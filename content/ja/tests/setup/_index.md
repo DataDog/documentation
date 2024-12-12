@@ -1,7 +1,6 @@
 ---
 aliases:
 - /ja/continuous_integration/tests/setup/
-kind: ドキュメント
 title: Test Visibility の構成
 type: multi-code-lang
 ---

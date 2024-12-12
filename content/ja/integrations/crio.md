@@ -25,6 +25,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - コンテナ
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/crio/README.md
 display_on_public_website: true
@@ -32,9 +33,8 @@ draft: false
 git_integration_title: crio
 integration_id: cri-o
 integration_title: CRI-O
-integration_version: 2.6.0
+integration_version: 4.0.0
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: crio
 public_title: CRI-O
@@ -50,6 +50,7 @@ tile:
   - Supported OS::macOS
   - Supported OS::Windows
   - Category::Containers
+  - Offering::Integration
   configuration: README.md#Setup
   description: CRI-O のすべてのメトリクスを Datadog で追跡
   media: []
@@ -65,13 +66,13 @@ tile:
 
 このチェックは [CRI-O][1] を監視します。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 このインテグレーションは、CRI-O の `--enable-metrics` オプションに依存します。このオプションはデフォルトでは無効です。有効にした場合は、`127.0.0.1:9090/metrics` でメトリクスが公開されます。
 
-### ブラウザトラブルシューティング
+### 構成
 
 1. CRI-Oのパフォーマンスデータを収集するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `crio.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル crio.d/conf.yaml][2] を参照してください。
 
@@ -81,20 +82,20 @@ tile:
 
 [Agent の `status` サブコマンドを実行][4]し、Checks セクションで `crio` を探します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
 CRI-O は、ランタイムによって実行される操作のカウントとレイテンシーに関するメトリクスを収集します。
 さらに、Datadog-CRI-O インテグレーションは、CRI-O Golang バイナリ自体の CPU 使用率とメモリ使用量を収集します。
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "crio" >}}
 
 
-### ヘルプ
+### サービスチェック
 {{< get-service-checks-from-git "crio" >}}
 
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][7]までお問い合わせください。
 

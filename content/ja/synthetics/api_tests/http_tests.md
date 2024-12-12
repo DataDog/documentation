@@ -39,19 +39,30 @@ HTTP テストでは、アプリケーションの API エンドポイントに 
 
 HTTP テストは、ネットワークの外部または内部からのテストの実行の好みに応じて、[管理ロケーション](#select-locations)と[プライベートロケーション][1]の両方から実行することができます。HTTP テストは、スケジュール、オンデマンド、または [CI/CD パイプライン][2]内で直接実行することができます。
 
-## コンフィギュレーション
+## 構成
 
 `HTTP` テストの作成を選択した後、テストのリクエストを定義します。
 
 ### リクエストを定義する
 
 1. **HTTP Method** を選択し、クエリする **URL** を指定します。使用可能なメソッドは、`GET`、`POST`、`PATCH`、`PUT`、`HEAD`、`DELETE`、`OPTIONS` です。`http` と `https` の両方の URL がサポートされています。
-2. **Advanced Options** を使用して HTTP リクエストを加工します (オプション)。
+
+   <div class="alert alert-info">その他のオプションについては、<a href=#advanced-options>高度なオプション</a>をご覧ください。</div>
+
+2. HTTP テストに**名前**を付けます。
+
+3. HTTP テストに `env` **タグ**とその他のタグを追加します。次に、これらのタグを使用して、[Synthetic Monitoring & Continuous Testing ページ][3]で Synthetic テストをフィルタリングできます。
+
+   {{< img src="synthetics/api_tests/http_test_config.png" alt="HTTP リクエストを定義する" style="width:90%;" >}}
+
+**Test URL** をクリックして、リクエストのコンフィギュレーションをテストします。画面の右側に応答プレビューが表示されます。
+
+### 高度なオプション
 
    {{< tabs >}}
 
    {{% tab "リクエストオプション" %}}
-
+   * **HTTP バージョン**: `HTTP/1.1 のみ`、`HTTP/2 のみ`、または `HTTP/2 から HTTP/1.1 へのフォールバック` を選択してください。
    * **Follow redirects**: 選択すると、リクエストを実行するときに HTTP テストで最大 10 個のリダイレクトをフォローします。
    * **Ignore server certificate error**: 選択すると、SSL 証明書の検証時にエラーが発生した場合でも、HTTP テストが接続を続行します。
    * **Timeout**: テストがタイムアウトするまでの時間を秒単位で指定します。
@@ -72,8 +83,8 @@ HTTP テストは、ネットワークの外部または内部からのテスト
    * **HTTP Basic Auth**: HTTP 基本認証資格情報を追加します。
    * **Digest Auth**: ダイジェスト認証の資格情報を追加します。
    * **NTLM**: NTLM 認証の資格情報を追加します。NTLMv2 と NTLMv1 の両方をサポートします。
-   * **AWS Signature v4**: Access Key ID と Secret Access Key を入力します。Datadog は、リクエストの署名を生成します。このオプションは、SigV4 の基本的な実装を使用します。AWS S3 などの特定の署名はそのままではサポートされていません。
-     AWS S3 バケットへの "Single Chunk" 転送リクエストでは、リクエストの本文を sha256 エンコードした `x-amz-content-sha256` をヘッダーとして追加します (本文が空の場合: `x-amz-content-sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`)。
+   * **AWS Signature v4**: Access Key ID と Secret Access Key を入力します。Datadog は、リクエストの署名を生成します。このオプションは、SigV4 の基本的な実装を使用します。Amazon S3 などの特定の署名はそのままではサポートされていません。
+     Amazon S3 バケットへの "Single Chunk" 転送リクエストの場合、リクエストの本文を sha256 エンコードした値を含む `x-amz-content-sha256` ヘッダーを追加します (本文が空の場合は、`x-amz-content-sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855` を使用します)。
    * **OAuth 2.0**: クライアント資格情報またはリソース所有者のパスワードのどちらかを付与するかを選択し、アクセストークンの URL を入力します。選択内容に応じて、クライアント ID とシークレット、またはユーザー名とパスワードを入力します。ドロップダウンメニューから、API トークンを基本認証ヘッダーとして送信するか、クライアント資格情報を本文に送信するかを選択します。オプションで、オーディエンス、リソース、スコープなどの追加情報を提供できます (**Resource Owner Password** を選択した場合は、クライアント ID とシークレットも提供します)。 
 
    {{% /tab %}}
@@ -86,9 +97,11 @@ HTTP テストは、ネットワークの外部または内部からのテスト
 
    {{% tab "リクエスト本文" %}}
 
-   * **Body type**: HTTP リクエストに追加するリクエスト本文のタイプ (`text/plain`、`application/json`、`text/xml`、`text/html`、`application/x-www-form-urlencoded`、`GraphQL`、または `None`) を選択します。
-   * **Request body**: HTTP リクエスト本文のコンテンツを追加します。リクエスト本文は最大サイズ 50 キロバイトに制限されています。
-
+   * **Body type**: HTTP リクエストに追加するリクエスト本文のタイプ (`application/json`、`application/octet-stream`、`application/x-www-form-urlencoded`、`multipart/form-data`、`text/html`、`text/plain`、`text/xml`、`GraphQL`、または `None`) を選択します。
+   * **Request body**: HTTP リクエスト本文の内容を追加します。
+       * `application/json`、`application/x-www-form-urlencoded`、`text/html`、`text/plain`、`text/xml`、`GraphQL` では、リクエスト本文のサイズは最大 50 キロバイトに制限されます。
+       * `application/octet-stream` では、リクエスト本文は 3 メガバイトのファイル 1 つに制限されます。
+       * `multipart/form-data` では、リクエスト本文はそれぞれ 3 メガバイトのファイル 3 つに制限されます。
    {{% /tab %}}
 
    {{% tab "プロキシ" %}}
@@ -106,17 +119,15 @@ HTTP テストは、ネットワークの外部または内部からのテスト
 [1]: /ja/data_security/synthetics
    {{% /tab %}}
 
+   {{% tab "Javascript" %}}
+
+JavaScript を使用して HTTP API テスト用の変数を定義します。
+
+{{< img src="synthetics/api_tests/http_javascript.png" alt="JavaScript を使用して HTTP API テストを定義する" style="width:90%;" >}}
+
+   {{% /tab %}}
+
    {{< /tabs >}}
-
-<br/>
-
-3. HTTP テストに**名前**を付けます。
-
-4. HTTP テストに `env` **タグ**とその他のタグを追加します。次に、これらのタグを使用して、[Synthetic Monitoring ホームページ][3]で Synthetic テストをすばやくフィルタリングできます。
-
-   {{< img src="synthetics/api_tests/http_test_config.png" alt="HTTP リクエストを定義する" style="width:90%;" >}}
-
-**Test URL** をクリックして、リクエストのコンフィギュレーションをテストします。画面の右側に応答プレビューが表示されます。
 
 ### アサーションを定義する
 
@@ -155,47 +166,19 @@ HTTP テストは次の頻度で実行できます。
 * [**Within your CI/CD pipelines**][2]: 欠陥のあるコードがカスタマーエクスペリエンスに影響を与える可能性があることを恐れずに出荷を開始します。
 * **On-demand**: チームにとって最も意味のあるときにいつでもテストを実行します。
 
-### アラート条件を定義する
+{{% synthetics-alerting-monitoring %}}
 
-アラート条件で、テストが失敗しアラートをトリガーする状況を設定します。
+## ワンクリック
 
-#### アラート設定規則
+API テストの作成は、[API カタログ][17]と既存の API テストからエンドポイントを提案し、テストフォームに関連するオプションを自動入力します。Datadog の既存データソースを使用してください (APM トレース、API カタログエンドポイントの発見、およびユーザーが作成した既存の同様の Synthetic テストなど)。
 
-アラートの条件を `An alert is triggered if your test fails for X minutes from any n of N locations` に設定すると、次の 2 つの条件が当てはまる場合にのみアラートがトリガーされます。
+Synthetic Monitoring の API テスト **URL** 入力に入力を開始すると、エンドポイントの提案や類似テストを取得できます。
 
-* 直近 *X* 分間に、最低 1 個のロケーションで失敗 (最低 1 つのアサーションが失敗)、
-* 直近 *X* 分間に、ある時点で最低 *n* 個のロケーションで失敗。
+{{< img src="synthetics/api_tests/api-one-click.png" alt="既存の API テストの GET 検索を表示する HTTP API テスト" style="width:90%;" >}}
 
-#### 高速再試行
+次に、提案を選択してテスト構成 (リクエストオプションとヘッダー、認証、変数) を自動入力します。
 
-テストが失敗した場合、`Y` ミリ秒後に `X` 回再試行することができます。再試行の間隔は、警告の感性に合うようにカスタマイズしてください。
-
-ロケーションのアップタイムは、評価ごとに計算されます (評価前の最後のテスト結果がアップかダウンか)。合計アップタイムは、構成されたアラート条件に基づいて計算されます。送信される通知は、合計アップタイムに基づきます。
-
-### テストモニターを構成する
-
-以前に定義された[アラート条件](#define-alert-conditions)に基づいて、テストによって通知が送信されます。このセクションを使用して、チームに送信するメッセージの方法と内容を定義します。
-
-1. [モニターの構成方法と同様][7]、メッセージに `@notification` を追加するか、ドロップダウンボックスでチームメンバーと接続されたインテグレーションを検索して、通知を受信する**ユーザーやサービス**を選択します。
-
-2. テストの通知**メッセージ**を入力します。このフィールドでは、標準の[マークダウン形式][8]のほか、以下の[条件付き変数][9]を使用できます。
-
-    | 条件付き変数       | 説明                                                         |
-    |----------------------------|---------------------------------------------------------------------|
-    | `{{#is_alert}}`            |テストがアラートを発する場合に表示します。                                          |
-    | `{{^is_alert}}`            |テストがアラートを発しない限り表示します。                                        |
-    | `{{#is_recovery}}`         | テストがアラートから回復したときに表示します。                          |
-    | `{{^is_recovery}}`         | テストがアラートから回復しない限り表示します。                        |
-    | `{{#is_renotify}}`         | モニターが再通知したときに表示します。                                   |
-    | `{{^is_renotify}}`         | モニターが再通知しない限り表示します。                                 |
-    | `{{#is_priority}}`         | モニターが優先順位 (P1～P5) に一致したときに表示します。                  |
-    | `{{^is_priority}}`         | モニターが優先順位 (P1～P5) に一致しない限り表示します。                |
-
-3. テストが失敗した場合に、テストで**通知メッセージを再送信する**頻度を指定します。テストの失敗を再通知しない場合は、`Never renotify if the monitor has not been resolved` オプションを使用してください。
-
-4. **Create** をクリックすると、テストの構成とモニターが保存されます。
-
-詳しくは、[Synthetic テストモニターの使用][10]をご覧ください。
+{{< img src="synthetics/api_tests/api-test-monitor-search.png" alt="選択" style="width:90%;" >}}
 
 {{% synthetics-variables %}}
 
@@ -209,7 +192,7 @@ HTTP テストの URL、高度なオプション、アサーションで、[**Se
 
 ## テストの失敗
 
-テストが 1 つ以上のアサーションを満たさない場合、またはリクエストが時期尚早に失敗した場合、テストは `FAILED` と見なされます。場合によっては、エンドポイントに対してアサーションをテストすることなくテストが実際に失敗することがあります。
+テストが 1 つ以上のアサーションを満たさない場合、またはリクエストが途中で失敗した場合、テストは `FAILED` と見なされます。場合によっては、エンドポイントに対するアサーションをテストせずにテストが実際に失敗することがあります。
 
 よくあるエラーは以下の通りです。
 
@@ -220,7 +203,10 @@ HTTP テストの URL、高度なオプション、アサーションで、[**Se
 : 接続がリモートサーバーによって突然閉じられました。Web サーバーにエラーが発生した、応答中にシステムが停止した、Web サーバーへの接続が失われた、などの原因が考えられます。
 
 `DNS`
-: テスト URL に対応する DNS エントリが見つかりませんでした。テスト URL の構成の誤りまたは DNS エントリの構成の誤りの原因が考えられます。
+: テスト URL に対応する DNS エントリが見つかりませんでした。原因としては、テスト URL の誤構成や DNS エントリの誤構成が考えられます。
+
+`Error performing HTTP/2 request`
+: リクエストを実行できませんでした。詳細は専用の[エラー][16]ページを参照してください。
 
 `INVALID_REQUEST` 
 : テストのコンフィギュレーションが無効です (URL に入力ミスがあるなど)。
@@ -249,7 +235,7 @@ HTTP テストの URL、高度なオプション、アサーションで、[**Se
 
 組織内の役割に基づいて、HTTP テストへのアクセスを制限することができます。HTTP テストを作成する際に、(ユーザーのほかに) どのロールがテストの読み取りと書き込みを行えるかを選択します。
 
-{{< img src="synthetics/settings/restrict_access.png" alt="テストの権限の設定" style="width:70%;" >}}
+{{< img src="synthetics/settings/restrict_access_1.png" alt="テストの権限の設定" style="width:70%;" >}}
 
 ## その他の参考資料
 
@@ -261,7 +247,7 @@ HTTP テストの URL、高度なオプション、アサーションで、[**Se
 [4]: https://restfulapi.net/json-jsonpath/
 [5]: https://www.w3schools.com/xml/xpath_syntax.asp
 [6]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
-[7]: /ja/monitors/notify/#notify-your-team
+[7]: /ja/monitors/notify/#configure-notifications-and-automations
 [8]: https://www.markdownguide.org/basic-syntax/
 [9]: /ja/monitors/notify/?tab=is_recoveryis_alert_recovery#conditional-variables
 [10]: /ja/synthetics/guide/synthetic-test-monitors
@@ -270,3 +256,5 @@ HTTP テストの URL、高度なオプション、アサーションで、[**Se
 [13]: /ja/account_management/rbac/
 [14]: /ja/account_management/rbac#custom-roles
 [15]: /ja/account_management/rbac/#create-a-custom-role
+[16]: /ja/synthetics/api_tests/errors/#http-errors
+[17]: /ja/api_catalog

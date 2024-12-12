@@ -29,21 +29,21 @@ title: Datadog のコードカバレッジ
 
 * `dd-trace>=3.20.0`。
 * `jest>=24.8.0`、`jest-circus` で実行した場合のみ。
-* `mocha>=5.2.0`。
-* `cucumber-js>=7.0.0`。
-* [`Istanbul`][1] コードカバレッジのみがサポートされています。
+* `mocha>=5.2.0`, only if `all` option in `nyc` is not explicitly set to `true`.
+* `cucumber-js>=7.0.0`, only if `all` option in `nyc` is not explicitly set to `true`.
+* Only [`Istanbul`][1] code coverage is supported.
 
 
-テストが [Istanbul][1] でインスツルメントされた場合、Datadog トレーサーは `test.code_coverage.lines_pct` タグを通じてテストセッションのコードカバレッジを自動的に報告します。Istanbul でテストをインスツルメントするには、[`nyc`][2] を使用します。
+When tests are instrumented with [Istanbul][1], the Datadog Tracer reports code coverage under the `test.code_coverage.lines_pct` tag for your test sessions automatically. To instrument tests with Istanbul, you can use [`nyc`][2].
 
-テストセッションから総コードカバレッジを報告するには、次の手順に従います。
+To report total code coverage from your test sessions, follow these steps:
 
-1. `nyc` をインストールします。
+1. Install `nyc`:
 ```
 npm install --save-dev nyc
 ```
 
-2. テストコマンドを `nyc` でラップします。
+2. Wrap your test command with `nyc`:
 ```json
 {
   "scripts": {
@@ -54,7 +54,7 @@ npm install --save-dev nyc
 ```
 
 <div class="alert alert-warning">
-  <strong>注</strong>: Jest にはデフォルトで Istanbul が含まれているので、<code>nyc</code> をインストールする必要はありません。単に <code>--coverage</code> を渡すだけです。
+  <strong>Note</strong>: Jest includes Istanbul by default, so you don't need to install <code>nyc</code>. Simply pass <code>--coverage</code>.
 </div>
 
 ```json
@@ -70,9 +70,13 @@ npm install --save-dev nyc
 NODE_OPTIONS="-r dd-trace/ci/init" DD_ENV=ci DD_SERVICE=my-javascript-service npm run coverage
 ```
 
+### 既知の制限
+
+If the `all` option is set to `true` when running `nyc` (see [nyc docs][3]), the total code coverage reported in the test session does not coincide with the value reported by `nyc`. This is because it does not include uncovered files (the ones that are not touched by your tests).
 
 [1]: https://istanbul.js.org/
 [2]: https://github.com/istanbuljs/nyc
+[3]: https://github.com/istanbuljs/nyc?tab=readme-ov-file#common-configuration-options
 {{% /tab %}}
 
 {{% tab ".NET" %}}
@@ -82,7 +86,7 @@ NODE_OPTIONS="-r dd-trace/ci/init" DD_ENV=ci DD_SERVICE=my-javascript-service np
 
 コードカバレッジが利用できる場合、Datadog トレーサー (v2.31.0 以降) は、テストセッションの `test.code_coverage.lines_pct` タグでそれを報告します。
 
-コードカバレッジの計算に [Coverlet][101] を使用している場合、`dd-trace` を実行する際に `DD_CIVISIBILITY_EXTERNAL_CODE_COVERAGE_PATH` 環境変数にレポートファイルへのパスを指定します。レポートファイルは、OpenCover または Cobertura 形式である必要があります。または、`DD_CIVISIBILITY_CODE_COVERAGE_ENABLED=true` 環境変数で、Datadog トレーサーに内蔵されているコードカバレッジ計算を有効にできます。
+If you are using [Coverlet][1] to compute your code coverage, indicate the path to the report file in the `DD_CIVISIBILITY_EXTERNAL_CODE_COVERAGE_PATH` environment variable when running `dd-trace`. The report file must be in the OpenCover or Cobertura formats. Alternatively, you can enable the Datadog Tracer's built-in code coverage calculation with the `DD_CIVISIBILITY_CODE_COVERAGE_ENABLED=true` environment variable.
 
 ### 高度なオプション
 
@@ -107,13 +111,13 @@ Datadog トレーサーのビルトインコードカバレッジは、`.runsett
 
 #### Coverlet オプション
 
-| オプション                   | メトリクス                                                                                                                                                         |
+| オプション                   | サマリー                                                                                                                                                         |
 |:-------------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | ExcludeByAttribute       | 属性で装飾されたメソッド、クラス、またはアセンブリをコードカバレッジから除外します。                                                                                                                |
 | ExcludeByFile            | 特定のソースファイルをコードカバレッジから除外します。                                                                                                                |
 | 除外する                  | フィルター式を使用してコードカバレッジ分析から除外します。                                                                                                  |
 
-##### NodeJS
+##### 属性
 
 `System.Diagnostics.CodeAnalysis` ネームスペースにある `ExcludeFromCodeCoverage` 属性を作成して適用することで、メソッド、クラス全体、またはアセンブリをコードカバレッジから除外することができます。
 
@@ -148,9 +152,9 @@ Datadog トレーサーのビルトインコードカバレッジは、`.runsett
 #### VS コードカバレッジオプション
 
 
-詳細については、Microsoft ドキュメントの[コードカバレッジ分析のカスタマイズ][102]を参照してください。
+See [Customize code coverage analysis][2] in the Microsoft documentation for additional information.
 
-| オプション                   | メトリクス                                                                                                                                                         |
+| オプション                   | サマリー                                                                                                                                                         |
 |:-------------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Attributes\Exclude       | 属性で装飾されたメソッド、クラス、またはアセンブリをコードカバレッジから除外します。                                                                                                                |
 | Sources\Exclude          | 特定のソースファイルをコードカバレッジから除外します。                                                                                                                |
@@ -188,44 +192,27 @@ Datadog トレーサーのビルトインコードカバレッジは、`.runsett
 </RunSettings>
 ```
 
-[101]: https://github.com/coverlet-coverage/coverlet
-[102]: https://learn.microsoft.com/en-us/visualstudio/test/customizing-code-coverage-analysis?view=vs-2022
+[1]: https://github.com/coverlet-coverage/coverlet
+[2]: https://learn.microsoft.com/en-us/visualstudio/test/customizing-code-coverage-analysis?view=vs-2022
 {{% /tab %}}
 {{% tab "Java" %}}
 
 ### 互換性
-* `dd-trace-java >= 1.24.2`
+* `dd-trace-java >= 1.24.2`.
 
-コードカバレッジが利用できる場合、Datadog トレーサーは、テストセッションの `test.code_coverage.lines_pct` タグでそれを報告します。
+When code coverage is available, the Datadog Tracer reports it under the `test.code_coverage.lines_pct` tag for your test sessions.
 
-[Jacoco][101] はコードカバレッジライブラリとしてサポートされています。
+[Jacoco][1] is supported as a code coverage library.
 
 プロジェクトにすでに Jacoco が構成されている場合、Datadog トレーサーはそれをインスツルメントし、カバレッジデータを自動的に Datadog に報告します。
 
-そうでない場合、ランタイムでテスト実行に Jacoco を追加するようトレーサーを構成できます。
-環境変数 `DD_CIVISIBILITY_JACOCO_PLUGIN_VERSION` を使用して、注入したい [Jacoco のバージョン][102]を指定します (例: `DD_CIVISIBILITY_JACOCO_PLUGIN_VERSION=0.8.11`)。
+Otherwise, you can configure the tracer to add Jacoco to your test runs at runtime.
+Use `DD_CIVISIBILITY_JACOCO_PLUGIN_VERSION` environment variable to specify which [version of Jacoco][2] you want to have injected (for example: `DD_CIVISIBILITY_JACOCO_PLUGIN_VERSION=0.8.11`).
 
-[101]: https://www.eclemma.org/jacoco/
-[102]: https://mvnrepository.com/artifact/org.jacoco/org.jacoco.agent
 
+[1]: https://www.eclemma.org/jacoco/
+[2]: https://mvnrepository.com/artifact/org.jacoco/org.jacoco.agent
 {{% /tab %}}
-{{% tab "JUnit レポートのアップロード" %}}
-
-### 互換性
-* `datadog-ci>=2.17.2`。
-
-JUnit レポートのアップロードでは、コードカバレッジパーセンテージの値をアップロードできます。
-
-```shell
-datadog-ci junit upload --service <service_name> --report-metrics=test.code_coverage.lines_pct:85 <path>
-```
-
-この例では、`85` はテストがカバーする行の割合であり、別のツールで生成する必要があります。
-
-コードカバレッジレポートは別のプロセスで生成する必要があります。そうしないと、JUnit レポートのアップロードでコードカバレッジレポートが生成されません。報告されるメトリクス名は `test.code_coverage.lines_pct` でなければなりません。
-
-{{% /tab %}}
-
 {{% tab "Python" %}}
 
 ### 互換性
@@ -273,18 +260,33 @@ DD_ENV=ci DD_SERVICE=my-python-service pytest --cov
 [1]: https://github.com/nedbat/coveragepy
 [2]: https://github.com/pytest-dev/pytest-cov
 {{% /tab %}}
+{{% tab "JUnit Report Uploads" %}}
 
+### 互換性
+* `datadog-ci>=2.17.2`。
+
+JUnit レポートのアップロードでは、コードカバレッジパーセンテージの値をアップロードできます。
+
+```shell
+datadog-ci junit upload --service <service_name> --report-measures=test.code_coverage.lines_pct:85 <path>
+```
+
+この例では、`85` はテストがカバーする行の割合であり、別のツールで生成する必要があります。
+
+コードカバレッジレポートは別のプロセスで生成する必要があります。そうしないと、JUnit レポートのアップロードでコードカバレッジレポートが生成されません。報告されるメトリクス名は `test.code_coverage.lines_pct` でなければなりません。
+
+{{% /tab %}}
 {{< /tabs >}}
 
 ## コードカバレッジをグラフ化する
 
-報告されたコードカバレッジは `@test.code_coverage.lines_pct` として報告され、これはファセット内の合計パーセンテージを表し、CI Visibility Explorer で他のメジャーファセットと同様にプロットできます。
+Reported code coverage is reported as `@test.code_coverage.lines_pct`, which represents the total percentage in the facet, and can be plotted as any other measure facet in the CI Visibility Explorer.
 
-{{< img src="/continuous_integration/graph_code_coverage.png" text="コードカバレッジのグラフ化" style="width:100%" >}}
+{{< img src="/continuous_integration/graph_code_coverage.png" text="Graph code coverage" style="width:100%" >}}
 
-## テストセッションのカバレッジタブ
+## Test Session coverage tab
 
-報告されたコードカバレッジは、テストセッションの詳細ページの **Coverage** タブにも表示されます。
+Reported code coverage also appears on the **Coverage** tab in a test session's details page:
 
 {{< img src="/continuous_integration/code_coverage_tab.png" text="テストセッションコードカバレッジタブ" style="width:100%" >}}
 
@@ -300,24 +302,24 @@ DD_ENV=ci DD_SERVICE=my-python-service pytest --cov
 
 [CI テストモニター][5]を作成して、サービスのコードカバレッジが特定のしきい値を下回るとアラートを受けます。
 
-{{< img src="/continuous_integration/code_coverage_monitor.png" text="コードカバレッジモニター" style="width:100%" >}}
+{{< img src="/continuous_integration/code_coverage_monitor.png" text="Code coverage monitor" style="width:100%" >}}
 
-## ブランチのコードカバレッジの推移を見る
+## See your branch's code coverage evolution
 
-また、[Branch Overview ページ][6]でコードカバレッジの推移を見ることができ、改善されているか悪化しているかを確認できます。
+You can also see the code coverage's evolution on the [Branch Overview page][6] and check whether it's improving or worsening:
 
-{{< img src="/continuous_integration/code_coverage_branch_view.png" text="ブランチビューのコードカバレッジ" style="width:100%" >}}
+{{< img src="/continuous_integration/code_coverage_branch_view.png" text="Branch view's code coverage" style="width:100%" >}}
 
 
 ## プルリクエストのコードカバレッジの変化を表示する
 
-プルリクエストの[テストサマリーコメント][8]には、GitHub プルリクエストのコードカバレッジの変化が、デフォルトブランチと比較する形で表示されます。
+The pull request's [test summary comment][7] shows the code coverage change of a GitHub pull request compared to the default branch.
 
-## Intelligent Test Runner と総コードカバレッジ
+## Intelligent Test Runner and total code coverage
 
-[Intelligent Test Runner][7] は、機能するために_テストごと_のコードカバレッジが必要であるにもかかわらず、自動的に総コードカバレッジの測定を**行いません**。
+[Intelligent Test Runner][8] will **not** automatically provide total code coverage measurements, even though it requires _per test_ code coverage to function.
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -328,5 +330,5 @@ DD_ENV=ci DD_SERVICE=my-python-service pytest --cov
 [4]: /ja/monitors
 [5]: /ja/monitors/types/ci/#maintain-code-coverage-percentage
 [6]: /ja/continuous_integration/tests/developer_workflows#branch-overview
-[7]: /ja/continuous_integration/intelligent_test_runner/
-[8]: /ja/tests/developer_workflows/#test-summaries-in-github-pull-requests
+[7]: /ja/tests/developer_workflows/#test-summaries-in-github-pull-requests
+[8]: /ja/continuous_integration/intelligent_test_runner/

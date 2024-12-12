@@ -44,7 +44,7 @@ The Datadog extension for Azure App Service provides additional monitoring capab
     - Azure App Service Web Apps
     - Function Apps hosted on Basic, Standard, and Premium plans.
 
-    <div class="alert alert-warning">Function Apps on consumption plans are not supported. Interested in support for other App Service resource types or runtimes? <a href="https://forms.gle/n4nQcxEyLqDBMCDA7">Sign up</a> to be notified when a beta becomes available.</div>
+    <div class="alert alert-warning">Function Apps on consumption plans are not supported. Interested in support for other App Service resource types or runtimes? <a href="https://forms.gle/n4nQcxEyLqDBMCDA7">Sign up</a> to be notified when a Preview becomes available.</div>
 
 3. The Datadog .NET APM extension supports the following .NET runtimes in both x64 and x86 architectures when running on Windows OS (AAS does not yet support extensions on Linux). For more details about automatically instrumented libraries, see the [Tracer documentation][2].
 
@@ -57,6 +57,7 @@ The Datadog extension for Azure App Service provides additional monitoring capab
     - .NET 6
     - .NET 7
     - .NET 8
+    - .NET 9
 
 4. Datadog recommends doing regular updates to the latest version of the extension to ensure optimal performance, stability, and availability of features. Note that both the initial install and subsequent updates require your web app to be fully stopped in order to install/update successfully.
 
@@ -161,7 +162,7 @@ Learn more about [custom metrics][12].
 [12]: /metrics/
 [13]: /integrations/guide/azure-portal/#app-service-extension
 [14]: /integrations/guide/azure-portal/
-[15]: /security/application_security/enabling/serverless/?tab=serverlessframework#azure-app-service
+[15]: /security/application_security/serverless/?tab=serverlessframework#azure-app-service
 {{% /tab %}}
 {{% tab "Java" %}}
 ### Requirements
@@ -169,8 +170,8 @@ Learn more about [custom metrics][12].
 1. If you haven't already, set up the [Microsoft Azure integration][1] first.
 
 2. The extension supports Azure App Service Web Apps. Function Apps are not supported.
-    <div class="alert alert-warning">Support for Java Web Apps is in beta for extension v2.4+. There are no billing implications for tracing Java Web Apps during this period.<br/><br/>
-    Interested in support for other App Service resource types or runtimes? <a href="https://forms.gle/n4nQcxEyLqDBMCDA7">Sign up</a> to be notified when a beta becomes available.</div>
+    <div class="alert alert-warning">Support for Java Web Apps is in Preview for extension v2.4+. There are no billing implications for tracing Java Web Apps during this period.<br/><br/>
+    Interested in support for other App Service resource types or runtimes? <a href="https://forms.gle/n4nQcxEyLqDBMCDA7">Sign up</a> to be notified when a Preview becomes available.</div>
 
 3. The Datadog Java APM extension supports all Java runtimes on Windows OS. Azure App Service does not support extensions on Linux. For more details about automatically instrumented libraries, see the [Tracer documentation][2].
 
@@ -322,7 +323,7 @@ Learn more about [custom metrics][10].
 [8]: https://github.com/brightcove/hot-shots
 [9]: /developers/dogstatsd/?tab=java#code
 [10]: /metrics/
-[11]: /security/application_security/enabling/nodejs/
+[11]: /security/application_security/serverless/
 [12]: /developers/dogstatsd/
 {{% /tab %}}
 {{< /tabs >}}
@@ -434,8 +435,8 @@ Many organizations use [Azure Resource Management (ARM) templates][8] to impleme
 {{% /tab %}}
 {{% tab "Java" %}}
 
-<div class="alert alert-warning">Support for Java Web Apps is in beta for extension v2.4+. Programmatic management is not available for Java Web Apps.<br/><br/>
-    Interested in support for other App Service resource types or runtimes? <a href="https://forms.gle/n4nQcxEyLqDBMCDA7">Sign up</a> to be notified when a beta becomes available.</div>
+<div class="alert alert-warning">Support for Java Web Apps is in Preview for extension v2.4+. Programmatic management is not available for Java Web Apps.<br/><br/>
+    Interested in support for other App Service resource types or runtimes? <a href="https://forms.gle/n4nQcxEyLqDBMCDA7">Sign up</a> to be notified when a Preview becomes available.</div>
 
 {{% /tab %}}
 {{< /tabs >}}

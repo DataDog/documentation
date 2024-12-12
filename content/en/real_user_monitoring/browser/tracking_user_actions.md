@@ -123,4 +123,4 @@ For more information, see [Send Custom Actions][5].
 [3]: /real_user_monitoring/browser/data_collected/#default-attributes
 [4]: https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md#v2160
 [5]: /real_user_monitoring/guide/send-rum-custom-actions
-[6]: /real_user_monitoring/session_replay/privacy_options#mask-action-names
+[6]: /data_security/real_user_monitoring/#mask-action-names

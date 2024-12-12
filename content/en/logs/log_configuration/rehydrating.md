@@ -33,7 +33,7 @@ If you download historical views as a CSV, the data is limited to the last 90 da
 
 4. **Name your historical view**. Names must begin with a lowercase letter and can only contain lowercase letters, numbers, and the `-` character.
 
-5. **Input the query**. The query syntax is the same as that of the [log explorer search][4]. Make sure your logs are [archived with their tags][5] if you use tags (such as `env:prod` or `version:x.y.z`) in the rehydration query.
+5. **Input the query**. The query syntax is the same as that of the [Log Explorer search][4]. Make sure your logs are [archived with their tags][5] if you use tags (such as `env:prod` or `version:x.y.z`) in the rehydration query.
 
 6. Define the maximum number of logs that should be rehydrated in this historical view. If the limit of the rehydration is reached, the reloading is stopped but you still have access to the rehydrated logs.
 
@@ -71,7 +71,7 @@ During the creation of a historical view, you can use the built-in template vari
 
 After selecting "Rehydrate from Archive," the historical view is marked as "pending" until its content is ready to be queried.
 
-Once the content is rehydrated, the historical view is marked as active, and the link in the query column leads to the historical view in the log explorer.
+Once the content is rehydrated, the historical view is marked as active, and the link in the query column leads to the historical view in the Log Explorer.
 
 #### From the Log Explorer
 

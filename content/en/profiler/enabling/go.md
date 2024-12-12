@@ -25,9 +25,9 @@ For a summary of the minimum and recommended runtime and tracer versions across 
 
 The Datadog Profiler requires Go 1.19+.
 
-For [Code Hotspots][2] and [Endpoint Profiling][3], use `dd-trace-go` version 1.37.0+.
+For the [Trace to Profiling integration][2] and [Endpoint Profiling][3], use `dd-trace-go` version 1.51.0+.
 
-Continuous Profiler is not supported on serverless platforms, such as AWS Lambda.
+Continuous Profiler is not supported on some serverless platforms, such as AWS Lambda.
 
 ## Installation
 
@@ -74,13 +74,15 @@ To begin profiling applications:
     defer profiler.Stop()
     ```
 
-4. Optional: Enable the [timeline feature][7] (beta), see [prerequisites][8].
+4. Optional: Enable the [timeline feature][7], see [prerequisites][8].
 
 5. Optional: Set up [Source Code Integration][9] to connect your profiling data with your Git repositories.
 
 6. After a minute or two, visualize your profiles in the [Datadog APM > Profiler page][10].
 
 **Note**: By default, only the CPU and Heap profiles are enabled. Use [profiler.WithProfileTypes][11] to enable additional [profile types][12].
+
+If you automatically instrument your Go application with [Orchestrion][20], it adds the continuous profiler code to your application. To enable the profiler at run time, set the environment variable `DD_PROFILING_ENABLED=true`.
 
 ## Configuration
 
@@ -155,3 +157,4 @@ The [Getting Started with Profiler][17] guide takes a sample service with a perf
 [17]: /getting_started/profiler/
 [18]: /profiler/enabling/supported_versions/
 [19]: https://app.datadoghq.com/account/settings/agent/latest?platform=overview
+[20]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/go

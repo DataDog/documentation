@@ -1,10 +1,10 @@
 guides:
-- desc: Recopila eventos y métricas de tus hosts que envían datos a Datadog.
+- desc: Recopila eventos y métricas de los hosts que envían datos a Datadog.
   link: getting_started/agent/
   link_text: Empezando con el Agent
   title: Instalar el Agent
-- desc: Recopila métricas, trazas y logs con más de 750 integraciones de serie para
-    enviar a Datadog.
+- desc: Recopila métricas, trazas (traces) y logs con más de 800 integraciones incorporadas
+    para enviar a Datadog.
   link: getting_started/integrations/
   link_text: Empezando con las integraciones
   title: Configurar integraciones
@@ -16,7 +16,7 @@ guides:
 heading: ¡Te damos la bienvenida a la documentación de Datadog!
 nav_sections:
 - nav_section:
-  - name: Plataforma
+  - name: Servicios de la plataforma
   - navtiles:
     - desc: Instalar y configurar el Agent para recopilar y enviar datos
       icon: agent-fill
@@ -26,7 +26,7 @@ nav_sections:
       icon: integrations
       link: integrations/
       title: Integraciones
-    - desc: Canalizar tus métricas, logs y trazas de OpenTelemetry a Datadog
+    - desc: Canalizar tus métricas, logs y trazas (traces) de OpenTelemetry a Datadog
       icon: open-telemetry
       link: opentelemetry/
       title: OpenTelemetry
@@ -34,22 +34,51 @@ nav_sections:
       icon: dashboard
       link: dashboards/
       title: Dashboards
-    - desc: Supervisar tus hosts, contenedores, procesos y funciones serverless
-      icon: host-map
-      link: infrastructure/
-      title: Infrastructure (Infraestructura)
-    - desc: Dar seguimiento a los cambios y alertas en tus aplicaciones e infraestructura
-      icon: events
-      link: events/
-      title: Events (Eventos)
-    - desc: Explorar, buscar y crear distribuciones para tus métricas
-      icon: metric
-      link: metrics/
-      title: Métricas
     - desc: Crear, editar y gestionar tus monitores y notificaciones
       icon: monitor
       link: monitors/
-      title: Alertar
+      title: Monitores y alertas
+    - desc: Detectar y mostrar anomalías de la aplicación e infraestructura
+      icon: watchdog
+      link: watchdog/
+      title: Datadog Watchdog
+    - desc: Ver alertas de Datadog, incidentes y más en tu dispositivo móvil
+      icon: mobile
+      link: mobile/
+      title: Aplicación móvil
+    - desc: Identificar, analizar y mitigar incidencias críticas en tu organización
+      icon: incidents
+      link: service_management/incident_management
+      title: Gestión de incidencias
+    - desc: Dar seguimiento a los cambios y alertas en tus aplicaciones e infraestructura
+      icon: events
+      link: events/
+      title: Eventos
+    - desc: Automatizar y orquestar procesos en todo tu stack tecnológico
+      icon: workflows
+      link: workflows
+      title: Automatización de flujos de trabajo
+- nav_section:
+  - name: Productos
+  - navtiles:
+    - desc: Supervisar tus hosts, contenedores, procesos y funciones serverless
+      icon: host-map
+      link: infrastructure/
+      title: Infraestructura
+    - desc: Detectar y solucionar problemas de rendimiento en tus aplicaciones serverless
+      icon: serverless
+      link: serverless/
+      title: Serverless
+    - desc: Usar objetos etiquetados para recopilar y generar gráficos de datos sobre
+        el tráfico de tu red
+      icon: network
+      link: network_monitoring/
+      title: Monitorización de red
+    - desc: Controla tu gasto en la nube con datos unificados sobre observabilidad
+        y costos
+      icon: cloud-cost-management
+      link: cloud_cost_management/
+      title: Gestión de costos en la nube
     - desc: Explorar dashboards de rendimiento listos para usar y trazas distribuidas
       icon: apm
       link: tracing/
@@ -58,68 +87,81 @@ nav_sections:
       icon: profiling-1
       link: profiler/
       title: Continuous Profiler
-    - desc: Procesar, monitorizar y archivar tus logs ingeridos
-      icon: log
-      link: logs/
-      title: Log Management
-    - desc: Detectar amenazas y configuraciones incorrectas en tus aplicaciones e
-        infraestructura
-      icon: security-platform
-      link: security/
-      title: Seguridad
-    - desc: Garantizar el tiempo de actividad, avisar de problemas regionales y probar
-        el rendimiento de aplicaciones
-      icon: synthetics
-      link: synthetics/
-      title: Synthetic Monitoring
-    - desc: Hacer tests de un extremo a otro y de integración sin código con proveedores
-        de CI/CD
-      icon: continuous-testing
-      link: continuous_testing/
-      title: Tests continuos
-    - desc: Registrar, observar y analizar la experiencia del uso de tus aplicaciones
-      icon: rum
-      link: real_user_monitoring/
-      title: Real User Monitoring
-    - desc: Usar objetos etiquetados para recopilar y generar gráficos de datos sobre
-        el tráfico de tu red
-      icon: la red
-      link: network_monitoring/
-      title: Monitorización de redes
-    - desc: Detectar y resolver problemas de rendimiento en tus aplicaciones serverless
-      icon: serverless
-      link: serverless/
-      title: Serverless
-    - desc: Ver alertas de Datadog, incidentes y más en tu dispositivo móvil
-      icon: mobile
-      link: mobile/
-      title: Aplicación móvil
-    - desc: Detectar y mostrar anomalías de la aplicación e infraestructura
-      icon: watchdog
-      link: watchdog/
-      title: Datadog Watchdog
-    - desc: Ver métricas de tests, resultados de compilación y ejecuciones de pipeline
-        para tu canalización de CI
-      icon: ci
-      link: continuous_integration/
-      title: CI Visibility
-    - desc: Controla tu gasto en la nube con observabilidad unificada y datos de costes
-      icon: cloud-cost-management
-      link: cloud_cost_management/
-      title: Gestión de costes en la nube
     - desc: Explorar dashboards enriquecidos, métricas de consultas y ejemplos de
         consultas
       icon: database-2
       link: database_monitoring/
       title: Monitorización de bases de datos
-    - desc: Gestionar y monitorizar tus pipelines de telemetría
-      icon: pipelines
-      link: observability_pipelines/
-      title: Pipelines de observabilidad
+    - desc: Rastrear y mejorar el rendimiento de tus pipelines de streaming de datos
+      icon: datastreams-monitoring
+      link: data_streams/
+      title: Data Streams Monitoring
+    - desc: Monitorizar y optimizar tus trabajos de procesamiento de datos
+      icon: data-jobs-monitoring
+      link: data_jobs/
+      title: Monitorización de trabajos de datos
     - desc: Descubrir, asignar y monitorizar servicios sin cambiar el código
       icon: usm
       link: universal_service_monitoring/
       title: Universal Service Monitoring
+    - desc: Garantizar el tiempo de actividad, avisar de problemas regionales y probar
+        el rendimiento de aplicaciones
+      icon: synthetics
+      link: synthetics/
+      title: Monitorización Synthetic
+    - desc: Identificar los errores críticos y acelerar la resolución en la web, los
+        dispositivos móviles y el backend.
+      icon: error-tracking
+      link: error_tracking/
+      title: Rastreo de errores
+    - desc: Capturar, observar y analizar la experiencia del usuario de tus aplicaciones
+      icon: rum
+      link: real_user_monitoring/
+      title: Real User Monitoring
+    - desc: Obtener información sobre el comportamiento de los usuarios y tomar decisiones
+        de productos impulsadas por datos
+      icon: product-analytics
+      link: product_analytics/
+      title: Análisis de productos
+    - desc: Monitorizar recorridos del usuario y transacciones comerciales en aplicaciones
+        móviles
+      icon: mobile
+      link: mobile_app_testing/
+      title: Test de aplicaciones móviles
+    - desc: Hacer tests de un extremo a otro y de integración sin código con proveedores
+        de CI/CD
+      icon: continuous-testing
+      link: continuous_testing/
+      title: Tests continuos
+    - desc: Monitorizar el mantenimiento y el rendimiento de tus pipelines de CI
+      icon: ci
+      link: continuous_integration/
+      title: CI Visibility
+    - desc: Detectar tests defectuosos e identificar confirmaciones que introduzcan
+        tests defectuosos
+      icon: ci
+      link: tests/
+      title: Optimización de tests
+    - desc: Detectar amenazas, vulnerabilidades y errores de configuración
+      icon: security-platform
+      link: security/
+      title: Seguridad
+    - desc: Explorar, buscar y crear distribuciones para tus métricas
+      icon: metric
+      link: metrics/
+      title: Métricas
+    - desc: Procesar, monitorizar y archivar tus logs ingeridos
+      icon: log
+      link: logs/
+      title: Gestión de logs
+    - desc: Gestionar y monitorizar tus pipelines de telemetría
+      icon: pipelines
+      link: observability_pipelines/
+      title: Pipelines de observabilidad
+    - desc: Rastrear, monitorizar y asegurar tus solicitudes de LLM
+      icon: llm-observability
+      link: llm_observability/
+      title: Observabilidad de LLM
 - nav_section:
   - name: Configuración
   - navtiles:

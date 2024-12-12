@@ -16,7 +16,9 @@ further_reading:
 - link: /logs/guide/
   tag: Guía
   text: Guías adicionales sobre el registro con Datadog
-kind: Documentación
+- link: https://www.datadoghq.com/architecture/a-guide-to-log-management-indexing-strategies-with-datadog/
+  tag: Centro de arquitectura
+  text: Guía de estrategias de indexación de la gestión de logs con Datadog
 title: Configuración de log
 ---
 
@@ -40,7 +42,7 @@ Datadog Logging without Limits* desacopla la ingestión y la indexación de logs
 
 Una vez que hayas completado la configuración, comienza a investigar y solucionar problemas de logs en el [Log Explorer][11].
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 

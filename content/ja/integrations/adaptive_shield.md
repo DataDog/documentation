@@ -5,12 +5,15 @@ assets:
   dashboards:
     adaptive_shield_overview: assets/dashboards/adaptive_shield_overview.json
   integration:
+    auto_install: true
     configuration: {}
     events:
       creates_events: true
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10310
     source_type_name: adaptive_shield
+  oauth: assets/oauth_clients.json
 author:
   homepage: https://www.adaptive-shield.com/
   name: Adaptive Shield
@@ -19,6 +22,7 @@ author:
 categories:
 - クラウド
 - セキュリティ
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/adaptive_shield/README.md
 display_on_public_website: true
@@ -28,7 +32,6 @@ integration_id: adaptive-shield
 integration_title: Adaptive Shield
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: adaptive_shield
 public_title: Adaptive Shield
@@ -61,6 +64,7 @@ tile:
   uninstallation: README.md#Uninstallation
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 ## 概要
 Office 365、Slack、Zoom、Salesforce などの SaaS アプリは、企業の日常業務に欠かせないものですが、しばしば新たなセキュリティ上の問題が発生することがあります。Adaptive Shield の SaaS セキュリティポスチャ管理ソリューション (SSPM) は、ビジネスに不可欠な SaaS アプリケーションをプロアクティブに、深く、継続的に、そして自動的に監視・管理することを特徴としています。SaaS アプリとインテグレーションすることで、Adaptive Shield はセキュリティチームが SaaS アプリをコントロールできるようにし、セキュリティポリシーを強固にしてリスクを低減することを可能にします。
 
@@ -81,7 +85,7 @@ Adaptive Shield とのインテグレーションにより、構成ドリフト�
 さらに、このインテグレーションに関連するすべての API キーが無効になっていることを、[API キー管理ページ][2]でインテグレーション名を検索して確認してください。
 
 
-## サポート
+## Agent
 ご不明な点は、[Adaptive Shield のサポートチーム][3]までお問い合わせください。
 
 [1]: https://dashboard.adaptive-shield.com/settings/alerts/add/63230b73c9624b93dadf38d4

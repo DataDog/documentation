@@ -1,5 +1,5 @@
 ---
-title: C++ Custom Instrumentation using Datadog API
+title: C++ Custom Instrumentation using the Datadog API
 aliases:
     - /tracing/manual_instrumentation/cpp
     - /tracing/custom_instrumentation/cpp
@@ -108,7 +108,7 @@ span. For example:
 span.set_error(true);
 ```
 
-Add more specific information about the error by setting any combination of `error.msg`, `error.stack`, or `error.type` by using respectively `Span::set_error_message`, `Span::set_error_stack` and `Span::set_error_type`. See [Error Tracking][4] for more information about error tags.
+Add more specific information about the error by setting any combination of `error.message`, `error.stack`, or `error.type` by using respectively `Span::set_error_message`, `Span::set_error_stack` and `Span::set_error_type`. See [Error Tracking][4] for more information about error tags.
 
 An example of adding a combination of error tags:
 
@@ -147,5 +147,5 @@ Traces can be excluded based on their resource name, to remove synthetic traffic
 [2]: /tracing/glossary/#spans
 [3]: /getting_started/tagging/unified_service_tagging
 [4]: /tracing/error_tracking/
-[5]: /tracing/trace_collection/trace_context_propagation/cpp
+[5]: /tracing/trace_collection/trace_context_propagation/
 [6]: /tracing/security

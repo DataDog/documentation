@@ -28,122 +28,414 @@ Default privacy options for Session Replay protect end user privacy and prevent 
 
 By enabling Mobile Session Replay, you can automatically mask sensitive elements from being recorded through the RUM Mobile SDK. When data is masked, that data is not collected in its original form by Datadog's SDKs and thus is not sent to the backend.
 
-## Configuring masking modes
+## Fine-grained masking
+Using the masking modes below, you can override the default setup on a per-application basis. Masking is fine-grained, which means you can override masking for text and inputs, images, and touches individually to create a custom configuration that suits your needs. 
 
-Using the masking modes below, you can override the default setup on a per-application basis.
+### Text and input masking
 
-### Mask all text elements
-
-By default, the `mask` setting is enabled for all data. With this setting enabled, all text content on screen is masked, as shown below.
+By default, the `mask_all` setting is enabled for all data. With this setting enabled, all text and input content on screen is masked, as shown below.
 
 {{< img src="real_user_monitoring/session_replay/mobile/masking-mode-mask-all-2.png" alt="What your application screen may resemble when `mask` is enabled." style="width:50%;">}}
 
+#### Mask sensitive inputs
+With the `mask_sensitive_inputs` setting enabled, all text and inputs are shown except those considered sensitive, such as password fields. 
+
+{{< tabs >}}
+{{% tab "Android" %}}
+{{< code-block lang="kotlin" filename="application.kt" disable_copy="false" collapsible="true" >}}
+
+    val sessionReplayConfig = SessionReplayConfiguration.Builder([sampleRate])
+    .setTextAndInputPrivacy(TextAndInputPrivacy.MASK_SENSITIVE_INPUTS)
+    .build()
+    SessionReplay.enable(sessionReplayConfig)
+
+{{< /code-block >}}
+{{% /tab %}}
+{{% tab "iOS" %}}
+{{< code-block lang="swift" filename="AppDelegate.swift" disable_copy="false" collapsible="true" >}}
+
+    let sessionReplayConfig = SessionReplay.Configuration(
+        replaySampleRate: sampleRate, 
+        textAndInputPrivacyLevel: .maskSensitiveInputs,
+        imagePrivacyLevel: imagePrivacyLevel,
+        touchPrivacyLevel: touchPrivacyLevel
+    )
+    SessionReplay.enable(with: sessionReplayConfig)
+
+{{< /code-block >}}
+{{% /tab %}}
+{{< /tabs >}}
+
+#### Mask all inputs
+With the `mask_all_inputs` setting enabled, all inputs fields are masked in the replay.
+
+{{< tabs >}}
+{{% tab "Android" %}}
+{{< code-block lang="kotlin" filename="application.kt" disable_copy="false" collapsible="true" >}}
+
+    val sessionReplayConfig = SessionReplayConfiguration.Builder([sampleRate])
+    .setTextAndInputPrivacy(TextAndInputPrivacy.MASK_ALL_INPUTS)
+    .build()
+    SessionReplay.enable(sessionReplayConfig)
+
+{{< /code-block >}}
+{{% /tab %}}
+{{% tab "iOS" %}}
+{{< code-block lang="swift" filename="AppDelegate.swift" disable_copy="false" collapsible="true" >}}
+
+    let sessionReplayConfig = SessionReplay.Configuration(
+        replaySampleRate: sampleRate, 
+        textAndInputPrivacyLevel: .maskAllInputs,
+        imagePrivacyLevel: imagePrivacyLevel,
+        touchPrivacyLevel: touchPrivacyLevel
+    )
+    SessionReplay.enable(with: sessionReplayConfig)
+
+{{< /code-block >}}
+{{% /tab %}}
+{{< /tabs >}}
+
+#### Mask all
+With the `mask_all` setting enabled, all text and input fields are masked in the replay.
+
+{{< tabs >}}
+{{% tab "Android" %}}
+{{< code-block lang="kotlin" filename="application.kt" disable_copy="false" collapsible="true" >}}
+
+    val sessionReplayConfig = SessionReplayConfiguration.Builder([sampleRate])
+    .setTextAndInputPrivacy(TextAndInputPrivacy.MASK_ALL)
+    .build()
+    SessionReplay.enable(sessionReplayConfig)
+
+{{< /code-block >}}
+{{% /tab %}}
+{{% tab "iOS" %}}
+{{< code-block lang="swift" filename="AppDelegate.swift" disable_copy="false" collapsible="true" >}}
+
+    let sessionReplayConfig = SessionReplay.Configuration(
+        replaySampleRate: sampleRate, 
+        textAndInputPrivacyLevel: .maskAll,
+        imagePrivacyLevel: imagePrivacyLevel,
+        touchPrivacyLevel: touchPrivacyLevel
+    )
+    SessionReplay.enable(with: sessionReplayConfig)
+
+{{< /code-block >}}
+{{% /tab %}}
+{{< /tabs >}}
+
+### Image masking
+
+By default, the `mask_all` setting is enabled for all images. With this setting enabled, all images on screen are masked.
+
+#### Mask all images
+With the `mask_all` setting enabled, all images are replaced by placeholders labeled 'Image' in the replay.
+
+{{< img src="real_user_monitoring/session_replay/mobile/masking-image-mask-all.png" alt="What your application screen may resemble when `mask-all` is enabled." style="width:50%;">}}
+
+{{< tabs >}}
+{{% tab "Android" %}}
+{{< code-block lang="kotlin" filename="application.kt" disable_copy="false" collapsible="true" >}}
+
+    val sessionReplayConfig = SessionReplayConfiguration.Builder([sampleRate])
+    .setImagePrivacy(ImagePrivacy.MASK_ALL)
+    .build()
+    SessionReplay.enable(sessionReplayConfig)
+
+{{< /code-block >}}
+{{% /tab %}}
+{{% tab "iOS" %}}
+{{< code-block lang="swift" filename="AppDelegate.swift" disable_copy="false" collapsible="true" >}}
+
+    let sessionReplayConfig = SessionReplay.Configuration(
+        replaySampleRate: sampleRate, 
+        textAndInputPrivacyLevel: textAndInputPrivacyLevel,
+        imagePrivacyLevel: .maskAll,
+        touchPrivacyLevel: touchPrivacyLevel
+    )
+    SessionReplay.enable(with: sessionReplayConfig)
+
+{{< /code-block >}}
+{{% /tab %}}
+{{< /tabs >}}
+
+#### Mask content images
+To manage content masking while still showing system images, users can choose the following options:
+
+On iOS, users can select the `mask_non_bundled_only` setting, which replaces any image that is not part of the system with a "Content Image" placeholder.
+
+On Android, users can select the `mask_large_only` setting, which replaces images with dimensions that exceed 100x100dp with a "Content Image" placeholder. 
+
+**Note**: These dimensions refer to the drawable resource, not the view's size.
+
+{{< tabs >}}
+
+{{% tab "Android" %}}
+{{< img src="real_user_monitoring/session_replay/mobile/masking-image-mask-large-only.png" alt="What your application screen may resemble when `mask_large_only` is enabled on Android." style="width:50%;">}}
+
+
+{{< code-block lang="kotlin" filename="application.kt" disable_copy="false" collapsible="true" >}}
+
+    val sessionReplayConfig = SessionReplayConfiguration.Builder([sampleRate])
+    .setImagePrivacy(ImagePrivacy.MASK_LARGE_ONLY)
+    .build()
+    SessionReplay.enable(sessionReplayConfig)
+
+{{< /code-block >}}
+
+{{< /tab >}}
+
+
+{{% tab "iOS" %}}
+
+{{< img src="real_user_monitoring/session_replay/mobile/masking-image-mask-non-bundled-only.png" alt="What your application screen may resemble when `mask_non_bundled_only` is enabled on iOS." style="width:50%;">}}
+
+{{< code-block lang="swift" filename="AppDelegate.swift" disable_copy="false" collapsible="true" >}}
+
+    let sessionReplayConfig = SessionReplay.Configuration(
+        replaySampleRate: sampleRate, 
+        textAndInputPrivacyLevel: textAndInputPrivacyLevel,
+        imagePrivacyLevel: .maskNonBundledOnly,
+        touchPrivacyLevel: touchPrivacyLevel
+    )
+    SessionReplay.enable(with: sessionReplayConfig)
+
+{{< /code-block >}}
+{{% /tab %}}
+{{< /tabs >}}
+
+#### Show all images
+With the `mask_none` setting enabled, all images are shown in the replay.
+
+{{< tabs >}}
+{{% tab "Android" %}}
+{{< code-block lang="kotlin" filename="application.kt" disable_copy="false" collapsible="true" >}}
+
+    val sessionReplayConfig = SessionReplayConfiguration.Builder([sampleRate])
+    .setImagePrivacy(ImagePrivacy.MASK_NONE)
+    .build()
+    SessionReplay.enable(sessionReplayConfig)
+
+{{< /code-block >}}
+{{% /tab %}}
+{{% tab "iOS" %}}
+{{< code-block lang="swift" filename="AppDelegate.swift" disable_copy="false" collapsible="true" >}}
+
+    let sessionReplayConfig = SessionReplay.Configuration(
+        replaySampleRate: sampleRate, 
+        textAndInputPrivacyLevel: textAndInputPrivacyLevel,
+        imagePrivacyLevel: .maskNone,
+        touchPrivacyLevel: touchPrivacyLevel
+    )
+    SessionReplay.enable(with: sessionReplayConfig)
+
+{{< /code-block >}}
+{{% /tab %}}
+{{< /tabs >}}
+
+### Touch masking
+By default, the `hide` setting is enabled for all touches. With this setting enabled, all touches on screen are hidden.
+
+#### Hide all touches
+With the `hide` setting enabled, all touches that occur during the replay are hidden. This is the default setting. 
+
+{{< tabs >}}
+{{% tab "Android" %}}
+{{< code-block lang="kotlin" filename="application.kt" disable_copy="false" collapsible="true" >}}
+
+    val sessionReplayConfig = SessionReplayConfiguration.Builder([sampleRate])
+    .setTouchPrivacy(TouchPrivacy.HIDE)
+    .build()
+    SessionReplay.enable(sessionReplayConfig)
+
+{{< /code-block >}}
+{{% /tab %}}
+{{% tab "iOS" %}}
+{{< code-block lang="swift" filename="AppDelegate.swift" disable_copy="false" collapsible="true" >}}
+
+    let sessionReplayConfig = SessionReplay.Configuration(
+        replaySampleRate: sampleRate, 
+        textAndInputPrivacyLevel: textAndInputPrivacyLevel,
+        imagePrivacyLevel: imagePrivacyLevel,
+        touchPrivacyLevel: .hide
+    )
+    SessionReplay.enable(with: sessionReplayConfig)
+
+{{< /code-block >}}
+{{% /tab %}}
+{{< /tabs >}}
+
+#### Show all touches
+With the `show` setting enabled, all touches that occur during the replay are shown. 
+
+{{< tabs >}}
+{{% tab "Android" %}}
+{{< code-block lang="kotlin" filename="application.kt" disable_copy="false" collapsible="true" >}}
+
+    val sessionReplayConfig = SessionReplayConfiguration.Builder([sampleRate])
+    .setTouchPrivacy(TouchPrivacy.SHOW)
+    .build()
+    SessionReplay.enable(sessionReplayConfig)
+
+{{< /code-block >}}
+{{% /tab %}}
+{{% tab "iOS" %}}
+{{< code-block lang="swift" filename="AppDelegate.swift" disable_copy="false" collapsible="true" >}}
+
+    let sessionReplayConfig = SessionReplay.Configuration(
+        replaySampleRate: sampleRate, 
+        textAndInputPrivacyLevel: textAndInputPrivacyLevel,
+        imagePrivacyLevel: imagePrivacyLevel,
+        touchPrivacyLevel: .show
+    )
+    SessionReplay.enable(with: sessionReplayConfig)
+
+{{< /code-block >}}
+{{% /tab %}}
+{{< /tabs >}}
+
+## Privacy overrides
+
+The sections above describe the global masking levels that apply to the entire application. However, it is also possible to override these settings at the view level. The same privacy levels as above are available for text and inputs, images, touches, and an additional setting to completely hide a specific view.
+
+To ensure overrides are recognized properly, they should be applied as early as possible in the view lifecycle. This prevents scenarios where Session Replay might process a view before applying the overrides.
+
+Privacy overrides affect views and their descendants. This means that even if an override is applied to a view where it might have no immediate effect (for example, applying an image override to a text input), the override still applies to all child views. 
+
+Overrides operate using a "nearest parent" principle: if a view has an override, it uses that setting. Otherwise, it inherits the privacy level from the closest parent in the hierarchy with an override. If no parent has an override, the view defaults to the application's general masking level.
+
+
+### Text and input override
+
 {{< tabs >}}
 {{% tab "Android" %}}
 
-   {{< code-block lang="javascript" filename="build.gradle" disable_copy="false" collapsible="true" >}}
+To override text and input privacy, use `setSessionReplayTextAndInputPrivacy` on a view instance and pass a value from the `TextAndInputPrivacy` enum. Passing `null` removes the override.
 
-   // mask all text elements
-   val sessionReplayConfig = SessionReplayConfiguration.Builder([sampleRate])
-       .setPrivacy(SessionReplayPrivacy.MASK)
-       .build()
-   SessionReplay.enable(sessionReplayConfig)
-   {{< /code-block >}}
-
+{{< code-block lang="kotlin" filename="build.gradle" disable_copy="false" collapsible="true" >}}
+    // Set an text and input override on your view
+    myView.setSessionReplayTextAndInputPrivacy(TextAndInputPrivacy.MASK_SENSITIVE_INPUTS)
+    // Remove an image override from your view
+    myView.setSessionReplayTextAndInputPrivacy(null)
+{{< /code-block >}}
 {{% /tab %}}
+
 {{% tab "iOS" %}}
 
-   {{< code-block lang="swift" filename="AppDelegate.swift" disable_copy="false" collapsible="true" >}}
+To override text and input privacy, use `dd.sessionReplayOverrides.textAndInputPrivacy` on a view instance and set a value from the `TextAndInputPrivacyLevel` enum. Setting it to `nil` removes the override.
 
-    // mask all text elements
-    SessionReplay.enable(
-        with: SessionReplay.Configuration(
-            replaySampleRate: sampleRate,
-            defaultPrivacyLevel: .mask
-        )
-    )
+{{< code-block lang="swift" filename="AppDelegate.swift" disable_copy="false" collapsible="true" >}}
+    // Set an text and input override on your view
+    myView.dd.sessionReplayOverrides.textAndInputPrivacy = .maskSensitiveInputs
+    // Remove an image override from your view
+    myView.dd.sessionReplayOverrides.textAndInputPrivacy = nil
+{{< /code-block >}}
+{{% /tab %}}
+{{< /tabs >}}
 
-   {{< /code-block >}}
+### Image override
+
+{{< tabs >}}
+{{% tab "Android" %}}
+
+To override image privacy, use `setSessionReplayImagePrivacy` on a view instance and pass a value from the `ImagePrivacy` enum. Passing `null` removes the override.
+
+{{< code-block lang="kotlin" filename="build.gradle" disable_copy="false" collapsible="true" >}}
+    // Set an image override on your view
+    myView.setSessionReplayImagePrivacy(ImagePrivacy.MASK_ALL)
+    // Remove an image override from your view
+    myView.setSessionReplayImagePrivacy(null)
+{{< /code-block >}}
+{{% /tab %}}
+
+{{% tab "iOS" %}}
+
+To override image privacy, use `dd.sessionReplayOverrides.imagePrivacy` on a view instance and set a value from the `ImagePrivacyLevel` enum. Setting it to `nil` removes the override.
+
+{{< code-block lang="swift" filename="AppDelegate.swift" disable_copy="false" collapsible="true" >}}
+    // Set an image override on your view
+    myView.dd.sessionReplayOverrides.imagePrivacy = .maskAll
+    // Remove an image override from your view
+    myView.dd.sessionReplayOverrides.imagePrivacy = nil
+{{< /code-block >}}
+{{% /tab %}}
+{{< /tabs >}}
+
+### Touch override
+
+{{< tabs >}}
+{{% tab "Android" %}}
+
+To override touch privacy, use `setSessionReplayTouchPrivacy` on a view instance and pass a value from the `TouchPrivacy` enum. Passing `null` removes the override.
+
+{{< code-block lang="kotlin" filename="build.gradle" disable_copy="false" collapsible="true" >}}
+    // Set a touch override on your view
+    view.setSessionReplayTouchPrivacy(TouchPrivacy.HIDE)
+    // Remove a touch override from your view
+    view.setSessionReplayTouchPrivacy(null)
+{{< /code-block >}}
+{{% /tab %}}
+
+{{% tab "iOS" %}}
+
+To override touch privacy, use `dd.sessionReplayOverrides.touchPrivacy` on a view instance and set a value from the `TouchPrivacyLevel` enum. Setting it to `nil` removes the override.
+
+{{< code-block lang="swift" filename="AppDelegate.swift" disable_copy="false" collapsible="true" >}}
+    // Set a touch override on your view
+    myView.dd.sessionReplayOverrides.touchPrivacy = .hide
+    // Remove a touch override from your view
+    myView.dd.sessionReplayOverrides.touchPrivacy = nil
+{{< /code-block >}}
 
 {{% /tab %}}
 {{< /tabs >}}
 
-### Mask only input elements
+### Hidden elements override
 
-With the `mask user input` setting enabled, any input field is replaced with anonymized text. 
+For sensitive elements that need to be completely hidden, use the `hidden` setting.
 
-{{< img src="real_user_monitoring/session_replay/mobile/masking-mode-user-input-2.png" alt="What your application screen may resemble when user input fields are masked." style="width:50%;">}}
+When an element is `hidden`, it is replaced by a placeholder labeled as "Hidden" in the replay, and its subviews are not recorded.
 
-{{< tabs >}}
-{{% tab "Android" %}}
-
-   {{< code-block lang="javascript" filename="build.gradle" disable_copy="false" collapsible="true" >}}
-
-   // mask only input elements
-   val sessionReplayConfig = SessionReplayConfiguration.Builder([sampleRate])
-       .setPrivacy(SessionReplayPrivacy.MASK_USER_INPUT)
-       .build()
-   SessionReplay.enable(sessionReplayConfig)
-   {{< /code-block >}}
-
-{{% /tab %}}
-{{% tab "iOS" %}}
-
-   {{< code-block lang="swift" filename="AppDelegate.swift" disable_copy="false" collapsible="true" >}}
-   
-   // mask only input elements
-    SessionReplay.enable(
-        with: SessionReplay.Configuration(
-            replaySampleRate: sampleRate,
-            defaultPrivacyLevel: .maskUserInput
-        )
-    )
-
-   {{< /code-block >}}
-
-{{% /tab %}}
-{{< /tabs >}}
-
-### Allow (no masking)
-
-With the `allow` setting enabled, all text is revealed.
-
-{{< img src="real_user_monitoring/session_replay/mobile/masking-mode-allow-all-2.png" alt="What your application screen may resemble when `allow` is enabled." style="width:50%;">}}
-
-**Note**: Even with this option enabled, any sensitive text fields, such as passwords, emails, phone numbers, and addresses are still masked. For more information, see [Text masking definitions](#text-masking-definitions).
+**Note**: Marking a view as `hidden` does not prevent touch interactions from being recorded on that element. To hide touch interactions as well, use the [touch override](#touch-override) in addition to marking the element as hidden.
 
 {{< tabs >}}
 {{% tab "Android" %}}
 
-   {{< code-block lang="javascript" filename="build.gradle" disable_copy="false" collapsible="true" >}}
+Use `setSessionReplayHidden(hide = true)` to hide the element. Setting `hide` to `false` removes the override.
 
-   // no masking; all text is revealed
-   val sessionReplayConfig = SessionReplayConfiguration.Builder([sampleRate])
-      .setPrivacy(SessionReplayPrivacy.ALLOW)
-      .build()
-   SessionReplay.enable(sessionReplayConfig)
-   {{< /code-block >}}
+{{< code-block lang="kotlin" filename="build.gradle" disable_copy="false" collapsible="true" >}}
+    // Mark a view as hidden
+    myView.setSessionReplayHidden(hide = true)
+    // Remove the override from the view
+    myView.setSessionReplayHidden(hide = false)
+{{< /code-block >}}
 
 {{% /tab %}}
+
 {{% tab "iOS" %}}
+{{< code-block lang="swift" filename="AppDelegate.swift" disable_copy="false" collapsible="true" >}}
+    // Mark a view as hidden
+    myView.dd.sessionReplayOverrides.hide = true
+    // Remove the override from the view
+    myView.dd.sessionReplayOverrides.hide = false
+{{< /code-block >}}
 
-   {{< code-block lang="swift" filename="AppDelegate.swift" disable_copy="false" collapsible="true" >}}
-   // no masking; all text is revealed
-    SessionReplay.enable(
-        with: SessionReplay.Configuration(
-            replaySampleRate: sampleRate,
-            defaultPrivacyLevel: .allow
-        )
-    )
-
-   {{< /code-block >}}
+**Note**: Setting the `hidden` override to `nil` has the same effect as setting it to `false`—it disables the override.
 
 {{% /tab %}}
 {{< /tabs >}}
+
+### Notes on WebViews
+
+• Privacy overrides, aside from the `hidden` and `touch` options, are not supported for WebViews. You can primarily manage their privacy using the [browser SDK privacy settings][1].
+
+• When a WebView is marked as `hidden`, it is replaced by a placeholder in the replay. However, the WebView itself continues to collect and send data. To avoid this, it is recommended to use [browser SDK privacy settings][1] for managing WebView privacy, as they provide more targeted control.
+
 
 ## How and what data is masked
 
-This section describes how the Datadog recorder handles masking based on data type and how that data is defined. 
+This section describes how the Datadog recorder handles masking based on data type and how that data is defined.
+
 ### Text masking strategies
 
 Depending on how you've configured your privacy settings, the type of text, and sensitivity of data, Datadog's masking rules apply different strategies to different types of text fields.
@@ -252,6 +544,18 @@ The following chart shows how we apply different touch interaction strategies, u
 | [Other attributes](#other-attributes) |  |  |  |
 | [On-screen keyboard](#on-screen-keyboard) | {{< X >}} | {{< X >}} | {{< X >}} |
 
+### Image masking
+
+The following chart shows how we apply different image masking strategies:
+
+| Type           | Mask None | Mark Large Only (Android) <br/> / Mask Non Bundled Only (iOS) | Mask All 
+|----------------|-----------|---------------------------------------------------------------|---------|
+| Content Image  | Shown     | Masked                                                        | Masked |
+| System Image   | Shown     | Shown                                                         | Masked |
+
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /real_user_monitoring/session_replay/privacy_options

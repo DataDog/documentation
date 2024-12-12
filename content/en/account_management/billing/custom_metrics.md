@@ -2,15 +2,24 @@
 title: Custom Metrics Billing
 aliases:
     - /integrations/faq/what-standard-integrations-emit-custom-metrics/
+further_reading:
+- link: "/metrics/custom_metrics/"
+  tag: "Documentation"
+  text: "Learn more about Custom Metrics"
+- link: "/metrics/guide/custom_metrics_governance/"
+  tag: "Guide"
+  text: "Best Practice for Custom Metric Governance"
 algolia:
   tags: ['custom metrics billing']
 ---
+
+## Overview
 
 If a metric is not submitted from one of the [more than {{< translate key="integration_count" >}} Datadog integrations][1] it's considered a [custom metric][2]. Certain standard integrations can also potentially emit custom metrics. For more information, see [Custom metrics and standard integrations][14].
 
 **A custom metric is uniquely identified by a combination of a metric name and tag values (including the host tag)**. In general, any metric you send using [DogStatsD][3] or through a [custom Agent Check][4] is a custom metric.
 
-Your monthly billable count for custom metrics (reflected on the Usage page) is calculated by taking the total of all distinct custom metrics for each hour in a given month, and dividing it by the number of hours in the month to compute a monthly average value.
+Your monthly billable custom metrics usage (reflected on the Usage page) is calculated by taking the total of all distinct custom metrics (also known as timeseries) for each hour in a given month, and dividing it by the number of hours in the month to compute a monthly average value. Your billable usage is not impacted by data point submission frequency or the number of queries you run on your metrics.
 
 Metrics without Limits™ users see monthly billable volumes for _ingested_ and _indexed_ custom metrics on their Usage page. Learn more about ingested and indexed custom metrics and [Metrics without Limits™][5]. 
 

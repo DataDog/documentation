@@ -1,4 +1,7 @@
 ---
+algolia:
+  tags:
+  - trace metrics
 aliases:
 - /fr/tracing/getting_further/metrics_namespace
 - /fr/tracing/guide/metrics_namespace
@@ -6,9 +9,9 @@ further_reading:
 - link: tracing/trace_collection/
   tag: Documentation
   text: Configurer le tracing d'APM avec votre application
-- link: tracing/services/services_list/
+- link: tracing/service_catalog/
   tag: Documentation
-  text: Découvrir la liste des services transmettant des données à Datadog
+  text: Découvrir et cataloguer les services transmettant des données à Datadog
 - link: tracing/services/service_page
   tag: Documentation
   text: En savoir plus sur les services dans Datadog
@@ -36,7 +39,6 @@ Des métriques de trace sont générées pour les spans d'entrée de service et 
 L'espace de nommage des [métriques de trace][3] est formaté comme suit :
 
 - `trace.<NOM_SPAN>.<SUFFIXE_MÉTRIQUE>`
-- `trace.<NOM_SPAN>.<SUFFIXE_MÉTRIQUE>.<2E_TAG_PRIM>_service`
 
 Les paramètres sont définis comme suit :
 
@@ -44,29 +46,27 @@ Les paramètres sont définis comme suit :
 : Le nom de l'opération ou `span.name` (par exemple : `redis.command`, `pylons.request`, `rails.request`, `mysql.query`).
 
 `<SUFFIXE_MÉTRIQUE>`
-: Le nom de la métrique (par exemple : `duration`, `hits`, `span_count`). Référez-vous à la section ci-dessous.
-
-`<2ND_PRIM_TAG>`
-: Si le nom de la métrique prend en compte le [deuxième tag primaire][4], ce tag fait partie du nom de la métrique.
+: Le nom de la métrique (par exemple : `hits`, `errors`, `apdex`, `duration`). Référez-vous à la section ci-dessous.
 
 `<TAGS>`
-: Les tags des métriques de trace. Voici la liste des tags pris en charge : `env`, `service`, `version`, `resource`, `sublayer_type`, `sublayer_service`, `http.status_code`, `http.status_class` et les tags de l'Agent Datadog (y compris le tag host et le deuxième tag primaire). **Remarque :** les tags définis sur des spans ne sont pas pris en compte et ne seront pas disponibles en tant que tags pour vos métriques de trace.
+: Les tags des métriques de trace. Voici la liste des tags pris en charge : `env`, `service`, `version`, `resource`, `http.status_code`, `http.status_class` et les tags de l'Agent Datadog (y compris le tag host et le deuxième tag primaire). 
+**Remarque :** les autres tags définis sur des spans ne sont pas disponibles en tant que tags sur les métriques de trace.
 
 ## Suffixe des métriques
 
 ### Hits
 
-`trace.<NOM_SPAN>.hits`
+`trace.<SPAN_NAME>.hits`
 : **Prérequis :** cette métrique est disponible pour tous les services APM.<br>
-**Description :** elle représente le nombre de hits d'une span donnée.<br>
+**Description :** elle représente le nombre de spans créées avec un nom spécifique (par exemple `redis.command`, `pylons.request`, `rails.request`, or `mysql.query`).<br>
 **Type de métrique :** [COUNT][5].<br>
-**Tags :** `env`, `service`, `version`, `resource`, `http.status_code`, tous les tags de host de l'Agent de host Datadog et le [deuxième tag primaire][4].
+**Tags :** `env`, `service`, `version`, `resource`, `resource_name`, `http.status_code`, tous les tags de host de l'Agent de host Datadog et le [deuxième tag primaire][4].
 
 `trace.<NOM_SPAN>.hits.by_http_status`
 : **Prérequis :** cette métrique est disponible pour les services APM de type HTTP/WEB tant que des métadonnées HTTP sont fournies.<br>
 **Description :** elle représente le nombre de hits d'une span donnée, avec une répartition par code de statut HTTP.<br>
 **Type de métrique :** [COUNT][5].<br>
-**Tags :** `env`, `service`, `version`, `resource`, `http.status_class`, `http.status_code`, tous les tags de host de l'Agent de host Datadog et le [deuxième tag primaire][4].
+**Tags :** `env`, `service`, `version`, `resource`, `resource_name`, `http.status_class`, `http.status_code`, tous les tags de host de l'Agent de host Datadog et le [deuxième tag primaire][4].
 
 ### Distribution de la latence
 
@@ -74,8 +74,7 @@ Les paramètres sont définis comme suit :
 : **Prérequis :** cette métrique est disponible pour tous les services de l'APM.<br>
 **Description :** elle représente la distribution de latence pour l'ensemble des services, ressources et versions ainsi que tous les environnements et deuxièmes tags primaires.<br>
 **Type de métrique :** [DISTRIBUTION][6].<br>
-**Tags :** `env`, `service`, `resource`, `resource_name`, `version`, `synthetics` et [le deuxième tag primaire][4].
-
+**Tags :** `env`, `service`,`version`, `resource`, `resource_name`, `http.status_code`, `synthetics` et [le deuxième tag primaire][4].
 
 ### Erreurs
 
@@ -83,7 +82,7 @@ Les paramètres sont définis comme suit :
 : **Prérequis :** cette métrique est disponible pour tous les services APM.<br>
 **Description :** elle représente le nombre d'erreurs d'une span donnée.<br>
 **Type de métrique :** [COUNT][5].<br>
-**Tags :** `env`, `service`, `version`, `resource`, `http.status_code`, tous les tags de host de l'Agent de host Datadog et le [deuxième tag primaire][4].
+**Tags :** `env`, `service`, `version`, `resource`, `resource_name`, `http.status_code`, tous les tags de host de l'Agent de host Datadog et le [deuxième tag primaire][4].
 
 `trace.<NOM_SPAN>.errors.by_http_status`
 : **Prérequis :** cette métrique est disponible pour tous les services APM.<br>
@@ -91,37 +90,29 @@ Les paramètres sont définis comme suit :
 **Type de métrique :** [COUNT][5].<br>
 **Tags :** `env`, `service`, `version`, `resource`, `http.status_class`, `http.status_code`, tous les tags de host de l'Agent de host Datadog et le [deuxième tag primaire][4].
 
+### Apdex
 
-### Span count
-
-**Remarque** : cet espace de nommage est obsolète.
-
-`trace.<NOM_SPAN>.span_count`
-: **Prérequis :** cette métrique est disponible pour tous les services APM.<br>
-**Description :** elle représente le nombre de spans recueillies lors d'un intervalle donné.<br>
-**Type de métrique :** [COUNT][5].<br>
-**Tags :** `env`, `service`, `resource`, tous les tags de host de l'Agent de host Datadog et le [deuxième tag primaire][4].
-
-`trace.<NOM_SPAN>.span_count.by_http_status`
-: **Prérequis :** cette métrique est disponible pour les services APM de type HTTP/WEB tant que des métadonnées HTTP sont fournies.<br>
-**Description :** elle représente le nombre de spans recueillies lors d'un intervalle donné, réparties par statut HTTP.<br>
-**Type de métrique :** [COUNT][5].<br>
-**Tags :** `env`, `service`, `resource`, `http.status_class`, `http.status_code`, tous les tags de host de l'Agent de host Datadog et le [deuxième tag primaire][4].
-
+`trace.<NOM_SPAN>.apdex`
+: **Prérequis :** cette métrique est disponible pour tous les services APM de type HTTP/ ou basés sur le web.<br>
+**Description :** elle mesure le score [Apdex][10] pour chaque service Web.<br>
+**Type de métrique :** [GAUGE][7].<br>
+**Tags :** `env`, `service`, `version`, `resource` / `resource_name`, `version`, `synthetics` et le [deuxième tag primaire][4].
 
 ### Durée
 
-<div class="alert alert-warning">Cette méthode d'utilisation des métriques de trace est obsolète. À la place, nous vous conseillons de <a href="/tracing/guide/ddsketch_trace_metrics/">tracer les métriques de distribution avec DDSketch</a>.</div>
+<div class="alert alert-warning">Datadog recommande <a href="/tracing/guide/ddsketch_trace_metrics/">de tracer les métriques de distribution avec DDSketch</a>.</div>
 
-`trace.<NOM_SPAN>.duration`
-: **Prérequis :** cette métrique existe pour tous les services APM.<br>
-**Description :** [OBSOLÈTE] Correspond à la durée totale mesurée pour un groupe de spans dans un intervalle de temps, y compris les spans enfants détectées par le service de collecte. Cette métrique est utilisée pour générer le graphique « % exec time for downstream services » (% de temps d'exécution pour les services en aval). Le fait de diviser `trace.<NOM_SPAN>.duration` par `trace.<NOM_SPAN>.hits`, peut donner une latence moyenne, mais cette méthode de calcul de la latence moyenne n'est pas recommandée. Consultez plutôt la section [Distribution de la latence](#distribution-de-la-latence) pour effectuer ce calcul. <br>
+`trace.<SPAN_NAME>.duration`
+: **Prérequis :** cette métrique est disponible pour tous les services APM.<br>
+**Description :** correspond à la durée totale mesurée pour un groupe de spans dans un intervalle de temps, y compris les spans enfants détectées par le service de collecte. Dans la plupart des cas, Datadog recommande d'utiliser la [distribution de la latence](#latency-distribution) pour calculer la latence moyenne ou les centiles. Pour calculer la latence moyenne avec des filtres basés sur des tags, vous pouvez utiliser cette métrique avec la formule suivante : <br>
+`sum:trace.<SPAN_NAME>.duration{<FILTER>}.rollup(sum).fill(zero) / sum:trace.<SPAN_NAME>.hits{<FILTER>}` <br>
+Cette métrique ne prend pas en charge les agrégations par centile. Lisez la section relative à la [distribution de la latence](#distribution-de-la-latence) pour en savoir plus.
 **Type de métrique :** [GAUGE][7].<br>
-**Tags :** `env`, `service`, `resource`, `http.status_code`, tous les tags de host de l'Agent pour host Datadog et le [deuxième tag primaire][4].
+**Tags :** `env`, `service`, `resource`, `http.status_code` tous les tags de l'Agent pour host Datadog et le [deuxième tag primaire][4].
 
 ### Duration by
 
-<div class="alert alert-warning">Cette méthode d'utilisation des métriques de trace est obsolète. À la place, nous vous conseillons de <a href="/tracing/guide/ddsketch_trace_metrics/">tracer les métriques de distribution avec DDSketch</a>.</div>
+<div class="alert alert-warning">Datadog recommande <a href="/tracing/guide/ddsketch_trace_metrics/">de tracer les métriques de distribution avec DDSketch</a>.</div>
 
 `trace.<NOM_SPAN>.duration.by_http_status`
 : **Prérequis :** cette métrique est disponible pour les services APM HTTP/WEB tant que des métadonnées HTTP sont fournies.<br>
@@ -129,65 +120,26 @@ Les paramètres sont définis comme suit :
 **Type de métrique :** [GAUGE][7].<br>
 **Tags :** `env`, `service`, `resource`, `http.status_class`, `http.status_code`, tous les tags de host de l'Agent de host Datadog et le [deuxième tag primaire][4].
 
-`trace.<NOM_SPAN>.duration.by_service`
-: **Prérequis :** cette métrique est disponible pour tous les services APM.<br>
-**Description :** elle mesure la durée réelle totale du traitement pour chaque service (c'est-à-dire, en excluant le temps passé à attendre les processus enfant).<br>
-**Type de métrique :** [GAUGE][7].<br>
-**Tags :** `env`, `service`, `resource`, `sublayer_service`, `http.status_code`, tous les tags de host de l'Agent de host Datadog et le [deuxième tag primaire][4].
+## Impact de l'échantillonnage sur les métriques de traces
 
-`trace.<NOM_SPAN>.duration.by_type`
-: **Prérequis :** cette métrique est disponible pour tous les services APM.<br>
-**Description :** elle mesure la durée réelle totale du traitement pour chaque [type de service][8].<br>
-**Type de métrique :** [GAUGE][7].<br>
-**Tags :** `env`, `service`, `resource`, `sublayer_type`, `http.status_code`, tous les tags de host de l'Agent de host Datadog et le [deuxième tag primaire][4].
+Dans la plupart des cas, les métriques de traces sont calculés sur la base de l'ensemble du trafic de l'application. Toutefois, dans certaines configurations d'échantillonnage de l'ingestion des traces, les métriques ne représentent qu'un sous-ensemble de toutes les requêtes.
 
-`trace.<NOM_SPAN>.duration.by_type.by_http_status`
-: **Prérequis :** cette métrique est disponible pour les services APM de type HTTP/WEB tant que des métadonnées HTTP sont fournies.<br>
-**Description :** elle mesure la durée réelle totale du traitement pour chaque [type de service][8] et statut HTTP.<br>
-**Type de métrique :** [GAUGE][7].<br>
-**Tags :** `env`, `service`, `resource`, `sublayer_type`, `http.status_class`, `http.status_code`, tous les tags de host de l'Agent de host Datadog et le [deuxième tag primaire][4].
+### Échantillonnage côté application
 
-`trace.<NOM_SPAN>.duration.by_service.by_http_status`
-: **Prérequis :** cette métrique est disponible pour les services APM de type HTTP/WEB tant que des métadonnées HTTP sont fournies.<br>
-**Description :** elle mesure la durée réelle totale du traitement pour chaque [service][9] et statut HTTP.<br>
-**Type de métrique :** [GAUGE][7].<br>
-**Tags :** `env`, `service`, `resource`, `sublayer_service`, `http.status_class`, `http.status_code`, tous les tags de host de l'Agent de host Datadog et le [deuxième tag primaire][4].
+Certaines bibliothèques de tracing prennent en charge l'échantillonnage côté application, ce qui réduit le nombre de spans avant leur envoi vers l'Agent Datadog. Par exemple, la bibliothèques de tracing Ruby propose un échantillonnage côté application afin d'améliorer les performances. Cependant, cela peut affecter les métriques de traces, car l'Agent Datadog a besoin de tous les spans pour calculer les métriques avec précision. 
 
-### Apdex
+Très peu de bibliothèques de tracing prennent en charge ce paramètre, et son utilisation n'est généralement pas conseillée.
 
-`trace.<NOM_SPAN>.apdex`
-: **Prérequis :** cette métrique est disponible pour tous les services APM de type HTTP/WEB.<br>
-**Description :** elle mesure le score [Apdex][10] pour chaque service Web.<br>
-**Type de métrique :** [GAUGE][7].<br>
-**Tags :** `env`, `service`, `resource` / `resource_name`, `version`, `synthetics` et le [deuxième tag primaire][4].
+### Échantillonnage OpenTelemetry
 
-**Les métriques Apdex suivantes sont désormais obsolètes.**
+Les mécanismes d'échantillonnage natifs du SDK OpenTelemetry réduisent le nombre de spans envoyées au Collector Datadog, ce qui se traduit par des métriques de traces échantillonnées et potentiellement imprécises.
 
-`trace.<NOM_SPAN>.apdex.by.resource_<2E_TAG_PRIM>_service`
-: **Prérequis :** cette métrique est disponible pour tous les services APM de type HTTP/WEB.<br>
-**Description :** elle mesure le score [Apdex][10] pour toutes les combinaisons de ressources, [deuxièmes tags primaires][4] et services.<br>
-**Type de métrique :** [GAUGE][7].<br>
-**Tags :** `env`, `service`, `resource`/`resource_name` et le [deuxième tag primaire][4].
+### Échantillonnage XRay
 
-`trace.<NOM_SPAN>.apdex.by.resource_service`
-: **Prérequis :** cette métrique est disponible pour tous les services APM de type HTTP/WEB.<br>
-**Description :** elle mesure le score [Apdex][10] de chaque combinaison de ressources et de services Web.<br>
-**Type de métrique :** [GAUGE][7].<br>
-**Tags :** `env`, `service` et `resource`/`resource_name`.
-
-`trace.<NOM_SPAN>.apdex.by.<2E_TAG_PRIM>_service`
-: **Prérequis :** cette métrique est disponible pour tous les services APM de type HTTP/WEB.<br>
-**Description :** elle mesure le score [Apdex][10] pour chaque combinaison de [deuxième tag primaire][4] et de service Web.<br>
-**Type de métrique :** [GAUGE][7].<br>
-**Tags :** `env`, `service` et le [deuxième tag primaire][4].
-
-`trace.<NOM_SPAN>.apdex.by.service`
-: **Prérequis :** cette métrique est disponible pour tous les services APM de type HTTP/WEB.<br>
-**Description :** elle mesure le score [Apdex][10] pour chaque service Web.<br>
-**Type de métrique :** [GAUGE][7].<br>
-**Tags :** `env` et `service`.
+Les spans XRay sont échantillonnées avant d'être envoyées à Datadog, ce qui signifie que les métriques de traces ne reflètent peut-être pas tout le trafic.
 
 
+## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -198,6 +150,6 @@ Les paramètres sont définis comme suit :
 [5]: /fr/metrics/types/?tab=count#metric-types
 [6]: /fr/metrics/types/?tab=distribution#metric-types
 [7]: /fr/metrics/types/?tab=gauge#metric-types
-[8]: /fr/tracing/services/services_list/#services-types
+[8]: /fr/tracing/service_catalog/#services-types
 [9]: /fr/tracing/glossary/#services
 [10]: /fr/tracing/guide/configure_an_apdex_for_your_traces_with_datadog_apm/

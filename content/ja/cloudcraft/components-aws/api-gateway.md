@@ -18,7 +18,7 @@ API Gateway コンポーネントを使用して、Amazon Web Services アーキ
 - **M min./month**: 1 分ごと送信されるメッセージの数を百万単位で入力します。`websocket` タイプの API でのみ使用可能です。
 - **Cache Memory (GB)**: API レスポンスのキャッシュに使用するメモリ量をギガバイト単位で選択します。`rest` タイプの API でのみ使用可能です。
 
-## ヘルプ
+## API
 
 [Cloudcraft API][1] を使用して、プログラムでアーキテクチャ図にアクセスし、JSON オブジェクトとしてレンダリングします。
 

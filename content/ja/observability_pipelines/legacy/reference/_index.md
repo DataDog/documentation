@@ -7,6 +7,6 @@ cascade:
   type: リファレンス
 disable_sidebar: true
 disable_toc: true
-title: Threat Monitoring and Protection
+title: リファレンス
 type: リファレンス
 ---

@@ -1,0 +1,15 @@
+---
+schema-version: v1
+kind: mergequeue
+enable: true
+merge_method: squash
+workflow_type: speculative # (default)
+speculative_fallback_enable: true # When enabled, a fallback build will get started when there is more than 2 pull requests.
+speculative_max_depth: 3 # (default)
+wait_for_check_timeout_in_minutes: 120 # 2 hours (default)
+gitlab_jobs_retry_enable: true
+gitlab_fail_fast: true
+team: webops-platform
+checks_to_ignore:
+  - "Send PR Approval Status"
+  - "Preview Synthetics"

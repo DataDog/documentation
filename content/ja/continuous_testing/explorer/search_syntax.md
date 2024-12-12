@@ -1,11 +1,12 @@
 ---
 aliases:
 - /ja/synthetics/explorer/search_syntax
-description: CI Results Explorer で検索クエリを作成する方法について説明します。
+description: Learn how to create a search query in the Synthetic Monitoring & Testing
+  Results Explorer.
 further_reading:
 - link: /continuous_testing/explorer
   tag: ドキュメント
-  text: Synthetic Monitoring & Continuous Testing Explorer について
+  text: Learn about the Synthetic Monitoring & Testing Results Explorer
 title: 検索構文
 ---
 

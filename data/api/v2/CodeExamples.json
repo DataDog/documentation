@@ -20,6 +20,25 @@
       "description": "Update a retention filter returns \"OK\" response"
     }
   ],
+  "CreateAWSAccount": [
+    {
+      "group": "aws_integration",
+      "suffix": "_1716720881",
+      "description": "Create an AWS account returns \"AWS Account object\" response"
+    },
+    {
+      "group": "aws_integration",
+      "suffix": "",
+      "description": "Create an AWS integration returns \"AWS Account object\" response"
+    }
+  ],
+  "UpdateAWSAccount": [
+    {
+      "group": "aws_integration",
+      "suffix": "",
+      "description": "Update an AWS integration returns \"AWS Account object\" response"
+    }
+  ],
   "SearchAuditLogs": [
     {
       "group": "audit",
@@ -73,8 +92,8 @@
     },
     {
       "group": "ci_visibility_pipelines",
-      "suffix": "_129899466",
-      "description": "Send pipeline job event returns \"Request accepted for processing\" response"
+      "suffix": "_2341150096",
+      "description": "Send running pipeline event returns \"Request accepted for processing\" response"
     }
   ],
   "AggregateCIAppTestEvents": [
@@ -201,6 +220,13 @@
       "description": "Update Cloud Cost Management Azure config returns \"OK\" response"
     }
   ],
+  "UploadCustomCostsFile": [
+    {
+      "group": "cloud_cost_management",
+      "suffix": "_4125168396",
+      "description": "Upload Custom Costs File returns \"Accepted\" response"
+    }
+  ],
   "CreateCloudflareAccount": [
     {
       "group": "cloudflare_integration",
@@ -272,6 +298,20 @@
       "group": "dashboard_lists",
       "suffix": "",
       "description": "Update items of a dashboard list returns \"OK\" response"
+    }
+  ],
+  "CreateDataDeletionRequest": [
+    {
+      "group": "data_deletion",
+      "suffix": "",
+      "description": "Creates a data deletion request returns \"OK\" response"
+    }
+  ],
+  "PatchDomainAllowlist": [
+    {
+      "group": "domain_allowlist",
+      "suffix": "",
+      "description": "Sets Domain Allowlist returns \"OK\" response"
     }
   ],
   "CreateDowntime": [
@@ -450,6 +490,13 @@
       "description": "Create an incident todo returns \"CREATED\" response"
     }
   ],
+  "CreateIncidentType": [
+    {
+      "group": "incidents",
+      "suffix": "",
+      "description": "Create an incident type returns \"CREATED\" response"
+    }
+  ],
   "UpdateIncidentIntegration": [
     {
       "group": "incidents",
@@ -462,6 +509,13 @@
       "group": "incidents",
       "suffix": "",
       "description": "Update an incident todo returns \"OK\" response"
+    }
+  ],
+  "UpdateIncidentType": [
+    {
+      "group": "incidents",
+      "suffix": "",
+      "description": "Update an incident type returns \"OK\" response"
     }
   ],
   "CreateAPIKey": [
@@ -645,6 +699,20 @@
       "description": "Update a tag configuration returns \"OK\" response"
     }
   ],
+  "CreateTenantBasedHandle": [
+    {
+      "group": "microsoft_teams_integration",
+      "suffix": "_1540689753",
+      "description": "Create api handle returns \"CREATED\" response"
+    }
+  ],
+  "UpdateTenantBasedHandle": [
+    {
+      "group": "microsoft_teams_integration",
+      "suffix": "_419892746",
+      "description": "Update api handle returns \"OK\" response"
+    }
+  ],
   "CreateMonitorConfigPolicy": [
     {
       "group": "monitors",
@@ -657,6 +725,13 @@
       "group": "monitors",
       "suffix": "",
       "description": "Edit a monitor configuration policy returns \"OK\" response"
+    }
+  ],
+  "UpdateDeviceUserTags": [
+    {
+      "group": "network_device_monitoring",
+      "suffix": "",
+      "description": "Update the tags for a device returns \"OK\" response"
     }
   ],
   "CreateOktaAccount": [
@@ -790,6 +865,20 @@
       "description": "Revoke permission returns \"OK\" response"
     }
   ],
+  "CreateRumMetric": [
+    {
+      "group": "rum_metrics",
+      "suffix": "",
+      "description": "Create a rum-based metric returns \"Created\" response"
+    }
+  ],
+  "UpdateRumMetric": [
+    {
+      "group": "rum_metrics",
+      "suffix": "",
+      "description": "Update a rum-based metric returns \"OK\" response"
+    }
+  ],
   "EditSecurityMonitoringSignalIncidents": [
     {
       "group": "security_monitoring",
@@ -881,6 +970,13 @@
       "group": "security_monitoring",
       "suffix": "",
       "description": "Mute or unmute a batch of findings returns \"OK\" response"
+    }
+  ],
+  "RunHistoricalJob": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Run a historical job returns \"Status created\" response"
     }
   ],
   "TestSecurityMonitoringRule": [
@@ -1036,6 +1132,20 @@
       "description": "Create outcomes batch returns \"OK\" response"
     }
   ],
+  "UpdateScorecardRule": [
+    {
+      "group": "service_scorecards",
+      "suffix": "",
+      "description": "Update an existing rule returns \"Rule updated successfully\" response"
+    }
+  ],
+  "UpsertCatalogEntity": [
+    {
+      "group": "software_catalog",
+      "suffix": "_586948155",
+      "description": "Create or update software catalog entity using schema v3 returns \"ACCEPTED\" response"
+    }
+  ],
   "AggregateSpans": [
     {
       "group": "spans",
@@ -1135,6 +1245,13 @@
       "group": "users",
       "suffix": "",
       "description": "Update a user returns \"OK\" response"
+    }
+  ],
+  "CreateWorkflowInstance": [
+    {
+      "group": "workflow_automation",
+      "suffix": "",
+      "description": "Execute a workflow returns \"Created\" response"
     }
   ]
 }

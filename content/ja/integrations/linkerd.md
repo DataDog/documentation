@@ -30,6 +30,7 @@ author:
 categories:
 - configuration & deployment
 - log collection
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/linkerd/README.md
 display_on_public_website: true
@@ -37,9 +38,8 @@ draft: false
 git_integration_title: linkerd
 integration_id: linkerd
 integration_title: Linkerd
-integration_version: 4.2.0
+integration_version: 6.0.0
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: linkerd
 public_title: Linkerd
@@ -56,6 +56,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: linkerd からメトリクスを取得してサービス健全性を監視
   media: []
@@ -77,22 +78,22 @@ tile:
 このインテグレーションは、アプリケーションの成功率、レイテンシー、飽和状態など、Linkerd のメトリクスを Datadog に送信します。
 
 
-## 計画と使用
+## セットアップ
 
 この OpenMetrics ベースのインテグレーションには、最新モード (ターゲットエンドポイントを指すように `openmetrics_endpoint` を設定することで有効) とレガシーモード (代わりに `prometheus_url` を設定することで有効) があります。すべての最新機能を利用するために、Datadog は最新モードを有効にすることを推奨します。詳しくは、[OpenMetrics ベースのインテグレーションにおける最新バージョニングとレガシーバージョニング][2]を参照してください。
 
 `[OpenMetrics V1]` または `[OpenMetrics V2]` とマークされたメトリクスは、Linkerd インテグレーションの対応するモードを使用した場合にのみ利用できます。マークされていないメトリクスは、すべてのモードで収集されます。
 
-### インフラストラクチャーリスト
+### インストール
 
 Linkerd チェックは [Datadog Agent][3] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 
-### ブラウザトラブルシューティング
+### 構成
 
 {{< tabs >}}
 {{% tab "ホスト" %}}
 
-#### メトリクスベース SLO
+#### ホスト
 
 ホストで実行中の Agent に対してこのチェックを構成するには
 
@@ -133,7 +134,7 @@ Linkerd チェックは [Datadog Agent][3] パッケージに含まれていま�
 **注**: これは新しいデフォルトの OpenMetrics チェックの例です。以前にこのインテグレーションを実装したことがある場合は、[レガシーの例][2]を参照してください。
 
 
-##### 収集データ
+##### ログ収集
 
 Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集][3]を参照してください。
 
@@ -154,9 +155,9 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 
 [Agent の status サブコマンド][4]を実行し、Checks セクションで `linkerd` を探します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 
 このインテグレーションによって提供されるメトリクスのリストについては、[metadata.csv][5] を参照してください。
 
@@ -177,11 +178,11 @@ curl <linkerd_prometheus_endpoint>
 詳しくは[デフォルト構成][8]の例を参照してください。
 
 
-### ヘルプ
+### サービスチェック
 {{< get-service-checks-from-git "linkerd" >}}
 
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
 

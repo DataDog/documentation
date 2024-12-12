@@ -26,61 +26,66 @@ further_reading:
 - link: /glossary/#tail
   tag: Glosario
   text: Entrada de glosario para "tail" (cola)
-kind: documentación
+- link: https://github.com/DataDog/serilog-sinks-datadog-logs/
+  tag: Paquete de Github
+  text: Paquete Serilog.Sinks.Datadog.Logs
 title: Recopilación de logs de C#
 ---
 
-Para enviar tus logs C# a Datadog, utiliza una de las siguientes estrategias:
+Para enviar tus logs de C# a Datadog, usa una de las siguientes estrategias:
 
-- [Registra los logs en un archivo y luego supervísalo con tu Datadog Agent](#file-tail-logging-with-the-datadog-agent).
-- [Activa el registro de logs sin Agentl](#agentless-logging-with-apm).
-- [Utiliza el receptor Serilog](#agentless-logging-with-serilog-sink).
+- [Registrar los logs en un archivo y luego supervísarlo con tu Datadog Agent](#file-tail-logging-with-the-datadog-agent).
+- [Habilitar el registro de logs sin Agent](#agentless-logging-with-apm).
+- [Usar el receptor Serilog](#agentless-logging-with-serilog-sink).
 
-Esta página incluye ejemplos de configuración de las bibliotecas de registro de logs `Serilog`, `NLog`, `log4net` y`Microsoft.Extensions.Logging` para cada una de las estrategias anteriores.
+## Registro de logs en un archivo para supervisarlo con el Datadog Agent
 
-## Registrar logs en un archivo para supervisarlo con el Datadog Agent
+Para recopilar logs de C#, lo más recomendable es que tus logs se registren en un archivo que luego puedas [supervisar][20] con tu Datadog Agent. De esta forma, el Datadog Agent enriquecerá los logs con metadatos adicionales.
 
-Para recopilar logs de C#, lo más recomendable es que tus logs se registren en un archivo que luego puedas [supervisar][20] con tu Datadog Agent. De esta forma, el Agent enriquecerá los logs con metadatos adicionales.
+Datadog recomienda que configures tu biblioteca de registro para que genere tus logs en formato JSON y así evitar la necesidad de crear [reglas de parseo personalizadas][1].
 
-Datadog recomienda configurar tu biblioteca de logs para que genere tus logs en formato JSON y así evitar la necesidad de crear [reglas de parseo personalizadas][1].
+El registro de logs en un archivo para supervisarlo es compatible con los siguientes marcos:
+- Serilog
+- NLog
+- log4net
 
-### Configurar tu logger
+### Configurar el registrador
 
 {{< tabs >}}
 {{% tab "Serilog" %}}
 
-Como muchas otras bibliotecas para .NET, Serilog permite hacer un registro de diagnóstico en los archivos, la consola y otros lugares. Esta estrategia se basa en una API limpia, compatible con las últimas plataformas .NET.
+Como muchas otras bibliotecas para .NET, Serilog permite hacer un registro de logs de diagnóstico en los archivos, la consola y otros lugares. Esta estrategia se basa en una API limpia, compatible con las últimas plataformas de .NET.
 
 A diferencia de otras bibliotecas de registro de logs, Serilog se ha creado para proporcionar potentes datos de eventos estructurados.
 
-Para instalar Serilog con NuGet, ejecuta el siguiente comando en la Package Manager Console:
+Para instalar Serilog con NuGet, ejecuta el siguiente comando en la consola del administrador de paquetes:
 
 ```text
 PM> Install-Package Serilog.Sinks.File
 ```
 
-Luego, añade el siguiente código para iniciar el logger directamente en tu aplicación:
+Luego, añade el siguiente código para iniciar el registrador directamente en tu aplicación:
 
 ```csharp
-// Instantiate the logger
-var log = new LoggerConfiguration()  // using Serilog;
+// Crea una instancia del registrador
+var log = new LoggerConfiguration()  // mediante Serilog;
 
-    // using Serilog.Formatting.Json;
+    // mediante Serilog.Formatting.Json;
     .WriteTo.File(new JsonFormatter(renderMessage: true), "log.json")
 
-    // using Serilog.Formatting.Compact;
-    // .WriteTo.File(new RenderedCompactJsonFormatter(), "log.json")
+    // mediante Serilog.Formatting.Compact;
+    // .WriteTo.File(RenderedCompactJsonFormatter() nuevo, "log.json")
 
     .CreateLogger();
 
-// An example
+// Un ejemplo
 var position = new { Latitude = 25, Longitude = 134 };
 var elapsedMs = 34;
 
 log.Information("Processed {@Position} in {Elapsed:000} ms.", position, elapsedMs);
 ```
 
-En el archivo `log.json`, confirma que una instancia del logger se ha creado correctamente:
+En el archivo `log.json`, confirma que la instancia del registrador se ha creado correctamente:
 
 - Si usas `JsonFormatter(renderMessage: true)`, busca el siguiente evento para confirmarlo:
 
@@ -95,7 +100,7 @@ En el archivo `log.json`, confirma que una instancia del logger se ha creado cor
 }
 ```
 
-- Si utilizas `RenderedCompactJsonFormatter()`, busca el siguiente evento para confirmarlo:
+- Si usas `RenderedCompactJsonFormatter()`, busca el siguiente evento para confirmarlo:
 
 ```json
 {
@@ -110,15 +115,15 @@ En el archivo `log.json`, confirma que una instancia del logger se ha creado cor
 {{% /tab %}}
 {{% tab "NLog" %}}
 
-NLog es una plataforma de registro de logs para .NET con funcionalidades de gestión y de enrutamiento de logs ricos. Te puede ayudar a producir y gestionar logs de alta calidad para tu aplicación, independientemente de su tamaño o complejidad.
+NLog es una plataforma de registro de logs para .NET con funcionalidades de gestión y enrutamiento de logs ricos. Te puede ayudar a producir y gestionar logs de alta calidad para tu aplicación, independientemente de su tamaño o complejidad.
 
-Para instalar NLog con NuGet, ejecuta el siguiente comando en la Package Manager Console:
+Para instalar NLog con NuGet, ejecuta el siguiente comando en la consola del administrador de paquetes:
 
 ```text
 PM> Install-Package NLog
 ```
 
-Una vez tengas la biblioteca en tu classpath, adjunta el siguiente formato a cualquier destino. Edita o añade un archivo `NLog.config` a la ruta raíz del proyecto. Luego copia y pega el siguiente código en (*los logs que se graban en el archivo `application-logs.json`*):
+Una vez tengas la biblioteca en tu classpath, adjunta el siguiente formato a cualquier destino. Edita o añade un archivo `NLog.config` a la ruta raíz del proyecto. Luego copia y pega el siguiente código en él (*los logs que se graban en el archivo `application-logs.json`*):
 
 ```xml
 <?xml version="1.0" encoding="utf-8" ?>
@@ -126,11 +131,11 @@ Una vez tengas la biblioteca en tu classpath, adjunta el siguiente formato a cua
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 
   <!--
-  See https://github.com/nlog/nlog/wiki/Configuration-file
-  for information on customizing logging rules and outputs.
+  Consulta https://github.com/nlog/nlog/wiki/Configuration-file
+  para obtener información sobre cómo personalizar las reglas y resultados del registro de logs.
    -->
   <targets async="true">
-    <!-- Write logs as Json into a file -->
+    <!-- Escribe logs como JSON en un archivo -->
     <target name="json-file" xsi:type="File" fileName="application-logs.json">
       <layout xsi:type="JsonLayout">
         <attribute name="date" layout="${date:universalTime=true:format=o}" />
@@ -142,7 +147,7 @@ Una vez tengas la biblioteca en tu classpath, adjunta el siguiente formato a cua
 
   </targets>
   <rules>
-    <!-- Log all events to the json-file target -->
+    <!-- Registra todos los eventos en el archivo JSON de destino -->
     <logger name="*" writeTo="json-file" minlevel="Trace" />
   </rules>
 </nlog>
@@ -157,15 +162,15 @@ namespace Datadog
 {
     class Program
     {
-        // Initialize a logger
+        // Inicia un registrador
         private static Logger logger = LogManager.GetCurrentClassLogger();
 
         static void Main(string[] args)
         {
-            // Log a simple debug message
+            // Registra en un log un mensaje de depuración simple
             logger.Debug("This is my first step");
 
-            // your code continues here ...
+            // tu código continúa aquí...
         }
     }
 }
@@ -173,9 +178,9 @@ namespace Datadog
 
 {{% /tab %}}
 {{% tab "Log4Net" %}}
-Log4Net es una plataforma de registro de logs .NET basada en Log4j con funciones de gestión y enrutamiento de logs ricos. Te ayuda a generar y gestionar logs de alta calidad para tu aplicación independientemente de su tamaño o complejidad.
+Log4Net es una plataforma de registro de logs para .NET basada en Log4j con funcionalidades de gestión y enrutamiento de logs ricos. Te puede ayudar a producir y gestionar logs de alta calidad para tu aplicación, independientemente de su tamaño o complejidad.
 
-Para instalar Log4Net, ejecuta el siguiente comando en la Package Manager Console:
+Para instalar Log4Net, ejecuta el siguiente comando en la consola del administrador de paquetes:
 
 ```text
 PM> Install-Package log4net
@@ -205,20 +210,20 @@ Una vez instalada la biblioteca, adjunta el siguiente formato a cualquier destin
       <layout type="log4net.Layout.SerializedLayout, log4net.Ext.Json">
         <decorator type="log4net.Layout.Decorators.StandardTypesDecorator, log4net.Ext.Json" />
         <default />
-        <!--explicit default members-->
+        <!--miembros predeterminados explícitos-->
         <remove value="ndc" />
         <remove value="message" />
-        <!--remove the default preformatted message member-->
+        <!--elimina el miembro del mensaje preformateado de manera predetermina-->
         <member value="message:messageobject" />
-        <!--add raw message-->
+        <!--añade un mensaje sin procesar-->
       </layout>
     </appender>
   </log4net>
 
-  <!-- The rest of your configuration starts here ... -->
+  <!-- El resto de tu configuración empieza aquí... -->
 ```
 
-Crea instancias en tu logger y empieza a activar tus eventos:
+Crea instancias en tu registrador y empieza a activar tus eventos:
 
 ```csharp
 using log4net;
@@ -227,30 +232,30 @@ namespace Datadog
 {
     class Program
     {
-        // Get the current class logger
+        // Obtén el registrador de clases actual
         private static ILog logger = LogManager.GetLogger(typeof(Program));
 
         static void Main(string[] args)
         {
 
-           // Load the configure fom App.config
+           // Carga la configuración desde App.config
            XmlConfigurator.Configure();
 
-           // Log a simple debug message
-           logger.Debug("This is my first debug message");
+           // Registra en un log un mensaje de depuración simple
+           logger.Debug("Este es mi primer mensaje de depuración");
 
-           // your code continues here ...
+           // tu código continúa aquí...
         }
     }
 }
 ```
 
-Si has seguido las instrucciones, deberías ver el siguiente evento en tu archivo (por ejemplo en `C:\Projects\Datadog\Logs\log.json`):
+Si has seguido las instrucciones, deberías ver el siguiente evento en tu archivo (por ejemplo, `C:\Projects\Datadog\Logs\log.json`):
 
 ```json
 {
   "level": "DEBUG",
-  "message": "This is my debug message",
+  "message": "Este es mi mensaje de depuración",
   "date": "2016-05-24 15:53:35.7175",
   "appname": "Datadog.vshost.exe",
   "logger": "Datadog.Program",
@@ -258,7 +263,7 @@ Si has seguido las instrucciones, deberías ver el siguiente evento en tu archiv
 }
 ```
 
-Si, a pesar de los beneficios de crear logs en JSON, quieres crearlos como cadenas sin formato, prueba a actualizar el `log4net conversion pattern` para parsear automáticamente tus logs con el pipeline de integración C# como se detalla a continuación:
+Si, a pesar de los beneficios del registro de logs en JSON, quieres registrarlos como cadenas sin formato, prueba actualizar el `log4net conversion pattern` para parsear de manera automática tus logs con el pipeline de integración de C# como se detalla a continuación:
 
 ```text
 <param name="ConversionPattern" value="%date{yyyy-MM-dd HH:mm:ss.SSS} %level [%thread] %logger %method:%line - %message%n" />
@@ -269,9 +274,9 @@ Si, a pesar de los beneficios de crear logs en JSON, quieres crearlos como caden
 
 ### Configurar el Datadog Agent
 
-Cuando tengas la [recopilación de logs activada][2], configura la [recopilación de logs personalizada][3] para supervisar tus logs y enviarlos a Datadog.
+Una vez que [se haya habilitado la recopilación de logs][2], configura la [recopilación de logs personalizada][3] para supervisar tus archivos de log y enviarlos a Datadog.
 
-1. Crea una carpeta `csharp.d/` en el [directorio de configuración del Agent][4]  `conf.d/`.
+1. Crea una carpeta `csharp.d/` en el [directorio de configuración del Agent][4] `conf.d/`.
 2. Crea un archivo `conf.yaml` en `csharp.d/` con el siguiente contenido:
 
     ```yaml
@@ -293,156 +298,156 @@ Cuando tengas la [recopilación de logs activada][2], configura la [recopilació
         #    name: new_log_start_with_date
         #    pattern: \d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])
     ```
-3. Asegúrate de que el usuario del Agent tiene permisos de acceso de lectura al archivo de log.
+3. Asegúrate de que el usuario del Agent tenga permisos de acceso de lectura al archivo de log.
 4. [Reinicia el Agent][5].
-5. Ejecuta el [subcomando de estado del Agent][6] y busca `csharp` en la sección `Checks` para confirmar que los logs se envían correctamente a Datadog.
+5. Ejecuta el [subcomando de estado del Agent][6] y busca `csharp` en la sección `Checks` para confirmar que los logs se envíen correctamente a Datadog.
 
 Si los logs están en formato JSON, Datadog [parsea los mensajes del log][7] de forma automática para extraer sus atributos. Utiliza el [Log Explorer][8] para ver tus logs y solucionar problemas relacionados.
 
-### Conectar tus servicios al conjunto de logs y trazas (traces)
+### Conectar los servicios a logs y trazas
 
-Si tines APM activado para esta aplicación, conecta tus logs y trazas añadiendo automáticamente los ID de traza (trace) y los ID de tramo (span),
-`env`, `service` y `version` a tus logs mediante [las siguientes instrucciones de APM para .NET][9]
+Si tienes APM habilitado para esta aplicación, conecta tus logs y trazas al añadir de manera automática los IDs de traza, IDs de tramo (span),
+`env`, `service` y `version` a tus logs mediante las [siguientes instrucciones de APM para .NET][9]
 
-**Nota**: Si el rastreador APM inyecta `service` en tus logs, este reemplazará al valor definido en la configuración del Agent.
+**Nota**: Si el rastreador de APM inyecta `service` en tus logs, este reemplazará al valor definido en la configuración del Agent.
 
 ## Registro de logs sin Agent con APM
 
-Gracias a la biblioteca de instrumentación automática .NET de APM,  es posible crear un flujo de logs desde tu aplicación directamente a Datadog, sin hacer cambios en el código. De esta forma, los logs se envían directamente a Datadog, así que no podrás beneficiarte de [prestaciones como la limpieza de datos sensibles][10] que ofrece el Datadog Agent. Por esta razón, te recomendamos que registres los logs en un archivo que puedas supervisar cuando sea posible, aunque es cierto que el registro de logs sin Agent resulta útil en entornos no compatibles con este método (por ejemplo, si utilizas [Azure App Service][11]). Conviene recordar que podrás seguir limpiando los datos sensibles en el servidor con la ayuda de [Sensitive Data Scanner][12].
+Gracias a la biblioteca de instrumentación automática de APM y .NET, es posible crear un flujo de logs desde tu aplicación directamente a Datadog, sin hacer cambios en el código. De esta forma, los logs se envían directamente a Datadog, por lo que no se beneficia de [funciones como la limpieza de datos confidenciales][10] que ofrece el Datadog Agent. Por esta razón, recomendamos que registres los logs en un archivo que puedas supervisar siempre que sea posible, aunque es cierto que resulta útil en entornos no compatibles con este método (por ejemplo, si usas [Azure App Service][11]). Cabe destacar que podrás seguir limpiando los datos confidenciales en el servidor con la ayuda de [Sensitive Data Scanner][12].
 
-El registro de logs sin Agent (también denominado "envío directo de logs") es compatible con los siguientes entornos:
-- Serilog (v1.0+)
-- NLog (v2.1+)
-- log4net (v1.0+)
-- Microsoft.Extensions.Logging (2.0+)
+El registro de logs sin Agent (también denominado «envío directo de logs») es compatible con los siguientes marcos:
+- Serilog (versión 1.0 o posterior)
+- NLog (versión 2.1 o posterior)
+- log4net (versión 1.0 o posterior)
+- Microsoft.Extensions.Logging (2.0 o posterior)
 
 No es necesario que modifiques el código de tu aplicación ni que instales dependencias adicionales.
 
 <div class="alert alert-warning">
-  <strong>Nota:</strong> Si utilizas log4net o NLog, debes configurar un appender (log4net) o un logger (NLog) para poder activar el registro de logs sin Agent. En esos casos, puedes añadir dependencias adicionales o utilizar <a href="/logs/log_collection/csharp/?tab=log4net#agentless-logging-with-serilog-sink">el registro de logs sin Agent con el receptor Serilog</a>.
+  <strong>Nota:</strong> Si usas log4net o NLog, debes configurar un adicionador (log4net) o un registrador (NLog) para poder habilitar el registro de logs sin Agent. En esos casos, puedes añadir dependencias adicionales o usar el <a href="/logs/log_collection/csharp/?tab=log4net#agentless-logging-with-serilog-sink">registro de logs sin Agent con el receptor Serilog</a>.
 </div>
 
 
-### Configurar la biblioteca APM
+### Configurar la biblioteca de APM
 
-El registro de logs sin Agent solo está disponible cuando se utiliza APM con instrumentación automática. Para empezar, instrumenta tu aplicación según se describe en los siguientes documentos:
+El registro de logs sin Agent solo está disponible cuando se usa APM con la instrumentación automática. Para empezar, instrumenta tu aplicación según se describe en los siguientes documentos:
 
-- [Aplicaciones .NET Core/.NET 5+][13]
-- [Aplicaciones .NET Framework][14]
+- [Aplicaciones de .NET Core/.NET 5 o posterior][13]
+- [Aplicaciones de .NET Framework][14]
 
-Después de la instalación, verifica que estás recibiendo trazas correctamente.
+Después de la instalación, verifica que estés recibiendo trazas correctamente.
 
-### Activar el registro de logs sin Agent
+### Habilitar el registro de logs sin Agent
 
-Para activar el registro de logs sin Agent, define las siguientes variables de entorno:
+Para habilitar el registro de logs sin Agent, define las siguientes variables de entorno:
 
 `DD_API_KEY`
-: Tu [clave API de Datadog][15] para enviar tus logs a Datadog.
+: Tu [clave de API de Datadog][15] para enviar tus logs a Datadog.
 
 `DD_SITE`
-: El nombre de tu [sitio Datadog][16]. Elige uno de los siguientes ejemplos:<br>
+: El nombre de [tu sitio de Datadog][16]. Elige uno de los siguientes ejemplos:<br>
 **Ejemplo**: `datadoghq.com` (US1), `datadoghq.eu` (EU), `us3.datadoghq.com` (US3), `us5.datadoghq.com` (US5), `ddog-gov.com` (US1-FED) <br>
-**Valor predeterminado**: `datadoghq.com` (US1)
+**Predeterminado**: `datadoghq.com` (US1)
 
 `DD_LOGS_INJECTION`
-: Activa [la conexión de logs y trazas][9]:<br>
-**Valor predeterminado**: `true` <br>
-Activado por omisión al utilizar el registro de logs sin Agent a partir de la versión 2.7.0 del Tracer.
+: Habilita la [conexión de logs y trazas][9]:<br>
+**Predeterminado**: `true` <br>
+Habilitado de manera predeterminada al usar el registro de logs sin Agent a partir de la versión 2.7.0 del rastreador.
 
 `DD_LOGS_DIRECT_SUBMISSION_INTEGRATIONS`
-: Permite el registro de logs sin Agent. Activa esta funcionalidad en tu entorno configurando `Serilog`, `NLog`, `Log4Net` o `ILogger` (para `Microsoft.Extensions.Logging`). Si utilizas varios entornos de registro de logs, utiliza una lista de variables separadas por punto y coma.<br>
+: Permite el registro de logs sin Agent. Habilita esta funcionalidad en tu marco de registro de logs al establecer `Serilog`, `NLog`, `Log4Net` o `ILogger` (para `Microsoft.Extensions.Logging`). Si usas varios marcos de registro de logs, usa una lista de variables separadas por punto y coma.<br>
 **Ejemplo**: `Serilog;Log4Net;NLog`
 
 <div class="alert alert-warning">
-  <strong>Nota:</strong> Si utilizas un entorno de registro de errores junto con <code>Microsoft.Extensions.Logging</code>, lo normal es que debas utilizar el nombre del entorno. Por ejemplo, si utilizas <a href="https://github.com/serilog/serilog-extensions-logging">Serilog.Extensions.Logging</a>, deberías configurar <code>DD_LOGS_DIRECT_SUBMISSION_INTEGRATIONS=Serilog</code>.
+  <strong>Nota:</strong> Si usas un marco de registro de logs junto con <code>Microsoft.Extensions.Logging</code>, lo normal es que debas usar el nombre del marco. Por ejemplo, si usas <a href="https://github.com/serilog/serilog-extensions-logging">Serilog.Extensions.Logging</a>, deberías establecer <code>DD_LOGS_DIRECT_SUBMISSION_INTEGRATIONS=Serilog</code>.
 </div>
 
-Reinicia tu aplicación después de configurar las variables de entorno.
+Reinicia tu aplicación después de establecer las variables de entorno.
 
 ### Configuración adicional
 
-Puedes personalizar algunos aspectos de la recopilación de logs sin Agent utilizando las siguientes variables de entorno:
+Puedes personalizar algunos aspectos de la recopilación de logs sin Agent mediante las siguientes variables de entorno:
 
 `DD_LOGS_DIRECT_SUBMISSION_MINIMUM_LEVEL`
-: Permite filtrar los logs por nivel _antes_ de enviarlos a Datadog. Define uno de los siguientes valores: `Verbose`, `Debug`, `Information`, `Warning`, `Error`, `Critical`. Se corresponden con los niveles equivalentes en los entornos de registros de errores.<br>
-**Valor predeterminado**: `Information`
+: Permite filtrar los logs por nivel _antes_ de enviarlos a Datadog. Define uno de los siguientes valores: `Verbose`, `Debug`, `Information`, `Warning`, `Error`, `Critical`. Estos corresponden a los niveles equivalentes en los marcos de registro de logs compatibles.<br>
+**Predeterminado**: `Information`
 
 `DD_LOGS_DIRECT_SUBMISSION_HOST`
-: Define el nombre del equipo host asociado a los logs. Si no se indica, el nombre de host se intentará encontrar de forma automática.<br>
-**Valor predeterminado**: Se determina automáticamente.
+: Define el nombre del equipo host asociado a los logs. Si no se indica, el nombre de host se intentará encontrar de manera automática.<br>
+**Predeterminado**: se determina de manera automática
 
 `DD_LOGS_DIRECT_SUBMISSION_TAGS`
-: Si se especifica, añade todas las etiquetas detalladas a los tramos generados. De lo contrario, se usa `DD_TAGS`.<br>
+: Si se especifica, añade todas las etiquetas (tags) detalladas a los tramos generados. De lo contrario, se usa `DD_TAGS`.<br>
 **Ejemplo**: `layer:api, team:intake`
-Ten en cuenta que se utiliza una coma y un espacio como separador: `, `.
+Ten en cuenta que se usa una coma y un espacio como separador: `, `.
 
-Los siguientes valores de configuración normalmente no se modifican, pero pueden definirse si fuera necesario.
+Por lo general, los siguientes valores de configuración no se modifican, pero pueden definirse si fuera necesario.
 
 {{< site-region region="us" >}}
 
 `DD_LOGS_DIRECT_SUBMISSION_URL`
-: Define la URL a la que deberían enviarse los logs. De forma predeterminada, utiliza el dominio incluido en `DD_SITE`.<br>
-**Valor predeterminado**: `https://http-intake.logs.datadoghq.com:443` (según `DD_SITE`)
+: Define la URL a la que deberían enviarse los logs. De manera predeterminada, usa el dominio que se proporciona en `DD_SITE`.<br>
+**Predeterminado**: `https://http-intake.logs.datadoghq.com:443` (según `DD_SITE`)
 
 {{< /site-region >}}
 
 {{< site-region region="us3" >}}
 
 `DD_LOGS_DIRECT_SUBMISSION_URL`
-: Define la URL a la que deberían enviarse los logs. De forma predeterminada, utiliza el dominio incluido en `DD_SITE`.<br>
-**Valor predeterminado**: `https://http-intake.logs.us3.datadoghq.com:443` (según `DD_SITE`)
+: Define la URL a la que deberían enviarse los logs. De manera predeterminada, usa el dominio que se proporciona en `DD_SITE`.<br>
+**Predeterminado**: `https://http-intake.logs.us3.datadoghq.com:443` (según `DD_SITE`)
 
 {{< /site-region >}}
 
 {{< site-region region="us5" >}}
 
 `DD_LOGS_DIRECT_SUBMISSION_URL`
-: Define la URL a la que deberían enviarse los logs. De forma predeterminada, utiliza el dominio incluido en `DD_SITE`.<br>
-**Valor predeterminado**: `https://http-intake.logs.us5.datadoghq.com:443` (según `DD_SITE`)
+: Define la URL a la que deberían enviarse los logs. De manera predeterminada, usa el dominio que se proporciona en `DD_SITE`.<br>
+**Predeterminado**: `https://http-intake.logs.us5.datadoghq.com:443` (según `DD_SITE`)
 
 {{< /site-region >}}
 
 {{< site-region region="ap1" >}}
 
 `DD_LOGS_DIRECT_SUBMISSION_URL`
-: Define la URL a la que deberían enviarse los logs. De forma predeterminada, utiliza el dominio incluido en `DD_SITE`.<br>
-**Valor predeterminado**: `https://http-intake.logs.ap1.datadoghq.com:443` (según `DD_SITE`)
+: Define la URL a la que deberían enviarse los logs. De manera predeterminada, usa el dominio que se proporciona en `DD_SITE`.<br>
+**Predeterminado**: `https://http-intake.logs.ap1.datadoghq.com:443` (según `DD_SITE`)
 
 {{< /site-region >}}
 
 {{< site-region region="eu" >}}
 
 `DD_LOGS_DIRECT_SUBMISSION_URL`
-: Define la URL a la que deberían enviarse los logs. De forma predeterminada, utiliza el dominio incluido en `DD_SITE`.<br>
-**Valor predeterminado**: `https://http-intake.logs.datadoghq.eu:443` (según `DD_SITE`)
+: Define la URL a la que deberían enviarse los logs. De manera predeterminada, usa el dominio que se proporciona en `DD_SITE`.<br>
+**Predeterminado**: `https://http-intake.logs.datadoghq.eu:443` (según `DD_SITE`)
 
 {{< /site-region >}}
 
 {{< site-region region="gov" >}}
 
 `DD_LOGS_DIRECT_SUBMISSION_URL`
-: Define la URL a la que deberían enviarse los logs. De forma predeterminada, utiliza el dominio incluido en `DD_SITE`.<br>
-**Valor predeterminado**: `https://http-intake.logs.ddog-gov.com:443` (según `DD_SITE`)
+: Define la URL a la que deberían enviarse los logs. De manera predeterminada, usa el dominio que se proporciona en `DD_SITE`.<br>
+**Predeterminado**: `https://http-intake.logs.ddog-gov.com:443` (según `DD_SITE`)
 
 {{< /site-region >}}
 
 `DD_LOGS_DIRECT_SUBMISSION_SOURCE`
-: Define la regla de parseo para los logs enviados. Siempre debería definirse como `csharp`, de no ser que tengas un [pipeline personalizado][17].<br>
-**Valor predeterminado**: `csharp`
+: Define la regla de parseo para los logs enviados. Siempre debería definirse como `csharp`, a menos que tengas un [pipeline personalizado][17].<br>
+**Predeterminado**: `csharp`
 
 `DD_LOGS_DIRECT_SUBMISSION_MAX_BATCH_SIZE`
 : Define el número máximo de logs que se pueden enviar de una vez. Tiene en cuenta los [límites establecidos para la API][18].<br>
-**Valor predeterminado**: `1000`
+**Predeterminado**: `1000`
 
 `DD_LOGS_DIRECT_SUBMISSION_MAX_QUEUE_SIZE`
 : Define el número máximo de logs que se pueden mantener en la cola interna antes de empezar a eliminar mensajes de log.<br>
-**Valor predeterminado**: `100000`
+**Predeterminado**: `100000`
 
 `DD_LOGS_DIRECT_SUBMISSION_BATCH_PERIOD_SECONDS`
 : Define el tiempo de espera (en segundos) antes de comprobar si hay logs nuevos para enviar.<br>
-**Valor predeterminado**: `1`
+**Predeterminado**: `1`
 
-Si vas a usar la integración `Microsoft.Extensions.Logging`, puedes filtrar los logs enviados a Datadog con ayuda de las funcionalidades estándar integradas en `ILogger`. Utiliza la clave `"Datadog"` para identificar al proveedor de envío directo, y establece los niveles mínimos del log para un espacio de nombres. Por ejemplo, si añades lo siguiente a tu `appSettings.json`, evitarías que se enviaran logs con un nivel inferior a `Warning` a Datadog. Disponible a partir de la versión v2.20.0 de la biblioteca de rastreo .NET.
+Si usas la integración `Microsoft.Extensions.Logging`, puedes filtrar los logs enviados a Datadog con ayuda de las funcionalidades estándar integradas en `ILogger`. Usa la clave `"Datadog"` para identificar al proveedor de envío directo, y establece los niveles mínimos del log para un espacio de nombres. Por ejemplo, si añades lo siguiente a tu `appSettings.json`, evitarías que se envíen logs con un nivel inferior a `Warning` a Datadog. Disponible a partir de la versión 2.20.0 de la biblioteca del rastreador de .NET.
 
 ```json
 {
@@ -458,100 +463,34 @@ Si vas a usar la integración `Microsoft.Extensions.Logging`, puedes filtrar los
 
 ## Registro de logs sin Agent con el receptor Serilog
 
-Si no es posible utilizar el registro de logs en un archivo para su posterior supervisión ni el registro de logs sin Agent con APM, y estás trabajando en un entorno `Serilog`, puedes utilizar el [receptor Serilog][19] de Datadog para enviar logs directamente a Datadog.
+<div class="alert alert-info">Desde la versión <code>0.2.0</code>, puedes configurar el receptor de Datadog mediante un archivo <code>appsettings.json</code> con el paquete <a href="https://github.com/serilog/serilog-settings-configuration"><code>Serilog.Setting.Configuration</code></a>.
+Para más información, consulta el paquete <a href="https://github.com/DataDog/serilog-sinks-datadog-logs/tree/master?tab=readme-ov-file#serilogsinksdatadoglogs">`Serilog.Sinks.Datadog.Logs`</a>.</div>
 
-Instala el [receptor Serilog][19] de Datadog en tu aplicación, que envía eventos y logs a Datadog. De forma predeterminada, el receptor reenvía los logs a través de HTTPS en el puerto 443.
-Ejecuta el siguiente comando en la Package Manager Console:
+Si no es posible usar el registro de logs en un archivo para supervisarlo ni el registro de logs sin Agent de APM, y usas un marco `Serilog`, puedes usar el [receptor Serilog][19] de Datadog para enviar logs directamente a Datadog.
+
+Instala el [receptor Serilog de Datadog][19] en tu aplicación, que envía eventos y logs a Datadog. De manera predeterminada, el receptor reenvía los logs a través de HTTPS en el puerto 443.
+Ejecuta el siguiente comando en la consola del administrador de paquetes:
 
 ```text
 PM> Install-Package Serilog.Sinks.Datadog.Logs
 ```
 
-Luego, inicia el logger directamente en tu aplicación. Asegúrate de [añadir tu `<API_KEY>`][15].
+Luego, inicia el registrador directamente en tu aplicación. Asegúrate de [añadir tu `<API_KEY>`][15].
+
+```csharp
+using (var log = new LoggerConfiguration()
+    .WriteTo.DatadogLogs("<API_KEY>", configuration: new DatadogConfiguration(){ Url = "{{< region-param key="http_endpoint" code="true" >}}" })
+    .CreateLogger())
+{
+    // Inserta código
+}
+```
 
 {{< site-region region="us" >}}
 
-```csharp
-using (var log = new LoggerConfiguration()
-    .WriteTo.DatadogLogs("<API_KEY>", configuration: new DatadogConfiguration(){ Url = "https://http-intake.logs.datadoghq.com" })
-    .CreateLogger())
-{
-    // Some code
-}
-```
+También puedes reemplazar el comportamiento predeterminado y enviar los logs en TCP al especificar manualmente las siguientes propiedades necesarias: `url`, `port`, `useSSL` y `useTCP`. De manera opcional, [especifica el `source`, `service`, `host` y las etiquetas personalizadas.][1]
 
-{{< /site-region >}}
-
-{{< site-region region="us3" >}}
-
-```csharp
-using (var log = new LoggerConfiguration()
-    .WriteTo.DatadogLogs("<API_KEY>", configuration: new DatadogConfiguration(){ Url = "https://http-intake.logs.us3.datadoghq.com" })
-    .CreateLogger())
-{
-    // Some code
-}
-```
-
-{{< /site-region >}}
-
-{{< site-region region="ap1" >}}
-
-```csharp
-using (var log = new LoggerConfiguration()
-    .WriteTo.DatadogLogs("<API_KEY>", configuration: new DatadogConfiguration(){ Url = "https://http-intake.logs.ap1.datadoghq.com" })
-    .CreateLogger())
-{
-    // Some code
-}
-```
-
-{{< /site-region >}}
-
-{{< site-region region="us5" >}}
-
-```csharp
-using (var log = new LoggerConfiguration()
-    .WriteTo.DatadogLogs("<API_KEY>", configuration: new DatadogConfiguration(){ Url = "https://http-intake.logs.us5.datadoghq.com" })
-    .CreateLogger())
-{
-    // Some code
-}
-```
-
-{{< /site-region >}}
-
-{{< site-region region="eu" >}}
-
-```csharp
-using (var log = new LoggerConfiguration()
-    .WriteTo.DatadogLogs("<API_KEY>", configuration: new DatadogConfiguration(){ Url = "https://http-intake.logs.datadoghq.eu" })
-    .CreateLogger())
-{
-    // Some code
-}
-```
-
-{{< /site-region >}}
-
-{{< site-region region="gov" >}}
-
-```csharp
-using (var log = new LoggerConfiguration()
-    .WriteTo.DatadogLogs("<API_KEY>", configuration: new DatadogConfiguration(){ Url = "https://http-intake.logs.ddog-gov.com" })
-    .CreateLogger())
-{
-    // Some code
-}
-```
-
-{{< /site-region >}}
-
-{{< site-region region="us" >}}
-
-También puedes reemplazar el comportamiento predeterminado y enviar los logs en TCP especificando manualmente las siguientes propiedades necesarias: `url`, `port`, `useSSL` y `useTCP`. De manera opcional, [especifica el `source`, `service`, `host` y las etiquetas personalizadas.][1]
-
-Por ejemplo, para reenviar logs a la región Datadog US en TCP deberías utilizar la siguiente configuración del receptor:
+Por ejemplo, para reenviar logs a la región US de Datadog en TCP deberías usar la siguiente configuración del receptor:
 
 ```csharp
 var config = new DatadogConfiguration(url: "intake.logs.datadoghq.com", port: 10516, useSSL: true, useTCP: true);
@@ -566,7 +505,7 @@ using (var log = new LoggerConfiguration()
     )
     .CreateLogger())
 {
-    // Some code
+    // Inserta código
 }
 ```
 
@@ -575,9 +514,9 @@ using (var log = new LoggerConfiguration()
 {{< /site-region >}}
 {{< site-region region="eu" >}}
 
-También puedes reemplazar el comportamiento predeterminado y enviar los logs en TCP especificando manualmente las siguientes propiedades necesarias: `url`, `port`, `useSSL` y `useTCP`. De manera opcional, [especifica el `source`, `service`, `host` y las etiquetas personalizadas.][1]
+También puedes reemplazar el comportamiento predeterminado y enviar los logs en TCP al especificar manualmente las siguientes propiedades necesarias: `url`, `port`, `useSSL` y `useTCP`. De manera opcional, [especifica el `source`, `service`, `host` y las etiquetas personalizadas.][1]
 
-Por ejemplo, para reenviar logs a la región Datadog EU en TCP deberías utilizar la siguiente configuración del receptor:
+Por ejemplo, para reenviar logs a la región EU de Datadog en TCP deberías usar la siguiente configuración del receptor:
 
 ```csharp
 var config = new DatadogConfiguration(url: "tcp-intake.logs.datadoghq.eu", port: 443, useSSL: true, useTCP: true);
@@ -592,43 +531,16 @@ using (var log = new LoggerConfiguration()
     )
     .CreateLogger())
 {
-    // Some code
+    // Inserta código
 }
 ```
 [1]: /es/logs/log_configuration/attributes_naming_convention/#reserved-attributes
 
 {{< /site-region >}}
 
-Los nuevos logs se envían directamente a Datadog.
+Ahora los logs nuevos se envían directamente a Datadog.
 
-Como alternativa, desde la versión `0.2.0`, puedes configurar el receptor de Datadog utilizando un archivo `appsettings.json`con el paquete `Serilog.Setting.Configuration`.
-
-En la matriz `Serilog.WriteTo`, añade una entrada para `DatadogLogs`. A continuación se muestra un ejemplo:
-
-```json
-"Serilog": {
-  "Using": [ "Serilog.Sinks.Console", "Serilog.Sinks.Datadog.Logs" ],
-  "MinimumLevel": "Debug",
-  "WriteTo": [
-    { "Name": "Console" },
-    {
-      "Name": "DatadogLogs",
-      "Args": {
-        "apiKey": "<API_KEY>",
-        "source": "<SOURCE_NAME>",
-        "host": "<HOST_NAME>",
-        "tags": ["<TAG_1>:<VALUE_1>", "<TAG_2>:<VALUE_2>"],
-      }
-    }
-  ],
-  "Enrich": [ "FromLogContext", "WithMachineName", "WithThreadId" ],
-  "Properties": {
-    "Application": "Sample"
-  }
-}
-```
-
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 

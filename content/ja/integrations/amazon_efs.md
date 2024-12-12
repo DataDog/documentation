@@ -7,6 +7,7 @@ categories:
 - data stores
 - log collection
 - os & system
+custom_kind: インテグレーション
 dependencies: []
 description: Amazon Elastic Filesystem のキーメトリクスを追跡。
 doc_link: https://docs.datadoghq.com/integrations/amazon_efs/
@@ -17,7 +18,6 @@ integration_id: ''
 integration_title: Amazon Elastic File System
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: '1.0'
 name: amazon_efs
 public_title: Datadog-Amazon Elastic File System インテグレーション
@@ -32,9 +32,9 @@ Amazon EFS は、AWS Lambda 関数または Amazon EC2 インスタンスと共�
 
 Datadog のすべての EFS メトリクスを収集するには、このインテグレーションを有効にします。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 [Amazon Web Services インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。
 
@@ -75,23 +75,23 @@ Amazon EFS から S3 バケットまたは CloudWatch のいずれかにログ�
 
     - `elasticfilesystem:DescribeAccessPoints`: Lambda 関数に接続された有効な EFS を一覧表示します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "amazon_efs" >}}
 
 
 AWS から取得される各メトリクスには、ホスト名やセキュリティ グループなど、AWS コンソールに表示されるのと同じタグが割り当てられます。
 
-### ヘルプ
+### イベント
 
-AWS Elastic File System インテグレーションには、イベントは含まれません。
+Amazon Elastic File System インテグレーションには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 
-AWS Elastic File System インテグレーションには、サービスのチェックは含まれません。
+Amazon Elastic File System インテグレーションには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][12]までお問合せください。
 
@@ -101,8 +101,8 @@ AWS Elastic File System インテグレーションには、サービスのチ�
 [4]: https://docs.aws.amazon.com/efs/latest/ug/auth-and-access-control.html
 [5]: https://app.datadoghq.com/integrations/amazon-efs
 [6]: https://docs.datadoghq.com/ja/logs/guide/forwarder/
-[7]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-s3-buckets
-[8]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-cloudwatch-log-group
+[7]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-s3-buckets
+[8]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
 [9]: /ja/integrations/amazon_lambda/#amazon-efs-for-lambda
 [10]: https://docs.datadoghq.com/ja/integrations/amazon_lambda/#aws-lambda-metrics
 [11]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_efs/amazon_efs_metadata.csv

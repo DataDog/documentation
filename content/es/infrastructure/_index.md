@@ -3,11 +3,13 @@ aliases:
 - /es/graphing/infrastructure/
 cascade:
 - _target:
-    path: /infrastructure/resource_catalog/aws_iam_user.md
+    path: /infrastructure/resource_catalog/aws_iam_user
+    lang: es
   aliases:
-  - /security/cspm/custom_rules/aws_iam_user/
+  - /es/security/cspm/custom_rules/aws_iam_user/
 - _target:
     path: /infrastructure/**/*
+    lang: es
   algolia:
     rank: 70
 further_reading:
@@ -40,4 +42,4 @@ La monitorización de la infraestructura incluye funciones básicas de Datadog q
 
 ## Referencias adicionales
 
-{{< nombre parcial="whats-next/whats-next.html" >}}
+{{< partial name="whats-next/whats-next.html" >}}

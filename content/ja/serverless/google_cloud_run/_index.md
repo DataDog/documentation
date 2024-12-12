@@ -149,7 +149,7 @@ gcloud run deploy APP_NAME --image=gcr.io/YOUR_PROJECT/APP_NAME \
 | `DD_SOURCE`       | [統合サービスタグ付け][6]を参照してください。                                  |
 | `DD_TAGS`         | [統合サービスタグ付け][6]を参照してください。                                  |
 
-## ヘルプ
+## トラブルシューティング
 
 このインテグレーションは、ランタイムに完全な SSL 実装があることが前提です。slim イメージを使用している場合、証明書を含めるために Dockerfile に次のコマンドを追加する必要があります。
 

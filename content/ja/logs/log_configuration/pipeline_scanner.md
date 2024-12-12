@@ -10,7 +10,6 @@ further_reading:
 - link: /logs/log_configuration/processors/
   tag: ドキュメント
   text: ログプロセッサーについて
-kind: ドキュメント
 title: パイプラインスキャナー
 ---
 

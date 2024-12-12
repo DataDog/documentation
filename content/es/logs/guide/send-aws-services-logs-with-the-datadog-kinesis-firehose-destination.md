@@ -12,7 +12,9 @@ further_reading:
 - link: https://www.datadoghq.com/blog/send-amazon-vpc-flow-logs-to-data-firehose-and-datadog/
   tag: Blog
   text: Envía los logs del flujo de Amazon VPC a Amazon Kinesis Data Firehose y Datadog
-kind: documentación
+- link: /logs/guide/reduce_data_transfer_fees
+  tag: Guía
+  text: Cómo enviar logs a Datadog reduciendo las tarifas de transferencia de datos
 title: Enviar logs de servicios de AWS con el destino Datadog Amazon Data Firehose
 ---
 
@@ -39,7 +41,8 @@ Datadog recomienda utilizar un Kinesis Data Stream como entrada al utilizar el d
    b. Establece el destino como `Datadog`.
    c. Indica un nombre para el flujo de entrega.
    d. En **Destination settings** (Configuración del destino), elige la URL del endpoint HTTP de `Datadog logs` que corresponda a tu [sitio de Datadog][5].
-   e. Pega tu clave de API en el campo **API key** (Clave de API). Puedes obtener o crear una clave de API en la [página claves de API de Datadog][3].
+   e. Pega tu clave de API en el campo **Clave de API**. Puedes obtener o crear una clave de API en la página [Claves de API Datadog][3]. Si prefieres utilizar la autenticación de Secrets Manager, añade tu clave de API Datadog en el formato JSON completo en el campo de valor de la siguiente manera: `{"api_key":"<YOUR_API_KEY>"}`.
+
    f. Opcionalmente, configura *Retry duration** (Duración de los reintentos), los ajustes de buffer, o añade **Parameters** (Parámetros), que se adjuntan como etiquetas a tus logs.  
    **Nota**: Datadog recomienda establecer el **Buffer size** (Tamaño de buffer) en `2 MiB` si los logs son mensajes de una sola línea.
    g. En **Backup settings** (Configuración de copia de seguridad), selecciona un bucket de copia de seguridad de S3 para recibir cualquier evento fallido que supere la duración de los reintentos.
@@ -150,9 +153,9 @@ Para rellenar todos los logs por ARN:
 1. Ve al [Log Explorer][5] en Datadog.
 2. En la barra de búsqueda, escribe `@aws.firehose.arn:"<ARN>"`, sustituye `<ARN>` por tu ARN de Amazon Data Firehose y pulsa **Enter** (Intro) para ver todos tus logs suscritos.
 
-**Nota**: Una sola carga útil de Kinesis no debe superar los 65.000 mensajes de log. Los mensajes de log que superen ese límite se descartarán.
+**Nota**: Una sola carga útil de Kinesis no debe superar los 65.000 mensajes de logs. Los mensajes de logs que superen ese límite se descartan.
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 

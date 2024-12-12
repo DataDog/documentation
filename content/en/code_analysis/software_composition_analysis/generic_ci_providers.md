@@ -1,7 +1,7 @@
 ---
 title: Generic CI Providers
 description: Learn how to run the Datadog CLI directly in your CI pipeline to configure environment variables, install dependencies, and scan code for quality and security issues before they reach production.
-is_beta: true
+is_beta: false
 further_reading:
 - link: "https://www.datadoghq.com/blog/monitor-ci-pipelines/"
   tag: "Blog"
@@ -10,19 +10,19 @@ algolia:
   tags: ['software composition analysis', 'ci pipeline', 'SCA']
 ---
 
+{{< callout url="#" btn_hidden="true" header="Join the Preview!" >}}
+Code Analysis is in Preview.
+{{< /callout >}}
+
 {{% site-region region="gov" %}}
 <div class="alert alert-danger">
     Code Analysis is not available for the {{< region-param key="dd_site_name" >}} site.
 </div>
 {{% /site-region %}}
 
-{{< callout url="#" btn_hidden="true" header="Try the Beta!" >}}
-Code Analysis is in public beta.
-{{< /callout >}}
-
 ## Overview
 
-If you don't use GitHub Actions, you can run the Datadog CLI directly in your CI pipeline platform. 
+If you don't use GitHub Actions, you can run the Datadog CLI directly in your CI pipeline platform.
 
 Prerequisites:
 
@@ -34,7 +34,7 @@ Configure the following environment variables:
 | Name         | Description                                                                                                                | Required | Default         |
 |--------------|----------------------------------------------------------------------------------------------------------------------------|----------|-----------------|
 | `DD_API_KEY` | Your Datadog API key. This key is created by your [Datadog organization][1] and should be stored as a secret.            | Yes      |                 |
-| `DD_APP_KEY` | Your Datadog application key. This key is created by your [Datadog organization][2] and should be stored as a secret.    | Yes      |                 |
+| `DD_APP_KEY` | Your Datadog application key. This key, created by your [Datadog organization][2], should include the `code_analysis_read` scope and be stored as a secret.    | Yes      |                 |
 | `DD_SITE`    | The [Datadog site][3] to send information to. Your Datadog site is {{< region-param key="dd_site" code="true" >}}.       | No       | `datadoghq.com` |
 
 Provide the following inputs:
@@ -48,7 +48,7 @@ Provide the following inputs:
 ```bash
 # Set the Datadog site to send information to
 export DD_SITE="{{< region-param key="dd_site" code="true" >}}"
-                        
+
 # Install dependencies
 npm install -g @datadog/datadog-ci
 
@@ -59,14 +59,14 @@ DATADOG_OSV_SCANNER_URL=https://github.com/DataDog/osv-scanner/releases/latest/d
 # Install OSV Scanner
 mkdir /osv-scanner
 curl -L -o /osv-scanner/osv-scanner.zip $DATADOG_OSV_SCANNER_URL
-cd /osv-scanner && unzip osv-scanner.zip
+unzip /osv-scanner/osv-scanner.zip -d /osv-scanner
 chmod 755 /osv-scanner/osv-scanner
 
-# Output OSC Scanner results
+# Run OSV Scanner and scan your dependencies
 /osv-scanner/osv-scanner --skip-git -r --experimental-only-packages --format=cyclonedx-1-5 --paths-relative-to-scan-dir  --output=/tmp/sbom.json /path/to/repository
 
-# Upload results
-datadog-ci sbom upload --service "my-app" --env "ci" /tmp/sbom.json
+# Upload results to Datadog
+datadog-ci sbom upload /tmp/sbom.json
 ```
 
 ## Further Reading

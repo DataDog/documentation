@@ -21,16 +21,19 @@ Python APM クライアントライブラリは，ライブラリと Python ラ�
 
 | リリース    | サポートレベル        |
 |------------|----------------------|
-| `<1`       | メンテナンス           |
-| `>=1.0,<2` | 一般提供 |
+| `>=1.0,<2` | メンテナンス          |
+| `>=2.0,<3` | 一般提供 |
 
 また、このライブラリは以下のランタイムをサポートしています。
 
-| OS      | CPU                   | ランタイム | ランタイムバージョン | ddtrace のバージョンに対応 |
-|---------|-----------------------|---------|-----------------|--------------------------|
-| Linux   | x86-64、i686、AArch64 | CPython | 2.7、3.5-3.11   | `<2`                     |
-| MacOS   | Intel、Apple Silicon  | CPython | 2.7、3.5-3.11   | `<2`                     |
-| Windows | 64bit、32bit          | CPython | 2.7、3.5-3.11   | `<2`                     |
+| OS      | CPU                   | ランタイム | ランタイムバージョン | Supported ddtrace versions  |
+|---------|-----------------------|---------|-----------------|---------------------------|
+| Linux   | x86-64、i686、AArch64 | CPython | 2.7、3.5-3.11   | `<2`                      |
+| MacOS   | Intel、Apple Silicon  | CPython | 2.7、3.5-3.11   | `<2`                      |
+| Windows | 64bit、32bit          | CPython | 2.7、3.5-3.11   | `<2`                      |
+| Linux   | x86-64、i686、AArch64 | CPython | 3.7+            | `2 以降`                     |
+| MacOS   | Intel、Apple Silicon  | CPython | 3.7+            | `2 以降`                     |
+| Windows | 64bit、32bit          | CPython | 3.7+            | `2 以降`                     |
 
 ## インテグレーション
 
@@ -56,7 +59,6 @@ Python APM クライアントライブラリは，ライブラリと Python ラ�
 | [Molten][11]               | 0.7.0 以降          | はい | https://ddtrace.readthedocs.io/en/stable/integrations.html#molten  |
 | [Pylons][12]              | 0.9.6 以降          | いいえ | https://ddtrace.readthedocs.io/en/stable/integrations.html#pylons  |
 | [Pyramid][13]             | 1.7 以降            | いいえ | https://ddtrace.readthedocs.io/en/stable/integrations.html#pyramid |
-| [pytest][14]              | 3.0 以降            | いいえ | https://ddtrace.readthedocs.io/en/stable/integrations.html#pytest  |
 | [Sanic][15]               | >= 19.6.0         | はい | https://ddtrace.readthedocs.io/en/stable/integrations.html#sanic   |
 | [Starlette][16]           | >= 0.13.0         | はい | https://ddtrace.readthedocs.io/en/stable/integrations.html#starlette |
 | [Tornado][17]             | 4.0 以降            | いいえ | https://ddtrace.readthedocs.io/en/stable/integrations.html#tornado |
@@ -72,7 +74,7 @@ Python APM クライアントライブラリは，ライブラリと Python ラ�
 | [algoliasearch][18]                | >= 1.20.0         | はい | https://ddtrace.readthedocs.io/en/stable/integrations.html#algoliasearch                       |
 | [asyncpg][19]                      | >= 0.18.0         | はい | https://ddtrace.readthedocs.io/en/stable/integrations.html#asyncpg                             |
 | [Cassandra][20]                    | 3.5 以降            | はい | https://ddtrace.readthedocs.io/en/stable/integrations.html#cassandra                           |
-| [Elasticsearch][21]                | >= 1.6、< 8.0     | はい | https://ddtrace.readthedocs.io/en/stable/integrations.html#elasticsearch                       |
+| [Elasticsearch][21]                | 1.6 以降            | はい | https://ddtrace.readthedocs.io/en/stable/integrations.html#elasticsearch                       |
 | [Flask Cache][22]                  | 0.12 以降           | いいえ | https://ddtrace.readthedocs.io/en/stable/integrations.html#flask-cache                         |
 | [Mariadb][23]                      | >= 1.0.0          | はい | https://ddtrace.readthedocs.io/en/stable/integrations.html#mariadb                             |
 | [Memcached][24] [pylibmc][25]      | 1.4 以降            | はい | https://ddtrace.readthedocs.io/en/stable/integrations.html#pylibmc                             |
@@ -82,6 +84,7 @@ Python APM クライアントライブラリは，ライブラリと Python ラ�
 | [MySQL][30] [MySQL-python][31]     | 1.2.3 以降          | はい | https://ddtrace.readthedocs.io/en/stable/integrations.html#module-ddtrace.contrib.mysqldb      |
 | [MySQL][30] [mysqlclient][32]      | 1.3 以降            | はい | https://ddtrace.readthedocs.io/en/stable/integrations.html#module-ddtrace.contrib.mysqldb      |
 | [MySQL][30] [mysql-connector][33]  | 2.1 以降            | はい | https://ddtrace.readthedocs.io/en/stable/integrations.html#mysql-connector                     |
+| [Opensearch][63]                   | 1.0 以降            | はい | https://ddtrace.readthedocs.io/en/stable/integrations.html#elasticsearch                       |
 | [Postgres][34] [aiopg][35]         | >= 0.12.0, <=&nbsp;0.16        | はい | https://ddtrace.readthedocs.io/en/stable/integrations.html#aiopg                               |
 | [Postgres][34] [psycopg][36]       | 2.4 以降            | はい | https://ddtrace.readthedocs.io/en/stable/integrations.html#module-ddtrace.contrib.psycopg      |
 | [PyMySQL][37]                      | >= 0.7            | はい | https://ddtrace.readthedocs.io/en/stable/integrations.html?highlight=pymysql#pymysql |
@@ -104,18 +107,22 @@ Python APM クライアントライブラリは，ライブラリと Python ラ�
 | [asyncio][46]     | 完全対応   | > Python 3.7 yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#asyncio     |
 | [Botocore][47]    | 1.4.51 以降         | はい | https://ddtrace.readthedocs.io/en/stable/integrations.html#botocore    |
 | [Boto2][48]       | 2.29.0 以降         | はい | https://ddtrace.readthedocs.io/en/stable/integrations.html#boto2       |
-| [Celery][49]      | >= 3.1            | はい | https://ddtrace.readthedocs.io/en/stable/integrations.html#celery      |
+| [Celery][49]      | >= 4.4.0            | はい | https://ddtrace.readthedocs.io/en/stable/integrations.html#celery      |
 | [Consul][50]      | >= 0.7            | はい | https://ddtrace.readthedocs.io/en/stable/integrations.html#consul      |
 | [Futures][51]     | 完全対応   | はい | https://ddtrace.readthedocs.io/en/stable/integrations.html#futures     |
-| [gevent][52]      | 1.0 以降            | いいえ | https://ddtrace.readthedocs.io/en/stable/integrations.html#gevent      |
+| [gevent][52]      | >= 20.12          | はい | https://ddtrace.readthedocs.io/en/stable/integrations.html#gevent      |
 | [Grpc][53]        | 1.8.0 以降          | はい | https://ddtrace.readthedocs.io/en/stable/integrations.html#grpc        |
 | [httplib][54]     | 完全対応   | いいえ | https://ddtrace.readthedocs.io/en/stable/integrations.html#httplib     |
-| [Jinja2][55]      | 2.7 以降            | はい | https://ddtrace.readthedocs.io/en/stable/integrations.html#jinja2      |
+| [Logbook][66]     | >= 1.0.0          | いいえ | https://ddtrace.readthedocs.io/en/stable/integrations.html#logbook     |
+| [Loguru][65]      | >= 0.4.0          | いいえ | https://ddtrace.readthedocs.io/en/stable/integrations.html#loguru     |
+| [Jinja2][55]      | >= 2.7            | はい | https://ddtrace.readthedocs.io/en/stable/integrations.html#jinja2      |
 | [Kombu][56]       | 4.0 以降            | いいえ | https://ddtrace.readthedocs.io/en/stable/integrations.html#kombu       |
 | [Mako][57]        | 0.1.0 以降          | はい | https://ddtrace.readthedocs.io/en/stable/integrations.html#mako        |
 | [Requests][58]    | 2.08 以降           | はい | https://ddtrace.readthedocs.io/en/stable/integrations.html#requests    |
+| [structlog][64]   | >= 20.2.0         | いいえ | https://ddtrace.readthedocs.io/en/stable/integrations.html#structlog   | 
 | [urllib3][59]     | >= 1.22           | いいえ | https://ddtrace.readthedocs.io/en/stable/integrations.html#urllib3     |
 | [graphql-core][60]| >= 2.0            | はい | https://ddtrace.readthedocs.io/en/stable/integrations.html#graphql |
+| [pytest][14]              | 3.0 以降            | いいえ | https://ddtrace.readthedocs.io/en/stable/integrations.html#pytest  |
 
 ## その他の参考資料
 
@@ -184,3 +191,7 @@ Python APM クライアントライブラリは，ライブラリと Python ラ�
 [60]: https://graphql-core-3.readthedocs.io/en/latest/intro.html
 [61]: https://gunicorn.org/
 [62]: https://snowflake.com/
+[63]: https://opensearch.org/
+[64]: https://www.structlog.org/en/stable/
+[65]: https://loguru.readthedocs.io/en/stable/
+[66]: https://logbook.readthedocs.io/en/stable/

@@ -374,7 +374,7 @@ curl -X POST "https://app.datadoghq.com/api/v2/roles/<ROLE_ID>/permissions" -H "
 
 {{< img src="logs/guide/rbac/rehydration_index.png" alt="リハイドレートインデックスアクセス許可" style="width:60%;">}}
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

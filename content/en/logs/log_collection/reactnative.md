@@ -180,6 +180,21 @@ This means that even if users open your application while being offline, no data
 
 The data on disk will automatically be discarded if it gets too old to ensure the SDK doesn't use too much disk space.
 
+## Custom error fingerprint
+
+Starting from v2.4.2, you can add a custom fingerprint to the error logs by using the `fingerprint` argument:
+
+```ts
+export type LogWithErrorArguments = [
+    message: string,
+    errorKind?: string,
+    errorMessage?: string,
+    stacktrace?: string,
+    context?: object,
+    fingerprint?: string
+];
+```
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}

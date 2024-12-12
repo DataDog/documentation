@@ -37,11 +37,11 @@ info:
 x-datadog:
  teamHandle: <dd-team>
 {{< /highlight >}}
-2. [Import the OpenAPI/Swagger file][2].
+2. [OpenAPI/Swagger ファイルをインポート][2]します。
 
 <!--## Assess monitoring gaps TKTK -->
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

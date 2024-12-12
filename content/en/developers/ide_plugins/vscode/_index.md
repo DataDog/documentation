@@ -126,7 +126,7 @@ The supported logging libraries are:
 
 Alternatively, you can select some text in your source code, right click on them, and look for the **Datadog > Search Logs With Selected Text** option.
 
-{{< img src="developers/ide_plugins/vscode/log_search.png" alt="Using the Datadog Logs explorer feature" style="width:100%;" >}}
+{{< img src="developers/ide_plugins/vscode/log_search.png" alt="Using the Datadog Log explorer feature" style="width:100%;" >}}
 
 ## Code Delta
 

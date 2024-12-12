@@ -5,6 +5,7 @@ categories:
 - ログの収集
 - ネットワーク
 - セキュリティ
+custom_kind: integration
 dependencies: []
 description: CrowdStrike
 doc_link: https://docs.datadoghq.com/integrations/crowdstrike/
@@ -15,7 +16,6 @@ integration_id: ''
 integration_title: CrowdStrike
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: '1.0'
 name: crowdstrike
 public_title: CrowdStrike
@@ -31,13 +31,13 @@ version: '1.0'
 
 CrowdStrike インテグレーションにより、CrowdStrike の検出イベントやアラートを Datadog のログとしてリアルタイムに収集することができます。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 インストールは必要ありません。
 
-### ブラウザトラブルシューティング
+### 構成
 
 #### イベントストリーミングの有効化
 
@@ -66,13 +66,13 @@ Datadog の [CrowdStrike インテグレーションタイル][5]に API クラ�
 
 数分後、[Crowdstrike Log Overview ダッシュボード][7]に `crowdstrike` というソースの[ログ][6]が表示されます。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 
 CrowdStrike インテグレーションには、メトリクスは含まれません。
 
-### ヘルプ
+### イベント
 
 CrowdStrike インテグレーションにより、Datadog は以下のイベントを取り込むことができるようになります。
 
@@ -93,11 +93,11 @@ CrowdStrike インテグレーションにより、Datadog は以下のイベン
 
 これらのイベントは [Crowdstrike Log Overview ダッシュボード][7]に表示されます。
 
-### ヘルプ
+### サービスチェック
 
 CrowdStrike インテグレーションには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
 

@@ -9,14 +9,13 @@ further_reading:
 - link: /logs/search_syntax/
   tag: Documentación
   text: Más información sobre la sintaxis para la API de Búsqueda de logs
-kind: guía
 title: Accede mediante programación a los datos de log con la API de Búsqueda de logs
 ---
 
 
 ## Información general
 
-Utiliza la [API de Búsqueda de logs][1] para acceder mediante programación a tus datos de log y ejecutar consultas.
+Utiliza la [API de Búsqueda de logs][1] para acceder mediante programación a los datos del log y ejecutar consultas.
 
 En esta guía se tratan los siguientes ejemplos:
 
@@ -38,7 +37,7 @@ En esta guía se tratan los siguientes ejemplos:
 
 Para recuperar todos los eventos de log dentro de un periodo específico, utiliza la siguiente [Sintaxis de búsqueda][5] para completar la llamada a la API.
 
-`from` indica el `start time` y `to` indica el `end time` para los datos de log. `query` indica la consulta de búsqueda que debe ejecutarse.
+`from` indica `start time` y `to` indica `end time` para los datos del log. `query` indica la consulta de búsqueda que debe ejecutarse.
 
 **Llamada a la API:**
 
@@ -142,7 +141,7 @@ El conjunto de datos resultante está compuesto por el objeto `data`, como se mu
 
 #### Faceta
 
-Con la siguiente llamada a la API, ordena tus eventos de log recuperados por una faceta como `pageViews` en orden ascendente. Incluye `@` para la faceta. Utiliza `-` hyphen in front of the facet name such as `-@pageViews` para ordenar en orden descendente. El orden por defecto es descendente por marcas temporales.
+Con la siguiente llamada a la API, ordena los eventos de log recuperados por una faceta como `pageViews` en orden ascendente. Incluye `@` para la faceta. Utiliza `-` hyphen in front of the facet name such as `-@pageViews` para ordenar de forma descendente. El orden por defecto es descendente por marcas temporales.
 
 **Llamada a la API:**
 
@@ -161,7 +160,7 @@ curl -L -X POST "https://api.{{< region-param key="dd_site" code="true" >}}/api/
 
 **Respuesta:**
 
-Los eventos de log se recuperan en orden ascendente de los valores de la faceta `pageViews` como se muestra en la siguiente respuesta. El usuario `chris` tiene 450, `bob` tiene 500 y `steve` tiene 700 vistas de páginas.
+Los eventos de log se recuperan en orden ascendente de los valores de la faceta `pageViews`, como se muestra en la siguiente respuesta. El usuario `chris` tiene 450, `bob` tiene 500 y `steve` tiene 700 vistas de páginas.
 
 ```json
 
@@ -245,7 +244,7 @@ Los eventos de log se recuperan en orden ascendente de los valores de la faceta 
 
 #### Marca temporal
 
-Con la siguiente llamada a la API, tus eventos de log recuperados se ordenan por `timestamp` en orden ascendente. Por defecto, el orden es descendente.
+Con la siguiente llamada a la API, los eventos de log recuperados se ordenan por `timestamp` en orden ascendente. Por defecto, el orden es descendente.
 
 **Llamada a la API:**
 
@@ -264,7 +263,7 @@ curl -L -X POST "https://api.{{< region-param key="dd_site" code="true" >}}/api/
 
 **Respuesta:**
 
-Los eventos de log se recuperan en orden ascendente en función de sus valores `timestamp` como se muestra en la siguiente respuesta.
+Los eventos de log se recuperan en orden ascendente en función de sus valores de `timestamp`, como se muestra en la siguiente respuesta.
 
 ```json
 
@@ -348,7 +347,7 @@ Los eventos de log se recuperan en orden ascendente en función de sus valores `
 
 ### Limitar el número de resultados recuperados
 
-Con la siguiente llamada a la API, limita el número de eventos de log recuperados. `limit` indica el número máximo de eventos de log devueltos en la respuesta. El límite máximo es `1000`.
+Con la siguiente llamada a la API, limita el número de eventos de log recuperados. El `limit` indica el número máximo de eventos de log devueltos en la respuesta. El límite máximo es `1000`.
 
 ```bash
 
@@ -432,7 +431,7 @@ curl -L -X POST "https://api.{{< region-param key="dd_site" code="true" >}}/api/
 Los parámetros `from` y `to` pueden ser:
 - una cadena ISO-8601
 - una marca temporal unix (número que representa los milisegundos transcurridos desde epoch)
-- una cadena matemática de fecha como `+1h` para añadir una hora, `-2d` to subtract two days, etc. The full list includes `s` for seconds, `m` for minutes, `h` for hours, and `d` for days. Optionally, use `now` para indicar la hora actual.
+- una cadena matemática de fecha como `+1h` para añadir una hora, `-2d` to subtract two days, etc. The full list includes `s` for seconds, `m` for minutes, `h` for hours, and `d` for days. Optionally, use `now` (ahora) para indicar la hora actual.
 
 ```javascript
 {
@@ -545,7 +544,7 @@ En la respuesta, se recuperan los dos resultados siguientes, `joe` con 500 `page
 
 **Nota:** Evita el uso de intervalos de tiempo relativos cuando utilices la paginación, ya que puede hacer que se pierdan resultados de búsqueda.
 
-### Leer más
+### Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 

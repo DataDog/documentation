@@ -25,6 +25,7 @@ categories:
 - ai/ml
 - kubernetes
 - OS & システム
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/nvml/README.md
 display_on_public_website: true
@@ -34,7 +35,6 @@ integration_id: nvml
 integration_title: Nvidia NVML
 integration_version: 1.0.9
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: nvml
 public_title: Nvidia NVML
@@ -52,6 +52,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: k8s で Nvidia GPU メトリクスをサポート
   media: []
@@ -67,11 +68,11 @@ tile:
 
 このチェックは、Datadog Agent を通じて [NVIDIA Management Library (NVML)][1] 公開メトリクスを監視し、[公開された Kubernetes デバイス][2]と関連付けることができます。
 
-## 計画と使用
+## セットアップ
 
 NVML チェックは [Datadog Agent][3] パッケージに含まれていないため、お客様自身でインストールする必要があります。
 
-### インフラストラクチャーリスト
+### インストール
 
 Agent v7.21 / v6.21 以降の場合は、下記の手順に従い NVML チェックをホストにインストールします。Docker Agent または 上記バージョン以前の Agent でインストールする場合は、[コミュニティインテグレーションの使用][4]をご参照ください。
 
@@ -102,7 +103,7 @@ Docker と Kubernetes を使用している場合は、環境変数 `NVIDIA_VISI
 
 予約済みの Kubernetes NVIDIA デバイスを、そのデバイスを使用する Kubernetes ポッドと関連付けるには、Unix ドメインソケット `/var/lib/kubelet/pod-resources/kubelet.sock` を Agent のコンフィギュレーションにマウントします。このソケットの詳細については、[Kubernetes のウェブサイト][2]を参照してください。このデバイスはバージョン 1.15 のベータサポートであることに注意してください。
 
-### ブラウザトラブルシューティング
+### 構成
 
 1. NVML のパフォーマンスデータを収集するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `nvml.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル nvml.d/conf.yaml][7] を参照してください。
 
@@ -112,23 +113,23 @@ Docker と Kubernetes を使用している場合は、環境変数 `NVIDIA_VISI
 
 [Agent の status サブコマンドを実行][9]し、Checks セクションで `nvml` を探します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "nvml" >}}
   信頼できるメトリクスのドキュメントは、[NVIDIA ウェブサイト][11]にあります。
 
 可能な場合、メトリクス名を NVIDIA の [Data Center GPU Manager (DCGM) エクスポーター][12]と一致させる試みがあります。
 
-### ヘルプ
+### イベント
 
 NVML には、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 {{< get-service-checks-from-git "nvml" >}}
 
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][14]までお問合せください。
 

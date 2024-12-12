@@ -31,6 +31,7 @@ categories:
 - コンテナ
 - ログの収集
 - セキュリティ
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/open_policy_agent/README.md
 display_on_public_website: true
@@ -40,7 +41,6 @@ integration_id: open-policy-agent
 integration_title: Open Policy Agent
 integration_version: 0.0.1
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: open_policy_agent
 public_title: Open Policy Agent
@@ -56,6 +56,7 @@ tile:
   - Category::Log Collection
   - Category::Security
   - Supported OS::Linux
+  - Offering::Integration
   configuration: README.md#Setup
   description: OPA インテグレーション
   media: []
@@ -71,11 +72,11 @@ tile:
 
 このチェックは、[Open Policy Agent][1] からメトリクスを収集します。
 
-## 計画と使用
+## セットアップ
 
 Kubernetes クラスターで実行されている Agent 用にこのチェックをインストールおよび構成する場合は、以下の手順に従ってください。[オートディスカバリーのインテグレーションテンプレート][2]のガイドも参照してこの手順を行ってください。
 
-### インフラストラクチャーリスト
+### インストール
 
 open_policy_agent チェックを Kubernetes クラスターにインストールするには:
 
@@ -165,7 +166,7 @@ open_policy_agent チェックを Kubernetes クラスターにインストー�
 
 ![OPA 決定メトリクス][8]
 
-### ブラウザトラブルシューティング
+### 構成
 
 1. OPA パフォーマンスデータの収集を開始するには、Agent ポッドに追加した `/confd` フォルダーの `open_policy_agent/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル open_policy_agent/conf.yaml][9] を参照してください。
 
@@ -175,21 +176,21 @@ open_policy_agent チェックを Kubernetes クラスターにインストー�
 
 [Agent の status サブコマンドを実行][11]し、Checks セクションで `open_policy_agent` を探します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "open_policy_agent" >}}
 
 
-### ヘルプ
+### イベント
 
 open_policy_agent には、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 {{< get-service-checks-from-git "open_policy_agent" >}}
 
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][14]までお問合せください。
 

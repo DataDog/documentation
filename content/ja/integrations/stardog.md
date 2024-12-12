@@ -3,6 +3,7 @@ app_id: stardog
 app_uuid: a4d874ba-7173-4c43-8cc8-09f966186be8
 assets:
   integration:
+    auto_install: true
     configuration: {}
     events:
       creates_events: false
@@ -12,6 +13,7 @@ assets:
       prefix: stardog.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10206
     source_type_name: Stardog
 author:
   homepage: https://github.com/DataDog/integrations-extras
@@ -19,7 +21,8 @@ author:
   sales_email: support@stardog.com
   support_email: support@stardog.com
 categories:
-- data store
+- data stores
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/stardog/README.md
 display_on_public_website: true
@@ -29,7 +32,6 @@ integration_id: stardog
 integration_title: Stardog
 integration_version: 2.0.0
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: stardog
 public_title: Stardog
@@ -44,7 +46,8 @@ tile:
   - Supported OS::Linux
   - Supported OS::macOS
   - Supported OS::Windows
-  - Category::データストア
+  - Category::Data Stores
+  - Offering::Integration
   configuration: README.md#Setup
   description: Datadog 用 Stardog データコレクター。
   media: []
@@ -53,6 +56,7 @@ tile:
   title: Stardog
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -78,7 +82,7 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Stardog チェ
 
 2. コアの[インテグレーション][3]と同様にインテグレーションを構成します。
 
-### コンフィギュレーション
+### 構成
 
 1. Stardog の[メトリクス](#メトリクス) を収集するには、[Agent のコンフィギュレーションディレクトリ][4]のルートにある `conf.d/` フォルダーの `stardog.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル stardog.d/conf.yaml][5] を参照してください。
 
@@ -98,7 +102,7 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Stardog チェ
 
 Stardog チェックには、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 
 Stardog チェックには、サービスのチェック機能は含まれません。
 
@@ -106,7 +110,7 @@ Stardog チェックには、サービスのチェック機能は含まれませ
 
 ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
 
-[1]: https://app.datadoghq.com/account/settings#agent
+[1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: https://docs.datadoghq.com/ja/agent/guide/use-community-integrations/
 [3]: https://docs.datadoghq.com/ja/getting_started/integrations/
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory

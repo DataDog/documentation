@@ -77,7 +77,7 @@ Datadog Android SDK をまだセットアップしていない場合は、[ア�
    ```
 
 [1]: https://app.datadoghq.com/logs/onboarding/client
-[2]:/ja/logs/log_collection/android/#setup
+[2]: /ja/logs/log_collection/android/#setup
 [3]: https://github.com/Datadog/dd-sdk-android
 [4]: /ja/logs/log_collection/android/?tab=kotlin#setup
 

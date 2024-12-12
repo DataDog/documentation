@@ -16,8 +16,7 @@ Log Rehydration* を使用すると、顧客が所有している、ストレー
 
 履歴ビューを作成するには
 
-1. Datadog アカウントの[構成ページ][2]に移動します。
-2. [**Rehydrate From Archives**][3] タブを選択します。
+1. [Rehydrate From Archives][3] ページに移動します。
 3. **New Historical View** をクリックします。
 
 インデックス除外フィルターは履歴ビューには適用されないため、アーカイブからリハイドレートするときに除外フィルターを変更する必要はありません。
@@ -108,7 +107,7 @@ Rehydrate from Archives ページで進行中のリハイドレートを直接�
 
 外部のアーカイブからデータをリハイドレートするには、外部のアーカイブを構成する必要があります。ログを外部の使用可能な場所にアーカイブするには、[こちらのガイド][8]を参照してください。
 
-### アクセス許可
+### 権限
 
 Datadog は、アーカイブからコンテンツをリハイドレートするために、アーカイブに対して読み取りのアクセス許可を必要とします。このアクセス許可は、いつでも変更できます。
 
@@ -177,7 +176,6 @@ Datadog は、アーカイブのストレージアカウントのスコープを
 *Log Rehydration は Datadog, Inc. の商標です
 
 [1]: /ja/logs/explorer/
-[2]: https://app.datadoghq.com/logs/pipelines
 [3]: https://app.datadoghq.com/logs/pipelines/historical-views
 [4]: /ja/logs/explorer/search/
 [5]: /ja/logs/archives/?tab=awss3#datadog-tags

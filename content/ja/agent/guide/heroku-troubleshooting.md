@@ -45,4 +45,4 @@ heroku ps:copy /app/.apt/var/log/datadog/datadog-apm.log --dyno=<YOUR DYNO NAME>
 agent-wrapper flare
 ```
 
-[1]: /ja/agent/guide/agent-commands/#agent-status-and-information
+[1]: /ja/agent/configuration/agent-commands/#agent-status-and-information

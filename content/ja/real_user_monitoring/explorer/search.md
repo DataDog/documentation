@@ -1,4 +1,6 @@
 ---
+aliases:
+- /ja/real_user_monitoring/explorer/analytics/
 further_reading:
 - link: /real_user_monitoring/explorer/group/
   tag: ドキュメント

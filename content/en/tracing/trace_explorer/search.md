@@ -24,7 +24,6 @@ Select a top list view, and group the query by `resource` to see which specific 
 {{< img src="tracing/trace_explorer/search/trace_explorer_top_list_search.png" alt="Trace Explorer list search. The Visualize As option is set to Top List." style="width:100%;">}}
 
 {{< site-region region="us,eu,us3,us5,ap1" >}}
-**Note**: `key:value` queries **do not** require that you [declare a facet][1] beforehand.
 
 [1]: /tracing/trace_explorer/query_syntax/#facets
 {{< /site-region >}}

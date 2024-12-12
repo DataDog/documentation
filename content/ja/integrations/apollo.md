@@ -24,6 +24,7 @@ author:
   support_email: sachin@apollographql.com
 categories:
 - キャッシュ
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/apollo/README.md
 display_on_public_website: true
@@ -33,7 +34,6 @@ integration_id: apollo
 integration_title: Apollo
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: apollo
 public_title: Apollo
@@ -49,6 +49,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: GraphQL インフラストラクチャーのパフォーマンスを監視
   media: []
@@ -86,9 +87,9 @@ Studio は次のメトリクスを Datadog に送信します。
 
 (2020 年 10 月より前に設定されたインテグレーションでは、メトリクス名が `apollo.operations` ではなく `apollo.engine.operations` で始まり、`graph` ではなく `service` タグが使用されます。Apollo Studio のグラフのインテグレーションページで新しいメトリクス名に移行できます。)
 
-## 計画と使用
+## セットアップ
 
-### ブラウザトラブルシューティング
+### 構成
 
 Apollo Datadog インテグレーションは、Studio に Datadog API キーとリージョンを提供するだけで簡単にセットアップできます。それ以上の構成は必要ありません。
 
@@ -110,25 +111,25 @@ Apollo Datadog インテグレーションは、Studio に Datadog API キーと
 
 6. Datadog  メトリクスエクスプローラーにアクセスし、メトリクスを確認します。メトリクスは、表示されるまでに最大 5 分かかる場合があります。
 
-### API
+### 使用方法
 
 詳細な使用方法については、[Apollo インテグレーションのドキュメント][7]を参照してください。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "apollo" >}}
 
 
-### ヘルプ
+### イベント
 
 現時点で、Apollo インテグレーションには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 
 現時点で、Apollo インテグレーションには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
 

@@ -20,8 +20,6 @@ assets:
       metadata_path: assets/service_checks.json
     source_type_id: 10036
     source_type_name: CockroachDB
-  logs:
-    source: cockroachdb
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
@@ -32,6 +30,7 @@ categories:
 - クラウド
 - data stores
 - ログの収集
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/cockroachdb/README.md
 display_on_public_website: true
@@ -39,9 +38,8 @@ draft: false
 git_integration_title: cockroachdb
 integration_id: cockroachdb
 integration_title: CockroachDB
-integration_version: 3.3.0
+integration_version: 5.0.0
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: cockroachdb
 public_title: CockroachDB
@@ -62,10 +60,14 @@ tile:
   - Supported OS::macOS
   - Submitted Data Type::Metrics
   - Submitted Data Type::Logs
+  - Offering::Integration
   configuration: README.md#Setup
   description: CockroachDB クラスターの全体的な健全性とパフォーマンスを監視
   media: []
   overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/monitor-cockroachdb-performance-metrics-with-datadog
   support: README.md#Support
   title: CockroachDB
 ---
@@ -176,7 +178,7 @@ LABEL "com.datadoghq.ad.logs"='[{"source": "cockroachdb", "service": "<SERVICE_N
 
 [Agent の `status` サブコマンドを実行][5]し、Checks セクションで `cockroachdb` を探します。
 
-## データ収集
+## 収集データ
 
 ### メトリクス
 {{< get-metrics-from-git "cockroachdb" >}}

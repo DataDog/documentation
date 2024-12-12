@@ -9,7 +9,10 @@ aliases:
   - /security/cloud_security_management/setup/csm_enterprise/agent/ecs_ec2/
 ---
 
-Use the following instructions to enable Misconfigurations, Threat Detection, Host Vulnerability Management, and Container Vulnerability Management.
+Use the following instructions to enable Misconfigurations, Threat Detection, and Vulnerability Management.
+
+{{< partial name="security-platform/CSW-billing-note.html" >}}
+
 
 ## Prerequisites
 

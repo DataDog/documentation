@@ -23,6 +23,7 @@ author:
 categories:
 - コンテナ
 - kubernetes
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/containerd/README.md
 display_on_public_website: true
@@ -32,7 +33,6 @@ integration_id: containerd
 integration_title: Containerd
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: containerd
 public_title: Containerd
@@ -47,6 +47,7 @@ tile:
   - Category::Kubernetes
   - Supported OS::Linux
   - Supported OS::Windows
+  - Offering::Integration
   configuration: README.md#Setup
   description: Containerd のすべてのメトリクスを Datadog で追跡
   media: []
@@ -62,9 +63,9 @@ tile:
 
 このチェックは、Containerd コンテナランタイムを監視します。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 Containerd は [Datadog Agent][1] の中核となるチェックです。Containerd は、`datadog.yaml` と `containerd.d/conf.yaml` の両方で構成する必要があります。
 
@@ -143,7 +144,7 @@ spec:
 {{% /tab %}}
 {{< /tabs >}}
 
-### ブラウザトラブルシューティング
+### 構成
 
 1. Containerd のパフォーマンスデータの収集を開始するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `containerd.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル containerd.d/conf.yaml][2] を参照してください。
 
@@ -153,23 +154,23 @@ spec:
 
 [Agent の `status` サブコマンドを実行][4]し、Checks セクションで `containerd` を探します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "containerd" >}}
 
 
 このインテグレーションは Linux と Windows で動作しますが、一部のメトリクスは OS に依存します。OS に依存するメトリクスの一覧は `metadata.csv` をご覧ください。
 
-### ヘルプ
+### イベント
 
 Containerd チェックは、イベントを収集できます。`filters` を使用して関連イベントを選択します。詳細については、[サンプル containerd.d/conf.yaml][2] を参照してください。
 
-### ヘルプ
+### サービスチェック
 {{< get-service-checks-from-git "containerd" >}}
 
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
 

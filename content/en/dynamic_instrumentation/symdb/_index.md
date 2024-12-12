@@ -1,6 +1,5 @@
 ---
 title: Autocomplete and Search
-kind: documentation
 is_beta: true
 private: false
 further_reading:
@@ -13,7 +12,7 @@ further_reading:
 {{< /site-region >}}
 
 {{< beta-callout url="#" btn_hidden="true" >}}
-Autocomplete and search are in public beta.
+Autocomplete and search are in Preview for Python and .NET.
 {{< /beta-callout >}}
 
 ## Overview

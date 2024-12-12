@@ -18,8 +18,6 @@ assets:
       metadata_path: assets/service_checks.json
     source_type_id: 10078
     source_type_name: ClickHouse
-  logs:
-    source: clickhouse
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
@@ -29,6 +27,7 @@ categories:
 - キャッシュ
 - data stores
 - ログの収集
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/clickhouse/README.md
 display_on_public_website: true
@@ -36,9 +35,8 @@ draft: false
 git_integration_title: clickhouse
 integration_id: clickhouse
 integration_title: ClickHouse
-integration_version: 3.5.0
+integration_version: 5.1.0
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: clickhouse
 public_title: ClickHouse
@@ -56,6 +54,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: ClickHouse クラスターの健全性とパフォーマンスを監視。
   media: []
@@ -71,20 +70,20 @@ tile:
 
 このチェックは、Datadog Agent を通じて [ClickHouse][1] を監視します。
 
-## 計画と使用
+## セットアップ
 
 ホストで実行されている Agent 用にこのチェックをインストールおよび構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][2]のガイドを参照してこの手順を行ってください。
 
-### インフラストラクチャーリスト
+### インストール
 
 ClickHouse チェックは [Datadog Agent][3] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 
-### ブラウザトラブルシューティング
+### 構成
 
 {{< tabs >}}
 {{% tab "ホスト" %}}
 
-#### メトリクスベース SLO
+#### ホスト
 
 ホストで実行中の Agent に対してこのチェックを構成するには
 
@@ -94,7 +93,7 @@ ClickHouse チェックは [Datadog Agent][3] パッケージに含まれてい�
 
 2. [Agent を再起動します][2]。
 
-##### 収集データ
+##### ログ収集
 
 1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` ファイルでこれを有効にします。
 
@@ -133,7 +132,7 @@ ClickHouse チェックは [Datadog Agent][3] パッケージに含まれてい�
 | `<INIT_CONFIG>`      | 空白または `{}`                                              |
 | `<INSTANCE_CONFIG>`  | `{"server": "%%host%%", "port": "%%port%%", "username": "<ユーザー>", "password": "<パスワード>"}`       |
 
-##### 収集データ
+##### ログ収集
 
 Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集][2]を参照してください。
 
@@ -150,21 +149,21 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 
 [Agent の status サブコマンドを実行][4]し、**Checks** セクションで `clickhouse` を探します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "clickhouse" >}}
 
 
-### ヘルプ
+### イベント
 
 ClickHouse チェックにはイベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 {{< get-service-checks-from-git "clickhouse" >}}
 
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
 

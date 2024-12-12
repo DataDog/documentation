@@ -45,7 +45,7 @@
 {{- with $parameters.queryStrings -}}
     {{- $i := 0 -}}
     {{- range . -}}
-        {{- if eq .required true -}}
+        {{- if or (eq .required true) (eq (index . "x-docs-curl-required") true) -}}
             {{- if eq $i 0 -}}
                 <span class="c1"># Required query arguments</span><br/>
             {{- end -}}
@@ -79,8 +79,10 @@
 {{- end -}}
 {{- end -}}
 <span class="n">curl</span> <span class="o">-X</span> <span class="s1">{{ $endpoint.actionType | upper }}</span> {{ range $region, $url := $endpoint.regions }}{{ if ne $region "local" }}<span class="kn d-none" data-region="{{ $region }}">"{{ $url }}</span>{{ else }}<span class="kn">"{{ $url }}</span>{{ end }}{{ end }}<span class="kn">{{ replace $endpoint.pathKey "{" "${" }}</span>
-{{- range $qi, $q := where $parameters.queryStrings ".required" true -}}
+{{- range $qi, $q := $parameters.queryStrings -}}
+      {{- if or (eq $q.required true) (eq (index $q "x-docs-curl-required") true) -}}
       <span class="kn">{{ cond (gt $qi 0) "&" "?" }}</span><span class="kn">{{ $q.name }}</span><span class="kn">=</span><span class="kn">${ {{- $q.name -}} }</span>
+      {{- end -}}
 {{- end -}}
 
 {{- /* Render authentication query parameters "?api_key=XXX" */ -}}
@@ -130,7 +132,7 @@
             {{ $authSchema := (index $securitySchemes $key) }}
             {{- if eq $authSchema.in "header" -}}
                 {{ " \\" }}
-<span class="o">-H</span> <span class="s1">"{{ $authSchema.name }}: <span class="n">${ {{- index $authSchema "x-env-name" -}} }</span>"</span>
+<span class="o">-H</span> <span class="s1">"{{ $authSchema.name }}:{{ if eq $authSchema.scheme "bearer" }} Bearer{{- end }} <span class="n">${ {{- index $authSchema "x-env-name" -}} }</span>"</span>
             {{- end -}}
         {{- end -}}
     {{- end -}}

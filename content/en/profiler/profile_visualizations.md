@@ -109,7 +109,7 @@ To access the timeline view:
 
 Depending on the runtime and language, the timeline lanes vary:
 
-{{< programming-lang-wrapper langs="java,go,ruby,nodejs,dotnet,php" >}}
+{{< programming-lang-wrapper langs="java,python,go,ruby,nodejs,dotnet,php" >}}
 {{< programming-lang lang="java" >}}
 Each lane represents a **thread**. Threads from a common pool are grouped together. You can expand the pool to view details for each thread.
 
@@ -118,6 +118,13 @@ Lanes on top are runtime activities that may impact performance.
 For additional information about debugging slow p95 requests or timeouts using the timeline, see the blog post [Understanding Request Latency with Profiling][1].
 
 [1]: https://www.datadoghq.com/blog/request-latency-profiling/
+{{< /programming-lang >}}
+{{< programming-lang lang="python" >}}
+See [prerequisites][1] to learn how to enable this feature for Python.
+
+Each lane represents a **thread**. Threads from a common pool are grouped together. You can expand the pool to view details for each thread.
+
+[1]: /profiler/connect_traces_and_profiles/#prerequisites
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
 See [prerequisites][1] to learn how to enable this feature for Go.

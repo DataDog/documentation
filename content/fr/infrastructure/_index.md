@@ -2,6 +2,14 @@
 aliases:
 - /fr/graphing/infrastructure/
 cascade:
+- _target:
+    path: /infrastructure/resource_catalog/aws_iam_user
+    lang: fr
+  aliases:
+  - /fr/security/cspm/custom_rules/aws_iam_user/
+- _target:
+    path: /infrastructure/**/*
+    lang: fr
   algolia:
     rank: 70
 further_reading:
@@ -15,6 +23,14 @@ further_reading:
     infrastructure
 title: Infrastructure
 ---
+
+{{< img src="infrastructure/Hostmap-compressed.mp4" alt="Vidéo d'une hostmap filtrée pour garder uniquement les hosts Nginx" video="true">}}
+
+## Présentation
+
+La surveillance d'infrastructure comprend des fonctionnalités Datadog essentielles qui permettent de visualiser, de surveiller et de mesurer les performances de vos hosts, conteneurs et processus.
+
+## Composants
 
 {{< whatsnext desc="Cette section aborde les sujets suivants :">}}
     {{< nextlink href="/infrastructure/list" >}}<u>Liste des infrastructures</u> : consultez la liste de tous vos hosts surveillés par Datadog.{{< /nextlink >}}

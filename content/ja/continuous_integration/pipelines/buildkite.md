@@ -7,10 +7,10 @@ further_reading:
   text: パイプラインの実行結果とパフォーマンスを確認する
 - link: /continuous_integration/troubleshooting/
   tag: ドキュメント
-  text: トラブルシューティング CI
-- link: /continuous_integration/pipelines/custom_tags_and_metrics/
+  text: CI Visibility のトラブルシューティング
+- link: /continuous_integration/pipelines/custom_tags_and_measures/
   tag: ドキュメント
-  text: カスタムタグとメトリクスを追加してパイプラインの可視性を拡張する
+  text: カスタムタグと測定値を追加してパイプラインの可視性を拡張する
 title: Buildkite パイプラインでトレースを設定する
 ---
 
@@ -18,19 +18,26 @@ title: Buildkite パイプラインでトレースを設定する
 <div class="alert alert-warning">選択したサイト ({{< region-param key="dd_site_name" >}}) では現在 CI Visibility は利用できません。</div>
 {{< /site-region >}}
 
-## 互換性
+## 概要
 
-- **Partial pipelines**: [部分リトライ][5]とダウンストリームパイプラインの実行を表示します
+[Buildkite][1] is a continuous integration and deployment platform that allows you to run builds on your own infrastructure, providing you with full control over security and customizing your build environment while managing orchestration in the cloud.
 
-- **Manual steps**: 手動でトリガーされたパイプラインを表示します
+Set up tracing on Buildkite to optimize your resource usage, reduce overhead, and improve the speed and quality of your software development lifecycle.
 
-- **Queue time**: パイプラインのジョブが処理される前にキューに残っている時間を表示します
+### 互換性
 
-- **Custom tags and metrics at runtime**: ランタイムに[カスタムタグ][6]とメトリクスを構成します
+| Pipeline Visibility | プラットフォーム | 定義 |
+|---|---|---|
+| [Partial retries][9] | Partial pipelines | View partially retried pipeline executions. |
+| インフラストラクチャーメトリクスの相関 | インフラストラクチャーメトリクスの相関 | Correlate jobs to [infrastructure host metrics][6] for Buildkite agents. |
+| [Manual steps][12] | Manual steps | View manually triggered pipelines. |
+| [Queue time][13] | Queue time | View the amount of time pipeline jobs sit in the queue before processing. |
+| [Custom tags][10] [and measures at runtime][11] | Custom tags and measures at runtime | Configure [custom tags and measures][6] at runtime. |
+| [Custom spans][14] | Custom spans | Configure custom spans for your pipelines. |
 
 ## Datadog インテグレーションの構成
 
-[Buildkite][1] の Datadog インテグレーションを有効にする手順は以下の通りです。
+To set up the Datadog integration for [Buildkite][1]:
 
 1. Buildkite の **Settings > Notification Services** に移動し、add a **Datadog Pipeline Visibility** integration をクリックします。
 2. 以下の情報をフォームに入力してください。
@@ -66,13 +73,15 @@ Datadog では、ルートスパンだけでなく、関連するジョブスパ
 
 {{< img src="ci/buildkite-custom-tags.png" alt="カスタムタグによる Buildkite パイプラインのトレース" style="width:100%;">}}
 
-キーが `dd-metrics.` で始まり、数値を含むメタデータは、数値メジャーの作成に利用できるメトリクスタグとして設定されます。このようなタグを作成するには、`buildkite-agent meta-data set` コマンドを使用します。これは、例えばパイプラインのバイナリーサイズを計測するのに使うことができます。
+Any metadata with a key starting with `dd-measures.` and containing a numerical value will be set as
+a metric tag that can be used to create numerical measures. You can use the `buildkite-agent meta-data set`
+command to create such tags. This can be used for example to measure the binary size in a pipeline:
 
 ```yaml
 steps:
   - commands:
     - go build -o dst/binary .
-    - ls -l dst/binary | awk '{print \$5}' | tr -d '\n' | buildkite-agent meta-data set "dd_metrics.binary_size"
+    - ls -l dst/binary | awk '{print \$5}' | tr -d '\n' | buildkite-agent meta-data set "dd_measures.binary_size"
     label: Go build
 ```
 
@@ -84,13 +93,18 @@ steps:
 
 ## Datadog でパイプラインデータを視覚化する
 
-パイプラインが終了した後、[Pipelines][3] ページと [Pipeline Executions][4] ページにデータが入力されます。
+The [**CI Pipeline List**][3] and [**Executions**][4] pages populate with data after the pipelines finish.
 
-**注**: Pipelines ページには、各リポジトリのデフォルトブランチのデータのみが表示されます。
+The **CI Pipeline List** page shows data for only the default branch of each repository.
+
+### インフラストラクチャーメトリクスとジョブの相関付け
+
+If you are using Buildkite agents, you can correlate jobs with the infrastructure that is running them.
+For this feature to work, install the [Datadog Agent][7] in the hosts running the Buildkite agents.
 
 ### 部分的およびダウンストリームパイプラインを表示する
 
-**Pipeline Executions** のページでは、検索バーで以下のフィルターを使用することができます。
+**Executions** ページでは、検索バーで以下のフィルターを使用することができます。
 
 `Downstream Pipeline`
 : 可能な値: `true`、`false`
@@ -106,7 +120,7 @@ steps:
 これらのフィルターは、ページの左側にあるファセットパネルからも適用することができます。
 {{< img src="ci/partial_retries_facet_panel.png" alt="Partial Pipeline ファセットが展開され、値 Retry が選択されたファセットパネル、Partial Retry ファセットが展開され、値 true が選択されたファセットパネル" style="width:40%;">}}
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -114,5 +128,13 @@ steps:
 [2]: https://app.datadoghq.com/organization-settings/api-keys
 [3]: https://app.datadoghq.com/ci/pipelines
 [4]: https://app.datadoghq.com/ci/pipeline-executions
-[5]: https://docs.datadoghq.com/ja/continuous_integration/pipelines/buildkite/#view-partial-and-downstream-pipelines
-[6]: https://docs.datadoghq.com/ja/continuous_integration/pipelines/custom_tags_and_metrics/?tab=linux
+[5]: /ja/continuous_integration/pipelines/buildkite/#view-partial-and-downstream-pipelines
+[6]: /ja/continuous_integration/pipelines/custom_tags_and_measures/?tab=linux
+[7]: /ja/agent/
+[8]: /ja/continuous_integration/pipelines/buildkite/#correlate-infrastructure-metrics-to-jobs
+[9]: /ja/glossary/#partial-retry
+[10]: /ja/glossary/#custom-tag
+[11]: /ja/glossary/#custom-measure
+[12]: /ja/glossary/#manual-step
+[13]: /ja/glossary/#queue-time
+[14]: /ja/glossary/#custom-span

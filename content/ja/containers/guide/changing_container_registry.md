@@ -147,7 +147,7 @@ Fargate でデプロイする際にレジストリを更新するには、Fargat
 
 次にタスクを起動するときは、Docker Hub ではなく `public.ecr.aws` からプルします。Fargate でのデプロイについては、[ECS での Agent のデプロイ][8]、[EKS での Agent のデプロイ][9]を参照してください。
 
-## 重複するホスト
+## Cluster Agent
 
 Datadog Agent と Datadog Cluster Agent のデプロイに Helm チャートを使用している場合は、[Kubernetes と Helm チャート](#kubernetes-with-helm-chart)の説明に従い、他の更新は必要ありません。上記の Helm `values.yaml` の変更により、Cluster Agent と Datadog Agent の両方が引き出されるリポジトリが変更されます。
 

@@ -1,10 +1,11 @@
 ---
-title: HTTP リクエストが HTTPS にリダイレクトされることを監視する
 further_reading:
-  - link: /synthetics/api_tests/http_tests
-    tag: ドキュメント
-    text: HTTP テストの作成
+- link: /synthetics/api_tests/http_tests
+  tag: ドキュメント
+  text: HTTP テストの作成
+title: HTTP リクエストが HTTPS にリダイレクトされているか監視する
 ---
+
 ## 概要
 
 HTTP トラフィックが HTTPS にリダイレクトされることを監視することは、ユーザーの API エンドポイントおよびアプリケーションとの接続が暗号化されていることを確認するために重要です。

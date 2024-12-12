@@ -86,7 +86,7 @@ Datadog でログ属性を適切に使用しログデータを絞り込んだり
 
 Datadog では、上記のような一般的な攻撃に対し、収集されたログをリアルタイムでスキャンすることのできる、事前設定済みの[検出ルール][12]を提供しています。このルールをトリガーするログがあると、Datadog により自動的に[セキュリティシグナル][13]が生成されます。このシグナルには、検出された攻撃の種類や対応方法、状況への対処方法など、イベントに関する重要なデータが含まれます。セキュリティシグナルは、エクスプローラーで表示、絞り込み、並べ替えることが可能で、情報をトリアージして重点的に作業をすべき点を確認できます。
 
-`Credential Stuffing Attack` 検出ルールによりトリガーされたシグナルには、対応および対処に[すぐに使える Runbook][14] があります。この Runbook を使うと、クレデンシャルスタッフィング攻撃の可能性を調査することが可能で、関連ログのグラフが含まれています。Runbook を使用するには、コピーを保存して時間枠を設定し、マークダウンで調査を記録します。チームメイトに共有すると[コメントを入力][15]できます。
+For signals triggered from the `Credential Stuffing Attack` Detection Rule, there is an [out-of-the-box runbook][14] available to help with response and remediation. This runbook guides you through investigating a potential credential stuffing attack and includes graphs of related logs. To use this runbook, save a copy and set the time frame, document your investigation in markdown, and share it with teammates [for commenting][15].
 
 ### 調査にはダッシュボードを使用
 
@@ -100,18 +100,18 @@ Datadog では、[IP 調査ダッシュボード][16]や[ユーザーアカウ�
 
 Datadog では、[すべてのログ][18]を取り込み分析し、環境全体において脅威を検出します。[インデックス化の必要のない][19]ログはアーカイブし、調査や監査、またはコンプライアンスのために必要になった時に、すばやく[リハイドレート][20]できます。
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/cloud_siem/
-[2]: /ja/logs/log_collection/?tab=http#application-log-collection
+[2]: /ja/logs/log_collection/?tab=application#application-log-collection
 [3]: /ja/logs/log_configuration/processors/#grok-parser
 [4]: https://www.datadoghq.com/blog/logs-standard-attributes/
 [5]: /ja/logs/log_configuration/attributes_naming_convention
 [6]: /ja/logs/log_configuration/attributes_naming_convention/#user-related-attributes
 [7]: /ja/logs/log_configuration/attributes_naming_convention/#events
-[8]: /ja/logs/log_configuration/attributes_naming_convention/#network
+[8]: /ja/logs/log_configuration/attributes_naming_convention/#web-access
 [9]: https://developers.google.com/recaptcha/docs/v3
 [10]: https://app.datadoghq.com/security/configuration/rules?product=siem&query=brute%20force%20attack&sort=rule
 [11]: https://app.datadoghq.com/security/configuration/rules?product=siem&query=credential%20stuffing%20attack&sort=rule
@@ -122,5 +122,5 @@ Datadog では、[すべてのログ][18]を取り込み分析し、環境全体
 [16]: https://app.datadoghq.com/screen/integration/security-monitoring-ip-investigation
 [17]: https://app.datadoghq.com/screen/integration/security-monitoring-user-investigation
 [18]: https://www.datadoghq.com/blog/logging-without-limits/
-[19]: /ja/logs/indexes/#exclusion-filters
+[19]: /ja/logs/log_configuration/indexes/#exclusion-filters
 [20]: https://www.datadoghq.com/blog/efficient-log-rehydration-with-datadog/

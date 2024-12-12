@@ -77,13 +77,16 @@ If job log collection is supported and enabled for the CI provider, related log 
 
 Job log collection is supported for the following providers:
 
+- [AWS CodePipeline][8]
+- [Azure][9]
+- [CircleCI][10]
 - [GitHub Actions][3]
 - [GitLab][4]
 - [Jenkins][5]
 
 #### AI-generated log summaries
 
-<div class="alert alert-info">AI-generated log summaries are in private beta. To request access, fill out <a href="https://docs.google.com/forms/d/e/1FAIpQLSfBuPfdyhgqjjduDYpOM5twJdkdDnTTxJdCCWonauaBxWTCnQ/viewform">this form</a>.</div>
+<div class="alert alert-info">AI-generated log summaries are in Preview. To request access, fill out <a href="https://docs.google.com/forms/d/e/1FAIpQLSfBuPfdyhgqjjduDYpOM5twJdkdDnTTxJdCCWonauaBxWTCnQ/viewform">this form</a>.</div>
 
 Pipeline Visibility provides AI-generated explanations for pipeline errors based on your CI job logs. These explanations can be found on the **Failed Jobs** tab for each pipeline execution. You can use these summaries to determine whether an error in CI is associated with developer-written code or the CI pipeline itself, as well as troubleshoot execution failures.
 
@@ -97,3 +100,6 @@ Pipeline Visibility provides AI-generated explanations for pipeline errors based
 [5]: /continuous_integration/pipelines/jenkins#enable-job-log-collection
 [6]: /account_management/teams/ 
 [7]: /continuous_integration/pipelines/custom_tags_and_measures/?tab=linux
+[8]: /continuous_integration/pipelines/awscodepipeline/#enable-log-correlation
+[9]: /continuous_integration/pipelines/azure/#enable-job-log-collection
+[10]: /continuous_integration/pipelines/circleci/#enable-log-collection

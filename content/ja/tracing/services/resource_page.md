@@ -2,12 +2,15 @@
 aliases:
 - /ja/tracing/visualization/resource/
 further_reading:
+- link: https://www.datadoghq.com/blog/dependency-map-navigator/
+  tag: ブログ
+  text: Dependency Map Navigator でダウンストリームサービスのパフォーマンス問題を特定する
 - link: /tracing/trace_collection/
   tag: ドキュメント
   text: アプリケーションで APM トレースをセットアップする方法
-- link: /tracing/services/services_list/
+- link: /tracing/service_catalog/
   tag: ドキュメント
-  text: Datadog に報告するサービスの一覧
+  text: Datadog に報告するサービスの発見とカタログ化
 - link: /tracing/services/service_page/
   tag: ドキュメント
   text: Datadog のサービスについて
@@ -17,7 +20,7 @@ further_reading:
 title: リソースステータス画面
 ---
 
-{{< img src="tracing/visualization/resource/resource-page.png" alt="APM リソースページ" >}}
+{{< img src="tracing/visualization/resource/resource-page-cropped.png" alt="The APM resource page, showing monitor status and trends for key metrics" >}}
 
 リソースは、特定の[サービス][1]（通常は個々のエンドポイントまたはクエリ）に対する特定のアクションです。リソースの詳細については、[APM を開始する][2]をご覧ください。リソースごとに、APM は以下をカバーするダッシュボードページを自動的に生成します。
 
@@ -27,24 +30,11 @@ title: リソースステータス画面
 
 ## すぐに使えるグラフ
 
-Datadog は、特定のリソースに対してすぐに使用できるグラフを提供しています。
+Datadog provides out-of-the-box graphs for any given resource. Use the dropdown above each graph to change the displayed information.
 
-* リクエスト - 選択して表示:
-    *  **リクエストの合計量**
-    *  **1 秒あたりのリクエスト**の量
-* レイテンシー - 選択して表示:
-    *  トレースされたリクエストの平均/p75/p90/p95/p99/最大レイテンシー
-* エラー - 選択して表示:
-    * **エラーの合計量**
-    * **1 秒あたりのエラー**の量
-    * **% エラー率**
-* サブサービス: 複数のサービスが関係している場合、4 番目のグラフを使用して、サービスの**リクエストあたりの合計消費時間**/**消費時間の割合**/**平均時間**を*サービス*ごとまたは*タイプ*ごとに分類できます。
+{{< img src="tracing/visualization/resource/resource_otb_graphs.png" alt="Out-of-the-box resource graphs showing requests per second, latency, total errors, and percent time spent per service" style="width:90%;">}}
 
-  これは、現在のサービスから他の*サービス*または*タイプ*への[トレース][3]に費やされた合計/相対/平均時間を表します。
-
-  **注**: *Postgres* や *Redis* などのサービスは、他のサービスを呼び出さない「最終的な」オペレーションであり、サブサービスのグラフはありません。
-
-{{< img src="tracing/visualization/resource/resource_otb_graphs.png" alt="すぐに使えるリソースグラフ" style="width:90%;">}}
+{{% apm-ootb-graphs %}}
 
 ### ダッシュボードへのエクスポート
 
@@ -54,38 +44,40 @@ Datadog は、特定のリソースに対してすぐに使用できるグラフ
 
 リソースステータス画面にも、リソースレイテンシー分布グラフが表示されます。
 
-{{< img src="tracing/visualization/resource/resource_latency_distribution.png" alt="レイテンシー分布" style="width:100%;">}}
+{{< img src="tracing/visualization/resource/resource_latency_distribution.png" alt="A latency distribution graph showing a distribution of the time taken per resource request" style="width:100%;">}}
 
 右上のセレクターを使用して特定のパーセンタイルを拡大するか、サイドバーにカーソルを合わせてパーセンタイルマーカーを表示します。
 
-{{< img src="tracing/visualization/service/latency_distribution_sidebar.png" alt="レイテンシー分布セレクター" style="width:50%;">}}
+{{< img src="tracing/visualization/service/latency_distribution_sidebar.png" alt="A close-up of the latency distribution graph sidebar which allows filtering on percentiles" style="width:50%;">}}
 
 ## ナビゲーター付き依存関係マップ
 
-また、リソースの上流と下流のすべてのサービスの依存関係のマップを表示することができます。依存関係マップナビゲーターを使用すると、特定のリソース (エンドポイントやデータベースクエリなど) をエンドツーエンドで通過するスパンを持つサービスのフローを、リクエスト数とともにすばやく確認することができます。
+You can also view a map of all of a resource's upstream and downstream service dependencies. With the Dependency Map Navigator, you can see the flow of services, with spans that go through a specific resource (endpoint, database query, etc.) end-to-end, along with their request counts.
+
+This map is based on a sample of ingested spans; the sample is drawn by a fixed sampling algorithm that considers the structure of traces. The sampling algorithm is not configurable and is not impacted by ingestion control.
 
 依存関係マップは、サービスエントリースパンを含むリソースにのみ利用可能です。
 
-{{< img src="tracing/visualization/resource/dependency-map-navigator.png" alt="依存関係マップナビゲーター" style="width:100%;" >}}
+{{< img src="tracing/visualization/resource/dependency-map-navigator-cropped.png" alt="A dependency map for a resource, with a list of service dependencies and flow diagram of requests from service to service" style="width:100%;" >}}
 
 ノードにカーソルを合わせると、リクエスト/秒、エラー率、平均レイテンシーなど、各サービスのメトリクスを表示します。ノードをクリックすると、コンテキストメニューが表示され、サービスページや関連するトレースなどを表示することができます。
 
 ノードのハイライト色は、そのサービスの[モニターステータス][5]を示しています。サービスに複数のモニターが構成されている場合、最も厳しいモニターのステータスが表示されます。
 
-{{< img src="tracing/visualization/resource/dependency-navigator.mp4" video="true" alt="リスト上でカーソルを合わせてクリック" style="width:100%;" >}}
+{{< img src="tracing/visualization/resource/dependency-navigator-cropped.mp4" video="true" alt="A video that shows selecting a service in the dependency map list to view the flow of requests into and out of that service" style="width:100%;" >}}
 
 ### 負荷増幅
 
 選択したリソースのアップストリームで受信したリクエストの 100% 以上を受信している場合、サービスには負荷増幅があります。コールパスがオレンジ色でハイライトされているサービスには負荷増幅があり、増幅倍率はパネル上のリストに表示されます。増幅は、リソースが受信したリクエスト (下のイメージで地図上にハイライト表示) と、ダウンストリームサービスが受信したリクエスト (地図上のダウンストリームサービスノード内に表示) に基づいて計算されます。リスト内のサービスをクリックすると、増幅に寄与しているスパンを確認することができます。
 
-{{< img src="tracing/visualization/resource/dependency-map-requests.png" alt="リソースのリクエスト数を示す依存関係マップ" style="width:100%;" >}}
+{{< img src="tracing/visualization/resource/dependency-map-requests-cropped.png" alt="A dependency map that shows the flow of requests into and out of a particular resource and highlights the request count of that resource" style="width:100%;" >}}
 
 
 ## スパンサマリー
 
 特定のリソースについて、Datadog は一致するすべてのトレースの[スパン][6]分析内訳を提供します。
 
-{{< img src="tracing/visualization/resource/span_stats.png" alt="スパン統計" style="width:80%;">}}
+{{< img src="tracing/visualization/resource/span_stats.png" alt="A table showing several key metrics for a list of the spans associated with a particular resource" style="width:80%;">}}
 
 表示されるメトリクスは、スパンごとに次を表します。
 
@@ -109,7 +101,7 @@ Datadog は、特定のリソースに対してすぐに使用できるグラフ
 
 環境、サービス、オペレーション、およびリソース名で既にフィルタリングされている[トレース検索][8]モーダルで、このリソースに関連付けられている[トレース][7]のリストを参照してください。
 
-{{< img src="tracing/visualization/resource/traces_list.png" alt="トレースの一覧画面" style="width:90%;">}}
+{{< img src="tracing/visualization/resource/traces_list.png" alt="A list of traces associated with a particular resource that shows the timestamp, duration, status, and latency breakdown of each trace" style="width:90%;">}}
 
 ## その他の参考資料
 

@@ -30,6 +30,7 @@ categories:
 - containers
 - ログの収集
 - ネットワーク
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/docker_daemon/README.md
 display_on_public_website: true
@@ -39,7 +40,6 @@ integration_id: docker
 integration_title: Docker Daemon
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: docker_daemon
 public_title: Docker Daemon
@@ -55,10 +55,24 @@ tile:
   - Category::Containers
   - Category::Log Collection
   - Category::Network
+  - Offering::Integration
   configuration: README.md#Setup
   description: コンテナのパフォーマンスをその内部で実行中のサービスのパフォーマンスと関連付けます。
   media: []
   overview: README.md#Overview
+  resources:
+  - resource_type: documentation
+    url: https://docs.datadoghq.com/agent/guide/compose-and-the-datadog-agent
+  - resource_type: documentation
+    url: https://docs.datadoghq.com/integrations/faq/dogstatsd-and-docker
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/the-docker-monitoring-problem
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/how-to-monitor-docker-resource-metrics
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/how-to-collect-docker-metrics
+  - resource_type: documentation
+    url: https://www.datadoghq.com/docker-adoption
   support: README.md#Support
   title: Docker Daemon
 ---
@@ -81,8 +95,8 @@ tile:
 * Docker_daemon の状態を視覚化および監視できます。
 * Docker_daemon のフェイルオーバーとイベントの通知を受けることができます。
 
-## 計画と使用
-### インフラストラクチャーリスト
+## セットアップ
+### インストール
 
 すべてのコンテナに関する Docker メトリクスを収集するには、ホストごとに **1 つの** Datadog Agent を実行します。各ホストで直接 Agent を実行する方法と、1 つの [docker-dd-agent コンテナ][2]内で実行する方法 (推奨) の 2 つがあります。
 
@@ -191,12 +205,12 @@ Datadog Agent を使用したカスタム Docker コンテナの構築、Alpine 
 
 [`import`][18] コマンドは、古い `docker_daemon.yaml` を新しい `docker.yaml` に変換します。また、このコマンドは、必要な設定を `docker_daemon.yaml` から `datadog.yaml` に移動します。
 
-## リアルユーザーモニタリング
-### データセキュリティ
+## 収集データ
+### メトリクス
 {{< get-metrics-from-git "docker_daemon" >}}
 
 
-### ヘルプ
+### イベント
 Docker インテグレーションは以下のイベントを生成します。
 
 * Delete Image
@@ -210,13 +224,13 @@ Docker インテグレーションは以下のイベントを生成します。
 * Restart Daemon
 * Update
 
-### ヘルプ
+### サービスチェック
 {{< get-service-checks-from-git "docker_daemon" >}}
 
 
 **注**: `docker.exit` を使用するには、[Docker YAML ファイル][21]に `collect_exit_codes: true` を追加し、Agent を再起動します。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][22]までお問い合わせください。
 

@@ -55,7 +55,7 @@ hugo defaults to environment development with hugo server
 {{ if $isProd }}
   {{ $dd_libs_js = $dd_libs_js | fingerprint "sha512" }}
 {{ end }}
-<script type="text/javascript" src="{{ $dd_libs_js.Permalink }}" {{ if $isProd }} integrity="{{ $dd_libs_js.Data.Integrity }}" {{ end }}></script>
+<script type="text/javascript" src="{{ $dd_libs_js.Permalink }}" {{ if $isProd }} integrity="{{ $dd_libs_js.Data.Integrity }}" {{ end }} crossorigin="anonymous"></script>
 
 
 {{ $opts := dict "targetPath" "static/dd-browser-logs-rum.js" "defines" $defines "sourceMap" $sourcemap "minify" $isProd }}
@@ -69,7 +69,7 @@ hugo defaults to environment development with hugo server
   {{ if $isProd }}
     {{ $js = $js | fingerprint "sha512" }}
   {{ end }}
-  <script type="text/javascript" src="{{ $js.Permalink }}" {{ if $isProd }} integrity="{{ $js.Data.Integrity }}" {{ end }}></script>
+  <script type="text/javascript" src="{{ $js.Permalink }}" {{ if $isProd }} integrity="{{ $js.Data.Integrity }}" {{ end }} crossorigin="anonymous"></script>
 {{ end }}
 
 {{ $opts := dict "targetPath" "static/lang-redirects.js" "defines" $defines "sourceMap" $sourcemap "minify" $isProd }}
@@ -77,11 +77,11 @@ hugo defaults to environment development with hugo server
 {{ if $isProd }}
   {{ $js = $js | fingerprint "sha512" }}
 {{ end }}
-<script type="text/javascript" src="{{ $js.Permalink }}" {{ if $isProd }} integrity="{{ $js.Data.Integrity }}" {{ end }}></script>
+<script type="text/javascript" src="{{ $js.Permalink }}" {{ if $isProd }} integrity="{{ $js.Data.Integrity }}" {{ end }} crossorigin="anonymous"></script>
 
 {{ $opts := dict "targetPath" "static/region-redirects.js" "defines" $defines "sourceMap" $sourcemap "minify" $isProd }}
 {{ $js := resources.Get "scripts/region-redirects.js" | js.Build $opts }}
 {{ if $isProd }}
   {{ $js = $js | fingerprint "sha512" }}
 {{ end }}
-<script type="text/javascript" src="{{ $js.Permalink }}" {{ if $isProd }} integrity="{{ $js.Data.Integrity }}" {{ end }}></script>
+<script type="text/javascript" src="{{ $js.Permalink }}" {{ if $isProd }} integrity="{{ $js.Data.Integrity }}" {{ end }} crossorigin="anonymous"></script>

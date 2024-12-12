@@ -16,9 +16,9 @@ title: ユーザーモニタリングと保護
 
 サービスをインスツルメンテーションし、ユーザーのアクティビティを追跡することで、悪質なユーザーを検出・ブロックします。
 
-[認証されたユーザー情報をトレースに追加する](#adding-authenticated-user-information-to-traces-and-enabling-user-blocking-capability)ことで、認証された攻撃対象領域を狙う悪質なユーザーを特定し、ブロックすることができます。これを行うには、実行中の APM トレースにユーザー ID タグを設定し、ASM が認証済み攻撃者をブロックするために必要なインストルメンテーションを提供します。これにより、ASM は攻撃やビジネスロジックのイベントをユーザーに関連付けることができます。
+[Add authenticated user information on traces](#adding-authenticated-user-information-to-traces-and-enabling-user-blocking-capability) to identify and block bad actors targeting your authenticated attack surface. To do this, set the user ID tag on the running APM trace, providing the necessary instrumentation for ASM to block authenticated attackers. This allows ASM to associate attacks and business logic events to users.
 
-[ユーザーのログインとアクティビティを追跡](#adding-business-logic-information-login-success-login-failure-any-business-logic-to-traces)し、すぐに使える検出ルールでアカウントの乗っ取りやビジネスロジックの乱用を検出し、最終的に攻撃者をブロックすることができます。
+[Track user logins and activity](#adding-business-logic-information-login-success-login-failure-any-business-logic-to-traces) to detect account takeovers and business logic abuse with out-of-the-box detection rules, and to ultimately block attackers.
 
 <div class="alert alert-info">
 <strong>ユーザーアクティビティの自動検出:</strong> Datadog トレーシングライブラリは、ユーザーアクティビティイベントを自動的に検出してレポートしようとします。詳細については、<a href="/security/application_security/threats/add-user-info/?tab=set_user#disabling-automatic-user-activity-event-tracking">ユーザーアクティビティイベントの自動追跡を無効にする</a>を参照してください。
@@ -29,12 +29,12 @@ title: ユーザーモニタリングと保護
 | 内蔵のイベント名   | 必要なメタデータ                                    | 関連ルール                                                                                                                                                                                                       |
 |------------------------|------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `activity.sensitive`   | `{ "name": "coupon_use", "required_role": "user" }`  | [IP からのレート制限アクティビティ][4]<br>[不正なアクティビティの検出][5] |
-| `users.login.success`  | ユーザー ID は必須で、オプションでメタデータを追加できます | [クレデンシャルスタッフィング攻撃][6]                                                                                                              |
-| `users.login.failure`  | ユーザー ID は必須で、オプションでメタデータを追加できます | [クレデンシャルスタッフィング攻撃][6]                                                                                                              |
+| `users.login.success`  | ユーザー ID は必須で、オプションでメタデータを追加できます | [Credential Stuffing attack][6]<br>[Bruteforce attack][12]<br>[Distributed Credential Stuffing][13]               |
+| `users.login.failure`  | User ID and `usr.exists` are mandatory, optional metadata can be added | [Credential Stuffing attack][6]<br>[Bruteforce attack][12]<br>[Distributed Credential Stuffing][13]  |
 | `users.signup`         | `{ "usr.id": "12345" }`                              | [IP からの過剰なアカウント作成][7]                                                                                                    |
 | `users.delete`         | `{ "usr.id": "12345" }`                              | [IP からの過剰なアカウント削除][8]                                                                                           |
 | `users.password_reset` | `{ "usr.id": "12345", "exists": true }`              | [パスワードリセットのブルートフォース試行][9]                                                                                                         |
-| `payment.attempt`      | `{ "status": "failed" }`                             | [IP からの過剰な支払い失敗][10]                                                                                                        |
+| `payment.failure`      | なし                                                 | [IP からの過剰な支払い失敗][10]                                                                                                        |
 
 ## 認証されたユーザー情報をトレースに追加し、ユーザーブロック機能を有効にする
 
@@ -312,14 +312,14 @@ import datadog.trace.api.GlobalTracer;
 
 public class LoginController {
 
-    private User doLogin(String userId, String password) {
-        // ここで、userId/password の資格情報に基づいた User を取得します
-        User user = checkLogin(userId, password);
+    private User doLogin(String userName, String password) {
+        // this is where you get User based on userName/password credentials
+        User user = checkLogin(userName, password);
 
         Map<String, String> metadata = new HashMap<>();
         metadata.put("email", user.getEmail());
 
-        // ユーザー認証の成功イベントを追跡します
+        // track user authentication success events
         GlobalTracer
             .getEventTracker()
             .trackLoginSuccessEvent(user.getId(), metadata);
@@ -337,18 +337,22 @@ import datadog.trace.api.GlobalTracer;
 
 public class LoginController {
 
-    private User doLogin(String userId, String password) {
-        // ここで、userId/password の資格情報に基づいた User を取得します
-        User user = checkLogin(userId, password);
+    private User doLogin(String userName, String password) {
+        // this is where you get User based on userName/password credentials
+        User user = checkLogin(userName, password);
 
-        // 関数が null を返した場合 - ユーザーは存在しません
+        // if function returns null - user doesn't exist
         boolean userExists = (user != null);
+        String userId = null;
         Map<String, String> metadata = new HashMap<>();
         if (userExists != null) {
+            userId = getUserId(userName)
             metadata.put("email", user.getEmail());
+        } else {
+            userId = user.getEmail();
         }
 
-        // ユーザー認証のエラーイベントを追跡します
+        // track user authentication error events
         GlobalTracer
             .getEventTracker()
             .trackLoginFailureEvent(userId, userExists, metadata);
@@ -417,7 +421,8 @@ using Datadog.Trace.AppSec;
 
 void OnLogonFailure(string userId, bool userExists, ...)
 {
-    // metadata はオプションです
+    // If no userId can be provided, any unique user identifier (username, email...) may be used
+    // metadata is optional
     var metadata = new Dictionary<string, string>()
     {
         { "customKey", "customValue" }
@@ -463,13 +468,13 @@ dd-trace-go v1.47.0 からは、Go トレーサーの API を使用してユー�
 import "gopkg.in/DataDog/dd-trace-go.v1/appsec"
 
 func handler(w http.ResponseWriter, r *http.Request) {
-  metadata := /* オプションの追加イベントメタデータ */
-  userdata := /* オプションの追加ユーザーデータ */
+  metadata := /* optional extra event metadata */
+  userdata := /* optional extra user data */
 
-  // ログイン成功を追跡します
+  // Track login success, replace `my-uid` by a unique identifier of the user (such as numeric, username, and email)
   if appsec.TrackUserLoginSuccessEvent(r.Context(), "my-uid", metadata, userdata) != nil {
-    // 指定されたユーザー ID はブロックされているため、速やかにハンドラーを中止する必要があります。
-    // ブロック応答は、appsec ミドルウェアから送信されます。
+    // The given user id is blocked and the handler should be aborted asap.
+    // The blocking response will be sent by the appsec middleware.
     return
   }
 }
@@ -480,8 +485,9 @@ func handler(w http.ResponseWriter, r *http.Request) {
 import "gopkg.in/DataDog/dd-trace-go.v1/appsec"
 
 func handler(w http.ResponseWriter, r *http.Request) {
-  exists := /* 指定されたユーザー ID が存在するかどうか */
-  metadata := /* オプションの追加イベントメタデータ */ 
+  exists := /* whether the given user id exists or not */
+  metadata := /* optional extra event metadata */ 
+  // Replace `my-uid` by a unique identifier of the user (numeric, username, email...)
   appsec.TrackUserLoginFailureEvent(r.Context(), "my-uid", exists, metadata)
 }
 ```
@@ -517,6 +523,7 @@ dd-trace-rb v1.9.0 からは、Ruby トレーサーの API を使用してユー
 require 'datadog/kit/appsec/events'
 
 trace = Datadog::Tracing.active_trace
+# Replace `my_user_id` by a unique identifier of the user (numeric, username, email...)
 Datadog::Kit::AppSec::Events.track_login_success(trace, user: { id: 'my_user_id' })
 ```
 {{% /tab %}}
@@ -526,10 +533,12 @@ Datadog::Kit::AppSec::Events.track_login_success(trace, user: { id: 'my_user_id'
 require 'datadog/kit/appsec/events'
 trace = Datadog::Tracing.active_trace
 
-# ユーザー ID が存在する場合
+# Replace `my_user_id` by a unique identifier of the user (numeric, username, email...)
+
+# if the user exists
 Datadog::Kit::AppSec::Events.track_login_failure(trace, user_id: 'my_user_id', user_exists: true)
 
-# ユーザー ID が存在しない場合
+# if the user doesn't exist
 Datadog::Kit::AppSec::Events.track_login_failure(trace, user_id: 'my_user_id', user_exists: false)
 ```
 {{% /tab %}}
@@ -564,6 +573,8 @@ dd-trace-php v0.84.0 からは、PHP トレーサーの API を使用してユ�
 {{% tab "ログイン失敗" %}}
 ```php
 <?php
+// If no numeric userId is available, you may use any unique string as userId instead (username, email...)
+// Make sure that the value is unique per user (and not per attacker/IP)
 \datadog\appsec\track_user_login_failure_event($id, $exists, ['email' => $email])
 ?>
 ```
@@ -582,7 +593,7 @@ dd-trace-php v0.84.0 からは、PHP トレーサーの API を使用してユ�
 
 {{< /programming-lang >}}
 {{< programming-lang lang="nodejs" >}}
-dd-trace-js v3.13.1 からは、NodeJS トレーサーの API を使用してユーザーイベントを追跡することができます。
+dd-trace-js v3.13.1 からは、Node.js トレーサーの API を使用してユーザーイベントを追跡することができます。
 
 次の例は、ログインイベントやカスタムイベント (サインアップを例とする) を追跡する方法を示しています。
 
@@ -591,15 +602,15 @@ dd-trace-js v3.13.1 からは、NodeJS トレーサーの API を使用してユ
 ```javascript
 const tracer = require('dd-trace')
 
-// コントローラーで
+// in a controller:
 const user = {
-  id: 'user-id', // id は必須です
-  email: 'user@email.com' // その他のフィールドはオプションです
+  id: 'user-id', // id is mandatory, if no numeric ID is available, any unique identifier will do (username, email...)
+  email: 'user@email.com' // other fields are optional
 }
-const metadata = { custom: 'value' } // 任意フィールドを持つオプションのメタデータ
+const metadata = { custom: 'value' } // optional metadata with arbitrary fields
 
-// ユーザー認証に成功したイベントのログ
-tracer.appsec.trackUserLoginSuccessEvent(user, metadata) // metadata はオプションです
+// Log a successful user authentication event
+tracer.appsec.trackUserLoginSuccessEvent(user, metadata) // metadata is optional
 ```
 {{% /tab %}}
 
@@ -607,12 +618,12 @@ tracer.appsec.trackUserLoginSuccessEvent(user, metadata) // metadata はオプ�
 ```javascript
 const tracer = require('dd-trace')
 
-// コントローラーで
-const userId = 'user-id'
-const userExists = true // ユーザーログインがデータベースに存在する場合、例えば
-const metadata = { custom: 'value' } // 任意フィールドを持つオプションのメタデータ
+// in a controller:
+const userId = 'user-id' // if no numeric ID is available, any unique identifier will do (username, email...)
+const userExists = true // if the user login exists in database for example
+const metadata = { custom: 'value' } // optional metadata with arbitrary fields
 
-// metadata はオプションです
+// metadata is optional
 tracer.appsec.trackUserLoginFailureEvent(userId, userExists, metadata)
 ```
 {{% /tab %}}
@@ -659,8 +670,9 @@ track_user_login_success_event(tracer, "userid", metadata)
 from ddtrace.appsec.trace_utils import track_user_login_failure_event
 from ddtrace import tracer
 metadata = {"custom": "customvalue"}
-# exists は、ログインに失敗したユーザーがシステムに存在するかどうかを示します
+# exists indicates if the failed login user exists in the system
 exists = False
+# if no numeric userId is available, any unique identifier will do (username, email...)
 track_user_login_failure_event(tracer, "userid", exists, metadata)
 ```
 {{% /tab %}}
@@ -670,7 +682,7 @@ track_user_login_failure_event(tracer, "userid", exists, metadata)
 ```python
 from ddtrace.appsec.trace_utils import track_custom_event
 from ddtrace import tracer
-metadata = {"usr.id": "12345"}
+metadata = {"usr.id": "userid"}
 event_name = "users.signup"
 track_custom_event(tracer, event_name, metadata)
 ```
@@ -702,7 +714,7 @@ track_custom_event(tracer, event_name, metadata)
 
 ## ユーザーアクティビティイベントの自動追跡
 
-ASM を有効にすると、最近の Datadog トレーシングライブラリは、ユーザーアクティビティイベントの自動検出を試みます。
+When ASM is enabled, Datadog Tracing Libraries attempt to detect user activity events automatically.
 
 自動検出できるイベントは以下の通りです。
 
@@ -710,21 +722,50 @@ ASM を有効にすると、最近の Datadog トレーシングライブラリ�
 - `users.login.failure`
 - `users.signup`
 
-### ユーザーアクティビティイベント自動追跡モード
+### Automatic user activity event tracking modes
 
-ユーザーアクティビティの自動追跡には、<code>safe</code> モードと <code>extended</code> モードの 2 種類があります
+Automatic user activity tracking offers the following modes:
 
-<code>safe</code> モードでは、トレースライブラリはイベントのメタデータに PII 情報を含めません。トレーサーライブラリはユーザー ID の収集を試みますが、ユーザー ID が有効な [GUID][10] である場合のみです
+- `identification` mode (short name: `ident`): 
+  - This mode is the default and always collects the user ID or best effort.
+  - The user ID is collected on login success and login failure. With failure, the user ID is collected regardless of whether the user exists or not.
+  - When the instrumented framework doesn’t clearly provide a user ID, but rather a structured user object, the user ID is determined on a best effort basis based on the object field names. This list of field names are considered, ordered by priority:
+    - `id`
+    - `email`
+    - `username`
+    - `login`
+    - `user`
+  - If no user ID is available or found, the user event is not emitted.
+- `anonymization` mode (short name: `anon`):
+  - This mode is the same as `identification`, but anonymizes the user ID.
+- `disabled` mode:
+  - ASM libraries do *not* collect any user ID from their automated instrumentations. 
+  - User login events are not emitted.
 
-<code>extended</code> モードでは、トレースライブラリはユーザー ID とユーザーのメールアドレスを収集しようとします。このモードでは、ユーザー ID のタイプが GUID であるかどうかをチェックしません。トレースライブラリは、イベントから抽出できる値であれば何でもレポートします。
+<div class="alert alert-info">All modes only affect automated instrumentation. The modes don't apply to manual collection. Manual collection is configured using an SDK, and those settings are not overridden by automated instrumentation.</div>
 
-ユーザーイベント自動追跡モードを構成するには、環境変数 <code>DD_APPSEC_AUTOMATED_USER_EVENTS_TRACKING</code> を <code>safe</code> または <code>extended</code> に設定します。デフォルトでは、トレーサーライブラリは <code>safe</code> モードを使用します。
+Datadog libraries allow you to configure auto-instrumentation by using the `DD_APPSEC_AUTO_USER_INSTRUMENTATION_MODE` environment variable with the short name for the mode: `ident`|`anon`|`disabled`.
 
-**注**: トレースライブラリがユーザーイベントから情報を抽出できない場合があります。イベントは空のメタデータでレポートされます。そのような場合は、[SDK](#adding-business-logic-information-login-success-login-failure-any-business-logic-to-traces) を使用して、ユーザーイベントを手動でインスツルメンテーションすることをお勧めします。
+The default mode is `identification` mode (short name: `ident`).
+
+For example, `DD_APPSEC_AUTO_USER_INSTRUMENTATION_MODE=anon`.
+
+### Deprecated modes
+
+<div class="alert alert-info">Previous modes are deprecated, but compatibility will be maintained until the next major release.</div>
+
+The following modes are deprecated:
+
+- `safe` mode: The trace library does not include any PII information on the events metadata. The tracer library tries to collect the user ID, and only if the user ID is a valid [GUID][10]
+- `extended` mode: The trace library tries to collect the user ID, and the user email. In this mode, Datadog does not check the type for the user ID to be a GUID. The trace library reports whatever value can be extracted from the event.
+
+**Note**: There could be cases in which the trace library won't be able to extract any information from the user event. The event would be reported with empty metadata. In those cases, use the [SDK](#adding-business-logic-information-login-success-login-failure-any-business-logic-to-traces) to manually instrument the user events.
 
 ## ユーザーアクティビティイベントの自動追跡を無効にする
 
-これらのイベントの検出を無効にするには、環境変数 <code>DD_APPSEC_AUTOMATED_USER_EVENTS_TRACKING</code> を <code>disabled</code> に設定します。これは、Datadog Agent ではなく、Datadog トレーシングライブラリをホストするアプリケーションで設定する必要があります。
+If you wish to disable the detection of these events, you should set the environment variable `DD_APPSEC_AUTOMATED_USER_EVENTS_TRACKING_ENABLED` to `false`. This should be set on the application hosting the Datadog Tracing Library, and not on the Datadog Agent.
+
+The previous environment variable was named `DD_APPSEC_AUTOMATED_USER_EVENTS_TRACKING`.
 
 ## その他の参考資料
 
@@ -739,3 +780,5 @@ ASM を有効にすると、最近の Datadog トレーシングライブラリ�
 [9]: /ja/security/default_rules/bl-password-reset/
 [10]: /ja/security/default_rules/bl-payment-failures/
 [11]: https://guid.one/guid
+[12]: /ja/security/default_rules/appsec-ato-bf/
+[13]: /ja/security/default_rules/distributed-ato-ua-asn/

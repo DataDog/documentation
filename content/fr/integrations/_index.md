@@ -11,11 +11,13 @@ aliases:
 - /fr/integrations/shoreline_software_license/
 cascade:
 - _target:
-    path: /integrations/akamai_datastream_2.md
+    path: /integrations/akamai_datastream_2
+    lang: fr
   aliases:
-  - /integrations/akamai_datastream
+  - /fr/integrations/akamai_datastream
 - _target:
-    path: /integrations/azure.md
+    path: /integrations/azure
+    lang: fr
   algolia:
     category: Documentation
     rank: 80
@@ -24,7 +26,8 @@ cascade:
     - azure
     - microsoft azure
 - _target:
-    path: /integrations/kubernetes_state_core.md
+    path: /integrations/kubernetes_state_core
+    lang: fr
   algolia:
     category: Documentation
     rank: 60
@@ -32,7 +35,8 @@ cascade:
     tags:
     - ksm
 - _target:
-    path: /integrations/google_cloud_platform.md
+    path: /integrations/google_cloud_platform
+    lang: fr
   algolia:
     category: Documentation
     rank: 80
@@ -41,7 +45,8 @@ cascade:
     - gcp
     - google cloud platform
 - _target:
-    path: /integrations/amazon_web_services.md
+    path: /integrations/amazon_web_services
+    lang: fr
   algolia:
     category: Documentation
     rank: 80
@@ -50,7 +55,8 @@ cascade:
     - aws
     - amazon web services
 - _target:
-    path: /integrations/eks_fargate.md
+    path: /integrations/eks_fargate
+    lang: fr
   algolia:
     category: Documentation
     rank: 60
@@ -58,7 +64,8 @@ cascade:
     tags:
     - journalisation eks
 - _target:
-    path: /integrations/win32_event_log.md
+    path: /integrations/win32_event_log
+    lang: fr
   algolia:
     category: Documentation
     rank: 60
@@ -66,60 +73,73 @@ cascade:
     tags:
     - event viewer
   aliases:
-  - /integrations/eventviewer/
+  - /fr/integrations/eventviewer/
 - _target:
-    path: /integrations/lambdatest_license.md
+    path: /integrations/lambdatest_license
+    lang: fr
   aliases:
-  - /integrations/lambdatest_software_license/
+  - /fr/integrations/lambdatest_software_license/
 - _target:
-    path: /integrations/mongo.md
+    path: /integrations/mongo
+    lang: fr
   aliases:
-  - /integrations/mongodb/
+  - /fr/integrations/mongodb/
 - _target:
-    path: /integrations/rapdev_validator.md
+    path: /integrations/rapdev_validator
+    lang: fr
   aliases:
-  - /integrations/rapdev_dashboard_widget_pack/
+  - /fr/integrations/rapdev_dashboard_widget_pack/
 - _target:
-    path: /integrations/wmi_check.md
+    path: /integrations/wmi_check
+    lang: fr
   aliases:
-  - /integrations/wmi/
+  - /fr/integrations/wmi/
 - _target:
-    path: /integrations/jfrog_platform_self_hosted.md
+    path: /integrations/jfrog_platform_self_hosted
+    lang: fr
   aliases:
-  - /integrations/jfrog_platform/
+  - /fr/integrations/jfrog_platform/
 - _target:
-    path: /integrations/komodor_license.md
+    path: /integrations/komodor_license
+    lang: fr
   aliases:
-  - /integrations/komodor_komodor/
+  - /fr/integrations/komodor_komodor/
 - _target:
-    path: /integrations/stormforge_license.md
+    path: /integrations/stormforge_license
+    lang: fr
   aliases:
-  - /integrations/stormforge_stormforge_license/
+  - /fr/integrations/stormforge_stormforge_license/
 - _target:
-    path: /integrations/feed.md
+    path: /integrations/feed
+    lang: fr
   aliases:
-  - /integrations/rss/
+  - /fr/integrations/rss/
 - _target:
-    path: /integrations/java.md
+    path: /integrations/java
+    lang: fr
   aliases:
-  - /agent/faq/jmx_integrations/
-  - /agent/faq/docker-jmx/
+  - /fr/agent/faq/jmx_integrations/
+  - /fr/agent/faq/docker-jmx/
 - _target:
-    path: /integrations/amazon_elb.md
+    path: /integrations/amazon_elb
+    lang: fr
   aliases:
-  - /integrations/awselb
+  - /fr/integrations/awselb
 - _target:
-    path: /integrations/elastic.md
+    path: /integrations/elastic
+    lang: fr
   aliases:
-  - /integrations/awses
+  - /fr/integrations/awses
 - _target:
-    path: /integrations/amazon_s3.md
+    path: /integrations/amazon_s3
+    lang: fr
   aliases:
-  - /integrations/awss3
+  - /fr/integrations/awss3
 - _target:
-    path: /integrations/snowflake_web.md
+    path: /integrations/snowflake_web
+    lang: fr
   aliases:
-  - /integrations/snowflake/
+  - /fr/integrations/snowflake/
 description: Rassembler des données de tous vos systèmes, toutes vos applications
   et tous vos services
 disable_sidebar: true

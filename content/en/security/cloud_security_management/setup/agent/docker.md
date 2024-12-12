@@ -10,6 +10,8 @@ aliases:
 
 Use the following instructions to enable Misconfigurations and Threat Detection.
 
+{{< partial name="security-platform/CSW-billing-note.html" >}}
+
 ## Prerequisites
 
 - Datadog Agent version `7.46` or later.

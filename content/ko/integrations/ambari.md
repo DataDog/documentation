@@ -34,7 +34,7 @@ draft: false
 git_integration_title: ambari
 integration_id: ambari
 integration_title: Ambari
-integration_version: 4.2.1
+integration_version: 6.0.0
 is_public: true
 manifest_version: 2.0.0
 name: ambari
@@ -50,6 +50,7 @@ tile:
   - Category::Network
   - Supported OS::Linux
   - Supported OS::macOS
+  - 제공::통합
   configuration: README.md#Setup
   description: 모든 ambari 관리형 클러스터에 대해 호스트 또는 서비스별로 메트릭 가져오기
   media: []
@@ -74,11 +75,11 @@ Ambari 검사는 [Datadog Agent][2] 패키지에 포함되어 있어 서버에 �
 ### 구성
 
 {{< tabs >}}
-{{% tab "호스트" %}}
+{{% tab "Host" %}}
 
 #### 호스트
 
-호스트에서 실행 중인 Agent에 대해 이 검사를 설정하려면:
+호스트에서 실행 중인 에이전트에 대해 이 점검을 구성하려면:
 
 ##### 메트릭 수집
 

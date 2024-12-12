@@ -10,12 +10,12 @@ further_reading:
 - link: /synthetics/settings/
   tag: Documentation
   text: Paramètres de la surveillance Synthetic
-title: Explorer vos données RUM et Session Replay dans Synthetics
+title: Découvrez un aperçu des fonctionnalités du RUM dans Synthetics
 ---
 
 ## Présentation
 
-<div class="alert alert-info">Si vous n'avez pas accès à la solution Real User Monitoring, vous pouvez prévisualiser des données relatives à RUM, à Session Replay et au suivi des erreurs, ainsi que des données de performance supplémentaires, depuis vos exécutions de test Browser Synthetic.</div>
+<div class="alert alert-info">Si vous avez accès à la solution Real User Monitoring, vous pouvez prévisualiser des données relatives à RUM, à Session Replay et au suivi des erreurs, ainsi que des données de performance supplémentaires, depuis vos exécutions de test Browser Synthetic.</div>
 
 Les tests Browser Synthetic intègrent le SDK Real User Monitoring. Vous pouvez donc explorer ce qui suit :
 
@@ -31,7 +31,7 @@ Si l'application cible est déjà instrumentée à l'aide de RUM, veillez à ne 
 
 Dans l'enregistrement de votre test Browser, cliquez sur l'option **Collect RUM Data on** au-dessus du bouton **Start Recording**, puis sélectionnez l'application pour laquelle vous souhaitez recueillir des données. Une fois la configuration de votre test et votre enregistrement validée, la solution RUM recueille des données sur les tests et génère des enregistrements de session à partir de vos exécutions de test Browser.
 
-1. Accédez à [**UX Monitoring**> **Settings** > **Integration Settings**][5].
+1. Accédez à **Digital Experience** > **Settings** (sous Synthetic Monitoring & Testing) > [**Integration Settings**][5].
 2. Sous **Synthetic Data RUM Collection**, cliquez sur **Enable Synthetic RUM data collection** pour permettre à Datadog de collecter des données RUM à partir de vos exécutions de test.
 3. Cliquez sur **Save RUM Data Collection**.
 4. Sous **Synthetic Data RUM Applications**, sélectionnez une suggestion d'application RUM par défaut depuis le menu déroulant de l'enregistreur de test Browser.
@@ -69,8 +69,8 @@ Pour revenir à la vue Synthetics et aux résultats de votre test, cliquez sur *
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/real_user_monitoring/session_replay/
-[2]: /fr/real_user_monitoring/session_replay/developer_tools/
+[1]: /fr/real_user_monitoring/session_replay/browser/
+[2]: /fr/real_user_monitoring/session_replay/browser/developer_tools/
 [3]: /fr/real_user_monitoring/explorer/
 [4]: /fr/real_user_monitoring/error_tracking/
 [5]: https://app.datadoghq.com/synthetics/settings/integrations

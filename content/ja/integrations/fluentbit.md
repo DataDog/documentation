@@ -1,6 +1,7 @@
 ---
 categories:
 - ログの収集
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/documentation/blob/master/content/en/integrations/fluentbit.md
 description: Fluent Bit を構成し、ログデータを複数ソースから収集してパースし、転送します。
@@ -13,7 +14,6 @@ has_logo: true
 integration_id: fluentbit
 integration_title: Fluent Bit
 is_public: true
-custom_kind: integration
 name: fluentbit
 public_title: Datadog-Fluent Bit インテグレーション
 short_description: ログデータを複数ソースから収集してパースし、転送します。
@@ -38,17 +38,18 @@ Fluent Bit を構成して、ログデータを複数の異なるソースから
 
 #### コンフィギュレーションパラメーター
 
-| キー            | 説明                                                                                                              | デフォルト                                                                     |
-| -------------- | ------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------- |
-| ホスト           | _必須_ - ログの送信先となる Datadog サーバー。                                                         | {{< region-param key="http_endpoint" code="true" >}} |
-| TLS            | _必須_ - エンドツーエンドの安全な通信のためのセキュリティプロトコル。この設定は `on` に設定する必要があります。              | `off`                                                                       |
-| apikey         | _必須_ - [Datadog API キー][4]。                                                                                  |                                                                             |
-| 圧縮       | _推奨_ - ペイロードを GZIP 形式で圧縮します。Datadog はこれを `gzip` と設定することをサポートおよび推奨します。           |                                                                             |
-| dd_service     | _推奨_ - ログを生成するサービス (アプリケーションまたはデータベース) の名前。人間が解読可能であること。 |                                                                             |
-| dd_source      | _推奨_ - サービスの基盤となるテクノロジーの名前。人間が解読可能であること。たとえば `postgres` や `nginx` など。 |                                                                             |
-| dd_message_key | _推奨_ - ログメッセージを保存するために属性を使用するように設定します。                                                      |                                                                             |
-| dd_tags        | _任意_ - Datadog のログに割り当てる[タグ][10]。                                                  |                                                                             |
-| プロバイダー       | _任意_ - 使用するプロバイダー。Fargate Tasks から Datadog にログを送信する場合は、これを `ecs` に設定します。         |                                                                             |
+| キー            | 説明                                                                                                                                                                                                                                                                                                                 | デフォルト                                                                     |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------                                                                                                                                                                                                    | --------------------------------------------------------------------------- |
+| ホスト           | _必須_ - ログの送信先となる Datadog サーバー。                                                                                                                                                                                                                                                            | {{< region-param key="http_endpoint" code="true" >}}                        |
+| TLS            | _必須_ - エンドツーエンドの安全な通信のためのセキュリティプロトコル。この設定は `on` に設定する必要があります。                                                                                                                                                                                                                        | `off`                                                                       |
+| apikey         | _必須_ - [Datadog API キー][4]。                                                                                                                                                                                                                                                                                     |                                                                             |
+| 圧縮       | _推奨_ - ペイロードを GZIP 形式で圧縮します。Datadog はこれを `gzip` と設定することをサポートおよび推奨します。                                                                                                                                                                                                              |                                                                             |
+| dd_service     | _推奨_ - ログを生成するサービス (アプリケーションまたはデータベース) の名前。人間が解読可能であること。                                                                                                                                                                                                    |                                                                             |
+| dd_source      | _推奨_ - サービスの基盤となるテクノロジーの名前。人間が解読可能であること。たとえば `postgres` や `nginx` など。                                                                                                                                                                                                    |                                                                             |
+| dd_message_key | _推奨_ - ログメッセージを保存するために属性を使用するように設定します。                                                                                                                                                                                                                                                         |                                                                             |
+| dd_tags        | _任意_ - Datadog のログに割り当てる[タグ][10]。                                                                                                                                                                                                                                                     |                                                                             |
+| dd_hostname    | _オプション_ - ログを発行したホストに関連付けることができます。未設定の場合、Datadog はホストが[標準のホスト属性][12]のいずれかとして設定されているとみなします。 
+| プロバイダー       | _任意_ - 使用するプロバイダー。Fargate Tasks から Datadog にログを送信する場合は、これを `ecs` に設定します。                                                                                                                                                                                                            |                                                                             |
 
 #### コンフィギュレーションファイルの例
 
@@ -85,3 +86,4 @@ Fluent Bit を構成して、ログデータを複数の異なるソースから
 [9]: https://app.datadoghq.com/logs
 [10]: /ja/getting_started/tagging/
 [11]: /ja/help/
+[12]: /ja/logs/log_configuration/pipelines/?tab=host#preprocessing

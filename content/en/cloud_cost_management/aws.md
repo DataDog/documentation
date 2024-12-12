@@ -14,9 +14,6 @@ further_reading:
   text: "Gain insights into your Google Cloud bill"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Cloud Cost Management is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
 
 ## Overview
 
@@ -258,17 +255,55 @@ The following out-of-the-box tags are available for filtering and grouping data:
 | `aws_savings_plan_arn`       | The ARN of the Savings Plan the item benefited from.|
 | `aws_usage_type`             | The usage details of the item (for example, BoxUsage:i3.8xlarge).|
 | `aws_operation`              | The operation associated with the item (for example, RunInstances).|
-| `aws_region`                 | The region associated with the item.|
+| `aws_region`                 | The region associated with the item (for example, us-east-1).|
 | `aws_availability_zone`      | The availability zone associated with the item.|
 | `aws_resource_id`            | The resource ID associated with the item.|
-| `aws_instance_type`          | The instance types associated with your items.|
+| `aws_instance_type`          | The instance type of the item.|
 | `aws_instance_family`        | The instance family associated with your item (for example, Storage optimized).|
+| `aws_datatransfer_type`      | The type of data transfer associated with the item (for example, cross-zone or cross-region).|
+| `aws_datatransfer_direction` | The direction of data transfer associated with the item (for example, in or out).|
 | `is_aws_ec2_compute`         | Whether the usage is related to EC2 compute.|
 | `is_aws_ec2_compute_on_demand`| Whether the usage is on-demand.|
 | `is_aws_ec2_compute_reservation`| Whether the usage is associated with a Reserved Instance.|
 | `is_aws_ec2_capacity_reservation`| Whether the usage is associated with a Capacity Reservation.|
 | `is_aws_ec2_spot_instance`   | Whether the usage is associated with a Spot Instance.|
 | `is_aws_ec2_savings_plan`    | Whether the usage is associated with a Savings Plan.|
+| `aws_bill_entity` | The AWS seller that your account is with. Transactions can either be an AWS Marketplace purchase (`AWS Marketplace`) or a purchase of other AWS services (`AWS`). |
+| `aws_bill_type` | The type of bill that this report covers (such as `Purchase`). |
+| `aws_cost_type` | The type of charge covering the line item (such as `SavingsPlanCoveredUsage`). |
+| `aws_discount_lease_term` | The length of time that a Reserved instance is reserved for. |
+| `aws_discount_purchase_option` | How you chose to pay for a reservation (such as `All Upfront`). |
+| `aws_ec2_compute_product_family` | The type of usage for an EC2 Compute line item (such as `BoxUsage` or `SpotUsage`). |
+| `aws_pricing_usage_unit` | The pricing unit that AWS used for calculating the usage cost (such as `Hours`). |
+| `aws_reservation_modification_status` | Indicates whether the RI lease was modified or unaltered (such as `Manual`). |
+| `bill/billing_entity` | The AWS seller that your account is with. Transactions can either be an AWS Marketplace purchase (`AWS Marketplace`) or a purchase of other AWS services (`AWS`). |
+| `bill/bill_type` | The type of bill that this report covers (such as `Purchase`). |
+| `bill/invoicing_entity` | The AWS entity that issues the invoice. |
+| `bill/payer_account_id` | The account ID of the paying account. For an organization in AWS Organizations, this is the account ID of the management account. |
+| `is_aws_ec2_compute_savings_plan` | `true` for line items that represent EC2 Compute usage, paid for using a Savings Plan. |
+| `line_item/currency_code` | The currency that this line item is shown in (`USD` by default). |
+| `line_item/legal_entity` | The provider of your AWS services. |
+| `line_item/line_item_type` | The type of charge covered by the line item (such as `Credit`). |
+| `line_item/operation` | The specific AWS operation covered by the line item (such as `RunInstances`). |
+| `line_item/product_code` | The code of the product measured (such as `Amazon EC2` for Amazon Elastic Cloud Compute). |
+| `line_item/resource_id` | The individual resource ID associated with the line item (Optional). |
+| `line_item/tax_type` | The type of tax that AWS applied to the line item. |
+| `line_item/usage_account_id` | The ID of the account that used the line item. |
+| `line_item/usage_type` | The usage details of the line item (such as `USW2-BoxUsage:m2.2xlarge`). |
+| `pricing/lease_contract_length` | The length of time that the RI is reserved for. |
+| `pricing/purchase_option` | How you chose to pay for the line item (such as `All Upfront`). |
+| `pricing/term` | Whether your AWS usage is `Reserved` or `On-Demand`. |
+| `pricing/unit` | The pricing unit that AWS used for calculating the usage cost (such as `Hours`). |
+| `reservation/availability_zone` | The Availability Zone of the resource associated with the line item (such as `us-east-1`). |
+| `reservation/modification_status` | Shows whether the RI lease was modified or unaltered (such as `Manual`). |
+| `reservation/reservation_arn` | The ARN of the RI that the line item benefited from. |
+| `reservation/subscription_id` | The unique ID that maps the line item with the associated offer. |
+| `savings_plan/instance_type_family` | The instance family that is associated with the specified usage (such as `m4`). |
+| `savings_plan/offering_type` | The type of Savings Plan purchased (such as `ComputeSavingsPlans`). |
+| `savings_plan/payment_option` | The payment options available for the Savings Plan (such as `All Upfront`). |
+| `savings_plan/purchase_term` | Describes the duration or term of the Savings Plan (such as `1yr`). |
+| `savings_plan/region` | The AWS Region that hosts the AWS services (such as `US East (N. Virginia)`). |
+| `savings_plan/savings_plan_arn` | The unique Savings Plan identifier. |
 
 #### Cost and observability correlation
 
@@ -277,6 +312,7 @@ Viewing costs in context of observability data is important to understand how in
 For example, to view cost and utilization for each RDS database, you can make a table with `aws.cost.amortized`, `aws.rds.cpuutilization`, and `aws.rds.freeable_memory` (or any other RDS metric) and group by `dbinstanceidentifier`. Or, to see Lambda usage and costs side by side, you can graph `aws.lambda.concurrent_executions` and `aws.cost.amortized` grouped by `functionname`.
 
 The following out-of-the-box tags are available:
+
 | AWS Product                  | Tag       |
 | ---------------------------- | ----------------- |
 | ec2                | `instance_id`|

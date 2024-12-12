@@ -1,8 +1,9 @@
 ---
-title: Network Time Protocol (NTP) に関する問題
 aliases:
-  - /ja/agent/faq/network-time-protocol-ntp-offset-issues
+- /ja/agent/faq/network-time-protocol-ntp-offset-issues
+title: Network Time Protocol (NTP) に関する問題
 ---
+
 以下の問題は、Agent を介してメトリクスを報告するホストの NTP オフセットに関連している可能性があります。
 
 * 不正なアラートのトリガー
@@ -31,6 +32,6 @@ aliases:
     {{< nextlink href="http://www.freebsd.org/doc/en/books/handbook/network-ntp.html" tag="FreeBSD">}}NTP との時刻同期{{< /nextlink >}}
 {{< /whatsnext >}}
 
-[1]: /ja/agent/guide/agent-commands/#agent-status-and-information
+[1]: /ja/agent/configuration/agent-commands/#agent-status-and-information
 [2]: /ja/integrations/ntp/
 [3]: https://app.datadoghq.com/check/summary

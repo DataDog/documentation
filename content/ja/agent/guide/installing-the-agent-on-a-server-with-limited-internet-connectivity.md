@@ -1,11 +1,19 @@
 ---
+algolia:
+  tags:
+  - airgap
+  - airgapped
+  - air gap
+  - air gapped
+  - air-gap
+  - air-gapped
 aliases:
 - /ja/agent/faq/how-do-i-install-the-agent-on-a-server-with-limited-internet-connectivity/
 further_reading:
 - link: /agent/
   tag: ドキュメント
   text: Datadog Agent の詳細
-- link: /agent/proxy/
+- link: /agent/configuration/proxy/
   tag: ドキュメント
   text: プロキシの詳細
 title: インターネット接続が制限されているサーバーへの Agent のインストール
@@ -22,7 +30,7 @@ title: インターネット接続が制限されているサーバーへの Age
 
 インターネットに直接アクセスできないサーバーの場合、Agent はプロキシを経由するように構成できます ([Agent Proxy の構成][2]を参照)。インターネットへの接続が制限されているサーバーでは、サーバーの OS に関連するパッケージを使用して Agent をインストールすることができます。[Agent インストール手順][1]には、1 行のインストールコマンドの下にステップバイステップの手順が記載されています。
 
-ターゲットシステムがパッケージリポジトリへの直接アクセスをブロックされている場合、他のサーバーを使用してリポジトリからパッケージをダウンロードし、ターゲットシステムに転送してローカルにインストールします。
+If the target system is blocked from accessing the package repository directly, download the package from the repository using another server, then transfer it over to the target system for a local install.
 
 Agent 6 の RPM パッケージは [https://yum.datadoghq.com/stable/6/][3] に、Agent 7 の RPM パッケージは [https://yum.datadoghq.com/stable/7/][4] に、DEB パッケージは [https://apt.datadoghq.com/pool/d/da/][5] に掲載されています。
 
@@ -53,9 +61,9 @@ sudo sh -c "sed 's/api_key:.*/api_key: <YOUR_DATADOG_API_KEY>/' /etc/datadog-age
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest
-[2]: /ja/agent/proxy
+[2]: /ja/agent/configuration/proxy
 [3]: https://yum.datadoghq.com/stable/6
 [4]: https://yum.datadoghq.com/stable/7
 [5]: https://apt.datadoghq.com/pool/d/da
 [6]: https://app.datadoghq.com/organization-settings/api-keys
-[7]: /ja/agent/guide/agent-commands/#start-the-agent
+[7]: /ja/agent/configuration/agent-commands/#start-the-agent

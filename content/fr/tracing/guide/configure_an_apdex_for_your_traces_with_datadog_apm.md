@@ -34,7 +34,7 @@ Les seuils Apdex doivent être définis par des administrateurs, pour chaque ser
 
 Pour visualiser le score Apdex de votre application ou service Web, procédez comme suit :
 
-1. Depuis la [page Services][3], cliquez sur un service Web. Sélectionnez ensuite Apdex au lieu de Latency dans le graphique situé en haut à droite. Si cette option n'est pas disponible, vérifiez que vous avez bien sélectionné un service Web :
+1. Dans le [catalogue des service][3], cliquez sur un service Web. Dans le graphique en haut à droite, sélectionnez l'option Apdex au lieu de Latency. Si l'option Apdex n'est pas disponible, vérifiez que vous avez cliqué sur un service Web :
 
    {{< img src="tracing/faq/apdex_selection.png" alt="Sélection Apdex" >}}
 
@@ -50,12 +50,12 @@ Pour visualiser le score Apdex de votre application ou service Web, procédez co
 
    {{< img src="tracing/faq/apm_save.png" alt="Enregistrement Apdex" >}}
 
-## Afficher votre Apdex sur votre page Service
+## Afficher votre Apdex dans le service des catalogues
 
-Pour afficher l'Apdex sur votre [page Service][2], sélectionnez-le dans le menu de configuration, dans le coin supérieur droit de la page :
+Pour afficher les scores Apdex dans le [catalogue des services][2], sélectionnez cette option dans le menu de configuration, en haut à droite de la page :
 
-{{< img src="tracing/faq/apdex_service_list.png" alt="Liste des services Apdex" >}}
+{{< img src="tracing/faq/apdex_service_list.png" alt="Catalogue des services Apdex" >}}
 
 [1]: https://www.apdex.org/
-[2]: https://app.datadoghq.com/apm/services
-[3]: https://app.datadoghq.com/apm/services?query=type%3Aweb
+[2]: https://app.datadoghq.com/services
+[3]: https://app.datadoghq.com/services?query=type%3Aweb

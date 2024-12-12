@@ -23,6 +23,7 @@ author:
   support_email: justin.morris@ferocia.com.au
 categories:
 - メトリクス
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/puma/README.md
 display_on_public_website: true
@@ -32,7 +33,6 @@ integration_id: puma
 integration_title: Puma
 integration_version: 1.2.1
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: puma
 public_title: Puma
@@ -48,6 +48,7 @@ tile:
   - Supported OS::Windows
   - Category::Metrics
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: Ruby および Rack のための高速コンカレントウェブサーバー
   media: []
@@ -63,11 +64,11 @@ tile:
 
 このチェックでは、[コントロールとステータス][2]サーバーにより提供される Puma メトリクスエンドポイントを使用して、Datadog Agent 経由で [Puma][1] を監視します。
 
-## 計画と使用
+## セットアップ
 
 Puma チェックは [Datadog Agent][3] パッケージに含まれていないため、お客様自身でインストールする必要があります。
 
-### インフラストラクチャーリスト
+### インストール
 
 Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Puma チェックをホストにインストールします。Docker Agent または 上記バージョン以前の Agent でインストールする場合は、[コミュニティインテグレーションの使用][4]をご参照ください。
 
@@ -79,7 +80,7 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Puma チェッ
 
 2. コアの[インテグレーション][5]と同様にインテグレーションを構成します。
 
-### ブラウザトラブルシューティング
+### 構成
 
 1. Puma のパフォーマンスデータの収集を開始するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `puma.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル puma.d/conf.yaml][6] を参照してください。
 
@@ -89,21 +90,21 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Puma チェッ
 
 [Agent の status サブコマンド][8]を実行し、Checks セクションの `puma` を探します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "puma" >}}
 
 
-### ヘルプ
+### イベント
 
 Puma には、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 {{< get-service-checks-from-git "puma" >}}
 
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][11]までお問合せください。
 

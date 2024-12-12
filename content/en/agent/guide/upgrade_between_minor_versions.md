@@ -13,11 +13,11 @@ aliases:
 
 The recommended way to upgrade between minor versions of the Agent is to use the `install_script_agent7.sh` script. The following commands work on all supported Linux distributions.
 
-Upgrading to a given Agent 7 minor version:
+Upgrading to a given Agent minor version:
 
 : `DD_AGENT_MINOR_VERSION=<target_minor> bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"`
 
-Upgrading to the latest Agent 7 minor version:
+Upgrading to the latest Agent minor version:
 
 : `bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"`
 

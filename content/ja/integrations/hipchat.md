@@ -2,6 +2,7 @@
 categories:
 - collaboration
 - notifications
+custom_kind: integration
 dependencies: []
 description: Datadog のアラートとグラフをチームの Hipchat ルームに送信。
 doc_link: https://docs.datadoghq.com/integrations/hipchat/
@@ -12,7 +13,6 @@ integration_id: ''
 integration_title: HipChat
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: '1.0'
 name: hipchat
 public_title: Datadog-HipChat インテグレーション

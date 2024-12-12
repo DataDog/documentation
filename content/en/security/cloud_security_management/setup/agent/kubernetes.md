@@ -9,11 +9,13 @@ aliases:
   - /security/cloud_security_management/setup/csm_enterprise/agent/kubernetes/
 ---
 
-Use the following instructions to enable Misconfigurations, Threat Detection, Host Vulnerability Management, and Container Vulnerability Management.
+Use the following instructions to enable Misconfigurations, Threat Detection, and Vulnerability Management.
+
+{{< partial name="security-platform/CSW-billing-note.html" >}}
 
 ## Prerequisites
 
-- Datadog Agent version `7.46` or later.
+- Latest Datadog Agent version. For installation instructions, see [Getting Started with the Agent][5] or install the Agent from the [Datadog UI][6].
 
 ## Installation
 
@@ -48,6 +50,10 @@ Use the following instructions to enable Misconfigurations, Threat Detection, Ho
           # Image collection is enabled by default with Datadog Operator version `>= 1.3.0`
           containerImage:
             enabled: true
+    
+            # Uncomment the following line if you are using Google Kubernetes Engine (GKE) or Amazon Elastic Kubernetes (EKS)
+            # uncompressedLayersSupport: true
+    
           # Enables Host Vulnerability Management
           host:
             enabled: true
@@ -80,15 +86,18 @@ Use the following instructions to enable Misconfigurations, Threat Detection, Ho
       sbom:
         containerImage:
           enabled: true
-        # Enables Container Vulnerability Management
-        # Image collection is enabled by default with Datadog Helm version `>= 3.46.0`
-        containerImageCollection:
-          enabled: true
+
           # Uncomment the following line if you are using Google Kubernetes Engine (GKE) or Amazon Elastic Kubernetes (EKS)
           # uncompressedLayersSupport: true
+
         # Enables Host Vulnerability Management
         host:
           enabled: true
+
+        # Enables Container Vulnerability Management
+        # Image collection is enabled by default with Datadog Helm version `>= 3.46.0`
+        # containerImageCollection:
+        #   enabled: true
     ```
 
 2. Restart the Agent.
@@ -138,3 +147,5 @@ Add the following settings to the `env` section of `security-agent` and `system-
 [2]: /security/threats
 [3]: /security/cloud_security_management/vulnerabilities
 [4]: /security/cloud_security_management/setup#supported-deployment-types-and-features
+[5]: /getting_started/agent
+[6]: https://app.datadoghq.com/account/settings/agent/latest

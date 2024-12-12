@@ -1,22 +1,22 @@
 ---
 further_reading:
 - link: /tracing/trace_collection/library_config/go/
-  tags: Documentation
+  tag: ドキュメント
   text: トレーシングライブラリの追加構成オプション
 - link: /tracing/trace_collection/dd_libraries/go/
-  tags: Documentation
+  tag: ドキュメント
   text: トレーシングライブラリの詳細設定手順
 - link: /tracing/trace_collection/compatibility/go/
-  tags: Documentation
+  tag: ドキュメント
   text: 自動インスツルメンテーションのためにサポートされている Go フレームワーク
 - link: /tracing/trace_collection/custom_instrumentation/go/
-  tags: Documentation
+  tag: ドキュメント
   text: トレースとスパンを手動で構成する
 - link: /tracing/trace_pipeline/ingestion_mechanisms/
-  tags: Documentation
+  tag: ドキュメント
   text: 取り込みのメカニズム
 - link: https://github.com/DataDog/dd-trace-Go
-  tags: GitHub
+  tag: ソースコード
   text: トレーシングライブラリオープンソースコードリポジトリ
 title: チュートリアル - Datadog Agent と同じホスト上の Go アプリケーションのトレースを有効にする
 ---
@@ -174,7 +174,7 @@ go mod tidy
 
 しばらく待って、Datadog の UI を見てみてください。[**APM > Traces**][11] に移動します。Traces リストには、次のように表示されます。
 
-{{< img src="tracing/guide/tutorials/tutorial-go-host-traces.png" alt="Traces ビューには、ホストから入ってくるトレースデータが表示されます。" style="width:100%;" >}}
+{{< img src="tracing/guide/tutorials/tutorial-go-host-traces2.png" alt="Traces view shows trace data coming in from host." style="width:100%;" >}}
 
 データベース (`db`) と `notes` アプリのエントリがあります。トレースリストには、すべてのスパン、いつ開始したか、どのリソースがスパンで追跡されたか、どれくらいの時間がかかったか、が表示されます。
 
@@ -363,7 +363,7 @@ func privateMethod1(ctx context.Context) {
 
 もし、期待通りのトレースが受信できない場合は、Go トレーサーのでデバッグモードを設定してください。詳しくは[デバッグモードの有効化][13]を読んでください。
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

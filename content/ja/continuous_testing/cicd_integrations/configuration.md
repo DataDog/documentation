@@ -13,19 +13,17 @@ further_reading:
   text: Continuous Testing と CI/CD について
 - link: /continuous_testing/explorer
   tag: ドキュメント
-  text: Synthetic Monitoring & Continuous Testing Explorer について
+  text: Learn about the Synthetic Monitoring & Testing Results Explorer
 - link: /continuous_testing/testing_tunnel
   tag: ドキュメント
   text: Continuous Testing Tunnel について
 title: Continuous Testing と CI/CD の構成
 ---
-<div class="alert alert-info">このページでは、継続的インテグレーション (CI) と継続的デリバリー (CD) のパイプラインの Continuous Testing テストの構成について説明します。CI のメトリクスやデータを Datadog のダッシュボードに取り込みたい場合は、<a href="https://docs.datadoghq.com/continuous_integration/" target="_blank">CI Visibility</a> のセクションを参照してください。</div>
+<div class="alert alert-info">This page is about configuring Continuous Testing tests for your Continuous Integration (CI) and Continuous Delivery (CD) pipelines. If you want to bring your CI/CD metrics and data into Datadog dashboards, see the <a href="https://docs.datadoghq.com/continuous_integration/" target="_blank">CI Visibility</a> section.</div>
 
 ## 概要
 
-NPM パッケージの `@datadog-ci` を使用すると、CI/CD パイプライン内で直接 Continuous Testing テストを実行することができます。Synthetic ブラウザテストがリグレッションを検出した場合、自動的にビルドを停止し、デプロイをブロックし、デプロイをロールバックすることが可能です。
-
-テストがどの URL から始まるかを構成するには、テストオブジェクトに `startUrl` を指定します。テストのオリジナルの開始 URL の任意の部分を使って、環境変数を含めて独自の開始 URL を構築します。
+Use the [`@datadog-ci` NPM package][1] to run Continuous Testing tests directly within your CI/CD pipeline. You can automatically halt a build, block a deployment, and roll back a deployment when a Synthetic test detects a regression.
 
 ## セットアップ
 
@@ -56,154 +54,43 @@ yarn add --dev @datadog/datadog-ci
 
 クライアントをセットアップするには、Datadog API キーとアプリケーションキーを構成する必要があります。これらのキーは次の 3 つの方法で定義できます。
 
-1. 環境変数として定義されています:
+1. Defined in a [global JSON configuration file](#global-configuration-file-options):
 
-   ```bash
-   export DATADOG_API_KEY="<API_KEY>"
-   export DATADOG_APP_KEY="<APPLICATION_KEY>"
-   ```
+    ```json
+    {
+      "apiKey": "<API_KEY>",
+      "appKey": "<APPLICATION_KEY>",
+    }
+    ```
 
-2. テストの実行中に CLI に渡す
+2. 環境変数として定義されています:
 
-   ```bash
-   yarn datadog-ci synthetics run-tests --apiKey "<API_KEY>" --appKey "<APPLICATION_KEY>"
-   ```
+    ```bash
+    export DATADOG_API_KEY="<API_KEY>"
+    export DATADOG_APP_KEY="<APPLICATION_KEY>"
+    ```
 
-3. または[グローバル JSON コンフィギュレーションファイル](#global-configuration-file-options)で定義されています。
+3. テストの実行中に CLI に渡す
 
-   システム上に JSON コンフィギュレーションファイルを作成します。[テストの起動時](#run-tests)に `--config` フラグを使用してファイルへのパスを指定します。ファイルパスを指定しない場合、Datadog はデフォルトのファイル名である `datadog-ci.json` を使用します。
+    ```bash
+    yarn datadog-ci synthetics run-tests --apiKey "<API_KEY>" --appKey "<APPLICATION_KEY>"
+    ```
 
 ### グローバルコンフィギュレーションファイルのオプション
 
-テストを実行する際には、コマンドラインで `--config` フラグを使用して、グローバルコンフィグレーションファイルのパスを指定します。
+Using a global configuration file (Global Config) is one of the ways to configure datadog-ci. To do so, create a JSON configuration file on your system. Specify the path to the file using the `--config` flag or configure it through the `DATADOG_SYNTHETICS_CONFIG_PATH` environment variable [when launching your tests](#run-tests-command) or [uploading a new application](#upload-application-command). If you don't specify a file path, Datadog looks for a file with the default filename of `datadog-ci.json`.
 
-グローバルコンフィギュレーションファイルの高度なオプションの一覧は、以下を参照してください。コンフィギュレーションファイルの例としては、この [`global.config.json` ファイル][9]を参照してください。
-
-`apiKey`
-: Datadog API にクエリーを送信する際に使用される API キー。
-
-`appKey`
-: Datadog API にクエリーを送信する際に使用されるアプリケーションキー。
-
-`datadogSite`
-: リクエストの送信先となる Datadog インスタンス。デフォルトは `datadoghq.com`。Datadog サイトは {{< region-param key="dd_site" code="true" >}} です。
-
-`failOnCriticalErrors`
-: テストがトリガーされなかったり、Datadog から結果を取得できなかった場合に CI ジョブを失敗させるためのブーリアンフラグ。デフォルトでは `false` に設定されています。
-
-`failOnMissingTests`
-: 公開 ID (`--public-id` CLI 引数、または[テストファイル](#test-files)にリストされている) を持つ指定したテストが少なくとも 1 つ実行中に見つからない場合 (例えば、プログラム的に削除されたか Datadog サイトで削除された場合)、CI ジョブが失敗するブール値フラグ。デフォルトは `false` に設定されています。
-
-`failOnTimeout`
-: 少なくとも一つのテストがデフォルトのテストタイムアウトを超えた場合、CI ジョブを失敗させるブーリアンフラグ。デフォルトでは `true` に設定されています。
-
-`files`
-: Synthetic テスト用[コンフィギュレーションファイル](#test-files)を検出するグロブパターン。
-
-`global`
-: すべてのテストに適用される Synthetic テストのオーバーライド。
-
-`mobileApplicationVersionFilePath`
-: すべての Synthetic モバイルアプリケーションテストのアプリケーションバージョンをオーバーライドします。
-
-`pollingTimeout`
-: **タイプ**: 整数<br>
-`datadog-ci` がテスト結果のポーリングを停止するまでの期間 (ミリ秒単位)。デフォルトは 30 分です。CI レベルでは、この期間の後に完了したテスト結果は失敗したと見なされます。
-
-`proxy`
-: Datadog への発信接続に使用されるプロキシ。`host` と `port` キーは必須の引数で、`protocol` キーの初期値は `http` です。サポートされる `protocol` キーの値は、`http`、`https`、`socks`、`socks4`、`socks4a`、`socks5`、`socks5h`、`pac+data`、`pac+file`、`pac+ftp`、`pac+http`、`pac+https` です。プロキシの構成に使用されるライブラリは、[proxy-agent][2] ライブラリです。
-
-`subdomain`
-: Datadog アプリケーションにアクセスするために設定されたカスタムサブドメインの名前。Datadog へのアクセスに使用する URL が `myorg.datadoghq.com` の場合、`subdomain` の値は `myorg` にする必要があります。
-
-`testSearchQuery`
-: 実行する Synthetic テストを選択するためのクエリを渡します。CLI でテストを実行する場合は、`-s` フラグを使用します。
-
-`tunnel`
-: [Continuous Testing Tunnel](#use-the-testing-tunnel) を使って、テストバッチを実行します。
-
-#### プロキシの利用
-
-グローバルコンフィギュレーションファイルの `proxy` キーを使用して、Datadog への送信接続に使用するプロキシを設定することが可能です。
-
-プロキシの設定には [`proxy-agent` ライブラリ][2]を使用しているので、サポートされているプロトコルは `http`、`https`、`socks`、`socks4`、`socks4a`、`socks5`、`socks5h`、`pac+data`、`pac+file`、`pac+ftp`、`pac+http` および `pac+https` となります。グローバルコンフィギュレーションファイルの `proxy` キーは、新しい `proxy-agent` インスタンスに渡されます。つまり、ライブラリの同じ構成がサポートされていることになります。
-
-**注**: `host` と `port` のキーは必須引数で、 `protocol` のキーは定義されていない場合、デフォルトで `http` になります。
-
-例: 
-
-```json
-{
-  "apiKey": "<DATADOG_API_KEY>",
-  "appKey": "<DATADOG_APPLICATION_KEY>",
-  "datadogSite": "datadoghq.com", // https://docs.datadoghq.com/getting_started/site/ で他の Datadog サイトを使用することもできます。デフォルトでは、リクエストは Datadog US1 に送信されます。
-  "failOnCriticalErrors": false,
-  "failOnMissingTests": false,
-  "failOnTimeout": true,
-  "files": ["{,!(node_modules)/**/}*.synthetics.json"],
-  "global": {
-    "allowInsecureCertificates": true,
-    "basicAuth": {"username": "test", "password": "test"},
-    "body": "{\"fakeContent\":true}",
-    "bodyType": "application/json",
-    "cookies": "name1=value1;name2=value2;",
-    "deviceIds": ["laptop_large"],
-    "followRedirects": true,
-    "headers": {"<NEW_HEADER>": "<NEW_VALUE>"},
-    "locations": ["aws:us-west-1"],
-    "retry": {"count": 2, "interval": 300},
-    "executionRule": "blocking",
-    "startUrlSubstitutionRegex": "s/(https://www.)(.*)/$1extra-$2/",
-    "startUrl": "{{URL}}?static_hash={{STATIC_HASH}}",
-    "variables": {"titleVariable": "new value"},
-    "pollingTimeout": 180000
-  },
-  "proxy": {
-    "auth": {
-      "username": "login",
-      "password": "pwd"
-    },
-    "host": "127.0.0.1",
-    "port": 3128,
-    "protocol": "http"
-  },
-  "subdomain": "subdomainname",
-  "tunnel": true
-}
-```
-
-### コマンドラインオプション
-
-組織が Datadog にアクセスするためにカスタムサブドメインを使用している場合、テスト結果の URL を適切に表示するために、`DATADOG_SUBDOMAIN` 環境変数または `subdomain` キーのグローバル構成ファイルでこれを設定する必要があります。
-
-例えば、Datadog にアクセスするための URL が `myorg.datadoghq.com` である場合、環境変数に `myorg` を設定します。
-
-```bash
-export DATADOG_SUBDOMAIN="myorg"
-```
-
-`DATADOG_SYNTHETICS_LOCATIONS` を使用すると、テストが実行される場所をオーバーライドすることができます。ロケーションは `;` で区切ってください。[テストファイル](#test-files)内の構成は、他のオーバーライドよりも優先されます。
-
-```bash
-export DATADOG_SYNTHETICS_LOCATIONS="aws:us-east-1;aws:us-east-2"
-```
-
-### API
-
-デフォルトでは、`datadog-ci` は作業ディレクトリのルートで動作し、`{,!(node_modules)/**/}*.synthetics.json` ファイル (`.synthetics.json` で終わる全てのファイル、ただし `node_modules` フォルダにあるものを除く) を検出します。このツールは `datadog-ci.json` をロードしますが、`--config` 引数でオーバーライドすることができます。
+See each command's list of configurations below for the list of advanced options in the global configuration file relevant to each [run-tests command](#run-tests-command) and [upload-application command](#upload-application-command). For an example configuration file, see this [`global-config-complete-example.json` file][9].
 
 例:
 
-```json
+```jsonc
 {
   "apiKey": "<DATADOG_API_KEY>",
   "appKey": "<DATADOG_APPLICATION_KEY>",
-  "datadogSite": "datadoghq.com", // https://docs.datadoghq.com/getting_started/site/ で他の Datadog サイトを使用することもできます。デフォルトでは、リクエストは Datadog US1 に送信されます。
-  "failOnCriticalErrors": true,
-  "failOnMissingTests": true,
-  "failOnTimeout": true,
-  "files": ["{,!(node_modules)/**/}*.synthetics.json"],
-  "global": {
+  "batchTimeout": 180000,
+  "datadogSite": "datadoghq.com", // You can use another Datadog site in https://docs.datadoghq.com/getting_started/site/. By default, requests are sent to Datadog US1. 
+  "defaultTestOverrides": {
     "allowInsecureCertificates": true,
     "basicAuth": {"username": "test", "password": "test"},
     "body": "{\"fakeContent\":true}",
@@ -215,13 +102,18 @@ export DATADOG_SYNTHETICS_LOCATIONS="aws:us-east-1;aws:us-east-2"
     "followRedirects": true,
     "headers": {"NEW_HEADER": "NEW VALUE"},
     "locations": ["aws:us-east-1"],
+    "mobileApplicationVersion": "01234567-8888-9999-abcd-efffffffffff",
     "mobileApplicationVersionFilePath": "path/to/application.apk",
     "retry": {"count": 2, "interval": 300},
     "startUrl": "{{URL}}?static_hash={{STATIC_HASH}}",
     "startUrlSubstitutionRegex": "s/(https://www.)(.*)/$1extra-$2/",
-    "variables": {"NEW_VARIABLE": "NEW VARIABLE"},
-    "pollingTimeout": 120000
+    "testTimeout": 300,
+    "variables": {"NEW_VARIABLE": "NEW VARIABLE"}
   },
+  "failOnCriticalErrors": true,
+  "failOnMissingTests": true,
+  "failOnTimeout": true,
+  "files": ["{,!(node_modules)/**/}*.synthetics.json"],
   "proxy": {
     "auth": {
       "username": "login",
@@ -236,9 +128,106 @@ export DATADOG_SYNTHETICS_LOCATIONS="aws:us-east-1;aws:us-east-2"
 }
 ```
 
-## テストを実行する
+### 環境変数
 
-CLI にすべての `**/*.synthetics.json` Synthetic テスト (または[グローバルコンフィギュレーションファイル](#global-configuration-file-options))で指定したパスに紐付いたすべてのテスト) を自動検知させるか、`-p,--public-id` フラグを使用して実行するテストを指定するか、定義できます。
+In addition to the global configuration file, you can configure all properties using environment variables. If a property is defined in both the global configuration file and as an environment variable, the environment variable takes precedence.
+
+例:
+
+```bash
+export DATADOG_SITE=datadoghq.com
+```
+
+### コマンドラインオプション
+
+The CLI provides another way to set options and configure the behavior of datadog-ci. These options will override the global configuration file and environment variables.
+
+例:
+
+```bash
+yarn datadog-ci synthetics run-tests --public-id pub-lic-id1
+```
+
+The priority of the 3 forms of configuration is as follows:
+
+```yml
+Global Config < Environment variables < CLI parameters
+```
+
+### Using datadog-ci as a library
+
+You can also use the `datadog-ci` package as a library in your Node.js application to trigger tests. To do so, import the package from the Synthetics `run-tests` command and call the `executeWithDetails()` function.
+
+``` javascript
+import { synthetics } from '@datadog/datadog-ci';
+
+const { results, summary } = await synthetics.executeTests(...)
+```
+
+### プロキシの利用
+
+You can configure a proxy to be used for outgoing connections to Datadog. To do this, use the `proxy` key of the global configuration file or the `HTTPS_PROXY` environment variable.
+
+**Note**: This is the only exception where the global configuration file takes precedence over the environment variable. There is no option to set this through the CLI.
+
+プロキシの設定には [`proxy-agent` ライブラリ][2]を使用しているので、サポートされているプロトコルは `http`、`https`、`socks`、`socks4`、`socks4a`、`socks5`、`socks5h`、`pac+data`、`pac+file`、`pac+ftp`、`pac+http` および `pac+https` となります。グローバルコンフィギュレーションファイルの `proxy` キーは、新しい `proxy-agent` インスタンスに渡されます。つまり、ライブラリの同じ構成がサポートされていることになります。
+
+To use a proxy, you need to first set the CA certificate so datadog-ci trusts your proxy. You can do this by setting the `NODE_EXTRA_CA_CERTS` environment variable to the path of your CA certificate. Otherwise, you might get a `unable to verify the first certificate` error.
+
+```bash
+export NODE_EXTRA_CA_CERTS=/path/to/your-ca-cert.pem
+```
+
+When using the global configuration, `host` and `port` keys are mandatory arguments and the `protocol` key defaults to `http` if not defined.
+
+例:
+
+```jsonc
+{
+  ...
+  "proxy": {
+    "auth": {
+      "username": "login",
+      "password": "pwd"
+    },
+    "host": "127.0.0.1",
+    "port": 3128,
+    "protocol": "http"
+  },
+  ...
+}
+```
+
+The format used for the `HTTPS_PROXY` environment variable is `<protocol>://<username>:<password>@<host>:<port>`, as described by the [proxy-from-env][13] library that [`proxy-agent` library][2] uses for parsing env variables.
+The `HTTPS_PROXY` variable is used instead of the `HTTP_PROXY` one, because the Datadog API uses the HTTPS protocol.
+
+例:
+
+```bash
+export HTTPS_PROXY=http://login:pwd@127.0.0.1:3128
+```
+
+If you want to confirm that a proxy is being used, you can set the `DEBUG` environment variable to `proxy-agent` like this:
+
+```bash
+DEBUG=proxy-agent yarn datadog-ci synthetics run-tests
+```
+
+### Deprecated fields
+
+Datadog is streamlining and enhancing the datadog-ci synthetics commands. In this effort, certain fields have been marked as deprecated. While these fields remain backwards compatible for now, they will not be supported with the release of a new major version. We highly advise transitioning away from these deprecated fields.
+
+The following is a list of the changes:
+
+* The `global` field from the global configuration file is deprecated in favor of `defaultTestOverrides`.
+* The `config` field from the test configuration file is deprecated in favor of `testOverrides`.
+* The `pollingTimeout` option and `--pollingTimeout` CLI parameter, that were on the **Global Configuration** level, are deprecated in favor of `batchTimeout` and `--batchTimeout`, respectively.
+* The `pollingTimeout` option, on the **Test Configuration** level, is deprecated in favor of `batchTimeout` in the global configuration file, or the `--batchTimeout` CLI parameter.
+* The env variable `DATADOG_SYNTHETICS_LOCATIONS` has been deprecated in favor of `DATADOG_SYNTHETICS_OVERRIDE_LOCATIONS`
+
+## Run Tests Command
+
+You can decide to have the CLI auto-discover all your `**/*.synthetics.json` Synthetic tests (see [test files](#test-files)) or specify the tests you want to run using the `-p,--public-id` flag.
 
 {{< tabs >}}
 {{% tab "NPM" %}}
@@ -261,59 +250,505 @@ CLI にすべての `**/*.synthetics.json` Synthetic テスト (または[グロ
 npm run datadog-ci-synthetics
 ```
 
-**注**: カスタムグローバルコンフィギュレーションファイルを使用してテストを起動している場合は、`datadog-ci-synthetics` スクリプトに紐付けられたコマンドに `--config <PATH_TO_GLOBAL_CONFIG_FILE>` を追加します。
+**Note**: If you are launching your tests with a custom filename for the [global configuration file](#global-configuration-file-options), append the command associated to your `datadog-ci-synthetics` script with `--config <CUSTOM_PATH_TO_GLOBAL_CONFIG_FILE>`.
 
 {{% /tab %}}
 {{% tab "Yarn" %}}
 
 **Yarn** を通じて CLI を実行し、テストを実行します。
 
-`run-tests` サブコマンドは `files` コンフィギュレーションキーにしたがって、フォルダ内で検出されたテストを実行します。`--public-id` (または短縮形の `-p`) 引数を指定することで、指定したテストのみをトリガーすることができます。複数のテストを実行するために、複数回設定することができます。
+The `run-tests` sub-command accepts the `--public-id` (or shorthand `-p`) argument to trigger only the specified test. It can be set multiple times to run multiple tests:
 
 ```bash
 yarn datadog-ci synthetics run-tests --public-id pub-lic-id1 --public-id pub-lic-id2
 ```
 
-また、フラグ `--search` (または省略形の `-s`) を使用することで、検索クエリに対応するテストをトリガーすることも可能です。このオプションでは、検索クエリで検出されたすべてのテストに、グローバル構成のオーバーライドが適用されます。
+It is also possible to trigger tests corresponding to a search query by using the `--search` (or shorthand `-s`) argument. With this option, the overrides defined in your [global configuration file](#global-configuration-file-options) apply to all tests discovered with the search query.
 
 ```bash
-yarn datadog-ci synthetics run-tests -s 'tag:e2e-tests' --config global.config.json
+yarn datadog-ci synthetics run-tests -s 'tag:e2e-tests'
 ```
 
-1 つのグローバルコンフィギュレーションファイルで複数のスイートを並行して実行したい場合には、`--files` (短縮形 `-f`) を使ってグローバルファイルセレクタをオーバーライドすることができます。
+You can use `--files` (shorthand `-f`) to override the default glob pattern (which would match all `**/*.synthetics.json` files).
 
 ```bash
 yarn datadog-ci synthetics run-tests -f ./component-1/**/*.synthetics.json -f ./component-2/**/*.synthetics.json
 ```
 
-また、変数を引数として渡すには、`--variable KEY=VALUE` を使用することができます。
-
-```bash
-yarn datadog-ci synthetics run-tests -f ./component-1/**/*.synthetics.json -v PASSWORD=$PASSWORD
-```
-
-**注**: カスタムグローバルコンフィギュレーションファイルを使用してテストを起動している場合は、コマンドに `--config <PATH_TO_GLOBAL_CONFIG_FILE>` を追加します。
+**Note**: If you are launching your tests with a custom filename for the [global configuration file](#global-configuration-file-options), append the command associated to your `datadog-ci-synthetics` script with `--config <CUSTOM_PATH_TO_GLOBAL_CONFIG_FILE>`.
 
 {{% /tab %}}
 {{< /tabs >}}
 
-### 障害モードフラグ
+### List of Configurations
 
-- `--failOnTimeout` (または `--no-failOnTimeout`) は、テストタイムアウトを超えたら CI を失敗 (または成功) させます。
-- `--failOnCriticalErrors` は、テストがトリガーされなかったり、結果を取得できなかった場合に、CI を失敗させます。
-- `--failOnMissingTests` は、公開 ID (`--public-id` CLI 引数またはテストファイルにリストされている) を持つ指定したテストが少なくとも 1 つ実行中に見つからない場合 (例えば、プログラム的に削除されたか Datadog サイトで削除された場合)、CI を失敗させます。
+<!--
+  The descriptions of these is kept for consistency in this doc - https://datadoghq.atlassian.net/wiki/spaces/SYN/pages/3378446383/Configuration+parameters+and+their+usages#Proposal-for-aligning-Descriptions-and-labels
+  If want to update them please update the doc and the relevant integrations as well.
+-->
+
+#### `apiKey`
+
+The API key used to query the Datadog API.
+
+**Configuration options**
+
+* Global Config: `"apiKey": "<API_KEY>"`
+* ENV variable: `DATADOG_API_KEY="<API_KEY>"`
+* CLI param: `--apiKey "<API_KEY>"`
+
+#### `appKey`
+
+The application key used to query the Datadog API.
+
+**Configuration options**
+
+* Global Config: `"appKey": "<APPLICATION_KEY>"`
+* ENV variable: `DATADOG_APP_KEY="<APPLICATION_KEY>"`
+* CLI param: `--appKey "<APPLICATION_KEY>"`
+
+#### `batchTimeout`
+
+The duration (integer in milliseconds) after which `datadog-ci` stops waiting for test results. The default is 30 minutes. At the CI level, test results completed after this duration are considered failed.
+
+**Configuration options**
+
+* Global Config: `"batchTimeout": 180000`
+* ENV variable: `DATADOG_SYNTHETICS_BATCH_TIMEOUT=180000`
+* CLI param: `--batchTimeout 180000`
+
+#### `configPath`
+
+The global JSON configuration is used when launching tests. See the [example configuration](#global-configuration-file-options) for more details.
+
+**Configuration options**
+
+* Global Config: N/A
+* ENV variable: `DATADOG_SYNTHETICS_CONFIG_PATH=global-config.json`
+* CLI param: `--config global-config.json`
+
+#### `datadogSite`
+
+The Datadog instance to which request is sent. The default is `datadoghq.com`. Your Datadog site is {{< region-param key="dd_site" code="true" >}}. 
+
+**Configuration options**
+
+* Global Config: `"datadogSite": "datadoghq.com"`
+* ENV variable: `DATADOG_SITE=datadoghq.com`
+* CLI param: `--datadogSite datadoghq.com`
+
+#### `defaultTestOverrides`
+
+Overrides for Synthetic tests applied to all tests.
+
+**Configuration options**
+
+* Global Config: See [test overrides](#test-overrides)
+* ENV variable: all variables follow the  `DATADOG_SYNTHETICS_OVERRIDE_...` pattern
+* CLI param: all CLI params use the `--override option=value` pattern
+
+#### `failOnCriticalErrors`
+
+A boolean flag that fails the CI job if no tests were triggered, or results could not be fetched from Datadog. The default is set to `false`.
+
+**Configuration options**
+
+* Global Config: `"failOnCriticalErrors": true`
+* ENV variable: `DATADOG_SYNTHETICS_FAIL_ON_CRITICAL_ERRORS=true`
+* CLI param: `--failOnCriticalErrors` / `--no-failOnCriticalErrors`
+
+#### `failOnMissingTests`
+
+A boolean flag that fails the CI job if at least one specified test with a public ID (a `--public-id` CLI argument or listed in a [test file](#test-files)) is missing in a run (for example, if it has been deleted programmatically or on the Datadog site). The default is set to `false`.
+
+**Configuration options**
+
+* Global Config: `"failOnMissingTests": true`
+* ENV variable: `DATADOG_SYNTHETICS_FAIL_ON_MISSING_TESTS=true`
+* CLI param: `--failOnMissingTests` / `--no-failOnMissingTests`
+
+#### `failOnTimeout`
+
+A boolean flag that fails the CI job if at least one test exceeds the default batch timeout. The default is set to `true`.
+
+**Configuration options**
+
+* Global Config: `"failOnTimeout": true`
+* ENV variable: `DATADOG_SYNTHETICS_FAIL_ON_TIMEOUT=true`
+* CLI param: `--failOnTimeout` / `--no-failOnTimeout`
+
+#### `files`
+
+Glob patterns to detect Synthetic [test configuration files](#test-files).
+
+**Configuration options**
+
+* Global Config: `"files": ["{,!(node_modules)/**/}*.synthetics.json"]`
+* ENV variable: `DATADOG_SYNTHETICS_FILES="{,!(node_modules)/**/}*.synthetics.json"`
+* CLI param: `-f "{,!(node_modules)/**/}*.synthetics.json"` / `--files "{,!(node_modules)/**/}*.synthetics.json"`
+
+#### `jUnitReport`
+
+The filename for a JUnit report if you want to generate one. The file created will be an XML file.
+
+**Configuration options**
+
+* Global Config: `"jUnitReport": "e2e-test-junit.xml"`
+* ENV variable: `DATADOG_SYNTHETICS_JUNIT_REPORT="e2e-test-junit.xml"`
+* CLI param:`-j "e2e-test-junit.xml"` / `--jUnitReport "e2e-test-junit.xml"`
+
+#### `mobileApplicationVersionFilePath`
+
+Override the application version for all Synthetic mobile application tests.
+
+**Configuration options**
+
+* Global Config: `"mobileApplicationVersionFilePath": "path/to/application.apk"`
+* ENV variable: Not Available
+* CLI param: `--mobileApp "path/to/application.apk"` / `--mobileApplicationVersionFilePath "path/to/application.apk"`
+
+#### `proxy`
+
+The proxy to be used for outgoing connections to Datadog. `host` and `port` keys are mandatory arguments, the `protocol` key defaults to `http`. Supported values for the `protocol` key are `http`, `https`, `socks`, `socks4`, `socks4a`, `socks5`, `socks5h`, `pac+data`, `pac+file`, `pac+ftp`, `pac+http`, and `pac+https`. The library used to configure the proxy is the [proxy-agent][2] library.
+
+**Configuration options**
+
+* Global Config: See [Use a proxy](#use-a-proxy) for an example.
+* ENV variable: `HTTPS_PROXY=http://login:pwd@127.0.0.1:3128`
+* CLI param: N/A
+
+#### `publicIds`
+
+List of IDs for the Synthetic tests you want to trigger.
+
+**Configuration options**
+
+* Global Config: `"publicIds": ["abc-def-ghi", "123-456-789"]`
+* ENV variable: `DATADOG_SYNTHETICS_PUBLIC_IDS="abc-def-ghi;123-456-789"`
+* CLI param: `-p "abc-def-ghi" --public-id "123-456-789"`
+
+#### `selectiveRerun`
+
+A boolean flag to only run the tests which failed in the previous test batches. Use the `--no-selectiveRerun` CLI flag to force a full run if your configuration enables it by default.
+
+**Configuration options**
+
+* Global Config: `"selectiveRerun": true,`
+* ENV variable: `DATADOG_SYNTHETICS_SELECTIVE_RERUN=true`
+* CLI param: `--selectiveRerun` / `--no-selectiveRerun`
+
+#### `subdomain`
+
+The name of the custom subdomain set to access your Datadog application. If the URL used to access Datadog is `myorg.datadoghq.com`, the `subdomain` value needs to be set to `myorg`.
+
+**Configuration options**
+
+* Global Config: `"subdomain": "myorg"`
+* ENV variable: `DATADOG_SUBDOMAIN="myorg"`
+* CLI param: `--subdomain "myorg"`
+
+#### `testSearchQuery`
+
+Pass a query to select which Synthetic tests to run.
+
+**Configuration options**
+
+* Global Config: `"testSearchQuery": "tag:e2e-tests"`
+* ENV variable: `DATADOG_SYNTHETICS_TEST_SEARCH_QUERY="tag:e2e-tests"`
+* CLI param: `-s "tag:e2e-tests"` / `--search "tag:e2e-tests"`
+
+#### `tunnel`
+
+Use [Local and Staging Environments](#use-local-and-staging-environments) to execute your test batch.
+
+**Configuration options**
+
+* Global Config: `"tunnel": true`
+* ENV variable: `DATADOG_SYNTHETICS_TUNNEL=true`
+* CLI param: `-t` / `--tunnel` / `--no-tunnel`
+
+### Test overrides
+
+All test overrides are optional and allow overriding the test configuration that is stored in Datadog.
+
+These overrides can either be applied to all tests with `defaultTestOverrides` in the [global configuration file](#global-configuration-file-options), or to some specific tests with `testOverrides` in a [test configuration file](#test-files).
+
+These options can also be set with environment variables starting with `DATADOG_SYNTHETICS_OVERRIDE_...` or with the `--override` CLI parameter following this pattern: `--override option=value`.
+
+#### `allowInsecureCertificates` (Boolean)
+
+Disable certificate checks in Synthetic API and Browser tests.
+
+**Configuration options**
+
+* Global/Test Config: `"allowInsecureCertificates": true`
+* ENV variable: `DATADOG_SYNTHETICS_OVERRIDE_ALLOW_INSECURE_CERTIFICATES=true`
+* CLI param: `--override allowInsecureCertificates=true`
+
+#### `basicAuth` (Object)
+
+Credentials to provide if basic authentication is required.
+
+* `username` (String): The username for basic authentication.
+* `password` (String): The password for basic authentication.
+
+**Configuration options**
+
+* Global/Test Config: `"basicAuth": {"username": "test_username", "password": "test_password"}`
+* ENV variable:
+  * `DATADOG_SYNTHETICS_OVERRIDE_BASIC_AUTH_USERNAME=test_username`
+  * `DATADOG_SYNTHETICS_OVERRIDE_BASIC_AUTH_PASSWORD=test_password`
+* CLI param:
+  * `--override basicAuth.username=test_username`
+  * `--override basicAuth.password=test_password`
+
+#### `body` (String)
+
+API テストで送信するデータ。
+
+**Configuration options**
+
+* Global/Test Config: `"body": "{\"fakeContent\":true}"`
+* ENV variable: `DATADOG_SYNTHETICS_OVERRIDE_BODY={"fakeContent":true}`
+* CLI param: `--override body={"fakeContent":true}`
+
+#### `bodyType` (String)
+
+API テストで送信するデータのコンテンツタイプ。
+
+**Configuration options**
+
+* Global/Test Config: `"bodyType": "application/json"`
+* ENV variable: `DATADOG_SYNTHETICS_OVERRIDE_BODY_TYPE=application/json`
+* CLI param: `--override bodyType=application/json`
+
+#### `cookies` (String or object)
+
+Use the provided string as a cookie header in an API or browser test (in addition or as a replacement).
+
+* If this is a string, it is used to replace the original cookies.
+* If this is an object, the format must be `{append?: boolean, value: string}`, and depending on the value of append, it is appended or replaces the original cookies.
+
+**Configuration options**
+
+* Global/Test Config: `"cookies": "name1=value1;name2=value2"` (equivalent to `"append": false`) or `"cookies": {"append": true, "value": "name1=value1;name2=value2"}`
+* ENV variable:
+  * `DATADOG_SYNTHETICS_OVERRIDE_COOKIES="name1=value1;name2=value2"`
+  * `DATADOG_SYNTHETICS_OVERRIDE_COOKIES_APPEND=true`
+* CLI param:
+  * `--override cookies="name1=value1;name2=value2"`
+  * `--override cookies.append=true`
+
+#### `defaultStepTimeout` (Number)
+
+ブラウザテストにおけるステップの最大継続時間を秒単位で指定し、個別に設定されたステップのタイムアウトをオーバーライドしません。
+
+**Configuration options**
+
+* Global/Test Config: `"defaultStepTimeout": 15`
+* ENV variable: `DATADOG_SYNTHETICS_OVERRIDE_DEFAULT_STEP_TIMEOUT=15`
+* CLI param: `--override defaultStepTimeout=15`
+
+#### `deviceIds` (Array)
+
+A list of devices to run the browser test on. The values that it can take can be found in the [Datadog Synthetics Terraform documentation][11].
+
+**Configuration options**
+
+* Global/Test Config: `"deviceIds": ["chrome.laptop_large", "firefox.tablet"]`
+* ENV variable: `DATADOG_SYNTHETICS_OVERRIDE_DEVICE_IDS=["chrome.laptop_large", "firefox.tablet"]`
+* CLI param: `--override deviceIds=["chrome.laptop_large", "firefox.tablet"]`
+
+#### `executionRule` (String)
+
+The execution rule for the test defines the behavior of the CLI in case of a failing test.
+It accepts one of the following values:
+
+* `blocking`: テストが失敗した場合、CLI はエラーを返す。
+* `non_blocking`: テストが失敗した場合、CLI は警告のプリントのみを実施する。
+* `skipped`: テストを一切実行しない。
+
+**Configuration options**
+
+* Global/Test Config: `"executionRule": "skipped"`
+* ENV variable: `DATADOG_SYNTHETICS_OVERRIDE_EXECUTION_RULE=skipped`
+* CLI param: `--override executionRule=skipped`
+
+#### `followRedirects` (Boolean)
+
+Synthetic API テストにおいて、HTTP リダイレクトに従うか否かを示します。
+
+**Configuration options**
+
+* Global/Test Config: `"followRedirects": true`
+* ENV variable: `DATADOG_SYNTHETICS_OVERRIDE_FOLLOW_REDIRECTS=true`
+* CLI param: `--override followRedirects=true`
+
+#### `headers` (Object)
+
+This object specifies the headers to be replaced in the test. It should have keys representing the names of the headers to be replaced, and values indicating the new header values.
+
+**Configuration options**
+
+* Global/Test Config: `"headers": {"NEW_HEADER_1": "NEW VALUE 1", "NEW_HEADER_2": "NEW VALUE 2"}`
+* ENV variable: `DATADOG_SYNTHETICS_OVERRIDE_HEADERS='{"NEW_HEADER_1":"NEW VALUE 1", "NEW_HEADER_2":"NEW VALUE 2"}'` (**note** this must be a valid JSON)
+* CLI param:
+  * `--override headers.NEW_HEADER_1="NEW VALUE 1"`
+  * `--override headers.NEW_HEADER_2="NEW VALUE 2"`
+
+#### `locations` (Array)
+
+A list of locations to run the test from. The specific values that it can accept for your org can be found [here][12].
+
+**Configuration options**
+
+* Global/Test Config: `"locations": ["aws:us-east-1", "gcp:europe-west3"]`
+* ENV variable: `DATADOG_SYNTHETICS_OVERRIDE_LOCATIONS=["aws:us-east-1", "gcp:europe-west3"]`
+* CLI param: `--override locations=["aws:us-east-1", "gcp:europe-west3"]`
+
+#### `mobileApplicationVersion` (String)
+
+Override the default mobile application version for a Synthetic mobile application test. The version must be uploaded and available within Datadog.
+
+**Configuration options**
+
+* Global/Test Config: `"mobileApplicationVersion": "01234567-8888-9999-abcd-efffffffffff"`
+* ENV variable: `DATADOG_SYNTHETICS_OVERRIDE_MOBILE_APPLICATION_VERSION=01234567-8888-9999-abcd-efffffffffff`
+* CLI param: `--mobileApplicationVersion=01234567-8888-9999-abcd-efffffffffff`
+
+#### `mobileApplicationVersionFilePath` (String)
+
+Synthetic モバイルアプリケーションテストのアプリケーションバージョンをオーバーライドします。
+
+**Configuration options**
+
+* Global/Test Config: `"mobileApplicationVersionFilePath": "path/to/application.apk"`
+* ENV variable: Not Available
+* CLI param: `--mobileApplicationVersionFilePath=path/to/application.apk`
+
+#### `retry` (Object)
+
+The retry policy for the test. The 2 possible attributes for this object are independent:
+
+* `count` (Integer): The number of attempts to perform in case of test failure.
+* `interval` (Integer): The interval between attempts in milliseconds.
+
+**Configuration options**
+
+* Global/Test Config: `"retry": {"count": 2, "interval": 300}`
+* ENV variable:
+  * `DATADOG_SYNTHETICS_OVERRIDE_RETRY_COUNT=2`
+  * `DATADOG_SYNTHETICS_OVERRIDE_RETRY_INTERVAL=300`
+* CLI param:
+  * `--override retry.count=2`
+  * `--override retry.interval=300`
+
+#### `startUrl` (String)
+
+テストに提供する新しい開始 URL。環境変数にある、大括弧で指定された変数 (例えば `{{ EXAMPLE }}`) は置き換えられます。
+
+**Configuration options**
+
+* Global/Test Config: `"startUrl": "{{URL}}?static_hash={{STATIC_HASH}}"`
+* ENV variable: `DATADOG_SYNTHETICS_OVERRIDE_START_URL="{{URL}}?static_hash={{STATIC_HASH}}"`
+* CLI param: `--override startUrl="{{URL}}?static_hash={{STATIC_HASH}}"`
+
+#### `startUrlSubstitutionRegex` (String)
+
+The regex to modify the starting URL of the test (for browser and HTTP tests only), whether it was given by the original test or the configuration override startUrl.
+
+If the URL contains variables, this regex applies after the interpolation of the variables.
+
+There are two possible formats:
+
+* **`your_regex|your_substitution`**: The pipe-based syntax, to avoid any conflicts with / characters in URLs. For example, `https://example.com(.*)|http://subdomain.example.com$1` to transform `https://example.com/test` to `http://subdomain.example.com/test`.
+* **`s/your_regex/your_substitution/modifiers`**: The slash syntax, which supports modifiers. For example, `s/(https://www.)(.*)/$1extra-$2/` to transform `https://www.example.com` into `https://www.extra-example.com`.
+
+**Configuration options**
+
+* Global/Test Config: `"startUrlSubstitutionRegex": "s/(https://www.)(.*)/$1extra-$2/"`
+* ENV variable: `DATADOG_SYNTHETICS_OVERRIDE_START_URL_SUBSTITUTION_REGEX="s/(https://www.)(.*)/$1extra-$2/"`
+* CLI param: `--override startUrlSubstitutionRegex="s/(https://www.)(.*)/$1extra-$2/"`
+
+#### `testTimeout` (Number)
+
+ブラウザテストの最大時間 (秒)。
+
+**Configuration options**
+
+* Global/Test Config: `"testTimeout": 300`
+* ENV variable: `DATADOG_SYNTHETICS_OVERRIDE_TEST_TIMEOUT=300`
+* CLI param: `--override testTimeout=300`
+
+#### `variables` (Object)
+
+This object defines the variables to be substituted in the test. It should include keys corresponding to the names of the variables to be replaced, and values representing the new values for these variables.
+
+**Configuration options**
+
+* Global/Test Config: `"variables": {"NEW_VARIABLE_1": "NEW VARIABLE 1", "NEW_VARIABLE_2": "NEW VARIABLE 2"}`
+* ENV variable: `DATADOG_SYNTHETICS_OVERRIDE_VARIABLES='{"NEW_VARIABLE_1":"NEW VARIABLE 1", "NEW_VARIABLE_2":"NEW VARIABLE 2"}'` (**note** this must be a valid JSON)
+* CLI param:
+  * `--override variables.NEW_VARIABLE_1="NEW VARIABLE 1"`
+  * `--override variables.NEW_VARIABLE_2="NEW VARIABLE 2"`
+
+### Configure a start URL
+
+テストがどの URL から始まるかを構成するには、テストオブジェクトに `startUrl` を指定します。テストのオリジナルの開始 URL の任意の部分を使って、環境変数を含めて独自の開始 URL を構築します。
+
+### Configure a custom subdomain
+
+If the organization uses a custom sub-domain to access Datadog, this needs to be set in the `DATADOG_SUBDOMAIN` environment variable or in the global configuration file under the `subdomain` key in order to properly display the test results URL.
+
+例えば、Datadog にアクセスするための URL が `myorg.datadoghq.com` である場合、環境変数に `myorg` を設定します。
+
+```bash
+export DATADOG_SUBDOMAIN="myorg"
+```
+
+### Configure custom locations
+
+You can use `DATADOG_SYNTHETICS_OVERRIDE_LOCATIONS` to override the locations where your tests run. Locations should be separated with a semicolon (`;`). The configuration in [test files](#test-files) takes precedence over other overrides.
+
+```bash
+export DATADOG_SYNTHETICS_OVERRIDE_LOCATIONS="aws:us-east-1;aws:us-east-2"
+```
 
 ### テストファイル
 
-テストファイルの名前は `.synthetics.json` というサフィックスを付ける必要があります。
+Test configuration files (Test Config) let you customize individual tests or set up multiple runs of the same test with different settings, beyond what you can do with other configuration methods.
 
-```json
+You can find a list of all these options in the [test overrides](#test-overrides) section.
+
+These files take precedence over global configuration files, environment variables, and CLI parameters. The priority order including test configurations is as follows:
+
+``` yml
+Global Config < Environment variables < CLI parameters < Test Config
+```
+
+To determine which tests to run, one or more of those options may be passed to `datadog-ci`:
+- The [`files` option](#files)
+- The [`publicIds` option](#publicids)
+- The [`testSearchQuery` option](#testsearchquery)
+
+If none of these options is passed, `datadog-ci` auto-discovers test configuration files with the `{,!(node_modules)/**/}*.synthetics.json` glob pattern (every file ending with `.synthetics.json`, except for those in the `node_modules` folder).
+
+**Note**: The file search starts from the current working directory, so it may be slow if the command is run from a large directory, like a home folder. If file search command is too slow, consider:
+- Using the above options to specify the tests (this will disable the file search),
+- Or refining the glob pattern with the [`files` option](#files).
+  - For example, by using `*` instead of `**` or by adding a specific folder to the pattern.
+
+`<TEST_PUBLIC_ID>` は、テスト詳細ページの URL の一部であるテストの識別子 (例えば `https://app.datadoghq.com/synthetics/details/abc-def-ghi` の場合は `abc-def-ghi`) か、詳細ページへの URL 全体 (例えば、直接 `https://app.datadoghq.com/synthetics/details/abc-def-ghi`) のいずれかになります。
+
+例:
+
+```jsonc
 // myTest.synthetics.json
 {
   "tests": [
     {
-      "id": "<TEST_PUBLIC_ID>",
-      "config": {
+      "id": "<TEST_PUBLIC_ID_1>",
+      "testOverrides": {
         "allowInsecureCertificates": true,
         "basicAuth": {"username": "test", "password": "test"},
         "body": "{\"fakeContent\":true}",
@@ -325,11 +760,20 @@ yarn datadog-ci synthetics run-tests -f ./component-1/**/*.synthetics.json -v PA
         "followRedirects": true,
         "headers": {"NEW_HEADER": "NEW VALUE"},
         "locations": ["aws:us-east-1"],
+        "mobileApplicationVersion": "01234567-8888-9999-abcd-efffffffffff",
         "mobileApplicationVersionFilePath": "path/to/application.apk",
-        "pollingTimeout": 30000,
         "retry": {"count": 2, "interval": 300},
         "startUrl": "{{URL}}?static_hash={{STATIC_HASH}}",
         "startUrlSubstitutionRegex": "s/(https://www.)(.*)/$1extra-$2/",
+        "testTimeout": 300,
+        "variables": {"MY_VARIABLE": "new title"}
+      }
+    },
+    {
+      "id": "<TEST_PUBLIC_ID_2>",
+      "testOverrides": {
+        "allowInsecureCertificates": true,
+        ...
         "variables": {"MY_VARIABLE": "new title"}
       }
     }
@@ -337,33 +781,145 @@ yarn datadog-ci synthetics run-tests -f ./component-1/**/*.synthetics.json -v PA
 }
 ```
 
-`<TEST_PUBLIC_ID>` は、テスト詳細ページの URL の一部であるテストの識別子 (例えば `https://app.datadoghq.com/synthetics/details/abc-def-ghi` の場合は `abc-def-ghi`) か、詳細ページへの URL 全体 (例えば、直接 `https://app.datadoghq.com/synthetics/details/abc-def-ghi`) のいずれかになります。
+## アプリケーションのアップロードコマンド
 
-`config` キーの下にあるオプションはすべてオプションで、Datadog に保存されているテストの構成をオーバーライドすることができます。
+This command uploads a new version to an **existing** mobile application.
 
-| オプション                            | タイプ             | 定義                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
-| ---------------------------------- | ---------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `allowInsecureCertificates`        | Boolean          | Synthetic API テストでの証明書チェックを無効にします。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
-| `basicAuth`                        | オブジェクト           | 基本認証が必要な場合に提供する資格情報。<br><br>- `username` (文字列): 基本認証のユーザー名。<br>- `password` (文字列): 基本認証のパスワード。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
-| `body`                             | 文字列           | API テストで送信するデータ。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-| `bodyType`                         | 文字列           | API テストで送信するデータのコンテンツタイプ。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
-| `cookies`                          | 文字列またはオブジェクト | API やブラウザのテストにおいて、提供された文字列をクッキーのヘッダーとして使用します (追加または置換)。<br><br>- これが文字列である場合、オリジナルのクッキーを置き換えるために使用されます。<br>- これがオブジェクトの場合、フォーマットは `{append?: boolean, value: string}` でなければならず、`append` の値によって、オリジナルのクッキーに追加されるか置き換えられるかが決まります。                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
-| `defaultStepTimeout`               | 数値           | ブラウザテストにおけるステップの最大継続時間を秒単位で指定し、個別に設定されたステップのタイムアウトをオーバーライドしません。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
-| `deviceIds`                        | 配列            | ブラウザテストを実行するデバイスのリスト。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
-| `executionRule`                    | 文字列           | テストの実行ルールは、テストが失敗した場合の CLI の振る舞いを定義します。<br><br>- `blocking`: テストが失敗した場合、CLI はエラーを返します。<br>- `non_blocking`: テストが失敗した場合、CLI はエラーを返します。テストが失敗した場合に、CLI は警告を表示するだけである。<br>- `skipped`: テストは全く実行されません。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
-| `followRedirects`                  | Boolean          | Synthetic API テストにおいて、HTTP リダイレクトに従うか否かを示します。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-| `headers`                          | オブジェクト           | テスト内で置換するヘッダー。このオブジェクトは、キーが置換するヘッダーの名前、そして値が置換するヘッダーの新しい値である必要があります。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
-| `locations`                        | 配列            | テストを実行する場所のリスト。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
-| `mobileApplicationVersionFilePath` | 文字列           | Synthetic モバイルアプリケーションテストのアプリケーションバージョンをオーバーライドします。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
-| `pollingTimeout`                   | 整数          | テストの最大継続時間をミリ秒単位で指定します。実行がこの値を超えた場合、失敗とみなされます。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
-| `retry`                            | オブジェクト           | テストの再試行ポリシー。<br><br>- `count` (整数): テストに失敗した場合に実行する試行回数を指定します。<br>- `interval` (整数): 再試行の間隔をミリ秒で指定します。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
-| `startUrl`                         | 文字列           | テストに提供する新しい開始 URL。環境変数にある、大括弧で指定された変数 (例えば `{{ EXAMPLE }}`) は置き換えられます。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
-| `startUrlSubstitutionRegex`        | 文字列           | テストの開始 URL を変更する正規表現 (ブラウザテストと HTTP テストのみ) で、元のテストや構成のオーバーライド `startUrl` によって与えられたものであるかどうかを指定します。<br><br>URL が変数を含んでいる場合、この正規表現は変数の補間の後に適用されます。可能なフォーマットは 2 つです: <br>- `your_regex\|your_substitution`: URL の `/` 文字との衝突を避けるために、パイプベースの構文を使用します。例: `https://example.com(.*)\|http://subdomain.example.com$1` は、`https://example.com/test` を `http://subdomain.example.com/test` に変換します。<br>- `s/your_regex/your_substitution/modifiers`: スラッシュ構文で、修飾語をサポートします。例: `s/(https://www.)(.*)/$1extra-$2/` は、`https://www.example.com` を `https://www.extra-example.com` に変換します。 |
-| `variables`                        | オブジェクト           | テスト内で置換する変数。このオブジェクトは、キーが置換する変数の名前、そして値が置換する変数の新しい値である必要があります。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+### List of Configurations
 
-## テストトンネルを使用する
+<!--
+  The descriptions of these is kept for consistency in this doc - https://datadoghq.atlassian.net/wiki/spaces/SYN/pages/3378446383/Configuration+parameters+and+their+usages#Proposal-for-aligning-Descriptions-and-labels
+  If want to update them please update the doc and the relevant integrations as well.
+-->
 
-変数のオーバーライドと [Continuous Testing Tunnel][3] を組み合わせることで、開発環境内でテストを実行することができます。テストトンネルは、インフラストラクチャーと Datadog の間にエンドツーエンドで暗号化された HTTP プロキシを作成し、CLI を通して送信された全てのテストリクエストが自動的に `datadog-ci` クライアントを経由してルーティングされることを可能にします。
+#### `apiKey`
+
+The API key used to query the Datadog API.
+
+**Configuration options**
+
+* Global Config: `"apiKey": "<API_KEY>"`
+* ENV variable: `DATADOG_API_KEY="<API_KEY>"`
+* CLI param: `--apiKey "<API_KEY>"`
+
+#### `appKey`
+
+The application key used to query the Datadog API.
+
+**Configuration options**
+
+* Global Config: `"appKey": "<APPLICATION_KEY>"`
+* ENV variable: `DATADOG_APP_KEY="<APPLICATION_KEY>"`
+* CLI param: `--appKey "<APPLICATION_KEY>"`
+
+#### `configPath`
+
+The global JSON configuration is used when launching tests. See the [example configuration](#global-configuration-file-options) for more details.
+
+**Configuration options**
+
+* Global Config: N/A
+* ENV variable: `DATADOG_SYNTHETICS_CONFIG_PATH=global-config.json`
+* CLI param: `--config global-config.json`
+
+#### `datadogSite`
+
+The Datadog instance to which request is sent. The default is `datadoghq.com`. Your Datadog site is {{< region-param key="dd_site" code="true" >}}. 
+
+**Configuration options**
+
+* Global Config: `"datadogSite": "datadoghq.com"`
+* ENV variable: `DATADOG_SITE=datadoghq.com`
+* CLI param: `--datadogSite datadoghq.com`
+
+#### `latest`
+
+If present, marks the application as 'latest'. Any tests that run on the latest version will use this version on their next run.
+
+**Configuration options**
+
+* Global Config: `"latest": true,`
+* ENV variable:  `DATADOG_SYNTHETICS_LATEST=true`
+* CLI param: `--latest` / `--no-latest`
+
+#### `mobileApplicationId`
+
+The ID of the application you want to upload the new version to.
+
+**Configuration options**
+
+* Global Config: `"mobileApplicationId": "123-123-123"`
+* ENV variable: `DATADOG_SYNTHETICS_MOBILE_APPLICATION_ID=123-123-123`
+* CLI param: `--mobileApplicationId 123-123-123`
+
+#### `mobileApplicationVersionFilePath`
+
+The path to your mobile application (`.apk` or `.ipa`).
+
+**Configuration options**
+
+* Global Config: `"mobileApplicationVersionFilePath": example/test.apk`
+* ENV variable: Not Available
+* CLI param: `--mobileApplicationVersionFilePath example/test.apk`
+
+#### `proxy`
+
+The proxy to be used for outgoing connections to Datadog. `host` and `port` keys are mandatory arguments, the `protocol` key defaults to `http`. Supported values for the `protocol` key are `http`, `https`, `socks`, `socks4`, `socks4a`, `socks5`, `socks5h`, `pac+data`, `pac+file`, `pac+ftp`, `pac+http`, and `pac+https`. The library used to configure the proxy is the [proxy-agent][2] library.
+
+**Configuration options**
+
+* Global Config: See [Use a proxy](#use-a-proxy) for an example.
+* ENV variable: N/A
+* CLI param: N/A
+
+#### `versionName`
+
+The name of the new version. It has to be unique.
+
+**Configuration options**
+
+* Global Config: `"versionName": "example"`
+* ENV variable: `DATADOG_SYNTHETICS_VERSION_NAME=example`
+* CLI param: `--versionName example`
+
+例:
+
+```bash
+datadog-ci synthetics upload-application                \
+  --mobileApplicationId '123-123-123'                   \
+  --mobileApplicationVersionFilePath example/test.apk   \
+  --versionName 'example 1.0'                           \
+  --latest
+```
+
+### Using the global configuration file
+
+You can also pass these options in a configuration file:
+
+```json
+{
+  "apiKey": "<DATADOG_API_KEY>",
+  "appKey": "<DATADOG_APPLICATION_KEY>",
+  "mobileApplicationVersionFilePath": "example_path/example_app.apk",
+  "mobileApplicationId": "example-abc",
+  "versionName": "example",
+  "latest": true
+}
+```
+
+These options can also be added to the same global configuration file used for the run-tests command.
+
+Pass this config file to the command with the `--config` flag:
+
+```bash
+datadog-ci synthetics upload-application --config global-config.json
+```
+
+The default file name for the [global configuration file](#global-configuration-file-options) is `datadog-ci.json`. If you use this name for your global configuration file, you may omit the `--config` flag.
+
+## Use local and staging environments
+
+You can combine variable overrides with [Local and Staging Environments][3] to run tests within your development environment. This connection ensures that all test requests sent through the CLI are automatically routed through the `datadog-ci` client. 
 
 これにより、本番前環境から本番システムまで、ソフトウェア開発のライフサイクルのあらゆる段階で、エンドツーエンドで暗号化されたテストを実行することが可能になります。
 
@@ -404,7 +960,7 @@ Took 11546ms
 JUnit レポートを有効にするには、コマンドに `--jUnitReport` (省略形 `-j`) を渡し、JUnit XML レポートのファイル名を指定します。
 
 ```bash
-yarn datadog-ci synthetics run-tests -s 'tag:e2e-tests' --config global.config.json --jUnitReport e2e-test-junit
+yarn datadog-ci synthetics run-tests -s 'tag:e2e-tests' --config global-config.json --jUnitReport e2e-test-junit
 ```
 
 レポーターはコマンドの `MainReporter` に自分自身をフックすることができます。
@@ -416,25 +972,25 @@ yarn datadog-ci synthetics run-tests -s 'tag:e2e-tests' --config global.config.j
 | `log`            | `(log: string)`                                                                          | ロギング用に呼び出されます。                                             |
 | `error`          | `(error: string)`                                                                        | エラーが発生するたびに呼び出されます。                                |
 | `initErrors`     | `(errors: string[])`                                                                     | テストのパース段階でエラーが発生するたびに呼び出されます。 |
-| `reportStart`    | `(timings: {startTime: number})`                                                         | レポート開始時に呼び出されます。                              |
-| `resultEnd`      | `(result: Result, baseUrl: string)`                                                      | 全結果の終了時に各結果に対して呼び出されます。               |
-| `resultReceived` | `(result: Result)`                                                                       | 結果を受信したときに呼び出されます。                               |
 | `testTrigger`    | `(test: Test, testId: string, executionRule: ExecutionRule, config: UserConfigOverride)` | テストがトリガーされたときに呼び出されます。                                |
 | `testWait`       | `(test: Test)`                                                                           | テストが結果の受信を待っているときに呼び出されます。           |
-| `testsWait`      | `(tests: Test[])`                                                                        | すべてのテストが結果を受け取るのを待っているときに呼び出されます。     |
+| `testsWait`      | `(tests: Test[], baseUrl: string, batchId: string, skippedCount?: number)`               | すべてのテストが結果を受け取るのを待っているときに呼び出されます。     |
+| `resultReceived` | `(result: ResultInBatch)`                                                                | 結果を受信したときに呼び出されます。                               |
+| `resultEnd`      | `(result: Result, baseUrl: string)`                                                      | 全結果の終了時に各結果に対して呼び出されます。               |
+| `reportStart`    | `(timings: {startTime: number})`                                                         | レポート開始時に呼び出されます。                              |
 | `runEnd`         | `(summary: Summary, baseUrl: string, orgSettings?: SyntheticsOrgSettings)`               | 実行の終了時に呼び出されます。                                   |
 
 ## テスト結果の表示
 
-CI バッチの結果は、[Synthetic Monitoring と Continuous Testing Explorer][4] でバッチをクリックするか、[**Synthetic Tests** ページ][5]でテストをクリックすることで確認できます。
+You can see results for CI batches by clicking on a batch in the [Synthetic Monitoring & Testing Results Explorer][4] or clicking on a test on the [**Tests** page][5].
 
 また、テストが実行される際に、CI の中で直接テストの実行結果を確認することができます。テストが失敗した原因を特定するには、実行ログを見てアサーションが失敗した原因を探します。
 
 ```bash
-  yarn datadog-ci synthetics run-tests --config synthetics.global.json
+  yarn datadog-ci synthetics run-tests --config global-config.json
   yarn run v1.22.4
-  $ /Users/demo.user/go/src/github.com/Datadog/tmp/test/testDemo/node_modules/.bin/datadog-ci synthetics run-tests --config synthetics.global.json
-  Finding files in /Users/demo.user/go/src/github.com/Datadog/tmp/test/testDemo/{,!(node_modules)/**/}*.synthetics.json
+  $ /Users/demo.user/go/src/github.com/Datadog/tmp/test/testDemo/node_modules/.bin/datadog-ci synthetics run-tests --config global-config.json
+  Finding files matching /Users/demo.user/go/src/github.com/Datadog/tmp/test/testDemo/{,!(node_modules)/**/}*.synthetics.json
 
   Got test files:
     - user.synthetics.json
@@ -454,56 +1010,31 @@ CI バッチの結果は、[Synthetic Monitoring と Continuous Testing Explorer
   info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.
 ```
 
-## アプリケーションのアップロードコマンド
-
-**既存のアプリケーション**に新しいバージョンをアップロードするには、`synthetic upload-application` コマンドを使うことができます。使うには
-
-`--mobileApplicationId` - 文字列 - 新しいバージョンをアップロードしたいアプリケーションの ID
-`--mobileApplicationVersionFilePath` - 文字列 - モバイルアプリへのパス (.apk/.ipa)
-`--versionName` - 文字列 - 新しいバージョンの名前。一意でなければなりません。
-`--latest` - ブール値 - 存在する場合は、そのアプリケーションを 'latest' としてマークします。最新バージョンで実行されたテストは、次回実行時にこのバージョンを使用します。
-
-例:
-```
-datadog-ci synthetics upload-application              \
---mobileApplicationId '123-123-123'                   \
---mobileApplicationVersionFilePath example/test.apk \
---versionName 'example 1.0'                           \
---latest
-```   
-
-これらのオプションは、コンフィギュレーションファイルで渡すこともできます
-```
-{
-  "apiKey": <DATADOG_API_KEY>,
-  "appKey": <DATADOG_APPLICATION_KEY>,
-  "mobileApplicationVersionFilePath": "example_path/example_app.apk",
-  "mobileApplicationId": "example-abc",
-  "versionName": "example",
-  "latest": true
-}
-```
-
-そして `—config` フラグを付けてコマンドに渡します。例:
-```
-datadog-ci synthetics upload-application --config global.config.json
-```
-
-## その他の参考資料
+## 参考資料
 
 お役に立つドキュメント、リンクや記事:
 
-- [Datadog の GitHub Action を使用して、ワークフローに Continuous Testing を追加する][6]
-- [Continuous Testing と CI/CD について][7]
-- [Continuous Testing Explorer について][8]
-- [Continuous Testing Tunnel について][3]
+* [Datadog の GitHub Action を使用して、ワークフローに Continuous Testing を追加する][6]
+* [Continuous Testing と CI/CD について][7]
+* [Learn about Mobile Application Testing][10]
+* [Learn about the Synthetic Monitoring & Testing Results Explorer][8]
+* [Learn about Testing Local and Staging Environments][3]
 
 [1]: https://www.npmjs.com/package/@datadog/datadog-ci
-[2]: https://github.com/TooTallNate/node-proxy-agent
-[3]: https://docs.datadoghq.com/ja/continuous_testing/testing_tunnel/
+[2]: https://github.com/TooTallNate/proxy-agents/tree/main/packages/proxy-agent
+[3]: https://docs.datadoghq.com/ja/continuous_testing/environments/
 [4]: https://app.datadoghq.com/synthetics/explorer/
 [5]: https://app.datadoghq.com/synthetics/tests
 [6]: https://www.datadoghq.com/blog/datadog-github-action-synthetics-ci-visibility/
 [7]: https://docs.datadoghq.com/ja/continuous_testing/cicd_integrations/
 [8]: https://docs.datadoghq.com/ja/continuous_testing/explorer/
-[9]: https://github.com/DataDog/datadog-ci/blob/master/.github/workflows/e2e/global.config.json
+[9]: https://github.com/DataDog/datadog-ci/blob/master/src/commands/synthetics/examples/global-config-complete-example.json
+[10]: https://docs.datadoghq.com/ja/mobile_app_testing/
+[11]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_test#device_ids
+[12]: https://app.datadoghq.com/api/v1/synthetics/locations?only_public=true
+[13]: https://www.npmjs.com/package/proxy-from-env#external-resources
+
+<!--
+  This page is single-sourced:
+  https://github.com/DataDog/documentation/blob/7007931530baf7da59310e7224a26dc9a71c53c5/local/bin/py/build/configurations/pull_config_preview.yaml#L315
+-->

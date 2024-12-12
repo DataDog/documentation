@@ -1,14 +1,14 @@
 ---
-title: 자동 결함 배포 감지
+title: 잘못된 배포 자동 탐지
 ---
 
 ## 개요
 
-자동 결함 배포 감지 기능은 결함 코드 배포를 몇 분 안에 찾아 평균 감지 시간(MTTD)을 단축합니다. 코드가 프로덕션에 배포될 때마다 Watchdog에서 새 코드 버전의 성능을 이전 버전과 비교해 배포에 나타난 새로운 유형의 오류를 찾거나 오류율이 증가한 것을 보여 줍니다. Watchdog에서 새 배포에 결함이 있다고 판단하면 영향을 받는 서비스에 대한 상세 정보가 APM 서비스 페이지와 영향을 받는 엔드포인트의 리소스 페이지에 나타납니다.
+자동 결함 배포 감지 기능은 결함 코드 배포를 단 몇 분 안에 찾아 내어 평균 감지 시간(MTTD)을 단축합니다. 코드가 배포될 때마다 Watchdog은 새 코드 버전의 성능을 이전 버전과 비교하여 배포에 나타난 신규 유형 오류나 오류율 증가를 파악합니다. Watchdog이 새로운 배포에 결함이 있다고 판단하면 영향을 받는 서비스에 대한 상세 정보가 APM 서비스 페이지와 영향을 받는 엔드포인트의 리소스 페이지에 표시됩니다.
 
 Watchdog이 현재 활성화된 버전에 결함이 있음을 발견하면 아래 스크린샷과 같이 서비스 상세 페이지 상단에 분홍색 배너로 표시됩니다. 서비스의 배포 기록을 제공하는 화면 하단의 배포 테이블에 과거에 Watchdog에서 결함이 있는 것으로 발견된 버전도 표시됩니다.
 
-{{< img src="watchdog/faulty_deployment_redesigned.png" alt="상단에 분홍색 배너가 표시되고 하단에 배포 테이블이 표시된 APM 서비스 페이지" >}}
+{{< img src="watchdog/faulty_deployment_redesigned_cropped.png" alt="상단에는 핑크색 배너가, 하단에는 배포 테이블이 표시된 APM 서비스 페이지" >}}
 
 배너에서 **View Details**을 클릭해 측면 패널을 열면 잘못된 배포에 관한 추가 정보를 확인할 수 있습니다. 이 보기에서 다음 사항을 포함해 잘못된 배포에 관한 상세 정보를 볼 수 있습니다.
 
@@ -19,7 +19,7 @@ Watchdog이 현재 활성화된 버전에 결함이 있음을 발견하면 아�
 
 이 보기는 배포 테이블에 있는 버전을 하나 클릭해 확인할 수도 있습니다. 아래 스크린샷은 상세 보기의 예시입니다. 여기에서 `db.utils.OperationalError` 오류 유형이 ` /inventory` 엔드포인트에 영향을 주고 있고, HTTP 상태 코드가 `(500)`인 것을 알 수 있습니다.
 
-{{< img src="watchdog/faulty_deployment_details_redesigned.png" alt="잘못된 배포 상세 정보 패널" >}}
+{{< img src="watchdog/faulty_deployment_details_redesigned_cropped.png" alt="결함 배포 추적 상세 정보 패널" >}}
 
 결함 배포가 감지될 때마다 Watchdog은 이를 [Event Explorer][2]에 이벤트로 추가합니다. 이러한 이벤트에 대해 자동으로 알림을 받도록 모니터를 설정할 수 있습니다. 이렇게 하려면 [New Monitors][3] 페이지로 이동하여 **Events**를 선택하고 모니터를 정의하는 검색 쿼리에 `tags:deployment_analysis`를 포함하세요.
 
@@ -27,7 +27,7 @@ Watchdog이 현재 활성화된 버전에 결함이 있음을 발견하면 아�
 
 각 배포는 반복적으로 분석됩니다. 동일한 결함 배포에 대한 재경고를 방지하기 위해 Datadog는 모니터의 복구 시간을 60분으로 설정할 것을 권장합니다.
 
-{{< img src="watchdog/faulty_deployment_suggested_monitors_redesigned.png" alt="Suggested Monitors 버튼이 있는 APM 서비스 페이지" >}}
+{{< img src="watchdog/faulty_deployment_suggested_monitors_redesigned_cropped.png" alt="제안 모니터링 버튼이 있는 APM 서비스 페이지" >}}
 
 ### 오류가 있는데도 새 배포에 결함이 있다고 표시되지 않은 이유는 무엇인가요?
 

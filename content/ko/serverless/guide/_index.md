@@ -9,7 +9,7 @@ private: true
 title: 서버리스 모니터링 지침
 ---
 
-## 일반 서버리스 지침
+## 일반 서버리스 가이드
 
 {{< whatsnext desc="서버리스 애플리케이션 모니터링 모범 사례" >}}
     {{< nextlink href="/serverless/guide/connect_invoking_resources" >}}Lambda 함수를 호출하는 리소스에 대한 심층적인 가시성{{< /nextlink >}}
@@ -19,14 +19,18 @@ title: 서버리스 모니터링 지침
     {{< nextlink href="/serverless/guide/opentelemetry" >}}서버리스 및 OpenTelemetry{{< /nextlink >}}
 {{< /whatsnext >}}
 
-## Datadog 포워더를 사용해 설치
+{{< whatsnext desc="Azure App Service and Container Apps" >}}
+    {{< nextlink href="/serverless/guide/azure_app_service_linux_sidecar" >}}Azure Sidecar을 사용해 Azure App Service에서 Linux 컨테이너 계측하기{{< /nextlink >}}
+{{< /whatsnext >}}
 
-{{< whatsnext desc="이전에 Datadog 포워더를 사용하여 모니터링하도록 설정된 애플리케이션에 대한 설치 지침" >}}
-{{< nextlink href="/serverless/guide/datadog_forwarder_node" >}}Datadog 포워더를 사용하여 Node.js 서버리스 애플리케이션 계측하기{{< /nextlink >}}
-{{< nextlink href="/serverless/guide/datadog_forwarder_python" >}}Datadog 포워더를 사용하여 Python 서버리스 애플리케이션 계측하기{{< /nextlink >}}
-{{< nextlink href="/serverless/guide/datadog_forwarder_java" >}}Datadog 포워더를 사용하여 Java 서버리스 애플리케이션 계측하기{{< /nextlink >}}
-{{< nextlink href="/serverless/guide/datadog_forwarder_go" >}}Datadog 포워더를 사용하여 Go 서버리스 애플리케이션 계측하기{{< /nextlink >}}
-{{< nextlink href="/serverless/guide/datadog_forwarder_dotnet" >}}Datadog 포워더를 사용하여 .NET 서버리스 애플리케이션 계측하기{{< /nextlink >}}
+## Datadog Forwarder를 사용해 설치
+
+{{< whatsnext desc="이전에 Datadog Forwarder를 사용하여 모니터링하도록 설정된 애플리케이션에 대한 설치 지침" >}}
+{{< nextlink href="/serverless/guide/datadog_forwarder_node" >}}Datadog Forwarder를 사용하여 Node.js 서버리스 애플리케이션 계측하기{{< /nextlink >}}
+{{< nextlink href="/serverless/guide/datadog_forwarder_python" >}}Datadog Forwarder를 사용하여 Python 서버리스 애플리케이션 계측하기{{< /nextlink >}}
+{{< nextlink href="/serverless/guide/datadog_forwarder_java" >}}Datadog Forwarder를 사용하여 Java 서버리스 애플리케이션 계측하기{{< /nextlink >}}
+{{< nextlink href="/serverless/guide/datadog_forwarder_go" >}}Datadog Forwarder를 사용하여 Go 서버리스 애플리케이션 계측하기{{< /nextlink >}}
+{{< nextlink href="/serverless/guide/datadog_forwarder_dotnet" >}}Datadog Forwarder를 사용하여 .NET 서버리스 애플리케이션 계측하기{{< /nextlink >}}
 {{< nextlink href="/serverless/guide/extension_motivation" >}}Datadog Lambda 확장으로 마이그레이션 결정하기{{< /nextlink >}}
 {{< /whatsnext >}}
 

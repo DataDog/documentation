@@ -95,9 +95,9 @@ Take the following steps according to your compliance requirements. You might no
 
 This step makes logs with sensitive data, both logs that already sent and logs that might keep flowing in, not queryable in Datadog (Explorer, Dashboards, and Livetail).
 
-Use the [Data Access configuration page][17] and a sensitive outline query to define a [restriction][18] that applies to everyone in your organization. For example, the query mentioned above: `version:x.y.z source:python status:debug`.
+Use the [Data Access configuration page][17] and a sensitive outline query to define a [restriction][18] that applies to everyone in your organization. For example, the query mentioned below: `version:x.y.z source:python status:debug`. You can also restrict over a time period with the `@timestamp` attribute. For example, `@timestamp:[1731597125165 TO 1731597125200]`.
 
-**Note:** Using **NOT** in the sensitive outline query restricts users from seeing anything BUT matching logs.
+**Note:** Using **NOT** in the sensitive outline query restricts users from the logs matching the query and allows users to see logs that do not match the query.
 
 {{< img src="logs/guide/sensitive/sensitive_data_access.png" alt="Sensitive Data Access" style="width:80%;" >}}
 

@@ -9,6 +9,7 @@ categories:
 - containers
 - orchestration
 - log collection
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/documentation/blob/master/content/en/integrations/kubernetes.md
 description: Kubernetes クラスターとそこで実行されているアプリケーションの状態を監視します。Pod スケジュールイベントをキャプチャし、Kubelets
@@ -28,7 +29,6 @@ git_integration_title: Kubernetes
 integration_id: kubernetes
 integration_title: Kubernetes
 is_public: true
-custom_kind: integration
 name: Kubernetes
 newhlevel: true
 public_title: Datadog-Kubernetes インテグレーション

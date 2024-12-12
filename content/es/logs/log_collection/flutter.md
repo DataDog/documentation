@@ -7,7 +7,6 @@ further_reading:
 - link: logs/explorer/
   tag: Documentación
   text: Aprende a explorar tus logs
-kind: documentación
 title: Recopilación de logs de Flutter
 ---
 Envía logs a Datadog desde tus aplicaciones de Flutter con [el complemento de flutter de Datadog][1] y aprovecha las siguientes funciones:

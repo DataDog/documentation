@@ -308,7 +308,7 @@ When enabled, a watchdog termination is reported and attached to the previous RU
 
 - The application was not upgraded in the meantime,
 
-- And it did not call neither `exit`, nor `abort`,
+- And it did not call either `exit`, or `abort`,
 
 - And it did not crash, either because of an exception, or because of a fatal [app hang][13],
 
@@ -349,6 +349,10 @@ Mapping files are used to deobfuscate stack traces, which helps in debugging err
 
 For iOS applications, the matching of stack traces and symbol files relies on their `uuid` field.
 
+### List uploaded .dSYMs
+
+See the [RUM Debug Symbols][20] page to view all uploaded symbols.
+
 ### Symbolicate crash reports
 
 Crash reports are collected in a raw format and mostly contain memory addresses. To map these addresses into legible symbol information, Datadog requires .`dSYM` files, which are generated in your application's build or distribution process.
@@ -357,12 +361,7 @@ Crash reports are collected in a raw format and mostly contain memory addresses.
 
 Every iOS application produces `.dSYM` files for each application module. These files minimize an application's binary size and enable faster download speed. Each application version contains a set of `.dSYM` files. 
 
-Depending on your setup, you may need to download `.dSYM` files from App Store Connect or find them on your local machine. 
-
-| Bitcode Enabled | Description |
-|---|---|
-| Yes | `.dSYM` files are available after [App Store Connect][7] completes processing your application's build. |
-| No | Xcode exports `.dSYM` files to `$DWARF_DSYM_FOLDER_PATH` at the end of your application's build. Ensure that the `DEBUG_INFORMATION_FORMAT` build setting is set to **DWARF with dSYM File**. By default, Xcode projects only set `DEBUG_INFORMATION_FORMAT` to **DWARF with dSYM File** for the Release project configuration. |
+Xcode exports `.dSYM` files to `$DWARF_DSYM_FOLDER_PATH` at the end of your application's build. Ensure that the `DEBUG_INFORMATION_FORMAT` build setting is set to **DWARF with dSYM File**. By default, Xcode projects only set `DEBUG_INFORMATION_FORMAT` to **DWARF with dSYM File** for the Release project configuration.
 
 ### Upload your .dSYM file
 
@@ -460,7 +459,7 @@ To verify your iOS Crash Reporting and Error Tracking configuration, issue a cra
 
    ```swift
    func didTapButton() {
-   fatalError("Crash the app")
+     fatalError("Crash the app")
    }
    ```
 
@@ -491,3 +490,4 @@ To verify your iOS Crash Reporting and Error Tracking configuration, issue a cra
 [17]: /real_user_monitoring/explorer/search/#facets
 [18]: /dashboards/widgets/timeseries
 [19]: /real_user_monitoring/error_tracking/mobile/ios/?tab=cocoapods#add-crash-reporting
+[20]: https://app.datadoghq.com/source-code/setup/rum

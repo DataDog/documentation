@@ -4,17 +4,17 @@ further_reading:
 - link: "/integrations/mongo/"
   tag: "Documentation"
   text: "Basic MongoDB Integration"
-
 ---
 
-<div class="alert alert-info">Database Monitoring for MongoDB is in private beta. If you are interested in participating, reach out to your Datadog Customer Success Manager.</div>
-
-Database Monitoring provides deep visibility into your MongoDB databases by exposing database metrics, operation samples, explain plans, and events.
+Database Monitoring offers comprehensive insights into your MongoDB databases by providing access to critical metrics, slow operations, operation samples, explain plans, and replication state changes. To take advantage of Database Monitoring for MongoDB, ensure that the Datadog Agent is installed and configured to connect to your MongoDB instances. This guide outlines the steps to set up Database Monitoring for self-hosted MongoDB.
 
 ## Before you begin
 
 Supported MongoDB major versions
-: 4.4, 5.0, 6.0, 7.0
+: 4.4, 5.0, 6.0, 7.0, 8.0
+
+Supported MongoDB editions
+: Community, Enterprise
 
 {{% dbm-mongodb-before-you-begin %}}
 
@@ -151,25 +151,12 @@ db.grantRolesToUser("datadog", [
 {{% /tab %}}
 {{< /tabs >}}
 
+### Securely store your password
+{{% dbm-secret %}}
+
 ### Install and configure the Agent
 
 Datadog recommends installing the Agent directly on the MongoDB host, as that enables the Agent to collect a variety of system telemetry (CPU, memory, disk, network) in addition to MongoDB specific telemetry.
-
-#### Install the beta version of the Datadog Agent
-
-The Database Monitoring feature for MongoDB is available in the beta version of the Datadog Agent. To install the beta version of the Datadog Agent, follow the instructions for your environment. A [Datadog API key][1] is required.
-
-{{< tabs >}}
-{{% tab "Linux Host" %}}
-{{% dbm-mongodb-agent-beta-install-linux %}}
-{{% /tab %}}
-{{% tab "Docker" %}}
-{{% dbm-mongodb-agent-beta-install-docker %}}
-{{% /tab %}}
-{{% tab "Kubernetes" %}}
-{{% dbm-mongodb-agent-beta-install-kubernetes %}}
-{{% /tab %}}
-{{< /tabs >}}
 
 #### Create the configuration file
 
@@ -199,4 +186,14 @@ The Database Monitoring feature for MongoDB is available in the beta version of 
 {{% /tab %}}
 {{< /tabs >}}
 
+
+## Data Collected
+
+### Metrics
+
+Refer to the [MongoDB integration documentation][2] for a comprehensive list of metrics collected by the MongoDB integration.
+
+{{% dbm-mongodb-agent-data-collected %}}
+
 [1]: /account_management/api-app-keys/
+[2]: /integrations/mongo/?tab=standalone#metrics

@@ -14,7 +14,7 @@ Data Streams Monitoring を開始するには、Datadog Agent と .NET ライブ
   * Kafka および RabbitMQ: v2.28.0 以降
   * Amazon SQS: v2.48.0
 
-### インフラストラクチャーリスト
+### インストール
 
 .NET は自動インスツルメンテーションを使用して、Data Streams Monitoring がエンドツーエンドのレイテンシーやキューとサービス間の関係を測定するために必要な追加のメタデータを挿入し抽出します。Data Streams Monitoring を有効にするには、Kafka または RabbitMQ にメッセージを送信する (またはメッセージを消費する) サービス上で `DD_DATA_STREAMS_ENABLED` 環境変数を `true` に設定します。
 

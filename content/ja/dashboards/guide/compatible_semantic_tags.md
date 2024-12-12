@@ -36,6 +36,6 @@ title: 互換性のあるセマンティックタグ
 
 {{% semantic-color %}}
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}

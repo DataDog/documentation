@@ -19,6 +19,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - os & system
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/pdh_check/README.md
 display_on_public_website: true
@@ -26,9 +27,8 @@ draft: false
 git_integration_title: pdh_check
 integration_id: pdh
 integration_title: PDH Check
-integration_version: 2.1.0
+integration_version: 4.0.0
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: pdh_check
 public_title: PDH Check
@@ -40,6 +40,7 @@ tile:
   classifier_tags:
   - Supported OS::Windows
   - Category::OS とシステム
+  - Offering::Integration
   configuration: README.md#Setup
   description: Windows のパフォーマンスカウンターを収集およびグラフ化。
   media: []
@@ -59,13 +60,13 @@ Windows のパフォーマンスカウンターからメトリクスをリアル
 
 - PDH API を使用して Windows のパフォーマンスカウンターを視覚化および監視できます。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 PDH チェックは [Datadog Agent][2] パッケージに含まれています。追加のインストールは必要ありません。
 
-### ブラウザトラブルシューティング
+### 構成
 
 1. Windows のパフォーマンスデータの収集を開始するには、[Agent の構成ディレクトリ][3]のルートにある `conf.d/` フォルダーの `pdh_check.d/conf.yaml` ファイルを編集します。使用可能なすべての構成オプションの詳細については、[サンプル pdh_check.d/conf.yaml][4] を参照してください。
 
@@ -75,21 +76,21 @@ PDH チェックは [Datadog Agent][2] パッケージに含まれています�
 
 [Agent の status サブコマンド][6]を実行し、Checks セクションの `pdh_check` を探します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 
 PDH チェックにより収集されたすべてのメトリクスは、[カスタムメトリクス][7]として Datadog に送信できますが、これはお客様への[請求][8]に影響します。
 
-### ヘルプ
+### イベント
 
 PDH チェックには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 
 PDH チェックには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
 

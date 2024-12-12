@@ -15,6 +15,7 @@ categories:
 - インシデント
 - 問題追跡
 - notifications
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/pagerduty/README.md
 display_on_public_website: true
@@ -24,7 +25,6 @@ integration_id: pagerduty-ui
 integration_title: PagerDuty UI
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: pagerduty_ui
 public_title: PagerDuty UI
@@ -97,7 +97,7 @@ Incidents by PagerDuty は、Datadog のインターフェイスから直接イ�
 - PagerDuty に移動して、個々のインシデントとそのサービスを表示したり、インシデントリストを表示することができます
 
 
-## 計画と使用
+## セットアップ
 
 1. Datadog アカウントで、Dashboards に移動します。Status Dashboard ウィジェットを追加したいダッシュボードを選択するか、[新しいダッシュボードを作成][1]します。
 

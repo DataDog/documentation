@@ -26,11 +26,12 @@ By enriching your RUM data with feature flag data, you can be confident that you
 
 Feature flag tracking is available in the RUM Browser SDK. To start, set up [RUM browser monitoring][1]. You need the Browser RUM SDK version >= 4.25.0.
 
-To start collecting feature flag data, initialize the RUM SDK and configure the `enableExperimentalFeatures` initialization parameter with ` ["feature_flags"]`.
+<details>
+  <summary>Before <code>v5.17.0</code></summary>
 
-<details open>
-  <summary>npm</summary>
+If you are using a version previous to 5.17.0, initialize the RUM SDK and configure the `enableExperimentalFeatures` initialization parameter with `["feature_flags"]` to start collecting feature flag data.
 
+{{% collapse-content title="NPM" level="h4" %}}
 ```javascript
   import { datadogRum } from '@datadog/browser-rum';
 
@@ -41,12 +42,9 @@ To start collecting feature flag data, initialize the RUM SDK and configure the 
     ...
 });
 ```
+{{% /collapse-content %}} 
 
-</details>
-
-<details>
-  <summary>CDN async</summary>
-
+{{% collapse-content title="CDN async" level="h4" %}}
 ```javascript
 window.DD_RUM.onReady(function() {
     window.DD_RUM.init({
@@ -56,11 +54,9 @@ window.DD_RUM.onReady(function() {
     })
 })
 ```
-</details>
+{{% /collapse-content %}} 
 
-<details>
-  <summary>CDN sync</summary>
-
+{{% collapse-content title="CDN sync" level="h4" %}}
 ```javascript
 window.DD_RUM &&
     window.DD_RUM.init({
@@ -69,6 +65,8 @@ window.DD_RUM &&
       ...
     })
 ```
+{{% /collapse-content %}}
+
 </details>
 <br/>
 
@@ -78,13 +76,13 @@ window.DD_RUM &&
 
 Feature flag tracking is available in the RUM iOS SDK. To start, set up [RUM iOS monitoring][1]. You need the iOS RUM SDK version >= 1.16.0.
 
-[1]: https://docs.datadoghq.com/real_user_monitoring/ios/?tab=swift
+[1]: https://docs.datadoghq.com/real_user_monitoring/mobile_and_tv_monitoring/setup/ios/?tab=swiftpackagemanagerspm
 {{% /tab %}}
 {{% tab "Android" %}}
 
 Feature flag tracking is available in the RUM Android SDK. To start, set up [RUM Android monitoring][1]. You need the Android RUM SDK version >= 1.18.0.
 
-[1]: https://docs.datadoghq.com/real_user_monitoring/android/?tab=kotlin
+[1]: https://docs.datadoghq.com/real_user_monitoring/mobile_and_tv_monitoring/setup/android/?tab=kotlin
 {{% /tab %}}
 {{% tab "Flutter" %}}
 
@@ -96,7 +94,19 @@ Feature flag tracking is available for your Flutter applications. To start, set 
 
 Feature flag tracking is available for your React Native applications. To start, set up [RUM React Native monitoring][1]. You need the React Native RUM SDK version >= 1.7.0.
 
-[1]: https://docs.datadoghq.com/real_user_monitoring/reactnative/
+[1]: https://docs.datadoghq.com/real_user_monitoring/mobile_and_tv_monitoring/setup/reactnative/
+{{% /tab %}}
+{{% tab "Unity" %}}
+
+Feature flag tracking is available for your Unity applications. To start, set up [RUM Unity monitoring][1].
+
+[1]: https://docs.datadoghq.com/real_user_monitoring/mobile_and_tv_monitoring/setup/unity/
+{{% /tab %}}
+{{% tab "Kotlin Multiplatform" %}}
+
+Feature flag tracking is available for your Kotlin Multiplatform applications. To start, set up [RUM Kotlin Multiplatform monitoring][1].
+
+[1]: https://docs.datadoghq.com/real_user_monitoring/mobile_and_tv_monitoring/setup/kotlin-multiplatform/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -562,6 +572,62 @@ Flagsmith does not currently support this integration. Create a ticket with Flag
 {{% /tab %}}
 {{< /tabs >}}
 
+
+### Kameleoon integration
+
+{{< tabs >}}
+{{% tab "Browser" %}}
+
+After creating and initializing the Kameleoon SDK, subscribe to the `Evaluation` event using the `onEvent` handler.
+
+For more information about the SDK, see [Kameleoon JavaScript SDK documentation][1].
+
+```javascript
+client.onEvent(EventType.Evaluation, ({ featureKey, variation }) => {
+  datadogRum.addFeatureFlagEvaluation(featureKey, variation.key);
+});
+```
+
+
+[1]: https://developers.kameleoon.com/feature-management-and-experimentation/web-sdks/js-sdk
+{{% /tab %}}
+{{% tab "iOS" %}}
+
+Kameleoon does not support this integration. Contact product@kameleoon.com to request this feature.
+
+{{% /tab %}}
+{{% tab "Android" %}}
+
+Kameleoon does not support this integration. Contact product@kameleoon.com to request this feature.
+
+
+{{% /tab %}}
+{{% tab "Flutter" %}}
+
+Kameleoon does not support this integration. Contact product@kameleoon.com to request this feature.
+
+
+{{% /tab %}}
+{{% tab "React Native" %}}
+
+After creating and initializing the Kameleoon SDK, subscribe to the `Evaluation` event using the `onEvent` handler.
+
+Learn more about SDK initialization in the [Kameleoon React Native SDK documentation][1].
+
+```javascript
+const { onEvent } = useInitialize();
+
+onEvent(EventType.Evaluation, ({ featureKey, variation }) => {
+  datadogRum.addFeatureFlagEvaluation(featureKey, variation.key);
+});
+```
+
+
+[1]: https://developers.kameleoon.com/feature-management-and-experimentation/web-sdks/react-js-sdk
+{{% /tab %}}
+{{< /tabs >}}
+
+
 ### LaunchDarkly integration
 
 {{< tabs >}}
@@ -620,7 +686,7 @@ LaunchDarkly does not currently support this integration. Create a ticket with L
 {{< tabs >}}
 {{% tab "Browser" %}}
 
-Initialize Split's SDK and and create an impression listener reporting feature flag evaluations to Datadog using the following snippet of code:
+Initialize Split's SDK and create an impression listener reporting feature flag evaluations to Datadog using the following snippet of code:
 
 For more information about initializing Split's SDK, see Split's [JavaScript SDK documentation][1].
 
@@ -718,7 +784,7 @@ For more information about initializing Split's SDK, see Split's [Flutter plugin
 {{% /tab %}}
 {{% tab "React Native" %}}
 
-Initialize Split's SDK and and create an impression listener reporting feature flag evaluations to Datadog using the following snippet of code:
+Initialize Split's SDK and create an impression listener reporting feature flag evaluations to Datadog using the following snippet of code:
 
 For more information about initializing Split's SDK, see Split's [React Native SDK documentation][1].
 
@@ -819,16 +885,14 @@ Filtering your **Errors** with the `@feature_flags.{flag_name}` attribute, you c
 
 ## Troubleshooting
 
-### Why doesn't my feature flag data reflect what I expect to see?
+### Feature flag data is not reflecting the expected information
 Feature flags show up in the context of events where they are evaluated, meaning they should show up on the views that the feature flag code logic is run on.
 
 Depending on how you've structured your code and set up your feature flags, you may see unexpected feature flags appear in the context of some events.
 
 For example, to see what **Views** your feature flag is being evaluated on, you can use the RUM Explorer to make a similar query:
 
-
 {{< img src="real_user_monitoring/guide/setup-feature-flag-data-collection/feature_flag_view_query.png" alt="Search Views for Feature Flags in the RUM Explorer" style="width:75%;">}}
-
 
 Here are a few examples of reasons why your feature flag is being evaluated on unrelated Views that can help with your investigations:
 
@@ -849,7 +913,7 @@ datadogRum.addFeatureFlagEvaluation(key.replace(':', '_'), value);
 ## Further Reading
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/browser/setup
+[1]: /real_user_monitoring/browser/setup/
 [2]: https://app.datadoghq.com/rum/explorer
 [3]: /dashboards/
 [4]: /monitors/#create-monitors

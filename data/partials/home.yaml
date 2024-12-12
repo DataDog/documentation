@@ -7,7 +7,7 @@ guides:
     link_text: Getting Started with the Agent
     link: getting_started/agent/
   - title: Set Up Integrations
-    desc: Gather metrics, traces, and logs with over 750 built-in integrations to send to Datadog.
+    desc: Gather metrics, traces, and logs with over 800 built-in integrations to send to Datadog.
     link_text: Getting Started with Integrations
     link: getting_started/integrations/
   - title: Get Started in App
@@ -107,6 +107,10 @@ nav_sections:
         link: synthetics/
         icon: synthetics
         desc: Ensure uptime, flag regional issues, and test application performance
+      - title: Error Tracking
+        link: error_tracking/
+        icon: error-tracking
+        desc: Identify critical errors and accelerate resolution across web, mobile, and backend
       - title: Real User Monitoring
         link: real_user_monitoring/
         icon: rum
@@ -127,7 +131,7 @@ nav_sections:
         link: continuous_integration/
         icon: ci
         desc: Monitor the health and performance of your CI pipelines
-      - title: Test Visibility
+      - title: Test Optimization
         link: tests/
         icon: ci
         desc: Detect flaky tests and identify commits introducing flaky tests
@@ -147,6 +151,10 @@ nav_sections:
         link: observability_pipelines/
         icon: pipelines
         desc: Manage and monitor your telemetry pipelines
+      - title: LLM Observability
+        link: llm_observability/
+        icon: llm-observability
+        desc: Trace, monitor, and secure your LLM applications
   - nav_section:
     - name: 'Configuration'
     - navtiles:

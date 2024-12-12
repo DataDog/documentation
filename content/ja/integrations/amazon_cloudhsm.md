@@ -3,6 +3,7 @@ categories:
 - cloud
 - aws
 - ログの収集
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/documentation/blob/master/content/en/integrations/amazon_cloudhsm.md
 description: Datadog オーガニゼーションの HSM 監査ログを収集
@@ -10,7 +11,6 @@ has_logo: true
 integration_id: amazon-cloudhsm
 integration_title: AWS CloudHSM
 is_public: true
-custom_kind: integration
 name: amazon_cloudhsm
 public_title: Datadog-AWS Cloudhsm インテグレーション
 short_description: Datadog オーガニゼーションの HSM 監査ログを収集

@@ -1,0 +1,117 @@
+name: Code Owners Approval Check
+
+on:
+  pull_request_review:
+    types: [submitted, dismissed]
+
+permissions: {}
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref }}
+  cancel-in-progress: true
+
+jobs:
+  check-code-owners-approval:
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+      contents: read
+    steps:
+      - name: Check Code Owners Approval
+        id: check_approvals
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{secrets.CODEOWNER_WORKFLOW_TOKEN}}
+          script: |
+            const { owner, repo, number } = context.issue;
+            
+            // Get pull request details
+            const { data: pr } = await github.rest.pulls.get({ owner, repo, pull_number: number });
+            
+            // Skip if not targeting master
+            if (pr.base.ref !== 'master') {
+              console.log(`Base branch is ${pr.base.ref}. Skipping check.`);
+              return;
+            }
+
+            // Get required reviewers (this includes CODEOWNERS)
+            const { data: reviewers } = await github.rest.pulls.listRequestedReviewers({
+              owner,
+              repo,
+              pull_number: number,
+            });
+
+            // Get all reviews
+            const { data: reviews } = await github.rest.pulls.listReviews({
+              owner,
+              repo,
+              pull_number: number,
+            });
+
+            // Track latest review state per user
+            const latestReviews = new Map();
+            reviews.forEach(review => {
+              const existing = latestReviews.get(review.user.login);
+              if (!existing || review.submitted_at > existing.submitted_at) {
+                latestReviews.set(review.user.login, review);
+              }
+            });
+
+            // Get current approvals
+            const approvals = new Set(
+              Array.from(latestReviews.values())
+                .filter(review => review.state === 'APPROVED')
+                .map(review => review.user.login)
+            );
+
+            // Track team memberships and approvals
+            const requiredTeams = new Set(
+              reviewers.teams.map(team => `@${owner}/${team.slug}`)
+            );
+
+            // Check all approvals and gather missing ones
+            const missingApprovals = [];
+            const teamApprovals = new Map();
+
+            // Check team approvals
+            for (const teamSlug of requiredTeams) {
+              const strippedTeamSlug = teamSlug.replace(`@${owner}/`, '');
+              try {
+                const { data: teamMembers } = await github.rest.teams.listMembersInOrg({
+                  org: owner,
+                  team_slug: strippedTeamSlug,
+                });
+                
+                const hasTeamApproval = teamMembers.some(member => 
+                  approvals.has(member.login)
+                );
+                
+                teamApprovals.set(teamSlug, hasTeamApproval);
+                
+                if (!hasTeamApproval) {
+                  missingApprovals.push(teamSlug);
+                }
+              } catch (error) {
+                console.error(`Error checking team ${teamSlug}: ${error}`);
+                teamApprovals.set(teamSlug, null); // null indicates error
+                missingApprovals.push(teamSlug);
+              }
+            }
+
+            // Check individual approvals
+            const individualApprovals = new Map();
+            reviewers.users.forEach(user => {
+              const userApproved = approvals.has(user.login);
+              individualApprovals.set(`@${user.login}`, userApproved);
+              
+              if (!userApproved) {
+                missingApprovals.push(`@${user.login}`);
+              }
+            });
+
+            // Set final status
+            if (missingApprovals.length > 0) {
+              core.setFailed(`Missing approvals from: ${missingApprovals.join(', ')}`);
+            } else {
+              console.log('All required reviewers have approved.');
+            }

@@ -7,7 +7,6 @@ further_reading:
 - link: logs/explorer
   tag: Documentación
   text: Aprende a explorar tus logs
-kind: documentación
 title: Recopilación de logs de Roku
 ---
 

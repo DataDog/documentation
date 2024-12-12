@@ -5,6 +5,7 @@ categories:
 - cloud
 - aws
 - log collection
+custom_kind: 통합
 dependencies: []
 description: AWS MQ의 핵심 메트릭 추적하기.
 doc_link: https://docs.datadoghq.com/integrations/amazon_mq/
@@ -19,7 +20,6 @@ integration_id: ''
 integration_title: Amazon MQ
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: '1.0'
 name: amazon_mq
 public_title: Datadog-Amazon MQ 통합
@@ -74,7 +74,7 @@ AWS에서 검색된 각 메트릭에는 호스트 이름, 보안 그룹 등을 �
 
 AWS Amazon MQ 통합에는 이벤트가 포함되어 있지 않습니다.
 
-### 서비스 검사
+### 서비스 점검
 
 AWS Amazon MQ 통합에는 서비스 점검이 포함되어 있지 않습니다.
 

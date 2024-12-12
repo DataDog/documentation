@@ -27,20 +27,9 @@ Send [traces][1] to Datadog from your iOS applications with [Datadog's `dd-sdk-i
 
 ## Setup
 
-1. Declare the library as a dependency depending on your package manager:
+1. Declare the library as a dependency depending on your package manager. Swift Package Manager (SPM) is recommended.
 
 {{< tabs >}}
-{{% tab "CocoaPods" %}}
-
-You can use [CocoaPods][4] to install `dd-sdk-ios`:
-```
-pod 'DatadogCore'
-pod 'DatadogTrace'
-```
-
-[4]: https://cocoapods.org/
-
-{{% /tab %}}
 {{% tab "Swift Package Manager (SPM)" %}}
 
 To integrate using Apple's Swift Package Manager, add the following as a dependency to your `Package.swift`:
@@ -53,6 +42,17 @@ In your project, link the following libraries:
 DatadogCore
 DatadogTrace
 ```
+
+{{% /tab %}}
+{{% tab "CocoaPods" %}}
+
+You can use [CocoaPods][4] to install `dd-sdk-ios`:
+```
+pod 'DatadogCore'
+pod 'DatadogTrace'
+```
+
+[4]: https://cocoapods.org/
 
 {{% /tab %}}
 {{% tab "Carthage" %}}
@@ -464,13 +464,13 @@ Trace.enable(
 
 URLSessionInstrumentation.enable(
     with: .init(
-        delegateClass: SessionDelegate.self,
+        delegateClass: <YourSessionDelegate>.self,
     )
 )
 
 let session = URLSession(
     configuration: .default,
-    delegate: SessionDelegate(),
+    delegate: <YourSessionDelegate>(),
     delegateQueue: nil
 )
 ```

@@ -11,6 +11,7 @@ categories:
 - 構成とデプロイ
 - 問題追跡
 - 開発ツール
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/split-rum/README.md
 display_on_public_website: true
@@ -20,7 +21,6 @@ integration_id: split-rum
 integration_title: Split - RUM
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: split-rum
 public_title: Split - RUM
@@ -61,7 +61,7 @@ tile:
 
 Datadog Split RUM インテグレーションにより、製品チームは機能フラグ情報を RUM データにオーバーレイして表示することができます。これにより、個々のユーザーのアクティビティとエクスペリエンスをリアルタイムでプロアクティブにモニタリングし、必要に応じて、機能低下の原因となっている可能性のある機能を迅速にロールバックまたは停止することができます。
 
-## 計画と使用
+## セットアップ
 
 機能フラグ追跡は、RUM ブラウザ SDK で利用可能です。詳細なセットアップ方法は、[RUM での機能フラグデータの概要][3]ガイドをご覧ください。
 
@@ -77,7 +77,7 @@ const factory = SplitFactory({
       key: "<USER_ID>",
     },
     impressionListener: {
-      logImpression(impressionData) {              
+      logImpression(impressionData) {
           datadogRum
               .addFeatureFlagEvaluation(
                    impressionData.impression.feature,
@@ -90,7 +90,7 @@ const factory = SplitFactory({
 const client = factory.client();
 ```
 
-## ヘルプ
+## トラブルシューティング
 
 サポートが必要な場合は、Split ドキュメントの [JavaScript SDK ページ][4]を参照するか、[Datadog サポート][5]にお問い合わせください。
 

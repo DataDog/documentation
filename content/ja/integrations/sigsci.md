@@ -26,6 +26,7 @@ author:
   support_email: info@signalsciences.com
 categories:
 - security
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/sigsci/README.md
 display_on_public_website: true
@@ -35,7 +36,6 @@ integration_id: sigsci
 integration_title: Signal Sciences
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: sigsci
 public_title: Signal Sciences
@@ -51,10 +51,14 @@ tile:
   - Supported OS::macOS
   - Supported OS::Windows
   - Category::Security
+  - Offering::Integration
   configuration: README.md#Setup
   description: Signal Sciences からデータを収集して異常値を表示し、攻撃を阻止
   media: []
   overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.signalsciences.com/blog/
   support: README.md#Support
   title: Signal Sciences
 ---
@@ -95,11 +99,11 @@ Signal Sciences からメトリクスとイベントをリアルタイムに取�
 
 - Signal Sciences エージェントのステータスに関するアラートを表示できます。
 
-## 計画と使用
+## セットアップ
 
 Signal Sciences-Datadog インテグレーションを使用するには、Signal Sciences ユーザーである必要があります。Signal Sciences の詳細については、<https://www.signalsciences.com> を参照してください。
 
-### ブラウザトラブルシューティング
+### 構成
 
 #### メトリクスの収集
 
@@ -143,21 +147,21 @@ Signal Sciences-Datadog インテグレーションを使用するには、Signa
 
 詳細については、[Datadog Signal Sciences インテグレーション][7]を参照してください。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "sigsci" >}}
 
 
-### ヘルプ
+### イベント
 
 Signal Sciences で IP アドレスにフラグが立てられると、イベントが作成され、[Datadog イベントストリーム][9]に送信されます。
 
-### ヘルプ
+### サービスチェック
 
 Signal Sciences インテグレーションには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][10]までお問合せください。
 

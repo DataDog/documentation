@@ -15,7 +15,6 @@ further_reading:
 - link: /continuous_integration/troubleshooting/
   tag: ドキュメント
   text: CI Visibility のトラブルシューティング
-kind: ドキュメント
 title: Swift テスト
 type: multi-code-lang
 ---

@@ -39,7 +39,7 @@ title: 機密データ問題を調査する
 {{< img src="sensitive_data_scanner/investigate_sensitive_data_issues/issues_panel_02_01_2024.png" alt="visa カードスキャナーの重大な問題が表示された問題パネル" style="width:50%;">}}
 4. **Blast Radius** セクションで、
    a. この機密データの問題の影響を受けた上位 10 個のサービス、ホスト、環境を確認します。
-   b. サービスをクリックすると、サービスの詳細が**サービス カタログ**に表示されます。  
+   b. サービスをクリックすると、サービスの詳細が**サービス カタログ**に表示されます。
    c. ホストをクリックすると、ホストの詳細情報が Infrastructure List ページに表示されます。
 {{< img src="sensitive_data_scanner/investigate_sensitive_data_issues/blast_radius_02_01_2024.png" alt="影響を受けた上位 10 個のサービスが表示された問題パネル" style="width:50%;">}}
 機密データの問題の検出に使用されたスキャンルールを修正する場合は、パネル上部の **Modify Rule** をクリックします。

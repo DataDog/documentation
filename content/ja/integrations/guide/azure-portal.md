@@ -38,7 +38,7 @@ Datadog リソースを使用すると、関連付けられた Azure サブス�
 
 {{< img src="integrations/guide/azure_portal/resource-overview.png" alt="左のナビバーで Overview がハイライトされた Azure ポータル" responsive="true" style="width:100%;">}}
 
-### 重要な情報
+### エッセンシャル
 
 概要ページには、リソースグループ名、場所 (地域)、サブスクリプション、タグ、Datadog 組織リンク、ステータス、料金プラン、請求期間など、Datadog リソースに関する重要な情報が表示されます。
 
@@ -104,7 +104,7 @@ Datadog の請求プランを変更するには、概要ページで **Change Pl
    - サブスクリプションをモニターに追加するには、`+ Add Subscriptions` をクリックします。利用可能なサブスクリプションのリストには、`Owner` ロールが割り当てられているサブスクリプションのみが含まれています。監視したいサブスクリプションを選択し、`Add` をクリックします。
    - Datadog で監視しているサブスクリプションを削除するには、削除したいサブスクリプションを選択し、`Remove Subscriptions` をクリックします。サブスクリプションを削除できるのは、`Owner` ロールを持つユーザーのみです。
 
-**注**: 同じ設定 (ホストフィルターやログ収集ルールなど) は、スコープ内のすべてのサブスクリプションで適用されます。異なるサブスクリプションに異なる設定を適用するには、異なる Datadog リソースを作成します。
+**Note**: The same settings (such as host filters and log collection rules) are applied across all subscriptions in scope. To apply different settings to different subscriptions, create different Datadog resources.
 
 ### Metrics and logs
 
@@ -124,7 +124,7 @@ Datadog の請求プランを変更するには、概要ページで **Change Pl
  * 包含および除外ルールの間で競合がある場合は、除外が優先されます。
  * 他のリソースタイプのメトリクス収集を制限するオプションはありません。
 
-#### ログの収集
+#### ログ収集
 
 Datadog リソースを使用して Azure から Datadog に出力できるログは 3 種類あります。
 

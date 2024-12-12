@@ -36,7 +36,7 @@ Le sélecteur d'application dans la barre de navigation supérieure vous permet 
 
 Saisissez une requête dans la barre de recherche et sélectionnez un type de visualisation dans le [RUM Explorer][1] pour rechercher et filtrer vos événements RUM. Vous pouvez consulter des événements précis ou généraux, ou vous concentrer sur un groupe d'événements pertinents.
 
-## Autorisation
+## Regrouper
 
 Vous pouvez regrouper les événements RUM que vous avez interrogés au sein d'entités de plus haut niveau, afin de déduire ou de consolider des informations à propos d'un problème. Pour identifier des patterns d'événement et agréger des événements dans des sous-ensembles, consultez la section [Regrouper des événements RUM][2].
 

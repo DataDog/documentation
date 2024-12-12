@@ -8,7 +8,7 @@ Lambda 関数から Datadog へカスタムメトリクスを送信するには�
 
 - **[ログまたはトレースからカスタムメトリクスを作成](#creating-custom-metrics-from-logs-or-traces)**: すでに Lambda 関数からトレースまたはログデータが Datadog に送信されていて、クエリを作成するデータが既存のログまたはトレースにキャプチャされている場合は、再デプロイしたりアプリケーションコードに変更を加えたりせずにログおよびトレースからカスタムメトリクスを作成できます。
 - **[Datadog Lambda 拡張機能を使ったカスタムメトリクスの送信](#with-the-datadog-lambda-extension)**: Lambda 関数から直接カスタムメトリクスを送信したい場合、Datadog では [Datadog Lambda 拡張機能][1]の使用を推奨しています。
-- **[Datadog Forwarder Lambda を使用したカスタムメトリクスの送信](#with-the-datadog-forwarder)**: Lambda 関数から Datadog Forwarder Lambda 経由でテレメトリーを送信する場合、Datadog が提供するヘルパー関数を使用してログ経由で顧客のメトリクスを送信することができます。
+- **[Datadog Forwarder Lambda を使用したカスタムメトリクスの送信](#with-the-datadog-forwarder)**: Lambda 関数から Datadog Forwarder Lambda 経由でテレメトリーを送信する場合、Datadog が提供するヘルパー関数を使用してログ経由でカスタムメトリクスを送信することができます。
 - **[(非推奨) CloudWatch ログからカスタムメトリクスを送信](#deprecated-cloudwatch-logs)**: `MONITORING|<UNIX_EPOCH_TIMESTAMP>|<METRIC_VALUE>|<METRIC_TYPE>|<METRIC_NAME>|#<TAG_LIST>` 形式のログを出力してカスタムメトリクスを送信する方法は非推奨となりました。Datadog では、代わりに [Datadog Lambda 拡張機能](#with-the-datadog-lambda-extension)を使用することを推奨しています。
 - **(非推奨) Datadog Lambda ライブラリを使用したカスタムメトリクスの送信**: Python、Node.js、Go 用の Datadog Lambda ライブラリは、`DD_FLUSH_TO_LOG` を `false` に設定すると呼び出しをブロックし、ランタイムから Datadog にカスタムメトリクスを同期的に送ることをサポートしています。パフォーマンスのオーバーヘッドに加え、メトリクス送信は、過渡的なネットワークの問題のためにリトライができないため、断続的にエラーが発生する可能性があります。Datadog では、代わりに [Datadog Lambda 拡張機能](#with-the-datadog-lambda-extension)を使用することを推奨しています。
 - **(非推奨) サードパーティライブラリの使用について**: ほとんどのサードパーティライブラリは、ディストリビューションとしてメトリクスを送信しないため、カウント不足の結果になることがあります。また、一過性のネットワークの問題でリトライが行われないため、断続的なエラーが発生することがあります。
@@ -59,7 +59,7 @@ Datadog では、サポートされている Lambda ランタイムからの[**�
 1. Lambda 関数からログを収集しない場合は、環境変数 `DD_SERVERLESS_LOGS_ENABLED` を `false` に設定します。
 1. 以下のサンプルコードまたは説明に従って、カスタムメトリクスを送信してください。
 
-{{< programming-lang-wrapper langs="python,nodeJS,go,ruby,java,dotnet,other" >}}
+{{< programming-lang-wrapper langs="python,nodeJS,go,java,dotnet,other" >}}
 {{< programming-lang lang="python" >}}
 
 ```python
@@ -110,25 +110,6 @@ func myHandler(ctx context.Context, event MyEvent) (string, error) {
   )
 }
 ```
-
-{{< /programming-lang >}}
-{{< programming-lang lang="ruby" >}}
-
-```ruby
-require 'datadog/lambda'
-
-def handler(event:, context:)
-    # ラップする必要があるのは関数ハンドラーだけです（ヘルパー関数ではありません）。
-    Datadog::Lambda.wrap(event, context) do
-        Datadog::Lambda.metric(
-          'coffee_house.order_value',         # メトリクス名
-          12.45,                              # メトリクス値
-          "product":"latte", "order":"online" # 関連付けられたタグ
-        )
-    end
-end
-```
-
 {{< /programming-lang >}}
 {{< programming-lang lang="java" >}}
 
@@ -161,6 +142,22 @@ public class Handler implements RequestHandler<APIGatewayV2ProxyRequestEvent, AP
         response.setStatusCode(200);
         return response;
     }
+
+    static {
+        // シャットダウン前にすべてのメトリクスがフラッシュされるようにする
+        Runtime.getRuntime().addShutdownHook(new Thread() {
+            @Override
+            public void run() {
+                System.out.println("[runtime] shutdownHook triggered");
+                try {
+                    Thread.sleep(300);
+                } catch (InterruptedException e) {
+                    System.out.println("[runtime] sleep interrupted");
+                }
+                System.out.println("[runtime] exiting");
+            }
+        });
+    }
 }
 ```
 
@@ -177,7 +174,7 @@ using System.IO;
 using StatsdClient;
 
 namespace Example
-{            
+{
   public class Function
   {
     static Function()
@@ -259,7 +256,7 @@ async function myHandler(event, context) {
         'order:online'              // 2 番目のタグ
     );
 
-    // 過去 20 分以内のタイムスタンプでメトリクスを送信します 
+    // 過去 20 分以内のタイムスタンプでメトリクスを送信します
     sendDistributionMetricWithDate(
         'coffee_house.order_value', // メトリクス名
         12.45,                      // メトリクス値

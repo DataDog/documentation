@@ -81,8 +81,10 @@ The following command deletes all the Kubernetes resources created by the above 
 
 ```shell
 kubectl delete datadogagent datadog
-helm delete datadog
+helm delete my-datadog-operator
 ```
+
+It is important to delete the `DatadogAgent` resource and let Operator perform a cleanup. When the `DatadogAgent` resource is created in a cluster, Operator adds a finalizer to prevent deletion until it finishes the cleanup of resources it created. If Operator is uninstalled first, attempts to delete the `DatadogAgent` resource are blocked indefinitely; this will block namespace deletion as well. A workaround in this situation is to remove the `metadata.finalizers` value from `DatadogAgent` resource.
 
 ### Tolerations
 

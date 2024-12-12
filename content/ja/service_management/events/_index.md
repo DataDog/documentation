@@ -16,17 +16,18 @@ further_reading:
 - link: https://app.datadoghq.com/event/configuration/quick-start
   tag: App
   text: クイックスタートガイド
+- link: https://www.datadoghq.com/blog/datadog-event-management
+  tag: ブログ
+  text: Aggregate, correlate, and act on alerts faster with AIOps-powered Event Management
 is_beta: true
 title: イベント管理
 ---
 
-{{< site-region region="us3,us5,gov" >}}
+{{< site-region region="gov" >}}
 <div class="alert alert-warning">Event Management はこのサイトではサポートされていません。</div>
 {{< /site-region >}}
 
-{{< callout url="https://docs.google.com/forms/d/e/1FAIpQLSeYkh0jFy_wMCLGKZ5019H0DpFvq0fILvyJEt_gRyeGgvRymA/viewform" btn_hidden="false" header="ベータ版に参加しよう">}}
-イベント管理のベータ版に参加して、Datadog とサードパーティのアラートとの相関付けを行い、イベントを実用的なインサイトに変え、調査を一元化し、重大な問題をチームとしてより迅速に管理しましょう。詳しくは、 <a href="https://www.datadoghq.com/blog/dash-2022-new-feature-roundup/#event-management">発表</a>をご覧ください。
-{{< /callout >}}
+{{< img src="service_management/events/correlation/event_management.png" alt="what is event management" style="width:100%;" >}}
 
 ## 概要
 
@@ -36,10 +37,13 @@ title: イベント管理
 
 ## コンポーネント
 
-{{< whatsnext desc="イベント管理の機能:">}}
-    {{< nextlink href="/service_management/events/ingest/" >}}<u>イベントの取り込み</u> - Datadog にイベントを送信する方法について{{< /nextlink >}}
-    {{< nextlink href="/service_management/events/explorer/" >}}<u>イベントエクスプローラー</u> - Datadog に集まるイベントの集約と表示{{< /nextlink >}}
-    {{< nextlink href="/service_management/events/usage/" >}}<u>イベントの利用</u> - イベントの分析、調査、監視 {{< /nextlink >}}
+{{< whatsnext desc="Event Management features:">}}
+    {{< nextlink href="/service_management/events/ingest/" >}}<u>Ingest events</u> - Learn how to send events to Datadog{{< /nextlink >}}
+     {{< nextlink href="/service_management/events/pipelines_and_processors/">}}<u>Pipelines and Processors</u> - Enrich and Normalize your events{{< /nextlink >}}
+    {{< nextlink href="/service_management/events/explorer/" >}}<u>Events Explorer</u> - View, search and send notifications from events coming into Datadog{{< /nextlink >}}
+    {{< nextlink href="/service_management/events/guides/usage/" >}}<u>Using events</u> - Analyze, investigate, and monitor events {{< /nextlink >}}
+    {{< nextlink href="/service_management/events/correlation/" >}}<u>Correlation</u> - reduce alert fatigure and the number of tickets/notifictions you recieve {{< /nextlink >}}
+
 {{< /whatsnext >}}
 
 ## その他の参考資料

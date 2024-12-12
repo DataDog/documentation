@@ -8,6 +8,7 @@
 {{- end -}}
 {{- $isPopup := $.Scratch.Get "popup" -}}
 {{- $img_width := .Get "width" -}}
+{{- $img_inline := .Get "inline" | default "false" -}}
 {{- $img_height := .Get "height" -}}
 {{- $wide :=  .Get "wide" -}}
 {{- $video :=  .Get "video" -}}
@@ -42,62 +43,70 @@
 {{- $pop_param := $.Scratch.Get "pop_param" -}}
 {{- $figure_class :=  .Get "figure_class" -}}
 {{ $e := (print $img_resource "?auto=format" | safeURL) }}
-<div class="shortcode-wrapper shortcode-img expand {{- if $wide -}}wide-parent{{- end -}}"><figure class="text-center {{- if $wide -}}wide {{- end -}}{{ $figure_class -}}" {{- if .Get "figure_style" -}}style="{{- with .Get "figure_style" -}}{{- . | safeCSS -}}{{- end -}}"{{- end -}}>
-  {{- if $video -}}
-    <video width="{{$img_width | default "100%" }}" height="auto"
-           muted
-           playsinline
-           autoplay
-           loop
-           controls >
-      <source src="{{ $img }}"
-              type="video/mp4"
-              media="(min-width: 0px)" >
-      <div class="play"></div>
-      <div class="pause"></div>
-    </video>
-{{- else -}}
-  {{- if (and (eq $isPopup "true") (ne $image_ext "gif")) -}}
-  <a href="{{ print $img_resource $pop_param | relURL }}" class="pop" data-bs-toggle="modal" data-bs-target="#popupImageModal">
-{{- else if .Get "href" -}}
-  <a href="{{- with .Get "href" -}}{{- . -}}{{- end -}}"
-     {{- if .Get "target" -}}target="{{- with .Get "target" -}}{{- . -}}{{- end -}}"{{- end -}} >
-{{- end -}}
-{{- if $wide -}}
-  {{ $e := (print $img_resource "?auto=format" safeURL) }}
-  {{- if eq $image_ext "gif" -}}
-    <img class="img-fluid" src="{{ (print $img_resource | safeURL) }}" {{ if .Get "style" }} style="{{ with .Get "style" }}{{ . | safeCSS }}{{end}}" {{ end }} {{ if .Get "alt" }} alt="{{ with .Get "alt"}}{{ . }}{{ end }}" {{ end }} />
+{{- if not (eq $img_inline "true")}}
+  <div class="shortcode-wrapper shortcode-img expand {{- if $wide -}}wide-parent{{- end -}}"><figure class="text-center {{- if $wide -}}wide {{- end -}}{{ $figure_class -}}" {{- if .Get "figure_style" -}}style="{{- with .Get "figure_style" -}}{{- . | safeCSS -}}{{- end -}}"{{- end -}}>
+    {{- if $video -}}
+      <video width="{{$img_width | default "100%" }}" height="auto"
+            muted
+            playsinline
+            autoplay
+            loop
+            controls >
+        <source src="{{ $img }}"
+                type="video/mp4"
+                media="(min-width: 0px)" >
+        <div class="play"></div>
+        <div class="pause"></div>
+      </video>
   {{- else -}}
-    <picture {{ if .Get "style" }} style="{{- with .Get "style" -}}{{- . | safeCSS -}}{{- end -}}" {{ end }}>
-      <img class="img-fluid" srcset="{{ $e }}" {{ if .Get "style" }} style="{{ with .Get "style" }}{{ . | safeCSS }}{{end}}" {{ end }} {{ if .Get "alt" }} alt="{{ with .Get "alt"}}{{ . }}{{ end }}" {{ end }} />
-    </picture>
+    {{- if (and (eq $isPopup "true") (ne $image_ext "gif")) -}}
+    <a href="{{ print $img_resource $pop_param | relURL }}" class="pop" data-bs-toggle="modal" data-bs-target="#popupImageModal">
+  {{- else if .Get "href" -}}
+    <a href="{{- with .Get "href" -}}{{- . -}}{{- end -}}"
+      {{- if .Get "target" -}}target="{{- with .Get "target" -}}{{- . -}}{{- end -}}"{{- end -}} >
   {{- end -}}
-{{- else -}}
-    {{ $e := (print $img_resource "?auto=format" | safeURL) }}
+  {{- if $wide -}}
+    {{ $e := (print $img_resource "?auto=format" safeURL) }}
     {{- if eq $image_ext "gif" -}}
-        <img class="img-fluid" src="{{ (print $img_resource | safeURL) }}" {{ if .Get "style" }} style="{{- with .Get "style" -}}{{ . | safeCSS }}{{- end -}}" {{ end }} {{ if .Get "alt" }} alt="{{- with .Get "alt" -}}{{.}}{{- end -}}" {{ end }} />
+      <img class="img-fluid" src="{{ (print $img_resource | safeURL) }}" {{ if .Get "style" }} style="{{ with .Get "style" }}{{ . | safeCSS }}{{end}}" {{ end }} {{ if .Get "alt" }} alt="{{ with .Get "alt"}}{{ . }}{{ end }}" {{ end }} />
     {{- else -}}
-      <picture class="" {{ if .Get "style" }} style="{{- with .Get "style" -}}{{- . | safeCSS -}}{{- end -}}" {{ end }} >
-        <img 
-            class="img-fluid" 
-            srcset="{{ $e }}" 
-            {{ if .Get "style" }}style="{{ with .Get "style" }}{{ . | safeCSS }}{{ end }}" {{ end }} 
-            {{- with $img_width -}} width="{{ . }}" {{- end -}}
-            {{- with $img_height -}} height="{{ . }}" {{- end -}}
-            {{ if .Get "alt" }} alt="{{- with .Get "alt" -}}{{.}}{{- end -}}" {{ end }} />
+      <picture {{ if .Get "style" }} style="{{- with .Get "style" -}}{{- . | safeCSS -}}{{- end -}}" {{ end }}>
+        <img class="img-fluid" srcset="{{ $e }}" {{ if .Get "style" }} style="{{ with .Get "style" }}{{ . | safeCSS }}{{end}}" {{ end }} {{ if .Get "alt" }} alt="{{ with .Get "alt"}}{{ . }}{{ end }}" {{ end }} />
       </picture>
     {{- end -}}
-{{- end -}}
-{{- if (and (eq $isPopup "true") (ne $image_ext "gif")) -}}
-  </a>
-{{- else if .Get "href" -}}
-  </a>
-{{- end -}}
-{{- end -}}
-  {{- if .Get "caption" -}}
-      {{- with .Get "caption" -}}
-          <figcaption>{{.}}</figcaption>
+  {{- else -}}
+      {{ $e := (print $img_resource "?auto=format" | safeURL) }}
+      {{- if eq $image_ext "gif" -}}
+          <img class="img-fluid" src="{{ (print $img_resource | safeURL) }}" {{ if .Get "style" }} style="{{- with .Get "style" -}}{{ . | safeCSS }}{{- end -}}" {{ end }} {{ if .Get "alt" }} alt="{{- with .Get "alt" -}}{{.}}{{- end -}}" {{ end }} />
+      {{- else -}}
+        <picture class="" {{ if .Get "style" }} style="{{- with .Get "style" -}}{{- . | safeCSS -}}{{- end -}}" {{ end }} >
+          <img 
+              class="img-fluid" 
+              srcset="{{ $e }}" 
+              {{ if .Get "style" }}style="{{ with .Get "style" }}{{ . | safeCSS }}{{ end }}" {{ end }} 
+              {{- with $img_width -}} width="{{ . }}" {{- end -}}
+              {{- with $img_height -}} height="{{ . }}" {{- end -}}
+              {{ if .Get "alt" }} alt="{{- with .Get "alt" -}}{{.}}{{- end -}}" {{ end }} />
+        </picture>
       {{- end -}}
-    {{- end -}}
-  </figure>
-</div>
+  {{- end -}}
+  {{- if (and (eq $isPopup "true") (ne $image_ext "gif")) -}}
+    </a>
+  {{- else if .Get "href" -}}
+    </a>
+  {{- end -}}
+  {{- end -}}
+    {{- if .Get "caption" -}}
+        {{- with .Get "caption" -}}
+            <figcaption>{{.}}</figcaption>
+        {{- end -}}
+      {{- end -}}
+    </figure>
+  </div>
+  {{- else -}}
+  <img 
+    srcset="{{ $e }}" 
+    {{ if .Get "style" }}style="{{ with .Get "style" }}{{ . | safeCSS }}{{ end }}" {{ end }} 
+    {{- with $img_width -}} width="{{ . }}" {{- end -}}
+    {{- with $img_height -}} height="{{ . }}" {{- end -}} />
+  {{- end -}}

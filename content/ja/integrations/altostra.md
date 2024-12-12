@@ -27,6 +27,7 @@ categories:
 - cloud
 - 構成 & デプロイ
 - ログの収集
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/altostra/README.md
 display_on_public_website: true
@@ -36,7 +37,6 @@ integration_id: altostra
 integration_title: Altostra
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: altostra
 public_title: Altostra
@@ -55,6 +55,7 @@ tile:
   - Category::Cloud
   - Category::Configuration & Deployment
   - Category::Log Collection
+  - Offering::Integration
   configuration: README.md#Setup
   description: Altostra から Datadog へクラウドアプリケーションログを自動的に送信
   media: []
@@ -72,13 +73,13 @@ Altostra は、クラウドコンピューティングサービスと統合し�
 
 Datadog Altostra インテグレーションにより、Altostra プロジェクトを実装中に自動的にインスツルメントして、Datadog アカウントにログやメトリクスを送信できます。インテグレーションのコンフィギュレーションは、デプロイ環境ごとに制御できます。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 Datadog Altostra インテグレーションは組み込まれているため、インストールは必要ありません。
 
-### ブラウザトラブルシューティング
+### 構成
 
 Datadog のインテグレーションは、アカウント設定ぺージの[インテグレーション][1]にある Altostra Web Console でご利用いただけます。
 
@@ -97,7 +98,7 @@ Datadog のインテグレーションは、アカウント設定ぺージの[�
 2. Lambda 関数を呼び出します。
 3. Datadog の _Logs_ ビューに Lambda 関数のログが表示されます。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
 

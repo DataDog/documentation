@@ -95,7 +95,7 @@ spec:
 
 `dd-check-kubernetes` パッケージを手動または任意の構成マネージャーを使用してインストールします。
 
-### コンフィグレーション
+### 構成
 
 `kubernetes.yaml` ファイルを編集して、サーバーとポートを指定し、監視するマスターを設定します。
 
@@ -202,7 +202,7 @@ kubectl create -f kube-state-metrics.yaml
 Kubernetes State Metrics サービスを別の URL またはポートで実行するように構成する場合は、`conf.d/kubernetes_state.yaml` で `kube_state_url` パラメーターを設定し、Datadog Agent を再起動することで構成を行います。
 詳細については、[kubernetes_state.yaml.example ファイル][14]を参照してください。[オートディスカバリー][9]を有効にしている場合は、kube state URL が自動的に構成および管理されます。
 
-#### ホストのインストール
+#### Host installation
 
 `dd-check-kubernetes_state` パッケージを手動または任意の構成マネージャーを使用してインストールします (CentOS/AWS 上)。[rpm パッケージ][15]をダウンロードし、[インストール手順][16]を参照してください。
 次に、`kubernetes_state.yaml` ファイルを編集して、サーバーとポートを指定し、監視するマスターを設定します。使用可能なすべての構成オプションの詳細については、[kubernetes_state.yaml のサンプル][14] を参照してください。
@@ -239,11 +239,11 @@ Checks
 
 ## Kubernetes DNS のセットアップ
 
-### インストール
+### Installation
 
 `dd-check-kube_dns` パッケージを手動または任意の構成マネージャーを使用してインストールします。
 
-### コンフィグレーション
+### 構成
 
 `kube_dns.yaml` ファイルを編集してサーバーとポートを指定し、監視するマスターを設定します。使用可能なすべてのコンフィギュレーションオプションについては、[kube_dns.yaml のサンプル ][17]を参照してください。
 
@@ -289,7 +289,7 @@ Checks
 [8]: https://kubernetes.io/docs/concepts/configuration/secret/#using-secrets-as-environment-variables
 [9]: /ja/getting_started/agent/autodiscovery/
 [10]: https://github.com/DataDog/integrations-core/blob/master/kubernetes/datadog_checks/kubernetes/data/conf.yaml.example
-[11]: /ja/agent/guide/agent-commands/#agent-status-and-information
+[11]: /ja/agent/configuration/agent-commands/#agent-status-and-information
 [12]: https://github.com/kubernetes/kube-state-metrics
 [13]: https://quay.io/coreos/kube-state-metrics
 [14]: https://github.com/DataDog/integrations-core/blob/master/kubernetes_state/datadog_checks/kubernetes_state/data/conf.yaml.example

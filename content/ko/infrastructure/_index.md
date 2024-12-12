@@ -3,10 +3,12 @@ aliases:
 - /ko/graphing/infrastructure/
 cascade:
 - _target:
-    path: /infrastructure/resource_catalog/aws_iam_user.md
+    lang: en
+    path: /infrastructure/resource_catalog/aws_iam_user
   aliases:
   - /security/cspm/custom_rules/aws_iam_user/
 - _target:
+    lang: en
     path: /infrastructure/**/*
   algolia:
     rank: 70
@@ -20,9 +22,14 @@ further_reading:
 title: 인프라스트럭처
 ---
 
-{{< img src="infrastructure/Hostmap-compressed.mp4" alt="Nginx 호스트로 필터링된 호스트 맵 비디오" video="true">}}
+{{< learning-center-callout header="활성화 웨비나 세션 참가하기" hide_image="true" btn_title="등록" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=Infrastructure+Monitoring">}}
+  기본 활성화 세션을 알아보고 등록하세요. Datadog의 SaaS 기반 인프라스트럭처 모니터링을 사용하면 메트릭, 시각화, 알림 기능을 이용해 엔지니어 팀이 클라우드나 하이브리드 환경을 최적화하고 최적화된 상태를 유지할 수 있습니다.
+{{< /learning-center-callout >}}
+
 
 ## 개요
+
+{{< img src="infrastructure/Hostmap-compressed.mp4" alt="Nginx 호스트로 필터링된 호스트 맵 비디오" video="true">}}
 
 인프라스트럭처 모니터링에는 호스트, 컨테이너 및 프로세스의 성능을 시각화, 모니터링 및 측정하는 핵심 Datadog 기능이 포함되어 있습니다.
 
@@ -30,7 +37,7 @@ title: 인프라스트럭처
 
 {{< whatsnext desc="이 섹션에는 다음 항목이 포함됩니다.">}}
     {{< nextlink href="/infrastructure/list" >}}<u>인프라스트럭처 리스트</u> - Datadog이 모니터링하는 모든 호스트 목록을 확인하세요.{{< /nextlink >}}
-    {{< nextlink href="/infrastructure/hostmap" >}}<u>호스트 및 컨테이너 맵</u> - 색상과 모양으로 이해하기 쉬운 사용자 지정 그룹, 필터 및 메트릭을 통해 호스트를 한 화면에서 함께 시각화하세요.{{< /nextlink >}}
+    {{< nextlink href="/infrastructure/hostmap" >}}<u>호스트 및 컨테이너 맵</u> - 색상과 모양으로 이해하기 쉬운 사용자 지정 그룹, 필터 및 메트릭을 통해 호스트를 한 화면에서 함께 시각화하세요.{{< /nextlink >}}
     {{< nextlink href="/infrastructure/containers" >}}<u>컨테이너 보기</u> - 실시간 가시성을 통해 환경 전체의 컨테이너를 모니터링하세요.{{< /nextlink >}}
     {{< nextlink href="/infrastructure/process" >}}<u>프로세스 보기</u> - 배포에서 가장 세부적인 요소를 실시간으로 확인하여 프로세스를 모니터링하세요.{{< /nextlink >}}
 

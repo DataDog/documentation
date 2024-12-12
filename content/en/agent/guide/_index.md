@@ -20,7 +20,6 @@ cascade:
 {{< whatsnext desc="Windows guides:" >}}
     {{< nextlink href="agent/guide/datadog-agent-manager-windows" >}}Datadog Agent Manager for Windows{{< /nextlink >}}
     {{< nextlink href="agent/guide/windows-agent-ddagent-user" >}}Datadog Windows Agent user{{< /nextlink >}}
-    {{< nextlink href="agent/guide/windows-flare-agent-5" >}}Send an Agent 5 flare on Windows{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Cloud infrastructure guides:" >}}
@@ -54,12 +53,18 @@ cascade:
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Agent 5 guides:" >}}
+    {{< nextlink href="agent/guide/agent-5-architecture" >}}Agent 5 architecture{{< /nextlink >}}
     {{< nextlink href="agent/guide/agent-5-commands" >}}Agent 5 commands{{< /nextlink >}}
     {{< nextlink href="agent/guide/agent-5-configuration-files" >}}Agent 5 configuration files{{< /nextlink >}}
     {{< nextlink href="agent/guide/agent-5-log-files" >}}Agent 5 log files{{< /nextlink >}}
     {{< nextlink href="agent/guide/install-agent-5" >}}Install Agent 5{{< /nextlink >}}
-    {{< nextlink href="agent/guide/agent-5-autodiscovery" >}}Autodiscovery in Agent v5{{< /nextlink >}}
-    {{< nextlink href="agent/guide/agent-5-kubernetes-basic-agent-usage" >}}Kubernetes Basic Agent Usage in Agent v5{{< /nextlink >}}
+    {{< nextlink href="agent/guide/agent-5-ports" >}}Agent 5 ports{{< /nextlink >}}
+    {{< nextlink href="agent/guide/agent-5-proxy" >}}Agent 5 proxy configuration{{< /nextlink >}}
+    {{< nextlink href="agent/guide/agent-5-flare" >}}Send an Agent 5 flare{{< /nextlink >}}
+    {{< nextlink href="agent/guide/agent-5-autodiscovery" >}}Autodiscovery in Agent 5{{< /nextlink >}}
+    {{< nextlink href="agent/guide/agent-5-kubernetes-basic-agent-usage" >}}Kubernetes Basic Agent Usage in Agent 5{{< /nextlink >}}
+    {{< nextlink href="agent/guide/agent-5-check-status" >}}Troubleshoot an Agent Check on Agent 5{{< /nextlink >}}
+    {{< nextlink href="agent/guide/agent-5-permissions-issues" >}}Agent 5 permission issues{{< /nextlink >}}
+    {{< nextlink href="agent/guide/agent-5-debug-mode" >}}Agent 5 debug mode{{< /nextlink >}}
     {{< nextlink href="agent/guide/dogstream" >}}Dogstream{{< /nextlink >}}
-    {{< nextlink href="agent/guide/windows-flare-agent-5" >}}Send an Agent 5 flare on Windows{{< /nextlink >}}
 {{< /whatsnext >}}

@@ -11,7 +11,7 @@ further_reading:
   text: "Monitor OpenTelemetry-instrumented apps with support for W3C Trace Context"
 - link: "https://www.datadoghq.com/blog/ingest-opentelemetry-traces-metrics-with-datadog-exporter/"
   tag: "Blog"
-  text: Send metrics and traces from OpenTelemetry Collector to Datadog via Datadog Exporter 
+  text: Send metrics and traces from OpenTelemetry Collector to Datadog via Datadog Exporter
 - link: "https://www.datadoghq.com/blog/opentelemetry-logs-datadog-exporter/"
   tag: "Blog"
   text: "Forward logs from the OpenTelemetry Collector with the Datadog Exporter"
@@ -50,7 +50,7 @@ If your applications and services are instrumented with OpenTelemetry libraries,
 
 {{< img src="tracing/setup/open_standards/otel-flow.png" alt="Map options for generating telemetry data and sending it to observability products.">}}
 
-<div class="alert alert-info"><strong>Beta: Custom Instrumentation with the OpenTelemetry API</strong></br>For some supported languages, you can configure OpenTelemetry instrumented applications to use the Datadog tracing library to process spans and traces. For more information, read <a href="/tracing/trace_collection/otel_instrumentation/">Custom Instrumentation with the OpenTelemetry API</a>.</div>
+<div class="alert alert-info"><strong>Custom Instrumentation with the OpenTelemetry API</strong></br>You can configure OpenTelemetry instrumented applications to use the Datadog APM SDK to process spans and traces. For more information, read <a href="/tracing/trace_collection/otel_instrumentation/">Custom Instrumentation with the OpenTelemetry API</a>.</div>
 
 Datadog supports the [W3C Trace Context standard][6], ensuring complete traces are captured even when a request travels between services that have been instrumented with different tools. Services need only be instrumented with any system, such as an OpenTelemetry library or Datadog tracing library, that follows the W3C Trace Context standard. Read [Propagating Trace Context][5] for more information.
 
@@ -64,3 +64,7 @@ Datadog supports the [W3C Trace Context standard][6], ensuring complete traces a
 [4]: /opentelemetry/otlp_ingest_in_the_agent/
 [5]: /tracing/trace_collection/trace_context_propagation/
 [6]: https://www.w3.org/TR/trace-context/
+
+{{< learning-center-callout header="Try Understanding OpenTelemetry in the Learning Center" btn_title="Enroll Now" btn_url="https://learn.datadoghq.com/courses/understanding-opentelemetry">}}
+  Discover the fundamentals of OpenTelemetry, an open source standard for telemetry data collection. This course provides an overview of OpenTelemetry's capabilities and benefits, preparing you for integrating observability into your applications.
+{{< /learning-center-callout >}}

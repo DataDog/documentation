@@ -51,6 +51,12 @@ Use this guide to manually set up the Datadog [AWS Integration][1].
 
 To set up the AWS integration manually, create an IAM policy and IAM role in your AWS account, and configure the role with an AWS External ID generated in your Datadog account. This allows Datadog's AWS account to query AWS APIs on your behalf, and pull data into your Datadog account. The sections below detail the steps for creating each of these components, and then completing the setup in your Datadog account.
 
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">
+  <em>Setting up S3 Log Archives using Role Delegation is currently in limited availability. Contact <a href="https://docs.datadoghq.com/help/">Datadog Support</a> to request this feature in your Datadog for Government account</em>.
+</div>
+{{< /site-region >}}
+
 ## Setup
 
 ### Generate an external ID
@@ -87,7 +93,7 @@ Create an IAM role for Datadog to use the permissions defined in the IAM policy.
 Ensure to leave `Require MFA` disabled. For more details, see the [How to use an external ID when granting access to your AWS resources to a third party][2] AWS documentation.
 12. Click **Next**.
 13. If you've already created the policy, search for it on this page and select it. Otherwise, click **Create Policy**, which opens in a new window, and follow the instructions from the previous section.
-14. Optionally, attach the <a href="https://console.aws.amazon.com/iam/home#policies/arn:aws:iam::aws:policy/SecurityAudit" target="_blank">AWS SecurityAudit Policy</a> to the role to use [Cloud Security Management Misconfigurations][5].
+14. Attach the <a href="https://console.aws.amazon.com/iam/home#policies/arn:aws:iam::aws:policy/SecurityAudit" target="_blank">AWS SecurityAudit Policy</a> to the role to enable [resource collection][5].
 15. Click **Next**.
 16. Give the role a name such as `DatadogIntegrationRole`, as well as an apt description.
 17. Click **Create Role**.
@@ -106,7 +112,7 @@ Ensure to leave `Require MFA` disabled. For more details, see the [How to use an
 [2]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user_externalid.html
 [3]: https://console.aws.amazon.com/iam/home#/policies
 [4]: https://console.aws.amazon.com/iam/home#/roles
-[5]: /security/cloud_security_management/misconfigurations/
+[5]: /integrations/amazon_web_services/#resource-collection
 [6]: /integrations/guide/error-datadog-not-authorized-sts-assume-role/
 [7]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_condition.html
 [8]: https://aws.amazon.com/blogs/security/easier-way-to-control-access-to-aws-regions-using-iam-policies/
@@ -137,6 +143,8 @@ Ensure to leave `Require MFA` disabled. For more details, see the [How to use an
 {{< /tabs >}}
 
 {{% aws-permissions %}}
+
+{{% aws-resource-collection %}}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

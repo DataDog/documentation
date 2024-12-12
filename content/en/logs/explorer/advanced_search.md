@@ -20,8 +20,6 @@ When you need to further refine the results of a log search, use [subqueries](#f
 
 ## Filter logs with subqueries
 
-<div class="alert alert-warning">Filtering logs with subqueries is in beta.</div>
-
 Use subqueries when you want to filter the results of a query based on the results of a secondary query. See [subquery examples](#subquery-examples) for two example scenarios.
 
 To add a subquery filter:
@@ -74,13 +72,9 @@ In this example, use `service:network_directory` as your main query, and then de
 
 ## Filter logs based on Reference Tables
 
-<div class="alert alert-warning">Reference Tables are in beta. Reference Tables containing over 40,000 rows cannot be used to filter logs. See <a href="https://docs.datadoghq.com/integrations/guide/reference-tables/">Add Custom Metadata with Reference Tables</a> for more information on how to create and manage Reference Tables. </div>
+{{% filter_by_reference_tables %}}
 
-Reference Tables allow you to combine metadata with logs, providing more information to resolve application issues. Add a query filter based on a Reference Table to perform lookup queries. For more information on creating and managing this feature, see the [Reference Tables][2] guide.
-
-To apply a query filter with Reference Tables, click on the `+ Add` button next to the query editor and select **Reference Table**. In the following example, the Reference Table query filter is used to search all recent logs that include a malicious IP address from a threat intel reference table:
-
-{{< img src="logs/explorer/advanced_search/reference_tables_logs.png" alt="The Datadog log explorer with reference table search options highlighted" border="true" popup="true" style="width:100%;" >}}
+{{< img src="logs/explorer/advanced_search/reference_tables_logs.png" alt="The Datadog Log Explorer with reference table search options highlighted" border="true" popup="true" style="width:100%;" >}}
 
 ## Further reading
 

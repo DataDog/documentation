@@ -33,15 +33,18 @@ Datadog では Azure App Service に属するすべてのリソースタイプ�
 
 Datadog は、Basic、Standard、Premium プランにおいて、以下の Azure App Service のワークロードランタイムの監視機能を追加提供します。
 
-| OS | ランタイム |アプリタイプ|ステータス|Documentation| 
+| OS | ランタイム |アプリタイプ|ステータス|Documentation|
 |----|---------|-----|----|--------------|
 |Windows|.NET|関数アプリと Web アプリ|GA|[Windows .NET のセットアップ][7]|
-|Windows|Java|関数アプリと Web アプリ|beta|[Windows Java のセットアップ][8]|
+|Windows|Java|Web アプリ|GA|[Windows Java のセットアップ][8]|
+|Windows|Node|Web アプリ|GA|[Windows Node のセットアップ][13]|
 |Linux|.NET|Web アプリ|GA|[Linux .NET のセットアップ][9]|
 |Linux|Node|Web アプリ|GA|[Linux Node のセットアップ][9]|
 |Linux|PHP|Web アプリ|GA|[Linux PHP のセットアップ][9]|
 |Linux|Java|Web アプリ|GA|[Linux Java のセットアップ][10]|
 |Linux|Python|Web アプリ|GA|[Linux Python のセットアップ][9]|
+|Linux|コンテナ|Web アプリ|GA|[Linux Container の設定][12]|
+
 
 機能:
 - 自動インスツルメンテーションを用いた完全分散型 APM トレーシング
@@ -65,3 +68,5 @@ Datadog は、Basic、Standard、Premium プランにおいて、以下の Azure
 [9]: /ja/serverless/azure_app_services/azure_app_services_linux?tab=nodenetphppython
 [10]: /ja/serverless/azure_app_services/azure_app_services_linux?tab=java
 [11]: /ja/developers/dogstatsd/
+[12]: /ja/serverless/azure_app_services/azure_app_services_container
+[13]: /ja/serverless/azure_app_services/azure_app_services_windows?tab=nodejs#setup

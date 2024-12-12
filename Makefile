@@ -2,7 +2,7 @@
 SHELL = /bin/bash
 # MAKEFLAGS := --jobs=$(shell nproc)
 # MAKEFLAGS += --output-sync --no-print-directory
-.PHONY: help clean-all clean dependencies server start start-no-pre-build start-docker stop-docker all-examples clean-examples placeholders update_pre_build config derefs source-dd-source vector_data
+.PHONY: help clean-all clean start-preserve-build dependencies server start start-no-pre-build start-docker stop-docker all-examples clean-examples placeholders update_pre_build config derefs source-dd-source vector_data
 .DEFAULT_GOAL := help
 PY3=$(shell if [ `which pyenv` ]; then \
 				if [ `pyenv which python3` ]; then \
@@ -24,7 +24,7 @@ include $(CONFIG_FILE)
 # API Code Examples
 BRANCH ?= $(shell git rev-parse --abbrev-ref HEAD)
 EXAMPLES_DIR = $(shell pwd)/examples/content/en/api
-EXAMPLES_REPOS := datadog-api-client-go datadog-api-client-java datadog-api-client-python datadog-api-client-ruby datadog-api-client-typescript
+EXAMPLES_REPOS := datadog-api-client-go datadog-api-client-java datadog-api-client-python datadog-api-client-ruby datadog-api-client-typescript datadog-api-client-rust
 
 # Set defaults when no makefile.config or missing entries
 # Use DATADOG_API_KEY if set, otherwise try DD_API_KEY and lastly fall back to false
@@ -39,7 +39,7 @@ CONFIGURATION_FILE ?= "./local/bin/py/build/configurations/pull_config_preview.y
 help:
 	@perl -nle'print $& if m{^[a-zA-Z_-]+:.*?## .*$$}' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-25s\033[0m %s\n", $$1, $$2}'
 
-clean-all: clean clean-examples clean-dependent-repos ## Clean everything (environment, sourced repos, generated files)
+clean-all: clean clean-examples clean-dependent-repos clean-build-scripts ## Clean everything (environment, sourced repos, generated files, build scripts)
 	rm -rf ./node_modules ./hugpython ./public
 
 clean-dependent-repos:
@@ -67,11 +67,19 @@ server:
 	fi;
 
 # Download all dependencies and run the site
-start: dependencies ## Build and run docs including external content.
+start: setup-build-scripts ## Build and run docs including external content.
+	@make dependencies
+	@make update_websites_sources_module
 	@make server
 
 # Skip downloading any dependencies and run the site (hugo needs at the least node)
 start-no-pre-build: node_modules  ## Build and run docs excluding external content.
+	@make server
+
+# Leave build scripts as is for local testing
+# This is useful for testing changes to the build scripts locally
+start-preserve-build: dependencies
+	@make update_websites_sources_module
 	@make server
 
 start-docker: clean  ## Build and run docs including external content via docker
@@ -93,21 +101,11 @@ node_modules: package.json yarn.lock
 	@yarn install --immutable
 
 source-dd-source:
-	$(call source_repo,dd-source,https://github.com/DataDog/dd-source.git,main,true,domains/workflow/actionplatform/apps/tools/manifest_generator domains/workflow/actionplatform/apps/wf-actions-worker/src/runner/bundles/)
+	$(call source_repo,dd-source,https://github.com/DataDog/dd-source.git,main,true,domains/workflow/actionplatform/documentation/stable_bundles.json)
 
 # All the requirements for a full build
 dependencies: clean source-dd-source
-	make hugpython all-examples data/permissions.json update_pre_build node_modules placeholders derefs
-
-# make directories
-data/workflows/:
-	mkdir -p $@
-
-# dereference any source jsonschema files
-derefs: $(patsubst integrations_data/extracted/dd-source/domains/workflow/actionplatform/apps/wf-actions-worker/src/runner/bundles/%/manifest.json, data/workflows/%.json, $(wildcard integrations_data/extracted/dd-source/domains/workflow/actionplatform/apps/wf-actions-worker/src/runner/bundles/*/manifest.json))
-
-data/workflows/%.json : integrations_data/extracted/dd-source/domains/workflow/actionplatform/apps/wf-actions-worker/src/runner/bundles/%/manifest.json node_modules | data/workflows/
-	@node ./assets/scripts/workflow-process.js $< $@
+	make hugpython all-examples data/permissions.json update_pre_build node_modules placeholders
 
 # builds permissions json from rbac
 # Always run if PULL_RBAC_PERMISSIONS or we are running in gitlab e.g CI_COMMIT_REF_NAME exists
@@ -130,7 +128,7 @@ placeholders: hugpython update_pre_build
 hugpython: local/etc/requirements3.txt
 	@${PY3} -m venv --clear $@ && . $@/bin/activate && $@/bin/pip install --upgrade pip wheel && $@/bin/pip install -r $<;\
 	if [[ "$(CI_COMMIT_REF_NAME)" != "" ]]; then \
-		$@/bin/pip install https://binaries.ddbuild.io/dd-source/python/assetlib-0.0.37052508-py3-none-any.whl; \
+		$@/bin/pip install https://binaries.ddbuild.io/dd-source/python/assetlib-0.0.43732323-py3-none-any.whl; \
 	fi
 
 update_pre_build: hugpython
@@ -143,6 +141,12 @@ config:
 	envsubst '$$CI_COMMIT_REF_NAME' < "config/$(CI_ENVIRONMENT_NAME)/params.yaml" | sponge "config/$(CI_ENVIRONMENT_NAME)/params.yaml"; \
 	echo -e "\nbranch: ${CI_COMMIT_REF_NAME}" >> config/$(CI_ENVIRONMENT_NAME)/params.yaml;
 
+# Automatically download the latest module from websites-sources repo
+update_websites_sources_module:
+	node_modules/hugo-bin/vendor/hugo mod get github.com/DataDog/websites-sources@main
+	node_modules/hugo-bin/vendor/hugo mod clean
+	node_modules/hugo-bin/vendor/hugo mod tidy
+	cat go.mod
 #######################################################################################################################
 # API Code Examples
 #######################################################################################################################
@@ -181,6 +185,7 @@ examples/$(patsubst datadog-api-client-%,clean-%-examples,$(1)):
 examples/$(patsubst datadog-api-client-%,%,$(1)): examples/$(1) examples/$(patsubst datadog-api-client-%,clean-%-examples,$(1))
 	-find examples/$(1)/examples -iname \*.py -exec mv {} {}beta \;
 	-find examples/$(1)/examples -iname \*.rb -exec mv {} {}beta \;
+	-find examples/$(1)/examples -maxdepth 1 -iname \*.rs -exec sh -c 'mkdir -p `echo {} | sed "s/\_/\//2" | sed "s/\_/\//1" | xargs dirname` && mv {} `echo {} | sed "s/\_/\//2" | sed "s/\_/\//1"`' \;
 	-cp -Rn examples/$(1)/examples/v* ./content/en/api
 endef
 
@@ -201,6 +206,93 @@ all-examples: $(foreach repo,$(EXAMPLES_REPOS),$(addprefix examples/, $(patsubst
 clean-examples: $(foreach repo,$(EXAMPLES_REPOS),$(addprefix examples/, $(patsubst datadog-api-client-%,clean-%-examples,$(repo))))
 	@rm -rf examples
 
+# Local build setup
+PY_PATH := local/bin/py
+JS_PATH := local/bin/js
+TRANSLATIONS_PATH := $(PY_PATH)/translations
+BUILD_SCRIPTS_PATH := $(PY_PATH)/build
+
+.PHONY: setup-build-scripts clean-build-scripts backup-config restore-config
+
+# Save specific config files
+backup-config:
+	@tmp_backup=$$(mktemp -d) && \
+	mkdir -p $$tmp_backup/build_backup && \
+	if [ -d "$(BUILD_SCRIPTS_PATH)/configurations" ]; then \
+		for config in pull_config_preview.yaml pull_config.yaml integration_merge.yaml; do \
+			if [ -f "$(BUILD_SCRIPTS_PATH)/configurations/$$config" ]; then \
+				cp "$(BUILD_SCRIPTS_PATH)/configurations/$$config" "$$tmp_backup/build_backup/$$config"; \
+			fi \
+		done; \
+	fi && \
+	if [ -d "$(PY_PATH)" ]; then \
+	    mkdir -p $$tmp_backup/py_backup && \
+	    find $(PY_PATH) -mindepth 1 -maxdepth 1 \
+	        ! -name "build" \
+	        ! -name "translations" \
+	        ! -name "add_notranslate_tag.py" \
+	        ! -name "missing_metrics.py" \
+	        ! -name "placehold_translations.py" \
+	        ! -name "submit_github_status_check.py" \
+	        -exec cp -r {} $$tmp_backup/py_backup/ \; ; \
+	fi && \
+	echo "$$tmp_backup" > .backup_path
+
+# Restore specific config files
+restore-config:
+	@if [ -f .backup_path ]; then \
+		backup_dir=$$(cat .backup_path) && \
+		if [ -d "$$backup_dir/py_backup" ]; then \
+			cp -r $$backup_dir/py_backup/* $(PY_PATH)/; \
+		fi && \
+		if [ -d "$$backup_dir/build_backup" ]; then \
+			mkdir -p $(BUILD_SCRIPTS_PATH)/configurations && \
+			for config in pull_config_preview.yaml pull_config.yaml integration_merge.yaml; do \
+				if [ -f "$$backup_dir/build_backup/$$config" ]; then \
+					cp "$$backup_dir/build_backup/$$config" "$(BUILD_SCRIPTS_PATH)/configurations/$$config"; \
+				fi \
+			done; \
+		fi && \
+		rm -rf $$backup_dir && \
+		rm .backup_path; \
+	fi
+
+$(PY_PATH):
+	@mkdir -p $(PY_PATH)
+
+# Clean build scripts
+clean-build-scripts:
+	@echo "Cleaning build files..."
+	@$(MAKE) backup-config
+	@rm -rf $(PY_PATH)
+	@rm -rf $(JS_PATH)
+	@mkdir -p $(PY_PATH)
+	@mkdir -p $(BUILD_SCRIPTS_PATH)
+	@$(MAKE) restore-config
+
+# Source the build scripts and maintain file structure
+setup-build-scripts: $(PY_PATH) backup-config clean-build-scripts
+	@echo "Fetching latest build scripts..."; \
+	if [ -z "$(BUILD_SCRIPT_BRANCH)" ] || [ -z "$(BUILD_SCRIPT_REPO_URL)" ] || [ -z "$(BUILD_SCRIPT_SOURCE_DIR)" ]; then \
+		echo -e "\033[0;31mone or more build-script env vars are undefined, check your makefile.config \033[0m"; \
+		exit 1; \
+	fi;
+	@tmp_dir=$$(mktemp -d) && \
+	git clone --depth 1 -b $(BUILD_SCRIPT_BRANCH) $(BUILD_SCRIPT_REPO_URL) $$tmp_dir && \
+	if [ -d "$$tmp_dir/$(BUILD_SCRIPT_SOURCE_DIR)" ]; then \
+		echo "Moving files to python directory..." && \
+		cp -r $$tmp_dir/$(BUILD_SCRIPT_SOURCE_DIR)/* $(PY_PATH)/ && \
+		if [ -d "$(PY_PATH)/services" ]; then \
+			echo "Cleaning up directory structure..." && \
+			rm -rf $(PY_PATH)/services; \
+		fi \
+	fi && \
+	rm -rf $$tmp_dir
+	@$(MAKE) restore-config
+	mkdir local/bin/js
+	cp -r $(PY_PATH)/js/* $(JS_PATH)/
+	rm -rf local/bin/py/sh local/bin/py/js
+	@echo "Build scripts updated successfully!"
 
 # Function that will clone a repo or sparse clone a repo
 # If the dir already exists it will attempt to update it instead

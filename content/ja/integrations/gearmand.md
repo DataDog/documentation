@@ -21,8 +21,6 @@ assets:
       metadata_path: assets/service_checks.json
     source_type_id: 52
     source_type_name: Gearman
-  logs:
-    source: gearman
   saved_views:
     gearman_processes: assets/saved_views/gearman_processes.json
 author:
@@ -32,6 +30,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - log collection
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/gearmand/README.md
 display_on_public_website: true
@@ -39,9 +38,8 @@ draft: false
 git_integration_title: gearmand
 integration_id: gearman
 integration_title: Gearman
-integration_version: 3.1.0
+integration_version: 5.0.0
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: gearmand
 public_title: Gearman
@@ -55,6 +53,7 @@ tile:
   - Category::ログの収集
   - Supported OS::Linux
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: 実行中およびキューにあるジョブの合計数またはタスクごとの数を追跡。
   media: []
@@ -74,18 +73,18 @@ Gearman のメトリクスを収集して、以下のことができます。
 - キューに置かれているタスクまたは実行中のタスクの数を知ることができます。
 - Gearman のパフォーマンスをアプリケーションの他の部分と関連付けることができます。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 Gearman チェックは [Datadog Agent][1] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 
-### ブラウザトラブルシューティング
+### 構成
 
 {{< tabs >}}
 {{% tab "ホスト" %}}
 
-#### メトリクスベース SLO
+#### ホスト
 
 ホストで実行中の Agent に対してこのチェックを構成するには
 
@@ -121,7 +120,7 @@ Gearman チェックは [Datadog Agent][1] パッケージに含まれていま�
 {{% /tab %}}
 {{< /tabs >}}
 
-#### 収集データ
+#### ログ収集
 
 1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` ファイルでこれを有効にします。
 
@@ -148,21 +147,21 @@ Kubernetes 環境でのログ収集のための Agent の構成については�
 
 [Agent の `status` サブコマンドを実行][5]し、Checks セクションで `gearmand` を探します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "gearmand" >}}
 
 
-### ヘルプ
+### イベント
 
 Gearman チェックには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 {{< get-service-checks-from-git "gearmand" >}}
 
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][6]までお問合せください。
 

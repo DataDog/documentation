@@ -95,7 +95,7 @@ az containerapp up \
   --resource-group RESOURCE_GROUP \
   --ingress external \
   --target-port 80 \
-  --env-vars "DD_API_KEY=$DD_API_KEY" "DD_TRACE_ENABLED=true" "DD_SITE='datadoghq.com'" \
+  --env-vars "DD_API_KEY=$DD_API_KEY" "DD_TRACE_ENABLED=true" "DD_SITE=datadoghq.com" \
   --image YOUR_REGISTRY/YOUR_PROJECT
 ```
 

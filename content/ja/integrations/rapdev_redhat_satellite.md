@@ -27,10 +27,10 @@ assets:
   logs:
     source: rapdev_redhat_satellite
   monitors:
-    Foreman Task Failure: assets/monitors/foreman_task_failure.json
-    HTTP 5xx Errors: assets/monitors/5xx_errors.json
-    Job Invocation Failure: assets/monitors/job_invocation_failure.json
-    OpenMetrics Connection: assets/monitors/openmetrics_connection.json
+    RedHat Satellite Foreman Task Failed: assets/monitors/foreman_task_failure.json
+    RedHat Satellite HTTP has 5xx Errors: assets/monitors/5xx_errors.json
+    RedHat Satellite Job has failed: assets/monitors/job_invocation_failure.json
+    RedHat Satellite Prometheus Connection Failing: assets/monitors/openmetrics_connection.json
 author:
   homepage: https://www.rapdev.io
   name: RapDev
@@ -43,7 +43,7 @@ categories:
 - 構成とデプロイ
 - ログの収集
 - モニター
-custom_custom_kind: integration
+custom_kind: インテグレーション
 dependencies: []
 display_on_public_website: true
 draft: false

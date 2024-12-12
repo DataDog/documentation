@@ -1,5 +1,5 @@
 ---
-title: OOTB SLO Performance Summary Dashboard
+title: SLO Performance Dashboard for Leadership
 further_reading:
 - link: "service_management/service_level_objectives/"
   tag: "Documentation"
@@ -10,42 +10,54 @@ further_reading:
 
 ## Overview
 
-The Out-of-the-Box (OOTB) SLO Performance Summary Dashboard supports aggregated views of SLOs to help engineering leadership understand your organization's reliability at a glance. With this dashboard, you can:
+The SLO Performance Summary Dashboard supports aggregated views of SLOs to help executive leadership understand your organization's reliability at a glance. With this out-of-the-Box (OOTB) dashboard, you can:
 
 - Customize your SLO groupings to be based on service, team, user journey, or any other tag that has been added to your SLOs.
 - Use a summary Score, based on the remaining error budget of the underlying SLOs, to understand SLO performance across different groups and identify areas of improvement.
 
-{{< callout url="http://datadoghq.com/private-beta/ootb-slo-dashboard/" btn_hidden="false" header="Try Out the OOTB SLO Dashboard">}}
-The OOTB SLO Performance Dashboard is in Private Beta. Complete the form to request access.
+{{< callout url="https://www.datadoghq.com/product-preview/slo-performance-dashboard-for-leadership/" btn_hidden="false" header="Try Out the SLO Performance Summary Dashboard">}}
+The SLO Performance Summary Dashboard is in Preview. Complete the form to request access.
 {{< /callout >}}
 
-Access your OOTB SLO Dashbord by filtering for `SLO Performance Summary` in the search query of the [**Dashboard List**][1] or by clicking on the **Analytics** button on the top right corner of the [SLO status page][2].
+Access your OOTB SLO Performance Summary Dashbord by filtering for `SLO Performance Summary` in the search query of the [**Dashboard List**][1] or by clicking on the **Analytics** button on the top right corner of the [SLO status page][2].
 
-{{< img src="service_management/service_level_objectives/ootb_dashboard/slo-default-ootb-dashboard.png" alt="Default OOTB SLO Dashboard by Service Tag" >}}
+{{< img src="service_management/service_level_objectives/ootb_dashboard/slo-ootb-dashboard.png" alt="Default OOTB SLO Dashboard by Service Tag" >}}
 
-## Interact with your OOTB SLO dashboard
+## Interact with your SLO performance summary dashboard
 
-By default, the OOTB dashboard is based on the `service` tag added to your SLOs. This allows you to view your organization's SLO performance by service groupings to understand which services are performing best and worst. 
+By default, the SLO Performance Summary Dashbord is based on the `service` tag added to your SLOs. This allows you to view your organization's SLO performance by service groupings to understand which services are performing best and worst. 
 
 ### Summary score
 
-The **SLO Summary** widget in the OOTB dashboard includes a "Score". It is designed as a summary metric for engineering leadership to understand the performance of a group of SLOs. The Score is calculated based on the average remaining error budget of the underlying SLOs, which is then mapped to a score between 0 - 100:
+The **SLO Summary** widget in the OOTB dashboard includes a "Score". It is designed as a summary metric for executive leadership to understand the performance of a group of SLOs. The Score is calculated based on the average remaining error budget of the underlying SLOs, which is then mapped to a score between 0 - 100:
 
 - The Score is "passing" (green/yellow) when most SLOs are **not** breached and have remaining error budget
 - The Score is "failing" (red) when many SLOs are out of error budget or a few SLOs are far out of error budget
 - SLOs in the "No Data" state are not considered in the Score
 
-### Customize your OOTB SLO dashboard
+#### Score calculation details
 
-To customize your OOTB SLO dashboard, click **Configure** in the dashboard and select **Clone dashboard**. The default OOTB dashboard is configured based on the `service` tag that's been added to SLOs. You can update the dashboard to be based on any [SLO tag][3] by taking the following steps:
+The Score is calculated as follows:
+- Average the remaining error budget of the SLOs (the minimum error budget is set to -200%, so any SLO with a lower error budget will be counted as -200% in the average)
+- The average error budget (between -200 and 100) is mapped to a Score between 0 and 100
+- The color and status of the Score is set based on the thresholds below
 
-- Update the configuration for every widget in the default OOTB dashboard to use your desired tag, instead of `service`
+Note that an average remaining error budget of 0% corresponds to a Score value of 66.667. The Score's status and color is based on the following thresholds:
+- **Red:** 0 ≤ Score < 66.667
+- **Yellow:** 66.667 ≤ Score < 80
+- **Green:** 80 ≤ Score ≤ 100
+
+### Customize your SLO performance summary dashbord
+
+To customize your SLO Performance Summary Dashbord, click **Configure** in the dashboard and select **Clone dashboard**. The default dashboard is configured based on the `service` tag that's been added to SLOs. You can update the dashboard to be based on any [SLO tag][3] by taking the following steps:
+
+- Update the configuration for every widget in the default dashboard to use your desired tag, instead of `service`
 - Add a [template variable][4] based on your desired tag (or replace the existing `service` template variable)
 
 
-For instance, if you have added a `journey` tag to your SLOs, you can clone the OOTB dashboard and customize it to be based on the `journey` tag:
+For instance, if you have added a `journey` tag to your SLOs, you can clone the SLO Performance Summary Dashbord and customize it to be based on the `journey` tag:
 
-{{< img src="service_management/service_level_objectives/ootb_dashboard/slo-dashboard-by-journey.mp4" alt="OOTB SLO Dashboard by Journey Tag" video=true style="width:80%;" >}}
+{{< img src="service_management/service_level_objectives/ootb_dashboard/slo-dashboard-flow.mp4" alt="OOTB SLO Dashboard by Journey Tag" video=true style="width:80%;" >}}
 
 
 

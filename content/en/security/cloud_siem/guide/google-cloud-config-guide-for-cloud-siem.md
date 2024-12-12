@@ -7,7 +7,7 @@ further_reading:
 - link: "/security/cloud_siem/investigate_security_signals"
   tag: "Documentation"
   text: "Learn about the Security Signals Explorer"
-- link: "/security/cloud_siem/log_detection_rules/"
+- link: "/security/cloud_siem/detection_rules/"
   tag: "Documentation"
   text: "Create new detection rules"
 - link: "/integrations/google_cloud_platform/#log-collection"
@@ -110,7 +110,7 @@ The default behavior for Dataflow pipeline workers is to use your project's [Com
     | [Pub/Sub Publisher][16] | `roles/pubsub.publisher` | Allow this service account to publish failed messages to a separate subscription, which allows for analysis or resending the logs
     | [Secret Manager Secret Accessor][17] | `roles/secretmanager.secretAccessor` | Allow this service account to access the Datadog API key in Secret Manager
     | [Storage Object Admin][18] | `roles/storage.objectAdmin` | Allow this service account to read and write to the Cloud Storage bucket specified for staging files |
-7. Continue **Continue**.
+7. Click **Continue**.
 8. Click **Done**.
 
 ##  Create a log sink to publish logs to the Pub/Sub

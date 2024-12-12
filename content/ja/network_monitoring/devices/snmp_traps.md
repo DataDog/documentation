@@ -15,54 +15,65 @@ SNMP トラップの監視は、デバイスが不安定なために気付かな
 
 Datadog Agent v7.37+ は、SNMP トラップのリッスンをサポートしており、特定のトラップイベントに対する[モニター][1]を設定することが可能です。
 
-## コンフィギュレーション
+## 構成
 
 SNMP トラップのリッスンを有効にするには、`datadog.yaml` に以下を追加します。
 
 ```yaml
+logs_enabled: true # Traps are forwarded as logs and can be found in the logs explorer with a `source:snmp-traps` query.
 network_devices:
-  namespace: <NAMESPACE> # オプション、デフォルトは "default" です。
+  namespace: <NAMESPACE> # optional, defaults to "default".
   snmp_traps:
     enabled: true
-    port: 9162 # どのポートでトラップをリッスンするか
-    community_strings: # v2 トラップで許可するコミュニティ文字列を指定します
+    port: 9162 # on which ports to listen for traps
+    community_strings: # which community strings to allow for v2 traps
       - <STRING_1>
       - <STRING_2>
     bind_host: 0.0.0.0
-    users: # v3 ユーザー 1 名のみに限定
-      - username: 'user'
-        authKey: 'fakeKey'
-        authProtocol: 'SHA' # 選択肢: MD5、SHA、SHA224、SHA256、SHA384、SHA512
-        privKey: 'fakePrivKey'
-        privProtocol: 'AES' # 選択肢: DES、AES (128 ビット)、AES192、AES192C、AES256、AES256C
+    users: # SNMP v3
+    - user: "user"
+      authKey: myAuthKey
+      authProtocol: "SHA"
+      privKey: myPrivKey
+      privProtocol: "AES" # choices: MD5, SHA, SHA224, SHA256, SHA384, SHA512
+    - user: "user"
+      authKey: myAuthKey
+      authProtocol: "MD5"
+      privKey: myPrivKey
+      privProtocol: "DES"
+    - user: "user2"
+      authKey: myAuthKey2
+      authProtocol: "SHA"
+      privKey: myPrivKey2
+      privProtocol: "AES" # choices: DES, AES (128 bits), AES192, AES192C, AES256, AES256C
 ```
 
-**注**: 複数の v3 ユーザーとパスワードはサポートされていません。お客様の環境でこれが必要な場合は、[Datadog サポート][2]にお問い合わせください。
+**Note**: Multiple v3 users and passwords are supported as of Datadog Agent `7.51` or higher.
 
-## デバイスのネームスペース
+## Device namespaces
 
-[ネットワークデバイスモニタリング][3]と同様に、ネームスペースをタグとして使用して、同じプライベート IP を共有する可能性がある複数のネットワークデバイスを区別することができます。たとえば、ニューヨークとパリの 2 つのルーターが同じプライベート IP を共有している場合を考えてみましょう。ニューヨークのデータセンターに 1 つ、パリのデータセンターにもう 1 つの Agent があるはずです。これらには、それぞれ `namespace: nyc` と `namespace: paris` というタグを付けるとよいでしょう。
+As in [Network Device Monitoring][2], namespaces can be used as tags to differentiate between multiple network devices that may share the same private IP. For example, consider a case of two routers: one in New York and one in Paris, which share the same private IP. There should be one Agent in the New York data center and another in the Paris data center. You may wish to tag these with `namespace: nyc` and `namespace: paris`, respectively.
 
-ネームスペースは、SNMP トラップから送信デバイス、または送信デバイスから SNMP トラップへの一意なピボットとして使用することができます。
+The namespace can then be used to uniquely pivot from an SNMP Trap to the emitter device, or from the emitter device to an SNMP Trap. 
 
-複数の Agent 構成間で一貫性を持たせることが重要です。例えば、2 つの Agent を構成している場合 (例えば、1 つはトラップ収集用、もう 1 つはメトリクス用)、ネームスペースが両方の場所に存在することを確認する必要があります。または、ネームスペースがどちらにも存在しないことを確認します。
+It is critical to have consistency between the multiple Agent configurations. For instance, if you have two Agents configured (for example, one for trap collection, and the other for metrics) you must ensure that the namespaces exist in both places. Alternatively, ensure that the namespaces exist in neither. 
 
-## 解決
+## Resolution
 
-各 SNMP トラップには、特定の OID ベースのフォーマットがあります。Datadog Agent は、OID をより読みやすい文字列に変換するための_解決_ステップを実行します。
+Each SNMP Trap has a specific OID-based format. The Datadog Agent performs a _resolution_ step to convert OIDs into more readable strings.
 
-SNMP トラップは、以下の要素から構成されます。
-- エミッター情報 (デバイスの IP など)
-- トラップの種類を定義する OID
-- “変数” - つまり、トラップに追加のコンテキストを提供するペア (`OID:value`) のリストです。
+An SNMP Trap consists of:
+- Emitter information (for example, the IP of the device)
+- An OID that defines the type of trap
+- "Variables"—that is, a list of pairs (`OID:value`) that provides additional context for the trap.
 
-デコードは Agent 側で行われ、ディスク上の `{TX-PL-LABEL}lt;PATH_TO_AGENT_CONF.D>/snmp.d/traps_db/dd_traps_db.json.gz` に格納されたマッピングを使用します。Datadog は、11,000 以上の異なる管理情報ベース (MIB) をサポートしています。
+Decoding is performed on the Agent side, using a mapping stored on disk at `$<PATH_TO_AGENT_CONF.D>/snmp.d/traps_db/dd_traps_db.json.gz`. Datadog supports more than 11,000 different management information bases (MIBs).
 
-### マッピングフォーマット
+### Mapping format
 
-マッピングは TrapsDB ファイルとして保存され、YAML または JSON を使用することができます。
+Mappings are stored as TrapsDB files, and can be YAML or JSON.
 
-#### 例
+#### Examples
 
 {{< tabs >}}
 {{% tab "YAML" %}}
@@ -100,28 +111,30 @@ vars:
 {{% /tab %}}
 {{< /tabs >}}
 
-### Agent を拡張する
+### Extend the Agent
 
-Agent の機能を拡張するために、独自のマッピングを作成し、`{TX-PL-LABEL}lt;PATH_TO_AGENT_CONF.D>/snmp.d/traps_db/` ディレクトリに配置します。
+To extend the capabilities of the Agent, create your own mappings and place them in the `$<PATH_TO_AGENT_CONF.D>/snmp.d/traps_db/` directory.
 
-これらのマッピングは手で書くこともできますし、Datadog の開発者ツールキットである [`ddev`][4] を使用して MIB の一覧からマッピングを生成することもできます。
+You can write these mappings by hand, or generate mappings from a list of MIBs using Datadog's developer toolkit, [`ddev`][3].
 
-#### MIB の一覧から TrapsDB ファイルを生成する
+#### Generate a TrapsDB file from a list of MIBs
 
-**前提条件**:
+**Prerequisites**:
 - Python 3
-- [`ddev`][4] (`pip3 install "datadog-checks-dev[cli]"`)
-- [`pysmi`][5] (`pip3 install pysmi`)
+- [`ddev`][3] (`pip3 install "datadog-checks-dev[cli]"`)
+- [`pysmi`][4] (`pip3 install pysmi`)
 
-すべての MIB を専用のフォルダに入れます。そして、次を実行します:
+Put all your MIBs into a dedicated folder. Then, run:
 `ddev meta snmp generate-traps-db -o ./output_dir/ /path/to/my/mib1 /path/to/my/mib2 /path/to/my/mib3 ...`
 
-MIB に依存関係がある場合、`ddev` は依存関係が見つかればオンラインで取得します。あるいは、すべての依存関係を別のフォルダに置いて、`--mib-sources` パラメータでそのフォルダを指定します。
+If your MIBs have dependencies, `ddev` fetches them online if they can be found.
+
+If there are errors due to missing dependencies and you have access to the missing MIB files, put the files in a separate folder and use the `--mib-sources <DIR>` parameter so that ddev knows where to find them. Make sure that each filename is the same as the MIB name (for example, `SNMPv2-SMI` and not `snmp_v2_smi.txt`).
+
 
 
 
 [1]: /ja/monitors/
-[2]: /ja/help/
-[3]: /ja/network_monitoring/devices
-[4]: /ja/developers/integrations/new_check_howto/?tab=configurationtemplate#developer-toolkit
-[5]: https://pypi.org/project/pysmi/
+[2]: /ja/network_monitoring/devices
+[3]: /ja/developers/integrations/python
+[4]: https://pypi.org/project/pysmi/

@@ -2,6 +2,10 @@
 aliases:
 - /ja/graphing/faq/interpolation-the-fill-modifier-explained
 - /ja/dashboards/faq/interpolation-the-fill-modifier-explained
+further_reading:
+- link: /dashboards/functions/interpolation/
+  tag: ドキュメント
+  text: Interpolation Functions について
 title: 補間とフィル修飾子
 ---
 
@@ -72,6 +76,10 @@ net.bytes_rcvd    |  3:00:00  3:00:10  3:00:20  3:00:30  3:00:40 ...
 線形補間は、同じソースから定常的に報告されるメトリクスに最適です。疎なメトリクスや、時とともに変化するソースから報告されるメトリクスでは、補間を無効にした方が興味深いことがよくあります。これは、測定するものの値が変化したときだけデータポイントを送信する場合に意味があります。
 
 Null にすると、最後の実測値から 5 分後に補間された値がグラフに表示されるのを防ぐことができます。
+
+## 参考資料
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/metrics/types/
 [2]: /ja/metrics/custom_metrics/type_modifiers/?tab=gauge#in-application-modifiers

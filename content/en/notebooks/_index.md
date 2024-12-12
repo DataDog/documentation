@@ -12,6 +12,9 @@ further_reading:
 - link: 'https://www.datadoghq.com/blog/incident-postmortem-process-best-practices/'
   tag: 'Blog'
   text: 'Best practices for writing incident postmortems'
+- link: "https://www.datadoghq.com/blog/observability-pipelines-transform-and-enrich-logs/"
+  tag: "blog"
+  text: "Transform and enrich your logs with Datadog Observability Pipelines"
 cascade:
     algolia:
         rank: 70

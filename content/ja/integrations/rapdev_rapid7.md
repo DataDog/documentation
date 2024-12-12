@@ -33,6 +33,7 @@ categories:
 - ログの収集
 - マーケットプレイス
 - セキュリティ
+custom_kind: integration
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -41,7 +42,6 @@ integration_id: rapdev-rapid7
 integration_title: Rapid7
 integration_version: ''
 is_public: true
-custom_kind: integration
 legal_terms:
   eula: assets/EULA.pdf
 manifest_version: 2.0.0
@@ -94,17 +94,17 @@ tile:
 
 チェックのログ部分 (有効な場合) は、Rapid7 REST API を使用して IDR ログストリームをクエリします。このインテグレーションは、Rapid7 プラットフォームレベルのログとみなされないすべてのログを返します。これらのログは Datadog に送信されます。**注:** これらのログの提出には、[Datadog ログ管理の価格体系](https://www.datadoghq.com/pricing/?product=log-management#log-management)に記載されているように、Datadog の価格プランに基づく追加料金が発生する場合があります。これらのログは、通常、Rapid7 エンドポイントエージェントのサマリーおよび特定の時間におけるプロセスのステータスで構成されています。
 
-### ライブラリ
+### Dashboards
 1. このインテグレーションには、Rapid 7 Investigations を要約したすぐに使えるダッシュボードが含まれています。
 2. このインテグレーションには、ログに基づくダッシュボードの例も含まれています。このダッシュボードはインテグレーションのインストール時に利用可能ですが、データの流れを確認するために、R7 ログソースのファセットを作成する必要があります。
 
-### ヘルプ
+### イベント
 このインテグレーションは、新しいオープン/クローズされた調査に対して Datadog のイベントを生成します。このインテグレーションは、ID に基づく調査の状態を追跡し、一緒に生成されたオープンとクローズのイベントを集計します。
 
-### データセキュリティ
+### メトリクス
 各チェックで処理されるログの数が、メトリクスとして報告されます。
 
-### レート
+### ログ収集
 ログ収集はオプションで、デフォルトでは無効になっています。
 このインテグレーションでは、Rapid7 ログ API を呼び出し、最終インターバルで利用可能なすべてのログをクエリします。デフォルトのインターバル時間は最新の分数です。Rapid7 insightIDR [ログ検索ドキュメント][5]で詳しく説明されているとおり、特定の[ログセット][4]を指定して、そのログのみを取得することができます。
 

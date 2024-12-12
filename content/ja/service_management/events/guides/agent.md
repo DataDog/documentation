@@ -38,12 +38,12 @@ self.event(
 | `event_type`       | 文字列          | はい      | イベント名                                                |
 | `msg_title`        | 文字列          | はい      | イベントのタイトル                                        |
 | `msg_text`         | 文字列          | はい      | イベントのテキスト本文                                    |
-| `aggregation_key`  | 文字列          | ✕       | イベントを集計するために使用するキー                           |
-| `alert_type`       | 文字列          | ✕       | `error`、`warning`、`success`、または `info` (デフォルトは `info`) |
-| `source_type_name` | 文字列          | ✕       | ソースタイプの名前                                     |
-| `host`             | 文字列          | ✕       | ホスト名                                                 |
-| `tags`             | 文字列のリスト | ✕       | このイベントに関連付けられるタグのリスト                    |
-| `priority`         | 文字列          | ✕       | イベントの優先度を指定します (`normal` または `low`)。      |
+| `aggregation_key`  | 文字列          | いいえ       | イベントを集計するために使用するキー                           |
+| `alert_type`       | 文字列          | いいえ       | `error`、`warning`、`success`、または `info` (デフォルトは `info`) |
+| `source_type_name` | 文字列          | いいえ       | ソースタイプの名前                                     |
+| `host`             | 文字列          | いいえ       | ホスト名                                                 |
+| `tags`             | 文字列のリスト | いいえ       | このイベントに関連付けられるタグのリスト                    |
+| `priority`         | 文字列          | いいえ       | イベントの優先度を指定します (`normal` または `low`)。      |
 
 ### 例
 
@@ -103,12 +103,12 @@ self.event(
         (...)
     ```
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 
 [1]: /ja/developers/custom_checks/write_agent_check/
-[2]: /ja/agent/guide/agent-configuration-files/#agent-configuration-directory
-[3]: /ja/agent/guide/agent-commands/#restart-the-agent
-[4]: /ja/agent/guide/agent-commands/#agent-information
+[2]: /ja/agent/configuration/agent-configuration-files/#agent-configuration-directory
+[3]: /ja/agent/configuration/agent-commands/#restart-the-agent
+[4]: /ja/agent/configuration/agent-commands/#agent-information

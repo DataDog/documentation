@@ -17,6 +17,16 @@
   font-stretch: normal;
   font-display: swap;
 }
+@font-face {
+  font-family: 'NationalWeb';
+  src: url('../fonts/NationalWeb-Medium.woff2') format('woff2'),
+  url('../fonts/NationalWeb-Medium.woff') format('woff'),
+  url('../fonts/NationalWeb-Medium.eot') format('embedded-opentype');
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+  font-display: swap;
+}
 
 @font-face {
   font-family: 'NationalWeb';

@@ -16,6 +16,8 @@ further_reading:
 - link: "/logs/faq/how-to-investigate-a-log-parsing-issue/"
   tag: "Documentation"
   text: "Learn how to investigate a log parsing issue"
+algolia:
+  tags: ["grok", "grok parser", "logs parsing", "Extracting Attributes", "Remapping attributes", "parsing"]
 ---
 
 ## Overview

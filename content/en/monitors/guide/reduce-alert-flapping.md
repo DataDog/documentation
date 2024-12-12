@@ -24,7 +24,7 @@ There is functionality within Datadog that often leads to less noisy, more meani
     * If your metric frequently spikes, and those spikes are not inherently indicative of issues, applying a rate or average to it will allow you to set a more meaningful threshold.
 
 * Consider the states of other monitors using Composite alerts
-    * The most recent addition to Datadog's alerting capabilities, composite alerts will allow you to combine two or more previously created alerts.
+    * [Composite Monitor][6] allows you to combine two or more previously created alerts.
     For example: if CPU is high AND disk is high on a host, trigger the alert.
 
 * Use some built-in analysis modules with Anomaly or Outlier
@@ -40,3 +40,4 @@ If the issue is alert routing, [template variables][4] and the separation of **w
 [3]: /monitors/types/outlier/
 [4]: /monitors/notify/variables/?tab=is_alert#template-variables
 [5]: /monitors/notify/variables/?tab=is_alert#conditional-variables
+[6]: /monitors/types/composite/

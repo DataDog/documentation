@@ -1,12 +1,10 @@
 ---
-title: CSM エージェントレススキャンのセットアップ
+title: Setting up Agentless Scanning for Cloud Security Management
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">選択した <a href="/getting_started/site">Datadog サイト</a> ({{< region-param key="dd_site_name" >}}) では、Cloud Security Management のためのエージェントレススキャンはサポートされていません。</div>
+<div class="alert alert-warning">Agentless Scanning for Cloud Security Management is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
-
-<div class="alert alert-info">Cloud Security Management のためのエージェントレススキャンは、AWS クラウド環境での公開ベータです。</div>
 
 エージェントレススキャンは、Datadog Agent をインストールすることなく、AWS ホスト、実行中のコンテナ、Lambda 関数、Amazon Machine Images (AMI) 内に存在する脆弱性を視覚化します。
 

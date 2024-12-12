@@ -18,6 +18,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/cloud-cost-management-container-support/"
   tag: "blog"
   text: "Understand your Kubernetes and ECS spend with Datadog Cloud Cost Management"
+- link: "https://www.datadoghq.com/architecture/using-datadog-with-ecs-fargate/"
+  tag: "Architecture Center"
+  text: "Using Datadog with ECS Fargate"
 algolia:
   tags: ['ecs']
 ---
@@ -27,7 +30,7 @@ algolia:
 Amazon ECS is a scalable, high-performance container orchestration service that supports Docker containers. With the Datadog Agent, you can monitor ECS containers and tasks on every EC2 instance in your cluster.
 
 <div class="alert alert-info">
-If you want to monitor <strong>ECS on Fargate</strong>, see <a href="/integrations/ecs_fargate/">Amazon ECS on AWS Fargate</a>.  
+If you want to monitor <strong>ECS on Fargate</strong>, see <a href="/integrations/ecs_fargate/">Amazon ECS on AWS Fargate</a>.
 </div>
 
 ## Setup
@@ -44,7 +47,7 @@ The following instructions assume that you have configured an EC2 cluster. See t
 
 ### Create an ECS task definition
 
-This [ECS task definition][30] launches the Datadog Agent container with the necessary configurations. When you need to modify the Agent configuration, update this task definition and redeploy the daemon service. You can configure this task definition by using the AWS Management Console, or with the [AWS CLI][9]. 
+This [ECS task definition][30] launches the Datadog Agent container with the necessary configurations. When you need to modify the Agent configuration, update this task definition and redeploy the daemon service. You can configure this task definition by using the AWS Management Console, or with the [AWS CLI][9].
 
 The following sample is a minimal configuration for core infrastructure monitoring. However, additional Task Definition samples with various features enabled are provided in the [Setup additional Agent features](#setup-additional-agent-features) section if you want to use those instead.
 
@@ -52,17 +55,17 @@ The following sample is a minimal configuration for core infrastructure monitori
 
 1. For Linux containers, download [datadog-agent-ecs.json][20].
     - If you are using Amazon Linux 1 (AL1, formerly Amazon Linux AMI), use [datadog-agent-ecs1.json][21]
-    - If you are using Windows, use [datadog-agent-ecs-win.json][22] 
+    - If you are using Windows, use [datadog-agent-ecs-win.json][22]
 
    <div class="alert alert-info">
    These files provide minimal configuration for core infrastructure monitoring. For more sample task definition files with various features enabled, see the <a href="#set-up-additional-agent-features">Set up additional Agent features</a> section on this page.
    </div>
 2. Edit your base task definition file
     - Set the `DD_API_KEY` environment variable by replacing `<YOUR_DATADOG_API_KEY>` with the [Datadog API key][14] for your account. Alternatively, you can also [supply the ARN of a secret stored in AWS Secrets Manager][16].
-    - Set the `DD_SITE` environment variable to your [Datadog site][13]. Your site is: {{< region-param key="dd_site" code="true" >}} 
+    - Set the `DD_SITE` environment variable to your [Datadog site][13]. Your site is: {{< region-param key="dd_site" code="true" >}}
 
       <div class="alert alert-info">
-      If <code>DD_SITE</code> is not set, it defaults to the <code>US1</code> site, <code>datadoghq.com</code>. 
+      If <code>DD_SITE</code> is not set, it defaults to the <code>US1</code> site, <code>datadoghq.com</code>.
       </div>
     - Optionally, add a `DD_TAGS` environment variable to specify any additional tags.
 
@@ -199,7 +202,7 @@ To collect Live Process information for all your containers and send it to Datad
 }
 {{< /highlight >}}
 
-#### Network Performance Monitoring
+#### Cloud Network Monitoring
 
 <div class="alert alert-warning">
 This feature is only available for Linux.
@@ -261,7 +264,49 @@ If you already have a task definition, update your file to include the following
    "family": "datadog-agent-task"
  }
  ```
+#### Network Path
 
+<div class="alert alert-info">Network Path for Datadog Cloud Network Monitoring is in Limited Availability. Reach out to your Datadog representative to sign up.</div>
+
+1. To enable [Network Path][31] on your ECS clusters, enable the `system-probe` traceroute module by adding the following environment variable in your `datadog-agent-sysprobe-ecs.json` file:
+
+   ```json
+      "environment": [
+        (...)
+        {
+          "name": "DD_TRACEROUTE_ENABLED",
+          "value": "true"
+        }
+      ],
+   ```
+
+2. To monitor individual paths, follow the instructions here to [set up additional Agent features](#set-up-additional-agent-features):
+
+   These files deploy an Agent container with a base configuration to collect core metrics about the containers in your ECS cluster. The Agent can also run Agent integrations based on Docker Labels discovered on your containers.
+
+3. To monitor network traffic paths and allow the Agent to automatically discover and monitor network paths based on actual network traffic, without requiring you to specify endpoints manually, add the following additional environment variables to your `datadog-agent-sysprobe-ecs.json`:
+
+   ```json
+      "environment": [
+        (...)
+        {
+          "name": "DD_NETWORK_PATH_CONNECTIONS_MONITORING_ENABLED",
+          "value": "true"
+        }
+      ],
+   ```
+
+4. Optionally, to configure number of workers (default is 4) adjust the following environment variable in your `datadog-agent-sysprobe-ecs.json` file:
+
+   ```json
+      "environment": [
+        (...)
+        {
+          "name": "DD_NETWORK_PATH_COLLECTOR_WORKERS",
+          "value": "10"
+        }
+      ],
+   ```
 ## AWSVPC mode
 
 For Agent v6.10+, `awsvpc` mode is supported for applicative containers, provided that security groups are set to allow the host instance's security group to reach the applicative containers on relevant ports.
@@ -277,13 +322,15 @@ This feature is only available for Linux.
 
 To send data to the Datadog for Government site, add the `fips-proxy` sidecar container and open container ports to ensure proper communication for [supported features][1].
 
+**Note**: You must also ensure that the sidecar container is configured with applicable network settings and IAM permissions.
+
 ```json
  {
    "containerDefinitions": [
      (...)
           {
             "name": "fips-proxy",
-            "image": "datadog/fips-proxy:1.1.3",
+            "image": "datadog/fips-proxy:1.1.6",
             "portMappings": [
                 {
                     "containerPort": 9803,
@@ -432,3 +479,4 @@ Need help? Contact [Datadog support][11].
 [28]: #run-the-agent-as-a-daemon-service
 [29]: #set-up-additional-agent-features
 [30]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definitions.html
+[31]: /network_monitoring/network_path

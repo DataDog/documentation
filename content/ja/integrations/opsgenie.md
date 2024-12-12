@@ -2,6 +2,7 @@
 categories:
 - collaboration
 - notifications
+custom_kind: integration
 dependencies: []
 description: OpsGenie を Datadog のアラートとイベントで通知チャンネルとして使用。
 doc_link: https://docs.datadoghq.com/integrations/opsgenie/
@@ -19,7 +20,6 @@ integration_id: ''
 integration_title: OpsGenie
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: '1.0'
 name: opsgenie
 public_title: Datadog-OpsGenie インテグレーション
@@ -35,9 +35,9 @@ version: '1.0'
 - スナップショットを取得して作成
 - メトリクスアラートがトリガーされたときに作成
 
-## 計画と使用
+## セットアップ
 
-### ブラウザトラブルシューティング
+### 構成
 
 #### Opsgenie で Datadog インテグレーションを作成する
 
@@ -58,21 +58,21 @@ version: '1.0'
 3. Datadog インテグレーションごとに提供されたキー (Opsgenie で作成される) を「**Opsgenie API Key**」フィールドに貼り付け、**Service Name** にサービス名を入力します。
    {{< img src="integrations/opsgenie/datadog-add-opsgenie-api-key.png" alt="Datadog で Opsgenie キーを追加" popup="true">}}
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 
 Opsgenie インテグレーションには、メトリクスは含まれません。
 
-### ヘルプ
+### イベント
 
 Opsgenie インテグレーションには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 
 Opsgenie インテグレーションには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
 

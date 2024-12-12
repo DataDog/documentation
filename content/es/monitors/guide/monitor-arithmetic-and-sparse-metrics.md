@@ -53,7 +53,7 @@ Se verían sobre todo evaluaciones "omitidas".
 
 | Ruta                | Evaluación                              | Resultado |
 |:--------------------|:----------------------------------------|:-------|
-| `classic_eval_path` | **1/Nan + Nan/1 + ... + 1/Nan + Nan/1** | N/D    |
+| `classic_eval_path` | **1/Nan + Nan/1 + ... + 1/Nan + Nan/1** | N/A    |
 
 Ajustando la interpolación, puedes asegurarte que haya métricas en cada intervalo de tiempo.
 

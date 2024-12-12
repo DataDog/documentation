@@ -13,12 +13,7 @@ further_reading:
   text: "Send an Agent Flare"
 ---
 
-The Agent needs a specific set of permission in order to collect your data on your host, find below the most common permission issues and how to solve them:
-
-* [Agent Logging permission issues](#agent-logging-permission-issues)
-* [Agent Socket permission issues](#agent-socket-permission-issues)
-* [Process Metrics permission issue](#process-metrics-permission-issue)
-* [Further Reading](#further-reading)
+The Agent needs a specific set of permission in order to collect your data on your host, find below the most common permission issues and how to solve them.
 
 ## Agent logging permission issues
 
@@ -73,7 +68,7 @@ ls -al /opt/datadog-agent/run
 If the owner of the file is **NOT** `dd-agent`, run the following command to fix it:
 
 ```text
-chown dd-agent -R /opt/datadog-agent/run
+sudo chown -R dd-agent:dd-agent /opt/datadog-agent/run
 ```
 
 After making this change, the [Agent Start command][5] should successfully be able to start the Agent. If you continue to see this issue despite having taken these steps, contact [Datadog support][6] for additional direction.
@@ -83,10 +78,7 @@ After making this change, the [Agent Start command][5] should successfully be ab
 If you enabled the [process check][7] in the Agent running on a Linux OS you may notice that the `system.processes.open_file_descriptors` metric is not collected or reported by default.
 This occurs when processes being monitored by the process check runs under a different user than the Agent user: `dd-agent`. In fact, `dd-agent` user doesn't have full access to all files in `/proc`, which is where the Agent looks to collect data for this metric.
 
-{{< tabs >}}
-{{% tab "Agent v6.3+" %}}
-
-Enable the `try_sudo` option in the process check configuration and add the appropriate `sudoers` rules:
+Enable the `try_sudo` option (available since Agent 6.3) in the process check configuration and add the appropriate `sudoers` rules:
 
 ```text
 dd-agent ALL=NOPASSWD: /bin/ls /proc/*/fd/
@@ -96,43 +88,16 @@ This allows the process check to use `sudo` to execute the `ls` command but only
 
 If you see this line in the Datadog `error.log` file: `sudo: sorry, you must have a tty to run sudo`, you should use `visudo` to comment out the line `Default requiretty` in your sudoers file.
 
-{{% /tab %}}
-{{% tab "Agent v6 & v7" %}}
+### Run Agent as root
 
-If you are running Agent v6 less than v6.3, try updating the Agent and using the `try_sudo` option. If you are unable to update, a workaround for this issue is running the Agent as `root`.
+If you are unable to use `try_sudo`, you can run the Agent as `root` as a workaround.
 
-**NOTE**: It is not recommended to run the Agent as `root`. This isn't specific to the Datadog Agent or due to any concern that something untrustworthy is happening in any way, but it isn't recommended to run the daemon as `root` as this is best practice for most processes on Linux. If you have any personal cause for concern, the Agent is open source and may be audited by you or your team via the [GitHub repository][1].
+<div class="alert alert-info">Running a process daemon as <code>root</code> is not best practice on Linux. The Agent is open source and may be audited via the <a href="https://github.com/DataDog/datadog-agent">GitHub repository.</a></div>
 
-1. [Stop the Agent][2]
-
-2. Open `/etc/systemd/system/multi-user.target.wants/datadog-agent.service` and change the `user​` attribute under `[Service]`
-
-3. [Start the Agent][3]
-
-[1]: https://github.com/DataDog/datadog-agent
-[2]: /agent/configuration/agent-commands/#stop-the-agent
-[3]: /agent/configuration/agent-commands/#start-the-agent
-{{% /tab %}}
-{{% tab "Agent v5" %}}
-
-If you are running Agent v5, try updating to the [latest version of Agent 6][1] and using the `try_sudo` option. If you are unable to update, a workaround for this issue is running the Agent as `root`.
-
-**NOTE**: It is not recommended to run the Agent as `root`. This isn't specific to the Datadog Agent or due to any concern that something untrustworthy is happening in any way, but it isn't recommended to run the daemon as `root` as this is best practice for most processes on Linux. If you have any personal cause for concern, the Agent is open source and may be audited by you or your team via the [GitHub repository][2].
-
-1. [Stop the Agent][3]
-
-2. Open `/etc/dd-agent/supervisor.conf` and replace `dd-agent` with `root` on [line 20][4] and [line 30][5]. Do this again if you upgrade or reinstall the Agent.
-
-3. [Start the Agent][6]
-
-[1]: /agent/guide/upgrade-to-agent-v6/
-[2]: https://github.com/DataDog/dd-agent
-[3]: /agent/configuration/agent-commands/?tab=agentv5#stop-the-agent
-[4]: https://github.com/DataDog/dd-agent/blob/master/packaging/supervisor.conf#L20
-[5]: https://github.com/DataDog/dd-agent/blob/master/packaging/supervisor.conf#L30
-[6]: /agent/configuration/agent-commands/?tab=agentv5#start-the-agent
-{{% /tab %}}
-{{< /tabs >}}
+To run the Agent as `root`:
+1. [Stop the Agent][9]
+2. Open `/etc/systemd/system/multi-user.target.wants/datadog-agent.service` and change the `user` attribute under `[Service]`
+3. [Start the Agent][10]
 
 See the following GitHub issues for more information and other potential methods of capturing this metric on Linux machines.
 
@@ -150,3 +115,5 @@ See the following GitHub issues for more information and other potential methods
 [5]: /agent/configuration/agent-commands/#start-the-agent
 [6]: /help/
 [7]: /integrations/process/
+[9]: /agent/configuration/agent-commands/#stop-the-agent
+[10]: /agent/configuration/agent-commands/#start-the-agent

@@ -4,7 +4,6 @@ further_reading:
 - link: /sensitive_data_scanner/
   tag: Documentación
   text: Configurar Sensitive Data Scanner
-kind: documentation
 title: Sintaxis de expresiones regulares
 ---
 

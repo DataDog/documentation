@@ -53,6 +53,10 @@
         "operator": "md5",
         "target": "a",
         "type": "bodyHash"
+      },
+      {
+        "code": "const hello = 'world';",
+        "type": "javascript"
       }
     ],
     "configVariables": [

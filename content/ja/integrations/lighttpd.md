@@ -20,8 +20,6 @@ assets:
       metadata_path: assets/service_checks.json
     source_type_id: 58
     source_type_name: Lighttpd
-  logs:
-    source: lighttpd
   saved_views:
     lighttpd_processes: assets/saved_views/lighttpd_processes.json
 author:
@@ -31,6 +29,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - log collection
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/lighttpd/README.md
 display_on_public_website: true
@@ -38,9 +37,8 @@ draft: false
 git_integration_title: lighttpd
 integration_id: lighttpd
 integration_title: Lighttpd
-integration_version: 3.5.0
+integration_version: 5.0.0
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: lighttpd
 public_title: Lighttpd
@@ -56,10 +54,14 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: アップタイム、処理バイト数、毎秒のリクエスト数、応答コードなどを追跡。
   media: []
   overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/monitor-lighttpd-web-server-metrics
   support: README.md#Support
   title: Lighttpd
 ---
@@ -73,20 +75,20 @@ tile:
 
 Agent の lighttpd チェックは、アップタイム、処理バイト数、毎秒のリクエスト数、応答コードなどを追跡します。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 Lighttpd チェックは [Datadog Agent][2] パッケージに含まれています。Lighttpd サーバーに追加でインストールする必要はありません。
 
 加えて、Lighttpd サーバーに `mod_status` をインストールします。
 
-### ブラウザトラブルシューティング
+### 構成
 
 {{< tabs >}}
 {{% tab "ホスト" %}}
 
-#### メトリクスベース SLO
+#### ホスト
 
 ホストで実行中の Agent に対してこのチェックを構成するには
 
@@ -124,7 +126,7 @@ Lighttpd チェックは [Datadog Agent][2] パッケージに含まれていま
 {{% /tab %}}
 {{< /tabs >}}
 
-#### 収集データ
+#### ログ収集
 
 1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` でこれを有効にする必要があります。
 
@@ -150,21 +152,21 @@ Lighttpd チェックは [Datadog Agent][2] パッケージに含まれていま
 
 [Agent の `status` サブコマンドを実行][5]し、Checks セクションで `lighttpd` を探します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "lighttpd" >}}
 
 
-### ヘルプ
+### イベント
 
 Lighttpd チェックには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 {{< get-service-checks-from-git "lighttpd" >}}
 
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][6]までお問合せください。
 
@@ -174,7 +176,7 @@ Lighttpd チェックには、イベントは含まれません。
 
 
 
-[1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/lighttpd/images/lighttpddashboard.png
+[1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/lighttpd/images/lighttpddashboard_2.png
 [2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://github.com/DataDog/integrations-core/blob/master/lighttpd/datadog_checks/lighttpd/data/conf.yaml.example
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent

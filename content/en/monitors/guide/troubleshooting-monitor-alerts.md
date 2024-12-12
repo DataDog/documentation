@@ -23,9 +23,13 @@ further_reading:
 
 ## Overview
 
-This guide provides an overview of some foundational concepts that can help you determine if your monitor's alerting behavior is valid. If you suspect that your monitor's evaluations are not accurately reflecting the underlying data, refer to the sections below as you inspect your monitor.
+This guide provides an overview of some foundational concepts that can help you determine if your monitor's alerting behavior is valid. If you suspect that your monitor's evaluations are not accurately reflecting the underlying data, use this guide to inspect your monitor and troubleshoot the following:
+- [The monitor state or status is not matching up to the evaluation](#monitor-state-and-monitor-status)
+- [Verify that the data is present](#verify-the-presence-of-data)
+- [Alert configurations](#alert-conditions)
+- [Unwanted notifications](#notification-issues)
 
-### Monitor state and monitor status
+## Monitor state and monitor status
 
 While monitor *evaluations* are stateless, meaning that the result of a given evaluation does not depend on the results of previous evaluations, monitors themselves are stateful, and their state is updated based on the evaluation results of their queries and configurations. A monitor evaluation with a given status won't necessarily cause the monitor's state to change to the same status. See below for some potential causes:
 
@@ -37,19 +41,23 @@ If metrics are absent from a monitor's evaluation window, and the monitor is not
 
 The state of a monitor may also sometimes update in the absence of a monitor evaluation, for example, due to [auto-resolve][4].
 
-### Verify the presence of data
+#### "No Data" status using Rollup function
 
-If your monitor's state or status is not what you expect, confirm the behavior of the underlying data source. For a metric monitor, you can use the [history][2] graph to view the data points being pulled in by the metric query. For further investigation into your metrics evolution, click **Open in a notebook** by the status graph. This generates an investigation [notebook][20] with a formatted graph of the monitor query.
+If your monitors are unexpectedly evaluating in a "No Data" status, consider reviewing your settings for rollups and evaluation windows. For instance, if a monitor has a 4-minute rollup and a 20-minute evaluation window, it produces one data point every 4 minutes, leading to a maximum of 5 data points within the window. If the "Require Full Window" option is enabled, the evaluation may result in "No Data" because the window is not fully populated. 
 
-{{< img src="monitors/monitor_status/notebook-button2.png" alt="The monitor status page with the mouse cursor hovering over the Open in a notebook button next to one monitor group status bar" style="width:60%;">}}
+For most use cases, disable the "Require Full Window" setting unless your specific scenario demands complete data for accurate evaluation. For more information, see [Rollups in monitors][21].
 
-### Alert conditions
+## Verify the presence of data
+
+If your monitor's state or status is not what you expect, confirm the behavior of the underlying data source. For a metric monitor, you can use the [history][2] graph to view the data points being pulled in by the metric query. 
+
+## Alert conditions
 
 Unexpected monitor behavior can sometimes be the result of misconfigured [alert conditions][5], which vary by [monitor type][6]. If your monitor query uses the `as_count()` function, check the [`as_count()` in Monitor Evaluations][7] guide.
 
 If using recovery thresholds, check the conditions listed in the [recovery thresholds guide][8] to see if the behavior is expected.
 
-### Monitor status and groups
+## Monitor status and groups
 
 For both monitor evaluations and state, status is tracked by group.
 
@@ -61,7 +69,7 @@ If you anticipate creating new monitor groups within the scope of your multi ale
 
 If your monitor queries for crawler-based cloud metrics, use an [evaluation delay][11] to ensure that the metrics have arrived before the monitor evaluates. Read [cloud metric delay][12] for more information about cloud integration crawler schedules.
 
-### Notification issues
+## Notification issues
 
 If your monitor is behaving as expected, but producing unwanted notifications, there are multiple options to reduce or suppress notifications:
 
@@ -69,14 +77,14 @@ If your monitor is behaving as expected, but producing unwanted notifications, t
 - For alerts which are expected or are otherwise not useful for your organization, use [Downtimes][14] to suppress unwanted notifications.
 - To control alert routing, use [template variables][15] and the separation of **warning** or **alert** states with [conditional variables][16].
 
-#### Absent notifications
+### Absent notifications
 
 If you suspect that notifications are not being properly delivered, check the items below to ensure that notifications are able to be delivered:
 
 - Check [email preferences][17] for the recipient and ensure that `Notification from monitor alerts` is checked.
 - Check the [event stream][18] for events with the string `Error delivering notification`.
 
-#### Opsgenie multi-notification
+### Opsgenie multi-notification
 
 If you are using multiple `@opsgenie-[...]` notifications in your monitor, we send those notifications with the same alias to Opsgenie.
 Due to an [Opsgenie feature][19], Opsgenie will discard what is seen as a duplication.
@@ -86,7 +94,7 @@ Due to an [Opsgenie feature][19], Opsgenie will discard what is seen as a duplic
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /monitors/configuration/?tabs=thresholdalert#no-data
-[2]: /monitors/manage/status/#history
+[2]: /monitors/status/#history
 [3]: /monitors/guide/monitor-arithmetic-and-sparse-metrics/
 [4]: /monitors/configuration/?tabs=thresholdalert#auto-resolve
 [5]: /monitors/configuration/?tabs=thresholdalert#set-alert-conditions
@@ -105,3 +113,4 @@ Due to an [Opsgenie feature][19], Opsgenie will discard what is seen as a duplic
 [18]: /events/stream
 [19]: https://docs.opsgenie.com/docs/alert-deduplication
 [20]: /notebooks
+[21]: /dashboards/functions/rollup/#rollups-in-monitors

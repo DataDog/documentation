@@ -44,16 +44,10 @@ The resulting error appears as:
 ERROR | (pkg/workloadmeta/collectors/internal/containerd/image_sbom_trivy.go:80 in func2) | Failed to generate SBOM for containerd image: unable to marshal report to sbom format, err: analyze error: failed to analyze layer:  : unable to get uncompressed layer
 ```
 
-The workaround for this issue is to set the configuration option `discard_unpacked_layers=false` in the containerd configuration file.
-
-## View related metrics
-
-1. Go to **[Metrics > Summary][4]** in Datadog.
-2. Search for the following metrics to aid in troubleshooting:
-    -  `datadog.agent.sbom_attempts`: Tracks sbom collection attempts by `source` and `type`.
-    -  `datadog.agent.sbom_generation_duration`: Measures the time that it takes to generate SBOMs in seconds.
-    -  `datadog.agent.sbom_errors`: Number of sbom failures by `source`, `type`, and `reason`.
-    -  `datadog.agent.export_size`: The size of the archive written on disk. 
+The workaround for this issue is to set the configuration option:
+- For containerd: set `discard_unpacked_layers=false` in the containerd configuration file.
+- For Helm: set `datadog.sbom.containerImage.uncompressedLayersSupport: true` in your `values.yaml` file.
+- For Datadog Operator: set `features.sbom.containerImage.uncompressedLayersSupport` to `true` in your DatadogAgent CRD.
 
 ## Further Reading
 

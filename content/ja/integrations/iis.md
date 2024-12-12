@@ -19,12 +19,10 @@ assets:
       metadata_path: assets/service_checks.json
     source_type_id: 46
     source_type_name: IIS
-  logs:
-    source: iis
   monitors:
-    '[IIS] Anomalous amount of requests for site: {{site.name}}': assets/monitors/req.json
-    '[IIS] Increase of locked error per second for site: {{site.name}}': assets/monitors/lock.json
-    '[IIS] Increase of not found error per second for site: {{site.name}}': assets/monitors/err.json
+    404 errors is high: assets/monitors/err.json
+    Locked errors is high: assets/monitors/lock.json
+    Request number is high: assets/monitors/req.json
   saved_views:
     4xx_errors: assets/saved_views/4xx_errors.json
     5xx_errors: assets/saved_views/5xx_errors.json
@@ -38,6 +36,8 @@ author:
   support_email: help@datadoghq.com
 categories:
 - ログの収集
+- windows
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/iis/README.md
 display_on_public_website: true
@@ -45,9 +45,8 @@ draft: false
 git_integration_title: iis
 integration_id: iis
 integration_title: IIS
-integration_version: 3.1.0
+integration_version: 5.0.0
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: iis
 public_title: IIS
@@ -58,7 +57,9 @@ tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Category::Log Collection
+  - カテゴリー::Windows
   - Supported OS::Windows
+  - Offering::Integration
   configuration: README.md#Setup
   description: 全体またはサイトごとのメトリクスを追跡し、各サイトの稼働/停止状態を監視。
   media: []
@@ -76,13 +77,13 @@ tile:
 
 すべてのサイトを集計して、またはサイトごとに IIS メトリクスを収集します。IIS Agent チェックは、アクティブな接続数、送信および受信バイト数、HTTP メソッド別のリクエスト数などのメトリクスを収集します。サイトごとのサービスチェックも送信されるため、サイトが稼働しているか停止しているかを把握できます。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 IIS チェックは Agent にパッケージ化されています。IIS メトリクスとログの収集を開始するには、[Agent をインストールします][2]。
 
-#### メトリクスベース SLO
+#### ホスト
 
 ホストで実行中の Agent に対してこのチェックを構成するには
 
@@ -94,7 +95,7 @@ IIS チェックは Agent にパッケージ化されています。IIS メト�
 
 **注**: このチェックのバージョン 2.14.0 以降では、メトリクスの収集に新しい実装を使用し、これには Python 3 が必要です。Python 3 の使用が不可能なホストの場合や、このチェックのレガシーバージョンを使用する場合は、以下の[コンフィグ][7]を参照してください。
 
-##### 収集データ
+##### ログ収集
 
 1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` ファイルでこれを有効にします。
 
@@ -123,21 +124,21 @@ IIS チェックは Agent にパッケージ化されています。IIS メト�
 
 [Agent の status サブコマンドを実行][9]し、Checks セクションで `iis` を探します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "iis" >}}
 
 
-### ヘルプ
+### イベント
 
 IIS チェックには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 {{< get-service-checks-from-git "iis" >}}
 
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][12]までお問合せください。
 

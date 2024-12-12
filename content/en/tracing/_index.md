@@ -19,7 +19,7 @@ further_reading:
     text: "Manage API performance, security, and ownership with Datadog API Catalog"
   - link: "https://dtdg.co/fe"
     tag: "Foundation Enablement"
-    text: "Join an interactive session to boost your APM understanding"  
+    text: "Join an interactive session to boost your APM understanding"
 
 aliases:
   - /tracing/faq/terminology
@@ -29,7 +29,7 @@ aliases:
   - /tracing/api
   - /tracing/faq/distributed-tracing/
 algolia:
-  tags: ['apm', 'application performance monitoring', 'distributed tracing']
+  tags: ['apm', 'application performance monitoring', 'distributed tracing', 'trace', 'tracing']
 cascade:
     algolia:
         rank: 70
@@ -38,6 +38,11 @@ cascade:
 {{< vimeo url="https://player.vimeo.com/progressive_redirect/playback/381554158/rendition/1080p/file.mp4?loc=external&signature=e19b4e64632c3b1a42b11cb27fca2682dfadecd4690774c005ba2f5079b6a416" poster="/images/poster/tracing.png" >}}
 
 </br>
+
+
+{{< learning-center-callout header="Join an enablement webinar session" hide_image="true" btn_title="Sign Up" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=APM">}}
+  Join an introductory or intermediate enablement session to learn more about how Datadog Application Performance Monitoring (APM) provides AI-powered, code-level distributed tracing from browser and mobile applications to backend services and databases.
+{{< /learning-center-callout >}}
 
 ## Overview
 
@@ -50,6 +55,8 @@ For an introduction to terminology used in Datadog APM, see [APM Terms and Conce
 The simplest way to start with Datadog APM is with Single Step Instrumentation. This approach installs the Datadog Agent and instruments your application in one step, with no additional configuration steps required. To learn more, read [Single Step Instrumentation][27].
 
 For setups that require more customization, Datadog supports custom instrumentation with Datadog tracing libraries. To learn more, read [Application Instrumentation][2].
+
+<div class="alert alert-info">If you're new to Datadog APM, read <a href="https://docs.datadoghq.com/getting_started/tracing/">Getting Started with APM</a> to learn how to send your first trace to Datadog.</div>
 
 ## Use cases
 
@@ -88,9 +95,13 @@ Datadog APM integrates seamlessly with logs, real user monitoring (RUM), synthet
 
 Traces start in your instrumented applications and flow into Datadog.
 
-Datadog APM provides tools to manage the volume and retention of your trace data. Use [Ingestion Controls][6] to adjust sampling rates and [retention filters][7] to control which spans are are stored.
+Datadog APM provides tools to manage the volume and retention of your trace data. Use [Ingestion Controls][6] to adjust sampling rates and [retention filters][7] to control which spans are stored.
 
 {{< img src="/tracing/apm_lifecycle/apm_lifecycle_0.png" alt="Flow of data through Datadog APM." style="width:100%;" >}}
+
+## Troubleshooting
+
+For troubleshooting assistance, read the [APM Troubleshooting][29] guide.
 
 ## Further reading
 
@@ -124,3 +135,4 @@ Datadog APM provides tools to manage the volume and retention of your trace data
 [26]: /tracing/services/service_page/
 [27]: /tracing/trace_collection/single-step-apm/
 [28]: /tracing/services/resource_page/
+[29]: /tracing/troubleshooting/

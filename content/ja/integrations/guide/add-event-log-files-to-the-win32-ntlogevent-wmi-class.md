@@ -1,7 +1,7 @@
 ---
 aliases:
 - /ja/integrations/faq/how-to-add-event-log-files-to-the-win32-ntlogevent-wmi-class
-title: イベントログファイルを `Win32_NTLogEvent` WMI クラスに追加する
+title: Add event log files to the Win32_NTLogEvent WMI class
 ---
 
 すべてのイベントログが Win32_NTLogEvent WMI クラス内にあるわけではありません。Event Viewer インテグレーションはこのクラスのイベントしか拾えないので、Windows レジストリを変更して、このクラスの範囲外のイベントログを追加してください。

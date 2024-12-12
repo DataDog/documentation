@@ -10,13 +10,13 @@ further_reading:
   text: 'Learn how to search your rules and executions'
 ---
 
+{{< callout url="#" btn_hidden="true" header="Join the Preview!" >}}
+Quality Gates is in Preview.
+{{< /callout >}}
+
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">Quality Gates is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
-
-{{< callout url="#" btn_hidden="true" >}}
-Quality Gates is in public beta.
-{{< /callout >}}
 
 ## Overview
 
@@ -24,30 +24,7 @@ Facets are user-defined tags and attributes from your rules or executions. They 
 
 [Creating facets](#creating-facets) is **not required** for [searching quality gates][5]. Autocomplete capabilities use existing facets, but also any input that matches incoming quality gates applies.
 
-The [Quality Gates Explorer][4] includes out-of-the-box facets such as `Status` and `Gate ID`. You can use facets in the Quality Gates Explorer to [search for and filter quality gates][5].
-
-{{< tabs >}}
-{{% tab "Gates" %}}
-
-Navigate to [**Software Delivery** > **Quality Gates** > **Quality Gate Executions**][101] and select **Gates** to access the list of [Quality Gates facets][102].
-
-{{< img src="quality_gates/explorer/facets_gates.png" text="Facets list for gates on the Quality Gates Explorer" style="width:100%" >}}
-
-[101]: https://app.datadoghq.com/ci/quality-gates/executions
-[102]: /quality_gates/explorer/?tab=gates
-
-{{% /tab %}}
-{{% tab "Rules" %}}
-
-Navigate to [**Software Delivery** > **Quality Gates** > **Quality Gate Executions**][101] and select **Rules** to access the list of [Quality Gates facets][102].
-
-{{< img src="quality_gates/explorer/facets_rules.png" text="Facets list for rules on the Quality Gates Explorer" style="width:100%" >}}
-
-[101]: https://app.datadoghq.com/ci/quality-gates/executions
-[102]: /quality_gates/explorer/?tab=rules
-
-{{% /tab %}}
-{{< /tabs >}}
+The [Quality Gates Explorer][4] includes out-of-the-box facets such as `Status` and `Gate ID`. You can use facets in the Quality Gates Explorer to [search for and filter your quality gates][5].
 
 ### Qualitative facets
 

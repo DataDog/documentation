@@ -1,8 +1,19 @@
 ---
 aliases:
 - /ja/monitors/create/types/slo/
+further_reading:
+- link: /service_management/service_level_objectives/burn_rate
+  tag: ドキュメント
+  text: バーンレートアラート
+- link: /service_management/service_level_objectives/error_budget
+  tag: ドキュメント
+  text: エラーバジェットアラート
 title: SLO アラート
 ---
+
+<div class="alert alert-info">
+This monitor is available for the Metric-based SLOs, Time Slice SLOs, and Monitor-based SLOs composed of Metric Monitor types (Metric, Integration, APM Metric, Anomaly, Forecast, or Outlier Monitors).
+</div>
 
 ## 概要
 
@@ -26,7 +37,7 @@ Datadog で [SLO アラート][2]を作成するには、メインナビゲー�
 
 ### 通知
 
-**Say what's happening** と **Notify your team** のセクションに関する詳しい説明は、[通知][5] のページを参照してください。
+For detailed instructions on the **Configure notifications and automations** section, see the [Notifications][5] page.
 
 すべてのモニタータイプで利用可能な[標準テンプレート変数][6]に加えて、SLO アラートは以下の変数もサポートします。
 
@@ -36,6 +47,10 @@ Datadog で [SLO アラート][2]を作成するには、メインナビゲー�
 | `{{value}}` | エラーバジェットの消費割合 (エラーバジェットアラートのみ)。 |
 | `{{short_window_burn_rate}}` | ショートウィンドウで観測可能なバーンレート値 (バーンレートアラートのみ)。 |
 | `{{long_window_burn_rate}}` | ロングウィンドウで観測可能なバーンレート値 (バーンレートアラートのみ)。 |
+
+## 参考資料
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/service_management/service_level_objectives/
 [2]: https://app.datadoghq.com/monitors/create/slo

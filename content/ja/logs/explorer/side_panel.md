@@ -1,19 +1,20 @@
 ---
-title: ログサイドパネル
-description: すべてのログを検索し、ログ分析を実行します
 aliases:
-  - /ja/logs/explorer/sidepanel
+- /ja/logs/explorer/sidepanel
+description: すべてのログを検索し、ログ分析を実行します
 further_reading:
-  - link: /logs/log_configuration/processors
-    tag: Documentation
-    text: ログの処理方法
-  - link: /tracing/connect_logs_and_traces
-    tag: Documentation
-    text: ログとトレースの接続
-  - link: /logs/guide/correlate-logs-with-metrics
-    tag: Documentation
-    text: ログをインフラストラクチャーメトリクスに接続する
+- link: /logs/log_configuration/processors
+  tag: Documentation
+  text: ログの処理方法
+- link: tracing/other_telemetry/connect_logs_and_traces
+  tag: Documentation
+  text: ログとトレースの接続
+- link: /logs/guide/correlate-logs-with-metrics
+  tag: Documentation
+  text: ログをインフラストラクチャーメトリクスに接続する
+title: ログサイドパネル
 ---
+
 ## 概要
 Datadog は次の一般的なサイドパネルレイアウトに従い、個々のログを表示します。
 
@@ -39,7 +40,7 @@ Datadog は次の一般的なサイドパネルレイアウトに従い、個々
 
 **Metrics** タブをクリックして、ログの周囲の 30 分の時間枠で基底のインフラストラクチャーメトリクスにアクセスします。
 
-上部の予約済み属性セクション、関連する[ホストダッシュボード][5]、または[ネットワークページ][6]で**ホスト**を操作します。**Container** セクションを操作して、基底のパラメーターでスコープされた[コンテナページ][7]に移動します。
+上部の予約済み属性セクション、関連する[ホストダッシュボード][5]、または [Network Analytics][6] ページで**ホスト**を操作します。**Container** セクションを操作して、基底のパラメーターでスコープされた[コンテナページ][7]に移動します。
 
 {{< img src="logs/explorer/side_panel/infra.mp4" alt="インフラへのハブ" video=true style="width:100%;">}}
 
@@ -85,11 +86,11 @@ Datadog は次の一般的なサイドパネルレイアウトに従い、個々
 [2]: /ja/integrations/#cat-log-collection
 [3]: /ja/agent/autodiscovery/integrations/?tab=kubernetes
 [4]: /ja/logs/log_configuration/attributes_naming_convention
-[5]: /ja/dashboards/#preset-lists
-[6]: /ja/network_monitoring/performance/network_page/
+[5]: /ja/dashboards/list/#preset-lists
+[6]: /ja/network_monitoring/performance/network_analytics/
 [7]: /ja/infrastructure/livecontainers/?tab=linuxwindows#introduction
 [8]: /ja/infrastructure/serverless/#function-detail-view
-[9]: /ja/tracing/connect_logs_and_traces/
+[9]: /ja/tracing/other_telemetry/connect_logs_and_traces/
 [10]: /ja/getting_started/tagging/unified_service_tagging
 [11]: /ja/tracing/app_analytics/search/#displaying-a-full-trace
 [12]: /ja/logs/explorer/facets/#overview

@@ -14,13 +14,13 @@ further_reading:
     - link: "/continuous_integration/tests"
       tag: "Documentation"
       text: "Explore Test Results and Performance"
-    - link: "/continuous_integration/troubleshooting/"
+    - link: "/tests/troubleshooting/"
       tag: "Documentation"
-      text: "Troubleshooting CI Visibility"
+      text: "Troubleshooting Test Optimization"
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
+<div class="alert alert-warning">Test Optimization is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
 ## Compatibility
@@ -45,22 +45,11 @@ Supported test frameworks:
 To report test results to Datadog, you need to configure the Datadog Python library:
 
 {{< tabs >}}
-{{% tab "Github Actions" %}}
-You can use the dedicated [Datadog Test Visibility Github Action][1] to enable Test Visibility.
-If you do so, the rest of the setup steps below can be skipped.
-
-[1]: https://github.com/marketplace/actions/configure-datadog-test-visibility
+{{% tab "CI Provider with Auto-Instrumentation Support" %}}
+{{% ci-autoinstrumentation %}}
 {{% /tab %}}
 
-{{% tab "Jenkins" %}}
-You can use [UI-based configuration][1] to enable Test Visibility for your jobs and pipelines.
-If you do so, the rest of the setup steps below can be skipped.
-
-[1]: /continuous_integration/pipelines/jenkins/#enable-with-the-jenkins-configuration-ui-1
-{{% /tab %}}
-
-
-{{% tab "Other cloud CI provider" %}}
+{{% tab "Other Cloud CI Provider" %}}
 {{% ci-agentless %}}
 {{% /tab %}}
 
@@ -174,6 +163,213 @@ assert True
 
 {{% /tab %}}
 
+{{% tab "Manual instrumentation (beta)" %}}
+
+### Manual testing API
+
+<div class="alert alert-warning"><strong>Note</strong>: The Test Optimization manual testing API is in <strong>beta</strong> and subject to change.</div>
+
+As of version `2.13.0`, the [Datadog Python tracer][1] provides the Test Optimization API (`ddtrace.ext.test_visibility`) to submit test optimization results as needed.
+
+#### API execution
+
+The API uses classes to provide namespaced methods to submit test optimization events.
+
+Test execution has two phases:
+- Discovery: inform the API what items to expect
+- Execution: submit results (using start and finish calls)
+
+The distinct discovery and execution phases allow for a gap between the test runner process collecting the tests and the tests starting.
+
+API users must provide consistent identifiers (described below) that are used as references for Test Optimization items within the API's state storage.
+
+##### Enable `test_visibility`
+
+You must call the `ddtrace.ext.test_visibility.api.enable_test_visibility()` function before using the Test Optimization API.
+
+Call the `ddtrace.ext.test_visibility.api.disable_test_visibility()` function before process shutdown to ensure proper flushing of data.
+
+#### Domain model
+
+The API is based around four concepts: test session, test module, test suite, and test.
+
+Modules, suites, and tests form a hierarchy in the Python Test Optimization API, represented by the item identifier's parent relationship.
+
+##### Test session
+
+A test session represents a project's test execution, typically corresponding to the execution of a test command. Only one session can be discovered, started, and finished in the execution of Test Optimization program.
+
+Call `ddtrace.ext.test_visibility.api.TestSession.discover()` to discover the session, passing the test command, a given framework name, and version.
+
+Call `ddtrace.ext.test_visibility.api.TestSession.start()` to start the session.
+
+When tests have completed, call `ddtrace.ext.test_visibility.api.TestSession.finish()` .
+
+
+##### Test module
+
+A test module represents a smaller unit of work within a project's tests run (a directory, for example).
+
+Call `ddtrace.ext.test_visibility.api.TestModuleId()`, providing the module name as a parameter, to create a `TestModuleId`.
+
+Call `ddtrace.ext.test_visibility.api.TestModule.discover()`, passing the `TestModuleId` object as an argument, to discover the module.
+
+Call `ddtrace.ext.test_visibility.api.TestModule.start()`, passing the `TestModuleId` object as an argument, to start the module.
+
+After all the children items within the module have completed, call `ddtrace.ext.test_visibility.api.TestModule.finish()`, passing the `TestModuleId` object as an argument.
+
+
+##### Test suite
+
+A test suite represents a subset of tests within a project's modules (`.py` file, for example).
+
+Call `ddtrace.ext.test_visibility.api.TestSuiteId()`, providing the parent module's `TestModuleId` and the suite's name as arguments, to create a `TestSuiteId`.
+
+Call `ddtrace.ext.test_visibility.api.TestSuite.discover()`, passing the `TestSuiteId` object as an argument, to discover the suite.
+
+Call `ddtrace.ext.test_visibility.api.TestSuite.start()`, passing the `TestSuiteId` object as an argument, to start the suite.
+
+After all the child items within the suite have completed, call `ddtrace.ext.test_visibility.api.TestSuite.finish()`, passing the `TestSuiteId` object as an argument.
+
+##### Test
+
+A test represents a single test case that is executed as part of a test suite.
+
+Call `ddtrace.ext.test_visibility.api.TestId()`, providing the parent suite's `TestSuiteId` and the test's name as arguments, to create a `TestId`. The `TestId()` method accepts a JSON-parseable string as the optional `parameters` argument. The `parameters` argument can be used to distinguish parametrized tests that have the same name, but different parameter values.
+
+Call `ddtrace.ext.test_visibility.api.Test.discover()`, passing the `TestId` object as an argument, to discover the test. The `Test.discover()` classmethod accepts a string as the optional `resource` parameter, which defaults to the `TestId`'s `name`.
+
+Call `ddtrace.ext.test_visibility.api.Test.start()`, passing the `TestId` object as an argument, to start the test.
+
+Call `ddtrace.ext.test_visibility.api.Test.mark_pass()`, passing the `TestId` object as an argument, to mark that the test has passed successfully.
+Call `ddtrace.ext.test_visibility.api.Test.mark_fail()`, passing the `TestId` object as an argument, to mark that the test has failed. `mark_fail()` accepts an optional `TestExcInfo` object as the `exc_info` parameter.
+Call `ddtrace.ext.test_visibility.api.Test.mark_skip()`, passing the `TestId` object as an argument, to mark that the test was skipped. `mark_skip()` accepts an optional string as the `skip_reason` parameter.
+
+###### Exception information
+
+The `ddtrace.ext.test_visibility.api.Test.mark_fail()` classmethod holds information about exceptions encountered during a test's failure.
+
+The `ddtrace.ext.test_visibility.api.TestExcInfo()` method takes three positional parameters:
+- `exc_type`: the type of the exception encountered
+- `exc_value`: the `BaseException` object for the exception
+- `exc_traceback`: the `Traceback` object for the exception
+
+###### Codeowner information
+
+The `ddtrace.ext.test_visibility.api.Test.discover()` classmethod accepts an optional list of strings as the `codeowners` parameter.
+
+###### Test source file information
+
+The `ddtrace.ext.test_visibility.api.Test.discover()` classmethod accepts an optional `TestSourceFileInfo` object as the `source_file_info` parameter. A `TestSourceFileInfo` object represents the path and optionally, the start and end lines for a given test.
+
+The `ddtrace.ext.test_visibility.api.TestSourceFileInfo()` method accepts three positional parameters:
+- `path`: a `pathlib.Path` object (made relative to the repo root by the `Test Optimization` API)
+- `start_line`: an optional integer representing the start line of the test in the file
+- `end_line`: an optional integer representing the end line of the test in the file
+
+###### Setting parameters after test discovery
+
+The `ddtrace.ext.test_visibility.api.Test.set_parameters()` classmethod accepts a `TestId` object as an argument, and a JSON-parseable string, to set the `parameters` for the test.
+
+**Note:** this overwrites the parameters associated with the test, but does not modify the `TestId` object's `parameters` field.
+
+Setting parameters after a test has been discovered requires that the `TestId` object be unique even without the `parameters` field being set.
+
+#### Code example
+
+```python
+from ddtrace.ext.test_visibility import api
+import pathlib
+import sys
+
+if __name__ == "__main__":
+    # Enable the Test Optimization service
+    api.enable_test_visibility()
+
+    # Discover items
+    api.TestSession.discover("manual_test_api_example", "my_manual_framework", "1.0.0")
+    test_module_1_id = api.TestModuleId("module_1")
+    api.TestModule.discover(test_module_1_id)
+
+    test_suite_1_id = api.TestSuiteId(test_module_1_id, "suite_1")
+    api.TestSuite.discover(test_suite_1_id)
+
+    test_1_id = api.TestId(test_suite_1_id, "test_1")
+    api.Test.discover(test_1_id)
+
+    # A parameterized test with codeowners and a source file
+    test_2_codeowners = ["team_1", "team_2"]
+    test_2_source_info = api.TestSourceFileInfo(pathlib.Path("/path/to_my/tests.py"), 16, 35)
+
+    parametrized_test_2_a_id = api.TestId(
+        test_suite_1_id,
+        "test_2",
+        parameters='{"parameter_1": "value_is_a"}'
+    )
+    api.Test.discover(
+        parametrized_test_2_a_id,
+        codeowners=test_2_codeowners,
+        source_file_info=test_2_source_info,
+        resource="overriden resource name A",
+    )
+
+    parametrized_test_2_b_id = api.TestId(
+        test_suite_1_id,
+        "test_2",
+        parameters='{"parameter_1": "value_is_b"}'
+    )
+    api.Test.discover(
+      parametrized_test_2_b_id,
+      codeowners=test_2_codeowners,
+      source_file_info=test_2_source_info,
+      resource="overriden resource name B"
+    )
+
+    test_3_id = api.TestId(test_suite_1_id, "test_3")
+    api.Test.discover(test_3_id)
+
+    test_4_id = api.TestId(test_suite_1_id, "test_4")
+    api.Test.discover(test_4_id)
+
+
+    # Start and execute items
+    api.TestSession.start()
+
+    api.TestModule.start(test_module_1_id)
+    api.TestSuite.start(test_suite_1_id)
+
+    # test_1 passes successfully
+    api.Test.start(test_1_id)
+    api.Test.mark_pass(test_1_id)
+
+    # test_2's first parametrized test succeeds, but the second fails without attaching exception info
+    api.Test.start(parametrized_test_2_a_id)
+    api.Test.mark_pass(parametrized_test_2_a_id)
+
+    api.Test.start(parametrized_test_2_b_id)
+    api.Test.mark_fail(parametrized_test_2_b_id)
+
+    # test_3 is skipped
+    api.Test.start(test_3_id)
+    api.Test.mark_skip(test_3_id, skip_reason="example skipped test")
+
+    # test_4 fails, and attaches exception info
+    api.Test.start(test_4_id)
+    try:
+      raise(ValueError("this test failed"))
+    except:
+      api.Test.mark_fail(test_4_id, exc_info=api.TestExcInfo(*sys.exc_info()))
+
+    # Finish suites and modules
+    api.TestSuite.finish(test_suite_1_id)
+    api.TestModule.finish(test_module_1_id)
+    api.TestSession.finish()
+```
+
+[1]: https://github.com/DataDog/dd-trace-py
+
+{{% /tab %}}
+
 {{< /tabs >}}
 
 ## Configuration settings
@@ -235,9 +431,9 @@ The overall count of test events (and their correctness) remain unaffected.
 
 {{% tab "unittest" %}}
 
-In some cases, if your `unittest` test execution is run in a parallel manner, this may break the instrumentation and affect test visibility.
+In some cases, if your `unittest` test execution is run in a parallel manner, this may break the instrumentation and affect test optimization.
 
-Datadog recommends you use up to one process at a time to prevent affecting test visibility.
+Datadog recommends you use up to one process at a time to prevent affecting test optimization.
 
 {{% /tab %}}
 

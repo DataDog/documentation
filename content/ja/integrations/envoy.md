@@ -21,10 +21,8 @@ assets:
       metadata_path: assets/service_checks.json
     source_type_id: 10012
     source_type_name: Envoy
-  logs:
-    source: envoy
   monitors:
-    Envoy - connected state: assets/monitors/connected_state.json
+    Envoy instance disconnected from control plane: assets/monitors/connected_state.json
   saved_views:
     envoy_4xx: assets/saved_views/envoy_4xx.json
     envoy_5xx: assets/saved_views/envoy_5xx.json
@@ -38,6 +36,8 @@ author:
 categories:
 - cloud
 - log collection
+- network
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/envoy/README.md
 display_on_public_website: true
@@ -45,9 +45,8 @@ draft: false
 git_integration_title: envoy
 integration_id: envoy
 integration_title: Envoy
-integration_version: 3.4.0
+integration_version: 5.0.0
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: envoy
 public_title: Envoy
@@ -64,6 +63,10 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Category::ネットワーク
+  - Submitted Data Type::Metrics
+  - Submitted Data Type::Logs
+  - Offering::Integration
   configuration: README.md#Setup
   description: Envoy はオープンソースのエッジ/サービスプロキシを提供
   media: []
@@ -79,9 +82,9 @@ tile:
 
 このチェックは、[Envoy][1] から分散型システムの可観測性メトリクスを収集します。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 Envoy チェックは [Datadog Agent][2] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 
@@ -163,12 +166,12 @@ static_resources:
             port_value: 8001
 ```
 
-### ブラウザトラブルシューティング
+### 構成
 
 {{< tabs >}}
 {{% tab "ホスト" %}}
 
-#### メトリクスベース SLO
+#### ホスト
 
 ホストで実行中の Agent に対してこのチェックを構成するには
 
@@ -190,7 +193,7 @@ static_resources:
 2. Datadog Agent が Envoy の[管理エンドポイント][3]にアクセスできるかを確認します。
 3. [Agent を再起動します][4]。
 
-##### 収集データ
+##### ログ収集
 
 _Agent バージョン 6.0 以降で利用可能_
 
@@ -232,7 +235,7 @@ _Agent バージョン 6.0 以降で利用可能_
 | `<INSTANCE_CONFIG>`  | `{"openmetrics_endpoint": "http://%%host%%:80/stats/prometheus"}` |
  **注**: 現行バージョンのチェック (1.26.0+) は、メトリクスの収集に [OpenMetrics][2] を使用し、これには Python 3 が必要です。Python 3 の使用が不可能なホストの場合や、このチェックのレガシーバージョンを使用する場合は、以下の[コンフィグ][3]を参照してください。
 
-##### 収集データ
+##### ログ収集
 
 _Agent バージョン 6.0 以降で利用可能_
 
@@ -253,23 +256,23 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 
 [Agent の status サブコマンドを実行][6]し、Checks セクションで `envoy` を探します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "envoy" >}}
 
 
 各メトリクスによって送信されるタグのリストについては、[metrics.py][7] を参照してください。
 
-### ヘルプ
+### イベント
 
 Envoy チェックには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 {{< get-service-checks-from-git "envoy" >}}
 
 
-## ヘルプ
+## トラブルシューティング
 
 ### 一般的な問題
 

@@ -10,15 +10,12 @@ further_reading:
 - link: /synthetics/metrics/
   tag: Documentation
   text: En savoir plus sur les métriques de la surveillance Synthetic
-kind: guide
 title: Utiliser des monitors de test Synthetic
 ---
 
 ## Présentation
 
 Lorsque vous créez un test Synthetic, Datadog crée automatiquement un monitor associé. Vous pouvez configurer des notifications lorsque le monitor du test Synthetic envoie une alerte.
-
-{{< img src="synthetics/guide/synthetics_test_monitors/synthetic_test_monitor.png" alt="Monitor de test Synthetic" style="width:100%;">}}
 
 ## Créer un monitor de test Synthetic
 

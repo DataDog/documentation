@@ -1,7 +1,7 @@
 ---
 title: Generic CI Providers
 description: Learn about Datadog Static Analysis to scan code for quality issues and security vulnerabilities before your code reaches production.
-is_beta: true
+is_beta: false
 further_reading:
 - link: "https://www.datadoghq.com/blog/monitor-ci-pipelines/"
   tag: "Blog"
@@ -10,19 +10,19 @@ algolia:
   tags: ['static analysis', 'ci pipeline', 'SAST']
 ---
 
+{{< callout url="#" btn_hidden="true" header="Join the Preview!" >}}
+Code Analysis is in Preview.
+{{< /callout >}}
+
 {{% site-region region="gov" %}}
 <div class="alert alert-danger">
     Code Analysis is not available for the {{< region-param key="dd_site_name" >}} site.
 </div>
 {{% /site-region %}}
 
-{{< callout url="#" btn_hidden="true" header="Try the Beta!" >}}
-Code Analysis is in public beta.
-{{< /callout >}}
-
 ## Overview
 
-If you don't use CircleCI Orbs or GitHub Actions, you can run the Datadog CLI directly in your CI pipeline platform. 
+If you don't use CircleCI Orbs or GitHub Actions, you can run the Datadog CLI directly in your CI pipeline platform.
 
 Prerequisites:
 
@@ -34,7 +34,7 @@ Configure the following environment variables:
 | Name         | Description                                                                                                                | Required | Default         |
 |--------------|----------------------------------------------------------------------------------------------------------------------------|----------|-----------------|
 | `DD_API_KEY` | Your Datadog API key. This key is created by your [Datadog organization][1] and should be stored as a secret.            | Yes      |                 |
-| `DD_APP_KEY` | Your Datadog application key. This key is created by your [Datadog organization][2] and should be stored as a secret.    | Yes      |                 |
+| `DD_APP_KEY` | Your Datadog application key. This key, created by your [Datadog organization][2], should include the `code_analysis_read` scope and be stored as a secret.  | Yes      |                 |
 | `DD_SITE`    | The [Datadog site][3] to send information to. Your Datadog site is {{< region-param key="dd_site" code="true" >}}.       | No       | `datadoghq.com` |
 
 Provide the following inputs:
@@ -65,7 +65,7 @@ Add the following to your CI pipeline:
 export DD_SITE="datadoghq.com"
 
 # Install dependencies
-npm install -g @datadog/datadog-ci 
+npm install -g @datadog/datadog-ci
 
 # Download the latest Datadog static analyzer:
 # https://github.com/DataDog/datadog-static-analyzer/releases
@@ -78,7 +78,7 @@ mv /tmp/datadog-static-analyzer /usr/local/datadog-static-analyzer
 /usr/local/datadog-static-analyzer -i . -o /tmp/report.sarif -f sarif
 
 # Upload results
-datadog-ci sarif upload /tmp/report.sarif --service <service> --env <env>
+datadog-ci sarif upload /tmp/report.sarif
 ```
 
 <div class="alert alert-info">
@@ -87,24 +87,24 @@ datadog-ci sarif upload /tmp/report.sarif --service <service> --env <env>
 
 ## Diff-aware scanning
 
-<div class="alert alert-warning">
-  Diff-aware scanning for Static Analysis is in public beta.
-</div>
+Diff-aware scanning is a feature that enables Datadog Static Analysis to only scan the files modified by a commit in a feature branch. It accelerates scan time significantly by not having the analysis run on every file in the repository for every scan. The first scan performed, as well as default branch scans, always produce an analysis of the full repository (not diff-aware).
 
-Diff-aware scanning is a feature that enables Datadog Static Analysis to only scan the files modified by a commit in a feature branch. It accelerates scan time significantly by not having the analysis run on every file in the repository for every scan. To enable diff-aware scanning in your CI pipeline, follow these steps:
+If you are using GitHub Actions, diff-aware scanning is enabled by default.
+
+For other CI providers, follow these steps to enable diff-aware scanning:
 
 1. Make sure your `DD_APP_KEY`, `DD_SITE` and `DD_API_KEY` variables are set in your CI pipeline.
 2. Add a call to `datadog-ci git-metadata upload` before invoking the static analyzer. This command ensures that Git metadata is available to the Datadog backend. Git metadata is required to calculate the number of files to analyze.
 3. Ensure that the datadog-static-analyzer is invoked with the flag `--diff-aware`.
 
-Example of commands sequence:
+Example of commands sequence (these commands must be invoked in your Git repository):
 ```bash
 datadog-ci git-metadata upload
 
-datadog-static-analyzer -i /path/to/directory -g -o sarif.json -f sarif –diff-aware <...other-options...>
+datadog-static-analyzer -i /path/to/directory -g -o sarif.json -f sarif –-diff-aware <...other-options...>
 ```
 
-**Note:** These commands must be invoked in your Git repository.
+**Note:** When a diff-aware scan cannot be completed, the entire directory is scanned.
 
 ## Further Reading
 

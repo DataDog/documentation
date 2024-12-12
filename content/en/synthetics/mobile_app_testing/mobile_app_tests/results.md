@@ -73,11 +73,50 @@ Device
 Run type
 : The type of test run (CI, manually triggered, or scheduled).
 
+Records
+: Download device logs that have been captured for your test runs to aid in debugging.
+
 ### Screenshots and actions
 
 Every executed test step contains a screenshot of the step action, step action name, step ID, and step duration.
 
 {{< img src="mobile_app_testing/screenshot-and-action.png" alt="Screenshots and actions in the Sample Runs section of the test details" style="width=80%" >}}
+
+### XML highlighting 
+
+Results of steps contain the XML representation of the screen being tested, as well as the ability to hover over the screenshot or the XML to highlight specific elements of the app. 
+Click an element to view additional attributes:
+
+{{< img src="mobile_app_testing/xml_inspector.png" alt="Screenshot of a test result under the Sample Runs section, showing the XML inspector" style="width=80%" >}}
+
+## Crash reports
+
+View and download crash reports for your iOS and Android devices in the [Results Explorer][12].
+
+{{< tabs >}}
+{{% tab "iOS" %}}
+
+In the Results Explorer, filter and search for crash reports with the query `@checkType:mobile @result.result.error:"Your application has crashed during the test." @result.result.device.platform.name:ios` to identify, view, and download crash reports for your iOS devices:
+
+{{< img src="mobile_app_testing/ios_search.png" alt="Screenshot the Results Explorer using filter and search to locate iOS crash results" style="width=80%" >}}
+
+Select a failed test and download the crash report:
+
+{{< img src="mobile_app_testing/ios_crash_report.png" alt="Screenshot of a test result highlighting the ability to download the iOS crash report" style="width=80%" >}}
+
+{{% /tab %}}
+{{% tab "Android" %}}
+
+In the Results Explorer, filter and search for crash reports with the query `@checkType:mobile @result.result.error:"Your application has crashed during the test." @result.result.device.platform.name:android` to identify, view, and download crash reports for your Android devices.
+
+{{< img src="mobile_app_testing/android_search.png" alt="Screenshot the Results Explorer using filter and search to locate Android crash results" style="width=80%" >}}
+
+Select a failed test and download the crash report:
+
+{{< img src="mobile_app_testing/andriod_crash_report.png" alt="Screenshot of a test result highlighting the ability to download the Android crash report" style="width=80%" >}}
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Failed results
 
@@ -110,3 +149,4 @@ Alerts from your Synthetic test monitors appear in the **Events** tab under **Te
 [9]: /synthetics/private_locations
 [10]: /mobile_app_testing/mobile_app_tests/steps
 [11]: https://app.datadoghq.com/synthetics/tests
+[12]: https://app.datadoghq.com/synthetics/explorer

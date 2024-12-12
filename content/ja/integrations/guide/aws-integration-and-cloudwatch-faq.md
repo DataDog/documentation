@@ -33,7 +33,7 @@ Datadog は、インストールした各 AWS サブインテグレーション�
 
 ### CloudWatch のメトリクスを Datadog に受信する際の遅延を減らすにはどうしたらよいですか？
 
-デフォルトでは、Datadog は 10 分ごとに AWS メトリクスを収集します。詳細は、[Cloud Metric Delay][4] を参照してください。レイテンシーを小さくする必要がある場合は、[Datadog サポート][5]にお問い合わせください。CloudWatch のメトリクスを 2-3 分のレイテンシーでより速く Datadog に取り込むには、[Amazon CloudWatch Metric Streams と Amazon Kinesis Data Firehose][6] を使用することをお勧めします。
+By default, Datadog collects AWS metrics every 10 minutes. See [Cloud Metric Delay][4] for more information. If you need to reduce the latency, contact [Datadog support][5] for assistance. To get CloudWatch metrics into Datadog faster with a 2-3 minute latency we recommend using the [Amazon CloudWatch Metric Streams and Amazon Data Firehose][6]. 
 
 
 ### なぜカスタム AWS/Cloudwatch メトリクスの平均値しか表示されないのでしょうか？
@@ -46,7 +46,7 @@ Datadog は、インストールした各 AWS サブインテグレーション�
 
 - Datadog は、Datadog の同等の CloudWatch メトリクスに対して、単一の CloudWatch 統計を収集します。CloudWatch の `Sum` と Datadog の `Average` を比較すると、不一致が発生します。一部の CloudWatch メトリクスでは、複数の統計が有用な場合があり、Datadog では同じ CloudWatch メトリクスに対して異なる統計で異なるメトリクス名を作成します。例えば、`aws.elb.latency` と `aws.elb.latency.maximum` のようにです。
 - AWS のカウンターでは、`sum` `1 minute` に設定したグラフは、その時点までの 1 分間の発生回数の合計 (1 分当たりの割合) を表示します。Datadog は、AWS で選択したタイムフレームに関係なく、AWS からの生データを 1 秒あたりの値に正規化して表示しています。そのため、Datadog ではより低い値が表示される可能性があります。
-- 全体として、`min`、`max`、`avg` は AWS 内で異なる意味を持ちます。AWS は、平均レイテンシー、最小レイテンシー、最大レイテンシーを明確に収集します。AWS CloudWatch からメトリクスを取得する場合、Datadog は ELB ごとに単一のタイムシリーズとして平均レイテンシーを受け取るだけです。Datadog では、`min`、`max`、`avg` を選択すると、複数のタイムシリーズがどのように結合されるかを制御することができます。例えば、`system.cpu.idle` をフィルターなしでリクエストすると、そのメトリクスを報告している各ホストの 1 つの系列が返されます。Datadog は、これらの時系列を[空間集計][7]を使用して結合します。そうでない場合、1 つのホストから `system.cpu.idle` をリクエストすると、集計は必要なく、`avg` と `max` を切り替えても同じ結果が得られます。
+- Overall, `min`, `max`, and `avg` have different meanings within AWS. AWS distinctly collects average latency, minimum latency, and maximum latency. When pulling metrics from AWS CloudWatch, Datadog only receives the average latency as a single timeseries per ELB. Within Datadog, when you select `min`, `max`, or `avg`, you are controlling how multiple timeseries are combined. For example, requesting `system.cpu.idle` without any filter returns one series for each host reporting that metric. Datadog combines these timeseries using [space aggregation][7]. Otherwise, if you requested `system.cpu.idle` from a single host, no aggregation is necessary and switching between `avg` and `max` yields the same result.
 
 ### Datadog 上のデータを CloudWatch に表示されるデータと一致させるためには、どのように調整すればよいでしょうか？
 

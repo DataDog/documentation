@@ -28,7 +28,6 @@ A few options are available to send traffic to Datadog over SSL/TLS for hosts th
 
 1. Using a web proxy, such as Squid or Microsoft Web Proxy, that is already deployed to your network
 2. Using HAProxy (if you want to proxy **more than 16-20 Agents** through the same proxy)
-3. Using the Agent as a proxy (for **up to 16 Agents** per proxy, **only on Agent v5** )
 
 ## FIPS compliance
 
@@ -39,8 +38,6 @@ For information on setting up the Datadog Agent FIPS Proxy with the Datadog Agen
 For specific information regarding Squid, see the [Squid](#squid) section of this page.
 
 Traditional web proxies are supported natively by the Agent. If you need to connect to the Internet through a proxy, edit your Agent configuration file.
-
-**Agent v6 & v7**
 
 Set different proxy servers for `https` and `http` requests in your Agent `datadog.yaml` configuration file. The Agent uses `https` to send data to Datadog, but integrations might use `http` to gather metrics. No matter the proxied requests, you can activate SSL on your proxy server. Below are some configuration examples for your `datadog.yaml` file.
 
@@ -127,22 +124,6 @@ The Agent uses the following values in order of precedence:
 2. `HTTPS_PROXY`, `HTTP_PROXY`, and `NO_PROXY` environment variables
 3. Values inside `datadog.yaml`
 
-**Agent v5**
-
-<div class="alert alert-warning">
-The <code>&ltHOST&gt;:&ltPORT&gt;</code> used to proxy metrics can NOT be used to proxy logs. See the <a href="/agent/logs/proxy">Proxy for Logs</a> page.
-</div>
-
-Edit the `datadog.conf` file with your proxy information:
-
-```text
-# If you need a proxy to connect to the Internet, provide the settings here
-proxy_host: my-proxy.example.com
-proxy_port: 3128
-proxy_user: my_user
-proxy_password: my_password
-```
-
 Do not forget to [restart the Agent][2] for the new settings to take effect.
 
 ### Squid
@@ -209,27 +190,12 @@ net start squid
 
 ##### Datadog Agent configuration
 
-**Agent v6 & v7**
-
 Modify the Agent's configuration file (`datadog.yaml`) to include the following:
 
 ```yaml
 proxy:
   http: http://127.0.0.1:3128
   https: http://127.0.0.1:3128
-```
-
-After saving these changes, [restart the Agent][2].
-
-Verify that Datadog is able to receive the data from your Agent(s) by checking your [Infrastructure Overview][4].
-
-**Agent v5**
-
-Modify the Agent's configuration file (`datadog.conf`) to include the following:
-
-```conf
-proxy_host: 127.0.0.1
-proxy_port: 3128
 ```
 
 After saving these changes, [restart the Agent][2].
@@ -837,8 +803,6 @@ If you are using older version of HAProxy, you have to reload or restart HAProxy
 
 #### Datadog Agent configuration
 
-**Agent v6 & v7**
-
 Edit each Agent to point to HAProxy by setting its `dd_url` to the address of HAProxy, for example: `haproxy.example.com`.
 This `dd_url` setting can be found in the `datadog.yaml` file.
 
@@ -905,47 +869,6 @@ With this option set to `true`, the Agent skips the certificate validation step 
 
 ```yaml
 skip_ssl_validation: true
-```
-
-Finally [restart the Agent][2].
-
-To verify that everything is working properly, review the HAProxy statistics at `http://haproxy.example.com:3833` as well as the [Infrastructure Overview][4].
-
-**Agent v5**
-
-Edit each Agent to point to HAProxy by setting its `dd_url` to the address of HAProxy, for example: `haproxy.example.com`.
-This `dd_url` setting can be found in the `datadog.conf` file.
-
-`dd_url: http://haproxy.example.com:3834`
-
-To send traces or processes through the proxy, setup the following in the `datadog.conf` file:
-
-```conf
-[trace.api]
-endpoint = http://haproxy.example.com:3835
-
-[process.api]
-endpoint = http://haproxy.example.com:3837
-```
-
-Edit your supervisor configuration to disable SSL certificate verification. This is needed to prevent Python from complaining about the discrepancy between the hostname on the SSL certificate (`app.datadoghq.com`) and your HAProxy hostname. The supervisor configuration found at:
-
-* `/etc/dd-agent/supervisor_ddagent.conf` on Debian-based systems
-* `/etc/dd-agent/supervisor.conf` on Red Hat-based systems
-* `/opt/local/datadog/supervisord/supervisord.conf` on SmartOS
-* `/usr/local/etc/datadog/supervisord/supervisord.conf` on FreeBSD
-* `~/.datadog-agent/supervisord/supervisord.conf` on macOS
-
-Assuming that the supervisor file is found at `<SUP_FILE>`
-
-```bash
-sed -i 's/ddagent.py/ddagent.py --sslcheck=0/' <SUP_FILE>
-```
-
-For the Windows Agent, edit your configuration file `datadog.conf` and add this option:
-
-```conf
-skip_ssl_validation: yes
 ```
 
 Finally [restart the Agent][2].
@@ -1290,51 +1213,9 @@ skip_ssl_validation: true
 
 When sending logs over TCP, see [TCP Proxy for Logs][9].
 
-## Datadog Agent
-
-{{< tabs >}}
-{{% tab "Agent v6 & v7" %}}
-
-**This feature is only available for Agent v5**.
-
-{{% /tab %}}
-{{% tab "Agent v5" %}}
-
-It is recommended to use an actual proxy (a web proxy or HAProxy) to forward your traffic to Datadog, however if those options aren't available to you, it is possible to configure an instance of **Agent v5** to serve as a proxy.
-
-1. Designate one node **running datadog-agent** as the proxy.
-    In this example assume that the proxy name is `proxy-node`. This node **must** be able to reach `https://app.datadoghq.com`.
-
-2. Verify SSL connectivity on `proxy-node`:
-
-    ```shell
-    curl -v https://app.datadoghq.com/account/login 2>&1 | grep "200 OK"
-    ```
-
-3. Allow non-local traffic on `proxy-node` by changing the following line in `datadog.conf`.
-     `# non_local_traffic: no` should read `non_local_traffic: yes`.
-
-4. Make sure `proxy-node` can be reached from the other nodes over port 17123. Start the Agent on the `proxy-node` and run on the other nodes:
-
-    `curl -v http://proxy-node:17123/status 2>&1 | grep "200 OK"`
-
-5. Update non-proxy nodes to forward to `proxy-node`. Change the following line in `datadog.conf` from:
-
-    `dd_url: https://app.datadoghq.com`
-    to
-    `dd_url: http://proxy-node:17123`
-
-6. Verify on the [Infrastructure page][1] that all nodes report data to Datadog.
-
-
-[1]: https://app.datadoghq.com/infrastructure#overview
-{{% /tab %}}
-{{< /tabs >}}
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
 
 [1]: /agent/configuration/agent-fips-proxy
 [2]: /agent/configuration/agent-commands/

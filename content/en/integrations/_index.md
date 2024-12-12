@@ -12,48 +12,57 @@ aliases:
     - /integrations/shoreline_license/
     - /integrations/shoreline_software_license/
 description: Gather data from all of your systems, apps, & services
+algolia:
+    tags: ['integration', 'integration setup']
 cascade:
 - _target:
-    path: /integrations/akamai_datastream_2.md
+    path: /integrations/akamai_datastream_2
+    lang: en
   aliases:
     - /integrations/akamai_datastream
 - _target:
-    path: /integrations/azure.md
+    path: /integrations/azure
+    lang: en
   algolia:
     rank: 80
     category: Documentation
     subcategory: Integrations
     tags: ['azure', 'microsoft azure']
 - _target:
-    path: /integrations/kubernetes_state_core.md
+    path: /integrations/kubernetes_state_core
+    lang: en
   algolia:
     rank: 60
     category: Documentation
     subcategory: Integrations
     tags: ['ksm']
 - _target:
-    path: /integrations/google_cloud_platform.md
+    path: /integrations/google_cloud_platform
+    lang: en
   algolia:
     rank: 80
     category: Documentation
     subcategory: Integrations
     tags: ['gcp', 'google cloud platform']
 - _target:
-    path: /integrations/amazon_web_services.md
+    path: /integrations/amazon_web_services
+    lang: en
   algolia:
     rank: 80
     category: Documentation
     subcategory: Integrations
     tags: ['aws', 'amazon web services']
 - _target:
-    path: /integrations/eks_fargate.md
+    path: /integrations/eks_fargate
+    lang: en
   algolia:
     rank: 60
     category: Documentation
     subcategory: Integrations
     tags: ['eks logging']
 - _target:
-    path: /integrations/win32_event_log.md
+    path: /integrations/win32_event_log
+    lang: en
   aliases:
     - /integrations/eventviewer/
   algolia:
@@ -62,56 +71,69 @@ cascade:
     subcategory: Integrations
     tags: ['event viewer']
 - _target:
-    path: /integrations/lambdatest_license.md
+    path: /integrations/lambdatest_license
+    lang: en
   aliases:
     - /integrations/lambdatest_software_license/
 - _target:
-    path: /integrations/mongo.md
+    path: /integrations/mongo
+    lang: en
   aliases:
     - /integrations/mongodb/
 - _target:
-    path: /integrations/rapdev_validator.md
+    path: /integrations/rapdev_validator
+    lang: en
   aliases:
     - /integrations/rapdev_dashboard_widget_pack/
 - _target:
-    path: /integrations/wmi_check.md
+    path: /integrations/wmi_check
+    lang: en
   aliases:
     - /integrations/wmi/
 - _target:
-    path: /integrations/jfrog_platform_self_hosted.md
+    path: /integrations/jfrog_platform_self_hosted
+    lang: en
   aliases:
     - /integrations/jfrog_platform/
 - _target:
-    path: /integrations/komodor_license.md
+    path: /integrations/komodor_license
+    lang: en
   aliases:
     - /integrations/komodor_komodor/
 - _target:
-    path: /integrations/stormforge_license.md
+    path: /integrations/stormforge_license
+    lang: en
   aliases:
     - /integrations/stormforge_stormforge_license/
 - _target:
-    path: /integrations/feed.md
+    path: /integrations/feed
+    lang: en
   aliases:
     - /integrations/rss/
 - _target:
-    path: /integrations/java.md
+    path: /integrations/java
+    lang: en
   aliases:
     - /agent/faq/jmx_integrations/
     - /agent/faq/docker-jmx/
 - _target:
-    path: /integrations/amazon_elb.md
+    path: /integrations/amazon_elb
+    lang: en
   aliases:
     - /integrations/awselb
 - _target:
-    path: /integrations/elastic.md
+    path: /integrations/elastic
+    lang: en
   aliases:
     - /integrations/awses
 - _target:
-    path: /integrations/amazon_s3.md
+    path: /integrations/amazon_s3
+    lang: en
   aliases:
     - /integrations/awss3
 - _target:
-    path: /integrations/snowflake_web.md
+    path: /integrations/snowflake_web
+    lang: en
   aliases:
     - /integrations/snowflake/
 ---

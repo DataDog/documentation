@@ -7,9 +7,6 @@ further_reading:
 - link: "/tracing/service_catalog/service_definition_api/"
   tag: "Documentation"
   text: "Registering Services with the Service Definition API"
-- link: "/tracing/service_catalog/guides/understanding-service-configuration"
-  tag: "Guide"
-  text: "Understanding Your Service Configuration"
 - link: "/tracing/service_catalog/guides/upstream-downstream-dependencies"
   tag: "Guide"
   text: "See Upstream and Downstream Dependencies During an Active Incident"
@@ -124,7 +121,7 @@ To access additional details describing your CI status and static analysis viola
 
 
 [1]: https://app.datadoghq.com/services
-[2]: /tracing/service_catalog/setup/
+[2]: /service_catalog/enrich_default_catalog/
 [3]: /tracing/guide/setting_primary_tags_to_scope/?tab=helm#add-a-second-primary-tag-in-datadog
 [4]: /tracing/metrics/metrics_namespace/
 [5]: /tracing/guide/configuring-primary-operation/

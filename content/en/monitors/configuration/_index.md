@@ -10,9 +10,12 @@ further_reading:
 - link: "/monitors/manage/"
   tag: "Documentation"
   text: "Manage monitors"
-- link: "/monitors/manage/status/"
+- link: "/monitors/status/"
   tag: "Documentation"
   text: "Monitor Status"
+- link: "https://www.datadoghq.com/blog/manage-monitors-with-datadog-teams/"
+  tag: "Blog"
+  text: "Manage your monitors more efficiently with Datadog Teams"
 ---
 
 ## Overview
@@ -66,16 +69,16 @@ The figure below illustrates the difference between cumulative and rolling time 
 
 #### Rolling time windows
 
-A rolling time window has a fixed size and moves its starting point over time. Monitors support looking back at the last `5 minutes`, `15 minutes`, `1 hour`, or over a custom specified time window.
+A rolling time window has a fixed size and shifts its starting point over time. Monitors can look back at the last `5 minutes`, `15 minutes`, `1 hour`, or over a custom time window of up to 1 month.
 
 #### Cumulative time windows
 A cumulative time window has a fixed starting point and expands over time. Monitors support three different cumulative time windows:
 
 - `Current hour`: A time window with a maximum of one hour starting at a configurable minute of an hour. For example, monitor amount of calls an HTTP endpoint receives in one hour starting at minute 0.
 - `Current day`: A time window with a maximum of 24 hours starting at a configurable hour and minute of a day. For example, monitor a [daily log index quota][3] by using the `current day` time window and letting it start at 2:00pm UTC.
-- `Current month`: Looks back at the current month starting on the first of the month at midnight UTC. This option represents a month-to-date time window and is only available for metric monitors.
+- `Current month`: Looks back at the current month starting on a configurable day of the month at a configurable hour and minute. This option represents a month-to-date time window and is only available for metric monitors.
 
-{{< img src="/monitors/create/cumulative_window_example.png" alt="Screenshot of how a cumulative window is configured in the Datadog interface. The user has searched for aws.sqs.number_of_messages_received. The options are set to evaluate the SUM of the query over the CURRENT MONTH." style="width:100%;">}}
+{{< img src="/monitors/create/cumulative_window_example_more_options.png" alt="Screenshot of how a cumulative window is configured in the Datadog interface. The user has searched for aws.sqs.number_of_messages_received. The options are set to evaluate the SUM of the query over the CURRENT MONTH." style="width:100%;">}}
 
 A cumulative time window is reset after its maximum time span is reached. For example, a cumulative time window looking at the `current month` resets itself on the first of each month at midnight UTC. Alternatively, a cumulative time window of `current hour`, which starts at minute 30, resets itself every hour. For example, at 6:30am, 7:30am, 8:30am.
 
@@ -157,22 +160,6 @@ In this case, you should enable notifications for missing data. The sections bel
 
 **Note**: The monitor must be able to evaluate data before alerting on missing data. For example, if you create a monitor for `service:abc` and data from that `service` is not reporting, the monitor does not send alerts.
 
-
-{{< tabs >}}
-{{% tab "Metric-based monitors" %}}
-
-If you are monitoring a metric over an auto-scaling group of hosts that stops and starts automatically, notifying for `no data` produces a lot of notifications. In this case, you should not enable notifications for missing data. This option does not work unless it is enabled at a time when data has been reporting for a long period.
-
-| Option                                                     | Description                                                                                                                                        | Notes        |
-| ---------------------------------------------------------  | -------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ |
-| **Do not notify** if data is missing                       | No notification is sent if data is missing                                                                                                         | <u>Simple Alert</u>: the monitor skips evaluations and stays green until data returns that would change the status from OK <br> <u>Multi Alert</u>: if a group does not report data, the monitor skips evaluations and eventually drops the group. During this period, the bar in the results page stays green. When there is data and groups start reporting again, the green bar shows an OK status and backfills to make it look like there was no interruption.|
-| **Notify** if data is missing for more than **N** minutes. | You are notified if data is missing. The notification occurs when no data was received during the configured time window.| Datadog recommends that you set the missing data window to at least two times the evaluation period. |
-
-
-{{% /tab %}}
-
-{{% tab "Other monitor types" %}}
-
 If data is missing for `N` minutes, select an option from the dropdown menu:
 
 {{< img src="/monitors/create/on_missing_data.png" alt="No Data Options" style="width:70%;">}}
@@ -196,9 +183,6 @@ The `Evaluate as zero` and `Show last known status` options are displayed based 
 
 - **Evaluate as zero:** This option is available for monitors using `Count` queries without the `default_zero()` function.
 - **Show last known status:** This option is available for monitors using any other query type than `Count`, for example `Gauge`, `Rate`, and `Distribution`, as well as for `Count` queries with `default_zero()`.
-
-{{% /tab %}}
-{{< /tabs >}}
 
 #### Auto resolve
 
@@ -267,7 +251,7 @@ For more information on the configuration options for the notification message, 
 
 ### Set alert aggregation
 
-Alerts are grouped automatically based on your selection of the `group by` step when defining your query. If the query has no grouping, it defaults to `Simple Alert`. If the query is grouped by any dimension, grouping changes to `Multi Alert`.
+Alerts are grouped automatically based on your selection of the aggregation selected for your query (for example, `avg by service`). If the query has no grouping, it defaults to `Simple Alert`. If the query is grouped by any dimension, grouping changes to `Multi Alert`.
 
 {{< img src="/monitors/create/notification-aggregation.png" alt="Configurations options for monitor notification aggregation" style="width:100%;">}}
 
@@ -303,34 +287,32 @@ If you configure tags or dimensions in your query, these values are available fo
 
 ## Permissions
 
-All users can view all monitors, regardless of the role they are associated with. By default, only users attached to roles with the [Monitors Write permission][11] can edit monitors. [Datadog Admin Role and Datadog Standard Role][12] have the Monitors Write permission by default. If your organization uses [Custom Roles][13], other custom roles may have the Monitors Write permission. For more information on setting up RBAC for Monitors and migrating monitors from the locked setting to using role restrictions, see the guide on [How to set up RBAC for Monitors][14].
+All users can view all monitors, regardless of the team or role they are associated with. By default, only users attached to roles with the [Monitors Write permission][11] can edit monitors. [Datadog Admin Role and Datadog Standard Role][12] have the Monitors Write permission by default. If your organization uses [Custom Roles][13], other custom roles may have the Monitors Write permission. For more information on setting up RBAC for Monitors and migrating monitors from the locked setting to using role restrictions, see the guide on [How to set up RBAC for Monitors][14].
 
-You can further restrict your monitor by specifying a list of [roles][15] allowed to edit it. The monitor's creator can always edit the monitor. Editing includes any updates to the monitor configuration, deleting the monitor, and muting the monitor for any amount of time.
+You can further restrict your monitor by specifying a list of [teams][17], [roles][15], or users allowed to edit it. The monitor's creator has edit rights on the monitor by default. Editing includes any updates to the monitor configuration, deleting the monitor, and muting the monitor for any amount of time.
 
 **Note**: The limitations are applied both in the UI and API.
 
 ### Granular access controls
 
-Use [granular access controls][16] to limit the roles that can edit a monitor:
+Use [granular access controls][16] to limit the teams, roles, or users that can edit a monitor:
 1. While editing or configuring a monitor, find the **Define permissions and audit notifications** section.
   {{< img src="monitors/configuration/define_permissions_audit_notifications.png" alt="Monitor configuration options to define permissions" style="width:70%;" >}}
 1. Click **Edit Access**.
 1. Click **Restrict Access**.
 1. The dialog box updates to show that members of your organization have **Viewer** access by default.
-1. Use the dropdown to select one or more roles, teams, or users that may edit the monitor.
+1. Use the dropdown to select one or more teams, roles, or users that may edit the monitor.
 1. Click **Add**.
 1. The dialog box updates to show that the role you selected has the **Editor** permission.
 1. Click **Done**.
 
-**Note:** To maintain your edit access to the monitor, the system requires you to include at least one role that you are a member of before saving. For more information about roles, see the [RBAC documentation][15].
+**Note:** To maintain your edit access to the monitor, the system requires you to include at least one role or team that you are a member of before saving.
 
 To restore general access to a monitor with restricted access, follow the steps below:
 1. While viewing a monitor, click the **More** dropdown menu.
 1. Select **Permissions**.
 1. Click **Restore Full Access**.
 1. Click **Save**.
-
-Edit-restricted monitors display the roles that have Editor access at the top of the page.
 
 ## Further reading
 
@@ -352,3 +334,4 @@ Edit-restricted monitors display the roles that have Editor access at the top of
 [14]: /monitors/guide/how-to-set-up-rbac-for-monitors/
 [15]: /account_management/rbac/
 [16]: /account_management/rbac/granular_access
+[17]: /account_management/teams/

@@ -5,8 +5,9 @@ further_reading:
 - link: "/integrations/sqlserver/"
   tag: "Documentation"
   text: "SQL Server Integration"
-
-
+- link: "/database_monitoring/guide/sql_deadlock/"
+  tag: "Documentation"
+  text: "Configure Deadlock Monitoring"
 ---
 
 Database Monitoring provides deep visibility into your Microsoft SQL Server databases by exposing query metrics, query samples, explain plans, database states, failovers, and events.
@@ -80,6 +81,9 @@ To use [Windows Authentication][4], set `connection_string: "Trusted_Connection=
 
 Use the `service` and `env` tags to link your database telemetry to other telemetry through a common tagging scheme. See [Unified Service Tagging][5] on how these tags are used throughout Datadog.
 
+### Securely store your password
+{{% dbm-secret %}}
+
 ### Supported Drivers
 
 #### Microsoft ADO
@@ -135,7 +139,7 @@ instances:
   - dbm: true
     host: '<HOSTNAME>,<SQL_PORT>'
     username: datadog
-    password: '<PASSWORD>'
+    password: 'ENC[datadog_user_database_password]'
     connector: odbc
     driver: '<Driver from the `odbcinst.ini` file>'
     tags:  # Optional
@@ -231,7 +235,7 @@ Complete the following steps to install the [Datadog Cluster Agent][1] on your K
     ```yaml
     clusterAgent:
       confd:
-        sqlserver.yaml: -|
+        sqlserver.yaml: |-
           cluster_check: true
           init_config:
           instances:
@@ -239,9 +243,9 @@ Complete the following steps to install the [Datadog Cluster Agent][1] on your K
             host: <HOSTNAME>
             port: 1433
             username: datadog
-            password: '<PASSWORD>'
+            password: 'ENC[datadog_user_database_password]'
             connector: 'odbc'
-            driver: 'ODBC Driver 18 for SQL Server'
+            driver: '{ODBC Driver 18 for SQL Server}'
             tags:  # Optional
               - 'service:<CUSTOM_SERVICE>'
               - 'env:<CUSTOM_ENV>'
@@ -278,9 +282,9 @@ instances:
     host: '<HOSTNAME>'
     port: <SQL_PORT>
     username: datadog
-    password: '<PASSWORD>'
+    password: 'ENC[datadog_user_database_password]'
     connector: "odbc"
-    driver: "ODBC Driver 18 for SQL Server"
+    driver: '{ODBC Driver 18 for SQL Server}'
     tags:  # Optional
       - 'service:<CUSTOM_SERVICE>'
       - 'env:<CUSTOM_ENV>'
@@ -310,7 +314,7 @@ metadata:
           "host": "<HOSTNAME>",
           "port": <SQL_PORT>,
           "username": "datadog",
-          "password": "<PASSWORD>",
+          "password": "ENC[datadog_user_database_password]",
           "connector": "odbc",
           "driver": "ODBC Driver 18 for SQL Server",
           "tags": ["service:<CUSTOM_SERVICE>", "env:<CUSTOM_ENV>"],  # Optional

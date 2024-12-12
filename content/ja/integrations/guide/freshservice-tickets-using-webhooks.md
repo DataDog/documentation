@@ -1,11 +1,12 @@
 ---
-title: Webhooks を使用した Freshservice チケット
 author: Trevor Veralrud
 further_reading:
-  - link: /integrations/webhooks/
-    tag: Documentation
-    text: Webhooks インテグレーション
+- link: /integrations/webhooks/
+  tag: Documentation
+  text: Webhooks インテグレーション
+title: Webhooks を使用した Freshservice チケット
 ---
+
 このガイドでは、Datadog Webhooks インテグレーションを使用して、モニターがアラートを出すときに、Freshservice で新しいチケットを開く方法について説明します。
 
 ## セットアップ
@@ -45,7 +46,7 @@ URL フィールドに、次のエンドポイントを入力します。
 * ペイロードの `description` フィールドは HTML を受け取ります。`$EVENT_MSG` 変数は、モニターのメッセージを Markdown で表示しますが、Freshservice の API には対応していないため、上記の例では `$TEXT_ONLY_MSG` をグラフのスナップショットと一緒に使用しています。
 * `status` と `priority` のフィールドには、さまざまな値に対応付けられた数値を指定します。これらの値については、[Freshservice によるチケットエンドポイントの情報][2]を参照してください。
 
-### Authentication
+### 認証
 
 Freshservice の API は、[Basic 認証][4]を使用します。Base64 でエンコードされた資格情報を、`Authorization` リクエストヘッダーで送る必要があります。ユーザー名とパスワードを `ユーザー名:パスワード` の形式で入力するか、または Freshservice API のキーを、資格情報として送ることができます。
 

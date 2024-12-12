@@ -1,10 +1,11 @@
 ---
-title: Agent ランタイムコンフィギュレーション管理
 further_reading:
-  - link: /agent/troubleshooting/debug_mode/
-    tag: Agent のトラブルシューティング
-    text: Agent デバッグモード
+- link: /agent/troubleshooting/debug_mode/
+  tag: ドキュメント
+  text: Agent デバッグモード
+title: Agent ランタイムコンフィギュレーション管理
 ---
+
 Agent 6.19+/7.19+ を実行している場合は、コンフィギュレーションの変更を反映するために Agent を再起動する必要はなく、ランタイム時に一部の設定を動的に変更できます。
 
 **注**: 動的に行われた変更は保持されません。Agent を再起動するとすぐに失われます。

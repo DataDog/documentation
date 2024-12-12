@@ -98,7 +98,7 @@ agents:
 
 Filtering traces this way removes these requests from [trace metrics][3]. For more information on how to reduce ingestion without affecting the trace metrics, see [Ingestion Controls][4].
 
-On the backend, Datadog creates and adds the following span tags to spans after ingestion. These tags cannot be used to drop traces at the Datadog Agent level.
+On the backend, Datadog creates and adds the following span tags to spans after ingestion. Note, these tags cannot be used to drop traces at the Datadog Agent level, as the agent only filters based on tags available before ingestion.
 
 
 | Name                                    | Description                                      |
@@ -129,7 +129,7 @@ On the backend, Datadog creates and adds the following span tags to spans after 
 | **Name**                       | **Remap from**                                                                                        |
 |--------------------------------|-------------------------------------------------------------------------------------------------------|
 | `http.route`                   | `aspnet_core.route` - .NET<br>`aspnet.route` - .NET<br>`laravel.route` - PHP<br>`symfony.route` - PHP |
-| `http.useragent`               | `user_agent` - Java                                                                                   |
+| `http.useragent`               | `user_agent` - Java, C++                                                                                   |
 | `http.url_details.queryString` | `http.query.string` - Python                                                                          |
 
 #### Database

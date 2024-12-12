@@ -3,6 +3,7 @@ categories:
 - languages
 - log collection
 - tracing
+custom_kind: integration
 dependencies: []
 description: Datadog クライアントライブラリを使用して Ruby アプリケーションからカスタムメトリクスを送信。
 doc_link: https://docs.datadoghq.com/integrations/ruby/
@@ -23,7 +24,6 @@ integration_id: ruby
 integration_title: Ruby
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: '1.0'
 name: ruby
 public_title: Datadog-Ruby インテグレーション
@@ -36,7 +36,7 @@ version: '1.0'
 
 Ruby インテグレーションを利用して、Ruby アプリケーションのログ、トレース、カスタムメトリクスを収集および監視できます。
 
-## 計画と使用
+## セットアップ
 
 ### メトリクスの収集
 
@@ -52,9 +52,13 @@ Ruby インテグレーションを利用して、Ruby アプリケーション�
 
 ログを Datadog に転送するには、[Ruby ログ収集のセットアップ][3]方法に関するドキュメントを参照してください。
 
-## ヘルプ
+### プロファイルの収集
 
-ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
+[Ruby プロファイラを有効にするための専用ドキュメント][4]をご覧ください。
+
+## トラブルシューティング
+
+ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
 
 ## その他の参考資料
 
@@ -63,4 +67,5 @@ Ruby インテグレーションを利用して、Ruby アプリケーション�
 [1]: https://docs.datadoghq.com/ja/developers/dogstatsd/?tab=ruby
 [2]: https://docs.datadoghq.com/ja/tracing/setup/ruby/
 [3]: https://docs.datadoghq.com/ja/logs/log_collection/ruby/
-[4]: https://docs.datadoghq.com/ja/help/
+[4]: https://docs.datadoghq.com/ja/profiler/enabling/ruby/
+[5]: https://docs.datadoghq.com/ja/help/

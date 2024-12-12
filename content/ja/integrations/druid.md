@@ -18,8 +18,6 @@ assets:
       metadata_path: assets/service_checks.json
     source_type_id: 10074
     source_type_name: Druid
-  logs:
-    source: druid
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
@@ -29,6 +27,7 @@ categories:
 - キャッシュ
 - data stores
 - ログの収集
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/druid/README.md
 display_on_public_website: true
@@ -36,9 +35,8 @@ draft: false
 git_integration_title: druid
 integration_id: druid
 integration_title: Druid
-integration_version: 2.5.0
+integration_version: 2.5.1
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: druid
 public_title: Druid
@@ -56,6 +54,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: クエリ、取り込み、コーディネーションに関するメトリクスを追跡。
   media: []
@@ -75,13 +74,13 @@ Datadog Agent は [DogStatsD][2] を使用して Druid からメトリクスを�
 
 メトリクスの収集に加え、Agent はDruid の健全性に関連するサービスチェックも送信します。
 
-## 計画と使用
+## セットアップ
 
 ### 前提条件
 
 このインテグレーションが正常に動作するには Druid 0.16 以上が必要です。
 
-### インフラストラクチャーリスト
+### インストール
 
 Druid インテグレーショが正常に動作するためには、下記の 2 ステップを実施する必要があります。ステップを開始する前に [Datadog Agent][4] をインストールしてください。
 
@@ -138,7 +137,7 @@ Druid インテグレーショが正常に動作するためには、下記の 2
 
 `druid.d/conf.yaml` ファイルのデフォルトコンフィギュレーションを使用して、Druid サービスチェックの収集を有効にします。利用可能なすべてのコンフィギュレーションオプションについては、[druid.d/conf.yaml][6]  のサンプルをご参照ください。
 
-#### 収集データ
+#### ログ収集
 
 _Agent バージョン 6.0 以降で利用可能_
 
@@ -170,21 +169,21 @@ _Agent バージョン 6.0 以降で利用可能_
 
 [Agent のステータスサブコマンドを実行][10]し、Checks セクションで `druid` を探します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "druid" >}}
 
 
-### ヘルプ
+### イベント
 
 Druid チェックには イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 {{< get-service-checks-from-git "druid" >}}
 
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][13]までお問合せください。
 

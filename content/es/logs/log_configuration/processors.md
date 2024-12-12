@@ -12,7 +12,6 @@ further_reading:
 - link: /logs/explorer/
   tag: Documentación
   text: Aprender a explorar tus logs
-kind: documentación
 title: Procesadores
 ---
 
@@ -35,7 +34,7 @@ En la sección de [configuración de parámetros de logs][1], puedes configurar 
 Crea reglas grok personalizadas para analizar el mensaje completo o un atributo específico de tu evento sin procesar. Para obtener más información, consulta la [sección Análisis][2]. Una práctica recomendada es utilizar como máximo 10 reglas de análisis en un procesador grok.
 
 {{< tabs >}}
-{{% tab "UI" (IU) %}}
+{{% tab "IU" %}}
 
 Define el procesador Grok en la [página **Pipelines**][1]:
 
@@ -108,7 +107,7 @@ Para ver cómo se puede analizar un formato personalizado de fecha y hora en Dat
 * Si se aplican varios procesadores de reasignación de fechas de logs a un determinado log del pipeline, se tiene en cuenta el último (según el orden del pipeline).
 
 {{< tabs >}}
-{{% tab "UI" (IU) %}}
+{{% tab "IU" %}}
 
 Define el procesador de reasignación de fechas de logs en la [página **Pipelines**][1]:
 
@@ -165,7 +164,7 @@ Cada valor de estado entrante se asigna de la siguiente manera:
 **Nota**: Si se aplican varios procesadores de reasignación de estado de log a un determinado log del pipeline, sólo se tendrá en cuenta el primero (según el orden del pipeline).
 
 {{< tabs >}}
-{{% tab "UI" (IU) %}}
+{{% tab "IU" %}}
 
 Define el procesador de reasignación de estados de logs en la [página **Pipelines**][1]:
 
@@ -204,7 +203,7 @@ El procesador de reasignación de servicios asigna uno o más atributos a tus lo
 **Nota**: Si se aplican varios procesadores de reasignación de servicios a un determinado log del pipeline, sólo se tendrá en cuenta el primero (según el orden del pipeline).
 
 {{< tabs >}}
-{{% tab "UI" (IU) %}}
+{{% tab "IU" %}}
 
 Define el procesador de reasignación de servicios de logs en la [página **Pipelines**][1]:
 
@@ -247,7 +246,7 @@ Para definir los atributos de los mensajes, utiliza primero el [procesador de cr
 **Nota**: Si se aplican varios procesadores de reasignación de mensajes de logs a un determinado log del pipeline, sólo se tendrá en cuenta el primero (según el orden del pipeline).
 
 {{< tabs >}}
-{{% tab "UI" (IU) %}}
+{{% tab "IU" %}}
 
 Define el procesador de reasignación de mensajes de logs en la [página **Pipelines**][1]:
 
@@ -292,7 +291,7 @@ Si el objetivo del reasignador es un atributo, el reasignador también puede int
 **Nota**: El separador decimal para `Double` debe ser `.`.
 
 {{< tabs >}}
-{{% tab "UI" (IU) %}}
+{{% tab "IU" %}}
 
 Define el procesador de reasignación en la [página de **Pipelines**][1]. Por ejemplo, reasigna `user` a `user.firstname`.
 
@@ -343,7 +342,7 @@ El procesador del analizador de URL extrae los parámetros de consulta y otros p
 {{< img src="logs/procesar/processors/url_processor.png" alt="Procesador de URL" style="width:80%;" >}}
 
 {{< tabs >}}
-{{% tab "UI" (IU) %}}
+{{% tab "IU" %}}
 
 Define el procesador del analizador de URL en la [página **Pipelines**][1]:
 
@@ -383,7 +382,7 @@ El procesador del analizador del agente de usuario toma un atributo `useragent` 
 **Nota**: Si tus logs contienen agentes de usuario codificados (por ejemplo, logs IIS), configura este procesador para **decodificar la URL** antes del análisis.
 
 {{< tabs >}}
-{{% tab "UI" (IU) %}}
+{{% tab "IU" %}}
 
 Define el procesador del agente de usuario en la [página **Pipelines**][1]:
 
@@ -431,7 +430,7 @@ Utiliza el procesador de categorías para añadir un nuevo atributo (sin espacio
 * Una vez definidas las categorías en el procesador de categorías, puedes asignarlas al estado del log utilizando el [Reasignador de estados de logs](#log-status-remapper).
 
 {{< tabs >}}
-{{% tab "UI" (IU) %}}
+{{% tab "IU" %}}
 
 Define el procesador de categorías en la [página **Pipelines**][1]. Por ejemplo, para categorizar tus logs de acceso web basándote en el valor del rango de código de estado (`"OK" for a response code between 200 and 299, "Notice" for a response code between 300 and 399, ...`), añade este procesador:
 
@@ -489,7 +488,7 @@ Por defecto, si falta un atributo se omite un cálculo. Selecciona *Replace miss
 * Si necesitas escalar una unidad de medida, utiliza el filtro para escalas.
 
 {{< tabs >}}
-{{% tab "UI" (IU) %}}
+{{% tab "IU" %}}
 
 Define el procesador aritmético en la [página **Pipelines**][1]:
 
@@ -539,7 +538,7 @@ La plantilla está definida tanto por texto sin formato como por bloques con la 
 * Los resultados de una plantilla no pueden superar los 256 caracteres.
 
 {{< tabs >}}
-{{% tab "UI" (IU) %}}
+{{% tab "IU" %}}
 
 Define el procesador del creador de cadenas en la [página **Pipelines**][1]:
 
@@ -618,7 +617,7 @@ Utiliza el [endpoint de API de pipeline para logs de Datadog][1] con la siguient
 El analizador GeoIP toma un atributo de una dirección IP y extrae información de continente, país, subdivisión o ciudad (si está disponible) en la ruta del atributo de destino.
 
 {{< tabs >}}
-{{% tab "UI" (IU) %}}
+{{% tab "IU" %}}
 
 {{< img src="logs/log_configuration/processor/geoip_processor.png" alt="Procesador GeoIP" style="width:80%;">}}
 
@@ -662,7 +661,7 @@ Utiliza el procesador de búsqueda para definir una reasignación entre un atrib
 Por ejemplo, puedes utilizar el procesador de búsqueda para asignar un ID interno de servicio a un nombre de servicio legible por el ser humano. También puedes utilizarlo para comprobar si la dirección MAC que acaba de intentar conectarse al entorno de producción pertenece a tu lista de máquinas robadas.
 
 {{< tabs >}}
-{{% tab "UI" (IU) %}}
+{{% tab "IU" %}}
 
 El procesador de búsqueda realiza las siguientes acciones:
 
@@ -723,7 +722,7 @@ Existen dos formas de mejorar la correlación entre trazas y logs de aplicacione
 2. Utilice el procesador del reasignador de trazas para definir un atributo de log como su ID de rastreo asociado.
 
 {{< tabs >}}
-{{% tab "UI" (IU) %}}
+{{% tab "IU" %}}
 
 Define el procesador del reasignador de trazas en la [página **Pipelines**][1]. Introduce la ruta de atributo del ID de rastreo en el cuadro del procesador, de la siguiente manera:
 

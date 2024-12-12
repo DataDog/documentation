@@ -20,6 +20,7 @@ categories:
 - 構成 & デプロイ
 - developer tools
 - orchestration
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/terraform/README.md
 display_on_public_website: true
@@ -29,7 +30,6 @@ integration_id: terraform
 integration_title: Terraform
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: terraform
 public_title: Terraform
@@ -47,6 +47,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: Terraform を使用して Datadog アカウントを管理する
   media: []
@@ -62,13 +63,13 @@ tile:
 
 Datadog Terraform プロバイダーは Terraform コンフィギュレーションを介して Datadog API とのやり取りを可能にします。このコンフィギュレーションによって、ダッシュボード、モニター、ログコンフィギュレーションといった Datadog のリソースを管理することができます。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 Datadog Terraform プロバイダーは [Terraform レジストリ][1]を介して利用することができます。
 
-### ブラウザトラブルシューティング
+### 構成
 
 1. [Terraform をインストールします][2]。
 2. Terraform のコンフィギュレーションファイルを含むディレクトリを作成します。例: `terraform_config/`
@@ -97,7 +98,7 @@ Datadog Terraform プロバイダーは [Terraform レジストリ][1]を介し�
 4. `terraform init` を実行します。これにより、Terraform での利用のためにディレクトリが初期化され、Datadog プロバイダーがプルされます。
 5. `terraform_config/` ディレクトリ内に任意の `.tf` ファイルを作成し、Datadog リソースの作成を開始します。
 
-## ノートブックの更新
+## モニターを作成
 
 この例では、[ライブプロセスモニター][5]を作成する `monitor.tf` ファイルを示します。
 
@@ -143,21 +144,21 @@ Datadog Terraform プロバイダーは [Terraform レジストリ][1]を介し�
   dogwrap -n "terraform destroy" -k $DD_API_KEY --submit_mode all --tags="source:terraform" "terraform destroy -no-color"
   ```
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 
 Terraform には、メトリクスは含まれません。
 
-### ヘルプ
+### サービスチェック
 
 Terraform には、サービスのチェック機能は含まれません。
 
-### ヘルプ
+### イベント
 
 Terraform には、イベントは含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][7]までお問い合わせください。
 

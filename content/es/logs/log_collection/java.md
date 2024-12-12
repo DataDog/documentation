@@ -26,7 +26,6 @@ further_reading:
 - link: /glossary/#tail
   tag: Glosario
   text: Entrada de glosario para "tail" (cola)
-kind: documentación
 title: Recopilación de logs de Java
 ---
 
@@ -606,7 +605,7 @@ Para generar este JSON:
 
 ## Lectura adicional
 
-{{< nombre parcial="whats-next/whats-next.html" >}}
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: http://logback.qos.ch/manual/mdc.html
 [2]: /es/logs/log_configuration/parsing

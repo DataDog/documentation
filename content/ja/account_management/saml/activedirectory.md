@@ -1,15 +1,16 @@
 ---
-title: Microsoft Active Directory フェデレーションサービスの SAML IdP
 aliases:
-  - /ja/account_management/faq/how-do-i-setup-microsoft-active-directory-federation-services-as-a-saml-idp/
+- /ja/account_management/faq/how-do-i-setup-microsoft-active-directory-federation-services-as-a-saml-idp/
 further_reading:
-  - link: /account_management/saml/
-    tag: Documentation
-    text: Datadog アカウントのための SAML の構成
-  - link: /account_management/multi_organization/
-    tag: Documentation
-    text: 複数のアカウントを持つチームとオーガニゼーションの構成
+- link: /account_management/saml/
+  tag: Documentation
+  text: Datadog アカウントのための SAML の構成
+- link: /account_management/multi_organization/
+  tag: Documentation
+  text: 複数のアカウントを持つチームとオーガニゼーションの構成
+title: Microsoft Active Directory フェデレーションサービスの SAML IdP
 ---
+
 Datadog の SSO 用 SAML インテグレーションは、オーガニゼーションを外部のユーザー管理システムにリンクして、一元的なシステムで資格情報を維持および管理するための手段を提供します。このドキュメントは、Datadog 目線でシングルサインオンの概要を説明したメインの「[SAML を使用したシングルサインオン][1]」ドキュメントのアドオンとして使用してください。
 
 Active Directory フェデレーションサービス (AD FS) 用の SAML コンフィギュレーションを開始するには、Microsoft の「[AD FS を使用してポータルに SAML 2.0 プロバイダーを構成する][2]」ドキュメントを参照してください。

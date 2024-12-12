@@ -10,4 +10,4 @@ further_reading:
       text: "Obfuscate user data with Session Replay default privacy settings"
 ---
 
-{{< include-markdown "content/en/real_user_monitoring/session_replay/browser/privacy_options.md" >}}
+{{< include-markdown "real_user_monitoring/session_replay/browser/privacy_options" >}}

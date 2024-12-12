@@ -32,14 +32,19 @@ further_reading:
   tag: ブログ
   text: Datadog API カタログで API のパフォーマンス、セキュリティ、所有権を管理する
 - link: https://dtdg.co/fe
-  tag: 基盤の活用
-  text: APM の理解を深めるためのインタラクティブなセッションにご参加ください
+  tag: Foundation Enablement
+  text: APM の理解を深めるためのインタラクティブセッションに参加しましょう
 title: APM
 ---
 
 {{< vimeo url="https://player.vimeo.com/progressive_redirect/playback/381554158/rendition/1080p/file.mp4?loc=external&signature=e19b4e64632c3b1a42b11cb27fca2682dfadecd4690774c005ba2f5079b6a416" poster="/images/poster/tracing.png" >}}
 
 </br>
+
+
+{{< learning-center-callout header="イネーブルメントウェビナーセッションに参加" hide_image="true" btn_title="登録" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=APM">}}
+  入門または中級者向けのイネーブルメントセッションに参加して、Datadog Application Performance Monitoring (APM) が、ブラウザやモバイルアプリケーションからバックエンドサービスやデータベースまで、AI を活用したコードレベルの分散トレーシングを提供する仕組みを学びましょう。
+{{< /learning-center-callout >}}
 
 ## 概要
 
@@ -52,6 +57,8 @@ Datadog APM で使用される用語の紹介は、[APM の用語と概念][1]�
 Datadog APM の利用を開始する場合は、シングルステップのインスツルメンテーションを利用するのが最も簡単です。この方法であれば、Datadog Agent のインストールとアプリケーションのインスツルメンテーションをワンステップで行うことができ、追加の構成手順は必要ありません。詳しくは、[シングルステップのインスツルメンテーション][27]をご覧ください。
 
 よりカスタマイズが必要なセットアップに対応するため、Datadog は Datadog トレーシングライブラリを使ったカスタムインスツルメンテーションをサポートしています。詳しくは、[アプリケーションのインスツルメンテーション][2]をご覧ください。
+
+<div class="alert alert-info">Datadog APM を初めて使用する場合は、<a href="https://docs.datadoghq.com/getting_started/tracing/">APM の概要</a>を読んで、Datadog に最初のトレースを送信する方法を学んでください。</div>
 
 ## ユースケース
 
@@ -94,7 +101,11 @@ Datadog APM は、トレースデータの量と保持を管理するための�
 
 {{< img src="/tracing/apm_lifecycle/apm_lifecycle_0.png" alt="Datadog APM を通したデータの流れ。" style="width:100%;" >}}
 
-## その他の参考資料
+## トラブルシューティング
+
+For troubleshooting assistance, read the [APM Troubleshooting][29] guide.
+
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -126,3 +137,4 @@ Datadog APM は、トレースデータの量と保持を管理するための�
 [26]: /ja/tracing/services/service_page/
 [27]: /ja/tracing/trace_collection/single-step-apm/
 [28]: /ja/tracing/services/resource_page/
+[29]: /ja/tracing/troubleshooting/

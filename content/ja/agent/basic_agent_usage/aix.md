@@ -1,4 +1,8 @@
 ---
+algolia:
+  tags:
+  - アンインストール
+  - アンインストール
 further_reading:
 - link: /agent/basic_agent_usage/#agent-architecture
   tag: ドキュメント
@@ -62,7 +66,7 @@ Agent のインストールログは、`dd-aix-install.log` ファイルに記�
 | フレアの送信                      | `datadog-agent flare`       |
 | コマンドの使用方法の表示           | `datadog-agent --help`      |
 
-## コンフィギュレーション
+## 構成
 
 Agent のコンフィギュレーションファイルおよびフォルダーは `/etc/datadog-agent/datadog.yaml` にあります
 
@@ -119,6 +123,10 @@ dogstatsd:                        # DogStatsD 構成オプション
 **注**: DogStatsD はデーモン化されずに、フォアグラウンドで実行されます。
 
 既存の Python スーパーバイザーで Agent を実行する機能もあります。このツールを使い慣れている場合は、この方法で Agent デーモンを管理してもかまいません。Agent と DogStatsD の両方のエントリがあります。
+
+## Agent の稼働時間を監視する
+
+Agent の稼働時間を監視するには、メトリクス `datadog.agent.running` を使用できます。このメトリクスは、Agent が Datadog にレポートを送信している場合に `1` を出力します。
 
 ## Agent のアンインストール
 

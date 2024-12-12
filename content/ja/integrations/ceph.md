@@ -22,8 +22,6 @@ assets:
       metadata_path: assets/service_checks.json
     source_type_id: 138
     source_type_name: Ceph
-  logs:
-    source: ceph
   saved_views:
     ceph_processes: assets/saved_views/ceph_processes.json
 author:
@@ -35,6 +33,7 @@ categories:
 - data stores
 - os & system
 - log collection
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/ceph/README.md
 display_on_public_website: true
@@ -42,9 +41,8 @@ draft: false
 git_integration_title: ceph
 integration_id: ceph
 integration_title: Ceph
-integration_version: 2.10.0
+integration_version: 4.0.0
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: ceph
 public_title: Ceph
@@ -60,10 +58,14 @@ tile:
   - Category::Data Stores
   - Category::OS とシステム
   - Category::ログの収集
+  - Offering::Integration
   configuration: README.md#Setup
   description: プールごとのパフォーマンスメトリクスを収集し、クラスター状態全体を監視。
   media: []
   overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/monitor-ceph-datadog
   support: README.md#Support
   title: Ceph
 ---
@@ -81,13 +83,13 @@ Datadog-Ceph インテグレーションを有効にすると、以下のこと�
 - 問題が発生した場合にサービスチェックを受信できます。
 - I/O パフォーマンスメトリクスを監視できます。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 Ceph チェックは [Datadog Agent][2] パッケージに含まれています。Ceph サーバーに追加でインストールする必要はありません。
 
-### ブラウザトラブルシューティング
+### 構成
 
 [Agent のコンフィギュレーションディレクトリ][3]のルートにある `conf.d/` フォルダーの `ceph.d/conf.yaml` ファイルを編集します。
 使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル ceph.d/conf.yaml][4] を参照してください。
@@ -106,7 +108,7 @@ instances:
 dd-agent ALL=(ALL) NOPASSWD:/path/to/your/ceph
 ```
 
-#### 収集データ
+#### ログ収集
 
 _Agent バージョン 6.0 以降で利用可能_
 
@@ -132,23 +134,23 @@ _Agent バージョン 6.0 以降で利用可能_
 
 [Agent の status サブコマンドを実行][6]し、Checks セクションで `ceph` を探します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "ceph" >}}
 
 
 **注**: Ceph luminous またはそれ以降を実行している場合、`ceph.osd.pct_used` メトリクスは含まれません。
 
-### ヘルプ
+### イベント
 
 Ceph チェックには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 {{< get-service-checks-from-git "ceph" >}}
 
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
 

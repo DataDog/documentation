@@ -23,7 +23,6 @@ further_reading:
 - link: /tracing/services/services_map/
   tag: Documentación
   text: Leer sobre el Mapa de servicios
-kind: documentación
 title: Universal Service Monitoring
 ---
 

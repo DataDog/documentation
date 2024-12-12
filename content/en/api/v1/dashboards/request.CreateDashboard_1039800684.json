@@ -11,11 +11,16 @@
               {
                 "width": "auto",
                 "field": "timestamp"
+              },
+              {
+                "width": "auto",
+                "field": "message"
               }
             ],
             "query": {
               "data_source": "logs_pattern_stream",
               "query_string": "",
+              "clustering_pattern_field_path": "message",
               "group_by": [
                 {
                   "facet": "service"

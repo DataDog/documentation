@@ -11,8 +11,6 @@ assets:
       metadata_path: assets/service_checks.json
     source_type_id: 10106
     source_type_name: Azure Active Directory
-  logs:
-    source: azure.active_directory
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
@@ -23,6 +21,7 @@ categories:
 - クラウド
 - ログの収集
 - セキュリティ
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/azure_active_directory/README.md
 display_on_public_website: true
@@ -32,7 +31,6 @@ integration_id: azure-active-directory
 integration_title: Azure Active Directory
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: azure_active_directory
 public_title: Azure Active Directory
@@ -51,6 +49,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: Azure Active Directory アクティビティログを分析
   media: []
@@ -67,13 +66,13 @@ tile:
 Azure Active Directory は、Microsoft Azure によるクラウドホスト型 Active Directory 製品です。
 このインテグレーションにより、[Azure AD アクティビティログ][1] (監査ログとサインインログ) を Datadog に取り込むことができます。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 このインテグレーションにより、 Azure Event Hubs を使用してログが Datadog に転送されます。アクティビティログをイベントハブに転送するように Azure AD を構成します。
 
-### ブラウザトラブルシューティング
+### 構成
 
 1. [Datadog への Azure ログの送信][2]ガイドに従って、Event Hub を使用して Azure から Datadog へのログ転送パイプラインをセットアップします。
 
@@ -102,9 +101,9 @@ Azure Active Directory は、Microsoft Azure によるクラウドホスト型 A
 15 分以内に Datadog はログを受け取り始めます。
 セットアップに関する詳細は、[Azure チュートリアル][3]を参照してください。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-#### 収集データ
+#### ログ収集
 
 このインテグレーションにより、Azure Active Directory アクティビティログのログ取り込みを設定できます。
 
@@ -114,11 +113,11 @@ Azure Active Directory は、Microsoft Azure によるクラウドホスト型 A
 
    - Audit logs - Azure AD 内のさまざまな機能が行った変更のログを介してトレーサビリティを提供します。
 
-### データセキュリティ
+### メトリクス
 
 Azure Active Directory には、メトリクスは含まれません。
 
-### ヘルプ
+### イベント
 
 Datadog は、Azure アプリ登録、Key Vault キー、Key Vault シークレット、Key Vault 証明書の資格情報期限切れを視覚化する資格情報期限切れイベントを送信します。Azure アプリ登録のイベントを受信するには、Azure Active Directory インテグレーションをインストールする必要があります。また、Azure からイベントを受信するには、[Azure インテグレーション][4]のインストールが必要です。
 
@@ -128,12 +127,12 @@ Datadog は、Azure アプリ登録、Key Vault キー、Key Vault シークレ�
 
 これらのイベントは[イベントエクスプローラー][5]で表示できます。
 
-**注**: 
+**注**:
 
 - Azure アプリ登録期限切れイベントを収集するには、[Microsoft Graph API へのアクセスを有効にします][6]。
 - 証明書とそれに関連するキーとシークレットがまったく同時に期限切れになる場合、すべてのリソースに対して 1 つの期限切れイベントが送信されます。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][7]までお問い合わせください。
 

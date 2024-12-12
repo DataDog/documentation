@@ -33,13 +33,15 @@ from ddtrace.runtime import RuntimeMetrics
 RuntimeMetrics.enable()
 ```
 
-ランタイムメトリクスは、Python サービスと相関して表示できます。Datadog の[サービス詳細画面][1]を参照してください。
+ランタイムメトリクスは、Python サービスと相関して表示できます。Datadog の[サービスカタログ][1]を参照してください。
 
 **注**: ランタイム UI では、`ddtrace` >= [`0.24.0`][2] がサポートされています。
 
 初期設定では、アプリケーションからのランタイムメトリクスは DogStatsD のポート `8125` から Datadog Agent に送信されます。[DogStatsD が Agent に対して有効になっていること][3]を確認してください。
 Agent をコンテナとして実行している場合は、`DD_DOGSTATSD_NON_LOCAL_TRAFFIC` が [true に設定されていること][4]、また Agent 上でポート `8125` が開いていることを確認してください。
 Kubernetes では、[DogstatsD ポートをホストポートにバインド][5]し、ECS では[タスク定義で適切なフラグを設定][6]します。
+
+または、Agent は UDP トランスポートの代わりに Unix Domain Socket (UDS) を使用してメトリクスを取り込むこともできます。詳細については、[Unix Domain Socket 経由の DogStatsD][8] を参照してください。
 
 ## 収集データ
 
@@ -53,10 +55,11 @@ APM サービス詳細画面にこれらのメトリクスを表示するだけ�
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/apm/services
+[1]: https://app.datadoghq.com/services
 [2]: https://github.com/DataDog/dd-trace-py/releases/tag/v0.24.0
 [3]: /ja/metrics/custom_metrics/dogstatsd_metrics_submission/#setup
 [4]: /ja/agent/docker/#dogstatsd-custom-metrics
 [5]: /ja/developers/dogstatsd/?tab=kubernetes#agent
 [6]: /ja/agent/amazon_ecs/#create-an-ecs-task
 [7]: https://app.datadoghq.com/dash/integration/30267/python-runtime-metrics
+[8]: /ja/developers/dogstatsd/unix_socket/

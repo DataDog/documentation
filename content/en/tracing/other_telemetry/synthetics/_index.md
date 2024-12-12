@@ -13,4 +13,4 @@ further_reading:
     text: 'Ease troubleshooting with cross product correlation.'
 ---
 
-{{< include-markdown "content/en/synthetics/platform/apm/_index.md" >}}
+{{< include-markdown "synthetics/platform/apm" >}}

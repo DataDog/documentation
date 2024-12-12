@@ -37,6 +37,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - metrics
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/php_fpm/README.md
 display_on_public_website: true
@@ -44,9 +45,8 @@ draft: false
 git_integration_title: php_fpm
 integration_id: php-fpm
 integration_title: PHP FPM
-integration_version: 3.3.0
+integration_version: 5.0.0
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: php_fpm
 public_title: PHP FPM
@@ -62,6 +62,7 @@ tile:
   - Supported OS::Windows
   - Category::Metrics
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: プロセスの状態、低速なリクエスト、受け付けたリクエストを監視.
   media: []
@@ -79,20 +80,20 @@ tile:
 
 PHP-FPM チェックは、FPM プールの状態を監視し、リクエストパフォーマンスを追跡します。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 PHP-FPM チェックは [Datadog Agent][2] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 
-### ブラウザトラブルシューティング
+### 構成
 
 ホストで実行中の Agent でこのチェックを構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[コンテナ化](#コンテナ化)セクションを参照してください。
 
 {{< tabs >}}
 {{% tab "ホスト" %}}
 
-#### メトリクスベース SLO
+#### ホスト
 
 ホストで実行中の Agent に対してこのチェックを構成するには
 
@@ -203,21 +204,21 @@ PHP-FPM インストールが Unix ソケットを使用する場合、`status_u
 
 [Agent の `status` サブコマンドを実行][3]し、Checks セクションで `php_fpm` を探します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "php_fpm" >}}
 
 
-### ヘルプ
+### イベント
 
 PHP-FPM チェックには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 {{< get-service-checks-from-git "php_fpm" >}}
 
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
 

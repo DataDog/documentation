@@ -9,6 +9,9 @@ further_reading:
 - link: /logs/log_configuration/pipelines
   tag: ドキュメント
   text: ログパイプラインについて
+- link: /observability_pipelines/
+  tag: ドキュメント
+  text: Forward logs directly from your environment with Observability Pipelines
 title: カスタム宛先へのログの転送
 ---
 
@@ -22,25 +25,28 @@ title: カスタム宛先へのログの転送
 
 ログ転送を使用すると、Datadog から Splunk、Elasticsearch、HTTP エンドポイントなどのカスタム宛先にログを送信することができます。つまり、[ログパイプライン][1]を使用して、Datadog でログを一元的に収集、処理、標準化することが可能です。その後、Datadog から他のツールにログを送信し、各チームのワークフローをサポートします。取り込まれたログは、インデックスの有無にかかわらず、カスタム宛先に転送することができます。ログは JSON 形式で転送され、GZIP で圧縮されます。
 
+**Note**: Only Datadog users with the [`logs_write_forwarding_rules`][2] permission can [create][6], [edit][7], and [delete][8] custom destinations for forwarding logs.
+
 {{< img src="logs/log_configuration/forwarding/forwarding_page.png" alt="ログ転送のページで、カスタム宛先がハイライト表示されています。宛先のリストには、Splunk (service:logs-processing でフィルタリング)、HTTP Endpoint (source:okta OR source:paloalto でフィルタリング)、Elasticsearch (team:acme env:prod でフィルタリング) が含まれています。" >}}
+
+If a forwarding attempt fails (for example: if your destination temporarily becomes unavailable), Datadog retries periodically for 2 hours using an exponential backoff strategy. The first attempt is made following a 1-minute delay. For subsequent retries, the delay increases progressively to a maximum of 8-12 minutes (10 minutes with 20% variance).
 
 次のメトリクスは、再試行後に正常に送信されたログなどの正常に転送されたログ、およびドロップされたログについて報告します。
 
 - datadog.forwarding.logs.bytes
 - datadog.forwarding.logs.count
 
-**注**: [`logs_write_forwarding_rules`][2] 権限を持つ Datadog ユーザーのみ、ログ転送用のカスタム宛先を作成、編集、削除することができます。
 
 ## カスタム宛先へのログ転送設定
 
-1. [IP 範囲リスト][3]から Webhook の IP を許可リストに追加します。
-2. [ログ転送][4]に移動します。または、**Logs** &gt; **Configuration** に移動して、**Log Forwarding** タブをクリックします。
+1. Add webhook IPs from the {{< region-param key="ip_ranges_url" link="true" text="IP ranges list">}} to the allowlist.
+2. [ログ転送][4]に移動します。
 3. **Custom Destinations** を選択します。
 4. **New Destination** をクリックします。
 5. 転送するログをフィルターするためのクエリを入力します。詳しくは、[検索構文][5]を参照してください。
 6. **Destination Type** を選択します。
 
-{{< img src="logs/log_configuration/forwarding/configuration.png" alt="宛先の構成ページで、新しい宛先を設定する手順を示しています。" style="width:70%;">}}
+{{< img src="logs/log_configuration/forwarding/tag-forwarding.png" alt="The destination configuration page, showing the steps to set up a new destination." style="width:70%;">}}
 
 {{< tabs >}}
 {{% tab "HTTP" %}}
@@ -53,7 +59,6 @@ title: カスタム宛先へのログの転送
     - Request Header: ヘッダー名と値を指定します。例えば、Authorization ヘッダーを使用し、ログを送信するアカウントのユーザー名が `myaccount` で、パスワードが `mypassword` の場合:
         - **Header Name** に `Authorization` を入力します。
         - ヘッダー値は `Basic username:password` というフォーマットで、`username:password` は base64 でエンコードされています。この例では、ヘッダー値は `Basic bXlhY2NvdW50Om15cGFzc3dvcmQ=` となります。
-  9. **保存**をクリックします。
 
 [1]: https://help.sumologic.com/docs/send-data/hosted-collectors/http-source/logs-metrics/
 {{% /tab %}}
@@ -61,11 +66,10 @@ title: カスタム宛先へのログの転送
 {{% tab "Splunk" %}}
 
 6. 宛先の名前を入力します。
-7. **Configure Destination** セクションで、ログを送信するエンドポイントを入力します。エンドポイントは、`https://` で始まる必要があります。例えば、`https://<your_account>.splunkcloud.com:8088`と入力します。**注**: エンドポイントには `/services/collector/event` が自動的に付加されます。
-8. **Configure Authentication** セクションで、Splunk HEC トークンを入力します。Splunk HEC トークンの詳細については、[HTTP Event Collector のセットアップと使用][1]を参照してください。
-9. **保存**をクリックします。
-
-**注**: [インデクサ確認応答][2]を無効にする必要があります。
+7. In the **Configure Destination** section, enter the endpoint to which you want to send the logs. The endpoint must start with `https://`. For example, enter `https://<your_account>.splunkcloud.com:8088`.
+    **Note**: `/services/collector/event` is automatically appended to the endpoint.
+8. In the **Configure Authentication** section, enter the Splunk HEC token. See [Set up and use HTTP Event Collector][1] for more information about the Splunk HEC token.
+    **Note**: The [indexer acknowledgment][2] needs to be disabled.
 
 [1]: https://docs.splunk.com/Documentation/Splunk/9.0.1/Data/UsetheHTTPEventCollector
 [2]: https://docs.splunk.com/Documentation/Splunk/9.0.3/Data/AboutHECIDXAck
@@ -76,13 +80,17 @@ title: カスタム宛先へのログの転送
 6. 宛先の名前を入力します。
 7. **Configure Destination** セクションで、以下の内容を入力します。
     a. ログを送信するエンドポイント。エンドポイントは `https://` で始まらなければなりません。Elasticsearch のエンドポイント例: `https://<your_account>.us-central1.gcp.cloud.es.io`
-    b. ログを送信する宛先インデックスの名前。 
+    b. ログを送信する宛先インデックスの名前。
     c. オプションで、新しいインデックスを作成する頻度を示すインデックスローテーションを選択します。`No Rotation`、`Every Hour`、`Every Day`、`Every Week`、または `Every Month` です。デフォルトは `No Rotation` です。
 8. **Configure Authentication** セクションで、Elasticsearch アカウントのユーザー名とパスワードを入力します。
-9. **保存**をクリックします。
 
 {{% /tab %}}
 {{< /tabs >}}
+
+9. In the **Select Tags to Forward** section:
+  a. Select whether you want **All tags**, **No tags**, or **Specific Tags** to be included.
+  b. Select whether you want to **Include** or **Exclude specific tags**, and specify which tags to include or exclude.
+10. **Save** をクリックします。
 
 [Log Forwarding][4] ページで、宛先のステータスにカーソルを合わせると、過去 1 時間に転送されたフィルターの条件に一致するログの割合が表示されます。
 
@@ -91,19 +99,21 @@ title: カスタム宛先へのログの転送
 2. **Custom Destinations** を選択すると、既存のすべての宛先のリストが表示されます。
 3. 編集したい宛先の **Edit** ボタンをクリックします。
 4. 構成ページで変更します。
-5. **保存**をクリックします。
+5. **Save** をクリックします。
 
 ## 宛先を削除する
 1. [ログ転送][4]に移動します。
 2. **Custom Destinations** を選択すると、既存のすべての宛先のリストが表示されます。
 3. 削除したい宛先の **Delete** ボタンをクリックし、**Confirm** をクリックします。これにより、設定されている宛先リストから宛先が削除され、ログが転送されなくなります。
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/logs/log_configuration/pipelines/
 [2]: /ja/account_management/rbac/permissions/?tab=ui#log-management
-[3]: https://ip-ranges.datadoghq.com/
 [4]: https://app.datadoghq.com/logs/pipelines/log-forwarding/custom-destinations
 [5]: /ja/logs/explorer/search_syntax/
+[6]: /ja/logs/log_configuration/forwarding_custom_destinations#set-up-log-forwarding-to-custom-destinations
+[7]: /ja/logs/log_configuration/forwarding_custom_destinations#edit-a-destination
+[8]: /ja/logs/log_configuration/forwarding_custom_destinations#delete-a-destination

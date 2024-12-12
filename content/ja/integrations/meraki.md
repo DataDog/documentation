@@ -8,18 +8,18 @@ assets:
     auto_install: false
     metrics:
       check:
-      - meraki.port.usageInKb.recv
+      - meraki.devStatus
       - snmp.devStatus
       metadata_path: metadata.csv
-      prefix: ''
+      prefix: meraki.
     service_checks:
       metadata_path: assets/service_checks.json
     source_type_id: 602
     source_type_name: Meraki
   monitors:
-    '[Meraki] A Meraki Device Uplink is Failing': assets/monitors/uplink_device_is_failing.json
-    '[Meraki] A Meraki Device is in an Alerting State': assets/monitors/device_is_in_alert_state.json
-    '[Meraki] Abnormally High Latency on a Meraki Uplink': assets/monitors/high_latency_on_uplink.json
+    A Meraki Device Uplink is Failing: assets/monitors/uplink_device_is_failing.json
+    A Meraki Device is in an Alerting State: assets/monitors/device_is_in_alert_state.json
+    Abnormally High Latency on a Meraki Uplink: assets/monitors/high_latency_on_uplink.json
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
@@ -30,6 +30,7 @@ categories:
 - ログの収集
 - security
 - snmp
+custom_kind: インテグレーション
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -38,7 +39,6 @@ integration_id: meraki
 integration_title: Cisco Meraki
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: meraki
 public_title: Cisco Meraki
@@ -59,15 +59,23 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: Network Device Monitoring、ログ、Cloud SIEM を使用して Cisco Meraki 環境を監視する
   media: []
   overview: README.md#Overview
+  resources:
+  - resource_type: documentation
+    url: https://docs.datadoghq.com/network_monitoring/devices/
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/monitor-meraki/
   support: README.md#Support
   title: Cisco Meraki
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
+<div class="alert alert-info">Cisco Meraki インテグレーションはプレビュー版です。</div>
+
 ## 概要
 
 このインテグレーションは、[Network Device Monitoring][1]、Network Event Logs、および [Cloud SIEM][2] の Security Event Logs のメトリクスを収集することで、Cisco Meraki 環境の包括的な可視性を提供します。
@@ -107,9 +115,9 @@ tile:
 Meraki Cloud Controller からメトリクスを収集するには、Meraki Profile で [SNMP インテグレーション][6]を構成します。
 
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 1. アプリで [Meraki インテグレーションタイル][7]を開きます。
 1. **+ Add Account** をクリックします。
@@ -130,40 +138,43 @@ NDM メトリクスの収集を構成するには、Meraki の API キーが必�
 
 デバイスタグフィルターでは、NDM 内で監視するデバイスを指定できます。カンマで区切って複数のタグを指定できます。タグを指定しない場合は、すべてのデバイスが監視されます。
 
-### 収集データ
+### ログ収集
 
 ネットワークイベントログとセキュリティイベントログの収集を構成するには、Meraki の API キーが必要です。
 
 詳細については、[Cisco Meraki Dashboard API][9] を参照してください。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 
-<div class="alert alert-info">ネットワークデバイスモニタリングの Meraki デバイス (MR、MS、MX) のデータ (ネットワークレベル、デバイスレベル、アップリンクレベル、インターフェイス (スイッチポート) レベルのメトリクスとタグを含む) はベータ版です。</div>
+<div class="alert alert-info">ネットワークデバイスモニタリングの Meraki デバイス (MR、MS、MX) のデータ (ネットワークレベル、デバイスレベル、アップリンクレベル、インターフェイス (スイッチポート) レベルのメトリクスとタグを含む) はベータ版です。
 
-Meraki デバイスからメトリクスを収集できるよう、Meraki プロファイルで [SNMP インテグレーション][6]を構成します。
+スイッチレベルのポートトラフィックおよび使用状況に関するメトリクスは利用できません。</div>
+
+Meraki プロファイルで [SNMP インテグレーション][6]を構成し、Meraki デバイスからメトリクス (以下の表ではプレフィックス `snmp.`) を収集します。あるいは、[カスタムプロファイル][10]を作成して追加のメトリクスを収集します。プレフィックスが `meraki.` のメトリクスは、前述の手順を使用して有効にした Datadog Meraki インテグレーション経由で収集されます。
 
 {{< get-metrics-from-git "meraki" >}}
 
-### ヘルプ
+### イベント
 
 Meraki インテグレーションには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 
 Meraki インテグレーションには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## トラブルシューティング
+Datadog は、サーバーから Meraki にアクセスする際に問題が発生することがあります。Datadog の IP を IP アドレス許可リストに追加して、クロールが期待通りに動作するようにしてください。
 
-ご不明な点は、[Datadog のサポートチーム][10]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][11]までお問合せください。
 
 ## その他の参考資料
 
 お役に立つドキュメント、リンクや記事:
 
-- [ネットワークデバイスモニタリング][11]
-- [Datadog で Cisco Meraki を監視する][12]
+- [ネットワークデバイスモニタリング][12]
+- [Datadog で Cisco Meraki を監視する][13]
 
 [1]: https://app.datadoghq.com/devices
 [2]: https://app.datadoghq.com/security/home
@@ -174,6 +185,7 @@ Meraki インテグレーションには、サービスのチェック機能は�
 [7]: https://app.datadoghq.com/integrations/meraki
 [8]: https://documentation.meraki.com/zGeneral_Administration/Other_Topics/The_Cisco_Meraki_Dashboard_API
 [9]: https://documentation.meraki.com/General_Administration/Other_Topics/Cisco_Meraki_Dashboard_API#Enable_API_access
-[10]: https://docs.datadoghq.com/ja/help/
-[11]: https://docs.datadoghq.com/ja/network_monitoring/devices/
-[12]: https://www.datadoghq.com/blog/monitor-meraki/
+[10]: https://docs.datadoghq.com/ja/network_monitoring/devices/guide/build-ndm-profile/
+[11]: https://docs.datadoghq.com/ja/help/
+[12]: https://docs.datadoghq.com/ja/network_monitoring/devices/
+[13]: https://www.datadoghq.com/blog/monitor-meraki/

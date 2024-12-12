@@ -8,10 +8,6 @@ further_reading:
   text: "Learn about Cloud Cost Management"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Cloud Cost Management is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
 {{< jqmath-vanilla >}}
 
 ## Overview
@@ -40,18 +36,26 @@ The following table presents the list of collected features and the minimal Agen
 | Feature | Minimal Agent version | Minimal Cluster Agent version |
 |---|---|---|
 | Container Cost Allocation | 7.27.0 | 1.11.0 |
-| AWS Persistent Volume Allocation | 7.46.0 | 1.11.0  |
+| GPU Container Cost Allocation | 7.54.0 | 7.54.0 |
+| AWS Persistent Volume Allocation | 7.46.0 | 1.11.0 |
+| Data Transfer Cost Allocation    | 7.58.0 | 7.58.0 |
 
 1. Configure the AWS Cloud Cost Management integration on the [Cloud Costs Setup page][101].
 1. For Kubernetes support, install the [**Datadog Agent**][102] in a Kubernetes environment and ensure that you enable the [**Orchestrator Explorer**][103] in your Agent configuration.
 1. For AWS ECS support, set up [**Datadog Container Monitoring**][104] in ECS tasks.
 1. Optionally, enable [AWS Split Cost Allocation][105] for usage-based ECS allocation.
+1. To enable storage cost allocation, set up [EBS metric collection][108].
+1. To enable GPU container cost allocation, install the [Datadog DCGM integration][106].
+1. To enable Data transfer cost allocation, set up [Cloud Network Monitoring][107]. **Note**: additional charges apply
 
 [101]: https://app.datadoghq.com/cost/setup
 [102]: /containers/kubernetes/installation/?tab=operator
 [103]: /infrastructure/containers/orchestrator_explorer?tab=datadogoperator
 [104]: /containers/amazon_ecs/
 [105]: https://docs.aws.amazon.com/cur/latest/userguide/enabling-split-cost-allocation-data.html
+[106]: /integrations/dcgm/?tab=kubernetes#installation
+[107]: /network_monitoring/cloud_network_monitoring/setup
+[108]: /integrations/amazon_ebs/#metric-collection
 
 {{% /tab %}}
 {{% tab "Azure" %}}
@@ -63,13 +67,16 @@ The following table presents the list of collected features and the minimal Agen
 | Feature | Minimal Agent version | Minimal Cluster Agent version |
 |---|---|---|
 | Container Cost Allocation | 7.27.0 | 1.11.0 |
+| GPU Container Cost Allocation | 7.54.0 | 7.54.0 |
 
 1. Configure the Azure Cost Management integration on the [Cloud Costs Setup page][101].
 1. Install the [**Datadog Agent**][102] in a Kubernetes environment and ensure that you enable the [**Orchestrator Explorer**][103] in your Agent configuration.
+1. To enable GPU container cost allocation, install the [Datadog DCGM integration][104].
 
 [101]: https://app.datadoghq.com/cost/setup
 [102]: /containers/kubernetes/installation/?tab=operator
 [103]: /infrastructure/containers/orchestrator_explorer?tab=datadogoperator
+[104]: https://docs.datadoghq.com/integrations/dcgm/?tab=kubernetes#installation
 
 {{% /tab %}}
 {{% tab "Google" %}}
@@ -81,13 +88,16 @@ The following table presents the list of collected features and the minimal Agen
 | Feature | Minimal Agent version | Minimal Cluster Agent version |
 |---|---|---|
 | Container Cost Allocation | 7.27.0 | 1.11.0 |
+| GPU Container Cost Allocation | 7.54.0 | 7.54.0 |
 
 1. Configure the Google Cloud Cost Management integration on the [Cloud Costs Setup page][101].
 1. Install the [**Datadog Agent**][102] in a Kubernetes environment and ensure that you enable the [**Orchestrator Explorer**][103] in your Agent configuration.
+1. To enable GPU container cost allocation, install the [Datadog DCGM integration][104].
 
 [101]: https://app.datadoghq.com/cost/setup
 [102]: /containers/kubernetes/installation/?tab=operator
 [103]: /infrastructure/containers/orchestrator_explorer?tab=datadogoperator
+[104]: https://docs.datadoghq.com/integrations/dcgm/?tab=kubernetes#installation
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -129,9 +139,24 @@ Based on resources the task has used, Datadog assigns the appropriate portion of
 
 ECS tasks that run on Fargate are already fully allocated [in the CUR][103]. CCM enriches that data by adding out-of-the-box tags and container tags to the AWS Fargate cost.
 
+### Data transfer
+
+For Kubernetes data transfer allocation, a Kubernetes node is joined with its associated data transfer costs from the [CUR][103]. The node's cluster name and all node tags are added to the entire data transfer cost for the node. This allows you to associate cluster-level dimensions with the cost of the data transfer, without considering the pods scheduled to the node.
+
+Next, Datadog examines the daily [workload resources][104] running on that node. The node cost is allocated to the workload level according to network traffic volume usage. This calculated cost is enriched with all of the workload resource's tags.
+
+**Note**: Only _tags_ from pods and nodes are added to cost metrics. To include labels, enable labels as tags for [nodes][101] and [pods][102].
+
+[Cloud Network Monitoring][105] must be enabled on all AWS hosts to allow accurate data transfer cost allocation. If some hosts do not have Cloud Network Monitoring enabled, the data transfer costs for these hosts is not allocated and may appear as an `n/a` bucket depending on filter and group-by conditions.
+
+Datadog supports data transfer cost allocation using [standard 6 workload resources][104] only. For [custom workload resources][106], data transfer costs can be allocated down to the cluster level only, and not the node/namespace level.
+
 [101]: /containers/kubernetes/tag/?tab=containerizedagent#node-labels-as-tags
 [102]: /containers/kubernetes/tag/?tab=containerizedagent#pod-labels-as-tags
 [103]: https://docs.aws.amazon.com/cur/latest/userguide/what-is-cur.html
+[104]: https://kubernetes.io/docs/concepts/workloads/
+[105]: /network_monitoring/cloud_network_monitoring/setup
+[106]: https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/
 
 {{% /tab %}}
 {{% tab "Azure" %}}
@@ -193,19 +218,19 @@ Use the `allocated_spend_type` tag to visualize the spend category associated wi
 
 ### Compute
 
-The cost of a host instance is split into two components: 60% for the CPU and 40% for the memory. Each component is allocated to individual workloads based on their resource reservations and usage.
+The cost of a host instance is split into two components: 60% for the CPU and 40% for the memory. If the host instance has GPUs, the cost is split into three components: 95% for the GPU, 3% for the CPU, and 2% for the memory. Each component is allocated to individual workloads based on their resource reservations and usage.
 
 Costs are allocated into the following spend types:
 
 | Spend type | Description    |
 | -----------| -----------    |
-| Usage | Cost of resources (such as memory and CPU) used by workloads, based on the average usage on that day. |
-| Workload idle | Cost of resources (such as memory and CPU) that are reserved and allocated but not used by workloads. This is the difference between the total resources requested and the average usage. |
-| Cluster idle | Cost of resources (such as memory and CPU) that are not reserved by workloads in a cluster. This is the difference between the total cost of the resources and what is allocated to workloads. |
+| Usage | Cost of resources (such as memory, CPU, and GPU) used by workloads, based on the average usage on that day. |
+| Workload idle | Cost of resources (such as memory, CPU, and GPU) that are reserved and allocated but not used by workloads. This is the difference between the total resources requested and the average usage. |
+| Cluster idle | Cost of resources (such as memory, CPU, and GPU) that are not reserved by workloads in a cluster. This is the difference between the total cost of the resources and what is allocated to workloads. |
 
 ### Persistent volume
 
-The cost of an AWS EBS volume has three components: IOPS, throughput, and storage. Each is allocated according to a pod's usage when the volume is mounted.
+The cost of an EBS volume has three components: IOPS, throughput, and storage. Each is allocated according to a pod's usage when the volume is mounted.
 
 | Spend type | Description    |
 | -----------| -----------    |
@@ -217,35 +242,44 @@ The cost of an AWS EBS volume has three components: IOPS, throughput, and storag
 
 [101]: https://app.datadoghq.com/integrations/amazon-web-services
 
-{{% /tab %}}
-{{% tab "Azure" %}}
-
-### Compute
-
-The cost of a host instance is split into two components: 60% for the CPU and 40% for the memory. Each component is allocated to individual workloads based on their resource reservations and usage.
+### Data transfer
 
 Costs are allocated into the following spend types:
 
 | Spend type | Description    |
 | -----------| -----------    |
-| Usage | Cost of resources (such as memory and CPU) used by workloads, based on the average usage on that day. |
-| Workload idle | Cost of resources (such as memory and CPU) that are reserved and allocated but not used by workloads. This is the difference between the total resources requested and the average usage. |
-| Cluster idle | Cost of resources (such as memory and CPU) that are not reserved by workloads in a cluster. This is the difference between the total cost of the resources and what is allocated to workloads. |
+| Usage | Cost of data transfer that is monitored by Cloud Network Monitoring and allocated. |
+| Not monitored | Cost of data transfer not monitored by Cloud Network Monitoring. This cost is not allocated. |
+
+{{% /tab %}}
+{{% tab "Azure" %}}
+
+### Compute
+
+The cost of a host instance is split into two components: 60% for the CPU and 40% for the memory. If the host instance has GPUs, the cost is split into three components: 95% for the GPU, 3% for the CPU, and 2% for the memory. Each component is allocated to individual workloads based on their resource reservations and usage.
+
+Costs are allocated into the following spend types:
+
+| Spend type | Description    |
+| -----------| -----------    |
+| Usage | Cost of resources (such as memory, CPU, and GPU) used by workloads, based on the average usage on that day. |
+| Workload idle | Cost of resources (such as memory, CPU, and GPU) that are reserved and allocated but not used by workloads. This is the difference between the total resources requested and the average usage. |
+| Cluster idle | Cost of resources (such as memory, CPU, and GPU) that are not reserved by workloads in a cluster. This is the difference between the total cost of the resources and what is allocated to workloads. |
 
 {{% /tab %}}
 {{% tab "Google" %}}
 
 ### Compute
 
-The cost of a host instance is split into two components: 60% for the CPU and 40% for the memory. Each component is allocated to individual workloads based on their resource reservations and usage.
+The cost of a host instance is split into two components: 60% for the CPU and 40% for the memory. If the host instance has GPUs, the cost is split into three components: 95% for the GPU, 3% for the CPU, and 2% for the memory. Each component is allocated to individual workloads based on their resource reservations and usage.
 
 Costs are allocated into the following spend types:
 
 | Spend type | Description    |
 | -----------| -----------    |
-| Usage | Cost of resources (such as memory and CPU) used by workloads, based on the average usage on that day. |
-| Workload idle | Cost of resources (such as memory and CPU) that are reserved and allocated but not used by workloads. This is the difference between the total resources requested and the average usage. |
-| Cluster idle | Cost of resources (such as memory and CPU) that are not reserved by workloads in a cluster. This is the difference between the total cost of the resources and what is allocated to workloads. |
+| Usage | Cost of resources (such as memory, CPU, and GPU) used by workloads, based on the average usage on that day. |
+| Workload idle | Cost of resources (such as memory, CPU, and GPU) that are reserved and allocated but not used by workloads. This is the difference between the total resources requested and the average usage. |
+| Cluster idle | Cost of resources (such as memory, CPU, and GPU) that are not reserved by workloads in a cluster. This is the difference between the total cost of the resources and what is allocated to workloads. |
 | Not monitored | Cost of resources where the spend type is unknown. To resolve this, install the Datadog Agent on these clusters or nodes. |
 
 {{% /tab %}}
@@ -262,8 +296,8 @@ Depending on the cloud provider, certain resources may or may not be available f
 | {{< ccm-details title="Persistent volumes" >}}Storage resources within a cluster, provisioned by administrators or dynamically, that persist data independently of pod lifecycles.{{< /ccm-details >}} | {{< X >}} |  |  |
 | {{< ccm-details title="Managed service fees" >}}Cost of associated fees charged by the cloud provider for managing the cluster, such as fees for managed Kubernetes services or other container orchestration options.{{< /ccm-details >}} | {{< X >}} | {{< X >}} | {{< X >}} |
 | ECS costs | {{< X >}} | N/A | N/A |
-| Networking costs |  | Limited* | Limited* |
-| GPU |  |  | Limited* |
+| Data transfer costs | {{< X >}} | Limited* | Limited* |
+| GPU | {{< X >}} | {{< X >}} | {{< X >}}  |
 | {{< ccm-details title="Local storage" >}}Directly-attached storage resources for a node.{{< /ccm-details >}} |  | Limited* | Limited* |
 
 `Limited*` resources have been identified as part of your Kubernetes spend, but are not fully allocated to specific workloads or pods. These resources are host-level costs, not pod or namespace-level costs, and are identified with `allocated_spend_type:<resource>_not_supported`.
@@ -277,22 +311,22 @@ When the prerequisites are met, the following cost metrics automatically appear.
 
 | Cost Metric                    | Description    |
 | ---                                | ----------- |
-| `aws.cost.amortized.shared.resources.allocated` | EC2 costs allocated by the CPU & memory used by a pod or ECS task, using a 60:40 split for CPU & memory respectively. Also includes allocated EBS costs. <br> *Based on `aws.cost.amortized`* |
-| `aws.cost.net.amortized.shared.resources.allocated` | Net EC2 costs allocated by CPU & memory used by a pod or ECS task, using a 60:40 split for CPU & memory respectively. Also includes allocated AWS EBS costs. <br> *Based on `aws.cost.net.amortized`, if available* |
+| `aws.cost.amortized.shared.resources.allocated` | EC2 costs allocated by the CPU & memory used by a pod or ECS task, using a 60:40 split for CPU & memory respectively and a 95:3:2 split for GPU, CPU, & memory respectively if a GPU is used by a pod. Also includes allocated EBS costs. <br> *Based on `aws.cost.amortized`* |
+| `aws.cost.net.amortized.shared.resources.allocated` | Net EC2 costs allocated by CPU & memory used by a pod or ECS task, using a 60:40 split for CPU & memory respectively and a 95:3:2 split for GPU, CPU, & memory respectively if a GPU is used by a pod. Also includes allocated EBS costs. <br> *Based on `aws.cost.net.amortized`, if available* |
 
 {{% /tab %}}
 {{% tab "Azure" %}}
 
 | Cost Metric                    | Description    |
 | ---                                | ----------- |
-| `azure.cost.amortized.shared.resources.allocated` | Azure VM costs allocated by the CPU & memory used by a pod or container task, using a 60:40 split for CPU & memory respectively. Also includes allocated Azure costs. <br> *Based on `azure.cost.amortized`* |
+| `azure.cost.amortized.shared.resources.allocated` | Azure VM costs allocated by the CPU & memory used by a pod or container task, using a 60:40 split for CPU & memory respectively and a 95:3:2 split for GPU, CPU, & memory respectively if a GPU is used by a pod. Also includes allocated Azure costs. <br> *Based on `azure.cost.amortized`* |
 
 {{% /tab %}}
 {{% tab "Google" %}}
 
 | Cost Metric                    | Description    |
 | ---                                | ----------- |
-| `gcp.cost.amortized.shared.resources.allocated` | Google Compute Engine costs allocated by the CPU & memory used by a pod, using 60:40 split for CPU & memory respectively. This allocation method is used when the bill does not already provide a specific split between CPU and memory usage. <br> *Based on `gcp.cost.amortized`* |
+| `gcp.cost.amortized.shared.resources.allocated` | Google Compute Engine costs allocated by the CPU & memory used by a pod, using 60:40 split for CPU & memory respectively and a 95:3:2 split for GPU, CPU, & memory respectively if a GPU is used by a pod. This allocation method is used when the bill does not already provide a specific split between CPU and memory usage. <br> *Based on `gcp.cost.amortized`* |
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -332,7 +366,7 @@ In addition to Kubernetes pod and Kubernetes node tags, the following out-of-the
 | `persistent_volume_reclaim_policy`      | The Kubernetes Reclaim Policy on the Persistent Volume.                                                                                      |
 | `storage_class_name`                    | The Kubernetes Storage Class used to instantiate the Persistent Volume.                                                                      |
 | `volume_mode`                           | The Volume Mode of the Persistent Volume.                                                                                                    |
-| `ebs_volume_type`                       | The type of the AWS EBS volume. Can be `gp3`, `gp2`, or others.                                                                              |
+| `ebs_volume_type`                       | The type of the EBS volume. Can be `gp3`, `gp2`, or others.                                                                              |
 
 ### Amazon ECS
 
@@ -347,6 +381,22 @@ In addition to ECS task tags, the following out-of-the-box tags are applied to c
 | `is_aws_ecs`            | All costs associated with running ECS. |
 | `is_aws_ecs_on_ec2`     | All EC2 compute costs associated with running ECS on EC2. |
 | `is_aws_ecs_on_fargate` | All costs associated with running ECS on Fargate. |
+
+### Data transfer
+
+The following list of out-of-the-box tags are applied to cost metrics associated with Kubernetes workloads:
+
+| Out-of-the-box tag      |  Description |
+| ---                     | ------------ |
+| `source_availability_zone` | The availability zone name where data transfer originated. |
+| `source_availability_zone_id` | The availability zone ID where data transfer originated. |
+| `source_region` | The region where data transfer originated. |
+| `destination_availability_zone` | The availability zone name where data transfer was sent to. |
+| `destination_availability_zone_id` | The availability zone ID where data transfer was sent to. |
+| `destination_region` | The region where data transfer was sent to. |
+| `allocated_resource:data_transfer` | The tracking and allocation of costs associated with data transfer activities. |
+
+In addition, some Kubernetes pod tags that are common between all pods on the same node are also applied.
 
 {{% /tab %}}
 {{% tab "Azure" %}}

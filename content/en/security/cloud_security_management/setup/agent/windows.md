@@ -9,3 +9,5 @@ aliases:
 ---
 
 {{% csm-windows-setup %}}
+
+{{< partial name="security-platform/CSW-billing-note.html" >}}

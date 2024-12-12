@@ -2,7 +2,11 @@
 title: Cloudcraft API Reference
 type: documentation
 cascade:
-        disable_toc: true
+  disable_toc: true
+  build:
+    render: always
+    list: always
+    publishResources: false
 ---
 
 {{< openapi-ref-docs url="cloudcraft.json" >}}

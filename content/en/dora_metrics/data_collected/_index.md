@@ -19,7 +19,7 @@ further_reading:
 <div class="alert alert-warning">DORA Metrics is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
-<div class="alert alert-warning">DORA Metrics is in public beta.</div>
+<div class="alert alert-warning">DORA Metrics is in Preview.</div>
 
 ## Overview
 
@@ -63,7 +63,10 @@ Datadog breaks down change lead time into the following metrics, which represent
 
 These metrics are only computed when the source of the repository metadata is GitHub, and there must be a pull request (PR) associated with a commit, if any. A commit is associated with a PR if the commit is first introduced to the target branch when merging that PR. If a commit does not have an associated PR, only `dora.time_to_deploy` and `dora.deploy_time` metrics are available.
 
-**Note:** These metrics are emitted for every commit and not per deployment.
+**Notes:**
+
+- These metrics are emitted for every commit and not per deployment.
+- There are several edge cases depending on the way the commits were introduced to the deployment, view the [limitations][12].
 
 ## Examine metrics in Event Management
 
@@ -85,5 +88,7 @@ These metrics can be queried programmatically by using the [Query timeseries poi
 [7]: /api/latest/dora-metrics/
 [8]: https://app.datadoghq.com/ci/dora
 [9]: https://docs.datadoghq.com/metrics/
-[10]: /dora_metrics/deployments/
+[10]: /dora_metrics/setup/deployments/
 [11]: https://app.datadoghq.com/event/explorer?query=source%3Asoftware_delivery_insights%20&cols=&messageDisplay=expanded-lg&options=&refresh_mode=sliding&sort=DESC&from_ts=1714391730343&to_ts=1714392630343&live=true
+[12]: /dora_metrics/deployments/#limitations
+

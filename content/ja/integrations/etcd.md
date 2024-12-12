@@ -23,8 +23,6 @@ assets:
       metadata_path: assets/service_checks.json
     source_type_id: 111
     source_type_name: etcd
-  logs:
-    source: etcd
   saved_views:
     etcd_overview: assets/saved_views/etcd_overview.json
     etcd_processes: assets/saved_views/etcd_processes.json
@@ -38,6 +36,7 @@ categories:
 - containers
 - configuration & deployment
 - log collection
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/etcd/README.md
 display_on_public_website: true
@@ -45,9 +44,8 @@ draft: false
 git_integration_title: etcd
 integration_id: etcd
 integration_title: etcd
-integration_version: 6.2.0
+integration_version: 8.0.0
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: etcd
 public_title: etcd
@@ -66,10 +64,20 @@ tile:
   - Category::コンテナ
   - Category::構成 & デプロイ
   - Category::ログの収集
+  - Offering::Integration
   configuration: README.md#Setup
   description: 書き込み、更新、削除、ノード間レイテンシー、さまざまな Etcd メトリクスを追跡。
   media: []
   overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/monitor-etcd-performance
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/monitor-etcd-with-datadog/
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/etcd-monitoring-tools/
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/etcd-key-metrics/
   support: README.md#Support
   title: etcd
 ---
@@ -87,18 +95,18 @@ Etcd のメトリクスを収集して、以下のことができます。
 - ホスト構成が同期されていない可能性があることに気付くことができます。
 - Etcd のパフォーマンスを他のアプリケーションと関連付けることができます。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 Etcdチェックは [Datadog Agent][2] パッケージに含まれています。Etcd インスタンスに追加でインストールする必要はありません。
 
-### ブラウザトラブルシューティング
+### 構成
 
 {{< tabs >}}
 {{% tab "ホスト" %}}
 
-#### メトリクスベース SLO
+#### ホスト
 
 ホストで実行中の Agent に対してこのチェックを構成するには
 
@@ -107,7 +115,7 @@ Etcdチェックは [Datadog Agent][2] パッケージに含まれています�
 1. Etcd のパフォーマンスデータを収集するには、[Agent のコンフィギュレーションディレクトリ][1]のルートにある `conf.d/` フォルダーの `etcd.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル etcd.d/conf.yaml][2] を参照してください。
 2. [Agent を再起動します][3]。
 
-##### 収集データ
+##### ログ収集
 
 1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` ファイルでこれを有効にします。
 
@@ -147,7 +155,7 @@ Etcdチェックは [Datadog Agent][2] パッケージに含まれています�
 | `<INIT_CONFIG>`      | 空白または `{}`                                        |
 | `<INSTANCE_CONFIG>`  | `{"prometheus_url": "http://%%host%%:2379/metrics"}` |
 
-##### 収集データ
+##### ログ収集
 
 Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集][2]を参照してください。
 
@@ -164,23 +172,23 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 
 [Agent の `status` サブコマンドを実行][3]し、Checks セクションで `etcd` を探します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "etcd" >}}
 
 
 Etcd メトリクスは、ノードのステータスに応じて `etcd_state:leader` または `etcd_state:follower` がタグ付けされるため、メトリクスをステータスごとに簡単に集計できます。
 
-### ヘルプ
+### イベント
 
 Etcd チェックには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 {{< get-service-checks-from-git "etcd" >}}
 
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
 

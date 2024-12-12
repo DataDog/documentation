@@ -92,7 +92,7 @@ $http_request.status
 $http_request.responseText
 ```
 
-### ホストへのタグの追加
+### ホストにタグを追加
 
 1. API/アプリキーを自分のものに置き換えます。
 

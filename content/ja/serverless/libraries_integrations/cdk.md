@@ -59,14 +59,14 @@ pip install datadog-cdk-constructs
 
 `Datadog CDK Construct Library` はピアの依存関係があるので、パッケージマネージャーからの出力に注意してください。
 
-## API
+## 使用方法
 
 ### AWS CDK
 
 - _AWS CDK を初めて使うのであれば、こちらの[ワークショップ][14]をご覧ください。_
 - _以下の例では、AWS CDK v2 を使用することを想定しています。CDK v1 を使用している場合は、`datadog-cdk-constructs-v2` ではなく、`datadog-cdk-constructs` をインポートします。_
 
-これを CDK スタックに追加します。
+Add this to your CDK stack:
 
 ```typescript
 import { Datadog } from "datadog-cdk-constructs-v2";
@@ -163,7 +163,7 @@ CDK Stack が初期化されている場所で行うことをお勧めします�
   ```
 </details>
 
-## ブラウザトラブルシューティング
+## 構成
 
 Datadog のコンストラクトをさらに構成するには、以下のカスタムパラメーターを使用します。
 
@@ -195,17 +195,17 @@ _注_: 説明では npm パッケージパラメーターを使用していま�
 | `service` | `service` | `extensionLayerVersion` と共に設定すると、指定した値を持つすべての Lambda 関数に `DD_SERVICE` 環境変数が追加されます。`forwarderArn` と共に設定すると、すべての Lambda 関数に `service` タグが追加され、指定した値が設定されます。 |
 | `version` | `version` | `extensionLayerVersion` と共に設定すると、指定した値を持つすべての Lambda 関数に `DD_VERSION` 環境変数が追加されます。`forwarderArn` と共に設定すると、すべての Lambda 関数に `version` タグが追加され、指定した値が設定されます。 |
 | `tags` | `tags` | 1 つの文字列としての key:value のペアのカンマ区切りのリスト。`extensionLayerVersion` と共に設定すると、すべての Lambda 関数に `DD_TAGS` 環境変数が追加され、指定した値が設定されます。`forwarderArn` と共に指定すると、cdk は文字列をパースして、各 key:value ペアをタグとしてすべての Lambda 関数に設定します。 |
-| `enableColdStartTracing`      | `enable_cold_start_tracing` | コールドスタートトレースを無効にするには、`false` に設定します。Node.js と Python で使用されます。デフォルトは `true` です。 |
+| `enableColdStartTracing`      | `enable_cold_start_tracing` | コールドスタートトレーシングを無効にするには、`false` に設定します。Node.js と Python で使用されます。デフォルトは `true` です。 |
 | `coldStartTraceMinDuration`   | `min_cold_start_trace_duration` | コールドスタートトレースでトレースするモジュールロードイベントの最小継続時間 (ミリ秒) を設定します。数値。デフォルトは `3` です。 |
 | `coldStartTraceSkipLibs`      | `cold_start_trace_skip_libs`| オプションで、カンマで区切られたライブラリのリストに対してコールドスタートスパンの作成をスキップすることができます。深さを制限したり、既知のライブラリをスキップするのに便利です。デフォルトはランタイムに依存します。 |
-| `enableProfiling`             | `enable_profiling` | Datadog Continuous Profiler を `true` で有効にします。Node.js と Python のベータ版でサポートされています。デフォルトは `false` です。 |
+| `enableProfiling`             | `enable_profiling` | `true` で Datadog Continuous Profiler を有効にします。Node.js と Python のベータ版でサポートされています。デフォルトは `false` です。 |
 | `encodeAuthorizerContext`     |`encode_authorizer_context` | Lambda オーサライザーで `true` に設定すると、トレースコンテキストがレスポンスにエンコードされて伝搬されます。Node.js と Python でサポートされています。デフォルトは `true` です。 |
 | `decodeAuthorizerContext`     |`decode_authorizer_context` | Lambda オーサライザーで認可された Lambda に対して `true` を設定すると、エンコードされたトレースコンテキストをパースして使用します (見つかった場合)。Node.js と Python でサポートされています。デフォルトは `true` です。                         |
 | `apmFlushDeadline` | `apm_flush_deadline` | タイムアウトが発生する前にスパンを送信するタイミングをミリ秒単位で決定するために使用されます。AWS Lambda の呼び出しの残り時間が設定された値よりも小さい場合、トレーサーは、現在のアクティブなスパンとすべての終了したスパンの送信を試みます。Node.js と Python でサポートされています。デフォルトは `100` ミリ秒です。 |
 | `redirectHandler` | `redirect_handler` | `false` に設定すると、ハンドラーを Datadog Lambda Library のハンドラーにリダイレクトするのをスキップします。Datadog Lambda 拡張機能のみでインスツルメンテーションを行う場合に便利です。デフォルトは `true` です。 |
 
 **注**: 上記のパラメーターを使用すると、対応する関数レベルの `DD_XXX` 環境変数がオーバーライドされる場合があります。
-### ヘルプ
+### トレーシング
 
 Lambda 関数で X-Ray トレーシングを有効にします。詳しくは、[CDK ドキュメント][9]を参照してください。
 
@@ -283,7 +283,7 @@ class NestedStack extends cdk.NestedStack {
 }
 ```
 
-### Lambda のトレースされた起動の 1 時間単位使用量の取得
+### タグ
 
 コンストラクトにタグを追加します。Datadog のテレメトリーを紐付けるために、`env` タグと `service` タグを設定することをお勧めします。詳しくは [AWS 公式ドキュメント][10]や [CDK ドキュメント][11]を参照してください。
 
@@ -306,7 +306,7 @@ const datadog = new Datadog(this, 'Datadog', {
 
 `addLambdaFunctions` が呼び出されると、Datadog CDK コンストラストは、Lambda 実行ロールに与えられた AWS シークレットへの読み取りアクセスを付与します。これは [AWS ISecret の grantRead 関数][17]を通して行われます。
 
-## UDS の仕組み
+## 仕組み
 
 Datadog CDK コンストラクトは、Lambda 関数のリストを取り込み、関数に [.NET][19]、[Java][15]、[Node.js][2]、および [Python][1] の Lambda Layers をアタッチして、Datadog Lambda Library をインストールするものです。これは、必要なコードの変更なしに Lambda Library を初期化する代替ハンドラーにリダイレクトします。Datadog CDK コンストラクトに追加された構成も、各 Lambda 関数の下でそれぞれの環境変数に変換されます (該当する場合/必要な場合)。
 
@@ -319,15 +319,9 @@ Lambda 関数ベースのロググループは `addLambdaFunctions` メソッド
 - [CDK by AWS の紹介ビデオ (デモ付き)](https://youtu.be/ZWCvNFUN-sU)
 - [CDK コンセプト](https://youtu.be/9As_ZIjUGmY)
 
-## リポジトリの構造
-
-このリポジトリでは、`v1` と `v2` というフォルダが、パッケージ `datadog-cdk-constructs` と `datadog-cdk-contructs-v2` に対応しています。それぞれは独立したプロジェクトとして扱うことができます (依存関係、コンフィギュレーションファイル、テスト、スクリプトを持つ別々の projen プロジェクトです)。
-
-さらに、`v1` と `v2` の両パッケージに共通する共有ロジックを格納した `common` フォルダも用意されています。これは、`v1/src` と `v2/src` 内の `common` フォルダを、リポジトリのルートにある `common` フォルダにソフトリンクすることによって行われます。
-
 ## Projen の使用
 
-Datadog CDK コンストラクトライブラリの `v1` と `v2` は共に、`package.json`、`.gitignore`、`.npmignore` などのプロジェクトコンフィギュレーションファイルを管理するために Projen を使用しています。ほとんどのコンフィギュレーションファイルは、Projen によって読み取り専用権限で保護されています。これらのファイルを変更するには、 `v1` または `v2` フォルダ内の `.projenrc.js` ファイルを編集して、`npx projen` (`v1` または `v2` 内) を実行して新しい変更を反映させます。詳しくは、[Projen][13] をチェックしてください。
+Datadog CDK コンストラクトライブラリは、`package.json`、`.gitignore`、`.npmignore` などのプロジェクトコンフィギュレーションファイルを管理するために Projen を使用しています。ほとんどのコンフィギュレーションファイルは、Projen によって読み取り専用権限で保護されています。これらのファイルを変更するには、`.projenrc.js` ファイルを編集して、`npx projen` を実行して新しい変更を反映させます。詳しくは、[Projen][13] をチェックしてください。
 
 ## 問題を開く
 
@@ -343,12 +337,12 @@ Datadog CDK コンストラクトライブラリの `v1` と `v2` は共に、`p
 
 ## テスト
 
-このパッケージに貢献した場合、`v1` または `v2` フォルダ内の `yarn test` を使ってテストを実行することができます。このパッケージには、手動テスト用のサンプルアプリケーションも含まれています。
+このパッケージに貢献した場合、`yarn test` を使ってテストを実行することができます。このパッケージには、手動テスト用のサンプルアプリケーションも含まれています。
 
-1. 別のターミナルを開き、`v1` または `v2` に `cd` します。
+1. 別のターミナルを開きます。
 2. `yarn watch` を実行すると、`src` ディレクトリにある Typescript ファイルが、`lib` ディレクトリにある Javascript にコンパイルされることを確認できます。
 3. `src/sample` に移動し、ここで `index.ts` を編集して、手動で貢献をテストすることができます。
-4. `v1` または `v2` ディレクトリのルートで、`npx cdk --app lib/sample/index.js <CDK Command>` を実行します。`<CDK Command>` は `synth`、`diff`、`deploy` などの一般的な CDK コマンドに置き換えてください。
+4. root ディレクトリで、`npx cdk --app lib/sample/index.js <CDK Command>` を実行します。`<CDK Command>` は `synth`、`diff`、`deploy` などの一般的な CDK コマンドに置き換えてください。
 
 - なお、"... is not authorized to perform: …” (...は実行する権限がありません: …) と表示された場合は、AWS の認証情報でコマンドを認証する必要がある場合もあります。
 
@@ -357,13 +351,13 @@ Datadog CDK コンストラクトライブラリの `v1` と `v2` は共に、`p
 このライブラリのデバッグログを表示するには、`cdk synth` を実行するときに `DD_CONSTRUCT_DEBUG_LOGS` 環境変数を `true` に設定します (生成されたテンプレートの出力を抑制するには `--quiet` を使用します)。
 
 例:
-_`v1` または `v2` ディレクトリのルートにいることを確認します_
+_root ディレクトリにいることを確認します_
 
 ```
 DD_CONSTRUCT_DEBUG_LOGS=true npx cdk --app lib/sample/index.js synth --quiet
 ```
 
-## ヘルプ
+## コミュニティ
 
 製品のフィードバックや質問については、[Slack の Datadog コミュニティ](https://chat.datadoghq.com/)の `#serverless` チャンネルに参加してください。
 

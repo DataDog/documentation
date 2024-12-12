@@ -64,7 +64,11 @@ Event
 : **Value**: click
 
 Reaction
-: **Values**: custom, set component state, trigger query, open modal, close modal, open url, download file
+: **Values**: custom, set component state, trigger query, open modal, close modal, open url, download file, set state variable value
+
+State Function
+: fetch<br>
+**Example**: See [events][9].
 
 For more information on events, see [Events][1].
 
@@ -176,7 +180,11 @@ Event
 : **Value**: change<br>
 
 Reaction
-: **Values**: custom, set component state, trigger query, open modal, close modal, download file
+: **Values**: custom, set component state, trigger query, open modal, close modal, download file, set state variable value
+
+State Function
+: fetch<br>
+**Example**: See [events][9].
 
 For more information on events, see [Events][1].
 
@@ -211,6 +219,36 @@ To view this component in context, see the [Metrics Explorer & Monitors Builder]
 
 
 
+{{% collapse-content title="Custom chart" level="h3" %}}
+Custom chart components have the following properties.
+
+### General
+
+Vega Specification
+: A string representing a valid Vega-Lite or Vega JSON specification.
+
+### Appearance
+
+Is Loading
+: Shows a loading indicator.<br>
+**Provided values**: on, off
+
+Is Visible
+: Determines whether the component is visible to the end-user. In edit mode, all components remain visible.<br>
+**Provided values**: on, off
+
+### Inspect data
+
+Displays property and value pairs in JSON format.
+
+### Example
+
+For an example showing how to use this component, see [Custom charts][10].
+
+{{% /collapse-content %}}
+
+
+
 {{% collapse-content title="Date range picker" level="h3" %}}
 Date range picker components have the following properties.
 
@@ -234,6 +272,10 @@ Event
 Reaction
 : **Values**: custom, set component state, trigger query, open modal, close modal, download file
 
+State Function
+: fetch<br>
+**Example**: See [events][9].
+
 For more information on events, see [Events][1].
 
 ### Inspect data
@@ -245,6 +287,41 @@ Displays property and value pairs in JSON format.
 To view this component in context, see the [Metrics Explorer & Monitors Builder][2] app blueprint.
 {{% /collapse-content %}}
 
+
+{{% collapse-content title="File input" level="h3" %}}
+File input components have the following properties.
+
+### General
+
+Accepted File Types
+: Determines which file types the file input component accepts.<br>
+**Values**: .csv, .json
+
+### Appearance
+
+Is Visible
+: Determines whether the component is visible to the end-user. In edit mode, all components remain visible.<br>
+**Provided values**: on, off
+
+### Events
+
+Event
+: **Value**: change
+
+Reaction
+: **Values**: custom, set component state, trigger query, open modal, close modal, download file, set state variable value
+
+State Function
+: fetch<br>
+**Example**: See [events][9].
+
+For more information on events, see [Events][1].
+
+### Inspect data
+
+Displays property and value pairs in JSON format.
+
+{{% /collapse-content %}}
 
 
 {{% collapse-content title="JSON input" level="h3" %}}
@@ -274,7 +351,11 @@ Event
 : **Value**: change
 
 Reaction
-: **Values**: custom, set component state, trigger query, open modal, close modal, download file
+: **Values**: custom, set component state, trigger query, open modal, close modal, download file, set state variable value
+
+State Function
+: fetch<br>
+**Example**: See [events][9].
 
 For more information on events, see [Events][1].
 
@@ -310,7 +391,13 @@ Event
 : **Values**: toggleOpen, close, open
 
 Reaction
-: **Values**: custom, set component state, trigger query, open modal, close modal, download file
+: **Values**: custom, set component state, trigger query, open modal, close modal, download file, set state variable value
+
+State Functions
+: fetch<br>
+**Example**: See [events][9].
+: setIsOpen<br>
+**Example**: `modal0.setIsOpen(true)` sets the state of `modal0` to open.
 
 For more information on events, see [Events][1].
 
@@ -366,7 +453,13 @@ Event
 : **Value**: change
 
 Reaction
-: **Values**: custom, set component state, trigger query, open modal, close modal, download file
+: **Values**: custom, set component state, trigger query, open modal, close modal, download file, set state variable value
+
+State Functions
+: fetch<br>
+**Example**: See [events][9].
+: setValue<br>
+**Example**: `numberInput0.setValue(3)` sets the value of the `numberInput0` component to `3`.
 
 For more information on events, see [Events][1].
 
@@ -428,7 +521,13 @@ Event
 : **Value**: change
 
 Reaction
-: **Values**: custom, set component state, trigger query, open modal, close modal, download file
+: **Values**: custom, set component state, trigger query, open modal, close modal, download file, set state variable value
+
+State Functions
+: fetch<br>
+**Example**: See [events][9].
+: setValue<br>
+**Example**: `radioButtons0.setValue("production")` sets the value of the `radioButtons0` component to `"production"`.
 
 For more information on events, see [Events][1].
 
@@ -472,7 +571,13 @@ Event
 : **Values**: change, submit
 
 Reaction
-: **Values**: custom, set component state, trigger query, open modal, close modal, download file
+: **Values**: custom, set component state, trigger query, open modal, close modal, download file, set state variable value
+
+State Functions
+: fetch<br>
+**Example**: See [events][9].
+: setValue<br>
+**Example**: `search0.setValue("search query")` sets the value of the `search0` component to `"search query"`.
 
 For more information on events, see [Events][1].
 
@@ -541,7 +646,13 @@ Event
 : **Value**: change
 
 Reaction
-: **Values**: custom, set component state, trigger query, open modal, close modal, download file
+: **Values**: custom, set component state, trigger query, open modal, close modal, download file, set state variable value
+
+State Functions
+: fetch<br>
+**Example**: See [events][9].
+: setValue<br>
+**Example**: `select0.setValue("staging")` sets the value of the `select0` component to `"staging"`.
 
 For more information on events, see [Events][1].
 
@@ -555,6 +666,64 @@ To view this component in context, see the [Metrics Explorer & Monitors Builder]
 {{% /collapse-content %}}
 
 
+{{% collapse-content title="Tab" level="h3" %}}
+Tab components have the following properties.
+
+### Tabs
+
+A list of tab views. Use the **+ (plus)** to add additional views.
+
+
+### Style
+
+Style
+: The coloring style used for the tab component.<br>
+**Provided values**: Default, purple, pink, orange, red, green
+
+Alignment
+: The way the tabs are aligned within the tab component.<br>
+**Provided values**: Horizontal (→), vertical (↓)
+
+Impact
+: Controls whether the selected tab's background is fully colored or only a small band at the bottom is colored.<br>
+**Provided values**: High, low
+
+
+### Appearance
+
+Hide Tabs
+: Controls whether the tab markers are displayed.<br>
+**Provided values**: on, off
+
+Hide Body
+: Controls whether the body of the tabs are displayed.<br>
+**Provided values**: on, off
+
+Is Visible
+: Determines whether the component is visible to the end-user. In edit mode, all components remain visible.<br>
+**Provided values**: on, off
+
+### Events
+
+Event
+: **Value**: change
+
+Reaction
+: **Values**: custom, set component state, trigger query, open modal, close modal, download file, set state variable value
+
+State Functions
+: fetch<br>
+**Example**: See [events][9].
+: setTabIndex<br>
+**Example**: `tab0.setTabIndex(0)` sets the value of the `tab0` component to the first tab.
+
+For more information on events, see [Events][1].
+
+### Inspect data
+
+Displays property and value pairs in JSON format.
+
+{{% /collapse-content %}}
 
 {{% collapse-content title="Table" level="h3" %}}
 Table components have the following properties.
@@ -633,6 +802,10 @@ Reaction
 : The reaction type the button triggers.
 **Values**: custom, set component state, trigger query, open modal, close modal, open url, download file
 
+State Function
+: fetch<br>
+**Example**: See [events][9].
+
 ### Appearance
 
 Is Loading
@@ -657,7 +830,15 @@ Event
 : **Values**: pageChange, tableRowClick
 
 Reaction
-: **Values**: custom, set component state, trigger query, open modal, close modal, download file
+: **Values**: custom, set component state, trigger query, open modal, close modal, download file, set state variable value
+
+State Functions
+: fetch<br>
+**Example**: See [events][9].
+: setSelectedRow<br>
+**Examples**: <ul><li>`table0.setSelectedRow(0)` sets the `selectedRow` property of `table0` to the first row.</li><li>`table0.setSelectedRow(null)` clears the `selectedRow` property.</li></ul>
+: setPageIndex<br>
+**Example**: `table0.setPageIndex(0)` sets the `pageIndex` property of `table0` to the first page.
 
 For more information on events, see [Events][1].
 
@@ -712,6 +893,52 @@ To view this component in context, see the [Metrics Explorer & Monitors Builder]
 {{% /collapse-content %}}
 
 
+{{% collapse-content title="Text area" level="h3" %}}
+Text area components have the following properties.
+
+Label
+: The text that displays at the top of the component.<br>
+**Value**: string or expression
+
+Default value
+: The value that is selected when the text area loads.<br>
+**Value**: string or expression
+
+Placeholder text
+: The text that displays when no value is entered.<br>
+**Value**: string or expression
+
+### Appearance
+
+Is Disabled
+: Applies disabled styling and removes interactions.<br>
+**Provided values**: on, off
+
+Is Visible
+: Determines whether the component is visible to the end-user. In edit mode, all components remain visible.<br>
+**Provided values**: on, off
+
+### Events
+
+Event
+: **Values**: change, submit
+
+Reaction
+: **Values**: custom, set component state, trigger query, open modal, close modal, download file, set state variable value
+
+State Functions
+: fetch<br>
+**Example**: See [events][9].
+: setValue<br>
+**Example**: `textArea0.setValue("text")` sets the value of the `textArea0` component to `"text"`.
+
+For more information on events, see [Events][1].
+
+### Inspect data
+
+Displays property and value pairs in JSON format.
+{{% /collapse-content %}}
+
 
 {{% collapse-content title="Text input" level="h3" %}}
 Text input components have the following properties.
@@ -744,7 +971,13 @@ Event
 : **Values**: change, submit
 
 Reaction
-: **Values**: custom, set component state, trigger query, open modal, close modal, download file
+: **Values**: custom, set component state, trigger query, open modal, close modal, download file, set state variable value
+
+State Functions
+: fetch<br>
+**Example**: See [events][9].
+: setValue<br>
+**Example**: `textInput0.setValue("text")` sets the value of the `textInput0` component to `"text"`.
 
 For more information on events, see [Events][1].
 
@@ -765,7 +998,7 @@ To view this component in context, see the [Metrics Explorer & Monitors Builder]
 <br>Do you have questions or feedback? Join the **#app-builder** channel on the [Datadog Community Slack][5].
 
 
-[1]: /service_management/app_builder/build/#events
+[1]: /service_management/app_builder/events
 [2]: https://app.datadoghq.com/app-builder/apps/edit?activeTab=queries&showActionCatalog=false&template=datadog_metrics_and_monitors&viewMode=preview
 [3]: https://app.datadoghq.com/app-builder/apps/edit?activeTab=queries&showActionCatalog=false&template=ec2_instance_manager&viewMode=preview
 [4]: https://app.datadoghq.com/app-builder/apps/edit?activeTab=queries&showActionCatalog=false&template=ecs_task_manager&viewMode=preview
@@ -773,3 +1006,5 @@ To view this component in context, see the [Metrics Explorer & Monitors Builder]
 [6]: /service_management/app_builder/components/tables/
 [7]: /service_management/app_builder/expressions
 [8]: https://www.markdownguide.org/basic-syntax/
+[9]: /service_management/app_builder/events/#state-functions
+[10]: /service_management/app_builder/components/custom_charts/

@@ -3,13 +3,14 @@ title: AWS Fargate Configuration Guide for Datadog Security
 disable_toc: false
 aliases:
   - /security/cloud_security_management/setup/fargate
+  - /security/cloud_security_management/setup/serverless
 further_reading:
 - link: "https://www.datadoghq.com/blog/threat-detection-fargate/"
   tag: "Blog"
   text: "Get real-time threat detection for AWS Fargate ECS and EKS environments with Datadog CSM"
 ---
 
-This guide walks you through configuring [Cloud Security Management (CSM)][3], [Application Security Management (ASM)][4], and [Cloud SIEM][5] on AWS Fargate.
+This guide walks you through configuring [Cloud Security Management (CSM)][3], [Software Composition Analysis (SCA)][22], [Threat Detection and Protection (ASM)][4], and [Cloud SIEM][5] on AWS Fargate.
 
 {{< img src="security/datadog_security_coverage_aws_fargate.png" alt="Flow chart showing how CSM, ASM, and Cloud SIEM are configured on AWS Fargate" width="90%">}}
 
@@ -31,8 +32,8 @@ Datadog Security provides multiple layers of visibility for AWS Fargate. Use the
     <tr>
         <td>Fargate Application</td>
         <td>Application Performance Monitoring</td>
-        <td>Application Security Management</td>
-        <td>Application Security Management</td>
+        <td>Software Composition Analysis (SCA) and Code Security</td>
+        <td>ASM - Threat Detection and Protection</td>
     </tr>
     <tr>
         <td>Fargate Infrastructure</td>
@@ -334,7 +335,7 @@ spec:
 
 ### Verify that the Agent is sending events to CSM
 
-When you enable CSM on AWS Fargate ECS or EKS, the Agent sends a log to Datadog to confirm that the default ruleset has been successfully deployed. To view the log, navigate to the [Logs][9] page in Datadog and search for `@agent.rule_id:ruleset_loaded`.
+When you enable CSM on AWS Fargate ECS or EKS, the Agent sends an agent event to Datadog to confirm that the default ruleset has been successfully deployed. To view the agent event, navigate to the [Agent Events][9] page in Datadog and search for `@agent.rule_id:ruleset_loaded`.
 
 <div class="alert alert-info">You can also verify the Agent is sending events to CSM by manually triggering an AWS Fargate security signal.</div>
 
@@ -354,7 +355,7 @@ In the task definition, replace the "workload" container with the following:
             ],
 {{< /code-block >}}
 
-## Application Security Management
+## Application Security
 
 ### Prerequisites
 
@@ -364,6 +365,9 @@ In the task definition, replace the "workload" container with the following:
 <div class="alert alert-info"> For additional performance and reliability insights, Datadog recommends enabling Application Performance Monitoring with Application Security Management.</div>
 
 ### Installation
+
+#### Software Composition Analysis (SCA)
+[Software Composition Analysis (SCA)][22] works in Fargate. Follow the [installation steps for applications that run in traditional hosts][23].
 
 #### Threat Detection and Protection
 
@@ -414,16 +418,18 @@ For step-by-step instructions, see [AWS Configuration Guide for Cloud SIEM][17].
 [6]: /integrations/eks_fargate/?tab=manual#aws-eks-fargate-rbac
 [7]: /resources/json/datadog-agent-cws-ecs-fargate.json
 [8]: /integrations/faq/integration-setup-ecs-fargate/?tab=rediswebui
-[9]: https://app.datadoghq.com/logs
-[10]: /security/application_security/enabling/tracing_libraries/threat_detection/java?tab=awsfargate
-[11]: /security/application_security/enabling/tracing_libraries/threat_detection/go/?tab=amazonecs
-[12]: /security/application_security/enabling/tracing_libraries/threat_detection/dotnet?tab=awsfargate
-[13]: /security/application_security/enabling/tracing_libraries/threat_detection/ruby?tab=awsfargate
-[14]: /security/application_security/enabling/tracing_libraries/threat_detection/nodejs?tab=awsfargate
-[15]: /security/application_security/enabling/tracing_libraries/threat_detection/python?tab=awsfargate
-[16]: /security/application_security/enabling/compatibility/
+[9]: https://app.datadoghq.com/security/agent-events
+[10]: /security/application_security/threats/setup/threat_detection/java/?tab=awsfargate
+[11]: /security/application_security/threats/setup/threat_detection/java/?tab=amazonecs
+[12]: /security/application_security/threats/setup/threat_detection/dotnet?tab=awsfargate
+[13]: /security/application_security/threats/setup/threat_detection/ruby?tab=awsfargate
+[14]: /security/application_security/threats/setup/threat_detection/nodejs?tab=awsfargate
+[15]: /security/application_security/threats/setup/threat_detection/python?tab=awsfargate
+[16]: /security/application_security/
 [17]: /security/cloud_siem/guide/aws-config-guide-for-cloud-siem/
-[18]: /security/application_security/enabling/tracing_libraries/code_security/java/
-[19]: /security/application_security/enabling/tracing_libraries/code_security/dotnet?tab=awsfargate
-[20]: /security/application_security/enabling/tracing_libraries/code_security/nodejs
+[18]: /security/application_security/code_security/setup/java/
+[19]: /security/application_security/code_security/setup/dotnet/
+[20]: /security/application_security/code_security/setup/nodejs/
 [21]: https://app.datadoghq.com/security/configuration/siem/setup
+[22]: /security/application_security/software_composition_analysis/
+[23]: /security/application_security/software_composition_analysis/setup/

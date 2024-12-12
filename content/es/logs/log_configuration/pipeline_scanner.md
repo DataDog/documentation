@@ -11,7 +11,6 @@ further_reading:
 - link: /logs/log_configuration/processors/
   tag: Documentación
   text: Obtener más información sobre los procesadores de logs
-kind: documentación
 title: Analizador de pipelines
 ---
 

@@ -11,6 +11,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/app-builder-remediation/"
   tag: "Blog"
   text: "Remediate apps built using Datadog App Builder"
+- link: "https://www.datadoghq.com/blog/ai-assistant-workflows-apps/"
+  tag: "Blog"
+  text: "Build Datadog workflows and apps in minutes with our AI assistant"
 ---
 
 {{< site-region region="gov" >}}
@@ -47,6 +50,24 @@ You can use your apps from the Apps page or [access them directly from within yo
 
 {{< img src="/service_management/app_builder/app-builder-embedded-dashboard.png" alt="An app embedded in a dashboard" style="width:100%;" >}}
 
+### Apps created by Datadog
+
+Apps created by Datadog are apps that are embedded in Integration dashboards. They work without having to build them; all you need to do is choose a connection.
+
+For example, the [EC2 integration dashboard][7] offers an EC2 instance management app. When you load the dashboard, the app is populated with demo data:
+
+{{< img src="/service_management/app_builder/ootb-app-ec2-demo-data.png" alt="EC2 app created by Datadog, populated with demo data" style="width:100%;" >}}
+
+To use the app with your data, click **+ Connect Data**, then either create a new connection or select an existing one. After you save your selection, the app displays data from your connection.
+
+You can change the selected connection by clicking **Change Connection** in the app.
+
+## App Builder Overview dashboard
+
+The App Builder Overview dashboard provides a high-level overview of your Datadog apps. To find the dashboard, go to your [Dashboard list][3] and search for `App Builder Overview`.
+
+{{< img src="service_management/app_builder/app-builder-dashboard.png" alt="The App Builder Overview dashboard" style="width:100%;" >}}
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -59,3 +80,4 @@ You can use your apps from the Apps page or [access them directly from within yo
 [4]: https://datadoghq.slack.com/
 [5]: /service_management/app_builder/build/#build-an-app-from-a-blueprint
 [6]: /service_management/app_builder/embedded_apps/#add-apps-to-your-dashboard
+[7]: https://app.datadoghq.com/dash/integration/60

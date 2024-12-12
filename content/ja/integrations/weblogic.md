@@ -21,11 +21,13 @@ assets:
       metadata_path: assets/service_checks.json
     source_type_id: 10245
     source_type_name: WebLogic
-  logs:
-    source: weblogic
   monitors:
-    active_threads: assets/monitors/active_threads.json
-    stuck_threads: assets/monitors/stuck_threads.json
+    Number of active thread is high: assets/monitors/active_threads.json
+    Number of stuck thread is high: assets/monitors/stuck_threads.json
+  saved_views:
+    weblogic_error_logs: assets/saved_views/error_logs.json
+    weblogic_overview: assets/saved_views/weblogic_overview.json
+    weblogic_patterns: assets/saved_views/weblogic_patterns.json
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
@@ -34,6 +36,7 @@ author:
 categories:
 - ログの収集
 - oracle
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/weblogic/README.md
 display_on_public_website: true
@@ -41,9 +44,8 @@ draft: false
 git_integration_title: weblogic
 integration_id: weblogic
 integration_title: WebLogic
-integration_version: 1.3.0
+integration_version: 3.0.0
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: weblogic
 public_title: WebLogic
@@ -60,6 +62,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: WebLogic サーバーの健全性とパフォーマンスを監視します。
   media: []
@@ -82,16 +85,16 @@ Datadog による Oracle WebLogic のモニタリングでは、以下のこと�
 - スレッドプールとメッセージングサービスを追跡する
 - データベース接続プールの使用量を追跡する
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 WebLogic チェックは [Datadog Agent][1] パッケージに含まれています。
 サーバーに追加でインストールする必要はありません。
 
 1. このチェックは JMX ベースで、JVM によりエキスポートされた プラットフォーム MBean サーバーからメトリクスを収集するため、WebLogic サーバーで JMX リモートモニタリングが有効になっている必要があります。インストール手順については、[リモートモニタリングおよび管理][2]を参照してください。
 
-2. システムプロパティ `-Djavax.management.builder.initial=weblogic.management.jmx.mbeanserver.WLSMBeanServerBuilder` を設定し、これらのメトリクスをプラットフォーム MBean サーバーで有効にします。これは、WebLogic サーバー管理コンソールまたはサーバー起動スクリプトのいずれかで有効にできます。
+2. システムプロパティ `-Djavax.management.builder.initial=weblogic.management.jmx.mbeanserver.WLSMBeanServerBuilder` を設定し、これらのメトリクスをプラットフォーム MBean サーバーで有効にします。これは、WebLogic サーバー管理コンソールとサーバー起動スクリプトの両方で有効にする必要があります。**注**: これは複数回行うことが可能であり、また複数回行うべきです。
 
 
    _**管理コンソールで有効化**_
@@ -135,7 +138,7 @@ WebLogic チェックは [Datadog Agent][1] パッケージに含まれていま
 
    変更をアクティブにして、WebLogic サーバーを再起動します。
 
-### ブラウザトラブルシューティング
+### 構成
 
 1. Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `weblogic.d/conf.yaml` ファイルを編集して、
    WebLogic パフォーマンスデータの収集を開始します。 
@@ -153,13 +156,13 @@ WebLogic チェックは [Datadog Agent][1] パッケージに含まれていま
 
 [Agent の `status` サブコマンドを実行][6]し、Checks セクションで `weblogic` を探します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "weblogic" >}}
 
 
-### 収集データ
+### ログ収集
 
 1. WebLogic ロギングサービスは、Java ロギング API に基づく実装をデフォルトで使用します。別のフォーマットを使用する場合は、[インテグレーションパイプライン][11]のクローンを作成し編集します。
 
@@ -208,17 +211,17 @@ WebLogic チェックは [Datadog Agent][1] パッケージに含まれていま
 ### コンテナ化
 コンテナ環境の場合は、[JMX を使用したオートディスカバリー][12]のガイドを参照してください。
 
-### ヘルプ
+### イベント
 
 WebLogic インテグレーションには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 {{< get-service-checks-from-git "weblogic" >}}
 
 
-## ヘルプ
+## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][8]までお問い合わせください。
 
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest

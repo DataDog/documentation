@@ -1,8 +1,6 @@
 ---
 title: Troubleshooting Flutter SDK issues
 description: Learn how to troubleshoot issues with Flutter Monitoring.
-aliases:
-    - /real_user_monitoring/mobile_and_tv_monitoring/troubleshooting/
 code_lang: flutter
 type: multi-code-lang
 code_lang_weight: 30
@@ -91,7 +89,7 @@ final configuration = DdSdkConfiguration(
    //
    rumConfiguration: DatadogRumConfiguration(
     applicationId: '<RUM_APPLICATION_ID>',
-    tracingSamplingRate: 100.0
+    traceSampleRate: 100.0
    ),
 );
 ```
@@ -101,13 +99,9 @@ If you are still having issues, check that your `firstPartyHosts` property is se
     ✅ Good - 'example.com', 'api.example.com', 'us1.api.sample.com'
     ❌ Bad - 'https://example.com', '*.example.com', 'us1.sample.com/api/*', 'api.sample.com/api'
 
-## Sending data when device is offline
+## "Deobfuscation failed" warning
 
-RUM ensures availability of data when your user device is offline. In cases of low-network areas, or when the device battery is too low, all RUM events are first stored on the local device in batches. They are sent as soon as the network is available, and the battery is high enough to ensure the Flutter RUM SDK does not impact the end user's experience. If the network is not available with your application running in the foreground, or if an upload of data fails, the batch is kept until it can be sent successfully.
-
-This means that even if users open your application while offline, no data is lost.
-
-**Note**: The data on the disk is automatically deleted if it gets too old to ensure the Flutter RUM SDK does not use too much disk space.
+A warning appears when deobfuscation fails for a stack trace. If the stack trace is not obfuscated to begin with, you can ignore this warning. Otherwise, use the [RUM Debug Symbols page][6] to view all your uploaded symbol files, dSYMs, and mapping files. See [Investigate Obfuscated Stack Traces with RUM Debug Symbols][7].
 
 ## Further Reading
 
@@ -118,3 +112,5 @@ This means that even if users open your application while offline, no data is lo
 [3]: https://pub.dev/packages/datadog_tracking_http_client
 [4]: https://pub.dev/packages/http
 [5]: https://pub.dev/packages/dio
+[6]: https://app.datadoghq.com/source-code/setup/rum
+[7]: /real_user_monitoring/guide/debug-symbols

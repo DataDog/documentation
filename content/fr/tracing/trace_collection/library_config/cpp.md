@@ -2,8 +2,8 @@
 code_lang: cpp
 code_lang_weight: 50
 further_reading:
-- link: https://github.com/DataDog/dd-opentracing-cpp
-  tag: Github
+- link: https://github.com/DataDog/dd-trace-cpp
+  tag: Code source
   text: Code source
 - link: /tracing/glossary/
   tag: Documentation
@@ -11,7 +11,7 @@ further_reading:
 - link: /tracing/trace_collection/trace_context_propagation/cpp/
   tag: Documentation
   text: Propager le contexte de traces
-title: Configurer la bibliothèque de traçage C++
+title: Configurer la bibliothèque de tracing C++
 type: multi-code-lang
 ---
 
@@ -22,36 +22,36 @@ Il est conseillé d'utiliser `DD_SERVICE`, `DD_ENV` et `DD_VERSION` pour défini
 ## Variables d'environnement
 Pour configurer le traceur à l'aide de variables d'environnement, définissez-les avant le lancement de l'application instrumentée.
 
-`DD_SERVICE` 
+`DD_SERVICE`
 : **Depuis** : v0.1.0 <br>
 Définit le nom de service.
 
 `DD_ENV`
 : **Depuis** : v0.1.0 <br>
-**Exemple** : `prod`, `pre-prod` ou `staging` <br> 
+**Exemple** : `prod`, `pre-prod` ou `staging` <br>
 Ajoute le tag `env` avec la valeur spécifiée à toutes les spans générées.
 
-`DD_VERSION` 
+`DD_VERSION`
 : **Depuis** : v0.1.0 <br>
 **Exemple** : `1.2.3`, `6c44da20`, `2020.02.13` <br>
 Définit la version du service.
 
-`DD_TAGS` 
+`DD_TAGS`
 : **Depuis** : v0.1.0 <br>
 **Exemple** : `team:intake,layer:api,foo:bar` <br>
 Un liste séparée par des virgules de paires `key:value` à ajouter à toutes les spans générées.
 
-`DD_AGENT_HOST` 
+`DD_AGENT_HOST`
 : **Depuis** : v0.1.0 <br>
 **Valeur par défaut** : `localhost` <br>
 Définit le host vers lequel les traces sont envoyées (le host qui exécute l'Agent). Il peut s'agir d'un hostname ou d'une adresse IP. Ce paramètre est ignoré si `DD_TRACE_AGENT_URL` est défini.
 
-`DD_TRACE_AGENT_PORT` 
+`DD_TRACE_AGENT_PORT`
 : **Depuis** : v0.1.0 <br>
 **Valeur par défaut** : `8126` <br>
 Définit le port sur lequel les traces sont envoyées (le port sur lequel lʼAgent détecte les connexions). Ignoré si `DD_TRACE_AGENT_URL` est défini. Si la [configuration de lʼAgent][3] définit `receiver_port` ou `DD_APM_RECEIVER_PORT` sur une valeur autre que la valeur par défaut `8126`, alors `DD_TRACE_AGENT_PORT` ou `DD_TRACE_AGENT_URL` doit correspondre à cette valeur.
 
-`DD_TRACE_AGENT_URL` 
+`DD_TRACE_AGENT_URL`
 : **Depuis** : v0.1.0 <br>
 **Valeur par défaut** : `http://<DD_AGENT_HOST>:<DD_TRACE_AGENT_PORT>` si définis, ou `http://localhost:8126`.
 **Exemples** : <br>
@@ -70,7 +70,7 @@ Nombre maximum dʼenvoi de traces autorisé par seconde.
 **Valeur par défaut** : Le taux par défaut de lʼAgent Datadog ou `1.0`. <br>
 Définit le taux d'échantillonnage pour toutes les traces générées. La valeur doit être comprise entre `0.0` et `1.0` (inclus). Par défaut, le taux d'échantillonnage est délégué à lʼAgent Datadog. Si aucun taux d'échantillonnage n'est défini par lʼAgent Datadog, la valeur par défaut est `1.0`.
 
-`DD_TRACE_SAMPLING_RULES` 
+`DD_TRACE_SAMPLING_RULES`
 : **Depuis** : v0.1.0 <br>
 **Valeur par défaut** : `null` <br>
 **Exemples :**<br>
@@ -93,14 +93,14 @@ Dirige vers un fichier JSON qui contient les règles d'échantillonnage de la sp
 Liste séparée par des virgules des styles de propagation à utiliser lors de l'extraction et de l'injection du contexte de tracing. <br>
 Lorsque plusieurs valeurs sont données, l'ordre de la correspondance est basé sur l'ordre des valeurs.
 
-`DD_TRACE_PROPAGATION_STYLE_INJECT` 
+`DD_TRACE_PROPAGATION_STYLE_INJECT`
 : **Depuis** : v0.1.6 <br>
 **Valeur par défaut** : `datadog,tracecontext` <br>
 **Valeurs acceptées** : `datadog`, `tracecontext`, `b3` <br>
 Liste séparée par des virgules des styles de propagation à utiliser lors de l'injection du contexte de tracing.
 Lorsque plusieurs valeurs sont données, l'ordre de la correspondance est basé sur l'ordre des valeurs.
 
-`DD_TRACE_PROPAGATION_STYLE_EXTRACT` 
+`DD_TRACE_PROPAGATION_STYLE_EXTRACT`
 : **Depuis** : v0.1.6 <br>
 **Valeur par défaut** : `datadog,tracecontext` <br>
 **Valeurs acceptées** : `datadog`, `tracecontext`, `b3` <br>
@@ -143,8 +143,8 @@ Pour obtenir plus d'informations, consultez la section [Configuration à distanc
 
 `DD_REMOTE_CONFIG_POLL_INTERVAL_SECONDS`
 : **Depuis** : 0.2.0 <br>
-**Valeur par défaut** : `5` <br>
-Définit la fréquence, en secondes, à laquelle lʼAgent Datadog est interrogé sur les mises à jour de la configuration à distance.
+**Valeur par défaut** : `5.0` <br>
+Définit la fréquence, en secondes, à laquelle lʼAgent Datadog reçoit les demandes de mise à jour de la configuration à distance.
 
 `DD_TRACE_DELEGATE_SAMPLING`
 : **Version** : 0.2.0 <br>

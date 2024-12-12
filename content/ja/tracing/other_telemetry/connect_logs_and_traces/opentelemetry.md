@@ -9,7 +9,7 @@ further_reading:
   tag: ドキュメント
   text: OpenTelemetry トレースを Datadog へ送信
 - link: tracing/glossary/
-  tag: OpenTelemetry
+  tag: 外部サイト
   text: Collectorドキュメント
 - link: https://www.datadoghq.com/blog/opentelemetry-instrumentation/
   tag: GitHub
@@ -17,7 +17,7 @@ further_reading:
 - link: /logs/guide/ease-troubleshooting-with-cross-product-correlation/
   tag: ガイド
   text: クロスプロダクト相関で容易にトラブルシューティング。
-title: OpenTelemetry トレースとログに接続
+title: Correlating OpenTelemetry Traces and Logs
 type: multi-code-lang
 ---
 
@@ -25,9 +25,7 @@ OpenTelemetry 言語の SDK ログおよびトレースの Datadog 内での接�
 
 1. OpenTelemetry `TraceId` および `SpanId` プロパティは、Datadog のルールセットと異なります。そのため、`TraceId` と `SpanId` を OpenTelemetry の形式 ([符号なし 128bit 整数および符号なし 64bit 整数は、それぞれ 32 Hex 文字列および 16 Hex 文字列 (小文字)][2]) を Datadog 形式 ([符号なし 64bit 整数][3]) に変換する必要があります。
 
-2. 自動挿入
-
-3. トレースとログの相関が機能するには、言語レベルログが Datadog 属性に変換される必要があるため、ログが JSON として送信されていることを確認します。
+2. トレースとログの相関が機能するには、言語レベルログが Datadog 属性に変換される必要があるため、ログが JSON として送信されていることを確認します。
 
 特定の言語における OpenTelemetry トレースおよびログの相関方法について、詳しくは以下の例を参照してください。
 
@@ -42,22 +40,25 @@ from opentelemetry import trace
 
 class CustomDatadogLogProcessor(object):
     def __call__(self, logger, method_name, event_dict):
-        # Datadog 形式のトレースコンテキストのログへの追加例
-        # from: https://github.com/open-telemetry/opentelemetry-python-contrib/blob/b53b9a012f76c4fc883c3c245fddc29142706d0d/exporter/opentelemetry-exporter-datadog/src/opentelemetry/exporter/datadog/propagator.py#L122-L129 
+        # An example of adding datadog formatted trace context to logs
+        # from: https://github.com/open-telemetry/opentelemetry-python-contrib/blob/b53b9a012f76c4fc883c3c245fddc29142706d0d/exporter/opentelemetry-exporter-datadog/src/opentelemetry/exporter/datadog/propagator.py#L122-L129
         current_span = trace.get_current_span()
+        if not current_span.is_recording():
+            return event_dict
 
-        if current_span is not None:
-            event_dict['dd.trace_id'] = str(current_span.context.trace_id & 0xFFFFFFFFFFFFFFFF)
-            event_dict['dd.span_id'] = str(current_span.context.span_id)
+        context = current_span.get_span_context() if current_span is not None else None
+        if context is not None:
+            event_dict["dd.trace_id"] = str(context.trace_id & 0xFFFFFFFFFFFFFFFF)
+            event_dict["dd.span_id"] = str(context.span_id)
 
-        return event_dict        
+        return event_dict
 # ##########
 
 # ########## app.py
 import .injection
 import logging
 import structlog
-# カスタム形式を追加して、Datadog 形式のトレース ID をログに挿入
+# Add custom formatting to inject datadog formatted trace ids into logs
 structlog.configure(
     processors=[
         injection.CustomDatadogLogProcessor(),
@@ -75,7 +76,7 @@ log.info("Example log line with trace correlation info")
 [1]: https://www.structlog.org/en/stable/standard-library.html
 [2]: /ja/tracing/other_telemetry/connect_logs_and_traces/python/#manually-inject-trace-and-span-ids
 [3]: https://github.com/DataDog/trace-examples/blob/98626d924f82666de60d6b2d6a65d87eebebdff1/opentelemetry/python-microservice/ddlogging/injection.py#L3
-{{< /tabs >}}
+{{% /tab %}}
 
 {{% tab "Node.js" %}}
 
@@ -114,8 +115,8 @@ module.exports = winston.createLogger({
 // ...
 // トレーサーを初期化します
 // ...
-// 
-const logger = require('./logger') 
+//
+const logger = require('./logger')
 //
 // アプリケーションでロガーを使用します
 logger.info("Example log line with trace correlation info")
@@ -126,7 +127,7 @@ logger.info("Example log line with trace correlation info")
 [1]: https://github.com/winstonjs/winston
 [2]: /ja/tracing/other_telemetry/connect_logs_and_traces/nodejs/#manually-inject-trace-and-span-ids
 [3]: https://github.com/DataDog/trace-examples/blob/98626d924f82666de60d6b2d6a65d87eebebdff1/opentelemetry/node-microservice/logger.js#L86
-{{< /tabs >}}
+{{% /tab %}}
 
 {{% tab "Ruby" %}}
 
@@ -158,7 +159,7 @@ logger.info("Example log line with trace correlation info")
 [1]: https://ruby-doc.org/stdlib-3.0.0/libdoc/logger/rdoc/index.html
 [2]: /ja/tracing/other_telemetry/connect_logs_and_traces/ruby/#manually-inject-trace-and-span-ids
 [3]: https://github.com/DataDog/trace-examples/blob/98626d924f82666de60d6b2d6a65d87eebebdff1/opentelemetry/ruby-microservice/app.rb#L21-L35
-{{< /tabs >}}
+{{% /tab %}}
 
 {{% tab "Java" %}}
 
@@ -177,11 +178,13 @@ String datadogSpanIdString = Long.toUnsignedString(datadogSpanId);
 logging.pattern.console = %d{yyyy-MM-dd HH:mm:ss} - %logger{36} - %msg dd.trace_id=%X{datadogTraceIdString} dd.span_id=%X{datadogSpanIdString} %n
 ```
 
+See [Java Log Collection][4] on how to send your Java logs to Datadog.
 
 [1]: https://github.com/open-telemetry/opentelemetry-java-instrumentation/blob/main/docs/logger-mdc-instrumentation.md
 [2]: https://docs.spring.io/spring-boot/docs/2.1.18.RELEASE/reference/html/boot-features-logging.html
 [3]: /ja/tracing/other_telemetry/connect_logs_and_traces/java/?tab=log4j2#manually-inject-trace-and-span-ids
-{{< /tabs >}}
+[4]: /ja/logs/log_collection/java/?tab=logback
+{{% /tab %}}
 
 {{% tab "PHP" %}}
 
@@ -194,7 +197,7 @@ PHP のトレースとログの相関では、[Datadog SDK PHP 例][1]を変更�
 
 [1]: /ja/tracing/other_telemetry/connect_logs_and_traces/php/
 [2]: /ja/help/
-{{< /tabs >}}
+{{% /tab %}}
 
 {{% tab "Go" %}}
 
@@ -252,7 +255,7 @@ func convertTraceID(id string) string {
 
 [1]: https://github.com/sirupsen/logrus
 [2]: /ja/help/
-{{< /tabs >}}
+{{% /tab %}}
 
 {{% tab ".NET" %}}
 
@@ -274,7 +277,7 @@ using (LogContext.PushProperty("dd.span_id", ddSpanId))
 
 
 [1]: https://serilog.net/
-{{< /tabs >}}
+{{% /tab %}}
 
 {{< /tabs >}}
 

@@ -1,0 +1,16 @@
+{
+  "description": "",
+  "is_totp": true,
+  "name": "GLOBAL_VARIABLE_TOTP_PAYLOAD_EXAMPLESYNTHETIC",
+  "tags": [],
+  "value": {
+    "secure": false,
+    "value": "",
+    "options": {
+      "totp_parameters": {
+        "digits": 6,
+        "refresh_interval": 30
+      }
+    }
+  }
+}

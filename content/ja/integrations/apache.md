@@ -22,11 +22,9 @@ assets:
       metadata_path: assets/service_checks.json
     source_type_id: 30
     source_type_name: Apache
-  logs:
-    source: apache
   monitors:
-    '[Apache] Low number of idle workers': assets/monitors/apache_low_idle_workers.json
-    '[Apache] resource utilization': assets/monitors/high_keep_alive_and_cpu.json
+    CPU load is running high: assets/monitors/high_keep_alive_and_cpu.json
+    Idle workers number is low: assets/monitors/apache_low_idle_workers.json
   saved_views:
     4xx_errors: assets/saved_views/4xx_errors.json
     5xx_errors: assets/saved_views/5xx_errors.json
@@ -40,6 +38,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - log collection
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/apache/README.md
 display_on_public_website: true
@@ -47,9 +46,8 @@ draft: false
 git_integration_title: apache
 integration_id: apache
 integration_title: Apache
-integration_version: 4.5.0
+integration_version: 6.0.0
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: apache
 public_title: Apache
@@ -65,10 +63,18 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: 毎秒のリクエスト数、処理バイト数、ワーカースレッド数、アップタイムなどを追跡
   media: []
   overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/monitoring-apache-web-server-performance
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/collect-apache-performance-metrics
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/monitor-apache-web-server-datadog
   support: README.md#Support
   title: Apache
 ---
@@ -82,9 +88,9 @@ tile:
 
 Apache チェックは、毎秒のリクエスト数、処理されたバイト数、ワーカースレッド数、サービスアップタイムなどを追跡します。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 Apache チェックは [Datadog Agent][2] にパッケージ化されています。Apache のメトリクスとログの収集を開始するには、以下を行います。
 
@@ -92,12 +98,12 @@ Apache チェックは [Datadog Agent][2] にパッケージ化されていま�
 
 2. Apache サーバーに `mod_status` をインストールし、`ExtendedStatus` を有効にします。
 
-### ブラウザトラブルシューティング
+### 構成
 
 {{< tabs >}}
 {{% tab "ホスト" %}}
 
-#### メトリクスベース SLO
+#### ホスト
 
 ホストで実行中の Agent に対してこのチェックを構成するには
 
@@ -117,7 +123,7 @@ Apache チェックは [Datadog Agent][2] にパッケージ化されていま�
 
 2. [Agent を再起動します][3]。
 
-##### 収集データ
+##### ログ収集
 
 _Agent バージョン 6.0 以降で利用可能_
 
@@ -168,7 +174,7 @@ LABEL "com.datadoghq.ad.init_configs"='[{}]'
 LABEL "com.datadoghq.ad.instances"='[{"apache_status_url": "http://%%host%%/server-status?auto"}]'
 ```
 
-##### 収集データ
+##### ログ収集
 
 
 Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Docker ログ収集][2]を参照してください。
@@ -185,7 +191,7 @@ LABEL "com.datadoghq.ad.logs"='[{"source": "apache", "service": "<SERVICE_NAME>"
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
-#### ガイド
+#### Kubernetes
 
 このチェックを、Kubernetes で実行している Agent に構成します。
 
@@ -238,7 +244,7 @@ spec:
     - name: apache
 ```
 
-##### 収集データ
+##### ログ収集
 
 
 Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集][3]を参照してください。
@@ -290,7 +296,7 @@ spec:
 }
 ```
 
-##### 収集データ
+##### ログ収集
 
 
 Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[ECS ログ収集][2]を参照してください。
@@ -319,21 +325,21 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 
 [Agent の status サブコマンドを実行][4]し、Checks セクションの `apache` を探します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "apache" >}}
 
 
-### ヘルプ
+### イベント
 
 Apache チェックにはイベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 {{< get-service-checks-from-git "apache" >}}
 
 
-## ヘルプ
+## トラブルシューティング
 
 ### Apache のステータス URL
 

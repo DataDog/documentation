@@ -7,7 +7,6 @@ further_reading:
   tag: Blog
   text: Señales clave en segundos con Universal Service Monitoring
 is_beta: true
-kind: documentación
 private: true
 title: Detección de servicios en la nube y protocolos adicionales
 ---

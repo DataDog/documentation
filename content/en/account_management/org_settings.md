@@ -76,32 +76,6 @@ Client tokens are used to send events and logs from your user's web and mobile a
 
 If your application does not have an existing Datadog integration, and you don't want to create a custom Agent check, you can send events with email. To learn how to set up events API emails, read the [Events with email guide][12].
 
-## Products
-
-### Logs
-
-
-##### Out-of-contract retention periods for log indexes
-
-Users with `Org Management` permission can enable the out-of-contract retention periods feature for log indexes. This feature is enabled on a per-org basis. This means that if a user enables the feature on a parent org, the feature is not automatically enabled for all child orgs.
-
-{{< img src="account_management/out-of-contract-retention.png" alt="The out-of-contract retention periods for log indexes setting showing enabled." style="width:70%;" >}}
-
-When enabled, users with `Modify Index` permission can choose any of the 3-, 7-, 15-, 30-, 45-, and 60-day retention periods, even if it is not in the contract. This can be useful when troubleshooting a potential long standing issue or meeting compliance requirements for which customers need a higher retention period that is not part of the current contract.
-
-**Note**: Using out-of-contract retention periods incur on-demand charges. If an out-of-contract retention period is often used, Datadog recommends that customers contact their account manager to have it added to their contract.
-
-### Monitors
-
-#### Monitors time zone preference
-
-
-Users with the `Org Management` permission can customize the time zone used in alert graph snapshots within Monitor alert notifications.
-
-{{< img src="account_management/monitors-time-zone-preference.png" alt="Monitors Time Zone Preferences" style="width:70%;" >}}
-
-The setting applies to **all** Monitor alert notifications, as it's an org-wide setting.
-
 ### Synthetic tests
 
 Learn how to access and control [Synthetic Monitoring Settings][13].
@@ -143,6 +117,24 @@ To rename your organization, click the **Edit** button in the **Preferences** ta
 #### Datadog homepage
 
 You can choose to set your organization homepage to a Dashboard List or an individual dashboard.
+
+#### Out-of-contract retention periods for log indexes
+
+Users with `Org Management` permission can enable the out-of-contract retention periods feature for log indexes. This feature is enabled on a per-org basis. This means that if a user enables the feature on a parent org, the feature is not automatically enabled for all child orgs.
+
+{{< img src="account_management/out-of-contract-retention.png" alt="The out-of-contract retention periods for log indexes setting showing enabled." style="width:70%;" >}}
+
+When enabled, users with `Modify Index` permission can choose any of the 3-, 7-, 15-, 30-, 45-, and 60-day retention periods, even if it is not in the contract. This can be useful when troubleshooting a potential long standing issue or meeting compliance requirements for which customers need a higher retention period that is not part of the current contract.
+
+**Note**: Using out-of-contract retention periods incur on-demand charges. If an out-of-contract retention period is often used, Datadog recommends that customers contact their account manager to have it added to their contract.
+
+#### Monitors time zone preference
+
+Users with the `Org Management` permission can customize the time zone used in alert graph snapshots within Monitor alert notifications.
+
+{{< img src="account_management/monitors-time-zone-preference.png" alt="Monitors Time Zone Preferences" style="width:70%;" >}}
+
+The setting applies to **all** Monitor alert notifications, as it's an org-wide setting.
 
 ## Further reading
 

@@ -11,7 +11,7 @@ further_reading:
 - link: "/monitors/downtimes/"
   tag: "Documentation"
   text: "Schedule a downtime to mute a monitor"
-- link: "/monitors/manage/status/"
+- link: "/monitors/status/"
   tag: "Documentation"
   text: "Check your monitor status"
 ---
@@ -84,7 +84,7 @@ For detailed instructions on the **Configure notifications and automations** sec
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /integrations/process/
-[2]: https://app.datadoghq.com/monitors#create/process
+[2]: https://app.datadoghq.com/monitors/create/process
 [3]: /monitors/configuration/#advanced-alert-conditions
 [4]: /monitors/configuration/#no-data
 [5]: /monitors/configuration/#auto-resolve

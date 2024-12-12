@@ -1,7 +1,4 @@
 ---
-- config:
-    cache_enabled: true
-
 - data:
     - org_name: jenkinsci
 
@@ -123,6 +120,7 @@
           - "*/metadata.csv"
           - "*/manifest.json"
           - "*/assets/service_checks.json"
+          - "*/assets/metrics/metric-spec.yaml"
           - "*/README.md"
           - "*/datadog_checks/*/__about__.py"
 
@@ -449,6 +447,8 @@
             front_matters:
               dependencies: ["https://github.com/DataDog/datadog-lambda-extension/blob/main/README.md"]
               title: Datadog Lambda Extension
+              algolia:
+                tags: ['datadog lambda extension']
               aliases:
                 - /serverless/datadog_lambda_library/extension
 
@@ -567,10 +567,9 @@
             file_name: 'agent_config.yaml'
             output_content: false
         - action: pull-and-push-folder
-          branch: main
+          branch: 7.59.x
           globs:
           - 'docs/cloud-workload-security/agent_expressions.md'
-          - 'docs/cloud-workload-security/backend.md'
           - 'docs/cloud-workload-security/backend_linux.md'
           - 'docs/cloud-workload-security/backend_windows.md'
           - 'docs/cloud-workload-security/linux_expressions.md'
@@ -581,17 +580,14 @@
 
       - repo_name: dd-source
         contents:
-        - action: workflows
+        - action: pull-and-push-file
           branch: main
           globs:
-            - "domains/workflow/actionplatform/apps/tools/manifest_generator/manifest.schema.json"
-            - "domains/workflow/actionplatform/apps/wf-actions-worker/src/runner/bundles/com.datadoghq.*/manifest.json"
+            - "domains/workflow/actionplatform/documentation/stable_bundles.json"
           options:
-            dest_path: '/service_management/workflows/actions_catalog/'
-            bundle_excludes:
-              - "com.datadoghq.test"
-              - "com.datadoghq.sample"
-              - "com.datadoghq.internal"
+            base_path: ""
+            dest_path: "/data/"
+            file_name: "workflow_bundles.json"
 
       - repo_name: web-ui
         contents:

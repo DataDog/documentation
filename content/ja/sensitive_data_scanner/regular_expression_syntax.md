@@ -4,7 +4,9 @@ further_reading:
 - link: /sensitive_data_scanner/
   tag: ドキュメント
   text: 機密データスキャナーの設定
-kind: ドキュメント
+- link: /sensitive_data_scanner/guide/best_practices_for_creating_custom_rules
+  tag: ドキュメント
+  text: Best practices for creating custom rules
 title: 正規表現の構文
 ---
 
