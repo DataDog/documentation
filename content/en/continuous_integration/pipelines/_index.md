@@ -89,11 +89,10 @@ While the concept of a CI pipeline may vary depending on your provider, see how 
 {{% /tab %}}
 {{% tab "Buildkite" %}}
 
-| Datadog                    | Buildkite |
-|----------------------------|-----------|
-| Pipeline                   | Pipeline  |
-| Job                        | Job       |
-| _Not available in Datadog_ | Step      |
+| Datadog                    | Buildkite                       |
+|----------------------------|---------------------------------|
+| Pipeline                   | Build (execution of a pipeline) |
+| Job                        | Job (execution of a step)       |
 
 {{% /tab %}}
 {{% tab "TeamCity" %}}
