@@ -98,8 +98,11 @@ export class MarkdocHugoIntegration {
 
     if (this.hugoGlobalConfig.env === 'development') {
       // write it to the static folder
-      const consolePath = this.hugoGlobalConfig.dirs.static + '/markdoc/console.html';
-      fs.mkdirSync(this.hugoGlobalConfig.dirs.static + '/markdoc', { recursive: true });
+      const consolePath =
+        this.hugoGlobalConfig.dirs.static + '/markdoc/console/index.html';
+      fs.mkdirSync(this.hugoGlobalConfig.dirs.static + '/markdoc/console', {
+        recursive: true
+      });
       fs.writeFileSync(consolePath, consoleHtml);
     }
 

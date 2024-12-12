@@ -32,6 +32,19 @@ fs.writeFileSync(ASSETS_PARTIAL_PATH, assetsPartialContents);
 // Compile all .mdoc files found in the content directory
 const { compiledFilePaths, hasErrors } = markdocIntegration.compileMdocFiles();
 
+// Inject the author console
+
+if (env === 'development') {
+    (async () => {
+        try {
+            await markdocIntegration.injectAuthorConsole();
+            console.log('Author console injected successfully');
+        } catch (error) {
+            console.error('Failed to inject author console:', error);
+        }
+    })();
+}
+
 // Build a .gitignore file for the compiled files,
 // to be written to the content directory
 let gitignoreContents = `# GENERATED FILE: DO NOT EDIT

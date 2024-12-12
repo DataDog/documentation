@@ -10,6 +10,7 @@ import ErrorsReport from './components/errors/ErrorsReport';
 import Alert from '@mui/material/Alert';
 import AlertTitle from '@mui/material/AlertTitle';
 import ErrorIcon from '@mui/icons-material/Error';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -67,17 +68,30 @@ function App() {
         </Box>
         <CustomTabPanel value={currentTabIndex} index={0}>
           {consoleData.buildStatus.hasErrors && (
+            <>
+              <Alert
+                severity="error"
+                icon={<ErrorIcon sx={{ color: '#eb364b' }} />}
+                sx={{ padding: '10px', paddingBottom: '5px', backgroundColor: '#fdebed' }}
+              >
+                <AlertTitle sx={{ marginTop: '0px', color: '#922c35' }}>
+                  The latest build has Markdoc errors.
+                </AlertTitle>
+              </Alert>
+              <ErrorsReport errorsByFilePath={consoleData.buildStatus.errorsByFilePath} />
+            </>
+          )}
+          {!consoleData.buildStatus.hasErrors && (
             <Alert
-              severity="error"
-              icon={<ErrorIcon sx={{ color: '#eb364b' }} />}
-              sx={{ padding: '10px', paddingBottom: '5px', backgroundColor: '#fdebed' }}
+              severity="success"
+              sx={{ padding: '10px', paddingBottom: '5px', backgroundColor: '#ecf9ef' }}
+              icon={<CheckCircleIcon sx={{ color: '#2a7e41' }} />}
             >
-              <AlertTitle sx={{ marginTop: '0px', color: '#922c35' }}>
-                This build has errors.
+              <AlertTitle sx={{ marginTop: '0px', color: '#2a7e41' }}>
+                The latest build has no errors.
               </AlertTitle>
             </Alert>
           )}
-          <ErrorsReport errorsByFilePath={consoleData.buildStatus.errorsByFilePath} />
         </CustomTabPanel>
         {/*
         <CustomTabPanel value={currentTabIndex} index={1}>
