@@ -90,6 +90,8 @@ Consider the following example for a monitor-based SLO containing 3 monitors. Th
 
 In this example, the overall status is lower than the average of the individual statuses.
 
+Muting a monitor does not affect the SLO calculation. To exclude time periods from an SLO calculation, use the [SLO status corrections][5] feature.
+
 ### Exceptions for synthetic tests
 In certain cases, there is an exception to the status calculation for monitor-based SLOs that are comprised of one grouped Synthetic test. Synthetic tests have optional special alerting conditions that change the behavior of when the test enters the ALERT state and consequently impact the overall uptime:
 
