@@ -25,7 +25,7 @@ further_reading:
 
 ## Overview
 
-This page describes how to instrument your applications for both [Real User Monitoring (RUM)][1] or [Error Tracking][2] with the React Native SDK. You can follow the steps below to instrument your applications for RUM (includes Error Tracking), or Error Tracking if you have purchased it as a standalone product.
+This page describes how to instrument your applications for both [Real User Monitoring (RUM)][1] and [Error Tracking][2] with the React Native SDK. You can follow the steps below to instrument your applications for RUM (which includes Error Tracking) or Error Tracking if you have purchased it as a standalone product.
 
 The React Native SDK also supports Expo and Expo Go. To use it, install `expo-datadog` and `@datadog/mobile-react-native`.
 
@@ -49,7 +49,7 @@ yarn add expo-datadog @datadog/mobile-react-native
 
 ### Track view navigation
 
-To see RUM/Error Tracking sessions populate in Datadog, you need to implement view tracking, which can be initialized manually or automatically.
+To see RUM or Error Tracking sessions populate in Datadog, you need to implement view tracking, which can be initialized manually or automatically.
 
 #### Manual tracking
 
@@ -75,8 +75,8 @@ DdRum.stopView('<view-key>', { 'custom.bar': 42 }, Date.now());
 
 Automatic view tracking is supported for the following modules:
 
-- React Navigation: [@Datadog/mobile-react-navigation][4]
-- React Native Navigation: [@Datadog/mobile-react-native-navigation][5]
+- React Navigation: [`@Datadog/mobile-react-navigation`][4]
+- React Native Navigation: [`@Datadog/mobile-react-native-navigation`][5]
 
 In this Datadog example project, View Tracking is achieved through `@datadog/mobile-react-navigation` and is configured using the `NavigationContainer`:
 
@@ -129,7 +129,7 @@ await DdSdkReactNative.initialize(config);
 
 <div class="alert alert-warning">Configuring the session sample rate does not apply to Error Tracking.</div>
 
-To control the data your application sends to Datadog RUM, you can specify a sampling rate for RUM sessions while [initializing the Expo SDK][6] as a percentage between 0 and 100. To set this rate, use the `config.sessionSamplingRate` parameter. 
+To control the data your application sends to Datadog RUM, you can specify a sampling rate for RUM sessions while [initializing the Expo SDK][6]. To set this rate, use the `config.sessionSamplingRate` parameter and specify a percentage between 0 and 100.
 
 ### Upload source maps on EAS builds
 

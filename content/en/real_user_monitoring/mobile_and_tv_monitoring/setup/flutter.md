@@ -24,7 +24,7 @@ further_reading:
 ---
 ## Overview
 
-This page describes how to instrument your applications for both [Real User Monitoring (RUM)][1] and [Error Tracking][2] with the Flutter SDK. You can follow the steps below to instrument your applications for RUM (includes Error Tracking), or Error Tracking if you have purchased it as a standalone product.
+This page describes how to instrument your applications for both [Real User Monitoring (RUM)][1] and [Error Tracking][2] with the Flutter SDK. You can follow the steps below to instrument your applications for RUM (which includes Error Tracking) or Error Tracking if you have purchased it as a standalone product.
 
 ## Setup
 
@@ -36,7 +36,7 @@ This page describes how to instrument your applications for both [Real User Moni
 1. In Datadog, navigate to [**Digital Experience** > **Add an Application**][1].
 2. Choose `Flutter` as the application type.
 3. Provide an application name to generate a unique Datadog application ID and client token.
-4. To disable automatic user data collection for either client IP or geolocation data, uncheck the boxes for those settings. For more information, see [Flutter Data Collected][2].
+4. To disable automatic user data collection for client IP or geolocation data, uncheck the boxes for those settings. For more information, see [Flutter Data Collected][2].
 
    {{< img src="real_user_monitoring/flutter/flutter-new-application.png" alt="Create a RUM application for Flutter in Datadog" style="width:90%;">}}
 
@@ -49,7 +49,7 @@ This page describes how to instrument your applications for both [Real User Moni
 1. Navigate to [**Error Tracking** > **Settings** > **Browser and Mobile** > **Add an Application**][1].
 2. Choose `Flutter` as the application type.
 3. Provide an application name to generate a unique Datadog application ID and client token.
-4. To disable automatic user data collection for either client IP or geolocation data, uncheck the boxes for those settings. For more information, see [Flutter Data Collected][2].
+4. To disable automatic user data collection for client IP or geolocation data, uncheck the boxes for those settings. For more information, see [Flutter Data Collected][2].
 
    {{< img src="real_user_monitoring/error_tracking/mobile-new-application.png" alt="Create an application for Flutter in Datadog" style="width:90%;">}}
  
@@ -72,10 +72,10 @@ Datadog supports Flutter Monitoring for iOS and Android for Flutter 3.0+.
 Datadog does not officially support Flutter Web, but the current Flutter SDK for mobile apps allows you to achieve some out-of-the-box monitoring. Here are known limitations:
 
  * All Actions reported from Flutter are labeled with type `custom`.
- * Long running actions (`startAction` / `stopAction`) are not supported.
- * Manually reporting RUM resources (`startResource` / `stopResource`) is not supported.
- * Event mappers are not currently supported.
- * Tags on loggers are not currently supported.
+ * Long running actions (`startAction` and `stopAction`) are not supported.
+ * Manually reporting RUM resources (`startResource` and `stopResource`) is not supported.
+ * Event mappers are not supported.
+ * Tags on loggers are not supported.
  * `addUserExtraInfo` is not supported.
  * `stopSession` is not supported.
 
@@ -377,7 +377,7 @@ Container(
 
 ## Sending data when device is offline
 
-RUM ensures availability of data when your user device is offline. In cases of low-network areas, or when the device battery is too low, all events are first stored on the local device in batches. They are sent as soon as the network is available, and the battery is high enough to ensure the Flutter SDK does not impact the end user's experience. If the network is not available with your application running in the foreground, or if an upload of data fails, the batch is kept until it can be sent successfully.
+RUM ensures availability of data when your user device is offline. In cases of low-network areas, or when the device battery is too low, all events are first stored on the local device in batches. They are sent as soon as the network is available and the battery is high enough to ensure the Flutter SDK does not impact the end user's experience. If the network is not available with your application running in the foreground, or if an upload of data fails, the batch is kept until it can be sent successfully.
 
 This means that even if users open your application while offline, no data is lost.
 

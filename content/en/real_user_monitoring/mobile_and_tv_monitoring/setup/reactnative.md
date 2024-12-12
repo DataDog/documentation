@@ -27,7 +27,7 @@ further_reading:
 ---
 ## Overview
 
-This page describes how to instrument your applications for both [Real User Monitoring (RUM)][1] or [Error Tracking][2] with the React Native SDK. You can follow the steps below to instrument your applications for RUM (includes Error Tracking), or Error Tracking if you have purchased it as a standalone product.
+This page describes how to instrument your applications for both [Real User Monitoring (RUM)][1] and [Error Tracking][2] with the React Native SDK. You can follow the steps below to instrument your applications for RUM (includes Error Tracking) or Error Tracking if you have purchased it as a standalone product.
 
 The minimum supported version for the React Native SDK is React Native v0.63.4+. Compatibility with older versions is not guaranteed out-of-the-box.
 
@@ -80,7 +80,7 @@ The Datadog React Native SDK requires you to have `compileSdkVersion = 31` or hi
 1. In Datadog, navigate to [**Digital Experience** > **Add an Application**][1].
 2. Choose `react-native` as the application type.
 3. Provide an application name to generate a unique Datadog application ID and client token.
-4. To disable automatic user data collection for either client IP or geolocation data, uncheck the boxes for those settings.
+4. To disable automatic user data collection for client IP or geolocation data, uncheck the boxes for those settings.
 
    {{< img src="real_user_monitoring/react_native/reactnative_setup.png" alt="Create a RUM application for React Native in Datadog" style="width:90%;">}}
 
@@ -92,7 +92,7 @@ The Datadog React Native SDK requires you to have `compileSdkVersion = 31` or hi
 1. In Datadog, navigate to [**Error Tracking** > **Settings** > **Browser and Mobile** > **Add an Application**][1].
 2. Choose `react-native` as the application type.
 3. Provide an application name to generate a unique Datadog application ID and client token.
-4. To disable automatic user data collection for either client IP or geolocation data, uncheck the boxes for those settings.
+4. To disable automatic user data collection for client IP or geolocation data, uncheck the boxes for those settings.
 
    {{< img src="real_user_monitoring/error_tracking/mobile-new-application.png" alt="Create an application for React Native in Datadog" style="width:90%;">}}
 
@@ -101,7 +101,7 @@ The Datadog React Native SDK requires you to have `compileSdkVersion = 31` or hi
 {{% /tab %}}
 {{< /tabs >}}
 
-To ensure the safety of your data, you must use a client token. If you used only [Datadog API keys][5] to configure the `@datadog/mobile-react-native` library, they would be exposed client-side in the React Native application's code.
+To ensure the safety of your data, you must use a client token. If you use only [Datadog API keys][5] to configure the `@datadog/mobile-react-native` library, they are exposed client-side in the React Native application's code.
 
 For more information about setting up a client token, see the [Client Token documentation][6].
 
@@ -317,7 +317,7 @@ export default function App() {
 
 <div class="alert alert-warning">Configuring the session sample rate does not apply to Error Tracking.</div>
 
-To control the data your application sends to Datadog RUM, you can specify a sampling rate for RUM sessions while [initializing the RUM React Native SDK][7] as a percentage between 0 and 100. You can specify the rate with the `config.sessionSamplingRate` parameter.
+To control the data your application sends to Datadog RUM, you can specify a sampling rate for RUM sessions while [initializing the RUM React Native SDK][7]. You can specify the rate with the `config.sessionSamplingRate` parameter as a percentage between 0 and 100.
 
 ### Set tracking consent (GDPR compliance)
 
@@ -371,7 +371,7 @@ Alternatively, you can use the `accessibilityLabel` element property to give the
 
 ### Track view navigation
 
-Because React Native offers a wide range of libraries to create screen navigation, only manual view tracking is supported by default. To see RUM/Error tracking sessions populate in Datadog, you need to implement view tracking.
+Because React Native offers a wide range of libraries to create screen navigation, only manual view tracking is supported by default. To see RUM or Error tracking sessions populate in Datadog, you need to implement view tracking.
 
 You can manually start and stop a view using the following `startView()` and `stopView` methods.
 
