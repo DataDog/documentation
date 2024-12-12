@@ -255,7 +255,7 @@ In the full side panel, you can see a timeseries graph about the performance met
 
 ### Error outliers
 
-Error outliers in Synthetic Monitoring display unexpected behaviors and performance deviations. These anomalies provide insights into the reliability issues in your [Synthetic browser tests][101]. Identifying these error outliers helps you troubleshoot errors in failed test runs, enhancing debugging and reducing Mean Time To Resolution (MTTR).
+Error outliers in Synthetic Monitoring display unexpected behaviors and performance deviations. These anomalies provide insights into the reliability issues in your [Synthetic Browser Tests][101]. Identifying these error outliers helps you troubleshoot errors in failed test runs, enhancing debugging and reducing Mean Time To Resolution (MTTR).
 
 When reviewing failed test runs, you can see the number of error outliers on the failed test:
 
