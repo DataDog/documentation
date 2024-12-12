@@ -19,6 +19,10 @@ further_reading:
 title: Monitor de procesos en directo
 ---
 
+<div class="alert alert-warning">
+Live Processes y Live Process Monitoring están incluidos en el plan Enterprise. Para todos los demás planes, ponte en contacto con tu representante de cuenta o <a href="mailto:success@datadoghq.com">success@datadoghq.com</a> para solicitar esta función.
+</div>
+
 ## Información general
 
 Los monitores de procesos en directo se basan en los datos recopilados por el [Agent de procesos][1]. Crea monitores que avisen o alerten en función del recuento de cualquier grupo de procesos en hosts o etiquetas (tags).
@@ -89,9 +93,10 @@ Para obtener instrucciones detalladas sobre las opciones avanzadas de alerta (re
 
 Para obtener instrucciones detalladas sobre la sección **Configure notifications and automations** (Configurar notificaciones y automatizaciones), consulta la página [Notificaciones][6].
 
-## Para leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
+
 
 [1]: /es/infrastructure/process/
 [2]: https://app.datadoghq.com/monitors/create/live_process
