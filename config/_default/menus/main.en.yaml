@@ -690,7 +690,7 @@ menu:
       parent: otel_interoperability
       weight: 705
     - name: Correlate RUM and Traces
-      url: /real_user_monitoring/platform/connect_rum_and_traces/
+      url: /opentelemetry/interoperability/connect_rum_and_traces
       identifier: otel_rum
       parent: otel_interoperability
       weight: 706
