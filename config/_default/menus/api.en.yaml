@@ -5407,7 +5407,8 @@ menu:
           - v2
         operationids:
           - CancelDataDeletionRequest
-        unstable: []
+        unstable:
+          - v2
         order: 2
     - name: Gets a list of data deletion requests
       url: '#gets-a-list-of-data-deletion-requests'
@@ -5419,7 +5420,8 @@ menu:
           - v2
         operationids:
           - GetDataDeletionRequests
-        unstable: []
+        unstable:
+          - v2
         order: 3
     - name: Creates a data deletion request
       url: '#creates-a-data-deletion-request'
@@ -5431,7 +5433,8 @@ menu:
           - v2
         operationids:
           - CreateDataDeletionRequest
-        unstable: []
+        unstable:
+          - v2
         order: 1
     - name: Domain Allowlist
       url: /api/latest/domain-allowlist/
