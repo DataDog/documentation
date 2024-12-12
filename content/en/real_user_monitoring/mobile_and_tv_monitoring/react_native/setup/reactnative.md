@@ -8,6 +8,7 @@ aliases:
     - /real_user_monitoring/react-native/
     - /real_user_monitoring/reactnative/
     - /real_user_monitoring/mobile_and_tv_monitoring/setup/reactnative
+    - /real_user_monitoring/mobile_and_tv_monitoring/react_native/setup
 further_reading:
 - link: /real_user_monitoring/mobile_and_tv_monitoring/react_native/advanced_configuration
   tag: Documentation
