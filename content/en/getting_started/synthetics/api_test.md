@@ -36,44 +36,37 @@ API tests **proactively monitor** that your **most important services** are avai
 
 HTTP tests monitor your API endpoints and alert you when response latency is high or fail to meet any conditions you define, such as expected HTTP status code, response headers, or response body content.
 
-{{< img src="getting_started/synthetics/api-test.png" alt="Overview of a Synthetics HTTP Test" style="width:100%;" >}}
-
 The example below demonstrates how to create an [HTTP test][3], a subtype of [single API tests][1].
-
-### Define request
 
 1. In the Datadog site, hover over **Digital Experience** and select **[Tests][4]** (under **Synthetic Monitoring & Testing**).
 
 2. Click **New Test** > **[New API test][5]**.
 
-   You may create a test using one of the following options:
+3. You may create a test using one of the following options:
 
-   - **[Create a test from a template](#templates)** 
-   - **[Build a test from scratch](#build-a-test-from-scratch)** 
+   - **Create a test from a template**: 
 
-#### Templates
+     Select one of the following pre-populated templates, which configures your test options depending on the type of test you want to perform:
 
-Select one of the following pre-populated templates, which configures your test options depending on the type of test you want to perform:
+     {{< img src="getting_started/synthetics/synthetics_api_templates.png" alt="Synthetics API test landing page with templates" style="width:100%;" >}}
 
-   {{< img src="getting_started/synthetics/synthetics_api_templates.png" alt="Synthetics API test landing page with templates" style="width:100%;" >}}
+   - **Build a test from scratch**:
 
-#### Build a test from scratch
+      1. To build a test from scratch, click the **+ Start from scratch** template, then select the `HTTP` request type.
 
-1. To build a test from scratch, click the **+ Start from scratch** template, then select the `HTTP` request type.
+      2. Add the URL of the endpoint you want to monitor. If you don't know what to start with, you can use `https://www.shopist.io/`, a test e-commerce web application. Defining the endpoint to test automatically populates the name of your test to `Test on www.shopist.io`. 
 
-2. Define your request:
+      3. Optionally, select **Advanced Options** to set custom request options, certificates, authentication credentials, and more.  
+          
+            **Note:** You can create secure [global variables][6] to store credentials and create [local variables][7] to generate dynamic timestamps to use in your request payload. After creating these variables, type `{{` in any relevant field and select the variable to inject its value in your test options. 
+          
+            In this example, no specific advanced option is needed. 
 
-    - Add the URL of the endpoint you want to monitor. If you don't know what to start with, you can use `https://www.shopist.io/`, a test e-commerce web application. Defining the endpoint to test automatically populates the name of your test to `Test on www.shopist.io`. 
-    - You can select **Advanced Options** to set custom request options, certificates, authentication credentials, and more.  
-    
-      **Note:** You can create secure [global variables][6] to store credentials and create [local variables][7] to generate dynamic timestamps to use in your request payload. After creating these variables, type `{{` in any relevant field and select the variable to inject its value in your test options.  
-    
-      In this example, no specific advanced option is needed.
-    - You can set tags such as `env:prod` and `app:shopist` on your test. Tags allow you to keep your test suite organized and quickly find tests you're interested in on the homepage.
+      4. Optionally, set tags such as `env:prod` and `app:shopist` on your test. Tags allow you to keep your test suite organized and quickly find tests you're interested in on the homepage.
 
-3. Click **Test URL** to trigger a sample test run.
+      5. Click **Test URL** to trigger a sample test run.
 
-   {{< img src="getting_started/synthetics/api-test-config-3.png" alt="API test configuration" style="width:100%;">}}
+         {{< img src="getting_started/synthetics/api-test-config-3.png" alt="API test configuration" style="width:100%;">}}
 
 ### Define assertions
 
