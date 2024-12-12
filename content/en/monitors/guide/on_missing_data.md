@@ -10,7 +10,7 @@ further_reading:
 
 Metric Monitors offer enhanced options for handling missing data, allowing you to differentiate between missing data as a failure mode and a healthy state. 
 
-These options align with what's available in other monitors types like CI, Database, Error Tracking, and more. They apply to query-based monitors, including Integration and Anomaly monitors, providing two main configurations based on the aggregation type:
+These options align with what's available in other monitors types like Logs, Events, CI, Database, Error Tracking, and more.
 
 ## Benefits of using On Missing Data options
 
