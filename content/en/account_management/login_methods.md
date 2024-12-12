@@ -25,9 +25,9 @@ As an organization manager, you can enable or disable the default login methods 
 
 **Note**: You cannot disable all login methods for an organization. At least one login method must be enabled by default for your organization.
 
-## Requiring multi-factor authentication
+## Requiring Multi-factor Authentication
 
-For enhanced security, organization managers can enforce [multi-factor authentication][4](MFA) for all users in the organization that log in with an email and password.
+For enhanced security, organization managers can enforce [Multi-factor Authentication][4] (MFA) for all users in the organization that log in with an email and password.
 
 1. Navigate to [Login Methods][3].
 2. Set the **Require Multi-Factor Authentication** setting to `On` or `Off`, according to your organization's preference or policy requirements.
