@@ -6548,12 +6548,12 @@ menu:
       identifier: rum_mobile_ios_data_collected
       weight: 104
     - name: Mobile Vitals
-      url: real_user_monitoring/mobile_and_tv_monitoring/ios/mobile_vitals
+      url: real_user_monitoring/mobile_and_tv_monitoring/ios/mobile_vitals?tab=ios
       parent: rum_mobile_ios
       identifier: rum_mobile_ios_mobile_vitals
       weight: 105
     - name: Web View Tracking
-      url: real_user_monitoring/mobile_and_tv_monitoring/ios/web_view_tracking
+      url: real_user_monitoring/mobile_and_tv_monitoring/ios/web_view_tracking?tab=ios
       parent: rum_mobile_ios
       identifier: rum_mobile_ios_web_view_tracking
       weight: 106
@@ -6598,12 +6598,12 @@ menu:
       identifier: rum_mobile_flutter_data_collected
       weight: 104
     - name: Mobile Vitals
-      url: real_user_monitoring/mobile_and_tv_monitoring/flutter/mobile_vitals
+      url: real_user_monitoring/mobile_and_tv_monitoring/flutter/mobile_vitals?tab=flutter
       parent: rum_mobile_flutter
       identifier: rum_mobile_flutter_mobile_vitals
       weight: 105
     - name: Web View Tracking
-      url: real_user_monitoring/mobile_and_tv_monitoring/flutter/web_view_tracking
+      url: real_user_monitoring/mobile_and_tv_monitoring/flutter/web_view_tracking?tab=flutter
       parent: rum_mobile_flutter
       identifier: rum_mobile_flutter_web_view_tracking
       weight: 106
@@ -6688,12 +6688,12 @@ menu:
       identifier: rum_mobile_react_data_collected
       weight: 104
     - name: Mobile Vitals
-      url: real_user_monitoring/mobile_and_tv_monitoring/react_native/mobile_vitals
+      url: real_user_monitoring/mobile_and_tv_monitoring/react_native/mobile_vitals?tab=reactnative
       parent: rum_mobile_react_native
       identifier: rum_mobile_react_mobile_vitals
       weight: 105
     - name: Web View Tracking
-      url: real_user_monitoring/mobile_and_tv_monitoring/react_native/web_view_tracking
+      url: real_user_monitoring/mobile_and_tv_monitoring/react_native/web_view_tracking?tab=reactnative
       parent: rum_mobile_react_native
       identifier: rum_mobile_react_web_view_tracking
       weight: 106
@@ -6777,16 +6777,11 @@ menu:
       parent: rum_mobile_roku
       identifier: rum_mobile_roku_data_collected
       weight: 104
-    - name: Mobile Vitals
-      url: real_user_monitoring/mobile_and_tv_monitoring/roku/mobile_vitals
-      parent: rum_mobile_roku
-      identifier: rum_mobile_roku_mobile_vitals
-      weight: 105
     - name: Web View Tracking
       url: real_user_monitoring/mobile_and_tv_monitoring/roku/web_view_tracking
       parent: rum_mobile_roku
       identifier: rum_mobile_roku_web_view_tracking
-      weight: 106
+      weight: 105
     - name: Unity
       url: real_user_monitoring/mobile_and_tv_monitoring/unity
       parent: mobile_and_tv_monitoring
@@ -6798,7 +6793,7 @@ menu:
       identifier: rum_mobile_unity_setup
       weight: 101
     - name: Mobile Vitals
-      url: real_user_monitoring/mobile_and_tv_monitoring/unity/mobile_vitals
+      url: real_user_monitoring/mobile_and_tv_monitoring/unity/mobile_vitals?tab=unity
       parent: rum_mobile_unity
       identifier: rum_mobile_unity_mobile_vitals
       weight: 102
