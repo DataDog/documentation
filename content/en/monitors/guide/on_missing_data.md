@@ -14,7 +14,7 @@ These options align with what's available in other monitors types like Logs, Eve
 
 ## Benefits of using On Missing Data options
 
-Metric Monitors tracking errors should reflect as "OK" when no errors occur. With the legacy No Data configurations, monitors would raise alerts with missing data, leading to confusion and workarounds. The On Missing Data configuration options allow monitors to reflect health states, eliminating the need for workarounds.
+When measuring the number of bad events, like errors, Monitors should reflect an "OK" when no data is detected. With the legacy No Data configurations, monitors would report No Data. The On Missing Data configuration options allows monitors to reflect health states more accurately, improving clarity.
 
 ## Monitors managed through the UI
 
