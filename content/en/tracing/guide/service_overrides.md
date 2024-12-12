@@ -14,11 +14,11 @@ Inferred service dependencies are in Preview. To request access, complete the fo
 
 ## Overview
 
-Inferred services improve how Datadog represents service dependencies. This document explains the changes and how to adapt your configuration.
+[Inferred services][1] improve how Datadog represents service dependencies. This document explains the changes and how to adapt your configuration.
 
 ### Before inferred services
 
-Datadog changed service names of client spans (`span.kind:client`) to represent databases, queues, and third-party dependencies. For example, a client call from service `A` to a PostgreSQL database would be tagged as `service:postgres` or `service:A-postgres`. 
+Datadog used to change service names of client spans (`span.kind:client`) to represent databases, queues, and third-party dependencies. For example, a client call from service `A` to a PostgreSQL database would be tagged as `service:postgres` or `service:A-postgres`. Changing the service name of spans is referred to as a [**service override**](#service-override) in the rest of this guide. The initial service name is referred to as the [**base service**](#base-service).
 
 In this approach, a span representing a client call from a service `auth-dotnet` to a PostgreSQL database would be tagged with `service:auth-dotnet-postgres`. In service maps, these dependencies were represented as separate services, as shown below:
 
@@ -98,11 +98,11 @@ For example:
 - .NET tags gRPC calls as `service:<DD_SERVICE>-grpc-client`
 - Python tags gRPC calls as `service:grpc-client`
 
-With the `DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED` option set to `true`, all supported tracing libraries tag client spans capturing the call to the downstream service with the calling service's name, `service:<DD_SERVICE>`. This provides a *global default service name*.
+With the `DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED` option set to `true`, all supported tracing libraries tag client spans capturing the call to the downstream service with the calling service's name, `service:<DD_SERVICE>`. This ensures all spans are always tagged with the *default service name* emitting the span; [`peer.*`][6] attributes are used to describe the called dependency (for example, database or queue).
 
 | Scenario | Service Name | Additional `peer.*` Attributes |
 |----------|--------------|--------------------------------|
-| *Without* inferred services and *with* service overrides | `service:my-service-grpc-client` or `service:grpc-client` | No `peer.*` tags set |
+| *Without* inferred services and *with* service overrides | `service:my-service-grpc-client` or `service:grpc-client` | No `peer.*` attributes set |
 | *With* inferred services and *without* service overrides | `service:myservice` | `@peer.service:otherservice` (where `otherservice` is the name of the remote service being called with gRPC) |
 
 Similarly, for a span representing a call to a mySQL database:
@@ -133,6 +133,14 @@ Similarly, for a span representing a call to a mySQL database:
 
 **Note**: The configuration above only removes [integration service overrides](#integration-service-overrides). Custom service overrides must be removed directly in the code.
 
+## Glossary
+
+##### Service override
+A service name set for a span which differs from the default `DD_SERVICE` name. It can be set [automatically](#integration-service-overrides) by some Datadog integrations, or [manually](#custom-service-overrides) by users.
+
+##### Base service
+The default `DD_SERVICE` name.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -142,3 +150,4 @@ Similarly, for a span representing a call to a mySQL database:
 [3]: /monitors/types/apm/?tab=traceanalytics
 [4]: /tracing/trace_pipeline/trace_retention/#retention-filters
 [5]: /tracing/metrics/metrics_namespace/
+[6]: https://docs.datadoghq.com/tracing/guide/inferred-service-opt-in/#list-of-newly-introduced-peer-tags

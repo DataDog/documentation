@@ -6,7 +6,7 @@ categories:
 - suministración
 - configuración y despliegue
 - recopilación de log
-custom_kind: integración
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/documentation/blob/master/content/en/integrations/vmware_tanzu_application_service.md
 description: Realiza un seguimiento del estado de tus máquinas virtuales de VMware

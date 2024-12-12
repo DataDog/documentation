@@ -1,6 +1,5 @@
 ---
 title: Resource-based sampling
-
 disable_toc: false
 private: true
 further_reading:
@@ -12,9 +11,6 @@ further_reading:
   text: "Ingestion Control Page"
 ---
 
-{{< callout url="https://www.datadoghq.com/private-beta/resource-based-sampling-adaptive-sampling/" d_target="#signupModal" btn_hidden="true" btn_hidden="false" header="Request access to the beta!" >}}
-Remotely configured sampling rules are in Beta. To request access, complete the form.
-{{< /callout >}}
 
 ## Overview
 
@@ -37,7 +33,7 @@ Go        | [v1.64.0][6]
 Python    | [v.2.9.0][10]
 Ruby      | [v2.0.0][11]
 Node.js   | [v5.16.0][12]
-PHP       | _Coming soon_
+PHP       | [v1.4.0][15]
 .NET      | [v.2.53.2][13]
 C++       | [v0.2.2][14]
 
@@ -45,7 +41,7 @@ C++       | [v0.2.2][14]
 
 To see configured sampling rates by resource, navigate to the Ingestion controls [Service Ingestion summary][1]. The table lists the applied sampling rate by resource of the service.
 
-{{< img src="/tracing/guide/resource_based_sampling/resource_sampling_rates.png" alt="Sampling rates table by resource" style="width:100%;">}}
+{{< img src="/tracing/trace_indexing_and_ingestion/resource_sampling_rates.png" alt="Sampling rates table by resource" style="width:100%;">}}
 
 - The `Ingested bytes` column surfaces the ingested bytes from spans of the service and resource, while the `Downstream bytes` column surfaces the ingested bytes from spans where the sampling decision is made starting from that service and resource, including bytes from downstream services in the call chain.
 - The `Configuration` column surfaces where the resource sampling rate is being applied from: 
@@ -57,7 +53,7 @@ To see configured sampling rates by resource, navigate to the Ingestion controls
 
 To configure sampling rates for the service by resource name: 
 1. Click **Manage Ingestion rate**. If the remote configuration option is disabled, make sure that the listed [requirements](#compatibility-requirements) are all met.
-   {{< img src="/tracing/guide/resource_based_sampling/sampling_configuration_modal.png" alt="Configuration Modal" style="width:100%;">}}
+   {{< img src="/tracing/trace_indexing_and_ingestion/sampling_configuration_modal.png" alt="Configuration Modal" style="width:100%;">}}
 1. Click **Add new rule** to set sampling rates for some resources. Sampling rules use glob pattern matching, so you can use wildcards (`*`) to match against multiple resources at the same time.
 1. Click **Apply** to save the configuration.
 
@@ -85,3 +81,4 @@ From the **Service Ingestion Summary**, resources for which the sampling rate ar
 [12]: https://github.com/DataDog/dd-trace-js/releases/tag/v5.16.0
 [13]: https://github.com/DataDog/dd-trace-dotnet/releases/tag/v2.53.2
 [14]: https://github.com/DataDog/dd-trace-cpp/releases/tag/v0.2.2
+[15]: https://github.com/DataDog/dd-trace-php/releases/tag/1.4.0

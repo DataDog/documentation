@@ -99,7 +99,16 @@ Then, in your node Agent Pod, run the `agent status` command and review the resu
 
 On managed services such as Azure Kubernetes Service (AKS) and Google Kubernetes Engine (GKE), the user cannot access the control plane components. As a result, it is not possible to run the `kube_apiserver`, `kube_controller_manager`, `kube_scheduler`, or `etcd` checks in these environments.
 
- 
+## ECS Fargate
+
+### Windows Agent times out while starting service
+
+```text
+[ENTRYPOINT][ERROR] Could not start the service: The service did not respond to the start or control request in a timely fashion.
+. Error: [1053 (0x41d)]
+```
+
+To avoid this error, make sure you've set a **CPU units** reservation of at least `512` for the Datadog Agent.
 
 # Troubleshooting data requested by Datadog support
 

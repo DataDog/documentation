@@ -14,16 +14,16 @@ further_reading:
     - link: "/continuous_integration/tests"
       tag: "Documentation"
       text: "Explore Test Results and Performance"
-    - link: "/continuous_integration/intelligent_test_runner/javascript"
+    - link: "/tests/test_impact_analysis/javascript"
       tag: "Documentation"
-      text: "Speed up your test jobs with Intelligent Test Runner"
-    - link: "/continuous_integration/troubleshooting/"
+      text: "Speed up your test jobs with Test Impact Analysis"
+    - link: "/tests/troubleshooting/"
       tag: "Documentation"
-      text: "Troubleshooting CI Visibility"
+      text: "Troubleshooting Test Optimization"
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
+<div class="alert alert-warning">Test Optimization is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
 ## Compatibility
@@ -126,8 +126,14 @@ Just like tags, you can add custom measures to your tests by using the current a
 
 For more information about custom measures, see the [Add Custom Measures Guide][2].
 
+### Mocha ECMAScript modules (ESM)
+[Mocha >=9.0.0][3] uses an ESM-first approach to load test files. Set `NODE_OPTIONS` to `-r dd-trace/ci/init --import dd-trace/register.js` to get full visibility into your tests. See [`dd-trace-js` ESM support][4] for more information.
+
+
 [1]: /tracing/trace_collection/custom_instrumentation/nodejs?tab=locally#adding-tags
 [2]: /tests/guides/add_custom_measures/?tab=javascripttypescript
+[3]: https://github.com/mochajs/mocha/releases/tag/v9.0.0
+[4]: https://github.com/datadog/dd-trace-js?tab=readme-ov-file#ecmascript-modules-esm-support
 {{% /tab %}}
 
 {{% tab "Playwright" %}}
@@ -476,7 +482,7 @@ If the browser application being tested is instrumented using [Browser Monitorin
 [7]: https://docs.cypress.io/guides/core-concepts/writing-and-organizing-tests#Support-file
 [8]: /tracing/trace_collection/custom_instrumentation/nodejs?tab=locally#adding-tags
 [9]: /tests/guides/add_custom_measures/?tab=javascripttypescript
-[10]: /real_user_monitoring/browser/setup
+[10]: /real_user_monitoring/browser/setup/
 [11]: /continuous_integration/guides/rum_integration/
 {{% /tab %}}
 
@@ -622,7 +628,7 @@ For more information about `service` and `env` reserved tags, see [Unified Servi
   <strong>Note</strong>: The manual testing API is available starting in <code>dd-trace</code> versions <code>5.23.0</code> and <code>4.47.0</code>.
 </div>
 
-If you use Jest, Mocha, Cypress, Playwright, Cucumber, or Vitest, **do not use the manual testing API**, as CI Visibility automatically instruments them and sends the test results to Datadog. The manual testing API is **incompatible** with already supported testing frameworks.
+If you use Jest, Mocha, Cypress, Playwright, Cucumber, or Vitest, **do not use the manual testing API**, as Test Optimization automatically instruments them and sends the test results to Datadog. The manual testing API is **incompatible** with already supported testing frameworks.
 
 Use the manual testing API only if you use an unsupported testing framework or have a different testing mechanism.
 
@@ -731,30 +737,27 @@ NODE_OPTIONS="-r dd-trace/ci/init" DD_ENV=ci DD_SERVICE=my-custom-framework-test
 
 ## Known limitations
 
-### ES modules
-[Mocha >=9.0.0][9] uses an ESM-first approach to load test files. That means that if [ES modules][10] are used (for example, by defining test files with the `.mjs` extension), _the instrumentation is limited_. Tests are detected, but there isn't visibility into your test. For more information about ES modules, see the [Node.js documentation][10].
-
 ### Browser tests
 Browser tests executed with `mocha`, `jest`, `cucumber`, `cypress`, `playwright`, and `vitest` are instrumented by `dd-trace-js`, but visibility into the browser session itself is not provided by default (for example, network calls, user actions, page loads, and more.).
 
-If you want visibility into the browser process, consider using [RUM & Session Replay][11]. When using Cypress, test results and their generated RUM browser sessions and session replays are automatically linked. For more information, see the [Instrumenting your browser tests with RUM guide][12].
+If you want visibility into the browser process, consider using [RUM & Session Replay][9]. When using Cypress, test results and their generated RUM browser sessions and session replays are automatically linked. For more information, see the [Instrumenting your browser tests with RUM guide][10].
 
 ### Cypress interactive mode
 
-Cypress interactive mode (which you can enter by running `cypress open`) is not supported by CI Visibility because some cypress events, such as [`before:run`][13], are not fired. If you want to try it anyway, pass `experimentalInteractiveRunEvents: true` to the [cypress configuration file][14].
+Cypress interactive mode (which you can enter by running `cypress open`) is not supported by Test Optimization because some cypress events, such as [`before:run`][11], are not fired. If you want to try it anyway, pass `experimentalInteractiveRunEvents: true` to the [cypress configuration file][12].
 
 ### Jest's `test.concurrent`
-Jest's [test.concurrent][15] is not supported.
+Jest's [test.concurrent][13] is not supported.
 
 ### Jest's `--forceExit`
-Jest's [--forceExit][16] option may cause data loss. Datadog tries to send data immediately after your tests finish, but shutting down the process abruptly can cause some requests to fail. Use `--forceExit` with caution.
+Jest's [--forceExit][14] option may cause data loss. Datadog tries to send data immediately after your tests finish, but shutting down the process abruptly can cause some requests to fail. Use `--forceExit` with caution.
 
 ### Mocha's `--exit`
-Mocha's [--exit][17] option may cause data loss. Datadog tries to send data immediately after your tests finish, but shutting down the process abruptly can cause some requests to fail. Use `--exit` with caution.
+Mocha's [--exit][15] option may cause data loss. Datadog tries to send data immediately after your tests finish, but shutting down the process abruptly can cause some requests to fail. Use `--exit` with caution.
 
 ## Best practices
 
-Follow these practices to take full advantage of the testing framework and CI Visibility.
+Follow these practices to take full advantage of the testing framework and Test Optimization.
 
 ### Parameterized tests
 
@@ -769,7 +772,7 @@ Avoid this:
 })
 {{< /code-block >}}
 
-And use [`test.each`][18] instead:
+And use [`test.each`][16] instead:
 
 {{< code-block lang="javascript" >}}
 test.each([[1,2,3], [3,4,7]])('sums correctly %i and %i', (a,b,expected) => {
@@ -777,7 +780,7 @@ test.each([[1,2,3], [3,4,7]])('sums correctly %i and %i', (a,b,expected) => {
 })
 {{< /code-block >}}
 
-For `mocha`, use [`mocha-each`][19]:
+For `mocha`, use [`mocha-each`][17]:
 
 {{< code-block lang="javascript" >}}
 const forEach = require('mocha-each');
@@ -790,7 +793,7 @@ forEach([
 });
 {{< /code-block >}}
 
-When you use this approach, both the testing framework and CI Visibility can tell your tests apart.
+When you use this approach, both the testing framework and Test Optimization can tell your tests apart.
 
 ## Further reading
 
@@ -804,14 +807,12 @@ When you use this approach, both the testing framework and CI Visibility can tel
 [6]: /tests/code_coverage/?tab=javascripttypescript
 [7]: /getting_started/tagging/unified_service_tagging
 [8]: /tracing/trace_collection/library_config/nodejs/?tab=containers#configuration
-[9]: https://github.com/mochajs/mocha/releases/tag/v9.0.0
-[10]: https://nodejs.org/api/packages.html#packages_determining_module_system
-[11]: /real_user_monitoring/browser/
-[12]: /continuous_integration/guides/rum_integration/
-[13]: https://docs.cypress.io/api/plugins/before-run-api
-[14]: https://docs.cypress.io/guides/references/configuration#Configuration-File
-[15]: https://jestjs.io/docs/api#testconcurrentname-fn-timeout
-[16]: https://jestjs.io/docs/cli#--forceexit
-[17]: https://mochajs.org/#-exit
-[18]: https://jestjs.io/docs/api#testeachtablename-fn-timeout
-[19]: https://www.npmjs.com/package/mocha-each
+[9]: /real_user_monitoring/browser/
+[10]: /continuous_integration/guides/rum_integration/
+[11]: https://docs.cypress.io/api/plugins/before-run-api
+[12]: https://docs.cypress.io/guides/references/configuration#Configuration-File
+[13]: https://jestjs.io/docs/api#testconcurrentname-fn-timeout
+[14]: https://jestjs.io/docs/cli#--forceexit
+[15]: https://mochajs.org/#-exit
+[16]: https://jestjs.io/docs/api#testeachtablename-fn-timeout
+[17]: https://www.npmjs.com/package/mocha-each

@@ -26,17 +26,17 @@ Cloud SIEM provides security operational metrics to help you determine the effec
 
 `datadog.security.siem_signal.time_to_detect`
 : **Name**: Time to Detect (TTD)
-: **Description**: The time between when a matching log is triggered and when a signal is generated.
+: **Description**: The time (in seconds) between when a matching log is triggered and when a signal is generated.
 : **Metric type**: [DISTRIBUTION][3]
 
 `datadog.security.siem_signal.time_to_acknowledge`
 : **Name**: Time to Acknowledge (TTA)
-: **Description**: The time between when a signal is triggered and when an investigation on the signal begins.
+: **Description**: The time (in seconds) between when a signal is triggered and when an investigation on the signal begins.
 : **Metric type**: [DISTRIBUTION][3]
 
 `datadog.security.siem_signal.time_to_resolve`
 : **Name**: Time to Resolve (TTR)
-: **Description**: The time it takes to close a signal starting from the time when you are first notified of the detection.
+: **Description**: The time (in seconds) it takes to close a signal starting from the time when you are first notified of the detection.
 : **Metric type**: [DISTRIBUTION][3]
 
 ## How the metrics are calculated

@@ -18,7 +18,7 @@ aliases:
 ---
 
 <div class="alert alert-info">
-Exception Replay for APM Error Tracking is in beta.
+Exception Replay for APM Error Tracking is in Preview
 </div>
 
 ## Overview
@@ -29,13 +29,14 @@ Exception Replay in APM Error Tracking automatically captures production variabl
 
 ## Requirements
 Supported languages
-: Python, Java, .NET
+: Python, Java, .NET, PHP
 
 - Your Datadog Agent must be configured for APM.
 - Your application must be instrumented with:
   - `ddtrace` for Python
   - `dd-trace-java` for Java
   - `dd-trace-dotnet` for .NET
+  - `dd-trace-php` for PHP
 
 Exception Replay is only available in APM Error Tracking. Error Tracking for Logs and RUM is not supported.
 
@@ -48,9 +49,11 @@ Exception Replay is only available in APM Error Tracking. Error Tracking for Log
    * `dd-trace-dotnet` version `2.53.0` or higher.
 4. Set the `DD_EXCEPTION_DEBUGGING_ENABLED` environment variable to `true` to run your service with Error Tracking Exception Replay enabled.
 
+For `dd-trace-php` version `1.4.0` or higher, set the `DD_EXCEPTION_REPLAY_ENABLED` environment variable to `true`.
+
 ### Redacting sensitive data
 
-By default, variable data linked to specific identifiers deemed sensitive, such as `password` and `accessToken`, are automatically redacted. See the full [list of redacted identifiers][1].
+After you enable Sensitive Data Scrubbing, by default, variable data linked to specific identifiers deemed sensitive, such as `password` and `accessToken`, is automatically redacted. Enable Sensitive Data Scrubbing rules [in Datadog][7]. See the full [list of redacted identifiers][1].
 
 You can also scrub variable data for PII by:
 - [Creating custom identifier redaction][2].
@@ -79,6 +82,7 @@ To keep the performance overhead of the feature at a minimum, error capturing is
 [4]: /sensitive_data_scanner/
 [5]: /dynamic_instrumentation/sensitive-data-scrubbing/
 [6]: https://app.datadoghq.com/apm/error-tracking
+[7]: https://app.datadoghq.com/dynamic-instrumentation/setup
 
 ## Further Reading
 

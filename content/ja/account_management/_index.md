@@ -29,9 +29,12 @@ Google 認証を使用して Datadog にログインする場合、メールア�
 {{% site-region region="us,us3,us5,eu,ap1" %}}
 **Personal Settings** ページ内の [Preferences タブ][3]から、タイムゾーン、ビジュアルアクセシビリティの環境設定、メールサブスクリプションを管理することができます。
 
-#### Email subscriptions
+#### メールサブスクリプション
 
 メールサブスクリプションでは、以下のレポートにアクセスできます。
+{{< site-region region="us3,us5,gov,ap1" >}}
+<div class="alert alert-warning">選択したサイト ({{< region-param key="dd_site_name" >}}) ではメールダイジェストは利用できません。</div>
+{{< /site-region >}}
 
 * 1 日のダイジェスト
 * 週間ダイジェスト

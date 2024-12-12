@@ -10,7 +10,7 @@ further_reading:
 - link: /monitors/downtimes/
   tag: Documentación
   text: Programar un tiempo de inactividad para silenciar un monitor
-- link: /monitors/manage/status/
+- link: /monitors/status/
   tag: Documentación
   text: Comprobar el estado de tu monitor
 - link: https://www.datadoghq.com/blog/monitor-fargate-processes/
@@ -18,6 +18,10 @@ further_reading:
   text: Monitorizar los procesos que se ejecutan en AWS Fargate con Datadog
 title: Monitor de procesos en directo
 ---
+
+<div class="alert alert-warning">
+Live Processes y Live Process Monitoring están incluidos en el plan Enterprise. Para todos los demás planes, ponte en contacto con tu representante de cuenta o <a href="mailto:success@datadoghq.com">success@datadoghq.com</a> para solicitar esta función.
+</div>
 
 ## Información general
 
@@ -89,9 +93,10 @@ Para obtener instrucciones detalladas sobre las opciones avanzadas de alerta (re
 
 Para obtener instrucciones detalladas sobre la sección **Configure notifications and automations** (Configurar notificaciones y automatizaciones), consulta la página [Notificaciones][6].
 
-## Para leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
+
 
 [1]: /es/infrastructure/process/
 [2]: https://app.datadoghq.com/monitors/create/live_process

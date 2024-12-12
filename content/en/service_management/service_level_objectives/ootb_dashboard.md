@@ -15,8 +15,8 @@ The SLO Performance Summary Dashboard supports aggregated views of SLOs to help 
 - Customize your SLO groupings to be based on service, team, user journey, or any other tag that has been added to your SLOs.
 - Use a summary Score, based on the remaining error budget of the underlying SLOs, to understand SLO performance across different groups and identify areas of improvement.
 
-{{< callout url="http://datadoghq.com/private-beta/ootb-slo-dashboard/" btn_hidden="false" header="Try Out the SLO Performance Summary Dashboard">}}
-The SLO Performance Summary Dashboard is in Private Beta. Complete the form to request access.
+{{< callout url="https://www.datadoghq.com/product-preview/slo-performance-dashboard-for-leadership/" btn_hidden="false" header="Try Out the SLO Performance Summary Dashboard">}}
+The SLO Performance Summary Dashboard is in Preview. Complete the form to request access.
 {{< /callout >}}
 
 Access your OOTB SLO Performance Summary Dashbord by filtering for `SLO Performance Summary` in the search query of the [**Dashboard List**][1] or by clicking on the **Analytics** button on the top right corner of the [SLO status page][2].
@@ -34,6 +34,13 @@ The **SLO Summary** widget in the OOTB dashboard includes a "Score". It is desig
 - The Score is "passing" (green/yellow) when most SLOs are **not** breached and have remaining error budget
 - The Score is "failing" (red) when many SLOs are out of error budget or a few SLOs are far out of error budget
 - SLOs in the "No Data" state are not considered in the Score
+
+#### Score calculation details
+
+The Score is calculated as follows:
+- Average the remaining error budget of the SLOs (the minimum error budget is set to -200%, so any SLO with a lower error budget will be counted as -200% in the average)
+- The average error budget (between -200 and 100) is mapped to a Score between 0 and 100
+- The color and status of the Score is set based on the thresholds below
 
 Note that an average remaining error budget of 0% corresponds to a Score value of 66.667. The Score's status and color is based on the following thresholds:
 - **Red:** 0 ≤ Score < 66.667

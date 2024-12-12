@@ -59,7 +59,8 @@ To run the workflow:
 
 ## Monitor triggers
 
-To trigger a workflow from a monitor, you must first add a monitor trigger to your workflow:
+### Add a monitor trigger to your workflow
+
 1. Add a monitor trigger to your workflow:
    - If your workflow doesn't have any triggers, click **Add Trigger** > **Monitor**.
    - If your workflow already has one or more triggers and you're adding the monitor as an additional trigger, click the **Add Trigger** (lightning bolt) icon and select **Monitor**.
@@ -69,15 +70,22 @@ To trigger a workflow from a monitor, you must first add a monitor trigger to yo
 1. Save your Workflow.
 1. Click **Publish** to publish your workflow. Workflows don't run automatically until you've published them. Published workflows accrue costs based on workflow executions. For more information, see the [Datadog Pricing page][11].
 
-Add the workflow to your monitor:
+### Add the workflow to your monitor
+
 1. Navigate to the [**Monitors** page][2] in Datadog.
 1. Find the monitor you'd like to use to trigger the workflow and edit it, or create a new monitor.
-1. In the **Configure notifications & automations** section, click **Add Workflow**.
-1. Use the workflow mention name to search for your workflow and select it from the drop-down. Only workflows with monitor triggers appear in the list.
-1. Optionally, to pass trigger variables into the workflow, use a comma-separated list with the syntax `@workflow-name(key=value, key=value)`. For example, `@workflow-my-workflow(name="Bits", alert_threshold=threshold)`
+1. In the **Configure notifications & automations** section, click **+ Add Workflow**.
+1. Use the workflow mention name to search for your workflow and select it from the dropdown. Only workflows with monitor triggers appear in the list.<br>A mention for the monitor appears in the notification message field, in the format `@workflow-name` if it takes no input parameters or `@workflow-name(param="")` if it takes input parameters.
+1. If the workflow takes input parameters:
+    1. Click **Configure Inputs** next to the monitor name and ID.
+        {{< img src="service_management/workflows/monitor-configure-inputs-arrow.png" alt="An attached workflow with a Configure Inputs link available" style="width:100%;" >}}
+    1. Enter values for the input parameters.<br>**Note**: Values can include monitor message template variables. To see a list of available variables, click **Use Message Template Variables** in the upper-right of the **Configure notifications & automations** section.
+    <br>The parameters populate in the mention within the notification message field.<br>For example, if you configure a workflow named `@workflow-test-inputs` to have the following parameters:
+        {{< img src="service_management/workflows/monitor-configure-inputs-modal.png" alt="Configure Inputs panel with values set as follows: im_a_string to 'abc', im_a_number to 123, im_a_boolean toggled to true, and i_have_a_default_value to 'override this'" style="width:70%;" >}}
+        the mention changes to `@workflow-test-inputs(im_a_string="abc", im_a_number=123, im_a_boolean=true, i_have_a_default_value="override this")`.
 1. Save the monitor.
 
-Each time the monitor threshold is hit, the monitor triggers a workflow run.
+Each time the monitor threshold is reached, the monitor triggers a workflow run.
 
 ### Test a monitor trigger
 
@@ -143,6 +151,25 @@ You can manually start a workflow from a Cloud SIEM Security Signal panel.
 1. You can see the workflow run status in the **Workflow** section of the Security Signal.
 
 For additional examples of security workflows you can automate, see [Automate Security Workflows with Workflow Automation][4].
+
+## GitHub triggers
+
+<div class="alert alert-info"><strong>Note</strong>: Your GitHub account must have permission to create webhooks to use this feature.</div>
+
+You can trigger a workflow from GitHub using the following steps.
+
+1. Add a GitHub trigger to your workflow:
+   - If your workflow doesn't have any triggers, click **Add Trigger > GitHub**.
+   - If your workflow already has one or more triggers and you're adding GitHub as an additional trigger, click the **Add Trigger** (lightning bolt) icon and select **GitHub**.
+1. Navigate to the GitHub repo you want to use to trigger your workflow.
+1. In GitHub, click **Settings**, click **Webhooks**, and then click **Add webhook**.
+1. In the **Configure** tab of your workflow, copy the **Payload URL**. Paste it into the **Payload URL** field on the GitHub webhook creation page.
+1. In GitHub, set the **Content type** of your webhook to `application/json`.
+1. In GitHub, create a secret that is at least 16 characters long, then copy this secret to the **Secret** field of your workflow trigger.
+1. In GitHub, choose which events you would like to trigger your webhook, then click **Add webhook**.
+1. _Optionally_, in your workflow, click the **plus** (+) to add a **Rate Limit**.
+1. Click **Save** on your workflow.
+1. Click **Publish** to publish the workflow. A workflow must be published before you can trigger it from GitHub. Published workflows accrue costs based on workflow executions. For more information, see the [Datadog Pricing page][11].
 
 ## API triggers
 

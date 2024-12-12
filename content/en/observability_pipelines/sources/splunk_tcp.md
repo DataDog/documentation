@@ -1,5 +1,5 @@
 ---
-title: Splunk Heavy and Universal Forwarders (TCP) Source
+title: Splunk Heavy or Universal Forwarders (TCP) Source
 disable_toc: false
 ---
 

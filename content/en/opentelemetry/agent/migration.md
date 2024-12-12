@@ -10,8 +10,8 @@ further_reading:
   text: "Install the Datadog Agent with Embedded OpenTelemetry Collector"
 ---
 
-{{< callout url="https://www.datadoghq.com/private-beta/agent-with-embedded-opentelemetry-collector/" btn_hidden="false" header="Join the Beta!">}}
-  The Datadog Agent with embedded OpenTelemetry Collector is in private beta. To request access, fill out this form.
+{{< callout url="https://www.datadoghq.com/private-beta/agent-with-embedded-opentelemetry-collector/" btn_hidden="false" header="Join the Preview!">}}
+  The Datadog Agent with embedded OpenTelemetry Collector is in Preview. To request access, fill out this form.
 {{< /callout >}}
 
 If you are already using a standalone OpenTelemetry (OTel) Collector for your OTel-instrumented applications, you can migrate to the Datadog Agent with embedded OpenTelemetry Collector. The embedded OTel Collector allows you to leverage Datadog's enhanced capabilities, including optimized configurations, seamless integrations, and additional features tailored for the Datadog ecosystem.
@@ -187,8 +187,8 @@ datadog:
    {{< code-block lang="yaml" filename="datadog-values.yaml" collapsible="true" >}}
 agents:
   image:
-    repository: datadog/agent
-    tag: 7.57.0-v1.0-ot-beta-jmx
+    repository: gcr.io/datadoghq/agent
+    tag: 7.59.0-v1.1.0-ot-beta-jmx
     doNotCheckTag: true
 ...
    {{< /code-block >}}
@@ -251,8 +251,8 @@ Your `datadog-values.yaml` file should look something like this:
 {{< code-block lang="yaml" filename="datadog-values.yaml" collapsible="false" >}}
 agents:
   image:
-    repository: datadog/agent
-    tag: 7.57.0-v1.0-ot-beta-jmx
+    repository: gcr.io/datadoghq/agent
+    tag: 7.59.0-v1.1.0-ot-beta-jmx
     doNotCheckTag: true
 
 datadog:

@@ -51,7 +51,7 @@ Puedes habilitar el consumo de métricas históricas para varias métricas a la 
 1. Selecciona **Enable historical metrics** (Habilitar métricas históricas).
 1. Especifica un prefijo en el espacio de nombres de la métrica para habilitar el consumo de métricas históricas en todas las métricas que coinciden con ese espacio de nombres.
 
-{{< img src="metrics/custom_metrics/historical_metrics/enable_bulk_historical_metrics.mp4" alt=Vídeo "Guía de la habilitación masiva del consumo de métricas históricas" =true >}}
+{{< img src="metrics/custom_metrics/historical_metrics/enable_bulk_historical_metrics.mp4" alt="Guía de la habilitación masiva del consumo de métricas históricas" video=true >}}
 
 ## Envío de métricas históricas
 

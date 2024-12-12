@@ -1,6 +1,6 @@
 ---
-title: Ruby Custom Instrumentation using OpenTelemetry API
-description: 'Instrument your Ruby application with OpenTelemetry API to send traces to Datadog.'
+title: Ruby Custom Instrumentation using the OpenTelemetry API
+description: 'Instrument your Ruby application with the OpenTelemetry API to send traces to Datadog.'
 code_lang: otel
 type: multi-code-lang
 code_lang_weight: 2
@@ -66,6 +66,8 @@ The following OpenTelemetry features implemented in the Datadog library as noted
 
     - [Add additional Datadog configuration settings][6]
     - [Activate or reconfigure Datadog instrumentation][7]
+   
+   OpenTelemetry configuration can be changed separately, using the [`OpenTelemetry::SDK.configure` block][15].
 
 Datadog combines these OpenTelemetry spans with other Datadog APM spans into a single trace of your application. It supports [integration instrumentation][7] and [OpenTelemetry Automatic instrumentation][8] also.
 
@@ -125,9 +127,10 @@ Read the [OpenTelemetry][14] specification for more information.
 [5]: https://opentelemetry.io/docs/instrumentation/ruby/manual/
 [6]: /tracing/trace_collection/dd_libraries/ruby/#additional-configuration
 [7]: /tracing/trace_collection/dd_libraries/ruby#integration-instrumentation
-[8]: https://opentelemetry.io/docs/instrumentation/ruby/automatic/
+[8]: https://opentelemetry.io/docs/languages/ruby/libraries/
 [9]: /tracing/trace_collection/trace_context_propagation/
 [10]: /tracing/trace_collection/dd_libraries/ruby/#custom-logging
 [12]: /opentelemetry/guide/otel_api_tracing_interoperability/
 [13]: https://opentelemetry.io/docs/specs/otel/trace/api/#add-events
 [14]: https://opentelemetry.io/docs/specs/otel/trace/api/#record-exception
+[15]: https://opentelemetry.io/docs/languages/ruby/getting-started/#instrumentation

@@ -1,10 +1,12 @@
 ---
 title: Serverless Warnings
-
 further_reading:
 - link: "https://www.datadoghq.com/blog/serverless-insights/"
   tag: "Blog"
   text: "Read more about serverless insights"
+- link: "https://www.datadoghq.com/blog/identifying-deprecated-lambda-functions/"
+  tag: "Blog"
+  text: "Identify deprecated Lambda functions with Datadog"
 aliases:
     - /serverless/troubleshooting/insights/
     - /serverless/insights/
@@ -126,6 +128,12 @@ At least one invocation in the selected time range approached the maximum durati
 
 **Resolution:** Lambda functions approaching the maximum timeout limit of 15 minutes risk termination by the Lambda runtime. This could lead to slow or failed responses to incoming requests. Consider improving the performance of your Lambda function, using smaller lambdas in a Step Function, or moving your workload to a longer running environment like ECS Fargate.
 
+### Recursive invocations dropped
+
+Invocations in this function have a recursive loop, generally caused by recursive triggering between AWS entities (for example, Lambda -> SQS -> Lambda). When this exceeds your `maxReceiveCount` (default 16), then it adds to this metric. For more information, see [Use Lambda recursive loop detection to prevent infinite loops][15].
+
+**Resolution:** Find recursive calls in your AWS entities related to this function. Look for related entities such as [SQS, SNS, and S3][16].
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -144,3 +152,5 @@ At least one invocation in the selected time range approached the maximum durati
 [12]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-memory.html
 [13]: https://aws.amazon.com/blogs/compute/optimizing-your-aws-lambda-costs-part-1/
 [14]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html
+[15]: https://docs.aws.amazon.com/lambda/latest/dg/invocation-recursion.html
+[16]: https://docs.aws.amazon.com/lambda/latest/dg/invocation-recursion.html#invocation-recursion-supported

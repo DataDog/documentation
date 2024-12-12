@@ -24,7 +24,9 @@ Billing of [GKE Autopilot][5] environments is the same as that of [GKE Standard]
 
 **How does Datadog measure hourly on-demand usage?**
 
-Containers are metered in five minute increments. The difference is calculated between the number of containers observed and the allotment for the account. The allotment for the account is the total of the included containers (5/host for Pro and 10/host for Enterprise by default) and any contracted container commitment. The number of containers exceeding the allotment is averaged out over the hour to calculate the hourly on-demand usage. The average is determined by summing each five minute increment over each hour and dividing by twelve. This method normalizes the on-demand usage for short term spikes and variations between hosts.
+Containers are metered in five minute increments. The difference is calculated between the number of containers observed and the allotment for the account. The allotment for the account is the total of the included containers (5/host for Pro and 10/host for Enterprise by default) and any contracted container commitment.
+
+First, the five-minute usage increments are averaged over the hour by dividing total usage by twelve. Secondly, the allotment is deducted from each hour. Finally, the total on-demand usage is the sum of the on-demand usage for each hour. This method normalizes the on-demand usage for short term spikes and variations between hosts.
 
 **What if a user runs a particularly high number of containers for a short period of time?**
 

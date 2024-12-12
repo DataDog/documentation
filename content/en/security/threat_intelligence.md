@@ -72,6 +72,8 @@ Sources, categories, and intents are available as facets and filters on relevant
 | [Abuse.ch](https://abuse.ch/) Malware Bazaar| malware | Malware on hosts | CWS |
 | [Minerstat](https://minerstat.com/mining-pool-whitelist.txt) | malware | Coinminer activity with known mining pools| CWS |
 | Tor | tor | Policy violations for user activity | ASM, Cloud SIEM, and CWS |
+| [Threatfox](https://threatfox.abuse.ch/) | attack | Indicators of compromise (IOCs) associated with malware | Cloud SIEM, and CWS |
+
 
 ### Threat Intelligence Categories
 
@@ -82,7 +84,7 @@ Sources, categories, and intents are available as facets and filters on relevant
 | malware | malicious | application library versions, file hashes | Malicious packages and communication with mining pools| CWS |
 | scanner | suspicious | IP addresses | Reputation for scanners | ASM and Cloud SIEM |
 | hosting_proxy | suspicious | IP addresses | Datacenter IPs with a reputation of abuse, such as for distributed credential stuffing attacks | ASM and Cloud SIEM |
-| Tor | suspicious | IP addresses  | Corporate policy violations for user activity | ASM and Cloud SIEM |
+| tor | suspicious | IP addresses  | Corporate policy violations for user activity | ASM and Cloud SIEM |
 
 ### Threat Intelligence Intents
 | Intent | Use Case |

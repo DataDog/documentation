@@ -19,8 +19,8 @@ further_reading:
   text: "Handling Private Action Credentials for App Builder"
 ---
 
-{{< callout url="https://www.datadoghq.com/private-beta/private-actions/" btn_hidden="false" header="Join the Beta!">}}
-Private Actions are in beta. Use this form to request access today.
+{{< callout url="https://www.datadoghq.com/product-preview/private-actions/" btn_hidden="false" header="Join the Preview!">}}
+Private Actions are in Preview. Use this form to request access today.
 {{< /callout >}}
 
 ## Overview
@@ -46,7 +46,7 @@ To use App Builder with private actions, you must be able to point a hostname to
 
 In addition, the host must have the following:
 - 2GB of RAM
-- Docker (with Docker Compose if that is your preference)
+- Docker (with Docker Compose if that is your preference) or Kubernetes
 
 ## Set up a private action runner
 
@@ -57,7 +57,7 @@ From the **Private Action Runner** page in [Workflow Automation][6] or [App Buil
 1. Click **Both**.
 1. Enter a runner hostname. App Builder calls your runner using this hostname over HTTPS. You must bring your own SSL termination and forward to port 9016 in the container.
 1. Create a directory on your host where the runner can store its configuration, such as `./config`. You can also use this directory to store any credentials required by the runner's connection.
-1. Deploy your runner with Docker or Docker Compose:
+1. Deploy your runner with Docker, Docker Compose, or Kubernetes:
 
 {{< tabs >}}
 {{% tab "Docker" %}}
@@ -77,6 +77,21 @@ From the **Private Action Runner** page in [Workflow Automation][6] or [App Buil
 
 [101]: https://docs.docker.com/compose/compose-application-model/
 {{% /tab %}}
+
+{{% tab "Kubernetes" %}}
+1. Click **Kubernetes**.
+1. Confirm that you have installed `kubectl` on your machine by running `kubectl version` and verifying that there is output, then check the box on the **Private Action Runner** page.
+1. Confirm that you have installed `helm` on your machine by running `helm version` and verifying that there is output, then check the box on the **Private Action Runner** page.
+1. Confirm that you have sufficient permissions to create Kubernetes resources in your cluster, then check the box on the **Private Action Runner** page.<br>Further instructions appear in the app.
+1. Follow the instructions provided in the app to:
+    1. Enroll the runner and generate the config.
+    1. Create a `values.yaml` file.
+    1. Add the **Private Action Runner** to your Helm repositories.
+    1. Install the Helm chart.
+1. Run `kubectl get pods -w` and verify that the status of the Private Action Runner pod becomes `Ready`.
+
+
+{{% /tab %}}
 {{< /tabs >}}
 {{% /collapse-content %}}
 
@@ -85,7 +100,7 @@ From the **Private Action Runner** page in [Workflow Automation][6] or [App Buil
 1. Click **App Builder**.
 1. Enter a runner hostname. App Builder calls your runner using this hostname over HTTPS. You must bring your own SSL termination and forward to port 9016 in the container.
 1. Create a directory on your host where the runner can store its configuration, such as `./config`. You can also use this directory to store any credentials required by the runner's connection.
-1. Deploy your runner with Docker or Docker Compose:
+1. Deploy your runner with Docker, Docker Compose, or Kubernetes:
 {{< tabs >}}
 {{% tab "Docker" %}}
 1. Click **Docker**.
@@ -106,6 +121,21 @@ From the **Private Action Runner** page in [Workflow Automation][6] or [App Buil
 
 [101]: https://docs.docker.com/compose/compose-application-model/
 {{% /tab %}}
+
+{{% tab "Kubernetes" %}}
+1. Click **Kubernetes**.
+1. Confirm that you have installed `kubectl` on your machine by running `kubectl version` and verifying that there is output, then check the box on the **Private Action Runner** page.
+1. Confirm that you have installed `helm` on your machine by running `helm version` and verifying that there is output, then check the box on the **Private Action Runner** page.
+1. Confirm that you have sufficient permissions to create Kubernetes resources in your cluster, then check the box on the **Private Action Runner** page.<br>Further instructions appear in the app.
+1. Follow the instructions provided in the app to:
+    1. Enroll the runner and generate the config.
+    1. Create a `values.yaml` file.
+    1. Add the **Private Action Runner** to your Helm repositories.
+    1. Install the Helm chart.
+1. Run `kubectl get pods -w` and verify that the status of the Private Action Runner pod becomes `Ready`.
+
+
+{{% /tab %}}
 {{< /tabs >}}
 
 {{% /collapse-content %}}
@@ -114,7 +144,7 @@ From the **Private Action Runner** page in [Workflow Automation][6] or [App Buil
 1. Enter a name for your runner.
 1. Click **Workflows**.
 1. Create a directory on your host where the runner can store its configuration, such as `./config`. You can also use this directory to store any credentials required by the runner's connection.
-1. Deploy your runner with Docker or Docker Compose:
+1. Deploy your runner with Docker, Docker Compose, or Kubernetes:
 {{< tabs >}}
 {{% tab "Docker" %}}
 1. Click **Docker**.
@@ -132,6 +162,20 @@ From the **Private Action Runner** page in [Workflow Automation][6] or [App Buil
    You can safely ignore the error `DATADOG TRACER DIAGNOSTIC - Agent Error: connect ECONNREFUSED`.
 
 [101]: https://docs.docker.com/compose/compose-application-model/
+{{% /tab %}}
+
+{{% tab "Kubernetes" %}}
+1. Click **Kubernetes**.
+1. Confirm that you have installed `kubectl` on your machine by running `kubectl version` and verifying that there is output, then check the box on the **Private Action Runner** page.
+1. Confirm that you have installed `helm` on your machine by running `helm version` and verifying that there is output, then check the box on the **Private Action Runner** page.
+1. Confirm that you have sufficient permissions to create Kubernetes resources in your cluster, then check the box on the **Private Action Runner** page.<br>Further instructions appear in the app.
+1. Follow the instructions provided in the app to:
+    1. Enroll the runner and generate the config.
+    1. Create a `values.yaml` file.
+    1. Add the **Private Action Runner** to your Helm repositories.
+    1. Install the Helm chart.
+1. Run `kubectl get pods -w` and verify that the status of the Private Action Runner pod becomes `Ready`.
+
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -176,7 +220,189 @@ To use a private action in your [Workflow Automation][11] workflow or [App Build
 
 ## Edit private runners
 
+### Edit connections or delete runners
+
 From the **Private Action Runner** page in [Workflow Automation][6] or [App Builder][7], you can view all of your private runners together with the workflows or apps that use each runner. To edit the connection for a runner, click **View Details**. Click the trash can icon to delete a runner.
+
+### Change the allowlist of a runner
+
+To edit the allowlist for a Private Action Runner:
+
+1. Edit the `actionsAllowlist` section of the `config.yaml` file in your runner's environment and add or remove the relevant permissions.
+1. Restart the runner by restarting your container or deployment.
+
+{{% collapse-content title="Available permissions" level="p" %}}
+
+<details>
+  <summary>Ansible</summary>
+  <pre>"com.datadoghq.ansible.invokePlaybook"</pre>
+</details>
+
+<details>
+  <summary>HTTP</summary>
+  <pre>"com.datadoghq.http.request"</pre>
+</details>
+
+<details>
+  <summary>Jenkins</summary>
+  <pre>"com.datadoghq.jenkins.buildJenkinsJob"
+"com.datadoghq.jenkins.deleteJenkinsJob"
+"com.datadoghq.jenkins.getJobStatus"</pre>
+</details>
+
+<details>
+  <summary>Kubernetes Apps</summary>
+  <pre>"com.datadoghq.kubernetes.apps.createControllerRevision"
+"com.datadoghq.kubernetes.apps.createDaemonSet"
+"com.datadoghq.kubernetes.apps.createDeployment"
+"com.datadoghq.kubernetes.apps.createReplicaSet"
+"com.datadoghq.kubernetes.apps.createStatefulSet"
+"com.datadoghq.kubernetes.apps.deleteControllerRevision"
+"com.datadoghq.kubernetes.apps.deleteDaemonSet"
+"com.datadoghq.kubernetes.apps.deleteDeployment"
+"com.datadoghq.kubernetes.apps.deleteMultipleControllerRevisions"
+"com.datadoghq.kubernetes.apps.deleteMultipleDaemonSets"
+"com.datadoghq.kubernetes.apps.deleteMultipleDeployments"
+"com.datadoghq.kubernetes.apps.deleteMultipleReplicaSets"
+"com.datadoghq.kubernetes.apps.deleteMultipleStatefulSets"
+"com.datadoghq.kubernetes.apps.deleteReplicaSet"
+"com.datadoghq.kubernetes.apps.deleteStatefulSet"
+"com.datadoghq.kubernetes.apps.getControllerRevision"
+"com.datadoghq.kubernetes.apps.getDaemonSet"
+"com.datadoghq.kubernetes.apps.getDeployment"
+"com.datadoghq.kubernetes.apps.getReplicaSet"
+"com.datadoghq.kubernetes.apps.getStatefulSet"
+"com.datadoghq.kubernetes.apps.listControllerRevision"
+"com.datadoghq.kubernetes.apps.listDaemonSet"
+"com.datadoghq.kubernetes.apps.listDeployment"
+"com.datadoghq.kubernetes.apps.listReplicaSet"
+"com.datadoghq.kubernetes.apps.listStatefulSet"
+"com.datadoghq.kubernetes.apps.patchControllerRevision"
+"com.datadoghq.kubernetes.apps.patchDaemonSet"
+"com.datadoghq.kubernetes.apps.patchDeployment"
+"com.datadoghq.kubernetes.apps.patchReplicaSet"
+"com.datadoghq.kubernetes.apps.patchStatefulSet"
+"com.datadoghq.kubernetes.apps.restartDeployment"
+"com.datadoghq.kubernetes.apps.updateControllerRevision"
+"com.datadoghq.kubernetes.apps.updateDaemonSet"
+"com.datadoghq.kubernetes.apps.updateDeployment"
+"com.datadoghq.kubernetes.apps.updateReplicaSet"
+"com.datadoghq.kubernetes.apps.updateStatefulSet"</pre>
+</details>
+
+<details>
+  <summary>Kubernetes Core</summary>
+  <pre>"com.datadoghq.kubernetes.core.createConfigMap"
+"com.datadoghq.kubernetes.core.createEndpoints"
+"com.datadoghq.kubernetes.core.createEvent"
+"com.datadoghq.kubernetes.core.createLimitRange"
+"com.datadoghq.kubernetes.core.createNamespace"
+"com.datadoghq.kubernetes.core.createNode"
+"com.datadoghq.kubernetes.core.createPersistentVolume"
+"com.datadoghq.kubernetes.core.createPersistentVolumeClaim"
+"com.datadoghq.kubernetes.core.createPod"
+"com.datadoghq.kubernetes.core.createPodTemplate"
+"com.datadoghq.kubernetes.core.createReplicationController"
+"com.datadoghq.kubernetes.core.createResourceQuota"
+"com.datadoghq.kubernetes.core.createService"
+"com.datadoghq.kubernetes.core.createServiceAccount"
+"com.datadoghq.kubernetes.core.deleteConfigMap"
+"com.datadoghq.kubernetes.core.deleteEndpoints"
+"com.datadoghq.kubernetes.core.deleteEvent"
+"com.datadoghq.kubernetes.core.deleteLimitRange"
+"com.datadoghq.kubernetes.core.deleteMultipleConfigMaps"
+"com.datadoghq.kubernetes.core.deleteMultipleEndpoints"
+"com.datadoghq.kubernetes.core.deleteMultipleEvents"
+"com.datadoghq.kubernetes.core.deleteMultipleLimitRanges"
+"com.datadoghq.kubernetes.core.deleteMultipleNodes"
+"com.datadoghq.kubernetes.core.deleteMultiplePersistentVolumeClaims"
+"com.datadoghq.kubernetes.core.deleteMultiplePersistentVolumes"
+"com.datadoghq.kubernetes.core.deleteMultiplePodTemplates"
+"com.datadoghq.kubernetes.core.deleteMultiplePods"
+"com.datadoghq.kubernetes.core.deleteMultipleReplicationControllers"
+"com.datadoghq.kubernetes.core.deleteMultipleResourceQuotas"
+"com.datadoghq.kubernetes.core.deleteMultipleServiceAccounts"
+"com.datadoghq.kubernetes.core.deleteNamespace"
+"com.datadoghq.kubernetes.core.deleteNode"
+"com.datadoghq.kubernetes.core.deletePersistentVolume"
+"com.datadoghq.kubernetes.core.deletePersistentVolumeClaim"
+"com.datadoghq.kubernetes.core.deletePod"
+"com.datadoghq.kubernetes.core.deletePodTemplate"
+"com.datadoghq.kubernetes.core.deleteReplicationController"
+"com.datadoghq.kubernetes.core.deleteResourceQuota"
+"com.datadoghq.kubernetes.core.deleteService"
+"com.datadoghq.kubernetes.core.deleteServiceAccount"
+"com.datadoghq.kubernetes.core.getConfigMap"
+"com.datadoghq.kubernetes.core.getEndpoints"
+"com.datadoghq.kubernetes.core.getEvent"
+"com.datadoghq.kubernetes.core.getLimitRange"
+"com.datadoghq.kubernetes.core.getNamespace"
+"com.datadoghq.kubernetes.core.getNode"
+"com.datadoghq.kubernetes.core.getPersistentVolume"
+"com.datadoghq.kubernetes.core.getPersistentVolumeClaim"
+"com.datadoghq.kubernetes.core.getPod"
+"com.datadoghq.kubernetes.core.getPodTemplate"
+"com.datadoghq.kubernetes.core.getReplicationController"
+"com.datadoghq.kubernetes.core.getResourceQuota"
+"com.datadoghq.kubernetes.core.getService"
+"com.datadoghq.kubernetes.core.getServiceAccount"
+"com.datadoghq.kubernetes.core.listConfigMap"
+"com.datadoghq.kubernetes.core.listEndpoints"
+"com.datadoghq.kubernetes.core.listEvent"
+"com.datadoghq.kubernetes.core.listLimitRange"
+"com.datadoghq.kubernetes.core.listNamespace"
+"com.datadoghq.kubernetes.core.listNode"
+"com.datadoghq.kubernetes.core.listPersistentVolume"
+"com.datadoghq.kubernetes.core.listPersistentVolumeClaim"
+"com.datadoghq.kubernetes.core.listPod"
+"com.datadoghq.kubernetes.core.listPodTemplate"
+"com.datadoghq.kubernetes.core.listReplicationController"
+"com.datadoghq.kubernetes.core.listResourceQuota"
+"com.datadoghq.kubernetes.core.listService"
+"com.datadoghq.kubernetes.core.listServiceAccount"
+"com.datadoghq.kubernetes.core.patchConfigMap"
+"com.datadoghq.kubernetes.core.patchEndpoints"
+"com.datadoghq.kubernetes.core.patchEvent"
+"com.datadoghq.kubernetes.core.patchLimitRange"
+"com.datadoghq.kubernetes.core.patchNamespace"
+"com.datadoghq.kubernetes.core.patchNode"
+"com.datadoghq.kubernetes.core.patchPersistentVolume"
+"com.datadoghq.kubernetes.core.patchPersistentVolumeClaim"
+"com.datadoghq.kubernetes.core.patchPod"
+"com.datadoghq.kubernetes.core.patchPodTemplate"
+"com.datadoghq.kubernetes.core.patchReplicationController"
+"com.datadoghq.kubernetes.core.patchResourceQuota"
+"com.datadoghq.kubernetes.core.patchService"
+"com.datadoghq.kubernetes.core.patchServiceAccount"
+"com.datadoghq.kubernetes.core.updateConfigMap"
+"com.datadoghq.kubernetes.core.updateEndpoints"
+"com.datadoghq.kubernetes.core.updateEvent"
+"com.datadoghq.kubernetes.core.updateLimitRange"
+"com.datadoghq.kubernetes.core.updateNamespace"
+"com.datadoghq.kubernetes.core.updateNode"
+"com.datadoghq.kubernetes.core.updatePersistentVolume"
+"com.datadoghq.kubernetes.core.updatePersistentVolumeClaim"
+"com.datadoghq.kubernetes.core.updatePod"
+"com.datadoghq.kubernetes.core.updatePodTemplate"
+"com.datadoghq.kubernetes.core.updateReplicationController"
+"com.datadoghq.kubernetes.core.updateResourceQuota"
+"com.datadoghq.kubernetes.core.updateService"
+"com.datadoghq.kubernetes.core.updateServiceAccount"</pre>
+</details>
+
+<details>
+  <summary>PostgreSQL</summary>
+  <pre>"com.datadoghq.postgresql.select"</pre>
+</details>
+
+<details>
+  <summary>Temporal</summary>
+  <pre>"com.datadoghq.temporal.getWorkflowResult"
+"com.datadoghq.temporal.listWorkflows"
+"com.datadoghq.temporal.runWorkflow"</pre>
+</details>
+
+{{% /collapse-content %}}
 
 ## Further reading
 

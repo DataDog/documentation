@@ -33,6 +33,15 @@ Designed for new users, the quick start workflow offers an efficient setup proce
 
 {{% csm-agentless-exclude-resources %}}
 
+## Update the CloudFormation stack
+
+Datadog recommends updating the CloudFormation stack regularly, so you can get access to new features and bug fixes as they get released. To do so, follow these steps:
+1. Log in to your AWS console and go to the CloudFormation Stacks page.
+2. Select the **DatadogIntegration-DatadogAgentlessScanning-...** CloudFormation sub-stack, click **Update**, then click **Update nested stack**.
+3. Click **Replace existing template**.
+4. In the following S3 URL: `https://datadog-cloudformation-template-quickstart.s3.amazonaws.com/aws/<VERSION>/datadog_agentless_scanning.yaml`, replace `<VERSION>` with the version found in [aws_quickstart/version.txt][11]. Paste that URL into the **Amazon S3 URL** field.
+5. Click **Next** to advance through the next several pages without modifying them, then submit the form.
+
 ## Disable Agentless Scanning
 
 1. On the [Cloud Security Management Setup][10] page, click **Cloud Integrations** > **AWS**.
@@ -56,3 +65,4 @@ To uninstall Agentless Scanning, log in to your AWS console and delete the Cloud
 [8]: mailto:success@datadoghq.com
 [9]: https://github.com/DataDog/terraform-module-datadog-agentless-scanner/blob/main/README.md#uninstall
 [10]: https://app.datadoghq.com/security/configuration/csm/setup
+[11]: https://github.com/DataDog/cloudformation-template/blob/master/aws_quickstart/version.txt

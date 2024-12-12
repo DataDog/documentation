@@ -5,7 +5,7 @@ categories:
 - nube
 - recopilación de logs
 - la red
-custom_kind: integración
+custom_kind: integration
 dependencies: []
 description: Reúne tus logs de Amazon VPC.
 doc_link: https://docs.datadoghq.com/integrations/amazon_vpc/
@@ -43,19 +43,21 @@ Si aún no lo has hecho, configura la [integración Amazon Web Services][1].
 
 No se requieren pasos adicionales para recopilar métricas de Amazon VPC que no son `aws.vpc.flowlogs.*`. Las métricas con el prefijo `aws.vpc.flowlogs.*` son generadas por la integración de [logs de flujo de VPC en Datadog][2]. Para habilitar la recopilación del métricas de logs de flujo, consulta la sección de [recopilación de logs](#log-collection) a continuación.
 
-Para habilitar la recopilación de métricas `aws.vpc.subnet.*` en tu cuenta, ponte en contacto con el [servicio de asistencia de Datadog][3].
+Para las métricas `aws.vpc.subnet.*`:
+   1. Asegúrate de que la integración [Amazon EC2][3] esté instalada y que la recopilación de métricas de EC2 esté habilitada en la pestaña **Metric Collection** en la [página de la integración AWS][4].
+   2. Ponte en contacto con el [servicio de asistencia de Datadog][5] para habilitar la recopilación en tu cuenta.
 
-### APM
+### Recopilación de logs
 
 
-#### Buscar o crear el recurso de destino en AWS para tus logs de flujo VPC
+#### Buscar o crear el recurso de destino en AWS para tus logs de flujo de VPC
 
 Los logs de flujo de VPC deben enviarse primero a un destino intermedio, antes de enviarse a Datadog. Puedes enviarlos directamente a Amazon Data Firehose o puedes almacenarlos en un bucket de S3 o en un grupo de CloudWatch Logs.
 
-Amazon Data Firehose es la opción recomendada para enviar logs de flujo de VPC a Datadog, ya que tiene menos gastos operativos y puede ser más rentable. Para obtener más información, consulta [Introducción de logs de flujo de Amazon VPC en Kinesis Data Firehose][4].
+Amazon Data Firehose es la opción recomendada para enviar logs de flujo de VPC a Datadog, ya que tiene menos gastos operativos y puede ser más rentable. Para obtener más información, consulta [Introducción de logs de flujo de Amazon VPC en Kinesis Data Firehose][6].
 
 1. Crea uno nuevo o elige uno existente:
-   - Amazon Data Firehose (recomendado). Si aún no dispones de un flujo de entrega existente en Amazon Data Firehose para enviar logs a Datadog, sigue las instrucciones de la guía [Enviar logs de servicios AWS con el destino Datadog Amazon Firehose][5] para crear uno. **Nota:** Opcionalmente, puedes elegir un flujo de entrega de otra cuenta AWS, independiente de tu VPC, para la recopilación y la entrega centralizada de logs.
+   - Amazon Data Firehose (recomendado). Si aún no dispones de un flujo de entrega existente en Amazon Data Firehose para enviar logs a Datadog, sigue las instrucciones de la guía [Enviar logs de servicios AWS con el destino Datadog Amazon Firehose][7] para crear uno. **Nota:** Opcionalmente, puedes elegir un flujo de entrega de otra cuenta AWS, independiente de tu VPC, para la recopilación y la entrega centralizada de logs.
    - Bucket de S3 o ruta de carpeta.
    - Grupo de CloudWatch Logs.
 
@@ -78,16 +80,16 @@ Si has seleccionado Amazon Data Firehose como destino, ya está todo listo.
 
 Si has seleccionado un bucket de S3 o el grupo de CloudWatch Logs como destino:
 
-1. Si aún no lo has hecho, configura la [función Lambda del Datadog Forwarder[6] en tu cuenta AWS.
+1. Si aún no lo has hecho, configura la [función Lambda del Datadog Forwarder][8] en tu cuenta AWS.
 2. Una vez configurada, ve a la función Lambda del Datadog Forwarder. En la sección Información general de la función, haz clic en **Add Trigger** (Añadir activador).
 3. Para configurar un activador, selecciona el activador **S3** o **CloudWatch Logs**.
 4. Selecciona el bucket de S3 o el grupo de CloudWatch Logs que contiene los logs de tu VPC.
 5. Para S3, deja el tipo evento como `All object create events`.
 6. Haz clic en **Add** (Añadir) para añadir el activador a tu Lambda.
 
-Para empezar a explorar tus logs, ve al [Explorador de logs][7].
+Ve al [Explorador de logs][9] para empezar a explorar tus logs.
 
-Para obtener más información sobre la recopilación de logs de servicios AWS, consulta [Enviar logs de servicios AWS con la función Lambda en Datadog][8].
+Para obtener más información sobre la recopilación de logs de servicios AWS, consulta [Enviar logs de servicios AWS con la función Lambda en Datadog][10].
 
 ## Datos recopilados
 
@@ -95,30 +97,32 @@ Para obtener más información sobre la recopilación de logs de servicios AWS, 
 {{< get-metrics-from-git "amazon_vpc" >}}
 
 
-A cada una de las métricas recuperadas de AWS se le asignan las mismas etiquetas que aparecen en la consola de AWS, incluidos, entre otros, el nombre del host y los grupos de seguridad.
+A cada una de las métricas recuperadas de AWS se le asignan las mismas etiquetas (tags) que aparecen en la consola de AWS, incluidos, entre otros, el nombre del host y los grupos de seguridad.
 
 ### Eventos
 
 La integración de Amazon VPC no incluye eventos.
 
-### Checks de servicios
+### Checks de servicio
 
 La integración de Amazon VPC no incluye checks de servicios.
 
-## Resolución de problemas
+## Solucionar problemas
 
-¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][3].
+¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][5].
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://docs.datadoghq.com/es/integrations/amazon_web_services/
 [2]: https://serverlessrepo.aws.amazon.com/applications/arn:aws:serverlessrepo:us-east-1:464622532012:applications~Datadog-VPC-Flow-Logs
-[3]: https://docs.datadoghq.com/es/help/
-[4]: https://aws.amazon.com/blogs/networking-and-content-delivery/introducing-amazon-vpc-flow-logs-kinesis-data-firehose/
-[5]: https://docs.datadoghq.com/es/logs/guide/send-aws-services-logs-with-the-datadog-kinesis-firehose-destination/
-[6]: https://docs.datadoghq.com/es/logs/guide/forwarder/
-[7]: https://docs.datadoghq.com/es/logs/explorer/
-[8]: https://docs.datadoghq.com/es/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/
-[9]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_vpc/amazon_vpc_metadata.csv
+[3]: https://docs.datadoghq.com/es/integrations/amazon_ec2/
+[4]: https://app.datadoghq.com/integrations/amazon-web-services
+[5]: https://docs.datadoghq.com/es/help/
+[6]: https://aws.amazon.com/blogs/networking-and-content-delivery/introducing-amazon-vpc-flow-logs-kinesis-data-firehose/
+[7]: https://docs.datadoghq.com/es/logs/guide/send-aws-services-logs-with-the-datadog-kinesis-firehose-destination/
+[8]: https://docs.datadoghq.com/es/logs/guide/forwarder/
+[9]: https://docs.datadoghq.com/es/logs/explorer/
+[10]: https://docs.datadoghq.com/es/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/
+[11]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_vpc/amazon_vpc_metadata.csv

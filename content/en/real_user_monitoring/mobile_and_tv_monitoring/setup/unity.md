@@ -23,9 +23,9 @@ further_reading:
 ---
 ## Overview
 
-{{< beta-callout url="#" btn_hidden="true" >}}
-Unity Monitoring is in public beta.
-{{< /beta-callout >}}
+{{< callout url="#" btn_hidden="true" header="false">}}
+Unity Monitoring is in Preview.
+{{< /callout >}}
 
 Datadog Real User Monitoring (RUM) enables you to visualize and analyze user journeys of your application's individual users.
 
@@ -76,10 +76,11 @@ The following parameters are available:
 | --------- | --------- | ----------- |
 | Enable Datadog | No | Whether Datadog should be enabled. Disabling Datadog does not cause any of the Datadog APIs to fail, throw exceptions, or return `null` from any calls. It only stops the SDK from sending any information. |
 | Output Symbol Files | No | This option enables the output of symbol files for Datadog symbolication and file/line mapping features in Datadog Error Tracking. |
+| Perform Native Stack Mapping | No | Converts C# stacks traces to native stack traces in non-development builds. This allows for file and line mapping to C# code if symbol files are uploaded to Datadog. This is not supported if Output Symbols is disabled.
 | Client Token | Yes | Your client token created for your application on Datadog's website. |
 | Env | No | The name of the environment for your application. Defaults to `"prod"`. |
+| Service Name | No | The service name for your application. If this is not set, it is automatically set to your application's package name or bundle name (e.g.: com.example.android). |
 | Datadog Site | Yes | The site you send your data to. |
-| Custom Endpoint | No | A custom endpoint or proxy to send Datadog data through. Mostly used for debugging. |
 | Batch Size | Yes | Sets the preferred size of batched data uploaded to Datadog. This value impacts the size and number of requests performed by the SDK (small batches mean more requests, but each request becomes smaller in size). |
 | Upload Frequency | Yes | Sets the preferred frequency of uploading data to Datadog. |
 | Batch Processing Level | Yes | Defines the maximum amount of batches processed sequentially without a delay within one reading/uploading cycle. |
@@ -91,6 +92,9 @@ The following parameters are available:
 | RUM Application ID | Yes (if RUM is enabled) | The RUM Application ID created for your application on Datadog's website. |
 | Session Sample Rate | Yes | The percentage of sessions to send to Datadog. Between 0 and 100. |
 | Trace Sample Rate | Yes | The percentage of distributed traces to send to Datadog. Between 0 and 100. |
+| Trace Context Injection | Yes | Whether to inject trace context into `All` or `Only Sampled` resource requests. |
+| Track Non-Fatal ANRs | No | (Android Only) Wether to track non-fatal ANRs (Application Not Responding) errors. The \"SDK Default\" option disables ANR detection on Android 30+ because it would create too much noise over fatal ANRs. On Android 29 and below, however, the reporting of non-fatal ANRs is enabled by default, as fatal ANRs cannot be reported on those versions. |
+| Track Non-Fatal App Hangs | No | (iOS Only) Whether to track non-fatal app hangs. App hangs are detected when the app is unresponsive for a certain amount of time. The supplied "Threshold" is the amount of time in seconds that the app must be unresponsive before it is considered a non-fatal app hang. |
 | First Party Hosts | No | To enable distributed tracing, you must specify which hosts are considered "first party" and have trace information injected. |
 
 ### Sample RUM sessions
@@ -199,10 +203,10 @@ To enable Datadog Distributed Tracing, you must set the `First Party Hosts` in y
 
 ## Sending data when device is offline
 
-RUM ensures availability of data when your user device is offline. In case of low-network areas, or when the device battery is too low, all the RUM events are first stored on the local device in batches. 
+RUM ensures availability of data when your user device is offline. In case of low-network areas, or when the device battery is too low, all the RUM events are first stored on the local device in batches.
 
 Each batch follows the intake specification. They are sent as soon as the network is available, and the battery is high enough to ensure the Datadog SDK does not impact the end user's experience. If the network is not available while your application is in the foreground, or if an upload of data fails, the batch is kept until it can be sent successfully.
- 
+
 This means that even if users open your application while offline, no data is lost. To ensure the SDK does not use too much disk space, the data on the disk is automatically discarded if it gets too old.
 
 [1]: https://app.datadoghq.com/rum/application/create

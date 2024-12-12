@@ -9,7 +9,7 @@ further_reading:
 
 {{< img src="data_jobs/overview_062024.png" alt="Datadog Data Jobs Monitoring overview page" style="width:100%;" >}}
 
-Data Jobs Monitoring provides visibility into the performance and reliability of data processing jobs, including Apache Spark and Databricks jobs, along with the underlying infrastructure. Data Jobs Monitoring enables you to:
+Data Jobs Monitoring provides visibility into the performance, reliability, and cost efficiency of your data processing jobs, along with the underlying infrastructure. Data Jobs Monitoring enables you to:
 
 - Track the health and performance of data processing jobs across your accounts and workspaces. See which take up the most compute resources or have inefficiencies.
 - Receive an alert when a job fails—or when a job is taking too long to complete.
@@ -19,7 +19,7 @@ Data Jobs Monitoring provides visibility into the performance and reliability of
 
 ## Setup
 
-Data Jobs Monitoring is supported for Amazon EMR, Databricks (AWS, Azure, Google Cloud), Google Dataproc, and Spark on Kubernetes.
+Data Jobs Monitoring supports the monitoring of jobs on Amazon EMR, Databricks (AWS, Azure, Google Cloud), Google Dataproc, Spark on Kubernetes, and Apache Airflow.
 
 To get started, select your platform and follow the installation instructions:
 

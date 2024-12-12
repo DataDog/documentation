@@ -7,7 +7,7 @@ categories:
 - os & system
 - aws
 - log collection
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies: []
 description: インスタンスリソースの使用状況の追跡、ステータスチェックの監視など。
 doc_link: https://docs.datadoghq.com/integrations/amazon_ec2/
@@ -20,9 +20,9 @@ integration_version: ''
 is_public: true
 manifest_version: '1.0'
 monitors:
-  ec2_cpu_utilization: assets/monitors/ec2_cpu_utilization.json
-  ec2_host_ok: assets/monitors/ec2_host_ok.json
-  ec2_status_check: assets/monitors/ec2_status_check.json
+  CPU utilization is high: assets/monitors/ec2_cpu_utilization.json
+  Host Ok check is failing: assets/monitors/ec2_host_ok.json
+  Status check is failing: assets/monitors/ec2_status_check.json
 name: amazon_ec2
 public_title: Datadog-Amazon EC2 インテグレーション
 short_description: インスタンスリソースの使用状況の追跡、ステータスチェックの監視など。
@@ -66,7 +66,7 @@ Datadog は、CloudWatch API からのホストステータスに基づいて、
 
 EC2 インスタンスのシャットダウンが予期される場合にモニターをオフにするには、[AWS インテグレーションページ][2]で **EC2 automuting** チェックボックスをオンにします。
 
-{{< img src="integrations/amazon_ec2/aws_ec2_automuting.png" alt="Amazon EC2 オートミュート" >}}
+{{< img src="integrations/amazon_ec2/aws_ec2_automuting_2024.png" alt="Amazon EC2 オートミュート" >}}
 
 ### AWS Systems Manager (SSM) を使用した Agent のインストール
 
@@ -140,9 +140,9 @@ Datadog US サイトの場合は、`runCommand` をご使用の `<AWS_REGION>` (
 
 AWS から取得される各メトリクスには、ホスト名やセキュリティ グループなど、AWS コンソールに表示されるのと同じタグが割り当てられます。
 
-**注**:
+**注**: 
    - Datadog - EC2 インテグレーションでは、デフォルトでは `aws.ec2.instance_age` メトリクスは収集されません。このメトリクスの収集を有効にするには、[Datadog サポート][21]までお問い合わせください。
-   - Amazon EC2 インテグレーションでメトリクスの収集を無効にしても、`aws.ec2.host_ok` はデフォルトで収集され、インフラストラクチャーのリストに想定外のホストが表示される可能性があります。不要なホストを除外したい場合、それらの EC2 インスタンスに `datadog:true` などの AWS タグを付与します。[Datadog AWS インテグレーションページ][2]の **Metric Collection** タブにある **Limit metric collection to specific resources** テキストボックスで、そのタグを指定します。
+   - Amazon EC2 インテグレーションでメトリクスの収集を無効にしても、`aws.ec2.host_ok` はデフォルトで収集されるため、インフラストラクチャーリストに意図しないホストが表示される可能性があります。監視対象を希望するホストのみに制限するには、それらの EC2 インスタンスに `datadog:true` などの AWS タグを付与します。その後、[Datadog AWS インテグレーションページ][2]の **Metric Collection** タブにある **Limit metric collection to specific resources** テキストボックスにそのタグを指定します。
 
 ### サービスチェック
 {{< get-service-checks-from-git "amazon_ec2" >}}

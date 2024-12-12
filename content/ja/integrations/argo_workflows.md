@@ -42,7 +42,7 @@ draft: false
 git_integration_title: argo_workflows
 integration_id: argo-workflows
 integration_title: Argo Workflows
-integration_version: 1.0.2
+integration_version: 2.1.0
 is_public: true
 manifest_version: 2.0.0
 name: argo_workflows
