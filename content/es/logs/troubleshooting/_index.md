@@ -6,18 +6,18 @@ Si experimentas un comportamiento inesperado en logs de Datadog, hay algunos pro
 
 ## Logs faltantes - Cuota diaria de logs alcanzada
 
-No has realizado ningún cambio en la configuración de tus logs, pero el [Explorador de logs][2] muestra que faltan logs para hoy. Esto puede deberse a que has alcanzado tu cuota diaria.
+No has realizado ningún cambio en tu configuración de log, pero el [Log Explorer][2] muestra que faltan logs para hoy. Esto puede deberse a que has alcanzado tu cuota diaria.
 
 {{< img src="logs/troubleshooting/daily_quota_reached.png" alt="Gráfico de barras que muestra los logs faltantes y un mensaje que avisa que se ha alcanzado la cuota diaria" style="width:90%" >}}
 
 Para obtener más información sobre cómo configurar, actualizar o eliminar la cuota, consulta [Establecer cuota diaria][3].
 
-## Logs faltantes - Marca de tiempo fuera de la ventana de consumo
+## Logs faltantes: marca temporal fuera de la ventana de consumo
 
-Los logs con una marca de tiempo de más de 18 horas en el pasado se descartan en la entrada.
+Los logs con una marca temporal de más de 18 horas en el pasado se descartan en la entrada.
 Soluciona el problema en el origen comprobando qué `service` y `source` se ven afectados por la métrica `datadog.estimated_usage.logs.drop_count`.
 
-## No se puede analizar la clave de marca de tiempo de logs JSON
+## No se puede analizar la clave de marca temporal de logs JSON
 
 Si no puedes convertir la marca de tiempo de logs JSON a un [formato de fecha reconocido][4] antes de que se consuman en Datadog, sigue estos pasos para convertir y asignar las marcas de tiempo utilizando el [procesador aritmético][5] y el [reasignador de fechas de logs][6] de Datadog:
 
@@ -33,12 +33,15 @@ Si no puedes convertir la marca de tiempo de logs JSON a un [formato de fecha re
 
 3. Configura el [reasignador de fechas de logs][6] para que utilice el nuevo atributo como marca de tiempo oficial.
 
-Ve al [Explorador de logs][2] para ver los nuevos logs JSON con sus marcas de tiempo asignadas.
+Ve a [Log Explorer][2] para ver los nuevos logs JSON con su marca temporal asignada.
 
 ## Logs truncados
 
-Los logs de más de 1 MB se truncan.
-Soluciona el problema en el origen comprobando qué `service` y `source` se ven afectados por las métricas `datadog.estimated_usage.logs.truncated_count` y `datadog.estimated_usage.logs.truncated_bytes`.
+Los logs de más de 1 MB se truncan. Soluciona el problema en origen comprobando qué `service` y `source` se ven afectados con las métricas `datadog.estimated_usage.logs.truncated_count` y `datadog.estimated_usage.logs.truncated_bytes`.
+
+## Mensajes de logs truncados
+
+Existe un truncamiento adicional en los campos que sólo se aplica a logs indexados: el valor se trunca a 75 KiB para el campo de mensaje y a 25 KiB para los campos que no son de mensaje. Datadog almacena el texto completo y sigue siendo visible en las consultas normales de lista en el Explorador de logs. Sin embargo, la versión truncada se muestra al realizar una consulta agrupada, como cuando se agrupan logs por ese campo truncado o se realizan operaciones similares que muestran ese campo específico.
 
 [1]: /es/help/
 [2]: https://app.datadoghq.com/logs
