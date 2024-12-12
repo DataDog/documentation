@@ -66,6 +66,6 @@ If you don't have access to your authenticator app or recovery codes, during the
 
 If you have lost access to your registered authenticator app, Datadog recommends that you remove the lost device and add a new one. Maintaining a valid authenticator app helps prevent issues logging into your account in the future.
 
-[1]: /account_management/login_methods/
+[1]: /account_management/login_methods/#requiring-multi-factor-authentication
 [2]: https://app.datadoghq.com/personal-settings/password-and-authentication
 [3]: https://app.datadoghq.com
