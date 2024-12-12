@@ -194,7 +194,17 @@ public class Application {
 }
 ```
 
-**Note**: Prepared statements are not supported in `full` mode, and all JDBC API calls that use prepared statements are automatically downgraded to `service` mode. Since most Java SQL libraries use prepared statements by default, this means that **most** Java applications are only able to use `service` mode.
+**Note**:
+
+**Tracer versions 1.44 and greater**:
+Enable the prepared statements tracing using **one** of the following methods:
+- Set the system property `dd.dbm.trace_prepared_statements=true`
+- Set the environment variable `export DD_DBM_TRACE_PREPARED_STATEMENTS=true`
+
+The prepared statements instrumentation will overwrite the `Application` property, and will cause an extra roundtrip to the database.
+
+**Tracer versions below 1.44**:
+Prepared statements are not supported in `full` mode, and all JDBC API calls that use prepared statements are automatically downgraded to `service` mode. Since most Java SQL libraries use prepared statements by default, this means that **most** Java applications are only able to use `service` mode.
 
 [1]: /tracing/trace_collection/dd_libraries/java/
 [2]: /tracing/trace_collection/compatibility/java/#data-store-compatibility
