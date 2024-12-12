@@ -16154,6 +16154,36 @@ components:
       - COUNT
       - RATE
       - GAUGE
+    MetricMetaPage:
+      description: Paging attributes. Only present if pagination query parameters
+        were provided.
+      properties:
+        cursor:
+          description: The cursor used to get the current results, if any.
+          nullable: true
+          type: string
+        limit:
+          description: Number of results returned
+          format: int32
+          maximum: 20000
+          minimum: 0
+          type: integer
+        next_cursor:
+          description: The cursor used to get the next results, if any.
+          nullable: true
+          type: string
+        type:
+          $ref: '#/components/schemas/MetricMetaPageType'
+      type: object
+    MetricMetaPageType:
+      default: cursor_limit
+      description: Type of metric pagination.
+      enum:
+      - cursor_limit
+      example: cursor_limit
+      type: string
+      x-enum-varnames:
+      - CURSOR_LIMIT
     MetricMetadata:
       description: Metadata for the metric.
       properties:
@@ -16235,6 +16265,12 @@ components:
           format: int32
           maximum: 1000
           type: integer
+      type: object
+    MetricPaginationMeta:
+      description: Response metadata object.
+      properties:
+        pagination:
+          $ref: '#/components/schemas/MetricMetaPage'
       type: object
     MetricPayload:
       description: The metrics' payload.
@@ -16712,6 +16748,10 @@ components:
           items:
             $ref: '#/components/schemas/MetricsAndMetricTagConfigurations'
           type: array
+        links:
+          $ref: '#/components/schemas/MetricsListResponseLinks'
+        meta:
+          $ref: '#/components/schemas/MetricPaginationMeta'
       readOnly: true
       type: object
     MetricsDataSource:
@@ -16725,6 +16765,29 @@ components:
       x-enum-varnames:
       - METRICS
       - CLOUD_COST
+    MetricsListResponseLinks:
+      description: Pagination links. Only present if pagination query parameters were
+        provided.
+      properties:
+        first:
+          description: Link to the first page.
+          type: string
+        last:
+          description: Link to the last page.
+          nullable: true
+          type: string
+        next:
+          description: Link to the next page.
+          nullable: true
+          type: string
+        prev:
+          description: Link to previous page.
+          nullable: true
+          type: string
+        self:
+          description: Link to current page.
+          type: string
+      type: object
     MetricsScalarQuery:
       description: An individual scalar metrics query.
       properties:
@@ -37794,7 +37857,12 @@ paths:
     get:
       description: "Returns all metrics that can be configured in the Metrics Summary
         page or with Metrics without Limits\u2122 (matching additional filters if
-        specified)."
+        specified).\nOptionally, paginate by using the `page[cursor]` and/or `page[size]`
+        query parameters.\nTo fetch the first page, pass in a query parameter with
+        either a valid `page[size]` or an empty cursor like `page[cursor]=`. To fetch
+        the next page, pass in the `next_cursor` value from the response as the new
+        `page[cursor]` value.\nOnce the `meta.pagination.next_cursor` value is null,
+        all pages have been retrieved."
       operationId: ListTagConfigurations
       parameters:
       - description: Filter custom metrics that have configured tags.
@@ -37859,6 +37927,27 @@ paths:
         schema:
           format: int64
           type: integer
+      - description: Maximum number of results returned.
+        in: query
+        name: page[size]
+        required: false
+        schema:
+          default: 10000
+          format: int32
+          maximum: 10000
+          minimum: 1
+          type: integer
+      - description: 'String to query the next page of results.
+
+          This key is provided with each valid response from the API in `meta.pagination.next_cursor`.
+
+          Once the `meta.pagination.next_cursor` key is null, all pages have been
+          retrieved.'
+        in: query
+        name: page[cursor]
+        required: false
+        schema:
+          type: string
       responses:
         '200':
           content:
@@ -37893,6 +37982,11 @@ paths:
       tags:
       - Metrics
       x-menu-order: 5
+      x-pagination:
+        cursorParam: page[cursor]
+        cursorPath: meta.pagination.next_cursor
+        limitParam: page[size]
+        resultsPath: data
       x-permission:
         operator: OR
         permissions:
