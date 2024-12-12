@@ -34,7 +34,9 @@ TCP tests can run from both [managed](#select-locations) and [private locations]
 
 After choosing to create a `TCP` test, define your test's request.
 
-### Define request
+{{% synthetics-api-tests-templates %}}
+
+### Define request (build from scratch)
 
 1. Specify the **Host** and the **Port** to run your test on.
 2. Decide whether or not to **Track number of network hops (TTL)**. This option allows you to assert on the number of network hops and to have access to a TCP Traceroute in your test results.

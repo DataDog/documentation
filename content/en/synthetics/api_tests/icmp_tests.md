@@ -34,7 +34,9 @@ ICMP tests can run from both [managed](#select-locations) and [private locations
 
 After choosing to create an `ICMP` test, define your test's request.
 
-### Define request
+{{% synthetics-api-tests-templates %}}
+
+### Define request (build from scratch)
 
 1. Specify the **Domain Name** or **IP address** to run your test on.
 2. Select or deselect **Track number of network hops (TTL)**. When selected, this option turns on a "traceroute" probe to discover all gateways along the path to the host destination.
