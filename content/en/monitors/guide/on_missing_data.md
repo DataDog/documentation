@@ -52,8 +52,8 @@ Here's an example of before and after of a JSON monitor with those fields:
         "thresholds": { "critical": 90 },  
         "notify_audit": false,  
         "include_tags": false,  
-        "notify_no_data": true,  
-        "no_data_timeframe": 10  
+        `"notify_no_data": true,`  
+        `"no_data_timeframe": 10`  
     }  
 }
 ```
