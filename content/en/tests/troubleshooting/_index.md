@@ -161,7 +161,7 @@ The best way to fix this is to make sure that the test parameters are the same b
 [2]: /help/
 [3]: /continuous_integration/tests/
 [4]: https://app.datadoghq.com/ci/test-runs
-[5]: https://app.datadoghq.com/ci/test-services
+[5]: https://app.datadoghq.com/ci/test-repositories
 [6]: /tracing/troubleshooting/tracer_debug_logs
 [7]: /continuous_integration/tests/containers/
 [8]: https://github.com/travisjeffery/timecop
