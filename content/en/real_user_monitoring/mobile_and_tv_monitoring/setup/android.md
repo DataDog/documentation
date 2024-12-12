@@ -325,7 +325,7 @@ The Gradle plugin automatically uploads the appropriate ProGuard `mapping.txt` f
 
 <div class="alert alert-warning">Configuring the session sample rate does not apply to Error Tracking.</div>
 
-To control the data your application sends to Datadog, you can specify a sample rate for sessions when [initializing RUM][11]. The sample rate is a percentage between 0 and 100.
+To control the data your application sends to Datadog, you can specify a sample rate for sessions when [initializing RUM][11]. The rate is a percentage between 0 and 100. By default, `sessionSamplingRate` is set to 100 (keep all sessions).
 
 ```kotlin
 val rumConfig = RumConfiguration.Builder(applicationId)

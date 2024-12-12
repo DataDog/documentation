@@ -83,7 +83,7 @@ Make sure you have a `roku_modules/datadogroku` subfolder in both the `component
 {{% /tab %}}
 {{< /tabs >}}
 
-To ensure the safety of your data, you must use a client token. If you used only [Datadog API keys][5] to configure the `dd-sdk-roku` library, they would be exposed client-side in the Roku channel's BrightScript code. 
+To ensure the safety of your data, you must use a client token. If you use only [Datadog API keys][5] to configure the `dd-sdk-roku` library, they are exposed client-side in the Roku channel's BrightScript code.
 
 For more information about setting up a client token, see the [Client Token documentation][6].
 
@@ -198,7 +198,7 @@ end sub
 
 ### Sample RUM sessions
 
-To control the data your application sends to Datadog RUM, you can specify a sampling rate for RUM sessions while [initializing the RUM Roku SDK][8] as a percentage between 0 and 100. You can specify the rate with the `sessionSampleRate` parameter.
+To control the data your application sends to Datadog RUM, you can specify a sampling rate for RUM sessions while [initializing the RUM Roku SDK][8]. The rate is a percentage between 0 and 100. By default, `sessionSamplingRate` is set to 100 (keep all sessions).
 
 ### Instrument the channel
 

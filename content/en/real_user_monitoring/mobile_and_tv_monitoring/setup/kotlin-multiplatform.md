@@ -284,7 +284,7 @@ fun initializeDatadog(context: Any? = null) {
 
 ### Sample RUM sessions
 
-To control the data your application sends to Datadog RUM, you can specify a sample rate for RUM sessions while [initializing the RUM feature][8] as a percentage between 0 and 100.
+To control the data your application sends to Datadog RUM, you can specify a sample rate for RUM sessions while [initializing the RUM feature][8]. The rate is a percentage between 0 and 100. By default, `sessionSamplingRate` is set to 100 (keep all sessions).
 
 ```kotlin
 val rumConfig = RumConfiguration.Builder(applicationId)
