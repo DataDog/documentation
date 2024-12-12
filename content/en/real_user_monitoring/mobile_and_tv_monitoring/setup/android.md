@@ -18,7 +18,7 @@ further_reading:
 ---
 ## Overview
 
-This page describes how to instrument your applications for both [Real User Monitoring (RUM)][1] or [Error Tracking][2] with the Android SDK. You can follow the steps below to instrument your applications for RUM (includes Error Tracking), or Error Tracking if you have purchased it as a standalone product.
+This page describes how to instrument your applications for both [Real User Monitoring (RUM)][1] and [Error Tracking][2] with the Android SDK. You can follow the steps below to instrument your applications for RUM (which includes Error Tracking) or Error Tracking if you have purchased it as a standalone product.
 
 The Datadog Android SDK supports Android 5.0+ (API level 21) and Android TV.
 
@@ -63,7 +63,7 @@ dependencies {
 1. Navigate to [**Digital Experience** > **Add an Application**][1].
 2. Select `android` as the application type and enter an application name to generate a unique Datadog application ID and client token.
 3. To instrument your web views, click the **Instrument your webviews** toggle. For more information, see [Web View Tracking][2].
-4. To disable automatic user data collection for either client IP or geolocation data, use the toggles for those settings. For more information, see [RUM Android Data Collected][3].
+4. To disable automatic user data collection for client IP or geolocation data, use the toggles for those settings. For more information, see [RUM Android Data Collected][3].
 
    {{< img src="real_user_monitoring/android/android-new-application.png" alt="Create a RUM application for Android in Datadog" style="width:90%;">}}
 
@@ -77,7 +77,7 @@ dependencies {
 1. Navigate to [**Error Tracking** > **Settings** > **Browser and Mobile** > **Add an Application**][1].
 2. Select `android` as the application type and enter an application name to generate a unique Datadog application ID and client token.
 3. To instrument your web views, click the **Instrument your webviews** toggle. For more information, see [Web View Tracking][2].
-4. To disable automatic user data collection for either client IP or geolocation data, use the toggles for those settings. For more information, see [Android Data Collected][3].
+4. To disable automatic user data collection for client IP or geolocation data, use the toggles for those settings. For more information, see [Android Data Collected][3].
 
    {{< img src="real_user_monitoring/error_tracking/mobile-new-application.png" alt="Create an application for Android in Datadog" style="width:90%;">}}
 

@@ -24,7 +24,7 @@ further_reading:
 Kotlin Multiplatform Monitoring is in Preview.
 {{< /beta-callout >}}
 
-This page describes how to instrument your applications for both [Real User Monitoring (RUM)][1] and [Error Tracking][2] with the Kotlin Multiplatform SDK. You can follow the steps below to instrument your applications for RUM (includes Error Tracking), or Error Tracking if you have purchased it as a standalone product.
+This page describes how to instrument your applications for both [Real User Monitoring (RUM)][1] and [Error Tracking][2] with the Kotlin Multiplatform SDK. You can follow the steps below to instrument your applications for RUM (includes Error Tracking) or Error Tracking if you have purchased it as a standalone product.
 
 The Datadog Kotlin Multiplatform SDK supports Android 5.0+ (API level 21) and iOS v12+.
 
@@ -114,7 +114,7 @@ If you are integrating Kotlin Multiplatform library as a framework with an `embe
 
 1. Navigate to [**Digital Experience** > **Add an Application**][1].
 2. Select `Kotlin Multiplatform` as the application type and enter an application name to generate a unique Datadog application ID and client token.
-3. To disable automatic user data collection for either client IP or geolocation data, use the toggles for those settings. For more information, see [Kotlin Multiplatform Data Collected][2].
+3. To disable automatic user data collection for client IP or geolocation data, use the toggles for those settings. For more information, see [Kotlin Multiplatform Data Collected][2].
 
 [1]: https://app.datadoghq.com/rum/application/create
 [2]: /real_user_monitoring/kotlin-multiplatform/data_collected/
@@ -124,7 +124,7 @@ If you are integrating Kotlin Multiplatform library as a framework with an `embe
 
 1. Navigate to [**Error Tracking** > **Settings** > **Browser and Mobile** > **Add an Application**][1].
 2. Select `Kotlin Multiplatform` as the application type and enter an application name to generate a unique Datadog application ID and client token.
-3. To disable automatic user data collection for either client IP or geolocation data, use the toggles for those settings. For more information, see [Kotlin Multiplatform Data Collected][2].
+3. To disable automatic user data collection for client IP or geolocation data, use the toggles for those settings. For more information, see [Kotlin Multiplatform Data Collected][2].
 
    {{< img src="real_user_monitoring/error_tracking/mobile-new-application.png" alt="Create an application for iOS in Datadog" style="width:90%;">}}
 
@@ -135,7 +135,7 @@ If you are integrating Kotlin Multiplatform library as a framework with an `embe
 {{% /tab %}}
 {{< /tabs >}}
 
-To ensure the safety of your data, you must use a client token. If you used only [Datadog API keys][4] to configure the Datadog SDK, they would be exposed client-side in the Android application's APK byte code. 
+To ensure the safety of your data, you must use a client token. If you use only [Datadog API keys][4] to configure the Datadog SDK, they are exposed client-side in the Android application's APK byte code. 
 
 For more information about setting up a client token, see the [Client Token documentation][5].
 

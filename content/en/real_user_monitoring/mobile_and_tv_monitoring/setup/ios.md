@@ -34,14 +34,14 @@ further_reading:
 
 ## Overview
 
-This page describes how to instrument your applications for both [Real User Monitoring (RUM)][1] or [Error Tracking][2] with the iOS SDK. You can follow the steps below to instrument your applications for RUM (includes Error Tracking), or Error Tracking if you have purchased it as a standalone product.
+This page describes how to instrument your applications for both [Real User Monitoring (RUM)][1] and [Error Tracking][2] with the iOS SDK. You can follow the steps below to instrument your applications for RUM (which includes Error Tracking) or Error Tracking if you have purchased it as a standalone product.
 
 ## Setup
 
 1. Declare the SDK as a dependency.
 2. Specify application details in the UI.
 3. Initialize the library.
-4. Initialize the Datadog Monitor and enable `URLSessionInstrumentation`, to start sending data.
+4. Initialize the Datadog Monitor and enable `URLSessionInstrumentation` to start sending data.
 
 ### Declare the SDK as a dependency
 
@@ -99,7 +99,7 @@ DatadogRUM.xcframework
 1. Navigate to [**Digital Experience** > **Add an Application**][1].
 2. Select `iOS` as the application type and enter an application name to generate a unique Datadog application ID and client token.
 3. To instrument your web views, click the **Instrument your webviews** toggle. For more information, see [Web View Tracking][2].
-4. To disable automatic user data collection for either client IP or geolocation data, use the toggles for those settings. For more information, see [RUM iOS Data Collected][3].
+4. To disable automatic user data collection for client IP or geolocation data, use the toggles for those settings. For more information, see [RUM iOS Data Collected][3].
 
    {{< img src="real_user_monitoring/ios/ios-create-application.png" alt="Create a RUM application for iOS in Datadog" style="width:100%;border:none" >}}
 
@@ -113,7 +113,7 @@ DatadogRUM.xcframework
 1. Navigate to [**Error Tracking** > **Settings** > **Browser and Mobile** > **Add an Application**][1].
 2. Select `iOS` as the application type and enter an application name to generate a unique Datadog application ID and client token.
 3. To instrument your web views, click the **Instrument your webviews** toggle. For more information, see [Web View Tracking][2].
-4. To disable automatic user data collection for either client IP or geolocation data, use the toggles for those settings. For more information, see [iOS Data Collected][3].
+4. To disable automatic user data collection for client IP or geolocation data, use the toggles for those settings. For more information, see [iOS Data Collected][3].
 
    {{< img src="real_user_monitoring/error_tracking/mobile-new-application.png" alt="Create an application for iOS in Datadog" style="width:90%;">}}
 
@@ -124,7 +124,7 @@ DatadogRUM.xcframework
 {{% /tab %}}
 {{< /tabs >}}
 
-To ensure the safety of your data, you must use a client token. If you used only [Datadog API keys][3] to configure the `dd-sdk-ios` library, they would be exposed client-side in the iOS application's byte code.
+To ensure the safety of your data, you must use a client token. If you use only [Datadog API keys][3] to configure the `dd-sdk-ios` library, they are exposed client-side in the iOS application's byte code.
 
 For more information about setting up a client token, see the [Client token documentation][4].
 
@@ -508,7 +508,7 @@ The iOS SDK ensures availability of data when your user device is offline. In ca
 
 This means that even if users open your application while offline, no data is lost.
 
-**Note**: The data on the disk is automatically discarded if it gets too old to ensure the iOS SDK does not use too much disk space.
+**Note**: To ensure that the iOS SDK does not use too much disk space, the data on the disk is automatically discarded if it gets too old.
 
 ## Supported versions
 
