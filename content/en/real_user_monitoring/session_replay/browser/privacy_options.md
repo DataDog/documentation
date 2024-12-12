@@ -53,7 +53,7 @@ Setting `defaultPrivacyLevel` to `mask` mode masks all HTML text, user input, im
 
 {{< img src="real_user_monitoring/session_replay/mask-mode-fixed.png" alt="Mask mode" style="width:70%;">}}
 
-**Note:** By default, `mask` is the privacy setting when you enable Session Replay.
+**Note:** If you do not specify the privacy setting, `mask` is enabled by default when you enable Session Replay.
 **Note**: Masked data is not stored on Datadog servers.
 
 ### Mask user input mode
@@ -110,8 +110,6 @@ If you are concerned about the number of visible elements in sensitive fields, e
 In this example replay session, the username in the Datadog navigation is obfuscated.
 
 {{< img src="real_user_monitoring/session_replay/hidden.png" alt="Example of hidden mode obfuscating a username" style="width:60%;">}}
-
-
 
 ### Override the action name
 
