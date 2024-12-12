@@ -4761,11 +4761,6 @@ components:
           description: Widget column field.
           example: content
           type: string
-        is_clustering_pattern_field_path:
-          description: Identifies the clustering pattern field column, usable only
-            with logs_pattern_stream.
-          example: true
-          type: boolean
         width:
           $ref: '#/components/schemas/ListStreamColumnWidth'
       required:
