@@ -10,6 +10,10 @@ further_reading:
   text: 'Alerting With Conversion Rates'
 ---
 
+<div class="alert alert-warning">
+<a href="https://www.shopify.com/plus/upgrading-to-checkout-extensibility">Shopify's Checkout Extensibility</a> is not supported with RUM tracking.
+</div>
+
 ## Overview
 
 Understanding how customers interact with your web pages is crucial to the success of your online store.
