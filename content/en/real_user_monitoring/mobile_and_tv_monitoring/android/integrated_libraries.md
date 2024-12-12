@@ -7,9 +7,6 @@ further_reading:
 - link: https://github.com/DataDog/dd-sdk-android
   tag: "Source Code"
   text: Source code for dd-sdk-android
-- link: /real_user_monitoring/mobile_and_tv_monitoring/android/integrated_libraries
-  tag: Documentation
-  text: Integrated Libraries
 ---
 
 This page lists integrated libraries you can use for Android and Android TV applications.

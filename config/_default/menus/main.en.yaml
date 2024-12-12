@@ -6792,21 +6792,26 @@ menu:
       parent: rum_mobile_unity
       identifier: rum_mobile_unity_setup
       weight: 101
+    - name: Advanced Configuration
+      url: real_user_monitoring/mobile_and_tv_monitoring/unity/advanced_configuration
+      parent: rum_mobile_unity
+      identifier: rum_mobile_unity_advanced_configuration
+      weight: 102
     - name: Mobile Vitals
       url: real_user_monitoring/mobile_and_tv_monitoring/unity/mobile_vitals?tab=unity
       parent: rum_mobile_unity
       identifier: rum_mobile_unity_mobile_vitals
-      weight: 102
+      weight: 103
     - name: Web View Tracking
       url: real_user_monitoring/mobile_and_tv_monitoring/unity/web_view_tracking
       parent: rum_mobile_unity
       identifier: rum_mobile_unity_web_view_tracking
-      weight: 103
+      weight: 104
     - name: Troubleshooting
       url: real_user_monitoring/mobile_and_tv_monitoring/unity/troubleshooting
       parent: rum_mobile_unity
       identifier: rum_mobile_unity_troubleshooting
-      weight: 104
+      weight: 105
     - name: Platform
       identifier: real_user_monitoring_platform
       url: real_user_monitoring/platform
