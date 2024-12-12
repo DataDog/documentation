@@ -53,7 +53,7 @@ The example below demonstrates how to create an [HTTP test][3], a subtype of [si
 
 #### Templates
 
-1. Select one of the pre-populated templates available which pre-populates your test with configured options depending on the type of test you want to perform:
+Select one of the following pre-populated templates, which configures your test options depending on the type of test you want to perform:
 
    {{< img src="getting_started/synthetics/synthetics_api_templates.png" alt="Synthetics API test landing page with templates" style="width:100%;" >}}
 
