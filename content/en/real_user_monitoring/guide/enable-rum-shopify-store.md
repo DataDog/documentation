@@ -11,7 +11,7 @@ further_reading:
 ---
 
 <div class="alert alert-warning">
-<a href="https://www.shopify.com/plus/upgrading-to-checkout-extensibility">Shopify's Checkout Extensibility</a> is not supported with RUM tracking.
+<a href="https://www.shopify.com/plus/upgrading-to-checkout-extensibility">Shopify's Checkout Extensibility</a> is not supported with RUM tracking. If this feature is critical for your business needs, create a ticket with <a href="https://docs.datadoghq.com/help/">Datadog Support</a>.
 </div>
 
 ## Overview
