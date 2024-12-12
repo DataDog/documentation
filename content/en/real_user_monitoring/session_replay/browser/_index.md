@@ -77,11 +77,8 @@ To stop the Session Replay recording, call `stopSessionReplayRecording()`.
 
 In some scenarios, you may want to begin recording a session after it has already started, even if it was initially sampled out of replay. For instance, you might want to force Session Replay on a newly deployed page for closer monitoring, or start recording after detecting an error to ensure complete replay data.
 
-To force Session Replay recording for the rest of the current session, call:
+To force Session Replay recording for the rest of the current session, call: `startSessionReplayRecording({ force: true })`
 
-```javascript
-window.DD_RUM.startSessionReplayRecording({ force: true })
-```
 When using the force option, the session is upgraded to a replayed session for the remainder of its duration, regardless of its initial sampling decision.
 
 ## Disable Session Replay
