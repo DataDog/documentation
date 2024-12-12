@@ -177,7 +177,7 @@ To ensure the safety of your data, you must use a client token. You cannot use D
 
 You can initialize the library using one of two methods in your `main.dart` file.
 
-1. Use `DatadogSdk.runApp` which automatically sets up [Error Tracking][5].
+- Use `DatadogSdk.runApp` to automatically set up [Error Tracking][5].
 
    ```dart
    await DatadogSdk.runApp(configuration, TrackingConsent.granted, () async {
@@ -185,7 +185,7 @@ You can initialize the library using one of two methods in your `main.dart` file
    })
    ```
 
-2. Alternatively, manually set up [Error Tracking][5] and resource tracking. `DatadogSdk.runApp` calls `WidgetsFlutterBinding.ensureInitialized`, so if you are not using `DatadogSdk.runApp`, you need to call this method prior to calling `DatadogSdk.instance.initialize`.
+- You can also manually set up [Error Tracking][5] and resource tracking. `DatadogSdk.runApp` calls `WidgetsFlutterBinding.ensureInitialized`, so if you are not using `DatadogSdk.runApp`, you need to call this method prior to calling `DatadogSdk.instance.initialize`.
 
    ```dart
    WidgetsFlutterBinding.ensureInitialized();
