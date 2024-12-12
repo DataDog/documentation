@@ -1,0 +1,4394 @@
+[
+  {
+    "title": "AWS Application Auto Scaling",
+    "name": "com.datadoghq.aws.applicationautoscaling",
+    "icon": {
+      "id": "amazon-auto-scaling",
+      "type": "INTEGRATION"
+    },
+    "actions": {
+      "deleteScheduledAction": {
+        "title": "Delete scheduled actions",
+        "description": "Deletes the specified scheduled action for an Application Auto Scaling scalable target. For more information, see Delete a scheduled action in the Application Auto Scaling User Guide."
+      },
+      "describeScalableTargets": {
+        "title": "Describe scalable targets",
+        "description": "Gets information about the scalable targets in the specified namespace."
+      },
+      "describeScheduledActions": {
+        "title": "Describe scheduled actions",
+        "description": "Describes the Application Auto Scaling scheduled actions for the specified service namespace."
+      }
+    }
+  },
+  {
+    "title": "AWS Autoscaling",
+    "name": "com.datadoghq.aws.autoscaling",
+    "icon": {
+      "id": "amazon-auto-scaling",
+      "type": "INTEGRATION"
+    },
+    "actions": {
+      "attachInstance": {
+        "title": "Attach instance",
+        "description": "Attach one or more EC2 instances to the specified Auto Scaling group."
+      },
+      "deleteScheduledAction": {
+        "title": "Delete scheduled action",
+        "description": "Deletes the specified scheduled action."
+      },
+      "describeInstanceRefreshes": {
+        "title": "Describe instance refresh",
+        "description": "Get information about the instance refreshes for the specified auto scaling group."
+      },
+      "describeScalingActivity": {
+        "title": "Describe activity",
+        "description": "Get information about the scaling activity in the account and region."
+      },
+      "describeScheduledActions": {
+        "title": "Describe scheduled actions",
+        "description": "Gets information about the scheduled actions that haven't run or that have not reached their end time."
+      },
+      "describe_auto_scaling_group": {
+        "title": "Describe auto scaling group",
+        "description": "Get information about the auto scaling groups in an account and region."
+      },
+      "describe_auto_scaling_instance": {
+        "title": "Describe auto scaling instance",
+        "description": "Get information about the auto scaling instances in an account and region."
+      },
+      "detachInstance": {
+        "title": "Detach instance",
+        "description": "Remove one or more instances from the specified auto scaling group."
+      },
+      "execute_policy": {
+        "title": "Execute policy",
+        "description": "Execute the specified policy. This can be useful for testing the design of your scaling policy."
+      },
+      "setDesiredCapacity": {
+        "title": "Set desired capacity",
+        "description": "Set the size of the specified Auto Scaling group."
+      },
+      "startInstanceRefresh": {
+        "title": "Start instance refresh",
+        "description": "Start a new instance refresh operation. An instance refresh performs a rolling replacement of all or some instances in an auto scaling group. Each instance is terminated first and then replaced, which temporarily reduces the capacity available within your auto scaling group."
+      }
+    }
+  },
+  {
+    "title": "AWS Certificate Manager",
+    "name": "com.datadoghq.aws.acm",
+    "icon": {
+      "id": "amazon-certificate-manager",
+      "type": "INTEGRATION"
+    },
+    "actions": {
+      "deleteCertificate": {
+        "title": "Delete certificate",
+        "description": "Delete a certificate and its associated private key."
+      },
+      "describeCertificate": {
+        "title": "Describe certificate",
+        "description": "Return detailed metadata about the specified ACM certificate."
+      },
+      "listCertificates": {
+        "title": "List certificates",
+        "description": "Retrieve a list of certificate ARNs and domain names."
+      },
+      "renewCertificate": {
+        "title": "Renew certificate",
+        "description": "Renew an eligible certificate."
+      },
+      "requestPrivateCertificate": {
+        "title": "Request private certificate",
+        "description": "Request a private certificate for use with other AWS services."
+      },
+      "requestPublicCertificate": {
+        "title": "Request public certificate",
+        "description": "Request a public certificate for use with other AWS services with DNS validation."
+      }
+    }
+  },
+  {
+    "title": "AWS CloudFront",
+    "name": "com.datadoghq.aws.cloudfront",
+    "icon": {
+      "id": "amazon-cloudfront",
+      "type": "INTEGRATION"
+    },
+    "actions": {
+      "create_invalidation": {
+        "title": "Create invalidation",
+        "description": "Create a new invalidation."
+      },
+      "getAWSCloudFrontDistribution": {
+        "title": "Describe distribution",
+        "description": "Get details about a distribution."
+      },
+      "get_invalidation": {
+        "title": "Describe invalidation",
+        "description": "Get information about an invalidation."
+      },
+      "list_distributions": {
+        "title": "List distributions",
+        "description": "List CloudFront distributions. A distribution tells CloudFront where you want content to be delivered from, and the details about how to track and manage content delivery."
+      },
+      "list_distributions_by_web_acl": {
+        "title": "List distributions by web ACL",
+        "description": "List the distributions that are associated with a WAF web ACL."
+      },
+      "list_invalidations": {
+        "title": "List invalidations",
+        "description": "List invalidation batches."
+      }
+    }
+  },
+  {
+    "title": "AWS CloudTrail",
+    "name": "com.datadoghq.aws.cloudtrail",
+    "icon": {
+      "id": "amazon-cloudtrail",
+      "type": "INTEGRATION"
+    },
+    "actions": {
+      "getAWSCloudTrailTrail": {
+        "title": "Describe trail",
+        "description": "Get details about a trail."
+      },
+      "listAWSCloudTrailTrail": {
+        "title": "List trails",
+        "description": "List trails."
+      },
+      "updateCloudTrail": {
+        "title": "Update trail",
+        "description": "Update trail settings that control the events being logged, and how to handle log files."
+      }
+    }
+  },
+  {
+    "title": "AWS CodeDeploy",
+    "name": "com.datadoghq.aws.codedeploy",
+    "icon": {
+      "id": "amazon-codedeploy",
+      "type": "INTEGRATION"
+    },
+    "actions": {
+      "createDeployment": {
+        "title": "Create deployment",
+        "description": "Deploy an application revision through the specified deployment group."
+      },
+      "getDeployment": {
+        "title": "Get deployment",
+        "description": "Get information about an AWS CodeDeploy deployment."
+      },
+      "registerApplicationRevision": {
+        "title": "Register application revision",
+        "description": "Register a revision for the specified application with AWS CodeDeploy."
+      },
+      "stopDeployment": {
+        "title": "Stop deployment",
+        "description": "Attempt to stop an ongoing deployment."
+      }
+    }
+  },
+  {
+    "title": "AWS CodePipeline",
+    "name": "com.datadoghq.aws.codepipeline",
+    "icon": {
+      "id": "aws-codepipeline",
+      "type": "INTEGRATION"
+    },
+    "actions": {
+      "acknowledgeJob": {
+        "title": "Acknowledge job",
+        "description": "Returns information about a specified job and whether that job has been received by the job worker. Used for custom actions only."
+      },
+      "createCustomActionType": {
+        "title": "Create custom action type",
+        "description": "Creates a new custom action that can be used in all pipelines associated with the Amazon Web Services account. Only used for custom actions."
+      },
+      "createPipeline": {
+        "title": "Create pipeline",
+        "description": "Creates a pipeline.  In the pipeline structure, you must include either artifactStore or artifactStores in your pipeline, but you cannot use both. If you create a cross-region action in your pipeline, you must use artifactStores."
+      },
+      "deleteCustomActionType": {
+        "title": "Delete custom action type",
+        "description": "Marks a custom action as deleted. PollForJobs for the custom action fails after the action is marked for deletion. Used for custom actions only.  To re-create a custom action after it has been deleted you must use a string in the version field that has never been used before. This string can be an incremented version number, for example. To restore a deleted custom action, use a JSON file that is identical to the deleted action, including the original string in the version field."
+      },
+      "deletePipeline": {
+        "title": "Delete pipeline",
+        "description": "Deletes the specified pipeline."
+      },
+      "deleteWebhook": {
+        "title": "Delete webhook",
+        "description": "Deletes a previously created webhook by name. Deleting the webhook stops CodePipeline from starting a pipeline every time an external event occurs. The API returns successfully when trying to delete a webhook that is already deleted. If a deleted webhook is re-created by calling PutWebhook with the same name, it will have a different URL."
+      },
+      "deregisterWebhookWithThirdParty": {
+        "title": "Deregister webhook with third party",
+        "description": "Removes the connection between the webhook that was created by CodePipeline and the external tool with events to be detected. Currently supported only for webhooks that target an action type of GitHub."
+      },
+      "disableStageTransition": {
+        "title": "Disable stage transition",
+        "description": "Prevents artifacts in a pipeline from transitioning to the next stage in the pipeline."
+      },
+      "enableStageTransition": {
+        "title": "Enable stage transition",
+        "description": "Enables artifacts in a pipeline to transition to a stage in a pipeline."
+      },
+      "getActionType": {
+        "title": "Get action type",
+        "description": "Returns information about an action type created for an external provider, where the action is to be used by customers of the external provider. The action can be created with any supported integration model."
+      },
+      "getJobDetails": {
+        "title": "Get job details",
+        "description": "Returns information about a job. Used for custom actions only.  When this API is called, CodePipeline returns temporary credentials for the S3 bucket used to store artifacts for the pipeline, if the action requires access to that S3 bucket for input or output artifacts. This API also returns any secret values defined for the action."
+      },
+      "getPipeline": {
+        "title": "Get pipeline",
+        "description": "Returns the metadata, structure, stages, and actions of a pipeline. Can be used to return the entire structure of a pipeline in JSON format, which can then be modified and used to update the pipeline structure with UpdatePipeline."
+      },
+      "getPipelineExecution": {
+        "title": "Get pipeline execution",
+        "description": "Returns information about an execution of a pipeline, including details about artifacts, the pipeline execution ID, and the name, version, and status of the pipeline."
+      },
+      "getPipelineState": {
+        "title": "Get pipeline state",
+        "description": "Returns information about the state of a pipeline, including the stages and actions.  Values returned in the revisionId and revisionUrl fields indicate the source revision information, such as the commit ID, for the current state."
+      },
+      "listActionExecutions": {
+        "title": "List action executions",
+        "description": "Lists the action executions that have occurred in a pipeline."
+      },
+      "listActionTypes": {
+        "title": "List action types",
+        "description": "Gets a summary of all CodePipeline action types associated with your account."
+      },
+      "listPipelineExecutions": {
+        "title": "List pipeline executions",
+        "description": "Gets a summary of the most recent executions for a pipeline."
+      },
+      "listPipelines": {
+        "title": "List pipelines",
+        "description": "Gets a summary of all of the pipelines associated with your account."
+      },
+      "listTagsForResource": {
+        "title": "List tags for resource",
+        "description": "Gets the set of key-value pairs (metadata) that are used to manage the resource."
+      },
+      "listWebhooks": {
+        "title": "List webhooks",
+        "description": "Gets a listing of all the webhooks in this Amazon Web Services Region for this account. The output lists all webhooks and includes the webhook URL and ARN and the configuration for each webhook."
+      },
+      "pollForJobs": {
+        "title": "Poll for jobs",
+        "description": "Returns information about any jobs for CodePipeline to act on. PollForJobs is valid only for action types with \u0026quot;Custom\u0026quot; in the owner field. If the action type contains AWS or ThirdParty in the owner field, the PollForJobs action returns an error.  When this API is called, CodePipeline returns temporary credentials for the S3 bucket used to store artifacts for the pipeline, if the action requires access to that S3 bucket for input or output artifacts. This API also returns any secret values defined for the action."
+      },
+      "pollForThirdPartyJobs": {
+        "title": "Poll for third party jobs",
+        "description": "Determines whether there are any third party jobs for a job worker to act on. Used for partner actions only.  When this API is called, CodePipeline returns temporary credentials for the S3 bucket used to store artifacts for the pipeline, if the action requires access to that S3 bucket for input or output artifacts."
+      },
+      "putActionRevision": {
+        "title": "Put action revision",
+        "description": "Provides information to CodePipeline about new revisions to a source."
+      },
+      "putApprovalResult": {
+        "title": "Put approval result",
+        "description": "Provides the response to a manual approval request to CodePipeline. Valid responses include Approved and Rejected."
+      },
+      "putJobFailureResult": {
+        "title": "Put job failure result",
+        "description": "Represents the failure of a job as returned to the pipeline by a job worker. Used for custom actions only."
+      },
+      "putJobSuccessResult": {
+        "title": "Put job success result",
+        "description": "Represents the success of a job as returned to the pipeline by a job worker. Used for custom actions only."
+      },
+      "putWebhook": {
+        "title": "Put webhook",
+        "description": "Defines a webhook and returns a unique webhook URL generated by CodePipeline. This URL can be supplied to third party source hosting providers to call every time there\u0026#x27;s a code change. When CodePipeline receives a POST request on this URL, the pipeline defined in the webhook is started as long as the POST request satisfied the authentication and filtering requirements supplied when defining the webhook. RegisterWebhookWithThirdParty and DeregisterWebhookWithThirdParty APIs can be used to automatically configure supported third parties to call the generated webhook URL."
+      },
+      "registerWebhookWithThirdParty": {
+        "title": "Register webhook with third party",
+        "description": "Configures a connection between the webhook that was created and the external tool with events to be detected."
+      },
+      "retryStageExecution": {
+        "title": "Retry stage execution",
+        "description": "You can retry a stage that has failed without having to run a pipeline again from the beginning. You do this by either retrying the failed actions in a stage or by retrying all actions in the stage starting from the first action in the stage. When you retry the failed actions in a stage, all actions that are still in progress continue working, and failed actions are triggered again. When you retry a failed stage from the first action in the stage, the stage cannot have any actions in progress. Before a stage can be retried, it must either have all actions failed or some actions failed and some succeeded."
+      },
+      "startPipelineExecution": {
+        "title": "Start pipeline execution",
+        "description": "Starts the specified pipeline. Specifically, it begins processing the latest commit to the source location specified as part of the pipeline."
+      },
+      "stopPipelineExecution": {
+        "title": "Stop pipeline execution",
+        "description": "Stops the specified pipeline execution. You choose to either stop the pipeline execution by completing in-progress actions without starting subsequent actions, or by abandoning in-progress actions. While completing or abandoning in-progress actions, the pipeline execution is in a Stopping state. After all in-progress actions are completed or abandoned, the pipeline execution is in a Stopped state."
+      },
+      "tagResource": {
+        "title": "Tag resource",
+        "description": "Adds to or modifies the tags of the given resource. Tags are metadata that can be used to manage a resource."
+      },
+      "untagResource": {
+        "title": "Untag resource",
+        "description": "Removes tags from an Amazon Web Services resource."
+      },
+      "updateActionType": {
+        "title": "Update action type",
+        "description": "Updates an action type that was created with any supported integration model, where the action type is to be used by customers of the action type provider. Use a JSON file with the action definition and UpdateActionType to provide the full structure."
+      },
+      "updatePipeline": {
+        "title": "Update pipeline",
+        "description": "Updates a specified pipeline with edits or changes to its structure. Updating the pipeline increases the version number of the pipeline by 1."
+      }
+    }
+  },
+  {
+    "title": "AWS DynamoDB",
+    "name": "com.datadoghq.aws.dynamodb",
+    "icon": {
+      "id": "amazon-dynamodb",
+      "type": "INTEGRATION"
+    },
+    "actions": {
+      "delete_item": {
+        "title": "Delete item",
+        "description": "Delete a single item in a table by primary key."
+      },
+      "describe_table": {
+        "title": "Describe DynamoDB table",
+        "description": "Return information about the table, including the current status of the table, when it was created, the primary key schema, and any indexes on the table."
+      },
+      "getAWSDynamoDBGlobalTable": {
+        "title": "Describe global table",
+        "description": "Get details about a global table."
+      },
+      "get_item": {
+        "title": "Get item",
+        "description": "Return a set of attributes for the item with the given primary key."
+      },
+      "listAWSDynamoDBGlobalTable": {
+        "title": "List global tables",
+        "description": "List global tables."
+      },
+      "put_item": {
+        "title": "Put item",
+        "description": "Create a new item, or replace an old item with a new item."
+      },
+      "scanItems": {
+        "title": "Scan items",
+        "description": "Return one or more items and item attributes by accessing every item in a table. To have DynamoDB return fewer items, you can provide a `filterExpression` input."
+      },
+      "update_item": {
+        "title": "Update item",
+        "description": "Edit an existing item's attributes, or add a new item to the table if it does not already exist."
+      }
+    }
+  },
+  {
+    "title": "AWS EBS",
+    "name": "com.datadoghq.aws.ebs",
+    "icon": {
+      "id": "amazon-ebs",
+      "type": "INTEGRATION"
+    },
+    "actions": {
+      "attach_volume": {
+        "title": "Attach volume",
+        "description": "Attach an EBS volume to a running or stopped instance, and expose it to the instance with the specified device name."
+      },
+      "createSnapshot": {
+        "title": "Create snapshot",
+        "description": "Create a snapshot of an EBS volume and store it in Amazon S3."
+      },
+      "create_volume": {
+        "title": "Create volume",
+        "description": "Create an EBS volume that can be attached to an instance in the same availability zone."
+      },
+      "delete_volume": {
+        "title": "Delete volume",
+        "description": "Delete an EBS volume."
+      },
+      "describeVolumes": {
+        "title": "Describe volumes",
+        "description": "Describe EBS volumes."
+      },
+      "describe_volume": {
+        "title": "Describe volume",
+        "description": "Describe an EBS volume."
+      },
+      "detach_volume": {
+        "title": "Detach volume",
+        "description": "Detach an EBS volume from an instance."
+      }
+    }
+  },
+  {
+    "title": "AWS EC2",
+    "name": "com.datadoghq.aws.ec2",
+    "icon": {
+      "id": "amazon-ec2",
+      "type": "INTEGRATION"
+    },
+    "actions": {
+      "addSecurityGroupsToInstance": {
+        "title": "Add EC2 instance security groups",
+        "description": "Add new Security Groups to list of already existing Security Groups of a EC2 Instance."
+      },
+      "allocate_hosts": {
+        "title": "Allocate hosts",
+        "description": "Allocate dedicated hosts to your account."
+      },
+      "authorize_security_group_egress": {
+        "title": "Authorize security group egress",
+        "description": "Add outbound (egress) rules to a security group."
+      },
+      "authorize_security_group_ingress": {
+        "title": "Authorize security group ingress",
+        "description": "Add inbound (ingress) rules to a security group."
+      },
+      "createKeyPair": {
+        "title": "Create key pair",
+        "description": "Create an ED25519 or 2048-bit RSA key pair with a name and in the PEM or PPK format. Amazon EC2 stores the public key and displays the private key for you to save to a file. The private key is returned as an unencrypted PEM encoded PKCS#1 private key, or an unencrypted PPK formatted private key for use with PuTTY. If a key with the same name already exists, Amazon EC2 returns an error."
+      },
+      "create_ec2_tags": {
+        "title": "Create EC2 tags",
+        "description": "Add or overwrite tags for EC2 resources."
+      },
+      "create_security_group": {
+        "title": "Create security group",
+        "description": "Create a security group. A security group acts as a virtual firewall for your instance to control inbound and outbound traffic."
+      },
+      "deleteKeyPair": {
+        "title": "Delete key pair",
+        "description": "Delete a key pair by removing the public key from Amazon EC2. If the key pair does not exist no key pairs are removed, but the action is still successful."
+      },
+      "delete_ec2_tags": {
+        "title": "Delete EC2 tags",
+        "description": "Delete tags from EC2 resources."
+      },
+      "delete_security_group": {
+        "title": "Delete security group",
+        "description": "Delete a security group."
+      },
+      "describeAvailabilityZones": {
+        "title": "Describe availability zones",
+        "description": "Describe the Availability Zones, Local Zones, and Wavelength Zones that are available to you."
+      },
+      "describeKeyPairs": {
+        "title": "List key pairs",
+        "description": "Describe the specified key pairs or all of your key pairs."
+      },
+      "describeSecurityGroupRules": {
+        "title": "List security group rules",
+        "description": "Describe one or more of your security group rules."
+      },
+      "describe_ec2_host": {
+        "title": "Describe EC2 host",
+        "description": "Describe a dedicated host."
+      },
+      "describe_ec2_instance": {
+        "title": "Describe EC2 instance",
+        "description": "Describe an EC2 instance."
+      },
+      "describe_ec2_instances": {
+        "title": "List EC2 instances",
+        "description": "List EC2 instances."
+      },
+      "describe_ec2_tags": {
+        "title": "Describe EC2 tags",
+        "description": "Describe tags for EC2 resources."
+      },
+      "describe_security_group": {
+        "title": "Describe security group",
+        "description": "Describe the specified security group."
+      },
+      "listAWSEC2Host": {
+        "title": "List hosts",
+        "description": "List hosts."
+      },
+      "modifySecurityGroupRules": {
+        "title": "Modify security group rules",
+        "description": "Modify the rules of a security group."
+      },
+      "monitor_ec2_instance": {
+        "title": "Monitor EC2 instance",
+        "description": "Enable detailed monitoring for a running instance."
+      },
+      "reboot_ec2_instance": {
+        "title": "Reboot EC2 instance",
+        "description": "Request a reboot of the specified instance."
+      },
+      "release_host": {
+        "title": "Release host",
+        "description": "Release an on-demand dedicated host."
+      },
+      "revoke_security_group_egress": {
+        "title": "Revoke security group egress",
+        "description": "Remove outbound (egress) rules from a security group."
+      },
+      "revoke_security_group_ingress": {
+        "title": "Revoke security group ingress",
+        "description": "Remove inbound (ingress) rules from a security group."
+      },
+      "start_ec2_instance": {
+        "title": "Start EC2 instance",
+        "description": "Start an Amazon EBS-backed instance that was previously stopped."
+      },
+      "stop_ec2_instance": {
+        "title": "Stop EC2 instance",
+        "description": "Stop an Amazon EBS-backed instance."
+      },
+      "terminate_ec2_instance": {
+        "title": "Terminate EC2 instance",
+        "description": "Terminate an EC2 instance."
+      },
+      "unmonitor_ec2_instance": {
+        "title": "Unmonitor EC2 instance",
+        "description": "Disable detailed monitoring for a running instance."
+      },
+      "updateInstanceSecurityGroups": {
+        "title": "Update EC2 instance security groups",
+        "description": "Replace current set of Security Groups associated with a specific EC2 instance with the Security Groups specified."
+      }
+    }
+  },
+  {
+    "title": "AWS ECS",
+    "name": "com.datadoghq.aws.ecs",
+    "icon": {
+      "id": "amazon-ecs",
+      "type": "INTEGRATION"
+    },
+    "actions": {
+      "createService": {
+        "title": "Create service",
+        "description": "Runs and maintains your desired number of tasks from a specified task definition."
+      },
+      "deleteService": {
+        "title": "Delete service",
+        "description": "Deletes a specified service within a cluster."
+      },
+      "describeEcsService": {
+        "title": "Describe ECS service",
+        "description": "Get the full description of your ECS service."
+      },
+      "describeEcsTask": {
+        "title": "Describe ECS task",
+        "description": "Get the full description of your ECS task."
+      },
+      "describeEcsTasks": {
+        "title": "Describe ECS tasks",
+        "description": "Get the full description of your ECS tasks."
+      },
+      "listEcsClusters": {
+        "title": "List ECS clusters",
+        "description": "List ECS clusters in a particular region."
+      },
+      "listEcsServices": {
+        "title": "List ECS services",
+        "description": "List ECS services in a particular cluster."
+      },
+      "listEcsTasks": {
+        "title": "List ECS tasks",
+        "description": "List ECS tasks for a particular cluster and service."
+      },
+      "stopEcsTask": {
+        "title": "Stop ECS task",
+        "description": "Stop an ECS task."
+      },
+      "updateEcsService": {
+        "title": "Update ECS service",
+        "description": "Update an Amazon ECS service."
+      }
+    }
+  },
+  {
+    "title": "AWS EKS",
+    "name": "com.datadoghq.aws.eks",
+    "icon": {
+      "id": "amazon-eks",
+      "type": "INTEGRATION"
+    },
+    "actions": {
+      "deleteCluster": {
+        "title": "Delete cluster",
+        "description": "Delete the Amazon EKS cluster control plane. If you have active services in your cluster that are associated with a load balancer, you must delete those services before deleting the cluster so that the load balancers are deleted properly. Otherwise, you can have orphaned resources in your VPC that prevent you from being able to delete the VPC. If you have managed node groups or Fargate profiles attached to the cluster, you must delete them first."
+      },
+      "describeCluster": {
+        "title": "Describe cluster",
+        "description": "Get details about a cluster."
+      },
+      "describeNodegroup": {
+        "title": "Describe node group",
+        "description": "Get details about a node group."
+      },
+      "describeUpdate": {
+        "title": "Describe update",
+        "description": "Return information about an update of your Amazon EKS cluster, associated managed node group, or Amazon EKS add-on."
+      },
+      "listClusters": {
+        "title": "List clusters",
+        "description": "List clusters."
+      },
+      "listNodegroups": {
+        "title": "List node groups",
+        "description": "List node groups."
+      },
+      "listTagsForResource": {
+        "title": "List tags for resource",
+        "description": "List the tags for an Amazon EKS resource."
+      },
+      "listUpdates": {
+        "title": "List updates",
+        "description": "List the updates associated with an Amazon EKS cluster or managed node group."
+      },
+      "tagResource": {
+        "title": "Tag resource",
+        "description": "Associate tags to a resource with a given `resourceArn`. Existing tags not specified in the request parameters remain unchanged. When a resource is deleted, the tags associated with that resource are also deleted."
+      },
+      "untagResource": {
+        "title": "Untag resource",
+        "description": "Delete tags from a resource."
+      },
+      "updateNodegroupConfig": {
+        "title": "Update node group configuration",
+        "description": "Update an Amazon EKS managed node group configuration. Node groups continue to function during the update."
+      }
+    }
+  },
+  {
+    "title": "AWS ELB",
+    "name": "com.datadoghq.aws.elb",
+    "icon": {
+      "id": "amazon-elb",
+      "type": "INTEGRATION"
+    },
+    "actions": {
+      "deregister_instances_from_classic_load_balancer": {
+        "title": "Deregister instances from classic load balancer",
+        "description": "Deregister instances from a classic load balancer. After an instance is deregistered, it no longer receives traffic from the load balancer."
+      },
+      "deregister_targets": {
+        "title": "Deregister targets",
+        "description": "Deregister targets from a target group. After the targets are deregistered, they no longer receive traffic from the load balancer."
+      },
+      "describe_classic_load_balancer_attributes": {
+        "title": "Describe classic load balancer attributes",
+        "description": "Describe the attributes of a classic load balancer."
+      },
+      "describe_classic_load_balancers": {
+        "title": "List classic load balancers",
+        "description": "Describe the specified classic load balancers. If no load balancers are specified, the call describes all of your load balancers."
+      },
+      "describe_instance_health": {
+        "title": "Describe classic load balancer instance health",
+        "description": "Describe the health of instances registered with a classic load balancer."
+      },
+      "describe_load_balancer_attributes": {
+        "title": "Describe load balancer attributes",
+        "description": "Describe the attributes of a load balancer."
+      },
+      "describe_load_balancers": {
+        "title": "List load balancers",
+        "description": "Describe the specified Load Balancers."
+      },
+      "describe_target_group_attributes": {
+        "title": "Describe target group attributes",
+        "description": "Describe the attributes of a target group."
+      },
+      "describe_target_groups": {
+        "title": "List target groups",
+        "description": "Describe the specified target groups. You can specify either their ARNs or their names."
+      },
+      "describe_target_health": {
+        "title": "Describe target health",
+        "description": "Describe the health of specific targets or all targets."
+      },
+      "modify_alb_target_group_attributes": {
+        "title": "Modify ALB target group attributes",
+        "description": "Modify attributes of a target group."
+      },
+      "modify_classic_load_balancer_attributes": {
+        "title": "Modify classic load balancer attributes",
+        "description": "Modify the attributes of a classic load balancer."
+      },
+      "modify_nlb_target_group_attributes": {
+        "title": "Modify NLB target group attributes",
+        "description": "Modify attributes of a target group."
+      },
+      "register_instances_with_classic_load_balancer": {
+        "title": "Register instances with classic load balancer",
+        "description": "Add instances to a classic load balancer."
+      },
+      "register_targets": {
+        "title": "Register targets",
+        "description": "Register targets with a target group."
+      },
+      "set_blue_green_strategy": {
+        "title": "Set blue-green deployment strategy",
+        "description": "Configure a blue-green deployment for the application load balancer using the given strategy. This modifies the default actions of the given listener. When stickiness is enabled, requests routed to a target group remain in the same group for the duration you specify."
+      }
+    }
+  },
+  {
+    "title": "AWS Elastic Beanstalk",
+    "name": "com.datadoghq.aws.elasticbeanstalk",
+    "icon": {
+      "id": "amazon-elastic-beanstalk",
+      "type": "INTEGRATION"
+    },
+    "actions": {
+      "describeApplication": {
+        "title": "Describe application",
+        "description": "Describe an existing application."
+      },
+      "describeConfigurationOptions": {
+        "title": "Describe configuration options",
+        "description": "Describe the configuration options that are used in a particular configuration template or environment, or that a specified solution stack defines."
+      },
+      "describeEnvironment": {
+        "title": "Describe environment",
+        "description": "Return description of an existing environment."
+      },
+      "listApplications": {
+        "title": "List applications",
+        "description": "List the descriptions of existing applications that you have access to. Returns an empty array if they don’t exist or if you don’t have the right permissions."
+      },
+      "listEnvironments": {
+        "title": "List environments",
+        "description": "Return descriptions for existing environments that you have access to. Returns an empty array if they don’t exist or if you don’t have the right permissions."
+      },
+      "rebuildEnvironment": {
+        "title": "Rebuild environment",
+        "description": "Delete and recreate all of the AWS resources (for example: the Auto Scaling group, load balancer, etc.) for a specified environment and force a restart."
+      },
+      "restartAppServer": {
+        "title": "Restart app server",
+        "description": "Restart the application container server running on each Amazon EC2 instance in the specified environment."
+      },
+      "updateEnvironment": {
+        "title": "Update environment",
+        "description": "Update the environment description, deploy a new application version, update the configuration settings to an entirely new configuration template, or update select configuration option values in the running environment."
+      }
+    }
+  },
+  {
+    "title": "AWS EventBridge",
+    "name": "com.datadoghq.aws.eventbridge",
+    "icon": {
+      "id": "amazon-event-bridge",
+      "type": "INTEGRATION"
+    },
+    "actions": {
+      "activate_event_source": {
+        "title": "Activate event source",
+        "description": "Activate a partner event source that was previously deactivated. Once activated, the matching event bus starts receiving events from the event source."
+      },
+      "cancel_replay": {
+        "title": "Cancel replay",
+        "description": "Cancel a replay."
+      },
+      "create_archive": {
+        "title": "Create archive",
+        "description": "Create an archive of events with the specified settings. Incoming events may not immediately start being sent to the archive, so allow a short period of time for changes to take effect."
+      },
+      "deactivate_event_source": {
+        "title": "Deactivate event source",
+        "description": "Temporarily stop receiving events from a partner event source. The matching event bus is not deleted. When you deactivate a partner event source, the source goes into `PENDING` state. If it remains in `PENDING` state for more than two weeks, it is deleted. To activate a deactivated partner event source, use `ActivateEventSource`."
+      },
+      "delete_archive": {
+        "title": "Delete archive",
+        "description": "Delete an archive."
+      },
+      "describe_event_source": {
+        "title": "Describe event source",
+        "description": "List details about a partner event source shared with your account."
+      },
+      "describe_replay": {
+        "title": "Describe replay",
+        "description": "Retrieve details about a replay. Use `DescribeReplay` to determine the progress of a running replay."
+      },
+      "disable_rule": {
+        "title": "Disable rule",
+        "description": "Disable a rule. A disabled rule does not match any events nor self-trigger if it has a schedule expression. Incoming events may continue to match to the disabled rule, so allow a short period of time for changes to take effect."
+      },
+      "enable_rule": {
+        "title": "Enable rule",
+        "description": "Enable a rule. If the rule does not exist, the operation fails. Incoming events may not immediately match to a newly enabled rule, so allow a short period of time for changes to take effect."
+      },
+      "getAWSEventsArchive": {
+        "title": "Describe archive",
+        "description": "Get details about an archive."
+      },
+      "listAWSEventsArchive": {
+        "title": "List archives",
+        "description": "List archives."
+      },
+      "list_event_sources": {
+        "title": "List event source",
+        "description": "List all the partner event sources that have been shared with your AWS account. For more information about partner event sources, see [CreateEventBus](https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_CreateEventBus.html \"{isExternal}\") in the EventBridge documentation."
+      },
+      "list_replays": {
+        "title": "List replays",
+        "description": "List all replays or provide a prefix to match to replay names. Filter parameters are exclusive."
+      },
+      "put_event": {
+        "title": "Put event",
+        "description": "Send a single event to Amazon EventBridge."
+      },
+      "put_events": {
+        "title": "Put events",
+        "description": "Send custom events to Amazon EventBridge."
+      },
+      "start_replay": {
+        "title": "Start replay",
+        "description": "Start a replay. Events may not be replayed in the same order they were added to the archive. See [StartReplay](https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_StartReplay.html \"{isExternal}\") in the EventBridge documentation for more information."
+      },
+      "update_archive": {
+        "title": "Update archive",
+        "description": "Update an archive."
+      }
+    }
+  },
+  {
+    "title": "AWS GuardDuty",
+    "name": "com.datadoghq.aws.guardduty",
+    "icon": {
+      "id": "amazon-guardduty",
+      "type": "INTEGRATION"
+    },
+    "actions": {
+      "add_member": {
+        "title": "Add member",
+        "description": "Invite other AWS accounts to enable GuardDuty, and allow the current AWS account to view and manage findings on their behalf as the GuardDuty administrator account."
+      },
+      "update_ipset": {
+        "title": "Update IP set",
+        "description": "Update the IP set specified by the IP set ID."
+      },
+      "update_threatintelset": {
+        "title": "Update threat intel set",
+        "description": "Update the threat intelligence set specified by the threat intelligence set ID."
+      }
+    }
+  },
+  {
+    "title": "AWS IAM",
+    "name": "com.datadoghq.aws.iam",
+    "icon": {
+      "id": "aws-iam",
+      "type": "INTEGRATION"
+    },
+    "actions": {
+      "add_user_to_group": {
+        "title": "Add user to group",
+        "description": "Add a user to a group."
+      },
+      "create_user": {
+        "title": "Create user",
+        "description": "Create a new IAM user for your Amazon Web Services account."
+      },
+      "create_user_login": {
+        "title": "Create user login",
+        "description": "Create a password for an IAM user."
+      },
+      "deleteAccessKey": {
+        "title": "Delete access key",
+        "description": "Deletes the access key pair associated with the specified IAM user."
+      },
+      "delete_user": {
+        "title": "Delete user",
+        "description": "Delete all items attached to the IAM user; then delete the user."
+      },
+      "disable_user": {
+        "title": "Disable user",
+        "description": "Disable access for the IAM user by revoking all authentication credentials."
+      },
+      "getUser": {
+        "title": "Get user",
+        "description": "Retrieve information about the specified IAM user."
+      },
+      "listAccessKeys": {
+        "title": "List access keys",
+        "description": "Return information about the access key IDs associated with the specified IAM user."
+      },
+      "putRolePolicy": {
+        "title": "Put role policy",
+        "description": "Adds or updates an inline policy document that is embedded in the specified IAM role."
+      },
+      "putUserPolicy": {
+        "title": "Put user policy",
+        "description": "Adds or updates an inline policy document that is embedded in the specified IAM user."
+      },
+      "remove_user_from_group": {
+        "title": "Remove user from group",
+        "description": "Remove a user from a group."
+      },
+      "updateAccessKey": {
+        "title": "Update access key",
+        "description": "Changes the status of the specified access key from Active to Inactive, or vice versa. This operation can be used to disable a user\u0026#x27;s key as part of a key rotation workflow."
+      }
+    }
+  },
+  {
+    "title": "AWS Kinesis",
+    "name": "com.datadoghq.aws.kinesis",
+    "icon": {
+      "id": "amazon-kinesis",
+      "type": "INTEGRATION"
+    },
+    "actions": {
+      "add_tags_to_stream": {
+        "title": "Add tags to stream",
+        "description": "Add or update tags for a Kinesis data stream."
+      },
+      "describe_stream": {
+        "title": "Describe stream",
+        "description": "Describe a Kinesis data stream."
+      },
+      "list_streams": {
+        "title": "List streams",
+        "description": "List your Kinesis data streams. May require multiple calls to `ListStreams`."
+      },
+      "list_tags_for_stream": {
+        "title": "List tags for stream",
+        "description": "List the tags of a Kinesis data stream."
+      },
+      "put_record": {
+        "title": "Put record",
+        "description": "Write a single data record into a data stream."
+      },
+      "put_records": {
+        "title": "Put records",
+        "description": "Write multiple data records into a Kinesis data stream in a single call."
+      },
+      "remove_tags_from_stream": {
+        "title": "Remove tags from stream",
+        "description": "Remove tags from a Kinesis data stream."
+      }
+    }
+  },
+  {
+    "title": "AWS Lambda",
+    "name": "com.datadoghq.aws.lambda",
+    "icon": {
+      "id": "amazon-lambda",
+      "type": "INTEGRATION"
+    },
+    "actions": {
+      "createFunction": {
+        "title": "Create function",
+        "description": "Creates a Lambda function. To create a function, you need a deployment package and an execution role."
+      },
+      "deleteFunction": {
+        "title": "Delete function",
+        "description": "Deletes a Lambda function. To delete a specific function version, use the Qualifier parameter. Otherwise, all versions and aliases are deleted. This doesn\u0026#x27;t require the user to have explicit permissions for DeleteAlias. To delete Lambda event source mappings that invoke a function, use DeleteEventSourceMapping. For Amazon Web Services and resources that invoke your function directly, delete the trigger in the service where you originally configured it."
+      },
+      "getAWSLambdaExecution": {
+        "title": "Get lambda execution history",
+        "description": "Get logs for the last execution of a specified Lambda function."
+      },
+      "getAWSLambdaFunction": {
+        "title": "Describe function",
+        "description": "Get details about a function."
+      },
+      "invoke_lambda": {
+        "title": "Invoke lambda function",
+        "description": "Invoke a Lambda function. You can invoke a function synchronously (and wait for the response), or asynchronously."
+      },
+      "listAWSLambdaFunction": {
+        "title": "List functions",
+        "description": "List functions."
+      }
+    }
+  },
+  {
+    "title": "AWS RDS",
+    "name": "com.datadoghq.aws.rds",
+    "icon": {
+      "id": "amazon-rds",
+      "type": "INTEGRATION"
+    },
+    "actions": {
+      "createRdsDbInstance": {
+        "title": "Create DB instance",
+        "description": "Create a new DB instance."
+      },
+      "createRdsDbInstanceReadReplica": {
+        "title": "Create DB instance read replica",
+        "description": "Create a new DB instance that acts as a read replica for an existing source DB instance. All read replica DB instances are created with backups disabled. All other attributes (including DB security groups and DB parameter groups) are inherited from the source DB instance or cluster."
+      },
+      "deleteRdsDbInstance": {
+        "title": "Delete DB instance",
+        "description": "Delete a previously provisioned DB instance."
+      },
+      "describeDBCluster": {
+        "title": "Describe DB cluster",
+        "description": "Describe existing Amazon Aurora DB cluster or Multi-AZ DB cluster."
+      },
+      "describe_db_instance": {
+        "title": "Describe DB instance",
+        "description": "Describe a DB instance."
+      },
+      "listDBClusters": {
+        "title": "List DB clusters",
+        "description": "List existing Amazon Aurora DB clusters and Multi-AZ DB clusters."
+      },
+      "list_db_instances": {
+        "title": "List DB instances",
+        "description": "List DB instances with optional filters."
+      },
+      "set_autoscale_params": {
+        "title": "Set min and max autoscale capacity",
+        "description": "Set Min and Max capacity in the scaling configuration of an Aurora Serverless DB cluster."
+      },
+      "startDBCluster": {
+        "title": "Start DB cluster",
+        "description": "Start an Amazon Aurora DB cluster that was stopped."
+      },
+      "start_rds_db_instance": {
+        "title": "Start DB instance",
+        "description": "Start an Amazon RDS DB instance that was stopped using the Amazon Web Services console, the stop-db-instance CLI command, or the StopDBInstance action."
+      },
+      "stopDBCluster": {
+        "title": "Stop DB cluster",
+        "description": "Stop an Amazon Aurora DB cluster. When you stop a DB cluster, Aurora retains the DB cluster's metadata, including its endpoints and DB parameter groups."
+      },
+      "stop_rds_db_instance": {
+        "title": "Stop DB instance",
+        "description": "Stop an Amazon RDS DB instance."
+      },
+      "update_allocated_storage": {
+        "title": "Update allocated storage",
+        "description": "The new amount of storage in gibibytes (GiB) to allocate for the DB instance."
+      },
+      "update_security_groups": {
+        "title": "Update instance security groups",
+        "description": "A list of DB security groups or VPC security groups to authorize on this DB instance."
+      }
+    }
+  },
+  {
+    "title": "AWS Resources Tagging",
+    "name": "com.datadoghq.aws.resourcetagging",
+    "icon": {
+      "id": "aws-service-catalog",
+      "type": "INTEGRATION"
+    },
+    "actions": {
+      "getResourceTags": {
+        "title": "Get resource tags",
+        "description": "Return all tags associated with a resource."
+      },
+      "getResourcesByTags": {
+        "title": "Get resources by tags",
+        "description": "Get all resources with the tags specified in the filters. If the filter list is empty, the response includes all resources that are currently tagged or have ever had a tag."
+      },
+      "tagResources": {
+        "title": "Tag resources",
+        "description": "Add tags to multiple AWS resources."
+      },
+      "untagResources": {
+        "title": "Untag resources",
+        "description": "Remove tags from multiple AWS resources."
+      }
+    }
+  },
+  {
+    "title": "AWS Route53",
+    "name": "com.datadoghq.aws.route53",
+    "icon": {
+      "id": "amazon-route-53",
+      "type": "INTEGRATION"
+    },
+    "actions": {
+      "associateFirewallRuleGroup": {
+        "title": "Associate firewall rule group",
+        "description": "Associate a firewall rule group with a VPC, to provide DNS filtering for the VPC."
+      },
+      "disassociateFirewallRuleGroup": {
+        "title": "Disassociate firewall rule group",
+        "description": "Disassociate a firewall rule group from a VPC, to remove DNS filtering from the VPC."
+      },
+      "getAWSRoute53HealthCheck": {
+        "title": "Describe health check",
+        "description": "Get details about a health check."
+      },
+      "getHealthCheckStatus": {
+        "title": "Get health check status",
+        "description": "Get the status of a health check."
+      },
+      "listAWSRoute53HealthCheck": {
+        "title": "List health checks",
+        "description": "List health checks."
+      },
+      "listFirewallRuleGroupAssociations": {
+        "title": "List firewall rule group associations",
+        "description": "Retrieve any defined firewall rule group associations. Each association enables DNS filtering for a VPC with one rule group."
+      }
+    }
+  },
+  {
+    "title": "AWS S3",
+    "name": "com.datadoghq.aws.s3",
+    "icon": {
+      "id": "amazon-s3",
+      "type": "INTEGRATION"
+    },
+    "actions": {
+      "block_public_access": {
+        "title": "Block public access",
+        "description": "Block all public access to an existing S3 bucket and its contents."
+      },
+      "copyObject": {
+        "title": "Copy object",
+        "description": "Create a copy of an object that is already stored in Amazon S3."
+      },
+      "create_s3_bucket": {
+        "title": "Create bucket",
+        "description": "Create a new S3 bucket."
+      },
+      "deleteObject": {
+        "title": "Delete object",
+        "description": "Remove the null version (if there is one) of an object and insert a `delete` marker. If there isn't a null version, Amazon S3 does not remove any objects but still responds that the command was successful."
+      },
+      "delete_s3_bucket": {
+        "title": "Delete bucket",
+        "description": "Delete an S3 bucket."
+      },
+      "disableBucketLogging": {
+        "title": "Disable bucket logging",
+        "description": "Set the logging parameters for a bucket, and specify permissions for who can view and modify the logging parameters."
+      },
+      "enableBucketLogging": {
+        "title": "Enable bucket logging",
+        "description": "Set the logging parameters for a bucket, and specify permissions for who can view and modify the logging parameters."
+      },
+      "enable_default_bucket_encryption": {
+        "title": "Enable default bucket encryption",
+        "description": "Configure default encryption and S3 bucket keys for an existing bucket."
+      },
+      "getBucketLogging": {
+        "title": "Get bucket logging",
+        "description": "Return the logging status of a bucket, and the permissions users have to view and modify that status."
+      },
+      "getObject": {
+        "title": "Get object",
+        "description": "Retrieve objects from Amazon S3."
+      },
+      "getObjectAttributes": {
+        "title": "Get object attributes",
+        "description": "Retrieve all metadata from an object, without returning the object itself."
+      },
+      "getPreSignedURL": {
+        "title": "Get pre-signed URL",
+        "description": "Get a pre-signed URL for a given operation name."
+      },
+      "get_s3_bucket_encryption": {
+        "title": "Get bucket encryption",
+        "description": "Return the default encryption configuration for an S3 bucket."
+      },
+      "listObjects": {
+        "title": "List objects",
+        "description": "Return up to 1,000 objects in a bucket with each request."
+      },
+      "list_s3_buckets": {
+        "title": "List buckets",
+        "description": "Return a list of all buckets owned by the authenticated sender of the request."
+      },
+      "moveObject": {
+        "title": "Move object",
+        "description": "Move an object from one bucket to another. To make changes to the key name, use the `Rename` action next."
+      },
+      "putObject": {
+        "title": "Put object",
+        "description": "Add an object to a bucket. You must have `WRITE` permissions on a bucket to add an object."
+      },
+      "renameObject": {
+        "title": "Rename object",
+        "description": "Rename an object's key in a bucket. For cases where users want to make changes across buckets they should use the move action first."
+      },
+      "set_canned_acl": {
+        "title": "Set canned ACL",
+        "description": "Set the permissions on an existing bucket using access control lists (ACL)."
+      }
+    }
+  },
+  {
+    "title": "AWS SNS",
+    "name": "com.datadoghq.aws.sns",
+    "icon": {
+      "id": "amazon-sns",
+      "type": "INTEGRATION"
+    },
+    "actions": {
+      "publish": {
+        "title": "Publish a message",
+        "description": "Send a message to an Amazon SNS topic, a text message (SMS message) directly to a phone number, or a message to a mobile platform endpoint (when you specify the `TargetArn`)."
+      },
+      "send_sms": {
+        "title": "Send SMS",
+        "description": "Send a text message (SMS message) directly to a phone number."
+      }
+    }
+  },
+  {
+    "title": "AWS SQS",
+    "name": "com.datadoghq.aws.sqs",
+    "icon": {
+      "id": "amazon-sqs",
+      "type": "INTEGRATION"
+    },
+    "actions": {
+      "cancelMessageMoveTask": {
+        "title": "Cancel message move task",
+        "description": "Cancels a specified message movement task. A message movement can only be cancelled when the current status is RUNNING. Cancelling a message movement task does not revert the messages that have already been moved. It can only stop the messages that have not been moved yet.    This action is currently limited to supporting message redrive from dead-letter queues (DLQs) only. In this context, the source queue is the dead-letter queue (DLQ), while the destination queue can be the original source queue (from which the messages were driven to the dead-letter-queue), or a custom destination queue.    Only one active message movement task is supported per queue at any given time."
+      },
+      "delete_messages": {
+        "title": "Delete messages",
+        "description": "Delete messages from a queue."
+      },
+      "getAWSSQSQueue": {
+        "title": "Describe queue",
+        "description": "Get details about a queue."
+      },
+      "get_queue_attributes": {
+        "title": "Get queue attributes",
+        "description": "Get attributes for a queue."
+      },
+      "listMessageMoveTasks": {
+        "title": "List message move tasks",
+        "description": "Gets the most recent message movement tasks (up to 10) under a specific source queue.    This action is currently limited to supporting message redrive from dead-letter queues (DLQs) only. In this context, the source queue is the dead-letter queue (DLQ), while the destination queue can be the original source queue (from which the messages were driven to the dead-letter-queue), or a custom destination queue.    Only one active message movement task is supported per queue at any given time."
+      },
+      "list_queues": {
+        "title": "List queues",
+        "description": "Return a list of queues in the current region. The response includes a maximum of 1,000 results. If you specify a value for the optional `QueueNamePrefix` parameter, only queues with names that begin with the specified value are returned."
+      },
+      "list_queues_with_attributes": {
+        "title": "List queues with attributes",
+        "description": "Return a list of queues in the current region with their attributes . The response includes a maximum of 1,000 results. If you specify a value for the optional `QueueNamePrefix` parameter, only queues with names that begin with the specified value are returned."
+      },
+      "move_messages": {
+        "title": "Move messages",
+        "description": "Send messages from one queue to another queue."
+      },
+      "purge_queue": {
+        "title": "Purge queue",
+        "description": "Delete the messages in a queue specified by the `Queue name` parameter. Any messages deleted from a queue through this action are irretrievable. The message deletion process takes up to 60 seconds."
+      },
+      "receive_messages": {
+        "title": "Receive messages",
+        "description": "Receive messages from a queue."
+      },
+      "send_message": {
+        "title": "Send message",
+        "description": "Deliver a message to a queue."
+      },
+      "set_queue_attributes": {
+        "title": "Set queue attributes",
+        "description": "Set attributes for a queue."
+      },
+      "startMessageMoveTask": {
+        "title": "Start message move task",
+        "description": "Starts an asynchronous task to move messages from a specified source queue to a specified destination queue.    This action is currently limited to supporting message redrive from queues that are configured as dead-letter queues (DLQs) of other Amazon SQS queues only. Non-SQS queue sources of dead-letter queues, such as Lambda or Amazon SNS topics, are currently not supported.   In dead-letter queues redrive context, the StartMessageMoveTask the source queue is the DLQ, while the destination queue can be the original source queue (from which the messages were driven to the dead-letter-queue), or a custom destination queue.   Only one active message movement task is supported per queue at any given time."
+      }
+    }
+  },
+  {
+    "title": "AWS Step Functions",
+    "name": "com.datadoghq.aws.stepfunctions",
+    "icon": {
+      "id": "amazon-step-functions",
+      "type": "INTEGRATION"
+    },
+    "actions": {
+      "describeExecution": {
+        "title": "Describe execution",
+        "description": "Provide information about a state machine execution, such as the state machine associated with the execution, the execution input and output, and relevant execution metadata."
+      },
+      "describeStateMachine": {
+        "title": "Describe state machine",
+        "description": "Provide information about a state machine's definition, its IAM role Amazon Resource Name (ARN), and configuration."
+      },
+      "listExecutions": {
+        "title": "List executions",
+        "description": "List all executions of a state machine by specifying a state machine Amazon Resource Name (ARN)."
+      },
+      "listStateMachines": {
+        "title": "List state machines",
+        "description": "List the existing state machines."
+      },
+      "redriveExecution": {
+        "title": "Redrive execution",
+        "description": "Restarts unsuccessful executions of Standard workflows that didn\u0026#x27;t complete successfully in the last 14 days. These include failed, aborted, or timed out executions."
+      },
+      "startExecution": {
+        "title": "Start execution",
+        "description": "Start a state machine execution."
+      },
+      "stopExecution": {
+        "title": "Stop execution",
+        "description": "Stop an execution."
+      }
+    }
+  },
+  {
+    "title": "AWS System Manager",
+    "name": "com.datadoghq.aws.system_manager",
+    "icon": {
+      "id": "amazon-ssm",
+      "type": "INTEGRATION"
+    },
+    "actions": {
+      "deleteInventory": {
+        "title": "Delete inventory",
+        "description": "Delete a custom inventory type or the data associated with a custom inventory type. Deleting a custom inventory type is also referred to as deleting a custom inventory schema."
+      },
+      "getAutomationExecution": {
+        "title": "Get automation execution",
+        "description": "Get detailed information about an automation execution."
+      },
+      "getCommand": {
+        "title": "Get command",
+        "description": "Get commands requested by users of the Amazon Web Services account."
+      },
+      "getDocument": {
+        "title": "Get document",
+        "description": "Get the contents of the specified Amazon Web Services Systems Manager document (SSM document)."
+      },
+      "listAutomationExecutions": {
+        "title": "List automation executions",
+        "description": "Provide details about all active and terminated automation executions."
+      },
+      "listCommands": {
+        "title": "List commands",
+        "description": "List commands requested by users of the Amazon Web Services account."
+      },
+      "listDocuments": {
+        "title": "List documents",
+        "description": "Return all Systems Manager (SSM) documents in the current Amazon Web Services account and region. Use a filter to limit the results."
+      },
+      "listInventoryData": {
+        "title": "List inventory data",
+        "description": "A list of inventory items returned by the request."
+      },
+      "putInventory": {
+        "title": "Put inventory",
+        "description": "Bulk update custom inventory items on one or more managed nodes. If a specified inventory item does not already exist, it is created."
+      },
+      "putParameter": {
+        "title": "Put parameter",
+        "description": "Add a parameter to the system."
+      },
+      "queryInventory": {
+        "title": "Query inventory",
+        "description": "Query inventory information. This includes managed node status, such as `Stopped` or `Terminated`."
+      },
+      "sendCommand": {
+        "title": "Send command",
+        "description": "Run commands on one or more managed nodes."
+      },
+      "startAutomationExecution": {
+        "title": "Start automation execution",
+        "description": "Initiate execution of an Automation runbook."
+      }
+    }
+  },
+  {
+    "title": "AWS WAF classic",
+    "name": "com.datadoghq.aws.waf.classic",
+    "icon": {
+      "id": "amazon-waf",
+      "type": "INTEGRATION"
+    },
+    "actions": {
+      "add_ip": {
+        "title": "Add to IP set",
+        "description": "Add given IPs to an IP set if they don't already exist."
+      },
+      "delete_ip": {
+        "title": "Remove from IP set",
+        "description": "Remove given IPs from an IP set."
+      },
+      "get_rule": {
+        "title": "Get rule",
+        "description": "Return the rule associated with the `RuleId` included in the `GetRule` request."
+      },
+      "get_web_acl": {
+        "title": "Get web ACL",
+        "description": "Return the WebACL specified by `WebACLId`."
+      },
+      "list_web_acls": {
+        "title": "List web ACL",
+        "description": "Return an array of `WebACLSummary` objects in the response."
+      }
+    }
+  },
+  {
+    "title": "AWS WAFV2",
+    "name": "com.datadoghq.aws.wafv2",
+    "icon": {
+      "id": "amazon-waf",
+      "type": "INTEGRATION"
+    },
+    "actions": {
+      "add_to_ip_set": {
+        "title": "Add to IP set",
+        "description": "Add given IPs to an IP set if they don't already exist."
+      },
+      "getRegexPatternSet": {
+        "title": "Get regex pattern set",
+        "description": "Retrieves the specified RegexPatternSet."
+      },
+      "get_ip_set": {
+        "title": "Get IP set",
+        "description": "Retrieve an IP set."
+      },
+      "get_web_acl": {
+        "title": "Get web ACL",
+        "description": "Retrieve a WebACL."
+      },
+      "list_ip_sets": {
+        "title": "List IP set",
+        "description": "Retrieve an array of `IPSetSummary` objects for your IP sets."
+      },
+      "list_web_acls": {
+        "title": "List web ACL",
+        "description": "Retrieve an array of `WebACLSummary` objects for your web ACLs."
+      },
+      "remove_from_ip_set": {
+        "title": "Remove from IP set",
+        "description": "Remove given IPs from an IP set."
+      },
+      "updateRegexPatternSet": {
+        "title": "Update regex pattern set",
+        "description": "Updates the specified RegexPatternSet. This operation completely replaces the mutable specifications that you already have for the regex pattern set with the ones that you provide to this call."
+      }
+    }
+  },
+  {
+    "title": "Asana",
+    "name": "com.datadoghq.asana",
+    "icon": {
+      "id": "asana",
+      "type": "INTEGRATION"
+    },
+    "actions": {
+      "addTagToTask": {
+        "title": "Add tag to task",
+        "description": "Add a tag to a task."
+      },
+      "commentOnTask": {
+        "title": "Comment on task",
+        "description": "Create a comment on a task."
+      },
+      "createTask": {
+        "title": "Create task",
+        "description": "Create a new task."
+      },
+      "getTags": {
+        "title": "Get tags",
+        "description": "Retrieve the tags for a given workspace."
+      },
+      "getTask": {
+        "title": "Get task",
+        "description": "Retrieve the details of the specified task."
+      },
+      "getTeam": {
+        "title": "Get team",
+        "description": "Retrieve the details of the specified team."
+      },
+      "getUser": {
+        "title": "Get user",
+        "description": "Retrieve the details of the specified user."
+      },
+      "removeTagFromTask": {
+        "title": "Remove tag from task",
+        "description": "Remove a tag from a task."
+      },
+      "searchTasksInWorkspace": {
+        "title": "Search tasks in workspace",
+        "description": "Retrieve tasks from a workspace that match the provided filters. This action can only be performed by premium Asana users."
+      },
+      "updateTaskApprovalStatus": {
+        "title": "Update task approval status",
+        "description": "Update the approval status of a task to the specified value."
+      },
+      "updateTaskAssignee": {
+        "title": "Update task assignee",
+        "description": "Update the assignee of a task to the specified user."
+      },
+      "updateTaskCompletedStatus": {
+        "title": "Update task completed status",
+        "description": "Update the completed status of a task to the specified value."
+      }
+    }
+  },
+  {
+    "title": "Azure AKS",
+    "name": "com.datadoghq.azure.aks",
+    "icon": {
+      "id": "azure-kubernetes-service",
+      "type": "INTEGRATION"
+    },
+    "actions": {
+      "getCluster": {
+        "title": "Get cluster",
+        "description": "Get a Kubernetes cluster details."
+      },
+      "listClustersByResourceGroup": {
+        "title": "List clusters by resource group",
+        "description": "List the available Kubernetes clusters for resource group."
+      },
+      "runCommand": {
+        "title": "Run command",
+        "description": "Submit a command to run against the Managed Cluster. AKS will create a pod to run the command. For more information see [AKS Run Command](https://learn.microsoft.com/en-us/rest/api/aks/managed-clusters/run-command).\nCurrently supports imperative `kubectl` commands (e.g., `kubectl scale`, `kubectl restart`) that directly alter state.\nDeclarative commands like `kubectl apply -f \u003cfilename\u003e`, which rely on YAML file inputs to define desired states, are not yet supported."
+      },
+      "scaleNodePools": {
+        "title": "Scale node pools",
+        "description": "Adjust your AKS cluster's capacity ensuring high availability during demand surges and cost savings during downtimes.\nThis action can only be performed for the clusters with \"Scale method\" - \"Manual\", disable \"Autoscale\" to use this action."
+      },
+      "startCluster": {
+        "title": "Start cluster",
+        "description": "Start a previously stopped kubernetes cluster."
+      },
+      "stopCluster": {
+        "title": "Stop cluster",
+        "description": "Stop started kubernetes cluster.\nThis can only be performed on Azure Virtual Machine Scale set backed clusters.\nStopping a cluster stops the control plane and agent nodes entirely, while maintaining all object and cluster state.\nA cluster does not accrue charges while it is stopped.\nSee [stopping a cluster](https://learn.microsoft.com/en-us/azure/aks/start-stop-cluster) for more details about stopping a cluster."
+      }
+    }
+  },
+  {
+    "title": "Azure App Services",
+    "name": "com.datadoghq.azure.apps",
+    "icon": {
+      "id": "azure-app-services",
+      "type": "INTEGRATION"
+    },
+    "actions": {
+      "getWebApp": {
+        "title": "Get Web App",
+        "description": "Get a description of a Web App in Azure App Service."
+      },
+      "restartWebApp": {
+        "title": "Restart Web App",
+        "description": "Restart a running Web App in Azure App Service."
+      },
+      "startWebApp": {
+        "title": "Start Web App",
+        "description": "Start a stopped Web App in Azure App Service."
+      },
+      "stopWebApp": {
+        "title": "Stop Web App",
+        "description": "Stop a running Web App in Azure App Service."
+      }
+    }
+  },
+  {
+    "title": "Azure Blob",
+    "name": "com.datadoghq.azure.blob",
+    "icon": {
+      "id": "azure-blob-storage",
+      "type": "INTEGRATION"
+    },
+    "actions": {
+      "acquireBlobLease": {
+        "title": "Acquire blob lease",
+        "description": "Establish a lock for write and delete operations."
+      },
+      "copyBlob": {
+        "title": "Copy blob",
+        "description": "Copy a blob to a destination within the storage account."
+      },
+      "createBlobSnapshot": {
+        "title": "Create blob snapshot",
+        "description": "Create a read-only snapshot of a blob."
+      },
+      "deleteBlob": {
+        "title": "Delete blob",
+        "description": "Delete a blob."
+      },
+      "getBlob": {
+        "title": "Get blob",
+        "description": "Retrieve a blob from the system, including its metadata and properties."
+      },
+      "getBlobProperties": {
+        "title": "Get blob properties",
+        "description": "Retrieve a blobs properties."
+      },
+      "getBlockBlobList": {
+        "title": "Get block blob list",
+        "description": "Get a list of all the blocks in a specific block blob."
+      },
+      "getCopyStatus": {
+        "title": "Get copy status",
+        "description": "Get the current status of a copy operation on a blob."
+      },
+      "queryBlockBlob": {
+        "title": "Query block blob",
+        "description": "Query for a CSV formatted blob."
+      },
+      "releaseBlobLease": {
+        "title": "Release blob lease",
+        "description": "Release a lease on a blob."
+      },
+      "renewBlobLease": {
+        "title": "Renew blob lease",
+        "description": "Renew a lease on a blob."
+      },
+      "sealAppendBlob": {
+        "title": "Seal append blob",
+        "description": "Seal the append blob, making it read-only."
+      },
+      "uploadBlockBlob": {
+        "title": "Upload block blob",
+        "description": "Upload content to a block blob."
+      }
+    }
+  },
+  {
+    "title": "Azure Cosmos DB",
+    "name": "com.datadoghq.azure.cosmosdb",
+    "icon": {
+      "id": "azure-cosmosdb",
+      "type": "INTEGRATION"
+    },
+    "actions": {
+      "createItem": {
+        "title": "Create item",
+        "description": "Insert an item into a container."
+      },
+      "deleteItem": {
+        "title": "Delete item",
+        "description": "Delete an item by id."
+      },
+      "describeDatabase": {
+        "title": "Describe database",
+        "description": "Retrieve basic information about a database."
+      },
+      "getItem": {
+        "title": "Get item",
+        "description": "Get a given item's content and metadata."
+      },
+      "listConflicts": {
+        "title": "List conflicts",
+        "description": "List all conflicts on a specific container."
+      },
+      "queryConflicts": {
+        "title": "Query conflicts",
+        "description": "Search for specific conflicts in a container."
+      },
+      "queryItems": {
+        "title": "Query items",
+        "description": "Given a query, return the associated items."
+      },
+      "updateItem": {
+        "title": "Update item",
+        "description": "Update a given item's content."
+      }
+    }
+  },
+  {
+    "title": "Azure DevOps Pipelines",
+    "name": "com.datadoghq.azure.dev_ops.pipelines",
+    "icon": {
+      "id": "azuredevops",
+      "type": "INTEGRATION"
+    },
+    "actions": {
+      "getPipeline": {
+        "title": "Get pipeline",
+        "description": "Retrieve an Azure DevOps pipeline."
+      },
+      "listPipelines": {
+        "title": "List pipelines",
+        "description": "Retrieve a list of Azure DevOps pipelines."
+      },
+      "runPipeline": {
+        "title": "Run pipeline",
+        "description": "Trigger an Azure DevOps pipeline run."
+      }
+    }
+  },
+  {
+    "title": "Azure Functions",
+    "name": "com.datadoghq.azure.functions",
+    "icon": {
+      "id": "azure_functions",
+      "type": "INTEGRATION"
+    },
+    "actions": {
+      "getFunction": {
+        "title": "Get function",
+        "description": "Retrieve information about a specified Azure function."
+      },
+      "listFunctions": {
+        "title": "List functions",
+        "description": "List Azure functions."
+      }
+    }
+  },
+  {
+    "title": "Azure Network",
+    "name": "com.datadoghq.azure.network",
+    "icon": {
+      "id": "azure-virtual-network",
+      "type": "INTEGRATION"
+    },
+    "actions": {
+      "createOrUpdateLoadBalancer": {
+        "title": "Create or update load balancer",
+        "description": "Creates or updates a load balancer."
+      },
+      "deleteLoadBalancer": {
+        "title": "Delete load balancer",
+        "description": "Deletes the specified load balancer."
+      },
+      "getLoadBalancer": {
+        "title": "Get load balancer",
+        "description": "Gets the specified load balancer."
+      },
+      "listLoadBalancersByResourceGroup": {
+        "title": "List load balancers by resource group",
+        "description": "Gets all the load balancers in a resource group."
+      },
+      "listLoadBalancersBySubscription": {
+        "title": "List load balancers by subscription",
+        "description": "Gets all the load balancers in a subscription."
+      },
+      "updateLoadBalancerTags": {
+        "title": "Update load balancer tags",
+        "description": "Updates a load balancer tags."
+      }
+    }
+  },
+  {
+    "title": "Azure Queue Storage",
+    "name": "com.datadoghq.azure.queue_storage",
+    "icon": {
+      "id": "azure-queue-storage",
+      "type": "INTEGRATION"
+    },
+    "actions": {
+      "createQueue": {
+        "title": "Create queue",
+        "description": "Create a queue in a storage account."
+      },
+      "deleteMessage": {
+        "title": "Delete message",
+        "description": "Delete the specified message from the queue."
+      },
+      "getMessages": {
+        "title": "Get messages",
+        "description": "Retrieve one or more messages from the front of the queue."
+      },
+      "getQueueMetadata": {
+        "title": "Get queue metadata",
+        "description": "Retrieve user-defined metadata and queue properties on the specified queue."
+      },
+      "listQueues": {
+        "title": "List queues",
+        "description": "List all of the queues in a particular storage account."
+      },
+      "moveMessages": {
+        "title": "Move messages",
+        "description": "Move all messages from one queue to another."
+      },
+      "peekMessages": {
+        "title": "Peek messages",
+        "description": "Retrieve one or more messages from the front of the queue without altering the visiblity of the messages."
+      },
+      "purgeQueue": {
+        "title": "Purge queue",
+        "description": "Delete all messages from the specified queue."
+      },
+      "sendMessage": {
+        "title": "Send message",
+        "description": "Add a new message to the back of the queue."
+      },
+      "updateMessage": {
+        "title": "Update message",
+        "description": "Update the content or visibility timeout of a message."
+      },
+      "updateQueueMetadata": {
+        "title": "Update queue metadata",
+        "description": "Update user-defined metadata on the specified queue. Appends the provided metadata input to the existing queue metadata or overwrites if key already exists."
+      }
+    }
+  },
+  {
+    "title": "Azure Service Bus",
+    "name": "com.datadoghq.azure.service_bus",
+    "icon": {
+      "id": "azure",
+      "type": "INTEGRATION"
+    },
+    "actions": {
+      "completeMessage": {
+        "title": "Complete message in queue",
+        "description": "This operation completes a message in a queue."
+      },
+      "peekLockMessage": {
+        "title": "Peek and lock message",
+        "description": "This operation atomically retrieves and locks a message from a queue or subscription for processing."
+      },
+      "receiveAndDeleteMessage": {
+        "title": "Receive and delete message",
+        "description": "Receives and deletes a message from a Service Bus queue."
+      },
+      "renewLockMessage": {
+        "title": "Renew lock for a message",
+        "description": "This operation renews the lock on a message."
+      },
+      "sendMessageToQueue": {
+        "title": "Send message to queue",
+        "description": "Sends a message to a Service Bus queue."
+      },
+      "unlockMessage": {
+        "title": "Unlock message",
+        "description": "This operation unlocks a previously peeked and locked message from a queue or subscription."
+      }
+    }
+  },
+  {
+    "title": "Azure VM",
+    "name": "com.datadoghq.azure.vm",
+    "icon": {
+      "id": "azure-vm",
+      "type": "INTEGRATION"
+    },
+    "actions": {
+      "addTagsToVirtualMachine": {
+        "title": "Add tags",
+        "description": "Add tags to a VM."
+      },
+      "deallocateVirtualMachine": {
+        "title": "Deallocate VM",
+        "description": "Shut down the VM and releases the compute resources.\nYou are not billed for the compute resources that this VM uses."
+      },
+      "deleteVirtualMachine": {
+        "title": "Delete VM",
+        "description": "Delete a virtual machine."
+      },
+      "getOperationStatus": {
+        "title": "Get operation status",
+        "description": "Retrieve details from the provided operation status location URL. Use this action to poll\nfor the status of asynchronous actions in our Azure VM integration such as starting, restarting, or deallocating a virtual machine."
+      },
+      "getVirtualMachine": {
+        "title": "Get VM",
+        "description": "Retrieve details of a VM."
+      },
+      "getVirtualMachineInstanceView": {
+        "title": "Get VM instance view",
+        "description": "Retrieve information about the run-time state of a VM."
+      },
+      "listResourceGroupVirtualMachines": {
+        "title": "List VMs for resource group",
+        "description": "List all of the VMs for a resource group."
+      },
+      "listSubscriptionVirtualMachines": {
+        "title": "List VMs for subscription",
+        "description": "List all of the VMs for a subscription."
+      },
+      "performMaintenance": {
+        "title": "Perform maintenance",
+        "description": "Perform maintenance on a VM."
+      },
+      "powerOffVirtualMachine": {
+        "title": "Power off VM",
+        "description": "Power off a VM. The VM can be restarted with the same provisioned resources.\nYou are still charged for this VM."
+      },
+      "removeTagsFromVirtualMachine": {
+        "title": "Remove tags",
+        "description": "Remove tags from a VM."
+      },
+      "restartVirtualMachine": {
+        "title": "Restart VM",
+        "description": "Restart a VM."
+      },
+      "runCommand": {
+        "title": "Run command",
+        "description": "Run a command on the VM."
+      },
+      "startVirtualMachine": {
+        "title": "Start VM",
+        "description": "Start a VM."
+      }
+    }
+  },
+  {
+    "title": "Azure VM Scale Sets",
+    "name": "com.datadoghq.azure.vm_scale_set",
+    "icon": {
+      "id": "azure-vm-scale-set",
+      "type": "INTEGRATION"
+    },
+    "actions": {
+      "deallocateVMs": {
+        "title": "Deallocate VMs",
+        "description": "Deallocate specific VMs in a VM scale set."
+      },
+      "getOperationStatus": {
+        "title": "Get operation status",
+        "description": "Retrieves details from the provided operation status location URL.\nUse this action to poll for the status of asynchronous actions."
+      },
+      "getScaleSet": {
+        "title": "Get scale set",
+        "description": "Retrieve information about a VM scale set."
+      },
+      "getScaleSetInstances": {
+        "title": "Get scale set instances",
+        "description": "Retrieves information about a VM scale sets' instances."
+      },
+      "listSKUs": {
+        "title": "List SKUs",
+        "description": "Gets a list of SKUs available for your VM scale set."
+      },
+      "listScaleSets": {
+        "title": "List scale sets",
+        "description": "Lists the VM scale sets under a resource group."
+      },
+      "restartVMs": {
+        "title": "Restart VMs",
+        "description": "Restart one or more VMs in a VM scale set."
+      },
+      "setCapacity": {
+        "title": "Set desired capacity",
+        "description": "Set the capacity of the specified VM scale set."
+      }
+    }
+  },
+  {
+    "title": "CircleCI",
+    "name": "com.datadoghq.circleci",
+    "icon": {
+      "id": "circleci",
+      "type": "INTEGRATION"
+    },
+    "actions": {
+      "approveWorkflowJob": {
+        "title": "Approve workflow job",
+        "description": "Approve a pending approval job in a workflow."
+      },
+      "getJobArtifacts": {
+        "title": "Get job artifacts",
+        "description": "Return a job's artifacts."
+      },
+      "getJobDetails": {
+        "title": "Get job details",
+        "description": "Return job details."
+      },
+      "getWorkflow": {
+        "title": "Get workflow",
+        "description": "Return summary fields of a workflow by ID."
+      },
+      "getWorkflowJobs": {
+        "title": "Get workflow jobs",
+        "description": "Return a sequence of jobs for a workflow."
+      }
+    }
+  },
+  {
+    "title": "Cloudflare",
+    "name": "com.datadoghq.cloudflare",
+    "icon": {
+      "id": "cloudflare",
+      "type": "INTEGRATION"
+    },
+    "actions": {
+      "create_zone_access_rule": {
+        "title": "Create zone access rule",
+        "description": "Make a new IP, IP range, or country access rule for a given zone."
+      },
+      "delete_zone_access_rule": {
+        "title": "Delete zone access rule",
+        "description": "Remove an access rule so it is no longer evaluated during requests. You can only delete rules in the `zone` scope via this action."
+      },
+      "get_access_rules": {
+        "title": "Get access rules",
+        "description": "Get the access rules of an IP, IP range, or country. This returns access rules created for the target by the zone itself, or the account/user to which that zone belongs."
+      },
+      "list_zone_access_rules": {
+        "title": "List zone access rules",
+        "description": "List the access rules for a specific zone."
+      },
+      "purgeCache": {
+        "title": "Purge cache",
+        "description": "Granularly remove one or more files from Cloudflare's cache by specifying URLs. All tiers can purge by URL, however, FREE can only purge 1000 URLs per minute."
+      },
+      "update_zone_access_rule": {
+        "title": "Update zone access rule",
+        "description": "Update the rule state and/or note for a zone. You can only edit rules in the `zone` scope via this action."
+      }
+    }
+  },
+  {
+    "title": "ConfigCat",
+    "name": "com.datadoghq.configcat",
+    "icon": {
+      "id": "configcat",
+      "type": "INTEGRATION"
+    },
+    "actions": {
+      "disableFlag": {
+        "title": "Disable feature flag",
+        "description": "Disable a feature flag."
+      },
+      "enableFlag": {
+        "title": "Enable feature flag",
+        "description": "Enable a feature flag."
+      },
+      "getFlag": {
+        "title": "Get feature flag",
+        "description": "Get information about a feature flag."
+      },
+      "listFeatureFlags": {
+        "title": "List feature flags",
+        "description": "List all feature flags in a configuration."
+      }
+    }
+  },
+  {
+    "title": "Data Transformation",
+    "name": "com.datadoghq.datatransformation",
+    "icon": {
+      "id": "javascript",
+      "type": "INTEGRATION"
+    },
+    "actions": {
+      "expression": {
+        "title": "Expression",
+        "description": "Use JavaScript expression to apply transformations on data or objects. An *expression* is any valid unit of code that resolves to a value.\n\n**Examples**:\n- `1 + 2`\n- `[1, 2, 3].filter(x =\u003e x \u003c 3)`\n\n**Note**: Lodash is available through the variable `_`."
+      },
+      "func": {
+        "title": "Function",
+        "description": "Use JavaScript to apply transformations on data or objects. The code entered into the script area represents the body of the function to be executed.\n\n**Notes**:\n- Network and file system access is restricted.\n- Lodash is available through the variable `_`."
+      }
+    }
+  },
+  {
+    "title": "Datadog Case Management",
+    "name": "com.datadoghq.dd.casem",
+    "icon": {
+      "name": "Inbox",
+      "type": "ICON"
+    },
+    "actions": {
+      "addComment": {
+        "title": "Add comment",
+        "description": "Add a comment to a case in Datadog."
+      },
+      "createCase": {
+        "title": "Create case",
+        "description": "Create a new case in Datadog."
+      },
+      "getCase": {
+        "title": "Get case",
+        "description": "Get a case in Datadog."
+      },
+      "updateStatus": {
+        "title": "Update status",
+        "description": "Update the status of a case in Datadog."
+      }
+    }
+  },
+  {
+    "title": "Datadog Cloud Security",
+    "name": "com.datadoghq.dd.cloudsecurity",
+    "icon": {
+      "name": "SecurityPlatform",
+      "type": "ICON"
+    },
+    "actions": {
+      "changeSecuritySignalState": {
+        "title": "Change security signal state",
+        "description": "Change the status of a Datadog Security Signal."
+      },
+      "createDetectionRule": {
+        "title": "Create detection rule",
+        "description": "Create a detection rule."
+      },
+      "getDectectedIPs": {
+        "title": "Get detected IPs",
+        "description": "Get the detected IPs for a specific security signal."
+      },
+      "getDetectionRule": {
+        "title": "Get detection rule",
+        "description": "Get a rule’s details."
+      },
+      "getSecurityFinding": {
+        "title": "Get security finding",
+        "description": "Get information about a specific cloud security posture management finding."
+      },
+      "getSecurityIssue": {
+        "title": "Get security issue",
+        "description": "Get information about a specific security issue."
+      },
+      "getSecuritySignal": {
+        "title": "Get security signal",
+        "description": "Get information about a specific security signal."
+      }
+    }
+  },
+  {
+    "title": "Datadog DDSQL",
+    "name": "com.datadoghq.dd.ddsql",
+    "icon": {
+      "name": "Inventories",
+      "type": "ICON"
+    },
+    "actions": {
+      "queryInventory": {
+        "title": "Run DDSQL query",
+        "description": "Get deeper visibility into your infrastructure by querying your resources with natural language or with [DDSQL](https://docs.datadoghq.com/ddsql_editor/#use-sql-syntax-ddsql), a dialect of SQL with additional support for querying tags."
+      }
+    }
+  },
+  {
+    "title": "Datadog Dashboard",
+    "name": "com.datadoghq.dd.dashboard",
+    "icon": {
+      "name": "Dashboard",
+      "type": "ICON"
+    },
+    "actions": {
+      "cloneDashboard": {
+        "title": "Clone dashboard",
+        "description": "Clone the specified dashboard."
+      },
+      "deleteDashboard": {
+        "title": "Delete dashboard",
+        "description": "Delete a dashboard using the specified ID."
+      },
+      "getDashboard": {
+        "title": "Get dashboard details",
+        "description": "Get a dashboard with widgets using the specified ID."
+      },
+      "getDashboardWithoutWidgets": {
+        "title": "Get dashboard",
+        "description": "Get a dashboard using the specified ID."
+      },
+      "getSharedDashboard": {
+        "title": "Get shared dashboard",
+        "description": "Fetch an existing shared dashboard’s sharing metadata associated with the specified token."
+      },
+      "listDashboards": {
+        "title": "List dashboards",
+        "description": "Get all dashboards."
+      },
+      "restoreDashboard": {
+        "title": "Restore dashboard",
+        "description": "Restore dashboard with the specified ID."
+      }
+    }
+  },
+  {
+    "title": "Datadog Dashboard List",
+    "name": "com.datadoghq.dd.dashboard_list",
+    "icon": {
+      "name": "Dashboard",
+      "type": "ICON"
+    },
+    "actions": {
+      "createDashboardListItems": {
+        "title": "Create dashboard list items",
+        "description": "Add dashboards to an existing dashboard list."
+      },
+      "deleteDashboardListItems": {
+        "title": "Delete dashboard list items",
+        "description": "Delete dashboards from an existing dashboard list."
+      },
+      "getDashboardListItems": {
+        "title": "Get dashboard list items",
+        "description": "Fetch the dashboard list’s dashboard definitions."
+      },
+      "updateDashboardListItems": {
+        "title": "Update dashboard list items",
+        "description": "Update dashboards of an existing dashboard list."
+      }
+    }
+  },
+  {
+    "title": "Datadog Downtime",
+    "name": "com.datadoghq.dd.downtime",
+    "icon": {
+      "name": "Wrench",
+      "type": "ICON"
+    },
+    "actions": {
+      "cancelDowntimeV2": {
+        "title": "Cancel Downtime",
+        "description": "Cancel a downtime."
+      },
+      "getDowntimeV2": {
+        "title": "Get Downtime",
+        "description": "Get downtime detail by `downtime_id`."
+      },
+      "listDowntimesV2": {
+        "title": "List downtimes",
+        "description": "Get all scheduled downtimes."
+      },
+      "listMonitorDowntimesV2": {
+        "title": "List monitor downtimes",
+        "description": "Get all active downtimes for the specified monitor."
+      },
+      "scheduleDowntimeV2": {
+        "title": "Schedule Downtime",
+        "description": "Schedule a downtime."
+      },
+      "searchDowntimes": {
+        "title": "Search downtimes",
+        "description": "Search all scheduled downtimes matching the provided filters. The search is limited to 1000 downtimes."
+      }
+    }
+  },
+  {
+    "title": "Datadog Events",
+    "name": "com.datadoghq.dd.events",
+    "icon": {
+      "name": "Events",
+      "type": "ICON"
+    },
+    "actions": {
+      "createEvent": {
+        "title": "Create event",
+        "description": "Post events to the stream."
+      },
+      "getEvent": {
+        "title": "Get event",
+        "description": "Query event details."
+      },
+      "listEventsV2": {
+        "title": "List events",
+        "description": "List events that match an events search query."
+      },
+      "searchEvents": {
+        "title": "Search events",
+        "description": "Search for events in your Datadog account."
+      }
+    }
+  },
+  {
+    "title": "Datadog Hosts",
+    "name": "com.datadoghq.dd.hosts",
+    "icon": {
+      "name": "HexRinged",
+      "type": "ICON"
+    },
+    "actions": {
+      "getHost": {
+        "title": "Get host",
+        "description": "Get details of host tracked in Datadog."
+      },
+      "getHostTotals": {
+        "title": "Get host totals",
+        "description": "Retrieve total number of active and up hosts in your Datadog account."
+      },
+      "listHosts": {
+        "title": "List hosts",
+        "description": "Search for hosts by name, alias, or tag."
+      },
+      "muteHost": {
+        "title": "Mute host",
+        "description": "Mute a host."
+      },
+      "unmuteHost": {
+        "title": "Unmute host",
+        "description": "Unmute a host."
+      }
+    }
+  },
+  {
+    "title": "Datadog IP Ranges",
+    "name": "com.datadoghq.dd.ip_ranges",
+    "icon": {
+      "name": "Api",
+      "type": "ICON"
+    },
+    "actions": {
+      "getIPRanges": {
+        "title": "Get IP ranges",
+        "description": "Get Datadog IP ranges."
+      }
+    }
+  },
+  {
+    "title": "Datadog Incidents",
+    "name": "com.datadoghq.dd.incidents",
+    "icon": {
+      "name": "Incidents",
+      "type": "ICON"
+    },
+    "actions": {
+      "addResponder": {
+        "title": "Add responder to incident",
+        "description": "Add a responder to a Datadog incident."
+      },
+      "addTask": {
+        "title": "Add task to incident",
+        "description": "Add a task to a Datadog incident."
+      },
+      "createIncident": {
+        "title": "Create incident",
+        "description": "Create an incident."
+      },
+      "getIncident": {
+        "title": "Get incident",
+        "description": "Get the details of an incident by `incident_id`."
+      },
+      "getResponders": {
+        "title": "Get responders",
+        "description": "Get all responders for a Datadog incident."
+      },
+      "searchIncident": {
+        "title": "Search incidents",
+        "description": "Get specific incidents by given search query."
+      },
+      "updateIncident": {
+        "title": "Update incident",
+        "description": "Update an incident."
+      },
+      "updateTimeline": {
+        "title": "Update timeline",
+        "description": "Update timeline with given text."
+      }
+    }
+  },
+  {
+    "title": "Datadog Logs",
+    "name": "com.datadoghq.dd.logs",
+    "icon": {
+      "name": "Logs",
+      "type": "ICON"
+    },
+    "actions": {
+      "aggregateEvents": {
+        "title": "Aggregate events",
+        "description": "This action aggregates events into buckets and computes metrics and timeseries."
+      },
+      "listLogs": {
+        "title": "Search logs",
+        "description": "List endpoint returns logs that match a log search query."
+      }
+    }
+  },
+  {
+    "title": "Datadog Metrics",
+    "name": "com.datadoghq.dd.metrics",
+    "icon": {
+      "name": "Metric",
+      "type": "ICON"
+    },
+    "actions": {
+      "createTagConfiguration": {
+        "title": "Create tag configuration",
+        "description": "Create and define a list of queryable tag keys for an existing metric."
+      },
+      "getMetricMetadata": {
+        "title": "Get metric metadata",
+        "description": "Get metadata about a specific metric."
+      },
+      "getTagConfiguration": {
+        "title": "Get tag configuration",
+        "description": "Get the tag configuration for the given metric name."
+      },
+      "listActiveMetrics": {
+        "title": "List active metrics",
+        "description": "Get the list of actively reporting metrics from a given time until now."
+      },
+      "listActiveTagsAndAggregations": {
+        "title": "List active tags and aggregations",
+        "description": "List tags and aggregations that are actively queried on\ndashboards and monitors for a given metric name."
+      },
+      "listMetrics": {
+        "title": "Search metrics",
+        "description": "Search for metrics from the last 24 hours in Datadog."
+      },
+      "listTagsByMetricName": {
+        "title": "List tags by metric name",
+        "description": "View indexed tag key-value pairs for a given metric name."
+      },
+      "queryMetrics": {
+        "title": "Get timeseries points",
+        "description": "Query timeseries points for a given metric."
+      },
+      "submitMetric": {
+        "title": "Submit metric",
+        "description": "The metrics end-point allows you to post time-series data that can be graphed on Datadog’s dashboards."
+      },
+      "updateTagConfiguration": {
+        "title": "Update tag configuration",
+        "description": "Update the tag configuration of a metric."
+      }
+    }
+  },
+  {
+    "title": "Datadog Monitor",
+    "name": "com.datadoghq.dd.monitor",
+    "icon": {
+      "name": "Monitor",
+      "type": "ICON"
+    },
+    "actions": {
+      "checkCanDeleteMonitor": {
+        "title": "Check can delete monitor",
+        "description": "Check if the given monitors can be deleted."
+      },
+      "cloneMonitor": {
+        "title": "Clone monitor",
+        "description": "Clone the specified monitor."
+      },
+      "createMonitor": {
+        "title": "Create monitor",
+        "description": "Create a monitor using the specified options."
+      },
+      "deleteMonitor": {
+        "title": "Delete monitor",
+        "description": "Delete the specified monitor."
+      },
+      "getMonitor": {
+        "title": "Get monitor",
+        "description": "Get details about the specified monitor from your organization."
+      },
+      "muteMonitor": {
+        "title": "Mute monitor",
+        "description": "Mute the specified monitor."
+      },
+      "resolveMonitor": {
+        "title": "Resolve monitor",
+        "description": "Mark the monitor as resolved for all groups. The monitor state will become 'OK'."
+      },
+      "searchMonitors": {
+        "title": "Search monitors",
+        "description": "Search and filter your monitors details."
+      },
+      "unmuteMonitor": {
+        "title": "Unmute monitor",
+        "description": "Unmute the specified monitor."
+      }
+    }
+  },
+  {
+    "title": "Datadog Notebooks",
+    "name": "com.datadoghq.dd.notebooks",
+    "icon": {
+      "name": "Notebook",
+      "type": "ICON"
+    },
+    "actions": {
+      "cloneNotebook": {
+        "title": "Clone notebook",
+        "description": "Clone the specified notebook."
+      },
+      "createFromTemplate": {
+        "title": "Create notebook from template",
+        "description": "Create a new notebook from the given template."
+      },
+      "createNotebook": {
+        "title": "Create notebook",
+        "description": "Create a notebook using the specified options."
+      },
+      "deleteNotebook": {
+        "title": "Delete notebook",
+        "description": "Delete a notebook using the specified ID."
+      },
+      "getNotebook": {
+        "title": "Get notebook details",
+        "description": "Get a notebook using the specified notebook ID with the cells' information."
+      },
+      "getNotebookWithoutCells": {
+        "title": "Get notebook",
+        "description": "Get a notebook using the specified notebook ID."
+      },
+      "listNotebooks": {
+        "title": "List notebooks",
+        "description": "Get all notebooks."
+      }
+    }
+  },
+  {
+    "title": "Datadog Pagerduty Integration",
+    "name": "com.datadoghq.pagerduty.integration",
+    "icon": {
+      "id": "pagerduty",
+      "type": "INTEGRATION"
+    },
+    "actions": {
+      "createPagerDutyIntegration": {
+        "title": "Create Pagerduty Integration in Datadog",
+        "description": "Create an integration of an existing PagerDuty service in Datadog's [PagerDuty Integration Tile](/integrations/pagerduty)."
+      }
+    }
+  },
+  {
+    "title": "Datadog Push Notifications",
+    "name": "com.datadoghq.dd.push_notification",
+    "icon": {
+      "name": "Mobile",
+      "type": "ICON"
+    },
+    "actions": {
+      "sendPushNotification": {
+        "title": "Send mobile push notification message",
+        "description": "Send a push notification message to specified Datadog Mobile app user."
+      }
+    }
+  },
+  {
+    "title": "Datadog RUM",
+    "name": "com.datadoghq.dd.rum",
+    "icon": {
+      "name": "Rum",
+      "type": "ICON"
+    },
+    "actions": {
+      "getRUMApplication": {
+        "title": "Get RUM application",
+        "description": "Get a RUM application."
+      },
+      "listRUMApplications": {
+        "title": "List RUM applications",
+        "description": "List all of the RUM applications."
+      },
+      "listRUMEvents": {
+        "title": "List RUM events",
+        "description": "List endpoint returns events that match a RUM search query."
+      },
+      "searchRUMEvents": {
+        "title": "Search RUM events",
+        "description": "List endpoint returns RUM events that match a RUM search query."
+      },
+      "updateRUMApplication": {
+        "title": "Update RUM application",
+        "description": "Update a RUM application."
+      }
+    }
+  },
+  {
+    "title": "Datadog Reference Tables",
+    "name": "com.datadoghq.dd.reference_tables",
+    "icon": {
+      "name": "Inventories",
+      "type": "ICON"
+    },
+    "actions": {
+      "bulkHasKey": {
+        "title": "Bulk has key",
+        "description": "Check to see if up to 250 primary keys exist in a given table. If at least one primary key has a matching row, an output is returned. Throws an error if no table with a matching table name is found."
+      },
+      "bulkLookup": {
+        "title": "Bulk lookup",
+        "description": "Look up the rows associated with up to 250 primary keys by equality only. If at least one primary key has a matching row, an output will still be returned. Throws an error if:\n- No table with a matching table name is found."
+      },
+      "getTable": {
+        "title": "Get table",
+        "description": "Return up to the 99 first rows from the reference table. An error is thrown if:\n- There is no table with matching table name.\n- An incorrect column is given."
+      },
+      "hasKey": {
+        "title": "Has key",
+        "description": "Check to see if a single primary key exists in a given table. Throws an error if no table with a matching table name is found."
+      },
+      "lookup": {
+        "title": "Lookup",
+        "description": "Look up the row associated with the given primary key by equality only. Throws an error if:\n- No table with a matching table name is found.\n- No primary key with a matching entry is found."
+      },
+      "tableExists": {
+        "title": "Table exists",
+        "description": "Check if a reference table exists, returns true or false."
+      }
+    }
+  },
+  {
+    "title": "Datadog Security Monitoring",
+    "name": "com.datadoghq.dd.securitymonitoring",
+    "icon": {
+      "name": "SecurityMonitoring",
+      "type": "ICON"
+    },
+    "actions": {
+      "listSecurityMonitoringSignals": {
+        "title": "List security monitoring signals",
+        "description": "List security monitoring signals matching a certain query and other filters."
+      }
+    }
+  },
+  {
+    "title": "Datadog Service Catalog",
+    "name": "com.datadoghq.dd.service_catalog",
+    "icon": {
+      "name": "ServiceCatalog",
+      "type": "ICON"
+    },
+    "actions": {
+      "getScores": {
+        "title": "Get scores",
+        "description": "Get all scores organized by rule, service, or team."
+      },
+      "getServiceDefinition": {
+        "title": "Get service definition",
+        "description": "Get a single service definition from the Datadog Service Catalog."
+      },
+      "getServiceDependencies": {
+        "title": "Get service dependencies",
+        "description": "Get a specific service’s immediate upstream and downstream services. The services retrieved are filtered by environment and a primary tag, if one is defined."
+      },
+      "getServicePagerdutyOncall": {
+        "title": "Get service pagerduty oncall",
+        "description": "Get the service pagerduty oncall information."
+      },
+      "listServiceDefinitions": {
+        "title": "List service definitions",
+        "description": "Get a list of all service definitions from the Datadog Service Catalog."
+      },
+      "updateScorecardRuleOutcome": {
+        "title": "Update scorecard rule outcome",
+        "description": "Update scorecard rule outcome for a single service."
+      }
+    }
+  },
+  {
+    "title": "Datadog Spans",
+    "name": "com.datadoghq.dd.spans",
+    "icon": {
+      "name": "Trace",
+      "type": "ICON"
+    },
+    "actions": {
+      "getSpansList": {
+        "title": "Get spans list",
+        "description": "Get the spans list that match a span search query. This action temporarly requires a Datadog external account."
+      }
+    }
+  },
+  {
+    "title": "Datadog Synthetics",
+    "name": "com.datadoghq.dd.synthetics",
+    "icon": {
+      "name": "Synthetics",
+      "type": "ICON"
+    },
+    "actions": {
+      "getAPITestLatestResults": {
+        "title": "List API test results",
+        "description": "Get the last 50 test results summaries for a given Synthetics API test."
+      },
+      "getAPITestResult": {
+        "title": "Get API test result",
+        "description": "Get a specific full result from a given (API) Synthetic test."
+      },
+      "getBrowserTestLatestResults": {
+        "title": "List browser test results",
+        "description": "Get the last 50 test results summaries for a given Synthetics Browser test."
+      },
+      "getBrowserTestResult": {
+        "title": "Get browser test result",
+        "description": "Get a specific full result from a given (browser) Synthetic test."
+      },
+      "getGlobalVariable": {
+        "title": "Get global variable",
+        "description": "Get the detailed configuration of a global variable."
+      },
+      "getTest": {
+        "title": "Get test",
+        "description": "Get the detailed configuration associated with a Synthetics test."
+      },
+      "listGlobalVariables": {
+        "title": "List global variables",
+        "description": "Get the list of all Synthetics global variables."
+      },
+      "listTests": {
+        "title": "List tests",
+        "description": "Get the list of all Synthetic tests."
+      },
+      "triggerTests": {
+        "title": "Trigger tests",
+        "description": "Trigger a set of Synthetics tests."
+      },
+      "updateTestPauseStatus": {
+        "title": "Update test pause status",
+        "description": "Pause or start a Synthetics test by changing the status."
+      }
+    }
+  },
+  {
+    "title": "Datadog Tags",
+    "name": "com.datadoghq.dd.tags",
+    "icon": {
+      "name": "Tags",
+      "type": "ICON"
+    },
+    "actions": {
+      "getHostTags": {
+        "title": "Get host tags",
+        "description": "Return all tags that apply to a given host."
+      }
+    }
+  },
+  {
+    "title": "Datadog Teams",
+    "name": "com.datadoghq.dd.teams",
+    "icon": {
+      "name": "Users",
+      "type": "ICON"
+    },
+    "actions": {
+      "addUser": {
+        "title": "Add user",
+        "description": "Add a user to a team."
+      },
+      "getTeam": {
+        "title": "Get team",
+        "description": "Get a specific team given a team ID or team name."
+      },
+      "listTeams": {
+        "title": "List teams",
+        "description": "Get all teams."
+      },
+      "removeUser": {
+        "title": "Remove user",
+        "description": "Remove a user from a team."
+      }
+    }
+  },
+  {
+    "title": "Datadog Users",
+    "name": "com.datadoghq.dd.users",
+    "icon": {
+      "name": "User",
+      "type": "ICON"
+    },
+    "actions": {
+      "getUser": {
+        "title": "Get user by ID",
+        "description": "Get a user in the organization specified by the user’s `user_id`."
+      },
+      "listUsers": {
+        "title": "Search users",
+        "description": "Search users in the organization."
+      }
+    }
+  },
+  {
+    "title": "Datadog Workflow Automation",
+    "name": "com.datadoghq.dd.workflow_automation",
+    "icon": {
+      "name": "Workflows",
+      "type": "ICON"
+    },
+    "actions": {
+      "triggerWorkflow": {
+        "title": "Trigger workflow",
+        "description": "Kick-off a child workflow."
+      }
+    }
+  },
+  {
+    "title": "Email",
+    "name": "com.datadoghq.email",
+    "icon": {
+      "name": "Email",
+      "type": "ICON"
+    },
+    "actions": {
+      "send": {
+        "title": "Send",
+        "description": "Send a simple fire-and-forget email message containing plain text. You can send a maximum of 10 000 emails per day accross all your workflows."
+      }
+    }
+  },
+  {
+    "title": "Fastly",
+    "name": "com.datadoghq.fastly",
+    "icon": {
+      "id": "fastly",
+      "type": "INTEGRATION"
+    },
+    "actions": {
+      "activate_service_version": {
+        "title": "Activate service version",
+        "description": "Activate the current version."
+      },
+      "clone_service_version": {
+        "title": "Clone service version",
+        "description": "Clone the current configuration into a new version."
+      },
+      "create_acl": {
+        "title": "Create ACL",
+        "description": "Create a new ACL attached to the specified service version. A new, empty ACL must be attached to a draft version of a service. The version associated with the ACL must be activated to be used."
+      },
+      "create_acl_entries": {
+        "title": "Create ACL entries",
+        "description": "Add ACL entries to an ACL."
+      },
+      "create_acl_entry": {
+        "title": "Create ACL entry",
+        "description": "Add an ACL entry to an ACL."
+      },
+      "create_service_version": {
+        "title": "Create service version",
+        "description": "Create a version for a particular service."
+      },
+      "deactivate_service_version": {
+        "title": "Deactivate service version",
+        "description": "Deactivate the current version."
+      },
+      "delete_acl": {
+        "title": "Delete ACL",
+        "description": "Delete an ACL from the specified service version. To remove an ACL from use, the ACL must be deleted from a draft version and the version without the ACL must be activated."
+      },
+      "delete_acl_entry": {
+        "title": "Delete ACL entry",
+        "description": "Delete an ACL Entry."
+      },
+      "get_acl": {
+        "title": "Get ACL",
+        "description": "Retrieve a single ACL by name for the specified version and service."
+      },
+      "get_acl_entry": {
+        "title": "Get ACL entry",
+        "description": "Get an ACL Entry."
+      },
+      "get_service_version": {
+        "title": "Get service version",
+        "description": "Get the version for a particular service."
+      },
+      "list_acl_entries": {
+        "title": "List ACL entries",
+        "description": "List ACL Entries for a given ACL."
+      },
+      "list_acls": {
+        "title": "List ACLs",
+        "description": "List ACLs for a given service."
+      },
+      "list_service_versions": {
+        "title": "List service versions",
+        "description": "List the versions for a particular service."
+      },
+      "lock_service_version": {
+        "title": "Locks service version",
+        "description": "Lock the specified version."
+      },
+      "purge_everything_from_service": {
+        "title": "Purge everything from service",
+        "description": "Instant Purge everything from a service. Purging effectively removes an object from the Fastly cache, prompting future requests that would otherwise hit that cached object to proceed to origin as a cache miss. Read more about purging in Fastly [here](https://developer.fastly.com/learning/concepts/purging)."
+      },
+      "purge_url": {
+        "title": "Purge a URL",
+        "description": "Instant Purge a url. Purging effectively removes an object from the Fastly cache, prompting future requests that would otherwise hit that cached object to proceed to origin as a cache miss. Read more about purging in Fastly [here](https://developer.fastly.com/learning/concepts/purging)."
+      },
+      "validate_service_version": {
+        "title": "Validate service version",
+        "description": "Validate the version for a particular service and version."
+      }
+    }
+  },
+  {
+    "title": "Freshservice",
+    "name": "com.datadoghq.freshservice",
+    "icon": {
+      "id": "freshservice",
+      "type": "INTEGRATION"
+    },
+    "actions": {
+      "createTicket": {
+        "title": "Create ticket",
+        "description": "Create a new Freshservice Ticket."
+      },
+      "getTicket": {
+        "title": "Get ticket",
+        "description": "Get a Freshservice ticket by ID."
+      },
+      "listTickets": {
+        "title": "List tickets",
+        "description": "List Freshservice tickets."
+      },
+      "updateTicket": {
+        "title": "Update ticket",
+        "description": "Update the Freshservice Ticket."
+      }
+    }
+  },
+  {
+    "title": "GitHub",
+    "name": "com.datadoghq.github",
+    "icon": {
+      "id": "github",
+      "type": "INTEGRATION"
+    },
+    "actions": {
+      "addLabelsToPR": {
+        "title": "Add labels to pull request",
+        "description": "Add labels to an existing pull request."
+      },
+      "addOrUpdateTeamMembership": {
+        "title": "Add or update team member",
+        "description": "Add or update team membership for a GitHub user."
+      },
+      "checkPRStatus": {
+        "title": "Get pull request status",
+        "description": "Get a pull request's status."
+      },
+      "configChange": {
+        "title": "Edit configuration files",
+        "description": "Perform modifications on configuration files, such as `yaml` or `ini`, and creates a pull request."
+      },
+      "createBranch": {
+        "title": "Create branch",
+        "description": "Create a new branch."
+      },
+      "createComment": {
+        "title": "Create comment",
+        "description": "Create a comment on a pull request."
+      },
+      "createIssue": {
+        "title": "Create issue",
+        "description": "Create an issue."
+      },
+      "createOrUpdateFile": {
+        "title": "Create or update file",
+        "description": "Create or update a file in the specified GitHub repository."
+      },
+      "createPullRequest": {
+        "title": "Create pull request",
+        "description": "Create a pull request."
+      },
+      "deleteFile": {
+        "title": "Delete file",
+        "description": "Delete a file in the specified GitHub repository."
+      },
+      "getTeamMembership": {
+        "title": "Get team membership",
+        "description": "Get team membership information for a GitHub user."
+      },
+      "getUser": {
+        "title": "Get user",
+        "description": "Get additional information about a user."
+      },
+      "listCommits": {
+        "title": "List commits",
+        "description": "List commits in a repo."
+      },
+      "listPullRequests": {
+        "title": "List pull requests",
+        "description": "List pull requests. Returns 30 pull requests max."
+      },
+      "listReleases": {
+        "title": "List releases",
+        "description": "List releases in a repo."
+      },
+      "listTeamMembers": {
+        "title": "List team members",
+        "description": "List members of given team."
+      },
+      "removeTeamMembership": {
+        "title": "Remove team member",
+        "description": "Remove team membership for a GitHub user."
+      },
+      "searchRepositories": {
+        "title": "Search repositories",
+        "description": "Search for public GitHub repositories."
+      }
+    }
+  },
+  {
+    "title": "GitHub Actions",
+    "name": "com.datadoghq.github.actions",
+    "icon": {
+      "id": "github-actions",
+      "type": "INTEGRATION"
+    },
+    "actions": {
+      "getLatestWorkflowRun": {
+        "title": "Get latest workflow run",
+        "description": "Returns the latest execution for a specific github workflow."
+      },
+      "getWorkflowRun": {
+        "title": "Get github actions workflow run",
+        "description": "Get a specified run of a github actions workflow."
+      },
+      "listWorkflowRuns": {
+        "title": "List github actions workflow runs",
+        "description": "List runs for a specified github actions workflow."
+      },
+      "triggerWorkflowRun": {
+        "title": "Trigger github actions workflow run",
+        "description": "Manually trigger a Github Actions workflow run. You must configure your GitHub Actions workflow to run when the workflow_dispatch webhook event occurs."
+      }
+    }
+  },
+  {
+    "title": "GitLab",
+    "name": "com.datadoghq.gitlab",
+    "icon": {
+      "id": "gitlab",
+      "type": "INTEGRATION"
+    },
+    "actions": {
+      "approveMergeRequest": {
+        "title": "Approve merge request",
+        "description": "Approve a merge request."
+      },
+      "getMergeRequestReviewers": {
+        "title": "List merge request reviewers",
+        "description": "Get a list of merge request reviewers."
+      },
+      "getOpenMergeRequests": {
+        "title": "List open merge requests",
+        "description": "List open merge requests."
+      },
+      "getProjectDeployments": {
+        "title": "List project deployments",
+        "description": "Get a list of deployments in a project."
+      },
+      "getSingleDeployments": {
+        "title": "Get deployment",
+        "description": "Get a specific deployment."
+      },
+      "getSingleMergeRequest": {
+        "title": "Get merge request",
+        "description": "Show information about a single merge request."
+      },
+      "unapproveMergeRequest": {
+        "title": "Unapprove merge request",
+        "description": "Unapprove a merge request."
+      }
+    }
+  },
+  {
+    "title": "GitLab Branches",
+    "name": "com.datadoghq.gitlab.branches",
+    "icon": {
+      "id": "gitlab",
+      "type": "INTEGRATION"
+    },
+    "actions": {
+      "createBranch": {
+        "title": "Create branch",
+        "description": "Create a branch in a given project."
+      },
+      "deleteBranch": {
+        "title": "Delete branch",
+        "description": "Delete a branch in a given project."
+      },
+      "deleteMergedBranches": {
+        "title": "Delete merged branches",
+        "description": "Delete all merged branches in a given project."
+      },
+      "getBranch": {
+        "title": "Get branch",
+        "description": "Get a single project repository branch."
+      },
+      "listBranches": {
+        "title": "List branches",
+        "description": "Get a list of repository branches from a project, sorted by name alphabetically."
+      }
+    }
+  },
+  {
+    "title": "Google Cloud Armor",
+    "name": "com.datadoghq.gcp.armor",
+    "icon": {
+      "id": "google-cloud-armor",
+      "type": "INTEGRATION"
+    },
+    "actions": {
+      "addRule": {
+        "title": "Add rule",
+        "description": "Inserts a rule into a security policy."
+      },
+      "deleteSecurityPolicy": {
+        "title": "Delete security policy",
+        "description": "Deletes the specified policy."
+      },
+      "getRule": {
+        "title": "Get rule",
+        "description": "Gets a rule at the specified priority."
+      },
+      "getSecurityPolicy": {
+        "title": "Get security policy",
+        "description": "List all of the ordered rules present in a single specified policy."
+      },
+      "listExistingWAFRules": {
+        "title": "List existing WAF rules",
+        "description": "Gets the current list of preconfigured Web Application Firewall (WAF) expressions."
+      },
+      "listSecurityPolicies": {
+        "title": "List security policies",
+        "description": "List all the policies that have been configured for the specified project."
+      },
+      "patchRule": {
+        "title": "Patch rule",
+        "description": "Patches a rule at the specified priority. To clear fields in the rule, leave the fields empty and specify them in the updateMask."
+      },
+      "patchSecurityPolicy": {
+        "title": "Patch security policy",
+        "description": "Patches the specified policy with the data included in the request. To clear fields in the policy, leave the fields empty and specify them in the updateMask. This cannot be used to be update the rules in the policy. Please use the per rule methods like addRule, patchRule, and removeRule instead."
+      },
+      "removeRule": {
+        "title": "Remove rule",
+        "description": "Deletes a rule at the specified priority."
+      },
+      "setLabels": {
+        "title": "Set labels",
+        "description": "Sets the labels on a security policy. To learn more about labels, read the Labeling Resources documentation."
+      }
+    }
+  },
+  {
+    "title": "Google Cloud SQL",
+    "name": "com.datadoghq.gcp.sql",
+    "icon": {
+      "id": "google-cloudsql",
+      "type": "INTEGRATION"
+    },
+    "actions": {
+      "createSQLInstance": {
+        "title": "Create SQL instance",
+        "description": "Creates a new Cloud SQL instance by making a call to the Cloud SQL API endpoint [insert](https://cloud.google.com/sql/docs/mysql/admin-api/rest/v1/instances/insert)."
+      },
+      "deleteSQLInstance": {
+        "title": "Delete SQL instance",
+        "description": "Deletes a Cloud SQL instance."
+      },
+      "getSQLInstance": {
+        "title": "Get SQL instance",
+        "description": "Retrieves a resource containing information about a Cloud SQL instance."
+      },
+      "listSQLInstances": {
+        "title": "List SQL instances",
+        "description": "Lists instances under a given project."
+      },
+      "patchSQLInstance": {
+        "title": "Patch SQL instance",
+        "description": "Updates settings of a Cloud SQL instance by making a call to the Cloud SQL API endpoint [patch](https://cloud.google.com/sql/docs/mysql/admin-api/rest/v1/instances/patch)."
+      },
+      "restoreBackup": {
+        "title": "Restore backup",
+        "description": "Restores a backup of a Cloud SQL instance. Using this operation might cause your instance to restart."
+      }
+    }
+  },
+  {
+    "title": "Google Compute Engine",
+    "name": "com.datadoghq.gcp.compute",
+    "icon": {
+      "id": "google-compute-engine",
+      "type": "INTEGRATION"
+    },
+    "actions": {
+      "createSnapshot": {
+        "title": "Create snapshot",
+        "description": "Creates a snapshot of a specified persistent disk. For regular snapshot creation, consider using snapshots.insert instead, as that method supports more features, such as creating snapshots in a project different from the source disk project."
+      },
+      "deleteInstance": {
+        "title": "Delete instance",
+        "description": "Deletes the specified Instance resource. For more information, see Deleting an instance."
+      },
+      "getDisk": {
+        "title": "Get disk",
+        "description": "Returns the specified persistent disk."
+      },
+      "getInstance": {
+        "title": "Get instance",
+        "description": "Returns the specified Instance resource."
+      },
+      "getMachineType": {
+        "title": "Get machine type",
+        "description": "Returns the specified machine type."
+      },
+      "getZone": {
+        "title": "Get zone",
+        "description": "Returns the specified Zone resource."
+      },
+      "listInstances": {
+        "title": "List instances",
+        "description": "Retrieves the list of instances contained within the specified zone."
+      },
+      "listMachineTypes": {
+        "title": "List machine types",
+        "description": "Retrieves a list of machine types available to the specified project."
+      },
+      "listZones": {
+        "title": "List zones",
+        "description": "Retrieves the list of Zone resources available to the specified project."
+      },
+      "resizeDisk": {
+        "title": "Resize disk",
+        "description": "Resizes the specified persistent disk. You can only increase the size of the disk."
+      },
+      "setLabels": {
+        "title": "Set labels",
+        "description": "Sets labels on an instance. To learn more about labels, read the Labeling Resources documentation."
+      },
+      "setMetadata": {
+        "title": "Set metadata",
+        "description": "Sets metadata for the specified instance to the data included in the request."
+      },
+      "setTags": {
+        "title": "Set tags",
+        "description": "Sets network tags for the specified instance to the data included in the request."
+      },
+      "startInstance": {
+        "title": "Start instance",
+        "description": "Starts an instance that was stopped using the instances().stop method. For more information, see Restart an instance."
+      },
+      "stopInstance": {
+        "title": "Stop instance",
+        "description": "Stops a running instance, shutting it down cleanly, and allows you to restart the instance at a later time. Stopped instances do not incur VM usage charges while they are stopped. However, resources that the VM is using, such as persistent disks and static IP addresses, will continue to be charged until they are deleted. For more information, see Stopping an instance."
+      }
+    }
+  },
+  {
+    "title": "Google Kubernetes Engine (GKE)",
+    "name": "com.datadoghq.gcp.container",
+    "icon": {
+      "id": "google-container-engine",
+      "type": "INTEGRATION"
+    },
+    "actions": {
+      "createCluster": {
+        "title": "Create cluster",
+        "description": "Creates a cluster, consisting of the specified number and type of Google Compute Engine instances. By default, the cluster is created in the project's [default network](https://cloud.google.com/compute/docs/networks-and-firewalls#networks). One firewall is added for the cluster. After cluster creation, the Kubelet creates routes for each node to allow the containers on that node to communicate with all other instances in the cluster. Finally, an entry is added to the project's global metadata indicating which CIDR range the cluster is using."
+      },
+      "createNodePool": {
+        "title": "Create node pool",
+        "description": "Creates a node pool for a cluster."
+      },
+      "deleteCluster": {
+        "title": "Delete cluster",
+        "description": "Deletes the cluster, including the Kubernetes endpoint and all worker nodes. Firewalls and routes that were configured during cluster creation are also deleted. Other Google Compute Engine resources that might be in use by the cluster, such as load balancer resources, are not deleted if they weren't present when the cluster was initially created."
+      },
+      "deleteNodePool": {
+        "title": "Delete node pool",
+        "description": "Deletes a node pool from a cluster."
+      },
+      "getCluster": {
+        "title": "Get cluster",
+        "description": "Gets the details of a specific cluster."
+      },
+      "getNodePool": {
+        "title": "Get node pool",
+        "description": "Retrieves the requested node pool."
+      },
+      "getServerConfig": {
+        "title": "Get server config",
+        "description": "Returns configuration info about the Google Kubernetes Engine service."
+      },
+      "listClusters": {
+        "title": "List clusters",
+        "description": "Lists all clusters owned by a project in either the specified zone or all zones."
+      },
+      "listNodePools": {
+        "title": "List node pools",
+        "description": "Lists the node pools for a cluster."
+      },
+      "rollbackNodePoolUpgrade": {
+        "title": "Rollback node pool upgrade",
+        "description": "Rolls back a previously Aborted or Failed NodePool upgrade. This makes no changes if the last upgrade successfully completed."
+      },
+      "setNetworkPolicy": {
+        "title": "Set network policy",
+        "description": "Enables or disables Network Policy for a cluster."
+      },
+      "setNodePoolAutoscaling": {
+        "title": "Set node pool autoscaling",
+        "description": "Sets the autoscaling settings for the specified node pool."
+      },
+      "updateCluster": {
+        "title": "Update cluster",
+        "description": "Updates the settings of a specific cluster."
+      }
+    }
+  },
+  {
+    "title": "GreyNoise",
+    "name": "com.datadoghq.greynoise",
+    "icon": {
+      "id": "greynoise",
+      "type": "INTEGRATION"
+    },
+    "actions": {
+      "getAdvancedIPContext": {
+        "title": "Get advanced IP context",
+        "description": "The action provided the full context of the given IP address by putting both the RIOT and the noise context of the IP address."
+      },
+      "getCommunityIPContext": {
+        "title": "Get community IP context",
+        "description": "The Community API provides community users with a free tool to query IPs in the GreyNoise dataset and retrieve a subset of the full IP context data returned by the IP Lookup API."
+      },
+      "getIPsContext": {
+        "title": "Get IPs context",
+        "description": "Get more information about a set of IP addresses. Returns time ranges, IP metadata (network owner, ASN, reverse DNS pointer, country), associated actors, activity tags, and raw port scan and web request information."
+      },
+      "lookupIPWithRIOT": {
+        "title": "Lookup IP with RIOT",
+        "description": "RIOT identifies IPs from known benign services and organizations that commonly cause false positives in network security and threat intelligence products."
+      },
+      "quickCheckIPs": {
+        "title": "Quick check IPs",
+        "description": "Check whether a set of IP addresses are \"Internet background noise\", or have been observed scanning or attacking devices across the Internet."
+      }
+    }
+  },
+  {
+    "title": "HTTP",
+    "name": "com.datadoghq.http",
+    "icon": {
+      "id": "http",
+      "type": "INTEGRATION"
+    },
+    "actions": {
+      "request": {
+        "title": "Make request",
+        "description": "Make an HTTP request."
+      }
+    }
+  },
+  {
+    "title": "Jenkins",
+    "name": "com.datadoghq.jenkins",
+    "icon": {
+      "id": "jenkins",
+      "type": "INTEGRATION"
+    },
+    "actions": {
+      "buildJenkinsJob": {
+        "title": "Submit Jenkins job",
+        "description": "Submit a Jenkins job."
+      },
+      "deleteJenkinsJob": {
+        "title": "Delete Jenkins job",
+        "description": "Delete a Jenkins job."
+      },
+      "getJobStatus": {
+        "title": "Get Jenkins job status",
+        "description": "Get the status of a Jenkins job."
+      }
+    }
+  },
+  {
+    "title": "Jira",
+    "name": "com.datadoghq.jira",
+    "icon": {
+      "id": "jira-software",
+      "type": "INTEGRATION"
+    },
+    "actions": {
+      "add_comment": {
+        "title": "Add comment",
+        "description": "Add a new comment to an issue."
+      },
+      "create_issue": {
+        "title": "Create issue",
+        "description": "Create an issue or a sub-task."
+      },
+      "get_issue": {
+        "title": "Get issue",
+        "description": "Return a full representation of the issue for the given issue key."
+      },
+      "transition_issue": {
+        "title": "Transition issue",
+        "description": "Perform a transition on an issue. When performing the transition you can update or set other issue fields."
+      }
+    }
+  },
+  {
+    "title": "Kubernetes Api Extensions",
+    "name": "com.datadoghq.kubernetes.apiextensions",
+    "icon": {
+      "id": "kubernetes",
+      "type": "INTEGRATION"
+    },
+    "actions": {
+      "getCustomResourceDefinition": {
+        "title": "Get custom resource definition",
+        "description": "Read the specified CustomResourceDefinition."
+      },
+      "listCustomResourceDefinition": {
+        "title": "List custom resource definition",
+        "description": "List or watch objects of kind CustomResourceDefinition."
+      }
+    }
+  },
+  {
+    "title": "Kubernetes Apps",
+    "name": "com.datadoghq.kubernetes.apps",
+    "icon": {
+      "id": "kubernetes",
+      "type": "INTEGRATION"
+    },
+    "actions": {
+      "getControllerRevision": {
+        "title": "Get controller revision",
+        "description": "Read the specified ControllerRevision."
+      },
+      "getDaemonSet": {
+        "title": "Get daemon set",
+        "description": "Read the specified DaemonSet."
+      },
+      "getDeployment": {
+        "title": "Get deployment",
+        "description": "Read the specified Deployment."
+      },
+      "getReplicaSet": {
+        "title": "Get replica set",
+        "description": "Read the specified ReplicaSet."
+      },
+      "getStatefulSet": {
+        "title": "Get stateful set",
+        "description": "Read the specified StatefulSet."
+      },
+      "listControllerRevision": {
+        "title": "List controller revision",
+        "description": "List or watch objects of kind ControllerRevision."
+      },
+      "listDaemonSet": {
+        "title": "List daemon set",
+        "description": "List or watch objects of kind DaemonSet."
+      },
+      "listDeployment": {
+        "title": "List deployment",
+        "description": "List or watch objects of kind Deployment."
+      },
+      "listReplicaSet": {
+        "title": "List replica set",
+        "description": "List or watch objects of kind ReplicaSet."
+      },
+      "listStatefulSet": {
+        "title": "List stateful set",
+        "description": "List or watch objects of kind StatefulSet."
+      },
+      "restartDeployment": {
+        "title": "Restart deployment",
+        "description": "Restarts a deployment."
+      },
+      "updateDeployment": {
+        "title": "Update deployment",
+        "description": "Replace the specified Deployment."
+      },
+      "updateReplicaSet": {
+        "title": "Update replica set",
+        "description": "Replace the specified ReplicaSet."
+      }
+    }
+  },
+  {
+    "title": "Kubernetes Batch",
+    "name": "com.datadoghq.kubernetes.batch",
+    "icon": {
+      "id": "kubernetes",
+      "type": "INTEGRATION"
+    },
+    "actions": {
+      "getCronJob": {
+        "title": "Get cron job",
+        "description": "Read the specified CronJob."
+      },
+      "getJob": {
+        "title": "Get job",
+        "description": "Read the specified Job."
+      },
+      "listCronJob": {
+        "title": "List cron job",
+        "description": "List or watch objects of kind CronJob."
+      },
+      "listJob": {
+        "title": "List job",
+        "description": "List or watch objects of kind Job."
+      }
+    }
+  },
+  {
+    "title": "Kubernetes Core",
+    "name": "com.datadoghq.kubernetes.core",
+    "icon": {
+      "id": "kubernetes",
+      "type": "INTEGRATION"
+    },
+    "actions": {
+      "createNode": {
+        "title": "Create node",
+        "description": "Create a Node."
+      },
+      "createPod": {
+        "title": "Create pod",
+        "description": "Create a Pod."
+      },
+      "deleteMultiplePods": {
+        "title": "Delete multiple pods",
+        "description": "Delete collection of Pod."
+      },
+      "deletePod": {
+        "title": "Delete pod",
+        "description": "Delete a Pod."
+      },
+      "getConfigMap": {
+        "title": "Get config map",
+        "description": "Read the specified ConfigMap."
+      },
+      "getEndpoints": {
+        "title": "Get endpoints",
+        "description": "Read the specified Endpoints."
+      },
+      "getEvent": {
+        "title": "Get event",
+        "description": "Read the specified Event."
+      },
+      "getLimitRange": {
+        "title": "Get limit range",
+        "description": "Read the specified LimitRange."
+      },
+      "getNamespace": {
+        "title": "Get namespace",
+        "description": "Read the specified Namespace."
+      },
+      "getNode": {
+        "title": "Get node",
+        "description": "Read the specified Node."
+      },
+      "getPersistentVolume": {
+        "title": "Get persistent volume",
+        "description": "Read the specified PersistentVolume."
+      },
+      "getPersistentVolumeClaim": {
+        "title": "Get persistent volume claim",
+        "description": "Read the specified PersistentVolumeClaim."
+      },
+      "getPod": {
+        "title": "Get pod",
+        "description": "Read the specified Pod."
+      },
+      "getPodTemplate": {
+        "title": "Get pod template",
+        "description": "Read the specified PodTemplate."
+      },
+      "getReplicationController": {
+        "title": "Get replication controller",
+        "description": "Read the specified ReplicationController."
+      },
+      "getResourceQuota": {
+        "title": "Get resource quota",
+        "description": "Read the specified ResourceQuota."
+      },
+      "getService": {
+        "title": "Get service",
+        "description": "Read the specified Service."
+      },
+      "getServiceAccount": {
+        "title": "Get service account",
+        "description": "Read the specified ServiceAccount."
+      },
+      "listConfigMap": {
+        "title": "List config map",
+        "description": "List or watch objects of kind ConfigMap."
+      },
+      "listEndpoints": {
+        "title": "List endpoints",
+        "description": "List or watch objects of kind Endpoints."
+      },
+      "listEvent": {
+        "title": "List event",
+        "description": "List or watch objects of kind Event."
+      },
+      "listLimitRange": {
+        "title": "List limit range",
+        "description": "List or watch objects of kind LimitRange."
+      },
+      "listNamespace": {
+        "title": "List namespace",
+        "description": "List or watch objects of kind Namespace."
+      },
+      "listNode": {
+        "title": "List node",
+        "description": "List or watch objects of kind Node."
+      },
+      "listPersistentVolume": {
+        "title": "List persistent volume",
+        "description": "List or watch objects of kind PersistentVolume."
+      },
+      "listPersistentVolumeClaim": {
+        "title": "List persistent volume claim",
+        "description": "List or watch objects of kind PersistentVolumeClaim."
+      },
+      "listPod": {
+        "title": "List pod",
+        "description": "List or watch objects of kind Pod."
+      },
+      "listPodTemplate": {
+        "title": "List pod template",
+        "description": "List or watch objects of kind PodTemplate."
+      },
+      "listReplicationController": {
+        "title": "List replication controller",
+        "description": "List or watch objects of kind ReplicationController."
+      },
+      "listResourceQuota": {
+        "title": "List resource quota",
+        "description": "List or watch objects of kind ResourceQuota."
+      },
+      "listService": {
+        "title": "List service",
+        "description": "List or watch objects of kind Service."
+      },
+      "listServiceAccount": {
+        "title": "List service account",
+        "description": "List or watch objects of kind ServiceAccount."
+      },
+      "updatePod": {
+        "title": "Update pod",
+        "description": "Replace the specified Pod."
+      }
+    }
+  },
+  {
+    "title": "Kubernetes Custom Resources",
+    "name": "com.datadoghq.kubernetes.customresources",
+    "icon": {
+      "id": "kubernetes",
+      "type": "INTEGRATION"
+    },
+    "actions": {
+      "getCustomObject": {
+        "title": "Get custom object",
+        "description": "Returns a namespace scoped custom object."
+      },
+      "listCustomObject": {
+        "title": "List custom object",
+        "description": "List or watch namespace scoped custom objects."
+      }
+    }
+  },
+  {
+    "title": "LaunchDarkly",
+    "name": "com.datadoghq.launchdarkly",
+    "icon": {
+      "id": "launchdarkly",
+      "type": "INTEGRATION"
+    },
+    "actions": {
+      "addExpireUserTargetDate": {
+        "title": "Add expire user target date",
+        "description": "Add a date and time that LaunchDarkly will remove the user from the flag's individual targeting."
+      },
+      "addUserTargets": {
+        "title": "Add user targets",
+        "description": "Add user keys to the individual user targets for the variation that `variationID` specifies."
+      },
+      "copyFeatureFlag": {
+        "title": "Copy feature flag",
+        "description": "Copy flag settings from a source environment to a target environment."
+      },
+      "createFeatureFlag": {
+        "title": "Create feature flag",
+        "description": "Create a feature flag with the given name and key."
+      },
+      "deleteFeatureFlag": {
+        "title": "Delete feature flag",
+        "description": "Delete a feature flag in all environments. Use with caution: only delete feature flags your application no longer uses."
+      },
+      "getFeatureFlag": {
+        "title": "Get feature flag",
+        "description": "Get a single feature flag by key."
+      },
+      "getFeatureFlagStatus": {
+        "title": "Get feature flag status",
+        "description": "Get the status for a particular feature flag."
+      },
+      "getPercentageRollout": {
+        "title": "Get percentage rollout",
+        "description": "Return the percentage rollout for a feature flag in an environment."
+      },
+      "listEnvironments": {
+        "title": "List environments",
+        "description": "Return a list of environments for the specified project."
+      },
+      "listFeatureFlagStatuses": {
+        "title": "List feature flag statuses",
+        "description": "Get a list of statuses for all feature flags."
+      },
+      "listFeatureFlags": {
+        "title": "List feature flags",
+        "description": "Get a list of all features in the given project."
+      },
+      "listProjects": {
+        "title": "List projects",
+        "description": "Return a list of projects."
+      },
+      "removeExpireUserTargetDate": {
+        "title": "Remove expire user target date",
+        "description": "Remove the scheduled removal of the user from the flag's individual targeting. The user will remain part of the flag's individual targeting until you explicitly remove them, or until you schedule another removal."
+      },
+      "removeUserTargets": {
+        "title": "Remove user targets",
+        "description": "Remove all individual user targets from the variation that `variationID` specifies."
+      },
+      "toggleFeatureFlag": {
+        "title": "Toggle feature flag",
+        "description": "Set the flag's targeting state to On or Off."
+      },
+      "updateExpireUserTargetDate": {
+        "title": "Update expire user target date",
+        "description": "Update the date and time that LaunchDarkly will remove the user from the flag's individual targeting."
+      },
+      "updatePercentageRollout": {
+        "title": "Update percentage rollout",
+        "description": "Update the percentage rollouts of a rule to release new features incrementally."
+      }
+    }
+  },
+  {
+    "title": "Microsoft Entra",
+    "name": "com.datadoghq.azure.entra",
+    "icon": {
+      "id": "azure-active-directory",
+      "type": "INTEGRATION"
+    },
+    "actions": {
+      "addUserApp": {
+        "title": "Assign app role",
+        "description": "Assign an app role to a team or group."
+      },
+      "createUser": {
+        "title": "Create user",
+        "description": "Create a new user, with the body containing the user to create."
+      },
+      "deleteUser": {
+        "title": "Delete user",
+        "description": "Delete a user. When deleted, user resources are moved to a temporary container and can be restored within 30 days. After that time, they are permanently deleted."
+      },
+      "deleteUserApp": {
+        "title": "Delete user app",
+        "description": "Delete an app role assignment that has been granted to a user."
+      },
+      "disableUser": {
+        "title": "Disable user",
+        "description": "Disable a user."
+      },
+      "enableUser": {
+        "title": "Enable user",
+        "description": "Enable a user."
+      },
+      "getAppPermissions": {
+        "title": "Get app permissions",
+        "description": "Read the properties and relationships of an app role assignment object."
+      },
+      "getUser": {
+        "title": "Get user",
+        "description": "Get a user by ID or principal name."
+      },
+      "listGroupMembers": {
+        "title": "List group members",
+        "description": "The following action gets a list of the group's direct members."
+      },
+      "listGroups": {
+        "title": "List groups",
+        "description": "Gets the groups available in an organization."
+      },
+      "listUserApps": {
+        "title": "List user apps",
+        "description": "The following action retrieves a list of apps associated with a user."
+      },
+      "listUsers": {
+        "title": "List all users",
+        "description": "The following action retrieves a list of user objects."
+      },
+      "resetUserPassword": {
+        "title": "Reset user password",
+        "description": "Reset a user password given a password profile."
+      },
+      "revokeSignInSessions": {
+        "title": "Revoke sign in sessions",
+        "description": "Invalidate all the refresh tokens issued to applications for a user (as well as session cookies in a user's browser), by resetting the `signInSessionsValidFromDateTime` user property to\nthe current date-time. Typically, this operation is performed (by the user or an administrator) if the user has a lost or stolen device."
+      }
+    }
+  },
+  {
+    "title": "Microsoft Teams",
+    "name": "com.datadoghq.msteams",
+    "icon": {
+      "id": "microsoft-teams",
+      "type": "INTEGRATION"
+    },
+    "actions": {
+      "sendInteractiveMessage": {
+        "title": "Make a decision",
+        "description": "Send an MS Teams message with a list of options, and wait for someone to select an option before proceeding. Workflow execution flow will branch out depending on the user's decision."
+      },
+      "sendSimpleMessage": {
+        "title": "Send message",
+        "description": "Send a simple fire-and-forget Microsoft Teams message containing plain text."
+      }
+    }
+  },
+  {
+    "title": "NIST",
+    "name": "com.datadoghq.nist",
+    "icon": {
+      "id": "nist",
+      "type": "INTEGRATION"
+    },
+    "actions": {
+      "getCve": {
+        "title": "Get CVE",
+        "description": "Retrieve information for a CVE from the National Vulnerability Database."
+      }
+    }
+  },
+  {
+    "title": "Notion",
+    "name": "com.datadoghq.notion",
+    "icon": {
+      "id": "notion",
+      "type": "INTEGRATION"
+    },
+    "actions": {
+      "addParagraphToPage": {
+        "title": "Add paragraph to page",
+        "description": "Add a paragraph to a Notion page."
+      },
+      "createDatabaseRow": {
+        "title": "Create database row",
+        "description": "Create a row in a Notion database."
+      },
+      "createSubpage": {
+        "title": "Create subpage",
+        "description": "Create a child page on an existing Notion page."
+      },
+      "getPage": {
+        "title": "Get page",
+        "description": "Retrieve details of a Notion page."
+      },
+      "queryDatabase": {
+        "title": "Query database",
+        "description": "Query a Notion database with provided filters."
+      },
+      "updatePage": {
+        "title": "Update page",
+        "description": "Update the properties of a Notion page."
+      }
+    }
+  },
+  {
+    "title": "Okta",
+    "name": "com.datadoghq.okta",
+    "icon": {
+      "id": "okta",
+      "type": "INTEGRATION"
+    },
+    "actions": {
+      "add_user_to_group": {
+        "title": "Add user to group",
+        "description": "Add a user to a group of OKTA_GROUP type."
+      },
+      "create_user": {
+        "title": "Create user",
+        "description": "Create a new user in your Okta organization with or without credentials."
+      },
+      "deactivate_user": {
+        "title": "Deactivate user",
+        "description": "Deactivate a user. This operation can only be performed on users that do not have a `DEPROVISIONED` status."
+      },
+      "delete_user": {
+        "title": "Delete user",
+        "description": "Delete a user permanently. This operation can only be performed on users that have a `DEPROVISIONED` status. This action cannot be recovered!"
+      },
+      "get_user": {
+        "title": "Get user",
+        "description": "Get an Okta user."
+      },
+      "listUsers": {
+        "title": "List Users",
+        "description": "List Okta users with optional search/filter parameters."
+      },
+      "list_factors": {
+        "title": "List factors",
+        "description": "Enumerate all of the enrolled Factors for the specified User."
+      },
+      "reset_password": {
+        "title": "Reset password",
+        "description": "Reset the password of an Okta user."
+      },
+      "suspend_user": {
+        "title": "Suspend user",
+        "description": "Suspend a user. This operation can only be performed on users with an `ACTIVE` status. The user has a status of `SUSPENDED` when the process is complete."
+      },
+      "usersExist": {
+        "title": "Users Exist",
+        "description": "Check if there are user profiles related to the provided email."
+      }
+    }
+  },
+  {
+    "title": "OpenAI",
+    "name": "com.datadoghq.openai",
+    "icon": {
+      "id": "openai",
+      "type": "INTEGRATION"
+    },
+    "actions": {
+      "chatCompletion": {
+        "title": "Chat Completion",
+        "description": "Creates a model response for the given chat conversation."
+      },
+      "editText": {
+        "title": "Edit text",
+        "description": "Create a new edit for the provided instruction and input."
+      },
+      "generateText": {
+        "title": "Generate text",
+        "description": "Generate text given an input."
+      },
+      "summarizeText": {
+        "title": "Summarize text",
+        "description": "Summarize a given text."
+      }
+    }
+  },
+  {
+    "title": "Opsgenie",
+    "name": "com.datadoghq.opsgenie",
+    "icon": {
+      "id": "opsgenie",
+      "type": "INTEGRATION"
+    },
+    "actions": {
+      "acknowledgeAlert": {
+        "title": "Acknowledge alert",
+        "description": "Acknowledge an alert."
+      },
+      "addNoteToAlert": {
+        "title": "Add note to alert",
+        "description": "Add a note to an alert."
+      },
+      "addNoteToIncident": {
+        "title": "Add note to incident",
+        "description": "Add a note to an incident."
+      },
+      "addTagsToIncident": {
+        "title": "Add tags to incident",
+        "description": "Add tags to an incident."
+      },
+      "closeAlert": {
+        "title": "Close alert",
+        "description": "Close an alert."
+      },
+      "createAlert": {
+        "title": "Create alert",
+        "description": "Create an alert."
+      },
+      "createIncident": {
+        "title": "Create incident",
+        "description": "Create an incident."
+      },
+      "getAlert": {
+        "title": "Get alert",
+        "description": "Get an Opsgenie alert."
+      },
+      "getAssociatedAlerts": {
+        "title": "Get associated alerts",
+        "description": "Get alerts associated with an incident."
+      },
+      "getCurrentOnCall": {
+        "title": "Get current on call",
+        "description": "Retrieve current on-call participants of a specific schedule."
+      },
+      "getIncident": {
+        "title": "Get incident",
+        "description": "Get an Opsgenie incident."
+      },
+      "updateIncidentStatus": {
+        "title": "Update incident status",
+        "description": "Update the status of an incident."
+      }
+    }
+  },
+  {
+    "title": "PagerDuty",
+    "name": "com.datadoghq.pagerduty",
+    "icon": {
+      "id": "pagerduty",
+      "type": "INTEGRATION"
+    },
+    "actions": {
+      "ack_incident": {
+        "title": "Acknowledge incident",
+        "description": "Acknowledge an incident."
+      },
+      "createService": {
+        "title": "Create service",
+        "description": "Create a PagerDuty service."
+      },
+      "getService": {
+        "title": "Get service",
+        "description": "Given a service ID or service name, return basic information about the service."
+      },
+      "getServiceDependencies": {
+        "title": "Get service dependencies",
+        "description": "Get the dependencies associated with a service."
+      },
+      "getTeam": {
+        "title": "Get team",
+        "description": "Given a team ID or team name, return basic information about the team."
+      },
+      "get_current_on_call": {
+        "title": "Get current on-call",
+        "description": "Get the on-call schedule."
+      },
+      "listEscalationPolicies": {
+        "title": "List escalation policies",
+        "description": "List all escalation policies associated with a team."
+      },
+      "listIncidents": {
+        "title": "List incidents",
+        "description": "List pagerduty incidents."
+      },
+      "listSchedules": {
+        "title": "List schedules",
+        "description": "List pagerduty schedules."
+      },
+      "listServices": {
+        "title": "List services",
+        "description": "Lists all services that you have currently [integrated with Datadog](/integrations/pagerduty). To learn how you can integrate your PagerDuty services with Datadog check out the [guide here](/integrations/pagerduty)."
+      },
+      "listTeams": {
+        "title": "List teams",
+        "description": "List all teams associated with an account."
+      },
+      "resolve_incident": {
+        "title": "Resolve incident",
+        "description": "Resolve an incident."
+      },
+      "trigger_incident": {
+        "title": "Trigger incident",
+        "description": "Trigger an incident."
+      },
+      "updateService": {
+        "title": "Update service",
+        "description": "Update a PagerDuty service."
+      },
+      "updateServiceIncidentUrgencyRule": {
+        "title": "Update service incident urgency rule",
+        "description": "Update a PagerDuty service incident urgency rule."
+      }
+    }
+  },
+  {
+    "title": "PostgreSQL",
+    "name": "com.datadoghq.postgresql",
+    "icon": {
+      "id": "postgres",
+      "type": "INTEGRATION"
+    },
+    "actions": {
+      "explain": {
+        "title": "Execute an EXPLAIN query for a SQL statement",
+        "description": "Execute an EXPLAIN query on a PostgreSQL database."
+      },
+      "explainAnalyze": {
+        "title": "Execute an EXPLAIN ANALYZE query for a SQL statement",
+        "description": "Execute an EXPLAIN query on a PostgreSQL database."
+      },
+      "insert": {
+        "title": "Execute an INSERT query",
+        "description": "Execute an INSERT query on a PostgreSQL database."
+      },
+      "select": {
+        "title": "Execute a SELECT query",
+        "description": "Execute a SELECT query on a PostgreSQL database."
+      }
+    }
+  },
+  {
+    "title": "Posthog",
+    "name": "com.datadoghq.posthog",
+    "icon": {
+      "id": "posthog",
+      "type": "INTEGRATION"
+    },
+    "actions": {
+      "disableFeatureFlag": {
+        "title": "Disable feature flag",
+        "description": "Disable a feature flag."
+      },
+      "enableFeatureFlag": {
+        "title": "Enable feature flag",
+        "description": "Enable a feature flag."
+      },
+      "getFeatureFlag": {
+        "title": "Get feature flag",
+        "description": "Retrieve feature flag."
+      },
+      "listFeatureFlags": {
+        "title": "List feature flags",
+        "description": "List all feature flags."
+      },
+      "updateFeatureFlag": {
+        "title": "Update feature flag",
+        "description": "Update a feature flag."
+      }
+    }
+  },
+  {
+    "title": "ServiceNow",
+    "name": "com.datadoghq.servicenow",
+    "icon": {
+      "id": "servicenow",
+      "type": "INTEGRATION"
+    },
+    "actions": {
+      "createIncident": {
+        "title": "Create incident",
+        "description": "Create a new incident."
+      },
+      "deleteIncident": {
+        "title": "Delete incident",
+        "description": "Delete an existing incident."
+      },
+      "getIncident": {
+        "title": "Get incident",
+        "description": "Get an incident."
+      },
+      "listIncidents": {
+        "title": "List incidents",
+        "description": "Retrieve list of existing incidents."
+      },
+      "resolveIncident": {
+        "title": "Resolve incident",
+        "description": "Resolve an incident."
+      }
+    }
+  },
+  {
+    "title": "Signal Sciences",
+    "name": "com.datadoghq.sigsci",
+    "icon": {
+      "id": "sigsci",
+      "type": "INTEGRATION"
+    },
+    "actions": {
+      "addToSiteList": {
+        "title": "Add IPs to site list",
+        "description": "Add given IPs to a site list if they don't already exist."
+      },
+      "getSiteList": {
+        "title": "Get site list",
+        "description": "Retrieve a site list."
+      },
+      "listSiteLists": {
+        "title": "List site lists",
+        "description": "Retrieve an array of site lists."
+      },
+      "listSiteRules": {
+        "title": "List site rules",
+        "description": "List the rules for a site."
+      },
+      "removeFromSiteList": {
+        "title": "Remove IPs from site list",
+        "description": "Remove given IPs from an site list."
+      }
+    }
+  },
+  {
+    "title": "Slack",
+    "name": "com.datadoghq.slack",
+    "icon": {
+      "id": "slack",
+      "type": "INTEGRATION"
+    },
+    "actions": {
+      "addDatadogAgentToChannel": {
+        "title": "Add Datadog App to channel",
+        "description": "Add the Datadog slack app to a channel."
+      },
+      "archiveChannel": {
+        "title": "Archive channel",
+        "description": "Archive a channel."
+      },
+      "createChannel": {
+        "title": "Create channel",
+        "description": "Create a slack channel."
+      },
+      "getChannelTopic": {
+        "title": "Get public channel topic",
+        "description": "Get the topic of a public channel."
+      },
+      "getUserByEmail": {
+        "title": "Get user by email",
+        "description": "Lookup user by email."
+      },
+      "getUserById": {
+        "title": "Get user by ID",
+        "description": "Lookup user by ID."
+      },
+      "inviteUsersToChannel": {
+        "title": "Invite users to channel",
+        "description": "Invite users to a channel."
+      },
+      "listChannelMembers": {
+        "title": "List public channel members",
+        "description": "List all members in a public Slack channel."
+      },
+      "listChannels": {
+        "title": "List channels",
+        "description": "List channels for the given team."
+      },
+      "listWorkspaces": {
+        "title": "List workspaces",
+        "description": "List workspaces."
+      },
+      "send_interactive_message": {
+        "title": "Make a decision",
+        "description": "Send a Slack message with a list of options, and wait for someone to select an option before proceeding. Workflow execution flow will branch out depending on the user's decision."
+      },
+      "send_simple_message": {
+        "title": "Send message",
+        "description": "Send a simple fire-and-forget Slack message containing plain text."
+      },
+      "setChannelTopic": {
+        "title": "Set channel topic",
+        "description": "Set the topic of a channel."
+      }
+    }
+  },
+  {
+    "title": "Split",
+    "name": "com.datadoghq.split",
+    "icon": {
+      "id": "split",
+      "type": "INTEGRATION"
+    },
+    "actions": {
+      "getFeatureFlag": {
+        "title": "Get feature flag",
+        "description": "Get the definition of a feature flag in a workspace and environment."
+      },
+      "killFeatureFlag": {
+        "title": "Kill feature flag",
+        "description": "Kill a feature flag in a workspace and environment."
+      },
+      "listFeatureFlags": {
+        "title": "List feature flags",
+        "description": "List all feature flags in a workspace and environment."
+      },
+      "restoreFeatureFlag": {
+        "title": "Restore feature flag",
+        "description": "Restore a feature flag in a workspace and environment."
+      }
+    }
+  },
+  {
+    "title": "Statsig",
+    "name": "com.datadoghq.statsig",
+    "icon": {
+      "id": "statsig",
+      "type": "INTEGRATION"
+    },
+    "actions": {
+      "disableGate": {
+        "title": "Disable gate",
+        "description": "Disable a feature gate."
+      },
+      "enableGate": {
+        "title": "Enable gate",
+        "description": "Enable a feature gate."
+      },
+      "getDynamicConfig": {
+        "title": "Get dynamic config",
+        "description": "Get information about a dynamic config."
+      },
+      "getGate": {
+        "title": "Get gate",
+        "description": "Get information about a feature gate."
+      },
+      "listGates": {
+        "title": "List gates",
+        "description": "List all feature gates."
+      },
+      "updateDynamicConfig": {
+        "title": "Update dynamic config",
+        "description": "Update a dynamic config."
+      }
+    }
+  },
+  {
+    "title": "Statuspage",
+    "name": "com.datadoghq.statuspage",
+    "icon": {
+      "id": "statuspage",
+      "type": "INTEGRATION"
+    },
+    "actions": {
+      "createIncident": {
+        "title": "Create an incident",
+        "description": "Create an incident on a specific page."
+      },
+      "getIncident": {
+        "title": "Get incident",
+        "description": "Retrieve a specific incident by ID."
+      },
+      "getPages": {
+        "title": "Get pages",
+        "description": "Get all pages associated with a specific account."
+      },
+      "listIncidents": {
+        "title": "List incidents",
+        "description": "List all incidents on a specific page."
+      },
+      "updateComponentStatus": {
+        "title": "Update component status",
+        "description": "Update the status of a specific component."
+      }
+    }
+  },
+  {
+    "title": "Temporal",
+    "name": "com.datadoghq.temporal",
+    "icon": {
+      "id": "temporal",
+      "type": "INTEGRATION"
+    },
+    "actions": {
+      "getWorkflowResult": {
+        "title": "Get workflow result",
+        "description": "Get the result of a Workflow execution. Follow the chain of execution in case Workflow continues as new, or has a cron schedule or retry policy."
+      },
+      "listWorkflows": {
+        "title": "List workflow executions",
+        "description": "List temporal workflow executions based on query."
+      },
+      "runWorkflow": {
+        "title": "Run workflow",
+        "description": "Run a temporal workflow."
+      }
+    }
+  },
+  {
+    "title": "VirusTotal",
+    "name": "com.datadoghq.virustotal",
+    "icon": {
+      "id": "virustotal",
+      "type": "INTEGRATION"
+    },
+    "actions": {
+      "getDomain": {
+        "title": "Get a domain report",
+        "description": "Get the domain object."
+      },
+      "getFile": {
+        "title": "Get a file report",
+        "description": "Get the file object."
+      },
+      "getIP": {
+        "title": "Get an IP report",
+        "description": "Get the IP address object."
+      },
+      "getURL": {
+        "title": "Get a URL analysis report from URL ID",
+        "description": "Get the URL object."
+      },
+      "getURLReportFromURL": {
+        "title": "Get a URL analysis report from URL",
+        "description": "Get the URL object."
+      }
+    }
+  }
+]

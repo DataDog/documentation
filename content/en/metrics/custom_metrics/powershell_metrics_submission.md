@@ -40,7 +40,7 @@ function postMetric($metric,$tags) {
 $app_key = "<DATADOG_APPLICATION_KEY>" #provide your valid app key
 $api_key = "<DATADOG_API_KEY>" #provide your valid api key
 $url_base = "https://app.datadoghq.com/"
-$url_signature = "api/latest/series"
+$url_signature = "api/v2/series"
 $url = $url_base + $url_signature + "?api_key=$api_key" + "&" + "application_key=$app_key"
 $tags = "[env:test]" #optional parameter
 
@@ -108,7 +108,7 @@ $http_request.responseText
 
     $http_method = "POST"
 
-    $url_signature = "api/latest/tags/hosts/$host_name"
+    $url_signature = "api/v2/tags/hosts/$host_name"
 
     $parameters = "{
     `"tags`" : [`"environment:production`", `"role:webserver`"]
@@ -131,7 +131,7 @@ $http_request.responseText
     ```powershell
     $http_method = "POST"
 
-    $url_signature = "api/latest/series"
+    $url_signature = "api/v2/series"
 
     $currenttime = (Get-Date -date ((get-date).ToUniversalTime()) -UFormat %s) -Replace("[,\.]\d*", "")
 
