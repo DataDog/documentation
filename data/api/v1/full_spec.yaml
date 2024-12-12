@@ -23664,6 +23664,12 @@ components:
       type: apiKey
       x-auth-id-alias: appKeyAuth
       x-env-name: DD_APP_KEY
+    bearerAuth:
+      in: header
+      name: Authorization
+      scheme: bearer
+      type: http
+      x-env-name: DD_BEARER_TOKEN
 info:
   contact:
     email: support@datadoghq.com
