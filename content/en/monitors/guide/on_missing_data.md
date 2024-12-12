@@ -23,12 +23,6 @@ If you manage your monitors from the UI, they will be automatically updated for 
 ## Monitors managed through the API or Terraform
 
 If you are managing your monitors with API or Terraform, replace `notify_no_data` and `no_data_timeframe` with `on_missing_data`. The `no_data_timeframe` parameter is not required since `on_missing_data` uses the same time frame as the time window.  
-The available values for `on_missing_data` are:
-
-* default  
-* show_no_data  
-* show_and_notify_no_data  
-* resolve
 
 ### API parameters
 
