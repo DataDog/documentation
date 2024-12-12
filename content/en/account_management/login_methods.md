@@ -33,7 +33,9 @@ For enhanced security, organization managers can enforce [multi-factor authentic
 2. Set the **Require Multi-Factor Authentication** setting to `On` or `Off`, according to your organization's preference or policy requirements.
 3. Confirm your selection.
 
-When the **Require Multi-Factor Authentication** setting is `On`, users that log in with an email and password must register a second authentication factor before accessing the organization.
+Setting **Require Multi-Factor Authentication** to `On` has two effects:
+- Users that log in with an email and password must register a second authentication factor before accessing the organization.
+- In Login Methods, a link to **View users without MFA** appears. Click on the link to see the Users list, filtered on users without MFA.
 
 The setting to require multi-factor authentication is independent of the default login method settings. Regardless of which login methods you enable by default, enforcing MFA requires a second authentication factor for users that log in with an email and password.
 
