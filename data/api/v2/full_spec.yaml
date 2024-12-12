@@ -21531,11 +21531,13 @@ components:
     SLOReportInterval:
       description: The frequency at which report data is to be generated.
       enum:
+      - daily
       - weekly
       - monthly
       example: weekly
       type: string
       x-enum-varnames:
+      - DAILY
       - WEEKLY
       - MONTHLY
     SLOReportPostResponse:
