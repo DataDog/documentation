@@ -62,7 +62,7 @@ cascade:
 
 ## What is Real User Monitoring?
 
-{{< img src="real_user_monitoring/rum-performance-dashboard-updated.png" alt="RUM Dashboard" >}}
+{{< img src="real_user_monitoring/performance-summary-browser.png" alt="RUM Dashboard" >}}
 
 Datadog's *Real User Monitoring (RUM)* gives you end-to-end visibility into the real-time activity and experience of individual users. RUM solves four types of use cases for monitoring web and mobile applications:
 
@@ -134,7 +134,9 @@ Select an application from the top navigation, or follow the setup instructions 
 
 ## Performance monitoring summary
 
-{{< img src="real_user_monitoring/rum-performance-browser.png" alt="RUM Performance Monitoring summary page for a browser application" >}}
+| Browser Performance Summary | Mobile Performance Summary |
+|---------|---------|
+| {{< img src="real_user_monitoring/performance-summary-browser.png" alt="RUM Performance Monitoring summary page for a browser application" >}} | {{< img src="real_user_monitoring/performance-summary-mobile-2.png" alt="RUM Performance Monitoring summary page for a mobile application" >}} | 
 
 The [RUM Performance Monitoring summary][1] page provides relevant and actionable insights for both web and mobile applications. You have a tailored experience for each platform that helps you:
 
