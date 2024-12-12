@@ -46,7 +46,7 @@ The example below demonstrates how to create an [HTTP test][3], a subtype of [si
 
 2. Click **New Test** > **[New API test][5]**.
 
-You may create a test using one of the following options:
+   You may create a test using one of the following options:
 
    - **[Create a test from a template](#templates)** 
    - **[Build a test from scratch](#build-a-test-from-scratch)** 
