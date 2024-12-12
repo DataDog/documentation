@@ -53,7 +53,7 @@ Setting `defaultPrivacyLevel` to `mask` mode masks all HTML text, user input, im
 
 {{< img src="real_user_monitoring/session_replay/mask-mode-fixed.png" alt="Mask mode" style="width:70%;">}}
 
-**Note:** If you do not specify the privacy setting, `mask` is enabled by default when you enable Session Replay.
+**Note:** If the privacy setting is not specified when enabling Session Replay, `mask` is enabled by default.
 **Note**: Masked data is not stored on Datadog servers.
 
 ### Mask user input mode
