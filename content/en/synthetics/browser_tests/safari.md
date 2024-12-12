@@ -16,59 +16,59 @@ private: true
 
 Datadog supports running Synthetic Monitoring tests on the Safari browser, in addition to Chrome, Edge, and Firefox.
 
-## Safari browser testing setup
+## Safari Browser Testing setup
 
-To run Safari tests, create a new Synthetic Monitoring browser test that is **only** scheduled to run on Safari devices. 
+To run Safari tests, create a new Synthetic Monitoring Browser Test that is **only** scheduled to run on Safari devices. 
 
 Use one of the following three options : 
 
-* **[Create a new Synthetic Monitoring browser test](#create-a-new-synthetic-monitoring-browser-test)**: To record a new user journey from scratch.  
-* **[Clone an existing Synthetic Monitoring browser test](#clone-an-existing-synthetic-monitoring-browser-test)**: To start the user journey from an existing browser test.
-* **[Creating a new Synthetic Monitoring browser test, using an existing test as its subtest (recommended)](#create-a-new-synthetic-monitoring-browser-test-using-an-existing-test-as-a-subtest)**: If you want to base your test off the user journey from an existing test but you don't want to have to maintain two separate user journeys.
+* **[Create a new Synthetic Monitoring Browser Test](#create-a-new-synthetic-monitoring-browser-test)**: To record a new user journey from scratch.  
+* **[Clone an existing Synthetic Monitoring Browser Test](#clone-an-existing-synthetic-monitoring-browser-test)**: To start the user journey from an existing Browser Test.
+* **[Creating a new Synthetic Monitoring Browser Test, using an existing test as its subtest (recommended)](#create-a-new-synthetic-monitoring-browser-test-using-an-existing-test-as-a-subtest)**: If you want to base your test off the user journey from an existing test but you don't want to have to maintain two separate user journeys.
 
-## **Create a new Synthetic Monitoring browser test** 
+## **Create a new Synthetic Monitoring Browser Test** 
 
-1. Create a **new** [Browser test][1].   
+1. Create a **new** [Browser Test][1].   
 2. In the **Set your test details** > **Browser & Devices** section, **uncheck ALL** browsers and devices except the Safari devices you want. 
 
-   {{< img src="synthetics/browser_tests/safari/browsers_devices_safari.png" alt="Screenshot of a browser test creation, with Safari devices selected" width="80%" >}}
+   {{< img src="synthetics/browser_tests/safari/browsers_devices_safari.png" alt="Screenshot of a Browser Test creation, with Safari devices selected" width="80%" >}}
 
 3. In the **Select locations > Safari Private Locations** section, select the location named **macos-pl Safari Private Beta** that has been created for you.
 
-   {{< img src="synthetics/browser_tests/safari/safari_private_location.jpg" alt="Screenshot of a browser test creation, showing the private locations drop down" width="70%" >}}
+   {{< img src="synthetics/browser_tests/safari/safari_private_location.jpg" alt="Screenshot of a Browser Test creation, showing the private locations drop down" width="70%" >}}
 
-4. You can continue configuring the test as you would a usual browser test.
+4. You can continue configuring the test as you would a usual Browser Test.
 
-## Clone an existing Synthetic Monitoring browser test
+## Clone an existing Synthetic Monitoring Browser Test
 
-1. Create a **new** Browser test by cloning your desired existing test.
+1. Create a **new** Browser Test by cloning your desired existing test.
 
-   {{< img src="synthetics/browser_tests/safari/safari_clone.png" alt="Screenshot of cloning an existing browser test" width="70%" >}}
+   {{< img src="synthetics/browser_tests/safari/safari_clone.png" alt="Screenshot of cloning an existing Browser Test" width="70%" >}}
 
 2. In the **Set your test details** > **Browser & Devices** section, **uncheck ALL** browsers and devices except the Safari devices you want.
 
-   {{< img src="synthetics/browser_tests/safari/browsers_devices_safari.png" alt="Screenshot of a browser test creation, with Safari devices selected" width="80%" >}}
+   {{< img src="synthetics/browser_tests/safari/browsers_devices_safari.png" alt="Screenshot of a Browser Test creation, with Safari devices selected" width="80%" >}}
 
 3. In the **Select locations > Safari Private Locations** section, select the location named **macos-pl Safari Private Beta** that has been created for you.
 
-   {{< img src="synthetics/browser_tests/safari/safari_private_location.jpg" alt="Screenshot of a browser test creation, showing the private locations drop down" width="70%" >}}
+   {{< img src="synthetics/browser_tests/safari/safari_private_location.jpg" alt="Screenshot of a Browser Test creation, showing the private locations drop down" width="70%" >}}
 
 4. You can continue to save and run your new test.
 
    **Note** Since you are cloning tests, any changes made to the user journey in the original test is not automatically applied to your new Safari test.
 
 
-## Create a new Synthetic Monitoring browser test using an existing test as a subtest
+## Create a new Synthetic Monitoring Browser Test using an existing test as a subtest
 
-1. Create a **new** [Browser test][1]. 
+1. Create a **new** [Browser Test][1]. 
 
 2. In the **Set your test details** > **Browser & Devices** section, **uncheck ALL** browsers and devices but the Safari devices you want.
 
-   {{< img src="synthetics/browser_tests/safari/browsers_devices_safari.png" alt="Screenshot of a browser test creation, with Safari devices selected" width="80%" >}}
+   {{< img src="synthetics/browser_tests/safari/browsers_devices_safari.png" alt="Screenshot of a Browser Test creation, with Safari devices selected" width="80%" >}}
 
 3. In the **Select locations > Safari Private Locations** section, select the location named **macos-pl Safari Private Beta** that has been created for you.
 
-  {{< img src="synthetics/browser_tests/safari/safari_private_location.jpg" alt="Screenshot of a browser test creation, showing the private locations drop down" width="70%" >}}  
+  {{< img src="synthetics/browser_tests/safari/safari_private_location.jpg" alt="Screenshot of a Browser Test creation, showing the private locations drop down" width="70%" >}}  
 
 4. Click on **Save & Edit Recording**, add your desired test as a subtest _playing in the main window_ : 
 
@@ -84,9 +84,9 @@ Use one of the following three options :
 
 ### Can I run Safari tests from managed locations?
 
-**No**. Safari browser tests are limited to a dedicated Safari private location in your account. See [list of Synthetics Private Locations][2].
+**No**. Safari Browser Tests are limited to a dedicated Safari private location in your account. See [list of Synthetics Monitoring Private Locations][2].
 
-**Note**: An API key named `API Key managed by synthetics-platform` with the label `MANAGED` was created and added to your org in order to create this dedicated Safari private location. **Do not revoke this key** as it is required to enable Safari testing.
+**Note**: An API key named `API Key managed by synthetics-platform` with the label `MANAGED` was created and added to your org to create this dedicated Safari private location. **Do not revoke this key** as it is required to enable Safari testing.
 
 In the context of this Preview, it is **expected** that some monitors may be triggered for this private location. The monitors can be resolved by ignoring the `synthetics-safari-private-beta:true` tag.
 
@@ -94,7 +94,7 @@ In the context of this Preview, it is **expected** that some monitors may be tri
 
 ### Are there any existing limitations for Safari tests?
 
-**Yes**. Safari browser specific limitations can affect some of the regular Synthetic Monitoring browser test features: 
+**Yes**. Safari browser specific limitations can affect some of the regular Synthetic Monitoring Browser Test features: 
 
 1. **Managed locations:** Safari tests can only run on a Private Location dedicated to your Datadog account. 
 2. **Running Subtests in a new window:** It is only possible to run subtests in the main window.
