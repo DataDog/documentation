@@ -22,6 +22,32 @@ menu:
       url: /api/latest/aws-integration/
       identifier: aws-integration
       generated: true
+    - name: List available namespaces
+      url: '#list-available-namespaces'
+      identifier: aws-integration-list-available-namespaces
+      parent: aws-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListAWSNamespaces
+        unstable:
+          - v2
+        order: 1
+    - name: Get an AWS integration by config ID
+      url: '#get-an-aws-integration-by-config-id'
+      identifier: aws-integration-get-an-aws-integration-by-config-id
+      parent: aws-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetAWSAccount
+        unstable:
+          - v2
+        order: 3
     - name: Generate a new external ID
       url: '#generate-a-new-external-id'
       identifier: aws-integration-generate-a-new-external-id
@@ -30,9 +56,11 @@ menu:
       params:
         versions:
           - v1
+          - v2
         operationids:
           - CreateNewAWSExternalID
-        unstable: []
+        unstable:
+          - v2
         order: 4
     - name: Set an AWS tag filter
       url: '#set-an-aws-tag-filter'
@@ -126,9 +154,11 @@ menu:
       params:
         versions:
           - v1
+          - v2
         operationids:
           - UpdateAWSAccount
-        unstable: []
+        unstable:
+          - v2
         order: 9
     - name: Create an AWS integration
       url: '#create-an-aws-integration'
@@ -138,9 +168,11 @@ menu:
       params:
         versions:
           - v1
+          - v2
         operationids:
           - CreateAWSAccount
-        unstable: []
+        unstable:
+          - v2
         order: 8
     - name: List all AWS integrations
       url: '#list-all-aws-integrations'
@@ -150,9 +182,11 @@ menu:
       params:
         versions:
           - v1
+          - v2
         operationids:
           - ListAWSAccounts
-        unstable: []
+        unstable:
+          - v2
         order: 6
     - name: Delete an AWS integration
       url: '#delete-an-aws-integration'
@@ -162,9 +196,11 @@ menu:
       params:
         versions:
           - v1
+          - v2
         operationids:
           - DeleteAWSAccount
-        unstable: []
+        unstable:
+          - v2
         order: 7
     - name: AWS Logs Integration
       url: /api/latest/aws-logs-integration/
@@ -202,9 +238,11 @@ menu:
       params:
         versions:
           - v1
+          - v2
         operationids:
           - ListAWSLogsServices
-        unstable: []
+        unstable:
+          - v2
         order: 4
     - name: Check that an AWS Lambda Function exists
       url: '#check-that-an-aws-lambda-function-exists'
@@ -812,6 +850,7 @@ menu:
       params:
         versions:
           - v1
+          - v2
         operationids:
           - CreateEvent
         unstable: []
@@ -1446,8 +1485,7 @@ menu:
           - v2
         operationids:
           - QueryTimeseriesData
-        unstable:
-          - v2
+        unstable: []
         order: 1
     - name: Query scalar data across multiple products
       url: '#query-scalar-data-across-multiple-products'
@@ -1459,8 +1497,7 @@ menu:
           - v2
         operationids:
           - QueryScalarData
-        unstable:
-          - v2
+        unstable: []
         order: 2
     - name: List distinct metric volumes by metric name
       url: '#list-distinct-metric-volumes-by-metric-name'
@@ -2161,6 +2198,84 @@ menu:
       url: /api/latest/security-monitoring/
       identifier: security-monitoring
       generated: true
+    - name: Cancel a historical job
+      url: '#cancel-a-historical-job'
+      identifier: security-monitoring-cancel-a-historical-job
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CancelHistoricalJob
+        unstable:
+          - v2
+        order: 22
+    - name: Get a job's details
+      url: '#get-a-jobs-details'
+      identifier: security-monitoring-get-a-jobs-details
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetHistoricalJob
+        unstable:
+          - v2
+        order: 21
+    - name: Delete an existing job
+      url: '#delete-an-existing-job'
+      identifier: security-monitoring-delete-an-existing-job
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteHistoricalJob
+        unstable:
+          - v2
+        order: 23
+    - name: Convert a job result to a signal
+      url: '#convert-a-job-result-to-a-signal'
+      identifier: security-monitoring-convert-a-job-result-to-a-signal
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ConvertJobResultToSignal
+        unstable:
+          - v2
+        order: 24
+    - name: Run a historical job
+      url: '#run-a-historical-job'
+      identifier: security-monitoring-run-a-historical-job
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - RunHistoricalJob
+        unstable:
+          - v2
+        order: 19
+    - name: List historical jobs
+      url: '#list-historical-jobs'
+      identifier: security-monitoring-list-historical-jobs
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListHistoricalJobs
+        unstable:
+          - v2
+        order: 20
     - name: Change the related incidents of a security signal
       url: '#change-the-related-incidents-of-a-security-signal'
       identifier: security-monitoring-change-the-related-incidents-of-a-security-signal
@@ -4884,18 +4999,6 @@ menu:
       url: /api/latest/cloud-cost-management/
       identifier: cloud-cost-management
       generated: true
-    - name: Cloud Cost Enabled
-      url: '#cloud-cost-enabled'
-      identifier: cloud-cost-management-cloud-cost-enabled
-      parent: cloud-cost-management
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - GetCloudCostActivity
-        unstable: []
-        order: 10
     - name: Get Custom Costs file
       url: '#get-custom-costs-file'
       identifier: cloud-cost-management-get-custom-costs-file
@@ -5290,6 +5393,46 @@ menu:
         unstable:
           - v2
         order: 4
+    - name: Data Deletion
+      url: /api/latest/data-deletion/
+      identifier: data-deletion
+      generated: true
+    - name: Cancels a data deletion request
+      url: '#cancels-a-data-deletion-request'
+      identifier: data-deletion-cancels-a-data-deletion-request
+      parent: data-deletion
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CancelDataDeletionRequest
+        unstable: []
+        order: 2
+    - name: Gets a list of data deletion requests
+      url: '#gets-a-list-of-data-deletion-requests'
+      identifier: data-deletion-gets-a-list-of-data-deletion-requests
+      parent: data-deletion
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetDataDeletionRequests
+        unstable: []
+        order: 3
+    - name: Creates a data deletion request
+      url: '#creates-a-data-deletion-request'
+      identifier: data-deletion-creates-a-data-deletion-request
+      parent: data-deletion
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateDataDeletionRequest
+        unstable: []
+        order: 1
     - name: Domain Allowlist
       url: /api/latest/domain-allowlist/
       identifier: domain-allowlist

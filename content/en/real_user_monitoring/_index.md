@@ -45,6 +45,9 @@ further_reading:
 - link: "/real_user_monitoring/browser/data_collected/"
   tag: "Documentation"
   text: "RUM Browser Data Collected"
+- link: "https://www.datadoghq.com/blog/progressive-web-application-monitoring/"
+  tag: "Blog"
+  text: "Best practices for monitoring progressive web applications"
 algolia:
   tags: ['rum', 'real user monitoring']
 cascade:
@@ -103,7 +106,7 @@ The following table shows which RUM capabilities are supported on each platform:
 | Monitor platform-specific vitals | {{< X >}} | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} |  |  |
 | Global context/attribute tracking in Logs  | {{< X >}} |  |  |  |  |  |  |
 | Client side tracing |  | {{< X >}} |  {{< X >}}|  |  |  |  |  |
-| Session Replay | {{< X >}} | {{< X >}} | {{< X >}} |  |  |  | Mobile Session Replay is in public beta for native mobile apps. |
+| Session Replay | {{< X >}} | {{< X >}} | {{< X >}} |  |  |  | Mobile Session Replay is in Preview for native mobile apps. |
 | Frustration signals | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | Only partially supported for all **mobile** and **Roku** devices |
 
 ## Supported endpoints for SDK domains
@@ -122,6 +125,8 @@ All Datadog SDKs traffic is transmitted over SSL (default 443) to the following 
 ## Explore Datadog RUM
 
 Access RUM by navigating to [**Digital Experience > Performance Summary**][1].
+
+**Tip**: To open RUM from Datadog's global search, press <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>K</kbd> and search for `real user monitoring`.
 
 ### Out-of-the-box dashboards
 

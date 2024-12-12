@@ -26,7 +26,7 @@ author:
 categories:
 - recopilación de logs
 - so y sistema
-custom_kind: integración
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/ibm_was/README.md
 display_on_public_website: true

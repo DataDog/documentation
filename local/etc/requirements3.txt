@@ -1,7 +1,6 @@
 setuptools==60.10.0
 PyGithub==1.47
 markdown
-algoliasearch>=2.2.0
 beautifulsoup4==4.5.1
 cffi==1.15.0
 cssutils>=1.0.0

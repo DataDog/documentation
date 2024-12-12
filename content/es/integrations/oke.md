@@ -21,7 +21,7 @@ categories:
 - kubernetes
 - oracle
 - orquestación
-custom_kind: integración
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/oke/README.md
 display_on_public_website: true

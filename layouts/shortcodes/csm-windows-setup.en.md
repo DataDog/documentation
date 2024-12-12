@@ -19,7 +19,12 @@ Datadog Cloud Security Management on Windows includes host vulnerability detecti
 - Access to hosts running Windows Server 2016 or newer.
 - (Optional) For network events, [NPM][2] must be enabled on the hosts.
 
-**Note**: Windows containerized workloads are not supported.
+## Limitations
+
+- Windows containerized workloads are not supported.
+- Datadog detects vulnerabilities in Windows by identifying the Windows version and installed security knowledge base (KB) updates to address vulnerabilities associated with that version. However, some KB updates are cumulative and contain other KB updates, which might cause Datadog to misidentify which updates have been installed.
+- Datadog can't track vulnerability fixes that Windows applies outside of KB updates.
+- Datadog can't track vulnerabilities associated with third-party software.
 
 ## Installation
 

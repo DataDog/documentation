@@ -21,7 +21,7 @@ title: Controles del consumo
 
 Los controles del consumo afectan a qué trazas (traces) envían tus aplicaciones a Datadog. Las [métricas de APM][1] siempre se calculan basándose en todas las trazas y no se ven afectadas por los controles del consumo.
 
-La página de control del consumo ofrece visibilidad al nivel del Agent y de las <txprotected>bibliotecas de rastreo</txprotected> en la configuración del consumo de tus aplicaciones y servicios. Desde la [página de configuración del control del consumo][2], puedes:
+La página de control del consumo ofrece visibilidad al nivel del Agent y de las bibliotecas de rastreo en la configuración del consumo de tus aplicaciones y servicios. Desde la [página de configuración del control del consumo][2], puedes:
 - Obtener visibilidad de tu configuración del consumo al nivel del servicio y ajustar las frecuencias de muestreo de trazas para obtener servicios de alto rendimiento.
 - Comprender qué mecanismos de consumo son responsables del muestreo de la mayor parte de tus trazas.
 - Investigar y actuar ante posibles problemas de configuración del consumo, como recursos limitados de la CPU o la RAM para el Agent.
@@ -43,7 +43,7 @@ Haz clic en **Configuración remota del consumo en el Agent** para administrar e
 {{< img src="tracing/trace_indexing_and_ingestion/agent_level_configurations_modal.png" style="width:70%;" alt="Modalidad de configuración en el nivel del Agent" >}}
 
 Hay tres mecanismos de muestreo del consumo que se pueden controlar desde el Datadog Agent:
-- **[Head-based sampling][4]** (Muestreo basado en la fase inicial): Cuando no se establecen reglas para el muestreo de un servicio, el Datadog Agent calcula automáticamente las frecuencias de muestreo que se aplicarán a tus <txprotected>servicios</txprotected>con un objetivo de **10 trazas por segundo por Agent**. Cambia este número de destino de trazas en Datadog o configura `DD_APM_MAX_TPS` localmente en el nivel del Agent.
+- **[Head-based sampling][4]** (Muestreo basado en la fase inicial): Cuando no se establecen reglas para el muestreo de un servicio, el Datadog Agent calcula automáticamente las frecuencias de muestreo que se aplicarán a tus servicioscon un objetivo de **10 trazas por segundo por Agent**. Cambia este número de destino de trazas en Datadog o configura `DD_APM_MAX_TPS` localmente en el nivel del Agent.
 -  **[Muestreo de tramos (spans) de error][5]**: Para las trazas no capturadas por el muestreo basado en la fase inicial, el Datadog Agent captura trazas de error locales **hasta 10 trazas por segundo por Agent**. Cambia este número de destino de trazas en Datadog o configura `DD_APM_ERROR_TPS` localmente en el nivel del Agent.
 -  **[Muestreo de tramos poco frecuentes][6]**: Para las trazas no capturadas por el muestreo basado en la fase inicial, el Datadog Agent captura trazas poco frecuentes locales **hasta 5 trazas por segundo por Agent**. Esta opción está desactivada por defecto. Habilita la recopilación de trazas poco frecuentes en Datadog o configura `DD_APM_ENABLE_RARE_SAMPLER` localmente en el nivel del Agent.
 
@@ -76,7 +76,7 @@ Desglose del tráfico
 : Un desglose detallado del tráfico muestreado y no muestreado para trazas partiendo del servicio. Consulta [Desglose del tráfico](#traffic-breakdown) para obtener más información.
 
 Configuración del consumo
-: Muestra `Automatic` si se aplica el [mecanismo de muestreo basado en la fase inicial por defecto][4] del Agent. Si el consumo se configuró en las <txprotected>bibliotecas de rastreo</txprotected> con las [reglas de muestreo de trazas][8], el servicio se marca como `Configured`. Para más información sobre la configuración del consumo para un servicio, lee [cambiar la velocidad de consumo por defecto](#configure-the-service-ingestion-rate).
+: Muestra `Automatic` si se aplica el [mecanismo de muestreo basado en la fase inicial por defecto][4] del Agent. Si el consumo se configuró en las bibliotecas de rastreo con las [reglas de muestreo de trazas][8], el servicio se marca como `Configured`. Para más información sobre la configuración del consumo para un servicio, lee [cambiar la velocidad de consumo por defecto](#configure-the-service-ingestion-rate).
 
 Infraestructura
 : Hosts, contenedores y funciones en los cuales se ejecuta el servicio.
@@ -120,7 +120,7 @@ Para investigar más a fondo, utiliza [APM Trace - Dashboard de uso estimado][12
 
 ### Versiones del Agent y de las bibliotecas de rastreo
 
-Consulta las versiones del **Datadog Agent y de las bibliotecas de rastreo** que utiliza tu servicio. Compara las versiones en uso con las últimas versiones publicadas para asegurarte de estar ejecutando Agents y <txprotected>bibliotecas</txprotected> actualizadas.
+Consulta las versiones del **Datadog Agent y de las bibliotecas de rastreo** que utiliza tu servicio. Compara las versiones en uso con las últimas versiones publicadas para asegurarte de estar ejecutando Agents y bibliotecas actualizadas.
 
 {{< img src="tracing/trace_indexing_and_ingestion/agent_tracer_version.png" style="width:90%;" alt="Versiones del Agent y de las bibliotecas de rastreo" >}}
 
@@ -145,7 +145,7 @@ Para especificar que se envíe un porcentaje específico del tráfico de un serv
 
 ## Leer más
 
-{{< nombre parcial="whats-next/whats-next.html" >}}
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /es/tracing/metrics/metrics_namespace/
 [2]: https://app.datadoghq.com/apm/traces/ingestion-control

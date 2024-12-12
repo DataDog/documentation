@@ -66,7 +66,6 @@
   "changelog": "CHANGELOG.md"
   "classifier_tags":
   - "Category::Almacenes de datos"
- 
   - "Category::Recopilación de logs"
   - "Category::Notificaciones"
   - "Category::Rastreo"

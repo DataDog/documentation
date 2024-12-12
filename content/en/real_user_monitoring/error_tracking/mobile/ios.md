@@ -361,12 +361,7 @@ Crash reports are collected in a raw format and mostly contain memory addresses.
 
 Every iOS application produces `.dSYM` files for each application module. These files minimize an application's binary size and enable faster download speed. Each application version contains a set of `.dSYM` files. 
 
-Depending on your setup, you may need to download `.dSYM` files from App Store Connect or find them on your local machine. 
-
-| Bitcode Enabled | Description |
-|---|---|
-| Yes | `.dSYM` files are available after [App Store Connect][7] completes processing your application's build. |
-| No | Xcode exports `.dSYM` files to `$DWARF_DSYM_FOLDER_PATH` at the end of your application's build. Ensure that the `DEBUG_INFORMATION_FORMAT` build setting is set to **DWARF with dSYM File**. By default, Xcode projects only set `DEBUG_INFORMATION_FORMAT` to **DWARF with dSYM File** for the Release project configuration. |
+Xcode exports `.dSYM` files to `$DWARF_DSYM_FOLDER_PATH` at the end of your application's build. Ensure that the `DEBUG_INFORMATION_FORMAT` build setting is set to **DWARF with dSYM File**. By default, Xcode projects only set `DEBUG_INFORMATION_FORMAT` to **DWARF with dSYM File** for the Release project configuration.
 
 ### Upload your .dSYM file
 

@@ -15,8 +15,8 @@ further_reading:
 <div class="alert alert-warning">CD Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
-{{< callout url="https://docs.google.com/forms/d/e/1FAIpQLScNhFEUOndGHwBennvUp6-XoA9luTc27XBwtSgXhycBVFM9yA/viewform?usp=sf_link" header="false" >}}
-CD Visibility for Argo CD is in private beta. To request access, complete the form.
+{{< callout url="https://docs.google.com/forms/d/e/1FAIpQLScNhFEUOndGHwBennvUp6-XoA9luTc27XBwtSgXhycBVFM9yA/viewform?usp=sf_link" btn_hidden="false" header="Join the Preview!" >}}
+CD Visibility for Argo CD is in Preview. If you're interested in this feature, complete the form to request access.
 {{< /callout >}}
 
 ## Overview
@@ -191,10 +191,11 @@ The following diagram represents an example of this kind of setup:
 
 {{< img src="ci/diagram_argo-cd-deployment_240910.png" alt="Triggering Argo CD deployments using git" style="width:100%;">}}
 
-In this case, you can replace the Git metadata reported in the deployment with the metadata of the application repository instead of the configuration repository. This allows you to connect the deployments performed by Argo CD and the related CI pipeline runs on the application repository.
+The [`datadog-ci deployment correlate` command][14] can be used to correlate one or more configuration repository commits with an application repository commit. When an Argo CD deployment occurs, the configuration commit information in the deployment event is replaced by the related application repository commit, if any. There are two possible ways to perform the correlation using the command: automatic and manual setup. Both methods require version `2.44.0` or higher of the `datadog-ci` CLI.
 
-To associate the application repository Git information with the Argo CD deployments, run the `datadog-ci deployment correlate` command between committing and pushing the changes to the configuration repository. This requires the `datadog-ci` CLI version to be `2.41.0` or later. See the [command syntax][14] for additional details:
-
+{{< tabs >}}
+{{% tab "Automatic" %}}
+In this method, the command automatically infers the current application commit (that is, the commit of the pipeline that the command is running in) and the configuration repository commits based on the current Git environment. For this to work properly, the command needs to be run between committing the changes and pushing them to the configuration repository:
 ```yaml
 - job: JobToUpdateConfigurationRepository
   run: |
@@ -206,8 +207,23 @@ To associate the application repository Git information with the Argo CD deploym
     datadog-ci deployment correlate --provider argocd
     git push
 ```
+{{% /tab %}}
+{{% tab "Manual" %}}
+If the automatic setup is too limited for your use case, you can provide the configuration repository URL and SHAs manually:
+```yaml
+- job: JobToUpdateConfigurationRepository
+  run: |
+    # Correlate the deployment with the CI pipeline
+    export DD_BETA_COMMANDS_ENABLED=1
+    datadog-ci deployment correlate --provider argocd --config-repo <CONFIG_REPO_URL> --config-shas <COMMIT_SHA>
+```
+You can omit the `--config-repo` option if the CI is checked out to the configuration repository. See [command syntax][1] for additional details.
 
-**Note**: Even if a single repository is used to store both the source code and the Kubernetes manifest, running this command is still required to correctly associate deployments and CI pipelines.
+[1]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/deployment#correlate
+{{% /tab %}}
+{{< /tabs >}}
+
+**Note**: Even if a single repository is used to store both the source code and the Kubernetes manifest, you still need to run this command to correctly associate deployments and CI pipelines.
 
 
 ### Validation

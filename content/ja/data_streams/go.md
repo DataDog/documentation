@@ -47,7 +47,7 @@ producer, err := ddkafka.NewProducer(&kafka.ConfigMap{
 
 ```go
 import (
-  ddsarama "gopkg.in/DataDog/dd-trace-go.v1/contrib/Shopify/sarama"
+  ddsarama "gopkg.in/DataDog/dd-trace-go.v1/contrib/IBM/sarama.v1"
 )
 
 ...

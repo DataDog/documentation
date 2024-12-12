@@ -36,7 +36,7 @@ draft: false
 git_integration_title: cisco_aci
 integration_id: cisco-aci
 integration_title: CiscoACI
-integration_version: 4.0.0
+integration_version: 4.1.0
 is_public: true
 manifest_version: 2.0.0
 name: cisco_aci
@@ -72,12 +72,13 @@ Cisco ACI インテグレーションを使用すると、以下のことが可�
 - ネットワークの状態と健全性を追跡できます。
 - ACI の容量を追跡できます。
 - スイッチおよびコントローラー自体を監視できます。
+- [Network Devices Monitoring][1] を通じてデバイスを監視する機能
 
 ## セットアップ
 
 ### インストール
 
-Cisco ACI チェックは Agent にパッケージ化されているので、ネットワーク内のサーバーに [Agent をインストール][1]するだけです。
+Cisco ACI チェックは Agent にパッケージ化されているので、ネットワーク内のサーバーに [Agent をインストール][2]するだけです。
 
 ### 構成
 
@@ -117,6 +118,11 @@ Cisco ACI チェックは Agent にパッケージ化されているので、ネ
         # tenant:
         #   - <TENANT_1>
         #   - <TENANT_2>
+
+        ## @param send_ndm_metadata - boolean - optional - default: false
+        ## Set to `true` to enable Network Device Monitoring metadata (for devices and interfaces) to be sent.
+        #
+        # send_ndm_metadata: false
    ```
 
    *注*: 必ずインテグレーションにテナントを指定し、アプリケーションのメトリクスや EPG などを収集します。
@@ -145,11 +151,11 @@ Cisco ACI チェックは Agent にパッケージ化されているので、ネ
 
 ### 検証
 
-[Agent の `status` サブコマンドを実行][2]し、Checks セクションで `cisco_aci` を探します。
+[Agent の `status` サブコマンドを実行][3]し、Checks セクションで `cisco_aci` を探します。
 
 ## ベンダープロファイル
 
-このインテグレーションでサポートされている具体的なベンダープロファイルは、[ネットワークベンダー][3]のページで確認できます。
+このインテグレーションでサポートされている具体的なベンダープロファイルは、[ネットワークベンダー][4]のページで確認できます。
 
 ## 収集データ
 
@@ -192,10 +198,11 @@ Cisco ACI チェックはテナントの障害をイベントとして送信し�
     Last Successful Execution Date : 2023-01-04 15:58:04 CST / 2023-01-04 21:58:04 UTC (1672869484000)
   ```
 
-ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
 
 
-[1]: https://app.datadoghq.com/account/settings/agent/latest
-[2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[3]: https://docs.datadoghq.com/ja/network_monitoring/devices/supported_devices/
-[4]: https://docs.datadoghq.com/ja/help/
+[1]: https://www.datadoghq.com/product/network-monitoring/network-device-monitoring/
+[2]: https://app.datadoghq.com/account/settings/agent/latest
+[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[4]: https://docs.datadoghq.com/ja/network_monitoring/devices/supported_devices/
+[5]: https://docs.datadoghq.com/ja/help/

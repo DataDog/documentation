@@ -65,6 +65,17 @@ Use the following environment variables to enable and configure Agentless log su
 {{% /tab %}}
 {{< /tabs >}}
 
+### .NET
+Agentless log submission is supported for the following languages and frameworks:
+
+- `dd-trace-dotnet >= 2.50.0` and XUnit TestOutputHelper.
+
+Use the following environment variables to enable and configure Agentless log submission:
+
+| Name | Description | Default value |
+|---|---|---|
+| `DD_CIVISIBILITY_LOGS_ENABLED` (required) | Enables/disables CI Visibility log submission | `false`
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}

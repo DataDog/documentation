@@ -6,7 +6,7 @@ categories:
 - クラウド
 - 構成 & デプロイ
 - ログの収集
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies: []
 description: 行われているデプロイを表示し、その所要時間を追跡
 doc_link: https://docs.datadoghq.com/integrations/amazon_codebuild/
@@ -43,9 +43,9 @@ Datadog AWS CodeBuild インテグレーションをインストールすると�
 
 ### メトリクスの収集
 
-1. In the [AWS integration page][2], ensure that `CodeBuild` is enabled under the `Metric Collection` tab.
+1. [AWS インテグレーションページ][2]で、`Metric Collection` タブの下にある `CodeBuild` が有効になっていることを確認します。
 
-2. Install the [Datadog - AWS CodeBuild integration][3].
+2. [Datadog - AWS CodeBuild インテグレーション][3]をインストールします。
 
 ### 収集データ
 
@@ -85,7 +85,7 @@ AWS CodeBuild インテグレーションには、サービスのチェック機
 [2]: https://app.datadoghq.com/integrations/amazon-web-services
 [3]: https://app.datadoghq.com/integrations/amazon-codebuild
 [4]: https://docs.datadoghq.com/ja/logs/guide/forwarder/
-[5]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-s3-buckets
-[6]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-cloudwatch-log-group
+[5]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-s3-buckets
+[6]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
 [7]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_codebuild/amazon_codebuild_metadata.csv
 [8]: https://docs.datadoghq.com/ja/help/

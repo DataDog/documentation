@@ -3,7 +3,7 @@ categories:
 - colaboración
 - recopilación de logs
 - suministrar
-custom_kind: integración
+custom_kind: integration
 dependencies: []
 description: Seguimiento de logs de Netlify.
 doc_link: https://docs.datadoghq.com/integrations/netlify/

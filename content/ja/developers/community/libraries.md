@@ -39,7 +39,6 @@ Datadog [API][4] を使用すると、ダッシュボード定義をコードと
 | 言語   | ライブラリ          | Author          |
 |------------|------------------|-----------------|
 | JavaScript | [dog-watcher][5] | [Brightcove][6] |
-| Ruby       | [doggy][7]       | [Shopify][8]    |
 | Ruby       | [kennel][9]      | [Zendesk][10]    |
 
 ### モニターの管理
@@ -48,10 +47,7 @@ Datadog [API][4] を使用してモニターを維持、管理、またはバッ
 
 | 言語  | ライブラリ          | Author               |
 |-----------|------------------|----------------------|
-| Python    | [DogPush][11]              | [TrueAccord][12]     |
-| Ruby      | [barkdog][13]              | [codenize-tools][14] |
 | Ruby      | [interferon][15]           | [Airbnb][16]         |
-| Ruby      | [dogwatch][17]             | [Rapid7][18]         |
 | Terraform | [Terraform][19]            | [Terraform][20]      |
 | Terraform | [datadog-to-terraform][21] | [Intercom][22]       |
 
@@ -63,7 +59,7 @@ Datadog [API][4] を使用してモニターを維持、管理、またはバッ
 
 ### Aptible
 
-Enclave は Datadog アカウントにメトリクスを送信します。方法については、[専用の Aptible ヘルプセンター][25]を参照してください。
+Aptible プラットフォームは、コンテナログとメトリクスを Datadog アカウントに送信することができます。詳細については、[Aptible ヘルプセンター][25]をご参照ください。
 
 ### CLI 管理
 
@@ -83,10 +79,7 @@ Enclave は Datadog アカウントにメトリクスを送信します。方法
 
 ### Heroku
 
-Heroku は、dyno メトリクスをログから生成します。ログをメトリクスに変換して Datdog に送信するために、以下のログドレインのいずれかを使用します。Heroku のログの Datadog への送信方法については、[Heroku ログの収集][34]を参照してください。
-
-* [Oz][36] による Node.js 版 [Heroku Datadog ログドレイン][35]
-* [Apiary][38] による Go 版 [Heroku Datadog ログドレイン][37]
+Heroku のログを Datadog に送信する方法については、[Heroku ログの収集][34]をご確認ください。
 
 Heroku で PHP トレーサーやプロファイラーを使用するには、以下のビルドパックを使用します。
 
@@ -104,10 +97,6 @@ Load Impact が開発した負荷およびパフォーマンスの回帰テス�
 
 * [Datadog の Logstash 出力][42]
 * [DogStatsD の Logstash 出力][43]
-
-### Moogsoft
-
-Datadog 通知を取り込む Moogsoft [リスナー][44]。
 
 ### NGINX LUA
 
@@ -164,35 +153,24 @@ Datadog ライブラリを作成し、このページに追加する場合は、
 [4]: /ja/api/
 [5]: https://github.com/brightcove/dog-watcher
 [6]: https://www.brightcove.com
-[7]: https://github.com/Shopify/doggy
-[8]: https://www.shopify.com
 [9]: https://github.com/grosser/kennel
 [10]: https://www.zendesk.com
-[11]: https://github.com/trueaccord/DogPush
-[12]: https://github.com/trueaccord
-[13]: https://github.com/codenize-tools/barkdog
 [14]: https://github.com/codenize-tools
 [15]: https://github.com/airbnb/interferon
 [16]: https://github.com/airbnb
-[17]: https://github.com/rapid7/dogwatch
-[18]: https://github.com/rapid7
 [19]: https://www.terraform.io/docs/providers/datadog/r/monitor.html
 [20]: https://www.terraform.io
 [21]: https://github.com/intercom/datadog-to-terraform
 [22]: https://github.com/intercom
 [23]: https://docs.ansible.com/ansible/2.9/modules/list_of_monitoring_modules.html
 [24]: https://github.com/ansible/ansible-modules-extras
-[25]: https://www.aptible.com/documentation/enclave/reference/metrics/metric-drains/datadog.html
+[25]: https://www.aptible.com/docs/core-concepts/integrations/datadog
 [27]: https://github.com/keirans/datadog-management
 [28]: https://github.com/zendesk/consul2dogstats
 [29]: https://github.com/cvent/dogscaler
 [30]: https://github.com/wimactel/FreeSwitch-DataDog-Metrics
 [31]: https://github.com/wimactel
 [34]: /ja/logs/guide/collect-heroku-logs/
-[35]: https://github.com/ozinc/heroku-datadog-drain
-[36]: https://oz.com/
-[37]: https://github.com/apiaryio/heroku-datadog-drain-golang
-[38]: https://apiary.io
 [40]: https://grafana.com/docs/k6/latest/results-output/real-time/datadog/
 [41]: https://github.com/meetup/launch-dogly
 [42]: https://www.elastic.co/guide/en/logstash/current/plugins-outputs-datadog.html

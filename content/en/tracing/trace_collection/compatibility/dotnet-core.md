@@ -20,7 +20,7 @@ further_reading:
 ---
 
 
-The Datadog .NET Tracer supports all .NET-based languages (for example, C#, F#, Visual Basic). It has [beta support for trimmed apps][12].
+The Datadog .NET Tracer supports all .NET-based languages (for example, C#, F#, Visual Basic). It has [Preview support for trimmed apps][12].
 
 The .NET Tracer is open source. For more information, see the [.NET Tracer repository][1].
 
@@ -30,6 +30,7 @@ The .NET Tracer supports automatic instrumentation on the following .NET and .NE
 
 | .NET Version         | Microsoft End of Life | Support level        | Package version      |
 | -------------------- | --------------------- | -------------------- | -------------------- |
+| .NET 9               |                       | [GA](#support-ga)    | latest (>= 3.6.0)   |
 | .NET 8               |                       | [GA](#support-ga)    | latest (>= 2.42.0)   |
 | .NET 7               | 05/14/2024            | [GA](#support-ga)    | latest (>= 2.20.0)   |
 | .NET 6               |                       | [GA](#support-ga)    | latest (>= 2.0.0)    |
@@ -172,7 +173,7 @@ The .NET Tracer depends on the host operating system, .NET runtime, certain .NET
 | **Level**                                              | **Support provided**                                                                                                                                                          |
 |--------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | <span id="support-unsupported">Unsupported</span>      |  No implementation. [Contact customer support for special requests.][10]                                                             |
-| <span id="support-beta">Beta</span>                    |  Initial implementation. May not yet contain all features. Support for new features, bug & security fixes provided on a best-effort basis.                                    |
+| <span id="support-beta">Preview</span>                 |  Initial implementation. May not yet contain all features. Support for new features, bug & security fixes provided on a best-effort basis.                                    |
 | <span id="support-ga">General Availability (GA)</span> |  Full implementation of all features. Full support for new features, bug & security fixes.                                                                                    |
 | <span id="support-maintenance">Maintenance</span>      |  Full implementation of existing features. Does not receive new features. Support for bug & security fixes only.                                                              |
 | <span id="support-eol">End-of-life (EOL)</span>        |  No support.                                                                                                                                                                  |
@@ -182,7 +183,7 @@ The .NET Tracer depends on the host operating system, .NET runtime, certain .NET
 The .NET Tracer practices [semantic versioning][11].
 Version updates imply the following changes to runtime support:
 
-  - **Major version updates** (for example `1.0.0` to `2.0.0`) may change support for any runtime from [Beta](#support-beta)/[GA](#support-ga) to [Maintenance](#support-maintenance)/[EOL](#support-eol).
+  - **Major version updates** (for example `1.0.0` to `2.0.0`) may change support for any runtime from [Preview](#support-beta)/[GA](#support-ga) to [Maintenance](#support-maintenance)/[EOL](#support-eol).
   - **Minor version updates** (for example `1.0.0` to `1.1.0`) won't lower the level of support for one runtime but may add support for one.
   - **Patch version updates** (for example `1.0.0` to `1.0.1`) will not change support for any runtime.
 

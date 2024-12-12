@@ -23,7 +23,7 @@ author:
 categories:
 - nube
 - recopilación de logs
-custom_kind: integración
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/traefik/README.md
 display_on_public_website: true

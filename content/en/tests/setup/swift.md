@@ -14,9 +14,9 @@ further_reading:
     - link: "/tests/test_impact_analysis/swift"
       tag: "Documentation"
       text: "Speed up your test jobs with Test Impact Analysis"
-    - link: "/continuous_integration/troubleshooting/"
+    - link: "/tests/troubleshooting/"
       tag: "Documentation"
-      text: "Troubleshooting CI Visibility"
+      text: "Troubleshooting Test Optimization"
 ---
 
 {{< site-region region="gov" >}}
@@ -731,7 +731,7 @@ Always call `module.end()` at the end so that all the test info is flushed to Da
 
 ## Best practices
 
-Follow these practices to take full advantage of the testing framework and CI Visibility.
+Follow these practices to take full advantage of the testing framework and Test Optimization.
 
 ### Generate symbols file when building
 

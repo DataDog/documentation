@@ -26,7 +26,7 @@ author:
 categories:
 - data stores
 - ログの収集
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/ibm_db2/README.md
 display_on_public_website: true
@@ -34,7 +34,7 @@ draft: false
 git_integration_title: ibm_db2
 integration_id: ibm-db2
 integration_title: IBM Db2
-integration_version: 2.2.0
+integration_version: 4.0.0
 is_public: true
 manifest_version: 2.0.0
 name: ibm_db2
@@ -86,7 +86,7 @@ IBM Db2 チェックは [Datadog Agent][3] パッケージに含まれていま�
 ##### Unix
 
 ```text
-sudo -Hu dd-agent /opt/datadog-agent/embedded/bin/pip install ibm_db==3.1.0
+sudo -Hu dd-agent /opt/datadog-agent/embedded/bin/pip install ibm_db==3.2.3
 ```
 
 注: Python 2 が動作する Agent をお使いの場合は、`ibm_db=3.1.0` の代わりに `ibm_db==3.0.1` を使用してください。
@@ -105,10 +105,16 @@ Agent バージョン >= 6.12 および < 7.0 の場合
 "C:\Program Files\Datadog\Datadog Agent\embedded<PYTHON_MAJOR_VERSION>\python.exe" -m pip install ibm_db==3.0.1
 ```
 
-Agent バージョン >= 7.0 の場合
+Agent バージョン 7.0 以上 7.58 未満の場合
 
 ```text
 "C:\Program Files\Datadog\Datadog Agent\embedded3\python.exe" -m pip install ibm_db==3.1.4
+```
+
+Agent バージョン 7.58 以上の場合
+
+```text
+"C:\Program Files\Datadog\Datadog Agent\embedded3\python.exe" -m pip install ibm_db==3.2.3
 ```
 
 Linux では、XML 機能が必要になる場合があります。ビルドプロセス中にエラーが発生した場合は、
@@ -130,7 +136,7 @@ Db2 インスタンスを監視するには、上記の 5 つのテーブル関�
 * `DBADM` 権限
 * `SQLADM` 権限
 
-インスタンス、関連するデータベース、およびデータベースオブジェクトの健全性を監視するには、監視したいオブジェクトごとにデータベースシステムモニタスイッチを有効にします。
+インスタンス、関連するデータベース、およびデータベースオブジェクトの状態を監視するには、監視対象とするオブジェクトごとにデータベースシステムモニタスイッチを有効にします。
 * ステートメント
 * Lock
 * テーブル
