@@ -41,8 +41,7 @@ For all the available fields, see the [API Documentation][1].
 Here's an example of before and after of a JSON monitor with those fields:
 
 **Before**  
-```json
-{  
+{{< highlight yaml "hl_lines=11-12" >}}{ 
   "name": "CPU usage is high for host $host.value",  
     "type": "query alert",  
     "query": "avg(last_5m):100 - avg:system.cpu.idle{$host} > 90",  
@@ -52,11 +51,12 @@ Here's an example of before and after of a JSON monitor with those fields:
         "thresholds": { "critical": 90 },  
         "notify_audit": false,  
         "include_tags": false,  
-        `"notify_no_data": true,`  
-        `"no_data_timeframe": 10`  
+        "notify_no_data": true,  
+        "no_data_timeframe": 10  
     }  
 }
-```
+{{< /highlight >}}
+
 
 **After**  
 {{< highlight yaml "hl_lines=11" >}}{
