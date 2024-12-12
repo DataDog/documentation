@@ -1,10 +1,12 @@
 ---
 title: Serverless Warnings
-
 further_reading:
 - link: "https://www.datadoghq.com/blog/serverless-insights/"
   tag: "Blog"
   text: "Read more about serverless insights"
+- link: "https://www.datadoghq.com/blog/identifying-deprecated-lambda-functions/"
+  tag: "Blog"
+  text: "Identify deprecated Lambda functions with Datadog"
 aliases:
     - /serverless/troubleshooting/insights/
     - /serverless/insights/
