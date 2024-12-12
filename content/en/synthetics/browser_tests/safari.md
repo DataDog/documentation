@@ -24,7 +24,7 @@ Use one of the following three options :
 
 * **[Create a new Synthetic Monitoring Browser Test](#create-a-new-synthetic-monitoring-browser-test)**: To record a new user journey from scratch.  
 * **[Clone an existing Synthetic Monitoring Browser Test](#clone-an-existing-synthetic-monitoring-browser-test)**: To start the user journey from an existing Browser Test.
-* **[Creating a new Synthetic Monitoring Browser Test, using an existing test as its subtest (recommended)](#create-a-new-synthetic-monitoring-browser-test-using-an-existing-test-as-a-subtest)**: If you want to base your test off the user journey from an existing test but you don't want to have to maintain two separate user journeys.
+* **[Creating a new Synthetic Monitoring Browser Test, using an existing test as its subtest (recommended)](#create-a-new-synthetic-monitoring-browser-test-using-an-existing-test-as-a-subtest)**: To base your test off the user journey from an existing test without maintaining two separate user journeys.
 
 ## **Create a new Synthetic Monitoring Browser Test** 
 
@@ -33,7 +33,7 @@ Use one of the following three options :
 
    {{< img src="synthetics/browser_tests/safari/browsers_devices_safari.png" alt="Screenshot of a Browser Test creation, with Safari devices selected" width="80%" >}}
 
-3. In the **Select locations > Safari Private Locations** section, select the location named **macos-pl Safari Private Beta** that has been created for you.
+3. In the **Select locations > Safari Private Locations** section, select the location named **macos-pl Safari Private Beta** which has been created for you.
 
    {{< img src="synthetics/browser_tests/safari/safari_private_location.jpg" alt="Screenshot of a Browser Test creation, showing the private locations drop down" width="70%" >}}
 
@@ -49,7 +49,7 @@ Use one of the following three options :
 
    {{< img src="synthetics/browser_tests/safari/browsers_devices_safari.png" alt="Screenshot of a Browser Test creation, with Safari devices selected" width="80%" >}}
 
-3. In the **Select locations > Safari Private Locations** section, select the location named **macos-pl Safari Private Beta** that has been created for you.
+3. In the **Select locations > Safari Private Locations** section, select the location named **macos-pl Safari Private Beta** which has been created for you.
 
    {{< img src="synthetics/browser_tests/safari/safari_private_location.jpg" alt="Screenshot of a Browser Test creation, showing the private locations drop down" width="70%" >}}
 
@@ -66,7 +66,7 @@ Use one of the following three options :
 
    {{< img src="synthetics/browser_tests/safari/browsers_devices_safari.png" alt="Screenshot of a Browser Test creation, with Safari devices selected" width="80%" >}}
 
-3. In the **Select locations > Safari Private Locations** section, select the location named **macos-pl Safari Private Beta** that has been created for you.
+3. In the **Select locations > Safari Private Locations** section, select the location named **macos-pl Safari Private Beta** which has been created for you.
 
   {{< img src="synthetics/browser_tests/safari/safari_private_location.jpg" alt="Screenshot of a Browser Test creation, showing the private locations drop down" width="70%" >}}  
 
@@ -84,9 +84,9 @@ Use one of the following three options :
 
 ### Can I run Safari tests from managed locations?
 
-**No**. Safari Browser Tests are limited to a dedicated Safari private location in your account. See [list of Synthetics Monitoring Private Locations][2].
+**No**. Safari Browser Tests are limited to a dedicated Safari private location in your account. See [list of Synthetic Monitoring Private Locations][2].
 
-**Note**: An API key named `API Key managed by synthetics-platform` with the label `MANAGED` was created and added to your org to create this dedicated Safari private location. **Do not revoke this key** as it is required to enable Safari testing.
+**Note**: An API key labeled `MANAGED` and named `API Key managed by synthetics-platform` was created and added to your organization to set up this dedicated Safari private location. **Do not revoke this key** as it is required to enable Safari testing.
 
 In the context of this Preview, it is **expected** that some monitors may be triggered for this private location. The monitors can be resolved by ignoring the `synthetics-safari-private-beta:true` tag.
 
