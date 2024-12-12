@@ -5,9 +5,11 @@ import path from 'path';
 import fs from 'fs';
 import { AuthorConsoleData } from '../schemas/authorConsole';
 
-const __dirname = path.dirname(__filename);
-const VITE_PROJECT_PATH = path.resolve(__dirname, '../../dist/author-console');
-const TEMP_PARENT_DIR = path.resolve(__dirname, '../../dist/tmp');
+// TODO: I think I can just use __dirname here,
+// but don't want to change it until I can test it
+const dirname = path.dirname(__filename);
+const VITE_PROJECT_PATH = path.resolve(dirname, '../../dist/author-console');
+const TEMP_PARENT_DIR = path.resolve(dirname, '../../dist/tmp');
 
 export class AuthorConsoleBuilder {
   static async buildHtml(p: { data: AuthorConsoleData }): Promise<string> {

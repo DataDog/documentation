@@ -31,6 +31,9 @@ Function in Filter
 High Row Count
 : The query returns a large number of rows in its result set.
 
+Long Running Query
+: The query has durations that have exceeded a threshold of 30 seconds.
+
 Unused Index
 : The index has not been used in any execution plans recently.
 
@@ -52,6 +55,9 @@ High Impact Blocker
 High Row Count
 : The query returns a large number of rows in its result set.
 
+Long Running Query
+: The query has durations that have exceeded a threshold of 30 seconds.
+
 Low Disk Space
 : The database instance is running low on disk space.
 
@@ -63,6 +69,9 @@ Low Disk Space
 
 High Row Count
 : The query returns a large number of rows in its result set.
+
+Long Running Query
+: The query has durations that have exceeded a threshold of 30 seconds.
 
 Low Disk Space
 : The database instance is running low on disk space.
@@ -78,6 +87,9 @@ High Impact Blocker
 
 High Row Count
 : The query returns a large number of rows in its result set.
+
+Long Running Query
+: The query has durations that have exceeded a threshold of 30 seconds.
 
 Low Disk Space
 : The database instance is running low on disk space.

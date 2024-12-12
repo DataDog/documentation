@@ -850,6 +850,7 @@ menu:
       params:
         versions:
           - v1
+          - v2
         operationids:
           - CreateEvent
         unstable: []
@@ -4998,18 +4999,6 @@ menu:
       url: /api/latest/cloud-cost-management/
       identifier: cloud-cost-management
       generated: true
-    - name: Cloud Cost Enabled
-      url: '#cloud-cost-enabled'
-      identifier: cloud-cost-management-cloud-cost-enabled
-      parent: cloud-cost-management
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - GetCloudCostActivity
-        unstable: []
-        order: 10
     - name: Get Custom Costs file
       url: '#get-custom-costs-file'
       identifier: cloud-cost-management-get-custom-costs-file
@@ -5404,6 +5393,46 @@ menu:
         unstable:
           - v2
         order: 4
+    - name: Data Deletion
+      url: /api/latest/data-deletion/
+      identifier: data-deletion
+      generated: true
+    - name: Cancels a data deletion request
+      url: '#cancels-a-data-deletion-request'
+      identifier: data-deletion-cancels-a-data-deletion-request
+      parent: data-deletion
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CancelDataDeletionRequest
+        unstable: []
+        order: 2
+    - name: Gets a list of data deletion requests
+      url: '#gets-a-list-of-data-deletion-requests'
+      identifier: data-deletion-gets-a-list-of-data-deletion-requests
+      parent: data-deletion
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetDataDeletionRequests
+        unstable: []
+        order: 3
+    - name: Creates a data deletion request
+      url: '#creates-a-data-deletion-request'
+      identifier: data-deletion-creates-a-data-deletion-request
+      parent: data-deletion
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateDataDeletionRequest
+        unstable: []
+        order: 1
     - name: Domain Allowlist
       url: /api/latest/domain-allowlist/
       identifier: domain-allowlist

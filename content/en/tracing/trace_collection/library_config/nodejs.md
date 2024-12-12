@@ -163,6 +163,24 @@ Automatically Instrument External Libraries
 **Default**: `true`<br>
 Whether to enable automatic instrumentation of external libraries using the built-in plugins.
 
+`DD_TRACE_CLOUD_REQUEST_PAYLOAD_TAGGING`
+: **Configuration**: `cloudPayloadTagging.request`<br>
+**Default**: N/A (disabled)<br>
+**Example**: `DD_TRACE_CLOUD_REQUEST_PAYLOAD_TAGGING=$.Metadata.UserId`<br>
+A comma-separated string of JSONPath entries to redact from AWS SDK requests. Setting this enables [AWS payload tagging][6] for requests.
+
+`DD_TRACE_CLOUD_RESPONSE_PAYLOAD_TAGGING`
+: **Configuration**: `cloudPayloadTagging.response`<br>
+**Default**: N/A (disabled)<br>
+**Example**: `DD_TRACE_CLOUD_RESPONSE_PAYLOAD_TAGGING=$.Metadata.UserId`<br>
+A comma-separated string of JSONPath entries to redact from AWS SDK responses. Setting this enables [AWS payload tagging][6] for responses.
+
+`DD_TRACE_CLOUD_PAYLOAD_TAGGING_MAX_DEPTH`
+: **Configuration**: `cloudPayloadTagging.maxDepth`<br>
+**Default**: 10<br>
+**Example**: `DD_TRACE_CLOUD_PAYLOAD_TAGGING_MAX_DEPTH=10`<br>
+An integer representing the maximum depth of an AWS SDK request/reponse payload to use for [AWS payload tagging][6].
+
 ### Agent
 
 `DD_TAGS`
@@ -292,6 +310,7 @@ For more examples of how to work with the library see [API documentation][2].
 [3]: /tracing/trace_pipeline/ingestion_mechanisms/
 [4]: /help/
 [5]: /tracing/trace_collection/trace_context_propagation/
+[6]: /tracing/guide/aws_payload_tagging/?code-lang=nodejs
 [13]: /agent/configuration/network/#configure-ports
 [14]: /opentelemetry/interoperability/environment_variable_support
 [15]: /tracing/trace_collection/custom_instrumentation/nodejs/otel/

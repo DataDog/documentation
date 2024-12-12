@@ -187,6 +187,8 @@ If the **Request** has a header `User-ID`, its value is applied as tag `http.req
 If the **Response** has a header `User-ID`, its value is applied as tag `http.response.headers.User-ID`.<br><br>
 Added in version 1.18.3.<br>
 Response header support and entries without tag names added in version 1.26.0.<br>
+Starting in version 2.35.0, if [Agent Remote Configuration][16] is enabled where this service runs, you can set `DD_TRACE_HEADER_TAGS` in the [Service Catalog][17] UI.
+
 
 `DD_TRACE_CLIENT_IP_ENABLED`
 : Enables client IP collection from relevant IP headers.<br>

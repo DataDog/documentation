@@ -12,7 +12,6 @@ further_reading:
 - link: /tracing/trace_explorer/query_syntax/
   tag: 설명서
   text: 스팬(span) 쿼리 구문
-is_beta: true
 title: 트레이스 쿼리
 ---
 

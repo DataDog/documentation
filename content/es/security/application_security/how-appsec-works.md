@@ -133,7 +133,7 @@ Para más información, consulta [Seguridad del código][28] y [Análisis de la 
 
 ## Seguridad de la API
 
-<div class="alert alert-info">La seguridad de la API está en fase beta privada.</div>
+<div class="alert alert-info">La seguridad de la API está en Vista previa.</div>
 
 Datadog Application Security proporciona visibilidad de las amenazas dirigidas a tus API. Utiliza el [Catálogo de la API][27] para monitorizar el mantenimiento y las métricas de rendimiento de las API, donde puedes ver los ataques dirigidos a tus API. Esta vista incluye la IP y la información de autenticación del atacante, así como los encabezados de la solicitud que muestran detalles sobre cómo se formó el ataque. Utilizando Application Security y la gestión de las API, puedes tener una visión completa de la superficie de ataque a tu API y responder para mitigar las amenazas.
 

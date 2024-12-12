@@ -2,7 +2,7 @@
 title: "DebugIt: A Fake Debugging Library"
 content_filters:
   - display_name: Language
-    id: programming_lang
+    id: prog_lang
     options_source: debugit_programming_lang_options
   - display_name: Operating system
     id: os
@@ -23,35 +23,35 @@ troubleshooting and debugging of your applications.
 ### Install the DebugIt library
 
 <!-- Python -->
-{% if equals($programming_lang, "python") %}
+{% if equals($prog_lang, "python") %}
 ```shell
 pip install debugit
 ```
 {% /if %}
 
 <!-- JavaScript -->
-{% if equals($programming_lang, "javascript") %}
+{% if equals($prog_lang, "javascript") %}
 ```shell
 npm install debugit
 ```
 {% /if %}
 
 <!-- Java -->
-{% if equals($programming_lang, "java") %}
+{% if equals($prog_lang, "java") %}
 ```shell
 mvn install debugit
 ```
 {% /if %}
 
 <!-- Ruby -->
-{% if equals($programming_lang, "ruby") %}
+{% if equals($prog_lang, "ruby") %}
 ```shell
 gem install debugit
 ```
 {% /if %}
 
 <!-- Go -->
-{% if equals($programming_lang, "go") %}
+{% if equals($prog_lang, "go") %}
 ```shell
 go get debugit
 ```
@@ -62,35 +62,35 @@ go get debugit
 <!-- Windows -->
 {% if equals($os, "windows") %}
 <!-- Windows > Python -->
-{% if equals($programming_lang, "python") %}
+{% if equals($prog_lang, "python") %}
 ```shell
 setx PYTHONPATH "%PYTHONPATH%;C:\path\to\your\library\directory"
 ```
 {% /if %}
 
 <!-- Windows > Java -->
-{% if equals($programming_lang, "java") %}
+{% if equals($prog_lang, "java") %}
 ```shell
 set CLASSPATH=%CLASSPATH%;C:\path\to\your\library\directory
 ```
 {% /if %}
 
 <!-- Windows > Go -->
-{% if equals($programming_lang, "go") %}
+{% if equals($prog_lang, "go") %}
 ```shell
 setx GOPATH "%GOPATH%;C:\path\to\your\library\directory"
 ```
 {% /if %}
 
 <!-- Windows > Ruby -->
-{% if equals($programming_lang, "ruby") %}
+{% if equals($prog_lang, "ruby") %}
 ```shell
 set RUBYLIB=%RUBYLIB%;C:\path\to\your\library\directory
 ```
 {% /if %}
 
 <!-- Windows > JavaScript -->
-{% if equals($programming_lang, "javascript") %}
+{% if equals($prog_lang, "javascript") %}
 ```shell
 set NODE_PATH=%NODE_PATH%;C:\path\to\your\library\directory
 ```
@@ -100,35 +100,35 @@ set NODE_PATH=%NODE_PATH%;C:\path\to\your\library\directory
 <!-- Linux -->
 {% if equals($os, "linux") %}
 <!-- Linux > Python -->
-{% if equals($programming_lang, "python") %}
+{% if equals($prog_lang, "python") %}
 ```shell
 sudo export PYTHONPATH="$PYTHONPATH:/path/to/your/library/directory"
 ```
 {% /if %}
 
 <!-- Linux > Java -->
-{% if equals($programming_lang, "java") %}
+{% if equals($prog_lang, "java") %}
 ```shell
 sudo export CLASSPATH="$CLASSPATH:/path/to/your/library/directory"
 ```
 {% /if %}
 
 <!-- Linux > Go -->
-{% if equals($programming_lang, "go") %}
+{% if equals($prog_lang, "go") %}
 ```shell
 sudo export GOPATH="$GOPATH:/path/to/your/library/directory"
 ```
 {% /if %}
 
 <!-- Linux > Ruby -->
-{% if equals($programming_lang, "ruby") %}
+{% if equals($prog_lang, "ruby") %}
 ```shell
 sudo export RUBYLIB="$RUBYLIB:/path/to/your/library/directory"
 ```
 {% /if %}
 
 <!-- Linux > JavaScript -->
-{% if equals($programming_lang, "javascript") %}
+{% if equals($prog_lang, "javascript") %}
 ```shell
 sudo export NODE_PATH="$NODE_PATH:/path/to/your/library/directory"
 ```
@@ -138,35 +138,35 @@ sudo export NODE_PATH="$NODE_PATH:/path/to/your/library/directory"
 <!-- macOS -->
 {% if equals($os, "mac_os") %}
 <!-- macOS > Python -->
-{% if equals($programming_lang, "python") %}
+{% if equals($prog_lang, "python") %}
 ```shell
 export PYTHONPATH="$PYTHONPATH:/path/to/your/library/directory"
 ```
 {% /if %}
 
 <!-- macOS > Java -->
-{% if equals($programming_lang, "java") %}
+{% if equals($prog_lang, "java") %}
 ```shell
 export CLASSPATH="$CLASSPATH:/path/to/your/library/directory"
 ```
 {% /if %}
 
 <!-- macOS > Go -->
-{% if equals($programming_lang, "go") %}
+{% if equals($prog_lang, "go") %}
 ```shell
 export GOPATH="$GOPATH:/path/to/your/library/directory"
 ```
 {% /if %}
 
 <!-- macOS > Ruby -->
-{% if equals($programming_lang, "ruby") %}
+{% if equals($prog_lang, "ruby") %}
 ```shell
 export RUBYLIB="$RUBYLIB:/path/to/your/library/directory"
 ```
 {% /if %}
 
 <!-- macOS > JavaScript -->
-{% if equals($programming_lang, "javascript") %}
+{% if equals($prog_lang, "javascript") %}
 ```shell
 export NODE_PATH="$NODE_PATH:/path/to/your/library/directory"
 ```
