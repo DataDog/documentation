@@ -3,6 +3,7 @@ title: Troubleshooting Service Catalog
 aliases:
   - /tracing/service_catalog/troubleshooting
   - /service_catalog/guides/troubleshooting
+  - /api_catalog/troubleshoot/
 further_reading:
   - link: "/tracing/service_catalog/setup/"
     tag: "Documentation"
