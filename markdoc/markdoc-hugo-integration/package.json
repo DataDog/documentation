@@ -13,6 +13,9 @@
         "copy-author-console": "cp -r ./src/author-console ./dist/author-console",
         "copy-compiled-scripts": "cp -r ./dist/helperModules/PageBuilder/compiledScripts ./src/helperModules/PageBuilder"
     },
+    "engines": {
+        "node": ">= 20.11.0"
+    },
     "dependencies": {
         "@types/markdown-it": "^14.1.2",
         "@vitejs/plugin-react": "^4.3.3",
