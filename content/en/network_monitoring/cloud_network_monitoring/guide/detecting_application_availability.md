@@ -103,7 +103,7 @@ To identify if there might be a communication problem with your Kubernetes pods 
 
    {{< img src="network_performance_monitoring/guide/detecting_network_insights/cnm_network_map_node.png" alt="CNM Network Map page showing a clustering example, highlighting a specific node">}}
 
-3. To observe if a particular pod is contributing to latency, hover over an arrow with a wider edge. Since wider edges can mean increased latency, this particular edge may want to be investigated further. You can navigate directly back to the [Network Analytics][1] page by clicking on the dotted edge directly to investigate this further.
+3. The edge thickness is associated with the metric chosen from the drop down. In this particular example, a thicker edge is associated with the metric `volume sent`. Optionally, you can also navigate directly back to the [Network Analytics][1] page by clicking on the dotted edge directly to investigate the network connections further.
 
    {{< img src="network_performance_monitoring/guide/detecting_network_insights/cnm_network_map_thicker_edge.png" alt="CNM Network Map page showing a clustering example, highlighting a thicker edge">}}
 
