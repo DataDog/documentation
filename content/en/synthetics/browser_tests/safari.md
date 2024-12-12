@@ -86,21 +86,21 @@ Use one of the following three options :
 
 **No**. Safari browser tests are limited to a dedicated Safari private location in your account. See [list of Synthetics Private Locations][2].
 
-**Note**: An API key named *API Key managed by synthetics-platform* with the label `MANAGED` has been created to your org in order to create this dedicated Safari private location. **Please** **do not revoke this key** as it is required to enable Safari testing.
+**Note**: An API key named `API Key managed by synthetics-platform` with the label `MANAGED` was created and added to your org in order to create this dedicated Safari private location. **Do not revoke this key** as it is required to enable Safari testing.
 
 In the context of this Preview, it is **expected** that some monitors may be triggered for this private location. The monitors can be resolved by ignoring the `synthetics-safari-private-beta:true` tag.
 
-**Please do not change the name of this private location** as a specific name is required to enable Safari testing. You can however restrict its usage and/or add tags to it as you see fit.
+**Please do not change the name of this private location** as a specific name is required to enable Safari testing. You can restrict its usage and/or add tags to it as needed.
 
 ### Are there any existing limitations for Safari tests?
 
 **Yes**. Safari browser specific limitations can affect some of the regular Synthetic Monitoring browser test features: 
 
-1. **Managed locations:** Safari tests can only run on a Private Location located dedicated to your Datadog account. 
+1. **Managed locations:** Safari tests can only run on a Private Location dedicated to your Datadog account. 
 2. **Running Subtests in a new window:** It is only possible to run subtests in the main window.
-3. **Errors & Warnings:** Due to the Safari limitations, it's not possible to see error details in the Errors & Warnings tab.  
-4. **Page Resources:** The type information for some of the resources in page resources might not be displayed properly. 
-5. **Max Concurrency / Parallelization:** For the Preview, you can run up to two tests in parallel at once while any other awaiting tests are queued. 
+3. **Errors & Warnings:** Due to Safari limitations, it is not possible to see error details in the **Errors & Warnings** tab.  
+4. **Page Resources:** The `type` information for some of the resources in page resources might not be displayed properly. 
+5. **Max Concurrency / Parallelization:** For the Preview, you can run up to two tests in parallel while other pending tests are queued. 
 6. **Download file:** This feature is not yet available in the Safari Preview.
 
 
