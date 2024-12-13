@@ -56,24 +56,24 @@ Commands provided in this section are for reference only and should be adjusted 
 
 2. Create two new certificates in two new key stores:
 
-```shell
-keytool -keystore java-app-keystore -genkey -alias java-app -dname CN=java-app -validity 365 -keyalg ec -storepass changeit
-keytool -keystore jmxfetch-keystore -genkey -alias jmxfetch -dname CN=jmxfetch -validity 365 -keyalg ec -storepass changeit
-```
+   ```shell
+   keytool -keystore java-app-keystore -genkey -alias java-app -dname CN=java-app -validity 365 -keyalg ec -storepass changeit
+   keytool -keystore jmxfetch-keystore -genkey -alias jmxfetch -dname CN=jmxfetch -validity 365 -keyalg ec -storepass changeit
+   ```
 
 3. Export public parts of the generated certificates to separate files:
 
-```shell
-keytool -keystore java-app-keystore -export -alias java-app -rfc -file java-app-cert.pem -storepass changeit
-keytool -keystore jmxfetch-keystore -export -alias jmxfetch -rfc -file jmxfetch-cert.pem -storepass changeit
-```
+   ```shell
+   keytool -keystore java-app-keystore -export -alias java-app -rfc -file java-app-cert.pem -storepass changeit
+   keytool -keystore jmxfetch-keystore -export -alias jmxfetch -rfc -file jmxfetch-cert.pem -storepass changeit
+   ```
 
 4. Import certificates into corresponding trust stores to make them trusted:
 
-```shell
-keytool -keystore java-app-truststore -import -alias jmxfetch -file jmxfetch-cert.pem -storepass changeit -noprompt
-keytool -keystore jmxfetch-truststore -import -alias java-app -file java-app-cert.pem -storepass changeit -noprompt
-```
+   ```shell
+   keytool -keystore java-app-truststore -import -alias jmxfetch -file jmxfetch-cert.pem -storepass changeit -noprompt
+   keytool -keystore jmxfetch-truststore -import -alias java-app -file java-app-cert.pem -storepass changeit -noprompt
+   ```
 
 {{% /tab %}}
 
@@ -85,30 +85,30 @@ Container installations must use BCFKS key store format. Use the `keytool` utili
 
 2. Create two new certificates in two new key stores:
 
-```shell
-keytool -keystore java-app-keystore -genkey -alias java-app -dname CN=java-app -validity 365 -keyalg ec -storepass changeit
+   ```shell
+   keytool -keystore java-app-keystore -genkey -alias java-app -dname CN=java-app -validity 365 -keyalg ec -storepass changeit
 
-docker run --rm -v $(pwd):/ssl datadog/agent:latest-fips-jmx \
-  keytool -keystore /ssl/jmxfetch-keystore -genkey -alias jmxfetch -dname CN=jmxfetch -validity 365 -keyalg ec -storepass changeit -keypass changeit
-```
+   docker run --rm -v $(pwd):/ssl datadog/agent:latest-fips-jmx \
+     keytool -keystore /ssl/jmxfetch-keystore -genkey -alias jmxfetch -dname CN=jmxfetch -validity 365 -keyalg ec -storepass changeit -keypass changeit
+   ```
 
 3. Export public parts of the generated certificates to separate files:
 
-```shell
-keytool -keystore java-app-keystore -export -alias java-app -rfc -file java-app-cert.pem -storepass changeit
+   ```shell
+   keytool -keystore java-app-keystore -export -alias java-app -rfc -file java-app-cert.pem -storepass changeit
 
-docker run --rm -v $(pwd):/ssl datadog/agent:latest-fips-jmx \
-  keytool -keystore /ssl/jmxfetch-keystore -export -alias jmxfetch -rfc -file /ssl/jmxfetch-cert.pem -storepass changeit
-```
+   docker run --rm -v $(pwd):/ssl datadog/agent:latest-fips-jmx \
+     keytool -keystore /ssl/jmxfetch-keystore -export -alias jmxfetch -rfc -file /ssl/jmxfetch-cert.pem -storepass changeit
+   ```
 
 4. Import certificates into corresponding trust stores to make them trusted:
 
-```shell
-keytool -keystore java-app-truststore -import -alias jmxfetch -file jmxfetch-cert.pem -storepass changeit -noprompt
+   ```shell
+   keytool -keystore java-app-truststore -import -alias jmxfetch -file jmxfetch-cert.pem -storepass changeit -noprompt
 
-docker run --rm -v $(pwd):/ssl datadog/agent:latest-fips-jmx \
-  keytool -keystore /ssl/jmxfetch-truststore -import -alias java-app -file /ssl/java-app-cert.pem -storepass changeit -noprompt
-```
+   docker run --rm -v $(pwd):/ssl datadog/agent:latest-fips-jmx \
+     keytool -keystore /ssl/jmxfetch-truststore -import -alias java-app -file /ssl/java-app-cert.pem -storepass changeit -noprompt
+   ```
 
 {{% /tab %}}
 
