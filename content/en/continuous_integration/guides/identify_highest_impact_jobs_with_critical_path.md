@@ -26,7 +26,7 @@ The exclusive time of a job on the critical path represents the amount of time t
 
 {{< img src="continuous_integration/critical_path_highlight_pipeline_exclusive_time.png" alt="Highlight exclusive time of the jobs on the critical path in a pipeline execution." width="90%">}}
 
-If CI job A is on the critical path with a duration of 100ms and runs in parallel with CI job B, which takes 80ms, the exclusive time for job A on the critical path would be 20ms. This means the actual improvement in pipeline duration reduction would be 20ms.
+If CI job A is on the critical path with a duration of 100ms and runs in parallel with CI job B, which has a duration of 80ms, the exclusive time of CI job A on the critical path is 20ms. This means that reducing the duration of the CI Job A by more than 20ms would still only decrease the overall pipeline duration by 20ms.
 
 ### Supported CI Providers
 
