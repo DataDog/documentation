@@ -21,7 +21,7 @@ further_reading:
 
 Datadog's OpenTelemetry Protocol (OTLP) logs intake API endpoint allows you to send logs directly to Datadog. With this feature, you don't need to run the [Datadog Agent][2] or [OpenTelemetry Collector + Datadog Exporter][1].
 
-You might prefer this option if you're looking for a straightforward setup and want to send logs directly to Datadog without using the Datadog Agent or OpenTelemetry Collector.
+Choose this option for a straightforward setup to send logs directly to Datadog without using the Datadog Agent or OpenTelemetry Collector.
 
 ## Configuration
 
@@ -41,7 +41,7 @@ export OTEL_EXPORTER_OTLP_LOGS_HEADERS="dd-protocol=otlp,dd-api-key=${DD_API_KEY
 
 #### Manual instrumentation
 
-If you are using manual instrumentation with OpenTelemetry SDKs, configure the OTLP HTTP Protobuf exporter programmatically using the examples below.
+If you are using manual instrumentation with OpenTelemetry SDKs, configure the OTLP HTTP Protobuf exporter programmatically using the following examples.
 
 <div class="alert alert-info">OpenTelemetry SDK logs support for JavaScript and Python is in development. For the latest statuses, see <a href="https://opentelemetry.io/docs/languages/#status-and-releases">OpenTelemetry Status and Releases</a>.</div>
 
