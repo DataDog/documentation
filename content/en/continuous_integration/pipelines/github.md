@@ -83,7 +83,7 @@ workflow job and workflow run events. To remove the events:
 
 ### Collect job logs
 
-The GitHub Actions CI Visibility integration also allows you to automatically forwarding workflow job logs to [Log Management][5].
+The GitHub Actions CI Visibility integration also allows you to automatically forward workflow job logs to [Log Management][5].
 
 To enable job logs collection:
 
