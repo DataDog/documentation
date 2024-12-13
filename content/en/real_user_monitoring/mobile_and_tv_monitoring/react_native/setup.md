@@ -1,9 +1,6 @@
 ---
 title: React Native Monitoring Setup
 description: Collect RUM and Error Tracking data from your React Native projects.
-type: multi-code-lang
-code_lang: reactnative
-code_lang_weight: 1
 aliases:
     - /real_user_monitoring/react-native/
     - /real_user_monitoring/reactnative/
@@ -33,10 +30,8 @@ This page describes how to instrument your applications for both [Real User Moni
 
 The minimum supported version for the React Native SDK is React Native v0.63.4+. Compatibility with older versions is not guaranteed out-of-the-box.
 
-The React Native SDK supports the following services:
-
-- [CodePush][3]. For more information, see the [CodePush documentation][4].
-- [Expo][5]. For more information, see the [Expo documentation][6].
+- If you are using [CodePush][3], see this dedicated [CodePush setup guide][4]
+- If you are using [Expo][5], see this dedicated [Expo setup guide][6]
 
 ## Setup
 
@@ -497,12 +492,12 @@ end
 [1]: /real_user_monitoring/
 [2]: /error_tracking/
 [3]: https://microsoft.github.io/code-push/
-[4]: /real_user_monitoring/mobile_and_tv_monitoring/react_native/setup/codepush
+[4]: /real_user_monitoring/mobile_and_tv_monitoring/codepush/setup
 [5]: https://docs.expo.dev/
-[6]: /real_user_monitoring/mobile_and_tv_monitoring/react_native/setup/expo
+[6]: /real_user_monitoring/mobile_and_tv_monitoring/expo/setup
 [7]: /account_management/api-app-keys/#api-keys
 [8]: /account_management/api-app-keys/#client-tokens
-[9]: /real_user_monitoring/mobile_and_tv_monitoring/react_native/setup/reactnative/#initialize-the-library-with-application-context
+[9]: /real_user_monitoring/mobile_and_tv_monitoring/react_native/setup/#initialize-the-library-with-application-context
 [10]: /getting_started/tagging/#define-tags
 [11]: https://github.com/wix/react-native-navigation
 [12]: /real_user_monitoring/mobile_and_tv_monitoring/react_native/integrated_libraries/

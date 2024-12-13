@@ -5,9 +5,6 @@ aliases:
     - /real_user_monitoring/reactnative/codepush
     - /real_user_monitoring/reactnative-codepush/
     - /real_user_monitoring/mobile_and_tv_monitoring/setup/codepush
-type: multi-code-lang
-code_lang: codepush
-code_lang_weight: 3
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-reactnative
   tag: "Source Code"
@@ -24,13 +21,13 @@ Enable React Native Crash Reporting and Error Tracking to get comprehensive cras
 
 Each time you release a new [CodePush][1] version for your React Native application, you need to upload the source maps to Datadog to unminify errors.
 
-Datadog recommends using `@datadog/mobile-react-native-code-push` in your app and the [datadog-ci][3] `react-native codepush` command to upload your source maps. This ensures that the `version` is consistent in both reported crashes and uploaded source maps.
+Datadog recommends using `@datadog/mobile-react-native-code-push` in your app and the [datadog-ci][2] `react-native codepush` command to upload your source maps. This ensures that the `version` is consistent in both reported crashes and uploaded source maps.
 
-If you experience any issues setting up the Datadog SDK with codepush, you can see our [example application][6] as a reference.
+If you experience any issues setting up the Datadog SDK with CodePush, you refer to this [example application][3] as a reference.
 
 ## Setup
 
-See the [React Native Monitoring installation steps][2] to install `@datadog/mobile-react-native`.
+See the [React Native Monitoring installation steps][4] to install `@datadog/mobile-react-native`.
 
 Then, install `@datadog/mobile-react-native-code-push`.
 
@@ -86,7 +83,7 @@ As getting the CodePush version is an asynchronous step that needs to be perform
 
 ## Upload CodePush source maps
 
-Install [`@datadog/datadog-ci`][3] as a development dependency to your project.
+Install [`@datadog/datadog-ci`][2] as a development dependency to your project.
 
 To install it with NPM:
 
@@ -152,9 +149,9 @@ config.versionSuffix = `codepush.${codepushVersion}`; // will result in "1.0.0-c
 
 In order to avoid potential version clashes, the `versionSuffix` adds a dash (`-`) before the suffix.
 
-To obtain the `codepushVersion`, you can hardcode it or use [`CodePush.getUpdateMetadata`][4].
+To obtain the `codepushVersion`, you can hardcode it or use [`CodePush.getUpdateMetadata`][5].
 
-Then, upload your source maps using the [`datadog-ci react-native upload`][5] command, and ensure the `--release-version` argument matches the one set in the SDK configuration.
+Then, upload your source maps using the [`datadog-ci react-native upload`][6] command, and ensure the `--release-version` argument matches the one set in the SDK configuration.
 
 ## Sending data when device is offline
 
@@ -169,8 +166,8 @@ This means that even if users open your application while offline, no data is lo
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://docs.microsoft.com/en-us/appcenter/distribution/codepush/
-[2]: /real_user_monitoring/reactnative/
-[3]: https://github.com/DataDog/datadog-ci
-[4]: https://docs.microsoft.com/en-us/appcenter/distribution/codepush/rn-api-ref#codepushgetupdatemetadata
-[5]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/react-native#upload
-[6]: https://github.com/DataDog/dd-sdk-reactnative-examples/tree/main/rum-react-navigation-codepush
+[2]: https://github.com/DataDog/datadog-ci
+[3]: https://github.com/DataDog/dd-sdk-reactnative-examples/tree/main/rum-react-navigation-codepush
+[4]: /real_user_monitoring/reactnative/
+[5]: https://docs.microsoft.com/en-us/appcenter/distribution/codepush/rn-api-ref#codepushgetupdatemetadata
+[6]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/react-native#upload
