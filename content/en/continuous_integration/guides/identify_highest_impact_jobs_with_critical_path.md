@@ -65,6 +65,12 @@ You can also import the [CI Visibility - Critical Path][1] dashboard template:
 | Avg Exclusive Time On Critical Path   | Avg exclusive time of a particular job on the critical path. This measures the potential reduction of a pipeline duration if the job reduces its exclusive time. |
 | Rate On Critical Path                 | Measures the porcentage that a job is on the critical path compared when that job is not.                                                                        |
 
+** Example **
+
+In the previous image, we can observe that a CI job called `metrics` is a potential candidate for improvement, as its total exclusive time is the highest. The average exclusive time is around 21 minutes, meaning there is room for improvement of up to 21 minutes for this CI job. Since we know this CI job is on the critical path, any improvements made to it will be reflected in the corresponding CI pipelines, reducing a similar amount of time.
+
+{{< img src="critical_path_dashboard_outlier_job_hightlighted.png" alt="Potencial CI Job candidate to improve the exclusive time." width="90%">}}
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
