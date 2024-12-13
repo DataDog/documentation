@@ -26,14 +26,14 @@ The exclusive time of a job on the critical path represents the amount of time t
 
 {{< img src="continuous_integration/critical_path_highlight_pipeline_exclusive_time.png" alt="Highlight exclusive time of the jobs on the critical path in a pipeline execution." width="90%">}}
 
-If CI job A is on the critical path with a duration of 100ms and runs in parallel with CI job B, which has a duration of 80ms, the exclusive time of CI job A on the critical path is 20ms. This means that reducing the duration of the CI Job A by more than 20ms would still only decrease the overall pipeline duration by 20ms.
+If a CI Job `job1` is on the critical path with a duration of 100ms and runs in parallel with a CI job `job2`, which has a duration of 80ms, the exclusive time of `job1` on the critical path is 20ms. This means that reducing the duration of the `job1` by more than 20ms would still only decrease the overall pipeline duration by 20ms.
 
 ### Supported CI Providers
 
-<div class="alert alert-info">Are you interested in critical path and your CI provider is not supported yet? Fill out <a href="https://forms.gle/zDgiDSGQxA1HgjXh6" target="_blank">this form</a>.</div>
-
 Filtering and Exclusive Time computation of CI Jobs on the Critical Path is available for the following CI Providers:
 * [GitLab][3]
+
+<div class="alert alert-info">Are you interested in critical path and your CI provider is not supported yet? Fill out <a href="https://forms.gle/zDgiDSGQxA1HgjXh6" target="_blank">this form</a>.</div>
 
 You can still [highlight which CI Jobs are on the critical path][4] using the Pipeline Execution detail view across all CI providers.
 
