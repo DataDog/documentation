@@ -92,6 +92,11 @@
     },
     {
       "group": "ci_visibility_pipelines",
+      "suffix": "_129899466",
+      "description": "Send pipeline job event returns \"Request accepted for processing\" response"
+    },
+    {
+      "group": "ci_visibility_pipelines",
       "suffix": "_2341150096",
       "description": "Send running pipeline event returns \"Request accepted for processing\" response"
     }
