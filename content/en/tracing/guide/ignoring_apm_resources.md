@@ -192,6 +192,8 @@ The **ignore resources** option allows resources to be excluded if the global ro
 
 You can specify resources to ignore either in the Agent configuration file, `datadog.yaml`, or with the `DD_APM_IGNORE_RESOURCES` environment variable. See examples below.
 
+Using `datadog.yaml`:
+
 {{< code-block lang="yaml" filename="datadog.yaml" >}}
 apm_config:
 ## @param ignore_resources - list of strings - optional
@@ -201,7 +203,14 @@ apm_config:
   ignore_resources: ["(GET|POST) /healthcheck","API::NotesController#index"]
 {{< /code-block >}}
 
+Using `DD_APM_IGNORE_RESOURCES`:
+
+```shell
+DD_APM_IGNORE_RESOURCES=(GET|POST) /healthcheck,API::NotesController#index
+```
+
 **Notes**:
+- When using the environment variable format (`DD_APM_IGNORE_RESOURCES`), values must be provided as a comma-separated list of strings.
 - The regex syntax that the Trace Agent accepts is evaluated by Go's [regexp][6].
 - Depending on your deployment strategy, you may have to adjust the regex by escaping special characters.
 - If you use dedicated containers with Kubernetes, make sure that the environment variable for the ignore resource option is being applied to the **trace-agent** container.
