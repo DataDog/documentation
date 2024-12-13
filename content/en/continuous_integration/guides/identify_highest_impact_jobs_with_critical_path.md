@@ -32,19 +32,18 @@ If CI job A is on the critical path with a duration of 100ms and runs in paralle
 
 <div class="alert alert-info">Are you interested in critical path and your CI provider is not supported yet? Fill out this form.</div>
 
-Filtering CI Jobs on the Critical Path is available for the following CI Providers:
+Filtering and Exclusive Time computation of CI Jobs on the Critical Path is available for the following CI Providers:
 * [GitLab][3]
 
-Note that this applies only to filtering CI Jobs on the critical path. You can still [highlight which CI Jobs are on the critical path][4] using the Pipeline Execution detail view across all CI providers.
+You can still [highlight which CI Jobs are on the critical path][4] using the Pipeline Execution detail view across all CI providers.
 
 ## Identify the CI Jobs to improve your CI Pipeline
 
 ### Using the facet
 
-You can use the facet `@ci.on_critical_path` to identify which CI Jobs are on the critical path in your CI Pipelines.
-Using that facet, you can create your custom dashboards and notebooks for your needs.
+You can use the facet `@ci.on_critical_path` and `@ci.critical_path.exclusive_time` to identify which CI Jobs are on the critical path in your CI Pipelines. Using those facets, you can create your custom dashboards and notebooks for your needs.
 
-{{< img src="continuous_integration/critical_path_facet.png" alt="Filter using critical path facet" width="90%">}}
+{{< img src="continuous_integration/critical_path_facets.png" alt="Filter using critical path facets" width="90%">}}
 
 Notice that the facet is only available using the `ci_level:job` in your queries, as it's a tag added only to the CI Job level.
 
