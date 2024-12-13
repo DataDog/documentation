@@ -57,7 +57,7 @@ Alternately, you can set the `DATADOG_API_KEY` and `DATADOG_SITE` environment va
 
 Then, you can use the following command to upload all the necessary files for symbolication and deobfuscation of your crash reports:
 ```sh
-datadog-ci flutter-symbols upload --service-name <your_service_name> --dart-symbols-location <location_of_dart_symbols> --android-mapping --ios-dsyms
+datadog-ci flutter-symbols upload --service-name <YOUR_SERVICE_NAME> --dart-symbols-location <LOCATION_OF_DART_SYMBOLS> --android-mapping --ios-dsyms
 ```
 
 For a full list of options, see the `datadog-ci` [Flutter Symbols documentation][6].

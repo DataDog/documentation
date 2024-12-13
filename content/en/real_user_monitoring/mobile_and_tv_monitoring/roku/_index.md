@@ -20,7 +20,7 @@ Datadog Real User Monitoring (RUM) enables you to visualize and analyze the real
 
 ## Start monitoring Roku applications
 
-To get started with RUM for Roku, create an application and configure the RokuSDK.
+To get started with RUM for Roku, create an application and configure the Roku SDK.
 
 {{< whatsnext desc="This section includes the following topics:">}}
   {{< nextlink href="/real_user_monitoring/mobile_and_tv_monitoring/roku/setup">}}<u>Setup</u>: Learn how to set up the Roku SDK, track background events, and send data when devices are offline.{{< /nextlink >}}
