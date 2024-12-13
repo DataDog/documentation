@@ -31,14 +31,14 @@ Set up tracing in GitHub Actions to track the execution of your workflows, ident
 
 | Pipeline Visibility | Platform | Definition |
 |---|---|---|
-| [Running pipelines][12] | Running pipelines | View pipeline executions that are running. Queued or waiting pipelines show with status "Running" on Datadog. |
-| [Partial retries][13] | Partial pipelines | View partially retried pipeline executions. |
+| [Running pipelines][2] | Running pipelines | View pipeline executions that are running. Queued or waiting pipelines show with status "Running" on Datadog. |
+| [Partial retries][3] | Partial pipelines | View partially retried pipeline executions. |
 | Logs correlation | Logs correlation | Correlate pipeline and job spans to logs and enable [job log collection](#collect-job-logs). |
-| Infrastructure metric correlation | Infrastructure metric correlation | Correlate jobs to [infrastructure host metrics][11] for GitHub jobs. |
-| [Custom tags][20] [and measures at runtime][21] | Custom tags and measures at runtime | Configure [custom tags and measures][14] at runtime. |
-| [Queue time][15] | Queue time | View the amount of time pipeline jobs sit in the queue before processing. |
-| [Approval wait time][16] | Approval wait time | View the amount of time workflow runs and workflow jobs wait for manual approvals. |
-| [Custom spans][17] | Custom spans | Configure custom spans for your pipelines. |
+| Infrastructure metric correlation | Infrastructure metric correlation | Correlate jobs to [infrastructure host metrics][4] for GitHub jobs. |
+| [Custom tags][5] [and measures at runtime][6] | Custom tags and measures at runtime | Configure [custom tags and measures][7] at runtime. |
+| [Queue time][8] | Queue time | View the amount of time pipeline jobs sit in the queue before processing. |
+| [Approval wait time][9] | Approval wait time | View the amount of time workflow runs and workflow jobs wait for manual approvals. |
+| [Custom spans][10] | Custom spans | Configure custom spans for your pipelines. |
 
 
 The following GitHub versions are supported:
@@ -50,9 +50,9 @@ The following GitHub versions are supported:
 
 ### Configure a GitHub App
 
-The [GitHub Actions][1] integration uses a private [GitHub App][2] to collect workflow information. If you already have an app, you can skip to the next section.
+The [GitHub Actions][1] integration uses a private [GitHub App][11] to collect workflow information. If you already have an app, you can skip to the next section.
 
-1. Go to the [GitHub integration tile][3].
+1. Go to the [GitHub integration tile][12].
 2. Click **+ Create GitHub App**.
 3. Configure the integration for a personal or organization account and enter the name of the GitHub organization.
 3. Select the Datadog features you want to enable for the GitHub App.
@@ -65,7 +65,7 @@ The [GitHub Actions][1] integration uses a private [GitHub App][2] to collect wo
 
 After the GitHub App is created and installed, enable CI Visibility on the accounts and/or repositories you want visibility into.
 
-1. In Datadog, navigate to [**Software Delivery** > **CI Visibility** > **Add a Pipeline Provider**][4] and select **GitHub**.
+1. In Datadog, navigate to [**Software Delivery** > **CI Visibility** > **Add a Pipeline Provider**][13] and select **GitHub**.
 2. Click **Enable Account** for the account you want to enable.
 3. Enable CI Visibility for the whole account by clicking the toggle next to **Enable CI Visibility**.
 4. Alternatively, you can enable individual repositories by scrolling through the repository list and clicking the **Enable CI Visibility** toggle.
@@ -77,24 +77,24 @@ Pipelines appear immediately after enabling CI Visibility for any account or rep
 To disable the CI Visibility GitHub Actions integration, make sure the GitHub app is no longer subscribed to the
 workflow job and workflow run events. To remove the events:
 
-1. Go to the [GitHub Apps][9] page.
+1. Go to the [GitHub Apps][14] page.
 2. Click **Edit > Permission & events** on the relevant Datadog GitHub App (if you have multiple apps, you have to repeat the process for each).
 3. Scroll to the **Subscribe to events** section, and make sure that **Workflow job** and **Workflow run** are not selected.
 
 ### Collect job logs
 
-The GitHub Actions CI Visibility integration also allows you to automatically forward workflow job logs to [Log Management][5].
+The GitHub Actions CI Visibility integration also allows you to automatically forward workflow job logs to [Log Management][15].
 
 To enable job logs collection:
 
-1. In Datadog, navigate to [**Software Delivery** > **CI Visibility** > **Add a Pipeline Provider**][4] and select **GitHub**.
+1. In Datadog, navigate to [**Software Delivery** > **CI Visibility** > **Add a Pipeline Provider**][13] and select **GitHub**.
 2. Click **Enable Account** for the account you want to enable.
 3. Enable Job Logs Collection for the whole account by clicking the toggle next to **Enable Job Logs Collection**.
 4. Alternatively, you can enable individual repositories by scrolling through the repository list and clicking the **Enable Job Logs Collection** toggle.
 
 Immediately after toggling logs collection, workflow job logs are forwarded to Datadog Log Management. Log files larger than 1 GiB are truncated.
 
-Logs are billed separately from CI Visibility. Log retention, exclusion, and indexes are configured in [Log Management][18]. Logs for GitHub jobs can be identified by the `datadog.product:cipipeline` and `source:github` tags.
+Logs are billed separately from CI Visibility. Log retention, exclusion, and indexes are configured in [Log Management][16]. Logs for GitHub jobs can be identified by the `datadog.product:cipipeline` and `source:github` tags.
 
 ### Correlate infrastructure metrics to jobs
 
@@ -104,7 +104,7 @@ To see the metrics, click on a job span in the trace view. A window opens with a
 
 ## Visualize pipeline data in Datadog
 
-The [**CI Pipeline List**][7] and [**Executions**][8] pages populate with data after the pipelines finish.
+The [**CI Pipeline List**][17] and [**Executions**][18] pages populate with data after the pipelines finish.
 
 The **CI Pipeline List** page shows data for only the default branch of each repository. For more information, see [Search and Manage CI Pipelines][19].
 
@@ -113,22 +113,21 @@ The **CI Pipeline List** page shows data for only the default branch of each rep
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://docs.github.com/actions
-[2]: https://docs.github.com/developers/apps/getting-started-with-apps/about-apps
-[3]: https://app.datadoghq.com/integrations/github/
-[4]: https://app.datadoghq.com/ci/setup/pipeline?provider=github
-[5]: /logs/
-[6]: https://app.datadoghq.com/ci/settings
-[7]: https://app.datadoghq.com/ci/pipelines
-[8]: https://app.datadoghq.com/ci/pipeline-executions
-[9]: https://github.com/settings/apps
-[11]: /continuous_integration/pipelines/github/#correlate-infrastructure-metrics-to-jobs
-[12]: /glossary/#running-pipeline
-[13]: /glossary/#partial-retry
-[14]: /continuous_integration/pipelines/custom_tags_and_measures/?tab=linux
-[15]: /glossary/#queue-time
-[16]: /glossary/#approval-wait-time
-[17]: /glossary/#custom-span
-[18]: /logs/guide/best-practices-for-log-management/
+[2]: /glossary/#running-pipeline
+[3]: /glossary/#partial-retry
+[4]: /continuous_integration/pipelines/github/#correlate-infrastructure-metrics-to-jobs
+[5]: /glossary/#custom-tag
+[6]: /glossary/#measure
+[7]: /continuous_integration/pipelines/custom_tags_and_measures/?tab=linux
+[8]: /glossary/#queue-time
+[9]: /glossary/#approval-wait-time
+[10]: /glossary/#custom-span
+[11]: https://docs.github.com/developers/apps/getting-started-with-apps/about-apps
+[12]: https://app.datadoghq.com/integrations/github/
+[13]: https://app.datadoghq.com/ci/setup/pipeline?provider=github
+[14]: https://github.com/settings/apps
+[15]: /logs/
+[16]: /logs/guide/best-practices-for-log-management/
+[17]: https://app.datadoghq.com/ci/pipelines
+[18]: https://app.datadoghq.com/ci/pipeline-executions
 [19]: /continuous_integration/search/#search-for-pipelines
-[20]: /glossary/#custom-tag
-[21]: /glossary/#measure
