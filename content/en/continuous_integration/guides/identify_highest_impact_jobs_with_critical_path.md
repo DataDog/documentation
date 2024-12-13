@@ -69,9 +69,9 @@ You can also import the [CI Visibility - Critical Path][1] dashboard template:
 
 In the previous image, we can observe that a CI job called `metrics` is a potential candidate for improvement, as its total exclusive time is the highest. The average exclusive time is around 21 minutes, meaning there is room for improvement of up to 21 minutes for this CI job. 
 
-Since we know this CI job is on the critical path 43.5% of the time, we can hope to reduce the average pipeline duration by 21 minutes for 43.5% of the pipeline executions.
+Since we know this CI job is on the critical path 43.5% of the times, we could potentially reduce the average pipeline duration by up to 21 minutes for 43.5% of the pipeline executions.
 
-{{< img src="continuous_integration/critical_path_dashboard_outlier_job_hightlighted.png" alt="Potencial CI Job candidate to improve the exclusive time." width="90%">}}
+{{< img src="continuous_integration/critical_path_dashboard_outlier_job_highlighted.png" alt="Potential CI Job candidate to improve the exclusive time." width="90%">}}
 
 ## Further reading
 
