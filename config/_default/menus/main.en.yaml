@@ -7094,7 +7094,7 @@ menu:
       url: data_security/logs/
       parent: data_security
       weight: 3
-    - name: Kube3netes
+    - name: Kubernetes
       identifier: data_security_kubernetes
       url: data_security/kubernetes
       parent: data_security
