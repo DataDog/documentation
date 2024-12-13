@@ -2,7 +2,7 @@
 title: Android and Android TV Libraries for RUM
 aliases:
 - /real_user_monitoring/android/integrated_libraries/
-- /real_user_monitoring/mobile_and_tv_monitoring/android/integrated_libraries/
+- /real_user_monitoring/mobile_and_tv_monitoring/integrated_libraries/android
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-android
   tag: "Source Code"

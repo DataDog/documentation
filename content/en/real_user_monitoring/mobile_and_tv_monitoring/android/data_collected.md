@@ -2,7 +2,7 @@
 title: Android Data Collected
 aliases:
 - /real_user_monitoring/android/data_collected/
-- /real_user_monitoring/mobile_and_tv_monitoring/android/data_collected/
+- /real_user_monitoring/mobile_and_tv_monitoring/data_collected/android
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-android
   tag: "Source Code"
