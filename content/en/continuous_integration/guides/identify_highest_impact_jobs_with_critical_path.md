@@ -14,6 +14,20 @@ further_reading:
 
 This guide explains how to identify the CI jobs that are on the critical path, with the goal of determining which CI jobs to focus on to improve the overall duration of CI pipelines.
 
+### Understanding the Critical Path in a CI Pipeline
+
+The critical path in a CI Pipeline is the longest sequence of CI Jobs that determines the total duration of that pipeline. In other words, it is the path through the DAG of CI Jobs that requires the most time to complete. You can only reduce the total duration of a CI Pipeline by reducing the duration of CI Jobs that are on the critical path.
+
+{{< img src="continuous_integration/critical_path_highlight_pipeline.png" alt="Highlight of jobs on the critical path in a pipeline execution." width="90%">}}
+
+However, CI jobs are typically executed in parallel with other jobs, meaning that the actual reduction in pipeline time is determined by the **exclusive time** a CI job spends on the CI runner during its execution.
+
+The exclusive time that a job is on the critical path represents the amount of time the CI runner has spent executing a specific job exclusively, excluding the execution time of other jobs that were running in parallel.
+
+{{< img src="continuous_integration/critical_path_highlight_pipeline_exclusive_time.png" alt="Highlight exclusive time of the jobs on the critical path in a pipeline execution." width="90%">}}
+
+If CI job A is on the critical path with a duration of 100ms and runs in parallel with CI job B, which takes 80ms, the exclusive time for job A on the critical path would be 20ms. This means the actual improvement in pipeline duration reduction would be 20ms.
+
 ### Compatibility
 
 <div class="alert alert-info">Are you interested in critical path and your CI provider is not supported yet? Fill out this form.</div>
@@ -46,27 +60,11 @@ You can also import the [CI Visibility - Critical Path][1] dashboard template:
 
 #### Terminology
 
-| Column            | Description                                                                                                                                                                                               |
-|-------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Total Duration    | Sum all jobs duration                                                                                                                                                                                     |
-| Count             | Number of times that the job has been detected on the critical path                                                                                                                                       |
-| Avg Duration      | Avg duration of the jobs                                                                                                                                                                                  |
-| Impact on Latency | Represents the impact of a particular job across all your pipelines. This value is proportional to the total duration and count. The higher the number is the higher is the impact of the job in your CI. |
-
-#### Using Impact on Latency value
-
-You can identify the CI Jobs with the highest impact on your CI by sorting by `Impact on Latency`.
-
-This metric helps you to determine quickly which CI Jobs require attention to <u>achieve the best effort-to-benefit ratio</u> for overall CI improvement, as it accounts, not only for the CI Job duration, but also for the frequency with which a particular CI Job is executed.
-
-**Example**
-
-In the previous image, we can observe that the first two rows correspond to different types of CI Jobs:
-
-- The `tests` CI Job, executed in the `shopist/cart-service` repository, has an average duration of 5 minutes and runs approximately 2,500 times. This is undoubtedly the CI Job with the highest impact on this repository. Improving it would yield the most significant improvement in our CI performance.
-- The `build` CI Job, also executed in the `shopist/cart-service` repository, has an average duration of less than 2 minutes but is executed almost twice as often as the `tests` CI Job. As a result, its `Impact on Latency` ranks second, despite its significantly shorter duration.
-
-{{< img src="continuous_integration/critical_path_dashboard_focus_impact.png" alt="Focus on the CI Jobs with the highest impact" width="90%">}}
+| Column                                | Description                                                                                                                                                      |
+|---------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Total Exclusive Time On Critical Path | Sum all exclusive time of the job. It gives an approximation of the potential saved time the involved pipelines might have.                                      |
+| Avg Exclusive Time On Critical Path   | Avg exclusive time of a particular job on the critical path. This measures the potential reduction of a pipeline duration if the job reduces its exclusive time. |
+| Rate On Critical Path                 | Measures the porcentage that a job is on the critical path compared when that job is not.                                                                        |
 
 ## Further reading
 
