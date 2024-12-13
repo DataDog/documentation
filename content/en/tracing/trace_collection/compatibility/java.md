@@ -98,7 +98,7 @@ Integrations in Preview are disabled by default but can be enabled individually:
 | Jax-RS Annotations      | JSR311-API | Fully Supported                                        | `jax-rs`, `jaxrs`, `jax-rs-annotations`, `jax-rs-filter` |
 | Jetty                   | 7.0-12.x   | Fully Supported                                        | `jetty`                                                  |
 | Micronaut HTTP Server   | 2.x        | Fully Supported                                        | `micronaut`                                              |
-| Mulesoft                | 4          | Fully Supported                                        | `mule`                                                   |
+| Mulesoft                | 4.5.0+     | Fully Supported                                        | `mule`                                                   |
 | Netty HTTP Server       | 3.8+       | Fully Supported                                        | `netty`, `netty-3.8`, `netty-4.0`, `netty-4.1`           |
 | Play                    | 2.3-2.8    | Fully Supported                                        | `play`, `play-action`                                    |
 | Ratpack                 | 1.5+       | Fully Supported                                        | `ratpack`                                                |
@@ -127,7 +127,8 @@ The following instrumentations are disabled by default and can be enabled with t
 | JAX-WS                       | `-Ddd.integration.jax-ws.enabled=true`                                                                                                              |
 | JDBC Datasource              | `-Ddd.integration.jdbc-datasource.enabled=true`                                                                                                     |
 | Kotlin Coroutines            | `-Ddd.integration.kotlin_coroutine.experimental.enabled=true`                                                                                       |
-| Mulesoft                     | `-Ddd.integration.mule.enabled=true` <br/> `-Ddd.integration.grizzly-client.enabled=true` <br/> `-Ddd.integration.grizzly-filterchain.enabled=true` |
+| Mulesoft                     | `-Ddd.integration.mule.enabled=true`
+      |
 | Netty Promise                | `-Ddd.integration.netty-promise.enabled=true`                                                                                                       |
 | Ning                         | `-Ddd.integration.ning.enabled=true`                                                                                                                |
 | Spark Java                   | `-Ddd.integration.sparkjava.enabled=true`                                                                                                           |
