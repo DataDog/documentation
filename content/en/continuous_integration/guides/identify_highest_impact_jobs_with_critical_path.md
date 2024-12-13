@@ -71,7 +71,7 @@ In the previous image, we can observe that a CI job called `metrics` is a potent
 
 Since we know this CI job is on the critical path, any improvements made to it will be reflected in the corresponding CI pipelines, reducing a similar amount of time.
 
-{{< img src="critical_path_dashboard_outlier_job_hightlighted.png" alt="Potencial CI Job candidate to improve the exclusive time." width="90%">}}
+{{< img src="continuous_integration/critical_path_dashboard_outlier_job_hightlighted.png" alt="Potencial CI Job candidate to improve the exclusive time." width="90%">}}
 
 ## Further reading
 
