@@ -121,7 +121,7 @@ The **CI Pipeline List** page shows data for only the default branch of each rep
 [7]: https://app.datadoghq.com/ci/pipelines
 [8]: https://app.datadoghq.com/ci/pipeline-executions
 [9]: https://github.com/settings/apps
-[10]: /continuous_integration/pipelines/github/#enable-log-collection
+[10]: /continuous_integration/pipelines/github/#collect-job-logs
 [11]: /continuous_integration/pipelines/github/#correlate-infrastructure-metrics-to-jobs
 [12]: /glossary/#running-pipeline
 [13]: /glossary/#partial-retry
