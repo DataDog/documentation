@@ -12,7 +12,7 @@ further_reading:
 
 ## Overview
 
-This guide explains how to identify the CI jobs that are on the critical path, with the goal of determining which CI jobs to focus on to improve the overall duration of CI pipelines.
+This guide explains how to identify the CI jobs that are on the critical path, with the goal of determining which CI jobs to focus on to reduce the overall duration of the CI pipelines.
 
 ### Understanding the Critical Path in a CI Pipeline
 
@@ -41,11 +41,11 @@ You can still [highlight which CI Jobs are on the critical path][4] using the Pi
 
 ### Using the facet
 
-You can use the facet `@ci.on_critical_path` and `@ci.critical_path.exclusive_time` to identify which CI Jobs are on the critical path in your CI Pipelines. Using those facets, you can create your custom dashboards and notebooks for your needs.
+You can use the facet `@ci.on_critical_path` or `@ci.critical_path.exclusive_time` to identify which CI Jobs are on the critical path in your CI Pipelines. Using those facets, you can create your custom dashboards and notebooks for your needs.
 
 {{< img src="continuous_integration/critical_path_facets.png" alt="Filter using critical path facets" width="90%">}}
 
-Notice that the facet is only available using the `ci_level:job` in your queries, as it's a tag added only to the CI Job level.
+Notice that these facets are only available using the `ci_level:job` in your queries.
 
 ### Using the dashboard template
 
