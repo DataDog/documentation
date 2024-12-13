@@ -23,7 +23,7 @@ Datadog Real User Monitoring (RUM) enables you to visualize and analyze the real
 To get started with RUM for React Native, create an application and configure the React Native SDK.
 
 {{< whatsnext desc="This section includes the following topics:">}}
-  {{< nextlink href="/real_user_monitoring/mobile_and_tv_monitoring/react_native/setup">}}<u>Setup</u>: Learn how to setup the React Native SDK, track background events, and send data when devices are offline.{{< /nextlink >}}
+  {{< nextlink href="/real_user_monitoring/mobile_and_tv_monitoring/react_native/setup">}}<u>Setup</u>: Learn how to set up the React Native SDK, track background events, and send data when devices are offline.{{< /nextlink >}}
   {{< nextlink href="/real_user_monitoring/mobile_and_tv_monitoring/react_native/error_tracking/">}}<u>Crash Reporting</u>: Add ANR detection and crash reporting, get deobfuscated stack traces, then test your implementation.{{< /nextlink >}}
   {{< nextlink href="/real_user_monitoring/mobile_and_tv_monitoring/react_native/advanced_configuration">}}<u>Advanced Configuration</u>: Enrich user sessions, manage events and data, track custom global attributes and widgets, review initialization parameters, modify or drop RUM events, and more.{{< /nextlink >}}
   {{< nextlink href="/real_user_monitoring/mobile_and_tv_monitoring/react_native/mobile_vitals">}}<u>Data Collected</u>: Review data that the RUM React Native SDK collects.{{< /nextlink >}}

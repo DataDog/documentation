@@ -74,7 +74,7 @@ Non-fatal ANRs may or may not have led to the application being terminated (cras
 
 {{< img src="real_user_monitoring/error_tracking/rum-anr-non-fatal.png" alt="A non-fatal crash report in Error Tracking." >}}
 
-- In the **Error Tracking** page, non-fatal ANRs are grouped under a **single** issue due to their level of noise
+- In the **Error Tracking** page, non-fatal ANRs are grouped under a **single** issue due to their level of noise.
 - By default, the reporting of non-fatal ANRs on *Android 30+* is **disabled** because it would create too much noise over fatal ANRs. On *Android 29* and below, however, the reporting of non-fatal ANRs is **enabled** by default, as fatal ANRs cannot be reported on those versions.
 
 For any Android version, you can override the default setting for reporting non-fatal ANRs by setting `trackNonFatalAnrs` to `true` or `false` when initializing the SDK.
@@ -172,7 +172,7 @@ Depending on the [Android Gradle plugin][1] version, the matching of stack trace
 
 See the [RUM Debug Symbols][11] page to view all uploaded symbols.
 
-### Plugin Configuration Options
+### Plugin configuration options
 
 There are several plugin properties that can be configured through the plugin extension. In case you are using multiple variants, you can set a property value for a specific flavor in the variant.
 

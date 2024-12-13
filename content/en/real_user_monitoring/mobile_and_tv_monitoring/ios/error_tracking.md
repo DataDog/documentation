@@ -86,7 +86,7 @@ CrashReporting.enable()
 
 App hangs are an iOS-specific type of error that happens when the application is unresponsive for too long.
 
-By default, app hangs reporting is **disabled**, but you can enable it and set your own threshold to monitor app hangs that last more than a specified duration by using the `appHangThreshold` initialization parameter. A customizable threshold allows you to find the right balance between fine-grained and noisy observability. See [Configure the app hang threshold][5] for more guidance on what to set this value to.
+By default, app hangs reporting is **disabled**, but you can enable it and set your own threshold to monitor app hangs that last more than a specified duration by using the `appHangThreshold` initialization parameter. A customizable threshold allows you to find the right balance between fine-grained and noisy observability. See [Configure the app hang threshold][5] for more guidance on setting this value.
 
 App hangs are reported through the iOS SDK (not through [Logs][4]).
 
@@ -117,7 +117,7 @@ To enable app hang monitoring:
    )
    ```
 
-3. Set the `appHangThreshold` parameter to the minimal duration you want app hangs to be reported. For example, enter `0.25` to report hangs lasting at least 250 ms. See [Configure the app hang threshold][5] for more guidance on what to set this value to.
+3. Set the `appHangThreshold` parameter to the minimal duration you want app hangs to be reported. For example, enter `0.25` to report hangs lasting at least 250 ms. See [Configure the app hang threshold][5] for more guidance on setting this value.
 
    Make sure you follow the steps below to get [deobfuscated stack traces][6].
 
