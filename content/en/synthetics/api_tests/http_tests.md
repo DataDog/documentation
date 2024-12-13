@@ -52,9 +52,9 @@ After choosing to create an `HTTP` test, define your test's request.
 
 3. Add `env` **Tags** as well as any other tag to your HTTP test. You can then use these tags to filter through your Synthetic tests on the [Synthetic Monitoring & Continuous Testing page][3].
 
-   {{< img src="synthetics/api_tests/http_test_config.png" alt="Define HTTP request" style="width:90%;" >}}
+   {{< img src="getting_started/synthetics/api-test-config-4.png" alt="Define HTTP request" style="width:90%;" >}}
 
-Click **Test URL** to try out the request configuration. A response preview is displayed on the right side of your screen.
+Click **Send** to try out the request configuration. A response preview is displayed on the right side of your screen.
 
 ### Snippets
 
