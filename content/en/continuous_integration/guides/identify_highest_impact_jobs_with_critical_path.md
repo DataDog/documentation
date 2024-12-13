@@ -22,7 +22,7 @@ The critical path of a CI Pipeline execution is the longest sequence of CI Jobs 
 
 Looking at the job duration may not be enough. CI jobs are typically executed in parallel with other jobs, meaning that the reduction of the pipeline execution time is determined by reducing the **exclusive time** of the CI job.
 
-The exclusive time that a job is on the critical path represents the amount of time the CI runner has spent executing a specific job exclusively, excluding the execution time of other jobs that were running in parallel.
+The exclusive time of a job on the critical path represents the amount of time the CI runner has spent executing a specific job exclusively, excluding the execution time of other jobs that were running in parallel.
 
 {{< img src="continuous_integration/critical_path_highlight_pipeline_exclusive_time.png" alt="Highlight exclusive time of the jobs on the critical path in a pipeline execution." width="90%">}}
 
@@ -63,7 +63,7 @@ You can also import the [CI Visibility - Critical Path][1] dashboard template:
 |---------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Total Exclusive Time On Critical Path | Sum all exclusive time of the job. It gives an approximation of the potential saved time the involved pipelines might have.                                      |
 | Avg Exclusive Time On Critical Path   | Avg exclusive time of a particular job on the critical path. This measures the potential reduction of a pipeline duration if the job reduces its exclusive time. |
-| Rate On Critical Path                 | Measures the porcentage that a job is on the critical path compared when that job is not.                                                                        |
+| Rate On Critical Path                 | Measures how often a job is on the critical path.                                                                                                                |
 
 ##### Example
 
