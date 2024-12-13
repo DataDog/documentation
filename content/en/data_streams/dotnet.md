@@ -14,7 +14,7 @@ title: Setup Data Streams Monitoring for .NET
 | RabbitMQ   | [RabbitMQ.Client](https://www.nuget.org/packages/RabbitMQ.Client)              | 2.28.0                 | 2.37.0 or later            |
 | Amazon SQS | [AWS SQS SDK](https://www.nuget.org/packages/AWSSDK.SQS)                       | 2.48.0                 | 2.48.0 or later            |
 | Amazon SNS | [AWS SNS SDK](https://www.nuget.org/packages/AWSSDK.SimpleNotificationService) | 3.6.0                  | 3.6.0 or later             |
-| IBM MQ     | [IBM.Data.DB2.Core](https://www.nuget.org/packages/IBMMQDotnetClient)          | 2.49.0                 | 2.49.0 or later            |
+| IBM MQ     | [IBMMQDotnetClient](https://www.nuget.org/packages/IBMMQDotnetClient)          | 2.49.0                 | 2.49.0 or later            |
 
 ### Installation
 
