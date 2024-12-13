@@ -33,7 +33,7 @@ Set up tracing in GitHub Actions to track the execution of your workflows, ident
 |---|---|---|
 | [Running pipelines][12] | Running pipelines | View pipeline executions that are running. Queued or waiting pipelines show with status "Running" on Datadog. |
 | [Partial retries][13] | Partial pipelines | View partially retried pipeline executions. |
-| Logs correlation | Logs correlation | Correlate pipeline and job spans to logs and enable [job log collection][10]. |
+| Logs correlation | Logs correlation | Correlate pipeline and job spans to logs and enable [job log collection](#collect-job-logs). |
 | Infrastructure metric correlation | Infrastructure metric correlation | Correlate jobs to [infrastructure host metrics][11] for GitHub jobs. |
 | [Custom tags][20] [and measures at runtime][21] | Custom tags and measures at runtime | Configure [custom tags and measures][14] at runtime. |
 | [Queue time][15] | Queue time | View the amount of time pipeline jobs sit in the queue before processing. |
@@ -121,7 +121,6 @@ The **CI Pipeline List** page shows data for only the default branch of each rep
 [7]: https://app.datadoghq.com/ci/pipelines
 [8]: https://app.datadoghq.com/ci/pipeline-executions
 [9]: https://github.com/settings/apps
-[10]: /continuous_integration/pipelines/github/#collect-job-logs
 [11]: /continuous_integration/pipelines/github/#correlate-infrastructure-metrics-to-jobs
 [12]: /glossary/#running-pipeline
 [13]: /glossary/#partial-retry
