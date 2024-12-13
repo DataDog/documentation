@@ -62,7 +62,7 @@ cascade:
 
 ## What is Real User Monitoring?
 
-{{< img src="real_user_monitoring/rum-performance-summary-2.png" alt="RUM Dashboard" >}}
+{{< img src="real_user_monitoring/performance-summary-browser.png" alt="RUM Dashboard" >}}
 
 Datadog's *Real User Monitoring (RUM)* gives you end-to-end visibility into the real-time activity and experience of individual users. RUM solves four types of use cases for monitoring web and mobile applications:
 
@@ -126,7 +126,27 @@ All Datadog SDKs traffic is transmitted over SSL (default 443) to the following 
 
 Access RUM by navigating to [**Digital Experience > Performance Summary**][1].
 
+Select an application from the top navigation, or follow the setup instructions for [browser][15] or [mobile][16] to add your first application.
+
+{{< img src="real_user_monitoring/rum-performance-application-selector.png" alt="Select a RUM application" >}}
+
 **Tip**: To open RUM from Datadog's global search, press <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>K</kbd> and search for `real user monitoring`.
+
+## Performance monitoring summary
+
+| Browser Performance Summary | Mobile Performance Summary |
+|---------|---------|
+| {{< img src="real_user_monitoring/performance-summary-browser.png" alt="RUM Performance Monitoring summary page for a browser application" >}} | {{< img src="real_user_monitoring/performance-summary-mobile-2.png" alt="RUM Performance Monitoring summary page for a mobile application" >}} | 
+
+The [RUM Performance Monitoring summary][1] page provides relevant and actionable insights for both web and mobile applications. You have a tailored experience for each platform that helps you:
+
+- **Focus on key data points** by platform, such as the UI latency for web or mobile crashes
+- **Monitor application health** through familiar KPIs, such as Core Web Vitals for web apps or hang rate for iOS, to assess app reliability
+- **Dive into investigations directly** from interactive widgets without leaving the page
+
+For **web apps**, use the search bar to filter data, identify slow pages, and follow the UI to the [RUM Optimization Inspect][17] page.
+
+For **mobile apps**, review recent crashes at the bottom of the page and use the [Error Tracking][6] side panel for troubleshooting.
 
 ### Out-of-the-box dashboards
 
@@ -190,3 +210,6 @@ Access triggered logs, errors, and performance information when troubleshooting 
 [12]: /real_user_monitoring/session_replay/browser/
 [13]: /real_user_monitoring/session_replay/browser/privacy_options/
 [14]: /real_user_monitoring/session_replay/browser/developer_tools/
+[15]: /real_user_monitoring/browser/setup/
+[16]: /real_user_monitoring/mobile_and_tv_monitoring/setup
+[17]: https://app.datadoghq.com/rum/optimization/inspect
