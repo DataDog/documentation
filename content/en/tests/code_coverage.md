@@ -279,7 +279,7 @@ DD_ENV=ci DD_SERVICE=my-python-service pytest --cov
 
 ### Compatibility
 
-* `datadogg-ci-rb>=1.7.0`
+* `datadog-ci-rb>=1.7.0`
 * `simplecov>=0.18.0`.
 
 <div class="alert alert-warning">
@@ -292,6 +292,24 @@ This feature is enabled by default. Use `DD_CIVISIBILITY_SIMPLECOV_INSTRUMENTATI
 
 [1]: https://github.com/simplecov-ruby/simplecov
 {{% /tab %}}
+
+{{% tab "Go" %}}
+
+<div class="alert alert-info">Test optimization for Go is in Preview.</div>
+
+### Compatibility
+
+* `go test -cover`
+
+<div class="alert alert-warning">
+  <strong>Note</strong>: The DataDog library does not generate total code coverage. If your tests are run with code coverage enabled, <code>dd-trace-go</code> reports it under the <code>test.code_coverage.lines_pct</code> tag for your test sessions automatically.
+</div>
+
+If your tests are executed with the `-cover` flag, the Datadog library instruments it and automatically reports the coverage data to Datadog under the `test.code_coverage.lines_pct` tag for your test sessions.
+
+{{% /tab %}}
+
+
 {{% tab "JUnit Report Uploads" %}}
 
 ### Compatibility

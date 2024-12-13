@@ -55,13 +55,13 @@ title: RUM & セッションリプレイ
 ---
 
 
-{{< learning-center-callout header="Join an enablement webinar session" hide_image="true" btn_title="Sign Up" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=RUM">}}
-  Discover how to create custom user actions tailored to specific business needs, enabling precise tracking of user behavior.
+{{< learning-center-callout header="イネーブルメントウェビナーセッションに参加" hide_image="true" btn_title="登録" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=RUM">}}
+  特定のビジネスニーズに合わせてカスタマイズされたユーザーアクションを作成する方法を発見し、ユーザー行動の正確な追跡を可能にします。
 {{< /learning-center-callout >}}
 
 ## リアルユーザーモニタリングとは？
 
-{{< img src="real_user_monitoring/rum-performance-summary-2.png" alt="RUM Dashboard" >}}
+{{< img src="real_user_monitoring/rum-performance-summary-2.png" alt="RUM ダッシュボード" >}}
 
 Datadog の*リアルユーザーモニタリング (RUM)* は、個々のユーザーのリアルタイムのアクティビティとエクスペリエンスをエンドツーエンドで可視化します。RUM は Web およびモバイルアプリケーションを監視するための 4 種類のユースケースを解決します。
 

@@ -33,11 +33,11 @@ Selecting a service on the Service Catalog leads you to the detailed service pag
 
 Consult on this page:
 
-* [Service health](#service-health) (private beta)
+* [Service health](#service-health) (in Preview)
 * [Service monitor states](#service-monitor)
 * [Watchdog Insights](#watchdog-insights)
 * [Summary cards](#summary-cards)
-{{< site-region region="ap1,us3,us5" >}}
+{{< site-region region="ap1,us3,us5,eu,us" >}}
 * [Dependencies](#dependencies)
 {{< /site-region >}}
 * [Out-of-the-box graphs](#out-of-the-box-graphs)
@@ -47,8 +47,8 @@ Consult on this page:
 
 ## Service health
 
-{{< callout header="Opt in to the private beta!" url="https://www.datadoghq.com/private-beta/service-health/" >}}
-  Service health is in private beta. To request access, complete the form.
+{{< callout header="Opt in to the Preview!" url="https://www.datadoghq.com/product-preview/service-health/" >}}
+  Service health is in Preview. To request access, complete the form.
 {{< /callout >}}
 
 The **Service Health** banner and alert badges provides a real-time summary of service signals to help you understand if a service needs your attention.
@@ -139,7 +139,7 @@ Choose what to display in your resources list:
 
 {{< img src="tracing/visualization/service/resource_columns.png" alt="Resource columns" style="width:40%;">}}
 
-{{< site-region region="ap1,us3,us5" >}}
+{{< site-region region="ap1,us3,us5,eu,us" >}}
 ## Dependencies
 
 Visualize upstream and downstream dependencies that the service interacts with from the dependency map. The map is powered by [APM metrics][1] to surface accurate request counts, error rates, and latency numbers. The map automatically groups dependencies by operation name. For instance, if a service calls two downstream services using gRPC, these services are grouped together. The table on the left-hand side of the map shows requests and error rates over time, useful to identify failing dependencies.

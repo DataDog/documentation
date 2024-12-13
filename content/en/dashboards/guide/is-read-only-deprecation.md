@@ -1,5 +1,5 @@
 ---
-title: "Dashboards API: Migrate from is_read_only by November 30, 2024"
+title: "Dashboards API: Migrate from is_read_only by December 13, 2024"
 further_reading:
 - link: "/dashboards/guide/how-to-use-terraform-to-restrict-dashboard-edit/"
   tag: "Guide"
@@ -11,11 +11,11 @@ further_reading:
 
 ## Overview
 
-On **November 30, 2024**, Datadog is removing support for the `is_read_only` attribute in the Dashboards API's. For customers who manage Dashboards with the API directly, Datadog recommends that you transition to [`restricted_roles`](#migrate-to-restricted_roles) or [Restriction Policies](#restriction-policies). 
+On **December 13, 2024**, Datadog is removing support for the `is_read_only` attribute in the Dashboards API's. For customers who manage Dashboards with the API directly, Datadog recommends that you transition to [`restricted_roles`](#migrate-to-restricted_roles) or [Restriction Policies](#restriction-policies). 
 
-## Actions to take before November 30, 2024
+## Actions to take before December 13, 2024
 
-Before November 30, 2024, migrate off of `is_read_only` to `restricted_roles` or consider participating in the beta for Restriction Policies.
+Before December 13, 2024, migrate off of `is_read_only` to `restricted_roles` or consider participating in Preview for Restriction Policies.
 
 ### Migrate to `restricted_roles`
 

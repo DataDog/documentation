@@ -79,4 +79,5 @@ These tutorials walk you through setting up a sample multi-service application w
     {{< nextlink href="/tracing/guide/leveraging_diversity_sampling/" >}}Understand Datadog Trace Retention Policy{{< /nextlink >}}
     {{< nextlink href="/tracing/guide/agent_tracer_hostnames" >}}Understand the Difference Between the Agent Host and the Tracer Host{{< /nextlink >}}
     {{< nextlink href="/tracing/guide/setting_up_apm_with_kubernetes_service/" >}}Setting up APM with Kubernetes Service{{< /nextlink >}}
+    {{< nextlink href="/tracing/guide/aws_payload_tagging/" >}}Capture requests and responses from AWS services automatically{{< /nextlink >}}
 {{< /whatsnext >}}

@@ -92,6 +92,17 @@ components:
       required: false
       schema:
         $ref: '#/components/schemas/APIKeysSort'
+    AWSAccountConfigIDPathParameter:
+      description: 'Unique Datadog ID of the AWS Account Integration Config. To get
+        the config ID for an account, use the
+
+        [List all AWS integrations](https://docs.datadoghq.com/api/latest/aws-integration/#list-all-aws-integrations)
+        endpoint and query by AWS Account ID.'
+      in: path
+      name: aws_account_config_id
+      required: true
+      schema:
+        type: string
     ApplicationKeyFilterCreatedAtEndParameter:
       description: Only include application keys created on or before the specified
         date.
@@ -571,6 +582,13 @@ components:
         example: 10
         format: int64
         type: integer
+    ProductName:
+      description: Name of the product to be deleted, either `logs` or `rum`.
+      in: path
+      name: product
+      required: true
+      schema:
+        type: string
     ProjectIDPathParameter:
       description: Project UUID
       example: e555e290-ed65-49bd-ae18-8acbfcf18db7
@@ -586,9 +604,16 @@ components:
       required: true
       schema:
         type: string
+    RequestId:
+      description: ID of the deletion request.
+      in: path
+      name: id
+      required: true
+      schema:
+        type: string
     ResourceID:
       description: 'Identifier, formatted as `type:id`. Supported types: `connection`,
-        `dashboard`, `notebook`, `security-rule`, `slo`.'
+        `dashboard`, `notebook`, `reference-table`, `security-rule`, `slo`.'
       example: dashboard:abc-def-ghi
       in: path
       name: resource_id
@@ -1024,6 +1049,558 @@ components:
       type: string
       x-enum-varnames:
       - API_KEYS
+    AWSAccountConfigID:
+      description: 'Unique Datadog ID of the AWS Account Integration Config.
+
+        To get the config ID for an account, use the [List all AWS integrations](https://docs.datadoghq.com/api/latest/aws-integration/#list-all-aws-integrations)
+
+        endpoint and query by AWS Account ID.'
+      example: 00000000-abcd-0001-0000-000000000000
+      type: string
+    AWSAccountCreateRequest:
+      description: AWS Account Create Request body.
+      properties:
+        data:
+          $ref: '#/components/schemas/AWSAccountCreateRequestData'
+      required:
+      - data
+      type: object
+    AWSAccountCreateRequestAttributes:
+      description: The AWS Account Integration Config to be created.
+      properties:
+        account_tags:
+          $ref: '#/components/schemas/AWSAccountTags'
+        auth_config:
+          $ref: '#/components/schemas/AWSAuthConfig'
+        aws_account_id:
+          $ref: '#/components/schemas/AWSAccountID'
+        aws_partition:
+          $ref: '#/components/schemas/AWSAccountPartition'
+        aws_regions:
+          $ref: '#/components/schemas/AWSRegions'
+        logs_config:
+          $ref: '#/components/schemas/AWSLogsConfig'
+        metrics_config:
+          $ref: '#/components/schemas/AWSMetricsConfig'
+        resources_config:
+          $ref: '#/components/schemas/AWSResourcesConfig'
+        traces_config:
+          $ref: '#/components/schemas/AWSTracesConfig'
+      required:
+      - aws_account_id
+      - aws_partition
+      - auth_config
+      type: object
+    AWSAccountCreateRequestData:
+      description: AWS Account Create Request data.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/AWSAccountCreateRequestAttributes'
+        type:
+          $ref: '#/components/schemas/AWSAccountType'
+      required:
+      - attributes
+      - type
+      type: object
+    AWSAccountID:
+      description: AWS Account ID.
+      example: '123456789012'
+      type: string
+    AWSAccountPartition:
+      description: 'AWS partition your AWS account is scoped to. Defaults to `aws`.
+
+        See [Partitions](https://docs.aws.amazon.com/whitepapers/latest/aws-fault-isolation-boundaries/partitions.html)
+        in the AWS documentation for more information.'
+      enum:
+      - aws
+      - aws-cn
+      - aws-us-gov
+      example: aws
+      type: string
+      x-enum-varnames:
+      - AWS
+      - AWS_CN
+      - AWS_US_GOV
+    AWSAccountResponse:
+      description: AWS Account response body.
+      properties:
+        data:
+          $ref: '#/components/schemas/AWSAccountResponseData'
+      required:
+      - data
+      type: object
+    AWSAccountResponseAttributes:
+      description: AWS Account response attributes.
+      properties:
+        account_tags:
+          $ref: '#/components/schemas/AWSAccountTags'
+        auth_config:
+          $ref: '#/components/schemas/AWSAuthConfig'
+        aws_account_id:
+          $ref: '#/components/schemas/AWSAccountID'
+        aws_partition:
+          $ref: '#/components/schemas/AWSAccountPartition'
+        aws_regions:
+          $ref: '#/components/schemas/AWSRegions'
+        created_at:
+          description: Timestamp of when the account integration was created.
+          format: date-time
+          readOnly: true
+          type: string
+        logs_config:
+          $ref: '#/components/schemas/AWSLogsConfig'
+        metrics_config:
+          $ref: '#/components/schemas/AWSMetricsConfig'
+        modified_at:
+          description: Timestamp of when the account integration was updated.
+          format: date-time
+          readOnly: true
+          type: string
+        resources_config:
+          $ref: '#/components/schemas/AWSResourcesConfig'
+        traces_config:
+          $ref: '#/components/schemas/AWSTracesConfig'
+      required:
+      - aws_account_id
+      type: object
+    AWSAccountResponseData:
+      description: AWS Account response data.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/AWSAccountResponseAttributes'
+        id:
+          $ref: '#/components/schemas/AWSAccountConfigID'
+        type:
+          $ref: '#/components/schemas/AWSAccountType'
+      required:
+      - id
+      - type
+      type: object
+    AWSAccountTags:
+      description: Tags to apply to all hosts and metrics reporting for this account.
+        Defaults to `[]`.
+      items:
+        description: Tag in the form `key:value`.
+        example: env:prod
+        type: string
+      nullable: true
+      type: array
+    AWSAccountType:
+      default: account
+      description: AWS Account resource type.
+      enum:
+      - account
+      example: account
+      type: string
+      x-enum-varnames:
+      - ACCOUNT
+    AWSAccountUpdateRequest:
+      description: AWS Account Update Request body.
+      properties:
+        data:
+          $ref: '#/components/schemas/AWSAccountUpdateRequestData'
+      required:
+      - data
+      type: object
+    AWSAccountUpdateRequestAttributes:
+      description: The AWS Account Integration Config to be updated.
+      properties:
+        account_tags:
+          $ref: '#/components/schemas/AWSAccountTags'
+        auth_config:
+          $ref: '#/components/schemas/AWSAuthConfig'
+        aws_account_id:
+          $ref: '#/components/schemas/AWSAccountID'
+        aws_partition:
+          $ref: '#/components/schemas/AWSAccountPartition'
+        aws_regions:
+          $ref: '#/components/schemas/AWSRegions'
+        logs_config:
+          $ref: '#/components/schemas/AWSLogsConfig'
+        metrics_config:
+          $ref: '#/components/schemas/AWSMetricsConfig'
+        resources_config:
+          $ref: '#/components/schemas/AWSResourcesConfig'
+        traces_config:
+          $ref: '#/components/schemas/AWSTracesConfig'
+      required:
+      - aws_account_id
+      type: object
+    AWSAccountUpdateRequestData:
+      description: AWS Account Update Request data.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/AWSAccountUpdateRequestAttributes'
+        id:
+          $ref: '#/components/schemas/AWSAccountConfigID'
+        type:
+          $ref: '#/components/schemas/AWSAccountType'
+      required:
+      - attributes
+      - type
+      type: object
+    AWSAccountsResponse:
+      description: AWS Accounts response body.
+      properties:
+        data:
+          description: List of AWS Account Integration Configs.
+          items:
+            $ref: '#/components/schemas/AWSAccountResponseData'
+          type: array
+      required:
+      - data
+      type: object
+    AWSAuthConfig:
+      description: AWS Authentication config.
+      oneOf:
+      - $ref: '#/components/schemas/AWSAuthConfigKeys'
+      - $ref: '#/components/schemas/AWSAuthConfigRole'
+    AWSAuthConfigKeys:
+      description: AWS Authentication config to integrate your account using an access
+        key pair.
+      properties:
+        access_key_id:
+          description: AWS Access Key ID.
+          example: AKIAIOSFODNN7EXAMPLE
+          type: string
+        secret_access_key:
+          description: AWS Secret Access Key.
+          example: wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
+          minLength: 1
+          type: string
+          writeOnly: true
+      required:
+      - access_key_id
+      type: object
+    AWSAuthConfigRole:
+      description: AWS Authentication config to integrate your account using an IAM
+        role.
+      properties:
+        external_id:
+          description: AWS IAM External ID for associated role.
+          type: string
+        role_name:
+          description: AWS IAM Role name.
+          example: DatadogIntegrationRole
+          maxLength: 576
+          minLength: 1
+          type: string
+      required:
+      - role_name
+      type: object
+    AWSLambdaForwarderConfig:
+      description: 'Log Autosubscription configuration for Datadog Forwarder Lambda
+        functions. Automatically set up triggers for existing
+
+        and new logs for some services, ensuring no logs from new resources are missed
+        and saving time spent on manual configuration.'
+      properties:
+        lambdas:
+          description: List of Datadog Lambda Log Forwarder ARNs in your AWS account.
+            Defaults to `[]`.
+          items:
+            example: arn:aws:lambda:us-east-1:123456789012:function:DatadogLambdaLogForwarder
+            type: string
+          type: array
+        sources:
+          description: 'List of service IDs set to enable automatic log collection.
+            Discover the list of available services with the
+
+            [Get list of AWS log ready services](https://docs.datadoghq.com/api/latest/aws-logs-integration/#get-list-of-aws-log-ready-services)
+            endpoint.'
+          items:
+            example: s3
+            type: string
+          type: array
+      type: object
+    AWSLogsConfig:
+      description: AWS Logs Collection config.
+      properties:
+        lambda_forwarder:
+          $ref: '#/components/schemas/AWSLambdaForwarderConfig'
+      type: object
+    AWSLogsServicesResponse:
+      description: AWS Logs Services response body
+      properties:
+        data:
+          $ref: '#/components/schemas/AWSLogsServicesResponseData'
+      required:
+      - data
+      type: object
+    AWSLogsServicesResponseAttributes:
+      description: AWS Logs Services response body
+      properties:
+        logs_services:
+          description: List of AWS services that can send logs to Datadog
+          example:
+          - s3
+          items:
+            example: s3
+            type: string
+          type: array
+      required:
+      - logs_services
+      type: object
+    AWSLogsServicesResponseData:
+      description: AWS Logs Services response body
+      properties:
+        attributes:
+          $ref: '#/components/schemas/AWSLogsServicesResponseAttributes'
+        id:
+          default: logs_services
+          description: The `AWSLogsServicesResponseData` `id`.
+          example: logs_services
+          type: string
+        type:
+          $ref: '#/components/schemas/AWSLogsServicesResponseDataType'
+      required:
+      - id
+      - type
+      type: object
+    AWSLogsServicesResponseDataType:
+      default: logs_services
+      description: The `AWSLogsServicesResponseData` `type`.
+      enum:
+      - logs_services
+      example: logs_services
+      type: string
+      x-enum-varnames:
+      - LOGS_SERVICES
+    AWSMetricsConfig:
+      description: AWS Metrics Collection config.
+      properties:
+        automute_enabled:
+          description: Enable EC2 automute for AWS metrics. Defaults to `true`.
+          example: true
+          type: boolean
+        collect_cloudwatch_alarms:
+          description: Enable CloudWatch alarms collection. Defaults to `false`.
+          example: false
+          type: boolean
+        collect_custom_metrics:
+          description: Enable custom metrics collection. Defaults to `false`.
+          example: false
+          type: boolean
+        enabled:
+          description: Enable AWS metrics collection. Defaults to `true`.
+          example: true
+          type: boolean
+        namespace_filters:
+          $ref: '#/components/schemas/AWSNamespaceFilters'
+        tag_filters:
+          description: AWS Metrics collection tag filters list. Defaults to `[]`.
+          items:
+            $ref: '#/components/schemas/AWSNamespaceTagFilter'
+          type: array
+      type: object
+    AWSNamespaceFilters:
+      description: AWS Metrics namespace filters. Defaults to `exclude_only`.
+      oneOf:
+      - $ref: '#/components/schemas/AWSNamespaceFiltersExcludeOnly'
+      - $ref: '#/components/schemas/AWSNamespaceFiltersIncludeOnly'
+    AWSNamespaceFiltersExcludeOnly:
+      description: 'Exclude only these namespaces from metrics collection. Defaults
+        to `["AWS/SQS", "AWS/ElasticMapReduce"]`.
+
+        `AWS/SQS` and `AWS/ElasticMapReduce` are excluded by default to reduce your
+        AWS CloudWatch costs from `GetMetricData` API calls.'
+      properties:
+        exclude_only:
+          description: 'Exclude only these namespaces from metrics collection. Defaults
+            to `["AWS/SQS", "AWS/ElasticMapReduce"]`.
+
+            `AWS/SQS` and `AWS/ElasticMapReduce` are excluded by default to reduce
+            your AWS CloudWatch costs from `GetMetricData` API calls.'
+          example:
+          - AWS/SQS
+          - AWS/ElasticMapReduce
+          items:
+            example: AWS/SQS
+            type: string
+          type: array
+      required:
+      - exclude_only
+    AWSNamespaceFiltersIncludeOnly:
+      description: Include only these namespaces.
+      properties:
+        include_only:
+          description: Include only these namespaces.
+          example:
+          - AWS/EC2
+          items:
+            example: AWS/EC2
+            type: string
+          type: array
+      required:
+      - include_only
+    AWSNamespaceTagFilter:
+      description: 'AWS Metrics Collection tag filters list. Defaults to `[]`.
+
+        The array of custom AWS resource tags (in the form `key:value`) defines a
+        filter that Datadog uses when collecting metrics from a specified service.
+
+        Wildcards, such as `?` (match a single character) and `*` (match multiple
+        characters), and exclusion using `!` before the tag are supported.
+
+        For EC2, only hosts that match one of the defined tags will be imported into
+        Datadog. The rest will be ignored.
+
+        For example, `env:production,instance-type:c?.*,!region:us-east-1`.'
+      properties:
+        namespace:
+          description: The AWS service for which the tag filters defined in `tags`
+            will be applied.
+          example: AWS/EC2
+          type: string
+        tags:
+          description: The AWS resource tags to filter on for the service specified
+            by `namespace`.
+          items:
+            description: Tag in the form `key:value`.
+            example: datadog:true
+            type: string
+          nullable: true
+          type: array
+      type: object
+    AWSNamespacesResponse:
+      description: AWS Namespaces response body.
+      properties:
+        data:
+          $ref: '#/components/schemas/AWSNamespacesResponseData'
+      required:
+      - data
+      type: object
+    AWSNamespacesResponseAttributes:
+      description: AWS Namespaces response attributes.
+      properties:
+        namespaces:
+          description: AWS CloudWatch namespace.
+          example:
+          - AWS/ApiGateway
+          items:
+            example: AWS/ApiGateway
+            type: string
+          type: array
+      required:
+      - namespaces
+      type: object
+    AWSNamespacesResponseData:
+      description: AWS Namespaces response data.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/AWSNamespacesResponseAttributes'
+        id:
+          default: namespaces
+          description: The `AWSNamespacesResponseData` `id`.
+          example: namespaces
+          type: string
+        type:
+          $ref: '#/components/schemas/AWSNamespacesResponseDataType'
+      required:
+      - id
+      - type
+      type: object
+    AWSNamespacesResponseDataType:
+      default: namespaces
+      description: The `AWSNamespacesResponseData` `type`.
+      enum:
+      - namespaces
+      example: namespaces
+      type: string
+      x-enum-varnames:
+      - NAMESPACES
+    AWSNewExternalIDResponse:
+      description: AWS External ID response body.
+      properties:
+        data:
+          $ref: '#/components/schemas/AWSNewExternalIDResponseData'
+      required:
+      - data
+      type: object
+    AWSNewExternalIDResponseAttributes:
+      description: AWS External ID response body.
+      properties:
+        external_id:
+          description: AWS IAM External ID for associated role.
+          example: acb8f6b8a844443dbb726d07dcb1a870
+          type: string
+      required:
+      - external_id
+      type: object
+    AWSNewExternalIDResponseData:
+      description: AWS External ID response body.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/AWSNewExternalIDResponseAttributes'
+        id:
+          default: external_id
+          description: The `AWSNewExternalIDResponseData` `id`.
+          example: external_id
+          type: string
+        type:
+          $ref: '#/components/schemas/AWSNewExternalIDResponseDataType'
+      required:
+      - id
+      - type
+      type: object
+    AWSNewExternalIDResponseDataType:
+      default: external_id
+      description: The `AWSNewExternalIDResponseData` `type`.
+      enum:
+      - external_id
+      example: external_id
+      type: string
+      x-enum-varnames:
+      - EXTERNAL_ID
+    AWSRegions:
+      description: AWS Regions to collect data from. Defaults to `include_all`.
+      oneOf:
+      - $ref: '#/components/schemas/AWSRegionsIncludeAll'
+      - $ref: '#/components/schemas/AWSRegionsIncludeOnly'
+    AWSRegionsIncludeAll:
+      description: Include all regions. Defaults to `true`.
+      properties:
+        include_all:
+          description: Include all regions.
+          example: true
+          type: boolean
+      required:
+      - include_all
+    AWSRegionsIncludeOnly:
+      description: Include only these regions.
+      properties:
+        include_only:
+          description: Include only these regions.
+          example:
+          - us-east-1
+          items:
+            example: us-east-1
+            type: string
+          type: array
+      required:
+      - include_only
+    AWSResourcesConfig:
+      description: AWS Resources Collection config.
+      properties:
+        cloud_security_posture_management_collection:
+          description: Enable Cloud Security Management to scan AWS resources for
+            vulnerabilities, misconfigurations, identity risks, and compliance violations.
+            Defaults to `false`. Requires `extended_collection` to be set to `true`.
+          example: false
+          type: boolean
+        extended_collection:
+          description: Whether Datadog collects additional attributes and configuration
+            information about the resources in your AWS account. Defaults to `true`.
+            Required for `cloud_security_posture_management_collection`.
+          example: true
+          type: boolean
+      type: object
+    AWSTracesConfig:
+      description: AWS Traces Collection config.
+      properties:
+        xray_services:
+          $ref: '#/components/schemas/XRayServicesList'
+      type: object
     ActiveBillingDimensionsAttributes:
       description: List of active billing dimensions.
       properties:
@@ -2805,6 +3382,183 @@ components:
         tags:
           $ref: '#/components/schemas/TagsEventAttribute'
       type: object
+    CIAppPipelineEventFinishedPipeline:
+      description: Details of a finished pipeline.
+      properties:
+        end:
+          description: Time when the pipeline run finished. It cannot be older than
+            18 hours in the past from the current time. The time format must be RFC3339.
+          example: '2023-05-31T15:30:00Z'
+          format: date-time
+          type: string
+        error:
+          $ref: '#/components/schemas/CIAppCIError'
+        git:
+          $ref: '#/components/schemas/CIAppGitInfo'
+        is_manual:
+          description: Whether or not the pipeline was triggered manually by the user.
+          example: false
+          nullable: true
+          type: boolean
+        is_resumed:
+          description: Whether or not the pipeline was resumed after being blocked.
+          example: false
+          nullable: true
+          type: boolean
+        level:
+          $ref: '#/components/schemas/CIAppPipelineEventPipelineLevel'
+        metrics:
+          $ref: '#/components/schemas/CIAppPipelineEventMetrics'
+        name:
+          description: Name of the pipeline. All pipeline runs for the builds should
+            have the same name.
+          example: Deploy to AWS
+          type: string
+        node:
+          $ref: '#/components/schemas/CIAppHostInfo'
+        parameters:
+          $ref: '#/components/schemas/CIAppPipelineEventParameters'
+        parent_pipeline:
+          $ref: '#/components/schemas/CIAppPipelineEventParentPipeline'
+        partial_retry:
+          description: 'Whether or not the pipeline was a partial retry of a previous
+            attempt. A partial retry is one
+
+            which only runs a subset of the original jobs.'
+          example: false
+          type: boolean
+        pipeline_id:
+          description: 'Any ID used in the provider to identify the pipeline run even
+            if it is not unique across retries.
+
+            If the `pipeline_id` is unique, then both `unique_id` and `pipeline_id`
+            can be set to the same value.'
+          example: '#023'
+          type: string
+        previous_attempt:
+          $ref: '#/components/schemas/CIAppPipelineEventPreviousPipeline'
+        queue_time:
+          description: The queue time in milliseconds, if applicable.
+          example: 1004
+          format: int64
+          minimum: 0
+          nullable: true
+          type: integer
+        start:
+          description: Time when the pipeline run started (it should not include any
+            queue time). The time format must be RFC3339.
+          example: '2023-05-31T15:30:00Z'
+          format: date-time
+          type: string
+        status:
+          $ref: '#/components/schemas/CIAppPipelineEventPipelineStatus'
+        tags:
+          $ref: '#/components/schemas/CIAppPipelineEventTags'
+        unique_id:
+          description: 'UUID of the pipeline run. The ID has to be unique across retries
+            and pipelines,
+
+            including partial retries.'
+          example: 3eacb6f3-ff04-4e10-8a9c-46e6d054024a
+          type: string
+        url:
+          description: The URL to look at the pipeline in the CI provider UI.
+          example: https://my-ci-provider.example/pipelines/my-pipeline/run/1
+          type: string
+      required:
+      - level
+      - unique_id
+      - name
+      - url
+      - start
+      - end
+      - status
+      - partial_retry
+      type: object
+    CIAppPipelineEventInProgressPipeline:
+      description: Details of a running pipeline.
+      properties:
+        error:
+          $ref: '#/components/schemas/CIAppCIError'
+        git:
+          $ref: '#/components/schemas/CIAppGitInfo'
+        is_manual:
+          description: Whether or not the pipeline was triggered manually by the user.
+          example: false
+          nullable: true
+          type: boolean
+        is_resumed:
+          description: Whether or not the pipeline was resumed after being blocked.
+          example: false
+          nullable: true
+          type: boolean
+        level:
+          $ref: '#/components/schemas/CIAppPipelineEventPipelineLevel'
+        metrics:
+          $ref: '#/components/schemas/CIAppPipelineEventMetrics'
+        name:
+          description: Name of the pipeline. All pipeline runs for the builds should
+            have the same name.
+          example: Deploy to AWS
+          type: string
+        node:
+          $ref: '#/components/schemas/CIAppHostInfo'
+        parameters:
+          $ref: '#/components/schemas/CIAppPipelineEventParameters'
+        parent_pipeline:
+          $ref: '#/components/schemas/CIAppPipelineEventParentPipeline'
+        partial_retry:
+          description: 'Whether or not the pipeline was a partial retry of a previous
+            attempt. A partial retry is one
+
+            which only runs a subset of the original jobs.'
+          example: false
+          type: boolean
+        pipeline_id:
+          description: 'Any ID used in the provider to identify the pipeline run even
+            if it is not unique across retries.
+
+            If the `pipeline_id` is unique, then both `unique_id` and `pipeline_id`
+            can be set to the same value.'
+          example: '#023'
+          type: string
+        previous_attempt:
+          $ref: '#/components/schemas/CIAppPipelineEventPreviousPipeline'
+        queue_time:
+          description: The queue time in milliseconds, if applicable.
+          example: 1004
+          format: int64
+          minimum: 0
+          nullable: true
+          type: integer
+        start:
+          description: Time when the pipeline run started (it should not include any
+            queue time). The time format must be RFC3339.
+          example: '2023-05-31T15:30:00Z'
+          format: date-time
+          type: string
+        status:
+          $ref: '#/components/schemas/CIAppPipelineEventPipelineInProgressStatus'
+        tags:
+          $ref: '#/components/schemas/CIAppPipelineEventTags'
+        unique_id:
+          description: UUID of the pipeline run. The ID has to be the same as the
+            finished pipeline.
+          example: 3eacb6f3-ff04-4e10-8a9c-46e6d054024a
+          type: string
+        url:
+          description: The URL to look at the pipeline in the CI provider UI.
+          example: https://my-ci-provider.example/pipelines/my-pipeline/run/1
+          type: string
+      required:
+      - level
+      - unique_id
+      - name
+      - url
+      - start
+      - status
+      - partial_retry
+      type: object
     CIAppPipelineEventJob:
       description: Details of a CI job.
       properties:
@@ -2953,97 +3707,17 @@ components:
       type: object
     CIAppPipelineEventPipeline:
       description: Details of the top level pipeline, build, or workflow of your CI.
-      properties:
-        end:
-          description: Time when the pipeline run finished. It cannot be older than
-            18 hours in the past from the current time. The time format must be RFC3339.
-          example: '2023-05-31T15:30:00Z'
-          format: date-time
-          type: string
-        error:
-          $ref: '#/components/schemas/CIAppCIError'
-        git:
-          $ref: '#/components/schemas/CIAppGitInfo'
-        is_manual:
-          description: Whether or not the pipeline was triggered manually by the user.
-          example: false
-          nullable: true
-          type: boolean
-        is_resumed:
-          description: Whether or not the pipeline was resumed after being blocked.
-          example: false
-          nullable: true
-          type: boolean
-        level:
-          $ref: '#/components/schemas/CIAppPipelineEventPipelineLevel'
-        metrics:
-          $ref: '#/components/schemas/CIAppPipelineEventMetrics'
-        name:
-          description: Name of the pipeline. All pipeline runs for the builds should
-            have the same name.
-          example: Deploy to AWS
-          type: string
-        node:
-          $ref: '#/components/schemas/CIAppHostInfo'
-        parameters:
-          $ref: '#/components/schemas/CIAppPipelineEventParameters'
-        parent_pipeline:
-          $ref: '#/components/schemas/CIAppPipelineEventParentPipeline'
-        partial_retry:
-          description: 'Whether or not the pipeline was a partial retry of a previous
-            attempt. A partial retry is one
-
-            which only runs a subset of the original jobs.'
-          example: false
-          type: boolean
-        pipeline_id:
-          description: 'Any ID used in the provider to identify the pipeline run even
-            if it is not unique across retries.
-
-            If the `pipeline_id` is unique, then both `unique_id` and `pipeline_id`
-            can be set to the same value.'
-          example: '#023'
-          type: string
-        previous_attempt:
-          $ref: '#/components/schemas/CIAppPipelineEventPreviousPipeline'
-        queue_time:
-          description: The queue time in milliseconds, if applicable.
-          example: 1004
-          format: int64
-          minimum: 0
-          nullable: true
-          type: integer
-        start:
-          description: Time when the pipeline run started (it should not include any
-            queue time). The time format must be RFC3339.
-          example: '2023-05-31T15:30:00Z'
-          format: date-time
-          type: string
-        status:
-          $ref: '#/components/schemas/CIAppPipelineEventPipelineStatus'
-        tags:
-          $ref: '#/components/schemas/CIAppPipelineEventTags'
-        unique_id:
-          description: 'UUID of the pipeline run. The ID has to be unique across retries
-            and pipelines,
-
-            including partial retries.'
-          example: 3eacb6f3-ff04-4e10-8a9c-46e6d054024a
-          type: string
-        url:
-          description: The URL to look at the pipeline in the CI provider UI.
-          example: https://my-ci-provider.example/pipelines/my-pipeline/run/1
-          type: string
-      required:
-      - level
-      - unique_id
-      - name
-      - url
-      - start
-      - end
-      - status
-      - partial_retry
-      type: object
+      oneOf:
+      - $ref: '#/components/schemas/CIAppPipelineEventFinishedPipeline'
+      - $ref: '#/components/schemas/CIAppPipelineEventInProgressPipeline'
+    CIAppPipelineEventPipelineInProgressStatus:
+      description: The in progress status of the pipeline.
+      enum:
+      - running
+      example: running
+      type: string
+      x-enum-varnames:
+      - RUNNING
     CIAppPipelineEventPipelineLevel:
       default: pipeline
       description: Used to distinguish between pipelines, stages, jobs, and steps.
@@ -3757,6 +4431,14 @@ components:
       - name
       - expression
       type: object
+    CancelDataDeletionResponseBody:
+      description: The response from the cancel data deletion request endpoint.
+      properties:
+        data:
+          $ref: '#/components/schemas/DataDeletionResponseItem'
+        meta:
+          $ref: '#/components/schemas/DataDeletionResponseMeta'
+      type: object
     Case:
       description: A case
       properties:
@@ -4096,6 +4778,127 @@ components:
           format: int64
           type: integer
       type: object
+    ChangeEventCustomAttributes:
+      description: Object representing custom change event attributes.
+      properties:
+        author:
+          $ref: '#/components/schemas/ChangeEventCustomAttributesAuthor'
+        change_metadata:
+          additionalProperties: {}
+          description: Free form object with information related to the `change` event.
+            Can be arbitrarily nested and contain any valid JSON.
+          example:
+            dd:
+              team: datadog_team
+              user_email: datadog@datadog.com
+              user_id: datadog_user_id
+              user_name: datadog_username
+            resource_link: datadog.com/feature/fallback_payments_test
+          type: object
+        changed_resource:
+          $ref: '#/components/schemas/ChangeEventCustomAttributesChangedResource'
+        impacted_resources:
+          description: 'A list of resources impacted by this change. It is recommended
+            to provide an impacted resource to display
+
+            the change event at the right location. Only resources of type `service`
+            are supported.'
+          example:
+          - name: payments_api
+            type: service
+          items:
+            $ref: '#/components/schemas/ChangeEventCustomAttributesImpactedResourcesItems'
+          type: array
+        new_value:
+          additionalProperties: {}
+          description: Free form object to track new value of the changed resource.
+          example:
+            enabled: true
+            percentage: 50%
+            rule:
+              datacenter: devcycle.us1.prod
+          type: object
+        prev_value:
+          additionalProperties: {}
+          description: Free form object to track previous value of the changed resource.
+          example:
+            enabled: true
+            percentage: 10%
+            rule:
+              datacenter: devcycle.us1.prod
+          type: object
+      required:
+      - changed_resource
+      type: object
+    ChangeEventCustomAttributesAuthor:
+      description: Object representing the entity which made the change. Optional
+        field but if provided should include `type` and `name`.
+      properties:
+        name:
+          description: Author's name. Limited to 128 characters.
+          example: datadog@datadog.com
+          maxLength: 128
+          type: string
+        type:
+          $ref: '#/components/schemas/ChangeEventCustomAttributesAuthorType'
+      required:
+      - name
+      - type
+      type: object
+    ChangeEventCustomAttributesAuthorType:
+      description: Author's type.
+      enum:
+      - user
+      - system
+      example: user
+      type: string
+      x-enum-varnames:
+      - USER
+      - SYSTEM
+    ChangeEventCustomAttributesChangedResource:
+      description: Object representing a uniquely identified resource. Only the resource
+        type `feature_flag` is supported.
+      properties:
+        name:
+          description: Resource's name.
+          example: fallback_payments_test
+          type: string
+        type:
+          $ref: '#/components/schemas/ChangeEventCustomAttributesChangedResourceType'
+      required:
+      - type
+      - name
+      type: object
+    ChangeEventCustomAttributesChangedResourceType:
+      description: Resource's type.
+      enum:
+      - feature_flag
+      example: feature_flag
+      type: string
+      x-enum-varnames:
+      - FEATURE_FLAG
+    ChangeEventCustomAttributesImpactedResourcesItems:
+      description: Object representing a uniquely identified resource. Only the resource
+        type `service` is supported.
+      properties:
+        name:
+          description: Resource's name.
+          example: payments_api
+          type: string
+        type:
+          $ref: '#/components/schemas/ChangeEventCustomAttributesImpactedResourcesItemsType'
+      required:
+      - type
+      - name
+      type: object
+    ChangeEventCustomAttributesImpactedResourcesItemsType:
+      description: Resource's type.
+      enum:
+      - service
+      example: service
+      type: string
+      x-enum-varnames:
+      - SERVICE
     ChargebackBreakdown:
       description: Charges breakdown.
       properties:
@@ -4346,42 +5149,6 @@ components:
       type: string
       x-enum-varnames:
       - CLOUD_CONFIGURATION
-    CloudCostActivity:
-      description: Cloud Cost Activity.
-      properties:
-        attributes:
-          $ref: '#/components/schemas/CloudCostActivityAttributes'
-        type:
-          $ref: '#/components/schemas/CloudCostActivityType'
-      required:
-      - attributes
-      - type
-      type: object
-    CloudCostActivityAttributes:
-      description: Attributes for Cloud Cost activity.
-      properties:
-        is_enabled:
-          description: Whether or not the cloud account is enabled.
-          example: true
-          type: boolean
-      required:
-      - is_enabled
-      type: object
-    CloudCostActivityResponse:
-      description: Response for Cloud Cost activity.
-      properties:
-        data:
-          $ref: '#/components/schemas/CloudCostActivity'
-      type: object
-    CloudCostActivityType:
-      default: cloud_cost_activity
-      description: Type of Cloud Cost Activity.
-      enum:
-      - cloud_cost_activity
-      example: cloud_cost_activity
-      type: string
-      x-enum-varnames:
-      - CLOUD_COST_ACTIVITY
     CloudWorkloadSecurityAgentRuleAction:
       description: The action the rule can perform if triggered.
       properties:
@@ -5827,6 +6594,66 @@ components:
       type: string
       x-enum-varnames:
       - COST_BY_ORG
+    CreateDataDeletionRequestBody:
+      description: Object needed to create a data deletion request.
+      properties:
+        data:
+          $ref: '#/components/schemas/CreateDataDeletionRequestBodyData'
+      required:
+      - data
+      type: object
+    CreateDataDeletionRequestBodyAttributes:
+      description: Attributes for creating a data deletion request.
+      properties:
+        from:
+          description: Start of requested time window, milliseconds since Unix epoch.
+          example: 1672527600000
+          format: int64
+          type: integer
+        indexes:
+          description: List of indexes for the search. If not provided, the search
+            is performed in all indexes.
+          example:
+          - test-index
+          - test-index-2
+          items:
+            description: Individual index.
+            type: string
+          type: array
+        query:
+          additionalProperties:
+            type: string
+          description: Query for creating a data deletion request.
+          example:
+            host: abc
+            service: xyz
+          type: object
+        to:
+          description: End of requested time window, milliseconds since Unix epoch.
+          example: 1704063600000
+          format: int64
+          type: integer
+      required:
+      - query
+      - from
+      - to
+      type: object
+    CreateDataDeletionRequestBodyData:
+      description: Data needed to create a data deletion request.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/CreateDataDeletionRequestBodyAttributes'
+      required:
+      - attributes
+      type: object
+    CreateDataDeletionResponseBody:
+      description: The response from the create data deletion request endpoint.
+      properties:
+        data:
+          $ref: '#/components/schemas/DataDeletionResponseItem'
+        meta:
+          $ref: '#/components/schemas/DataDeletionResponseMeta'
+      type: object
     CreateOpenAPIResponse:
       description: Response for `CreateOpenAPI` operation.
       properties:
@@ -7118,6 +7945,142 @@ components:
       - INTEGRATION_SCREENBOARD
       - INTEGRATION_TIMEBOARD
       - HOST_TIMEBOARD
+    DataDeletionResponseItem:
+      description: The created data deletion request information.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/DataDeletionResponseItemAttributes'
+        id:
+          description: The ID of the created data deletion request.
+          example: '1'
+          type: string
+        type:
+          description: The type of the request created.
+          example: deletion_request
+          type: string
+      required:
+      - id
+      - type
+      - attributes
+      type: object
+    DataDeletionResponseItemAttributes:
+      description: Deletion attribute for data deletion response.
+      properties:
+        created_at:
+          description: Creation time of the deletion request.
+          example: '2024-01-01T00:00:00.000000Z'
+          type: string
+        created_by:
+          description: User who created the deletion request.
+          example: test.user@datadoghq.com
+          type: string
+        from_time:
+          description: Start of requested time window, milliseconds since Unix epoch.
+          example: 1672527600000
+          format: int64
+          type: integer
+        indexes:
+          description: List of indexes for the search. If not provided, the search
+            is performed in all indexes.
+          example:
+          - test-index
+          - test-index-2
+          items:
+            description: Individual index.
+            type: string
+          type: array
+        is_created:
+          description: Whether the deletion request is fully created or not. It can
+            take several minutes to fully create a deletion request depending on the
+            target query and timeframe.
+          example: true
+          type: boolean
+        org_id:
+          description: Organization ID.
+          example: 321813
+          format: int64
+          type: integer
+        product:
+          description: Product name.
+          example: logs
+          type: string
+        query:
+          description: Query for creating a data deletion request.
+          example: service:xyz host:abc
+          type: string
+        starting_at:
+          description: Starting time of the process to delete the requested data.
+          example: '2024-01-01T02:00:00.000000Z'
+          type: string
+        status:
+          description: Status of the deletion request.
+          example: pending
+          type: string
+        to_time:
+          description: End of requested time window, milliseconds since Unix epoch.
+          example: 1704063600000
+          format: int64
+          type: integer
+        total_unrestricted:
+          description: Total number of elements to be deleted. Only the data accessible
+            to the current user that matches the query and timeframe provided will
+            be deleted.
+          example: 100
+          format: int64
+          type: integer
+        updated_at:
+          description: Update time of the deletion request.
+          example: '2024-01-01T00:00:00.000000Z'
+          type: string
+      required:
+      - created_at
+      - created_by
+      - from_time
+      - is_created
+      - org_id
+      - product
+      - query
+      - starting_at
+      - status
+      - to_time
+      - total_unrestricted
+      - updated_at
+      type: object
+    DataDeletionResponseMeta:
+      description: The metadata of the data deletion response.
+      properties:
+        count_product:
+          additionalProperties:
+            format: int64
+            type: integer
+          description: The total deletion requests created by product.
+          example:
+            logs: 8
+            rum: 7
+          type: object
+        count_status:
+          additionalProperties:
+            format: int64
+            type: integer
+          description: The total deletion requests created by status.
+          example:
+            completed: 10
+            pending: 5
+          type: object
+        next_page:
+          description: The next page when searching deletion requests created in the
+            current organization.
+          example: cGFnZTI=
+          type: string
+        product:
+          description: The product of the deletion request.
+          example: logs
+          type: string
+        request_status:
+          description: The status of the executed request.
+          example: canceled
+          type: string
+      type: object
     DataScalarColumn:
       description: A column containing the numerical results for a formula or query.
       properties:
@@ -8899,6 +9862,125 @@ components:
           example: Oh boy!
           type: string
       type: object
+    EventCategory:
+      description: Event category to identify the type of event. Only the value `change`
+        is supported. Support for other categories are coming. please reach out to
+        datadog support if you're interested.
+      enum:
+      - change
+      example: change
+      type: string
+      x-enum-varnames:
+      - CHANGE
+    EventCreateRequest:
+      description: Object representing an event creation request.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/EventPayload'
+        type:
+          $ref: '#/components/schemas/EventCreateRequestType'
+      type: object
+    EventCreateRequestPayload:
+      description: Payload for creating an event.
+      properties:
+        data:
+          $ref: '#/components/schemas/EventCreateRequest'
+      type: object
+    EventCreateRequestType:
+      description: Entity type.
+      enum:
+      - event
+      example: event
+      type: string
+      x-enum-varnames:
+      - EVENT
+    EventCreateResponse:
+      description: Object containing an event response.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/EventCreateResponseAttributes'
+        type:
+          description: Event type
+          example: event
+          type: string
+      type: object
+    EventCreateResponseAttributes:
+      description: JSON object containing all events attributes and their associated
+        values.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/EventCreateResponseAttributesAttributes'
+      type: object
+    EventCreateResponseAttributesAttributes:
+      description: JSON object of attributes from your events.
+      properties:
+        evt:
+          $ref: '#/components/schemas/EventCreateResponseAttributesAttributesEvt'
+      type: object
+    EventCreateResponseAttributesAttributesEvt:
+      description: JSON object of event system attributes.
+      properties:
+        id:
+          description: Event id
+          type: string
+      type: object
+    EventCreateResponsePayload:
+      description: Response containing information about created event.
+      properties:
+        data:
+          $ref: '#/components/schemas/EventCreateResponse'
+      type: object
+    EventPayload:
+      description: Event attributes.
+      properties:
+        aggregation_key:
+          description: An arbitrary string to use for aggregation when correlating
+            events. Limited to 100 characters.
+          maxLength: 100
+          type: string
+        attributes:
+          $ref: '#/components/schemas/EventPayloadAttributes'
+        category:
+          $ref: '#/components/schemas/EventCategory'
+        message:
+          description: The body of the event. Limited to 4000 characters.
+          example: payment_processed feature flag has been enabled
+          maxLength: 4000
+          type: string
+        tags:
+          description: 'A list of tags to apply to the event.
+
+            Refer to [Tags docs](https://docs.datadoghq.com/getting_started/tagging/).'
+          example:
+          - environment:test
+          items:
+            description: A tag.
+            type: string
+          type: array
+        timestamp:
+          description: 'Timestamp when the event occurred. Must follow [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html)
+            format.
+
+            For example `"2017-01-15T01:30:15.010000Z"`.
+
+            Defaults to the timestamp of receipt. Limited to values no older than
+            18 hours.'
+          type: string
+        title:
+          description: The event title. Limited to 500 characters.
+          example: payment_processed feature flag updated
+          maxLength: 500
+          type: string
+      required:
+      - title
+      - category
+      - attributes
+      type: object
+    EventPayloadAttributes:
+      description: JSON object for custom attributes. Schema are different per each
+        event category.
+      oneOf:
+      - $ref: '#/components/schemas/ChangeEventCustomAttributes'
     EventPriority:
       description: The priority of the event's monitor. For example, `normal` or `low`.
       enum:
@@ -10017,6 +11099,17 @@ components:
       type: string
       x-enum-varnames:
       - GCP_SERVICE_ACCOUNT
+    GetDataDeletionsResponseBody:
+      description: The response from the get data deletion requests endpoint.
+      properties:
+        data:
+          description: The list of data deletion requests that matches the query.
+          items:
+            $ref: '#/components/schemas/DataDeletionResponseItem'
+          type: array
+        meta:
+          $ref: '#/components/schemas/DataDeletionResponseMeta'
+      type: object
     GetDeviceAttributes:
       description: The device attributes
       properties:
@@ -15061,6 +16154,36 @@ components:
       - COUNT
       - RATE
       - GAUGE
+    MetricMetaPage:
+      description: Paging attributes. Only present if pagination query parameters
+        were provided.
+      properties:
+        cursor:
+          description: The cursor used to get the current results, if any.
+          nullable: true
+          type: string
+        limit:
+          description: Number of results returned
+          format: int32
+          maximum: 20000
+          minimum: 0
+          type: integer
+        next_cursor:
+          description: The cursor used to get the next results, if any.
+          nullable: true
+          type: string
+        type:
+          $ref: '#/components/schemas/MetricMetaPageType'
+      type: object
+    MetricMetaPageType:
+      default: cursor_limit
+      description: Type of metric pagination.
+      enum:
+      - cursor_limit
+      example: cursor_limit
+      type: string
+      x-enum-varnames:
+      - CURSOR_LIMIT
     MetricMetadata:
       description: Metadata for the metric.
       properties:
@@ -15142,6 +16265,12 @@ components:
           format: int32
           maximum: 1000
           type: integer
+      type: object
+    MetricPaginationMeta:
+      description: Response metadata object.
+      properties:
+        pagination:
+          $ref: '#/components/schemas/MetricMetaPage'
       type: object
     MetricPayload:
       description: The metrics' payload.
@@ -15619,6 +16748,10 @@ components:
           items:
             $ref: '#/components/schemas/MetricsAndMetricTagConfigurations'
           type: array
+        links:
+          $ref: '#/components/schemas/MetricsListResponseLinks'
+        meta:
+          $ref: '#/components/schemas/MetricPaginationMeta'
       readOnly: true
       type: object
     MetricsDataSource:
@@ -15632,6 +16765,29 @@ components:
       x-enum-varnames:
       - METRICS
       - CLOUD_COST
+    MetricsListResponseLinks:
+      description: Pagination links. Only present if pagination query parameters were
+        provided.
+      properties:
+        first:
+          description: Link to the first page.
+          type: string
+        last:
+          description: Link to the last page.
+          nullable: true
+          type: string
+        next:
+          description: Link to the next page.
+          nullable: true
+          type: string
+        prev:
+          description: Link to previous page.
+          nullable: true
+          type: string
+        self:
+          description: Link to current page.
+          type: string
+      type: object
     MetricsScalarQuery:
       description: An individual scalar metrics query.
       properties:
@@ -20375,11 +21531,13 @@ components:
     SLOReportInterval:
       description: The frequency at which report data is to be generated.
       enum:
+      - daily
       - weekly
       - monthly
       example: weekly
       type: string
       x-enum-varnames:
+      - DAILY
       - WEEKLY
       - MONTHLY
     SLOReportPostResponse:
@@ -22326,6 +23484,10 @@ components:
           $ref: '#/components/schemas/SecurityMonitoringRuleTypeRead'
         updateAuthorId:
           description: User ID of the user who updated the rule.
+          format: int64
+          type: integer
+        updatedAt:
+          description: The date the rule was last updated, in milliseconds.
           format: int64
           type: integer
         version:
@@ -27012,6 +28174,34 @@ components:
           description: The id of the instance.
           type: string
       type: object
+    XRayServicesIncludeAll:
+      description: Include all services.
+      properties:
+        include_all:
+          description: Include all services.
+          example: false
+          type: boolean
+      required:
+      - include_all
+    XRayServicesIncludeOnly:
+      description: Include only these services. Defaults to `[]`.
+      nullable: true
+      properties:
+        include_only:
+          description: Include only these services.
+          example:
+          - AWS/AppSync
+          items:
+            example: AWS/AppSync
+            type: string
+          type: array
+      required:
+      - include_only
+    XRayServicesList:
+      description: AWS X-Ray services to collect traces from. Defaults to `include_only`.
+      oneOf:
+      - $ref: '#/components/schemas/XRayServicesIncludeAll'
+      - $ref: '#/components/schemas/XRayServicesIncludeOnly'
   securitySchemes:
     AuthZ:
       description: This API uses OAuth 2 with the implicit grant flow.
@@ -27049,7 +28239,6 @@ components:
             incident_notification_settings_write: Configure Incidents Notification
               settings.
             incident_read: View incidents in Datadog.
-            incident_settings_read: View Incident Settings.
             incident_settings_write: Configure Incident Settings.
             incident_write: Create, view, and manage incidents in Datadog.
             metrics_read: View custom metrics.
@@ -27065,7 +28254,8 @@ components:
               Remote Configuration for the entire organization.
             security_monitoring_filters_read: Read Security Filters.
             security_monitoring_filters_write: Create, edit, and delete Security Filters.
-            security_monitoring_findings_read: View CSPM Findings.
+            security_monitoring_findings_read: View a list of findings that include
+              both misconfigurations and identity risks.
             security_monitoring_rules_read: Read Detection Rules.
             security_monitoring_rules_write: Create and edit Detection Rules.
             security_monitoring_signals_read: View Security Signals.
@@ -27093,6 +28283,7 @@ components:
               Access Manage permission.
             teams_read: Read Teams data. A User with this permission can view Team
               names, metadata, and which Users are on each Team.
+            test_visibility_read: View Test Visibility.
             timeseries_query: Query Timeseries data.
             usage_read: View your organization's usage and usage attribution.
             user_access_invite: Invite other users to your organization.
@@ -27116,6 +28307,12 @@ components:
       name: DD-APPLICATION-KEY
       type: apiKey
       x-env-name: DD_APP_KEY
+    bearerAuth:
+      in: header
+      name: Authorization
+      scheme: bearer
+      type: http
+      x-env-name: DD_BEARER_TOKEN
 info:
   contact:
     email: support@datadoghq.com
@@ -27412,6 +28609,10 @@ paths:
       tags:
       - API Management
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - apm_api_catalog_read
       x-undo:
         type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -27460,6 +28661,10 @@ paths:
       tags:
       - API Management
       x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - apm_api_catalog_write
       x-undo:
         type: idempotent
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -27514,6 +28719,10 @@ paths:
       tags:
       - API Management
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - apm_api_catalog_read
       x-undo:
         type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -27577,6 +28786,10 @@ paths:
       tags:
       - API Management
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - apm_api_catalog_write
       x-undo:
         type: idempotent
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -27638,6 +28851,10 @@ paths:
             value: '"openapi-spec.yaml"'
           step: there is a valid "managed_api" in the system
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - apm_api_catalog_write
       x-undo:
         operationId: DeleteOpenAPI
         parameters:
@@ -30338,41 +31555,6 @@ paths:
       x-menu-order: 12
       x-undo:
         type: safe
-  /api/v2/cost/enabled:
-    get:
-      deprecated: true
-      description: Get the Cloud Cost Management activity.
-      operationId: GetCloudCostActivity
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CloudCostActivityResponse'
-          description: OK
-        '403':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/APIErrorResponse'
-          description: Forbidden
-        '429':
-          $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ:
-        - cloud_cost_management_read
-      summary: Cloud Cost Enabled
-      tags:
-      - Cloud Cost Management
-      x-menu-order: 10
-      x-permission:
-        operator: OR
-        permissions:
-        - cloud_cost_management_read
-      x-undo:
-        type: safe
   /api/v2/cost_by_tag/active_billing_dimensions:
     get:
       description: Get active billing dimensions for cost attribution. Cost data for
@@ -30994,6 +32176,196 @@ paths:
       x-menu-order: 3
       x-undo:
         type: safe
+  /api/v2/deletion/data/{product}:
+    post:
+      description: Creates a data deletion request by providing a query and a timeframe
+        targeting the proper data.
+      operationId: CreateDataDeletionRequest
+      parameters:
+      - $ref: '#/components/parameters/ProductName'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateDataDeletionRequestBody'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateDataDeletionResponseBody'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '412':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Precondition failed error
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Internal server error
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: Creates a data deletion request
+      tags:
+      - Data Deletion
+      x-given:
+        deletion_request:
+          parameters:
+          - name: product
+            value: '"logs"'
+          - name: body
+            value: "{\n  \"data\": {\n    \"attributes\": {\n      \"from\": 1672527600000,\n
+              \     \"to\": 1704063600000,\n      \"indexes\": [\"test-index\", \"test-index-2\"],\n
+              \     \"query\": {\"host\": \"abc\", \"service\": \"xyz\"}\n    }\n
+              \ }\n}"
+          step: there is a valid "deletion_request" in the system
+      x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - rum_delete_data
+        - logs_delete_data
+      x-undo:
+        operationId: CancelDataDeletionRequest
+        parameters:
+        - name: id
+          source: data.id
+        type: unsafe
+  /api/v2/deletion/requests:
+    get:
+      description: Gets a list of data deletion requests based on several filter parameters.
+      operationId: GetDataDeletionRequests
+      parameters:
+      - description: The next page of the previous search. If the next_page parameter
+          is included, the rest of the query elements are ignored.
+        example: cGFnZTI=
+        in: query
+        name: next_page
+        required: false
+        schema:
+          type: string
+      - description: Retrieve only the requests related to the given product.
+        example: logs
+        in: query
+        name: product
+        required: false
+        schema:
+          type: string
+      - description: Retrieve only the requests that matches the given query.
+        example: service:xyz host:abc
+        in: query
+        name: query
+        required: false
+        schema:
+          type: string
+      - description: Retrieve only the requests with the given status.
+        example: pending
+        in: query
+        name: status
+        required: false
+        schema:
+          type: string
+      - description: Sets the page size of the search.
+        example: '50'
+        in: query
+        name: page_size
+        required: false
+        schema:
+          default: 50
+          format: int64
+          maximum: 50
+          minimum: 1
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetDataDeletionsResponseBody'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Internal server error
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: Gets a list of data deletion requests
+      tags:
+      - Data Deletion
+      x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - rum_delete_data
+        - logs_delete_data
+      x-undo:
+        type: safe
+  /api/v2/deletion/requests/{id}/cancel:
+    put:
+      description: Cancels a data deletion request by providing its ID.
+      operationId: CancelDataDeletionRequest
+      parameters:
+      - $ref: '#/components/parameters/RequestId'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CancelDataDeletionResponseBody'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '412':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Precondition failed error
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Internal server error
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: Cancels a data deletion request
+      tags:
+      - Data Deletion
+      x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - rum_delete_data
+        - logs_delete_data
+      x-undo:
+        type: idempotent
   /api/v2/domain_allowlist:
     get:
       description: Get the domain allowlist for an organization.
@@ -31542,8 +32914,93 @@ paths:
         - events_read
       x-undo:
         type: safe
+    post:
+      description: 'This endpoint allows you to post events.
+
+
+        Only events with **`change` category** are under General Availability. Refer
+        to [Change Tracking](https://docs.datadoghq.com/change_tracking) for further
+        details.'
+      operationId: CreateEvent
+      requestBody:
+        content:
+          application/json:
+            examples:
+              json-request-body:
+                value:
+                  data:
+                    attributes:
+                      attributes:
+                        author:
+                          name: datadog@datadog.com
+                          type: user
+                        change_metadata:
+                          dd:
+                            team: datadog_team
+                            user_email: datadog@datadog.com
+                            user_id: datadog_user_id
+                            user_name: datadog_username
+                          resource_link: datadog.com/feature/fallback_payments_test
+                        changed_resource:
+                          name: fallback_payments_test
+                          type: feature_flag
+                        impacted_resources:
+                        - name: payments_api
+                          type: service
+                        new_value:
+                          enabled: true
+                          percentage: 50%
+                          rule:
+                            datacenter: devcycle.us1.prod
+                        prev_value:
+                          enabled: true
+                          percentage: 10%
+                          rule:
+                            datacenter: devcycle.us1.prod
+                      category: change
+                      message: payment_processed feature flag has been enabled
+                      tags:
+                      - environment:test
+                      title: payment_processed feature flag updated
+                    type: event
+            schema:
+              $ref: '#/components/schemas/EventCreateRequestPayload'
+        description: Event request object
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventCreateResponsePayload'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: Post an event
+      tags:
+      - Events
+      x-codegen-request-body-name: body
+      x-menu-order: 2
+      x-undo:
+        type: unsafe
     x-merge-override:
       get: false
+      post: false
   /api/v2/events/search:
     post:
       description: 'List endpoint returns events that match an events search query.
@@ -31720,7 +33177,6 @@ paths:
       - apiKeyAuth: []
         appKeyAuth: []
       - AuthZ:
-        - incident_settings_read
         - incident_read
       summary: Get a list of incident types
       tags:
@@ -31729,7 +33185,6 @@ paths:
       x-permission:
         operator: OR
         permissions:
-        - incident_settings_read
         - incident_read
       x-undo:
         type: safe
@@ -31860,7 +33315,6 @@ paths:
       - apiKeyAuth: []
         appKeyAuth: []
       - AuthZ:
-        - incident_settings_read
         - incident_read
       summary: Get incident type details
       tags:
@@ -31869,7 +33323,6 @@ paths:
       x-permission:
         operator: OR
         permissions:
-        - incident_settings_read
         - incident_read
       x-undo:
         type: safe
@@ -32660,6 +34113,296 @@ paths:
       x-unstable: '**Note**: This endpoint is in public beta.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/integration/aws/accounts:
+    get:
+      description: Get a list of AWS Account Integration Configs.
+      operationId: ListAWSAccounts
+      parameters:
+      - description: Optional query parameter to filter accounts by AWS Account ID.
+          If not provided, all accounts are returned.
+        example: '123456789012'
+        in: query
+        name: aws_account_id
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AWSAccountsResponse'
+          description: AWS Accounts List object
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: List all AWS integrations
+      tags:
+      - AWS Integration
+      x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - aws_configuration_read
+      x-undo:
+        type: safe
+      x-unstable: '**Note: This endpoint is in Preview. If you have any feedback,
+
+        contact [Datadog support](https://docs.datadoghq.com/help/).**'
+    post:
+      description: Create a new AWS Account Integration Config.
+      operationId: CreateAWSAccount
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AWSAccountCreateRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AWSAccountResponse'
+          description: AWS Account object
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '409':
+          $ref: '#/components/responses/ConflictResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Create an AWS integration
+      tags:
+      - AWS Integration
+      x-codegen-request-body-name: body
+      x-given:
+        aws_account_v2:
+          parameters:
+          - name: body
+            value: "{\n  \"data\": {\n    \"type\": \"account\",\n    \"attributes\":
+              {\n      \"account_tags\": [\n        \"key:value\"\n      ],\n      \"auth_config\":
+              {\n        \"role_name\": \"DatadogIntegrationRole\"\n      },\n      \"aws_account_id\":
+              \"123456789012\",\n      \"aws_partition\": \"aws\",\n      \"aws_regions\":
+              {\n        \"include_only\": [\n          \"us-east-1\"\n        ]\n
+              \     },\n      \"logs_config\": {\n        \"lambda_forwarder\": {\n
+              \         \"lambdas\": [\n            \"arn:aws:lambda:us-east-1:123456789012:function:DatadogLambdaLogForwarder\"\n
+              \         ],\n          \"sources\": [\n            \"s3\"\n          ]\n
+              \       }\n      },\n      \"metrics_config\": {\n        \"enabled\":
+              true,\n        \"automute_enabled\": true,\n        \"collect_custom_metrics\":
+              false,\n        \"collect_cloudwatch_alarms\": false,\n        \"tag_filters\":
+              [\n          {\n            \"namespace\": \"AWS/EC2\",\n            \"tags\":
+              [\n              \"key:value\"\n            ]\n          }\n        ],\n
+              \       \"namespace_filters\": {\n          \"include_only\": [\n            \"AWS/EC2\"\n
+              \         ]\n        }\n      },\n      \"resources_config\": {\n        \"cloud_security_posture_management_collection\":
+              false,\n        \"extended_collection\": false\n      },\n      \"traces_config\":
+              {\n        \"xray_services\": {\n          \"include_only\": [\n            \"AWS/AppSync\"\n
+              \         ]\n        }\n      }\n    }\n  }\n}"
+          step: there is a valid "aws_account_v2" in the system
+      x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - aws_configurations_manage
+      x-undo:
+        operationId: DeleteAWSAccount
+        parameters:
+        - name: aws_account_config_id
+          source: data.id
+        type: unsafe
+      x-unstable: '**Note: This endpoint is in Preview. If you have any feedback,
+
+        contact [Datadog support](https://docs.datadoghq.com/help/).**'
+  /api/v2/integration/aws/accounts/{aws_account_config_id}:
+    delete:
+      description: Delete an AWS Account Integration Config by config ID.
+      operationId: DeleteAWSAccount
+      parameters:
+      - $ref: '#/components/parameters/AWSAccountConfigIDPathParameter'
+      responses:
+        '204':
+          description: No Content
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Delete an AWS integration
+      tags:
+      - AWS Integration
+      x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - aws_configurations_manage
+      x-undo:
+        type: idempotent
+      x-unstable: '**Note: This endpoint is in Preview. If you have any feedback,
+
+        contact [Datadog support](https://docs.datadoghq.com/help/).**'
+    get:
+      description: Get an AWS Account Integration Config by config ID.
+      operationId: GetAWSAccount
+      parameters:
+      - $ref: '#/components/parameters/AWSAccountConfigIDPathParameter'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AWSAccountResponse'
+          description: AWS Account object
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get an AWS integration by config ID
+      tags:
+      - AWS Integration
+      x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - aws_configuration_read
+      x-undo:
+        type: safe
+      x-unstable: '**Note: This endpoint is in Preview. If you have any feedback,
+
+        contact [Datadog support](https://docs.datadoghq.com/help/).**'
+    patch:
+      description: Update an AWS Account Integration Config by config ID.
+      operationId: UpdateAWSAccount
+      parameters:
+      - $ref: '#/components/parameters/AWSAccountConfigIDPathParameter'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AWSAccountUpdateRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AWSAccountResponse'
+          description: AWS Account object
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Update an AWS integration
+      tags:
+      - AWS Integration
+      x-codegen-request-body-name: body
+      x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - aws_configuration_edit
+      x-undo:
+        type: idempotent
+      x-unstable: '**Note: This endpoint is in Preview. If you have any feedback,
+
+        contact [Datadog support](https://docs.datadoghq.com/help/).**'
+  /api/v2/integration/aws/available_namespaces:
+    get:
+      description: Get a list of available AWS CloudWatch namespaces that can send
+        metrics to Datadog.
+      operationId: ListAWSNamespaces
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AWSNamespacesResponse'
+          description: AWS Namespaces List object
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: List available namespaces
+      tags:
+      - AWS Integration
+      x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - aws_configuration_read
+      x-undo:
+        type: safe
+      x-unstable: '**Note: This endpoint is in Preview. If you have any feedback,
+
+        contact [Datadog support](https://docs.datadoghq.com/help/).**'
+  /api/v2/integration/aws/generate_new_external_id:
+    post:
+      description: Generate a new external ID for AWS role-based authentication.
+      operationId: CreateNewAWSExternalID
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AWSNewExternalIDResponse'
+          description: AWS External ID object
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Generate a new external ID
+      tags:
+      - AWS Integration
+      x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - aws_configuration_edit
+      x-undo:
+        type: safe
+      x-unstable: '**Note: This endpoint is in Preview. If you have any feedback,
+
+        contact [Datadog support](https://docs.datadoghq.com/help/).**'
+  /api/v2/integration/aws/logs/services:
+    get:
+      description: Get a list of AWS services that can send logs to Datadog.
+      operationId: ListAWSLogsServices
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AWSLogsServicesResponse'
+          description: AWS Logs Services List object
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get list of AWS log ready services
+      tags:
+      - AWS Logs Integration
+      x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - aws_configuration_read
+      x-undo:
+        type: safe
+      x-unstable: '**Note: This endpoint is in public beta. If you have any feedback,
+
+        contact [Datadog support](https://docs.datadoghq.com/help/).**'
   /api/v2/integration/gcp/accounts:
     get:
       description: List all GCP STS-enabled service accounts configured in your Datadog
@@ -36116,7 +37859,12 @@ paths:
     get:
       description: "Returns all metrics that can be configured in the Metrics Summary
         page or with Metrics without Limits\u2122 (matching additional filters if
-        specified)."
+        specified).\nOptionally, paginate by using the `page[cursor]` and/or `page[size]`
+        query parameters.\nTo fetch the first page, pass in a query parameter with
+        either a valid `page[size]` or an empty cursor like `page[cursor]=`. To fetch
+        the next page, pass in the `next_cursor` value from the response as the new
+        `page[cursor]` value.\nOnce the `meta.pagination.next_cursor` value is null,
+        all pages have been retrieved."
       operationId: ListTagConfigurations
       parameters:
       - description: Filter custom metrics that have configured tags.
@@ -36181,6 +37929,27 @@ paths:
         schema:
           format: int64
           type: integer
+      - description: Maximum number of results returned.
+        in: query
+        name: page[size]
+        required: false
+        schema:
+          default: 10000
+          format: int32
+          maximum: 10000
+          minimum: 1
+          type: integer
+      - description: 'String to query the next page of results.
+
+          This key is provided with each valid response from the API in `meta.pagination.next_cursor`.
+
+          Once the `meta.pagination.next_cursor` key is null, all pages have been
+          retrieved.'
+        in: query
+        name: page[cursor]
+        required: false
+        schema:
+          type: string
       responses:
         '200':
           content:
@@ -36215,6 +37984,11 @@ paths:
       tags:
       - Metrics
       x-menu-order: 5
+      x-pagination:
+        cursorParam: page[cursor]
+        cursorPath: meta.pagination.next_cursor
+        limitParam: page[size]
+        resultsPath: data
       x-permission:
         operator: OR
         permissions:
@@ -37506,13 +39280,19 @@ paths:
           source: data[4]
           step: there is a valid "permission" in the system
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - user_access_read
       x-undo:
         type: safe
   /api/v2/posture_management/findings:
     get:
-      description: "Get a list of CSPM findings.\n\n### Filtering\n\nFilters can be
-        applied by appending query parameters to the URL.\n\n  - Using a single filter:
-        `?filter[attribute_key]=attribute_value`\n  - Chaining filters: `?filter[attribute_key]=attribute_value&filter[attribute_key]=attribute_value...`\n
+      description: "Get a list of findings. These include both misconfigurations and
+        identity risks.\n\n**Note**: To filter and return only identity risks, add
+        the following query parameter: `?filter[tags]=dd_rule_type:ciem`\n\n### Filtering\n\nFilters
+        can be applied by appending query parameters to the URL.\n\n  - Using a single
+        filter: `?filter[attribute_key]=attribute_value`\n  - Chaining filters: `?filter[attribute_key]=attribute_value&filter[attribute_key]=attribute_value...`\n
         \ - Filtering on tags: `?filter[tags]=tag_key:tag_value&filter[tags]=tag_key_2:tag_value_2`\n\nHere,
         `attribute_key` can be any of the filter keys described further below.\n\nQuery
         parameters of type `integer` support comparison operators (`>`, `>=`, `<`,
@@ -38437,6 +40217,8 @@ paths:
 
         - Powerpacks: `powerpack`
 
+        - Reference Tables: `reference-table`
+
         - Security Rules: `security-rule`
 
         - Service Level Objectives: `slo`
@@ -38472,7 +40254,9 @@ paths:
 
         Synthetic Private Locations | `viewer`, `editor`
 
-        Monitors                    | `viewer`, `editor`'
+        Monitors                    | `viewer`, `editor`
+
+        Reference Tables            | `viewer`, `editor`'
       operationId: UpdateRestrictionPolicy
       parameters:
       - $ref: '#/components/parameters/ResourceID'
@@ -39258,9 +41042,9 @@ paths:
         rum_application:
           parameters:
           - name: body
-            value: "{ \"data\": {\n\n    \"type\": \"rum_application_create\",\n    \"attributes\":
-              {\n        \"name\": \"test_name_create\",\n        \"type\": \"browser\"\n
-              \   }\n  }\n}"
+            value: "{ \"data\": {\n    \"type\": \"rum_application_create\",\n    \"attributes\":
+              {\n        \"name\": \"test-rum-{{ unique_hash }}\",\n        \"type\":
+              \"ios\"\n    }\n  }\n}"
           step: there is a valid "rum_application" in the system
       x-menu-order: 7
       x-permission:
@@ -39442,9 +41226,9 @@ paths:
         rum_metric:
           parameters:
           - name: body
-            value: "{\n  \"data\": {\n    \"id\": \"{{ unique }}\",\n    \"type\":
-              \"rum_metrics\",\n    \"attributes\": {\n      \"event_type\": \"session\",\n
-              \     \"compute\": {\n        \"aggregation_type\": \"distribution\",\n
+            value: "{\n  \"data\": {\n    \"id\": \"{{ unique_lower_alnum }}\",\n
+              \   \"type\": \"rum_metrics\",\n    \"attributes\": {\n      \"event_type\":
+              \"session\",\n      \"compute\": {\n        \"aggregation_type\": \"distribution\",\n
               \       \"include_percentiles\": true,\n        \"path\": \"@duration\"\n
               \     },\n      \"filter\": {\n        \"query\": \"source:{{ unique
               }}\"\n      },\n      \"group_by\": [{\n        \"path\": \"@browser.name\",\n
@@ -42707,7 +44491,8 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      - AuthZ: []
+      - AuthZ:
+        - security_monitoring_rules_write
       summary: Run a historical job
       tags:
       - Security Monitoring
@@ -42732,6 +44517,10 @@ paths:
               \   }\n  }\n}"
           step: there is a valid "historical_job" in the system
       x-menu-order: 19
+      x-permission:
+        operator: OR
+        permissions:
+        - security_monitoring_rules_write
       x-undo:
         type: idempotent
       x-unstable: '**Note**: This endpoint is in beta and may be subject to changes.
@@ -42760,15 +44549,15 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ: []
       summary: Convert a job result to a signal
       tags:
       - Security Monitoring
       x-codegen-request-body-name: body
       x-menu-order: 24
+      x-permission:
+        operator: OR
+        permissions:
+        - security_monitoring_signals_write
       x-undo:
         type: idempotent
       x-unstable: '**Note**: This endpoint is in beta and may be subject to changes.
@@ -42831,11 +44620,16 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      - AuthZ: []
+      - AuthZ:
+        - security_monitoring_rules_read
       summary: Get a job's details
       tags:
       - Security Monitoring
       x-menu-order: 21
+      x-permission:
+        operator: OR
+        permissions:
+        - security_monitoring_rules_read
       x-undo:
         type: safe
       x-unstable: '**Note**: This endpoint is in beta and may be subject to changes.
@@ -42865,11 +44659,16 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      - AuthZ: []
+      - AuthZ:
+        - security_monitoring_rules_write
       summary: Cancel a historical job
       tags:
       - Security Monitoring
       x-menu-order: 22
+      x-permission:
+        operator: OR
+        permissions:
+        - security_monitoring_rules_write
       x-undo:
         type: idempotent
       x-unstable: '**Note**: This endpoint is in beta and may be subject to changes.
@@ -44517,6 +46316,10 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - usage_read
       x-undo:
         type: safe
       x-unstable: '**Note**: This endpoint is in Preview.
@@ -44619,9 +46422,9 @@ paths:
         schema:
           type: string
       - description: 'Datetime in ISO-8601 format, UTC, precise to month: `[YYYY-MM]`
-          for cost beginning this month. Either start_month or start_date should be
-          specified, but not both. (start_month cannot go beyond two months in the
-          past). Provide an `end_month` to view month-over-month cost.'
+          for cost beginning this month. **Either start_month or start_date should
+          be specified, but not both.** (start_month cannot go beyond two months in
+          the past). Provide an `end_month` to view month-over-month cost.'
         in: query
         name: start_month
         required: false
@@ -44637,8 +46440,8 @@ paths:
           format: date-time
           type: string
       - description: 'Datetime in ISO-8601 format, UTC, precise to day: `[YYYY-MM-DD]`
-          for cost beginning this day. Either start_month or start_date should be
-          specified, but not both. (start_date cannot go beyond two months in the
+          for cost beginning this day. **Either start_month or start_date should be
+          specified, but not both.** (start_date cannot go beyond two months in the
           past). Provide an `end_date` to view day-over-day cumulative cost.'
         in: query
         name: start_date
@@ -45726,6 +47529,11 @@ paths:
           $ref: '#/components/responses/ForbiddenResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - workflows_run
       summary: Execute a workflow
       tags:
       - Workflow Automation
@@ -45860,6 +47668,18 @@ tags:
     description: Find out more at
     url: https://docs.datadoghq.com/tracing/trace_pipeline/trace_retention/
   name: APM Retention Filters
+- description: 'Configure your Datadog-AWS integration directly through the Datadog
+    API.
+
+    For more information, see the [AWS integration page](https://docs.datadoghq.com/integrations/amazon_web_services).'
+  name: AWS Integration
+- description: 'Configure your Datadog-AWS-Logs integration directly through Datadog
+    API.
+
+    For more information, see the [AWS integration page](https://docs.datadoghq.com/integrations/amazon_web_services/#log-collection).'
+  externalDocs:
+    url: https://docs.datadoghq.com/integrations/amazon_web_services/#log-collection
+  name: AWS Logs Integration
 - description: Search your Audit Logs events over HTTP.
   name: Audit
 - description: '[The AuthN Mappings API](https://docs.datadoghq.com/account_management/authn_mapping/?tab=example)
@@ -45917,6 +47737,10 @@ tags:
 
     organization.'
   name: Dashboard Lists
+- description: The Data Deletion API allows the user to target and delete data from
+    the allowed products. It's currently enabled for Logs and RUM and depends on `logs_delete_data`
+    and `rum_delete_data` permissions respectively.
+  name: Data Deletion
 - description: 'Configure your Datadog Email Domain Allowlist directly through the
     Datadog API.
 
@@ -45996,7 +47820,11 @@ tags:
 
     See the [Archives Page](https://app.datadoghq.com/logs/pipelines/archives)
 
-    for a list of the archives currently configured in Datadog.'
+    for a list of the archives currently configured in Datadog.
+
+
+    You need an API and non-scoped application key with Admin rights to interact with
+    these endpoints.'
   externalDocs:
     description: Find out more at
     url: https://docs.datadoghq.com/logs/archives/
@@ -46015,8 +47843,11 @@ tags:
     description: Find out more at
     url: https://docs.datadoghq.com/logs/log_configuration/forwarding_custom_destinations/
   name: Logs Custom Destinations
-- description: Manage configuration of [log-based metrics](https://app.datadoghq.com/logs/pipelines/generate-metrics)
+- description: 'Manage configuration of [log-based metrics](https://app.datadoghq.com/logs/pipelines/generate-metrics)
     for your organization.
+
+    You need an API and non-scoped application key with Admin rights to interact with
+    these endpoints.'
   externalDocs:
     description: Find out more at
     url: https://docs.datadoghq.com/logs/logs_to_metrics/
@@ -46056,7 +47887,8 @@ tags:
     scoped to different team values.
 
 
-    You need an API and application key with Admin rights to interact with this endpoint.
+    You need an API and non-scoped application key with Admin rights to interact with
+    these endpoints.
 
 
     See [How to Set Up RBAC for Logs](https://docs.datadoghq.com/logs/guide/logs-rbac/?tab=api#restrict-access-to-logs)
