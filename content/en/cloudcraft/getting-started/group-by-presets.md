@@ -2,13 +2,13 @@
 title: Group By and Presets
 ---
 
-Cloudcraft's **Group By** and **Presets** features offer powerful tools for creating focused, custom diagrams of your cloud infrastructure. These tools provide a structured approach to visualize cloud architecture, catering to specific use cases like infrastructure, network, and security requirements.
+Cloudcraft's **Group By** and **Presets** features empower users to create custom, insightful diagrams tailored to specific use cases such as infrastructure, network, or security. These tools streamline the visualization of cloud architecture, making it easier to analyze and manage resources.
 
-By utilizing grouping and preset configurations, users can quickly generate focused diagrams, improving workflow efficiency and resource management. Whether you are troubleshooting, conducting security audits, or analyzing network performance, these features help you create focused, insightful diagrams quickly and easily.
+Whether troubleshooting, performing security audits, or evaluating network performance, these features enhance workflow efficiency by enabling users to generate precise, focused diagrams with ease.
 
 ## Group By
 
-With **Group By**, Cloudcraft divides your diagram into distinct sections based on different group types. This feature provides a clear, organized view of your resources, even when they belong to multiple groups, which is particularly useful for visualizing complex cloud environments where resources may overlap across different categories.
+With **Group By**, Cloudcraft divides your diagram into distinct sections based on different group types. This feature provides a clear, organized view of your resources, which is particularly useful for visualizing complex cloud environments.
 
 ### AWS grouping options
 
@@ -47,8 +47,8 @@ To apply a preset to your diagram:
 
 The infrastructure preset provides a broad overview, grouping resources by Region and VPC in AWS, and by Region and VNet in Azure. This preset is ideal for quickly generating architecture diagrams for troubleshooting or high-level review.
 
-- In AWS, it deactivates components like EBS, NAT Gateway, and Transit Gateway, among others.
-- In Azure, components such as Azure VNGW and Azure Disk are disabled.
+- In AWS, it excludes components like EBS, NAT Gateway, and Transit Gateway, among others, to give you an uncluttered diagram, showing you the most important parts of your architecture.
+- In Azure, components such as Azure VNGW and Azure Disk are not shown.
 
 ### Security diagram
 
@@ -57,7 +57,7 @@ The infrastructure preset provides a broad overview, grouping resources by Regio
 The security preset focuses on potential security exposures, grouping resources by Region, VPC, and Security Group in AWS. This view is essential for identifying security risks and understanding rules governing inbound and outbound service communications, and is perfect for mapping attack surfaces during penetration testing or security audits.
 
 - This preset does not currently support Azure configurations.
-- In AWS, similar to infrastructure, it disables EBS, NAT Gateway, and other components that might clutter the security view.
+- In AWS, similar to infrastructure, it excludes EBS, NAT Gateway, and other components that might clutter the security view. In addition, a component may appear multiple times if they belong to multiple subnets.
 
 ### Network diagram
 
@@ -65,8 +65,8 @@ The security preset focuses on potential security exposures, grouping resources 
 
 The Network preset adds granularity by introducing Subnet grouping, making it especially useful for network teams seeking to identify latency sources and traffic patterns.
 
-- In AWS, it disables components such as EBS, S3, and SNS.
-- In Azure, it deactivates Azure Disk and the Network Security Group components.
+- In AWS, it excludes components such as EBS, S3, and SNS.
+- In Azure, it excludes Azure Disk and the Network Security Group components.
 
 ## Custom Presets
 
@@ -75,4 +75,4 @@ For use cases that require a tailored view, Cloudcraft allows you to customize g
 1. Adjust the filter and group-by settings to suit your requirements.
 2. Save your custom configuration as a new preset by clicking the **Save as preset** button.
 
-Once saved, these custom presets can be reused across multiple diagrams, ensuring consistency in style and presentation organization-wide.
+Once saved, these custom presets can be reused by anyone with access to the blueprint.
