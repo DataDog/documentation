@@ -16,11 +16,11 @@ This guide explains how to identify the CI jobs that are on the critical path, w
 
 ### Understanding the Critical Path in a CI Pipeline
 
-The critical path in a CI Pipeline is the longest sequence of CI Jobs that determines the total duration of that pipeline. In other words, it is the path through the DAG of CI Jobs that requires the most time to complete. You can only reduce the total duration of a CI Pipeline by reducing the duration of CI Jobs that are on the critical path.
+The critical path of a CI Pipeline execution is the longest sequence of CI Jobs that determines the total duration of that pipeline execution. In other words, it is the path through the dependency graph of CI Jobs that took the most time to complete. You can only reduce the total duration of a CI Pipeline execution by reducing the duration of CI Jobs that are on the critical path.
 
 {{< img src="continuous_integration/critical_path_highlight_pipeline.png" alt="Highlight of jobs on the critical path in a pipeline execution." width="90%">}}
 
-However, CI jobs are typically executed in parallel with other jobs, meaning that the actual reduction in pipeline time is determined by the **exclusive time** a CI job spends on the CI runner during its execution.
+Looking at the job duration may not be enough. CI jobs are typically executed in parallel with other jobs, meaning that the reduction of the pipeline execution time is determined by reducing the **exclusive time** of the CI job.
 
 The exclusive time that a job is on the critical path represents the amount of time the CI runner has spent executing a specific job exclusively, excluding the execution time of other jobs that were running in parallel.
 
@@ -28,7 +28,7 @@ The exclusive time that a job is on the critical path represents the amount of t
 
 If CI job A is on the critical path with a duration of 100ms and runs in parallel with CI job B, which takes 80ms, the exclusive time for job A on the critical path would be 20ms. This means the actual improvement in pipeline duration reduction would be 20ms.
 
-### Compatibility
+### Supported CI Providers
 
 <div class="alert alert-info">Are you interested in critical path and your CI provider is not supported yet? Fill out <a href="https://forms.gle/zDgiDSGQxA1HgjXh6" target="_blank">this form</a>.</div>
 
@@ -69,7 +69,7 @@ You can also import the [CI Visibility - Critical Path][1] dashboard template:
 
 In the previous image, we can observe that a CI job called `metrics` is a potential candidate for improvement, as its total exclusive time is the highest. The average exclusive time is around 21 minutes, meaning there is room for improvement of up to 21 minutes for this CI job. 
 
-Since we know this CI job is on the critical path, any improvements made to it will be reflected in the corresponding CI pipelines, reducing a similar amount of time.
+Since we know this CI job is on the critical path 43.5% of the time, we can hope to reduce the average pipeline duration by 21 minutes for 43.5% of the pipeline executions.
 
 {{< img src="continuous_integration/critical_path_dashboard_outlier_job_hightlighted.png" alt="Potencial CI Job candidate to improve the exclusive time." width="90%">}}
 
