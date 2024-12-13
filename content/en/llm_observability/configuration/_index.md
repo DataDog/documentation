@@ -31,7 +31,7 @@ Connect your OpenAI account to LLM Observability with your OpenAI API key.
 1. Select **Connect** on the OpenAI tile.
 1. Follow the instructions on the tile. 
    - Provide your OpenAI API key. Ensure that this key has **write** permission for **model capabilities**.
-1. Enable **Invoke Model from this API key**.
+1. Enable **Use this API key to evaluate your  LLM applications**.
 
 {{< img src="llm_observability/configuration/openai-tile.png" alt="The OpenAI configuration tile in LLM Observability. Lists instructions for configuring OpenAI and providing your OpenAI API key." style="width:100%;" >}}
 
