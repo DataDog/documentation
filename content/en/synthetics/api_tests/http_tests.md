@@ -38,7 +38,17 @@ HTTP tests can run from both [managed](#select-locations) and [private locations
 
 ## Configuration
 
-   {{% synthetics-api-tests-templates %}}<br />
+You may create a test using one of the following options:
+
+   - **Create a test from a template**:
+   
+     1. Hover over one of the following pre-populated templates and click **View Template**: 
+
+        {{< img src="getting_started/synthetics/synthetics_templates_api_video.mp4" alt="Video of Synthetics API test landing page with templates" video="true" >}}
+
+     2. This opens a side panel displaying pre-populated configuration information, including: Test Details, Request Details, Assertions, Alert Conditions, and Monitor Settings.
+
+     3. Click **+Create Test** to open the **Define Request** page, where you can review and edit the pre-populated configuration options.<br /><br>
      
   - **Build a test from scratch**:
     

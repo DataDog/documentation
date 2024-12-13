@@ -48,7 +48,7 @@ The example below demonstrates how to create an [HTTP test][3], a subtype of [si
 
    1. Hover over one of the following pre-populated templates and click **View Template**: 
 
-      {{< img src="getting_started/synthetics/synthetics_api_templates.png" alt="Synthetics API test landing page with templates" style="width:100%;" >}}
+      {{< img src="getting_started/synthetics/synthetics_templates_api_video.mp4" alt="Video of Synthetics API test landing page with templates" video="true" >}}
 
     2. This opens a side panel displaying pre-populated configuration information, including: Test Details, Request Details, Assertions, Alert Conditions, and Monitor Settings.
 

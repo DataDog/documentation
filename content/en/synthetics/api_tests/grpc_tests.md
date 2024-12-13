@@ -40,68 +40,75 @@ gRPC tests can run from both [managed](#select-locations) and [private locations
 
 ## Configuration 
 
-After choosing to create a `gRPC` test, define your test's request.
+You may create a test using one of the following options:
 
-{{% synthetics-api-tests-templates %}}
+   - **Create a test from a template**:
 
-### Define request (build from scratch)
+       1. Hover over one of the following pre-populated templates and click **View Template**: 
 
-1. Specify the **Host** and **Port** to run your test on. The default gRPC port is `50051`.
-2. Select **Behavior Check** to perform a unary call or **Health Check** to perform a health check. 
-   
-   {{< tabs >}}
-   {{% tab "Behavior Check" %}}
+          {{< img src="getting_started/synthetics/synthetics_templates_api_video.mp4" alt="Video of Synthetics API test landing page with templates" video="true" >}}
 
-   For a behavior check, specify the **Server Reflection** or [upload a **Proto File**][101] that defines your gRPC server. Select a method and include a request message. Datadog does not support streaming methods.
-   
-{{< img src="synthetics/api_tests/grpc_behavior_check_test.png" alt="Define gRPC request" style="width:90%;" >}}
-   
-   [101]: https://grpc.io/docs/what-is-grpc/introduction/#working-with-protocol-buffers
+       2. This opens a side panel displaying pre-populated configuration information, including: Test Details, Request Details, Assertions, Alert Conditions, and Monitor Settings.
 
-   {{% /tab %}}
-   {{% tab "Health Check" %}}
+      3. Click **+Create Test** to open the **Define Request** page, where you can review and edit the pre-populated configuration options. <br /><br>
 
-   For a health check, enter the name of the service. Leave this field blank if you want to send a health check on the gRPC server.
+   - **Build a test from scratch**:
 
-{{< img src="synthetics/api_tests/grpc_health_check_test.png" alt="Define gRPC request" style="width:90%;" >}}
-   
-   {{% /tab %}}
-   {{< /tabs >}}
+   1. To build a test from scratch, click the **+ Start from scratch** template, then select the `gRPC` request type.
+   2. Specify the **Host** and **Port** to run your test on. The default gRPC port is `50051`.
+   3. Select **Behavior Check** to perform a unary call or **Health Check** to perform a health check.
 
-3. Add **Advanced Options** (optional) to your test:
+      {{< tabs >}}
+      {{% tab "Behavior Check" %}}
 
-   {{< tabs >}}
+For a behavior check, specify the **Server Reflection** or [upload a **Proto File**][101] that defines your gRPC server. Select a method and include a request message. Datadog does not support streaming methods.
 
-   {{% tab "Request Options" %}}
-   
-   * **Timeout**: Specify the amount of time in seconds before the test times out.
-   * **Ignore server certificate error**: Select to have your gRPC test go on with connection even if there are errors when validating the SSL certificate.
-   * **gRPC metadata**: Add and define metadata to your gRPC request to pass metadata between services.
+{{< img src="synthetics/api_tests/grpc_behavior_check_test_2.png" alt="Define gRPC request" style="width:90%;" >}}
 
-   {{% /tab %}}
+[101]: https://grpc.io/docs/what-is-grpc/introduction/#working-with-protocol-buffers
 
-   {{% tab "Authentication" %}}
+      {{% /tab %}}
+      {{% tab "Health Check" %}}
 
-   * **Client certificate**: Authenticate through mTLS by uploading your client certificate (`.crt`) and the associated private key (`.key`) in `PEM` format. 
+For a health check, enter the name of the service. Leave this field blank if you want to send a health check on the gRPC server.
 
-     <br/> 
-   
-     You can use the `openssl` library to convert your certificates. For example, convert a `PKCS12` certificate to `PEM` formatted private keys and certificates.
+{{< img src="synthetics/api_tests/grpc_health_check_test_2.png" alt="Define gRPC request" style="width:90%;" >}}
 
-      ```
-      openssl pkcs12 -in <CERT>.p12 -out <CERT_KEY>.key -nodes -nocerts
-      openssl pkcs12 -in <CERT>.p12 -out <CERT>.cert -nokeys
-      ```
+      {{% /tab %}}
+      {{< /tabs >}}
 
-   {{% /tab %}}
+   4. Add **Advanced Options** (optional) to your test:
 
-   {{< /tabs >}}
+      {{< tabs >}}
+      {{% tab "Request Options" %}}
 
-3. **Name** your gRPC test.
+- **Timeout**: Specify the amount of time in seconds before the test times out.
+- **Ignore server certificate error**: Select to have your gRPC test go on with connection even if there are errors when validating the SSL certificate.
+- **gRPC metadata**: Add and define metadata to your gRPC request to pass metadata between services.
 
-4. Add `env` **Tags** as well as any other tag to your gRPC test. You can then use these tags to filter through your Synthetic tests on the [Synthetic Monitoring & Continuous Testing page][4].
+      {{% /tab %}}
+      {{% tab "Authentication" %}}
 
-Click **Send** to try out the request configuration. A response preview is displayed on the right side of your screen.
+- **Client certificate**: Authenticate through mTLS by uploading your client certificate (`.crt`) and the associated private key (`.key`) in `PEM` format.
+
+<br/>
+
+You can use the `openssl` library to convert your certificates. For example, convert a `PKCS12` certificate to `PEM` formatted private keys and certificates.
+
+```bash
+   openssl pkcs12 -in <CERT>.p12 -out <CERT_KEY>.key -nodes -nocerts
+   openssl pkcs12 -in <CERT>.p12 -out <CERT>.cert -nokeys
+```
+
+      {{% /tab %}}
+      {{< /tabs >}}
+
+   5. **Name** your gRPC test.
+
+   6. Add `env` **Tags** as well as any other tags to your gRPC test. You can then use these tags to filter through your Synthetic tests on the [Synthetic Monitoring & Continuous Testing page][4].
+
+   7. Click **Invoke** to try out the request configuration. A response preview is displayed on the right side of your screen.
+
 
 ### Snippets
 

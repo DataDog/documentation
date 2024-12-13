@@ -32,21 +32,30 @@ ICMP tests can run from both [managed](#select-locations) and [private locations
 
 ## Configuration
 
-After choosing to create an `ICMP` test, define your test's request.
+You may create a test using one of the following options:
 
-{{% synthetics-api-tests-templates %}}
+   - **Create a test from a template**:
 
-### Define request (build from scratch)
+       1. Hover over one of the following pre-populated templates and click **View Template**: 
 
-1. Specify the **Domain Name** or **IP address** to run your test on.
-2. Select or deselect **Track number of network hops (TTL)**. When selected, this option turns on a "traceroute" probe to discover all gateways along the path to the host destination.
-3. Select the **Number of Pings** to trigger per test session. By default, the number of pings is set to four. You can choose to decrease this number or increase it up to ten.
-4. **Name** your ICMP test.
-5. Add `env` **Tags** as well as any other tags to your ICMP test. You can then use these tags to filter through your Synthetic tests on the [Synthetic Monitoring & Continuous Testing page][3].
+          {{< img src="getting_started/synthetics/synthetics_templates_api_video.mp4" alt="Video of Synthetics API test landing page with templates" video="true" >}}
 
-{{< img src="synthetics/api_tests/icmp_test_config.png" alt="Define ICMP request" style="width:90%;" >}}
+       2. This opens a side panel displaying pre-populated configuration information, including: Test Details, Request Details, Assertions, Alert Conditions, and Monitor Settings.
 
-Click **Test URL** to try out the request configuration. A response preview is displayed on the right side of your screen.
+       3. Click **+Create Test** to open the **Define Request** page, where you can review and edit the pre-populated configuration options. <br /><br>
+
+   - **Build a test from scratch**:
+
+      1. To build a test from scratch, click the **+ Start from scratch** template, then select the `ICMP` request type.
+      1. Specify the **Domain Name** or **IP address** to run your test on.
+      1. Select or deselect **Track number of network hops (TTL)**. When selected, this option turns on a "traceroute" probe to discover all gateways along the path to the host destination.
+      1. Select the **Number of Pings** to trigger per test session. By default, the number of pings is set to four. You can choose to decrease this number or increase it up to ten.
+      1. **Name** your ICMP test.
+      1. Add `env` **Tags** as well as any other tags to your ICMP test. You can then use these tags to filter through your Synthetic tests on the [Synthetic Monitoring & Continuous Testing page][3].<br /><br>
+
+        {{< img src="synthetics/api_tests/icmp_test_config_2.png" alt="Define ICMP request" style="width:90%;" >}}
+
+      1. Click **Test Host** to try out the request configuration. A response preview is displayed on the right side of your screen.
 
 ### Snippets
 
