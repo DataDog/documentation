@@ -35,22 +35,20 @@ DNS tests can run from both [managed](#select-locations) and [private locations]
 
 ## Configuration
 
-After choosing to create a `DNS` test, define your test's request.
+{{% synthetics-api-tests-templates %}}<br />
 
-{{% synthetics-api-tests-templates %}}
+- **Build a test from scratch**:
 
-### Define request (build from scratch)
+   1. Specify the **Domain** you want your test to query. For example, `www.example.com`.
+   2. Specify the **DNS Server** to use (optional), it can be a domain name or an IP address. If not specified, your DNS test performs resolution using `8.8.8.8`, with a fallback on `1.1.1.1` and an internal AWS DNS server.
+   3. Specify your DNS Server **Port** (optional). If not specified, the DNS Server port defaults to 53.
+   4. Specify the amount of time in seconds before the test times out (optional).
+   5. **Name** your DNS test.
+   6. Add `env` **Tags** as well as any other tag to your DNS test. You can then use these tags to filter through your Synthetic tests on the [Synthetic Monitoring & Continuous Testing page][3].<br /><br>
 
-1. Specify the **Domain** you want your test to query. For example, `www.example.com`.
-2. Specify the **DNS Server** to use (optional), it can be a domain name or an IP address. If not specified, your DNS test performs resolution using `8.8.8.8`, with a fallback on `1.1.1.1` and an internal AWS DNS server.
-3. Specify your DNS Server **Port** (optional). If not specified, the DNS Server port defaults to 53.
-4. Specify the amount of time in seconds before the test times out (optional).
-5. **Name** your DNS test.
-6. Add `env` **Tags** as well as any other tag to your DNS test. You can then use these tags to filter through your Synthetic tests on the [Synthetic Monitoring & Continuous Testing page][3].
+   {{< img src="synthetics/api_tests/synthetics_dns_test_domain.png" alt="Define DNS query" style="width:90%;" >}}
 
-{{< img src="synthetics/api_tests/dns_test_config_new.png" alt="Define DNS query" style="width:90%;" >}}
-
-Click **Test URL** to try out the request configuration. A response preview is displayed on the right side of your screen.
+   7. Click **Test Domain** to try out the request configuration. A response preview is displayed on the right side of your screen.
 
 ### Snippets
 

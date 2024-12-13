@@ -32,34 +32,32 @@ SSL tests can run from both [managed](#select-locations) and [private locations]
 
 ## Configuration
 
-After choosing to create a `SSL` test, define your test's request.
+{{% synthetics-api-tests-templates %}}<br />
 
-{{% synthetics-api-tests-templates %}}
+- **Build a test from scratch**:
 
-### Define request (build from scratch)
-
-1. Specify the **Host** and the **Port** to run your test on. The default SSL port is `443`.
-2. Add **Advanced Options** (optional) to your test:
-   * **Accept self-signed certificates**: Bypasses any server error related to a self-signed certificate.
-   * **Fail on revoked certificate in stapled OCSP**: Fail the test if the certificate is labeled as revoked by the OCSP stapling.
-   * **Timeout**: Specify the amount of time in seconds before the test times out.
-   * **Server Name**: Specifies on which server you want to initiate the TLS handshake, allowing the server to present one of multiple possible certificates on the same IP address and TCP port number. By default, the parameter is filled by the **Host** value.
-   * **Client certificate**: Authenticate through mTLS by uploading your client certificate (`.crt`) and the associated private key (`.key`) in `PEM` format. 
+   1. Specify the **Host** and the **Port** to run your test on. The default SSL port is `443`.
+   2. Add **Advanced Options** (optional) to your test:
+      * **Accept self-signed certificates**: Bypasses any server error related to a self-signed certificate.
+      * **Fail on revoked certificate in stapled OCSP**: Fail the test if the certificate is labeled as revoked by the OCSP stapling.
+      * **Timeout**: Specify the amount of time in seconds before the test times out.
+      * **Server Name**: Specifies on which server you want to initiate the TLS handshake, allowing the server to present one of multiple possible certificates on the same IP address and TCP port number. By default, the parameter is filled by the **Host** value.
+      * **Client certificate**: Authenticate through mTLS by uploading your client certificate (`.crt`) and the associated private key (`.key`) in `PEM` format. 
    
-   You can use the `openssl` library to convert your certificates. For example, convert a `PKCS12` certificate to `PEM` formatted private keys and certificates.
+      You can use the `openssl` library to convert your certificates. For example, convert a `PKCS12` certificate to `PEM` formatted private keys and certificates.
 
-   ```
-   openssl pkcs12 -in <CERT>.p12 -out <CERT_KEY>.key -nodes -nocerts
-   openssl pkcs12 -in <CERT>.p12 -out <CERT>.cert -nokeys
-   ```
+      ```
+      openssl pkcs12 -in <CERT>.p12 -out <CERT_KEY>.key -nodes -nocerts
+      openssl pkcs12 -in <CERT>.p12 -out <CERT>.cert -nokeys
+      ```
 
-3. **Name** your SSL test.
+   3. **Name** your SSL test.
 
-4. Add `env` **Tags** as well as any other tag to your SSL test. You can then use these tags to filter through your Synthetic tests on the [Synthetic Monitoring & Continuous Testing page][3].
+   4. Add `env` **Tags** as well as any other tag to your SSL test. You can then use these tags to filter through your Synthetic tests on the [Synthetic Monitoring & Continuous Testing page][3].<br /><br>
 
-   {{< img src="synthetics/api_tests/ssl_test_config.png" alt="Define SSL request" style="width:90%;" >}}
+      {{< img src="synthetics/api_tests/synthetics_ssl_test_cert.png" alt="Define SSL request" style="width:90%;" >}}
 
-Click **Test URL** to try out the request configuration. A response preview is displayed on the right side of your screen.
+   5. Click **Test Certificate** to try out the request configuration. A response preview is displayed on the right side of your screen.
 
 ### Snippets
 

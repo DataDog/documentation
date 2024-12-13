@@ -38,23 +38,22 @@ HTTP tests can run from both [managed](#select-locations) and [private locations
 
 ## Configuration
 
-After choosing to create an `HTTP` test, define your test's request.
+   {{% synthetics-api-tests-templates %}}<br />
+     
+  - **Build a test from scratch**:
+    
+     1. To build a test from scratch, click the **+ Start from scratch** template, then select the `HTTP` request type and specify the **URL** to query. 
+        Available methods are: `GET`, `POST`, `PATCH`, `PUT`, `HEAD`, `DELETE`, and `OPTIONS`. Both `http` and `https` URLs are supported.
 
-{{% synthetics-api-tests-templates %}}
+        <div class="alert alert-info">See <a href=#advanced-options>Advanced options</a> for more options.</div>
 
-### Define request (build from scratch)
+     2. **Name** your HTTP test.
 
-1. Choose the **HTTP Method** and specify the **URL** to query. Available methods are: `GET`, `POST`, `PATCH`, `PUT`, `HEAD`, `DELETE`, and `OPTIONS`. Both `http` and `https` URLs are supported.
+     3. Add `env` **Tags** as well as any other tag to your HTTP test. You can then use these tags to filter through your Synthetic tests on the [Synthetic Monitoring & Continuous Testing page][3]. <br /><br>
 
-   <div class="alert alert-info">See <a href=#advanced-options>Advanced options</a> for more options.</div>
+       {{< img src="getting_started/synthetics/api-test-config-4.png" alt="Define HTTP request" style="width:90%;" >}}
 
-2. **Name** your HTTP test.
-
-3. Add `env` **Tags** as well as any other tag to your HTTP test. You can then use these tags to filter through your Synthetic tests on the [Synthetic Monitoring & Continuous Testing page][3].
-
-   {{< img src="getting_started/synthetics/api-test-config-4.png" alt="Define HTTP request" style="width:90%;" >}}
-
-Click **Send** to try out the request configuration. A response preview is displayed on the right side of your screen.
+     4. Click **Send** to try out the request configuration. A response preview is displayed on the right side of your screen.
 
 ### Snippets
 
