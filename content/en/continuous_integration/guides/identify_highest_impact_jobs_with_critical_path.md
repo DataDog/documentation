@@ -1,5 +1,5 @@
 ---
-title: Identify CI Jobs on the Critical Path to improve your Pipelines
+title: Identify CI Jobs on the Critical Path to reduce the Pipeline Duration
 description: Learn how to identify those CI Jobs that are on the critical path to improve the duration of your CI Pipelines.
 further_reading:
   - link: "/continuous_integration/search/#pipeline-details-and-executions"
