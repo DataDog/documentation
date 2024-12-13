@@ -43,6 +43,8 @@ export OTEL_EXPORTER_OTLP_LOGS_HEADERS="dd-protocol=otlp,dd-api-key=${DD_API_KEY
 
 If you are using manual instrumentation with OpenTelemetry SDKs, configure the OTLP HTTP Protobuf exporter programmatically using the examples below.
 
+<div class="alert alert-info">OpenTelemetry SDK logs support for JavaScript and Python is in development. For the latest statuses, see <a href="https://opentelemetry.io/docs/languages/#status-and-releases">OpenTelemetry Status and Releases</a>.</div>
+
 {{< tabs >}}
 {{% tab "Java" %}}
 The Java exporter is `OtlpHttpLogRecordExporter`. To configure the exporter, use the following code snippet:
