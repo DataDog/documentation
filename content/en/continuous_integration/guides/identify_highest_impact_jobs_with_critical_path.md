@@ -30,7 +30,7 @@ If CI job A is on the critical path with a duration of 100ms and runs in paralle
 
 ### Compatibility
 
-<div class="alert alert-info">Are you interested in critical path and your CI provider is not supported yet? Fill out this form.</div>
+<div class="alert alert-info">Are you interested in critical path and your CI provider is not supported yet? Fill out <a href="https://forms.gle/zDgiDSGQxA1HgjXh6" target="_blank">this form</a>.</div>
 
 Filtering and Exclusive Time computation of CI Jobs on the Critical Path is available for the following CI Providers:
 * [GitLab][3]
