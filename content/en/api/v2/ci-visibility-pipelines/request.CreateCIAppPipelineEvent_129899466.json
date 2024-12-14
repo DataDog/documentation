@@ -2,14 +2,14 @@
   "data": {
     "attributes": {
       "resource": {
-        "end": "2021-11-11T11:10:41+00:00",
         "level": "job",
-        "name": "Build image",
-        "start": "2021-11-11T11:09:11+00:00",
-        "status": "error",
         "id": "cf9456de-8b9e-4c27-aa79-27b1e78c1a33",
+        "name": "Build image",
         "pipeline_unique_id": "3eacb6f3-ff04-4e10-8a9c-46e6d054024a",
         "pipeline_name": "Deploy to AWS",
+        "start": "2021-11-11T11:09:11+00:00",
+        "end": "2021-11-11T11:10:41+00:00",
+        "status": "error",
         "url": "https://my-ci-provider.example/jobs/my-jobs/run/1"
       }
     },
