@@ -10207,7 +10207,7 @@ components:
           type: string
         query:
           default: '*'
-          description: The search query following the event search syntax.
+          description: The search query following the [event search syntax](https://docs.datadoghq.com/service_management/events/explorer/searching).
           example: service:web* AND @http.status_code:[200 TO 299]
           type: string
         to:
