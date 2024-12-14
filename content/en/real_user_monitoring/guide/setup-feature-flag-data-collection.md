@@ -42,7 +42,7 @@ If you are using a version previous to 5.17.0, initialize the RUM SDK and config
     ...
 });
 ```
-{{% /collapse-content %}} 
+{{% /collapse-content %}}
 
 {{% collapse-content title="CDN async" level="h4" %}}
 ```javascript
@@ -54,7 +54,7 @@ window.DD_RUM.onReady(function() {
     })
 })
 ```
-{{% /collapse-content %}} 
+{{% /collapse-content %}}
 
 {{% collapse-content title="CDN sync" level="h4" %}}
 ```javascript
@@ -577,7 +577,7 @@ Flagsmith does not currently support this integration. Create a ticket with Flag
 {{< tabs >}}
 {{% tab "Browser" %}}
 
-When initializing the GrowthBook SDK, report feature flag evaluations to DataDog inside the `trackingCallback` function.
+When initializing the GrowthBook SDK, report feature flag evaluations to Datadog inside the `trackingCallback` function.
 
 For more information about initializing GrowthBook's SDK, see [GrowthBook's JavaScript SDK documentation][1].
 
@@ -597,7 +597,7 @@ gb.init();
 {{% /tab %}}
 {{% tab "iOS" %}}
 
-When initializing the GrowthBook SDK, report feature flag evaluations to DataDog inside the `trackingCallback` function.
+When initializing the GrowthBook SDK, report feature flag evaluations to Datadog inside the `trackingCallback` function.
 
 For more information about initializing GrowthBook's SDK, see [GrowthBook's iOS SDK documentation][1].
 
@@ -615,7 +615,7 @@ let gb: GrowthBookSDK = GrowthBookBuilder(
 {{% /tab %}}
 {{% tab "Android" %}}
 
-When initializing the GrowthBook SDK, report feature flag evaluations to DataDog inside the `trackingCallback` function.
+When initializing the GrowthBook SDK, report feature flag evaluations to Datadog inside the `trackingCallback` function.
 
 For more information about initializing GrowthBook's SDK, see [GrowthBook's Android SDK documentation][1].
 
@@ -633,7 +633,7 @@ val gb = GBSDKBuilder(
 {{% /tab %}}
 {{% tab "Flutter" %}}
 
-When initializing the GrowthBook SDK, report feature flag evaluations to DataDog inside the `growthBookTrackingCallBack` function.
+When initializing the GrowthBook SDK, report feature flag evaluations to Datadog inside the `growthBookTrackingCallBack` function.
 
 For more information about initializing GrowthBook's SDK, see [GrowthBook's Flutter SDK documentation][1].
 
@@ -651,7 +651,7 @@ final GrowthBookSDK sdkInstance = GBSDKBuilderApp(
 {{% /tab %}}
 {{% tab "React Native" %}}
 
-When initializing the GrowthBook SDK, report feature flag evaluations to DataDog inside the `trackingCallback` function.
+When initializing the GrowthBook SDK, report feature flag evaluations to Datadog inside the `trackingCallback` function.
 
 For more information about initializing GrowthBook's SDK, see [GrowthBook's React Native SDK documentation][1].
 
