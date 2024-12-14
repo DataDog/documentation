@@ -35,7 +35,7 @@ For enhanced security, organization managers can enforce [Multi-factor Authentic
 
 Setting **Require Multi-Factor Authentication** to `On` has two effects:
 - Users that log in with an email and password must register a second authentication factor before accessing the organization.
-- In Login Methods, a link to **View users without MFA** appears. Click on the link to see the Users list, filtered on users without MFA.
+- In Login Methods, a link to [**View users without MFA**][5] appears. Click on the link to see the users list, filtered on users without MFA.
 
 The setting to require multi-factor authentication is independent of the default login method settings. Regardless of which login methods you enable by default, enforcing MFA requires a second authentication factor for users that log in with an email and password.
 
@@ -43,9 +43,9 @@ The setting to require multi-factor authentication is independent of the default
 
 Using overrides, you can change the available login methods for individual users. In the following example, **Sign in with Google** is Off by default in the organization, but one user has it enabled by having an override set.
 
-{{< img src="account_management/login_methods_disabled_overrides_set.png" alt="Login method disabled, with user override enabled" style="width:80%;">}}
+{{< img src="account_management/login_methods_enabled_off.png" alt="Login method disabled, with user override enabled" style="width:80%;">}}
 
-In [User Management][5], you can filter users by the override methods set, or view users who have the Default login methods enabled:
+In [User Management][6], you can filter users by the override methods set, or view users who have the Default login methods enabled:
 
 {{< img src="account_management/users/user_page_login_methods_override_view.png" alt="User Management view filtered to show users by login methods set." style="width:80%;">}}
 
@@ -55,4 +55,5 @@ You can edit the user's overrides or remove the override altogether to allow the
 [2]: /account_management/saml/
 [3]: https://app.datadoghq.com/organization-settings/login-methods
 [4]: /account_management/multi-factor_authentication/
-[5]: https://app.datadoghq.com/organization-settings/users
+[5]: https://app.datadoghq.com/organization-settings/users?filter%5Ballowed_login_methods%5D=standard&filter%5Bmfa_enabled%5D=false&filter%5Bstatus%5D=Active
+[6]: https://app.datadoghq.com/organization-settings/users
