@@ -6712,7 +6712,7 @@ menu:
       parent: rum_mobile_react_native
       identifier: rum_mobile_react_troubleshooting
       weight: 108
-    - name: CodePush
+    - name: React Native & CodePush
       url: real_user_monitoring/mobile_and_tv_monitoring/codepush
       parent: mobile_and_tv_monitoring
       identifier: rum_mobile_codepush

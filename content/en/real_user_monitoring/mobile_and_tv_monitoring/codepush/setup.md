@@ -1,5 +1,5 @@
 ---
-title: CodePush Setup
+title: React Native & CodePush Setup
 description: Learn how to use a client-side React Native module to interact with Appcenter Codepush and Datadog.
 aliases:
     - /real_user_monitoring/reactnative/codepush
