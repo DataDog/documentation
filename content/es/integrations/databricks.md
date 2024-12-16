@@ -330,7 +330,8 @@ chmod a+x /tmp/start_datadog.sh
 
 ```
 
-Accede a dashboards preconfigurados
+{{% /tab %}}
+{{< /tabs >}}
 
 #### Con un script de inicio de ámbito de clúster 
 
