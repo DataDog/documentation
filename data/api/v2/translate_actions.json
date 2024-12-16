@@ -458,7 +458,7 @@
     "summary": "Get a list of events"
   },
   "CreateEvent": {
-    "description": "This endpoint allows you to post events.\n\nOnly events with **`change` category** are under General Availability. Refer to [Change Tracking](https://docs.datadoghq.com/change_tracking) for further details.",
+    "description": "This endpoint allows you to post events.\n\n✅ **Only events with the `change` category** are in General Availability. See [Change Tracking](https://docs.datadoghq.com/change_tracking) for more details.\n\n❌ For use cases involving other event categories, please use the V1 endpoint.",
     "summary": "Post an event",
     "request_description": "Event request object",
     "request_schema_description": "Payload for creating an event."

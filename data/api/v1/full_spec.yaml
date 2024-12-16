@@ -15448,7 +15448,7 @@ components:
           format: int64
           type: integer
         public_ids:
-          description: An array of Synthetic test IDs you want to delete.
+          description: An array of Synthetic test IDs you want uptimes for.
           example: []
           items:
             description: A Synthetic test ID.
