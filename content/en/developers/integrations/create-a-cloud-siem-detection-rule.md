@@ -4,7 +4,7 @@ description: Learn how to create a Cloud SIEM detection rule for your integratio
 aliases:
 - /developers/integrations/create-an-integration-detection-rule
 further_reading:
-- link: https://docs.datadoghq.com/security/cloud_siem/log_detection_rules
+- link: https://docs.datadoghq.com/security/cloud_siem/detection_rules
   tag: Documentation
   text: Log Detection Rules
 ---
@@ -146,4 +146,4 @@ Reach out to Datadog to address the issue.
 [4]: https://app.datadoghq.com/security/rules/new?product=siem
 [5]: https://github.com/DataDog/integrations-extras 
 [6]: https://github.com/DataDog/marketplace
-[7]: https://docs.datadoghq.com/security/cloud_siem/log_detection_rules
+[7]: https://docs.datadoghq.com/security/cloud_siem/detection_rules

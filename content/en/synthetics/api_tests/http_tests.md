@@ -54,6 +54,10 @@ After choosing to create an `HTTP` test, define your test's request.
 
 Click **Test URL** to try out the request configuration. A response preview is displayed on the right side of your screen.
 
+### Snippets
+
+{{% synthetics-api-tests-snippets %}}
+
 ### Advanced options
 
    {{< tabs >}}
@@ -193,6 +197,9 @@ To display your list of variables, type `{{` in your desired field:
 A test is considered `FAILED` if it does not satisfy one or more assertions or if the request prematurely failed. In some cases, the test can fail without testing the assertions against the endpoint. 
 
 The most common errors include the following:
+
+`AUTHENTICATION_ERROR`
+: Synthetic Monitoring automatically disables test retries when authentication failures occur. This safety measure remains in effect until you update the test with valid credentials. This prevents unnecessary test executions that would generate false alerts and increase billable usage.
 
 `CONNREFUSED`
 : No connection could be made because the target machine actively refused it.

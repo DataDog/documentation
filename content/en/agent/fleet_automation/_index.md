@@ -21,7 +21,7 @@ further_reading:
 
 Datadog Fleet Automation allows you to centrally govern and remotely manage Datadog Agents at scale to support your evolving observability needs.
 
-{{< img src="agent/fleet_automation/fleet-automation.png" alt="The fleet automation page" style="width:100%;" >}}
+{{< img src="agent/fleet_automation/fleet-automation1.png" alt="The fleet automation page" style="width:100%;" >}}
 
 With the Fleet Automation platform, you can:
 - View Agent and Agent integration configurations to help confirm deployment changes and ensure configuration consistency.

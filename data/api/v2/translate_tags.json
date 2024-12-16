@@ -67,6 +67,10 @@
     "name": "Dashboard Lists",
     "description": "Interact with your dashboard lists through the API to\norganize, find, and share all of your dashboards with your team and\norganization."
   },
+  "data-deletion": {
+    "name": "Data Deletion",
+    "description": "The Data Deletion API allows the user to target and delete data from the allowed products. It's currently enabled for Logs and RUM and depends on `logs_delete_data` and `rum_delete_data` permissions respectively."
+  },
   "domain-allowlist": {
     "name": "Domain Allowlist",
     "description": "Configure your Datadog Email Domain Allowlist directly through the Datadog API.\nThe Email Domain Allowlist controls the domains that certain datadog emails can be sent to.\nFor more information, see the [Domain Allowlist docs page](https://docs.datadoghq.com/account_management/org_settings/domain_allowlist)"
