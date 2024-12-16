@@ -32924,12 +32924,10 @@ paths:
       x-undo:
         type: safe
     post:
-      description: 'This endpoint allows you to post events.
-
-
-        Only events with **`change` category** are under General Availability. Refer
-        to [Change Tracking](https://docs.datadoghq.com/change_tracking) for further
-        details.'
+      description: "This endpoint allows you to post events.\n\n\u2705 **Only events
+        with the `change` category** are in General Availability. See [Change Tracking](https://docs.datadoghq.com/change_tracking)
+        for more details.\n\n\u274C For use cases involving other event categories,
+        please use the V1 endpoint."
       operationId: CreateEvent
       requestBody:
         content:
