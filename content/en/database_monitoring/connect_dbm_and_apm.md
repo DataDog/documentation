@@ -94,8 +94,9 @@ DD_VERSION=(application version)
 {{% tab "Go" %}}
 
 Update your app dependencies to include [dd-trace-go@v1.44.0][1] or greater:
-```
-go get gopkg.in/DataDog/dd-trace-go.v1@v1.44.0
+```shell
+go get gopkg.in/DataDog/dd-trace-go.v1@v1.44.0 # 1.x
+# go get github.com/DataDog/dd-trace-go/v2 # 2.x
 ```
 
 Update your code to import the `contrib/database/sql` package:
