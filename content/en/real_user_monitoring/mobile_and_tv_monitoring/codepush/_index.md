@@ -1,5 +1,5 @@
 ---
-title: React Native & CodePush Monitoring
+title: React Native and CodePush Monitoring
 description: Collect RUM data from your CodePush projects.
 aliases:
 - /real_user_monitoring/mobile_and_tv_monitoring/setup/codepush
