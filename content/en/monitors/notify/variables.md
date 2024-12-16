@@ -348,6 +348,15 @@ The following table contains all available attributes:
 |-------------------|------------------------|
 | `{{pod_name.key}}`     | `k8s_pod_key`, `tags`, `annotations`, `cluster_id`, `cluster_name`, `conditions`, `container_statuses`, `creation_timestamp`, `deletion_timestamp`, `display_name`, `external_id`, `finalizers`, `first_seen_at`, `host_id`, `host_key`, `hostname`, `init_container_statuses`, `ip`, `labels`, `name`, `namespace`, `node_name`, `nominated_node_name`, `phase`, `pod_scheduled_timestamp`, `priority_class_name`, `qosclass`, `resource_requirements`, `uid`|
 
+##### Query group by service
+
+If your monitor triggers an alert for each `service`, then you can access some attribute of the service, as defined in the [Service Catalog][10]. 
+
+Service metadata variables:
+
+- Team name: `{{service.dd_team}}`
+- Docs: `{{service.docs}}`
+- Links: `{{service.links}}`
 
 
 ### Matching attribute/tag variables
@@ -664,3 +673,4 @@ https://app.datadoghq.com/services/{{urlencode "service.name"}}
 [7]: /monitors/guide/template-variable-evaluation/
 [8]: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
 [9]: /monitors/types/error_tracking/
+[10]: /service_catalog/service_definitions/
