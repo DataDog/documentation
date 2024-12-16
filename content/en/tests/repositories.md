@@ -62,7 +62,7 @@ The [Test Optimization settings][3] page gives you an overview of the features e
 
 ### Overrides for test services
 
-If you have a suite of test services that require their own configuration, you can override your default repository settings.
+If you have test services that require their own configuration, you can override your default repository settings.
 
 To create an override:
 1. From the [Test Optimization settings][3] page, select a repo with a test service.

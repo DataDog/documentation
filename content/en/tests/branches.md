@@ -20,7 +20,7 @@ further_reading:
 
 ## Overview
 
-The [Branches][1] view of the Tests page lists all branches from all {{< tooltip glossary="test service" >}}s that have reported test results. This tab is useful for seeing the status of tests run on your code branches and troubleshooting test failures.
+The [Branches][1] view of the Repositories page lists all branches from all repositories and {{< tooltip glossary="test service" >}}s that have reported test results. This tab is useful for seeing the status of tests run on your code branches and troubleshooting test failures.
 
 To filter the list down to only branches that you have committed to, toggle **My Branches** and enter the email address associated with your GitHub account. You can enter multiple email addresses. Edit your address later by clicking **Edit Authors**.
 

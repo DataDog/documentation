@@ -117,7 +117,7 @@ You can use the following facets to query sessions that run Early Flake Detectio
 
 ## Troubleshooting
 
-If you suspect there are issues with Early Flake Detection, navigate to the [Test Optimization Settings page][7], look for your test service, and click **Configure**. Disable Early Flake Detection by clicking on the toggle.
+If you suspect there are issues with Early Flake Detection, navigate to the [Test Optimization Settings page][7], look for your repository, and click **Configure**. Disable Early Flake Detection by clicking on the toggle.
 
 ### A new test is not being retried
 

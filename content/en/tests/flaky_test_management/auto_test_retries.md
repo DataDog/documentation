@@ -131,7 +131,7 @@ You can query the retried tests in the [Test Optimization Explorer][2]: they hav
 
 ## Troubleshooting
 
-If you suspect there are any issues with Auto Test Retries, navigate to the [Test Optimization Settings page][4], look for your test service, and click **Configure**. Disable Auto Test Retries by clicking on the toggle.
+If you suspect there are any issues with Auto Test Retries, navigate to the [Test Optimization Settings page][4], look for your repository, and click **Configure**. Disable Auto Test Retries by clicking on the toggle.
 
 ## Further Reading
 
