@@ -131,7 +131,7 @@ For each bucket you want to monitor:
 
 #### Post-setup steps
 
-After completing the above steps, fill out [this form][205] with the following required information::
+After completing the above steps, fill out the [post-setup form][205] with the following required information:
 
 1. Name of the destination bucket where inventories are stored.
 2. Prefix where the files are stored in the destination bucket.
