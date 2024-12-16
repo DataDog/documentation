@@ -47,7 +47,7 @@ yarn add expo-datadog @datadog/mobile-react-native
 
 ### Track view navigation
 
-To see RUM/Error Tracking sessions populate in Datadog, you need to implement view tracking, which can be initialized manually or automatically.
+To see RUM or Error Tracking sessions populate in Datadog, you need to implement view tracking, which can be initialized manually or automatically.
 
 #### Manual tracking
 
@@ -127,7 +127,7 @@ await DdSdkReactNative.initialize(config);
 
 <div class="alert alert-warning">Configuring the session sample rate does not apply to Error Tracking.</div>
 
-To control the data your application sends to Datadog RUM, you can specify a sampling rate for RUM sessions while [initializing the Expo SDK][6] as a percentage between 0 and 100. To set this rate, use the `config.sessionSamplingRate` parameter. 
+To control the data your application sends to Datadog RUM, you can specify a sampling rate for RUM sessions while [initializing the Expo SDK][6]. To set this rate, use the `config.sessionSamplingRate` parameter and specify a percentage between 0 and 100.
 
 ### Upload source maps on EAS builds
 
@@ -247,7 +247,7 @@ DdSdkReactNative.initialize(config);
 
 ## Sending data when device is offline
 
-RUM ensures availability of data when your user device is offline. In case of low-network areas, or when the device battery is too low, all the RUM events are first stored on the local device in batches. 
+RUM ensures availability of data when your user device is offline. In case of low-network areas, or when the device battery is too low, all the events are first stored on the local device in batches. 
 
 Each batch follows the intake specification. They are sent as soon as the network is available, and the battery is high enough to ensure the Datadog SDK does not impact the end user's experience. If the network is not available while your application is in the foreground, or if an upload of data fails, the batch is kept until it can be sent successfully.
  

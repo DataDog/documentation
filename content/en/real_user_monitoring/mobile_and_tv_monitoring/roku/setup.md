@@ -24,7 +24,7 @@ further_reading:
 
 ## Overview
 
-This page describes how to instrument your applications for both [Real User Monitoring (RUM)][1] or [Error Tracking][2] with the Roku SDK. You can follow the steps below to instrument your applications for RUM (includes Error Tracking), or Error Tracking if you have purchased it as a standalone product.
+This page describes how to instrument your applications for both [Real User Monitoring (RUM)][1] and [Error Tracking][2] with the Roku SDK. You can follow the steps below to instrument your applications for RUM (includes Error Tracking) or Error Tracking if you have purchased it as a standalone product.
 
 The Datadog Roku SDK supports BrightScript channels for Roku OS 10 and higher.
 
@@ -42,7 +42,7 @@ ropm install datadog-roku
 
 #### Setup manually
 
-If your project does not use `ROPM`, install the library manually by downloading the [Roku SDK][4] zip archive, 
+If your project does not use `ROPM`, install the library manually by downloading the [Roku SDK][4] zip archive
 and unzipping it in your project's root folder.
 
 Make sure you have a `roku_modules/datadogroku` subfolder in both the `components` and `source` folders of your project.
@@ -54,7 +54,7 @@ Make sure you have a `roku_modules/datadogroku` subfolder in both the `component
 
 1. Navigate to [**Digital Experience** > **Add an Application**][1].
 2. Select **Roku** as the application type and enter an application name to generate a unique Datadog application ID and client token.
-3. To disable automatic user data collection for either client IP or geolocation data, uncheck the boxes for those settings. For more information, see [Roku Data Collected][2].
+3. To disable automatic user data collection for client IP or geolocation data, uncheck the boxes for those settings. For more information, see [Roku Data Collected][2].
 
    {{< img src="real_user_monitoring/roku/roku-new-application-2.png" alt="Create a RUM application for Roku in Datadog" style="width:90%;">}}
 
@@ -66,9 +66,9 @@ Make sure you have a `roku_modules/datadogroku` subfolder in both the `component
 
 1. Navigate to [**Error Tracking** > **Settings** > **Browser and Mobile** > **Add an Application**][1].
 2. Select **Roku** as the application type and enter an application name to generate a unique Datadog application ID and client token.
-3. To disable automatic user data collection for either client IP or geolocation data, uncheck the boxes for those settings. For more information, see [Roku Data Collected][2].
+3. To disable automatic user data collection for client IP or geolocation data, uncheck the boxes for those settings. For more information, see [Roku Data Collected][2].
 
-   {{< img src="real_user_monitoring/error-tracking/mobile-new-application-1.png" alt="Create an application for Roku in Datadog" style="width:90%;">}}
+   {{< img src="real_user_monitoring/roku/roku-new-application-2.png" alt="Create an application for Roku in Datadog" style="width:90%;">}}
 
 [1]: https://app.datadoghq.com/error-tracking/settings/setup/client
 [2]: /real_user_monitoring/mobile_and_tv_monitoring/data_collected/roku
@@ -76,7 +76,7 @@ Make sure you have a `roku_modules/datadogroku` subfolder in both the `component
 {{% /tab %}}
 {{< /tabs >}}
 
-To ensure the safety of your data, you must use a client token. If you used only [Datadog API keys][5] to configure the `dd-sdk-roku` library, they would be exposed client-side in the Roku channel's BrightScript code. 
+To ensure the safety of your data, you must use a client token. If you use only [Datadog API keys][5] to configure the `dd-sdk-roku` library, they are exposed client-side in the Roku channel's BrightScript code.
 
 For more information about setting up a client token, see the [Client Token documentation][6].
 
@@ -193,16 +193,15 @@ end sub
 
 <div class="alert alert-warning">Configuring the session sample rate does not apply to Error Tracking.</div>
 
-
-To control the data your application sends to Datadog RUM, you can specify a sampling rate for RUM sessions while [initializing the RUM Roku SDK][8] as a percentage between 0 and 100. You can specify the rate with the `sessionSampleRate` parameter.
+To control the data your application sends to Datadog RUM, you can specify a sampling rate for RUM sessions while [initializing the RUM Roku SDK][8]. The rate is a percentage between 0 and 100. By default, `sessionSamplingRate` is set to 100 (keep all sessions).
 
 ### Step 4 - Instrument the channel
 
 See [**Track RUM Resources**][9] to enable automatic tracking of all your resources, and [**Enrich user sessions**][10] to add custom global or user information to your events.
 
-#### Track RUM Views
+#### Track Views
 
-To split [user sessions][11] into logical steps, manually start a View using the following code. Every navigation to a new screen within your channel should correspond to a new RUM View.
+To split [user sessions][11] into logical steps, manually start a View using the following code. Every navigation to a new screen within your channel should correspond to a new View.
 
 ```brightscript
     viewName = "VideoDetails"

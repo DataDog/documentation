@@ -1,7 +1,7 @@
 ---
 title: iOS and tvOS Monitoring Setup
 beta: true
-description: "Collect RUM and Error Tracking data from your iOS and tvOS applications."
+description: "Collect RUM or Error Tracking data from your iOS and tvOS applications."
 aliases:
   - /real_user_monitoring/ios
   - /real_user_monitoring/ios/getting_started
@@ -33,6 +33,7 @@ further_reading:
 ## Overview
 
 This page describes how to instrument your applications for both [Real User Monitoring (RUM)][1] or [Error Tracking][2] with the iOS SDK. You can follow the steps below to instrument your applications for RUM (includes Error Tracking), or Error Tracking if you have purchased it as a standalone product.
+
 ## Setup
 
 To start sending RUM or Error Tracking data from your iOS or tvOS application to Datadog:
@@ -81,7 +82,6 @@ DatadogCore.xcframework
 DatadogRUM.xcframework
 ```
 
-
 [1]: https://github.com/Carthage/Carthage
 {{% /tab %}}
 {{< /tabs >}}
@@ -94,7 +94,7 @@ DatadogRUM.xcframework
 1. Navigate to [**Digital Experience** > **Add an Application**][1].
 2. Select `iOS` as the application type and enter an application name to generate a unique Datadog application ID and client token.
 3. To instrument your web views, click the **Instrument your webviews** toggle. For more information, see [Web View Tracking][2].
-4. To disable automatic user data collection for either client IP or geolocation data, use the toggles for those settings. For more information, see [RUM iOS Data Collected][3].
+4. To disable automatic user data collection for client IP or geolocation data, use the toggles for those settings. For more information, see [RUM iOS Data Collected][3].
 
    {{< img src="real_user_monitoring/ios/ios-create-application.png" alt="Create a RUM application for iOS in Datadog" style="width:100%;border:none" >}}
 
@@ -326,7 +326,7 @@ The iOS SDK automatically tracks user sessions depending on options provided at 
 
 <div class="alert alert-warning">Configuring the session sample rate does not apply to Error Tracking.</div>
 
-To control the data your application sends to Datadog RUM, you can specify a sampling rate for RUM sessions while [initializing the RUM iOS SDK][7] as a percentage between 0 and 100.
+To control the data your application sends to Datadog RUM, you can specify a sampling rate for RUM sessions while [initializing the RUM iOS SDK][7]. The rate is a percentage between 0 and 100. By default, `sessionSamplingRate` is set to 100 (keep all sessions).
 
 For example, to only keep 50% of sessions use:
 
@@ -452,7 +452,7 @@ struct FooView: View {
 }
 ```
 
-The `trackRUMView(name:)` method starts and stops a RUM view when the `SwiftUI` view appears and disappears from the screen.
+The `trackRUMView(name:)` method starts and stops a view when the `SwiftUI` view appears and disappears from the screen.
 
 ### Instrument tap actions
 

@@ -319,7 +319,7 @@ The Gradle plugin automatically uploads the appropriate ProGuard `mapping.txt` f
 
 <div class="alert alert-warning">Configuring the session sample rate does not apply to Error Tracking.</div>
 
-To control the data your application sends to Datadog, you can specify a sample rate for sessions when [initializing RUM][8]. The sample rate is a percentage between 0 and 100.
+To control the data your application sends to Datadog, you can specify a sample rate for sessions when [initializing RUM][8]. The sample rate is a percentage between 0 and 100. By default, `sessionSamplingRate` is set to 100 (keep all sessions).
 
 ```kotlin
 val rumConfig = RumConfiguration.Builder(applicationId)
@@ -332,6 +332,7 @@ Rum.enable(rumConfig)
 #### Set tracking consent (GDPR compliance)
 
 To be compliant with the GDPR regulation, the SDK requires the tracking consent value upon initialization.
+
 Tracking consent can be one of the following values:
 
 - `TrackingConsent.PENDING`: (Default) The SDK starts collecting and batching the data but does not send it to the
@@ -369,6 +370,7 @@ To enable the Android SDK to start sending data:
       .build();
     Rum.enable(rumConfig);
 ```
+
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -378,7 +380,7 @@ See [`ViewTrackingStrategy`][10] to enable automatic tracking of all your views 
 
 To initialize an interceptor for tracking network events:
 
-1. If you want to have distributed tracing, [add and enable the Trace feature][11].
+1. For distributed tracing, [add and enable the Trace feature][11].
 2. Add the Gradle dependency to the `dd-sdk-android-okhttp` library in the module-level `build.gradle` file:
 
     ```groovy
@@ -491,10 +493,10 @@ val inputStream = context.getRawResAsRumResource(id)
 [5]: /account_management/api-app-keys/#api-keys
 [6]: /account_management/api-app-keys/#client-tokens
 [7]: /getting_started/tagging/using_tags/#rum--session-replay
-[8]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/android/#initialization-parameters
+[8]: /real_user_monitoring/mobile_and_tv_monitoring/android/advanced_configuration/#initialization-parameters
 [9]: /real_user_monitoring/error_tracking/android/#upload-your-mapping-file
-[10]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/android/#automatically-track-views
+[10]: /real_user_monitoring/mobile_and_tv_monitoring/android/advanced_configuration/#automatically-track-views
 [11]: /tracing/trace_collection/dd_libraries/android/?tab=kotlin
 [12]: https://square.github.io/okhttp/interceptors/
-[13]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/android/#custom-views
-[14]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/android/#automatically-track-network-requests
+[13]: /real_user_monitoring/mobile_and_tv_monitoring/android/advanced_configuration/#custom-views
+[14]: /real_user_monitoring/mobile_and_tv_monitoring/android/advanced_configuration/#automatically-track-network-requests

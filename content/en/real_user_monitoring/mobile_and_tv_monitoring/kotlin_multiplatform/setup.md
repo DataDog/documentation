@@ -22,13 +22,13 @@ further_reading:
 Kotlin Multiplatform Monitoring is in Preview.
 {{< /beta-callout >}}
 
-This page describes how to instrument your applications for both [Real User Monitoring (RUM)][1] and [Error Tracking][2] with the Kotlin Multiplatform SDK. You can follow the steps below to instrument your applications for RUM (includes Error Tracking), or Error Tracking if you have purchased it as a standalone product.
+This page describes how to instrument your applications for both [Real User Monitoring (RUM)][1] and [Error Tracking][2] with the Kotlin Multiplatform SDK. You can follow the steps below to instrument your applications for RUM (includes Error Tracking) or Error Tracking if you have purchased it as a standalone product.
 
 The Datadog Kotlin Multiplatform SDK supports Android 5.0+ (API level 21) and iOS v12+.
 
 ## Setup
 
-1. Declare the Datadog Kotlin Multiplatform SDK as a dependency.
+1. Declare the Datadog SDK as a dependency.
 2. Add native dependencies for iOS.
 3. Specify application details in the UI.
 4. Initialize the Datadog SDK.
@@ -130,7 +130,9 @@ If you are integrating Kotlin Multiplatform library as a framework with an `embe
 {{% /tab %}}
 {{< /tabs >}}
 
+To ensure the safety of your data, you must use a client token. If you use only [Datadog API keys][4] to configure the Datadog SDK, they are exposed client-side in the Android application's APK byte code.
 
+For more information about setting up a client token, see the [Client Token documentation][5].
 
 ### Initialize Datadog SDK
 
@@ -277,7 +279,7 @@ fun initializeDatadog(context: Any? = null) {
 
 ### Sample RUM sessions
 
-To control the data your application sends to Datadog RUM, you can specify a sample rate for RUM sessions while [initializing the RUM feature][2] as a percentage between 0 and 100.
+To control the data your application sends to Datadog RUM, you can specify a sample rate for RUM sessions while [initializing the RUM feature][8]. The rate is a percentage between 0 and 100. By default, `sessionSamplingRate` is set to 100 (keep all sessions).
 
 ```kotlin
 val rumConfig = RumConfiguration.Builder(applicationId)
@@ -324,7 +326,7 @@ internal actual fun rumPlatformSetup(rumConfigurationBuilder: RumConfiguration.B
 }
 ```
 
-See [Automatically track views][8] to enable automatic tracking of all your views.
+See [Automatically track views][9] to enable automatic tracking of all your views.
 
 ### Set tracking consent (GDPR compliance)
 
@@ -358,7 +360,7 @@ kotlin {
 }
 ```
 
-2. To track your Ktor requests as resources, add the provided [Datadog Ktor plugin][9]:
+2. To track your Ktor requests as resources, add the provided [Datadog Ktor plugin][10]:
 
 ```kotlin
 val ktorClient = HttpClient {
@@ -374,7 +376,7 @@ val ktorClient = HttpClient {
 }
 ```
 
-This records each request processed by the `HttpClient` as a resource in RUM, with all the relevant information automatically filled (URL, method, status code, and error). Only the network requests that started when a view is active are tracked. To track requests when your application is in the background, [create a view manually][10] or enable [background view tracking](#track-background-events).
+This records each request processed by the `HttpClient` as a resource in RUM, with all the relevant information automatically filled (URL, method, status code, and error). Only the network requests that started when a view is active are tracked. To track requests when your application is in the background, [create a view manually][11] or enable [background view tracking](#track-background-events).
 
 ## Track background events
 
@@ -390,7 +392,7 @@ Add the following snippet during RUM configuration:
 
 ## Track errors
 
-[Kotlin Multiplatform Crash Reporting and Error Tracking][11] displays any issues in your application and the latest available errors. You can view error details and attributes including JSON in the [RUM Explorer][12].
+[Kotlin Multiplatform Crash Reporting and Error Tracking][12] displays any issues in your application and the latest available errors. You can view error details and attributes including JSON in the [RUM Explorer][13].
 
 ## Sending data when device is offline
 
@@ -404,15 +406,16 @@ This means that even if users open your application while offline, no data is lo
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://github.com/DataDog/dd-sdk-kotlin-multiplatform/tree/develop/features/rum
-[2]: https://app.datadoghq.com/rum/application/create
-[3]: /real_user_monitoring/mobile_and_tv_monitoring/kotlin-multiplatform/data_collected/
+[1]: /real_user_monitoring/
+[2]: /error_tracking/
+[3]: https://github.com/DataDog/dd-sdk-kotlin-multiplatform/tree/develop/features/rum
 [4]: /account_management/api-app-keys/#api-keys
 [5]: /account_management/api-app-keys/#client-tokens
 [6]: /getting_started/tagging/using_tags/
-[7]: /real_user_monitoring/mobile_and_tv_monitoring/kotlin-multiplatform/advanced_configuration/#initialization-parameters
-[8]: /real_user_monitoring/mobile_and_tv_monitoring/kotlin-multiplatform/advanced_configuration/#automatically-track-views
-[9]: https://github.com/DataDog/dd-sdk-kotlin-multiplatform/tree/develop/integrations/ktor
-[10]: /real_user_monitoring/mobile_and_tv_monitoring/kotlin-multiplatform/advanced_configuration/#custom-views
-[11]: /real_user_monitoring/error_tracking/kotlin-multiplatform/
-[12]: /real_user_monitoring/explorer/
+[7]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/kotlin-multiplatform/#initialization-parameters
+[8]: https://app.datadoghq.com/rum/application/create
+[9]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/kotlin-multiplatform/#automatically-track-views
+[10]: https://github.com/DataDog/dd-sdk-kotlin-multiplatform/tree/develop/integrations/ktor
+[11]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/kotlin-multiplatform/#custom-views
+[12]: /real_user_monitoring/error_tracking/kotlin-multiplatform/
+[13]: /real_user_monitoring/explorer/

@@ -22,7 +22,7 @@ further_reading:
 ---
 ## Overview
 
-This page describes how to instrument your applications for both [Real User Monitoring (RUM)][1] and [Error Tracking][2] with the Flutter SDK. You can follow the steps below to instrument your applications for RUM (includes Error Tracking), or Error Tracking if you have purchased it as a standalone product.
+This page describes how to instrument your applications for both [Real User Monitoring (RUM)][1] and [Error Tracking][2] with the Flutter SDK. You can follow the steps below to instrument your applications for RUM (which includes Error Tracking) or Error Tracking if you have purchased it as a standalone product.
 
 ## Setup
 
@@ -36,7 +36,7 @@ To start sending RUM or Error Tracking data from your Flutter application to Dat
 1. In Datadog, navigate to [**Digital Experience** > **Add an Application**][1].
 2. Choose `Flutter` as the application type.
 3. Provide an application name to generate a unique Datadog application ID and client token.
-4. To disable automatic user data collection for either client IP or geolocation data, uncheck the boxes for those settings. For more information, see [Flutter Data Collected][2].
+4. To disable automatic user data collection for client IP or geolocation data, uncheck the boxes for those settings. For more information, see [Flutter Data Collected][2].
 
    {{< img src="real_user_monitoring/flutter/flutter-new-application.png" alt="Create a RUM application for Flutter in Datadog" style="width:90%;">}}
 
@@ -70,11 +70,12 @@ Datadog supports Flutter Monitoring for iOS and Android for Flutter 3.0+.
 </div>
 
 Datadog does not officially support Flutter Web, but the current Flutter SDK for mobile apps allows you to achieve some out-of-the-box monitoring. Here are known limitations:
+
  * All Actions reported from Flutter are labeled with type `custom`.
- * Long running actions (`startAction` / `stopAction`) are not supported.
- * Manually reporting RUM resources (`startResource` / `stopResource`) is not supported.
- * Event mappers are not currently supported.
- * Tags on loggers are not currently supported.
+ * Long running actions (`startAction` and `stopAction`) are not supported.
+ * Manually reporting RUM resources (`startResource` and `stopResource`) is not supported.
+ * Event mappers are not supported.
+ * Tags on loggers are not supported.
  * `addUserExtraInfo` is not supported.
  * `stopSession` is not supported.
 
@@ -175,7 +176,7 @@ To ensure the safety of your data, you must use a client token. You cannot use D
 
 You can initialize the library using one of two methods in your `main.dart` file.
 
-1. Use `DatadogSdk.runApp` which automatically sets up [Error Tracking][5].
+- Use `DatadogSdk.runApp` to automatically set up [Error Tracking][5].
 
    ```dart
    await DatadogSdk.runApp(configuration, TrackingConsent.granted, () async {
@@ -183,7 +184,7 @@ You can initialize the library using one of two methods in your `main.dart` file
    })
    ```
 
-2. Alternatively, manually set up [Error Tracking][5] and resource tracking. `DatadogSdk.runApp` calls `WidgetsFlutterBinding.ensureInitialized`, so if you are not using `DatadogSdk.runApp`, you need to call this method prior to calling `DatadogSdk.instance.initialize`.
+- You can also manually set up [Error Tracking][5] and resource tracking. `DatadogSdk.runApp` calls `WidgetsFlutterBinding.ensureInitialized`, so if you are not using `DatadogSdk.runApp`, you need to call this method prior to calling `DatadogSdk.instance.initialize`.
 
    ```dart
    WidgetsFlutterBinding.ensureInitialized();
@@ -209,7 +210,7 @@ You can initialize the library using one of two methods in your `main.dart` file
 
 <div class="alert alert-warning">Configuring the session sample rate does not apply to Error Tracking.</div>
 
-To control the data your application sends to Datadog, you can specify a sampling rate for RUM sessions while initializing the Flutter SDK as a percentage between 0 and 100. By default, `sessionSamplingRate` is set to 100 (keep all sessions).
+To control the data your application sends to Datadog RUM, you can specify a sampling rate for RUM sessions while initializing the Flutter RUM SDK. The rate is a percentage between 0 and 100. By default, `sessionSamplingRate` is set to 100 (keep all sessions).
 
 For example, to keep only 50% of sessions, use:
 
@@ -279,7 +280,6 @@ MaterialApp.router(
 ```
 
 For examples that use routers other than `go_router`, see [Advanced Configuration - Automatic View Tracking][7].
-
 
 ### Renaming Views
 

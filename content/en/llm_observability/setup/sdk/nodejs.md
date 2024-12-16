@@ -41,25 +41,25 @@ DD_SITE={{< region-param key="dd_site" code="true" >}} DD_API_KEY=<YOUR_API_KEY>
 DD_LLMOBS_ML_APP=<YOUR_ML_APP_NAME> NODE_OPTIONS="--import dd-trace/initialize.mjs" node <YOUR_APP_ENTRYPOINT>
 ```
 
-`DD_API_KEY`
-: required - _string_
-<br />Your Datadog API key.
-
 `DD_SITE`
-: required - _string_ 
+: required - _string_
 <br />The Datadog site to submit your LLM data. Your site is {{< region-param key="dd_site" code="true" >}}.
 
 `DD_LLMOBS_ENABLED`
-: required - _integer or string_ 
+: required - _integer or string_
 <br />Toggle to enable submitting data to LLM Observability. Should be set to `1` or `true`.
 
 `DD_LLMOBS_ML_APP`
-: required - _string_ 
+: required - _string_
 <br />The name of your LLM application, service, or project, under which all traces and spans are grouped. This helps distinguish between different applications or experiments. See [Application naming guidelines](#application-naming-guidelines) for allowed characters and other constraints. To override this value for a given root span, see [Tracing multiple applications](#tracing-multiple-applications).
 
 `DD_LLMOBS_AGENTLESS_ENABLED`
 : optional - _integer or string_ - **default**: `false`
 <br />Only required if you are not using the Datadog Agent, in which case this should be set to `1` or `true`.
+
+`DD_API_KEY`
+: optional - _string_
+<br />Your Datadog API key. Only required if you are not using the Datadog Agent.
 
 ### In-code setup
 
@@ -123,7 +123,7 @@ To trace a span, use `llmobs.wrap(options, function)` as a function wrapper for 
 
 ### Span Kinds
 
-Span kinds are required, and are specified on the `options` object passed to the `llmobs` tracing functions (`trace`, `wrap`, and `decorate`). See the [Span Kinds documentation][2] for a list of supported span kinds. 
+Span kinds are required, and are specified on the `options` object passed to the `llmobs` tracing functions (`trace`, `wrap`, and `decorate`). See the [Span Kinds documentation][2] for a list of supported span kinds.
 
 **Note:** Spans with an invalid span kind are not submitted to LLM Observability.
 
@@ -379,7 +379,7 @@ getRelevantDocs = llmobs.wrap({ kind: 'retrieval' }, getRelevantDocs)
 The following example demonstrates the second condition, where the last argument is a callback:
 
 #### Example
-  
+
 {{< code-block lang="javascript" >}}
 const express = require('express')
 const app = express()
@@ -426,13 +426,13 @@ processMessage = llmobs.wrap({ kind: 'workflow', sessionId: "<SESSION_ID>" }, pr
 
 ## Annotating a span
 
-The SDK provides the method `llmobs.annotate()` to annotate spans with inputs, outputs, and metadata. 
+The SDK provides the method `llmobs.annotate()` to annotate spans with inputs, outputs, and metadata.
 
 ### Arguments
 
 The `LLMObs.annotate()` method accepts the following arguments:
 
-`span` 
+`span`
 : optional - _Span_ - **default**: the current active span
 <br />The span to annotate. If `span` is not provided (as when using function wrappers), the SDK annotates the current active span.
 
@@ -442,15 +442,15 @@ The `LLMObs.annotate()` method accepts the following arguments:
 
 The `annotationOptions` object can contain the following:
 
-`inputData` 
-: optional - _JSON serializable type or list of objects_ 
+`inputData`
+: optional - _JSON serializable type or list of objects_
 <br />Either a JSON serializable type (for non-LLM spans) or a list of dictionaries with this format: `{role: "...", content: "..."}` (for LLM spans).  **Note**: Embedding spans are a special case and require a string or an object (or a list of objects) with this format: `{text: "..."}`.
 
-`outputData` 
-: optional - _JSON serializable type or list of objects_ 
+`outputData`
+: optional - _JSON serializable type or list of objects_
 <br />Either a JSON serializable type (for non-LLM spans) or a list of objects with this format: `{role: "...", content: "..."}` (for LLM spans). **Note**: Retrieval spans are a special case and require a string or an object (or a list of objects) with this format: `{text: "...", name: "...", score: number, id: "..."}`.
 
-`metadata` 
+`metadata`
 : optional - _object_
 <br />An object of JSON serializable key-value pairs that users can add as metadata information relevant to the input or output operation described by the span (`model_temperature`, `max_tokens`, `top_k`, etc.).
 
@@ -647,7 +647,7 @@ function processMessage () {
 The Node.js LLM Observability SDK offers an `llmobs.decorate` function which serves as a function decorator for TypeScript applications. This functions tracing behavior is the same as `llmobs.wrap`.
 
 #### Example
-  
+
 {{< code-block lang="javascript" >}}
 // index.ts
 import tracer from 'dd-trace';
