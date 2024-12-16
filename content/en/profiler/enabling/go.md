@@ -47,7 +47,7 @@ To begin profiling applications:
 
     ```Go
     import "gopkg.in/DataDog/dd-trace-go.v1/profiler" // 1.x
-    // "github.com/DataDog/dd-trace-go/v2/profiler" //2.x
+    // "github.com/DataDog/dd-trace-go/v2/profiler" // 2.x
     ```
 
 4. Add the following snippet to start the profiler:

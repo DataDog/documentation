@@ -123,7 +123,7 @@ This example shows how to retrieve the current tracer span, use it to set user m
 ```go
 import (
   "gopkg.in/DataDog/dd-trace-go.v1/appsec" // 1.x
-  // "github.com/DataDog/dd-trace-go/v2/appsec //2.x
+  // "github.com/DataDog/dd-trace-go/v2/appsec // 2.x
 )
 
 func handler(w http.ResponseWriter, r *http.Request) {
@@ -472,7 +472,7 @@ The following examples show how to track login events or custom events (using si
 ```go
 import (
   "gopkg.in/DataDog/dd-trace-go.v1/appsec" // 1.x
-  // "github.com/DataDog/dd-trace-go/v2/appsec" //2.x
+  // "github.com/DataDog/dd-trace-go/v2/appsec" // 2.x
 )
 
 func handler(w http.ResponseWriter, r *http.Request) {
@@ -492,7 +492,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 ```go
 import (
   "gopkg.in/DataDog/dd-trace-go.v1/appsec" // 1.x
-  // "github.com/DataDog/dd-trace-go/v2/appsec" //2.x
+  // "github.com/DataDog/dd-trace-go/v2/appsec" // 2.x
 )
 
 func handler(w http.ResponseWriter, r *http.Request) {
@@ -508,7 +508,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 ```go
 import (
   "gopkg.in/DataDog/dd-trace-go.v1/appsec" // 1.x
-  // "github.com/DataDog/dd-trace-go/v2/appsec" //2.x
+  // "github.com/DataDog/dd-trace-go/v2/appsec" // 2.x
 )
 
 func handler(w http.ResponseWriter, r *http.Request) {

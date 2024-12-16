@@ -201,9 +201,9 @@ import (
 	"net/http"
 
 	ddotel "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/opentelemetry" // 1.x
-  // "github.com/DataDog/dd-trace-go/v2/ddtrace/opentelemetry //2.x
+  // "github.com/DataDog/dd-trace-go/v2/ddtrace/opentelemetry // 2.x
 	ddtracer "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer" // 1.x
-  // "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer //2.x
+  // "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer // 2.x
 
 	"go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp"
 	"go.opentelemetry.io/otel"
