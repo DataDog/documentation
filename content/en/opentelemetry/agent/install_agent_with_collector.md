@@ -263,10 +263,10 @@ exporters:
   datadog:
     api:
       key: ${env:DD_API_KEY}
-      site: datadoghq.com
+      site: ${env:DD_SITE}
 {{< /code-block >}}
 
-Set `datadog.site` to your [Datadog site][52]. Otherwise, it defaults to `datadoghq.com`, the US1 site.
+Note: If key and / or site are unset, or key is set to a secret, the missing parameters will be sourced from the core agent config. For site, core agent config defaults to `datadoghq.com` (US1). 
 
 ##### Prometheus receiver
 
