@@ -1,6 +1,6 @@
 ---
 title: RUM Flutter Monitoring Setup
-description: Collect RUM data from your Flutter projects.
+description: Collect RUM or Error Tracking data from your Flutter projects.
 aliases:
     - /real_user_monitoring/flutter/
     - /real_user_monitoring/flutter/setup
@@ -24,20 +24,42 @@ further_reading:
 ---
 ## Overview
 
-Datadog Real User Monitoring (RUM) enables you to visualize and analyze the real-time performance and user journeys of your application's individual users.
+This page describes how to instrument your applications for both [Real User Monitoring (RUM)][1] and [Error Tracking][2] with the Flutter SDK. You can follow the steps below to instrument your applications for RUM (which includes Error Tracking) or Error Tracking if you have purchased it as a standalone product.
 
 ## Setup
 
 ### Specify application details in the UI
 
+{{< tabs >}}
+{{% tab "RUM" %}}
+
 1. In Datadog, navigate to [**Digital Experience** > **Add an Application**][1].
 2. Choose `Flutter` as the application type.
 3. Provide an application name to generate a unique Datadog application ID and client token.
-4. To disable automatic user data collection for either client IP or geolocation data, uncheck the boxes for those settings. For more information, see [RUM Flutter Data Collected][7].
+4. To disable automatic user data collection for client IP or geolocation data, uncheck the boxes for those settings. For more information, see [Flutter Data Collected][2].
 
    {{< img src="real_user_monitoring/flutter/flutter-new-application.png" alt="Create a RUM application for Flutter in Datadog" style="width:90%;">}}
 
-To ensure the safety of your data, you must use a client token. For more information about setting up a client token, see the [Client Token documentation][2].
+[1]: https://app.datadoghq.com/rum/application/create
+[2]: /real_user_monitoring/ios/data_collected/
+
+{{% /tab %}}
+{{% tab "Error Tracking" %}}
+
+1. Navigate to [**Error Tracking** > **Settings** > **Browser and Mobile** > **Add an Application**][1].
+2. Choose `Flutter` as the application type.
+3. Provide an application name to generate a unique Datadog application ID and client token.
+4. To disable automatic user data collection for client IP or geolocation data, uncheck the boxes for those settings. For more information, see [Flutter Data Collected][2].
+
+   {{< img src="real_user_monitoring/error_tracking/mobile-new-application.png" alt="Create an application for Flutter in Datadog" style="width:90%;">}}
+ 
+[1]: https://app.datadoghq.com/error-tracking/settings/setup/client
+[2]: /real_user_monitoring/ios/data_collected/
+
+{{% /tab %}}
+{{< /tabs >}}
+
+To ensure the safety of your data, you must use a client token. For more information about setting up a client token, see the [Client Token documentation][3].
 
 ### Instrument your application
 
@@ -48,15 +70,16 @@ Datadog supports Flutter Monitoring for iOS and Android for Flutter 3.0+.
 </div>
 
 Datadog does not officially support Flutter Web, but the current Flutter SDK for mobile apps allows you to achieve some out-of-the-box monitoring. Here are known limitations:
-  * All Actions reported from Flutter are labeled with type `custom`.
-  * Long running actions (`startAction` / `stopAction`) are not supported.
-  * Manually reporting RUM resources (`startResource` / `stopResource`) is not supported.
-  * Event mappers are not currently supported.
-  * Tags on loggers are not currently supported.
-  * `addUserExtraInfo` is not supported.
-  * `stopSession` is not supported.
 
-No Flutter Web support is planned, but Datadog's priorities are often re-evaluated based on your feedback. If you have a Flutter Web app and would want to use Datadog RUM to monitor its performance, reach out to your customer support team and escalate this feature request.
+ * All Actions reported from Flutter are labeled with type `custom`.
+ * Long running actions (`startAction` and `stopAction`) are not supported.
+ * Manually reporting RUM resources (`startResource` and `stopResource`) is not supported.
+ * Event mappers are not supported.
+ * Tags on loggers are not supported.
+ * `addUserExtraInfo` is not supported.
+ * `stopSession` is not supported.
+
+No Flutter Web support is planned, but Datadog's priorities are often re-evaluated based on your feedback. If you have a Flutter Web app and would want to use the Datadog SDK to monitor its performance, reach out to your customer support team and escalate this feature request.
 
 #### iOS
 
@@ -141,7 +164,7 @@ This loads the CDN-delivered Datadog Browser SDKs for Logs and RUM. The synchron
    );
    ```
 
-For more information on available configuration options, see the [DatadogConfiguration object documentation][3].
+For more information on available configuration options, see the [DatadogConfiguration object documentation][4].
 
 To ensure the safety of your data, you must use a client token. You cannot use Datadog API keys to configure the Datadog Flutter Plugin.
 
@@ -152,9 +175,9 @@ To ensure the safety of your data, you must use a client token. You cannot use D
 
 ### Initialize the library
 
-You can initialize RUM using one of two methods in your `main.dart` file.
+You can initialize the library using one of two methods in your `main.dart` file.
 
-1. Use `DatadogSdk.runApp` which automatically sets up [Error Tracking][4].
+- Use `DatadogSdk.runApp` to automatically set up [Error Tracking][5].
 
    ```dart
    await DatadogSdk.runApp(configuration, TrackingConsent.granted, () async {
@@ -162,7 +185,7 @@ You can initialize RUM using one of two methods in your `main.dart` file.
    })
    ```
 
-2. Alternatively, manually set up [Error Tracking][4] and resource tracking. `DatadogSdk.runApp` calls `WidgetsFlutterBinding.ensureInitialized`, so if you are not using `DatadogSdk.runApp`, you need to call this method prior to calling `DatadogSdk.instance.initialize`.
+- You can also manually set up [Error Tracking][5] and resource tracking. `DatadogSdk.runApp` calls `WidgetsFlutterBinding.ensureInitialized`, so if you are not using `DatadogSdk.runApp`, you need to call this method prior to calling `DatadogSdk.instance.initialize`.
 
    ```dart
    WidgetsFlutterBinding.ensureInitialized();
@@ -186,7 +209,9 @@ You can initialize RUM using one of two methods in your `main.dart` file.
 
 ### Sample RUM sessions
 
-To control the data your application sends to Datadog RUM, you can specify a sampling rate for RUM sessions while initializing the Flutter RUM SDK as a percentage between 0 and 100. By default, `sessionSamplingRate` is set to 100 (keep all sessions).
+<div class="alert alert-warning">Configuring the session sample rate does not apply to Error Tracking.</div>
+
+To control the data your application sends to Datadog RUM, you can specify a sampling rate for RUM sessions while initializing the Flutter RUM SDK. The rate is a percentage between 0 and 100. By default, `sessionSamplingRate` is set to 100 (keep all sessions).
 
 For example, to keep only 50% of sessions, use:
 
@@ -208,7 +233,7 @@ Set `trackingConsent` to one of the following values:
 
 - `TrackingConsent.pending`: The Datadog Flutter SDK starts collecting and batching the data but does not send it to Datadog. It waits for the new tracking consent value to decide what to do with the batched data.
 - `TrackingConsent.granted`: The Datadog Flutter SDK starts collecting the data and sends it to Datadog.
-- `TrackingConsent.notGranted`: The Datadog Flutter SDK does not collect any data, which means no logs, traces, or RUM events are sent to Datadog.
+- `TrackingConsent.notGranted`: The Datadog Flutter SDK does not collect any data, which means no logs, traces, or events are sent to Datadog.
 
 To change the tracking consent value after the SDK is initialized, use the `DatadogSdk.setTrackingConsent` API call.
 
@@ -238,7 +263,7 @@ If you are not using named routes, you can use `DatadogRouteAwareMixin` in conju
 
 ### Flutter Navigator v2
 
-If you are using Flutter Navigator v2.0, which uses the `MaterialApp.router` named constructor, the setup varies based on the routing middleware you are using, if any. Since [`go_router`][11] uses the same observer interface as Flutter Navigator v1, `DatadogNavigationObserver` can be added to other observers as a parameter to `GoRouter`.
+If you are using Flutter Navigator v2.0, which uses the `MaterialApp.router` named constructor, the setup varies based on the routing middleware you are using, if any. Since [`go_router`][6] uses the same observer interface as Flutter Navigator v1, `DatadogNavigationObserver` can be added to other observers as a parameter to `GoRouter`.
 
 ```dart
 final _router = GoRouter(
@@ -255,8 +280,7 @@ MaterialApp.router(
 )
 ```
 
-For examples that use routers other than `go_router`, see [Advanced Configuration - Automatic View Tracking][12].
-
+For examples that use routers other than `go_router`, see [Advanced Configuration - Automatic View Tracking][7].
 
 ### Renaming Views
 
@@ -283,7 +307,7 @@ var observer = DatadogNavigationObserver(
 
 ## Automatically track resources
 
-Use the [Datadog Tracking HTTP Client][5] package to enable automatic tracking of resources and HTTP calls from your RUM views.
+Use the [Datadog Tracking HTTP Client][9] package to enable automatic tracking of resources and HTTP calls from your views.
 
 Add the package to your `pubspec.yaml` and add the following to your initialization file:
 
@@ -294,9 +318,9 @@ final configuration = DatadogConfiguration(
 )..enableHttpTracking()
 ```
 
-**Note**: The Datadog Tracking HTTP Client modifies [`HttpOverrides.global`][9]. If you are using your own custom `HttpOverrides`, you may need to inherit from [`DatadogHttpOverrides`][10]. In this case, you do not need to call `enableHttpTracking`. Versions of `datadog_tracking_http_client` >= 1.3 check the value of `HttpOverrides.current` and use this for client creation, so you only need to make sure to initialize `HttpOverrides.global` prior to initializing Datadog.
+**Note**: The Datadog Tracking HTTP Client modifies [`HttpOverrides.global`][10]. If you are using your own custom `HttpOverrides`, you may need to inherit from [`DatadogHttpOverrides`][11]. In this case, you do not need to call `enableHttpTracking`. Versions of `datadog_tracking_http_client` >= 1.3 check the value of `HttpOverrides.current` and use this for client creation, so you only need to make sure to initialize `HttpOverrides.global` prior to initializing Datadog.
 
-In order to enable Datadog [Distributed Tracing][6], you must set the `DatadogConfiguration.firstPartyHosts` property in your configuration object to a domain that supports distributed tracing. You can also modify the sampling rate for distributed tracing by setting the `tracingSamplingRate` on your `DatadogRumConfiguration`.
+In order to enable Datadog [Distributed Tracing][12], you must set the `DatadogConfiguration.firstPartyHosts` property in your configuration object to a domain that supports distributed tracing. You can also modify the sampling rate for distributed tracing by setting the `tracingSamplingRate` on your `DatadogRumConfiguration`.
 
 - `firstPartyHosts` does not allow wildcards, but matches any subdomains for a given domain. For example, `api.example.com` matches `staging.api.example.com` and `prod.api.example.com`, not `news.example.com`.
 
@@ -353,28 +377,27 @@ Container(
 
 ## Sending data when device is offline
 
-RUM ensures availability of data when your user device is offline. In cases of low-network areas, or when the device battery is too low, all RUM events are first stored on the local device in batches. They are sent as soon as the network is available, and the battery is high enough to ensure the Flutter RUM SDK does not impact the end user's experience. If the network is not available with your application running in the foreground, or if an upload of data fails, the batch is kept until it can be sent successfully.
+RUM ensures availability of data when your user device is offline. In cases of low-network areas, or when the device battery is too low, all events are first stored on the local device in batches. They are sent as soon as the network is available and the battery is high enough to ensure the Flutter SDK does not impact the end user's experience. If the network is not available with your application running in the foreground, or if an upload of data fails, the batch is kept until it can be sent successfully.
 
 This means that even if users open your application while offline, no data is lost.
 
 **Note**: The data on the disk is automatically deleted if it gets too old to ensure the Flutter RUM SDK does not use too much disk space.
 
-
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/rum/application/create
-[2]: /account_management/api-app-keys/#client-tokens
-[3]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/DatadogConfiguration-class.html
-[4]: /real_user_monitoring/error_tracking/flutter
-[5]: https://pub.dev/packages/datadog_tracking_http_client
-[6]: /serverless/distributed_tracing
-[7]: /real_user_monitoring/mobile_and_tv_monitoring/data_collected/flutter
+[1]: /real_user_monitoring/
+[2]: /error_tracking/
+[3]: /account_management/api-app-keys/#client-tokens
+[4]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/DatadogConfiguration-class.html
+[5]: /real_user_monitoring/error_tracking/flutter
+[6]: https://pub.dev/packages/go_router
+[7]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/flutter#automatic-view-tracking
 [8]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/ViewInfoExtractor.html
-[9]: https://api.flutter.dev/flutter/dart-io/HttpOverrides/current.html
-[10]: https://pub.dev/documentation/datadog_tracking_http_client/latest/datadog_tracking_http_client/DatadogTrackingHttpOverrides-class.html
-[11]: https://pub.dev/packages/go_router
-[12]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/flutter#automatic-view-tracking
+[9]: https://pub.dev/packages/datadog_tracking_http_client
+[10]: https://api.flutter.dev/flutter/dart-io/HttpOverrides/current.html
+[11]: https://pub.dev/documentation/datadog_tracking_http_client/latest/datadog_tracking_http_client/DatadogTrackingHttpOverrides-class.html
+[12]: /serverless/distributed_tracing
 [13]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/RumUserActionDetector-class.html
 [14]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/RumUserActionAnnotation-class.html

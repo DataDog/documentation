@@ -18,21 +18,23 @@ further_reading:
 ---
 ## Overview
 
-Datadog Real User Monitoring (RUM) enables you to visualize and analyze the real-time performance and user journeys of your application's individual users.
+This page describes how to instrument your applications for both [Real User Monitoring (RUM)][1] and [Error Tracking][2] with the Android SDK. You can follow the steps below to instrument your applications for RUM (which includes Error Tracking) or Error Tracking if you have purchased it as a standalone product.
 
 The Datadog Android SDK supports Android 5.0+ (API level 21) and Android TV.
 
 ## Setup
 
-1. Declare Datadog RUM SDK as a dependency.
+### Specify application details in the UI
+
+1. Declare Datadog SDK as a dependency.
 2. Specify application details in the UI.
 3. Initialize Datadog SDK with application context.
-4. Enable RUM feature to start sending data.
-5. Initialize RUM Interceptor to track network events.
+4. Enable the feature to start sending data.
+5. Initialize the Interceptor to track network events.
 
-### Declare the Datadog RUM SDK as a dependency
+### Declare the Datadog SDK as a dependency
 
-Declare [dd-sdk-android-rum][1] and the [Gradle plugin][12] as a dependency in your **application module's** `build.gradle` file.
+Declare [dd-sdk-android-rum][3] and the [Gradle plugin][4] as dependencies in your **application module's** `build.gradle` file.
 
 ```groovy
 buildscript {
@@ -55,23 +57,46 @@ dependencies {
 ```
 
 ### Specify application details in the UI
+{{< tabs >}}
+{{% tab "RUM" %}}
 
-1. Navigate to [**Digital Experience** > **Add an Application**][2].
+1. Navigate to [**Digital Experience** > **Add an Application**][1].
 2. Select `android` as the application type and enter an application name to generate a unique Datadog application ID and client token.
-3. To instrument your web views, click the **Instrument your webviews** toggle. For more information, see [Web View Tracking][13].
-4. To disable automatic user data collection for either client IP or geolocation data, uncheck the boxes for those settings. For more information, see [RUM Android Data Collected][15].
+3. To instrument your web views, click the **Instrument your webviews** toggle. For more information, see [Web View Tracking][2].
+4. To disable automatic user data collection for client IP or geolocation data, use the toggles for those settings. For more information, see [RUM Android Data Collected][3].
 
    {{< img src="real_user_monitoring/android/android-new-application.png" alt="Create a RUM application for Android in Datadog" style="width:90%;">}}
 
-To ensure the safety of your data, you must use a client token. If you used only [Datadog API keys][3] to configure the Datadog SDK, they would be exposed client-side in the Android application's APK byte code. 
+[1]: https://app.datadoghq.com/rum/application/create
+[2]: /real_user_monitoring/android/web_view_tracking/
+[3]: /real_user_monitoring/android/data_collected/
 
-For more information about setting up a client token, see the [Client Token documentation][4].
+{{% /tab %}}
+{{% tab "Error Tracking" %}}
+
+1. Navigate to [**Error Tracking** > **Settings** > **Browser and Mobile** > **Add an Application**][1].
+2. Select `android` as the application type and enter an application name to generate a unique Datadog application ID and client token.
+3. To instrument your web views, click the **Instrument your webviews** toggle. For more information, see [Web View Tracking][2].
+4. To disable automatic user data collection for client IP or geolocation data, use the toggles for those settings. For more information, see [Android Data Collected][3].
+
+   {{< img src="real_user_monitoring/error_tracking/mobile-new-application.png" alt="Create an application for Android in Datadog" style="width:90%;">}}
+
+[1]: https://app.datadoghq.com/error-tracking/settings/setup/client
+[2]: /real_user_monitoring/android/web_view_tracking/
+[3]: /real_user_monitoring/android/data_collected/
+
+{{% /tab %}}
+{{< /tabs >}}
+
+To ensure the safety of your data, you must use a client token. If you use only [Datadog API keys][5] to configure the Datadog SDK, they are exposed client-side in the Android application's APK byte code. 
+
+For more information about setting up a client token, see the [Client Token documentation][6].
 
 ### Initialize Datadog SDK with application context
 
-In the initialization snippet, set an environment name, service name, and version number. In the examples below, `APP_VARIANT_NAME` specifies the variant of the application that generates data. For more information, see [Using Tags][14].
+In the initialization snippet, set an environment name, service name, and version number. In the examples below, `APP_VARIANT_NAME` specifies the variant of the application that generates data. For more information, see [Using Tags][7].
 
-See [`trackingConsent`][6] to add GDPR compliance for your EU users, and [other configuration options][7] to initialize the library.
+See [`trackingConsent`][8] to add GDPR compliance for your EU users. See [other configuration options][9] to initialize the library.
 
 {{< site-region region="us" >}}
 {{< tabs >}}
@@ -292,13 +317,15 @@ public class SampleApplication extends Application {
 {{< /tabs >}}
 {{< /site-region >}}
 
-The initialization credentials require your application's variant name and uses the value of `BuildConfig.FLAVOR`. With the variant, RUM can match the errors reported from your application with the mapping files uploaded by the Gradle plugin. If you do not have variants, the credentials use an empty string. 
+The initialization credentials require your application's variant name and use the value of `BuildConfig.FLAVOR`. With the variant, the SDK can match the errors reported from your application to the mapping files uploaded by the Gradle plugin. If you do not have variants, the credentials use an empty string. 
 
-The Gradle plugin automatically uploads the appropriate ProGuard `mapping.txt` file at build time so you can view deobfuscated RUM error stack traces. For more information, see the [Track Android Errors][8].
+The Gradle plugin automatically uploads the appropriate ProGuard `mapping.txt` file at build time so you can view deobfuscated error stack traces. For more information, see the [Track Android Errors][10].
 
-### Sample RUM sessions
+### Sample sessions
 
-To control the data your application sends to Datadog RUM, you can specify a sample rate for RUM sessions while [initializing the RUM feature][2] as a percentage between 0 and 100.
+<div class="alert alert-warning">Configuring the session sample rate does not apply to Error Tracking.</div>
+
+To control the data your application sends to Datadog, you can specify a sample rate for sessions when [initializing RUM][11]. The rate is a percentage between 0 and 100. By default, `sessionSamplingRate` is set to 100 (keep all sessions).
 
 ```kotlin
 val rumConfig = RumConfiguration.Builder(applicationId)
@@ -310,14 +337,14 @@ Rum.enable(rumConfig)
 
 ### Set tracking consent (GDPR compliance)
 
-To be compliant with the GDPR regulation, the SDK requires the tracking consent value at initialization.
+To be compliant with the GDPR regulation, the SDK requires the tracking consent value upon initialization.
+
 Tracking consent can be one of the following values:
 
 - `TrackingConsent.PENDING`: (Default) The SDK starts collecting and batching the data but does not send it to the
  collection endpoint. The SDK waits for the new tracking consent value to decide what to do with the batched data.
 - `TrackingConsent.GRANTED`: The SDK starts collecting the data and sends it to the data collection endpoint.
-- `TrackingConsent.NOT_GRANTED`: The SDK does not collect any data. You are not able to manually send any logs, traces, or
- RUM events.
+- `TrackingConsent.NOT_GRANTED`: The SDK does not collect any data. You are not able to manually send any logs, traces, or events.
 
 To update the tracking consent after the SDK is initialized, call `Datadog.setTrackingConsent(<NEW CONSENT>)`. The SDK changes its behavior according to the new consent. For example, if the current tracking consent is `TrackingConsent.PENDING` and you update it to:
 
@@ -325,37 +352,44 @@ To update the tracking consent after the SDK is initialized, call `Datadog.setTr
 - `TrackingConsent.NOT_GRANTED`: The SDK wipes all batched data and does not collect any future data.
 
 
-### Enable RUM feature to start sending data
+### Enable the feature to start sending data
+
+To enable the Android SDK to start sending data:
 
 {{< tabs >}}
 {{% tab "Kotlin" %}}
-```kotlin
-    val rumConfig = RumConfiguration.Builder(applicationId)
-      .trackInteractions()
-      .trackLongTasks(durationThreshold)
-      .useViewTrackingStrategy(strategy)
-      .build()
-    Rum.enable(rumConfig)
-```
-{{% /tab %}}
 
-{{% tab "Java" %}}
-```java
-    RumConfiguration rumConfig = new RumConfiguration.Builder(applicationId)
-      .trackInteractions()
-      .trackLongTasks(durationThreshold)
-      .useViewTrackingStrategy(strategy)
-      .build();
-    Rum.enable(rumConfig);
+```kotlin
+   val rumConfig = RumConfiguration.Builder(applicationId)
+     .trackInteractions()
+     .trackLongTasks(durationThreshold) // Not applicable to Error Tracking
+     .useViewTrackingStrategy(strategy)
+     .build()
+   Rum.enable(rumConfig)
 ```
+
+{{% /tab %}}
+{{% tab "Java" %}}
+
+```java
+   RumConfiguration rumConfig = new RumConfiguration.Builder(applicationId)
+     .trackInteractions()
+     .trackLongTasks(durationThreshold)  // Not applicable to Error Tracking
+     .useViewTrackingStrategy(strategy)
+     .build();
+   Rum.enable(rumConfig);
+```
+
 {{% /tab %}}
 {{< /tabs >}}
 
-See [`ViewTrackingStrategy`][5] to enable automatic tracking of all your views (activities, fragments, and more).
+See [`ViewTrackingStrategy`][12] to enable automatic tracking of all your views (activities, fragments, and more).
 
-### Initialize RUM Interceptor to track network events
+### Initialize the Interceptor to track network events
 
-1. If you want to have distributed tracing, add and enable Trace feature, see [Datadog Android Trace Collection documentation][16] to learn how.
+To initialize an interceptor for tracking network events:
+
+1. If you want to have distributed tracing, [add and enable the Trace feature][13].
 2. Add the Gradle dependency to the `dd-sdk-android-okhttp` library in the module-level `build.gradle` file:
 
     ```groovy
@@ -364,7 +398,7 @@ See [`ViewTrackingStrategy`][5] to enable automatic tracking of all your views (
     }
     ```
 
-3. To track your OkHttp requests as resources, add the provided [Interceptor][9]:
+3. To track your OkHttp requests as resources, add the provided [Interceptor][14]:
 
 {{< tabs >}}
 {{% tab "Kotlin" %}}
@@ -394,19 +428,17 @@ OkHttpClient okHttpClient = new OkHttpClient.Builder()
 {{% /tab %}}
 {{< /tabs >}}
 
-
-
-This records each request processed by the `OkHttpClient` as a resource in RUM, with all the relevant information automatically filled (URL, method, status code, and error). Only the network requests that started when a view is active are tracked. To track requests when your application is in the background, [create a view manually][10].
+This records each request processed by the `OkHttpClient` as a resource, with all the relevant information (URL, method, status code, and error) automatically filled in. Only the network requests that started when a view is active are tracked. To track requests when your application is in the background, [create a view manually][15].
 
 **Note**: If you also use multiple Interceptors, add `DatadogInterceptor` first.
 
-You can also add an `EventListener` for the `OkHttpClient` to [automatically track resource timing][11] for third-party providers and network requests.
+You can also add an `EventListener` for the `OkHttpClient` to [automatically track resource timing][16] for third-party providers and network requests.
 
 ## Track background events
 
 You can track events such as crashes and network requests when your application is in the background (for example, no active view is available). 
 
-Add the following snippet during RUM configuration:
+Add the following snippet during configuration:
 
 {{< tabs >}}
 {{% tab "Kotlin" %}}
@@ -427,7 +459,7 @@ Add the following snippet during RUM configuration:
 
 ### `Closeable` extension
 
-You can monitor `Closeable` instance usage by using `useMonitored` method, it will report any error happened to Datadog and close the resource afterwards.
+You can monitor `Closeable` instance usage with the `useMonitored` method, which reports errors to Datadog and closes the resource afterwards.
 
 ```kotlin
 val closeable: Closeable = ...
@@ -437,7 +469,7 @@ closeable.useMonitored {
 
 ```
 
-### Track local assets as RUM resources
+### Track local assets as resources
 
 You can track access to the assets by using `getAssetAsRumResource` extension method:
 
@@ -453,9 +485,9 @@ val inputStream = context.getRawResAsRumResource(id)
 
 ## Sending data when device is offline
 
-RUM ensures availability of data when your user device is offline. In case of low-network areas, or when the device battery is too low, all the RUM events are first stored on the local device in batches. 
+The Android SDK ensures availability of data when your user device is offline. In case of low-network areas, or when the device battery is too low, all events are first stored on the local device in batches. 
 
-Each batch follows the intake specification. They are sent as soon as the network is available, and the battery is high enough to ensure the Datadog SDK does not impact the end user's experience. If the network is not available while your application is in the foreground, or if an upload of data fails, the batch is kept until it can be sent successfully.
+Each batch follows the intake specification. Batches are sent as soon as the network is available, and the battery is high enough to ensure the Datadog SDK does not impact the end user's experience. If the network is not available while your application is in the foreground, or if an upload of data fails, the batch is kept until it can be sent successfully.
  
 This means that even if users open your application while offline, no data is lost. To ensure the SDK does not use too much disk space, the data on the disk is automatically discarded if it gets too old.
 
@@ -463,19 +495,20 @@ This means that even if users open your application while offline, no data is lo
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://github.com/DataDog/dd-sdk-android/tree/develop/features/dd-sdk-android-rum
-[2]: https://app.datadoghq.com/rum/application/create
-[3]: /account_management/api-app-keys/#api-keys
-[4]: /account_management/api-app-keys/#client-tokens
-[5]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/android/#automatically-track-views
-[6]: #set-tracking-consent-gdpr-compliance
-[7]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/android/#initialization-parameters
-[8]: /real_user_monitoring/error_tracking/android/#upload-your-mapping-file
-[9]: https://square.github.io/okhttp/interceptors/
-[10]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/android/#custom-views
-[11]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/android/#automatically-track-network-requests
-[12]: https://github.com/DataDog/dd-sdk-android-gradle-plugin
-[13]: /real_user_monitoring/android/web_view_tracking/
-[14]: /getting_started/tagging/using_tags/#rum--session-replay
-[15]: /real_user_monitoring/android/data_collected/
-[16]: /tracing/trace_collection/dd_libraries/android/?tab=kotlin
+[1]: /real_user_monitoring/
+[2]: /error_tracking/
+[3]: https://github.com/DataDog/dd-sdk-android/tree/develop/features/dd-sdk-android-rum
+[4]: https://github.com/DataDog/dd-sdk-android-gradle-plugin
+[5]: /account_management/api-app-keys/#api-keys
+[6]: /account_management/api-app-keys/#client-tokens
+[7]: /getting_started/tagging/using_tags/#rum--session-replay
+[8]: #set-tracking-consent-gdpr-compliance
+[9]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/android/#initialization-parameters
+[10]: /real_user_monitoring/error_tracking/android/#upload-your-mapping-file
+[11]: https://app.datadoghq.com/rum/application/create/
+[12]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/android/#automatically-track-views
+[13]: /tracing/trace_collection/dd_libraries/android/?tab=kotlin
+[14]: https://square.github.io/okhttp/interceptors/
+[15]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/android/#custom-views
+[16]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/android/#automatically-track-network-requests
+

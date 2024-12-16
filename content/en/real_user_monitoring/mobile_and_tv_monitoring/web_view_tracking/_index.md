@@ -129,11 +129,14 @@ Set up the RUM Browser SDK on the web page you want rendered on your mobile appl
 [1]: /real_user_monitoring/browser/setup/#npm
 
 {{% /tab %}}
+{{% tab "Kotlin Multiplatform" %}}
+
+Add `DatadogWebViewTracking` library to your application by following the guide [here][1].
+
+[1]: /real_user_monitoring/mobile_and_tv_monitoring/setup/kotlin-multiplatform/#add-native-dependencies-for-ios
+
+{{% /tab %}}
 {{< /tabs >}}
-
-#### Kotlin Multiplatform
-
-Add `DatadogWebViewTracking` library to your application by following the guide [here][5].
 
 ### Instrument your web views
 
@@ -352,7 +355,7 @@ The `allowedHosts` parameter of `DatadogInAppWebViewUserScript` matches the give
 
 ### Access your web views
 
-Your web views appear in the [RUM Explorer][6] with associated `service` and `source` attributes. The `service` attribute indicates the web component the web view is generated from, and the `source` attribute denotes the mobile application's platform, such as Android.
+Your web views appear in the [RUM Explorer][5] with associated `service` and `source` attributes. The `service` attribute indicates the web component the web view is generated from, and the `source` attribute denotes the mobile application's platform, such as Android.
 
 To access your web views:
 
@@ -371,7 +374,7 @@ From here, you can hover over a session event and click **Open View waterfall** 
 
 ## Billing implications
 
-See [RUM & Session Replay Billing][7] for details on how web views in mobile applications impact session recordings and billing.
+See [RUM & Session Replay Billing][6] for details on how web views in mobile applications impact session recordings and billing.
 
 ## Further Reading
 
@@ -381,6 +384,5 @@ See [RUM & Session Replay Billing][7] for details on how web views in mobile app
 [2]: /real_user_monitoring/browser/setup/#npm
 [3]: /real_user_monitoring/mobile_and_tv_monitoring/setup
 [4]: /logs/log_collection/ios
-[5]: /real_user_monitoring/mobile_and_tv_monitoring/setup/kotlin-multiplatform/#add-native-dependencies-for-ios
-[6]: https://app.datadoghq.com/rum/explorer
-[7]: /account_management/billing/rum/#how-do-webviews-in-mobile-applications-impact-session-recordings-and-billing
+[5]: https://app.datadoghq.com/rum/explorer
+[6]: /account_management/billing/rum/#how-do-webviews-in-mobile-applications-impact-session-recordings-and-billing

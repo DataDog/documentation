@@ -1,5 +1,5 @@
 ---
-title: RUM Roku Channel Monitoring Setup
+title: Roku Channel Monitoring Setup
 aliases:
     - /real_user_monitoring/roku/
 code_lang: roku
@@ -21,12 +21,12 @@ further_reading:
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">RUM for Roku is not available on the US1-FED Datadog site.</div>
+<div class="alert alert-warning">RUM and Error Tracking for Roku are not available on the US1-FED Datadog site.</div>
 {{< /site-region >}}
 
 ## Overview
 
-Datadog Real User Monitoring (RUM) enables you to visualize and analyze the real-time performance and user journeys of your channel's individual users.
+This page describes how to instrument your applications for both [Real User Monitoring (RUM)][1] and [Error Tracking][2] with the Roku SDK. You can follow the steps below to instrument your applications for RUM (includes Error Tracking) or Error Tracking if you have purchased it as a standalone product.
 
 The Datadog Roku SDK supports BrightScript channels for Roku OS 10 and higher.
 
@@ -41,7 +41,7 @@ The Datadog Roku SDK supports BrightScript channels for Roku OS 10 and higher.
 
 #### Using ROPM (recommended)
 
-`ROPM` is a package manager for the Roku platform (based on NPM). If you're not already using `ROPM` in your Roku project, read their [Getting started guide][1]. Once your project is set up to use `ROPM`, you can use the following command to install the Datadog dependency:
+`ROPM` is a package manager for the Roku platform (based on NPM). If you're not already using `ROPM` in your Roku project, read their [Getting started guide][3]. Once your project is set up to use `ROPM`, you can use the following command to install the Datadog dependency:
 
 ```shell
 ropm install datadog-roku
@@ -49,20 +49,41 @@ ropm install datadog-roku
 
 ### Setup manually
 
-If your project does not use `ROPM`, install the library manually by downloading the [Roku SDK][2] zip archive, 
+If your project does not use `ROPM`, install the library manually by downloading the [Roku SDK][4] zip archive
 and unzipping it in your project's root folder.
 
 Make sure you have a `roku_modules/datadogroku` subfolder in both the `components` and `source` folders of your project.
 
 ### Specify application details in Datadog
 
-1. Navigate to [**Digital Experience** > **Add an Application**][3].
+{{< tabs >}}
+{{% tab "RUM" %}}
+
+1. Navigate to [**Digital Experience** > **Add an Application**][1].
 2. Select **Roku** as the application type and enter an application name to generate a unique Datadog application ID and client token.
-3. To disable automatic user data collection for either client IP or geolocation data, uncheck the boxes for those settings. For more information, see [RUM Roku Data Collected][4].
+3. To disable automatic user data collection for client IP or geolocation data, uncheck the boxes for those settings. For more information, see [Roku Data Collected][2].
 
    {{< img src="real_user_monitoring/roku/roku-new-application-2.png" alt="Create a RUM application for Roku in Datadog" style="width:90%;">}}
 
-To ensure the safety of your data, you must use a client token. If you used only [Datadog API keys][5] to configure the `dd-sdk-roku` library, they would be exposed client-side in the Roku channel's BrightScript code. 
+[1]: https://app.datadoghq.com/rum/application/create
+[2]: /real_user_monitoring/mobile_and_tv_monitoring/data_collected/roku
+
+{{% /tab %}}
+{{% tab "Error Tracking" %}}
+
+1. Navigate to [**Error Tracking** > **Settings** > **Browser and Mobile** > **Add an Application**][1].
+2. Select **Roku** as the application type and enter an application name to generate a unique Datadog application ID and client token.
+3. To disable automatic user data collection for client IP or geolocation data, uncheck the boxes for those settings. For more information, see [Roku Data Collected][2].
+
+   {{< img src="real_user_monitoring/roku/roku-new-application-2.png" alt="Create an application for Roku in Datadog" style="width:90%;">}}
+
+[1]: https://app.datadoghq.com/error-tracking/settings/setup/client
+[2]: /real_user_monitoring/mobile_and_tv_monitoring/data_collected/roku
+
+{{% /tab %}}
+{{< /tabs >}}
+
+To ensure the safety of your data, you must use a client token. If you use only [Datadog API keys][5] to configure the `dd-sdk-roku` library, they are exposed client-side in the Roku channel's BrightScript code.
 
 For more information about setting up a client token, see the [Client Token documentation][6].
 
@@ -177,15 +198,15 @@ end sub
 
 ### Sample RUM sessions
 
-To control the data your application sends to Datadog RUM, you can specify a sampling rate for RUM sessions while [initializing the RUM Roku SDK][9] as a percentage between 0 and 100. You can specify the rate with the `sessionSampleRate` parameter.
+To control the data your application sends to Datadog RUM, you can specify a sampling rate for RUM sessions while [initializing the RUM Roku SDK][8]. The rate is a percentage between 0 and 100. By default, `sessionSamplingRate` is set to 100 (keep all sessions).
 
 ### Instrument the channel
 
-See [**Track RUM Resources**][8] to enable automatic tracking of all your resources, and [**Enrich user sessions**][9] to add custom global or user information to your events.
+See [**Track RUM Resources**][9] to enable automatic tracking of all your resources, and [**Enrich user sessions**][8] to add custom global or user information to your events.
 
-#### Track RUM Views
+#### Track Views
 
-To split [user sessions][4] into logical steps, manually start a View using the following code. Every navigation to a new screen within your channel should correspond to a new RUM View.
+To split [user sessions][10] into logical steps, manually start a View using the following code. Every navigation to a new screen within your channel should correspond to a new View.
 
 ```brightscript
     viewName = "VideoDetails"
@@ -227,13 +248,13 @@ This means that even if users open your application while offline, no data is lo
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://github.com/rokucommunity/ropm
-[2]: https://github.com/DataDog/dd-sdk-roku
-[3]: https://app.datadoghq.com/rum/application/create
-[4]: /real_user_monitoring/mobile_and_tv_monitoring/data_collected/roku
+[1]: /real_user_monitoring/
+[2]: /error_tracking/
+[3]: https://github.com/rokucommunity/ropm
+[4]: https://github.com/DataDog/dd-sdk-roku
 [5]: /account_management/api-app-keys/#api-keys
 [6]: /account_management/api-app-keys/#client-tokens
 [7]: /getting_started/tagging/using_tags/#rum--session-replay
-[8]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/roku#track-rum-resources
-[9]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/roku#enrich-user-sessions
-[10]: 
+[8]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/roku#enrich-user-sessions
+[9]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/roku#track-rum-resources
+[10]: /real_user_monitoring/mobile_and_tv_monitoring/data_collected/roku
