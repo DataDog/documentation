@@ -44,24 +44,23 @@ You may create a test using one of the following options:
 
    - **Create a test from a template**:
 
-       1. Hover over one of the following pre-populated templates and click **View Template**: 
+       1. Hover over one of the following pre-populated templates and click **View Template**. This opens a side panel displaying pre-populated configuration information, including: Test Details, Request Details, Assertions, Alert Conditions, and Monitor Settings.<br /><br>
 
           {{< img src="getting_started/synthetics/synthetics_templates_api_video.mp4" alt="Video of Synthetics API test landing page with templates" video="true" >}}
 
-       2. This opens a side panel displaying pre-populated configuration information, including: Test Details, Request Details, Assertions, Alert Conditions, and Monitor Settings.
-
-      3. Click **+Create Test** to open the **Define Request** page, where you can review and edit the pre-populated configuration options. <br /><br>
+       2. Click **+Create Test** to open the **Define Request** page, where you can review and edit the pre-populated configuration options. The fields presented are identical to those available when creating a test from scratch.
+       3. Click **Save Details** when you are ready to submit your API test.<br /><br>
 
    - **Build a test from scratch**:
 
-   1. To build a test from scratch, click the **+ Start from scratch** template, then select the `gRPC` request type.
-   2. Specify the **Host** and **Port** to run your test on. The default gRPC port is `50051`.
-   3. Select **Behavior Check** to perform a unary call or **Health Check** to perform a health check.
+       1. To build a test from scratch, click the **+ Start from scratch** template, then select the `gRPC` request type.
+       2. Specify the **Host** and **Port** to run your test on. The default gRPC port is `50051`.
+       3. Select **Behavior Check** to perform a unary call or **Health Check** to perform a health check.<br /><br>
 
       {{< tabs >}}
       {{% tab "Behavior Check" %}}
 
-For a behavior check, specify the **Server Reflection** or [upload a **Proto File**][101] that defines your gRPC server. Select a method and include a request message. Datadog does not support streaming methods.
+For a behavior check, specify the **Server Reflection** or [upload a **Proto File**][101] that defines your gRPC server. Select a method and include a request message. Datadog does not support streaming methods.<br /><br>
 
 {{< img src="synthetics/api_tests/grpc_behavior_check_test_2.png" alt="Define gRPC request" style="width:90%;" >}}
 
@@ -70,7 +69,7 @@ For a behavior check, specify the **Server Reflection** or [upload a **Proto Fil
       {{% /tab %}}
       {{% tab "Health Check" %}}
 
-For a health check, enter the name of the service. Leave this field blank if you want to send a health check on the gRPC server.
+For a health check, enter the name of the service. Leave this field blank if you want to send a health check on the gRPC server.<br /><br>
 
 {{< img src="synthetics/api_tests/grpc_health_check_test_2.png" alt="Define gRPC request" style="width:90%;" >}}
 
@@ -109,6 +108,7 @@ You can use the `openssl` library to convert your certificates. For example, con
 
    7. Click **Invoke** to try out the request configuration. A response preview is displayed on the right side of your screen.
 
+   8. Click **Create Test** when you are ready to submit your API test.
 
 ### Snippets
 

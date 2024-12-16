@@ -42,14 +42,13 @@ You may create a test using one of the following options:
 
    - **Create a test from a template**:
    
-     1. Hover over one of the following pre-populated templates and click **View Template**: 
+     1. Hover over one of the following pre-populated templates and click **View Template**. This opens a side panel displaying pre-populated configuration information, including: Test Details, Request Details, Assertions, Alert Conditions, and Monitor Settings. <br /><br>
 
         {{< img src="getting_started/synthetics/synthetics_templates_api_video.mp4" alt="Video of Synthetics API test landing page with templates" video="true" >}}
 
-     2. This opens a side panel displaying pre-populated configuration information, including: Test Details, Request Details, Assertions, Alert Conditions, and Monitor Settings.
+     2. Click **+Create Test** to open the **Define Request** page, where you can review and edit the pre-populated configuration options. The fields presented are identical to those available when creating a test from scratch.
+     3. Click **Save Details** when you are ready to submit your API test. <br /><br>
 
-     3. Click **+Create Test** to open the **Define Request** page, where you can review and edit the pre-populated configuration options.<br /><br>
-     
   - **Build a test from scratch**:
     
      1. To build a test from scratch, click the **+ Start from scratch** template, then select the `HTTP` request type and specify the **URL** to query. 
@@ -59,11 +58,13 @@ You may create a test using one of the following options:
 
      2. **Name** your HTTP test.
 
-     3. Add `env` **Tags** as well as any other tag to your HTTP test. You can then use these tags to filter through your Synthetic tests on the [Synthetic Monitoring & Continuous Testing page][3]. <br /><br>
+     3. Add `env` **Tags** as well as any other tag to your HTTP test. You can then use these tags to filter through your Synthetic tests on the [Synthetic Monitoring & Continuous Testing page][3]. 
+     
+     4. Click **Send** to try out the request configuration. A response preview is displayed on the right side of your screen.<br /><br>
 
        {{< img src="getting_started/synthetics/api-test-config-4.png" alt="Define HTTP request" style="width:90%;" >}}
 
-     4. Click **Send** to try out the request configuration. A response preview is displayed on the right side of your screen.
+     5. Click **Create Test** when you are ready to submit your API test.
 
 ### Snippets
 
