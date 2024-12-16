@@ -71,8 +71,8 @@ If you've already [set up Cloud Security Management][4] and want to add a new cl
 
 ## Disable Agentless Scanning
 
-1. On the [Cloud Security Management Setup][4] page, click **Cloud Integrations** > **AWS**.
-1. To disable Agentless Scanning for an account, click the **Edit** button {{< img src="security/csm/setup/edit-button.png" inline="true" style="width:24px;">}} and toggle the **Agentless Scanning** section to the off position.
+1. On the [Cloud Security Management Setup][4] page, click **Cloud Integrations** > **AWS** or **Azure**.
+1. To disable Agentless Scanning for an account, click the **Edit** button {{< img src="security/csm/setup/edit-button.png" inline="true" style="width:24px;">}} and toggle the **Vulnerability Scanning** section to the off position.
 1. Click **Done**.
 
 ## Uninstall with Terraform
