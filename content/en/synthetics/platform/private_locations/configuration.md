@@ -28,6 +28,11 @@ docker run --rm datadog/synthetics-private-location-worker --help
 synthetics-pl-worker.exe --help
 ```
 {{% /tab %}}
+{{% tab "Kubernetes" %}}
+
+Check example on [github.com/DataDog/helm-charts/tree/main/charts/synthetics-private-location][6]
+
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Customize your private location
@@ -292,3 +297,4 @@ Command options can also be set using environment variables such as `DATADOG_API
 [3]: https://csrc.nist.gov/projects/cryptographic-module-validation-program/certificate/4282
 [4]: https://www.iana.org/assignments/iana-ipv4-special-registry/iana-ipv4-special-registry.xhtml
 [5]: https://www.iana.org/assignments/iana-ipv6-special-registry/iana-ipv6-special-registry.xhtml
+[6]: https://github.com/DataDog/helm-charts/tree/main/charts/synthetics-private-location
