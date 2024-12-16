@@ -195,7 +195,7 @@ WebViewTracking.disable(webView: webView)
 
 The RUM Flutter SDK provides APIs for you to control web view tracking when the [`webview_flutter`][1] or the [`flutter_inappwebview`][2] package.
 
-#### WebView Flutter package
+#### Web view Flutter package
 
 To add Web View Tracking when using `webview_flutter`, add the following to your `pubspec.yaml` with the most recent version of the [`datadog_webview_tracking`][3] plugin:
 ```yaml

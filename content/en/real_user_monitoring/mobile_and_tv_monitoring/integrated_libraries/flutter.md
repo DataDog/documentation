@@ -134,7 +134,7 @@ final routerDelegate = BeamerDelegate(
 );
 ```
 
-## Webview Tracking
+## Web view tracking
 
 Real User Monitoring allows you to monitor web views and eliminate blind spots in your hybrid mobile applications.
 
@@ -142,7 +142,7 @@ The Datadog Flutter SDK has packages for working with both [`webview_flutter`][8
 
 ## gRPC
 
-Datadog provides [`datadog_grpc_interceptor`][6] for use with the [grpc Flutter package][7]. The gRPC interceptor automaticly tracks gRPC requests as RUM Resources and enables distributed tracing with APM.
+Datadog provides [`datadog_grpc_interceptor`][6] for use with the [grpc Flutter package][7]. The gRPC interceptor automatically tracks gRPC requests as RUM Resources and enables distributed tracing with APM.
 
 ### Setup
 
@@ -159,8 +159,8 @@ To inter this plugin, create an instance of `DatadogGrpcInterceptor`, then pass 
 ```dart
 import 'package:datadog_grpc_interceptor/datadog_grpc_interceptor.dart'
 
-// Initialize Datadog, be sure to set the [DatadogConfiguration.firstPartyHosts] member
-// to enable Datadog Distributed Tracing
+// Initialize Datadog - be sure to set the [DatadogConfiguration.firstPartyHosts] member
+// Enable Datadog Distributed Tracing
 final config = DatadogConfiguration(
   // ...
   firstParthHosts = ['localhost']
@@ -207,7 +207,7 @@ final link = Link.from([
 ]);
 ```
 
-If you are tracking non-GraphQL network calls with `datadog_tracking_http_client`, you need to configure the tracking plugin to ignore requests to your GraphQL endpoint. Otherwise, GraphQL resources will be reported twice, and APM traces may be broken. Ignore your GraphQL endpoint by using the `ignoreUrlPatterns` parameter added to `datadog_tracking_http_client` version 2.1.0.
+If you are tracking non-GraphQL network calls with `datadog_tracking_http_client`, you need to configure the tracking plugin to ignore requests to your GraphQL endpoint. Otherwise, GraphQL resources are reported twice, and APM traces may be broken. Ignore your GraphQL endpoint by using the `ignoreUrlPatterns` parameter added to `datadog_tracking_http_client` version 2.1.0.
 
 ```dart
 final datadogConfig = DatadogConfiguration(
