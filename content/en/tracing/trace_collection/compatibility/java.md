@@ -423,7 +423,9 @@ dd.trace 2024-12-30 08:34:43:306 +0000] [main] WARN datadog.trace.agent.tooling.
 java.lang.NoClassDefFoundError: Could not initialize class jnr.unixsocket.UnixSocketChannel
 ```
 
-The solution is to configure the Java tracer to use host-based communication (`hostip` or `service` mode), rather than socket-based communication (`socket` mode). For more information, see [Configure APM and DogstatsD communication mode][11].
+The solution is to configure the Java tracer to use host-based communication (`hostip` or `service` mode), rather than socket-based communication (`socket` mode).
+
+For more information, see [Configure APM and DogstatsD communication mode][11]. For setups that don't rely on the Admission Controller, see documentation for [DD_TRACE_AGENT_URL][12].
 
 {{% /collapse-content %}}
 
@@ -440,3 +442,4 @@ The solution is to configure the Java tracer to use host-based communication (`h
 [9]: /tracing/trace_explorer/
 [10]: /opentelemetry/interoperability/instrumentation_libraries/?tab=java
 [11]: /containers/cluster_agent/admission_controller/?tab=datadogoperator#configure-apm-and-dogstatsd-communication-mode
+[12]: /tracing/trace_collection/library_config/#agent
