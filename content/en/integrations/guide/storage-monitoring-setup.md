@@ -76,7 +76,7 @@ This template creates two IAM policies:
 
 #### Post-setup steps
 
-After completing the CloudFormation setup, fill out [this form][105] with the following required information:
+After completing the CloudFormation setup, fill out the [post-setup form][105] with the following required information:
 1. Name of the destination bucket holding the inventory files.
 2. Prefix where the files are stored in the destination bucket.
 3. Name of the source bucket you want to monitor (the bucket producing inventory files).
