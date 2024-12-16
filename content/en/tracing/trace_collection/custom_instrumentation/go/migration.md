@@ -12,32 +12,37 @@ further_reading:
 
 <div class="alert alert-info">This documentation assumes that you are using version v1.x of the Go tracer. If you are using v2.x, see <a href="tracing/trace_collection/custom_instrumentation/dd-api">Go Custom Instrumentation using the Datadog API</a> instead.</div>
 
-This document outlines migrating from an older version of the Datadog tracer (v1.x.x) to v2.
+This guide explains how to migrate from Go Tracer v1.x to v2. 
 
-Datadog's v2 version of the Go tracer provides a huge refactor of our API, moving away from interfaces to provide flexibility in future works, isolating our integrations to prevent false-positives from security scanners, and enforcing proper library patterns to prevent misuse. This update is the result of continuous feedback from customers, the community, as well as our extensive internal usage. 
+Version 2 of the Go tracer introduces significant API improvements:
 
-To assist with the migration from an older version of the tracer, we have also provided a new migration tool to help with the most essential changes made in v2.
+- Removes interfaces to enable future flexibility
+- Isolates integrations to prevent false positives from security scanners
+- Enforces library patterns to prevent misuse
 
-## Features
-The migration tool will allow a simplified process to upgrade your tracing code from `dd-trace-go` version 1.6x to v2.0. By running this tool, you will be able to make quick fixes for:
+To simplify the migration process, Datadog provides a migration tool that handles essential code updates automatically.
 
-* Changing import URLs from `dd-trace-go.v1` to `dd-trace-go/v2`.
-* Importing and using the certain types from `ddtrace/tracer` rather than from `ddtrace`.
-* Calling `Span` and `SpanContext` using pointers.
-* Replacing `WithServiceName()`, which is no longer supported, with `WithService()` calls.
-* Using `TraceIDLower()` to get an `uint64` Trace ID instead of `TraceID()`.
+## Migration tool features
 
-## Running the Migration Tool
+The migration tool automatically updates your tracing code when upgrading from `dd-trace-go` v1.x to v2.0. It makes the following changes:
 
-Use the migration tool by running:
+* Updates import URLs from `dd-trace-go.v1` to `dd-trace-go/v2`.
+* Moves imports and using certain types from `ddtrace/tracer` to `ddtrace`.
+* Converts `Span` and `SpanContext` calls to use pointers.
+* Replaces unsupported `WithServiceName()` calls with `WithService()`.
+* Updates `TraceID()` calls to `TraceIDLower()` for obtaining `uint64` trace IDs.
+
+## Using the migration tool
+
+Run these commands to use the migration tool:
 
 ```shell
 go get github.com/DataDog/dd-trace-go/v2/tools/v2check
 go run github.com/DataDog/dd-trace-go/v2/tools/v2check/main.go
 ```
 
-For more information about the migration, please visit our [godoc page](https://godoc.org/github.com/DataDog/dd-trace-go/v2/).
+For more information about the migration, , see the [godoc page for dd-trace-go v2](https://godoc.org/github.com/DataDog/dd-trace-go/v2/).
 
-## Further Reading
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
