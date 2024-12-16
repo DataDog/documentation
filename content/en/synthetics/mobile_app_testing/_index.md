@@ -36,30 +36,30 @@ You can create mobile app tests in Datadog by navigating to [**Digital Experienc
 
 {{< img src="mobile_app_testing/new_test_2.png" alt="Create a Synthetic Mobile Test" style="width:50%;">}}
 
-### Flakiness 
-
-Flakiness is a pain point in end-to-end testing. Test failures are occasionally caused by valid frontend code changes that impact an identifier, not by an actual application issue.
-
-To prevent flaky tests, Datadog uses an algorithm that leverages a set of locators to target elements in mobile app tests. A small change in the UI may modify an element (for example, moving it to another location). The mobile app test automatically locates the element again based on points of reference that are not affected by the change. 
-
-When the test runs successfully, the mobile app test recomputes (or "self heals") any broken locators with updated values. This ensures your tests do not break from simple UI updates and your tests are automatically adapting to your mobile application's UI. 
-
 ## Configuration
 
-Define the configuration of your mobile app test.
+You may create a test using one of the following options:
 
-1. Select a pre-populated template to choose from, or to build a test from scratch, see steps 2-9 below.
+- **Create a test from a template**:
 
-   {{< img src="mobile_app_testing/mobile_app_templates.png" alt="Mobile app landing page with templates" style="width:100%;" >}}
+    1. Hover over one of the following pre-populated templates and click **View Template**. This opens a side panel displaying pre-populated configuration information, including: Test Details, Request Details, Alert Conditions, and Steps.<br /><br>
 
-1. If you want to build a test from scratch, click the **+** template, then select a mobile application from the dropdown menu. If you haven't created one already, create a mobile application in the [Applications List section][2] on the [Synthetic Monitoring & Continuous Testing Settings page][3]. 
-1. Select a **version** or click **Always run the latest version** to use the latest version of your mobile application whenever your test is run.
-1. Add a **name** for your test.
-1. Select **environment and additional tags** that relate to your test. Use the `<KEY>:<VALUE>` format to filter on a `<VALUE>` for a given `<KEY>`.
-1. Select the **devices** to run your test on.
-1. Set retry conditions for your test.
-1. Set the **test frequency** by clicking on basic time intervals or customizing your test frequency and **alert conditions** for your test monitor. 
-1. Enter a name for the test monitor, select a service or team member to notify, and add a message notification.
+       {{< img src="/synthetics/browser_tests/synthetics_templates_mobile.mp4" alt="Video of Mobile Application test landing page with templates" video="true" >}}
+
+    2. Click **+Create Test** to open the configuration page, where you can review and edit the pre-populated configuration options. The fields presented are identical to those available when creating a test from scratch.
+    3. Click **Save & Quit** in the upper right hand corner when you are ready to submit your Mobile Application Test.<br /><br>
+
+- **Build a test from scratch**:
+
+    1. Click the **+** template, then select a mobile application from the dropdown menu. If you haven't created one already, create a mobile application in the [Applications List section][2] on the [Synthetic Monitoring & Continuous Testing Settings page][3]. 
+    1. Select a **version** or click **Always run the latest version** to use the latest version of your mobile application whenever your test is run.
+    1. Add a **name** for your test.
+    1. Select **environment and additional tags** that relate to your test. Use the `<KEY>:<VALUE>` format to filter on a `<VALUE>` for a given `<KEY>`.
+    1. Select the **devices** to run your test on.
+    1. Set retry conditions for your test.
+    1. Set the **test frequency** by clicking on basic time intervals or customizing your test frequency and **alert conditions** for your test monitor. 
+    1. Enter a name for the test monitor, select a service or team member to notify, and add a message notification.
+    1. Click **Save & Edit Recording** when you are ready to submit your Mobile Application Test.
 
 ### Snippets
 
@@ -134,6 +134,14 @@ A notification is sent according to the set of alerting conditions. Use this sec
 4. Click **Save & Edit Recording** to save your test configuration and record your mobile app test steps.
 
 For more information, see [Using Synthetic Test Monitors][7].
+
+## Flakiness 
+
+Flakiness is a pain point in end-to-end testing. Test failures are occasionally caused by valid frontend code changes that impact an identifier, not by an actual application issue.
+
+To prevent flaky tests, Datadog uses an algorithm that leverages a set of locators to target elements in mobile app tests. A small change in the UI may modify an element (for example, moving it to another location). The mobile app test automatically locates the element again based on points of reference that are not affected by the change. 
+
+When the test runs successfully, the mobile app test recomputes (or "self heals") any broken locators with updated values. This ensures your tests do not break from simple UI updates and your tests are automatically adapting to your mobile application's UI. 
 
 ## Run tests in CI
 
