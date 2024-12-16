@@ -335,7 +335,7 @@ spec:
 
 ### Verify that the Agent is sending events to CSM
 
-When you enable CSM on AWS Fargate ECS or EKS, the Agent sends a log to Datadog to confirm that the default ruleset has been successfully deployed. To view the log, navigate to the [Logs][9] page in Datadog and search for `@agent.rule_id:ruleset_loaded`.
+When you enable CSM on AWS Fargate ECS or EKS, the Agent sends an agent event to Datadog to confirm that the default ruleset has been successfully deployed. To view the agent event, navigate to the [Agent Events][9] page in Datadog and search for `@agent.rule_id:ruleset_loaded`.
 
 <div class="alert alert-info">You can also verify the Agent is sending events to CSM by manually triggering an AWS Fargate security signal.</div>
 
@@ -418,7 +418,7 @@ For step-by-step instructions, see [AWS Configuration Guide for Cloud SIEM][17].
 [6]: /integrations/eks_fargate/?tab=manual#aws-eks-fargate-rbac
 [7]: /resources/json/datadog-agent-cws-ecs-fargate.json
 [8]: /integrations/faq/integration-setup-ecs-fargate/?tab=rediswebui
-[9]: https://app.datadoghq.com/logs
+[9]: https://app.datadoghq.com/security/agent-events
 [10]: /security/application_security/threats/setup/threat_detection/java/?tab=awsfargate
 [11]: /security/application_security/threats/setup/threat_detection/java/?tab=amazonecs
 [12]: /security/application_security/threats/setup/threat_detection/dotnet?tab=awsfargate

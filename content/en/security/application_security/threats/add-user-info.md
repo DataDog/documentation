@@ -20,10 +20,6 @@ Instrument your services and track user activity to detect and block bad actors.
 
 [Track user logins and activity](#adding-business-logic-information-login-success-login-failure-any-business-logic-to-traces) to detect account takeovers and business logic abuse with out-of-the-box detection rules, and to ultimately block attackers.
 
-<div class="alert alert-info">
-<strong>Automated Detection of User Activity:</strong> Datadog Tracing Libraries attempt to detect and report user activity events automatically. For more information, read <a href="/security/application_security/threats/add-user-info/?tab=set_user#disabling-automatic-user-activity-event-tracking">Disabling automatic user activity event tracking</a>.
-</div>
-
 The custom user activity for which out-of-the-box detection rules are available are as follow:
 
 | Built-in event names   | Required metadata                                    | Related rules                                                                                                                                                                                                       |
@@ -33,10 +29,14 @@ The custom user activity for which out-of-the-box detection rules are available 
 | `users.login.failure`  | User ID and `usr.exists` are mandatory, optional metadata can be added | [Credential Stuffing attack][6]<br>[Bruteforce attack][12]<br>[Distributed Credential Stuffing][13]  |
 | `users.signup`         | `{ "usr.id": "12345" }`                              | [Excessive account creations from an IP][7]                                                                                                    |
 | `users.delete`         | `{ "usr.id": "12345" }`                              | [Excessive account deletion from an IP][8]                                                                                           |
-| `users.password_reset` | `{ "usr.id": "12345", "exists": true }`              | [Password reset brute force attempts][9]                                                                                                         |
+| `users.password_reset` | `{ "usr.id": "12345", "usr.login": "user@email.com", "exists": true }` | [Password reset brute force attempts][9]                                                                                                         |
 | `payment.failure`      | None                                                 | [Excessive payment failures from IP][10]                                                                                                        |
 
 ## Adding authenticated user information to traces and enabling user blocking capability
+
+<div class="alert alert-info">
+<strong>Automated Detection of User Activity:</strong> Datadog Tracing Libraries attempt to detect and report user activity events automatically. For more information, see <a href="/security/application_security/threats/add-user-info/?tab=set_user#disabling-automatic-user-activity-event-tracking">Disabling automatic user activity event tracking</a>.
+</div>
 
 You can [add custom tags to your root span][3], or use the instrumentation functions described below. 
 
@@ -297,6 +297,12 @@ set_user(tracer, user_id, name="John", email="test@test.com", scope="some_scope"
 
 ## Adding business logic information (login success, login failure, any business logic) to traces
 
+<div class="alert alert-info">
+<strong>A note on usr.id and usr.login:</strong> Investigation login abuse rely on two similar, but different concepts. usr.id contains the unique identifier of the user account in database. It's unique and immutable. It's unavailable when someone tries to log into a non-existant account. User blocking targets usr.id.</br>
+The user generally isn't aware of their user ID. Instead, they rely on mutable identifiers (phone number, username, email address...). The string used by the user to log into an account should be reported as usr.login in login events.</br>
+If no usr.login is provided, usr.id will be used instead.</a>
+</div>
+
 {{< programming-lang-wrapper langs="java,dotnet,go,ruby,php,nodejs,python" >}}
 {{< programming-lang lang="java" >}}
 
@@ -318,6 +324,10 @@ public class LoginController {
 
         Map<String, String> metadata = new HashMap<>();
         metadata.put("email", user.getEmail());
+        metadata.put("usr.login", userName);
+
+        // If your system has multiple "tenants", please provide it. A tenant is an environment/group of user
+        metadata.put("usr.org", usr.getTenant());
 
         // track user authentication success events
         GlobalTracer
@@ -345,11 +355,12 @@ public class LoginController {
         boolean userExists = (user != null);
         String userId = null;
         Map<String, String> metadata = new HashMap<>();
+        metadata.put("usr.login", userName);
         if (userExists != null) {
             userId = getUserId(userName)
             metadata.put("email", user.getEmail());
         } else {
-            userId = user.getEmail();
+            userId = userName;
         }
 
         // track user authentication error events
@@ -373,8 +384,7 @@ public class LoginController {
         User user = createUser(userId, email);
 
         Map<String, String> metadata = new HashMap<>();
-        metadata.put("email", user.getEmail());
-        metadata.put("id", user.getId());
+        metadata.put("usr.id", user.getId());
 
         // track user signup events
         GlobalTracer
@@ -401,12 +411,12 @@ The following examples show how to track login events or custom events (using si
 ```csharp
 using Datadog.Trace.AppSec;
 
-void OnLogonSuccess(string userId, ...)
+void OnLogonSuccess(string userId, string login...)
 {
     // metadata is optional
     var metadata = new Dictionary<string, string>()
     {
-        { "customKey", "customValue" }
+        { "usr.login", login }
     };
     EventTrackingSdk.TrackUserLoginSuccessEvent(userId, metadata);
 
@@ -419,13 +429,13 @@ void OnLogonSuccess(string userId, ...)
 ```csharp
 using Datadog.Trace.AppSec;
 
-void OnLogonFailure(string userId, bool userExists, ...)
+void OnLogonFailure(string userId, string login, bool userExists, ...)
 {
     // If no userId can be provided, any unique user identifier (username, email...) may be used
     // metadata is optional
     var metadata = new Dictionary<string, string>()
     {
-        { "customKey", "customValue" }
+        { "usr.login", login }
     };
     EventTrackingSdk.TrackUserLoginFailureEvent(userId, userExists, metadata);
 
@@ -468,8 +478,10 @@ The following examples show how to track login events or custom events (using si
 import "gopkg.in/DataDog/dd-trace-go.v1/appsec"
 
 func handler(w http.ResponseWriter, r *http.Request) {
-  metadata := /* optional extra event metadata */
+  metadata := make(map[string]string) /* optional extra event metadata */
   userdata := /* optional extra user data */
+
+  metadata["usr.login"] = "user-email"
 
   // Track login success, replace `my-uid` by a unique identifier of the user (such as numeric, username, and email)
   if appsec.TrackUserLoginSuccessEvent(r.Context(), "my-uid", metadata, userdata) != nil {
@@ -486,7 +498,9 @@ import "gopkg.in/DataDog/dd-trace-go.v1/appsec"
 
 func handler(w http.ResponseWriter, r *http.Request) {
   exists := /* whether the given user id exists or not */
-  metadata := /* optional extra event metadata */ 
+  metadata := make(map[string]string) /* optional extra event metadata */
+  metadata["usr.login"] = "user-email"
+  
   // Replace `my-uid` by a unique identifier of the user (numeric, username, email...)
   appsec.TrackUserLoginFailureEvent(r.Context(), "my-uid", exists, metadata)
 }
@@ -524,7 +538,7 @@ require 'datadog/kit/appsec/events'
 
 trace = Datadog::Tracing.active_trace
 # Replace `my_user_id` by a unique identifier of the user (numeric, username, email...)
-Datadog::Kit::AppSec::Events.track_login_success(trace, user: { id: 'my_user_id' })
+Datadog::Kit::AppSec::Events.track_login_success(trace, user: { id: 'my_user_id' }, { 'usr.login': 'my_user_email' })
 ```
 {{% /tab %}}
 
@@ -536,10 +550,10 @@ trace = Datadog::Tracing.active_trace
 # Replace `my_user_id` by a unique identifier of the user (numeric, username, email...)
 
 # if the user exists
-Datadog::Kit::AppSec::Events.track_login_failure(trace, user_id: 'my_user_id', user_exists: true)
+Datadog::Kit::AppSec::Events.track_login_failure(trace, user_id: 'my_user_id', user_exists: true, { 'usr.login': 'my_user_email' })
 
 # if the user doesn't exist
-Datadog::Kit::AppSec::Events.track_login_failure(trace, user_id: 'my_user_id', user_exists: false)
+Datadog::Kit::AppSec::Events.track_login_failure(trace, user_id: 'my_user_id', user_exists: false, { 'usr.login': 'my_user_email' })
 ```
 {{% /tab %}}
 
@@ -548,8 +562,10 @@ Datadog::Kit::AppSec::Events.track_login_failure(trace, user_id: 'my_user_id', u
 require 'datadog/kit/appsec/events'
 trace = Datadog::Tracing.active_trace
 
+# Replace `my_user_id` by a unique identifier of the user (numeric, username, email...) 
+
 # Leveraging custom business logic tracking to track user signups
-Datadog::Kit::AppSec::Events.track('users.signup', trace)
+Datadog::Kit::AppSec::Events.track('users.signup', trace, nil, { 'usr.id': 'my_user_id'})
 ```
 {{% /tab %}}
 {{< /tabs >}}
@@ -565,7 +581,7 @@ The following examples show how to track login events or custom events (using si
 {{% tab "Login success" %}}
 ```php
 <?php
-\datadog\appsec\track_user_login_success_event($id, ['email' => $email])
+\datadog\appsec\track_user_login_success_event($id, ['usr.login' => $email])
 ?>
 ```
 {{% /tab %}}
@@ -575,7 +591,7 @@ The following examples show how to track login events or custom events (using si
 <?php
 // If no numeric userId is available, you may use any unique string as userId instead (username, email...)
 // Make sure that the value is unique per user (and not per attacker/IP)
-\datadog\appsec\track_user_login_failure_event($id, $exists, ['email' => $email])
+\datadog\appsec\track_user_login_failure_event($id, $exists, ['usr.login' => $email])
 ?>
 ```
 {{% /tab %}}
@@ -583,7 +599,7 @@ The following examples show how to track login events or custom events (using si
 {{% tab "Custom business logic" %}}
 ```php
 <?php
-\datadog\appsec\track_custom_event('users.signup', ['id' => $id, 'email' => $email]);
+\datadog\appsec\track_custom_event('users.signup', ['usr.id' => $id]);
 ?>
 ```
 {{% /tab %}}
@@ -607,7 +623,7 @@ const user = {
   id: 'user-id', // id is mandatory, if no numeric ID is available, any unique identifier will do (username, email...)
   email: 'user@email.com' // other fields are optional
 }
-const metadata = { custom: 'value' } // optional metadata with arbitrary fields
+const metadata = { 'usr.login': 'user@email.com' } // usr.login is required, but you can also add arbitrary fields
 
 // Log a successful user authentication event
 tracer.appsec.trackUserLoginSuccessEvent(user, metadata) // metadata is optional
@@ -621,7 +637,7 @@ const tracer = require('dd-trace')
 // in a controller:
 const userId = 'user-id' // if no numeric ID is available, any unique identifier will do (username, email...)
 const userExists = true // if the user login exists in database for example
-const metadata = { custom: 'value' } // optional metadata with arbitrary fields
+const metadata = { 'usr.login': 'user@email.com' } // usr.login is required, but you can also add arbitrary fields
 
 // metadata is optional
 tracer.appsec.trackUserLoginFailureEvent(userId, userExists, metadata)
@@ -658,7 +674,7 @@ The following examples show how to track login events or custom events (using si
 ```python
 from ddtrace.appsec.trace_utils import track_user_login_success_event
 from ddtrace import tracer
-metadata = {"custom": "customvalue"}
+metadata = {"usr.login": "user@email.com"}
 # name, email, scope, role, session_id and propagate are optional arguments which 
 # default to None except propagate that defaults to True. They'll be 
 # passed to the set_user() function
@@ -669,7 +685,7 @@ track_user_login_success_event(tracer, "userid", metadata)
 ```python
 from ddtrace.appsec.trace_utils import track_user_login_failure_event
 from ddtrace import tracer
-metadata = {"custom": "customvalue"}
+metadata = {"usr.login": "user@email.com"}
 # exists indicates if the failed login user exists in the system
 exists = False
 # if no numeric userId is available, any unique identifier will do (username, email...)

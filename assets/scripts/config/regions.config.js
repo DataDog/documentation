@@ -281,6 +281,12 @@ export default {
      us5: 'https://api.us5.datadoghq.com/api/intake/otlp/v1/metrics',
      eu: 'https://api.datadoghq.eu/api/intake/otlp/v1/metrics'
     },
+    otlp_logs_endpoint: {
+     us: 'https://http-intake.logs.datadoghq.com/api/v2/logs',
+     us3: 'https://http-intake.logs.us3.datadoghq.com/api/v2/logs',
+     us5: 'https://http-intake.logs.us5.datadoghq.com/api/v2/logs',
+     eu: 'https://http-intake.logs.datadoghq.eu/api/v2/logs'
+    },
     custom_costs_endpoint: {
       us: 'api.datadoghq.com/api/v2/cost/custom_costs',
       us3: 'api.us3.datadoghq.com/api/v2/cost/custom_costs',
@@ -296,5 +302,13 @@ export default {
       eu: 'http://ip-ranges.datadoghq.eu/webhooks.json',
       ap1: 'http://ip-ranges.ap1.datadoghq.com/webhooks.json',
       gov: 'http://ip-ranges.ddog-gov.com/webhooks.json'
-    }
+    },
+    vercel_setup: {
+     us: 'http://app.datadoghq.com/setup/vercel',
+     us3: 'http://us3.datadoghq.com/setup/vercel',
+     us5: 'http://us5.datadoghq.com/setup/vercel',
+     eu: 'http://app.datadoghq.eu/setup/vercel',
+     ap1: 'http://ap1.datadoghq.com/setup/vercel',
+     gov: 'http://app.ddog-gov.com/setup/vercel'
+ }
 };

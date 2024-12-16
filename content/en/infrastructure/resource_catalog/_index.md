@@ -126,7 +126,7 @@ Clicking on any resource opens a side panel with details including:
 - **Service and team ownership** of the resource
 - **Security risks** that the resource is exposed to, including misconfigurations, signals, identity risks, and vulnerabilities
 
-### Recent changes
+## Recent changes
 
 {{< callout url="https://www.datadoghq.com/product-preview/recent-changes-tab/" >}}
   The <strong>Recent Changes</strong> tab is in Preview, but you can easily request access! Use this form to submit your request today.
@@ -142,6 +142,10 @@ Use the **Recent Changes** tab on a resource's side panel to see a 7-day history
 
 See the [AWS Config integration page][6] to launch a CloudFormation template that sets up change event forwarding through AWS Config.
 
+#### Azure
+
+To collect resource configuration changes, enable **Resource Collection** for your Azure subscriptions in the [Azure integration tile][14].
+
 #### Google Cloud Platform
 
 See the [Resource change collection][8] section of the Google Cloud Platform integration page for instructions on forwarding change events through a Pub/Sub topic and subscription.
@@ -155,7 +159,7 @@ See the [Resource change collection][8] section of the Google Cloud Platform int
 [3]: /integrations/#cat-notification
 [4]: /account_management/teams
 [5]: https://app.datadoghq.com/infrastructure/catalog/configuration
-[6]: /integrations/amazon_config/#events
+[6]: /integrations/amazon_config/#resource-change-collection
 [7]: https://app.datadoghq.com/integrations
 [8]: /integrations/google_cloud_platform/#resource-change-collection
 [9]: https://www.datadoghq.com/product-preview/recent-changes-tab/
@@ -163,3 +167,4 @@ See the [Resource change collection][8] section of the Google Cloud Platform int
 [11]: https://docs.datadoghq.com/security/threats/
 [12]: https://docs.datadoghq.com/security/cloud_security_management/identity_risks/
 [13]: https://docs.datadoghq.com/security/cloud_security_management/vulnerabilities/
+[14]: https://app.datadoghq.com/integrations/azure

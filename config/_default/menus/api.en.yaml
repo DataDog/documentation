@@ -4999,18 +4999,6 @@ menu:
       url: /api/latest/cloud-cost-management/
       identifier: cloud-cost-management
       generated: true
-    - name: Cloud Cost Enabled
-      url: '#cloud-cost-enabled'
-      identifier: cloud-cost-management-cloud-cost-enabled
-      parent: cloud-cost-management
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - GetCloudCostActivity
-        unstable: []
-        order: 10
     - name: Get Custom Costs file
       url: '#get-custom-costs-file'
       identifier: cloud-cost-management-get-custom-costs-file
@@ -5419,7 +5407,8 @@ menu:
           - v2
         operationids:
           - CancelDataDeletionRequest
-        unstable: []
+        unstable:
+          - v2
         order: 2
     - name: Gets a list of data deletion requests
       url: '#gets-a-list-of-data-deletion-requests'
@@ -5431,7 +5420,8 @@ menu:
           - v2
         operationids:
           - GetDataDeletionRequests
-        unstable: []
+        unstable:
+          - v2
         order: 3
     - name: Creates a data deletion request
       url: '#creates-a-data-deletion-request'
@@ -5443,7 +5433,8 @@ menu:
           - v2
         operationids:
           - CreateDataDeletionRequest
-        unstable: []
+        unstable:
+          - v2
         order: 1
     - name: Domain Allowlist
       url: /api/latest/domain-allowlist/
