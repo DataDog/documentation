@@ -85,6 +85,19 @@ The Go packages listed in this page are relevant for Application Security capabi
 |-------------------|-----------------|--------------------------------------------------------------------------|
 | [sql][14]          | {{< X >}} |   {{< X >}}    |
 
+[6]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib
+[7]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/gin-gonic/gin
+[8]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/gorilla/mux
+[9]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/labstack/echo.v4
+[10]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/labstack/echo
+[11]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/google.golang.org/grpc
+[12]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/go-chi/chi
+[13]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http
+[14]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/database/sql
+[16]: /tracing/compatibility_requirements/go
+[17]: https://pkg.go.dev/github.com/graphql-go/graphql
+[18]: https://pkg.go.dev/github.com/99designs/gqlgen/graphql
+
 {{% /tab %}}
 {{% tab "v2" %}}
 
@@ -119,27 +132,8 @@ The Go packages listed in this page are relevant for Application Security capabi
 |-------------------|-----------------|--------------------------------------------------------------------------|
 | [sql][26]          | {{< X >}} |   {{< X >}}    |
 
-{{% /tab %}}
-
-[1]: /agent/remote_config/#enabling-remote-configuration
-[2]: https://github.com/DataDog/dd-trace-go
-[3]: https://github.com/DataDog/dd-trace-go#support-policy
-[4]: https://github.com/DataDog/dd-trace-go#support-maintenance
-[5]: https://www.datadoghq.com/support/
-[6]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib
-[7]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/gin-gonic/gin
-[8]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/gorilla/mux
-[9]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/labstack/echo.v4
-[10]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/labstack/echo
-[11]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/google.golang.org/grpc
-[12]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/go-chi/chi
-[13]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http
-[14]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/database/sql
-[15]: https://github.com/golang/go/wiki/cgo
-[16]: /tracing/compatibility_requirements/go
 [17]: https://pkg.go.dev/github.com/graphql-go/graphql
 [18]: https://pkg.go.dev/github.com/99designs/gqlgen/graphql
-
 [19]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/contrib
 [20]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/contrib/gin-gonic/gin/v2
 [21]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/contrib/gorilla/mux/v2
@@ -148,3 +142,12 @@ The Go packages listed in this page are relevant for Application Security capabi
 [24]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/contrib/go-chi/chi/v2
 [25]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/contrib/net/http/v2
 [26]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/contrib/database/sql/v2
+
+{{% /tab %}}
+
+[1]: /agent/remote_config/#enabling-remote-configuration
+[2]: https://github.com/DataDog/dd-trace-go
+[3]: https://github.com/DataDog/dd-trace-go#support-policy
+[4]: https://github.com/DataDog/dd-trace-go#support-maintenance
+[5]: https://www.datadoghq.com/support/
+[15]: https://github.com/golang/go/wiki/cgo
