@@ -531,7 +531,8 @@ chmod a+x /tmp/start_datadog.sh
 /tmp/start_datadog.sh >> /tmp/datadog_start.log 2>&1 & disown
 ```
 
-Accede a dashboards preconfigurados
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Datos recopilados
 
