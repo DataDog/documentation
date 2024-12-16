@@ -50,6 +50,15 @@ func main() {
     // When the tracer is stopped, it will flush everything it has to the Datadog Agent before quitting.
     // Make sure this line stays in your main function.
     defer tracer.Stop()
+
+    // If you expect your application to be shut down by SIGTERM (for example, a container in Kubernetes),
+    // you might want to listen for that signal and explicitly stop the tracer to ensure no data is lost
+    sigChan := make(chan os.Signal, 1)
+    signal.Notify(sigChan, syscall.SIGTERM)
+    go func() {
+        <-sigChan
+        tracer.Stop()
+    }()
 }
 ```
 

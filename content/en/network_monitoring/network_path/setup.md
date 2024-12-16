@@ -12,10 +12,10 @@ further_reading:
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">Network Path for Datadog Network Performance Monitoring is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-warning">Network Path for Datadog Cloud Network Monitoring is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
-<div class="alert alert-info">Network Path for Datadog Network Performance Monitoring is in Preview. Reach out to your Datadog representative to sign up, and then use the following instructions to configure the Datadog Agent to gather network path data.</div>
+<div class="alert alert-info">Network Path for Datadog Cloud Network Monitoring is in Limited Availability. Reach out to your Datadog representative to sign up, and then use the following instructions to configure the Datadog Agent to gather network path data.</div>
 
 ## Overview
 
@@ -24,7 +24,7 @@ Setting up Network Path involves configuring your Linux environment to monitor a
 ## Prerequisites
 
 - Agent version `7.59` or higher is required.
-- [NPM][1] must be enabled.
+- [CNM][1] must be enabled.
 
 **Note**: If your network configuration restricts outbound traffic, follow the setup instructions on the [Agent proxy configuration][2] documentation.
 
@@ -141,7 +141,7 @@ Configure network traffic paths to allow the Agent to automatically discover and
      enabled: true
    ```
 
-2. Enable `network_path` to monitor NPM connections by creating or editing the `/etc/datadog-agent/datadog.yaml` file:
+2. Enable `network_path` to monitor CNM connections by creating or editing the `/etc/datadog-agent/datadog.yaml` file:
 
     ```yaml
     network_path:
@@ -176,7 +176,7 @@ Configure network traffic paths to allow the Agent to automatically discover and
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /network_monitoring/performance/setup/
+[1]: /network_monitoring/cloud_network_monitoring/setup/
 [2]: https://docs.datadoghq.com/agent/configuration/proxy/?tab=linux
 [3]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/config_template.yaml#L1645
 [4]: https://github.com/DataDog/datadog-agent/blob/main/cmd/agent/dist/conf.d/network_path.d/conf.yaml.example
