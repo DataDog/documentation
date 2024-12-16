@@ -211,5 +211,5 @@ Access triggered logs, errors, and performance information when troubleshooting 
 [13]: /real_user_monitoring/session_replay/browser/privacy_options/
 [14]: /real_user_monitoring/session_replay/browser/developer_tools/
 [15]: /real_user_monitoring/browser/setup/
-[16]: /real_user_monitoring/mobile_and_tv_monitoring/setup
+[16]: /real_user_monitoring/mobile_and_tv_monitoring/setup/
 [17]: https://app.datadoghq.com/rum/optimization/inspect
