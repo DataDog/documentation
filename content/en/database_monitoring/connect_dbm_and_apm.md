@@ -111,15 +111,15 @@ import (
 ```
 
 Enable the database monitoring propagation feature using one of the following methods:
-1. Env variable:
+- Env variable:
    `DD_DBM_PROPAGATION_MODE=full`
 
-2. Using code during the driver registration:
+- Using code during the driver registration:
    ```go
    sqltrace.Register("postgres", &pq.Driver{}, sqltrace.WithDBMPropagation(tracer.DBMPropagationModeFull), sqltrace.WithService("my-db-service"))
    ```
 
-3. Using code on `sqltrace.Open`:
+- Using code on `sqltrace.Open`:
    ```go
    sqltrace.Register("postgres", &pq.Driver{}, sqltrace.WithService("my-db-service"))
 
