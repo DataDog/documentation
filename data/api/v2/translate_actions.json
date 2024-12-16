@@ -347,6 +347,14 @@
     "description": "Get monthly cost attribution by tag across multi-org and single root-org accounts.\nCost Attribution data for a given month becomes available no later than the 19th of the following month.\nThis API endpoint is paginated. To make sure you receive all records, check if the value of `next_record_id` is\nset in the response. If it is, make another request and pass `next_record_id` as a parameter.\nPseudo code example:\n```\nresponse := GetMonthlyCostAttribution(start_month, end_month)\ncursor := response.metadata.pagination.next_record_id\nWHILE cursor != null BEGIN\n  sleep(5 seconds)  # Avoid running into rate limit\n  response := GetMonthlyCostAttribution(start_month, end_month, next_record_id=cursor)\n  cursor := response.metadata.pagination.next_record_id\nEND\n```\n\nThis endpoint is only accessible for [parent-level organizations](https://docs.datadoghq.com/account_management/multi_organization/).",
     "summary": "Get Monthly Cost Attribution"
   },
+  "ListAllCSMAgents": {
+    "description": "Get the list of all CSM Agents running on your hosts and containers.",
+    "summary": "Get all CSM Agents"
+  },
+  "ListAllCSMServerlessAgents": {
+    "description": "Get the list of all CSM Serverless Agents running on your hosts and containers.",
+    "summary": "Get all CSM Serverless Agents"
+  },
   "ListCurrentUserApplicationKeys": {
     "description": "List all application keys available for current user",
     "summary": "Get all application keys owned by current user"
