@@ -98,7 +98,7 @@ To manually set up the required [Amazon S3 Inventory][206] and related configura
 #### Step 1: Create a destination bucket
 
 1. [Create an S3 bucket][201] to store your inventory files. This bucket acts as the central location for inventory reports. **Note**: You must only use one destination bucket for all inventory files generated in an AWS account.
-2. Create a prefix within the destination bucket.
+2. Create a prefix within the destination bucket (required).
 
 #### Step 2: Configure the bucket and integration role policies
 
