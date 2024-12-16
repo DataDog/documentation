@@ -26,7 +26,7 @@ There are additional [metrics and attributes that are specific to a given event 
 | View     | 30 days   | A view represents a unique screen (or screen segment) on your mobile application. A view starts and stops when the `onActivityResumed` and `onActivityPaused` callbacks are called through the `ActivityLifecycleCallbacks` interface. Each occurrence is classified as a distinct view. While a user stays on a view, RUM event attributes (Errors, Resources, and Actions) get attached to the view with a unique `view.id`.                     |
 | Resource  | 15 days   | A resource represents network requests to first-party hosts, APIs, and third-party providers in your mobile application. All requests generated during a user session are attached to the view with a unique `resource.id`.                                                                                           |
 | Error     | 30 days   | An error represents an exception or crash emitted by the mobile application attached to the view it is generated in.                                                                                                                                            |
-| Action    | 30 days   | An action represents user activity in your mobile application (such as an application launch, tap, swipe, or back). Each action is attached with a unique `action.id` attached to the view it gets generated in.                                                                                                                                              |
+| Action    | 30 days   | An action represents user activity in your mobile application (such as an application launch, tap, swipe, or back). Each action is attached with a unique `action.id` attached to the view it gets generated in. When an action is being tracked, other actions within the next `100 ms` do not get sent, unless they are [custom actions][10].                                                                                                                                             |
 | Long Task | 15 days | A long task event is generated for any task in the application that blocks the main thread for more than the specified duration threshold. |
 
 The following diagram illustrates the RUM event hierarchy:
@@ -272,3 +272,4 @@ is unlocked won't be captured, since the credential encrypted storage won't be a
 [7]: https://developer.android.com/training/articles/direct-boot
 [8]: /data_security/real_user_monitoring/#ip-address
 [9]: /data_security/real_user_monitoring/#geolocation
+[10]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/android/#custom-actions
