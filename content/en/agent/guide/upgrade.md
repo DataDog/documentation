@@ -2,6 +2,7 @@
 title: Upgrade to Datadog Agent 7
 aliases:
 - /agent/versions/upgrade_to_agent_v7/
+- /agent/upgrade/
 further_reading:
 - link: "/agent/guide/python-3/"
   tag: "Documentation"
