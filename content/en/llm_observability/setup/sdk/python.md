@@ -65,7 +65,7 @@ DD_LLMOBS_ML_APP=<YOUR_ML_APP_NAME> ddtrace-run <YOUR_APP_STARTUP_COMMAND>
 
 ### In-code setup
 
-Enable LLM Observability programatically through the `LLMOBs.enable()` function instead of running with the `ddtrace-run` command. **Note**: Do not use this setup method with the `ddtrace-run` command.
+Enable LLM Observability programatically through the `LLMObs.enable()` function instead of running with the `ddtrace-run` command. **Note**: Do not use this setup method with the `ddtrace-run` command.
 
 {{< code-block lang="python" >}}
 from ddtrace.llmobs import LLMObs

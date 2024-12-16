@@ -127,27 +127,24 @@ Run your tests as you normally do (for example: `mvn test` or `mvn verify`).
 {{% /tab %}}
 {{% tab "Gradle" %}}
 
-Make sure to set the `DD_TRACER_FOLDER` variable to the path where you have downloaded the tracer.
+Set the following environment variables to configure the tracer:
 
-Run your tests using the `org.gradle.jvmargs` system property to specify the path to the Datadog Java Tracer JAR.
+`DD_CIVISIBILITY_ENABLED=true` (Required)
+: Enables the Test Optimization product.
 
-When specifying tracer arguments, include the following:
+`DD_ENV` (Required)
+: Environment where the tests are being run (for example: `local` when running tests on a developer workstation or `ci` when running them on a CI provider).
 
-* Enable Test Optimization by setting the `dd.civisibility.enabled` property to `true`.
-* Define the environment where the tests are being run using the `dd.env` property (for example: `local` when running tests on a developer workstation or `ci` when running them on a CI provider).
-* Define the name of the service or library being tested in the `dd.service` property.
+`DD_SERVICE` (Required)
+: Name of the service or library being tested.
 
-For example:
+`DD_TRACER_FOLDER` (Required)
+: Path to the folder where the downloaded Java Tracer is located.
 
-{{< code-block lang="shell" >}}
-./gradlew cleanTest test -Dorg.gradle.jvmargs=\
--javaagent:$DD_TRACER_FOLDER/dd-java-agent.jar=\
-dd.civisibility.enabled=true,\
-dd.env=ci,\
-dd.service=my-java-app
-{{< /code-block >}}
+`GRADLE_OPTS=-javaagent:$DD_TRACER_FOLDER/dd-java-agent.jar` (Required)
+: Injects the tracer into the Gradle launcher process.
 
-Specifying `org.gradle.jvmargs` in the command line overrides the value specified elsewhere. If you have this property specified in a `gradle.properties` file, be sure to replicate the necessary settings in the command line invocation.
+Run your tests as you normally do (for example: `./gradlew clean test`).
 
 {{% /tab %}}
 {{% tab "Other" %}}

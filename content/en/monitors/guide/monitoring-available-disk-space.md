@@ -27,7 +27,9 @@ To create the monitor for available disk space:
 6. In **Configure notifications & automations**, give your monitor a name, then specify the notification message. Include relevant details and a meaningful message template. For example:
 
      ```
-       {{#is_alert}}Warning: Free disk space is below 10% on {{host.name}}. Free space: {{system.disk.free}} bytes, Total space: {{system.disk.total}} bytes.{{/is_alert}}
+       {{#is_alert}} Alert: Free disk space is below {{threshold}}% on {{host.name}}. {{/is_alert}}
+       {{#is_warning}} Warning: Free disk space is below {{warn_threshold}}% on {{host.name}}. {{/is_warning}}
+       Disk space available: {{value}}%
      ```
 
 7. Click **Create** to save the monitor.

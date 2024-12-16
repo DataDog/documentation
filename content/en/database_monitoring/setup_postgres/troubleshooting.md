@@ -105,10 +105,10 @@ Then, run this command to check which schemas are visible to the `datadog` user:
 psql -h localhost -U datadog -d <your_database> -c "show search_path;"
 ```
 
-If you do not see the `pg_stat_statements` schema in the `datadog` user's `search_path`, you need to add it to the `datadog` user. For example:
+If you do not see the `pg_stat_statements` schema in the `datadog` user's `search_path`, you need to add it to the `datadog` user. For example (replace `<schema_with_pg_stat_statements>` with the schema where `pg_stat_statements` is located) :
 
 ```sql
-ALTER ROLE datadog SET search_path = "$user",public,schema_with_pg_stat_statements;
+ALTER ROLE datadog SET search_path = "$user",public,<schema_with_pg_stat_statements>;
 ```
 
 ### Certain queries are missing
@@ -119,7 +119,7 @@ If you have data from some queries, but do not see a particular query or set of 
 | For Postgres 9.6, if you only see queries executed by the datadog user, then the instance configuration is likely missing some settings. | For monitoring instances on Postgres 9.6, the Datadog Agent instance config must use the settings `pg_stat_statements_view: datadog.pg_stat_statements()` and `pg_stat_activity_view: datadog.pg_stat_activity()` based on the functions created in the initial setup guide. These functions must be created in all databases. |
 | The Datadog user does not have sufficient access to view queries by other users. | The Datadog user must have the [`pg_monitor` role][25] to access tables such as `pg_stat_activity`. Ensure that the Datadog user has this role: `GRANT pg_monitor TO datadog`. |
 | The query is not a "top query," meaning the sum of its total execution time is not in the top 200 normalized queries at any point in the selected time frame. | The query may be grouped into the "Other Queries" row. For more information on which queries are tracked, see see [Data Collected][5]. The number of top queries tracked can be raised by contacting Datadog Support. |
-| The query is not a SELECT, INSERT, UPDATE, or DELETE query. | Non-utility functions are not tracked by default. To collect them, set the Postgres parameter `pg_stat_statements.track_utility` to `on`. See the [Postgres documentation][6] for more information. |
+| The query is not a SELECT, INSERT, UPDATE, or DELETE query. | Non-utility functions are not tracked by default. To collect them, set the Postgres parameter `pg_stat_statements.track_utility` to `all`. See the [Postgres documentation][6] for more information. |
 | The query is executed in a function or stored procedure. | To track queries executed in functions or procedures, set the configuration parameter `pg_stat_statements.track` to `on`. See the [Postgres documentation][6] for more information. |
 | The `pg_stat_statements.max` Postgres configuration parameter may be too low for your workload. | If a large number of normalized queries are executed in a short period of time (thousands of unique normalized queries in 10 seconds), then the buffer in `pg_stat_statements` may not be able to hold all of the normalized queries. Increasing this value can improve the coverage of tracked normalized queries and reduce the impact of high churn from generated SQL. **Note**: Queries with unordered column names or using ARRAYs of variable lengths can significantly increase the rate of normalized query churn. For instance `SELECT ARRAY[1,2]` and `SELECT ARRAY[1,2,3]` are tracked as separate queries in `pg_stat_statements`. For more information about tuning this setting, see [Advanced configuration][7]. |
 | The query has been executed only once since the agent last restarted. | Query metrics are only emitted after having been executed at least once over two separate ten second intervals since the Agent was restarted. |

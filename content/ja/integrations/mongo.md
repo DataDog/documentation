@@ -21,7 +21,14 @@ assets:
     source_type_id: 19
     source_type_name: MongoDB
   monitors:
-    '[MongoDB] High incoming connections': assets/monitors/high_connections.json
+    Connection pool is reaching saturation: assets/monitors/high_connections.json
+    High query targeting: assets/monitors/high_query_targeting.json
+    High queued readers: assets/monitors/high_queued_readers.json
+    High queued writers: assets/monitors/high_queued_writers.json
+    High replication lag: assets/monitors/high_replication_lag.json
+    Low oplog window: assets/monitors/low_oplog_window.json
+    Unhealthy replica set member: assets/monitors/unhealthy_repliset_member.json
+    Used file system storage is reaching capacity: assets/monitors/high_fsstorage_usage.json
   saved_views:
     mongodb_processes: assets/saved_views/mongodb_processes.json
     operations_by_type_overview: assets/saved_views/operations_by_type_overview.json
@@ -36,7 +43,7 @@ author:
 categories:
 - data stores
 - log collection
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/mongo/README.md
 display_on_public_website: true
@@ -44,7 +51,7 @@ draft: false
 git_integration_title: mongo
 integration_id: mongodb
 integration_title: MongoDB
-integration_version: 6.8.2
+integration_version: 8.3.0
 is_public: true
 manifest_version: 2.0.0
 name: mongo
@@ -90,7 +97,7 @@ MongoDB を Datadog に接続して、以下のことができます。
 
 また、カスタム `find`/`count`/`aggregate` クエリを使用して、独自のメトリクスを作成することもできます。
 
-**Note**: MongoDB v3.0+ is required for this integration. Integration of MongoDB Atlas with Datadog is only available on M10+ clusters. This integration also supports Alibaba ApsaraDB and AWS DocumentDB Instance-Based clusters. DocumentDB Elastic clusters are not supported because they only expose the cluster (mongos) endpoints.
+**注**: このインテグレーションには MongoDB v3.0 以降が必要です。MongoDB Atlas と Datadog のインテグレーションは、M10+ クラスターでのみ利用可能です。このインテグレーションは、Alibaba ApsaraDB と AWS DocumentDB のインスタンスベースのクラスターもサポートしています。一方、DocumentDB Elastic クラスターは、クラスター (mongos) エンドポイントのみを公開するためサポートされていません。
 
 ## セットアップ
 
@@ -100,11 +107,11 @@ MongoDB チェックは [Datadog Agent][2] パッケージに含まれていま�
 
 ### アーキテクチャ
 
-Most low-level metrics (uptime, storage size etc.) need to be collected on every mongod node. Other higher-level metrics (collection/index statistics etc.) should be collected only once. For these reasons the way you configure the Agents depends on how your mongo cluster is deployed.
+ほとんどの低レベルのメトリクス (稼働時間、ストレージサイズなど) は、すべての mongod ノードで収集する必要があります。その他の高レベルのメトリクス (コレクションやインデックスの統計など) は、一度だけ収集する必要があります。これらの理由により、Agent の構成方法は mongo クラスターのデプロイ方法によって異なります。
 
 {{< tabs >}}
 {{% tab "スタンドアロン" %}}
-#### Standalone
+#### スタンドアロン
 
 このインテグレーションを単一ノードの MongoDB デプロイ用に構成するには
 
@@ -422,7 +429,7 @@ LABEL "com.datadoghq.ad.instances"='[{"hosts": ["%%host%%:%%port%%"], "username"
 
 Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Docker ログ収集][2]を参照してください。
 
-Then, set [Log Integrations][3] as Docker labels:
+次に、[ログインテグレーション][3]を Docker ラベルとして設定します。
 
 ```yaml
 LABEL "com.datadoghq.ad.logs"='[{"source":"mongodb","service":"<SERVICE_NAME>"}]'
@@ -643,23 +650,24 @@ Agent コンテナで必要な環境変数
 
 次のメトリクスは、デフォルトでは収集**されません**。これらを収集するには、`mongo.d/conf.yaml` ファイルで `additional_metrics` パラメーターを使用してください。
 
-| メトリクスのプレフィックス            | 収集するために `additional_metrics` に追加する項目 |
-| ------------------------ | ------------------------------------------------- |
-| mongodb.collection       | collection                                        |
-| mongodb.usage.commands   | top                                               |
-| mongodb.usage.getmore    | top                                               |
-| mongodb.usage.insert     | top                                               |
-| mongodb.usage.queries    | top                                               |
-| mongodb.usage.readLock   | top                                               |
-| mongodb.usage.writeLock  | top                                               |
-| mongodb.usage.remove     | top                                               |
-| mongodb.usage.total      | top                                               |
-| mongodb.usage.update     | top                                               |
-| mongodb.usage.writeLock  | top                                               |
-| mongodb.tcmalloc         | tcmalloc                                          |
-| mongodb.metrics.commands | metrics.commands                                  |
-| mongodb.chunks.jumbo     | jumbo_chunks                                      |
-| mongodb.chunks.total     | jumbo_chunks                                      |
+| メトリクスのプレフィックス                     | 収集するために `additional_metrics` に追加する項目 |
+| --------------------------------- | ------------------------------------------------- |
+| mongodb.collection                | collection                                        |
+| mongodb.usage.commands            | top                                               |
+| mongodb.usage.getmore             | top                                               |
+| mongodb.usage.insert              | top                                               |
+| mongodb.usage.queries             | top                                               |
+| mongodb.usage.readLock            | top                                               |
+| mongodb.usage.writeLock           | top                                               |
+| mongodb.usage.remove              | top                                               |
+| mongodb.usage.total               | top                                               |
+| mongodb.usage.update              | top                                               |
+| mongodb.usage.writeLock           | top                                               |
+| mongodb.tcmalloc                  | tcmalloc                                          |
+| mongodb.metrics.commands          | metrics.commands                                  |
+| mongodb.chunks.jumbo              | jumbo_chunks                                      |
+| mongodb.chunks.total              | jumbo_chunks                                      |
+| mongodb.sharded_data_distribution | sharded_data_distribution                         |
 
 ### イベント
 
