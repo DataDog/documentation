@@ -198,6 +198,9 @@ A test is considered `FAILED` if it does not satisfy one or more assertions or i
 
 The most common errors include the following:
 
+`AUTHENTICATION_ERROR`
+: As a safety measure, when a test fails due to an authentication error (invalid credentials), Synthetics disables the test retry mechanism until the test is updated with new credentials (and is therefore more likely to succeed). This is done to ensure your failing tests are not run unnecessarily in the interim causing false alerts and inflated usage (billing).
+
 `CONNREFUSED`
 : No connection could be made because the target machine actively refused it.
 
