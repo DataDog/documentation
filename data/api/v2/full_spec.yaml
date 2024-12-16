@@ -21531,11 +21531,13 @@ components:
     SLOReportInterval:
       description: The frequency at which report data is to be generated.
       enum:
+      - daily
       - weekly
       - monthly
       example: weekly
       type: string
       x-enum-varnames:
+      - DAILY
       - WEEKLY
       - MONTHLY
     SLOReportPostResponse:
@@ -32241,6 +32243,9 @@ paths:
         - name: id
           source: data.id
         type: unsafe
+      x-unstable: '**Note**: This endpoint is in Preview. If you have any feedback,
+
+        contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/deletion/requests:
     get:
       description: Gets a list of data deletion requests based on several filter parameters.
@@ -32319,6 +32324,9 @@ paths:
         - logs_delete_data
       x-undo:
         type: safe
+      x-unstable: '**Note**: This endpoint is in Preview. If you have any feedback,
+
+        contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/deletion/requests/{id}/cancel:
     put:
       description: Cancels a data deletion request by providing its ID.
@@ -32364,6 +32372,9 @@ paths:
         - logs_delete_data
       x-undo:
         type: idempotent
+      x-unstable: '**Note**: This endpoint is in Preview. If you have any feedback,
+
+        contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/domain_allowlist:
     get:
       description: Get the domain allowlist for an organization.

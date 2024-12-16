@@ -1968,7 +1968,9 @@ The `trackUserInteractions` parameter enables the automatic collection of user c
 {{< tabs >}}
 {{% tab "RUM" %}}
 
-Types are compatible with TypeScript >= 3.8.2. For earlier versions, import JavaScript sources and use global variables to avoid any compilation issues:
+Types are compatible with TypeScript >= 3.8.2. To initialize the SDK, use the following code snippet.
+
+<div class="alert alert-info"><strong>Note</strong>: For earlier versions of TypeScript, import JavaScript sources and use global variables to avoid any compilation issues.</div>
 
 ```javascript
 import '@datadog/browser-rum/bundle/datadog-rum'
@@ -1984,7 +1986,23 @@ window.DD_RUM.init({
 {{% /tab %}}
 {{% tab "Error Tracking" %}}
 
-TypeScript is not supported for Error Tracking.
+
+Types are compatible with TypeScript >= 3.8.2. To initialize the SDK, use the following code snippet.
+
+<div class="alert alert-info"><strong>Note</strong>: For earlier versions of TypeScript, import JavaScript sources and use global variables to avoid any compilation issues.</div>
+
+```javascript
+import '@datadog/browser-rum/bundle/datadog-rum'
+
+window.DD_RUM.init({
+  applicationId: 'XXX',
+  clientToken: 'XXX',
+  site: 'datadoghq.com',
+  trackUserInteractions: true,
+   trackResources: true,
+  ...
+})
+```
 
 {{% /tab %}}
 {{< /tabs >}}
