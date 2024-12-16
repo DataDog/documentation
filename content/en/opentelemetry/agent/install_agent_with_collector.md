@@ -266,7 +266,7 @@ exporters:
       site: ${env:DD_SITE}
 {{< /code-block >}}
 
-Note: If key and / or site are unset, or key is set to a secret, the missing parameters will be sourced from the core agent config. For site, core agent config defaults to `datadoghq.com` (US1). 
+**Note**: If `key` is not specified or set to a secret, or if `site` is not specified, the system uses values from the core Agent configuration. By default, the core Agent sets site to `datadoghq.com` (US1).
 
 ##### Prometheus receiver
 
