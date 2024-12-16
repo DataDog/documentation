@@ -99,14 +99,16 @@ Next, configure the Go application to enable tracing. Because the Agent runs in 
 To enable tracing support, uncomment the following imports in `apm-tutorial-golang/cmd/notes/main.go`:
 
 {{< code-block lang="go" filename="cmd/notes/main.go" >}}
-      sqltrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/database/sql" // 1.x
-     // sqltrace "github.com/DataDog/dd-trace-go/contrib/database/sql/v2" // 2.x
-     chitrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/go-chi/chi" // 1.x
-     // chitrace "github.com/DataDog/dd-trace-go/contrib/go-chi/chi/v2" // 2.x
-     httptrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http" // 1.x
-     // httptrace "github.com/DataDog/dd-trace-go/contrib/net/http/v2" // 2.x
-     "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer" // 1.x
-     // "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer" // 2.x
+    sqltrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/database/sql" // 1.x
+    chitrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/go-chi/chi" // 1.x
+    httptrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http" // 1.x
+    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer" // 1.x
+     
+    // If you are using v2, the lines look like this:
+    // sqltrace "github.com/DataDog/dd-trace-go/contrib/database/sql/v2" // 2.x
+    // chitrace "github.com/DataDog/dd-trace-go/contrib/go-chi/chi/v2" // 2.x
+    // httptrace "github.com/DataDog/dd-trace-go/contrib/net/http/v2" // 2.x
+    // "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer" // 2.x
 {{< /code-block >}}
 
 In the `main()` function, uncomment the following lines:
@@ -258,10 +260,12 @@ import (
   ...
 
   sqltrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/database/sql" // 1.x
-  // sqltrace "github.com/DataDog/dd-trace-go/contrib/database/sql/v2" // 2.x
   chitrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/go-chi/chi" // 1.x
-  // chitrace "github.com/DataDog/dd-trace-go/contrib/go-chi/chi/v2" // 2.x
   httptrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http" // 1.x
+  
+  // If you are using v2, the lines look like this:
+  // sqltrace "github.com/DataDog/dd-trace-go/contrib/database/sql/v2" // 2.x
+  // chitrace "github.com/DataDog/dd-trace-go/contrib/go-chi/chi/v2" // 2.x
   // httptrace "github.com/DataDog/dd-trace-go/contrib/net/http/v2" // 2.x
   ...
 )
