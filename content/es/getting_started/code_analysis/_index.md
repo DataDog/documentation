@@ -76,8 +76,8 @@ Si utilizas un repositorio de GitHub, puedes configurar la [integración GitHub]
 
 Los comentarios en las [solicitudes pull de GitHub][105] están habilitados por defecto. Haz clic en **Connect Repositories** (Conectar repositorios) en la página de configuración de Code Analysis y pasa el cursor sobre el marcador "Falta", en la columna Permisos de solicitudes pull, para ver qué permisos necesitas actualizar para tu cuenta.
 
-{{< img src="/getting_started/code_analysis/missing_permissions.png" alt="Pasa el cursor sobre la píldora "Falta" para ver qué permisos necesitas actualizar en cada repositorio." style="width:100%" >}}
-
+{{< img src="/getting_started/code_analysis/missing_permissions.png" alt="Pasa el cursor sobre la píldora Falta para ver qué permisos necesitas actualizar en cada repositorio." style="width:100%" >}}
+d
 Para desactivar esta función, ve a la página [**Configuración de Code Analysis**][106] y haz clic en el conmutador de la columna Comentarios de GitHub.
 
 {{< img src="/getting_started/code_analysis/github_comments_setting.png" alt="Haz clic en el conmutador de la columna Comentarios de GitHub para activar o desactivar Code Analysis en el repositorio de GitHub conectado." style="width:100%" >}}
