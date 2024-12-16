@@ -13,14 +13,18 @@ further_reading:
 <div class="alert alert-warning">Agentless Scanning for Cloud Security Management is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
+Agentless Scanning provides visibility into vulnerabilities that exist within your cloud infrastructure,
+without requiring you to install the Datadog Agent.
+
+See the [CSM Agentless Scanning][12] page to learn more about its capabilities and how it works.
+
 ## Prerequisites
 
 Before setting up Agentless Scanning, ensure the following prerequisites are met:
 
-- **AWS integration**: The [AWS integration][2] must be installed and configured for your AWS accounts.
-- **Remote Configuration**: [Remote Configuration][3] is required to enable Datadog to send information to Agentless scanners, such as which cloud resources to scan.
-- **IAM permissions**: The Agentless Scanning instance requires specific IAM permissions to scan hosts, containers, and Lambda functions. These permissions are automatically applied as part of the installation process.<br><br>
-  {{< collapse-content title="Host and container permissions" level="h5" >}}
+- **Remote Configuration**: [Remote Configuration][3] is required to enable Datadog to send information to Agentless scanners, such as the cloud resources to scan.
+- **Cloud permissions**: The Agentless Scanning instance requires specific permissions to scan hosts, containers, and functions. These permissions are automatically applied as part of the installation process.<br><br>
+  {{< collapse-content title="AWS Host and container scanning permissions" level="h5" >}}
   <ul>
     <li><code>ec2:DescribeVolumes</code></li>
     <li><code>ec2:CreateTags</code></li>
@@ -34,9 +38,23 @@ Before setting up Agentless Scanning, ensure the following prerequisites are met
   </ul>
   {{< /collapse-content >}}
 
-  {{< collapse-content title="Lambda permissions" level="h5" >}}
+  {{< collapse-content title="AWS Lambda scanning permissions" level="h5" >}}
   <ul><li><code>lambda:GetFunction</code></li></ul>
-  {{< /collapse-content >}} 
+  {{< /collapse-content >}}
+
+  {{< collapse-content title="Azure Host scanning permissions" level="h5" >}}
+  <ul>
+    <li><code>Microsoft.Compute/virtualMachines/read</code></li>
+    <li><code>Microsoft.Compute/virtualMachines/instanceView/read</code></li>
+    <li><code>Microsoft.Compute/virtualMachineScaleSets/read</code></li>
+    <li><code>Microsoft.Compute/virtualMachineScaleSets/instanceView/read</code></li>
+    <li><code>Microsoft.Compute/virtualMachineScaleSets/virtualMachines/read</code></li>
+    <li><code>Microsoft.Compute/virtualMachineScaleSets/virtualMachines/instanceView/read</code></li>
+    <li><code>Microsoft.Compute/disks/read</code></li>
+    <li><code>Microsoft.Compute/disks/beginGetAccess/action</code></li>
+    <li><code>Microsoft.Compute/disks/endGetAccess/action</code></li>
+  </ul>
+  {{< /collapse-content >}}
 
 ## Setup
 
@@ -71,3 +89,4 @@ Use the AWS CloudFormation template to create a CloudFormation stack. The templa
 [9]: https://github.com/DataDog/terraform-module-datadog-agentless-scanner/blob/main/README.md#uninstall
 [10]: https://app.datadoghq.com/security/configuration/csm/setup
 [11]: /security/cloud_security_management/setup/agentless_scanning/cloudformation
+[12]: /security/cloud_security_management/agentless_scanning
