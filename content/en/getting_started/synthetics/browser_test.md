@@ -48,6 +48,7 @@ You may create a test using one of the following options:
 
 - **Build a test from scratch**:
 
+    1. Click the **+** template to start a new Browser Test from scratch.
     1. Add the URL of the website you want to monitor. If you don't know what to start with, you can use `https://www.shopist.io`, a test e-commerce web application.
     2. Select **Advanced Options** to set custom request options, certificates, authentication credentials, and more. 
     3. Name your test and set tags to it such as `env:prod` and `app:shopist`. Tags allow you to keep your test suite organized and quickly find tests you're interested in on the homepage.
