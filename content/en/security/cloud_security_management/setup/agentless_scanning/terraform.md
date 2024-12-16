@@ -14,7 +14,7 @@ aliases:
   - /security/cloud_security_management/guide/agentless_terraform
 ---
 
-If you've already set up Cloud Security Management and want to add a new AWS account or enable [Agentless Scanning][1] on an existing integrated AWS account, you can use either Terraform or [AWS CloudFormation][2]. This article provides detailed instructions for the Terraform approach.
+If you've already [set up Cloud Security Management][4] and want to add a new cloud account or enable [Agentless Scanning][1] on an existing integrated cloud account, you can use either Terraform, [AWS CloudFormation][2] or Azure Resource Manager. This article provides detailed instructions for the Terraform approach.
 
 <div class="alert alert-info">If you're setting up Cloud Security Management for the first time, you can follow the <a href="/security/cloud_security_management/setup/agentless_scanning/quick_start">quick start workflow</a>, which uses AWS CloudFormation to enable Agentless Scanning.</div>
 
@@ -46,6 +46,21 @@ If you've already set up Cloud Security Management and want to add a new AWS acc
 
 [1]: https://app.datadoghq.com/security/configuration/csm/setup
 [2]: https://github.com/DataDog/terraform-datadog-agentless-scanner/blob/main/README.md
+
+{{% /tab %}}
+
+{{% tab "Existing Azure subscription" %}}
+
+1. On the [Cloud Security Management Setup][1] page, click **Cloud Integrations > Azure**.
+1. Expend the Tenant containing the subscription where you want to deploy the Agentless scanner.
+1. Click the **Enable** button for the Azure subscription where you want to deploy the Agentless scanner.
+1. Toggle on **Vulnerability Scanning**.
+1. In the **How would you like to set up Agentless Scanning?** section, select **Terraform**.
+1. Follow the instructions for installing the [Datadog Agentless Scanner module][2].
+1. Click **Done**.
+
+[1]: https://app.datadoghq.com/security/configuration/csm/setup
+[2]: https://github.com/DataDog/terraform-module-datadog-agentless-scanner/tree/main/azure#readme
 
 {{% /tab %}}
 {{< /tabs >}}
