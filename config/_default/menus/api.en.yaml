@@ -4687,6 +4687,34 @@ menu:
           - AggregateCIAppTestEvents
         unstable: []
         order: 3
+    - name: CSM Agents
+      url: /api/latest/csm-agents/
+      identifier: csm-agents
+      generated: true
+    - name: Get all CSM Serverless Agents
+      url: '#get-all-csm-serverless-agents'
+      identifier: csm-agents-get-all-csm-serverless-agents
+      parent: csm-agents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListAllCSMServerlessAgents
+        unstable: []
+        order: 3
+    - name: Get all CSM Agents
+      url: '#get-all-csm-agents'
+      identifier: csm-agents-get-all-csm-agents
+      parent: csm-agents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListAllCSMAgents
+        unstable: []
+        order: 3
     - name: CSM Threats
       url: /api/latest/csm-threats/
       identifier: csm-threats

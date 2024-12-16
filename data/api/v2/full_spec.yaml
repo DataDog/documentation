@@ -4416,6 +4416,34 @@ components:
             from the other indexes
           type: string
       type: object
+    CSMAgentsMetadata:
+      description: Metadata related to the paginated response.
+      properties:
+        page_index:
+          description: The index of the current page in the paginated results.
+          example: 0
+          format: int64
+          type: integer
+        page_size:
+          description: The number of items per page in the paginated results.
+          example: 10
+          format: int64
+          type: integer
+        total_filtered:
+          description: Total number of items that match the filter criteria.
+          example: 128697
+          format: int64
+          type: integer
+      type: object
+    CSMAgentsType:
+      default: datadog_agent
+      description: The type of the resource. The value should always be `datadog_agent`.
+      enum:
+      - datadog_agent
+      example: datadog_agent
+      type: string
+      x-enum-varnames:
+      - DATADOG_AGENT
     CalculatedField:
       description: Calculated field.
       properties:
@@ -6722,6 +6750,96 @@ components:
           description: Name of the creator.
           nullable: true
           type: string
+      type: object
+    CsmAgentData:
+      description: Single Agent Data.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/CsmAgentsAttributes'
+        id:
+          description: The ID of the Agent.
+          example: fffffc5505f6a006fdf7cf5aae053653
+          type: string
+        type:
+          $ref: '#/components/schemas/CSMAgentsType'
+      type: object
+    CsmAgentsAttributes:
+      description: A CSM Agent returned by the API.
+      properties:
+        agent_version:
+          description: Version of the Datadog Agent.
+          type: string
+        aws_fargate:
+          description: AWS Fargate details.
+          type: string
+        cluster_name:
+          description: List of cluster names associated with the Agent.
+          items:
+            type: string
+          type: array
+        datadog_agent:
+          description: Unique identifier for the Datadog Agent.
+          type: string
+        ecs_fargate_task_arn:
+          description: ARN of the ECS Fargate task.
+          type: string
+        envs:
+          description: List of environments associated with the Agent.
+          items:
+            type: string
+          nullable: true
+          type: array
+        host_id:
+          description: ID of the host.
+          format: int64
+          type: integer
+        hostname:
+          description: Name of the host.
+          type: string
+        install_method_installer_version:
+          description: Version of the installer used for installing the Datadog Agent.
+          type: string
+        install_method_tool:
+          description: Tool used for installing the Datadog Agent.
+          type: string
+        is_csm_vm_containers_enabled:
+          description: Indicates if CSM VM Containers is enabled.
+          nullable: true
+          type: boolean
+        is_csm_vm_hosts_enabled:
+          description: Indicates if CSM VM Hosts is enabled.
+          nullable: true
+          type: boolean
+        is_cspm_enabled:
+          description: Indicates if CSPM is enabled.
+          nullable: true
+          type: boolean
+        is_cws_enabled:
+          description: Indicates if CWS is enabled.
+          nullable: true
+          type: boolean
+        is_cws_remote_configuration_enabled:
+          description: Indicates if CWS Remote Configuration is enabled.
+          nullable: true
+          type: boolean
+        is_remote_configuration_enabled:
+          description: Indicates if Remote Configuration is enabled.
+          nullable: true
+          type: boolean
+        os:
+          description: Operating system of the host.
+          type: string
+      type: object
+    CsmAgentsResponse:
+      description: Response object that includes a list of CSM Agents.
+      properties:
+        data:
+          description: A list of Agents.
+          items:
+            $ref: '#/components/schemas/CsmAgentData'
+          type: array
+        meta:
+          $ref: '#/components/schemas/CSMAgentsMetadata'
       type: object
     CustomCostGetResponseMeta:
       description: Meta for the response from the Get Custom Costs endpoints.
@@ -17876,6 +17994,16 @@ components:
       required:
       - data
       type: object
+    OrderDirection:
+      description: The sort direction for results.
+      enum:
+      - asc
+      - desc
+      example: asc
+      type: string
+      x-enum-varnames:
+      - ASC
+      - DESC
     OrgConfigGetResponse:
       description: A response with a single Org Config.
       properties:
@@ -31733,6 +31861,119 @@ paths:
       x-unstable: '**Note**: This endpoint is in public beta.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/csm/onboarding/agents:
+    get:
+      description: Get the list of all CSM Agents running on your hosts and containers.
+      operationId: ListAllCSMAgents
+      parameters:
+      - description: The page index for pagination (zero-based).
+        in: query
+        name: page
+        required: false
+        schema:
+          example: 2
+          format: int32
+          maximum: 1000000
+          minimum: 0
+          type: integer
+      - description: The number of items to include in a single page.
+        in: query
+        name: size
+        required: false
+        schema:
+          example: 12
+          format: int32
+          maximum: 100
+          minimum: 0
+          type: integer
+      - description: A search query string to filter results (for example, `hostname:COMP-T2H4J27423`).
+        in: query
+        name: query
+        required: false
+        schema:
+          example: hostname:COMP-T2H4J27423
+          type: string
+      - description: The sort direction for results. Use `asc` for ascending or `desc`
+          for descending.
+        in: query
+        name: order_direction
+        required: false
+        schema:
+          $ref: '#/components/schemas/OrderDirection'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CsmAgentsResponse'
+          description: OK
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get all CSM Agents
+      tags:
+      - CSM Agents
+      x-menu-order: 3
+      x-undo:
+        type: safe
+  /api/v2/csm/onboarding/serverless/agents:
+    get:
+      description: Get the list of all CSM Serverless Agents running on your hosts
+        and containers.
+      operationId: ListAllCSMServerlessAgents
+      parameters:
+      - description: The page index for pagination (zero-based).
+        in: query
+        name: page
+        required: false
+        schema:
+          example: 2
+          format: int32
+          maximum: 1000000
+          minimum: 0
+          type: integer
+      - description: The number of items to include in a single page.
+        in: query
+        name: size
+        required: false
+        schema:
+          example: 12
+          format: int32
+          maximum: 100
+          minimum: 0
+          type: integer
+      - description: A search query string to filter results (for example, `hostname:COMP-T2H4J27423`).
+        in: query
+        name: query
+        required: false
+        schema:
+          example: hostname:COMP-T2H4J27423
+          type: string
+      - description: The sort direction for results. Use `asc` for ascending or `desc`
+          for descending.
+        in: query
+        name: order_direction
+        required: false
+        schema:
+          $ref: '#/components/schemas/OrderDirection'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CsmAgentsResponse'
+          description: OK
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get all CSM Serverless Agents
+      tags:
+      - CSM Agents
+      x-menu-order: 3
+      x-undo:
+        type: safe
   /api/v2/current_user/application_keys:
     get:
       description: List all application keys available for current user
@@ -47703,6 +47944,15 @@ tags:
     [Test Visibility in Datadog page](https://docs.datadoghq.com/tests/) for more
     information.
   name: CI Visibility Tests
+- description: 'Datadog Cloud Security Management (CSM) delivers real-time threat
+    detection
+
+    and continuous configuration audits across your entire cloud infrastructure,
+
+    all in a unified view for seamless collaboration and faster remediation.
+
+    Go to https://docs.datadoghq.com/security/cloud_security_management to learn more'
+  name: CSM Agents
 - description: Cloud Security Management Threats (CSM Threats) monitors file, network,
     and process activity across your environment to detect real-time threats to your
     infrastructure. See [Cloud Security Management Threats](https://docs.datadoghq.com/security/threats/)
