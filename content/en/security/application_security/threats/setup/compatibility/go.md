@@ -144,6 +144,7 @@ The Go packages listed in this page are relevant for Application Security capabi
 [26]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/contrib/database/sql/v2
 
 {{% /tab %}}
+{{% /tabs %}}
 
 [1]: /agent/remote_config/#enabling-remote-configuration
 [2]: https://github.com/DataDog/dd-trace-go
