@@ -154,7 +154,7 @@ dependencies:
   datadog_grpc_interceptor: ^1.1.0
 ```
 
-To inter this plugin, create an instance of `DatadogGrpcInterceptor`, then pass it to your generated gRPC client:
+To use this plugin, create an instance of `DatadogGrpcInterceptor`, then pass it to your generated gRPC client:
 
 ```dart
 import 'package:datadog_grpc_interceptor/datadog_grpc_interceptor.dart'
