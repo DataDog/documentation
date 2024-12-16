@@ -43,6 +43,8 @@ The following table provides a summary of Agentless scanning technologies in rel
 | Serverless                  | AWS, AWS Lambda                                             |
 | Serverless languages        | .Net, Python, Java, Ruby, Node.js, Go                        |
 
+**Note**: AMIs must be stored in an account that uses Datadog's AWS integration. Otherwise, Datadog can't read its underlying Amazon Elastic Block Store (EBS) snapshot, so it can't scan or report on the AMI.
+
 ## How it works
 
 After [setting up Agentless scanning][1] for your resources, Datadog schedules automated scans in 12-hour intervals through [Remote Configuration][2]. During a scan cycle, Agentless scanners gather Lambda code dependencies and create snapshots of your EC2 instances. With these snapshots, the Agentless scanners scan, generate, and transmit a list of packages to Datadog to check for vulnerabilities, along with Lambda code dependencies. When scans of a snapshot are completed, the snapshot is deleted. No confidential or private personal information is ever transmitted outside of your infrastructure.
