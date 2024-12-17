@@ -116,9 +116,11 @@ On the upper-right corner of each graph click on the arrow in order to export yo
 
 ## Resources
 
-See Requests, Latency, and Error graphs broken down by resource to identify problematic resources. Resources are particular actions for your services (typically individual endpoints or queries). Read more in [Getting Started with APM][1].
+See Requests, Latency, and Error graphs broken down by resource to identify problematic resources. Resources are particular actions for your services (typically individual endpoints or queries). 
 
-Below, there's a list of [resources][11] associated with your service. Sort the resources for this service by requests, latency, errors, and time, to identify areas of high traffic or potential trouble. Note that these metric columns are configurable (see image below).
+Below, there's a list of [resources][11] associated with your service. Note: If the a resource represents an external interface of an HTTP service, the list displays endpoints instead.
+
+Sort the resources for this service by requests, latency, errors, and time, to identify areas of high traffic or potential trouble. These metric columns are configurable, as shown in the following example:
 
 {{< img src="tracing/visualization/service/resources_tab_1.jpg" alt="Resources" style="width:100%;">}}
 

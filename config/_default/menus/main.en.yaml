@@ -3466,22 +3466,22 @@ menu:
       identifier: tracing_apm_monitors
       weight: 707
     - name: Endpoint Observability
-      url: /service_catalog/api_catalog/
+      url: /service_catalog/endpoint_list/
       identifier: endpoint_observability
       parent: tracing
       weight: 8
     - name: Discover Endpoints
-      url: /service_catalog/api_catalog/discover_endpoints
+      url: /service_catalog/endpoint_list/discover_endpoints
       identifier: discover_endpoints
       parent: endpoint_observability
       weight: 801
     - name: Monitor Endpoints
-      url: /service_catalog/api_catalog/monitor_endpoints
+      url: /service_catalog/endpoint_list/monitor_endpoints
       identifier: monitor_endpoints
       parent: endpoint_observability
       weight: 802
     - name: Explore Endpoints
-      url: /service_catalog/api_catalog/explore_endpoints
+      url: /service_catalog/endpoint_list/explore_endpoints
       identifier: explore_endpoints
       parent: endpoint_observability
       weight: 803

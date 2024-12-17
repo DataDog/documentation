@@ -137,6 +137,7 @@ Every entry showing up in the Service Catalog is categorized as a component type
 *  Queues
 *  RUM Apps
 *  External providers
+*  Endpoints
 
 {{< img src="tracing/service_catalog/component_selector.png" alt="Service Catalog component selector" style="width:30%;" >}}
 

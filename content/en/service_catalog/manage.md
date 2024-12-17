@@ -36,37 +36,6 @@ algolia:
 
 You can assign a `team` to entries in the Service Catalog either in the UI or by creating a [Service Definition][4]. Datadog recommends that you set up [Datadog Teams][5] so that you can specify individual members of the team and take advantage of *Teams* filters across common views like Dashboards and Notebook lists. 
 
-### Assigning an owner to endpoints
-
-For endpoints, you manage ownership at the API level, where each API represents a group of endpoints. The owners of APIs are called *teams*.
-
-You can find the teams that own an API on the API page, endpoint side panel, and in the **Explorer** table. Teams are represented by a pill containing a name like `Orders`. Click the team name to see additional details like the team members, contact links, and more. Team details are useful to resolve incidents related to specific endpoints.
-
-{{< img src="tracing/api_catalog/api-catalog-endpoint-owners.png" alt="The team details panel in the endpoint details page, showing the name and communication information for the team that owns the endpoint" style="width:100%;" >}}
-
-To assign owners from the Datadog UI:
-
-1. Make sure the [API endpoints are registered][11].
-2. From the **API** column, click the API you want to assign an owner to.
-3. Beside the **N/A** pill at the top-left, click the pencil icon.
-4. Select a team from the list.
-5. Click **Confirm**.
-
-To assign owners within the API specification file:
-
-1. Add the team name to the `x-datadog.teamHandle` property:
-   {{< highlight yaml "hl_lines=6-7" >}}
-openapi: 3.0.2
-info:
- title: API Name
- description: API Description
- version: 1.0.0
-x-datadog:
- teamHandle: <dd-team>
-{{< /highlight >}}
-2. [Import the OpenAPI/Swagger file][12].
-
-
 ## Determining and communicating criticality 
 Not all instances of observability carry the same level of importance. Some are mission-critical, while others are less so. By identifying the service tier, lifecycle, and the application ecosystem they belong to, you can determine if the observability coverage is adequate and quickly assess the severity of issues. 
 
@@ -120,6 +89,85 @@ Click a service in Service Catalog to open the side panel with the following det
   {{< img src="tracing/service_catalog/service_details_remote_config.png" alt="Configuration options for the service in the Datadog UI" style="width:80%;" >}}
 
 Click **View Related** and select a page from the dropdown menu to navigate into related pages in Datadog, such as the [APM Service Page][6] and service map for this service, or related telemetry data pages, such as for distributed tracing, infrastructure, network performance, Log Management, RUM, and Continuous Profiler.
+
+## Add metadata to endpoints
+
+You can add metadata to APIs through the Datadog UI or API, or use automated pipelines through the GitHub integration or Terraform.
+
+### Metadata structure and supported versions
+
+API Catalog supports OpenAPI 2 and 3 as the format for defining APIs. 
+
+Datadog supports custom OpenAPI fields to help manage metadata:
+- **API owner**: Add the following to the top level of the OpenAPI file:
+  ```yaml
+  x-datadog:
+   teamHandle: dd-team
+  ```
+
+- **Scope to service**: Add the `service` parameter to the top level of an OpenAPI file to scope the API to a specific service. If you don't define a specific service, Datadog matches all endpoints that fit your definition:
+  ```yaml
+  x-datadog:
+   service: web-store
+  ```
+  The name of the service should be the exact service name as it appears on Datadog traces.
+
+Example OpenAPI file:
+
+{{< code-block lang="yaml" disable_copy="true" >}}
+openapi: 3.0.2
+info:
+ title: API Name
+ description: API Description
+ version: 1.0.0
+x-datadog:
+ teamHandle: dd-team
+ service: web-store
+paths:
+ /api/v2/customers/{id}:
+   get:
+     summary: get customer information
+     operationId: getCustomerInfo
+     tags:
+       - public
+       - important
+     parameters:
+       - in: path
+         name: id
+     responses:
+       '200':
+         description: Successful operation
+         content:
+           application/vnd.api+json:
+             schema:
+               type: object
+               properties:
+                 data:
+                   type: array
+                   description: Contains all customer information
+       '400':
+         description: Invalid arguments
+       '401':
+         description: Unauthorized operation
+       '500':
+         description: An internal server error
+{{< /code-block >}}
+
+### Automations for adding metadata
+
+#### Add API metadata from a GitHub repository
+
+Use the Datadog GitHub integration to import API definitions and keep them updated. After connecting, the API automatically updates whenever the file content changes in the repository.
+
+To import an OpenAPI or Swagger file using the GitHub integration:
+1. Set up the [Datadog GitHub integration][12].
+1. Navigate to the API Catalog in Datadog.
+1. Click on the **Manage** tab, and select **Add API**.
+1. Select **GitHub**.
+1. Choose the repository and the file you want to register.
+1. Select Create.
+
+{{< img src="tracing/api_catalog/api-catalog-create-from-github2.png" alt="API Catalog modal showing how to create a new API from GitHub" style="width:100%;" >}}
 
 ## Further reading
 

@@ -215,7 +215,7 @@ Web servers are almost always inter-connected with other services through a netw
 
 ## Platform services
 
-Datadog infrastructure monitoring comes with  additional products that you can use to maximize observability of your environments.
+Datadog infrastructure monitoring comes with additional products that you can use to maximize observability of your environments.
 
 ### Service Catalog
 
@@ -225,7 +225,9 @@ Service Catalog also helps you evaluate the coverage of your observability setup
 
 {{< img src="/administrators_guide/service_catalog_2.png" alt="Service Catalog home screen" style="width:90%;">}}
 
-You can add components that you aren't planning on monitoring immediately, such as cron jobs or libraries, to create a comprehensive view of your system, and to mark team members who are responsible for these components ahead of the next phase of your Datadog rollout.  
+You can add components that you aren't planning on monitoring immediately, such as cron jobs or libraries, to create a comprehensive view of your system, and to mark team members who are responsible for these components ahead of the next phase of your Datadog rollout.
+
+Use the [API list][33] for resource endpoint-specific categorization, performance, reliability, and ownership of all your API endpoints in one place.
 
 ### Resource Catalog
 
@@ -237,10 +239,6 @@ You can use Resource Catalog in a variety of contexts, including:
 - Planning upgrades of resources that are running deprecated versions.
 - Accessing configuration information and other metadata to speed up incident response.
 - Maintaining your security posture by finding and resolving misconfigurations and vulnerabilities.
-
-### API Catalog 
-
-Use [API Catalog][33] for resource endpoint-specific categorization, performance, reliability, and ownership of all your API endpoints in one place.
 
 ### Event Management 
 
