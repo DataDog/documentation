@@ -349,7 +349,7 @@ TARBALL="ngx_http_datadog_module-${ARCH}-${NGINX_VERSION}.so.tgz"
 curl -Lo ${TARBALL} "https://github.com/DataDog/nginx-datadog/releases/download/${RELEASE_TAG}/${TARBALL}"
 ```
 
-Extract the `ngx_http_datadog_module.so` file from the downloaded tarball using `tar` and place it in the NGINX modules directory, typically locaated at `/usr/lib/nginx/modules`.
+Extract the `ngx_http_datadog_module.so` file from the downloaded tarball using `tar` and place it in the NGINX modules directory, typically located at `/usr/lib/nginx/modules`.
 
 ### NGINX configuration with Datadog module
 In the topmost section of the NGINX configuration, load the Datadog module.

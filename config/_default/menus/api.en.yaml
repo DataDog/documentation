@@ -4687,6 +4687,34 @@ menu:
           - AggregateCIAppTestEvents
         unstable: []
         order: 3
+    - name: CSM Agents
+      url: /api/latest/csm-agents/
+      identifier: csm-agents
+      generated: true
+    - name: Get all CSM Serverless Agents
+      url: '#get-all-csm-serverless-agents'
+      identifier: csm-agents-get-all-csm-serverless-agents
+      parent: csm-agents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListAllCSMServerlessAgents
+        unstable: []
+        order: 3
+    - name: Get all CSM Agents
+      url: '#get-all-csm-agents'
+      identifier: csm-agents-get-all-csm-agents
+      parent: csm-agents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListAllCSMAgents
+        unstable: []
+        order: 3
     - name: CSM Threats
       url: /api/latest/csm-threats/
       identifier: csm-threats
@@ -4999,18 +5027,6 @@ menu:
       url: /api/latest/cloud-cost-management/
       identifier: cloud-cost-management
       generated: true
-    - name: Cloud Cost Enabled
-      url: '#cloud-cost-enabled'
-      identifier: cloud-cost-management-cloud-cost-enabled
-      parent: cloud-cost-management
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - GetCloudCostActivity
-        unstable: []
-        order: 10
     - name: Get Custom Costs file
       url: '#get-custom-costs-file'
       identifier: cloud-cost-management-get-custom-costs-file
@@ -5405,46 +5421,6 @@ menu:
         unstable:
           - v2
         order: 4
-    - name: Data Deletion
-      url: /api/latest/data-deletion/
-      identifier: data-deletion
-      generated: true
-    - name: Cancels a data deletion request
-      url: '#cancels-a-data-deletion-request'
-      identifier: data-deletion-cancels-a-data-deletion-request
-      parent: data-deletion
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - CancelDataDeletionRequest
-        unstable: []
-        order: 2
-    - name: Gets a list of data deletion requests
-      url: '#gets-a-list-of-data-deletion-requests'
-      identifier: data-deletion-gets-a-list-of-data-deletion-requests
-      parent: data-deletion
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - GetDataDeletionRequests
-        unstable: []
-        order: 3
-    - name: Creates a data deletion request
-      url: '#creates-a-data-deletion-request'
-      identifier: data-deletion-creates-a-data-deletion-request
-      parent: data-deletion
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - CreateDataDeletionRequest
-        unstable: []
-        order: 1
     - name: Domain Allowlist
       url: /api/latest/domain-allowlist/
       identifier: domain-allowlist
@@ -7164,6 +7140,154 @@ menu:
           - ListRumMetrics
         unstable: []
         order: 1
+    - name: SCIM
+      url: /api/latest/scim/
+      identifier: scim
+      generated: true
+    - name: Update user
+      url: '#update-user'
+      identifier: scim-update-user
+      parent: scim
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateSCIMUser
+        unstable: []
+        order: 4
+    - name: Patch user
+      url: '#patch-user'
+      identifier: scim-patch-user
+      parent: scim
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - PatchSCIMUser
+        unstable: []
+        order: 5
+    - name: Get user
+      url: '#get-user'
+      identifier: scim-get-user
+      parent: scim
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetSCIMUser
+        unstable: []
+        order: 3
+    - name: Delete user
+      url: '#delete-user'
+      identifier: scim-delete-user
+      parent: scim
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteSCIMUser
+        unstable: []
+        order: 6
+    - name: Create user
+      url: '#create-user'
+      identifier: scim-create-user
+      parent: scim
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateSCIMUser
+        unstable: []
+        order: 2
+    - name: List users
+      url: '#list-users'
+      identifier: scim-list-users
+      parent: scim
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListSCIMUsers
+        unstable: []
+        order: 1
+    - name: Update group
+      url: '#update-group'
+      identifier: scim-update-group
+      parent: scim
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateSCIMGroup
+        unstable: []
+        order: 10
+    - name: Patch group
+      url: '#patch-group'
+      identifier: scim-patch-group
+      parent: scim
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - PatchSCIMGroup
+        unstable: []
+        order: 11
+    - name: Get group
+      url: '#get-group'
+      identifier: scim-get-group
+      parent: scim
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetSCIMGroup
+        unstable: []
+        order: 9
+    - name: Delete group
+      url: '#delete-group'
+      identifier: scim-delete-group
+      parent: scim
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteSCIMGroup
+        unstable: []
+        order: 12
+    - name: Create group
+      url: '#create-group'
+      identifier: scim-create-group
+      parent: scim
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateSCIMGroup
+        unstable: []
+        order: 8
+    - name: List groups
+      url: '#list-groups'
+      identifier: scim-list-groups
+      parent: scim
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListSCIMGroups
+        unstable: []
+        order: 7
     - name: Sensitive Data Scanner
       url: /api/latest/sensitive-data-scanner/
       identifier: sensitive-data-scanner

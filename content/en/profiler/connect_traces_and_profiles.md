@@ -48,12 +48,7 @@ It's highly recommended to <a href="/profiler/enabling/java/?tab=datadog#require
 {{< /programming-lang >}}
 {{< programming-lang lang="python" >}}
 
-The Trace to Profiling integration is enabled by default when you [turn on profiling for your Python service][1].
-
-Requires `dd-trace-py` version 0.44.0+.
-
-To enable the [timeline feature](#span-execution-timeline-view):
-
+The Trace to Profiling integration is enabled when you:
 - Upgrade `dd-trace-py` to version 2.12.0+, 2.11.4+, or 2.10.7+.
 - Set environment variable `DD_PROFILING_TIMELINE_ENABLED` to `true`
 
@@ -61,9 +56,7 @@ To enable the [timeline feature](#span-execution-timeline-view):
 {{< /programming-lang >}}
 {{< programming-lang lang="ruby" >}}
 
-The Trace to Profiling integration is enabled by default when you [turn on profiling for your Ruby service][1].
-
-The new [timeline feature](#span-execution-timeline-view), including GC information, is enabled by default in `dd-trace-rb` 1.22.0+.
+The Trace to Profiling integration is enabled by default when you [turn on profiling for your Ruby service][1] and update `dd-trace-rb` to 1.22.0+.
 
 [1]: /profiler/enabling/ruby
 {{< /programming-lang >}}
@@ -71,17 +64,13 @@ The new [timeline feature](#span-execution-timeline-view), including GC informat
 
 The Trace to Profiling integration is enabled by default when you [turn on profiling for your Node.js service][1] on Linux and macOS. The feature is not available on Windows.
 
-Requires `dd-trace-js` version 5.0.0+, 4.24.0+ or 3.45.0+.
-
-The new [timeline feature](#span-execution-timeline-view) is enabled by default in `dd-trace-js` 5.11.0+, 4.35.0+, and 3.56.0+.
+Requires `dd-trace-js` 5.11.0+, 4.35.0+, and 3.56.0+.
 
 [1]: /profiler/enabling/nodejs
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
 
-The Trace to Profiling integration is enabled by default when you [turn on profiling for your Go service][1].
-
-To enable the new [timeline feature](#span-execution-timeline-view), set the environment variables below:
+The Trace to Profiling integration is enabled when you [turn on profiling for your Go service][1] and set the environment variables below:
 
 ```go
 os.Setenv("DD_PROFILING_EXECUTION_TRACE_ENABLED", "true")
@@ -117,62 +106,13 @@ This capability requires `dd-trace-dotnet` version 2.30.0+.
 {{< /programming-lang >}}
 {{< programming-lang lang="php" >}}
 
-The Trace to Profiling integration is enabled by default when you [turn on profiling for your PHP service][1].
-
-Requires `dd-trace-php` version 0.71+.
-
-To enable the [timeline feature](#span-execution-timeline-view):
-- Upgrade to `dd-trace-php` version 0.98+.
-- Set the environment variable `DD_PROFILING_TIMELINE_ENABLED=1` or INI setting `datadog.profiling.timeline_enabled=1`
+The Trace to Profiling integration is enabled when you [turn on profiling for your PHP service][1] and meet the following criteria:
+- You are on `dd-trace-php` version 0.98+
+- You set the environment variable `DD_PROFILING_TIMELINE_ENABLED=1` or INI setting `datadog.profiling.timeline_enabled=1`
 
 [1]: /profiler/enabling/php
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
-
-### Span execution breakdown
-
-From the view of each trace, the **Profiles** tab highlights profiling data scoped on the selected spans.
-
-The values on the left side represent the time spent in that method call during the selected span. Depending on the runtime and language, the categories vary:
-{{< programming-lang-wrapper langs="java,python,go,ruby,nodejs,dotnet,php" >}}
-{{< programming-lang lang="java" >}}
-- **CPU** shows the time taken executing CPU tasks.
-- **Synchronization** shows the time spent waiting on monitors, the time a thread is sleeping and the time it is parked.
-- **VM operations** shows the time taken waiting for VM operations (for example, garbage collections, compilation, safepoints, and heap dumps).
-- **File I/O** shows the time taken waiting for a disk read/write operation to execute.
-- **Socket I/O** shows the time taken waiting for a network read/write operation to execute.
-- **Monitor enter** shows the time a thread is blocked on a lock.
-- **Uncategorized** shows the time taken to execute the span that cannot be placed into one of the previous categories.
-{{< /programming-lang >}}
-{{< programming-lang lang="python" >}}
-- **CPU** shows the time taken executing CPU tasks.
-- **Lock Wait** shows the time a thread is blocked on a lock.
-- **Uncategorized** shows the time taken to execute the span that cannot be placed into one of the previous categories.
-{{< /programming-lang >}}
-{{< programming-lang lang="ruby" >}}
-- **CPU** shows the time taken executing CPU tasks.
-- **Uncategorized** shows the time taken to execute the span that is not CPU execution.
-{{< /programming-lang >}}
-{{< programming-lang lang="nodejs" >}}
-- **CPU** shows the time taken executing CPU tasks.
-- **Uncategorized** shows the time taken to execute the span that is not CPU execution.
-{{< /programming-lang >}}
-{{< programming-lang lang="go" >}}
-- **CPU** shows the time taken executing CPU tasks.
-- **Off-CPU** shows the time taken to execute the span that is not CPU execution.
-{{< /programming-lang >}}
-{{< programming-lang lang="dotnet" >}}
-- **CPU** shows the time taken executing CPU tasks.
-- **Lock Wait** shows the time a thread is blocked on a lock.
-- **Uncategorized** shows the time taken to execute the span that cannot be placed into one of the previous categories.
-{{< /programming-lang >}}
-{{< programming-lang lang="php" >}}
-- **CPU** shows the time taken executing CPU tasks.
-- **Uncategorized** shows the time taken to execute the span that is not CPU execution.
-{{< /programming-lang >}}
-{{< /programming-lang-wrapper >}}
-
-Click the plus icon `+` to expand the stack trace to that method **in reverse order**. Hover over the value to see the percentage of time explained by category.
 
 ### Span execution timeline view
 
@@ -242,7 +182,7 @@ Lanes on the top are runtime activities that may add extra latency to your reque
 
 {{< img src="profiler/view_profile_from_trace.png" alt="Opening a view of the profile in a flame graph" >}}
 
-For each type from the breakdown, click **Open in Profiling** to see the same data opened up in a new page. From there, you can change the visualization to a flame graph.
+From the timeline, click **Open in Profiling** to see the same data on a new page. From there, you can change the visualization to a flame graph.
 Click the **Focus On** selector to define the scope of the data:
 
 - **Span & Children** scopes the profiling data to the selected span and all descendant spans in the same service.
