@@ -29,6 +29,7 @@ cascade:
 
 {{< whatsnext desc="API:" >}}
     {{< nextlink href="monitors/guide/monitor_api_options" >}}Monitor API options{{< /nextlink >}}
+    {{< nextlink href="content/en/monitors/guide/on_missing_data" >}}Migrating to On Missing Data Configuration{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="General Guides:" >}}
@@ -44,6 +45,7 @@ cascade:
     {{< nextlink href="monitors/guide/integrate-monitors-with-statuspage" >}}Integrate monitors with Statuspage{{< /nextlink >}}
     {{< nextlink href="monitors/guide/github_gating" >}}Gating your GitHub Actions Deployments with Datadog Monitors{{< /nextlink >}}
     {{< nextlink href="monitors/guide/monitoring-available-disk-space" >}}Monitoring Available Disk Space{{< /nextlink >}}
+    {{< nextlink href="content/en/monitors/guide/on_missing_data" >}}Migrating to On Missing Data Configuration{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Querying:" >}}
