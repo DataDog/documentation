@@ -4,7 +4,7 @@ on:
     paths:
     - 'content/en/**/*'
     - 'layouts/shortcodes/**/*.md'
-    - '!**.json'
+    - '!**/*.json'
 
 permissions:
   contents: read
