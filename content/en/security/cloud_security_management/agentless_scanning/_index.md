@@ -39,8 +39,8 @@ The following table provides a summary of Agentless scanning technologies in rel
 | Package Manager             | Deb (debian, ubuntu) <br> RPM (amazon-linux, fedora, redhat, centos) <br> APK (alpine)                                                         | Deb (debian, ubuntu) <br> RPM (fedora, redhat, centos) <br> APK (alpine)                                                             |
 | Encryption                  | AWS </br> Unencrypted </br> Encrypted - Platform Managed Key (PMK) </br> **Note**: Encrypted - Customer Managed Key (CMK) is **not** supported | Unencrypted </br> Encrypted - Platform Managed Key (PMK) </br> **Note**: Encrypted - Customer Managed Key (CMK) is **not** supported |
 | Container runtime           | Docker, containerd </br> **Note**: CRI-O is **not** supported                                                                                  | Docker, containerd </br> **Note**: CRI-O is **not** supported                                                                        |
-| Serverless                  | AWS, AWS Lambda                                                                                                                                | Request the feature                                                                                                                  |
-| Serverless languages        | .Net, Python, Java, Ruby, Node.js, Go, PHP                                                                                                     | Request the feature                                                                                                                  |
+| Serverless                  | AWS, AWS Lambda                                                                                                                                | [Request the feature][12]                                                                                                            |
+| Serverless languages        | .Net, Python, Java, Ruby, Node.js, Go, PHP                                                                                                     | [Request the feature][12]                                                                                                            |
 
 ## How it works
 
@@ -131,3 +131,4 @@ To establish estimates on scanner costs, reach out to your [Datadog Customer Suc
 [9]: /security/cloud_security_management
 [10]: /agent/remote_config
 [11]: /sensitive_data_scanner/library_rules/
+[12]: https://www.datadoghq.com/product-preview/agentless-vulnerability-scanning-for-azure/
