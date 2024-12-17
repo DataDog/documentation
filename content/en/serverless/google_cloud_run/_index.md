@@ -216,7 +216,7 @@ To deploy your Cloud Run service with a YAML service specification:
    apiVersion: serving.knative.dev/v1
    kind: Service
    metadata:
-     name: '<RESOURCE_NAME>'
+     name: '<SERVICE_NAME>'
      labels:
        cloud.googleapis.com/location: '<LOCATION>'
    spec:
@@ -232,7 +232,7 @@ To deploy your Cloud Run service with a YAML service specification:
                - name: DD_SERVERLESS_LOG_PATH
                  value: shared-volume/logs/*.log
                - name: DD_SITE
-                 value: datadoghq.com
+                 value: '<DATADOG_SITE>'
                - name: DD_ENV
                  value: serverless
                - name: DD_API_KEY
@@ -308,12 +308,12 @@ To deploy your Cloud Run service with a YAML service specification:
          percent: 100
    ```
 1. Supply placeholder values:
-   - `<RESOURCE_NAME>`:
-   - `<LOCATION>`:
-   - `<API_KEY>`: Your [Datadog API key][1]. **Note**: This placeholder appears twice in the file. Use the same value for both.
    - `<SERVICE_NAME>`: A name for your service. For example, `gcr-sidecar-test`. See [Unified Service Tagging][2].
+   - `<LOCATION>`: The region you are deploying your service in. For example, `us-central`.
+   - `<DATADOG_SITE>`: Your [Datadog site][3], {{< region-param key="dd_site" code="true" >}}.
+   - `<API_KEY>`: Your [Datadog API key][1]. 
    - `<VERSION>`: The version number of your deployment. See [Unified Service Tagging][2].
-   - `<CONTAINER_IMAGE>`:
+   - `<CONTAINER_IMAGE>`: The image of the code you are deploying to Cloud Run.
    - `<SERVICE_ACCOUNT>`: The name of your Google Cloud service account.
    
 1. Run:
@@ -323,7 +323,214 @@ To deploy your Cloud Run service with a YAML service specification:
 
 [1]: https://app.datadoghq.com/organization-settings/api-keys
 [2]: /getting_started/tagging/unified_service_tagging/
+[3]: /getting_started/site/
 
+{{% /tab %}}
+{{% tab "Terraform deploy" %}}
+To deploy your Cloud Run service with Terraform, use the following example configuration file:
+
+```
+provider "google" {
+  project = "<PROJECT_ID>"
+  region  = "<LOCATION>"  # e.g., us-central1
+}
+
+resource "google_cloud_run_service" "terraform_with_sidecar" {
+  name     = "<SERVICE_NAME>"
+  location = "<LOCATION>"
+
+  template {
+    metadata {
+      annotations = {
+        # Correctly formatted container-dependencies annotation
+        "run.googleapis.com/container-dependencies" = jsonencode({main-app = ["sidecar-container"]})
+      }
+    }
+    spec {
+      # Define shared volume
+      volumes {
+        name = "shared-volume"
+        empty_dir {
+          medium = "Memory"
+        }
+      }
+
+      # Main application container
+      containers {
+        name  = "main-app"
+        image = "<CONTAINER_IMAGE>"
+
+        # Expose a port for the main container
+        ports {
+          container_port = 8080
+        }
+        # Mount the shared volume
+        volume_mounts {
+          name      = "shared-volume"
+          mount_path = "/shared-volume"
+        }
+
+        # Startup Probe for TCP Health Check
+        startup_probe {
+          tcp_socket {
+            port = 8080
+          }
+          initial_delay_seconds = 0  # Delay before the probe starts
+          period_seconds        = 10   # Time between probes
+          failure_threshold     = 3   # Number of failures before marking as unhealthy
+          timeout_seconds       = 1  # Number of failures before marking as unhealthy
+        }
+
+        # Environment variables for the main container
+        env {
+          name  = "DD_SITE"
+          value = "<DATADOG_SITE>"
+        }
+        env {
+          name  = "DD_SERVERLESS_LOG_PATH"
+          value = "shared-volume/logs/*.log"
+        }
+        env {
+          name  = "DD_ENV"
+          value = "serverless"
+        }
+        env {
+          name  = "DD_API_KEY"
+          value = "<API_KEY>"
+        }
+        env {
+          name  = "DD_SERVICE"
+          value = "<SERVICE_NAME>"
+        }
+        env {
+          name  = "DD_VERSION"
+          value = "<VERSION>"
+        }
+        env {
+          name  = "DD_LOG_LEVEL"
+          value = "debug"
+        }
+        env {
+          name  = "DD_LOGS_INJECTION"
+          value = "true"
+        }
+        env {
+          name  = "FUNCTION_TARGET"
+          value = "<FUNCTION_NAME>" # only needed for cloud run functions
+        }
+
+        # Resource limits for the main container
+        resources {
+          limits = {
+            memory = "512Mi"
+            cpu    = "1"
+          }
+        }
+      }
+
+      # Sidecar container
+      containers {
+        name  = "sidecar-container"
+        image = "gcr.io/datadoghq/serverless-init:latest"
+
+        # Mount the shared volume
+        volume_mounts {
+          name      = "shared-volume"
+          mount_path = "/shared-volume"
+        }
+
+        # Startup Probe for TCP Health Check
+        startup_probe {
+          tcp_socket {
+            port = 12345
+          }
+          initial_delay_seconds = 0  # Delay before the probe starts
+          period_seconds        = 10   # Time between probes
+          failure_threshold     = 3   # Number of failures before marking as unhealthy
+          timeout_seconds       = 1
+        }
+
+        # Environment variables for the main container
+        env {
+          name  = "DD_SITE"
+          value = "<DATADOG_SITE>"
+        }
+        env {
+          name  = "DD_SERVERLESS_LOG_PATH"
+          value = "shared-volume/logs/*.log"
+        }
+        env {
+          name  = "DD_ENV"
+          value = "serverless"
+        }
+        env {
+          name  = "DD_API_KEY"
+          value = "<API_KEY>"
+        }
+        env {
+          name  = "DD_SERVICE"
+          value = "<SERVICE_NAME>"
+        }
+        env {
+          name  = "DD_VERSION"
+          value = "<VERSION>"
+        }
+        env {
+          name  = "DD_LOG_LEVEL"
+          value = "debug"
+        }
+        env {
+          name  = "DD_LOGS_INJECTION"
+          value = "true"
+        }
+        env {
+          name  = "FUNCTION_TARGET"
+          value = "<FUNCTION_NAME>" # only needed for cloud run functions
+        }
+        env {
+          name  = "DD_HEALTH_PORT"
+          value = "12345"
+        }
+
+        # Resource limits for the sidecar
+        resources {
+          limits = {
+            memory = "512Mi"
+            cpu    = "1"
+          }
+        }
+      }
+    }
+  }
+
+  # Define traffic splitting
+  traffic {
+    percent         = 100
+    latest_revision = true
+  }
+}
+
+# IAM Member to allow public access (optional, adjust as needed)
+resource "google_cloud_run_service_iam_member" "invoker" {
+  service  = google_cloud_run_service.terraform_with_sidecar.name
+  location = google_cloud_run_service.terraform_with_sidecar.location
+  role     = "roles/run.invoker"
+  member   = "allUsers"
+}
+```
+
+Supply placeholder values:
+- `<PROJECT_ID>`: Your Google Cloud project ID.
+- `<LOCATION>`: The region you are deploying your service in. For example, `us-central1`. 
+- `<SERVICE_NAME>`: A name for your service. For example, `gcr-sidecar-test`. See [Unified Service Tagging][2].
+- `<CONTAINER_IMAGE>`: The image of the code you are deploying to Cloud Run.
+- `<DATADOG_SITE>`: Your [Datadog site][3], {{< region-param key="dd_site" code="true" >}}.
+- `<API_KEY>`: Your [Datadog API key][1].
+- `<VERSION>`: The version number of your deployment. See [Unified Service Tagging][2].
+
+[1]: https://app.datadoghq.com/organization-settings/api-keys
+[2]: /getting_started/tagging/unified_service_tagging/
+[3]: /getting_started/site/
 {{% /tab %}}
 {{< /tabs >}}
 
