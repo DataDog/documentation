@@ -140,6 +140,7 @@ content/en/real_user_monitoring/error_tracking/browser.md       @Datadog/rum-bro
 
 # Threat Intel
 content/en/security/threat_intelligence.md  @DataDog/documentation @datamarmot @DataDog/asm-monitor-backend
+content/en/security/application_security/threats/threat_intelligence.md  @DataDog/documentation @datamarmot @DataDog/asm-monitor-backend
 
 # Observability Pipelines
 static/resources/yaml/observability_pipelines/                  @DataDog/observability-pipelines-worker-admin  @DataDog/documentation
