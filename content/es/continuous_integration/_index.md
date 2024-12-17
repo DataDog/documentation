@@ -39,6 +39,9 @@ further_reading:
 - link: https://www.datadoghq.com/blog/modernize-your-ci-cd-environment/
   tag: Blog
   text: Monitorizar tus modernizaciones de CI/CD con Datadog CI Pipeline Visibility
+- link: https://www.datadoghq.com/blog/datadog-detection-as-code/
+  tag: Blog
+  text: Cómo utilizamos Datadog para la detección como código
 title: Continuous Integration Visibility
 ---
 
@@ -67,7 +70,7 @@ CI Visibility ayuda a los desarrolladores a comprender las causas de las interru
 
 CI Visibility te ayuda a solucionar los problemas de los pipelines y las compilaciones rotas conectando las interrupciones de desarrollo más significativas con las confirmaciones que las provocaron. Puedes instrumentar y rastrear tus pipelines a medida que se ejecutan, lo que te permite conocer mejor su rendimiento.
 
-## Aumentar la eficiencia mediante integraciones sin interrupciones
+## Aumentar la eficiencia mediante integraciones sencillas
 
 Datadog se integra con diversos proveedores de CI para recopilar métricas, que realiza un seguimiento del rendimiento de tus pipelines de CI desde la confirmación hasta el despliegue. Estas métricas se utilizan para identificar tendencias de rendimiento y oportunidades de mejora.
 
@@ -75,7 +78,7 @@ Datadog se integra con diversos proveedores de CI para recopilar métricas, que 
 
 </br>
 
-Puedes utilizar la CLI `datadog-ci` para [rastrear comandos][8] y añadir [ etiquetas (tags) y medidas personalizadas][9], lo que te permite añadir texto definido por el usuario y etiquetas numéricas en tus trazas de pipeline.
+Puedes utilizar la CLI `datadog-ci` para [rastrear comandos][8] y añadir [etiquetas (tags) y medidas personalizadas][9], lo que te permite añadir texto definido por el usuario y etiquetas numéricas en tus trazas de pipeline.
 
 ## ¿Estás listo para comenzar?
 

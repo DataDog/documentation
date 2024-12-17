@@ -11,8 +11,8 @@ further_reading:
   text: "Learn about Container Cost Allocation"
 ---
 
-{{< callout url="https://www.datadoghq.com/private-beta/multisource-querying/" btn_hidden="false" header="Join the Beta!">}}
-Multisource Querying is in private beta. To request access, complete the form.
+{{< callout url="https://www.datadoghq.com/product-preview/multisource-querying/" btn_hidden="false" header="Join the Preview!">}}
+Multisource Querying is in Preview. If you're interested in this feature, complete the form to request access.
 {{< /callout >}}
 
 ## Overview

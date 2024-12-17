@@ -59,7 +59,7 @@ Get up to speed with the parts of Datadog that are most important to your use ca
 **Site Reliability Engineers**:
 {{< whatsnext desc=" " >}}
     {{< nextlink href="https://learn.datadoghq.com/courses/dd-101-sre" >}}Datadog 101: Site Reliability Engineer{{< /nextlink >}}
-    {{< nextlink href="https://learn.datadoghq.com/courses/apm-monitors-and-alerting" >}}APM Monitors and Alertin{{< /nextlink >}}
+    {{< nextlink href="https://learn.datadoghq.com/courses/apm-monitors-and-alerting" >}}APM Monitors and Alerting{{< /nextlink >}}
     {{< nextlink href="https://learn.datadoghq.com/courses/core-web-vitals-lab" >}}Using Datadog RUM to track core web vitals{{< /nextlink >}}
 {{< /whatsnext >}}
 

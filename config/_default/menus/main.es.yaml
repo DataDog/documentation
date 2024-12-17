@@ -944,18 +944,44 @@ menu:
     parent: dev_tools
     url: developers/guide/
     weight: 9
+  - name: Administrator's Guide
+    url: administrators_guide/
+    pre: organization
+    parent: essentials_heading
+    identifier: administrators_guide
+    weight: 80000
+  - name: Getting Started
+    url: administrators_guide/getting_started/
+    parent: administrators_guide
+    identifier: administrators_guide_getting_started
+    weight: 1
+  - name: Plan
+    url: administrators_guide/plan/
+    parent: administrators_guide
+    identifier: administrators_guide_plan
+    weight: 2
+  - name: Build
+    url: administrators_guide/build/
+    parent: administrators_guide
+    identifier: administrators_guide_build
+    weight: 3
+  - name: Run
+    url: administrators_guide/run/
+    parent: administrators_guide
+    identifier: administrators_guide_run
+    weight: 4
   - identifier: api
     name: API
     parent: essentials_heading
     pre: api
     url: api/
-    weight: 80000
+    weight: 90000
   - identifier: mobile
     name: Aplicación móvil de Datadog
     parent: essentials_heading
     pre: mobile
     url: mobile/
-    weight: 90000
+    weight: 100000
   - identifier: mobile_enterprise_configuration
     name: Configuración de Enterprise
     parent: mobile
@@ -966,7 +992,7 @@ menu:
     parent: essentials_heading
     pre: coscreen
     url: coscreen/
-    weight: 100000
+    weight: 110000
   - identifier: coscreen_troubleshooting
     name: Solucionar problemas
     parent: coscreen

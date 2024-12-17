@@ -72,7 +72,7 @@ instances:
 ```
 
 ### Collecting schemas
-Starting from Agent v7.56, the Datadog Agent can collect schema information from SQLServer databases. To enable this feature, use the `schemas_collection` option. Schemas are collected on databases for which the Agent has `CONNECT` access.
+Starting from Agent v7.56, the Datadog Agent can collect schema information from SQLServer databases running SQLServer 2017 or higher. To enable this feature, use the `schemas_collection` option. Schemas are collected on databases for which the Agent has `CONNECT` access.
 
 **Note: For schema collection on RDS instances, it is necessary to grant explicit `CONNECT` access to the `datadog` user for each database on the instance. See [Grant the Agent access](https://docs.datadoghq.com/database_monitoring/setup_sql_server/rds/?tab=windowshost#grant-the-agent-access) for more details.**
 
@@ -88,8 +88,7 @@ instances:
     password: 'ENC[datadog_user_database_password]'
     connector: adodbapi
     adoprovider: MSOLEDBSQL
-    database_autodiscovery:
-      enabled: true
+    database_autodiscovery: true
     schemas_collection:
       enabled: true
     # Optional: enable metric collection for indexes

@@ -18,7 +18,7 @@ After using this guide to install Datadog to scale with your organization, you c
 
 ## Benefits of this guide
 
-This guide outlines the foundational concepts of Datadog and offers steps to prevent common issues like fragmented data models, unstructured user grouping, ungoverned consumption, and unrealized value.
+This guide outlines the foundational concepts of Datadog and offers steps to prevent common issues such as fragmented data models, unstructured user grouping, ungoverned consumption, and unrealized value.
 
 ## How to use this guide
 

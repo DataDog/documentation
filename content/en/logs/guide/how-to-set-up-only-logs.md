@@ -78,6 +78,7 @@ datadog:
 [...]
   processAgent:
     enabled: false
+    containerCollection: false
 [...]
   env:
     - name: DD_ENABLE_PAYLOADS_EVENTS

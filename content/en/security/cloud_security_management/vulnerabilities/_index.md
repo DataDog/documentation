@@ -113,6 +113,14 @@ Easily track and report progress to stakeholders by using the [out-of-the-box CS
 
 {{< img src="security/vulnerabilities/csm-vm-reporting.png" alt="The CSM Vulnerabilities dashboard" width="100%">}}
 
+## Explore infrastructure packages
+
+The [Infrastructure Packages Catalog][19] provides a real-time inventory of all packages across hosts, host images, and container images deployed in your infrastructure. It offers an interface you can use to investigate your SBOMs, enriched with vulnerability and runtime context.
+
+Quickly assess the impact of a critical emerging vulnerability by searching for affected package versions and identifying all of the resources that use it.
+
+{{< img src="security/vulnerabilities/csm_package_explorer.png" alt="The inventory of packages deployed in the infrastructure with vulnerability context and pivot to resources using them" width="100%">}}
+
 ## Video walkthrough
 
 The following video provides an overview of how to enable and use CSM Vulnerabilities:
@@ -135,7 +143,7 @@ The following video provides an overview of how to enable and use CSM Vulnerabil
 [16]: https://www.datadoghq.com/product-preview/ecr-vulnerability-scanning/
 [17]: https://app.datadoghq.com/security/configuration/notification-rules
 [18]: https://app.datadoghq.com/dash/integration/csm_vulnerabilities?fromUser=true&refresh_mode=sliding&from_ts=1733323465252&to_ts=1733928265252&live=true
-
+[19]: https://app.datadoghq.com/security/catalog/libraries
 
 ## Further reading
 

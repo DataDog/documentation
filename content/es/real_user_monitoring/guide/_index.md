@@ -11,17 +11,17 @@ title: Guías de Real User Monitoring y Session Replay
 
 {{< whatsnext desc="General RUM:" >}}
     {{< nextlink href="real_user_monitoring/guide/understanding-the-rum-event-hierarchy" >}}Comprender la jerarquía de eventos RUM{{< /nextlink >}}
-    {{< nextlink href="real_user_monitoring/guide/compute-apdex-with-rum-data" >}}Computar Apdex y personalizar indicadores de rendimiento con datos de RUM{{< /nextlink >}}
-    {{< nextlink href="real_user_monitoring/guide/alerting-with-rum" >}}Crear alertas con datos de RUM{{< /nextlink >}}
-    {{< nextlink href="real_user_monitoring/guide/alerting-with-conversion-rates" >}}Crear alertas para tasas de conversión{{< /nextlink >}}
-    {{< nextlink href="real_user_monitoring/guide/monitor-your-rum-usage" >}}Monitorizar tu uso de RUM{{< /nextlink >}}
-    {{< nextlink href="/real_user_monitoring/guide/track-rum-usage-with-attribution-tags" >}}Rastrear el uso de RUM con las etiquetas de atribución de uso{{< /nextlink >}}
-    {{< nextlink href="/real_user_monitoring/guide/rum-for-product-analytics" >}}Uso de RUM y Session Replay para el análisis de productos{{< /nextlink >}}
-    {{< nextlink href="/real_user_monitoring/guide/remotely-configure-rum-using-launchdarkly" >}}Configura RUM de forma remota con LaunchDarkly{{< /nextlink >}}
-    {{< nextlink href="/real_user_monitoring/guide/getting-started-rum-deployment-tracking" >}}Empezando con el rastreo de despliegue de RUM{{< /nextlink >}}
-    {{< nextlink href="/real_user_monitoring/guide/getting-started-feature-flags" >}}Empezando con el Rastreo de indicadores de características{{< /nextlink >}}
-    {{< nextlink href="/real_user_monitoring/guide/monitor-kiosk-sessions-using-rum" >}}Monitorizar sesiones kiosk con RUM{{< /nextlink >}}
-    {{< nextlink href="real_user_monitoring/guide/best-practices-for-rum-sampling" >}}Prácticas recomendadas para el muestreo en RUM{{< /nextlink >}}
+    {{< nextlink href="real_user_monitoring/guide/compute-apdex-with-rum-data" >}}Computar indicadores de Apdex y rendimiento personalizado con datos de RUM{{< /nextlink >}}
+    {{< nextlink href="real_user_monitoring/guide/alerting-with-rum" >}}Crear alertas con datos RUM{{< /nextlink >}}
+    {{< nextlink href="real_user_monitoring/guide/alerting-with-conversion-rates" >}}Crear alertas para las tasas de conversión{{< /nextlink >}}
+    {{< nextlink href="real_user_monitoring/guide/monitor-your-rum-usage" >}}Monitoriza tu uso de RUM{{< /nextlink >}}
+    {{< nextlink href="/real_user_monitoring/guide/track-rum-usage-with-attribution-tags" >}}Rastreo del uso de RUM con las etiquetas de atribución de uso{{< /nextlink >}}
+    {{< nextlink href="/real_user_monitoring/guide/remotely-configure-rum-using-launchdarkly" >}}Configuración remota de RUM mediante LaunchDarkly{{< /nextlink >}}
+    {{< nextlink href="/real_user_monitoring/guide/getting-started-rum-deployment-tracking" >}}Introducción al rastreo de despliegues de RUM{{< /nextlink >}}
+    {{< nextlink href="/real_user_monitoring/guide/getting-started-feature-flags" >}}Introducción al rastreo de etiquetas de características{{< /nextlink >}}
+    {{< nextlink href="/real_user_monitoring/guide/monitor-kiosk-sessions-using-rum" >}}Monitorizar sesiones de mediante RUM{{< /nextlink >}}
+    {{< nextlink href="real_user_monitoring/guide/best-practices-for-rum-sampling" >}}Prácticas recomendadas del muestreo de RUM{{< /nextlink >}}
+    {{< nextlink href="real_user_monitoring/guide/debug-symbols" >}}Investigar stack traces enmascaradas con símbolos de depuración de RUM{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Browser RUM:" >}}

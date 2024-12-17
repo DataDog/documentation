@@ -46,7 +46,7 @@ To navigate the graph, scroll to zoom, click and drag to move around, and use th
 
 The legend details the color coding of the flame graph. Group spans by either **Service** (default), **[Base service][1]** (service from which the span is emitted), **Host**, or **Container**. Choose to display either the percentage of trace execution time (**% Exec Time**) or span count (**Spans**) by group. If errors exist on spans in the trace, highlight them in the flame graph by selecting the **Errors** checkbox under **Filter Spans**.
 
-{{< site-region region="ap1,us3,us5" >}}
+{{< site-region region="ap1,us3,us5,eu,us" >}}
 Spans from [inferred services][2] are represented with a dashed outline.
 
 [2]: /tracing/services/inferred_services
@@ -85,7 +85,7 @@ Each row (span) indicates the following:
 - **Statuses**: When applicable, an HTTP status code is displayed.
 - **Color coding**: Spans are color-coded by service (default), host, or container. To change how spans are color-coded, use the **Color by** dropdown.
 
-{{< site-region region="ap1,us3,us5" >}}
+{{< site-region region="ap1,us3,us5,eu,us" >}}
 Spans from [inferred services][1] are represented with a dashed underline.
 
 [1]: /tracing/services/inferred_services
@@ -148,7 +148,7 @@ The span header contains service, operation, and resource names of the selected 
 
 {{< img src="tracing/trace_view/span_header.png" alt="Span header" style="width:90%;">}}
 
-{{< site-region region="ap1,us3,us5" >}}
+{{< site-region region="ap1,us3,us5,eu,us" >}}
 When the span represents a client call from an instrumented service to a database, a queue, or a third-party service, the span header shows the service and the inferred entity.
 
 {{< img src="tracing/trace_view/span_header_inferred.png" alt="Span header inferred" style="width:90%;">}}
@@ -168,7 +168,7 @@ Other information may be displayed under various conditions:
 
 {{< img src="tracing/trace_view/info_tab.png" alt="Span Info tab" style="width:90%;">}}
 
-{{< site-region region="ap1,us3,us5" >}}
+{{< site-region region="ap1,us3,us5,eu,us" >}}
 When the service name is an override from the base service name, the top of the info section shows the:
 - **[Base service][2]**: service from which the span is emitted, identified by the `@base_service` attribute.
 - **[Service override][3]**: service name, different from the base service name, set automatically in Datadog integrations or changed via the programmatic API. The service override is identified by the `service` reserved attribute.
@@ -214,7 +214,7 @@ Click on a service's span to see the processes running on its underlying infrast
 
 {{% tab "Network" %}}
 
-Click on a service's span to see network dependencies of the service making the request. Use key network performance metrics such as volume, errors (TCP retransmits), and network latency (TCP round-trip time) to differentiate between application-specific and network-wide issues, especially when no code errors have been generated. For instance, you can use network telemetry to determine if high request latency is due to traffic overloading of the relevant application, or faulty dependencies with a downstream pod, security group, or any other tagged endpoint. Clicking on a process brings you to the [Network Analytics][1] page. To view span-specific processes, enable [Network Performance Monitoring][2].
+Click on a service's span to see network dependencies of the service making the request. Use key network performance metrics such as volume, errors (TCP retransmits), and network latency (TCP round-trip time) to differentiate between application-specific and network-wide issues, especially when no code errors have been generated. For instance, you can use network telemetry to determine if high request latency is due to traffic overloading of the relevant application, or faulty dependencies with a downstream pod, security group, or any other tagged endpoint. Clicking on a process brings you to the [Network Analytics][1] page. To view span-specific processes, enable [Cloud Network Monitoring][2].
 
 **Note**: Related network telemetry is not currently supported for serverless traces.
 
@@ -243,15 +243,13 @@ View [Profiles][1] to identify lines of code related to performance issues. The 
 [1]: /profiler/connect_traces_and_profiles/#identify-code-hotspots-in-slow-traces
 
 {{% /tab %}}
-{{% tab "Span Links (Beta)" %}}
-
-<div class="alert alert-info">Span link support is in beta.</div>
+{{% tab "Span Links" %}}
 
 [Span links][4] correlate one or more spans together that are causally related but don't have a typical parent-child relationship.
 
 Click a span in the flame graph to display spans connected with span links:
 
-{{< img src="tracing/span_links/span_links_tab.png" alt="Span Links tab" style="width:90%;">}}
+{{< img src="tracing/span_links/span_links_tab_2.png" alt="Span Links tab" style="width:90%;">}}
 
 **Note**: Span links only display when the corresponding spans are ingested and indexed, for example, with a [retention filter][1].
 

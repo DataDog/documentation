@@ -37,6 +37,7 @@ Set up tracing in Jenkins to collect data across various stages of your pipeline
 | [Custom tags][22] [and measures at runtime][23] | Custom tags and measures at runtime | Configure [custom tags and measures][12] at runtime. |
 | [Parameters][24] | Parameters | Set custom parameters (such as the default branch name or Git information) when a pipeline is triggered. |
 | [Pipeline failure reasons][25] | Pipeline failure reasons | Identify pipeline failure reasons from error messages. |
+| [Running pipelines][32] | Running pipelines | View pipeline executions that are running. Requires Jenkins plugin version >= 8.0.0 |
 
 The following Jenkins versions are supported:
 
@@ -1102,7 +1103,7 @@ To enable Test Optimization through the UI do the following:
 5. Optionally, provide [additional configuration settings][18].
 6. Click **Save**.
 
-{{< img src="ci/ci-jenkins-plugin-tests-config.png" alt="Datadog Test Optimization configuration for Jenkins" style="width:100%;">}}
+{{< img src="ci/ci-jenkins-plugin-tests-config-2.png" alt="Datadog Test Optimization configuration for Jenkins" style="width:100%;">}}
 
 ### Enable with the `datadog` pipeline step
 
@@ -1117,7 +1118,7 @@ pipeline {
         datadog(testVisibility: [
             enabled: true,
             serviceName: "my-service", // the name of service or library being tested
-            languages: ["JAVA"], // languages that should be instrumented (available options are "JAVA", "JAVASCRIPT", "PYTHON", "DOTNET")
+            languages: ["JAVA"], // languages that should be instrumented (available options are "JAVA", "JAVASCRIPT", "PYTHON", "DOTNET", "RUBY")
             additionalVariables: ["my-var": "value"]  // additional tracer configuration settings (optional)
         ])
     }
@@ -1544,3 +1545,4 @@ try restarting the Jenkins instance.
 [29]: /agent/logs/?tab=tcpudp#custom-log-collection
 [30]: /developers/dogstatsd/
 [31]: /containers/docker/apm/#tracing-from-the-host
+[32]: /glossary/#running-pipeline

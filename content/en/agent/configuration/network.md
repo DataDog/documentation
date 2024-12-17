@@ -294,7 +294,7 @@ Used for Agent services communicating with each other locally within the host on
 | ------  | ---- | ------- | ----------- |
 | [Agent browser GUI][16] | 5002 | TCP |  |
 | APM receiver | 8126 | TCP | Includes Tracing and the Profiler. |
-| [DogStatsD][18] | 8125 | UDP | Port for DogStatsD unless `dogstatsd_non_local_traffic` is set to true. This port is available on localhost: `127.0.0.1`, `::1`, `fe80::1`. |
+| [DogStatsD][18] | 8125 | UDP | Port for DogStatsD unless `dogstatsd_non_local_traffic` is set to true. This port is available on IPv4 localhost: `127.0.0.1`. |
 | go_expvar server (APM) | 5012 | TCP | For more information, see [the go_expar integration documentation][15]. |
 | go_expvar integration server | 5000 | TCP | For more information, see [the go_expar integration documentation][15]. |
 | IPC API | 5001 | TCP | Port used for Inter Process Communication (IPC). |

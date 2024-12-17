@@ -5,7 +5,7 @@ aliases:
 ---
 
 {{< callout url="https://datadoghq.com/private-beta/ddsql-editor">}}
-DDSQL is in private beta.
+DDSQL is in Preview.
 {{< /callout >}}
 
 *Value expressions* are the general expression language used to produce values for conditions, `SELECT` expressions, filters, and clauses like `WHERE`, `ORDER BY`, and `GROUP BY`. The expression syntax of DDSQL is a superset of SQL expression syntax.
