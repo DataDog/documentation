@@ -43,7 +43,7 @@ The following table provides a summary of Agentless scanning technologies in rel
 | Serverless                  | AWS, AWS Lambda                                             |
 | Serverless languages        | .Net, Python, Java, Ruby, Node.js, Go                        |
 
-**Note**: AMIs must be stored in an account that uses Datadog's AWS integration. Otherwise, Datadog can't read its underlying Amazon Elastic Block Store (EBS) snapshot, so it can't scan or report on the AMI.
+**Note**: AMIs must be stored in an account that uses Datadog's AWS integration. Otherwise, Datadog can't read the AMI's underlying Amazon Elastic Block Store (EBS) snapshot, so it can't scan or report on the AMI.
 
 ## How it works
 
