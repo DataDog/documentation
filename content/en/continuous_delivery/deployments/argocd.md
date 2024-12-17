@@ -70,7 +70,7 @@ data:
       send: [cd-visibility-template]
 ```
 
-The following fields have been added:
+The following resources have been added:
 1. The `cd-visibility-webhook` service targets the Datadog intake and configures the correct headers for the request. The `DD-API-KEY` header references the `dd-api-key` entry added previously in the `argocd-notifications-secret`.
 2. The `cd-visibility-template` defines what to send in the request for the `cd-visibility-webhook` service.
 3. The `cd-visibility-trigger` defines when to send the notification, and it references the `cd-visibility-template`.
