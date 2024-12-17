@@ -9,7 +9,7 @@ private: true
 
 Storage Monitoring for Amazon S3 provides deep, prefix-level analytics to help you understand exactly how your storage is being used, detect potential issues before they impact operations, and make data-driven decisions about storage optimization. Use these insights to help you track storage growth, investigate access patterns, and optimize costs.
 
-This guide explains how to configure Storage Monitoring in Datadog for your S3 buckets. You can set this up either manually or using the provided CloudFormation templates. Access your Storage Monitoring data by navigating to **Infrastructure -> Resource Catalog -> Monitoring -> S3 Buckets**. 
+This guide explains how to configure Storage Monitoring in Datadog for your S3 buckets. You can set this up either manually or using the provided CloudFormation templates. Access your Storage Monitoring data by navigating to **Infrastructure -> Resource Catalog -> Monitoring -> S3 Buckets**.
 
 To learn more about the Resource Catalog, see the [Resource Catalog][2] documentation.
 
@@ -76,7 +76,7 @@ This template creates two IAM policies:
 
 #### Post-setup steps
 
-After completing the CloudFormation setup, [reach out][105] with the following information:
+After completing the CloudFormation setup, fill out the [post-setup form][105] with the following required information:
 1. Name of the destination bucket holding the inventory files.
 2. Prefix where the files are stored in the destination bucket.
 3. Name of the source bucket you want to monitor (the bucket producing inventory files).
@@ -88,7 +88,7 @@ After completing the CloudFormation setup, [reach out][105] with the following i
 [102]: https://console.aws.amazon.com/cloudformation/
 [103]: https://datadog-cloudformation-template.s3.us-east-1.amazonaws.com/aws/cloud-inventory/cloud-inventory-policies-cfn.yaml
 [104]: https://console.aws.amazon.com/cloudformation/
-[105]: mailto:storage-monitoring@datadoghq.com
+[105]: https://forms.gle/L97Ndxr2XLen1GBs7
 [106]: https://aws.amazon.com/s3/pricing/
 {{% /tab %}}
 {{% tab "AWS Console" %}}
@@ -98,7 +98,7 @@ To manually set up the required [Amazon S3 Inventory][206] and related configura
 #### Step 1: Create a destination bucket
 
 1. [Create an S3 bucket][201] to store your inventory files. This bucket acts as the central location for inventory reports. **Note**: You must only use one destination bucket for all inventory files generated in an AWS account.
-2. Create a prefix within the destination bucket.
+2. Create a prefix within the destination bucket (required).
 
 #### Step 2: Configure the bucket and integration role policies
 
@@ -131,7 +131,7 @@ For each bucket you want to monitor:
 
 #### Post-setup steps
 
-After completing the above steps, [reach out][205] with the following information:
+After completing the above steps, fill out the [post-setup form][205] with the following required information:
 
 1. Name of the destination bucket where inventories are stored.
 2. Prefix where the files are stored in the destination bucket.
@@ -144,7 +144,7 @@ After completing the above steps, [reach out][205] with the following informatio
 [202]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/add-bucket-policy.html
 [203]: https://console.aws.amazon.com/s3/buckets
 [204]: https://aws.amazon.com/s3/pricing/
-[205]: mailto:storage-monitoring@datadoghq.com
+[205]: https://forms.gle/L97Ndxr2XLen1GBs7
 [206]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/configure-inventory.html
 {{% /tab %}}
 {{< /tabs >}}
