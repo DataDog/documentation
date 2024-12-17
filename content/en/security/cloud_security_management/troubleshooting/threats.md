@@ -83,6 +83,83 @@ datadog:
 ```bash
 DD_RUNTIME_SECURITY_CONFIG_NETWORK_ENABLED=false
 ```
+## Disable CSM Threats
+
+To disable CSM Threats, follow the steps for your Agent platform.
+
+### Helm
+
+In the Helm `values.yaml`, set `securityAgent.runtime` to `enabled: false` as follows:
+
+```
+# values.yaml file
+datadog:
+
+# Set to false to Disable CWS
+securityAgent:
+  runtime:
+    enabled: false
+```
+
+### Daemonset/Docker
+
+Apply the following environment variable change to both the System Probe and the Security Agent deployment for a Daemonset:
+
+```
+DD_RUNTIME_SECURITY_CONFIG_ENABLED=false
+```
+
+### Host
+
+Modify the `system-probe.yaml` and `security-agent.yaml` to disable the runtime config:
+
+1. Disable CSM in `/etc/datadog-agent/system-probe.yaml`. Ensure that `runtime_security_config` is set to `enabled: false`:
+    ```
+    ##########################################
+    ## Security Agent Runtime Configuration ##
+    ##                                      ##
+    ## Settings to send logs to Datadog are ##
+    ## fetched from section `logs_config`   ##
+    ## in datadog-agent.yaml                ##
+    ##########################################
+
+    runtime_security_config:
+    ## @param enabled - boolean - optional - default: false
+    ## Set to true to enable full CSM.
+    #
+    enabled: false
+
+    ## @param fim_enabled - boolean - optional - default: false
+    ## Set to true to only enable the File Integrity Monitoring feature.
+    # fim_enabled: false
+
+    ## @param socket - string - optional - default: /opt/datadog-agent/run/runtime-security.sock
+    ## The full path of the unix socket where the security runtime module is accessed.
+    #
+    # socket: /opt/datadog-agent/run/runtime-security.sock
+    ```
+2. Disable CSM in `/etc/datadog-agent/security-agent.yaml`. Ensure that `runtime_security_config` is set to `enabled: false`:
+    ```
+    ##########################################
+    ## Security Agent Runtime Configuration ##
+    ##                                      ##
+    ## Settings to send logs to Datadog are ##
+    ## fetched from section `logs_config`   ##
+    ## in datadog-agent.yaml                ##
+    ##########################################
+
+    runtime_security_config:
+    ## @param enabled - boolean - optional - default: false
+    ## Set to true to enable the Security Runtime Module.
+    #
+    enabled: false
+
+    ## @param socket - string - optional - default: /opt/datadog-agent/run/runtime-security.sock
+    ## The full path of the unix socket where the security runtime module is accessed.
+    #
+    # socket: /opt/datadog-agent/run/runtime-security.sock
+    ```
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
