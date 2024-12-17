@@ -51,10 +51,10 @@ processors:
           - set(attributes["datadog.host.name"], "${NODE_NAME}")
 ```
 
-**Note**: When overriding hostnames, consider:
-- Potential impacts on billing if using more granular hostname assignments
-- Effects on correlation between different types of telemetry
-- Consistency across your observability pipeline
+Note: When overriding hostnames, consider:
+- Potential impacts on billing if using more granular hostname assignments.
+- Effects on correlation between different types of telemetry.
+- Consistency across your observability pipeline.
 
 For more information on host-identifying attributes, see [Mapping OpenTelemetry Semantic Conventions to Hostnames][2].
 
@@ -197,7 +197,7 @@ processors:
           - set(attributes["ddtags"], Concat(["team:", resource.attributes["team"]],""))
 ```
 
-**Note**: Replace `resource.attributes["team"]` with the actual attribute name if different in your setup (e.g., `resource.attributes["arm.team.name"]`).
+Note: Replace `resource.attributes["team"]` with the actual attribute name if different in your setup (e.g., `resource.attributes["arm.team.name"]`).
 
 To verify the configuration:
 
@@ -214,8 +214,8 @@ To verify the configuration:
 
 When using OTLP ingestion in the Datadog Agent, you need to set specific resource attributes to ensure proper container metadata association. Configure one of the following resource attributes:
 
-- `container.id` ([Resource Semantic Conventions][4])
-- `k8s.node.uid` ([Resource Semantic Conventions][5])
+- `container.id` ([Resource Semantic Conventions][4]).
+- `k8s.node.uid` ([Resource Semantic Conventions][5]).
 
 To verify the configuration:
 
@@ -232,11 +232,11 @@ To verify the configuration:
 
 To verify the configuration:
 
-1. Check that your metrics contain the required semantic conventions
-2. Verify metric names follow OpenTelemetry naming conventions
-3. Confirm metrics are being properly translated to Datadog format
+1. Check that your metrics contain the required semantic conventions.
+2. Verify metric names follow OpenTelemetry naming conventions.
+3. Confirm metrics are being properly translated to Datadog format.
 
-**Note**: When working with semantic conventions, ensure you're following the latest OpenTelemetry specification for metric naming and attributes.
+Note: When working with semantic conventions, ensure you're following the latest OpenTelemetry specification for metric naming and attributes.
 
 ## Logs and traces correlation issues
 
@@ -265,12 +265,12 @@ To verify the configuration:
 
 To verify the configuration:
 
-1. Generate test logs and traces for your service
-2. Navigate to a trace in the Datadog UI
-3. Click on a span and verify that related logs appear in the side panel
-4. Confirm that the service name matches between logs and traces
+1. Generate test logs and traces for your service.
+2. Navigate to a trace in the Datadog UI.
+3. Click on a span and verify that related logs appear in the side panel.
+4. Confirm that the service name matches between logs and traces.
 
-**Note**: Service name consistency is crucial for proper correlation. Ensure that your logging and tracing configurations use identical service naming conventions across your observability pipeline.
+Note: Service name consistency is crucial for proper correlation. Ensure that your logging and tracing configurations use identical service naming conventions across your observability pipeline.
 
 ## Further reading
 
