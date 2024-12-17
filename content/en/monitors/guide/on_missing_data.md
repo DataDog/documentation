@@ -18,7 +18,7 @@ When measuring the number of bad events, like errors, Monitors should reflect an
 
 ## Monitors managed through the UI
 
-If you manage your monitors from the UI, they will be automatically updated for you the next time you edit them. If you'd like to update them sooner, you can do it through the API as explained below.
+If you manage your monitors from the UI, the configuration automatically updates the next time you edit them. To update the On Missing Data configuration sooner, see the following sections on adjusting through the API.
 
 ## Monitors managed through the API or Terraform
 
