@@ -414,6 +414,19 @@ paketo-buildpacks_datadog/helper/exec.d/toggle': exit status 1
 
 The solution to this issue is to upgrade to version 4.6.0 or later.
 
+##### Problem activating Datadog tracer
+
+You might encounter initialization errors if your tracer configuration relies on Unix Domain Sockets (UDS), which are not supported in native images:
+
+```text
+dd.trace 2024-12-30 08:34:43:306 +0000] [main] WARN datadog.trace.agent.tooling.nativeimage.TracerActivation - Problem activating datadog tracer
+java.lang.NoClassDefFoundError: Could not initialize class jnr.unixsocket.UnixSocketChannel
+```
+
+The solution is to configure the Java tracer to use host-based communication (`hostip` or `service` mode), rather than socket-based communication (`socket` mode).
+
+For more information, see [Configure APM and DogstatsD communication mode][11]. For setups that don't rely on the Admission Controller, see documentation for [DD_TRACE_AGENT_URL][12].
+
 {{% /collapse-content %}}
 
 ## Further Reading
@@ -428,3 +441,5 @@ The solution to this issue is to upgrade to version 4.6.0 or later.
 [7]: https://www.graalvm.org/downloads/
 [9]: /tracing/trace_explorer/
 [10]: /opentelemetry/interoperability/instrumentation_libraries/?tab=java
+[11]: /containers/cluster_agent/admission_controller/?tab=datadogoperator#configure-apm-and-dogstatsd-communication-mode
+[12]: /tracing/trace_collection/library_config/#agent
