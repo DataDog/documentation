@@ -76,7 +76,7 @@ Use the AWS CloudFormation template to create a CloudFormation stack. The templa
 
 ### Azure Resource Manager
 
-Use the Azure Resource Manager template to deploy the Agentless Scanner. For more information, see [Setting up Agentless Scanning using Azure Resource Manager][13].
+Use the Azure Resource Manager template to deploy the Agentless Scanner. The template includes the rule definitions required to deploy and manage Agentless scanners. For more information, see [Setting up Agentless Scanning using Azure Resource Manager][13].
 
 ## Further Reading
 

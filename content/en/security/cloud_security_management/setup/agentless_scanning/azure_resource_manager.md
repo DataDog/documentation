@@ -22,14 +22,15 @@ If you've already [set up Cloud Security Management][3] and want to add a new Az
 
 1. On the [Cloud Security Management Setup][1] page, click **Cloud Integrations** > **Azure**.
 1. Locate the tenant id of your subscription.
-1. **[OPTIONAL]:** you can enable **Resource Scanning** for the tenant to also enable misconfigurations detection.
+1. **[OPTIONAL]** you can enable **Resource Scanning** for the tenant to also enable misconfigurations detection.
 1. Expand the list of azure subscriptions and locate the Azure subscription where you want to deploy the Agentless scanner.
 1. Click on the **Enable** button of **VULNERABILITY SCANNING**.
 1. The **Vulnerability Scanning** dialog is displayed. Switch the **Vulnerability Scanning** toggle button on.
 1. In the **Agentless Scanning** section, select **Azure Resource Manager**.
 1. Click on **Launch Azure Resource Manager**.
 1. You will be redirected to the Azure portal. Once logged in, the template creation form is displayed.
-1. Select your subscription and your resource group. It is **strongly recommended** to deploy the Datadog Agentless Scanner in a **dedicated resource group**.
+1. Select the subscription and the resource group in which the agentless scanners will be deployed. It is **strongly recommended** to deploy the Datadog Agentless Scanner in a **dedicated resource group**.
+1. Select all the subscriptions you want to scan.
 1. Use your Datadog Api Key and complete the rest of the form.
 1. Click on **Review + create**.
 
@@ -51,7 +52,7 @@ If you've already [set up Cloud Security Management][3] and want to add a new Az
 
 ## Uninstall with Azure Resource Manager
 
-To uninstall Agentless Scanning, log in to your Azure subscription and delete the Resource Manager stack created for Agentless Scanning.
+To uninstall Agentless Scanning, log in to your Azure subscription. If you created a dedicated resource group for agentless scanners, delete this resource group and the related azure rules definitions. If you did not, delete the instances and the related rule definitions created for Agentless Scanning.
 
 ## Further Reading
 
