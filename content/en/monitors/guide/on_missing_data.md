@@ -8,7 +8,7 @@ further_reading:
 
 ## Overview
 
-Metric Monitors offer enhanced options for handling missing data, allowing you to differentiate between missing data as a failure mode and a healthy state. 
+Metric monitors offer enhanced options for handling missing data, allowing you to differentiate between missing data as a failure mode and a healthy state. 
 
 These options align with what's available in other monitors types like Logs, Events, CI, Database, Error Tracking, and more.
 
