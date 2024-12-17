@@ -15,9 +15,7 @@ further_reading:
 
 ## Overview
 
-When applications depend on each other, poor connectivity or slow service calls can lead to errors and latency that appear at the application layer. Determining if the issue is a network problem or a code-level issue can be difficult with visibility into only one layer.
-
-Datadog CNM addresses this by correlating monitoring data from both the network and application layers. For example, if high TCP retransmits are detected in a specific availability zone, you can access logs, traces, and processes to identify the root cause, such as a CPU-saturating process, without leaving the network view.
+Modern applications are built in a modular distributed manner with microservices and stateless design principles. Networking connects the distributed components of an application, ensuring a seamless user and application experience. By capturing, analyzing, and correlating network metrics such as latency, packet loss, and throughput across different applications and services, Datadog's Cloud Network Monitoring (CNM) provides actionable insights for application developers and SRE teams.
 
 ## Service discovery and connectivity
 
