@@ -10,7 +10,7 @@ further_reading:
       text: 'Get started with v2 of the Go Tracer'
 ---
 
-<div class="alert alert-info">This documentation assumes that you are using version v1.x of the Go tracer. If you are using v2.x, see <a href="tracing/trace_collection/custom_instrumentation/dd-api">Go Custom Instrumentation using the Datadog API</a> instead.</div>
+<div class="alert alert-info">This documentation assumes that you are using version v1.x of the Go tracer. If you are already using v2.x, see <a href="tracing/trace_collection/custom_instrumentation/dd-api">Go Custom Instrumentation using the Datadog API</a> instead.</div>
 
 This guide explains how to migrate from Go Tracer v1.x to v2. 
 

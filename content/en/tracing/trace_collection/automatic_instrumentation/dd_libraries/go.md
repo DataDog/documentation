@@ -29,6 +29,11 @@ further_reading:
   text: "Explore your services, resources and traces"
 ---
 
+<div class="alert alert-info">
+[PREVIEW] The preview version of Go Tracer v2 has been released! See <a href="/content/en/tracing/trace_collection/custom_instrumentation/go/migration.md">our migration guide</a> to upgrade.
+</div>
+
+
 ## Compatibility requirements
 
 The Go Tracer requires Go `1.18+` and Datadog Agent `>= 5.21.1`. For a full list of Datadog's Go version and framework support (including legacy and maintenance versions), see the [Compatibility Requirements][1] page.
