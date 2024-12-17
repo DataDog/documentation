@@ -74,6 +74,10 @@ The [Terraform Datadog Agentless Scanner module][6] provides a simple and reusab
 
 Use the AWS CloudFormation template to create a CloudFormation stack. The template includes the IAM permissions required to deploy and manage Agentless scanners. For more information, see [Setting up Agentless Scanning using AWS CloudFormation][11].
 
+### Azure Resource Manager
+
+Use the Azure Resource Manager template to deploy the Agentless Scanner. For more information, see [Setting up Agentless Scanning using Azure Resource Manager][13].
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -90,3 +94,4 @@ Use the AWS CloudFormation template to create a CloudFormation stack. The templa
 [10]: https://app.datadoghq.com/security/configuration/csm/setup
 [11]: /security/cloud_security_management/setup/agentless_scanning/cloudformation
 [12]: /security/cloud_security_management/agentless_scanning
+[13]: /security/cloud_security_management/setup/agentless_scanning/azure_resource_manager

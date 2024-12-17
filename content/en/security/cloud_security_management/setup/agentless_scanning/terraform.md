@@ -52,7 +52,7 @@ If you've already [set up Cloud Security Management][4] and want to add a new cl
 {{% tab "Existing Azure subscription" %}}
 
 1. On the [Cloud Security Management Setup][1] page, click **Cloud Integrations > Azure**.
-1. Expend the Tenant containing the subscription where you want to deploy the Agentless scanner.
+1. Expand the Tenant containing the subscription where you want to deploy the Agentless scanner.
 1. Click the **Enable** button for the Azure subscription where you want to deploy the Agentless scanner.
 1. Toggle on **Vulnerability Scanning**.
 1. In the **How would you like to set up Agentless Scanning?** section, select **Terraform**.
