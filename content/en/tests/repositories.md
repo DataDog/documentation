@@ -21,11 +21,11 @@ further_reading:
 
 ## Overview
 
-[Repositories page][1]
+Use the [Repositories page][1] to gain insights into test trends in your repositories or debug issues by investigating individual commits.
 
-## Repository trends
+## Test performance and trends
 
-The [Repositories view][1] displays aggregated health metrics for the default branch of each repository. This view is useful for gaining a high-level overview of test performance across your organization's repositories.
+The [Repositories view][1] displays aggregated health metrics for the default branch of each repository. This view is useful for gaining a high-level overview of test performance and trends across your organization's repositories.
 
 Use the Repositories page to:
 - See the total number of flaky tests in each repo.
@@ -41,7 +41,7 @@ To filter the list down to only repositories that you have committed to, toggle 
 
 ### Investigate a repository
 
-Select a repository to gain granular insights into its test performance. Use the **Branch**, **Test Service**, and **Env** drop-downs to filter for the desired data. Selecting the **\*** filter gives you an aggregated view across that category.
+Select a repository to gain granular insights into its test performance. Use the **Branch**, **Test Service**, and **Env** drop-downs to filter for the desired data. Selecting the wildcard (**\***) filter gives you an aggregated view across that category.
 
 The page for a specific repository gives you access to:
 - **Latest Commit**: Test status and performance for the latest commit.
@@ -49,7 +49,7 @@ The page for a specific repository gives you access to:
 - **Test Services**: A summary of any test services you've added to the repo.
 - **Flaky Tests**: Insights into [flaky tests][2] in the repo.
 - **Test Regressions**: Insights into {{< tooltip glossary="test regression" >}}s.
-- **Test Performance**: See which tests have become slower over time.
+- **Test Performance**: See which tests have become faster or slower over time.
 - **Common Error Types**: See the most common error types in the repo.
 - **All Test Runs**: Explore all test runs in the repo.
 
@@ -75,8 +75,32 @@ You can view the number of overrides in effect on each repo from the [settings][
 
 ## Debugging commits
 
+Use the [Branches view][9] to investigate and debug issues introduced by individual commits.
 
+The **Branches** view table shows the most recent update to each of your branches. For each branch, the table includes:
+- The associated repository, branch, test service and environment
+- Counters for failed, new flaky, skipped, and passed tests
+- A counter for regressions
+- The total time for test runs
+- When the branch was last updated
 
+<!-- vale Datadog.pronouns = NO -->
+
+To filter the list down to only branches that you have committed to, toggle **My Branches** and enter the email address associated with your GitHub account. You can enter multiple email addresses. Edit your address later by clicking **Edit Authors**.
+
+<!-- vale Datadog.pronouns = YES -->
+
+### Debugging
+
+To debug a commit, select a branch to open the **Commit Overview** page. The commit overview lists details such as the pull request where the commit was introduced, as well as modified files, test status, and test performance.
+
+From this page, you can also access:
+- **Failed Tests**: A list of failed tests. Select a test for details and traces.
+- **[New Flaky Tests][7]**: A list of new flaky tests introduced in the commit.
+- **Test Regressions**: Insights into {{< tooltip glossary="test regression" >}}s introduced by the commit.
+- **Test Performance**: See how the commit affects test performance.
+- **Related Pipeline Executions**: See the CI pipeline executions for the commit.
+- **All Test Runs**: Explore all test runs for the commit.
 
 ## Further reading
 
@@ -90,3 +114,4 @@ You can view the number of overrides in effect on each repo from the [settings][
 [6]: /tests/flaky_test_management/auto_test_retries/
 [7]: /tests/flaky_test_management/early_flake_detection/
 [8]: /tests/test_impact_analysis/
+[9]: https://app.datadoghq.com/ci/test-repositories?view=branches
