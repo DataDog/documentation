@@ -15,7 +15,7 @@ This page discusses using OpenTelemetry with Datadog Serverless Monitoring for A
 There are multiple ways to instrument AWS Lambda functions with OpenTelemetry and send the data to Datadog:
 
 - [OpenTelemetry API support in the Datadog tracers](#opentelemetry-api-support-within-datadog-tracers) (recommended)
-- [Send OpenTelemetry traces from any OpenTelemetry SDK through the Datadog Lambda Extension](#sdk) (beta)
+- [Send OpenTelemetry traces from any OpenTelemetry SDK through the Datadog Lambda Extension](#sdk) (Preview)
 
 ### OpenTelemetry API support within Datadog tracers
 

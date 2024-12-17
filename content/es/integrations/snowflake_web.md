@@ -181,10 +181,12 @@ grant database role SNOWFLAKE.ORGANIZATION_USAGE_VIEWER to role DATADOG;
 -- Concede ORGANIZATION_BILLING_VIEWER al nuevo rol. Haz esto si deseas recopilar datos de costes de Snowflake.
 grant database role SNOWFLAKE.ORGANIZATION_BILLING_VIEWER to role DATADOG;
 
--- Concede el uso en la base de datos, el esquema y la tabla de la tabla de eventos.
-grant usage on database <EVENT_TABLE_DATABASE> to role DATADOG;
-grant usage on schema <EVENT_TABLE_DATABASE>.<EVENT_TABLE_SCHEMA> to role DATADOG;
-grant select on table <EVENT_TABLE_DATABASE>.<EVENT_TABLE_SCHEMA>.<EVENT_TABLE_NAME> to role DATADOG;
+-- Conceder uso en la base de datos, esquema y tabla de la tabla del evento.
+conceder uso en la base de datos <EVENT_TABLE_DATABASE> al rol de Datadog;
+conceder uso en el esquema <EVENT_TABLE_DATABASE>.<EVENT_TABLE_SCHEMA> al rol de Datadog;
+conceder selección en la tabla <EVENT_TABLE_DATABASE>.<EVENT_TABLE_SCHEMA>.<EVENT_TABLE_NAME> al rol de Datadog;
+conceder rol de aplicación SNOWFLAKE.EVENTS_VIEWER al rol de DATADOG;
+conceder rol de aplicación SNOWFLAKE.EVENTS_ADMIN al rol de DATADOG;
 
 -- Crea un usuario.
 create user <USERNAME>
@@ -216,9 +218,9 @@ La tabla siguiente describe los campos utilizados para definir métricas persona
 
 | Campo | Descripción | Obligatorio |
 | -------------  | ----------- | --- |
-| Custom Metric Identifier | Este es un identificador para la métrica personalizada, que se utiliza para distinguir métricas personalizadas independientes en cada cuenta.   | Sí |
+| Custom Metric Identifier | Se trata de un identificador para la métrica personalizada, que se utiliza para vincular diferentes métricas personalizadas a sus respectivas consultas personalizadas en cada cuenta.   | Sí |
 | Consulta | Esta es la consulta SQL que se debe ejecutar. Puede ser una sentencia simple o un script de varias líneas. Se evalúan todas las filas de los resultados.  | Sí |
-| Columnas de metadatos | Esta es una lista que representa cada columna ordenada secuencialmente de izquierda a derecha. Hay dos campos obligatorios para cada columna:<br> - **Custom Column Name**:<br> Este es el sufijo que se añade a `metric_prefix` para formar el nombre completo de la métrica. Si el tipo se especifica como `Tag Key`, la columna se aplica como una etiqueta a cada métrica recopilada por esta consulta.<br> - **Metadata Type**:<br> Este es el método de envío (por ejemplo, gauge, count o tasa). Esto también se puede configurar para etiquetar cada métrica en la fila con el nombre y el valor (`<name>:<row_value>`) del elemento en esta columna. | Sí |
+| Columnas de metadatos | Se trata de una lista que representa cada columna ordenada secuencialmente de izquierda a derecha. Hay dos campos obligatorios para cada columna:<br> - **Nombre de columna personalizado**:<br>este es el sufijo que se añade a `metric_prefix` para formar el nombre completo de la métrica. Por ejemplo, `my_custom_metric.count` da como resultado el nombre completo de la métrica `snowflake.my_custom_metric.count`. Si el tipo se especifica como `Tag Key`, la columna se aplica como una etiqueta a cada métrica recopilada por esta consulta.<br> - **Tipo de metadatos**: <br>este es el método de envío (por ejemplo, gauge, recuento o tasa). También se puede establecer para etiquetar cada métrica de la fila con el nombre y el valor (`<NAME>:<ROW_VALUE>`) del elemento de esta columna. | Sí |
 
 
 **Notas**:
@@ -359,7 +361,7 @@ El check de Snowflake está incluido en el paquete del [Datadog Agent][13].
         min_collection_interval: 3600
 
         # @param disable_generic_tags - boolean - optional - default: false
-        # Generic tags such as `cluster` will be replaced by <integration_name>_cluster to avoid
+        # Generic tags such as `cluster` will be replaced by <INTEGRATION_NAME>_cluster to avoid
         # getting mixed with other integration tags.
         # disable_generic_tags: true
     ```
@@ -467,7 +469,7 @@ La opción `custom_queries` tiene las siguientes opciones:
 | Opción        | Obligatorio | Descripción                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
 |---------------|----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | query         | Sí      | Este es el SQL que se va a ejecutar. Puede ser una sentencia simple o un script de varias líneas. Se evalúan todas las filas de los resultados. Utiliza la barra vertical si requieres un script de varias líneas.                                                                                                                                                                                                                                                                                                                                                                                                                              |
-| columns       | Sí      | Esta es una lista que representa cada columna ordenada de forma secuencial de izquierda a derecha.<br><br>Hay 2 datos necesarios:<br> - **`name`**: este es el sufijo que hay que anexar a `metric_prefix` para formar el nombre completo de la métrica. Si `type` se especifica como `tag`, la columna se aplica como etiqueta a las métricas que recoge esta consulta.<br> - **`type`**: este es el método de envío (`gauge`, `count`, `rate`, etc.). También puede configurarse como `tag` para etiquetar las métricas de la fila con el nombre y el valor (`<name>:<row_value>`) del elemento en esta columna. |
+| columns       | Sí      | Se trata de una lista que representa cada columna ordenada secuencialmente de izquierda a derecha.<br><br>Hay 2 datos necesarios:<br> -`name`**: es el sufijo que se añade a `metric_prefix` para formar el nombre completo de la métrica. Si se especifica `type` como `tag`, la columna se aplica como una etiqueta a cada métrica recopilada por esta consulta.<br> - **`type`**: este es el método de envío (`gauge`, `count`, `rate`, etc.). También se puede establecer como `tag` para etiquetar cada métrica de la fila con el nombre y el valor (`<NAME>:<ROW_VALUE>`) del elemento de esta columna. |
 | tags          | No       | Una lista de etiquetas (tags) estáticas que pueden aplicarse a las métricas.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
 ##### Notas:
 - Al menos uno de los elementos definidos en `columns` debería ser un tipo de métrica (`gauge`, `count`, `rate`).

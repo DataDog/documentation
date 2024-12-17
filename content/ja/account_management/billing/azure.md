@@ -12,7 +12,7 @@ Azure インテグレーションは、その他のすべての Azure リソー�
 
 ## Azure VM の除外
 
-Datadog-Azure インテグレーションタイルを使用して、Datadog によって監視される VM をフィルタリングします。Configuration タブに移動して、既存の App Registration を編集するか、新規追加します。各フィルターは、"Optionally limit metrics collection to hosts with tag:" の設定に基づいて制御されます。
+Datadog-Azure インテグレーションタイルを使用して、Datadog によって監視される VM をフィルタリングします。Metric Collection タブに移動して、既存の App Registration を編集するか、新規追加します。各フィルターは、"Optionally limit metrics collection to hosts with tag:" の設定に基づいて制御されます。
 
 インテグレーションタイルで既存の Azure テナントに制限を追加した場合は、それまでに検出された VM がインフラストラクチャーリストに最長 2 時間残る可能性があります。移行時間中、VM のステータスは `???` と表示されます。これは、課金対象に含まれません。
 

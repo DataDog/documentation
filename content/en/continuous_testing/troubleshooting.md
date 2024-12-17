@@ -45,6 +45,10 @@ Check whether you are using API endpoints to trigger your CI/CD test runs. In or
 
 The first thing to check is which failure mode flags you are passing in your [global configuration file][3]. For CI runs that contain multiple tests, some tests are queued based on the parallelization setting defined on the [Continuous Testing Settings page][9]. You may need to adapt both your configuration and parallelization based on your organizational needs.
 
+## Synthetics monitors
+
+The CI does not trigger Synthetics monitors or incorporate them into monitor evaluations; however, failing runs will result in the CI showing a red status.
+
 ## Further reading
  
 {{< partial name="whats-next/whats-next.html" >}}

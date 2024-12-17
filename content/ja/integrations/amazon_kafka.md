@@ -25,7 +25,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - AWS
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/amazon_msk/README.md
 display_on_public_website: true
@@ -33,7 +33,7 @@ draft: false
 git_integration_title: amazon_kafka
 integration_id: amazon-kafka
 integration_title: Amazon MSK (Agent)
-integration_version: 4.10.0
+integration_version: 6.0.0
 is_public: true
 manifest_version: 2.0.0
 name: amazon_kafka
@@ -51,6 +51,7 @@ tile:
   - Supported OS::Windows
   - Supported OS::macOS
   - Offering::Integration
+  - 製品::Data Streams Monitoring
   configuration: README.md#Setup
   description: Amazon MSK クラスターの健全性とパフォーマンスを監視。
   media: []

@@ -2,7 +2,7 @@
 categories:
 - colaboración
 - notificaciones
-custom_kind: integración
+custom_kind: integration
 dependencies: []
 description: Envía alertas y gráficos de Datadog al grupo DingTalk de tu equipo.
 doc_link: https://docs.datadoghq.com/integrations/dingtalk/

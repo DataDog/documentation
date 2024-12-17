@@ -5,6 +5,10 @@ aliases:
   - /developers/faq/submitting-metrics-via-powershell
   - /developers/metrics/powershell_metrics_submission/
   - /metrics/powershell_metrics_submission
+further_reading:
+- link: "/api/latest/metrics/"
+  tag: "API"
+  text: "Metrics API Endpoints"
 ---
 
 Datadog can collect metrics from the Agent as well as from the API independently of which language you decide to use. This page gives examples of both using PowerShell.
@@ -40,7 +44,7 @@ function postMetric($metric,$tags) {
 $app_key = "<DATADOG_APPLICATION_KEY>" #provide your valid app key
 $api_key = "<DATADOG_API_KEY>" #provide your valid api key
 $url_base = "https://app.datadoghq.com/"
-$url_signature = "api/v1/series"
+$url_signature = "api/v2/series"
 $url = $url_base + $url_signature + "?api_key=$api_key" + "&" + "application_key=$app_key"
 $tags = "[env:test]" #optional parameter
 
@@ -131,7 +135,7 @@ $http_request.responseText
     ```powershell
     $http_method = "POST"
 
-    $url_signature = "api/v1/series"
+    $url_signature = "api/v2/series"
 
     $currenttime = (Get-Date -date ((get-date).ToUniversalTime()) -UFormat %s) -Replace("[,\.]\d*", "")
 
@@ -149,9 +153,13 @@ $http_request.responseText
 
 [See the ncracker/dd_metric GitHub repository for more code examples][6].
 
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
 [1]: https://app.datadoghq.com/organization-settings/api-keys
 [2]: /metrics/custom_metrics/dogstatsd_metrics_submission/
 [3]: https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest
-[4]: /api/v1/hosts/
-[5]: /api/v1/metrics/
+[4]: /api/latest/hosts/
+[5]: /api/latest/metrics/
 [6]: https://github.com/ncracker/dd_metric

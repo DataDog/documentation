@@ -18,6 +18,12 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/azure-workflow-automation/"
   tag: "Blog"
   text: "Quickly remediate issues in your Azure applications with Datadog Workflow Automation"
+- link: "https://www.datadoghq.com/blog/ai-assistant-workflows-apps/"
+  tag: "Blog"
+  text: "Build Datadog workflows and apps in minutes with our AI assistant"
+- link: "https://learn.datadoghq.com/courses/automated-workflows"
+  tag: "Learning Center"
+  text: "Remediate Issues with Workflow Automation"
 ---
 
 {{< site-region region="gov" >}}

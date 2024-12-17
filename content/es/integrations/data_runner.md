@@ -9,7 +9,7 @@ author:
   sales_email: sales@datadog.com
   support_email: help@datadoghq.com
 categories: []
-custom_kind: integración
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/data_runner/README.md
 display_on_public_website: true

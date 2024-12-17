@@ -1,6 +1,6 @@
 ---
-title: RUM React Native Monitoring Setup
-description: Collect RUM data from your React Native projects.
+title: React Native Monitoring Setup
+description: Collect RUM or Error Tracking data from your React Native projects.
 aliases:
     - /real_user_monitoring/react-native/
     - /real_user_monitoring/reactnative/
@@ -27,11 +27,11 @@ further_reading:
 ---
 ## Overview
 
-Datadog Real User Monitoring (RUM) enables you to visualize and analyze the real-time performance and user journeys of your application's individual users.
+This page describes how to instrument your applications for both [Real User Monitoring (RUM)][1] and [Error Tracking][2] with the React Native SDK. You can follow the steps below to instrument your applications for RUM (includes Error Tracking) or Error Tracking if you have purchased it as a standalone product.
 
-The minimum supported version for the RUM React Native SDK is React Native v0.63.4+. Compatibility with older versions is not guaranteed out-of-the-box.
+The minimum supported version for the React Native SDK is React Native v0.63.4+. Compatibility with older versions is not guaranteed out-of-the-box.
 
-The RUM React Native SDK supports [Expo][12]. For more information, see the [Expo documentation][13].
+The React Native SDK supports [Expo][3]. For more information, see the [Expo documentation][4].
 
 ## Setup
 
@@ -74,16 +74,36 @@ The Datadog React Native SDK requires you to have `compileSdkVersion = 31` or hi
 
 ### Specify application details in the UI
 
+{{< tabs >}}
+{{% tab "RUM" %}}
+
 1. In Datadog, navigate to [**Digital Experience** > **Add an Application**][1].
 2. Choose `react-native` as the application type.
 3. Provide an application name to generate a unique Datadog application ID and client token.
-4. To disable automatic user data collection for either client IP or geolocation data, uncheck the boxes for those settings.
+4. To disable automatic user data collection for client IP or geolocation data, uncheck the boxes for those settings.
 
    {{< img src="real_user_monitoring/react_native/reactnative_setup.png" alt="Create a RUM application for React Native in Datadog" style="width:90%;">}}
 
-To ensure the safety of your data, you must use a client token. If you used only [Datadog API keys][3] to configure the `@datadog/mobile-react-native` library, they would be exposed client-side in the React Native application's code.
+[1]: https://app.datadoghq.com/rum/application/create
 
-For more information about setting up a client token, see the [Client Token documentation][4].
+{{% /tab %}}
+{{% tab "Error Tracking" %}}
+
+1. In Datadog, navigate to [**Error Tracking** > **Settings** > **Browser and Mobile** > **Add an Application**][1].
+2. Choose `react-native` as the application type.
+3. Provide an application name to generate a unique Datadog application ID and client token.
+4. To disable automatic user data collection for client IP or geolocation data, uncheck the boxes for those settings.
+
+   {{< img src="real_user_monitoring/error_tracking/mobile-new-application.png" alt="Create an application for React Native in Datadog" style="width:90%;">}}
+
+[1]: https://app.datadoghq.com/error-tracking/settings/setup/client/
+
+{{% /tab %}}
+{{< /tabs >}}
+
+To ensure the safety of your data, you must use a client token. If you use only [Datadog API keys][5] to configure the `@datadog/mobile-react-native` library, they are exposed client-side in the React Native application's code.
+
+For more information about setting up a client token, see the [Client Token documentation][6].
 
 ### Initialize the library with application context
 
@@ -106,7 +126,7 @@ const config = new DatadogProviderConfiguration(
 config.site = 'US1';
 // Optional: Enable or disable native crash reports
 config.nativeCrashReportEnabled = true;
-// Optional: Sample RUM sessions (in this example, 80% of session are sent to Datadog. Default is 100%).
+// Optional: Sample RUM sessions (in this example, 80% of session are sent to Datadog. Default is 100%). This option is not applicable to Error Tracking.
 config.sessionSamplingRate = 80;
 // Optional: Sample tracing integrations for network calls between your app and your backend (in this example, 80% of calls to your instrumented backend are linked from the RUM view to the APM view. Default is 20%)
 // You need to specify the hosts of your backends to enable tracing with these backends
@@ -144,16 +164,16 @@ const config = new DatadogProviderConfiguration(
     '<CLIENT_TOKEN>',
     '<ENVIRONMENT_NAME>',
     '<RUM_APPLICATION_ID>',
-    true, // track user interactions (such as a tap on buttons).
-    true, // track XHR resources
-    true // track errors
+    true, // Track user interactions (such as a tap on buttons).
+    true, // Track XHR resources
+    true // Track errors
 );
 config.site = 'US3';
-// Optional: enable or disable native crash reports
+// Optional: Enable or disable native crash reports
 config.nativeCrashReportEnabled = true;
-// Optional: sample RUM sessions (here, 80% of session will be sent to Datadog. Default = 100%)
+// Optional: Sample RUM sessions (here, 80% of sessions are sent to Datadog. Default = 100%). This setting is not applicable to Error Tracking.
 config.sessionSamplingRate = 80;
-// Optional: sample tracing integrations for network calls between your app and your backend (here, 80% of calls to your instrumented backend will be linked from the RUM view to the APM view. Default = 20%)
+// Optional: Sample tracing integrations for network calls between your app and your backend (here, 80% of calls to your instrumented backend are linked from the RUM view to the APM view. Default = 20%)
 // You need to specify the hosts of your backends to enable tracing with these backends
 config.resourceTracingSamplingRate = 80;
 config.firstPartyHosts = ['example.com']; // matches 'example.com' and subdomains like 'api.example.com'
@@ -168,7 +188,7 @@ export default function App() {
     );
 }
 
-// Once the Datadog React Native SDK for RUM is initialized, you need to setup view tracking to be able to see data in the RUM dashboard
+// Once the Datadog React Native SDK is initialized, you need to setup view tracking to be able to see data in a dashboard
 ```
 
 {{< /site-region >}}
@@ -185,19 +205,19 @@ const config = new DatadogProviderConfiguration(
     '<CLIENT_TOKEN>',
     '<ENVIRONMENT_NAME>',
     '<RUM_APPLICATION_ID>',
-    true, // track User interactions (e.g.: Tap on buttons).
-    true, // track XHR Resources
-    true // track Errors
+    true, // Track User interactions (e.g.: Tap on buttons).
+    true, // Track XHR Resources
+    true // Track Errors
 );
 config.site = 'US5';
-// Optional: enable or disable native crash reports
+// Optional: Enable or disable native crash reports
 config.nativeCrashReportEnabled = true;
-// Optional: sample RUM sessions (here, 80% of session will be sent to Datadog. Default = 100%)
+// Optional: Sample RUM sessions (here, 80% of sessions are sent to Datadog. Default = 100%). This setting is not applicable to Error Tracking.
 config.sessionSamplingRate = 80;
-// Optional: sample tracing integrations for network calls between your app and your backend (here, 80% of calls to your instrumented backend will be linked from the RUM view to the APM view. Default = 20%)
+// Optional: Sample tracing integrations for network calls between your app and your backend (here, 80% of calls to your instrumented backend are linked from the RUM view to the APM view. Default = 20%)
 // You need to specify the hosts of your backends to enable tracing with these backends
 config.resourceTracingSamplingRate = 80;
-config.firstPartyHosts = ['example.com']; // matches 'example.com' and subdomains like 'api.example.com'
+config.firstPartyHosts = ['example.com']; // Matches 'example.com' and subdomains like 'api.example.com'
 
 //Wrap the content of your App component in a DatadogProvider component, passing it your configuration:
 
@@ -208,7 +228,7 @@ export default function App() {
         </DatadogProvider>
     );
 }
-// Once the Datadog React Native SDK for RUM is initialized, you need to setup view tracking to be able to see data in the RUM dashboard
+// Once the Datadog React Native SDK for RUM is initialized, you need to setup view tracking to be able to see data in a dashboard
 ```
 
 {{< /site-region >}}
@@ -225,16 +245,16 @@ const config = new DatadogProviderConfiguration(
     '<CLIENT_TOKEN>',
     '<ENVIRONMENT_NAME>',
     '<RUM_APPLICATION_ID>',
-    true, // track User interactions (e.g.: Tap on buttons).
-    true, // track XHR Resources
-    true // track Errors
+    true, // Track User interactions (e.g.: Tap on buttons).
+    true, // Track XHR Resources
+    true // Track Errors
 );
 config.site = 'EU1';
-// Optional: enable or disable native crash reports
+// Optional: Enable or disable native crash reports
 config.nativeCrashReportEnabled = true;
-// Optional: sample RUM sessions (here, 80% of session will be sent to Datadog. Default = 100%)
+// Optional: Sample RUM sessions (here, 80% of sessions are sent to Datadog. Default = 100%). This setting is not applicable to Error Tracking.
 config.sessionSamplingRate = 80;
-// Optional: sample tracing integrations for network calls between your app and your backend (here, 80% of calls to your instrumented backend will be linked from the RUM view to the APM view. Default = 20%)
+// Optional: Sample tracing integrations for network calls between your app and your backend (here, 80% of calls to your instrumented backend are linked from the RUM view to the APM view. Default = 20%)
 // You need to specify the hosts of your backends to enable tracing with these backends
 config.resourceTracingSamplingRate = 80;
 config.firstPartyHosts = ['example.com']; // matches 'example.com' and subdomains like 'api.example.com'
@@ -248,7 +268,7 @@ export default function App() {
         </DatadogProvider>
     );
 }
-// Once the Datadog React Native SDK for RUM is initialized, you need to setup view tracking to be able to see data in the RUM dashboard
+// Once the Datadog React Native SDK for RUM is initialized, you need to setup view tracking to be able to see data in a dashboard
 ```
 
 {{< /site-region >}}
@@ -265,16 +285,16 @@ const config = new DatadogProviderConfiguration(
     '<CLIENT_TOKEN>',
     '<ENVIRONMENT_NAME>',
     '<RUM_APPLICATION_ID>',
-    true, // track User interactions (e.g.: Tap on buttons).
-    true, // track XHR Resources
-    true // track Errors
+    true, // Track User interactions (e.g.: Tap on buttons).
+    true, // Track XHR Resources
+    true // Track Errors
 );
 config.site = 'US1_FED';
-// Optional: enable or disable native crash reports
+// Optional: Enable or disable native crash reports
 config.nativeCrashReportEnabled = true;
-// Optional: sample RUM sessions (here, 80% of session will be sent to Datadog. Default = 100%)
+// Optional: Sample RUM sessions (here, 80% of sessions are sent to Datadog. Default = 100%)
 config.sessionSamplingRate = 80;
-// Optional: sample tracing integrations for network calls between your app and your backend (here, 80% of calls to your instrumented backend will be linked from the RUM view to the APM view. Default = 20%)
+// Optional: Sample tracing integrations for network calls between your app and your backend (here, 80% of calls to your instrumented backend are linked from the RUM view to the APM view. Default = 20%). This setting is not applicable to Error Tracking.
 // You need to specify the hosts of your backends to enable tracing with these backends
 config.resourceTracingSamplingRate = 80;
 config.firstPartyHosts = ['example.com']; // matches 'example.com' and subdomains like 'api.example.com'
@@ -288,31 +308,33 @@ export default function App() {
         </DatadogProvider>
     );
 }
-// Once the Datadog React Native SDK for RUM is initialized, you need to setup view tracking to be able to see data in the RUM dashboard
+// Once the Datadog React Native SDK for RUM is initialized, you need to setup view tracking to be able to see data in a dashboard
 ```
 
 {{< /site-region >}}
 
 ### Sample RUM sessions
 
-To control the data your application sends to Datadog RUM, you can specify a sampling rate for RUM sessions while [initializing the RUM React Native SDK][18] as a percentage between 0 and 100. You can specify the rate with the `config.sessionSamplingRate` parameter.
+<div class="alert alert-warning">Configuring the session sample rate does not apply to Error Tracking.</div>
+
+To control the data your application sends to Datadog RUM, you can specify a sampling rate for RUM sessions while [initializing the RUM React Native SDK][7]. You can specify the rate with the `config.sessionSamplingRate` parameter as a percentage between 0 and 100.
 
 ### Set tracking consent (GDPR compliance)
 
-To be compliant with the GDPR regulation, the RUM React Native SDK requires the tracking consent value at initialization.
+To be compliant with the GDPR regulation, the React Native SDK requires the tracking consent value at initialization.
 
 The `trackingConsent` setting can be one of the following values:
 
-1. `.PENDING`: The RUM React Native SDK starts collecting and batching the data but does not send it to Datadog. The RUM iOReact NativeS SDK waits for the new tracking consent value to decide what to do with the batched data.
-2. `.GRANTED`: The RUM React Native SDK starts collecting the data and sends it to Datadog.
+1. `.PENDING`: The React Native SDK starts collecting and batching the data but does not send it to Datadog. The RUM iOReact NativeS SDK waits for the new tracking consent value to decide what to do with the batched data.
+2. `.GRANTED`: The React Native SDK starts collecting the data and sends it to Datadog.
 3. `.NOTGRANTED`: The RUM iReact NativeOS SDK does not collect any data. No logs, traces, or RUM events are sent to Datadog.
 
-To change the tracking consent value after the RUM React Native SDK is initialized, use the `Datadog.set(trackingConsent:)` API call. The RUM React Native SDK changes its behavior according to the new value.
+To change the tracking consent value after the React Native SDK is initialized, use the `Datadog.set(trackingConsent:)` API call. The React Native SDK changes its behavior according to the new value.
 
 For example, if the current tracking consent is `.PENDING`:
 
-- If you change the value to `.GRANTED`, the RUM React Native SDK sends all current and future data to Datadog;
-- If you change the value to `.NOTGRANTED`, the RUM React Native SDK wipes all current data and does not collect future data.
+- If you change the value to `.GRANTED`, the React Native SDK sends all current and future data to Datadog;
+- If you change the value to `.NOTGRANTED`, the React Native SDK wipes all current data and does not collect future data.
 
 ### Override the reported version
 
@@ -339,7 +361,7 @@ If the commercial version of your app is "1.2.44", it is reported as "1.2.44-cod
 
 You can also completely override the version by specifying the `version` field. However, make sure you set it correctly, as it has to match the one specified during the upload of your source maps and other mapping files.
 
-For more information about limitations on the version field, see the [Tags documentation][15].
+For more information about limitations on the version field, see the [Tags documentation][8].
 
 ### User interactions tracking
 
@@ -349,7 +371,7 @@ Alternatively, you can use the `accessibilityLabel` element property to give the
 
 ### Track view navigation
 
-Because React Native offers a wide range of libraries to create screen navigation, only manual view tracking is supported by default. To see RUM sessions populate in Datadog, you need to implement view tracking.
+Because React Native offers a wide range of libraries to create screen navigation, only manual view tracking is supported by default. To see RUM or Error tracking sessions populate in Datadog, you need to implement view tracking.
 
 You can manually start and stop a view using the following `startView()` and `stopView` methods.
 
@@ -371,14 +393,14 @@ DdRum.stopView('<view-key>', { 'custom.bar': 42 }, Date.now());
 
 Use one of Datadog's integrations to automatically track views for the following libraries:
 
--   If you use the [`react-native-navigation`][5] library, then add the `@datadog/mobile-react-native-navigation` package and follow the [setup instructions][6].
--   If you use the [`react-navigation`][7] library, then add the `@datadog/mobile-react-navigation` package and follow the [setup instructions][8].
+- If you use the [`react-native-navigation`][9] library, then add the `@datadog/mobile-react-native-navigation` package and follow the [setup instructions][10].
+- If you use the [`react-navigation`][11] library, then add the `@datadog/mobile-react-navigation` package and follow the [setup instructions][10].
 
-If you experience any issues setting up View tracking with `@datadog/mobile-react-navigation` you can see this Datadog [example application][16] as a reference.
+If you experience any issues setting up View tracking with `@datadog/mobile-react-navigation` you can see this Datadog [example application][12] as a reference.
 
 ## Sending data when device is offline
 
-RUM ensures availability of data when your user device is offline. In cases of low-network areas, or when the device battery is too low, all RUM events are first stored on the local device in batches. They are sent as soon as the network is available, and the battery is high enough to ensure the React Native RUM SDK does not impact the end user's experience. If the network is not available with your application running in the foreground, or if an upload of data fails, the batch is kept until it can be sent successfully.
+RUM ensures availability of data when your user device is offline. In cases of low-network areas, or when the device battery is too low, all events are first stored on the local device in batches. They are sent as soon as the network is available, and the battery is high enough to ensure the React Native SDK does not impact the end user's experience. If the network is not available with your application running in the foreground, or if an upload of data fails, the batch is kept until it can be sent successfully.
 
 This means that even if users open your application while offline, no data is lost.
 
@@ -398,15 +420,15 @@ Add the following snippet during initialization in your Datadog configuration:
 configuration.trackBackgroundEvents = true;
 ```
 
-## Data Storage
+## Data storage
 
 ### Android
 
-Before data is uploaded to Datadog, it is stored in cleartext in your application's cache directory. This cache folder is protected by [Android's Application Sandbox][10], meaning that on most devices this data can't be read by other applications. However, if the mobile device is rooted, or someone tampers with the Linux kernel, the stored data might become readable.
+Before data is uploaded to Datadog, it is stored in cleartext in your application's cache directory. This cache folder is protected by [Android's Application Sandbox][13], meaning that on most devices this data can't be read by other applications. However, if the mobile device is rooted, or someone tampers with the Linux kernel, the stored data might become readable.
 
 ### iOS
 
-Before data is uploaded to Datadog, it is stored in cleartext in the cache directory (`Library/Caches`) of your [application sandbox][11], which can't be read by any other app installed on the device.
+Before data is uploaded to Datadog, it is stored in cleartext in the cache directory (`Library/Caches`) of your [application sandbox][14], which can't be read by any other app installed on the device.
 
 ## Development mode
 
@@ -428,7 +450,7 @@ const config = new DatadogProviderConfiguration(
 
 ## New architecture support
 
-The [React Native new architecture][17] is supported by the RUM React Native SDK in version `>=1.8.0`.
+The [React Native new architecture][15] is supported by the React Native SDK in version `>=1.8.0`.
 
 The minimum supported React Native version for the new architecture is `0.71`.
 
@@ -462,27 +484,25 @@ pre_install do |installer|
 end
 ```
 
-**Note**: This solution comes from this [StackOverflow][14] post.
+**Note**: This solution comes from this [StackOverflow][16] post.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/rum/application/create
-[2]: https://raw.githubusercontent.com/DataDog/dd-sdk-reactnative/main/docs/image_reactnative.png
-[3]: /account_management/api-app-keys/#api-keys
-[4]: /account_management/api-app-keys/#client-tokens
-[5]: https://github.com/wix/react-native-navigation
-[6]: /real_user_monitoring/reactnative/integrated_libraries/
-[7]: https://github.com/react-navigation/react-navigation
-[8]: /real_user_monitoring/reactnative/integrated_libraries/
-[9]: https://github.com/DataDog/dd-sdk-reactnative/blob/main/LICENSE
-[10]: https://source.android.com/security/app-sandbox
-[11]: https://support.apple.com/guide/security/security-of-runtime-process-sec15bfe098e/web
-[12]: https://docs.expo.dev/
-[13]: /real_user_monitoring/reactnative/expo/
-[14]: https://stackoverflow.com/questions/37388126/use-frameworks-for-only-some-pods-or-swift-pods/60914505#60914505
-[15]: /getting_started/tagging/#define-tags
-[16]: https://github.com/DataDog/dd-sdk-reactnative-examples/tree/main/rum-react-navigation
-[17]: https://reactnative.dev/docs/the-new-architecture/landing-page
-[18]: /real_user_monitoring/mobile_and_tv_monitoring/setup/reactnative/#initialize-the-library-with-application-context
+[1]: /real_user_monitoring/
+[2]: /error_tracking/
+[3]: https://docs.expo.dev/
+[4]: /real_user_monitoring/reactnative/expo/
+[5]: /account_management/api-app-keys/#api-keys
+[6]: /account_management/api-app-keys/#client-tokens
+[7]: /real_user_monitoring/mobile_and_tv_monitoring/setup/reactnative/#initialize-the-library-with-application-context
+[8]: /getting_started/tagging/#define-tags
+[9]: https://github.com/wix/react-native-navigation
+[10]: /real_user_monitoring/reactnative/integrated_libraries/
+[11]: https://github.com/react-navigation/react-navigation
+[12]: https://github.com/DataDog/dd-sdk-reactnative-examples/tree/main/rum-react-navigation
+[13]: https://source.android.com/security/app-sandbox
+[14]: https://support.apple.com/guide/security/security-of-runtime-process-sec15bfe098e/web
+[15]: https://reactnative.dev/docs/the-new-architecture/landing-page
+[16]: https://stackoverflow.com/questions/37388126/use-frameworks-for-only-some-pods-or-swift-pods/60914505#60914505

@@ -13,7 +13,7 @@ further_reading:
 title: アクセス許可に関する問題
 ---
 
-The Agent needs a specific set of permission in order to collect your data on your host, find below the most common permission issues and how to solve them.
+Agent がホスト上でデータを収集するためには、特定の権限が必要です。以下に、最も一般的な権限の問題とその解決方法を示します。
 
 ## Agent ロギングのアクセス許可に関する問題
 
@@ -78,7 +78,7 @@ chown dd-agent -R /opt/datadog-agent/run
 Linux OS で実行している Agent の[プロセスチェック][7]を有効化している場合、デフォルトでは `system.processes.open_file_descriptors` メトリクスが収集または報告されません。
 これは、プロセスが Agent ユーザー `dd-agent` ではなく、他のユーザーの元で実行されるプロセスチェックにより監視されている場合に発生します。実際、`dd-agent` ユーザーには、Agent がメトリクスのデータを収集するために参照する `/proc` の全ファイルへの完全なアクセス権がありません。
 
-Enable the `try_sudo` option (available since Agent 6.3) in the process check configuration and add the appropriate `sudoers` rules:
+プロセスチェック構成で `try_sudo` オプション (Agent 6.3 以降で利用可能) を有効化し、適切な `sudoers` ルールを追加します。
 
 ```text
 dd-agent ALL=NOPASSWD: /bin/ls /proc/*/fd/
@@ -88,16 +88,16 @@ dd-agent ALL=NOPASSWD: /bin/ls /proc/*/fd/
 
 Datadog の `error.log` ファイルに `sudo: sorry, you must have a tty to run sudo` の行があった場合、`visudo` を使って sudoers ファイルの `Default requiretty` という行をコメントアウトする必要があります。
 
-### Run Agent as root
+### Agent を root 権限で実行する
 
-If you are unable to use `try_sudo`, you can run the Agent as `root` as a workaround.
+`try_sudo` を使用できない場合、代替手段として Agent を `root` 権限で実行することができます。
 
-<div class="alert alert-info">Running a process daemon as <code>root</code> is not best practice on Linux. The Agent is open source and may be audited via the <a href="https://github.com/DataDog/datadog-agent">GitHub repository.</a></div>
+<div class="alert alert-info">Linux では、プロセスデーモンを <code>root</code> 権限で実行することはベストプラクティスではありません。Agent はオープンソースであり、<a href="https://github.com/DataDog/datadog-agent">GitHub リポジトリ</a>を通じて監査できます。</div>
 
-To run the Agent as `root`:
-1. [Stop the Agent][9]
-2. Open `/etc/systemd/system/multi-user.target.wants/datadog-agent.service` and change the `user` attribute under `[Service]`
-3. [Start the Agent][10]
+Agent を `root` 権限で実行するには
+1. [Agent を停止します][9]
+2. `/etc/systemd/system/multi-user.target.wants/datadog-agent.service` を開き、`[Service]` の `user` 属性を変更します
+3. [Agent を起動します][10]
 
 詳細情報と、Linux マシンで利用可能なこのメトリクスのその他の取得メソッドについては、下記の GitHub に関する問題をご参照ください。
 

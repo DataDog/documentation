@@ -1,7 +1,7 @@
 ---
 categories:
 - lenguajes
-custom_kind: integración
+custom_kind: integration
 dependencies: []
 description: Envía métricas de tiempo de ejecución desde tus aplicaciones .NET con
   bibliotecas cliente de Datadog.
