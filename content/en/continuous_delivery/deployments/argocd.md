@@ -30,12 +30,11 @@ Argo CD notifications consists of two main components:
 
 ## Setup
 
-For more information on how to set up Argo CD notifications using webhooks, see the [official Argo CD guide][5].
+The setup below uses the [Webhook notification service][5] of Argo CD in order to send notifications to Datadog.
 
-The first step is to create the service containing the Datadog intake URL and the Datadog API Key:
-1. Add your [Datadog API Key][11] in the
-`argocd-notifications-secret` secret with the `dd-api-key` key. See [the Argo CD guide][2] for information on modifying the `argocd-notifications-secret`.
-1. Add a notification service in the `argocd-notifications-cm` config map with the following format:
+First, add your [Datadog API Key][11] in the `argocd-notifications-secret` secret with the `dd-api-key` key. See [the Argo CD guide][2] for information on modifying the `argocd-notifications-secret`.
+
+Then, modify the `argocd-notifications-cm` ConfigMap to create the notification service, template, and trigger to send notifications to Datadog:
 
 ```yaml
 apiVersion: v1
@@ -52,18 +51,6 @@ data:
       value: $dd-api-key
     - name: "Content-Type"
       value: "application/json"
-```
-
-`cd-visibility-webhook` is the name of the notification service, and `$dd-api-key` is a reference to the API Key stored in the `argocd-notifications-secret` secret.
-
-The second step is to add the template in the same `argocd-notifications-cm` config map:
-
-```yaml
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: argocd-notifications-cm
-data:
   template.cd-visibility-template: |
     webhook:
       cd-visibility-webhook:
@@ -76,23 +63,6 @@ data:
               "recipient": {{toJson .recipient}},
               "commit_metadata": {{toJson (call .repo.GetCommitMetadata .app.status.operationState.syncResult.revision)}}
             }
-```
-
-<div class="alert alert-warning">
-The call to populate the <code>commit_metadata</code> field is not required. The field is used to enrich the payload with Git information.
-If you are using Helm repositories as the source of your Argo CD application, adjust the body by removing that line and the comma in the previous line.
-</div>
-
-`cd-visibility-template` is the name of the template, and `cd-visibility-webhook` is a reference to the service created above.
-
-The third step is to add the trigger, again in the same `argocd-notifications-cm` config map:
-
-```yaml
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: argocd-notifications-cm
-data:
   trigger.cd-visibility-trigger: |
     - when: app.status.operationState.phase in ['Succeeded', 'Failed', 'Error'] and app.status.health.status in ['Healthy', 'Degraded']
       send: [cd-visibility-template]
@@ -100,7 +70,15 @@ data:
       send: [cd-visibility-template]
 ```
 
-`cd-visibility-trigger` is the name of the trigger, and `cd-visibility-template` is a reference to the template created above.
+The following fields have been added:
+1. The `cd-visibility-webhook` service targets the Datadog intake and configures the correct headers for the request. The `DD-API-KEY` header references the `dd-api-key` entry added previously in the `argocd-notifications-secret`.
+2. The `cd-visibility-template` defines what to send in the request for the `cd-visibility-webhook` service.
+3. The `cd-visibility-trigger` defines when to send the notification, and it references the `cd-visibility-template`.
+
+<div class="alert alert-warning">
+The call to populate the <code>commit_metadata</code> field is not required. The field is used to enrich the payload with Git information.
+If your Argo CD application source is not a defined commit SHA (for example, if you are using Helm repositories), adjust the body by removing that line and the comma in the previous line.
+</div>
 
 After the notification service, trigger, and template have been added to the config map, you can subscribe any of your Argo CD applications to the integration.
 Modify the annotations of the Argo CD application by either using the Argo CD UI or modifying the application definition with the following annotations:
@@ -115,8 +93,8 @@ metadata:
     dd_service: <YOUR_SERVICE>
 ```
 
-There are three annotations:
-1. The notifications annotation subscribes the Argo CD application to the notification setup created above.
+Three annotations have been added:
+1. The notifications annotation subscribes the Argo CD application to the notification setup created above. This allows Datadog to receive deployment-related notifications for this application.
 2. The `dd_env` annotation configures the environment of the application. Replace `YOUR_ENV` above with the environment
    to which this application is deploying (for example: `staging` or `prod`). If you don't set this annotation,
    the environment defaults to `none`.
@@ -175,11 +153,33 @@ metadata:
     dd_k8s_cluster: example-cluster
 ```
 
+## Change duration to wait for resources health
+The duration reported in deployment events matches the sync duration in Argo CD. However, the sync duration generally represents the time spent by Argo CD to sync the Git repository state and the Kubernetes cluster state.
+This means that what happens after the sync (for example, the time spent by the Kubernetes resources to start up), is not included in the duration.
 
-## Visualize deployments in Datadog
+To change the duration reported to wait until the configured resources have started up and reached a healthy state, you can add a [PostSync Hook][19] to the resources that your Argo CD application monitors.
+The PostSync Hook will run after all the resources have reached a Healthy state, and the Argo CD sync will wait on the PostSync Hook result to update the application status as Healthy.
 
-The [**Deployments**][6] and [**Executions**][7] pages populate with data after a deployment is executed. For more information, see [Search and Manage][9] and [CD Visibility Explorer][10].
+Below is represented an example of a PostSync Hook Job that runs a simple `echo` command.
 
+```yaml
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: cdvisibility-postsync-job # Ensures that the Argo CD sync duration waits for resources health
+  annotations:
+    argocd.argoproj.io/hook: PostSync
+    argocd.argoproj.io/hook-delete-policy: HookSucceeded
+spec:
+  template:
+    spec:
+      containers:
+        - name: noop-echo
+          image: alpine:latest
+          command: ["echo", "all the sync resources have reached a healthy state"]
+      restartPolicy: Never
+  backoffLimit: 0
+```
 
 ## Correlate deployments with CI pipelines
 
@@ -230,6 +230,10 @@ You can omit the `--config-repo` option if the CI is checked out to the configur
 
 If the command has been correctly run, deployments contain Git metadata from the application repository instead of the configuration repository. Also, the deployment executions view now contains a new **Pipeline** tab representing the related CI pipeline trace.
 
+## Visualize deployments in Datadog
+
+The [**Deployments**][6] and [**Executions**][7] pages populate with data after a deployment is executed. For more information, see [Search and Manage][9] and [CD Visibility Explorer][10].
+
 ## Troubleshooting
 
 If notifications are not sent, examine the logs of the `argocd-notification-controller` pod. The controller logs when it is sending a notification (for example: `Sending notification ...`) and when it fails to notify a recipient
@@ -257,3 +261,4 @@ If notifications are not sent, examine the logs of the `argocd-notification-cont
 [16]: https://app.datadoghq.com/orchestration/explorer
 [17]: https://argo-cd.readthedocs.io/en/stable/user-guide/best_practices/#separating-config-vs-source-code-repositories
 [18]: /getting_started/tagging/unified_service_tagging/?tab=kubernetes#configuration-1
+[19]: https://argo-cd.readthedocs.io/en/stable/user-guide/resource_hooks/#resource-hooks
