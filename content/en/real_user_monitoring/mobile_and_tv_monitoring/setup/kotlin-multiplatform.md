@@ -1,8 +1,8 @@
 ---
-title: RUM Kotlin Multiplatform Monitoring Setup
+title: Kotlin Multiplatform Monitoring Setup
 is_beta: true
 private: true
-description: Collect RUM data from your Kotlin Multiplatform projects.
+description: Collect RUM or Error Tracking data from your Kotlin Multiplatform projects.
 aliases:
     - /real_user_monitoring/kotlin-multiplatform/
     - /real_user_monitoring/kotlin-multiplatform/setup
@@ -24,22 +24,22 @@ further_reading:
 Kotlin Multiplatform Monitoring is in Preview.
 {{< /beta-callout >}}
 
-Datadog Real User Monitoring (RUM) enables you to visualize and analyze the real-time performance and user journeys of your application's individual users.
+This page describes how to instrument your applications for both [Real User Monitoring (RUM)][1] and [Error Tracking][2] with the Kotlin Multiplatform SDK. You can follow the steps below to instrument your applications for RUM (includes Error Tracking) or Error Tracking if you have purchased it as a standalone product.
 
 The Datadog Kotlin Multiplatform SDK supports Android 5.0+ (API level 21) and iOS v12+.
 
 ## Setup
 
-1. Declare the Datadog RUM SDK as a dependency.
+1. Declare the Datadog SDK as a dependency.
 2. Add native dependencies for iOS.
 3. Specify application details in the UI.
 4. Initialize the Datadog SDK.
 5. Enable RUM to start sending data.
-6. Initialize the RUM Ktor plugin to track network events made with Ktor.
+6. Initialize the Ktor plugin to track network events made with Ktor.
 
-### Declare the Datadog RUM SDK as a dependency
+### Declare the Datadog SDK as a dependency
 
-Declare [`dd-sdk-kotlin-multiplatform-rum`][1] as a common source set dependency in your Kotlin Multiplatform module's `build.gradle.kts` file.
+Declare [`dd-sdk-kotlin-multiplatform-rum`][3] as a common source set dependency in your Kotlin Multiplatform module's `build.gradle.kts` file.
 
 ```kotlin
 kotlin {
@@ -109,19 +109,41 @@ If you are integrating Kotlin Multiplatform library as a framework with an `embe
 
 ### Specify application details in the UI
 
-1. Navigate to [**Digital Experience** > **Add an Application**][2].
+{{< tabs >}}
+{{% tab "RUM" %}}
+
+1. Navigate to [**Digital Experience** > **Add an Application**][1].
 2. Select `Kotlin Multiplatform` as the application type and enter an application name to generate a unique Datadog application ID and client token.
-3. To disable automatic user data collection for either client IP or geolocation data, uncheck the boxes for those settings. For more information, see [RUM Kotlin Multiplatform Data Collected][10].
+3. To disable automatic user data collection for client IP or geolocation data, use the toggles for those settings. For more information, see [Kotlin Multiplatform Data Collected][2].
 
-To ensure the safety of your data, you must use a client token. If you used only [Datadog API keys][3] to configure the Datadog SDK, they would be exposed client-side in the Android application's APK byte code. 
+[1]: https://app.datadoghq.com/rum/application/create
+[2]: /real_user_monitoring/kotlin-multiplatform/data_collected/
 
-For more information about setting up a client token, see the [Client Token documentation][4].
+{{% /tab %}}
+{{% tab "Error Tracking" %}}
+
+1. Navigate to [**Error Tracking** > **Settings** > **Browser and Mobile** > **Add an Application**][1].
+2. Select `Kotlin Multiplatform` as the application type and enter an application name to generate a unique Datadog application ID and client token.
+3. To disable automatic user data collection for client IP or geolocation data, use the toggles for those settings. For more information, see [Kotlin Multiplatform Data Collected][2].
+
+   {{< img src="real_user_monitoring/error_tracking/mobile-new-application.png" alt="Create an application for iOS in Datadog" style="width:90%;">}}
+
+
+[1]: https://app.datadoghq.com/error-tracking/settings/setup/client
+[2]: /real_user_monitoring/kotlin-multiplatform/data_collected/
+
+{{% /tab %}}
+{{< /tabs >}}
+
+To ensure the safety of your data, you must use a client token. If you use only [Datadog API keys][4] to configure the Datadog SDK, they are exposed client-side in the Android application's APK byte code. 
+
+For more information about setting up a client token, see the [Client Token documentation][5].
 
 ### Initialize Datadog SDK
 
-In the initialization snippet, set an environment name. For Android, set a variant name if it exists. For more information, see [Using Tags][9].
+In the initialization snippet, set an environment name. For Android, set a variant name if it exists. For more information, see [Using Tags][6].
 
-See [`trackingConsent`](#set-tracking-consent-gdpr-compliance) to add GDPR compliance for your EU users, and [other configuration options][6] to initialize the library.
+See [`trackingConsent`](#set-tracking-consent-gdpr-compliance) to add GDPR compliance for your EU users, and [other configuration options][7] to initialize the library.
 
 {{< site-region region="us" >}}
 ```kotlin
@@ -262,7 +284,7 @@ fun initializeDatadog(context: Any? = null) {
 
 ### Sample RUM sessions
 
-To control the data your application sends to Datadog RUM, you can specify a sample rate for RUM sessions while [initializing the RUM feature][2] as a percentage between 0 and 100.
+To control the data your application sends to Datadog RUM, you can specify a sample rate for RUM sessions while [initializing the RUM feature][8]. The rate is a percentage between 0 and 100. By default, `sessionSamplingRate` is set to 100 (keep all sessions).
 
 ```kotlin
 val rumConfig = RumConfiguration.Builder(applicationId)
@@ -309,7 +331,7 @@ internal actual fun rumPlatformSetup(rumConfigurationBuilder: RumConfiguration.B
 }
 ```
 
-See [Automatically track views][5] to enable automatic tracking of all your views.
+See [Automatically track views][9] to enable automatic tracking of all your views.
 
 ### Set tracking consent (GDPR compliance)
 
@@ -343,7 +365,7 @@ kotlin {
 }
 ```
 
-2. To track your Ktor requests as resources, add the provided [Datadog Ktor plugin][7]:
+2. To track your Ktor requests as resources, add the provided [Datadog Ktor plugin][10]:
 
 ```kotlin
 val ktorClient = HttpClient {
@@ -359,7 +381,7 @@ val ktorClient = HttpClient {
 }
 ```
 
-This records each request processed by the `HttpClient` as a resource in RUM, with all the relevant information automatically filled (URL, method, status code, and error). Only the network requests that started when a view is active are tracked. To track requests when your application is in the background, [create a view manually][8] or enable [background view tracking](#track-background-events).
+This records each request processed by the `HttpClient` as a resource in RUM, with all the relevant information automatically filled (URL, method, status code, and error). Only the network requests that started when a view is active are tracked. To track requests when your application is in the background, [create a view manually][11] or enable [background view tracking](#track-background-events).
 
 ## Track background events
 
@@ -375,7 +397,7 @@ Add the following snippet during RUM configuration:
 
 ## Track errors
 
-[Kotlin Multiplatform Crash Reporting and Error Tracking][11] displays any issues in your application and the latest available errors. You can view error details and attributes including JSON in the [RUM Explorer][12].
+[Kotlin Multiplatform Crash Reporting and Error Tracking][12] displays any issues in your application and the latest available errors. You can view error details and attributes including JSON in the [RUM Explorer][13].
 
 ## Sending data when device is offline
 
@@ -389,15 +411,16 @@ This means that even if users open your application while offline, no data is lo
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://github.com/DataDog/dd-sdk-kotlin-multiplatform/tree/develop/features/rum
-[2]: https://app.datadoghq.com/rum/application/create
-[3]: /account_management/api-app-keys/#api-keys
-[4]: /account_management/api-app-keys/#client-tokens
-[5]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/kotlin-multiplatform/#automatically-track-views
-[6]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/kotlin-multiplatform/#initialization-parameters
-[7]: https://github.com/DataDog/dd-sdk-kotlin-multiplatform/tree/develop/integrations/ktor
-[8]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/kotlin-multiplatform/#custom-views
-[9]: /getting_started/tagging/using_tags/
-[10]: /real_user_monitoring/kotlin-multiplatform/data_collected/
-[11]: /real_user_monitoring/error_tracking/kotlin-multiplatform/
-[12]: /real_user_monitoring/explorer/
+[1]: /real_user_monitoring/
+[2]: /error_tracking/
+[3]: https://github.com/DataDog/dd-sdk-kotlin-multiplatform/tree/develop/features/rum
+[4]: /account_management/api-app-keys/#api-keys
+[5]: /account_management/api-app-keys/#client-tokens
+[6]: /getting_started/tagging/using_tags/
+[7]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/kotlin-multiplatform/#initialization-parameters
+[8]: https://app.datadoghq.com/rum/application/create
+[9]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/kotlin-multiplatform/#automatically-track-views
+[10]: https://github.com/DataDog/dd-sdk-kotlin-multiplatform/tree/develop/integrations/ktor
+[11]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/kotlin-multiplatform/#custom-views
+[12]: /real_user_monitoring/error_tracking/kotlin-multiplatform/
+[13]: /real_user_monitoring/explorer/
