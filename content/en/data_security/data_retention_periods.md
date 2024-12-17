@@ -9,7 +9,7 @@ further_reading:
       tag: 'Documentation'
       text: 'Review the main categories of data submitted to Datadog'
 filter_all: All
-content: "The following table lists the default data retention period by data type and product. Optionally, search by keyword or description text to find the data type or product you're interested in. For collection interval and minimum resolution information, see [Datadog Data Collection and Resolution][1]. Still need help? Contact [Datadog support][2]."
+content: "The following table lists the default data retention period by data type and product. Optionally, search by keyword or description text to find the data type or product you're interested in. For collection interval and minimum resolution information, see [Datadog Data Collection and Resolution](https://docs.datadoghq.com/developers/guide/data-collection-resolution-retention/). Still need help? Contact [Datadog support](/help)."
 attributes: 
   - product: APM
     data_type: |
@@ -141,8 +141,8 @@ attributes:
        - **Detected vulnerabilities**: 15 months
   - product: Synthetics
     data_type: | 
-       - **Test results (not displayed in UI): 2 months
-       - **Test results (displayed in UI): 15 months
+       - **Test results (not displayed in UI)**: 2 months
+       - **Test results (displayed in UI)**: 15 months
   - product: Test Visibility & Intelligent Test Runner
     data_type: | 
        - **Tests**: 3 months
@@ -154,6 +154,3 @@ attributes:
 ### Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
-[1]: https://docs.datadoghq.com/developers/guide/data-collection-resolution-retention/
-[2]: /help/
