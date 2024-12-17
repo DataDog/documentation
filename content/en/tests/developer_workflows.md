@@ -53,8 +53,8 @@ You can enable test summaries in pull requests with the following steps:
 1. Install the [GitHub integration][4]:
    1. Navigate to the **Configuration** tab on the [GitHub integration tile][6] and click **+ Create GitHub App**.
    1. Give the application read and write permissions for pull requests.
-1. Navigate to the [Test Optimization Settings page][3] and search for the repository you want to enable. You can also search by repository.
-1. Select the repository.
+1. Navigate to the [Test Optimization Settings page][3].
+1. Select the repository where you want to enable test summaries.
 1. Toggle **GitHub Comments**.
 
 {{< img src="ci/enable-settings-github-comments.png" alt="The Test Optimization Settings tab in Datadog with GitHub comments enabled for one test service" style="width:100%;">}}
