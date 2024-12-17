@@ -25,17 +25,17 @@ To take action on a Step Function in Datadog:
 5. Click the **Redrive** button.
 
 ## Tracing redrives
+When monitoring redriven executions, we recommend using the Waterfall view. The large gap between the original execution and redrive can make the Flame Graph view imperceptible.
+
 We recommend using the Waterfall view for monitoring redrive traces as there can be a very large gap after the original execution.
 
-### Merge redriven Lambda traces
-Node.js (layer v118+) or Python (layer v105+) runtimes only.
+### Merge Lambda traces
+**Supported runtimes**: Node.js (layer v118+) or Python (layer v105+)
 
-Follow the instructions for [Merge Step Functions and Lambda Traces][5].
+For instructions on how to merge redriven Step Functions and Lambda traces, see [Merge Step Functions and Lambda Traces][5]. 
 
-### I cannot see redrive traces
-If a redrive occurs within 1 minute of an execution's failure, there is a chance it won't be traced.
-
-If a failed execution is redriven within 1 minute, there is a chance it won't be traced.
+### Troubleshooting Missing Redrive Traces
+If a redrive is triggered within one minute of the original execution’s failure, its corresponding trace may not appear.
 
 ## Further Reading
 
