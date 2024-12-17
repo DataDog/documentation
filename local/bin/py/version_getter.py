@@ -2,11 +2,7 @@
 import re
 import os
 import json
-from io import StringIO
 import requests
-import defusedxml.ElementTree as ET
-import semver
-
 
 def get_data():
     url = "https://ddsynthetics-windows.s3.amazonaws.com/installers.json"
