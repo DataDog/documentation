@@ -140,6 +140,7 @@ content/en/real_user_monitoring/error_tracking/browser.md       @Datadog/rum-bro
 
 # Threat Intel
 content/en/security/threat_intelligence.md  @DataDog/documentation @datamarmot @DataDog/asm-monitor-backend
+content/en/security/application_security/threats/threat_intelligence.md  @DataDog/documentation @datamarmot @DataDog/asm-monitor-backend
 
 # Observability Pipelines
 static/resources/yaml/observability_pipelines/                  @DataDog/observability-pipelines-worker-admin  @DataDog/documentation
@@ -162,3 +163,6 @@ content/en/quality_gates/                         @Datadog/ci-app-backend @Datad
 
 # DDSQL Editor References
 content/en/ddsql_editor/reference/*.md              @Datadog/xpq @Datadog/documentation
+
+# Data Streams Monitoring
+content/en/data_streams/*.md                      @Datadog/data-streams-monitoring @Datadog/documentation
