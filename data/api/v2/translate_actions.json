@@ -401,20 +401,6 @@
     "request_description": "New dashboards of the dashboard list.",
     "request_schema_description": "Request containing the list of dashboards to update to."
   },
-  "CreateDataDeletionRequest": {
-    "description": "Creates a data deletion request by providing a query and a timeframe targeting the proper data.",
-    "summary": "Creates a data deletion request",
-    "request_description": "",
-    "request_schema_description": "Object needed to create a data deletion request."
-  },
-  "GetDataDeletionRequests": {
-    "description": "Gets a list of data deletion requests based on several filter parameters.",
-    "summary": "Gets a list of data deletion requests"
-  },
-  "CancelDataDeletionRequest": {
-    "description": "Cancels a data deletion request by providing its ID.",
-    "summary": "Cancels a data deletion request"
-  },
   "GetDomainAllowlist": {
     "description": "Get the domain allowlist for an organization.",
     "summary": "Get Domain Allowlist"
