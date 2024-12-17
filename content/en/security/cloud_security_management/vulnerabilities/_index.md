@@ -58,7 +58,7 @@ Take advantage of guided remediation
 : See which layers are impacted, get suggestions specific to each image, and action on your vulnerability lifecycle management.
 
 Implement automation and integrations
-: Automate creation of JIRA tickets, implement SLAs. Export vulnerabilities, coverage, and SBOMs using Datadog's public API.
+: Automate creation of Jira tickets, implement SLAs. Export vulnerabilities, coverage, and SBOMs using Datadog's public API.
 
 Explore reports
 : View and monitor vulnerability data in your dashboards.
@@ -73,7 +73,7 @@ You can also use both deployment methods to use the unified Datadog Agent where 
 
 After you've enabled it, Datadog starts scanning your resources continuously, and starts reporting prioritized vulnerabilities in your [CSM Vulnerability Explorer][1] within an hour. 
 
-Use this table to decide which solution to start with: 
+Use these tables to decide which solution to start with: 
 | Feature                                   | Agentless                                     | Unified Datadog Agent          |
 |-------------------------------------------|-----------------------------------------------|--------------------------------|
 | Time to deploy across your infrastructure | Minutes                                       | Hours to weeks                 |
@@ -82,36 +82,36 @@ Use this table to decide which solution to start with:
 
 | Vulnerability detection scope             | Agentless                                     | Unified Datadog Agent          |
 |-------------------------------------------|-----------------------------------------------|--------------------------------|
-| Host and Host image                       | OS packages and App packages, mapped to image | OS packages                    |
-| Container image                           | OS packages and App packages, mapped to image | OS packages                    |
-| Cloud Provider                            | AWS, [Azure (preview)][15]                    | AWS, Azure, GCP, on-prem, etc. |
-| Operating System                          | Linux                                         | Linux, Windows                 |
+| Host and host image                       | OS packages and app packages, mapped to image | OS packages                    |
+| Container image                           | OS packages and app packages, mapped to image | OS packages                    |
+| Cloud provider                            | AWS, [Azure (Preview)][15]                    | AWS, Azure, GCP, on-prem, etc. |
+| Operating system                          | Linux                                         | Linux, Windows                 |
 | Serverless                                | AWS Lambda                                    | -                              |
-| Container Registries                      | [Amazon ECR (preview)][16]                    | -                              |
+| Container registries                      | [Amazon ECR (Preview)][16]                    | -                              |
 
 For more information on compatibility, see [CSM Vulnerabilities Hosts and Containers Compatibility][13]. If you need any assistance, see the [troubleshooting guide][14], or reach out to support@datadoghq.com.
 
-## Continuously detect, prioritize and remediate exploitable vulnerabilities
-The [CSM Vulnerabilities Explorer][1] helps you investigate all vulnerabilities detected across container images, host images, running hosts and serverless functions you own, using filtering and grouping capabilities.
+## Continuously detect, prioritize, and remediate exploitable vulnerabilities
+The [CSM Vulnerabilities Explorer][1] helps you investigate all vulnerabilities detected across container images, host images, running hosts, and serverless functions you own, using filtering and grouping capabilities.
 
-Focus on exploitable vulnerabilities first, using the Datadog Severity score, combining the base CVSS score with many risk factors, including sensitive data, environment sensitivity, exposure to attacks, exploit availability or threat Intelligence sources.
+Focus on exploitable vulnerabilities first, using the Datadog Severity Score, combining the base CVSS score with many risk factors, including sensitive data, environment sensitivity, exposure to attacks, exploit availability, or threat intelligence sources.
 
-The [CSM Vulnerabilities Explorer][1] helps you address vulnerabilities having a fix available and provides guided remediation steps, helping Dev and Ops teams fix vulnerabilities faster. Triage, mute, comment and assign vulnerabilities to easily manage their lifecycle.
+The [CSM Vulnerabilities Explorer][1] helps you address vulnerabilities that have fixes available, and provides guided remediation steps, helping Dev and Ops teams fix vulnerabilities faster. Triage, mute, comment, and assign vulnerabilities to easily manage their lifecycle.
 
-{{< img src="security/vulnerabilities/csm-vm-explorer-actionability.png" alt="The CSM Vulnerability Explorer help investigate all vulnerabilities and guides you to remediation" width="100%">}}
+{{< img src="security/vulnerabilities/csm-vm-explorer-actionability.png" alt="The CSM Vulnerability Explorer displaying a vulnerability and the actions a user can take to remediate it" width="100%">}}
 
-## Automation and JIRA integration
-Make CSM Vulnerabilities part of your daily workflow by setting up your [Security notification rule][17]:
+## Automation and Jira integration
+Make CSM Vulnerabilities part of your daily workflow by setting up [security notification rules][17]:
 - Get alerted upon detection of an exploitable vulnerability for your scope
-- Automatically create JIRA tickets
+- Automatically create Jira tickets
 - Configure SLAs to remediate vulnerabilities
 
-{{< img src="security/vulnerabilities/csm-notifications.png" alt="Notifications helps you automate your process by alerting and creating JIRA tickets." width="100%">}}
+{{< img src="security/vulnerabilities/csm-notifications.png" alt="The notification rule setup screen" width="100%">}}
 
 ## Tracking and reporting
-Easily track and report progress to stakeholders by using the [out-of-the-box CSM Vulnerabilities dashboard][18]. Customize this dashboard to your own needs by cloning and tweaking it
+Easily track and report progress to stakeholders by using the [out-of-the-box CSM Vulnerabilities dashboard][18]. Customize this dashboard to your own needs by cloning and tweaking it as needed.
 
-{{< img src="security/vulnerabilities/csm-vm-reporting.png" alt="Track your progress addressing vulnerabilities and report to stakeholders." width="100%">}}
+{{< img src="security/vulnerabilities/csm-vm-reporting.png" alt="The CSM Vulnerabilities dashboard" width="100%">}}
 
 ## Video walkthrough
 
