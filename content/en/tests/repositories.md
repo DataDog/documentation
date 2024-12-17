@@ -13,9 +13,6 @@ further_reading:
 - link: "/continuous_integration/guides/flaky_test_management"
   tag: "Documentation"
   text: "Learn how to manage flaky tests"
-- link: "/tests/branches"
-  tag: "Documentation"
-  text: "Gain insight into test performance in your repository branches"
 ---
 
 {{< site-region region="gov" >}}
@@ -24,7 +21,11 @@ further_reading:
 
 ## Overview
 
-The [Repositories page][1] displays aggregated health metrics for the default branch of each repository. This view is useful for gaining a high-level overview of test performance across your organization's repositories.
+[Repositories page][1]
+
+## Repository trends
+
+The [Repositories view][1] displays aggregated health metrics for the default branch of each repository. This view is useful for gaining a high-level overview of test performance across your organization's repositories.
 
 Use the Repositories page to:
 - See the total number of flaky tests in each repo.
@@ -38,7 +39,7 @@ To filter the list down to only repositories that you have committed to, toggle 
 
 <!-- vale Datadog.pronouns = YES -->
 
-## Investigate a repository
+### Investigate a repository
 
 Select a repository to gain granular insights into its test performance. Use the **Branch**, **Test Service**, and **Env** drop-downs to filter for the desired data. Selecting the **\*** filter gives you an aggregated view across that category.
 
@@ -52,7 +53,7 @@ The page for a specific repository gives you access to:
 - **Common Error Types**: See the most common error types in the repo.
 - **All Test Runs**: Explore all test runs in the repo.
 
-## Repository settings
+### Repository settings
 
 The [Test Optimization settings][3] page gives you an overview of the features enabled on each of your repos together with any overrides you've applied. Select a repo to configure the following repository capabilities:
 - **[GitHub Comments][4]**: Show summaries of your test results directly in pull requests.
@@ -60,7 +61,7 @@ The [Test Optimization settings][3] page gives you an overview of the features e
 - **[Early Flake Detection][6]**: Identify flaky tests early in the development cycle.
 - **[Test Impact Analysis][7]**: Automatically select and run only the relevant tests for a given commit based on the code being changed.
 
-### Overrides for test services
+#### Overrides for test services
 
 If you have test services that require their own configuration, you can override your default repository settings.
 
@@ -72,14 +73,20 @@ To create an override:
 
 You can view the number of overrides in effect on each repo from the [settings][3] page.
 
+## Debugging commits
+
+
+
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/ci/test-repositories?view=repositories
-[2]: /tests/flaky_test_management
-[3]: https://app.datadoghq.com/ci/settings/test-optimization
-[4]: /tests/developer_workflows/#test-summaries-in-github-pull-requests
-[5]: /tests/flaky_test_management/auto_test_retries/
-[6]: /tests/flaky_test_management/early_flake_detection/
-[7]: /tests/test_impact_analysis/
+[1]: https://app.datadoghq.com/ci/test-repositories
+[2]: https://app.datadoghq.com/ci/test-repositories?view=repositories
+[3]: /tests/flaky_test_management
+[4]: https://app.datadoghq.com/ci/settings/test-optimization
+[5]: /tests/developer_workflows/#test-summaries-in-github-pull-requests
+[6]: /tests/flaky_test_management/auto_test_retries/
+[7]: /tests/flaky_test_management/early_flake_detection/
+[8]: /tests/test_impact_analysis/

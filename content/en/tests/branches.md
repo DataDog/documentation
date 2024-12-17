@@ -1,28 +1,14 @@
----
-title: Branches
-description: Gain insight into test performance in your repository branches.
-aliases:
-- /tests/search/
-algolia:
-   rank: 70
-   tags: ['flaky test', 'flaky tests', 'test regression', 'test regressions', 'test service', 'test services']
-further_reading:
-- link: "/continuous_integration/explorer"
-  tag: "Documentation"
-  text: "Search and filter test runs"
-- link: "/continuous_integration/guides/flaky_test_management"
-  tag: "Documentation"
-  text: "Learn how to manage flaky tests"
-- link: "/tests/repositories"
-  tag: "Documentation"
-  text: "Gain insight into test performance in your repositories"
----
+
 
 ## Overview
 
-The [Branches][1] view of the Repositories page lists all branches from all repositories and {{< tooltip glossary="test service" >}}s that have reported test results. This tab is useful for seeing the status of tests run on your code branches and troubleshooting test failures.
+The [Branches][1] view of the Repositories page lists the branches from all repositories and {{< tooltip glossary="test service" >}}s that have reported test results. This tab is useful for seeing the status of tests run on your code branches and troubleshooting test failures.
+
+<!-- vale Datadog.pronouns = NO -->
 
 To filter the list down to only branches that you have committed to, toggle **My Branches** and enter the email address associated with your GitHub account. You can enter multiple email addresses. Edit your address later by clicking **Edit Authors**.
+
+<!-- vale Datadog.pronouns = YES -->
 
 ## Test results
 
