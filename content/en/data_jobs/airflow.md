@@ -141,8 +141,8 @@ For Astronomer customers using Astro, <a href=https://www.astronomer.io/docs/lea
 
 2. To set up the OpenLineage provider, define the following environment variables. You can configure these variables in your Astronomer deployment using either of the following methods:
 
-- [From the Astro UI][5]: Navigate to your deployment settings and add the environment variables directly.
-- [In the Dockerfile][11]: Define the environment variables in your `Dockerfile` to ensure they are included during the build process.
+  - [From the Astro UI][5]: Navigate to your deployment settings and add the environment variables directly.
+  - [In the Dockerfile][11]: Define the environment variables in your `Dockerfile` to ensure they are included during the build process.
 
    ```shell
    OPENLINEAGE__TRANSPORT__TYPE=composite
@@ -160,7 +160,7 @@ For Astronomer customers using Astro, <a href=https://www.astronomer.io/docs/lea
    * Set `AIRFLOW__OPENLINEAGE__NAMESPACE` with a unique name for your Airflow deployment. This allows Datadog to logically separate this deployment's jobs from those of other Airflow deployments.
    * Set `OPENLINEAGE_CLIENT_LOGGING` to `DEBUG` for the OpenLineage client and its child modules to log at a `DEBUG` logging level. This can be useful for troubleshooting during the configuration of an OpenLineage provider.
 
-   See the [Astronomer official guide][5] for managing environment variables for a deployment. See Apache Airflow's [OpenLineage Configuration Reference][6] for other supported configurations of the OpenLineage provider.
+   See the [Astronomer official guide][10] for managing environment variables for a deployment. See Apache Airflow's [OpenLineage Configuration Reference][6] for other supported configurations of the OpenLineage provider.
 
 3. Trigger a update to your deployment and wait for it to finish.
 
