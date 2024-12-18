@@ -69,10 +69,10 @@ data:
       send: [cd-visibility-template]
 ```
 
-The following fields have been added:
-1. The `cd-visibility-webhook` service added under `data.service.webhook` targets the Datadog intake and configures the correct headers for the request. The `DD-API-KEY` header references the `dd-api-key` entry added previously in the `argocd-notifications-secret`.
-2. The `cd-visibility-template` added under `data.template` defines what to send in the request for the `cd-visibility-webhook` service.
-3. The `cd-visibility-trigger` added under `data.trigger` defines when to send the notification, and it references the `cd-visibility-template`.
+The following resources have been added:
+1. The `cd-visibility-webhook` service targets the Datadog intake and configures the correct headers for the request. The `DD-API-KEY` header references the `dd-api-key` entry added previously in the `argocd-notifications-secret`.
+2. The `cd-visibility-template` defines what to send in the request for the `cd-visibility-webhook` service.
+3. The `cd-visibility-trigger` defines when to send the notification, and it references the `cd-visibility-template`.
 
 <div class="alert alert-warning">
 The call to populate the <code>commit_metadata</code> field is not required. The field is used to enrich the payload with Git information.
@@ -114,7 +114,7 @@ The [Recommended Setup](#recommended-setup) section below contains recommended a
 
 ### Change duration to wait for resources health
 The duration reported in deployment events matches the sync duration in Argo CD. However, the sync duration generally represents the time spent by Argo CD to sync the Git repository state and the Kubernetes cluster state.
-This means that what happens after the sync (for example, the time spent by the Kubernetes resources to start up), is not included in the duration.
+This means that what happens after the sync (for example, the time spent by the Kubernetes resources to start up) is not included in the duration.
 
 To change the duration reported to wait until the configured resources have started up and reached a healthy state, you can add a [PostSync Hook][19] to the resources that your Argo CD application monitors.
 The PostSync Hook will run after all the resources have reached a Healthy state, and the Argo CD sync will wait on the PostSync Hook result to update the application status as Healthy.
