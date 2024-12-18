@@ -34,13 +34,13 @@ Data Jobs Monitoring supports Apache Airflow deployments with [apache-airflow-pr
 To get started, follow the instructions below.
 
 1. Install `openlineage` provider by adding the following into your `requirements.txt` file or wherever your Airflow depedencies are managed:
-   
+
    ```text
    apache-airflow-providers-openlineage>=1.11.0
    ```
 
 2. Configure `openlineage` provider. The simplest option is to set the following environment variables and make them available to pods where you run Airflow schedulers and Airflow workers:
-   
+
    ```shell
    OPENLINEAGE_URL=<DD_DATA_OBSERVABILITY_INTAKE>
    OPENLINEAGE_API_KEY=<DD_API_KEY>
@@ -49,10 +49,10 @@ To get started, follow the instructions below.
    * Install and configure `openlineage` provider for **both Airflow schedulers and Airflow workers**.
    * Replace `<DD_DATA_OBSERVABILITY_INTAKE>` with `https://data-obs-intake.`{{< region-param key="dd_site" code="true" >}}.
    * Replace `<DD_API_KEY>` with your valid [Datadog API key][4].
-   
+
    **Optional:**
    * Set `AIRFLOW__OPENLINEAGE__NAMESPACE` with a unique name for your Airflow deployment. This allows Datadog to logically separate this deployment's jobs from those of other Airflow deployments.
-   * Set `OPENLINEAGE_CLIENT_LOGGING` to `DEBUG` for OpenLineage client and its child modules. This can be useful in troubleshooting during the configuration of `openlineage` provider. 
+   * Set `OPENLINEAGE_CLIENT_LOGGING` to `DEBUG` for OpenLineage client and its child modules. This can be useful in troubleshooting during the configuration of `openlineage` provider.
 
    Check official documentation [configuration-openlineage][3] for other supported configurations of the `openlineage` provider.
 
@@ -77,7 +77,7 @@ Data Jobs Monitoring is supported for Apache Airflow deployment with [apache-air
 To get started, follow the instructions below.
 
 1. Install `openlineage` provider by adding the following into your `requirements.txt` file:
-   
+
    ```text
    apache-airflow-providers-openlineage>=1.11.0
    ```
@@ -85,10 +85,10 @@ To get started, follow the instructions below.
    Ensure the openlineage provider version is compatible with your constraints file. If no constraints file is specified in `requirements.txt`, ensure compatibility with the [default Apache Airflow constraints][8] for your Airflow version. Refer to the [Amazon MWAA User Guide][7] for guidance on specifying Python dependencies in `requirements.txt`.
 
 2. Configure `openlineage` provider. The simplest option is to set the following environment variables in your [Amazon MWAA start script][3]:
-   
+
    ```shell
    #!/bin/sh
-   
+
    export OPENLINEAGE_URL=<DD_DATA_OBSERVABILITY_INTAKE>
    export OPENLINEAGE_API_KEY=<DD_API_KEY>
    ```
@@ -98,7 +98,7 @@ To get started, follow the instructions below.
 
    **Optional:**
    * Set `AIRFLOW__OPENLINEAGE__NAMESPACE` with a unique name for your Airflow deployment. This allows Datadog to logically separate this deployment's jobs from those of other Airflow deployments.
-   * Set `OPENLINEAGE_CLIENT_LOGGING` to `DEBUG` for OpenLineage client and its child modules. This can be useful in troubleshooting during the configuration of `openlineage` provider. 
+   * Set `OPENLINEAGE_CLIENT_LOGGING` to `DEBUG` for OpenLineage client and its child modules. This can be useful in troubleshooting during the configuration of `openlineage` provider.
 
    Check official documentation [configuration-openlineage][4] for other supported configurations of `openlineage` provider.
 
@@ -139,8 +139,11 @@ For Astronomer customers using Astro, <a href=https://www.astronomer.io/docs/lea
    openlineage-python>=1.23.0
    ```
 
-2. Configure the OpenLineage provider. You can do this by setting the following environment variables [using the Astro UI][5]:
-   
+2. To set up the OpenLineage provider, define the following environment variables. You can configure these variables in your Astronomer deployment using either of the following methods:
+
+- [From the Astro UI][5]: Navigate to your deployment settings and add the environment variables directly.
+- [In the Dockerfile][11]: Define the environment variables in your `Dockerfile` to ensure they are included during the build process.
+
    ```shell
    OPENLINEAGE__TRANSPORT__TYPE=composite
    OPENLINEAGE__TRANSPORT__TRANSPORTS__DATADOG__TYPE=http
@@ -155,7 +158,7 @@ For Astronomer customers using Astro, <a href=https://www.astronomer.io/docs/lea
 
    **Optional:**
    * Set `AIRFLOW__OPENLINEAGE__NAMESPACE` with a unique name for your Airflow deployment. This allows Datadog to logically separate this deployment's jobs from those of other Airflow deployments.
-   * Set `OPENLINEAGE_CLIENT_LOGGING` to `DEBUG` for the OpenLineage client and its child modules to log at a `DEBUG` logging level. This can be useful for troubleshooting during the configuration of an OpenLineage provider. 
+   * Set `OPENLINEAGE_CLIENT_LOGGING` to `DEBUG` for the OpenLineage client and its child modules to log at a `DEBUG` logging level. This can be useful for troubleshooting during the configuration of an OpenLineage provider.
 
    See the [Astronomer official guide][5] for managing environment variables for a deployment. See Apache Airflow's [OpenLineage Configuration Reference][6] for other supported configurations of the OpenLineage provider.
 
@@ -170,13 +173,15 @@ For Astronomer customers using Astro, <a href=https://www.astronomer.io/docs/lea
 [7]: https://docs.datadoghq.com/account_management/api-app-keys/#api-keys
 [8]: https://github.com/OpenLineage/OpenLineage/releases/tag/1.23.0
 [9]: https://www.astronomer.io/docs/astro/runtime-provider-reference#astro-runtime-1210
+[10]: https://www.astronomer.io/docs/astro/environment-variables/#management-options
+[11]: https://www.astronomer.io/docs/astro/manage-env-vars#using-your-dockerfile
 {{% /tab %}}
 
 {{< /tabs >}}
 
 ## Validation
 
-In Datadog, view the [Data Jobs Monitoring][2] page to see a list of your Airflow job runs after the setup. 
+In Datadog, view the [Data Jobs Monitoring][2] page to see a list of your Airflow job runs after the setup.
 
 ## Advanced Configuration
 
@@ -188,9 +193,9 @@ You can troubleshoot Airflow tasks that run Spark jobs more efficiently by conne
 To see the link between Airflow task and the the Spark application it submitted, follow these steps:
 
 1. Configure Airflow to turn off lazy loading of Airflow plugins by setting [lazy_load_plugins config][3] to `False` in your `airflow.cfg` or exporting the following environment variable where your Airflow schedulers and Airflow workers run:
-   
+
    ```shell
-   export AIRFLOW__CORE__LAZY_LOAD_PLUGINS='False' 
+   export AIRFLOW__CORE__LAZY_LOAD_PLUGINS='False'
    ```
 
 2. Update your Airflow job's DAG file by adding the following Spark configurations to your [SparkSubmitOperator][5] where you submit your Spark Application:
