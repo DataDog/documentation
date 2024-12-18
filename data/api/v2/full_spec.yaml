@@ -48960,7 +48960,11 @@ tags:
     page](https://docs.datadoghq.com/account_management/org_settings/service_accounts/)
     for more information.
   name: Service Accounts
-- description: API to create, update, retrieve and delete service definitions.
+- description: 'API to create, update, retrieve and delete service definitions.
+
+    Note: Service Catalog [v3.0 schema](https://docs.datadoghq.com/service_catalog/service_definitions/v3-0/)
+    has new API endpoints documented under [Software Catalog](https://docs.datadoghq.com/api/latest/software-catalog/).
+    Use the following Service Definition endpoints for v2.2 and earlier.'
   externalDocs:
     url: https://docs.datadoghq.com/tracing/service_catalog/
   name: Service Definition
