@@ -49,6 +49,30 @@ The workaround for this issue is to set the configuration option:
 - For Helm: set `datadog.sbom.containerImage.uncompressedLayersSupport: true` in your `values.yaml` file.
 - For Datadog Operator: set `features.sbom.containerImage.uncompressedLayersSupport` to `true` in your DatadogAgent CRD.
 
+## Disable CSM Vulnerabilities
+
+In the `datadog-values.yaml` file for the Agent, set the following configuration settings to `false`:
+
+```
+# datadog-values.yaml file
+datadog:
+  sbom:
+    containerImage:
+      enabled: false
+
+      # Uncomment the following line if you are using Google Kubernetes Engine (GKE) or Amazon Elastic Kubernetes (EKS)
+      # uncompressedLayersSupport: true
+
+    # Enables Host Vulnerability Management
+    host:
+      enabled: false
+
+    # Enables Container Vulnerability Management
+    # Image collection is enabled by default with Datadog Helm version `>= 3.46.0`
+      containerImageCollection:
+        enabled: false
+```
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
