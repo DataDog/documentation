@@ -62,6 +62,10 @@ To get started, follow the instructions below.
 [2]: https://airflow.apache.org/docs/apache-airflow-providers-openlineage/stable/index.html
 [3]: https://airflow.apache.org/docs/apache-airflow-providers-openlineage/stable/configurations-ref.html#configuration-openlineage
 [4]: https://docs.datadoghq.com/account_management/api-app-keys/#api-keys
+
+## Validation
+
+In Datadog, view the [Data Jobs Monitoring][2] page to see a list of your Airflow job runs after the setup.
 {{% /tab %}}
 
 {{% tab "Amazon MWAA" %}}
@@ -116,6 +120,9 @@ To get started, follow the instructions below.
 [7]: https://docs.aws.amazon.com/mwaa/latest/userguide/working-dags-dependencies.html#working-dags-dependencies-syntax-create
 [8]: https://docs.aws.amazon.com/mwaa/latest/userguide/airflow-versions.html#airflow-versions-official
 
+## Validation
+
+In Datadog, view the [Data Jobs Monitoring][2] page to see a list of your Airflow job runs after the setup.
 {{% /tab %}}
 
 {{% tab "Astronomer" %}}
@@ -175,13 +182,17 @@ For Astronomer customers using Astro, <a href=https://www.astronomer.io/docs/lea
 [9]: https://www.astronomer.io/docs/astro/runtime-provider-reference#astro-runtime-1210
 [10]: https://www.astronomer.io/docs/astro/environment-variables/#management-options
 [11]: https://www.astronomer.io/docs/astro/manage-env-vars#using-your-dockerfile
-{{% /tab %}}
-
-{{< /tabs >}}
 
 ## Validation
 
 In Datadog, view the [Data Jobs Monitoring][2] page to see a list of your Airflow job runs after the setup.
+
+
+## Troubleshooting
+Check that the OpenLineage environment variables are correctly set on the Astronomer deployment. Note that using the `.env` file to add the environment variables does not work because the variables are only applied to the local Airflow environment.
+{{% /tab %}}
+
+{{< /tabs >}}
 
 ## Advanced Configuration
 
