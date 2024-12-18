@@ -762,6 +762,17 @@ components:
           schema:
             $ref: '#/components/schemas/APIErrorResponse'
       description: Conflict
+    DueDateRulesList:
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                items:
+                  $ref: '#/components/schemas/DueDateRule'
+                type: array
+            type: object
+      description: The list of due date rules
     FindingsBadRequestResponse:
       content:
         application/json:
@@ -793,6 +804,28 @@ components:
           schema:
             $ref: '#/components/schemas/APIErrorResponse'
       description: Forbidden
+    InboxRulesList:
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                items:
+                  $ref: '#/components/schemas/InboxRule'
+                type: array
+            type: object
+      description: The list of inbox rules
+    MuteRulesList:
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                items:
+                  $ref: '#/components/schemas/MuteRule'
+                type: array
+            type: object
+      description: The list of mute rules
     NotAuthorizedResponse:
       content:
         application/json:
@@ -847,6 +880,18 @@ components:
           schema:
             $ref: '#/components/schemas/APIErrorResponse'
       description: Unauthorized
+    UnprocessableEntityResponse:
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                items:
+                  $ref: '#/components/schemas/JSONAPIErrorResponse'
+                type: array
+            type: object
+      description: The server cannot process the request because it contains invalid
+        data.
   schemas:
     APIErrorResponse:
       description: API error response.
@@ -1586,6 +1631,44 @@ components:
       properties:
         xray_services:
           $ref: '#/components/schemas/XRayServicesList'
+      type: object
+    ActionDueDate:
+      description: Action of the due date rule
+      properties:
+        due_time_per_severity:
+          description: Defines due dates for the specified severities.
+          items:
+            $ref: '#/components/schemas/DueTimePerSeverity'
+          type: array
+        notify_before_due:
+          $ref: '#/components/schemas/Duration'
+      required:
+      - due_time_per_severity
+      type: object
+    ActionInbox:
+      description: Action of the inbox rule
+      properties:
+        reason_description:
+          description: Free text to add a reason description.
+          example: We want to focus on these items.
+          type: string
+      type: object
+    ActionMute:
+      description: Action of the mute rule
+      properties:
+        enabled_until:
+          description: End date of the mute rule (null means mute forever)
+          example: 1893452400000
+          format: int64
+          type: integer
+        reason:
+          $ref: '#/components/schemas/MuteReason'
+        reason_description:
+          description: Free text to add a reason description.
+          example: Muting for a while
+          type: string
+      required:
+      - reason
       type: object
     ActiveBillingDimensionsAttributes:
       description: List of active billing dimensions.
@@ -6600,6 +6683,114 @@ components:
       type: string
       x-enum-varnames:
       - COST_BY_ORG
+    CreateDueDateRuleParameters:
+      description: Body of the due date rule create request
+      properties:
+        data:
+          $ref: '#/components/schemas/CreateDueDateRuleParametersData'
+      type: object
+    CreateDueDateRuleParametersData:
+      description: 'Data of the due date rule create request: the rule type, and the
+        rule attributes. All fields are required.'
+      properties:
+        attributes:
+          $ref: '#/components/schemas/CreateDueDateRuleParametersDataAttributes'
+        type:
+          $ref: '#/components/schemas/DueDateRulesType'
+      required:
+      - attributes
+      - type
+      type: object
+    CreateDueDateRuleParametersDataAttributes:
+      description: 'Attributes of the due date rule create request: the rule name,
+        the rule details, the associated action, and the optional enabled field. All
+        fields are required.'
+      properties:
+        action:
+          $ref: '#/components/schemas/ActionDueDate'
+        enabled:
+          $ref: '#/components/schemas/Enabled'
+        name:
+          $ref: '#/components/schemas/RuleName'
+        rule:
+          $ref: '#/components/schemas/Rule'
+      required:
+      - action
+      - name
+      - rule
+      type: object
+    CreateInboxRuleParameters:
+      description: Body of the inbox rule create request
+      properties:
+        data:
+          $ref: '#/components/schemas/CreateInboxRuleParametersData'
+      type: object
+    CreateInboxRuleParametersData:
+      description: 'Data of the inbox rule create request: the rule type, and the
+        rule attributes. All fields are required.'
+      properties:
+        attributes:
+          $ref: '#/components/schemas/CreateInboxRuleParametersDataAttributes'
+        type:
+          $ref: '#/components/schemas/InboxRulesType'
+      required:
+      - attributes
+      - type
+      type: object
+    CreateInboxRuleParametersDataAttributes:
+      description: 'Attributes of the inbox rule create request: the rule name, the
+        rule details, the associated action, and the optional enabled field. All fields
+        are required.'
+      properties:
+        action:
+          $ref: '#/components/schemas/ActionInbox'
+        enabled:
+          $ref: '#/components/schemas/Enabled'
+        name:
+          $ref: '#/components/schemas/RuleName'
+        rule:
+          $ref: '#/components/schemas/Rule'
+      required:
+      - action
+      - name
+      - rule
+      type: object
+    CreateMuteRuleParameters:
+      description: Body of the mute rule create request
+      properties:
+        data:
+          $ref: '#/components/schemas/CreateMuteRuleParametersData'
+      type: object
+    CreateMuteRuleParametersData:
+      description: 'Data of the mute rule create request: the rule type, and the rule
+        attributes. All fields are required.'
+      properties:
+        attributes:
+          $ref: '#/components/schemas/CreateMuteRuleParametersDataAttributes'
+        type:
+          $ref: '#/components/schemas/MuteRulesType'
+      required:
+      - attributes
+      - type
+      type: object
+    CreateMuteRuleParametersDataAttributes:
+      description: 'Attributes of the mute rule create request: the rule name, the
+        rule details, the associated action, and the optional enabled field. All fields
+        are required.'
+      properties:
+        action:
+          $ref: '#/components/schemas/ActionMute'
+        enabled:
+          $ref: '#/components/schemas/Enabled'
+        name:
+          $ref: '#/components/schemas/RuleName'
+        rule:
+          $ref: '#/components/schemas/Rule'
+      required:
+      - action
+      - name
+      - rule
+      type: object
     CreateOpenAPIResponse:
       description: Response for `CreateOpenAPI` operation.
       properties:
@@ -8004,6 +8195,11 @@ components:
             type: number
           type: array
       type: object
+    Date:
+      description: Date as Unix timestamp in milliseconds
+      example: 1722439510282
+      format: int64
+      type: integer
     DetailedFinding:
       description: A single finding with with message and resource configuration.
       properties:
@@ -8839,6 +9035,83 @@ components:
       - type
       - attributes
       type: object
+    DueDateRule:
+      description: 'Due date rules are used to set a due date to matching vulnerabilities
+        to meet your SLOs.
+
+        Due dates are defined per severity. Notifications can be setup to be sent
+        before the due date is reached.
+
+        A due date rule is composed of a rule UUID, a rule type, and the rule attributes.
+        All fields are required.
+
+        '
+      properties:
+        attributes:
+          $ref: '#/components/schemas/DueDateRuleAttributes'
+        id:
+          $ref: '#/components/schemas/UUID'
+        type:
+          $ref: '#/components/schemas/DueDateRulesType'
+      required:
+      - attributes
+      - id
+      - type
+      type: object
+    DueDateRuleAttributes:
+      description: Attributes of the due date rule
+      properties:
+        action:
+          $ref: '#/components/schemas/ActionDueDate'
+        created_at:
+          $ref: '#/components/schemas/Date'
+        created_by:
+          $ref: '#/components/schemas/RuleUser'
+        enabled:
+          $ref: '#/components/schemas/Enabled'
+        modified_at:
+          $ref: '#/components/schemas/Date'
+        modified_by:
+          $ref: '#/components/schemas/RuleUser'
+        name:
+          $ref: '#/components/schemas/RuleName'
+        rule:
+          $ref: '#/components/schemas/Rule'
+      required:
+      - action
+      - created_at
+      - created_by
+      - enabled
+      - modified_at
+      - modified_by
+      - name
+      - rule
+      type: object
+    DueDateRulesType:
+      description: The pipeline rule type associated to due date rules
+      enum:
+      - due_date_rules
+      example: due_date_rules
+      type: string
+      x-enum-varnames:
+      - DUE_DATE_RULES
+    DueTimePerSeverity:
+      description: Associates a due time to a rule severity. Both fields are required.
+      properties:
+        severity:
+          $ref: '#/components/schemas/RuleSeverity'
+        time:
+          $ref: '#/components/schemas/Duration'
+      required:
+      - severity
+      - time
+      type: object
+    Duration:
+      description: Duration of the due date delay for a given rule severity (ISO 8601
+        duration format, where we accept only Weeks, Days, Hours, Minutes and Seconds,
+        example PT12H)"
+      example: PT12H
+      type: string
     EmailTypeType:
       description: The type of email.
       enum:
@@ -8846,6 +9119,10 @@ components:
       type: string
       x-enum-varnames:
       - WORK
+    Enabled:
+      description: Field used to enable or disable the rule.
+      example: true
+      type: boolean
     EntityAttributes:
       description: Entity attributes.
       properties:
@@ -11790,6 +12067,61 @@ components:
           type: string
           x-mimetype: application/xml
       type: object
+    InboxRule:
+      description: 'Inbox rules are used to prioritize and add relevant vulnerabilities
+        to your Security Inbox.
+
+        An inbox rule is composed of a rule UUID, a rule type, and the rule attributes.
+        All fields are required.'
+      properties:
+        attributes:
+          $ref: '#/components/schemas/InboxRuleAttributes'
+        id:
+          $ref: '#/components/schemas/UUID'
+        type:
+          $ref: '#/components/schemas/InboxRulesType'
+      required:
+      - attributes
+      - id
+      - type
+      type: object
+    InboxRuleAttributes:
+      description: Attributes of the inbox rule
+      properties:
+        action:
+          $ref: '#/components/schemas/ActionInbox'
+        created_at:
+          $ref: '#/components/schemas/Date'
+        created_by:
+          $ref: '#/components/schemas/RuleUser'
+        enabled:
+          $ref: '#/components/schemas/Enabled'
+        modified_at:
+          $ref: '#/components/schemas/Date'
+        modified_by:
+          $ref: '#/components/schemas/RuleUser'
+        name:
+          $ref: '#/components/schemas/RuleName'
+        rule:
+          $ref: '#/components/schemas/Rule'
+      required:
+      - action
+      - created_at
+      - created_by
+      - enabled
+      - modified_at
+      - modified_by
+      - name
+      - rule
+      type: object
+    InboxRulesType:
+      description: The pipeline rule type associated to inbox rules
+      enum:
+      - inbox_rules
+      example: inbox_rules
+      type: string
+      x-enum-varnames:
+      - INBOX_RULES
     IncidentAttachmentAttachmentType:
       description: The type of the incident attachment attributes.
       enum:
@@ -13928,6 +14260,14 @@ components:
       - DOWN
       - WARNING
       - 'OFF'
+    IssueType:
+      description: The type of issues on which the rule applies
+      enum:
+      - vulnerability
+      example: vulnerability
+      type: string
+      x-enum-varnames:
+      - VULNERABILITY
     JSONAPIErrorItem:
       description: API error response body
       properties:
@@ -17824,6 +18164,85 @@ components:
         meta:
           $ref: '#/components/schemas/MonthlyCostAttributionMeta'
       type: object
+    MuteReason:
+      description: Reason for muting a vulnerability
+      enum:
+      - duplicate
+      - external_solution
+      - false_positive
+      - internal_solution
+      - no_fix_available
+      - other
+      - pending_fix
+      - risk_accepted
+      example: duplicate
+      type: string
+      x-enum-varnames:
+      - DUPLICATE
+      - EXTERNAL_SOLUTION
+      - FALSE_POSITIVE
+      - INTERNAL_SOLUTION
+      - NO_FIX_AVAILABLE
+      - OTHER
+      - PENDING_FIX
+      - RISK_ACCEPTED
+    MuteRule:
+      description: 'Mute rules are used to proactively filter out known false positives
+        or accepted risks.
+
+        A mute rule is composed of a rule UUID, a rule type, and the rule attributes.
+        All fields are required.
+
+        '
+      properties:
+        attributes:
+          $ref: '#/components/schemas/MuteRuleAttributes'
+        id:
+          $ref: '#/components/schemas/UUID'
+        type:
+          $ref: '#/components/schemas/MuteRulesType'
+      required:
+      - attributes
+      - id
+      - type
+      type: object
+    MuteRuleAttributes:
+      description: Attributes of the mute rule
+      properties:
+        action:
+          $ref: '#/components/schemas/ActionMute'
+        created_at:
+          $ref: '#/components/schemas/Date'
+        created_by:
+          $ref: '#/components/schemas/RuleUser'
+        enabled:
+          $ref: '#/components/schemas/Enabled'
+        modified_at:
+          $ref: '#/components/schemas/Date'
+        modified_by:
+          $ref: '#/components/schemas/RuleUser'
+        name:
+          $ref: '#/components/schemas/RuleName'
+        rule:
+          $ref: '#/components/schemas/Rule'
+      required:
+      - action
+      - created_at
+      - created_by
+      - enabled
+      - modified_at
+      - modified_by
+      - name
+      - rule
+      type: object
+    MuteRulesType:
+      description: The pipeline rule type associated to mute rules
+      enum:
+      - mute_rules
+      example: mute_rules
+      type: string
+      x-enum-varnames:
+      - MUTE_RULES
     NullableRelationshipToUser:
       description: Relationship to user.
       nullable: true
@@ -18700,6 +19119,108 @@ components:
           items:
             $ref: '#/components/schemas/ApplicationKeyResponseIncludedItem'
           type: array
+      type: object
+    PatchDueDateRuleParameters:
+      description: Body of the due date rule patch request
+      properties:
+        data:
+          $ref: '#/components/schemas/PatchDueDateRuleParametersData'
+      type: object
+    PatchDueDateRuleParametersData:
+      description: 'Data of the due date rule patch request: the rule UUID, the rule
+        type, and the rule attributes. All fields are required.'
+      properties:
+        attributes:
+          $ref: '#/components/schemas/PatchDueDateRuleParametersDataAttributes'
+        id:
+          $ref: '#/components/schemas/UUID'
+        type:
+          $ref: '#/components/schemas/DueDateRulesType'
+      required:
+      - attributes
+      - id
+      - type
+      type: object
+    PatchDueDateRuleParametersDataAttributes:
+      description: 'Attributes of the due date rule patch request: the rule name,
+        the rule details, the associated action, and the enabled field.'
+      properties:
+        action:
+          $ref: '#/components/schemas/ActionDueDate'
+        enabled:
+          $ref: '#/components/schemas/Enabled'
+        name:
+          $ref: '#/components/schemas/RuleName'
+        rule:
+          $ref: '#/components/schemas/RuleWithoutSeverities'
+      type: object
+    PatchInboxRulesParameters:
+      description: Body of the inbox rule patch request
+      properties:
+        data:
+          $ref: '#/components/schemas/PatchInboxRulesParametersData'
+      type: object
+    PatchInboxRulesParametersData:
+      description: 'Data of the inbox rule patch request: the rule UUID, the rule
+        type, and the rule attributes. All fields are required.'
+      properties:
+        attributes:
+          $ref: '#/components/schemas/PatchInboxRulesParametersDataAttributes'
+        id:
+          $ref: '#/components/schemas/UUID'
+        type:
+          $ref: '#/components/schemas/InboxRulesType'
+      required:
+      - attributes
+      - id
+      - type
+      type: object
+    PatchInboxRulesParametersDataAttributes:
+      description: 'Attributes of the inbox rule patch request: the rule name, the
+        rule details, the associated action, and the enabled field.'
+      properties:
+        action:
+          $ref: '#/components/schemas/ActionInbox'
+        enabled:
+          $ref: '#/components/schemas/Enabled'
+        name:
+          $ref: '#/components/schemas/RuleName'
+        rule:
+          $ref: '#/components/schemas/Rule'
+      type: object
+    PatchMuteRuleParameters:
+      description: Body of the mute rule patch request
+      properties:
+        data:
+          $ref: '#/components/schemas/PatchMuteRuleParametersData'
+      type: object
+    PatchMuteRuleParametersData:
+      description: 'Data of the mute rule patch request: the rule UUID, the rule type,
+        and the rule attributes. All fields are required.'
+      properties:
+        attributes:
+          $ref: '#/components/schemas/PatchMuteRuleParametersDataAttributes'
+        id:
+          $ref: '#/components/schemas/UUID'
+        type:
+          $ref: '#/components/schemas/MuteRulesType'
+      required:
+      - attributes
+      - id
+      - type
+      type: object
+    PatchMuteRuleParametersDataAttributes:
+      description: 'Attributes of the mute rule patch request: the rule name, the
+        rule details, the associated action, and the enabled field.'
+      properties:
+        action:
+          $ref: '#/components/schemas/ActionMute'
+        enabled:
+          $ref: '#/components/schemas/Enabled'
+        name:
+          $ref: '#/components/schemas/RuleName'
+        rule:
+          $ref: '#/components/schemas/Rule'
       type: object
     Permission:
       description: Permission object.
@@ -20665,6 +21186,72 @@ components:
       required:
       - data
       type: object
+    ReorderDueDateRulesParameters:
+      description: 'Body of the due date rule reorder request: the full list of due
+        date rules needs to be provided in the new order.'
+      properties:
+        data:
+          description: The `ReorderDueDateRulesParameters` `data`.
+          items:
+            $ref: '#/components/schemas/ReorderDueDateRulesParametersData'
+          type: array
+      type: object
+    ReorderDueDateRulesParametersData:
+      description: 'Data of the due date rule reorder request: the rule UUID, the
+        rule type, and the rule attributes. All fields are required.'
+      properties:
+        id:
+          $ref: '#/components/schemas/UUID'
+        type:
+          $ref: '#/components/schemas/DueDateRulesType'
+      required:
+      - id
+      - type
+      type: object
+    ReorderInboxRulesParameters:
+      description: 'Body of the inbox rule reorder request: the full list of inbox
+        rules needs to be provided in the new order.'
+      properties:
+        data:
+          description: The `ReorderInboxRulesParameters` `data`.
+          items:
+            $ref: '#/components/schemas/ReorderInboxRulesParametersData'
+          type: array
+      type: object
+    ReorderInboxRulesParametersData:
+      description: 'Data of the inbox rule reorder request: the rule UUID, the rule
+        type, and the rule attributes. All fields are required.'
+      properties:
+        id:
+          $ref: '#/components/schemas/UUID'
+        type:
+          $ref: '#/components/schemas/InboxRulesType'
+      required:
+      - id
+      - type
+      type: object
+    ReorderMuteRulesParameters:
+      description: 'Body of the mute rule reorder request: the full list of mute rules
+        needs to be provided in the new order.'
+      properties:
+        data:
+          description: The `ReorderMuteRulesParameters` `data`.
+          items:
+            $ref: '#/components/schemas/ReorderMuteRulesParametersData'
+          type: array
+      type: object
+    ReorderMuteRulesParametersData:
+      description: 'Data of the mute rule reorder request: a rule UUID and its type.
+        All fields are required.'
+      properties:
+        id:
+          $ref: '#/components/schemas/UUID'
+        type:
+          $ref: '#/components/schemas/MuteRulesType'
+      required:
+      - id
+      - type
+      type: object
     ReorderRetentionFiltersRequest:
       description: A list of retention filters to reorder.
       properties:
@@ -21489,6 +22076,33 @@ components:
       type: string
       x-enum-varnames:
       - ROLES
+    Rule:
+      description: 'The definition of an automation pipeline rule scope.
+
+        A rule can act on specific issue types, security rule types, security rule
+        IDs, rule severities, or a query.
+
+        The query can be used to filter resources on tags and attributes.
+
+        The issue type and rule types fields are required.'
+      properties:
+        issue_type:
+          $ref: '#/components/schemas/IssueType'
+        query:
+          $ref: '#/components/schemas/RuleQuery'
+        rule_ids:
+          $ref: '#/components/schemas/RuleIds'
+        rule_types:
+          $ref: '#/components/schemas/RuleTypes'
+        severities:
+          description: The security rules severities to consider
+          items:
+            $ref: '#/components/schemas/RuleSeverity'
+          type: array
+      required:
+      - issue_type
+      - rule_types
+      type: object
     RuleAttributes:
       description: Details of a rule.
       properties:
@@ -21530,12 +22144,46 @@ components:
       description: The unique ID for a scorecard rule.
       example: q8MQxk8TCqrHnWkx
       type: string
+    RuleIds:
+      description: Security rule ids
+      items:
+        description: Id of a rule
+        example: rule-id-1
+        type: string
+      type: array
+    RuleName:
+      description: Name of the pipeline rule
+      example: Rule 1
+      type: string
     RuleOutcomeRelationships:
       description: The JSON:API relationship to a scorecard rule.
       properties:
         rule:
           $ref: '#/components/schemas/RelationshipToOutcome'
       type: object
+    RuleQuery:
+      description: The query is composed of one or several key:value pairs, which
+        can be used to filter resources on tags and attributes.
+      example: key:val
+      type: string
+    RuleSeverity:
+      description: Severity of a security rule
+      enum:
+      - critical
+      - high
+      - medium
+      - low
+      - unknown
+      - info
+      example: critical
+      type: string
+      x-enum-varnames:
+      - CRITICAL
+      - HIGH
+      - MEDIUM
+      - LOW
+      - UNKNOWN
+      - INFO
     RuleType:
       default: rule
       description: The JSON:API type for scorecard rules.
@@ -21545,6 +22193,64 @@ components:
       type: string
       x-enum-varnames:
       - RULE
+    RuleTypes:
+      description: Security rule types
+      example:
+      - application_code_vulnerability
+      items:
+        description: Security rule type
+        enum:
+        - application_code_vulnerability
+        - application_library_vulnerability
+        - attack_path
+        - container_image_vulnerability
+        - identity_risk
+        - misconfiguration
+        - api_security
+        type: string
+        x-enum-varnames:
+        - APPLICATION_CODE_VULNERABILITY
+        - APPLICATION_LIBRARY_VULNERABILITY
+        - ATTACK_PATH
+        - CONTAINER_IMAGE_VULNERABILITY
+        - IDENTITY_RISK
+        - MISCONFIGURATION
+        - API_SECURITY
+      type: array
+    RuleUser:
+      description: User creating or modifying a rule
+      properties:
+        handle:
+          description: The user handle.
+          example: john.doe@domain.com
+          type: string
+        name:
+          description: The user name.
+          example: John Doe
+          type: string
+      type: object
+    RuleWithoutSeverities:
+      description: 'The definition of a due date rule scope.
+
+        A due date rule can act on specific issue types, security rule types, security
+        rule IDs, or a query.
+
+        The query can be used to filter resources on tags and attributes.
+
+        The issue type and rule types fields are required.'
+      properties:
+        issue_type:
+          $ref: '#/components/schemas/IssueType'
+        query:
+          $ref: '#/components/schemas/RuleQuery'
+        rule_ids:
+          $ref: '#/components/schemas/RuleIds'
+        rule_types:
+          $ref: '#/components/schemas/RuleTypes'
+      required:
+      - issue_type
+      - rule_types
+      type: object
     RumMetricCompute:
       description: The compute rule to compute the rum-based metric.
       properties:
@@ -27704,6 +28410,11 @@ components:
       items:
         $ref: '#/components/schemas/TimeseriesResponseValues'
       type: array
+    UUID:
+      description: The ID of a pipeline rule
+      example: 123e4567-e89b-12d3-a456-426655440000
+      format: uuid
+      type: string
     Unit:
       description: Object containing the metric unit family, scale factor, name, and
         short name.
@@ -48548,6 +49259,844 @@ paths:
         - workflows_run
       x-undo:
         type: safe
+  /vulnerabilities/pipelines/due_date_rules:
+    get:
+      description: Returns the ordered list of due date rules in the pipeline (first
+        match applies)
+      operationId: GetDueDateRules
+      responses:
+        '200':
+          $ref: '#/components/responses/DueDateRulesList'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get the ordered list of due date rules
+      tags:
+      - Security Monitoring
+      x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - security_pipelines_read
+      x-undo:
+        type: safe
+    post:
+      description: Create a new due date rule and return the created rule.
+      operationId: CreateDueDateRule
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateDueDateRuleParameters'
+        description: 'Mandatory fields are the rule type and the required attributes:
+          rule name, rule details, and action.
+
+          The rule details are composed of issue types and security rule types on
+          which the rule applies. Optional security rule IDs, severities, and a tag
+          or attribute query can be provided.
+
+          The action is composed of the due date per severity and optionally the notification
+          setup.
+
+          '
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DueDateRule'
+          description: Successfully created the due date rule
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Create a new due date rule
+      tags:
+      - Security Monitoring
+      x-codegen-request-body-name: body
+      x-given:
+        valid_due_date_rule:
+          parameters:
+          - name: body
+            value: "{\n  \"data\": {\n    \"type\": \"due_date_rules\",\n    \"attributes\":
+              {\n      \"name\": \"due date rule 1\",\n      \"rule\": {\n        \"issue_type\":
+              \"vulnerability\",\n        \"rule_types\": [\"misconfiguration\", \"attack_path\"],\n
+              \       \"rule_ids\": [],\n        \"severities\": [\"CRITICAL\"],\n
+              \       \"query\": \"\"\n      },\n      \"action\": {\n          \"due_time_per_severity\":
+              {\n            \"severity\": \"CRITICAL\",\n            \"time\": \"PT12H\"\n
+              \         }\n      },\n      \"enabled\": true\n    }\n  }\n}"
+          step: there is a valid "valid_due_date_rule" in the system
+      x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - security_pipelines_write
+      x-undo:
+        operationId: DeleteDueDateRule
+        parameters:
+        - name: due-date-rule-id
+          source: id
+        type: unsafe
+  /vulnerabilities/pipelines/due_date_rules/reorder:
+    post:
+      description: 'Reorder the list of due date rules in the pipeline and return
+        the reordered list of rules.
+
+        To reorder fields you need to provide the full list of pipeline rules in the
+        new order.'
+      operationId: ReorderDueDateRules
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReorderDueDateRulesParameters'
+        description: 'The full list of rules to reorder. The order of the rules in
+          the list will be the new order in the pipeline.
+
+          '
+        required: true
+      responses:
+        '200':
+          $ref: '#/components/responses/DueDateRulesList'
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Reorder the list of due date rules in the pipeline
+      tags:
+      - Security Monitoring
+      x-codegen-request-body-name: body
+      x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - security_pipelines_write
+      x-undo:
+        type: idempotent
+  /vulnerabilities/pipelines/due_date_rules/{due-date-rule-id}:
+    delete:
+      description: Delete a due date rule
+      operationId: DeleteDueDateRule
+      parameters:
+      - description: ID of the due date rule
+        in: path
+        name: due-date-rule-id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      responses:
+        '204':
+          description: Rule successfully deleted
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/UnprocessableEntityResponse'
+          description: The requested object cannot be found.
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Delete a due date rule
+      tags:
+      - Security Monitoring
+      x-menu-order: 7
+      x-permission:
+        operator: OR
+        permissions:
+        - security_pipelines_write
+      x-undo:
+        type: safe
+    get:
+      description: Get the details of a due date rule.
+      operationId: GetDueDateRule
+      parameters:
+      - description: ID of the due date rule
+        in: path
+        name: due-date-rule-id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DueDateRule'
+          description: Due date rule details
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get details of a due date rule
+      tags:
+      - Security Monitoring
+      x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - security_pipelines_read
+      x-undo:
+        type: safe
+    patch:
+      description: Partially update the due date rule. All fields are optional; if
+        a field is not provided, it will not be updated.
+      operationId: PatchDueDateRule
+      parameters:
+      - description: ID of the due date rule
+        in: path
+        name: due-date-rule-id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchDueDateRuleParameters'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DueDateRule'
+          description: Due date rule successfully patched
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntityResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Patch a due date rule
+      tags:
+      - Security Monitoring
+      x-codegen-request-body-name: body
+      x-menu-order: 6
+      x-permission:
+        operator: OR
+        permissions:
+        - security_pipelines_write
+      x-undo:
+        type: idempotent
+    put:
+      description: Update the whole due date rule. If an optional field is not provided,
+        it will be set to its default value.
+      operationId: UpdateDueDateRule
+      parameters:
+      - description: ID of the due date rule
+        in: path
+        name: due-date-rule-id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateDueDateRuleParameters'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DueDateRule'
+          description: Due date rule successfully updated
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntityResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Update a due date rule
+      tags:
+      - Security Monitoring
+      x-codegen-request-body-name: body
+      x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - security_pipelines_write
+      x-undo:
+        type: idempotent
+  /vulnerabilities/pipelines/inbox_rules:
+    get:
+      description: Returns the ordered list of inbox rules in the pipeline (first
+        match applies)
+      operationId: GetInboxRules
+      responses:
+        '200':
+          $ref: '#/components/responses/InboxRulesList'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get the ordered list of inbox rules
+      tags:
+      - Security Monitoring
+      x-menu-order: 8
+      x-permission:
+        operator: OR
+        permissions:
+        - security_pipelines_read
+      x-undo:
+        type: safe
+    post:
+      description: Create a new inbox rule and return the created rule.
+      operationId: CreateInboxRule
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateInboxRuleParameters'
+        description: 'Mandatory fields are the rule type and the required attributes:
+          rule name, rule details, and action.
+
+          The rule details are composed of issue types and security rule types on
+          which the rule applies. Optional security rule IDs, severities, and a tag
+          or attribute query can be provided.
+
+          The action is composed of the optional reason description.
+
+          '
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InboxRule'
+          description: Successfully created the inbox rule
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Create a new inbox rule
+      tags:
+      - Security Monitoring
+      x-codegen-request-body-name: body
+      x-given:
+        valid_inbox_rule:
+          parameters:
+          - name: body
+            value: "{\n  \"data\": {\n    \"type\": \"inbox_rules\",\n    \"attributes\":
+              {\n      \"name\": \"inbox rule 1\",\n      \"rule\": {\n        \"issue_type\":
+              \"vulnerability\",\n        \"rule_types\": [\"misconfiguration\", \"attack_path\"],\n
+              \       \"rule_ids\": [],\n        \"severities\": [\"CRITICAL\"],\n
+              \       \"query\": \"\"\n      },\n      \"action\": {\n          \"reason_description\":
+              \"items to focus on\"\n      },\n      \"enabled\": true\n    }\n  }\n}"
+          step: there is a valid "valid_inbox_rule" in the system
+      x-menu-order: 9
+      x-permission:
+        operator: OR
+        permissions:
+        - security_pipelines_write
+      x-undo:
+        operationId: DeleteInboxRule
+        parameters:
+        - name: inbox-rule-id
+          source: id
+        type: unsafe
+  /vulnerabilities/pipelines/inbox_rules/reorder:
+    post:
+      description: 'Reorder the list of inbox rules in the pipeline and return the
+        reordered list of rules.
+
+        To reorder fields you need to provide the full list of pipeline rules in the
+        new order.'
+      operationId: ReorderInboxRules
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReorderInboxRulesParameters'
+        description: 'The list of rules to reorder. The order of the rules in the
+          list will be the new order in the pipeline.
+
+          '
+        required: true
+      responses:
+        '200':
+          $ref: '#/components/responses/InboxRulesList'
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Reorder the list of inbox rules in the pipeline
+      tags:
+      - Security Monitoring
+      x-codegen-request-body-name: body
+      x-menu-order: 10
+      x-permission:
+        operator: OR
+        permissions:
+        - security_pipelines_write
+      x-undo:
+        type: idempotent
+  /vulnerabilities/pipelines/inbox_rules/{inbox-rule-id}:
+    delete:
+      description: Delete an inbox rule
+      operationId: DeleteInboxRule
+      parameters:
+      - description: ID of the inbox rule
+        in: path
+        name: inbox-rule-id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      responses:
+        '204':
+          description: Rule successfully deleted
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Delete an inbox rule
+      tags:
+      - Security Monitoring
+      x-menu-order: 14
+      x-permission:
+        operator: OR
+        permissions:
+        - security_pipelines_write
+      x-undo:
+        type: safe
+    get:
+      description: Get the details of an inbox rule.
+      operationId: GetInboxRule
+      parameters:
+      - description: ID of the inbox rule
+        in: path
+        name: inbox-rule-id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InboxRule'
+          description: Inbox rule details
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get details of an inbox rule
+      tags:
+      - Security Monitoring
+      x-menu-order: 11
+      x-permission:
+        operator: OR
+        permissions:
+        - security_pipelines_read
+      x-undo:
+        type: safe
+    patch:
+      description: Partially update the inbox rule. All fields are optional; if a
+        field is not provided, it will not be updated.
+      operationId: PatchInboxRule
+      parameters:
+      - description: ID of the inbox rule
+        in: path
+        name: inbox-rule-id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchInboxRulesParameters'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InboxRule'
+          description: Inbox rule successfully patched
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntityResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Patch an inbox rule
+      tags:
+      - Security Monitoring
+      x-codegen-request-body-name: body
+      x-menu-order: 13
+      x-permission:
+        operator: OR
+        permissions:
+        - security_pipelines_write
+      x-undo:
+        type: idempotent
+    put:
+      description: Update the whole inbox rule. If an optional field is not provided,
+        it will be set to its default value.
+      operationId: UpdateInboxRule
+      parameters:
+      - description: ID of the inbox rule
+        in: path
+        name: inbox-rule-id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateInboxRuleParameters'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InboxRule'
+          description: Inbox rule successfully updated
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntityResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Update an inbox rule
+      tags:
+      - Security Monitoring
+      x-codegen-request-body-name: body
+      x-menu-order: 12
+      x-permission:
+        operator: OR
+        permissions:
+        - security_pipelines_write
+      x-undo:
+        type: idempotent
+  /vulnerabilities/pipelines/mute_rules:
+    get:
+      description: Returns the ordered list of mute rules in the pipeline (first match
+        applies)
+      operationId: GetMuteRules
+      responses:
+        '200':
+          $ref: '#/components/responses/MuteRulesList'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get the ordered list of mute rules
+      tags:
+      - Security Monitoring
+      x-menu-order: 15
+      x-permission:
+        operator: OR
+        permissions:
+        - security_pipelines_read
+      x-undo:
+        type: safe
+    post:
+      description: Create a new mute rule and return the created rule.
+      operationId: CreateMuteRule
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateMuteRuleParameters'
+        description: 'Mandatory fields are the rule type and the required attributes:
+          rule name, rule details, and action.
+
+          The rule details are composed of issue types and security rule types on
+          which the rule applies. Optional security rule IDs, severities, and a tag
+          or attribute query can be provided.
+
+          The action is composed of the reason for muting and the rule expiration
+          date, and optionally a description of the rule.
+
+          '
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MuteRule'
+          description: Successfully created the mute rule
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Create a new mute rule
+      tags:
+      - Security Monitoring
+      x-codegen-request-body-name: body
+      x-given:
+        valid_mute_rule:
+          parameters:
+          - name: body
+            value: "{\n  \"data\": {\n    \"type\": \"mute_rules\",\n    \"attributes\":
+              {\n      \"name\": \"mute rule 1\",\n      \"rule\": {\n        \"issue_type\":
+              \"vulnerability\",\n        \"rule_types\": [\"misconfiguration\", \"attack_path\"],\n
+              \       \"rule_ids\": [],\n        \"severities\": [\"CRITICAL\"],\n
+              \       \"query\": \"\"\n      },\n      \"action\": {\n        \"reason\":
+              \"DUPLICATE\"\n      },\n      \"enabled\": true\n    }\n  }\n}"
+          step: there is a valid "valid_mute_rule" in the system
+      x-menu-order: 16
+      x-permission:
+        operator: OR
+        permissions:
+        - security_pipelines_write
+      x-undo:
+        operationId: DeleteMuteRule
+        parameters:
+        - name: mute-rule-id
+          source: id
+        type: unsafe
+  /vulnerabilities/pipelines/mute_rules/reorder:
+    post:
+      description: 'Reorder the list of mute rules in the pipeline and return the
+        reordered list of rules.
+
+        To reorder fields you need to provide the full list of pipeline rules in the
+        new order.'
+      operationId: ReorderMuteRules
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReorderMuteRulesParameters'
+        description: 'The list of rules to reorder. The order of the rules in the
+          list will be the new order in the pipeline.
+
+          '
+        required: true
+      responses:
+        '200':
+          $ref: '#/components/responses/MuteRulesList'
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Reorder the list of mute rules in the pipeline
+      tags:
+      - Security Monitoring
+      x-codegen-request-body-name: body
+      x-menu-order: 17
+      x-permission:
+        operator: OR
+        permissions:
+        - security_pipelines_write
+      x-undo:
+        type: idempotent
+  /vulnerabilities/pipelines/mute_rules/{mute-rule-id}:
+    delete:
+      description: Delete a mute rule
+      operationId: DeleteMuteRule
+      parameters:
+      - description: ID of the mute rule
+        in: path
+        name: mute-rule-id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      responses:
+        '204':
+          description: Rule successfully deleted
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Delete a mute rule
+      tags:
+      - Security Monitoring
+      x-menu-order: 21
+      x-permission:
+        operator: OR
+        permissions:
+        - security_pipelines_write
+      x-undo:
+        type: safe
+    get:
+      description: Get the details of a mute rule.
+      operationId: GetMuteRule
+      parameters:
+      - description: ID of the mute rule
+        in: path
+        name: mute-rule-id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MuteRule'
+          description: Mute rule details
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get details of a mute rule
+      tags:
+      - Security Monitoring
+      x-menu-order: 18
+      x-permission:
+        operator: OR
+        permissions:
+        - security_pipelines_read
+      x-undo:
+        type: safe
+    patch:
+      description: Partially update the mute rule. All fields are optional; if a field
+        is not provided, it will not be updated.
+      operationId: PatchMuteRule
+      parameters:
+      - description: ID of the mute rule
+        in: path
+        name: mute-rule-id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchMuteRuleParameters'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MuteRule'
+          description: Mute rule successfully patched
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntityResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Patch a mute rule
+      tags:
+      - Security Monitoring
+      x-codegen-request-body-name: body
+      x-menu-order: 20
+      x-permission:
+        operator: OR
+        permissions:
+        - security_pipelines_write
+      x-undo:
+        type: idempotent
+    put:
+      description: Update the whole mute rule. If an optional field is not provided,
+        it will be set to its default value.
+      operationId: UpdateMuteRule
+      parameters:
+      - description: ID of the mute rule
+        in: path
+        name: mute-rule-id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateMuteRuleParameters'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MuteRule'
+          description: Mute rule successfully updated
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntityResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Update a mute rule
+      tags:
+      - Security Monitoring
+      x-codegen-request-body-name: body
+      x-menu-order: 19
+      x-permission:
+        operator: OR
+        permissions:
+        - security_pipelines_write
+      x-undo:
+        type: idempotent
   x-merge-override:
     /api/v2/rum/analytics/aggregate: true
     /api/v2/rum/events: true
