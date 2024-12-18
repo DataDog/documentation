@@ -206,7 +206,7 @@ apm_config:
 Using `DD_APM_IGNORE_RESOURCES`:
 
 ```shell
-DD_APM_IGNORE_RESOURCES=(GET|POST) /healthcheck,API::NotesController#index
+DD_APM_IGNORE_RESOURCES="(GET|POST) /healthcheck,API::NotesController#index"
 ```
 
 **Notes**:
