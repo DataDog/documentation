@@ -14206,7 +14206,7 @@ components:
           $ref: '#/components/schemas/ListAPIsResponseMeta'
       type: object
     ListAPIsResponseData:
-      description: Data envelope for `ListAPIsResponse`.
+      description: Testing `ListAPIsResponse`.
       properties:
         attributes:
           $ref: '#/components/schemas/ListAPIsResponseDataAttributes'
