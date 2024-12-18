@@ -23,12 +23,11 @@ CD Visibility for Argo CD is in Preview. If you're interested in this feature, c
 
 [Argo CD][1] is a declarative GitOps continuous delivery (CD) tool for Kubernetes. It follows the GitOps pattern by using Git repositories to define the desired application state, and automates the deployment of applications in specified target environments.
 
-Datadog CD Visibility integrates with Argo CD by using [Argo CD Notifications][2].
-Argo CD notifications consists of two main components:
+Datadog CD Visibility integrates with Argo CD by using [Argo CD Notifications][2]. Argo CD notifications consists of two main components:
 1. [Triggers][3], which define _when_ to send a notification.
 2. [Templates][4], which define _what_ to send in a notification.
 
-## Setup
+## Minimal Setup
 
 The setup below uses the [Webhook notification service][5] of Argo CD in order to send notifications to Datadog.
 
@@ -71,9 +70,9 @@ data:
 ```
 
 The following fields have been added:
-1. The `cd-visibility-webhook` service targets the Datadog intake and configures the correct headers for the request. The `DD-API-KEY` header references the `dd-api-key` entry added previously in the `argocd-notifications-secret`.
-2. The `cd-visibility-template` defines what to send in the request for the `cd-visibility-webhook` service.
-3. The `cd-visibility-trigger` defines when to send the notification, and it references the `cd-visibility-template`.
+1. The `cd-visibility-webhook` service added under `data.service.webhook` targets the Datadog intake and configures the correct headers for the request. The `DD-API-KEY` header references the `dd-api-key` entry added previously in the `argocd-notifications-secret`.
+2. The `cd-visibility-template` added under `data.template` defines what to send in the request for the `cd-visibility-webhook` service.
+3. The `cd-visibility-trigger` added under `data.trigger` defines when to send the notification, and it references the `cd-visibility-template`.
 
 <div class="alert alert-warning">
 The call to populate the <code>commit_metadata</code> field is not required. The field is used to enrich the payload with Git information.
@@ -91,69 +90,29 @@ metadata:
     notifications.argoproj.io/subscribe.cd-visibility-trigger.cd-visibility-webhook: ""
     dd_env: <YOUR_ENV>
     dd_service: <YOUR_SERVICE>
+    dd_customtags: "region:us1-east, team:backend"
 ```
 
-Three annotations have been added:
-1. The notifications annotation subscribes the Argo CD application to the notification setup created above. This allows Datadog to receive deployment-related notifications for this application.
-2. The `dd_env` annotation configures the environment of the application. Replace `YOUR_ENV` above with the environment
+From the above snippet:
+1. The notifications annotation subscribes the Argo CD application to the notification setup created above. See the [Argo CD official guide][12] for more details on applications subscriptions.
+2. You can use the `dd_env` annotation to configure the environment of the application. Replace `YOUR_ENV` above with the environment
    to which this application is deploying (for example: `staging` or `prod`). If you don't set this annotation,
    the environment defaults to `none`.
-3. The `dd_service` annotation configures the service of the application. Replace `YOUR_SERVICE` above with the service
+3. You can use the `dd_service` annotation to configure the service of the application. Replace `YOUR_SERVICE` above with the service
    that the Argo CD application is deploying (for example: `transaction-service`). When this annotation is used, the service
    name is added to all the deployment executions generated from the application. Moreover, if your service is
    registered in [Service Catalog][13], the team name is also added to all the deployment executions. If your Argo CD
    application is configured to deploy more than one service, see [Tag an Argo CD application deploying multiple services](#tag-an-argo-cd-application-deploying-multiple-services).
+4. You can use the `dd_customtags` annotation to optionally add custom tags to the deployment executions generated for this Argo CD application.
+   The value should be set to a comma-separated list of tags, structured as `key:value` pairs.
 
-See the [Argo CD official guide][12] for more details on applications subscriptions.
+After you have subscribed your Argo CD application by adding the annotations above, new deployments of the application will start to appear in Datadog.
 
-After this final step is completed, you can start monitoring your Argo CD deployments in Datadog.
+The [Recommended Setup](#recommended-setup) section below contains recommended actions to improve the monitoring reported in CD Visibility.
 
-## Adding custom tags to deployment executions
+## Recommended Setup
 
-You can optionally add custom tags to the deployment executions generated from Argo CD applications deployments. These tags can be used to filter, group, and aggregate deployment executions in Datadog.
-To add custom tags, add the `dd_customtags` annotation to your Argo CD application annotations and set the value to a comma-separated list of tags, structured as `key:value` pairs. For example:
-
-```yaml
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  annotations:
-    notifications.argoproj.io/subscribe.cd-visibility-trigger.cd-visibility-webhook: ""
-    dd_env: <YOUR_ENV>
-    dd_customtags: "region:us1-east, team:backend"
-```
-
-## Tag an Argo CD application deploying multiple services
-
-If your Argo CD application deploys more than one service, Datadog can automatically infer the services deployed from an application sync. Datadog infers the services based on the Kubernetes resources that were modified.
-
-<div class="alert alert-warning">
-Automatic service discovery is not supported when <a href="https://argo-cd.readthedocs.io/en/stable/user-guide/sync-options/#server-side-apply">Server-Side Apply</a> is used.
-</div>
-
-To enable automatic service tagging, you need to [monitor your Kubernetes infrastructure using the Datadog Agent][15] and your Kubernetes resources should have the following labels:
-- `tags.datadoghq.com/service` (required): specifies the Datadog service of this resource. For more information, see [Unified Service Tagging][18].
-- `team` (optional): specifies the Datadog team of this resource. If this label is omitted, the team is automatically retrieved from [Service Catalog][13] based on the service label.
-
-Only the Kubernetes resources with the following kinds are eligible: `Deployment`, `ReplicaSet`, `StatefulSet`, `Service`, `DaemonSet`, `Pod`, `Job`, and `CronJob`.
-
-Add the following annotations to your Argo CD application:
-- `dd_multiservice`: `true`. This annotation specifies whether Datadog automatically infers the services deployed in a sync based on the changed Kubernetes resources.
-- `dd_k8s_cluster`: set to the name of the Kubernetes cluster that the Argo CD application deploys to. The name must match the name reported in the [Datadog Kubernetes product][16].
-
-For example:
-```yaml
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  annotations:
-    notifications.argoproj.io/subscribe.cd-visibility-trigger.cd-visibility-webhook: ""
-    dd_env: <YOUR_ENV>
-    dd_multiservice: true
-    dd_k8s_cluster: example-cluster
-```
-
-## Change duration to wait for resources health
+### Change duration to wait for resources health
 The duration reported in deployment events matches the sync duration in Argo CD. However, the sync duration generally represents the time spent by Argo CD to sync the Git repository state and the Kubernetes cluster state.
 This means that what happens after the sync (for example, the time spent by the Kubernetes resources to start up), is not included in the duration.
 
@@ -181,7 +140,7 @@ spec:
   backoffLimit: 0
 ```
 
-## Correlate deployments with CI pipelines
+### Correlate deployments with CI pipelines
 
 By default, the Git metadata reported in deployment events is associated with the repository that Argo CD monitors. However, a common setup is to:
 - Have an application repository, storing the source code, and a configuration repository, storing the Kubernetes manifests. Then, configure Argo CD to monitor the configuration repository, as outlined in the [Argo CD Best Practices page][17].
@@ -225,10 +184,39 @@ You can omit the `--config-repo` option if the CI is checked out to the configur
 
 **Note**: Even if a single repository is used to store both the source code and the Kubernetes manifest, you still need to run this command to correctly associate deployments and CI pipelines.
 
-
-### Validation
+#### Validation
 
 If the command has been correctly run, deployments contain Git metadata from the application repository instead of the configuration repository. Also, the deployment executions view now contains a new **Pipeline** tab representing the related CI pipeline trace.
+
+## Tag an Argo CD application deploying multiple services
+
+If your Argo CD application deploys more than one service, Datadog can automatically infer the services deployed from an application sync. Datadog infers the services based on the Kubernetes resources that were modified.
+
+<div class="alert alert-warning">
+Automatic service discovery is not supported when <a href="https://argo-cd.readthedocs.io/en/stable/user-guide/sync-options/#server-side-apply">Server-Side Apply</a> is used.
+</div>
+
+To enable automatic service tagging, you need to [monitor your Kubernetes infrastructure using the Datadog Agent][15] and your Kubernetes resources should have the following labels:
+- `tags.datadoghq.com/service` (required): specifies the Datadog service of this resource. For more information, see [Unified Service Tagging][18].
+- `team` (optional): specifies the Datadog team of this resource. If this label is omitted, the team is automatically retrieved from [Service Catalog][13] based on the service label.
+
+Only the Kubernetes resources with the following kinds are eligible: `Deployment`, `ReplicaSet`, `StatefulSet`, `Service`, `DaemonSet`, `Pod`, `Job`, and `CronJob`.
+
+Add the following annotations to your Argo CD application:
+- `dd_multiservice`: `true`. This annotation specifies whether Datadog automatically infers the services deployed in a sync based on the changed Kubernetes resources.
+- `dd_k8s_cluster`: set to the name of the Kubernetes cluster that the Argo CD application deploys to. The name must match the name reported in the [Datadog Kubernetes product][16].
+
+For example:
+```yaml
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+    notifications.argoproj.io/subscribe.cd-visibility-trigger.cd-visibility-webhook: ""
+    dd_env: <YOUR_ENV>
+    dd_multiservice: true
+    dd_k8s_cluster: example-cluster
+```
 
 ## Visualize deployments in Datadog
 
