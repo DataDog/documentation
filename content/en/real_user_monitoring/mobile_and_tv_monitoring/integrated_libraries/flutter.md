@@ -16,44 +16,7 @@ further_reading:
 
 This page lists integrated libraries you can use for Flutter applications.
 
-## GraphQL (gql_link)
-
-Datadog provides [`datadog_gql_link`][1] for use with most GraphQL Flutter libraries, including `graphql_flutter` and `ferry`.
-
-### Setup
-
-Add `datadog_gql_link` to your `pubspec.yaml` or by running `flutter pub add datadog_gql_link` from your terminal:
-
-```yaml
-dependencies:
-  # Other dependencies
-  datadog_gql_link: ^1.0.0
-```
-
-When creating your GraphQL link, add the `DatadogGqlLink` above your terminating link. For example:
-
-```dart
-final graphQlUrl = "https://example.com/graphql";
-
-final link = Link.from([
-  DatadogGqlLink(DatadogSdk.instance, Uri.parse(graphQlUrl)),
-  HttpLink(graphQlUrl),
-]);
-```
-
-If you are tracking non-GraphQL network calls with `datadog_tracking_http_client`, you need to configure the tracking plugin to ignore requests to your GraphQL endpoint. Otherwise, GraphQL resources will be reported twice, and APM traces may be broken. Ignore your GraphQL endpoint by using the `ignoreUrlPatterns` parameter added to `datadog_tracking_http_client` version 2.1.0.
-
-```dart
-final datadogConfig = DatadogConfiguration(
-    // Your configuration
-  )..enableHttpTracking(
-      ignoreUrlPatterns: [
-        RegExp('example.com/graphql'),
-      ],
-    );
-```
-
-## Automatic view tracking
+## Routing and automatic view tracking
 
 If you are using Flutter Navigator v2.0, your setup for automatic view tracking differs depending on your routing middleware. This section explains how to integrate with the most popular routing packages.
 
@@ -171,6 +134,93 @@ final routerDelegate = BeamerDelegate(
 );
 ```
 
+## Web view tracking
+
+Real User Monitoring allows you to monitor web views and eliminate blind spots in your hybrid mobile applications.
+
+The Datadog Flutter SDK has packages for working with both [`webview_flutter`][8] and [`flutter_inappwebview`][9]. For more information, refer to the [Web View Tracking documentation page][10].
+
+## gRPC
+
+Datadog provides [`datadog_grpc_interceptor`][6] for use with the [grpc Flutter package][7]. The gRPC interceptor automatically tracks gRPC requests as RUM Resources and enables distributed tracing with APM.
+
+### Setup
+
+Add `datadog_grpc_interceptor` to your `pubspec.yaml` or by running `flutter pub add datadog_grpc_interceptor` from your terminal:
+
+```yaml
+dependencies:
+  # Other dependencies
+  datadog_grpc_interceptor: ^1.1.0
+```
+
+To use this plugin, create an instance of `DatadogGrpcInterceptor`, then pass it to your generated gRPC client:
+
+```dart
+import 'package:datadog_grpc_interceptor/datadog_grpc_interceptor.dart'
+
+// Initialize Datadog - be sure to set the [DatadogConfiguration.firstPartyHosts] member
+// Enable Datadog Distributed Tracing
+final config = DatadogConfiguration(
+  // ...
+  firstParthHosts = ['localhost']
+)
+
+// Create the gRPC channel
+final channel = ClientChannel(
+  'localhost',
+  port: 50051,
+  options: ChannelOptions(
+    // ...
+  ),
+);
+
+// Create the gRPC interceptor with the supported channel
+final datadogInterceptor = DatadogGrpcInterceptor(DatadogSdk.instance, channel);
+
+// Create the gRPC client, passing in the Datadog interceptor
+final stub = GreeterClient(channel, interceptors: [datadogInterceptor]);
+```
+
+## GraphQL (gql_link)
+
+Datadog provides [`datadog_gql_link`][1] for use with most GraphQL Flutter libraries, including `graphql_flutter` and `ferry`. The link automatically tracks GraphQL requests as RUM resources, adds query names, mutation names, and variables as attributes of the Resource, and enables distributed tracing in APM.
+
+### Setup
+
+Add `datadog_gql_link` to your `pubspec.yaml` or by running `flutter pub add datadog_gql_link` from your terminal:
+
+```yaml
+dependencies:
+  # Other dependencies
+  datadog_gql_link: ^1.0.0
+```
+
+When creating your GraphQL link, add the `DatadogGqlLink` above your terminating link. For example:
+
+```dart
+final graphQlUrl = "https://example.com/graphql";
+
+final link = Link.from([
+  DatadogGqlLink(DatadogSdk.instance, Uri.parse(graphQlUrl)),
+  HttpLink(graphQlUrl),
+]);
+```
+
+If you are tracking non-GraphQL network calls with `datadog_tracking_http_client`, you need to configure the tracking plugin to ignore requests to your GraphQL endpoint. Otherwise, GraphQL resources are reported twice, and APM traces may be broken. Ignore your GraphQL endpoint by using the `ignoreUrlPatterns` parameter added to `datadog_tracking_http_client` version 2.1.0.
+
+```dart
+final datadogConfig = DatadogConfiguration(
+    // Your configuration
+  )..enableHttpTracking(
+      ignoreUrlPatterns: [
+        RegExp('example.com/graphql'),
+      ],
+    );
+```
+
+
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -180,3 +230,8 @@ final routerDelegate = BeamerDelegate(
 [3]: https://github.com/flutter/flutter/issues/112196
 [4]: https://pub.dev/packages/auto_route
 [5]: https://pub.dev/packages/beamer
+[6]: https://pub.dev/packages/datadog_grpc_interceptor
+[7]: https://pub.dev/packages/grpc
+[8]: https://pub.dev/packages/webview_flutter
+[9]: https://pub.dev/packages/flutter_inappwebview
+[10]: /real_user_monitoring/mobile_and_tv_monitoring/web_view_tracking?tab=flutter
