@@ -2,15 +2,12 @@
 title: Migrating from v1 to v2 of the Go Tracer
 description: 'Upgrade your Go tracer from v1 to v2.'
 further_reading:
-    - link: 'tracing/trace_collection/custom_instrumentation/dd-api'
+    - link: 'tracing/trace_collection/custom_instrumentation/go/dd-api'
       tag: 'Documentation'
       text: 'Get started with v1 of the Go Tracer'
-    - link: 'tracing/trace_collection/custom_instrumentation/dd-api-v2'
-      tag: 'Documentation'
-      text: 'Get started with v2 of the Go Tracer'
 ---
 
-<div class="alert alert-info">This documentation assumes that you are using version v1.x of the Go tracer. If you are already using v2.x, see <a href="tracing/trace_collection/custom_instrumentation/dd-api">Go Custom Instrumentation using the Datadog API</a> instead.</div>
+<div class="alert alert-info">This documentation assumes that you are using version v1.x of the Go tracer. If you are already using v2.x, see <a href="/tracing/trace_collection/custom_instrumentation/go/dd-api">Go Custom Instrumentation using the Datadog API</a> instead.</div
 
 This guide explains how to migrate from Go Tracer v1.x to v2. 
 
