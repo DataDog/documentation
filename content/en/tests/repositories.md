@@ -30,7 +30,7 @@ The [Repositories view][1] displays aggregated health metrics for the default br
 Use the Repositories page to:
 - See the total number of flaky tests in each repo.
 - Track whether tests are becoming more or less unreliable over time.
-- See the test status for the most recent commit in each repository.
+- See the test status for the most recent commit in each repo.
 - See how many {{< tooltip glossary="test service" >}}s are associated with each repo.
 
 <!-- vale Datadog.pronouns = NO -->
