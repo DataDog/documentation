@@ -32,7 +32,7 @@ The Go Datadog Trace Library has a [version support policy][2] defined for Go ve
 
 Integrate the Go tracer with the following list of web frameworks using one of the following helper packages.
 
-{{% tabs %}}
+{{< tabs >}}
 {{% tab "v1" %}}
 **Note**: The [integrations documentation][5] provides a detailed overview of the supported packages and their APIs, along with usage examples.
 
@@ -148,9 +148,8 @@ Packages must be imported with:
 ```go
 import "github.com/DataDog/dd-trace-go/contrib/<PACKAGE_DIR>/<PACKAGE_NAME>/v2"
 ```
-
 {{% /tab %}}
-
+{{< /tabs >}}
 
 ## Further Reading
 
