@@ -38,7 +38,7 @@ Ensure [Test Optimization][1] is configured for your test runs.
 {{< tabs >}}
 
 {{% tab "Java" %}}
-After you have set up Test Optimization, you can configure Auto Test Retries from the [Test Service Settings page][1].
+After you have set up Test Optimization, you can configure Auto Test Retries from the [Test Optimization Settings page][1].
 
 {{< img src="continuous_integration/auto_test_retries_test_settings.png" alt="Auto Test Retries in Test Service Settings." style="width:100%" >}}
 
@@ -53,7 +53,7 @@ This behavior can be fine-tuned with the following environment variables:
 {{% /tab %}}
 
 {{% tab "Javascript" %}}
-After you have set up Test Optimization, you can configure Auto Test Retries from the [Test Service Settings page][1].
+After you have set up Test Optimization, you can configure Auto Test Retries from the [Test Optimization Settings page][1].
 
 {{< img src="continuous_integration/auto_test_retries_test_settings.png" alt="Auto Test Retries in Test Service Settings." style="width:100%" >}}
 
@@ -67,13 +67,13 @@ This behavior can be fine-tuned with the following environment variables:
 
 [jest-image-snapshot][2] is incompatible with `jest.retryTimes` unless `customSnapshotIdentifier` is passed (see [jest-image-snapshot docs][3]) to `toMatchImageSnapshot`. Therefore, auto test retries do not work unless `customSnapshotIdentifier` is used.
 
-[1]: https://app.datadoghq.com/ci/settings/test-service
+[1]: https://app.datadoghq.com/ci/settings/test-optimization
 [2]: https://www.npmjs.com/package/jest-image-snapshot
 [3]: https://github.com/americanexpress/jest-image-snapshot?tab=readme-ov-file#jestretrytimes
 {{% /tab %}}
 
 {{% tab "Ruby" %}}
-After you have set up Test Optimization, you can configure Auto Test Retries from the [Test Service Settings page][1].
+After you have set up Test Optimization, you can configure Auto Test Retries from the [Test Optimization Settings page][1].
 
 {{< img src="continuous_integration/auto_test_retries_test_settings.png" alt="Auto Test Retries in Test Service Settings." style="width:100%" >}}
 
@@ -85,11 +85,11 @@ This behavior can be fine-tuned with the following environment variables:
 * `DD_CIVISIBILITY_TOTAL_FLAKY_RETRY_COUNT` - a non-negative number to set the maximum total number of failed tests to retry (default: 1000)
 
 
-[1]: https://app.datadoghq.com/ci/settings/test-service
+[1]: https://app.datadoghq.com/ci/settings/test-optimization
 {{% /tab %}}
 
 {{% tab ".NET" %}}
-After you set up Test Visibility, you can configure Auto Test Retries from the [Test Service Settings page][1].
+After you set up Test Visibility, you can configure Auto Test Retries from the [Test Optimization Settings page][1].
 
 {{< img src="continuous_integration/auto_test_retries_test_settings.png" alt="Auto Test Retries enabled in Test Service Settings." style="width:100%" >}}
 
@@ -101,14 +101,14 @@ Customize the Auto Test Retries with the following environment variables:
 * `DD_CIVISIBILITY_TOTAL_FLAKY_RETRY_COUNT` - a non-negative number to set the maximum total number of failed tests to retry (default: 1000)
 
 
-[1]: https://app.datadoghq.com/ci/settings/test-service
+[1]: https://app.datadoghq.com/ci/settings/test-optimization
 {{% /tab %}}
 
 {{% tab "Go" %}}
 
 <div class="alert alert-info">Test optimization for Go is in Preview.</div>
 
-After you set up Test Visibility, you can configure Auto Test Retries from the [Test Service Settings page][1].
+After you set up Test Visibility, you can configure Auto Test Retries from the [Test Optimization Settings page][1].
 
 {{< img src="continuous_integration/auto_test_retries_test_settings.png" alt="Auto Test Retries enabled in Test Service Settings." style="width:100%" >}}
 
@@ -120,7 +120,7 @@ Customize the Auto Test Retries with the following environment variables:
 * `DD_CIVISIBILITY_TOTAL_FLAKY_RETRY_COUNT` - a non-negative number to set the maximum total number of failed tests to retry (default: 1000)
 
 
-[1]: https://app.datadoghq.com/ci/settings/test-service
+[1]: https://app.datadoghq.com/ci/settings/test-optimization
 {{% /tab %}}
 
 {{< /tabs >}}
@@ -131,7 +131,7 @@ You can query the retried tests in the [Test Optimization Explorer][2]: they hav
 
 ## Troubleshooting
 
-If you suspect there are any issues with Auto Test Retries, navigate to the [Test Service Settings page][4], look for your test service, and click **Configure**. Disable Auto Test Retries by clicking on the toggle.
+If you suspect there are any issues with Auto Test Retries, navigate to the [Test Optimization Settings page][4], look for your repository, and click **Configure**. Disable Auto Test Retries by clicking on the toggle.
 
 ## Further Reading
 
@@ -140,4 +140,4 @@ If you suspect there are any issues with Auto Test Retries, navigate to the [Tes
 [1]: /tests/setup/
 [2]: /tests/explorer/
 [3]: /tests/flaky_test_management/early_flake_detection
-[4]: https://app.datadoghq.com/ci/settings/test-service
+[4]: https://app.datadoghq.com/ci/settings/test-optimization
