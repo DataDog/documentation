@@ -14,7 +14,7 @@ aliases:
   - /security/cloud_security_management/guide/agentless_terraform
 ---
 
-If you've already [set up Cloud Security Management][4] and want to add a new cloud account or enable [Agentless Scanning][1] on an existing integrated cloud account, you can use either Terraform, [AWS CloudFormation][2] or Azure Resource Manager. This article provides detailed instructions for the Terraform approach.
+If you've already [set up Cloud Security Management][4] and want to add a new cloud account or enable [Agentless Scanning][1] on an existing integrated cloud account, you can use either Terraform, [AWS CloudFormation][2] or [Azure Resource Manager][5]. This article provides detailed instructions for the Terraform approach.
 
 <div class="alert alert-info">If you're setting up Cloud Security Management for the first time, you can follow the <a href="/security/cloud_security_management/setup/agentless_scanning/quick_start">quick start workflow</a>, which uses AWS CloudFormation to enable Agentless Scanning.</div>
 
@@ -93,3 +93,4 @@ For usage examples, refer to our [Github repository](https://github.com/DataDog/
 [2]: /security/cloud_security_management/setup/agentless_scanning/cloudformation
 [3]: https://github.com/DataDog/terraform-module-datadog-agentless-scanner/blob/main/README.md#uninstall
 [4]: https://app.datadoghq.com/security/configuration/csm/setup
+[5]: /security/cloud_security_management/setup/agentless_scanning/azure_resource_manager
