@@ -69,8 +69,8 @@ datadog:
 
     # Enables Container Vulnerability Management
     # Image collection is enabled by default with Datadog Helm version `>= 3.46.0`
-    # containerImageCollection:
-    #   enabled: false
+      containerImageCollection:
+        enabled: false
 ```
 
 ## Further Reading
