@@ -31988,7 +31988,8 @@ paths:
         != null BEGIN\n  sleep(5 seconds)  # Avoid running into rate limit\n  response
         := GetMonthlyCostAttribution(start_month, end_month, next_record_id=cursor)\n
         \ cursor := response.metadata.pagination.next_record_id\nEND\n```\n\nThis
-        endpoint is only accessible for [parent-level organizations](https://docs.datadoghq.com/account_management/multi_organization/)."
+        endpoint is only accessible for [parent-level organizations](https://docs.datadoghq.com/account_management/multi_organization/).
+        This endpoint is not available in the Government (US1-FED) site."
       operationId: GetMonthlyCostAttribution
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to month: `[YYYY-MM]`
