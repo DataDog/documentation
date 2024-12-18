@@ -2,14 +2,12 @@
 title: Data Retention Periods
 disable_sidebar: true
 type: data_retention_periods
-aliases:
-    - /developers/guide/data-collection-resolution-retention
 further_reading:
     - link: '/data_security/'
       tag: 'Documentation'
       text: 'Review the main categories of data submitted to Datadog'
 filter_all: All
-content: "The following table lists the default data retention period by data type and product. Optionally, search by keyword or description text to find the data type or product you're interested in. For collection interval and minimum resolution information, see [Datadog Data Collection and Resolution](/developers/guide/data-collection-resolution-retention/). Still need help? Contact [Datadog support](/help)."
+content: "The following table lists the default data retention period by data type and product. Optionally, search by keyword or description text to find the data type or product you're interested in. For collection interval and minimum resolution information, see [Datadog Data Collection and Resolution](/developers/guide/data-collection-resolution-retention). Still need help? Contact [Datadog support](/help)."
 attributes: 
   - product: APM
     data_type: |
