@@ -101,7 +101,7 @@ The [CSM Vulnerabilities Explorer][1] helps you address vulnerabilities that hav
 {{< img src="security/vulnerabilities/csm-vm-explorer-actionability.png" alt="The CSM Vulnerability Explorer displaying a vulnerability and the actions a user can take to remediate it" width="100%">}}
 
 ## Automation and Jira integration
-Make CSM Vulnerabilities part of your daily workflow by setting up [security notification rules][17] and [automation pipelines (in preview)][20]:
+Make CSM Vulnerabilities part of your daily workflow by setting up [security notification rules][17] and [automation pipelines (in Preview)][20]:
 - Get alerted upon detection of an exploitable vulnerability for your scope
 - Automatically create Jira tickets
 - Configure SLAs to remediate vulnerabilities
