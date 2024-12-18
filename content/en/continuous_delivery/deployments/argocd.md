@@ -116,7 +116,7 @@ The [Recommended Setup](#recommended-setup) section below contains recommended a
 The duration reported in deployment events matches the sync duration in Argo CD. However, the sync duration generally represents the time spent by Argo CD to sync the Git repository state and the Kubernetes cluster state.
 This means that what happens after the sync (for example, the time spent by the Kubernetes resources to start up) is not included in the duration.
 
-To change the duration reported to wait until the configured resources have started up and reached a healthy state, you can add a [PostSync Hook][19] to the resources that your Argo CD application monitors.
+To change the duration reported to wait until the configured resources have started up and reached a healthy state, add a new no-op resource monitored by your Argo CD application, with a [PostSync Hook][19] annotation.
 The PostSync Hook will run after all the resources have reached a Healthy state, and the Argo CD sync will wait on the PostSync Hook result to update the application status as Healthy.
 
 Below is represented an example of a PostSync Hook Job that runs a simple `echo` command.
