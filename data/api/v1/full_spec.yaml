@@ -844,8 +844,15 @@ components:
             Only hosts that match one of the defined tags are imported into Datadog.'
           example: key:value,filter:example
           type: string
-        metrics_config:
-          $ref: '#/components/schemas/AzureAccountMetricsConfig'
+        metrics_enabled:
+          description: Enable Azure metrics for your organization.
+          example: true
+          type: boolean
+        metrics_enabled_default:
+          description: Enable Azure metrics for your organization for resource providers
+            where no resource provider config is specified.
+          example: true
+          type: boolean
         new_client_id:
           description: Your New Azure web application ID.
           example: new1c7f6-1234-5678-9101-3fcbf464test
@@ -860,37 +867,26 @@ components:
             monitored by this app registration.
           example: true
           type: boolean
+        resource_provider_configs:
+          description: Configuration settings applied to resources from the specified
+            Azure resource providers.
+          items:
+            $ref: '#/components/schemas/ResourceProviderConfig'
+          type: array
         tenant_name:
           description: Your Azure Active Directory ID.
           example: testc44-1234-5678-9101-cc00736ftest
           type: string
+        usage_metrics_enabled:
+          description: Enable azure.usage metrics for your organization.
+          example: true
+          type: boolean
       type: object
     AzureAccountListResponse:
       description: Accounts configured for your organization.
       items:
         $ref: '#/components/schemas/AzureAccount'
       type: array
-    AzureAccountMetricsConfig:
-      description: 'Dictionary containing the key `excluded_resource_providers` which
-        has to be a list of Microsoft Azure Resource Provider names.
-
-        This feature is currently being beta tested.
-
-        In order to enable all resource providers for metric collection, pass:
-
-        `metrics_config: {"excluded_resource_providers": []}` (i.e., an empty list
-        for `excluded_resource_providers`).'
-      properties:
-        excluded_resource_providers:
-          description: List of Microsoft Azure Resource Providers to exclude from
-            metric collection.
-          example:
-          - Microsoft.Sql
-          - Microsoft.Cdn
-          items:
-            type: string
-          type: array
-      type: object
     CancelDowntimesByScopeRequest:
       description: Cancel downtimes according to scope.
       properties:
@@ -10315,6 +10311,19 @@ components:
       - target
       - lookup_enrichment_table
       - type
+      type: object
+    ResourceProviderConfig:
+      description: Configuration settings applied to resources from the specified
+        Azure resource provider.
+      properties:
+        metrics_enabled:
+          description: Collect metrics for resources from this provider.
+          example: true
+          type: boolean
+        namespace:
+          description: The provider namespace to apply this configuration to.
+          example: Microsoft.Compute
+          type: string
       type: object
     ResponseMetaAttributes:
       description: Object describing meta attributes of response.
@@ -27748,10 +27757,13 @@ paths:
               \"TestingRh2nx664kUy5dIApvM54T4AtO\",\n  \"container_app_filters\":
               \"key:value,filter:example\",\n  \"cspm_enabled\": true,\n  \"custom_metrics_enabled\":
               true,\n  \"errors\": [\"*\"],\n  \"host_filters\": \"key:value,filter:example\",\n
+              \ \"metrics_enabled\": true,\n  \"metrics_enabled_default\": true,\n
               \ \"new_client_id\": \"{{ uuid }}\",\n  \"new_tenant_name\": \"{{ uuid
-              }}\",\n  \"resource_collection_enabled\": true,\n  \"metrics_config\":
-              {\n    \"excluded_resource_providers\": [\"Microsoft.Sql\", \"Microsoft.Cdn\"]\n
-              \ },\n  \"tenant_name\": \"{{ uuid }}\"\n}"
+              }}\",\n  \"resource_collection_enabled\": true,\n  \"resource_provider_configs\":
+              [\n    {\n      \"namespace\": \"Microsoft.Compute\",\n      \"metrics_enabled\":
+              false\n    },\n    {\n      \"namespace\": \"Microsoft.Web\",\n      \"metrics_enabled\":
+              false\n    }\n  ],\n  \"tenant_name\": \"{{ uuid }}\",\n  \"usage_metrics_enabled\":
+              true\n}"
           step: there is a valid "azure_account" in the system
       x-menu-order: 2
       x-permission:
