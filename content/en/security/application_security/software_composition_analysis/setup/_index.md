@@ -44,9 +44,9 @@ Before setting up Software Composition Analysis, ensure the following prerequisi
 
 ### Settings page
 
-Alternatively, you can enable Software Composition Analysis through the [Settings] page.
+Alternatively, you can enable Software Composition Analysis through the [Settings][3] page.
 
-1. Navigate to the [Settings] page and select **Get Started in Software Composition Analysis (SCA)**.
+1. Navigate to the [Settings][3] page and select **Get Started** in **Software Composition Analysis (SCA)**.
 2. For static analysis in source code, select **Select Repositories**.
 3. Select **Add Github Account** and follow the [instructions][4] to create a new GitHub Application.
 4. Once the GitHub account is set up, select **Select Repositories** and enable **Software Composition Analysis (SCA)**.
