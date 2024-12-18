@@ -66,7 +66,7 @@ To highlight the critical path on the trace, click on the `Critical path` checkb
 
 The critical path highlights the spans that you need to speed up if you want to reduce the overall execution time of your pipeline. If a CI job is on the critical path, it means it is part of the longest path through the trace in terms of execution time. Speeding up the CI Jobs on the critical path is strictly necessary to speed up the CI pipeline.
 
-You can use [this guide][11] to identify those CI Jobs on the critical path with the goal of determining which CI jobs to focus on to reduce the overall duration of the CI pipelines.
+You can use [this guide][11] to identify the CI jobs on the critical path to help you determine which jobs to prioritize in order to reduce the overall duration of the CI pipelines.
 
 ### Explore connections to services, resources, and network events
 
