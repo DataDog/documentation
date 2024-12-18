@@ -42,7 +42,7 @@ If you are using a version previous to 5.17.0, initialize the RUM SDK and config
     ...
 });
 ```
-{{% /collapse-content %}} 
+{{% /collapse-content %}}
 
 {{% collapse-content title="CDN async" level="h4" %}}
 ```javascript
@@ -54,7 +54,7 @@ window.DD_RUM.onReady(function() {
     })
 })
 ```
-{{% /collapse-content %}} 
+{{% /collapse-content %}}
 
 {{% collapse-content title="CDN sync" level="h4" %}}
 ```javascript
@@ -577,15 +577,15 @@ Flagsmith does not currently support this integration. Create a ticket with Flag
 {{< tabs >}}
 {{% tab "Browser" %}}
 
-When initializing the GrowthBook SDK, report feature flag evaluations to Datadog inside the `trackingCallback` function.
+When initializing the GrowthBook SDK, report feature flag evaluations to Datadog by using the `onFeatureUsage` callback.
 
 For more information about initializing GrowthBook's SDK, see [GrowthBook's JavaScript SDK documentation][1].
 
 ```javascript
 const gb = new GrowthBook({
   ...,
-  trackingCallback: (experiment, result) => {
-    datadogRum.addFeatureFlagEvaluation(experiment.key, result.key);
+  onFeatureUsage: (featureKey, result) => {
+    datadogRum.addFeatureFlagEvaluation(featureKey, result.value);
   },
 });
 
@@ -597,35 +597,23 @@ gb.init();
 {{% /tab %}}
 {{% tab "iOS" %}}
 
-When initializing the GrowthBook SDK, report feature flag evaluations to Datadog inside the `trackingCallback` function.
-
-For more information about initializing GrowthBook's SDK, see [GrowthBook's iOS SDK documentation][1].
-
-```swift
-let gb: GrowthBookSDK = GrowthBookBuilder(
-  ...,
-  trackingCallback: { experiment, experimentResult in
-    RUMMonitor.shared().addFeatureFlagEvaluation(featureFlag: experiment.key, variation: experimentResult.key)
-  }
-).initializer()
-```
-
-[1]: https://docs.growthbook.io/lib/swift#quick-usage
+Currently GrowthBook does not support this integration. Reach out to GrowthBook to request this feature.
 
 {{% /tab %}}
 {{% tab "Android" %}}
 
-When initializing the GrowthBook SDK, report feature flag evaluations to Datadog inside the `trackingCallback` function.
+When initializing the GrowthBook SDK, report feature flag evaluations to Datadog by calling `setFeatureUsageCallback`.
 
 For more information about initializing GrowthBook's SDK, see [GrowthBook's Android SDK documentation][1].
 
 ```kotlin
-val gb = GBSDKBuilder(
-  ...,
-  trackingCallback = { gbExperiment, gbExperimentResult ->
-    GlobalRumMonitor.get().addFeatureFlagEvaluation(gbExperiment.key, gbExperimentResult.key);
-  },
-).initialize()
+val gbBuilder = GBSDKBuilder(...)
+
+gbBuilder.setFeatureUsageCallback { featureKey, result ->
+  GlobalRumMonitor.get().addFeatureFlagEvaluation(featureKey, result.value);
+}
+
+val gb = gbBuilder.initialize()
 ```
 
 [1]: https://docs.growthbook.io/lib/kotlin#quick-usage
@@ -633,17 +621,18 @@ val gb = GBSDKBuilder(
 {{% /tab %}}
 {{% tab "Flutter" %}}
 
-When initializing the GrowthBook SDK, report feature flag evaluations to Datadog inside the `growthBookTrackingCallBack` function.
+When initializing the GrowthBook SDK, report feature flag evaluations to Datadog by calling `setFeatureUsageCallback`.
 
 For more information about initializing GrowthBook's SDK, see [GrowthBook's Flutter SDK documentation][1].
 
 ```dart
-final GrowthBookSDK sdkInstance = GBSDKBuilderApp(
-  ...,
-  growthBookTrackingCallBack: (gbExperiment, gbExperimentResult) {
-    DatadogSdk.instance.rum?.addFeatureFlagEvaluation(gbExperiment.key, gbExperimentResult.key);
-  },
-).initialize();
+final gbBuilder = GBSDKBuilderApp(...);
+
+gbBuilder.setFeatureUsageCallback((featureKey, result) {
+  DatadogSdk.instance.rum?.addFeatureFlagEvaluation(featureKey, result.value);
+});
+
+final gb = await gbBuilder.initialize();
 ```
 
 [1]: https://docs.growthbook.io/lib/flutter#quick-usage
@@ -651,19 +640,19 @@ final GrowthBookSDK sdkInstance = GBSDKBuilderApp(
 {{% /tab %}}
 {{% tab "React Native" %}}
 
-When initializing the GrowthBook SDK, report feature flag evaluations to Datadog inside the `trackingCallback` function.
+When initializing the GrowthBook SDK, report feature flag evaluations to Datadog by using the `onFeatureUsage` callback.
 
 For more information about initializing GrowthBook's SDK, see [GrowthBook's React Native SDK documentation][1].
 
 ```javascript
-// Create a GrowthBook instance
 const gb = new GrowthBook({
   ...,
-  trackingCallback: (experiment, result) => {
-    DdRum.addFeatureFlagEvaluation(experiment.key, result.key);
+  onFeatureUsage: (featureKey, result) => {
+    datadogRum.addFeatureFlagEvaluation(featureKey, result.value);
   },
 });
-gb.init()
+
+gb.init();
 ```
 
 [1]: https://docs.growthbook.io/lib/react-native#step-1-configure-your-app
