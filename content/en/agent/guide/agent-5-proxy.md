@@ -1,6 +1,7 @@
 ---
 title: Agent 5 proxy configuration
 disable_toc: false
+private: true
 ---
 
 ## Overview
