@@ -1,5 +1,5 @@
 ---
-title: Monitoring APIs
+title: Monitoring Endpoints
 further_reading:
 - link: "/tracing/api_catalog/get_started/"
   tag: "Documentation"
@@ -15,6 +15,7 @@ further_reading:
   text: "Application Security Monitoring"
 aliases:
     - /tracing/api_catalog/monitor_apis/
+    - /api_catalog/monitor_apis/
 ---
 
 ## Overview
@@ -58,8 +59,8 @@ Powered by Datadog [Application Security Management (ASM)][4], the **SECURITY SI
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /api_catalog/add_entries/#register-automatically-detected-endpoints
-[2]: /api_catalog/owners_and_tags/#establishing-owners
+[1]: /service_catalog/customize/create_entries
+[2]: /service_catalog/manage
 [3]: /synthetics/api_tests/http_tests/
 [4]: /security/application_security/threats/
 [5]: /monitors/
