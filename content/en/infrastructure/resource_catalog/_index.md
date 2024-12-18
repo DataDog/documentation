@@ -92,7 +92,7 @@ To filter the list to see a subset of resources you're most interested in, selec
 
 {{< img src="/infrastructure/resource_catalog/resource-catalog_security_tab_list.png" alt="Resource Catalog Security tab sorting by the list view" >}}
 
-**Pro Tip**: If you use [Datadog Teams][4], select the **Teams** toggle on the left panel, then select the toggle for the teams to which you're assigned to view only resources assigned to those teams. In addition, export your Resource Catalog list as a CSV file from the top right corner of the list.
+**Note**: If you use [Datadog Teams][4], select the **Teams** toggle on the left panel, then select the toggle for the teams to which you're assigned to view only the resources assigned to those teams. In addition, you can export your Resource Catalog list as a CSV file from the top right corner of the list.
 
 To access the relevant cloud console for any resource in your list, click on a resource to open a side panel. Then, click the **Open Resource** dropdown in the top right corner to be redirected.
 
