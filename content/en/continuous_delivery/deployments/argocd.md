@@ -29,7 +29,7 @@ Datadog CD Visibility integrates with Argo CD by using [Argo CD Notifications][2
 
 ## Minimal Setup
 
-The setup below uses the [Webhook notification service][5] of Argo CD in order to send notifications to Datadog.
+The setup below uses the [Webhook notification service][5] of Argo CD to send notifications to Datadog.
 
 First, add your [Datadog API Key][11] in the `argocd-notifications-secret` secret with the `dd-api-key` key. See [the Argo CD guide][2] for information on modifying the `argocd-notifications-secret`.
 
