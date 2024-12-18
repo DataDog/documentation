@@ -96,12 +96,12 @@ The [CSM Vulnerabilities Explorer][1] helps you investigate all vulnerabilities 
 
 Focus on exploitable vulnerabilities first, using the Datadog Severity Score, combining the base CVSS score with many risk factors, including sensitive data, environment sensitivity, exposure to attacks, exploit availability, or threat intelligence sources.
 
-The [CSM Vulnerabilities Explorer][1] helps you address vulnerabilities that have fixes available, and provides guided remediation steps, helping Dev and Ops teams fix vulnerabilities faster. Triage, mute, comment, and assign vulnerabilities to easily manage their lifecycle.
+The [CSM Vulnerabilities Explorer][1] helps you address vulnerabilities that have fixes available, and provides guided remediation steps, helping Dev and Ops teams fix vulnerabilities faster. Triage, mute, comment, and assign vulnerabilities to manage their lifecycle.
 
 {{< img src="security/vulnerabilities/csm-vm-explorer-actionability.png" alt="The CSM Vulnerability Explorer displaying a vulnerability and the actions a user can take to remediate it" width="100%">}}
 
 ## Automation and Jira integration
-Make CSM Vulnerabilities part of your daily workflow by setting up [security notification rules][17]:
+Make CSM Vulnerabilities part of your daily workflow by setting up [security notification rules][17] and [automation pipelines (in preview)][20]:
 - Get alerted upon detection of an exploitable vulnerability for your scope
 - Automatically create Jira tickets
 - Configure SLAs to remediate vulnerabilities
@@ -109,7 +109,7 @@ Make CSM Vulnerabilities part of your daily workflow by setting up [security not
 {{< img src="security/vulnerabilities/csm-notifications.png" alt="The notification rule setup screen" width="100%">}}
 
 ## Tracking and reporting
-Easily track and report progress to stakeholders by using the [out-of-the-box CSM Vulnerabilities dashboard][18]. Customize this dashboard to your own needs by cloning and tweaking it as needed.
+Track and report progress to stakeholders by using the [out-of-the-box CSM Vulnerabilities dashboard][18]. Customize this dashboard to your own needs by cloning and tweaking it as needed.
 
 {{< img src="security/vulnerabilities/csm-vm-reporting.png" alt="The CSM Vulnerabilities dashboard" width="100%">}}
 
@@ -144,6 +144,7 @@ The following video provides an overview of how to enable and use CSM Vulnerabil
 [17]: https://app.datadoghq.com/security/configuration/notification-rules
 [18]: https://app.datadoghq.com/dash/integration/csm_vulnerabilities?fromUser=true&refresh_mode=sliding&from_ts=1733323465252&to_ts=1733928265252&live=true
 [19]: https://app.datadoghq.com/security/catalog/libraries
+[20]: https://www.datadoghq.com/product-preview/security-automation-pipelines/
 
 ## Further reading
 
