@@ -148,5 +148,5 @@ With [Service Catalog metadata schema 2.2][5], you can specify the type and lang
 [8]: /tracing/guide/service_overrides/#remove-service-overrides
 [9]: /tracing/guide/service_overrides/
 [10]: /service_catalog/service_definitions/#add-metadata-with-automation
-[11]: /service_catalog/endpoint_list/discover_endpoints/
+[11]: /service_catalog/endpoints/discover_endpoints/
 [12]: /integrations/github/

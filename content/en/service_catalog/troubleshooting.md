@@ -78,4 +78,4 @@ API Catalog is based on APM tracing, so info from traffic is displayed only when
 [3]: /tracing/guide/setting_primary_tags_to_scope
 [4]: /help/
 [5]: /tracing/trace_pipeline/ingestion_controls/
-[6]: /api_catalog/add_metadata/#metadata-structure-and-supported-versions
+[6]: /api_catalog/add_metadata/

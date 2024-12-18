@@ -1,5 +1,5 @@
 ---
-title: Datadog Endpoint List
+title: Endpoint Observability
 further_reading:
 - link: "https://www.datadoghq.com/blog/monitor-apis-datadog-api-catalog/"
   tag: "Blog"
@@ -111,7 +111,7 @@ Partner APIs
 [1]: https://app.datadoghq.com/apis/catalog
 [3]: /api_catalog/explore_apis/
 [6]: /service_catalog/manage
-[7]: /endpoint_list/monitor_endpoints/
+[7]: /endpoints/monitor_endpoints/
 [8]: /tracing/trace_collection/
 [9]: /service_catalog/customize/create_entries
 [10]: /service_catalog/manage/#add-metadata-to-endpoints

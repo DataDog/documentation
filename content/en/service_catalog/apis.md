@@ -28,8 +28,6 @@ algolia:
   tags: ['service definition']
 ---
 
-## Overview
-
 This page outlines Datadog's API reference documentation for each schema version.
 
 ## v3.0 and later

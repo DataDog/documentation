@@ -346,7 +346,7 @@ Create a detailed roll-out methodology in the [build][41] phase by focusing on t
 [30]: /service_catalog/
 [31]: /service_management/events/
 [32]: /error_tracking/
-[33]: /endpoint_list/
+[33]: /endpoints/
 [34]: /agent/fleet_automation/
 [35]: /agent/remote_config/
 [36]: /agent/remote_config/?tab=configurationyamlfile\#supported-products-and-feature-capabilities
