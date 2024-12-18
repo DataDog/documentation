@@ -5,6 +5,7 @@ aliases:
   - /tracing/service_catalog/service_definition_api
   - /service_catalog/service_definition_api
   - /tracing/api_catalog/api_catalog_api/
+  - /api_catalog/api_catalog_api
 further_reading:
 - link: "/tracing/service_catalog/"
   tag: "Documentation"

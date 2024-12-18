@@ -5,6 +5,8 @@ aliases:
   - /service_catalog/investigating/
   - /tracing/service_catalog/guides/understanding-service-configuration
   - /service_catalog/guides/understanding-service-configuration/
+  - /api_catalog/add_metadata
+  - /api_catalog/owners_and_tags
 further_reading:
 - link: "/tracing/service_catalog/service_definition_api/"
   tag: "Documentation"
