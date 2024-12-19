@@ -133,6 +133,12 @@ Consult the list of [traces][7] associated with this resource in the [Trace sear
 
 {{< img src="tracing/visualization/resource/traces_list.png" alt="A list of traces associated with a particular resource that shows the timestamp, duration, status, and latency breakdown of each trace" style="width:90%;">}}
 
+## Endpoint definition
+
+An endpoint is an HTTP resource exposed by a service at a specific URL path.
+
+In case of a resource that represents an endpoint, a new **Definition** section will be added to the resource page
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
