@@ -344,8 +344,16 @@
     "summary": "Get active billing dimensions for cost attribution"
   },
   "GetMonthlyCostAttribution": {
-    "description": "Get monthly cost attribution by tag across multi-org and single root-org accounts.\nCost Attribution data for a given month becomes available no later than the 19th of the following month.\nThis API endpoint is paginated. To make sure you receive all records, check if the value of `next_record_id` is\nset in the response. If it is, make another request and pass `next_record_id` as a parameter.\nPseudo code example:\n```\nresponse := GetMonthlyCostAttribution(start_month, end_month)\ncursor := response.metadata.pagination.next_record_id\nWHILE cursor != null BEGIN\n  sleep(5 seconds)  # Avoid running into rate limit\n  response := GetMonthlyCostAttribution(start_month, end_month, next_record_id=cursor)\n  cursor := response.metadata.pagination.next_record_id\nEND\n```\n\nThis endpoint is only accessible for [parent-level organizations](https://docs.datadoghq.com/account_management/multi_organization/).",
+    "description": "Get monthly cost attribution by tag across multi-org and single root-org accounts.\nCost Attribution data for a given month becomes available no later than the 19th of the following month.\nThis API endpoint is paginated. To make sure you receive all records, check if the value of `next_record_id` is\nset in the response. If it is, make another request and pass `next_record_id` as a parameter.\nPseudo code example:\n```\nresponse := GetMonthlyCostAttribution(start_month, end_month)\ncursor := response.metadata.pagination.next_record_id\nWHILE cursor != null BEGIN\n  sleep(5 seconds)  # Avoid running into rate limit\n  response := GetMonthlyCostAttribution(start_month, end_month, next_record_id=cursor)\n  cursor := response.metadata.pagination.next_record_id\nEND\n```\n\nThis endpoint is only accessible for [parent-level organizations](https://docs.datadoghq.com/account_management/multi_organization/). This endpoint is not available in the Government (US1-FED) site.",
     "summary": "Get Monthly Cost Attribution"
+  },
+  "ListAllCSMAgents": {
+    "description": "Get the list of all CSM Agents running on your hosts and containers.",
+    "summary": "Get all CSM Agents"
+  },
+  "ListAllCSMServerlessAgents": {
+    "description": "Get the list of all CSM Serverless Agents running on your hosts and containers.",
+    "summary": "Get all CSM Serverless Agents"
   },
   "ListCurrentUserApplicationKeys": {
     "description": "List all application keys available for current user",
@@ -392,20 +400,6 @@
     "summary": "Update items of a dashboard list",
     "request_description": "New dashboards of the dashboard list.",
     "request_schema_description": "Request containing the list of dashboards to update to."
-  },
-  "CreateDataDeletionRequest": {
-    "description": "Creates a data deletion request by providing a query and a timeframe targeting the proper data.",
-    "summary": "Creates a data deletion request",
-    "request_description": "",
-    "request_schema_description": "Object needed to create a data deletion request."
-  },
-  "GetDataDeletionRequests": {
-    "description": "Gets a list of data deletion requests based on several filter parameters.",
-    "summary": "Gets a list of data deletion requests"
-  },
-  "CancelDataDeletionRequest": {
-    "description": "Cancels a data deletion request by providing its ID.",
-    "summary": "Cancels a data deletion request"
   },
   "GetDomainAllowlist": {
     "description": "Get the domain allowlist for an organization.",
@@ -458,7 +452,7 @@
     "summary": "Get a list of events"
   },
   "CreateEvent": {
-    "description": "This endpoint allows you to post events.\n\nOnly events with **`change` category** are under General Availability. Refer to [Change Tracking](https://docs.datadoghq.com/change_tracking) for further details.",
+    "description": "This endpoint allows you to post events.\n\n✅ **Only events with the `change` category** are in General Availability. See [Change Tracking](https://docs.datadoghq.com/change_tracking) for more details.\n\n❌ For use cases involving other event categories, please use the V1 endpoint.",
     "summary": "Post an event",
     "request_description": "Event request object",
     "request_schema_description": "Payload for creating an event."
@@ -1370,6 +1364,66 @@
     "summary": "Upload IdP metadata",
     "request_description": "",
     "request_schema_description": "The form data submitted to upload IdP metadata"
+  },
+  "ListSCIMGroups": {
+    "description": "List groups in the organization.\nResults are paginated by `startIndex` and `count` parameters.\nResults can be narrowed down by the `filter` parameter.",
+    "summary": "List groups"
+  },
+  "CreateSCIMGroup": {
+    "description": "Create a new group.\nThe group may contain members.",
+    "summary": "Create group",
+    "request_description": "",
+    "request_schema_description": "Definition of a group."
+  },
+  "DeleteSCIMGroup": {
+    "description": "Delete the group with the given `group_id`.",
+    "summary": "Delete group"
+  },
+  "GetSCIMGroup": {
+    "description": "Get a single group using the `group_id`.",
+    "summary": "Get group"
+  },
+  "PatchSCIMGroup": {
+    "description": "Patch the group with the given `group_id`.",
+    "summary": "Patch group",
+    "request_description": "",
+    "request_schema_description": "Request object for patching a group."
+  },
+  "UpdateSCIMGroup": {
+    "description": "Update the group with the given `group_id`.",
+    "summary": "Update group",
+    "request_description": "",
+    "request_schema_description": "Definition of a group."
+  },
+  "ListSCIMUsers": {
+    "description": "List users in the organization.\nResults are paginated by `startIndex` and `count` parameters.\nResults can be narrowed down by the `filter` parameter.",
+    "summary": "List users"
+  },
+  "CreateSCIMUser": {
+    "description": "Create a new user.",
+    "summary": "Create user",
+    "request_description": "",
+    "request_schema_description": "Definition of a user."
+  },
+  "DeleteSCIMUser": {
+    "description": "Delete the group with the given `user_uuid`.",
+    "summary": "Delete user"
+  },
+  "GetSCIMUser": {
+    "description": "Get a single user using the `user_uuid`.",
+    "summary": "Get user"
+  },
+  "PatchSCIMUser": {
+    "description": "Patch the user with the given `user_uuid`.",
+    "summary": "Patch user",
+    "request_description": "",
+    "request_schema_description": "Request object for patching a user."
+  },
+  "UpdateSCIMUser": {
+    "description": "Update the user with the given `user_uuid`.",
+    "summary": "Update user",
+    "request_description": "",
+    "request_schema_description": "Definition of a user."
   },
   "ListScorecardOutcomes": {
     "description": "Fetches all rule outcomes.",

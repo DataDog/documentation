@@ -582,13 +582,6 @@ components:
         example: 10
         format: int64
         type: integer
-    ProductName:
-      description: Name of the product to be deleted, either `logs` or `rum`.
-      in: path
-      name: product
-      required: true
-      schema:
-        type: string
     ProjectIDPathParameter:
       description: Project UUID
       example: e555e290-ed65-49bd-ae18-8acbfcf18db7
@@ -601,13 +594,6 @@ components:
       description: The ID of the report job.
       in: path
       name: report_id
-      required: true
-      schema:
-        type: string
-    RequestId:
-      description: ID of the deletion request.
-      in: path
-      name: id
       required: true
       schema:
         type: string
@@ -4416,6 +4402,34 @@ components:
             from the other indexes
           type: string
       type: object
+    CSMAgentsMetadata:
+      description: Metadata related to the paginated response.
+      properties:
+        page_index:
+          description: The index of the current page in the paginated results.
+          example: 0
+          format: int64
+          type: integer
+        page_size:
+          description: The number of items per page in the paginated results.
+          example: 10
+          format: int64
+          type: integer
+        total_filtered:
+          description: Total number of items that match the filter criteria.
+          example: 128697
+          format: int64
+          type: integer
+      type: object
+    CSMAgentsType:
+      default: datadog_agent
+      description: The type of the resource. The value should always be `datadog_agent`.
+      enum:
+      - datadog_agent
+      example: datadog_agent
+      type: string
+      x-enum-varnames:
+      - DATADOG_AGENT
     CalculatedField:
       description: Calculated field.
       properties:
@@ -4430,14 +4444,6 @@ components:
       required:
       - name
       - expression
-      type: object
-    CancelDataDeletionResponseBody:
-      description: The response from the cancel data deletion request endpoint.
-      properties:
-        data:
-          $ref: '#/components/schemas/DataDeletionResponseItem'
-        meta:
-          $ref: '#/components/schemas/DataDeletionResponseMeta'
       type: object
     Case:
       description: A case
@@ -6594,66 +6600,6 @@ components:
       type: string
       x-enum-varnames:
       - COST_BY_ORG
-    CreateDataDeletionRequestBody:
-      description: Object needed to create a data deletion request.
-      properties:
-        data:
-          $ref: '#/components/schemas/CreateDataDeletionRequestBodyData'
-      required:
-      - data
-      type: object
-    CreateDataDeletionRequestBodyAttributes:
-      description: Attributes for creating a data deletion request.
-      properties:
-        from:
-          description: Start of requested time window, milliseconds since Unix epoch.
-          example: 1672527600000
-          format: int64
-          type: integer
-        indexes:
-          description: List of indexes for the search. If not provided, the search
-            is performed in all indexes.
-          example:
-          - test-index
-          - test-index-2
-          items:
-            description: Individual index.
-            type: string
-          type: array
-        query:
-          additionalProperties:
-            type: string
-          description: Query for creating a data deletion request.
-          example:
-            host: abc
-            service: xyz
-          type: object
-        to:
-          description: End of requested time window, milliseconds since Unix epoch.
-          example: 1704063600000
-          format: int64
-          type: integer
-      required:
-      - query
-      - from
-      - to
-      type: object
-    CreateDataDeletionRequestBodyData:
-      description: Data needed to create a data deletion request.
-      properties:
-        attributes:
-          $ref: '#/components/schemas/CreateDataDeletionRequestBodyAttributes'
-      required:
-      - attributes
-      type: object
-    CreateDataDeletionResponseBody:
-      description: The response from the create data deletion request endpoint.
-      properties:
-        data:
-          $ref: '#/components/schemas/DataDeletionResponseItem'
-        meta:
-          $ref: '#/components/schemas/DataDeletionResponseMeta'
-      type: object
     CreateOpenAPIResponse:
       description: Response for `CreateOpenAPI` operation.
       properties:
@@ -6722,6 +6668,96 @@ components:
           description: Name of the creator.
           nullable: true
           type: string
+      type: object
+    CsmAgentData:
+      description: Single Agent Data.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/CsmAgentsAttributes'
+        id:
+          description: The ID of the Agent.
+          example: fffffc5505f6a006fdf7cf5aae053653
+          type: string
+        type:
+          $ref: '#/components/schemas/CSMAgentsType'
+      type: object
+    CsmAgentsAttributes:
+      description: A CSM Agent returned by the API.
+      properties:
+        agent_version:
+          description: Version of the Datadog Agent.
+          type: string
+        aws_fargate:
+          description: AWS Fargate details.
+          type: string
+        cluster_name:
+          description: List of cluster names associated with the Agent.
+          items:
+            type: string
+          type: array
+        datadog_agent:
+          description: Unique identifier for the Datadog Agent.
+          type: string
+        ecs_fargate_task_arn:
+          description: ARN of the ECS Fargate task.
+          type: string
+        envs:
+          description: List of environments associated with the Agent.
+          items:
+            type: string
+          nullable: true
+          type: array
+        host_id:
+          description: ID of the host.
+          format: int64
+          type: integer
+        hostname:
+          description: Name of the host.
+          type: string
+        install_method_installer_version:
+          description: Version of the installer used for installing the Datadog Agent.
+          type: string
+        install_method_tool:
+          description: Tool used for installing the Datadog Agent.
+          type: string
+        is_csm_vm_containers_enabled:
+          description: Indicates if CSM VM Containers is enabled.
+          nullable: true
+          type: boolean
+        is_csm_vm_hosts_enabled:
+          description: Indicates if CSM VM Hosts is enabled.
+          nullable: true
+          type: boolean
+        is_cspm_enabled:
+          description: Indicates if CSPM is enabled.
+          nullable: true
+          type: boolean
+        is_cws_enabled:
+          description: Indicates if CWS is enabled.
+          nullable: true
+          type: boolean
+        is_cws_remote_configuration_enabled:
+          description: Indicates if CWS Remote Configuration is enabled.
+          nullable: true
+          type: boolean
+        is_remote_configuration_enabled:
+          description: Indicates if Remote Configuration is enabled.
+          nullable: true
+          type: boolean
+        os:
+          description: Operating system of the host.
+          type: string
+      type: object
+    CsmAgentsResponse:
+      description: Response object that includes a list of CSM Agents.
+      properties:
+        data:
+          description: A list of Agents.
+          items:
+            $ref: '#/components/schemas/CsmAgentData'
+          type: array
+        meta:
+          $ref: '#/components/schemas/CSMAgentsMetadata'
       type: object
     CustomCostGetResponseMeta:
       description: Meta for the response from the Get Custom Costs endpoints.
@@ -7945,142 +7981,6 @@ components:
       - INTEGRATION_SCREENBOARD
       - INTEGRATION_TIMEBOARD
       - HOST_TIMEBOARD
-    DataDeletionResponseItem:
-      description: The created data deletion request information.
-      properties:
-        attributes:
-          $ref: '#/components/schemas/DataDeletionResponseItemAttributes'
-        id:
-          description: The ID of the created data deletion request.
-          example: '1'
-          type: string
-        type:
-          description: The type of the request created.
-          example: deletion_request
-          type: string
-      required:
-      - id
-      - type
-      - attributes
-      type: object
-    DataDeletionResponseItemAttributes:
-      description: Deletion attribute for data deletion response.
-      properties:
-        created_at:
-          description: Creation time of the deletion request.
-          example: '2024-01-01T00:00:00.000000Z'
-          type: string
-        created_by:
-          description: User who created the deletion request.
-          example: test.user@datadoghq.com
-          type: string
-        from_time:
-          description: Start of requested time window, milliseconds since Unix epoch.
-          example: 1672527600000
-          format: int64
-          type: integer
-        indexes:
-          description: List of indexes for the search. If not provided, the search
-            is performed in all indexes.
-          example:
-          - test-index
-          - test-index-2
-          items:
-            description: Individual index.
-            type: string
-          type: array
-        is_created:
-          description: Whether the deletion request is fully created or not. It can
-            take several minutes to fully create a deletion request depending on the
-            target query and timeframe.
-          example: true
-          type: boolean
-        org_id:
-          description: Organization ID.
-          example: 321813
-          format: int64
-          type: integer
-        product:
-          description: Product name.
-          example: logs
-          type: string
-        query:
-          description: Query for creating a data deletion request.
-          example: service:xyz host:abc
-          type: string
-        starting_at:
-          description: Starting time of the process to delete the requested data.
-          example: '2024-01-01T02:00:00.000000Z'
-          type: string
-        status:
-          description: Status of the deletion request.
-          example: pending
-          type: string
-        to_time:
-          description: End of requested time window, milliseconds since Unix epoch.
-          example: 1704063600000
-          format: int64
-          type: integer
-        total_unrestricted:
-          description: Total number of elements to be deleted. Only the data accessible
-            to the current user that matches the query and timeframe provided will
-            be deleted.
-          example: 100
-          format: int64
-          type: integer
-        updated_at:
-          description: Update time of the deletion request.
-          example: '2024-01-01T00:00:00.000000Z'
-          type: string
-      required:
-      - created_at
-      - created_by
-      - from_time
-      - is_created
-      - org_id
-      - product
-      - query
-      - starting_at
-      - status
-      - to_time
-      - total_unrestricted
-      - updated_at
-      type: object
-    DataDeletionResponseMeta:
-      description: The metadata of the data deletion response.
-      properties:
-        count_product:
-          additionalProperties:
-            format: int64
-            type: integer
-          description: The total deletion requests created by product.
-          example:
-            logs: 8
-            rum: 7
-          type: object
-        count_status:
-          additionalProperties:
-            format: int64
-            type: integer
-          description: The total deletion requests created by status.
-          example:
-            completed: 10
-            pending: 5
-          type: object
-        next_page:
-          description: The next page when searching deletion requests created in the
-            current organization.
-          example: cGFnZTI=
-          type: string
-        product:
-          description: The product of the deletion request.
-          example: logs
-          type: string
-        request_status:
-          description: The status of the executed request.
-          example: canceled
-          type: string
-      type: object
     DataScalarColumn:
       description: A column containing the numerical results for a formula or query.
       properties:
@@ -8939,6 +8839,13 @@ components:
       - type
       - attributes
       type: object
+    EmailTypeType:
+      description: The type of email.
+      enum:
+      - work
+      type: string
+      x-enum-varnames:
+      - WORK
     EntityAttributes:
       description: Entity attributes.
       properties:
@@ -10389,6 +10296,231 @@ components:
             from the other indexes.
           type: string
       type: object
+    ExternalUser:
+      description: Definition of a user.
+      properties:
+        active:
+          description: A Boolean value indicating the User's administrative status.
+          type: boolean
+        emails:
+          description: Email addresses for the user.
+          items:
+            $ref: '#/components/schemas/ExternalUserEmailType'
+          type: array
+        id:
+          description: The identifier of the resource. Not required when creating
+            a user.
+          type: string
+        meta:
+          $ref: '#/components/schemas/ExternalUserMeta'
+        name:
+          $ref: '#/components/schemas/ExternalUserNameType'
+        schemas:
+          description: User JSON Schemas.
+          example:
+          - urn:ietf:params:scim:schemas:core:2.0:User
+          items:
+            type: string
+          type: array
+        title:
+          description: The user's title.
+          type: string
+        userName:
+          description: Unique identifier for the User.
+          type: string
+      type: object
+    ExternalUserEmailType:
+      description: Email address for the user.
+      properties:
+        primary:
+          description: Boolean indicating if this email is the primary email address.
+          type: boolean
+        type:
+          $ref: '#/components/schemas/EmailTypeType'
+        value:
+          description: Email addresses for the user.
+          type: string
+      type: object
+    ExternalUserGroup:
+      description: Definition of a group.
+      properties:
+        displayName:
+          description: A human-readable name for the group.
+          type: string
+        externalId:
+          description: An identifier for the resource as defined by the provisioning
+            client.
+          type: string
+        id:
+          description: The identifier of the resource. Not required when creating
+            a group.
+          type: string
+        members:
+          description: Members of the group.
+          items:
+            $ref: '#/components/schemas/ExternalUserGroupMembersItems'
+          type: array
+        meta:
+          $ref: '#/components/schemas/ExternalUserGroupMeta'
+        schemas:
+          description: Input JSON Schemas.
+          example:
+          - urn:ietf:params:scim:schemas:core:2.0:Group
+          items:
+            type: string
+          type: array
+      type: object
+    ExternalUserGroupMembersItems:
+      description: The definition of a member belonging to a group.
+      properties:
+        $ref:
+          description: The URI corresponding to a SCIM resource that is a member of
+            this group.
+          example: https://app.datadoghq.com/api/scim/v2/Users/429ebce5-8ed3-4da9-9f1e-662f2dbc2fe6
+          type: string
+        display:
+          description: A human-readable name for the group member.
+          example: John Doe
+          type: string
+        type:
+          description: A label indicating the type of resource.
+          example: User
+          type: string
+        value:
+          description: The identifier of the member of this group.
+          example: 429ebce5-8ed3-4da9-9f1e-662f2dbc2fe6
+          type: string
+      type: object
+    ExternalUserGroupMeta:
+      description: Metadata associated with a group.
+      properties:
+        created:
+          description: The date and time the group was created.
+          example: 2024-10-17 12:53:35.793883+00:00
+          format: date-time
+          type: string
+        lastModified:
+          description: The date and time the group was last changed.
+          example: 2024-10-19 12:53:35.793883+00:00
+          format: date-time
+          type: string
+        location:
+          description: URL identifying the resource.
+          example: https://app.datadoghq.com/api/scim/v2/Groups/429ebce5-8ed3-4da9-9f1e-662f2dbc2fe6
+          type: string
+        resourceType:
+          description: Type of resource.
+          example: Group
+          type: string
+      type: object
+    ExternalUserGroupPatchRequest:
+      description: Request object for patching a group.
+      properties:
+        Operations:
+          description: A list of update operations to be performed on a group.
+          items:
+            $ref: '#/components/schemas/ExternalUserGroupPatchRequestOperationsItems'
+          type: array
+        schemas:
+          description: Input JSON Schemas
+          example:
+          - urn:ietf:params:scim:api:messages:2.0:PatchOp
+          items:
+            type: string
+          type: array
+      type: object
+    ExternalUserGroupPatchRequestOperationsItems:
+      description: The definition of an individual patch operation in a patch request.
+      properties:
+        op:
+          $ref: '#/components/schemas/ExternalUserGroupPatchRequestOperationsItemsOp'
+        path:
+          description: An attribute path describing the target of the operation.
+          example: members
+          type: string
+        value:
+          description: JSON element containing the target values required to apply
+            the patch operation.
+          example: "{\n    \"displayName\": \"Real new group\",\n    \"id\": \"80df3a9b-24f5-4ebf-9ba0-714455453621\"\n}"
+      type: object
+    ExternalUserGroupPatchRequestOperationsItemsOp:
+      description: The operation to be performed.
+      enum:
+      - add
+      - replace
+      - remove
+      type: string
+      x-enum-varnames:
+      - ADD
+      - REPLACE
+      - REMOVE
+    ExternalUserMeta:
+      description: Metadata associated with a user.
+      properties:
+        created:
+          description: The date and time the user was created.
+          example: 2024-10-17 12:53:35.793883+00:00
+          format: date-time
+          type: string
+        lastModified:
+          description: The date and time the user was last changed.
+          example: 2024-10-19 12:53:35.793883+00:00
+          format: date-time
+          type: string
+        location:
+          description: URL identifying the resource.
+          example: https://app.datadoghq.com/api/scim/v2/Users/13a95654-b76d-478d-8636-157a7e461d7c
+          type: string
+        resourceType:
+          description: Type of resource.
+          example: User
+          type: string
+      type: object
+    ExternalUserNameType:
+      description: The components of user's real name
+      properties:
+        formatted:
+          description: The full name, including all middle names, titles, and suffixes
+            as appropriate, formatted for display.
+          type: string
+      type: object
+    ExternalUserPatchRequest:
+      description: Request object for patching a user.
+      properties:
+        Operations:
+          description: A list of update operations to be performed on a user.
+          items:
+            $ref: '#/components/schemas/ExternalUserPatchRequestOperationsItems'
+          type: array
+        schemas:
+          description: Input JSON Schemas
+          example:
+          - urn:ietf:params:scim:api:messages:2.0:PatchOp
+          items:
+            type: string
+          type: array
+      type: object
+    ExternalUserPatchRequestOperationsItems:
+      description: The definition of an individual patch operation in a patch request.
+      properties:
+        op:
+          $ref: '#/components/schemas/ExternalUserPatchRequestOperationsItemsOp'
+        path:
+          description: An attribute path describing the target of the operation.
+          example: title
+          type: string
+        value:
+          description: New value to use for the patch operation.
+      type: object
+    ExternalUserPatchRequestOperationsItemsOp:
+      description: The operation to be performed.
+      enum:
+      - add
+      - replace
+      type: string
+      x-enum-varnames:
+      - ADD
+      - REPLACE
     FastlyAccounResponseAttributes:
       description: Attributes object of a Fastly account.
       properties:
@@ -11099,17 +11231,6 @@ components:
       type: string
       x-enum-varnames:
       - GCP_SERVICE_ACCOUNT
-    GetDataDeletionsResponseBody:
-      description: The response from the get data deletion requests endpoint.
-      properties:
-        data:
-          description: The list of data deletion requests that matches the query.
-          items:
-            $ref: '#/components/schemas/DataDeletionResponseItem'
-          type: array
-        meta:
-          $ref: '#/components/schemas/DataDeletionResponseMeta'
-      type: object
     GetDeviceAttributes:
       description: The device attributes
       properties:
@@ -11420,6 +11541,65 @@ components:
           format: int32
           maximum: 2147483647
           type: integer
+      type: object
+    HistoricalJobOptions:
+      description: Job options.
+      properties:
+        detectionMethod:
+          $ref: '#/components/schemas/SecurityMonitoringRuleDetectionMethod'
+        evaluationWindow:
+          $ref: '#/components/schemas/SecurityMonitoringRuleEvaluationWindow'
+        impossibleTravelOptions:
+          $ref: '#/components/schemas/SecurityMonitoringRuleImpossibleTravelOptions'
+        keepAlive:
+          $ref: '#/components/schemas/SecurityMonitoringRuleKeepAlive'
+        maxSignalDuration:
+          $ref: '#/components/schemas/SecurityMonitoringRuleMaxSignalDuration'
+        newValueOptions:
+          $ref: '#/components/schemas/SecurityMonitoringRuleNewValueOptions'
+        thirdPartyRuleOptions:
+          $ref: '#/components/schemas/SecurityMonitoringRuleThirdPartyOptions'
+      type: object
+    HistoricalJobQuery:
+      description: Query for selecting logs analyzed by the historical job.
+      properties:
+        aggregation:
+          $ref: '#/components/schemas/SecurityMonitoringRuleQueryAggregation'
+        distinctFields:
+          description: Field for which the cardinality is measured. Sent as an array.
+          items:
+            description: Field.
+            type: string
+          type: array
+        groupByFields:
+          description: Fields to group by.
+          items:
+            description: Field.
+            type: string
+          type: array
+        hasOptionalGroupByFields:
+          description: When false, events without a group-by value are ignored by
+            the query. When true, events with missing group-by fields are processed
+            with `N/A`, replacing the missing values.
+          example: false
+          readOnly: true
+          type: boolean
+        metrics:
+          description: Group of target fields to aggregate over when using the sum,
+            max, geo data, or new value aggregations. The sum, max, and geo data aggregations
+            only accept one value in this list, whereas the new value aggregation
+            accepts up to five values.
+          items:
+            description: Field.
+            type: string
+          type: array
+        name:
+          description: Name of the query.
+          type: string
+        query:
+          description: Query to run on logs.
+          example: a > 3
+          type: string
       type: object
     HistoricalJobResponse:
       description: Historical job response.
@@ -13928,13 +14108,6 @@ components:
           items:
             $ref: '#/components/schemas/SecurityMonitoringRuleCaseCreate'
           type: array
-        filters:
-          description: Additional queries to filter matched events before they are
-            processed. This field is deprecated for log detection, signal correlation,
-            and workload security rules.
-          items:
-            $ref: '#/components/schemas/SecurityMonitoringFilter'
-          type: array
         from:
           description: Starting time of data analyzed by the job.
           example: 1729843470000
@@ -13953,14 +14126,14 @@ components:
           example: Excessive number of failed attempts.
           type: string
         options:
-          $ref: '#/components/schemas/SecurityMonitoringRuleOptions'
+          $ref: '#/components/schemas/HistoricalJobOptions'
         queries:
           description: Queries for selecting logs analyzed by the job.
           items:
-            $ref: '#/components/schemas/SecurityMonitoringStandardRuleQuery'
+            $ref: '#/components/schemas/HistoricalJobQuery'
           type: array
         referenceTables:
-          description: Reference tables for the rule.
+          description: Reference tables used in the queries.
           items:
             $ref: '#/components/schemas/SecurityMonitoringReferenceTable'
           type: array
@@ -13970,8 +14143,8 @@ components:
             type: string
           type: array
         thirdPartyCases:
-          description: Cases for generating results from third-party rules. Only available
-            for third-party rules.
+          description: Cases for generating results from third-party detection method.
+            Only available for third-party detection method.
           example: []
           items:
             $ref: '#/components/schemas/SecurityMonitoringThirdPartyRuleCaseCreate'
@@ -14219,6 +14392,248 @@ components:
           type: string
         self:
           description: Current link.
+          type: string
+      type: object
+    ListExternalUserGroupResponse:
+      description: List groups response object.
+      example:
+        Resources:
+        - displayName: Group 1
+          externalId: group1
+          id: e43536e9-33fe-43f8-90b8-d3e39a7dd6ad
+          members:
+          - $ref: https://app.datadoghq.com/api/scim/v2/Users/d34a5f93-5690-4d3f-a293-f2ad5c7a82a4
+            display: John Doe
+            type: User
+            value: d34a5f93-5690-4d3f-a293-f2ad5c7a82a4
+          - $ref: https://app.datadoghq.com/api/scim/v2/Users/429ebce5-8ed3-4da9-9f1e-662f2dbc2fe6
+            display: Jane Doe
+            type: User
+            value: 429ebce5-8ed3-4da9-9f1e-662f2dbc2fe6
+          meta:
+            created: '2024-11-22T15:05:52.055138963Z'
+            lastModified: '2024-11-22T15:05:52.055139017Z'
+            location: https://app.datadoghq.com/api/scim/v2/Groups/e43536e9-33fe-43f8-90b8-d3e39a7dd6ad
+            resourceType: Group
+          schemas:
+          - urn:ietf:params:scim:schemas:core:2.0:Group
+        - displayName: Group 2
+          externalId: group2
+          id: 79ef0d28-f257-4829-97e6-d23d2a26cb1a
+          members:
+          - $ref: https://app.datadoghq.com/api/scim/v2/Users/29da9fb7-8fca-4e87-bf58-86652253deae
+            display: Alice Smith
+            type: User
+            value: 29da9fb7-8fca-4e87-bf58-86652253deae
+          - $ref: https://app.datadoghq.com/api/scim/v2/Users/f85e3868-ad7b-47e3-a8a9-ff1eade2bbf9
+            display: Bob Smith
+            type: User
+            value: f85e3868-ad7b-47e3-a8a9-ff1eade2bbf9
+          meta:
+            created: '2024-11-22T15:05:52.055139748Z'
+            lastModified: '2024-11-22T15:05:52.055139813Z'
+            location: https://app.datadoghq.com/api/scim/v2/Groups/79ef0d28-f257-4829-97e6-d23d2a26cb1a
+            resourceType: Group
+          schemas:
+          - urn:ietf:params:scim:schemas:core:2.0:Group
+        itemsPerPage: 2
+        schemas:
+        - urn:ietf:params:scim:api:messages:2.0:ListResponse
+        startIndex: 1
+        totalResults: 2
+      properties:
+        Resources:
+          description: List of groups matching the request criteria.
+          items:
+            $ref: '#/components/schemas/ListExternalUserGroupResponseResourcesItems'
+          type: array
+        itemsPerPage:
+          description: Number of groups returned per page.
+          format: int64
+          maximum: 4294967295
+          minimum: 0
+          type: integer
+        schemas:
+          description: List response JSON Schemas.
+          example:
+          - urn:ietf:params:scim:api:messages:2.0:ListResponse
+          items:
+            type: string
+          type: array
+        startIndex:
+          description: Starting index of the groups for this page (1-indexed).
+          format: int64
+          maximum: 4294967295
+          minimum: 0
+          type: integer
+        totalResults:
+          description: Total number of groups matching the request criteria.
+          format: int64
+          maximum: 4294967295
+          minimum: 0
+          type: integer
+      type: object
+    ListExternalUserGroupResponseResourcesItems:
+      description: Resources returned in response to a List groups request.
+      properties:
+        displayName:
+          description: A human-readable name for the group.
+          example: My test group
+          type: string
+        externalId:
+          description: An identifier for the resource as defined by the provisioning
+            client.
+          example: 346af543-e5ab-4855-937d-133231cd59ed
+          type: string
+        id:
+          description: The identifier of the resource. Not required when creating
+            a group.
+          example: 0e80d350-9519-4771-9aa8-ce849fc36c20
+          type: string
+        members:
+          description: A list of members belonging to the team.
+          items:
+            $ref: '#/components/schemas/ListExternalUserGroupResponseResourcesItemsMembersItems'
+          type: array
+        meta:
+          $ref: '#/components/schemas/ExternalUserGroupMeta'
+        schemas:
+          description: Group JSON Schemas.
+          example:
+          - urn:ietf:params:scim:schemas:core:2.0:Group
+          items:
+            type: string
+          type: array
+      type: object
+    ListExternalUserGroupResponseResourcesItemsMembersItems:
+      description: The definition of a member belonging to a group in the List groups
+        response.
+      properties:
+        $ref:
+          description: The URI corresponding to a resource that is a member of this
+            group.
+          example: https://app.datadoghq.com/api/scim/v2/Users/429ebce5-8ed3-4da9-9f1e-662f2dbc2fe6
+          type: string
+        display:
+          description: Full name of the user.
+          example: John Doe
+          type: string
+        type:
+          description: A label indicating the type of resource. Only supported value
+            is "User".
+          example: User
+          type: string
+        value:
+          description: The identifier of the member of this group.
+          example: 429ebce5-8ed3-4da9-9f1e-662f2dbc2fe6
+          type: string
+      type: object
+    ListExternalUsersResponse:
+      description: List users response object.
+      example:
+        Resources:
+        - active: true
+          emails:
+          - primary: true
+            type: work
+            value: john.doe@datadoghq.com
+          id: e43536e9-33fe-43f8-90b8-d3e39a7dd6ad
+          meta:
+            created: '2024-11-22T15:05:52.055138963Z'
+            lastModified: '2024-11-22T15:05:52.055139017Z'
+            location: https://app.datadoghq.com/api/scim/v2/Users/e43536e9-33fe-43f8-90b8-d3e39a7dd6ad
+            resourceType: User
+          name:
+            formatted: John Doe
+          schemas:
+          - urn:ietf:params:scim:schemas:core:2.0:User
+          title: Mr.
+          userName: john.doe@datadoghq.com
+        - active: true
+          emails:
+          - primary: true
+            type: work
+            value: jane.doe@datadoghq.com
+          id: 79ef0d28-f257-4829-97e6-d23d2a26cb1a
+          meta:
+            created: '2024-11-22T15:05:52.055139748Z'
+            lastModified: '2024-11-22T15:05:52.055139813Z'
+            location: https://app.datadoghq.com/api/scim/v2/Users/79ef0d28-f257-4829-97e6-d23d2a26cb1a
+            resourceType: User
+          name:
+            formatted: Jane Doe
+          schemas:
+          - urn:ietf:params:scim:schemas:core:2.0:User
+          title: Mrs.
+          userName: jane.doe@datadoghq.com
+        itemsPerPage: 2
+        schemas:
+        - urn:ietf:params:scim:api:messages:2.0:ListResponse
+        startIndex: 1
+        totalResults: 2
+      properties:
+        Resources:
+          description: List of users matching the request criteria.
+          items:
+            $ref: '#/components/schemas/ListExternalUsersResponseResourcesItems'
+          type: array
+        itemsPerPage:
+          description: Number of users returned per page.
+          format: int64
+          maximum: 4294967295
+          minimum: 0
+          type: integer
+        schemas:
+          description: List response JSON Schemas.
+          example:
+          - urn:ietf:params:scim:api:messages:2.0:ListResponse
+          items:
+            type: string
+          type: array
+        startIndex:
+          description: Starting index of the users for this page (1-indexed).
+          format: int64
+          maximum: 4294967295
+          minimum: 0
+          type: integer
+        totalResults:
+          description: Total number of users matching the request criteria.
+          format: int64
+          maximum: 4294967295
+          minimum: 0
+          type: integer
+      type: object
+    ListExternalUsersResponseResourcesItems:
+      description: Resources returned in response to a List users request.
+      properties:
+        active:
+          description: A Boolean value indicating the User's administrative status.
+          type: boolean
+        emails:
+          description: Email addresses for the user.
+          items:
+            $ref: '#/components/schemas/ExternalUserEmailType'
+          type: array
+        id:
+          description: The identifier of the resource. Not required when creating
+            a user.
+          type: string
+        meta:
+          $ref: '#/components/schemas/ExternalUserMeta'
+        name:
+          $ref: '#/components/schemas/ExternalUserNameType'
+        schemas:
+          description: User JSON Schemas.
+          example:
+          - urn:ietf:params:scim:schemas:core:2.0:User
+          items:
+            type: string
+          type: array
+        title:
+          description: The user's title.
+          type: string
+        userName:
+          description: Unique identifier for the User.
           type: string
       type: object
     ListFindingsData:
@@ -17876,6 +18291,16 @@ components:
       required:
       - data
       type: object
+    OrderDirection:
+      description: The sort direction for results.
+      enum:
+      - asc
+      - desc
+      example: asc
+      type: string
+      x-enum-varnames:
+      - ASC
+      - DESC
     OrgConfigGetResponse:
       description: A response with a single Org Config.
       properties:
@@ -22013,7 +22438,7 @@ components:
           $ref: '#/components/schemas/ResponseMetaAttributes'
       type: object
     SecurityMonitoringReferenceTable:
-      description: Reference table for the rule.
+      description: Reference tables used in the queries.
       properties:
         checkPresence:
           description: Whether to include or exclude the matched values.
@@ -22025,7 +22450,7 @@ components:
           description: The field in the log to match against the reference table.
           type: string
         ruleQueryName:
-          description: The name of the rule query to apply the reference table to.
+          description: The name of the query to apply the reference table to.
           type: string
         tableName:
           description: The name of the reference table.
@@ -22056,7 +22481,7 @@ components:
       description: Case when signal is generated.
       properties:
         condition:
-          description: 'A rule case contains logical operations (`>`,`>=`, `&&`, `||`)
+          description: 'A case contains logical operations (`>`,`>=`, `&&`, `||`)
             to determine if a signal should be generated
 
             based on the event counts in the previously defined queries.'
@@ -22065,7 +22490,7 @@ components:
           description: Name of the case.
           type: string
         notifications:
-          description: Notification targets for each rule case.
+          description: Notification targets.
           items:
             description: Notification.
             type: string
@@ -22127,7 +22552,8 @@ components:
       description: 'A time window is specified to match when at least one of the cases
         matches true. This is a sliding window
 
-        and evaluates in real time. For third party rules, this field is not used.'
+        and evaluates in real time. For third party detection method, this field is
+        not used.'
       enum:
       - 0
       - 60
@@ -22156,7 +22582,7 @@ components:
       x-enum-varnames:
       - LOG4SHELL
     SecurityMonitoringRuleImpossibleTravelOptions:
-      description: Options on impossible travel rules.
+      description: Options on impossible travel detection method.
       properties:
         baselineUserLocations:
           $ref: '#/components/schemas/SecurityMonitoringRuleImpossibleTravelOptionsBaselineUserLocations'
@@ -22172,7 +22598,7 @@ components:
     SecurityMonitoringRuleKeepAlive:
       description: "Once a signal is generated, the signal will remain \u201Copen\u201D
         if a case is matched at least once within\nthis keep alive window. For third
-        party rules, this field is not used."
+        party detection method, this field is not used."
       enum:
       - 0
       - 60
@@ -22230,7 +22656,7 @@ components:
       - TWELVE_HOURS
       - ONE_DAY
     SecurityMonitoringRuleNewValueOptions:
-      description: Options on new value rules.
+      description: Options on new value detection method.
       properties:
         forgetAfter:
           $ref: '#/components/schemas/SecurityMonitoringRuleNewValueOptionsForgetAfter'
@@ -22300,7 +22726,7 @@ components:
       - ZERO_OCCURRENCES
       - ONE_OCCURRENCE
     SecurityMonitoringRuleOptions:
-      description: Options on rules.
+      description: Options.
       properties:
         complianceRuleOptions:
           $ref: '#/components/schemas/CloudConfigurationComplianceRuleOptions'
@@ -22442,7 +22868,7 @@ components:
           type: array
       type: object
     SecurityMonitoringRuleThirdPartyOptions:
-      description: Options on third party rules.
+      description: Options on third party detection method.
       properties:
         defaultNotifications:
           description: Notification targets for the logs that do not correspond to
@@ -23842,7 +24268,7 @@ components:
           description: Name of the case.
           type: string
         notifications:
-          description: Notification targets for each rule case.
+          description: Notification targets for each case.
           items:
             description: Notification.
             type: string
@@ -31615,7 +32041,8 @@ paths:
         != null BEGIN\n  sleep(5 seconds)  # Avoid running into rate limit\n  response
         := GetMonthlyCostAttribution(start_month, end_month, next_record_id=cursor)\n
         \ cursor := response.metadata.pagination.next_record_id\nEND\n```\n\nThis
-        endpoint is only accessible for [parent-level organizations](https://docs.datadoghq.com/account_management/multi_organization/)."
+        endpoint is only accessible for [parent-level organizations](https://docs.datadoghq.com/account_management/multi_organization/).
+        This endpoint is not available in the Government (US1-FED) site."
       operationId: GetMonthlyCostAttribution
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to month: `[YYYY-MM]`
@@ -31733,6 +32160,119 @@ paths:
       x-unstable: '**Note**: This endpoint is in public beta.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/csm/onboarding/agents:
+    get:
+      description: Get the list of all CSM Agents running on your hosts and containers.
+      operationId: ListAllCSMAgents
+      parameters:
+      - description: The page index for pagination (zero-based).
+        in: query
+        name: page
+        required: false
+        schema:
+          example: 2
+          format: int32
+          maximum: 1000000
+          minimum: 0
+          type: integer
+      - description: The number of items to include in a single page.
+        in: query
+        name: size
+        required: false
+        schema:
+          example: 12
+          format: int32
+          maximum: 100
+          minimum: 0
+          type: integer
+      - description: A search query string to filter results (for example, `hostname:COMP-T2H4J27423`).
+        in: query
+        name: query
+        required: false
+        schema:
+          example: hostname:COMP-T2H4J27423
+          type: string
+      - description: The sort direction for results. Use `asc` for ascending or `desc`
+          for descending.
+        in: query
+        name: order_direction
+        required: false
+        schema:
+          $ref: '#/components/schemas/OrderDirection'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CsmAgentsResponse'
+          description: OK
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get all CSM Agents
+      tags:
+      - CSM Agents
+      x-menu-order: 3
+      x-undo:
+        type: safe
+  /api/v2/csm/onboarding/serverless/agents:
+    get:
+      description: Get the list of all CSM Serverless Agents running on your hosts
+        and containers.
+      operationId: ListAllCSMServerlessAgents
+      parameters:
+      - description: The page index for pagination (zero-based).
+        in: query
+        name: page
+        required: false
+        schema:
+          example: 2
+          format: int32
+          maximum: 1000000
+          minimum: 0
+          type: integer
+      - description: The number of items to include in a single page.
+        in: query
+        name: size
+        required: false
+        schema:
+          example: 12
+          format: int32
+          maximum: 100
+          minimum: 0
+          type: integer
+      - description: A search query string to filter results (for example, `hostname:COMP-T2H4J27423`).
+        in: query
+        name: query
+        required: false
+        schema:
+          example: hostname:COMP-T2H4J27423
+          type: string
+      - description: The sort direction for results. Use `asc` for ascending or `desc`
+          for descending.
+        in: query
+        name: order_direction
+        required: false
+        schema:
+          $ref: '#/components/schemas/OrderDirection'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CsmAgentsResponse'
+          description: OK
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get all CSM Serverless Agents
+      tags:
+      - CSM Agents
+      x-menu-order: 3
+      x-undo:
+        type: safe
   /api/v2/current_user/application_keys:
     get:
       description: List all application keys available for current user
@@ -32176,196 +32716,6 @@ paths:
       x-menu-order: 3
       x-undo:
         type: safe
-  /api/v2/deletion/data/{product}:
-    post:
-      description: Creates a data deletion request by providing a query and a timeframe
-        targeting the proper data.
-      operationId: CreateDataDeletionRequest
-      parameters:
-      - $ref: '#/components/parameters/ProductName'
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/CreateDataDeletionRequestBody'
-        required: true
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CreateDataDeletionResponseBody'
-          description: OK
-        '400':
-          $ref: '#/components/responses/BadRequestResponse'
-        '403':
-          $ref: '#/components/responses/ForbiddenResponse'
-        '412':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/APIErrorResponse'
-          description: Precondition failed error
-        '429':
-          $ref: '#/components/responses/TooManyRequestsResponse'
-        '500':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/APIErrorResponse'
-          description: Internal server error
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      summary: Creates a data deletion request
-      tags:
-      - Data Deletion
-      x-given:
-        deletion_request:
-          parameters:
-          - name: product
-            value: '"logs"'
-          - name: body
-            value: "{\n  \"data\": {\n    \"attributes\": {\n      \"from\": 1672527600000,\n
-              \     \"to\": 1704063600000,\n      \"indexes\": [\"test-index\", \"test-index-2\"],\n
-              \     \"query\": {\"host\": \"abc\", \"service\": \"xyz\"}\n    }\n
-              \ }\n}"
-          step: there is a valid "deletion_request" in the system
-      x-menu-order: 1
-      x-permission:
-        operator: OR
-        permissions:
-        - rum_delete_data
-        - logs_delete_data
-      x-undo:
-        operationId: CancelDataDeletionRequest
-        parameters:
-        - name: id
-          source: data.id
-        type: unsafe
-  /api/v2/deletion/requests:
-    get:
-      description: Gets a list of data deletion requests based on several filter parameters.
-      operationId: GetDataDeletionRequests
-      parameters:
-      - description: The next page of the previous search. If the next_page parameter
-          is included, the rest of the query elements are ignored.
-        example: cGFnZTI=
-        in: query
-        name: next_page
-        required: false
-        schema:
-          type: string
-      - description: Retrieve only the requests related to the given product.
-        example: logs
-        in: query
-        name: product
-        required: false
-        schema:
-          type: string
-      - description: Retrieve only the requests that matches the given query.
-        example: service:xyz host:abc
-        in: query
-        name: query
-        required: false
-        schema:
-          type: string
-      - description: Retrieve only the requests with the given status.
-        example: pending
-        in: query
-        name: status
-        required: false
-        schema:
-          type: string
-      - description: Sets the page size of the search.
-        example: '50'
-        in: query
-        name: page_size
-        required: false
-        schema:
-          default: 50
-          format: int64
-          maximum: 50
-          minimum: 1
-          type: integer
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/GetDataDeletionsResponseBody'
-          description: OK
-        '400':
-          $ref: '#/components/responses/BadRequestResponse'
-        '403':
-          $ref: '#/components/responses/ForbiddenResponse'
-        '429':
-          $ref: '#/components/responses/TooManyRequestsResponse'
-        '500':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/APIErrorResponse'
-          description: Internal server error
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      summary: Gets a list of data deletion requests
-      tags:
-      - Data Deletion
-      x-menu-order: 3
-      x-permission:
-        operator: OR
-        permissions:
-        - rum_delete_data
-        - logs_delete_data
-      x-undo:
-        type: safe
-  /api/v2/deletion/requests/{id}/cancel:
-    put:
-      description: Cancels a data deletion request by providing its ID.
-      operationId: CancelDataDeletionRequest
-      parameters:
-      - $ref: '#/components/parameters/RequestId'
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CancelDataDeletionResponseBody'
-          description: OK
-        '400':
-          $ref: '#/components/responses/BadRequestResponse'
-        '403':
-          $ref: '#/components/responses/ForbiddenResponse'
-        '412':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/APIErrorResponse'
-          description: Precondition failed error
-        '429':
-          $ref: '#/components/responses/TooManyRequestsResponse'
-        '500':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/APIErrorResponse'
-          description: Internal server error
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      summary: Cancels a data deletion request
-      tags:
-      - Data Deletion
-      x-menu-order: 2
-      x-permission:
-        operator: OR
-        permissions:
-        - rum_delete_data
-        - logs_delete_data
-      x-undo:
-        type: idempotent
   /api/v2/domain_allowlist:
     get:
       description: Get the domain allowlist for an organization.
@@ -32915,12 +33265,10 @@ paths:
       x-undo:
         type: safe
     post:
-      description: 'This endpoint allows you to post events.
-
-
-        Only events with **`change` category** are under General Availability. Refer
-        to [Change Tracking](https://docs.datadoghq.com/change_tracking) for further
-        details.'
+      description: "This endpoint allows you to post events.\n\n\u2705 **Only events
+        with the `change` category** are in General Availability. See [Change Tracking](https://docs.datadoghq.com/change_tracking)
+        for more details.\n\n\u274C For use cases involving other event categories,
+        please use the V1 endpoint."
       operationId: CreateEvent
       requestBody:
         content:
@@ -41508,6 +41856,644 @@ paths:
         - org_management
       x-undo:
         type: idempotent
+  /api/v2/scim/Groups:
+    get:
+      description: 'List groups in the organization.
+
+        Results are paginated by `startIndex` and `count` parameters.
+
+        Results can be narrowed down by the `filter` parameter.'
+      operationId: ListSCIMGroups
+      parameters:
+      - description: Specifies the start index to fetch the results (1-indexed).
+        in: query
+        name: startIndex
+        required: false
+        schema:
+          default: 1
+          example: 1
+          format: int64
+          type: integer
+      - description: Specifies the number of groups to be returned.
+        in: query
+        name: count
+        required: false
+        schema:
+          default: 20
+          example: 20
+          format: int64
+          type: integer
+      - description: 'Specifies the url encoded filter to use to narrow down the results.
+
+          Filters can be in the form of `displayName eq <group name>` or `externalId
+          eq <external id of group>`
+
+          or `id eq <group id> and members eq <user uuid>` or `members eq <user uuid>
+          and id eq <group id>`.'
+        in: query
+        name: filter
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListExternalUserGroupResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - AuthZ:
+        - user_access_invite
+        - user_access_manage
+      - bearerAuth: []
+      summary: List groups
+      tags:
+      - SCIM
+      x-menu-order: 7
+      x-permission:
+        operator: AND
+        permissions:
+        - user_access_invite
+        - user_access_manage
+      x-undo:
+        type: safe
+    post:
+      description: 'Create a new group.
+
+        The group may contain members.'
+      operationId: CreateSCIMGroup
+      requestBody:
+        content:
+          application/json:
+            examples:
+              json-request-body:
+                value:
+                  displayName: Group 1
+                  externalId: group1
+                  members:
+                  - $ref: https://app.datadoghq.com/api/scim/v2/Users/d34a5f93-5690-4d3f-a293-f2ad5c7a82a4
+                    display: John Doe
+                    type: User
+                    value: d34a5f93-5690-4d3f-a293-f2ad5c7a82a4
+                  - $ref: https://app.datadoghq.com/api/scim/v2/Users/429ebce5-8ed3-4da9-9f1e-662f2dbc2fe6
+                    display: Jane Doe
+                    type: User
+                    value: 429ebce5-8ed3-4da9-9f1e-662f2dbc2fe6
+                  schemas:
+                  - urn:ietf:params:scim:schemas:core:2.0:Group
+            schema:
+              $ref: '#/components/schemas/ExternalUserGroup'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExternalUserGroup'
+          description: Created
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - AuthZ:
+        - user_access_invite
+        - user_access_manage
+      - bearerAuth: []
+      summary: Create group
+      tags:
+      - SCIM
+      x-menu-order: 8
+      x-permission:
+        operator: AND
+        permissions:
+        - user_access_invite
+        - user_access_manage
+      x-undo:
+        operationId: DeleteSCIMGroup
+        parameters:
+        - name: group_id
+          source: <RESPONSE_PATH>
+        type: unsafe
+  /api/v2/scim/Groups/{group_id}:
+    delete:
+      description: Delete the group with the given `group_id`.
+      operationId: DeleteSCIMGroup
+      parameters:
+      - description: None
+        in: path
+        name: group_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: No Content
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - AuthZ:
+        - user_access_invite
+        - user_access_manage
+      - bearerAuth: []
+      summary: Delete group
+      tags:
+      - SCIM
+      x-menu-order: 12
+      x-permission:
+        operator: AND
+        permissions:
+        - user_access_invite
+        - user_access_manage
+      x-undo:
+        type: idempotent
+    get:
+      description: Get a single group using the `group_id`.
+      operationId: GetSCIMGroup
+      parameters:
+      - description: None
+        in: path
+        name: group_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExternalUserGroup'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - AuthZ:
+        - user_access_invite
+        - user_access_manage
+      - bearerAuth: []
+      summary: Get group
+      tags:
+      - SCIM
+      x-menu-order: 9
+      x-permission:
+        operator: AND
+        permissions:
+        - user_access_invite
+        - user_access_manage
+      x-undo:
+        type: safe
+    patch:
+      description: Patch the group with the given `group_id`.
+      operationId: PatchSCIMGroup
+      parameters:
+      - description: None
+        in: path
+        name: group_id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            examples:
+              json-request-body:
+                value:
+                  Operations:
+                  - op: replace
+                    path: None
+                    value:
+                      displayName: Real new group
+                      id: e43536e9-33fe-43f8-90b8-d3e39a7dd6ad
+                  - op: add
+                    path: None
+                    value:
+                      members:
+                      - $ref: https://app.datadoghq.com/api/scim/v2/Users/f85e3868-ad7b-47e3-a8a9-ff1eade2bbf9
+                        displayName: Bob Smith
+                        value: f85e3868-ad7b-47e3-a8a9-ff1eade2bbf9
+                  - op: remove
+                    path: members[value eq "fddf0cf2-9b60-11ef-ad4b-d6754a54a839"]
+                    value: null
+                  schemas:
+                  - urn:ietf:params:scim:api:messages:2.0:PatchOp
+            schema:
+              $ref: '#/components/schemas/ExternalUserGroupPatchRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExternalUserGroup'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - AuthZ:
+        - user_access_invite
+        - user_access_manage
+      - bearerAuth: []
+      summary: Patch group
+      tags:
+      - SCIM
+      x-menu-order: 11
+      x-permission:
+        operator: AND
+        permissions:
+        - user_access_invite
+        - user_access_manage
+      x-undo:
+        type: idempotent
+    put:
+      description: Update the group with the given `group_id`.
+      operationId: UpdateSCIMGroup
+      parameters:
+      - description: None
+        in: path
+        name: group_id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            examples:
+              json-request-body:
+                value:
+                  displayName: Group 1
+                  externalId: group1
+                  id: e43536e9-33fe-43f8-90b8-d3e39a7dd6ad
+                  members:
+                  - $ref: https://app.datadoghq.com/api/scim/v2/Users/d34a5f93-5690-4d3f-a293-f2ad5c7a82a4
+                    display: John Doe
+                    type: User
+                    value: d34a5f93-5690-4d3f-a293-f2ad5c7a82a4
+                  - $ref: https://app.datadoghq.com/api/scim/v2/Users/429ebce5-8ed3-4da9-9f1e-662f2dbc2fe6
+                    display: Jane Doe
+                    type: User
+                    value: 429ebce5-8ed3-4da9-9f1e-662f2dbc2fe6
+                  schemas:
+                  - urn:ietf:params:scim:schemas:core:2.0:Group
+            schema:
+              $ref: '#/components/schemas/ExternalUserGroup'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExternalUserGroup'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '409':
+          $ref: '#/components/responses/ConflictResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - AuthZ:
+        - user_access_invite
+        - user_access_manage
+      - bearerAuth: []
+      summary: Update group
+      tags:
+      - SCIM
+      x-menu-order: 10
+      x-permission:
+        operator: AND
+        permissions:
+        - user_access_invite
+        - user_access_manage
+      x-undo:
+        type: idempotent
+  /api/v2/scim/Users:
+    get:
+      description: 'List users in the organization.
+
+        Results are paginated by `startIndex` and `count` parameters.
+
+        Results can be narrowed down by the `filter` parameter.'
+      operationId: ListSCIMUsers
+      parameters:
+      - description: Specifies the start index to fetch the results (1-indexed).
+        in: query
+        name: startIndex
+        required: false
+        schema:
+          default: 1
+          example: 1
+          format: int64
+          type: integer
+      - description: Specifies the number of users to be returned.
+        in: query
+        name: count
+        required: false
+        schema:
+          default: 20
+          example: 20
+          format: int64
+          type: integer
+      - description: 'Specifies the url encoded filter to use to narrow down the results.
+
+          Filter should be of the form `userName eq <user name>`.'
+        in: query
+        name: filter
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListExternalUsersResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - AuthZ:
+        - user_access_invite
+        - user_access_manage
+      - bearerAuth: []
+      summary: List users
+      tags:
+      - SCIM
+      x-menu-order: 1
+      x-permission:
+        operator: AND
+        permissions:
+        - user_access_invite
+        - user_access_manage
+      x-undo:
+        type: safe
+    post:
+      description: Create a new user.
+      operationId: CreateSCIMUser
+      requestBody:
+        content:
+          application/json:
+            examples:
+              json-request-body:
+                value:
+                  active: true
+                  emails:
+                  - primary: true
+                    type: work
+                    value: john.doe@datadoghq.com
+                  name:
+                    formatted: John Doe
+                  schemas:
+                  - urn:ietf:params:scim:schemas:core:2.0:User
+                  title: Mr.
+                  userName: john.doe@datadoghq.com
+            schema:
+              $ref: '#/components/schemas/ExternalUser'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExternalUser'
+          description: Created
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - AuthZ:
+        - user_access_invite
+        - user_access_manage
+      - bearerAuth: []
+      summary: Create user
+      tags:
+      - SCIM
+      x-menu-order: 2
+      x-permission:
+        operator: AND
+        permissions:
+        - user_access_invite
+        - user_access_manage
+      x-undo:
+        operationId: DeleteSCIMUser
+        parameters:
+        - name: user_uuid
+          source: <RESPONSE_PATH>
+        type: unsafe
+  /api/v2/scim/Users/{user_uuid}:
+    delete:
+      description: Delete the group with the given `user_uuid`.
+      operationId: DeleteSCIMUser
+      parameters:
+      - description: None
+        in: path
+        name: user_uuid
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: No Content
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - AuthZ:
+        - user_access_invite
+        - user_access_manage
+      - bearerAuth: []
+      summary: Delete user
+      tags:
+      - SCIM
+      x-menu-order: 6
+      x-permission:
+        operator: AND
+        permissions:
+        - user_access_invite
+        - user_access_manage
+      x-undo:
+        type: idempotent
+    get:
+      description: Get a single user using the `user_uuid`.
+      operationId: GetSCIMUser
+      parameters:
+      - description: None
+        in: path
+        name: user_uuid
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExternalUser'
+          description: OK
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - AuthZ:
+        - user_access_invite
+        - user_access_manage
+      - bearerAuth: []
+      summary: Get user
+      tags:
+      - SCIM
+      x-menu-order: 3
+      x-permission:
+        operator: AND
+        permissions:
+        - user_access_invite
+        - user_access_manage
+      x-undo:
+        type: safe
+    patch:
+      description: Patch the user with the given `user_uuid`.
+      operationId: PatchSCIMUser
+      parameters:
+      - description: None
+        in: path
+        name: user_uuid
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            examples:
+              json-request-body:
+                value:
+                  Operations:
+                  - op: replace
+                    path: title
+                    value: CEO
+                  - op: replace
+                    value:
+                      name:
+                        formatted: John Doe
+                  schemas:
+                  - urn:ietf:params:scim:api:messages:2.0:PatchOp
+            schema:
+              $ref: '#/components/schemas/ExternalUserPatchRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExternalUser'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - AuthZ:
+        - user_access_invite
+        - user_access_manage
+      - bearerAuth: []
+      summary: Patch user
+      tags:
+      - SCIM
+      x-menu-order: 5
+      x-permission:
+        operator: AND
+        permissions:
+        - user_access_invite
+        - user_access_manage
+      x-undo:
+        type: idempotent
+    put:
+      description: Update the user with the given `user_uuid`.
+      operationId: UpdateSCIMUser
+      parameters:
+      - description: None
+        in: path
+        name: user_uuid
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            examples:
+              json-request-body:
+                value:
+                  active: true
+                  emails:
+                  - primary: true
+                    type: work
+                    value: john.doe@datadoghq.com
+                  id: e43536e9-33fe-43f8-90b8-d3e39a7dd6ad
+                  name:
+                    formatted: John Doe
+                  schemas:
+                  - urn:ietf:params:scim:schemas:core:2.0:User
+                  title: Mr.
+                  userName: john.doe@datadoghq.com
+            schema:
+              $ref: '#/components/schemas/ExternalUser'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExternalUser'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - AuthZ:
+        - user_access_invite
+        - user_access_manage
+      - bearerAuth: []
+      summary: Update user
+      tags:
+      - SCIM
+      x-menu-order: 4
+      x-permission:
+        operator: AND
+        permissions:
+        - user_access_invite
+        - user_access_manage
+      x-undo:
+        type: idempotent
   /api/v2/scorecard/outcomes:
     get:
       description: Fetches all rule outcomes.
@@ -47696,6 +48682,15 @@ tags:
     [Test Visibility in Datadog page](https://docs.datadoghq.com/tests/) for more
     information.
   name: CI Visibility Tests
+- description: 'Datadog Cloud Security Management (CSM) delivers real-time threat
+    detection
+
+    and continuous configuration audits across your entire cloud infrastructure,
+
+    all in a unified view for seamless collaboration and faster remediation.
+
+    Go to https://docs.datadoghq.com/security/cloud_security_management to learn more'
+  name: CSM Agents
 - description: Cloud Security Management Threats (CSM Threats) monitors file, network,
     and process activity across your environment to detect real-time threats to your
     infrastructure. See [Cloud Security Management Threats](https://docs.datadoghq.com/security/threats/)
@@ -47737,10 +48732,6 @@ tags:
 
     organization.'
   name: Dashboard Lists
-- description: The Data Deletion API allows the user to target and delete data from
-    the allowed products. It's currently enabled for Logs and RUM and depends on `logs_delete_data`
-    and `rum_delete_data` permissions respectively.
-  name: Data Deletion
 - description: 'Configure your Datadog Email Domain Allowlist directly through the
     Datadog API.
 
@@ -48004,6 +48995,13 @@ tags:
     description: Find out more at
     url: https://docs.datadoghq.com/real_user_monitoring/platform/generate_metrics/
   name: Rum Metrics
+- description: 'Provision Datadog users and teams using SCIM APIs.
+
+
+    Note: SCIM provisioning for Datadog teams is only available for select organizations
+    at this point. Request access by contacting Datadog support, or see the [SCIM
+    page](https://docs.datadoghq.com/account_management/scim/) for more information.'
+  name: SCIM
 - description: Create and manage your security rules, signals, filters, and more.
     See the [Datadog Security page](https://docs.datadoghq.com/security/) for more
     information.
@@ -48016,7 +49014,11 @@ tags:
     page](https://docs.datadoghq.com/account_management/org_settings/service_accounts/)
     for more information.
   name: Service Accounts
-- description: API to create, update, retrieve and delete service definitions.
+- description: 'API to create, update, retrieve and delete service definitions.
+
+    Note: Service Catalog [v3.0 schema](https://docs.datadoghq.com/service_catalog/service_definitions/v3-0/)
+    has new API endpoints documented under [Software Catalog](https://docs.datadoghq.com/api/latest/software-catalog/).
+    Use the following Service Definition endpoints for v2.2 and earlier.'
   externalDocs:
     url: https://docs.datadoghq.com/tracing/service_catalog/
   name: Service Definition

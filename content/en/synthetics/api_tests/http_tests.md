@@ -198,6 +198,9 @@ A test is considered `FAILED` if it does not satisfy one or more assertions or i
 
 The most common errors include the following:
 
+`AUTHENTICATION_ERROR`
+: Synthetic Monitoring automatically disables test retries when authentication failures occur. This safety measure remains in effect until you update the test with valid credentials. This prevents unnecessary test executions that would generate false alerts and increase billable usage.
+
 `CONNREFUSED`
 : No connection could be made because the target machine actively refused it.
 
