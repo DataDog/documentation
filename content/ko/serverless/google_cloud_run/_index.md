@@ -22,9 +22,9 @@ Google Cloud Run은 컨테이너 기반 애플리케이션을 배포하고 확�
 
 Datadog은 `serverless-init` 컨테이너 이미지의 새 릴리스를 Google의 gcr.io, AWS의 ECR 및 Docker Hub에 게시합니다.
 
-| dockerhub.io | gcr.io | public.ecr.aws |
-| ------------ | ------ | -------------- |
-| datadog/serverless-init | gcr.io/datadoghq/serverless-init | public.ecr.aws/datadog/serverless-init |
+| dockerhub.io            | gcr.io                           | public.ecr.aws                         | datadoghq.azurecr.io                 |
+| ----------------------- | -------------------------------- | -------------------------------------- | ------------------------------------ |
+| datadog/serverless-init | gcr.io/datadoghq/serverless-init | public.ecr.aws/datadog/serverless-init | datadoghq.azurecr.io/serverless-init |
 
 이미지에는 시맨틱 버전 관리를 기반으로 태그가 지정되며, 새 버전마다 3개의 관련 태그가 지정됩니다:
 
@@ -136,18 +136,18 @@ gcloud run deploy APP_NAME --image=gcr.io/YOUR_PROJECT/APP_NAME \
 
 ### 환경 변수
 
-| 변수 | 설명 |
-| -------- | ----------- |
-|`DD_API_KEY`| [Datadog API 키][7] - **필수**|
-| `DD_SITE` | [Datadog 사이트][5] - **필수** |
-| `DD_LOGS_ENABLED` | true인 경우 로그 (stdout 및 stderr)를 Datadog에 전송합니다. 기본값은 false입니다. |
-| `DD_LOGS_INJECTION`| true인 경우 [Java][19], [Node][20], [.NET][21] 및 [PHP][22]에서 지원되는 로거에 대한 트레이스 데이터로 모든 로그를 보강합니다. [Python][23], [Go][24] 및 [Ruby][25]에 대한 추가 문서를 참조하세요. |
-| `DD_TRACE_SAMPLE_RATE`|  트레이스 수집 샘플링 속도 `0.0` 및 `1.0`을 제어합니다. |
-| `DD_SERVICE`      | [통합 서비스 태깅][6]을 참조하세요.                                  |
-| `DD_VERSION`      | [통합 서비스 태깅][6]을 참조하세요.                                  |
-| `DD_ENV`          | [통합 서비스 태깅][6]을 참조하세요.                                  |
-| `DD_SOURCE`       | [통합 서비스 태깅][6]을 참조하세요.                                  |
-| `DD_TAGS`         | [통합 서비스 태깅][6]을 참조하세요.                                  |
+| 변수                   | 설명                                                                                                                                                                                               |
+| ---------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `DD_API_KEY`           | [Datadog API 키][7] - **필수**                                                                                                                                                                     |
+| `DD_SITE`              | [Datadog 사이트][5] - **필수**                                                                                                                                                                     |
+| `DD_LOGS_ENABLED`      | true인 경우 로그 (stdout 및 stderr)를 Datadog에 전송합니다. 기본값은 false입니다.                                                                                                                  |
+| `DD_LOGS_INJECTION`    | true인 경우 [Java][19], [Node][20], [.NET][21] 및 [PHP][22]에서 지원되는 로거에 대한 트레이스 데이터로 모든 로그를 보강합니다. [Python][23], [Go][24] 및 [Ruby][25]에 대한 추가 문서를 참조하세요. |
+| `DD_TRACE_SAMPLE_RATE` | 트레이스 수집 샘플링 속도 `0.0` 및 `1.0`을 제어합니다.                                                                                                                                             |
+| `DD_SERVICE`           | [통합 서비스 태깅][6]을 참조하세요.                                                                                                                                                                |
+| `DD_VERSION`           | [통합 서비스 태깅][6]을 참조하세요.                                                                                                                                                                |
+| `DD_ENV`               | [통합 서비스 태깅][6]을 참조하세요.                                                                                                                                                                |
+| `DD_SOURCE`            | [통합 서비스 태깅][6]을 참조하세요.                                                                                                                                                                |
+| `DD_TAGS`              | [통합 서비스 태깅][6]을 참조하세요.                                                                                                                                                                |
 
 ## 트러블슈팅
 
