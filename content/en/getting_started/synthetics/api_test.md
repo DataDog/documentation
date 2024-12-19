@@ -36,32 +36,47 @@ API tests **proactively monitor** that your **most important services** are avai
 
 HTTP tests monitor your API endpoints and alert you when response latency is high or fail to meet any conditions you define, such as expected HTTP status code, response headers, or response body content.
 
-{{< img src="getting_started/synthetics/api-test.png" alt="Overview of a Synthetics HTTP Test" style="width:100%;" >}}
-
 The example below demonstrates how to create an [HTTP test][3], a subtype of [single API tests][1].
 
-### Define request
-
 1. In the Datadog site, hover over **Digital Experience** and select **[Tests][4]** (under **Synthetic Monitoring & Testing**).
+
 2. Click **New Test** > **[New API test][5]**.
-3. Select the `HTTP` request type.
-4. Define your request:
 
-    - Add the URL of the endpoint you want to monitor. If you don't know what to start with, you can use `https://www.shopist.io/`, a test e-commerce web application. Defining the endpoint to test automatically populates the name of your test to `Test on www.shopist.io`. 
-    - You can select **Advanced Options** to set custom request options, certificates, authentication credentials, and more.  
-    
-      **Note:** You can create secure [global variables][6] to store credentials and create [local variables][7] to generate dynamic timestamps to use in your request payload. After creating these variables, type `{{` in any relevant field and select the variable to inject its value in your test options.  
-    
-      In this example, no specific advanced option is needed.
-    - You can set tags such as `env:prod` and `app:shopist` on your test. Tags allow you to keep your test suite organized and quickly find tests you're interested in on the homepage.
+3. You may create a test using one of the following options:
 
-5. Click **Test URL** to trigger a sample test run.
+   - **Create a test from a template**:
 
-{{< img src="getting_started/synthetics/api-test-config-3.png" alt="API test configuration" style="width:100%;">}}
+   1. Hover over one of the following pre-populated templates and click **View Template**. This opens a side panel displaying pre-populated configuration information, including: Test Details, Request Details, Assertions, Alert Conditions, and Monitor Settings. 
+
+      {{< img src="getting_started/synthetics/synthetics_templates_api_video.mp4" alt="Video of Synthetics API test landing page with templates" video="true" >}}
+
+   2. Click **+Create Test** to open the **Define Request** page, where you can review and edit the pre-populated configuration options. The fields presented are identical to those available when creating a test from scratch.
+   3. Click **Save Details** when you are ready to submit your API test.<br />
+
+   - **Build a test from scratch**:
+
+   1. To build a test from scratch, click the **+ Start from scratch** template, then select the `HTTP` request type.
+
+   2. Add the URL of the endpoint you want to monitor. If you don't know what to start with, you can use `https://www.shopist.io/`, a test e-commerce web application. After entering the endpoint to test, the name of your test is automatically populated as `Test on shopist.io`. 
+
+   3. Optionally, select **Advanced Options** to:
+      - Set custom request options.
+      - Add certificates and authentication credentials.
+      - Create secure [global variables][6] or [local variables][7] for dynamic inputs.
+
+        **Note**: Type `{{` in any relevant field to select a variable and inject its value into your test options. 
+          
+   4. Optionally, set tags such as `env:prod` and `app:shopist` on your test. Tags allow you to keep your test suite organized and quickly find tests you're interested in on the homepage.
+
+   5. Click **Send** to trigger a sample test run.
+
+      {{< img src="getting_started/synthetics/api-test-config-4.png" alt="API test configuration" style="width:90%;">}}
+
+   6. Click **Create Test** when you are ready to submit your API test.
 
 ### Define assertions
 
-Clicking **Test URL** automatically populates basic assertions about your endpoint's response. Assertions define what a successful test run is.
+Clicking **Send** automatically populates basic assertions about your endpoint's response. Assertions define what a successful test run is.
 
 In this example, three default assertions populate after triggering the sample test run:
 
