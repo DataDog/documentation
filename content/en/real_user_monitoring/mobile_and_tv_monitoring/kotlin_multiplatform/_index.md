@@ -28,7 +28,7 @@ To get started with RUM for Kotlin Multiplatform, create an application and conf
   {{< nextlink href="/real_user_monitoring/mobile_and_tv_monitoring/kotlin_multiplatform/advanced_configuration">}}<u>Advanced Configuration</u>: Enrich user sessions, manage events and data, track custom global attributes and widgets, review initialization parameters, modify or drop RUM events, and more.{{< /nextlink >}}
   {{< nextlink href="/real_user_monitoring/mobile_and_tv_monitoring/kotlin_multiplatform/mobile_vitals">}}<u>Data Collected</u>: Review data that the RUM Kotlin Multiplatform SDK collects.{{< /nextlink >}}
   {{< nextlink href="/real_user_monitoring/mobile_and_tv_monitoring/kotlin_multiplatform/mobile_vitals">}}<u>Mobile Vitals</u>: View mobile vitals, which help compute insights about your mobile application.{{< /nextlink >}}
-  {{< nextlink href="/real_user_monitoring/mobile_and_tv_monitoring/kotlin_multiplatform/web_view_tracking/?tab=kotlinmultiplatform">}}<u>Web View Tracking</u>: Monitor web views and eliminate blind spots in your mobile applications.{{< /nextlink >}}
+  {{< nextlink href="/real_user_monitoring/mobile_and_tv_monitoring/kotlin_multiplatform/web_view_tracking">}}<u>Web View Tracking</u>: Monitor web views and eliminate blind spots in your mobile applications.{{< /nextlink >}}
   {{< nextlink href="/real_user_monitoring/mobile_and_tv_monitoring/kotlin_multiplatform/integrated_libraries">}}
   <u>Integrated Libraries</u>: Import integrated libraries for your Kotlin Multiplatform applications.{{< /nextlink >}}
   {{< nextlink href="/real_user_monitoring/mobile_and_tv_monitoring/kotlin_multiplatform/troubleshooting">}}
