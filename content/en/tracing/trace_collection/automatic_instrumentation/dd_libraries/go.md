@@ -30,7 +30,7 @@ further_reading:
 ---
 
 <div class="alert alert-info">
-The Go Tracer v2 is now in Preview! See <a href="/tracing/trace_collection/custom_instrumentation/go/migration">our migration guide</a> to upgrade.
+The Go Tracer v2 is in Preview! See <a href="/tracing/trace_collection/custom_instrumentation/go/migration">the migration guide</a> to upgrade.
 </div>
 
 

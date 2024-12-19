@@ -61,29 +61,29 @@ The Go packages listed in this page are relevant for Application Security capabi
 
 | Framework         | Threat Detection supported? | Threat Protection supported? |
 |-------------------|-----------------------------|------------------------------|
-| [net/http][13]     | {{< X >}}  | {{< X >}} |
-| [Gin][7]          | {{< X >}} | {{< X >}} |
-| [Gorilla Mux][8] | {{< X >}} | {{< X >}} |
-| [gRPC][11]          | {{< X >}} | {{< X >}} |
-| [echo v4][9]     | {{< X >}}  | {{< X >}} |
-| [echo v3][10]     | {{< X >}} | {{< X >}} |
-| [chi][12] | {{< X >}} | {{< X >}} |
-| [graphql-go][17] | {{< X >}} | {{< X >}} |
-| [gqlgen][18] | {{< X >}} | {{< X >}} |
+| [net/http][13]     | <i class="icon-check-bold"></i>  | <i class="icon-check-bold"></i> |
+| [Gin][7]          | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |
+| [Gorilla Mux][8] | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |
+| [gRPC][11]          | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |
+| [echo v4][9]     | <i class="icon-check-bold"></i>  | <i class="icon-check-bold"></i> |
+| [echo v3][10]     | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |
+| [chi][12] | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |
+| [graphql-go][17] | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |
+| [gqlgen][18] | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |
 
 
 ### Networking framework compatibility
 
 | Framework             | Threat Detection supported? | Threat Protection supported? |
 |-----------------------|-----------------------------|------------------------------|
-| [gRPC client][11]     | {{< X >}}                   | {{< X >}} |
-| [net/http client][13] | {{< X >}}                   | {{< X >}} |
+| [gRPC client][11]     | <i class="icon-check-bold"></i>                   | <i class="icon-check-bold"></i> |
+| [net/http client][13] | <i class="icon-check-bold"></i>                   | <i class="icon-check-bold"></i> |
 
 ### Data store compatibility
 
 | Framework         | Threat Detection supported?    | Threat Protection supported?                                              |
 |-------------------|-----------------|--------------------------------------------------------------------------|
-| [sql][14]          | {{< X >}} |   {{< X >}}    |
+| [sql][14]          | <i class="icon-check-bold"></i> |   <i class="icon-check-bold"></i>    |
 
 [6]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib
 [7]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/gin-gonic/gin
@@ -109,28 +109,28 @@ The Go packages listed in this page are relevant for Application Security capabi
 
 | Framework         | Threat Detection supported? | Threat Protection supported? |
 |-------------------|-----------------------------|------------------------------|
-| [net/http][25]     | {{< X >}}  | {{< X >}} |
-| [Gin][20]          | {{< X >}} | {{< X >}} |
-| [Gorilla Mux][21] | {{< X >}} | {{< X >}} |
-| [gRPC][23]          | {{< X >}} | {{< X >}} |
-| [echo v4][22]     | {{< X >}}  | {{< X >}} |
-| [chi][24] | {{< X >}} | {{< X >}} |
-| [graphql-go][17] | {{< X >}} | {{< X >}} |
-| [gqlgen][18] | {{< X >}} | {{< X >}} |
+| [net/http][25]     | <i class="icon-check-bold"></i>  | <i class="icon-check-bold"></i> |
+| [Gin][20]          | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |
+| [Gorilla Mux][21] | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |
+| [gRPC][23]          | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |
+| [echo v4][22]     | <i class="icon-check-bold"></i>  | <i class="icon-check-bold"></i> |
+| [chi][24] | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |
+| [graphql-go][17] | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |
+| [gqlgen][18] | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |
 
 
 ### Networking framework compatibility
 
 | Framework             | Threat Detection supported? | Threat Protection supported? |
 |-----------------------|-----------------------------|------------------------------|
-| [gRPC client][23]     | {{< X >}}                   | {{< X >}} |
-| [net/http client][25] | {{< X >}}                   | {{< X >}} |
+| [gRPC client][23]     | <i class="icon-check-bold"></i>                   | <i class="icon-check-bold"></i> |
+| [net/http client][25] | <i class="icon-check-bold"></i>                   | <i class="icon-check-bold"></i> |
 
 ### Data store compatibility
 
 | Framework         | Threat Detection supported?    | Threat Protection supported?                                              |
 |-------------------|-----------------|--------------------------------------------------------------------------|
-| [sql][26]          | {{< X >}} |   {{< X >}}    |
+| [sql][26]          | <i class="icon-check-bold"></i> |   <i class="icon-check-bold"></i>    |
 
 [17]: https://pkg.go.dev/github.com/graphql-go/graphql
 [18]: https://pkg.go.dev/github.com/99designs/gqlgen/graphql

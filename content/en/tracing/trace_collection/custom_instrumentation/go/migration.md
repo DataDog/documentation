@@ -1,6 +1,8 @@
 ---
 title: Migrating from v1 to v2 of the Go Tracer
 description: 'Upgrade your Go tracer from v1 to v2.'
+aliases:
+  - /tracing/trace_collection/custom_instrumentation/opentracing/go
 further_reading:
     - link: 'tracing/trace_collection/custom_instrumentation/go/dd-api'
       tag: 'Documentation'
