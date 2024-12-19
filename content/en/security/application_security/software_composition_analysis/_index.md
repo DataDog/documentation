@@ -121,6 +121,10 @@ Software Composition Analysis enriches the information APM is already collecting
 
 {{< img src="security/application_security/threats/threats-on-svc-cat_3.png" alt="Vulnerability information shown in the APM Service Catalog" style="width:100%;" >}}
 
+## Disable Software Composition Analysis
+
+For information on disabling Software Composition Analysis, see [Disabling Software Composition Analysis][14].
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -137,3 +141,4 @@ Software Composition Analysis enriches the information APM is already collecting
 [11]: /integrations/jira/
 [12]: https://app.datadoghq.com/security/configuration/asm/setup
 [13]: https://github.com/DataDog/guarddog
+[14]: /security/application_security/troubleshooting/#disabling-software-composition-analysis
