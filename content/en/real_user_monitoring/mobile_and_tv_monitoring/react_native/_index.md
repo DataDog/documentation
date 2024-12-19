@@ -28,9 +28,9 @@ To get started with RUM for React Native, create an application and configure th
   {{< nextlink href="/real_user_monitoring/mobile_and_tv_monitoring/react_native/advanced_configuration">}}<u>Advanced Configuration</u>: Enrich user sessions, manage events and data, track custom global attributes and widgets, review initialization parameters, modify or drop RUM events, and more.{{< /nextlink >}}
   {{< nextlink href="/real_user_monitoring/mobile_and_tv_monitoring/react_native/mobile_vitals">}}<u>Data Collected</u>: Review data that the RUM React Native SDK collects.{{< /nextlink >}}
   {{< nextlink href="/real_user_monitoring/mobile_and_tv_monitoring/react_native/mobile_vitals">}}<u>Mobile Vitals</u>: View mobile vitals, which help compute insights about your mobile application.{{< /nextlink >}}
-  {{< nextlink href="/real_user_monitoring/mobile_and_tv_monitoring/react_native/web_view_tracking">}}<u>Web View Tracking</u>: Monitor web views and eliminate blind spots in your mobile applications.{{< /nextlink >}}
+  {{< nextlink href="/real_user_monitoring/mobile_and_tv_monitoring/react_native/web_view_tracking/?tab=reactnative">}}<u>Web View Tracking</u>: Monitor web views and eliminate blind spots in your mobile applications.{{< /nextlink >}}
   {{< nextlink href="/real_user_monitoring/mobile_and_tv_monitoring/react_native/integrated_libraries">}}
   <u>Integrated Libraries</u>: Import integrated libraries for your React Native applications.{{< /nextlink >}}
   {{< nextlink href="/real_user_monitoring/mobile_and_tv_monitoring/react_native/troubleshooting">}}
-  <u>Troubleshooting</u>: Common troubleshooting RUM React Native SDK issues.{{< /nextlink >}}
+  <u>Troubleshooting</u>: Common troubleshooting React Native SDK issues.{{< /nextlink >}}
 {{< /whatsnext >}}

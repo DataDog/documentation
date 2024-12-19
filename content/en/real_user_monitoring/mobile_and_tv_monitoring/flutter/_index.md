@@ -25,8 +25,10 @@ To get started with RUM for Flutter, create an application and configure the Flu
   {{< nextlink href="/real_user_monitoring/mobile_and_tv_monitoring/flutter/advanced_configuration">}}<u>Advanced Configuration</u>: Enrich user sessions, manage events and data, track custom global attributes and widgets, review initialization parameters, modify or drop RUM events, and more.{{< /nextlink >}}
   {{< nextlink href="/real_user_monitoring/mobile_and_tv_monitoring/flutter/mobile_vitals">}}<u>Data Collected</u>: Review data that the RUM Flutter SDK collects.{{< /nextlink >}}
   {{< nextlink href="/real_user_monitoring/mobile_and_tv_monitoring/flutter/mobile_vitals">}}<u>Mobile Vitals</u>: View mobile vitals, which help compute insights about your mobile application.{{< /nextlink >}}
+  {{< nextlink href="/real_user_monitoring/mobile_and_tv_monitoring/flutter/web_view_tracking/?tab=flutter">}}
+  <u>Web View tracking</u>: Monitor web views and eliminate blind spots in your mobile applications.{{< /nextlink >}}
   {{< nextlink href="/real_user_monitoring/mobile_and_tv_monitoring/flutter/integrated_libraries">}}
   <u>Integrated Libraries</u>: Import integrated libraries for your Flutter applications.{{< /nextlink >}}
   {{< nextlink href="/real_user_monitoring/mobile_and_tv_monitoring/flutter/troubleshooting">}}
-  <u>Troubleshooting</u>: Common troubleshooting RUM Flutter SDK issues.{{< /nextlink >}}
+  <u>Troubleshooting</u>: Common troubleshooting Flutter SDK issues.{{< /nextlink >}}
 {{< /whatsnext >}}

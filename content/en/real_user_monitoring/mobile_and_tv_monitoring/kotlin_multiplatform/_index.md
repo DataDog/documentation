@@ -32,5 +32,5 @@ To get started with RUM for Kotlin Multiplatform, create an application and conf
   {{< nextlink href="/real_user_monitoring/mobile_and_tv_monitoring/kotlin_multiplatform/integrated_libraries">}}
   <u>Integrated Libraries</u>: Import integrated libraries for your Kotlin Multiplatform applications.{{< /nextlink >}}
   {{< nextlink href="/real_user_monitoring/mobile_and_tv_monitoring/kotlin_multiplatform/troubleshooting">}}
-  <u>Troubleshooting</u>: Common troubleshooting RUM Kotlin Multiplatform SDK issues.{{< /nextlink >}}
+  <u>Troubleshooting</u>: Common troubleshooting Kotlin Multiplatform SDK issues.{{< /nextlink >}}
 {{< /whatsnext >}}
