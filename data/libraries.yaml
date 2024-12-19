@@ -271,11 +271,16 @@ Tracing:
       link: https://github.com/zachdaniel/spandex
       authors: Zach Daniel
   - Go:
-    - name: dd-trace-go
+    - name: dd-trace-go (v1)
       link: https://github.com/DataDog/dd-trace-go
       official: true
       authors: Datadog
-      notes: Go package is 'gopkg.in/DataDog/dd-trace-go.v1' or 'github.com/DataDog/dd-trace-go/v2'.
+      notes: Go package is 'gopkg.in/DataDog/dd-trace-go.v1'.
+    - name: dd-trace-go (v2)
+      link: https://github.com/DataDog/dd-trace-go
+      official: true
+      authors: Datadog
+      notes: "Go package is 'github.com/DataDog/dd-trace-go/v2'. Note: v2 is in Preview."
     - name: datadog-go
       link: https://github.com/savaki/datadog
       authors: Matt Ho
