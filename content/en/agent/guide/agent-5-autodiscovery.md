@@ -3,6 +3,7 @@ title: Autodiscovery with Agent v5
 private: true
 aliases:
   - /agent/faq/agent-5-autodiscovery
+private: true
 ---
 
 <div class="alert alert-info">
