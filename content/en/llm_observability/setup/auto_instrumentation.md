@@ -83,15 +83,21 @@ The LangChain integration instruments the following methods:
 
 - [LLMs][13]:
   - `llm.invoke()`, `llm.ainvoke()`
+  - `llm.stream()`, `llm.astream()`
 - [Chat models][14]
   - `chat_model.invoke()`, `chat_model.ainvoke()`
+  - `chat_model.stream()`, `chat_model.astream()`
 - [Chains/LCEL][15]
   - `chain.invoke()`, `chain.ainvoke()`
   - `chain.batch()`, `chain.abatch()`
+  - `chain.stream()`, `chain.astream()`
 - [Embeddings][17]
   - OpenAI : `OpenAIEmbeddings.embed_documents()`, `OpenAIEmbeddings.embed_query()`
-
-**Note:** The LangChain integration does not yet support tracing streamed calls.
+- [Tools][24]
+  - `BaseTool.invoke()`, `BaseTool.ainvoke()`
+- [Retrieval][25]
+  - `langchain_community.<vectorstore>.similarity_search()`
+  - `langchain_pinecone.similarity_search()`
 
 ## Amazon Bedrock
 
@@ -172,6 +178,9 @@ The Vertex AI integration instruments the following methods:
 [21]: https://cloud.google.com/vertex-ai/generative-ai/docs/reference/python/latest
 [22]: https://cloud.google.com/vertex-ai/generative-ai/docs/reference/python/latest/summary_method#vertexai_preview_generative_models_GenerativeModel_generate_content_summary
 [23]: https://cloud.google.com/vertex-ai/generative-ai/docs/reference/python/latest/summary_method#vertexai_generative_models_ChatSession_send_message_summary
+[24]: https://python.langchain.com/v0.2/docs/concepts/#tools
+[25]: https://python.langchain.com/v0.2/docs/concepts/#retrieval
+
 {{% /tab %}}
 {{% tab "Node.js" %}}
 

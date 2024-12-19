@@ -2,6 +2,9 @@
 title: Advanced Log Collection Configurations
 description: Use the Datadog Agent to collect your logs and send them to Datadog
 further_reading:
+- link: "/logs/guide/getting-started-lwl/"
+  tag: "Documentation"
+  text: "Getting started with Logging without Limits™"
 - link: "/logs/guide/how-to-set-up-only-logs/"
   tag: "Documentation"
   text: "Use the Datadog Agent for log collection only"
@@ -17,9 +20,6 @@ further_reading:
 - link: "/logs/explorer/"
   tag: "Documentation"
   text: "See how to explore your logs"
-- link: "/logs/logging_without_limits/"
-  tag: "Documentation"
-  text: "Logging without Limits*"
 - link: "/glossary/#tail"
   tag: Glossary
   text: 'Glossary entry for "tail"'

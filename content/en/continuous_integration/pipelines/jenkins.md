@@ -1103,7 +1103,7 @@ To enable Test Optimization through the UI do the following:
 5. Optionally, provide [additional configuration settings][18].
 6. Click **Save**.
 
-{{< img src="ci/ci-jenkins-plugin-tests-config.png" alt="Datadog Test Optimization configuration for Jenkins" style="width:100%;">}}
+{{< img src="ci/ci-jenkins-plugin-tests-config-2.png" alt="Datadog Test Optimization configuration for Jenkins" style="width:100%;">}}
 
 ### Enable with the `datadog` pipeline step
 
@@ -1118,7 +1118,7 @@ pipeline {
         datadog(testVisibility: [
             enabled: true,
             serviceName: "my-service", // the name of service or library being tested
-            languages: ["JAVA"], // languages that should be instrumented (available options are "JAVA", "JAVASCRIPT", "PYTHON", "DOTNET")
+            languages: ["JAVA"], // languages that should be instrumented (available options are "JAVA", "JAVASCRIPT", "PYTHON", "DOTNET", "RUBY")
             additionalVariables: ["my-var": "value"]  // additional tracer configuration settings (optional)
         ])
     }
@@ -1233,7 +1233,7 @@ To do so, set the following environment variables.
 
 **Note:** These variables are optional, but if they are set, they take precedence over the Git information set by other Jenkins plugins.
 
-`DD_GIT_REPOSITORY` (Optional)
+`DD_GIT_REPOSITORY_URL` (Optional)
 : The repository URL of your service.<br/>
 **Example**: `https://github.com/my-org/my-repo.git`
 

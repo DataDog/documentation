@@ -281,6 +281,12 @@ export default {
      us5: 'https://api.us5.datadoghq.com/api/intake/otlp/v1/metrics',
      eu: 'https://api.datadoghq.eu/api/intake/otlp/v1/metrics'
     },
+    otlp_logs_endpoint: {
+     us: 'https://http-intake.logs.datadoghq.com/api/v2/logs',
+     us3: 'https://http-intake.logs.us3.datadoghq.com/api/v2/logs',
+     us5: 'https://http-intake.logs.us5.datadoghq.com/api/v2/logs',
+     eu: 'https://http-intake.logs.datadoghq.eu/api/v2/logs'
+    },
     custom_costs_endpoint: {
       us: 'api.datadoghq.com/api/v2/cost/custom_costs',
       us3: 'api.us3.datadoghq.com/api/v2/cost/custom_costs',
