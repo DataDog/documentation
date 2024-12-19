@@ -110,7 +110,7 @@ If you are integrating Kotlin Multiplatform library as a framework with an `embe
 {{< tabs >}}
 {{% tab "RUM" %}}
 
-1. Navigate to [**Digital Experience** > **Add an Application**][2].
+1. Navigate to [**Digital Experience** > **Add an Application**][1].
 2. Select `Kotlin Multiplatform` as the application type and enter an application name to generate a unique Datadog application ID and client token.
 3. To disable automatic user data collection for either client IP or geolocation data, uncheck the boxes for those settings. For more information, see [RUM Kotlin Multiplatform Data Collected][2].
 
