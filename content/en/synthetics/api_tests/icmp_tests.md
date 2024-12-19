@@ -73,7 +73,7 @@ If a test contains an assertion on the response body and the timeout limit is re
 
 Select the **Locations** to run your ICMP test from. ICMP tests can run from both managed and [private locations][1] depending on your preference for triggering trigger the ICMP pings from outside or inside your network.
 
-{{% managed-locations %}} 
+{{% managed-locations %}}
 
 ### Specify test frequency
 
@@ -95,7 +95,7 @@ To display your list of variables, type `{{` in your desired field.
 
 ## Test failure
 
-A test is considered `FAILED` if it does not satisfy one or more assertions or if the request prematurely failed. In some cases, the test can fail without testing the assertions against the endpoint. 
+A test is considered `FAILED` if it does not satisfy one or more assertions or if the request prematurely failed. In some cases, the test can fail without testing the assertions against the endpoint.
 
 These reasons include the following:
 
@@ -110,11 +110,30 @@ If you are using the [custom role feature][10], add your user to any custom role
 
 ### Restrict access
 
-Access restriction is available for customers using [custom roles][11] on their accounts.
+{{< img src="synthetics/settings/grace_1.png" alt="Set permissions for your test" style="width:70%;" >}}
 
-You can restrict access to an ICMP test based on the roles in your organization. When creating an ICMP test, choose which roles (in addition to your user) can read and write your test. 
+Use [granular access control][11] to limit who has access to your test based on roles, teams, or individual users.
 
-{{< img src="synthetics/settings/restrict_access_1.png" alt="Set permissions for your test" style="width:70%;" >}}
+To do so:
+
+1. Open the permissions section of the form
+2. Click on `edit access`
+
+{{< img src="synthetics/settings/grace_2.png" alt="Set permissions for your test" style="width:70%;" >}}
+
+3. Click on `restrict access`
+4. Select teams, roles, or users
+5. Click `add`
+6. Select the level of access you want to associate with each of them
+7. Click on done
+
+| Access level | View test configuration | Edit test configuration | View test results[ˆ1] | Run test  |
+| ------------ | ----------------------- | ----------------------- | --------------------- | --------- |
+| No access    |                         |                         |                       |           |
+| Viewer       | {{< X >}}               |                         | {{< X >}}             |           |
+| Editor       | {{< X >}}               | {{< X >}}               | {{< X >}}             | {{< X >}} |
+
+[ˆ1]: You will be able to see results from Private Location even if you don't have Viewer access to that Private Location.
 
 ## Further Reading
 
@@ -130,4 +149,4 @@ You can restrict access to an ICMP test based on the roles in your organization.
 [8]: /synthetics/settings/#global-variables
 [9]: /account_management/rbac/
 [10]: /account_management/rbac#custom-roles
-[11]: /account_management/rbac/#create-a-custom-role
+[11]: account_management/rbac/granular_access

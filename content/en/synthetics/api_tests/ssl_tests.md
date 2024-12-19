@@ -42,8 +42,8 @@ After choosing to create a `SSL` test, define your test's request.
    * **Fail on revoked certificate in stapled OCSP**: Fail the test if the certificate is labeled as revoked by the OCSP stapling.
    * **Timeout**: Specify the amount of time in seconds before the test times out.
    * **Server Name**: Specifies on which server you want to initiate the TLS handshake, allowing the server to present one of multiple possible certificates on the same IP address and TCP port number. By default, the parameter is filled by the **Host** value.
-   * **Client certificate**: Authenticate through mTLS by uploading your client certificate (`.crt`) and the associated private key (`.key`) in `PEM` format. 
-   
+   * **Client certificate**: Authenticate through mTLS by uploading your client certificate (`.crt`) and the associated private key (`.key`) in `PEM` format.
+
    You can use the `openssl` library to convert your certificates. For example, convert a `PKCS12` certificate to `PEM` formatted private keys and certificates.
 
    ```
@@ -89,7 +89,7 @@ If a test contains an assertion on the response body and the timeout limit is re
 
 Select the **Locations** to run your SSL test from. SSL tests can run from both managed and [private locations][1] depending on your preference for monitoring certificates from outside or inside your network.
 
-{{% managed-locations %}} 
+{{% managed-locations %}}
 
 ### Specify test frequency
 
@@ -111,7 +111,7 @@ To display your list of variables, type `{{` in your desired field.
 
 ## Test failure
 
-A test is considered `FAILED` if it does not satisfy one or more assertions or if the request prematurely failed. In some cases, the test can fail without testing the assertions against the endpoint. 
+A test is considered `FAILED` if it does not satisfy one or more assertions or if the request prematurely failed. In some cases, the test can fail without testing the assertions against the endpoint.
 
 These reasons include the following:
 
@@ -121,7 +121,7 @@ These reasons include the following:
 `DNS`
 : DNS entry not found for the test URL. Possible causes include misconfigured test URL or the wrong configuration of your DNS entries.
 
-`INVALID_REQUEST` 
+`INVALID_REQUEST`
 : The configuration of the test is invalid (for example, a typo in the URL).
 
 `SSL`
@@ -129,7 +129,7 @@ These reasons include the following:
 
 `TIMEOUT`
 : The request couldn't be completed in a reasonable time. Two types of `TIMEOUT` can happen:
-  - `TIMEOUT: The request couldn't be completed in a reasonable time.` indicates that the request duration hit the test defined timeout (default is set to 60s). 
+  - `TIMEOUT: The request couldn't be completed in a reasonable time.` indicates that the request duration hit the test defined timeout (default is set to 60s).
   For each request only the completed stages for the request are displayed in the network waterfall. For example, in the case of `Total response time` only being displayed, the timeout occurred during the DNS resolution.
   - `TIMEOUT: Overall test execution couldn't be completed in a reasonable time.` indicates that the test duration (request + assertions) hits the maximum duration (60.5s).
 
@@ -141,11 +141,30 @@ If you are using the [custom role feature][12], add your user to any custom role
 
 ### Restrict access
 
-Access restriction is available for customers using [custom roles][13] on their accounts.
+{{< img src="synthetics/settings/grace_1.png" alt="Set permissions for your test" style="width:70%;" >}}
 
-You can restrict access to an SSL test based on the roles in your organization. When creating an SSL test, choose which roles (in addition to your user) can read and write your test. 
+Use [granular access control][13] to limit who has access to your test based on roles, teams, or individual users.
 
-{{< img src="synthetics/settings/restrict_access_1.png" alt="Set permissions for your test" style="width:70%;" >}}
+To do so:
+
+1. Open the permissions section of the form
+2. Click on `edit access`
+
+{{< img src="synthetics/settings/grace_2.png" alt="Set permissions for your test" style="width:70%;" >}}
+
+3. Click on `restrict access`
+4. Select teams, roles, or users
+5. Click `add`
+6. Select the level of access you want to associate with each of them
+7. Click on done
+
+| Access level | View test configuration | Edit test configuration | View test results[ˆ1] | Run test  |
+| ------------ | ----------------------- | ----------------------- | --------------------- | --------- |
+| No access    |                         |                         |                       |           |
+| Viewer       | {{< X >}}               |                         | {{< X >}}             |           |
+| Editor       | {{< X >}}               | {{< X >}}               | {{< X >}}             | {{< X >}} |
+
+[ˆ1]: You will be able to see results from Private Location even if you don't have Viewer access to that Private Location.
 
 ## Further Reading
 
@@ -163,4 +182,4 @@ You can restrict access to an SSL test based on the roles in your organization. 
 [10]: /synthetics/api_tests/errors/#ssl-errors
 [11]: /account_management/rbac/
 [12]: /account_management/rbac#custom-roles
-[13]: /account_management/rbac/#create-a-custom-role
+[13]: account_management/rbac/granular_access

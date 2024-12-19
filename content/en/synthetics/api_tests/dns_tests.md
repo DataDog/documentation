@@ -80,7 +80,7 @@ If a test contains an assertion on the response body and the timeout limit is re
 
 Select the **Locations** to run your DNS test from. DNS tests can run from both managed and [private locations][1] depending on your preference for monitoring a public or private domain.
 
-{{% managed-locations %}} 
+{{% managed-locations %}}
 
 ### Specify test frequency
 
@@ -92,7 +92,7 @@ DNS tests can run:
 
 {{% synthetics-alerting-monitoring %}}
 
-{{% synthetics-variables %}} 
+{{% synthetics-variables %}}
 
 ### Use variables
 
@@ -102,7 +102,7 @@ To display your list of variables, type `{{` in your desired field.
 
 ## Test failure
 
-A test is considered `FAILED` if it does not satisfy one or more assertions or if the request prematurely failed. In some cases, the test can fail without testing the assertions against the endpoint. 
+A test is considered `FAILED` if it does not satisfy one or more assertions or if the request prematurely failed. In some cases, the test can fail without testing the assertions against the endpoint.
 
 These reasons include the following:
 
@@ -112,12 +112,12 @@ These reasons include the following:
 `DNS`
 : DNS entry not found for the test URL. Possible causes include misconfigured test URL or the wrong configuration of your DNS entries.
 
-`INVALID_REQUEST` 
+`INVALID_REQUEST`
 : The configuration of the test is invalid (for example, a typo in the URL).
 
 `TIMEOUT`
 : The request couldn't be completed in a reasonable time. Two types of `TIMEOUT` can happen:
-  - `TIMEOUT: The request couldn't be completed in a reasonable time.` indicates that the request duration hit the test defined timeout (default is set to 60s). 
+  - `TIMEOUT: The request couldn't be completed in a reasonable time.` indicates that the request duration hit the test defined timeout (default is set to 60s).
   For each request only the completed stages for the request are displayed in the network waterfall. For example, in the case of `Total response time` only being displayed, the timeout occurred during the DNS resolution.
   - `TIMEOUT: Overall test execution couldn't be completed in a reasonable time.` indicates that the test duration (request + assertions) hits the maximum duration (60.5s).
 
@@ -129,11 +129,30 @@ If you are using the [custom role feature][11], add your user to any custom role
 
 ### Restrict access
 
-Access restriction is available for customers using [custom roles][12] on their accounts.
+{{< img src="synthetics/settings/grace_1.png" alt="Set permissions for your test" style="width:70%;" >}}
 
-You can restrict access to a DNS test based on the roles in your organization. When creating a DNS test, choose which roles (in addition to your user) can read and write your test. 
+Use [granular access control][12] to limit who has access to your test based on roles, teams, or individual users.
 
-{{< img src="synthetics/settings/restrict_access_1.png" alt="Set permissions for your test" style="width:70%;" >}}
+To do so:
+
+1. Open the permissions section of the form
+2. Click on `edit access`
+
+{{< img src="synthetics/settings/grace_2.png" alt="Set permissions for your test" style="width:70%;" >}}
+
+3. Click on `restrict access`
+4. Select teams, roles, or users
+5. Click `add`
+6. Select the level of access you want to associate with each of them
+7. Click on done
+
+| Access level | View test configuration | Edit test configuration | View test results[ˆ1] | Run test  |
+| ------------ | ----------------------- | ----------------------- | --------------------- | --------- |
+| No access    |                         |                         |                       |           |
+| Viewer       | {{< X >}}               |                         | {{< X >}}             |           |
+| Editor       | {{< X >}}               | {{< X >}}               | {{< X >}}             | {{< X >}} |
+
+[ˆ1]: You will be able to see results from Private Location even if you don't have Viewer access to that Private Location.
 
 ## Further Reading
 
@@ -150,4 +169,4 @@ You can restrict access to a DNS test based on the roles in your organization. W
 [9]: /synthetics/settings/#global-variables
 [10]: /account_management/rbac/
 [11]: /account_management/rbac#custom-roles
-[12]: /account_management/rbac/#create-a-custom-role
+[12]: account_management/rbac/granular_access

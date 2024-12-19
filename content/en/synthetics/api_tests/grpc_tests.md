@@ -33,7 +33,7 @@ gRPC tests allow you to proactively monitor your gRPC services and servers. You 
 Behavior Checks
 : Send gRPC requests to your applications' API endpoints to verify responses and defined conditions, such as overall response time, header, or body content.
 
-Health Checks 
+Health Checks
 : gRPC health checks are a standard for reporting the health of gRPC services. Determine if your gRPC servers and services are responsive, running, and capable of handling remote procedure calls (RPCs).<br><br>By implementing gRPC health checks, you can run gRPC health checks tests without having to provide a `.proto` file to Datadog. For more information, see the [example health checks `.proto` file][1] shared by the gRPC community.
 
 gRPC tests can run from both [managed](#select-locations) and [private locations][2] depending on your preference for running the test from outside or inside your network. gRPC tests can run on a schedule, on-demand, or directly within your [CI/CD pipelines][3].
@@ -45,15 +45,15 @@ After choosing to create a `gRPC` test, define your test's request.
 ### Define request
 
 1. Specify the **Host** and **Port** to run your test on. The default gRPC port is `50051`.
-2. Select **Behavior Check** to perform a unary call or **Health Check** to perform a health check. 
-   
+2. Select **Behavior Check** to perform a unary call or **Health Check** to perform a health check.
+
    {{< tabs >}}
    {{% tab "Behavior Check" %}}
 
    For a behavior check, specify the **Server Reflection** or [upload a **Proto File**][101] that defines your gRPC server. Select a method and include a request message. Datadog does not support streaming methods.
-   
+
 {{< img src="synthetics/api_tests/grpc_behavior_check_test.png" alt="Define gRPC request" style="width:90%;" >}}
-   
+
    [101]: https://grpc.io/docs/what-is-grpc/introduction/#working-with-protocol-buffers
 
    {{% /tab %}}
@@ -62,7 +62,7 @@ After choosing to create a `gRPC` test, define your test's request.
    For a health check, enter the name of the service. Leave this field blank if you want to send a health check on the gRPC server.
 
 {{< img src="synthetics/api_tests/grpc_health_check_test.png" alt="Define gRPC request" style="width:90%;" >}}
-   
+
    {{% /tab %}}
    {{< /tabs >}}
 
@@ -71,7 +71,7 @@ After choosing to create a `gRPC` test, define your test's request.
    {{< tabs >}}
 
    {{% tab "Request Options" %}}
-   
+
    * **Timeout**: Specify the amount of time in seconds before the test times out.
    * **Ignore server certificate error**: Select to have your gRPC test go on with connection even if there are errors when validating the SSL certificate.
    * **gRPC metadata**: Add and define metadata to your gRPC request to pass metadata between services.
@@ -80,10 +80,10 @@ After choosing to create a `gRPC` test, define your test's request.
 
    {{% tab "Authentication" %}}
 
-   * **Client certificate**: Authenticate through mTLS by uploading your client certificate (`.crt`) and the associated private key (`.key`) in `PEM` format. 
+   * **Client certificate**: Authenticate through mTLS by uploading your client certificate (`.crt`) and the associated private key (`.key`) in `PEM` format.
 
-     <br/> 
-   
+     <br/>
+
      You can use the `openssl` library to convert your certificates. For example, convert a `PKCS12` certificate to `PEM` formatted private keys and certificates.
 
       ```
@@ -150,7 +150,7 @@ If a test contains an assertion on the response body and the timeout limit is re
 
 Select the **Locations** to run your gRPC test from. gRPC tests can run from both managed and [private locations][2] depending on your preference for running the test from outside or inside your network.
 
-{{% managed-locations %}} 
+{{% managed-locations %}}
 
 ### Specify test frequency
 
@@ -205,11 +205,30 @@ If you are using the [custom role feature][13], add your user to any custom role
 
 ## Restrict access
 
-Access restriction is available for customers using [custom roles][14] on their accounts.
+{{< img src="synthetics/settings/grace_1.png" alt="Set permissions for your test" style="width:70%;" >}}
 
-You can restrict access to a browser test based on the roles in your organization. When creating a browser test, choose which roles (in addition to your user) can read and write your test.
+Use [granular access control][14] to limit who has access to your test based on roles, teams, or individual users.
 
-{{< img src="synthetics/settings/restrict_access_1.png" alt="Set permissions for your test" style="width:70%;" >}}
+To do so:
+
+1. Open the permissions section of the form
+2. Click on `edit access`
+
+{{< img src="synthetics/settings/grace_2.png" alt="Set permissions for your test" style="width:70%;" >}}
+
+3. Click on `restrict access`
+4. Select teams, roles, or users
+5. Click `add`
+6. Select the level of access you want to associate with each of them
+7. Click on done
+
+| Access level | View test configuration | Edit test configuration | View test results[ˆ1] | Run test  |
+| ------------ | ----------------------- | ----------------------- | --------------------- | --------- |
+| No access    |                         |                         |                       |           |
+| Viewer       | {{< X >}}               |                         | {{< X >}}             |           |
+| Editor       | {{< X >}}               | {{< X >}}               | {{< X >}}             | {{< X >}} |
+
+[ˆ1]: You will be able to see results from Private Location even if you don't have Viewer access to that Private Location.
 
 
 ## Further Reading
@@ -230,4 +249,4 @@ You can restrict access to a browser test based on the roles in your organizatio
 [11]: /synthetics/api_tests/errors/#ssl-errors
 [12]: /account_management/rbac/
 [13]: /account_management/rbac#custom-roles
-[14]: /account_management/rbac/#create-a-custom-role
+[14]: account_management/rbac/granular_access
