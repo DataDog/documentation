@@ -178,6 +178,6 @@ To add custom rules to your Scorecards dashboard:
 [8]: https://www.datadoghq.com/blog/github-actions-service-catalog
 [9]: https://backstage.io/docs/overview/what-is-backstage
 [10]:/api/latest/service-definition
-[11]: /service_catalog/add_metadata#metadata-structure-and-supported-versions
+[11]: /service_catalog/add_metadata
 [12]: /service_catalog/scorecards
 [13]: /api/latest/service-scorecards

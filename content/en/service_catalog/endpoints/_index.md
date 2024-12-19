@@ -1,5 +1,5 @@
 ---
-title: Datadog API Catalog
+title: Endpoint Observability
 further_reading:
 - link: "https://www.datadoghq.com/blog/monitor-apis-datadog-api-catalog/"
   tag: "Blog"
@@ -20,10 +20,6 @@ aliases:
     - /tracing/api_catalog/get_started
     - /tracing/api_catalog/
 ---
-
-{{< site-region region="gov,ap1" >}}
-<div class="alert alert-warning">API Catalog is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
 
 <div class="alert alert-warning"><h5 class="card-title text-black mt-0 mb-1">The API Catalog features are migrating to Service Catalog</h5>
 We are making significant improvements to the way API endpoints are represented in Datadog. The functionality described on this page is moving to the <a href="https://docs.datadoghq.com/service_catalog">Service Catalog</a>. All core capabilities will be available in the Service Catalog after the migration is done, at which point API Catalog will be deprecated.
@@ -114,8 +110,8 @@ Partner APIs
 
 [1]: https://app.datadoghq.com/apis/catalog
 [3]: /api_catalog/explore_apis/
-[6]: /api_catalog/owners_and_tags/
-[7]: /api_catalog/monitor_apis/
+[6]: /service_catalog/manage
+[7]: /endpoints/monitor_endpoints/
 [8]: /tracing/trace_collection/
-[9]: /api_catalog/add_entries
-[10]: /api_catalog/add_metadata
+[9]: /service_catalog/customize/create_entries
+[10]: /service_catalog/manage/#add-metadata-to-endpoints
