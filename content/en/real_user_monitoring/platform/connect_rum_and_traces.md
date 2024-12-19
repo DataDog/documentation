@@ -283,7 +283,7 @@ To start sending just your iOS application's traces to Datadog, see [iOS Trace C
     )..enableHttpTracking()
     ```
 
-[1]: /real_user_monitoring/mobile_and_tv_monitoring/flutter/etup/
+[1]: /real_user_monitoring/mobile_and_tv_monitoring/flutter/setup/
 [2]: /real_user_monitoring/mobile_and_tv_monitoring/flutter/setup/#automatic-resource-tracking
 
 {{% /tab %}}
