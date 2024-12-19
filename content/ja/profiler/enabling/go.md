@@ -38,7 +38,7 @@ Continuous Profiler は、AWS Lambda などのサーバーレスプラットフ�
 2. 以下のコマンドを使用して、`dd-trace-go` を取得します。
 
     ```shell
-    go get github.com/DataDog/dd-trace-go/v2/profiler
+    go get gopkg.in/DataDog/dd-trace-go.v1/profiler
     ```
 
      **注**: プロファイラは、バージョン 1.23.0 以降の `dd-trace-go` ライブラリで利用できます。
@@ -46,7 +46,7 @@ Continuous Profiler は、AWS Lambda などのサーバーレスプラットフ�
 3. アプリケーションの開始時に、[プロファイラ][6]をインポートします。
 
     ```Go
-    import "github.com/DataDog/dd-trace-go/v2/profiler"
+    import "gopkg.in/DataDog/dd-trace-go.v1/profiler"
     ```
 
 4. 次のスニペットを追加し、プロファイラを起動します。
@@ -141,13 +141,13 @@ The [Getting Started with Profiler][17] guide takes a sample service with a perf
 [3]: /ja/profiler/connect_traces_and_profiles/#break-down-code-performance-by-api-endpoints
 [4]: https://app.datadoghq.com/account/settings/agent/latest?platform=overview
 [5]: https://app.datadoghq.com/account/settings/agent/6?platform=overview
-[6]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/profiler#pkg-constants
+[6]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/profiler#pkg-constants
 [7]: /ja/profiler/connect_traces_and_profiles/#span-execution-timeline-view
 [8]: /ja/profiler/connect_traces_and_profiles/#prerequisites
 [9]: /ja/integrations/guide/source-code-integration/?tab=go
 [10]: https://app.datadoghq.com/profiling
-[11]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/profiler#WithProfileTypes
-[12]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/profiler#ProfileType
+[11]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/profiler#WithProfileTypes
+[12]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/profiler#ProfileType
 [13]: /ja/getting_started/tagging/unified_service_tagging
 [14]: https://pkg.go.dev/github.com/ianlancetaylor/cgosymbolizer#pkg-overview
 [15]: https://tip.golang.org/doc/go1.21

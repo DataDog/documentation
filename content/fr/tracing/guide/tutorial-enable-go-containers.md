@@ -100,10 +100,10 @@ Configurez ensuite l'application Go pour activer le traçage. Comme l'Agent s'ex
 Pour activer la prise en charge du traçage, supprimez la mise en commentaire l-des importations suivantes dans `apm-tutorial-golang/cmd/notes/main.go`  :
 
 {{< code-block lang="go" filename="cmd/notes/main.go" >}}
-sqltrace "github.com/DataDog/dd-trace-go/contrib/database/sql/v2"
-chitrace "github.com/DataDog/dd-trace-go/contrib/go-chi/chi/v2"
-httptrace "github.com/DataDog/dd-trace-go/contrib/net/http/v2"
-"github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
+sqltrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/database/sql"
+chitrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/go-chi/chi"
+httptrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http"
+"gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
 {{< /code-block >}}
 
 Dans la fonction `main()`, supprimez la mise en commentaire des lignes suivantes :
@@ -120,13 +120,13 @@ client = httptrace.WrapClient(client, httptrace.RTWithResourceNamer(func(req *ht
 {{< /code-block >}}
 
 {{< code-block lang="go" filename="cmd/notes/main.go" >}}
-r.Use(chitrace.Middleware(chitrace.WithService("notes")))
+r.Use(chitrace.Middleware(chitrace.WithServiceName("notes")))
 {{< /code-block >}}
 
 Dans `setupDB()`, supprimez la mise en commentaire des lignes suivantes :
 
 {{< code-block lang="go" filename="cmd/notes/main.go" >}}
-sqltrace.Register("sqlite3", &sqlite3.SQLiteDriver{}, sqltrace.WithService("db"))
+sqltrace.Register("sqlite3", &sqlite3.SQLiteDriver{}, sqltrace.WithServiceName("db"))
 db, err := sqltrace.Open("sqlite3", "file::memory:?cache=shared")
 {{< /code-block >}}
 
@@ -254,23 +254,23 @@ Datadog propose plusieurs bibliothèques entièrement compatibles pour Go qui pe
 import (
   ...
 
-  sqltrace "github.com/DataDog/dd-trace-go/contrib/database/sql/v2"
-  chitrace "github.com/DataDog/dd-trace-go/contrib/go-chi/chi/v2"
-  httptrace "github.com/DataDog/dd-trace-go/contrib/net/http/v2"
+  sqltrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/database/sql"
+  chitrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/go-chi/chi"
+  httptrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http"
   ...
 )
 {{< /code-block >}}
 
-Dans `cmd/notes/main.go`, les bibliothèques Datadog sont initialisées avec l'option `WithService`. Par exemple, la bibliothèque `chitrace` est initialisée comme suit :
+Dans `cmd/notes/main.go`, les bibliothèques Datadog sont initialisées avec l'option `WithServiceName`. Par exemple, la bibliothèque `chitrace` est initialisée comme suit :
 
 {{< code-block lang="go" filename="cmd/notes/main.go" disable_copy="true" collapsible="true" >}}
 r := chi.NewRouter()
 r.Use(middleware.Logger)
-r.Use(chitrace.Middleware(chitrace.WithService("notes")))
+r.Use(chitrace.Middleware(chitrace.WithServiceName("notes")))
 r.Mount("/", nr.Register())
 {{< /code-block >}}
 
-L'utilisation de `chitrace.WithService("notes")` garantit que tous les éléments tracés par la bibliothèque relèvent du nom de service `notes`.
+L'utilisation de `chitrace.WithServiceName("notes")` garantit que tous les éléments tracés par la bibliothèque relèvent du nom de service `notes`.
 
 Le fichier `main.go` contient d'autres exemples d'implémentation pour chacune de ces bibliothèques. Pour obtenir la liste complète des bibliothèques, référez-vous à la section [Exigences de compatibilité Go][16].
 
@@ -301,7 +301,7 @@ r.Delete("/notes/{noteID}", makeSpanMiddleware("DeleteNote", nr.DeleteNoteByID))
 Supprimez également le commentaire autour de l'importation suivante :
 
 {{< code-block lang="go" filename="notes/notesController.go" disable_copy="true" collapsible="true" >}}
-"github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
+"gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
 {{< /code-block >}}
 
 L'exemple d'application contient plusieurs exemples de traçage personnalisé. En voici quelques autres. Supprimez les commentaires pour activer ces spans :
@@ -348,8 +348,8 @@ Pour activer le tracing dans l'application de calendrier :
 
 1. Supprimez la mise en commentaire des lignes suivantes dans `cmd/calendar/main.go` :
    {{< code-block lang="go" filename="cmd/calendar/main.go" disable_copy="true" collapsible="true" >}}
-   chitrace "github.com/DataDog/dd-trace-go/contrib/go-chi/chi/v2"
-   "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
+   chitrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/go-chi/chi"
+   "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
    {{< /code-block >}}
 
    {{< code-block lang="go" filename="cmd/calendar/main.go" disable_copy="true" collapsible="true" >}}
@@ -358,7 +358,7 @@ Pour activer le tracing dans l'application de calendrier :
    {{< /code-block >}}
 
    {{< code-block lang="go" filename="cmd/calendar/main.go" disable_copy="true" collapsible="true" >}}
-   r.Use(chitrace.Middleware(chitrace.WithService("calendar")))
+   r.Use(chitrace.Middleware(chitrace.WithServiceName("calendar")))
    {{< /code-block >}}
 
 1. Ouvrez `docker/all-docker-compose.yaml` et supprimez la mise en commentaire du service `calendar` pour configurer le host de lʼAgent et les tags de service unifié pour l'application et pour Docker :

@@ -123,7 +123,7 @@ Le package du traceur Go fournit la fonction `SetUser()`, qui vous permet de sur
 L'exemple ci-dessous montre comment récupérer la span active du traceur, l'utiliser pour définir des tags de surveillance d'utilisateur et activer la fonctionnalité de blocage des utilisateurs :
 
 ```go
-import "github.com/DataDog/dd-trace-go/v2/appsec"
+import "gopkg.in/DataDog/dd-trace-go.v1/appsec"
 func handler(w http.ResponseWriter, r *http.Request) {
   if appsec.SetUser(r.Context(), "mon-uid") != nil {
     // L'utilisateur doit être bloqué en annulant immédiatement l'exécution du gestionnaire de requêtes.
@@ -133,7 +133,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 }
 ```
 
-[1]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/ddtrace/tracer#SetUser
+[1]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#SetUser
 {{< /programming-lang >}}
 
 {{< programming-lang lang="ruby" >}}
@@ -462,7 +462,7 @@ Les exemples suivants montrent comment surveiller les événements de connexion 
 {{< tabs >}}
 {{% tab "Connexion réussie" %}}
 ```go
-import "github.com/DataDog/dd-trace-go/v2/appsec"
+import "gopkg.in/DataDog/dd-trace-go.v1/appsec"
 
 func handler(w http.ResponseWriter, r *http.Request) {
   metadata := /* métadonnées d'événement supplémentaires facultatives */
@@ -479,7 +479,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 {{% /tab %}}
 {{% tab "Échec de connexion" %}}
 ```go
-import "github.com/DataDog/dd-trace-go/v2/appsec"
+import "gopkg.in/DataDog/dd-trace-go.v1/appsec"
 
 func handler(w http.ResponseWriter, r *http.Request) {
   exists := /* indique si l'ID de l'utilisateur transmis existe ou non */
@@ -491,7 +491,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 
 {{% tab "Logique opérationnelle personnalisée" %}}
 ```go
-import "github.com/DataDog/dd-trace-go/v2/appsec"
+import "gopkg.in/DataDog/dd-trace-go.v1/appsec"
 
 func handler(w http.ResponseWriter, r *http.Request) {
   metadata := map[string]string{"usr.id": "mon-uid"}

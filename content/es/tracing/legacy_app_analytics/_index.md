@@ -67,7 +67,7 @@ La aplicación Analytics está disponible a partir de la versión 1.11.0 del cli
 
 * a partir de la versión 1.26.0, utilizando la variable de entorno: `DD_TRACE_ANALYTICS_ENABLED=true`
 
-[1]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/ddtrace/tracer#WithAnalytics
+[1]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#WithAnalytics
 {{< /programming-lang >}}
 {{< programming-lang lang="nodejs" >}}
 
@@ -191,8 +191,8 @@ Además de la configuración global, puedes habilitar o deshabilitar la aplicaci
 package main
 
 import (
-    httptrace "github.com/DataDog/dd-trace-go/contrib/net/http/v2"
-    "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
+    httptrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http"
+    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
 )
 
 func main() {

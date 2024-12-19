@@ -93,17 +93,17 @@ DD_VERSION=(application version)
 {{< tabs >}}
 {{% tab "Go" %}}
 
-앱 종속성을 업데이트하여 [dd-trace-go@v2.0.0][1] 이상을 포함합니다.
+앱 종속성을 업데이트하여 [dd-trace-go@v1.44.0][1] 이상을 포함합니다.
 ```
-go get github.com/DataDog/dd-trace-go/v2@v1.44.0
+go get gopkg.in/DataDog/dd-trace-go.v1@v1.44.0
 ```
 
 코드를 업데이트하여 `contrib/database/sql` 패키지를 내보내세요.
 ```go
 import (
    "database/sql"
-   "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
-   sqltrace "github.com/DataDog/dd-trace-go/contrib/database/sql/v2"
+   "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+   sqltrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/database/sql"
 )
 ```
 
@@ -113,12 +113,12 @@ import (
 
 2. 드라이버 등록 동안 코드 사용하기:
    ```go
-   sqltrace.Register("postgres", &pq.Driver{}, sqltrace.WithDBMPropagation(tracer.DBMPropagationModeFull), sqltrace.WithService("my-db-service"))
+   sqltrace.Register("postgres", &pq.Driver{}, sqltrace.WithDBMPropagation(tracer.DBMPropagationModeFull), sqltrace.WithServiceName("my-db-service"))
    ```
 
 3. `sqltrace.Open` 코드 사용하기:
    ```go
-   sqltrace.Register("postgres", &pq.Driver{}, sqltrace.WithService("my-db-service"))
+   sqltrace.Register("postgres", &pq.Driver{}, sqltrace.WithServiceName("my-db-service"))
 
    db, err := sqltrace.Open("postgres", "postgres://pqgotest:password@localhost/pqgotest?sslmode=disable", sqltrace.WithDBMPropagation(tracer.DBMPropagationModeFull))
    if err != nil {
@@ -130,8 +130,8 @@ import (
 ```go
 import (
     "database/sql"
-    "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
-    sqltrace "github.com/DataDog/dd-trace-go/contrib/database/sql/v2"
+    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+    sqltrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/database/sql"
 )
 
 func main() {
@@ -154,7 +154,7 @@ func main() {
 }
 ```
 
-[1]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2
+[1]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1
 
 {{% /tab %}}
 
@@ -428,7 +428,7 @@ client.query('SELECT $1::text as message', ['Hello world!'], (err, result) => {
 
 [1]: /ko/database_monitoring/#getting-started
 [2]: /ko/tracing/
-[3]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2
+[3]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1
 [4]: https://pkg.go.dev/database/sql
 [5]: https://pkg.go.dev/github.com/jmoiron/sqlx
 [6]: https://github.com/dataDog/dd-trace-rb

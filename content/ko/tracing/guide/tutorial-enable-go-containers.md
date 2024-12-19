@@ -98,10 +98,10 @@ git clone https://github.com/DataDog/apm-tutorial-golang.git
 추적 지원을 활성화하려면 `apm-tutorial-golang/cmd/notes/main.go`의 가져오기에서 주석을 제거합니다.
 
 {{< code-block lang="go" filename="cmd/notes/main.go" >}}
-sqltrace "github.com/DataDog/dd-trace-go/contrib/database/sql/v2"
-chitrace "github.com/DataDog/dd-trace-go/contrib/go-chi/chi/v2"
-httptrace "github.com/DataDog/dd-trace-go/contrib/net/http/v2"
-"github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
+sqltrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/database/sql"
+chitrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/go-chi/chi"
+httptrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http"
+"gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
 {{< /code-block >}}
 
 `main()` 함수에서 다음 줄의 주석을 제거합니다.
@@ -118,13 +118,13 @@ client = httptrace.WrapClient(client, httptrace.RTWithResourceNamer(func(req *ht
 {{< /code-block >}}
 
 {{< code-block lang="go" filename="cmd/notes/main.go" >}}
-r.Use(chitrace.Middleware(chitrace.WithService("notes")))
+r.Use(chitrace.Middleware(chitrace.WithServiceName("notes")))
 {{< /code-block >}}
 
 `setupDB()`에서 다음 줄의 주석을 제거합니다.
 
 {{< code-block lang="go" filename="cmd/notes/main.go" >}}
-sqltrace.Register("sqlite3", &sqlite3.SQLiteDriver{}, sqltrace.WithService("db"))
+sqltrace.Register("sqlite3", &sqlite3.SQLiteDriver{}, sqltrace.WithServiceName("db"))
 db, err := sqltrace.Open("sqlite3", "file::memory:?cache=shared")
 {{< /code-block >}}
 
@@ -252,23 +252,23 @@ Datadog는 코드에 구현하면 자동 추적을 허용하고 완전한 지원
 import (
   ...
 
-  sqltrace "github.com/DataDog/dd-trace-go/contrib/database/sql/v2"
-  chitrace "github.com/DataDog/dd-trace-go/contrib/go-chi/chi/v2"
-  httptrace "github.com/DataDog/dd-trace-go/contrib/net/http/v2"
+  sqltrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/database/sql"
+  chitrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/go-chi/chi"
+  httptrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http"
   ...
 )
 {{< /code-block >}}
 
-`cmd/notes/main.go`에서 Datadog 라이브러리는 `WithService` 옵션을 사용해 초기화됩니다. 예를 들어 `chitrace` 라이브러리는 다음과 같이 초기화됩니다.
+`cmd/notes/main.go`에서 Datadog 라이브러리는 `WithServiceName` 옵션을 사용해 초기화됩니다. 예를 들어 `chitrace` 라이브러리는 다음과 같이 초기화됩니다.
 
 {{< code-block lang="go" filename="cmd/notes/main.go" disable_copy="true" collapsible="true" >}}
 r := chi.NewRouter()
 r.Use(middleware.Logger)
-r.Use(chitrace.Middleware(chitrace.WithService("notes")))
+r.Use(chitrace.Middleware(chitrace.WithServiceName("notes")))
 r.Mount("/", nr.Register())
 {{< /code-block >}}
 
-`chitrace.WithService("notes")`를 사용하면 라이브러리가 추적하는 모든 요소가 서비스 이름 `notes` 아래에 있는지 확인합니다.
+`chitrace.WithServiceName("notes")`를 사용하면 라이브러리가 추적하는 모든 요소가 서비스 이름 `notes` 아래에 있는지 확인합니다.
 
 `main.go` 파일은 이러한 각 라이브러리에 대한 더 많은 구현 예시를 포함합니다. 라이브러리 확장 목록을 보려면 [고 호환성 요구 사항][16]을 참조하세요.
 
@@ -299,7 +299,7 @@ r.Delete("/notes/{noteID}", makeSpanMiddleware("DeleteNote", nr.DeleteNoteByID))
 다음 가져오기에 대한 코멘트도 제거합니다.
 
 {{< code-block lang="go" filename="notes/notesController.go" disable_copy="true" collapsible="true" >}}
-"github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
+"gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
 {{< /code-block >}}
 
 샘플 애플리케이션에 커스텀 추적의 몇몇 예시가 있습니다. 여기 두어 개의 예시가 추가로 제공됩니다. 이러한 스팬을 활성화하려면 코멘트를 제거합니다.
@@ -346,8 +346,8 @@ func privateMethod1(ctx context.Context) {
 
 1. `cmd/calendar/main.go`에서 다음 줄의 주석을 제거합니다.
    {{< code-block lang="go" filename="cmd/calendar/main.go" disable_copy="true" collapsible="true" >}}
-   chitrace "github.com/DataDog/dd-trace-go/contrib/go-chi/chi/v2"
-   "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
+   chitrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/go-chi/chi"
+   "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
    {{< /code-block >}}
 
    {{< code-block lang="go" filename="cmd/calendar/main.go" disable_copy="true" collapsible="true" >}}
@@ -356,7 +356,7 @@ func privateMethod1(ctx context.Context) {
    {{< /code-block >}}
 
    {{< code-block lang="go" filename="cmd/calendar/main.go" disable_copy="true" collapsible="true" >}}
-   r.Use(chitrace.Middleware(chitrace.WithService("calendar")))
+   r.Use(chitrace.Middleware(chitrace.WithServiceName("calendar")))
    {{< /code-block >}}
 
 1. `docker/all-docker-compose.yaml`를 열고 `calendar` 서비스 주석을 제거하여 앱과 도커를 위한 통합 서비스 태그와 에이전트 호스트를 설정합니다.

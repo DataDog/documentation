@@ -67,7 +67,7 @@ App Analyticsは、Go トレースクライアントのバージョン 1.11.0 �
 
 * バージョン 1.26.0 以降は、環境変数 `DD_TRACE_ANALYTICS_ENABLED=true` を使用
 
-[1]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/ddtrace/tracer#WithAnalytics
+[1]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#WithAnalytics
 {{< /programming-lang >}}
 {{< programming-lang lang="nodejs" >}}
 
@@ -191,8 +191,8 @@ Datadog.configure { |c| c.tracing.instrument :integration, analytics_enabled: tr
 package main
 
 import (
-    httptrace &quot;github.com/DataDog/dd-trace-go/contrib/net/http&quot;/v2
-    &quot;github.com/DataDog/dd-trace-go/v2/ddtrace/tracer&quot;
+    httptrace &quot;gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http&quot;
+    &quot;gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer&quot;
 )
 
 func main() {

@@ -222,7 +222,7 @@ package main
 import (
     "net/http"
     "io/ioutil"
-    "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
+    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
 )
 
 func main() {

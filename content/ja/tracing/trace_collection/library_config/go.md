@@ -5,7 +5,7 @@ further_reading:
 - link: https://github.com/DataDog/dd-trace-go/tree/v1
   tag: ソースコード
   text: ソースコード
-- link: https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/ddtrace
+- link: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace
   tag: 外部サイト
   text: パッケージページ
 - link: /tracing/glossary/
@@ -33,7 +33,7 @@ Datadog では、`DD_ENV`、`DD_SERVICE`、`DD_VERSION` を使用して、サー
 package main
 
 import (
-    "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
+    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
 )
 
 func main() {
@@ -180,7 +180,7 @@ Configures trace header injection and extraction style. See [Propagating Go Trac
 
 [1]: /ja/tracing/trace_collection/dd_libraries/go
 [2]: /ja/getting_started/tagging/unified_service_tagging
-[3]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/ddtrace/tracer#StartOption
+[3]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#StartOption
 [4]: /ja/tracing/trace_pipeline/ingestion_mechanisms/
 [5]: /ja/tracing/trace_pipeline/ingestion_mechanisms/?tab=go#pagetitle
 [6]: /ja/tracing/configure_data_security#telemetry-collection
@@ -189,7 +189,7 @@ Configures trace header injection and extraction style. See [Propagating Go Trac
 [9]: https://github.com/openzipkin/b3-propagation
 [13]: /ja/agent/configuration/network/#configure-ports
 [14]: https://github.com/w3c/trace-context
-[15]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/contrib
+[15]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib
 [16]: https://www.rfc-editor.org/rfc/rfc7230#section-3.2
 [17]: https://docs.datadoghq.com/ja/tracing/metrics/runtime_metrics/go
 [18]: https://docs.datadoghq.com/ja/tracing/trace_collection/trace_context_propagation/
