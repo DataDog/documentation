@@ -6717,36 +6717,6 @@ menu:
       parent: rum_mobile_codepush
       identifier: rum_mobile_codepush_setup
       weight: 101
-    - name: Advanced Configuration
-      url: real_user_monitoring/mobile_and_tv_monitoring/react_native/advanced_configuration
-      parent: rum_mobile_codepush
-      identifier: rum_mobile_react_cp_advanced_config
-      weight: 102
-    - name: Data Collected
-      url: real_user_monitoring/mobile_and_tv_monitoring/react_native/data_collected
-      parent: rum_mobile_codepush
-      identifier: rum_mobile_react_cp_data_collected
-      weight: 103
-    - name: Mobile Vitals
-      url: real_user_monitoring/mobile_and_tv_monitoring/react_native/mobile_vitals?tab=reactnative
-      parent: rum_mobile_codepush
-      identifier: rum_mobile_react_cp_mobile_vitals
-      weight: 104
-    - name: Web View Tracking
-      url: real_user_monitoring/mobile_and_tv_monitoring/react_native/web_view_tracking?tab=reactnative
-      parent: rum_mobile_codepush
-      identifier: rum_mobile_react_cp_web_view_tracking
-      weight: 105
-    - name: Integrated Libraries
-      url: real_user_monitoring/mobile_and_tv_monitoring/react_native/integrated_libraries
-      parent: rum_mobile_codepush
-      identifier: rum_mobile_react_cp_integrated_libraries
-      weight: 106
-    - name: Troubleshooting
-      url: real_user_monitoring/mobile_and_tv_monitoring/react_native/troubleshooting
-      parent: rum_mobile_codepush
-      identifier: rum_mobile_react_cp_troubleshooting
-      weight: 107
     - name: Expo
       url: real_user_monitoring/mobile_and_tv_monitoring/expo
       parent: mobile_and_tv_monitoring
@@ -6762,36 +6732,6 @@ menu:
       parent: rum_mobile_expo
       identifier: rum_mobile_expo_crash
       weight: 102
-    - name: Advanced Configuration
-      url: real_user_monitoring/mobile_and_tv_monitoring/react_native/advanced_configuration
-      parent: rum_mobile_expo
-      identifier: rum_mobile_react_ep_advanced_config
-      weight: 103
-    - name: Data Collected
-      url: real_user_monitoring/mobile_and_tv_monitoring/react_native/data_collected
-      parent: rum_mobile_expo
-      identifier: rum_mobile_react_ep_data_collected
-      weight: 104
-    - name: Mobile Vitals
-      url: real_user_monitoring/mobile_and_tv_monitoring/react_native/mobile_vitals?tab=reactnative
-      parent: rum_mobile_expo
-      identifier: rum_mobile_react_ep_mobile_vitals
-      weight: 105
-    - name: Web View Tracking
-      url: real_user_monitoring/mobile_and_tv_monitoring/react_native/web_view_tracking?tab=reactnative
-      parent: rum_mobile_expo
-      identifier: rum_mobile_react_ep_web_view_tracking
-      weight: 106
-    - name: Integrated Libraries
-      url: real_user_monitoring/mobile_and_tv_monitoring/react_native/integrated_libraries
-      parent: rum_mobile_expo
-      identifier: rum_mobile_react_ep_integrated_libraries
-      weight: 107
-    - name: Troubleshooting
-      url: real_user_monitoring/mobile_and_tv_monitoring/react_native/troubleshooting
-      parent: rum_mobile_expo
-      identifier: rum_mobile_react_ep_troubleshooting
-      weight: 108
     - name: Roku
       url: real_user_monitoring/mobile_and_tv_monitoring/roku
       parent: mobile_and_tv_monitoring
