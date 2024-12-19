@@ -63,10 +63,10 @@ The minimum tracer version to get all supported application security capabilitie
 
 
 These are supported on the following architectures:
-- Linux (GNU) x64, ARM64   (.Net Core)
-- Alpine Linux (musl) x64, ARM64   (.Net Core)
-- macOS (Darwin) x64, ARM64   (.Net Core)
-- Windows (msvc) x86, x86-64   (.Net Core and .Net Framework)
+- Linux (GNU) x64, ARM64 - (.Net Core)
+- Alpine Linux (musl) x64, ARM64 - (.Net Core)
+- macOS (Darwin) x64, ARM64 - (.Net Core)
+- Windows (msvc) x86, x86-64 - (.Net Core and .Net Framework)
 
 
 ### Web framework compatibility
