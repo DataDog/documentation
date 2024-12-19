@@ -62,7 +62,7 @@ When setting up a new Synthetic Monitoring browser test, use snippets to automat
    * **Tablet**
    * **Mobile**
 
-* **Multi-region check**: Automatically test your website against a location in each of the three primary geographic regions (AMER, APAC and EMEA). 
+* **Multi-region check**: Automatically test your website against a location in each of the three primary geographic regions (AMER, APAC and EMEA).
 </br><br>
 
   {{< img src="synthetics/browser_tests/browser_snippets_2.png" alt="Screenshot of the left hand side of a browser test creation, showing the snippets examples" width="70%" >}}
@@ -122,7 +122,7 @@ When setting up a new Synthetic Monitoring browser test, use snippets to automat
    {{% /tab %}}
 
    {{% tab "Time & Language" %}}
-   
+
   By default, timezone is set to UTC, and language is set to English (en). To define a language, use the corresponding 2 or 3 digit [ISO code][1].
 
 [1]: https://www.loc.gov/standards/iso639-2/php/code_list.php
@@ -208,11 +208,30 @@ If you are using the [custom role feature][15], add your user to any custom role
 
 ### Restrict access
 
-Access restriction is available for customers using [custom roles][16] on their accounts.
+{{< img src="synthetics/settings/grace_1.png" alt="Set permissions for your test" style="width:70%;" >}}
 
-You can restrict access to a browser test based on the roles in your organization. When creating a browser test, choose which roles (in addition to your user) can read and write your test.
+Use [granular access control][18] to limit who has access to your test based on roles, teams, or individual users.
 
-{{< img src="synthetics/settings/restrict_access_1.png" alt="Set permissions for your test" style="width:70%;" >}}
+To do so:
+
+1. Open the permissions section of the form
+2. Click on `edit access`
+
+{{< img src="synthetics/settings/grace_2.png" alt="Set permissions for your test" style="width:70%;" >}}
+
+3. Click on `restrict access`
+4. Select teams, roles, or users
+5. Click `add`
+6. Select the level of access you want to associate with each of them
+7. Click on done
+
+| Access level | View test metadata | Edit test metadata | View test results[ˆ1] | Run test  |
+| ------------ | ------------------ | ------------------ | --------------------- | --------- |
+| No access    |                    |                    |                       |           |
+| Viewer       | {{< X >}}          |                    | {{< X >}}             |           |
+| Editor       | {{< X >}}          | {{< X >}}          | {{< X >}}             | {{< X >}} |
+
+[ˆ1]: You will be able to see results from Private Location even if you don't have Viewer access to that Private Location.
 
 ## Further Reading
 

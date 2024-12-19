@@ -80,19 +80,19 @@ Click **Test URL** to try out the request configuration. A response preview is d
       openssl pkcs12 -in <CERT>.p12 -out <CERT_KEY>.key -nodes -nocerts
       openssl pkcs12 -in <CERT>.p12 -out <CERT>.cert -nokeys
       ```
-      
+
    * **HTTP Basic Auth**: Add HTTP basic authentication credentials.
-   * **Digest Auth**: Add Digest authentication credentials. 
+   * **Digest Auth**: Add Digest authentication credentials.
    * **NTLM**: Add NTLM authentication credentials. Support both NTLMv2 and NTLMv1.
-   * **AWS Signature v4**: Enter your Access Key ID and Secret Access Key. Datadog generates the signature for your request. This option uses the basic implementation of SigV4. Specific signatures such as Amazon S3 are not supported out-of-the box.  
+   * **AWS Signature v4**: Enter your Access Key ID and Secret Access Key. Datadog generates the signature for your request. This option uses the basic implementation of SigV4. Specific signatures such as Amazon S3 are not supported out-of-the box.
      For "Single Chunk" transfer requests to Amazon S3 buckets, add `x-amz-content-sha256` containing the sha256-encoded body of the request as a header (for an empty body: `x-amz-content-sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`).
-   * **OAuth 2.0**: Choose between granting client credentials or a resource owner password and enter an access token URL. Depending on your selection, enter a client ID and secret, or a username and password. From the dropdown menu, select an option to either send the API token as a basic authentication header, or send the client credentials in the body. Optionally, you can provide additional information such as the audience, resource, and scope (as well as the client ID and secret, if you selected **Resource Owner Password**).  
-   
+   * **OAuth 2.0**: Choose between granting client credentials or a resource owner password and enter an access token URL. Depending on your selection, enter a client ID and secret, or a username and password. From the dropdown menu, select an option to either send the API token as a basic authentication header, or send the client credentials in the body. Optionally, you can provide additional information such as the audience, resource, and scope (as well as the client ID and secret, if you selected **Resource Owner Password**).
+
    {{% /tab %}}
 
    {{% tab "Query Parameters" %}}
 
-   * **Encode parameters**: Add the name and value of query parameters that require encoding. 
+   * **Encode parameters**: Add the name and value of query parameters that require encoding.
 
    {{% /tab %}}
 
@@ -102,7 +102,7 @@ Click **Test URL** to try out the request configuration. A response preview is d
    * **Request body**: Add the content of your HTTP request body.
        * The request body is limited to a maximum size of 50 kilobytes for `application/json`, `application/x-www-form-urlencoded`, `text/html`, `text/plain`, `text/xml`, `GraphQL`.
        * The request body is limited to one file of 3 megabytes for `application/octet-stream`.
-       * The request body is limited to three files of 3 megabytes each for `multipart/form-data`.  
+       * The request body is limited to three files of 3 megabytes each for `multipart/form-data`.
    {{% /tab %}}
 
    {{% tab "Proxy" %}}
@@ -147,7 +147,7 @@ You can create up to 20 assertions per API test by clicking **New Assertion** or
 
 {{< img src="synthetics/api_tests/assertions_http.png" alt="Define assertions for your HTTP test to succeed or fail on" style="width:90%;" >}}
 
-To perform `OR` logic in an assertion, use the `matches regex` comparator to define a regex with multiple expected values like `(200|302)`. For example, you may want your HTTP test to succeed when a server must respond with a `200` or `302` status code. The `status code` assertion succeeds if the status code is 200 or 302. You can also add `OR` logic on a `body` or `header` assertion. 
+To perform `OR` logic in an assertion, use the `matches regex` comparator to define a regex with multiple expected values like `(200|302)`. For example, you may want your HTTP test to succeed when a server must respond with a `200` or `302` status code. The `status code` assertion succeeds if the status code is 200 or 302. You can also add `OR` logic on a `body` or `header` assertion.
 
 If a test does not contain an assertion on the response body, the body payload drops and returns an associated response time for the request within the timeout limit set by the Synthetics Worker.
 
@@ -155,9 +155,9 @@ If a test contains an assertion on the response body and the timeout limit is re
 
 ### Select locations
 
-Select the **Locations** to run your HTTP test from. HTTP tests can run from both managed and [private locations][1] depending on your preference for running the test from outside or inside your network. 
+Select the **Locations** to run your HTTP test from. HTTP tests can run from both managed and [private locations][1] depending on your preference for running the test from outside or inside your network.
 
-{{% managed-locations %}} 
+{{% managed-locations %}}
 
 ### Specify test frequency
 
@@ -177,7 +177,7 @@ Use existing Datadog data sources such as APM traces, API Catalog endpoints disc
 Start typing in the API test **URL** input to get endpoint suggestions or similar tests in Synthetic Monitoring:
 
    {{< img src="synthetics/api_tests/api-one-click.png" alt="HTTP API Test showing a GET search for an existing API test" style="width:90%;" >}}
-   
+
 Then, select a suggestion to prefill your test configuration (request options and headers, authentication, and variables):
 
    {{< img src="synthetics/api_tests/api-test-monitor-search.png" alt="Select" style="width:90%;" >}}
@@ -194,7 +194,7 @@ To display your list of variables, type `{{` in your desired field:
 
 ## Test failure
 
-A test is considered `FAILED` if it does not satisfy one or more assertions or if the request prematurely failed. In some cases, the test can fail without testing the assertions against the endpoint. 
+A test is considered `FAILED` if it does not satisfy one or more assertions or if the request prematurely failed. In some cases, the test can fail without testing the assertions against the endpoint.
 
 The most common errors include the following:
 
@@ -213,7 +213,7 @@ The most common errors include the following:
 `Error performing HTTP/2 request`
 : The request could not be performed. See the dedicated [error][16] page for more information.
 
-`INVALID_REQUEST` 
+`INVALID_REQUEST`
 : The configuration of the test is invalid (for example, a typo in the URL).
 
 `SSL`
@@ -221,11 +221,11 @@ The most common errors include the following:
 
 `TIMEOUT`
 : The request couldn't be completed in a reasonable time. Two types of `TIMEOUT` can happen:
-  - `TIMEOUT: The request couldn't be completed in a reasonable time.` indicates that the request duration hit the test defined timeout (default is set to 60s). 
+  - `TIMEOUT: The request couldn't be completed in a reasonable time.` indicates that the request duration hit the test defined timeout (default is set to 60s).
   For each request only the completed stages for the request are displayed in the network waterfall. For example, in the case of `Total response time` only being displayed, the timeout occurred during the DNS resolution.
   - `TIMEOUT: Overall test execution couldn't be completed in a reasonable time.` indicates that the test duration (request + assertions) hits the maximum duration (60.5s).
 
-`MALFORMED_RESPONSE` 
+`MALFORMED_RESPONSE`
 : The remote server responded with a payload that does not comply with HTTP specifications.
 
 ## Permissions
@@ -236,11 +236,30 @@ If you are using the [custom role feature][14], add your user to any custom role
 
 ### Restrict access
 
-Access restriction is available for customers using [custom roles][15] on their accounts.
+{{< img src="synthetics/settings/grace_1.png" alt="Set permissions for your test" style="width:70%;" >}}
 
-You can restrict access to an HTTP test based on the roles in your organization. When creating an HTTP test, choose which roles (in addition to your user) can read and write your test. 
+Use [granular access control][18] to limit who has access to your test based on roles, teams, or individual users.
 
-{{< img src="synthetics/settings/restrict_access_1.png" alt="Set permissions for your test" style="width:70%;" >}}
+To do so:
+
+1. Open the permissions section of the form
+2. Click on `edit access`
+
+{{< img src="synthetics/settings/grace_2.png" alt="Set permissions for your test" style="width:70%;" >}}
+
+3. Click on `restrict access`
+4. Select teams, roles, or users
+5. Click `add`
+6. Select the level of access you want to associate with each of them
+7. Click on done
+
+| Access level | View test configuration | Edit test configuration | View test results[ˆ1] | Run test  |
+| ------------ | ----------------------- | ----------------------- | --------------------- | --------- |
+| No access    |                         |                         |                       |           |
+| Viewer       | {{< X >}}               |                         | {{< X >}}             |           |
+| Editor       | {{< X >}}               | {{< X >}}               | {{< X >}}             | {{< X >}} |
+
+[ˆ1]: You will be able to see results from Private Location even if you don't have Viewer access to that Private Location.
 
 ## Further Reading
 
@@ -263,3 +282,4 @@ You can restrict access to an HTTP test based on the roles in your organization.
 [15]: /account_management/rbac/#create-a-custom-role
 [16]: /synthetics/api_tests/errors/#http-errors
 [17]: /api_catalog
+[18]: account_management/rbac/granular_access
