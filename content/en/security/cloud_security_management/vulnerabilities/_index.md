@@ -66,7 +66,7 @@ Explore reports
 ## Deployment methods
 
 Get started with CSM Vulnerabilities and cover your infrastructure in minutes, using:
-- [Agentless scanning][11]
+- [Agentless Scanning][11]
 - [Unified Datadog agent][12]
 
 You can also use both deployment methods to use the unified Datadog Agent where you already have it deployed, and Agentless elsewhere.
