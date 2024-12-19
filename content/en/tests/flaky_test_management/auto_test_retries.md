@@ -148,7 +148,7 @@ Customize the Auto Test Retries with the following environment variables:
 
 {{% tab "Python" %}}
 
-<div class="alert alert-info">Auto Test Retries is available using the beta of the new pytest plugin. Set the <b>DD_PYTEST_USE_NEW_PLUGIN_BETA</b> environment variable to <b>true</b> to enable it.</div>
+<div class="alert alert-info">Auto Test Retries is available using the beta of the new pytest plugin. Set the <code>DD_PYTEST_USE_NEW_PLUGIN_BETA</code> environment variable to <code>true</code> to enable it.</div>
 
 ### Compatibility
 
@@ -160,11 +160,11 @@ After you have set up Test Optimization, you can configure Auto Test Retries fro
 
 {{< img src="continuous_integration/auto_test_retries_test_settings.png" alt="Auto Test Retries in Test Service Settings." style="width:100%" >}}
 
-The default behavior of the feature is to retry any failing test case up to 5 times. Tests that originally fail either the original setup, teardown, or fixtures in Pytest, are not retried.
+The default behavior of the feature is to retry any failing test case up to five times. Tests that originally fail either the original setup, teardown, or fixtures in Pytest, are not retried.
 
-This behavior can be fine-tuned with the following environment variables:
+You can fine tune this behavior with the following environment variables:
 
-* `DD_CIVISIBILITY_FLAKY_RETRY_ENABLED` - set to `0` or `false` to explicitly disable retries even if the remote setting is enabled (default: true)
+* `DD_CIVISIBILITY_FLAKY_RETRY_ENABLED` - set to `0` or `false` to explicitly disable retries even if the remote setting is enabled (default: `true`)
 * `DD_CIVISIBILITY_FLAKY_RETRY_COUNT` - a non-negative number to change the maximum number of retries per test case (default: `5`).
 * `DD_CIVISIBILITY_TOTAL_FLAKY_RETRY_COUNT` - a non-negative number to set the maximum total number of failed tests to retry (default: `1000`)
 
@@ -189,4 +189,4 @@ If you suspect there are any issues with Auto Test Retries, navigate to the [Tes
 [1]: /tests/setup/
 [2]: /tests/explorer/
 [3]: /tests/flaky_test_management/early_flake_detection
-[4]: https://app.datadoghq.com/ci/settings/test-service
+[4]: https://app.datadoghq.com/ci/settings/test-optimization
