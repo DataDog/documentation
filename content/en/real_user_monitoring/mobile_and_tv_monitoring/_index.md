@@ -1,7 +1,13 @@
 ---
 title: Mobile and TV Monitoring
 description: Collect RUM data from your mobile and TV applications.
-type: multi-code-lang
+aliases:
+- /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/
+- /real_user_monitoring/mobile_and_tv_monitoring/data_collected/
+- /real_user_monitoring/mobile_and_tv_monitoring/integrated_libraries/
+- /real_user_monitoring/mobile_and_tv_monitoring/other_frameworks/
+- /real_user_monitoring/mobile_and_tv_monitoring/setup/
+- /real_user_monitoring/mobile_and_tv_monitoring/troubleshooting/
 further_reading:
 - link: '/real_user_monitoring/session_replay/browser/'
   tag: 'Documentation'

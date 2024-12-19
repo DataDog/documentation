@@ -3,7 +3,8 @@ title: iOS and tvOS Monitoring Supported Versions
 beta: true
 description: "List of supported operating systems and platforms for the RUM iOS SDK."
 aliases:
- -  /real_user_monitoring/mobile_and_tv_monitoring/supported_versions/ios
+ - /real_user_monitoring/mobile_and_tv_monitoring/supported_versions/ios
+ - /real_user_monitoring/mobile_and_tv_monitoring/supported_versions/
 further_reading:
  - link: /real_user_monitoring/mobile_and_tv_monitoring/ios/advanced_configuration/
    tag: Documentation
