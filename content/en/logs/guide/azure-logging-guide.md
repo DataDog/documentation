@@ -13,11 +13,13 @@ further_reading:
 
 Use this guide to set up logging from your Azure subscriptions to Datadog.
 
-Datadog recommends sending logs from Azure to Datadog with the Agent or DaemonSet. For some resources it may not be possible. In these cases, you can create a log forwarding pipeline using an Azure Event Hub to collect [Azure Platform Logs][2]. For resources that cannot stream Azure Platform Logs to an Event Hub, you can use the Blob Storage forwarding option. To collect logs from Azure Log Analytics workspaces, you must use the Azure Event Hub process.
+Datadog recommends using the Agent or DaemonSet to send logs from Azure. If direct streaming isn't possible, create a log forwarding pipeline using an Azure Event Hub to collect [Azure Platform Logs][2]. For resources that cannot stream to an Event Hub, use the Blob Storage forwarding option. To collect logs from Azure Log Analytics workspaces, use the Azure Event Hub process.
 
-**All sites**: All Datadog sites can use the steps on this page to send Azure logs to Datadog.
+Follow these steps to send Azure logs to any Datadog site.
 
-**US3**: If your organization is on the Datadog US3 site, you can use the Azure Native integration to simplify configuration for your Azure log forwarding. Datadog recommends using this method when possible. Configuration is done through the [Datadog resource in Azure][5]. This replaces the Azure Event Hub process for log forwarding. See the [Azure Native Logging Guide][4] for more information.
+**US3**: Organizations on the Datadog US3 site can simplify Azure log forwarding using the Azure Native integration. This method is recommended and is configured through the [Datadog resource in Azure][5], replacing the Azure Event Hub process. See the [Azure Native Logging Guide][4] for more details.
+
+## Setup
 
 {{< tabs >}}
 
@@ -34,25 +36,17 @@ Alternatively, Datadog provides automated scripts you can use for sending Azure 
 Follow these steps to run the script that creates and configures the Azure resources required to stream activity logs into your Datadog account. These resources include activity log diagnostic settings, Azure Functions, Event Hub namespaces, and Event Hubs.
 
 1. In the Azure portal, navigate to your **Cloud Shell**.
-
-{{< img src="integrations/azure/azure_cloud_shell.png" alt="azure cloud shell" popup="true" style="width:100%">}}
-
-2. Run the command below to download the automation script into your Cloud Shell environment. 
+  {{< img src="integrations/azure/azure_cloud_shell.png" alt="azure cloud shell" popup="true" style="width:100%">}}
+2. Run the command below to download the automation script into your Cloud Shell environment. You can also [view the contents of the script][100].
 
 {{< code-block lang="powershell" filename="Activity Logs Step 1" >}}
-
 (New-Object System.Net.WebClient).DownloadFile("https://raw.githubusercontent.com/DataDog/datadog-serverless-functions/master/azure/eventhub_log_forwarder/activity_logs_deploy.ps1", "activity_logs_deploy.ps1")
-
 {{< /code-block >}}
 
-You can also [view the contents of the script](https://github.com/DataDog/datadog-serverless-functions/blob/master/azure/eventhub_log_forwarder/activity_logs_deploy.ps1).
-
-3. Invoke the script by running the command below, while replacing **`<API_KEY>`**, with your [Datadog API token](https://app.datadoghq.com/organization-settings/api-keys), and **`<SUBSCRIPTION_ID>`**, with your Azure Subscription ID. Add [Optional Parameters](#optional-parameters) to configure your deployment.
+3. Invoke the script by running the command below, while replacing **`<API_KEY>`**, with your [Datadog API token][101], and **`<SUBSCRIPTION_ID>`**, with your Azure Subscription ID. Add [Optional Parameters](#optional-parameters) to configure your deployment.
 
 {{< code-block lang="powershell" filename="Activity Logs Step 2" >}}
-
 ./activity_logs_deploy.ps1 -ApiKey <API_KEY> -SubscriptionId <SUBSCRIPTION_ID> 
-
 {{< /code-block >}}
 
 ### Azure platform logs
@@ -64,23 +58,17 @@ After deploying, create diagnostic settings for each of the log sources to strea
 
 1. In the Azure portal, navigate to your **Cloud Shell**.
 
-2. Run the Powershell command below to download the automation script into your Cloud Shell environment. 
+2. Run the PowerShell command below to download the automation script into your Cloud Shell environment. You can also [view the contents of the script][102].
 
-   {{< code-block lang="powershell" filename="Platform Logs Step 1" >}}
+{{< code-block lang="powershell" filename="Platform Logs Step 1" >}}
+(New-Object System.Net.WebClient).DownloadFile("https://raw.githubusercontent.com/DataDog/datadog-serverless-functions/master/azure/eventhub_log_forwarder/resource_deploy.ps1", "resource_deploy.ps1")
+{{< /code-block >}}
 
-   (New-Object System.Net.WebClient).DownloadFile("https://raw.githubusercontent.com/DataDog/datadog-serverless-functions/master/azure/eventhub_log_forwarder/resource_deploy.ps1", "resource_deploy.ps1")
+3. Invoke the script by running the PowerShell command below, replacing **`<API_KEY>`**, with your [Datadog API token][101], and **`<SUBSCRIPTION_ID>`**, with your Azure Subscription ID. You can also add other optional parameters to configure your deployment. See [Optional Parameters](#optional-parameters).
 
-   {{< /code-block >}}
-
-   You can also [view the contents of the script](https://github.com/DataDog/datadog-serverless-functions/blob/master/azure/eventhub_log_forwarder/resource_deploy.ps1).
-
-3. Invoke the script by running the Powershell command below, replacing **`<API_KEY>`**, with your [Datadog API token](https://app.datadoghq.com/organization-settings/api-keys), and **`<SUBSCRIPTION_ID>`**, with your Azure Subscription ID. You can also add other optional parameters to configure your deployment. See [Optional Parameters](#optional-parameters).
-
-   {{< code-block lang="powershell" filename="Platform Logs Step 2" >}}
-
-   ./resource_deploy.ps1 -ApiKey <API_KEY> -SubscriptionId <SUBSCRIPTION_ID> 
-
-   {{< /code-block >}}
+{{< code-block lang="powershell" filename="Platform Logs Step 2" >}}
+./resource_deploy.ps1 -ApiKey <API_KEY> -SubscriptionId <SUBSCRIPTION_ID> 
+{{< /code-block >}}
 
 4. Create diagnostic settings for all Azure resources sending logs to Datadog. Configure these diagnostic settings to stream to the Event Hub you just created.
 
@@ -110,9 +98,14 @@ To stream both activity logs and resource logs, run the first script including t
 | -FunctionName `<datadog-function>`                                  | Customize the name of your Azure Function by adding this flag with an updated parameter.                                                                              |
 | -DiagnosticSettingName `<datadog-activity-logs-diagnostic-setting>` | Customize the name of your Azure diagnostic setting by adding this flag with an updated parameter. **(Only relevant for sending activity logs)**                      |
 
-Installation errors? See [Automated log collection][1] for common error cases.
+Installation errors? See [Automated log collection][103] for common error cases.
 
-[101]: /integrations/guide/azure-troubleshooting/#automated-log-collection
+
+[100]: https://github.com/DataDog/datadog-serverless-functions/blob/master/azure/eventhub_log_forwarder/activity_logs_deploy.ps1
+[101]: https://app.datadoghq.com/organization-settings/api-keys
+[102]: https://github.com/DataDog/datadog-serverless-functions/blob/master/azure/eventhub_log_forwarder/resource_deploy.ps1
+[103]: /integrations/guide/azure-troubleshooting/#automated-log-collection
+
 {{% /tab %}}
 
 {{% tab "Manual installation" %}}
@@ -123,7 +116,7 @@ This section describes the manual setup process to forward your Azure logs to Da
 2. Set up the [Datadog-Azure function with an Event hub trigger](#create-the-datadog-azure-function) to forward logs to Datadog.
 3. Create [diagnostic settings](#create-diagnostic-settings) to forward your Azure [Activity logs](#activity-logs), [resource logs](#resource-logs), or both to your Event Hub.
 
-The instructions below walk through a basic, initial setup using the Azure Portal. All of these steps can be performed with the CLI, Powershell, or resource templates by referring to the Azure documentation.
+The instructions below walk through a basic, initial setup using the Azure Portal. All of these steps can be performed with the CLI, PowerShell, or resource templates by referring to the Azure documentation.
 
 **Note**: Resources can only stream to Event Hubs in the same Azure region.
 
@@ -269,6 +262,7 @@ See [Diagnostic settings in Azure monitor][213] for more information.
 [213]: https://learn.microsoft.com/en-us/azure/azure-monitor/essentials/diagnostic-settings?WT.mc_id=Portal-Microsoft_Azure_Monitoring
 [214]: https://learn.microsoft.com/en-us/azure/event-hubs/authorize-access-shared-access-signature
 [215]: https://learn.microsoft.com/en-us/azure/azure-functions/functions-get-started
+
 {{% /tab %}}
 
 {{% tab "Blob Storage" %}}
@@ -285,7 +279,7 @@ Datadog recommends using the Event Hub setup for Azure log collection. However, 
    - [Azure portal][302]
    - [Azure Storage Explorer][303]
    - [Azure CLI][304]
-   - [Powershell][305]
+   - [PowerShell][305]
 2. Set up the Datadog-Azure Function to forward logs from Blob Storage using the instructions below.
 3. Configure your Azure App Services to [forward their logs to Blob Storage][306].
 
@@ -339,8 +333,27 @@ See [Getting started with Azure Functions][307] for more information.
 [311]: https://learn.microsoft.com/en-us/azure/storage/common/storage-configure-connection-string#configure-a-connection-string-for-an-azure-storage-account
 [312]: https://docs.datadoghq.com/getting_started/site/
 [313]: https://learn.microsoft.com/en-us/azure/azure-functions/functions-bindings-storage-blob-trigger?tabs=python-v2%2Cisolated-process%2Cnodejs-v4%2Cextensionv5&pivots=programming-language-csharp
+
 {{% /tab %}}
 {{< /tabs >}}
+
+## Advanced configuration
+Refer to the following topics to configure your installation according to your monitoring needs.
+
+### PCI Compliance
+
+<div class="alert alert-warning">
+PCI DSS compliance for APM and Log Management is only available for Datadog organizations in the <a href="/getting_started/site/">US1 site</a>.
+</div>
+
+To set up PCI-compliant Log Management, you must meet the requirements outlined in [PCI DSS Compliance][6]. Send your logs to the dedicated PCI compliant endpoint:
+- `agent-http-intake-pci.logs.datadoghq.com:443` for Agent traffic
+- `http-intake-pci.logs.datadoghq.com:443` for non-Agent traffic
+
+```
+const DD_SITE = process.env.DD_SITE || 'datadoghq.com';
+const DD_HTTP_URL = process.env.DD_URL || 'http-intake-pci.logs.' + DD_SITE;
+```
 
 ## Log Archiving
 
@@ -359,3 +372,4 @@ Once you have an App Registration configured, you can [create a log archive][3] 
 [3]: /logs/log_configuration/archives/
 [4]: /logs/guide/azure-native-logging-guide/
 [5]: https://learn.microsoft.com/en-us/azure/partner-solutions/datadog/overview
+[6]: /data_security/pci_compliance/?tab=logmanagement
