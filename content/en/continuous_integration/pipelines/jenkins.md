@@ -1233,7 +1233,7 @@ To do so, set the following environment variables.
 
 **Note:** These variables are optional, but if they are set, they take precedence over the Git information set by other Jenkins plugins.
 
-`DD_GIT_REPOSITORY` (Optional)
+`DD_GIT_REPOSITORY_URL` (Optional)
 : The repository URL of your service.<br/>
 **Example**: `https://github.com/my-org/my-repo.git`
 
