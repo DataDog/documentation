@@ -70,7 +70,7 @@ This behavior can be fine-tuned with the following environment variables:
 
 [jest-image-snapshot][2] is incompatible with `jest.retryTimes` unless `customSnapshotIdentifier` is passed (see [jest-image-snapshot docs][3]) to `toMatchImageSnapshot`. Therefore, auto test retries do not work unless `customSnapshotIdentifier` is used.
 
-[1]: https://app.datadoghq.com/ci/settings/test-optimization```
+[1]: https://app.datadoghq.com/ci/settings/test-optimization
 [2]: https://www.npmjs.com/package/jest-image-snapshot
 [3]: https://github.com/americanexpress/jest-image-snapshot?tab=readme-ov-file#jestretrytimes
 {{% /tab %}}
