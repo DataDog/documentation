@@ -50,6 +50,9 @@ The Go tracer includes support for the following frameworks, data stores and lib
 
 The Go packages listed in this page are relevant for Application Security capabilities. You can also find more tracing integrations in [APM's tracing compatibility page][16].
 
+{{% tabs %}}
+{{% tab "v1" %}}
+
 **Note**: The [Go integrations documentation][6] provides a detailed overview of the supported packages and their APIs, along with usage examples.
 
 <div class="alert alert-info">If you don't see your library of choice listed, fill out <a href="https://forms.gle/gHrxGQMEnAobukfn7">this form to send details</a>.</div>
@@ -82,11 +85,6 @@ The Go packages listed in this page are relevant for Application Security capabi
 |-------------------|-----------------|--------------------------------------------------------------------------|
 | [sql][14]          | {{< X >}} |   {{< X >}}    |
 
-[1]: /agent/remote_config/#enabling-remote-configuration
-[2]: https://github.com/DataDog/dd-trace-go
-[3]: https://github.com/DataDog/dd-trace-go#support-policy
-[4]: https://github.com/DataDog/dd-trace-go#support-maintenance
-[5]: https://www.datadoghq.com/support/
 [6]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib
 [7]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/gin-gonic/gin
 [8]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/gorilla/mux
@@ -96,8 +94,61 @@ The Go packages listed in this page are relevant for Application Security capabi
 [12]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/go-chi/chi
 [13]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http
 [14]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/database/sql
-[15]: https://github.com/golang/go/wiki/cgo
 [16]: /tracing/compatibility_requirements/go
 [17]: https://pkg.go.dev/github.com/graphql-go/graphql
 [18]: https://pkg.go.dev/github.com/99designs/gqlgen/graphql
 
+{{% /tab %}}
+{{% tab "v2" %}}
+
+**Note**: The [Go integrations documentation][19] provides a detailed overview of the supported packages and their APIs, along with usage examples.
+
+<div class="alert alert-info">If you don't see your library of choice listed, fill out <a href="https://forms.gle/gHrxGQMEnAobukfn7">this form to send details</a>.</div>
+
+### Web framework compatibility
+
+| Framework         | Threat Detection supported? | Threat Protection supported? |
+|-------------------|-----------------------------|------------------------------|
+| [net/http][25]     | {{< X >}}  | {{< X >}} |
+| [Gin][20]          | {{< X >}} | {{< X >}} |
+| [Gorilla Mux][21] | {{< X >}} | {{< X >}} |
+| [gRPC][23]          | {{< X >}} | {{< X >}} |
+| [echo v4][22]     | {{< X >}}  | {{< X >}} |
+| [chi][24] | {{< X >}} | {{< X >}} |
+| [graphql-go][17] | {{< X >}} | {{< X >}} |
+| [gqlgen][18] | {{< X >}} | {{< X >}} |
+
+
+### Networking framework compatibility
+
+| Framework             | Threat Detection supported? | Threat Protection supported? |
+|-----------------------|-----------------------------|------------------------------|
+| [gRPC client][23]     | {{< X >}}                   | {{< X >}} |
+| [net/http client][25] | {{< X >}}                   | {{< X >}} |
+
+### Data store compatibility
+
+| Framework         | Threat Detection supported?    | Threat Protection supported?                                              |
+|-------------------|-----------------|--------------------------------------------------------------------------|
+| [sql][26]          | {{< X >}} |   {{< X >}}    |
+
+[17]: https://pkg.go.dev/github.com/graphql-go/graphql
+[18]: https://pkg.go.dev/github.com/99designs/gqlgen/graphql
+[19]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/contrib
+[20]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/contrib/gin-gonic/gin/v2
+[21]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/contrib/gorilla/mux/v2
+[22]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/contrib/labstack/echo.v4/v2
+[23]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/contrib/google.golang.org/grpc/v2
+[24]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/contrib/go-chi/chi/v2
+[25]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/contrib/net/http/v2
+[26]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/contrib/database/sql/v2
+
+{{% /tab %}}
+{{% /tabs %}}
+
+[1]: /agent/remote_config/#enabling-remote-configuration
+[2]: https://github.com/DataDog/dd-trace-go
+[3]: https://github.com/DataDog/dd-trace-go#support-policy
+[4]: https://github.com/DataDog/dd-trace-go#support-maintenance
+[5]: https://www.datadoghq.com/support/
+[15]: https://github.com/golang/go/wiki/cgo

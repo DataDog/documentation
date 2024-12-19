@@ -13,7 +13,7 @@ further_reading:
 - link: https://github.com/DataDog/dd-trace-go/tree/v1
   tag: Código fuente
   text: Código fuente
-- link: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace
+- link: https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/ddtrace
   tag: Sitio externo
   text: Página del paquete
 - link: /tracing/glossary/
@@ -48,5 +48,5 @@ Para obtener instrucciones de configuración y detalles sobre el uso de la API, 
 [1]: /es/tracing/compatibility_requirements/go
 [2]: https://app.datadoghq.com/apm/service-setup
 [3]: /es/tracing/trace_collection/library_config/go/
-[4]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace
+[4]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/ddtrace
 [5]: /es/tracing/trace_collection/automatic_instrumentation/?tab=datadoglibraries#install-and-configure-the-agent
