@@ -189,7 +189,9 @@ In Datadog, view the [Data Jobs Monitoring][2] page to see a list of your Airflo
 
 
 ## Troubleshooting
-Check that the OpenLineage environment variables are correctly set on the Astronomer deployment. Note that using the `.env` file to add the environment variables does not work because the variables are only applied to the local Airflow environment.
+Check that the OpenLineage environment variables are correctly set on the Astronomer deployment.
+
+**Note**: Using the `.env` file to add the environment variables does not work because the variables are only applied to the local Airflow environment.
 {{% /tab %}}
 
 {{< /tabs >}}
