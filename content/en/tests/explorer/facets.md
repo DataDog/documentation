@@ -14,7 +14,7 @@ further_reading:
 
 Facets are user-defined tags and attributes from your tests. They are useful for both [qualitative](#qualitative-facets) and [quantitative](#quantitative-measures) data analysis. Facets allow you to manipulate your tests in your [CI Test monitors][1], and in search queries that appear on [dashboards][2] and in [notebooks][3].
 
-[Creating facets](#creating-facets) is **not required** for [searching test runs][5]. Autocomplete capabilities use existing facets, but also any input that matches incoming test runs applies.
+[Creating facets](#creating-facets) is **not required** for searching test runs. Autocomplete capabilities use existing facets, but also any input that matches incoming test runs applies.
 
 ## Common facets
 
@@ -24,7 +24,7 @@ Navigate to [**Software Delivery** > **Test Optimization** > **Test Runs**][7] t
 
 You can use facets in the Test Optimization Explorer to:
 
-- [Search for and filter test runs][5]
+- Search for and filter test runs
 - Perform test analytics
 - Start troubleshooting once your test runs complete
 
@@ -153,6 +153,5 @@ Autocomplete based on the content in test runs of the current views helps you to
 [2]: /dashboards/
 [3]: /notebooks/
 [4]: /tests/explorer
-[5]: /tests/search
 [6]: /tests/explorer/search_syntax/
 [7]: https://app.datadoghq.com/ci/test-runs

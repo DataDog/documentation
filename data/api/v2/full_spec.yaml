@@ -11542,6 +11542,65 @@ components:
           maximum: 2147483647
           type: integer
       type: object
+    HistoricalJobOptions:
+      description: Job options.
+      properties:
+        detectionMethod:
+          $ref: '#/components/schemas/SecurityMonitoringRuleDetectionMethod'
+        evaluationWindow:
+          $ref: '#/components/schemas/SecurityMonitoringRuleEvaluationWindow'
+        impossibleTravelOptions:
+          $ref: '#/components/schemas/SecurityMonitoringRuleImpossibleTravelOptions'
+        keepAlive:
+          $ref: '#/components/schemas/SecurityMonitoringRuleKeepAlive'
+        maxSignalDuration:
+          $ref: '#/components/schemas/SecurityMonitoringRuleMaxSignalDuration'
+        newValueOptions:
+          $ref: '#/components/schemas/SecurityMonitoringRuleNewValueOptions'
+        thirdPartyRuleOptions:
+          $ref: '#/components/schemas/SecurityMonitoringRuleThirdPartyOptions'
+      type: object
+    HistoricalJobQuery:
+      description: Query for selecting logs analyzed by the historical job.
+      properties:
+        aggregation:
+          $ref: '#/components/schemas/SecurityMonitoringRuleQueryAggregation'
+        distinctFields:
+          description: Field for which the cardinality is measured. Sent as an array.
+          items:
+            description: Field.
+            type: string
+          type: array
+        groupByFields:
+          description: Fields to group by.
+          items:
+            description: Field.
+            type: string
+          type: array
+        hasOptionalGroupByFields:
+          description: When false, events without a group-by value are ignored by
+            the query. When true, events with missing group-by fields are processed
+            with `N/A`, replacing the missing values.
+          example: false
+          readOnly: true
+          type: boolean
+        metrics:
+          description: Group of target fields to aggregate over when using the sum,
+            max, geo data, or new value aggregations. The sum, max, and geo data aggregations
+            only accept one value in this list, whereas the new value aggregation
+            accepts up to five values.
+          items:
+            description: Field.
+            type: string
+          type: array
+        name:
+          description: Name of the query.
+          type: string
+        query:
+          description: Query to run on logs.
+          example: a > 3
+          type: string
+      type: object
     HistoricalJobResponse:
       description: Historical job response.
       properties:
@@ -14049,13 +14108,6 @@ components:
           items:
             $ref: '#/components/schemas/SecurityMonitoringRuleCaseCreate'
           type: array
-        filters:
-          description: Additional queries to filter matched events before they are
-            processed. This field is deprecated for log detection, signal correlation,
-            and workload security rules.
-          items:
-            $ref: '#/components/schemas/SecurityMonitoringFilter'
-          type: array
         from:
           description: Starting time of data analyzed by the job.
           example: 1729843470000
@@ -14074,14 +14126,14 @@ components:
           example: Excessive number of failed attempts.
           type: string
         options:
-          $ref: '#/components/schemas/SecurityMonitoringRuleOptions'
+          $ref: '#/components/schemas/HistoricalJobOptions'
         queries:
           description: Queries for selecting logs analyzed by the job.
           items:
-            $ref: '#/components/schemas/SecurityMonitoringStandardRuleQuery'
+            $ref: '#/components/schemas/HistoricalJobQuery'
           type: array
         referenceTables:
-          description: Reference tables for the rule.
+          description: Reference tables used in the queries.
           items:
             $ref: '#/components/schemas/SecurityMonitoringReferenceTable'
           type: array
@@ -14091,8 +14143,8 @@ components:
             type: string
           type: array
         thirdPartyCases:
-          description: Cases for generating results from third-party rules. Only available
-            for third-party rules.
+          description: Cases for generating results from third-party detection method.
+            Only available for third-party detection method.
           example: []
           items:
             $ref: '#/components/schemas/SecurityMonitoringThirdPartyRuleCaseCreate'
@@ -22386,7 +22438,7 @@ components:
           $ref: '#/components/schemas/ResponseMetaAttributes'
       type: object
     SecurityMonitoringReferenceTable:
-      description: Reference table for the rule.
+      description: Reference tables used in the queries.
       properties:
         checkPresence:
           description: Whether to include or exclude the matched values.
@@ -22398,7 +22450,7 @@ components:
           description: The field in the log to match against the reference table.
           type: string
         ruleQueryName:
-          description: The name of the rule query to apply the reference table to.
+          description: The name of the query to apply the reference table to.
           type: string
         tableName:
           description: The name of the reference table.
@@ -22429,7 +22481,7 @@ components:
       description: Case when signal is generated.
       properties:
         condition:
-          description: 'A rule case contains logical operations (`>`,`>=`, `&&`, `||`)
+          description: 'A case contains logical operations (`>`,`>=`, `&&`, `||`)
             to determine if a signal should be generated
 
             based on the event counts in the previously defined queries.'
@@ -22438,7 +22490,7 @@ components:
           description: Name of the case.
           type: string
         notifications:
-          description: Notification targets for each rule case.
+          description: Notification targets.
           items:
             description: Notification.
             type: string
@@ -22500,7 +22552,8 @@ components:
       description: 'A time window is specified to match when at least one of the cases
         matches true. This is a sliding window
 
-        and evaluates in real time. For third party rules, this field is not used.'
+        and evaluates in real time. For third party detection method, this field is
+        not used.'
       enum:
       - 0
       - 60
@@ -22529,7 +22582,7 @@ components:
       x-enum-varnames:
       - LOG4SHELL
     SecurityMonitoringRuleImpossibleTravelOptions:
-      description: Options on impossible travel rules.
+      description: Options on impossible travel detection method.
       properties:
         baselineUserLocations:
           $ref: '#/components/schemas/SecurityMonitoringRuleImpossibleTravelOptionsBaselineUserLocations'
@@ -22545,7 +22598,7 @@ components:
     SecurityMonitoringRuleKeepAlive:
       description: "Once a signal is generated, the signal will remain \u201Copen\u201D
         if a case is matched at least once within\nthis keep alive window. For third
-        party rules, this field is not used."
+        party detection method, this field is not used."
       enum:
       - 0
       - 60
@@ -22603,7 +22656,7 @@ components:
       - TWELVE_HOURS
       - ONE_DAY
     SecurityMonitoringRuleNewValueOptions:
-      description: Options on new value rules.
+      description: Options on new value detection method.
       properties:
         forgetAfter:
           $ref: '#/components/schemas/SecurityMonitoringRuleNewValueOptionsForgetAfter'
@@ -22673,7 +22726,7 @@ components:
       - ZERO_OCCURRENCES
       - ONE_OCCURRENCE
     SecurityMonitoringRuleOptions:
-      description: Options on rules.
+      description: Options.
       properties:
         complianceRuleOptions:
           $ref: '#/components/schemas/CloudConfigurationComplianceRuleOptions'
@@ -22815,7 +22868,7 @@ components:
           type: array
       type: object
     SecurityMonitoringRuleThirdPartyOptions:
-      description: Options on third party rules.
+      description: Options on third party detection method.
       properties:
         defaultNotifications:
           description: Notification targets for the logs that do not correspond to
@@ -24215,7 +24268,7 @@ components:
           description: Name of the case.
           type: string
         notifications:
-          description: Notification targets for each rule case.
+          description: Notification targets for each case.
           items:
             description: Notification.
             type: string
@@ -31988,7 +32041,8 @@ paths:
         != null BEGIN\n  sleep(5 seconds)  # Avoid running into rate limit\n  response
         := GetMonthlyCostAttribution(start_month, end_month, next_record_id=cursor)\n
         \ cursor := response.metadata.pagination.next_record_id\nEND\n```\n\nThis
-        endpoint is only accessible for [parent-level organizations](https://docs.datadoghq.com/account_management/multi_organization/)."
+        endpoint is only accessible for [parent-level organizations](https://docs.datadoghq.com/account_management/multi_organization/).
+        This endpoint is not available in the Government (US1-FED) site."
       operationId: GetMonthlyCostAttribution
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to month: `[YYYY-MM]`
@@ -48960,7 +49014,11 @@ tags:
     page](https://docs.datadoghq.com/account_management/org_settings/service_accounts/)
     for more information.
   name: Service Accounts
-- description: API to create, update, retrieve and delete service definitions.
+- description: 'API to create, update, retrieve and delete service definitions.
+
+    Note: Service Catalog [v3.0 schema](https://docs.datadoghq.com/service_catalog/service_definitions/v3-0/)
+    has new API endpoints documented under [Software Catalog](https://docs.datadoghq.com/api/latest/software-catalog/).
+    Use the following Service Definition endpoints for v2.2 and earlier.'
   externalDocs:
     url: https://docs.datadoghq.com/tracing/service_catalog/
   name: Service Definition

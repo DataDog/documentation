@@ -163,3 +163,6 @@ content/en/quality_gates/                         @Datadog/ci-app-backend @Datad
 
 # DDSQL Editor References
 content/en/ddsql_editor/reference/*.md              @Datadog/xpq @Datadog/documentation
+
+# Data Streams Monitoring
+content/en/data_streams/*.md                      @Datadog/data-streams-monitoring @Datadog/documentation

@@ -4319,10 +4319,10 @@ menu:
       parent: tests
       identifier: tests_containers
       weight: 3
-    - name: Search and Manage
-      url: tests/search/
+    - name: Repositories
+      url: /tests/repositories
       parent: tests
-      identifier: tests_search
+      identifier: tests_repositories
       weight: 4
     - name: Explorer
       url: tests/explorer/

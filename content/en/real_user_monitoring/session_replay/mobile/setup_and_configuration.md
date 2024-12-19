@@ -40,6 +40,8 @@ To set up Mobile Session Replay for Android:
     implementation("com.datadoghq:dd-sdk-android-session-replay:[datadog_version]")
     // in case you need Material support
     implementation("com.datadoghq:dd-sdk-android-session-replay-material:[datadog_version]")
+    // in case you need Jetpack Compose support
+    implementation("com.datadoghq:dd-sdk-android-session-replay-compose:[datadog_version]")
    {{< /code-block >}}
 
 3. Enable Session Replay in your app:
@@ -48,6 +50,8 @@ To set up Mobile Session Replay for Android:
    val sessionReplayConfig = SessionReplayConfiguration.Builder([sampleRate])
     // in case you need Material extension support
     .addExtensionSupport(MaterialExtensionSupport())
+    // in case you need Jetpack Compose support
+    .addExtensionSupport(ComposeExtensionSupport)
     .build()
    SessionReplay.enable(sessionReplayConfig)
    {{< /code-block >}}
