@@ -19,9 +19,8 @@ further_reading:
   text: "Logging without Limits*"
 ---
 
-Log Indexes provide fine-grained control over your Log Management budget by allowing you to segment data into value groups for differing retention, quotas, usage monitoring, and billing. Indexes are located on the [Configuration page][1] in the Indexes section. Double click on them or click on the *edit* button to see more information about the number of logs that were indexed in the past 3 days, as well as the retention period for those logs:
+Log Indexes provide fine-grained control over your Log Management budget by allowing you to segment data into value groups for differing retention, quotas, usage monitoring, and billing. Indexes are located on the [Configuration page][1] in the Indexes section. Double click on them or click on the *edit* button to see more information about the number of logs that were indexed in the past 3 days, as well as the retention period for those logs.![2_1_screen_cmd_k](https://github.com/user-attachments/assets/8b55c4a6-1ef6-414f-bd2d-e3498bd66464)
 
-{{< img src="logs/indexes/index_details.jpg" alt="index details" style="width:70%;">}}
 
 You can use indexed logs for [faceted searching][2], [patterns][3], [analytics][4], and [monitoring][6].
 
