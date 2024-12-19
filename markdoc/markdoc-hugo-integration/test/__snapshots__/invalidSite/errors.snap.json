@@ -1,0 +1,67 @@
+{
+  "/en/bad_interpolated_options_source.mdoc.md": [
+    {
+      "message": "Invalid options source: The options source 'orange_item_options', which is required for the filter ID 'item', does not exist."
+    },
+    {
+      "message": "Invalid options source: The options source 'green_item_options', which is required for the filter ID 'item', does not exist."
+    },
+    {
+      "message": "Invalid options source: The options source 'indigo_item_options', which is required for the filter ID 'item', does not exist."
+    },
+    {
+      "message": "Invalid options source: The options source 'violet_item_options', which is required for the filter ID 'item', does not exist."
+    }
+  ],
+  "/en/bad_literal_options_source.mdoc.md": [
+    {
+      "message": "Invalid options source: The options source 'red_object_options', which is required for the filter ID 'item', does not exist."
+    },
+    {
+      "message": "Invalid options source: The options source 'yellow_object_options', which is required for the filter ID 'item', does not exist."
+    },
+    {
+      "message": "Invalid options source: The options source 'blue_object_options', which is required for the filter ID 'item', does not exist."
+    }
+  ],
+  "/en/bad_nested_pref_value_reference.mdoc.md": [
+    {
+      "message": "Invalid value found in markup: \"bleu\" is not a valid value for the filter ID \"color\".",
+      "searchTerm": "bleu"
+    }
+  ],
+  "/en/bad_placeholder.mdoc.md": [
+    {
+      "message": "Invalid placeholder: The placeholder <COLOUR> in the options source '<COLOUR>_item_options' refers to an unrecognized filter ID. The file frontmatter must contain a filter with the ID 'colour', and it must be defined before the filter with the ID item.",
+      "searchTerm": "<COLOUR>_item_options"
+    }
+  ],
+  "/en/bad_pref_value_reference.mdoc.md": [
+    {
+      "message": "Invalid value found in markup: \"bleu\" is not a valid value for the filter ID \"color\".",
+      "searchTerm": "bleu"
+    }
+  ],
+  "/en/bad_variable_id.mdoc.md": [
+    {
+      "message": "Invalid filter ID found in markup: colour",
+      "searchTerm": "colour"
+    }
+  ],
+  "/en/missing_closing_tag.mdoc.md": [
+    {
+      "message": "Node 'if' is missing closing",
+      "lines": [
+        6,
+        7
+      ]
+    },
+    {
+      "message": "Node 'if' is missing closing",
+      "lines": [
+        9,
+        10
+      ]
+    }
+  ]
+}
