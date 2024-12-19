@@ -21,10 +21,6 @@ aliases:
     - /tracing/api_catalog/
 ---
 
-<div class="alert alert-warning"><h5 class="card-title text-black mt-0 mb-1">The API Catalog features are migrating to Service Catalog</h5>
-We are making significant improvements to the way API endpoints are represented in Datadog. The functionality described on this page is moving to the <a href="https://docs.datadoghq.com/service_catalog">Service Catalog</a>. All core capabilities will be available in the Service Catalog after the migration is done, at which point API Catalog will be deprecated.
-</div>
-
 {{< img src="tracing/api_catalog/api-catalog-catalog-api-details.png" alt="API Catalog showing a list of endpoints for an API called Checkout, along with information about ownership, service and environment, tags, and links to related monitors, tests, and performance data." style="width:100%;" >}}
 
 ## Overview
