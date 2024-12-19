@@ -41,19 +41,32 @@ The minimum tracer version to get all supported application security capabilitie
 
 | .NET Framework Version  | Microsoft End of Life | Support level                       | Package version             |
 | ----------------------- | --------------------- | ----------------------------------- | --------------------------- |
-| 4.8                     |                       | GA   | latest                      |
+| 4.8.1                   |                       | GA | latest                      |
+| 4.8                     |                       | GA | latest                      |
 | 4.7.2                   |                       | GA | latest                      |
+| 4.7.1                   |                       | GA | latest                      |
 | 4.7                     |                       | GA | latest                      |
-| 4.6.2                   |                       | GA | latest                      |
-| 4.6.1                   | 04/26/2022            | GA   | latest |
+| 4.6.2                   | 01/12/2027            | GA | latest                      |
+| 4.6.1                   | 04/26/2022            | GA | latest                      |
+
+| .NET Core Version  | Microsoft End of Life | Support level                       | Package version             |
+| ----------------------- | --------------------- | ----------------------------------- | --------------------------- |
+| 9                     | 04/12/2026            | GA | latest                      |
+| 8                     | 11/10/2026            | GA | latest                      |
+| 7                     | 04/14/2024            | GA | latest                      |
+| 6                     | 11/12/2024            | GA | latest                      |
+| 5                     | 04/10/2022            | GA | latest                      |
+| 3.1                   | 12/13/2022            | GA | latest                      |
+| 3.0                   | 03/03/2020            | GA | latest                      |
+| 2.2                   | 23/10/2019            | GA | latest                      |
+| 2.1                   | 08/21/2021            | GA | latest                      |
 
 
 These are supported on the following architectures:
-- Linux (GNU) x86-64, ARM64
-- Alpine Linux (musl) x86-64, ARM64
-- macOS (Darwin) x86-64, ARM64
-- Windows (msvc) x86, x86-64
-
+- Linux (GNU) x64, ARM64 - (.Net Core)
+- Alpine Linux (musl) x64, ARM64 - (.Net Core)
+- macOS (Darwin) x64, ARM64 - (.Net Core)
+- Windows (msvc) x86, x86-64 - (.Net Core and .Net Framework)
 
 
 ### Web framework compatibility
