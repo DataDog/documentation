@@ -109,7 +109,7 @@ Make CSM Vulnerabilities part of your daily workflow by setting up [security not
 {{< img src="security/vulnerabilities/csm-notifications.png" alt="The notification rule setup screen" width="100%">}}
 
 ## Tracking and reporting
-Track and report progress to stakeholders by using the [out-of-the-box CSM Vulnerabilities dashboard][18]. Customize this dashboard to your own needs by cloning and tweaking it as needed.
+Use the out-of-the-box [CSM Vulnerabilities dashboard][18] to track and report progress to stakeholders. Clone and modify it as needed to fit your unique needs.
 
 {{< img src="security/vulnerabilities/csm-vm-reporting.png" alt="The CSM Vulnerabilities dashboard" width="100%">}}
 
