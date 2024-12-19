@@ -56,7 +56,7 @@ Security Inbox ranks issues by considering the severity of a finding first, foll
 
 **Note**: The type of finding, detected risk, or impacted resource does not influence prioritization.
 
-## Using the security context map to identify and mitigate vulnerabilities
+## Use the security context map to identify and mitigate vulnerabilities
 
 The security context map for [Attack Paths](#types-of-findings-in-security-inbox) provides a comprehensive view to help identify and address potential breach points. It effectively maps interconnected misconfigurations, permission gaps, and vulnerabilities that attackers might exploit.
 
@@ -66,6 +66,20 @@ Key features include:
 - **Actionable context for immediate response**: The map includes service ownership information and other relevant context, allowing teams to make informed, real-time decisions. Teams can take action directly from the map by running integrated workflows, sharing security issue links, and accessing the AWS console view of resources for efficient remediation, all without switching tools.
 
 {{< img src="security/security_context_map.png" alt="The security context map showing a publicly accessible AWS EC2 instance with a critical misconfiguration" width="100%">}}
+
+## Customize Security Inbox to highlight crucial issues
+
+{{< callout url="https://www.datadoghq.com/product-preview/customize-your-security-inbox/" >}}
+  Vulnerability Pipeline is in Preview. To enroll in the Preview for Add to Security Inbox rules, click <strong>Request Access</strong>.
+{{< /callout >}}
+
+Vulnerability Pipeline enables you to configure rules that customize your Security Inbox, allowing you to highlight issues that are critical to your organization. By setting up these automated rules, you can streamline the management of newly discovered vulnerabilities, enhancing triage and remediation efforts at scale. Leveraging both the Vulnerability Pipeline and Add to Security Inbox rules, you can optimize your security operations in the following ways:
+
+- **Resurface issues not captured by default**: Highlight issues that might be missed by default or custom detection rules, ensuring no critical issue is overlooked.
+- **Strengthen compliance and address key system concerns**: Address concerns affecting regulatory compliance or important business systems, regardless of severity.
+- **Prioritize current risks**: Focus on immediate threats, such as identity risks after an incident or industry-wide vulnerabilities.
+
+For more information, see [Vulnerability Pipeline][11] and [Add to Security Inbox Rules][12].
 
 ## Further Reading
 
@@ -81,3 +95,5 @@ Key features include:
 [8]: https://www.exploit-db.com/
 [9]: https://nvd.nist.gov/
 [10]: /security/cloud_security_management/severity_scoring/#csm-severity-scoring-framework
+[11]: /security/vulnerability_pipeline/
+[12]: /security/vulnerability_pipeline/security_inbox

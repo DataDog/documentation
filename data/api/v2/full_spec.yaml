@@ -93,7 +93,11 @@ components:
       schema:
         $ref: '#/components/schemas/APIKeysSort'
     AWSAccountConfigIDPathParameter:
-      description: Unique Datadog ID of the AWS Account Integration Config
+      description: 'Unique Datadog ID of the AWS Account Integration Config. To get
+        the config ID for an account, use the
+
+        [List all AWS integrations](https://docs.datadoghq.com/api/latest/aws-integration/#list-all-aws-integrations)
+        endpoint and query by AWS Account ID.'
       in: path
       name: aws_account_config_id
       required: true
@@ -595,7 +599,7 @@ components:
         type: string
     ResourceID:
       description: 'Identifier, formatted as `type:id`. Supported types: `connection`,
-        `dashboard`, `notebook`, `security-rule`, `slo`.'
+        `dashboard`, `notebook`, `reference-table`, `security-rule`, `slo`.'
       example: dashboard:abc-def-ghi
       in: path
       name: resource_id
@@ -1032,11 +1036,15 @@ components:
       x-enum-varnames:
       - API_KEYS
     AWSAccountConfigID:
-      description: Unique Datadog ID of the AWS Account Integration Config
+      description: 'Unique Datadog ID of the AWS Account Integration Config.
+
+        To get the config ID for an account, use the [List all AWS integrations](https://docs.datadoghq.com/api/latest/aws-integration/#list-all-aws-integrations)
+
+        endpoint and query by AWS Account ID.'
       example: 00000000-abcd-0001-0000-000000000000
       type: string
     AWSAccountCreateRequest:
-      description: AWS Account Create Request body
+      description: AWS Account Create Request body.
       properties:
         data:
           $ref: '#/components/schemas/AWSAccountCreateRequestData'
@@ -1044,7 +1052,7 @@ components:
       - data
       type: object
     AWSAccountCreateRequestAttributes:
-      description: The AWS Account Integration Config to be created
+      description: The AWS Account Integration Config to be created.
       properties:
         account_tags:
           $ref: '#/components/schemas/AWSAccountTags'
@@ -1070,7 +1078,7 @@ components:
       - auth_config
       type: object
     AWSAccountCreateRequestData:
-      description: AWS Account Create Request data
+      description: AWS Account Create Request data.
       properties:
         attributes:
           $ref: '#/components/schemas/AWSAccountCreateRequestAttributes'
@@ -1081,12 +1089,14 @@ components:
       - type
       type: object
     AWSAccountID:
-      description: AWS Account ID
+      description: AWS Account ID.
       example: '123456789012'
       type: string
     AWSAccountPartition:
-      default: aws
-      description: AWS Account partition
+      description: 'AWS partition your AWS account is scoped to. Defaults to `aws`.
+
+        See [Partitions](https://docs.aws.amazon.com/whitepapers/latest/aws-fault-isolation-boundaries/partitions.html)
+        in the AWS documentation for more information.'
       enum:
       - aws
       - aws-cn
@@ -1098,7 +1108,7 @@ components:
       - AWS_CN
       - AWS_US_GOV
     AWSAccountResponse:
-      description: AWS Account response body
+      description: AWS Account response body.
       properties:
         data:
           $ref: '#/components/schemas/AWSAccountResponseData'
@@ -1106,7 +1116,7 @@ components:
       - data
       type: object
     AWSAccountResponseAttributes:
-      description: The AWS Account Integration Config
+      description: AWS Account response attributes.
       properties:
         account_tags:
           $ref: '#/components/schemas/AWSAccountTags'
@@ -1119,7 +1129,7 @@ components:
         aws_regions:
           $ref: '#/components/schemas/AWSRegions'
         created_at:
-          description: Timestamp of when the account integration was created
+          description: Timestamp of when the account integration was created.
           format: date-time
           readOnly: true
           type: string
@@ -1128,7 +1138,7 @@ components:
         metrics_config:
           $ref: '#/components/schemas/AWSMetricsConfig'
         modified_at:
-          description: Timestamp of when the account integration was updated
+          description: Timestamp of when the account integration was updated.
           format: date-time
           readOnly: true
           type: string
@@ -1140,7 +1150,7 @@ components:
       - aws_account_id
       type: object
     AWSAccountResponseData:
-      description: AWS Account Response body
+      description: AWS Account response data.
       properties:
         attributes:
           $ref: '#/components/schemas/AWSAccountResponseAttributes'
@@ -1153,10 +1163,11 @@ components:
       - type
       type: object
     AWSAccountTags:
-      description: Tags to apply to all metrics in the account
+      description: Tags to apply to all hosts and metrics reporting for this account.
+        Defaults to `[]`.
       items:
-        description: Tag to apply to all metrics in the account
-        example: key:value
+        description: Tag in the form `key:value`.
+        example: env:prod
         type: string
       nullable: true
       type: array
@@ -1170,7 +1181,7 @@ components:
       x-enum-varnames:
       - ACCOUNT
     AWSAccountUpdateRequest:
-      description: AWS Account Update Request body
+      description: AWS Account Update Request body.
       properties:
         data:
           $ref: '#/components/schemas/AWSAccountUpdateRequestData'
@@ -1178,7 +1189,7 @@ components:
       - data
       type: object
     AWSAccountUpdateRequestAttributes:
-      description: The AWS Account Integration Config to be updated
+      description: The AWS Account Integration Config to be updated.
       properties:
         account_tags:
           $ref: '#/components/schemas/AWSAccountTags'
@@ -1202,7 +1213,7 @@ components:
       - aws_account_id
       type: object
     AWSAccountUpdateRequestData:
-      description: AWS Account Update Request data
+      description: AWS Account Update Request data.
       properties:
         attributes:
           $ref: '#/components/schemas/AWSAccountUpdateRequestAttributes'
@@ -1215,10 +1226,10 @@ components:
       - type
       type: object
     AWSAccountsResponse:
-      description: AWS Accounts response body
+      description: AWS Accounts response body.
       properties:
         data:
-          description: List of AWS Account Integration Configs
+          description: List of AWS Account Integration Configs.
           items:
             $ref: '#/components/schemas/AWSAccountResponseData'
           type: array
@@ -1226,19 +1237,20 @@ components:
       - data
       type: object
     AWSAuthConfig:
-      description: AWS Authentication config
+      description: AWS Authentication config.
       oneOf:
       - $ref: '#/components/schemas/AWSAuthConfigKeys'
       - $ref: '#/components/schemas/AWSAuthConfigRole'
     AWSAuthConfigKeys:
-      description: AWS Authentication config for key-based account
+      description: AWS Authentication config to integrate your account using an access
+        key pair.
       properties:
         access_key_id:
-          description: AWS Access Key ID
+          description: AWS Access Key ID.
           example: AKIAIOSFODNN7EXAMPLE
           type: string
         secret_access_key:
-          description: AWS Secret Access Key
+          description: AWS Secret Access Key.
           example: wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
           minLength: 1
           type: string
@@ -1247,13 +1259,14 @@ components:
       - access_key_id
       type: object
     AWSAuthConfigRole:
-      description: AWS Authentication config for role-based account
+      description: AWS Authentication config to integrate your account using an IAM
+        role.
       properties:
         external_id:
-          description: AWS IAM External ID for associated role
+          description: AWS IAM External ID for associated role.
           type: string
         role_name:
-          description: AWS IAM Role name
+          description: AWS IAM Role name.
           example: DatadogIntegrationRole
           maxLength: 576
           minLength: 1
@@ -1262,24 +1275,32 @@ components:
       - role_name
       type: object
     AWSLambdaForwarderConfig:
-      description: AWS Lambda forwarder
+      description: 'Log Autosubscription configuration for Datadog Forwarder Lambda
+        functions. Automatically set up triggers for existing
+
+        and new logs for some services, ensuring no logs from new resources are missed
+        and saving time spent on manual configuration.'
       properties:
         lambdas:
-          description: List of Datadog Lambda Log Forwarder ARNs
+          description: List of Datadog Lambda Log Forwarder ARNs in your AWS account.
+            Defaults to `[]`.
           items:
             example: arn:aws:lambda:us-east-1:123456789012:function:DatadogLambdaLogForwarder
             type: string
           type: array
         sources:
-          description: List of AWS services that will send logs to the Datadog Lambda
-            Log Forwarder
+          description: 'List of service IDs set to enable automatic log collection.
+            Discover the list of available services with the
+
+            [Get list of AWS log ready services](https://docs.datadoghq.com/api/latest/aws-logs-integration/#get-list-of-aws-log-ready-services)
+            endpoint.'
           items:
             example: s3
             type: string
           type: array
       type: object
     AWSLogsConfig:
-      description: AWS Logs config
+      description: AWS Logs Collection config.
       properties:
         lambda_forwarder:
           $ref: '#/components/schemas/AWSLambdaForwarderConfig'
@@ -1332,75 +1353,64 @@ components:
       x-enum-varnames:
       - LOGS_SERVICES
     AWSMetricsConfig:
-      description: AWS Metrics config
+      description: AWS Metrics Collection config.
       properties:
         automute_enabled:
-          description: Enable EC2 automute for AWS metrics
+          description: Enable EC2 automute for AWS metrics. Defaults to `true`.
           example: true
           type: boolean
         collect_cloudwatch_alarms:
-          description: Enable CloudWatch alarms collection
-          example: true
+          description: Enable CloudWatch alarms collection. Defaults to `false`.
+          example: false
           type: boolean
         collect_custom_metrics:
-          description: Enable custom metrics collection
-          example: true
+          description: Enable custom metrics collection. Defaults to `false`.
+          example: false
           type: boolean
         enabled:
-          description: Enable AWS metrics collection
+          description: Enable AWS metrics collection. Defaults to `true`.
           example: true
           type: boolean
         namespace_filters:
           $ref: '#/components/schemas/AWSNamespaceFilters'
         tag_filters:
-          description: AWS Metrics tag filters list
+          description: AWS Metrics collection tag filters list. Defaults to `[]`.
           items:
             $ref: '#/components/schemas/AWSNamespaceTagFilter'
           type: array
       type: object
     AWSNamespaceFilters:
-      description: AWS Metrics namespace filters
+      description: AWS Metrics namespace filters. Defaults to `exclude_only`.
       oneOf:
-      - $ref: '#/components/schemas/AWSNamespaceFiltersExcludeAll'
       - $ref: '#/components/schemas/AWSNamespaceFiltersExcludeOnly'
-      - $ref: '#/components/schemas/AWSNamespaceFiltersIncludeAll'
       - $ref: '#/components/schemas/AWSNamespaceFiltersIncludeOnly'
-    AWSNamespaceFiltersExcludeAll:
-      description: Exclude all namespaces
-      properties:
-        exclude_all:
-          description: Exclude all namespaces
-          example: false
-          type: boolean
-      required:
-      - exclude_all
     AWSNamespaceFiltersExcludeOnly:
-      description: Exclude only these namespaces
+      description: 'Exclude only these namespaces from metrics collection. Defaults
+        to `["AWS/SQS", "AWS/ElasticMapReduce"]`.
+
+        `AWS/SQS` and `AWS/ElasticMapReduce` are excluded by default to reduce your
+        AWS CloudWatch costs from `GetMetricData` API calls.'
       properties:
         exclude_only:
-          description: Exclude only these namespaces
+          description: 'Exclude only these namespaces from metrics collection. Defaults
+            to `["AWS/SQS", "AWS/ElasticMapReduce"]`.
+
+            `AWS/SQS` and `AWS/ElasticMapReduce` are excluded by default to reduce
+            your AWS CloudWatch costs from `GetMetricData` API calls.'
           example:
-          - AWS/EC2
+          - AWS/SQS
+          - AWS/ElasticMapReduce
           items:
-            example: AWS/EC2
+            example: AWS/SQS
             type: string
           type: array
       required:
       - exclude_only
-    AWSNamespaceFiltersIncludeAll:
-      description: Include all namespaces
-      properties:
-        include_all:
-          description: Include all namespaces
-          example: false
-          type: boolean
-      required:
-      - include_all
     AWSNamespaceFiltersIncludeOnly:
-      description: Include only these namespaces
+      description: Include only these namespaces.
       properties:
         include_only:
-          description: Include only these namespaces
+          description: Include only these namespaces.
           example:
           - AWS/EC2
           items:
@@ -1410,22 +1420,36 @@ components:
       required:
       - include_only
     AWSNamespaceTagFilter:
-      description: AWS Metrics tag filters
+      description: 'AWS Metrics Collection tag filters list. Defaults to `[]`.
+
+        The array of custom AWS resource tags (in the form `key:value`) defines a
+        filter that Datadog uses when collecting metrics from a specified service.
+
+        Wildcards, such as `?` (match a single character) and `*` (match multiple
+        characters), and exclusion using `!` before the tag are supported.
+
+        For EC2, only hosts that match one of the defined tags will be imported into
+        Datadog. The rest will be ignored.
+
+        For example, `env:production,instance-type:c?.*,!region:us-east-1`.'
       properties:
         namespace:
-          description: The AWS Namespace to apply the tag filters against
+          description: The AWS service for which the tag filters defined in `tags`
+            will be applied.
           example: AWS/EC2
           type: string
         tags:
-          description: The tags to filter based on
+          description: The AWS resource tags to filter on for the service specified
+            by `namespace`.
           items:
-            example: key:value
+            description: Tag in the form `key:value`.
+            example: datadog:true
             type: string
           nullable: true
           type: array
       type: object
     AWSNamespacesResponse:
-      description: AWS Namespaces response body
+      description: AWS Namespaces response body.
       properties:
         data:
           $ref: '#/components/schemas/AWSNamespacesResponseData'
@@ -1433,10 +1457,10 @@ components:
       - data
       type: object
     AWSNamespacesResponseAttributes:
-      description: AWS Namespaces response body
+      description: AWS Namespaces response attributes.
       properties:
         namespaces:
-          description: AWS CloudWatch namespace
+          description: AWS CloudWatch namespace.
           example:
           - AWS/ApiGateway
           items:
@@ -1447,7 +1471,7 @@ components:
       - namespaces
       type: object
     AWSNamespacesResponseData:
-      description: AWS Namespaces response body
+      description: AWS Namespaces response data.
       properties:
         attributes:
           $ref: '#/components/schemas/AWSNamespacesResponseAttributes'
@@ -1472,7 +1496,7 @@ components:
       x-enum-varnames:
       - NAMESPACES
     AWSNewExternalIDResponse:
-      description: AWS External ID response body
+      description: AWS External ID response body.
       properties:
         data:
           $ref: '#/components/schemas/AWSNewExternalIDResponseData'
@@ -1480,17 +1504,17 @@ components:
       - data
       type: object
     AWSNewExternalIDResponseAttributes:
-      description: AWS External ID response body
+      description: AWS External ID response body.
       properties:
         external_id:
-          description: AWS IAM External ID for associated role
+          description: AWS IAM External ID for associated role.
           example: acb8f6b8a844443dbb726d07dcb1a870
           type: string
       required:
       - external_id
       type: object
     AWSNewExternalIDResponseData:
-      description: AWS External ID response body
+      description: AWS External ID response body.
       properties:
         attributes:
           $ref: '#/components/schemas/AWSNewExternalIDResponseAttributes'
@@ -1515,24 +1539,24 @@ components:
       x-enum-varnames:
       - EXTERNAL_ID
     AWSRegions:
-      description: AWS Regions to collect data from
+      description: AWS Regions to collect data from. Defaults to `include_all`.
       oneOf:
       - $ref: '#/components/schemas/AWSRegionsIncludeAll'
       - $ref: '#/components/schemas/AWSRegionsIncludeOnly'
     AWSRegionsIncludeAll:
-      description: Include all regions
+      description: Include all regions. Defaults to `true`.
       properties:
         include_all:
-          description: Include all regions
-          example: false
+          description: Include all regions.
+          example: true
           type: boolean
       required:
       - include_all
     AWSRegionsIncludeOnly:
-      description: Include only these regions
+      description: Include only these regions.
       properties:
         include_only:
-          description: Include only these regions
+          description: Include only these regions.
           example:
           - us-east-1
           items:
@@ -1542,21 +1566,23 @@ components:
       required:
       - include_only
     AWSResourcesConfig:
-      description: AWS Resources config
+      description: AWS Resources Collection config.
       properties:
         cloud_security_posture_management_collection:
-          description: Whether Datadog collects cloud security posture management
-            resources from your AWS account.
+          description: Enable Cloud Security Management to scan AWS resources for
+            vulnerabilities, misconfigurations, identity risks, and compliance violations.
+            Defaults to `false`. Requires `extended_collection` to be set to `true`.
           example: false
           type: boolean
         extended_collection:
           description: Whether Datadog collects additional attributes and configuration
-            information about the resources in your AWS account. Required for `cspm_resource_collection`.
-          example: false
+            information about the resources in your AWS account. Defaults to `true`.
+            Required for `cloud_security_posture_management_collection`.
+          example: true
           type: boolean
       type: object
     AWSTracesConfig:
-      description: AWS Traces config
+      description: AWS Traces Collection config.
       properties:
         xray_services:
           $ref: '#/components/schemas/XRayServicesList'
@@ -3342,6 +3368,183 @@ components:
         tags:
           $ref: '#/components/schemas/TagsEventAttribute'
       type: object
+    CIAppPipelineEventFinishedPipeline:
+      description: Details of a finished pipeline.
+      properties:
+        end:
+          description: Time when the pipeline run finished. It cannot be older than
+            18 hours in the past from the current time. The time format must be RFC3339.
+          example: '2023-05-31T15:30:00Z'
+          format: date-time
+          type: string
+        error:
+          $ref: '#/components/schemas/CIAppCIError'
+        git:
+          $ref: '#/components/schemas/CIAppGitInfo'
+        is_manual:
+          description: Whether or not the pipeline was triggered manually by the user.
+          example: false
+          nullable: true
+          type: boolean
+        is_resumed:
+          description: Whether or not the pipeline was resumed after being blocked.
+          example: false
+          nullable: true
+          type: boolean
+        level:
+          $ref: '#/components/schemas/CIAppPipelineEventPipelineLevel'
+        metrics:
+          $ref: '#/components/schemas/CIAppPipelineEventMetrics'
+        name:
+          description: Name of the pipeline. All pipeline runs for the builds should
+            have the same name.
+          example: Deploy to AWS
+          type: string
+        node:
+          $ref: '#/components/schemas/CIAppHostInfo'
+        parameters:
+          $ref: '#/components/schemas/CIAppPipelineEventParameters'
+        parent_pipeline:
+          $ref: '#/components/schemas/CIAppPipelineEventParentPipeline'
+        partial_retry:
+          description: 'Whether or not the pipeline was a partial retry of a previous
+            attempt. A partial retry is one
+
+            which only runs a subset of the original jobs.'
+          example: false
+          type: boolean
+        pipeline_id:
+          description: 'Any ID used in the provider to identify the pipeline run even
+            if it is not unique across retries.
+
+            If the `pipeline_id` is unique, then both `unique_id` and `pipeline_id`
+            can be set to the same value.'
+          example: '#023'
+          type: string
+        previous_attempt:
+          $ref: '#/components/schemas/CIAppPipelineEventPreviousPipeline'
+        queue_time:
+          description: The queue time in milliseconds, if applicable.
+          example: 1004
+          format: int64
+          minimum: 0
+          nullable: true
+          type: integer
+        start:
+          description: Time when the pipeline run started (it should not include any
+            queue time). The time format must be RFC3339.
+          example: '2023-05-31T15:30:00Z'
+          format: date-time
+          type: string
+        status:
+          $ref: '#/components/schemas/CIAppPipelineEventPipelineStatus'
+        tags:
+          $ref: '#/components/schemas/CIAppPipelineEventTags'
+        unique_id:
+          description: 'UUID of the pipeline run. The ID has to be unique across retries
+            and pipelines,
+
+            including partial retries.'
+          example: 3eacb6f3-ff04-4e10-8a9c-46e6d054024a
+          type: string
+        url:
+          description: The URL to look at the pipeline in the CI provider UI.
+          example: https://my-ci-provider.example/pipelines/my-pipeline/run/1
+          type: string
+      required:
+      - level
+      - unique_id
+      - name
+      - url
+      - start
+      - end
+      - status
+      - partial_retry
+      type: object
+    CIAppPipelineEventInProgressPipeline:
+      description: Details of a running pipeline.
+      properties:
+        error:
+          $ref: '#/components/schemas/CIAppCIError'
+        git:
+          $ref: '#/components/schemas/CIAppGitInfo'
+        is_manual:
+          description: Whether or not the pipeline was triggered manually by the user.
+          example: false
+          nullable: true
+          type: boolean
+        is_resumed:
+          description: Whether or not the pipeline was resumed after being blocked.
+          example: false
+          nullable: true
+          type: boolean
+        level:
+          $ref: '#/components/schemas/CIAppPipelineEventPipelineLevel'
+        metrics:
+          $ref: '#/components/schemas/CIAppPipelineEventMetrics'
+        name:
+          description: Name of the pipeline. All pipeline runs for the builds should
+            have the same name.
+          example: Deploy to AWS
+          type: string
+        node:
+          $ref: '#/components/schemas/CIAppHostInfo'
+        parameters:
+          $ref: '#/components/schemas/CIAppPipelineEventParameters'
+        parent_pipeline:
+          $ref: '#/components/schemas/CIAppPipelineEventParentPipeline'
+        partial_retry:
+          description: 'Whether or not the pipeline was a partial retry of a previous
+            attempt. A partial retry is one
+
+            which only runs a subset of the original jobs.'
+          example: false
+          type: boolean
+        pipeline_id:
+          description: 'Any ID used in the provider to identify the pipeline run even
+            if it is not unique across retries.
+
+            If the `pipeline_id` is unique, then both `unique_id` and `pipeline_id`
+            can be set to the same value.'
+          example: '#023'
+          type: string
+        previous_attempt:
+          $ref: '#/components/schemas/CIAppPipelineEventPreviousPipeline'
+        queue_time:
+          description: The queue time in milliseconds, if applicable.
+          example: 1004
+          format: int64
+          minimum: 0
+          nullable: true
+          type: integer
+        start:
+          description: Time when the pipeline run started (it should not include any
+            queue time). The time format must be RFC3339.
+          example: '2023-05-31T15:30:00Z'
+          format: date-time
+          type: string
+        status:
+          $ref: '#/components/schemas/CIAppPipelineEventPipelineInProgressStatus'
+        tags:
+          $ref: '#/components/schemas/CIAppPipelineEventTags'
+        unique_id:
+          description: UUID of the pipeline run. The ID has to be the same as the
+            finished pipeline.
+          example: 3eacb6f3-ff04-4e10-8a9c-46e6d054024a
+          type: string
+        url:
+          description: The URL to look at the pipeline in the CI provider UI.
+          example: https://my-ci-provider.example/pipelines/my-pipeline/run/1
+          type: string
+      required:
+      - level
+      - unique_id
+      - name
+      - url
+      - start
+      - status
+      - partial_retry
+      type: object
     CIAppPipelineEventJob:
       description: Details of a CI job.
       properties:
@@ -3490,97 +3693,17 @@ components:
       type: object
     CIAppPipelineEventPipeline:
       description: Details of the top level pipeline, build, or workflow of your CI.
-      properties:
-        end:
-          description: Time when the pipeline run finished. It cannot be older than
-            18 hours in the past from the current time. The time format must be RFC3339.
-          example: '2023-05-31T15:30:00Z'
-          format: date-time
-          type: string
-        error:
-          $ref: '#/components/schemas/CIAppCIError'
-        git:
-          $ref: '#/components/schemas/CIAppGitInfo'
-        is_manual:
-          description: Whether or not the pipeline was triggered manually by the user.
-          example: false
-          nullable: true
-          type: boolean
-        is_resumed:
-          description: Whether or not the pipeline was resumed after being blocked.
-          example: false
-          nullable: true
-          type: boolean
-        level:
-          $ref: '#/components/schemas/CIAppPipelineEventPipelineLevel'
-        metrics:
-          $ref: '#/components/schemas/CIAppPipelineEventMetrics'
-        name:
-          description: Name of the pipeline. All pipeline runs for the builds should
-            have the same name.
-          example: Deploy to AWS
-          type: string
-        node:
-          $ref: '#/components/schemas/CIAppHostInfo'
-        parameters:
-          $ref: '#/components/schemas/CIAppPipelineEventParameters'
-        parent_pipeline:
-          $ref: '#/components/schemas/CIAppPipelineEventParentPipeline'
-        partial_retry:
-          description: 'Whether or not the pipeline was a partial retry of a previous
-            attempt. A partial retry is one
-
-            which only runs a subset of the original jobs.'
-          example: false
-          type: boolean
-        pipeline_id:
-          description: 'Any ID used in the provider to identify the pipeline run even
-            if it is not unique across retries.
-
-            If the `pipeline_id` is unique, then both `unique_id` and `pipeline_id`
-            can be set to the same value.'
-          example: '#023'
-          type: string
-        previous_attempt:
-          $ref: '#/components/schemas/CIAppPipelineEventPreviousPipeline'
-        queue_time:
-          description: The queue time in milliseconds, if applicable.
-          example: 1004
-          format: int64
-          minimum: 0
-          nullable: true
-          type: integer
-        start:
-          description: Time when the pipeline run started (it should not include any
-            queue time). The time format must be RFC3339.
-          example: '2023-05-31T15:30:00Z'
-          format: date-time
-          type: string
-        status:
-          $ref: '#/components/schemas/CIAppPipelineEventPipelineStatus'
-        tags:
-          $ref: '#/components/schemas/CIAppPipelineEventTags'
-        unique_id:
-          description: 'UUID of the pipeline run. The ID has to be unique across retries
-            and pipelines,
-
-            including partial retries.'
-          example: 3eacb6f3-ff04-4e10-8a9c-46e6d054024a
-          type: string
-        url:
-          description: The URL to look at the pipeline in the CI provider UI.
-          example: https://my-ci-provider.example/pipelines/my-pipeline/run/1
-          type: string
-      required:
-      - level
-      - unique_id
-      - name
-      - url
-      - start
-      - end
-      - status
-      - partial_retry
-      type: object
+      oneOf:
+      - $ref: '#/components/schemas/CIAppPipelineEventFinishedPipeline'
+      - $ref: '#/components/schemas/CIAppPipelineEventInProgressPipeline'
+    CIAppPipelineEventPipelineInProgressStatus:
+      description: The in progress status of the pipeline.
+      enum:
+      - running
+      example: running
+      type: string
+      x-enum-varnames:
+      - RUNNING
     CIAppPipelineEventPipelineLevel:
       default: pipeline
       description: Used to distinguish between pipelines, stages, jobs, and steps.
@@ -4279,6 +4402,34 @@ components:
             from the other indexes
           type: string
       type: object
+    CSMAgentsMetadata:
+      description: Metadata related to the paginated response.
+      properties:
+        page_index:
+          description: The index of the current page in the paginated results.
+          example: 0
+          format: int64
+          type: integer
+        page_size:
+          description: The number of items per page in the paginated results.
+          example: 10
+          format: int64
+          type: integer
+        total_filtered:
+          description: Total number of items that match the filter criteria.
+          example: 128697
+          format: int64
+          type: integer
+      type: object
+    CSMAgentsType:
+      default: datadog_agent
+      description: The type of the resource. The value should always be `datadog_agent`.
+      enum:
+      - datadog_agent
+      example: datadog_agent
+      type: string
+      x-enum-varnames:
+      - DATADOG_AGENT
     CalculatedField:
       description: Calculated field.
       properties:
@@ -5004,42 +5155,6 @@ components:
       type: string
       x-enum-varnames:
       - CLOUD_CONFIGURATION
-    CloudCostActivity:
-      description: Cloud Cost Activity.
-      properties:
-        attributes:
-          $ref: '#/components/schemas/CloudCostActivityAttributes'
-        type:
-          $ref: '#/components/schemas/CloudCostActivityType'
-      required:
-      - attributes
-      - type
-      type: object
-    CloudCostActivityAttributes:
-      description: Attributes for Cloud Cost activity.
-      properties:
-        is_enabled:
-          description: Whether or not the cloud account is enabled.
-          example: true
-          type: boolean
-      required:
-      - is_enabled
-      type: object
-    CloudCostActivityResponse:
-      description: Response for Cloud Cost activity.
-      properties:
-        data:
-          $ref: '#/components/schemas/CloudCostActivity'
-      type: object
-    CloudCostActivityType:
-      default: cloud_cost_activity
-      description: Type of Cloud Cost Activity.
-      enum:
-      - cloud_cost_activity
-      example: cloud_cost_activity
-      type: string
-      x-enum-varnames:
-      - CLOUD_COST_ACTIVITY
     CloudWorkloadSecurityAgentRuleAction:
       description: The action the rule can perform if triggered.
       properties:
@@ -6553,6 +6668,96 @@ components:
           description: Name of the creator.
           nullable: true
           type: string
+      type: object
+    CsmAgentData:
+      description: Single Agent Data.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/CsmAgentsAttributes'
+        id:
+          description: The ID of the Agent.
+          example: fffffc5505f6a006fdf7cf5aae053653
+          type: string
+        type:
+          $ref: '#/components/schemas/CSMAgentsType'
+      type: object
+    CsmAgentsAttributes:
+      description: A CSM Agent returned by the API.
+      properties:
+        agent_version:
+          description: Version of the Datadog Agent.
+          type: string
+        aws_fargate:
+          description: AWS Fargate details.
+          type: string
+        cluster_name:
+          description: List of cluster names associated with the Agent.
+          items:
+            type: string
+          type: array
+        datadog_agent:
+          description: Unique identifier for the Datadog Agent.
+          type: string
+        ecs_fargate_task_arn:
+          description: ARN of the ECS Fargate task.
+          type: string
+        envs:
+          description: List of environments associated with the Agent.
+          items:
+            type: string
+          nullable: true
+          type: array
+        host_id:
+          description: ID of the host.
+          format: int64
+          type: integer
+        hostname:
+          description: Name of the host.
+          type: string
+        install_method_installer_version:
+          description: Version of the installer used for installing the Datadog Agent.
+          type: string
+        install_method_tool:
+          description: Tool used for installing the Datadog Agent.
+          type: string
+        is_csm_vm_containers_enabled:
+          description: Indicates if CSM VM Containers is enabled.
+          nullable: true
+          type: boolean
+        is_csm_vm_hosts_enabled:
+          description: Indicates if CSM VM Hosts is enabled.
+          nullable: true
+          type: boolean
+        is_cspm_enabled:
+          description: Indicates if CSPM is enabled.
+          nullable: true
+          type: boolean
+        is_cws_enabled:
+          description: Indicates if CWS is enabled.
+          nullable: true
+          type: boolean
+        is_cws_remote_configuration_enabled:
+          description: Indicates if CWS Remote Configuration is enabled.
+          nullable: true
+          type: boolean
+        is_remote_configuration_enabled:
+          description: Indicates if Remote Configuration is enabled.
+          nullable: true
+          type: boolean
+        os:
+          description: Operating system of the host.
+          type: string
+      type: object
+    CsmAgentsResponse:
+      description: Response object that includes a list of CSM Agents.
+      properties:
+        data:
+          description: A list of Agents.
+          items:
+            $ref: '#/components/schemas/CsmAgentData'
+          type: array
+        meta:
+          $ref: '#/components/schemas/CSMAgentsMetadata'
       type: object
     CustomCostGetResponseMeta:
       description: Meta for the response from the Get Custom Costs endpoints.
@@ -8634,6 +8839,13 @@ components:
       - type
       - attributes
       type: object
+    EmailTypeType:
+      description: The type of email.
+      enum:
+      - work
+      type: string
+      x-enum-varnames:
+      - WORK
     EntityAttributes:
       description: Entity attributes.
       properties:
@@ -10084,6 +10296,231 @@ components:
             from the other indexes.
           type: string
       type: object
+    ExternalUser:
+      description: Definition of a user.
+      properties:
+        active:
+          description: A Boolean value indicating the User's administrative status.
+          type: boolean
+        emails:
+          description: Email addresses for the user.
+          items:
+            $ref: '#/components/schemas/ExternalUserEmailType'
+          type: array
+        id:
+          description: The identifier of the resource. Not required when creating
+            a user.
+          type: string
+        meta:
+          $ref: '#/components/schemas/ExternalUserMeta'
+        name:
+          $ref: '#/components/schemas/ExternalUserNameType'
+        schemas:
+          description: User JSON Schemas.
+          example:
+          - urn:ietf:params:scim:schemas:core:2.0:User
+          items:
+            type: string
+          type: array
+        title:
+          description: The user's title.
+          type: string
+        userName:
+          description: Unique identifier for the User.
+          type: string
+      type: object
+    ExternalUserEmailType:
+      description: Email address for the user.
+      properties:
+        primary:
+          description: Boolean indicating if this email is the primary email address.
+          type: boolean
+        type:
+          $ref: '#/components/schemas/EmailTypeType'
+        value:
+          description: Email addresses for the user.
+          type: string
+      type: object
+    ExternalUserGroup:
+      description: Definition of a group.
+      properties:
+        displayName:
+          description: A human-readable name for the group.
+          type: string
+        externalId:
+          description: An identifier for the resource as defined by the provisioning
+            client.
+          type: string
+        id:
+          description: The identifier of the resource. Not required when creating
+            a group.
+          type: string
+        members:
+          description: Members of the group.
+          items:
+            $ref: '#/components/schemas/ExternalUserGroupMembersItems'
+          type: array
+        meta:
+          $ref: '#/components/schemas/ExternalUserGroupMeta'
+        schemas:
+          description: Input JSON Schemas.
+          example:
+          - urn:ietf:params:scim:schemas:core:2.0:Group
+          items:
+            type: string
+          type: array
+      type: object
+    ExternalUserGroupMembersItems:
+      description: The definition of a member belonging to a group.
+      properties:
+        $ref:
+          description: The URI corresponding to a SCIM resource that is a member of
+            this group.
+          example: https://app.datadoghq.com/api/scim/v2/Users/429ebce5-8ed3-4da9-9f1e-662f2dbc2fe6
+          type: string
+        display:
+          description: A human-readable name for the group member.
+          example: John Doe
+          type: string
+        type:
+          description: A label indicating the type of resource.
+          example: User
+          type: string
+        value:
+          description: The identifier of the member of this group.
+          example: 429ebce5-8ed3-4da9-9f1e-662f2dbc2fe6
+          type: string
+      type: object
+    ExternalUserGroupMeta:
+      description: Metadata associated with a group.
+      properties:
+        created:
+          description: The date and time the group was created.
+          example: 2024-10-17 12:53:35.793883+00:00
+          format: date-time
+          type: string
+        lastModified:
+          description: The date and time the group was last changed.
+          example: 2024-10-19 12:53:35.793883+00:00
+          format: date-time
+          type: string
+        location:
+          description: URL identifying the resource.
+          example: https://app.datadoghq.com/api/scim/v2/Groups/429ebce5-8ed3-4da9-9f1e-662f2dbc2fe6
+          type: string
+        resourceType:
+          description: Type of resource.
+          example: Group
+          type: string
+      type: object
+    ExternalUserGroupPatchRequest:
+      description: Request object for patching a group.
+      properties:
+        Operations:
+          description: A list of update operations to be performed on a group.
+          items:
+            $ref: '#/components/schemas/ExternalUserGroupPatchRequestOperationsItems'
+          type: array
+        schemas:
+          description: Input JSON Schemas
+          example:
+          - urn:ietf:params:scim:api:messages:2.0:PatchOp
+          items:
+            type: string
+          type: array
+      type: object
+    ExternalUserGroupPatchRequestOperationsItems:
+      description: The definition of an individual patch operation in a patch request.
+      properties:
+        op:
+          $ref: '#/components/schemas/ExternalUserGroupPatchRequestOperationsItemsOp'
+        path:
+          description: An attribute path describing the target of the operation.
+          example: members
+          type: string
+        value:
+          description: JSON element containing the target values required to apply
+            the patch operation.
+          example: "{\n    \"displayName\": \"Real new group\",\n    \"id\": \"80df3a9b-24f5-4ebf-9ba0-714455453621\"\n}"
+      type: object
+    ExternalUserGroupPatchRequestOperationsItemsOp:
+      description: The operation to be performed.
+      enum:
+      - add
+      - replace
+      - remove
+      type: string
+      x-enum-varnames:
+      - ADD
+      - REPLACE
+      - REMOVE
+    ExternalUserMeta:
+      description: Metadata associated with a user.
+      properties:
+        created:
+          description: The date and time the user was created.
+          example: 2024-10-17 12:53:35.793883+00:00
+          format: date-time
+          type: string
+        lastModified:
+          description: The date and time the user was last changed.
+          example: 2024-10-19 12:53:35.793883+00:00
+          format: date-time
+          type: string
+        location:
+          description: URL identifying the resource.
+          example: https://app.datadoghq.com/api/scim/v2/Users/13a95654-b76d-478d-8636-157a7e461d7c
+          type: string
+        resourceType:
+          description: Type of resource.
+          example: User
+          type: string
+      type: object
+    ExternalUserNameType:
+      description: The components of user's real name
+      properties:
+        formatted:
+          description: The full name, including all middle names, titles, and suffixes
+            as appropriate, formatted for display.
+          type: string
+      type: object
+    ExternalUserPatchRequest:
+      description: Request object for patching a user.
+      properties:
+        Operations:
+          description: A list of update operations to be performed on a user.
+          items:
+            $ref: '#/components/schemas/ExternalUserPatchRequestOperationsItems'
+          type: array
+        schemas:
+          description: Input JSON Schemas
+          example:
+          - urn:ietf:params:scim:api:messages:2.0:PatchOp
+          items:
+            type: string
+          type: array
+      type: object
+    ExternalUserPatchRequestOperationsItems:
+      description: The definition of an individual patch operation in a patch request.
+      properties:
+        op:
+          $ref: '#/components/schemas/ExternalUserPatchRequestOperationsItemsOp'
+        path:
+          description: An attribute path describing the target of the operation.
+          example: title
+          type: string
+        value:
+          description: New value to use for the patch operation.
+      type: object
+    ExternalUserPatchRequestOperationsItemsOp:
+      description: The operation to be performed.
+      enum:
+      - add
+      - replace
+      type: string
+      x-enum-varnames:
+      - ADD
+      - REPLACE
     FastlyAccounResponseAttributes:
       description: Attributes object of a Fastly account.
       properties:
@@ -13905,6 +14342,248 @@ components:
           description: Current link.
           type: string
       type: object
+    ListExternalUserGroupResponse:
+      description: List groups response object.
+      example:
+        Resources:
+        - displayName: Group 1
+          externalId: group1
+          id: e43536e9-33fe-43f8-90b8-d3e39a7dd6ad
+          members:
+          - $ref: https://app.datadoghq.com/api/scim/v2/Users/d34a5f93-5690-4d3f-a293-f2ad5c7a82a4
+            display: John Doe
+            type: User
+            value: d34a5f93-5690-4d3f-a293-f2ad5c7a82a4
+          - $ref: https://app.datadoghq.com/api/scim/v2/Users/429ebce5-8ed3-4da9-9f1e-662f2dbc2fe6
+            display: Jane Doe
+            type: User
+            value: 429ebce5-8ed3-4da9-9f1e-662f2dbc2fe6
+          meta:
+            created: '2024-11-22T15:05:52.055138963Z'
+            lastModified: '2024-11-22T15:05:52.055139017Z'
+            location: https://app.datadoghq.com/api/scim/v2/Groups/e43536e9-33fe-43f8-90b8-d3e39a7dd6ad
+            resourceType: Group
+          schemas:
+          - urn:ietf:params:scim:schemas:core:2.0:Group
+        - displayName: Group 2
+          externalId: group2
+          id: 79ef0d28-f257-4829-97e6-d23d2a26cb1a
+          members:
+          - $ref: https://app.datadoghq.com/api/scim/v2/Users/29da9fb7-8fca-4e87-bf58-86652253deae
+            display: Alice Smith
+            type: User
+            value: 29da9fb7-8fca-4e87-bf58-86652253deae
+          - $ref: https://app.datadoghq.com/api/scim/v2/Users/f85e3868-ad7b-47e3-a8a9-ff1eade2bbf9
+            display: Bob Smith
+            type: User
+            value: f85e3868-ad7b-47e3-a8a9-ff1eade2bbf9
+          meta:
+            created: '2024-11-22T15:05:52.055139748Z'
+            lastModified: '2024-11-22T15:05:52.055139813Z'
+            location: https://app.datadoghq.com/api/scim/v2/Groups/79ef0d28-f257-4829-97e6-d23d2a26cb1a
+            resourceType: Group
+          schemas:
+          - urn:ietf:params:scim:schemas:core:2.0:Group
+        itemsPerPage: 2
+        schemas:
+        - urn:ietf:params:scim:api:messages:2.0:ListResponse
+        startIndex: 1
+        totalResults: 2
+      properties:
+        Resources:
+          description: List of groups matching the request criteria.
+          items:
+            $ref: '#/components/schemas/ListExternalUserGroupResponseResourcesItems'
+          type: array
+        itemsPerPage:
+          description: Number of groups returned per page.
+          format: int64
+          maximum: 4294967295
+          minimum: 0
+          type: integer
+        schemas:
+          description: List response JSON Schemas.
+          example:
+          - urn:ietf:params:scim:api:messages:2.0:ListResponse
+          items:
+            type: string
+          type: array
+        startIndex:
+          description: Starting index of the groups for this page (1-indexed).
+          format: int64
+          maximum: 4294967295
+          minimum: 0
+          type: integer
+        totalResults:
+          description: Total number of groups matching the request criteria.
+          format: int64
+          maximum: 4294967295
+          minimum: 0
+          type: integer
+      type: object
+    ListExternalUserGroupResponseResourcesItems:
+      description: Resources returned in response to a List groups request.
+      properties:
+        displayName:
+          description: A human-readable name for the group.
+          example: My test group
+          type: string
+        externalId:
+          description: An identifier for the resource as defined by the provisioning
+            client.
+          example: 346af543-e5ab-4855-937d-133231cd59ed
+          type: string
+        id:
+          description: The identifier of the resource. Not required when creating
+            a group.
+          example: 0e80d350-9519-4771-9aa8-ce849fc36c20
+          type: string
+        members:
+          description: A list of members belonging to the team.
+          items:
+            $ref: '#/components/schemas/ListExternalUserGroupResponseResourcesItemsMembersItems'
+          type: array
+        meta:
+          $ref: '#/components/schemas/ExternalUserGroupMeta'
+        schemas:
+          description: Group JSON Schemas.
+          example:
+          - urn:ietf:params:scim:schemas:core:2.0:Group
+          items:
+            type: string
+          type: array
+      type: object
+    ListExternalUserGroupResponseResourcesItemsMembersItems:
+      description: The definition of a member belonging to a group in the List groups
+        response.
+      properties:
+        $ref:
+          description: The URI corresponding to a resource that is a member of this
+            group.
+          example: https://app.datadoghq.com/api/scim/v2/Users/429ebce5-8ed3-4da9-9f1e-662f2dbc2fe6
+          type: string
+        display:
+          description: Full name of the user.
+          example: John Doe
+          type: string
+        type:
+          description: A label indicating the type of resource. Only supported value
+            is "User".
+          example: User
+          type: string
+        value:
+          description: The identifier of the member of this group.
+          example: 429ebce5-8ed3-4da9-9f1e-662f2dbc2fe6
+          type: string
+      type: object
+    ListExternalUsersResponse:
+      description: List users response object.
+      example:
+        Resources:
+        - active: true
+          emails:
+          - primary: true
+            type: work
+            value: john.doe@datadoghq.com
+          id: e43536e9-33fe-43f8-90b8-d3e39a7dd6ad
+          meta:
+            created: '2024-11-22T15:05:52.055138963Z'
+            lastModified: '2024-11-22T15:05:52.055139017Z'
+            location: https://app.datadoghq.com/api/scim/v2/Users/e43536e9-33fe-43f8-90b8-d3e39a7dd6ad
+            resourceType: User
+          name:
+            formatted: John Doe
+          schemas:
+          - urn:ietf:params:scim:schemas:core:2.0:User
+          title: Mr.
+          userName: john.doe@datadoghq.com
+        - active: true
+          emails:
+          - primary: true
+            type: work
+            value: jane.doe@datadoghq.com
+          id: 79ef0d28-f257-4829-97e6-d23d2a26cb1a
+          meta:
+            created: '2024-11-22T15:05:52.055139748Z'
+            lastModified: '2024-11-22T15:05:52.055139813Z'
+            location: https://app.datadoghq.com/api/scim/v2/Users/79ef0d28-f257-4829-97e6-d23d2a26cb1a
+            resourceType: User
+          name:
+            formatted: Jane Doe
+          schemas:
+          - urn:ietf:params:scim:schemas:core:2.0:User
+          title: Mrs.
+          userName: jane.doe@datadoghq.com
+        itemsPerPage: 2
+        schemas:
+        - urn:ietf:params:scim:api:messages:2.0:ListResponse
+        startIndex: 1
+        totalResults: 2
+      properties:
+        Resources:
+          description: List of users matching the request criteria.
+          items:
+            $ref: '#/components/schemas/ListExternalUsersResponseResourcesItems'
+          type: array
+        itemsPerPage:
+          description: Number of users returned per page.
+          format: int64
+          maximum: 4294967295
+          minimum: 0
+          type: integer
+        schemas:
+          description: List response JSON Schemas.
+          example:
+          - urn:ietf:params:scim:api:messages:2.0:ListResponse
+          items:
+            type: string
+          type: array
+        startIndex:
+          description: Starting index of the users for this page (1-indexed).
+          format: int64
+          maximum: 4294967295
+          minimum: 0
+          type: integer
+        totalResults:
+          description: Total number of users matching the request criteria.
+          format: int64
+          maximum: 4294967295
+          minimum: 0
+          type: integer
+      type: object
+    ListExternalUsersResponseResourcesItems:
+      description: Resources returned in response to a List users request.
+      properties:
+        active:
+          description: A Boolean value indicating the User's administrative status.
+          type: boolean
+        emails:
+          description: Email addresses for the user.
+          items:
+            $ref: '#/components/schemas/ExternalUserEmailType'
+          type: array
+        id:
+          description: The identifier of the resource. Not required when creating
+            a user.
+          type: string
+        meta:
+          $ref: '#/components/schemas/ExternalUserMeta'
+        name:
+          $ref: '#/components/schemas/ExternalUserNameType'
+        schemas:
+          description: User JSON Schemas.
+          example:
+          - urn:ietf:params:scim:schemas:core:2.0:User
+          items:
+            type: string
+          type: array
+        title:
+          description: The user's title.
+          type: string
+        userName:
+          description: Unique identifier for the User.
+          type: string
+      type: object
     ListFindingsData:
       description: Array of findings.
       items:
@@ -15838,6 +16517,36 @@ components:
       - COUNT
       - RATE
       - GAUGE
+    MetricMetaPage:
+      description: Paging attributes. Only present if pagination query parameters
+        were provided.
+      properties:
+        cursor:
+          description: The cursor used to get the current results, if any.
+          nullable: true
+          type: string
+        limit:
+          description: Number of results returned
+          format: int32
+          maximum: 20000
+          minimum: 0
+          type: integer
+        next_cursor:
+          description: The cursor used to get the next results, if any.
+          nullable: true
+          type: string
+        type:
+          $ref: '#/components/schemas/MetricMetaPageType'
+      type: object
+    MetricMetaPageType:
+      default: cursor_limit
+      description: Type of metric pagination.
+      enum:
+      - cursor_limit
+      example: cursor_limit
+      type: string
+      x-enum-varnames:
+      - CURSOR_LIMIT
     MetricMetadata:
       description: Metadata for the metric.
       properties:
@@ -15919,6 +16628,12 @@ components:
           format: int32
           maximum: 1000
           type: integer
+      type: object
+    MetricPaginationMeta:
+      description: Response metadata object.
+      properties:
+        pagination:
+          $ref: '#/components/schemas/MetricMetaPage'
       type: object
     MetricPayload:
       description: The metrics' payload.
@@ -16396,6 +17111,10 @@ components:
           items:
             $ref: '#/components/schemas/MetricsAndMetricTagConfigurations'
           type: array
+        links:
+          $ref: '#/components/schemas/MetricsListResponseLinks'
+        meta:
+          $ref: '#/components/schemas/MetricPaginationMeta'
       readOnly: true
       type: object
     MetricsDataSource:
@@ -16409,6 +17128,29 @@ components:
       x-enum-varnames:
       - METRICS
       - CLOUD_COST
+    MetricsListResponseLinks:
+      description: Pagination links. Only present if pagination query parameters were
+        provided.
+      properties:
+        first:
+          description: Link to the first page.
+          type: string
+        last:
+          description: Link to the last page.
+          nullable: true
+          type: string
+        next:
+          description: Link to the next page.
+          nullable: true
+          type: string
+        prev:
+          description: Link to previous page.
+          nullable: true
+          type: string
+        self:
+          description: Link to current page.
+          type: string
+      type: object
     MetricsScalarQuery:
       description: An individual scalar metrics query.
       properties:
@@ -17497,6 +18239,16 @@ components:
       required:
       - data
       type: object
+    OrderDirection:
+      description: The sort direction for results.
+      enum:
+      - asc
+      - desc
+      example: asc
+      type: string
+      x-enum-varnames:
+      - ASC
+      - DESC
     OrgConfigGetResponse:
       description: A response with a single Org Config.
       properties:
@@ -21152,11 +21904,13 @@ components:
     SLOReportInterval:
       description: The frequency at which report data is to be generated.
       enum:
+      - daily
       - weekly
       - monthly
       example: weekly
       type: string
       x-enum-varnames:
+      - DAILY
       - WEEKLY
       - MONTHLY
     SLOReportPostResponse:
@@ -23103,6 +23857,10 @@ components:
           $ref: '#/components/schemas/SecurityMonitoringRuleTypeRead'
         updateAuthorId:
           description: User ID of the user who updated the rule.
+          format: int64
+          type: integer
+        updatedAt:
+          description: The date the rule was last updated, in milliseconds.
           format: int64
           type: integer
         version:
@@ -27790,20 +28548,20 @@ components:
           type: string
       type: object
     XRayServicesIncludeAll:
-      description: Include all services
+      description: Include all services.
       properties:
         include_all:
-          description: Include all services
+          description: Include all services.
           example: false
           type: boolean
       required:
       - include_all
     XRayServicesIncludeOnly:
-      description: Include only these services
+      description: Include only these services. Defaults to `[]`.
       nullable: true
       properties:
         include_only:
-          description: Include only these services
+          description: Include only these services.
           example:
           - AWS/AppSync
           items:
@@ -27813,7 +28571,7 @@ components:
       required:
       - include_only
     XRayServicesList:
-      description: AWS X-Ray services to collect traces from
+      description: AWS X-Ray services to collect traces from. Defaults to `include_only`.
       oneOf:
       - $ref: '#/components/schemas/XRayServicesIncludeAll'
       - $ref: '#/components/schemas/XRayServicesIncludeOnly'
@@ -27830,9 +28588,6 @@ components:
             apm_service_catalog_read: View service catalog and service definitions.
             apm_service_catalog_write: Add, modify, and delete service catalog definitions
               when those definitions are maintained by Datadog.
-            appsec_vm_read: View infrastructure, application code and library vulnerabilities.
-              This does not restrict access to the vulnerability data source through
-              the API or inventory SQL.
             cases_read: View Cases.
             cases_write: Create and update cases.
             ci_visibility_pipelines_write: Create CI Visibility pipeline spans using
@@ -27857,7 +28612,6 @@ components:
             incident_notification_settings_write: Configure Incidents Notification
               settings.
             incident_read: View incidents in Datadog.
-            incident_settings_read: View Incident Settings.
             incident_settings_write: Configure Incident Settings.
             incident_write: Create, view, and manage incidents in Datadog.
             metrics_read: View custom metrics.
@@ -27878,7 +28632,6 @@ components:
             security_monitoring_rules_read: Read Detection Rules.
             security_monitoring_rules_write: Create and edit Detection Rules.
             security_monitoring_signals_read: View Security Signals.
-            security_monitoring_signals_write: Edit Security Signals.
             security_monitoring_suppressions_read: Read Rule Suppressions.
             security_monitoring_suppressions_write: Write Rule Suppressions.
             security_pipelines_read: View Security Pipelines.
@@ -27903,6 +28656,7 @@ components:
               Access Manage permission.
             teams_read: Read Teams data. A User with this permission can view Team
               names, metadata, and which Users are on each Team.
+            test_visibility_read: View Test Visibility.
             timeseries_query: Query Timeseries data.
             usage_read: View your organization's usage and usage attribution.
             user_access_invite: Invite other users to your organization.
@@ -27926,6 +28680,12 @@ components:
       name: DD-APPLICATION-KEY
       type: apiKey
       x-env-name: DD_APP_KEY
+    bearerAuth:
+      in: header
+      name: Authorization
+      scheme: bearer
+      type: http
+      x-env-name: DD_BEARER_TOKEN
 info:
   contact:
     email: support@datadoghq.com
@@ -28222,6 +28982,10 @@ paths:
       tags:
       - API Management
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - apm_api_catalog_read
       x-undo:
         type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -28270,6 +29034,10 @@ paths:
       tags:
       - API Management
       x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - apm_api_catalog_write
       x-undo:
         type: idempotent
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -28324,6 +29092,10 @@ paths:
       tags:
       - API Management
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - apm_api_catalog_read
       x-undo:
         type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -28387,6 +29159,10 @@ paths:
       tags:
       - API Management
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - apm_api_catalog_write
       x-undo:
         type: idempotent
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -28448,6 +29224,10 @@ paths:
             value: '"openapi-spec.yaml"'
           step: there is a valid "managed_api" in the system
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - apm_api_catalog_write
       x-undo:
         operationId: DeleteOpenAPI
         parameters:
@@ -31148,41 +31928,6 @@ paths:
       x-menu-order: 12
       x-undo:
         type: safe
-  /api/v2/cost/enabled:
-    get:
-      deprecated: true
-      description: Get the Cloud Cost Management activity.
-      operationId: GetCloudCostActivity
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CloudCostActivityResponse'
-          description: OK
-        '403':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/APIErrorResponse'
-          description: Forbidden
-        '429':
-          $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ:
-        - cloud_cost_management_read
-      summary: Cloud Cost Enabled
-      tags:
-      - Cloud Cost Management
-      x-menu-order: 10
-      x-permission:
-        operator: OR
-        permissions:
-        - cloud_cost_management_read
-      x-undo:
-        type: safe
   /api/v2/cost_by_tag/active_billing_dimensions:
     get:
       description: Get active billing dimensions for cost attribution. Cost data for
@@ -31243,7 +31988,8 @@ paths:
         != null BEGIN\n  sleep(5 seconds)  # Avoid running into rate limit\n  response
         := GetMonthlyCostAttribution(start_month, end_month, next_record_id=cursor)\n
         \ cursor := response.metadata.pagination.next_record_id\nEND\n```\n\nThis
-        endpoint is only accessible for [parent-level organizations](https://docs.datadoghq.com/account_management/multi_organization/)."
+        endpoint is only accessible for [parent-level organizations](https://docs.datadoghq.com/account_management/multi_organization/).
+        This endpoint is not available in the Government (US1-FED) site."
       operationId: GetMonthlyCostAttribution
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to month: `[YYYY-MM]`
@@ -31361,6 +32107,119 @@ paths:
       x-unstable: '**Note**: This endpoint is in public beta.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/csm/onboarding/agents:
+    get:
+      description: Get the list of all CSM Agents running on your hosts and containers.
+      operationId: ListAllCSMAgents
+      parameters:
+      - description: The page index for pagination (zero-based).
+        in: query
+        name: page
+        required: false
+        schema:
+          example: 2
+          format: int32
+          maximum: 1000000
+          minimum: 0
+          type: integer
+      - description: The number of items to include in a single page.
+        in: query
+        name: size
+        required: false
+        schema:
+          example: 12
+          format: int32
+          maximum: 100
+          minimum: 0
+          type: integer
+      - description: A search query string to filter results (for example, `hostname:COMP-T2H4J27423`).
+        in: query
+        name: query
+        required: false
+        schema:
+          example: hostname:COMP-T2H4J27423
+          type: string
+      - description: The sort direction for results. Use `asc` for ascending or `desc`
+          for descending.
+        in: query
+        name: order_direction
+        required: false
+        schema:
+          $ref: '#/components/schemas/OrderDirection'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CsmAgentsResponse'
+          description: OK
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get all CSM Agents
+      tags:
+      - CSM Agents
+      x-menu-order: 3
+      x-undo:
+        type: safe
+  /api/v2/csm/onboarding/serverless/agents:
+    get:
+      description: Get the list of all CSM Serverless Agents running on your hosts
+        and containers.
+      operationId: ListAllCSMServerlessAgents
+      parameters:
+      - description: The page index for pagination (zero-based).
+        in: query
+        name: page
+        required: false
+        schema:
+          example: 2
+          format: int32
+          maximum: 1000000
+          minimum: 0
+          type: integer
+      - description: The number of items to include in a single page.
+        in: query
+        name: size
+        required: false
+        schema:
+          example: 12
+          format: int32
+          maximum: 100
+          minimum: 0
+          type: integer
+      - description: A search query string to filter results (for example, `hostname:COMP-T2H4J27423`).
+        in: query
+        name: query
+        required: false
+        schema:
+          example: hostname:COMP-T2H4J27423
+          type: string
+      - description: The sort direction for results. Use `asc` for ascending or `desc`
+          for descending.
+        in: query
+        name: order_direction
+        required: false
+        schema:
+          $ref: '#/components/schemas/OrderDirection'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CsmAgentsResponse'
+          description: OK
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get all CSM Serverless Agents
+      tags:
+      - CSM Agents
+      x-menu-order: 3
+      x-undo:
+        type: safe
   /api/v2/current_user/application_keys:
     get:
       description: List all application keys available for current user
@@ -32353,8 +33212,10 @@ paths:
       x-undo:
         type: safe
     post:
-      description: This endpoint allows you to post events. Only events with `change`
-        category are under General Availability.
+      description: "This endpoint allows you to post events.\n\n\u2705 **Only events
+        with the `change` category** are in General Availability. See [Change Tracking](https://docs.datadoghq.com/change_tracking)
+        for more details.\n\n\u274C For use cases involving other event categories,
+        please use the V1 endpoint."
       operationId: CreateEvent
       requestBody:
         content:
@@ -32424,6 +33285,7 @@ paths:
           $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
+        appKeyAuth: []
       summary: Post an event
       tags:
       - Events
@@ -32610,7 +33472,6 @@ paths:
       - apiKeyAuth: []
         appKeyAuth: []
       - AuthZ:
-        - incident_settings_read
         - incident_read
       summary: Get a list of incident types
       tags:
@@ -32619,7 +33480,6 @@ paths:
       x-permission:
         operator: OR
         permissions:
-        - incident_settings_read
         - incident_read
       x-undo:
         type: safe
@@ -32750,7 +33610,6 @@ paths:
       - apiKeyAuth: []
         appKeyAuth: []
       - AuthZ:
-        - incident_settings_read
         - incident_read
       summary: Get incident type details
       tags:
@@ -32759,7 +33618,6 @@ paths:
       x-permission:
         operator: OR
         permissions:
-        - incident_settings_read
         - incident_read
       x-undo:
         type: safe
@@ -33555,7 +34413,8 @@ paths:
       description: Get a list of AWS Account Integration Configs.
       operationId: ListAWSAccounts
       parameters:
-      - description: Optional query filter accounts by AWS Account ID
+      - description: Optional query parameter to filter accounts by AWS Account ID.
+          If not provided, all accounts are returned.
         example: '123456789012'
         in: query
         name: aws_account_id
@@ -33583,7 +34442,7 @@ paths:
         - aws_configuration_read
       x-undo:
         type: safe
-      x-unstable: '**Note: This endpoint is in public beta. If you have any feedback,
+      x-unstable: '**Note: This endpoint is in Preview. If you have any feedback,
 
         contact [Datadog support](https://docs.datadoghq.com/help/).**'
     post:
@@ -33648,12 +34507,12 @@ paths:
         - name: aws_account_config_id
           source: data.id
         type: unsafe
-      x-unstable: '**Note: This endpoint is in public beta. If you have any feedback,
+      x-unstable: '**Note: This endpoint is in Preview. If you have any feedback,
 
         contact [Datadog support](https://docs.datadoghq.com/help/).**'
   /api/v2/integration/aws/accounts/{aws_account_config_id}:
     delete:
-      description: Delete an AWS Account Integration Config
+      description: Delete an AWS Account Integration Config by config ID.
       operationId: DeleteAWSAccount
       parameters:
       - $ref: '#/components/parameters/AWSAccountConfigIDPathParameter'
@@ -33678,11 +34537,11 @@ paths:
         - aws_configurations_manage
       x-undo:
         type: idempotent
-      x-unstable: '**Note: This endpoint is in public beta. If you have any feedback,
+      x-unstable: '**Note: This endpoint is in Preview. If you have any feedback,
 
         contact [Datadog support](https://docs.datadoghq.com/help/).**'
     get:
-      description: Get an AWS Account Integration Config
+      description: Get an AWS Account Integration Config by config ID.
       operationId: GetAWSAccount
       parameters:
       - $ref: '#/components/parameters/AWSAccountConfigIDPathParameter'
@@ -33711,11 +34570,11 @@ paths:
         - aws_configuration_read
       x-undo:
         type: safe
-      x-unstable: '**Note: This endpoint is in public beta. If you have any feedback,
+      x-unstable: '**Note: This endpoint is in Preview. If you have any feedback,
 
         contact [Datadog support](https://docs.datadoghq.com/help/).**'
     patch:
-      description: Update an AWS Account Integration Config
+      description: Update an AWS Account Integration Config by config ID.
       operationId: UpdateAWSAccount
       parameters:
       - $ref: '#/components/parameters/AWSAccountConfigIDPathParameter'
@@ -33751,7 +34610,7 @@ paths:
         - aws_configuration_edit
       x-undo:
         type: idempotent
-      x-unstable: '**Note: This endpoint is in public beta. If you have any feedback,
+      x-unstable: '**Note: This endpoint is in Preview. If you have any feedback,
 
         contact [Datadog support](https://docs.datadoghq.com/help/).**'
   /api/v2/integration/aws/available_namespaces:
@@ -33780,7 +34639,7 @@ paths:
         - aws_configuration_read
       x-undo:
         type: safe
-      x-unstable: '**Note: This endpoint is in public beta. If you have any feedback,
+      x-unstable: '**Note: This endpoint is in Preview. If you have any feedback,
 
         contact [Datadog support](https://docs.datadoghq.com/help/).**'
   /api/v2/integration/aws/generate_new_external_id:
@@ -33808,7 +34667,7 @@ paths:
         - aws_configuration_edit
       x-undo:
         type: safe
-      x-unstable: '**Note: This endpoint is in public beta. If you have any feedback,
+      x-unstable: '**Note: This endpoint is in Preview. If you have any feedback,
 
         contact [Datadog support](https://docs.datadoghq.com/help/).**'
   /api/v2/integration/aws/logs/services:
@@ -37295,7 +38154,12 @@ paths:
     get:
       description: "Returns all metrics that can be configured in the Metrics Summary
         page or with Metrics without Limits\u2122 (matching additional filters if
-        specified)."
+        specified).\nOptionally, paginate by using the `page[cursor]` and/or `page[size]`
+        query parameters.\nTo fetch the first page, pass in a query parameter with
+        either a valid `page[size]` or an empty cursor like `page[cursor]=`. To fetch
+        the next page, pass in the `next_cursor` value from the response as the new
+        `page[cursor]` value.\nOnce the `meta.pagination.next_cursor` value is null,
+        all pages have been retrieved."
       operationId: ListTagConfigurations
       parameters:
       - description: Filter custom metrics that have configured tags.
@@ -37360,6 +38224,27 @@ paths:
         schema:
           format: int64
           type: integer
+      - description: Maximum number of results returned.
+        in: query
+        name: page[size]
+        required: false
+        schema:
+          default: 10000
+          format: int32
+          maximum: 10000
+          minimum: 1
+          type: integer
+      - description: 'String to query the next page of results.
+
+          This key is provided with each valid response from the API in `meta.pagination.next_cursor`.
+
+          Once the `meta.pagination.next_cursor` key is null, all pages have been
+          retrieved.'
+        in: query
+        name: page[cursor]
+        required: false
+        schema:
+          type: string
       responses:
         '200':
           content:
@@ -37394,6 +38279,11 @@ paths:
       tags:
       - Metrics
       x-menu-order: 5
+      x-pagination:
+        cursorParam: page[cursor]
+        cursorPath: meta.pagination.next_cursor
+        limitParam: page[size]
+        resultsPath: data
       x-permission:
         operator: OR
         permissions:
@@ -38685,6 +39575,10 @@ paths:
           source: data[4]
           step: there is a valid "permission" in the system
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - user_access_read
       x-undo:
         type: safe
   /api/v2/posture_management/findings:
@@ -39618,6 +40512,8 @@ paths:
 
         - Powerpacks: `powerpack`
 
+        - Reference Tables: `reference-table`
+
         - Security Rules: `security-rule`
 
         - Service Level Objectives: `slo`
@@ -39653,7 +40549,9 @@ paths:
 
         Synthetic Private Locations | `viewer`, `editor`
 
-        Monitors                    | `viewer`, `editor`'
+        Monitors                    | `viewer`, `editor`
+
+        Reference Tables            | `viewer`, `editor`'
       operationId: UpdateRestrictionPolicy
       parameters:
       - $ref: '#/components/parameters/ResourceID'
@@ -40439,9 +41337,9 @@ paths:
         rum_application:
           parameters:
           - name: body
-            value: "{ \"data\": {\n\n    \"type\": \"rum_application_create\",\n    \"attributes\":
-              {\n        \"name\": \"test_name_create\",\n        \"type\": \"browser\"\n
-              \   }\n  }\n}"
+            value: "{ \"data\": {\n    \"type\": \"rum_application_create\",\n    \"attributes\":
+              {\n        \"name\": \"test-rum-{{ unique_hash }}\",\n        \"type\":
+              \"ios\"\n    }\n  }\n}"
           step: there is a valid "rum_application" in the system
       x-menu-order: 7
       x-permission:
@@ -40623,9 +41521,9 @@ paths:
         rum_metric:
           parameters:
           - name: body
-            value: "{\n  \"data\": {\n    \"id\": \"{{ unique }}\",\n    \"type\":
-              \"rum_metrics\",\n    \"attributes\": {\n      \"event_type\": \"session\",\n
-              \     \"compute\": {\n        \"aggregation_type\": \"distribution\",\n
+            value: "{\n  \"data\": {\n    \"id\": \"{{ unique_lower_alnum }}\",\n
+              \   \"type\": \"rum_metrics\",\n    \"attributes\": {\n      \"event_type\":
+              \"session\",\n      \"compute\": {\n        \"aggregation_type\": \"distribution\",\n
               \       \"include_percentiles\": true,\n        \"path\": \"@duration\"\n
               \     },\n      \"filter\": {\n        \"query\": \"source:{{ unique
               }}\"\n      },\n      \"group_by\": [{\n        \"path\": \"@browser.name\",\n
@@ -40903,6 +41801,644 @@ paths:
         operator: OR
         permissions:
         - org_management
+      x-undo:
+        type: idempotent
+  /api/v2/scim/Groups:
+    get:
+      description: 'List groups in the organization.
+
+        Results are paginated by `startIndex` and `count` parameters.
+
+        Results can be narrowed down by the `filter` parameter.'
+      operationId: ListSCIMGroups
+      parameters:
+      - description: Specifies the start index to fetch the results (1-indexed).
+        in: query
+        name: startIndex
+        required: false
+        schema:
+          default: 1
+          example: 1
+          format: int64
+          type: integer
+      - description: Specifies the number of groups to be returned.
+        in: query
+        name: count
+        required: false
+        schema:
+          default: 20
+          example: 20
+          format: int64
+          type: integer
+      - description: 'Specifies the url encoded filter to use to narrow down the results.
+
+          Filters can be in the form of `displayName eq <group name>` or `externalId
+          eq <external id of group>`
+
+          or `id eq <group id> and members eq <user uuid>` or `members eq <user uuid>
+          and id eq <group id>`.'
+        in: query
+        name: filter
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListExternalUserGroupResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - AuthZ:
+        - user_access_invite
+        - user_access_manage
+      - bearerAuth: []
+      summary: List groups
+      tags:
+      - SCIM
+      x-menu-order: 7
+      x-permission:
+        operator: AND
+        permissions:
+        - user_access_invite
+        - user_access_manage
+      x-undo:
+        type: safe
+    post:
+      description: 'Create a new group.
+
+        The group may contain members.'
+      operationId: CreateSCIMGroup
+      requestBody:
+        content:
+          application/json:
+            examples:
+              json-request-body:
+                value:
+                  displayName: Group 1
+                  externalId: group1
+                  members:
+                  - $ref: https://app.datadoghq.com/api/scim/v2/Users/d34a5f93-5690-4d3f-a293-f2ad5c7a82a4
+                    display: John Doe
+                    type: User
+                    value: d34a5f93-5690-4d3f-a293-f2ad5c7a82a4
+                  - $ref: https://app.datadoghq.com/api/scim/v2/Users/429ebce5-8ed3-4da9-9f1e-662f2dbc2fe6
+                    display: Jane Doe
+                    type: User
+                    value: 429ebce5-8ed3-4da9-9f1e-662f2dbc2fe6
+                  schemas:
+                  - urn:ietf:params:scim:schemas:core:2.0:Group
+            schema:
+              $ref: '#/components/schemas/ExternalUserGroup'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExternalUserGroup'
+          description: Created
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - AuthZ:
+        - user_access_invite
+        - user_access_manage
+      - bearerAuth: []
+      summary: Create group
+      tags:
+      - SCIM
+      x-menu-order: 8
+      x-permission:
+        operator: AND
+        permissions:
+        - user_access_invite
+        - user_access_manage
+      x-undo:
+        operationId: DeleteSCIMGroup
+        parameters:
+        - name: group_id
+          source: <RESPONSE_PATH>
+        type: unsafe
+  /api/v2/scim/Groups/{group_id}:
+    delete:
+      description: Delete the group with the given `group_id`.
+      operationId: DeleteSCIMGroup
+      parameters:
+      - description: None
+        in: path
+        name: group_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: No Content
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - AuthZ:
+        - user_access_invite
+        - user_access_manage
+      - bearerAuth: []
+      summary: Delete group
+      tags:
+      - SCIM
+      x-menu-order: 12
+      x-permission:
+        operator: AND
+        permissions:
+        - user_access_invite
+        - user_access_manage
+      x-undo:
+        type: idempotent
+    get:
+      description: Get a single group using the `group_id`.
+      operationId: GetSCIMGroup
+      parameters:
+      - description: None
+        in: path
+        name: group_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExternalUserGroup'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - AuthZ:
+        - user_access_invite
+        - user_access_manage
+      - bearerAuth: []
+      summary: Get group
+      tags:
+      - SCIM
+      x-menu-order: 9
+      x-permission:
+        operator: AND
+        permissions:
+        - user_access_invite
+        - user_access_manage
+      x-undo:
+        type: safe
+    patch:
+      description: Patch the group with the given `group_id`.
+      operationId: PatchSCIMGroup
+      parameters:
+      - description: None
+        in: path
+        name: group_id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            examples:
+              json-request-body:
+                value:
+                  Operations:
+                  - op: replace
+                    path: None
+                    value:
+                      displayName: Real new group
+                      id: e43536e9-33fe-43f8-90b8-d3e39a7dd6ad
+                  - op: add
+                    path: None
+                    value:
+                      members:
+                      - $ref: https://app.datadoghq.com/api/scim/v2/Users/f85e3868-ad7b-47e3-a8a9-ff1eade2bbf9
+                        displayName: Bob Smith
+                        value: f85e3868-ad7b-47e3-a8a9-ff1eade2bbf9
+                  - op: remove
+                    path: members[value eq "fddf0cf2-9b60-11ef-ad4b-d6754a54a839"]
+                    value: null
+                  schemas:
+                  - urn:ietf:params:scim:api:messages:2.0:PatchOp
+            schema:
+              $ref: '#/components/schemas/ExternalUserGroupPatchRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExternalUserGroup'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - AuthZ:
+        - user_access_invite
+        - user_access_manage
+      - bearerAuth: []
+      summary: Patch group
+      tags:
+      - SCIM
+      x-menu-order: 11
+      x-permission:
+        operator: AND
+        permissions:
+        - user_access_invite
+        - user_access_manage
+      x-undo:
+        type: idempotent
+    put:
+      description: Update the group with the given `group_id`.
+      operationId: UpdateSCIMGroup
+      parameters:
+      - description: None
+        in: path
+        name: group_id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            examples:
+              json-request-body:
+                value:
+                  displayName: Group 1
+                  externalId: group1
+                  id: e43536e9-33fe-43f8-90b8-d3e39a7dd6ad
+                  members:
+                  - $ref: https://app.datadoghq.com/api/scim/v2/Users/d34a5f93-5690-4d3f-a293-f2ad5c7a82a4
+                    display: John Doe
+                    type: User
+                    value: d34a5f93-5690-4d3f-a293-f2ad5c7a82a4
+                  - $ref: https://app.datadoghq.com/api/scim/v2/Users/429ebce5-8ed3-4da9-9f1e-662f2dbc2fe6
+                    display: Jane Doe
+                    type: User
+                    value: 429ebce5-8ed3-4da9-9f1e-662f2dbc2fe6
+                  schemas:
+                  - urn:ietf:params:scim:schemas:core:2.0:Group
+            schema:
+              $ref: '#/components/schemas/ExternalUserGroup'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExternalUserGroup'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '409':
+          $ref: '#/components/responses/ConflictResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - AuthZ:
+        - user_access_invite
+        - user_access_manage
+      - bearerAuth: []
+      summary: Update group
+      tags:
+      - SCIM
+      x-menu-order: 10
+      x-permission:
+        operator: AND
+        permissions:
+        - user_access_invite
+        - user_access_manage
+      x-undo:
+        type: idempotent
+  /api/v2/scim/Users:
+    get:
+      description: 'List users in the organization.
+
+        Results are paginated by `startIndex` and `count` parameters.
+
+        Results can be narrowed down by the `filter` parameter.'
+      operationId: ListSCIMUsers
+      parameters:
+      - description: Specifies the start index to fetch the results (1-indexed).
+        in: query
+        name: startIndex
+        required: false
+        schema:
+          default: 1
+          example: 1
+          format: int64
+          type: integer
+      - description: Specifies the number of users to be returned.
+        in: query
+        name: count
+        required: false
+        schema:
+          default: 20
+          example: 20
+          format: int64
+          type: integer
+      - description: 'Specifies the url encoded filter to use to narrow down the results.
+
+          Filter should be of the form `userName eq <user name>`.'
+        in: query
+        name: filter
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListExternalUsersResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - AuthZ:
+        - user_access_invite
+        - user_access_manage
+      - bearerAuth: []
+      summary: List users
+      tags:
+      - SCIM
+      x-menu-order: 1
+      x-permission:
+        operator: AND
+        permissions:
+        - user_access_invite
+        - user_access_manage
+      x-undo:
+        type: safe
+    post:
+      description: Create a new user.
+      operationId: CreateSCIMUser
+      requestBody:
+        content:
+          application/json:
+            examples:
+              json-request-body:
+                value:
+                  active: true
+                  emails:
+                  - primary: true
+                    type: work
+                    value: john.doe@datadoghq.com
+                  name:
+                    formatted: John Doe
+                  schemas:
+                  - urn:ietf:params:scim:schemas:core:2.0:User
+                  title: Mr.
+                  userName: john.doe@datadoghq.com
+            schema:
+              $ref: '#/components/schemas/ExternalUser'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExternalUser'
+          description: Created
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - AuthZ:
+        - user_access_invite
+        - user_access_manage
+      - bearerAuth: []
+      summary: Create user
+      tags:
+      - SCIM
+      x-menu-order: 2
+      x-permission:
+        operator: AND
+        permissions:
+        - user_access_invite
+        - user_access_manage
+      x-undo:
+        operationId: DeleteSCIMUser
+        parameters:
+        - name: user_uuid
+          source: <RESPONSE_PATH>
+        type: unsafe
+  /api/v2/scim/Users/{user_uuid}:
+    delete:
+      description: Delete the group with the given `user_uuid`.
+      operationId: DeleteSCIMUser
+      parameters:
+      - description: None
+        in: path
+        name: user_uuid
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: No Content
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - AuthZ:
+        - user_access_invite
+        - user_access_manage
+      - bearerAuth: []
+      summary: Delete user
+      tags:
+      - SCIM
+      x-menu-order: 6
+      x-permission:
+        operator: AND
+        permissions:
+        - user_access_invite
+        - user_access_manage
+      x-undo:
+        type: idempotent
+    get:
+      description: Get a single user using the `user_uuid`.
+      operationId: GetSCIMUser
+      parameters:
+      - description: None
+        in: path
+        name: user_uuid
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExternalUser'
+          description: OK
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - AuthZ:
+        - user_access_invite
+        - user_access_manage
+      - bearerAuth: []
+      summary: Get user
+      tags:
+      - SCIM
+      x-menu-order: 3
+      x-permission:
+        operator: AND
+        permissions:
+        - user_access_invite
+        - user_access_manage
+      x-undo:
+        type: safe
+    patch:
+      description: Patch the user with the given `user_uuid`.
+      operationId: PatchSCIMUser
+      parameters:
+      - description: None
+        in: path
+        name: user_uuid
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            examples:
+              json-request-body:
+                value:
+                  Operations:
+                  - op: replace
+                    path: title
+                    value: CEO
+                  - op: replace
+                    value:
+                      name:
+                        formatted: John Doe
+                  schemas:
+                  - urn:ietf:params:scim:api:messages:2.0:PatchOp
+            schema:
+              $ref: '#/components/schemas/ExternalUserPatchRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExternalUser'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - AuthZ:
+        - user_access_invite
+        - user_access_manage
+      - bearerAuth: []
+      summary: Patch user
+      tags:
+      - SCIM
+      x-menu-order: 5
+      x-permission:
+        operator: AND
+        permissions:
+        - user_access_invite
+        - user_access_manage
+      x-undo:
+        type: idempotent
+    put:
+      description: Update the user with the given `user_uuid`.
+      operationId: UpdateSCIMUser
+      parameters:
+      - description: None
+        in: path
+        name: user_uuid
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            examples:
+              json-request-body:
+                value:
+                  active: true
+                  emails:
+                  - primary: true
+                    type: work
+                    value: john.doe@datadoghq.com
+                  id: e43536e9-33fe-43f8-90b8-d3e39a7dd6ad
+                  name:
+                    formatted: John Doe
+                  schemas:
+                  - urn:ietf:params:scim:schemas:core:2.0:User
+                  title: Mr.
+                  userName: john.doe@datadoghq.com
+            schema:
+              $ref: '#/components/schemas/ExternalUser'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExternalUser'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - AuthZ:
+        - user_access_invite
+        - user_access_manage
+      - bearerAuth: []
+      summary: Update user
+      tags:
+      - SCIM
+      x-menu-order: 4
+      x-permission:
+        operator: AND
+        permissions:
+        - user_access_invite
+        - user_access_manage
       x-undo:
         type: idempotent
   /api/v2/scorecard/outcomes:
@@ -43946,11 +45482,6 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ:
-        - security_monitoring_signals_write
       summary: Convert a job result to a signal
       tags:
       - Security Monitoring
@@ -45718,6 +47249,10 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - usage_read
       x-undo:
         type: safe
       x-unstable: '**Note**: This endpoint is in Preview.
@@ -45820,9 +47355,9 @@ paths:
         schema:
           type: string
       - description: 'Datetime in ISO-8601 format, UTC, precise to month: `[YYYY-MM]`
-          for cost beginning this month. Either start_month or start_date should be
-          specified, but not both. (start_month cannot go beyond two months in the
-          past). Provide an `end_month` to view month-over-month cost.'
+          for cost beginning this month. **Either start_month or start_date should
+          be specified, but not both.** (start_month cannot go beyond two months in
+          the past). Provide an `end_month` to view month-over-month cost.'
         in: query
         name: start_month
         required: false
@@ -45838,8 +47373,8 @@ paths:
           format: date-time
           type: string
       - description: 'Datetime in ISO-8601 format, UTC, precise to day: `[YYYY-MM-DD]`
-          for cost beginning this day. Either start_month or start_date should be
-          specified, but not both. (start_date cannot go beyond two months in the
+          for cost beginning this day. **Either start_month or start_date should be
+          specified, but not both.** (start_date cannot go beyond two months in the
           past). Provide an `end_date` to view day-over-day cumulative cost.'
         in: query
         name: start_date
@@ -46927,6 +48462,11 @@ paths:
           $ref: '#/components/responses/ForbiddenResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - workflows_run
       summary: Execute a workflow
       tags:
       - Workflow Automation
@@ -47089,6 +48629,15 @@ tags:
     [Test Visibility in Datadog page](https://docs.datadoghq.com/tests/) for more
     information.
   name: CI Visibility Tests
+- description: 'Datadog Cloud Security Management (CSM) delivers real-time threat
+    detection
+
+    and continuous configuration audits across your entire cloud infrastructure,
+
+    all in a unified view for seamless collaboration and faster remediation.
+
+    Go to https://docs.datadoghq.com/security/cloud_security_management to learn more'
+  name: CSM Agents
 - description: Cloud Security Management Threats (CSM Threats) monitors file, network,
     and process activity across your environment to detect real-time threats to your
     infrastructure. See [Cloud Security Management Threats](https://docs.datadoghq.com/security/threats/)
@@ -47393,6 +48942,13 @@ tags:
     description: Find out more at
     url: https://docs.datadoghq.com/real_user_monitoring/platform/generate_metrics/
   name: Rum Metrics
+- description: 'Provision Datadog users and teams using SCIM APIs.
+
+
+    Note: SCIM provisioning for Datadog teams is only available for select organizations
+    at this point. Request access by contacting Datadog support, or see the [SCIM
+    page](https://docs.datadoghq.com/account_management/scim/) for more information.'
+  name: SCIM
 - description: Create and manage your security rules, signals, filters, and more.
     See the [Datadog Security page](https://docs.datadoghq.com/security/) for more
     information.
@@ -47405,7 +48961,11 @@ tags:
     page](https://docs.datadoghq.com/account_management/org_settings/service_accounts/)
     for more information.
   name: Service Accounts
-- description: API to create, update, retrieve and delete service definitions.
+- description: 'API to create, update, retrieve and delete service definitions.
+
+    Note: Service Catalog [v3.0 schema](https://docs.datadoghq.com/service_catalog/service_definitions/v3-0/)
+    has new API endpoints documented under [Software Catalog](https://docs.datadoghq.com/api/latest/software-catalog/).
+    Use the following Service Definition endpoints for v2.2 and earlier.'
   externalDocs:
     url: https://docs.datadoghq.com/tracing/service_catalog/
   name: Service Definition

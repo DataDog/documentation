@@ -73,7 +73,7 @@ In addition to tests, Test Optimization provides visibility over the whole testi
 | {{< ci-details title="Auto test retries *" >}}Automatically <a href="/tests/flaky_test_management/auto_test_retries">retry failed tests</a> up to N times to avoid failing the build due to test flakiness.{{< /ci-details >}}    | {{< X >}} |       {{< X >}}      |       {{< X >}}        | {{< X >}} | {{< X >}}             | {{< X >}} | {{< X >}} |                        |
 | {{< ci-details title="Selenium RUM integration" >}}Automatically <a href="/tests/browser_tests">link browser sessions to test cases</a> when testing RUM-instrumented applications.{{< /ci-details >}}                            | {{< X >}} |       {{< X >}}      |       {{< X >}}        | {{< X >}} | {{< X >}}             |           |           |                        |
 
-\* The feature is opt-in, and needs to be enabled on the [**Test Service Settings** page][2].
+\* The feature is opt-in, and needs to be enabled on the [**Test Optimization Settings** page][2].
 
 ## Default configurations
 
@@ -161,8 +161,8 @@ When you're evaluating failed or flaky tests, or the performance of a CI test, y
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/ci/test-services
-[2]: https://app.datadoghq.com/ci/settings/test-service
+[1]: https://app.datadoghq.com/ci/test-repositories
+[2]: https://app.datadoghq.com/ci/settings/test-optimization
 [3]: /continuous_integration/explorer/facets/
 [4]: https://app.datadoghq.com/dashboard/lists
 [5]: https://app.datadoghq.com/notebook/list

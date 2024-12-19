@@ -9,22 +9,23 @@ further_reading:
       text: 'Service Catalog'
 ---
 
-{{< site-region region="ap1" >}}
-<div class="alert alert-info">Data Streams Monitoring is not supported in the AP1 region.</a></div>
-{{< /site-region >}}
-
 ### Prerequisites
 
 * [Datadog Agent v7.34.0 or later][1]
 
 ### Supported libraries
 
-| Technology | Library                                                                                    | Minimal tracer version | Recommended tracer version |
-|------------|--------------------------------------------------------------------------------------------|------------------------|----------------------------|
-| Kafka      | [kafka-clients](https://mvnrepository.com/artifact/org.apache.kafka/kafka-clients)         | 1.9.0                  | 1.42.2 or later            |
-| RabbitMQ   | [amqp-client](https://mvnrepository.com/artifact/com.rabbitmq/amqp-client)                 | 1.9.0                  | 1.42.2 or later            |
-| Amazon SQS | [aws-java-sdk-sqs (v1)](https://mvnrepository.com/artifact/com.amazonaws/aws-java-sdk-sqs) | 1.27.0                 | 1.42.2 or later            |
-| Amazon SQS | [sqs (v2)](https://mvnrepository.com/artifact/software.amazon.awssdk/sqs)                  | 1.27.0                 | 1.42.2 or later            |
+| Technology     | Library                                                                                         | Minimal tracer version | Recommended tracer version |
+|----------------|-------------------------------------------------------------------------------------------------|------------------------|-----------------------------
+| Kafka          | [kafka-clients](https://mvnrepository.com/artifact/org.apache.kafka/kafka-clients)              | 1.9.0                  | 1.43.0 or later            |
+| RabbitMQ       | [amqp-client](https://mvnrepository.com/artifact/com.rabbitmq/amqp-client)                      | 1.9.0                  | 1.42.2 or later            |
+| Amazon SQS     | [aws-java-sdk-sqs (v1)](https://mvnrepository.com/artifact/com.amazonaws/aws-java-sdk-sqs)      | 1.27.0                 | 1.42.2 or later            |
+| Amazon SQS     | [sqs (v2)](https://mvnrepository.com/artifact/software.amazon.awssdk/sqs)                       | 1.27.0                 | 1.42.2 or later            |
+| Amazon Kinesis | [Kinesis (v1)](https://mvnrepository.com/artifact/com.amazonaws/aws-java-sdk-kinesis)           | 1.22.0                 | 1.42.2 or later            |
+| Amazon Kinesis | [Kinesis (v2)](https://mvnrepository.com/artifact/software.amazon.awssdk/kinesis)               | 1.22.0                 | 1.42.2 or later            |
+| Amazon SNS     | [SNS (v1)](https://mvnrepository.com/artifact/com.amazonaws/aws-java-sdk-sns)                   | 1.31.0                 | 1.42.2 or later            |
+| Amazon SNS     | [SNS (v2)](https://mvnrepository.com/artifact/software.amazon.awssdk/sns)                       | 1.31.0                 | 1.42.2 or later            |
+| Google PubSub  | [Google Cloud Pub/Sub](https://mvnrepository.com/artifact/com.google.cloud/google-cloud-pubsub) | 1.25.0                 | 1.42.2 or later            |
 
 ### Installation
 
@@ -53,6 +54,9 @@ To set up Data Streams Monitoring from the Datadog UI without needing to restart
 ### Monitoring SQS pipelines
 Data Streams Monitoring uses one [message attribute][3] to track a message's path through an SQS queue. As Amazon SQS has a maximum limit of 10 message attributes allowed per message, all messages streamed through the data pipelines must have 9 or fewer message attributes set, allowing the remaining attribute for Data Streams Monitoring.
 
+### Manual instrumentation
+Data Streams Monitoring propagates context through message headers. If you are using a message queue technology that is not supported by DSM, a technology without headers (such as Kinesis), or Lambdas, use [manual instrumentation to set up DSM][5].
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -61,3 +65,4 @@ Data Streams Monitoring uses one [message attribute][3] to track a message's pat
 [2]: /tracing/trace_collection/dd_libraries/java/
 [3]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-metadata.html
 [4]: /agent/remote_config/?tab=configurationyamlfile#enabling-remote-configuration
+[5]: /data_streams/manual_instrumentation/?tab=java
