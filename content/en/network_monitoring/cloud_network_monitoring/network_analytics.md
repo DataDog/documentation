@@ -357,8 +357,8 @@ The **Security** tab highlights potential network threats and findings detected 
 
 [1]: /logs/search_syntax/
 [2]: /network_monitoring/cloud_network_monitoring/network_map/
-[3]: /network_monitoring/cloud_network_monitoring/guide/aws_supported_services/
-[4]: /network_monitoring/cloud_network_monitoring/guide/gcp_supported_services/
+[3]: /network_monitoring/cloud_network_monitoring/supported_cloud_services/aws_supported_services/
+[4]: /network_monitoring/cloud_network_monitoring/guide/supported_cloud_services/gcp_supported_services/
 [5]: /logs/explorer/saved_views/
 [6]: /security/threats/
 [7]: /security/cloud_security_management/misconfigurations/

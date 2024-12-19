@@ -2,6 +2,7 @@
 title: CNM Azure Supported Services
 aliases:
   - /network_monitoring/performance/guide/azure_supported_services
+  - /network_monitoring/cloud_network_monitoring/guide/azure_supported_services/
 npm_provider: azure
 further_reading:
   - link: 'https://www.datadoghq.com/blog/network-performance-monitoring'
