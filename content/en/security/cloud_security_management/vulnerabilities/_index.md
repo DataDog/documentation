@@ -58,7 +58,7 @@ Take advantage of guided remediation
 : See which layers are impacted, get suggestions specific to each image, and action on your vulnerability lifecycle management.
 
 Implement automation and integrations
-: Automate creation of Jira tickets, implement SLAs. Export vulnerabilities, coverage, and SBOMs using Datadog's public API.
+: Automate the creation of Jira tickets and implement SLAs. Use Datadog's public API to export vulnerabilities, coverage, and SBOMs.
 
 Explore reports
 : View and monitor vulnerability data in your dashboards.
