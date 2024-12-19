@@ -135,7 +135,7 @@ The Google Gemini integration instruments the following methods:
 
 ## Vertex AI
 
-The Vertex AI integration provides automatic tracing for [Google's Vertex AI SDK for Python][21] content generation and chat message calls.
+The Vertex AI integration automatically traces content generation and chat message calls made through [Google's Vertex AI Python SDK][21].
 
 ### Traced methods
 
