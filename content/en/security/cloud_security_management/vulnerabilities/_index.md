@@ -35,7 +35,7 @@ Cloud Security Management Vulnerabilities (CSM Vulnerabilities) helps you improv
 With CSM Vulnerabilities, you can manage your cloud security management strategy, all in one place:
 
 - Create a vulnerability management program, from CI/CD pipelines to production resources
-- Pass compliance audits (SOC2, PCI, HIPAA, CIS, FedRamp, etc.)
+- Pass compliance audits (such as SOC2, PCI, HIPAA, CIS, and FedRamp)
 - Remediate emerging vulnerabilities (0-day CVEs)
 
 **Note**: For vulnerability management in application libraries, see [Software Composition Analysis][5]. For application code, see [Code Security][10].
