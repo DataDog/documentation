@@ -44,7 +44,7 @@ This behavior can be fine-tuned with the following environment variables:
 * `DD_CIVISIBILITY_FLAKY_RETRY_ONLY_KNOWN_FLAKES` - if this environment variable is set to `true`, only the test cases that Test Optimization considers [flaky][2] are retried.
 * `DD_CIVISIBILITY_FLAKY_RETRY_COUNT` - can be set to any non-negative number to change the maximum number of retries per test case.
 
-[1]: /tests/explorer/
+[1]: https://app.datadoghq.com/ci/settings/test-optimization
 [2]: /tests/flaky_test_management/
 {{% /tab %}}
 
