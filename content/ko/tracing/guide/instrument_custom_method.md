@@ -181,7 +181,7 @@ Go의 경우 Datadog APM을 이용해 코드를 계측하고 특정 코드 블�
 ```go
 package ledger
 
-import "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+import "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
 
 // [...]
 
