@@ -16,7 +16,7 @@ further_reading:
 
 | Technology     | Library                                                                   | Minimal tracer version    | Recommended tracer version |
 |----------------|---------------------------------------------------------------------------|---------------------------|----------------------------|
-| Kafka          | [kafka-node](https://www.npmjs.com/package/kafka-node)                    | 2.39.0 or 3.26.0 or 4.5.0 | 5.25.0 or later            |
+| Kafka          | [kafkajs](https://www.npmjs.com/package/kafkajs)                          | 2.39.0 or 3.26.0 or 4.5.0 | 5.25.0 or later            |
 | RabbitMQ       | [amqplib](https://www.npmjs.com/package/amqplib)                          | 3.48.0 or 4.27.0 or 5.3.0 | 5.3.0 or later             |
 | Amazon SQS     | [client-sqs](https://www.npmjs.com/package/@aws-sdk/client-sqs)           | 3.47.0 or 4.26.0 or 5.2.0 | 5.18.0 or later            |
 | Amazon Kinesis | [client-kinesis](https://www.npmjs.com/package/@aws-sdk/client-kinesis)   | 3.47.0 or 4.26.0 or 5.2.0 | 5.18.0 or later            |
