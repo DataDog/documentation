@@ -52,7 +52,7 @@ Detect vulnerabilities continuously
 : Scan recent updates and newly published CVEs, across running container images, hosts, host images, and serverless, and identify vulnerable container image layers.
 
 Prioritize exploitable vulnerabilities, using runtime observability
-: Take advantage of Datadog's security scoring, which is based on CVSS, and combining intel with CISA KEV, EPSS, and public exploit availability. With runtime observability, you can monitor production, exposure to attacks, sensitive data processing, and who has privileged access.
+: Leverage Datadog's security scoring, which is based on CVSS, by incorporating intel from CISA KEV, EPSS, and public exploit availability. With runtime observability, you can monitor production, exposure to attacks, sensitive data processing, and privileged access.
 
 Take advantage of guided remediation
 : See which layers are impacted, get suggestions specific to each image, and action on your vulnerability lifecycle management.
