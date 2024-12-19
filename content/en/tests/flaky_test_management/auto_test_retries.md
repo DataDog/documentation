@@ -168,7 +168,7 @@ You can fine tune this behavior with the following environment variables:
 * `DD_CIVISIBILITY_FLAKY_RETRY_COUNT` - a non-negative number to change the maximum number of retries per test case (default: `5`).
 * `DD_CIVISIBILITY_TOTAL_FLAKY_RETRY_COUNT` - a non-negative number to set the maximum total number of failed tests to retry (default: `1000`)
 
-[1]: https://app.datadoghq.com/ci/settings/test-service
+[1]: https://app.datadoghq.com/ci/settings/test-optimization
 
 {{% /tab %}}
 
