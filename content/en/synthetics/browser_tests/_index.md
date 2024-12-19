@@ -225,11 +225,11 @@ To do so:
 6. Select the level of access you want to associate with each of them
 7. Click on done
 
-| Access level | View test metadata | Edit test metadata | View test results[ˆ1] | Run test  |
-| ------------ | ------------------ | ------------------ | --------------------- | --------- |
-| No access    |                    |                    |                       |           |
-| Viewer       | {{< X >}}          |                    | {{< X >}}             |           |
-| Editor       | {{< X >}}          | {{< X >}}          | {{< X >}}             | {{< X >}} |
+| Access level | View test configuration | Edit test configuration | View test results[ˆ1] | Run test  | View recording | Edit recording |
+| ------------ | ----------------------- | ----------------------- | --------------------- | --------- | -------------- | -------------- |
+| No access    |                         |                         |                       |           |                |                |
+| Viewer       | {{< X >}}               |                         | {{< X >}}             |           |                |                |
+| Editor       | {{< X >}}               | {{< X >}}               | {{< X >}}             | {{< X >}} | {{< X >}}      | {{< X >}}      |
 
 [ˆ1]: You will be able to see results from Private Location even if you don't have Viewer access to that Private Location.
 
