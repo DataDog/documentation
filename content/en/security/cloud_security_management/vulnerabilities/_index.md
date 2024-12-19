@@ -96,7 +96,7 @@ The [CSM Vulnerabilities Explorer][1] helps you investigate all vulnerabilities 
 
 Focus on exploitable vulnerabilities first, using the Datadog Severity Score, combining the base CVSS score with many risk factors, including sensitive data, environment sensitivity, exposure to attacks, exploit availability, or threat intelligence sources.
 
-The [CSM Vulnerabilities Explorer][1] helps you address vulnerabilities that have fixes available, and provides guided remediation steps, helping Dev and Ops teams fix vulnerabilities faster. Triage, mute, comment, and assign vulnerabilities to manage their lifecycle.
+For vulnerabilities with available fixes, the Explorer provides guided remediation steps to assist Dev and Ops teams in resolving issues more quickly and effectively. You can also triage, mute, comment, and assign vulnerabilities to manage their lifecycle.
 
 {{< img src="security/vulnerabilities/csm-vm-explorer-actionability.png" alt="The CSM Vulnerability Explorer displaying a vulnerability and the actions a user can take to remediate it" width="100%">}}
 
