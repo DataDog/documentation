@@ -92,7 +92,7 @@ Use these tables to decide which solution to start with:
 For more information on compatibility, see [CSM Vulnerabilities Hosts and Containers Compatibility][13]. If you need any assistance, see the [troubleshooting guide][14], or reach out to support@datadoghq.com.
 
 ## Continuously detect, prioritize, and remediate exploitable vulnerabilities
-The [CSM Vulnerabilities Explorer][1] helps you investigate all vulnerabilities detected across container images, host images, running hosts, and serverless functions you own, using filtering and grouping capabilities.
+The [CSM Vulnerabilities Explorer][1] helps you investigate vulnerabilities detected across  your container images, host images, running hosts, and serverless functions using filtering and grouping capabilities.
 
 Focus on exploitable vulnerabilities first, using the Datadog Severity Score, combining the base CVSS score with many risk factors, including sensitive data, environment sensitivity, exposure to attacks, exploit availability, or threat intelligence sources.
 
