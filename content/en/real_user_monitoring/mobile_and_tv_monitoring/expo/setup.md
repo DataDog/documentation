@@ -287,7 +287,7 @@ config.resourceEventMapper = event => {
 [4]: https://www.npmjs.com/package/@datadog/mobile-react-navigation
 [5]: https://www.npmjs.com/package/@datadog/mobile-react-native-navigation
 [6]: /real_user_monitoring/mobile_and_tv_monitoring/setup/expo#initialize-the-library-with-application-context
-[7]: /real_user_monitoring/mobile_and_tv_monitoring/expo/error_tracking
+[7]: /real_user_monitoring/error_tracking/mobile/expo/
 [8]: https://expo.github.io/router/docs/
 [9]: https://docs.expo.dev/development/introduction/
 [10]: https://docs.expo.dev/workflow/customizing/#releasing-apps-with-custom-native-code-to
