@@ -172,6 +172,29 @@ You can fine tune this behavior with the following environment variables:
 
 {{% /tab %}}
 
+{{% tab "Swift" %}}
+
+### Compatibility
+
+`dd-sdk-swift-testing >= 2.5.2`
+
+### Configuration
+
+After you have set up Test Optimization, you can configure Auto Test Retries from the [Test Service Settings page][1].
+
+{{< img src="continuous_integration/auto_test_retries_test_settings.png" alt="Auto Test Retries in Test Service Settings." style="width:100%" >}}
+
+The default behavior of the feature is to retry any failing test case up to 5 times.
+This behavior can be fine-tuned with the following environment variables:
+
+* `DD_CIVISIBILITY_FLAKY_RETRY_ENABLED` - set to 0 or false to explicitly disable retries even if the remote setting is enabled (default: true)
+* `DD_CIVISIBILITY_FLAKY_RETRY_COUNT` - a non-negative number to change the maximum number of retries per test case (default: 5).
+* `DD_CIVISIBILITY_TOTAL_FLAKY_RETRY_COUNT` - a non-negative number to set the maximum total number of failed tests to retry (default: 1000)
+
+
+[1]: https://app.datadoghq.com/ci/settings/test-optimization
+{{% /tab %}}
+
 {{< /tabs >}}
 
 ## Explore results in the Test Optimization Explorer

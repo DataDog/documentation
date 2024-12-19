@@ -109,6 +109,12 @@ The test framework compatibility is the same as [Test Optimization Compatibility
 
 {{% /tab %}}
 
+{{% tab "Swift" %}}
+
+`dd-sdk-swift-testing>=2.5.2`
+
+{{% /tab %}}
+
 {{< /tabs >}}
 
 

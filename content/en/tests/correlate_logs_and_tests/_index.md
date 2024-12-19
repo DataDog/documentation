@@ -76,6 +76,15 @@ Use the following environment variables to enable and configure Agentless log su
 |---|---|---|
 | `DD_CIVISIBILITY_LOGS_ENABLED` (required) | Enables/disables CI Visibility log submission | `false`
 
+### Swift
+
+Use the following environment variables to enable and configure log submission:
+
+| Name | Description | Default value |
+|---|---|---|
+| `DD_ENABLE_STDOUT_INSTRUMENTATION` | Enables/disables stdout log submission | `false`
+| `DD_ENABLE_STDERR_INSTRUMENTATION` | Enables/disables stderr log submission | `false`
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
