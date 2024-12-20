@@ -364,6 +364,8 @@ To access your web views:
    - Your Android and Android TV applications using either `application.id` or `application.name`
    - The web component using `service`
    - The platform using `source`
+
+   **Note**: If you see unrecognized version numbers reporting in your mobile app, they may belong to the Browser SDK version. In that case, you can filter out the Browser platform session. For example, `source: react-native`.
 3. Click a session. A side panel with a list of events in the session appears.
 
    {{< img src="real_user_monitoring/android/android-webview-tracking.png" alt="Webview events captured in a session in the RUM Explorer" style="width:100%;">}}
