@@ -19,6 +19,8 @@ further_reading:
 aliases:
     - /tracing/api_catalog/get_started
     - /tracing/api_catalog/
+    - /api_catalog/endpoint_discovery/
+    - /service_catalog/endpoints/discover_endpoints
 ---
 
 {{< img src="tracing/api_catalog/api-catalog-catalog-api-details.png" alt="API Catalog showing a list of endpoints for an API called Checkout, along with information about ownership, service and environment, tags, and links to related monitors, tests, and performance data." style="width:100%;" >}}
