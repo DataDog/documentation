@@ -282,4 +282,4 @@ To do so:
 [15]: /account_management/rbac/#create-a-custom-role
 [16]: /synthetics/api_tests/errors/#http-errors
 [17]: /api_catalog
-[18]: account_management/rbac/granular_access
+[18]: /account_management/rbac/granular_access

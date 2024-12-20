@@ -201,7 +201,7 @@ To do so:
 [7]: /synthetics/guide/synthetic-test-monitors/
 [8]: /account_management/rbac/?tab=datadogapplication#datadog-default-roles
 [9]: /account_management/rbac/?tab=datadogapplication#custom-roles
-[10]: account_management/rbac/granular_access
+[10]: /account_management/rbac/granular_access
 [11]: /mobile_app_testing/mobile_app_tests/steps/
 [12]: https://app.datadoghq.com/synthetics/mobile/create
 [13]: /continuous_testing/cicd_integrations/configuration?tab=npm#test-files

@@ -187,4 +187,4 @@ To do so:
 [9]: /synthetics/api_tests/errors/#ssl-errors
 [10]: /account_management/rbac/
 [11]: /account_management/rbac#custom-roles
-[12]: account_management/rbac/granular_access
+[12]: /account_management/rbac/granular_access

@@ -149,4 +149,4 @@ To do so:
 [8]: /synthetics/settings/#global-variables
 [9]: /account_management/rbac/
 [10]: /account_management/rbac#custom-roles
-[11]: account_management/rbac/granular_access
+[11]: /account_management/rbac/granular_access
