@@ -5,7 +5,7 @@ categories:
 - recopilación de logs
 - la red
 - seguridad
-custom_kind: integración
+custom_kind: integration
 dependencies: []
 description: CrowdStrike
 doc_link: https://docs.datadoghq.com/integrations/crowdstrike/

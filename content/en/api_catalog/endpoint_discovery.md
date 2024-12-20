@@ -1,6 +1,5 @@
 ---
 title: Discovering Endpoints from APM
-is_beta: true
 further_reading:
 - link: "/tracing/api_catalog/"
   tag: "Documentation"
@@ -25,12 +24,28 @@ This tag should contain the matched route, that is, the path template in the for
 </div>
 
 ## Example
-The following examples demonstrate adding a custom tag for each span in Go and Ruby:
+The following examples demonstrate adding a span tag for each using custom instrumentation:
+
+**Java**\
+{{< code-block lang="java" disable_copy="true" >}}
+span.setTag("datadog.api_catalog.route", "/products/{productId}")
+{{< /code-block >}}
+
+**Python**\
+{{< code-block lang="python" disable_copy="true" >}}
+span.set_tag("datadog.api_catalog.route", "/products/{productId}")
+{{< /code-block >}}
+
+**.NET**\
+{{< code-block lang="csharp" disable_copy="true" >}}
+scope.Span.SetTag("datadog.api_catalog.route", "/products/{productid}");
+{{< /code-block >}}
 
 **Go**\
 {{< code-block lang="go" disable_copy="true" >}}
 span.SetTag("datadog.api_catalog.route", "/products/:id")
 {{< /code-block >}}
+
 **Ruby**\
 {{< code-block lang="ruby" disable_copy="true" >}}
 Datadog::Tracing.active_trace.set_tag('datadog.api_catalog.route', '/products/:id')

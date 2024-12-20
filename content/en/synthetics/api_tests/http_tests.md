@@ -54,6 +54,10 @@ After choosing to create an `HTTP` test, define your test's request.
 
 Click **Test URL** to try out the request configuration. A response preview is displayed on the right side of your screen.
 
+### Snippets
+
+{{% synthetics-api-tests-snippets %}}
+
 ### Advanced options
 
    {{< tabs >}}
@@ -165,6 +169,19 @@ HTTP tests can run:
 
 {{% synthetics-alerting-monitoring %}}
 
+## One-click
+
+API test creation suggests endpoints from the [API Catalog][17] and existing API tests to prefill your test form with relevant options.
+Use existing Datadog data sources such as APM traces, API Catalog endpoints discovery, and existing similar Synthetic tests created by users.
+
+Start typing in the API test **URL** input to get endpoint suggestions or similar tests in Synthetic Monitoring:
+
+   {{< img src="synthetics/api_tests/api-one-click.png" alt="HTTP API Test showing a GET search for an existing API test" style="width:90%;" >}}
+   
+Then, select a suggestion to prefill your test configuration (request options and headers, authentication, and variables):
+
+   {{< img src="synthetics/api_tests/api-test-monitor-search.png" alt="Select" style="width:90%;" >}}
+
 {{% synthetics-variables %}}
 
 ### Use variables
@@ -180,6 +197,9 @@ To display your list of variables, type `{{` in your desired field:
 A test is considered `FAILED` if it does not satisfy one or more assertions or if the request prematurely failed. In some cases, the test can fail without testing the assertions against the endpoint. 
 
 The most common errors include the following:
+
+`AUTHENTICATION_ERROR`
+: Synthetic Monitoring automatically disables test retries when authentication failures occur. This safety measure remains in effect until you update the test with valid credentials. This prevents unnecessary test executions that would generate false alerts and increase billable usage.
 
 `CONNREFUSED`
 : No connection could be made because the target machine actively refused it.
@@ -242,3 +262,4 @@ You can restrict access to an HTTP test based on the roles in your organization.
 [14]: /account_management/rbac#custom-roles
 [15]: /account_management/rbac/#create-a-custom-role
 [16]: /synthetics/api_tests/errors/#http-errors
+[17]: /api_catalog

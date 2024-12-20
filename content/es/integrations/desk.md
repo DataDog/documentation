@@ -2,7 +2,7 @@
 categories:
 - Collaboration
 - issue tracking
-custom_kind: integración
+custom_kind: integration
 dependencies: []
 description: Visualiza y discute casos nuevos, abiertos, pendientes y resueltos de
   tu flujo (stream) de eventos.

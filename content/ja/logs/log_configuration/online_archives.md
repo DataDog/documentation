@@ -45,7 +45,7 @@ Online Archives は、Log インデックスごとに設定されています。
 
 ## Online Archives で検索する
 
-ログエクスプローラーのドロップダウンから Online Archives を選択すると、インデックスではなく Online Archives での検索を開始します。このドロップダウンは、タイムピッカーの隣にあります。タイムピッカーでは、事前設定オプションで最大 3 か月まで選択できるほか、カレンダービューで過去にさかのぼって検索できます。
+Log Explorer のドロップダウンから Online Archives を選択すると、インデックスではなく Online Archives での検索を開始します。このドロップダウンは、タイムピッカーの隣にあります。タイムピッカーは、最大 3 か月までの事前設定オプションを選択するか、カレンダービューを選択してさらに過去まで検索するように調整できます。
 
 
 {{< img src="logs/log_configuration/online_archives/searching.png" alt="オンラインアーカイブの検索方法" style="width:100%;">}}
@@ -76,7 +76,7 @@ Online Archives は、Log インデックスごとに設定されています。
 2. このインデックスの Online Archives を有効にします。
 3. インデックス `status:Debug` に、除外率を 90% に設定した除外フィルターを追加します。この除外フィルターは、インデックスにのみ適用されます。
 
-{{< img src="logs/log_configuration/online_archives/retain.png" alt="How to exclude things from the index" style="width:100%;">}}
+{{< img src="logs/log_configuration/online_archives/retain.png" alt="インデックスからモノを除外する方法" style="width:100%;">}}
 
 ### セキュリティチームは、すべてのログを Online Archives に保存したくて、インデックスには保存したくない
 

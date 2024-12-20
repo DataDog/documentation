@@ -1,7 +1,7 @@
 ---
 categories:
 - métricas
-custom_kind: integración
+custom_kind: integration
 dependencies: []
 description: Monitoriza métricas de informaciones de calidad en plataformas de streaming
   de vídeo.

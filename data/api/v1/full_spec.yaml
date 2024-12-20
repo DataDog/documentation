@@ -440,6 +440,7 @@ components:
       - custom
       - network_elb
       - lambda
+      - step_functions
       type: string
       x-enum-varnames:
       - ELB
@@ -449,6 +450,7 @@ components:
       - CUSTOM
       - NETWORK_ELB
       - LAMBDA
+      - STEP_FUNCTIONS
     AWSTagFilter:
       description: A tag filter.
       properties:
@@ -842,8 +844,15 @@ components:
             Only hosts that match one of the defined tags are imported into Datadog.'
           example: key:value,filter:example
           type: string
-        metrics_config:
-          $ref: '#/components/schemas/AzureAccountMetricsConfig'
+        metrics_enabled:
+          description: Enable Azure metrics for your organization.
+          example: true
+          type: boolean
+        metrics_enabled_default:
+          description: Enable Azure metrics for your organization for resource providers
+            where no resource provider config is specified.
+          example: true
+          type: boolean
         new_client_id:
           description: Your New Azure web application ID.
           example: new1c7f6-1234-5678-9101-3fcbf464test
@@ -858,37 +867,26 @@ components:
             monitored by this app registration.
           example: true
           type: boolean
+        resource_provider_configs:
+          description: Configuration settings applied to resources from the specified
+            Azure resource providers.
+          items:
+            $ref: '#/components/schemas/ResourceProviderConfig'
+          type: array
         tenant_name:
           description: Your Azure Active Directory ID.
           example: testc44-1234-5678-9101-cc00736ftest
           type: string
+        usage_metrics_enabled:
+          description: Enable azure.usage metrics for your organization.
+          example: true
+          type: boolean
       type: object
     AzureAccountListResponse:
       description: Accounts configured for your organization.
       items:
         $ref: '#/components/schemas/AzureAccount'
       type: array
-    AzureAccountMetricsConfig:
-      description: 'Dictionary containing the key `excluded_resource_providers` which
-        has to be a list of Microsoft Azure Resource Provider names.
-
-        This feature is currently being beta tested.
-
-        In order to enable all resource providers for metric collection, pass:
-
-        `metrics_config: {"excluded_resource_providers": []}` (i.e., an empty list
-        for `excluded_resource_providers`).'
-      properties:
-        excluded_resource_providers:
-          description: List of Microsoft Azure Resource Providers to exclude from
-            metric collection.
-          example:
-          - Microsoft.Sql
-          - Microsoft.Cdn
-          items:
-            type: string
-          type: array
-      type: object
     CancelDowntimesByScopeRequest:
       description: Cancel downtimes according to scope.
       properties:
@@ -3147,6 +3145,8 @@ components:
       enum:
       - good_events
       - bad_events
+      - good_minutes
+      - bad_minutes
       - slo_status
       - error_budget_remaining
       - burn_rate
@@ -3156,6 +3156,8 @@ components:
       x-enum-varnames:
       - GOOD_EVENTS
       - BAD_EVENTS
+      - GOOD_MINUTES
+      - BAD_MINUTES
       - SLO_STATUS
       - ERROR_BUDGET_REMAINING
       - BURN_RATE
@@ -4286,6 +4288,7 @@ components:
       - ci_test_indexed_spans_usage
       - ci_visibility_itr_usage
       - cloud_siem_usage
+      - code_security_host_usage
       - container_excl_agent_usage
       - container_usage
       - cspm_containers_usage
@@ -4294,6 +4297,7 @@ components:
       - custom_ingested_timeseries_usage
       - custom_timeseries_usage
       - cws_containers_usage
+      - cws_fargate_task_usage
       - cws_hosts_usage
       - data_jobs_monitoring_usage
       - data_stream_monitoring_usage
@@ -4358,6 +4362,7 @@ components:
       - CI_TEST_INDEXED_SPANS_USAGE
       - CI_VISIBILITY_ITR_USAGE
       - CLOUD_SIEM_USAGE
+      - CODE_SECURITY_HOST_USAGE
       - CONTAINER_EXCL_AGENT_USAGE
       - CONTAINER_USAGE
       - CSPM_CONTAINERS_USAGE
@@ -4366,6 +4371,7 @@ components:
       - CUSTOM_INGESTED_TIMESERIES_USAGE
       - CUSTOM_TIMESERIES_USAGE
       - CWS_CONTAINERS_USAGE
+      - CWS_FARGATE_TASK_USAGE
       - CWS_HOSTS_USAGE
       - DATA_JOBS_MONITORING_USAGE
       - DATA_STREAM_MONITORING_USAGE
@@ -4832,6 +4838,11 @@ components:
     ListStreamQuery:
       description: Updated list stream widget.
       properties:
+        clustering_pattern_field_path:
+          description: Specifies the field for logs pattern clustering. Usable only
+            with logs_pattern_stream.
+          example: message
+          type: string
         compute:
           description: Compute configuration for the List Stream Widget. Compute can
             be used only with the logs_transaction_stream (from 1 to 5 items) list
@@ -8032,6 +8043,8 @@ components:
       - ci_visibility_itr_percentage
       - cloud_siem_usage
       - cloud_siem_percentage
+      - code_security_host_usage
+      - code_security_host_percentage
       - container_excl_agent_usage
       - container_excl_agent_percentage
       - container_usage
@@ -8046,6 +8059,8 @@ components:
       - custom_ingested_timeseries_percentage
       - cws_containers_percentage
       - cws_containers_usage
+      - cws_fargate_task_percentage
+      - cws_fargate_task_usage
       - cws_hosts_percentage
       - cws_hosts_usage
       - data_jobs_monitoring_usage
@@ -8171,6 +8186,8 @@ components:
       - CI_VISIBILITY_ITR_PERCENTAGE
       - CLOUD_SIEM_USAGE
       - CLOUD_SIEM_PERCENTAGE
+      - CODE_SECURITY_HOST_USAGE
+      - CODE_SECURITY_HOST_PERCENTAGE
       - CONTAINER_EXCL_AGENT_USAGE
       - CONTAINER_EXCL_AGENT_PERCENTAGE
       - CONTAINER_USAGE
@@ -8185,6 +8202,8 @@ components:
       - CUSTOM_INGESTED_TIMESERIES_PERCENTAGE
       - CWS_CONTAINERS_PERCENTAGE
       - CWS_CONTAINERS_USAGE
+      - CWS_FARGATE_TASK_PERCENTAGE
+      - CWS_FARGATE_TASK_USAGE
       - CWS_HOSTS_PERCENTAGE
       - CWS_HOSTS_USAGE
       - DATA_JOBS_MONITORING_USAGE
@@ -8396,6 +8415,14 @@ components:
             tag(s).
           format: double
           type: number
+        code_security_host_percentage:
+          description: The percentage of Code Security host usage by tags.
+          format: double
+          type: number
+        code_security_host_usage:
+          description: The Code Security host usage by tags.
+          format: double
+          type: number
         container_excl_agent_percentage:
           description: The percentage of container usage without the Datadog Agent
             by tag(s).
@@ -8462,6 +8489,15 @@ components:
           type: number
         cws_containers_usage:
           description: The Cloud Workload Security container usage by tag(s).
+          format: double
+          type: number
+        cws_fargate_task_percentage:
+          description: The percentage of Cloud Workload Security Fargate task usage
+            by tag(s).
+          format: double
+          type: number
+        cws_fargate_task_usage:
+          description: The Cloud Workload Security Fargate task usage by tag(s).
           format: double
           type: number
         cws_hosts_percentage:
@@ -10275,6 +10311,19 @@ components:
       - target
       - lookup_enrichment_table
       - type
+      type: object
+    ResourceProviderConfig:
+      description: Configuration settings applied to resources from the specified
+        Azure resource provider.
+      properties:
+        metrics_enabled:
+          description: Collect metrics for resources from this provider.
+          example: true
+          type: boolean
+        namespace:
+          description: The provider namespace to apply this configuration to.
+          example: Microsoft.Compute
+          type: string
       type: object
     ResponseMetaAttributes:
       description: Object describing meta attributes of response.
@@ -13946,6 +13995,9 @@ components:
           items:
             $ref: '#/components/schemas/SyntheticsAssertion'
           type: array
+        exitIfSucceed:
+          description: Determines whether or not to exit the test if the step succeeds.
+          type: boolean
         extractedValues:
           description: Array of values to parse and save as variables from the response.
           items:
@@ -15394,34 +15446,8 @@ components:
       type: object
     SyntheticsDeviceID:
       description: The device ID.
-      enum:
-      - laptop_large
-      - tablet
-      - mobile_small
-      - chrome.laptop_large
-      - chrome.tablet
-      - chrome.mobile_small
-      - firefox.laptop_large
-      - firefox.tablet
-      - firefox.mobile_small
-      - edge.laptop_large
-      - edge.tablet
-      - edge.mobile_small
       example: chrome.laptop_large
       type: string
-      x-enum-varnames:
-      - LAPTOP_LARGE
-      - TABLET
-      - MOBILE_SMALL
-      - CHROME_LAPTOP_LARGE
-      - CHROME_TABLET
-      - CHROME_MOBILE_SMALL
-      - FIREFOX_LAPTOP_LARGE
-      - FIREFOX_TABLET
-      - FIREFOX_MOBILE_SMALL
-      - EDGE_LAPTOP_LARGE
-      - EDGE_TABLET
-      - EDGE_MOBILE_SMALL
     SyntheticsFetchUptimesPayload:
       description: Object containing IDs of Synthetic tests and a timeframe.
       properties:
@@ -15431,7 +15457,7 @@ components:
           format: int64
           type: integer
         public_ids:
-          description: An array of Synthetic test IDs you want to delete.
+          description: An array of Synthetic test IDs you want uptimes for.
           example: []
           items:
             description: A Synthetic test ID.
@@ -15724,10 +15750,6 @@ components:
             $ref: '#/components/schemas/SyntheticsLocation'
           type: array
       type: object
-    SyntheticsMobileDeviceID:
-      description: The device ID.
-      example: synthetics:mobile:device:apple_ipad_10th_gen_2022_ios_16
-      type: string
     SyntheticsMobileStep:
       description: The steps used in a Synthetic mobile test.
       properties:
@@ -16003,7 +16025,7 @@ components:
         device_ids:
           description: Array with the different device IDs used to run the test.
           items:
-            $ref: '#/components/schemas/SyntheticsMobileDeviceID'
+            $ref: '#/components/schemas/SyntheticsDeviceID'
           type: array
         message:
           description: Notification message associated with the test.
@@ -16092,7 +16114,7 @@ components:
           example:
           - synthetics:mobile:device:apple_ipad_10th_gen_2022_ios_16
           items:
-            $ref: '#/components/schemas/SyntheticsMobileDeviceID'
+            $ref: '#/components/schemas/SyntheticsDeviceID'
           type: array
         disableAutoAcceptAlert:
           description: A boolean to disable auto accepting alerts.
@@ -17245,12 +17267,12 @@ components:
     SyntheticsTestRestrictionPolicyBinding:
       description: Objects describing the binding used for a mobile test.
       properties:
-        principal:
-          $ref: '#/components/schemas/SyntheticsTestRestrictionPolicyBindingPrincipal'
+        principals:
+          $ref: '#/components/schemas/SyntheticsTestRestrictionPolicyBindingPrincipals'
         relation:
           $ref: '#/components/schemas/SyntheticsTestRestrictionPolicyBindingRelation'
       type: object
-    SyntheticsTestRestrictionPolicyBindingPrincipal:
+    SyntheticsTestRestrictionPolicyBindingPrincipals:
       description: List of principals for a mobile test binding.
       items:
         description: A principal for a mobile test binding.
@@ -19921,7 +19943,8 @@ components:
           format: int64
           type: integer
         avg_profiled_fargate_tasks:
-          description: The average profiled task count for Fargate Profiling.
+          description: The average total count for Fargate Container Profiler over
+            all hours in the current date for all organizations.
           format: int64
           type: integer
         aws_host_top99p:
@@ -20026,6 +20049,11 @@ components:
         code_analysis_sca_committers_hwm:
           description: Shows the high-water mark of all static Software Composition
             Analysis committers over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        code_security_host_top99p:
+          description: Shows the 99th percentile of all Code Security hosts over all
+            hours in the current date for the given org.
           format: int64
           type: integer
         container_avg:
@@ -20146,6 +20174,11 @@ components:
             over all hours in the current date for all organizations.
           format: int64
           type: integer
+        cws_fargate_task_avg:
+          description: Shows the average of all distinct Cloud Workload Security Fargate
+            tasks over all hours in the current date for all organizations.
+          format: int64
+          type: integer
         cws_host_top99p:
           description: Shows the 99th percentile of all Cloud Workload Security hosts
             over all hours in the current date for all organizations.
@@ -20183,6 +20216,16 @@ components:
         error_tracking_rum_error_events_sum:
           description: Shows the sum of all Error Tracking RUM error events over all
             hours in the current date for the given org.
+          format: int64
+          type: integer
+        fargate_container_profiler_profiling_fargate_avg:
+          description: The average number of Profiling Fargate tasks over all hours
+            in the current date for all organizations.
+          format: int64
+          type: integer
+        fargate_container_profiler_profiling_fargate_eks_avg:
+          description: The average number of Profiling Fargate Elastic Kubernetes
+            Service tasks over all hours in the current date for all organizations.
           format: int64
           type: integer
         fargate_tasks_count_avg:
@@ -20349,8 +20392,9 @@ components:
           format: int64
           type: integer
         npm_host_top99p:
-          description: Shows the 99th percentile of all distinct Networks hosts over
-            all hours in the current date for all organizations.
+          description: Shows the 99th percentile of all distinct Cloud Network Monitoring
+            hosts (formerly known as Network hosts) over all hours in the current
+            date for all organizations.
           format: int64
           type: integer
         observability_pipelines_bytes_processed_sum:
@@ -20681,7 +20725,8 @@ components:
           format: int64
           type: integer
         avg_profiled_fargate_tasks:
-          description: The average profiled task count for Fargate Profiling.
+          description: The average total count for Fargate Container Profiler over
+            all hours in the current month for the given org.
           format: int64
           type: integer
         aws_host_top99p:
@@ -20786,6 +20831,11 @@ components:
         code_analysis_sca_committers_hwm:
           description: Shows the high-water mark of all static Software Composition
             Analysis committers over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        code_security_host_top99p:
+          description: Shows the 99th percentile of all Code Security hosts over all
+            hours in the current date for the given org.
           format: int64
           type: integer
         container_avg:
@@ -20916,6 +20966,11 @@ components:
             over all hours in the current date for the given org.
           format: int64
           type: integer
+        cws_fargate_task_avg:
+          description: Shows the average of all distinct Cloud Workload Security Fargate
+            tasks over all hours in the current date for the given org.
+          format: int64
+          type: integer
         cws_host_top99p:
           description: Shows the 99th percentile of all Cloud Workload Security hosts
             over all hours in the current date for the given org.
@@ -20949,6 +21004,16 @@ components:
         error_tracking_rum_error_events_sum:
           description: Shows the sum of all Error Tracking RUM error events over all
             hours in the current date for the given org.
+          format: int64
+          type: integer
+        fargate_container_profiler_profiling_fargate_avg:
+          description: The average number of Profiling Fargate tasks over all hours
+            in the current month for the given org.
+          format: int64
+          type: integer
+        fargate_container_profiler_profiling_fargate_eks_avg:
+          description: The average number of Profiling Fargate Elastic Kubernetes
+            Service tasks over all hours in the current month for the given org.
           format: int64
           type: integer
         fargate_tasks_count_avg:
@@ -21118,8 +21183,9 @@ components:
           format: int64
           type: integer
         npm_host_top99p:
-          description: Shows the 99th percentile of all distinct Networks hosts over
-            all hours in the current date for the given org.
+          description: Shows the 99th percentile of all distinct Cloud Network Monitoring
+            hosts (formerly known as Network hosts) over all hours in the current
+            date for the given org.
           format: int64
           type: integer
         observability_pipelines_bytes_processed_sum:
@@ -21445,8 +21511,8 @@ components:
           format: int64
           type: integer
         avg_profiled_fargate_tasks_sum:
-          description: Shows the average of all profiled Fargate tasks over all hours
-            in the current month for all organizations.
+          description: The average total count for Fargate Container Profiler over
+            all hours in the current month for all organizations.
           format: int64
           type: integer
         aws_host_top99p_sum:
@@ -21557,6 +21623,11 @@ components:
         code_analysis_sca_committers_hwm_sum:
           description: Shows the high-water mark of all static Software Composition
             Analysis committers over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        code_security_host_top99p_sum:
+          description: Shows the 99th percentile of all Code Security hosts over all
+            hours in the current month for all organizations.
           format: int64
           type: integer
         container_avg_sum:
@@ -21680,9 +21751,14 @@ components:
             hours in the current month for all organizations.
           format: int64
           type: integer
-        cws_containers_avg_sum:
+        cws_container_avg_sum:
           description: Shows the average of all distinct Cloud Workload Security containers
             over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        cws_fargate_task_avg_sum:
+          description: Shows the average of all distinct Cloud Workload Security Fargate
+            tasks over all hours in the current month for all organizations.
           format: int64
           type: integer
         cws_host_top99p_sum:
@@ -21722,6 +21798,16 @@ components:
         error_tracking_rum_error_events_agg_sum:
           description: Shows the sum of all Error Tracking RUM error events over all
             hours in the current month for all organizations.
+          format: int64
+          type: integer
+        fargate_container_profiler_profiling_fargate_avg_sum:
+          description: The average number of Profiling Fargate tasks over all hours
+            in the current month for all organizations.
+          format: int64
+          type: integer
+        fargate_container_profiler_profiling_fargate_eks_avg_sum:
+          description: The average number of Profiling Fargate Elastic Kubernetes
+            Service tasks over all hours in the current month for all organizations.
           format: int64
           type: integer
         fargate_tasks_count_avg_sum:
@@ -21910,8 +21996,9 @@ components:
           format: int64
           type: integer
         npm_host_top99p_sum:
-          description: Shows the 99th percentile of all distinct Networks hosts over
-            all hours in the current month for all organizations.
+          description: Shows the 99th percentile of all distinct Cloud Network Monitoring
+            hosts (formerly known as Network hosts) over all hours in the current
+            month for all organizations.
           format: int64
           type: integer
         observability_pipelines_bytes_processed_agg_sum:
@@ -23560,7 +23647,6 @@ components:
             incident_notification_settings_write: Configure Incidents Notification
               settings.
             incident_read: View incidents in Datadog.
-            incident_settings_read: View Incident Settings.
             incident_settings_write: Configure Incident Settings.
             incident_write: Create, view, and manage incidents in Datadog.
             metrics_read: View custom metrics.
@@ -23576,7 +23662,8 @@ components:
               Remote Configuration for the entire organization.
             security_monitoring_filters_read: Read Security Filters.
             security_monitoring_filters_write: Create, edit, and delete Security Filters.
-            security_monitoring_findings_read: View CSPM Findings.
+            security_monitoring_findings_read: View a list of findings that include
+              both misconfigurations and identity risks.
             security_monitoring_rules_read: Read Detection Rules.
             security_monitoring_rules_write: Create and edit Detection Rules.
             security_monitoring_signals_read: View Security Signals.
@@ -23604,6 +23691,7 @@ components:
               Access Manage permission.
             teams_read: Read Teams data. A User with this permission can view Team
               names, metadata, and which Users are on each Team.
+            test_visibility_read: View Test Visibility.
             timeseries_query: Query Timeseries data.
             usage_read: View your organization's usage and usage attribution.
             user_access_invite: Invite other users to your organization.
@@ -23641,6 +23729,12 @@ components:
       type: apiKey
       x-auth-id-alias: appKeyAuth
       x-env-name: DD_APP_KEY
+    bearerAuth:
+      in: header
+      name: Authorization
+      scheme: bearer
+      type: http
+      x-env-name: DD_BEARER_TOKEN
 info:
   contact:
     email: support@datadoghq.com
@@ -27663,10 +27757,13 @@ paths:
               \"TestingRh2nx664kUy5dIApvM54T4AtO\",\n  \"container_app_filters\":
               \"key:value,filter:example\",\n  \"cspm_enabled\": true,\n  \"custom_metrics_enabled\":
               true,\n  \"errors\": [\"*\"],\n  \"host_filters\": \"key:value,filter:example\",\n
+              \ \"metrics_enabled\": true,\n  \"metrics_enabled_default\": true,\n
               \ \"new_client_id\": \"{{ uuid }}\",\n  \"new_tenant_name\": \"{{ uuid
-              }}\",\n  \"resource_collection_enabled\": true,\n  \"metrics_config\":
-              {\n    \"excluded_resource_providers\": [\"Microsoft.Sql\", \"Microsoft.Cdn\"]\n
-              \ },\n  \"tenant_name\": \"{{ uuid }}\"\n}"
+              }}\",\n  \"resource_collection_enabled\": true,\n  \"resource_provider_configs\":
+              [\n    {\n      \"namespace\": \"Microsoft.Compute\",\n      \"metrics_enabled\":
+              false\n    },\n    {\n      \"namespace\": \"Microsoft.Web\",\n      \"metrics_enabled\":
+              false\n    }\n  ],\n  \"tenant_name\": \"{{ uuid }}\",\n  \"usage_metrics_enabled\":
+              true\n}"
           step: there is a valid "azure_account" in the system
       x-menu-order: 2
       x-permission:
@@ -38500,7 +38597,8 @@ tags:
   name: Logs
 - description: 'Manage configuration of [log indexes](https://docs.datadoghq.com/logs/indexes/).
 
-    You need an API and application key with Admin rights to interact with this endpoint.'
+    You need an API and non-scoped application key with Admin rights to interact with
+    these endpoints.'
   externalDocs:
     description: Find out more at
     url: https://docs.datadoghq.com/logs/indexes/
@@ -38512,11 +38610,12 @@ tags:
     about processors can be found in the\n  [processors documentation](https://docs.datadoghq.com/logs/log_configuration/processors/?tab=api#lookup-processor).\n\n-
     For more information about Pipelines, see the\n  [pipeline documentation](https://docs.datadoghq.com/logs/log_configuration/pipelines).\n\n**Notes:**\n\nThese
     endpoints are only available for admin users.\nMake sure to use an application
-    key created by an admin.\n\n**Grok parsing rules may effect JSON output and require\nreturned
-    data to be configured before using in a request.**\nFor example, if you are using
-    the data returned from a\nrequest for another request body, and have a parsing
-    rule\nthat uses a regex pattern like `\\s` for spaces, you will\nneed to configure
-    all escaped spaces as `%{space}` to use\nin the body data."
+    key created by an admin with no applied scopes.\n\n**Grok parsing rules may effect
+    JSON output and require\nreturned data to be configured before using in a request.**\nFor
+    example, if you are using the data returned from a\nrequest for another request
+    body, and have a parsing rule\nthat uses a regex pattern like `\\s` for spaces,
+    you will\nneed to configure all escaped spaces as `%{space}` to use\nin the body
+    data."
   externalDocs:
     description: Find out more at
     url: https://docs.datadoghq.com/logs/log_configuration

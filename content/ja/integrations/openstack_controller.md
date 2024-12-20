@@ -32,7 +32,7 @@ categories:
 - プロビジョニング
 - オーケストレーション
 - 構成とデプロイ
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/openstack_controller/README.md
 display_on_public_website: true
@@ -40,7 +40,7 @@ draft: false
 git_integration_title: openstack_controller
 integration_id: openstack-controller
 integration_title: OpenStack Controller
-integration_version: 6.9.0
+integration_version: 8.0.0
 is_public: true
 manifest_version: 2.0.0
 name: openstack_controller
@@ -114,7 +114,7 @@ OpenStack Controller インテグレーションは、すべてのコンピュ�
 
 2. [Agent を再起動します][5]。
 
-**注**: インテグレーションを v5.0.0 以前から v6.0.0 以降にアップグレードする場合、新しい機能を使用するために `use_legacy_check_version` フラグを有効にする必要があります。また、互換性を維持するためには、構成を変更する必要が生じる場合もあります。詳しくは [openstack controller.d/conf.yaml のサンプル][4]を参照してください。
+**注**: インテグレーションを v5.0.0 以前から v6.0.0 以降にアップグレードする場合、新しい機能を使用するために `use_legacy_check_version` フラグを有効にする必要があります。また、互換性を維持するためには、構成を変更する必要が生じる場合もあります。詳しくは [openstack controller.d/conf.yaml のサンプル][4]を参照してください。 
 
 ##### ログ収集
 

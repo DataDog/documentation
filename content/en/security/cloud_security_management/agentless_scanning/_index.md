@@ -26,7 +26,7 @@ further_reading:
 
 ## Overview
 
-Agentless Scanning provides visibility into vulnerabilities that exist within your AWS hosts, running containers, Lambda functions, and Amazon Machine Images (AMIs) without requiring you to install the Datadog Agent. Datadog recommends enabling Agentless Scanning as a first step to gain complete visibility into your cloud resources, and then installing the Datadog Agent on your core assets over time for deeper security and observability context.
+Agentless Scanning provides visibility into vulnerabilities that exist within your AWS hosts, running containers, Lambda functions, and running Amazon Machine Images (AMIs) without requiring you to install the Datadog Agent. Datadog recommends enabling Agentless Scanning as a first step to gain complete visibility into your cloud resources, and then installing the Datadog Agent on your core assets over time for deeper security and observability context.
 
 ## Availability
 
@@ -42,6 +42,8 @@ The following table provides a summary of Agentless scanning technologies in rel
 | Container runtime           | Docker, containerd </br> **Note**: CRI-O is **not** supported                                         |
 | Serverless                  | AWS, AWS Lambda                                             |
 | Serverless languages        | .Net, Python, Java, Ruby, Node.js, Go                        |
+
+**Note**: AMIs must be stored in an account that uses Datadog's AWS integration. Otherwise, Datadog can't read the AMI's underlying Amazon Elastic Block Store (EBS) snapshot, so it can't scan or report on the AMI.
 
 ## How it works
 
@@ -76,7 +78,7 @@ Datadog does **not** send:
 
 ## Security considerations
 
-Because the scanner instances grant [permissions][4] to create and copy EBS snapshots, and describe volumes, Datadog advises restricting access to these instances solely to administrative users. 
+Because the scanner instances grant [permissions][4] to create and copy EBS snapshots, and describe volumes, Datadog advises restricting access to these instances solely to administrative users.
 
 To further mitigate this risk, Datadog implements the following security measures:
 
@@ -101,8 +103,8 @@ The following diagram illustrates how Agentless scanning works with existing Age
 
 ## Cloud Storage scanning
 
-{{< callout header="Join the Preview!" url="https://www.datadoghq.com/private-beta/data-security" >}}
-  Scanning support for Amazon S3 buckets and RDS instances is in Preview. To enroll, click <strong>Request Access</strong>.
+{{< callout header="Limited Availability" url="https://www.datadoghq.com/private-beta/data-security" >}}
+  Scanning support for Amazon S3 buckets and RDS instances is in Limited Availability. To enroll, click <strong>Request Access</strong>.
 {{< /callout >}}
 
 If you have [Sensitive Data Scanner][8] enabled, you can catalog and classify sensitive data in your Amazon S3 buckets and RDS instances.
@@ -113,7 +115,7 @@ Along with displaying sensitive data matches, Sensitive Data Scanner surfaces an
 
 ## Cloud service provider cost
 
-When using Agentless Scanning, there are additional costs for running scanners in your cloud environments. To optimize on costs while being able to reliably scan every 12 hours, Datadog recommends setting up [Agentless Scanning with Terraform][6] as the default template, as this also avoids cross-region networking. 
+When using Agentless Scanning, there are additional costs for running scanners in your cloud environments. To optimize on costs while being able to reliably scan every 12 hours, Datadog recommends setting up [Agentless Scanning with Terraform][6] as the default template, as this also avoids cross-region networking.
 
 To establish estimates on scanner costs, reach out to your [Datadog Customer Success Manager.][7]
 

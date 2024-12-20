@@ -18,7 +18,7 @@ further_reading:
 - link: "/synthetics/browser_tests/"
   tag: "Documentation"
   text: "Configure a Browser Test"
-- link: "/mobile_app_testing/mobile_app_tests"
+- link: "/mobile_app_testing/"
   tag: "Documentation"
   text: "Configure a Mobile Test"
 - link: "/synthetics/private_locations/"
@@ -233,7 +233,7 @@ Variable values are updated whenever the test they are extracted from runs.
 
 {{% tab "MFA Token" %}}  
  
-To generate and use a TOTP in your tests, create a global variable where you enter a secret key or upload a QR code from your authentication provider.
+To generate and use a TOTP in your tests, create a global variable where you enter a secret key or upload a QR code from your authentication provider. **Note:** Currently, only the SHA1 hashing algorithm is supported for TOTP.
 
 1. In **Choose variable type**, select **MFA Token**.
 2. In **Define Variable**, enter a **Variable Name**. Your variable name can only use uppercase letters, numbers, and underscores.
@@ -326,8 +326,8 @@ For more information, see [Explore RUM & Session Replay][14].
 [14]: /synthetics/guide/explore-rum-through-synthetics/
 [15]: /synthetics/apm/#prerequisites
 [16]: /synthetics/browser_tests/actions/#use-variables
-[17]: /mobile_app_testing/mobile_app_tests/
-[18]: /mobile_app_testing/settings/
-[19]: /mobile_app_testing/mobile_app_tests/#use-global-variables
+[17]: /synthetics/mobile_app_testing/
+[18]: /synthetics/mobile_app_testing/settings/
+[19]: /synthetics/mobile_app_testing/#use-global-variables
 [20]: https://app.datadoghq.com/synthetics/settings/default
 [21]: https://app.datadoghq.com/monitors/settings/policies

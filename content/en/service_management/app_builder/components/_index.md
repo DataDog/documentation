@@ -219,6 +219,36 @@ To view this component in context, see the [Metrics Explorer & Monitors Builder]
 
 
 
+{{% collapse-content title="Custom chart" level="h3" %}}
+Custom chart components have the following properties.
+
+### General
+
+Vega Specification
+: A string representing a valid Vega-Lite or Vega JSON specification.
+
+### Appearance
+
+Is Loading
+: Shows a loading indicator.<br>
+**Provided values**: on, off
+
+Is Visible
+: Determines whether the component is visible to the end-user. In edit mode, all components remain visible.<br>
+**Provided values**: on, off
+
+### Inspect data
+
+Displays property and value pairs in JSON format.
+
+### Example
+
+For an example showing how to use this component, see [Custom charts][10].
+
+{{% /collapse-content %}}
+
+
+
 {{% collapse-content title="Date range picker" level="h3" %}}
 Date range picker components have the following properties.
 
@@ -977,3 +1007,4 @@ To view this component in context, see the [Metrics Explorer & Monitors Builder]
 [7]: /service_management/app_builder/expressions
 [8]: https://www.markdownguide.org/basic-syntax/
 [9]: /service_management/app_builder/events/#state-functions
+[10]: /service_management/app_builder/components/custom_charts/

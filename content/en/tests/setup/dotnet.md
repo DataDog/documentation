@@ -17,13 +17,13 @@ further_reading:
     - link: "/tests/test_impact_analysis/dotnet"
       tag: "Documentation"
       text: "Speed up your test jobs with Test Impact Analysis"
-    - link: "/continuous_integration/troubleshooting/"
+    - link: "/tests/troubleshooting/"
       tag: "Documentation"
-      text: "Troubleshooting CI Visibility"
+      text: "Troubleshooting Test Optimization"
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
+<div class="alert alert-warning">Test Optimization is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
 ## Compatibility
@@ -280,7 +280,7 @@ For more information about how to add spans and tags for custom instrumentation,
   <strong>Note:</strong> To use the manual testing API, you must add the <code>Datadog.Trace</code> NuGet package in the target .NET project.
 </div>
 
-If you use XUnit, NUnit, or MSTest with your .NET projects, CI Visibility automatically instruments them and sends the test results to Datadog. If you use an unsupported testing framework or if you have a different testing mechanism, you can instead use the API to report test results to Datadog.
+If you use XUnit, NUnit, or MSTest with your .NET projects, Test Optimization automatically instruments them and sends the test results to Datadog. If you use an unsupported testing framework or if you have a different testing mechanism, you can instead use the API to report test results to Datadog.
 
 The API is based around three concepts: test module, test suites, and tests.
 

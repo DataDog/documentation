@@ -40,18 +40,6 @@ Agent は、読み取り専用のユーザーとしてログインすること�
 [DB クラスターパラメーターグループ][3]で以下を構成してから、設定を有効にするために**サーバーを再起動**します。
 
 {{< tabs >}}
-{{% tab "MySQL 5.6" %}}
-| パラメーター | 値 | 説明 |
-| --- | --- | --- |
-| `performance_schema` | `1` | 必須。[パフォーマンススキーマ][1]を有効にします。 |
-| <code style="word-break:break-all;">performance_schema_consumer_events_statements_current</code> | `1` | 必須。現在実行中のクエリの監視を有効にします。 |
-| <code style="word-break:break-all;">performance-schema-consumer-events-waits-current</code> | `ON` | 必須。待機イベントの収集を有効にします。 |
-| <code style="word-break:break-all;">performance_schema_consumer_events_statements_history</code> | `1` | オプション。スレッドごとの最近のクエリ履歴の追跡を有効にします。有効にすると、実行頻度の低いクエリの実行詳細をキャプチャできる可能性が高くなります。 |
-| <code style="word-break:break-all;">performance_schema_consumer_events_statements_history_long</code> | `1` | オプション。全てのスレッドでより多くの最近のクエリの追跡を有効にします。有効にすると、実行頻度の低いクエリの実行詳細をキャプチャできる可能性が高くなります。 |
-
-[1]: https://dev.mysql.com/doc/refman/8.0/en/performance-schema-quick-start.html
-{{% /tab %}}
-
 {{% tab "MySQL ≥ 5.7" %}}
 | パラメーター | 値 | 説明 |
 | --- | --- | --- |
@@ -62,6 +50,17 @@ Agent は、読み取り専用のユーザーとしてログインすること�
 | <code style="word-break:break-all;">performance_schema_consumer_events_statements_history_long</code> | `1` | オプション。全てのスレッドでより多くの最近のクエリの追跡を有効にします。有効にすると、実行頻度の低いクエリの実行詳細をキャプチャできる可能性が高くなります。 |
 | <code style="word-break:break-all;">performance_schema_max_digest_length</code> | `4096` | `events_statements_*` テーブルの SQL ダイジェストテキストのサイズを増やします。デフォルト値のままだと `1024` 文字より長いクエリは収集されません。 |
 | <code style="word-break:break-all;">performance_schema_max_sql_text_length</code> | `4096` | <code style="word-break:break-all;">performance_schema_max_digest_length</code> と一致する必要があります。 |
+
+[1]: https://dev.mysql.com/doc/refman/8.0/en/performance-schema-quick-start.html
+{{% /tab %}}
+{{% tab "MySQL 5.6" %}}
+| パラメーター | 値 | 説明 |
+| --- | --- | --- |
+| `performance_schema` | `1` | 必須。[パフォーマンススキーマ][1]を有効にします。 |
+| <code style="word-break:break-all;">performance_schema_consumer_events_statements_current</code> | `1` | 必須。現在実行中のクエリの監視を有効にします。 |
+| <code style="word-break:break-all;">performance-schema-consumer-events-waits-current</code> | `ON` | 必須。待機イベントの収集を有効にします。 |
+| <code style="word-break:break-all;">performance_schema_consumer_events_statements_history</code> | `1` | オプション。スレッドごとの最近のクエリ履歴の追跡を有効にします。有効にすると、実行頻度の低いクエリの実行詳細をキャプチャできる可能性が高くなります。 |
+| <code style="word-break:break-all;">performance_schema_consumer_events_statements_history_long</code> | `1` | オプション。全てのスレッドでより多くの最近のクエリの追跡を有効にします。有効にすると、実行頻度の低いクエリの実行詳細をキャプチャできる可能性が高くなります。 |
 
 [1]: https://dev.mysql.com/doc/refman/8.0/en/performance-schema-quick-start.html
 {{% /tab %}}
@@ -76,18 +75,6 @@ Datadog Agent が統計やクエリを収集するためには、データベー
 次の手順では、`datadog@'%'` を使用して任意のホストからログインするアクセス許可を Agent に付与します。`datadog@'localhost'` を使用して、`datadog` ユーザーが localhost からのみログインできるように制限できます。詳細については、[MySQL ドキュメント][4]を参照してください。
 
 {{< tabs >}}
-{{% tab "MySQL 5.6" %}}
-
-`datadog` ユーザーを作成し、基本的なアクセス許可を付与します。
-
-```sql
-CREATE USER datadog@'%' IDENTIFIED BY '<UNIQUEPASSWORD>';
-GRANT REPLICATION CLIENT ON *.* TO datadog@'%' WITH MAX_USER_CONNECTIONS 5;
-GRANT PROCESS ON *.* TO datadog@'%';
-GRANT SELECT ON performance_schema.* TO datadog@'%';
-```
-
-{{% /tab %}}
 {{% tab "MySQL ≥ 5.7" %}}
 
 `datadog` ユーザーを作成し、基本的なアクセス許可を付与します。
@@ -96,6 +83,18 @@ GRANT SELECT ON performance_schema.* TO datadog@'%';
 CREATE USER datadog@'%' IDENTIFIED by '<UNIQUEPASSWORD>';
 ALTER USER datadog@'%' WITH MAX_USER_CONNECTIONS 5;
 GRANT REPLICATION CLIENT ON *.* TO datadog@'%';
+GRANT PROCESS ON *.* TO datadog@'%';
+GRANT SELECT ON performance_schema.* TO datadog@'%';
+```
+
+{{% /tab %}}
+{{% tab "MySQL 5.6" %}}
+
+`datadog` ユーザーを作成し、基本的なアクセス許可を付与します。
+
+```sql
+CREATE USER datadog@'%' IDENTIFIED BY '<UNIQUEPASSWORD>';
+GRANT REPLICATION CLIENT ON *.* TO datadog@'%' WITH MAX_USER_CONNECTIONS 5;
 GRANT PROCESS ON *.* TO datadog@'%';
 GRANT SELECT ON performance_schema.* TO datadog@'%';
 ```
@@ -157,7 +156,7 @@ DELIMITER ;
 GRANT EXECUTE ON PROCEDURE datadog.enable_events_statements_consumers TO datadog@'%';
 ```
 
-### Securely store your password
+### パスワードを安全に保管
 {{% dbm-secret %}}
 
 ## Agent のインストールと構成
@@ -187,9 +186,9 @@ instances:
     host: '<AWS_INSTANCE_ENDPOINT>'
     port: 3306
     username: datadog
-    password: 'ENC[datadog_user_database_password]' # from the CREATE USER step earlier, stored as a secret
+    password: 'ENC[datadog_user_database_password]' # CREATE USER ステップで設定し、シークレットとして保存されたもの
 
-    # After adding your project and instance, configure the Datadog AWS integration to pull additional cloud data such as CPU and Memory.
+    # プロジェクトとインスタンスを追加した後、CPU やメモリなどの追加のクラウドデータを取得するために Datadog AWS インテグレーションを構成します。
     aws:
       instance_endpoint: '<AWS_INSTANCE_ENDPOINT>'
 ```
@@ -257,9 +256,9 @@ Kubernetes クラスターでまだチェックが有効になっていない場
 
 ### Helm
 
-以下の手順を踏んで、Kubernetes クラスターに [Datadog Cluster Agent][1] をインストールします。お使いのアカウントや環境に合わせて値を変更してください。
+以下の手順に従って、Kubernetes クラスターに [Datadog Cluster Agent][1] をインストールしてください。お使いのアカウントや環境に合わせて値を変更してください。
 
-1. Helm の [Datadog Agent インストール手順][3]を踏みます。
+1. Helm の [Datadog Agent インストール手順][3]に従います。
 2. YAML コンフィギュレーションファイル (Cluster Agent インストール手順の `datadog-values.yaml`) を更新して、以下を含めます。
     ```yaml
     clusterAgent:
@@ -296,7 +295,7 @@ Windows の場合は、<code>helm install</code> コマンドに <code>--set tar
 マウントされたコンフィギュレーションファイルを使ってクラスターチェックを構成するには、コンフィギュレーションファイルを Cluster Agent コンテナのパス `/conf.d/mysql.yaml` にマウントします。
 
 ```yaml
-cluster_check: true  # Make sure to include this flag
+cluster_check: true  # このフラグを必ず含めてください
 init_config:
 instances:
   - dbm: true
@@ -354,7 +353,7 @@ Cluster Agent は自動的にこのコンフィギュレーションを登録し
 
 ### UpdateAzureIntegration
 
-[Agent の status サブコマンドを実行][6]し、Checks セクションで `mysql` を探します。または、[データベース][7]のページを参照してください。
+[Agent の status サブコマンドを実行][6]し、Checks セクションで `mysql` を探すか、[データベース][7]のページを参照してください。
 
 ## Agent の構成例
 {{% dbm-mysql-agent-config-examples %}}
@@ -373,7 +372,7 @@ DBM でデータベースのテレメトリーとともに CPU などの AWS か
 
 
 [1]: /ja/database_monitoring/agent_integration_overhead/?tab=mysql
-[2]: /ja/database_monitoring/data_collected/#sensitive-information
+[2]: /ja/containers/cluster_agent/clusterchecks/?tab=datadogoperator
 [3]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_WorkingWithParamGroups.html
 [4]: https://dev.mysql.com/doc/refman/5.7/en/creating-accounts.html
 [5]: https://app.datadoghq.com/account/settings/agent/latest

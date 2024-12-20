@@ -5,7 +5,7 @@ categories:
 - gestión de costes
 - recopilación de logs
 - aprovisionamiento
-custom_kind: integración
+custom_kind: integration
 dependencies: []
 description: Rastrea métricas clave de AWS Trusted Advisor.
 doc_link: https://docs.datadoghq.com/integrations/amazon_trusted_advisor/

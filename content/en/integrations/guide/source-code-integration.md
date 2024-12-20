@@ -221,7 +221,14 @@ If you are using a host, you have two options: using Microsoft SourceLink or con
 {{% /tab %}}
 {{% tab "Node.js" %}}
 
-<div class="alert alert-info">The Node.js client library version 3.21.0 or later is required.</div>
+<div class="alert alert-info">
+  The Node.js client library version 3.21.0 or later is required.
+  </br>
+  </br>
+  Displaying code links and snippets for TypeScript applications requires your Node application to be run with: 
+  </br>
+  <a href="https://nodejs.org/dist/v12.22.12/docs/api/cli.html#cli_enable_source_maps"><code>--enable-source-maps</code></a>.
+</div>
 
 #### Containers
 
@@ -293,6 +300,8 @@ If you are using a host, configure your application with the `DD_TAGS` environme
 
 <div class="alert alert-info">The Java client library version 1.12.0 or later is required.</div>
 
+#### Containers
+
 If you are using Docker containers, you have two options: using Docker or configuring your application with  `DD_GIT_*` environment variables.
 
 ##### Option 1: Docker
@@ -310,6 +319,29 @@ If you are using Serverless, you have two options depending on your serverless a
 ##### Option 1: Datadog Tooling
 
 {{% sci-dd-serverless %}}
+
+##### Option 2: `DD_GIT_*` Environment Variables
+
+{{% sci-dd-git-env-variables %}}
+
+#### Host
+
+If you are using a host, configure your application with `DD_GIT_*` environment variables.
+
+{{% sci-dd-git-env-variables %}}
+
+{{% /tab %}}
+{{% tab "PHP" %}}
+
+<div class="alert alert-info">The PHP client library version 1.2.0 or later is required.</div>
+
+#### Containers
+
+If you are using Docker containers, you have two options: using Docker or configuring your application with  `DD_GIT_*` environment variables.
+
+##### Option 1: Docker
+
+{{% sci-docker %}}
 
 ##### Option 2: `DD_GIT_*` Environment Variables
 
