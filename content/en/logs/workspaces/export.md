@@ -29,7 +29,9 @@ From your workspace:
 
 Saving a cell to a dashboard creates a real-time sync between the cell and every widget it's saved on. Any changes made to an exported dataset are also reflected in the associated dashboards or notebooks. 
 
-From the dashboard or notebook, you have the option of adjusting the columns and customizing widget options. However, you can only change dataset configurations from Log Workspaces.
+From the dashboard or notebook, you have the option of adjusting the columns and customizing widget options. However, You can only change dataset configurations from Log Workspaces. To edit the source, click **Edit in Log Workspaces** from the widget graph editor.
+
+{{< img src="/logs/workspace/export/link_to_workspace_from_dashboard.png" alt="Options in the graph editor to adjust columns and link out to the source Workspace" style="width:100%;" >}}
 
 ## Further reading
 
