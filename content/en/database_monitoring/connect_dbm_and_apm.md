@@ -104,8 +104,8 @@ Update your code to import the `contrib/database/sql` package:
 import (
    "database/sql"
    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer" // 1.x
-   // "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer" // 2.x
    sqltrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/database/sql" // 1.x
+   // "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer" // 2.x
    // sqltrace "github.com/DataDog/dd-trace-go/contrib/database/sql/v2" // 2.x
 )
 ```
@@ -134,8 +134,8 @@ Full example:
 import (
 	"database/sql"
 	"gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer" // 1.x
-   // "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer" // 2.x
    sqltrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/database/sql" // 1.x
+   // "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer" // 2.x
    // sqltrace "github.com/DataDog/dd-trace-go/contrib/database/sql/v2" // 2.x
 )
 

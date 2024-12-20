@@ -449,8 +449,8 @@ import (
     "log"
     "net/http"
     "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/ext" // 1.x
-    // "github.com/DataDog/dd-trace-go/v2/ddtrace/ext" // 2.x
     "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer" // 1.x
+    // "github.com/DataDog/dd-trace-go/v2/ddtrace/ext" // 2.x
     // "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer" // 2.x
 )
 
@@ -476,8 +476,8 @@ import (
     "net/http"
 
     "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/ext" // 1.x
-    // "github.com/DataDog/dd-trace-go/v2/ddtrace/ext" // 2.x
     "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer" // 1.x
+    // "github.com/DataDog/dd-trace-go/v2/ddtrace/ext" // 2.x
     // "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer" // 2.x
 )
 

@@ -32,7 +32,7 @@ You can monitor application security for Go apps running in Docker, Kubernetes, 
 
 1. **Add to your program's go.mod dependencies** the latest version of the Datadog Go library (version 1.53.0 or later):
 
-   ```console
+   ```shell
    $ go get -v -u gopkg.in/DataDog/dd-trace-go.v1 # v1
    # $ go get -v -u github.com/DataDog/dd-trace-go/v2/ddtrace/tracer # v2
    ```

@@ -97,7 +97,7 @@ Next, install the Go tracer. From your `apm-tutorial-golang` directory, run:
 
 {{< code-block lang="shell" >}}
 go get gopkg.in/DataDog/dd-trace-go.v1/ddtrace // 1.x
-go get github.com/DataDog/dd-trace-go/v2/ddtrace // 2.x
+// go get github.com/DataDog/dd-trace-go/v2/ddtrace // 2.x
 {{< /code-block >}}
 
 Now that the tracing library has been added to `go.mod`, enable tracing support.
