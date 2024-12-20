@@ -72,25 +72,6 @@ DdRum.startView(
 DdRum.stopView('<view-key>', { 'custom.bar': 42 }, Date.now());
 ```
 
-#### Automatic tracking
-
-Automatic view tracking is supported for the following modules:
-
-- React Navigation: [@Datadog/mobile-react-navigation][4]
-- React Native Navigation: [@Datadog/mobile-react-native-navigation][5]
-
-In this Datadog example project, View Tracking is achieved through `@datadog/mobile-react-navigation` and is configured using the `NavigationContainer`:
-
-```tsx
-<NavigationContainer
-          ref={navigationRef}
-          onReady={() => {
-            DdRumReactNavigationTracking.startTrackingViews(
-              navigationRef.current,
-            );
-          }}>
-```
-
 ## Usage
 
 ### Initialize the library with application context
@@ -130,7 +111,7 @@ await DdSdkReactNative.initialize(config);
 
 <div class="alert alert-warning">Configuring the session sample rate does not apply to Error Tracking.</div>
 
-To control the data your application sends to Datadog RUM, you can specify a sampling rate for RUM sessions while [initializing the Expo SDK][6]. To set this rate, use the `config.sessionSamplingRate` parameter and specify a percentage between 0 and 100.
+To control the data your application sends to Datadog RUM, you can specify a sampling rate for RUM sessions while [initializing the Expo SDK][4]. To set this rate, use the `config.sessionSamplingRate` parameter and specify a percentage between 0 and 100.
 
 ### Upload source maps on EAS builds
 
@@ -162,11 +143,11 @@ yarn add -D @datadog/datadog-ci
 
 Run `eas secret:create` to set `DATADOG_API_KEY` to your Datadog API key, and `DATADOG_SITE` to the host of your Datadog site (for example, `datadoghq.com`).
 
-For information about tracking Expo crashes, see [Expo Crash Reporting and Error Tracking][7].
+For information about tracking Expo crashes, see [Expo Crash Reporting and Error Tracking][5].
 
 ## Tracking Expo Router screens
 
-If you are using [Expo Router][8], track your screens in your `app/_layout.js` file:
+If you are using [Expo Router][6], track your screens in your `app/_layout.js` file:
 
 ```javascript
 import { useEffect } from 'react';
@@ -192,10 +173,10 @@ If you are using Expo Go, switch to development builds (recommended), or keep us
 
 ### Switch from Expo Go to development builds
 
-Your application's [development builds][9] are debug builds that contain the `expo-dev-client` package.
+Your application's [development builds][7] are debug builds that contain the `expo-dev-client` package.
 
-1. Enable the [custom native code to run][10] with `expo run:android` and `expo run:ios`.
-2. To start using your development application, run `expo install expo-dev-client` and `expo start --dev-client`. This installs and starts the [`expo-dev-client` package][11] to execute the added native code in dev mode.
+1. Enable the [custom native code to run][8] with `expo run:android` and `expo run:ios`.
+2. To start using your development application, run `expo install expo-dev-client` and `expo start --dev-client`. This installs and starts the [`expo-dev-client` package][9] to execute the added native code in dev mode.
 
 ### Develop with Expo Go
 
@@ -287,11 +268,9 @@ config.resourceEventMapper = event => {
 [1]: /real_user_monitoring/
 [2]: /error_tracking/
 [3]: https://github.com/DataDog/dd-sdk-reactnative-examples/tree/main/rum-expo-react-navigation
-[4]: https://www.npmjs.com/package/@datadog/mobile-react-navigation
-[5]: https://www.npmjs.com/package/@datadog/mobile-react-native-navigation
-[6]: /real_user_monitoring/mobile_and_tv_monitoring/setup/expo#initialize-the-library-with-application-context
-[7]: /real_user_monitoring/error_tracking/mobile/expo/
-[8]: https://expo.github.io/router/docs/
-[9]: https://docs.expo.dev/development/introduction/
-[10]: https://docs.expo.dev/workflow/customizing/#releasing-apps-with-custom-native-code-to
-[11]: https://docs.expo.dev/development/getting-started/
+[4]: /real_user_monitoring/mobile_and_tv_monitoring/setup/expo#initialize-the-library-with-application-context
+[5]: /real_user_monitoring/error_tracking/mobile/expo/
+[6]: https://expo.github.io/router/docs/
+[7]: https://docs.expo.dev/development/introduction/
+[8]: https://docs.expo.dev/workflow/customizing/#releasing-apps-with-custom-native-code-to
+[9]: https://docs.expo.dev/development/getting-started/
