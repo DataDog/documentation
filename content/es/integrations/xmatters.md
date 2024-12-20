@@ -32,7 +32,7 @@
 "manifest_version": "2.0.0"
 "name": "xmatters"
 "public_title": "xMatters"
-"short_description": "Utiliza xMatters como canal de notificación en las alertas y eventos de Datadog".
+"short_description": "Utiliza xMatters como canal de notificación en las alertas y eventos de Datadog"
 "supported_os": []
 "tile":
   "changelog": "CHANGELOG.md"
@@ -43,7 +43,7 @@
   - "Category::Notifications"
   - "Offering::Integration"
   "configuration": "README.md#Setup"
-  "description": "Utiliza xMatters como canal de notificación en las alertas y eventos de Datadog".
+  "description": "Utiliza xMatters como canal de notificación en las alertas y eventos de Datadog"
   "media": []
   "overview": "README.md#Overview"
   "support": "README.md#Support"

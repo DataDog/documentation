@@ -3,9 +3,9 @@
 - "languages"
 - "log collection"
 - "tracing"
-"custom_kind": "integración"
+"custom_kind": "integration"
 "dependencies": []
-"description": "Envía métricas personalizadas desde tus aplicaciones de Ruby con las bibliotecas de cliente de Datadog".
+"description": "Envía métricas personalizadas desde tus aplicaciones de Ruby con las bibliotecas de cliente de Datadog."
 "doc_link": "https://docs.datadoghq.com/integrations/ruby/"
 "draft": false
 "further_reading":
@@ -27,7 +27,7 @@
 "manifest_version": "1.0"
 "name": "ruby"
 "public_title": "Integración de Datadog y Ruby"
-"short_description": "Envía métricas personalizadas desde tus aplicaciones de Ruby con las bibliotecas de cliente de Datadog".
+"short_description": "Envía métricas personalizadas desde tus aplicaciones de Ruby con las bibliotecas de cliente de Datadog."
 "version": "1.0"
 ---
 
