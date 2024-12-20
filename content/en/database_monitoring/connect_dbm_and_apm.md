@@ -82,7 +82,7 @@ APM tracer integrations support a *Propagation Mode*, which controls the amount 
     - .NET tracer version 3.3 or greater
 
 \*\*\* Full mode Oracle for Java:
-  - The instrumentation oveerwrites `V$SESSION.ACTION`.
+  - The instrumentation overwrites `V$SESSION.ACTION`.
   - Prerequisite: Java tracer 1.45 or greater
 
 ## Setup
