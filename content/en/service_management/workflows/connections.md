@@ -26,10 +26,13 @@ Workflow actions can be authenticated in two ways:
 ## Integration tile credentials
 
 Credentials and account authentication that you set up in the following Datadog integration tiles automatically propagate to the corresponding actions in Workflow Automation:
+- GitHub
 - Jira
+- Microsoft Teams
+- Opsgenie
 - PagerDuty
 - Slack
-- GitHub
+- Statuspage
 
 Configure the integration tiles by following instructions in [Datadog Integrations][6].
 
