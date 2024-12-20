@@ -159,7 +159,7 @@ See the [Resource changes collection][8] section of the Google Cloud Platform in
 [3]: /integrations/#cat-notification
 [4]: /account_management/teams
 [5]: https://app.datadoghq.com/infrastructure/catalog/configuration
-[6]: /integrations/amazon_config/#resource-change-collection
+[6]: /integrations/amazon_config/#resource-changes-collection
 [7]: https://app.datadoghq.com/integrations
 [8]: /integrations/google_cloud_platform/#resource-changes-collection
 [9]: https://www.datadoghq.com/product-preview/recent-changes-tab/
