@@ -49,7 +49,7 @@ For most use cases, disable the "Require Full Window" setting unless your specif
 
 ## Verify the presence of data
 
-If your monitor's state or status is not what you expect, confirm the behavior of the underlying data source. For a metric monitor, you can use the [history][2] graph to view the data points being pulled in by the metric query. `N/A` groups are not included in monitors while they are visible in dashboard queries. 
+If your monitor's state or status is not what you expect, confirm the behavior of the underlying data source. For a metric monitor, you can use the [history][2] graph to view the data points being pulled in by the metric query. `N/A` groups are not included in monitors, but are visible in dashboard queries. 
 
 ## Alert conditions
 
