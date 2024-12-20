@@ -1,7 +1,5 @@
 ---
 title: Add Custom Metadata with Reference Tables
-
-beta: true
 aliases:
   - /logs/guide/enrichment-tables/
   - /logs/guide/reference-tables/
@@ -54,7 +52,7 @@ Click **New Reference Table +**, then upload a CSV file, name the appropriate co
 
 {{% tab "Amazon S3" %}}
 
-Reference Tables can automatically pull a CSV file from an Amazon S3 bucket to keep your data up to date. The integration looks for changes to the CSV file in S3, and when the file is updated it replaces the Reference Table with the new data. This also enables API updating with the S3 API once the initial Reference Table is configured.
+Reference Tables can automatically pull a CSV file from an Amazon S3 bucket to keep your data up to date. The integration looks for changes to the CSV file in S3, and when the file is updated it replaces the Reference Table with the new data. This also enables API updating with the S3 API once the initial Reference Table is configured. **Note**: Reference Tables are not replaced if the content of the CSV file is unchanged.
 
 To update Reference Tables from S3, Datadog uses the IAM role in your AWS account that you configured for the [AWS integration][1]. If you have not yet created that role, [follow these steps][2] to do so. To allow that role to update your Reference Tables, add the following permission statement to its IAM policies. Be sure to edit the bucket names to match your environment.
 
