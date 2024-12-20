@@ -70,13 +70,7 @@ window.DD_RUM &&
 </details>
 <br/>
 
-[1]: /real_user_monitoring/browser#setup
-{{% /tab %}}
-{{% tab "iOS" %}}
-
-Feature flag tracking is available in the RUM iOS SDK. To start, set up [RUM iOS monitoring][1]. You need the iOS RUM SDK version >= 1.16.0.
-
-[1]: /real_user_monitoring/mobile_and_tv_monitoring/setup/ios/?tab=swiftpackagemanagerspm
+[1]: /real_user_monitoring/browser/setup/
 {{% /tab %}}
 {{% tab "Android" %}}
 
@@ -90,23 +84,29 @@ Feature flag tracking is available for your Flutter applications. To start, set 
 
 [1]: /real_user_monitoring/mobile_and_tv_monitoring/flutter/setup/
 {{% /tab %}}
-{{% tab "React Native" %}}
+{{% tab "iOS" %}}
 
-Feature flag tracking is available for your React Native applications. To start, set up [RUM React Native monitoring][1]. You need the React Native RUM SDK version >= 1.7.0.
+Feature flag tracking is available in the RUM iOS SDK. To start, set up [RUM iOS monitoring][1]. You need the iOS RUM SDK version >= 1.16.0.
 
-[1]: /real_user_monitoring/mobile_and_tv_monitoring/setup/reactnative/
-{{% /tab %}}
-{{% tab "Unity" %}}
-
-Feature flag tracking is available for your Unity applications. To start, set up [RUM Unity monitoring][1].
-
-[1]: /real_user_monitoring/mobile_and_tv_monitoring/setup/unity/
+[1]: /real_user_monitoring/mobile_and_tv_monitoring/ios/setup
 {{% /tab %}}
 {{% tab "Kotlin Multiplatform" %}}
 
 Feature flag tracking is available for your Kotlin Multiplatform applications. To start, set up [RUM Kotlin Multiplatform monitoring][1].
 
-[1]: /real_user_monitoring/mobile_and_tv_monitoring/setup/kotlin-multiplatform/
+[1]: /real_user_monitoring/mobile_and_tv_monitoring/kotlin_multiplatform
+{{% /tab %}}
+{{% tab "React Native" %}}
+
+Feature flag tracking is available for your React Native applications. To start, set up [RUM React Native monitoring][1]. You need the React Native RUM SDK version >= 1.7.0.
+
+[1]: /real_user_monitoring/mobile_and_tv_monitoring/react_native/setup
+{{% /tab %}}
+{{% tab "Unity" %}}
+
+Feature flag tracking is available for your Unity applications. To start, set up [RUM Unity monitoring][1].
+
+[1]: /real_user_monitoring/mobile_and_tv_monitoring/unity/setup
 {{% /tab %}}
 {{< /tabs >}}
 
