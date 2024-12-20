@@ -30,12 +30,10 @@ APM tracer integrations support a *Propagation Mode*, which controls the amount 
 
 | DD_DBM_PROPAGATION_MODE | Postgres  |   MySQL     | SQL Server |  Oracle   |
 |:------------------------|:---------:|:-----------:|:----------:|:---------:|
-| `full`                  | {{< X >}} | {{< X >}} * |    {{< X >}} ** |           |
+| `full`                  | {{< X >}} | {{< X >}} * | {{< X >}}  | {{< X >}} |
 | `service`               | {{< X >}} | {{< X >}}   | {{< X >}}  | {{< X >}} |
 
 \* Full propagation mode on Aurora MySQL requires version 3.
-
-\*\* SQL Server only supports full mode with the Java and .NET tracers.
 
 **Supported application tracers and drivers**
 
