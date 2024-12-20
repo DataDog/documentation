@@ -340,7 +340,7 @@ See [Getting started with Azure Functions][307] for more information.
 ## Advanced configuration
 Refer to the following topics to configure your installation according to your monitoring needs.
 
-### PCI Compliance
+### PCI compliance
 
 <div class="alert alert-warning">
 PCI DSS compliance for APM and Log Management is only available for Datadog organizations in the <a href="/getting_started/site/">US1 site</a>.
