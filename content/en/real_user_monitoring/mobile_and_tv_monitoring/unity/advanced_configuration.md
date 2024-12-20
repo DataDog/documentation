@@ -30,9 +30,10 @@ If you have not set up the Datadog Unity SDK for RUM yet, follow the [in-app set
 Send data to a custom endpoint instead of the default Datadog endpoint. This is useful for proxying data through a custom server.
 
 `SDK Verbosity`
+: Optional<br/>
 **Type**: Enum<br/>
 **Default**: `Warn`<br/>
-The level of debugging information the Datadog SDK should output. Higher levels will output more information.
+The level of debugging information the Datadog SDK should output. Higher levels will output more information. This option is helpful for getting debugging information from the SDK when something is not working as expected, or removing the SDK-related debugging entries from console logs.
 
 `Telemetry Sample Rate`
 : Optional<br/>
