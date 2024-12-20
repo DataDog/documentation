@@ -25,7 +25,7 @@ further_reading:
 
 Reference Tables allow you to combine metadata with information already in Datadog. You can define new entities like customer details, service names and information, or IP addresses by uploading a CSV file containing a table of information. The entities are represented by a primary key in a Reference Table and the associated metadata. 
 
-{{< img src="integrations/guide/reference-tables/reference-table.png" alt="A reference table with data populated in the columns for org id, org name, parent org, account owner, and csm" style="width:100%;">}}
+{{< img src="reference_tables/reference-table.png" alt="A reference table with data populated in the columns for org id, org name, parent org, account owner, and csm" style="width:100%;">}}
 
 ## Validation rules
 
@@ -47,7 +47,7 @@ Reference Table names and column headers are validated using the following namin
 
 Click **New Reference Table +**, then upload a CSV file, name the appropriate columns, and define the primary key for lookups.
 
-{{< img src="integrations/guide/reference-tables/enrichment-table-setup.png" alt="The Define the Schema section showing a table with org_id marked as the primary key and columns with data for org id, org name, parent org, account owner, and csm " style="width:100%;">}}
+{{< img src="reference_tables/enrichment-table-setup.png" alt="The Define the Schema section showing a table with org_id marked as the primary key and columns with data for org id, org name, parent org, account owner, and csm " style="width:100%;">}}
 
 **Note**: The manual CSV upload method supports files up to 4MB.
 
@@ -84,7 +84,7 @@ To update Reference Tables from S3, Datadog uses the IAM role in your AWS accoun
 
 Click **New Reference Table +**, then add a name, select Amazon S3, fill out all fields, click import, and define the primary key for lookups.
 
-{{< img src="integrations/guide/reference-tables/configure-s3-reference-table.png" alt="The upload your data section with the Amazon S3 tile selected and data filled in for AWS Account, Bucket, and Path" style="width:100%;">}}
+{{< img src="reference_tables/configure-s3-reference-table.png" alt="The upload your data section with the Amazon S3 tile selected and data filled in for AWS Account, Bucket, and Path" style="width:100%;">}}
 
 **Note**: The upload from an S3 bucket method supports files up to 200MB.
 
@@ -100,11 +100,11 @@ Click **New Reference Table +**, then add a name, select Amazon S3, fill out all
 4. Input and select the **Storage Blob Data Reader** Role. The [Storage Blob Data Reader role][3] allows Datadog to read and list storage containers and blobs.
 5. In the **Members** tab, click **+ Select members**. Select the app registration you created in Step 1.
    
-   {{< img src="integrations/guide/reference-tables/add_members.png" alt="The Members section in the Azure Portal where a member is selected and data filled in for the Name, Object ID, and Type" style="width:85%;">}}
+   {{< img src="reference_tables/add_members.png" alt="The Members section in the Azure Portal where a member is selected and data filled in for the Name, Object ID, and Type" style="width:85%;">}}
 
 After reviewing and assigning the role, you can import into Reference Tables from Azure. It may take a few minutes for your Azure configuration to update in Datadog.
 
-{{< img src="integrations/guide/reference-tables/azure_storage.png" alt="An Azure Storage tile in the Upload or import data section of a new reference table workflow" style="width:80%;">}}
+{{< img src="reference_tables/azure_storage.png" alt="An Azure Storage tile in the Upload or import data section of a new reference table workflow" style="width:80%;">}}
 
 For more information, see the [Azure integration documentation][4]. 
 
@@ -130,11 +130,11 @@ For more information, see the [Azure integration documentation][4].
 1. In the window that appears, under the "New principals" field, enter the service account email that you created and added to the GCP tile in Step 1. Under "Assign roles", select the **Storage Object Viewer** role. Click **Save**.
 
 
-{{< img src="integrations/guide/reference-tables/grant_access.png" alt="Google Cloud console showing the configuration to grant access" style="width:100%;" >}}
+{{< img src="reference_tables/grant_access.png" alt="Google Cloud console showing the configuration to grant access" style="width:100%;" >}}
 
 After reviewing and assigning the role, you can import into Reference Tables from Google Cloud. It may take a few minutes for your configuration to update in Datadog.
 
-{{< img src="integrations/guide/reference-tables/gcp_upload_import_ui.png" alt="Select GCP Storage in Upload or import data when creating a new reference table" style="width:100%;" >}}
+{{< img src="reference_tables/gcp_upload_import_ui.png" alt="Select GCP Storage in Upload or import data when creating a new reference table" style="width:100%;" >}}
 
 **Note**: The upload from cloud object storage supports files up to 200MB.
 
