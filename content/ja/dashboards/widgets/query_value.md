@@ -42,7 +42,7 @@ widget_type: query_value
 
 条件付きルールを使用して、Query Value ウィジェットの背景をカスタマイズできます。背景色、フォント色、またはカスタムイメージを追加することが可能です。カスタムイメージを使用する場合は、内部画像を参照するクロスオリジンリクエストをサポートするために内部サーバーを更新する必要があります。
 
-{{< img src="dashboards/widgets/query_value/visual_formatting_rules_custom_img.png" alt=“カスタムイメージの背景を持つ Query Value ウィジェットのビジュアルフォーマットルール" style="width:90%;" >}}
+{{< img src="dashboards/widgets/query_value/visual_formatting_rules_custom_img.png" alt="カスタムイメージの背景を持つ Query Value ウィジェットのビジュアルフォーマットルール" style="width:90%;" >}}
 
 #### コンテキストリンク
 
