@@ -15,7 +15,7 @@
       - "gitlab.process_max_fds"
       - "gitlab.ruby.process_start_time_seconds"
       "metadata_path": "metadata.csv"
-      "prefix": "gitlab".
+      "prefix": "gitlab."
     "process_signatures":
     - "gitlab-kas"
     - "gitlab-workhorse"
@@ -35,7 +35,7 @@
 - "issue tracking"
 - "log collection"
 - "source control"
-"custom_kind": "integración"
+"custom_kind": "integration"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/gitlab/README.md"
 "display_on_public_website": true
@@ -48,7 +48,7 @@
 "manifest_version": "2.0.0"
 "name": "gitlab"
 "public_title": "GitLab"
-"short_description": "Rastrea todas tus métricas de GitLab con Datadog".
+"short_description": "Track all your GitLab metrics with Datadog."
 "supported_os":
 - "linux"
 - "windows"
@@ -56,22 +56,22 @@
 "tile":
   "changelog": "CHANGELOG.md"
   "classifier_tags":
-  - "Category::Colaboración"
-  - "Category::Herramientas para desarrolladores"
-  - "Category::Rastreo de problemas"
-  - "Category::Recopilación de logs"
-  - "Category::Control de orígenes"
+  - "Category::Collaboration"
+  - "Category::Developer Tools"
+  - "Category::Issue Tracking"
+  - "Category::Log Collection"
+  - "Category::Source Control"
   - "Supported OS::Linux"
   - "Supported OS::Windows"
   - "Supported OS::macOS"
-  - "Submitted Data Type::Métricas"
+  - "Submitted Data Type::Metrics"
   - "Submitted Data Type::Logs"
-  - "Offering::Integración"
-  "configuration": "README.md#Configuración"
-  "description": "Rastrea todas tus métricas de GitLab con Datadog".
+  - "Offering::Integration"
+  "configuration": "README.md#Setup"
+  "description": "Track all your GitLab metrics with Datadog."
   "media": []
-  "overview": "README.md#Información general"
-  "support": "README.md#Soporte"
+  "overview": "README.md#Overview"
+  "support": "README.md#Support"
   "title": "GitLab"
 ---
 

@@ -4,9 +4,9 @@
 - "incidents"
 - "issue tracking"
 - "notifications"
-"custom_kind": "integración"
+"custom_kind": "integration"
 "dependencies": []
-"description": "Haz que tus alertas de Datadog generen y actualicen automáticamente los tiques".
+"description": "Haz que tus alertas de Datadog generen y actualicen automáticamente los tiques."
 "doc_link": "https://docs.datadoghq.com/integrations/servicenow/"
 "draft": false
 "further_reading":
@@ -25,7 +25,7 @@
 "manifest_version": "1.0"
 "name": "servicenow"
 "public_title": "Integración de Datadog y ServiceNow"
-"short_description": "Haz que tus alertas de Datadog generen y actualicen automáticamente los tiques".
+"short_description": "Haz que tus alertas de Datadog generen y actualicen automáticamente los tiques."
 "team": "integraciones web"
 "version": "1.0"
 ---

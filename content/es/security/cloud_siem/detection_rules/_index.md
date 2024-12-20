@@ -91,7 +91,7 @@ La unión de logs que abarcan un marco temporal puede aumentar la confianza o la
 Las reglas de detección unen los logs mediante un valor `group by`. Los valores de `group by` suelen ser entidades (por ejemplo, dirección IP o usuario), pero pueden ser cualquier atributo.
 
 [1]: /es/logs/search_syntax/
-{{< partial name="whats-next/whats-next.html" >}}
+{{% /tab %}}
 
 {{% tab "Nuevo valor" %}}
 
@@ -112,7 +112,7 @@ Por ejemplo, crea una consulta para la autenticación correcta de usuarios y est
 También puedes identificar usuarios y entidades con varios valores en una misma consulta. Por ejemplo, si quieres detectar cuándo un usuario inicia sesión desde un nuevo dispositivo y desde un país desde el que nunca antes había iniciado sesión, añade `device_id` y `country_name` a **Detect new value** (Detectar nuevo valor).
 
 [1]: /es/logs/search_syntax/
-{{< partial name="whats-next/whats-next.html" >}}
+{{% /tab %}}
 
 {{% tab "Anomalía" %}}
 
@@ -126,7 +126,7 @@ La detección de anomalías inspecciona cómo se ha comportado el atributo `grou
 
 **Nota**: La consulta se aplica a todas las ingestas de logs.
 
-{{< partial name="whats-next/whats-next.html" >}}
+{{% /tab %}}
 
 {{% tab "Impossible Travel" %}}
 
@@ -152,7 +152,7 @@ No hagas clic en la casilla si deseas que Datadog detecte todos los comportamien
 
 [1]: /es/logs/search_syntax/
 [2]: /es/logs/log_configuration/processors#geoip-parser
-{{< partial name="whats-next/whats-next.html" >}}
+{{% /tab %}}
 
 {{% tab "Third Party" %}}
 
@@ -166,6 +166,8 @@ Haz clic en **Add Query** (Añadir consulta) para añadir consultas adicionales.
 
 [1]: /es/logs/search_syntax/
 Accede a dashboards preconfigurados
+{{% /tab %}}
+{{< /tabs >}}
 
 #### Filtrar logs a partir de tablas de referencia
 
@@ -234,7 +236,7 @@ Haz clic en **Add case** (Añadir caso) para añadir casos adicionales.
 
 **Nota**: El valor de `evaluation window` debe ser inferior o igual a `keep alive` y `maximum signal duration`.
 
-{{< partial name="whats-next/whats-next.html" >}}
+{{% /tab %}}
 
 {{% tab "Nuevo valor" %}}
 
@@ -254,7 +256,7 @@ Establece una duración máxima para seguir actualizando una señal si se detect
 
 **Nota**: Si se requiere una señal única para cada nuevo valor, configura este valor en `0 minutes`.
 
-{{< partial name="whats-next/whats-next.html" >}}
+{{% /tab %}}
 
 {{% tab "Anomalía" %}}
 
@@ -270,7 +272,7 @@ Una vez que se genera una señal, ésta permanece "abierta" si los datos siguen 
 
 Una señal se "cierra" una vez que el tiempo supera la duración máxima de la señal, independientemente de que la anomalía siga siendo anómala o no. Este tiempo se calcula a partir de la primera marca temporal vista.
 
-{{< partial name="whats-next/whats-next.html" >}}
+{{% /tab %}}
 
 {{% tab "Impossible Travel" %}}
 
@@ -284,7 +286,7 @@ El método de detección de Impossible Travel no requiere establecer un caso de 
 
 {{% security-rule-time-windows %}}
 
-{{< partial name="whats-next/whats-next.html" >}}
+{{% /tab %}}
 
 {{% tab "Third Party" %}}
 
@@ -303,6 +305,9 @@ Un caso de regla contiene operaciones lógicas (`>, >=, &&, ||`) para determinar
 Haz clic en **Add case** (Añadir caso) para añadir casos adicionales.
 
 Accede a dashboards preconfigurados
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ### Disminución de la gravedad de un entorno de no producción
 
@@ -345,6 +350,8 @@ El proceso de obsolescencia de las reglas es el siguiente:
 
 ## Configurar tests de API y tests de API multupaso
 Grabar pruebas de aplicaciones móviles
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/security/configuration/siem/rules
 [2]: /es/security/detection_rules/#clone-a-rule

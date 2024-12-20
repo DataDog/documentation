@@ -3,19 +3,19 @@
 - "languages"
 - "log collection"
 - "tracing"
-"custom_kind": "integración"
+"custom_kind": "integration"
 "dependencies": []
-"description": "Recopila métricas, trazas, logs y datos de perfil de tus aplicaciones PHP".
+"description": "Recopila métricas, trazas, logs y datos de perfil de tus aplicaciones PHP."
 "doc_link": "https://docs.datadoghq.com/integrations/php/"
 "draft": false
 "further_reading":
 - "link": "https://www.datadoghq.com/blog/monitor-php-performance/"
   "tag": "Blog"
-  "text": "Monitorización de PHP con Datadog APM y rastreo distribuido".
+  "text": "Monitorización de PHP con Datadog APM y rastreo distribuido."
 - "link": "https://www.datadoghq.com/blog/php-logging-guide/"
   "tag": "Blog"
-  "text": "Cómo recopilar, personalizar y analizar logs de PHP".
-"git_integration_title": "PHP"
+  "text": "Cómo recopilar, personalizar y analizar logs de PHP."
+"git_integration_title": "php"
 "has_logo": true
 "integration_id": "php"
 "integration_title": "PHP"
@@ -24,7 +24,7 @@
 "manifest_version": "1.0"
 "name": "php"
 "public_title": "Integración de Datadog y PHP"
-"short_description": "Recopila métricas, trazas, logs y datos de perfil de tus aplicaciones PHP".
+"short_description": "Recopila métricas, trazas, logs y datos de perfil de tus aplicaciones PHP."
 "version": "1.0"
 ---
 
