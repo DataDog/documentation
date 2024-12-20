@@ -3,9 +3,9 @@ title: Troubleshooting Cloud Security Management Vulnerabilities
 aliases:
   - /security/vulnerabilities/troubleshooting/
 further_reading:
-- link: "/security/cloud_security_management/setup/csm_pro/?tab=aws#configure-the-agent-for-containers"
+- link: "/infrastructure/containers/container_images/#enable-sbom-collection"
   tag: "Documentation"
-  text: "Setting up container image vulnerabilities"
+  text: "Enable SBOM collection in CSM Vulnerabilities"
 - link: "/security/cloud_security_management/setup/csm_enterprise/?tab=aws#hosts"
   tag: "Documentation"
   text: "Setting up host vulnerabilities"
