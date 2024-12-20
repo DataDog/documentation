@@ -92,9 +92,7 @@ instances:
     schemas_collection:
       enabled: true
     # Optional: enable metric collection for indexes
-    database_metrics:
-      index_usage_metrics:
-        enabled: true
+    include_index_usage_metrics: true
 # This instance only collects schemas and index metrics from the `users` database
   - dbm: true
         host: 'shopist-prod,1433'
@@ -105,9 +103,7 @@ instances:
     database: users
     schemas_collection:
       enabled: true
-    database_metrics:
-      index_usage_metrics:
-        enabled: true
+    include_index_usage_metrics: true
 ```
 
 ### One Agent connecting to multiple hosts
