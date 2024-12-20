@@ -5,6 +5,7 @@ beta: true
 aliases:
   - /logs/guide/enrichment-tables/
   - /logs/guide/reference-tables/
+  - /integrations/guide/reference-tables
 further_reading:
 - link: "/logs/log_configuration/processors"
   tag: "Documentation"
