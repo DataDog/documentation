@@ -3470,11 +3470,6 @@ menu:
       identifier: endpoint_observability
       parent: tracing
       weight: 8
-    - name: Discover Endpoints
-      url: /service_catalog/endpoints/discover_endpoints
-      identifier: discover_endpoints
-      parent: endpoint_observability
-      weight: 801
     - name: Monitor Endpoints
       url: /service_catalog/endpoints/monitor_endpoints
       identifier: monitor_endpoints
@@ -3485,9 +3480,6 @@ menu:
       identifier: explore_endpoints
       parent: endpoint_observability
       weight: 803
-      
-      
-
     - name: Dynamic Instrumentation
       url: dynamic_instrumentation/
       identifier: dyninst
