@@ -26,6 +26,23 @@ The Go Datadog Trace Library has a [version support policy][2] defined for Go ve
   * [Automatically at compile time using `orchestrion`][78]
   * [Manually add and initialize the Datadog Go tracer][77]
 
+### Go Tracer Support
+
+The Go Tracer v2 is in Preview! See <a href="/tracing/trace_collection/custom_instrumentation/go/migration">the migration guide</a> to upgrade. Support for each version of the Go Tracer is as follows:
+
+| Version	| Preview	   | General Availability (GA)	| Maintenance	| End-of-life (EOL) |
+|---------|------------|----------------------------|-------------|-------------------|
+| v2      | 2024-11-27 | 2025-02-05 (projected)     | TBD         | TBD               |
+| v1      | X          | 2019-02-16                 | 2025-02-05  | 2025-12-31        |
+
+| Level	                    |  Support provided                                       |
+|---------------------------|---------------------------------------------------------|
+| Unsupported	              | No implementation. Contact [Datadog support][2] for special requests. |
+| Preview	                  | Initial implementation. May not yet contain all features. Support for new features and bug and security fixes are provided on a best-effort basis.|
+| General Availability (GA)	| Full implementation of all features. Full support for new features and bug and security fixes.|
+| Maintenance	              | Full implementation of existing features. Does not receive new features. Support for bug and security fixes only.|
+| End-of-life (EOL)	        | No support. |
+
 ### Integrations
 
 #### Framework compatibility
