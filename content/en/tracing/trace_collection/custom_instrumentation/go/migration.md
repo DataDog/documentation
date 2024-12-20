@@ -19,6 +19,8 @@ Version 2 of the Go tracer introduces significant API improvements:
 - Isolates integrations to prevent false positives from security scanners
 - Enforces library patterns to prevent misuse
 
+Following the full release of v2, versions v1.x will receive decreased support. Bug fixes, security fixes, and basic maintenance remains supported in v1 until the end of 2025. After this point, maintenace for v1 is dropped. To receive new features, upgrade your Go Tracer to v2.
+
 To simplify the migration process, Datadog provides a migration tool that handles essential code updates automatically.
 
 ## Migration tool features
