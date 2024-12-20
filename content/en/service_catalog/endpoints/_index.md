@@ -31,7 +31,7 @@ Monitor your mission-critical, API-driven business features, standardize and val
 
 ## Use cases
 
-The endpoints list combines data from across Datadog to provide opinionated workflows so you can explore and monitor your APIs from different sources in one unified view. providing:
+The endpoints list combines data from across Datadog to provide opinionated workflows so you can explore and monitor your APIs from different sources in one unified view. It provides:
 
 - **Automated discoverability** with one inventory for all public, private, and partner APIs, where _endpoints_ are the organizing principle.
 - **Correlation of and direct linking to API metadata** from different Datadog sources.
