@@ -1,0 +1,13 @@
+---
+title: Guides
+disable_toc: false
+aliases:
+- /path-to-old-doc/
+---
+
+
+
+{{< whatsnext desc="Software Composition Analysis" >}}
+    {{< nextlink href="/security/code_security/guides/automate_risk_reduction_sca/" >}}Automate open source risk reduction with Datadog SCA{{< /nextlink >}}
+
+{{< /whatsnext >}}

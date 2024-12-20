@@ -375,7 +375,7 @@
           globs:
           - rulesets/**/*.md
           options:
-            dest_dir: '/code_analysis/static_analysis_rules/'
+            dest_dir: 'security/code_security/static_analysis/static_analysis_rules/'
             path_to_remove: 'rulesets/'
             front_matters:
               disable_edit: true
