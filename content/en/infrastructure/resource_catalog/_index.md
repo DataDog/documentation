@@ -148,7 +148,7 @@ To collect resource configuration changes, enable **Resource Collection** for yo
 
 #### Google Cloud Platform
 
-See the [Resource change collection][8] section of the Google Cloud Platform integration page for instructions on forwarding change events through a Pub/Sub topic and subscription.
+See the [Resource changes collection][8] section of the Google Cloud Platform integration page for instructions on forwarding change events through a Pub/Sub topic and subscription.
 
 ## Further reading
 
@@ -159,9 +159,9 @@ See the [Resource change collection][8] section of the Google Cloud Platform int
 [3]: /integrations/#cat-notification
 [4]: /account_management/teams
 [5]: https://app.datadoghq.com/infrastructure/catalog/configuration
-[6]: /integrations/amazon_config/#resource-change-collection
+[6]: /integrations/amazon_config/#resource-changes-collection
 [7]: https://app.datadoghq.com/integrations
-[8]: /integrations/google_cloud_platform/#resource-change-collection
+[8]: /integrations/google_cloud_platform/#resource-changes-collection
 [9]: https://www.datadoghq.com/product-preview/recent-changes-tab/
 [10]: https://docs.datadoghq.com/security/cloud_security_management/misconfigurations/
 [11]: https://docs.datadoghq.com/security/threats/
