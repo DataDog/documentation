@@ -15,7 +15,7 @@ aliases:
 
 ## Exploring endpoints
 
-The [API Catalog][1] shows all endpoints in all environments in your Datadog organization. The performance data shown for each endpoint is scoped to the environment and time frame you select. You can browse and ask questions by querying different properties and metrics for more precise results, and you can filter using facets and tags.
+The [Endpoints list][1] shows all endpoints in all environments in your Datadog organization. The performance data shown for each endpoint is scoped to the environment and time frame you select. You can browse and ask questions by querying different properties and metrics for more precise results, and you can filter using facets and tags.
 
 - **Sort by a column in the table**: Click a header to sort by. For example, click **P99** to see endpoints with the highest 99th percentile for latency. **Note**: the **P99** column may not be displayed by default.
 
@@ -33,8 +33,8 @@ The following example shows how to scope the displayed data to a specific enviro
 
 When exploring an endpoint, getting a higher resolution view of the API endpoint details is helpful.
 
-Use the filtering, sorting, and searching options in API Catalog to find endpoints of interest.
-Click an endpoint to view its details page. Here you can see performance, errors, issues, deployments, monitors, ownership, a dependency map, and metadata information in one central location. From the details page, you can also add custom tags to the endpoint. You can also investigate the various types of telemetry using links to other areas of Datadog. 
+Use the filtering, sorting, and searching options in the endpoints list to find endpoints of interest.
+Click an endpoint to view its details resource page. Here you can see performance, errors, issues, deployments, monitors, ownership, a dependency map, and metadata information in one central location. From the details page, you can also add custom tags to the endpoint. You can also investigate the various types of telemetry using links to other areas of Datadog. 
 
 In the details page, you can:
 - Look up a specific endpoint by path (for example, `/checkout`) when it shows a high error rate and a high request count.
@@ -42,8 +42,6 @@ In the details page, you can:
 - Navigate to related telemetry like traces, logs, and errors.
 
 {{< img src="tracing/api_catalog/api-catalog-endpoint-details-pivot-to-traces3.mp4" alt="Click into an endpoint to see Errors graph and dependency graph. Click through to related traces to investigate." video="true" >}}
-
-The graphs on the details page are initially scoped to the same settings as the **Explorer** page. You can change those settings on the details page to suit your investigation by using the time frame selector and other scope dropdown menus. 
 
 ## Further reading
 

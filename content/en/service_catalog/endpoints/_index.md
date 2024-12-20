@@ -21,21 +21,17 @@ aliases:
     - /tracing/api_catalog/
 ---
 
-<div class="alert alert-warning"><h5 class="card-title text-black mt-0 mb-1">The API Catalog features are migrating to Service Catalog</h5>
-We are making significant improvements to the way API endpoints are represented in Datadog. The functionality described on this page is moving to the <a href="https://docs.datadoghq.com/service_catalog">Service Catalog</a>. All core capabilities will be available in the Service Catalog after the migration is done, at which point API Catalog will be deprecated.
-</div>
-
 {{< img src="tracing/api_catalog/api-catalog-catalog-api-details.png" alt="API Catalog showing a list of endpoints for an API called Checkout, along with information about ownership, service and environment, tags, and links to related monitors, tests, and performance data." style="width:100%;" >}}
 
 ## Overview
 
-API Catalog provides a single view and entry point for exploring the performance, reliability, and ownership of all your API endpoints in one place. It's a central place where your whole company can find up-to-date information about the characteristics of the APIs used by internal services (private APIs) and external users (publicly exposed APIs). 
+The endpoints list in the Service Catalog provides a single view and entry point for exploring the performance, reliability, and ownership of all your API endpoints in one place. It's a central place where your whole company can find up-to-date information about the characteristics of the APIs used by internal services (private APIs) and external users (publicly exposed APIs). 
 
 Monitor your mission-critical, API-driven business features, standardize and validate API performance expectations, and alert when performance deviates from them.
 
 ## Use cases
 
-API Catalog combines data from across Datadog to provide opinionated workflows so you can explore and monitor your APIs from different sources in one unified view. API Catalog provides:
+The endpoints list combines data from across Datadog to provide opinionated workflows so you can explore and monitor your APIs from different sources in one unified view. It provides:
 
 - **Automated discoverability** with one inventory for all public, private, and partner APIs, where _endpoints_ are the organizing principle.
 - **Correlation of and direct linking to API metadata** from different Datadog sources.
@@ -46,13 +42,7 @@ API Catalog combines data from across Datadog to provide opinionated workflows s
 
 ## Getting started
 
-If you're already monitoring the performance of your services using [Datadog APM][8], API Catalog automatically detects endpoints in your instrumented services.
-
-### Exploring APIs
-
-Use the API Catalog Explorer page to navigate through all the endpoints.
-
-See [Exploring APIs][3] for more information.
+If you're already monitoring the performance of your http services using [Datadog APM][8], the endpoints list will automatically be filled with endpoints from your instrumented services.
 
 ### Assigning owners
 
@@ -92,8 +82,8 @@ API
 
 API endpoint
 : The address of a resource (URL) of a server or a service that implements the set of rules defined in the API, often through an HTTP, RESTful API interface. The API endpoint is responsible for making the API call response.<br /><br/>
-API Catalog displays API endpoints as the HTTP method (for example, `GET`), the URL path (for example, `/payment/{shop_id}/purchase`), and the name of the service this resource serves (for example, `Payments`).<br /><br/>
-API Catalog only supports **HTTP** endpoints. 
+The endpoints list displays API endpoints as the HTTP method (for example, `GET`), the URL path (for example, `/payment/{shop_id}/purchase`), and the name of the service this resource serves (for example, `Payments`).<br /><br/>
+The endpoints list only supports **HTTP** endpoints. 
 
 Public APIs
 : Customer-facing API endpoints that are accessible from the internet.
