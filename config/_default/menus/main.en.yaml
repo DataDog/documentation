@@ -839,9 +839,9 @@ menu:
       url: developers/integrations/create-an-integration-dashboard
       parent: dev_tools_integrations
       weight: 407
-    - name: Create a Recommended Monitor
-      identifier: dev_tools_integrations_recommended_monitor
-      url: developers/integrations/create-an-integration-recommended-monitor
+    - name: Create a Monitor Template
+      identifier: dev_tools_integrations_monitor_template
+      url: developers/integrations/create-an-integration-monitor-template
       parent: dev_tools_integrations
       weight: 408
     - name: Create a Cloud SIEM Detection Rule
@@ -1421,10 +1421,10 @@ menu:
       parent: alerting
       identifier: monitor_configuration
       weight: 1
-    - name: Recommended Monitors
-      url: monitors/recommended/
+    - name: Monitor Templates
+      url: monitors/templates/
       parent: alerting
-      identifier: monitor_recommended
+      identifier: monitor_templates
       weight: 2
     - name: Monitor Types
       url: monitors/types/
