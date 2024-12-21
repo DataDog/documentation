@@ -6,7 +6,29 @@ further_reading:
 title: トレーサーデバッグログ
 ---
 
-## デバッグモードを有効にする
+## 自動化されたデバッグログ収集
+
+<div class="alert alert-warning">自動化されたデバッグログは、Java、.NET、Node.js、Python でサポートされています。他の言語の場合は、代わりに<a href="/tracing/troubleshooting/tracer_debug_logs/#manual-debug-log-collection">手動でのデバッグログ収集</a>をご利用ください。</div>
+
+フレアを使用すると、機密データを除去したうえで、必要なトラブルシューティング情報 (レーサーログを含む) を Datadog サポートチームに送信できます。これは、高い CPU 使用率やメモリ使用率、スパンの欠落などの問題をトラブルシューティングする際に有用です。
+
+### 前提条件
+
+- Datadog サイトからフレアを送信するには、Agent で [Fleet Automation][4] と [Remote Configuration][5] を有効にしてください。
+- 対応するトレーサーバージョンが必要です。
+  - Java: `1.26.0` 以上
+  - Python: `2.11.0` 以上
+  - Node.js: `5.15.0` 以上または `4.39.0` 以上
+  - .NET: `2.48.0` 以上
+
+### フレアの送信
+
+{{% remote-flare %}}
+例:
+
+{{< img src="agent/fleet_automation/fleet-automation-flare-agent-and-tracer-debuglevel.png" alt="Send Ticket ボタンは、既存または新規のサポートチケットにフレアを送信するためのフォームを起動します" style="width:60%;" >}}
+
+## 手動でのデバッグログ収集
 
 Datadog デバッグ設定を使用して、問題を診断したり、トレースデータを監査したりできます。ロガーに送信されるイベントの数が増えるため、実稼働システムでデバッグモードを有効にすることはお勧めできません。デバッグモードはデバッグ目的でのみ使用してください。
 
@@ -277,7 +299,8 @@ cmake --install .build
 
 ## デバッグログを確認する
 
-トレーサーのデバッグモードが有効になっている場合、トレーサー固有のログメッセージはトレーサーの初期化方法およびトレーサーが Agent に送信されたかを報告します。**このログは、フレアでは Datadog Agent に送信できません。また、ロギングコンフィギュレーションによっては別のパスに保存されます**。以下は、ご使用のログファイルに表示されるログの例になります。
+
+トレーサーのデバッグモードを有効にすると、トレーサー固有のログメッセージによって、初期化状況やトレースが Agent へ送信されたかを確認できます。デバッグログはログ設定に応じて別のパスに格納されます。アプリケーションレベルのトレーサー情報を有効にすると、デバッグログは[対応する言語](#prerequisites)向けのフレアにも送信されます。以下は、ログファイルに出力されうるログメッセージの例です。
 
 理解できないエラーがある場合、またはトレースが Datadog にフラッシュされたと報告されたものの　Datadog UI に表示されない場合は、[Datadog サポートに連絡][1]し、[フレア][2] で関連するログエントリを入力します。
 
@@ -481,3 +504,6 @@ YYYY-MM-DD HH:MM:SS.<integer> +00:00 [ERR] An error occurred while sending trace
 
 [1]: /ja/help/
 [2]: /ja/agent/troubleshooting/#send-a-flare
+[3]: /ja/agent/remote_config
+[4]: /ja/agent/fleet_automation/
+[5]: /ja/agent/remote_config#enabling-remote-configuration

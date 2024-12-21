@@ -4,6 +4,9 @@ algolia:
   - 高度なログフィルター
 description: Datadog Agent を使用してログを収集し、Datadog に送信
 further_reading:
+- link: /logs/guide/getting-started-lwl/
+  tag: ドキュメント
+  text: Logging without LimitsTM 入門
 - link: /logs/guide/how-to-set-up-only-logs/
   tag: ドキュメント
   text: ログ収集専用として Datadog Agent を使用する
@@ -19,9 +22,6 @@ further_reading:
 - link: /logs/explorer/
   tag: ドキュメント
   text: ログの調査方法
-- link: /logs/logging_without_limits/
-  tag: ドキュメント
-  text: Logging without Limits*
 - link: /glossary/#tail
   tag: 用語集
   text: 用語集の "tail" の項目
@@ -260,7 +260,7 @@ spec:
 ## ログの機密データのスクラビング
 
 {{< callout url="https://www.datadoghq.com/private-beta/sensitive-data-scanner-using-agent-in-your-premises/" >}}
-  Agent を使用した Sensitive Data Scanner は非公開ベータ版です。詳細は<a href="https://www.datadoghq.com/blog/sensitive-data-scanner-using-the-datadog-agent/">ブログ記事</a>と<a href="https://docs.datadoghq.com/sensitive_data_scanner/">ドキュメント</a>をご覧ください。アクセスをリクエストするには、このフォームに記入してください。
+  Agent を使用した Sensitive Data Scanner はプレビュー版です。詳細は<a href="https://www.datadoghq.com/blog/sensitive-data-scanner-using-the-datadog-agent/">ブログ記事</a>と<a href="https://docs.datadoghq.com/sensitive_data_scanner/">ドキュメント</a>をご覧ください。アクセスをリクエストするには、このフォームに記入してください。
 {{< /callout >}}
 
 編集が必要な機密データがログに含まれている場合は、機密要素をスクラビングするように Datadog Agent を構成します。それには、構成ファイルで `log_processing_rules` パラメーターを使用して、type に `mask_sequences` を指定します。

@@ -88,6 +88,101 @@ Agent の構成ファイルに機密情報がプレーンテキストで格納�
 
 詳細については、[秘密情報管理][18]のドキュメントを参照してください。
 
+## テレメトリーの収集
+
+{{< site-region region="gov" >}}
+
+非政府サイト上の Agent は、Datadog Agent に関する環境情報、パフォーマンス情報、および機能使用状況の情報を収集します。Agent が政府サイトを検出した場合、または [Datadog Agent FIPS Proxy][1] が使用されている場合、Agent はこのテレメトリー収集を自動的に無効化します。そのような検出が不可能な場合 (例えば、プロキシを使用している場合)、Agent のテレメトリーは送信されますが、Datadog のインテークで即座に破棄されます。そもそもこのデータが送信されること自体を避けるために、Datadog は Agent コンフィギュレーションファイルで `agent_telemetry` 設定を更新し、明示的に Agent のテレメトリーを無効化することを推奨しています。以下はその例です。
+
+{{< tabs >}}
+{{% tab "datadog.yaml" %}}
+
+```yaml
+agent_telemetry:
+  enabled: false
+```
+{{% /tab %}}
+{{% tab "環境変数" %}}
+
+```bash
+DD_AGENT_TELEMETRY_ENABLED=false
+```
+{{% /tab %}}
+{{< /tabs >}}
+[1]: https://docs.datadoghq.com/ja/agent/configuration/agent-fips-proxy/?tab=hostorvm&site=gov
+{{< /site-region >}}
+{{< site-region region="us,us3,us5,eu,ap1" >}}
+Datadog は、Datadog Agent に関する環境情報、パフォーマンス情報、および機能使用状況の情報を収集する場合があります。これには、Datadog Agent の診断ログや、難読化されたスタックトレースを含むクラッシュダンプが含まれ、Datadog Agent のサポートおよびさらなる改善に役立ちます。
+
+このテレメトリー収集は、以下の例のように Agent コンフィギュレーションファイルで `agent_telemetry` 設定を更新することで無効化できます。
+{{< tabs >}}
+{{% tab "datadog.yaml" %}}
+
+```yaml
+agent_telemetry:
+  enabled: false
+```
+{{% /tab %}}
+{{% tab "環境変数" %}}
+
+```bash
+DD_AGENT_TELEMETRY_ENABLED=false
+```
+{{% /tab %}}
+{{< /tabs >}}
+
+**テレメトリー内容:**
+| メタデータ ([source][1]) |
+| ------------------------ |
+| マシン ID |
+| マシン名 |
+| OS |
+| OS バージョン |
+| Agent バージョン |
+
+| メトリクス ([source][2])                       | 説明                                                                                       |
+| ------------------------------------------- | ------------------------------------------------------------------------------------------------- |
+| checks.execution_time                       | チェックの実行時間 (ミリ秒単位)                                                            |
+| pymem.inuse                                 | Python インタープリタによって割り当てられているバイト数                                               |
+| pymem.alloc                                 | Agent 起動以来、Python インタープリタによって割り当てられた累計バイト数            |
+| api_server.request_duration_seconds         | CLI コマンド実行性能 (実行された場合)                                                  |
+| logs.decoded                                | デコードされたログの総数                                                                      |
+| logs.processed                              | 処理されたログの総数                                                                    |
+| logs.sender_latency                         | HTTP sender latency in millisecondsHTTP 送信者の遅延時間 (ミリ秒単位)                                                               |
+| logs.bytes_missed                           | Agent が消費される前に失われたバイト数の総計 (ログローテーション後など) |
+| logs.sent                                   | 送信されたログの総数                                                                         |
+| logs.dropped                                | ドロップされたログの総数                                                                      |
+| logs.bytes_sent                             | エンコード前に送信されたバイト数の総計 (該当する場合)                                                |
+| logs.encoded_bytes_sent                     | エンコード後に送信されたバイト数の総計 (該当する場合)                                                 |
+| dogstatsd.udp_packets                       | DogStatsD UDP パケットのバイト数                                                                       |
+| dogstatsd.uds_packets                       | DogStatsD UDS パケットのバイト数                                                                       |
+| transactions.input_count                    | 受信トランザクション数                                                                        |
+| transactions.requeued                       | 再キューイングされたトランザクション数                                                                         |
+| transactions.retries                        | 再試行されたトランザクション数                                                                           |
+| point.sent                                  | 送信されたメトリクスの総数                                                                      |
+| point.dropped                               | ドロップされたメトリクスの総数                                                                   |
+| oracle.activity_samples_count               | クエリアクティビティを計測する際に取得した行数 (収集されたアクティビティサンプル数)         |
+| oracle.activity_latency                     | Time to retrieve query activity in millisecondsクエリアクティビティ取得時間 (ミリ秒単位)                                                   |
+| oracle.statement_metrics                    | データベースメトリクス取得時間 (ミリ秒単位)                                                 |
+| oracle.statement_plan_errors                | 実行計画取得時のエラー数                                                    |
+| postgres.collect_relations_autodiscovery_ms | リレーションのオートディスカバリー収集時間 (ミリ秒単位)                                          |
+| postgres.collect_stat_autodiscovery_ms      | オートディスカバリー統計の収集時間 (ミリ秒単位)                                               |
+| postgres.get_new_pg_stat_activity_ms        | `pg_stat_activity` 取得時間 (ミリ秒単位)                                                    |
+| postgres.get_new_pg_stat_activity_count     | `pg_stat_activity` 収集のために取得された総行数                                                  |
+| postgres.get_active_connections_ms          | アクティブな接続取得時間 (ミリ秒単位)                                                    |
+| postgres.get_active_connections_count       | アクティブな接続取得のために取得された総行数                                                      |
+| postgres.collect_activity_snapshot_ms       | アクティビティスナップショット取得時間 (ミリ秒単位)                                                     |
+| postgres.collect_statement_samples_ms       | ステートメントサンプル取得時間 (ミリ秒単位)                                                     |
+| postgres.collect_statement_samples_count    | ステートメントサンプル収集のために取得された総行数                                                   |
+
+適用可能なメトリクスのみが送信されます。例えば、DBM が有効でない場合、データベース関連のメトリクスは一切送信されません。
+
+
+[1]: https://github.com/DataDog/datadog-agent/blob/4dc6ed6eb069bdea7e93f2d267ac5086a98c968c/comp/core/agenttelemetry/impl/sender.go#L218-L221
+[2]: https://github.com/DataDog/datadog-agent/blob/4dc6ed6eb069bdea7e93f2d267ac5086a98c968c/comp/core/agenttelemetry/impl/config.go#L156
+
+{{< /site-region >}}
+
 ### その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}

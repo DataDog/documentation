@@ -26,9 +26,9 @@ title: タグの使用方法
 
 ## イベント
 
-[イベントエクスプローラー][2]は、指定された期間の環境からのイベントを表示します。タグを使用して、イベントリストをフィルターし、イベントのサブセットに焦点を当てることができます。`tags:` の後にタグを入力すると、そのタグを持つホスト、[インテグレーション][3]、またはサービスからのすべてのイベントを見ることができます。例えば、`service:coffee-house` というタグを検索するには、`tags:service:coffee-house` を使用します。
+[イベントエクスプローラー][2]は、指定された期間の環境からのイベントを表示します。タグを使用して、イベントリストをフィルターし、イベントのサブセットに焦点を当てることができます。`tags:` の後にタグを入力すると、そのタグを持つホスト、[インテグレーション][3]、またはサービスからのすべてのイベントを見ることができます。例えば、`service:coffee-house` というタグを検索するには、`tags:(service:coffee-house)` を使用します。
 
-複数のタグを包括的に検索する場合は、括弧を使用し、各タグを OR で区切ってください: `tags:(service:coffee-house OR host:coffeehouseprod)`。複数のタグを排他的に検索するには、各タグを AND で区切ってください: `tags:(service:coffee-house AND host:coffeehouseprod)`。
+複数のタグを包括的に検索する場合は、各タグを OR で区切ってください: `tags:(service:coffee-house OR host:coffeehouseprod)`。複数のタグを排他的に検索するには、各タグを AND で区切ってください: `tags:(service:coffee-house AND host:coffeehouseprod)`。
 
 ## ダッシュボード
 
@@ -251,7 +251,7 @@ datadog:monitored,env:production,!env:staging,instance-type:c1.*
 
 ログ[検索][10]、[分析][11]、[パターン][12]、[Live Tail][13]は、検索バーまたはファセットのチェックボックスを使用して、タグでログを絞り込みます。検索バーの形式は `<KEY>:<VALUE>` で、`service:coffee-house` などです。高度な検索については、[ログ検索][10]を参照してください。
 
-Additionally, tags are used to filter a logs [Pipeline][14]. For example, if you only want logs from the coffee-house service to go through the pipeline, add the tag `service:coffee-house` to the filter field.
+さらに、タグはログの [Pipeline][14] をフィルタリングするために使用されます。例えば、coffee-house サービスのログのみをパイプラインに通したい場合は、フィルターフィールドにタグ `service:coffee-house` を追加してください。
 
 ## RUM & セッションリプレイ
 
@@ -332,12 +332,12 @@ SLO タグは、SLO の基礎となるメトリクスまたはモニターで使
 
 [CI Visibility Explorer][101] は、CI パイプラインで実行されているテストランを表示します。
 
-テストランをタグでフィルターするには、検索バーまたはファセットチェックボックスを使用します。検索バーのフォーマットは `<KEY>:<VALUE>` で、例えば `@test.status:failed` のようになります。詳細な検索については、[CI テストの検索と管理][102]を参照してください。
+テストランをタグでフィルターするには、検索バーまたはファセットチェックボックスを使用します。検索バーのフォーマットは `<KEY>:<VALUE>` で、例えば `@test.status:failed` のようになります。詳細な検索については、[Test Optimization Explorer の検索構文][102]を参照してください。
 
 {{< img src="/continuous_integration/test_runs.png" alt="CI Visibility Explorer のテストラン" style="width:80%;">}}
 
 [101]: https://app.datadoghq.com/ci/test-runs
-[102]: /ja/tests/search/
+[102]: /ja/tests/explorer/search_syntax
 
 {{% /tab %}}
 {{% tab "パイプラインの実行" %}}

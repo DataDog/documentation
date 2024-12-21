@@ -28,7 +28,7 @@ author:
 categories:
 - caching
 - data stores
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/tokumx/README.md
 display_on_public_website: true
@@ -70,6 +70,12 @@ tile:
 
 
 ## 概要
+
+<div class="alert alert-warning">
+このインテグレーションはメンテナンスモードで、Python 2 でのみ動作します。
+v7.37 以降の Agent には含まれていませんが、:6 のバグフィックスリリースには引き続き含まれます。
+</div>
+
 
 このチェックは、以下を含む TokuMX メトリクスを収集します。
 

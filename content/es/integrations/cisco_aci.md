@@ -21,6 +21,7 @@ assets:
   monitors:
     CPU usage is high for Cisco ACI device: assets/monitors/cpu_high.json
     Health score of device is critical: assets/monitors/critical_health_score.json
+    Interface for a Cisco ACI device is down: assets/monitors/interface_down.json
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
@@ -28,16 +29,16 @@ author:
   support_email: help@datadoghq.com
 categories:
 - network
-custom_kind: integration
+custom_kind: integración
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/cisco_aci/README.md
-display_on_public_website: true
-draft: false
+display_on_public_website: verdadero
+draft: falso
 git_integration_title: cisco_aci
 integration_id: cisco-aci
 integration_title: CiscoACI
 integration_version: 4.1.0
-is_public: true
+is_public: verdadero
 manifest_version: 2.0.0
 name: cisco_aci
 public_title: CiscoACI
@@ -53,7 +54,7 @@ tile:
   - Supported OS::macOS
   - Supported OS::Windows
   - Category::Red
-  - Offering::integración
+  - Offering::Integration
   configuration: README.md#Configuración
   description: Rastrea el rendimiento y el uso de Cisco ACI.
   media: []
@@ -87,7 +88,7 @@ El check de Cisco ACI está incluido con el Agent, así que simplemente [instala
 
 #### Host
 
-Para configurar este check para un Agent que se ejecuta en un host:
+A fin de configurar este check para un Agent que se ejecuta en un host:
 
 1. Edita el archivo `cisco_aci.d/conf.yaml`, que se encuentra en la carpeta `conf.d/` en la raíz del [directorio de configuración del Agent][1]. Consulta el [cisco_aci.d/conf.yaml de ejemplo][2] para conocer todas las opciones de configuración disponibles:
 
@@ -135,9 +136,9 @@ Para configurar este check para un Agent que se ejecuta en un host:
 {{% /tab %}}
 {{% tab "Contenedores" %}}
 
-#### Contenedores
+#### En contenedores
 
-Para entornos en contenedores, consulta las [plantillas de integración de Autodiscovery][1] para obtener orientación sobre la aplicación de los parámetros que se indican a continuación.
+En el caso de los entornos en contenedores, consulta las [plantillas de integración de Autodiscovery][1] para obtener orientación sobre la aplicación de los parámetros que se indican a continuación.
 
 | Parámetro            | Valor                                                                  |
 | -------------------- | ---------------------------------------------------------------------- |
@@ -171,7 +172,7 @@ El check de Cisco ACI envía fallas de inquilino como eventos.
 {{< get-service-checks-from-git "cisco_aci" >}}
 
 
-## Solucionar problemas
+## Resolución de problemas
 
 ### Métricas `cisco_aci.tenant.*` faltantes
 Si faltan las métricas `cisco_aci.tenant.*`, puedes ejecutar el script `test/cisco_aci_query.py` para consultar manualmente el endpoint del inquilino.

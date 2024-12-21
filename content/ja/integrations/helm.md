@@ -110,7 +110,7 @@ spec:
 ```
 
 {{% /tab %}}
-{{% tab "Operator (< v1.5.0)" %}}
+{{% tab "Operator (v1.5.0 未満)" %}}
 
 これはクラスターのチェックです。このチェックを有効にするには、`DatadogAgent` のデプロイメント構成でコンフィギュレーションファイル `helm.yaml` を Cluster Agent に渡します。
 

@@ -4,10 +4,13 @@ further_reading:
 - link: /integrations/sqlserver/
   tag: ドキュメント
   text: SQL Server インテグレーション
+- link: /database_monitoring/guide/sql_deadlock/
+  tag: ドキュメント
+  text: デッドロックモニタリングの構成
 title: Google Cloud SQL マネージド SQL Server のデータベースモニタリングの設定
 ---
 
-データベースモニタリングは、クエリメトリクス、クエリサンプル、実行計画、データベースの状態、フェイルオーバー、イベントを公開することで、Microsoft SQL Server データベースを詳細に可視化します。
+Database Monitoring は、クエリメトリクス、クエリサンプル、実行計画、データベースの状態、フェイルオーバー、イベントを公開することで、Microsoft SQL Server データベースを詳細に可視化します。
 
 データベースでデータベースモニタリングを有効にするには、以下の手順を実行します。
 

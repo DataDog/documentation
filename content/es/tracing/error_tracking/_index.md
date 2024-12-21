@@ -38,7 +38,7 @@ Para empezar a configurar tu repositorio, consulta la [documentación sobre la i
 
 ## Uso de los atributos de tramos (spans) para realizar el seguimiento de tramos de errores
 
-Los rastreadores de Datadog recopilan errores a través de las integraciones y la instrumentación manual del código fuente de tus servicios backend. Los tramos de errores dentro de una traza son procesados por el Seguimiento de errores **si el error se encuentra en un tramo de entrada de servicio** (el principal tramo de servicio). Este tramo también debe contener los [atributos de tramos][1] `error.stack`, `error.message` y `error.type` de los que se va a realizar un seguimiento.
+Los rastreadores de Datadog recopilan errores a través de las integraciones y la instrumentación manual del código fuente de tus servicios backend. Los tramos de errores dentro de una traza son procesados por el Seguimiento de errores **si el error se encuentra en un tramo de entrada de servicio** (el principal tramo de servicio). Este tramo también debe contener los [atributos de tramos[1] `error.stack`, `error.message` y `error.type` de los que se va a realizar un seguimiento.
 
 {{< img src="tracing/error_tracking/flamegraph_with_errors.png" alt="Gráfica de llamas con errores." style="width:100%;" >}}
 

@@ -60,7 +60,7 @@ title: Sensitive Data Scanner
 **環境:**
 
 {{< callout url="https://www.datadoghq.com/private-beta/sensitive-data-scanner-using-agent-in-your-premises/" >}}
-Datadog Agent の Sensitive Data Scanner サポートはベータ版です。参加するには、<strong>Request Access</strong> をクリックしてください。
+Datadog Agent の Sensitive Data Scanner サポートはプレビュー版です。参加するには、<strong>Request Access</strong> をクリックしてください。
 {{< /callout >}}
 
 - **Sensitive Data Scanner using the Agent** では、ログを Datadog バックエンドに送信する前に Datadog がログをマスキングし、マスキングされていないログはプレミス外に出る必要がなくなります。この方法では、組織ごとに 1 つのスキャングループに制限され、定義済みのライブラリルールしか使用できません。
@@ -188,7 +188,7 @@ Terraform については、[Datadog Sensitive Data Scanner ルール][1]のリ�
 1. **Create keyword dictionary** では、正規表現条件とマッチする際の検出精度を高めるためにキーワードを追加します。例えば、16 桁の Visa クレジットカード番号をスキャンする場合、`visa`、`credit`、`card` などのキーワードを追加できます。また、これらのキーワードがマッチした値から指定された文字数以内に存在するよう条件を設定することも可能です。デフォルトでは、キーワードはマッチした値の前に 30 文字以内に配置されている必要があります。
 {{% sds-scanning-rule %}}
 1. **Add Rule** をクリックします。
-{{< /collapse-content >}} 
+{{< /collapse-content >}}
 
 **注**:
 
@@ -336,8 +336,8 @@ Datadog プラットフォームが機能上必要とする予約キーワード
 
 ## Cloud Storage のスキャン
 
-{{< callout header="プレビューにご参加ください！" url="https://www.datadoghq.com/private-beta/data-security" >}}
-Amazon S3 バケットおよび RDS インスタンスのスキャンサポートは現在プレビュー中です。参加をご希望の方は、<strong>Request Access</strong> をクリックしてください。
+{{< callout header="Limited Availability" url="https://www.datadoghq.com/private-beta/data-security" >}}
+  Scanning support for Amazon S3 buckets and RDS instances is in Limited Availability. To enroll, click <strong>Request Access</strong>.
 {{< /callout >}}
 
 [Sensitive Data Scanner][6] を有効にしている場合、Amazon S3 バケットや RDS インスタンス内の機密データをカタログ化し、分類することができます。

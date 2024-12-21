@@ -110,7 +110,7 @@ spec:
 ```
 
 {{% /tab %}}
-{{% tab "Operator (v1.5.0 o anterior)" %}}
+{{% tab "Operator (anterior a la versión 1.5.0)" %}}
 
 Este es un check de clúster. Puedes activar este check proporcionando un archivo de configuración `helm.yaml` al Cluster Agent en la configuración del despliegue de tu `DatadogAgent`.
 

@@ -2,7 +2,7 @@
 title: テンプレート変数評価
 ---
 
-モニター通知メッセージでは、`eval` 構文を使用してテンプレート変数の出力を変更できます。これにより、数値を持つテンプレート変数に対していくつかの異なる算術演算と関数を使用できます。
+モニター通知メッセージでは、`eval` 構文を使用してテンプレート変数の出力を変更できます。これにより、数値または文字列値を持つテンプレート変数に対していくつかの異なる算術演算と関数を使用できます。
 
 ## 演算子
 
@@ -43,22 +43,27 @@ https://app.datadoghq.com/logs?from_ts={{eval "last_triggered_at_epoch-15*60*100
 
 ### 時間帯に基づいて異なるチームに通知をルーティングする
 
-You can combine a modulo `%` evaluation of the `last_triggered_at_epoch` variable with `{{#is_match}}{{/is_match}}` to customize the routing of notifications based on time of day (UTC):
+`last_triggered_at_epoch` 変数の評価に modulo `%` と `{{#is_exact_match}}{{/is_exact_match}}` を組み合わせることで、時間帯 (UTC) に基づいた通知のルーティングをカスタマイズできます。
 ```
-{{#is_match (eval "int(last_triggered_at_epoch / 3600000 % 24)") "14" "15" "16"}}  
-Handle that should receive notification if time is between 2PM and 5PM UTC
-{{/is_match}}
+{{#is_exact_match (eval "int(last_triggered_at_epoch / 3600000 % 24)") "8" "9" "10" "11" "12" "13"}}  
+時間が午前 8 時から午後 2 時 (UTC) の間の場合に通知を受け取るハンドル
+{{/is_exact_match}}
 ```
 
-**Note:** If you need to evaluate your monitor on a schedule, see [Custom Schedules][2] instead.
+注: モニターを特定のスケジュールで評価する必要がある場合は、代わりに [Custom Schedules][2] をご参照ください。
 
 ## 関数
 
-数値テンプレート変数の値を評価関数の入力として使用して、テンプレート変数のフォーマットを変更したり、値に対して算術演算を実行したりできます。構文は次の形式を使用します。**注**: 式は引用符（`"`）で囲む必要があります。
+テンプレート変数の値を評価関数の入力として使用して、テンプレート変数のフォーマットを変更したり、値に対して算術演算を実行したりできます (該当する場合)。構文は次の形式を使用します。**注**: 式は引用符（`"`）で囲む必要があります。
 
 ```text
 {{eval "function(TEMPLATE_VARIABLE_NAME)"}}
 ```
+
+
+{{< tabs >}}
+{{% tab "数値変数" %}}
+
 
 次の関数は、数値テンプレート変数の値のフォーマット方法を変更します。
 
@@ -113,6 +118,28 @@ Handle that should receive notification if time is between 2PM and 5PM UTC
 
 {{eval "humanize_bits(value)"}}
 ```
+
+{{% /tab %}}
+
+
+{{% tab "文字列変数" %}}
+
+以下の関数を使用すると、文字列変数に対して特定の操作を実行できます。
+
+| 関数            | 説明|
+|---------------------|--------------------------------------------------------------------------------------------------------------------------------------------|
+| upper(var) | 文字列を大文字に変換した結果を返します|
+| lower(var)  | 文字列を小文字に変換した結果を返します|
+| substring(var, start, end)            | 指定した 2 つのインデックス (start, end) で区切られた範囲の文字列を抽出します。第 3 引数は省略可能です。<br>例: substring("host:D", 5) = "D"|
+| strip(var, characters)            | 文字列の先頭および末尾から指定した文字を削除します。第 2 引数が null の場合、先頭と末尾の空白を削除します。
+例:<br>strip(" host:E ") = "host:E"<br>strip("abchost:Eabc", "abc") = "host:E"|
+
+
+{{% /tab %}}
+
+{{< /tabs >}}
+
+
 
 [1]: /ja/logs/explorer/
 [2]: /ja/monitors/guide/custom_schedules

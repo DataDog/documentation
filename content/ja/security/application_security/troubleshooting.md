@@ -154,7 +154,7 @@ ASM は、特定のトレーサーのインテグレーションに依存して�
 {{< programming-lang-wrapper langs="java,.NET,go,ruby,PHP,Node.js,python" >}}
 {{< programming-lang lang="java" >}}
 
-For Java, if you are using any of the following technologies, the respective integration is required:
+Java の場合、以下のいずれかの技術を使用している場合は、それぞれのインテグレーションが必要です。
 
 - grizzly
 - grizzly-filterchain
@@ -174,7 +174,7 @@ For Java, if you are using any of the following technologies, the respective int
 {{< /programming-lang >}}
 {{< programming-lang lang=".NET" >}}
 
-For .NET, the ASP.NET integration is required.
+.NET の場合、ASP.NET とのインテグレーションが必要です。
 
 **注:** ASP.NET Core が無効になっている場合でも、ASM はこのフレームワークで動作するはずです。
 
@@ -182,14 +182,14 @@ For .NET, the ASP.NET integration is required.
 {{< /programming-lang >}}
 {{< programming-lang lang="PHP" >}}
 
-There are no required integrations for PHP.
+PHP については、必須のインテグレーションはありません。
 <p></p>
 
 
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
 
-The following Go frameworks should be instrumented using the out-of-the-box APM integrations:
+以下の Go フレームワークは、すぐに使える APM インテグレーションを使用してインスツルメントする必要があります。
 
 - [gRPC][2]
 - [net/http][3]
@@ -208,14 +208,14 @@ The following Go frameworks should be instrumented using the out-of-the-box APM 
 {{< /programming-lang >}}
 {{< programming-lang lang="Node.js" >}}
 
-For Node.js, the HTTP integration is required.
+Node.js の場合、HTTP とのインテグレーションが必要です。
 <p></p>
 
 
 {{< /programming-lang >}}
 {{< programming-lang lang="ruby" >}}
 
-For Ruby, the [Rack][2] integration is required. Ruby tracer version `1.0.0` or higher is also required. See information on [migrating from 0.x to 1.x][3].
+Ruby の場合、[Rack][2] とのインテグレーションが必要です。また、Ruby トレーサーのバージョン `1.0.0` 以降が必要です。[0.x から 1.x への移行][3]の情報を参照してください。
 
 **注:** Rack は手動で追加するか、[Rails][4] または [Sinatra][5] とのインテグレーションで自動的に追加することができます。手動で追加した場合、Rack スタックにおいて、トレーサーミドルウェアはセキュリティミドルウェアの前に表示される必要があります。
 
@@ -227,8 +227,7 @@ For Ruby, the [Rack][2] integration is required. Ruby tracer version `1.0.0` or 
 
 {{< programming-lang lang="python" >}}
 
-For Python, the WSGI integration is required along with the integration for the
-framework you're using, such as the Django or Flask integration.
+Python の場合、WSGI インテグレーションと、Django や Flask のような使用中のフレームワークのインテグレーションが必要です。
 <p></p>
 
 {{< /programming-lang >}}
@@ -381,7 +380,7 @@ Node.js アプリケーションの[トレースとシグナルエクスプロ�
 
 3. アプリケーションのディレクトリで、`npm explore @datadog/native-appsec -- npm run install` というコマンドを実行し、アプリを再起動します。
 
-    a. If `@datadog/native-appsec` is not found then the installation is incorrect.
+    a. `@datadog/native-appsec` が見つからない場合は、インストールが正しく行われていません。
 
     b. アプリケーションの起動時に `@datadog/native-appsec` が見つかった場合は、ランタイム起動スクリプトにコマンドを追加してください。
 
@@ -416,7 +415,7 @@ Python アプリケーションの[トレースとシグナルエクスプロー
    DEBUG:ddtrace.appsec.processor:[DDAS-001-00] Executing AppSec In-App WAF with parameters:
    ```
 
-   If this log is not present, ASM is not running.
+   このログがない場合は、ASM が起動していないことになります。
 
 2. トレーサーは動作していますか？APM ダッシュボードで関連するトレースを見ることができますか？
 
@@ -448,7 +447,7 @@ D, [2021-12-14T11:03:32.167125 #73127] DEBUG -- ddtrace: [ddtrace] (libddwaf/lib
 D, [2021-12-14T11:03:32.200491 #73127] DEBUG -- ddtrace: [ddtrace] (libddwaf/lib/datadog/appsec/waf.rb:296:in `block in logger=') {:level=>:ddwaf_log_debug, :func= >"parse", :file=>"parser_v2.cpp", :message=>"Loaded 124 rules out of 124 available in the ruleset"}
 ```
 
-If you do not see those logs, check the following:
+これらのログが表示されない場合は、以下を確認してください。
 
 - アプリケーションプロセスに対して正しい ASM 環境変数が設定されているか。
 - 最新バージョンの gem がインストールされている。
@@ -547,7 +546,7 @@ ASM のデータは、APM トレースと一緒に送信されます。[APM の�
 
 ### トレーサーのバージョンが更新されていることを確認する
 
-See the Application Security product set up documentation to validate you you are using the right version of the tracer. These minimum versions are required to start sending telemetry data that includes library information.
+トレーサーの正しいバージョンを使用していることを確認するために、Application Security 製品設定ドキュメントを参照してください。ライブラリ情報を含むテレメトリーデータの送信を開始するには、これらの最小バージョンが必要です。
 
 ### テレメトリーデータの通信を確保する
 
@@ -576,25 +575,26 @@ See the Application Security product set up documentation to validate you you ar
 
 ## Software Composition Analysis を無効にする
 
-[Software Composition Analysis][14] を無効にするには:
+SCA は、UI または 環境変数を使用した手動の 2 つの方法で有効化できます。SCA を無効化する際は、有効化したときと**同じ方法**で行う必要があります。たとえば、SCA を手動で有効化した場合、UI からは無効化できず、手動で無効化しなければなりません。
 
-* [Services][15] に移動して **Software Composition Analysis (SCA)** を選択し、サービスをクリックして **Deactivate** をクリックします。
+一般的には、SCA は UI を使用してサービス単位で有効化・無効化されます。
+
+SCA ([Software Composition Analysis][14]) を UI で無効化する方法:
+
+* [Services][15] に移動し、**Software Composition Analysis (SCA)** を選択して対象のサービスをクリックし、詳細を開きます。次に、**Vulnerability Detection** で **Deactivate** をクリックします。
 * 複数のサービスで Software Composition Analysis を一括で無効にするには、リストヘッダーのチェックボックスをクリックし、**Bulk Actions** で **Deactivate Software Composition Analysis (SCA) on (number of) services** を選択します。
+
+SCA を手動で無効化する方法:
+
 * 環境変数 `DD_APPSEC_SCA_ENABLED` を使用して Software Composition Analysis を無効にするには、アプリケーションの構成から環境変数 `DD_APPSEC_SCA_ENABLED=true` を削除し、サービスを再起動します。これは PHP アプリには適用されません。
 
 ## コードセキュリティの無効化
 
-[Code Security][13] の脆弱性検出を無効にするには、アプリケーション構成から `DD_IAST_ENABLED=true` 環境変数を削除して、サービスを再起動します。これは PHP アプリには適用されません。
+[Code Security][13] を無効化するには、アプリケーションの構成から `DD_IAST_ENABLED=true` という環境変数を削除するか、`DD_IAST_ENABLED=false` と設定してサービスを再起動します。
 
-サービスで `DD_IAST_ENABLED=true` 環境変数が設定されていない場合は、以下を行います。
-  1. [Services][15] に移動します。
-  2. **Code Security** を選択します。
-  3. サービスをクリックします。
-  4. サービスの詳細で、**Vulnerability Detection** の **Deactivate** をクリックします。
+## すべてまたは一部のコードレベルの脆弱性が検出されない
 
-## IAST/カスタムコードの脆弱性が一部またはすべて検出されない
-
-### IAST が有効であることを確認する
+### Code Security が有効化されていることを確認してください
 
 `DD_IAST_ENABLED` 環境変数が `true` に設定されているか、使用言語に対応するシステムプロパティが有効になっていることを確認します。
 

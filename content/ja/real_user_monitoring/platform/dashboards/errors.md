@@ -45,4 +45,4 @@ RUM モバイルアプリクラッシュおよびエラーダッシュボード�
 [3]: /ja/real_user_monitoring/ios/data_collected/
 [4]: /ja/real_user_monitoring/android/data_collected/
 [5]: /ja/real_user_monitoring/reactnative/data_collected/
-[6]: /ja/real_user_monitoring/mobile_and_tv_monitoring/data_collected/flutter
+[6]: /ja/real_user_monitoring/mobile_and_tv_monitoring/flutter/data_collected/

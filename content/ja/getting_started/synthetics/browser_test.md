@@ -90,7 +90,7 @@ Slack、PagerDuty、Microsoft Teams、Webhook などの[通知インテグレー
 
 ## 記録を作成する
 
-テストコンフィギュレーションが保存されると、Datadog は Chrome 拡張機能の [Datadog テストレコーダー][9]をダウンロードしてインストールするように要求します。
+テスト構成を保存すると、Datadog から [Datadog テストレコーダー][9] Chrome 拡張機能をダウンロードしてインストールするように求められます。(この Chrome 拡張機能は Microsoft Edge ブラウザにもインストールできます)
 
 拡張機能をインストールしたら、**Start Recording** をクリックしてテストステップの記録を開始します。
 

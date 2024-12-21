@@ -59,7 +59,7 @@ pricing:
   short_description: コア 1 個あたりの単価
   tag: コア
   unit_label: Nutanix ホストコア
-  unit_price: 5
+  unit_price: 7.0
 public_title: Nutanix
 short_description: Nutanix リソースの使用量を監視して、お使いの環境をより良く理解しましょう。
 supported_os:
@@ -129,4 +129,4 @@ Nutanix インテグレーションではストレージ、CPU 使用量、読�
 *お探しのインテグレーションが見つかりませんか？組織に役立つ重要なツールの導入をお考えですか？[こちら](mailto:support@rapdev.io)からメッセージをお送りいただければ、導入をサポートいたします！*
 
 ---
-このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/rapdev-nutanix" target="_blank">こちらをクリック</a>してください。
+このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。利用するには、<a href="https://app.datadoghq.com/marketplace/app/rapdev-nutanix" target="_blank">Marketplace でこのアプリケーションを購入してください</a>。

@@ -7,12 +7,15 @@ further_reading:
 - link: /database_monitoring/troubleshooting/?tab=sqlserver
   tag: ドキュメント
   text: よくある問題のトラブルシューティング
+- link: /database_monitoring/guide/sql_deadlock/
+  tag: ドキュメント
+  text: デッドロックモニタリングの構成
 title: Amazon RDS 上の SQL Server のデータベースモニタリングの設定
 ---
 
-データベースモニタリングは、クエリメトリクス、クエリサンプル、実行計画、データベースの状態、フェイルオーバー、イベントを公開することで、Microsoft SQL Server データベースを詳細に可視化します。
+Database Monitoring は、クエリメトリクス、クエリサンプル、実行計画、データベースの状態、フェイルオーバー、イベントを公開することで、Microsoft SQL Server データベースを詳細に可視化します。
 
-データベースでデータベースモニタリングを有効にするには、以下の手順を実行します。
+データベースで Database Monitoring を有効にするには、以下の手順を実行します。
 
 1. [AWS インテグレーションを構成する](#configure-the-aws-integration)
 1. [Agent にアクセスを付与する](#grant-the-agent-access)
@@ -34,22 +37,27 @@ title: Amazon RDS 上の SQL Server のデータベースモニタリングの�
 
 Datadog Agent が統計やクエリを収集するためには、データベースサーバーへの読み取り専用のアクセスが必要となります。
 
-サーバーに接続するための読み取り専用ログインを作成し、必要な権限を付与します。
+サーバーに接続するために読み取り専用ログインを作成し、必要な権限を付与します。
 
 ```SQL
 USE [master];
 CREATE LOGIN datadog WITH PASSWORD = '<PASSWORD>';
 GO
---コンテキストを msdb データベースに設定し、datadog ユーザーを作成します。
+-- msdb データベースにコンテキストを切り替え、datadog ユーザーを作成
 USE [msdb];
 CREATE USER datadog FOR LOGIN datadog;
--- Log Shipping Monitoring (Agent v7.50 以降で利用可能) を使用するには、次の行のコメントを外します。
--- GRANT SELECT to datadog;
+-- Log Shipping Monitoring (Agent v7.50 以降で利用可能) を使用しない場合は、以下の行をコメントアウトしてください。
+GRANT SELECT ON dbo.log_shipping_monitor_primary TO datadog;
+GRANT SELECT ON dbo.log_shipping_monitor_secondary TO datadog;
+-- SQL Server Agent Monitoring (Agent v7.57 以降で利用可能) を使用しない場合は、以下の 3 行をコメントアウトしてください。
+GRANT SELECT ON dbo.sysjobs TO datadog;
+GRANT SELECT ON dbo.sysjobhistory TO datadog;
+GRANT SELECT ON dbo.sysjobactivity TO datadog;
 GO
---master に戻り、datadog ユーザーにサーバー権限を付与します
+-- master に戻り、datadog ユーザーにサーバー権限を付与
 USE [master];
-GRANT VIEW SERVER STATE to datadog;
-GRANT VIEW ANY DEFINITION to datadog;
+GRANT VIEW SERVER STATE TO datadog;
+GRANT VIEW ANY DEFINITION TO datadog;
 GO
 ```
 

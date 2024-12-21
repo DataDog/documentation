@@ -30,7 +30,7 @@ author:
 categories:
 - cloud
 - network
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/vsphere/README.md
 display_on_public_website: true
@@ -38,7 +38,7 @@ draft: false
 git_integration_title: vsphere
 integration_id: vsphere
 integration_title: vSphere
-integration_version: 7.6.0
+integration_version: 8.0.1
 is_public: true
 manifest_version: 2.0.0
 name: vsphere
@@ -128,6 +128,18 @@ collect_per_instance_filters:
 
 `disk` メトリクスは、ホストの各ディスクに特定されるため、収集するには `collect_per_instance_filters` を使用してこのメトリクスを有効にする必要があります。
 
+#### プロパティメトリクスの収集
+
+vSphere インテグレーションでは、プロパティベースのメトリクスも収集可能です。例えば、ホストがメンテナンスモードかどうか、またはクラスターが DRS に構成されているかなどの構成プロパティが該当します。
+
+プロパティメトリクスを有効にするには、次のオプションを構成してください。
+```
+collect_property_metrics: true
+```
+
+プロパティメトリクスにはリソース名がプレフィックスとして付与されます。例えば、ホストのプロパティメトリクスには `vsphere.host.*` が、VM のプロパティメトリクスには `vsphere.vm.*` が付与されます。利用可能なプロパティメトリクスの一覧は [metadata.csv][8] でご確認ください。
+
+
 ### イベント
 
 このチェックは vCenter イベントマネージャーでイベントを監視し、それを Datadog に送信します。デフォルトで、以下のタイプのイベントを送信します。
@@ -142,7 +154,7 @@ collect_per_instance_filters:
 - VmSuspendedEvent
 - VmPoweredOffEvent
 
-ただし、イベントは `vsphere.d/conf.yaml` ファイルを使用して追加または削除することができます。[サンプル vsphere.d/conf.yaml][4] の `include_events` パラメーターのセクションを参照してください。
+追加のイベントを `vim.event` クラスから収集するには、[サンプル vsphere.d/conf.yaml][4] 内の `include_events` パラメータセクションを使用してください。
 
 ### サービスチェック
 {{< get-service-checks-from-git "vsphere" >}}

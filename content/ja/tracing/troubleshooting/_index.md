@@ -35,7 +35,7 @@ further_reading:
   text: Datadog の全インテグレーション一覧
 - link: /tracing/guide/inferred-service-opt-in/
   tag: ドキュメント
-  text: 推測されたサービス依存関係 (ベータ版)
+  text: 推測されたサービス依存関係 (プレビュー版)
 title: APM トラブルシューティング
 ---
 
@@ -100,7 +100,7 @@ APM データを Datadog に送信する際には、以下のコンポーネン�
 - `service:test-mongodb`
 - `service:test-postgresdb`
 
-[推測されたサービス依存関係 (ベータ版)][30] を使用できます。推測された外部 API は、デフォルトの命名スキーム `net.peer.name` を使用します。例えば、`api.stripe.com`、`api.twilio.com`、`us6.api.mailchimp.com` などです。推測されたデータベースは、デフォルトの命名スキーム `db.instance` を使用します。
+[推測されたサービス依存関係 (プレビュー版)][30] を使用できます。推測された外部 API は、デフォルトの命名スキーム `net.peer.name` を使用します。例えば、`api.stripe.com`、`api.twilio.com`、`us6.api.mailchimp.com` などです。推測されたデータベースは、デフォルトの命名スキーム `db.instance` を使用します。
 
 または、`DD_SERVICE_MAPPING` や `DD_TRACE_SERVICE_MAPPING` などの環境変数を使用して、サービス名をマージすることもできます (言語に応じて異なります)。
 
@@ -207,7 +207,7 @@ try/catch ブロックで例外が処理される場合、`error.message`、`err
 
 Datadog は、40 分間隔で以下の組み合わせを受け入れます。
 
-- 1000 個の一意な `環境` と `サービス` の組み合わせ
+- 5000 個の一意な `環境` と `サービス` の組み合わせ
 - 環境ごとに 30 個の一意な `秒単位のプライマリタグ値`
 - 環境およびサービスごとに 100 個の一意な `オペレーション名`
 - 環境、サービス、および操作名ごとに 1000 個の一意な `リソース`

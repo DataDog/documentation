@@ -20,7 +20,7 @@ categories:
 - collaboration
 - incidents
 - notifications
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -83,7 +83,7 @@ xMatters インテグレーションには、メトリクスは含まれませ�
 
 ### イベント
 
-xMatters インテグレーションには、イベントは含まれません。
+xMatters インテグレーションはイベントを収集します。
 
 ### サービスチェック
 

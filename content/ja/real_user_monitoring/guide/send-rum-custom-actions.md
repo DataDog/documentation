@@ -1,4 +1,7 @@
 ---
+algolia:
+  tags:
+  - addaction
 aliases:
 - /ja/real_user_monitoring/guide/send-custom-user-actions/
 beta: true

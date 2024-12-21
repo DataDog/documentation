@@ -133,7 +133,7 @@ Datadog Application Security には、アプリケーションコードおよび
 
 ## API セキュリティ
 
-<div class="alert alert-info">API セキュリティは非公開ベータ版です。</div>
+<div class="alert alert-info">API セキュリティはプレビュー版です。</div>
 
 Datadog Application Security は、API を標的とした脅威を視覚化します。[API カタログ][27]を使用して API の健全性とパフォーマンスのメトリクスを監視します。ここでは、API を標的とした攻撃を表示することができます。このビューには、攻撃者の IP と認証情報のほか、攻撃がどのように形成されたかの詳細を示すリクエストヘッダーが含まれます。Application Security と API 管理の両方を使用することで、API 攻撃対象の包括的なビューを維持し、そして脅威を緩和する対応を行うことができます。
 

@@ -19,7 +19,8 @@ author:
   support_email: help@datadoghq.com
 categories:
 - os & system
-custom_kind: integration
+- windows
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/windows_service/README.md
 display_on_public_website: true
@@ -40,6 +41,7 @@ tile:
   classifier_tags:
   - Supported OS::Windows
   - Category::OS とシステム
+  - Category::Windows
   - Offering::Integration
   configuration: README.md#Setup
   description: Windows Service の状態を監視。
@@ -140,7 +142,7 @@ services:
 
 Agent バージョン 7.40 以降、チェックはサービスのスタートアップタイプを示すために、各サービスチェックに `windows_service_startup_type:<STARTUP_TYPE>` タグを追加できます。各サービスチェックにこのタグを含めるには、`windows_service_startup_type_tag` オプションを設定します。
 
-Beginning with Agent version 7.55, the check can add a `display_name:<DISPLAY_NAME>` tag to each service check to indicate the display name of the service. Set the `collect_display_name_as_tag` option to `true` to include this tag with each service check.
+Agent バージョン 7.55 以降では、このチェックにより各サービスチェックに `display_name:<DISPLAY_NAME>` タグを追加し、サービスの表示名を示すことができます。このタグを各サービスチェックに含めるには、`collect_display_name_as_tag` オプションを `true` に設定してください。
 
 ### 検証
 

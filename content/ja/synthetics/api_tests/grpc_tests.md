@@ -104,6 +104,10 @@ gRPC テストは、ネットワークの外部または内部からのテスト
 
 **Send** をクリックして、リクエストの構成をテストします。画面の右側に応答プレビューが表示されます。
 
+### スニペット
+
+{{% synthetics-api-tests-snippets %}}
+
 ### アサーションを定義する
 
 アサーションは、期待されるテスト結果が何であるかを定義します。**Send** をクリックすると、取得したレスポンスに基づいて `response time` に関するアサーションが追加されます。モニターするテストには、少なくとも 1 つのアサーションを定義する必要があります。
@@ -115,7 +119,7 @@ gRPC テストは、ネットワークの外部または内部からのテスト
 |---|---|---|
 | response time | `is less than` | 整数 (ms) |
 | gRPC レスポンス | `contains`、`does not contain`、`is`、`is not`、<br> `matches`、`does not match`、<br> [`jsonpath`][1]、[`xpath`][2] | _文字列_ <br> _[正規表現][3]_ |
-| gRPC メタデータ | `is`、`is not`、`contains`、`does not contain`、`matches regex`、`does not match regex`、`does not exist` | _整数 (ミリ秒)_ <br> _[正規表現][3]_ |
+| gRPC メタデータ | `is`、`is not`、`contains`、`does not contain`、`matches regex`、`does not match regex`、`does not exist`  | _整数 (ミリ秒)_ <br> _[正規表現][3]_ |
 
 **New Assertion** をクリックするか、応答プレビューを直接クリックすることで、API テストごとに最大 20 個のアサーションを作成できます。
 

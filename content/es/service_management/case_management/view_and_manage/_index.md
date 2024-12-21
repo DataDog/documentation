@@ -27,41 +27,35 @@ Utiliza los siguientes atajos de teclado para una navegación rápida:
 | Establecer estado          | `S`            |
 | Asignar al usuario      | `A`            |
 | Establecer prioridad        | `P`            |
-| Mover a proyecto     | `V`            |
+| Mover al proyecto     | `V`            |
 | Archivar/desarchivar | `E`            |
 
 ## Buscar casos
 
-En un proyecto, puedes realizar una búsqueda de casos por:
-- **pares clave-valor de atributo**: por ejemplo, para encontrar todos los casos creados a partir de patrones de correlación de eventos, busca `creation_source:Event Management`. Para los casos creados a partir de eventos individuales, busca `creation_source:Event`.
-- **título**: rodea el término de búsqueda entre comillas dobles. Por ejemplo, para encontrar todos los casos que contengan el término "kubernetes pods" en el título, busca `"kubernetes pods."`
+En un proyecto, puedes buscar casos por:
+- **Pares clave-valor del atributo**: por ejemplo, para encontrar todos los casos creados a partir de patrones de correlación de eventos, busca `creation_source:Event Management`. Para los casos creados a partir de eventos individuales, busca `creation_source:Event`.
+- **Título**: rodea el término de búsqueda con comillas dobles. Por ejemplo, para encontrar todos los casos que contienen el término «pods de Kubernetes» en el título, busca `"pods de kubernetes"`.
 
-Para componer una consulta más compleja, puedes utilizar los siguientes operadores booleanos que distinguen entre mayúsculas y minúsculas: `AND`, `OR` y `-` (exclusión). Por ejemplo, `priority:(P2 OR P3)` devuelve casos de prioridad `P2` o `P3`. 
+Para crear una consulta más compleja, puedes usar los siguientes operadores booleanos que distinguen entre mayúsculas y minúsculas: `AND`, `OR` y `-` (exclusión). Por ejemplo, `priority:(P2 OR P3)` devuelve casos de prioridad `P2` o `P3`.
 
-Además, puedes buscar los casos en todos los proyectos con la barra de búsqueda general en la esquina superior izquierda.
+Además, puedes buscar casos en todos los proyectos con la barra de búsqueda global en la esquina superior izquierda.
 
 ## Crear una vista
 
-Una **vista** es un filtro de consulta guardado que te permite limitar una lista de casos a lo que te resulta más relevante. Los proyectos tienen vistas predeterminadas para cada uno de los estados: abierto, en curso, cerrado y archivado. Además, hay vistas predeterminadas para los casos que se te han asignado y los que has creado. 
+Una **vista** es un filtro de consulta guardado que te permite delimitar una lista de casos hasta encontrar lo que te sea más relevante. Los proyectos tienen vistas predeterminadas para cada uno de los estados: abierto, en curso, cerrado y archivado. Además, existen vistas predeterminadas para los casos que se te asignaron y que creaste.
 
 Para crear una vista personalizada:
 1. Selecciona **Add View** (Añadir vista) desde un proyecto.
 1. Asigna un nombre a la vista.
 1. En el cuadro de búsqueda, ingresa una consulta. La vista previa se actualiza para mostrarte los casos que coinciden con la consulta de búsqueda actual.
-1. (Opcional) Envía una notificación con herramientas de terceros como Slack, Microsoft Teams, PagerDuty o Webhooks. Haz clic en **+ Add Recipient Type** (+ Añadir tipo de destinatario) y selecciona uno de los canales o destinatarios preconfigurados. Se envía una notificación cada vez que se crea un caso que coincide con la consulta.
-    | Integración     | Configuración    |
-    | --------------- | ---------------- |
-    | Slack           | Selecciona un espacio de trabajo y canal de Slack. |
-    | Microsoft Teams | Si has conectado inquilinos de Microsoft Teams a Datadog, selecciona un inquilino, equipo y canal. De lo contrario, selecciona un conector.|
-    | PagerDuty       | Selecciona un servicio. |
-    | Webhooks        | Selecciona el nombre de un webhook. |
+1. (Opcional) Envía una notificación con herramientas de terceros como Slack, Microsoft Teams, PagerDuty o Webhooks. Haz clic en **+ Add Recipient Type** (+ Añadir tipo de destinatario) y selecciona uno de los canales o destinatarios preconfigurados. Consulta [Crear notificaciones y tickets][2] para obtener más información sobre las herramientas y opciones disponibles.
 1. Haz clic en **Save view** (Guardar vista).
 
 ## Detalles del caso
 
-{{< img src="/service_management/case_management/view_and_manage/case_details_overview.png" alt="Vista de detalles del caso de un ejemplo que se ha escalado" style="width:100%;" >}}
+{{< img src="/service_management/case_management/view_and_manage/case_details_overview.png" alt="Vista detallada de un caso de ejemplo que se escaló" style="width:100%;" >}}
 
-La página de Detalles del caso actúa como la única fuente de información sobre lo que ocurre con la investigación. Cada caso tiene las siguientes propiedades: 
+La página de detalles del caso actúa como la única fuente de información sobre lo que sucede con la investigación. Cada caso tiene las siguientes propiedades:
 
 Estado
 : De manera predeterminada, todos los casos se abren al momento de crearse. A medida que avanzas en el caso, puedes cambiarlo a en curso y cerrado. Escribe `S` para cambiar el estado de un caso. 
@@ -70,7 +64,7 @@ Prioridad
 : De manera predeterminada, no se define una prioridad. Puedes establecer la prioridad del caso en P1: crítico, P2: alto, P3: medio, P4: bajo, P5: información. Escribe `P` para establecer la prioridad de un caso. 
 
 Asignado
-: Se encuentra no asignado de manera predeterminada. Para asignarlo a un usuario, escribe `A`. Para asignártelo, escribe `I`. 
+: De manera predeterminada, no se encuentra asignado. Para asignarlo a un usuario, escribe `A`. Para asignártelo a ti mismo, escribe `I`. 
 
 Atributos
 : Añadir atributos permite organizar y filtrar. De manera predeterminada, todos los casos tienen los siguientes atributos: equipo, centros de datos, servicios, entornos y versiones. 
@@ -81,33 +75,34 @@ Archivado
 Cronología de la actividad
 : Cada caso crea de manera automática una cronología de la actividad para capturar actualizaciones en tiempo real del estado, el asignado, la prioridad, las señales y cualquier comentario añadido. Si te etiquetan en un comentario, recibirás un correo electrónico. Escribe `M` para añadir un comentario y `Cmd + Enter` para enviarlo.
 
-## Tomar acciones
+## Tomar medidas
 
-Utiliza Case Management para recopilar información, contexto y recursos con el fin de determinar la acción adecuada. Esto incluye seguir investigando, escalar a un incidente o cerrar un caso.
+Usa Case Management para recopilar información, contexto y recursos a fin de determinar la medida adecuada que se debe tomar. Esto incluye investigar más a fondo, escalar el caso hasta convertirlo en incidencia o cerrarlo.
 
-De un caso individual:
-- [Crear un notebook de investigación][2]: recopila información sobre la investigación y colabora con los miembros de tu equipo.
-- [Declarar un incidente][3]: escala un caso a incidente e inicia tu proceso de respuesta a incidentes.
-- Crear una incidencia de Jira de manera manual: utiliza `Shift + J` para crear una incidencia de Jira. Para obtener más información sobre cómo configurar la creación automática de incidencias de Jira y la sincronización bidireccional, consulta la documentación de [configuración][4]. 
-- Crear un incidente de ServiceNow de manera manual: utiliza `Shift + N` para crear un incidente de ServiceNow. 
-- [Reunirse en CoScreen][5]: comparte pantallas para la depuración colaborativa. 
+En un caso individual:
+- [Crear un notebook de investigación][3]: recopila información sobre la investigación y colabora con los miembros de tu equipo.
+- [Declarar una incidencia][4]: escala un caso a incidencia e inicia tu proceso de respuesta a incidencias.
+- Crear una incidencia de Jira de manera manual: usa `Shift + J` para crear una incidencia de Jira. Para obtener más información sobre cómo configurar la creación automática de incidencias de Jira y la sincronización bidireccional, consulta la documentación de [configuración][5]. 
+- Crear una incidencia de ServiceNow de manera manual: usa `Shift + N` para crear una incidencia de ServiceNow. 
+- [Reunirse en CoScreen][6]: comparte pantallas para la depuración colaborativa. 
 - Cerrar el caso: informa al equipo que ya no es necesario realizar una acción. Actualiza el estado del caso a cerrado.
 
 ## Análisis de casos
 
-{{< img src="/service_management/case_management/view_and_manage/view_and_manage_case_analytics.png" alt="Editor de gráficos que muestra las opciones de casos seleccionados como fuente de datos." style="width:100%;" >}}
+{{< img src="/service_management/case_management/view_and_manage/view_and_manage_case_analytics.png" alt="Editor de gráficas que muestra las opciones de casos seleccionados como origen de datos" style="width:100%;" >}}
 
-El análisis de casos es una fuente de datos consultable para estadísticas de casos agregadas. Puedes consultar estos análisis en una variedad de widgets de gráficos tanto en [Dashboards][6] como en [Notebooks][2] para analizar la productividad del equipo e identificar patrones en los problemas. 
+El análisis de casos es un origen de datos consultable para estadísticas de casos agregadas. Puedes consultar estos análisis en una variedad de widgets de gráficas tanto en [Dashboards][7] como en [Notebooks][3] para analizar la productividad del equipo e identificar patrones en los problemas. 
 
-Los siguientes widgets son compatibles con el análisis de casos: serie temporal, lista principal, valor de consulta, tabla, mapa de árbol, gráfico circular, cambio y lista.
+Los siguientes widgets son compatibles con el análisis de casos: serie temporal, lista de principales, valor de consulta, tabla, mapa de árbol, gráfico circular, cambio y lista. 
 
-## Leer más
+## Lectura adicional
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/cases
-[2]: /es/notebooks/
-[3]: /es/service_management/incident_management/#describing-the-incident
-[4]: /es/service_management/case_management/settings/#jira
-[5]: /es/coscreen/
-[6]: https://docs.datadoghq.com/es/dashboards/
+[2]: /es/service_management/case_management/create_notifications_and_third_party_tickets
+[3]: /es/notebooks/
+[4]: /es/service_management/incident_management/#describing-the-incident
+[5]: /es/service_management/case_management/settings/#jira
+[6]: /es/coscreen/
+[7]: https://docs.datadoghq.com/es/dashboards/

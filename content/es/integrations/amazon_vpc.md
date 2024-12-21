@@ -4,8 +4,8 @@ categories:
 - aws
 - nube
 - recopilación de logs
-- la red
-custom_kind: integration
+- red
+custom_kind: integración
 dependencies: []
 description: Reúne tus logs de Amazon VPC.
 doc_link: https://docs.datadoghq.com/integrations/amazon_vpc/
@@ -15,6 +15,10 @@ further_reading:
   tag: Blog
   text: Monitorizar logs de flujo (flow) para garantizar la seguridad de la VPC con
     Datadog
+- link: https://www.datadoghq.com/architecture/connect-to-datadog-over-aws-privatelink-using-aws-vpc-peering/
+  tag: Centro de arquitectura
+  text: Conéctate a Datadog a través de AWS PrivateLink mediante la interconexión
+    de VPC de AWS
 git_integration_title: amazon_vpc
 has_logo: false
 integration_id: ''
@@ -37,7 +41,7 @@ Amazon Virtual Private Cloud (Amazon VPC) te permite lanzar recursos AWS en tu r
 
 ### Instalación
 
-Si aún no lo has hecho, configura la [integración Amazon Web Services][1].
+Si aún no lo has hecho, configura primero la [integración de Amazon Web Services][1].
 
 ### Recopilación de métricas
 
@@ -81,7 +85,7 @@ Si has seleccionado Amazon Data Firehose como destino, ya está todo listo.
 Si has seleccionado un bucket de S3 o el grupo de CloudWatch Logs como destino:
 
 1. Si aún no lo has hecho, configura la [función Lambda del Datadog Forwarder][8] en tu cuenta AWS.
-2. Una vez configurada, ve a la función Lambda del Datadog Forwarder. En la sección Información general de la función, haz clic en **Add Trigger** (Añadir activador).
+2. Una vez configurada, ve a la función de Lambda del Datadog Forwarder. En la sección Información general de la función, haz clic en **Add Trigger** (Añadir activador).
 3. Para configurar un activador, selecciona el activador **S3** o **CloudWatch Logs**.
 4. Selecciona el bucket de S3 o el grupo de CloudWatch Logs que contiene los logs de tu VPC.
 5. Para S3, deja el tipo evento como `All object create events`.
@@ -107,13 +111,13 @@ La integración de Amazon VPC no incluye eventos.
 
 La integración de Amazon VPC no incluye checks de servicios.
 
-## Solucionar problemas
+## Resolución de problemas
 
 ¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][5].
 
-## Referencias adicionales
+## {{< img src="synthetics/browser_test.mp4" alt="Browser tests" video=true style="width:100%;">}}
 
-{{< partial name="whats-next/whats-next.html" >}}
+Grabar pruebas de aplicaciones móviles
 
 [1]: https://docs.datadoghq.com/es/integrations/amazon_web_services/
 [2]: https://serverlessrepo.aws.amazon.com/applications/arn:aws:serverlessrepo:us-east-1:464622532012:applications~Datadog-VPC-Flow-Logs

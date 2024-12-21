@@ -24,7 +24,7 @@ title: ログアーカイブ
 
 Datadog アカウントを構成して、独自のクラウドストレージシステムへ収集されたすべてのログ ([インデックス化][1]の有無にかかわらず) を転送します。ストレージに最適化されたアーカイブにログを長期間保管し、コンプライアンス要件を満たすことができると同時に、アドホック調査のための監査適合性を[リハイドレート][2]で維持できます。
 
-{{< img src="logs/archives/log_forwarding_archives_tab.png" alt="Log Forwarding ページの Archives タブ" style="width:100%;">}}
+{{< img src="logs/archives/log_forwarding_archives_122024.png" alt="Log Forwarding ページの Archives タブ" style="width:100%;">}}
 
 [**Log Forwarding** ページ][3]に移動して、取り込んだログを自分のクラウドホストのストレージバケットに転送するためのアーカイブをセットアップします。
 
@@ -83,6 +83,10 @@ GCS ストレージバケットを持つプロジェクト用の [Google Cloud �
 {{% tab "AWS S3" %}}
 
 [AWS コンソール][1]にアクセスし、アーカイブを転送する [S3 バケットを作成][2]します。
+
+{{< site-region region="gov" >}}
+<div class="alert alert-warning"> Datadog アーカイブは、仮想ホスト型アドレッシングに依存する S3 FIPS エンドポイントとの統合時、バケット名にドット (.) を含む場合はサポートされません。詳細は AWS のドキュメント、<a href="https://aws.amazon.com/compliance/fips/">AWS FIPS</a> および <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/VirtualHosting.html">AWS バーチャルホスティング</a>をご参照ください。</div>
+{{< /site-region >}}
 
 **注:**
 
@@ -202,54 +206,15 @@ GCS ストレージバケットを持つプロジェクト用の [Google Cloud �
 * バケットでネットワークアクセスを特定の IP に制限している場合は、{{< region-param key="ip_ranges_url" link="true" text="IP 範囲リスト">}}から Webhook の IP を許可リストに追加してください。
 * **US1-FED サイト**の場合、Datadog を構成して、ログを Datadog GovCloud 環境外の宛先に送信することができます。Datadog は、Datadog GovCloud 環境を離れたログに対して一切の責任を負いません。また、これらのログが GovCloud 環境を離れた後に適用される FedRAMP、DoD 影響レベル、ITAR、輸出コンプライアンス、データ居住地、またはそれに類する規制に関する義務や要件についても、Datadog は一切の責任を負いません。
 
-{{< tabs >}}
-{{% tab "AWS S3" %}}
-
-S3 バケットに適した AWS アカウントとロールの組み合わせを選択します。
-
-バケット名を入力します。**任意**: ログアーカイブのすべてのコンテンツにプレフィックスディレクトリを入力します。
-
-{{< img src="logs/archives/logs_archive_aws_setup.png" alt="Datadog で S3 バケットの情報を設定" style="width:75%;">}}
-
-{{% /tab %}}
-{{% tab "Azure Storage" %}}
-
-**Azure Storage** アーカイブタイプを選択し、ストレージアカウントで Storage Blob Data Contributor ロールのある Datadog アプリ用の Azure テナントとクライアントを選択します。
-
-ストレージアカウント名とアーカイブのコンテナ名を入力します。**任意**: ログアーカイブのすべてのコンテンツにプレフィックスディレクトリを入力します。
-
-{{< img src="logs/archives/logs_archive_azure_setup.png" alt="Datadog で Azure ストレージアカウントの情報を設定" style="width:75%;">}}
-
-
-{{% /tab %}}
-{{% tab "Google Cloud Storage" %}}
-
-**GCS** のアーカイブタイプを選択し、ストレージバケットに書き込む権限を持つ GCS サービスアカウントを選択します。バケット名を入力します。
-
-バケット名を入力します。**任意**: ログアーカイブのすべてのコンテンツにプレフィックスディレクトリを入力します。
-
-{{< img src="logs/archives/logs_archive_gcp_setup.png" alt="Datadog で Azure ストレージアカウントの情報を設定" style="width:75%;">}}
-
-{{% /tab %}}
-{{< /tabs >}}
+| サービス                  | ステップ                                                                                                                                                      |
+|--------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Amazon S3**               | - S3 バケットに適した AWS アカウントとロールの組み合わせを選択します。<br>- バケット名を入力します。<br>**オプション**: ログアーカイブのすべてのコンテンツにプレフィックスディレクトリを入力できます。 |
+| **Azure Storage**        | - **Azure Storage** アーカイブタイプを選択し、ストレージアカウントで Storage Blob Data Contributor ロールのある Datadog アプリ用の Azure テナントとクライアントを選択します。<br>- ストレージアカウント名とアーカイブのコンテナ名を入力します。<br>**オプション**: ログアーカイブのすべてのコンテンツにプレフィックスディレクトリを入力できます。 |
+| **Google Cloud Storage** | - **Google Cloud Storage** のアーカイブタイプを選択し、ストレージバケットに書き込む権限を持つ GCS サービスアカウントを選択します。<br>- バケット名を入力します。<br>**オプション**: ログアーカイブのすべてのコンテンツにプレフィックスディレクトリを入力できます。 |
 
 ### 高度な設定
 
-#### Datadog の権限
-
-デフォルト:
-
-* すべての Datadog 管理者ユーザーは、アーカイブの作成、編集、並べ替えができます。詳しくは、[複数アーカイブの構成](#multiple-archives)を参照してください。
-* すべての Datadog 監理者および標準ユーザーは、アーカイブからリハイドレーションできます。
-* Datadog の読み取り専用ユーザーを含むすべてのユーザーは、リハイドレーションされたログにアクセスできます。
-
-オプションで、コンフィギュレーションステップを使用し、アーカイブにロールを割り当て、以下を実行できるユーザーを設定できます。
-
-* そのアーカイブの構成を編集します。[`logs_write_archive`][9] 権限を参照してください。
-* そのアーカイブからリハイドレートします。[`logs_read_archives`][10] と [`logs_write_historical_view`][11] 権限を参照してください。
-* レガシーな [`read_index_data` 権限][12]を使用する場合に、リハイドレートされたログにアクセスします。
-
-{{< img src="logs/archives/archive_restriction.png" alt="アーカイブおよびリハイドレート済みログへのアクセスを制限" style="width:75%;">}}
+{{< img src="/logs/archives/log_archives_advanced_settings.png" alt="オプションのタグを追加し、最大スキャンサイズを定義するための高度な設定" style="width:100%;" >}}
 
 #### Datadog タグ
 
@@ -258,15 +223,11 @@ S3 バケットに適した AWS アカウントとロールの組み合わせを
 * アーカイブ内のすべてのログタグを含める (デフォルトでは、すべての新規アーカイブに有効化されています)。**注**: 結果のアーカイブサイズが増大します。
 * リハイドレートされたログに、制限クエリポリシーに従ってタグを追加します。[`logs_read_data`][13] 権限を参照してください。
 
-{{< img src="logs/archives/tags_in_out.png" alt="アーカイブタグの構成" style="width:75%;">}}
-
 #### 最大スキャンサイズを定義する
 
 このオプションの構成ステップを使用して、ログアーカイブでリハイドレートのためにスキャンできるログデータの最大量 (GB 単位) を定義します。
 
 最大スキャンサイズが定義されているアーカイブの場合、すべてのユーザーは、リハイドレートを開始する前にスキャンサイズを推定する必要があります。推定されたスキャンサイズがそのアーカイブで許可されているものより大きい場合、ユーザーはリハイドレートを要求する時間範囲を狭めなければなりません。時間範囲を減らすと、スキャンサイズが小さくなり、ユーザーがリハイドレートを開始できるようになります。
-
-{{< img src="logs/archives/max_scan_size.png" alt="アーカイブの最大スキャンサイズを設定する" style="width:75%;">}}
 
 {{< site-region region="us3" >}}
 #### ファイアウォールルール 
@@ -293,11 +254,13 @@ S3 バケットに適した AWS アカウントとロールの組み合わせを
 * S3 Standard-IA
 * S3 One Zone-IA
 * S3 Glacier Instant Retrieval
+* S3 Intelligent-Tiering、[オプションの非同期アーカイブアクセス階層][3]が両方とも無効化されている場合のみ。
 
 他のストレージクラスにあるアーカイブからリハイドレートする場合は、まず上記のサポートされているストレージクラスのいずれかに移動させる必要があります。
 
 [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/how-to-set-lifecycle-configuration-intro.html
 [2]: /ja/logs/archives/rehydrating/
+[3]: https://aws.amazon.com/s3/storage-classes/intelligent-tiering/
 {{% /tab %}}
 {{% tab "Azure Storage" %}}
 

@@ -12,6 +12,9 @@ further_reading:
 - link: /logs/guide/correlate-logs-with-metrics
   tag: Documentation
   text: ログをインフラストラクチャーメトリクスに接続する
+- link: /logs/explorer/calculated_fields/expression_language
+  tag: ドキュメント
+  text: Calculated Fields Expression Language について
 title: ログサイドパネル
 ---
 
@@ -64,12 +67,11 @@ Datadog は次の一般的なサイドパネルレイアウトに従い、個々
 
 - ログテーブルに列を追加または削除する
 - 検索リクエストに特定の値 (include または exclude) を付加します。
-
-{{< img src="logs/explorer/side_panel/context.jpg" alt="サイドパネルコンテキスト" style="width:50%;">}} {{< img src="logs/explorer/side_panel/context2.jpg" alt="サイドパネルコンテキスト" style="width:50%;">}}
-
+  {{< img src="logs/explorer/side_panel/context.jpg" alt="サイドパネルコンテキスト" style="width:50%;">}} {{< img src="logs/explorer/side_panel/context2.jpg" alt="サイドパネルコンテキスト" style="width:50%;">}}
 - 属性からファセットまたはメジャーを作成または編集します。[ログファセット][12]を参照してください。
+  {{< img src="logs/explorer/side_panel/facets.mp4" alt="サイドパネルファセット" video=true style="width:100%;">}}
+- 属性をもとに計算フィールドを作成または編集します。[計算フィールド][14]を参照してください。
 
-{{< img src="logs/explorer/side_panel/facets.mp4" alt="サイドパネルファセット" video=true style="width:100%;">}}
 
 ## ログの共有
 
@@ -95,3 +97,4 @@ Datadog は次の一般的なサイドパネルレイアウトに従い、個々
 [11]: /ja/tracing/app_analytics/search/#displaying-a-full-trace
 [12]: /ja/logs/explorer/facets/#overview
 [13]: /ja/integrations/#cat-notification
+[14]: /ja/logs/explorer/calculated_fields/
