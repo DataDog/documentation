@@ -1342,7 +1342,7 @@ menu:
       pre: inventories
       identifier: sheets
       parent: platform_heading
-      weight: 40000
+      weight: 50000
     - name: Functions and Operators
       url: sheets/functions_operators/
       parent: sheets
@@ -1358,7 +1358,7 @@ menu:
       pre: monitor
       identifier: alerting
       parent: platform_heading
-      weight: 50000
+      weight: 60000
     - name: Configure Monitors
       url: monitors/configuration/
       parent: alerting
@@ -22127,7 +22127,7 @@ menu:
       identifier: metrics_top_level
       pre: metric
       parent: platform_heading
-      weight: 90000
+      weight: 80000
     - name: Custom Metrics
       url: metrics/custom_metrics/
       parent: metrics_top_level
@@ -22233,7 +22233,7 @@ menu:
       identifier: watchdog_top_level
       pre: watchdog
       parent: platform_heading
-      weight: 100000
+      weight: 90000
     - name: Alerts
       url: watchdog/alerts
       identifier: watchdog_alerts
@@ -35039,7 +35039,7 @@ menu:
       pre: bits-ai
       identifier: bits_ai
       parent: platform_heading
-      weight: 110000
+      weight: 100000
     - name: Getting Started
       url: bits_ai/getting_started
       identifier: bits_ai_getting_started
@@ -42725,7 +42725,7 @@ menu:
       pre: service-catalog
       parent: platform_heading
       identifier: service_catalog
-      weight: 120000
+      weight: 110000
     - name: Customize the Service Catalog
       url: service_catalog/customize
       parent: service_catalog
@@ -42836,7 +42836,7 @@ menu:
       pre: api-catalog
       parent: platform_heading
       identifier: api_catalog
-      weight: 130000
+      weight: 120000
     - name: Exploring APIs
       url: /api_catalog/explore_apis/
       identifier: api_catalog_explore
@@ -53082,7 +53082,7 @@ menu:
       pre: error-tracking
       parent: platform_heading
       identifier: error_tracking
-      weight: 140000
+      weight: 130000
     - name: Explorer
       url: error_tracking/explorer
       parent: error_tracking
@@ -53183,7 +53183,7 @@ menu:
       pre: graph-3
       parent: platform_heading
       identifier: change_tracking
-      weight: 150000
+      weight: 140000
     - name: Service Level Objectives
       url: service_management/service_level_objectives/
       pre: slos
@@ -66352,10 +66352,10 @@ menu:
       parent: tests
       identifier: tests_containers
       weight: 3
-    - name: Search and Manage
-      url: tests/search/
+    - name: Repositories
+      url: /tests/repositories
       parent: tests
-      identifier: tests_search
+      identifier: tests_repositories
       weight: 4
     - name: Explorer
       url: tests/explorer/
