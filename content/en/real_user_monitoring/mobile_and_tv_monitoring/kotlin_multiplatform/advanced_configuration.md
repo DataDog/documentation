@@ -158,6 +158,18 @@ GlobalRumMonitor.get().addAttribute(key, value)
 GlobalRumMonitor.get().removeAttribute(key)
 ```
 
+## Track background events
+
+You can track events such as crashes and network requests when your application is in the background (for example, no active view is available). 
+
+Add the following snippet during RUM configuration:
+
+```kotlin
+.trackBackgroundEvents(true)
+```
+<div class="alert alert-info"><p>Tracking background events may lead to additional sessions, which can impact billing. For questions, <a href="https://docs.datadoghq.com/help/">contact Datadog support.</a></p>
+</div>
+
 ## Initialization parameters
 
 You can use the following methods in `Configuration.Builder` when creating the Datadog configuration to initialize the library:

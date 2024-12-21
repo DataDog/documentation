@@ -96,6 +96,43 @@ Whenever you use a `Video` or an `Audio` node to stream media, you can forward a
     end while
 ```
 
+
+## Instrument the channel
+
+See [**Track RUM Resources**](#track-rum-resources) to enable automatic tracking of all your resources, and [**Enrich user sessions**](#enrich-user-sessions) to add custom global or user information to your events.
+
+### Track Views
+
+To split [user sessions][3] into logical steps, manually start a View using the following code. Every navigation to a new screen within your channel should correspond to a new View.
+
+```brightscript
+    viewName = "VideoDetails"
+    viewUrl = "components/screens/VideoDetails.xml"
+    m.global.datadogRumAgent.callfunc("startView", viewName, viewUrl)
+```
+
+### Track RUM Actions
+
+RUM Actions represent the interactions your users have with your channel. You can forward actions to Datadog as follows:
+
+```brightscript
+    targetName = "playButton" ' the name of the SG Node the user interacted with
+    actionType = "click" ' the type of interaction, should be one of "click", "back", or "custom" 
+    m.global.datadogRumAgent.callfunc("addAction", { target: targetName, type: actionType})
+```
+
+### Track RUM errors
+
+Whenever you perform an operation that might throw an exception, you can forward the error to Datadog as follows:
+
+```brightscript
+    try
+        doSomethingThatMightThrowAnException()
+    catch error
+        m.global.datadogRumAgent.callfunc("addError", error)
+    end try
+```
+
 ## Enrich user sessions
 
 After your Roku channel is instrumented with RUM, you can further enrich user session information and gain finer control over the attributes collected by tracking custom events.
@@ -131,10 +168,12 @@ In addition to the default attributes captured by the SDK automatically, you can
     m.global.setField("datadogContext", { foo: "Some value", bar: 123})
 ```
 
-[1]: https://app.datadoghq.com/rum/application/create
-[2]: /real_user_monitoring/mobile_and_tv_monitoring/roku/setup
-
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://app.datadoghq.com/rum/application/create
+[2]: /real_user_monitoring/mobile_and_tv_monitoring/roku/setup
+[3]: /real_user_monitoring/mobile_and_tv_monitoring/roku/data_collected
+
+

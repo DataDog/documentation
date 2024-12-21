@@ -89,8 +89,8 @@ The Datadog React Native SDK requires you to have `compileSdkVersion = 31` or hi
 
    {{< img src="real_user_monitoring/react_native/reactnative_setup.png" alt="Create a RUM application for React Native in Datadog" style="width:90%;">}}
 
-[1]: https://app.datadoghq.com/rum/application/create
 
+[1]: https://app.datadoghq.com/rum/application/create
 {{% /tab %}}
 {{% tab "Error Tracking" %}}
 
@@ -101,8 +101,8 @@ The Datadog React Native SDK requires you to have `compileSdkVersion = 31` or hi
 
    {{< img src="real_user_monitoring/error_tracking/mobile-new-application.png" alt="Create an application for React Native in Datadog" style="width:90%;">}}
 
-[1]: https://app.datadoghq.com/error-tracking/settings/setup/client/
 
+[1]: https://app.datadoghq.com/error-tracking/settings/setup/client/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -374,35 +374,6 @@ If user interactions tracking is enabled as in the code example above, the Datad
 
 Alternatively, you can use the `accessibilityLabel` element property to give the tap action a name; otherwise, the element type is reported. You can check the sample app for usage examples.
 
-### Track view navigation
-
-Because React Native offers a wide range of libraries to create screen navigation, only manual view tracking is supported by default. To see RUM or Error tracking sessions populate in Datadog, you need to implement view tracking.
-
-You can manually start and stop a view using the following `startView()` and `stopView` methods.
-
-```js
-import {
-    DdRum
-} from '@datadog/mobile-react-native';
-
-// Start a view with a unique view identifier, a custom view name, and an object to attach additional attributes to the view
-DdRum.startView(
-    '<view-key>', // <view-key> has to be unique, for example it can be ViewName-unique-id
-    'View Name',
-    { 'custom.foo': 'something' },
-    Date.now()
-);
-// Stops a previously started view with the same unique view identifier, and an object to attach additional attributes to the view
-DdRum.stopView('<view-key>', { 'custom.bar': 42 }, Date.now());
-```
-
-Use one of Datadog's integrations to automatically track views for the following libraries:
-
--   If you use the [`react-native-navigation`][11] library, then add the `@datadog/mobile-react-native-navigation` package and follow the [setup instructions][12].
--   If you use the [`react-navigation`][13] library, then add the `@datadog/mobile-react-navigation` package and follow the [setup instructions][12].
-
-If you experience any issues setting up View tracking with `@datadog/mobile-react-navigation` you can see this Datadog [example application][14] as a reference.
-
 ## Sending data when device is offline
 
 The React Native SDK ensures availability of data when your user device is offline. In cases of low-network areas, or when the device battery is too low, all events are first stored on the local device in batches. They are sent as soon as the network is available, and the battery is high enough to ensure the React Native SDK does not impact the end user's experience. If the network is not available with your application running in the foreground, or if an upload of data fails, the batch is kept until it can be sent successfully.
@@ -428,11 +399,11 @@ configuration.trackBackgroundEvents = true;
 
 ### Android
 
-Before data is uploaded to Datadog, it is stored in cleartext in your application's cache directory. This cache folder is protected by [Android's Application Sandbox][15], meaning that on most devices this data can't be read by other applications. However, if the mobile device is rooted, or someone tampers with the Linux kernel, the stored data might become readable.
+Before data is uploaded to Datadog, it is stored in cleartext in your application's cache directory. This cache folder is protected by [Android's Application Sandbox][11], meaning that on most devices this data can't be read by other applications. However, if the mobile device is rooted, or someone tampers with the Linux kernel, the stored data might become readable.
 
 ### iOS
 
-Before data is uploaded to Datadog, it is stored in cleartext in the cache directory (`Library/Caches`) of your [application sandbox][16], which can't be read by any other app installed on the device.
+Before data is uploaded to Datadog, it is stored in cleartext in the cache directory (`Library/Caches`) of your [application sandbox][12], which can't be read by any other app installed on the device.
 
 ## Development mode
 
@@ -454,7 +425,7 @@ const config = new DatadogProviderConfiguration(
 
 ## New architecture support
 
-The [React Native new architecture][15] is supported by the React Native SDK in version `>=1.8.0`.
+The [React Native new architecture][11] is supported by the React Native SDK in version `>=1.8.0`.
 
 The minimum supported React Native version for the new architecture is `0.71`.
 
@@ -488,7 +459,7 @@ pre_install do |installer|
 end
 ```
 
-**Note**: This solution comes from this [StackOverflow][18] post.
+**Note**: This solution comes from this [StackOverflow][13] post.
 
 ## Further Reading
 
@@ -504,11 +475,6 @@ end
 [8]: /account_management/api-app-keys/#client-tokens
 [9]: /real_user_monitoring/mobile_and_tv_monitoring/react_native/setup/reactnative/#initialize-the-library-with-application-context
 [10]: /getting_started/tagging/#define-tags
-[11]: https://github.com/wix/react-native-navigation
-[12]: /real_user_monitoring/mobile_and_tv_monitoring/react_native/integrated_libraries/
-[13]: https://github.com/rmobile_and_tv_monitoring/eact-navigation/react-navigation
-[14]: https://github.com/DataDog/dd-sdk-reactnative-examples/tree/main/rum-react-navigation
-[15]: https://source.android.com/security/app-sandbox
-[16]: https://support.apple.com/guide/security/security-of-runtime-process-sec15bfe098e/web
-[17]: https://reactnative.dev/docs/the-new-architecture/landing-page
-[18]: https://stackoverflow.com/questions/37388126/use-frameworks-for-only-some-pods-or-swift-pods/60914505#60914505
+[11]: https://source.android.com/security/app-sandbox
+[12]: https://support.apple.com/guide/security/security-of-runtime-process-sec15bfe098e/web
+[13]: https://stackoverflow.com/questions/37388126/use-frameworks-for-only-some-pods-or-swift-pods/60914505#60914505
