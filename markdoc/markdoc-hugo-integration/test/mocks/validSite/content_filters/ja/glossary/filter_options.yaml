@@ -1,0 +1,54 @@
+  allowed:
+  # Colors
+  - id: red
+    display_name: Red (ja)
+  - id: blue
+    display_name: Blue (ja)
+  - id: yellow
+    display_name: Yellow (ja)
+  - id: green
+    display_name: Green (ja)
+
+  # Blue items
+
+
+  - display_name: Ocean (ja)
+    id: ocean
+  - display_name: Sky (ja)
+    id: sky
+  - display_name: Jeans (ja)
+    id: jeans
+  - display_name: Blueberry (ja)
+    id: blueberry
+
+  # Green items
+  - display_name: Grass (ja)
+    id: grass
+  - display_name: Emerald (ja)
+    id: emerald
+  - display_name: Lime (ja)
+    id: lime
+  - display_name: Frog (ja)
+    id: frog
+
+  # Red items
+  # This item is intentionally missing from the list,
+  # to verify the failover to EN
+  # - id: ruby
+  #   display_name: Ruby (ja)
+  - id: apple
+    display_name: Apple (ja)
+  - id: firetruck
+    display_name: Firetruck (ja)
+  - id: stop_sign
+    display_name: Stop sign (ja)
+
+  # Yellow items
+  - id: banana
+    display_name: Banana (ja)
+  - id: sunflower
+    display_name: Sunflower (ja)
+  - id: lemon
+    display_name: Lemon (ja)
+  - id: school_bus
+    display_name: School bus (ja)
