@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Light_Small" xmlns="http://www.w3.org/2000/svg" width="100" viewBox="0 0 192 192">
+<defs>
+<style>.cls-1{fill:#9580ff;}.cls-1,.cls-2,.cls-3,.cls-4{stroke-width:0px;}.cls-2{fill:#d4ccff;}.cls-3{fill:#4e00d4;}.cls-4{fill:#60f;}</style>
+</defs>
+<rect class="cls-3" x="8" y="32.15" width="176" height="8"/>
+<rect class="cls-3" x="8.01" y="51.98" width="55.82" height="32.44"/>
+<rect class="cls-4" x="8.01" y="89.77" width="55.82" height="32.44"/>
+<rect class="cls-1" x="8.01" y="127.56" width="55.82" height="32.44"/>
+<rect class="cls-4" x="67.83" y="51.98" width="56" height="32.44"/>
+<rect class="cls-2" x="127.84" y="51.98" width="56" height="32.44"/>
+<rect class="cls-1" x="67.83" y="89.77" width="56" height="32.44"/>
+</svg>
