@@ -36,7 +36,6 @@ $baseImgURL: '{{.Site.Params.img_url}}';
 @import "pages/404";
 @import "pages/home";
 @import "pages/glossary";
-@import "pages/standard-attributes";
 @import "pages/reference";
 
 // Components
@@ -76,6 +75,7 @@ $baseImgURL: '{{.Site.Params.img_url}}';
 
 @import 'components/tooltip'; // Tooltip shortcode styles
 @import "components/multifilter-search";
+@import "components/filter-search";
 
 
 // for now just include ie fixes
