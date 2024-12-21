@@ -1,6 +1,7 @@
 ---
 title: Agent 6 Configuration Files
 disable_toc: false
+private: true
 ---
 
 ## Agent main configuration file
