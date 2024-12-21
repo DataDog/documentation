@@ -3016,6 +3016,11 @@ menu:
       identifier: cnm_guides
       parent: cnm
       weight: 105
+    - name: Supported Cloud Services
+      url: network_monitoring/cloud_network_monitoring/supported_cloud_services/
+      identifier: cnm_supported_cloud_services
+      parent: cnm
+      weight: 106
     - name: DNS Monitoring
       url: network_monitoring/dns/
       parent: nm_parent
