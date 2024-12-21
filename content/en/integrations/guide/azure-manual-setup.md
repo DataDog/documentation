@@ -188,11 +188,10 @@ A form to create a new app registration is displayed:
 #### Creating the app registration
 
 1. Under **Azure Active Directory**, navigate to **App Registrations** and click **New registration**.
-2. Enter the following and click the **Create** button. The name and sign-on URL are not used but are required for the setup process.
+2. Enter the following and click the **Create** button.
 
     - Name: `Datadog Auth`
-    - Supported Account Types: `Accounts in this organizational directory only (Datadog)`
-    - Redirect URI: {{< region-param key="dd_full_site" code="true" >}}
+    - Supported Account Types: `Accounts in this organizational directory only`
 
 {{< img src="integrations/guide/azure_manual_setup/Azure_create_ad.png" alt="Azure create app" popup="true" style="width:80%;" >}}
 
