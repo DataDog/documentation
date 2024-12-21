@@ -69,7 +69,7 @@ layouts/shortcodes/**/*.md                                    @DataDog/documenta
 
 # Serverless
 
-/content/en/serverless/                                 @DataDog/serverless-product @DataDog/documentation
+/content/en/serverless/                                 @DataDog/serverless @DataDog/documentation
 /layouts/shortcodes/latest-lambda-layer-version.html    @DataDog/documentation
 
 # Database Management
