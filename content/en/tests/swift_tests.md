@@ -1,6 +1,6 @@
 ---
 title: Instrumenting your Swift tests with RUM
-description: Learn how to use Test Optimisation and RUM to connect your Swift test results with application sessions and session replays.
+description: Learn how to use Test Optimization and RUM to connect your Swift test results with application sessions and session replays.
 aliases:
 - /continuous_integration/guides/rum_swift_integration
 - /continuous_integration/integrate_tests/swift_tests
