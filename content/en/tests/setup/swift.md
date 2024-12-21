@@ -208,7 +208,7 @@ Environment variables need to be set only in the test target, because the framew
 
 ### Test Optimisation SDK
 
-If you don't use RUM you can link your application target with the Test SDK. It will add auto-intrumentation to your application and will gather network requests and logs and will attach them to the test traces.
+If you don't use RUM, you can link your application target with the Test SDK. The SDK adds auto-intrumentation to your application, gathers network requests and logs, and attaches them to the test traces.
 
 Environment variables need to be set only in the test target, because the framework automatically injects these values to the application.
 
