@@ -7,7 +7,7 @@ aliases:
     - /tracing/setup_overview/custom_instrumentation/go
     - /tracing/trace_collection/custom_instrumentation/go
     - /tracing/trace_collection/custom_instrumentation/dd_libraries/go
-description: 'Instrument your code with the Datadog API tracer.'
+description: 'Instrument your code with the Datadog Go APM tracer.'
 code_lang: dd-api
 type: multi-code-lang
 code_lang_weight: 1
@@ -19,8 +19,13 @@ further_reading:
       tag: 'Documentation'
       text: 'Explore your services, resources, and traces'
 ---
+
 <div class="alert alert-info">
 If you have not yet read the instructions for auto-instrumentation and setup, start with the <a href="https://docs.datadoghq.com/tracing/setup/go/">Go Setup Instructions</a>.
+</div>
+
+<div class="alert alert-info">
+The Go Tracer v2 is in Preview! See <a href="/tracing/trace_collection/custom_instrumentation/go/migration">the migration guide</a> to upgrade.
 </div>
 
 This page details common use cases for adding and customizing observability with Datadog APM.
@@ -40,7 +45,8 @@ import (
     "log"
     "net/http"
 
-    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer" // 1.x
+    // "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer" // 2.x
 )
 
 func handler(w http.ResponseWriter, r *http.Request) {
@@ -70,7 +76,8 @@ package main
 import (
     "net/http"
 
-    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer" // 1.x
+    // "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer" // 2.x
 )
 
 func handler(w http.ResponseWriter, r *http.Request) {
@@ -89,7 +96,10 @@ Add [tags][1] to all [spans][2] by configuring the tracer with the `WithGlobalTa
 ```go
 package main
 
-import "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+import (
+    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer" // 1.x
+    // "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer" // 2.x
+)
 
 func main() {
     tracer.Start(
@@ -109,9 +119,6 @@ err := someOperation()
 span.Finish(tracer.WithError(err))
 ```
 
-**Note**: Closing a span that was not started in your code can lead to missing data.
-Please follow your specific `dd-trace-go` [integration documentation][10] to do that.
-
 ## Adding spans
 
 If you aren't using supported library instrumentation (see [Library compatibility][3]), you may want to to manually instrument your code.
@@ -122,9 +129,9 @@ Unlike other Datadog tracing libraries, when tracing Go applications, it's recom
 
 ### Manually creating a new span
 
-To make use of manual instrumentation, use the `tracer` package which is documented on Datadog's [godoc page][4]:
+To make use of manual instrumentation, use the `tracer` package which is documented on Datadog's [godoc page][4] (or [the v2 godoc page][12]):
 
-There are two functions available to create spans. API details are available for `StartSpan` [here][5] and for `StartSpanFromContext` [here][6].
+There are two functions available to create spans. API details are available for `StartSpan` [here][5] (or [here for v2][13]) and for `StartSpanFromContext` [here][6] (or [here for v2][14]).
 
 ```go
 //Create a span with a resource name, which is the child of parentSpan.
@@ -160,7 +167,8 @@ package main
 import (
     "net/http"
 
-    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer" // 1.x
+    // "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer" // 2.x
 )
 
 func handler(w http.ResponseWriter, r *http.Request) {
@@ -186,7 +194,8 @@ package main
 import (
     "net/http"
 
-    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer" // 1.x
+    // "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer" // 2.x
 )
 
 func handler(w http.ResponseWriter, r *http.Request) {
@@ -226,5 +235,7 @@ Traces can be excluded based on their resource name, to remove synthetic traffic
 [6]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#StartSpanFromContext
 [7]: /tracing/glossary/#trace
 [9]: /tracing/security
-[10]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1
 [11]: /tracing/trace_collection/trace_context_propagation/
+[12]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/ddtrace/tracer
+[13]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/ddtrace/tracer#StartSpan
+[14]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/ddtrace/tracer#StartSpanFromContext

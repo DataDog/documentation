@@ -38,15 +38,16 @@ To begin profiling applications:
 2. Get `dd-trace-go` using the command:
 
     ```shell
-    go get gopkg.in/DataDog/dd-trace-go.v1/profiler
+    go get gopkg.in/DataDog/dd-trace-go.v1/profiler # v1
+    # go get github.com/DataDog/dd-trace-go/v2/profiler # v2
     ```
-
      **Note**: Profiler is available in the `dd-trace-go` library for versions 1.23.0+.
 
-3. Import the [profiler][6] at the start of your application:
+3. Import the [profiler][6] ([or profiler v2][21]) at the start of your application:
 
-    ```Go
-    import "gopkg.in/DataDog/dd-trace-go.v1/profiler"
+    ```go
+    import "gopkg.in/DataDog/dd-trace-go.v1/profiler" // 1.x
+    // "github.com/DataDog/dd-trace-go/v2/profiler" // 2.x
     ```
 
 4. Add the following snippet to start the profiler:
@@ -80,7 +81,7 @@ To begin profiling applications:
 
 6. After a minute or two, visualize your profiles in the [Datadog APM > Profiler page][10].
 
-**Note**: By default, only the CPU and Heap profiles are enabled. Use [profiler.WithProfileTypes][11] to enable additional [profile types][12].
+**Note**: By default, only the CPU and Heap profiles are enabled. Use [profiler.WithProfileTypes][11] to enable additional [profile types][12]. For relevant v2 documentation, view [profiler.WithProfileTypes][22] and [profile types][23].
 
 If you automatically instrument your Go application with [Orchestrion][20], it adds the continuous profiler code to your application. To enable the profiler at run time, set the environment variable `DD_PROFILING_ENABLED=true`.
 
@@ -158,3 +159,6 @@ The [Getting Started with Profiler][17] guide takes a sample service with a perf
 [18]: /profiler/enabling/supported_versions/
 [19]: https://app.datadoghq.com/account/settings/agent/latest?platform=overview
 [20]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/go
+[21]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/profiler#pkg-constants
+[22]:https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/profiler#WithProfileTypes
+[23]:https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/profiler#ProfileType

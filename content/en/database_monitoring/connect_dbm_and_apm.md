@@ -96,31 +96,34 @@ DD_VERSION=(application version)
 {{% tab "Go" %}}
 
 Update your app dependencies to include [dd-trace-go@v1.44.0][1] or greater:
-```
-go get gopkg.in/DataDog/dd-trace-go.v1@v1.44.0
+```shell
+go get gopkg.in/DataDog/dd-trace-go.v1@v1.44.0 # 1.x
+# go get github.com/DataDog/dd-trace-go/v2 # 2.x
 ```
 
 Update your code to import the `contrib/database/sql` package:
 ```go
 import (
    "database/sql"
-   "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
-   sqltrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/database/sql"
+   "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer" // 1.x
+   sqltrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/database/sql" // 1.x
+   // "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer" // 2.x
+   // sqltrace "github.com/DataDog/dd-trace-go/contrib/database/sql/v2" // 2.x
 )
 ```
 
 Enable the database monitoring propagation feature using one of the following methods:
-1. Env variable:
+- Env variable:
    `DD_DBM_PROPAGATION_MODE=full`
 
-2. Using code during the driver registration:
+- Using code during the driver registration:
    ```go
-   sqltrace.Register("postgres", &pq.Driver{}, sqltrace.WithDBMPropagation(tracer.DBMPropagationModeFull), sqltrace.WithServiceName("my-db-service"))
+   sqltrace.Register("postgres", &pq.Driver{}, sqltrace.WithDBMPropagation(tracer.DBMPropagationModeFull), sqltrace.WithService("my-db-service"))
    ```
 
-3. Using code on `sqltrace.Open`:
+- Using code on `sqltrace.Open`:
    ```go
-   sqltrace.Register("postgres", &pq.Driver{}, sqltrace.WithServiceName("my-db-service"))
+   sqltrace.Register("postgres", &pq.Driver{}, sqltrace.WithService("my-db-service"))
 
    db, err := sqltrace.Open("postgres", "postgres://pqgotest:password@localhost/pqgotest?sslmode=disable", sqltrace.WithDBMPropagation(tracer.DBMPropagationModeFull))
    if err != nil {
@@ -132,8 +135,10 @@ Full example:
 ```go
 import (
 	"database/sql"
-	"gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
-	sqltrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/database/sql"
+	"gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer" // 1.x
+   sqltrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/database/sql" // 1.x
+   // "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer" // 2.x
+   // sqltrace "github.com/DataDog/dd-trace-go/contrib/database/sql/v2" // 2.x
 )
 
 func main() {
