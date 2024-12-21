@@ -319,7 +319,7 @@ When code coverage is enabled, the Datadog Tracer reports it under the `test.cod
 
 To enable code coverage for Xcode projects you can follow this guide from Apple: [Enable code coverage in your test plan][1].
 
-For SPM tests add `--enable-code-coverage` parameter to your `swift test` invocation.
+For SPM tests, add the `--enable-code-coverage` parameter to your `swift test` invocation.
 
 [1]: https://developer.apple.com/documentation/xcode/determining-how-much-code-your-tests-cover#Enable-code-coverage-in-your-test-plan
 {{% /tab %}}
