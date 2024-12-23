@@ -21,56 +21,56 @@ When configured, the SNMP check can also send ICMP pings to your devices. This c
 
 3. **Linux Only**: If you're receiving errors when running ping, you may need to configure the integration to send pings using a raw socket. This requires elevated privileges and is done using the Agent's system-probe. See the [linux.use_raw_socket][5] `system-probe` configuration below.
 
-**Note**: For Autodiscovery, Datadog does not ping devices that do not respond to SNMP.
-
 {{< tabs >}}
 {{% tab "Individual" %}}
 
-- To apply ping settings to all _manually_ configured devices, add the ping configuration in the `init_config` section.
+To apply ping settings to all _manually_ configured devices, add the ping configuration in the `init_config` section.
 
-    ```yaml
-        init_config:
-          loader: core
-          use_device_id_as_hostname: true
-        instances:
-        - ip_address: '1.2.3.4'
-          community_string: 'sample-string'
-          tags:
-            - 'key1:val1'
-            - 'key2:val2'
-          ping:
-            enabled: true            # (default false) enable the ping check
-            linux:                   # (optional) Linux specific configuration
-              use_raw_socket: true   # (optional, default false) send pings using a raw socket (see step 3 above)
-    ```
+```yaml
+init_config:
+  loader: core
+  use_device_id_as_hostname: true
+  instances:
+    - ip_address: '1.2.3.4'
+      community_string: 'sample-string'
+      tags:
+      - 'key1:val1'
+      - 'key2:val2'
+  ping:
+    enabled: true            # (default false) enable the ping check
+    linux:                   # (optional) Linux specific configuration
+    use_raw_socket: true   # (optional, default false) send pings using a raw socket (see step 3 above)
+```
 
 {{% /tab %}}
 
 {{% tab "Autodiscovery" %}}
 
-- To apply ping settings to all _Autodiscovery_ subnets, create the ping configuration under the `network_devices.autodiscovery` section.
+To apply ping settings to all _Autodiscovery_ subnets, create the ping configuration under the `network_devices.autodiscovery` section.
 
-    ```yaml
-   network_devices:
-     autodiscovery:
-       workers: 100
-       discovery_interval: 3600
-       loader: core
-       use_device_id_as_hostname: true
-       configs:
-         - network_address: 10.10.0.0/24
-           loader: core
-           snmp_version: 2
-           port: 161
-           community_string: '***'
-           tags:
-           - "key1:val1"
-           - "key2:val2"
-           ping:
-             enabled: true            # (default false) enable the ping check
-             linux:                   # (optional) Linux specific configuration
-               use_raw_socket: true   # (optional, default false) send pings using a raw socket (see step 3 above)
-    ```
+```yaml
+network_devices:
+  autodiscovery:
+    workers: 100
+    discovery_interval: 3600
+    loader: core
+    use_device_id_as_hostname: true
+    configs:
+      - network_address: 10.10.0.0/24
+        loader: core
+        snmp_version: 2
+        port: 161
+        community_string: '***'
+        tags:
+        - "key1:val1"
+        - "key2:val2"
+        ping:
+          enabled: true            # (default false) enable the ping check
+          linux:                   # (optional) Linux specific configuration
+          use_raw_socket: true   # (optional, default false) send pings using a raw socket (see step 3 above)
+```
+
+**Note**: For Autodiscovery, Datadog does not ping devices that do not respond to SNMP.
 
 {{% /tab %}}
 

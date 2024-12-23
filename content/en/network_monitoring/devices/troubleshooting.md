@@ -42,71 +42,89 @@ The output should look similar to the following:
 
    **Note**: Provide your credentials directly in the CLI. If credentials aren't provided, the Agent attempts to locate them in your running Agent configuration files. 
 
-   **Linux**: 
-   For SNMP v2:
-   ```
-   sudo -u dd-agent datadog-agent snmp walk <IP Address> -C <COMMUNITY_STRING>
-   ```
-   For SNMP v3:
-    ```
-    sudo -u dd-agent datadog-agent snmp walk <IP Address> -A <AUTH_KEY> -a <AUTH_PROTOCOL> -X <PRIV_KEY> -x <PRIV_PROTOCOL>
-    ```
-    **Windows**:   
-    ```
-    agent snmp walk <IP Address>[:Port]
+   **Linux**: <br />
+     SNMP v2:
+     ```
+     sudo -u dd-agent datadog-agent snmp walk <IP Address> -C <COMMUNITY_STRING>
+     ```
+     SNMP v3:
+      ```
+      sudo -u dd-agent datadog-agent snmp walk <IP Address> -A <AUTH_KEY> -a <AUTH_PROTOCOL> -X <PRIV_KEY> -x <PRIV_PROTOCOL>
+      ```
+      **Windows**:   
+      ```
+      agent snmp walk <IP Address>[:Port]
 
-    Example:           
-    agent.exe snmp walk  10.143.50.30 1.3.6 
-    ```
+      Example:           
+      agent.exe snmp walk  10.143.50.30 1.3.6 
+      ```
 
     Refer to your vendor specific documentation for additional information on running these commands.
 
-3. If either the SNMP status or Agent walk show an error, it could indicate one of the following issues:
+### Troubleshooting SNMP Errors
 
-   **Unreachable or misconfigured device**:
+If either the SNMP status or Agent walk shows an error, it could indicate one of the following issues:
 
-   ```
+#### Unreachable or misconfigured device:
+
+   **Error**:
+   ```plaintext
    Error: check device reachable: failed: error reading from socket: read udp 127.0.0.1:46068->1.2.3.4:161
    ```
-   
+
    **Solution**:
-   - Log into your device and ensure that SNMP is enabled and exposed on port 161.
-   - Ensure your collector firewall allows egress:
 
-   **Linux only**:
+   1. Log into your device and ensure that SNMP is enabled and exposed on port 161.
+   2. Verify that your collector firewall allows egress.
 
-   Run `iptables -L OUTPUT` and ensure that there is not a deny rule:
+   3. Optionally, For Linux only:
 
+      Run `iptables -L OUTPUT` and ensure there is no deny rule:
+
+      ```
+      vagrant@agent-dev-ubuntu-22:~$ sudo iptables -L OUTPUT
+      Chain OUTPUT (policy ACCEPT)
+      target     prot opt source               destination
+      DROP       all  --  anywhere             10.4.5.6
+      ```
+   3. Ensure your community string matches.
+
+#### Incorrect SNMPv2 credentials
+
+   **Error**:
    ```
-   vagrant@agent-dev-ubuntu-22:~$ sudo iptables -L OUTPUT
-   Chain OUTPUT (policy ACCEPT)
-   target     prot opt source               destination
-   DROP       all  --  anywhere             10.4.5.6
-   ```
-
-   - Ensure your community string matches.
-
-   **Incorrect SNMPv2 credentials**:
-
-   ``` 
    Error: an authentication method needs to be provided
+   ``` 
+
+   **Solution**:
+
+   If using SNMPv2, ensure that a community string is set.
+
+#### Incorrect SNMPv3 privacy protocol
+
+   **Error**:
+   ```
+   Error: check device reachable: failed: decryption error; failed to autodetect profile: failed to fetch sysobjectid: cannot get sysobjectid: decryption error; failed to fetch values: failed to fetch scalar oids with batching: failed to fetch scalar oids: fetch scalar: error getting oids `[1.3.6.1.2.1.1.1.0 1.3.6.1.2.1.1.2.0 1.3.6.1.2.1.1.3.0 1.3.6.1.2.1.1.5.0]`: decryption error
    ```
 
-   **Solution**: 
-   If you are using SNMPv2 you need to set a community string.
-
-   **Incorrect SNMPv3 privacy protocol**
+   OR
 
    ```
-   Error: check device reachable: failed: decryption error; failed to autodetect profile: failed to fetch sysobjectid: cannot get sysobjectid: decryption error; failed to fetch values: failed to fetch scalar oids with batching: failed to fetch scalar oids: fetch scalar: error getting oids `[1.3.6.1.2.1.1.1.0 1.3.6.1.2.1.1.2.0 1.3.6.1.2.1.1.3.0 1.3.6.1.2.1.1.5.0]`: decryption error  OR Error: check device reachable: failed: wrong digest; failed to autodetect profile: failed to fetch sysobjectid: cannot get sysobjectid: wrong digest; failed to fetch values: failed to fetch scalar oids with batching: failed to fetch scalar oids: fetch scalar: error getting oids `[1.3.6.1.2.1.1.1.0 1.3.6.1.2.1.1.2.0 1.3.6.1.2.1.1.3.0 1.3.6.1.2.1.1.5.0]`: wrong digest
+   Error: check device reachable: failed: wrong digest; failed to autodetect profile: failed to fetch sysobjectid: cannot get sysobjectid: wrong digest; failed to fetch values: failed to fetch scalar oids with batching: failed to fetch scalar oids: fetch scalar: error getting oids `[1.3.6.1.2.1.1.1.0 1.3.6.1.2.1.1.2.0 1.3.6.1.2.1.1.3.0 1.3.6.1.2.1.1.5.0]`: wrong digest
    ```
 
-   **Solution**: 
-   Ensure the following configuration parameters are correct: `user`, `authKey`, `authProtocol`, `privKey`, `privProtocol`.
+   **Solution**:
+
+   Verify that the following SNMPv3 configuration parameters are correct:
+   - user
+   - authKey
+   - authProtocol
+   - privKey
+   - privProtocol
 
 ### Traps not being received for devices
 
-Check the Datadog `agent.log` file to ensure that you can bind to the traps port. The following error indicates that you are unable to bind to the traps port:
+1. Check the Datadog `agent.log` file to ensure that you can bind to the traps port. The following error indicates that you are unable to bind to the traps port:
 
    ```
    Failed to start snmp-traps server: error happened when listening for SNMP Traps: listen udp 0.0.0.0:162: bind: permission denied
@@ -119,16 +137,19 @@ Check the Datadog `agent.log` file to ensure that you can bind to the traps port
    sudo setcap 'cap_net_bind_service=+ep' /opt/datadog-agent/bin/agent/agent
    ```
 
-2. Navigate to the troubleshooting dashboard in NDM:
+#### Traps incorrectly formatted
+
+1. Navigate to the troubleshooting dashboard in NDM:
 
    {{< img src="/network_device_monitoring/troubleshooting/ndm_troubleshooting_dashboard.png" alt="The Network Device Monitoring page showing the Dashboard dropdown with the NDM Troubleshooting dashboard highlighed." style="width:80%;" >}}
 
-3. Scroll down to the Traps widget and observe the **Traps incorrectly formatted** graph. If this is non-zero it likely means that the authentication on the NDM collector and the device do not match. 
+2. Scroll down to the Traps widget and observe the **Traps incorrectly formatted** graph. If this is non-zero it likely means that the authentication on the NDM collector and the device do not match. 
 
    {{< img src="/network_device_monitoring/troubleshooting/ndm_traps_dashboard.png" alt="The NDM troubleshooting dashboard showing the Traps widget section." style="width:100%;" >}}
    
-   **Solution**: 
-   Ensure that the following configurations in the `datadog.yaml` file match the traps settings on the devices from which you are missing traps:
+   **Solution**:
+
+     Verify that the following configurations in the `datadog.yaml` file align with the trap settings on the devices from which traps are missing:
 
    ```
     ## @param community_strings - list of strings - required
