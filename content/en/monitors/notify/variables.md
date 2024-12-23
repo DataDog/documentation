@@ -376,7 +376,7 @@ To include **any** attribute or tag from a log, a trace span, a RUM event, a CI 
 
 {{% collapse-content title="Example syntax usage" level="h4" %}}
 - For any `key:value` pair, the variable `{{log.tags.key}}` renders `value` in the alert message.
-- The `@` that prefixes all attributes is not included. For example, if a log monitor is grouped by `@http.status_code`, to include the error message or infrastructure tags in the notification message, use the variables:
+- The `@` that prefixes all attributes is not included. For example, if a log monitor is grouped by `@http.status_code`, you can include the error message or infrastructure tags in the notification message by using the variables:
   
   ```text
   {{ log.attributes.[error.message] }}
@@ -386,7 +386,7 @@ To include **any** attribute or tag from a log, a trace span, a RUM event, a CI 
 
   {{< img src="monitors/notifications/tag_attribute_variables.png" alt="Matching attribute variable syntax" style="width:90%;">}}
 - The message renders the `error.message` attribute of a chosen log matching the query, **if the attribute exists**.
-- If the tag is on an event use the following syntax:
+- If the tag is on an event, use the following syntax:
 
   ```text
   {{ event.tags.[dot.key.test] }}
@@ -398,7 +398,7 @@ To include **any** attribute or tag from a log, a trace span, a RUM event, a CI 
 
 #### Important notes
 
-- If the selected event does not include the attribute or tag key, the variable renders empty in the notification message. To prevent missing notifications, avoid using these variables for routing notification with `{{#is_match}}` handles.
+- If the selected event does not include the attribute or tag key, the variable renders empty in the notification message. To prevent missing notifications, avoid using these variables for routing notifications with `{{#is_match}}` handles.
 - For monitors using Formulas & Functions in queries, values resolve based on events extracted from the first query.
 
 
