@@ -125,8 +125,7 @@ Aunque el concepto de pipeline CI puede variar en función de tu proveedor, ve c
 | Etapa    | Etapa            |
 | Trabajo      | Acción           |
 
-{{< partial name="whats-next/whats-next.html" >}}
-
+{{% /tab %}}
 {{% tab "Otros proveedores de IC" %}}
 
 | Datadog  | Otros proveedores de CI |
