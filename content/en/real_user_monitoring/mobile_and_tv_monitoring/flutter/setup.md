@@ -241,6 +241,72 @@ The SDK changes its behavior according to the new value. For example, if the cur
 - You change it to `TrackingConsent.granted`, the SDK sends all current and future data to Datadog;
 - You change it to `TrackingConsent.notGranted`, the SDK wipes all current data and does not collect any future data.
 
+## Automatically track views
+
+If you are using Flutter Navigator v2.0, your setup for automatic view tracking differs depending on your routing middleware. See [Flutter Integrated Libraries][18] for instructions on how to integrate with [go_router][8], [AutoRoute][9], and [Beamer][10].
+
+### Flutter Navigator v1
+
+The Datadog Flutter Plugin can automatically track named routes using the `DatadogNavigationObserver` on your MaterialApp:
+
+```dart
+MaterialApp(
+  home: HomeScreen(),
+  navigatorObservers: [
+    DatadogNavigationObserver(DatadogSdk.instance),
+  ],
+);
+```
+
+This works if you are using named routes or if you have supplied a name to the `settings` parameter of your `PageRoute`.
+
+If you are not using named routes, you can use `DatadogRouteAwareMixin` in conjunction with the `DatadogNavigationObserverProvider` widget to start and stop your RUM views automatically. With `DatadogRouteAwareMixin`, move any logic from `initState` to `didPush`.
+
+### Flutter Navigator v2
+
+If you are using Flutter Navigator v2.0, which uses the `MaterialApp.router` named constructor, the setup varies based on the routing middleware you are using, if any. Since [`go_router`][25] uses the same observer interface as Flutter Navigator v1, `DatadogNavigationObserver` can be added to other observers as a parameter to `GoRouter`.
+
+```dart
+final _router = GoRouter(
+  routes: [
+    // Your route information here
+  ],
+  observers: [
+    DatadogNavigationObserver(datadogSdk: DatadogSdk.instance),
+  ],
+);
+MaterialApp.router(
+  routerConfig: _router,
+  // Your remaining setup
+)
+```
+
+For examples that use routers other than `go_router`, see [Automatically track views](#automatically-track-views).
+
+
+### Renaming Views
+
+For all setups, you can rename views or supply custom paths by providing a [`viewInfoExtractor`][26] callback. This function can fall back to the default behavior of the observer by calling `defaultViewInfoExtractor`. For example:
+
+```dart
+RumViewInfo? infoExtractor(Route<dynamic> route) {
+  var name = route.settings.name;
+  if (name == 'my_named_route') {
+    return RumViewInfo(
+      name: 'MyDifferentName',
+      attributes: {'extra_attribute': 'attribute_value'},
+    );
+  }
+
+  return defaultViewInfoExtractor(route);
+}
+
+var observer = DatadogNavigationObserver(
+  datadogSdk: DatadogSdk.instance,
+  viewInfoExtractor: infoExtractor,
+);
+```
+
 ## Automatically track actions
 
 Use [`RumUserActionDetector`][13] to track user taps that happen in a given Widget tree:
