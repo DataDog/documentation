@@ -71,7 +71,7 @@ Software Composition Analysis (SCA) を有効にしてオープンソースラ�
 
 GitHub リポジトリを使用している場合は、[GitHub インテグレーション][103]をセットアップし、リポジトリを接続して Static Analysis と Software Composition Analysis のスキャンを有効にできます。
 
-{{< img src="/getting_started/code_analysis/github_accounts.png" alt="GitHub アカウントの Connect Repositories ボタンをクリックします。” style="width:100%" >}}
+{{< img src="/getting_started/code_analysis/github_accounts.png" alt="GitHub アカウントの Connect Repositories ボタンをクリックします。" style="width:100%" >}}
 
 [GitHub プルリクエスト][105]のコメントはデフォルトで有効になっています。 Code Analysis Setup ページの **Connect Repositories** をクリックし、PR Permissions 列の Missing フラグにカーソルを合わせると、アカウントで更新が必要な権限が表示されます。
 
@@ -258,7 +258,7 @@ Code Analysis を GitHub のプルリクエストに統合することで、コ�
 
 [**Repositories** ページ][6]でリポジトリをクリックすると、検索クエリをブランチ別 (デフォルトのブランチが最初に表示されます) やコミット別 (最新のものから始まります) にカスタマイズできる、より詳細なビューにアクセスできます。
 
-{{< img src="/getting_started/code_analysis/sca_vulnerabilities.png" alt=“リポジトリのデフォルトブランチと最新コミットによる Code Analysis 結果の Library Vulnerabilities ビュー" style="width:100%" >}}
+{{< img src="/getting_started/code_analysis/sca_vulnerabilities.png" alt="リポジトリのデフォルトブランチと最新コミットによる Code Analysis 結果の Library Vulnerabilities ビュー" style="width:100%" >}}
 
 {{< tabs >}}
 {{% tab "Static Analysis" %}}
