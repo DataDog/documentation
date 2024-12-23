@@ -1,50 +1,50 @@
 ---
-"app_id": "vns3"
-"app_uuid": "f6ffc9ae-a65d-41e4-8abd-c7194fc39a9a"
-"assets":
-  "integration":
-    "auto_install": true
-    "configuration": {}
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": "vns3.peering"
-      "metadata_path": "metadata.csv"
-      "prefix": "vns3."
-    "service_checks":
-      "metadata_path": "assets/service_checks.json"
-    "source_type_id": !!int "10005"
-    "source_type_name": "VNS3"
-"author":
-  "homepage": "https://github.com/DataDog/integrations-extras"
-  "name": "Redes cohesivas"
-  "sales_email": "help@datadoghq.com"
-  "support_email": "help@datadoghq.com"
-"categories":
+app_id: "vns3"
+app_uuid: "f6ffc9ae-a65d-41e4-8abd-c7194fc39a9a"
+assets:
+  integration:
+    auto_install: true
+    configuration: {}
+    events:
+      creates_events: false
+    metrics:
+      check: "vns3.peering"
+      metadata_path: "metadata.csv"
+      prefix: "vns3."
+    service_checks:
+      metadata_path: "assets/service_checks.json"
+    source_type_id: !!int "10005"
+    source_type_name: "VNS3"
+author:
+  homepage: "https://github.com/DataDog/integrations-extras"
+  name: "Redes cohesivas"
+  sales_email: "help@datadoghq.com"
+  support_email: "help@datadoghq.com"
+categories:
 - "cloud"
 - "network"
 - "security"
-"custom_kind": "integración"
-"dependencies":
+custom_kind: "integración"
+dependencies:
 - "https://github.com/DataDog/integrations-extras/blob/master/vns3/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "vns3"
-"integration_id": "vns3"
-"integration_title": "VNS3"
-"integration_version": ""
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "vns3"
-"public_title": "VNS3"
-"short_description": "Dispositivo de red en la nube para la conectividad y seguridad de aplicaciones".
-"supported_os":
+display_on_public_website: true
+draft: false
+git_integration_title: "vns3"
+integration_id: "vns3"
+integration_title: "VNS3"
+integration_version: ""
+is_public: true
+manifest_version: "2.0.0"
+name: "vns3"
+public_title: "VNS3"
+short_description: "Dispositivo de red en la nube para la conectividad y seguridad de aplicaciones."
+supported_os:
 - "linux"
 - "windows"
 - "macos"
-"tile":
-  "changelog": "CHANGELOG.md"
-  "classifier_tags":
+tile:
+  changelog: "CHANGELOG.md"
+  classifier_tags:
   - "Category::Cloud"
   - "Category::Network"
   - "Category::Security"
@@ -52,12 +52,12 @@
   - "Supported OS::Windows"
   - "Supported OS::macOS"
   - "Offering::Integration"
-  "configuration": "README.md#Setup"
-  "description": "Dispositivo de red en la nube para la conectividad y seguridad de aplicaciones".
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": "VNS3"
+  configuration: "README.md#Setup"
+  description: "Dispositivo de red en la nube para la conectividad y seguridad de aplicaciones."
+  media: []
+  overview: "README.md#Overview"
+  support: "README.md#Support"
+  title: "VNS3"
 ---
 
 <!--  EXTRAÍDO DE https://github.com/DataDog/integrations-extras -->
