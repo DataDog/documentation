@@ -12,9 +12,9 @@ further_reading:
 
 ## Overview
 
-Export your Workspaces query to dashboards and notebooks. The export feature allows you to extract datasets and display them in dashboards and notebooks for analysis or reporting. 
+Export your Workspaces cell as a dataset to dashboards and notebooks. The export feature allows you to create datasets and display them in dashboards and notebooks for analysis or reporting. 
 
-## Export a Workspaces dataset
+## Export a Workspaces cell as a dataset 
 
 From your workspace:
 
