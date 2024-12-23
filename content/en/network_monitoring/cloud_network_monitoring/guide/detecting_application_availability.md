@@ -15,25 +15,25 @@ further_reading:
 
 ## Overview
 
-Modern applications are built in a modular distributed manner with microservices and stateless design principles. Networking connects the distributed components of an application, ensuring a seamless user and application experience. By capturing, analyzing, and correlating network metrics such as latency, packet loss, and throughput across different applications and services, Datadog's Cloud Network Monitoring (CNM) provides actionable insights for application developers and SRE teams.
+When applications rely on each other, poor connectivity or slow service calls can cause errors and latency at the application layer. Datadog's Cloud Network Monitoring (CNM) offers actionable insights for resolving application and network issues by capturing, analyzing, and correlating network metrics such as latency, packet loss, and throughput across various applications and services.
 
-## Service discovery and connectivity
+## Discovery of services and connectivity
 
 CNM is designed to track traffic between entities, determine which resources are communicating, and report their health status.
 
 To examine the a basic traffic flow between entities, use the following steps:
 
-1. On the [Network Analytics page][1], set your **View clients as** and **View servers as** dropdown filters to group by `service` tags to examine a service-to-service flow, and observe the basic traffic unit: a source IP communicating over a port to a destination IP on a port.
+1. On the [Network Analytics page][1], set your **View clients as** and **View servers as** dropdown filters to group by `service` tags to examine a service-to-service flow. Here you can observe the basic traffic unit: a source IP communicating over a port to a destination IP on a port.
 
    {{< img src="network_performance_monitoring/guide/detecting_network_insights/cnm_service_service.png" alt="CNM analytics page, grouping by service to service with Client and Server IP highlighted">}}
 
-   Each row aggregates 5 minutes' worth of connections. While you might recognize some IPs as specific addresses or hosts, depending on your network familiarity, this becomes challenging with larger, more complex networks. Therefore, the most meaningful aggregation level is rolling up the host or container associated with these IPs to tags in Datadog, such as `service`, `availability zone`, `pod`, and so on.
+   Each row aggregates 5 minutes' worth of connections. While you might recognize some IPs as specific addresses or hosts, depending on your network familiarity, this becomes challenging with larger, more complex networks. The most relevant aggregation level involves correlating each host or container associated with these IPs to tags in Datadog, such as `service`, `availability zone`, `pod`, and more, as shown in the following example.
 
 2. Narrow down your search results using filters. For example, to view the network traffic for all of your `orders-sqlserver*` pods by host and availability zone, use the `client_pod_name:orders-sqlserver*` filter:
 
    {{< img src="network_performance_monitoring/guide/detecting_network_insights/cnm_host_az.png" alt="CNM analytics page, grouping by host and availability zone for specific client pod name">}}
 
-   This initial step allows you to begin monitoring your most complex networks and start gaining insights between endpoints in your environment, including VMs, containers, services, cloud regions, datacenters, and more.
+This first step enables you to monitor your most complex networks and being gaining insights into the connections between endpoints in your environment, such as VMs, containers, services, cloud regions, data centers, and more.
 
 ### Service-to-service dependency tracking
 
@@ -55,27 +55,27 @@ To analyze the cause of service latency, use the following steps:
 
    {{< img src="network_performance_monitoring/guide/detecting_network_insights/cnm_sidepanel_flows.png" alt="Side panel of a traffic flow, highlighting the Flows tab">}}
 
-## Visibility into network traffic 
+## Insight into network traffic 
 
 Datadog CNM consolidates relevant distributed traces, logs, and infrastructure data into a single view, allowing you to identify and trace issues back to the originating request from an application.
 
 In the example below, check the **Traces** tab under Network Analytics to view distributed traces of requests between source and destination endpoints, which can help you pinpoint where application-level errors occur.
 
-To identify if an issue is an Application or Network issue, you can use the following steps:
+To identify if an issue is an application or network issue, you can use the following steps:
 
 1. Navigate to [**Infrastructure** > **Cloud Network** > **Analytics**][1].  
 2. In the **Summary** graphs, click a line of communication that has a lot of volume and high RTT time:
 
    {{< img src="network_performance_monitoring/guide/detecting_network_insights/cnm_isolate_series.png" alt="CNM analytics page, clicking on a path with high RTT Time">}}
 
-3. Click **Isolate this series**.  
-4. Click this path, then click the **Flows** tab to observe RTT time:
+3. Click **Isolate this series**. This opens a page that allows you to observe the network traffic only on this line of communication.
+4. While on this page, click into one of the network communications paths, then click the **Flows** tab to observe RTT time:
 
    {{< img src="network_performance_monitoring/guide/detecting_network_insights/cnm_sidepanel_rtt.png" alt="CNM sidepanel, highlighting the RTT time column">}}
 
-5. On this page, CNM correlates network metric round-trip time (RTT) with application request latency, to help us identify if the issue is a network or application issue. In this particular example, observe that the RTT time is slightly high but has come down over time and needs to be investigated further.  
+   On this page, CNM correlates network metric round-trip time (RTT) with application request latency, to help identify if the issue is a network or application issue. In this particular example, observe that the RTT time is slightly high but has come down over time and needs to be investigated further.  
      
-6. On this same page, click the **Traces** tab and investigate the **Duration** column: 
+5. On this same page, click the **Traces** tab and investigate the **Duration** column: 
 
    {{< img src="network_performance_monitoring/guide/detecting_network_insights/cnm_traces_duration.png" alt="CNM sidepanel, highlighting the Traces tab and duration column">}}
 
@@ -85,11 +85,11 @@ To identify if an issue is an Application or Network issue, you can use the foll
 
    {{< img src="network_performance_monitoring/guide/detecting_network_insights/cnm_apm_traces.png" alt="APM flame graph screenshot after clicking on a service from the CNM sidepanel traces tab">}}
 
-### Network map
+### Network Map
 
-The [Network map][2] in Datadog provides a visual representation of your network topology, helping identify partitions, dependencies, and bottlenecks. It consolidates network data into a directional map, making it easier to isolate problematic areas. Additionally, it visualizes network traffic between any tagged object in your environment, from `services` to `pods` to cloud regions.
+The [Network Map][2] in Datadog provides a visual representation of your network topology, helping identify partitions, dependencies, and bottlenecks. It consolidates network data into a directional map, making it easier to isolate problematic areas. Additionally, it visualizes network traffic between any tagged object in your environment, from `services` to `pods` to `cloud regions`.
 
-For complex networks in large containerized environments, Datadog's [Network Map][3] simplifies your troubleshooting by using directional arrows, or edges, to visualize real-time traffic flows between containers, pods, and deployments, even as containers change. This allows you to spot inefficiencies and misconfigurations. For example, the map can reveal if Kubernetes pods within the same cluster are communicating through an ingress controller, rather than directly to each other, indicating a misconfiguration that can cause increased latency.  
+For complex networks in large containerized environments, Datadog's Network Map simplifies your troubleshooting by using directional arrows, or edges, to visualize real-time traffic flows between containers, pods, and deployments, even as containers change. This allows you to spot inefficiencies and misconfigurations. For example, the map can reveal if Kubernetes pods within the same cluster are communicating through an ingress controller, rather than directly to each other, indicating a misconfiguration that can cause increased latency. 
 
 To identify if there might be a communication problem with your Kubernetes pods and their underlying services, perform the following steps:
 
@@ -101,13 +101,13 @@ To identify if there might be a communication problem with your Kubernetes pods 
 
    {{< img src="network_performance_monitoring/guide/detecting_network_insights/cnm_network_map_node.png" alt="CNM Network Map page showing a clustering example, highlighting a specific node">}}
 
-3. The edge thickness is associated with the metric chosen from the drop down. In this particular example, a thicker edge is associated with the metric `volume sent`. Optionally, you can also navigate directly back to the [Network Analytics][1] page by clicking on the dotted edge directly to investigate the network connections further.
+    The edge thickness is associated with the metric chosen from the drop down. In this particular example, a thicker edge is associated with the metric `volume sent`. Optionally, you can also navigate directly back to the [Network Analytics][1] page by clicking on the dotted edge directly to investigate the network connections further.
 
    {{< img src="network_performance_monitoring/guide/detecting_network_insights/cnm_network_map_thicker_edge.png" alt="CNM Network Map page showing a clustering example, highlighting a thicker edge">}}
 
 ### Service mesh
 
-Service meshes like [Istio][4] help manage microservice communication, but add complexity to monitoring by introducing layers of abstraction. Datadog CNM simplifies this by visualizing traffic flows across Istio-managed networks and providing full visibility into the Istio environment. Datadog monitors key metrics like bandwidth and request performance, logs control plane health, and traces application requests across the mesh.
+Service meshes like [Istio][4] help manage microservice communication, but add complexity to monitoring by introducing layers of abstraction. Datadog CNM simplifies this complexity by visualizing traffic flows across Istio-managed networks and providing full visibility into the Istio environment. Datadog monitors key metrics like bandwidth and request performance, logs control plane health, and traces application requests across the mesh.
 
 Additionally, Datadog supports [Envoy][5] monitoring, correlating Istio data with the Envoy proxy mesh. Since traffic is routed through Envoy sidecars, Datadog tags them as containers, allowing users to identify and diagnose latency issues between pods and determine if they're related to the service mesh.
 
