@@ -220,7 +220,7 @@ A continuación, define `volumeMounts` y `volumes` en tu manifiesto:
 ```
 
 {{% /tab %}}
-{{% tab "Key-value store" (Base de datos clave-valor) %}}
+{{% tab "Base de datos clave-valor" %}}
 
 Los siguientes comandos etcd crean una plantilla de con integración Redis con un parámetro de `password` personalizado:
 
@@ -526,7 +526,7 @@ En el manifiesto, define `volumeMounts` y `volumes`:
 ```
 
 {{% /tab %}}
-{{% tab "Key-value store" (Base de datos clave-valor) %}}
+{{% tab "Base de datos clave-valor" %}}
 
 ```conf
 etcdctl set /datadog/check_configs/apache/check_names '["apache", "http_check"]'
