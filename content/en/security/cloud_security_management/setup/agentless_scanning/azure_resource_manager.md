@@ -7,17 +7,20 @@ further_reading:
   - link: "/security/cloud_security_management/setup/agentless_scanning/terraform"
     tag: "Documentation"
     text: "Setting up Agentless Scanning using Terraform"
-aliases:
-  - /security/cloud_security_management/guide/agentless_azure_integration
 ---
 
 If you've already [set up Cloud Security Management][3] and want to add a new Azure subscription or enable [Agentless Scanning][1] on an existing integrated Azure subscription, you can use either [Terraform][2] or Azure Resource Manager. This article provides detailed instructions for the Azure Resource Manager approach.
 
-<div class="alert alert-info">If you want to enable Agentless Scanning for an Azure subscription that is not already integrated in Datadog, start by <a href="/integrations/guide/azure-manual-setup/?tab=azurecli">integrating the Azure subscription</a> then enable Agentless Scanning by following the tutorial below.</div>
-
 <div class="alert alert-warning">Running Agentless scanners incurs additional costs. To optimize these costs while still ensuring reliable 12-hour scans, Datadog recommends setting up <a href="/security/cloud_security_management/setup/agentless_scanning/terraform/">Agentless Scanning with Terraform</a> as the default template.</div>
 
 {{< tabs >}}
+{{% tab "New Azure account" %}}
+
+1. To enable Agentless Scanning for an Azure subscription not yet integrated with Datadog, first <a href="/integrations/guide/azure-manual-setup/?tab=azurecli">integrate the Azure subscription</a>.
+1. Proceed to enable Agentless Scanning by following the steps of the **Existing Azure subscription** tab.
+
+{{% /tab %}}
+
 {{% tab "Existing Azure subscription" %}}
 
 1. On the [Cloud Security Management Setup][1] page, click **Cloud Integrations** > **Azure**.
