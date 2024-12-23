@@ -24,14 +24,14 @@ If you've already [set up Cloud Security Management][3] and want to add a new Az
 1. Locate the tenant ID of your subscription.
 1. **[OPTIONAL]** you can enable **Resource Scanning** for the tenant to also enable misconfigurations detection.
 1. Expand the list of Azure subscriptions and locate the subscription where you want to deploy the Agentless scanner.
-1. Click on the **Enable** button of **VULNERABILITY SCANNING**.
-1. The **Vulnerability Scanning** dialog is displayed. Switch the **Vulnerability Scanning** toggle button on.
-1. In the **Agentless Scanning** section, select **Azure Resource Manager**.
-1. Click on **Launch Azure Resource Manager**.
-1. You will be redirected to the Azure portal. Once logged in, the template creation form is displayed.
-1. Select the subscription and the resource group in which the agentless scanners will be deployed. It is **strongly recommended** to deploy the Datadog Agentless Scanner in a **dedicated resource group**.
+1. Click the **Enable** button under **Vulnerability Scanning**.
+1. The **Vulnerability Scanning** dialog is displayed. Toggle **Vulnerability Scanning** to the on position.
+1. Under **How would you like to set up Agentless Scanning?**, select **Azure Resource Manager**.
+1. Click **Launch Azure Resource Manager**.
+1. You are redirected to the Azure portal. When you log in, the template creation form is displayed.
+1. Select the subscription and the resource group in which the Agentless scanners will be deployed. Datadog recommends that you deploy the Datadog Agentless Scanner in a dedicated resource group.
 1. In **Subscriptions to scan**, select all the subscriptions you want to scan.
-1. Enter your **Datadog API Key**, select your **Datadog Site** and complete the rest of the form.
+1. Enter your **Datadog API Key**, select your **Datadog Site**, and fill out the remainder of the form.
 1. Click on **Review + create**.
 
 [1]: https://app.datadoghq.com/security/configuration/csm/setup
@@ -46,17 +46,17 @@ If you've already [set up Cloud Security Management][3] and want to add a new Az
 ## Disable Agentless Scanning
 
 1. On the [Cloud Security Management Setup][3] page, click **Cloud Integrations** > **Azure**.
-1. Locate the tenant of your subscription, expand the list of subscriptions and locate the subscription for which you want to disable Agentless Scanning.
-1. Click the **Edit** button {{< img src="security/csm/setup/edit-button.png" inline="true" style="width:24px;">}} and toggle the **Vulnerability Scanning** button to the off position.
+1. Locate your subscription's tenant, expand the list of subscriptions, and identify the subscription for which you want to disable Agentless Scanning.
+1. Click the **Edit** button {{< img src="security/csm/setup/edit-button.png" inline="true" style="width:24px;">}} and toggle **Vulnerability Scanning** to the off position.
 1. Click **Done**.
 
 ## Uninstall with Azure Resource Manager
 
-To uninstall Agentless Scanning, log in to your Azure subscription. If you created a dedicated resource group for the Agentless scanner, delete this resource group and the following Azure role definitions:
+To uninstall Agentless Scanning, log in to your Azure subscription. If you created a dedicated resource group for the Agentless scanner, delete this resource group along with the following Azure role definitions:
   - Datadog Agentless Scanner Role
   - Datadog Agentless Scanner Delegate Role
 
-If you did not use a dedicated resource group, you will have to manually delete the scanner resources, which can be identified by the tags `Datadog:true` and `DatadogAgentlessScanner:true`.
+If you did not use a dedicated resource group, you must manually delete the scanner resources, which can be identified by the tags `Datadog:true` and `DatadogAgentlessScanner:true`.
 
 ## Further Reading
 

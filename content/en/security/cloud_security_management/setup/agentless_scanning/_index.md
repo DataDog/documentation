@@ -13,16 +13,13 @@ further_reading:
 <div class="alert alert-warning">Agentless Scanning for Cloud Security Management is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
-Agentless Scanning provides visibility into vulnerabilities that exist within your cloud infrastructure,
-without requiring you to install the Datadog Agent.
-
-See the [CSM Agentless Scanning][12] page to learn more about its capabilities and how it works.
+Agentless Scanning provides visibility into vulnerabilities that exist within your cloud infrastructure, without requiring you to install the Datadog Agent. To learn more about Agentless Scanning's capabilities and how it works, see the [Agentless Scanning][12] docs.
 
 ## Prerequisites
 
 Before setting up Agentless Scanning, ensure the following prerequisites are met:
 
-- **Remote Configuration**: [Remote Configuration][3] is required to enable Datadog to send information to Agentless scanners, such as the cloud resources to scan.
+- **Remote Configuration**: [Remote Configuration][3] is required to enable Datadog to send information to Agentless scanners, such as which cloud resources to scan.
 - **Cloud permissions**: The Agentless Scanning instance requires specific permissions to scan hosts, containers, and functions. These permissions are automatically applied as part of the installation process.<br><br>
   {{< collapse-content title="AWS Host and container scanning permissions" level="h5" >}}
   <ul>
