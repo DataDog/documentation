@@ -25,6 +25,7 @@ title: DORA メトリクスのインシデントデータの設定方法
 
 {{< site-region region="gov" >}}
 DORA Metrics は、選択されたサイト ({{&lt; region-param key="dd_site_name" &gt;}}) では現在利用できません。{{&lt; /site-region &gt;}} DORA Metrics は公開ベータ版です。
+{{< /site-region >}}
 
 ## 概要
 
