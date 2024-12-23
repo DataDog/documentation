@@ -40,4 +40,4 @@ Por último, añada la ruta a la DLL (wevtapi.dll) de la API del log de eventos 
 Los cambios deberían ser inmediatos. Para confirmar que el log de eventos es accesible a través de la clase Win32_NTLogEvent WMI, reintenta la consulta anterior. A continuación, puedes continuar añadiendo eventos al archivo de configuración de la integración del Visor de eventos.
 
 Nota: Si sigue sin haber eventos al ejecutar la consulta, comprueba el Visor de eventos para confirmar si hay algún evento en el archivo de logs. Además, asegúrate de que el log de eventos no está desactivado y de que hay eventos recientes disponibles.
-{{< img src="integrations/guide/windows_event_logs_with_wmi/event_viewer_7.png" alt="Visor de eventos de Windows que muestra una lista de acciones a la derecha. La acción de activación de logs está resaltada con una nota para indicar que se pueden activar logs allí.}}
+{{< img src="integrations/guide/windows_event_logs_with_wmi/event_viewer_7.png" alt="Visor de eventos de Windows que muestra una lista de acciones a la derecha. La acción de activación de logs está resaltada con una nota para indicar que se pueden activar logs allí." >}}
