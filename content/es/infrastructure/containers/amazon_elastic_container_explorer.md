@@ -56,7 +56,8 @@ Para la configuración manual, incluye la siguiente línea en el archivo de conf
 ```yaml
 ecs_task_collection_enabled: true
 ```
-Accede a dashboards preconfigurados
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Utilización
 
