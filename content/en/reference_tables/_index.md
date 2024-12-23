@@ -17,6 +17,9 @@ further_reading:
 - link: 'https://www.datadoghq.com/blog/add-context-with-reference-tables/'
   tag: 'Blog'
   text: 'Add more context to your logs with Reference Tables'
+- link: 'https://www.datadoghq.com/blog/add-context-with-reference-tables-in-cloud-siem/'
+  tag: 'Blog'
+  text: 'Add more context to Cloud SIEM detections and investigations with Datadog Reference Tables'
 ---
 
 ## Overview
