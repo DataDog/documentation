@@ -66,10 +66,10 @@ Aunque el concepto de pipeline CI puede variar en función de tu proveedor, ve c
 
 | Datadog                    | GitLab   |
 |----------------------------|----------|
-| Tuberías                   | Tuberías |
+| _No disponible en Datadog_ | Script   |
 | Etapa                      | Etapa    |
 | Trabajo                        | Trabajo      |
-| _No disponible en Datadog_ | Script   |
+| Tuberías                   | Tuberías |
 
 {{% /tab %}}
 {{% tab "Jenkins" %}}
