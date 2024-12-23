@@ -1,6 +1,7 @@
 ---
 title: Trace Queries
 description: "Trace Queries"
+is_beta: true
 aliases:
  - /tracing/trace_queries
 further_reading:

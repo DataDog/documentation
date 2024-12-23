@@ -18,7 +18,6 @@
             "target": 200
           }
         ],
-        "exitIfSucceed": true,
         "extractedValues": [
           {
             "field": "server",

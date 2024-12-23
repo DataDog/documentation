@@ -7,9 +7,6 @@ further_reading:
 - link: /database_monitoring/troubleshooting/?tab=sqlserver
   tag: Documentación
   text: Solucionar problemas comunes
-- link: /database_monitoring/guide/sql_deadlock/
-  tag: Documentación
-  text: Configurar la Monitorización Deadlock
 - link: https://www.datadoghq.com/blog/migrate-sql-workloads-to-azure-with-datadog/
   tag: Blog
   text: Establecer estrategias de migración Azure para cargas de trabajo SQL con Datadog
@@ -24,8 +21,8 @@ Database Monitoring te proporciona una amplia visibilidad de tus bases de datos 
 
 Sigue los siguientes pasos para habilitar Database Monitoring con tu base de datos:
 
-1. [Concede acceso al Agent](#grant-the-agent-access).
-1. [Instala el Agent](#install-the-agent).
+1. [Conceder acceso al Agent](#grant-the-agent-access)
+1. [Instalar el Agent](#install-the-agent)
 
 ## Antes de empezar
 
@@ -34,11 +31,11 @@ Versiones de SQL Server compatibles
 
 {{% dbm-sqlserver-before-you-begin %}}
 
-## Conceder acceso al Agent
+## Conceder acceso al Agent 
 
 El Datadog Agent requiere acceso de sólo lectura al servidor de la base de datos para recopilar estadísticas y consultas.
 
-Crea un inicio de sesión de solo lectura para conectarte a tu servidor y concede los permisos necesarios:
+Crea un inicio de sesión de sólo lectura para conectarte a tu servidor y concede los permisos necesarios:
 
 {{< tabs >}}
 {{% tab "SQL Server 2014 o posterior" %}}
@@ -75,13 +72,13 @@ Crea el usuario `datadog` en cada base de datos de aplicaciones adicional:
 USE [database_name];
 CREATE USER datadog FOR LOGIN datadog;
 ```
-{{% /tab%}}
-{{< /tabs>}}
+{{% /tab %}}
+{{< /tabs >}}
 
 ### Guarda tu contraseña de forma segura
 {{% dbm-secret %}}
 
-## Instalar el Agent
+## Instalación del Agent
 
 Se recomienda instalar el Agent directamente en el host de SQL Server, ya que esto permite al Agent recopilar una variedad de telemetrías del sistema (CPU, memoria, disco, red), además de la telemetría específica del SQL Server.
 
@@ -104,7 +101,7 @@ Se recomienda instalar el Agent directamente en el host de SQL Server, ya que es
 {{% /tab %}}
 {{< /tabs >}}
 
-## Configuraciones del Agent de ejemplo
+## Ejemplo de configuraciones del Agent
 {{% dbm-sqlserver-agent-config-examples %}}
 
 ## Referencias adicionales

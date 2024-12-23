@@ -1,5 +1,6 @@
 ---
 title: Resource-based sampling
+
 disable_toc: false
 private: true
 further_reading:

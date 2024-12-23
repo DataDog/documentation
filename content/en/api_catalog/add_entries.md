@@ -1,5 +1,6 @@
 ---
 title: Adding Entries to API Catalog
+is_beta: true
 further_reading:
 - link: "/tracing/service_catalog/"
   tag: "Documentation"

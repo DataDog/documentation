@@ -59,7 +59,7 @@ Last Updated
 Enabled toggle
 : Allows filters to be turned on and off.
 
-**Note**: The order of the retention filter list changes indexing behavior. If a span matches a retention filter early in the list, the span is either kept or dropped. Any matching custom retention filter lower on the list does not catch the already-processed span.
+**Note**: The order of the retention filter list changes indexing behavior. If a span matches a retention filter early in the list, the span is either kept or dropped. Any matching retention filter lower on the list does not catch the already-processed span.
 
 The `Spans Indexed` column for each retention filter is powered by the `datadog.estimated_usage.apm.indexed_spans` metric, which you can use to track your indexed span usage. For more information, read [Usage Metrics][2], or see the [dashboard][4] available in your account.
 

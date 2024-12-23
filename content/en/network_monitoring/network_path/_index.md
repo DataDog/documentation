@@ -17,16 +17,16 @@ further_reading:
   text: "Get end-to-end network visibility with Datadog Network Path"
 ---
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">Network Path for Datadog Cloud Network Monitoring is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-warning">Network Path for Datadog Network Performance Monitoring is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
-<div class="alert alert-info">Network Path for Datadog Cloud Network Monitoring is in Limited Availability. Reach out to your Datadog representative to sign up.</div>
+<div class="alert alert-info">Network Path for Datadog Network Performance Monitoring is in Preview. Reach out to your Datadog representative to sign up.</div>
 
 ## Overview
 
 Network Path illustrates the route that network traffic follows from its origin to its destination. This provides network administrators with the capability to precisely identify the source of network problems, whether they're internal or from an Internet Service Provider (ISP), or due to other issues such as misrouting. Each row signifies a path from a source to its destination, as depicted in the `source` and `destination` facet panel.
 
-**Note**: [Cloud Network Monitoring][2] must be enabled to use Network Path functionality.
+**Note**: [Network Performance Monitoring][2] must be enabled to use Network Path functionality.
 
 {{< img src="network_performance_monitoring/network_path/network_path_default_view_3.png" alt="The Network Path default view, showing the path from source to destination" >}}
 
@@ -46,4 +46,4 @@ The following diagram depicts the typical flow of a network path from a source (
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/network/path
-[2]: /network_monitoring/cloud_network_monitoring/
+[2]: /network_monitoring/performance/

@@ -1,5 +1,5 @@
 ---
-title: Scorecards
+title: Service Scorecards
 aliases:
   - /tracing/service_catalog/scorecards
 further_reading:
@@ -8,10 +8,10 @@ further_reading:
   text: "Service Catalog"
 - link: /api/latest/service-scorecards/
   tag: "Documentation" 
-  text: "Scorecards API" 
+  text: "Service Scorecards API" 
 - link: "https://www.datadoghq.com/blog/service-scorecards/"
   tag: "Blog"
-  text: "Prioritize and promote service observability best practices with Scorecards"
+  text: "Prioritize and promote service observability best practices with Service Scorecards"
 - link: "https://www.datadoghq.com/blog/datadog-custom-scorecards/"
   tag: "Blog"
   text: "Formalize best practices with custom Scorecards"
@@ -24,23 +24,23 @@ further_reading:
 ---
 
 {{< callout url="#" btn_hidden="true" header="false" >}}
-Scorecards are in Preview.
+Service Scorecards are in beta.
 {{< /callout >}}
 
-{{< img src="/tracing/service_catalog/scorecard-overview.png" alt="Scorecards dashboard highlighting Production Readiness out-of-the-box rules" style="width:90%;" >}}
+{{< img src="/tracing/service_catalog/scorecard-overview.png" alt="Service Scorecards dashboard highlighting Production Readiness out-of-the-box rules" style="width:90%;" >}}
 
 ## Overview
 
-Scorecards help you monitor, prioritize, plan, and communicate effectively to take informed actions that improve your service's health and performance. Each scorecard shows the status for Production Readiness, Observability Best Practices, and Documentation & Ownership. All services with defined metadata in the Service Catalog are automatically evaluated against a set of pass-fail criteria.
+Service Scorecards help you monitor, prioritize, plan, and communicate effectively to take informed actions that improve your service's health and performance. Each scorecard shows the status for Production Readiness, Observability Best Practices, and Documentation & Ownership. All services with defined metadata in the Service Catalog are automatically evaluated against a set of pass-fail criteria.
 
 You can select the rules used to populate the Scorecards, and you can generate reports, which are sent directly to your team's Slack channel, to regularly report on scorecard results.
 
 ## Get started
 
-{{< whatsnext desc="Set up Scorecards and explore how they can help your team:" >}}
-    {{< nextlink href="/service_catalog/scorecards/scorecard_configuration/" >}}Configure Scorecards{{< /nextlink >}}
+{{< whatsnext desc="Set up Service Scorecards and explore how they can help your team:" >}}
+    {{< nextlink href="/service_catalog/scorecards/scorecard_configuration/" >}}Configure Service Scorecards{{< /nextlink >}}
     {{< nextlink href="/service_catalog/scorecards/custom_rules/" >}}Create custom rules{{< /nextlink >}}
-    {{< nextlink href="/service_catalog/scorecards/using_scorecards/" >}}Learn what you can do with Scorecards{{< /nextlink >}}
+    {{< nextlink href="/service_catalog/scorecards/using_scorecards/" >}}Learn what you can do with Service Scorecards{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Further reading

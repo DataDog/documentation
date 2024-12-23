@@ -100,7 +100,7 @@ DELIMITER ;
 GRANT EXECUTE ON PROCEDURE <YOUR_SCHEMA>.explain_statement TO datadog@'%';
 ```
 
-### パスワードを安全に保管
+### Securely store your password
 {{% dbm-secret %}}
 
 ## Agent のインストールと構成
@@ -124,9 +124,9 @@ instances:
     host: '<AZURE_INSTANCE_ENDPOINT>'
     port: 3306
     username: datadog
-    password: 'ENC[datadog_user_database_password]' # CREATE USER ステップで設定し、シークレットとして保存されたもの
+    password: 'ENC[datadog_user_database_password]' # from the CREATE USER step earlier, stored as a secret
 
-    # プロジェクトとインスタンスを追加した後、Datadog Azure インテグレーションを構成して、CPU やメモリなどの追加のクラウドデータを取得します。
+    # After adding your project and instance, configure the Datadog Azure integration to pull additional cloud data such as CPU and Memory.
     azure:
       deployment_type: '<DEPLOYMENT_TYPE>'
       fully_qualified_domain_name: '<AZURE_INSTANCE_ENDPOINT>'
@@ -244,7 +244,7 @@ Windows の場合は、<code>helm install</code> コマンドに <code>--set tar
 マウントされたコンフィギュレーションファイルを使ってクラスターチェックを構成するには、コンフィギュレーションファイルを Cluster Agent コンテナのパス `/conf.d/mysql.yaml` にマウントします。
 
 ```yaml
-cluster_check: true  # このフラグを必ず入れてください
+cluster_check: true  # Make sure to include this flag
 init_config:
 instances:
   - dbm: true
@@ -252,7 +252,7 @@ instances:
     port: 3306
     username: datadog
     password: 'ENC[datadog_user_database_password]'
-    # プロジェクトとインスタンスを追加した後、Datadog Azure インテグレーションを構成して、CPU、メモリなどの追加のクラウドデータを取得します。
+    # After adding your project and instance, configure the Datadog Azure integration to pull additional cloud data such as CPU, Memory, etc.
     azure:
       deployment_type: '<DEPLOYMENT_TYPE>'
       fully_qualified_domain_name: '<AZURE_INSTANCE_ENDPOINT>'

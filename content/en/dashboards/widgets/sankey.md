@@ -2,10 +2,14 @@
 title: Sankey Widget
 widget_type: "sankey"
 further_reading:
-- link: "/product_analytics/journeys/sankey/"
+- link: "/product_analytics/journeys/pathways"
   tag: "Documentation"
-  text: "Build Sankey Diagrams in Product Analytics"
+  text: "Build Pathway Diagrams in Product Analytics"
 ---
+
+{{< callout url="http://datadoghq.com/private-beta/product-analytics" header="false" >}}
+This feature is in Preview and only available to Product Analytics users. To request access to Product Analytics, complete the form.
+{{< /callout >}}
 
 {{< img src="dashboards/widgets/sankey/sankey_widget.png" alt="Sankey widget configuration showing an example graph" style="width:100%;" >}}
 

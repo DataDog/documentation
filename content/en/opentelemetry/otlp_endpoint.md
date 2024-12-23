@@ -13,7 +13,7 @@ further_reading:
     text: "OpenTelemetry Protocol Exporter"
 ---
 {{< callout header="false" btn_hidden="true">}}
-  The Datadog OTLP traces intake endpoint is in Preview.
+  The Datadog OTLP traces intake endpoint is in private beta.
 {{< /callout >}} 
 
 {{< site-region region="ap1,gov" >}}

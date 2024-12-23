@@ -5,7 +5,7 @@ aliases:
 ---
 
 {{< callout url="https://datadoghq.com/private-beta/ddsql-editor">}}
-DDSQL is in Preview.
+DDSQL is in private beta.
 {{< /callout >}}
 
 ## SELECT

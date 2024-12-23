@@ -37,6 +37,7 @@ $baseImgURL: '{{.Site.Params.img_url}}';
 @import "pages/home";
 @import "pages/glossary";
 @import "pages/standard-attributes";
+@import "pages/static-analysis";
 @import "pages/reference";
 
 // Components
@@ -75,8 +76,6 @@ $baseImgURL: '{{.Site.Params.img_url}}';
 @import 'components/collapsible-section'; // Collapsible section styles
 
 @import 'components/tooltip'; // Tooltip shortcode styles
-@import "components/multifilter-search";
-
 
 // for now just include ie fixes
 @import 'ie';

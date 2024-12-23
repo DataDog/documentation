@@ -1,3 +1,0 @@
----
-title: Índices de logs
----

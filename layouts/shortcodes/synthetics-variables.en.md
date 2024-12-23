@@ -1,3 +1,5 @@
+## Variables
+
 ### Create local variables
 
 To create a local variable, click **Create a Local Variable**. You can select one of the following available builtins to add to your variable string:

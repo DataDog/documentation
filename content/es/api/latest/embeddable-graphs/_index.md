@@ -1,3 +1,0 @@
----
-title: Gráficos integrables
----

@@ -33,7 +33,7 @@ touch ~/.dogrc
    [Connection]
    apikey = MY_API_KEY
    appkey = MY_APP_KEY
-   api_host = {{< region-param key="dd_api">}}
+   api_host = https://{{< region-param key="dd_site">}}
    ```
 
    <div class="alert alert-info">You can create multiple configuration files if you need to run commands against different environments. Use the <code>--config</code> flag to specify the path to an alternative configuration file.</div>

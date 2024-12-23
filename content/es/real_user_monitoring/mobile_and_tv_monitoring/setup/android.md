@@ -36,19 +36,19 @@ Declara [dd-sdk-android-rum][1] y el [complemento Gradle][12] como dependencia e
 
 ```groovy
 buildscript {
-    dependencies {
+    dependencias {
         classpath("com.datadoghq:dd-sdk-android-gradle-plugin:x.x.x")
     }
 }
-plugins {
+complementos {
     id("com.datadoghq.dd-sdk-android-gradle-plugin")
     //(...)
 }
 android {
     //(...)
 }
-dependencies {
-    implementation "com.datadoghq:dd-sdk-android-rum:x.x.x" 
+dependencias {
+    implementación "com.datadoghq:dd-sdk-android-rum:x.x.x" 
     //(...)
 }
 
@@ -77,29 +77,29 @@ Consulta [`trackingConsent`][6] para añadir el cumplimiento del Reglamento gene
 {{< tabs >}}
 {{% tab "Kotlin" %}}
 ```kotlin
-class SampleApplication : Application() {
-    override fun onCreate() {
+clase SampleApplication : Application() {
+    sustituir fun onCreate() {
         super.onCreate()
-        val configuration = Configuration.Builder(
+        configuración de valor = Configuration.Builder(
             clientToken = <CLIENT_TOKEN>,
-            env = <ENV_NAME>,
-            variant = <APP_VARIANT_NAME>
+            variable de entorno = <ENV_NAME>,
+            variante = <APP_VARIANT_NAME>
         ).build()
-        Datadog.initialize(this, configuration, trackingConsent)
+        Datadog.initialize(this, configuración, trackingConsent)
     }
 }
 ```
 {{% /tab %}}
 {{% tab "Java" %}}
-```java
-public class SampleApplication extends Application {
+```Java
+clase pública SampleApplication extiende Application {
     @Override
-    public void onCreate() {
+    anulación pública onCreate() {
         super.onCreate();
-        Configuration configuration =
-                new Configuration.Builder(<CLIENT_TOKEN>, <ENV_NAME>, <APP_VARIANT_NAME>)
+        Configuración configuración =
+                nuevo Configuration.Builder(<CLIENT_TOKEN>, <ENV_NAME>, <APP_VARIANT_NAME>)
                         .build();
-        Datadog.initialize(this, configuration, trackingConsent);
+        Datadog.initialize(this, configuración, trackingConsent);
     }
 }
 ```
@@ -111,32 +111,32 @@ public class SampleApplication extends Application {
 {{< tabs >}}
 {{% tab "Kotlin" %}}
 ```kotlin
-class SampleApplication : Application() {
-    override fun onCreate() {
+clase SampleApplication : Application() {
+    sustituir fun onCreate() {
         super.onCreate()
-        val configuration = Configuration.Builder(
+        configuración de valor = Configuration.Builder(
                 clientToken = <CLIENT_TOKEN>,
-                env = <ENV_NAME>,
-                variant = <APP_VARIANT_NAME>
+                variable de entorno = <ENV_NAME>,
+                variante = <APP_VARIANT_NAME>
             )
             .useSite(DatadogSite.EU1)
             .build()
-        Datadog.initialize(this, configuration, trackingConsent)
+        Datadog.initialize(this, configuración, trackingConsent)
     }
 }
 ```
 {{% /tab %}}
 {{% tab "Java" %}}
-```java
-public class SampleApplication extends Application {
+```Java
+clase públcia SampleApplication extends Application {
     @Override
-    public void onCreate() {
+    anulación pública onCreate() {
         super.onCreate();
-        Configuration configuration =
-                new Configuration.Builder(<CLIENT_TOKEN>, <ENV_NAME>, <APP_VARIANT_NAME>)
+        Configuración configuración =
+                nuevo Configuration.Builder(<CLIENT_TOKEN>, <ENV_NAME>, <APP_VARIANT_NAME>)
                         .useSite(DatadogSite.EU1)
                         .build();
-        Datadog.initialize(this, configuration, trackingConsent);
+        Datadog.initialize(this, configuración, trackingConsent);
     }
 }
 ```
@@ -148,32 +148,32 @@ public class SampleApplication extends Application {
 {{< tabs >}}
 {{% tab "Kotlin" %}}
 ```kotlin
-class SampleApplication : Application() {
-    override fun onCreate() {
+clase SampleApplication : Applicación() {
+    sustituir fun onCreate() {
         super.onCreate()
-        val configuration = Configuration.Builder(
+        configuración de valor = Configuration.Builder(
                 clientToken = <CLIENT_TOKEN>,
-                env = <ENV_NAME>,
-                variant = <APP_VARIANT_NAME>
+                variable de entorno = <ENV_NAME>,
+                variante = <APP_VARIANT_NAME>
             )
             .useSite(DatadogSite.US3)
             .build()
-        Datadog.initialize(this, configuration, trackingConsent)
+        Datadog.initialize(this, configuración, trackingConsent)
     }
 }
 ```
 {{% /tab %}}
 {{% tab "Java" %}}
-```java
-public class SampleApplication extends Application {
+```Java
+clase pública SampleApplication extends Application {
     @Override
-    public void onCreate() {
+    anulación pública onCreate() {
         super.onCreate();
-        Configuration configuration =
-                new Configuration.Builder(<CLIENT_TOKEN>, <ENV_NAME>, <APP_VARIANT_NAME>)
+        Configuración configuración =
+                nuevo Configuration.Builder(<CLIENT_TOKEN>, <ENV_NAME>, <APP_VARIANT_NAME>)
                         .useSite(DatadogSite.US3)
                         .build();
-        Datadog.initialize(this, configuration, trackingConsent);
+        Datadog.initialize(this, configuración, trackingConsent);
     }
 }
 ```
@@ -185,32 +185,32 @@ public class SampleApplication extends Application {
 {{< tabs >}}
 {{% tab "Kotlin" %}}
 ```kotlin
-class SampleApplication : Application() {
-    override fun onCreate() {
+clase SampleApplication : Application() {
+    sustituir fun onCreate() {
         super.onCreate()
-        val configuration = Configuration.Builder(
+        configuración de valor = Configuration.Builder(
                 clientToken = <CLIENT_TOKEN>,
-                env = <ENV_NAME>,
-                variant = <APP_VARIANT_NAME>
+                variable de entorno = <ENV_NAME>,
+                variante = <APP_VARIANT_NAME>
             )
             .useSite(DatadogSite.US5)
             .build()
-        Datadog.initialize(this, configuration, trackingConsent)
+        Datadog.initialize(this, configuración, trackingConsent)
     }
 }
 ```
 {{% /tab %}}
 {{% tab "Java" %}}
-```java
-public class SampleApplication extends Application {
+```Java
+clase pública SampleApplication extends Application {
     @Override
-    public void onCreate() {
+    anulación pública onCreate() {
         super.onCreate();
-        Configuration configuration =
-                new Configuration.Builder(<CLIENT_TOKEN>, <ENV_NAME>, <APP_VARIANT_NAME>)
+        Configuración configuración =
+                nuevo Configuration.Builder(<CLIENT_TOKEN>, <ENV_NAME>, <APP_VARIANT_NAME>)
                         .useSite(DatadogSite.US5)
                         .build();
-        Datadog.initialize(this, configuration, trackingConsent);
+        Datadog.initialize(this, configuración, trackingConsent);
     }
 }
 ```
@@ -222,32 +222,32 @@ public class SampleApplication extends Application {
 {{< tabs >}}
 {{% tab "Kotlin" %}}
 ```kotlin
-class SampleApplication : Application() {
-    override fun onCreate() {
+clase SampleApplication : Application() {
+    sustituir fun onCreate() {
         super.onCreate()
-        val configuration = Configuration.Builder(
+        configuración de valor = Configuration.Builder(
                 clientToken = <CLIENT_TOKEN>,
-                env = <ENV_NAME>,
-                variant = <APP_VARIANT_NAME>
+                variable de entorno = <ENV_NAME>,
+                variante = <APP_VARIANT_NAME>
             )
             .useSite(DatadogSite.US1_FED)
             .build()
-        Datadog.initialize(this, configuration, trackingConsent)
+        Datadog.initialize(this, configuraciión, trackingConsent)
     }
 }
 ```
 {{% /tab %}}
 {{% tab "Java" %}}
-```java
-public class SampleApplication extends Application {
+```Java
+clase pública SampleApplication extiende Aplicación {
     @Override
-    public void onCreate() {
+    anulación pública onCreate() {
         super.onCreate();
-        Configuration configuration =
-                new Configuration.Builder(<CLIENT_TOKEN>, <ENV_NAME>, <APP_VARIANT_NAME>)
+        Configuración configuración =
+                nuevo Configuration.Builder(<CLIENT_TOKEN>, <ENV_NAME>, <APP_VARIANT_NAME>)
                         .useSite(DatadogSite.US1_FED)
                         .build();
-        Datadog.initialize(this, configuration, trackingConsent);
+        Datadog.initialize(this, configuración, trackingConsent);
     }
 }
 ```
@@ -259,32 +259,32 @@ public class SampleApplication extends Application {
 {{< tabs >}}
 {{% tab "Kotlin" %}}
 ```kotlin
-class SampleApplication : Application() {
-    override fun onCreate() {
+clase SampleApplication : Aplicación() {
+    sustituir fun onCreate() {
         super.onCreate()
-        val configuration = Configuration.Builder(
+        configuración de valor = Configuration.Builder(
                 clientToken = <CLIENT_TOKEN>,
-                env = <ENV_NAME>,
-                variant = <APP_VARIANT_NAME>
+                variable de entorno = <ENV_NAME>,
+                variante = <APP_VARIANT_NAME>
             )
             .useSite(DatadogSite.AP1)
             .build()
-        Datadog.initialize(this, configuration, trackingConsent)
+        Datadog.initialize(this, configuración, trackingConsent)
     }
 }
 ```
 {{% /tab %}}
 {{% tab "Java" %}}
-```java
-public class SampleApplication extends Application {
+```Java
+clase pública SampleApplication extiende Aplicación {
     @Override
-    public void onCreate() {
+    anulación pública onCreate() {
         super.onCreate();
-        Configuration configuration =
-                new Configuration.Builder(<CLIENT_TOKEN>, <ENV_NAME>, <APP_VARIANT_NAME>)
+        Configuración configuración =
+                nuevo Configuration.Builder(<CLIENT_TOKEN>, <ENV_NAME>, <APP_VARIANT_NAME>)
                         .useSite(DatadogSite.AP1)
                         .build();
-        Datadog.initialize(this, configuration, trackingConsent);
+        Datadog.initialize(this, configuración, trackingConsent);
     }
 }
 ```
@@ -302,7 +302,7 @@ Para controlar los datos que tu aplicación envía a Datadog RUM, puedes especif
 
 ```kotlin
 val rumConfig = RumConfiguration.Builder(applicationId)
-        // Here 75% of the RUM sessions are sent to Datadog
+        // Aquí el 75 % de las sesiones de RUM se envía a Datadog
         .setSessionSampleRate(75.0f)
         .build()
 Rum.enable(rumConfig)
@@ -323,8 +323,8 @@ Rum.enable(rumConfig)
 {{% /tab %}}
 
 {{% tab "Java" %}}
-```java
-    RumConfiguration rumConfig = new RumConfiguration.Builder(applicationId)
+```Java
+    RumConfiguration rumConfig = nuevo RumConfiguration.Builder(applicationId)
       .trackInteractions()
       .trackLongTasks(durationThreshold)
       .useViewTrackingStrategy(strategy)
@@ -365,9 +365,9 @@ val okHttpClient = OkHttpClient.Builder()
 ```
 {{% /tab %}}
 {{% tab "Java" %}}
-```java
-final Map<String, Set<TracingHeaderType>> tracedHostsWithHeaderType = new HashMap<>();
-final Set<TracingHeaderType> datadogAndW3HeadersTypes = new HashSet<>(Arrays.asList(TracingHeaderType.DATADOG, TracingHeaderType.TRACECONTEXT));
+```Java
+final Map<String, Configurar<TracingHeaderType>> tracedHostsWithHeaderType = nuevo HashMap<>();
+final Configurar<TracingHeaderType> datadogAndW3HeadersTypes = nuevo HashSet<>(Arrays.asList(TracingHeaderType.DATADOG, TracingHeaderType.TRACECONTEXT));
 tracedHostsWithHeaderType.put("example.com", datadogAndW3HeadersTypes);
 tracedHostsWithHeaderType.put("example.eu", datadogAndW3HeadersTypes);
 OkHttpClient okHttpClient = new OkHttpClient.Builder()
@@ -413,9 +413,9 @@ Añade el siguiente fragmento durante configuración de RUM:
 Puedes el uso de la instancia `Closeable` de monitor mediante la utilización del método `useMonitored`, se informará de cualquier error ocurrido a Datadog y cerrar el recurso después.
 
 ```kotlin
-val closeable: Closeable = ...
+valor cerrable: Cerrable = ...
 closeable.useMonitored {
-    // Your code here
+    // Tu código aquí
 }
 
 ```

@@ -1,4 +1,0 @@
----
-title: SCIM
-headless: true
----

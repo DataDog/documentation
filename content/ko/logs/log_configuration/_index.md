@@ -15,9 +15,6 @@ further_reading:
 - link: /logs/guide/
   tag: 지침
   text: Datadog을 활용한 로그 수집 추가 지침
-- link: https://www.datadoghq.com/architecture/a-guide-to-log-management-indexing-strategies-with-datadog/
-  tag: 아키텍처 센터
-  text: Datadog를 통한 로그 관리 인덱싱 전략에 대한 가이드
 title: 로그 설정
 ---
 
@@ -46,7 +43,7 @@ title: 로그 설정
 {{< partial name="whats-next/whats-next.html" >}}
 
 <br>
-*Logging without Limits는 Datadog, Inc.의 상표입니다.
+*제한없는 로그 수집(Logging without Limits)은 Datadog, Inc.의 상표입니다.
 
 [1]: https://app.datadoghq.com/logs/pipelines
 [2]: /ko/data_security/pci_compliance/

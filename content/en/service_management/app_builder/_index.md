@@ -11,9 +11,6 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/app-builder-remediation/"
   tag: "Blog"
   text: "Remediate apps built using Datadog App Builder"
-- link: "https://www.datadoghq.com/blog/ai-assistant-workflows-apps/"
-  tag: "Blog"
-  text: "Build Datadog workflows and apps in minutes with our AI assistant"
 ---
 
 {{< site-region region="gov" >}}

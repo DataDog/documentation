@@ -37,26 +37,26 @@ further_reading:
     de amenazas
 - link: https://securitylabs.datadoghq.com/
   tag: Laboratorios de seguridad
-  text: Leer sobre temas relacionados con la seguridad en los laboratorios de seguridad
+  text: Leer sobre temas relacionados con la seguridad en los Laboratorios de seguridad
     de Datadog
 - link: https://www.datadoghq.com/blog/content-packs/
   tag: Blog
-  text: Incorporar y monitorizar con facilidad logs de seguridad con los paquetes
+  text: Incorporar y monitorizar con facilidad logs de seguridad con los Paquetes
     de contenido de Cloud SIEM
 title: Empezando con Cloud SIEM
 ---
 
 ## Información general
 
-[Datadog Cloud SIEM][1] detecta en tiempo real amenazas dirigidas a tu aplicación e infraestructura. Estas amenazas pueden ser un ataque dirigido, una IP de la lista de amenazas que se comunica con tus sistemas o una configuración insegura. Una vez detectada, se genera una señal y se puede enviar una notificación a tu equipo.
+[Datadog Cloud SIEM][1] detecta amenazas en tiempo real a tu aplicación e infraestructura. Estas amenazas pueden incluir un ataque dirigido, una IP de la lista de amenazas que se comunica con tus sistemas o una configuración insegura. Una vez detectada, se genera una señal y se puede enviar una notificación a tu equipo.
 
-Esta guía te mostrará las prácticas recomendadas para empezar a usar Cloud SIEM.
+Esta guía te mostrará las prácticas recomendadas para empezar con Cloud SIEM.
 
 ## Fase 1: Configuración
 
-1. Configura la [ingesta de logs][2] para recopilar logs de tus fuentes. Revisa las [prácticas recomendadas de gestión de logs][3].
+1. Configura la [ingesta de logs][2] para recopilar logs de tus fuentes. Revisa las [Prácticas recomendadas para la gestión de logs][3].
 
-    Puedes utilizar [pipelines de integración ya preparadas][4] a fin de recopilar logs de más de {{< translate key="integration_count" >}} integraciones o [crear pipelines de logs personalizadas][5] para enviarlas:
+    Puedes utilizar [pipelines de integración listas para utilizar][4] a fin de recopilar logs de más de {{< translate key="integration_count" >}} integraciones o [crear pipelines de logs personalizadas][5] para enviar:
 
     - [Logs de auditoría en la nube][6]
     - [Logs del proveedor de identidad][7]
@@ -64,59 +64,59 @@ Esta guía te mostrará las prácticas recomendadas para empezar a usar Cloud SI
     - Integraciones de seguridad de terceros (por ejemplo, Amazon GuardDuty)
 
 2. Habilite [Cloud SIEM][8].
-3. Selecciona y configura [paquetes de contenido][9], que proporcionan contenido listo para utilizar para fuentes de logs de seguridad críticas.
-4. Selecciona y configura las [fuentes de logs adicionales][10] que quieras que analice Cloud SIEM.
+3. Selecciona y configura [Paquetes de contenido][9], que proporcionan contenido listo para utilizar para fuentes de logs de seguridad críticas.
+4. Selecciona y configura [fuentes de logs adicionales][10] que quieras que analice Cloud SIEM.
 5. Haz clic en **Activate** (Activar). Se crea un índice de log de Cloud SIEM (`cloud-siem-xxxx`) personalizado.
-6. Si en la página de configuración de Cloud SIEM se muestra la advertencia «The Cloud SIEM index is not in the first position» (El índice de Cloud SIEM no está en la primera posición), sigue los pasos de la sección [Reordenar el índice de Cloud SIEM](#reorder-the-cloud-siem-index).
+6. Si en la página de configuración de Cloud SIEM se muestra la advertencia «The Cloud SIEM index is not in the first position» (El índice de Cloud SIEM no está en la primera posición), sigue los pasos en la sección [Reordenar el índice de Cloud SIEM](#reorder-the-cloud-siem-index).
 
 ### Reordenar el índice de Cloud SIEM
 
 {{< img src="getting_started/cloud_siem/cloud-siem-setup-warning.png" alt="Un cuadro de advertencia amarillo que indica que se debe prestar atención a la configuración del índice" style="width:80%;">}}
 
-1. Haz clic en **Reorder index in Logs Configuration** (Reordenar el índice en la configuración de logs).
+1. Haz clic en **Reorder index in Logs Configuration** (Reordenar el índice en la Configuración de logs).
 
-2. Confirma que el título de la ventana modal diga «Move cloud-siem-xxxx to...» (Mover cloud-siem-xxxx a...) y que el texto `cloud-siem-xxxx` en la columna de índice sea de color morado claro.
+2. Confirma que el título modal diga «Move cloud-siem-xxxx to...» (Mover cloud-siem-xxxx a...) y que el texto `cloud-siem-xxxx` en la columna de índice sea de color morado claro.
 
-{{< img src="getting_started/cloud_siem/move-index-modal.png" alt="Ventana modal Mover cloud-siem-xxxx que muestra la lista de índices con el índice cloud-siem-xxxx como último índice" style="width:60%;">}}
+{{< img src="getting_started/cloud_siem/move-index-modal.png" alt="El modal Mover cloud-siem-xxxx que muestra la lista de índices con el índice cloud-siem-xxxx como último índice" style="width:60%;">}}
 
-3. Para seleccionar la nueva ubicación del índice, haz clic en la línea superior del índice donde quieres que vaya `cloud-siem-xxxx`. Por ejemplo, si quieres que el índice `cloud-siem-xxxx` sea el primero, haz clic en la línea de *arriba* del primer índice actual. La posición nueva se resalta con una línea azul gruesa.
+3. Para seleccionar la ubicación nueva del índice, haz clic en la línea superior del índice donde deseas que vaya `cloud-siem-xxxx`. Por ejemplo, si deseas que el índice `cloud-siem-xxxx` sea el primer índice, haz clic en la línea *arriba* del primer índice actual. La posición nueva se resalta con una línea azul gruesa.
 
-{{< img src="getting_started/cloud_siem/move-index-highlight.png" alt="Ventana modal Mover cloud-siem-xxxx que muestra una línea azul en la parte superior del primer índice" style="width:65%;">}}
+{{< img src="getting_started/cloud_siem/move-index-highlight.png" alt="El modal Mover cloud-siem-xxxx que muestra una línea azul en la parte superior del primer índice" style="width:65%;">}}
 
-4. El texto confirma la posición seleccionada: «Select the new placement of your index: Position 1» (Selecciona la nueva posición del índice: Posición 1). Haz clic en **Move** (Mover).
+4. El texto confirma la posición seleccionada: «Selecciona la posición nueva de tu índice: Posición 1». Haz clic en **Move** (Mover).
 
-5. Revisa el texto de advertencia. Si estás conforme con el cambio, haz clic en **Reorder** (Reordenar).
+5. Revisa el texto de advertencia. Si estás satisfecho con el cambio, haz clic en **Reorder** (Reordenar).
 
-6. Revisa el orden de los índices y confirma que el índice `cloud-siem-xxxx` está donde quieres que esté. Si quieres moverlo, haz clic en el icono **Move to** (Mover a) y sigue los pasos 3 a 5.
+6. Revisa el orden de los índices y confirma que el índice `cloud-siem-xxxx` está donde deseas. Si deseas mover el índice, haz clic en el icono **Move to** (Mover a) y sigue los pasos 3 a 5.
 
-7. Vuelve a la [página de configuración de Cloud SIEM][11].
+7. Vuelve a la [Página de configuración de Cloud SIEM][11].
 
 Ahora el índice de Cloud SIEM debería estar en la primera posición. Si la página de configuración sigue mostrando una advertencia sobre la posición del índice, espera unos minutos y actualiza el navegador.
 
-Después de mover el índice a la primera posición, revisa la configuración y los estados de los [paquetes de contenido][11] y las [otras fuentes de logs][11]. Haz clic en cada integración que muestre una advertencia o error y sigue las instrucciones para solucionarlo.
+Después de mover el índice a la primera posición, revisa la configuración y los estados de los [Paquetes de contenido][11] y [otras fuentes de logs][11]. Para cada integración que muestre una advertencia o error, haz clic en la integración y sigue las instrucciones a fin de solucionarlo.
 
 ## Fase 2: Exploración de señales
 
-1. Echa un vistazo a las [reglas de detección que ya vienen preparadas][12] para detectar amenazas en tu entorno de inmediato. Las reglas de detección se aplican a todos los logs procesados para maximizar la cobertura de detección. Consulta el material de referencia de las [reglas de detección][13] para obtener más información.
+1. Revisa las [reglas de detección listas para utilizar][12] que comienzan a detectar amenazas en tu entorno de inmediato. Las reglas de detección se aplican a todos los logs procesados para maximizar la cobertura de detección. Consulta la documentación de las [reglas de detección][13] para obtener más información.
 
-2. Revisa las [señales de seguridad][14]. Cuando se detecta una amenaza con una regla de detección, se genera una señal de seguridad. Consulta la documentación de las [señales de seguridad][15] para obtener más información.
+2. Explora las [señales de seguridad][14]. Cuando se detecta una amenaza con una regla de detección, se genera una señal de seguridad. Consulta la documentación de las [señales de seguridad][15] para obtener más información.
 
-    - [Configura las reglas de notificación][16] para recibir un aviso cuando se generen señales. Puedes recibir alertas mediante Slack, Jira, correo electrónico, webhooks y otras integraciones. Consulta el material de referencia de las [reglas de notificación][17] para obtener más información.
+    - [Configura las reglas de notificación][16] para que avise cuando se generen señales. Puedes generar alertar mediante Slack, Jira, correos electrónicos, webhooks y otras integraciones. Consulta la documentación de las [reglas de notificación][17] para obtener más información.
     - Suscríbete a los [informes semanales de amenazas][18] para iniciar la investigación y corrección de las amenazas de seguridad más importantes que se han detectado en los siete días anteriores. 
 
 ## Fase 3: Investigación
 
-1. Usa [Investigator][19] para agilizar la corrección. Consulta la documentación de [Investigator][20] para obtener más información.
-2. Utiliza [dashboards ya preparados][21] o [crea el tuyo][22] para las investigaciones, la generación de informes y la monitorización.
+1. Explora [Investigator][19] para una corrección más rápida. Consulta la documentación de [Investigator][20] para obtener más información.
+2. Utiliza [dashboards listos para utilizar][21] o [crea el tuyo][22] para las investigaciones, la presentación de informes y la monitorización.
 
 ## Fase 4: Personalización
 
 1. Configura [reglas de supresión][23] para reducir el ruido. 
-2. Crea [reglas de detección personalizadas][24]. Lee las [prácticas recomendadas para crear reglas de detección][25].
+2. Crea [reglas de detección personalizadas][24]. Revisa las [Prácticas recomendadas para crear reglas de detección][25].
 
-## Configurar tests de API y tests de API multupaso
+## Leer más
 
-Grabar pruebas de aplicaciones móviles
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /es/security/cloud_siem/
 [2]: https://app.datadoghq.com/security/configuration/siem/log-sources
@@ -140,6 +140,6 @@ Grabar pruebas de aplicaciones móviles
 [20]: /es/security/cloud_siem/investigator
 [21]: https://app.datadoghq.com/dashboard/lists/preset/100
 [22]: /es/dashboards/#overview
-[23]: /es/security/cloud_siem/detection_rules/?tab=threshold#advanced-options
-[24]: /es/security/cloud_siem/detection_rules/
+[23]: /es/security/cloud_siem/log_detection_rules/?tab=threshold#advanced-options
+[24]: /es/security/cloud_siem/log_detection_rules/
 [25]: https://www.datadoghq.com/blog/writing-datadog-security-detection-rules/

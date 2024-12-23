@@ -32,12 +32,10 @@ if (window.DD_RUM) {
             service: 'docs',
             version: CI_COMMIT_SHORT_SHA,
             trackUserInteractions: true,
-            enableExperimentalFeatures: ['zero_lcp_telemetry'],
+            trackFrustrations: true,
+            enableExperimentalFeatures: ["clickmap"],
             sessionSampleRate: 100,
             sessionReplaySampleRate: 50,
-            trackResources: true,
-            trackLongTasks: true,
-            defaultPrivacyLevel: 'mask-user-input',
             allowedTracingUrls: [window.location.origin],
             internalAnalyticsSubdomain: IA_SUBDOMAIN
         });

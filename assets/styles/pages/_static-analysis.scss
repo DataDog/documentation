@@ -1,0 +1,196 @@
+.static-analysis-main {
+    [x-cloak] {
+        display: none !important;
+    }
+    #static-analysis-nav {
+        // position: sticky;
+        // top: 95px;
+        align-self: flex-start;
+        z-index: 2;
+        background-color: white;
+        padding-top: 12px;
+        padding-bottom: 12px;
+
+        .filters-static-analysis {
+            margin-bottom: 12px;
+            .filter-type {
+                margin-bottom: 24px;
+                .filter-type-name {
+                    margin-bottom: 8px;
+                }
+                button.toggler {
+                    height: 40px;
+                    padding: 0 50px 0 8px;
+                    border: 1px solid #C7C7C7;
+                    background: $gray-lightest;
+                    .selections {
+                        column-gap: 4px;
+                        overflow-x: scroll;
+                        .selection-container {
+                            column-gap: 7px;
+                            background-color: #E6D6F9;
+                            padding: 0 4px;
+                            height: 23px;
+                            .selection-name {
+                                white-space: nowrap;
+                                position: relative;
+                                top: -1px
+                            }
+                            .close-light-wrapper{
+                                position: relative;
+                                top: 2px;
+                                i.icon-close-light_x {
+                                    display: inherit;
+                                    color: $brand-primary
+                                }
+                            }
+                        }
+                        .selection-container:last-child{
+                            z-index: 1;
+                        }
+                        .all {
+                            color: $brand-primary
+                        }
+                    }
+
+                    /* Hide scrollbar for Chrome, Safari and Opera */
+                    .selections::-webkit-scrollbar {
+                        display: none;
+                    }
+                    
+                    /* Hide scrollbar for IE, Edge and Firefox */
+                    .selections {
+                        -ms-overflow-style: none;  /* IE and Edge */
+                        scrollbar-width: none;  /* Firefox */
+                    }
+
+                    .overflow-gradient {
+                        width: 70px;
+                        background: linear-gradient(90deg, rgba(246, 246, 246, 0.00) 6.25%, #F6F6F6 31.25%);
+                        padding-left: 8px;
+                        display: grid;
+                        grid-template-columns: repeat(3, 1fr);
+                        align-items: center;
+
+                        .cancel-circle-wrapper {
+                            display: inherit;
+                            position: relative;
+                            top: 3px;
+                            grid-column: 2/span 1;
+                            i.icon-x-circle-solid {
+                                color: $brand-primary;
+                            }
+                        }
+                        .chevron-wrapper {
+                            top: -1px;
+                            grid-column: 3/span 1;
+                            padding: 0 8px 
+                        }
+                    }
+                }
+                form {
+                    row-gap: 12px;
+                    padding: 8px;
+                    margin-top: 8px;
+                    box-shadow: 0px 0px 1px 0px rgba(0, 0, 0, 0.10), 0px 4px 16px 0px rgba(0, 0, 0, 0.32);
+                    z-index: 2;
+
+                    .filter-selection-container {
+                        display: flex;
+                        align-items: center;
+                        column-gap: 8px;
+                        input {
+                            width: 16px;
+                            height: 16px;
+                            cursor: pointer
+                        }
+                        label {
+                            column-gap: 8px;
+                            cursor: pointer
+                        }
+                    }
+                }
+            }
+            .filter-type:last-of-type {
+                margin-bottom: 0;
+            }
+        }
+        .search-static-analysis input {
+            padding: 9px 8px;
+            border-radius: 4px;
+            border: $gray-light 1px solid; 
+            &:focus {
+                outline: transparent;
+                box-shadow: 4px 4px 12px rgba(0,0,0,0.3);
+                border: 1px solid transparent;
+            }
+        }
+    }
+    .ruleset {
+        .ruleset-header {
+            transition: box-shadow 0.125s;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.25);
+            border-radius: 4px;
+            overflow: hidden;
+            height: 34px;
+            padding: 0 10px;
+            cursor: pointer;
+            i {
+                cursor: copy;
+                position: relative;
+                top: 4px;
+                margin-left: 4px;
+            }
+            .ruleset-header__plus {
+                margin-left: 4px;
+                color: $gray-900;
+            }
+            .ruleset-header__text {
+                margin: 0 8px
+            }
+            .ruleset-header__arrow {
+                font-size: 18px;
+                transform: rotate(-90deg) !important;
+            }
+            &:hover {
+            box-shadow: 0 2px 3px rgba(0,0,0,0.3);
+            }
+            &.active {
+            .ruleset-header__arrow {
+                position: relative;
+                top: 2px;
+                transform: rotate(-180deg) !important;
+            }
+            }
+            @media (max-width: 768px) {
+                height: auto;
+                min-height: 38px;
+                padding: 5px 10px
+            }
+        }
+        .ruleset-description {
+            // rendered if a paragraph description
+            p {
+                font-size: 16px;
+                margin: 0;
+            }
+            ul {
+                font-size: 16px;
+                -webkit-padding-start: 36px;
+            }
+        }
+        .rule {
+            .rule-name-container {
+                a {
+                    margin-left: 8px ;
+                }
+            }
+        }
+        .rule:hover {
+            color: $brand-primary;
+            a {
+                color: $brand-primary;
+            }
+        }
+    }
+}

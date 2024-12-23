@@ -1,8 +1,4 @@
 ---
-algolia:
-  tags:
-  - asm
-  - seguridad de las aplicaciones
 aliases:
 - /es/security_platform/application_security
 - /es/security/application_security/enabling/single_step

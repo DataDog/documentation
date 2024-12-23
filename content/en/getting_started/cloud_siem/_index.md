@@ -135,6 +135,6 @@ After the index is moved to the first index position, review the settings and st
 [20]: /security/cloud_siem/investigator
 [21]: https://app.datadoghq.com/dashboard/lists/preset/100
 [22]: /dashboards/#overview
-[23]: /security/cloud_siem/detection_rules/?tab=threshold#advanced-options
-[24]: /security/cloud_siem/detection_rules/
+[23]: /security/cloud_siem/log_detection_rules/?tab=threshold#advanced-options
+[24]: /security/cloud_siem/log_detection_rules/
 [25]: https://www.datadoghq.com/blog/writing-datadog-security-detection-rules/

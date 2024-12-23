@@ -11,7 +11,7 @@ instances:
     ## If the port number is not specified, the default port 27017 is used.
     #
   - hosts:
-      - <HOST>:<PORT>
+      - <HOST>:<PORT>  # Primary node
 
     ## @param username - string - optional
     ## The username to use for authentication.

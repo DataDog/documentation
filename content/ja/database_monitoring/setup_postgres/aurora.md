@@ -137,7 +137,7 @@ RETURNS NULL ON NULL INPUT
 SECURITY DEFINER;
 ```
 
-### パスワードを安全に保管
+### Securely store your password
 {{% dbm-secret %}}
 
 ### 検証する
@@ -353,20 +353,18 @@ metadata:
     tags.datadoghq.com/env: '<ENV>'
     tags.datadoghq.com/service: '<SERVICE>'
   annotations:
-    ad.datadoghq.com/service.checks: |
-      {
-        "postgres": {
-          "instances": [
-            {
-              "dbm": true,
-              "host": "<AWS_INSTANCE_ENDPOINT>",
-              "port": 5432,
-              "username": "datadog",
-              "password": "ENC[datadog_user_database_password]"
-            }
-          ]
+    ad.datadoghq.com/service.check_names: '["postgres"]'
+    ad.datadoghq.com/service.init_configs: '[{}]'
+    ad.datadoghq.com/service.instances: |
+      [
+        {
+          "dbm": true,
+          "host": "<AWS_INSTANCE_ENDPOINT>",
+          "port": 5432,
+          "username": "datadog",
+          "password": "ENC[datadog_user_database_password]"
         }
-      }
+      ]
 spec:
   ports:
   - port: 5432
@@ -385,8 +383,9 @@ metadata:
   annotations:
     ad.datadoghq.com/service.checks: |
       { 
-        "postgres": {
-          "instances": [ 
+        "postgres": 
+        { "instances": 
+          [ 
             { 
               "dbm":true, 
               "host":"your-host-1.us-east-2.rds.amazonaws.com", 

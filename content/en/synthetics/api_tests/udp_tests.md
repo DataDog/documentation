@@ -44,10 +44,6 @@ After choosing to create an `UDP` Test, define your test's request.
 
 Click **Test URL** to try out the request configuration. A response preview is displayed on the right side of your screen. 
 
-### Snippets
-
-{{% synthetics-api-tests-snippets %}}
-
 ### Define assertions
 
 Assertions define what an expected test result is. When you click **Test URL**, a basic assertion on `response time` is added. You must define at least one assertion for your test to monitor.

@@ -141,7 +141,7 @@ gMSA를 실행할 때 Windows 에이전트의 핵심 및 APM/추적 컴포넌트
 
 **참고:** `DatadogGMSA$`를 내 gMSA 사용자 이름을 변경합니다. 사용자 이름은 **$ 기호로 종료되어야 합니다.**
   ```powershell
-  Start-Process -Wait msiexec -ArgumentList '/qn /i datadog-agent-7-latest.amd64.msi APIKEY="<YOUR_DATADOG_API_KEY>" DDAGENTUSER_NAME="<YOUR_DOMAIN_NAME>\DatadogGMSA$"'
+  Start-Process -Wait msiexec -ArgumentList '/qn /i datadog-agent-7-latest.amd64.msi APIKEY="<YOUR_DATADOG_API_KEY>" DDAGENTUSER_NAME="<YOUR_DOMAIN_NAME>\DatadogGMSA$'
   ```
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest?platform=windows
@@ -327,7 +327,7 @@ start-process msiexec -Wait -ArgumentList ('/log', 'C:\uninst.log', '/q', '/x', 
 
 ### flare 전송 
 
-* Datadog Agent Manager를 표시하기 위해 [http://127.0.0.1:5002][12]로 이동합니다.
+*  Datadog 에이전트 Manager를 표시하기 위해 [http://127.0.0.1:5002][12]로 이동합니다.
 
 * flare 탭을 선택합니다.
 
@@ -340,16 +340,16 @@ start-process msiexec -Wait -ArgumentList ('/log', 'C:\uninst.log', '/q', '/x', 
 PowerShell에서 플레어 명령을 사용할 수 있습니다.
 
 ```powershell
-& "$env:ProgramFiles\Datadog\Datadog Agent\bin\agent.exe" flare <CASE_ID>
+& "$env:ProgramFiles\Datadog\Datadog 에이전트\bin\agent.exe" flare <CASE_ID>
 ```
 
 또는 cmd.exe:
 
 ```cmd
-"%ProgramFiles%\Datadog\Datadog Agent\bin\agent.exe" flare <CASE_ID>
+"%ProgramFiles%\Datadog\Datadog 에이전트\bin\agent.exe" flare <CASE_ID>
 ```
 
-{{< img src="agent/basic_agent_usage/windows/windows_flare_agent_6.png" alt="Windows flare with Agent 6" style="width:75%;">}}
+{{< img src="agent/basic_agent_usage/windows/windows_flare_agent_6.png" alt="Windows flare with 에이전트 6" style="width:75%;">}}
 
 ## 사용 사례
 

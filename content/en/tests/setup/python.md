@@ -14,13 +14,13 @@ further_reading:
     - link: "/continuous_integration/tests"
       tag: "Documentation"
       text: "Explore Test Results and Performance"
-    - link: "/tests/troubleshooting/"
+    - link: "/continuous_integration/troubleshooting/"
       tag: "Documentation"
-      text: "Troubleshooting Test Optimization"
+      text: "Troubleshooting CI Visibility"
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">Test Optimization is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
+<div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
 ## Compatibility

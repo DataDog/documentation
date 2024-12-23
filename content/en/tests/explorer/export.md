@@ -1,7 +1,7 @@
 ---
 title: Export Test Runs 
 further_reading:
-- link: "/tests/explorer/"
+- link: "/tests/search/"
   tag: "Documentation"
   text: "Search for your tests"
 - link: "/tests/explorer/saved_views/"

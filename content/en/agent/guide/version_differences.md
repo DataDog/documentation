@@ -32,7 +32,7 @@ Datadog Agent release numbering follows <a href="https://semver.org/">SemVer</a>
 {{< tabs >}}
 {{% tab "Agent v7 vs v6" %}}
 
-Agent v7 is the latest major version of the Datadog Agent. The main difference from Agent v6 is that **this version only includes support for Python 3 for integrations and custom checks**.
+Agent v7 is the latest major version of the Datadog Agent. The only change from Agent v6 is that **this version only includes support for Python 3 for integrations and custom checks**.
 
 See the [Upgrade to Agent v7 documentation][1] to learn how to upgrade your Agent to version 7. All official integrations support Python 3 out-of-the-box. Follow the [Python 3 Custom Check Migration guide][2] to migrate your custom checks to Python 3.
 

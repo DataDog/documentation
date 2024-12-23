@@ -135,6 +135,6 @@ title: Cloud SIEM 시작하기
 [20]: /ko/security/cloud_siem/investigator
 [21]: https://app.datadoghq.com/dashboard/lists/preset/100
 [22]: /ko/dashboards/#overview
-[23]: /ko/security/cloud_siem/detection_rules/?tab=threshold#advanced-options
-[24]: /ko/security/cloud_siem/detection_rules/
+[23]: /ko/security/cloud_siem/log_detection_rules/?tab=threshold#advanced-options
+[24]: /ko/security/cloud_siem/log_detection_rules/
 [25]: https://www.datadoghq.com/blog/writing-datadog-security-detection-rules/

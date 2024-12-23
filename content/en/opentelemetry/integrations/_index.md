@@ -38,6 +38,12 @@ Gain insights into your containerized environments and host systems:
 - [Docker Metrics][4]
 - [Host Metrics][5]
 
+### Logs
+
+Collect and manage logs from configured file paths:
+
+- [Log Collection][7]
+
 ### Vendor technologies
 
 Extend your observability to popular vendor technologies:
@@ -54,4 +60,5 @@ Extend your observability to popular vendor technologies:
 [4]: /opentelemetry/integrations/docker_metrics/
 [5]: /opentelemetry/integrations/host_metrics/
 [6]: /opentelemetry/integrations/kafka_metrics/
+[7]: /opentelemetry/integrations/log_collection/
 [8]: /opentelemetry/integrations/collector_health_metrics/

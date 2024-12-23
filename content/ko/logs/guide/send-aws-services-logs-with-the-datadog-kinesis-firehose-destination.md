@@ -41,8 +41,7 @@ Datadog에서는 Amazon Data Firehose와 함께 Datadog 대상을 사용할 때 
    b. 대상을 `Datadog`로 설정합니다.  
    c. 전송 스트림 이름을 입력합니다.
    d. **대상 설정**에서 [Datadog 사이트][5]에 해당하는 `Datadog logs` HTTP 엔드포인트 URL을 선택합니다.
-   e. API 키를 **API 키** 필드에 붙여넣습니다. API 키는 [Datadog API 키 페이지][3]에서 가져오거나 만들 수 있습니다. Secrets Manager 인증을 사용하려면 다음과 같이 값 필드에 전체 JSON 형식의 Datadog API 키를 추가합니다: `{"api_key":"<YOUR_API_KEY>"}`.
-
+   e. API 키를 **API 키** 필드에 붙여넣습니다. [Datadog API 키 페이지][3]에서 API 키를 가져오거나 생성할 수 있습니다.  
    f. 선택 사항으로 **재시도 기간**, 버퍼 설정을 구성하거나 로그에 태그로 첨부한 **파라미터**를 추가합니다.
    **참고**: Datadog은 로그가 한 줄 메시지인 경우 **버퍼 크기**를 `2 MiB` 로 설정할 것을 권장합니다.
    g. **백업 설정**에서 재시도 기간을 초과하는 실패 이벤트를 수신할 S3 백업 버킷을 선택합니다.
@@ -153,7 +152,7 @@ Amazon Data Firehose 전송 스트림을 설정한 후에는 Datadog에서 전�
 1. Datadog에서 [Log Explorer][5]로 이동합니다.
 2. 검색창에 `@aws.firehose.arn:"<ARN>"`을 입력하고 `<ARN>`을 Amazon Data Firehose ARN으로 변경한 다음 구독한 로그를 모두 보려면 **Enter**를 누릅니다.
 
-**참고**: 단일 Kinesis 페이로드는 65,000개(로그 메시지)를 넘지 않아야 합니다. 이 한도를 초과하는 로그 메시지는 삭제됩니다.
+**참고**: 단일 Kinesis 페이로드는 로그 메시지 65,000개를 넘지 않아야 합니다. 한도를 초과한 로그 메시지는 삭제됩니다.
 
 ## 참고 자료
 

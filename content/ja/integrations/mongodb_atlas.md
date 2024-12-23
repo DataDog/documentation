@@ -5,7 +5,6 @@ assets:
   dashboards:
     MongoDB-Atlas-Overview: assets/dashboards/MongoDB-Atlas-Overview_dashboard.json
     MongoDB-Atlas-Vector-Search-Overview: assets/dashboards/MongoDB-Atlas-Vector-Search-Overview_dashboard.json
-    MongoDB-dbStats-collStats-Dashboard: assets/dashboards/MongoDB-Atlas-dbStats-collStats_dashboard.json
   integration:
     auto_install: true
     configuration: {}
@@ -26,10 +25,10 @@ assets:
     Read latency is higher than expected: assets/monitors/read_latency.json
     Write latency is higher than expected: assets/monitors/write_latency.json
 author:
-  homepage: https://www.mongodb.com
-  name: MongoDB
-  sales_email: field@mongodb.com
-  support_email: frank.sun@mongodb.com
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com (日本語対応)
+  support_email: help@datadoghq.com
 categories:
 - ai/ml
 - モニター

@@ -1,5 +1,6 @@
 ---
 title: Monitoring APIs
+is_beta: true
 further_reading:
 - link: "/tracing/api_catalog/get_started/"
   tag: "Documentation"

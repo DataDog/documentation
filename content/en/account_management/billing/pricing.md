@@ -50,11 +50,11 @@ You can put controls in place for both Indexed and Ingested span volumes. For mo
 * A **browser test** is a simulation of a scripted sequence of user actions on a web-based application using a virtualized web browser. Datadog charges per thousand browser tests executed to the Datadog Synthetic Monitoring
  service.
 
-## Cloud Network Monitoring
+## Network Performance Monitoring
 
-* Datadog records the number of **Cloud Network Monitoring** (CNM) hosts you are concurrently monitoring with the Datadog CNM service once per hour.
+* Datadog records the number of **Network Performance Monitoring** (NPM) hosts you are concurrently monitoring with the Datadog NPM service once per hour.
   * The billable count of hosts is calculated at the end of the month using the maximum count (high-water mark) of the lower 99 percent of usage for those hours. Datadog excludes the top 1 percent to reduce the impact of spikes in usage on your bill.
-* Additionally, Datadog measures the total number of flows used by all CNM hosts per month. A **flow** is a record of traffic sent and received between a source (IP:Port) and destination (IP:Port), as measured over a five-minute time period.
+* Additionally, Datadog measures the total number of flows used by all NPM hosts per month. A **flow** is a record of traffic sent and received between a source (IP:Port) and destination (IP:Port), as measured over a five-minute time period.
 
 ## Real User Monitoring
 

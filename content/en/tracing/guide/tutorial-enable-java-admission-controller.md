@@ -125,12 +125,10 @@ labels:
 4. Configure the Datadog Admission Controller to inject a Java tracing library to the app container by adding the following annotation to the pod:
    {{< code-block lang="yaml" >}}
 annotations:
-  admission.datadoghq.com/java-lib.version: "<CONTAINER IMAGE TAG>"{{< /code-block >}}
+  admission.datadoghq.com/java-lib.version: "latest"{{< /code-block >}}
 
-    Replace `<CONTAINER IMAGE TAG>` with the desired library version. Available versions are listed in the [Java source repository][14]
-   
-    <div class="alert alert-warning">Exercise caution when using the <code>latest</code> tag, as major library releases may introduce breaking changes.</div>
-    
+    This annotation specifies the latest version of the Java tracing library. You can also reference a specific version of the library, such as `"v1.5.0"`.
+
     The final pod definition should look like the excerpt below. See also the full [YAML file][10] in the sample repo. The instructions you added to instrument the app are highlighted:
 
     {{< highlight yaml "hl_lines=6-8 24-28" >}}
@@ -161,14 +159,14 @@ annotations:
             tags.datadoghq.com/service: "springfront"
             tags.datadoghq.com/version: "12"
         annotations:
-            admission.datadoghq.com/java-lib.version: "<CONTAINER IMAGE TAG>"
+            admission.datadoghq.com/java-lib.version: "latest"
     {{< /highlight >}}
 
-6. Run the sample app with the following command:
+5. Run the sample app with the following command:
    {{< code-block lang="shell" >}}
 kubectl apply -f depl-with-lib-inj.yaml{{< /code-block >}}
 
-7. Run the following command to show that the app and Agent are running:
+6. Run the following command to show that the app and Agent are running:
    {{< code-block lang="shell" >}}
 kubectl get pods{{< /code-block >}}
 
@@ -183,7 +181,7 @@ kubectl get pods{{< /code-block >}}
     springfront-797b78d6db-mppbg                        1/1     Running   0          27m
     ```
 
-8. Run the following command to see details of the pod:
+7. Run the following command to see details of the pod:
    {{< code-block lang="shell" >}}
 kubectl describe pod springfront{{< /code-block >}}
 
@@ -221,7 +219,7 @@ kubectl describe pod springfront{{< /code-block >}}
     /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-qvmtk (ro)
     ```
 
-9. Verify that the Datadog tracing library is injected into the pod by checking the pod logs. For example:
+8. Verify that the Datadog tracing library is injected into the pod by checking the pod logs. For example::
    {{< code-block lang="shell" >}}
 kubectl logs -f springfront-797b78d6db-jqjdl{{< /code-block >}}
 
@@ -275,4 +273,3 @@ If you're not receiving traces as expected, set up debug mode for the Java trace
 [11]: https://app.datadoghq.com/services
 [12]: /tracing/trace_collection/admission_controller
 [13]: /tracing/troubleshooting/tracer_debug_logs/#enable-debug-mode
-[14]: https://github.com/DataDog/dd-trace-java/releases

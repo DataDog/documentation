@@ -3,7 +3,7 @@ guides:
   link: getting_started/agent/
   link_text: 에이전트 시작하기
   title: 에이전트 설치하기
-- desc: 800개가 넘는 내장 통합을 사용해 메트릭, 트레이스와 로그를 수집하여 Datadog에 전송하세요.
+- desc: 800개 이상의 기본 제공 통합을 통해 메트릭, 트레이스, 로그를 수집하여 Datadog으로 보냅니다.
   link: getting_started/integrations/
   link_text: 통합 시작하기
   title: 통합 설정하기
@@ -130,7 +130,7 @@ nav_sections:
     - desc: 취약한 테스트를 감지하고 취약한 테스트를 기져오는 커밋 식별
       icon: ci
       link: tests/
-      title: 테스트 최적화
+      title: 테스트 가시성
     - desc: 위협, 취약성 및 오설정 탐지
       icon: security-platform
       link: security/

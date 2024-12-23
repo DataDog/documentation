@@ -30,10 +30,12 @@ APM tracer integrations support a *Propagation Mode*, which controls the amount 
 
 | DD_DBM_PROPAGATION_MODE | Postgres  |   MySQL     | SQL Server |  Oracle   |
 |:------------------------|:---------:|:-----------:|:----------:|:---------:|
-| `full`                  | {{< X >}} | {{< X >}} * | {{< X >}}  | {{< X >}} |
+| `full`                  | {{< X >}} | {{< X >}} * |    {{< X >}} ** |           |
 | `service`               | {{< X >}} | {{< X >}}   | {{< X >}}  | {{< X >}} |
 
 \* Full propagation mode on Aurora MySQL requires version 3.
+
+\*\* SQL Server only supports full mode with the Java and .NET tracers.
 
 **Supported application tracers and drivers**
 
@@ -43,7 +45,7 @@ APM tracer integrations support a *Propagation Mode*, which controls the amount 
 |                                          | [database/sql][4]      | {{< X >}} | {{< X >}} | `service` mode only | `service` mode only |
 |                                          | [sqlx][5]              | {{< X >}} | {{< X >}} | `service` mode only | `service` mode only |
 | **Java** [dd-trace-java][23] >= 1.11.0   |                        |           |           |                     |                     |
-|                                          | [jdbc][22]             | {{< X >}} | {{< X >}} | {{< X >}} **        | {{< X >}} ***       |
+|                                          | [jdbc][22]             | {{< X >}} | {{< X >}} | {{< X >}} ** | `service` mode only |
 | **Ruby:** [dd-trace-rb][6] >= 1.8.0      |                        |           |           |                     |                     |
 |                                          | [pg][8]                | {{< X >}} |           |                     |                     |
 |                                          | [mysql2][7]            |           | {{< X >}} |                     |                     |
@@ -78,10 +80,6 @@ APM tracer integrations support a *Propagation Mode*, which controls the amount 
     - Agent version 7.55.0 or greater
     - Java tracer version 1.39.0 or greater
     - .NET tracer version 3.3 or greater
-
-\*\*\* Full mode Oracle for Java:
-  - The instrumentation overwrites `V$SESSION.ACTION`.
-  - Prerequisite: Java tracer 1.45 or greater
 
 ## Setup
 For the best user experience, ensure the following environment variables are set in your application:
@@ -196,17 +194,7 @@ public class Application {
 }
 ```
 
-**Note**:
-
-**Tracer versions 1.44 and greater**:
-Enable the prepared statements tracing using **one** of the following methods:
-- Set the system property `dd.dbm.trace_prepared_statements=true`
-- Set the environment variable `export DD_DBM_TRACE_PREPARED_STATEMENTS=true`
-
-The prepared statements instrumentation will overwrite the `Application` property, and will cause an extra roundtrip to the database.
-
-**Tracer versions below 1.44**:
-Prepared statements are not supported in `full` mode, and all JDBC API calls that use prepared statements are automatically downgraded to `service` mode. Since most Java SQL libraries use prepared statements by default, this means that **most** Java applications are only able to use `service` mode.
+**Note**: Prepared statements are not supported in `full` mode, and all JDBC API calls that use prepared statements are automatically downgraded to `service` mode. Since most Java SQL libraries use prepared statements by default, this means that **most** Java applications are only able to use `service` mode.
 
 [1]: /tracing/trace_collection/dd_libraries/java/
 [2]: /tracing/trace_collection/compatibility/java/#data-store-compatibility

@@ -22,12 +22,12 @@ assets:
     source_type_id: 37
     source_type_name: Elasticsearch
   monitors:
-    Average Search Query Latency is High: assets/monitors/elastic_average_search_latency.json
-    Current Indexing Load is High: assets/monitors/elastic_indexing_load.json
-    Latency is high: assets/monitors/elastic_query_latency_high.json
-    Number of pending tasks is high: assets/monitors/elastic_pending_tasks_high.json
-    Query load is high: assets/monitors/elastic_query_load_high.json
-    Unsuccessful requests rate is high: assets/monitors/elastic_requests.json
+    '[ElasticSearch] Average query latency is high': assets/monitors/elastic_average_search_latency.json
+    '[ElasticSearch] Current indexing load is high': assets/monitors/elastic_indexing_load.json
+    '[ElasticSearch] Number of pending tasks is high': assets/monitors/elastic_pending_tasks_high.json
+    '[ElasticSearch] Query load is high': assets/monitors/elastic_query_load_high.json
+    '[ElasticSearch] Time spent on queries is high': assets/monitors/elastic_query_latency_high.json
+    '[ElasticSearch] Unsuccessful requests rate is high': assets/monitors/elastic_requests.json
   saved_views:
     elasticsearch_processes: assets/saved_views/elasticsearch_processes.json
 author:
@@ -39,7 +39,7 @@ categories:
 - data stores
 - log collection
 - tracing
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/elastic/README.md
 display_on_public_website: true
@@ -47,7 +47,7 @@ draft: false
 git_integration_title: elastic
 integration_id: elasticsearch
 integration_title: ElasticSearch
-integration_version: 8.0.1
+integration_version: 6.3.1
 is_public: true
 manifest_version: 2.0.0
 name: elastic
@@ -108,7 +108,7 @@ Elasticsearch チェックは [Datadog Agent][2] パッケージに含まれて�
 
 ホストで実行中の Agent に対してこのチェックを構成するには
 
-##### メトリクスの収集
+##### Metric collection
 
 1. Elasticsearch の[メトリクス](#metrics)を収集するには、[Agent の構成ディレクトリ][1]のルートにある `conf.d/` フォルダーの `elastic.d/conf.yaml` ファイルを編集します。使用可能なすべての構成オプションについては、[サンプル elastic.d/conf.yaml][2] を参照してください。
 

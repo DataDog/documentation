@@ -11,7 +11,7 @@ title: Datadog Agent Integration Developer Tool をインストールする
 {{< tabs >}}
 
 {{% tab "MacOS" %}}
-[Homebrew][1] を使って Python 3.12 をインストールします。
+[Homebrew][1] を使って Python 3.11 をインストールします。
 
 1. Homebrew を更新します。
    ```
@@ -20,31 +20,31 @@ title: Datadog Agent Integration Developer Tool をインストールする
 
 2. Python をインストールします。
    ```
-   brew install python@3.12
+   brew install python@3.11
    ```
 
 3. Homebrew のインストール出力を確認し、インストールスクリプトが推奨する追加のコマンドを実行します。
 
 4. Python のバイナリが `PATH` にインストールされていることと、正しいバージョンがインストールされていることを確認してください。
    ```
-   which python3.12
+   which python3.11
    ```
 
-   お使いの Mac のアーキテクチャに応じて、以下の出力が表示されるはずです。
+   You should see the following output depending on your Mac architecture:
    - ARM (M1+) マシン:
      ```
-     /opt/homebrew/bin/python3.12
+     /opt/homebrew/bin/python3.11
      ```
    - Intel マシンの MacOS:
      ```
-     /usr/local/bin/python3.12
+     /usr/local/bin/python3.11
      ```
 
 [1]: https://brew.sh/
 {{% /tab %}}
 
 {{% tab "Windows" %}}
-1. [Python 3.12 64 ビット版の実行形式インストーラー][1]をダウンロードして実行します。
+1. [Python 3.11 64 ビット版の実行形式インストーラー][1]をダウンロードして実行します。
 1. Python を PATH に追加するオプションを選択します。
 1. **Install Now** をクリックします。
 1. インストールが完了したら、マシンを再起動します。
@@ -59,7 +59,7 @@ title: Datadog Agent Integration Developer Tool をインストールする
 {{% /tab %}}
 
 {{% tab "Linux" %}}
-Linux 環境でのインストールでは、システム Python を変更しないようにしてください。Datadog は [pyenv][1] または [miniconda][2] を使用して Python 3.12 をインストールすることを推奨しています。
+Linux でのインストールでは、システム Python の変更は避けてください。Datadog では [pyenv][1] や [miniconda][2] を使用して Python 3.11 をインストールすることを推奨しています。
 
 [1]: https://github.com/pyenv/pyenv#automatic-installer
 [2]: https://conda.io/projects/conda/en/stable/user-guide/install/linux.html
@@ -103,7 +103,7 @@ Linux 環境でのインストールでは、システム Python を変更しな
 
 {{< tabs >}}
 {{% tab "MacOS" %}}
-1. `curl` コマンドを使用してファイルをダウンロードします。-L オプションはリダイレクトを許可し、-o オプションはダウンロードしたパッケージを保存するファイル名を指定します。この例では、カレントディレクトリに `ddev-{{< sdk-version "integrations-core" >}}.pkg` という名前でファイルが保存されます。
+1. Download the file using the `curl` command. The -L option allows for redirects, and the -o option specifies the file name to which the downloaded package is written. In this example, the file is written to `ddev-{{< sdk-version "integrations-core" >}}.pkg` in the current directory.
    ```shell
    curl -L -o ddev-{{< sdk-version "integrations-core" >}}.pkg https://github.com/DataDog/integrations-core/releases/download/ddev-v{{< sdk-version "integrations-core" >}}/ddev-{{< sdk-version "integrations-core" >}}.pkg
    ```

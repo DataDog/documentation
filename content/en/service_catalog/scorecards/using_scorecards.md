@@ -8,10 +8,10 @@ further_reading:
   text: "Service Catalog"
 - link: /api/latest/service-scorecards/
   tag: "Documentation" 
-  text: "Scorecards API" 
+  text: "Service Scorecards API" 
 - link: "https://www.datadoghq.com/blog/service-scorecards/"
   tag: "Blog"
-  text: "Prioritize and promote service observability best practices with Scorecards"
+  text: "Prioritize and promote service observability best practices with Service Scorecards"
 - link: "https://www.datadoghq.com/blog/datadog-custom-scorecards/"
   tag: "Blog"
   text: "Formalize best practices with custom Scorecards"
@@ -21,7 +21,7 @@ further_reading:
 ---
 
 {{< callout url="#" btn_hidden="true" header="false" >}}
-Scorecards are in Preview.
+Service Scorecards are in beta.
 {{< /callout >}}
 
 After configuring your Scorecards, you can view service-level scores, track scores over time, and generate Scorecard reports to automatically update your team with Scorecard information.

@@ -22,8 +22,8 @@ assets:
     source_type_id: 18
     source_type_name: MySQL
   monitors:
-    MySQL database replica is not running properly: assets/monitors/replica_running.json
-    SELECT query volume is dropping: assets/monitors/select_query_rate.json
+    replica running: assets/monitors/replica_running.json
+    select query rate: assets/monitors/select_query_rate.json
   saved_views:
     mysql_processes: assets/saved_views/mysql_processes.json
     operations: assets/saved_views/operations.json
@@ -45,7 +45,7 @@ draft: false
 git_integration_title: mysql
 integration_id: mysql
 integration_title: MySQL
-integration_version: 14.2.0
+integration_version: 12.7.0
 is_public: true
 manifest_version: 2.0.0
 name: mysql
@@ -85,8 +85,6 @@ tile:
 MySQL インテグレーションは、MySQL インスタンスのパフォーマンスを追跡します。スループット、接続、エラー、InnoDB に関するメトリクスを収集します。
 
 [データベースモニタリング][2] (DBM) を有効にすると、クエリのパフォーマンスとデータベースの健全性について詳細なインサイトを取得できます。標準のインテグレーションに加え、Datadog DBM では、クエリレベルのメトリクス、リアルタイムおよび過去のクエリスナップショット、待機イベントの分析情報、データベースの負荷、クエリ実行計画が提供されます。
-
-MySQL バージョン 5.6、5.7、8.0、および MariaDB バージョン 10.5、10.6、10.11、11.1 がサポートされています。
 
 ## セットアップ
 
@@ -146,7 +144,7 @@ mysql> GRANT PROCESS ON *.* TO 'datadog'@'%';
 Query OK, 0 rows affected (0.00 sec)
 ```
 
-レプリケーションクライアントを検証します。`<UNIQUEPASSWORD>` は上記で作成したパスワードに置き換えます。
+Verify the replication client. Replace `<UNIQUEPASSWORD>` with the password you created above:
 
 ```shell
 mysql -u datadog --password=<一意のパスワード> -e "show slave status" && \
@@ -258,7 +256,7 @@ _Agent バージョン 6.0 以降で利用可能_
    logs_enabled: true
    ```
 
-3. MySQL のログの収集を開始するには、次の構成ブロックを `mysql.d/conf.yaml` ファイルに追加します。
+3. Add this configuration block to your `mysql.d/conf.yaml` file to start collecting your MySQL logs:
 
    ```yaml
    logs:
@@ -366,7 +364,7 @@ metadata:
     ad.datadoghq.com/mysql.instances: |
       [
         {
-          "server": "%%host%%", 
+          "server": "%%host%%",
           "username": "datadog",
           "password": "<UNIQUEPASSWORD>"
         }
@@ -391,7 +389,7 @@ metadata:
         "mysql": {
           "instances": [
             {
-              "server": "%%host%%", 
+              "server": "%%host%%",
               "username": "datadog",
               "password": "<UNIQUEPASSWORD>"
             }

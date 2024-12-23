@@ -166,10 +166,6 @@ Edit a workflow in JSON by clicking **Edit JSON Spec** on your workflow page. Th
 - **Format JSON**: Beautify your JSON.
 - **Export JSON**: Download the workflow.
 
-## Interact with workflows using the API
-
-To perform tasks using the API, see the [Workflow Automation API documentation][13].
-
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -188,4 +184,3 @@ To perform tasks using the API, see the [Workflow Automation API documentation][
 [10]: https://datadoghq.slack.com/
 [11]: /service_management/workflows/test_and_debug/#test-a-step
 [12]: /service_management/workflows/variables/
-[13]: /api/latest/workflow-automation/

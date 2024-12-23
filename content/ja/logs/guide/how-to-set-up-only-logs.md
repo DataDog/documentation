@@ -1,19 +1,10 @@
 ---
 aliases:
 - /ja/logs/faq/how-to-set-up-only-logs
-further_reading:
-- link: /containers/docker/log/?tab=containerinstallation
-  tag: ドキュメント
-  text: Docker ログ収集
-- link: /containers/kubernetes/log/
-  tag: ドキュメント
-  text: Kubernetes ログ収集
 title: Datadog Agent をログ収集のみに使用
 ---
 
-<div class="alert alert-danger">Infrastructure Monitoring は APM を使用するための前提条件です。APM のお客様である場合、メトリクス収集を無効にしないでください。重要なテレメトリーおよびメトリクス収集情報を失う可能性があります。</div>
-
-ペイロードを無効にするには、Agent v6.4 以降を実行している必要があります。これにより、メトリクスデータの送信 (カスタムメトリクスを含む) が無効になり、ホストが Datadog に表示されなくなります。以下の手順に従ってください。
+To disable payloads, you must be running Agent v6.4+. This disables metric data submission (including Custom Metrics) so that hosts stop showing up in Datadog. Follow these steps:
 
 {{< tabs >}}
 {{% tab "Host " %}}
@@ -38,13 +29,7 @@ title: Datadog Agent をログ収集のみに使用
 {{% /tab %}}
 {{% tab "Docker" %}}
 
-Docker コンテナ化 Agent を使用している場合、以下の環境変数を `false` に設定してください。
-- `DD_ENABLE_PAYLOADS_EVENTS`
-- `DD_ENABLE_PAYLOADS_SERIES`
-- `DD_ENABLE_PAYLOADS_SERVICE_CHECKS`
-- `DD_ENABLE_PAYLOADS_SKETCHES`
-
-以下は、Docker 実行コマンドにこれらの設定を含める例です。
+Docker コンテナ化された Agent を使用している場合は、`DD_ENABLE_PAYLOADS_EVENTS`、`DD_ENABLE_PAYLOADS_SERIES`、`DD_ENABLE_PAYLOADS_SERVICE_CHECKS`、`DD_ENABLE_PAYLOADS_SKETCHES` の環境変数を `false` に設定し、Agent のコンフィギュレーションを以下のようにします。
 
 ```shell
 docker run -d --name datadog-agent \
@@ -68,31 +53,22 @@ docker run -d --name datadog-agent \
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
-Kubernetes に Agent をデプロイする場合、Agent 構成に加えて Helm チャートに以下の変更を加えてください。
+Agent を Kubernetes にデプロイしている場合は、`DD_ENABLE_PAYLOADS_EVENTS`、`DD_ENABLE_PAYLOADS_SERIES`、`DD_ENABLE_PAYLOADS_SERVICE_CHECKS`、`DD_ENABLE_PAYLOADS_SKETCHES` の環境変数を `false` に設定し、Agent のコンフィギュレーションを以下のようにします。
 
 ```yaml
  ## ログのみ送信
-clusterAgent:
-  enabled: false
-datadog:
-[...]
-  processAgent:
-    enabled: false
-[...]
-  env:
-    - name: DD_ENABLE_PAYLOADS_EVENTS
-      value: "false"
-    - name: DD_ENABLE_PAYLOADS_SERIES
-      value: "false"
-    - name: DD_ENABLE_PAYLOADS_SERVICE_CHECKS
-      value: "false"
-    - name: DD_ENABLE_PAYLOADS_SKETCHES
-      value: "false"
+ datadog:
+ [...]
+   env:
+      - name: DD_ENABLE_PAYLOADS_EVENTS
+        value: "false"
+      - name: DD_ENABLE_PAYLOADS_SERIES
+        value: "false"
+      - name: DD_ENABLE_PAYLOADS_SERVICE_CHECKS
+        value: "false"
+      - name: DD_ENABLE_PAYLOADS_SKETCHES
+        value: "false"
 ```
 
 {{% /tab %}}
 {{< /tabs >}}
-
-## 参考資料
-
-{{< partial name="whats-next/whats-next.html" >}}

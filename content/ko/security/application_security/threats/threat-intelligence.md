@@ -42,11 +42,15 @@ Datadog은 다음 사항을 권장하지 _않습니다_.
 
 ## Bring your own threat intelligence
 
+{{< callout url="https://forms.gle/JV8VLH1ZTzmUnK5F7" d-toggle="modal" d_target="#signupModal" custom_class="sign-up-trigger">}}
+  Bring your own threat intelligence (BYOTI)는 비공개 베타 버전입니다.
+{{< /callout >}} 
+
 ASM은 Datadog 레퍼런스 테이블에 저장된 위협 인텔리전스 침해 지표를 통해 트레이스 강화 및 검색을 지원합니다. [레퍼런스 테이블][2]을 사용하면 메타데이터를 이미 Datadog에 있는 정보와 결합할 수 있습니다.
 
 ### 레퍼런스 테이블에 침해 지표 저장
 
-위협 인텔리전스는 CSV 형식으로 지원되며 다음 열이 필요합니다.
+위협 인텔리전스는 CSV 형식으로 지원되며 4개의 열이 필요합니다.
 
 **CSV 구조**
 
@@ -73,16 +77,10 @@ ip_address,additional_data,category,intention,source
 
 ### 자체 위협 인텔리전스 업로드 및 활성화
 
-Datadog는 수동 업로드를 통해 참조 테이블을 만들거나 [Amazon S3, Azure 스토리지 또는 Google Cloud 스토리지][10]에서 주기적으로 데이터를 검색하여 참조 테이블을 만들 수 있도록 지원합니다.
-
-참고:
-- 테이블을 만든 후 ASM 트레이스 보강을 시작하는 데 10~30분 정도 걸릴 수 있습니다.
-- 기본 키가 중복된 경우 해당 키는 건너뛰고 키에 대한 오류 메시지가 표시됩니다.
-
 새로운 [레퍼런스 테이블][4] 페이지에서:
 
 1. 테이블 이름을 지정합니다. 테이블 이름은 ASM의 **Threat Intel** 구성에서 참조됩니다.
-2. 로컬 CSV를 업로드하거나 클라우드 저장소 버킷에서 CSV를 가져옵니다. 파일이 정규화되고 유효성이 검사됩니다.
+2. CSV를 업로드합니다.
 3. 테이블 스키마를 미리 확인한 후 IP 주소를 기본 키로 선택합니다.
 
    {{< img src="/security/application_security/threats/threat_intel/threat_intel_ref_table.png" alt="새 레퍼런스 테이블" style="width:100%;" >}}
@@ -90,30 +88,6 @@ Datadog는 수동 업로드를 통해 참조 테이블을 만들거나 [Amazon S
 5. [Threat Intel][5]에서 새 테이블을 찾은 다음 토글을 선택하여 활성화합니다.
 
    {{< img src="/security/application_security/threats/threat_intel/threat_intel_ref_table_enabled.png" alt="활성화된 레퍼런스 테이블" style="width:100%;" >}}
-
-#### 클라우드 스토리지 사용
-
-참조 테이블이 클라우드 저장소에서 생성되면 주기적으로 새로 고쳐집니다. 전체 테이블이 *교체*됩니다. 데이터는 병합되지 않습니다.
-
-관련 참조 표 문서를 참조하세요.
-- [Amazon S3][11]
-- [Azure 스토리지][12]
-- [Google Cloud 스토리지][13]
-
-#### 트러블슈팅 클라우드 가져오기
-
-참조 테이블이 새로 고쳐지지 않으면 참조 테이블 세부 정보 페이지의 설정에서 **변경 이벤트 보기** 링크를 선택합니다. 
-
-**변경 이벤트 보기**를 클릭하면 수집에 대한 잠재적 오류 이벤트가 표시된 **이벤트 관리** 페이지가 열립니다. 참조 테이블 이름을 사용하여 **이벤트 관리**에서 필터링할 수도 있습니다.
-
-<div class="alert alert-info">Datadog 이벤트 관리에서는 클라우드에서 데이터를 가져오는 것처럼 보일 수 있지만 이러한 변경 사항을 위협 인텔리전스에 전파하는 데 몇 분 더 걸릴 수 있습니다.</div>
-
-기타 유용한 클라우드 가져오기 세부 정보:
-
-- 소스를 업로드하거나 업데이트할 때 업데이트된 보강 기능을 사용할 수 있기까지 예상되는 지연 시간은 10~30분입니다.
-- 업데이트가 언제 적용되는지 확인하는 방법 변경 사항은 참조 테이블 또는 스팬(span)에서 볼 수 있습니다. 참조 테이블 세부 정보 페이지의 설정에서 **변경 이벤트 보기** 링크를 선택하면 관련 이벤트를 볼 수 있습니다.
-- 업데이트는 *전체 테이블*을 새 데이터로 대체합니다.
-- 기본 키가 중복된 경우 중복된 키가 있는 행은 기록되지 않으며 참조 테이블 상세 페이지에 오류가 표시됩니다.
 
 ### 레퍼런스 테이블과 목록을 결합하여 트레이스를 필터링합니다.
 
@@ -170,7 +144,3 @@ ASM Traces Explorer에서 트레이스를 볼 때 `@appsec` 속성 아래에서 
 [7]: /ko/security/threat_intelligence#threat-intelligence-categories
 [8]: /ko/security/threat_intelligence#threat-intelligence-intents
 [9]: https://app.datadoghq.com/security/appsec/traces
-[10]: /ko/integrations/guide/reference-tables/?tab=manualupload#create-a-reference-table
-[11]: /ko/integrations/guide/reference-tables/?tab=amazons3#create-a-reference-table
-[12]: /ko/integrations/guide/reference-tables/?tab=azurestorage#create-a-reference-table
-[13]: /ko/integrations/guide/reference-tables/?tab=googlecloudstorage#create-a-reference-table

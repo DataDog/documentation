@@ -30,5 +30,6 @@
       }
     }
   ],
-  "description": "description"
+  "description": "description",
+  "is_read_only": false
 }

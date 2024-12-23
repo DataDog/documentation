@@ -23,7 +23,7 @@ further_reading:
 ---
 
 {{< callout header="false" btn_hidden="true">}}
-  The Datadog OTLP metrics intake endpoint is in Preview.
+  The Datadog OTLP metrics intake endpoint is in private beta.
 {{< /callout >}} 
 
 {{< site-region region="ap1,gov" >}}
