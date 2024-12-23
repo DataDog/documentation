@@ -58,7 +58,7 @@ You may create a test using one of the following options:
 
    {{< img src="synthetics/api_tests/synthetics_dns_test_domain.png" alt="Define DNS query" style="width:90%;" >}}
    
-   9. Click **Create Test** when to submit your API test.
+   1. Click **Create Test** to submit your API test.
 
 ### Snippets
 
