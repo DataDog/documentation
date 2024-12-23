@@ -67,7 +67,7 @@ Para empezar, sigue las instrucciones que se indican a continuación.
 ## Validación
 
 En Datadog, consulte la página [Data Jobs Monitorización][2] para ver un lista de sus ejecuciones de trabajos Airflow después de la configuración.
-{{% /pestaña %}}
+{{% /tab %}}
 
 {{% tab "Amazon MWAA" %}}
 ## Requisitos
@@ -124,7 +124,7 @@ Para empezar, sigue las instrucciones que se indican a continuación.
 ## Validación
 
 En Datadog, consulte la página [Data Jobs Monitorización][2] para ver un lista de sus ejecuciones de trabajos Airflow después de la configuración.
-{{% /pestaña %}}
+{{% /tab %}}
 
 {{% tab "Astronomer" %}}
 
@@ -193,7 +193,7 @@ En Datadog, consulte la página [Data Jobs Monitorización][2] para ver un lista
 check que las variables de OpenLineage entorno están correctamente configuradas en el despliegue de Astronomer.
 
 **Nota**: Utilizando el archivo `.env` para agregar las variables entorno no funciona porque las variables sólo se aplican a la local de flujo de aire entorno.
-{{% /pestaña %}}
+{{% /tab %}}
 
 {{< /tabs >}}
 
