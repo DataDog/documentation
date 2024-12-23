@@ -152,7 +152,7 @@ labels:
 ```
 
 {{% /tab %}}
-{{% tab "Local file" (Archivo local) %}}
+{{% tab "Archivo local" %}}
 1. Crea un archivo `conf.d/redisdb.d/conf.yaml` en tu host:
 
    ```yaml
@@ -428,7 +428,7 @@ LABEL "com.datadoghq.ad.instances"='[[{"apache_status_url": "http://%%host%%/ser
 ```
 
 {{% /tab %}}
-{{% tab "Local file" (Archivo local) %}}
+{{% tab "Archivo local" %}}
 
 * Crea las carpetas `conf.d/` y `conf.d/apache.d` en tu host.
 * Añade la siguiente auto-configuración personalizada a `conf.d/apache.d/conf.yaml` en tu host.
