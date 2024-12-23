@@ -1,25 +1,25 @@
 ---
-"categories":
+categories:
 - "cloud"
 - "configuration & deployment"
 - "network"
 - "azure"
-"custom_kind": "integración"
-"dependencies": []
-"description": "Realiza un seguimiento de flujos de trabajo de activación, latencia de acciones, acciones fallidas y mucho más".
-"doc_link": "https://docs.datadoghq.com/integrations/azure_logic_app/"
-"draft": false
-"git_integration_title": "azure_logic_app"
-"has_logo": true
-"integration_id": "azure-logic-app"
-"integration_title": "Microsoft Azure Logic App"
-"integration_version": ""
-"is_public": true
-"manifest_version": "1.0"
-"name": "azure_logic_app"
-"public_title": "Integración de Datadog y Microsoft Azure Logic App"
-"short_description": "Realiza un seguimiento de flujos de trabajo de activación, latencia de acciones, acciones fallidas y mucho más".
-"version": "1.0"
+custom_kind: "integración"
+dependencies: []
+description: "Realiza un seguimiento de flujos de trabajo de activación, latencia de acciones, acciones fallidas y mucho más."
+doc_link: "https://docs.datadoghq.com/integrations/azure_logic_app/"
+draft: false
+git_integration_title: "azure_logic_app"
+has_logo: true
+integration_id: "azure-logic-app"
+integration_title: "Microsoft Azure Logic App"
+integration_version: ""
+is_public: true
+manifest_version: "1.0"
+name: "azure_logic_app"
+public_title: "Integración de Datadog y Microsoft Azure Logic App"
+short_description: "Realiza un seguimiento de flujos de trabajo de activación, latencia de acciones, acciones fallidas y mucho más."
+version: "1.0"
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
