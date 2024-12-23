@@ -107,7 +107,7 @@ Aunque el concepto de pipeline CI puede variar en función de tu proveedor, ve c
 | _No disponible en Datadog_ | Paso        |
 
 {{% /tab %}}
-{{% tab "Azure Pipelines" (Pipelines de Azure) %}}
+{{% tab "Pipelines de Azure" %}}
 
 | Datadog                    | Pipelines Azure |
 |----------------------------|-----------------|
