@@ -21,7 +21,7 @@ When applications rely on each other, poor connectivity or slow service calls ca
 
 CNM is designed to track traffic between entities, determine which resources are communicating, and report their health status.
 
-To examine the a basic traffic flow between entities, use the following steps:
+To examine the a basic traffic flow between entities, take the following steps:
 
 1. On the [Network Analytics page][1], set your **View clients as** and **View servers as** dropdown filters to group by `service` tags to examine a service-to-service flow. Here you can observe the basic traffic unit: a source IP communicating over a port to a destination IP on a port.
 
@@ -41,7 +41,7 @@ CNM tracks dependencies between services, which is essential for ensuring system
 
 For example, a possible cause of service latency could be too much traffic being directed to a destination endpoint, overwhelming its ability to handle incoming requests effectively.
 
-To analyze the cause of service latency, use the following steps:
+To analyze the cause of service latency, take the following steps:
 
 1. On the [Network Analytics][1] page, aggregate traffic by `service`, and filter for the cloud region where you may be noticing alerts or service latency. This view displays all service-to-service dependency paths within that region. 
 
@@ -61,7 +61,7 @@ Datadog CNM consolidates relevant distributed traces, logs, and infrastructure d
 
 In the example below, check the **Traces** tab under Network Analytics to view distributed traces of requests between source and destination endpoints, which can help you pinpoint where application-level errors occur.
 
-To identify if an issue is an application or network issue, you can use the following steps:
+To identify if an issue is an application or network issue, take can use the following steps:
 
 1. Navigate to [**Infrastructure** > **Cloud Network** > **Analytics**][1].  
 2. In the **Summary** graphs, click a line of communication that has a lot of volume and high RTT time:
