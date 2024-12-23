@@ -238,42 +238,41 @@ If you configure a conditional block for a state transition into `alert` or `war
 
 ## Attribute and tag variables
 
-Use attribute and tag variables to render alert messages that are customized, informative, and specific to help understand the nature of the alert.
+Use attribute and tag variables to render alert messages that are customized, informative, and specific to help understand the nature of the alert. See the following sections for examples and use cases:
+- [Multi alert variables](#multi-alert-variables)
+- [Matching attribute/tag variables](#matching-attributetag-variables)
+
+Tags
+: Automatically attached (such as host name, container name, log file name, and serverless function name) or added through custom tags (such as team in charge, environment, application or version).
+
+Attributes
+: Based on the log content and either parsed or added by lookups from reference tables (for example, geoip).
 
 **Note**: If the monitor is configured to recover in no-data conditions (for example, when there are no events matching the query), the recovery message doesn't contain any data. To persist information in the recovery message, group by additional tags, which are accessible by `{{tag.name}}`.
 
 ### Multi alert variables
 
-Configure multi alert variables in [multi alert monitors][1] based on the dimension selected in the multi alert group box. Enrich the notification to dynamically include the value associated with the group by dimension in each alert.
+Configure multi alert variables in [multi alert monitors][1] based on the dimension selected in the multi alert group box. Enrich notifications by dynamically including the value associated with the group-by dimension in each alert.
 
 {{< tabs >}}
 {{% tab "Group by tag" %}}
 
-If a metric is tagged with any tag following the `key:value` syntax and the monitor query is grouped by this tag, use the variable:
+If a metric is tagged with any tag in the `key:value` format and the monitor query is grouped by this tag, use the variable:
 
-```text
+```
 {{ key.name }}
 ```
 
-This renders the `value` associated with the `key` in each alert notification. If a group is tagged with multiple `values` associated with the same `key`, the alert message renders a comma-separated string of all values, in the lexicographic order.
+This variable inserts the `value` associated with the `key` into each alert notification. For example, if your monitor triggers an alert for each `env`, then the variable `{{env.name}}` is available in your notification message. 
 
-**Example**: If your monitor triggers an alert for each `env`, then the variable `{{env.name}}` is available in your notification message.
-
-{{< img src="monitors/notifications/multi_alert_variable.png" alt="Multi alert variable syntax" style="width:90%;">}}
+If a group has multiple `values` associated with the same `key`, the alert message displays a comma-separated string of all values, in lexicographic order.
 
 #### Tag key with period
 
-If your tag's key has a period in it, include brackets around the full key when using a tag variable.
-For example, if your tag is `dot.key.test:five` and your monitor is grouped by `dot.key.test`, use:
+If your tag's key has a period in it, include brackets around the full key when using a tag variable. For example, if your tag is `dot.key.test:five` and your monitor is grouped by `dot.key.test`, use:
 
 ```text
 {{[dot.key.test].name}}
-```
-
-If the tag is on an event and you're using an event monitor, use:
-
-```text
-{{ event.tags.[dot.key.test] }}
 ```
 
 {{% /tab %}}
@@ -305,7 +304,7 @@ If your facet has periods, use brackets around the facet, for example:
 
 When your query is grouped by specific dimensions, you can enrich notifications with dynamic metadata associated with the group.
 
-##### Query group by host
+{{% collapse-content title="Query group by host" level="h5" %}}
 
 If your monitor triggers an alert for each `host`, then the tag variables `{{host.name}}` and `{{host.ip}}` are available as well as any host tag that is available on this host. To see a list of tag variables based on your tag selection, click **Use message template variables** in the **Say what's happening** section.
 
@@ -315,9 +314,9 @@ Specific host metadata variables:
 - Machine: `{{host.metadata_machine}}`
 - Platform: `{{host.metadata_platform}}`
 - Processor: `{{host.metadata_processor}}`
+{{% /collapse-content %}} 
 
-##### Query group by kube_namespace and kube_cluster_name
-
+{{% collapse-content title="Query group by kube_namespace and kube_cluster_name" level="h5" %}}
 If your monitor triggers an alert for each `kube_namespace` and `kube_cluster_name`, then you can access any attribute of the namespace. 
 
 Namespace metadata variables:
@@ -332,9 +331,9 @@ The following table contains all available attributes:
 | Variable syntax   | First level attributes |
 |-------------------|------------------------|
 | `{{kube_namespace.key}}`     | `k8s_namespace_key`, `tags`, `annotations`, `cluster_id`, `cluster_name`, `creation_timestamp`, `deletion_timestamp`, `display_name`, `external_id`, `finalizers`, `first_seen_at`, `group_size`, `labels`, `name`, `namespace`, `status`, `uid`|
+{{% /collapse-content %}} 
 
-##### Query group by pod_name and kube_namespace and kube_cluster_name
-
+{{% collapse-content title="Query group by pod_name and kube_namespace and kube_cluster_name" level="h5" %}}
 If your monitor triggers an alert for each `pod_name` and `kube_namespace` and `kube_cluster_name`, then you can access any attribute of the pod. 
 
 Pod metadata variables:
@@ -348,11 +347,19 @@ The following table contains all available attributes:
 |-------------------|------------------------|
 | `{{pod_name.key}}`     | `k8s_pod_key`, `tags`, `annotations`, `cluster_id`, `cluster_name`, `conditions`, `container_statuses`, `creation_timestamp`, `deletion_timestamp`, `display_name`, `external_id`, `finalizers`, `first_seen_at`, `host_id`, `host_key`, `hostname`, `init_container_statuses`, `ip`, `labels`, `name`, `namespace`, `node_name`, `nominated_node_name`, `phase`, `pod_scheduled_timestamp`, `priority_class_name`, `qosclass`, `resource_requirements`, `uid`|
 
+{{% /collapse-content %}} 
 
 
 ### Matching attribute/tag variables
 
-_Available for [Log monitors][2], [Trace Analytics monitors][3] (APM), [Error Tracking monitors][9], [RUM monitors][4], [CI monitors][5], and [Database Monitoring monitors][6]_.
+<div class="alert alert-info">Available for 
+  <a href="/monitors/types/log/">Log monitors </a>, 
+  <a href="/monitors/types/apm/?tab=analytics">Trace Analytics monitors (APM)</a>, 
+  <a href="/monitors/types/error_tracking/"> Error Tracking monitors </a>, 
+  <a href="/monitors/types/real_user_monitoring/">RUM monitors </a>, 
+  <a href="/monitors/types/ci/">CI monitors </a>, and 
+  <a href="/monitors/types/database_monitoring/">Database Monitoring monitors</a>.
+</div>
 
 To include **any** attribute or tag from a log, a trace span, a RUM event, a CI pipeline, or a CI test event matching the monitor query, use the following variables:
 
@@ -367,23 +374,33 @@ To include **any** attribute or tag from a log, a trace span, a RUM event, a CI 
 | CI Test         | `{{citest.attributes.key}}`                      |
 | Database Monitoring | `{{databasemonitoring.attributes.key}}`      |
 
-For any `key:value` pair, the variable `{{log.tags.key}}` renders `value` in the alert message.
+{{% collapse-content title="Example syntax usage" level="h4" %}}
+- For any `key:value` pair, the variable `{{log.tags.key}}` renders `value` in the alert message.
+- The `@` that prefixes all attributes is not included. For example, if a log monitor is grouped by `@http.status_code`, to include the error message or infrastructure tags in the notification message, use the variables:
+  
+  ```text
+  {{ log.attributes.[error.message] }}
+  {{ log.tags.env }}
+  ...
+  ```
 
-**Example**: If a log monitor is grouped by `@http.status_code`, to include the error message or infrastructure tags in the notification message, use the variables:
+  {{< img src="monitors/notifications/tag_attribute_variables.png" alt="Matching attribute variable syntax" style="width:90%;">}}
+- The message renders the `error.message` attribute of a chosen log matching the query, **if the attribute exists**.
+- If the tag is on an event use the following syntax:
 
-```text
-{{ log.attributes.[error.message] }}
-{{ log.tags.env }}
-...
-```
+  ```text
+  {{ event.tags.[dot.key.test] }}
+  ```
 
-{{< img src="monitors/notifications/tag_attribute_variables.png" alt="Matching attribute variable syntax" style="width:90%;">}}
 
-The message renders the `error.message` attribute of a chosen log matching the query, **if the attribute exists**.
+{{% /collapse-content %}} 
 
-<div class="alert alert-info"><strong>Note</strong>: If the selected event does not contain the attribute or the tag key, the variable renders empty in the notification message. To avoid missing notifications, do not use these variables for routing notification with <code>{{#is_match}}</code> handles.</div>
 
-If a monitor uses Formulas & Functions in its queries, the values are resolved with events that are extracted from the first query.
+#### Important notes
+
+- If the selected event does not include the attribute or tag key, the variable renders empty in the notification message. To prevent missing notifications, avoid using these variables for routing notification with `{{#is_match}}` handles.
+- For monitors using Formulas & Functions in queries, values resolve based on events extracted from the first query.
+
 
 #### Reserved attributes
 
