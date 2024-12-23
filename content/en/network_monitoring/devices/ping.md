@@ -88,7 +88,7 @@ ping:
 {{% /tab %}}
 {{< /tabs >}}
 
-After successfully enabling ping on your network devices, the **Ping State** column in the UI is enabled, allowing you to see the ping state statuses for your devices:
+After you successfully enable ping on your network devices, the **Ping State** column in the UI is enabled, allowing you to see the ping statuses for your devices:
 
 {{< img src="/network_device_monitoring/snmp/ping_state_status.png" alt="The status column in the NDM UI showing the Ping state toggle enabled with the ping state status column highlighted" style="width:100%;">}}
 
@@ -120,4 +120,4 @@ The following metrics are made available after enabling ping:
 [2]: /agent/configuration/agent-configuration-files/#agent-configuration-directory
 [3]: /agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-main-configuration-file
 [4]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/conf.yaml.example
-[5]: /network_monitoring/devices/snmp_metrics/?tab=userawsocketslinuxonly#ping
+[5]: /network_monitoring/devices/ping/?tab=userawsocketslinuxonly#setup

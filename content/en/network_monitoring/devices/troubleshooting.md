@@ -14,11 +14,11 @@ Use the information below for troubleshooting Datadog Network Device Monitoring.
 
 ### Device not visible in Datadog
 
-The following assumes you are running Datadog Agent version `7.59.0+`.
+The following assumes you are running Datadog Agent v7.59.0+.
 
-Perform the following steps if your device is not visible on the [devices][2] page:
+If your device is not visible on the [Devices][2] page:
 
-1. Run the [datadog-agent status][3] command and look for the snmp section which contains your devices monitoring IP. After starting the Agent, it may take up to one minute for NDM to discover individually configured devices. If your Agent is set to scan a large number of devices, it may take longer. 
+1. Run the [datadog-agent status][3] command and look for the snmp section, which contains your device's monitoring IP. After you start the Agent, it may take up to one minute for NDM to discover individually configured devices. If your Agent is set to scan a large number of devices, it may take longer. 
 The output should look similar to the following: 
 
    ```
@@ -38,7 +38,7 @@ The output should look similar to the following:
      No traceback
    ```
 
-2. If your device is not listed and you are using Autodiscovery, it likely means the Agent could not connect to your device. Try running an `snmp walk` on the device's admin IP. 
+2. If your device is not listed, and you are using Autodiscovery, it likely means the Agent could not connect to your device. Try running an `snmp walk` on the device's admin IP. 
 
    **Note**: Provide your credentials directly in the CLI. If credentials aren't provided, the Agent attempts to locate them in your running Agent configuration files. 
 
@@ -71,7 +71,7 @@ The output should look similar to the following:
    
    **Solution**:
    - Log into your device and ensure that SNMP is enabled and exposed on port 161.
-   - Ensure you collector firewall allows egress:
+   - Ensure your collector firewall allows egress:
 
    **Linux only**:
 
@@ -106,7 +106,7 @@ The output should look similar to the following:
 
 ### Traps not being received for devices
 
-1. Check the Datadog `agent.log` file to ensure that you aren't unable to bind to the traps port. If this is the case, the following error is present:
+Check the Datadog `agent.log` file to ensure that you can bind to the traps port. The following error indicates that you are unable to bind to the traps port:
 
    ```
    Failed to start snmp-traps server: error happened when listening for SNMP Traps: listen udp 0.0.0.0:162: bind: permission denied

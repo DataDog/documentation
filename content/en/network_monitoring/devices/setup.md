@@ -59,7 +59,7 @@ To begin monitoring your network devices, enable the SNMP integration using one 
 
 ### Enrich network devices with tags 
 
-Once NDM is configured on your devices, you can further enrich them by adding network device tags using the following methods:
+After NDM is configured on your devices, you can further enrich them by adding network device tags using the following methods:
 
 [Datadog Agent][2]
 : The Agent can collect device tags when configuring [individual devices][3] or with [Autodiscovery][4].
