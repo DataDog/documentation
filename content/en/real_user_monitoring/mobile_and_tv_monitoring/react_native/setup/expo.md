@@ -72,6 +72,25 @@ DdRum.startView(
 DdRum.stopView('<view-key>', { 'custom.bar': 42 }, Date.now());
 ```
 
+### Automatic tracking
+
+Automatic view tracking is supported for the following modules:
+
+- React Navigation: [@Datadog/mobile-react-navigation][10]
+- React Native Navigation: [@Datadog/mobile-react-native-navigation][11]
+
+In this Datadog example project, View Tracking is achieved through `@datadog/mobile-react-navigation` and is configured using the `NavigationContainer`:
+
+```tsx
+<NavigationContainer
+          ref={navigationRef}
+          onReady={() => {
+            DdRumReactNavigationTracking.startTrackingViews(
+              navigationRef.current,
+            );
+          }}>
+```
+
 ## Usage
 
 ### Initialize the library with application context
@@ -274,3 +293,5 @@ config.resourceEventMapper = event => {
 [7]: https://docs.expo.dev/development/introduction/
 [8]: https://docs.expo.dev/workflow/customizing/#releasing-apps-with-custom-native-code-to
 [9]: https://docs.expo.dev/development/getting-started/
+[10]: https://www.npmjs.com/package/@datadog/mobile-react-navigation
+[11]: https://www.npmjs.com/package/@datadog/mobile-react-native-navigation

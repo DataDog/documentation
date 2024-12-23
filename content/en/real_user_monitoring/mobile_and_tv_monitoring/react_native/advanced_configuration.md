@@ -369,26 +369,6 @@ Use one of Datadog's integrations to automatically track views for the following
 
 If you experience any issues setting up View tracking with `@datadog/mobile-react-navigation` you can see this Datadog [example application][13] as a reference.
 
-### Automatic tracking
-
-Automatic view tracking is supported for the following modules:
-
-- React Navigation: [@Datadog/mobile-react-navigation][14]
-- React Native Navigation: [@Datadog/mobile-react-native-navigation][15]
-
-In this Datadog example project, View Tracking is achieved through `@datadog/mobile-react-navigation` and is configured using the `NavigationContainer`:
-
-```tsx
-<NavigationContainer
-          ref={navigationRef}
-          onReady={() => {
-            DdRumReactNavigationTracking.startTrackingViews(
-              navigationRef.current,
-            );
-          }}>
-```
-
-
 ## Clear all data
 
 Use `clearAllData` to clear all data that has not been sent to Datadog.
@@ -449,12 +429,12 @@ Events include additional context:
 | ------------- | ------------------------------------------------ | ----------------------------------------------------------------------- |
 | LogEvent      | `logEvent.additionalInformation.userInfo`        | Contains the global user info set by `DdSdkReactNative.setUser`.        |
 |               | `logEvent.additionalInformation.attributes`      | Contains the global attributes set by `DdSdkReactNative.setAttributes`. |
-| ActionEvent   | `actionEvent.actionContext`                      | [GestureResponderEvent][16] corresponding to the action or `undefined`.  |
+| ActionEvent   | `actionEvent.actionContext`                      | [GestureResponderEvent][14] corresponding to the action or `undefined`.  |
 |               | `actionEvent.additionalInformation.userInfo`     | Contains the global user info set by `DdSdkReactNative.setUser`.        |
 |               | `actionEvent.additionalInformation.attributes`   | Contains the global attributes set by `DdSdkReactNative.setAttributes`. |
 | ErrorEvent    | `errorEvent.additionalInformation.userInfo`      | Contains the global user info set by `DdSdkReactNative.setUser`.        |
 |               | `errorEvent.additionalInformation.attributes`    | Contains the global attributes set by `DdSdkReactNative.setAttributes`. |
-| ResourceEvent | `resourceEvent.resourceContext`                  | [XMLHttpRequest][17] corresponding to the resource or `undefined`.       |
+| ResourceEvent | `resourceEvent.resourceContext`                  | [XMLHttpRequest][15] corresponding to the resource or `undefined`.       |
 |               | `resourceEvent.additionalInformation.userInfo`   | Contains the global user info set by `DdSdkReactNative.setUser`.        |
 |               | `resourceEvent.additionalInformation.attributes` | Contains the global attributes set by `DdSdkReactNative.setAttributes`. |
 
@@ -505,13 +485,13 @@ export default function App() {
 }
 ```
 
-This uses React Native's [InteractionManager.runAfterInteractions][18] to delay the animations.
+This uses React Native's [InteractionManager.runAfterInteractions][16] to delay the animations.
 
 All interactions with the RUM SDK (view tracking, actions, resources tracing, and so on) are still recorded and kept in a queue with a limit of 100 events.
 
 Logs are not recorded and calling a `DdLogs` method before the actual initialization might break logging.
 
-If you experience any issue setting up the asynchronous initialization of Datadog, you can check out our [example application][19].
+If you experience any issue setting up the asynchronous initialization of Datadog, you can check out our [example application][17].
 
 ## Delaying the initialization
 
@@ -570,7 +550,7 @@ const configuration = {
 
 ## Monitoring hybrid React Native applications
 
-See [Monitor hybrid React Native applications][20].
+See [Monitor hybrid React Native applications][18].
 
 ## Further reading
 
@@ -589,10 +569,8 @@ See [Monitor hybrid React Native applications][20].
 [11]: /real_user_monitoring/mobile_and_tv_monitoring/react_native/integrated_libraries/
 [12]: https://github.com/rmobile_and_tv_monitoring/eact-navigation/react-navigation
 [13]: https://github.com/DataDog/dd-sdk-reactnative-examples/tree/main/rum-react-navigation
-[14]: https://www.npmjs.com/package/@datadog/mobile-react-navigation
-[15]: https://www.npmjs.com/package/@datadog/mobile-react-native-navigation
-[16]: https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/react-native/v0.70/index.d.ts#L548
-[17]: https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest
-[18]: https://reactnative.dev/docs/interactionmanager#runafterinteractions
-[19]: https://github.com/DataDog/dd-sdk-reactnative-examples/tree/main/rum-react-navigation-async
-[20]: /real_user_monitoring/guide/monitor-hybrid-react-native-applications
+[14]: https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/react-native/v0.70/index.d.ts#L548
+[15]: https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest
+[16]: https://reactnative.dev/docs/interactionmanager#runafterinteractions
+[17]: https://github.com/DataDog/dd-sdk-reactnative-examples/tree/main/rum-react-navigation-async
+[18]: /real_user_monitoring/guide/monitor-hybrid-react-native-applications

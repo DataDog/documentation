@@ -195,6 +195,43 @@ end sub
 
 To control the data your application sends to Datadog RUM, you can specify a sampling rate for RUM sessions while [initializing the RUM Roku SDK][8]. The rate is a percentage between 0 and 100. By default, `sessionSamplingRate` is set to 100 (keep all sessions).
 
+
+## Instrument the channel
+
+See [**Track RUM Resources**](#track-rum-resources) to enable automatic tracking of all your resources, and [**Enrich user sessions**](#enrich-user-sessions) to add custom global or user information to your events.
+
+### Track Views
+
+To split [user sessions][9] into logical steps, manually start a View using the following code. Every navigation to a new screen within your channel should correspond to a new View.
+
+```brightscript
+    viewName = "VideoDetails"
+    viewUrl = "components/screens/VideoDetails.xml"
+    m.global.datadogRumAgent.callfunc("startView", viewName, viewUrl)
+```
+
+### Track RUM Actions
+
+RUM Actions represent the interactions your users have with your channel. You can forward actions to Datadog as follows:
+
+```brightscript
+    targetName = "playButton" ' the name of the SG Node the user interacted with
+    actionType = "click" ' the type of interaction, should be one of "click", "back", or "custom" 
+    m.global.datadogRumAgent.callfunc("addAction", { target: targetName, type: actionType})
+```
+
+### Track RUM errors
+
+Whenever you perform an operation that might throw an exception, you can forward the error to Datadog as follows:
+
+```brightscript
+    try
+        doSomethingThatMightThrowAnException()
+    catch error
+        m.global.datadogRumAgent.callfunc("addError", error)
+    end try
+```
+
 ## Sending data when device is offline
 
 RUM ensures availability of data when your user device is offline. In case of low-network areas, or when the device battery is too low, all the RUM events are first stored on the local device in batches. 
@@ -215,3 +252,4 @@ This means that even if users open your application while offline, no data is lo
 [6]: /account_management/api-app-keys/#client-tokens
 [7]: /getting_started/tagging/using_tags/#rum--session-replay
 [8]: /real_user_monitoring/mobile_and_tv_monitoring/roku/advanced_configuration/#enrich-user-sessions
+[9]: /real_user_monitoring/mobile_and_tv_monitoring/roku/data_collected
