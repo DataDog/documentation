@@ -44,12 +44,10 @@ You may create a test using one of the following options:
 
    - **Create a test from a template**:
 
-       1. Hover over one of the following pre-populated templates and click **View Template**. This opens a side panel displaying pre-populated configuration information, including: Test Details, Request Details, Assertions, Alert Conditions, and Monitor Settings.<br /><br>
-
-          {{< img src="getting_started/synthetics/synthetics_templates_api_video.mp4" alt="Video of Synthetics API test landing page with templates" video="true" >}}
-
+       1. Hover over one of the pre-populated templates and click **View Template**. This opens a side panel displaying pre-populated configuration information, including: Test Details, Request Details, Assertions, Alert Conditions, and Monitor Settings.
        2. Click **+Create Test** to open the **Define Request** page, where you can review and edit the pre-populated configuration options. The fields presented are identical to those available when creating a test from scratch.
-       3. Click **Save Details** when you are ready to submit your API test.<br /><br>
+       3. Click **Save Details** to submit your API test.<br /><br>
+          {{< img src="getting_started/synthetics/synthetics_templates_api_video.mp4" alt="Video of Synthetics API test landing page with templates" video="true" >}}
 
    - **Build a test from scratch**:
 
@@ -81,7 +79,7 @@ For a health check, enter the name of the service. Leave this field blank if you
       {{< tabs >}}
       {{% tab "Request Options" %}}
 
-- **Timeout**: Specify the amount of time in seconds before the test times out.
+- **Time out**: Specify the amount of time in seconds before the test times out.
 - **Ignore server certificate error**: Select to have your gRPC test go on with connection even if there are errors when validating the SSL certificate.
 - **gRPC metadata**: Add and define metadata to your gRPC request to pass metadata between services.
 
@@ -104,11 +102,11 @@ You can use the `openssl` library to convert your certificates. For example, con
 
    5. **Name** your gRPC test.
 
-   6. Add `env` **Tags** as well as any other tags to your gRPC test. You can then use these tags to filter through your Synthetic tests on the [Synthetic Monitoring & Continuous Testing page][4].
+   6. Add Environment **Tags** as well as any other tags to your gRPC test. You can then use these tags to filter through your Synthetic tests on the [Synthetic Monitoring & Continuous Testing page][4].
 
    7. Click **Invoke** to try out the request configuration. A response preview is displayed on the right side of your screen.
 
-   8. Click **Create Test** when you are ready to submit your API test.
+   8. Click **Create Test** to submit your API test.
 
 ### Snippets
 

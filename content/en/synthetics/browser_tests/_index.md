@@ -37,12 +37,10 @@ You may create a test using one of the following options:
 
 - **Create a test from a template**:
 
-    1. Hover over one of the following pre-populated templates and click **View Template**. This opens a side panel displaying pre-populated configuration information, including: Test Details, Alert Conditions, Steps, and optionally Variables.<br /><br>
-
-       {{< img src="/synthetics/browser_tests/synthetics_templates_browser.mp4" alt="Video of Synthetics Browser Test landing page with templates" video="true" >}}
-
+    1. Hover over one of the pre-populated templates and click **View Template**. This opens a side panel displaying pre-populated configuration information, including: Test Details, Alert Conditions, Steps, and optionally Variables.
     2. Click **+Create Test** to open the configuration page, where you can review and edit the pre-populated configuration options. The fields presented are identical to those available when creating a test from scratch.
-     3. Click **Save & Quit** in the upper right hand corner when you are ready to submit your Browser Test.<br /><br>
+    3. Click **Save & Quit** in the upper right hand corner to submit your Browser Test.<br /><br>
+       {{< img src="/synthetics/browser_tests/synthetics_templates_browser.mp4" alt="Video of Synthetics Browser Test landing page with templates" video="true" >}}
 
 - **Build a test from scratch**:
     
@@ -59,14 +57,14 @@ You may create a test using one of the following options:
       - For a tablet device, the dimensions are 768 pixels x 1020 pixels.
       - For a small mobile device, the dimensions are 320 pixels x 550 pixels.
 
-   1. Select **managed and private locations**: Select locations around the world that are managed by Datadog or create [private locations][1] to run your browser test from custom locations or inside private networks.<br /><br>
+   1. Select **managed and private locations**: Select from a list of locations around the world that are managed by Datadog, or create [private locations][1] to run your browser test from custom locations or inside private networks.<br /><br>
 
       {{% managed-locations %}}
 
       You can also use the [Continuous Testing Tunnel][2] to trigger tests on your local development setup or in your CI/CD pipeline to test internal environments.<br /><br>
 
    6. Set the **test frequency**: The intervals vary from every five minutes to once per week. To request one-minute frequency, [contact Support][3].
-   7. Click **Save & Edit Recording** when you are ready to submit your Browser Test.
+   7. Click **Save & Edit Recording** to submit your Browser Test.
 
 ### Snippets
 

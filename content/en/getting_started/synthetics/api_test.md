@@ -36,7 +36,7 @@ API tests **proactively monitor** that your **most important services** are avai
 
 HTTP tests monitor your API endpoints and alert you when response latency is high or fail to meet any conditions you define, such as expected HTTP status code, response headers, or response body content.
 
-The example below demonstrates how to create an [HTTP test][3], a subtype of [single API tests][1].
+The examples below demonstrate how to create an [HTTP test][3], a subtype of [single API tests][1].
 
 1. In the Datadog site, hover over **Digital Experience** and select **[Tests][4]** (under **Synthetic Monitoring & Testing**).
 
@@ -46,33 +46,29 @@ The example below demonstrates how to create an [HTTP test][3], a subtype of [si
 
    - **Create a test from a template**:
 
-   1. Hover over one of the following pre-populated templates and click **View Template**. This opens a side panel displaying pre-populated configuration information, including: Test Details, Request Details, Assertions, Alert Conditions, and Monitor Settings. 
+      1. Hover over one of the pre-populated templates and click **View Template**. This opens a side panel displaying pre-populated configuration information, including: Test Details, Request Details, Assertions, Alert Conditions, and Monitor Settings.
+      2. Click **+Create Test** to open the **Define Request** page, where you can review and edit the pre-populated configuration options. The fields presented are identical to those available when creating a test from scratch.
+      3. Click **Save Details** to submit your API test.<br /><br>
 
-      {{< img src="getting_started/synthetics/synthetics_templates_api_video.mp4" alt="Video of Synthetics API test landing page with templates" video="true" >}}
-
-   2. Click **+Create Test** to open the **Define Request** page, where you can review and edit the pre-populated configuration options. The fields presented are identical to those available when creating a test from scratch.
-   3. Click **Save Details** when you are ready to submit your API test.<br />
+        {{< img src="getting_started/synthetics/synthetics_templates_api_video.mp4" alt="Video of Synthetics API test landing page with templates" video="true" >}}
 
    - **Build a test from scratch**:
 
-   1. To build a test from scratch, click the **+ Start from scratch** template, then select the `HTTP` request type.
+      1. To build a test from scratch, click the **+ Start from scratch** template, then select the `HTTP` request type.
 
-   2. Add the URL of the endpoint you want to monitor. If you don't know what to start with, you can use `https://www.shopist.io/`, a test e-commerce web application. After entering the endpoint to test, the name of your test is automatically populated as `Test on shopist.io`. 
+      2. Add the URL of the endpoint you want to monitor. If you don't know what to start with, you can use `https://www.shopist.io/`, a test e-commerce web application. If you use the test Shopist URL, the name of your test is automatically populated as `Test on shopist.io`.  
 
-   3. Optionally, select **Advanced Options** to:
-      - Set custom request options.
-      - Add certificates and authentication credentials.
-      - Create secure [global variables][6] or [local variables][7] for dynamic inputs.
+      3. Optionally, select **Advanced Options** to set custom request options, add certificates and authentication credentials, and create secure [global variables][6] or [local variables][7] for dynamic inputs.
 
-        **Note**: Type `{{` in any relevant field to select a variable and inject its value into your test options. 
+         **Note**: Type `{{` in any relevant field to select a variable and inject its value into your test options. 
           
-   4. Optionally, set tags such as `env:prod` and `app:shopist` on your test. Tags allow you to keep your test suite organized and quickly find tests you're interested in on the homepage.
+      4. Optionally, set tags such as `env:prod` and `app:shopist` on your test. Tags allow you to keep your test suite organized and quickly find tests you're interested in on the homepage.
 
-   5. Click **Send** to trigger a sample test run.
+      5. Click **Send** to trigger a sample test run.
 
-      {{< img src="getting_started/synthetics/api-test-config-4.png" alt="API test configuration" style="width:90%;">}}
+         {{< img src="getting_started/synthetics/api-test-config-4.png" alt="API test configuration" style="width:90%;">}}
 
-   6. Click **Create Test** when you are ready to submit your API test.
+      6. Click **Create Test** to submit your API test.
 
 ### Define assertions
 

@@ -42,12 +42,10 @@ You may create a test using one of the following options:
 
 - **Create a test from a template**:
 
-    1. Hover over one of the following pre-populated templates and click **View Template**. This opens a side panel displaying pre-populated configuration information, including: Test Details, Request Details, Alert Conditions, and Steps.<br /><br>
-
-       {{< img src="/synthetics/browser_tests/synthetics_templates_mobile.mp4" alt="Video of Mobile Application test landing page with templates" video="true" >}}
-
+    1. Hover over one of the pre-populated templates and click **View Template**. This opens a side panel displaying pre-populated configuration information, including: Test Details, Request Details, Alert Conditions, and Steps.
     2. Click **+Create Test** to open the configuration page, where you can review and edit the pre-populated configuration options. The fields presented are identical to those available when creating a test from scratch.
-    3. Click **Save & Quit** in the upper right hand corner when you are ready to submit your Mobile Application Test.<br /><br>
+    3. Click **Save & Quit** in the upper right hand corner to submit your Mobile Application Test.<br /><br>
+       {{< img src="/mobile_app_testing/templates_mobile_app.mp4" alt="Video of Mobile Application test landing page with templates" video="true" >}}
 
 - **Build a test from scratch**:
 
@@ -59,7 +57,7 @@ You may create a test using one of the following options:
     1. Set retry conditions for your test.
     1. Set the **test frequency** by clicking on basic time intervals or customizing your test frequency and **alert conditions** for your test monitor. 
     1. Enter a name for the test monitor, select a service or team member to notify, and add a message notification.
-    1. Click **Save & Edit Recording** when you are ready to submit your Mobile Application Test.
+    1. Click **Save & Edit Recording** to submit your Mobile Application Test.
 
 ### Snippets
 

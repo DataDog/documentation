@@ -39,12 +39,11 @@ You may create a test using one of the following options:
 
 - **Create a test from a template**:
 
-    1. Hover over one of the following pre-populated templates and click **View Template**. This opens a side panel displaying pre-populated configuration information, including: Test Details, Alert Conditions, Steps, and optionally Variables.<br /><br>
+    1. Hover over one of the pre-populated templates and click **View Template**. This opens a side panel displaying pre-populated configuration information, including: Test Details, Alert Conditions, Steps, and optionally Variables.
+    2. Click **+Create Test** to open the configuration page, where you can review and edit the pre-populated configuration options. The fields presented are identical to those available when creating a test from scratch.
+    3. Click **Save & Quit** in the upper right hand corner to submit your Browser Test.<br /><br>
 
        {{< img src="/synthetics/browser_tests/synthetics_templates_browser.mp4" alt="Video of Synthetics Browser Test landing page with templates" video="true" >}}
-
-    2. Click **+Create Test** to open the configuration page, where you can review and edit the pre-populated configuration options. The fields presented are identical to those available when creating a test from scratch.
-    3. Click **Save & Quit** in the upper right hand corner when you are ready to submit your Browser Test.<br /><br>
 
 - **Build a test from scratch**:
 
@@ -53,7 +52,7 @@ You may create a test using one of the following options:
     2. Select **Advanced Options** to set custom request options, certificates, authentication credentials, and more. 
     3. Name your test and set tags to it such as `env:prod` and `app:shopist`. Tags allow you to keep your test suite organized and quickly find tests you're interested in on the homepage.
     4. Choose the browsers and devices you want to test with. 
-    5. Click **Save & Edit Recording** when you are ready to submit your Browser Test.
+    5. Click **Save & Edit Recording** to submit your Browser Test.
 
 ### Select locations 
 
