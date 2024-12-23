@@ -1,78 +1,78 @@
 ---
-"app_id": "mysql"
-"app_uuid": "f6177896-da1e-4bc4-ab19-fd32e8868647"
-"assets":
-  "dashboards":
-    "mysql": "assets/dashboards/overview.json"
-    "mysql-screenboard": "assets/dashboards/overview-screenboard.json"
-  "integration":
-    "auto_install": true
-    "configuration":
-      "spec": "assets/configuration/spec.yaml"
-    "events":
-      "creates_events": true
-    "metrics":
-      "check": "mysql.net.connections"
-      "metadata_path": "metadata.csv"
-      "prefix": "mysql."
-    "process_signatures":
+app_id: "mysql"
+app_uuid: "f6177896-da1e-4bc4-ab19-fd32e8868647"
+assets:
+  dashboards:
+    mysql: "assets/dashboards/overview.json"
+    mysql-screenboard: "assets/dashboards/overview-screenboard.json"
+  integration:
+    auto_install: true
+    configuration:
+      spec: "assets/configuration/spec.yaml"
+    events:
+      creates_events: true
+    metrics:
+      check: "mysql.net.connections"
+      metadata_path: "metadata.csv"
+      prefix: "mysql."
+    process_signatures:
     - "mysqld"
-    "service_checks":
-      "metadata_path": "assets/service_checks.json"
-    "source_type_id": !!int "18"
-    "source_type_name": "MySQL"
-  "monitors":
-    "MySQL database replica is not running properly": "assets/monitors/replica_running.json"
-    "SELECT query volume is dropping": "assets/monitors/select_query_rate.json"
-  "saved_views":
-    "mysql_processes": "assets/saved_views/mysql_processes.json"
-    "operations": "assets/saved_views/operations.json"
-    "operations_overview": "assets/saved_views/operations_overview.json"
-    "slow_operations": "assets/saved_views/slow_operations.json"
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": "Datadog"
-  "sales_email": "info@datadoghq.com"
-  "support_email": "help@datadoghq.com"
-"categories":
+    service_checks:
+      metadata_path: "assets/service_checks.json"
+    source_type_id: !!int "18"
+    source_type_name: "MySQL"
+  monitors:
+    MySQL database replica is not running properly: "assets/monitors/replica_running.json"
+    SELECT query volume is dropping: "assets/monitors/select_query_rate.json"
+  saved_views:
+    mysql_processes: "assets/saved_views/mysql_processes.json"
+    operations: "assets/saved_views/operations.json"
+    operations_overview: "assets/saved_views/operations_overview.json"
+    slow_operations: "assets/saved_views/slow_operations.json"
+author:
+  homepage: "https://www.datadoghq.com"
+  name: "Datadog"
+  sales_email: "info@datadoghq.com"
+  support_email: "help@datadoghq.com"
+categories:
 - "data stores"
 - "log collection"
-"custom_kind": "integración"
-"dependencies":
+custom_kind: "integración"
+dependencies:
 - "https://github.com/DataDog/integrations-core/blob/master/mysql/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "mysql"
-"integration_id": "mysql"
-"integration_title": "MySQL"
-"integration_version": "14.3.0"
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "mysql"
-"public_title": "MySQL"
-"short_description": "Recopila métricas de esquema de rendimiento, rendimiento de consultas, métricas personalizadas y mucho más".
-"supported_os":
+display_on_public_website: true
+draft: false
+git_integration_title: "mysql"
+integration_id: "mysql"
+integration_title: "MySQL"
+integration_version: "14.3.0"
+is_public: true
+manifest_version: "2.0.0"
+name: "mysql"
+public_title: "MySQL"
+short_description: "Recopila métricas de esquema de rendimiento, rendimiento de consultas, métricas personalizadas y mucho más."
+supported_os:
 - "linux"
 - "macos"
 - "windows"
-"tile":
-  "changelog": "CHANGELOG.md"
-  "classifier_tags":
+tile:
+  changelog: "CHANGELOG.md"
+  classifier_tags:
   - "Supported OS::Linux"
   - "Supported OS::macOS"
   - "Supported OS::Windows"
   - "Category::Data Stores"
   - "Category::Log Collection"
   - "Offering::Integration"
-  "configuration": "README.md#Setup"
-  "description": "Recopila métricas de esquema de rendimiento, rendimiento de consultas, métricas personalizadas y mucho más".
-  "media": []
-  "overview": "README.md#Overview"
-  "resources":
-  - "resource_type": "blog"
-    "url": "https://www.datadoghq.com/blog/monitoring-mysql-performance-metrics"
-  "support": "README.md#Support"
-  "title": "MySQL"
+  configuration: "README.md#Setup"
+  description: "Recopila métricas de esquema de rendimiento, rendimiento de consultas, métricas personalizadas y mucho más."
+  media: []
+  overview: "README.md#Overview"
+  resources:
+   resource_type: "blog"
+   url: "https://www.datadoghq.com/blog/monitoring-mysql-performance-metrics"
+  support: "README.md#Support"
+  title: "MySQL"
 ---
 
 <!--  EXTRAÍDO DE https://github.com/DataDog/integrations-core -->
