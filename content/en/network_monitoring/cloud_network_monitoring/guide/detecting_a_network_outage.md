@@ -32,7 +32,7 @@ Network errors and latency can also be caused by client-side application errors.
 
 If none of these steps lead to a root cause, and you are seeing errors and latency for your dependencies scoped to a particular region, availability zone, or third-party domain endpoint, then you are experiencing a network outage. In this case, you can reach out to the relevant providers to report and resolve the issue.
 
-## Further Reading
+## Further reading
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/network/dns
