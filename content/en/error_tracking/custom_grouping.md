@@ -78,7 +78,19 @@ In Datadog's mobile SDKs, you can add a custom error fingerprint when logging an
 a predefined attribute to the log call:
 
 {{< tabs >}}
+
+{{% tab "Android" %}}
+To use custom grouping, you need the Datadog Android SDK `2.7.0` or higher.
+
+```kotlin
+val errorFingerprint = "my-custom-grouping-material"
+val attributes = mapOf(LogAttributes.ERROR_FINGERPRINT to errorFingerprint)
+logger.e("My error message", error, attributes)
+```
+
+{{% /tab %}}
 {{% tab "iOS" %}}
+
 To use custom grouping, you need the Datadog iOS SDK `2.8.1` or higher.
 
 ```swift
@@ -92,18 +104,8 @@ logger.error(
 )
 ```
 {{% /tab %}}
-
-{{% tab "Android" %}}
-To use custom grouping, you need the Datadog Android SDK `2.7.0` or higher.
-
-```kotlin
-val errorFingerprint = "my-custom-grouping-material"
-val attributes = mapOf(LogAttributes.ERROR_FINGERPRINT to errorFingerprint)
-logger.e("My error message", error, attributes)
-```
-{{% /tab %}}
-
 {{% tab "Flutter" %}}
+
 To use custom grouping, you need the Datadog Flutter SDK `2.4.0` or higher.
 
 ```dart
@@ -117,28 +119,18 @@ logger.error(
 );
 ```
 {{% /tab %}}
+{{% tab "React Native" %}}
+
+To use custom grouping, you need the Datadog React Native SDK `2.4.2` or higher.
+
+TK
+
+{{% /tab %}}
 {{< /tabs >}}
 
 Or, you can add or adjust the fingerprint in the log mapper:
 
 {{< tabs >}}
-{{% tab "iOS" %}}
-To use custom grouping, you need the Datadog iOS SDK `2.8.1` or higher.
-
-```swift
-let logsConfiguration = Logs.Configuration(
-  eventMapper: { log in
-      var log = log
-      log.error?.fingerprint = "my-custom-grouping-material"
-      return log
-  }
-)
-Logs.enable(
-  with: logsConfiguration
-)
-```
-{{% /tab %}}
-
 {{% tab "Android" %}}
 To use custom grouping, you need the Datadog Android SDK `2.7.0` or higher.
 
@@ -153,6 +145,23 @@ val logsConfiguration = LogsConfiguration.Builder()
     .setEventMapper(mapper)
     .build()
 Logs.enable(logsConfiguration)
+```
+{{% /tab %}}
+
+{{% tab "iOS" %}}
+To use custom grouping, you need the Datadog iOS SDK `2.8.1` or higher.
+
+```swift
+let logsConfiguration = Logs.Configuration(
+  eventMapper: { log in
+      var log = log
+      log.error?.fingerprint = "my-custom-grouping-material"
+      return log
+  }
+)
+Logs.enable(
+  with: logsConfiguration
+)
 ```
 {{% /tab %}}
 
@@ -174,6 +183,14 @@ final configuration = DatadogConfiguration(
     loggingConfiguration: loggingConfiguration,
 );
 ```
+{{% /tab %}}
+
+{{% tab "React Native" %}}
+
+To use custom grouping, you need the Datadog React Native SDK `2.4.2` or higher.
+
+TK
+
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -217,35 +234,6 @@ In both cases, `my-custom-grouping-material` is used to group the Browser RUM er
 [2]: https://github.com/DataDog/browser-sdk/releases/tag/v4.42.0
 {{% /tab %}}
 
-{{% tab "iOS" %}}
-To use custom grouping, you need the Datadog iOS SDK `2.8.1` or higher.
-
-To add a custom fingerprint when manually reporting errors, you can add a predefined attribute when calling `addError`:
-
-```swift
-RUMMonitor.shared().addError(
-  message: "My error message",
-  source: .source,
-  attributes: [
-    RUM.Attributes.errorFingerprint: "my-custom-grouping-fingerprint"
-  ]
-)
-```
-
-Or, you can use the `errorEventMapper`:
-
-```swift
-var config = RUM.Configuration(applicationID: "rum-application-id")
-config.errorEventMapper = { errorEvent in
-  var errorEvent = errorEvent
-  errorEvent.error.fingerprint = "my-custom-grouping-fingerprint"
-  return errorEvent
-}
-RUM.enable(with: config)
-```
-
-{{% /tab %}}
-
 {{% tab "Android" %}}
 To use custom grouping, you need the Datadog Android SDK `2.7.0` or higher.
 
@@ -273,6 +261,35 @@ val rumConfiguration = RumConfiguration.Builder("rum-application-id")
     }
   }).build()
 RUM.enable(rumConfiguration)
+```
+
+{{% /tab %}}
+
+{{% tab "iOS" %}}
+To use custom grouping, you need the Datadog iOS SDK `2.8.1` or higher.
+
+To add a custom fingerprint when manually reporting errors, you can add a predefined attribute when calling `addError`:
+
+```swift
+RUMMonitor.shared().addError(
+  message: "My error message",
+  source: .source,
+  attributes: [
+    RUM.Attributes.errorFingerprint: "my-custom-grouping-fingerprint"
+  ]
+)
+```
+
+Or, you can use the `errorEventMapper`:
+
+```swift
+var config = RUM.Configuration(applicationID: "rum-application-id")
+config.errorEventMapper = { errorEvent in
+  var errorEvent = errorEvent
+  errorEvent.error.fingerprint = "my-custom-grouping-fingerprint"
+  return errorEvent
+}
+RUM.enable(with: config)
 ```
 
 {{% /tab %}}
@@ -311,6 +328,15 @@ final configuration = DatadogConfiguration(
 );
 ```
 {{% /tab %}}
+
+{{% tab "React Native" %}}
+
+To use custom grouping, you need the Datadog React Native SDK `2.4.2` or higher.
+
+TK
+
+{{% /tab %}}
+
 {{< /tabs >}}
 
 [1]: /tracing/
