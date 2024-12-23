@@ -1,23 +1,23 @@
 ---
-"categories":
+categories:
 - "alerting"
 - "notifications"
-"custom_kind": "integración"
-"dependencies": []
-"description": "Utiliza VictorOps como canal de notificación para las alertas y eventos de Datadog".
-"doc_link": "https://docs.datadoghq.com/integrations/victorops/"
-"draft": false
-"git_integration_title": "victorops"
-"has_logo": true
-"integration_id": "victorops"
-"integration_title": "VictorOps"
-"integration_version": ""
-"is_public": true
-"manifest_version": "1.0"
-"name": "victorops"
-"public_title": "Integración de Datadogy VictorOps"
-"short_description": "Utiliza VictorOps como canal de notificación para las alertas y eventos de Datadog".
-"version": "1.0"
+custom_kind: "integración"
+dependencies: []
+description: "Utiliza VictorOps como canal de notificación para las alertas y eventos de Datadog."
+doc_link: "https://docs.datadoghq.com/integrations/victorops/"
+draft: false
+git_integration_title: "victorops"
+has_logo: true
+integration_id: "victorops"
+integration_title: "VictorOps"
+integration_version: ""
+is_public: true
+manifest_version: "1.0"
+name: "victorops"
+public_title: "Integración de Datadogy VictorOps"
+short_description: "Utiliza VictorOps como canal de notificación para las alertas y eventos de Datadog."
+version: "1.0"
 ---
 
 <!--  EXTRAÍDO DE https://github.com/DataDog/dogweb -->
