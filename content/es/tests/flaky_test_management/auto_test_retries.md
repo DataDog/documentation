@@ -97,7 +97,8 @@ Este comportamiento se puede ajustar con las siguientes variables de entorno:
 
 
 [1]: https://app.datadoghq.com/ci/settings/test-optimization
-{{% /tabs %}}
+
+{{% /tab %}}
 
 {{% tab ".NET" %}}
 
@@ -145,7 +146,7 @@ Personaliza los reintentos de test automáticos con las siguientes variables de 
 
 
 [1]: https://app.datadoghq.com/ci/settings/test-optimization
-{{< partial name="whats-next/whats-next.html" >}}
+{{% /tab %}}
 
 {{% tab "Python" %}}
 
@@ -170,8 +171,7 @@ Puedes ajustar este comportamiento con las siguientes variables de entorno:
 * `DD_CIVISIBILITY_TOTAL_FLAKY_RETRY_COUNT`: un número no negativo para establecer el número total máximo de tests fallidos a reintentar (por defecto: `1000`)
 
 [1]: https://app.datadoghq.com/ci/settings/test-optimization
-
-{{< partial name="whats-next/whats-next.html" >}}
+{{% /tab %}}
 
 {{% tab "Swift" %}}
 
