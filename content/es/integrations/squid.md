@@ -168,7 +168,8 @@ La recopilación de logs se encuentra deshabilitada de manera predeterminada en 
 
 [1]: https://docs.datadoghq.com/es/agent/kubernetes/integrations/
 [2]: https://docs.datadoghq.com/es/agent/kubernetes/log/?tab=containerinstallation#setup
-Accede a dashboards preconfigurados
+{{% /tab %}}
+{{< /tabs >}}
 
 ### Validación
 
