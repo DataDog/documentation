@@ -109,13 +109,13 @@ aws:
 
 {{< tabs >}}
 {{% tab "Linux host" %}}
-{{% dbm-mongodb-Agent-setup-linux %}}
+{{% dbm-mongodb-agent-setup-linux %}}
 {{% /tab %}}
 {{% tab "Docker" %}}
-{{% dbm-mongodb-Agent-setup-Docker %}}
+{{% dbm-mongodb-agent-setup-docker %}}
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
-{{% dbm-mongodb-Agent-setup-Kubernetes %}}
+{{% dbm-mongodb-agent-setup-kubernetes %}}
 {{% /tab %}}
 {{< /tabs >}}
 
