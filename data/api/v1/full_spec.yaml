@@ -1209,13 +1209,8 @@ components:
         reflow_type:
           $ref: '#/components/schemas/DashboardReflowType'
         restricted_roles:
-          deprecated: true
-          description: 'A list of role identifiers. Only the author and users associated
+          description: A list of role identifiers. Only the author and users associated
             with at least one of these roles can edit this dashboard.
-
-
-            This property is deprecated; please use the [Restriction Policies API](https://docs.datadoghq.com/api/latest/restriction-policies/)
-            instead to manage write authorization for individual dashboards.'
           items:
             description: A role UUID.
             type: string
