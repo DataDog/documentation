@@ -23,7 +23,7 @@ This guide covers the following topics:
 
 1. [**Prerequisites for Admins**](#prerequisites): Details the necessary prerequisites.
 2. [**Setting Up Roles for the ACME Team**](#set-up-roles): Instructions on creating roles and assigning team members.
-3. [**Limiting Access to Logs**](#restrict-access-to-logs): How to employ restriction queries to control log access across a Datadog application.
+3. [**Limiting Access to Logs**](#restrict-access-to-logs): How to employ restriction queries to control log access.
 4. [**Configuring Permissions on Log Assets**](#restrict-access-to-log-assets): Guidelines for setting permissions on pipelines, indexes, and archives.
 
 
@@ -58,7 +58,7 @@ To perform the actions in this guide, you must have Datadog Admin permissions. E
 
 Navigate to the [Users list][8] to verify that you have all these permissions. If these permissions are missing, request them from a current Datadog Admin. 
 
-### Acquiring API and app keys
+### Get an API key and an app key
 
 If you plan to use the Datadog API, you need an API key and an app key from an Admin user. API keys and app keys can be generated on your [Datadog account API key page][9]. Ensure the app key is associated with a user who has the necessary permissions. For more information, see [API and app keys][10].
 
@@ -143,7 +143,7 @@ For more information on creating roles see [Access Control][3].
 
 ## Restrict access to logs
 
-Grant ACME Team members access to `team:acme` logs exclusively by using using the [Log Read Data][12] permission with Restriction Queries.
+Grant ACME Team members access to `team:acme` logs exclusively by using the [Log Read Data][12] permission with Restriction Queries.
 
 For best practices, avoid extending ACME Users' permissions to access additional logs. Avoid applying the same `team:acme` restriction uery to other roles. Instead, assign users to multiple roles based on their individual access needs.
 
