@@ -16,7 +16,7 @@ categories:
 - マーケットプレイス
 - ネットワーク
 - snmp
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -108,4 +108,4 @@ RapDev SNMP Trap Logs パッケージは、何千もの異なる SNMP デバイ�
 [7]: mailto:support@rapdev.io
 [8]: https://www.datadoghq.com/blog/diagnose-network-performance-with-snmp-trap-monitoring/
 ---
-このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/rapdev-snmp-trap-logs" target="_blank">こちらをクリック</a>してください。
+このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。利用するには、<a href="https://app.datadoghq.com/marketplace/app/rapdev-snmp-trap-logs" target="_blank">Marketplace でこのアプリケーションを購入してください</a>。
