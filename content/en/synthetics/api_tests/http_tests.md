@@ -38,21 +38,32 @@ HTTP tests can run from both [managed](#select-locations) and [private locations
 
 ## Configuration
 
-After choosing to create an `HTTP` test, define your test's request.
+You may create a test using one of the following options:
 
-### Define request
+   - **Create a test from a template**:
+   
+     1. Hover over one of the pre-populated templates and click **View Template**. This opens a side panel displaying pre-populated configuration information, including: Test Details, Request Details, Assertions, Alert Conditions, and Monitor Settings. 
+     2. Click **+Create Test** to open the **Define Request** page, where you can review and edit the pre-populated configuration options. The fields presented are identical to those available when creating a test from scratch.
+     3. Click **Save Details** to submit your API test. <br /><br>
 
-1. Choose the **HTTP Method** and specify the **URL** to query. Available methods are: `GET`, `POST`, `PATCH`, `PUT`, `HEAD`, `DELETE`, and `OPTIONS`. Both `http` and `https` URLs are supported.
+        {{< img src="getting_started/synthetics/synthetics_templates_api_video.mp4" alt="Video of Synthetics API test landing page with templates" video="true" >}}
 
-   <div class="alert alert-info">See <a href=#advanced-options>Advanced options</a> for more options.</div>
+  - **Build a test from scratch**:
+    
+     1. To build a test from scratch, click the **+ Start from scratch** template, then select the `HTTP` request type and specify the **URL** to query. 
+        Available methods are: `GET`, `POST`, `PATCH`, `PUT`, `HEAD`, `DELETE`, and `OPTIONS`. Both `http` and `https` URLs are supported.
 
-2. **Name** your HTTP test.
+        <div class="alert alert-info">See <a href=#advanced-options>Advanced options</a> for more options.</div>
 
-3. Add `env` **Tags** as well as any other tag to your HTTP test. You can then use these tags to filter through your Synthetic tests on the [Synthetic Monitoring & Continuous Testing page][3].
+     2. **Name** your HTTP test.
 
-   {{< img src="synthetics/api_tests/http_test_config.png" alt="Define HTTP request" style="width:90%;" >}}
+     3. Add Environment **Tags** as well as any other tag to your HTTP test. You can then use these tags to filter through your Synthetic tests on the [Synthetic Monitoring & Continuous Testing page][3]. 
+     
+     4. Click **Send** to try out the request configuration. A response preview is displayed on the right side of your screen.<br /><br>
 
-Click **Test URL** to try out the request configuration. A response preview is displayed on the right side of your screen.
+       {{< img src="getting_started/synthetics/api-test-config-4.png" alt="Define HTTP request" style="width:90%;" >}}
+
+     5. Click **Create Test** to submit your API test.
 
 ### Snippets
 
@@ -197,6 +208,9 @@ To display your list of variables, type `{{` in your desired field:
 A test is considered `FAILED` if it does not satisfy one or more assertions or if the request prematurely failed. In some cases, the test can fail without testing the assertions against the endpoint. 
 
 The most common errors include the following:
+
+`AUTHENTICATION_ERROR`
+: Synthetic Monitoring automatically disables test retries when authentication failures occur. This safety measure remains in effect until you update the test with valid credentials. This prevents unnecessary test executions that would generate false alerts and increase billable usage.
 
 `CONNREFUSED`
 : No connection could be made because the target machine actively refused it.

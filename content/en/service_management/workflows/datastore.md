@@ -10,7 +10,7 @@ further_reading:
   text: "Build Workflows"
 ---
 
-{{< callout url="https://docs.google.com/forms/d/1gVVWLg5P3EXkVXBc4qZtqKp_nqykDsFXCMmh6pbvxx0/edit" btn_hidden="false" header="Try the Preview!">}}
+{{< callout url="https://docs.google.com/forms/d/1NvW3I0Ep-lQo4FbiSwOEjccoFsS9Ue2wYiYDmCxKDYg/viewform?edit_requested=true" btn_hidden="false" header="Try the Preview!">}}
 Datastore is in Preview. Use this form to request access today.
 {{< /callout >}}
 

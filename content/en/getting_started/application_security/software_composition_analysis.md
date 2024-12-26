@@ -129,6 +129,9 @@ Optionally, you can select specific GitHub repositories to enable SCA by clickin
 
    {{< img src="getting_started/appsec/appsec-vuln-remediation_3.png" alt="Application Vulnerability Management recommended remediation steps of the vulnerability." style="width:100%;" >}}
 
+## Disable SCA
+
+For information on disabling Software Composition Analysis, see [Disabling Software Composition Analysis][16].
 
 ## Further reading
 
@@ -147,3 +150,4 @@ Optionally, you can select specific GitHub repositories to enable SCA by clickin
 [13]: https://app.datadoghq.com/security/configuration/asm/setup
 [14]: https://docs.datadoghq.com/integrations/github/
 [15]: /security/application_security/software_composition_analysis/setup/compatibility/
+[16]: /security/application_security/troubleshooting/#disabling-software-composition-analysis

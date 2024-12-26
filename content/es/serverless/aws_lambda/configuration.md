@@ -20,17 +20,17 @@ title: Configurar Serverless Monitoring para AWS Lambda
 
 Primero, [instala][1] Datadog Serverless Monitoring para comenzar a recopilar métricas, trazas (traces) y logs. Cuando la instalación se complete, consulta los siguientes temas y configura la instalación según tus necesidades de monitorización.
 
-- [Conectar la telemetría mediante etiquetas](#connect-telemetry-using-tags)
+- [Conectar la telemetría mediante etiquetas (tags)](#connect-telemetry-using-tags)
 - [Recopilar las cargas útiles de solicitud y respuesta](#collect-the-request-and-response-payloads)
 - [Recopilar trazas procedentes de recursos distintos de Lambda](#collect-traces-from-non-lambda-resources)
 - [Configurar el rastreador de Datadog](#configure-the-datadog-tracer)
-- [Seleccionar las frecuencias de muestreo para la ingesta de tramos de APM](#select-sampling-rates-for-ingesting-apm-spans)
+- [Seleccionar las frecuencias de muestreo para la ingesta de tramos (spans) de APM](#select-sampling-rates-for-ingesting-apm-spans)
 - [Filtrar o borrar información confidencial de las trazas](#filter-or-scrub-sensitive-information-from-traces)
 - [Habilitar y deshabilitar la recopilación de trazas](#enabledisable-trace-collection)
 - [Conectar logs y trazas](#connect-logs-and-traces)
 - [Vincular errores al código fuente](#link-errors-to-your-source-code)
 - [Enviar métricas personalizadas][27]
-- [Recopilar datos de la creación de perfiles (beta pública)](#collect-profiling-data-public-beta)
+- [Recopilar datos de perfiles](#collect-profiling-data)
 - [Enviar la telemetría a través de PrivateLink o un proxy](#send-telemetry-over-privatelink-or-proxy)
 - [Enviar la telemetría a varias organizaciones de Datadog](#send-telemetry-to-multiple-datadog-organizations)
 - [Propagar el contexto de las trazas en los recursos de AWS](#propagate-trace-context-over-aws-resources)
@@ -69,7 +69,7 @@ Unos minutos después de habilitar tu aplicación y enviar los patrones de ataqu
 
 ## Conectar la telemetría mediante etiquetas
 
-Conecta la telemetría de Datadog a través del uso de etiquetas (tags) personalizadas y de etiquetas reservadas (`env`, `service` y `version`). Puedes utilizarlas para navegar fácilmente por métricas, trazas y logs. Añade los parámetros adicionales que se indican a continuación en función de tu método de instalación.
+Conecta la telemetría de Datadog a través del uso de etiquetas personalizadas y de etiquetas reservadas (`env`, `service` y `version`). Puedes utilizarlas para navegar fácilmente por métricas, trazas y logs. Añade los parámetros adicionales que se indican a continuación en función de tu método de instalación.
 
 {{< tabs >}}
 {{% tab "Datadog CLI" %}}
@@ -280,7 +280,7 @@ DD_APM_REPLACE_TAGS=[
 
 <div class="alert alert-info">En estos momentos, esta característica es compatible con Python, Node.js, Java y .NET.</div>
 
-Datadog puede inferir tramos (spans) de APM en función de los eventos de Lambda entrantes para los recursos gestionados de AWS que activan la función de Lambda. Esto puede ayudarte a visualizar la relación entre los recursos gestionados de AWS e identificar problemas de rendimiento en tus aplicaciones serverless. Consulta [más detalles sobre el producto][12].
+Datadog puede inferir tramos de APM en función de los eventos de Lambda entrantes para los recursos gestionados de AWS que activan la función de Lambda. Esto puede ayudarte a visualizar la relación entre los recursos gestionados de AWS e identificar problemas de rendimiento en tus aplicaciones serverless. Consulta [más detalles sobre el producto][12].
 
 Los siguientes recursos son compatibles en estos momentos:
 
@@ -507,9 +507,9 @@ Para obtener instrucciones sobre cómo configurar la integración del código fu
 
 [101]: /es/integrations/guide/source-code-integration/?tab=go#serverless
 
-## Recopilar datos de la creación de perfiles (beta pública)
+## Recopilar datos de perfiles
 
-[Continuous Profiler][42] de Datadog está disponible en versión beta para Python en la versión 4.62.0 y la versión de capa 62 y anteriores. Esta característica opcional se habilita mediante la definición de la variable de entorno `DD_PROFILING_ENABLED` como `true`.
+El [Continuous Profiler][42] de Datadog está disponible en Vista Previa para Python versión 4.62.0 y para la capa versión 62 y anteriores. Esta función opcional se activa configurando la variable de entorno `DD_PROFILING_ENABLED` como `true`.
 
 Continuous Profiler genera un subproceso que toma periódicamente una snapshot de la CPU y el montículo de todo el código de Python en ejecución. Esto puede incluir el propio generador de perfiles. Si quieres que el generador de perfiles se ignore a sí mismo, define `DD_PROFILING_IGNORE_PROFILER` como `true`.
 
