@@ -40,6 +40,7 @@ The **Final Schedule** is composed of all layers. Lower layers take precedence o
       - _One Week_ (168 hours)
       - _Custom_
    - **Handoff Time**: The date and time when shifts are swapped to the next person.
+   - **End time**: The date and time after which no more shifts will be scheduled for this layer.
    - **Conditions**: Time conditions applied to each shift. This enables you to restrict the timeframe of on-call shifts. For example, Monday to Friday from 9:00 AM to 5:00 PM.
    - **Members**: The list of individuals who perform on-call duties. These individuals take shifts in the order in which you add them to the list.
 1. Select **Create**.
@@ -62,9 +63,37 @@ If you are part of an On-Call rotation, and you know that you will be out of off
 
 Other channel members can select **Take it** to schedule themselves to override your shift.
 
+### Export schedules
+
+The Export Shifts feature allows you to easily integrate your on-call schedule into your preferred calendar app (e.g., Google Calendar, Apple Calendar, or Outlook) using a `.webcal` link. Whether you’re part of multiple rotations, need to plan personal time around shifts, or want to increase team visibility, this feature ensures your on-call responsibilities are seamlessly accessible and always up-to-date.
+
+#### How to export and sync you schedules
+1. **Generate a `.webcal` link**
+    - Go to the [**On-Call** > **Schedules**][1] section in your account.
+    - Select **Export My Shifts**. A link will be auto-generated for you. Hit **Copy Link** to proceed.
+2. Once copied, use the. `.webcal` link your calendar app. For example:
+    - Google Calendar: [Follow these instructions from Google (under "Use a link to add a public calendar").][3]
+    - Outlook: [Microsoft’s guide to subscribing to internet calendars.][4]
+    - Apple Calendar: [Learn how to subscribe to calendars on Mac or iPhone.][5]
+
+If your on-call schedule changes, updates will automatically reflect in the linked calendar, ensuring you always have the most accurate view of your responsibilities. If needed, you can revoke access to a previously shared link by generating a new one, which invalidates the old URL.
+
+Most calendar apps support notifications—enable reminders to get alerts before your shifts start, but you can also configure shift reminders via SMS, push notification, and email in your [Datadog On-Call profile settings][6].
+
+#### Troubleshooting schedule exports
+
+If you experience issues when exporting your On-Call schedule feeds to Google Calendar (e.g. "could not fetch URL) or Outlook ("Couldn't import calendar. Try again"), please test the following fixes when initially subscribing to the calendar via URL:
+
+- Change webcal:// to http:// or https:// at the beginning of the URL.
+  - For example, in place of `webcal://<your_personal_link>`, use `http://<your_personal_link>`.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/on-call/schedules
 [2]: https://app.datadoghq.com/on-call/schedules/create
+[3]: https://support.google.com/calendar/answer/37100?hl=en&co=GENIE.Platform%3DDesktop
+[4]: https://support.microsoft.com/en-us/office/import-or-subscribe-to-a-calendar-in-outlook-com-or-outlook-on-the-web-cff1429c-5af6-41ec-a5b4-74f2c278e98c
+[5]: https://support.apple.com/en-us/102301
+[6]: /service_management/on-call/profile_settings/
