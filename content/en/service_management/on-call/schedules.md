@@ -65,27 +65,26 @@ Other channel members can select **Take it** to schedule themselves to override 
 
 ### Export schedules
 
-The Export Shifts feature allows you to integrate your on-call schedule into your preferred calendar app (for example Google Calendar, Apple Calendar, or Outlook) using a `.webcal` link. Whether you are part of multiple rotations, need to plan personal time around shifts, or want to increase team visibility, this feature ensures your on-call responsibilities are seamlessly accessible and always up-to-date.
+The Export Shifts feature allows you to integrate your on-call schedule into your preferred calendar app (for example, Google Calendar, Apple Calendar, or Outlook) using a `.webcal` link. Whether you are part of multiple rotations, planning personal time around shifts, or aiming to increase team visibility, this feature ensures your on-call responsibilities are accessible and always up-to-date.
 
-#### How to export and sync you schedules
-1. **Generate a `.webcal` link**
-    - Go to the [**On-Call** > **Schedules**][1] section in your account.
-    - Select **Export Shifts**. A link is auto-generated for you. Hit **Copy Link** to proceed.
-2. After copying the link, use it in your calendar app. For example:
+#### Export and sync schedules
+1. To generate a `.webcal` link, go to the [**On-Call** > **Schedules**][1] section in your account.
+2. Select **Export My Shifts**. A link is auto-generated for you. 
+3. Hit **Copy Link**.
+4. After copying the link, use it in your calendar app. For example:
     - Google Calendar: [Follow these instructions from Google (under 'Use a link to add a public calendar').][3]
     - Outlook: [Microsoft's guide to subscribing to internet calendars.][4]
     - Apple Calendar: [Learn how to subscribe to calendars on Mac or iPhone.][5]
 
-If your on-call schedule changes, updates are automatically reflected in the linked calendar, ensuring you always have the most accurate view of your responsibilities. If needed, you can revoke access to a previously shared link by generating a new one, which invalidates the old URL.
+If your on-call schedule changes, updates are automatically reflected in the linked calendar, ensuring you always have the most accurate view of your responsibilities. If needed, revoke access to a previously shared link by generating a new one, which invalidates the old URL.
 
-Most calendar apps support notifications—enable reminders to get alerts before your shifts start, but you can also configure shift reminders through SMS, push notification, and email in your [Datadog On-Call profile settings][6].
+Most calendar apps support notifications—enabled reminders to get alerts before your shifts start, but you can also configure shift reminders through SMS, push notification, and email in your [Datadog On-Call profile settings][6].
 
 #### Troubleshooting schedule exports
 
-If you experience issues when exporting your On-Call schedule feeds to Google Calendar (for example "could not fetch URL) or Outlook ("Couldn't import calendar. Try again"), test the following fixes when initially subscribing to the calendar via URL:
+If you encounter issues when exporting your On-Call schedule feeds to Google Calendar (such as "could not fetch URL) or Outlook ("Couldn't import calendar. Try again"), try the following fixes when initially subscribing to the calendar through URL:
 
-- Change webcal:// to http:// or https:// at the beginning of the URL.
-  - For example, in place of `webcal://<your_personal_link>`, use `http://<your_personal_link>`.
+- Change `webcal://` to `http://` or `https://` at the beginning of the URL. For example, change `webcal://<your_personal_link>` to `http://<your_personal_link>`.
 
 ## Further Reading
 
