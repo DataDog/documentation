@@ -29,13 +29,21 @@ WebSocket tests can run from both [managed](#select-locations) and [private loca
 
 ## Configuration
 
-After choosing to create an `WebSocket` test, define your test's request.
+You may create a test using one of the following options:
 
-### Define request
+- **Create a test from a template**:
+   
+     1. Hover over one of the pre-populated templates and click **View Template**. This opens a side panel displaying pre-populated configuration information, including: Test Details, Request Details, Assertions, Alert Conditions, and Monitor Settings.
+     2. Click **+Create Test** to open the **Define Request** page, where you can review and edit the pre-populated configuration options. The fields presented are identical to those available when creating a test from scratch.
+     3. Click **Save Details** to submit your API test.<br /><br>
+        {{< img src="getting_started/synthetics/synthetics_templates_api_video.mp4" alt="Video of Synthetics API test landing page with templates" video="true" >}}
 
-1. Specify the **URL** to run your test on.
-2. Enter the string you want to send in your test.
-3. Add **Advanced Options** (optional) to your test:
+- **Build a test from scratch**:
+
+    1. To build a test from scratch, click the **+ Start from scratch** template, then select the `WebSocket` request type.
+    1. Specify the **URL** to run your test on.
+    1. Enter the string you want to send in your test. 
+    1. Add **Advanced Options** (optional) to your test:<br /><br>
 
    {{< tabs >}}
 
@@ -54,14 +62,15 @@ After choosing to create an `WebSocket` test, define your test's request.
 
    {{< /tabs >}}
 
-<br/>
+</br>
 
-4. **Name** your WebSocket test.
-5. Add `env` **Tags** as well as any other tag to your WebSocket test. You can then use these tags to filter through your Synthetic tests on the [Synthetic Monitoring & Continuous Testing page][3].
+  5. **Name** your WebSocket test.
+  6. Add Environment **Tags** as well as any other tag to your WebSocket test. You can then use these tags to filter through your Synthetic tests on the [Synthetic Monitoring & Continuous Testing page][3].
+  7. Click **Send** to try out the request configuration. A response preview is displayed on the right side of your screen.
 
-{{< img src="synthetics/api_tests/websocket_test_config.png" alt="Define WebSocket request" style="width:90%;" >}}
+     {{< img src="synthetics/api_tests/websocket_test_config_2.png" alt="Define WebSocket request" style="width:90%;" >}}
 
-Click **Test URL** to try out the request configuration. A response preview is displayed on the right side of your screen.
+  8. Click **Create Test** to submit your API test.
 
 ### Snippets
 
