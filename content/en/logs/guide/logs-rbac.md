@@ -127,7 +127,7 @@ For more information on creating roles, see [Access Control][3].
 
 1. In the [Users Section][1] of Datadog, select a user and assign them either the `ACME Admin` or `ACME User` role.
 
-{{< img src="logs/guide/rbac/assign_user2.png" alt="Delete invite on the grid view" style="width:90%;">}}
+{{< img src="logs/guide/rbac/assign_user2.png" alt="Assigning roles to a user in the edit user screen" style="width:90%;">}}
 
 [1]: https://app.datadoghq.com/access/users
 {{% /tab %}}
@@ -143,9 +143,9 @@ For more information on creating roles, see [Access Control][3].
 
 ## Restrict access to logs
 
-Grant ACME Team members access to `team:acme` logs exclusively by using the [Log Read Data][12] permission with Restriction Queries.
+Grant ACME Team members access to `team:acme` logs exclusively by using the [`logs_read_data`][12] permission with Restriction Queries.
 
-For best practices, avoid extending ACME Users' permissions to access additional logs. Avoid applying the same `team:acme` restriction uery to other roles. Instead, assign users to multiple roles based on their individual access needs.
+For best practices, avoid extending ACME Users' permissions to access additional logs. Also, avoid applying the same `team:acme` restriction query to other roles. Instead, assign users to multiple roles based on their individual access needs.
 
 This section details how to:
 
@@ -171,8 +171,8 @@ This section details how to:
 1. Create a restriction query using the [Create Restriction Query API][1].
 1. Keep track of the restriction Query ID.
 1. Attach the restriction query to ACME roles with the [Restriction Query API][2].
-1. Enable the `logs_read_data` permissions on the role using the [Grant Permissions API][3]. See the [Get Permission IDs](#get-permission-ids) section to get the corresponding ID for this permission.
-1. (Optional) Confirm that the set up is properly done:
+1. Enable the `logs_read_data` permissions on the role using the [Grant Permissions API][3]. See the [obtaining Permission IDs](#obtaining-permission-ids) section to get the corresponding ID for this permission.
+1. (Optional) Validate the setup:
     * Get the list of roles attached to the query with the [Get Roles API][4]. You should see only `ACME Admin` and `ACME User` in the results.
     * Conversely, getting the restriction query attached to either role with the [Get Restriction Query API][5]. You should see the `team:acme` restriction query.
 
@@ -195,15 +195,15 @@ This ensures that:
 
 ### Log pipelines
 
-Create a [pipeline][13] for `team:acme` logs. Grant [`Write Processor`][14] permission to the `ACME Admin` role.
+Create a [pipeline][13] for `team:acme` logs. Grant the [`logs_write_processors`][14] permission to the `ACME Admin` role.
 
 ### Log indexes
 
-Create [indexes][15] for `team:acme` logs for detailed budget control. Grant [`Write Exclusion Filters`][16] permission to the `ACME Admin` role. 
+Create [indexes][15] for `team:acme` logs for detailed budget control. Grant the [`logs_write_exclusion_filters`][16] permission to the `ACME Admin` role. 
 
 ### Log archives
 
-Create one or multiple [archives][17] for `team:acme` logs. Assign the [`Read Archives`][18] permission to `ACME Admin` members. For rehydration, assign [`Write Historical View`][19] permission to `ACME Admin`.
+Create one or multiple [archives][17] for `team:acme` logs. Assign the [`logs_read_archives`][18] permission to `ACME Admin` members. For rehydration, assign the [`logs_write_historical_view`][19] permission to `ACME Admin`.
 
 Create one or multiple [archives][17] for `team:acme` logs. Assign the [Read Archives][18] permission to members of `ACME Admin`.
 
