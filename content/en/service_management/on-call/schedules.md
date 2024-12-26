@@ -40,7 +40,7 @@ The **Final Schedule** is composed of all layers. Lower layers take precedence o
       - _One Week_ (168 hours)
       - _Custom_
    - **Handoff Time**: The date and time when shifts are swapped to the next person.
-   - **End time**: The date and time after which no more shifts will be scheduled for this layer.
+   - **End time**: The date and time after which no more shifts are scheduled for this layer.
    - **Conditions**: Time conditions applied to each shift. This enables you to restrict the timeframe of on-call shifts. For example, Monday to Friday from 9:00 AM to 5:00 PM.
    - **Members**: The list of individuals who perform on-call duties. These individuals take shifts in the order in which you add them to the list.
 1. Select **Create**.
@@ -65,24 +65,24 @@ Other channel members can select **Take it** to schedule themselves to override 
 
 ### Export schedules
 
-The Export Shifts feature allows you to easily integrate your on-call schedule into your preferred calendar app (e.g., Google Calendar, Apple Calendar, or Outlook) using a `.webcal` link. Whether you’re part of multiple rotations, need to plan personal time around shifts, or want to increase team visibility, this feature ensures your on-call responsibilities are seamlessly accessible and always up-to-date.
+The Export Shifts feature allows you to integrate your on-call schedule into your preferred calendar app (for example Google Calendar, Apple Calendar, or Outlook) using a `.webcal` link. Whether you are part of multiple rotations, need to plan personal time around shifts, or want to increase team visibility, this feature ensures your on-call responsibilities are seamlessly accessible and always up-to-date.
 
 #### How to export and sync you schedules
 1. **Generate a `.webcal` link**
     - Go to the [**On-Call** > **Schedules**][1] section in your account.
-    - Select **Export My Shifts**. A link will be auto-generated for you. Hit **Copy Link** to proceed.
-2. Once copied, use the. `.webcal` link your calendar app. For example:
-    - Google Calendar: [Follow these instructions from Google (under "Use a link to add a public calendar").][3]
-    - Outlook: [Microsoft’s guide to subscribing to internet calendars.][4]
+    - Select **Export Shifts**. A link is auto-generated for you. Hit **Copy Link** to proceed.
+2. After copying the link, use it in your calendar app. For example:
+    - Google Calendar: [Follow these instructions from Google (under 'Use a link to add a public calendar').][3]
+    - Outlook: [Microsoft's guide to subscribing to internet calendars.][4]
     - Apple Calendar: [Learn how to subscribe to calendars on Mac or iPhone.][5]
 
-If your on-call schedule changes, updates will automatically reflect in the linked calendar, ensuring you always have the most accurate view of your responsibilities. If needed, you can revoke access to a previously shared link by generating a new one, which invalidates the old URL.
+If your on-call schedule changes, updates are automatically reflected in the linked calendar, ensuring you always have the most accurate view of your responsibilities. If needed, you can revoke access to a previously shared link by generating a new one, which invalidates the old URL.
 
-Most calendar apps support notifications—enable reminders to get alerts before your shifts start, but you can also configure shift reminders via SMS, push notification, and email in your [Datadog On-Call profile settings][6].
+Most calendar apps support notifications—enable reminders to get alerts before your shifts start, but you can also configure shift reminders through SMS, push notification, and email in your [Datadog On-Call profile settings][6].
 
 #### Troubleshooting schedule exports
 
-If you experience issues when exporting your On-Call schedule feeds to Google Calendar (e.g. "could not fetch URL) or Outlook ("Couldn't import calendar. Try again"), please test the following fixes when initially subscribing to the calendar via URL:
+If you experience issues when exporting your On-Call schedule feeds to Google Calendar (for example "could not fetch URL) or Outlook ("Couldn't import calendar. Try again"), test the following fixes when initially subscribing to the calendar via URL:
 
 - Change webcal:// to http:// or https:// at the beginning of the URL.
   - For example, in place of `webcal://<your_personal_link>`, use `http://<your_personal_link>`.
