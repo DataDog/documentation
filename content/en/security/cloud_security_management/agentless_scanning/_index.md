@@ -39,7 +39,7 @@ The following table provides a summary of Agentless scanning technologies in rel
 | Package Manager                                 | Deb (debian, ubuntu) <br> RPM (amazon-linux, fedora, redhat, centos) <br> APK (alpine)                                                    | Deb (debian, ubuntu) <br> RPM (fedora, redhat, centos) <br> APK (alpine)                                                                                                          |
 | Encryption                                      | AWS </br> Unencrypted </br> Encrypted - Platform Managed Key (PMK) </br> **Note**: Encrypted - Customer Managed Key (CMK) is **not** supported | Encrypted - Platform Managed Key (PMK): Azure Disk Storage Server-Side Encryption, Encryption at host </br> **Note**: Encrypted - Customer Managed Key (CMK) is **not** supported |
 | Container runtime                               | Docker, containerd </br> **Note**: CRI-O is **not** supported                                                                             | Docker, containerd </br> **Note**: CRI-O is **not** supported                                                                                                                     |
-| Serverless                                      | AWS Lambda                                                                                                                                | [Request the feature][12]                                                                                                                                                         |
+| Serverless                                      | AWS Lambda                                                                                                                                | To request this feature, contact [Datadog Support][12]                                                                                                                                                         |
 | Application languages (in hosts and containers) | Java, .Net, Python, Node.js, Go, Ruby, Rust, PHP, Swift, Dart, Elixir, Conan, Conda                                                       | Java, .Net, Python, Node.js, Go, Ruby, Rust, PHP, Swift, Dart, Elixir, Conan, Conda                                                                                               |
 
 ## How it works
@@ -131,4 +131,4 @@ To establish estimates on scanner costs, reach out to your [Datadog Customer Suc
 [9]: /security/cloud_security_management
 [10]: /agent/remote_config
 [11]: /sensitive_data_scanner/library_rules/
-[12]: https://www.datadoghq.com/product-preview/agentless-vulnerability-scanning-for-azure/
+[12]: /help
