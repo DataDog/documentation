@@ -876,30 +876,7 @@ If you are using the [custom role feature][21], add your user to a custom role t
 
 ## Restrict access
 
-{{< img src="synthetics/settings/grace_1.png" alt="Set permissions for your test" style="width:70%;" >}}
-
-Use [granular access control][24] to limit who has access to your private location based on roles, teams, or individual users.
-
-To do so:
-
-1. Open the permissions section of the form
-2. Click on `edit access`
-
-{{< img src="synthetics/private_locations/grace.png" alt="Set permissions for your private location" style="width:70%;" >}}
-
-3. Click on `restrict access`
-4. Select teams, roles, or users
-5. Click `add`
-6. Select the level of access you want to associate with each of them
-7. Click on done
-
-| Access level | View PL instructions | View PL metrics | Use PL in test | Edit PL configuration  |
-| ------------ | ---------------------| --------------- | -------------- | ---------------------- |
-| No access    |                      |                 |                |                        |
-| Viewer       | {{< X >}}            | {{< X >}}       | {{< X >}}      |                        |
-| Editor       | {{< X >}}            | {{< X >}}       | {{< X >}}      | {{< X >}}              |
-
-<div class="alert alert-info"><strong>Note</strong>: You will be able to see results from Private Location even if you don't have Viewer access to that Private Location.</div>
+{{% synthetics_grace_permissions %}}
 
 ## Further Reading
 
@@ -925,4 +902,3 @@ To do so:
 [21]: /account_management/rbac#custom-roles
 [22]: https://app.datadoghq.com/synthetics/settings/private-locations
 [23]: /continuous_testing/cicd_integrations/configuration
-[24]: /account_management/rbac/granular_access

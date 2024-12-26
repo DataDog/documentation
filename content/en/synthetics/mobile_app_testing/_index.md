@@ -173,30 +173,7 @@ If you are using the [custom role feature][9], add your user to any custom role 
 
 ### Restrict access
 
-{{< img src="synthetics/settings/grace_1.png" alt="Set permissions for your test" style="width:70%;" >}}
-
-Use [granular access control][10] to limit who has access to your test based on roles, teams, or individual users.
-
-To do so:
-
-1. Open the permissions section of the form
-2. Click on `edit access`
-
-{{< img src="synthetics/settings/grace_2.png" alt="Set permissions for your test" style="width:70%;" >}}
-
-3. Click on `restrict access`
-4. Select teams, roles, or users
-5. Click `add`
-6. Select the level of access you want to associate with each of them
-7. Click on done
-
-| Access level | View test configuration | Edit test configuration | View test results | Run test  |
-| ------------ | ----------------------- | ----------------------- | ------------------| --------- |
-| No access    |                         |                         |                   |           |
-| Viewer       | {{< X >}}               |                         | {{< X >}}         |           |
-| Editor       | {{< X >}}               | {{< X >}}               | {{< X >}}         | {{< X >}} |
-
-<div class="alert alert-info"><strong>Note</strong>: You will be able to see results from Private Location even if you don't have Viewer access to that Private Location.</div>
+{{% synthetics_grace_permissions %}}
 
 ## Further reading
 
@@ -211,7 +188,6 @@ To do so:
 [7]: /synthetics/guide/synthetic-test-monitors/
 [8]: /account_management/rbac/?tab=datadogapplication#datadog-default-roles
 [9]: /account_management/rbac/?tab=datadogapplication#custom-roles
-[10]: /account_management/rbac/granular_access
 [11]: /mobile_app_testing/mobile_app_tests/steps/
 [12]: https://app.datadoghq.com/synthetics/mobile/create
 [13]: /continuous_testing/cicd_integrations/configuration?tab=npm#test-files

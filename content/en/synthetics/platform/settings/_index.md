@@ -278,28 +278,7 @@ If you are using the [custom role feature][12], add your user to any custom role
 
 ### Restrict access
 
-{{< img src="synthetics/settings/grace_1.png" alt="Set permissions for your test" style="width:70%;" >}}
-
-Use [granular access control][22] to limit who has access to your global variable based on roles, teams, or individual users.
-
-To do so:
-
-1. Open the permissions section of the form
-2. Click on `edit access`
-
-{{< img src="synthetics/gv_grace.png" alt="Set permissions for your global variable" style="width:70%;" >}}
-
-3. Click on `restrict access`
-4. Select teams, roles, or users
-5. Click `add`
-6. Select the level of access you want to associate with each of them
-7. Click on done
-
-| Access level | View GV value | View GV metadata | Use GV in test | Edit GV value/metadata  |
-| ------------ | --------------| ---------------- | -------------- | ----------------------- |
-| No access    |               |                  |                |                         |
-| Viewer       | {{< X >}}     | {{< X >}}        | {{< X >}}      |                         |
-| Editor       | {{< X >}}     | {{< X >}}        | {{< X >}}      | {{< X >}}               |
+{{% synthetics_grace_permissions %}}
 
 ## Integration settings
 
@@ -348,4 +327,3 @@ For more information, see [Explore RUM & Session Replay][14].
 [19]: /synthetics/mobile_app_testing/#use-global-variables
 [20]: https://app.datadoghq.com/synthetics/settings/default
 [21]: https://app.datadoghq.com/monitors/settings/policies
-[22]: /account_management/rbac/granular_access
