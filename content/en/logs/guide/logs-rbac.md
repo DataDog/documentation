@@ -22,7 +22,7 @@ In many organizations, logs may contain sensitive information that requires [scr
 This guide covers the following topics:
 
 1. [**Prerequisites for Admins**](#prerequisites): Details the necessary prerequisites.
-2. [**Setting Up Roles for the ACME Team**](#set-up-roles): Instructions on creating roles and assigning team members.
+2. [**Setting Up Roles for the ACME Team**](#setting-up-roles): Instructions on creating roles and assigning team members.
 3. [**Limiting Access to Logs**](#restrict-access-to-logs): How to employ restriction queries to control log access.
 4. [**Configuring Permissions on Log Assets**](#restrict-access-to-log-assets): Guidelines for setting permissions on pipelines, indexes, and archives.
 
@@ -38,7 +38,7 @@ You can customize this setup to fit your organizational needs, either by consoli
 
 In Datadog, permissions are additive; users belonging to multiple teams benefit from combined permissions across all assigned roles.
 
-## The role of Datadog admin
+## The role of Datadog Admin
 
 As a Datadog Admin, you can configure a secure environment for ACME team members to manage their logs without affecting logs from other teams. This guide explains the steps for setting up roles and permissions to restrict log access to ACME Users specifically. You can also adapt the setup to make ACME Admins serve as Datadog Admins if needed.
 
@@ -60,7 +60,7 @@ Navigate to the [Users list][8] to verify that you have all these permissions. I
 
 ### Get an API key and an app key
 
-If you plan to use the Datadog API, you need an API key and an app key from an Admin user. API keys and app keys can be generated on your [Datadog account API key page][9]. Ensure the app key is associated with a user who has the necessary permissions. For more information, see [API and app keys][10].
+If you plan to use the Datadog API, you need an API key and an app key from an Admin user. API keys and app keys can be generated in your [organization settings][9]. Ensure the app key is associated with a user who has the necessary permissions. For more information, see [API and app keys][10].
 
 In this guide, replace `<DATADOG_API_KEY>` and `<DATADOG_APP_KEY>` with your Datadog API key and application key, respectively. A terminal with `CURL` is also required.
 
@@ -84,13 +84,13 @@ This section guides you through creating two roles, `ACME Admin` and `ACME User`
 {{< tabs >}}
 {{% tab "UI" %}}
 
-1. Navigate to the [Groups Section][1] in Datadog Organization Settings.
+1. Navigate to the [Roles section][1] in the Datadog Organization Settings.
 1. Click **New Role** to create `ACME Admin` and `ACME User`roles.
-1. Assign Standard Access and basic permissions, such as Read Index Data and Live Tail.
+1. Assign Standard Access and basic permissions, such as Logs Read Index Data and Logs Live Tail.
 
 {{< img src="logs/guide/rbac/add_role.png" alt="Add a new role" style="width:90%;">}}
 
-For more information on creating roles see [Access Control][3].
+For more information on creating roles, see [Access Control][3].
 
 
 [1]: https://app.datadoghq.com/access/roles
@@ -110,7 +110,7 @@ For more information on creating roles see [Access Control][3].
     "attributes": { "name": "ACME Admin", [...] }
     [...]
     ```
-1. Assign the necessary permissions using to the [Grant Permissions API][3]. 
+1. Assign the necessary permissions using the [Grant Permissions API][3]. 
 
 
 [1]: /api/v2/roles/#create-role
