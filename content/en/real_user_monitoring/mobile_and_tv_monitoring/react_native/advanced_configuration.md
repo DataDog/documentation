@@ -569,7 +569,7 @@ See [Monitor hybrid React Native applications][18].
 [11]: /real_user_monitoring/mobile_and_tv_monitoring/react_native/integrated_libraries/
 [12]: https://github.com/rmobile_and_tv_monitoring/eact-navigation/react-navigation
 [13]: https://github.com/DataDog/dd-sdk-reactnative-examples/tree/main/rum-react-navigation
-[14]: https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/react-native/v0.70/index.d.ts#L548
+[14]: https://github.com/DefinitelyTyped/DefinitelyTyped/blob/683ec4a2b420ff6bd3873a7338416ad3ec0b6595/types/react-native-side-menu/index.d.ts#L2
 [15]: https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest
 [16]: https://reactnative.dev/docs/interactionmanager#runafterinteractions
 [17]: https://github.com/DataDog/dd-sdk-reactnative-examples/tree/main/rum-react-navigation-async
