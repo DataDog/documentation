@@ -74,7 +74,10 @@ The Suspected Cause can be one of the following categories:
 - **Illegal Object Access**: Your code accessed an object which was null or undefined.
 - **Invalid Argument**: A function was called with an invalid argument.
 
-By leveraging the Suspected Cause feature, teams can enhance their efficiency in identifying and resolving issues. This capability enables quicker filtering and prioritization of errors, empowering teams to address potential root causes more effectively.
+Suspected Causes can be used as filters in search, enabling you to quickly locate relevant issues.
+{{< img src="/error_tracking/suspected-cause-filter.png" alt="Filter your search by Suspected Cause" >}}
+
+Suspected Cause enables quicker filtering and prioritization of errors, empowering teams to address potential root causes more effectively.
 
 ### Overriding suspected causes
 
