@@ -7064,16 +7064,21 @@ menu:
       parent: product_analytics
       identifier: pa_journeys
       weight: 2
+    - name: Pathway Diagrams
+      url: product_analytics/journeys/pathways
+      parent: pa_journeys
+      identifier: pa_pathways
+      weight: 201
     - name: Funnel Analysis
       url: product_analytics/journeys/funnel_analysis
       parent: pa_journeys
       identifier: pa_funnel_analysis
-      weight: 201
-    - name: Sankey Diagrams
-      url: product_analytics/journeys/sankey
-      parent: pa_journeys
-      identifier: pa_sankey
       weight: 202
+    - name: Conversions
+      url: product_analytics/journeys/conversions
+      parent: pa_journeys
+      identifier: pa_conversions
+      weight: 203
     - name: Heatmaps
       url: product_analytics/heatmaps
       parent: product_analytics
