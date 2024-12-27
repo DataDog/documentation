@@ -18,18 +18,18 @@ The Datadog Cluster Agent manages the Datadog Admission Controller by creating, 
 To disable the Admission Controller or remove the Cluster Agent, you must first disable the Admission Controller features in the Cluster Agent configuration and redeploy the Cluster Agent.
 Once the Admission Controllers are removed, the Cluster Agent can be safely removed if necessary.
 
-## Requirements
+## Prerequisites
 
-1. DataDog Cluster Agent v7.63+
+Datadog Cluster Agent v7.63+
 
 ## Steps
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
 To disable the Admission Controllers with your Cluster Agent managed by the Datadog Operator:
-* Set `features.admissionController.enabled` to `true` in your `DatadogAgent` configuration.
-* Set `features.admissionController.validation.enabled` to `false` in your `DatadogAgent` configuration.
-* Set `features.admissionController.mutation.enabled` to `false` in your `DatadogAgent` configuration.
+1. Set `features.admissionController.enabled` to `true` in your `DatadogAgent` configuration.
+2. Set `features.admissionController.validation.enabled` to `false` in your `DatadogAgent` configuration.
+3. Set `features.admissionController.mutation.enabled` to `false` in your `DatadogAgent` configuration.
 
 ```yaml
   apiVersion: datadoghq.com/v2alpha1
@@ -46,15 +46,15 @@ To disable the Admission Controllers with your Cluster Agent managed by the Data
           enabled: false
 ```
 
-Note that the `features.admissionController.enabled` parameter is set to `true` to allow the Cluster Agent to manage the Kubernetes Admission Controllers.
+**Note**: The the `features.admissionController.enabled` parameter is set to `true` to allow the Cluster Agent to manage the Kubernetes Admission Controllers.
 
 After redeploying the Cluster Agent with the updated configuration, the Admission Controllers are removed.
 {{% /tab %}}
 {{% tab "Helm" %}}
 To disable the Admission Controllers with your Cluster Agent managed by the Datadog Helm Chart:
-* Set `clusterAgent.admissionController.enabled` to `true`.
-* Set `clusterAgent.admissionController.validation.enabled` to `false`.
-* Set `clusterAgent.admissionController.mutation.enabled` to `false`.
+1. Set `clusterAgent.admissionController.enabled` to `true`.
+2. Set `clusterAgent.admissionController.validation.enabled` to `false`.
+3. Set `clusterAgent.admissionController.mutation.enabled` to `false`.
 
 ```yaml
 clusterAgent:
