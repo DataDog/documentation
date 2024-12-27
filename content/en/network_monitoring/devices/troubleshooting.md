@@ -34,7 +34,7 @@ The output should look similar to the following:
      Average Execution Time : 0s
      Last Execution Date : 2024-11-13 13:12:09 PST / 2024-11-13 21:12:09 UTC (1731532329000)
      Last Successful Execution Date : Never
-     Error: <b>&lt;ERROR MESSAGE&gt;</b> 
+     Error: <ERROR MESSAGE> 
      No traceback
    ```
 
