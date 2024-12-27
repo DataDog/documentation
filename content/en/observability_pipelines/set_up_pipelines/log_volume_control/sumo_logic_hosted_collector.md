@@ -31,6 +31,31 @@ This document walks you through the following steps:
 Enter the following information based on your selected logs destination.
 
 {{< tabs >}}
+{{% tab "Datadog Archives" %}}
+
+{{% observability_pipelines/destination_settings/datadog_archives_note %}}
+
+{{% observability_pipelines/destination_settings/datadog_archives_prerequisites %}}
+
+To set up the destination, follow the instructions for the cloud provider you are using to archive your logs.
+
+{{% collapse-content title="Amazon S3" level="h5" %}}
+
+{{% observability_pipelines/destination_settings/datadog_archives_amazon_s3 %}}
+
+{{% /collapse-content %}}
+{{% collapse-content title="Google Cloud Storage" level="h5" %}}
+
+{{% observability_pipelines/destination_settings/datadog_archives_google_cloud_storage %}}
+
+{{% /collapse-content %}}
+{{% collapse-content title="Azure Storage" level="h5" %}}
+
+{{% observability_pipelines/destination_settings/datadog_archives_azure_storage %}}
+
+{{% /collapse-content %}}
+{{% /tab %}}
+
 {{% tab "Datadog" %}}
 
 {{% observability_pipelines/destination_settings/datadog %}}
