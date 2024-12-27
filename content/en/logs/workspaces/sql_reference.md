@@ -39,7 +39,7 @@ WHERE department = 'Sales' AND name LIKE 'J%' {{< /code-block >}} |
     ELSE 'Standard Order' 
   END AS order_type 
 FROM orders {{< /code-block >}} |
-| `WINDOW` | Performs performs a calculation across a set of table rows that are somehow related to the current row.                 | {{< code-block lang="sql" >}}SELECT
+| `WINDOW` | Performs a calculation across a set of table rows that are somehow related to the current row.                 | {{< code-block lang="sql" >}}SELECT
   timestamp,
   service_name,
   cpu_usage_percent,
@@ -51,7 +51,7 @@ FROM products {{< /code-block >}} |
 
 ## Functions
 
-The following SQL functions are supported:
+The following SQL functions are supported. For Window function, see the separate [Window function](#window-functions) section in this documentation.
 
 | Function               | Return Type                     | Description                                                             |
 |------------------------|---------------------------------|-------------------------------------------------------------------------|
@@ -175,9 +175,26 @@ SELECT
 
 {{% /collapse-content %}} 
 
+## Window Functions
+
+This table provides an overview of the supprted window functions. For comprehensive details and examples, see to the [PostgreSQL documentation][2].
+
+| Function                | Return Type       | Description                                                            |
+|-------------------------|-------------------|------------------------------------------------------------------------|
+| `OVER`                  | N/A               | Defines a window for a set of rows for other window functions to operate on. |
+| `PARTITION BY`          | N/A               | Divides the result set into partitions, specifically for applying window functions. |
+| `RANK()`                | integer           | Assigns a rank to each row within a partition, with gaps for ties.     |
+| `ROW_NUMBER()`          | integer           | Assigns a unique sequential number to each row within a partition.     |
+| `LEAD(column n)`        | typeof column     | Returns the value from the next row in the partition.                  |
+| `LAG(column n)`         | typeof column     | Returns the value from the previous row in the partition.              |
+| `FIRST_VALUE(column n)` | typeof column     | Returns the first value in an ordered set of values.                   |
+| `LAST_VALUE(column n)`  | typeof column     | Returns the last value in an ordered set of values.                    |
+| `NTH_VALUE(column n, offset)`| typeof column | Returns the value at the specified offset in an ordered set of values. |
+
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /logs/workspaces/#analysis-cell
+[2]: https://www.postgresql.org/docs/current/functions-window.html
