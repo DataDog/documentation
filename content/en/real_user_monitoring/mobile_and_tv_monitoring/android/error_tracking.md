@@ -85,7 +85,7 @@ Mapping files are used to deobfuscate stack traces, which helps in debugging err
 
 Depending on the [Android Gradle plugin][1] version, the matching of stack traces and mapping files relies on different fields:
 
-- Version 1.13.0 uses the `build_id` field (you must use Datadog Android SDK 2.8.0 or newer to support this field)
+- Version 1.13.0 uses the `build_id` field (you must use Datadog Android SDK 2.8.0 or later to support this field)
 - Older versions use a combination of the `service`, `version`, and `variant` fields
 
 ### Upload your mapping file
