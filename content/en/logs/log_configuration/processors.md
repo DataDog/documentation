@@ -771,7 +771,7 @@ There are two ways to define correlation between application spans and logs:
 
 Define the span remapper processor on the [**Pipelines** page][1]. Enter the Span ID attribute path in the processor tile as follows:
 
-{{< img src="logs/log_configuration/processor/trace_processor.png" alt="Trace ID processor" style="width:80%;">}}
+{{< img src="logs/log_configuration/processor/span_id_remapper.png" alt="Span ID processor" style="width:80%;">}}
 
 [1]: https://app.datadoghq.com/logs/pipelines
 {{% /tab %}}
