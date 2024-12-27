@@ -42,9 +42,9 @@ Your Android application may be running native code (C/C++) for performance or c
 
 1. Add the Gradle dependency by declaring the library as a dependency in your `build.gradle` file:
 
-   ```groovy
+   ```kotlin
     dependencies {
-        implementation "com.datadoghq:dd-sdk-android-ndk:x.x.x" 
+        implementation("com.datadoghq:dd-sdk-android-ndk:x.x.x")
         //(...)
     }
    ```
@@ -81,11 +81,11 @@ For any Android version, you can override the default setting for reporting non-
 
 ## Get deobfuscated stack traces
 
-Mapping files are used to deobfuscate stack traces, which helps in debugging errors. Using a unique build ID that gets generated, Datadog automatically matches the correct stack traces with the corresponding mapping files. This ensures that regardless of when the mapping file was uploaded (either during pre-production or production builds), the correct information is available for efficient QA processes when reviewing crashes and errors reported in Datadog.
+Mapping files are used to deobfuscate stack traces, which helps in debugging errors. Using a unique build ID that gets generated for each build run, Datadog automatically matches the correct stack traces with the corresponding mapping files. This ensures that regardless of when the mapping file was uploaded (either during pre-production or production builds), the correct information is available for efficient QA processes when reviewing crashes and errors reported in Datadog.
 
 Depending on the [Android Gradle plugin][1] version, the matching of stack traces and mapping files relies on different fields:
 
-- Version 1.13.0 uses the `build_id` field
+- Version 1.13.0 uses the `build_id` field (you must use Datadog Android SDK 2.8.0 or newer to support this field)
 - Older versions use a combination of the `service`, `version`, and `variant` fields
 
 ### Upload your mapping file
@@ -97,7 +97,7 @@ Depending on the [Android Gradle plugin][1] version, the matching of stack trace
 
 1. Add the [Android Gradle Plugin][1] to your Gradle project using the following code snippet.
 
-   ```groovy
+   ```kotlin
    // In your app's build.gradle script
    plugins {
        id("com.datadoghq.dd-sdk-android-gradle-plugin") version "x.y.z"
@@ -107,7 +107,7 @@ Depending on the [Android Gradle plugin][1] version, the matching of stack trace
 2. [Create a dedicated Datadog API key][2] and export it as an environment variable named `DD_API_KEY` or `DATADOG_API_KEY`. Alternatively, pass it as a task property, or if you have `datadog-ci.json` file in the root of your project, it can be taken from an `apiKey` property there.
 3. Optionally, configure the plugin to upload files to the EU region by configuring the plugin in your `build.gradle` script:
    
-   ```groovy
+   ```kotlin
    datadog {
        site = "EU1"
    }
@@ -133,7 +133,7 @@ Depending on the [Android Gradle plugin][1] version, the matching of stack trace
 {{% tab "EU" %}}
 1. Add the [Android Gradle Plugin][1] to your Gradle project using the following code snippet.
 
-   ```groovy
+   ```kotlin
    // In your app's build.gradle script
    plugins {
        id("com.datadoghq.dd-sdk-android-gradle-plugin") version "x.y.z"
@@ -143,7 +143,7 @@ Depending on the [Android Gradle plugin][1] version, the matching of stack trace
 2. [Create a dedicated Datadog API key][2] and export it as an environment variable named `DD_API_KEY` or `DATADOG_API_KEY`. Alternatively, pass it as a task property, or if you have `datadog-ci.json` file in the root of your project, it can be taken from an `apiKey` property there.
 3. Configure the plugin to use the EU region by adding the following snippet in your app's `build.gradle` script file:
 
-   ```groovy
+   ```kotlin
    datadog {
        site = "EU1"
    }
@@ -178,7 +178,7 @@ There are several plugin properties that can be configured through the plugin ex
 
 For example, for a `fooBarRelease` variant, you can use the following configuration:
 
-```groovy
+```kotlin
 datadog {
     foo {
         versionName = "foo"
@@ -216,7 +216,7 @@ If you want to run this task in a CI/CD pipeline, and the task is required as pa
 
 For example:
 
-```groovy
+```kotlin
 tasks["minify${variant}WithR8"].finalizedBy { tasks["uploadMapping${variant}"] }
 ```
 
@@ -233,7 +233,7 @@ Mapping files are limited to **50** MB. If your project has a mapping file large
 - Set the `mappingFileTrimIndents` option to `true`. This reduces your file size by 5%, on average.
 - Set a map of `mappingFilePackagesAliases`: This replaces package names with shorter aliases. **Note**: Datadog's stacktrace uses the same alias instead of the original package name, so it's better to use this option for third party dependencies.
 
-```groovy
+```kotlin
 datadog {
     mappingFileTrimIndents = true
     mappingFilePackageAliases = mapOf(
