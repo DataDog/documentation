@@ -2564,6 +2564,32 @@ menu:
           - ListSecurityFilters
         unstable: []
         order: 18
+    - name: List vulnerabilities
+      url: '#list-vulnerabilities'
+      identifier: security-monitoring-list-vulnerabilities
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListVulnerabilities
+        unstable:
+          - v2
+        order: 3
+    - name: List vulnerable assets
+      url: '#list-vulnerable-assets'
+      identifier: security-monitoring-list-vulnerable-assets
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListVulnerableAssets
+        unstable:
+          - v2
+        order: 4
     - name: Get a finding
       url: '#get-a-finding'
       identifier: security-monitoring-get-a-finding
