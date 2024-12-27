@@ -23,8 +23,7 @@ Setting up Network Path involves configuring your Linux environment to monitor a
 
 ## Prerequisites
 
-- Agent version `7.59` or higher is required.
-- [CNM][1] must be enabled.
+[CNM][1] must be enabled.
 
 **Note**: If your network configuration restricts outbound traffic, follow the setup instructions on the [Agent proxy configuration][2] documentation.
 
@@ -34,6 +33,8 @@ Setting up Network Path involves configuring your Linux environment to monitor a
 
 {{< tabs >}}
 {{% tab "Linux" %}}
+
+Agent `v7.59+` is required.
 
 Manually configure individual paths by specifying the exact endpoint you want to test. This allows you to target specific network routes for monitoring.
 
@@ -134,6 +135,8 @@ Manually configure individual paths by specifying the exact endpoint you want to
 {{% /tab %}}
 {{% tab "Windows" %}}
 
+Agent `v7.61+` is required.
+
 **Note**: Windows only supports TCP traceroutes.
 
 In Windows environments, the Agent uses UDP by default to monitor individual paths. If the protocol is not specified in the configuration, the Agent attempts a UDP traceroute, and any errors are logged. To work around this, ensure the protocol is set to TCP in the following example:
@@ -153,6 +156,8 @@ instances:
 
 {{< tabs >}}
 {{% tab "Linux" %}}
+
+Agent `v7.59+` is required.
 
 **Note**: Network traffic paths is experimental and is not yet stable. Do not deploy network traffic paths widely in a production environment.
 
@@ -200,6 +205,8 @@ Configure network traffic paths to allow the Agent to automatically discover and
 
 {{% /tab %}}
 {{% tab "Windows" %}}
+
+Agent `v7.61+` is required.
 
 For network traffic paths on Windows environments, only detected TCP connections are shown.
 
