@@ -18,9 +18,9 @@ Export your Workspaces cell as a dataset to dashboards and notebooks. The export
 
 From your workspace:
 
-1. Find the dataset you want to export.  
+1. Find the cell you want to export as a dataset.  
 2. Click **Save to Dashboard** or select **Save to Notebook** from the dropdown menu.  
-3. In the modal, choose an existing dashboard or notebook, or add the dataset to a new dashboard or notebook.  
+3. In the modal, choose an existing dashboard or notebook, or add the cell as a dataset to a new dashboard or notebook.  
 4. Click **Save**.  
 5. (Optional) Rename the source name and click **Update**. The source name defaults to `<Workspace name> - <Cell name>`.
 6. A purple banner indicates a cell that is exported.
