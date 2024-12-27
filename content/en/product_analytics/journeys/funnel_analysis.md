@@ -43,6 +43,8 @@ When you have a starting point in mind, but aren't sure what your users did next
 
 **Note**: Any action or view that happens between two steps in a funnel does not impact the step-by-step or overall conversion rate. As long as step 1 and step 2 happen in the right order in a given session at least once, it counts as a single converted session.
 
+
+
 ### Filtering
 
 When constructing your funnel, you can add [default attributes][2] (core, device, operating system, geo-location, and user) and [session-specific][3] attributes to analyze the data further. Click the **Add Filter** button to view the full list of available attributes.
