@@ -64,7 +64,7 @@ Each event generated is tagged with the version, the service, and the environmen
 
 ## Suspected Cause
 
-Suspected Cause provides an initial label assigned to issues at the time of their creation, representing the first hypothesis a developer may have regarding the root cause of an error. This preliminary classification helps teams streamline their troubleshooting efforts and enhances their understanding of recurring problems.
+Suspected Cause assigns a label to issues at creation time, representing the first hypothesis a developer may have regarding the root cause of an error. This preliminary classification helps teams streamline their troubleshooting efforts and enhances their understanding of recurring problems.
 
 The Suspected Cause can be one of the following categories:
 
@@ -74,7 +74,7 @@ The Suspected Cause can be one of the following categories:
 - **Illegal Object Access**: Your code accessed an object which was null or undefined.
 - **Invalid Argument**: A function was called with an invalid argument.
 
-Suspected Causes can be used as filters in search, enabling you to quickly locate relevant issues.
+Suspected Causes can be used as filters in search, enabling you to easily locate relevant issues.
 {{< img src="/error_tracking/suspected-cause-filter.png" alt="Filter your search by Suspected Cause" >}}
 
 Suspected Cause enables quicker filtering and prioritization of errors, empowering teams to address potential root causes more effectively.
