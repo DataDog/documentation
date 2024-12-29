@@ -1,11 +1,10 @@
 ---
-title: Setting Up Database Monitoring for self hosted Postgres
+title: Setting Up Database Monitoring for Self-Hosted Postgres
 description: Install and configure Database Monitoring for self-hosted Postgres.
 further_reading:
 - link: "/integrations/postgres/"
   tag: "Documentation"
   text: "Basic Postgres Integration"
-
 ---
 
 Database Monitoring provides deep visibility into your Postgres databases by exposing query metrics, query samples, explain plans, database states, failovers, and events.
@@ -55,6 +54,8 @@ Configure the following [parameters][4] in the `postgresql.conf` file and then *
 The Datadog Agent requires read-only access to the database server in order to collect statistics and queries.
 
 The following SQL commands should be executed on the **primary** database server (the writer) in the cluster if Postgres is replicated. Choose a PostgreSQL database on the database server for the Agent to connect to. The Agent can collect telemetry from all databases on the database server regardless of which one it connects to, so a good option is to use the default `postgres` database. Choose a different database only if you need the Agent to run [custom queries against data unique to that database][6].
+
+{{% collapse-content title="DBM instructions" level="h3" %}}
 
 Connect to the chosen database as a superuser (or another user with sufficient permissions). For example, if your chosen database is `postgres`, connect as the `postgres` user using [psql][7] by running:
 
@@ -159,51 +160,53 @@ SECURITY DEFINER;
 ```
 
 ### Securely store your password
+
 {{% dbm-secret %}}
 
-### Verify
+{{% /collapse-content %}}
 
-To verify the permissions are correct, run the following commands to confirm the Agent user is able to connect to the database and read the core tables:
+{{% collapse-content title="Integration-only instructions" level="h3" %}}
 
-{{< tabs >}}
-{{% tab "Postgres ≥ 10" %}}
+To get started with the standard PostgreSQL integration, create a read-only `datadog` user with proper access to your PostgreSQL server. Start `psql` on your PostgreSQL database.
 
-```shell
-psql -h localhost -U datadog postgres -A \
-  -c "select * from pg_stat_database limit 1;" \
-  && echo -e "\e[0;32mPostgres connection - OK\e[0m" \
-  || echo -e "\e[0;31mCannot connect to Postgres\e[0m"
-psql -h localhost -U datadog postgres -A \
-  -c "select * from pg_stat_activity limit 1;" \
-  && echo -e "\e[0;32mPostgres pg_stat_activity read OK\e[0m" \
-  || echo -e "\e[0;31mCannot read from pg_stat_activity\e[0m"
-psql -h localhost -U datadog postgres -A \
-  -c "select * from pg_stat_statements limit 1;" \
-  && echo -e "\e[0;32mPostgres pg_stat_statements read OK\e[0m" \
-  || echo -e "\e[0;31mCannot read from pg_stat_statements\e[0m"
-```
-{{% /tab %}}
-{{% tab "Postgres 9.6" %}}
+For PostgreSQL version 10 and above, run:
 
 ```shell
-psql -h localhost -U datadog postgres -A \
-  -c "select * from pg_stat_database limit 1;" \
-  && echo -e "\e[0;32mPostgres connection - OK\e[0m" \
-  || echo -e "\e[0;31mCannot connect to Postgres\e[0m"
-psql -h localhost -U datadog postgres -A \
-  -c "select * from pg_stat_activity limit 1;" \
-  && echo -e "\e[0;32mPostgres pg_stat_activity read OK\e[0m" \
-  || echo -e "\e[0;31mCannot read from pg_stat_activity\e[0m"
-psql -h localhost -U datadog postgres -A \
-  -c "select * from pg_stat_statements limit 1;" \
-  && echo -e "\e[0;32mPostgres pg_stat_statements read OK\e[0m" \
-  || echo -e "\e[0;31mCannot read from pg_stat_statements\e[0m"
+create user datadog with password '<PASSWORD>';
+grant pg_monitor to datadog;
+grant SELECT ON pg_stat_database to datadog;
 ```
 
-{{% /tab %}}
-{{< /tabs >}}
+For older PostgreSQL versions, run:
 
-When it prompts for a password, use the password you entered when you created the `datadog` user.
+```shell
+create user datadog with password '<PASSWORD>';
+grant SELECT ON pg_stat_database to datadog;
+```
+
+To verify the permissions are correct, run the following command:
+
+```shell
+psql -h localhost -U datadog postgres -c \
+"select * from pg_stat_database LIMIT(1);" \
+&& echo -e "\e[0;32mPostgres connection - OK\e[0m" \
+|| echo -e "\e[0;31mCannot connect to Postgres\e[0m"
+```
+
+When it prompts for a password, enter the one used in the first command.
+
+**Note**: For PostgreSQL versions 9.6 and below, run the following and create a `SECURITY DEFINER` to read from `pg_stat_activity`.
+
+```shell
+CREATE FUNCTION pg_stat_activity() RETURNS SETOF pg_catalog.pg_stat_activity AS
+$$ SELECT * from pg_catalog.pg_stat_activity; $$
+LANGUAGE sql VOLATILE SECURITY DEFINER;
+
+CREATE VIEW pg_stat_activity_dd AS SELECT * FROM pg_stat_activity();
+grant SELECT ON pg_stat_activity_dd to datadog;
+```
+
+{{% /collapse-content %}}
 
 ## Install the Agent
 
@@ -245,8 +248,6 @@ Installing the Datadog Agent also installs the Postgres check which is required 
 
 {{% /tab %}}
 {{< /tabs >}}
-
-**Note**: Wrap your password in single quotes if a special character is present.
 
 2. [Restart the Agent][10].
 
@@ -302,7 +303,14 @@ PostgreSQL default logging is to `stderr`, and logs do not include detailed info
 
 [Run the Agent's status subcommand][13] and look for `postgres` under the Checks section. Or visit the [Databases][14] page to get started!
 
+## Data collected
+
+### Metrics
+
+{{< get-metrics-from-git "postgres" >}}
+
 ## Example Agent Configurations
+
 {{% dbm-postgres-agent-config-examples %}}
 
 ## Troubleshooting
