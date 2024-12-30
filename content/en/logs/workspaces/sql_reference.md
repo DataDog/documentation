@@ -11,7 +11,7 @@ further_reading:
 SQL in [Analysis cells][1] allows you to analyze and manipulate data within Log Workspaces. This documentation covers the SQL support available in Log Workspaces and includes:
 - [Syntax compatible with PostgreSQL](#syntax)
 - [SQL functions](#functions)
-
+- [Window functions](#window-functions)
 
 {{< img src="/logs/workspace/sql_reference/sql_syntax_analysis_cell.png" alt="Example workspace cell with SQL syntax" style="width:100%;" >}}
 
