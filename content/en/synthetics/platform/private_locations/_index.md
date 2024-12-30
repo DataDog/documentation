@@ -878,6 +878,12 @@ If you are using the [custom role feature][21], add your user to a custom role t
 
 {{% synthetics_grace_permissions %}}
 
+| Access level | View PL instructions | View PL metrics | Use PL in test | Edit PL configuration  |
+| ------------ | ---------------------| --------------- | -------------- | ---------------------- |
+| No access    |                      |                 |                |                        |
+| Viewer       | {{< X >}}            | {{< X >}}       | {{< X >}}      |                        |
+| Editor       | {{< X >}}            | {{< X >}}       | {{< X >}}      | {{< X >}}              |
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}

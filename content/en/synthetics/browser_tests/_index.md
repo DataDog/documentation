@@ -223,6 +223,12 @@ If you are using the [custom role feature][15], add your user to any custom role
 
 {{% synthetics_grace_permissions %}}
 
+| Access level | View test configuration | Edit test configuration | View test results | Run test  | View recording | Edit recording |
+| ------------ | ----------------------- | ----------------------- | ------------------| --------- | -------------- | -------------- |
+| No access    |                         |                         |                   |           |                |                |
+| Viewer       | {{< X >}}               |                         | {{< X >}}         |           |                |                |
+| Editor       | {{< X >}}               | {{< X >}}               | {{< X >}}         | {{< X >}} | {{< X >}}      | {{< X >}}      |
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}

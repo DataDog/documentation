@@ -280,6 +280,12 @@ If you are using the [custom role feature][12], add your user to any custom role
 
 {{% synthetics_grace_permissions %}}
 
+| Access level | View GV value | View GV metadata | Use GV in test | Edit GV value/metadata  |
+| ------------ | --------------| ---------------- | -------------- | ----------------------- |
+| No access    |               |                  |                |                         |
+| Viewer       | {{< X >}}     | {{< X >}}        | {{< X >}}      |                         |
+| Editor       | {{< X >}}     | {{< X >}}        | {{< X >}}      | {{< X >}}               |
+
 ## Integration settings
 
 {{< img src="synthetics/settings/integration_settings.png" alt="Integration Settings page" style="width:100%;">}}
