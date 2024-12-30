@@ -17,23 +17,6 @@ title: Filter Selector Menu Design
         font-size: 14px;
         line-height: 18px;
     }
-    
-    .cdocs-dropdown-container .btn {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        border: 1px solid #c7c7c7;
-        background: #f6f6f6;
-        border-radius: 4px;
-        height: 31px;
-        padding: 0rem 0.6rem 0.1rem;
-        color: #632CA6;
-        /* width: 100px; */
-        font-size: 16px;
-        line-height: 20px;
-        z-index: 3;
-        font-variant: lining-nums;
-    }
 
     .cdocs-dropdown-container {
         margin-bottom: 1em;
@@ -44,14 +27,7 @@ title: Filter Selector Menu Design
     .cdocs-dropdown-options-list {
         background-color: rgb(255, 255, 255);
         box-shadow: rgba(0, 0, 0, 0.25) 0px 4px 20px 0px;
-        border-bottom-left-radius: 6px;
-        border-bottom-right-radius: 6px;
-        border-top-left-radius: 6px;
-        border-top-right-radius: 6px;
-    }
-
-    .cdocs-btn-label {
-        /* margin-right: 0.5em; */
+        border-radius: 6px;
     }
 
     .cdocs-dropdown-option:hover {
@@ -62,11 +38,7 @@ title: Filter Selector Menu Design
     .cdocs-dropdown-option {
         display: block;
         width: 100%;
-        padding-bottom: 4px;
-        padding-left: 16px;
-        padding-right: 16px;
-        padding-top: 4px;
-        clear: both;
+        padding: 4px 16px;
         font-weight: 400;
         color: black;
         text-align: inherit;
@@ -84,10 +56,7 @@ title: Filter Selector Menu Design
         color: rgb(99, 44, 166);
         border: 1px solid rgb(199, 199, 199);
         border-radius: 4px;
-        padding-bottom: 1.6px;
-        padding-left: 9.6px;
-        padding-right: 9.6px;
-        padding-top: 0px;
+        padding: 0rem 0.6rem 0.1rem;
         background-color: rgb(246, 246, 246);
         font-weight: 600;
         line-height: 20px;
