@@ -83,7 +83,7 @@ Select the cloud provider you are using to archive your logs.
 
 ### Set up the destinations
 
-Enter the following information based on your selected logs destination.
+Enter the following information based on your selected logs destinations.
 
 {{< tabs >}}
 {{% tab "Datadog Archives" %}}

@@ -29,7 +29,7 @@ This document walks you through the following steps:
 
 ### Set up the destinations
 
-Enter the following information based on your selected logs destination.
+Enter the following information based on your selected logs destinations.
 
 {{< tabs >}}
 {{% tab "Datadog Archives" %}}
@@ -55,8 +55,8 @@ To set up the destination, follow the instructions for the cloud provider you ar
 {{% observability_pipelines/destination_settings/datadog_archives_azure_storage %}}
 
 {{% /collapse-content %}}
-{{% /tab %}}
 
+{{% /tab %}}
 {{% tab "Datadog" %}}
 
 {{% observability_pipelines/destination_settings/datadog %}}
