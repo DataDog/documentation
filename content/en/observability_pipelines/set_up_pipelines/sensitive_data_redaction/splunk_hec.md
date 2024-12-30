@@ -274,6 +274,16 @@ To set up the destination, follow the instructions for the cloud provider you ar
 {{% observability_pipelines/destination_env_vars/amazon_security_lake %}}
 
 {{% /tab %}}
+{{% tab "Microsoft Sentinel" %}}
+
+{{% observability_pipelines/destination_env_vars/microsoft_sentinel %}}
+
+{{% /tab %}}
+{{% tab "SentinelOne" %}}
+
+{{% observability_pipelines/destination_env_vars/sentinelone %}}
+
+{{% /tab %}}
 {{< /tabs >}}
 
 1. Follow the instructions for your environment to install the Worker.
