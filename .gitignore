@@ -271,4 +271,4 @@ local/bin/py/submit_github_status_check.py
 !local/bin/py/build/configuration/integration_merge.yaml
 
 # Generated Markdoc author console
-static/markdoc
+**/static/markdoc/console
