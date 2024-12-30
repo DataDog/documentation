@@ -3,7 +3,7 @@ Use [granular access control][100] to limit who has access to your test based on
 1. Open the permissions section of the form.
 2. Click **Edit Access**.
 <figure class="text-center">
-<img src="{{ .Site.Params.img_url}}images/synthetics/settings/grace_2.png" alt="Set permissions for your test from Private Locations configuration form" width="80%">
+<img src="{{ .Site.Params.img_url}}images/synthetics/settings/grace_2.png" alt="Set permissions for your test from Private Locations configuration form" width="100%">
 </figure>
 
 3. Click **Restrict Access**.
