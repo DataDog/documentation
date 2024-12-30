@@ -201,6 +201,25 @@ To set up the destination, follow the instructions for the cloud provider you ar
 1. Enter the Datadog Agent address. The Observability Pipelines Worker listens to this address and port for incoming logs from the Datadog Agent. For example, `0.0.0.0:<port_number>`.
 1. Provide the environment variables for each of your selected destinations.
 {{< tabs >}}
+{{% tab "Datadog Archives" %}}
+
+{{% collapse-content title="Amazon S3" level="h5" %}}
+
+{{% observability_pipelines/destination_env_vars/datadog_archives_amazon_s3 %}}
+
+{{% /collapse-content %}}
+{{% collapse-content title="Google Cloud Storage" level="h5" %}}
+
+{{% observability_pipelines/destination_env_vars/datadog_archives_google_cloud_storage %}}
+
+{{% /collapse-content %}}
+{{% collapse-content title="Azure Storage" level="h5" %}}
+
+{{% observability_pipelines/destination_env_vars/datadog_archives_azure_storage %}}
+
+{{% /collapse-content %}}
+
+{{% /tab %}}
 {{% tab "Datadog" %}}
 
 {{% observability_pipelines/destination_env_vars/datadog %}}

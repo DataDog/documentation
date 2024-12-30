@@ -190,6 +190,25 @@ To set up the destination, follow the instructions for the cloud provider you ar
 1. Enter the Splunk TCP address. This is the address and port where your applications are sending their logging data. The Observability Pipelines Worker listens to this address for incoming logs.
 1. Provide the environment variables for each of your selected destinations. See [prerequisites](#prerequisites) for more information.
 {{< tabs >}}
+{{% tab "Datadog Archives" %}}
+
+{{% collapse-content title="Amazon S3" level="h5" %}}
+
+{{% observability_pipelines/destination_env_vars/datadog_archives_amazon_s3 %}}
+
+{{% /collapse-content %}}
+{{% collapse-content title="Google Cloud Storage" level="h5" %}}
+
+{{% observability_pipelines/destination_env_vars/datadog_archives_google_cloud_storage %}}
+
+{{% /collapse-content %}}
+{{% collapse-content title="Azure Storage" level="h5" %}}
+
+{{% observability_pipelines/destination_env_vars/datadog_archives_azure_storage %}}
+
+{{% /collapse-content %}}
+
+{{% /tab %}}
 {{% tab "Datadog" %}}
 
 {{% observability_pipelines/destination_env_vars/datadog %}}
