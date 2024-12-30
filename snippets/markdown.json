@@ -277,5 +277,14 @@
             "---"
 		],
 		"description": "Eng Blog Frontmatter"
-	}
+	},
+	"Collapse": {
+			"prefix": ";;collapse",
+			"body": [
+				"{{% collapse-content title=\"Datadog Operator\" level=\"h4\" %}}",
+				"...",
+				"{{% /collapse-content %}}"
+			],
+			"description": "Collapse and expand content"
+	}	
 }
