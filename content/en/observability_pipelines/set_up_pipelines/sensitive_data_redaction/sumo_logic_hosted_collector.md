@@ -200,6 +200,11 @@ To set up the destination, follow the instructions for the cloud provider you ar
 {{% observability_pipelines/processors/add_env_vars %}}
 
 {{% /tab %}}
+{{% tab "Remap to OCSF" %}}
+
+{{% observability_pipelines/processors/remap_ocsf %}}
+
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Install the Observability Pipelines Worker
