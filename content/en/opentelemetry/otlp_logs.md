@@ -1,6 +1,5 @@
 ---
 title: Datadog OTLP Logs Intake Endpoint
-private: true
 further_reading:
   - link: "https://opentelemetry.io/docs/concepts/sdk-configuration/general-sdk-configuration/"
     tag: "External Site"
@@ -22,6 +21,9 @@ further_reading:
 Datadog's OpenTelemetry Protocol (OTLP) logs intake API endpoint allows you to send logs directly to Datadog. With this feature, you don't need to run the [Datadog Agent][2] or [OpenTelemetry Collector + Datadog Exporter][1].
 
 Choose this option for a straightforward setup to send logs directly to Datadog without using the Datadog Agent or OpenTelemetry Collector.
+
+{{< site-region region="us,us3,us5,eu" >}}
+
 
 ## Configuration
 
@@ -113,6 +115,8 @@ If you receive a `403 Forbidden` error when sending logs to the Datadog OTLP log
 
 - The endpoint URL is incorrect for your organization.  
    **Solution**: Use the correct endpoint URL for your organization. Your site is {{< region-param key=dd_datacenter code="true" >}}, so you need to use the {{< region-param key="otlp_logs_endpoint" code="true" >}} endpoint.
+   
+{{< /site-region >}}
 
 ## Further reading
 
