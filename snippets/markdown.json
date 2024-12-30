@@ -281,8 +281,8 @@
 	"Collapse": {
 			"prefix": ";;collapse",
 			"body": [
-				"{{% collapse-content title=\"${1:title}\" level=\"${2|h4,h1,h2,h3,h5,p|}\" %}}",
-				"${3:...}",
+				"{{% collapse-content title=\"${1:title}\" level=\"${2|h4,h1,h2,h3,h5,p|}\" expanded=\"${3|false,true|}\" %}}",
+				"${4:...}",
 				"{{% /collapse-content %}}"
 			],
 			"description": "Collapse and expand content"
