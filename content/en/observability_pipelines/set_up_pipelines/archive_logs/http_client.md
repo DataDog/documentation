@@ -153,6 +153,11 @@ Follow the instructions for the cloud provider you are using to archive your log
 {{% observability_pipelines/destination_settings/new_relic %}}
 
 {{% /tab %}}
+{{% tab "Amazon Security Lake" %}}
+
+{{% observability_pipelines/destination_settings/amazon_security_lake %}}
+
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Set up processors

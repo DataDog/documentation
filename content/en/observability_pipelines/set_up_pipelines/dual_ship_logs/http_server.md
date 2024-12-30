@@ -102,6 +102,11 @@ To set up the destination, follow the instructions for the cloud provider you ar
 {{% observability_pipelines/destination_settings/new_relic %}}
 
 {{% /tab %}}
+{{% tab "Amazon Security Lake" %}}
+
+{{% observability_pipelines/destination_settings/amazon_security_lake %}}
+
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Set up processors
