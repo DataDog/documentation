@@ -1,4 +1,4 @@
-Use [granular access control][12] to limit who has access to your test based on roles, teams, or individual users:
+Use [granular access control][100] to limit who has access to your test based on roles, teams, or individual users:
 
 1. Open the permissions section of the form.
 2. Click **Edit Access**.
@@ -20,4 +20,4 @@ Use [granular access control][12] to limit who has access to your test based on 
 | Viewer       | Yes                     |                         | Yes               |           |
 | Editor       | Yes                     | Yes                     | Yes               | Yes       |
 
-[12]: /account_management/rbac/granular_access
+[100]: /account_management/rbac/granular_access
