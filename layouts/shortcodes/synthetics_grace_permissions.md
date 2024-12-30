@@ -14,4 +14,10 @@ Use [granular access control][12] to limit who has access to your test based on 
 
 <div class="alert alert-info"><strong>Note</strong>: You can view results from a Private Location even without Viewer access to that Private Location.</div>
 
+| Access level | View test configuration | Edit test configuration | View test results | Run test  |
+| ------------ | ----------------------- | ----------------------- | ------------------| --------- |
+| No access    |                         |                         |                   |           |
+| Viewer       | Yes                     |                         | Yes               |           |
+| Editor       | Yes                     | Yes                     | Yes               | Yes       |
+
 [12]: /account_management/rbac/granular_access
