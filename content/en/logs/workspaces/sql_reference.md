@@ -39,7 +39,7 @@ WHERE department = 'Sales' AND name LIKE 'J%' {{< /code-block >}} |
     ELSE 'Standard Order' 
   END AS order_type 
 FROM orders {{< /code-block >}} |
-| `WINDOW` | Performs a calculation across a set of table rows that are somehow related to the current row.                 | {{< code-block lang="sql" >}}SELECT
+| `WINDOW` | Performs a calculation across a set of table rows that are related to the current row.                 | {{< code-block lang="sql" >}}SELECT
   timestamp,
   service_name,
   cpu_usage_percent,
@@ -175,7 +175,7 @@ SELECT
 
 {{% /collapse-content %}} 
 
-## Window Functions
+## Window functions
 
 This table provides an overview of the supprted window functions. For comprehensive details and examples, see to the [PostgreSQL documentation][2].
 
