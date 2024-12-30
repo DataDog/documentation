@@ -280,7 +280,7 @@ If you are using the [custom role feature][12], add your user to any custom role
 
 Access restriction is available for customers using [custom roles][11] on their accounts. If you are using the [custom role feature][12], add your user to any custom role that includes `synthetics_global_variable_read` and `synthetics_global_variable_write` permissions. 
 
-You can restrict access to a global variable based on the roles in your organization. When creating a global variable, choose which roles (in addition to your user) can read and write your global variable in **Permissions settings**. 
+You can restrict access to a global variable based on the roles in your organization. When creating a global variable, choose which roles (in addition to your user) can read and write your global variable in **Permissions settings**. Restricting a variable prevents other users to add it in a test and use it, but they will still be able to see the variable name if it was added in a test by an authorized user. 
 
 {{< img src="synthetics/settings/restrict_access_1.png" alt="Restrict access to a global variable" style="width:100%;" >}}
 
