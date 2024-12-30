@@ -13,9 +13,9 @@ further_reading:
 title: 예약 보고서
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">선택한 <a href="/getting_started/site">Datadog 사이트</a> {{< region-param key="dd_site_name" >}})에서는 예약된 보고서가 지원되지 않습니다.</div>
-{< /site-region >}}
+{{ < site-region region="gov" > }}
+<div class="alert alert-warning">선택한 <a href="/getting_started/site">Datadog 사이트</a> {{< region-param key="dd_site_name" >}} 에서는 예약된 보고서가 지원되지 않습니다.</div>
+{{< /site-region >}}
 
 ## 개요
 
