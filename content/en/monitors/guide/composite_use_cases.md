@@ -1,24 +1,24 @@
 ---
 title: Composite Monitor Use Cases
 further_reading:
-- link: "logs/processing/pipelines"
+- link: "monitors/types/composite/"
   tag: "Documentation"
-  text: "Log processing pipelines"
+  text: "Composite monitor type"
 ---
 
 
 ## Overview 
 
-This guide lists non-exhaustive use cases for composite monitors. These examples illustrate how composite monitors can be configured to address various use cases in monitoring environments.
+This guide lists non-exhaustive use cases for composite monitors. These examples illustrate how composite monitors can be configured to address various use cases in monitoring environments:
 
-- [Error Rates](#error-rates)
-- [Monitor Frequent Metrics](#monitor-frequent-metrics)
-- [Step Monitor](#step-monitor)
-- [Renotifying on Recovery](#renotifying-on-recovery)
-- [Delay on Notification](#delay-on-notification)
+- [Error rates](#error-rates)
+- [Monitor frequent metrics](#monitor-frequent-metrics)
+- [Step monitor](#step-monitor)
+- [Renotifying on recovery](#renotifying-on-recovery)
+- [Delay on notification](#delay-on-notification)
 
 
-## Error Rates
+## Error rates
 
 Alert when the error rate exceeds a threshold only when hits are above a certain number.
 
@@ -37,9 +37,9 @@ Create two monitors:
 
 For more state combinations, see [Composite Monitor](https://docs.datadoghq.com/monitors/create/types/composite/#computing-trigger-conditions).
 
-## Monitor Frequent Metrics
+## Monitor frequent metrics
 
-Monitor latency for services, ignoring occasional spikes due to low traffic.
+Monitor latency for services, ignoring occasional spikes due to low traffic. For example, a period of time during the night where services report very few values.
 
 Create two monitors:
 
@@ -54,9 +54,9 @@ Create two monitors:
 | **Alert** Latency above threshold | **OK** Less than Y metrics | **OK** Not enough metrics |
 | **OK** Latency below threshold | **Alert** More than Y metrics | **OK** Latency below threshold |
 
-## Step Monitor
+## Step monitor
 
-Trigger an alert in the absence of a paired metric.
+Trigger an alert in the absence of a paired metric. For example, log metrics for sent/received, down/up, or create/resolve.
 
 - **Monitor A**: Alert when `action:create` is above 0
 - **Monitor B**: Alert when `action:resolve` is above 0
@@ -69,7 +69,7 @@ Trigger an alert in the absence of a paired metric.
 | **Alert** Action create above 0 | **OK** | **Alert** Action resolve not present |
 | **OK** | **Alert** Action resolve above 0 | **OK** |
 
-## Renotifying on Recovery
+## Renotifying on recovery
 
 Renotify on recovery using two monitors with a `timeshift`.
 
@@ -84,9 +84,9 @@ Renotify on recovery using two monitors with a `timeshift`.
 | **Alert** Real-time metric | **OK** Metric not triggered | **OK** |
 | **OK** Metric not triggered | **Alert** Past metric | **Alert** |
 
-## Delay on Notification
+## Delay on notification
 
-Alert after errors persist for a set duration:
+Alert after errors persist for a set duration. For example, a set of errors triggered for at least 15 minutes.
 
 - **Monitor A**: Real-time metric
 - **Monitor B (timeshifted)**: Metric shifted by X minutes
@@ -99,3 +99,6 @@ Alert after errors persist for a set duration:
 | **Alert** Real-time metric | **OK** Metric not triggered | **OK** |
 | **OK** Metric not triggered | **Alert** Past metric | **OK** |
 
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
