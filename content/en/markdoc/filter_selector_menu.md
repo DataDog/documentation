@@ -55,7 +55,8 @@ title: Filter Selector Menu Design
     }
 
     .cdocs-dropdown-item:hover {
-        background-color: green;
+        background-color: rgb(246, 246, 246);
+        color: rgb(99, 44, 166);
     }
 
     .cdocs-dropdown-item {
@@ -125,13 +126,32 @@ title: Filter Selector Menu Design
         border-left: none;
     }
 
-    .cdocs-chevron.cdocs-up {
-        transform: rotate(45deg);
+    .cdocs-dropdown .cdocs-chevron.cdocs-up {
         display: none;
+    }
+
+    .cdocs-dropdown.cdocs-dropdown__expanded .cdocs-chevron.cdocs-down {
+        display: none;
+    }
+
+    .cdocs-dropdown.cdocs-dropdown__expanded .cdocs-chevron.cdocs-up {
+        display: inline-block;
+    }
+
+    .cdocs-chevron.cdocs-up {
+        transform: rotate(-135deg);
     }
 
     .cdocs-chevron.cdocs-down {
         transform: rotate(45deg);
+    }
+
+    .cdocs-dropdown-menu {
+        display: none;
+    }
+
+    .cdocs-dropdown.cdocs-dropdown__expanded .cdocs-dropdown-menu {
+        display: inline-block;
     }
 </style>
 
@@ -139,28 +159,28 @@ title: Filter Selector Menu Design
 
 <div class="cdocs-dropdown-container">
     <p class="cdocs-filter-label">Color</p>
-    <div class="cdocs-dropdown">
-      <button class="cdocs-dropdown-btn" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <div class="cdocs-dropdown cdocs-dropdown__expanded">
+      <button class="cdocs-dropdown-btn" type="button">
         <span class="cdocs-btn-label">Red</span>
         <div class="cdocs-chevron cdocs-down"></div>
         <div class="cdocs-chevron cdocs-up"></div>
       </button>
-      <div class="cdocs-dropdown-menu" style="display: none;">
+      <div class="cdocs-dropdown-menu">
         <a class="cdocs-dropdown-item">Red</a>
         <a class="cdocs-dropdown-item">Blue</a>
-        <a class="cdocs-dropdown-item">Green</a>
+        <a class="cdocs-dropdown-item">Chartreuse</a>
       </div>
     </div>
 </div>
 <div class="cdocs-dropdown-container">
     <p class="cdocs-filter-label">Size</p>
     <div class="cdocs-dropdown">
-      <button class="cdocs-dropdown-btn" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <button class="cdocs-dropdown-btn" type="button">
         <span class="cdocs-btn-label">Medium</span>
         <div class="cdocs-chevron cdocs-down"></div>
         <div class="cdocs-chevron cdocs-up"></div>
       </button>
-      <div class="cdocs-dropdown-menu" style="display: none;">
+      <div class="cdocs-dropdown-menu">
         <a class="cdocs-dropdown-item">Small</a>
         <a class="cdocs-dropdown-item">Medium</a>
         <a class="cdocs-dropdown-item">Large</a>
@@ -170,12 +190,12 @@ title: Filter Selector Menu Design
 <div class="cdocs-dropdown-container">
     <p class="cdocs-filter-label">Shape</p>
     <div class="cdocs-dropdown">
-      <button class="cdocs-dropdown-btn" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <button class="cdocs-dropdown-btn" type="button">
         <span class="cdocs-btn-label">A big rectangle</span>
         <div class="cdocs-chevron cdocs-down"></div>
         <div class="cdocs-chevron cdocs-up"></div>
       </button>
-      <div class="cdocs-dropdown-menu" style="display: none;">
+      <div class="cdocs-dropdown-menu">
         <a class="cdocs-dropdown-item">Circle</a>
         <a class="cdocs-dropdown-item">A big rectangle</a>
         <a class="cdocs-dropdown-item">Octagon</a>
