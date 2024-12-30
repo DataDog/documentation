@@ -307,6 +307,11 @@ For the Datadog Archives destination, follow the instructions for the cloud prov
 {{% observability_pipelines/destination_env_vars/new_relic %}}
 
 {{% /tab %}}
+{{% tab "Amazon Security Lake" %}}
+
+{{% observability_pipelines/destination_env_vars/amazon_security_lake %}}
+
+{{% /tab %}}
 {{< /tabs >}}
 1. Follow the instructions for your environment to install the Worker.
 {{< tabs >}}
