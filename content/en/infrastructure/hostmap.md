@@ -74,9 +74,7 @@ The Datadog Agent also collects host metadata and application information, some 
 - `field:metadata_machine`
 - `field:apps`
 
-The `field:apps` is dervied from the metrics the Datadog Agent is collecting from that host, and can be used to determine
-what intergrations or Datadog products are running on that host. 
-For example, a value of `field:apps:universal` indicates that Universal Service Monitoring is running on that host. 
+The `field:apps` is derived from the metrics collected by the Datadog Agent on a host, and it indicates which integrations or Datadog products are active. For example, a value of `field:apps:universal` indicates that Universal Service Monitoring is running on that host.
 
 ### Zoom in
 
