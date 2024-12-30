@@ -281,17 +281,24 @@
 	"Collapse": {
 			"prefix": ";;collapse",
 			"body": [
-				"{{% collapse-content title=\"Datadog Operator\" level=\"h4\" %}}",
+				"{{% collapse-content title=\"${1:title}\" level=\"${2|h1,h2,h3,h4,h5,p|}\" %}}",
 				"...",
 				"{{% /collapse-content %}}"
 			],
 			"description": "Collapse and expand content"
 	},
-	"Tooltip": {
-			"prefix": ";;tooltip",
+	"Tooltip (Custom)": {
+			"prefix": ";;tooltip-custom",
 			"body": [
-				"{{< tooltip ${1|text,glossary|}}=\"${2:term}\" ${3|tooltip=\"Additional information here\",case=\"title\"|} >}}"
+				"{{< tooltip text=\"${1:term}\" tooltip=\"${2:Additional information here}\" case=${3|title,lower,upper,sentence|} >}}"
 			],
-			"description": "Add interactive, informative tooltips to terms or phrases with support for custom content and glossary terms. Options: text/tooltip for custom content, glossary/case for glossary terms (case options: title, lower, upper, sentence)"
+			"description": "Add interactive tooltips to terms or phrases. `text` is the term or phrase to be highlighted; `tooltip` is displayed on hover."
+	},
+	"Tooltip (Glossary)": {
+			"prefix": ";;tooltip-glossary",
+			"body": [
+				"{{< tooltip glossary=\"${2:term}\" case=${4|title,lower,upper,sentence|} >}}"
+			],
+			"description": "Add interactive tooltips to terms or phrases. `glossary` must match the filename of a glossary entry."
 	}
 }
