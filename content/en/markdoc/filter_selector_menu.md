@@ -19,12 +19,14 @@ title: Filter Selector Menu Design
     }
 
     .cdocs-dropdown-container {
+        /* width: 22%; */
         margin-bottom: 1em;
         display: inline-block;
         margin-right: 1em;
     }
 
     .cdocs-dropdown-options-list {
+        /* width: 100%; */
         background-color: rgb(255, 255, 255);
         box-shadow: rgba(0, 0, 0, 0.25) 0px 4px 20px 0px;
         border-radius: 6px;
@@ -38,16 +40,21 @@ title: Filter Selector Menu Design
     .cdocs-dropdown-option {
         display: block;
         width: 100%;
-        padding: 4px 16px;
+        padding-bottom: 8px;
+        padding-left: 10px;
+        padding-right: 16px;
+        padding-top: 4px;
         font-weight: 400;
         color: black;
         text-align: inherit;
         white-space: nowrap;
         background-color: transparent;
         border: 0;
+        line-height: 20px;
     }
 
     button.cdocs-dropdown-btn {
+        /* width: 100%; */
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -73,6 +80,7 @@ title: Filter Selector Menu Design
     }
 
     .cdocs-dropdown {
+        display: block;
         position: relative;
     }
 
@@ -80,34 +88,32 @@ title: Filter Selector Menu Design
         display: none;
     }
 
-    .cdocs-dropdown.cdocs-dropdown__expanded .cdocs-chevron.cdocs-down {
+    .cdocs-dropdown__expanded .cdocs-chevron.cdocs-down {
         display: none;
     }
 
-    .cdocs-dropdown.cdocs-dropdown__expanded .cdocs-chevron.cdocs-up {
+    .cdocs-dropdown__expanded .cdocs-chevron.cdocs-up {
         display: inline-block;
     }
 
     .cdocs-chevron.cdocs-up {
         transform: rotate(-135deg);
+        margin-top: 5px;
     }
 
     .cdocs-chevron.cdocs-down {
         transform: rotate(45deg);
     }
 
-    /*
     .cdocs-dropdown-options-list {
         display: none;
     }
 
     .cdocs-dropdown.cdocs-dropdown__expanded .cdocs-dropdown-options-list {
-        position: absolute;
-        bottom: -7px;
-        box-sizing: border-box;
         display: block;
+        position: absolute;
+        top: 39px;
     }
-    */
 </style>
 
 ## Set of dropdowns
@@ -123,7 +129,7 @@ title: Filter Selector Menu Design
       <div class="cdocs-dropdown-options-list">
         <a class="cdocs-dropdown-option">Red</a>
         <a class="cdocs-dropdown-option">Blue</a>
-        <a class="cdocs-dropdown-option">Chartreuse</a>
+        <a class="cdocs-dropdown-option">Burgundy</a>
       </div>
     </div>
 </div>
@@ -154,6 +160,21 @@ title: Filter Selector Menu Design
         <a class="cdocs-dropdown-option">Circle</a>
         <a class="cdocs-dropdown-option">A big rectangle</a>
         <a class="cdocs-dropdown-option">Octagon</a>
+      </div>
+    </div>
+</div>
+<div class="cdocs-dropdown-container">
+    <p class="cdocs-filter-label">Count</p>
+    <div class="cdocs-dropdown">
+      <button class="cdocs-dropdown-btn" type="button">
+        <span class="cdocs-btn-label">Ten</span>
+        <div class="cdocs-chevron cdocs-down"></div>
+        <div class="cdocs-chevron cdocs-up"></div>
+      </button>
+      <div class="cdocs-dropdown-options-list">
+        <a class="cdocs-dropdown-option">Ten</a>
+        <a class="cdocs-dropdown-option">Twenty</a>
+        <a class="cdocs-dropdown-option">Thirty</a>
       </div>
     </div>
 </div>
