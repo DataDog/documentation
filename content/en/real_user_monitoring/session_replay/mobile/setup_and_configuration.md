@@ -213,7 +213,8 @@ To instrument your consolidated web and native Session Replay views for React Na
 2. Enable [Session Replay][2] for your web application.
 3. Enable Session Replay for your mobile application (see setup instructions above).
 
-This feature is **not compatible with new architecture** on Android.
+
+**Note**: This feature is not compatible with React Native's [New Architecture][3] for Android.
 
 [1]: /real_user_monitoring/mobile_and_tv_monitoring/web_view_tracking/?tab=reactnative#instrument-your-web-views
 [2]: /real_user_monitoring/session_replay/browser/#setup
@@ -377,3 +378,4 @@ See [Privacy Options][2].
 
 [1]: /real_user_monitoring/mobile_and_tv_monitoring/web_view_tracking
 [2]: /real_user_monitoring/session_replay/mobile/privacy_options
+[3]: https://reactnative.dev/architecture/landing-page
