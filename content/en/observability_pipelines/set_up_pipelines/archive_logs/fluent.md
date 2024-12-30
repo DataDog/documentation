@@ -160,6 +160,16 @@ Follow the instructions for the cloud provider you are using to archive your log
 {{% observability_pipelines/destination_settings/amazon_security_lake %}}
 
 {{% /tab %}}
+{{% tab "Microsoft Sentinel" %}}
+
+{{% observability_pipelines/destination_settings/microsoft_sentinel %}}
+
+{{% /tab %}}
+{{% tab "SentinelOne" %}}
+
+{{% observability_pipelines/destination_settings/sentinelone %}}
+
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Set up processors

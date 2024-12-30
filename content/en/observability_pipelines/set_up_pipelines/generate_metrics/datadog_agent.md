@@ -108,6 +108,16 @@ To set up the destination, follow the instructions for the cloud provider you ar
 {{% observability_pipelines/destination_settings/amazon_security_lake %}}
 
 {{% /tab %}}
+{{% tab "Microsoft Sentinel" %}}
+
+{{% observability_pipelines/destination_settings/microsoft_sentinel %}}
+
+{{% /tab %}}
+{{% tab "SentinelOne" %}}
+
+{{% observability_pipelines/destination_settings/sentinelone %}}
+
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Set up processors
