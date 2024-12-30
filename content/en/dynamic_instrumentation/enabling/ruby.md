@@ -2,7 +2,6 @@
 title: Enable Dynamic Instrumentation for Ruby
 aliases:
     - /tracing/dynamic_instrumentation/enabling/ruby/
-is_beta: true
 private: true
 code_lang: ruby
 type: multi-code-lang

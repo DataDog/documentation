@@ -2,7 +2,6 @@
 title: Enable Dynamic Instrumentation for PHP
 aliases:
     - /tracing/dynamic_instrumentation/enabling/php/
-is_beta: true
 private: true
 code_lang: php
 type: multi-code-lang
