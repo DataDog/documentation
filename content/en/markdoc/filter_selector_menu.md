@@ -41,7 +41,7 @@ title: Filter Selector Menu Design
         margin-right: 1em;
     }
 
-    .cdocs-dropdown-menu {
+    .cdocs-dropdown-options-list {
         background-color: rgb(255, 255, 255);
         box-shadow: rgba(0, 0, 0, 0.25) 0px 4px 20px 0px;
         border-bottom-left-radius: 6px;
@@ -54,12 +54,12 @@ title: Filter Selector Menu Design
         /* margin-right: 0.5em; */
     }
 
-    .cdocs-dropdown-item:hover {
+    .cdocs-dropdown-option:hover {
         background-color: rgb(246, 246, 246);
         color: rgb(99, 44, 166);
     }
 
-    .cdocs-dropdown-item {
+    .cdocs-dropdown-option {
         display: block;
         width: 100%;
         padding-bottom: 4px;
@@ -126,6 +126,10 @@ title: Filter Selector Menu Design
         border-left: none;
     }
 
+    .cdocs-dropdown {
+        position: relative;
+    }
+
     .cdocs-dropdown .cdocs-chevron.cdocs-up {
         display: none;
     }
@@ -146,13 +150,18 @@ title: Filter Selector Menu Design
         transform: rotate(45deg);
     }
 
-    .cdocs-dropdown-menu {
+    /*
+    .cdocs-dropdown-options-list {
         display: none;
     }
 
-    .cdocs-dropdown.cdocs-dropdown__expanded .cdocs-dropdown-menu {
-        display: inline-block;
+    .cdocs-dropdown.cdocs-dropdown__expanded .cdocs-dropdown-options-list {
+        position: absolute;
+        bottom: -7px;
+        box-sizing: border-box;
+        display: block;
     }
+    */
 </style>
 
 ## Set of dropdowns
@@ -165,10 +174,10 @@ title: Filter Selector Menu Design
         <div class="cdocs-chevron cdocs-down"></div>
         <div class="cdocs-chevron cdocs-up"></div>
       </button>
-      <div class="cdocs-dropdown-menu">
-        <a class="cdocs-dropdown-item">Red</a>
-        <a class="cdocs-dropdown-item">Blue</a>
-        <a class="cdocs-dropdown-item">Chartreuse</a>
+      <div class="cdocs-dropdown-options-list">
+        <a class="cdocs-dropdown-option">Red</a>
+        <a class="cdocs-dropdown-option">Blue</a>
+        <a class="cdocs-dropdown-option">Chartreuse</a>
       </div>
     </div>
 </div>
@@ -180,10 +189,10 @@ title: Filter Selector Menu Design
         <div class="cdocs-chevron cdocs-down"></div>
         <div class="cdocs-chevron cdocs-up"></div>
       </button>
-      <div class="cdocs-dropdown-menu">
-        <a class="cdocs-dropdown-item">Small</a>
-        <a class="cdocs-dropdown-item">Medium</a>
-        <a class="cdocs-dropdown-item">Large</a>
+      <div class="cdocs-dropdown-options-list">
+        <a class="cdocs-dropdown-option">Small</a>
+        <a class="cdocs-dropdown-option">Medium</a>
+        <a class="cdocs-dropdown-option">Large</a>
       </div>
     </div>
 </div>
@@ -195,10 +204,10 @@ title: Filter Selector Menu Design
         <div class="cdocs-chevron cdocs-down"></div>
         <div class="cdocs-chevron cdocs-up"></div>
       </button>
-      <div class="cdocs-dropdown-menu">
-        <a class="cdocs-dropdown-item">Circle</a>
-        <a class="cdocs-dropdown-item">A big rectangle</a>
-        <a class="cdocs-dropdown-item">Octagon</a>
+      <div class="cdocs-dropdown-options-list">
+        <a class="cdocs-dropdown-option">Circle</a>
+        <a class="cdocs-dropdown-option">A big rectangle</a>
+        <a class="cdocs-dropdown-option">Octagon</a>
       </div>
     </div>
 </div>
