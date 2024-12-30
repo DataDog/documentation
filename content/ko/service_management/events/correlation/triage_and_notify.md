@@ -6,7 +6,7 @@ further_reading:
 title: 분류 및 알림
 ---
 
-{{< img src="service_management/event/correlation/triage/triage.png" alt="사이드 패널이 있는 사례 상세 페이지입니다. 사례에서 상호 연관된 이벤트를 조사하고 관련 메트릭을 분석하세요." <txprotected>style="width:100%;" >}}
+{{< img src="service_management/event/correlation/triage/triage.png" alt="사이드 패널이 있는 사례 상세 페이지입니다. 사례에서 상호 연관된 이벤트를 조사하고 관련 메트릭을 분석하세요." style="width:100%;" >}}
 
 이벤트 관리팀은 관련 이벤트를 상호 연관시켜 자동으로 하나의 케이스로 통합합니다. 관련 로그, 관련 메트릭, 관련 경고 모니터의 모든 컨텍스트를 가져와 한 곳에서 문제를 분류하고 문제를 해결합니다.
 
