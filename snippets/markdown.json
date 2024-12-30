@@ -286,5 +286,12 @@
 				"{{% /collapse-content %}}"
 			],
 			"description": "Collapse and expand content"
-	}	
+	},
+	"Tooltip": {
+			"prefix": ";;tooltip",
+			"body": [
+				"{{< tooltip ${1|text,glossary|}}=\"${2:term}\" ${3|tooltip=\"Additional information here\",case=\"title\"|} >}}"
+			],
+			"description": "Add interactive, informative tooltips to terms or phrases with support for custom content and glossary terms. Options: text/tooltip for custom content, glossary/case for glossary terms (case options: title, lower, upper, sentence)"
+	}
 }
