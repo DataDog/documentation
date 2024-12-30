@@ -3,9 +3,11 @@ title: Filter Selector Menu Design
 ---
 
 <style>
+    /*
     * {
         outline: 1px solid red;
     }
+    */
 
     p.filter-label {
         font-size: 14px !important;
@@ -16,6 +18,9 @@ title: Filter Selector Menu Design
     }
     
     .cdocs-dropdown-container .btn {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
         border: 1px solid #c7c7c7;
         background: #f6f6f6;
         border-radius: 4px;
@@ -86,6 +91,9 @@ title: Filter Selector Menu Design
     }
 
     button.cdocs-dropdown-btn {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
         height: 31px;
         color: rgb(99, 44, 166);
         border-bottom-color: rgb(199, 199, 199);
@@ -142,9 +150,7 @@ title: Filter Selector Menu Design
     }
 
     .cdocs-dropdown {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
+
     }
 </style>
 
