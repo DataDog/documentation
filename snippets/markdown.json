@@ -281,8 +281,8 @@
 	"Collapse": {
 			"prefix": ";;collapse",
 			"body": [
-				"{{% collapse-content title=\"${1:title}\" level=\"${2|h1,h2,h3,h4,h5,p|}\" %}}",
-				"...",
+				"{{% collapse-content title=\"${1:title}\" level=\"${2|h4,h1,h2,h3,h5,p|}\" %}}",
+				"${3:...}",
 				"{{% /collapse-content %}}"
 			],
 			"description": "Collapse and expand content"
@@ -290,14 +290,14 @@
 	"Tooltip (Custom)": {
 			"prefix": ";;tooltip-custom",
 			"body": [
-				"{{< tooltip text=\"${1:term}\" tooltip=\"${2:Additional information here}\" case=${3|title,lower,upper,sentence|} >}}"
+				"{{< tooltip text=\"${1:term}\" tooltip=\"${2:Additional information here}\" case=\"${3|title,lower,upper,sentence|}\" >}}"
 			],
 			"description": "Add interactive tooltips to terms or phrases. `text` is the term or phrase to be highlighted; `tooltip` is displayed on hover."
 	},
 	"Tooltip (Glossary)": {
 			"prefix": ";;tooltip-glossary",
 			"body": [
-				"{{< tooltip glossary=\"${2:term}\" case=${4|title,lower,upper,sentence|} >}}"
+				"{{< tooltip glossary=\"${2:term}\" case=\"${4|title,lower,upper,sentence|}\" >}}"
 			],
 			"description": "Add interactive tooltips to terms or phrases. `glossary` must match the filename of a glossary entry."
 	}
