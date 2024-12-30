@@ -16,9 +16,7 @@ Designed for new users, the quick start workflow offers an efficient setup proce
 
 <div class="alert alert-info">This article provides instructions for the new user quick start workflow that uses AWS CloudFormation to set up Agentless Scanning.
 For existing users who want to add a new AWS account or enable Agentless Scanning on an existing integrated AWS account, see the instructions for
-<a href="/security/cloud_security_management/setup/agentless_scanning/terraform">Terraform</a>,
-<a href="/security/cloud_security_management/setup/agentless_scanning/cloudformation">AWS CloudFormation</a>,
- or <a href="/security/cloud_security_management/setup/agentless_scanning/azure_resource_manager">Azure Resource Manager</a>.</div>
+<a href="/security/cloud_security_management/setup/agentless_scanning/terraform">Terraform</a> or <a href="/security/cloud_security_management/setup/agentless_scanning/cloudformation">AWS CloudFormation</a>.</div>
 
 <div class="alert alert-warning">Running Agentless scanners incurs additional costs. To optimize these costs while still ensuring reliable 12-hour scans, Datadog recommends setting up <a href="/security/cloud_security_management/setup/agentless_scanning/terraform/">Agentless Scanning with Terraform</a> as the default template.</div>
 
