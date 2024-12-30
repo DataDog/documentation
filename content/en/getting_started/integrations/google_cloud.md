@@ -92,7 +92,7 @@ After reviewing the above [Prerequisites][3], follow these step-by-step instruct
 - Browser
 6. Click **Save**.
 
-**Note**: The `Browser` role is only required in the default project of the service account. Other projects require only the other listed roles.
+**Note**: The `Browser` role is only required in the default project (<SERVICE_ACCOUNT_NAME>@<DEFAULT_PROJECT>.iam.gserviceaccount.com) of the service account. Other projects require only the other listed roles.
 {{% /collapse-content %}}
 
 {{% collapse-content title="3. Add the Datadog principal to your service account" level="h5" %}}
