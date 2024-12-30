@@ -83,12 +83,8 @@ title: Filter Selector Menu Design
         height: 31px;
         color: rgb(99, 44, 166);
         border: 1px solid rgb(199, 199, 199);
-        border-radius: 4px 4px 0 0;
-        padding-block-end: 1.6px;
-        padding-block-start: 0px;
+        border-radius: 4px;
         padding-bottom: 1.6px;
-        padding-inline-end: 9.6px;
-        padding-inline-start: 9.6px;
         padding-left: 9.6px;
         padding-right: 9.6px;
         padding-top: 0px;
