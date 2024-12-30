@@ -9,12 +9,13 @@ title: Filter Selector Menu Design
     }
     */
 
-    p.filter-label {
-        font-size: 14px !important;
-        line-height: 18px;
-        color: black !important;
+    p.cdocs-filter-label {
+        margin-top: 0px;
         margin-bottom: 10px;
-        font-weight: 400; 
+        font-weight: 400;
+        text-transform: uppercase;
+        font-size: 14px;
+        line-height: 18px;
     }
     
     .cdocs-dropdown-container .btn {
@@ -47,27 +48,10 @@ title: Filter Selector Menu Design
         border-bottom-right-radius: 6px;
         border-top-left-radius: 6px;
         border-top-right-radius: 6px;
-        /* border-bottom-color: rgba(0, 0, 0, 0.176); */
-        /* border-image-outset: 0; */
-        /* border-image-repeat: stretch; */
-        /* border-image-slice: 100%; */
-        /* border-image-source: none; */
-        /* border-image-width: 1; */
-        /* border-bottom-style: solid; */
-        /* border-bottom-width: 1px; */
-        /* border-left-color: rgba(0, 0, 0, 0.176); */
-        /* border-left-style: solid; */
-        /* border-left-width: 1px; */
-        /* border-right-color: rgba(0, 0, 0, 0.176); */
-        /* border-right-style: solid; */
-        /* border-right-width: 1px; */
-        /* border-top-color: rgba(0, 0, 0, 0.176); */
-        /* border-top-style: solid; */
-        /* border-top-width: 1px; */
     }
 
     .cdocs-btn-label {
-        margin-right: 0.5em;
+        /* margin-right: 0.5em; */
     }
 
     .cdocs-dropdown-item:hover {
@@ -94,6 +78,7 @@ title: Filter Selector Menu Design
         display: flex;
         align-items: center;
         justify-content: space-between;
+        gap: 0.6em;
         height: 31px;
         color: rgb(99, 44, 166);
         border-bottom-color: rgb(199, 199, 199);
@@ -134,8 +119,8 @@ title: Filter Selector Menu Design
     .cdocs-chevron {
         width: 8px;
         height: 8px;
-        border: 2px solid rgb(99, 44, 166);
         display: inline-block;
+        border: 2px solid rgb(99, 44, 166);
         border-top: none;
         border-left: none;
     }
@@ -148,16 +133,12 @@ title: Filter Selector Menu Design
     .cdocs-chevron.cdocs-down {
         transform: rotate(45deg);
     }
-
-    .cdocs-dropdown {
-
-    }
 </style>
 
 ## Set of dropdowns
 
 <div class="cdocs-dropdown-container">
-    <p class="text-uppercase filter-label">Color</p>
+    <p class="cdocs-filter-label">Color</p>
     <div class="cdocs-dropdown">
       <button class="cdocs-dropdown-btn" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         <span class="cdocs-btn-label">Red</span>
@@ -172,33 +153,33 @@ title: Filter Selector Menu Design
     </div>
 </div>
 <div class="cdocs-dropdown-container">
-    <p class="text-uppercase filter-label">Size</p>
-    <div class="dropdown bootstrap-dropdown-custom">
-      <button class="btn d-flex align-items-center justify-content-between" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <p class="cdocs-filter-label">Size</p>
+    <div class="cdocs-dropdown">
+      <button class="cdocs-dropdown-btn" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         <span class="cdocs-btn-label">Medium</span>
-        <div class="chevron chevron-down"></div>
-        <div class="chevron chevron-up d-none"></div>
+        <div class="cdocs-chevron cdocs-down"></div>
+        <div class="cdocs-chevron cdocs-up"></div>
       </button>
-      <div class="dropdown-menu">
-        <a class="dropdown-item">Small</a>
-        <a class="dropdown-item">Medium</a>
-        <a class="dropdown-item">Large</a>
+      <div class="cdocs-dropdown-menu" style="display: none;">
+        <a class="cdocs-dropdown-item">Small</a>
+        <a class="cdocs-dropdown-item">Medium</a>
+        <a class="cdocs-dropdown-item">Large</a>
       </div>
     </div>
 </div>
 <div class="cdocs-dropdown-container">
-    <p class="text-uppercase filter-label">Shape</p>
-    <div class="dropdown bootstrap-dropdown-custom">
-        <button class="btn d-flex align-items-center justify-content-between" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <span class="cdocs-btn-label">An oblong rectangle</span>
-            <div class="chevron chevron-down"></div>
-            <div class="chevron chevron-up d-none"></div>
-        </button>
-        <div class="dropdown-menu">
-            <a class="dropdown-item">Circle</a>
-            <a class="dropdown-item">A big rectangle</a>
-            <a class="dropdown-item">Octagon</a>
-        </div>
+    <p class="cdocs-filter-label">Shape</p>
+    <div class="cdocs-dropdown">
+      <button class="cdocs-dropdown-btn" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <span class="cdocs-btn-label">A big rectangle</span>
+        <div class="cdocs-chevron cdocs-down"></div>
+        <div class="cdocs-chevron cdocs-up"></div>
+      </button>
+      <div class="cdocs-dropdown-menu" style="display: none;">
+        <a class="cdocs-dropdown-item">Circle</a>
+        <a class="cdocs-dropdown-item">A big rectangle</a>
+        <a class="cdocs-dropdown-item">Octagon</a>
+      </div>
     </div>
 </div>
 
