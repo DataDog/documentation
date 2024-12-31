@@ -115,7 +115,9 @@ If you receive a `403 Forbidden` error when sending logs to the Datadog OTLP log
 
 - The endpoint URL is incorrect for your organization.  
    **Solution**: Use the correct endpoint URL for your organization. Your site is {{< region-param key=dd_datacenter code="true" >}}, so you need to use the {{< region-param key="otlp_logs_endpoint" code="true" >}} endpoint.
-   
+
+[3]: https://opentelemetry.io/docs/specs/otel/glossary/#automatic-instrumentation
+[4]: https://github.com/open-telemetry/opentelemetry-collector/tree/main/exporter/otlphttpexporter   
 {{< /site-region >}}
 
 ## Further reading
@@ -124,5 +126,3 @@ If you receive a `403 Forbidden` error when sending logs to the Datadog OTLP log
 
 [1]: /opentelemetry/collector_exporter/
 [2]: /opentelemetry/otlp_ingest_in_the_agent/
-[3]: https://opentelemetry.io/docs/specs/otel/glossary/#automatic-instrumentation
-[4]: https://github.com/open-telemetry/opentelemetry-collector/tree/main/exporter/otlphttpexporter
