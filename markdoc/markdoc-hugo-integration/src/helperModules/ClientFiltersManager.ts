@@ -288,38 +288,24 @@ export class ClientFiltersManager {
     }
   }
 
+  /**
+   * Expand or hide the dropdown menu when the user clicks on it.
+   */
   addDropdownEventListeners() {
-    const dropdownBtns = document.getElementsByClassName('cdoc-dropdown-btn');
-    for (let i = 0; i < dropdownBtns.length; i++) {
-      dropdownBtns[i].addEventListener('click', (e) => {
-        console.log('dropdown button clicked');
-        const target = e.target as HTMLElement;
-        if (!target) {
-          return;
-        }
+    const dropdownContainers = document.getElementsByClassName('cdoc-dropdown');
+    for (let i = 0; i < dropdownContainers.length; i++) {
+      dropdownContainers[i].addEventListener('click', (e) => {
+        console.log('dropdown container clicked');
 
-        // find the parent cdoc-dropdown-btn element
-        // which contains the filter ID
+        const target = e.target as HTMLElement;
+
+        // find the parent dropdown container
         let parent = target;
-        while (!parent.classList.contains('cdoc-dropdown-btn') && parent.parentElement) {
+        while (!parent.classList.contains('cdoc-dropdown') && parent.parentElement) {
           parent = parent.parentElement;
         }
 
-        const filterId = parent.dataset.filterId;
-
-        if (!filterId) {
-          throw new Error(`No filter ID found on dropdown button`);
-        }
-
-        const dropdownOptionsList = document.getElementById(
-          `cdoc-dropdown-options-list-${filterId}`
-        );
-
-        if (!dropdownOptionsList) {
-          throw new Error(`No dropdown options list found for filter ID ${filterId}`);
-        }
-
-        dropdownOptionsList.classList.toggle('cdoc-hide');
+        parent.classList.toggle('cdoc-dropdown__expanded');
       });
     }
   }

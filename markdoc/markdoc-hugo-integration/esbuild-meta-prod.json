@@ -1,7 +1,7 @@
 {
   "inputs": {
     "dist/helperModules/PageBuilder/components/CustomizationMenu.js": {
-      "bytes": 2704,
+      "bytes": 2659,
       "imports": [],
       "format": "cjs"
     },
@@ -43,7 +43,7 @@
       "format": "cjs"
     },
     "dist/helperModules/ClientFiltersManager.js": {
-      "bytes": 16607,
+      "bytes": 16116,
       "imports": [
         {
           "path": "dist/helperModules/PageBuilder/components/CustomizationMenu.js",
@@ -87,7 +87,7 @@
       "entryPoint": "dist/markdoc-client-filters-manager.js",
       "inputs": {
         "dist/helperModules/PageBuilder/components/CustomizationMenu.js": {
-          "bytesInOutput": 1101
+          "bytesInOutput": 1056
         },
         "dist/schemas/regexes.js": {
           "bytesInOutput": 411
@@ -105,13 +105,13 @@
           "bytesInOutput": 1565
         },
         "dist/helperModules/ClientFiltersManager.js": {
-          "bytesInOutput": 6460
+          "bytesInOutput": 6220
         },
         "dist/markdoc-client-filters-manager.js": {
           "bytesInOutput": 140
         }
       },
-      "bytes": 218515
+      "bytes": 218230
     }
   }
 }

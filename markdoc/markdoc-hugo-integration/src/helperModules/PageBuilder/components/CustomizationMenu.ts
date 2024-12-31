@@ -42,17 +42,15 @@ function buildFilterSelectorNew(p: { filter: ResolvedPageFilter }) {
   selectorHtml += `<p class="cdoc-filter-label">${p.filter.displayName}</p>`;
 
   // Render the dropdown
-  selectorHtml += `<div class="cdoc-dropdown">
-    <button data-filter-id="${p.filter.id}" class="cdoc-dropdown-btn" type="button">
+  selectorHtml += `<div id="cdoc-dropdown-${p.filter.id}" class="cdoc-dropdown">
+    <button class="cdoc-dropdown-btn" type="button">
       <span class="cdoc-btn-label">${
         p.filter.options.find((o) => o.id === currentValue)!.displayName
       }</span>
       <div class="cdoc-chevron cdoc-down"></div>
       <div class="cdoc-chevron cdoc-up"></div>
     </button>
-    <div id="cdoc-dropdown-options-list-${
-      p.filter.id
-    }" class="cdoc-dropdown-options-list cdoc-hide">`;
+    <div class="cdoc-dropdown-options-list cdoc-hide">`;
   p.filter.options.forEach((option) => {
     const selected = option.id === currentValue ? 'selected' : '';
     selectorHtml += `<a class="cdoc-dropdown-option cdoc-filter__option ${selected}" data-filter-id="${p.filter.id}" data-option-id="${option.id}">${option.displayName}</a>`;

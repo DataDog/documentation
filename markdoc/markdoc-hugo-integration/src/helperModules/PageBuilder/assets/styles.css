@@ -2,10 +2,6 @@
     display: none;
 }
 
-.cdoc-hide {
-    display: none !important;
-}
-
 /* Document sections and headings */
 
 #cdoc-selector,
@@ -154,19 +150,14 @@ button.cdoc-dropdown-btn {
 }
 
 .cdoc-dropdown-options-list {
-    /* display: none; */
-    display: block;
-    position: absolute;
-    top: 39px;
+    display: none;
 }
 
-/*
 .cdoc-dropdown.cdoc-dropdown__expanded .cdoc-dropdown-options-list {
     display: block;
     position: absolute;
     top: 39px;
 }
-*/
 
 /* COMPONENT-SPECIFIC STYLES ===================================== */
 
