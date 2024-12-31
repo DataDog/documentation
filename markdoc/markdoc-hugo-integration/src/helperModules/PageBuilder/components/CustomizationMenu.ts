@@ -34,6 +34,24 @@ function buildFilterSelector(p: { filter: ResolvedPageFilter }) {
   return selectorHtml;
 }
 
+/*
+<div class="cdocs-dropdown-container">
+    <p class="cdocs-filter-label">Color</p>
+    <div class="cdocs-dropdown cdocs-dropdown__expanded">
+      <button class="cdocs-dropdown-btn" type="button">
+        <span class="cdocs-btn-label">Red</span>
+        <div class="cdocs-chevron cdocs-down"></div>
+        <div class="cdocs-chevron cdocs-up"></div>
+      </button>
+      <div class="cdocs-dropdown-options-list">
+        <a class="cdocs-dropdown-option">Red</a>
+        <a class="cdocs-dropdown-option">Blue</a>
+        <a class="cdocs-dropdown-option">Burgundy</a>
+      </div>
+    </div>
+</div>
+*/
+
 function buildFilterSelectorNew(p: { filter: ResolvedPageFilter }) {
   const currentValue = p.filter.currentValue || p.filter.defaultValue;
   let selectorHtml = '<div class="cdoc-filter__container">';

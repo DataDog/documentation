@@ -1,7 +1,7 @@
 {
   "inputs": {
     "dist/helperModules/PageBuilder/components/CustomizationMenu.js": {
-      "bytes": 1680,
+      "bytes": 2284,
       "imports": [],
       "format": "cjs"
     },

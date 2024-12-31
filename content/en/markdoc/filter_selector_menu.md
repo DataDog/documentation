@@ -9,7 +9,7 @@ title: Filter Selector Menu Design
     }
     */
 
-    p.cdocs-filter-label {
+    p.cdoc-filter-label {
         margin-top: 0px;
         margin-bottom: 10px;
         font-weight: 400;
@@ -18,26 +18,26 @@ title: Filter Selector Menu Design
         line-height: 18px;
     }
 
-    .cdocs-dropdown-container {
+    .cdoc-dropdown-container {
         /* width: 22%; */
         margin-bottom: 1em;
         display: inline-block;
         margin-right: 1em;
     }
 
-    .cdocs-dropdown-options-list {
+    .cdoc-dropdown-options-list {
         /* width: 100%; */
         background-color: rgb(255, 255, 255);
         box-shadow: rgba(0, 0, 0, 0.25) 0px 4px 20px 0px;
         border-radius: 6px;
     }
 
-    .cdocs-dropdown-option:hover {
+    .cdoc-dropdown-option:hover {
         background-color: rgb(246, 246, 246);
         color: rgb(99, 44, 166);
     }
 
-    .cdocs-dropdown-option {
+    .cdoc-dropdown-option {
         display: block;
         width: 100%;
         padding-bottom: 8px;
@@ -53,7 +53,7 @@ title: Filter Selector Menu Design
         line-height: 20px;
     }
 
-    button.cdocs-dropdown-btn {
+    button.cdoc-dropdown-btn {
         /* width: 100%; */
         display: flex;
         align-items: center;
@@ -70,7 +70,7 @@ title: Filter Selector Menu Design
         box-sizing: border-box;
     }
 
-    .cdocs-chevron {
+    .cdoc-chevron {
         width: 8px;
         height: 8px;
         display: inline-block;
@@ -79,37 +79,37 @@ title: Filter Selector Menu Design
         border-left: none;
     }
 
-    .cdocs-dropdown {
+    .cdoc-dropdown {
         display: block;
         position: relative;
     }
 
-    .cdocs-dropdown .cdocs-chevron.cdocs-up {
+    .cdoc-dropdown .cdoc-chevron.cdoc-up {
         display: none;
     }
 
-    .cdocs-dropdown__expanded .cdocs-chevron.cdocs-down {
+    .cdoc-dropdown__expanded .cdoc-chevron.cdoc-down {
         display: none;
     }
 
-    .cdocs-dropdown__expanded .cdocs-chevron.cdocs-up {
+    .cdoc-dropdown__expanded .cdoc-chevron.cdoc-up {
         display: inline-block;
     }
 
-    .cdocs-chevron.cdocs-up {
+    .cdoc-chevron.cdoc-up {
         transform: rotate(-135deg);
         margin-top: 5px;
     }
 
-    .cdocs-chevron.cdocs-down {
+    .cdoc-chevron.cdoc-down {
         transform: rotate(45deg);
     }
 
-    .cdocs-dropdown-options-list {
+    .cdoc-dropdown-options-list {
         display: none;
     }
 
-    .cdocs-dropdown.cdocs-dropdown__expanded .cdocs-dropdown-options-list {
+    .cdoc-dropdown.cdoc-dropdown__expanded .cdoc-dropdown-options-list {
         display: block;
         position: absolute;
         top: 39px;
@@ -118,63 +118,63 @@ title: Filter Selector Menu Design
 
 ## Set of dropdowns
 
-<div class="cdocs-dropdown-container">
-    <p class="cdocs-filter-label">Color</p>
-    <div class="cdocs-dropdown cdocs-dropdown__expanded">
-      <button class="cdocs-dropdown-btn" type="button">
-        <span class="cdocs-btn-label">Red</span>
-        <div class="cdocs-chevron cdocs-down"></div>
-        <div class="cdocs-chevron cdocs-up"></div>
+<div class="cdoc-dropdown-container">
+    <p class="cdoc-filter-label">Color</p>
+    <div class="cdoc-dropdown cdoc-dropdown__expanded">
+      <button class="cdoc-dropdown-btn" type="button">
+        <span class="cdoc-btn-label">Red</span>
+        <div class="cdoc-chevron cdoc-down"></div>
+        <div class="cdoc-chevron cdoc-up"></div>
       </button>
-      <div class="cdocs-dropdown-options-list">
-        <a class="cdocs-dropdown-option">Red</a>
-        <a class="cdocs-dropdown-option">Blue</a>
-        <a class="cdocs-dropdown-option">Burgundy</a>
+      <div class="cdoc-dropdown-options-list">
+        <a class="cdoc-dropdown-option">Red</a>
+        <a class="cdoc-dropdown-option">Blue</a>
+        <a class="cdoc-dropdown-option">Burgundy</a>
       </div>
     </div>
 </div>
-<div class="cdocs-dropdown-container">
-    <p class="cdocs-filter-label">Size</p>
-    <div class="cdocs-dropdown">
-      <button class="cdocs-dropdown-btn" type="button">
-        <span class="cdocs-btn-label">Medium</span>
-        <div class="cdocs-chevron cdocs-down"></div>
-        <div class="cdocs-chevron cdocs-up"></div>
+<div class="cdoc-dropdown-container">
+    <p class="cdoc-filter-label">Size</p>
+    <div class="cdoc-dropdown">
+      <button class="cdoc-dropdown-btn" type="button">
+        <span class="cdoc-btn-label">Medium</span>
+        <div class="cdoc-chevron cdoc-down"></div>
+        <div class="cdoc-chevron cdoc-up"></div>
       </button>
-      <div class="cdocs-dropdown-options-list">
-        <a class="cdocs-dropdown-option">Small</a>
-        <a class="cdocs-dropdown-option">Medium</a>
-        <a class="cdocs-dropdown-option">Large</a>
+      <div class="cdoc-dropdown-options-list">
+        <a class="cdoc-dropdown-option">Small</a>
+        <a class="cdoc-dropdown-option">Medium</a>
+        <a class="cdoc-dropdown-option">Large</a>
       </div>
     </div>
 </div>
-<div class="cdocs-dropdown-container">
-    <p class="cdocs-filter-label">Shape</p>
-    <div class="cdocs-dropdown">
-      <button class="cdocs-dropdown-btn" type="button">
-        <span class="cdocs-btn-label">A big rectangle</span>
-        <div class="cdocs-chevron cdocs-down"></div>
-        <div class="cdocs-chevron cdocs-up"></div>
+<div class="cdoc-dropdown-container">
+    <p class="cdoc-filter-label">Shape</p>
+    <div class="cdoc-dropdown">
+      <button class="cdoc-dropdown-btn" type="button">
+        <span class="cdoc-btn-label">A big rectangle</span>
+        <div class="cdoc-chevron cdoc-down"></div>
+        <div class="cdoc-chevron cdoc-up"></div>
       </button>
-      <div class="cdocs-dropdown-options-list">
-        <a class="cdocs-dropdown-option">Circle</a>
-        <a class="cdocs-dropdown-option">A big rectangle</a>
-        <a class="cdocs-dropdown-option">Octagon</a>
+      <div class="cdoc-dropdown-options-list">
+        <a class="cdoc-dropdown-option">Circle</a>
+        <a class="cdoc-dropdown-option">A big rectangle</a>
+        <a class="cdoc-dropdown-option">Octagon</a>
       </div>
     </div>
 </div>
-<div class="cdocs-dropdown-container">
-    <p class="cdocs-filter-label">Count</p>
-    <div class="cdocs-dropdown">
-      <button class="cdocs-dropdown-btn" type="button">
-        <span class="cdocs-btn-label">Ten</span>
-        <div class="cdocs-chevron cdocs-down"></div>
-        <div class="cdocs-chevron cdocs-up"></div>
+<div class="cdoc-dropdown-container">
+    <p class="cdoc-filter-label">Count</p>
+    <div class="cdoc-dropdown">
+      <button class="cdoc-dropdown-btn" type="button">
+        <span class="cdoc-btn-label">Ten</span>
+        <div class="cdoc-chevron cdoc-down"></div>
+        <div class="cdoc-chevron cdoc-up"></div>
       </button>
-      <div class="cdocs-dropdown-options-list">
-        <a class="cdocs-dropdown-option">Ten</a>
-        <a class="cdocs-dropdown-option">Twenty</a>
-        <a class="cdocs-dropdown-option">Thirty</a>
+      <div class="cdoc-dropdown-options-list">
+        <a class="cdoc-dropdown-option">Ten</a>
+        <a class="cdoc-dropdown-option">Twenty</a>
+        <a class="cdoc-dropdown-option">Thirty</a>
       </div>
     </div>
 </div>
