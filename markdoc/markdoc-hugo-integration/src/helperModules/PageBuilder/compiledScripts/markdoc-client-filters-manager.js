@@ -16,11 +16,11 @@
         Object.keys(resolvedPageFilters).forEach((filterId) => {
           const resolvedFilter = resolvedPageFilters[filterId];
           const currentValue = resolvedFilter.currentValue || resolvedFilter.defaultValue;
-          selectorHtml += '<div class="mdoc-filter__container">';
-          selectorHtml += `<div class="mdoc-filter__label">${resolvedFilter.displayName}</div>`;
+          selectorHtml += '<div class="cdoc-filter__container">';
+          selectorHtml += `<div class="cdoc-filter__label">${resolvedFilter.displayName}</div>`;
           resolvedFilter.options.forEach((option) => {
             const selected = option.id === currentValue ? "selected" : "";
-            selectorHtml += `<div class="mdoc-filter__pill ${selected}" data-filter-id="${resolvedFilter.id}" data-option-id="${option.id}">${option.displayName}</div>`;
+            selectorHtml += `<div class="cdoc-filter__pill ${selected}" data-filter-id="${resolvedFilter.id}" data-option-id="${option.id}">${option.displayName}</div>`;
           });
           selectorHtml += "</div>";
         });
@@ -12836,12 +12836,12 @@
         }
         /**
          * Check whether the element or any of its ancestors
-         * have the class 'mdoc__hidden'.
+         * have the class 'cdoc__hidden'.
          */
         elementIsHidden(element) {
           let currentElement = element;
           while (currentElement) {
-            if (currentElement.classList.contains("mdoc__hidden")) {
+            if (currentElement.classList.contains("cdoc__hidden")) {
               return true;
             }
             currentElement = currentElement.parentElement;
@@ -12905,7 +12905,7 @@
               newDisplayStatusByRef[ref] = resolvedFunction.value;
             }
           });
-          const toggleables = document.getElementsByClassName("mdoc__toggleable");
+          const toggleables = document.getElementsByClassName("cdoc__toggleable");
           for (let i = 0; i < toggleables.length; i++) {
             const toggleable = toggleables[i];
             const ref = toggleable.getAttribute("data-if");
@@ -12916,9 +12916,9 @@
               continue;
             }
             if (newDisplayStatusByRef[ref]) {
-              toggleable.classList.remove("mdoc__hidden");
+              toggleable.classList.remove("cdoc__hidden");
             } else {
-              toggleable.classList.add("mdoc__hidden");
+              toggleable.classList.add("cdoc__hidden");
             }
           }
         }
@@ -12926,7 +12926,7 @@
          * Listen for changes in the filter selector.
          */
         addFilterSelectorEventListeners() {
-          const filterOptionPills = document.getElementsByClassName("mdoc-filter__pill");
+          const filterOptionPills = document.getElementsByClassName("cdoc-filter__pill");
           for (let i = 0; i < filterOptionPills.length; i++) {
             filterOptionPills[i].addEventListener("click", (e) => this.handleFilterSelectionChange(e));
           }
@@ -12935,7 +12935,7 @@
          * Find the filter selector on a given page.
          */
         locateFilterSelectorEl() {
-          const filterSelectorEl = document.getElementById("mdoc-selector");
+          const filterSelectorEl = document.getElementById("cdoc-selector");
           if (!filterSelectorEl) {
             return false;
           } else {
@@ -12995,7 +12995,7 @@
             this.filterSelectorEl.style.visibility = "visible";
             this.filterSelectorEl.style.zIndex = "1000";
           }
-          const content = document.getElementById("mdoc-content");
+          const content = document.getElementById("cdoc-content");
           if (content) {
             content.style.visibility = "visible";
           }

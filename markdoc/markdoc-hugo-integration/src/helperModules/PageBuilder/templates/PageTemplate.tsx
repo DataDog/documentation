@@ -23,7 +23,7 @@ export const PageTemplate = (props: {
         filtersManifest={filtersManifest}
       />
       <div
-        id="mdoc-content"
+        id="cdoc-content"
         className="customizable"
         dangerouslySetInnerHTML={{ __html: articleHtml }}
       ></div>
@@ -43,7 +43,7 @@ function FilterSelectorTemplate(props: {
 
   return (
     <div
-      id="mdoc-selector"
+      id="cdoc-selector"
       dangerouslySetInnerHTML={{
         __html: buildFilterSelectorUi(
           resolvePageFilters({

@@ -1,7 +1,7 @@
 ---
 title: Traffic Light Colors (ja)
 ---
-<div id="mdoc-selector"><div><div class="mdoc-filter__container"><div class="mdoc-filter__label">Color</div><div class="mdoc-filter__pill " data-filter-id="color" data-option-id="red">Red (ja)</div><div class="mdoc-filter__pill " data-filter-id="color" data-option-id="yellow">Yellow (ja)</div><div class="mdoc-filter__pill selected" data-filter-id="color" data-option-id="green">Green (ja)</div></div><div class="mdoc-filter__container"><div class="mdoc-filter__label">Item</div><div class="mdoc-filter__pill selected" data-filter-id="item" data-option-id="grass">Grass</div><div class="mdoc-filter__pill " data-filter-id="item" data-option-id="emerald">Emerald</div><div class="mdoc-filter__pill " data-filter-id="item" data-option-id="lime">Lime</div><div class="mdoc-filter__pill " data-filter-id="item" data-option-id="frog">Frog</div></div><hr /></div></div><div id="mdoc-content" class="customizable"><article>
+<div id="cdoc-selector"><div><div class="cdoc-filter__container"><div class="cdoc-filter__label">Color</div><div class="cdoc-filter__pill " data-filter-id="color" data-option-id="red">Red (ja)</div><div class="cdoc-filter__pill " data-filter-id="color" data-option-id="yellow">Yellow (ja)</div><div class="cdoc-filter__pill selected" data-filter-id="color" data-option-id="green">Green (ja)</div></div><div class="cdoc-filter__container"><div class="cdoc-filter__label">Item</div><div class="cdoc-filter__pill selected" data-filter-id="item" data-option-id="grass">Grass</div><div class="cdoc-filter__pill " data-filter-id="item" data-option-id="emerald">Emerald</div><div class="cdoc-filter__pill " data-filter-id="item" data-option-id="lime">Lime</div><div class="cdoc-filter__pill " data-filter-id="item" data-option-id="frog">Frog</div></div><hr /></div></div><div id="cdoc-content" class="customizable"><article>
   <div class="alert alert-info">
     <p>This is just a test page. It's not real.</p>
   </div>
@@ -11,13 +11,13 @@ title: Traffic Light Colors (ja)
     seems contrived and odd, that's only because test pages are often both of
     those things.
   </p>
-  <div class="mdoc__toggleable" data-if="101">
+  <div class="cdoc__toggleable" data-if="101">
     <h2 id="green">Green</h2>
     <p>
       Green is a color that is often associated with nature, growth, and
       renewal.
     </p>
-    <div class="mdoc__toggleable" data-if="97">
+    <div class="cdoc__toggleable" data-if="97">
       <h3 id="grass">Grass</h3>
       <p>
         Grass is a common plant found in many environments, from lawns and
@@ -33,7 +33,7 @@ title: Traffic Light Colors (ja)
         and natural beauty.
       </p>
     </div>
-    <div class="mdoc__toggleable mdoc__hidden" data-if="98">
+    <div class="cdoc__toggleable cdoc__hidden" data-if="98">
       <h3 id="emerald">Emerald</h3>
       <p>
         Emeralds are a type of precious gemstone known for their rich green
@@ -48,7 +48,7 @@ title: Traffic Light Colors (ja)
         jewelry. They are believed to symbolize rebirth, love, and prosperity.
       </p>
     </div>
-    <div class="mdoc__toggleable mdoc__hidden" data-if="99">
+    <div class="cdoc__toggleable cdoc__hidden" data-if="99">
       <h3 id="lime">Lime</h3>
       <p>
         Limes are small, green citrus fruits known for their tart and tangy
@@ -63,7 +63,7 @@ title: Traffic Light Colors (ja)
         both sweet and savory dishes.
       </p>
     </div>
-    <div class="mdoc__toggleable mdoc__hidden" data-if="100">
+    <div class="cdoc__toggleable cdoc__hidden" data-if="100">
       <h3 id="frog">Frog</h3>
       <p>
         Frogs are amphibians known for their distinctive jumping abilities and
@@ -81,13 +81,13 @@ title: Traffic Light Colors (ja)
       </p>
     </div>
   </div>
-  <div class="mdoc__toggleable mdoc__hidden" data-if="102">
+  <div class="cdoc__toggleable cdoc__hidden" data-if="102">
     <h2 id="yellow">Yellow</h2>
     <p>
       Yellow is a bright and cheerful color that is often associated with
       happiness, energy, and warmth.
     </p>
-    <div class="mdoc__toggleable mdoc__hidden" data-if="104">
+    <div class="cdoc__toggleable cdoc__hidden" data-if="104">
       <h3 id="banana">Banana</h3>
       <p>
         Bananas are a type of fruit. They're often eaten raw or used in baking.
@@ -99,7 +99,7 @@ title: Traffic Light Colors (ja)
         fruit and makes it easy to carry and eat on the go.
       </p>
     </div>
-    <div class="mdoc__toggleable mdoc__hidden" data-if="105">
+    <div class="cdoc__toggleable cdoc__hidden" data-if="105">
       <h3 id="sunflower">Sunflower</h3>
       <p>
         Sunflowers are a striking type of flower recognized for their large,
@@ -116,7 +116,7 @@ title: Traffic Light Colors (ja)
         known as heliotropism, adds to its charm and appeal.
       </p>
     </div>
-    <div class="mdoc__toggleable mdoc__hidden" data-if="106">
+    <div class="cdoc__toggleable cdoc__hidden" data-if="106">
       <h3 id="lemon">Lemon</h3>
       <p>
         Lemons are a versatile citrus fruit known for their tart and tangy
@@ -131,7 +131,7 @@ title: Traffic Light Colors (ja)
         staple in many households.
       </p>
     </div>
-    <div class="mdoc__toggleable mdoc__hidden" data-if="107">
+    <div class="cdoc__toggleable cdoc__hidden" data-if="107">
       <h3 id="school-bus">School Bus</h3>
       <p>
         School buses are a vital mode of transportation for students, providing
@@ -147,13 +147,13 @@ title: Traffic Light Colors (ja)
       </p>
     </div>
   </div>
-  <div class="mdoc__toggleable mdoc__hidden" data-if="103">
+  <div class="cdoc__toggleable cdoc__hidden" data-if="103">
     <h2 id="red">Red</h2>
     <p>
       Red is a vibrant and intense color often associated with strong emotions
       such as love, passion, and anger.
     </p>
-    <div class="mdoc__toggleable mdoc__hidden" data-if="108">
+    <div class="cdoc__toggleable cdoc__hidden" data-if="108">
       <h3 id="ruby">Ruby</h3>
       <p>
         Rubies are precious gemstones renowned for their deep red color, which
@@ -169,7 +169,7 @@ title: Traffic Light Colors (ja)
         various cultures.
       </p>
     </div>
-    <div class="mdoc__toggleable mdoc__hidden" data-if="109">
+    <div class="cdoc__toggleable cdoc__hidden" data-if="109">
       <h3 id="apple">Apple</h3>
       <p>
         Apples are a widely consumed fruit known for their crisp texture and
@@ -185,7 +185,7 @@ title: Traffic Light Colors (ja)
         value.
       </p>
     </div>
-    <div class="mdoc__toggleable mdoc__hidden" data-if="110">
+    <div class="cdoc__toggleable cdoc__hidden" data-if="110">
       <h3 id="firetruck">Firetruck</h3>
       <p>
         Firetrucks are specialized vehicles designed to transport firefighters
@@ -201,7 +201,7 @@ title: Traffic Light Colors (ja)
         quick and efficient responses to emergencies.
       </p>
     </div>
-    <div class="mdoc__toggleable mdoc__hidden" data-if="111">
+    <div class="cdoc__toggleable cdoc__hidden" data-if="111">
       <h3 id="stop-sign">Stop Sign</h3>
       <p>
         Stop signs are essential traffic control devices used to manage vehicle

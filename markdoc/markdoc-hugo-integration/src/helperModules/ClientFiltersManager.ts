@@ -184,13 +184,13 @@ export class ClientFiltersManager {
 
   /**
    * Check whether the element or any of its ancestors
-   * have the class 'mdoc__hidden'.
+   * have the class 'cdoc__hidden'.
    */
   elementIsHidden(element: Element) {
     // check whether the element or any of its parents are hidden
     let currentElement: Element | null = element;
     while (currentElement) {
-      if (currentElement.classList.contains('mdoc__hidden')) {
+      if (currentElement.classList.contains('cdoc__hidden')) {
         return true;
       }
       currentElement = currentElement.parentElement;
@@ -267,7 +267,7 @@ export class ClientFiltersManager {
       }
     });
 
-    const toggleables = document.getElementsByClassName('mdoc__toggleable');
+    const toggleables = document.getElementsByClassName('cdoc__toggleable');
     for (let i = 0; i < toggleables.length; i++) {
       const toggleable = toggleables[i];
 
@@ -281,9 +281,9 @@ export class ClientFiltersManager {
       }
 
       if (newDisplayStatusByRef[ref]) {
-        toggleable.classList.remove('mdoc__hidden');
+        toggleable.classList.remove('cdoc__hidden');
       } else {
-        toggleable.classList.add('mdoc__hidden');
+        toggleable.classList.add('cdoc__hidden');
       }
     }
   }
@@ -292,7 +292,7 @@ export class ClientFiltersManager {
    * Listen for changes in the filter selector.
    */
   addFilterSelectorEventListeners() {
-    const filterOptionPills = document.getElementsByClassName('mdoc-filter__pill');
+    const filterOptionPills = document.getElementsByClassName('cdoc-filter__pill');
     for (let i = 0; i < filterOptionPills.length; i++) {
       filterOptionPills[i].addEventListener('click', (e) =>
         this.handleFilterSelectionChange(e)
@@ -304,7 +304,7 @@ export class ClientFiltersManager {
    * Find the filter selector on a given page.
    */
   locateFilterSelectorEl() {
-    const filterSelectorEl = document.getElementById('mdoc-selector');
+    const filterSelectorEl = document.getElementById('cdoc-selector');
     if (!filterSelectorEl) {
       return false;
     } else {
@@ -381,7 +381,7 @@ export class ClientFiltersManager {
       this.filterSelectorEl.style.zIndex = '1000';
     }
 
-    const content = document.getElementById('mdoc-content');
+    const content = document.getElementById('cdoc-content');
     if (content) {
       content.style.visibility = 'visible';
     }

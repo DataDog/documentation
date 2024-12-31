@@ -84,7 +84,7 @@ describe('custom components', () => {
   // in a different style than "shown" content
   const htmlWithStyles = `
   <style>
-    .mdoc__hidden {
+    .cdoc__hidden {
       background-color: dimgray;
       color: white;
     }
@@ -93,7 +93,7 @@ describe('custom components', () => {
       color: deeppink;
     }
 
-    .mdoc__hidden code {
+    .cdoc__hidden code {
       color: pink;
     }
 

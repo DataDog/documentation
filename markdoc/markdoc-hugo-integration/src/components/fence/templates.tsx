@@ -47,7 +47,7 @@ export const CodeBlockTemplate = (props: {
 function CodeSnippet(props: { contents: string; language: string }) {
   return (
     <div
-      className={`mdoc-code-snippet mdoc-language-${props.language}`}
+      className={`cdoc-code-snippet cdoc-language-${props.language}`}
       dangerouslySetInnerHTML={{ __html: props.contents }}
     ></div>
   );

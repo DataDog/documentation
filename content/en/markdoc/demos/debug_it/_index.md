@@ -1,7 +1,7 @@
 ---
 title: 'DebugIt: A Fake Debugging Library'
 ---
-<div id="mdoc-selector"><div><div class="mdoc-filter__container"><div class="mdoc-filter__label">Language</div><div class="mdoc-filter__pill selected" data-filter-id="prog_lang" data-option-id="python">Python</div><div class="mdoc-filter__pill " data-filter-id="prog_lang" data-option-id="go">Go</div><div class="mdoc-filter__pill " data-filter-id="prog_lang" data-option-id="javascript">JavaScript</div><div class="mdoc-filter__pill " data-filter-id="prog_lang" data-option-id="ruby">Ruby</div><div class="mdoc-filter__pill " data-filter-id="prog_lang" data-option-id="java">Java</div></div><div class="mdoc-filter__container"><div class="mdoc-filter__label">Operating system</div><div class="mdoc-filter__pill selected" data-filter-id="os" data-option-id="linux">Linux</div><div class="mdoc-filter__pill " data-filter-id="os" data-option-id="windows">Windows</div><div class="mdoc-filter__pill " data-filter-id="os" data-option-id="mac_os">MacOS</div></div><div class="mdoc-filter__container"><div class="mdoc-filter__label">Database</div><div class="mdoc-filter__pill selected" data-filter-id="database" data-option-id="postgres">Postgres</div><div class="mdoc-filter__pill " data-filter-id="database" data-option-id="mysql">MySQL</div><div class="mdoc-filter__pill " data-filter-id="database" data-option-id="sql_server">SQL Server</div></div><hr /></div></div><div id="mdoc-content" class="customizable"><article>
+<div id="cdoc-selector"><div><div class="cdoc-filter__container"><div class="cdoc-filter__label">Language</div><div class="cdoc-filter__pill selected" data-filter-id="prog_lang" data-option-id="python">Python</div><div class="cdoc-filter__pill " data-filter-id="prog_lang" data-option-id="go">Go</div><div class="cdoc-filter__pill " data-filter-id="prog_lang" data-option-id="javascript">JavaScript</div><div class="cdoc-filter__pill " data-filter-id="prog_lang" data-option-id="ruby">Ruby</div><div class="cdoc-filter__pill " data-filter-id="prog_lang" data-option-id="java">Java</div></div><div class="cdoc-filter__container"><div class="cdoc-filter__label">Operating system</div><div class="cdoc-filter__pill selected" data-filter-id="os" data-option-id="linux">Linux</div><div class="cdoc-filter__pill " data-filter-id="os" data-option-id="windows">Windows</div><div class="cdoc-filter__pill " data-filter-id="os" data-option-id="mac_os">MacOS</div></div><div class="cdoc-filter__container"><div class="cdoc-filter__label">Database</div><div class="cdoc-filter__pill selected" data-filter-id="database" data-option-id="postgres">Postgres</div><div class="cdoc-filter__pill " data-filter-id="database" data-option-id="mysql">MySQL</div><div class="cdoc-filter__pill " data-filter-id="database" data-option-id="sql_server">SQL Server</div></div><hr /></div></div><div id="cdoc-content" class="customizable"><article>
   <h2 id="overview">Overview</h2>
   <p>
     DebugIt is a powerful debugging library designed to streamline the debugging
@@ -11,14 +11,14 @@ title: 'DebugIt: A Fake Debugging Library'
   </p>
   <h2 id="setup">Setup</h2>
   <h3 id="install-the-debugit-library">Install the DebugIt library</h3>
-  <div class="mdoc__toggleable" data-if="30">
+  <div class="cdoc__toggleable" data-if="30">
     <div class="code-snippet-wrapper">
       <div class="code-filename-wrapper d-flex justify-content-end"></div>
       <div class="code-snippet">
         <div class="code-button-wrapper position-absolute">
           <button class="btn text-primary js-copy-button">Copy</button>
         </div>
-        <div class="mdoc-code-snippet mdoc-language-shell">
+        <div class="cdoc-code-snippet cdoc-language-shell">
           <pre
             tabindex="0"
             class="chroma"
@@ -28,14 +28,14 @@ title: 'DebugIt: A Fake Debugging Library'
       </div>
     </div>
   </div>
-  <div class="mdoc__toggleable mdoc__hidden" data-if="31">
+  <div class="cdoc__toggleable cdoc__hidden" data-if="31">
     <div class="code-snippet-wrapper">
       <div class="code-filename-wrapper d-flex justify-content-end"></div>
       <div class="code-snippet">
         <div class="code-button-wrapper position-absolute">
           <button class="btn text-primary js-copy-button">Copy</button>
         </div>
-        <div class="mdoc-code-snippet mdoc-language-shell">
+        <div class="cdoc-code-snippet cdoc-language-shell">
           <pre
             tabindex="0"
             class="chroma"
@@ -45,14 +45,14 @@ title: 'DebugIt: A Fake Debugging Library'
       </div>
     </div>
   </div>
-  <div class="mdoc__toggleable mdoc__hidden" data-if="32">
+  <div class="cdoc__toggleable cdoc__hidden" data-if="32">
     <div class="code-snippet-wrapper">
       <div class="code-filename-wrapper d-flex justify-content-end"></div>
       <div class="code-snippet">
         <div class="code-button-wrapper position-absolute">
           <button class="btn text-primary js-copy-button">Copy</button>
         </div>
-        <div class="mdoc-code-snippet mdoc-language-shell">
+        <div class="cdoc-code-snippet cdoc-language-shell">
           <pre
             tabindex="0"
             class="chroma"
@@ -62,14 +62,14 @@ title: 'DebugIt: A Fake Debugging Library'
       </div>
     </div>
   </div>
-  <div class="mdoc__toggleable mdoc__hidden" data-if="33">
+  <div class="cdoc__toggleable cdoc__hidden" data-if="33">
     <div class="code-snippet-wrapper">
       <div class="code-filename-wrapper d-flex justify-content-end"></div>
       <div class="code-snippet">
         <div class="code-button-wrapper position-absolute">
           <button class="btn text-primary js-copy-button">Copy</button>
         </div>
-        <div class="mdoc-code-snippet mdoc-language-shell">
+        <div class="cdoc-code-snippet cdoc-language-shell">
           <pre
             tabindex="0"
             class="chroma"
@@ -79,14 +79,14 @@ title: 'DebugIt: A Fake Debugging Library'
       </div>
     </div>
   </div>
-  <div class="mdoc__toggleable mdoc__hidden" data-if="34">
+  <div class="cdoc__toggleable cdoc__hidden" data-if="34">
     <div class="code-snippet-wrapper">
       <div class="code-filename-wrapper d-flex justify-content-end"></div>
       <div class="code-snippet">
         <div class="code-button-wrapper position-absolute">
           <button class="btn text-primary js-copy-button">Copy</button>
         </div>
-        <div class="mdoc-code-snippet mdoc-language-shell">
+        <div class="cdoc-code-snippet cdoc-language-shell">
           <pre
             tabindex="0"
             class="chroma"
@@ -99,15 +99,15 @@ title: 'DebugIt: A Fake Debugging Library'
   <h3 id="add-the-debugit-library-to-your-path">
     Add the DebugIt library to your path
   </h3>
-  <div class="mdoc__toggleable mdoc__hidden" data-if="40">
-    <div class="mdoc__toggleable" data-if="35">
+  <div class="cdoc__toggleable cdoc__hidden" data-if="40">
+    <div class="cdoc__toggleable" data-if="35">
       <div class="code-snippet-wrapper">
         <div class="code-filename-wrapper d-flex justify-content-end"></div>
         <div class="code-snippet">
           <div class="code-button-wrapper position-absolute">
             <button class="btn text-primary js-copy-button">Copy</button>
           </div>
-          <div class="mdoc-code-snippet mdoc-language-shell">
+          <div class="cdoc-code-snippet cdoc-language-shell">
             <pre
               tabindex="0"
               class="chroma"
@@ -117,14 +117,14 @@ title: 'DebugIt: A Fake Debugging Library'
         </div>
       </div>
     </div>
-    <div class="mdoc__toggleable mdoc__hidden" data-if="36">
+    <div class="cdoc__toggleable cdoc__hidden" data-if="36">
       <div class="code-snippet-wrapper">
         <div class="code-filename-wrapper d-flex justify-content-end"></div>
         <div class="code-snippet">
           <div class="code-button-wrapper position-absolute">
             <button class="btn text-primary js-copy-button">Copy</button>
           </div>
-          <div class="mdoc-code-snippet mdoc-language-shell">
+          <div class="cdoc-code-snippet cdoc-language-shell">
             <pre
               tabindex="0"
               class="chroma"
@@ -134,14 +134,14 @@ title: 'DebugIt: A Fake Debugging Library'
         </div>
       </div>
     </div>
-    <div class="mdoc__toggleable mdoc__hidden" data-if="37">
+    <div class="cdoc__toggleable cdoc__hidden" data-if="37">
       <div class="code-snippet-wrapper">
         <div class="code-filename-wrapper d-flex justify-content-end"></div>
         <div class="code-snippet">
           <div class="code-button-wrapper position-absolute">
             <button class="btn text-primary js-copy-button">Copy</button>
           </div>
-          <div class="mdoc-code-snippet mdoc-language-shell">
+          <div class="cdoc-code-snippet cdoc-language-shell">
             <pre
               tabindex="0"
               class="chroma"
@@ -151,14 +151,14 @@ title: 'DebugIt: A Fake Debugging Library'
         </div>
       </div>
     </div>
-    <div class="mdoc__toggleable mdoc__hidden" data-if="38">
+    <div class="cdoc__toggleable cdoc__hidden" data-if="38">
       <div class="code-snippet-wrapper">
         <div class="code-filename-wrapper d-flex justify-content-end"></div>
         <div class="code-snippet">
           <div class="code-button-wrapper position-absolute">
             <button class="btn text-primary js-copy-button">Copy</button>
           </div>
-          <div class="mdoc-code-snippet mdoc-language-shell">
+          <div class="cdoc-code-snippet cdoc-language-shell">
             <pre
               tabindex="0"
               class="chroma"
@@ -168,14 +168,14 @@ title: 'DebugIt: A Fake Debugging Library'
         </div>
       </div>
     </div>
-    <div class="mdoc__toggleable mdoc__hidden" data-if="39">
+    <div class="cdoc__toggleable cdoc__hidden" data-if="39">
       <div class="code-snippet-wrapper">
         <div class="code-filename-wrapper d-flex justify-content-end"></div>
         <div class="code-snippet">
           <div class="code-button-wrapper position-absolute">
             <button class="btn text-primary js-copy-button">Copy</button>
           </div>
-          <div class="mdoc-code-snippet mdoc-language-shell">
+          <div class="cdoc-code-snippet cdoc-language-shell">
             <pre
               tabindex="0"
               class="chroma"
@@ -186,15 +186,15 @@ title: 'DebugIt: A Fake Debugging Library'
       </div>
     </div>
   </div>
-  <div class="mdoc__toggleable" data-if="46">
-    <div class="mdoc__toggleable" data-if="41">
+  <div class="cdoc__toggleable" data-if="46">
+    <div class="cdoc__toggleable" data-if="41">
       <div class="code-snippet-wrapper">
         <div class="code-filename-wrapper d-flex justify-content-end"></div>
         <div class="code-snippet">
           <div class="code-button-wrapper position-absolute">
             <button class="btn text-primary js-copy-button">Copy</button>
           </div>
-          <div class="mdoc-code-snippet mdoc-language-shell">
+          <div class="cdoc-code-snippet cdoc-language-shell">
             <pre
               tabindex="0"
               class="chroma"
@@ -204,14 +204,14 @@ title: 'DebugIt: A Fake Debugging Library'
         </div>
       </div>
     </div>
-    <div class="mdoc__toggleable mdoc__hidden" data-if="42">
+    <div class="cdoc__toggleable cdoc__hidden" data-if="42">
       <div class="code-snippet-wrapper">
         <div class="code-filename-wrapper d-flex justify-content-end"></div>
         <div class="code-snippet">
           <div class="code-button-wrapper position-absolute">
             <button class="btn text-primary js-copy-button">Copy</button>
           </div>
-          <div class="mdoc-code-snippet mdoc-language-shell">
+          <div class="cdoc-code-snippet cdoc-language-shell">
             <pre
               tabindex="0"
               class="chroma"
@@ -221,14 +221,14 @@ title: 'DebugIt: A Fake Debugging Library'
         </div>
       </div>
     </div>
-    <div class="mdoc__toggleable mdoc__hidden" data-if="43">
+    <div class="cdoc__toggleable cdoc__hidden" data-if="43">
       <div class="code-snippet-wrapper">
         <div class="code-filename-wrapper d-flex justify-content-end"></div>
         <div class="code-snippet">
           <div class="code-button-wrapper position-absolute">
             <button class="btn text-primary js-copy-button">Copy</button>
           </div>
-          <div class="mdoc-code-snippet mdoc-language-shell">
+          <div class="cdoc-code-snippet cdoc-language-shell">
             <pre
               tabindex="0"
               class="chroma"
@@ -238,14 +238,14 @@ title: 'DebugIt: A Fake Debugging Library'
         </div>
       </div>
     </div>
-    <div class="mdoc__toggleable mdoc__hidden" data-if="44">
+    <div class="cdoc__toggleable cdoc__hidden" data-if="44">
       <div class="code-snippet-wrapper">
         <div class="code-filename-wrapper d-flex justify-content-end"></div>
         <div class="code-snippet">
           <div class="code-button-wrapper position-absolute">
             <button class="btn text-primary js-copy-button">Copy</button>
           </div>
-          <div class="mdoc-code-snippet mdoc-language-shell">
+          <div class="cdoc-code-snippet cdoc-language-shell">
             <pre
               tabindex="0"
               class="chroma"
@@ -255,14 +255,14 @@ title: 'DebugIt: A Fake Debugging Library'
         </div>
       </div>
     </div>
-    <div class="mdoc__toggleable mdoc__hidden" data-if="45">
+    <div class="cdoc__toggleable cdoc__hidden" data-if="45">
       <div class="code-snippet-wrapper">
         <div class="code-filename-wrapper d-flex justify-content-end"></div>
         <div class="code-snippet">
           <div class="code-button-wrapper position-absolute">
             <button class="btn text-primary js-copy-button">Copy</button>
           </div>
-          <div class="mdoc-code-snippet mdoc-language-shell">
+          <div class="cdoc-code-snippet cdoc-language-shell">
             <pre
               tabindex="0"
               class="chroma"
@@ -273,15 +273,15 @@ title: 'DebugIt: A Fake Debugging Library'
       </div>
     </div>
   </div>
-  <div class="mdoc__toggleable mdoc__hidden" data-if="52">
-    <div class="mdoc__toggleable" data-if="47">
+  <div class="cdoc__toggleable cdoc__hidden" data-if="52">
+    <div class="cdoc__toggleable" data-if="47">
       <div class="code-snippet-wrapper">
         <div class="code-filename-wrapper d-flex justify-content-end"></div>
         <div class="code-snippet">
           <div class="code-button-wrapper position-absolute">
             <button class="btn text-primary js-copy-button">Copy</button>
           </div>
-          <div class="mdoc-code-snippet mdoc-language-shell">
+          <div class="cdoc-code-snippet cdoc-language-shell">
             <pre
               tabindex="0"
               class="chroma"
@@ -291,14 +291,14 @@ title: 'DebugIt: A Fake Debugging Library'
         </div>
       </div>
     </div>
-    <div class="mdoc__toggleable mdoc__hidden" data-if="48">
+    <div class="cdoc__toggleable cdoc__hidden" data-if="48">
       <div class="code-snippet-wrapper">
         <div class="code-filename-wrapper d-flex justify-content-end"></div>
         <div class="code-snippet">
           <div class="code-button-wrapper position-absolute">
             <button class="btn text-primary js-copy-button">Copy</button>
           </div>
-          <div class="mdoc-code-snippet mdoc-language-shell">
+          <div class="cdoc-code-snippet cdoc-language-shell">
             <pre
               tabindex="0"
               class="chroma"
@@ -308,14 +308,14 @@ title: 'DebugIt: A Fake Debugging Library'
         </div>
       </div>
     </div>
-    <div class="mdoc__toggleable mdoc__hidden" data-if="49">
+    <div class="cdoc__toggleable cdoc__hidden" data-if="49">
       <div class="code-snippet-wrapper">
         <div class="code-filename-wrapper d-flex justify-content-end"></div>
         <div class="code-snippet">
           <div class="code-button-wrapper position-absolute">
             <button class="btn text-primary js-copy-button">Copy</button>
           </div>
-          <div class="mdoc-code-snippet mdoc-language-shell">
+          <div class="cdoc-code-snippet cdoc-language-shell">
             <pre
               tabindex="0"
               class="chroma"
@@ -325,14 +325,14 @@ title: 'DebugIt: A Fake Debugging Library'
         </div>
       </div>
     </div>
-    <div class="mdoc__toggleable mdoc__hidden" data-if="50">
+    <div class="cdoc__toggleable cdoc__hidden" data-if="50">
       <div class="code-snippet-wrapper">
         <div class="code-filename-wrapper d-flex justify-content-end"></div>
         <div class="code-snippet">
           <div class="code-button-wrapper position-absolute">
             <button class="btn text-primary js-copy-button">Copy</button>
           </div>
-          <div class="mdoc-code-snippet mdoc-language-shell">
+          <div class="cdoc-code-snippet cdoc-language-shell">
             <pre
               tabindex="0"
               class="chroma"
@@ -342,14 +342,14 @@ title: 'DebugIt: A Fake Debugging Library'
         </div>
       </div>
     </div>
-    <div class="mdoc__toggleable mdoc__hidden" data-if="51">
+    <div class="cdoc__toggleable cdoc__hidden" data-if="51">
       <div class="code-snippet-wrapper">
         <div class="code-filename-wrapper d-flex justify-content-end"></div>
         <div class="code-snippet">
           <div class="code-button-wrapper position-absolute">
             <button class="btn text-primary js-copy-button">Copy</button>
           </div>
-          <div class="mdoc-code-snippet mdoc-language-shell">
+          <div class="cdoc-code-snippet cdoc-language-shell">
             <pre
               tabindex="0"
               class="chroma"
@@ -361,14 +361,14 @@ title: 'DebugIt: A Fake Debugging Library'
     </div>
   </div>
   <h3 id="create-the-database-table">Create the database table</h3>
-  <div class="mdoc__toggleable mdoc__hidden" data-if="53">
+  <div class="cdoc__toggleable cdoc__hidden" data-if="53">
     <div class="code-snippet-wrapper">
       <div class="code-filename-wrapper d-flex justify-content-end"></div>
       <div class="code-snippet">
         <div class="code-button-wrapper position-absolute">
           <button class="btn text-primary js-copy-button">Copy</button>
         </div>
-        <div class="mdoc-code-snippet mdoc-language-sql">
+        <div class="cdoc-code-snippet cdoc-language-sql">
           <pre
             tabindex="0"
             class="chroma"
@@ -382,14 +382,14 @@ title: 'DebugIt: A Fake Debugging Library'
       </div>
     </div>
   </div>
-  <div class="mdoc__toggleable" data-if="54">
+  <div class="cdoc__toggleable" data-if="54">
     <div class="code-snippet-wrapper">
       <div class="code-filename-wrapper d-flex justify-content-end"></div>
       <div class="code-snippet">
         <div class="code-button-wrapper position-absolute">
           <button class="btn text-primary js-copy-button">Copy</button>
         </div>
-        <div class="mdoc-code-snippet mdoc-language-sql">
+        <div class="cdoc-code-snippet cdoc-language-sql">
           <pre
             tabindex="0"
             class="chroma"
@@ -403,14 +403,14 @@ title: 'DebugIt: A Fake Debugging Library'
       </div>
     </div>
   </div>
-  <div class="mdoc__toggleable mdoc__hidden" data-if="55">
+  <div class="cdoc__toggleable cdoc__hidden" data-if="55">
     <div class="code-snippet-wrapper">
       <div class="code-filename-wrapper d-flex justify-content-end"></div>
       <div class="code-snippet">
         <div class="code-button-wrapper position-absolute">
           <button class="btn text-primary js-copy-button">Copy</button>
         </div>
-        <div class="mdoc-code-snippet mdoc-language-sql">
+        <div class="cdoc-code-snippet cdoc-language-sql">
           <pre
             tabindex="0"
             class="chroma"

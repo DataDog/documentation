@@ -126,9 +126,9 @@ function render(p: {
     if ('ref' in p.node.if) {
       ref = `data-if=${p.node.if.ref}`;
     }
-    let wrapperTagClasses = 'mdoc__toggleable';
+    let wrapperTagClasses = 'cdoc__toggleable';
     if (attributes?.display === 'false') {
-      wrapperTagClasses += ` mdoc__hidden`;
+      wrapperTagClasses += ` cdoc__hidden`;
     }
     let wrapperTagOutput = `<${name} class="${wrapperTagClasses}" ${ref}>`;
     wrapperTagOutput += render({ ...p, node: children });

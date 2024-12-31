@@ -1,7 +1,7 @@
 ---
 title: The Primary Colors of the Color Wheel
 ---
-<div id="mdoc-selector"><div><div class="mdoc-filter__container"><div class="mdoc-filter__label">Color</div><div class="mdoc-filter__pill " data-filter-id="color" data-option-id="red">Red</div><div class="mdoc-filter__pill " data-filter-id="color" data-option-id="yellow">Yellow</div><div class="mdoc-filter__pill selected" data-filter-id="color" data-option-id="blue">Blue</div></div><div class="mdoc-filter__container"><div class="mdoc-filter__label">Item</div><div class="mdoc-filter__pill " data-filter-id="item" data-option-id="ocean">Ocean</div><div class="mdoc-filter__pill selected" data-filter-id="item" data-option-id="sky">Sky</div><div class="mdoc-filter__pill " data-filter-id="item" data-option-id="jeans">Jeans</div><div class="mdoc-filter__pill " data-filter-id="item" data-option-id="blueberry">Blueberry</div></div><hr /></div></div><div id="mdoc-content" class="customizable"><article>
+<div id="mdoc-selector"><div><div class="cdoc-filter__container"><div class="cdoc-filter__label">Color</div><div class="cdoc-filter__pill " data-filter-id="color" data-option-id="red">Red</div><div class="cdoc-filter__pill " data-filter-id="color" data-option-id="yellow">Yellow</div><div class="cdoc-filter__pill selected" data-filter-id="color" data-option-id="blue">Blue</div></div><div class="cdoc-filter__container"><div class="cdoc-filter__label">Item</div><div class="cdoc-filter__pill " data-filter-id="item" data-option-id="ocean">Ocean</div><div class="cdoc-filter__pill selected" data-filter-id="item" data-option-id="sky">Sky</div><div class="cdoc-filter__pill " data-filter-id="item" data-option-id="jeans">Jeans</div><div class="cdoc-filter__pill " data-filter-id="item" data-option-id="blueberry">Blueberry</div></div><hr /></div></div><div id="mdoc-content" class="customizable"><article>
   <p>
     This test page explores everyday items that are blue, yellow, or red --
     which also happen to be the primary colors of the color wheel. If this seems
@@ -9,75 +9,75 @@ title: The Primary Colors of the Color Wheel
     things.
   </p>
   <h2>sky: Your blue item of choice</h2>
-  <div class="mdoc__toggleable mdoc__hidden" data-if="37">
-    <div class="mdoc__toggleable mdoc__hidden" data-if="33">
+  <div class="cdoc__toggleable cdoc__hidden" data-if="37">
+    <div class="cdoc__toggleable cdoc__hidden" data-if="33">
       <p>
         The ocean is a large body of saltwater. It covers about 70% of the
         Earth's surface.
       </p>
     </div>
-    <div class="mdoc__toggleable" data-if="34">
+    <div class="cdoc__toggleable" data-if="34">
       <p>
         The sky is the atmosphere as seen from the Earth's surface. It appears
         blue during the day.
       </p>
     </div>
-    <div class="mdoc__toggleable mdoc__hidden" data-if="35">
+    <div class="cdoc__toggleable cdoc__hidden" data-if="35">
       <p>
         Jeans are a type of clothing. They're often made from denim and are
         known for their durability.
       </p>
     </div>
-    <div class="mdoc__toggleable mdoc__hidden" data-if="36">
+    <div class="cdoc__toggleable cdoc__hidden" data-if="36">
       <p>
         Blueberries are a type of fruit. They're often eaten raw or used in
         baking.
       </p>
     </div>
   </div>
-  <div class="mdoc__toggleable mdoc__hidden" data-if="38">
-    <div class="mdoc__toggleable mdoc__hidden" data-if="40">
+  <div class="cdoc__toggleable cdoc__hidden" data-if="38">
+    <div class="cdoc__toggleable cdoc__hidden" data-if="40">
       <p>
         Bananas are a type of fruit. They're often eaten raw or used in baking.
       </p>
     </div>
-    <div class="mdoc__toggleable mdoc__hidden" data-if="41">
+    <div class="cdoc__toggleable cdoc__hidden" data-if="41">
       <p>
         Sunflowers are a type of flower. They're known for their large, yellow
         petals.
       </p>
     </div>
-    <div class="mdoc__toggleable mdoc__hidden" data-if="42">
+    <div class="cdoc__toggleable cdoc__hidden" data-if="42">
       <p>
         Lemons are a type of citrus fruit. They're often used in drinks and
         cooking.
       </p>
     </div>
-    <div class="mdoc__toggleable mdoc__hidden" data-if="43">
+    <div class="cdoc__toggleable cdoc__hidden" data-if="43">
       <p>
         School buses are a type of vehicle. They're often used to transport
         students to and from school.
       </p>
     </div>
   </div>
-  <div class="mdoc__toggleable mdoc__hidden" data-if="39">
-    <div class="mdoc__toggleable mdoc__hidden" data-if="44">
+  <div class="cdoc__toggleable cdoc__hidden" data-if="39">
+    <div class="cdoc__toggleable cdoc__hidden" data-if="44">
       <p>
         Rubies are a type of gemstone. They're known for their deep red color.
       </p>
     </div>
-    <div class="mdoc__toggleable mdoc__hidden" data-if="45">
+    <div class="cdoc__toggleable cdoc__hidden" data-if="45">
       <p>
         Apples are a type of fruit. They're often eaten raw or used in baking.
       </p>
     </div>
-    <div class="mdoc__toggleable mdoc__hidden" data-if="46">
+    <div class="cdoc__toggleable cdoc__hidden" data-if="46">
       <p>
         Firetrucks are a type of vehicle. They're often used to transport
         firefighters and equipment to emergency situations.
       </p>
     </div>
-    <div class="mdoc__toggleable mdoc__hidden" data-if="47">
+    <div class="cdoc__toggleable cdoc__hidden" data-if="47">
       <p>
         Stop signs are a type of traffic sign. They're used to indicate that
         drivers should stop their vehicles.

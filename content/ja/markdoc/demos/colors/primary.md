@@ -3,7 +3,7 @@ title: Primary Colors (ja)
 aliases:
   - /primary_colors_alias/
 ---
-<div id="mdoc-selector"><div><div class="mdoc-filter__container"><div class="mdoc-filter__label">Color</div><div class="mdoc-filter__pill " data-filter-id="color" data-option-id="red">Red (ja)</div><div class="mdoc-filter__pill " data-filter-id="color" data-option-id="yellow">Yellow (ja)</div><div class="mdoc-filter__pill selected" data-filter-id="color" data-option-id="blue">Blue (ja)</div></div><div class="mdoc-filter__container"><div class="mdoc-filter__label">Item</div><div class="mdoc-filter__pill selected" data-filter-id="item" data-option-id="ocean">Ocean</div><div class="mdoc-filter__pill " data-filter-id="item" data-option-id="sky">Sky</div><div class="mdoc-filter__pill " data-filter-id="item" data-option-id="jeans">Jeans</div><div class="mdoc-filter__pill " data-filter-id="item" data-option-id="blueberry">Blueberry</div></div><hr /></div></div><div id="mdoc-content" class="customizable"><article>
+<div id="cdoc-selector"><div><div class="cdoc-filter__container"><div class="cdoc-filter__label">Color</div><div class="cdoc-filter__pill " data-filter-id="color" data-option-id="red">Red (ja)</div><div class="cdoc-filter__pill " data-filter-id="color" data-option-id="yellow">Yellow (ja)</div><div class="cdoc-filter__pill selected" data-filter-id="color" data-option-id="blue">Blue (ja)</div></div><div class="cdoc-filter__container"><div class="cdoc-filter__label">Item</div><div class="cdoc-filter__pill selected" data-filter-id="item" data-option-id="ocean">Ocean</div><div class="cdoc-filter__pill " data-filter-id="item" data-option-id="sky">Sky</div><div class="cdoc-filter__pill " data-filter-id="item" data-option-id="jeans">Jeans</div><div class="cdoc-filter__pill " data-filter-id="item" data-option-id="blueberry">Blueberry</div></div><hr /></div></div><div id="cdoc-content" class="customizable"><article>
   <div class="alert alert-warning">
     <p>Warning: This is just a test page. It's not real.</p>
   </div>
@@ -13,13 +13,13 @@ aliases:
     contrived and odd, that's only because test pages are often both of those
     things.
   </p>
-  <div class="mdoc__toggleable" data-if="86">
+  <div class="cdoc__toggleable" data-if="86">
     <h2 id="blue">Blue</h2>
     <p>
       Blue is a calming and serene color that is often associated with
       tranquility, stability, and trust.
     </p>
-    <div class="mdoc__toggleable" data-if="82">
+    <div class="cdoc__toggleable" data-if="82">
       <h3 id="ocean">Ocean</h3>
       <p>
         The ocean is a vast and expansive body of saltwater that covers
@@ -35,7 +35,7 @@ aliases:
         reflection.
       </p>
     </div>
-    <div class="mdoc__toggleable mdoc__hidden" data-if="83">
+    <div class="cdoc__toggleable cdoc__hidden" data-if="83">
       <h3 id="sky">Sky</h3>
       <p>
         The sky is the expanse of atmosphere that we see when we look up from
@@ -51,7 +51,7 @@ aliases:
         ever-changing nature inspire a sense of wonder and curiosity.
       </p>
     </div>
-    <div class="mdoc__toggleable mdoc__hidden" data-if="84">
+    <div class="cdoc__toggleable cdoc__hidden" data-if="84">
       <h3 id="jeans">Jeans</h3>
       <p>
         Jeans are a type of durable clothing typically made from denim fabric.
@@ -66,7 +66,7 @@ aliases:
         appeal of jeans have made them a beloved garment for people of all ages.
       </p>
     </div>
-    <div class="mdoc__toggleable mdoc__hidden" data-if="85">
+    <div class="cdoc__toggleable cdoc__hidden" data-if="85">
       <h3 id="blueberry">Blueberry</h3>
       <p>
         Blueberries are small, round fruits that are known for their sweet and
@@ -82,13 +82,13 @@ aliases:
       </p>
     </div>
   </div>
-  <div class="mdoc__toggleable mdoc__hidden" data-if="87">
+  <div class="cdoc__toggleable cdoc__hidden" data-if="87">
     <h2 id="yellow">Yellow</h2>
     <p>
       Yellow is a bright and cheerful color that is often associated with
       happiness, energy, and warmth.
     </p>
-    <div class="mdoc__toggleable mdoc__hidden" data-if="89">
+    <div class="cdoc__toggleable cdoc__hidden" data-if="89">
       <h3 id="banana">Banana</h3>
       <p>
         Bananas are a type of fruit. They're often eaten raw or used in baking.
@@ -100,7 +100,7 @@ aliases:
         fruit and makes it easy to carry and eat on the go.
       </p>
     </div>
-    <div class="mdoc__toggleable mdoc__hidden" data-if="90">
+    <div class="cdoc__toggleable cdoc__hidden" data-if="90">
       <h3 id="sunflower">Sunflower</h3>
       <p>
         Sunflowers are a striking type of flower recognized for their large,
@@ -117,7 +117,7 @@ aliases:
         known as heliotropism, adds to its charm and appeal.
       </p>
     </div>
-    <div class="mdoc__toggleable mdoc__hidden" data-if="91">
+    <div class="cdoc__toggleable cdoc__hidden" data-if="91">
       <h3 id="lemon">Lemon</h3>
       <p>
         Lemons are a versatile citrus fruit known for their tart and tangy
@@ -132,7 +132,7 @@ aliases:
         staple in many households.
       </p>
     </div>
-    <div class="mdoc__toggleable mdoc__hidden" data-if="92">
+    <div class="cdoc__toggleable cdoc__hidden" data-if="92">
       <h3 id="school-bus">School Bus</h3>
       <p>
         School buses are a vital mode of transportation for students, providing
@@ -148,13 +148,13 @@ aliases:
       </p>
     </div>
   </div>
-  <div class="mdoc__toggleable mdoc__hidden" data-if="88">
+  <div class="cdoc__toggleable cdoc__hidden" data-if="88">
     <h2 id="red">Red</h2>
     <p>
       Red is a vibrant and intense color often associated with strong emotions
       such as love, passion, and anger.
     </p>
-    <div class="mdoc__toggleable mdoc__hidden" data-if="93">
+    <div class="cdoc__toggleable cdoc__hidden" data-if="93">
       <h3 id="ruby">Ruby</h3>
       <p>
         Rubies are precious gemstones renowned for their deep red color, which
@@ -170,7 +170,7 @@ aliases:
         various cultures.
       </p>
     </div>
-    <div class="mdoc__toggleable mdoc__hidden" data-if="94">
+    <div class="cdoc__toggleable cdoc__hidden" data-if="94">
       <h3 id="apple">Apple</h3>
       <p>
         Apples are a widely consumed fruit known for their crisp texture and
@@ -186,7 +186,7 @@ aliases:
         value.
       </p>
     </div>
-    <div class="mdoc__toggleable mdoc__hidden" data-if="95">
+    <div class="cdoc__toggleable cdoc__hidden" data-if="95">
       <h3 id="firetruck">Firetruck</h3>
       <p>
         Firetrucks are specialized vehicles designed to transport firefighters
@@ -202,7 +202,7 @@ aliases:
         quick and efficient responses to emergencies.
       </p>
     </div>
-    <div class="mdoc__toggleable mdoc__hidden" data-if="96">
+    <div class="cdoc__toggleable cdoc__hidden" data-if="96">
       <h3 id="stop-sign">Stop Sign</h3>
       <p>
         Stop signs are essential traffic control devices used to manage vehicle

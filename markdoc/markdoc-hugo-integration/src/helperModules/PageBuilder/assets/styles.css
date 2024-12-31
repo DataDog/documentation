@@ -1,11 +1,11 @@
-.mdoc__hidden {
+.cdoc__hidden {
     display: none;
 }
-#mdoc-selector,
-#markdoc-content.customizable {
+#cdoc-selector,
+#cdoc-content.customizable {
     visibility: hidden;
 }
-.mdoc-filter__pill {
+.cdoc-filter__pill {
     display: inline-block;
     padding: 5px 10px;
     margin-right: 6px;
@@ -16,26 +16,26 @@
     font-size: 16px;
     border-radius: 5px;
 }
-div.mdoc-code-snippet.mdoc-language-shell span.line:before {
+div.cdoc-code-snippet.cdoc-language-shell span.line:before {
     content: '$ ';
     display: inline;
 }
-div.mdoc-code-snippet.mdoc-language-bash span.line:before {
+div.cdoc-code-snippet.cdoc-language-bash span.line:before {
     content: '$ ';
     display: inline;
 }
-.mdoc-filter__pill.selected {
+.cdoc-filter__pill.selected {
     color: white;
     background-color: #632ca6;
     border-color: #632ca6;
 }
-.mdoc-filter__label {
+.cdoc-filter__label {
     text-transform: uppercase;
     font-size: 14px;
     font-weight: 400;
     margin-bottom: 5px;
 }
-.mdoc-filter__container {
+.cdoc-filter__container {
     display: inline-block;
     margin-right: 25px;
 }
@@ -48,28 +48,28 @@ div.mdoc-code-snippet.mdoc-language-bash span.line:before {
 .alert.alert-danger p {
     color: #82322f;
 }
-#mdoc-content .alert p {
+#cdoc-content .alert p {
     font-size: 16px;
     font-family: nationalweb, Helvetica, Arial, sans-serif;
     margin-bottom: 0;
 }
-#mdoc-content .alert p + p {
+#cdoc-content .alert p + p {
     margin-top: 16px;
 }
-#mdoc-content table ul,
-#mdoc-content table p {
+#cdoc-content table ul,
+#cdoc-content table p {
     font-size: 16px;
     font-family: nationalweb, Helvetica, Arial, sans-serif;
 }
-#mdoc-content.customizable h1,
-#mdoc-content.customizable h2,
-#mdoc-content.customizable h3,
-#mdoc-content.customizable h4,
-#mdoc-content.customizable h5,
-#mdoc-content.customizable h6 {
+#cdoc-content.customizable h1,
+#cdoc-content.customizable h2,
+#cdoc-content.customizable h3,
+#cdoc-content.customizable h4,
+#cdoc-content.customizable h5,
+#cdoc-content.customizable h6 {
     scroll-margin-top: 95px;
 }
-span.s1 code.mdoc,
-span.s2 code.mdoc {
+span.s1 code.cdoc,
+span.s2 code.cdoc {
     color: #c41a16;
 }

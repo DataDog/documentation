@@ -3,7 +3,7 @@ title: Primary Colors
 aliases:
   - /primary_colors_alias/
 ---
-<div id="mdoc-selector"><div><div class="mdoc-filter__container"><div class="mdoc-filter__label">Color</div><div class="mdoc-filter__pill " data-filter-id="color" data-option-id="red">Red</div><div class="mdoc-filter__pill " data-filter-id="color" data-option-id="yellow">Yellow</div><div class="mdoc-filter__pill selected" data-filter-id="color" data-option-id="blue">Blue</div></div><div class="mdoc-filter__container"><div class="mdoc-filter__label">Item</div><div class="mdoc-filter__pill " data-filter-id="item" data-option-id="ocean">Ocean</div><div class="mdoc-filter__pill selected" data-filter-id="item" data-option-id="sky">Sky</div><div class="mdoc-filter__pill " data-filter-id="item" data-option-id="jeans">Jeans</div><div class="mdoc-filter__pill " data-filter-id="item" data-option-id="blueberry">Blueberry</div></div><hr /></div></div><div id="mdoc-content" class="customizable"><article>
+<div id="mdoc-selector"><div><div class="cdoc-filter__container"><div class="cdoc-filter__label">Color</div><div class="cdoc-filter__pill " data-filter-id="color" data-option-id="red">Red</div><div class="cdoc-filter__pill " data-filter-id="color" data-option-id="yellow">Yellow</div><div class="cdoc-filter__pill selected" data-filter-id="color" data-option-id="blue">Blue</div></div><div class="cdoc-filter__container"><div class="cdoc-filter__label">Item</div><div class="cdoc-filter__pill " data-filter-id="item" data-option-id="ocean">Ocean</div><div class="cdoc-filter__pill selected" data-filter-id="item" data-option-id="sky">Sky</div><div class="cdoc-filter__pill " data-filter-id="item" data-option-id="jeans">Jeans</div><div class="cdoc-filter__pill " data-filter-id="item" data-option-id="blueberry">Blueberry</div></div><hr /></div></div><div id="mdoc-content" class="customizable"><article>
   <div class="alert alert-warning">
     <p>Warning: This is just a test page. It's not real.</p>
   </div>
@@ -13,13 +13,13 @@ aliases:
     contrived and odd, that's only because test pages are often both of those
     things.
   </p>
-  <div class="mdoc__toggleable mdoc__hidden" data-if="22">
+  <div class="cdoc__toggleable cdoc__hidden" data-if="22">
     <h2 id="blue-header-id-override">Blue</h2>
     <p>
       Blue is a calming and serene color that is often associated with
       tranquility, stability, and trust.
     </p>
-    <div class="mdoc__toggleable mdoc__hidden" data-if="18">
+    <div class="cdoc__toggleable cdoc__hidden" data-if="18">
       <h3 id="ocean">Ocean</h3>
       <p>
         The ocean is a vast and expansive body of saltwater that covers
@@ -35,7 +35,7 @@ aliases:
         reflection.
       </p>
     </div>
-    <div class="mdoc__toggleable" data-if="19">
+    <div class="cdoc__toggleable" data-if="19">
       <h3 id="sky">Sky</h3>
       <p>
         The sky is the expanse of atmosphere that we see when we look up from
@@ -51,7 +51,7 @@ aliases:
         ever-changing nature inspire a sense of wonder and curiosity.
       </p>
     </div>
-    <div class="mdoc__toggleable mdoc__hidden" data-if="20">
+    <div class="cdoc__toggleable cdoc__hidden" data-if="20">
       <h3 id="jeans">Jeans</h3>
       <p>
         Jeans are a type of durable clothing typically made from denim fabric.
@@ -66,7 +66,7 @@ aliases:
         appeal of jeans have made them a beloved garment for people of all ages.
       </p>
     </div>
-    <div class="mdoc__toggleable mdoc__hidden" data-if="21">
+    <div class="cdoc__toggleable cdoc__hidden" data-if="21">
       <h3 id="blueberry">Blueberry</h3>
       <p>
         Blueberries are small, round fruits that are known for their sweet and
@@ -82,51 +82,51 @@ aliases:
       </p>
     </div>
   </div>
-  <div class="mdoc__toggleable mdoc__hidden" data-if="23">
+  <div class="cdoc__toggleable cdoc__hidden" data-if="23">
     <h2 id="yellow">Yellow</h2>
-    <div class="mdoc__toggleable mdoc__hidden" data-if="25">
+    <div class="cdoc__toggleable cdoc__hidden" data-if="25">
       <p>
         Bananas are a type of fruit. They're often eaten raw or used in baking.
       </p>
     </div>
-    <div class="mdoc__toggleable mdoc__hidden" data-if="26">
+    <div class="cdoc__toggleable cdoc__hidden" data-if="26">
       <p>
         Sunflowers are a type of flower. They're known for their large, yellow
         petals.
       </p>
     </div>
-    <div class="mdoc__toggleable mdoc__hidden" data-if="27">
+    <div class="cdoc__toggleable cdoc__hidden" data-if="27">
       <p>
         Lemons are a type of citrus fruit. They're often used in drinks and
         cooking.
       </p>
     </div>
-    <div class="mdoc__toggleable mdoc__hidden" data-if="28">
+    <div class="cdoc__toggleable cdoc__hidden" data-if="28">
       <p>
         School buses are a type of vehicle. They're often used to transport
         students to and from school.
       </p>
     </div>
   </div>
-  <div class="mdoc__toggleable mdoc__hidden" data-if="24">
+  <div class="cdoc__toggleable cdoc__hidden" data-if="24">
     <h2 id="red">Red</h2>
-    <div class="mdoc__toggleable mdoc__hidden" data-if="29">
+    <div class="cdoc__toggleable cdoc__hidden" data-if="29">
       <p>
         Rubies are a type of gemstone. They're known for their deep red color.
       </p>
     </div>
-    <div class="mdoc__toggleable mdoc__hidden" data-if="30">
+    <div class="cdoc__toggleable cdoc__hidden" data-if="30">
       <p>
         Apples are a type of fruit. They're often eaten raw or used in baking.
       </p>
     </div>
-    <div class="mdoc__toggleable mdoc__hidden" data-if="31">
+    <div class="cdoc__toggleable cdoc__hidden" data-if="31">
       <p>
         Firetrucks are a type of vehicle. They're often used to transport
         firefighters and equipment to emergency situations.
       </p>
     </div>
-    <div class="mdoc__toggleable mdoc__hidden" data-if="32">
+    <div class="cdoc__toggleable cdoc__hidden" data-if="32">
       <p>
         Stop signs are a type of traffic sign. They're used to indicate that
         drivers should stop their vehicles.

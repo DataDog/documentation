@@ -118,7 +118,7 @@ export function onScroll() {
     const windowHeight = window.innerHeight;
     let localOffset = 65;
 
-    const isCustomizableDoc = document.getElementById('mdoc-selector') ? true : false;
+    const isCustomizableDoc = document.getElementById('cdoc-selector') ? true : false;
     if (isCustomizableDoc) {
         localOffset += 65;
     }
