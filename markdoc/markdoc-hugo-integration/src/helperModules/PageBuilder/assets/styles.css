@@ -5,7 +5,7 @@
 #cdoc-content.customizable {
     visibility: hidden;
 }
-.cdoc-filter__pill {
+.cdoc-filter__option {
     display: inline-block;
     padding: 5px 10px;
     margin-right: 6px;
@@ -24,7 +24,7 @@ div.cdoc-code-snippet.cdoc-language-bash span.line:before {
     content: '$ ';
     display: inline;
 }
-.cdoc-filter__pill.selected {
+.cdoc-filter__option.selected {
     color: white;
     background-color: #632ca6;
     border-color: #632ca6;

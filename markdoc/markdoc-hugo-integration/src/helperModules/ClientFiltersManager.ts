@@ -292,7 +292,7 @@ export class ClientFiltersManager {
    * Listen for changes in the filter selector.
    */
   addFilterSelectorEventListeners() {
-    const filterOptionPills = document.getElementsByClassName('cdoc-filter__pill');
+    const filterOptionPills = document.getElementsByClassName('cdoc-filter__option');
     for (let i = 0; i < filterOptionPills.length; i++) {
       filterOptionPills[i].addEventListener('click', (e) =>
         this.handleFilterSelectionChange(e)

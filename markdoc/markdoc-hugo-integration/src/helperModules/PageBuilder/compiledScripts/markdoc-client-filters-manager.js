@@ -20,7 +20,7 @@
           selectorHtml += `<div class="cdoc-filter__label">${resolvedFilter.displayName}</div>`;
           resolvedFilter.options.forEach((option) => {
             const selected = option.id === currentValue ? "selected" : "";
-            selectorHtml += `<div class="cdoc-filter__pill ${selected}" data-filter-id="${resolvedFilter.id}" data-option-id="${option.id}">${option.displayName}</div>`;
+            selectorHtml += `<div class="cdoc-filter__option ${selected}" data-filter-id="${resolvedFilter.id}" data-option-id="${option.id}">${option.displayName}</div>`;
           });
           selectorHtml += "</div>";
         });
@@ -12926,7 +12926,7 @@
          * Listen for changes in the filter selector.
          */
         addFilterSelectorEventListeners() {
-          const filterOptionPills = document.getElementsByClassName("cdoc-filter__pill");
+          const filterOptionPills = document.getElementsByClassName("cdoc-filter__option");
           for (let i = 0; i < filterOptionPills.length; i++) {
             filterOptionPills[i].addEventListener("click", (e) => this.handleFilterSelectionChange(e));
           }

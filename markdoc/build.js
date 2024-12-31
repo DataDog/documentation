@@ -34,6 +34,7 @@ const { compiledFilePaths, hasErrors } = markdocIntegration.compileMdocFiles();
 
 // Inject the author console
 
+/*
 if (env === 'development') {
     (async () => {
         try {
@@ -44,6 +45,7 @@ if (env === 'development') {
         }
     })();
 }
+*/
 
 // Build a .gitignore file for the compiled files,
 // to be written to the content directory

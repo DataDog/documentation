@@ -20,7 +20,7 @@ export const buildFilterSelectorUi = (
     // Render each option pill
     resolvedFilter.options.forEach((option) => {
       const selected = option.id === currentValue ? 'selected' : '';
-      selectorHtml += `<div class="cdoc-filter__pill ${selected}" data-filter-id="${resolvedFilter.id}" data-option-id="${option.id}">${option.displayName}</div>`;
+      selectorHtml += `<div class="cdoc-filter__option ${selected}" data-filter-id="${resolvedFilter.id}" data-option-id="${option.id}">${option.displayName}</div>`;
     });
     selectorHtml += '</div>';
   });
