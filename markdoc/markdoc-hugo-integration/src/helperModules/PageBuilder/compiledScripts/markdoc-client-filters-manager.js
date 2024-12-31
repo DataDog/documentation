@@ -5,9 +5,9 @@
     return mod || (0, cb[__getOwnPropNames(cb)[0]])((mod = { exports: {} }).exports, mod), mod.exports;
   };
 
-  // dist/helperModules/PageBuilder/components/ContentFilter.js
-  var require_ContentFilter = __commonJS({
-    "dist/helperModules/PageBuilder/components/ContentFilter.js"(exports) {
+  // dist/helperModules/PageBuilder/components/CustomizationMenu.js
+  var require_CustomizationMenu = __commonJS({
+    "dist/helperModules/PageBuilder/components/CustomizationMenu.js"(exports) {
       "use strict";
       Object.defineProperty(exports, "__esModule", { value: true });
       exports.buildCustomizationMenuUi = void 0;
@@ -12711,7 +12711,7 @@
       var _ClientFiltersManager_instance;
       Object.defineProperty(exports, "__esModule", { value: true });
       exports.ClientFiltersManager = void 0;
-      var ContentFilter_1 = require_ContentFilter();
+      var CustomizationMenu_1 = require_CustomizationMenu();
       var filterResolution_1 = require_filterResolution();
       var reresolver_1 = require_reresolver();
       var pageConfigMinification_1 = require_pageConfigMinification();
@@ -13016,7 +13016,7 @@
             const resolvedFilter = resolvedPageFilters[filterId];
             this.selectedValsByFilterId[filterId] = resolvedFilter.currentValue;
           });
-          const newFilterSelectorHtml = (0, ContentFilter_1.buildCustomizationMenuUi)(resolvedPageFilters);
+          const newFilterSelectorHtml = (0, CustomizationMenu_1.buildCustomizationMenuUi)(resolvedPageFilters);
           this.filterSelectorEl.innerHTML = newFilterSelectorHtml;
           this.addFilterSelectorEventListeners();
         }

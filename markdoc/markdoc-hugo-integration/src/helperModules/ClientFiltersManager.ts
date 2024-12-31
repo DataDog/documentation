@@ -18,7 +18,7 @@
  * in the head of the main page layout.
  */
 
-import { buildCustomizationMenuUi } from './PageBuilder/components/ContentFilter';
+import { buildCustomizationMenuUi } from './PageBuilder/components/CustomizationMenu';
 import { resolvePageFilters } from './filterResolution';
 import { ClientFunction } from 'markdoc-static-compiler/src/types';
 import { reresolveFunctionNode } from './renderer/reresolver';

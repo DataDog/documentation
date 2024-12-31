@@ -1,5 +1,5 @@
 import { resolvePageFilters } from '../../filterResolution';
-import { buildCustomizationMenuUi } from '../components/ContentFilter';
+import { buildCustomizationMenuUi } from '../components/CustomizationMenu';
 import { PageFiltersManifest } from '../../../schemas/pageFilters';
 
 /**
