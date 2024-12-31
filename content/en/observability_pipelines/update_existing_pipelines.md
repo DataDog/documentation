@@ -130,6 +130,21 @@ On the the Worker installation page:
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/new_relic %}}
 
 {{% /tab %}}
+{{% tab "Amazon Security Lake" %}}
+
+{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/amazon_security_lake %}}
+
+{{% /tab %}}
+{{% tab "Microsoft Sentinel" %}}
+
+{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/microsoft_sentinel %}}
+
+{{% /tab %}}
+{{% tab "SentinelOne" %}}
+
+{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/sentinelone %}}
+
+{{% /tab %}}
 {{< /tabs >}}
 1. Follow the instructions for your environment to update the worker:
 {{< tabs >}}
