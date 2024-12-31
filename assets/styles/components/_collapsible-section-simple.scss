@@ -1,0 +1,45 @@
+.simple-collapse {
+    margin-bottom: 0.5rem;
+    background-color: transparent;
+    transition: background-color 0.2s;
+  }
+  
+  .simple-collapse[open] {
+    background-color: #faf7ff;
+    border-radius: 4px;
+  }
+  
+  .simple-collapse-header {
+    padding: 0.25rem 1.25rem;
+    font-weight: 600;
+    cursor: pointer;
+    position: relative;
+    list-style: none;
+    transition: color 0.2s;
+  }
+  
+  .simple-collapse-header:hover {
+    color: #632DA6;
+  }
+  
+  /* Remove the default triangle */
+  .simple-collapse-header::-webkit-details-marker {
+    display: none;
+  }
+  
+  /* Add custom triangle */
+  .simple-collapse-header::before {
+    content: "▸";
+    position: absolute;
+    left: 0.375rem;
+    transition: transform 0.2s;
+  }
+  
+  /* Rotate triangle when open */
+  .simple-collapse[open] .simple-collapse-header::before {
+    transform: rotate(90deg);
+  }
+  
+  .simple-collapse-content {
+    padding: 0.5rem 1.25rem;
+  }
