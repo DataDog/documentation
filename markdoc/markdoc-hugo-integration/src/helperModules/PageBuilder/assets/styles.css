@@ -98,7 +98,6 @@
 }
 
 button.cdoc-dropdown-btn {
-    /* width: 100%; */
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -114,7 +113,14 @@ button.cdoc-dropdown-btn {
     box-sizing: border-box;
 }
 
-.cdoc-chevron {
+.cdoc-dropdown {
+    display: block;
+    position: relative;
+}
+
+.cdoc-dropdown .cdoc-chevron {
+    display: inline-block;
+    transform: rotate(45deg); /* pointed down */
     width: 8px;
     height: 8px;
     display: inline-block;
@@ -123,30 +129,9 @@ button.cdoc-dropdown-btn {
     border-left: none;
 }
 
-.cdoc-dropdown {
-    display: block;
-    position: relative;
-}
-
-.cdoc-dropdown .cdoc-chevron.cdoc-up {
-    display: none;
-}
-
-.cdoc-dropdown__expanded .cdoc-chevron.cdoc-down {
-    display: none;
-}
-
-.cdoc-dropdown__expanded .cdoc-chevron.cdoc-up {
-    display: inline-block;
-}
-
-.cdoc-chevron.cdoc-up {
-    transform: rotate(-135deg);
+.cdoc-dropdown.cdoc-dropdown__expanded .cdoc-chevron {
+    transform: rotate(-135deg); /* pointed up */
     margin-top: 5px;
-}
-
-.cdoc-chevron.cdoc-down {
-    transform: rotate(45deg);
 }
 
 .cdoc-dropdown-options-list {
