@@ -12,23 +12,27 @@
       Object.defineProperty(exports, "__esModule", { value: true });
       exports.buildCustomizationMenuUi = void 0;
       var buildCustomizationMenuUi = (resolvedPageFilters) => {
-        let selectorHtml = "<div>";
+        let menuHtml = "<div>";
         Object.keys(resolvedPageFilters).forEach((filterId) => {
           const resolvedFilter = resolvedPageFilters[filterId];
-          const currentValue = resolvedFilter.currentValue || resolvedFilter.defaultValue;
-          selectorHtml += '<div class="cdoc-filter__container">';
-          selectorHtml += `<div class="cdoc-filter__label">${resolvedFilter.displayName}</div>`;
-          resolvedFilter.options.forEach((option) => {
-            const selected = option.id === currentValue ? "selected" : "";
-            selectorHtml += `<div class="cdoc-filter__option ${selected}" data-filter-id="${resolvedFilter.id}" data-option-id="${option.id}">${option.displayName}</div>`;
-          });
-          selectorHtml += "</div>";
+          menuHtml += buildFilterSelector({ filter: resolvedFilter });
         });
-        selectorHtml += "<hr />";
-        selectorHtml += "</div>";
-        return selectorHtml;
+        menuHtml += "<hr />";
+        menuHtml += "</div>";
+        return menuHtml;
       };
       exports.buildCustomizationMenuUi = buildCustomizationMenuUi;
+      function buildFilterSelector(p) {
+        const currentValue = p.filter.currentValue || p.filter.defaultValue;
+        let selectorHtml = '<div class="cdoc-filter__container">';
+        selectorHtml += `<div class="cdoc-filter__label">${p.filter.displayName}</div>`;
+        p.filter.options.forEach((option) => {
+          const selected = option.id === currentValue ? "selected" : "";
+          selectorHtml += `<div class="cdoc-filter__option ${selected}" data-filter-id="${p.filter.id}" data-option-id="${option.id}">${option.displayName}</div>`;
+        });
+        selectorHtml += "</div>";
+        return selectorHtml;
+      }
     }
   });
 

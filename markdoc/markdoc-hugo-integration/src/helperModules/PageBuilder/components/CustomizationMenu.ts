@@ -1,4 +1,4 @@
-import { ResolvedPageFilters } from '../../../schemas/pageFilters';
+import { ResolvedPageFilters, ResolvedPageFilter } from '../../../schemas/pageFilters';
 
 /**
  * Given a resolved page filters object, build the UI for the filter selector
@@ -10,21 +10,26 @@ import { ResolvedPageFilters } from '../../../schemas/pageFilters';
 export const buildCustomizationMenuUi = (
   resolvedPageFilters: ResolvedPageFilters
 ): string => {
-  let selectorHtml = '<div>';
+  let menuHtml = '<div>';
   Object.keys(resolvedPageFilters).forEach((filterId) => {
     const resolvedFilter = resolvedPageFilters[filterId];
-    const currentValue = resolvedFilter.currentValue || resolvedFilter.defaultValue;
-    selectorHtml += '<div class="cdoc-filter__container">';
-    // Render the label
-    selectorHtml += `<div class="cdoc-filter__label">${resolvedFilter.displayName}</div>`;
-    // Render each option pill
-    resolvedFilter.options.forEach((option) => {
-      const selected = option.id === currentValue ? 'selected' : '';
-      selectorHtml += `<div class="cdoc-filter__option ${selected}" data-filter-id="${resolvedFilter.id}" data-option-id="${option.id}">${option.displayName}</div>`;
-    });
-    selectorHtml += '</div>';
+    menuHtml += buildFilterSelector({ filter: resolvedFilter });
   });
-  selectorHtml += '<hr />';
+  menuHtml += '<hr />';
+  menuHtml += '</div>';
+  return menuHtml;
+};
+
+function buildFilterSelector(p: { filter: ResolvedPageFilter }) {
+  const currentValue = p.filter.currentValue || p.filter.defaultValue;
+  let selectorHtml = '<div class="cdoc-filter__container">';
+  // Render the label
+  selectorHtml += `<div class="cdoc-filter__label">${p.filter.displayName}</div>`;
+  // Render each option pill
+  p.filter.options.forEach((option) => {
+    const selected = option.id === currentValue ? 'selected' : '';
+    selectorHtml += `<div class="cdoc-filter__option ${selected}" data-filter-id="${p.filter.id}" data-option-id="${option.id}">${option.displayName}</div>`;
+  });
   selectorHtml += '</div>';
   return selectorHtml;
-};
+}
