@@ -1,12 +1,12 @@
 ---
 title: region-param
 ---
-<div id="mdoc-content" class="customizable"><article>
+<div id="cdoc-content" class="customizable"><article>
   <h2 id="body-copy">Body copy</h2>
   <p>
     The user's DD site is
     <span
-      class="mdoc js-region-param region-param"
+      class="cdoc js-region-param region-param"
       data-region-param="dd_site"
     ></span
     >.
@@ -15,7 +15,7 @@ title: region-param
   <p>
     The user's DD site is
     <code
-      class="mdoc js-region-param region-param"
+      class="cdoc js-region-param region-param"
       data-region-param="dd_site"
     ></code
     >.

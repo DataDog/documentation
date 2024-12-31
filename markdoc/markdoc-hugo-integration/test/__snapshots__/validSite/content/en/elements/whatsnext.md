@@ -1,7 +1,7 @@
 ---
 title: Whatsnext
 ---
-<div id="mdoc-content" class="customizable"><article>
+<div id="cdoc-content" class="customizable"><article>
   <h2 id="simple-example">Simple example</h2>
   <p>
     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod

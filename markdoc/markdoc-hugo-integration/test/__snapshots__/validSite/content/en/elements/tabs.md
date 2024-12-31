@@ -1,7 +1,7 @@
 ---
 title: Tabs
 ---
-<div id="mdoc-selector"><div><div class="mdoc-filter__container"><div class="mdoc-filter__label">Color</div><div class="mdoc-filter__pill " data-filter-id="color" data-option-id="red">Red</div><div class="mdoc-filter__pill " data-filter-id="color" data-option-id="yellow">Yellow</div><div class="mdoc-filter__pill selected" data-filter-id="color" data-option-id="blue">Blue</div></div><hr /></div></div><div id="mdoc-content" class="customizable"><article>
+<div id="cdoc-selector"><div><div class="cdoc-filter__container"><div class="cdoc-filter__label">Color</div><div class="cdoc-filter__option " data-filter-id="color" data-option-id="red">Red</div><div class="cdoc-filter__option " data-filter-id="color" data-option-id="yellow">Yellow</div><div class="cdoc-filter__option selected" data-filter-id="color" data-option-id="blue">Blue</div></div><hr /></div></div><div id="cdoc-content" class="customizable"><article>
   <h2 id="usage">Usage</h2>
   <ul>
     <li>
@@ -29,13 +29,13 @@ title: Tabs
       >
         <div class="alert alert-info"><p>Here's an info alert.</p></div>
         <h3 id="customization-demo">Customization demo</h3>
-        <div class="mdoc__toggleable" data-if="0">
+        <div class="cdoc__toggleable" data-if="0">
           <p>The selected color is <strong>blue</strong>.</p>
         </div>
-        <div class="mdoc__toggleable mdoc__hidden" data-if="1">
+        <div class="cdoc__toggleable cdoc__hidden" data-if="1">
           <p>The selected color is <strong>yellow</strong>.</p>
         </div>
-        <div class="mdoc__toggleable mdoc__hidden" data-if="2">
+        <div class="cdoc__toggleable cdoc__hidden" data-if="2">
           <p>The selected color is <strong>red</strong>.</p>
         </div>
         <h3 id="partial-demo">Partial demo</h3>

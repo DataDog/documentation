@@ -7,7 +7,7 @@ import { ResolvedPageFilters } from '../../../schemas/pageFilters';
  * This runs at compile time, but also client-side on filter selection change,
  * so JSX templating is not available.
  */
-export const buildFilterSelectorUi = (
+export const buildCustomizationMenuUi = (
   resolvedPageFilters: ResolvedPageFilters
 ): string => {
   let selectorHtml = '<div>';

@@ -10,8 +10,8 @@
     "dist/helperModules/PageBuilder/components/ContentFilter.js"(exports) {
       "use strict";
       Object.defineProperty(exports, "__esModule", { value: true });
-      exports.buildFilterSelectorUi = void 0;
-      var buildFilterSelectorUi = (resolvedPageFilters) => {
+      exports.buildCustomizationMenuUi = void 0;
+      var buildCustomizationMenuUi = (resolvedPageFilters) => {
         let selectorHtml = "<div>";
         Object.keys(resolvedPageFilters).forEach((filterId) => {
           const resolvedFilter = resolvedPageFilters[filterId];
@@ -28,7 +28,7 @@
         selectorHtml += "</div>";
         return selectorHtml;
       };
-      exports.buildFilterSelectorUi = buildFilterSelectorUi;
+      exports.buildCustomizationMenuUi = buildCustomizationMenuUi;
     }
   });
 
@@ -13016,7 +13016,7 @@
             const resolvedFilter = resolvedPageFilters[filterId];
             this.selectedValsByFilterId[filterId] = resolvedFilter.currentValue;
           });
-          const newFilterSelectorHtml = (0, ContentFilter_1.buildFilterSelectorUi)(resolvedPageFilters);
+          const newFilterSelectorHtml = (0, ContentFilter_1.buildCustomizationMenuUi)(resolvedPageFilters);
           this.filterSelectorEl.innerHTML = newFilterSelectorHtml;
           this.addFilterSelectorEventListeners();
         }

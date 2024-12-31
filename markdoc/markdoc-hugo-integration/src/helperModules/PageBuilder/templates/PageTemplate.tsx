@@ -1,5 +1,5 @@
 import { resolvePageFilters } from '../../filterResolution';
-import { buildFilterSelectorUi } from '../components/ContentFilter';
+import { buildCustomizationMenuUi } from '../components/ContentFilter';
 import { PageFiltersManifest } from '../../../schemas/pageFilters';
 
 /**
@@ -45,7 +45,7 @@ function FilterSelectorTemplate(props: {
     <div
       id="cdoc-selector"
       dangerouslySetInnerHTML={{
-        __html: buildFilterSelectorUi(
+        __html: buildCustomizationMenuUi(
           resolvePageFilters({
             valsByFilterId,
             filtersManifest

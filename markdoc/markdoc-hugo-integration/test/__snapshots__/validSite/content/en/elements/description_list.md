@@ -1,7 +1,7 @@
 ---
 title: Description List
 ---
-<div id="mdoc-content" class="customizable"><article>
+<div id="cdoc-content" class="customizable"><article>
   <h2 id="example">Example</h2>
   <dl>
     <dt>Service</dt>

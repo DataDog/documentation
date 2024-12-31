@@ -1,7 +1,7 @@
 ---
 title: Table
 ---
-<div id="mdoc-content" class="customizable"><article>
+<div id="cdoc-content" class="customizable"><article>
   <h2 id="markdown-table--commonmark-table">
     Markdown table (CommonMark table)
   </h2>
@@ -80,7 +80,7 @@ title: Table
               <div class="code-button-wrapper position-absolute">
                 <button class="btn text-primary js-copy-button">Copy</button>
               </div>
-              <div class="mdoc-code-snippet mdoc-language-ruby">
+              <div class="cdoc-code-snippet cdoc-language-ruby">
                 <pre
                   tabindex="0"
                   class="chroma"

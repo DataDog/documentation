@@ -1,7 +1,7 @@
 ---
 title: site-region
 ---
-<div id="mdoc-content" class="customizable"><article>
+<div id="cdoc-content" class="customizable"><article>
   <div class="d-none site-region-container" data-region="us">
     <p>
       Your site region is <code>US</code>, which is why this line appears. It

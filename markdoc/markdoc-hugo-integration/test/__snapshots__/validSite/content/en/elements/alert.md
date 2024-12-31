@@ -1,7 +1,7 @@
 ---
 title: Alert
 ---
-<div id="mdoc-content" class="customizable"><article>
+<div id="cdoc-content" class="customizable"><article>
   <h2 id="usage">Usage</h2>
   <ul>
     <li>

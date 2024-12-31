@@ -14,7 +14,7 @@ further_reading:
     tag: Documentation
     text: Cross-Organization Visibility
 ---
-<div id="mdoc-content" class="customizable"><article>
+<div id="cdoc-content" class="customizable"><article>
   <h2 id="some-page-contents">Some page contents</h2>
   <p>
     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod

@@ -1,7 +1,7 @@
 ---
 title: Callout
 ---
-<div id="mdoc-content" class="customizable"><article>
+<div id="cdoc-content" class="customizable"><article>
   <h2 id="common-example">Common example</h2>
   <div class="card callout-card mb-4">
     <div class="card-body d-flex flex-column">

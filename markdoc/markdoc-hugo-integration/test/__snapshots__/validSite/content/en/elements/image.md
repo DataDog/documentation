@@ -1,7 +1,7 @@
 ---
 title: Image/Video
 ---
-<div id="mdoc-content" class="customizable"><article>
+<div id="cdoc-content" class="customizable"><article>
   <h2 id="image">Image</h2>
   <p>
     Lorem ipsum dolor sit amet. 33 earum tempore in aperiam voluptatem et

@@ -1,7 +1,7 @@
 ---
 title: Code Block
 ---
-<div id="mdoc-selector"><div><div class="mdoc-filter__container"><div class="mdoc-filter__label">Color</div><div class="mdoc-filter__pill " data-filter-id="color" data-option-id="red">Red</div><div class="mdoc-filter__pill " data-filter-id="color" data-option-id="yellow">Yellow</div><div class="mdoc-filter__pill selected" data-filter-id="color" data-option-id="blue">Blue</div></div><hr /></div></div><div id="mdoc-content" class="customizable"><article>
+<div id="cdoc-selector"><div><div class="cdoc-filter__container"><div class="cdoc-filter__label">Color</div><div class="cdoc-filter__option " data-filter-id="color" data-option-id="red">Red</div><div class="cdoc-filter__option " data-filter-id="color" data-option-id="yellow">Yellow</div><div class="cdoc-filter__option selected" data-filter-id="color" data-option-id="blue">Blue</div></div><hr /></div></div><div id="cdoc-content" class="customizable"><article>
   <h2 id="usage">Usage</h2>
   <ul>
     <li>
@@ -17,7 +17,7 @@ title: Code Block
       <div class="code-button-wrapper position-absolute">
         <button class="btn text-primary js-copy-button">Copy</button>
       </div>
-      <div class="mdoc-code-snippet mdoc-language-javascript">
+      <div class="cdoc-code-snippet cdoc-language-javascript">
         <pre
           tabindex="0"
           class="chroma"
@@ -36,11 +36,11 @@ title: Code Block
       <div class="code-button-wrapper position-absolute">
         <button class="btn text-primary js-copy-button">Copy</button>
       </div>
-      <div class="mdoc-code-snippet mdoc-language-bash">
+      <div class="cdoc-code-snippet cdoc-language-bash">
         <pre
           tabindex="0"
           class="chroma"
-        ><code><span class="line"><span class="cl">curl -L -X GET <span class="s1">&#39;https://api.<code class="mdoc js-region-param region-param" data-region-param="dd_site"></code>/api/v2/security_monitoring/configuration/security_filters&#39;</span> <span class="se">\
+        ><code><span class="line"><span class="cl">curl -L -X GET <span class="s1">&#39;https://api.<code class="cdoc js-region-param region-param" data-region-param="dd_site"></code>/api/v2/security_monitoring/configuration/security_filters&#39;</span> <span class="se">\
 </span></span></span><span class="line"><span class="cl"><span class="se"></span>--header <span class="s1">&#39;Content-Type: application/json&#39;</span> <span class="se">\
 </span></span></span><span class="line"><span class="cl"><span class="se"></span>--header <span class="s1">&#39;DD-API-KEY: &lt;DATADOG_API_KEY&gt;&#39;</span> <span class="se">\
 </span></span></span><span class="line"><span class="cl"><span class="se"></span>--header <span class="s1">&#39;DD-APPLICATION-KEY: &lt;DATADOG_APP_KEY&gt;&#39;</span>
@@ -58,7 +58,7 @@ title: Code Block
           <div class="code-button-wrapper position-absolute">
             <button class="btn text-primary js-copy-button">Copy</button>
           </div>
-          <div class="mdoc-code-snippet mdoc-language-python">
+          <div class="cdoc-code-snippet cdoc-language-python">
             <pre
               tabindex="0"
               class="chroma"
@@ -84,7 +84,7 @@ title: Code Block
               <div class="code-button-wrapper position-absolute">
                 <button class="btn text-primary js-copy-button">Copy</button>
               </div>
-              <div class="mdoc-code-snippet mdoc-language-javascript">
+              <div class="cdoc-code-snippet cdoc-language-javascript">
                 <pre
                   tabindex="0"
                   class="chroma"

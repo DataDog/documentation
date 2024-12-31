@@ -18,7 +18,7 @@
  * in the head of the main page layout.
  */
 
-import { buildFilterSelectorUi } from './PageBuilder/components/ContentFilter';
+import { buildCustomizationMenuUi } from './PageBuilder/components/ContentFilter';
 import { resolvePageFilters } from './filterResolution';
 import { ClientFunction } from 'markdoc-static-compiler/src/types';
 import { reresolveFunctionNode } from './renderer/reresolver';
@@ -418,7 +418,7 @@ export class ClientFiltersManager {
       this.selectedValsByFilterId[filterId] = resolvedFilter.currentValue;
     });
 
-    const newFilterSelectorHtml = buildFilterSelectorUi(resolvedPageFilters);
+    const newFilterSelectorHtml = buildCustomizationMenuUi(resolvedPageFilters);
     this.filterSelectorEl.innerHTML = newFilterSelectorHtml;
     this.addFilterSelectorEventListeners();
   }
