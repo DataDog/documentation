@@ -13,7 +13,7 @@ further_reading:
 title: 예약 보고서
 ---
 
-{{< site-region region="gov" >}}
+{{ < site-region region="gov" > }}
 <div class="alert alert-warning">Scheduled Reports are not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
