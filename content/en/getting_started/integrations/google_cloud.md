@@ -70,6 +70,8 @@ Use this guide to maximize the value of the Google Cloud integration by setting 
 
 For the most comprehensive level of monitoring in your Google Cloud environment, integrate Datadog with [Google Cloud][9] at the organization or folder level.
 
+**Note**: You must have the `Admin` role assigned to your Cloud Identity user account at the desired scope (for example, `Organization Admin`).
+
 {{% collapse-content title="1. Create a Google Cloud service account in the default project" level="h5" %}}
 1. Open your [Google Cloud console][10].
 2. Navigate to **IAM & Admin** > **Service Accounts**.
@@ -87,7 +89,6 @@ For the most comprehensive level of monitoring in your Google Cloud environment,
 - [Compute Viewer][52] provides **read-only** access to get and list Compute Engine resources
 - [Monitoring Viewer][53] provides **read-only** access to the monitoring data availabile in your Google Cloud environment
 - [Cloud Asset Viewer][54] provides **read-only** access to cloud assets metadata
-- [Browser][55] provides **read-only** access to browse the hierarchy of a project
 6. Click **Save**.
 
 **Note**: The `Browser` role is only required in the default project of the service account. Other projects require only the other listed roles.
@@ -201,7 +202,7 @@ For the full list of benefits of installing the Agent on your cloud instances, s
 Use the [Google Cloud Private Service Connect integration][201] to visualize connections, data transferred, and dropped packets through Private Service Connect. This gives you visibility into important metrics from your Private Service Connect connections, both for producers as well as consumers.
 [Private Service Connect (PSC)][202] is a Google Cloud networking product that enables you to access [Google Cloud services][203], [third-party partner services][204], and company-owned applications directly from your Virtual Private Cloud (VPC).
 
-[201]: /integrations/google_cloud_private_service_connect/
+[201]: /integrations/google_cloud_private_service_connect/ 
 [202]: https://cloud.google.com/vpc/docs/private-service-connect
 [203]: https://cloud.google.com/vpc/docs/private-service-connect-compatibility#google-services
 [204]: https://cloud.google.com/vpc/docs/private-service-connect-compatibility#third-party-services
@@ -289,4 +290,3 @@ After setting up CSM, toggle the **Enable Resource Collection** option under the
 [52]: https://cloud.google.com/compute/docs/access/iam#compute.viewer
 [53]: https://cloud.google.com/monitoring/access-control#monitoring_roles
 [54]: https://cloud.google.com/iam/docs/understanding-roles#cloudasset.viewer
-[55]: https://cloud.google.com/resource-manager/docs/access-control-proj#browser
