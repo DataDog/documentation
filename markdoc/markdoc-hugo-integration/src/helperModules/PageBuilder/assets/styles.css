@@ -2,10 +2,23 @@
     display: none;
 }
 
+/* Document sections and headings */
+
 #cdoc-selector,
 #cdoc-content.customizable {
     visibility: hidden;
 }
+
+#cdoc-content.customizable h1,
+#cdoc-content.customizable h2,
+#cdoc-content.customizable h3,
+#cdoc-content.customizable h4,
+#cdoc-content.customizable h5,
+#cdoc-content.customizable h6 {
+    scroll-margin-top: 95px; /* Keep headers clear of the sticky customization menu */
+}
+
+/* Customization menu pills */
 
 .cdoc-pill {
     display: inline-block;
@@ -32,69 +45,12 @@
     margin-bottom: 5px;
 }
 
-/*
-.cdoc-filter__option {
-}
-*/
-
-div.cdoc-code-snippet.cdoc-language-shell span.line:before {
-    content: '$ ';
-    display: inline;
-}
-
-div.cdoc-code-snippet.cdoc-language-bash span.line:before {
-    content: '$ ';
-    display: inline;
-}
-
 .cdoc-filter__container {
     display: inline-block;
     margin-right: 25px;
 }
 
-.alert.alert-info p {
-    color: rgb(31, 92, 122);
-}
-
-.alert.alert-warning p {
-    color: #60451f;
-}
-
-.alert.alert-danger p {
-    color: #82322f;
-}
-
-#cdoc-content .alert p {
-    font-size: 16px;
-    font-family: nationalweb, Helvetica, Arial, sans-serif;
-    margin-bottom: 0;
-}
-
-#cdoc-content .alert p + p {
-    margin-top: 16px;
-}
-
-#cdoc-content table ul,
-#cdoc-content table p {
-    font-size: 16px;
-    font-family: nationalweb, Helvetica, Arial, sans-serif;
-}
-
-#cdoc-content.customizable h1,
-#cdoc-content.customizable h2,
-#cdoc-content.customizable h3,
-#cdoc-content.customizable h4,
-#cdoc-content.customizable h5,
-#cdoc-content.customizable h6 {
-    scroll-margin-top: 95px;
-}
-
-span.s1 code.cdoc,
-span.s2 code.cdoc {
-    color: #c41a16;
-}
-
-/* Dropdown styles */
+/* Customization menu dropdowns */
 
 .cdocs-dropdown-container {
     /* width: 22%; */
@@ -200,4 +156,55 @@ button.cdocs-dropdown-btn {
     display: block;
     position: absolute;
     top: 39px;
+}
+
+/* COMPONENT-SPECIFIC STYLES ===================================== */
+
+/* Tables */
+
+#cdoc-content table ul,
+#cdoc-content table p {
+    font-size: 16px;
+    font-family: nationalweb, Helvetica, Arial, sans-serif;
+}
+
+/* Alerts */
+
+#cdoc-content .alert p {
+    font-size: 16px;
+    font-family: nationalweb, Helvetica, Arial, sans-serif;
+    margin-bottom: 0;
+}
+
+#cdoc-content .alert p + p {
+    margin-top: 16px;
+}
+
+.alert.alert-info p {
+    color: rgb(31, 92, 122);
+}
+
+.alert.alert-warning p {
+    color: #60451f;
+}
+
+.alert.alert-danger p {
+    color: #82322f;
+}
+
+/* Code snippets */
+
+div.cdoc-code-snippet.cdoc-language-shell span.line:before {
+    content: '$ ';
+    display: inline;
+}
+
+div.cdoc-code-snippet.cdoc-language-bash span.line:before {
+    content: '$ ';
+    display: inline;
+}
+
+span.s1 code.cdoc,
+span.s2 code.cdoc {
+    color: #c41a16;
 }

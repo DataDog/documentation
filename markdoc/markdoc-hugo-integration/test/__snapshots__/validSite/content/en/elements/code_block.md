@@ -1,7 +1,7 @@
 ---
 title: Code Block
 ---
-<div id="cdoc-selector"><div><div class="cdoc-filter__container"><div class="cdoc-filter__label">Color</div><div class="cdoc-filter__option " data-filter-id="color" data-option-id="red">Red</div><div class="cdoc-filter__option " data-filter-id="color" data-option-id="yellow">Yellow</div><div class="cdoc-filter__option selected" data-filter-id="color" data-option-id="blue">Blue</div></div><hr /></div></div><div id="cdoc-content" class="customizable"><article>
+<div id="cdoc-selector"><div><div class="cdoc-filter__container"><div class="cdoc-filter__label">Color</div><div class="cdoc-filter__option cdoc-pill " data-filter-id="color" data-option-id="red">Red</div><div class="cdoc-filter__option cdoc-pill " data-filter-id="color" data-option-id="yellow">Yellow</div><div class="cdoc-filter__option cdoc-pill selected" data-filter-id="color" data-option-id="blue">Blue</div></div><hr /></div></div><div id="cdoc-content" class="customizable"><article>
   <h2 id="usage">Usage</h2>
   <ul>
     <li>
