@@ -34,24 +34,6 @@ function buildFilterSelector(p: { filter: ResolvedPageFilter }) {
   return selectorHtml;
 }
 
-/*
-<div class="cdoc-dropdown-container">
-    <p class="cdoc-filter-label">Color</p>
-    <div class="cdoc-dropdown cdoc-dropdown__expanded">
-      <button class="cdoc-dropdown-btn" type="button">
-        <span class="cdoc-btn-label">Red</span>
-        <div class="cdoc-chevron cdoc-down"></div>
-        <div class="cdoc-chevron cdoc-up"></div>
-      </button>
-      <div class="cdoc-dropdown-options-list">
-        <a class="cdoc-dropdown-option">Red</a>
-        <a class="cdoc-dropdown-option">Blue</a>
-        <a class="cdoc-dropdown-option">Burgundy</a>
-      </div>
-    </div>
-</div>
-*/
-
 function buildFilterSelectorNew(p: { filter: ResolvedPageFilter }) {
   const currentValue = p.filter.currentValue || p.filter.defaultValue;
   let selectorHtml = '<div class="cdoc-dropdown-container">';
@@ -62,14 +44,16 @@ function buildFilterSelectorNew(p: { filter: ResolvedPageFilter }) {
   // Render the dropdown
   selectorHtml += `<div class="cdoc-dropdown">
     <button class="cdoc-dropdown-btn" type="button">
-      <span class="cdoc-btn-label">${currentValue}</span>
+      <span class="cdoc-btn-label">${
+        p.filter.options.find((o) => o.id === currentValue)!.displayName
+      }</span>
       <div class="cdoc-chevron cdoc-down"></div>
       <div class="cdoc-chevron cdoc-up"></div>
     </button>
     <div class="cdoc-dropdown-options-list">`;
   p.filter.options.forEach((option) => {
     const selected = option.id === currentValue ? 'selected' : '';
-    selectorHtml += `<a class="cdoc-dropdown-option ${selected}" data-filter-id="${p.filter.id}" data-option-id="${option.id}">${option.displayName}</a>`;
+    selectorHtml += `<a class="cdoc-dropdown-option cdoc-filter__option ${selected}" data-filter-id="${p.filter.id}" data-option-id="${option.id}">${option.displayName}</a>`;
   });
 
   // Close options list

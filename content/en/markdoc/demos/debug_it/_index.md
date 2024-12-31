@@ -3,23 +3,23 @@ title: 'DebugIt: A Fake Debugging Library'
 ---
 <div id="cdoc-selector"><div><div class="cdoc-dropdown-container"><p class="cdoc-filter-label">Language</p><div class="cdoc-dropdown">
     <button class="cdoc-dropdown-btn" type="button">
-      <span class="cdoc-btn-label">python</span>
+      <span class="cdoc-btn-label">Python</span>
       <div class="cdoc-chevron cdoc-down"></div>
       <div class="cdoc-chevron cdoc-up"></div>
     </button>
-    <div class="cdoc-dropdown-options-list"><a class="cdoc-dropdown-option selected" data-filter-id="prog_lang" data-option-id="python">Python</a><a class="cdoc-dropdown-option " data-filter-id="prog_lang" data-option-id="go">Go</a><a class="cdoc-dropdown-option " data-filter-id="prog_lang" data-option-id="javascript">JavaScript</a><a class="cdoc-dropdown-option " data-filter-id="prog_lang" data-option-id="ruby">Ruby</a><a class="cdoc-dropdown-option " data-filter-id="prog_lang" data-option-id="java">Java</a></div></div></div><div class="cdoc-dropdown-container"><p class="cdoc-filter-label">Operating system</p><div class="cdoc-dropdown">
+    <div class="cdoc-dropdown-options-list"><a class="cdoc-dropdown-option cdoc-filter__option selected" data-filter-id="prog_lang" data-option-id="python">Python</a><a class="cdoc-dropdown-option cdoc-filter__option " data-filter-id="prog_lang" data-option-id="go">Go</a><a class="cdoc-dropdown-option cdoc-filter__option " data-filter-id="prog_lang" data-option-id="javascript">JavaScript</a><a class="cdoc-dropdown-option cdoc-filter__option " data-filter-id="prog_lang" data-option-id="ruby">Ruby</a><a class="cdoc-dropdown-option cdoc-filter__option " data-filter-id="prog_lang" data-option-id="java">Java</a></div></div></div><div class="cdoc-dropdown-container"><p class="cdoc-filter-label">Operating system</p><div class="cdoc-dropdown">
     <button class="cdoc-dropdown-btn" type="button">
-      <span class="cdoc-btn-label">linux</span>
+      <span class="cdoc-btn-label">Linux</span>
       <div class="cdoc-chevron cdoc-down"></div>
       <div class="cdoc-chevron cdoc-up"></div>
     </button>
-    <div class="cdoc-dropdown-options-list"><a class="cdoc-dropdown-option selected" data-filter-id="os" data-option-id="linux">Linux</a><a class="cdoc-dropdown-option " data-filter-id="os" data-option-id="windows">Windows</a><a class="cdoc-dropdown-option " data-filter-id="os" data-option-id="mac_os">MacOS</a></div></div></div><div class="cdoc-dropdown-container"><p class="cdoc-filter-label">Database</p><div class="cdoc-dropdown">
+    <div class="cdoc-dropdown-options-list"><a class="cdoc-dropdown-option cdoc-filter__option selected" data-filter-id="os" data-option-id="linux">Linux</a><a class="cdoc-dropdown-option cdoc-filter__option " data-filter-id="os" data-option-id="windows">Windows</a><a class="cdoc-dropdown-option cdoc-filter__option " data-filter-id="os" data-option-id="mac_os">MacOS</a></div></div></div><div class="cdoc-dropdown-container"><p class="cdoc-filter-label">Database</p><div class="cdoc-dropdown">
     <button class="cdoc-dropdown-btn" type="button">
-      <span class="cdoc-btn-label">postgres</span>
+      <span class="cdoc-btn-label">Postgres</span>
       <div class="cdoc-chevron cdoc-down"></div>
       <div class="cdoc-chevron cdoc-up"></div>
     </button>
-    <div class="cdoc-dropdown-options-list"><a class="cdoc-dropdown-option selected" data-filter-id="database" data-option-id="postgres">Postgres</a><a class="cdoc-dropdown-option " data-filter-id="database" data-option-id="mysql">MySQL</a><a class="cdoc-dropdown-option " data-filter-id="database" data-option-id="sql_server">SQL Server</a></div></div></div><hr /></div></div><div id="cdoc-content" class="customizable"><article>
+    <div class="cdoc-dropdown-options-list"><a class="cdoc-dropdown-option cdoc-filter__option selected" data-filter-id="database" data-option-id="postgres">Postgres</a><a class="cdoc-dropdown-option cdoc-filter__option " data-filter-id="database" data-option-id="mysql">MySQL</a><a class="cdoc-dropdown-option cdoc-filter__option " data-filter-id="database" data-option-id="sql_server">SQL Server</a></div></div></div><hr /></div></div><div id="cdoc-content" class="customizable"><article>
   <h2 id="overview">Overview</h2>
   <p>
     DebugIt is a powerful debugging library designed to streamline the debugging

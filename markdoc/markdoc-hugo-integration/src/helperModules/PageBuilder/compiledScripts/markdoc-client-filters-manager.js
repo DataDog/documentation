@@ -28,14 +28,14 @@
         selectorHtml += `<p class="cdoc-filter-label">${p.filter.displayName}</p>`;
         selectorHtml += `<div class="cdoc-dropdown">
     <button class="cdoc-dropdown-btn" type="button">
-      <span class="cdoc-btn-label">${currentValue}</span>
+      <span class="cdoc-btn-label">${p.filter.options.find((o) => o.id === currentValue).displayName}</span>
       <div class="cdoc-chevron cdoc-down"></div>
       <div class="cdoc-chevron cdoc-up"></div>
     </button>
     <div class="cdoc-dropdown-options-list">`;
         p.filter.options.forEach((option) => {
           const selected = option.id === currentValue ? "selected" : "";
-          selectorHtml += `<a class="cdoc-dropdown-option ${selected}" data-filter-id="${p.filter.id}" data-option-id="${option.id}">${option.displayName}</a>`;
+          selectorHtml += `<a class="cdoc-dropdown-option cdoc-filter__option ${selected}" data-filter-id="${p.filter.id}" data-option-id="${option.id}">${option.displayName}</a>`;
         });
         selectorHtml += "</div>";
         selectorHtml += "</div>";

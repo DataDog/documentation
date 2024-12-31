@@ -73,6 +73,7 @@
     background-color: rgb(255, 255, 255);
     box-shadow: rgba(0, 0, 0, 0.25) 0px 4px 20px 0px;
     border-radius: 6px;
+    z-index: 2000;
 }
 
 .cdoc-dropdown-option:hover {
@@ -89,9 +90,9 @@
     padding-top: 4px;
     font-weight: 400;
     color: black;
+    background-color: transparent;
     text-align: inherit;
     white-space: nowrap;
-    background-color: transparent;
     border: 0;
     line-height: 20px;
 }
