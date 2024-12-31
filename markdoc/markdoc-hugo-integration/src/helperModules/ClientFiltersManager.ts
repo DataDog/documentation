@@ -289,7 +289,8 @@ export class ClientFiltersManager {
   }
 
   /**
-   * Expand or hide the dropdown menu when the user clicks on it.
+   * Expand or hide the dropdown menu when the user clicks on it,
+   * or clicks on the document outside of it.
    */
   addDropdownEventListeners() {
     const dropdownContainers = document.getElementsByClassName('cdoc-dropdown');
@@ -308,6 +309,16 @@ export class ClientFiltersManager {
         parent.classList.toggle('cdoc-dropdown__expanded');
       });
     }
+
+    // handle outside clicks
+    document.addEventListener('click', (e) => {
+      for (let i = 0; i < dropdownContainers.length; i++) {
+        const dropdownContainer = dropdownContainers[i];
+        if (!dropdownContainer.contains(e.target as Node)) {
+          dropdownContainer.classList.remove('cdoc-dropdown__expanded');
+        }
+      }
+    });
   }
 
   /**
