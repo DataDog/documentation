@@ -128,6 +128,10 @@ To set up the destination, follow the instructions for the cloud provider you ar
 {{% /tab %}}
 {{< /tabs >}}
 
+#### Add another destination
+
+{{% observability_pipelines/dynamic_destinations %}}
+
 ### Set up processors
 
 {{% observability_pipelines/processors/intro %}}
