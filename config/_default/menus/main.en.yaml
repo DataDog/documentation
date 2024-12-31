@@ -74,19 +74,19 @@ menu:
       url: getting_started/integrations/aws/
       weight: 601
       parent: getting_started_integrations
+    - name: Azure
+      identifier: getting_started_with_azure
+      url: getting_started/integrations/azure/
+      weight: 602
+      parent: getting_started_integrations
     - name: Google Cloud
       identifier: getting_started_with_google_cloud
       url: getting_started/integrations/google_cloud/
-      weight: 602
+      weight: 603
       parent: getting_started_integrations
     - name: Terraform
       identifier: getting_started_with_terraform
       url: getting_started/integrations/terraform/
-      weight: 603
-      parent: getting_started_integrations
-    - name: Azure
-      identifier: getting_started_with_azure
-      url: getting_started/integrations/azure/
       weight: 604
       parent: getting_started_integrations
     - name: Containers
