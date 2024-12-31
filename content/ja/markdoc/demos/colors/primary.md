@@ -3,7 +3,19 @@ title: Primary Colors (ja)
 aliases:
   - /primary_colors_alias/
 ---
-<div id="cdoc-selector"><div><div class="cdoc-filter__container"><div class="cdoc-filter__label">Color</div><div class="cdoc-filter__option cdoc-pill " data-filter-id="color" data-option-id="red">Red (ja)</div><div class="cdoc-filter__option cdoc-pill " data-filter-id="color" data-option-id="yellow">Yellow (ja)</div><div class="cdoc-filter__option cdoc-pill selected" data-filter-id="color" data-option-id="blue">Blue (ja)</div></div><div class="cdoc-filter__container"><div class="cdoc-filter__label">Item</div><div class="cdoc-filter__option cdoc-pill selected" data-filter-id="item" data-option-id="ocean">Ocean</div><div class="cdoc-filter__option cdoc-pill " data-filter-id="item" data-option-id="sky">Sky</div><div class="cdoc-filter__option cdoc-pill " data-filter-id="item" data-option-id="jeans">Jeans</div><div class="cdoc-filter__option cdoc-pill " data-filter-id="item" data-option-id="blueberry">Blueberry</div></div><hr /></div></div><div id="cdoc-content" class="customizable"><article>
+<div id="cdoc-selector"><div><div class="cdoc-dropdown-container"><p class="cdoc-filter-label">Color</p><div class="cdoc-dropdown">
+    <button class="cdoc-dropdown-btn" type="button">
+      <span class="cdoc-btn-label">blue</span>
+      <div class="cdoc-chevron cdoc-down"></div>
+      <div class="cdoc-chevron cdoc-up"></div>
+    </button>
+    <div class="cdoc-dropdown-options-list"><a class="cdoc-dropdown-option " data-filter-id="color" data-option-id="red">Red (ja)</a><a class="cdoc-dropdown-option " data-filter-id="color" data-option-id="yellow">Yellow (ja)</a><a class="cdoc-dropdown-option selected" data-filter-id="color" data-option-id="blue">Blue (ja)</a></div></div></div><div class="cdoc-dropdown-container"><p class="cdoc-filter-label">Item</p><div class="cdoc-dropdown">
+    <button class="cdoc-dropdown-btn" type="button">
+      <span class="cdoc-btn-label">ocean</span>
+      <div class="cdoc-chevron cdoc-down"></div>
+      <div class="cdoc-chevron cdoc-up"></div>
+    </button>
+    <div class="cdoc-dropdown-options-list"><a class="cdoc-dropdown-option selected" data-filter-id="item" data-option-id="ocean">Ocean</a><a class="cdoc-dropdown-option " data-filter-id="item" data-option-id="sky">Sky</a><a class="cdoc-dropdown-option " data-filter-id="item" data-option-id="jeans">Jeans</a><a class="cdoc-dropdown-option " data-filter-id="item" data-option-id="blueberry">Blueberry</a></div></div></div><hr /></div></div><div id="cdoc-content" class="customizable"><article>
   <div class="alert alert-warning">
     <p>Warning: This is just a test page. It's not real.</p>
   </div>

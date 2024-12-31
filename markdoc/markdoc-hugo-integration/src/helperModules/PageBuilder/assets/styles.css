@@ -149,14 +149,19 @@ button.cdoc-dropdown-btn {
 }
 
 .cdoc-dropdown-options-list {
-    display: none;
+    /* display: none; */
+    display: block;
+    position: absolute;
+    top: 39px;
 }
 
+/*
 .cdoc-dropdown.cdoc-dropdown__expanded .cdoc-dropdown-options-list {
     display: block;
     position: absolute;
     top: 39px;
 }
+*/
 
 /* COMPONENT-SPECIFIC STYLES ===================================== */
 

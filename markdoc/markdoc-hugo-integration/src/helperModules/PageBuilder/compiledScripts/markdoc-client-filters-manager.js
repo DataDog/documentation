@@ -15,21 +15,30 @@
         let menuHtml = "<div>";
         Object.keys(resolvedPageFilters).forEach((filterId) => {
           const resolvedFilter = resolvedPageFilters[filterId];
-          menuHtml += buildFilterSelector({ filter: resolvedFilter });
+          menuHtml += buildFilterSelectorNew({ filter: resolvedFilter });
         });
         menuHtml += "<hr />";
         menuHtml += "</div>";
         return menuHtml;
       };
       exports.buildCustomizationMenuUi = buildCustomizationMenuUi;
-      function buildFilterSelector(p) {
+      function buildFilterSelectorNew(p) {
         const currentValue = p.filter.currentValue || p.filter.defaultValue;
-        let selectorHtml = '<div class="cdoc-filter__container">';
-        selectorHtml += `<div class="cdoc-filter__label">${p.filter.displayName}</div>`;
+        let selectorHtml = '<div class="cdoc-dropdown-container">';
+        selectorHtml += `<p class="cdoc-filter-label">${p.filter.displayName}</p>`;
+        selectorHtml += `<div class="cdoc-dropdown">
+    <button class="cdoc-dropdown-btn" type="button">
+      <span class="cdoc-btn-label">${currentValue}</span>
+      <div class="cdoc-chevron cdoc-down"></div>
+      <div class="cdoc-chevron cdoc-up"></div>
+    </button>
+    <div class="cdoc-dropdown-options-list">`;
         p.filter.options.forEach((option) => {
           const selected = option.id === currentValue ? "selected" : "";
-          selectorHtml += `<div class="cdoc-filter__option cdoc-pill ${selected}" data-filter-id="${p.filter.id}" data-option-id="${option.id}">${option.displayName}</div>`;
+          selectorHtml += `<a class="cdoc-dropdown-option ${selected}" data-filter-id="${p.filter.id}" data-option-id="${option.id}">${option.displayName}</a>`;
         });
+        selectorHtml += "</div>";
+        selectorHtml += "</div>";
         selectorHtml += "</div>";
         return selectorHtml;
       }
