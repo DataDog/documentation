@@ -2,18 +2,18 @@
 title: Traffic Light Colors (ja)
 ---
 <div id="cdoc-selector"><div><div class="cdoc-dropdown-container"><p class="cdoc-filter-label">Color</p><div class="cdoc-dropdown">
-    <button class="cdoc-dropdown-btn" type="button">
+    <button data-filter-id="color" class="cdoc-dropdown-btn" type="button">
       <span class="cdoc-btn-label">Green (ja)</span>
       <div class="cdoc-chevron cdoc-down"></div>
       <div class="cdoc-chevron cdoc-up"></div>
     </button>
-    <div class="cdoc-dropdown-options-list"><a class="cdoc-dropdown-option cdoc-filter__option " data-filter-id="color" data-option-id="red">Red (ja)</a><a class="cdoc-dropdown-option cdoc-filter__option " data-filter-id="color" data-option-id="yellow">Yellow (ja)</a><a class="cdoc-dropdown-option cdoc-filter__option selected" data-filter-id="color" data-option-id="green">Green (ja)</a></div></div></div><div class="cdoc-dropdown-container"><p class="cdoc-filter-label">Item</p><div class="cdoc-dropdown">
-    <button class="cdoc-dropdown-btn" type="button">
+    <div id="cdoc-dropdown-options-list-color" class="cdoc-dropdown-options-list cdoc-hide"><a class="cdoc-dropdown-option cdoc-filter__option " data-filter-id="color" data-option-id="red">Red (ja)</a><a class="cdoc-dropdown-option cdoc-filter__option " data-filter-id="color" data-option-id="yellow">Yellow (ja)</a><a class="cdoc-dropdown-option cdoc-filter__option selected" data-filter-id="color" data-option-id="green">Green (ja)</a></div></div></div><div class="cdoc-dropdown-container"><p class="cdoc-filter-label">Item</p><div class="cdoc-dropdown">
+    <button data-filter-id="item" class="cdoc-dropdown-btn" type="button">
       <span class="cdoc-btn-label">Grass</span>
       <div class="cdoc-chevron cdoc-down"></div>
       <div class="cdoc-chevron cdoc-up"></div>
     </button>
-    <div class="cdoc-dropdown-options-list"><a class="cdoc-dropdown-option cdoc-filter__option selected" data-filter-id="item" data-option-id="grass">Grass</a><a class="cdoc-dropdown-option cdoc-filter__option " data-filter-id="item" data-option-id="emerald">Emerald</a><a class="cdoc-dropdown-option cdoc-filter__option " data-filter-id="item" data-option-id="lime">Lime</a><a class="cdoc-dropdown-option cdoc-filter__option " data-filter-id="item" data-option-id="frog">Frog</a></div></div></div><hr /></div></div><div id="cdoc-content" class="customizable"><article>
+    <div id="cdoc-dropdown-options-list-item" class="cdoc-dropdown-options-list cdoc-hide"><a class="cdoc-dropdown-option cdoc-filter__option selected" data-filter-id="item" data-option-id="grass">Grass</a><a class="cdoc-dropdown-option cdoc-filter__option " data-filter-id="item" data-option-id="emerald">Emerald</a><a class="cdoc-dropdown-option cdoc-filter__option " data-filter-id="item" data-option-id="lime">Lime</a><a class="cdoc-dropdown-option cdoc-filter__option " data-filter-id="item" data-option-id="frog">Frog</a></div></div></div><hr /></div></div><div id="cdoc-content" class="customizable"><article>
   <div class="alert alert-info">
     <p>This is just a test page. It's not real.</p>
   </div>

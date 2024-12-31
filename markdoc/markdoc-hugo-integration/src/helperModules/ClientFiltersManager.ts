@@ -288,6 +288,42 @@ export class ClientFiltersManager {
     }
   }
 
+  addDropdownEventListeners() {
+    const dropdownBtns = document.getElementsByClassName('cdoc-dropdown-btn');
+    for (let i = 0; i < dropdownBtns.length; i++) {
+      dropdownBtns[i].addEventListener('click', (e) => {
+        console.log('dropdown button clicked');
+        const target = e.target as HTMLElement;
+        if (!target) {
+          return;
+        }
+
+        // find the parent cdoc-dropdown-btn element
+        // which contains the filter ID
+        let parent = target;
+        while (!parent.classList.contains('cdoc-dropdown-btn') && parent.parentElement) {
+          parent = parent.parentElement;
+        }
+
+        const filterId = parent.dataset.filterId;
+
+        if (!filterId) {
+          throw new Error(`No filter ID found on dropdown button`);
+        }
+
+        const dropdownOptionsList = document.getElementById(
+          `cdoc-dropdown-options-list-${filterId}`
+        );
+
+        if (!dropdownOptionsList) {
+          throw new Error(`No dropdown options list found for filter ID ${filterId}`);
+        }
+
+        dropdownOptionsList.classList.toggle('cdoc-hide');
+      });
+    }
+  }
+
   /**
    * Listen for changes in the filter selector.
    */
@@ -298,6 +334,7 @@ export class ClientFiltersManager {
         this.handleFilterSelectionChange(e)
       );
     }
+    this.addDropdownEventListeners();
   }
 
   /**

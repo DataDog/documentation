@@ -2,6 +2,10 @@
     display: none;
 }
 
+.cdoc-hide {
+    display: none !important;
+}
+
 /* Document sections and headings */
 
 #cdoc-selector,
