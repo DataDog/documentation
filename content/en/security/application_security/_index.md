@@ -88,6 +88,14 @@ In the [Security Signals Explorer][6], click on any security signal to see what 
 
 [Code Security][9] identifies code-level vulnerabilities in your services and provides actionable insights and recommended fixes. It uses an Interactive Application Security Testing (IAST) approach to find vulnerabilities within your application code. IAST uses instrumentation embedded in your code like application performance monitoring (APM) and it enables Datadog to identify vulnerabilities using legitimate application traffic instead of relying on external tests that could require extra configuration or periodic scheduling.
 
+## Disable ASM
+
+For information on disabling ASM or its features, see the following:
+
+- [Disabling threat management and protection][10]
+- [Disabling Software Composition Analysis][11]
+- [Disabling Code Security][12]
+
 ## Next steps
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -100,3 +108,6 @@ In the [Security Signals Explorer][6], click on any security signal to see what 
 [7]: https://dashcon.io/appsec
 [8]: /security/application_security/software_composition_analysis/
 [9]: /security/application_security/code_security/
+[10]: /security/application_security/troubleshooting/#disabling-threat-management-and-protection
+[11]: /security/application_security/troubleshooting/#disabling-software-composition-analysis
+[12]: /security/application_security/troubleshooting/#disabling-code-security

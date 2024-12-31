@@ -105,10 +105,10 @@ Then, run this command to check which schemas are visible to the `datadog` user:
 psql -h localhost -U datadog -d <your_database> -c "show search_path;"
 ```
 
-If you do not see the `pg_stat_statements` schema in the `datadog` user's `search_path`, you need to add it to the `datadog` user. For example:
+If you do not see the `pg_stat_statements` schema in the `datadog` user's `search_path`, you need to add it to the `datadog` user. For example (replace `<schema_with_pg_stat_statements>` with the schema where `pg_stat_statements` is located) :
 
 ```sql
-ALTER ROLE datadog SET search_path = "$user",public,schema_with_pg_stat_statements;
+ALTER ROLE datadog SET search_path = "$user",public,<schema_with_pg_stat_statements>;
 ```
 
 ### Certain queries are missing

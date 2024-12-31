@@ -117,6 +117,10 @@ To enable Code Security configure the [Datadog Tracing Library][9]. Detailed ins
 
 If you need additional help, contact [Datadog support][11].
 
+## Disable Code Security
+
+For information on disabling Code Security, see [Disabling Code Security][12].
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -131,3 +135,4 @@ If you need additional help, contact [Datadog support][11].
 [9]: /security/application_security/code_security/setup/
 [10]: https://app.datadoghq.com/security/configuration/asm/setup
 [11]: https://www.datadoghq.com/support/
+[12]: /security/application_security/troubleshooting/#disabling-code-security
