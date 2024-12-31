@@ -844,8 +844,15 @@ components:
             Only hosts that match one of the defined tags are imported into Datadog.'
           example: key:value,filter:example
           type: string
-        metrics_config:
-          $ref: '#/components/schemas/AzureAccountMetricsConfig'
+        metrics_enabled:
+          description: Enable Azure metrics for your organization.
+          example: true
+          type: boolean
+        metrics_enabled_default:
+          description: Enable Azure metrics for your organization for resource providers
+            where no resource provider config is specified.
+          example: true
+          type: boolean
         new_client_id:
           description: Your New Azure web application ID.
           example: new1c7f6-1234-5678-9101-3fcbf464test
@@ -860,37 +867,26 @@ components:
             monitored by this app registration.
           example: true
           type: boolean
+        resource_provider_configs:
+          description: Configuration settings applied to resources from the specified
+            Azure resource providers.
+          items:
+            $ref: '#/components/schemas/ResourceProviderConfig'
+          type: array
         tenant_name:
           description: Your Azure Active Directory ID.
           example: testc44-1234-5678-9101-cc00736ftest
           type: string
+        usage_metrics_enabled:
+          description: Enable azure.usage metrics for your organization.
+          example: true
+          type: boolean
       type: object
     AzureAccountListResponse:
       description: Accounts configured for your organization.
       items:
         $ref: '#/components/schemas/AzureAccount'
       type: array
-    AzureAccountMetricsConfig:
-      description: 'Dictionary containing the key `excluded_resource_providers` which
-        has to be a list of Microsoft Azure Resource Provider names.
-
-        This feature is currently being beta tested.
-
-        In order to enable all resource providers for metric collection, pass:
-
-        `metrics_config: {"excluded_resource_providers": []}` (i.e., an empty list
-        for `excluded_resource_providers`).'
-      properties:
-        excluded_resource_providers:
-          description: List of Microsoft Azure Resource Providers to exclude from
-            metric collection.
-          example:
-          - Microsoft.Sql
-          - Microsoft.Cdn
-          items:
-            type: string
-          type: array
-      type: object
     CancelDowntimesByScopeRequest:
       description: Cancel downtimes according to scope.
       properties:
@@ -4292,6 +4288,7 @@ components:
       - ci_test_indexed_spans_usage
       - ci_visibility_itr_usage
       - cloud_siem_usage
+      - code_security_host_usage
       - container_excl_agent_usage
       - container_usage
       - cspm_containers_usage
@@ -4365,6 +4362,7 @@ components:
       - CI_TEST_INDEXED_SPANS_USAGE
       - CI_VISIBILITY_ITR_USAGE
       - CLOUD_SIEM_USAGE
+      - CODE_SECURITY_HOST_USAGE
       - CONTAINER_EXCL_AGENT_USAGE
       - CONTAINER_USAGE
       - CSPM_CONTAINERS_USAGE
@@ -4761,11 +4759,6 @@ components:
           description: Widget column field.
           example: content
           type: string
-        is_clustering_pattern_field_path:
-          description: Identifies the clustering pattern field column, usable only
-            with logs_pattern_stream.
-          example: true
-          type: boolean
         width:
           $ref: '#/components/schemas/ListStreamColumnWidth'
       required:
@@ -8050,6 +8043,8 @@ components:
       - ci_visibility_itr_percentage
       - cloud_siem_usage
       - cloud_siem_percentage
+      - code_security_host_usage
+      - code_security_host_percentage
       - container_excl_agent_usage
       - container_excl_agent_percentage
       - container_usage
@@ -8191,6 +8186,8 @@ components:
       - CI_VISIBILITY_ITR_PERCENTAGE
       - CLOUD_SIEM_USAGE
       - CLOUD_SIEM_PERCENTAGE
+      - CODE_SECURITY_HOST_USAGE
+      - CODE_SECURITY_HOST_PERCENTAGE
       - CONTAINER_EXCL_AGENT_USAGE
       - CONTAINER_EXCL_AGENT_PERCENTAGE
       - CONTAINER_USAGE
@@ -8416,6 +8413,14 @@ components:
         cloud_siem_usage:
           description: The Cloud Security Information and Event Management usage by
             tag(s).
+          format: double
+          type: number
+        code_security_host_percentage:
+          description: The percentage of Code Security host usage by tags.
+          format: double
+          type: number
+        code_security_host_usage:
+          description: The Code Security host usage by tags.
           format: double
           type: number
         container_excl_agent_percentage:
@@ -10306,6 +10311,19 @@ components:
       - target
       - lookup_enrichment_table
       - type
+      type: object
+    ResourceProviderConfig:
+      description: Configuration settings applied to resources from the specified
+        Azure resource provider.
+      properties:
+        metrics_enabled:
+          description: Collect metrics for resources from this provider.
+          example: true
+          type: boolean
+        namespace:
+          description: The provider namespace to apply this configuration to.
+          example: Microsoft.Compute
+          type: string
       type: object
     ResponseMetaAttributes:
       description: Object describing meta attributes of response.
@@ -13977,6 +13995,9 @@ components:
           items:
             $ref: '#/components/schemas/SyntheticsAssertion'
           type: array
+        exitIfSucceed:
+          description: Determines whether or not to exit the test if the step succeeds.
+          type: boolean
         extractedValues:
           description: Array of values to parse and save as variables from the response.
           items:
@@ -15436,7 +15457,7 @@ components:
           format: int64
           type: integer
         public_ids:
-          description: An array of Synthetic test IDs you want to delete.
+          description: An array of Synthetic test IDs you want uptimes for.
           example: []
           items:
             description: A Synthetic test ID.
@@ -16490,6 +16511,9 @@ components:
         params:
           description: The parameters of the step.
           type: object
+        public_id:
+          description: The public ID of the step.
+          type: string
         timeout:
           description: The time before declaring a step failed.
           format: int64
@@ -19922,7 +19946,8 @@ components:
           format: int64
           type: integer
         avg_profiled_fargate_tasks:
-          description: The average profiled task count for Fargate Profiling.
+          description: The average total count for Fargate Container Profiler over
+            all hours in the current date for all organizations.
           format: int64
           type: integer
         aws_host_top99p:
@@ -20027,6 +20052,11 @@ components:
         code_analysis_sca_committers_hwm:
           description: Shows the high-water mark of all static Software Composition
             Analysis committers over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        code_security_host_top99p:
+          description: Shows the 99th percentile of all Code Security hosts over all
+            hours in the current date for the given org.
           format: int64
           type: integer
         container_avg:
@@ -20189,6 +20219,16 @@ components:
         error_tracking_rum_error_events_sum:
           description: Shows the sum of all Error Tracking RUM error events over all
             hours in the current date for the given org.
+          format: int64
+          type: integer
+        fargate_container_profiler_profiling_fargate_avg:
+          description: The average number of Profiling Fargate tasks over all hours
+            in the current date for all organizations.
+          format: int64
+          type: integer
+        fargate_container_profiler_profiling_fargate_eks_avg:
+          description: The average number of Profiling Fargate Elastic Kubernetes
+            Service tasks over all hours in the current date for all organizations.
           format: int64
           type: integer
         fargate_tasks_count_avg:
@@ -20688,7 +20728,8 @@ components:
           format: int64
           type: integer
         avg_profiled_fargate_tasks:
-          description: The average profiled task count for Fargate Profiling.
+          description: The average total count for Fargate Container Profiler over
+            all hours in the current month for the given org.
           format: int64
           type: integer
         aws_host_top99p:
@@ -20793,6 +20834,11 @@ components:
         code_analysis_sca_committers_hwm:
           description: Shows the high-water mark of all static Software Composition
             Analysis committers over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        code_security_host_top99p:
+          description: Shows the 99th percentile of all Code Security hosts over all
+            hours in the current date for the given org.
           format: int64
           type: integer
         container_avg:
@@ -20961,6 +21007,16 @@ components:
         error_tracking_rum_error_events_sum:
           description: Shows the sum of all Error Tracking RUM error events over all
             hours in the current date for the given org.
+          format: int64
+          type: integer
+        fargate_container_profiler_profiling_fargate_avg:
+          description: The average number of Profiling Fargate tasks over all hours
+            in the current month for the given org.
+          format: int64
+          type: integer
+        fargate_container_profiler_profiling_fargate_eks_avg:
+          description: The average number of Profiling Fargate Elastic Kubernetes
+            Service tasks over all hours in the current month for the given org.
           format: int64
           type: integer
         fargate_tasks_count_avg:
@@ -21458,8 +21514,8 @@ components:
           format: int64
           type: integer
         avg_profiled_fargate_tasks_sum:
-          description: Shows the average of all profiled Fargate tasks over all hours
-            in the current month for all organizations.
+          description: The average total count for Fargate Container Profiler over
+            all hours in the current month for all organizations.
           format: int64
           type: integer
         aws_host_top99p_sum:
@@ -21570,6 +21626,11 @@ components:
         code_analysis_sca_committers_hwm_sum:
           description: Shows the high-water mark of all static Software Composition
             Analysis committers over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        code_security_host_top99p_sum:
+          description: Shows the 99th percentile of all Code Security hosts over all
+            hours in the current month for all organizations.
           format: int64
           type: integer
         container_avg_sum:
@@ -21740,6 +21801,16 @@ components:
         error_tracking_rum_error_events_agg_sum:
           description: Shows the sum of all Error Tracking RUM error events over all
             hours in the current month for all organizations.
+          format: int64
+          type: integer
+        fargate_container_profiler_profiling_fargate_avg_sum:
+          description: The average number of Profiling Fargate tasks over all hours
+            in the current month for all organizations.
+          format: int64
+          type: integer
+        fargate_container_profiler_profiling_fargate_eks_avg_sum:
+          description: The average number of Profiling Fargate Elastic Kubernetes
+            Service tasks over all hours in the current month for all organizations.
           format: int64
           type: integer
         fargate_tasks_count_avg_sum:
@@ -23661,6 +23732,12 @@ components:
       type: apiKey
       x-auth-id-alias: appKeyAuth
       x-env-name: DD_APP_KEY
+    bearerAuth:
+      in: header
+      name: Authorization
+      scheme: bearer
+      type: http
+      x-env-name: DD_BEARER_TOKEN
 info:
   contact:
     email: support@datadoghq.com
@@ -27683,10 +27760,13 @@ paths:
               \"TestingRh2nx664kUy5dIApvM54T4AtO\",\n  \"container_app_filters\":
               \"key:value,filter:example\",\n  \"cspm_enabled\": true,\n  \"custom_metrics_enabled\":
               true,\n  \"errors\": [\"*\"],\n  \"host_filters\": \"key:value,filter:example\",\n
+              \ \"metrics_enabled\": true,\n  \"metrics_enabled_default\": true,\n
               \ \"new_client_id\": \"{{ uuid }}\",\n  \"new_tenant_name\": \"{{ uuid
-              }}\",\n  \"resource_collection_enabled\": true,\n  \"metrics_config\":
-              {\n    \"excluded_resource_providers\": [\"Microsoft.Sql\", \"Microsoft.Cdn\"]\n
-              \ },\n  \"tenant_name\": \"{{ uuid }}\"\n}"
+              }}\",\n  \"resource_collection_enabled\": true,\n  \"resource_provider_configs\":
+              [\n    {\n      \"namespace\": \"Microsoft.Compute\",\n      \"metrics_enabled\":
+              false\n    },\n    {\n      \"namespace\": \"Microsoft.Web\",\n      \"metrics_enabled\":
+              false\n    }\n  ],\n  \"tenant_name\": \"{{ uuid }}\",\n  \"usage_metrics_enabled\":
+              true\n}"
           step: there is a valid "azure_account" in the system
       x-menu-order: 2
       x-permission:

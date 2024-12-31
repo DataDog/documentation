@@ -39,6 +39,27 @@
       "description": "Update an AWS integration returns \"AWS Account object\" response"
     }
   ],
+  "CreateApp": [
+    {
+      "group": "apps",
+      "suffix": "",
+      "description": "Create App returns \"App Created\" response"
+    }
+  ],
+  "DeleteApps": [
+    {
+      "group": "apps",
+      "suffix": "",
+      "description": "Delete Multiple Apps returns \"OK\" response"
+    }
+  ],
+  "UpdateApp": [
+    {
+      "group": "apps",
+      "suffix": "",
+      "description": "Update App returns \"OK\" response"
+    }
+  ],
   "SearchAuditLogs": [
     {
       "group": "audit",
@@ -92,8 +113,8 @@
     },
     {
       "group": "ci_visibility_pipelines",
-      "suffix": "_129899466",
-      "description": "Send pipeline job event returns \"Request accepted for processing\" response"
+      "suffix": "_2341150096",
+      "description": "Send running pipeline event returns \"Request accepted for processing\" response"
     }
   ],
   "AggregateCIAppTestEvents": [

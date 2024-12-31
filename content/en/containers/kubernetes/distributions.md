@@ -116,6 +116,7 @@ spec:
     admissionController:
       enabled: true
   global:
+    site: <DATADOG_SITE>
     credentials:
       apiKey: <DATADOG_API_KEY>
       appKey: <DATADOG_APP_KEY>
@@ -130,6 +131,9 @@ spec:
               value: "true"
 ```
 
+Replace `<DATADOG_SITE>` with your [Datadog site][1]. Your site is {{< region-param key="dd_site" code="true" >}}. (Ensure that the correct SITE for your account is selected on the right of this page).
+
+[1]: /getting_started/site
 {{% /tab %}}
 {{% tab "Helm" %}}
 

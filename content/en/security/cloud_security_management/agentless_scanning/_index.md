@@ -26,7 +26,7 @@ further_reading:
 
 ## Overview
 
-Agentless Scanning provides visibility into vulnerabilities that exist within your AWS hosts, running containers, Lambda functions, and Amazon Machine Images (AMIs) without requiring you to install the Datadog Agent. Datadog recommends enabling Agentless Scanning as a first step to gain complete visibility into your cloud resources, and then installing the Datadog Agent on your core assets over time for deeper security and observability context.
+Agentless Scanning provides visibility into vulnerabilities that exist within your AWS hosts, running containers, Lambda functions, and running Amazon Machine Images (AMIs) without requiring you to install the Datadog Agent. Datadog recommends enabling Agentless Scanning as a first step to gain complete visibility into your cloud resources, and then installing the Datadog Agent on your core assets over time for deeper security and observability context.
 
 ## Availability
 
@@ -42,6 +42,8 @@ The following table provides a summary of Agentless scanning technologies in rel
 | Container runtime           | Docker, containerd </br> **Note**: CRI-O is **not** supported                                         |
 | Serverless                  | AWS, AWS Lambda                                             |
 | Serverless languages        | .Net, Python, Java, Ruby, Node.js, Go                        |
+
+**Note**: AMIs must be stored in an account that uses Datadog's AWS integration. Otherwise, Datadog can't read the AMI's underlying Amazon Elastic Block Store (EBS) snapshot, so it can't scan or report on the AMI.
 
 ## How it works
 

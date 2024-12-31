@@ -83,6 +83,14 @@ Datadog [Application Security][1] provides observability into application-level 
 
 {{< img src="/security/application_security/app-sec-landing-page.png" alt="A security signal panel in Datadog, which displays attack flows and flame graphs" width="75%">}}
 
+### Disable ASM
+
+For information on disabling ASM or its features, see the following:
+
+- [Disabling threat management and protection][17]
+- [Disabling Software Composition Analysis][18]
+- [Disabling Code Security][19]
+
 ## Cloud SIEM
 
 [Cloud SIEM][4] (Security Information and Event Management) detects real-time threats to your application and infrastructure, like a targeted attack, an IP communicating with your systems which matches a threat intel list, or an insecure configuration. Cloud SIEM is powered by [Datadog Log Management][5]. With these areas combined, you can [automate remediation of threats detected by Datadog Cloud SIEM][6] to speed up your threat-response workflow. Check out the dedicated [Guided Tour](https://www.datadoghq.com/guided-tour/security/cloud-siem/) to see more.
@@ -117,3 +125,6 @@ To get started with Datadog Security, navigate to the [**Security** > **Setup**]
 [14]: https://www.datadoghq.com/guided-tour/security/
 [15]: /security/cloud_security_management/identity_risks/
 [16]: /security/cloud_security_management/vulnerabilities/
+[17]: /security/application_security/troubleshooting/#disabling-threat-management-and-protection
+[18]: /security/application_security/troubleshooting/#disabling-software-composition-analysis
+[19]: /security/application_security/troubleshooting/#disabling-code-security

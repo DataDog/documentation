@@ -18,7 +18,7 @@ further_reading:
     - link: '/real_user_monitoring/session_replay'
       tag: Documentation
       text: Session Replay
-    - link: '/real_user_monitoring/mobile_and_tv_monitoring/web_view_tracking'
+    - link: '/real_user_monitoring/mobile_and_tv_monitoring/android/web_view_tracking'
       tag: Documentation
       text: Web View Tracking
 ---
@@ -40,6 +40,8 @@ To set up Mobile Session Replay for Android:
     implementation("com.datadoghq:dd-sdk-android-session-replay:[datadog_version]")
     // in case you need Material support
     implementation("com.datadoghq:dd-sdk-android-session-replay-material:[datadog_version]")
+    // in case you need Jetpack Compose support
+    implementation("com.datadoghq:dd-sdk-android-session-replay-compose:[datadog_version]")
    {{< /code-block >}}
 
 3. Enable Session Replay in your app:
@@ -47,7 +49,9 @@ To set up Mobile Session Replay for Android:
    {{< code-block lang="kotlin" filename="Application.kt" disable_copy="false" collapsible="true" >}}
    val sessionReplayConfig = SessionReplayConfiguration.Builder([sampleRate])
     // in case you need Material extension support
-    .addExtensionSupport(MaterialExtensionSupport()) 
+    .addExtensionSupport(MaterialExtensionSupport())
+    // in case you need Jetpack Compose support
+    .addExtensionSupport(ComposeExtensionSupport)
     .build()
    SessionReplay.enable(sessionReplayConfig)
    {{< /code-block >}}
@@ -77,7 +81,9 @@ To set up Mobile Session Replay for iOS:
 
    SessionReplay.enable(
        with: SessionReplay.Configuration(
-           replaySampleRate: sampleRate
+           replaySampleRate: sampleRate,
+           // Enable the experimental SwiftUI recording
+           featureFlags: [.swiftui: true]
        )
    )
    {{< /code-block >}}
@@ -149,9 +155,9 @@ To instrument your consolidated web and native Session Replay views for Android:
 3. Enable [Session Replay][4] for your web application.
 4. Enable Session Replay for your mobile application (see setup instructions above).
 
-[1]: /real_user_monitoring/mobile_and_tv_monitoring/web_view_tracking/
+[1]: /real_user_monitoring/mobile_and_tv_monitoring/android/web_view_tracking/
 [2]: https://github.com/DataDog/dd-sdk-android/releases/tag/2.8.0
-[3]: /real_user_monitoring/mobile_and_tv_monitoring/web_view_tracking/?tab=android#instrument-your-web-views
+[3]: /real_user_monitoring/mobile_and_tv_monitoring/android/web_view_tracking/?tab=android#instrument-your-web-views
 [4]: /real_user_monitoring/session_replay/browser/#setup
 
 {{% /tab %}}
@@ -165,7 +171,7 @@ To instrument your consolidated web and native Session Replay views for iOS:
 4. Enable Session Replay for your mobile application (see setup instructions above).
 
 [1]: https://github.com/DataDog/dd-sdk-ios/releases/tag/2.13.0
-[2]: /real_user_monitoring/mobile_and_tv_monitoring/web_view_tracking/?tab=ios#instrument-your-web-views
+[2]: /real_user_monitoring/mobile_and_tv_monitoring/ios/web_view_tracking/?tab=ios#instrument-your-web-views
 [3]: /real_user_monitoring/session_replay/browser/#setup
 
 {{% /tab %}}
@@ -177,7 +183,7 @@ To instrument your consolidated web and native Session Replay views for Kotlin M
 2. Enable [Session Replay][2] for your web application.
 3. Enable Session Replay for your mobile application (see setup instructions above).
 
-[1]: /real_user_monitoring/mobile_and_tv_monitoring/web_view_tracking/?tab=kotlinmultiplatform#instrument-your-web-views
+[1]: /real_user_monitoring/mobile_and_tv_monitoring/kotlin_multiplatform/web_view_tracking/?tab=kotlinmultiplatform#instrument-your-web-views
 [2]: /real_user_monitoring/session_replay/browser/#setup
 
 {{% /tab %}}
@@ -186,7 +192,7 @@ To instrument your consolidated web and native Session Replay views for Kotlin M
 ## Additional configuration
 ### Set the sample rate for recorded sessions to appear
 
-The sample rate is an optional parameter in the Session Replay configuration. It must be a number between 0.0 and 100.0, where 0 indicates that no replays are recorded and 100 means that all RUM sessions include a replay. If the sample rate is not specified in the configuration, the default value of 100 is applied. 
+The sample rate is an optional parameter in the Session Replay configuration. It must be a number between 0.0 and 100.0, where 0 indicates that no replays are recorded and 100 means that all RUM sessions include a replay. If the sample rate is not specified in the configuration, the default value of 100 is applied.
 
 This sample rate is applied in addition to the RUM sample rate. For example, if RUM uses a sample rate of 80% and Session Replay uses a sample rate of 20%, it means that out of all user sessions, 80% are included in RUM, and within those sessions, only 20% have replays.
 
@@ -231,7 +237,7 @@ By default, Session Replay starts recording automatically. However, if you prefe
     val sessionReplayConfig = SessionReplayConfiguration.Builder([sampleRate])
         .startRecordingImmediately(false)
         .build()
-    // Do something 
+    // Do something
     SessionReplay.startRecording()
     SessionReplay.stopRecording()
 {{< /code-block >}}
@@ -245,7 +251,7 @@ By default, Session Replay starts recording automatically. However, if you prefe
         replaySampleRate: sampleRate,
         startRecordingImmediately: false
     )
-    // Do something 
+    // Do something
     SessionReplay.startRecording()
     SessionReplay.stopRecording()
 {{< /code-block >}}
@@ -300,5 +306,5 @@ See [Privacy Options][2].
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/mobile_and_tv_monitoring/web_view_tracking
+[1]: /real_user_monitoring/mobile_and_tv_monitoring/ios/web_view_tracking
 [2]: /real_user_monitoring/session_replay/mobile/privacy_options
