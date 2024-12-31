@@ -28,7 +28,7 @@
         selectorHtml += `<div class="cdoc-filter__label">${p.filter.displayName}</div>`;
         p.filter.options.forEach((option) => {
           const selected = option.id === currentValue ? "selected" : "";
-          selectorHtml += `<div class="cdoc-filter__option ${selected}" data-filter-id="${p.filter.id}" data-option-id="${option.id}">${option.displayName}</div>`;
+          selectorHtml += `<div class="cdoc-filter__option cdoc-pill ${selected}" data-filter-id="${p.filter.id}" data-option-id="${option.id}">${option.displayName}</div>`;
         });
         selectorHtml += "</div>";
         return selectorHtml;

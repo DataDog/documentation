@@ -1,11 +1,13 @@
 .cdoc__hidden {
     display: none;
 }
+
 #cdoc-selector,
 #cdoc-content.customizable {
     visibility: hidden;
 }
-.cdoc-filter__option {
+
+.cdoc-pill {
     display: inline-block;
     padding: 5px 10px;
     margin-right: 6px;
@@ -16,51 +18,68 @@
     font-size: 16px;
     border-radius: 5px;
 }
-div.cdoc-code-snippet.cdoc-language-shell span.line:before {
-    content: '$ ';
-    display: inline;
-}
-div.cdoc-code-snippet.cdoc-language-bash span.line:before {
-    content: '$ ';
-    display: inline;
-}
-.cdoc-filter__option.selected {
+
+.cdoc-pill.selected {
     color: white;
     background-color: #632ca6;
     border-color: #632ca6;
 }
-.cdoc-filter__label {
+
+.cdoc-pill .cdoc-filter__label {
     text-transform: uppercase;
     font-size: 14px;
     font-weight: 400;
     margin-bottom: 5px;
 }
+
+/*
+.cdoc-filter__option {
+}
+*/
+
+div.cdoc-code-snippet.cdoc-language-shell span.line:before {
+    content: '$ ';
+    display: inline;
+}
+
+div.cdoc-code-snippet.cdoc-language-bash span.line:before {
+    content: '$ ';
+    display: inline;
+}
+
 .cdoc-filter__container {
     display: inline-block;
     margin-right: 25px;
 }
+
 .alert.alert-info p {
     color: rgb(31, 92, 122);
 }
+
 .alert.alert-warning p {
     color: #60451f;
 }
+
 .alert.alert-danger p {
     color: #82322f;
 }
+
 #cdoc-content .alert p {
     font-size: 16px;
     font-family: nationalweb, Helvetica, Arial, sans-serif;
     margin-bottom: 0;
 }
+
 #cdoc-content .alert p + p {
     margin-top: 16px;
 }
+
 #cdoc-content table ul,
 #cdoc-content table p {
     font-size: 16px;
     font-family: nationalweb, Helvetica, Arial, sans-serif;
 }
+
 #cdoc-content.customizable h1,
 #cdoc-content.customizable h2,
 #cdoc-content.customizable h3,
@@ -69,7 +88,116 @@ div.cdoc-code-snippet.cdoc-language-bash span.line:before {
 #cdoc-content.customizable h6 {
     scroll-margin-top: 95px;
 }
+
 span.s1 code.cdoc,
 span.s2 code.cdoc {
     color: #c41a16;
+}
+
+/* Dropdown styles */
+
+.cdocs-dropdown-container {
+    /* width: 22%; */
+    margin-bottom: 1em;
+    display: inline-block;
+    margin-right: 1em;
+}
+
+.cdocs-dropdown-container p.cdocs-filter-label {
+    margin-top: 0px;
+    margin-bottom: 10px;
+    font-weight: 400;
+    text-transform: uppercase;
+    font-size: 14px;
+    line-height: 18px;
+}
+
+.cdocs-dropdown-options-list {
+    /* width: 100%; */
+    background-color: rgb(255, 255, 255);
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 4px 20px 0px;
+    border-radius: 6px;
+}
+
+.cdocs-dropdown-option:hover {
+    background-color: rgb(246, 246, 246);
+    color: rgb(99, 44, 166);
+}
+
+.cdocs-dropdown-option {
+    display: block;
+    width: 100%;
+    padding-bottom: 8px;
+    padding-left: 10px;
+    padding-right: 16px;
+    padding-top: 4px;
+    font-weight: 400;
+    color: black;
+    text-align: inherit;
+    white-space: nowrap;
+    background-color: transparent;
+    border: 0;
+    line-height: 20px;
+}
+
+button.cdocs-dropdown-btn {
+    /* width: 100%; */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.6em;
+    height: 31px;
+    color: rgb(99, 44, 166);
+    border: 1px solid rgb(199, 199, 199);
+    border-radius: 4px;
+    padding: 0rem 0.6rem 0.1rem;
+    background-color: rgb(246, 246, 246);
+    font-weight: 600;
+    line-height: 20px;
+    box-sizing: border-box;
+}
+
+.cdocs-chevron {
+    width: 8px;
+    height: 8px;
+    display: inline-block;
+    border: 2px solid rgb(99, 44, 166);
+    border-top: none;
+    border-left: none;
+}
+
+.cdocs-dropdown {
+    display: block;
+    position: relative;
+}
+
+.cdocs-dropdown .cdocs-chevron.cdocs-up {
+    display: none;
+}
+
+.cdocs-dropdown__expanded .cdocs-chevron.cdocs-down {
+    display: none;
+}
+
+.cdocs-dropdown__expanded .cdocs-chevron.cdocs-up {
+    display: inline-block;
+}
+
+.cdocs-chevron.cdocs-up {
+    transform: rotate(-135deg);
+    margin-top: 5px;
+}
+
+.cdocs-chevron.cdocs-down {
+    transform: rotate(45deg);
+}
+
+.cdocs-dropdown-options-list {
+    display: none;
+}
+
+.cdocs-dropdown.cdocs-dropdown__expanded .cdocs-dropdown-options-list {
+    display: block;
+    position: absolute;
+    top: 39px;
 }

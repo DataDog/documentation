@@ -1,7 +1,7 @@
 {
   "inputs": {
     "dist/helperModules/PageBuilder/components/CustomizationMenu.js": {
-      "bytes": 1440,
+      "bytes": 1680,
       "imports": [],
       "format": "cjs"
     },
@@ -87,7 +87,7 @@
       "entryPoint": "dist/markdoc-client-filters-manager.js",
       "inputs": {
         "dist/helperModules/PageBuilder/components/CustomizationMenu.js": {
-          "bytesInOutput": 1386
+          "bytesInOutput": 1396
         },
         "dist/schemas/regexes.js": {
           "bytesInOutput": 601
@@ -111,7 +111,7 @@
           "bytesInOutput": 354
         }
       },
-      "bytes": 523797
+      "bytes": 523807
     }
   }
 }

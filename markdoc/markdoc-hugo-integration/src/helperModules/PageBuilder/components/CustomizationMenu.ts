@@ -28,8 +28,15 @@ function buildFilterSelector(p: { filter: ResolvedPageFilter }) {
   // Render each option pill
   p.filter.options.forEach((option) => {
     const selected = option.id === currentValue ? 'selected' : '';
-    selectorHtml += `<div class="cdoc-filter__option ${selected}" data-filter-id="${p.filter.id}" data-option-id="${option.id}">${option.displayName}</div>`;
+    selectorHtml += `<div class="cdoc-filter__option cdoc-pill ${selected}" data-filter-id="${p.filter.id}" data-option-id="${option.id}">${option.displayName}</div>`;
   });
+  selectorHtml += '</div>';
+  return selectorHtml;
+}
+
+function buildFilterSelectorNew(p: { filter: ResolvedPageFilter }) {
+  const currentValue = p.filter.currentValue || p.filter.defaultValue;
+  let selectorHtml = '<div class="cdoc-filter__container">';
   selectorHtml += '</div>';
   return selectorHtml;
 }
