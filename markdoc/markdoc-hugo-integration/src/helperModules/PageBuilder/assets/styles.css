@@ -53,10 +53,10 @@
 /* Customization menu dropdowns */
 
 .cdoc-dropdown-container {
-    /* width: 22%; */
     margin-bottom: 1em;
     display: inline-block;
     margin-right: 1em;
+    min-width: 100px;
 }
 
 .cdoc-dropdown-container p.cdoc-filter-label {
@@ -69,7 +69,7 @@
 }
 
 .cdoc-dropdown-options-list {
-    /* width: 100%; */
+    min-width: 100%;
     background-color: rgb(255, 255, 255);
     box-shadow: rgba(0, 0, 0, 0.25) 0px 4px 20px 0px;
     border-radius: 6px;
@@ -98,6 +98,7 @@
 }
 
 button.cdoc-dropdown-btn {
+    min-width: 100%;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -111,11 +112,14 @@ button.cdoc-dropdown-btn {
     font-weight: 600;
     line-height: 20px;
     box-sizing: border-box;
+    margin-right: 1em;
 }
 
 .cdoc-dropdown {
+    width: 100%;
     display: block;
     position: relative;
+    margin-right: 1em;
 }
 
 .cdoc-dropdown .cdoc-chevron {
