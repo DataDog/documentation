@@ -24419,6 +24419,12 @@ components:
             as the search bar for detection rules.
           example: type:log_detection source:cloudtrail
           type: string
+        start_date:
+          description: A Unix millisecond timestamp giving the start date for the
+            suppression rule. After this date, it starts suppressing signals.
+          example: 1703187336000
+          format: int64
+          type: integer
         suppression_query:
           description: The suppression query of the suppression rule. If a signal
             matches this query, it is suppressed and not triggered. Same syntax as
@@ -24474,6 +24480,12 @@ components:
             as the search bar for detection rules.
           example: type:log_detection source:cloudtrail
           type: string
+        start_date:
+          description: A Unix millisecond timestamp giving the start date for the
+            suppression rule. After this date, it starts suppressing signals.
+          example: 1703187336000
+          format: int64
+          type: integer
         suppression_query:
           description: The suppression query of the suppression rule. If a signal
             matches this query, it is suppressed and is not triggered. It uses the
@@ -24560,6 +24572,15 @@ components:
             as the search bar for detection rules.
           example: type:log_detection source:cloudtrail
           type: string
+        start_date:
+          description: A Unix millisecond timestamp giving the start date for the
+            suppression rule. After this date, it starts suppressing signals. If unset,
+            the start date of the suppression rule is left untouched. If set to `null`,
+            the start date is removed.
+          example: 1703187336000
+          format: int64
+          nullable: true
+          type: integer
         suppression_query:
           description: The suppression query of the suppression rule. If a signal
             matches this query, it is suppressed and not triggered. Same syntax as
