@@ -140,15 +140,6 @@ export class PageBuilder {
 }
 `;
 
-    // If the page does not have any filters,
-    // don't pass any data to the filters manager
-    if (!Object.keys(p.filtersManifest.filtersById).length) {
-      return this.#removeLineBreaks(
-        `const ${initFunctionName} = () => clientFiltersManager.initialize({}); ` +
-          docReadyExecutionScript
-      );
-    }
-
     const initFunctionStr = `const ${initFunctionName} = () => { 
 clientFiltersManager.initialize({
     ifFunctionsByRef: ${JSON.stringify(getMinifiedIfFunctionsByRef(p.renderableTree))},
