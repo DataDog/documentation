@@ -29,6 +29,7 @@ Select and set up your destinations when you [set up a pipeline][1]. This is ste
     {{< nextlink href="observability_pipelines/destinations/google_chronicle" >}}Google Chronicle{{< /nextlink >}}
     {{< nextlink href="observability_pipelines/destinations/google_cloud_storage" >}}Google Cloud Storage{{< /nextlink >}}
     {{< nextlink href="observability_pipelines/destinations/new_relic" >}}New Relic{{< /nextlink >}}
+    {{< nextlink href="observability_pipelines/destinations/microsoft_sentinel" >}}Microsoft Sentinel{{< /nextlink >}}
     {{< nextlink href="observability_pipelines/destinations/opensearch" >}}OpenSearch{{< /nextlink >}}
     {{< nextlink href="observability_pipelines/destinations/syslog" >}}rsyslog or syslog-ng{{< /nextlink >}}
     {{< nextlink href="observability_pipelines/destinations/sentinelone" >}} SentinelOne {{< /nextlink >}}
