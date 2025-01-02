@@ -1,106 +1,158 @@
 ---
 title: 'DebugIt: A Fake Debugging Library'
 ---
-<div id="cdoc-selector"><div><div class="cdoc-dropdown-container"><p id="cdoc-prog_lang-label" class="cdoc-filter-label">Language</p><div id="cdoc-dropdown-prog_lang" class="cdoc-dropdown">
-    <button 
+<div id="cdoc-selector"><div><div class="cdoc-dropdown-container"><p 
+    id="cdoc-prog_lang-label" 
+    class="cdoc-filter-label"
+  >Language</p><div 
+    id="cdoc-dropdown-prog_lang" 
+    class="cdoc-dropdown">
+    <button
       class="cdoc-dropdown-btn" 
-      type="button" 
+      type="button"
+      tabIndex="0"
       aria-haspopup="listbox"
       aria-expanded="false" 
       aria-labelledby="cdoc-prog_lang-label">
-      <span id="cdoc-dropdown-prog_lang-label" class="cdoc-btn-label">
-        Python
-      </span>
+      <span 
+        id="cdoc-dropdown-prog_lang-label" 
+        class="cdoc-btn-label"
+      >Python</span>
       <div class="cdoc-chevron"></div>
-    </button><div class="cdoc-dropdown-options-list" role="listbox" aria-labelledby="cdoc-prog_lang-label"><a 
+    </button><div 
+    class="cdoc-dropdown-options-list" 
+    role="listbox" 
+    aria-labelledby="cdoc-prog_lang-label"><a 
       class="cdoc-dropdown-option 
       cdoc-filter__option selected" 
-      role="option" 
-      aria-selected="selected" 
       data-filter-id="prog_lang" 
-      data-option-id="python">Python</a><a 
+      data-option-id="python"
+      role="option" 
+      aria-selected="selected"
+      tabIndex="0"
+    >Python</a><a 
       class="cdoc-dropdown-option 
       cdoc-filter__option " 
-      role="option" 
-      aria-selected="" 
       data-filter-id="prog_lang" 
-      data-option-id="go">Go</a><a 
+      data-option-id="go"
+      role="option" 
+      aria-selected=""
+      tabIndex="0"
+    >Go</a><a 
       class="cdoc-dropdown-option 
       cdoc-filter__option " 
-      role="option" 
-      aria-selected="" 
       data-filter-id="prog_lang" 
-      data-option-id="javascript">JavaScript</a><a 
+      data-option-id="javascript"
+      role="option" 
+      aria-selected=""
+      tabIndex="0"
+    >JavaScript</a><a 
       class="cdoc-dropdown-option 
       cdoc-filter__option " 
-      role="option" 
-      aria-selected="" 
       data-filter-id="prog_lang" 
-      data-option-id="ruby">Ruby</a><a 
+      data-option-id="ruby"
+      role="option" 
+      aria-selected=""
+      tabIndex="0"
+    >Ruby</a><a 
       class="cdoc-dropdown-option 
       cdoc-filter__option " 
-      role="option" 
-      aria-selected="" 
       data-filter-id="prog_lang" 
-      data-option-id="java">Java</a></div></div></div><div class="cdoc-dropdown-container"><p id="cdoc-os-label" class="cdoc-filter-label">Operating system</p><div id="cdoc-dropdown-os" class="cdoc-dropdown">
-    <button 
+      data-option-id="java"
+      role="option" 
+      aria-selected=""
+      tabIndex="0"
+    >Java</a></div></div></div><div class="cdoc-dropdown-container"><p 
+    id="cdoc-os-label" 
+    class="cdoc-filter-label"
+  >Operating system</p><div 
+    id="cdoc-dropdown-os" 
+    class="cdoc-dropdown">
+    <button
       class="cdoc-dropdown-btn" 
-      type="button" 
+      type="button"
+      tabIndex="0"
       aria-haspopup="listbox"
       aria-expanded="false" 
       aria-labelledby="cdoc-os-label">
-      <span id="cdoc-dropdown-os-label" class="cdoc-btn-label">
-        Linux
-      </span>
+      <span 
+        id="cdoc-dropdown-os-label" 
+        class="cdoc-btn-label"
+      >Linux</span>
       <div class="cdoc-chevron"></div>
-    </button><div class="cdoc-dropdown-options-list" role="listbox" aria-labelledby="cdoc-os-label"><a 
+    </button><div 
+    class="cdoc-dropdown-options-list" 
+    role="listbox" 
+    aria-labelledby="cdoc-os-label"><a 
       class="cdoc-dropdown-option 
       cdoc-filter__option selected" 
-      role="option" 
-      aria-selected="selected" 
       data-filter-id="os" 
-      data-option-id="linux">Linux</a><a 
+      data-option-id="linux"
+      role="option" 
+      aria-selected="selected"
+      tabIndex="0"
+    >Linux</a><a 
       class="cdoc-dropdown-option 
       cdoc-filter__option " 
-      role="option" 
-      aria-selected="" 
       data-filter-id="os" 
-      data-option-id="windows">Windows</a><a 
+      data-option-id="windows"
+      role="option" 
+      aria-selected=""
+      tabIndex="0"
+    >Windows</a><a 
       class="cdoc-dropdown-option 
       cdoc-filter__option " 
-      role="option" 
-      aria-selected="" 
       data-filter-id="os" 
-      data-option-id="mac_os">MacOS</a></div></div></div><div class="cdoc-dropdown-container"><p id="cdoc-database-label" class="cdoc-filter-label">Database</p><div id="cdoc-dropdown-database" class="cdoc-dropdown">
-    <button 
+      data-option-id="mac_os"
+      role="option" 
+      aria-selected=""
+      tabIndex="0"
+    >MacOS</a></div></div></div><div class="cdoc-dropdown-container"><p 
+    id="cdoc-database-label" 
+    class="cdoc-filter-label"
+  >Database</p><div 
+    id="cdoc-dropdown-database" 
+    class="cdoc-dropdown">
+    <button
       class="cdoc-dropdown-btn" 
-      type="button" 
+      type="button"
+      tabIndex="0"
       aria-haspopup="listbox"
       aria-expanded="false" 
       aria-labelledby="cdoc-database-label">
-      <span id="cdoc-dropdown-database-label" class="cdoc-btn-label">
-        Postgres
-      </span>
+      <span 
+        id="cdoc-dropdown-database-label" 
+        class="cdoc-btn-label"
+      >Postgres</span>
       <div class="cdoc-chevron"></div>
-    </button><div class="cdoc-dropdown-options-list" role="listbox" aria-labelledby="cdoc-database-label"><a 
+    </button><div 
+    class="cdoc-dropdown-options-list" 
+    role="listbox" 
+    aria-labelledby="cdoc-database-label"><a 
       class="cdoc-dropdown-option 
       cdoc-filter__option selected" 
-      role="option" 
-      aria-selected="selected" 
       data-filter-id="database" 
-      data-option-id="postgres">Postgres</a><a 
+      data-option-id="postgres"
+      role="option" 
+      aria-selected="selected"
+      tabIndex="0"
+    >Postgres</a><a 
       class="cdoc-dropdown-option 
       cdoc-filter__option " 
-      role="option" 
-      aria-selected="" 
       data-filter-id="database" 
-      data-option-id="mysql">MySQL</a><a 
+      data-option-id="mysql"
+      role="option" 
+      aria-selected=""
+      tabIndex="0"
+    >MySQL</a><a 
       class="cdoc-dropdown-option 
       cdoc-filter__option " 
-      role="option" 
-      aria-selected="" 
       data-filter-id="database" 
-      data-option-id="sql_server">SQL Server</a></div></div></div><hr /></div></div><div id="cdoc-content" class="customizable"><article>
+      data-option-id="sql_server"
+      role="option" 
+      aria-selected=""
+      tabIndex="0"
+    >SQL Server</a></div></div></div><hr /></div></div><div id="cdoc-content" class="customizable"><article>
   <h2 id="overview">Overview</h2>
   <p>
     DebugIt is a powerful debugging library designed to streamline the debugging

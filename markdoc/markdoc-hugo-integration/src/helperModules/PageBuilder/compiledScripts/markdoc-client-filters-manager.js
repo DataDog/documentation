@@ -26,30 +26,42 @@
         const currentValue = p.filter.currentValue || p.filter.defaultValue;
         const filterLabelElementId = `cdoc-${p.filter.id}-label`;
         let selectorHtml = '<div class="cdoc-dropdown-container">';
-        selectorHtml += `<p id="${filterLabelElementId}" class="cdoc-filter-label">${p.filter.displayName}</p>`;
-        selectorHtml += `<div id="cdoc-dropdown-${p.filter.id}" class="cdoc-dropdown">`;
+        selectorHtml += `<p 
+    id="${filterLabelElementId}" 
+    class="cdoc-filter-label"
+  >${p.filter.displayName}</p>`;
+        selectorHtml += `<div 
+    id="cdoc-dropdown-${p.filter.id}" 
+    class="cdoc-dropdown">`;
         selectorHtml += `
-    <button 
+    <button
       class="cdoc-dropdown-btn" 
-      type="button" 
+      type="button"
+      tabIndex="0"
       aria-haspopup="listbox"
       aria-expanded="false" 
       aria-labelledby="${filterLabelElementId}">
-      <span id="cdoc-dropdown-${p.filter.id}-label" class="cdoc-btn-label">
-        ${p.filter.options.find((o) => o.id === currentValue).displayName}
-      </span>
+      <span 
+        id="cdoc-dropdown-${p.filter.id}-label" 
+        class="cdoc-btn-label"
+      >${p.filter.options.find((o) => o.id === currentValue).displayName}</span>
       <div class="cdoc-chevron"></div>
     </button>`;
-        selectorHtml += `<div class="cdoc-dropdown-options-list" role="listbox" aria-labelledby="${filterLabelElementId}">`;
+        selectorHtml += `<div 
+    class="cdoc-dropdown-options-list" 
+    role="listbox" 
+    aria-labelledby="${filterLabelElementId}">`;
         p.filter.options.forEach((option) => {
           const selected = option.id === currentValue ? "selected" : "";
           selectorHtml += `<a 
       class="cdoc-dropdown-option 
       cdoc-filter__option ${selected}" 
-      role="option" 
-      aria-selected="${selected}" 
       data-filter-id="${p.filter.id}" 
-      data-option-id="${option.id}">${option.displayName}</a>`;
+      data-option-id="${option.id}"
+      role="option" 
+      aria-selected="${selected}"
+      tabIndex="0"
+    >${option.displayName}</a>`;
         });
         selectorHtml += "</div>";
         selectorHtml += "</div>";
@@ -12967,6 +12979,14 @@
               parent.setAttribute("aria-expanded", isExpanded.toString());
             });
           }
+          document.addEventListener("keydown", (e) => {
+            if (e.key === "Enter") {
+              const target = e.target;
+              if (target.classList.contains("cdoc-filter__option")) {
+                target.click();
+              }
+            }
+          });
           document.addEventListener("click", (e) => {
             for (let i = 0; i < dropdownContainers.length; i++) {
               const dropdownContainer = dropdownContainers[i];

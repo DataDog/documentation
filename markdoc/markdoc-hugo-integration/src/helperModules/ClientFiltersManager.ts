@@ -313,6 +313,16 @@ export class ClientFiltersManager {
       });
     }
 
+    // Handle Enter key presses on dropdown options
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        const target = e.target as HTMLElement;
+        if (target.classList.contains('cdoc-filter__option')) {
+          target.click();
+        }
+      }
+    });
+
     // Hide dropdown on outside clicks
     document.addEventListener('click', (e) => {
       for (let i = 0; i < dropdownContainers.length; i++) {

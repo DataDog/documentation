@@ -116,7 +116,16 @@ export class MarkdocHugoIntegration {
    * those are inline in the compiled files.
    */
   buildAssetsPartial() {
-    return `<style>${PageBuilder.getStylesStr()}</style>
+    let stylesStr = PageBuilder.getStylesStr();
+    if (this.hugoGlobalConfig.env === 'development') {
+      // Add focus ring styles in development mode
+      stylesStr += `
+      html head *:focus,
+      html body *:focus {
+          outline: 4px auto -webkit-focus-ring-color !important;
+      }`;
+    }
+    return `<style>${stylesStr}</style>
 <script>${PageBuilder.getClientFiltersManagerScriptStr()}</script>`;
   }
 

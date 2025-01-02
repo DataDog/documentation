@@ -42,27 +42,37 @@ function buildFilterSelectorDropdowns(p: { filter: ResolvedPageFilter }) {
   let selectorHtml = '<div class="cdoc-dropdown-container">';
 
   // Render the label
-  selectorHtml += `<p id="${filterLabelElementId}" class="cdoc-filter-label">${p.filter.displayName}</p>`;
+  selectorHtml += `<p 
+    id="${filterLabelElementId}" 
+    class="cdoc-filter-label"
+  >${p.filter.displayName}</p>`;
 
-  // Open the dropdown container
-  selectorHtml += `<div id="cdoc-dropdown-${p.filter.id}" class="cdoc-dropdown">`;
+  // Open the wrapper for the button and options list
+  selectorHtml += `<div 
+    id="cdoc-dropdown-${p.filter.id}" 
+    class="cdoc-dropdown">`;
 
   // Render the button
   selectorHtml += `
-    <button 
+    <button
       class="cdoc-dropdown-btn" 
-      type="button" 
+      type="button"
+      tabIndex="0"
       aria-haspopup="listbox"
       aria-expanded="false" 
       aria-labelledby="${filterLabelElementId}">
-      <span id="cdoc-dropdown-${p.filter.id}-label" class="cdoc-btn-label">
-        ${p.filter.options.find((o) => o.id === currentValue)!.displayName}
-      </span>
+      <span 
+        id="cdoc-dropdown-${p.filter.id}-label" 
+        class="cdoc-btn-label"
+      >${p.filter.options.find((o) => o.id === currentValue)!.displayName}</span>
       <div class="cdoc-chevron"></div>
     </button>`;
 
   // Open the options list
-  selectorHtml += `<div class="cdoc-dropdown-options-list" role="listbox" aria-labelledby="${filterLabelElementId}">`;
+  selectorHtml += `<div 
+    class="cdoc-dropdown-options-list" 
+    role="listbox" 
+    aria-labelledby="${filterLabelElementId}">`;
 
   // Render each option
   p.filter.options.forEach((option) => {
@@ -70,10 +80,12 @@ function buildFilterSelectorDropdowns(p: { filter: ResolvedPageFilter }) {
     selectorHtml += `<a 
       class="cdoc-dropdown-option 
       cdoc-filter__option ${selected}" 
-      role="option" 
-      aria-selected="${selected}" 
       data-filter-id="${p.filter.id}" 
-      data-option-id="${option.id}">${option.displayName}</a>`;
+      data-option-id="${option.id}"
+      role="option" 
+      aria-selected="${selected}"
+      tabIndex="0"
+    >${option.displayName}</a>`;
   });
 
   // Close the options list
