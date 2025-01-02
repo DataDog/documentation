@@ -14,9 +14,13 @@ further_reading:
 Being on-call requires reliable and timely notifications to ensure you can respond to incidents effectively, no matter where you are. This guide walks you through the steps to configure your mobile device for optimal performance with Datadog’s on-call features. From setting up notifications to bypass Do Not Disturb (DND) mode, to customizing alert preferences, you’ll learn how to stay informed and prepared while minimizing interruptions during off-hours.
 
 ## Install the Datadog mobile app
-Make sure you download the Datadog [mobile app][1] to acknowledge Pages on the go, review the impact of the alert alongside relevant observability data, and effectively triage the alert. The app is also **required** to let Datadog circumvent your Do Not Disturb mode.
+Make sure you download the Datadog [mobile app][1] to acknowledge Pages on the go, review the impact of the alert alongside relevant observability data, and effectively triage the alert. The app also makes it easier to let Datadog circumvent your Do Not Disturb mode.
 
 ## Set up push notifications
+<div class="alert alert-info">
+When logging into the mobile app for the first time, an onboarding flow will take care of notification settings and permissions.
+</div>
+
 By default, the mobile app is not allowed to send you notifications. To change that, open the app. To receive push notifications on On-Call events, start by opening the Datadog mobile app and navigate to **Account** > **Settings** > **Notifications**. Afterwards, follow your platform specific instructions:
 
 
@@ -26,7 +30,7 @@ Within the Settings page, select **Notifications**:
 
 {{< img src="service_management/oncall/app_settings_iOS.png" alt="Find the notification settings in the iOS version of Datadog's mobile app." style="width:35%;" >}}
 
-Afterwards, check the **Enable Notifications** toggle. This will take you to the iOS system settings. Within the system settings, make sure you enable the **Allow Notifications** toggle. We highly recommend you also toggle the **Sound** and **Badges** toggles for maximum recognition.
+Afterwards, check the **Enable Notifications** toggle. Depending on whether this is your first time enabling notifications, this will open up either a permissions prompt or take you to the iOS system settings. Within the system settings, make sure you enable the **Allow Notifications** toggle. We highly recommend you also toggle the **Sound** and **Badges** toggles for maximum recognition.
 
 {{< img src="service_management/oncall/system_notifications_settings_iOS.png" alt="Configure the system notification settings of your iOS device." style="width:100%;" >}}
 
@@ -58,6 +62,14 @@ Your device's Do-Not-Disturb mode can be overridden for two separate notificatio
 Deep dive into circumventing Do-Not-Disturb mode specifically for iOS devices.
 
 #### Mobile Push Notifications
+<div class="alert alert-danger">
+On Android, the Datadog app cannot bypass System Volume or Do Not Disturb settings when used within a Work Profile due to platform limitations.
+<br>
+
+Workaround:
+Install the Datadog app on your personal profile alongside the Work Profile. This allows the app to respect Do Not Disturb settings without requiring further adjustments.
+</div>
+
 Similar to how you enabled notifications in the first place, start by opening the Datadog mobile app and navigate to **Account** > **Settings** > **Notifications**.
 
 Within the notification settings, enable the toggle **Enable Critical Alerts**. Critical alerts ignore the mute switch and Do Not Disturb; the system plays a critical alert’s sound regardless of the device’s mute or Do Not Disturb settings.
