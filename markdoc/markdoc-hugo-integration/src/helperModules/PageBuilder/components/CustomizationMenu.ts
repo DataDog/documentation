@@ -36,32 +36,44 @@ function buildFilterSelectorPills(p: { filter: ResolvedPageFilter }) {
 
 function buildFilterSelectorDropdowns(p: { filter: ResolvedPageFilter }) {
   const currentValue = p.filter.currentValue || p.filter.defaultValue;
+  const filterLabelElementId = `cdoc-${p.filter.id}-label`;
 
   // Open the top-level container
   let selectorHtml = '<div class="cdoc-dropdown-container">';
 
   // Render the label
-  selectorHtml += `<p class="cdoc-filter-label">${p.filter.displayName}</p>`;
+  selectorHtml += `<p id="${filterLabelElementId}" class="cdoc-filter-label">${p.filter.displayName}</p>`;
 
   // Open the dropdown container
   selectorHtml += `<div id="cdoc-dropdown-${p.filter.id}" class="cdoc-dropdown">`;
 
   // Render the button
   selectorHtml += `
-    <button class="cdoc-dropdown-btn" type="button">
-      <span class="cdoc-btn-label">${
-        p.filter.options.find((o) => o.id === currentValue)!.displayName
-      }</span>
+    <button 
+      class="cdoc-dropdown-btn" 
+      type="button" 
+      aria-haspopup="listbox"
+      aria-expanded="false" 
+      aria-labelledby="${filterLabelElementId}">
+      <span id="cdoc-dropdown-${p.filter.id}-label" class="cdoc-btn-label">
+        ${p.filter.options.find((o) => o.id === currentValue)!.displayName}
+      </span>
       <div class="cdoc-chevron"></div>
     </button>`;
 
   // Open the options list
-  selectorHtml += `<div class="cdoc-dropdown-options-list">`;
+  selectorHtml += `<div class="cdoc-dropdown-options-list" role="listbox" aria-labelledby="${filterLabelElementId}">`;
 
   // Render each option
   p.filter.options.forEach((option) => {
     const selected = option.id === currentValue ? 'selected' : '';
-    selectorHtml += `<a class="cdoc-dropdown-option cdoc-filter__option ${selected}" data-filter-id="${p.filter.id}" data-option-id="${option.id}">${option.displayName}</a>`;
+    selectorHtml += `<a 
+      class="cdoc-dropdown-option 
+      cdoc-filter__option ${selected}" 
+      role="option" 
+      aria-selected="${selected}" 
+      data-filter-id="${p.filter.id}" 
+      data-option-id="${option.id}">${option.displayName}</a>`;
   });
 
   // Close the options list
