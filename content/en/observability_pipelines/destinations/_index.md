@@ -30,8 +30,8 @@ Select and set up your destinations when you [set up a pipeline][1]. This is ste
     {{< nextlink href="observability_pipelines/destinations/google_cloud_storage" >}}Google Cloud Storage{{< /nextlink >}}
     {{< nextlink href="observability_pipelines/destinations/new_relic" >}}New Relic{{< /nextlink >}}
     {{< nextlink href="observability_pipelines/destinations/opensearch" >}}OpenSearch{{< /nextlink >}}
-    {{< nextlink href="observability_pipelines/destinations/sentinelone" >}} SentinelOne {{< /nextlink >}}
     {{< nextlink href="observability_pipelines/destinations/syslog" >}}rsyslog or syslog-ng{{< /nextlink >}}
+    {{< nextlink href="observability_pipelines/destinations/sentinelone" >}} SentinelOne {{< /nextlink >}}
     {{< nextlink href="observability_pipelines/destinations/splunk_hec" >}}Splunk HTTP Event Collector (HEC){{< /nextlink >}}
     {{< nextlink href="observability_pipelines/destinations/sumo_logic_hosted_collector" >}}Sumo Logic Hosted Collector{{< /nextlink >}}
 {{< /whatsnext >}}
@@ -53,7 +53,7 @@ Logs are often stored in separate indexes based on log data, such as the service
 
 #### Example
 
-If you want to send logs based on the log's application ID field (for example, `application_id`) to the Amazon S3 destination, use the event fields syntax in the **Prefix to apply to all object keys** field.
+If you want to route logs based on the log's application ID field (for example, `application_id`) to the Amazon S3 destination, use the event fields syntax in the **Prefix to apply to all object keys** field.
 
 {{< img src="observability_pipelines/amazon_s3_prefix.png" alt="The Amazon S3 destination showing the prefix field using the event fields syntax /application_id={{ application_id }}/" style="width:40%;" >}}
 
@@ -64,7 +64,7 @@ If you want to send logs based on the log's application ID field (for example, `
 Use `{{ <field_name> }}` to access individual log event fields. For example:
 
 ```
-option = "{{ application_id }}"
+{{ application_id }}
 ```
 
 #### Strftime specifiers
@@ -72,7 +72,7 @@ option = "{{ application_id }}"
 Use [strftime specifiers][3] for the date and time. For example:
 
 ```
-option = "year=%Y/month=%m/day=%d"
+year=%Y/month=%m/day=%d
 ```
 
 #### Escape characters
@@ -80,13 +80,13 @@ option = "year=%Y/month=%m/day=%d"
 Prefix a character with `\` to escape the character. This example escapes the event field syntax:
 
 ```
-option = "\{{ field_name }}"
+\{{ field_name }}
 ```
 
 This example escapes the strftime specifiers:
 
 ```
-option = "year=\%Y/month=\%m/day=\%d/"
+year=\%Y/month=\%m/day=\%d/
 ```
 
 ## Event batching
