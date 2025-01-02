@@ -2090,7 +2090,7 @@ menu:
       parent: oncall
       identifier: oncall_teams
       weight: 1
-    - name: name: Send a Page
+    - name: Send a Page
       url: service_management/on-call/pages/
       parent: oncall
       identifier: oncall_pages
