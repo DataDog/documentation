@@ -351,6 +351,18 @@
     "description": "Get the list of all CSM Agents running on your hosts and containers.",
     "summary": "Get all CSM Agents"
   },
+  "GetCSMCloudAccountsCoverageAnalysis": {
+    "description": "Get the CSM Coverage Analysis of your Cloud Accounts.\nThis is calculated based on the number of your Cloud Accounts that are\nscanned for security issues.",
+    "summary": "Get the CSM Cloud Accounts Coverage Analysis"
+  },
+  "GetCSMHostsAndContainersCoverageAnalysis": {
+    "description": "Get the CSM Coverage Analysis of your Hosts and Containers.\nThis is calculated based on the number of agents running on your Hosts\nand Containers with CSM feature(s) enabled.",
+    "summary": "Get the CSM Hosts and Containers Coverage Analysis"
+  },
+  "GetCSMServerlessCoverageAnalysis": {
+    "description": "Get the CSM Coverage Analysis of your Serverless Resources.\nThis is calculated based on the number of agents running on your Serverless\nResources with CSM feature(s) enabled.",
+    "summary": "Get the CSM Serverless Coverage Analysis"
+  },
   "ListAllCSMServerlessAgents": {
     "description": "Get the list of all CSM Serverless Agents running on your hosts and containers.",
     "summary": "Get all CSM Serverless Agents"

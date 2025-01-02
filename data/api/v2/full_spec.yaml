@@ -6940,6 +6940,140 @@ components:
         meta:
           $ref: '#/components/schemas/CSMAgentsMetadata'
       type: object
+    CsmCloudAccountsCoverageAnalysisAttributes:
+      description: CSM Cloud Accounts Coverage Analysis attributes.
+      properties:
+        aws_coverage:
+          $ref: '#/components/schemas/CsmCoverageAnalysis'
+        azure_coverage:
+          $ref: '#/components/schemas/CsmCoverageAnalysis'
+        gcp_coverage:
+          $ref: '#/components/schemas/CsmCoverageAnalysis'
+        org_id:
+          description: The ID of your organization.
+          example: 123456
+          format: int64
+          type: integer
+        total_coverage:
+          $ref: '#/components/schemas/CsmCoverageAnalysis'
+      type: object
+    CsmCloudAccountsCoverageAnalysisData:
+      description: CSM Cloud Accounts Coverage Analysis data.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/CsmCloudAccountsCoverageAnalysisAttributes'
+        id:
+          description: The ID of your organization.
+          example: 66b3c6b5-5c9a-457e-b1c3-f247ca23afa3
+          type: string
+        type:
+          default: get_cloud_accounts_coverage_analysis_response_public_v0
+          description: The type of the resource. The value should always be `get_cloud_accounts_coverage_analysis_response_public_v0`.
+          example: get_cloud_accounts_coverage_analysis_response_public_v0
+          type: string
+      type: object
+    CsmCloudAccountsCoverageAnalysisResponse:
+      description: CSM Cloud Accounts Coverage Analysis response.
+      properties:
+        data:
+          $ref: '#/components/schemas/CsmCloudAccountsCoverageAnalysisData'
+      type: object
+    CsmCoverageAnalysis:
+      description: CSM Coverage Analysis.
+      properties:
+        configured_resources_count:
+          description: The number of fully configured resources.
+          example: 8
+          format: int64
+          type: integer
+        coverage:
+          description: The coverage percentage.
+          example: 0.8
+          format: double
+          type: number
+        partially_configured_resources_count:
+          description: The number of partially configured resources.
+          example: 0
+          format: int64
+          type: integer
+        total_resources_count:
+          description: The total number of resources.
+          example: 10
+          format: int64
+          type: integer
+      type: object
+    CsmHostsAndContainersCoverageAnalysisAttributes:
+      description: CSM Hosts and Containers Coverage Analysis attributes.
+      properties:
+        cspm_coverage:
+          $ref: '#/components/schemas/CsmCoverageAnalysis'
+        cws_coverage:
+          $ref: '#/components/schemas/CsmCoverageAnalysis'
+        org_id:
+          description: The ID of your organization.
+          example: 123456
+          format: int64
+          type: integer
+        total_coverage:
+          $ref: '#/components/schemas/CsmCoverageAnalysis'
+        vm_coverage:
+          $ref: '#/components/schemas/CsmCoverageAnalysis'
+      type: object
+    CsmHostsAndContainersCoverageAnalysisData:
+      description: CSM Hosts and Containers Coverage Analysis data.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/CsmHostsAndContainersCoverageAnalysisAttributes'
+        id:
+          description: The ID of your organization.
+          example: 66b3c6b5-5c9a-457e-b1c3-f247ca23afa3
+          type: string
+        type:
+          default: get_hosts_and_containers_coverage_analysis_response_public_v0
+          description: The type of the resource. The value should always be `get_hosts_and_containers_coverage_analysis_response_public_v0`.
+          example: get_hosts_and_containers_coverage_analysis_response_public_v0
+          type: string
+      type: object
+    CsmHostsAndContainersCoverageAnalysisResponse:
+      description: CSM Hosts and Containers Coverage Analysis response.
+      properties:
+        data:
+          $ref: '#/components/schemas/CsmHostsAndContainersCoverageAnalysisData'
+      type: object
+    CsmServerlessCoverageAnalysisAttributes:
+      description: CSM Serverless Resources Coverage Analysis attributes.
+      properties:
+        cws_coverage:
+          $ref: '#/components/schemas/CsmCoverageAnalysis'
+        org_id:
+          description: The ID of your organization.
+          example: 123456
+          format: int64
+          type: integer
+        total_coverage:
+          $ref: '#/components/schemas/CsmCoverageAnalysis'
+      type: object
+    CsmServerlessCoverageAnalysisData:
+      description: CSM Serverless Resources Coverage Analysis data.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/CsmServerlessCoverageAnalysisAttributes'
+        id:
+          description: The ID of your organization.
+          example: 66b3c6b5-5c9a-457e-b1c3-f247ca23afa3
+          type: string
+        type:
+          default: get_serverless_coverage_analysis_response_public_v0
+          description: The type of the resource. The value should always be `get_serverless_coverage_analysis_response_public_v0`.
+          example: get_serverless_coverage_analysis_response_public_v0
+          type: string
+      type: object
+    CsmServerlessCoverageAnalysisResponse:
+      description: CSM Serverless Resources Coverage Analysis response.
+      properties:
+        data:
+          $ref: '#/components/schemas/CsmServerlessCoverageAnalysisData'
+      type: object
     CustomCostGetResponseMeta:
       description: Meta for the response from the Get Custom Costs endpoints.
       properties:
@@ -24419,6 +24553,12 @@ components:
             as the search bar for detection rules.
           example: type:log_detection source:cloudtrail
           type: string
+        start_date:
+          description: A Unix millisecond timestamp giving the start date for the
+            suppression rule. After this date, it starts suppressing signals.
+          example: 1703187336000
+          format: int64
+          type: integer
         suppression_query:
           description: The suppression query of the suppression rule. If a signal
             matches this query, it is suppressed and not triggered. Same syntax as
@@ -24474,6 +24614,12 @@ components:
             as the search bar for detection rules.
           example: type:log_detection source:cloudtrail
           type: string
+        start_date:
+          description: A Unix millisecond timestamp giving the start date for the
+            suppression rule. After this date, it starts suppressing signals.
+          example: 1703187336000
+          format: int64
+          type: integer
         suppression_query:
           description: The suppression query of the suppression rule. If a signal
             matches this query, it is suppressed and is not triggered. It uses the
@@ -24560,6 +24706,15 @@ components:
             as the search bar for detection rules.
           example: type:log_detection source:cloudtrail
           type: string
+        start_date:
+          description: A Unix millisecond timestamp giving the start date for the
+            suppression rule. After this date, it starts suppressing signals. If unset,
+            the start date of the suppression rule is left untouched. If set to `null`,
+            the start date is removed.
+          example: 1703187336000
+          format: int64
+          nullable: true
+          type: integer
         suppression_query:
           description: The suppression query of the suppression rule. If a signal
             matches this query, it is suppressed and not triggered. Same syntax as
@@ -32959,6 +33114,81 @@ paths:
       tags:
       - CSM Agents
       x-menu-order: 3
+      x-undo:
+        type: safe
+  /api/v2/csm/onboarding/coverage_analysis/cloud_accounts:
+    get:
+      description: 'Get the CSM Coverage Analysis of your Cloud Accounts.
+
+        This is calculated based on the number of your Cloud Accounts that are
+
+        scanned for security issues.'
+      operationId: GetCSMCloudAccountsCoverageAnalysis
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CsmCloudAccountsCoverageAnalysisResponse'
+          description: OK
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get the CSM Cloud Accounts Coverage Analysis
+      tags:
+      - CSM Coverage Analysis
+      x-menu-order: 1
+      x-undo:
+        type: safe
+  /api/v2/csm/onboarding/coverage_analysis/hosts_and_containers:
+    get:
+      description: 'Get the CSM Coverage Analysis of your Hosts and Containers.
+
+        This is calculated based on the number of agents running on your Hosts
+
+        and Containers with CSM feature(s) enabled.'
+      operationId: GetCSMHostsAndContainersCoverageAnalysis
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CsmHostsAndContainersCoverageAnalysisResponse'
+          description: OK
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get the CSM Hosts and Containers Coverage Analysis
+      tags:
+      - CSM Coverage Analysis
+      x-menu-order: 1
+      x-undo:
+        type: safe
+  /api/v2/csm/onboarding/coverage_analysis/serverless:
+    get:
+      description: 'Get the CSM Coverage Analysis of your Serverless Resources.
+
+        This is calculated based on the number of agents running on your Serverless
+
+        Resources with CSM feature(s) enabled.'
+      operationId: GetCSMServerlessCoverageAnalysis
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CsmServerlessCoverageAnalysisResponse'
+          description: OK
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get the CSM Serverless Coverage Analysis
+      tags:
+      - CSM Coverage Analysis
+      x-menu-order: 1
       x-undo:
         type: safe
   /api/v2/csm/onboarding/serverless/agents:
@@ -50004,6 +50234,15 @@ tags:
 
     Go to https://docs.datadoghq.com/security/cloud_security_management to learn more'
   name: CSM Agents
+- description: 'Datadog Cloud Security Management (CSM) delivers real-time threat
+    detection
+
+    and continuous configuration audits across your entire cloud infrastructure,
+
+    all in a unified view for seamless collaboration and faster remediation.
+
+    Go to https://docs.datadoghq.com/security/cloud_security_management to learn more.'
+  name: CSM Coverage Analysis
 - description: Cloud Security Management Threats (CSM Threats) monitors file, network,
     and process activity across your environment to detect real-time threats to your
     infrastructure. See [Cloud Security Management Threats](https://docs.datadoghq.com/security/threats/)
