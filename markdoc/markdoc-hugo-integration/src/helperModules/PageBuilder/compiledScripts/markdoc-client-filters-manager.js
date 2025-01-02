@@ -32,7 +32,7 @@
     <button 
       class="cdoc-dropdown-btn" 
       type="button" 
-      aria-haspopup="listbox" 
+      aria-haspopup="listbox"
       aria-expanded="false" 
       aria-labelledby="${filterLabelElementId}">
       <span id="cdoc-dropdown-${p.filter.id}-label" class="cdoc-btn-label">
@@ -12963,7 +12963,8 @@
               while (!parent.classList.contains("cdoc-dropdown") && parent.parentElement) {
                 parent = parent.parentElement;
               }
-              parent.classList.toggle("cdoc-dropdown__expanded");
+              const isExpanded = parent.classList.toggle("cdoc-dropdown__expanded");
+              parent.setAttribute("aria-expanded", isExpanded.toString());
             });
           }
           document.addEventListener("click", (e) => {
@@ -12971,6 +12972,7 @@
               const dropdownContainer = dropdownContainers[i];
               if (!dropdownContainer.contains(e.target)) {
                 dropdownContainer.classList.remove("cdoc-dropdown__expanded");
+                dropdownContainer.setAttribute("aria-expanded", "false");
               }
             }
           });

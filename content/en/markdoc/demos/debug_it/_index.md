@@ -5,7 +5,7 @@ title: 'DebugIt: A Fake Debugging Library'
     <button 
       class="cdoc-dropdown-btn" 
       type="button" 
-      aria-haspopup="listbox" 
+      aria-haspopup="listbox"
       aria-expanded="false" 
       aria-labelledby="cdoc-prog_lang-label">
       <span id="cdoc-dropdown-prog_lang-label" class="cdoc-btn-label">
@@ -46,7 +46,7 @@ title: 'DebugIt: A Fake Debugging Library'
     <button 
       class="cdoc-dropdown-btn" 
       type="button" 
-      aria-haspopup="listbox" 
+      aria-haspopup="listbox"
       aria-expanded="false" 
       aria-labelledby="cdoc-os-label">
       <span id="cdoc-dropdown-os-label" class="cdoc-btn-label">
@@ -75,7 +75,7 @@ title: 'DebugIt: A Fake Debugging Library'
     <button 
       class="cdoc-dropdown-btn" 
       type="button" 
-      aria-haspopup="listbox" 
+      aria-haspopup="listbox"
       aria-expanded="false" 
       aria-labelledby="cdoc-database-label">
       <span id="cdoc-dropdown-database-label" class="cdoc-btn-label">

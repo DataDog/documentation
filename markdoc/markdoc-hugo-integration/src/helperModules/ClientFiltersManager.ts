@@ -294,6 +294,8 @@ export class ClientFiltersManager {
    */
   addDropdownEventListeners() {
     const dropdownContainers = document.getElementsByClassName('cdoc-dropdown');
+
+    // Expand or hide dropdown on button click
     for (let i = 0; i < dropdownContainers.length; i++) {
       dropdownContainers[i].addEventListener('click', (e) => {
         console.log('dropdown container clicked');
@@ -306,16 +308,18 @@ export class ClientFiltersManager {
           parent = parent.parentElement;
         }
 
-        parent.classList.toggle('cdoc-dropdown__expanded');
+        const isExpanded = parent.classList.toggle('cdoc-dropdown__expanded');
+        parent.setAttribute('aria-expanded', isExpanded.toString());
       });
     }
 
-    // handle outside clicks
+    // Hide dropdown on outside clicks
     document.addEventListener('click', (e) => {
       for (let i = 0; i < dropdownContainers.length; i++) {
         const dropdownContainer = dropdownContainers[i];
         if (!dropdownContainer.contains(e.target as Node)) {
           dropdownContainer.classList.remove('cdoc-dropdown__expanded');
+          dropdownContainer.setAttribute('aria-expanded', 'false');
         }
       }
     });

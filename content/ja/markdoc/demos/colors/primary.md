@@ -7,7 +7,7 @@ aliases:
     <button 
       class="cdoc-dropdown-btn" 
       type="button" 
-      aria-haspopup="listbox" 
+      aria-haspopup="listbox"
       aria-expanded="false" 
       aria-labelledby="cdoc-color-label">
       <span id="cdoc-dropdown-color-label" class="cdoc-btn-label">
@@ -36,7 +36,7 @@ aliases:
     <button 
       class="cdoc-dropdown-btn" 
       type="button" 
-      aria-haspopup="listbox" 
+      aria-haspopup="listbox"
       aria-expanded="false" 
       aria-labelledby="cdoc-item-label">
       <span id="cdoc-dropdown-item-label" class="cdoc-btn-label">

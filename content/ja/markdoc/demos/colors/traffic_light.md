@@ -5,7 +5,7 @@ title: Traffic Light Colors (ja)
     <button 
       class="cdoc-dropdown-btn" 
       type="button" 
-      aria-haspopup="listbox" 
+      aria-haspopup="listbox"
       aria-expanded="false" 
       aria-labelledby="cdoc-color-label">
       <span id="cdoc-dropdown-color-label" class="cdoc-btn-label">
@@ -34,7 +34,7 @@ title: Traffic Light Colors (ja)
     <button 
       class="cdoc-dropdown-btn" 
       type="button" 
-      aria-haspopup="listbox" 
+      aria-haspopup="listbox"
       aria-expanded="false" 
       aria-labelledby="cdoc-item-label">
       <span id="cdoc-dropdown-item-label" class="cdoc-btn-label">
