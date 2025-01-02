@@ -42,7 +42,7 @@ EMR EC2 instance profile is a IAM role assigned to every EC2 instance in an Amaz
 These permissions are <strong>required</strong> if you are using AWS Secrets Manager.
 </div>
 
-1. In your [AWS IAM console][5], click on **Access management** > **Roles** in the left navigation bar. 
+1. In your [AWS IAM console][5], click on **Access management** > **Roles** in the left navigation bar.
 1. Click on the IAM role you plan to use as the instance profile for your EMR cluster.
 1. On the next page, under the **Permissions** tab, find the **Permissions policies** section. Click on **Add permissions** > **Create inline policy**.
 1. On the **Specify permissions** page, find the **Select a service** section. Under **Service**, select **Secrets Manager**.
@@ -85,7 +85,7 @@ These permissions are <strong>required</strong> if you are <strong>NOT</strong> 
    - Click **Next**.
 1. On the next page, give your policy a name. Then, click **Create policy**.
 
-Take note of the name of the IAM role you plan to use as the instance profile for your EMR cluster. 
+Take note of the name of the IAM role you plan to use as the instance profile for your EMR cluster.
 
 ### Create and configure your EMR cluster
 
@@ -142,6 +142,10 @@ spark-submit \
 ## Validation
 
 In Datadog, view the [Data Jobs Monitoring][8] page to see a list of all your data processing jobs.
+
+## Troubleshooting
+
+{{% djm-install-troubleshooting %}}
 
 ## Advanced Configuration
 

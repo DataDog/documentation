@@ -25,14 +25,14 @@ When these versions are no longer supported by their maintainers, Datadog APM fo
 
 #### Levels of support
 
-| **Level**                                              | **Support provided**                                                                                                                                                          |
-|--------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| <span id="support-unsupported">Unsupported</span>      |  No implementation. [Contact our customer support team for special requests.][2]                                                             |
-| <span id="support-beta">Beta</span>                    |  Initial implementation. May not yet contain all features. Support for new features, bug, and security fixes provided on a best-effort basis.                                    |
-| <span id="support-ga">General Availability (GA)</span> |  Full implementation of all features. Full support for new features, bug, and security fixes.                                                                                    |
-| <span id="support-maintenance">Maintenance</span>      |  Full implementation of existing features. Does not receive new features. Support for bug and security fixes only.                                                              |
-| <span id="support-legacy">Legacy</span>                |  Legacy implementation. May have limited function, but no maintenance provided. [Contact the support team][2] for special requests. |
-| <span id="support-eol">End-of-life (EOL)</span>        |  No support. The version can still be used but no bug fixes are provided.                                                                                                  |
+| **Level**                                              | **Support provided**                                                                                                                         |
+|--------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------|
+| <span id="support-unsupported">Unsupported</span>      | No implementation. [Contact our customer support team for special requests.][2]                                                              |
+| <span id="support-beta">Preview</span>                 | Initial implementation. May not yet contain all features. Support for new features, bug, and security fixes provided on a best-effort basis. |
+| <span id="support-ga">General Availability (GA)</span> | Full implementation of all features. Full support for new features, bug, and security fixes.                                                 |
+| <span id="support-maintenance">Maintenance</span>      | Full implementation of existing features. Does not receive new features. Support for bug and security fixes only.                            |
+| <span id="support-legacy">Legacy</span>                | Legacy implementation. May have limited function, but no maintenance provided. [Contact the support team][2] for special requests.           |
+| <span id="support-eol">End-of-life (EOL)</span>        | No support. The version can still be used but no bug fixes are provided.                                                                     |
 
 
 PHP APM supports the following PHP versions (both ZTS and NTS):
@@ -113,7 +113,7 @@ The following table enumerates some of the frameworks and versions Datadog succe
 | Magento        | 2                                       | All supported PHP versions  | Framework-level instrumentation |
 | Neos Flow      | 1.1                                     | All supported PHP versions  | Generic web tracing             |
 | Phalcon        | 1.3, 3.4                                | All supported PHP versions  | Generic web tracing             |
-| RoadRunner     | 2.x                                     | All supported PHP versions  | Framework-level instrumentation |
+| RoadRunner     | {{< tooltip text="SDK" tooltip="RoadRunner uses two versioning schemes: semantic versioning (3.x) for the SDK component, and calendar versioning (2024.x) for the server. For compatibility purposes, refer to the SDK version." >}} 2.x, 3.x                           | All supported PHP versions  | Framework-level instrumentation |
 | Slim           | 2.x, 3.x, 4.x                           | All supported PHP versions  | Framework-level instrumentation |
 | Symfony        | 2.x, 3.3, 3.4, 4.x, 5.x, 6.x, 7.x       | All supported PHP versions  | Framework-level instrumentation |
 | WordPress      | 4.x, 5.x, 6.x                           | All supported PHP versions  | Framework-level instrumentation |
@@ -122,6 +122,7 @@ The following table enumerates some of the frameworks and versions Datadog succe
 | Zend Framework | 2.x                                     | All supported PHP versions  | Generic web tracing             |
 
 Note that even if you don't see your web framework in this list, it is supported out of the box with the latest release of the tracer.
+
 
 Datadog is continuously adding more support for in-depth tracing for PHP web-frameworks. To request support for additional span metadata and framework internals, contact our awesome [support team][3].
 

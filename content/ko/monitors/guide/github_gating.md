@@ -15,61 +15,60 @@ further_reading:
 - link: https://www.datadoghq.com/blog/datadog-github-deployment-protection-rules/
   tag: 블로그
   text: GitHub 배포 보호 규칙 및 Datadog으로 실패한 품질 검사 감지
-
 title: Datadog 모니터로 GitHub Actions 배포 게이팅하기
 ---
 
 ## 개요
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">선택한 사이트 ({{< region-param key="dd_site_name" >}})에서는 현재 CI Visibility를 사용할 수 없습니다.</div>
+<div class="alert alert-warning">CI Visibility는 현재 선택한 사이트 ({{< region-param key="dd_site_name" >}})에서 사용할 수 없습니다.</div>
 {{< /site-region >}}
 
-Datadog은 최종 고객에게 고품질 애플리케이션을 제공할 수 있도록 도와주는 [GitHub Actions 배포 보호 규칙][10]의 통합 파트너입니다. Datadog 모니터를 사용하여 GitHub Actions 배포 워크플로우에 품질 게이트를 적용할 수 있습니다.
+Datadog은 최종 고객에게 고품질 애플리케이션을 제공할 수 있도록 도와드리는 [GitHub Actions 배포 보호 규칙][10]의 통합 파트너입니다. Datadog 모니터링을 사용하여 GitHub Actions 배포 워크플로에 품질 게이트를 적용할 수 있습니다.
 
-이러한 기능은 GitHub Enterprise Cloud의 모든 Datadog 고객이 사용할 수 있으며 CI Visibility를 사용할 필요가 없습니다.
+해당 기능은 GitHub Enterprise Cloud를 사용하는 모든 Datadog 고객께 제공되며, CI 가시성을 사용하지 않아도 됩니다.
 
-## 배포 보호 규칙 실행
-애플리케이션 배포 시 품질 검사를 위해 Datadog을 사용하려면 애플리케이션에 대해 배포 보호 규칙 기능을 활성화해야 합니다.
+## 배포 보호 규칙 사용
+애플리케이션 배포 시 Datadog으로 품질 점검을 하려면 애플리케이션에 대한 배포 보호 규칙 기능을 활성화해야 합니다.
 
-### Datadog에서 새 GitHub 애플리케이션 설정
+### Datadog에서 새 GitHub 애플리케이션을 설정합니다. 
 
 Datadog에 자동으로 연결되는 GitHub 애플리케이션을 생성하려면 [이 지침][1]을 참조하세요. **배포 보호 규칙** 체크박스를 선택하는 것을 잊지 마세요.
 
-{{< img src="ci/github_gates_new_app.png" alt="Datadog GitHub 풀 요청 댓글 미리보기" style="width:100%;">}}
+{{< img src="ci/github_gates_new_app.png" alt="Datadog GitHub 풀 리퀘스트 코멘트 미리보기" style="width:100%;">}}
 
-이미 GitHub 애플리케이션이 설정되어 있고 Datadog에 연결되어 있는 경우 인앱 [GitHub 통합 타일][2]에서 배포 보호 규칙을 활성화할 수 있는 링크를 찾을 수 있습니다.
+이미 GitHub 애플리케이션을 설정하고 Datadog에 연결된 경우 앱 내 [GitHub 통합 타일][2]에서 배포 보호 규칙을 활성화하는 링크를 찾을 수 있습니다.
 
-{{< img src="ci/github_gates_existing_app.png" alt="Datadog GitHub 풀 요청 댓글 미리보기" style="width:100%;">}}
+{{< img src="ci/github_gates_existing_app.png" alt="Datadog GitHub 풀 리퀘스트 코멘트 미리보기" style="width:100%;">}}
 
-### GitHub에서 배포 보호 규칙 설정
-1. 배포에 대한 읽기 및 쓰기 권한을 활성화합니다.
-2. 액션에 대한 읽기 권한을 활성화합니다.
-3. 애플리케이션의 **Subscribe to events**에서 **Deployment protection rule**에 대한 체크박스를 클릭합니다.
-4. 리포지토리에서 **Settings**를 클릭하고 **Code and Automation** 섹션에서 **Environments**를 클릭합니다. **Deployment Protection Rules**에서 Datadog 통합과 연결된 GitHub 애플리케이션을 활성화합니다.
+### GitHub 배포 보호 규칙 설정
+1. 배포에 대한 읽기 및 쓰기 권한을 사용 설정합니다.
+2. 작업에 대한 읽기 권한을 사용 설정합니다.
+3. 애플리케이션의 **이벤트 구독하기**에서 **배포 보호 규칙** 확인란을 클릭합니다.
+4. 리포지토리에서 **설정**을 클릭합니다. **코드 및 자동화** 섹션에서 **환경**를 클릭합니다. **배포 보호 규칙**에서 Datadog 통합과 연결된 GitHub 애플리케이션을 활성화합니다. 
 
-## 배포를 게이팅하는 모니터 만들기 
+## 배포를 게이팅하는 모니터링 생성하기
 
-[본 지침][3]에 따라 GitHub Actions 배포 게이팅에 사용할 Datadog 모니터를 만들고 설정합니다.
+[본 지침][3]에 따라 Datadog 모니터링을 생성 및 설정하고 GitHub Actions 배포 게이팅에 사용하세요. 
 
-품질 검사를 위해 여러 개의 개별 모니터를 사용할 수 있지만, 하나의 모니터로 두 개 이상의 신호를 기반으로 배포를 게이팅할 수 있으므로 [복합 모니터][4]를 사용할 것을 권장합니다. 자세한 내용은 [모니터 유형][5]을 참조하세요.
+품질 점검을 위해 다중 개별 모니터링를 사용할 수 있지만, Datadog은 [컴포짓(composite) 모니터링][4]을 사용할 것을 권장하는데, 이는 하나의 모니터링으로 두 개 이상의 신호에 기반하여 배포를 게이팅할 수 있기 때문입니다. 자세한 내용은 [모니터링 유형][5]를 참조하세요. 
 
-품질 게이팅에 사용할 모든 모니터에는 다음과 같은 적절한 태그를 반드시 지정해야 합니다.
+품질 게이팅에 사용하려는 모든 모니터링은 다음 태그를 사용하여 올바르게 태그를 지정해야 합니다.
 - `git_env` 
 - `git_repo` 
 
-`git_repo` 태그에는 리포지토리 소유자 이름이 `Datadog/my-repo`와 같은 `<OWNER>/<REPO>` 형식으로 포함되어야 합니다.
+`git_repo` 태그에는 `<OWNER>/<REPO>` 형식의 리포지토리 소유자 이름이 포함되어야 합니다(예: `Datadog/my-repo`).
 
-워크플로를 실행하면 GitHub Actions가 Datadog 모니터에 요청을 보냅니다. 아래 나열된 모니터의 평가 결과 중 하나에 따라 Datadog은 워크플로 실행 내 관련 이벤트 및 환경에 대한 **Comment** 섹션에서 확인할 수 있는 코멘트를 GitHub로 다시 전송합니다.
-- 환경 및 리포지토리 태그를 통해 배포와 연결된 모든 모니터가 `OK` 상태에 있으면 Datadog이 배포를 승인합니다.
-- 배포와 관련된 모니터가 `OK` 상태가 아니라 `ALERT`,`WARN` 또는 `NODATA`의 상태에 있으면 Datadog은 배포를 거부합니다.
+워크플로우 실행하면 GitHub Actions가 Datadog 모니터링으로 요청을 보냅니다. 아래 명시된 모니터링의 평가 결과 중 하나에 따라, Datadog은 GitHub로 코멘트를 다시 보냅니다. 해당 코멘트는 워크플로 실행 내의 연결된 이벤트 및 환경에 대한 GitHub의 **코멘트** 섹션에서 볼 수 있습니다.
+- 배포와 관련된 모든 모니터링(환경 및 리포지토리 태그를 통해)이 `OK` 상태면 Datadog이 배포를 승인합니다.
+- 배포와 관련된 모니터링이 `OK` 상태가 아닌 경우( `ALERT`, `WARN`, 또는 `NODATA`) Datadog은 배포를 거부합니다.
 
-## 품질 검사 예시
+## 품질 점검 예시
 ### 애플리케이션 성능
-배포 전에 애플리케이션의 오류율 및/또는 평균 대기 시간이 특정 임계값 미만인지 확인하려면 [APM 모니터][7]를 사용할 수 있습니다.
+배포하기 전에 애플리케이션의 오류율 및/또는 평균 레이턴시가 특정 임계값 미만인지 확인하려면 [애플리케이션 성능 모니터링(APM) 모니터링][7]를 사용할 수 있습니다.
 
-### 환경 인프라스트럭처 상태
-배포 전에 애플리케이션이나 서비스의 CPU 및/또는 메모리 사용량을 확인하려면 [통합][8] 및 [메트릭 모니터][9]를 사용하세요.
+### 환경 인프라스트럭처 서비스 상태
+배포 전에 애플리케이션 또는 서비스의 CPU 및/또는 메모리 사용량을 점검하려면 [통합][8] 및 [메트릭 모니터링][9]을 사용하세요.
 
 ## 참고 자료
 {{< partial name="whats-next/whats-next.html" >}}

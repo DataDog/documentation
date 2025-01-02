@@ -121,7 +121,9 @@ If you are viewing the request that originated before the change event and the l
 
 If you are viewing the request that originated before the change event and the linked trace is ingested, you can see the linked span as a `Forward` link. 
 
-This functionality is available for Python instrumented AWS Lambda functions on layer version 101 and above and python applications instrumented with [`dd-trace-py`][31] on version 2.16 and above.
+This functionality is available for:
+- Python AWS Lambda functions instrumented with layer version 101 and above, and Python applications instrumented with [`dd-trace-py`][31] on version 2.16 and above.
+- Node.js AWS Lambda functions instrumented with layer version 118 and above, and Node.js applications instrumented with [`dd-trace-js`][32] on versions 4.53.0 and above or versions 5.29.0 and above.
 
 ### DyanmoDB Change Stream Auto-linking
 
@@ -152,9 +154,7 @@ Datadog's [AWS X-Ray integration][2] only provides traces for Lambda functions. 
 
 ## Profiling your Lambda Functions
 
-<div class="alert alert-info">During the beta period, profiling is available at no additional cost.</div>
-
-Datadog's [Continuous Profiler][27] is available in beta for Python in version 4.62.0 and layer version 62 and above. This optional feature is enabled by setting the `DD_PROFILING_ENABLED` environment variable to `true`. 
+Datadog's [Continuous Profiler][27] is available in Preview for Python in version 4.62.0 and layer version 62 and above. This optional feature is enabled by setting the `DD_PROFILING_ENABLED` environment variable to `true`. 
 
 The Continuous Profiler works by spawning a thread that periodically wakes up and takes a snapshot of the CPU and heap of all running Python code. This can include the profiler itself. If you want the profiler to ignore itself, set `DD_PROFILING_IGNORE_PROFILER` to `true`.
 
@@ -398,3 +398,4 @@ If you are already tracing your serverless application with X-Ray and want to co
 [29]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Streams.html
 [30]: https://docs.datadoghq.com/tracing/trace_explorer/trace_view/?tab=spanlinksbeta
 [31]: https://github.com/DataDog/dd-trace-py/
+[32]: https://github.com/DataDog/dd-trace-js/

@@ -30,7 +30,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - log collection
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/spark/README.md
 display_on_public_website: true
@@ -38,7 +38,7 @@ draft: false
 git_integration_title: spark
 integration_id: spark
 integration_title: Spark
-integration_version: 4.3.1
+integration_version: 6.1.0
 is_public: true
 manifest_version: 2.0.0
 name: spark
@@ -77,8 +77,8 @@ tile:
 
 
 <div class="alert alert-warning">
-<a href="https://docs.datadoghq.com/data_jobs/">Data Jobs Monitoring</a> helps you observe, troubleshoot, and cost-optimize your Spark and Databricks jobs and clusters.<br/><br/>
-This page only documents how to ingest Spark metrics and logs.
+<a href="https://docs.datadoghq.com/data_jobs/">Data Jobs Monitoring</a> は、Spark および Databricks のジョブやクラスターを監視、トラブルシューティング、コスト最適化するのに役立ちます。<br/><br/>
+このページでは、Spark のメトリクスおよびログの取り込み方法のみを説明します。
 </div>
 
 ![Spark のグラフ][1]
