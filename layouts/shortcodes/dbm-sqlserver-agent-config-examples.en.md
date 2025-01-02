@@ -38,7 +38,7 @@
 
 ### Using AlwaysOn
 
-**Note: For AlwaysOn users, the Agent must be installed on a separate server and connected to the cluster through the listener endpoint**. This is because information about Availability Group (AG) secondary replicas is collected from the primary replica. Additionally, installing the Agent in this way helps to keep it up and running in the event of a failover.
+For AlwaysOn users, the Agent must be installed on a separate server and connected to the cluster through the listener endpoint. This is because information about Availability Group (AG) secondary replicas is collected from the primary replica. Additionally, installing the Agent in this way helps to keep it up and running in the event of a failover.
 
 ```yaml
 instances:
@@ -54,8 +54,11 @@ instances:
 
 ### Monitoring SQL Server Agent Jobs
 
-**Note: For monitoring SQL Server Agent jobs, the Datadog Agent must have access to the [msdb] database**. Monitoring of SQL Server Agent jobs is supported on SQL Server versions 2016 and newer.
-Starting from Agent v7.57, the Datadog Agent can collect SQL Server Agent job metrics and histories. To enable this feature, set `enabled` to `true` in the `agent_jobs` section of the SQL Server integration configuration file. The `collection_interval` and `history_row_limit` fields are optional.
+<div class="alert alert-info">To enable monitoring of SQL Server Agent jobs, the Datadog Agent must have access to the [msdb] database.</div>
+
+<div class="alert alert-warning">SQL Server Agent Jobs monitoring is not available for Azure SQL Database.</div>
+
+Monitoring of SQL Server Agent jobs is supported on SQL Server versions 2016 and newer. Starting from Agent v7.57, the Datadog Agent can collect SQL Server Agent job metrics and histories. To enable this feature, set `enabled` to `true` in the `agent_jobs` section of the SQL Server integration configuration file. The `collection_interval` and `history_row_limit` fields are optional.
 
 ```yaml
 instances:
@@ -74,7 +77,7 @@ instances:
 ### Collecting schemas
 Starting from Agent v7.56, the Datadog Agent can collect schema information from SQLServer databases running SQLServer 2017 or higher. To enable this feature, use the `schemas_collection` option. Schemas are collected on databases for which the Agent has `CONNECT` access.
 
-**Note: For schema collection on RDS instances, it is necessary to grant explicit `CONNECT` access to the `datadog` user for each database on the instance. See [Grant the Agent access](https://docs.datadoghq.com/database_monitoring/setup_sql_server/rds/?tab=windowshost#grant-the-agent-access) for more details.**
+<div class="alert alert-info">To collect schema information from RDS instances, you must grant the `datadog` user explicit `CONNECT` access to each database on the instance. For more information, see <a href="https://docs.datadoghq.com/database_monitoring/setup_sql_server/rds/?tab=windowshost#grant-the-agent-access">Grant the Agent access</a></div>
 
 Use the `database_autodiscovery` option to avoid specifying each logical database. See the sample [sqlserver.d/conf.yaml](https://github.com/DataDog/integrations-core/blob/master/sqlserver/datadog_checks/sqlserver/data/conf.yaml.example) for more details.
 
