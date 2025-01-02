@@ -243,7 +243,7 @@ The SDK changes its behavior according to the new value. For example, if the cur
 
 ## Automatically track views
 
-If you are using Flutter Navigator v2.0, your setup for automatic view tracking differs depending on your routing middleware. See [Flutter Integrated Libraries][7] for instructions on how to integrate with [go_router][8], [AutoRoute][9], and [Beamer][10].
+If you are using Flutter Navigator v2.0, your setup for automatic view tracking differs depending on your routing middleware. See [Flutter Integrated Libraries][12] for instructions on how to integrate with [go_router][7], [AutoRoute][9], and [Beamer][10].
 
 ### Flutter Navigator v1
 
@@ -264,7 +264,7 @@ If you are not using named routes, you can use `DatadogRouteAwareMixin` in conju
 
 ### Flutter Navigator v2
 
-If you are using Flutter Navigator v2.0, which uses the `MaterialApp.router` named constructor, the setup varies based on the routing middleware you are using, if any. Since [`go_router`][8] uses the same observer interface as Flutter Navigator v1, `DatadogNavigationObserver` can be added to other observers as a parameter to `GoRouter`.
+If you are using Flutter Navigator v2.0, which uses the `MaterialApp.router` named constructor, the setup varies based on the routing middleware you are using, if any. Since [`go_router`][7] uses the same observer interface as Flutter Navigator v1, `DatadogNavigationObserver` can be added to other observers as a parameter to `GoRouter`.
 
 ```dart
 final _router = GoRouter(
@@ -281,12 +281,12 @@ MaterialApp.router(
 )
 ```
 
-For examples that use routers other than `go_router`, see [Automatically track views][11].
+For examples that use routers other than `go_router`, see [Automatically track views](#automatically-track-views).
 
 
 ### Renaming Views
 
-For all setups, you can rename views or supply custom paths by providing a [`viewInfoExtractor`][12] callback. This function can fall back to the default behavior of the observer by calling `defaultViewInfoExtractor`. For example:
+For all setups, you can rename views or supply custom paths by providing a [`viewInfoExtractor`][11] callback. This function can fall back to the default behavior of the observer by calling `defaultViewInfoExtractor`. For example:
 
 ```dart
 RumViewInfo? infoExtractor(Route<dynamic> route) {
