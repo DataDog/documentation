@@ -1,9 +1,11 @@
 ---
-title: Recommended Monitors
+title: Monitor Templates
+aliases:
+- /monitors/recommended/
 further_reading:
 - link: https://app.datadoghq.com/monitors/recommended?q=&only_installed=true&p=1
   tag: "App"
-  text: Browse recommended monitors
+  text: Browse monitor templates
 - link: "https://www.datadoghq.com/blog/datadog-recommended-monitors/"
   tag: "Blog"
   text: "Enable preconfigured alerts with Recommended Monitors"
@@ -20,7 +22,7 @@ further_reading:
 
 ## Overview
 
-Recommended monitors are a collection of monitor templates that are pre-configured by Datadog and integration partners. Use recommended monitors to: 
+Recommended monitors are a collection of monitor templates that are pre-configured by Datadog and integration partners. Use monitor templates to: 
 - Save the time and effort of creating a new monitor from scratch.
 - Have comprehensive monitoring coverage for all your critical integrations.
 
