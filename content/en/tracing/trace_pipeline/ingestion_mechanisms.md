@@ -198,11 +198,11 @@ Read more about sampling controls in the [Node.js tracing library documentation]
 {{% tab "PHP" %}}
 **Remote configuration**
 
-<div class="alert alert-info"><strong>Resource-based sampling rules are in Preview</strong>. Starting from version <a href="https://github.com/DataDog/dd-trace-php/releases/tag/1.4.0">1.4.0</a>, for PHP applications, set by-service and by-resource sampling rates from the <a href="https://app.datadoghq.com/apm/traces/ingestion-control">Ingestion Control Page</a>. Use <a href="https://www.datadoghq.com/private-beta/resource-based-sampling-adaptive-sampling/">this form</a> to request access today.</div>
+<div class="alert alert-info"><strong>Resource-based sampling rules are in Preview</strong>. Starting from version <a href="https://github.com/DataDog/dd-trace-php/releases/tag/1.4.0">1.4.0</a>, for PHP applications, set by-service and by-resource sampling rates from the <a href="https://app.datadoghq.com/apm/traces/ingestion-control">Ingestion Control Page</a>. Use <a href="https://www.datadoghq.com/product-preview/resource-based-sampling-adaptive-sampling/">this form</a> to request access today.</div>
 
 Read more about how to remotely configure sampling rates by service and resource in the [Resource-based sampling guide][1].
 
-**Note**: Remotely set configuration takes precedence over local configuration.
+**Note**: Remotely-set configuration takes precedence over local configuration.
 
 **Local configuration**
 
