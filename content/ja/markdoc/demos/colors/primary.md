@@ -7,13 +7,11 @@ aliases:
     <button class="cdoc-dropdown-btn" type="button">
       <span class="cdoc-btn-label">Blue (ja)</span>
       <div class="cdoc-chevron"></div>
-    </button>
-    <div class="cdoc-dropdown-options-list"><a class="cdoc-dropdown-option cdoc-filter__option " data-filter-id="color" data-option-id="red">Red (ja)</a><a class="cdoc-dropdown-option cdoc-filter__option " data-filter-id="color" data-option-id="yellow">Yellow (ja)</a><a class="cdoc-dropdown-option cdoc-filter__option selected" data-filter-id="color" data-option-id="blue">Blue (ja)</a></div></div></div><div class="cdoc-dropdown-container"><p class="cdoc-filter-label">Item</p><div id="cdoc-dropdown-item" class="cdoc-dropdown">
+    </button><div class="cdoc-dropdown-options-list"><a class="cdoc-dropdown-option cdoc-filter__option " data-filter-id="color" data-option-id="red">Red (ja)</a><a class="cdoc-dropdown-option cdoc-filter__option " data-filter-id="color" data-option-id="yellow">Yellow (ja)</a><a class="cdoc-dropdown-option cdoc-filter__option selected" data-filter-id="color" data-option-id="blue">Blue (ja)</a></div></div></div><div class="cdoc-dropdown-container"><p class="cdoc-filter-label">Item</p><div id="cdoc-dropdown-item" class="cdoc-dropdown">
     <button class="cdoc-dropdown-btn" type="button">
       <span class="cdoc-btn-label">Ocean</span>
       <div class="cdoc-chevron"></div>
-    </button>
-    <div class="cdoc-dropdown-options-list"><a class="cdoc-dropdown-option cdoc-filter__option selected" data-filter-id="item" data-option-id="ocean">Ocean</a><a class="cdoc-dropdown-option cdoc-filter__option " data-filter-id="item" data-option-id="sky">Sky</a><a class="cdoc-dropdown-option cdoc-filter__option " data-filter-id="item" data-option-id="jeans">Jeans</a><a class="cdoc-dropdown-option cdoc-filter__option " data-filter-id="item" data-option-id="blueberry">Blueberry</a></div></div></div><hr /></div></div><div id="cdoc-content" class="customizable"><article>
+    </button><div class="cdoc-dropdown-options-list"><a class="cdoc-dropdown-option cdoc-filter__option selected" data-filter-id="item" data-option-id="ocean">Ocean</a><a class="cdoc-dropdown-option cdoc-filter__option " data-filter-id="item" data-option-id="sky">Sky</a><a class="cdoc-dropdown-option cdoc-filter__option " data-filter-id="item" data-option-id="jeans">Jeans</a><a class="cdoc-dropdown-option cdoc-filter__option " data-filter-id="item" data-option-id="blueberry">Blueberry</a></div></div></div><hr /></div></div><div id="cdoc-content" class="customizable"><article>
   <div class="alert alert-warning">
     <p>Warning: This is just a test page. It's not real.</p>
   </div>

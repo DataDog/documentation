@@ -56,7 +56,6 @@
     margin-bottom: 1em;
     display: inline-block;
     margin-right: 1em;
-    min-width: 100px;
 }
 
 .cdoc-dropdown-container p.cdoc-filter-label {
@@ -98,11 +97,10 @@
 }
 
 button.cdoc-dropdown-btn {
-    min-width: 100%;
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 0.6em;
     height: 31px;
     color: rgb(99, 44, 166);
     border: 1px solid rgb(199, 199, 199);
@@ -112,7 +110,6 @@ button.cdoc-dropdown-btn {
     font-weight: 600;
     line-height: 20px;
     box-sizing: border-box;
-    margin-right: 1em;
 }
 
 .cdoc-dropdown {
