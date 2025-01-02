@@ -28,7 +28,7 @@ To take action on a Step Function in Datadog:
 When monitoring redriven executions, use the Waterfall view, as the large gap between the original execution and redrive can make the Flame Graph view imperceptible.
 
 ### Merge Lambda traces
-Supported runtimes: Node.js (layer v118+) or Python (layer v105+)
+Supported runtimes: Node.js (layer v119+) or Python (layer v105+)
 
 For instructions on how to merge redriven Step Functions and Lambda traces, see [Merge Step Functions and Lambda Traces][5]. 
 
