@@ -1,6 +1,9 @@
 ---
 title: Set up your mobile device for Datadog On-Call
+
 description: "Still need to figure this one out."
+aliases:
+- /on-call/guides/configure-mobile-device-for-on-call
 further_reading:
 - link: "https://docs.datadoghq.com/service_management/on-call/"
   tag: "Documentation"
