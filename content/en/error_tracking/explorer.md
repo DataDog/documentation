@@ -62,6 +62,27 @@ Each event generated is tagged with the version, the service, and the environmen
 
 {{< img src="/error_tracking/create-monitor.mp4" alt="Export your search query to an Error Tracking monitor" video=true >}}
 
+## Suspected Cause
+
+Suspected Cause assigns a label to issues at creation time, representing the first hypothesis a developer may have regarding the root cause of an error. This preliminary classification helps teams streamline their troubleshooting efforts and enhances their understanding of recurring problems.
+
+The Suspected Cause can be one of the following categories:
+
+- **Network**: A server took long to respond or the network was slow.
+- **Failed Request**: An API endpoint responded with an error status code.
+- **Code Exception**: An error was caused by a flaw in your code.
+- **Illegal Object Access**: Your code accessed an object which was null or undefined.
+- **Invalid Argument**: A function was called with an invalid argument.
+
+Suspected Causes can be used as filters in search, enabling you to easily locate relevant issues.
+{{< img src="/error_tracking/suspected-cause-filter.png" alt="Filter your search by Suspected Cause" >}}
+
+Suspected Cause enables quicker filtering and prioritization of errors, empowering teams to address potential root causes more effectively.
+
+### Overriding suspected causes
+
+Suspected Causes can be manually edited if they are deemed incorrect, allowing for continuous improvement of the labeling process.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
