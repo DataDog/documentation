@@ -530,7 +530,7 @@ WordPress のアクションフックコールバックのインスツルメン�
 **デフォルト**: `DD_SERVICE`<br>
 OpenAI リクエストに対してデフォルトで報告されるサービス名。
 
-`DD_OPENAI_LOGS_ENABLED` (ベータ版) 
+`DD_OPENAI_LOGS_ENABLED` 
 : **INI**: `datadog.openai.logs_enabled`<br>
 **デフォルト**: `false`<br>
 プロンプトと完了結果をログとして収集することを有効にします。以下で説明するサンプリングレート構成を使用して、収集されるプロンプトと完了結果のレートを調整できます。
@@ -541,7 +541,7 @@ OpenAI リクエストに対してデフォルトで報告されるサービス�
 OpenAI メトリクスの収集を有効にします。<br>
 Datadog Agent がデフォルト以外の StatsD ホスト名またはポートを使用するように構成されている場合は、`DD_DOGSTATSD_URL` を使用して OpenAI メトリクスの収集を構成してください。
 
-`DD_OPENAI_SPAN_CHAR_LIMIT` (ベータ版) 
+`DD_OPENAI_SPAN_CHAR_LIMIT`
 : **INI**: `datadog.openai.span_char_limit`<br>
 **デフォルト**: `128`<br>
 スパンタグ内の以下のデータの最大文字数を構成します。
@@ -552,12 +552,12 @@ Datadog Agent がデフォルト以外の StatsD ホスト名またはポート�
 
 最大文字数を超えるテキストは、文字数制限まで切り詰められ、末尾に `...` が追加されます。
 
-`DD_OPENAI_SPAN_PROMPT_COMPLETION_SAMPLE_RATE` (ベータ版) 
+`DD_OPENAI_SPAN_PROMPT_COMPLETION_SAMPLE_RATE`
 : **INI**: `datadog.openai.span_prompt_completion_sample_rate`<br>
 **デフォルト**: `1.0`<br>
 スパンタグとしてプロンプトと完了結果を収集するためのサンプリングレートを構成します。
 
-`DD_OPENAI_LOG_PROMPT_COMPLETION_SAMPLE_RATE` (ベータ版) 
+`DD_OPENAI_LOG_PROMPT_COMPLETION_SAMPLE_RATE`
 : **INI**: `datadog.openai.log_prompt_completion_sample_rate`<br>
 **デフォルト**: `0.1`<br>
 プロンプトと完了結果をログとして収集するためのサンプリングレートを構成します。

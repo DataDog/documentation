@@ -21,6 +21,7 @@ assets:
   monitors:
     CPU usage is high for Cisco ACI device: assets/monitors/cpu_high.json
     Health score of device is critical: assets/monitors/critical_health_score.json
+    Interface for a Cisco ACI device is down: assets/monitors/interface_down.json
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
@@ -36,7 +37,7 @@ draft: false
 git_integration_title: cisco_aci
 integration_id: cisco-aci
 integration_title: CiscoACI
-integration_version: 4.1.0
+integration_version: 4.2.0
 is_public: true
 manifest_version: 2.0.0
 name: cisco_aci
