@@ -1,7 +1,105 @@
 ---
 title: The Primary Colors of the Color Wheel
 ---
-<div id="cdoc-selector"><div><div class="cdoc-filter__container"><div class="cdoc-filter__label">Color</div><div class="cdoc-filter__option cdoc-pill " data-filter-id="color" data-option-id="red">Red</div><div class="cdoc-filter__option cdoc-pill " data-filter-id="color" data-option-id="yellow">Yellow</div><div class="cdoc-filter__option cdoc-pill selected" data-filter-id="color" data-option-id="blue">Blue</div></div><div class="cdoc-filter__container"><div class="cdoc-filter__label">Item</div><div class="cdoc-filter__option cdoc-pill " data-filter-id="item" data-option-id="ocean">Ocean</div><div class="cdoc-filter__option cdoc-pill selected" data-filter-id="item" data-option-id="sky">Sky</div><div class="cdoc-filter__option cdoc-pill " data-filter-id="item" data-option-id="jeans">Jeans</div><div class="cdoc-filter__option cdoc-pill " data-filter-id="item" data-option-id="blueberry">Blueberry</div></div><hr /></div></div><div id="cdoc-content" class="customizable"><article>
+<div id="cdoc-selector"><div><div class="cdoc-dropdown-container"><p 
+    id="cdoc-color-label" 
+    class="cdoc-filter-label"
+  >Color</p><div 
+    id="cdoc-dropdown-color" 
+    class="cdoc-dropdown">
+    <button
+      class="cdoc-dropdown-btn" 
+      type="button"
+      tabIndex="0"
+      aria-haspopup="listbox"
+      aria-expanded="false" 
+      aria-labelledby="cdoc-color-label">
+      <span 
+        id="cdoc-dropdown-color-label" 
+        class="cdoc-btn-label"
+      >Blue</span>
+      <div class="cdoc-chevron"></div>
+    </button><div 
+    class="cdoc-dropdown-options-list" 
+    role="listbox" 
+    aria-labelledby="cdoc-color-label"><a 
+      class="cdoc-dropdown-option 
+      cdoc-filter__option " 
+      data-filter-id="color" 
+      data-option-id="red"
+      role="option" 
+      aria-selected=""
+      tabIndex="0"
+    >Red</a><a 
+      class="cdoc-dropdown-option 
+      cdoc-filter__option " 
+      data-filter-id="color" 
+      data-option-id="yellow"
+      role="option" 
+      aria-selected=""
+      tabIndex="0"
+    >Yellow</a><a 
+      class="cdoc-dropdown-option 
+      cdoc-filter__option selected" 
+      data-filter-id="color" 
+      data-option-id="blue"
+      role="option" 
+      aria-selected="selected"
+      tabIndex="0"
+    >Blue</a></div></div></div><div class="cdoc-dropdown-container"><p 
+    id="cdoc-item-label" 
+    class="cdoc-filter-label"
+  >Item</p><div 
+    id="cdoc-dropdown-item" 
+    class="cdoc-dropdown">
+    <button
+      class="cdoc-dropdown-btn" 
+      type="button"
+      tabIndex="0"
+      aria-haspopup="listbox"
+      aria-expanded="false" 
+      aria-labelledby="cdoc-item-label">
+      <span 
+        id="cdoc-dropdown-item-label" 
+        class="cdoc-btn-label"
+      >Sky</span>
+      <div class="cdoc-chevron"></div>
+    </button><div 
+    class="cdoc-dropdown-options-list" 
+    role="listbox" 
+    aria-labelledby="cdoc-item-label"><a 
+      class="cdoc-dropdown-option 
+      cdoc-filter__option " 
+      data-filter-id="item" 
+      data-option-id="ocean"
+      role="option" 
+      aria-selected=""
+      tabIndex="0"
+    >Ocean</a><a 
+      class="cdoc-dropdown-option 
+      cdoc-filter__option selected" 
+      data-filter-id="item" 
+      data-option-id="sky"
+      role="option" 
+      aria-selected="selected"
+      tabIndex="0"
+    >Sky</a><a 
+      class="cdoc-dropdown-option 
+      cdoc-filter__option " 
+      data-filter-id="item" 
+      data-option-id="jeans"
+      role="option" 
+      aria-selected=""
+      tabIndex="0"
+    >Jeans</a><a 
+      class="cdoc-dropdown-option 
+      cdoc-filter__option " 
+      data-filter-id="item" 
+      data-option-id="blueberry"
+      role="option" 
+      aria-selected=""
+      tabIndex="0"
+    >Blueberry</a></div></div></div><hr /></div></div><div id="cdoc-content" class="customizable"><article>
   <p>
     This test page explores everyday items that are blue, yellow, or red --
     which also happen to be the primary colors of the color wheel. If this seems

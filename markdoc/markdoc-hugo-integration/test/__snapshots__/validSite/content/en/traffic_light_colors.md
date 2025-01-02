@@ -1,7 +1,105 @@
 ---
 title: Traffic Light Colors
 ---
-<div id="cdoc-selector"><div><div class="cdoc-filter__container"><div class="cdoc-filter__label">Color</div><div class="cdoc-filter__option cdoc-pill " data-filter-id="color" data-option-id="red">Red</div><div class="cdoc-filter__option cdoc-pill " data-filter-id="color" data-option-id="yellow">Yellow</div><div class="cdoc-filter__option cdoc-pill selected" data-filter-id="color" data-option-id="green">Green</div></div><div class="cdoc-filter__container"><div class="cdoc-filter__label">Item</div><div class="cdoc-filter__option cdoc-pill selected" data-filter-id="item" data-option-id="grass">Grass</div><div class="cdoc-filter__option cdoc-pill " data-filter-id="item" data-option-id="emerald">Emerald</div><div class="cdoc-filter__option cdoc-pill " data-filter-id="item" data-option-id="lime">Lime</div><div class="cdoc-filter__option cdoc-pill " data-filter-id="item" data-option-id="frog">Frog</div></div><hr /></div></div><div id="cdoc-content" class="customizable"><article>
+<div id="cdoc-selector"><div><div class="cdoc-dropdown-container"><p 
+    id="cdoc-color-label" 
+    class="cdoc-filter-label"
+  >Color</p><div 
+    id="cdoc-dropdown-color" 
+    class="cdoc-dropdown">
+    <button
+      class="cdoc-dropdown-btn" 
+      type="button"
+      tabIndex="0"
+      aria-haspopup="listbox"
+      aria-expanded="false" 
+      aria-labelledby="cdoc-color-label">
+      <span 
+        id="cdoc-dropdown-color-label" 
+        class="cdoc-btn-label"
+      >Green</span>
+      <div class="cdoc-chevron"></div>
+    </button><div 
+    class="cdoc-dropdown-options-list" 
+    role="listbox" 
+    aria-labelledby="cdoc-color-label"><a 
+      class="cdoc-dropdown-option 
+      cdoc-filter__option " 
+      data-filter-id="color" 
+      data-option-id="red"
+      role="option" 
+      aria-selected=""
+      tabIndex="0"
+    >Red</a><a 
+      class="cdoc-dropdown-option 
+      cdoc-filter__option " 
+      data-filter-id="color" 
+      data-option-id="yellow"
+      role="option" 
+      aria-selected=""
+      tabIndex="0"
+    >Yellow</a><a 
+      class="cdoc-dropdown-option 
+      cdoc-filter__option selected" 
+      data-filter-id="color" 
+      data-option-id="green"
+      role="option" 
+      aria-selected="selected"
+      tabIndex="0"
+    >Green</a></div></div></div><div class="cdoc-dropdown-container"><p 
+    id="cdoc-item-label" 
+    class="cdoc-filter-label"
+  >Item</p><div 
+    id="cdoc-dropdown-item" 
+    class="cdoc-dropdown">
+    <button
+      class="cdoc-dropdown-btn" 
+      type="button"
+      tabIndex="0"
+      aria-haspopup="listbox"
+      aria-expanded="false" 
+      aria-labelledby="cdoc-item-label">
+      <span 
+        id="cdoc-dropdown-item-label" 
+        class="cdoc-btn-label"
+      >Grass</span>
+      <div class="cdoc-chevron"></div>
+    </button><div 
+    class="cdoc-dropdown-options-list" 
+    role="listbox" 
+    aria-labelledby="cdoc-item-label"><a 
+      class="cdoc-dropdown-option 
+      cdoc-filter__option selected" 
+      data-filter-id="item" 
+      data-option-id="grass"
+      role="option" 
+      aria-selected="selected"
+      tabIndex="0"
+    >Grass</a><a 
+      class="cdoc-dropdown-option 
+      cdoc-filter__option " 
+      data-filter-id="item" 
+      data-option-id="emerald"
+      role="option" 
+      aria-selected=""
+      tabIndex="0"
+    >Emerald</a><a 
+      class="cdoc-dropdown-option 
+      cdoc-filter__option " 
+      data-filter-id="item" 
+      data-option-id="lime"
+      role="option" 
+      aria-selected=""
+      tabIndex="0"
+    >Lime</a><a 
+      class="cdoc-dropdown-option 
+      cdoc-filter__option " 
+      data-filter-id="item" 
+      data-option-id="frog"
+      role="option" 
+      aria-selected=""
+      tabIndex="0"
+    >Frog</a></div></div></div><hr /></div></div><div id="cdoc-content" class="customizable"><article>
   <div class="alert alert-info">
     <p>This is just a test page. It's not real.</p>
   </div>

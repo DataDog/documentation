@@ -16,4 +16,4 @@ title: site-region
   </div>
 </article>
 </div>
-<div x-init='const initPage = () => clientFiltersManager.initialize({}); if (document.readyState === "complete" || document.readyState === "interactive") {  setTimeout(initPage, 1);} else {  document.addEventListener("DOMContentLoaded", initPage);}'></div>
+<div x-init='const initPage = () => { clientFiltersManager.initialize({    ifFunctionsByRef: {},    filtersManifest: {"filtersById":{},"defaultValsByFilterId":{},"optionSetsById":{}}  });}; if (document.readyState === "complete" || document.readyState === "interactive") {  setTimeout(initPage, 1);} else {  document.addEventListener("DOMContentLoaded", initPage);}'></div>
