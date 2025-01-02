@@ -56,7 +56,7 @@ Create two monitors:
 
 ## Step monitor
 
-Trigger an alert in the absence of a paired metric. For example, log metrics for sent/received, down/up, or create/resolve.
+Trigger an alert in the absence of a paired metric. For example, log metrics for sent/received, down/up, or create/resolve. You can adjust the evaluation windows for the monitors if paired metrics are expected to be N minutes apart.
 
 - **Monitor A**: Alert when `action:create` is above 0
 - **Monitor B**: Alert when `action:resolve` is above 0
