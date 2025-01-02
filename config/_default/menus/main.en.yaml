@@ -5764,6 +5764,11 @@ menu:
       parent: csm_setup_agentless_scanning
       identifier: csm_setup_agentless_scanning_terraform
       weight: 10002
+    - name: Azure Resource Manager
+      url: security/cloud_security_management/setup/agentless_scanning/azure_resource_manager
+      parent: csm_setup_agentless_scanning
+      identifier: csm_setup_agentless_scanning_azure_resource_manager
+      weight: 10003
     - name: Deploy the Agent
       url: security/cloud_security_management/setup/agent
       parent: csm_setup
