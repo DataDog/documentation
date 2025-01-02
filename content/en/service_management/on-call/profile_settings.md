@@ -32,7 +32,7 @@ Supported contact methods are:
 - SMS
 - Phone calls
 
-To **circumvent Do Not Disturb mode** on your mobile devices, follow this [guide][4].
+For more information on how to set up your mobile device, especially around **circumventing Do Not Disturb mode**, follow this [guide][4].
 
 ### Notification preferences
 The **Notification Preferences** feature allows you to tailor how and when **you** are alerted for On-Call Pages based on the urgency of the situation. By configuring preferences for low urgency and high urgency, you can ensure that notifications are effective and unobtrusive, depending on the urgency of the Page. Note, the urgency of a Page is determined within your [Routing Rules][5].
@@ -72,6 +72,6 @@ Under **Other Notifications**, you can opt to receive a **Shift reminder** befor
 [1]: https://app.datadoghq.com/on-call/profile
 [2]: /service_management/mobile/?tab=ios
 [3]: /mobile
-[4]: /service_management/on-call/guides/circumvent-dnd
+[4]: /service_management/on-call/guides/configure-mobile-device-for-on-call
 [5]: /service_management/on-call/routing_rules
 [6]: /service_management/on-call/escalation_policies

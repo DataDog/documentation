@@ -5,5 +5,5 @@ disable_toc: true
 ---
 
 {{< whatsnext desc="General guides:">}}
-    {{< nextlink href="/service_management/on-call/guides/circumvent-dnd" >}}Circumvent Do Not Disturb Mode on your mobile device{{< /nextlink >}}
+    {{< nextlink href="/service_management/on-call/guides/configure-mobile-device-for-on-call" >}}Set up your mobile for Datadog On-Call{{< /nextlink >}}
 {{< /whatsnext >}}
