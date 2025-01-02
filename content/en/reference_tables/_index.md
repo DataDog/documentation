@@ -1,5 +1,5 @@
 ---
-title: Add Custom Metadata with Reference Tables
+title: Reference Tables
 aliases:
   - /logs/guide/enrichment-tables/
   - /logs/guide/reference-tables/
@@ -24,7 +24,7 @@ further_reading:
 
 ## Overview
 
-Reference Tables allow you to combine metadata with information already in Datadog. You can define new entities like customer details, service names and information, or IP addresses by uploading a CSV file containing a table of information. The entities are represented by a primary key in a Reference Table and the associated metadata. 
+Reference Tables allow you to combine custom metadata with information already in Datadog. You can define new entities like customer details, service names and information, or IP addresses by uploading a CSV file containing a table of information. The entities are represented by a primary key in a Reference Table and the associated metadata. 
 
 {{< img src="reference_tables/reference-table.png" alt="A reference table with data populated in the columns for org id, org name, parent org, account owner, and csm" style="width:100%;">}}
 
