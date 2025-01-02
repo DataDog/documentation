@@ -58,8 +58,7 @@ Send Apigee proxy logs to Datadog using Apigee's JavaScript policy. For detailed
 1. Select the Apigee proxy from which you want to send logs to Datadog.
 2. In the selected proxy overview page, click the **DEVELOP** tab.
 3. Select **New Script**.
-4. Select JavaScript
-5. Add flow variables into JavaScript from the [Apigee flow variable reference][4]. 
+4. Select JavaScript and add flow variables into JavaScript from the [Apigee flow variable reference][4]. 
 
 {{% collapse-content title="Example JavaScript code snippet" level="h4" expanded=false %}}
 
