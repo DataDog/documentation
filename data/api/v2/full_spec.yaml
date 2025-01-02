@@ -41583,6 +41583,14 @@ paths:
       operationId: UpdateRestrictionPolicy
       parameters:
       - $ref: '#/components/parameters/ResourceID'
+      - description: Allows admins (users with the `user_access_manage` permission)
+          to remove their own access from the resource if set to `true`. By default,
+          this is set to `false`, preventing admins from locking themselves out.
+        in: query
+        name: allow_self_lockout
+        required: false
+        schema:
+          type: string
       requestBody:
         content:
           application/json:
