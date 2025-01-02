@@ -5164,11 +5164,16 @@ menu:
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_reduce
       weight: 711
+    - name: Remap to OCSF
+      url: observability_pipelines/processors/remap_ocsf
+      parent: observability_pipelines_processors
+      identifier: observability_pipelines_processors_remap_ocsf
+      weight: 712
     - name: Sample
       url: observability_pipelines/processors/sample
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_sample
-      weight: 712
+      weight: 713
     - name: Sensitive Data Scanner
       url: observability_pipelines/processors/sensitive_data_scanner
       parent: observability_pipelines_processors
