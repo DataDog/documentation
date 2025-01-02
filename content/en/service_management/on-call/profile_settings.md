@@ -73,5 +73,5 @@ Under **Other Notifications**, you can opt to receive a **Shift reminder** befor
 [2]: /service_management/mobile/?tab=ios
 [3]: /mobile
 [4]: /service_management/on-call/guides/configure-mobile-device-for-on-call
-[5]: /service_management/on-call/routing_rules
+[5]: /service_management/on-call/processing_rules
 [6]: /service_management/on-call/escalation_policies
