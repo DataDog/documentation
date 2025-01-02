@@ -1,5 +1,5 @@
-title: Set up your mobile device for Datadog On-Call
 ---
+title: Set up your mobile device for Datadog On-Call
 
 description: "Still need to figure this one out."
 aliases:
@@ -17,25 +17,28 @@ Being on-call requires reliable and timely notifications to ensure you can respo
 Make sure you download the Datadog [mobile app][1] to acknowledge Pages on the go, review the impact of the alert alongside relevant observability data, and effectively triage the alert. The app is also **required** to let Datadog circumvent your Do Not Disturb mode.
 
 ## Set up push notifications
-By default, the mobile app is not allowed to send you permissions. To change that, open the app and follow the instructions below.
+By default, the mobile app is not allowed to send you notifications. To change that, open the app. To receive push notifications on On-Call events, start by opening the Datadog mobile app and navigate to **Account** > **Settings** > **Notifications**. Afterwards, follow your platform specific instructions:
+
 
 {{< tabs >}}
-
 {{% tab "iOS" %}}
-There are two types of notifications you can enable: regular notifications and iOS critical alerts. Critical alerts ignore the mute switch and Do Not Disturb; the system plays a critical alert’s sound **regardless** of the device’s mute or Do Not Disturb settings.
+Within the Settings page, select **Notifications**:
 
-<TODO>
+{{< img src="service_management/oncall/app_settings_iOS.png" alt="Find the notification settings in the iOS version of Datadog's mobile app." style="width:35%;" >}}
 
+Afterwards, check the **Enable Notifications** toggle. This will take you to the iOS system settings. Within the system settings, make sure you enable the **Allow Notifications** toggle. We highly recommend you also toggle the **Sound** and **Badges** toggles for maximum recognition.
+
+{{< img src="service_management/oncall/system_notifications_settings_iOS.png" alt="Configure the system notification settings of your iOS device." style="width:100%;" >}}
 {{% /tab %}}
 
 {{% tab "Android" %}}
-To receive push notifications on On-Call events, start by opening the Datadog mobile app and navigate to **Account** > **Settings** > **Notifications**.
+Within the Settings page, select **Notifications**:
 
-{{< img src="service_management/oncall/app_settings_android.png" alt="Find the notification settings in the Android version of Datadog's mobile app." style="width:25%;" >}}
+{{< img src="service_management/oncall/app_settings_android.png" alt="Find the notification settings in the Android version of Datadog's mobile app." style="width:35%;" >}}
 
-Afterwards, tap **Notifications** to go to the system settings and configure your preferred app notifications. Make sure to enable the **Enable notifications** toggle. We highly recommend you select **Allow sound and vibration** for maximum visibility.
+Afterwards, tap **Notifications** to go to the system settings and configure your preferred app notifications. Make sure to enable the **Allow notifications** toggle. We highly recommend you select **Allow sound and vibration** for maximum recognition.
 
-{{< img src="service_management/oncall/system_notifications_settings_android.png" alt="Configure the system notification settings in the on your Android device." style="width:100%;" >}}
+{{< img src="service_management/oncall/system_notifications_settings_android.png" alt="Configure the system notification settings of your Android device." style="width:100%;" >}}
 
 {{% /tab %}}
 
@@ -45,12 +48,12 @@ Afterwards, tap **Notifications** to go to the system settings and configure you
 On both iOS and Android, you have the option to override the default system notification sounds. For high-urgency notifications, we strongly recommend customizing your system sounds and volume settings. This ensures that alerts are not only more distinct and recognizable, but also more effective in capturing attention. The Datadog app comes preloaded with a selection of custom sounds, thoughtfully curated to suit a variety of preferences.
 
 ## Circumventing Do-Not-Disturb mode
-Your device's Do-Not-Disturb mode can be overridden for two separate notification channel types: push notifications (coming from the mobile app) and telephony notifications (such as voice call and SMS). This section shows how to circumvent your device's Do-Not-Disturb mode for both notification channel types.
+Your device's Do-Not-Disturb mode can be overridden for two separate notification channel types: push notifications (coming from the Datadog mobile app) and telephony notifications (such as voice call and SMS). This section shows how to circumvent your device's Do-Not-Disturb mode for both notification channel types.
 
 {{< tabs >}}
 
 {{% tab "iOS" %}}
-Deep dive into circumvent Do-Not-Disturb mode specifically for iOS devices.
+Deep dive into circumventing Do-Not-Disturb mode specifically for iOS devices.
 
 #### Mobile Push Notifications
 Same as above, start by opening the Datadog mobile app and navigate to **Account** > **Settings** > **Notifications**.
@@ -64,7 +67,7 @@ Same as above, start by opening the Datadog mobile app and navigate to **Account
 {{% /tab %}}
 
 {{% tab "Android" %}}
-Deep dive into circumvent Do-Not-Disturb mode specifically for Android devices. Note, screenshots may not resemble your device's UI exactly since Android device UI differs between vendors.
+Deep dive into circumventing Do-Not-Disturb mode specifically for Android devices. Note, screenshots may not resemble your device's UI exactly since Android device UI differs between vendors.
 
 #### Mobile Push Notifications
 Same as above, start by opening the Datadog mobile app and navigate to **Account** > **Settings** > **Notifications**.
@@ -82,9 +85,9 @@ Same as above, start by opening the Datadog mobile app and navigate to **Account
 
 Scroll down and enable **Automatic Contact Card Sync**. This will automatically create a contact named "Datadog On-Call" and synchronize our latest phone numbers regularly.
 
-{{< img src="service_management/oncall/override_dnd_telephony_android.png" alt="Override your Android device's do-not-disturb mode for SMS and voice calls" style="width:100%;" >}}
-
 Once the contact is created, make sure you mark it as a favorite. Lastly, if you haven't done so yet, move to your Do Not Disturb system settings and create an exception for your favorite contacts.
+
+{{< img src="service_management/oncall/override_dnd_telephony_android.png" alt="Override your Android device's do-not-disturb mode for SMS and voice calls" style="width:100%;" >}}
 
 With that, Datadog will now circumvent your device's Do-Not-Disturb mode for SMS and voice calls.
 {{% /tab %}}
