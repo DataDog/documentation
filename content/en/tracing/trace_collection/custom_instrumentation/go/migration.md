@@ -11,7 +11,7 @@ further_reading:
 
 <div class="alert alert-info">This documentation assumes that you are using version v1.x of the Go tracer. If you are already using v2.x, see <a href="/tracing/trace_collection/custom_instrumentation/go/dd-api">Go Custom Instrumentation using the Datadog API</a> instead.</div>
 
-This guide explains how to migrate from Go Tracer v1.x to v2. **Note**: v2 is in Preview.
+This guide explains how to migrate from Go Tracer v1.x to v2. See [Go tracer support][2].
 
 Version 2 of the Go tracer introduces significant API improvements:
 
@@ -47,3 +47,4 @@ For more information about the migration, see the [godoc page for dd-trace-go v2
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://godoc.org/github.com/DataDog/dd-trace-go/v2/
+[2]: /tracing/trace_collection/compatibility/go/?tab=v1#go-tracer-support
