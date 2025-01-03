@@ -313,13 +313,13 @@ To use the optimized extension, disable Application Security Management (ASM), C
 
 Enabling any of these features cause the extension to default back to the fully compatible older version of the extension. You can also force your extension to use the older version by setting `DD_EXTENSION_VERSION` to `compatibility`. Datadog encourages you to report any feedback or bugs by adding an [issue on GitHub][8] and tagging your issue with `version/next`.
 
-## Adding Custom Spans
+## Adding custom spans
 
-Special care must be taken when installing the Datadog tracer when also using the [Datadog Lambda tracing layer for .NET](https://github.com/DataDog/dd-trace-dotnet-aws-lambda-layer) to ensure the code uses the same tracer instance for all instrumentation.
+If you are using both the Datadog tracer and the [Datadog Lambda tracing layer for .NET][9], you must ensure the code uses the same tracer instance for all instrumentation.
 
-1. In your `.csproj` file, make sure the tracer version the project is built with matches the tracer version installed in the tracing layer. See Datadog Lambda tracing layer for .NET [release notes](https://github.com/DataDog/dd-trace-dotnet-aws-lambda-layer/releases) to determine which version of the Datadog tracer is packaged with your layer version.
+1. In your `.csproj` file, make sure the tracer version the project is built with matches the tracer version installed in the tracing layer. See the Datadog Lambda tracing layer for .NET [release notes](https://github.com/DataDog/dd-trace-dotnet-aws-lambda-layer/releases) to determine which version of the Datadog tracer is packaged with your layer version.
 2. Compile your Lambda function as normal.
-3. Locate the packaged zip file. The Datadog tracer dll file must be removed. To do so, unzip, remove the tracer, and re-zip the package. The Datadog tracer file will be named something like `Datadog.Trace.dll`.
+3. Locate the packaged zip file and remove the Datadog tracer `dll` file: unzip the zip file, remove the tracer (named similarly to `Datadog.Trace.dll`), and re-zip the package.
 4. Deploy your code as normal.
 
 ## What's next?
@@ -347,3 +347,4 @@ Special care must be taken when installing the Datadog tracer when also using th
 [6]: /security/application_security/serverless/
 [7]: https://github.com/DataDog/datadog-lambda-extension
 [8]: https://github.com/DataDog/datadog-lambda-extension/issues
+[9]: https://github.com/DataDog/dd-trace-dotnet-aws-lambda-layer
