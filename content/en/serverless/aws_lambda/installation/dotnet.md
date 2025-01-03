@@ -317,7 +317,7 @@ Enabling any of these features cause the extension to default back to the fully 
 
 If you are using both the Datadog tracer and the [Datadog Lambda tracing layer for .NET][9], you must ensure the code uses the same tracer instance for all instrumentation.
 
-1. In your `.csproj` file, make sure the tracer version the project is built with matches the tracer version installed in the tracing layer. See the Datadog Lambda tracing layer for .NET [release notes](https://github.com/DataDog/dd-trace-dotnet-aws-lambda-layer/releases) to determine which version of the Datadog tracer is packaged with your layer version.
+1. In your `.csproj` file, make sure the tracer version the project is built with matches the tracer version installed in the tracing layer. See the Datadog Lambda tracing layer for .NET [release notes][10] to determine which version of the Datadog tracer is packaged with your layer version.
 2. Compile your Lambda function as normal.
 3. Locate the packaged zip file and remove the Datadog tracer `dll` file: unzip the zip file, remove the tracer (named similarly to `Datadog.Trace.dll`), and re-zip the package.
 4. Deploy your code as normal.
@@ -348,3 +348,4 @@ If you are using both the Datadog tracer and the [Datadog Lambda tracing layer f
 [7]: https://github.com/DataDog/datadog-lambda-extension
 [8]: https://github.com/DataDog/datadog-lambda-extension/issues
 [9]: https://github.com/DataDog/dd-trace-dotnet-aws-lambda-layer
+[10]: https://github.com/DataDog/dd-trace-dotnet-aws-lambda-layer/releases
