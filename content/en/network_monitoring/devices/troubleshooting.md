@@ -89,6 +89,10 @@ If either the SNMP status or Agent walk shows an error, it could indicate one of
       ```
    3. Ensure your community string matches.
 
+#### Permission denied
+
+If you see a permission denied error while port binding in agent logs, the port number you've indicated may require elevated permissions. To bind to a port number under 1024, see [Using the default SNMP Trap port 162][8].
+
 #### Incorrect SNMPv2 credentials
 
    **Error**:
@@ -195,3 +199,4 @@ If either the SNMP status or Agent walk shows an error, it could indicate one of
 [5]: /api/latest/network-device-monitoring/#get-the-list-of-interfaces-of-the-device
 [6]: /api/latest/network-device-monitoring/#get-the-list-of-tags-for-a-device
 [7]: /api/latest/network-device-monitoring/#update-the-tags-for-a-device
+[8]: /network_monitoring/devices/snmp_traps/#using-the-default-snmp-trap-port-162
