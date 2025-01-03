@@ -181,9 +181,19 @@ Follow the instructions for the cloud provider you are using to archive your log
 {{% observability_pipelines/processors/add_processors %}}
 
 {{< tabs >}}
-{{% tab "Filter" %}}
+{{% tab "Add env vars" %}}
 
-{{% observability_pipelines/processors/filter %}}
+{{% observability_pipelines/processors/add_env_vars %}}
+
+{{% /tab %}}
+{{% tab "Add hostname" %}}
+
+{{% observability_pipelines/processors/add_hostname %}}
+
+{{% /tab %}}
+{{% tab "Dedupe" %}}
+
+{{% observability_pipelines/processors/dedupe %}}
 
 {{% /tab %}}
 {{% tab "Edit fields" %}}
@@ -191,14 +201,29 @@ Follow the instructions for the cloud provider you are using to archive your log
 {{% observability_pipelines/processors/remap %}}
 
 {{% /tab %}}
-{{% tab "Sample" %}}
+{{% tab "Enrichment table" %}}
 
-{{% observability_pipelines/processors/sample %}}
+{{% observability_pipelines/processors/enrichment_table %}}
+
+{{% /tab %}}
+{{% tab "Filter" %}}
+
+{{% observability_pipelines/processors/filter %}}
+
+{{% /tab %}}
+{{% tab "Generate metrics" %}}
+
+{{% observability_pipelines/processors/generate_metrics %}}
 
 {{% /tab %}}
 {{% tab "Grok Parser" %}}
 
 {{% observability_pipelines/processors/grok_parser %}}
+
+{{% /tab %}}
+{{% tab "Parse JSON" %}}
+
+{{% observability_pipelines/processors/parse_json %}}
 
 {{% /tab %}}
 {{% tab "Quota" %}}
@@ -211,9 +236,14 @@ Follow the instructions for the cloud provider you are using to archive your log
 {{% observability_pipelines/processors/reduce %}}
 
 {{% /tab %}}
-{{% tab "Dedupe" %}}
+{{% tab "Remap to OCSF" %}}
 
-{{% observability_pipelines/processors/dedupe %}}
+{{% observability_pipelines/processors/remap_ocsf %}}
+
+{{% /tab %}}
+{{% tab "Sample" %}}
+
+{{% observability_pipelines/processors/sample %}}
 
 {{% /tab %}}
 {{% tab "Sensitive Data Scanner" %}}
@@ -230,36 +260,6 @@ Follow the instructions for the cloud provider you are using to archive your log
 {{% observability_pipelines/processors/sds_custom_rules %}}
 
 {{% /collapse-content %}}
-
-{{% /tab %}}
-{{% tab "Add hostname" %}}
-
-{{% observability_pipelines/processors/add_hostname %}}
-
-{{% /tab %}}
-{{% tab "Parse JSON" %}}
-
-{{% observability_pipelines/processors/parse_json %}}
-
-{{% /tab %}}
-{{% tab "Enrichment table" %}}
-
-{{% observability_pipelines/processors/enrichment_table %}}
-
-{{% /tab %}}
-{{% tab "Generate metrics" %}}
-
-{{% observability_pipelines/processors/generate_metrics %}}
-
-{{% /tab %}}
-{{% tab "Add env vars" %}}
-
-{{% observability_pipelines/processors/add_env_vars %}}
-
-{{% /tab %}}
-{{% tab "Remap to OCSF" %}}
-
-{{% observability_pipelines/processors/remap_ocsf %}}
 
 {{% /tab %}}
 {{< /tabs >}}
