@@ -220,6 +220,10 @@ To set up the destination, follow the instructions for the cloud provider you ar
 {{% /tab %}}
 {{< /tabs >}}
 
+#### Add another set of processors and destinations
+
+{{% observability_pipelines/multiple_processors %}}
+
 ### Install the Observability Pipelines Worker
 1. Select your platform in the **Choose your installation platform** dropdown menu.
 1. Enter the Datadog Agent address. The Observability Pipelines Worker listens to this address and port for incoming logs from the Datadog Agent. For example, `0.0.0.0:<port_number>`.

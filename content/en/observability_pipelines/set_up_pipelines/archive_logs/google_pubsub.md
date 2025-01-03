@@ -265,6 +265,10 @@ Follow the instructions for the cloud provider you are using to archive your log
 {{% /tab %}}
 {{< /tabs >}}
 
+#### Add another set of processors and destinations
+
+{{% observability_pipelines/multiple_processors %}}
+
 ### Install the Observability Pipelines Worker
 1. Select your platform in the **Choose your installation platform** dropdown menu.
 1. Provide the environment variables for each of your selected destinations. See the [prerequisites](#prerequisites) for more information.

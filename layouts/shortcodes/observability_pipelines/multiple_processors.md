@@ -1,0 +1,1 @@
+Click the plus sign (**+**) to the left of the processors to add another set of processors and destinations to the source. See [Add additional destinations](#add-additional-destinations) on adding additional destinations to the processor group.

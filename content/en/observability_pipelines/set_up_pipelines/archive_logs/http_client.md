@@ -266,6 +266,10 @@ Follow the instructions for the cloud provider you are using to archive your log
 {{% /tab %}}
 {{< /tabs >}}
 
+#### Add another set of processors and destinations
+
+{{% observability_pipelines/multiple_processors %}}
+
 ### Install the Observability Pipelines Worker
 1. Select your platform in the **Choose your installation platform** dropdown menu.
 1. Enter the full path of the HTTP/S endpoint URL. For example, `https://127.0.0.8/logs`. The Observability Pipelines Worker collects logs events from this endpoint.

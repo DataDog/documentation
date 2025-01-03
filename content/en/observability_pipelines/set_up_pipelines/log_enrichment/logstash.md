@@ -216,6 +216,10 @@ To set up the destination, follow the instructions for the cloud provider you ar
 {{% /tab %}}
 {{< /tabs >}}
 
+#### Add another set of processors and destinations
+
+{{% observability_pipelines/multiple_processors %}}
+
 ### Install the Observability Pipelines Worker
 1. Select your platform in the **Choose your installation platform** dropdown menu.
 1. Enter the Logstash address and port, such as `0.0.0.0:9997`. The Observability Pipelines Worker listens on this address for incoming log messages.
