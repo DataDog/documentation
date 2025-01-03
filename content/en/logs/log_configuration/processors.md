@@ -719,7 +719,7 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following lookup process
 
 There are two ways to define correlation between application traces and logs:
 
-1. Follow the documentation on [how to inject a Trace ID in the application logs][8]. Log integrations take care of all the rest of the setup by default.
+1. Follow the documentation on [how to inject a Trace ID in the application logs][8]. Log integrations automatically handle all remaining setup steps by default.
 
 2. Use the trace remapper processor to define a log attribute as its associated trace ID.
 
@@ -762,7 +762,7 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following trace remapper
 
 There are two ways to define correlation between application spans and logs:
 
-1. Follow the documentation on [how to inject a Span ID in the application logs][8]. Log integrations take care of all the rest of the setup by default.
+1. Follow the documentation on [how to inject a Span ID in the application logs][8]. Log integrations automatically handle all remaining setup steps by default.
 
 2. Use the span remapper processor to define a log attribute as its associated span ID.
 
@@ -792,7 +792,7 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following span remapper 
 |--------------|------------------|----------|--------------------------------------------------------|
 | `type`       | String           | Yes      | Type of the processor.                                 |
 | `name`       | String           | No       | Name of the processor.                                 |
-| `is_enabled` | Boolean          | No       | If the processors is enabled or not. Default: `false`. |
+| `is_enabled` | Boolean          | No       | Indicates whether the processor is enabled. Default: `false`. |
 | `sources`    | Array of strings | No       | Array of source attributes. Default: `dd.trace_id`.    |
 
 [1]: /api/v1/logs-pipelines/
