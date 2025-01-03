@@ -90,11 +90,11 @@ Time selection contains options to view usage graphs at daily, weekly, monthly o
 
 <div class="alert alert-warning">This feature is in beta. To request access and confirm your organization meets the feature criteria, contact your account representative or <a href="https://docs.datadoghq.com/help/">Customer Support</a>.</div>
 
-To display the committed and allotted pills, ensure the `See included usage` toggle is on:
-1. On the Total Usage card where you want to see committed and allotted usage data, click the eye (`See included usage`) icon.
-1. The icon changes to an eye with a slash through it. Committed and allotted pills populate on the card.
-
 Purple on-demand pills highlight the portion of billable usage that is on-demand usage. Blue committed and allotted pills highlight the portion of your usage that is covered by commitments and <a href="https://www.datadoghq.com/pricing/allotments/">allotments</a> from parent products. The dashed `Committed` line shows commitments per product, without any allotments (such as Custom Metrics or Containers).
+
+To display the committed and allotted pills on a card, ensure the **See included usage** toggle is on:
+1. On the total usage card where you want to see committed and allotted usage data, click the eye (**See included usage**) icon.
+1. The icon changes to an eye with a slash through it. Committed and allotted pills populate on the card.
 
 {{< img src="account_management/billing/UsageTilesWithPillsUsageTrendsWithCommittedLine.png" alt="Billable on-demand pills and committed usage lines on trends graphs." style="width:100%; align:left" >}}
 
