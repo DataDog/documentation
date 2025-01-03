@@ -5,44 +5,75 @@ aliases:
   - /service_catalog/use_cases/dependency_management
   - /service_catalog/guides/dependency_management
 further_reading:
-  - link: "/security/application_security/"
+  - link: "/tracing/"
     tag: "Documentation"
-    text: "Datadog Application Security Management"
+    text: "Datadog Application Performance Monitoring"
+  - link: "/universal_service_monitoring/"
+    tag: "Documentation"
+    text: "Datadog Universal Service Monitoring"
+  - link: "/real_user_monitoring"
+    tag: "Documentation"
+    text: "Datadog Real User Monitoring"
 ---
 
-Datadog’s Service Catalog helps new developers quickly find what they need—-docs, runbooks, [scorecards][1] and [templates][2]--so they can commit their first PR faster. By centralizing resources and automating key tasks, organizations can improve time-to-first-commit, reduce time spent locating relevant information and resources, and enhance overall developer experience.
+Datadog’s Service Catalog provides robust dependency mapping capabilities, helping teams document, track, and assess upstream and downstream relationships. These features combine automatic discovery with manual definition options to offer flexibility and accuracy in representing your system architecture.
 
-{{< img src="tracing/service_catalog/dev-onboarding-use-case-overview.png" alt="A service's home page, showing information like documentation and repository links, service owners, and on-call details." >}}
+## Automatic Dependency Mapping and Entity Discovery
 
-## Quick Access to Documentation and Standards
+Automatic Discovery:
 
-Service Catalog acts as a single source of truth for your engineering environment. Newly onboarded developers can:
+- Datadog Service Catalog includes all discovered services from APM, USM, and RUM by default.
+- As you instrument more applications across your environments, their dependencies are automatically added to the catalog.
 
-- Quickly locate relevant [APIs][3], services, repositories, and dependencies.
-- Access up-to-date documentation, code snippets, and runbooks, and start to make meaningful contributions.
-- Rely on [organized metadata and organizational inventory][4] to understand the team's structure, communication channels, and best practices.
+Telemetry Integration:
 
-{{< img src="tracing/service_catalog/dev-onboarding-use-case-workflows.png" alt="The side panel view of an API in the service catalog, showing a flow chart of services that consume the API, an OpenAPI Preview, and API metadata." >}}
+- Dependency relationships are auto-detected using application telemetry collected by APM, USM, and RUM.
+- Teams gain an immediate, real-time overview of service relationships and performance impacts across teams and services.
+
+{{< img src="tracing/service_catalog/dependency-mgmt-use-case-auto-discovery.png" alt="The Dependencies tab in the side panel for a service, showing a flow chart of service dependencies, ." >}}
+
+## Manual Dependency Definition in Service Catalog Schema v3.0
+
+Enhanced Relationship Mapping:
+- Service Catalog schema v3.0 allows teams to manually define relationships to supplement auto-detected topologies.
+- This feature lets teams represent dependencies that reflect institutional knowledge and team collaboration, ensuring a more complete view of system relationships.
+
+{{< img src="tracing/service_catalog/dependency-mgmt-use-case-relationship-mapping.png" alt="A hierarchical relationships diagram showing a service's dependencies." >}}
 
 
-## Automate Onboarding Workflows
+Keys for Manual Dependency Definition:
+- Teams can specify relationships in the spec section of the entity definition using these keys:
 
-[Software Templates][2] reduces the manual toil involved in onboarding by standardizing and streamlining common tasks:
+  - dependsOn: Specifies dependencies (e.g., service A depends on service B).
+  - ownedBy: Assigns ownership to a team or group (e.g., service A is owned by Team A).
+  - partOf: Groups components under a system (e.g., service A is part of System A).
 
-- Kick off onboarding workflows that automatically provision Git repos [link to scaffolder docs], assign PagerDuty schedules, or notify relevant Slack channels.
-- Integrate with third-party tools and systems to ensure every new developer starts with the right permissions, environments, and resources.
-- Scale onboarding processes effortlessly as your team grows, maintaining consistency and quality across new hires.
+Example YAML configuration:
 
-[Explore blueprints][5] to automate developer onboarding tasks.
+```yaml
+apiVersion: v3
+kind: service
+metadata:
+  name: web-store
+spec:
+  dependsOn: 
+    - service: cws-webapp
+```
 
+UI Display:
+
+- When "Include Detected" is disabled: Only manually defined dependencies are shown.
+- When "Include Detected" is enabled: Manually added dependencies are shown above auto-detected ones, providing a clear distinction.
+
+{{< img src="tracing/service_catalog/dependency-mgmt-use-case-include-detected.png" alt="A diagram showing the dependencies of a service, where 'Include Detected' is disabled." >}}
+
+## Benefits of Manual Dependency Definition
+
+- Improved Accuracy: Ensures the catalog reflects shared team knowledge, avoiding gaps left by automated tools.
+- Enhanced Collaboration: Promotes better alignment and understanding during incident response and architecture planning.
+- Contextual Knowledge: Helps developers and new team members quickly grasp complex system architectures and dependencies.
 
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
-[1]: /service_catalog/scorecards/
-[2]: /service_catalog/software_templates/
-[3]: /api/latest/api-management/
-[4]: /account_management/teams/
-[5]: /service_management/app_builder/
