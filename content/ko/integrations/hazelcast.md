@@ -37,7 +37,7 @@ draft: false
 git_integration_title: Hazelcast
 integration_id: Hazelcast
 integration_title: Hazelcast
-integration_version: 3.2.1
+integration_version: 6.0.0
 is_public: true
 manifest_version: 2.0.0
 name: Hazelcast

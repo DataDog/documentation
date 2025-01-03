@@ -7,6 +7,9 @@ further_reading:
 - link: /dashboards/guide/context-links/
   tag: Documentación
   text: Enlaces personalizados
+- link: https://www.datadoghq.com/blog/observability-pipelines-transform-and-enrich-logs/
+  tag: Blog
+  text: Transformar y enriquecer tus logs con pipelines de observabilidad de datos
 title: Widgets
 ---
 
@@ -15,31 +18,34 @@ title: Widgets
 Los widgets son componentes básicos de tus dashboards. Te permiten visualizar y correlacionar los datos en tu infraestructura.
 
 ### Gráficos
-{{< whatsnext desc="Widgets genéricos para graficar datos de productos de Datadog: ">}}
+{{< whatsnext desc="Widgets genéricos para graficar datos a partir de productos Datadog: ">}}
     {{< nextlink href="/dashboards/widgets/change" 
         img="dashboards/widgets/icons/change_light_large.png">}} Cambio {{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/distribution"
-        img="dashboards/widgets/icons/distribution_light_large.png">}} Distribución{{< /nextlink >}}
+        img="dashboards/widgets/icons/distribution_light_large.png">}} Distribución {{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/funnel"
-        img="dashboards/widgets/icons/funnel_light_large.png">}} Embudo{{< /nextlink >}}
+        img="dashboards/widgets/icons/funnel_light_large.png">}} Embudo {{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/geomap" 
-        img="dashboards/widgets/icons/geomap_light_large.png">}} Mapa geográfico{{< /nextlink >}}
+        img="dashboards/widgets/icons/geomap_light_large.png">}} Geomap {{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/heat_map"
-        img="dashboards/widgets/icons/heatmap_light_large.png">}} Mapa de calor{{< /nextlink >}}
+        img="dashboards/widgets/icons/heatmap_light_large.png">}} Heatmap {{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/pie_chart"
-        img="dashboards/widgets/icons/pie_light_large.png">}} Gráfico circular{{< /nextlink >}}
+        img="dashboards/widgets/icons/pie_light_large.png">}} Gráfico circular {{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/query_value"
-        img="dashboards/widgets/icons/query-value_light_large.png">}} Valor de consulta{{< /nextlink >}}
+        img="dashboards/widgets/icons/query-value_light_large.png">}} Valor de consulta {{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/sankey" img="dashboards/widgets/icons/sankey_light_large.svg">}} Sankey{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/scatter_plot"
-        img="dashboards/widgets/icons/scatter-plot_light_large.png">}} Gráfico de dispersión{{< /nextlink >}}
+        img="dashboards/widgets/icons/scatter-plot_light_large.png">}} Diagrama de dispersión {{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/table"
-        img="dashboards/widgets/icons/table_light_large.png">}} Tabla{{< /nextlink >}}
+        img="dashboards/widgets/icons/table_light_large.png">}} Tabla {{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/treemap"
-        img="dashboards/widgets/icons/treemap_light_large.png">}} Gráfico de rectángulos{{< /nextlink >}}
+        img="dashboards/widgets/icons/treemap_light_large.png">}} Treemap {{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/timeseries"
-        img="dashboards/widgets/icons/timeseries_light_large.png">}} Serie temporal{{< /nextlink >}}
+        img="dashboards/widgets/icons/timeseries_light_large.png">}} Series temporales {{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/top_list"
-        img="dashboards/widgets/icons/top-list_light_large.png">}} Lista de principales{{< /nextlink >}}
+        img="dashboards/widgets/icons/top-list_light_large.png">}} .Lista principal {{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/wildcard"
+        img="/dashboards/widgets/icons/wildcard_light_large.svg">}} Comodín {{< /nextlink >}}
 {{< /whatsnext >}}
 
 ### Groups (grupos)
@@ -171,7 +177,7 @@ Para copiar varios widgets de screenboard (solo en el modo de edición), pulsa `
 
 ## Gráficas de widget
 
-### Sensitive Data Scanner
+### Exportar
 
 | Formato | Instrucciones            |
 | -----  | ----------------------- |
@@ -194,7 +200,7 @@ Haz clic en cualquier gráfico del dashboard para abrir un menú de opciones:
 | View related traces (Ver trazas relacionadas)    | Rellena un panel de [Trazas][9] que se corresponde con tu gráfico.                 |
 | View related profiles (Ver perfiles relacionados)  | Accede a la página [Elaboración de perfiles][7] que se corresponde con tu gráfico.             |
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 

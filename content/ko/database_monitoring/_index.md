@@ -14,6 +14,9 @@ further_reading:
 - link: https://www.datadoghq.com/blog/sql-server-and-azure-managed-services-database-monitoring/
   tag: 블로그
   text: Datadog DBM을 사용하여 SQL Server 및 Azure 관리 데이터베이스 모니터링
+- link: https://www.datadoghq.com/blog/mongodb-database-monitoring/
+  tag: 블로그
+  text: MongoDB 성능 추적 및 문제 해결
 - link: /database_monitoring/data_collected/
   tag: 설명서
   text: 수집한 데이터
@@ -21,8 +24,11 @@ further_reading:
   tag: 설명서
   text: 트러블슈팅
 - link: https://dtdg.co/fe
-  tag: 기반 활성화
+  tag: 기초 구축
   text: 대화형 세선에 참여해 데이터베이스 모니터링을 한 단계 업그레이드하세요.
+- link: https://www.datadoghq.com/blog/mongodb-database-monitoring/
+  tag: 블로그
+  text: Datadog Database로 MongoDB 성능 추적 및 문제 해결 모니터링
 title: 데이터베이스 모니터링
 ---
 
@@ -59,7 +65,6 @@ Datadog 데이터베이스 모니터링은 **Postgres**, **MySQL**, **Oracle**, 
 
 ### MongoDB
 
-<div class="alert alert-info">MongoDB용 데이터베이스 모니터링은 공개 베타 버전입니다. 참여하시려면 Datadog 고객 성공 관리자에게 문의하세요.</div>
 {{< partial name="dbm/dbm-setup-mongodb" >}}
 <p></p>
 
@@ -109,6 +114,13 @@ Datadog에서 [데이터베이스 모니터링][1]로 이동합니다.
 
 {{< img src="database_monitoring/databases-list.png" alt="Datadog 데이터베이스 페이지" style="width:90%;" >}}
 
+### 최적화 권장 사항 보기
+
+권장 사항 페이지][6]는 문제와 최적화 기회를 강조 표시하여 가장 중요한 것의 우선순위를 정함으로써 시간을 절약할 수 있도록 도와줍니다. 권장 사항을 선택하면 문제 요약과 문제 해결을 위한 잠재적인 다음 단계를 포함한 세부 정보를 볼 수 있습니다.
+
+{{< img src="database_monitoring/recommendations-page.png" alt="Datadog 권장 사항 페이지" style="width:90%;" >}}
+
+
 ## 참고 자료
 
 {{< learning-center-callout header="학습 센터에서 Datadog DBM으로 Postgres 데이터베이스를 모니터링해 보세요." btn_title="지금 등록" btn_url="https://learn.datadoghq.com/courses/database-monitoring" >}}
@@ -122,3 +134,4 @@ Datadog 학습 센터에는 이 주제에 대해 학습하는 데 유용한 실�
 [3]: /ko/database_monitoring/query_samples/
 [4]: /ko/database_monitoring/query_metrics/#explain-plans
 [5]: /ko/database_monitoring/database_hosts/
+[6]: /ko/database_monitoring/recommendations/

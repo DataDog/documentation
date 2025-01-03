@@ -28,6 +28,13 @@ docker run --rm datadog/synthetics-private-location-worker --help
 synthetics-pl-worker.exe --help
 ```
 {{% /tab %}}
+{{% tab "Kubernetes" %}}
+
+Refer to the example in the [Datadog Helm repository][1].
+	
+[1]: https://github.com/DataDog/helm-charts/tree/main/charts/synthetics-private-location
+ 
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Customize your private location
@@ -37,7 +44,7 @@ These configuration options for private locations can be passed as **parameters 
 {{< tabs >}}
 {{% tab "Docker" %}}
 ```shell
-docker run --rm -v $PWD/<MY_WORKER_CONFIG_FILE_NAME>.json:/etc/datadog/synthetics-check-runner.json datadog/synthetics-private-location-worker:latest --logFormat=json
+docker run -d --restart always -v $PWD/<MY_WORKER_CONFIG_FILE_NAME>.json:/etc/datadog/synthetics-check-runner.json datadog/synthetics-private-location-worker:latest --logFormat=json
 ```
 {{% /tab %}}
 {{% tab "Windows" %}}

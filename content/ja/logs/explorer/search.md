@@ -19,7 +19,7 @@ title: ログを検索
 
 個々のログからの情報はリストとして視覚化すると便利ですが、集計することで価値ある情報にアクセスできる場合もあります。この情報にアクセスするには、[ログエクスプローラー][5]でログを検索し、時系列、トップリスト、ツリーマップ、円グラフまたはテーブルとして表示します。
 
-Log Explorer search consists of a time range and a search query, mixing `key:value` and [full-text search][6].
+ログエクスプローラーの検索は、時間範囲と検索クエリからなり、`key:value` 検索と[全文検索][6]が混在しています。
 
 ## 検索クエリ
 
@@ -27,7 +27,7 @@ Log Explorer search consists of a time range and a search query, mixing `key:val
 
 {{< img src="logs/explorer/search_filter.png" alt="ログエクスプローラーで、Web ストアサービスの支払い拒否のエラーログをフィルターする検索クエリを作成する" style="width:100%;" >}}
 
-[Indexed Logs][1] support both [full-text search][6] and `key:value` search queries.
+[インデックス化されたログ][1]は、[全文検索][6]と `key:value` 検索クエリの両方をサポートします。
 
 **注**: `key:value` クエリでは、事前に[ファセットを宣言][2]する必要が**ありません**。
 

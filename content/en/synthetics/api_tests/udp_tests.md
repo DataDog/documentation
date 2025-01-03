@@ -30,19 +30,32 @@ UDP tests can run from both [managed](#select-locations) and [private locations]
 
 ## Configuration
 
-After choosing to create an `UDP` Test, define your test's request.
+You may create a test using one of the following options:
 
-### Define request
+   - **Create a test from a template**:
 
-1. Specify the **Host** and **Port** to run your test on.
-2. Enter the string you want to send in your test. 
-3. Specify the amount of time in seconds before the test times out (optional).
-4. **Name** your UDP test.
-5. Add `env` **Tags** as well as any other tag to your UDP test. You can then use these tags to filter through your Synthetic tests on the [Synthetic Monitoring & Continuous Testing page][3].
+     1. Hover over one of the pre-populated templates and click **View Template**. This opens a side panel displaying pre-populated configuration information, including: Test Details, Request Details, Assertions, Alert Conditions, and Monitor Settings.
+     2. Click **+Create Test** to open the **Define Request** page, where you can review and edit the pre-populated configuration options. The fields presented are identical to those available when creating a test from scratch.
+     3. Click **Save Details** to submit your API test.<br /><br>
+        {{< img src="getting_started/synthetics/synthetics_templates_api_video.mp4" alt="Video of Synthetics API test landing page with templates" video="true" >}}
 
-{{< img src="synthetics/api_tests/udp_test_config.png" alt="Define UDP request" style="width:90%;" >}}
+  - **Build a test from scratch**:
 
-Click **Test URL** to try out the request configuration. A response preview is displayed on the right side of your screen. 
+    1. To build a test from scratch, click the **+ Start from scratch** template, then select the `UDP` request type.
+    1. Specify the **Host** and **Port** to run your test on.
+    1. Enter the string you want to send in your test. 
+    1. Specify the amount of time in seconds before the test times out (optional).
+    1. **Name** your UDP test.
+    1. Add Environment **Tags** as well as any other tag to your UDP test. You can then use these tags to filter through your Synthetic tests on the [Synthetic Monitoring & Continuous Testing page][3].
+    1. Click **Test Host** to try out the request configuration. A response preview is displayed on the right side of your screen. <br /><br>
+
+       {{< img src="synthetics/api_tests/udp_test_config_2.png" alt="Define UDP request" style="width:90%;" >}}
+
+    8. Click **Create Test** to submit your API test.
+
+### Snippets
+
+{{% synthetics-api-tests-snippets %}}
 
 ### Define assertions
 

@@ -107,8 +107,8 @@ Or, modify the `package.json` file if you typically start an application with np
     "start": "next start",
 
     // suggested command
-    "start": "node --require dd-trace/init ./node_modules/next start",
-    "start": "NODE_OPTIONS='--require dd-trace/init' ./node_modules/next start",
+    "start": "node --require dd-trace/init ./node_modules/.bin/next start",
+    "start": "NODE_OPTIONS='--require dd-trace/init' ./node_modules/.bin/next start",
 ```
 
 **Note**: The previous examples use Next.js, but the same approach applies to other frameworks with custom entry points, such as Nest.js. Adapt the commands to fit your specific framework and setup. Either command should work, but using `NODE_OPTIONS`  also applies to any child Node.js processes.

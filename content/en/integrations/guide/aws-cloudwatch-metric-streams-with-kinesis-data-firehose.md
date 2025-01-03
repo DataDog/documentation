@@ -47,6 +47,8 @@ There is no additional charge from Datadog to stream metrics.
 AWS charges based on the number of metric updates on the CloudWatch Metric Stream and the data volume sent to the Amazon Data Firehose. As such, there is a potential to see an increased CloudWatch cost for the subset of metrics you are streaming. For this reason, Datadog recommends using metric streams for the AWS metrics, services, regions, and accounts where you most need the lower latency, and polling for others. For more information, see [Amazon CloudWatch pricing][2].
  
 EC2 or Lambda metrics in the stream could increase the number of billable hosts and Lambda invocations (if those hosts and functions aren't already monitored with the AWS integration or Datadog Agent in the case of EC2).
+
+**Note**: You can create filters in CloudWatch to stream only specified metrics. See the [Amazon CloudWatch user guide][7] for more information. 
  
 ## Setup
  
@@ -157,3 +159,4 @@ To resolve any issues encountered while setting up Metric Streams or the associa
 [4]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Unified-Cross-Account-Setup.html
 [5]: https://app.datadoghq.com/integrations/amazon-web-services
 [6]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-metric-streams-troubleshoot.html
+[7]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Metric-Streams.html

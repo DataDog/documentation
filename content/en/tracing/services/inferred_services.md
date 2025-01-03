@@ -137,11 +137,25 @@ Peer Tag | Source Attributes
 
 **Note**: Peer attribute values that match IP address formats (for example, 127.0.0.1) are modified and redacted with `blocked-ip-address` to prevent unnecessary noise and tagging metrics with high-cardinality dimensions. As a result, you may encounter some `blocked-ip-address` services appearing as downstream dependencies of your instrumented services.
 
+#### Precedence of peer tags
+
+To assign the name to inferred entities, Datadog uses a specific order of precedence between peer tags, when entities are defined by a combination of multiple tags. 
+
+Entity type | Order of precedence
+-----------|----------------
+Database | `peer.db.name` > `peer.aws.s3.bucket` (For AWS S3) / `peer.aws.dynamodb.table` (For AWS DynamoDB) / `peer.cassandra.contact.points` (For Cassandra) / `peer.couchbase.seed.nodes` (For Couchbase) > `peer.hostname` > `peer.db.system`
+Queue | `peer.messaging.destination` > `peer.kafka.bootstrap.servers` (for Kafka) / `peer.aws.sqs.queue` (for AWS SQS) / `peer.aws.kinesis.stream` (For AWS Kinesis) > `peer.messaging.system`
+Inferred service | `peer.service` > `peer.rpc.service` > `peer.hostname`
+
+If the highest priority tag, such as `peer.db.name`, is not captured as part of the instrumentation, Datadog uses the second highest priority tag, like `peer.hostname`, and continue in that order.
+
+**Note**: Datadog never sets the `peer.service` for inferred databases and queues. `peer.service` is the highest priority peer attribute. If set, it take precedence over all other attributes.
+
 ## Migrate to global default service naming
 
 With inferred services, service dependencies are automatically detected from existing span attributes. As a result, changing service names (using the `service` tag) is not required to identify these dependencies. 
 
-Enable `DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED` to ensures no Datadog integration sets service names that are different from the default global service name. This also improves how service-to-service connections and inferred services are represented in Datadog visualizations, across all supported tracing library languages and integrations.
+Enable `DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED` to ensure no Datadog integration sets service names that are different from the default global service name. This also improves how service-to-service connections and inferred services are represented in Datadog visualizations, across all supported tracing library languages and integrations.
 
 <div class="alert alert-warning">Enabling this option may impact existing APM metrics, custom span metrics, trace analytics, retention filters, sensitive data scans, monitors, dashboards, or notebooks that reference the old service names. Update these assets to use the global default service tag (<code>service:&lt;DD_SERVICE&gt;</code>).</div>
 

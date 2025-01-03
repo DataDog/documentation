@@ -224,7 +224,13 @@ Si utilizas un host, tienes dos opciones: utilizar Microsoft SourceLink o config
 {{% /tab %}}
 {{% tab "Node.js" %}}
 
-<div class="alert alert-info">Se requiere la versión de la biblioteca del cliente Node.js 3.21.0 o posterior.</div>
+<div class="alert alert-info">Se requiere la biblioteca cliente Node.js versión 3.21.0 o posterior.
+</br>
+</br>
+La visualización de enlaces y fragmentos de código para aplicaciones TypeScript requiere que tu aplicación Node se ejecute con: 
+</br>
+<a href="https://nodejs.org/dist/v12.22.12/docs/api/cli.html#cli_enable_source_maps"><code>--enable-source-maps</code></a>.
+</div>
 
 #### Contenedores
 
@@ -296,6 +302,8 @@ Si utilizas un host, configura tu aplicación con la variable de entorno `DD_TAG
 
 <div class="alert alert-info">Se requiere la biblioteca del cliente Java versión 1.12.0 o posterior.</div>
 
+#### Contenedores
+
 Si utilizas contenedores Docker, tienes dos opciones: utilizar Docker o configurar tu aplicación con variables de entorno `DD_GIT_*`.
 
 ##### Opción 1: Docker
@@ -313,6 +321,29 @@ Si utilizas la opción serverless, tienes dos opciones en función de la configu
 ##### Opción 1: Herramientas de Datadog
 
 {{% sci-dd-serverless %}}
+
+##### Opción 2: Variables de entorno `DD_GIT_*`
+
+{{% sci-dd-git-env-variables %}}
+
+#### Host
+
+Si utilizas un host, configura tu aplicación con variables de entorno `DD_GIT_*`.
+
+{{% sci-dd-git-env-variables %}}
+
+{{% /tab %}}
+{{% tab "PHP" %}}
+
+<div class="alert alert-info">Se requiere la biblioteca del cliente PHP versión 1.2.0 o posterior.</div>
+
+#### Contenedores
+
+Si utilizas contenedores Docker, tienes dos opciones: utilizar Docker o configurar tu aplicación con variables de entorno `DD_GIT_*`.
+
+##### Opción 1: Docker
+
+{{% sci-docker %}}
 
 ##### Opción 2: Variables de entorno `DD_GIT_*`
 
@@ -359,13 +390,13 @@ La integración del código fuente admite los siguientes proveedores Git:
 
 | Proveedor | Compatibilidad con enlaces contextuales | Compatibilidad con fragmentos de código |
 |---|---|---|
-| SaaS GitHub (github.com) | Sí | Sí |
-| GitHub Enterprise Server | Sí | Sí |
-| SaaS GitLab (gitlab.com) | Sí | Sí |
-| GitLab autogestionado | Sí | No |
-| Bitbucket | Sí | No |
-| Servicios Azure DevOps | Sí | No |
-| Azure DevOps Server | Sí | No |
+| SaaS GitHub (github.com) | Sí | Accede a dashboards preconfigurados |
+| GitHub Enterprise Server | Sí | Accede a dashboards preconfigurados |
+| SaaS GitLab (gitlab.com) | Sí | Accede a dashboards preconfigurados |
+| GitLab autogestionado | Accede a dashboards preconfigurados | {{< img src="synthetics/test_coverage/test_coverage.png" alt="Continuous Testing Explorer" style="width:100%;">}} |
+| Bitbucket | Accede a dashboards preconfigurados | {{< img src="synthetics/test_coverage/test_coverage.png" alt="Continuous Testing Explorer" style="width:100%;">}} |
+| Servicios Azure DevOps | Accede a dashboards preconfigurados | {{< img src="synthetics/test_coverage/test_coverage.png" alt="Continuous Testing Explorer" style="width:100%;">}} |
+| Azure DevOps Server | Accede a dashboards preconfigurados | {{< img src="synthetics/test_coverage/test_coverage.png" alt="Continuous Testing Explorer" style="width:100%;">}} |
 
 {{< tabs >}}
 {{% tab "GitHub" %}}
@@ -452,7 +483,7 @@ Successfully synced git DB in 3.579 seconds.
 {{% /tab %}}
 {{< /tabs >}}
 
-## Uso
+## Utilización
 
 ### Enlaces a proveedores Git
 
@@ -555,7 +586,7 @@ Si utilizas la integración GitHub, haz clic en **Connect to preview** en los ma
 {{% /tab %}}
 {{< /tabs >}}
 
-## Referencias adicionales
+## Configurar tests de API y tests de API multupaso
 
 {{< partial name="whats-next/whats-next.html" >}}
 
