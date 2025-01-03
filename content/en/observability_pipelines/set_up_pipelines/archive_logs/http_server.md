@@ -167,9 +167,9 @@ Follow the instructions for the cloud provider you are using to archive your log
 {{% /tab %}}
 {{< /tabs >}}
 
-#### Add another destination
+#### Add additional destinations
 
-{{% observability_pipelines/dynamic_destinations %}}
+{{% observability_pipelines/multiple_destinations %}}
 
 ### Set up processors
 
