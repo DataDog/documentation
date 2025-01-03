@@ -86,6 +86,26 @@ Select the cloud provider you are using to archive your logs.
 Enter the following information based on your selected logs destinations.
 
 {{< tabs >}}
+{{% tab "Amazon OpenSearch" %}}
+
+{{% observability_pipelines/destination_settings/amazon_opensearch %}}
+
+{{% /tab %}}
+{{% tab "Amazon Security Lake" %}}
+
+{{% observability_pipelines/destination_settings/amazon_security_lake %}}
+
+{{% /tab %}}
+{{% tab "Chronicle" %}}
+
+{{% observability_pipelines/destination_settings/chronicle %}}
+
+{{% /tab %}}
+{{% tab "Datadog" %}}
+
+{{% observability_pipelines/destination_settings/datadog %}}
+
+{{% /tab %}}
 {{% tab "Datadog Archives" %}}
 
 {{% observability_pipelines/destination_settings/datadog_archives_note %}}
@@ -109,9 +129,29 @@ Follow the instructions for the cloud provider you are using to archive your log
 {{% /collapse-content %}}
 
 {{% /tab %}}
-{{% tab "Datadog" %}}
+{{% tab "Elasticsearch" %}}
 
-{{% observability_pipelines/destination_settings/datadog %}}
+{{% observability_pipelines/destination_settings/elasticsearch %}}
+
+{{% /tab %}}
+{{% tab "Microsoft Sentinel" %}}
+
+{{% observability_pipelines/destination_settings/microsoft_sentinel %}}
+
+{{% /tab %}}
+{{% tab "New Relic" %}}
+
+{{% observability_pipelines/destination_settings/new_relic %}}
+
+{{% /tab %}}
+{{% tab "OpenSearch" %}}
+
+{{% observability_pipelines/destination_settings/opensearch %}}
+
+{{% /tab %}}
+{{% tab "SentinelOne" %}}
+
+{{% observability_pipelines/destination_settings/sentinelone %}}
 
 {{% /tab %}}
 {{% tab "Splunk HEC" %}}
@@ -127,46 +167,6 @@ Follow the instructions for the cloud provider you are using to archive your log
 {{% tab "Syslog" %}}
 
 {{% observability_pipelines/destination_settings/syslog %}}
-
-{{% /tab %}}
-{{% tab "Chronicle" %}}
-
-{{% observability_pipelines/destination_settings/chronicle %}}
-
-{{% /tab %}}
-{{% tab "Elasticsearch" %}}
-
-{{% observability_pipelines/destination_settings/elasticsearch %}}
-
-{{% /tab %}}
-{{% tab "OpenSearch" %}}
-
-{{% observability_pipelines/destination_settings/opensearch %}}
-
-{{% /tab %}}
-{{% tab "Amazon OpenSearch" %}}
-
-{{% observability_pipelines/destination_settings/amazon_opensearch %}}
-
-{{% /tab %}}
-{{% tab "New Relic" %}}
-
-{{% observability_pipelines/destination_settings/new_relic %}}
-
-{{% /tab %}}
-{{% tab "Amazon Security Lake" %}}
-
-{{% observability_pipelines/destination_settings/amazon_security_lake %}}
-
-{{% /tab %}}
-{{% tab "Microsoft Sentinel" %}}
-
-{{% observability_pipelines/destination_settings/microsoft_sentinel %}}
-
-{{% /tab %}}
-{{% tab "SentinelOne" %}}
-
-{{% observability_pipelines/destination_settings/sentinelone %}}
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -275,7 +275,29 @@ Follow the instructions for the cloud provider you are using to archive your log
 1. Enter the Datadog Agent address. The Observability Pipelines Worker listens to this address and port for incoming logs from the Datadog Agent. For example, `0.0.0.0:<port_number>`.
 1. Provide the environment variables for each of your selected destinations.
 {{< tabs >}}
+{{% tab "Amazon OpenSearch" %}}
+
+{{% observability_pipelines/destination_env_vars/amazon_opensearch %}}
+
+{{% /tab %}}
+{{% tab "Amazon Security Lake" %}}
+
+{{% observability_pipelines/destination_env_vars/amazon_security_lake %}}
+
+{{% /tab %}}
+{{% tab "Chronicle" %}}
+
+{{% observability_pipelines/destination_env_vars/chronicle %}}
+
+{{% /tab %}}
+{{% tab "Datadog" %}}
+
+{{% observability_pipelines/destination_env_vars/datadog %}}
+
+{{% /tab %}}
 {{% tab "Datadog Archives" %}}
+
+For the Datadog Archives destination, follow the instructions for the cloud provider you are using to archive your logs.
 
 {{% collapse-content title="Amazon S3" level="h5" %}}
 
@@ -294,9 +316,29 @@ Follow the instructions for the cloud provider you are using to archive your log
 {{% /collapse-content %}}
 
 {{% /tab %}}
-{{% tab "Datadog" %}}
+{{% tab "Elasticsearch" %}}
 
-{{% observability_pipelines/destination_env_vars/datadog %}}
+{{% observability_pipelines/destination_env_vars/elasticsearch %}}
+
+{{% /tab %}}
+{{% tab "Microsoft Sentinel" %}}
+
+{{% observability_pipelines/destination_env_vars/microsoft_sentinel %}}
+
+{{% /tab %}}
+{{% tab "New Relic" %}}
+
+{{% observability_pipelines/destination_env_vars/new_relic %}}
+
+{{% /tab %}}
+{{% tab "OpenSearch" %}}
+
+{{% observability_pipelines/destination_env_vars/opensearch %}}
+
+{{% /tab %}}
+{{% tab "SentinelOne" %}}
+
+{{% observability_pipelines/destination_env_vars/sentinelone %}}
 
 {{% /tab %}}
 {{% tab "Splunk HEC" %}}
@@ -312,46 +354,6 @@ Follow the instructions for the cloud provider you are using to archive your log
 {{% tab "Syslog" %}}
 
 {{% observability_pipelines/destination_env_vars/syslog %}}
-
-{{% /tab %}}
-{{% tab "Chronicle" %}}
-
-{{% observability_pipelines/destination_env_vars/chronicle %}}
-
-{{% /tab %}}
-{{% tab "Elasticsearch" %}}
-
-{{% observability_pipelines/destination_env_vars/elasticsearch %}}
-
-{{% /tab %}}
-{{% tab "OpenSearch" %}}
-
-{{% observability_pipelines/destination_env_vars/opensearch %}}
-
-{{% /tab %}}
-{{% tab "Amazon OpenSearch" %}}
-
-{{% observability_pipelines/destination_env_vars/amazon_opensearch %}}
-
-{{% /tab %}}
-{{% tab "New Relic" %}}
-
-{{% observability_pipelines/destination_env_vars/new_relic %}}
-
-{{% /tab %}}
-{{% tab "Amazon Security Lake" %}}
-
-{{% observability_pipelines/destination_env_vars/amazon_security_lake %}}
-
-{{% /tab %}}
-{{% tab "Microsoft Sentinel" %}}
-
-{{% observability_pipelines/destination_env_vars/microsoft_sentinel %}}
-
-{{% /tab %}}
-{{% tab "SentinelOne" %}}
-
-{{% observability_pipelines/destination_env_vars/sentinelone %}}
 
 {{% /tab %}}
 {{< /tabs >}}

@@ -82,87 +82,83 @@ Select the cloud provider you are using to archive your logs.
 Enter the following information based on your selected logs destinations.
 
 {{< tabs >}}
-{{% tab "Datadog Archives" %}}
-
-{{% observability_pipelines/destination_settings/datadog_archives_note %}}
-
-Follow the instructions for the cloud provider you are using to archive your logs.
-
-{{% collapse-content title="Amazon S3" level="h5" %}}
-
-{{% observability_pipelines/destination_settings/datadog_archives_amazon_s3 %}}
-
-{{% /collapse-content %}}
-{{% collapse-content title="Google Cloud Storage" level="h5" %}}
-
-{{% observability_pipelines/destination_settings/datadog_archives_google_cloud_storage %}}
-
-{{% /collapse-content %}}
-{{% collapse-content title="Azure Storage" level="h5" %}}
-
-{{% observability_pipelines/destination_settings/datadog_archives_azure_storage %}}
-
-{{% /collapse-content %}}
-
-{{% /tab %}}
-{{% tab "Datadog" %}}
-
-{{% observability_pipelines/destination_settings/datadog %}}
-
-{{% /tab %}}
-{{% tab "Splunk HEC" %}}
-
-{{% observability_pipelines/destination_settings/splunk_hec %}}
-
-{{% /tab %}}
-{{% tab "Sumo Logic" %}}
-
-{{% observability_pipelines/destination_settings/sumo_logic %}}
-
-{{% /tab %}}
-{{% tab "Syslog" %}}
-
-{{% observability_pipelines/destination_settings/syslog %}}
-
-{{% /tab %}}
-{{% tab "Chronicle" %}}
-
-{{% observability_pipelines/destination_settings/chronicle %}}
-
-{{% /tab %}}
-{{% tab "Elasticsearch" %}}
-
-{{% observability_pipelines/destination_settings/elasticsearch %}}
-
-{{% /tab %}}
-{{% tab "OpenSearch" %}}
-
-{{% observability_pipelines/destination_settings/opensearch %}}
-
-{{% /tab %}}
 {{% tab "Amazon OpenSearch" %}}
 
-{{% observability_pipelines/destination_settings/amazon_opensearch %}}
-
-{{% /tab %}}
-{{% tab "New Relic" %}}
-
-{{% observability_pipelines/destination_settings/new_relic %}}
+{{% observability_pipelines/destination_env_vars/amazon_opensearch %}}
 
 {{% /tab %}}
 {{% tab "Amazon Security Lake" %}}
 
-{{% observability_pipelines/destination_settings/amazon_security_lake %}}
+{{% observability_pipelines/destination_env_vars/amazon_security_lake %}}
+
+{{% /tab %}}
+{{% tab "Chronicle" %}}
+
+{{% observability_pipelines/destination_env_vars/chronicle %}}
+
+{{% /tab %}}
+{{% tab "Datadog" %}}
+
+{{% observability_pipelines/destination_env_vars/datadog %}}
+
+{{% /tab %}}
+{{% tab "Datadog Archives" %}}
+
+{{% collapse-content title="Amazon S3" level="h5" %}}
+
+{{% observability_pipelines/destination_env_vars/datadog_archives_amazon_s3 %}}
+
+{{% /collapse-content %}}
+{{% collapse-content title="Google Cloud Storage" level="h5" %}}
+
+{{% observability_pipelines/destination_env_vars/datadog_archives_google_cloud_storage %}}
+
+{{% /collapse-content %}}
+{{% collapse-content title="Azure Storage" level="h5" %}}
+
+{{% observability_pipelines/destination_env_vars/datadog_archives_azure_storage %}}
+
+{{% /collapse-content %}}
+
+{{% /tab %}}
+{{% tab "Elasticsearch" %}}
+
+{{% observability_pipelines/destination_env_vars/elasticsearch %}}
 
 {{% /tab %}}
 {{% tab "Microsoft Sentinel" %}}
 
-{{% observability_pipelines/destination_settings/microsoft_sentinel %}}
+{{% observability_pipelines/destination_env_vars/microsoft_sentinel %}}
+
+{{% /tab %}}
+{{% tab "New Relic" %}}
+
+{{% observability_pipelines/destination_env_vars/new_relic %}}
+
+{{% /tab %}}
+{{% tab "OpenSearch" %}}
+
+{{% observability_pipelines/destination_env_vars/opensearch %}}
 
 {{% /tab %}}
 {{% tab "SentinelOne" %}}
 
-{{% observability_pipelines/destination_settings/sentinelone %}}
+{{% observability_pipelines/destination_env_vars/sentinelone %}}
+
+{{% /tab %}}
+{{% tab "Splunk HEC" %}}
+
+{{% observability_pipelines/destination_env_vars/splunk_hec %}}
+
+{{% /tab %}}
+{{% tab "Sumo Logic" %}}
+
+{{% observability_pipelines/destination_env_vars/sumo_logic %}}
+
+{{% /tab %}}
+{{% tab "Syslog" %}}
+
+{{% observability_pipelines/destination_env_vars/syslog %}}
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -272,7 +268,29 @@ Follow the instructions for the cloud provider you are using to archive your log
 1. Enter the HTTP/S server address, such as `0.0.0.0:9997`. The Observability Pipelines Worker listens to this socket address for your HTTP client logs.
 1. Provide the environment variables for each of your selected destinations. See the [prerequisites](#prerequisites) for more information.
 {{< tabs >}}
+{{% tab "Amazon OpenSearch" %}}
+
+{{% observability_pipelines/destination_env_vars/amazon_opensearch %}}
+
+{{% /tab %}}
+{{% tab "Amazon Security Lake" %}}
+
+{{% observability_pipelines/destination_env_vars/amazon_security_lake %}}
+
+{{% /tab %}}
+{{% tab "Chronicle" %}}
+
+{{% observability_pipelines/destination_env_vars/chronicle %}}
+
+{{% /tab %}}
+{{% tab "Datadog" %}}
+
+{{% observability_pipelines/destination_env_vars/datadog %}}
+
+{{% /tab %}}
 {{% tab "Datadog Archives" %}}
+
+For the Datadog Archives destination, follow the instructions for the cloud provider you are using to archive your logs.
 
 {{% collapse-content title="Amazon S3" level="h5" %}}
 
@@ -291,9 +309,29 @@ Follow the instructions for the cloud provider you are using to archive your log
 {{% /collapse-content %}}
 
 {{% /tab %}}
-{{% tab "Datadog" %}}
+{{% tab "Elasticsearch" %}}
 
-{{% observability_pipelines/destination_env_vars/datadog %}}
+{{% observability_pipelines/destination_env_vars/elasticsearch %}}
+
+{{% /tab %}}
+{{% tab "Microsoft Sentinel" %}}
+
+{{% observability_pipelines/destination_env_vars/microsoft_sentinel %}}
+
+{{% /tab %}}
+{{% tab "New Relic" %}}
+
+{{% observability_pipelines/destination_env_vars/new_relic %}}
+
+{{% /tab %}}
+{{% tab "OpenSearch" %}}
+
+{{% observability_pipelines/destination_env_vars/opensearch %}}
+
+{{% /tab %}}
+{{% tab "SentinelOne" %}}
+
+{{% observability_pipelines/destination_env_vars/sentinelone %}}
 
 {{% /tab %}}
 {{% tab "Splunk HEC" %}}
@@ -309,46 +347,6 @@ Follow the instructions for the cloud provider you are using to archive your log
 {{% tab "Syslog" %}}
 
 {{% observability_pipelines/destination_env_vars/syslog %}}
-
-{{% /tab %}}
-{{% tab "Chronicle" %}}
-
-{{% observability_pipelines/destination_env_vars/chronicle %}}
-
-{{% /tab %}}
-{{% tab "Elasticsearch" %}}
-
-{{% observability_pipelines/destination_env_vars/elasticsearch %}}
-
-{{% /tab %}}
-{{% tab "OpenSearch" %}}
-
-{{% observability_pipelines/destination_env_vars/opensearch %}}
-
-{{% /tab %}}
-{{% tab "Amazon OpenSearch" %}}
-
-{{% observability_pipelines/destination_env_vars/amazon_opensearch %}}
-
-{{% /tab %}}
-{{% tab "New Relic" %}}
-
-{{% observability_pipelines/destination_env_vars/new_relic %}}
-
-{{% /tab %}}
-{{% tab "Amazon Security Lake" %}}
-
-{{% observability_pipelines/destination_env_vars/amazon_security_lake %}}
-
-{{% /tab %}}
-{{% tab "Microsoft Sentinel" %}}
-
-{{% observability_pipelines/destination_env_vars/microsoft_sentinel %}}
-
-{{% /tab %}}
-{{% tab "SentinelOne" %}}
-
-{{% observability_pipelines/destination_env_vars/sentinelone %}}
 
 {{% /tab %}}
 {{< /tabs >}}
