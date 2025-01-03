@@ -19,7 +19,7 @@ jobs:
       - uses: actions/setup-python@v5.1.0
         with:
           python-version: '3.11'
-      - run: pip install requests semver defusedxml
+      - run: pip install requests
 
       - name: Find latest synthetic-worker version
         id: write-synthetics-worker-version
@@ -37,7 +37,7 @@ jobs:
         run: |-
           git config user.name documentation-ci
           git config user.email documentation-ci@datadoghq.com
-          git add ./data/synthetics_worker_versions.json
+          git add .
           git commit -m "(Automated) Bump synthetics-worker version"
           git push -f origin HEAD:refs/heads/synthetics-worker/versions
       
