@@ -41590,7 +41590,8 @@ paths:
         name: allow_self_lockout
         required: false
         schema:
-          type: string
+          default: false
+          type: boolean
       requestBody:
         content:
           application/json:
