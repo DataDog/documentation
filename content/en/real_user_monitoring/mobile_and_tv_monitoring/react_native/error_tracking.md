@@ -95,12 +95,7 @@ See the [RUM Debug Symbols][16] page to view all uploaded symbols.
 
 ## Limitations
 
-{{< site-region region="us,us3,us5,eu,gov" >}}
-Source maps, mapping files, and dSYM files are limited to **500** MB each.
-{{< /site-region >}}
-{{< site-region region="ap1" >}}
-Source maps, mapping files, and dSYM files are limited to **500** MB each.
-{{< /site-region >}}
+Source maps and mapping files are limited in size to **500 MB** each, while dSYM files can go up to **2 GB** each.
 
 To compute the size of your source maps and bundle, run the following command:
 

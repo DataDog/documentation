@@ -93,7 +93,7 @@ Use the following guides to see how you can upload mapping files (Android) or dS
 
 ### File sizing
 
-Individual debug symbols (mapping files and dSYMs) are limited to 500 MB each.
+Mapping files are limited in size to **500 MB** each, while dSYM files can go up to **2 GB** each.
 
 ### Collection
 

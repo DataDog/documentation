@@ -223,12 +223,7 @@ tasks["minify${variant}WithR8"].finalizedBy { tasks["uploadMapping${variant}"] }
 ## Limitations
 
 ### File sizing
-{{< site-region region="us,us3,us5,eu,gov" >}}
-Mapping files are limited to **500** MB. If your project has a mapping file larger than this, use one of the following options to reduce the file size:
-{{< /site-region >}}
-{{< site-region region="ap1" >}}
-Mapping files are limited to **50** MB. If your project has a mapping file larger than this, use one of the following options to reduce the file size:
-{{< /site-region >}}
+Mapping files are limited in size to **500 MB** each. If your project has a mapping file larger than this, use one of the following options to reduce the file size:
 
 - Set the `mappingFileTrimIndents` option to `true`. This reduces your file size by 5%, on average.
 - Set a map of `mappingFilePackagesAliases`: This replaces package names with shorter aliases. **Note**: Datadog's stacktrace uses the same alias instead of the original package name, so it's better to use this option for third party dependencies.
