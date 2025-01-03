@@ -21,10 +21,7 @@ The following configuration options behave consistently across the latest versio
 `DD_TRACE_<INTEGRATION>_ENABLED`
 : **Default**: `true` <br>
 **Supported Input**: Boolean <br>
-**Caveats**:<br>
-  - Not supported in Go
-  - [Some Java integrations are disabled by default][2].<br/>
-
+**Caveats**: Not supported in Go; [Some Java integrations are disabled by default][2].<br/>
 **Description**: Enables or disables instrumentation for the specified `<INTEGRATION>`. The integration name must be in uppercase (for example, `DD_TRACE_KAFKA_ENABLED=true`)
 
 `DD_TRACE_RATE_LIMIT`
@@ -71,11 +68,8 @@ The following configuration options behave consistently across the latest versio
 `DD_VERSION`
 : **Default**: `null`<br>
 **Supported Input**: A string representing an application version<br>
-**Caveats**:<br/>
-  - Node.js automatically sets the version number from package.json
-  - [Inferred services][3] do not set version tags<br/>
-
-**Description**: Adds a `version` tag to all spans
+**Caveats**: Node.js defaults to the version number from package.json<br/>
+**Description**: Adds a `version` tag to all spans, except for [Inferred services][3]
 
 `DD_SERVICE`
 : **Default**: `null`, the SDK tries to automatically determine a service name<br>
@@ -104,10 +98,7 @@ The following configuration options behave consistently across the latest versio
 `DD_TRACE_HTTP_CLIENT_TAG_QUERY_STRING`
 : **Default**: `true` <br>
 **Supported Input**: Boolean <br>
-**Caveats**:<br>
-  - Not supported in Node.js
-  - Disabled by default in Go<br/>
-
+**Caveats**: Not supported in Node.js; Disabled by default in Go<br/>
 **Description**: Enables or disables the inclusion of the query string in the `http.url` span tag value for automatically collected HTTP spans.
 
 `DD_TRACE_CLIENT_IP_HEADER`
