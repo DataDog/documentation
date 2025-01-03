@@ -47,7 +47,7 @@ Name Dataset
 : A descriptive name to help users understand what data is contained in the dataset. 
 
 Select data to be included in this Dataset
-: The boundary definition that describes which data to restrict to a specific set of users. Boundaries are query statements with limitations that allow an access manager to define the scope of sensitive data to be protected. The supported telemetry types are custom metrics, RUM, APM traces, and logs.
+: The boundary definition that describes which data to restrict to a specific set of users. Boundaries are query statements with limitations that allow an access manager to define the scope of sensitive data to be protected. The supported telemetry types are custom metrics, RUM, APM traces, logs and CI Visibility pipelines.
 
 Grant access
 : Select one or more teams or roles that may access the content bound in the Restricted Dataset. Any users who are not members of these groups are blocked from accessing this data.
