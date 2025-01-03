@@ -16511,6 +16511,9 @@ components:
         params:
           description: The parameters of the step.
           type: object
+        public_id:
+          description: The public ID of the step.
+          type: string
         timeout:
           description: The time before declaring a step failed.
           format: int64
