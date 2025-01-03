@@ -1,1 +1,1 @@
-REUSE INSTRUCTIONS
+Select your SentinelOne logs environment in the dropdown menu.

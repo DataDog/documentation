@@ -1,1 +1,4 @@
-REUSE INSTRUCTIONS
+- Data collection endpoint (DCE)
+	- Stored as the environment variable: `DD_OP_DESTINATION_MICROSOFT_SENTINEL_DCE_URI`
+- Client secret
+	- Stored as the environment variable: `DD_OP_DESTINATION_MICROSOFT_SENTINEL_CLIENT_SECRET`
