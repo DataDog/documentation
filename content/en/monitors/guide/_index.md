@@ -46,6 +46,7 @@ cascade:
     {{< nextlink href="monitors/guide/github_gating" >}}Gating your GitHub Actions Deployments with Datadog Monitors{{< /nextlink >}}
     {{< nextlink href="monitors/guide/monitoring-available-disk-space" >}}Monitoring Available Disk Space{{< /nextlink >}}
     {{< nextlink href="monitors/guide/on_missing_data" >}}Migrating to On Missing Data Configuration{{< /nextlink >}}
+    {{< nextlink href="monitors/guide/composite_use_cases" >}}Composite monitor use cases{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Querying:" >}}

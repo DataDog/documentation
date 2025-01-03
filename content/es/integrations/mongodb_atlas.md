@@ -48,9 +48,9 @@ public_title: MongoDB Atlas
 short_description: Haz un seguimiento del rendimiento de lectura/escritura, de las
   métricas de búsqueda vectorial de Atlas y mucho más.
 supported_os:
-- Linux
-- Windows
-- macOS
+- linux
+- windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:

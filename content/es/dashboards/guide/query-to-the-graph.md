@@ -21,20 +21,20 @@ Esto se debe a que esta métrica es reportada por diferentes hosts, y también a
 
 Así, esta métrica se ve con diferentes combinaciones de etiquetas `{host, dispositivo}`.
 
-Para cada fuente (definida por un host y un conjunto de etiquetas), los datos se almacenan por separado.
-En este ejemplo, considera que `host:moby` tiene 5 dispositivos. Por consiguiente, Datadog almacena 5 series temporales (todos los puntos de datos enviados a lo largo del tiempo para una fuente) para:
+Para cada fuente (definida por un host y un conjunto de etiquetas (tags)), los datos se almacenan por separado.
+En este ejemplo, considera que `host:bubs` tiene 5 dispositivos. Así, Datadog almacena 5 series temporales (todos los puntos de datos enviados a lo largo del tiempo para una fuente) para:
 
-* `{host:moby, device:tmpfs}`
-* `{host:moby, device:cgroup_root}`
-* `{host:moby, device:/dev/vda1}`
-* `{host:moby, device:overlay}`
-* `{host:moby, device:shm}`
+* `{host:bubs, device:tmpfs}`
+* `{host:bubs, device:cgroup_root}`
+* `{host:bubs, device:/dev/vda1}`
+* `{host:bubs, device:overlay}`
+* `{host:bubs, device:shm}`
 
 A continuación, considera los pasos sucesivos seguidos por el backend para la consulta presentada anteriormente.
 
 ## Encontrar las series temporales necesarias para la consulta
 
-En esta consulta, solo se han pedido datos asociados a `host:moby`. Por lo tanto, el primer paso para el backend de Datadog es escanear todas las fuentes (en este caso, todas las combinaciones de `{host, device}` con las que se envía la métrica `system.disk.total` ) y retener solo las correspondientes al contexto de la consulta.
+En esta consulta, solo se han pedido datos asociados a `host:bubs`. Así pues, el primer paso para el backend de Datadog es escanear todas las fuentes (en este caso, todas las combinaciones de `{host, device}` con las que se envía la métrica `system.disk.total` ) y retener solo las correspondientes al contexto de la consulta.
 
 Como habrás adivinado, el backend encuentra cinco fuentes coincidentes (ve el párrafo anterior).
 
@@ -46,8 +46,8 @@ La idea es agregar los datos desde estas fuentes para ofrecerte una métrica que
 
 [Más información sobre series temporales y cardinalidad de etiquetas][4]
 
-****Parameter involved: scope** (Parámetro implicado: contexto)
-Puedes utilizar más de una etiqueta, como `{host:moby, device:udev}`, si deseas obtener datos que respondan a ambas etiquetas.
+**Parámetro implicado: contexto**
+Puedes utilizar más de una etiqueta, como `{host:bubs, device:udev}`, si deseas obtener los datos correspondientes a ambas etiquetas.
 
 ## Proceder a la agregación temporal
 
@@ -67,7 +67,7 @@ Por ejemplo, en una vista de un día con la visualización "líneas", hay un pun
 
 ### ¿Cómo?
 
-Por defecto, el backend Datadog calcula el agregado rollup promediando todos los valores reales, lo que tiende a suavizar los gráficos a medida que se aleja el zoom. [Más información sobre por qué al alejar un marco temporal también se suavizan los gráficos][6].
+Por defecto, el backend de Datadog calcula el agregado rollup promediando todos los valores reales, lo que tiende a suavizar los gráficos a medida que se aleja el zoom. [Más información sobre por qué al alejar un marco temporal también se suavizan los gráficos][6].
 La agregación de datos es necesaria tanto si se dispone de 1 como de 1000 fuentes, siempre que se observe una ventana temporal amplia. Lo que generalmente se ve en el gráfico no son los valores reales presentados, sino agregados locales.
 
 {{< img src="dashboards/faq/metrics_graph_3.png" alt="metrics_graph_3" style="width:75%;">}}
@@ -94,7 +94,7 @@ En este ejemplo, para cada minuto, Datadog calcula la media de todas las fuentes
 
 El valor obtenido (25,74 GB) es la media de los valores comunicados por todas las fuentes (ve la imagen anterior).
 
-**Nota**: Si solo hay una fuente (por ejemplo, si has elegido el contexto `{host:moby, device:/dev/disk}` para la consulta), el uso de `suma`/`prom.`/`máx.`/`mín.` no tiene ningún efecto, ya que no es necesario realizar ninguna agregación espacial. Ve FAQ en [switching between the sum/min/max/avg aggregators (cambiar entre los agregadores suma/mín./máx./prom.)][8].
+**Nota**: Si solo hay una fuente (por ejemplo, si has elegido el contexto `{host:bubs, device:/dev/disk}` para la consulta), el uso de `sum`/`avg`/`max`/`min` no tiene ningún efecto, ya que no es necesario realizar ninguna agregación espacial. Consulta FAQ sobre [cambiar entre los agregadores suma/min/max/avg][8].
 
 **Parameter involved: space aggregator** (Parámetro implicado: aggregator de espacio)
 
@@ -158,7 +158,7 @@ Sintaxis: en lugar de añadir un rollup, puedes utilizar `.as_count()` o `.as_ra
 Para más información, ve [Visualize StatsD metrics with Counts Graphing (Visualiza métricas StatsD Crear gráficas Counts)][9].
 Documentación sobre [StatsD/DogStatsD][10].
 
-[1]: /es/dashboards/#timeboards
+[1]: /es/dashboards/#get-started
 [2]: /es/dashboards/#screenboards
 [3]: /es/agent/
 [4]: /es/metrics/custom_metrics/

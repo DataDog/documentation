@@ -110,7 +110,6 @@ To see relevant changes within the timeline and as overlays on your dashboard, e
 4. Click the change indicator or overlay to view detailed information and take remediation actions.
 
 ## Tracked changes
-
 Change Tracking follows these types of changes across your infrastructure:
 
 | Change Type | Tracking Requirements |
@@ -125,6 +124,14 @@ Change Tracking follows these types of changes across your infrastructure:
 | PostgreSQL Database Settings Change | [Database Monitoring (DBM)][8], [Correlate Database Monitoring and Traces][10]
 |  Kafka Schema Updates | [Data Streams Monitoring (DSM)][9]
 | Manual Kubernetes Deployment Scale Events | Kubernetes Audit Logging
+
+### Optional enrichment for feature flag changes
+Change Tracking offers an optional way to enhance visibility into feature flag changes by automatically detecting affected services when tracing is set up for the feature flag client. This enhancement enables faster and more precise root cause analysis, especially when feature flag changes impact multiple services.
+
+#### To enable auto-enrichment of feature flag changes:
+1. Add tracing around your feature flag client code.
+2. Name the trace operation **experiments.IsEnabled**.
+3. Add a tag called **experiment_id**. Set its value to match the ID of the relevant feature flag.
 
 ## Further reading
 

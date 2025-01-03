@@ -32,32 +32,43 @@ SSL tests can run from both [managed](#select-locations) and [private locations]
 
 ## Configuration
 
-After choosing to create a `SSL` test, define your test's request.
+You may create a test using one of the following options:
 
-### Define request
-
-1. Specify the **Host** and the **Port** to run your test on. The default SSL port is `443`.
-2. Add **Advanced Options** (optional) to your test:
-   * **Accept self-signed certificates**: Bypasses any server error related to a self-signed certificate.
-   * **Fail on revoked certificate in stapled OCSP**: Fail the test if the certificate is labeled as revoked by the OCSP stapling.
-   * **Timeout**: Specify the amount of time in seconds before the test times out.
-   * **Server Name**: Specifies on which server you want to initiate the TLS handshake, allowing the server to present one of multiple possible certificates on the same IP address and TCP port number. By default, the parameter is filled by the **Host** value.
-   * **Client certificate**: Authenticate through mTLS by uploading your client certificate (`.crt`) and the associated private key (`.key`) in `PEM` format. 
+- **Create a test from a template**:
    
-   You can use the `openssl` library to convert your certificates. For example, convert a `PKCS12` certificate to `PEM` formatted private keys and certificates.
+     1. Hover over one of the pre-populated templates and click **View Template**. This opens a side panel displaying pre-populated configuration information, including: Test Details, Request Details, Assertions, Alert Conditions, and Monitor Settings.
+     2. Click **+Create Test** to open the **Define Request** page, where you can review and edit the pre-populated configuration options. The fields presented are identical to those available when creating a test from scratch.
+     3. Click **Save Details** to submit your API test.<br /><br>
+        {{< img src="getting_started/synthetics/synthetics_templates_api_video.mp4" alt="Video of Synthetics API test landing page with templates" video="true" >}}
 
-   ```
-   openssl pkcs12 -in <CERT>.p12 -out <CERT_KEY>.key -nodes -nocerts
-   openssl pkcs12 -in <CERT>.p12 -out <CERT>.cert -nokeys
-   ```
+- **Build a test from scratch**:
 
-3. **Name** your SSL test.
+   1. To build a test from scratch, click the **+ Start from scratch** template, then select the SSL request type.
+   1. Specify the **Host** and the **Port** to run your test on. The default SSL port is `443`.
+   1. Add **Advanced Options** (optional) to your test:
+      * **Accept self-signed certificates**: Bypasses any server error related to a self-signed certificate.
+      * **Fail on revoked certificate in stapled OCSP**: Fail the test if the certificate is labeled as revoked by the OCSP stapling.
+      * **Timeout**: Specify the amount of time in seconds before the test times out.
+      * **Server Name**: Specifies on which server you want to initiate the TLS handshake, allowing the server to present one of multiple possible certificates on the same IP address and TCP port number. By default, the parameter is filled by the **Host** value.
+      * **Client certificate**: Authenticate through mTLS by uploading your client certificate (`.crt`) and the associated private key (`.key`) in `PEM` format. 
+   
+      You can use the `openssl` library to convert your certificates. For example, convert a `PKCS12` certificate to `PEM` formatted private keys and certificates.
 
-4. Add `env` **Tags** as well as any other tag to your SSL test. You can then use these tags to filter through your Synthetic tests on the [Synthetic Monitoring & Continuous Testing page][3].
+      ```
+      openssl pkcs12 -in <CERT>.p12 -out <CERT_KEY>.key -nodes -nocerts
+      openssl pkcs12 -in <CERT>.p12 -out <CERT>.cert -nokeys
+      ```
 
-   {{< img src="synthetics/api_tests/ssl_test_config.png" alt="Define SSL request" style="width:90%;" >}}
+   1. **Name** your SSL test.
 
-Click **Test URL** to try out the request configuration. A response preview is displayed on the right side of your screen.
+   1. Add Environment **Tags** as well as any other tag to your SSL test. You can then use these tags to filter through your Synthetic tests on the [Synthetic Monitoring & Continuous Testing page][3].
+   1. Click **Test Certificate** to try out the request configuration. A response preview is displayed on the right side of your screen.<br /><br>
+
+      {{< img src="synthetics/api_tests/synthetics_ssl_test_cert.png" alt="Define SSL request" style="width:90%;" >}}
+
+   1. Click **Create Test** to submit your API test.
+
+   
 
 ### Snippets
 

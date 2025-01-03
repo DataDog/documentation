@@ -76,7 +76,7 @@ tile:
 
 AWS Fargate 上にデプロイされている Amazon EKS は、マネージド型の Kubernetes サービスで、標準の Kubernetes 環境で展開とメンテナンスの特定の側面を自動化します。Kubernetes ノードは AWS Fargate によって管理され、ユーザーから分離されるように抽象化されています。
 
-**注**: Network Performance Monitoring (NPM) は、EKS Fargate ではサポートされていません。
+**注**: Cloud Network Monitoring (CNM) は、EKS Fargate ではサポートされていません。
 
 ## セットアップ
 
@@ -378,20 +378,30 @@ Agent やそのコンテナリソースをさらに構成するには、`Datadog
 
 ###### セットアップ
 
-1. Cluster Agent と Admission Controller を有効にして、Datadog Agent をインストールします。
+1. 以下の設定を含む `datadog-values.yaml` というファイルを作成します。
 
    ```sh
-   helm install datadog datadog/datadog -n datadog-agent \
-       --set datadog.clusterName=cluster-name \
-       --set agents.enabled=false \
-       --set datadog.apiKeyExistingSecret=datadog-secret \
-       --set clusterAgent.tokenExistingSecret=datadog-secret \
-       --set clusterAgent.admissionController.agentSidecarInjection.enabled=true \
-       --set clusterAgent.admissionController.agentSidecarInjection.provider=fargate
+   datadog:
+     clusterName: <CLUSTER_NAME>
+     apiKeyExistingSecret: datadog-secret
+   agents:
+     enabled: false
+   clusterAgent:
+     tokenExistingSecret: datadog-secret
+     admissionController:
+       agentSidecarInjection:
+         enabled: true
+         provider: fargate
    ```
    **注**: Fargate のみのクラスターでは、`agents.enabled=false` を使用します。混合クラスターでは、EC2 インスタンスのワークロードを監視する DaemonSet を作成するために、`agents.enabled=true` を設定します。
 
-2. Cluster Agent が実行状態に達し、Admission Controller の変更を加える Webhook を登録した後、`agent.datadoghq.com/sidecar:fargate` というラベルを持つどのポッドにも Agent のサイドカーが自動的に注入されます。
+2. チャートをデプロイします。
+
+   ```bash
+   helm install datadog-agent -f datadog-values.yaml datadog/datadog
+   ```
+
+3. Cluster Agent が実行状態に達し、Admission Controller の変更を加える Webhook を登録した後、`agent.datadoghq.com/sidecar:fargate` というラベルを持つどのポッドにも Agent のサイドカーが自動的に注入されます。
    **Admission Controller はすでに作成されたポッドを変更しません**。
 
 **結果例**

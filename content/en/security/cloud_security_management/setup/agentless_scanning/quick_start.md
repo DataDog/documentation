@@ -14,7 +14,9 @@ further_reading:
 
 Designed for new users, the quick start workflow offers an efficient setup process for Cloud Security Management, enabling immediate monitoring of AWS resources. It uses AWS CloudFormation to automate the configuration, and includes the Cloud Security Management features: Misconfigurations, Identity Risks (CIEM), and Vulnerability Management.
 
-<div class="alert alert-info">This article provides instructions for the new user quick start workflow that uses AWS CloudFormation to set up Agentless Scanning. For existing users who want to add a new AWS account or enable Agentless Scanning on an existing integrated AWS account, see the instructions for <a href="/security/cloud_security_management/setup/agentless_scanning/terraform">Terraform</a> or <a href="/security/cloud_security_management/setup/agentless_scanning/cloudformation">AWS CloudFormation</a>.</div>
+<div class="alert alert-info">This article provides instructions for the new user quick start workflow that uses AWS CloudFormation to set up Agentless Scanning.
+For existing users who want to add a new AWS account or enable Agentless Scanning on an existing integrated AWS account, see the instructions for
+<a href="/security/cloud_security_management/setup/agentless_scanning/terraform">Terraform</a> or <a href="/security/cloud_security_management/setup/agentless_scanning/cloudformation">AWS CloudFormation</a>.</div>
 
 <div class="alert alert-warning">Running Agentless scanners incurs additional costs. To optimize these costs while still ensuring reliable 12-hour scans, Datadog recommends setting up <a href="/security/cloud_security_management/setup/agentless_scanning/terraform/">Agentless Scanning with Terraform</a> as the default template.</div>
 
