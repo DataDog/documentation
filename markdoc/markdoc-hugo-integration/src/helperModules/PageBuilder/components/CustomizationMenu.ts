@@ -1,3 +1,4 @@
+import { s } from 'markdoc-static-compiler/dist/src/schema';
 import { ResolvedPageFilters, ResolvedPageFilter } from '../../../schemas/pageFilters';
 
 /**
@@ -20,23 +21,71 @@ export const buildCustomizationMenuUi = (
   return menuHtml;
 };
 
+/*
+<div id="cdoc-selector">
+<div class="cdoc-pills-container">
+  <p 
+    id="cdoc-color-label" 
+    class="cdoc-filter-label"
+  >Color</p>
+<button
+      class="cdoc-filter__option cdoc-pill selected" 
+      data-filter-id="color" 
+      data-option-id="red"
+      aria-selected=""
+      tabIndex="0"
+    >Red</button>
+<button
+      class="cdoc-filter__option cdoc-pill" 
+      data-filter-id="color" 
+      data-option-id="yellow"
+      aria-selected=""
+      tabIndex="0"
+    >Yellow</button>
+<button
+      class="cdoc-filter__option cdoc-pill" 
+      data-filter-id="color" 
+      data-option-id="blue"
+      aria-selected="selected"
+      tabIndex="0"
+    >Blue</button></div>
+</div>
+</div>
+*/
+
 function buildFilterSelectorPills(p: { filter: ResolvedPageFilter }) {
   const currentValue = p.filter.currentValue || p.filter.defaultValue;
-  let selectorHtml = '<div class="cdoc-filter__container">';
+
+  // Open the top-level container
+  let selectorHtml = '<div class="cdoc-pills-container">';
+
   // Render the label
-  selectorHtml += `<div class="cdoc-filter__label">${p.filter.displayName}</div>`;
-  // Render each option pill
+  selectorHtml += `<p 
+    id="cdoc-${p.filter.id}-pills-label" 
+    class="cdoc-filter-label"
+  >${p.filter.displayName}</p>`;
+
+  // Render each option
   p.filter.options.forEach((option) => {
-    const selected = option.id === currentValue ? 'selected' : '';
-    selectorHtml += `<div class="cdoc-filter__option cdoc-pill ${selected}" data-filter-id="${p.filter.id}" data-option-id="${option.id}">${option.displayName}</div>`;
+    const isSelected = option.id === currentValue;
+    selectorHtml += `<button
+      class="cdoc-filter__option cdoc-pill ${isSelected ? 'selected' : ''}" 
+      data-filter-id="${p.filter.id}" 
+      data-option-id="${option.id}"
+      aria-selected="${isSelected}"
+      tabIndex="0"
+    >${option.displayName}</button>`;
   });
+
+  // Close the top-level container
   selectorHtml += '</div>';
+
   return selectorHtml;
 }
 
 function buildFilterSelectorDropdowns(p: { filter: ResolvedPageFilter }) {
   const currentValue = p.filter.currentValue || p.filter.defaultValue;
-  const filterLabelElementId = `cdoc-${p.filter.id}-label`;
+  const filterLabelElementId = `cdoc-${p.filter.id}-dropdown-label`;
 
   // Open the top-level container
   let selectorHtml = '<div class="cdoc-dropdown-container">';
@@ -76,14 +125,14 @@ function buildFilterSelectorDropdowns(p: { filter: ResolvedPageFilter }) {
 
   // Render each option
   p.filter.options.forEach((option) => {
-    const selected = option.id === currentValue ? 'selected' : '';
+    const isSelected = option.id === currentValue;
     selectorHtml += `<a 
       class="cdoc-dropdown-option 
-      cdoc-filter__option ${selected}" 
+      cdoc-filter__option ${isSelected ? 'selected' : ''}" 
       data-filter-id="${p.filter.id}" 
       data-option-id="${option.id}"
       role="option" 
-      aria-selected="${selected}"
+      aria-selected="${isSelected}"
       tabIndex="0"
     >${option.displayName}</a>`;
   });
