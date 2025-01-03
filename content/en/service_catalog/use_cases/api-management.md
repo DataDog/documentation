@@ -1,8 +1,8 @@
 ---
 title: Simplify API Management
 aliases:
-  - /tracing/service_catalog/guides/api-management
-  - /service_catalog/guides/api-management
+  - /tracing/service_catalog/guides/api_management
+  - /service_catalog/guides/api_management
 further_reading:
   - link: "/tracing/service_catalog/"
     tag: "Documentation"

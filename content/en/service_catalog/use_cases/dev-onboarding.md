@@ -1,12 +1,15 @@
 ---
 title: Accelerate Developer Onboarding
 aliases:
-  - /tracing/service_catalog/guides/dev-onboarding
-  - /service_catalog/guides/dev-onboarding
+  - /tracing/service_catalog/guides/dev_onboarding
+  - /service_catalog/guides/dev_onboarding
 further_reading:
-  - link: "/security/application_security/"
+  - link: "/service_catalog/scorecards/"
     tag: "Documentation"
-    text: "Datadog Application Security Management"
+    text: "Datadog Scorecards"
+  - link: "/service_catalog/software_templates/"
+    tag: "Documentation"
+    text: "Datadog Scorecards"
 ---
 
 Datadog’s Service Catalog helps new developers quickly find what they need—-docs, runbooks, [scorecards][1] and [templates][2]--so they can commit their first PR faster. By centralizing resources and automating key tasks, organizations can improve time-to-first-commit, reduce time spent locating relevant information and resources, and enhance overall developer experience.

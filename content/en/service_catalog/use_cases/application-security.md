@@ -1,8 +1,8 @@
 ---
 title: Application Security Management
 aliases:
-  - /tracing/service_catalog/guides/appsec-management
-  - /service_catalog/guides/appsec-management
+  - /tracing/service_catalog/guides/appsec_management
+  - /service_catalog/guides/appsec_management
 further_reading:
   - link: "/security/application_security/"
     tag: "Documentation"

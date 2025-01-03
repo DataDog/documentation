@@ -1,8 +1,8 @@
 ---
 title: Drive Cloud Cost Accountability and Optimization
 aliases:
-  - /tracing/service_catalog/guides/cloud-cost-management
-  - /service_catalog/guides/cloud-cost-management
+  - /tracing/service_catalog/guides/cloud_cost_management
+  - /service_catalog/guides/cloud_cost_management
 further_reading:
   - link: "/tracing/service_catalog/"
     tag: "Documentation"
