@@ -35,6 +35,8 @@ For instructions on how to merge redriven Step Functions and Lambda traces, see 
 ### Troubleshooting missing redrive traces
 If a redrive is triggered within one minute of the original execution's failure, its corresponding trace may not appear.
 
+Also, a redrive may not always share the same sampling decision as the original execution. To ensure that the redriven execution is also sampled, you can reference the `@redrive:true` span tag in a retention query.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
