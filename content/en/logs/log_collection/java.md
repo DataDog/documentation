@@ -122,7 +122,8 @@ Log4j 2 includes a JSON layout.
   <Configuration>
     <Appenders>
       <File name="FILE" fileName="logs/app.log" >
-        <JsonTemplateLayout eventTemplateUri="classpath:MyLayout.json"/>      </File>
+        <JsonTemplateLayout eventTemplateUri="classpath:MyLayout.json"/>      
+      </File>
     </Appenders>
     <Loggers>
       <Root level="INFO">
