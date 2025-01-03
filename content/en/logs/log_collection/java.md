@@ -117,7 +117,7 @@ Log4j 2 includes a JSON layout.
 
 1. Configure an appender using the JSON layout in `log4j2.xml`. See the following example configurations for file and console appender. For a comprehensive description of Log4j plugins, see the [Log4j Plugin reference][1].
 {{% collapse-content title="File appender" level="h4" %}}
-{{< code-block lang="xml" filename="log4j2.xml" collapsible="false" >}}
+{{< code-block lang="xml" filename="log4j2.xml"  >}}
 <?xml version="1.0" encoding="UTF-8"?>
   <Configuration>
     <Appenders>
@@ -134,7 +134,7 @@ Log4j 2 includes a JSON layout.
 {{% /collapse-content %}}
 
 {{% collapse-content title="Console appender" level="h4" %}}
-{{< code-block lang="xml" filename="log4j2.xml" collapsible="false" >}}
+{{< code-block lang="xml" filename="log4j2.xml" >}}
   <?xml version="1.0" encoding="UTF-8"?>
   <Configuration>
     <Appenders>
