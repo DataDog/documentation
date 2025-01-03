@@ -115,47 +115,41 @@ For Log4j, log in JSON format by using the SLF4J module [log4j-over-slf4j][1] co
 
 Log4j 2 includes a JSON layout.
 
-1. Configure an appender using the JSON layout in `log4j2.xml`. See the following example configurations for file and console appender.
+1. Configure an appender using the JSON layout in `log4j2.xml`. See the following example configurations for file and console appender. For a comprehensive description of Log4j plugins, see the [Log4j Plugin reference][1].
+{{% collapse-content title="File appender" level="h4" %}}
+{{< code-block lang="xml" filename="log4j2.xml" collapsible="false" >}}
+<?xml version="1.0" encoding="UTF-8"?>
+  <Configuration>
+    <Appenders>
+      <File name="FILE" fileName="logs/app.log" >
+        <JsonTemplateLayout eventTemplateUri="classpath:MyLayout.json"/>      </File>
+    </Appenders>
+    <Loggers>
+      <Root level="INFO">
+        <AppenderRef ref="FILE"/>
+      </Root>
+    </Loggers>
+  </Configuration>
+{{< /code-block >}}
+{{% /collapse-content %}}
 
-    For a file appender:
-
-    ```xml
-    <?xml version="1.0" encoding="UTF-8"?>
-    <Configuration>
-      <Appenders>
-        <File name="FILE" fileName="logs/app.log" >
-          <JSONLayout compact="true" eventEol="true" properties="true" stacktraceAsString="true" />
-        </File>
-      </Appenders>
-
-      <Loggers>
-        <Root level="INFO">
-          <AppenderRef ref="FILE"/>
-        </Root>
-      </Loggers>
-    </Configuration>
-    ```
-
-    For a console appender:
-
-    ```xml
-    <?xml version="1.0" encoding="UTF-8"?>
-    <Configuration>
-
-        <Appenders>
-            <Console name="console" target="SYSTEM_OUT">
-                <JSONLayout compact="true" eventEol="true" properties="true" stacktraceAsString="true" />
-            </Console>
-        </Appenders>
-
-        <Loggers>
-            <Root level="INFO">
-                <AppenderRef ref="console"/>
-            </Root>
-
-        </Loggers>
-    </Configuration>
-    ```
+{{% collapse-content title="Console appender" level="h4" %}}
+{{< code-block lang="xml" filename="log4j2.xml" collapsible="false" >}}
+  <?xml version="1.0" encoding="UTF-8"?>
+  <Configuration>
+    <Appenders>
+      <Console name="console" target="SYSTEM_OUT">
+        <JsonTemplateLayout eventTemplateUri="classpath:MyLayout.json"/>
+      </Console>
+    </Appenders>
+    <Loggers>
+      <Root level="INFO">
+        <AppenderRef ref="console"/>
+      </Root>
+    </Loggers>
+  </Configuration>
+{{< /code-block >}}
+{{% /collapse-content %}}
 
 2. Add the JSON layout dependencies to your `pom.xml`. For example:
     ```xml
@@ -181,6 +175,7 @@ Log4j 2 includes a JSON layout.
     </dependency>
     ```
 
+[1]: https://logging.apache.org/log4j/2.x/plugin-reference.html
 {{% /tab %}}
 {{% tab "Logback" %}}
 
