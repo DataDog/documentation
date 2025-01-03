@@ -5,6 +5,12 @@ disable_toc: false
 
 Use Observability Pipelines' Amazon Security Lake destination to send logs to Amazon Security Lake.
 
+## Prerequisites
+
+You need to do the following before setting up the Amazon Security Lake destination:
+
+{{% observability_pipelines/prerequisites/amazon_security_lake %}}
+
 ## Setup
 
 Set up the Amazon Security Lake destination and its environment variables when you [set up a pipeline][1]. The information below is configured in the pipelines UI.

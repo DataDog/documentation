@@ -91,6 +91,12 @@ Enter the following information based on your selected logs destinations.
 {{% /tab %}}
 {{% tab "Amazon Security Lake" %}}
 
+##### Prerequisites
+
+{{% observability_pipelines/prerequisites/amazon_security_lake %}}
+
+##### Set up the destination
+
 {{% observability_pipelines/destination_settings/amazon_security_lake %}}
 
 {{% /tab %}}
