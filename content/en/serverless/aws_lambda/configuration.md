@@ -23,7 +23,6 @@ First, [install][1] Datadog Serverless Monitoring to begin collecting metrics, t
 - [Connect telemetry using tags](#connect-telemetry-using-tags)
 - [Collect the request and response payloads](#collect-the-request-and-response-payloads)
 - [Collect traces from non-Lambda resources](#collect-traces-from-non-lambda-resources)
-- [Install Datadog tracer for .NET](#install-datadog-tracer-for-net)
 - [Configure the Datadog tracer](#configure-the-datadog-tracer)
 - [Select sampling rates for ingesting APM spans](#select-sampling-rates-for-ingesting-apm-spans)
 - [Filter or scrub sensitive information from traces](#filter-or-scrub-sensitive-information-from-traces)
