@@ -89,81 +89,85 @@ Enter the following information based on your selected logs destinations.
 {{< tabs >}}
 {{% tab "Amazon OpenSearch" %}}
 
-{{% observability_pipelines/destination_env_vars/amazon_opensearch %}}
+{{% observability_pipelines/destination_settings/amazon_opensearch %}}
 
 {{% /tab %}}
 {{% tab "Amazon Security Lake" %}}
 
-{{% observability_pipelines/destination_env_vars/amazon_security_lake %}}
+{{% observability_pipelines/destination_settings/amazon_security_lake %}}
 
 {{% /tab %}}
 {{% tab "Chronicle" %}}
 
-{{% observability_pipelines/destination_env_vars/chronicle %}}
+{{% observability_pipelines/destination_settings/chronicle %}}
 
 {{% /tab %}}
 {{% tab "Datadog" %}}
 
-{{% observability_pipelines/destination_env_vars/datadog %}}
+{{% observability_pipelines/destination_settings/datadog %}}
 
 {{% /tab %}}
 {{% tab "Datadog Archives" %}}
 
+{{% observability_pipelines/destination_settings/datadog_archives_note %}}
+
+Follow the instructions for the cloud provider you are using to archive your logs.
+
 {{% collapse-content title="Amazon S3" level="h5" %}}
 
-{{% observability_pipelines/destination_env_vars/datadog_archives_amazon_s3 %}}
+{{% observability_pipelines/destination_settings/datadog_archives_amazon_s3 %}}
 
 {{% /collapse-content %}}
 {{% collapse-content title="Google Cloud Storage" level="h5" %}}
 
-{{% observability_pipelines/destination_env_vars/datadog_archives_google_cloud_storage %}}
+{{% observability_pipelines/destination_settings/datadog_archives_google_cloud_storage %}}
 
 {{% /collapse-content %}}
 {{% collapse-content title="Azure Storage" level="h5" %}}
 
-{{% observability_pipelines/destination_env_vars/datadog_archives_azure_storage %}}
+{{% observability_pipelines/destination_settings/datadog_archives_azure_storage %}}
 
 {{% /collapse-content %}}
 
 {{% /tab %}}
 {{% tab "Elasticsearch" %}}
 
-{{% observability_pipelines/destination_env_vars/elasticsearch %}}
+{{% observability_pipelines/destination_settings/elasticsearch %}}
 
 {{% /tab %}}
 {{% tab "Microsoft Sentinel" %}}
 
-{{% observability_pipelines/destination_env_vars/microsoft_sentinel %}}
+{{% observability_pipelines/destination_settings/microsoft_sentinel %}}
 
 {{% /tab %}}
 {{% tab "New Relic" %}}
 
-{{% observability_pipelines/destination_env_vars/new_relic %}}
+{{% observability_pipelines/destination_settings/new_relic %}}
 
 {{% /tab %}}
 {{% tab "OpenSearch" %}}
 
-{{% observability_pipelines/destination_env_vars/opensearch %}}
+{{% observability_pipelines/destination_settings/opensearch %}}
 
 {{% /tab %}}
 {{% tab "SentinelOne" %}}
 
-{{% observability_pipelines/destination_env_vars/sentinelone %}}
+{{% observability_pipelines/destination_settings/sentinelone %}}
 
 {{% /tab %}}
 {{% tab "Splunk HEC" %}}
 
-{{% observability_pipelines/destination_env_vars/splunk_hec %}}
+{{% observability_pipelines/destination_settings/splunk_hec %}}
 
 {{% /tab %}}
 {{% tab "Sumo Logic" %}}
 
-{{% observability_pipelines/destination_env_vars/sumo_logic %}}
+{{% observability_pipelines/destination_settings/sumo_logic %}}
 
 {{% /tab %}}
 {{% tab "Syslog" %}}
 
-{{% observability_pipelines/destination_env_vars/syslog %}}
+{{% observability_pipelines/destination_settings/syslog %}}
 
 {{% /tab %}}
 {{< /tabs >}}
