@@ -5,6 +5,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/diagnose-network-performance-with-snmp-trap-monitoring/"
     tag: "Blog"
     text: "Monitor and diagnose network performance issues with SNMP Traps"
+  - link: "/network_monitoring/devices/troubleshooting"
+    tag: "Documentation"
+    text: "NDM Troubleshooting"
 ---
 
 ## Overview
@@ -54,6 +57,32 @@ Datadog Agent v7.37+ supports listening for SNMP Traps, enabling you to set up [
   {{< img src="network_device_monitoring/snmp/snmp_logs_2.png" alt="Log Explorer showing `source:snmp-traps` with an SNMP Trap log line selected, highlighting the Network Device tag" style="width:90%" >}}
 
 **Note**: Even though SNMP traps are _forwarded as logs_, `logs_enabled` does **not** need to be set to `true`.
+
+### Using the default SNMP Trap port 162
+
+Binding to a port number under 1024 requires elevated permissions To bind to a port number such as the default SNMP Trap port 162, do the following:
+
+1. Grant access to the port using the setcap command:
+
+   ```
+   sudo setcap CAP_NET_BIND_SERVICE=+ep /opt/datadog-agent/bin/agent/agent
+   ```
+
+   **Note**: Re-run this setcap command every time you upgrade the Agent.
+
+2. Verify the setup is correect by running the getcap command:
+
+   ```
+   sudo getcap /opt/datadog-agent/bin/agent/agent
+   ```
+
+   You should see the following output:
+
+   ```
+   /opt/datadog-agent/bin/agent/agent = cap_net_bind_service+ep
+   ```
+
+3. [Restart the Agent][6].
 
 ## Device namespaces
 
@@ -136,11 +165,13 @@ If your MIBs have dependencies, `ddev` fetches them online if they can be found.
 
 If there are errors due to missing dependencies and you have access to the missing MIB files, put the files in a separate folder and use the `--mib-sources <DIR>` parameter so that ddev knows where to find them. Make sure that each filename is the same as the MIB name (for example, `SNMPv2-SMI` and not `snmp_v2_smi.txt`).
 
+## Further Reading
 
-
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /monitors/
 [2]: https://app.datadoghq.com/logs
 [3]: /network_monitoring/devices
 [4]: /developers/integrations/python
 [5]: https://pypi.org/project/pysmi/
+[6]: /agent/configuration/agent-commands/#start-stop-and-restart-the-agent
