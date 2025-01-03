@@ -4,7 +4,36 @@ title: Filter Selector Menu Design
 
 ## Pills menu
 
-TODO
+<div id="cdoc-selector" style="visibility: visible;">
+<div class="cdoc-pills-container">
+  <p 
+    id="cdoc-color-label" 
+    class="cdoc-filter-label"
+  >Color</p>
+<button
+      class="cdoc-filter__option cdoc-pill selected" 
+      data-filter-id="color" 
+      data-option-id="red"
+      aria-selected=""
+      tabIndex="0"
+    >Red</button>
+<button
+      class="cdoc-filter__option cdoc-pill" 
+      data-filter-id="color" 
+      data-option-id="yellow"
+      aria-selected=""
+      tabIndex="0"
+    >Yellow</button>
+<button
+      class="cdoc-filter__option cdoc-pill" 
+      data-filter-id="color" 
+      data-option-id="blue"
+      aria-selected="selected"
+      tabIndex="0"
+    >Blue</button></div>
+</div>
+</div>
+<p></p>
 
 ## Dropdown menu
 
