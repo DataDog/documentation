@@ -3,6 +3,7 @@ title: Accelerate Developer Onboarding
 aliases:
   - /tracing/service_catalog/guides/dev_onboarding
   - /service_catalog/guides/dev_onboarding
+  - /service_catalog/use_cases/dev_onboarding
 further_reading:
   - link: "/service_catalog/scorecards/"
     tag: "Documentation"
