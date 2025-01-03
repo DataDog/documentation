@@ -253,6 +253,8 @@ To set up the destination, follow the instructions for the cloud provider you ar
 {{% /tab %}}
 {{% tab "Datadog Archives" %}}
 
+For the Datadog Archives destination, follow the instructions for the cloud provider you are using to archive your logs.
+
 {{% collapse-content title="Amazon S3" level="h5" %}}
 
 {{% observability_pipelines/destination_env_vars/datadog_archives_amazon_s3 %}}
