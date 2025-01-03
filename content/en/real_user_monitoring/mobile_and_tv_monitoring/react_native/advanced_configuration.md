@@ -25,7 +25,7 @@ If you have not set up the SDK yet, follow the [in-app setup instructions][1] or
 
 Testing apps using `'@datadog/mobile-react-native'` might require completing extra steps, since Native Modules do not exist in testing environments.
 
-Datadog provides mocks for the `'@datadog/mobile-react-native'` package. To use them with [Jest][4], add the following in your Jest setup file:
+Datadog provides mocks for the `'@datadog/mobile-react-native'` package. To use them with [Jest][3], add the following in your Jest setup file:
 
 ```javascript
 jest.mock('@datadog/mobile-react-native', () => {
@@ -57,12 +57,12 @@ You can specify the following parameters in your configuration when initializing
 `clientToken`
 : Required<br/>
 **Type**: String<br/>
-A [Datadog client token][8].
+A [Datadog client token][4].
 
 `env`
 : Required<br/>
 **Type**: String<br/>
-The application's environment, for example: prod, pre-prod, and staging. Follows the [tag syntax requirements][15].
+The application's environment, for example: prod, pre-prod, and staging. Follows the [tag syntax requirements][5].
 
 `applicationId`
 : Required<br/>
@@ -91,28 +91,28 @@ Enables collection of React Native crashes.
 : Optional<br/>
 **Type**: String<br/>
 **Default**: `US1`<br/>
-[The Datadog site parameter of your organization][9].
+[The Datadog site parameter of your organization][6].
 
 `serviceName`
 : Optional<br/>
 **Type**: String<br/>
-The service name for your application. Follows the [tag syntax requirements][15].
+The service name for your application. Follows the [tag syntax requirements][5].
 
 `version`
 : Optional<br/>
 **Type**: String<br/>
-The application's version. For example: 1.2.3, 6c44da20, and 2020.02.13. Follows the [tag syntax requirements][15].
+The application's version. For example: 1.2.3, 6c44da20, and 2020.02.13. Follows the [tag syntax requirements][5].
 
 `versionSuffix`
 : Optional<br/>
 **Type**: String<br/>
-Add a suffix to the reported version of the app. Accepted characters are alphanumerics and `_`, `-`, `:`, `.`, `/`. Other special characters are converted to underscores. A dash (`-`) is automatically added between the version and the suffix. Follows the [tag syntax requirements][15].
+Add a suffix to the reported version of the app. Accepted characters are alphanumerics and `_`, `-`, `:`, `.`, `/`. Other special characters are converted to underscores. A dash (`-`) is automatically added between the version and the suffix. Follows the [tag syntax requirements][5].
 
 `trackFrustrations`
 : Optional<br/>
 **Type**: Boolean<br/>
 **Default**: `true` <br/>
-Enables [automatic collection of user frustrations][11]. Only error taps are supported. Implies `trackInteractions: true`.
+Enables [automatic collection of user frustrations][7]. Only error taps are supported. Implies `trackInteractions: true`.
 
 `nativeCrashReportEnabled`
 : Optional<br/>
@@ -136,7 +136,7 @@ The percentage of sessions to track: `100` for all, `0` for none. Only tracked s
 : Optional<br/>
 **Type**: Number<br/>
 **Default**: `20`<br/>
-The percentage of requests to trace: `100` for all, `0` for none. For more information, see [Connect RUM and Traces][12].
+The percentage of requests to trace: `100` for all, `0` for none. For more information, see [Connect RUM and Traces][8].
 
 `verbosity`
 : Optional<br/>
@@ -160,7 +160,7 @@ Enables native interaction tracking. Set to `true` if you want to track interact
 : Optional<br/>
 **Type**: List<br/>
 **Default**: `[]`<br/>
-List of your backends hosts to enable tracing with. For more information, see [Connect RUM and Traces][12].
+List of your backends hosts to enable tracing with. For more information, see [Connect RUM and Traces][8].
 
 `telemetrySampleRate`
 : Optional<br/>
@@ -207,7 +207,7 @@ Enables tracking of RUM event when no RUM View is active. By default, background
 `proxyConfig`
 : Optional<br/>
 **Type**: ProxyConfiguration<br/>
-Optional [proxy configuration][13].
+Optional [proxy configuration][9].
 
 `useAccessibilityLabel`
 : Optional<br/>
@@ -340,6 +340,35 @@ DdSdkReactNative.setAttributes({
 });
 ```
 
+## Track view navigation
+
+Because React Native offers a wide range of libraries to create screen navigation, only manual view tracking is supported by default. To see RUM or Error tracking sessions populate in Datadog, you need to implement view tracking.
+
+You can manually start and stop a view using the following `startView()` and `stopView` methods.
+
+```js
+import {
+    DdRum
+} from '@datadog/mobile-react-native';
+
+// Start a view with a unique view identifier, a custom view name, and an object to attach additional attributes to the view
+DdRum.startView(
+    '<view-key>', // <view-key> has to be unique, for example it can be ViewName-unique-id
+    'View Name',
+    { 'custom.foo': 'something' },
+    Date.now()
+);
+// Stops a previously started view with the same unique view identifier, and an object to attach additional attributes to the view
+DdRum.stopView('<view-key>', { 'custom.bar': 42 }, Date.now());
+```
+
+Use one of Datadog's integrations to automatically track views for the following libraries:
+
+-   If you use the [`react-native-navigation`][10] library, then add the `@datadog/mobile-react-native-navigation` package and follow the [setup instructions][11].
+-   If you use the [`react-navigation`][12] library, then add the `@datadog/mobile-react-navigation` package and follow the [setup instructions][11].
+
+If you experience any issues setting up View tracking with `@datadog/mobile-react-navigation` you can see this Datadog [example application][13] as a reference.
+
 ## Clear all data
 
 Use `clearAllData` to clear all data that has not been sent to Datadog.
@@ -400,12 +429,12 @@ Events include additional context:
 | ------------- | ------------------------------------------------ | ----------------------------------------------------------------------- |
 | LogEvent      | `logEvent.additionalInformation.userInfo`        | Contains the global user info set by `DdSdkReactNative.setUser`.        |
 |               | `logEvent.additionalInformation.attributes`      | Contains the global attributes set by `DdSdkReactNative.setAttributes`. |
-| ActionEvent   | `actionEvent.actionContext`                      | [GestureResponderEvent][5] corresponding to the action or `undefined`.  |
+| ActionEvent   | `actionEvent.actionContext`                      | [GestureResponderEvent][14] corresponding to the action or `undefined`.  |
 |               | `actionEvent.additionalInformation.userInfo`     | Contains the global user info set by `DdSdkReactNative.setUser`.        |
 |               | `actionEvent.additionalInformation.attributes`   | Contains the global attributes set by `DdSdkReactNative.setAttributes`. |
 | ErrorEvent    | `errorEvent.additionalInformation.userInfo`      | Contains the global user info set by `DdSdkReactNative.setUser`.        |
 |               | `errorEvent.additionalInformation.attributes`    | Contains the global attributes set by `DdSdkReactNative.setAttributes`. |
-| ResourceEvent | `resourceEvent.resourceContext`                  | [XMLHttpRequest][6] corresponding to the resource or `undefined`.       |
+| ResourceEvent | `resourceEvent.resourceContext`                  | [XMLHttpRequest][15] corresponding to the resource or `undefined`.       |
 |               | `resourceEvent.additionalInformation.userInfo`   | Contains the global user info set by `DdSdkReactNative.setUser`.        |
 |               | `resourceEvent.additionalInformation.attributes` | Contains the global attributes set by `DdSdkReactNative.setAttributes`. |
 
@@ -456,13 +485,13 @@ export default function App() {
 }
 ```
 
-This uses React Native's [InteractionManager.runAfterInteractions][3] to delay the animations.
+This uses React Native's [InteractionManager.runAfterInteractions][16] to delay the animations.
 
 All interactions with the RUM SDK (view tracking, actions, resources tracing, and so on) are still recorded and kept in a queue with a limit of 100 events.
 
 Logs are not recorded and calling a `DdLogs` method before the actual initialization might break logging.
 
-If you experience any issue setting up the asynchronous initialization of Datadog, you can check out our [example application][7].
+If you experience any issue setting up the asynchronous initialization of Datadog, you can check out our [example application][17].
 
 ## Delaying the initialization
 
@@ -521,7 +550,7 @@ const configuration = {
 
 ## Monitoring hybrid React Native applications
 
-See [Monitor hybrid React Native applications][16].
+See [Monitor hybrid React Native applications][18].
 
 ## Further reading
 
@@ -529,15 +558,19 @@ See [Monitor hybrid React Native applications][16].
 
 [1]: https://app.datadoghq.com/rum/application/create
 [2]: /real_user_monitoring/mobile_and_tv_monitoring/react_native
-[3]: https://reactnative.dev/docs/interactionmanager#runafterinteractions
-[4]: https://jestjs.io/
-[5]: https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/react-native/v0.70/index.d.ts#L548
-[6]: https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest
-[7]: https://github.com/DataDog/dd-sdk-reactnative-examples/tree/main/rum-react-navigation-async
-[8]: /account_management/api-app-keys/#client-tokens
-[9]: /getting_started/site/
-[11]: /real_user_monitoring/browser/frustration_signals/
-[12]: /real_user_monitoring/platform/connect_rum_and_traces?tab=reactnativerum
-[13]: /real_user_monitoring/guide/proxy-mobile-rum-data/
-[15]: /getting_started/tagging/#define-tags
-[16]: /real_user_monitoring/guide/monitor-hybrid-react-native-applications
+[3]: https://jestjs.io/
+[4]: /account_management/api-app-keys/#client-tokens
+[5]: /getting_started/tagging/#define-tags
+[6]: /getting_started/site/
+[7]: /real_user_monitoring/browser/frustration_signals/
+[8]: /real_user_monitoring/platform/connect_rum_and_traces?tab=reactnativerum
+[9]: /real_user_monitoring/guide/proxy-mobile-rum-data/
+[10]: https://github.com/wix/react-native-navigation
+[11]: /real_user_monitoring/mobile_and_tv_monitoring/react_native/integrated_libraries/
+[12]: https://github.com/rmobile_and_tv_monitoring/eact-navigation/react-navigation
+[13]: https://github.com/DataDog/dd-sdk-reactnative-examples/tree/main/rum-react-navigation
+[14]: https://github.com/DefinitelyTyped/DefinitelyTyped/blob/683ec4a2b420ff6bd3873a7338416ad3ec0b6595/types/react-native-side-menu/index.d.ts#L2
+[15]: https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest
+[16]: https://reactnative.dev/docs/interactionmanager#runafterinteractions
+[17]: https://github.com/DataDog/dd-sdk-reactnative-examples/tree/main/rum-react-navigation-async
+[18]: /real_user_monitoring/guide/monitor-hybrid-react-native-applications

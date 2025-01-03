@@ -475,26 +475,6 @@ struct BarView: View {
 }
 ```
 
-## Track background events
-
-<div class="alert alert-info"><p>Tracking background events may lead to additional sessions, which can impact billing. For questions, <a href="https://docs.datadoghq.com/help/">contact Datadog support.</a></p>
-</div>
-
-You can track events such as crashes and network requests when your application is in the background (for example, no active view is available).
-
-Add the following snippet during initialization in your Datadog configuration:
-
-```swift
-import DatadogRUM
-
-RUM.enable(
-  with: RUM.Configuration(
-    ...
-    trackBackgroundEvents: true
-  )
-)
-```
-
 ## Track iOS errors
 
 [iOS Crash Reporting and Error Tracking][8] displays any issues in your application and the latest available errors. You can view error details and attributes including JSON in the [RUM Explorer][9].
