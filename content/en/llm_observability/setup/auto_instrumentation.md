@@ -158,7 +158,7 @@ The Vertex AI integration instruments the following methods:
 [1]: https://platform.openai.com/docs/api-reference/introduction
 [2]: https://platform.openai.com/docs/api-reference/completions
 [3]: https://platform.openai.com/docs/api-reference/chat
-[4]: https://python.langchain.com/v0.2/docs/introduction/
+[4]: https://python.langchain.com/docs/introduction/
 [5]: https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/bedrock-runtime.html
 [6]: https://botocore.amazonaws.com/v1/documentation/api/latest/reference/services/bedrock-runtime.html
 [7]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_InvokeModel.html
@@ -168,18 +168,18 @@ The Vertex AI integration instruments the following methods:
 [11]: https://docs.anthropic.com/en/api/messages-streaming
 [12]: /llm_observability/setup/sdk/python/#in-code-setup
 [13]: https://python.langchain.com/v0.2/docs/concepts/#llms
-[14]: https://python.langchain.com/v0.2/docs/concepts/#chat-models
-[15]: https://python.langchain.com/v0.2/docs/concepts/#runnable-interface
+[14]: https://python.langchain.com/docs/concepts/chat_models/
+[15]: https://python.langchain.com/docs/concepts/runnables/
 [16]: /llm_observability/setup/sdk/python
-[17]: https://python.langchain.com/v0.2/docs/concepts/#embedding-models
+[17]: https://python.langchain.com/docs/concepts/embedding_models/
 [18]: /llm_observability/setup/sdk/#tracing-spans
 [19]: https://ai.google.dev/gemini-api/docs
 [20]: https://ai.google.dev/api/generate-content#method:-models.streamgeneratecontent
 [21]: https://cloud.google.com/vertex-ai/generative-ai/docs/reference/python/latest
 [22]: https://cloud.google.com/vertex-ai/generative-ai/docs/reference/python/latest/summary_method#vertexai_preview_generative_models_GenerativeModel_generate_content_summary
 [23]: https://cloud.google.com/vertex-ai/generative-ai/docs/reference/python/latest/summary_method#vertexai_generative_models_ChatSession_send_message_summary
-[24]: https://python.langchain.com/v0.2/docs/concepts/#tools
-[25]: https://python.langchain.com/v0.2/docs/concepts/#retrieval
+[24]: https://python.langchain.com/docs/concepts/tools/
+[25]: https://python.langchain.com/docs/concepts/retrieval/
 
 {{% /tab %}}
 {{% tab "Node.js" %}}
