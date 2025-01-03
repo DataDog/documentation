@@ -2564,6 +2564,32 @@ menu:
           - ListSecurityFilters
         unstable: []
         order: 18
+    - name: List vulnerabilities
+      url: '#list-vulnerabilities'
+      identifier: security-monitoring-list-vulnerabilities
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListVulnerabilities
+        unstable:
+          - v2
+        order: 3
+    - name: List vulnerable assets
+      url: '#list-vulnerable-assets'
+      identifier: security-monitoring-list-vulnerable-assets
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListVulnerableAssets
+        unstable:
+          - v2
+        order: 4
     - name: Get a finding
       url: '#get-a-finding'
       identifier: security-monitoring-get-a-finding
@@ -4715,6 +4741,46 @@ menu:
           - ListAllCSMAgents
         unstable: []
         order: 3
+    - name: CSM Coverage Analysis
+      url: /api/latest/csm-coverage-analysis/
+      identifier: csm-coverage-analysis
+      generated: true
+    - name: Get the CSM Serverless Coverage Analysis
+      url: '#get-the-csm-serverless-coverage-analysis'
+      identifier: csm-coverage-analysis-get-the-csm-serverless-coverage-analysis
+      parent: csm-coverage-analysis
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetCSMServerlessCoverageAnalysis
+        unstable: []
+        order: 1
+    - name: Get the CSM Hosts and Containers Coverage Analysis
+      url: '#get-the-csm-hosts-and-containers-coverage-analysis'
+      identifier: csm-coverage-analysis-get-the-csm-hosts-and-containers-coverage-analysis
+      parent: csm-coverage-analysis
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetCSMHostsAndContainersCoverageAnalysis
+        unstable: []
+        order: 1
+    - name: Get the CSM Cloud Accounts Coverage Analysis
+      url: '#get-the-csm-cloud-accounts-coverage-analysis'
+      identifier: csm-coverage-analysis-get-the-csm-cloud-accounts-coverage-analysis
+      parent: csm-coverage-analysis
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetCSMCloudAccountsCoverageAnalysis
+        unstable: []
+        order: 1
     - name: CSM Threats
       url: /api/latest/csm-threats/
       identifier: csm-threats
