@@ -1,5 +1,5 @@
 ---
-title: Application Security Managemetn
+title: Application Security Management
 aliases:
   - /tracing/service_catalog/guides/appsec-management
   - /service_catalog/guides/appsec-management

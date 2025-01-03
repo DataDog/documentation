@@ -65,11 +65,6 @@ Datadog [Service Catalog][1] provides a consolidated view of your services, comb
 - Reducing application risks by finding and fixing known security vulnerabilities in the dependencies of your services.
 - Understanding trends and identifying inefficiencies in the costs related to your services.
 
-#### Knowledge sharing 
-- Locate information without navigating through numerous repos, channels, or documentation pages.
-- Save time searching for runbooks or wiki pages when onboarding new team members.
-- Leverage real-time, automatically-generated topology maps to understand system architecture.
-
 #### Evaluate monitoring coverage  
 - Detecting which services aren’t reporting observability data or having that data monitored.
 - Facilitating [tagging best practices][6] and checking for recommended setup configurations to optimize [cross-telemetry insights][7].
