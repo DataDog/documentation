@@ -876,30 +876,24 @@ If you are using the [custom role feature][21], add your user to a custom role t
 
 ## Restrict access
 
-{{< img src="synthetics/settings/grace_1.png" alt="Set permissions for your test" style="width:70%;" >}}
+Use [granular access control][24] to limit who has access to your test based on roles, teams, or individual users:
 
-Use [granular access control][24] to limit who has access to your private location based on roles, teams, or individual users.
+1. Open the permissions section of the form.
+2. Click **Edit Access**.
+  {{< img src="synthetics/settings/grace_2.png" alt="Set permissions for your test from Private Locations configuration form" style="width:100%;" >}}
+3. Click **Restrict Access**.
+4. Select teams, roles, or users.
+5. Click **Add**.
+6. Select the level of access you want to associate with each of them.
+7. Click **Done**.
 
-To do so:
-
-1. Open the permissions section of the form
-2. Click on `edit access`
-
-{{< img src="synthetics/private_locations/grace.png" alt="Set permissions for your private location" style="width:70%;" >}}
-
-3. Click on `restrict access`
-4. Select teams, roles, or users
-5. Click `add`
-6. Select the level of access you want to associate with each of them
-7. Click on done
+<div class="alert alert-info"><strong>Note</strong>: You can view results from a Private Location even without Viewer access to that Private Location.</div>
 
 | Access level | View PL instructions | View PL metrics | Use PL in test | Edit PL configuration  |
 | ------------ | ---------------------| --------------- | -------------- | ---------------------- |
 | No access    |                      |                 |                |                        |
 | Viewer       | {{< X >}}            | {{< X >}}       | {{< X >}}      |                        |
 | Editor       | {{< X >}}            | {{< X >}}       | {{< X >}}      | {{< X >}}              |
-
-<div class="alert alert-info"><strong>Note</strong>: You will be able to see results from Private Location even if you don't have Viewer access to that Private Location.</div>
 
 ## Further Reading
 

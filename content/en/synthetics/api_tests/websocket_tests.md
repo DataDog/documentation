@@ -156,30 +156,7 @@ If you are using the [custom role feature][11], add your user to any custom role
 
 ### Restrict access
 
-{{< img src="synthetics/settings/grace_1.png" alt="Set permissions for your test" style="width:70%;" >}}
-
-Use [granular access control][12] to limit who has access to your test based on roles, teams, or individual users.
-
-To do so:
-
-1. Open the permissions section of the form
-2. Click on `edit access`
-
-{{< img src="synthetics/settings/grace_2.png" alt="Set permissions for your test" style="width:70%;" >}}
-
-3. Click on `restrict access`
-4. Select teams, roles, or users
-5. Click `add`
-6. Select the level of access you want to associate with each of them
-7. Click on done
-
-| Access level | View test configuration | Edit test configuration | View test results | Run test  |
-| ------------ | ----------------------- | ----------------------- | ------------------| --------- |
-| No access    |                         |                         |                   |           |
-| Viewer       | {{< X >}}               |                         | {{< X >}}         |           |
-| Editor       | {{< X >}}               | {{< X >}}               | {{< X >}}         | {{< X >}} |
-
-<div class="alert alert-info"><strong>Note</strong>: You will be able to see results from Private Location even if you don't have Viewer access to that Private Location.</div>
+{{% synthetics_grace_permissions %}}
 
 ## Further Reading
 
@@ -196,4 +173,3 @@ To do so:
 [9]: /synthetics/api_tests/errors/#ssl-errors
 [10]: /account_management/rbac/
 [11]: /account_management/rbac#custom-roles
-[12]: /account_management/rbac/granular_access
