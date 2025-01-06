@@ -1257,9 +1257,21 @@ menu:
       url: /api/latest/logs/
       identifier: logs
       generated: true
-    - name: Get a list of logs
-      url: '#get-a-list-of-logs'
-      identifier: logs-get-a-list-of-logs
+    - name: Search logs (POST)
+      url: '#search-logs-post'
+      identifier: logs-search-logs-post
+      parent: logs
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListLogs
+        unstable: []
+        order: 3
+    - name: Search logs (GET)
+      url: '#search-logs-get'
+      identifier: logs-search-logs-get
       parent: logs
       generated: true
       params:
@@ -1302,7 +1314,6 @@ menu:
       params:
         versions:
           - v1
-          - v2
         operationids:
           - ListLogs
         unstable: []

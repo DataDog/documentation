@@ -16,7 +16,7 @@ assets:
     service_checks:
       metadata_path: assets/service_checks.json
     source_type_id: 10134
-    source_type_name: Nvidia Jetson
+    source_type_name: NVIDIA Jetson
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
@@ -31,13 +31,13 @@ display_on_public_website: true
 draft: false
 git_integration_title: nvidia_jetson
 integration_id: nvidia-jetson
-integration_title: Nvidia Jetson
+integration_title: NVIDIA Jetson
 integration_version: ''
 is_public: true
 manifest_version: 2.0.0
 name: nvidia_jetson
-public_title: Nvidia Jetson
-short_description: Obtén métricas sobre tu placa Nvidia Jetson
+public_title: NVIDIA Jetson
+short_description: Obtén métricas sobre tu placa NVIDIA Jetson
 supported_os:
 - linux
 tile:
@@ -47,11 +47,11 @@ tile:
   - Category::IoT
   - Offering::Integration
   configuration: README.md#Setup
-  description: Obtén métricas sobre tu placa Nvidia Jetson
+  description: Obtén métricas sobre tu placa NVIDIA Jetson
   media: []
   overview: README.md#Overview
   support: README.md#Support
-  title: Nvidia Jetson
+  title: NVIDIA Jetson
 ---
 
 <!--  EXTRAÍDO DE https://github.com/DataDog/integrations-core -->
@@ -59,14 +59,14 @@ tile:
 
 ## Información general
 
-Este check monitoriza una placa [Nvidia Jetson][1].
+Este check monitoriza una placa [NVIDIA Jetson][1].
 Informa de las métricas recopiladas de `tegrastats`.
 
 ## Configuración
 
 ### Instalación
 
-El check de Nvidia Jetson está incluido en el paquete del [Datadog Agent][2].
+El check de NVIDIA Jetson está incluido en el paquete del [Datadog Agent][2].
 No es necesaria ninguna instalación adicional en tu servidor.
 
 ### Configuración
@@ -97,11 +97,11 @@ Algunas métricas solo se notifican si `use_sudo` está configurado como verdade
 
 ### Checks de servicio
 
-La integración de Nvidia Jetson no incluye ningún check de servicio.
+La integración de NVIDIA Jetson no incluye ningún check de servicio.
 
 ### Eventos
 
-La integración de Nvidia Jetson no incluye ningún evento.
+La integración de NVIDIA Jetson no incluye ningún evento.
 
 ## Solucionar problemas
 
