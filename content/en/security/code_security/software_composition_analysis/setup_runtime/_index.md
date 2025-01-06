@@ -1,20 +1,31 @@
 ---
-title: Software Composition Analysis Setup
+title: Set up runtime SCA in your services
 disable_toc: false
 aliases:
 - /security/application_security/enabling/tracing_libraries/sca/
 ---
 
-## Prerequisites
-Before setting up Software Composition Analysis, ensure the following prerequisites are met:
 
+SCA can detect vulnerabilities that affect open source libraries running in your services based on Datadog's application telemetry. 
+scan dependency management files in your repositories to statically detect open source libraries used in your codebase. 
+
+Before setting up runtime deteciton, ensure the following prerequisites are met:
+3. **Supported Tracing Library:** The Datadog Tracing Library used by your application or service supports Software Composition Analysis capabilities for the language of your application or service. See supported tracing libraries below:
+
+## Select a configuration option
+|----------------------------------------|---------|----------|--------------------------------------------------|---------------|-----------------|---------------|---------------|
+### Quick start for in-app service enablement
+
+Select your application language for details about framework compatibility and feature support.
+
+{{< partial name="security-platform/appsec-languages-sca.html" >}}
 1. **Datadog Agent Installation:** The Datadog Agent is installed and configured for your application's operating system or container, cloud, or virtual environment.
 2. **Datadog APM Configuration:** Datadog APM is configured for your application or service, and web traces (`type:web`) are being received by Datadog.
 3. **Supported Tracing Library:** The Datadog Tracing Library used by your application or service supports Software Composition Analysis capabilities for the language of your application or service. For more details, refer to the [Library Compatibility][5] page for each ASM product.
 
 ## Software Composition Analysis enablement types
 
-### Quick Start Guide
+### Quick start for in-app service enablement
 
 1. Navigate to the [Quick Start Guide][2]:
    1. Expand **Enable Vulnerability Detection**.
@@ -24,7 +35,7 @@ Before setting up Software Composition Analysis, ensure the following prerequisi
    5. Select **Enable for Selected Services**.
 
 ### Settings page
-
+### Datadog tracing library configuration 
 Alternatively, you can enable Software Composition Analysis through the [Settings][3] page.
 
 1. Navigate to the [Settings][3] page and select **Get Started** in **Software Composition Analysis (SCA)**.
@@ -35,7 +46,7 @@ Alternatively, you can enable Software Composition Analysis through the [Setting
 6. Choose the services where you want to identify library vulnerabilities, and select **Next**.
 7. Select **Enable for Selected Services**.
 
-### Datadog Tracing Libraries
+### Datadog tracing library configuration
 
 Add an environment variable or a new argument to your Datadog Tracing Library configuration.
 

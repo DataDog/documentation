@@ -1,6 +1,6 @@
 ---
-title: Static Analysis Rules
-description: View rules for multiple languages for Static Analysis.
+title: SAST Rules
+description: View rules for multiple languages for Static Code Analysis.
 aliases:
 - /continuous_integration/static_analysis/rules
 - /static_analysis/rules

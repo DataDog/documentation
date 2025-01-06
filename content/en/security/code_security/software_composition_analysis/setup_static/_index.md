@@ -1,20 +1,12 @@
 ---
-title: SCA Static Setup
+title: Set up static SCA in your repositories
 description: Learn about Datadog Software Composition Analysis to scan your imported open-source libraries for known security vulnerabilities before you ship to production.
 disable_toc: false
 aliases:
 - /path-to-old-doc/
 ---
 
-SCA supports scanning for libraries in the following languages and technologies:
-
-{{< partial name="code_security/sca-getting-started.html" >}}
-
-To get started, set up Software Composition Analysis on the [**Code Analysis** page][2] or see the [Setup documentation][3].
-
-### Lockfiles
-
-SCA scans libraries contained in your lockfiles. The following lockfiles are supported:
+SCA can scan dependency management files in your repositories to statically detect open source libraries used in your codebase. SCA supports scanning for libraries in the following languages and lockfiles below:
 
 | Package Manager | Lockfile                                 |
 |-----------------|------------------------------------------|
@@ -39,26 +31,6 @@ After you configure your CI pipelines to run Datadog SCA, violations are summari
 
 * The **Library Vulnerabilities** tab contains the vulnerable library versions found by Datadog SCA.
 * The **Library Catalog** tab contains all of the libraries (vulnerable or not) found by Datadog SCA.
-
-To filter your results, use the facets to the left of the list or the search bar at the top. Results can be filtered by service or team facets. For more information about how results are linked to Datadog services and teams, see [Getting Started with Code Analysis][5].
-
-Every row represents a unique library and version combination. Each combination is associated with the specific commit and branch that is selected in the filters at the top of the page (by default, the latest commit on the default branch of the repository you selected).
-
-Click on a library with a vulnerability to open a side panel that contains information about the scope of the violation and where it originated.
-
-{{< img src="code_analysis/software_composition_analysis/sca-violation.png" alt="Side panel for a SCA violation" style="width:80%;">}}
-
-The content of the violation is shown in tabs:
-
-- **Full Description**: A description of the vulnerability contained within this specific version of the library.
-- **Event**: JSON metadata regarding the SCA violation event.
-
-## Select where to run Software Composition Analysis scans
-### Scan with Datadog-hosted scanning
-SCA scans can be run directly on Datadog's infrastructure. To get started, navigate to the [**Code Analysis** page][2].
-
-### Scan in CI pipelines
-SCA can be run in your CI pipelines using the [`datadog-ci` CLI][5]. Configure your [Datadog API and application keys (requires the `code_analysis_read` scope)][6] and run SCA jobs in the respective CI provider.
 
 See the documentation for your CI provider in **GitHub Actions** and **Generic CI Providers** below.
 
@@ -142,11 +114,7 @@ Provide the following inputs:
 | Name           | Description                                                                                                                | Required | Default         |
 |----------------|----------------------------------------------------------------------------------------------------------------------------|----------|-----------------|
 | `service`      | The name of the service to tag the results with.                                                                           | Yes      |                 |
-| `env`          | The environment to tag the results with. `ci` is a helpful value for this input.                                           | No       | `none`          |
-| `subdirectory` | The subdirectory path the analysis should be limited to. The path is relative to the root directory of the repository.                  | No       |                 |
 
-```bash
-# Set the Datadog site to send information to
 export DD_SITE="{{< region-param key="dd_site" code="true" >}}"
 
 # Install dependencies
