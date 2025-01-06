@@ -14,7 +14,7 @@ export const buildCustomizationMenuUi = (
   let menuHtml = '<div>';
   Object.keys(resolvedPageFilters).forEach((filterId) => {
     const resolvedFilter = resolvedPageFilters[filterId];
-    menuHtml += buildFilterSelectorPills({ filter: resolvedFilter });
+    menuHtml += buildFilterSelectorDropdown({ filter: resolvedFilter });
   });
   menuHtml += '<hr />';
   menuHtml += '</div>';
@@ -51,7 +51,7 @@ function buildFilterSelectorPills(p: { filter: ResolvedPageFilter }) {
   return selectorHtml;
 }
 
-function buildFilterSelectorDropdowns(p: { filter: ResolvedPageFilter }) {
+function buildFilterSelectorDropdown(p: { filter: ResolvedPageFilter }) {
   const currentValue = p.filter.currentValue || p.filter.defaultValue;
   const filterLabelElementId = `cdoc-${p.filter.id}-dropdown-label`;
 

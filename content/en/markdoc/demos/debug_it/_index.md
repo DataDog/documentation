@@ -1,82 +1,158 @@
 ---
 title: 'DebugIt: A Fake Debugging Library'
 ---
-<div id="cdoc-selector"><div><div class="cdoc-pills-container"><p 
-    id="cdoc-prog_lang-pills-label" 
+<div id="cdoc-selector"><div><div class="cdoc-dropdown-container"><p 
+    id="cdoc-prog_lang-dropdown-label" 
     class="cdoc-filter-label"
-  >Language</p><button
-      class="cdoc-filter__option cdoc-pill selected" 
+  >Language</p><div 
+    id="cdoc-dropdown-prog_lang" 
+    class="cdoc-dropdown">
+    <button
+      class="cdoc-dropdown-btn" 
+      type="button"
+      tabIndex="0"
+      aria-haspopup="listbox"
+      aria-expanded="false" 
+      aria-labelledby="cdoc-prog_lang-dropdown-label">
+      <span 
+        id="cdoc-dropdown-prog_lang-label" 
+        class="cdoc-btn-label"
+      >Python</span>
+      <div class="cdoc-chevron"></div>
+    </button><div 
+    class="cdoc-dropdown-options-list" 
+    role="listbox" 
+    aria-labelledby="cdoc-prog_lang-dropdown-label"><a 
+      class="cdoc-dropdown-option 
+      cdoc-filter__option selected" 
       data-filter-id="prog_lang" 
       data-option-id="python"
+      role="option" 
       aria-selected="true"
       tabIndex="0"
-    >Python</button><button
-      class="cdoc-filter__option cdoc-pill " 
+    >Python</a><a 
+      class="cdoc-dropdown-option 
+      cdoc-filter__option " 
       data-filter-id="prog_lang" 
       data-option-id="go"
+      role="option" 
       aria-selected="false"
       tabIndex="0"
-    >Go</button><button
-      class="cdoc-filter__option cdoc-pill " 
+    >Go</a><a 
+      class="cdoc-dropdown-option 
+      cdoc-filter__option " 
       data-filter-id="prog_lang" 
       data-option-id="javascript"
+      role="option" 
       aria-selected="false"
       tabIndex="0"
-    >JavaScript</button><button
-      class="cdoc-filter__option cdoc-pill " 
+    >JavaScript</a><a 
+      class="cdoc-dropdown-option 
+      cdoc-filter__option " 
       data-filter-id="prog_lang" 
       data-option-id="ruby"
+      role="option" 
       aria-selected="false"
       tabIndex="0"
-    >Ruby</button><button
-      class="cdoc-filter__option cdoc-pill " 
+    >Ruby</a><a 
+      class="cdoc-dropdown-option 
+      cdoc-filter__option " 
       data-filter-id="prog_lang" 
       data-option-id="java"
+      role="option" 
       aria-selected="false"
       tabIndex="0"
-    >Java</button></div><div class="cdoc-pills-container"><p 
-    id="cdoc-os-pills-label" 
+    >Java</a></div></div></div><div class="cdoc-dropdown-container"><p 
+    id="cdoc-os-dropdown-label" 
     class="cdoc-filter-label"
-  >Operating system</p><button
-      class="cdoc-filter__option cdoc-pill selected" 
+  >Operating system</p><div 
+    id="cdoc-dropdown-os" 
+    class="cdoc-dropdown">
+    <button
+      class="cdoc-dropdown-btn" 
+      type="button"
+      tabIndex="0"
+      aria-haspopup="listbox"
+      aria-expanded="false" 
+      aria-labelledby="cdoc-os-dropdown-label">
+      <span 
+        id="cdoc-dropdown-os-label" 
+        class="cdoc-btn-label"
+      >Linux</span>
+      <div class="cdoc-chevron"></div>
+    </button><div 
+    class="cdoc-dropdown-options-list" 
+    role="listbox" 
+    aria-labelledby="cdoc-os-dropdown-label"><a 
+      class="cdoc-dropdown-option 
+      cdoc-filter__option selected" 
       data-filter-id="os" 
       data-option-id="linux"
+      role="option" 
       aria-selected="true"
       tabIndex="0"
-    >Linux</button><button
-      class="cdoc-filter__option cdoc-pill " 
+    >Linux</a><a 
+      class="cdoc-dropdown-option 
+      cdoc-filter__option " 
       data-filter-id="os" 
       data-option-id="windows"
+      role="option" 
       aria-selected="false"
       tabIndex="0"
-    >Windows</button><button
-      class="cdoc-filter__option cdoc-pill " 
+    >Windows</a><a 
+      class="cdoc-dropdown-option 
+      cdoc-filter__option " 
       data-filter-id="os" 
       data-option-id="mac_os"
+      role="option" 
       aria-selected="false"
       tabIndex="0"
-    >MacOS</button></div><div class="cdoc-pills-container"><p 
-    id="cdoc-database-pills-label" 
+    >MacOS</a></div></div></div><div class="cdoc-dropdown-container"><p 
+    id="cdoc-database-dropdown-label" 
     class="cdoc-filter-label"
-  >Database</p><button
-      class="cdoc-filter__option cdoc-pill selected" 
+  >Database</p><div 
+    id="cdoc-dropdown-database" 
+    class="cdoc-dropdown">
+    <button
+      class="cdoc-dropdown-btn" 
+      type="button"
+      tabIndex="0"
+      aria-haspopup="listbox"
+      aria-expanded="false" 
+      aria-labelledby="cdoc-database-dropdown-label">
+      <span 
+        id="cdoc-dropdown-database-label" 
+        class="cdoc-btn-label"
+      >Postgres</span>
+      <div class="cdoc-chevron"></div>
+    </button><div 
+    class="cdoc-dropdown-options-list" 
+    role="listbox" 
+    aria-labelledby="cdoc-database-dropdown-label"><a 
+      class="cdoc-dropdown-option 
+      cdoc-filter__option selected" 
       data-filter-id="database" 
       data-option-id="postgres"
+      role="option" 
       aria-selected="true"
       tabIndex="0"
-    >Postgres</button><button
-      class="cdoc-filter__option cdoc-pill " 
+    >Postgres</a><a 
+      class="cdoc-dropdown-option 
+      cdoc-filter__option " 
       data-filter-id="database" 
       data-option-id="mysql"
+      role="option" 
       aria-selected="false"
       tabIndex="0"
-    >MySQL</button><button
-      class="cdoc-filter__option cdoc-pill " 
+    >MySQL</a><a 
+      class="cdoc-dropdown-option 
+      cdoc-filter__option " 
       data-filter-id="database" 
       data-option-id="sql_server"
+      role="option" 
       aria-selected="false"
       tabIndex="0"
-    >SQL Server</button></div><hr /></div></div><div id="cdoc-content" class="customizable"><article>
+    >SQL Server</a></div></div></div><hr /></div></div><div id="cdoc-content" class="customizable"><article>
   <h2 id="overview">Overview</h2>
   <p>
     DebugIt is a powerful debugging library designed to streamline the debugging
