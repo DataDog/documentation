@@ -149,7 +149,7 @@ instances:
 ```
 
 ### Running custom queries
-To collect custom metrics, use the `custom_queries` option. See the sample [sqlserver.d/conf.yaml][1007] for more details.
+To collect custom metrics, use the `custom_queries` option. See the sample [sqlserver.d/conf.yaml][1005] for more details.
 ```yaml
 init_config:
 instances:
@@ -209,4 +209,3 @@ instances:
 
 [1005]: https://github.com/DataDog/integrations-core/blob/master/sqlserver/datadog_checks/sqlserver/data/conf.yaml.example
 [1006]: /database_monitoring/architecture/
-[1007]: https://github.com/DataDog/integrations-core/blob/master/sqlserver/datadog_checks/sqlserver/data/conf.yaml.example
