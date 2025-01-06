@@ -1,5 +1,6 @@
 import { s } from 'markdoc-static-compiler/dist/src/schema';
 import { ResolvedPageFilters, ResolvedPageFilter } from '../../../schemas/pageFilters';
+import { build } from 'vite';
 
 /**
  * Given a resolved page filters object, build the UI for the filter selector
@@ -11,15 +12,20 @@ import { ResolvedPageFilters, ResolvedPageFilter } from '../../../schemas/pageFi
 export const buildCustomizationMenuUi = (
   resolvedPageFilters: ResolvedPageFilters
 ): string => {
-  let menuHtml = '<div>';
-  Object.keys(resolvedPageFilters).forEach((filterId) => {
-    const resolvedFilter = resolvedPageFilters[filterId];
-    menuHtml += buildFilterSelectorPills({ filter: resolvedFilter });
-  });
+  let menuHtml = buildFilterSelectorPillsMenu({ filters: resolvedPageFilters });
   menuHtml += '<hr />';
-  menuHtml += '</div>';
   return menuHtml;
 };
+
+function buildFilterSelectorPillsMenu(p: { filters: ResolvedPageFilters }) {
+  let menuHtml = '<div id="cdoc-filters-pill-menu">';
+  Object.keys(p.filters).forEach((filterId) => {
+    const resolvedFilter = p.filters[filterId];
+    menuHtml += buildFilterSelectorPills({ filter: resolvedFilter });
+  });
+  menuHtml += '</div>';
+  return menuHtml;
+}
 
 function buildFilterSelectorPills(p: { filter: ResolvedPageFilter }) {
   const currentValue = p.filter.currentValue || p.filter.defaultValue;

@@ -3,7 +3,7 @@ title: Primary Colors (ja)
 aliases:
   - /primary_colors_alias/
 ---
-<div id="cdoc-selector"><div><div class="cdoc-pills-container"><p 
+<div id="cdoc-selector"><div id="cdoc-filters-pill-menu"><div class="cdoc-pills-container"><p 
     id="cdoc-color-pills-label" 
     class="cdoc-filter-label"
   >Color</p><button
@@ -51,7 +51,7 @@ aliases:
       data-option-id="blueberry"
       aria-selected="false"
       tabIndex="0"
-    >Blueberry</button></div><hr /></div></div><div id="cdoc-content" class="customizable"><article>
+    >Blueberry</button></div></div><hr /></div><div id="cdoc-content" class="customizable"><article>
   <div class="alert alert-warning">
     <p>Warning: This is just a test page. It's not real.</p>
   </div>

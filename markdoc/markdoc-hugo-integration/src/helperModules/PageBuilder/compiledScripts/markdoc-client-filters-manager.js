@@ -12,16 +12,20 @@
       Object.defineProperty(exports, "__esModule", { value: true });
       exports.buildCustomizationMenuUi = void 0;
       var buildCustomizationMenuUi = (resolvedPageFilters) => {
-        let menuHtml = "<div>";
-        Object.keys(resolvedPageFilters).forEach((filterId) => {
-          const resolvedFilter = resolvedPageFilters[filterId];
-          menuHtml += buildFilterSelectorPills({ filter: resolvedFilter });
-        });
+        let menuHtml = buildFilterSelectorPillsMenu({ filters: resolvedPageFilters });
         menuHtml += "<hr />";
-        menuHtml += "</div>";
         return menuHtml;
       };
       exports.buildCustomizationMenuUi = buildCustomizationMenuUi;
+      function buildFilterSelectorPillsMenu(p) {
+        let menuHtml = '<div id="cdoc-filters-pill-menu">';
+        Object.keys(p.filters).forEach((filterId) => {
+          const resolvedFilter = p.filters[filterId];
+          menuHtml += buildFilterSelectorPills({ filter: resolvedFilter });
+        });
+        menuHtml += "</div>";
+        return menuHtml;
+      }
       function buildFilterSelectorPills(p) {
         const currentValue = p.filter.currentValue || p.filter.defaultValue;
         let selectorHtml = '<div class="cdoc-pills-container">';

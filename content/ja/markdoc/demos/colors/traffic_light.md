@@ -1,7 +1,7 @@
 ---
 title: Traffic Light Colors (ja)
 ---
-<div id="cdoc-selector"><div><div class="cdoc-pills-container"><p 
+<div id="cdoc-selector"><div id="cdoc-filters-pill-menu"><div class="cdoc-pills-container"><p 
     id="cdoc-color-pills-label" 
     class="cdoc-filter-label"
   >Color</p><button
@@ -49,7 +49,7 @@ title: Traffic Light Colors (ja)
       data-option-id="frog"
       aria-selected="false"
       tabIndex="0"
-    >Frog</button></div><hr /></div></div><div id="cdoc-content" class="customizable"><article>
+    >Frog</button></div></div><hr /></div><div id="cdoc-content" class="customizable"><article>
   <div class="alert alert-info">
     <p>This is just a test page. It's not real.</p>
   </div>

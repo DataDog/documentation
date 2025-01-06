@@ -1,7 +1,7 @@
 ---
 title: 'DebugIt: A Fake Debugging Library'
 ---
-<div id="cdoc-selector"><div><div class="cdoc-pills-container"><p 
+<div id="cdoc-selector"><div id="cdoc-filters-pill-menu"><div class="cdoc-pills-container"><p 
     id="cdoc-prog_lang-pills-label" 
     class="cdoc-filter-label"
   >Language</p><button
@@ -76,7 +76,7 @@ title: 'DebugIt: A Fake Debugging Library'
       data-option-id="sql_server"
       aria-selected="false"
       tabIndex="0"
-    >SQL Server</button></div><hr /></div></div><div id="cdoc-content" class="customizable"><article>
+    >SQL Server</button></div></div><hr /></div><div id="cdoc-content" class="customizable"><article>
   <h2 id="overview">Overview</h2>
   <p>
     DebugIt is a powerful debugging library designed to streamline the debugging
