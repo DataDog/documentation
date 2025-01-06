@@ -13,6 +13,7 @@ Often, organizations need to send their logs to multiple products for different 
 
 Select your log source to get started:
 
+- [Amazon S3][11]
 - [Datadog Agent][1]
 - [Fluentd or Fluent Bit][2]
 - [Google Pub/Sub][3]
@@ -34,3 +35,4 @@ Select your log source to get started:
 [8]: /observability_pipelines/split_logs/splunk_tcp
 [9]: /observability_pipelines/split_logs/sumo_logic_hosted_collector
 [10]: /observability_pipelines/split_logs/syslog
+[11]: /observability_pipelines/set_up_pipelines/split_logs/amazon_s3

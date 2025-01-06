@@ -22,6 +22,11 @@ On the the Worker installation page:
 1. Select your platform in the **Choose your installation platform** dropdown menu.
 1. If you want to update source environment variables, update the information for your log source.
 {{< tabs >}}
+{{% tab "Amazon S3" %}}
+
+{{% observability_pipelines/configure_existing_pipelines/source_env_vars/amazon_s3 %}}
+
+{{% /tab %}}
 {{% tab "Datadog Agent" %}}
 
 {{% observability_pipelines/configure_existing_pipelines/source_env_vars/datadog_agent %}}

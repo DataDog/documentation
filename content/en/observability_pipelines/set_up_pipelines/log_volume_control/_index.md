@@ -23,6 +23,7 @@ As your infrastructure and applications grow, so does your log volume and the co
 
 Select a log source to get started:
 
+- [Amazon S3][11]
 - [Datadog Agent][1]
 - [Fluentd or Fluent Bit][2]
 - [Google Pub/Sub][3]
@@ -48,3 +49,4 @@ Select a log source to get started:
 [8]: /observability_pipelines/log_volume_control/splunk_tcp
 [9]: /observability_pipelines/log_volume_control/sumo_logic_hosted_collector
 [10]: /observability_pipelines/log_volume_control/syslog
+[11]: /observability_pipelines/set_up_pipelines/log_volume_control/amazon_s3

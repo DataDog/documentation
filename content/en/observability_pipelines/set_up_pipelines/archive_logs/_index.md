@@ -17,6 +17,7 @@ Use Observability Pipelines to route ingested logs to a cloud storage solution (
 
 Select a source to get started:
 
+- [Amazon S3][11]
 - [Datadog Agent][1]
 - [Fluentd or Fluent Bit][2]
 - [Google Pub/Sub][3]
@@ -38,3 +39,4 @@ Select a source to get started:
 [8]: /observability_pipelines/archive_logs/splunk_tcp
 [9]: /observability_pipelines/archive_logs/sumo_logic_hosted_collector
 [10]: /observability_pipelines/archive_logs/syslog
+[11]: /observability_pipelines/set_up_pipelines/archive_logs/amazon_s3
