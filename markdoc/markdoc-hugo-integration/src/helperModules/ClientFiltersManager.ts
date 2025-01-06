@@ -42,7 +42,7 @@ export class ClientFiltersManager {
   private ifFunctionsByRef: Record<string, ClientFunction> = {};
   private storedFilters: Record<string, string> = {};
 
-  handleMenuContentOverflow() {
+  fitCustomizationMenuToScreen() {
     const pillsMenu = document.getElementById(PILLS_MENU_ID);
     if (!pillsMenu) {
       return;
@@ -63,16 +63,10 @@ export class ClientFiltersManager {
     const pillsMenuIsOverflowing = pillsMenu.scrollWidth > menuWrapper.clientWidth;
 
     if (!pillsAreHidden && pillsMenuIsOverflowing) {
-      // hide the pills menu
       pillsMenu.classList.add(OFFSCREEN_CLASS);
-
-      // show the dropdown menu
       dropdownMenu.classList.remove(OFFSCREEN_CLASS);
     } else if (pillsAreHidden && !pillsMenuIsOverflowing) {
-      // show the pills menu
       pillsMenu.classList.remove(OFFSCREEN_CLASS);
-
-      // hide the dropdown menu
       dropdownMenu.classList.add(OFFSCREEN_CLASS);
     }
   }
@@ -132,7 +126,7 @@ export class ClientFiltersManager {
     }
 
     this.populateRightNav();
-    this.handleMenuContentOverflow();
+    this.fitCustomizationMenuToScreen();
     this.addWindowResizeListener();
     this.revealPage();
     this.updateEditButton();
@@ -332,7 +326,7 @@ export class ClientFiltersManager {
 
   addWindowResizeListener() {
     window.addEventListener('resize', () => {
-      this.handleMenuContentOverflow();
+      this.fitCustomizationMenuToScreen();
     });
   }
 
@@ -346,8 +340,6 @@ export class ClientFiltersManager {
     // Expand or hide dropdown on button click
     for (let i = 0; i < dropdownContainers.length; i++) {
       dropdownContainers[i].addEventListener('click', (e) => {
-        console.log('dropdown container clicked');
-
         const target = e.target as HTMLElement;
 
         // find the parent dropdown container
@@ -516,6 +508,7 @@ export class ClientFiltersManager {
 
     const newFilterSelectorHtml = buildCustomizationMenuUi(resolvedPageFilters);
     this.filterSelectorEl.innerHTML = newFilterSelectorHtml;
+    this.fitCustomizationMenuToScreen();
     this.addFilterSelectorEventListeners();
   }
 }

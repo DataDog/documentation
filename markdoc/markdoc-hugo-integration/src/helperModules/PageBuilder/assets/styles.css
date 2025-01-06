@@ -15,7 +15,10 @@
 .cdoc-pills-container {
     display: inline-block;
     margin-right: 1em;
-    margin-top: 1em;
+}
+
+.cdoc-pills-container:last-child {
+    margin-right: 0;
 }
 
 #cdoc-filters-pill-menu {
@@ -23,6 +26,10 @@
 }
 
 /* Document sections and headings */
+
+#cdoc-selector {
+    margin-top: -10px;
+}
 
 #cdoc-selector,
 #cdoc-content.customizable {

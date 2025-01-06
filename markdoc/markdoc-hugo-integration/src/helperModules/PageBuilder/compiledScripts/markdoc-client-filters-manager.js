@@ -12795,7 +12795,8 @@
       var MENU_WRAPPER_ID = "cdoc-filters-menu";
       var OFFSCREEN_CLASS = "cdoc-offscreen";
       var ClientFiltersManager = class {
-        handleMenuContentOverflow() {
+        fitCustomizationMenuToScreen() {
+          console.log("----");
           const pillsMenu = document.getElementById(PILLS_MENU_ID);
           if (!pillsMenu) {
             return;
@@ -12809,11 +12810,18 @@
           if (!menuWrapper) {
             throw new Error("Menu wrapper not found");
           }
+          console.log("pillsMenu.scrollWidth", pillsMenu.scrollWidth);
+          console.log("pillsMenu.offsetWidth", pillsMenu.offsetWidth);
+          console.log("menuWrapper.clientWidth", menuWrapper.clientWidth);
+          console.log("menuWrapper.offsetWidth", menuWrapper.offsetWidth);
+          console.log("menuWrapper.scrollWidth", menuWrapper.scrollWidth);
           const pillsMenuIsOverflowing = pillsMenu.scrollWidth > menuWrapper.clientWidth;
           if (!pillsAreHidden && pillsMenuIsOverflowing) {
+            console.log("pills are overflowing, hiding them");
             pillsMenu.classList.add(OFFSCREEN_CLASS);
             dropdownMenu.classList.remove(OFFSCREEN_CLASS);
           } else if (pillsAreHidden && !pillsMenuIsOverflowing) {
+            console.log("pills are not overflowing, showing them");
             pillsMenu.classList.remove(OFFSCREEN_CLASS);
             dropdownMenu.classList.add(OFFSCREEN_CLASS);
           }
@@ -12863,7 +12871,7 @@
             }
           }
           this.populateRightNav();
-          this.handleMenuContentOverflow();
+          this.fitCustomizationMenuToScreen();
           this.addWindowResizeListener();
           this.revealPage();
           this.updateEditButton();
@@ -13028,7 +13036,7 @@
         }
         addWindowResizeListener() {
           window.addEventListener("resize", () => {
-            this.handleMenuContentOverflow();
+            this.fitCustomizationMenuToScreen();
           });
         }
         /**
@@ -13164,6 +13172,7 @@
           });
           const newFilterSelectorHtml = (0, CustomizationMenu_1.buildCustomizationMenuUi)(resolvedPageFilters);
           this.filterSelectorEl.innerHTML = newFilterSelectorHtml;
+          this.fitCustomizationMenuToScreen();
           this.addFilterSelectorEventListeners();
         }
       };
