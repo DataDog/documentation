@@ -323,6 +323,8 @@ When using the [Datadog Lambda tracing layer for .NET](https://github.com/DataDo
 </PackageReference>
 ```
 
+You are now ready to add custom spans and span tags using the .NET tracer. For further instructions on how to add spans, see the [.NET custom instrumentation](https://docs.datadoghq.com/tracing/trace_collection/custom_instrumentation/dotnet/dd-api/) page.
+
 ## What's next?
 - You can now view metrics, logs, and traces on the [Serverless Homepage][1].
 - Turn on [threat monitoring][6] to get alerted on attackers targeting your service.
