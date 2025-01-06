@@ -467,7 +467,7 @@ The `LLMObs.annotation_context()` method accepts the following arguments:
 
 `prompt` 
 : optional - _dictionary_ 
-<br />A dictionary that represents the prompt used for an LLM call in the following form: `{"template": "...", "id": "...", "version": "...", "variables": {"variable_1": "...", ...}}`. The `Prompt` object can also be imported from `ddtrace.utils` and passed in as the `prompt` argument. **Note**: This argument is only applicable to LLM spans.
+<br />A dictionary that represents the prompt used for an LLM call in the following format:<br />`{"template": "...", "id": "...", "version": "...", "variables": {"variable_1": "...", ...}}`.<br />You can also import the `Prompt` object from `ddtrace.utils` and pass it in as the `prompt` argument. **Note**: This argument only applies to LLM spans.
 
 `tags`
 : optional - _dictionary_
