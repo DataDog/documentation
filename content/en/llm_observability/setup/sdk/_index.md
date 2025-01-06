@@ -1,24 +1,19 @@
 ---
-title: LLM Observability Python SDK Reference
-aliases:
-    - /tracing/llm_observability/sdk
-    - /llm_observability/sdk
+title: Configure the LLM Observability SDK
+type: multi-code-lang
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">LLM Observability is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
-{{< /site-region >}}
+For information about configuration options for LLM Observability SDKs, choose your language:
 
-## Overview
+{{< partial name="llmobs/llmobs-compatibility.html" >}}
 
-The LLM Observability SDK for Python enhances the observability of your Python-based LLM applications. The SDK supports Python versions 3.7 and newer. For information about LLM Observability's integration support, see [Auto Instrumentation][13].
+<br>
 
-You can install and configure tracing of various operations such as workflows, tasks, and API calls with function decorators or context managers. You can also annotate these traces with metadata for deeper insights into the performance and behavior of your applications, supporting multiple LLM services or models from the same environment.
+To instrument an application written in a language that does not yet have official library support, see the [API reference][1].
 
-For usage examples you can run from a Jupyter notebook, see the [LLM Observability Jupyter Notebooks repository][10].
 
-## Setup
 
+<<<<<<< HEAD
 ### Prerequisites
 
 1. The latest `ddtrace` package must be installed:
@@ -715,3 +710,6 @@ def server_process_request(request):
 [12]: /tracing/trace_collection/compatibility/python/#library-compatibility
 [13]: /llm_observability/setup/auto_instrumentation/
 [14]: /serverless/aws_lambda/installation/python/?tab=custom#installation
+=======
+[1]: /llm_observability/setup/api
+>>>>>>> 16e6669643f0988077c363022d7f0594a9227228

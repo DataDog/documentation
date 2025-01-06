@@ -21,10 +21,11 @@ In addition to the out of the box (OOTB) [default Agent and detection rules][7],
 
 ## RBAC for custom rule management
 
-To prevent users with the [Datadog Standard out-of-the-box role][11] from creating, updating, disabling, and deploying a changed rule using remote configuration:
+Here are some important [role and permissions][11] to use for custom rules RBAC:
 
-1. A user within the Datadog Admin role must create a role containing the `security_monitoring_cws_agent_rules_write` permission. 
-2. Add only those users that manage Agent rules to this role.
+- The `security_monitoring_cws_agent_rules_actions` permission can be used to turn on and configure the [Active Protection][12] feature. Active Protection enables you to proactively block and terminate crypto mining threats identified by the Datadog Agent threat detection rules.
+  - To use the `security_monitoring_cws_agent_rules_actions` permission, a user with the Datadog Admin role must create a role containing the `security_monitoring_cws_agent_rules_actions` permission and then add only those users that manage Active Protection to this role.
+- The **Datadog Standard** role enables users to create/update a custom rule by default, as long as the operation does not change the **protection** settings on the rule.
 
 
 ## Custom detection rules summary
@@ -101,8 +102,6 @@ Custom Agent rules are deployed to the Agent in a custom policy separate from th
 
 You can use Remote Configuration to automatically deploy the custom policy to your designated hosts (all hosts or a defined subset of hosts), or manually upload it to the Agent on each host.
 
-<div class="alert alert-info">Remote Configuration for custom rules is in private beta. Fill out this <a href="https://docs.google.com/forms/d/e/1FAIpQLSe5Emr7y_Jg3ShcC44HlYtalxKgHUocFAz8dq87xSkjfeALTg/viewform">form</a> to request access.</div>
-
 ### Remote Configuration
 
 1. On the **Agent Configuration** page, click **Deploy Agent Policy**.
@@ -121,7 +120,7 @@ Next, use the following instructions to upload the policy file to each host.
 {{< tabs >}}
 {{% tab "Host" %}}
 
-Copy the `default.policy` file to the target host in the `{$DD_AGENT}/runtime-security.d` folder. At a minimum, the file must have `read` and `write` access for the `dd-agent` user on the host. This may require use of a utility such as SCP or FTP.
+Copy the `default.policy` file to the target host in the `/etc/datadog-agent/runtime-security.d` folder. The file must have `read` and `write` access for the `root` user on the host. This may require use of a utility such as SCP or FTP.
 
 To apply the changes, restart the [Datadog Agent][1].
 
@@ -136,8 +135,7 @@ To apply the changes, restart the [Datadog Agent][1].
 
     ```yaml
     securityAgent:
-      compliance:
-        # [...]
+      # [...]
       runtime:
         # datadog.securityAgent.runtime.enabled
         # Set to true to enable Security Runtime Module
@@ -146,17 +144,12 @@ To apply the changes, restart the [Datadog Agent][1].
           # datadog.securityAgent.runtime.policies.configMap
           # Place custom policies here
           configMap: jdefaultpol
-      syscallMonitor:
-        # datadog.securityAgent.runtime.syscallMonitor.enabled
-        # Set to true to enable Syscall monitoring.
-        enabled: false
+      # [...]
     ```
 
 3. Upgrade the Helm chart with `helm upgrade <RELEASENAME> -f values.yaml --set datadog.apiKey=<APIKEY> datadog/datadog`.
 
     **Note:** If you need to make further changes to `default.policy`, you can either use `kubectl edit cm jdefaultpol` or replace the configMap with  `kubectl create configmap jdefaultpol --from-file default.policy -o yaml --dry-run=client | kubectl replace -f -`.
-
-4. Restart the [Datadog Agent][1].
 
 [1]: /agent/configuration/agent-commands/?tab=agentv6v7#restart-the-agent
 
@@ -202,6 +195,7 @@ To disable a default Agent rule, navigate to the [**Agent Configuration**][6] pa
 [6]: https://app.datadoghq.com/security/configuration/workload/agent-rules
 [7]: /security/threats/workload_security_rules
 [8]: /security/threats/
-[9]: /security/cloud_siem/log_detection_rules/?tab=threshold#set-a-rule-case
+[9]: /security/cloud_siem/detection_rules/?tab=threshold#set-a-rule-case
 [10]: https://app.datadoghq.com/notebook/list?type=runbook
 [11]: /account_management/rbac/permissions/
+[12]: /security/cloud_security_management/guide/active-protection

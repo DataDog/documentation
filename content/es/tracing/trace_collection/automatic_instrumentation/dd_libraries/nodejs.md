@@ -9,7 +9,7 @@ aliases:
 - /es/tracing/setup_overview/nodejs
 - /es/tracing/setup_overview/setup/nodejs
 - /es/tracing/trace_collection/dd_libraries/nodejs/
-code_lang: NodeJS
+code_lang: nodejs
 code_lang_weight: 30
 further_reading:
 - link: https://github.com/DataDog/dd-trace-js

@@ -24,6 +24,14 @@ export default {
         ap1: 'ap1.datadoghq.com',
         gov: 'app.ddog-gov.com'
     },
+    dd_api: {
+      us: 'https://api.datadoghq.com',
+      us3: 'https://api.us3.datadoghq.com',
+      us5: 'https://api.us5.datadoghq.com',
+      eu: 'https://api.datadoghq.eu',
+      ap1: 'https://api.ap1.datadoghq.com',
+      gov: 'https://api.ddog-gov.com'
+    },
     dd_site_name: {
         us: 'US1',
         us3: 'US3',
@@ -273,6 +281,12 @@ export default {
      us5: 'https://api.us5.datadoghq.com/api/intake/otlp/v1/metrics',
      eu: 'https://api.datadoghq.eu/api/intake/otlp/v1/metrics'
     },
+    otlp_logs_endpoint: {
+     us: 'https://http-intake.logs.datadoghq.com/api/v2/logs',
+     us3: 'https://http-intake.logs.us3.datadoghq.com/api/v2/logs',
+     us5: 'https://http-intake.logs.us5.datadoghq.com/api/v2/logs',
+     eu: 'https://http-intake.logs.datadoghq.eu/api/v2/logs'
+    },
     custom_costs_endpoint: {
       us: 'api.datadoghq.com/api/v2/cost/custom_costs',
       us3: 'api.us3.datadoghq.com/api/v2/cost/custom_costs',
@@ -280,5 +294,21 @@ export default {
       eu: 'api.datadoghq.eu/api/v2/cost/custom_costs.',
       ap1: 'api.ap1.datadoghq.com/api/v2/cost/custom_costs',
       gov: 'The custom costs endpoint for GOV is not supported.'
-    }  
+    },
+    ip_ranges_url_webhooks: {
+      us: 'http://ip-ranges.datadoghq.com/webhooks.json',
+      us3: 'http://ip-ranges.us3.datadoghq.com/webhooks.json',
+      us5: 'http://ip-ranges.us5.datadoghq.com/webhooks.json',
+      eu: 'http://ip-ranges.datadoghq.eu/webhooks.json',
+      ap1: 'http://ip-ranges.ap1.datadoghq.com/webhooks.json',
+      gov: 'http://ip-ranges.ddog-gov.com/webhooks.json'
+    },
+    vercel_setup: {
+     us: 'http://app.datadoghq.com/setup/vercel',
+     us3: 'http://us3.datadoghq.com/setup/vercel',
+     us5: 'http://us5.datadoghq.com/setup/vercel',
+     eu: 'http://app.datadoghq.eu/setup/vercel',
+     ap1: 'http://ap1.datadoghq.com/setup/vercel',
+     gov: 'http://app.ddog-gov.com/setup/vercel'
+ }
 };

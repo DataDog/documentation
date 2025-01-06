@@ -25,7 +25,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - containers
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/datadog_cluster_agent/README.md
 display_on_public_website: true
@@ -33,7 +33,7 @@ draft: false
 git_integration_title: datadog_cluster_agent
 integration_id: datadog-cluster-agent
 integration_title: Datadog Cluster Agent
-integration_version: 3.2.0
+integration_version: 5.2.0
 is_public: true
 manifest_version: 2.0.0
 name: datadog_cluster_agent
@@ -72,18 +72,21 @@ tile:
 
 ### インストール
 
-Datadog-Cluster-Agent チェックは [Datadog Agent][2] パッケージに含まれています。
+Datadog Cluster Agent チェックは [Datadog Agent][2] パッケージに含まれています。
 サーバーに追加でインストールする必要はありません。
 
 ### 構成
+Datadog Cluster Agent チェックは、ほとんどのシナリオで自動的に構成を行うために[オートディスカバリー][3]を使用します。このチェックは、Cluster Agent ポッドと同じノード上の Datadog Agent ポッドで実行されますが、Cluster Agent 自体では実行されません。
 
-1. datadog_cluster_agent のパフォーマンスデータの収集を開始するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `datadog_cluster_agent.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル datadog_cluster_agent.d/conf.yaml][3] を参照してください。
+チェックをさらに構成する必要がある場合
 
-2. [Agent を再起動します][4]。
+1. datadog_cluster_agent のパフォーマンスデータの収集を開始するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `datadog_cluster_agent.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル datadog_cluster_agent.d/conf.yaml][4] を参照してください。
+
+2. [Agent を再起動します][5]。
 
 ### 検証
 
-[Agent の status サブコマンドを実行][5]し、Checks セクションで `datadog_cluster_agent` を探します。
+[Agent の status サブコマンドを実行][6]し、Checks セクションで `datadog_cluster_agent` を探します。
 
 ## 収集データ
 
@@ -101,14 +104,15 @@ Datadog_Cluster_Agent インテグレーションには、イベントは含ま�
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
 
 
 [1]: https://docs.datadoghq.com/ja/agent/cluster_agent/
 [2]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
-[3]: https://github.com/DataDog/integrations-core/blob/master/datadog_cluster_agent/datadog_checks/datadog_cluster_agent/data/conf.yaml.example
-[4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[6]: https://github.com/DataDog/integrations-core/blob/master/datadog_cluster_agent/metadata.csv
-[7]: https://github.com/DataDog/integrations-core/blob/master/datadog_cluster_agent/assets/service_checks.json
-[8]: https://docs.datadoghq.com/ja/help/
+[3]: https://docs.datadoghq.com/ja/getting_started/containers/autodiscovery/
+[4]: https://github.com/DataDog/integrations-core/blob/master/datadog_cluster_agent/datadog_checks/datadog_cluster_agent/data/conf.yaml.example
+[5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[7]: https://github.com/DataDog/integrations-core/blob/master/datadog_cluster_agent/metadata.csv
+[8]: https://github.com/DataDog/integrations-core/blob/master/datadog_cluster_agent/assets/service_checks.json
+[9]: https://docs.datadoghq.com/ja/help/

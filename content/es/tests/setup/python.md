@@ -45,7 +45,7 @@ Marcos para tests compatibles:
 Para informar de los resultados de los tests a Datadog, debes configurar la biblioteca Python de Datadog:
 
 {{< tabs >}}
-{{% tab "Github Actions" (Acciones Github) %}}
+{{% tab "Acciones Github" %}}
 Puedes utilizar la [acción Github para la visibilidad de tests][1] exclusiva, para habilitar la visibilidad de los tests.
 Si lo haces, puedes omitir el resto de los pasos de configuración que se indican a continuación.
 
@@ -60,11 +60,11 @@ Si lo haces, puedes omitir el resto de los pasos de configuración que se indica
 {{% /tab %}}
 
 
-{{% tab "Other cloud CI provider" (Otro proveedor CI en la nube) %}}
+{{% tab "Otro proveedor CI en la nube" %}}
 {{% ci-agentless %}}
 {{% /tab %}}
 
-{{% tab "On-Premises CI Provider" (Proveedor CI on-premises) %}}
+{{% tab "Proveedor CI on-premises" %}}
 {{% ci-agent %}}
 {{% /tab %}}
 {{< /tabs >}}

@@ -72,6 +72,8 @@ code_languages:
     example_file: src/main.rs
 
 code_language_ids:
+    client: Client-Side
+    server: Server-Side (Auto-Instrumentation)
     android: Android
     ios: iOS
     expo: Expo
@@ -80,6 +82,7 @@ code_language_ids:
     codepush: CodePush
     roku: Roku
     unity: Unity
+    kotlin-multiplatform: Kotlin Multiplatform
     swiftui: Swift UI
     java: Java
     cpp: 'C++'
@@ -117,6 +120,8 @@ code_language_ids:
     rust: "Rust"
     dd-api: "Datadog API"
     otel: "OpenTelemetry API"
+    status_legacy: "Status Page (Legacy)"
+    status_page: "Status Page"
 branch: ""
 
 signupclass: sign-up-trigger
@@ -207,7 +212,7 @@ core_product:
     - name: log management
     - name: metrics
     - name: network device monitoring
-    - name: network performance monitoring
+    - name: cloud network monitoring
     - name: observability pipelines
     - name: security
     - name: serverless monitoring

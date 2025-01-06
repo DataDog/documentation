@@ -65,7 +65,7 @@ For Google Cloud tags, select **Google** from the dropdown menu on the top right
 {{% /tab %}}
 {{% tab "Datadog" %}}
 
-<div class="alert alert-warning">Daily Datadog costs are in private beta.</div>
+<div class="alert alert-warning">Daily Datadog costs are in Preview.</div>
 
 For Datadog tags, select **Datadog** from the dropdown menu on the top right corner.
 
@@ -74,7 +74,7 @@ For Datadog tags, select **Datadog** from the dropdown menu on the top right cor
 {{% /tab %}}
 {{% tab "Confluent Cloud" %}}
 
-<div class="alert alert-warning">Confluent Cloud costs are in public beta.</div>
+<div class="alert alert-warning">Confluent Cloud costs are in Preview.</div>
 
 For Confluent Cloud tags, select **Confluent Cloud** from the dropdown menu on the top right corner.
 
@@ -83,7 +83,7 @@ For Confluent Cloud tags, select **Confluent Cloud** from the dropdown menu on t
 {{% /tab %}}
 {{% tab "Databricks" %}}
 
-<div class="alert alert-warning">Databricks costs are in public beta.</div>
+<div class="alert alert-warning">Databricks costs are in Preview.</div>
 
 For Databricks tags, select **Databricks** from the dropdown menu on the top right corner.
 
@@ -92,7 +92,7 @@ For Databricks tags, select **Databricks** from the dropdown menu on the top rig
 {{% /tab %}}
 {{% tab "Fastly" %}}
 
-<div class="alert alert-warning">Fastly costs are in public beta.</div>
+<div class="alert alert-warning">Fastly costs are in Preview.</div>
 
 For Fastly tags, select **Fastly** from the dropdown menu on the top right corner.
 
@@ -101,7 +101,7 @@ For Fastly tags, select **Fastly** from the dropdown menu on the top right corne
 {{% /tab %}}
 {{% tab "Elastic Cloud" %}}
 
-<div class="alert alert-warning">Elastic Cloud costs are in public beta.</div>
+<div class="alert alert-warning">Elastic Cloud costs are in Preview.</div>
 
 For Elastic Cloud tags, select **Elastic Cloud** from the dropdown menu on the top right corner.
 
@@ -110,7 +110,7 @@ For Elastic Cloud tags, select **Elastic Cloud** from the dropdown menu on the t
 {{% /tab %}}
 {{% tab "MongoDB" %}}
 
-<div class="alert alert-warning">MongoDB costs are in public beta.</div>
+<div class="alert alert-warning">MongoDB costs are in Preview.</div>
 
 For MongoDB tags, select **MongoDB** from the dropdown menu on the top right corner.
 
@@ -119,7 +119,7 @@ For MongoDB tags, select **MongoDB** from the dropdown menu on the top right cor
 {{% /tab %}}
 {{% tab "OpenAI" %}}
 
-<div class="alert alert-warning">OpenAI costs are in public beta.</div>
+<div class="alert alert-warning">OpenAI costs are in Preview.</div>
 
 For OpenAI tags, select **OpenAI** from the dropdown menu on the top right corner.
 
@@ -128,7 +128,7 @@ For OpenAI tags, select **OpenAI** from the dropdown menu on the top right corne
 {{% /tab %}}
 {{% tab "Snowflake" %}}
 
-<div class="alert alert-warning">Snowflake costs are in public beta.</div>
+<div class="alert alert-warning">Snowflake costs are in Preview.</div>
 
 For Snowflake tags, select **Snowflake** from the dropdown menu on the top right corner.
 
@@ -137,7 +137,7 @@ For Snowflake tags, select **Snowflake** from the dropdown menu on the top right
 {{% /tab %}}
 {{% tab "Twilio" %}}
 
-<div class="alert alert-warning">Twilio costs are in public beta.</div>
+<div class="alert alert-warning">Twilio costs are in Preview.</div>
 
 For Twilio tags, select **Twilio** from the dropdown menu on the top right corner.
 

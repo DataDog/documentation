@@ -375,6 +375,7 @@ Options that must have a matching configuration when using the `RUM` SDK:
 | `useSecureSessionCookie`               | Boolean | No       | `false` | Use a secure session cookie. This disables logs sent on insecure (non-HTTPS) connections.                                                                                |
 | `usePartitionedCrossSiteSessionCookie` | Boolean | No       | `false` | Use a partitioned secure cross-site session cookie. This allows the logs SDK to run when the site is loaded from another one (iframe). Implies `useSecureSessionCookie`. |
 | `useCrossSiteSessionCookie`            | Boolean | No       | `false` | **Deprecated**, see `usePartitionedCrossSiteSessionCookie`.                                                                                                              |
+| `usePciIntake`                         | Boolean | No       | `false` | To forward logs to the [PCI-compliant intake][16], set to `true`. The PCI-compliant intake is only available for Datadog organizations in the US1 site. If `usePciIntake` is set to `true` and the site is not US1 (datadoghq.com), logs are sent to the default intake. |
 
 ## Usage
 
@@ -787,7 +788,7 @@ It can then be used in a different part of the code with:
 
 ```javascript
 if (window.DD_LOGS) {
-  const signupLogger = window.window.DD_LOGS.getLogger('signupLogger')
+  const signupLogger = window.DD_LOGS.getLogger('signupLogger')
   signupLogger.info('Test sign up completed')
 }
 ```
@@ -1261,3 +1262,4 @@ window.DD_LOGS && window.DD_LOGS.getInternalContext() // { session_id: "xxxx-xxx
 [13]: https://developer.mozilla.org/en-US/docs/Web/API/Event/isTrusted
 [14]: /integrations/content_security_policy_logs/#use-csp-with-real-user-monitoring-and-session-replay
 [15]: #user-tracking-consent
+[16]: https://docs.datadoghq.com/data_security/logs/#pci-dss-compliance-for-log-management

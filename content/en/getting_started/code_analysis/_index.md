@@ -325,7 +325,7 @@ The schema version `v3` and later of the Service Catalog allows you to add the m
 The `paths` attribute is a list of [globs][14]
 that should match paths in the repository.
 
-{{< code-block lang="yaml" filename="service.datadog.yaml" collapsible="true" >}}
+{{< code-block lang="yaml" filename="entity.datadog.yaml" collapsible="true" >}}
 apiVersion: v3
 kind: service
 metadata:
@@ -334,7 +334,7 @@ datadog:
   codeLocations:
     - repositoryURL: https://github.com/myorganization/myrepo.git
       paths:
-        - /path/to/service/code/**
+        - path/to/service/code/**
 {{< /code-block >}}
 
 

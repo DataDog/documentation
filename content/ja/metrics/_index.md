@@ -31,6 +31,7 @@ title: メトリクス
     {{< nextlink href="/metrics/explorer" >}}<u>メトリクスエクスプローラー</u> - すべてのメトリクスを探索し、分析を行います。{{< /nextlink >}}
     {{< nextlink href="/metrics/summary" >}}<u>メトリクスサマリー</u> - Datadog メトリクスのアクティブなレポートについて理解します。{{< /nextlink >}}
     {{< nextlink href="/metrics/advanced-filtering" >}}<u>高度なフィルタリング</u> - データをフィルタリングして、返されるメトリクスの範囲を絞り込みます。{{< /nextlink >}}
+    {{< nextlink href="/metrics/nested_queries" >}}<u>ネストされたクエリ</u> - 集計の追加レイヤーを適用して、高度なクエリ機能を活用します。{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="カスタムメトリクスのボリュームとコストの把握と管理" >}}
@@ -67,7 +68,7 @@ Datadog では、メトリクスデータは値とタイムスタンプを持つ
 
 さらに、メトリクスは、顧客からの需要を満たすために環境の規模を調整するのに役立ちます。リソースをどれだけ消費する必要があるかを正確に知ることは、お金を節約したり、パフォーマンスを向上させたりするのに役立ちます。
 
-### Submitting metrics to Datadog
+### Datadog へのメトリクスの送信
 
 メトリクスは、いくつかの場所から Datadog に送信できます。
 
@@ -104,6 +105,8 @@ Datadog Agent が、送信するデータポイントごとに Datadog のサー
 ## メトリクスのクエリ
 
 [メトリクスエクスプローラー][3]、[ダッシュボード][4]、または[ノートブック][5]の Datadog 全体でメトリクスを視覚化してグラフを作成できます。
+
+**ヒント**: Datadog のグローバル検索から Metrics Summary ページを開くには、<kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>K</kbd> を押し、`metrics` を検索してください。
 
 以下は、時系列を視覚化した場合の例です。
 
@@ -176,6 +179,10 @@ Datadog は大量のポイントを保管しており、ほとんどの場合、
 
 Aggregator を使用するときに適用できる集計には、_合計_、_最小_、_最大_、_平均_の 4 つがあります。上記の例を使用して、ホストが us-east-1、us-east-2、us-west-1、us-west-2 の 4 つのリージョンに分散しているとします。各リージョンのホストは、集計関数を使用して組み合わせる必要があります。_最大_アグリゲーターを使用すると、各リージョンのホスト間で最大のレイテンシーが発生し、_平均_アグリゲーターを使用すると、リージョンごとの平均レイテンシーが発生します。
 
+#### ネストされたクエリ
+UI のネストされたクエリまたは [API][27] を使用して、時間と空間における既存のクエリの結果に追加の集計レイヤーを追加します。詳細については、[ネストされたクエリ][26]のドキュメントを参照してください。
+
+
 ### メトリクスに関するリアルタイム情報を表示する
 
 [メトリクスの概要ページ][20]には、過去 1 時間、1 日、または 1 週間の指定されたタイムフレームで Datadog に報告されたメトリクスのリストが表示されます。メトリクスは、メトリクス名またはタグでフィルタリングできます。
@@ -220,3 +227,5 @@ Aggregator を使用するときに適用できる集計には、_合計_、_最
 [23]: /ja/dashboards/functions/rollup/#rollup-with-calendar-aligned-queries
 [24]: /ja/dashboards/functions/
 [25]: /ja/metrics/custom_metrics/type_modifiers/?tab=count#in-application-modifiers
+[26]: /ja/metrics/nested_queries
+[27]: https://docs.datadoghq.com/ja/api/latest/metrics/#query-timeseries-data-across-multiple-products

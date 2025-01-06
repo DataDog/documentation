@@ -45,10 +45,11 @@ CREATE USER datadog FOR LOGIN datadog;
 GRANT CONNECT ANY DATABASE to datadog;
 GRANT VIEW SERVER STATE to datadog;
 GRANT VIEW ANY DEFINITION to datadog;
--- 로그 전송 모니터링(에이전트 v7.50+에서 사용 가능) 기능을 활용하려면 다음 세 줄의 주석 처리를 해제하세요.
--- USE msdb;
--- CREATE USER datadog FOR LOGIN datadog;
--- GRANT SELECT to datadog;
+-- 로그 전송 모니터링(에이전트 v7.50+에서 사용 가능) 또는
+-- SQL Server 에이전트 모니터링(에이전트 v7.57+에서 사용 가능)을 사용하지 않는 경우, 다음 세 줄의 주석 처리를 해제하세요:
+USE msdb;
+CREATE USER datadog FOR LOGIN datadog;
+GRANT SELECT to datadog;
 ```
 {{% /tab %}}
 {{% tab "SQL Server 2012" %}}
@@ -58,10 +59,11 @@ CREATE LOGIN datadog WITH PASSWORD = '<PASSWORD>';
 CREATE USER datadog FOR LOGIN datadog;
 GRANT VIEW SERVER STATE to datadog;
 GRANT VIEW ANY DEFINITION to datadog;
--- 로그 전송 모니터링(에이전트 v7.50+에서 사용 가능) 기능을 활용하려면 다음 세 줄의 주석 처리를 해제하세요.
--- USE msdb;
--- CREATE USER datadog FOR LOGIN datadog;
--- GRANT SELECT to datadog;
+-- 로그 전송 모니터링(에이전트 v7.50+에서 사용 가능) 또는
+-- SQL Server 에이전트 모니터링(에이전트 v7.57+에서 사용 가능)을 사용하지 않는 경우, 다음 세 줄의 주석 처리를 해제하세요:
+USE msdb;
+CREATE USER datadog FOR LOGIN datadog;
+GRANT SELECT to datadog;
 ```
 
 각 애플리케이션 추가 데이터베이스에 `datadog` 사용자를 생성합니다.

@@ -22,7 +22,8 @@ Using Amazon CloudWatch Metric Streams and Amazon Data Firehose, you can get Clo
 1. Create a CloudWatch Metric Stream in each AWS account and region for which you want to stream metrics.
    - Optionally specify a limited set of namespaces or metrics to stream.
 2. Once you create the Metric Stream, Datadog immediately starts receiving the streamed metrics and displays them on the Datadog site with no additional configuration needed.
-   
+
+<div class="alert alert-danger">Namespace filtering configured in the AWS Integration tile <b>does not apply</b> to CloudWatch Metric Streams. See below for details.</div>   
    
 ### Metric Streaming versus API polling {#streaming-vs-polling}
 
@@ -43,9 +44,11 @@ If you later decide you don't want to stream metrics for a given AWS account and
  
 There is no additional charge from Datadog to stream metrics.
  
-AWS charges based on the number of metric updates on the CloudWatch Metric Stream and the data volume sent to the Amazon Data Firehose. As such, there is a potential to see an increased CloudWatch cost for the subset of metrics you are streaming. For this reason, Datadog recommends using metric streams for the AWS metrics, services, regions, and accounts where you most need the lower latency, and polling for others. For more information, see [Amazon CloudWatch pricing][1].
+AWS charges based on the number of metric updates on the CloudWatch Metric Stream and the data volume sent to the Amazon Data Firehose. As such, there is a potential to see an increased CloudWatch cost for the subset of metrics you are streaming. For this reason, Datadog recommends using metric streams for the AWS metrics, services, regions, and accounts where you most need the lower latency, and polling for others. For more information, see [Amazon CloudWatch pricing][2].
  
 EC2 or Lambda metrics in the stream could increase the number of billable hosts and Lambda invocations (if those hosts and functions aren't already monitored with the AWS integration or Datadog Agent in the case of EC2).
+
+**Note**: You can create filters in CloudWatch to stream only specified metrics. See the [Amazon CloudWatch user guide][7] for more information. 
  
 ## Setup
  
@@ -91,37 +94,38 @@ Once the stack is successfully created, wait five minutes for Datadog to recogni
 {{% /tab %}}
 {{% tab "AWS Console" %}}
  
-To set up metric streams using the AWS Console, create a [CloudWatch Metric Stream][2] for each AWS region.
+To set up metric streams using the AWS Console, create a [CloudWatch Metric Stream][1] for each AWS region.
 
 **Note**: Metric streaming to Datadog currently only supports OpenTelemetry v0.7 output format.
  
 1. Choose the **Quick AWS Partner Setup** and select **Datadog** as the AWS Partner destination from the dropdown menu.
    {{< img src="integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose/metric-stream-partner-setup.png" alt="Cloudwatch metric stream quick partner setup" responsive="true" style="width:60%;">}}
-2. Choose the Datadog site to which you want to stream metrics and enter your [Datadog API key][1].
-3. Choose whether you want to stream all CloudWatch metrics, or only specific namespaces. You also have the option to exclude specific metrics. If you are in a Monitoring Account, you can also choose to enable [Cross-account streaming][5].
+2. Choose the Datadog site to which you want to stream metrics and enter your [Datadog API key][2].
+3. Choose whether you want to stream all CloudWatch metrics, or only specific namespaces. You also have the option to exclude specific metrics. If you are in a Monitoring Account, you can also choose to enable [Cross-account streaming][3].
    {{< img src="integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose/metric-stream-namespace-filter.png" alt="Cloudwatch metric stream" responsive="true" style="width:60%;">}}
-4. Under **Add additional statistics**, include the AWS percentile metrics to send to Datadog. See the [CloudFormation template][3] for a list of the percentile metrics Datadog supports through polling.
+4. Under **Add additional statistics**, include the AWS percentile metrics to send to Datadog. See the [CloudFormation template][4] for a list of the percentile metrics Datadog supports through polling.
    {{< img src="integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose/percentiles.png" alt="Percentiles" responsive="true" style="width:60%;">}}
 5. Assign a name to your metric stream.
 6. Click **Create metric stream**.
  
 ### Results
  
-Once you see the Metric Stream resource has been successfully created, wait five minutes for Datadog to recognize the change. To validate completion, go to the **Metric Collection** tab in Datadog's [AWS integration page][4] and verify that the activated regions are enabled under **CloudWatch Metric Streams** for the specified AWS account.
+After you see the Metric Stream resource has been successfully created, wait five minutes for Datadog to recognize the change. To validate completion, go to the **Metric Collection** tab in Datadog's [AWS integration page][5] and verify that the activated regions are enabled under **CloudWatch Metric Streams** for the specified AWS account.
  
 {{< img src="integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose/active-region.png" alt="The CloudWatch Metric Streams section of the Metric Collection tab of the AWS integration page with one activated region" responsive="true" style="width:60%;">}}
+
 **Note**: If you've already enabled polling CloudWatch APIs, the transition to streaming could cause a brief (up to five minutes) period where the specific metrics you are streaming are double-counted in Datadog. This is because of the difference in timing between when Datadog's crawlers are running and submitting your CloudWatch metrics, and when Datadog recognizes that you have started streaming those metrics and turn off the crawlers.
  
-[1]: https://app.datadoghq.com/organization-settings/api-keys
-[2]: https://console.aws.amazon.com/cloudwatch/home?region=us-east-1#metric-streams:streams/create
-[3]: https://github.com/DataDog/cloudformation-template/blob/master/aws_streams/streams_single_region.yaml#L168-L249
-[4]: https://app.datadoghq.com/integrations/amazon-web-services
-[5]: https://docs.datadoghq.com/integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose/#cross-account-metric-streaming
+[1]: https://console.aws.amazon.com/cloudwatch/home?region=us-east-1#metric-streams:streams/create
+[2]: https://app.datadoghq.com/organization-settings/api-keys
+[3]: https://docs.datadoghq.com/integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose/#cross-account-metric-streaming
+[4]: https://github.com/DataDog/cloudformation-template/blob/master/aws_streams/streams_single_region.yaml#L168-L249
+[5]: https://app.datadoghq.com/integrations/amazon-web-services
 {{% /tab %}}
 {{< /tabs >}}
 
 ### Cross-account metric streaming
-Use cross-account metric streaming to include metrics in a single Metric Stream that spans across multiple AWS accounts within an AWS region. This helps to reduce the number of streams needed to collect metrics for a common destination. To do this, [connect your source accounts][5] with your monitoring account and enable Cross-account streaming to Datadog in your AWS monitoring account.
+Use cross-account metric streaming to include metrics in a single Metric Stream that spans across multiple AWS accounts within an AWS region. This helps to reduce the number of streams needed to collect metrics for a common destination. To do this, [connect your source accounts][4] with your monitoring account and enable Cross-account streaming to Datadog in your AWS monitoring account.
 
 Your monitoring account needs to have the following permissions in order for this feature to work properly:
    * oam:ListSinks
@@ -140,17 +144,19 @@ If you set streaming up through the [AWS Console](?tab=awsconsole#installation):
 1. Delete the CloudWatch Metric Stream linked to your delivery stream.
 2. Delete all resources that were created while setting up the stream, including the S3 and Firehose IAM roles that are associated with the stream.
 
-Once the resources are deleted, wait for five minutes for Datadog to recognize the change. To validate completion, go to the **Metric Collection** tab in Datadog's [AWS integration page][4] and verify that the disabled regions are not displayed under **CloudWatch Metric Streams** for the specified AWS account.
+Once the resources are deleted, wait for five minutes for Datadog to recognize the change. To validate completion, go to the **Metric Collection** tab in Datadog's [AWS integration page][5] and verify that the disabled regions are not displayed under **CloudWatch Metric Streams** for the specified AWS account.
 
 ## Troubleshooting
 
-To resolve any issues encountered while setting up Metric Streams or the associated resources, see [AWS Troubleshooting][5].
+To resolve any issues encountered while setting up Metric Streams or the associated resources, see [AWS Troubleshooting][6].
 
 ## Further Reading
  {{< partial name="whats-next/whats-next.html" >}}
  
-[1]: https://aws.amazon.com/cloudwatch/pricing/
-[2]: https://docs.datadoghq.com/integrations/amazon_web_services/?tab=roledelegation#setup
-[3]: https://app.datadoghq.com/integrations/amazon-web-services
-[4]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-metric-streams-troubleshoot.html
-[5]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Unified-Cross-Account-Setup.html
+[1]: /integrations/guide/cloud-metric-delay/
+[2]: https://aws.amazon.com/cloudwatch/pricing/
+[3]: /integrations/amazon_web_services/?tab=roledelegation#setup
+[4]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Unified-Cross-Account-Setup.html
+[5]: https://app.datadoghq.com/integrations/amazon-web-services
+[6]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-metric-streams-troubleshoot.html
+[7]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Metric-Streams.html

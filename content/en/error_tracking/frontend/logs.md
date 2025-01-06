@@ -70,11 +70,11 @@ If you have not set up the Datadog Android Logs SDK yet, follow the [in-app setu
 2. Configure your application's `version`, `env`, and `service` when [initializing the SDK][4].
 3. To log a caught exception yourself, you may optionally use:
 
-   ```java
+   ```kotlin
    try {
-     doSomething();
-   } catch (IOException e) {
-     logger.e("an exception occurred", e);
+     doSomething()
+   } catch (e: IOException) {
+     logger.e("an exception occurred", e)
    }
    ```
 
@@ -92,7 +92,7 @@ If you have not setup the Datadog iOS Logs SDK yet, follow the [in-app setup ins
 2. Configure your application's `version`, `env`, and `service` when [initializing the SDK][4].
 3. To log a caught exception yourself, you may optionally use:
 
-   ```java
+   ```swift
    do {
      // ...
    } catch {
@@ -104,6 +104,27 @@ If you have not setup the Datadog iOS Logs SDK yet, follow the [in-app setup ins
 [2]: /logs/log_collection/ios/#setup
 [3]: https://github.com/Datadog/dd-sdk-ios
 [4]: /logs/log_collection/ios/?tab=cocoapods#setup
+
+{{% /tab %}}
+{{% tab "Kotlin Multiplatform" %}}
+
+If you have not setup the Datadog Kotlin Multiplatform Logs SDK yet, follow the [in-app setup instructions][1] or see the [Kotlin Multiplatform Logs setup documentation][2].
+
+1. Download the latest version of the [Datadog Kotlin Multiplatform SDK for Logs][3].
+2. Configure your application's `version`, `env`, and `service` when [initializing the SDK][2].
+3. To log a caught exception yourself, you may optionally use:
+
+   ```kotlin
+   try {
+     doSomething()
+   } catch (e: IOException) {
+     logger.error("an exception occurred", e)
+   }
+   ```
+
+[1]: https://app.datadoghq.com/logs/onboarding/client
+[2]: /logs/log_collection/kotlin-multiplatform/#setup
+[3]: https://github.com/Datadog/dd-sdk-kotlin-multiplatform
 
 {{% /tab %}}
 {{< /tabs >}}

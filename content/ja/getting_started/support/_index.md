@@ -30,7 +30,7 @@ Datadog は、サポートを求めるお客様に 2 つの主要チャンネル
 
 ## チャットかサポートチケットか？
 
-Use the table below to determine whether to open a [support ticket][1] or [reach out on chat](#reaching-out-on-chat).
+[サポートチケット][1]を開くか、[チャットで連絡する][#reaching-out-on-chat]かを決定する際は、以下の表を参考にしてください。
 
 | サポートチケット                  | チャット        |
 | ------------------------------- | ----------- |
@@ -43,11 +43,11 @@ Use the table below to determine whether to open a [support ticket][1] or [reach
 
 ## チャットでのお問い合わせ
 
-<div class="alert alert-warning">Chat is available any business day between the hours of 10:00 and 19:00 Eastern Time (ET). Chat is not available for HIPAA-enabled accounts.</a></div>
+<div class="alert alert-warning">チャットは、営業日の午前 10 時から午後 7 時 (米国東部時間) までご利用いただけます。ただし、HIPAA 対応アカウントではチャットは利用できません。</a></div>
 
-To get started, click **Support** on the bottom-left corner of the navigation menu.
+開始するには、ナビゲーションメニューの左下にある **Support** をクリックしてください。
 
-{{< img src="getting_started/support/support_chat_nav.png" alt="The Support button at the bottom of the app left navigation menu" style="width:40%" >}}
+{{< img src="getting_started/support/support_chat_nav.png" alt="アプリ下部の左ナビゲーションメニューにある Support ボタン" style="width:40%" >}}
 
 新しいチャットが開かれると、**技術的な**質問か**販売に関する**質問か尋ねられます。
    - 技術的な質問の場合、最初に対応可能なテクニカルサポートエンジニアに転送されます。Datadog の使用や構成に関する質問には最適です。

@@ -43,7 +43,7 @@ API[![Postman에서 실행][3]] 시도해 보기(https://god.gw.postman.com/run-
 
 기본적으로 Datadog API 설명서는 cURL로 예제를 보여줍니다. 각 엔드포인트에서 공식 [클라이언트 라이브러리][6] 언어 중 하나를 선택하면 해당 라이브러리의 코드 예제를 볼 수 있습니다. 각 라이브러리를 설치하려면:
 
-{{< programming-lang-wrapper langs="java,python-legacy,python,ruby-legacy,ruby,go,typescript" class="api-reference" >}}
+{{< programming-lang-wrapper langs="java,python-legacy,python,ruby-legacy,ruby,go,typescript,rust" class="api-reference" >}}
 
 {{< programming-lang lang="java" >}}
 #### 설치
@@ -201,13 +201,44 @@ import { <VERSION> } from 'datadog-api-client';
 [1]: https://www.npmjs.com/package/@datadog/datadog-api-client
 {{< /programming-lang >}}
 
+{{< programming-lang lang="rust" >}}
+#### 설치
+`cargo add datadog-api-client`를 실행하거나 다음을 `[dependencies]` 아래에 있는 `Cargo.toml`에 추가하세요.
+
+```
+datadog-api-client = "0"
+```
+
+#### 사용량
+다음 코드 조각을 사용해 Datadog API 키를 인증하세요.
+```rust
+use datadog_api_client::datadog::Configuration;
+use datadog_api_client::datadogV1::api_authentication::AuthenticationAPI;
+
+#[tokio::main]
+async fn main() {
+    let configuration = Configuration::new();
+    let api = AuthenticationAPI::with_config(configuration);
+    let resp = api.validate().await;
+    if let Ok(value) = resp {
+        println!("{:#?}", value);
+    } else {
+        println!("{:#?}", resp.unwrap_err());
+    }
+}
+```
+
+[1]: https://crates.io/crates/datadog-api-client
+[2]: https://docs.rs/datadog-api-client/latest/datadog_api_client/
+{{< /programming-lang >}}
+
 {{< /programming-lang-wrapper >}}
 
-또는 라이브러리를 직접 확인하세요:
+또는 라이브러리를 바로 확인하세요.
 
 {{< partial name="api/sdk-languages.html" >}}
 </br>
-애플리케이션을 시작하려고 하시나요? Datadog의 [시작하기 문서][7]를 확인하세요.
+대신 애플리케이션으로 시작하고 싶나요? Datadog 일반 [시작하기 설명서][7]를 참고하세요.
 
 ## 참고 자료
 

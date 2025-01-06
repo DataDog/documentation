@@ -9,7 +9,7 @@ code_lang_weight: 50
 
 The following application security capabilities are supported in the Node.js library, for the specified tracer version:
 
-| Application Security capability                         | Minimum NodeJS tracer version                      |
+| Application Security capability        | Minimum Node.js tracer version                     |
 |----------------------------------------|----------------------------------------------------|
 | Threat Detection                       | 4.0.0                                              |
 | Threat Protection                      | 4.0.0                                              |
@@ -32,7 +32,7 @@ The minimum tracer version to get all supported application security capabilitie
 | Kubernetes  | {{< X >}}                | {{< X >}}                     |
 | Amazon ECS  | {{< X >}}                | {{< X >}}                     |
 | AWS Fargate | {{< X >}}                | {{< X >}}                     |
-| AWS Lambda  | {{< X >}}                | beta                          |
+| AWS Lambda  | {{< X >}}                | {{< X >}}                     |
 
 ## Language and framework compatibility
 

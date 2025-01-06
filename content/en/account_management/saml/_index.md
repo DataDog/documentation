@@ -21,12 +21,12 @@ Configuring [SAML (Security Assertion Markup Language)][1] for your Datadog acco
 
 {{% site-region region="us,us3,us5,eu,ap1" %}}
 - If you don't have SAML enabled on your Datadog account, reach out to [support][2] to enable it.
-- This documentation assumes that you already have a SAML Identity Provider (IdP). If you do not have a SAML IdP, there are several IdPs that have integrations with Datadog such as [Active Directory][3], [Auth0][4], [Azure][3], [Google][5], [LastPass][6], [Okta][7], and [SafeNet][8].
+- This documentation assumes that you already have a SAML Identity Provider (IdP). If you do not have a SAML IdP, there are several IdPs that have integrations with Datadog such as [Active Directory][3], [Auth0][4], [Google][5], [LastPass][6], [Microsoft Entra ID][3], [Okta][7], and [SafeNet][8].
 - SAML configuration requires [Datadog Administrator][9] access.
 {{% /site-region %}}
 
 {{% site-region region="gov" %}}
-- This documentation assumes that you already have a SAML Identity Provider (IdP). If you do not have a SAML IdP, there are several IdPs that have integrations with Datadog such as [Active Directory][3], [Auth0][4], [Azure][3], [Google][5], [LastPass][6], [Okta][7], and [SafeNet][8].
+- This documentation assumes that you already have a SAML Identity Provider (IdP). If you do not have a SAML IdP, there are several IdPs that have integrations with Datadog such as [Active Directory][3], [Auth0][4], [Google][5], [LastPass][6], [Microsoft Entra ID][3], [Okta][7], and [SafeNet][8].
 - SAML configuration requires [Datadog Administrator][9] access.
 {{% /site-region %}}
 
@@ -36,8 +36,8 @@ Configuring [SAML (Security Assertion Markup Language)][1] for your Datadog acco
 
     * [Active Directory][10]
     * [Auth0][11]
-    * [Azure][12]
     * [Google][13]
+    * [Microsoft Entra ID][12]
     * [NoPassword][14]
     * [Okta][15]
     * [SafeNet][16]
@@ -68,20 +68,27 @@ Configuring [SAML (Security Assertion Markup Language)][1] for your Datadog acco
 
 When a login occurs, a SAML Assertion containing user authorization is sent from the identity provider to Datadog.
 
-Some important notes on assertions:
+### Capabilities
 
 * Datadog supports the **HTTP-POST** binding for **SAML2**:
 `urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST`.
 * Datadog specifies `urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress` for the format of the **NameIDPolicy** in assertion requests.
+
+### Requirements
+
 * Assertions must be signed.
 * Assertions can be encrypted, but unencrypted assertions are accepted.
 * Reference [Datadog's Service Provider metadata][18] for more information. You must be signed in to Datadog to access the file.
+
+### Supported attributes
 
 Attributes may be included in a SAML Assertion. Datadog looks for three attributes in an `AttributeStatement`:
 
   1. **eduPersonPrincipalName**: If specified, the eduPersonPrincipalName must correspond to the user's Datadog username. The username is typically the user's email address.
   2. **sn**: This is optional, and should be set to the user's surname.
   3. **givenName**: This is optional, and should be set to the user's first, or given name.
+
+<div class="alert alert-info">For the Microsoft Entra ID IdP, use the attribute `surname` instead of `sn` in the assertion.</div>
 
 Datadog expects that Attributes use the URI NameFormat `urn:oasis:names:tc:SAML:2.0:attrname-format:uri` or the Basic NameFormat `urn:oasis:names:tc:SAML:2.0:attrname-format:basic`. The name used for each attribute depends on the NameFormat that your IdP uses.
 
@@ -143,7 +150,7 @@ Certain Identity Providers (such as Microsoft's ADFS) can be configured to pull 
 
 [1]: http://en.wikipedia.org/wiki/Security_Assertion_Markup_Language
 [2]: /help/
-[3]: https://docs.microsoft.com/en-us/azure/active-directory/fundamentals/auth-saml
+[3]: https://learn.microsoft.com/en-us/entra/architecture/auth-saml
 [4]: https://auth0.com/docs/protocols/saml-protocol
 [5]: https://cloud.google.com/architecture/identity/single-sign-on
 [6]: https://support.logmeininc.com/lastpass/help/lastpass-admin-toolkit-using-single-sign-on-sso
@@ -152,7 +159,7 @@ Certain Identity Providers (such as Microsoft's ADFS) can be configured to pull 
 [9]: /account_management/users/default_roles/
 [10]: /account_management/saml/activedirectory/
 [11]: /account_management/saml/auth0/
-[12]: /account_management/saml/azure/
+[12]: /account_management/saml/entra/
 [13]: /account_management/saml/google/
 [14]: /account_management/saml/nopassword/
 [15]: /account_management/saml/okta/

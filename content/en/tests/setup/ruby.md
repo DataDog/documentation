@@ -14,13 +14,13 @@ further_reading:
     - link: "/continuous_integration/tests"
       tag: "Documentation"
       text: "Explore Test Results and Performance"
-    - link: "/continuous_integration/troubleshooting/"
+    - link: "/tests/troubleshooting/"
       tag: "Documentation"
-      text: "Troubleshooting CI Visibility"
+      text: "Troubleshooting Test Optimization"
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
+<div class="alert alert-warning">Test Optimization is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
 ## Compatibility
@@ -45,6 +45,7 @@ Supported test runners:
 | Test runner | Version |
 |---|---|
 | Knapsack Pro | >= 7.2.0 |
+| parallel_tests | >= 4.0.0 |
 | ci-queue | >= 0.53.0 |
 
 ## Configuring reporting method
@@ -52,6 +53,15 @@ Supported test runners:
 To report test results to Datadog, you need to configure the `datadog-ci` gem:
 
 {{< tabs >}}
+{{% tab "CI Provider with Auto-Instrumentation Support" %}}
+{{% ci-autoinstrumentation %}}
+
+<div class="alert alert-warning">
+  <strong>Note</strong>: Auto-instrumentation is not supported for JRuby. Follow the <a href="/tests/setup/ruby/?tab=ciproviderwithautoinstrumentationsupport#manually-instrumenting-your-tests">manual instrumentation steps</a> instead.  
+</div>
+
+{{% /tab %}}
+
 {{% tab "Cloud CI provider (Agentless)" %}}
 
 {{% ci-agentless %}}
@@ -64,20 +74,145 @@ To report test results to Datadog, you need to configure the `datadog-ci` gem:
 {{% /tab %}}
 {{< /tabs >}}
 
-## Installing the Ruby test visibility library
+## Installing the Ruby test optimization library
 
-To install the Ruby test visibility library:
+To install the [Ruby test optimization gem][10] run:
+
+```bash
+bundle add datadog-ci --group "test"
+```
+Alternatively, add it to your Gemfile manually:
 
 1. Add the `datadog-ci` gem to your `Gemfile`:
 
 {{< code-block lang="ruby" filename="Gemfile" >}}
-source "<https://rubygems.org>"
 gem "datadog-ci", "~> 1.0", group: :test
 {{< /code-block >}}
 
 2. Install the gem by running `bundle install`
 
 ## Instrumenting your tests
+
+Follow these steps if your CI Provider is not supported for auto-instrumentation (see [Configuring reporting method](#configuring-reporting-method)).
+
+1. Set the following environment variables to configure the tracer:
+
+`DD_CIVISIBILITY_ENABLED=true` (Required)
+: Enables the Test Optimization product.
+
+`DD_ENV` (Required)
+: Environment where the tests are being run (for example: `local` when running tests on a developer workstation or `ci` when running them on a CI provider).
+
+`DD_SERVICE` (Optional)
+: Name of the service or library being tested.
+
+2. Prepend your test command with this datadog-ci CLI wrapper:
+
+```bash
+bundle exec ddcirb exec bundle exec rake test
+```
+
+Alternatively, set `RUBYOPT` environment variable to `"-rbundler/setup -rdatadog/ci/auto_instrument"` and don't modify your test command.
+
+### Adding custom tags to tests
+
+You can add custom tags to your tests by using the current active test:
+
+```ruby
+require "datadog/ci"
+
+# inside your test
+Datadog::CI.active_test&.set_tag("test_owner", "my_team")
+# test continues normally
+# ...
+```
+
+To create filters or `group by` fields for these tags, you must first create facets. For more information about adding tags, see the [Adding Tags][2] section of the Ruby custom instrumentation documentation.
+
+### Adding custom measures to tests
+
+Like tags, you can add custom measures to your tests by using the current active test:
+
+```ruby
+require "datadog/ci"
+
+# inside your test
+Datadog::CI.active_test&.set_metric("memory_allocations", 16)
+# test continues normally
+# ...
+```
+
+For more information on custom measures, see the [Add Custom Measures Guide][3].
+
+## Configuration settings
+
+The following is a list of the most important configuration settings that can be used with the test optimization library, either in code by using a `Datadog.configure` block, or using environment variables:
+
+`service`
+: Name of the service or library under test.<br/>
+**Environment variable**: `DD_SERVICE`<br/>
+**Default**: `$PROGRAM_NAME`<br/>
+**Example**: `my-ruby-app`
+
+`env`
+: Name of the environment where tests are being run.<br/>
+**Environment variable**: `DD_ENV`<br/>
+**Default**: `none`<br/>
+**Examples**: `local`, `ci`
+
+For more information about `service` and `env` reserved tags, see [Unified Service Tagging][4].
+
+The following environment variable can be used to configure the location of the Datadog Agent:
+
+`DD_TRACE_AGENT_URL`
+: Datadog Agent URL for trace collection in the form `http://hostname:port`.<br/>
+**Default**: `http://localhost:8126`
+
+All other [Datadog Tracer configuration][5] options can also be used.
+
+## Using additional instrumentation
+
+It can be useful to have rich tracing information about your tests that includes time spent performing database operations or other external calls, as seen in the following flame graph:
+
+{{< img src="continuous_integration/tests/setup/ci-ruby-test-trace-with-redis.png" alt="Test trace with Redis instrumented" >}}
+
+To achieve this, configure additional instrumentation in your `configure` block:
+
+```ruby
+if ENV["DD_ENV"] == "ci"
+  Datadog.configure do |c|
+    #  ... ci configs and instrumentation here ...
+    c.tracing.instrument :redis
+    c.tracing.instrument :pg
+    # ... any other instrumentations supported by datadog gem ...
+  end
+end
+```
+
+Alternatively, you can enable automatic APM instrumentation in `test_helper/spec_helper`:
+
+```ruby
+require "datadog/auto_instrument" if ENV["DD_ENV"] == "ci"
+```
+
+**Note**: In CI mode, these traces are submitted to Test Optimization, and they do **not** show up in Datadog APM.
+
+For the full list of available instrumentation methods, see the [tracing documentation][6]
+
+## Collecting Git metadata
+
+{{% ci-git-metadata %}}
+
+## Manually instrumenting your tests
+
+<div class="alert alert-info">
+<strong>Attention</strong>: when using manual instrumentation, run your tests like you normally do: 
+don't change `RUBYOPT` env variable and don't prepend `bundle exec ddcirb exec` to your test command
+</div>
+
+Auto-instrumentation adds additional performance overhead at the code loading stage. It can be especially noticeable for 
+large repositories with a lot of dependencies. If your project takes 20+ seconds to start, you are likely
+to benefit from manually instrumenting your tests.
 
 {{< tabs >}}
 {{% tab "RSpec" %}}
@@ -93,7 +228,7 @@ require "datadog/ci"
 # Only activates test instrumentation on CI
 if ENV["DD_ENV"] == "ci"
   Datadog.configure do |c|
-    # enables test visibility
+    # enables test optimization
     c.ci.enabled = true
 
     # The name of the service or library under test
@@ -133,7 +268,7 @@ require "datadog/ci"
 # Only activates test instrumentation on CI
 if ENV["DD_ENV"] == "ci"
   Datadog.configure do |c|
-    # enables test visibility
+    # enables test optimization
     c.ci.enabled = true
 
     # The name of the service or library under test
@@ -193,7 +328,7 @@ require "datadog/ci"
 # Only activates test instrumentation on CI
 if ENV["DD_ENV"] == "ci"
   Datadog.configure do |c|
-    # enables test visibility
+    # enables test optimization
     c.ci.enabled = true
 
     # The name of the service or library under test
@@ -220,134 +355,9 @@ DD_ENV=ci bundle exec rake cucumber
 {{% /tab %}}
 {{< /tabs >}}
 
-### Adding custom tags to tests
+## Using library's public API for unsupported test frameworks
 
-You can add custom tags to your tests by using the current active test:
-
-```ruby
-require "datadog/ci"
-
-# inside your test
-Datadog::CI.active_test&.set_tag("test_owner", "my_team")
-# test continues normally
-# ...
-```
-
-To create filters or `group by` fields for these tags, you must first create facets. For more information about adding tags, see the [Adding Tags][2] section of the Ruby custom instrumentation documentation.
-
-### Adding custom measures to tests
-
-Like tags, you can add custom measures to your tests by using the current active test:
-
-```ruby
-require "datadog/ci"
-
-# inside your test
-Datadog::CI.active_test&.set_metric("memory_allocations", 16)
-# test continues normally
-# ...
-```
-
-For more information on custom measures, see the [Add Custom Measures Guide][3].
-
-## Configuration settings
-
-The following is a list of the most important configuration settings that can be used with the test visibility library, either in code by using a `Datadog.configure` block, or using environment variables:
-
-`service`
-: Name of the service or library under test.<br/>
-**Environment variable**: `DD_SERVICE`<br/>
-**Default**: `$PROGRAM_NAME`<br/>
-**Example**: `my-ruby-app`
-
-`env`
-: Name of the environment where tests are being run.<br/>
-**Environment variable**: `DD_ENV`<br/>
-**Default**: `none`<br/>
-**Examples**: `local`, `ci`
-
-For more information about `service` and `env` reserved tags, see [Unified Service Tagging][4].
-
-The following environment variable can be used to configure the location of the Datadog Agent:
-
-`DD_TRACE_AGENT_URL`
-: Datadog Agent URL for trace collection in the form `http://hostname:port`.<br/>
-**Default**: `http://localhost:8126`
-
-All other [Datadog Tracer configuration][5] options can also be used.
-
-## Using additional instrumentation
-
-It can be useful to have rich tracing information about your tests that includes time spent performing database operations or other external calls, as seen in the following flame graph:
-
-{{< img src="continuous_integration/tests/setup/ci-ruby-test-trace-with-redis.png" alt="Test trace with Redis instrumented" >}}
-
-To achieve this, configure additional instrumentation in your `configure` block:
-
-```ruby
-if ENV["DD_ENV"] == "ci"
-  Datadog.configure do |c|
-    #  ... ci configs and instrumentation here ...
-    c.tracing.instrument :redis
-    c.tracing.instrument :pg
-    # ... any other instrumentations supported by datadog gem ...
-  end
-end
-```
-
-Alternatively, you can enable automatic instrumentation in `test_helper/spec_helper`:
-
-```ruby
-require "datadog/auto_instrument" if ENV["DD_ENV"] == "ci"
-```
-
-**Note**: In CI mode, these traces are submitted to CI Visibility, and they do **not** show up in Datadog APM.
-
-For the full list of available instrumentation methods, see the [tracing documentation][6]
-
-## Webmock/VCR
-
-[Webmock][7] and [VCR][9]
-are popular Ruby libraries that stub HTTP requests when running tests.
-By default, they fail when used with datadog-ci because traces are being sent
-to Datadog with HTTP calls.
-
-To allow HTTP connections for Datadog backend, you need to configure
-Webmock and VCR accordingly.
-
-```ruby
-# Webmock
-# when using Agentless mode:
-WebMock.disable_net_connect!(:allow => /datadoghq/)
-
-# when using Agent running locally:
-WebMock.disable_net_connect!(:allow_localhost => true)
-
-# or for more granular setting set your Agent URL, for example:
-WebMock.disable_net_connect!(:allow => "localhost:8126")
-
-# VCR
-VCR.configure do |config|
-  # ... your usual configuration here ...
-
-  # when using Agent
-  config.ignore_hosts "127.0.0.1", "localhost"
-
-  # when using Agentless mode
-  config.ignore_request do |request|
-    # ignore all requests to datadoghq hosts
-    request.uri =~ /datadoghq/
-  end
-end
-```
-
-## Collecting Git metadata
-
-{{% ci-git-metadata %}}
-
-## Using manual testing API
-
-If you use RSpec, Minitest, or Cucumber, **do not use the manual testing API**, as CI Visibility automatically instruments them and sends the test results to Datadog. The manual testing API is **incompatible** with already supported testing frameworks.
+If you use RSpec, Minitest, or Cucumber, **do not use the manual testing API**, as Test Optimization automatically instruments them and sends the test results to Datadog. The manual testing API is **incompatible** with already supported testing frameworks.
 
 Use the manual testing API only if you use an unsupported testing framework or have a different testing mechanism.
 Full public API documentation is available on [YARD site][8].
@@ -452,3 +462,4 @@ Datadog::CI.active_test_session&.finish
 [7]: https://github.com/bblimke/webmock
 [8]: https://datadoghq.dev/datadog-ci-rb/Datadog/CI.html
 [9]: https://github.com/vcr/vcr
+[10]: https://github.com/DataDog/datadog-ci-rb

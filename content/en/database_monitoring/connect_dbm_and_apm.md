@@ -30,12 +30,10 @@ APM tracer integrations support a *Propagation Mode*, which controls the amount 
 
 | DD_DBM_PROPAGATION_MODE | Postgres  |   MySQL     | SQL Server |  Oracle   |
 |:------------------------|:---------:|:-----------:|:----------:|:---------:|
-| `full`                  | {{< X >}} | {{< X >}} * |    {{< X >}} ** |           |
+| `full`                  | {{< X >}} | {{< X >}} * | {{< X >}}  | {{< X >}} |
 | `service`               | {{< X >}} | {{< X >}}   | {{< X >}}  | {{< X >}} |
 
 \* Full propagation mode on Aurora MySQL requires version 3.
-
-\*\* SQL Server only supports full mode with the Java and .NET tracers.
 
 **Supported application tracers and drivers**
 
@@ -45,7 +43,7 @@ APM tracer integrations support a *Propagation Mode*, which controls the amount 
 |                                          | [database/sql][4]      | {{< X >}} | {{< X >}} | `service` mode only | `service` mode only |
 |                                          | [sqlx][5]              | {{< X >}} | {{< X >}} | `service` mode only | `service` mode only |
 | **Java** [dd-trace-java][23] >= 1.11.0   |                        |           |           |                     |                     |
-|                                          | [jdbc][22]             | {{< X >}} | {{< X >}} | {{< X >}} ** | `service` mode only |
+|                                          | [jdbc][22]             | {{< X >}} | {{< X >}} | {{< X >}} **        | {{< X >}} ***       |
 | **Ruby:** [dd-trace-rb][6] >= 1.8.0      |                        |           |           |                     |                     |
 |                                          | [pg][8]                | {{< X >}} |           |                     |                     |
 |                                          | [mysql2][7]            |           | {{< X >}} |                     |                     |
@@ -61,7 +59,8 @@ APM tracer integrations support a *Propagation Mode*, which controls the amount 
 |                                          | [Npgsql][16] *         | {{< X >}} |           |                     |                     |
 |                                          | [MySql.Data][17] *     |           | {{< X >}} |                     |                     |
 |                                          | [MySqlConnector][18] * |           | {{< X >}} |                     |                     |
-|                                          | [ADO.NET][24] *        |           |           | {{< X >}} **       |                     |
+|                                          | [System.Data.SqlClient][24] * |    |           | {{< X >}} **        |                     |
+|                                          | [Microsoft.Data.SqlClient][32] * | |           | {{< X >}} **        |                     |
 | **PHP**  [dd-trace-php][19] >= 0.86.0    |                        |           |           |                     |                     |
 |                                          | [pdo][20]              | {{< X >}} | {{< X >}} |                     |                     |
 |                                          | [MySQLi][21]           |           | {{< X >}} |                     |                     |
@@ -72,13 +71,17 @@ APM tracer integrations support a *Propagation Mode*, which controls the amount 
 
 \* [CommandType.StoredProcedure][25] not supported
 
-\*\* Full mode SQL Server/Java:
-- The instrumentation executes a `SET context_info` command when the client issues a query, which makes an additional round-trip to the database.
-- If your applications uses `context_info` to instrument the application, it is overwritten by the APM tracer.
-- Prerequisites:
-  - Agent version 7.55.0 or greater
-  - Java tracer version 1.39.0 or greater
-  - .NET tracer version 3.3 or greater
+\*\* Full mode SQL Server for Java/.NET:
+  - The instrumentation executes a `SET context_info` command when the client issues a query, which makes an additional round-trip to the database.
+  - If your applications uses `context_info` to instrument the application, it is overwritten by the APM tracer.
+  - Prerequisites:
+    - Agent version 7.55.0 or greater
+    - Java tracer version 1.39.0 or greater
+    - .NET tracer version 3.3 or greater
+
+\*\*\* Full mode Oracle for Java:
+  - The instrumentation overwrites `V$SESSION.ACTION`.
+  - Prerequisite: Java tracer 1.45 or greater
 
 ## Setup
 For the best user experience, ensure the following environment variables are set in your application:
@@ -193,7 +196,17 @@ public class Application {
 }
 ```
 
-**Note**: Prepared statements are not supported in `full` mode, and all JDBC API calls that use prepared statements are automatically downgraded to `service` mode. Since most Java SQL libraries use prepared statements by default, this means that **most** Java applications are only able to use `service` mode.
+**Note**:
+
+**Tracer versions 1.44 and greater**:
+Enable the prepared statements tracing using **one** of the following methods:
+- Set the system property `dd.dbm.trace_prepared_statements=true`
+- Set the environment variable `export DD_DBM_TRACE_PREPARED_STATEMENTS=true`
+
+The prepared statements instrumentation will overwrite the `Application` property, and will cause an extra roundtrip to the database.
+
+**Tracer versions below 1.44**:
+Prepared statements are not supported in `full` mode, and all JDBC API calls that use prepared statements are automatically downgraded to `service` mode. Since most Java SQL libraries use prepared statements by default, this means that **most** Java applications are only able to use `service` mode.
 
 [1]: /tracing/trace_collection/dd_libraries/java/
 [2]: /tracing/trace_collection/compatibility/java/#data-store-compatibility
@@ -448,7 +461,7 @@ View historical performance of similar queries to those executed in your trace, 
 [21]: https://www.php.net/manual/en/book.mysqli.php
 [22]: https://docs.oracle.com/javase/8/docs/technotes/guides/jdbc/
 [23]: https://github.com/DataDog/dd-trace-java
-[24]: https://learn.microsoft.com/en-us/dotnet/framework/data/adonet/ado-net-overview
+[24]: https://learn.microsoft.com/sql/connect/ado-net/microsoft-ado-net-sql-server
 [25]: https://learn.microsoft.com/en-us/dotnet/api/system.data.sqlclient.sqlcommand.commandtype?view=dotnet-plat-ext-7.0#remarks:~:text=[…]%20should%20set
 [26]: https://app.datadoghq.com/services
 [27]: https://pypi.org/project/asyncpg/
@@ -456,3 +469,4 @@ View historical performance of similar queries to those executed in your trace, 
 [29]: https://pypi.org/project/mysql-connector-python/
 [30]: https://pypi.org/project/mysqlclient/
 [31]: https://github.com/PyMySQL/PyMySQL
+[32]: https://learn.microsoft.com/sql/connect/ado-net/introduction-microsoft-data-sqlclient-namespace

@@ -175,8 +175,8 @@ Datadog offers OOTB metrics that measures [estimated custom metrics usage][15]. 
 
 | Usage Type                    | Metric                                   | Description |
 |-------------------------------|------------------------------------------| ----------- |
-| Indexed Custom Metrics        | `datadog.estimated_usage.metrics.custom`, `datadog.estimated_usage.metrics.custom.by_metric` | Unique indexed Custom Metrics seen in the last hour. |
-| Ingested Custom Metrics       | `datadog.estimated_usage.metrics.custom.ingested`, `datadog.estimated_usage.metrics.custom.ingested.by_metric` | Unique ingested Custom Metrics seen in the last hour. |
+| Indexed Custom Metrics        | `datadog.estimated_usage.metrics.custom`, `datadog.estimated_usage.metrics.custom.by_metric`,  `datadog.estimated_usage.metrics.custom.by_tag` | Unique indexed Custom Metrics seen in the last hour. |
+| Ingested Custom Metrics       | `datadog.estimated_usage.metrics.custom.ingested`, `datadog.estimated_usage.metrics.custom.ingested.by_metric`, `datadog.estimated_usage.metrics.custom.ingested.by_tag` | Unique ingested Custom Metrics seen in the last hour. |
 
 ### Monitor spikes in custom metric usage to prevent overages
 
@@ -190,6 +190,7 @@ After you've received an alert, use the Metrics Volume Management page to inspec
     {{< nextlink href="/monitors/types/change-alert/" >}}Alert when the volume changes beyond a certain percent.{{< /nextlink >}}
     {{< nextlink href="/monitors/types/anomaly/" >}}Alert on anomalous changes in usage.{{< /nextlink >}}
     {{< nextlink href="/monitors/types/forecasts/" >}}Forecast future metrics growth and alert on any unexpected overall deviation.{{< /nextlink >}}
+
 {{< /whatsnext >}}
 
 ## Summary of best practices

@@ -7,6 +7,9 @@ further_reading:
 - link: "/continuous_integration/explorer"
   tag: "Documentation"
   text: "Search and filter pipeline executions"
+- link: "/continuous_integration/guides/identify_highest_impact_jobs_with_critical_path/"
+  tag: "Documentation"
+  text: "Identify CI Jobs on the Critical Path to reduce the Pipeline Duration"
 ---
 
 {{< site-region region="gov" >}}
@@ -63,6 +66,8 @@ To highlight the critical path on the trace, click on the `Critical path` checkb
 
 The critical path highlights the spans that you need to speed up if you want to reduce the overall execution time of your pipeline. If a CI job is on the critical path, it means it is part of the longest path through the trace in terms of execution time. Speeding up the CI Jobs on the critical path is strictly necessary to speed up the CI pipeline.
 
+You can use [this guide][11] to identify the CI jobs on the critical path to help you determine which jobs to prioritize in order to reduce the overall duration of the CI pipelines.
+
 ### Explore connections to services, resources, and network events
 
 Click one of the executions to open the pipeline execution view and see the flame graph or span list for the pipeline and its stages. The _Executions (n)_ list on the left side gives you quick access to the data for each retry of the pipeline for the same commit.
@@ -86,7 +91,7 @@ Job log collection is supported for the following providers:
 
 #### AI-generated log summaries
 
-<div class="alert alert-info">AI-generated log summaries are in private beta. To request access, fill out <a href="https://docs.google.com/forms/d/e/1FAIpQLSfBuPfdyhgqjjduDYpOM5twJdkdDnTTxJdCCWonauaBxWTCnQ/viewform">this form</a>.</div>
+<div class="alert alert-info">AI-generated log summaries are in Preview. To request access, fill out <a href="https://docs.google.com/forms/d/e/1FAIpQLSfBuPfdyhgqjjduDYpOM5twJdkdDnTTxJdCCWonauaBxWTCnQ/viewform">this form</a>.</div>
 
 Pipeline Visibility provides AI-generated explanations for pipeline errors based on your CI job logs. These explanations can be found on the **Failed Jobs** tab for each pipeline execution. You can use these summaries to determine whether an error in CI is associated with developer-written code or the CI pipeline itself, as well as troubleshoot execution failures.
 
@@ -103,3 +108,4 @@ Pipeline Visibility provides AI-generated explanations for pipeline errors based
 [8]: /continuous_integration/pipelines/awscodepipeline/#enable-log-correlation
 [9]: /continuous_integration/pipelines/azure/#enable-job-log-collection
 [10]: /continuous_integration/pipelines/circleci/#enable-log-collection
+[11]: /continuous_integration/guides/identify_highest_impact_jobs_with_critical_path

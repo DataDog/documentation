@@ -14,9 +14,9 @@ further_reading:
     text: 'Simplify production debugging with Datadog Exception Replay'
 ---
 
-{{< beta-callout url="#" btn_hidden="false" url="https://forms.gle/dMLudmE2xoBw8Ur59" header="Join the Beta!">}}
-Datadog's standalone backend Error Tracking is in private beta. Sign up to be notified and gain access when the private beta opens.
-{{< /beta-callout >}}
+{{< callout url="https://www.datadoghq.com/product-preview/backend-error-tracking/" btn_hidden="false" header="false">}}
+Datadog's standalone backend Error Tracking is in Preview. If you're interested in this feature, complete the form to request access.
+{{< /callout >}}
 
 
 ## Overview

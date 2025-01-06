@@ -30,7 +30,7 @@ title: AWS Lambda のためのサーバーレスモニタリングの構成
 - [ログとトレースを接続する](#connect-logs-and-traces)
 - [ソースコードにエラーをリンクさせる](#link-errors-to-your-source-code)
 - [カスタムメトリクスの送信][27]
-- [プロファイリングデータの収集 (公開ベータ版)](#collect-profiling-data-public-beta)
+- [プロファイリングデータの収集](#collect-profiling-data)
 - [PrivateLink またはプロキシ経由でテレメトリーを送信する](#send-telemetry-over-privatelink-or-proxy)
 - [複数の Datadog 組織にテレメトリーを送信する](#send-telemetry-to-multiple-datadog-organizations)
 - [AWS リソース上でトレースコンテキストを伝播させる](#propagate-trace-context-over-aws-resources)
@@ -39,9 +39,9 @@ title: AWS Lambda のためのサーバーレスモニタリングの構成
 - [Datadog Lambda 拡張機能に移行する](#migrate-to-the-datadog-lambda-extension)
 - [Datadog Lambda 拡張機能による x86 から arm64 への移行](#migrating-between-x86-to-arm64-with-the-datadog-lambda-extension)
 - [ローカルテスト用の Datadog Lambda 拡張機能の構成](#configure-the-datadog-lambda-extension-for-local-testing)
-- [OpenTelemetry API を使った AWS Lambda のインスツルメンテーション](#instrument-aws-lambda-with-the-opentelemetry-api)
+- [OpenTelemetry API を使用した AWS Lambda のインスツルメンテーション](#instrument-aws-lambda-with-the-opentelemetry-api)
 - [トラブルシューティング](#troubleshoot)
-- [その他の参考資料](#further-reading)
+- [参考文献](#further-reading)
 
 
 ## 脅威の検出を有効にして攻撃の試みを観測する
@@ -65,7 +65,7 @@ title: AWS Lambda のためのサーバーレスモニタリングの構成
    ```sh
    curl -H 'My-ASM-Test-Header: acunetix-product' https://<YOUR_FUNCTION_URL>/<EXISTING_ROUTE>
    ```
-アプリケーションを有効にして攻撃パターンを送信すると、数分後に[アプリケーションシグナルエクスプローラー][41]に脅威情報が表示されます。
+アプリケーションを有効化し、攻撃パターンを送信してから数分後、**脅威情報が [Application Signals Explorer][41] に表示されます**。
 
 ## タグを使ったテレメトリー接続
 
@@ -101,7 +101,7 @@ custom:
     tags: "team:avengers,project:marvel"
 ```
 
-デフォルトでは、`env` と `service` を定義しない場合、プラグインは自動的にサーバーレスアプリケーション定義から `stage` と `service` の値を使用します。この機能を無効にするには、`enableTags` を `false` に設定します。
+デフォルトでは、`env` と `service` を定義しない場合、プラグインはサーバーレスアプリケーション定義から `stage` と `service` の値を自動的に使用します。この機能を無効にするには、`enableTags` を `false` に設定してください。
 
 [1]: https://docs.datadoghq.com/ja/serverless/serverless_integrations/plugin
 {{% /tab %}}
@@ -354,7 +354,7 @@ Datadog APM クライアントによって自動的にインスツルメント�
 
 メトリクスは、アプリケーションの 100% のトラフィックに基づいて計算され、どのようなサンプリング構成であっても正確な値を維持します。
 
-高スループットのサービスでは、トレースデータが非常に反復性が高いため、通常、すべてのリクエストを収集する必要はありません。十分重要な問題は、常に複数のトレースで症状を示すはずです。[取り込み制御][18]は、予算の範囲内で、問題のトラブルシューティングに必要な可視性を確保するのに役立ちます。
+トレースデータは非常に反復性が高いため、高スループットのサービスでは、通常、すべてのリクエストを収集する必要はありません。十分重要な問題は、常に複数のトレースで症状を示すはずです。[取り込み制御][18]は、予算の範囲内で、問題のトラブルシューティングに必要な可視性を確保するのに役立ちます。
 
 取り込みのためのデフォルトのサンプリングメカニズムは[ヘッドベースサンプリング][19]と呼ばれています。トレースを維持するか削除するかの決定は、トレースの一番最初、ルートスパンの開始時に行われます。この決定は、HTTP リクエストヘッダーなどのリクエストコンテキストの一部として、他のサービスに伝搬されます。この判断はトレースの最初に行われ、その後トレースのすべての部分に伝えられるため、ルートサービスのサンプリングレートを構成しないと有効になりません。
 
@@ -501,15 +501,15 @@ Lambda 関数で環境変数 `DD_TRACE_ENABLED` を `false` に設定します�
 
 ## ソースコードにエラーをリンクする
 
-[Datadog ソースコードインテグレーション][26]では、テレメトリー (スタックトレースなど) を Git リポジトリにある Lambda 関数のソースコードにリンクさせることができます。
+[Datadog ソースコードインテグレーション][26]を使用すると、テレメトリー (スタックトレースなど) を Git リポジトリ内の Lambda 関数のソースコードにリンクできます。
 
-サーバーレスアプリケーションにソースコードインテグレーションをセットアップする手順については、[ビルドアーティファクトに Git 情報を埋め込むセクション][101]を参照してください。
+サーバーレスアプリケーションでソースコードインテグレーションを設定する手順については、[ビルドアーティファクトに Git 情報を埋め込むセクション][101]を参照してください。
 
 [101]: /ja/integrations/guide/source-code-integration/?tab=go#serverless
 
-## プロファイリングデータの収集 (公開ベータ版)
+## プロファイリングデータの収集
 
-Datadog の [Continuous Profiler][42] は Python バージョン 4.62.0 とレイヤーバージョン 62 以前でベータ版が利用可能です。このオプション機能は `DD_PROFILING_ENABLED` 環境変数を `true` に設定することで有効になります。
+Datadog の [Continuous Profiler][42] は Python バージョン 4.62.0 とレイヤーバージョン 62 以前でプレビュー版が利用可能です。このオプション機能は `DD_PROFILING_ENABLED` 環境変数を `true` に設定することで有効になります。
 
 Continuous Profiler は、実行中のすべての Python コードの CPU とヒープのスナップショットを定期的に取得するスレッドを生成することで動作します。これにはプロファイラー自身も含まれる場合があります。プロファイラー自身を無視したい場合は、 `DD_PROFILING_IGNORE_PROFILER` を `true` に設定します。
 
@@ -536,7 +536,7 @@ DD_APM_ADDITIONAL_ENDPOINTS={"https://trace.agent.datadoghq.com": ["<your_api_ke
 # APM (プロファイリング) でデュアルシッピングを有効にします
 DD_APM_PROFILING_ADDITIONAL_ENDPOINTS={"https://trace.agent.datadoghq.com": ["<your_api_key_2>", "<your_api_key_3>"], "https://trace.agent.datadoghq.eu": ["<your_api_key_4>"]}
 # ログでデュアルシッピングを有効にします
-DD_LOGS_CONFIG_USE_HTTP=true
+DD_LOGS_CONFIG_FORCE_USE_HTTP=true
 DD_LOGS_CONFIG_ADDITIONAL_ENDPOINTS=[{"api_key": "<your_api_key_2>", "Host": "agent-http-intake.logs.datadoghq.com", "Port": 443, "is_reliable": true}]
 ```
 
@@ -545,7 +545,7 @@ DD_LOGS_CONFIG_ADDITIONAL_ENDPOINTS=[{"api_key": "<your_api_key_2>", "Host": "ag
 
 Datadog 拡張機能は、`_SECRET_ARN` のプレフィックスが付いた任意の環境変数について、[AWS Secrets Manager][1] の値の自動取得をサポートしています。これを利用することで、環境変数を Secrets Manager に安全に格納し、Datadog でのデュアルシッピングを可能にすることができます。
 
-1. Lambda 関数に環境変数 `DD_LOGS_CONFIG_USE_HTTP=true` を設定します。
+1. Lambda 関数に環境変数 `DD_LOGS_CONFIG_FORCE_USE_HTTP` を設定します。
 2. Lambda 関数の IAM ロールの権限に `secretsmanager:GetSecretValue` の権限を追加します。
 3. Secrets Manager に、メトリクスのデュアルシッピング用の環境変数を格納するための新しいシークレットを作成します。その内容は、`{"https://app.datadoghq.com": ["<your_api_key_2>", "<your_api_key_3>"], "https://app.datadoghq.eu": ["<your_api_key_4>"]}`と似た内容になります。
 4. Lambda 関数の環境変数 `DD_ADDITIONAL_ENDPOINTS_SECRET_ARN` に上記シークレットの ARN を設定します。
@@ -563,7 +563,7 @@ Datadog 拡張機能は、`_SECRET_ARN` のプレフィックスが付いた任�
 
 Datadog 拡張機能は、`_KMS_ENCRYPTED` のプレフィックスが付いた任意の環境変数について、[AWS KMS][41] の値の自動復号化をサポートしています。これを利用することで、環境変数を KMS に安全に格納し、Datadog でのデュアルシッピングを可能にすることができます。
 
-1. Lambda 関数に環境変数 `DD_LOGS_CONFIG_USE_HTTP=true` を設定します。
+1. Lambda 関数に環境変数 `DD_LOGS_CONFIG_FORCE_USE_HTTP=true` を設定します。
 2. Lambda 関数の IAM ロールの権限に `kms:GenerateDataKey` と `kms:Decrypt` の権限を追加します。
 3. メトリクスのデュアルシッピングの場合は、KMS を使用して`{"https://app.datadoghq.com": ["<your_api_key_2>", "<your_api_key_3>"], "https://app.datadoghq.eu": ["<your_api_key_4>"]}` を暗号化し、`DD_ADDITIONAL_ENDPOINTS_KMS_ENCRYPTED` 環境変数にその値を設定します。
 4. トレースのデュアルシッピングの場合は、KMS を使用して  `{"https://trace.agent.datadoghq.com": ["<your_api_key_2>", "<your_api_key_3>"], "https://trace.agent.datadoghq.eu": ["<your_api_key_4>"]}` を暗号化し、`DD_APM_ADDITIONAL_KMS_ENCRYPTED` 環境変数にその値を設定します。
@@ -578,15 +578,15 @@ Datadog 拡張機能は、`_KMS_ENCRYPTED` のプレフィックスが付いた�
 
 ## AWS リソース上でトレースコンテキストを伝播させる
 
-Datadog は、送信する AWS SDK のリクエストにトレースコンテキストを自動的に注入し、Lambda イベントからトレースコンテキストを抽出します。これにより、Datadog は分散サービス上でリクエストやトランザクションをトレースすることができます。[サーバーレスのトレース伝播][33]を参照してください。
+Datadog は、発信する AWS SDK のリクエストにトレースコンテキストを自動的に挿入し、Lambda イベントからトレースコンテキストを抽出します。これにより、Datadog は分散サービス上でリクエストやトランザクションをトレースすることができます。[サーバーレスのトレース伝播][33]を参照してください。
 
 ## X-Ray と Datadog のトレースをマージする
 
-AWS X-Ray は、AppSync や Step Functions などの特定の AWS マネージドサービスに対するトレーシングをサポートしていますが、Datadog APM はネイティブにはサポートしていません。[Datadog X-Ray インテグレーション][34]を有効にし、X-Ray トレースを Datadog ネイティブトレースとマージすることが可能です。[追加詳細][35]を参照してください。
+AWS X-Ray は、AppSync や Step Functions などの特定の AWS マネージドサービスを通じたトレースをサポートしていますが、Datadog APM ではネイティブにサポートされていません。[Datadog X-Ray インテグレーション][34]を有効にし、X-Ray トレースを Datadog ネイティブトレースとマージすることが可能です。[追加詳細][35]を参照してください。
 
 ## AWS Lambda のコード署名を有効にする
 
-[AWS Lambda のコード署名][36]により、信頼できるコードのみを Lambda 関数から AWS へデプロイすることができます。関数でコード署名を有効にすると、デプロイメントのすべてのコードが信頼できるソースにより署名されていることが AWS で検証されます。これはコード署名構成から定義します。
+[AWS Lambda のコード署名][36]により、信頼できるコードのみを Lambda 関数から AWS へデプロイすることができます。関数でコード署名を有効にすると、デプロイメントのすべてのコードが信頼できるソースにより署名されていることが AWS で検証されます。このソースは、コード署名コンフィギュレーションで定義します。
 
 Lambda 関数がコード署名を使用するように構成されている場合、Datadog が公開する Lambda レイヤーを使用して Lambda 関数をデプロイする前に、関数のコード署名構成に Datadog の Signing Profile ARN を追加する必要があります。
 
@@ -626,7 +626,7 @@ Datadog は、[Forwarder Lambda 関数][4]または [Lambda 拡張機能][2]を�
 {{% /tab %}}
 {{% tab "Serverless Framework" %}}
 
-1. `serverless-plugin-datadog` を最新バージョンにアップグレードします。このバージョンでは、`addExtension` を `false` に設定しない限り、デフォルトで Datadog Lambda 拡張機能がインストールされます。
+1. `serverless-plugin-datadog` を最新バージョンにアップグレードしてください。これにより、`addExtension` を `false` に設定しない限り、Datadog Lambda 拡張機能がデフォルトでインストールされます。
 2. 必要なパラメーター `site` と `apiKeySecretArn` を設定します。
 3. Lambda のリソースタグとして `env`、`service`、`version` パラメーターを設定していた場合は、それらを設定します。このプラグインは、拡張機能を使用する際に、代わりに `DD_ENV` などの Datadog で予約された環境変数を通して自動的にそれらを設定します。
 4. ただし、Lambda 以外のリソースからログを収集するために Forwarder を保持し、`subscribeToApiGatewayLogs`、`subscribeToHttpApiLogs`、`subscribeToWebsocketLogs` を `true` に設定している場合は、`forwarderArn` パラメーターは削除してください。
@@ -664,9 +664,9 @@ Datadog は、[Forwarder Lambda 関数][4]または [Lambda 拡張機能][2]を�
 {{% /tab %}}
 {{< /tabs >}}
 
-## Datadog Lambda 拡張機能を使って x86 から arm64 へ移行する
+## Datadog Lambda 拡張機能を使用した x86 から arm64 への移行
 
-Datadog 拡張機能はコンパイル済みのバイナリで、x86 と arm64 の 2 種類が用意されています。CDK、Serverless Framework、SAM などのデプロイメントツールを使用して x86 の Lambda 関数を arm64 に移行 (または arm64 を x86 に移行) する場合、サービスインテグレーション (API Gateway、SNS、Kinesisなど) が Lambda 関数のバージョンまたはエイリアスを使用する構成になっていることを確認してください。さもなければ、デプロイ中に関数が約 10 秒間利用できなくなる可能性があります。
+Datadog 拡張機能は、x86 と arm64 の両方のバリアントで利用可能なコンパイル済みバイナリです。CDK、Serverless Framework、SAM などのデプロイメントツールを使用して x86 Lambda 関数を arm64 (または arm64 から x86) に移行する場合、サービスインテグレーション (API Gateway、SNS、Kinesis など) が Lambda 関数のバージョンまたはエイリアスを使用するように構成されていることを確認してください。そうしないと、デプロイメント中に関数が約 10 秒間利用できなくなる可能性があります。
 
 この現象が起きるのは、x86 から arm64 への Lambda 関数の移行が、`updateFunction` と `updateFunctionConfiguration` という並列で実行される 2 つの API 呼び出しで構成されているからです。これらの呼び出し中に短時間のずれが生じ、Lambda の `updateFunction` の呼び出しが完了して新しいアーキテクチャを使用するようコードが更新されても、 `updateFunctionConfiguration` の呼び出しがまだ完了せず、拡張機能で引き続き古いアーキテクチャを使用する構成が残ってしまいます。
 
@@ -677,13 +677,13 @@ Layer のバージョンを利用できない場合、Datadog では、アーキ
 
 Datadog Lambda 拡張機能をインストールして、Lambda 関数のコンテナイメージをローカルでテストするには、ローカルのテスト環境で `DD_LOCAL_TEST` を `true` に設定する必要があります。そうしないと、拡張機能は AWS Extensions API からのレスポンスを待ち、呼び出しをブロックします。
 
-## OpenTelemetry API を使った AWS Lambda のインスツルメンテーション
+## OpenTelemetry API を使用した AWS Lambda のインスツルメンテーション
 
-インストール時に Datadog Lambda 拡張機能に含まれる Datadog トレーシングライブラリは、OpenTelemetry でインスツルメントされたコードによって生成されたスパンとトレースを受け入れ、テレメトリーを処理して Datadog に送信します。
+Datadog Lambda 拡張機能のインストール時に含まれる Datadog トレーシングライブラリは、OpenTelemetry でインスツルメンテーションされたコードで生成されたスパンとトレースを受け入れ、テレメトリーを処理し、Datadog に送信します。
 
-例えば、コードがすでに OpenTelemetry API でインスツルメントされている場合に、このアプローチを使用することができます。また、OpenTelemetry API を使ってベンダーに依存しないコードでインスツルメントしたいが、Datadog トレーシングライブラリを使用するメリットを得たい場合にも、このアプローチを使用することができます。
+このアプローチは、例えば、コードが既に OpenTelemetry API でインスツルメントされている場合に使用できます。また、OpenTelemetry API を使用してベンダーニュートラルなコードでインスツルメントしつつ、Datadog トレーシングライブラリの利点を享受したい場合にも適しています。
 
-OpenTelemetry API で AWS Lambda をインスツルメントするには、環境変数 `DD_TRACE_OTEL_ENABLED` を `true` に設定します。詳細は [OpenTelemetry API を使ったカスタムインスツルメンテーション][48]を参照してください。
+AWS Lambda を OpenTelemetry API でインスツルメントするには、環境変数 `DD_TRACE_OTEL_ENABLED` を `true` に設定してください。詳細は [OpenTelemetry API を使ったカスタムインスツルメンテーション][48]を参照してください。
 
 ## トラブルシューティング
 

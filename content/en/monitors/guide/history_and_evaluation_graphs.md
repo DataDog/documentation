@@ -131,6 +131,6 @@ The monitor evaluation `Min` takes the minimum value of the queries over the pas
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /monitors/manage/status
+[1]: /monitors/status
 [2]: /monitors/guide/as-count-in-monitor-evaluations/
 [3]: /dashboards/widgets/query_value/

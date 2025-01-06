@@ -22,6 +22,32 @@ menu:
       url: /api/latest/aws-integration/
       identifier: aws-integration
       generated: true
+    - name: List available namespaces
+      url: '#list-available-namespaces'
+      identifier: aws-integration-list-available-namespaces
+      parent: aws-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListAWSNamespaces
+        unstable:
+          - v2
+        order: 1
+    - name: Get an AWS integration by config ID
+      url: '#get-an-aws-integration-by-config-id'
+      identifier: aws-integration-get-an-aws-integration-by-config-id
+      parent: aws-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetAWSAccount
+        unstable:
+          - v2
+        order: 3
     - name: Generate a new external ID
       url: '#generate-a-new-external-id'
       identifier: aws-integration-generate-a-new-external-id
@@ -30,9 +56,11 @@ menu:
       params:
         versions:
           - v1
+          - v2
         operationids:
           - CreateNewAWSExternalID
-        unstable: []
+        unstable:
+          - v2
         order: 4
     - name: Set an AWS tag filter
       url: '#set-an-aws-tag-filter'
@@ -126,9 +154,11 @@ menu:
       params:
         versions:
           - v1
+          - v2
         operationids:
           - UpdateAWSAccount
-        unstable: []
+        unstable:
+          - v2
         order: 9
     - name: Create an AWS integration
       url: '#create-an-aws-integration'
@@ -138,9 +168,11 @@ menu:
       params:
         versions:
           - v1
+          - v2
         operationids:
           - CreateAWSAccount
-        unstable: []
+        unstable:
+          - v2
         order: 8
     - name: List all AWS integrations
       url: '#list-all-aws-integrations'
@@ -150,9 +182,11 @@ menu:
       params:
         versions:
           - v1
+          - v2
         operationids:
           - ListAWSAccounts
-        unstable: []
+        unstable:
+          - v2
         order: 6
     - name: Delete an AWS integration
       url: '#delete-an-aws-integration'
@@ -162,9 +196,11 @@ menu:
       params:
         versions:
           - v1
+          - v2
         operationids:
           - DeleteAWSAccount
-        unstable: []
+        unstable:
+          - v2
         order: 7
     - name: AWS Logs Integration
       url: /api/latest/aws-logs-integration/
@@ -202,9 +238,11 @@ menu:
       params:
         versions:
           - v1
+          - v2
         operationids:
           - ListAWSLogsServices
-        unstable: []
+        unstable:
+          - v2
         order: 4
     - name: Check that an AWS Lambda Function exists
       url: '#check-that-an-aws-lambda-function-exists'
@@ -812,6 +850,7 @@ menu:
       params:
         versions:
           - v1
+          - v2
         operationids:
           - CreateEvent
         unstable: []
@@ -1218,9 +1257,21 @@ menu:
       url: /api/latest/logs/
       identifier: logs
       generated: true
-    - name: Get a list of logs
-      url: '#get-a-list-of-logs'
-      identifier: logs-get-a-list-of-logs
+    - name: Search logs (POST)
+      url: '#search-logs-post'
+      identifier: logs-search-logs-post
+      parent: logs
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListLogs
+        unstable: []
+        order: 3
+    - name: Search logs (GET)
+      url: '#search-logs-get'
+      identifier: logs-search-logs-get
       parent: logs
       generated: true
       params:
@@ -1263,7 +1314,6 @@ menu:
       params:
         versions:
           - v1
-          - v2
         operationids:
           - ListLogs
         unstable: []
@@ -1446,8 +1496,7 @@ menu:
           - v2
         operationids:
           - QueryTimeseriesData
-        unstable:
-          - v2
+        unstable: []
         order: 1
     - name: Query scalar data across multiple products
       url: '#query-scalar-data-across-multiple-products'
@@ -1459,8 +1508,7 @@ menu:
           - v2
         operationids:
           - QueryScalarData
-        unstable:
-          - v2
+        unstable: []
         order: 2
     - name: List distinct metric volumes by metric name
       url: '#list-distinct-metric-volumes-by-metric-name'
@@ -2161,6 +2209,84 @@ menu:
       url: /api/latest/security-monitoring/
       identifier: security-monitoring
       generated: true
+    - name: Cancel a historical job
+      url: '#cancel-a-historical-job'
+      identifier: security-monitoring-cancel-a-historical-job
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CancelHistoricalJob
+        unstable:
+          - v2
+        order: 22
+    - name: Get a job's details
+      url: '#get-a-jobs-details'
+      identifier: security-monitoring-get-a-jobs-details
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetHistoricalJob
+        unstable:
+          - v2
+        order: 21
+    - name: Delete an existing job
+      url: '#delete-an-existing-job'
+      identifier: security-monitoring-delete-an-existing-job
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteHistoricalJob
+        unstable:
+          - v2
+        order: 23
+    - name: Convert a job result to a signal
+      url: '#convert-a-job-result-to-a-signal'
+      identifier: security-monitoring-convert-a-job-result-to-a-signal
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ConvertJobResultToSignal
+        unstable:
+          - v2
+        order: 24
+    - name: Run a historical job
+      url: '#run-a-historical-job'
+      identifier: security-monitoring-run-a-historical-job
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - RunHistoricalJob
+        unstable:
+          - v2
+        order: 19
+    - name: List historical jobs
+      url: '#list-historical-jobs'
+      identifier: security-monitoring-list-historical-jobs
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListHistoricalJobs
+        unstable:
+          - v2
+        order: 20
     - name: Change the related incidents of a security signal
       url: '#change-the-related-incidents-of-a-security-signal'
       identifier: security-monitoring-change-the-related-incidents-of-a-security-signal
@@ -2449,6 +2575,32 @@ menu:
           - ListSecurityFilters
         unstable: []
         order: 18
+    - name: List vulnerabilities
+      url: '#list-vulnerabilities'
+      identifier: security-monitoring-list-vulnerabilities
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListVulnerabilities
+        unstable:
+          - v2
+        order: 3
+    - name: List vulnerable assets
+      url: '#list-vulnerable-assets'
+      identifier: security-monitoring-list-vulnerable-assets
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListVulnerableAssets
+        unstable:
+          - v2
+        order: 4
     - name: Get a finding
       url: '#get-a-finding'
       identifier: security-monitoring-get-a-finding
@@ -3087,6 +3239,18 @@ menu:
           - GetTest
         unstable: []
         order: 28
+    - name: Fetch uptime for multiple tests
+      url: '#fetch-uptime-for-multiple-tests'
+      identifier: synthetics-fetch-uptime-for-multiple-tests
+      parent: synthetics
+      generated: true
+      params:
+        versions:
+          - v1
+        operationids:
+          - FetchUptimes
+        unstable: []
+        order: 30
     - name: Trigger tests from CI/CD pipelines
       url: '#trigger-tests-from-ci/cd-pipelines'
       identifier: synthetics-trigger-tests-from-ci/cd-pipelines
@@ -3111,6 +3275,42 @@ menu:
           - TriggerTests
         unstable: []
         order: 8
+    - name: Edit a Mobile test
+      url: '#edit-a-mobile-test'
+      identifier: synthetics-edit-a-mobile-test
+      parent: synthetics
+      generated: true
+      params:
+        versions:
+          - v1
+        operationids:
+          - UpdateMobileTest
+        unstable: []
+        order: 3
+    - name: Get a Mobile test
+      url: '#get-a-mobile-test'
+      identifier: synthetics-get-a-mobile-test
+      parent: synthetics
+      generated: true
+      params:
+        versions:
+          - v1
+        operationids:
+          - GetMobileTest
+        unstable: []
+        order: 9
+    - name: Create a mobile test
+      url: '#create-a-mobile-test'
+      identifier: synthetics-create-a-mobile-test
+      parent: synthetics
+      generated: true
+      params:
+        versions:
+          - v1
+        operationids:
+          - CreateSyntheticsMobileTest
+        unstable: []
+        order: 2
     - name: Delete tests
       url: '#delete-tests'
       identifier: synthetics-delete-tests
@@ -3483,6 +3683,19 @@ menu:
           - GetCostByOrg
         unstable: []
         order: 45
+    - name: Get billing dimension mapping for usage endpoints
+      url: '#get-billing-dimension-mapping-for-usage-endpoints'
+      identifier: usage-metering-get-billing-dimension-mapping-for-usage-endpoints
+      parent: usage-metering
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetBillingDimensionMapping
+        unstable:
+          - v2
+        order: 1
     - name: Get hourly usage for application security
       url: '#get-hourly-usage-for-application-security'
       identifier: usage-metering-get-hourly-usage-for-application-security
@@ -4511,6 +4724,74 @@ menu:
           - AggregateCIAppTestEvents
         unstable: []
         order: 3
+    - name: CSM Agents
+      url: /api/latest/csm-agents/
+      identifier: csm-agents
+      generated: true
+    - name: Get all CSM Serverless Agents
+      url: '#get-all-csm-serverless-agents'
+      identifier: csm-agents-get-all-csm-serverless-agents
+      parent: csm-agents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListAllCSMServerlessAgents
+        unstable: []
+        order: 3
+    - name: Get all CSM Agents
+      url: '#get-all-csm-agents'
+      identifier: csm-agents-get-all-csm-agents
+      parent: csm-agents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListAllCSMAgents
+        unstable: []
+        order: 3
+    - name: CSM Coverage Analysis
+      url: /api/latest/csm-coverage-analysis/
+      identifier: csm-coverage-analysis
+      generated: true
+    - name: Get the CSM Serverless Coverage Analysis
+      url: '#get-the-csm-serverless-coverage-analysis'
+      identifier: csm-coverage-analysis-get-the-csm-serverless-coverage-analysis
+      parent: csm-coverage-analysis
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetCSMServerlessCoverageAnalysis
+        unstable: []
+        order: 1
+    - name: Get the CSM Hosts and Containers Coverage Analysis
+      url: '#get-the-csm-hosts-and-containers-coverage-analysis'
+      identifier: csm-coverage-analysis-get-the-csm-hosts-and-containers-coverage-analysis
+      parent: csm-coverage-analysis
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetCSMHostsAndContainersCoverageAnalysis
+        unstable: []
+        order: 1
+    - name: Get the CSM Cloud Accounts Coverage Analysis
+      url: '#get-the-csm-cloud-accounts-coverage-analysis'
+      identifier: csm-coverage-analysis-get-the-csm-cloud-accounts-coverage-analysis
+      parent: csm-coverage-analysis
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetCSMCloudAccountsCoverageAnalysis
+        unstable: []
+        order: 1
     - name: CSM Threats
       url: /api/latest/csm-threats/
       identifier: csm-threats
@@ -4823,18 +5104,6 @@ menu:
       url: /api/latest/cloud-cost-management/
       identifier: cloud-cost-management
       generated: true
-    - name: Cloud Cost Enabled
-      url: '#cloud-cost-enabled'
-      identifier: cloud-cost-management-cloud-cost-enabled
-      parent: cloud-cost-management
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - GetCloudCostActivity
-        unstable: []
-        order: 10
     - name: Get Custom Costs file
       url: '#get-custom-costs-file'
       identifier: cloud-cost-management-get-custom-costs-file
@@ -4931,18 +5200,6 @@ menu:
           - ListCostAzureUCConfigs
         unstable: []
         order: 6
-    - name: List related AWS accounts
-      url: '#list-related-aws-accounts'
-      identifier: cloud-cost-management-list-related-aws-accounts
-      parent: cloud-cost-management
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - ListAWSRelatedAccounts
-        unstable: []
-        order: 5
     - name: Update Cloud Cost Management AWS CUR config
       url: '#update-cloud-cost-management-aws-cur-config'
       identifier: cloud-cost-management-update-cloud-cost-management-aws-cur-config
@@ -5241,6 +5498,34 @@ menu:
         unstable:
           - v2
         order: 4
+    - name: Domain Allowlist
+      url: /api/latest/domain-allowlist/
+      identifier: domain-allowlist
+      generated: true
+    - name: Sets Domain Allowlist
+      url: '#sets-domain-allowlist'
+      identifier: domain-allowlist-sets-domain-allowlist
+      parent: domain-allowlist
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - PatchDomainAllowlist
+        unstable: []
+        order: 2
+    - name: Get Domain Allowlist
+      url: '#get-domain-allowlist'
+      identifier: domain-allowlist-get-domain-allowlist
+      parent: domain-allowlist
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetDomainAllowlist
+        unstable: []
+        order: 1
     - name: Fastly Integration
       url: /api/latest/fastly-integration/
       identifier: fastly-integration
@@ -5743,6 +6028,71 @@ menu:
         unstable:
           - v2
         order: 6
+    - name: Update an incident type
+      url: '#update-an-incident-type'
+      identifier: incidents-update-an-incident-type
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateIncidentType
+        unstable:
+          - v2
+        order: 22
+    - name: Get incident type details
+      url: '#get-incident-type-details'
+      identifier: incidents-get-incident-type-details
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetIncidentType
+        unstable:
+          - v2
+        order: 21
+    - name: Delete an incident type
+      url: '#delete-an-incident-type'
+      identifier: incidents-delete-an-incident-type
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteIncidentType
+        unstable:
+          - v2
+        order: 23
+    - name: Create an incident type
+      url: '#create-an-incident-type'
+      identifier: incidents-create-an-incident-type
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateIncidentType
+        unstable:
+          - v2
+        order: 19
+    - name: Get a list of incident types
+      url: '#get-a-list-of-incident-types'
+      identifier: incidents-get-a-list-of-incident-types
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListIncidentTypes
+        unstable:
+          - v2
+        order: 20
     - name: Create an incident
       url: '#create-an-incident'
       identifier: incidents-create-an-incident
@@ -6154,6 +6504,82 @@ menu:
           - ListRestrictionQueries
         unstable:
           - v2
+        order: 1
+    - name: Microsoft Teams Integration
+      url: /api/latest/microsoft-teams-integration/
+      identifier: microsoft-teams-integration
+      generated: true
+    - name: Update tenant-based handle
+      url: '#update-tenant-based-handle'
+      identifier: microsoft-teams-integration-update-tenant-based-handle
+      parent: microsoft-teams-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateTenantBasedHandle
+        unstable: []
+        order: 1
+    - name: Get tenant-based handle information
+      url: '#get-tenant-based-handle-information'
+      identifier: microsoft-teams-integration-get-tenant-based-handle-information
+      parent: microsoft-teams-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetTenantBasedHandle
+        unstable: []
+        order: 1
+    - name: Delete tenant-based handle
+      url: '#delete-tenant-based-handle'
+      identifier: microsoft-teams-integration-delete-tenant-based-handle
+      parent: microsoft-teams-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteTenantBasedHandle
+        unstable: []
+        order: 1
+    - name: Create tenant-based handle
+      url: '#create-tenant-based-handle'
+      identifier: microsoft-teams-integration-create-tenant-based-handle
+      parent: microsoft-teams-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateTenantBasedHandle
+        unstable: []
+        order: 1
+    - name: Get all tenant-based handles
+      url: '#get-all-tenant-based-handles'
+      identifier: microsoft-teams-integration-get-all-tenant-based-handles
+      parent: microsoft-teams-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListTenantBasedHandles
+        unstable: []
+        order: 1
+    - name: Get channel information by name
+      url: '#get-channel-information-by-name'
+      identifier: microsoft-teams-integration-get-channel-information-by-name
+      parent: microsoft-teams-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetChannelByName
+        unstable: []
         order: 1
     - name: Network Device Monitoring
       url: /api/latest/network-device-monitoring/
@@ -6727,6 +7153,218 @@ menu:
           - ListPermissions
         unstable: []
         order: 1
+    - name: Rum Metrics
+      url: /api/latest/rum-metrics/
+      identifier: rum-metrics
+      generated: true
+    - name: Update a rum-based metric
+      url: '#update-a-rum-based-metric'
+      identifier: rum-metrics-update-a-rum-based-metric
+      parent: rum-metrics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateRumMetric
+        unstable: []
+        order: 4
+    - name: Get a rum-based metric
+      url: '#get-a-rum-based-metric'
+      identifier: rum-metrics-get-a-rum-based-metric
+      parent: rum-metrics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetRumMetric
+        unstable: []
+        order: 3
+    - name: Delete a rum-based metric
+      url: '#delete-a-rum-based-metric'
+      identifier: rum-metrics-delete-a-rum-based-metric
+      parent: rum-metrics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteRumMetric
+        unstable: []
+        order: 5
+    - name: Create a rum-based metric
+      url: '#create-a-rum-based-metric'
+      identifier: rum-metrics-create-a-rum-based-metric
+      parent: rum-metrics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateRumMetric
+        unstable: []
+        order: 2
+    - name: Get all rum-based metrics
+      url: '#get-all-rum-based-metrics'
+      identifier: rum-metrics-get-all-rum-based-metrics
+      parent: rum-metrics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListRumMetrics
+        unstable: []
+        order: 1
+    - name: SCIM
+      url: /api/latest/scim/
+      identifier: scim
+      generated: true
+    - name: Update user
+      url: '#update-user'
+      identifier: scim-update-user
+      parent: scim
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateSCIMUser
+        unstable: []
+        order: 4
+    - name: Patch user
+      url: '#patch-user'
+      identifier: scim-patch-user
+      parent: scim
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - PatchSCIMUser
+        unstable: []
+        order: 5
+    - name: Get user
+      url: '#get-user'
+      identifier: scim-get-user
+      parent: scim
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetSCIMUser
+        unstable: []
+        order: 3
+    - name: Delete user
+      url: '#delete-user'
+      identifier: scim-delete-user
+      parent: scim
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteSCIMUser
+        unstable: []
+        order: 6
+    - name: Create user
+      url: '#create-user'
+      identifier: scim-create-user
+      parent: scim
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateSCIMUser
+        unstable: []
+        order: 2
+    - name: List users
+      url: '#list-users'
+      identifier: scim-list-users
+      parent: scim
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListSCIMUsers
+        unstable: []
+        order: 1
+    - name: Update group
+      url: '#update-group'
+      identifier: scim-update-group
+      parent: scim
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateSCIMGroup
+        unstable: []
+        order: 10
+    - name: Patch group
+      url: '#patch-group'
+      identifier: scim-patch-group
+      parent: scim
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - PatchSCIMGroup
+        unstable: []
+        order: 11
+    - name: Get group
+      url: '#get-group'
+      identifier: scim-get-group
+      parent: scim
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetSCIMGroup
+        unstable: []
+        order: 9
+    - name: Delete group
+      url: '#delete-group'
+      identifier: scim-delete-group
+      parent: scim
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteSCIMGroup
+        unstable: []
+        order: 12
+    - name: Create group
+      url: '#create-group'
+      identifier: scim-create-group
+      parent: scim
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateSCIMGroup
+        unstable: []
+        order: 8
+    - name: List groups
+      url: '#list-groups'
+      identifier: scim-list-groups
+      parent: scim
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListSCIMGroups
+        unstable: []
+        order: 7
     - name: Sensitive Data Scanner
       url: /api/latest/sensitive-data-scanner/
       identifier: sensitive-data-scanner

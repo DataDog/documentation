@@ -7,6 +7,8 @@ further_reading:
 - link: "/real_user_monitoring/explorer/visualize/"
   tag: "Documentation"
   text: "Apply visualizations on your events"
+aliases:
+  - /real_user_monitoring/explorer/analytics/
 ---
 
 ## Overview

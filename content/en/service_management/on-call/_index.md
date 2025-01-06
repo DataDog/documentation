@@ -9,6 +9,10 @@ cascade:
         rank: 70
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">On-Call is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
 {{< callout url="https://www.datadoghq.com/private-beta/on-call/" >}}
   On-Call is in private beta. Complete the form to request access.
 {{< /callout >}} 

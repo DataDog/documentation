@@ -939,18 +939,44 @@ menu:
       parent: dev_tools
       identifier: dev_tools_guides
       weight: 9
+    - name: Administrator's Guide
+      url: administrators_guide/
+      pre: organization
+      parent: essentials_heading
+      identifier: administrators_guide
+      weight: 80000
+    - name: Getting Started
+      url: administrators_guide/getting_started/
+      parent: administrators_guide
+      identifier: administrators_guide_getting_started
+      weight: 1
+    - name: Plan
+      url: administrators_guide/plan/
+      parent: administrators_guide
+      identifier: administrators_guide_plan
+      weight: 2
+    - name: Build
+      url: administrators_guide/build/
+      parent: administrators_guide
+      identifier: administrators_guide_build
+      weight: 3
+    - name: Run
+      url: administrators_guide/run/
+      parent: administrators_guide
+      identifier: administrators_guide_run
+      weight: 4
     - name: API
       url: api/
       pre: api
       identifier: api
       parent: essentials_heading
-      weight: 80000
+      weight: 90000
     - name: Datadog Mobile App
       url: mobile/
       pre: mobile
       identifier: mobile
       parent: essentials_heading
-      weight: 90000
+      weight: 100000
     - name: 엔터프라이즈 설정
       url: mobile/enterprise_configuration
       identifier: mobile_enterprise_configuration
@@ -961,7 +987,7 @@ menu:
       pre: coscreen
       identifier: coscreen
       parent: essentials_heading
-      weight: 100000
+      weight: 110000
     - name: 트러블슈팅
       url: coscreen/troubleshooting
       identifier: coscreen_troubleshooting
@@ -2410,7 +2436,7 @@ menu:
       parent: infrastructure_heading
       weight: 20000
       pre: container
-    - name: Amazon ECS
+    - name: Docker 및 그 외 런타임
       url: containers/docker/
       parent: containers
       identifier: containers_docker

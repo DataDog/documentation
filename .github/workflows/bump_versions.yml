@@ -38,6 +38,8 @@ jobs:
             console.log(versions)
             return JSON.stringify(versions)
       - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
       - name: Write version
         run: |-
           echo '${{steps.set-versions.outputs.result}}' | jq > ./data/sdk_versions.json

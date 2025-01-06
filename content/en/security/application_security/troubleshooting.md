@@ -551,7 +551,7 @@ See the Application Security product set up documentation to validate you you ar
 
 ### Ensure the communication of telemetry data
 
-Ensure the `DD_INSTRUMENTATION_TELEMETRY_ENABLED` environment variable (`DD_TRACE_TELEMETRY_ENABLED` for NodeJS) is set to `true`, or the corresponding system property for your language is enabled. For example in Java: `-Ddd.instrumentation.telemetry.enabled=true`
+Ensure the `DD_INSTRUMENTATION_TELEMETRY_ENABLED` environment variable (`DD_TRACE_TELEMETRY_ENABLED` for Node.js) is set to `true`, or the corresponding system property for your language is enabled. For example in Java: `-Ddd.instrumentation.telemetry.enabled=true`
 
 ## Disabling threat management and protection
 
@@ -576,10 +576,17 @@ If no `DD_APPSEC_ENABLED=true` environment variable is set for your service, do 
 
 ## Disabling Software Composition Analysis
 
-To disable [Software Composition Analysis][14]:
+SCA can be enabled using two methods: the UI or manually using an environment variable. When you disable SCA, you must use the *same method* you used to enable SCA. For example, if you enabled SCA manually, you cannot disable it using the UI. You must disable it manually. 
 
-* Go to [Services][15], select **Software Composition Analysis (SCA)**, click on your service and then click **Deactivate**.
+Typically, SCA is enabled and disabled on a service using the UI.
+
+To disable [Software Composition Analysis][14] using the UI:
+
+* Go to [Services][15], select **Software Composition Analysis (SCA)**, click on your service to open the service details, and then, in **Vulnerability Detection**, click **Deactivate**.
 * To disable Software Composition Analysis on your services in bulk, click the check box in the list header and then under **Bulk Actions** select **Deactivate Software Composition Analysis (SCA) on (number of) services**.
+
+To disable SCA manually:
+
 * To disable Software Composition Analysis using the `DD_APPSEC_SCA_ENABLED` environment variable, remove the `DD_APPSEC_SCA_ENABLED=true` environment variable from your application configuration, and restart your service. This does not apply to PHP apps.
 
 ## Disabling Code Security

@@ -15,9 +15,6 @@ further_reading:
     tag: 'Documentation'
     text: 'Error Tracking Issue States and Workflows'
 ---
-{{< callout url="#" btn_hidden="true" header="false">}}
-  Datadog's standalone frontend Error Tracking experience is in private beta.
-{{< /callout >}} 
 
 ## Overview
 
@@ -41,6 +38,7 @@ Error Tracking simplifies debugging by grouping thousands of similar errors into
     {{< nextlink href="error_tracking/frontend/mobile/expo" >}}Expo{{< /nextlink >}}
     {{< nextlink href="error_tracking/frontend/mobile/reactnative" >}}React Native{{< /nextlink >}}
     {{< nextlink href="error_tracking/frontend/mobile/flutter" >}}Flutter{{< /nextlink >}}
+    {{< nextlink href="error_tracking/frontend/mobile/kotlin-multiplatform" >}}Kotlin Multiplatform{{< /nextlink >}}
     {{< nextlink href="error_tracking/frontend/logs" >}}Logs{{< /nextlink >}}
 {{< /whatsnext >}}
 

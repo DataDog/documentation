@@ -120,13 +120,13 @@ Datadog を操作するための最速の入門コースとして、[クイッ�
 {{< nextlink href="/getting_started/synthetics" >}}<u>Synthetic Monitoring</u>: Synthetic テストを使って、API エンドポイントと主要なビジネスジャーニーのテストと監視を開始します。{{< /nextlink >}}
 {{< nextlink href="/getting_started/continuous_testing" >}}<u>Continuous Testing</u>: CI パイプラインや IDE でエンドツーエンドの Synthetic テストを実行します。{{< /nextlink >}}
 {{< nextlink href="/getting_started/session_replay" >}}<u>Session Replay</u>: Session Replay を利用して、ユーザーが製品とどのようにやり取りしているかを詳細に確認します。{{< /nextlink >}}
-{{< nextlink href="/getting_started/application_security" >}}<u>Application Security Management</u>: ASM を使ってチームを活性化するためのベストプラクティスをご紹介します。{{< /nextlink >}}
-{{< nextlink href="/getting_started/cloud_security_management" >}}<u>Cloud Security Management</u>: CSM を使ってチームを活性化するためのベストプラクティスをご紹介します。{{< /nextlink >}}
-{{< nextlink href="/getting_started/cloud_siem" >}}<u>Cloud SIEM</u>: Cloud SIEM を使ってチームを活性化するためのベストプラクティスをご紹介します。{{< /nextlink >}}
+{{< nextlink href="/getting_started/application_security" >}}<u>Application Security Management</u>: ASM を利用してチームが本格的に運用を開始できるようにするためのベストプラクティスをご紹介します。{{< /nextlink >}}
+{{< nextlink href="/getting_started/cloud_security_management" >}}<u>Cloud Security Management</u>: CSM を利用してチームが本格的に運用を開始できるようにするためのベストプラクティスをご紹介します。{{< /nextlink >}}
+{{< nextlink href="/getting_started/cloud_siem" >}}<u>Cloud SIEM</u>: Cloud SIEM を利用してチームが本格的に運用を開始できるようにするためのベストプラクティスをご紹介します。{{< /nextlink >}}
 {{< nextlink href="/getting_started/logs" >}}<u>Logs</u>: 最初のログを送信し、ログ処理を使ってログを充実させましょう。{{< /nextlink >}}
 {{< nextlink href="/getting_started/ci_visibility" >}}<u>CI Visibility</u>: CI プロバイダーとのインテグレーションをセットアップすることで、CI パイプラインデータを収集します。{{< /nextlink >}}
-{{< nextlink href="/getting_started/test_visibility" >}}<u>Test Visibility</u>: Datadog でテストサービスをセットアップして、CI テストデータを収集します。{{< /nextlink >}}
-{{< nextlink href="/getting_started/intelligent_test_runner" >}}<u>Intelligent Test Runner</u>: コード変更に関連するテストのみを実行することで、テストスイートを最適化し、CI コストを削減します。{{< /nextlink >}}
+{{< nextlink href="/getting_started/test_optimization" >}}<u>Test Optimization</u>: Datadog でテストサービスをセットアップして、CI テストデータを収集します。{{< /nextlink >}}
+{{< nextlink href="/getting_started/test_impact_analysis" >}}<u>Test Impact Analysis</u>: コード変更に関連するテストのみを実行することで、テストスイートを最適化し、CI コストを削減します。{{< /nextlink >}}
 {{< nextlink href="/getting_started/code_analysis" >}}<u>Code Analysis</u>: リポジトリに品質やセキュリティ上の問題がないか分析します。{{< /nextlink >}}
 {{< /whatsnext >}}
 

@@ -90,7 +90,7 @@ Antes de utilizar el instalador MSI, debes instalar .NET versión 4.7.2 o poster
 
 {{< /site-region >}}
 
-[101]: https://dd-public-oss-mirror.s3.amazonaws.com/synthetics-windows-pl/datadog-synthetics-worker-1.49.0.amd64.msi
+[101]: https://ddsynthetics-windows.s3.amazonaws.com/datadog-synthetics-worker-{{< synthetics-worker-version "synthetics-windows-pl" >}}.amd64.msi
 [102]: https://www.datadoghq.com/legal/eula/
 
 {{% /tab %}}
@@ -545,11 +545,11 @@ Una vez completado el proceso, haz clic en **Finish** (Finalizar) en la página 
 
 <div class="alert alert-warning">Si introdujiste tu configuración JSON, el servicio de Windows comienza a ejecutarse utilizando esa configuración. Si no introdujiste tu configuración JSON, ejecuta <code>C:\\Program Files\Datadog-Synthetics\Synthetics\synthetics-pl-worker.exe --config=< PathToYourConfiguration ></code> desde un símbolo del sistema o utilice el acceso directo del <code>menú de inicio para iniciar el worker de localización privada Synthetics.</div>
 
-[101]: https://dd-public-oss-mirror.s3.amazonaws.com/synthetics-windows-pl/datadog-synthetics-worker-1.49.0.amd64.msi
+[101]: https://ddsynthetics-windows.s3.amazonaws.com/datadog-synthetics-worker-{{< synthetics-worker-version "synthetics-windows-pl" >}}.amd64.msi
 [102]: https://app.datadoghq.com/synthetics/settings/private-locations
 
-{{% /pestaña %}}
-{{% pestaña "Windows vía CLI" %}}
+{{% /tab %}}
+{{% tab "Windows vía CLI" %}}
 
 1. Descarga el archivo [`datadog-synthetics-worker-1.49.0.amd64.msi` ][101] y ejecútalo desde la máquina en la que quieres instalar la localización privada. 
 2. Ejecuta uno de los siguientes comandos dentro del directorio en el que descargaste el instalador.
@@ -577,7 +577,7 @@ Se pueden añadir parámetros adicionales:
 | LOGGING_MAXDAYS | Número de días para conservar logs de archivo en el sistema antes de eliminarlos. Puede ser cualquier número cuando se ejecuta una instalación desatendida. | 7 | `--logFileMaxDays` | Entero |
 | WORKERCONFIG_FILEPATH | Debe cambiarse por la ruta a tu archivo de configuración JSON del worker de localización privada Synthetics. Escriba esta ruta entre comillas, si la ruta contiene espacios. | <None> | `--config` | Cadena |
 
-[101]: https://dd-public-oss-mirror.s3.amazonaws.com/synthetics-windows-pl/datadog-synthetics-worker-1.49.0.amd64.msi
+[101]: https://ddsynthetics-windows.s3.amazonaws.com/datadog-synthetics-worker-{{< synthetics-worker-version "synthetics-windows-pl" >}}.amd64.msi
 
 {{% /tab %}}
 {{< /tabs >}}

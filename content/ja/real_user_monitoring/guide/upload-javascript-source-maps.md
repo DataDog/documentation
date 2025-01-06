@@ -16,7 +16,7 @@ title: JavaScript ソースマップのアップロード
 
 フロントエンドの JavaScript ソースコードが縮小化されている場合、Datadog にソースマップをアップロードして、異なるスタックトレースの難読化を解除します。任意のエラーについて、関連するスタックトレースの各フレームのファイルパス、行番号、コードスニペットにアクセスすることができます。また、Datadog はスタックフレームをリポジトリ内のソースコードにリンクすることができます。
 
-<div class="alert alert-info"><a href="/real_user_monitoring/">Real User Monitoring (RUM)</a> で収集されたエラー、および<a href="/logs/log_collection/javascript/">ブラウザログ収集</a>のログのみ、縮小化解除が可能です。</div>
+<div class="alert alert-info"><a href="/error_tracking/">Error Tracking</a>、<a href="/real_user_monitoring/">Real User Monitoring (RUM)</a> で収集されたエラー、および<a href="/logs/log_collection/javascript/">ブラウザログ収集</a>のログのみ、縮小化解除が可能です。</div>
 
 ## コードのインスツルメンテーション
 
@@ -102,7 +102,7 @@ Parcel は、ビルドコマンドを実行すると、デフォルトでソー�
 {{< site-region region="us" >}}
 1. `package.json` ファイルに `@datadog/datadog-ci` を追加します (最新バージョンを使用していることを確認してください)。
 2. [専用の Datadog API キーを作成][1]し、`DATADOG_API_KEY` という名前の環境変数としてエクスポートします。
-3. RUM アプリケーションで、1 サービスにつき 1 回、以下のコマンドを実行します。
+3. アプリケーションで、1 サービスにつき 1 回、以下のコマンドを実行します。
 
    ```bash
    datadog-ci sourcemaps upload /path/to/dist \
@@ -119,7 +119,7 @@ Parcel は、ビルドコマンドを実行すると、デフォルトでソー�
 1. `package.json` ファイルに `@datadog/datadog-ci` を追加します (最新バージョンを使用していることを確認してください)。
 2. [専用の Datadog API キーを作成][1]し、`DATADOG_API_KEY` という名前の環境変数としてエクスポートします。
 3. 以下の 2 つの環境変数をエクスポートして、{{<region-param key="dd_site_name">}} サイトにファイルをアップロードするように CLI を構成します: `export DATADOG_SITE=`{{<region-param key="dd_site" code="true">}} と `export DATADOG_API_HOST=api.`{{<region-param key="dd_site" code="true">}}
-4. RUM アプリケーションで、1 サービスにつき 1 回、以下のコマンドを実行します。
+4. アプリケーションで、1 サービスにつき 1 回、以下のコマンドを実行します。
    ```bash
    datadog-ci sourcemaps upload /path/to/dist \
      --service=my-service \
@@ -135,9 +135,9 @@ CI のパフォーマンスに対するオーバーヘッドを最小限に抑�
 
 **注**: バージョンに変更がない場合、ソースマップを再アップロードしても既存のものはオーバーライドされません。
 
-`service` と `--release-version` パラメーターは、RUM イベントとブラウザログの `service` と `version` タグと一致する必要があります。これらのタグを設定する方法の詳細については、[Browser RUM SDK 初期化ドキュメント][2] または[ブラウザログ収集ドキュメント][3]を参照してください。
+`service` と `--release-version` パラメーターは、Error Tracking イベント、RUM イベント、およびブラウザログの `service` と `version` タグと一致する必要があります。これらのタグを設定する方法の詳細については、[Browser RUM SDK 初期化ドキュメント][2] または[ブラウザログ収集ドキュメント][3]を参照してください。
 
-<div class="alert alert-info">RUM アプリケーションで複数のサービスを定義している場合、RUM アプリケーション全体のソースマップのセットが 1 つであっても、サービスの数だけ CI コマンドを実行します。</div>
+<div class="alert alert-info">アプリケーションで複数のサービスを定義している場合、アプリケーション全体のソースマップのセットが 1 つであっても、サービスの数だけ CI コマンドを実行します。</div>
 
 サンプルの `dist` ディレクトリに対してコマンドを実行すると、Datadog はサーバーまたは CDN が `https://hostname.com/static/js/javascript.364758.min.js` と `https://hostname.com/static/js/subdirectory/javascript.464388.min.js` に JavaScript ファイルを配信することを期待します。
 

@@ -27,7 +27,7 @@ categories:
 - contenedores
 - Kubernetes
 - orquestación
-custom_kind: integración
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/kube_metrics_server/README.md
 display_on_public_website: true

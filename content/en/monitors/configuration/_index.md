@@ -10,7 +10,7 @@ further_reading:
 - link: "/monitors/manage/"
   tag: "Documentation"
   text: "Manage monitors"
-- link: "/monitors/manage/status/"
+- link: "/monitors/status/"
   tag: "Documentation"
   text: "Monitor Status"
 - link: "https://www.datadoghq.com/blog/manage-monitors-with-datadog-teams/"
@@ -69,7 +69,7 @@ The figure below illustrates the difference between cumulative and rolling time 
 
 #### Rolling time windows
 
-A rolling time window has a fixed size and moves its starting point over time. Monitors support looking back at the last `5 minutes`, `15 minutes`, `1 hour`, or over a custom specified time window.
+A rolling time window has a fixed size and shifts its starting point over time. Monitors can look back at the last `5 minutes`, `15 minutes`, `1 hour`, or over a custom time window of up to 1 month.
 
 #### Cumulative time windows
 A cumulative time window has a fixed starting point and expands over time. Monitors support three different cumulative time windows:
@@ -251,7 +251,7 @@ For more information on the configuration options for the notification message, 
 
 ### Set alert aggregation
 
-Alerts are grouped automatically based on your selection of the `group by` step when defining your query. If the query has no grouping, it defaults to `Simple Alert`. If the query is grouped by any dimension, grouping changes to `Multi Alert`.
+Alerts are grouped automatically based on your selection of the aggregation selected for your query (for example, `avg by service`). If the query has no grouping, it defaults to `Simple Alert`. If the query is grouped by any dimension, grouping changes to `Multi Alert`.
 
 {{< img src="/monitors/create/notification-aggregation.png" alt="Configurations options for monitor notification aggregation" style="width:100%;">}}
 

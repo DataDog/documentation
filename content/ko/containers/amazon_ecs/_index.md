@@ -28,7 +28,7 @@ title: Amazon ECS
 아마존 ECS는 도커(Docker) 컨테이너를 지원하며 확장성과 성능이 뛰어난 컨테이너 오케스트레이션 서비스입니다. Datadog Agent와 함께 사용하면 클러스터 내 모든 EC2 인스턴스의 ECS 컨테이너와 작업을 모니터링할 수 있습니다.
 
 <div class="alert alert-info">
-Fargate에서 <strong>ECS를 모니터링하려면</strong>, <a href="/integrations/ecs_fargate/">AWS Fargate 기반 Amazon ECS</a>를 참조하세요.
+Fargate에서 <strong>ECS를 모니터링하려면</strong>, <a href="/integrations/ecs_fargate/">AWS Fargate 기반 Amazon ECS</a>를 참조하세요.  
 </div>
 
 ## 설정
@@ -45,7 +45,7 @@ ECS 컨테이너 및 작업을 모니터링하려면 Datadog 에이전트를 ECS
 
 ### ECS 작업 정의 생성
 
-이 [ECS 작업 정의][30]는 필요한 설정으로 Datadog 에이전트 컨테이너를 시작합니다. 에이전트 설정을 수정해야 하는 경우 이 작업 정의를 업데이트하고 데몬 서비스를 다시 배포합니다. AWS Management Console 또는 [AWS CLI][9]를 사용하여 이 작업 정의를 설정할 수 있습니다.
+이 [ECS 작업 정의][30]는 필요한 구성으로 Datadog Agent  컨테이너를 시작합니다. Agent 구성을 수정해야 하는 경우 이 작업 정의를 업데이트하고 데몬 서비스를 다시 배포합니다. AWS Management Console 또는 [AWS CLI][9]를 사용하여 이 작업 정의를 설정할 수 있습니다.
 
 다음 샘플은 핵심 인프라스트럭처 모니터링을 위한 최소한의 설정입니다. 이외에도 여러 기능을 가진 작업 정의 샘플은 [추가적인 에이전트 기능 설정](#setup-additional-agent-features)에서 제공됩니다.
 
@@ -200,7 +200,7 @@ EC2 인스턴스의 보안 그룹 설정이 APM 및 DogStatsD의 포트를 공�
 }
 {{< /highlight >}}
 
-#### 네트워크 성능 모니터링
+#### 네트워크 성능 모니터링 
 
 <div class="alert alert-warning">
 이 기능은 리눅스에서만 사용할 수 있습니다.
@@ -262,7 +262,49 @@ EC2 인스턴스의 보안 그룹 설정이 APM 및 DogStatsD의 포트를 공�
    "family": "datadog-agent-task"
  }
  ```
+#### 네트워크 경로
 
+<div class="alert alert-info">네트워크 경로 Datadog 네트워크 성능 모니터링 미리보기 중입니다. 가입하려면 Datadog 담당자에게 문의하세요.</div>
+
+1. ECS 클러스터에서 [네트워크 경로][31]를 활성화하려면 `datadog-agent-sysprobe-ecs.json` 파일에 다음 환경 변수를 추가하여 `system-probe` 추적 경로 모듈을 활성화합니다.
+
+   ```json
+      "environment": [
+        (...)
+        {
+          "name": "DD_TRACEROUTE_ENABLED",
+          "value": "true"
+        }
+      ],
+   ```
+
+2. 개별 경로를 모니터링하려면 지침에 따라 [추가 에이전트 기능 설정](#set-up-additional-agent-features)을 수행하세요.
+
+   이 파일은 기본 설정을 사용하여 에이전트 컨테이너를 배포하여 ECS 클러스터의 컨테이너에 대한 핵심 메트릭을 수집합니다. 에이전트는 또한 컨테이너에서 발견된 도커(Docker) 레이블을 기반으로 에이전트 통합을 실행할 수도 있습니다.
+
+3. 네트워크 엔드포인트를 수동으로 지정할 필요 없이 에이전트에서 실제 네트워크 트래픽을 기반으로 자동으로 모니터 네트워크 경로를 검색하고 환경 변수를 추가하려면 `datadog-agent-sysprobe-ecs.json` 에 다음 변수를 추가하세요.
+
+   ```json
+      "environment": [
+        (...)
+        {
+          "name": "DD_NETWORK_PATH_CONNECTIONS_MONITORING_ENABLED",
+          "value": "true"
+        }
+      ],
+   ```
+
+4. 선택적으로 작업자 수(기본 4)를 설정하려면 `datadog-agent-sysprobe-ecs.json` 파일에 있는 다음 환경 변소를 조정합니다.
+
+   ```json
+      "environment": [
+        (...)
+        {
+          "name": "DD_NETWORK_PATH_COLLECTOR_WORKERS",
+          "value": "10"
+        }
+      ],
+   ```
 ## AWSVPC 모드
 
 Agent v6.10+인 경우 호스트 인스턴스의 보안 그룹이 관련 포트에 있는 응용 컨테이너에 도달할 수 있도록 설정되어 있다면 응용 컨테이너에 대해 `awsvpc`모드가 지원됩니다.
@@ -278,13 +320,15 @@ Agent v6.10+인 경우 호스트 인스턴스의 보안 그룹이 관련 포트�
 
 정부용 Datadog 사이트로 데이터를 보내려면 `fips-proxy` 사이드카 컨테이너를 추가하고 컨테이너 포트를 열어 [지원되는 기능][1]에 대한 적절한 통신이 이루어지도록 하세요.
 
+**참고**: 또한 사이드카 컨테이너가 해당 네트워크 설정 및 IAM 권한이 설정되어 있는지 확인해야 합니다.
+
 ```json
  {
    "containerDefinitions": [
      (...)
           {
             "name": "fips-proxy",
-            "image": "datadog/fips-proxy:1.1.4",
+            "image": "datadog/fips-proxy:1.1.6",
             "portMappings": [
                 {
                     "containerPort": 9803,
@@ -433,3 +477,4 @@ Agent v6.10+인 경우 호스트 인스턴스의 보안 그룹이 관련 포트�
 [28]: #run-the-agent-as-a-daemon-service
 [29]: #set-up-additional-agent-features
 [30]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definitions.html
+[31]: /ko/network_monitoring/network_path

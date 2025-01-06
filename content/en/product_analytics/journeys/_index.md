@@ -31,7 +31,7 @@ With [funnel analysis][1], you can understand the end-to-end conversion of a sin
 
 {{< img src="/product_analytics/journeys/pa-conversions.png" alt="View conversion rate values over time in graphs ">}}
 
-You can view [conversion rates][3] over time by showing the conversion rate value in graphs.
+You can view [conversion rates][3] over time by showing the conversion rate value in graphs. **Note**: Only completed RUM sessions contribute to conversion rates.
 
 ## Further reading
 {{< partial name="whats-next/whats-next.html" >}}
