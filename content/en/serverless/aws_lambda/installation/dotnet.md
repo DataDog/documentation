@@ -315,12 +315,13 @@ Enabling any of these features cause the extension to default back to the fully 
 
 ## Adding Custom Spans
 
-Special care must be taken when installing the Datadog tracer when also using the [Datadog Lambda tracing layer for .NET](https://github.com/DataDog/dd-trace-dotnet-aws-lambda-layer) to ensure the code uses the same tracer instance for all instrumentation.
+When using the [Datadog Lambda tracing layer for .NET](https://github.com/DataDog/dd-trace-dotnet-aws-lambda-layer), ensure that a second version of the .NET tracer is not also packaged with your application code. Add `ExcludeAssets` instruction to ensure this extra tracer is excluded.
 
-1. In your `.csproj` file, make sure the tracer version the project is built with matches the tracer version installed in the tracing layer. See Datadog Lambda tracing layer for .NET [release notes](https://github.com/DataDog/dd-trace-dotnet-aws-lambda-layer/releases) to determine which version of the Datadog tracer is packaged with your layer version.
-2. Compile your Lambda function as normal.
-3. Locate the packaged zip file. The Datadog tracer dll file must be removed. To do so, unzip, remove the tracer, and re-zip the package. The Datadog tracer file will be named something like `Datadog.Trace.dll`.
-4. Deploy your code as normal.
+```xml
+<PackageReference Include="Datadog.Trace" Version="2.38.0">
+    <ExcludeAssets>runtime</ExcludeAssets>
+</PackageReference>
+```
 
 ## What's next?
 - You can now view metrics, logs, and traces on the [Serverless Homepage][1].
