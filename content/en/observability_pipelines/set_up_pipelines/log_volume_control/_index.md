@@ -30,6 +30,7 @@ Select a log source to get started:
 - [Google Pub/Sub][3]
 - [HTTP Client][4]
 - [HTTP Server][5]
+- [Kafka][13]
 - [Logstash][6]
 - [Splunk HTTP Event Collector (HEC)][7]
 - [Splunk Heavy or Universal Forwarders (TCP)][8]
@@ -52,3 +53,4 @@ Select a log source to get started:
 [10]: /observability_pipelines/log_volume_control/syslog
 [11]: /observability_pipelines/set_up_pipelines/log_volume_control/amazon_s3
 [12]: /observability_pipelines/set_up_pipelines/log_volume_control/amazon_data_firehose
+[13]: /observability_pipelines/set_up_pipelines/log_volume_control/kafka

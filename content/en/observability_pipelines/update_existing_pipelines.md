@@ -57,6 +57,11 @@ On the the Worker installation page:
 {{% observability_pipelines/configure_existing_pipelines/source_env_vars/http_server %}}
 
 {{% /tab %}}
+{{% tab "Kafka" %}}
+
+{{% observability_pipelines/configure_existing_pipelines/source_env_vars/kafka %}}
+
+{{% /tab %}}
 {{% tab "Logstash" %}}
 
 {{% observability_pipelines/configure_existing_pipelines/source_env_vars/logstash %}}
