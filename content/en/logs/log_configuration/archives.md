@@ -84,6 +84,10 @@ Set up the [Google Cloud integration][1] for the project that holds your GCS sto
 
 Go into your [AWS console][1] and [create an S3 bucket][2] to send your archives to.
 
+{{< site-region region="gov" >}}
+<div class="alert alert-warning"> Datadog Archives do not support bucket names with dots (.) when integrated with an S3 FIPS endpoint which relies on virtual-host style addressing. Learn more from AWS documentation. <a href="https://aws.amazon.com/compliance/fips/">AWS FIPS</a> and <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/VirtualHosting.html">AWS Virtual Hosting</a>.</div>
+{{< /site-region >}}
+
 **Notes:**
 
 - Do not make your bucket publicly readable.
@@ -126,7 +130,7 @@ Only Datadog users with the [`logs_write_archive` permission][5] can create, mod
 {{< tabs >}}
 {{% tab "AWS S3" %}}
 
-1. [Create a policy][1] with the following permission statements:  
+1. [Create a policy][1] with the following permission statements:
 
    ```json
    {
@@ -155,17 +159,17 @@ Only Datadog users with the [`logs_write_archive` permission][5] can create, mod
    ```
      * The `GetObject` and `ListBucket` permissions allow for [rehydrating from archives][2].
      * The `PutObject` permission is sufficient for uploading archives.
-     * Ensure that the resource value under the `s3:PutObject` and `s3:GetObject` actions ends with `/*` because these permissions are applied to objects within the buckets. 
+     * Ensure that the resource value under the `s3:PutObject` and `s3:GetObject` actions ends with `/*` because these permissions are applied to objects within the buckets.
 
 2. Edit the bucket names.
 3. Optionally, specify the paths that contain your log archives.
-4. Attach the new policy to the Datadog integration role.  
-   * Navigate to **Roles** in the AWS IAM console.  
-   * Locate the role used by the Datadog integration. By default it is named **DatadogIntegrationRole**, but the name may vary if your organization has renamed it. Click the role name to open the role summary page.  
-   * Click **Add permissions**, and then **Attach policies**.  
-   * Enter the name of the policy created above.  
-   * Click **Attach policies**.  
- 
+4. Attach the new policy to the Datadog integration role.
+   * Navigate to **Roles** in the AWS IAM console.
+   * Locate the role used by the Datadog integration. By default it is named **DatadogIntegrationRole**, but the name may vary if your organization has renamed it. Click the role name to open the role summary page.
+   * Click **Add permissions**, and then **Attach policies**.
+   * Enter the name of the policy created above.
+   * Click **Attach policies**.
+
 
 [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_create-console.html
 [2]: /logs/archives/rehydrating/
@@ -197,7 +201,7 @@ Only Datadog users with the [`logs_write_archive` permission][5] can create, mod
 Navigate to the [Log Forwarding page][6] and select **Add a new archive** on the **Archives** tab.
 
 **Notes:**
-* Only Datadog users with the [`logs_write_archive` permission][5] can complete this and the following step.  
+* Only Datadog users with the [`logs_write_archive` permission][5] can complete this and the following step.
 * Archiving logs to Azure Blob Storage requires an App Registration. See instructions [on the Azure integration page][7], and set the "site" on the right-hand side of the documentation page to "US." App Registration(s) created for archiving purposes only need the "Storage Blob Data Contributor" role. If your storage bucket is in a subscription being monitored through a Datadog Resource, a warning is displayed about the App Registration being redundant. You can ignore this warning.
 * If your bucket restricts network access to specified IPs, add the webhook IPs from the {{< region-param key="ip_ranges_url" link="true" text="IP ranges list">}} to the allowlist.
 * For the **US1-FED site**, you can configure Datadog to send logs to a destination outside the Datadog GovCloud environment. Datadog is not responsible for any logs that leave the Datadog GovCloud environment. Additionally, Datatdog is not responsible for any obligations or requirements you might have concerning FedRAMP, DoD Impact Levels, ITAR, export compliance, data residency, or similar regulations applicable to these logs after they leave the GovCloud environment.
@@ -359,9 +363,9 @@ For any changes to existing KSM keys, reach out to [Datadog support][3] for furt
 
 Once your archive settings are successfully configured in your Datadog account, your processing pipelines begin to enrich all logs ingested into Datadog. These logs are subsequently forwarded to your archive.
 
-However, after creating or updating your archive configurations, it can take several minutes before the next archive upload is attempted. The frequency at which archives are uploaded can vary. **Check back on your storage bucket in 15 minutes** to make sure the archives are successfully being uploaded from your Datadog account. 
+However, after creating or updating your archive configurations, it can take several minutes before the next archive upload is attempted. The frequency at which archives are uploaded can vary. **Check back on your storage bucket in 15 minutes** to make sure the archives are successfully being uploaded from your Datadog account.
 
-After that, if the archive is still in a pending state, check your inclusion filters to make sure the query is valid and matches log events in [Live Tail][14]. When Datadog fails to upload logs to an external archive, due to unintentional changes in settings or permissions, the corresponding Log Archive is highlighted in the configuration page. 
+After that, if the archive is still in a pending state, check your inclusion filters to make sure the query is valid and matches log events in [Live Tail][14]. When Datadog fails to upload logs to an external archive, due to unintentional changes in settings or permissions, the corresponding Log Archive is highlighted in the configuration page.
 
 {{< img src="logs/archives/archive_errors_details.png" alt="Check that your archives are properly set up" style="width:100%;">}}
 
@@ -369,7 +373,7 @@ Hover over the archive to view the error details and the actions to take to reso
 
 ## Multiple archives
 
-If multiple archives are defined, logs enter the first archive based on filter. 
+If multiple archives are defined, logs enter the first archive based on filter.
 
 {{< img src="logs/archives/log_forwarding_archives_multiple.png" alt="Logs enter the first archive whose filter they match on." style="width:100%;">}}
 

@@ -16,8 +16,9 @@ title: Guías de monitorización de bases de datos
     {{< nextlink href="database_monitoring/guide/aurora_autodiscovery" >}}Configuración de monitorización de base de datos para clústeres de base de datos de Amazon Aurora{{< /nextlink >}}
 {{< /whatsnext >}}
 
-{{< whatsnext desc="SQL Server guides:" >}}
-    {{< nextlink href="database_monitoring/guide/sql_alwayson" >}}Exploración de grupos de disponibilidad AlwaysOn de SQL Server{{< /nextlink >}}
+{{< whatsnext desc="Guías de SQL Server:" >}}
+    {{< nextlink href="database_monitoring/guide/sql_alwayson" >}}Exploración de los grupos de disponibilidad AlwaysOn de SQL Server{{< /nextlink >}}
+    {{< nextlink href="database_monitoring/guide/sql_deadlock" >}}Configuración de la Monitorización Deadlock en SQL Server{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="PostgreSQL guides:" >}}

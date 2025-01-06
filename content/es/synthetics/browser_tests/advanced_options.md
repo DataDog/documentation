@@ -47,11 +47,11 @@ Para utilizar un identificador específico (por ejemplo, para hacer clic en el e
 
 {{< img src="synthetics/browser_tests/advanced_options/advanced_user_locator_2.png" alt="Campo Localizador especificado por el cliente, donde se resalta la sintaxis handlebars con variables" style="width:70%">}}
 
-5. Una vez que hayas definido un elemento, haz clic en **Test** para resaltar el elemento en la grabación a la derecha.
+5. Una vez que hayas definido un elemento, haz clic en **Highlight** (Resaltar) para resaltar el elemento en la grabación de la derecha.
 
 De forma predeterminada, la casilla **Si falla el localizador especificado por el usuario, falla el test** aparece seleccionada. Esto significa que si el localizador definido falla, el test se considera fallido.
 
-{{< img src="synthetics/browser_tests/advanced_options/css.mp4" alt="Elemento del test resaltado" video=true >}}
+{{< img src="synthetics/browser_tests/advanced_options/css_2.mp4" alt="Probar el elemento resaltado" video=true >}}
 
 Puedes decidir utilizar el algoritmo de test de navegador estándar desmarcando la casilla la casilla **Si falla el localizador especificado por el usuario, falla el test**.
 
@@ -72,7 +72,20 @@ En algunos casos, como en el de una ventana emergente, es posible que quieras qu
 
 {{< img src="synthetics/browser_tests/advanced_options/timeout.png" alt="Tiempo de espera" style="width:25%">}}
 
-## Para evitar las capturas de pantalla
+## Salir, no hubo errores
+
+Configura esta opción para salir del test después de finalizar con éxito un paso. De este modo se evita la ejecución de pasos innecesarios y se evita marcar el test como fallido.
+
+{{< img src="synthetics/browser_tests/advanced_options/exit_on_success_browser.png" alt="Salir, no hubo errores" style="width:50%">}}
+
+## Ejecutar siempre este paso
+
+Configura esta opción para ejecutar este paso incluso si los pasos anteriores han fallado. Esto puede ser útil para tareas de limpieza, cuando quieres que continúen los pasos posteriores.
+
+{{< img src="synthetics/browser_tests/advanced_options/always_run_step.png" alt="Ejecutar siempre este paso, incluso si los pasos anteriores han fallado" style="width:50%">}}
+
+
+## Impedir las capturas de pantalla
 
 Puedes evitar la captura de pantalla de un paso durante la ejecución de un test. Esta opción es útil para garantizar que no se muestren datos confidenciales en los resultados del test, pero debes utilizarla con prudencia ya que puede dificultar la resolución de problemas. Para obtener más información, consulta [Seguridad en la monitorización de datos Synthetic][2].
 
@@ -94,7 +107,7 @@ Las opciones avanzadas para [subtests][4] te permiten elegir dónde quieres que 
 
 Si se abre el subtest en la ventana principal, este será la continuación de tu test principal, ya que utiliza la URL del paso anterior. Si se abre el subtest en una nueva ventana o en una ventana específica, el test empezará a ejecutarse desde la URL de inicio del subtest.
 
-### Configuración del comportamiento de fallo
+### Definir el comportamiento del fallo
 
 Haz clic en **Continuar con el test si falla este paso** y en **Considerar todo el test como fallido si falla este paso** para asegurarte de que tu test de navegador continuará si falla el subtest o de que fallará por completo si falla el subtest.
 

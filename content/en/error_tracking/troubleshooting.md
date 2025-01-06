@@ -2,7 +2,7 @@
 title: Error Tracking Troubleshooting
 ---
 
-If you experience unexpected behavior with Error Tracking, the troubleshooting steps below can help you resolve the issue quickly. If you continue to have trouble, reach out to [Datadog support][1]. 
+If you experience unexpected behavior with Error Tracking, the troubleshooting steps below can help you resolve the issue quickly. If you continue to have trouble, reach out to [Datadog support][1].
 
 Datadog recommends regularly updating to the latest version of the Datadog tracing libraries, mobile SDKs, and web SDKs, as each release contains improvements and fixes.
 
@@ -10,7 +10,7 @@ Datadog recommends regularly updating to the latest version of the Datadog traci
 
 ### Logs
 
-Make sure the error message has the [required attributes][2], and Error Tracking for Logs is [activated][7]. 
+Make sure the error message has the [required attributes][2], and Error Tracking for Logs is [activated][7].
 
 This [example query][3] searches for logs meeting the criteria for inclusion in Error Tracking.
 
@@ -47,9 +47,9 @@ if (span != null && (span instanceof MutableSpan)) {
 {{% tab "Python" %}}
 
 ```python
-context = tracer.get_call_context() 
-root_span = context.get_current_root_span() 
-root_span.set_tag('<TAG>', '<VALUE>') 
+context = tracer.get_call_context()
+root_span = context.get_current_root_span()
+root_span.set_tag('<TAG>', '<VALUE>')
 ```
 
 {{% /tab %}}
@@ -66,7 +66,7 @@ current_root_span.set_tag('<TAG>', '<VALUE>') unless current_root_span.nil?
 
 ### RUM
 
-Error Tracking only processes errors that are sent with the source set to `custom`, `source` or `report`, and contain a stack trace. Errors sent with any other source (such as `console`) or sent from browser extensions are not processed by Error Tracking.
+Error Tracking only processes errors that are sent with the source set to `custom`, `source`, `report`, `network` or `console`, and contain a stack trace.
 
 This [example query][6] shows RUM errors that meet the criteria for inclusion in Error Tracking.
 

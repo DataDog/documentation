@@ -122,7 +122,7 @@ Add [`@datadog/browser-rum`][4] to your `package.json` file, then initialize it 
 {{< tabs >}}
 {{% tab "RUM" %}}
 
-{{% collapse-content title="Latest version" level="h4" %}}
+{{% collapse-content title="Latest version" level="h4" expanded="true" %}}
 
 ```javascript
 import { datadogRum } from '@datadog/browser-rum'
@@ -275,7 +275,7 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
 {{< tabs >}}
 {{% tab "RUM" %}}
 
-{{% collapse-content title="Latest version" level="h4" %}}
+{{% collapse-content title="Latest version" level="h4" expanded="true" %}}
 
 {{< site-region region="us" >}}
 ```html
@@ -1187,7 +1187,7 @@ Add the generated code snippet to the head tag (in front of any other script tag
 {{< tabs >}}
 {{% tab "RUM" %}}
 
-{{% collapse-content title="Latest version" level="h4" %}}
+{{% collapse-content title="Latest version" level="h4" expanded="true" %}}
 
 {{< site-region region="us" >}}
 ```html
@@ -1968,7 +1968,9 @@ The `trackUserInteractions` parameter enables the automatic collection of user c
 {{< tabs >}}
 {{% tab "RUM" %}}
 
-Types are compatible with TypeScript >= 3.8.2. For earlier versions, import JavaScript sources and use global variables to avoid any compilation issues:
+Types are compatible with TypeScript >= 3.8.2. To initialize the SDK, use the following code snippet.
+
+<div class="alert alert-info"><strong>Note</strong>: For earlier versions of TypeScript, import JavaScript sources and use global variables to avoid any compilation issues.</div>
 
 ```javascript
 import '@datadog/browser-rum/bundle/datadog-rum'
@@ -1984,7 +1986,23 @@ window.DD_RUM.init({
 {{% /tab %}}
 {{% tab "Error Tracking" %}}
 
-TypeScript is not supported for Error Tracking.
+
+Types are compatible with TypeScript >= 3.8.2. To initialize the SDK, use the following code snippet.
+
+<div class="alert alert-info"><strong>Note</strong>: For earlier versions of TypeScript, import JavaScript sources and use global variables to avoid any compilation issues.</div>
+
+```javascript
+import '@datadog/browser-rum/bundle/datadog-rum'
+
+window.DD_RUM.init({
+  applicationId: 'XXX',
+  clientToken: 'XXX',
+  site: 'datadoghq.com',
+  trackUserInteractions: true,
+   trackResources: true,
+  ...
+})
+```
 
 {{% /tab %}}
 {{< /tabs >}}

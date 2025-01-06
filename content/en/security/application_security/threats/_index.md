@@ -33,7 +33,7 @@ ASM Threat Management enables teams to identify and remediate threats quickly. I
 
 Discover the ways Datadog ASM Threat Management helps common use cases:
 
-| You want to...    | How Datadog APM can help |
+| You want to...    | How Datadog ASM can help |
 | ----------- | ----------- |
 | **Web Application Protection:** Prevent vulnerability exploits such as SQL Injection, Server-side Request Forgery, and Local File Inclusion. | Enable [Exploit Prevention][9] on your services. ASM Threat Management blocks exploits in real-time and generates signals for further investigation.|
 | **Application and API abuse:** Protect applications against application and API abuse such as credential stuffing and Account Takeover attacks.| Leverage [OOTB detection rules][10] for notifications such as unusual account creations or password resets from an IP, or distributed credential stuffing campaigns. Review the benefits of [OOTB Account TakeOver Protection][11].|
@@ -65,6 +65,10 @@ You can [create In-App WAF rules][5] that define what suspicious behavior looks 
 
 {{% asm-protect %}}
 
+## Disable threat management and protection
+
+For information on disabling threat management and protection, see [Disabling threat management and protection][12].
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -79,3 +83,4 @@ You can [create In-App WAF rules][5] that define what suspicious behavior looks 
 [9]: /security/application_security/threats/exploit-prevention/
 [10]: /security/default_rules/?category=cat-application-security
 [11]: /security/account_takeover_protection/
+[12]: /security/application_security/troubleshooting/#disabling-threat-management-and-protection
