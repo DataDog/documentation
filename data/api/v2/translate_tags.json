@@ -35,6 +35,10 @@
     "name": "CSM Agents",
     "description": "Datadog Cloud Security Management (CSM) delivers real-time threat detection\nand continuous configuration audits across your entire cloud infrastructure,\nall in a unified view for seamless collaboration and faster remediation.\nGo to https://docs.datadoghq.com/security/cloud_security_management to learn more"
   },
+  "csm-coverage-analysis": {
+    "name": "CSM Coverage Analysis",
+    "description": "Datadog Cloud Security Management (CSM) delivers real-time threat detection\nand continuous configuration audits across your entire cloud infrastructure,\nall in a unified view for seamless collaboration and faster remediation.\nGo to https://docs.datadoghq.com/security/cloud_security_management to learn more."
+  },
   "csm-threats": {
     "name": "CSM Threats",
     "description": "Cloud Security Management Threats (CSM Threats) monitors file, network, and process activity across your environment to detect real-time threats to your infrastructure. See [Cloud Security Management Threats](https://docs.datadoghq.com/security/threats/) for more information on setting up CSM Threats."
@@ -201,7 +205,7 @@
   },
   "service-definition": {
     "name": "Service Definition",
-    "description": "API to create, update, retrieve and delete service definitions."
+    "description": "API to create, update, retrieve and delete service definitions.\nNote: Service Catalog [v3.0 schema](https://docs.datadoghq.com/service_catalog/service_definitions/v3-0/) has new API endpoints documented under [Software Catalog](https://docs.datadoghq.com/api/latest/software-catalog/). Use the following Service Definition endpoints for v2.2 and earlier."
   },
   "service-level-objectives": {
     "name": "Service Level Objectives",

@@ -844,8 +844,15 @@ components:
             Only hosts that match one of the defined tags are imported into Datadog.'
           example: key:value,filter:example
           type: string
-        metrics_config:
-          $ref: '#/components/schemas/AzureAccountMetricsConfig'
+        metrics_enabled:
+          description: Enable Azure metrics for your organization.
+          example: true
+          type: boolean
+        metrics_enabled_default:
+          description: Enable Azure metrics for your organization for resource providers
+            where no resource provider config is specified.
+          example: true
+          type: boolean
         new_client_id:
           description: Your New Azure web application ID.
           example: new1c7f6-1234-5678-9101-3fcbf464test
@@ -860,37 +867,26 @@ components:
             monitored by this app registration.
           example: true
           type: boolean
+        resource_provider_configs:
+          description: Configuration settings applied to resources from the specified
+            Azure resource providers.
+          items:
+            $ref: '#/components/schemas/ResourceProviderConfig'
+          type: array
         tenant_name:
           description: Your Azure Active Directory ID.
           example: testc44-1234-5678-9101-cc00736ftest
           type: string
+        usage_metrics_enabled:
+          description: Enable azure.usage metrics for your organization.
+          example: true
+          type: boolean
       type: object
     AzureAccountListResponse:
       description: Accounts configured for your organization.
       items:
         $ref: '#/components/schemas/AzureAccount'
       type: array
-    AzureAccountMetricsConfig:
-      description: 'Dictionary containing the key `excluded_resource_providers` which
-        has to be a list of Microsoft Azure Resource Provider names.
-
-        This feature is currently being beta tested.
-
-        In order to enable all resource providers for metric collection, pass:
-
-        `metrics_config: {"excluded_resource_providers": []}` (i.e., an empty list
-        for `excluded_resource_providers`).'
-      properties:
-        excluded_resource_providers:
-          description: List of Microsoft Azure Resource Providers to exclude from
-            metric collection.
-          example:
-          - Microsoft.Sql
-          - Microsoft.Cdn
-          items:
-            type: string
-          type: array
-      type: object
     CancelDowntimesByScopeRequest:
       description: Cancel downtimes according to scope.
       properties:
@@ -10316,6 +10312,19 @@ components:
       - lookup_enrichment_table
       - type
       type: object
+    ResourceProviderConfig:
+      description: Configuration settings applied to resources from the specified
+        Azure resource provider.
+      properties:
+        metrics_enabled:
+          description: Collect metrics for resources from this provider.
+          example: true
+          type: boolean
+        namespace:
+          description: The provider namespace to apply this configuration to.
+          example: Microsoft.Compute
+          type: string
+      type: object
     ResponseMetaAttributes:
       description: Object describing meta attributes of response.
       properties:
@@ -16502,6 +16511,9 @@ components:
         params:
           description: The parameters of the step.
           type: object
+        public_id:
+          description: The public ID of the step.
+          type: string
         timeout:
           description: The time before declaring a step failed.
           format: int64
@@ -19934,7 +19946,8 @@ components:
           format: int64
           type: integer
         avg_profiled_fargate_tasks:
-          description: The average profiled task count for Fargate Profiling.
+          description: The average total count for Fargate Container Profiler over
+            all hours in the current date for all organizations.
           format: int64
           type: integer
         aws_host_top99p:
@@ -20193,6 +20206,73 @@ components:
             over all hours in the current date for all organizations.
           format: int64
           type: integer
+        eph_infra_host_agent_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts with the
+            Datadog Agent over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        eph_infra_host_alibaba_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts on Alibaba
+            over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        eph_infra_host_aws_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts on AWS
+            over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        eph_infra_host_azure_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts on Azure
+            over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        eph_infra_host_ent_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts for Enterprise
+            over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        eph_infra_host_gcp_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts on GCP
+            over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        eph_infra_host_heroku_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts on Heroku
+            over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        eph_infra_host_only_aas_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts with only
+            Azure App Services over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        eph_infra_host_only_vsphere_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts with only
+            vSphere over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        eph_infra_host_opentelemetry_apm_sum:
+          description: Shows the sum of all ephemeral APM hosts reported by the Datadog
+            exporter for the OpenTelemetry Collector over all hours in the current
+            date for the given org.
+          format: int64
+          type: integer
+        eph_infra_host_opentelemetry_sum:
+          description: Shows the sum of all ephemeral hosts reported by the Datadog
+            exporter for the OpenTelemetry Collector over all hours in the current
+            date for the given org.
+          format: int64
+          type: integer
+        eph_infra_host_pro_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts for Pro
+            over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        eph_infra_host_proplus_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts for Pro
+            Plus over all hours in the current date for the given org.
+          format: int64
+          type: integer
         error_tracking_error_events_sum:
           description: Shows the sum of all Error Tracking error events over all hours
             in the current date for the given org.
@@ -20206,6 +20286,16 @@ components:
         error_tracking_rum_error_events_sum:
           description: Shows the sum of all Error Tracking RUM error events over all
             hours in the current date for the given org.
+          format: int64
+          type: integer
+        fargate_container_profiler_profiling_fargate_avg:
+          description: The average number of Profiling Fargate tasks over all hours
+            in the current date for all organizations.
+          format: int64
+          type: integer
+        fargate_container_profiler_profiling_fargate_eks_avg:
+          description: The average number of Profiling Fargate Elastic Kubernetes
+            Service tasks over all hours in the current date for all organizations.
           format: int64
           type: integer
         fargate_tasks_count_avg:
@@ -20705,7 +20795,8 @@ components:
           format: int64
           type: integer
         avg_profiled_fargate_tasks:
-          description: The average profiled task count for Fargate Profiling.
+          description: The average total count for Fargate Container Profiler over
+            all hours in the current month for the given org.
           format: int64
           type: integer
         aws_host_top99p:
@@ -20970,6 +21061,73 @@ components:
             queries over all hours in the current month for the given org.
           format: int64
           type: integer
+        eph_infra_host_agent_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts with the
+            Datadog Agent over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        eph_infra_host_alibaba_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts on Alibaba
+            over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        eph_infra_host_aws_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts on AWS
+            over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        eph_infra_host_azure_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts on Azure
+            over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        eph_infra_host_ent_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts for Enterprise
+            over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        eph_infra_host_gcp_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts on GCP
+            over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        eph_infra_host_heroku_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts on Heroku
+            over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        eph_infra_host_only_aas_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts with only
+            Azure App Services over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        eph_infra_host_only_vsphere_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts with only
+            vSphere over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        eph_infra_host_opentelemetry_apm_sum:
+          description: Shows the sum of all ephemeral APM hosts reported by the Datadog
+            exporter for the OpenTelemetry Collector over all hours in the current
+            date for the given org.
+          format: int64
+          type: integer
+        eph_infra_host_opentelemetry_sum:
+          description: Shows the sum of all ephemeral hosts reported by the Datadog
+            exporter for the OpenTelemetry Collector over all hours in the current
+            date for the given org.
+          format: int64
+          type: integer
+        eph_infra_host_pro_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts for Pro
+            over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        eph_infra_host_proplus_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts for Pro
+            Plus over all hours in the current date for the given org.
+          format: int64
+          type: integer
         error_tracking_error_events_sum:
           description: Shows the sum of all Error Tracking error events over all hours
             in the current date for the given org.
@@ -20983,6 +21141,16 @@ components:
         error_tracking_rum_error_events_sum:
           description: Shows the sum of all Error Tracking RUM error events over all
             hours in the current date for the given org.
+          format: int64
+          type: integer
+        fargate_container_profiler_profiling_fargate_avg:
+          description: The average number of Profiling Fargate tasks over all hours
+            in the current month for the given org.
+          format: int64
+          type: integer
+        fargate_container_profiler_profiling_fargate_eks_avg:
+          description: The average number of Profiling Fargate Elastic Kubernetes
+            Service tasks over all hours in the current month for the given org.
           format: int64
           type: integer
         fargate_tasks_count_avg:
@@ -21480,8 +21648,8 @@ components:
           format: int64
           type: integer
         avg_profiled_fargate_tasks_sum:
-          description: Shows the average of all profiled Fargate tasks over all hours
-            in the current month for all organizations.
+          description: The average total count for Fargate Container Profiler over
+            all hours in the current month for all organizations.
           format: int64
           type: integer
         aws_host_top99p_sum:
@@ -21754,6 +21922,73 @@ components:
           description: Shows the last date of usage in the current month for all organizations.
           format: date-time
           type: string
+        eph_infra_host_agent_agg_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts with the
+            Datadog Agent over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        eph_infra_host_alibaba_agg_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts on Alibaba
+            over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        eph_infra_host_aws_agg_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts on AWS
+            over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        eph_infra_host_azure_agg_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts on Azure
+            over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        eph_infra_host_ent_agg_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts for Enterprise
+            over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        eph_infra_host_gcp_agg_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts on GCP
+            over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        eph_infra_host_heroku_agg_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts on Heroku
+            over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        eph_infra_host_only_aas_agg_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts with only
+            Azure App Services over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        eph_infra_host_only_vsphere_agg_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts with only
+            vSphere over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        eph_infra_host_opentelemetry_agg_sum:
+          description: Shows the sum of all ephemeral hosts reported by the Datadog
+            exporter for the OpenTelemetry Collector over all hours in the current
+            month for all organizations.
+          format: int64
+          type: integer
+        eph_infra_host_opentelemetry_apm_agg_sum:
+          description: Shows the sum of all ephemeral APM hosts reported by the Datadog
+            exporter for the OpenTelemetry Collector over all hours in the current
+            month for all organizations.
+          format: int64
+          type: integer
+        eph_infra_host_pro_agg_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts for Pro
+            over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        eph_infra_host_proplus_agg_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts for Pro
+            Plus over all hours in the current month for all organizations.
+          format: int64
+          type: integer
         error_tracking_error_events_agg_sum:
           description: Shows the sum of all Error Tracking error events over all hours
             in the current month for all organizations.
@@ -21767,6 +22002,16 @@ components:
         error_tracking_rum_error_events_agg_sum:
           description: Shows the sum of all Error Tracking RUM error events over all
             hours in the current month for all organizations.
+          format: int64
+          type: integer
+        fargate_container_profiler_profiling_fargate_avg_sum:
+          description: The average number of Profiling Fargate tasks over all hours
+            in the current month for all organizations.
+          format: int64
+          type: integer
+        fargate_container_profiler_profiling_fargate_eks_avg_sum:
+          description: The average number of Profiling Fargate Elastic Kubernetes
+            Service tasks over all hours in the current month for all organizations.
           format: int64
           type: integer
         fargate_tasks_count_avg_sum:
@@ -27716,10 +27961,13 @@ paths:
               \"TestingRh2nx664kUy5dIApvM54T4AtO\",\n  \"container_app_filters\":
               \"key:value,filter:example\",\n  \"cspm_enabled\": true,\n  \"custom_metrics_enabled\":
               true,\n  \"errors\": [\"*\"],\n  \"host_filters\": \"key:value,filter:example\",\n
+              \ \"metrics_enabled\": true,\n  \"metrics_enabled_default\": true,\n
               \ \"new_client_id\": \"{{ uuid }}\",\n  \"new_tenant_name\": \"{{ uuid
-              }}\",\n  \"resource_collection_enabled\": true,\n  \"metrics_config\":
-              {\n    \"excluded_resource_providers\": [\"Microsoft.Sql\", \"Microsoft.Cdn\"]\n
-              \ },\n  \"tenant_name\": \"{{ uuid }}\"\n}"
+              }}\",\n  \"resource_collection_enabled\": true,\n  \"resource_provider_configs\":
+              [\n    {\n      \"namespace\": \"Microsoft.Compute\",\n      \"metrics_enabled\":
+              false\n    },\n    {\n      \"namespace\": \"Microsoft.Web\",\n      \"metrics_enabled\":
+              false\n    }\n  ],\n  \"tenant_name\": \"{{ uuid }}\",\n  \"usage_metrics_enabled\":
+              true\n}"
           step: there is a valid "azure_account" in the system
       x-menu-order: 2
       x-permission:

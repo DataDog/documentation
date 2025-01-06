@@ -165,7 +165,7 @@ After adding OOTB scanning rules, you can edit each rule separately and add addi
 1. Navigate to the [Sensitive Data Scanner][2] configuration page.
 1. Click the scanning group with the rule you want to edit.
 1. Hover over the rule, and then click the pencil icon.
-1. The recommend keywords are used by default. To add additional keywords, toggle **Use recommended keywords**, then add your keywords to the list. You can also require that these keywords be within a specified number of characters of a match. By default, keywords must be within 30 characters before a matched value.
+1. The recommended keywords are used by default. To add additional keywords, toggle **Use recommended keywords**, then add your keywords to the list. You can also require that these keywords be within a specified number of characters of a match. By default, keywords must be within 30 characters before a matched value.
 1. Click **Update**.
 
 {{< /collapse-content >}}

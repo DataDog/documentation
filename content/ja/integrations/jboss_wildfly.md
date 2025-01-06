@@ -14,6 +14,8 @@ assets:
       check: jboss.jdbc_connections.count
       metadata_path: metadata.csv
       prefix: jboss.
+    process_signatures:
+    - java jboss-modules.jar
     service_checks:
       metadata_path: assets/service_checks.json
     source_type_id: 10060

@@ -364,6 +364,8 @@ To access your web views:
    - Your Android and Android TV applications using either `application.id` or `application.name`
    - The web component using `service`
    - The platform using `source`
+
+   **Note**: If you see unrecognized version numbers reporting in your mobile app, they may belong to the Browser SDK version. In that case, you can filter out the Browser platform session. For example, `source: react-native`.
 3. Click a session. A side panel with a list of events in the session appears.
 
    {{< img src="real_user_monitoring/android/android-webview-tracking.png" alt="Webview events captured in a session in the RUM Explorer" style="width:100%;">}}
@@ -382,7 +384,7 @@ See [RUM & Session Replay Billing][6] for details on how web views in mobile app
 
 [1]: /real_user_monitoring/session_replay/mobile/setup_and_configuration/#web-view-instrumentation
 [2]: /real_user_monitoring/browser/setup/#npm
-[3]: /real_user_monitoring/mobile_and_tv_monitoring/setup
+[3]: /real_user_monitoring/mobile_and_tv_monitoring/ios/setup
 [4]: /logs/log_collection/ios
 [5]: https://app.datadoghq.com/rum/explorer
 [6]: /account_management/billing/rum/#how-do-webviews-in-mobile-applications-impact-session-recordings-and-billing

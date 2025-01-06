@@ -33,25 +33,38 @@ Browser tests are scenarios executed by Datadog on your web applications. They r
 
 ## Test configuration
 
-Define the configuration of your browser test.
+You may create a test using one of the following options:
 
-1. Enter a **Starting URL**: The URL from which your browser test starts the scenario.
+- **Create a test from a template**:
 
- <div class="alert alert-info">See <a href=#advanced-options>Advanced options</a> for more options.</div>
+    1. Hover over one of the pre-populated templates and click **View Template**. This opens a side panel displaying pre-populated configuration information, including: Test Details, Alert Conditions, Steps, and optionally Variables.
+    2. Click **+Create Test** to open the configuration page, where you can review and edit the pre-populated configuration options. The fields presented are identical to those available when creating a test from scratch.
+    3. Click **Save & Quit** in the upper right hand corner to submit your Browser Test.<br /><br>
+       {{< img src="/synthetics/browser_tests/synthetics_templates_browser.mp4" alt="Video of Synthetics Browser Test landing page with templates" video="true" >}}
 
-2. Add a **name**: The name of your browser test.
-3. Select **environment and additional tags**: Set the `env` and related tags attached to your browser test. Use the `<KEY>:<VALUE>` format to filter on a `<VALUE>` for a given `<KEY>`.
-4. Select **browsers and devices**: The browsers (such as `Chrome`, `Firefox`, and `Edge`), and devices (such as `Laptop Large`, `Tablet`, and `Mobile Small`) to run your test on.
-   - For a large laptop device, the dimensions are 1440 pixels x 1100 pixels.
-   - For a tablet device, the dimensions are 768 pixels x 1020 pixels.
-   - For a small mobile device, the dimensions are 320 pixels x 550 pixels.
-5. Select **managed and private locations**: Select locations around the world that are managed by Datadog or create [private locations][1] to run your browser test from custom locations or inside private networks.
+- **Build a test from scratch**:
+    
+    1. Click the **+** template to start a new Browser Test from scratch.
+    1. Enter a **Starting URL**: The URL from which your browser test starts the scenario.
+    1. Add a **name**: The name of your browser test.
+    1. Select **environment and additional tags**: Set the `env` and related tags attached to your browser test. Use the `<KEY>:<VALUE>` format to filter on a `<VALUE>` for a given `<KEY>`.
 
-   {{% managed-locations %}}
+       <div class="alert alert-info">See <a href=#advanced-options>Advanced options</a> for more options.</div>
 
-   You can also use the [Continuous Testing Tunnel][2] to trigger tests on your local development setup or in your CI/CD pipeline to test internal environments.
+   1. Select **browsers and devices**: The browsers (such as `Chrome`, `Firefox`, and `Edge`), and devices (such as `Laptop Large`, `Tablet`, and `Mobile Small`) to run your test on.
 
-6. Set the **test frequency**: The intervals vary from every five minutes to once per week. To request one-minute frequency, [contact Support][3].
+      - For a large laptop device, the dimensions are 1440 pixels x 1100 pixels.
+      - For a tablet device, the dimensions are 768 pixels x 1020 pixels.
+      - For a small mobile device, the dimensions are 320 pixels x 550 pixels.
+
+   1. Select **managed and private locations**: Select from a list of locations around the world that are managed by Datadog, or create [private locations][1] to run your browser test from custom locations or inside private networks.<br /><br>
+
+      {{% managed-locations %}}
+
+      You can also use the [Continuous Testing Tunnel][2] to trigger tests on your local development setup or in your CI/CD pipeline to test internal environments.<br /><br>
+
+   6. Set the **test frequency**: The intervals vary from every five minutes to once per week. To request one-minute frequency, [contact Support][3].
+   7. Click **Save & Edit Recording** to submit your Browser Test.
 
 ### Snippets
 
