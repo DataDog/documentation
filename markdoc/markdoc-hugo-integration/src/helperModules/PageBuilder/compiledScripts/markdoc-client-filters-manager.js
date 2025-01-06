@@ -12796,7 +12796,6 @@
       var OFFSCREEN_CLASS = "cdoc-offscreen";
       var ClientFiltersManager = class {
         fitCustomizationMenuToScreen() {
-          console.log("----");
           const pillsMenu = document.getElementById(PILLS_MENU_ID);
           if (!pillsMenu) {
             return;
@@ -12810,18 +12809,11 @@
           if (!menuWrapper) {
             throw new Error("Menu wrapper not found");
           }
-          console.log("pillsMenu.scrollWidth", pillsMenu.scrollWidth);
-          console.log("pillsMenu.offsetWidth", pillsMenu.offsetWidth);
-          console.log("menuWrapper.clientWidth", menuWrapper.clientWidth);
-          console.log("menuWrapper.offsetWidth", menuWrapper.offsetWidth);
-          console.log("menuWrapper.scrollWidth", menuWrapper.scrollWidth);
           const pillsMenuIsOverflowing = pillsMenu.scrollWidth > menuWrapper.clientWidth;
           if (!pillsAreHidden && pillsMenuIsOverflowing) {
-            console.log("pills are overflowing, hiding them");
             pillsMenu.classList.add(OFFSCREEN_CLASS);
             dropdownMenu.classList.remove(OFFSCREEN_CLASS);
           } else if (pillsAreHidden && !pillsMenuIsOverflowing) {
-            console.log("pills are not overflowing, showing them");
             pillsMenu.classList.remove(OFFSCREEN_CLASS);
             dropdownMenu.classList.add(OFFSCREEN_CLASS);
           }
@@ -13047,7 +13039,6 @@
           const dropdownContainers = document.getElementsByClassName("cdoc-dropdown");
           for (let i = 0; i < dropdownContainers.length; i++) {
             dropdownContainers[i].addEventListener("click", (e) => {
-              console.log("dropdown container clicked");
               const target = e.target;
               let parent = target;
               while (!parent.classList.contains("cdoc-dropdown") && parent.parentElement) {
