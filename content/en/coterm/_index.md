@@ -14,30 +14,35 @@ For your security, CoTerm uses [Sensitive Data Scanner][2] to detect and obfusca
    curl --tlsv1.2 --proto '=https' -sSf 'https://update.coscreen.org/install-ddcoterm.sh' | bash
    ```
 
-2. Set your [Datadog API key][1] as an environment variable:
+2. Initialize and authenticate CoTerm:
 
    ```shell
-   export DD_API_KEY=<DATADOG_API_KEY>
+   ddcoterm init
    ```
-   Replace `<DATADOG_API_KEY>` with your API key.
 
 ## Usage
 
 Run `ddcoterm` to manually launch CoTerm and record the entirety of your terminal session.
 
-To record the output of an individual command, use `ddcoterm -- COMMAND <COMMAND>`.
+To record the output of an individual command, use `ddcoterm -- <COMMAND>`.
 
 For example, to record the output of `kubectl`, use:
 
 ```shell
-ddcoterm -- COMMAND kubectl
+ddcoterm -- kubectl
 ```
 
 This launches CoTerm and runs the `kubectl` process. When the process completes, CoTerm stops recording and sends the captured process data to Datadog.
 
 ### Make CoTerm part of your workflow
 
-Datadog recommends that you add CoTerm to your scripts and containers so that you can record your terminal sessions without manually launching CoTerm. You can use aliases to automatically record certain commands. For example, you can set `alias kubectl='ddcoterm -- COMMAND kubectl'`.
+You can configure CoTerm to automatically record certain commands with `shim`. For example:
+
+```shell
+ddcoterm shim kubectl
+```
+
+After you run this command, CoTerm records all future invocations of `kubectl`.
 
 ### Review terminal sessions in Datadog
 
@@ -49,7 +54,7 @@ You can review your recorded terminal sessions and process data in Datadog:
 
 ### Known limitations
 
-- The maximum duration of a recorded session is approximately 55 minutes.
+- The maximum duration of a recorded session is approximately 24 hours.
 - [Sensitive data redaction][2] may fail if the sensitive data is spread across multiple lines.
 - On Linux, `seccomp`-based tracing prevents you from elevating your permissions during a recording.
 - On macOS, [Apple SIP][6] prevents the observation of some commands under `/bin`, `/sbin`, etc.
