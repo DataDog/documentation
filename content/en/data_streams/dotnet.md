@@ -13,7 +13,7 @@ title: Setup Data Streams Monitoring for .NET
 | Kafka             | [Confluent.Kafka](https://www.nuget.org/packages/Confluent.Kafka)                       | 2.28.0                 | 2.41.0 or later            |
 | RabbitMQ          | [RabbitMQ.Client](https://www.nuget.org/packages/RabbitMQ.Client)                       | 2.28.0                 | 2.37.0 or later            |
 | Amazon SQS        | [Amazon SQS SDK](https://www.nuget.org/packages/AWSSDK.SQS)                                | 2.48.0                 | 2.48.0 or later            |
-| Amazon SNS        | [AWS SNS SDK](https://www.nuget.org/packages/AWSSDK.SimpleNotificationService)          | 3.6.0                  | 3.6.0 or later             |
+| Amazon SNS        | [Amazon SNS SDK](https://www.nuget.org/packages/AWSSDK.SimpleNotificationService)          | 3.6.0                  | 3.6.0 or later             |
 | IBM MQ            | [IBMMQDotnetClient](https://www.nuget.org/packages/IBMMQDotnetClient)                   | 2.49.0                 | 2.49.0 or later            |
 | Azure service bus | [Azure.Messaging.ServiceBus](https://www.nuget.org/packages/Azure.Messaging.ServiceBus) | 2.38.0                 | 2.38.0 or later            |
 
