@@ -62,7 +62,7 @@ Datadog Agent v7.37+ supports listening for SNMP Traps, enabling you to set up [
 
 Binding to a port number under 1024 requires elevated permissions. To bind to a port number such as the default SNMP Trap port 162, do the following:
 
-1. Grant access to the port using the setcap command:
+1. Grant access to the port using the `setcap` command:
 
    ```
    sudo setcap CAP_NET_BIND_SERVICE=+ep /opt/datadog-agent/bin/agent/agent
@@ -70,7 +70,7 @@ Binding to a port number under 1024 requires elevated permissions. To bind to a 
 
    **Note**: Re-run this setcap command every time you upgrade the Agent.
 
-2. Verify the setup is correct by running the getcap command:
+2. Verify the setup is correct by running the `getcap` command:
 
    ```
    sudo getcap /opt/datadog-agent/bin/agent/agent
