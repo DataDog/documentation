@@ -243,7 +243,7 @@ Use attribute and tag variables to render alert messages that are customized, in
 - [Matching attribute/tag variables](#matching-attributetag-variables)
 
 Tags
-: Automatically attached (such as host name, container name, log file name, and serverless function name) or added through custom tags (such as team in charge, environment, application or version).
+: Automatically attached (such as host name, container name, log filename, and serverless function name) or added through custom tags (such as team in charge, environment, application, or version).
 
 Attributes
 : Based on the log content and either parsed or added by lookups from reference tables (for example, geoip).
