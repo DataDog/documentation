@@ -14358,6 +14358,12 @@ components:
             the error.
           example: Missing required attribute in body
           type: string
+        meta:
+          additionalProperties: {}
+          description: Non-standard meta-information about the error
+          type: object
+        source:
+          $ref: '#/components/schemas/JSONAPIErrorItemSource'
         status:
           description: Status code of the response.
           example: '400'
@@ -14365,6 +14371,24 @@ components:
         title:
           description: Short human-readable summary of the error.
           example: Bad Request
+          type: string
+      type: object
+    JSONAPIErrorItemSource:
+      description: References to the source of the error.
+      properties:
+        header:
+          description: A string indicating the name of a single request header which
+            caused the error.
+          example: Authorization
+          type: string
+        parameter:
+          description: A string indicating which URI query parameter caused the error.
+          example: limit
+          type: string
+        pointer:
+          description: A JSON pointer to the value in the request document that caused
+            the error.
+          example: /data/attributes/title
           type: string
       type: object
     JSONAPIErrorResponse:
