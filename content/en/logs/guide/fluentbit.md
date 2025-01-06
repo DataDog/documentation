@@ -12,7 +12,7 @@ further_reading:
 
 Configure Fluent Bit to collect, parse, and forward log data from several different sources to Datadog for monitoring. Fluent Bit has a small memory footprint (~450 KB), so you can use it to collect logs in environments with limited resources, such as containerized services and embedded Linux systems. [Datadog's Fluent Bit output plugin][1] supports Fluent Bit v1.3.0+.
 
-To configure the Fluent Bit Agent check, see [Fluent Bit (Agent)][13]
+To configure the Fluent Bit Agent check, see [Fluent Bit (Agent)][13].
 
 ## Setup
 
