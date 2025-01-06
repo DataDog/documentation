@@ -13,6 +13,7 @@
 #cdoc-selector,
 #cdoc-content.customizable {
     visibility: hidden;
+    white-space: nowrap;
 }
 
 #cdoc-content.customizable h1,

@@ -14,7 +14,7 @@ export const buildCustomizationMenuUi = (
   let menuHtml = '<div>';
   Object.keys(resolvedPageFilters).forEach((filterId) => {
     const resolvedFilter = resolvedPageFilters[filterId];
-    menuHtml += buildFilterSelectorDropdown({ filter: resolvedFilter });
+    menuHtml += buildFilterSelectorPills({ filter: resolvedFilter });
   });
   menuHtml += '<hr />';
   menuHtml += '</div>';

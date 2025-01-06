@@ -15,56 +15,30 @@
         let menuHtml = "<div>";
         Object.keys(resolvedPageFilters).forEach((filterId) => {
           const resolvedFilter = resolvedPageFilters[filterId];
-          menuHtml += buildFilterSelectorDropdown({ filter: resolvedFilter });
+          menuHtml += buildFilterSelectorPills({ filter: resolvedFilter });
         });
         menuHtml += "<hr />";
         menuHtml += "</div>";
         return menuHtml;
       };
       exports.buildCustomizationMenuUi = buildCustomizationMenuUi;
-      function buildFilterSelectorDropdown(p) {
+      function buildFilterSelectorPills(p) {
         const currentValue = p.filter.currentValue || p.filter.defaultValue;
-        const filterLabelElementId = `cdoc-${p.filter.id}-dropdown-label`;
-        let selectorHtml = '<div class="cdoc-dropdown-container">';
+        let selectorHtml = '<div class="cdoc-pills-container">';
         selectorHtml += `<p 
-    id="${filterLabelElementId}" 
+    id="cdoc-${p.filter.id}-pills-label" 
     class="cdoc-filter-label"
   >${p.filter.displayName}</p>`;
-        selectorHtml += `<div 
-    id="cdoc-dropdown-${p.filter.id}" 
-    class="cdoc-dropdown">`;
-        selectorHtml += `
-    <button
-      class="cdoc-dropdown-btn" 
-      type="button"
-      tabIndex="0"
-      aria-haspopup="listbox"
-      aria-expanded="false" 
-      aria-labelledby="${filterLabelElementId}">
-      <span 
-        id="cdoc-dropdown-${p.filter.id}-label" 
-        class="cdoc-btn-label"
-      >${p.filter.options.find((o) => o.id === currentValue).displayName}</span>
-      <div class="cdoc-chevron"></div>
-    </button>`;
-        selectorHtml += `<div 
-    class="cdoc-dropdown-options-list" 
-    role="listbox" 
-    aria-labelledby="${filterLabelElementId}">`;
         p.filter.options.forEach((option) => {
           const isSelected = option.id === currentValue;
-          selectorHtml += `<a 
-      class="cdoc-dropdown-option 
-      cdoc-filter__option ${isSelected ? "selected" : ""}" 
+          selectorHtml += `<button
+      class="cdoc-filter__option cdoc-pill ${isSelected ? "selected" : ""}" 
       data-filter-id="${p.filter.id}" 
       data-option-id="${option.id}"
-      role="option" 
       aria-selected="${isSelected}"
       tabIndex="0"
-    >${option.displayName}</a>`;
+    >${option.displayName}</button>`;
         });
-        selectorHtml += "</div>";
-        selectorHtml += "</div>";
         selectorHtml += "</div>";
         return selectorHtml;
       }
