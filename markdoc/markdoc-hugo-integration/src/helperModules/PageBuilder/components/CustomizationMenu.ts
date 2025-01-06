@@ -14,44 +14,12 @@ export const buildCustomizationMenuUi = (
   let menuHtml = '<div>';
   Object.keys(resolvedPageFilters).forEach((filterId) => {
     const resolvedFilter = resolvedPageFilters[filterId];
-    menuHtml += buildFilterSelectorDropdowns({ filter: resolvedFilter });
+    menuHtml += buildFilterSelectorPills({ filter: resolvedFilter });
   });
   menuHtml += '<hr />';
   menuHtml += '</div>';
   return menuHtml;
 };
-
-/*
-<div id="cdoc-selector">
-<div class="cdoc-pills-container">
-  <p 
-    id="cdoc-color-label" 
-    class="cdoc-filter-label"
-  >Color</p>
-<button
-      class="cdoc-filter__option cdoc-pill selected" 
-      data-filter-id="color" 
-      data-option-id="red"
-      aria-selected=""
-      tabIndex="0"
-    >Red</button>
-<button
-      class="cdoc-filter__option cdoc-pill" 
-      data-filter-id="color" 
-      data-option-id="yellow"
-      aria-selected=""
-      tabIndex="0"
-    >Yellow</button>
-<button
-      class="cdoc-filter__option cdoc-pill" 
-      data-filter-id="color" 
-      data-option-id="blue"
-      aria-selected="selected"
-      tabIndex="0"
-    >Blue</button></div>
-</div>
-</div>
-*/
 
 function buildFilterSelectorPills(p: { filter: ResolvedPageFilter }) {
   const currentValue = p.filter.currentValue || p.filter.defaultValue;

@@ -3,105 +3,55 @@ title: Primary Colors (ja)
 aliases:
   - /primary_colors_alias/
 ---
-<div id="cdoc-selector"><div><div class="cdoc-dropdown-container"><p 
-    id="cdoc-color-label" 
+<div id="cdoc-selector"><div><div class="cdoc-pills-container"><p 
+    id="cdoc-color-pills-label" 
     class="cdoc-filter-label"
-  >Color</p><div 
-    id="cdoc-dropdown-color" 
-    class="cdoc-dropdown">
-    <button
-      class="cdoc-dropdown-btn" 
-      type="button"
-      tabIndex="0"
-      aria-haspopup="listbox"
-      aria-expanded="false" 
-      aria-labelledby="cdoc-color-label">
-      <span 
-        id="cdoc-dropdown-color-label" 
-        class="cdoc-btn-label"
-      >Blue (ja)</span>
-      <div class="cdoc-chevron"></div>
-    </button><div 
-    class="cdoc-dropdown-options-list" 
-    role="listbox" 
-    aria-labelledby="cdoc-color-label"><a 
-      class="cdoc-dropdown-option 
-      cdoc-filter__option " 
+  >Color</p><button
+      class="cdoc-filter__option cdoc-pill " 
       data-filter-id="color" 
       data-option-id="red"
-      role="option" 
-      aria-selected=""
+      aria-selected="false"
       tabIndex="0"
-    >Red (ja)</a><a 
-      class="cdoc-dropdown-option 
-      cdoc-filter__option " 
+    >Red (ja)</button><button
+      class="cdoc-filter__option cdoc-pill " 
       data-filter-id="color" 
       data-option-id="yellow"
-      role="option" 
-      aria-selected=""
+      aria-selected="false"
       tabIndex="0"
-    >Yellow (ja)</a><a 
-      class="cdoc-dropdown-option 
-      cdoc-filter__option selected" 
+    >Yellow (ja)</button><button
+      class="cdoc-filter__option cdoc-pill selected" 
       data-filter-id="color" 
       data-option-id="blue"
-      role="option" 
-      aria-selected="selected"
+      aria-selected="true"
       tabIndex="0"
-    >Blue (ja)</a></div></div></div><div class="cdoc-dropdown-container"><p 
-    id="cdoc-item-label" 
+    >Blue (ja)</button></div><div class="cdoc-pills-container"><p 
+    id="cdoc-item-pills-label" 
     class="cdoc-filter-label"
-  >Item</p><div 
-    id="cdoc-dropdown-item" 
-    class="cdoc-dropdown">
-    <button
-      class="cdoc-dropdown-btn" 
-      type="button"
-      tabIndex="0"
-      aria-haspopup="listbox"
-      aria-expanded="false" 
-      aria-labelledby="cdoc-item-label">
-      <span 
-        id="cdoc-dropdown-item-label" 
-        class="cdoc-btn-label"
-      >Ocean</span>
-      <div class="cdoc-chevron"></div>
-    </button><div 
-    class="cdoc-dropdown-options-list" 
-    role="listbox" 
-    aria-labelledby="cdoc-item-label"><a 
-      class="cdoc-dropdown-option 
-      cdoc-filter__option selected" 
+  >Item</p><button
+      class="cdoc-filter__option cdoc-pill selected" 
       data-filter-id="item" 
       data-option-id="ocean"
-      role="option" 
-      aria-selected="selected"
+      aria-selected="true"
       tabIndex="0"
-    >Ocean</a><a 
-      class="cdoc-dropdown-option 
-      cdoc-filter__option " 
+    >Ocean</button><button
+      class="cdoc-filter__option cdoc-pill " 
       data-filter-id="item" 
       data-option-id="sky"
-      role="option" 
-      aria-selected=""
+      aria-selected="false"
       tabIndex="0"
-    >Sky</a><a 
-      class="cdoc-dropdown-option 
-      cdoc-filter__option " 
+    >Sky</button><button
+      class="cdoc-filter__option cdoc-pill " 
       data-filter-id="item" 
       data-option-id="jeans"
-      role="option" 
-      aria-selected=""
+      aria-selected="false"
       tabIndex="0"
-    >Jeans</a><a 
-      class="cdoc-dropdown-option 
-      cdoc-filter__option " 
+    >Jeans</button><button
+      class="cdoc-filter__option cdoc-pill " 
       data-filter-id="item" 
       data-option-id="blueberry"
-      role="option" 
-      aria-selected=""
+      aria-selected="false"
       tabIndex="0"
-    >Blueberry</a></div></div></div><hr /></div></div><div id="cdoc-content" class="customizable"><article>
+    >Blueberry</button></div><hr /></div></div><div id="cdoc-content" class="customizable"><article>
   <div class="alert alert-warning">
     <p>Warning: This is just a test page. It's not real.</p>
   </div>
