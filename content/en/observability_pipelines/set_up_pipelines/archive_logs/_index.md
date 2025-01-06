@@ -17,6 +17,7 @@ Use Observability Pipelines to route ingested logs to a cloud storage solution (
 
 Select a source to get started:
 
+- [Amazon Data Firehose][12]
 - [Amazon S3][11]
 - [Datadog Agent][1]
 - [Fluentd or Fluent Bit][2]
@@ -40,3 +41,4 @@ Select a source to get started:
 [9]: /observability_pipelines/archive_logs/sumo_logic_hosted_collector
 [10]: /observability_pipelines/archive_logs/syslog
 [11]: /observability_pipelines/set_up_pipelines/archive_logs/amazon_s3
+[12]: /observability_pipelines/set_up_pipelines/archive_logs/amazon_data_firehose

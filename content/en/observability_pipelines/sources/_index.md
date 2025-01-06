@@ -29,6 +29,7 @@ Select and set up your source when you build a pipeline in the UI. This is step 
 Sources have different prerequisites and settings. Some sources also need to be configured to send logs to the Observability Pipelines Worker.
 
 {{< whatsnext desc="Select a source for more information:" >}}
+    {{< nextlink href="observability_pipelines/sources/amazon_data_firehose/" >}}Amazon Data Firehose{{< /nextlink >}}
     {{< nextlink href="observability_pipelines/sources/amazon_s3/" >}}Amazon S3{{< /nextlink >}}
     {{< nextlink href="observability_pipelines/sources/datadog_agent/" >}}Datadog Agent{{< /nextlink >}}
     {{< nextlink href="observability_pipelines/sources/fluent/" >}}Fluentd and Fluent Bit{{< /nextlink >}}

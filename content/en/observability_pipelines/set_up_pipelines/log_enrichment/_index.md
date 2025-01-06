@@ -18,6 +18,7 @@ aliases:
 
 Select a source to get started:
 
+- [Amazon Data Firehose][12]
 - [Amazon S3][11]
 - [Datadog Agent][1]
 - [Fluentd or Fluent Bit][2]
@@ -41,3 +42,4 @@ Select a source to get started:
 [9]: /observability_pipelines/log_enrichment/sumo_logic_hosted_collector
 [10]: /observability_pipelines/log_enrichment/syslog
 [11]: /observability_pipelines/set_up_pipelines/log_enrichment/amazon_s3
+[12]: /observability_pipelines/set_up_pipelines/log_enrichment/amazon_data_firehose
