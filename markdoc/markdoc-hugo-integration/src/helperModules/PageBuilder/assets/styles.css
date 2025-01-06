@@ -2,6 +2,16 @@
     display: none;
 }
 
+.cdoc-offscreen {
+    position: absolute;
+    left: -9999px;
+    visibility: hidden;
+}
+
+#cdoc-filters-menu {
+    width: 100%;
+}
+
 .cdoc-pills-container {
     display: inline-block;
     margin-right: 1em;

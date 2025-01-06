@@ -31,6 +31,7 @@ import { PageFiltersClientSideManifest } from '../schemas/pageFilters';
 const PILLS_MENU_ID = 'cdoc-filters-pill-menu';
 const DROPDOWN_MENU_ID = 'cdoc-filters-dropdown-menu';
 const MENU_WRAPPER_ID = 'cdoc-filters-menu';
+const OFFSCREEN_CLASS = 'cdoc-offscreen';
 
 export class ClientFiltersManager {
   static #instance: ClientFiltersManager;
@@ -47,6 +48,8 @@ export class ClientFiltersManager {
       return;
     }
 
+    const pillsAreHidden = pillsMenu.classList.contains(OFFSCREEN_CLASS);
+
     const dropdownMenu = document.getElementById(DROPDOWN_MENU_ID);
     if (!dropdownMenu) {
       throw new Error('Dropdown menu not found');
@@ -57,12 +60,20 @@ export class ClientFiltersManager {
       throw new Error('Menu wrapper not found');
     }
 
-    if (pillsMenu.scrollWidth > pillsMenu.clientWidth) {
+    const pillsMenuIsOverflowing = pillsMenu.scrollWidth > menuWrapper.clientWidth;
+
+    if (!pillsAreHidden && pillsMenuIsOverflowing) {
       // hide the pills menu
-      pillsMenu.style.display = 'none';
+      pillsMenu.classList.add(OFFSCREEN_CLASS);
 
       // show the dropdown menu
-      dropdownMenu.style.display = 'block';
+      dropdownMenu.classList.remove(OFFSCREEN_CLASS);
+    } else if (pillsAreHidden && !pillsMenuIsOverflowing) {
+      // show the pills menu
+      pillsMenu.classList.remove(OFFSCREEN_CLASS);
+
+      // hide the dropdown menu
+      dropdownMenu.classList.add(OFFSCREEN_CLASS);
     }
   }
 
@@ -122,6 +133,7 @@ export class ClientFiltersManager {
 
     this.populateRightNav();
     this.handleMenuContentOverflow();
+    this.addWindowResizeListener();
     this.revealPage();
     this.updateEditButton();
 
@@ -316,6 +328,12 @@ export class ClientFiltersManager {
         toggleable.classList.add('cdoc__hidden');
       }
     }
+  }
+
+  addWindowResizeListener() {
+    window.addEventListener('resize', () => {
+      this.handleMenuContentOverflow();
+    });
   }
 
   /**

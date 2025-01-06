@@ -49,7 +49,7 @@ title: Traffic Light Colors (ja)
       data-option-id="frog"
       aria-selected="false"
       tabIndex="0"
-    >Frog</button></div></div><div class="filter-selector-menu" id="cdoc-filters-dropdown-menu" style="display: none;"><div class="cdoc-dropdown-container"><p 
+    >Frog</button></div></div><div class="filter-selector-menu cdoc-offscreen" id="cdoc-filters-dropdown-menu"><div class="cdoc-dropdown-container"><p 
     id="cdoc-color-dropdown-label" 
     class="cdoc-filter-label"
   >Color</p><div 

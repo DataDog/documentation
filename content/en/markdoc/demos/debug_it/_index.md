@@ -76,7 +76,7 @@ title: 'DebugIt: A Fake Debugging Library'
       data-option-id="sql_server"
       aria-selected="false"
       tabIndex="0"
-    >SQL Server</button></div></div><div class="filter-selector-menu" id="cdoc-filters-dropdown-menu" style="display: none;"><div class="cdoc-dropdown-container"><p 
+    >SQL Server</button></div></div><div class="filter-selector-menu cdoc-offscreen" id="cdoc-filters-dropdown-menu"><div class="cdoc-dropdown-container"><p 
     id="cdoc-prog_lang-dropdown-label" 
     class="cdoc-filter-label"
   >Language</p><div 

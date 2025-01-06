@@ -50,7 +50,7 @@
         return selectorHtml;
       }
       function buildFilterSelectorDropdownsMenu(p) {
-        let menuHtml = '<div class="filter-selector-menu" id="cdoc-filters-dropdown-menu" style="display: none;">';
+        let menuHtml = '<div class="filter-selector-menu cdoc-offscreen" id="cdoc-filters-dropdown-menu">';
         Object.keys(p.filters).forEach((filterId) => {
           const resolvedFilter = p.filters[filterId];
           menuHtml += buildFilterSelectorDropdown({ filter: resolvedFilter });
@@ -12793,12 +12793,14 @@
       var PILLS_MENU_ID = "cdoc-filters-pill-menu";
       var DROPDOWN_MENU_ID = "cdoc-filters-dropdown-menu";
       var MENU_WRAPPER_ID = "cdoc-filters-menu";
+      var OFFSCREEN_CLASS = "cdoc-offscreen";
       var ClientFiltersManager = class {
         handleMenuContentOverflow() {
           const pillsMenu = document.getElementById(PILLS_MENU_ID);
           if (!pillsMenu) {
             return;
           }
+          const pillsAreHidden = pillsMenu.classList.contains(OFFSCREEN_CLASS);
           const dropdownMenu = document.getElementById(DROPDOWN_MENU_ID);
           if (!dropdownMenu) {
             throw new Error("Dropdown menu not found");
@@ -12807,9 +12809,13 @@
           if (!menuWrapper) {
             throw new Error("Menu wrapper not found");
           }
-          if (pillsMenu.scrollWidth > pillsMenu.clientWidth) {
-            pillsMenu.style.display = "none";
-            dropdownMenu.style.display = "block";
+          const pillsMenuIsOverflowing = pillsMenu.scrollWidth > menuWrapper.clientWidth;
+          if (!pillsAreHidden && pillsMenuIsOverflowing) {
+            pillsMenu.classList.add(OFFSCREEN_CLASS);
+            dropdownMenu.classList.remove(OFFSCREEN_CLASS);
+          } else if (pillsAreHidden && !pillsMenuIsOverflowing) {
+            pillsMenu.classList.remove(OFFSCREEN_CLASS);
+            dropdownMenu.classList.add(OFFSCREEN_CLASS);
           }
         }
         /**
@@ -12858,6 +12864,7 @@
           }
           this.populateRightNav();
           this.handleMenuContentOverflow();
+          this.addWindowResizeListener();
           this.revealPage();
           this.updateEditButton();
           if (contentIsCustomizable) {
@@ -13018,6 +13025,11 @@
               toggleable.classList.add("cdoc__hidden");
             }
           }
+        }
+        addWindowResizeListener() {
+          window.addEventListener("resize", () => {
+            this.handleMenuContentOverflow();
+          });
         }
         /**
          * Expand or hide the dropdown menu when the user clicks on it,

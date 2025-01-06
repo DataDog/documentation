@@ -1,6 +1,4 @@
-import { s } from 'markdoc-static-compiler/dist/src/schema';
 import { ResolvedPageFilters, ResolvedPageFilter } from '../../../schemas/pageFilters';
-import { build } from 'vite';
 
 /**
  * Given a resolved page filters object, build the UI for the filter selector
@@ -64,7 +62,7 @@ function buildFilterSelectorPills(p: { filter: ResolvedPageFilter }) {
 
 function buildFilterSelectorDropdownsMenu(p: { filters: ResolvedPageFilters }) {
   let menuHtml =
-    '<div class="filter-selector-menu" id="cdoc-filters-dropdown-menu" style="display: none;">';
+    '<div class="filter-selector-menu cdoc-offscreen" id="cdoc-filters-dropdown-menu">';
   Object.keys(p.filters).forEach((filterId) => {
     const resolvedFilter = p.filters[filterId];
     menuHtml += buildFilterSelectorDropdown({ filter: resolvedFilter });
