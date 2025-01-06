@@ -16,7 +16,7 @@ The Retention widget is available in Preview for Product Analytics customers. To
 
 {{< img src="/dashboards/widgets/retention/retention_widget_graph.png" alt="Graph visualization of the retention widget" style="width:100%;" >}}
 
-Retention Analysis allows you to measure how often users are successfully returning to a page or action. By tracking user retention over time, you can gain insights into overall user satisfaction. Use Retention Analysis to answer questions like the following:
+Retention Analysis allows you to measure how often users are successfully returning to a page or performing an action. By tracking user retention over time, you can gain insights into overall user satisfaction. Use Retention Analysis to answer questions like the following:
 - After visiting the checkout page and purchasing one item, what percentage of people come back and continue to do that in the following weeks?
 - During the holiday season, how many people look at the catalog page once and never return?
 - On a ride share app, how many people open up the app and then order a ride? 
