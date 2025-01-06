@@ -12,13 +12,18 @@ import { build } from 'vite';
 export const buildCustomizationMenuUi = (
   resolvedPageFilters: ResolvedPageFilters
 ): string => {
-  let menuHtml = buildFilterSelectorPillsMenu({ filters: resolvedPageFilters });
+  let menuHtml = '<div id="cdoc-filters-menu">';
+  // Build the displayed pills menu
+  menuHtml += buildFilterSelectorPillsMenu({ filters: resolvedPageFilters });
+  // Build a hidden dropdown menu in case the pills don't fit on the client
+  menuHtml += buildFilterSelectorDropdownsMenu({ filters: resolvedPageFilters });
+  menuHtml += '</div>';
   menuHtml += '<hr />';
   return menuHtml;
 };
 
 function buildFilterSelectorPillsMenu(p: { filters: ResolvedPageFilters }) {
-  let menuHtml = '<div id="cdoc-filters-pill-menu">';
+  let menuHtml = '<div class="filter-selector-menu" id="cdoc-filters-pill-menu">';
   Object.keys(p.filters).forEach((filterId) => {
     const resolvedFilter = p.filters[filterId];
     menuHtml += buildFilterSelectorPills({ filter: resolvedFilter });
@@ -55,6 +60,17 @@ function buildFilterSelectorPills(p: { filter: ResolvedPageFilter }) {
   selectorHtml += '</div>';
 
   return selectorHtml;
+}
+
+function buildFilterSelectorDropdownsMenu(p: { filters: ResolvedPageFilters }) {
+  let menuHtml =
+    '<div class="filter-selector-menu" id="cdoc-filters-dropdown-menu" style="display: none;">';
+  Object.keys(p.filters).forEach((filterId) => {
+    const resolvedFilter = p.filters[filterId];
+    menuHtml += buildFilterSelectorDropdown({ filter: resolvedFilter });
+  });
+  menuHtml += '</div>';
+  return menuHtml;
 }
 
 function buildFilterSelectorDropdown(p: { filter: ResolvedPageFilter }) {

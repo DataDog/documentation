@@ -28,6 +28,10 @@ import {
 } from './PageBuilder/pageConfigMinification';
 import { PageFiltersClientSideManifest } from '../schemas/pageFilters';
 
+const PILLS_MENU_ID = 'cdoc-filters-pill-menu';
+const DROPDOWN_MENU_ID = 'cdoc-filters-dropdown-menu';
+const MENU_WRAPPER_ID = 'cdoc-filters-menu';
+
 export class ClientFiltersManager {
   static #instance: ClientFiltersManager;
 
@@ -36,6 +40,31 @@ export class ClientFiltersManager {
   private selectedValsByFilterId: Record<string, string> = {};
   private ifFunctionsByRef: Record<string, ClientFunction> = {};
   private storedFilters: Record<string, string> = {};
+
+  handleMenuContentOverflow() {
+    const pillsMenu = document.getElementById(PILLS_MENU_ID);
+    if (!pillsMenu) {
+      return;
+    }
+
+    const dropdownMenu = document.getElementById(DROPDOWN_MENU_ID);
+    if (!dropdownMenu) {
+      throw new Error('Dropdown menu not found');
+    }
+
+    const menuWrapper = document.getElementById(MENU_WRAPPER_ID);
+    if (!menuWrapper) {
+      throw new Error('Menu wrapper not found');
+    }
+
+    if (pillsMenu.scrollWidth > pillsMenu.clientWidth) {
+      // hide the pills menu
+      pillsMenu.style.display = 'none';
+
+      // show the dropdown menu
+      dropdownMenu.style.display = 'block';
+    }
+  }
 
   /**
    * The constructor should not do anything,
@@ -92,6 +121,7 @@ export class ClientFiltersManager {
     }
 
     this.populateRightNav();
+    this.handleMenuContentOverflow();
     this.revealPage();
     this.updateEditButton();
 

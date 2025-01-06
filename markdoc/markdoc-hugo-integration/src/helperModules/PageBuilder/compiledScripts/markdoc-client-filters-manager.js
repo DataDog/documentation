@@ -12,13 +12,16 @@
       Object.defineProperty(exports, "__esModule", { value: true });
       exports.buildCustomizationMenuUi = void 0;
       var buildCustomizationMenuUi = (resolvedPageFilters) => {
-        let menuHtml = buildFilterSelectorPillsMenu({ filters: resolvedPageFilters });
+        let menuHtml = '<div id="cdoc-filters-menu">';
+        menuHtml += buildFilterSelectorPillsMenu({ filters: resolvedPageFilters });
+        menuHtml += buildFilterSelectorDropdownsMenu({ filters: resolvedPageFilters });
+        menuHtml += "</div>";
         menuHtml += "<hr />";
         return menuHtml;
       };
       exports.buildCustomizationMenuUi = buildCustomizationMenuUi;
       function buildFilterSelectorPillsMenu(p) {
-        let menuHtml = '<div id="cdoc-filters-pill-menu">';
+        let menuHtml = '<div class="filter-selector-menu" id="cdoc-filters-pill-menu">';
         Object.keys(p.filters).forEach((filterId) => {
           const resolvedFilter = p.filters[filterId];
           menuHtml += buildFilterSelectorPills({ filter: resolvedFilter });
@@ -43,6 +46,61 @@
       tabIndex="0"
     >${option.displayName}</button>`;
         });
+        selectorHtml += "</div>";
+        return selectorHtml;
+      }
+      function buildFilterSelectorDropdownsMenu(p) {
+        let menuHtml = '<div class="filter-selector-menu" id="cdoc-filters-dropdown-menu" style="display: none;">';
+        Object.keys(p.filters).forEach((filterId) => {
+          const resolvedFilter = p.filters[filterId];
+          menuHtml += buildFilterSelectorDropdown({ filter: resolvedFilter });
+        });
+        menuHtml += "</div>";
+        return menuHtml;
+      }
+      function buildFilterSelectorDropdown(p) {
+        const currentValue = p.filter.currentValue || p.filter.defaultValue;
+        const filterLabelElementId = `cdoc-${p.filter.id}-dropdown-label`;
+        let selectorHtml = '<div class="cdoc-dropdown-container">';
+        selectorHtml += `<p 
+    id="${filterLabelElementId}" 
+    class="cdoc-filter-label"
+  >${p.filter.displayName}</p>`;
+        selectorHtml += `<div 
+    id="cdoc-dropdown-${p.filter.id}" 
+    class="cdoc-dropdown">`;
+        selectorHtml += `
+    <button
+      class="cdoc-dropdown-btn" 
+      type="button"
+      tabIndex="0"
+      aria-haspopup="listbox"
+      aria-expanded="false" 
+      aria-labelledby="${filterLabelElementId}">
+      <span 
+        id="cdoc-dropdown-${p.filter.id}-label" 
+        class="cdoc-btn-label"
+      >${p.filter.options.find((o) => o.id === currentValue).displayName}</span>
+      <div class="cdoc-chevron"></div>
+    </button>`;
+        selectorHtml += `<div 
+    class="cdoc-dropdown-options-list" 
+    role="listbox" 
+    aria-labelledby="${filterLabelElementId}">`;
+        p.filter.options.forEach((option) => {
+          const isSelected = option.id === currentValue;
+          selectorHtml += `<a 
+      class="cdoc-dropdown-option 
+      cdoc-filter__option ${isSelected ? "selected" : ""}" 
+      data-filter-id="${p.filter.id}" 
+      data-option-id="${option.id}"
+      role="option" 
+      aria-selected="${isSelected}"
+      tabIndex="0"
+    >${option.displayName}</a>`;
+        });
+        selectorHtml += "</div>";
+        selectorHtml += "</div>";
         selectorHtml += "</div>";
         return selectorHtml;
       }
@@ -12732,7 +12790,28 @@
       var filterResolution_1 = require_filterResolution();
       var reresolver_1 = require_reresolver();
       var pageConfigMinification_1 = require_pageConfigMinification();
+      var PILLS_MENU_ID = "cdoc-filters-pill-menu";
+      var DROPDOWN_MENU_ID = "cdoc-filters-dropdown-menu";
+      var MENU_WRAPPER_ID = "cdoc-filters-menu";
       var ClientFiltersManager = class {
+        handleMenuContentOverflow() {
+          const pillsMenu = document.getElementById(PILLS_MENU_ID);
+          if (!pillsMenu) {
+            return;
+          }
+          const dropdownMenu = document.getElementById(DROPDOWN_MENU_ID);
+          if (!dropdownMenu) {
+            throw new Error("Dropdown menu not found");
+          }
+          const menuWrapper = document.getElementById(MENU_WRAPPER_ID);
+          if (!menuWrapper) {
+            throw new Error("Menu wrapper not found");
+          }
+          if (pillsMenu.scrollWidth > pillsMenu.clientWidth) {
+            pillsMenu.style.display = "none";
+            dropdownMenu.style.display = "block";
+          }
+        }
         /**
          * The constructor should not do anything,
          * since there is always only one instance,
@@ -12778,6 +12857,7 @@
             }
           }
           this.populateRightNav();
+          this.handleMenuContentOverflow();
           this.revealPage();
           this.updateEditButton();
           if (contentIsCustomizable) {

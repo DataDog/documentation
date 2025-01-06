@@ -8,12 +8,15 @@
     margin-top: 1em;
 }
 
+#cdoc-filters-pill-menu {
+    white-space: nowrap;
+}
+
 /* Document sections and headings */
 
 #cdoc-selector,
 #cdoc-content.customizable {
     visibility: hidden;
-    white-space: nowrap;
 }
 
 #cdoc-content.customizable h1,
