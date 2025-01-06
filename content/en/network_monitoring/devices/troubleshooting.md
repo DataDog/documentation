@@ -65,6 +65,10 @@ The output should look similar to the following:
 
 If either the SNMP status or Agent walk shows an error, it could indicate one of the following issues:
 
+#### Permission denied
+
+If you see a permission denied error while port binding in agent logs, the port number you've indicated may require elevated permissions. To bind to a port number under 1024, see [Using the default SNMP Trap port 162][8].
+
 #### Unreachable or misconfigured device:
 
    **Error**:
@@ -88,10 +92,6 @@ If either the SNMP status or Agent walk shows an error, it could indicate one of
       DROP       all  --  anywhere             10.4.5.6
       ```
    3. Ensure your community string matches.
-
-#### Permission denied
-
-If you see a permission denied error while port binding in agent logs, the port number you've indicated may require elevated permissions. To bind to a port number under 1024, see [Using the default SNMP Trap port 162][8].
 
 #### Incorrect SNMPv2 credentials
 
