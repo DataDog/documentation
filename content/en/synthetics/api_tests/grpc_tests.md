@@ -33,7 +33,7 @@ gRPC tests allow you to proactively monitor your gRPC services and servers. You 
 Behavior Checks
 : Send gRPC requests to your applications' API endpoints to verify responses and defined conditions, such as overall response time, header, or body content.
 
-Health Checks 
+Health Checks
 : gRPC health checks are a standard for reporting the health of gRPC services. Determine if your gRPC servers and services are responsive, running, and capable of handling remote procedure calls (RPCs).<br><br>By implementing gRPC health checks, you can run gRPC health checks tests without having to provide a `.proto` file to Datadog. For more information, see the [example health checks `.proto` file][1] shared by the gRPC community.
 
 gRPC tests can run from both [managed](#select-locations) and [private locations][2] depending on your preference for running the test from outside or inside your network. gRPC tests can run on a schedule, on-demand, or directly within your [CI/CD pipelines][3].
@@ -157,7 +157,7 @@ If a test contains an assertion on the response body and the timeout limit is re
 
 Select the **Locations** to run your gRPC test from. gRPC tests can run from both managed and [private locations][2] depending on your preference for running the test from outside or inside your network.
 
-{{% managed-locations %}} 
+{{% managed-locations %}}
 
 ### Specify test frequency
 
@@ -212,12 +212,7 @@ If you are using the [custom role feature][13], add your user to any custom role
 
 ## Restrict access
 
-Access restriction is available for customers using [custom roles][14] on their accounts.
-
-You can restrict access to a browser test based on the roles in your organization. When creating a browser test, choose which roles (in addition to your user) can read and write your test.
-
-{{< img src="synthetics/settings/restrict_access_1.png" alt="Set permissions for your test" style="width:70%;" >}}
-
+{{% synthetics_grace_permissions %}}
 
 ## Further Reading
 
@@ -237,4 +232,3 @@ You can restrict access to a browser test based on the roles in your organizatio
 [11]: /synthetics/api_tests/errors/#ssl-errors
 [12]: /account_management/rbac/
 [13]: /account_management/rbac#custom-roles
-[14]: /account_management/rbac/#create-a-custom-role
