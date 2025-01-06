@@ -43,26 +43,26 @@ nav_sections:
       link: watchdog/
       title: Datadog Watchdog
     - desc: Ver alertas de Datadog, incidentes y más en tu dispositivo móvil
-      icon: apm
+      icon: mobile
       link: mobile/
       title: Aplicación móvil
     - desc: Identificar, analizar y mitigar incidencias críticas en tu organización
-      icon: rum
-      link: gestión_de_servicios/gestión_de_incidentes
+      icon: incidents
+      link: service_management/incident_management
       title: Gestión de incidencias
     - desc: Dar seguimiento a los cambios y alertas en tus aplicaciones e infraestructura
-      icon: rastreo
+      icon: events
       link: events/
       title: Eventos
     - desc: Automatizar y orquestar procesos en todo tu stack tecnológico
-      icon: rastreo
-      link: rastreo
+      icon: workflows
+      link: workflows
       title: Automatización de flujos de trabajo
 - nav_section:
   - name: Productos
   - navtiles:
     - desc: Supervisar tus hosts, contenedores, procesos y funciones serverless
-      icon: metric
+      icon: host-map
       link: infrastructure/
       title: Infraestructura
     - desc: Detectar y solucionar problemas de rendimiento en tus aplicaciones serverless
@@ -71,13 +71,13 @@ nav_sections:
       title: Serverless
     - desc: Usar objetos etiquetados para recopilar y generar gráficos de datos sobre
         el tráfico de tu red
-      icon: la red
-      link: real_user_monitoring/
+      icon: network
+      link: network_monitoring/
       title: Monitorización de red
     - desc: Controla tu gasto en la nube con datos unificados sobre observabilidad
         y costos
-      icon: database-2
-      link: database_monitoring/
+      icon: cloud-cost-management
+      link: cloud_cost_management/
       title: Gestión de costos en la nube
     - desc: Explorar dashboards de rendimiento listos para usar y trazas distribuidas
       icon: apm
@@ -85,29 +85,29 @@ nav_sections:
       title: APM
     - desc: Comparar snapshots de rendimiento e investigar cuellos de botella
       icon: profiling-1
-      link: continuous_integration/
+      link: profiler/
       title: Continuous Profiler
     - desc: Explorar dashboards enriquecidos, métricas de consultas y ejemplos de
         consultas
-      icon: log
-      link: tracing/trace_explorer/
+      icon: database-2
+      link: database_monitoring/
       title: Monitorización de bases de datos
     - desc: Rastrear y mejorar el rendimiento de tus pipelines de streaming de datos
-      icon: pipelines
-      link: real_user_monitoring/
+      icon: datastreams-monitoring
+      link: data_streams/
       title: Data Streams Monitoring
     - desc: Monitorizar y optimizar tus trabajos de procesamiento de datos
-      icon: datos-trabajos-Monitorización
+      icon: data-jobs-monitoring
       link: data_jobs/
       title: Monitorización de trabajos de datos
     - desc: Descubrir, asignar y monitorizar servicios sin cambiar el código
       icon: usm
-      link: continuous_testing/
+      link: universal_service_monitoring/
       title: Universal Service Monitoring
     - desc: Garantizar el tiempo de actividad, avisar de problemas regionales y probar
         el rendimiento de aplicaciones
-      icon: rum
-      link: real_user_monitoring/
+      icon: synthetics
+      link: synthetics/
       title: Monitorización Synthetic
     - desc: Identificar los errores críticos y acelerar la resolución en la web, los
         dispositivos móviles y el backend.
@@ -115,7 +115,7 @@ nav_sections:
       link: error_tracking/
       title: Rastreo de errores
     - desc: Capturar, observar y analizar la experiencia del usuario de tus aplicaciones
-      icon: cog-2
+      icon: rum
       link: real_user_monitoring/
       title: Real User Monitoring
     - desc: Obtener información sobre el comportamiento de los usuarios y tomar decisiones
@@ -125,7 +125,7 @@ nav_sections:
       title: Análisis de productos
     - desc: Monitorizar recorridos del usuario y transacciones comerciales en aplicaciones
         móviles
-      icon: apm
+      icon: mobile
       link: mobile_app_testing/
       title: Test de aplicaciones móviles
     - desc: Hacer tests de un extremo a otro y de integración sin código con proveedores
@@ -147,7 +147,7 @@ nav_sections:
       link: security/
       title: Seguridad
     - desc: Explorar, buscar y crear distribuciones para tus métricas
-      icon: metrica
+      icon: metric
       link: metrics/
       title: Métricas
     - desc: Procesar, monitorizar y archivar tus logs ingeridos
@@ -159,14 +159,14 @@ nav_sections:
       link: observability_pipelines/
       title: Pipelines de observabilidad
     - desc: Rastrear, monitorizar y asegurar tus solicitudes de LLM
-      icon: llm-observabilidad
+      icon: llm-observability
       link: llm_observability/
       title: Observabilidad de LLM
 - nav_section:
   - name: Configuración
   - navtiles:
     - desc: Probar la API de Datadog
-      icon: cog-2
+      icon: api
       link: api/latest/
       title: API
     - desc: Acceder a la configuración y la facturación basadas en la organización
