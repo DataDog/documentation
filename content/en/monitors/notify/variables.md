@@ -356,9 +356,18 @@ If your monitor triggers an alert for each `service`, then you can access some a
 Service metadata variables:
 
 - Service name: `{{service.name}}`
-- Team name: `{{service.dd_team}}`
+- Team name: `{{service.dd-team}}`
+- Contacts: `{{service.contacts}}`
 - Docs: `{{service.docs}}`
 - Links: `{{service.links}}`
+
+For Contacts, Docs and Links you can also access a specific item with the following syntax `[<name>]`. For example, for services that have a definition schema like the one defined in this [example][11], you can access the runbook link using the following syntax
+
+```text
+{{service.links[Runbook]}}
+```
+
+**Note**: Only services using V2, V2.1 or V2.2 schema are currently supported.
 {{% /collapse-content %}}
 
 
@@ -695,3 +704,4 @@ https://app.datadoghq.com/services/{{urlencode "service.name"}}
 [8]: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
 [9]: /monitors/types/error_tracking/
 [10]: /service_catalog/service_definitions/
+[11]: https://docs.datadoghq.com/service_catalog/service_definitions/v2-2/#example-yaml
