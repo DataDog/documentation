@@ -208,8 +208,6 @@ This enables each protocol in the default port (`4317` for OTLP/gRPC and `4318` 
 {{% /tab %}}
 {{% tab "Kubernetes (Operator)" %}}
 
-If you already have the Datadog Agent deployed using the Kubernetes Operator, the agent should be configured to receive OTel traces on port 4317 by default. In the event you are not receiving traces, you can configure the receivers manually. 
-
 1. Follow the [Kubernetes Agent setup][1].
 
 2. Enable the preferred protocol in your Operator's manifest:
