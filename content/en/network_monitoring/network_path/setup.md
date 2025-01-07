@@ -139,7 +139,7 @@ Agent `v7.61+` is required.
 
 **Note**: Windows only supports TCP traceroutes.
 
-In Windows environments, the Agent uses UDP by default to monitor individual paths. If the protocol is not specified in the configuration, the Agent attempts a UDP traceroute, and any errors are logged. To work around this, ensure the protocol is set to TCP in the following example:
+In Windows environments, the Agent uses UDP by default to monitor individual paths. If the protocol is not specified in the configuration, the Agent attempts a UDP traceroute, and any errors are logged. To work around this, ensure the protocol is set to TCP. For example:
 
 ```yaml
 init_config:
