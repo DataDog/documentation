@@ -302,11 +302,11 @@ If your facet has periods, use brackets around the facet, for example:
 
 #### Customize the notification based on the group
 
-When your query is grouped by specific dimensions, you can enrich notifications with dynamic metadata associated with the group.
+When your query is grouped by specific dimensions, you can enrich notifications with dynamic metadata associated with the group. To see a list of tag variables based on your tag selection, click **Use message template variables** in the **Configure notifications & automations** section.
 
 {{% collapse-content title="Query group by host" level="h5" %}}
 
-If your monitor triggers an alert for each `host`, then the tag variables `{{host.name}}` and `{{host.ip}}` are available as well as any host tag that is available on this host. To see a list of tag variables based on your tag selection, click **Use message template variables** in the **Say what's happening** section.
+If your monitor triggers an alert for each `host`, then the tag variables `{{host.name}}` and `{{host.ip}}` are available as well as any host tag that is available on this host.
 
 Specific host metadata variables:
 
