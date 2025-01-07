@@ -228,8 +228,6 @@ To verify the configuration:
 
 **Resolution**:
 
-[TODO Input Needed: Specific semantic convention mappings and configuration examples]
-
 To verify the configuration:
 
 1. Check that your metrics contain the required semantic conventions.
