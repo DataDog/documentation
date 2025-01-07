@@ -33,7 +33,7 @@ To learn more about Kubernetes Admission Controller, read [Kubernetes Admission 
 * Datadog [Cluster Agent v7.40+][3] for Java, Python, Node.js, Datadog [Cluster Agent v7.44+][3] for .NET and Ruby.
 * Datadog Admission Controller enabled. **Note**: In Helm chart v2.35.0 and later, Datadog Admission Controller is activated by default in the Cluster Agent.
 * For Python, uWSGI applications are not supported at this time.
-* For Ruby, library injection support is in Beta. Instrumentation is only supported for Ruby on Rails applications with Bundler version greater than 2.3 and without vendored gems (deployment mode or `BUNDLE_PATH`).
+* For Ruby, library injection support is in Preview. Instrumentation is only supported for Ruby on Rails applications with Bundler version greater than 2.3 and without vendored gems (deployment mode or `BUNDLE_PATH`).
 * Applications in Java, JavaScript, Python, .NET, or Ruby deployed on Linux with a supported architecture. Check the [corresponding container registry](#container-registries) for the complete list of supported architectures by language.
 
 ## Container registries
@@ -264,7 +264,7 @@ The library injection mechanism for Python only supports injecting the Python li
 
 {{% tab "Host" %}}
 
-<div class="alert alert-info">Tracing Library Injection on a host is in beta.</div>
+<div class="alert alert-info">Tracing Library Injection on a host is in Preview.</div>
 
 When both the Agent and your services are running on a host, real or virtual, Datadog injects the tracing library by using a preload library that overrides calls to `execve`. Any newly started processes are intercepted and the specified instrumentation library is injected into the services.
 
@@ -277,10 +277,10 @@ When both the Agent and your services are running on a host, real or virtual, Da
 If the host does not yet have a Datadog Agent installed, or if you want to upgrade your Datadog Agent installation, use the Datadog Agent install script to install both the injection libraries and the Datadog Agent:
 
 ```shell
-DD_APM_INSTRUMENTATION_ENABLED=host DD_APM_INSTRUMENTATION_LIBRARIES=java:1,python:2,js:5,dotnet:3,ruby:2 DD_API_KEY=<YOUR KEY> DD_SITE="<YOUR SITE>" bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
+DD_APM_INSTRUMENTATION_ENABLED=host DD_APM_INSTRUMENTATION_LIBRARIES="java:1,python:2,js:5,dotnet:3" DD_API_KEY=<YOUR KEY> DD_SITE="<YOUR SITE>" bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 ```
 
-By default, running the script installs support for Java, Node.js, Python, Ruby, and .NET all pinned to the latest major version. If you want to specify which language support is installed, also set the `DD_APM_INSTRUMENTATION_LIBRARIES` environment variable. The valid values are `java`, `js`, `python`, `ruby`, and `dotnet`. Use a comma-separated list to specify more than one language:
+By default, running the script installs support for Java, Node.js, Python, Ruby, and .NET all pinned to the latest major version. If you want to specify which language support is installed, also set the `DD_APM_INSTRUMENTATION_LIBRARIES` environment variable. The valid values are `java`, `js`, `python` and `dotnet`. Use a comma-separated list to specify more than one language:
 
 ```shell
 DD_APM_INSTRUMENTATION_LIBRARIES=java:1,js:5 DD_APM_INSTRUMENTATION_ENABLED=host DD_API_KEY=<YOUR KEY> DD_SITE="<YOUR SITE>" bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
@@ -290,7 +290,7 @@ Exit and open a new shell to use the injection library.
 
 ## Next steps
 
-If you haven't already, install your app and any supporting languages or libraries it requires. 
+If you haven't already, install your app and any supporting languages or libraries it requires.
 
 When an app that is written in a supported language is launched, it is automatically injected with tracing enabled.
 
@@ -303,8 +303,8 @@ Values in environment variables override settings in the configuration file on a
 
 ### Configuration file
 
-| Property name | Purpose | Default value | Valid values | 
-| --------- | ----------- | ------------- | ----------- | 
+| Property name | Purpose | Default value | Valid values |
+| --------- | ----------- | ------------- | ----------- |
 |`log_level`  | The logging level|`off`|`off`, `debug`, `info`, `warn`, `error`|
 |`output_paths`|The location where log output is written|`stderr`|`stderr` or a `file://` URL|
 |`env`|The default environment assigned to a process|none|n/a|
@@ -324,10 +324,10 @@ env: dev
 
 The following environment variables configure library injection. You can pass these in by `export` through the command line (`export DD_CONFIG_SOURCES=BASIC`), shell configuration, or launch command.
 
-Each of the fields in the config file corresponds to an environment variable. This environment variable is read from the environment of the process that’s being launched and affects only the process currently being launched. 
+Each of the fields in the config file corresponds to an environment variable. This environment variable is read from the environment of the process that’s being launched and affects only the process currently being launched.
 
 |Config file property|Environment Variable|
-| --------- | ----------- |  
+| --------- | ----------- |
 |`log_level`|`DD_APM_INSTRUMENTATION_DEBUG`|
 |`output_paths`|`DD_APM_INSTRUMENTATION_OUTPUT_PATHS`|
 |`env`|`DD_ENV`|
@@ -360,7 +360,7 @@ Exercise your application to start generating telemetry data, which you can see 
 
 {{% tab "Agent on host, app in containers" %}}
 
-<div class="alert alert-info">Tracing Library Injection on hosts and containers is in beta.</div>
+<div class="alert alert-info">Tracing Library Injection on hosts and containers is in Preview.</div>
 
 
 When your Agent is running on a host, and your services are running in containers, Datadog injects the tracing library by intercepting container creation and configuring the Docker container.
@@ -378,10 +378,10 @@ Any newly started processes are intercepted and the specified instrumentation li
 If the host does not yet have a Datadog Agent installed, or if you want to upgrade your Datadog Agent installation, use the Datadog Agent install script to install both the injection libraries and the Datadog Agent:
 
 ```shell
-DD_APM_INSTRUMENTATION_ENABLED=all DD_API_KEY=<YOUR KEY> DD_SITE="<YOUR SITE>" bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
+DD_APM_INSTRUMENTATION_ENABLED=all DD_APM_INSTRUMENTATION_LIBRARIES="java:1,python:2,js:5,dotnet:3" DD_API_KEY=<YOUR KEY> DD_SITE="<YOUR SITE>" bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 ```
 
-By default, running the script installs support for Java, Node.js, Python, Ruby, and .NET. If you want to specify which language support is installed, also set the `DD_APM_INSTRUMENTATION_LIBRARIES` environment variable. The valid values are `java`, `js`, `python`, `ruby`, and `dotnet`. Use a comma-separated list to specify more than one language: 
+By default, running the script installs support for Java, Node.js, Python, Ruby, and .NET. If you want to specify which language support is installed, also set the `DD_APM_INSTRUMENTATION_LIBRARIES` environment variable. The valid values are `java`, `js`, `python`, and `dotnet`. Use a comma-separated list to specify more than one language:
 
 ```shell
 DD_APM_INSTRUMENTATION_LIBRARIES=java:1,js:5 DD_APM_INSTRUMENTATION_ENABLED=all DD_API_KEY=<YOUR KEY> DD_SITE="<YOUR SITE>" bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
@@ -411,7 +411,7 @@ Exercise your application to start generating telemetry data, which you can see 
 
 {{% tab "Agent and app in separate containers" %}}
 
-<div class="alert alert-info">Tracing Library Injection in containers is in beta.</div>
+<div class="alert alert-info">Tracing Library Injection in containers is in Preview.</div>
 
 When your Agent and services are running in separate Docker containers on the same host, Datadog injects the tracing library by intercepting container creation and configuring the Docker container.
 
@@ -424,16 +424,16 @@ Any newly started processes are intercepted and the specified instrumentation li
 
 ## Install the preload library
 
-Use the `install_script_docker_injection` shell script to automatically install Docker injection support. Docker must already be installed on the host machine.
+Use the `install_script_agent7.sh` shell script to automatically install Docker injection support. Docker must already be installed on the host machine.
 
 ```shell
-DD_APM_INSTRUMENTATION_ENABLED=docker DD_APM_INSTRUMENTATION_LIBRARIES=java:1,python:2,js:5,dotnet:3,ruby:2 DD_NO_AGENT_INSTALL=true bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
+DD_APM_INSTRUMENTATION_ENABLED=docker DD_APM_INSTRUMENTATION_LIBRARIES="java:1,python:2,js:5,dotnet:3" DD_NO_AGENT_INSTALL=true bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 ```
 
-This installs language libraries for all supported languages. To install specific languages, set the `DD_APM_INSTRUMENTATION_LIBRARIES` variable. The valid values are `java`, `js`, `python`, `ruby`, and `dotnet`:
+This installs language libraries for all supported languages. To install specific languages, set the `DD_APM_INSTRUMENTATION_LIBRARIES` variable. The valid values are `java`, `js`, `python`, and `dotnet`:
 
 ```shell
-DD_APM_INSTRUMENTATION_ENABLED=docker DD_APM_INSTRUMENTATION_LIBRARIES=java:1,js:5 DD_NO_AGENT_INSTALL=true bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
+DD_APM_INSTRUMENTATION_LIBRARIES="java:1,js:5" DD_APM_INSTRUMENTATION_ENABLED=docker DD_NO_AGENT_INSTALL=true bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 ```
 
 
@@ -499,7 +499,7 @@ To stop producing traces for a specific service, run the following commands and 
 {{< tabs >}}
 {{% tab "Host" %}}
 
-1. Add the `DD_INSTRUMENT_SERVICE_WITH_APM` environment variable to the service startup command: 
+1. Add the `DD_INSTRUMENT_SERVICE_WITH_APM` environment variable to the service startup command:
 
    ```shell
    DD_INSTRUMENT_SERVICE_WITH_APM=false <service_start_command>
@@ -510,7 +510,7 @@ To stop producing traces for a specific service, run the following commands and 
 
 {{% tab "Agent and app in separate containers" %}}
 
-1. Add the `DD_INSTRUMENT_SERVICE_WITH_APM` environment variable to the service startup command: 
+1. Add the `DD_INSTRUMENT_SERVICE_WITH_APM` environment variable to the service startup command:
    ```shell
    docker run -e DD_INSTRUMENT_SERVICE_WITH_APM=false
    ```

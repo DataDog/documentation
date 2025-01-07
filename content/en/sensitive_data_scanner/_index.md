@@ -52,13 +52,15 @@ With Sensitive Data Scanner in the Cloud, you submit your logs to the Datadog ba
 
 See [Set Up Sensitive Data Scanner in the Cloud][2] for setup details.
 
+
 ### In your environment {#in-your-environment}
 
 Use Sensitive Data Scanner for the Agent or Observability Pipelines if you want to scan your data on premises, before the data leaves your environment.
 
 #### Datadog Agent
 
-{{< callout header="Join the Preview!" url="https://www.datadoghq.com/private-beta/sensitive-data-scanner-using-agent-in-your-premises/" >}}
+{{< callout url="https://www.datadoghq.com/private-beta/sensitive-data-scanner-using-agent-in-your-premises/" >}}
+>>>>>>> master
   Sensitive Data Scanner support for the Datadog Agent is in Preview. To enroll, click <strong>Request Access</strong>.
 {{< /callout >}}
 
@@ -72,8 +74,8 @@ See [Set Up Sensitive Data Scanner using the Agent][2] for setup details.
 
 ## Scan cloud storage
 
-{{< callout header="Join the Preview!" url="https://www.datadoghq.com/private-beta/data-security" >}}
-  Scanning support for Amazon S3 buckets and RDS instances is in Preview. To enroll, click <strong>Request Access</strong>.
+{{< callout header="Limited Availability" url="https://www.datadoghq.com/private-beta/data-security" >}}
+  Scanning support for Amazon S3 buckets and RDS instances is in Limited Availability. To enroll, click <strong>Request Access</strong>.
 {{< /callout >}}
 
 {{< img src="sensitive_data_scanner/cloud_storage_issues.png" alt="Your image description" style="width:100%;" >}}

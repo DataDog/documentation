@@ -57,13 +57,14 @@ Before setting up Test Impact Analysis, you must configure [Test Optimization][4
     {{< nextlink href="intelligent_test_runner/setup/swift" >}}Swift{{< /nextlink >}}
     {{< nextlink href="intelligent_test_runner/setup/python" >}}Python{{< /nextlink >}}
     {{< nextlink href="intelligent_test_runner/setup/ruby" >}}Ruby{{< /nextlink >}}
+    {{< nextlink href="intelligent_test_runner/setup/go" >}}Go{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Configuration
 
 Once you have set up your Datadog library for Test Impact Analysis, configure it from the [Test Service Settings][5] page. Enabling Test Impact Analysis requires the `Intelligent Test Runner Activation Write` permission.
 
-{{< img src="continuous_integration/itr_overview.png" alt="Test Impact Analysis enabled in test service settings in the CI section of Datadog." style="width:80%;">}}
+{{< img src="/getting_started/intelligent_test_runner/test-impact-analysis-gs-configuration.png" alt="Enable Test Impact Analysis for a test service on the Test Optimization Settings page" style="width:80%" >}}
 
 ### Git executable
 
@@ -73,7 +74,7 @@ For Test Impact Analysis to work, [Git][6] needs to be available in the host run
 
 Due to the [limitations](#out-of-the-box-configuration-limitations) described above, the default branch of your repository is automatically excluded from having Test Impact Analysis enabled. Datadog recommends this configuration to ensure that all of your tests run prior to reaching production.
 
-If there are other branches you want to exclude, add them on the Test Service Settings page. The query bar supports using the wildcard character `*` to exclude any branches that match, such as `release_*`.
+If there are other branches you want to exclude, add them on the Test Optimization Settings page. The query bar supports using the wildcard character `*` to exclude any branches that match, such as `release_*`.
 
 Excluded branches collect per-test code coverage, which has a performance impact on the total testing time. However, this performance impact is mitigated by only collecting code coverage when Datadog detects that running with code coverage generates enough new coverage information that it offsets the cost of collecting the coverage. You can check whether a test session has code coverage enabled or not by looking at the `@test.code_coverage.enabled` field.
 
@@ -89,7 +90,7 @@ When you specify a set of tracked files, Test Impact Analysis runs all tests if 
 
 All file paths are considered to be relative to the root of the repository. You may use the `*` and `**` wildcard characters to match multiple files or directories. For instance, `**/*.mdx` matches any `.mdx` file in the repository.
 
-{{< img src="continuous_integration/itr_configuration2.png" alt="Select branches to exclude and tracked files" style="width:80%;">}}
+{{< img src="/getting_started/intelligent_test_runner/test-impact-analysis-gs-config.png" alt="Select branches to exclude and tracked files" style="width:80%" >}}
 
 ## Explore test sessions
 
@@ -119,7 +120,7 @@ The dashboard also tracks adoption of Test Impact Analysis throughout your organ
 [2]: /glossary/#flaky-test
 [3]: /tests/test_impact_analysis/setup
 [4]: /continuous_integration/tests/
-[5]: https://app.datadoghq.com/ci/settings/test-service
+[5]: https://app.datadoghq.com/ci/settings/test-optimization
 [6]: https://git-scm.com/
 [7]: https://app.datadoghq.com/ci/test-runs
 [8]: https://app.datadoghq.com/dash/integration/30941/ci-visibility-intelligent-test-runner

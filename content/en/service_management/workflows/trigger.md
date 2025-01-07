@@ -152,6 +152,25 @@ You can manually start a workflow from a Cloud SIEM Security Signal panel.
 
 For additional examples of security workflows you can automate, see [Automate Security Workflows with Workflow Automation][4].
 
+## GitHub triggers
+
+<div class="alert alert-info"><strong>Note</strong>: Your GitHub account must have permission to create webhooks to use this feature.</div>
+
+You can trigger a workflow from GitHub using the following steps.
+
+1. Add a GitHub trigger to your workflow:
+   - If your workflow doesn't have any triggers, click **Add Trigger > GitHub**.
+   - If your workflow already has one or more triggers and you're adding GitHub as an additional trigger, click the **Add Trigger** (lightning bolt) icon and select **GitHub**.
+1. Navigate to the GitHub repo you want to use to trigger your workflow.
+1. In GitHub, click **Settings**, click **Webhooks**, and then click **Add webhook**.
+1. In the **Configure** tab of your workflow, copy the **Payload URL**. Paste it into the **Payload URL** field on the GitHub webhook creation page.
+1. In GitHub, set the **Content type** of your webhook to `application/json`.
+1. In GitHub, create a secret that is at least 16 characters long, then copy this secret to the **Secret** field of your workflow trigger.
+1. In GitHub, choose which events you would like to trigger your webhook, then click **Add webhook**.
+1. _Optionally_, in your workflow, click the **plus** (+) to add a **Rate Limit**.
+1. Click **Save** on your workflow.
+1. Click **Publish** to publish the workflow. A workflow must be published before you can trigger it from GitHub. Published workflows accrue costs based on workflow executions. For more information, see the [Datadog Pricing page][11].
+
 ## API triggers
 
 Triggering a workflow using an API call requires an [API key][8] and an [application key][9] with the `workflows_run` scope. For information on adding a scope to an application key, see [Scopes][10].

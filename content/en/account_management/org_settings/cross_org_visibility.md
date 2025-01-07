@@ -3,7 +3,7 @@ title: Cross-Organization Visibility
 ---
 
 {{< callout url="#" btn_hidden="true">}}
-  Cross-organization visibility is in beta.
+  Cross-organization visibility is in Preview.
 {{< /callout >}} 
 
 
@@ -24,7 +24,9 @@ This document explains:
 
 A _source_ organization exposes data to a _destination_ organization through an _organization connection_. The source and destination Datadog organizations must be in the same [account][1]. A source organization can have multiple destinations, and a destination organization can have multiple sources.
 
-After you set up an organization connection, the exposed data still lives in the source organization and does not move to the destination. Instead, the destination organization queries the data from the source. Connections do not duplicate the data, and do not incur extra charges. The destination organization can query source data from any time range supported by the source data, including prior to the date of the creation of the connection. If you remove the connection, the destination can no longer access any data from the source.
+Note that once the connection is established, the destination organization can query the source organization's data in the same ways it can query its own data. This means that the source organization's data—including sensitive data—may be queried and displayed as permitted by the destination organization's access-control and other settings. This may include, for example, the destination organization's ability to create [public Dashboards][10] using the source organization's data even if the source organization's own settings do not permit the creation of public Dashboards.
+
+After you set up an organization connection, the exposed data is still stored in the source organization and does not move to the destination. Instead, the destination organization queries the data from the source. Connections do not duplicate the data, and do not incur extra charges. The destination organization can query source data from any time range supported by the source data, including prior to the date of the creation of the connection. If you remove the connection, the destination can no longer access any data from the source and any queries or Dashboards created from the source organization's data may no longer function.
 
 ### Scope
 
@@ -144,3 +146,4 @@ Note the `cross_org_uuids` parameter in the JSON widget definition payload.
 [7]: /account_management/org_settings/cross_org_visibility_api
 [8]: /api/latest/metrics/#query-timeseries-data-across-multiple-products
 [9]: /api/latest/organizations/#list-your-managed-organizations
+[10]: /dashboards/sharing/shared_dashboards/#public-shared-dashboards

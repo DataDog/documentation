@@ -19,7 +19,7 @@ further_reading:
   text: "Handling Private Action Credentials for App Builder"
 ---
 
-{{< callout url="https://www.datadoghq.com/private-beta/private-actions/" btn_hidden="false" header="Join the Preview!">}}
+{{< callout url="https://www.datadoghq.com/product-preview/private-actions/" btn_hidden="false" header="Join the Preview!">}}
 Private Actions are in Preview. Use this form to request access today.
 {{< /callout >}}
 

@@ -490,7 +490,7 @@ Live Processes adds extra visibility to your container deployments by monitoring
 
 In [APM Traces][10], you can click on a service's span to see the processes running on its underlying infrastructure. A service's span processes are correlated with the hosts or pods on which the service runs at the time of the request. Analyze process metrics such as CPU and RSS memory alongside code-level errors to distinguish between application-specific and wider infrastructure issues. Clicking on a process brings you to the Live Processes page. Related processes are not supported for serverless and browser traces.
 
-### Network Performance Monitoring
+### Cloud Network Monitoring
 
 When you inspect a dependency in the [Network Analytics][11] page, you can view processes running on the underlying infrastructure of the endpoints such as services communicating with one another. Use process metadata to determine whether poor network connectivity (indicated by a high number of TCP retransmits) or high network call latency (indicated by high TCP round-trip time) could be due to heavy workloads consuming those endpoints' resources, and thus, affecting the health and efficiency of their communication.
 
@@ -517,6 +517,6 @@ Processes are normally collected at 10s resolution. While actively working with 
 [8]: /dashboards/widgets/timeseries/#pagetitle
 [9]: /infrastructure/livecontainers/
 [10]: /tracing/
-[11]: /network_monitoring/performance/network_analytics
+[11]: /network_monitoring/cloud_network_monitoring/network_analytics
 [12]: /agent/configuration/agent-commands/#restart-the-agent
 

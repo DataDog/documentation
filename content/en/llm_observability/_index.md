@@ -6,6 +6,12 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/anthropic-integration-datadog-llm-observability/"
   tag: "Blog"
   text: "Monitor your Anthropic applications with Datadog LLM Observability"
+- link: "https://www.datadoghq.com/blog/monitor-llm-prompt-injection-attacks/"
+  tag: "Blog"
+  text: "Best practices for monitoring LLM prompt injection attacks to protect sensitive data"
+- link: "https://www.datadoghq.com/blog/vllm-integration/"
+  tag: "Blog"
+  text: "Optimize LLM application performance with Datadog's vLLM integration"
 ---
 
 {{< site-region region="gov" >}}

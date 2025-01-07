@@ -45,7 +45,7 @@ To enable Test Impact Analysis:
 1. Navigate to [**Software Delivery** > **Test Optimization** > **Settings**][3]. 
 1. On the **Test Services** tab, click **Configure** in the `Test Impact Analysis` column for a service.
 
-{{< img src="/getting_started/intelligent_test_runner/enable_settings.png" alt="Enable Test Impact Analysis for a test service on the Test Service Settings page" style="width:100%" >}}
+{{< img src="/getting_started/intelligent_test_runner/test-impact-analysis-gs-configuration.png" alt="Enable Test Impact Analysis for a test service on the Test Service Settings page" style="width:100%" >}}
 
 You must have the `Test Impact Analysis Activation Write` permission. For more information, see the [Datadog Role Permissions documentation][4].
 
@@ -63,7 +63,7 @@ To configure Test Impact Analysis:
 1. Specify file directories and files to track (for example, `documentation/content/**` or `domains/shopist/apps/api/BUILD.bazel`). Test Impact Analysis runs all CI tests when any of these tracked files change.
 1. Click **Save Settings**.
 
-{{< img src="/getting_started/intelligent_test_runner/configure_itr.png" alt="Enable Test Impact Analysis, provide branches for Test Impact Analysis to exclude, and add files for Test Impact Analysis to track and run tests when any changes happen" style="width:100%" >}}
+{{< img src="/getting_started/intelligent_test_runner/test-impact-analysis-gs-config.png" alt="Enable Test Impact Analysis, provide branches for Test Impact Analysis to exclude, and add files for Test Impact Analysis to track and run tests when any changes happen" style="width:100%" >}}
 
 Once you've configured Test Impact Analysis on a test service, execute a test suite run on your default branch. This establishes a baseline for Test Impact Analysis to accurately skip irrelevant tests in future commits. 
 
