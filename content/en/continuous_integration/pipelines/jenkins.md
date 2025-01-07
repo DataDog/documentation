@@ -779,7 +779,7 @@ In declarative pipelines, add the step to a top-level `options` block like so:
 pipeline {
     agent any
     options {
-        datadog(testVisibility: [
+        datadog(testOptimization: [
             enabled: true,
             serviceName: "my-service", // the name of service or library being tested
             languages: ["JAVA"], // languages that should be instrumented (available options are "JAVA", "JAVASCRIPT", "PYTHON", "DOTNET", "RUBY")
@@ -799,7 +799,7 @@ pipeline {
 In a scripted pipeline, wrap the relevant section with the `datadog` step like so:
 
 ```groovy
-datadog(testVisibility: [ enabled: true, serviceName: "my-service", languages: ["JAVASCRIPT"], additionalVariables: [:] ]) {
+datadog(testOptimization: [ enabled: true, serviceName: "my-service", languages: ["JAVASCRIPT"], additionalVariables: [:] ]) {
   node {
     stage('Example') {
       echo "Hello world."
@@ -808,7 +808,7 @@ datadog(testVisibility: [ enabled: true, serviceName: "my-service", languages: [
 }
 ```
 
-The other `datadog` settings, such as `collectLogs` or `tags` can be added alongside the `testVisibility` block.
+The other `datadog` settings, such as `collectLogs` or `tags` can be added alongside the `testOptimization` block.
 
 ### Enable with manual tracer configuration
 
