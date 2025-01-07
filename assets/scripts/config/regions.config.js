@@ -261,6 +261,16 @@ export default {
       ap1: 'com.amazonaws.vpce.ap-northeast-1.vpce-svc-00e15ab206f23b98c',
       gov: 'The private link service for GOV is not supported.'
     },
+    cross_region_support: [
+      'ap-northeast-1',
+      'ap-southeast-1',
+      'ap-southeast-2',
+      'eu-central-1',
+      'eu-west-1',
+      'sa-east-1',
+      'us-east-1',
+      'us-west-2',
+    ],
     ip_ranges_url: {
       us: 'http://ip-ranges.datadoghq.com',
       us3: 'http://ip-ranges.us3.datadoghq.com',
@@ -310,5 +320,5 @@ export default {
      eu: 'http://app.datadoghq.eu/setup/vercel',
      ap1: 'http://ap1.datadoghq.com/setup/vercel',
      gov: 'http://app.ddog-gov.com/setup/vercel'
- }
+    },
 };
