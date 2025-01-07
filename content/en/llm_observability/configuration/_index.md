@@ -57,7 +57,7 @@ The following metrics provide detailed insights into token usage during evaluati
 - `ml_obs.estimated_usage.llm.output.tokens`
 - `ml_obs.estimated_usage.llm.total.tokens`
 
-Each of these metrics is tagged with ml_app, model_server, model_provider, model_name, and evaluation_name, allowing you to pinpoint specific applications, models, and evaluations contributing to your usage. These metrics help you maintain visibility over the LLM-powered features in LLM Obs.
+Each of these metrics is tagged with `ml_app`, `model_server`, `model_provider`, `model_name`, and `evaluation_name`, allowing you to pinpoint specific applications, models, and evaluations contributing to your usage. These metrics help you maintain visibility over the LLM-powered features in LLM Obs.
 
 ## Provide topics for topic relevancy
 
