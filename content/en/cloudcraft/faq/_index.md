@@ -16,7 +16,6 @@ title: FAQ
     {{< nextlink href="cloudcraft/faq/error-429-too-many-requests">}}Why do I get error 429 Too Many Requests when using the API?{{< /nextlink >}}
     {{< nextlink href="cloudcraft/faq/cloudcraft-pro-demo">}}Can you give me a demo of the product?{{< /nextlink >}}
     {{< nextlink href="cloudcraft/faq/disable-google-sign-in">}}How do I disable Google Sign in?{{< /nextlink >}}
-    {{< nextlink href="cloudcraft/faq/schools-non-profit-organizations-discounts">}}Do you offer discounts for schools and non-profit organizations?{{< /nextlink >}}
     {{< nextlink href="cloudcraft/faq/govcloud-support">}}Is GovCloud supported?{{< /nextlink >}}
     {{< nextlink href="cloudcraft/faq/diagram-limitation">}}How many diagrams can I have on my account?{{< /nextlink >}}
     {{< nextlink href="cloudcraft/faq/what-happens-downgrade">}}Will I lose my diagrams if I downgrade?{{< /nextlink >}}

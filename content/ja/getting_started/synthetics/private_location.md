@@ -112,5 +112,5 @@ title: プライベートロケーションの概要
 [10]: https://podman.io/
 [11]: https://app.vagrantup.com/ubuntu/boxes/jammy64
 [12]: /ja/synthetics/private_locations?tab=windows#install-your-private-location
-[13]: https://dd-public-oss-mirror.s3.amazonaws.com/synthetics-windows-pl/datadog-synthetics-worker-{{< synthetics-worker-version "synthetics-windows-pl" >}}.amd64.msi
+[13]: https://ddsynthetics-windows.s3.amazonaws.com/datadog-synthetics-worker-{{< synthetics-worker-version "synthetics-windows-pl" >}}.amd64.msi
 [14]: https://www.datadoghq.com/legal/eula/

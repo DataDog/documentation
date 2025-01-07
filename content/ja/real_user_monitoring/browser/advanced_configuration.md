@@ -349,6 +349,45 @@ React、Angular、Vue、またはその他のフロントエンドフレーム�
    {{% /tab %}}
    {{< /tabs >}}
 
+### ビュー名を設定する
+
+`setViewName(name: string)` を使用して現在のビュー名を更新できます。これにより、新しいビューを開始せずにビュー名を変更できます。
+
+{{< tabs >}}
+{{% tab "NPM" %}}
+```javascript
+import { datadogRum } from '@datadog/browser-rum';
+
+datadogRum.setViewName('<VIEW_NAME>');
+
+// コード例
+datadogRum.setViewName('Checkout');
+```
+{{% /tab %}}
+{{% tab "CDN async" %}}
+```javascript
+window.DD_RUM.onReady(function() {
+    window.DD_RUM.setViewName('<VIEW_NAME>');
+})
+
+// コード例
+window.DD_RUM.onReady(function() {
+    window.DD_RUM.setViewName('Checkout');
+})
+```
+{{% /tab %}}
+{{% tab "CDN sync" %}}
+```javascript
+window.DD_RUM && window.DD_RUM.setViewName('<VIEW_NAME>');
+
+// コード例
+window.DD_RUM && window.DD_RUM.setViewName('Checkout');
+```
+{{% /tab %}}
+{{< /tabs >}}
+
+**注**: ビュー名を変更すると、そのメソッドが呼び出された後、当該時点以降のビューおよびその子イベントに影響します。
+
 ## RUM データを強化および制御する
 
 RUM ブラウザ SDK は RUM イベントをキャプチャし、それらの主な属性を設定します。`beforeSend` コールバック関数を使用すると、RUM ブラウザ SDK によって収集されたイベントが Datadog に送信される前に、そのすべてのイベントにアクセスできます。
@@ -572,14 +611,15 @@ window.DD_RUM &&
 
 ## ユーザーセッション
 
-RUM セッションにユーザー情報を追加すると、次の役に立ちます。
+RUM セッションにユーザー情報を追加することで、以下が可能になります。
+
 * 特定のユーザーのジャーニーをたどる
 * エラーの影響を最も受けているユーザーを把握する
 * 最も重要なユーザーのパフォーマンスを監視する
 
 {{< img src="real_user_monitoring/browser/advanced_configuration/user-api.png" alt="RUM UI のユーザー API" >}}
 
-次の属性はオプションですが、Datadog は少なくとも 1 つを指定することを推奨しています。
+以下の属性は任意ですが、Datadog では少なくとも 1 つを指定することを強く推奨します。例えば、`usr.id` をセッションに設定すると、一部のデフォルト RUM ダッシュボードで関連データを参照できます。これらのダッシュボードはクエリの一部として `usr.id` を利用します。
 
 | 属性  | タイプ | 説明                                                                                              |
 |------------|------|----------------------------------------------------------------------------------------------------|
@@ -1245,8 +1285,8 @@ RUM エクスプローラーで行われるクエリは、サービス属性を�
 
 いくつかのイベントはオリジンに帰属させることができないため、関連するハンドリングスタックがありません。これには以下が含まれます。
 - 自動的に収集されたアクションイベント
-- XHR や Fetch 以外のリソースイベント。
-- ビューイベント (ただし、代わりに[デフォルトの RUM ビュー名をオーバーライド][21]できます)
+- XHR および Fetch 以外のリソースイベント
+- ビューイベント (ただし、[デフォルトの RUM ビュー名を上書き][21]することも可能です)
 - CORS や CSP の違反
 
 ## その他の参考資料
@@ -1256,7 +1296,7 @@ RUM エクスプローラーで行われるクエリは、サービス属性を�
 [1]: /ja/real_user_monitoring/browser/data_collected/
 [2]: /ja/real_user_monitoring/browser/monitoring_page_performance/
 [3]: https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md#v2170
-[4]: /ja/real_user_monitoring/browser/setup
+[4]: /ja/real_user_monitoring/browser/setup/
 [5]: https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md#v2130
 [6]: https://developer.mozilla.org/en-US/docs/Web/API/Location
 [7]: https://developer.mozilla.org/en-US/docs/Web/API/Event
