@@ -2,7 +2,7 @@
 categories:
 - developer tools
 - notifications
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies: []
 description: 「Datadog のアラートやイベントで任意の Webhook を通知チャンネルとして使用します。」
 doc_link: https://docs.datadoghq.com/integrations/webhooks/
@@ -54,7 +54,7 @@ $ALERT_CYCLE_KEY
 : アラートがトリガーした時点から解決するまでイベントにリンクする ID。
 
 $ALERT_ID
-: アラートの ID。<br />
+: アラートを発行するモニターの ID です。<br />
 **例**: `1234`
 
 $ALERT_METRIC
@@ -117,7 +117,7 @@ $ID
 
 $INCIDENT_ATTACHMENTS
 : インシデントの添付 (事後分析やドキュメントなど) のある JSON オブジェクトのリスト。<br />
-**例**: `[{"attachment_type": "postmortem", "attachment": {"documentUrl": "https://app.datadoghq.com/notebook/123","title": "Postmortem IR-1"}}]`
+**例**: `[{"attachment_type": "postmortem", "attachment": {"documentUrl": "https://app.datadoghq.com/notebook/123","title": "Postmortem IR-1"}}]` 
 
 $INCIDENT_COMMANDER
 : JSON オブジェクトとインシデントコマンダーのハンドル、uuid、名前、メール、およびアイコン
@@ -257,7 +257,7 @@ $SNAPSHOT
 $SYNTHETICS_TEST_NAME
 : Synthetics テストの名前。
 
-$SYNTHETICS_FIRST_FAILING_STEP_NAME
+$SYNTHETICS_FIRST_FAILING_STEP_NAME 
 : Synthetics テストの最初の失敗したステップの名前。
 
 $SYNTHETICS_SUMMARY
