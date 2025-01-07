@@ -30,8 +30,6 @@ document.addEventListener('DOMContentLoaded', () => {
         })
     }
     crossRegionSupport()
-    // const regionParams = document.querySelectorAll('[data-region-param]');
-    // console.log(regionParams)
 });
 
 // returns the Datadog site associated with referrer URL, if applicable.

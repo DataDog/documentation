@@ -320,5 +320,5 @@ export default {
      eu: 'http://app.datadoghq.eu/setup/vercel',
      ap1: 'http://ap1.datadoghq.com/setup/vercel',
      gov: 'http://app.ddog-gov.com/setup/vercel'
-    },
+    }
 };
