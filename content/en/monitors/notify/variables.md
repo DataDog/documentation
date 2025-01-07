@@ -366,7 +366,7 @@ For Docs and Links you can also access a specific item with the following syntax
 {{service.links[Runbook]}}
 ```
 
-**Note**: Only services using V2, V2.1 or V2.2 schema are currently supported.
+**Note**: Only services using V2, V2.1 or V2.2 schema are supported.
 {{% /collapse-content %}}
 
 
