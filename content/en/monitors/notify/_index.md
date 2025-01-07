@@ -118,12 +118,6 @@ The options are:
 
 **Note**: Depending on the integration, some content may not be displayed by default.
 
-### Metadata
-
-Add metadata (Priority, Tags, Datadog Team) to your monitor. Monitor Priority allows you to set the importance of your monitor through P-level (P1 to P5). Monitor tag--which are different from metric tags--are used in the UI to group and search for monitors. If tag policies are configured, the required tags and tag values need to be added. To learn more, see [Tag Policies][10]. Datadog Teams allows you to set a layer of ownership to this monitor and view all the monitors linked to your team. To learn more, see [Datadog Teams][11].
-
-{{< img src="monitors/notifications/notifications_metadata.png" alt="View of policy tag configuration. Underneath 'Policy tags' are three example tags, cost_center, product_id, and env, next to a 'Select value' dropdown." style="width:100%;" >}}
-
 ### Renotify
 
 Enable monitor renotification (optional) to remind your team that a problem is not solved.
@@ -150,6 +144,20 @@ If you use the `{{#is_renotify}}` block, the original notification message is al
 2. Send the escalation message to a subset of groups.
 
 Learn how to configure your monitors for those use cases in the [example section][12].
+
+### Metadata
+
+Add metadata (Priority, Tags, Datadog Team) to your monitor. Monitor Priority allows you to set the importance of your monitor through P-level (P1 to P5). Monitor tag--which are different from metric tags--are used in the UI to group and search for monitors. If tag policies are configured, the required tags and tag values need to be added. To learn more, see [Tag Policies][10]. Datadog Teams allows you to set a layer of ownership to this monitor and view all the monitors linked to your team. To learn more, see [Datadog Teams][11].
+
+{{< img src="monitors/notifications/notifications_metadata.png" alt="View of policy tag configuration. Underneath 'Policy tags' are three example tags, cost_center, product_id, and env, next to a 'Select value' dropdown." style="width:100%;" >}}
+
+### Aggregation
+
+If the monitor's query is grouped by one or more dimensions, you can remove one or more of them from the notification grouping, or choose to notify as a Simple Alert.
+
+{{< img src="monitors/notifications/notifications_aggregation.png" alt="View of aggregation configuration set to multi-alert." style="width:100%;" >}}
+
+More information on this feature can be found on [Configure Monitors][18]
 
 
 ## Audit notifications
@@ -206,3 +214,4 @@ Message variables auto-populate with a randomly selected group based on the scop
 [15]: /monitors/configuration/
 [16]: /monitors/guide/recovery-thresholds/
 [17]: /service_management/workflows/trigger/#add-a-monitor-trigger-to-your-workflow
+[18]: /monitors/configuration/#set-alert-aggregation
