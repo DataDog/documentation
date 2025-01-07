@@ -121,6 +121,26 @@ processors:
 
 For more information, see [Mapping OpenTelemetry Semantic Conventions to Infrastructure List Host Information][3].
 
+### The same host shows up multiple times under different names
+
+**Symptom**: A single host appears under multiple names in Datadog. For example, you might see one entry from the OpenTelemetry Collector (with the OTel logo) and another from the Datadog Agent.
+
+**Cause**: When a host is monitored through more than one ingestion method (for example, OTLP + Datadog Agent, or DogStatsD + OTLP) without aligning on a single hostname resource attribute, Datadog treats each path as a separate host.
+
+**Resolution**:
+1. Identify all active telemetry ingestion paths sending data from the same machine to Datadog.
+2. Choose a single hostname source and decide whether you want to rely on the Datadog Agent's hostname or a specific resource attribute (for example, `k8s.node.name`).
+3. Configure each path (Agent, Collector, etc.) so that they report a consistent hostname. For example, if you're setting the hostname with OTLP attributes, configure your transform processor:
+    ```yaml
+    processors:
+      transform:
+        trace_statements:
+          - context: resource
+            statements:
+              - set(attributes["datadog.host.name"], "shared-hostname")
+    ```
+4. Validate in Datadog (Infrastructure List, Host Map, etc.) to confirm the host now appears under a single name.
+
 ## Host tag delays after startup
 
 You may experience a delay in host tags appearing on your telemetry data after starting the Datadog Agent or OpenTelemetry Collector. This delay typically lasts under 10 minutes but can extend up to 40-50 minutes in some cases.
