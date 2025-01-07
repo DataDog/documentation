@@ -153,11 +153,11 @@ Add metadata (Priority, Tags, Datadog Team) to your monitor. Monitor Priority al
 
 ### Aggregation
 
-If the monitor's query is grouped by one or more dimensions, you can remove one or more of them from the notification grouping, or choose to notify as a Simple Alert.
+If the monitor's query is grouped, you can remove one or more of the dimensions from the notification grouping, or remove them all and notify as a Simple Alert.
 
 {{< img src="monitors/notifications/notifications_aggregation.png" alt="View of aggregation configuration set to multi-alert." style="width:100%;" >}}
 
-More information on this feature can be found on [Configure Monitors][18]
+Find more information on this feature in [Configure Monitors][18]
 
 
 ## Audit notifications
