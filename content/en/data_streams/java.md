@@ -79,8 +79,6 @@ Enable [Amazon SNS raw message delivery][1].
 {{% /tab %}}
 {{< /tabs >}}
 
-
-
 ### Monitoring Kinesis pipelines
 There are no message attributes in Kinesis to propagate context and track a message's full path through a Kinesis stream. As a result, Data Streams Monitoring's end-to-end latency metrics are approximated based on summing latency on segments of a message's path, from the producing service through a Kinesis Stream, to a consumer service. Throughput metrics are based on segments from the producing service through a Kinesis Stream, to the consumer service. The full topology of data streams can still be visualized through instrumenting services.
 
