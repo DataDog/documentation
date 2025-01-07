@@ -318,7 +318,7 @@ Specific host metadata variables:
 
 ##### Query group by kube_namespace and kube_cluster_name
 
-If your monitor triggers an alert for each `kube_namespace` and `kube_cluster_name`, then you can access any attribute of the namespace. 
+If your monitor triggers an alert for each `kube_namespace` and `kube_cluster_name`, then you can access any attribute of the namespace.
 
 Namespace metadata variables:
 
@@ -335,7 +335,7 @@ The following table contains all available attributes:
 
 ##### Query group by pod_name and kube_namespace and kube_cluster_name
 
-If your monitor triggers an alert for each `pod_name` and `kube_namespace` and `kube_cluster_name`, then you can access any attribute of the pod. 
+If your monitor triggers an alert for each `pod_name` and `kube_namespace` and `kube_cluster_name`, then you can access any attribute of the pod.
 
 Pod metadata variables:
 - Cluster name: `{{pod_name.cluster_name}}`
@@ -350,10 +350,11 @@ The following table contains all available attributes:
 
 ##### Query group by service
 
-If your monitor triggers an alert for each `service`, then you can access some attribute of the service, as defined in the [Service Catalog][10]. 
+If your monitor triggers an alert for each `service`, then you can access some attribute of the service, as defined in the [Service Catalog][10].
 
 Service metadata variables:
 
+- Service name: `{{service.name}}`
 - Team name: `{{service.dd_team}}`
 - Docs: `{{service.docs}}`
 - Links: `{{service.links}}`
@@ -517,7 +518,7 @@ If your monitor starts failing on the `service:ad-server` group, the notificatio
 @slack-ad-server There is an ongoing issue with ad-server.
 ```
 
-When building dynamic handles with attributes that might not always be present, you may encounter issues with notification delivery. If an attribute is missing, the variable renders empty in the notification message, resulting in an invalid handle. 
+When building dynamic handles with attributes that might not always be present, you may encounter issues with notification delivery. If an attribute is missing, the variable renders empty in the notification message, resulting in an invalid handle.
 
 To avoid missed notifications when using dynamic handles with these variables, make sure to add a fallback handle:
 
