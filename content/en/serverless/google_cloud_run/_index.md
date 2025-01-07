@@ -30,7 +30,7 @@ Set `ENV NODE_OPTIONS="--require dd-trace/init"`. This specifies that the `dd-tr
 The tracing library also collects custom metrics. See the [code examples][2].
 
 #### Logs
-The Datadog sidecar collects logs through a shared volume. to forward logs from your main container to the sidecar, configure your application to write all logs to a location such as `shared-volume/logs/*.log`. 
+The Datadog sidecar collects logs through a shared volume. To forward logs from your main container to the sidecar, configure your application to write all logs to a location such as `shared-volume/logs/*.log`. 
 
 To set up logging in your application, see [Node.js Log Collection][3]. To set up trace log correlation, see [Correlating Node.js Logs and Traces][4].
 
@@ -49,7 +49,7 @@ In your main application, add the `dd-trace-py` library. See [Tracing Python app
 The tracing library also collects custom metrics. See the [code examples][2].
 
 #### Logs
-The Datadog sidecar collects logs through a shared volume. to forward logs from your main container to the sidecar, configure your application to write all logs to a location such as `shared-volume/logs/*.log`. 
+The Datadog sidecar collects logs through a shared volume. To forward logs from your main container to the sidecar, configure your application to write all logs to a location such as `shared-volume/logs/*.log`. 
 
 To set up logging in your application, see [Python Log Collection][3]. [Python logging best practices][6] can also be helpful. To set up trace log correlation, see [Correlating Python Logs and Traces][4].
 
@@ -72,14 +72,14 @@ WORKDIR /app
 COPY target/cloudrun-java-1.jar cloudrun-java-1.jar
 
 
-#Add the datadog tracer
+# Add the Datadog tracer
 ADD 'https://dtdg.co/latest-java-tracer' dd-java-agent.jar
 
 
 EXPOSE 8080
 
 
-#Start the datadog tracer via the javaagent argument
+# Start the Datadog tracer with the javaagent argument
 ENTRYPOINT [ "java", "-javaagent:dd-java-agent.jar", "-jar", "cloudrun-java-1.jar" ]
 ```
 
@@ -87,7 +87,7 @@ ENTRYPOINT [ "java", "-javaagent:dd-java-agent.jar", "-jar", "cloudrun-java-1.ja
 To collect custom metrics, [install the Java DogStatsD client][2].
 
 #### Logs
-The Datadog sidecar collects logs through a shared volume. to forward logs from your main container to the sidecar, configure your application to write all logs to a location such as `shared-volume/logs/*.log`. 
+The Datadog sidecar collects logs through a shared volume. To forward logs from your main container to the sidecar, configure your application to write all logs to a location such as `shared-volume/logs/*.log`. 
 
 To set up logging in your application, see [Java Log Collection][3]. To set up trace log correlation, see [Correlating Java Logs and Traces][4].
 
@@ -106,7 +106,7 @@ In your main application, add the `dd-trace-go` library. See [Tracing Go applica
 The tracing library also collects custom metrics. See the [code examples][2].
 
 #### Logs
-The Datadog sidecar collects logs through a shared volume. to forward logs from your main container to the sidecar, configure your application to write all logs to a location such as `shared-volume/logs/*.log`. 
+The Datadog sidecar collects logs through a shared volume. To forward logs from your main container to the sidecar, configure your application to write all logs to a location such as `shared-volume/logs/*.log`. 
 
 To set up logging in your application, see [Go Log Collection][3]. To set up trace log correlation, see [Correlating Go Logs and Traces][4].
 
@@ -145,7 +145,7 @@ ENTRYPOINT ["dotnet", "dotnet.dll"]
 The tracing library also collects custom metrics. See the [code examples][2].
 
 #### Logs
-The Datadog sidecar collects logs through a shared volume. to forward logs from your main container to the sidecar, configure your application to write all logs to a location such as `shared-volume/logs/*.log`. 
+The Datadog sidecar collects logs through a shared volume. To forward logs from your main container to the sidecar, configure your application to write all logs to a location such as `shared-volume/logs/*.log`. 
 
 To set up logging in your application, see [C# Log Collection][3]. To set up trace log correlation, see [Correlating .NET Logs and Traces][4].
 
@@ -161,7 +161,7 @@ In your main application, add the `dd-trace-php` library. See [Tracing PHP appli
 The tracing library also collects custom metrics. See the [code examples][2].
 
 #### Logs
-The Datadog sidecar collects logs through a shared volume. to forward logs from your main container to the sidecar, configure your application to write all logs to a location such as `shared-volume/logs/*.log`. 
+The Datadog sidecar collects logs through a shared volume. To forward logs from your main container to the sidecar, configure your application to write all logs to a location such as `shared-volume/logs/*.log`. 
 
 To set up logging in your application, see [PHP Log Collection][3]. To set up trace log correlation, see [Correlating PHP Logs and Traces][4].
 
@@ -297,7 +297,7 @@ To deploy your Cloud Run service with a YAML service specification:
              volumeMounts:
                - mountPath: /shared-volume
                  name: shared-volume
-         serviceAccountName: '<SERVICE_ACCOUNT>' # you do not have to add the serviceAccountName field to the Cloud Run service YAML. If you don't specify it, Cloud Run will use the default service account for your project, which is typically named PROJECT_NUMBER-compute@developer.gserviceaccount.com. This default service account will have limited permissions by default.
+         serviceAccountName: '<SERVICE_ACCOUNT>' # You do not have to add the serviceAccountName field to the Cloud Run service YAML. If you don't specify it, Cloud Run will use the default service account for your project, which is typically named PROJECT_NUMBER-compute@developer.gserviceaccount.com. This default service account will have limited permissions by default.
          volumes:
            - emptyDir:
                medium: Memory
@@ -332,7 +332,7 @@ To deploy your Cloud Run service with Terraform, use the following example confi
 ```
 provider "google" {
   project = "<PROJECT_ID>"
-  region  = "<LOCATION>"  # e.g., us-central1
+  region  = "<LOCATION>"  # example: us-central1
 }
 
 resource "google_cloud_run_service" "terraform_with_sidecar" {
@@ -538,7 +538,7 @@ Supply placeholder values:
 
 | Variable | Description |
 | -------- | ----------- |
-|`DD_API_KEY`| [Datadog API Key][4] - **Required**|
+|`DD_API_KEY`| [Datadog API key][4] - **Required**|
 | `DD_SITE` | [Datadog site][5] - **Required** |
 | `DD_LOGS_ENABLED` | When true, send logs (stdout and stderr) to Datadog. Defaults to false. |
 | `DD_LOGS_INJECTION`| When true, enrich all logs with trace data for supported loggers in [Java][6], [Node][7], [.NET][8], and [PHP][9]. See additional docs for [Python][10], [Go][11], and [Ruby][12]. |
@@ -547,7 +547,7 @@ Supply placeholder values:
 | `DD_VERSION`      | See [Unified Service Tagging][13].                                  |
 | `DD_ENV`          | See [Unified Service Tagging][13].                                  |
 | `DD_SOURCE`       | See [Unified Service Tagging][13].                                  |
-| `DD_TAGS`         | See [Unified Service Tagging][6]. 
+| `DD_TAGS`         | See [Unified Service Tagging][13]. 
 
 ## Example application
 

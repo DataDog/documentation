@@ -16,7 +16,7 @@ Google Cloud Run is a fully managed serverless platform for deploying and scalin
 
 ### Prerequisites
 
-Make sure you have a [Datadog API Key][6] and are using a programming language [supported by a Datadog tracing library][2].
+Make sure you have a [Datadog API key][7] and are using a programming language [supported by a Datadog tracing library][2].
 
 ## Instrument your application
 
@@ -24,7 +24,7 @@ You can instrument your application in one of two ways: [Dockerfile](#dockerfile
 
 ### Dockerfile
 
-Datadog publishes new releases of the `serverless-init` container image to Google’s gcr.io, AWS’ ECR, and on Docker Hub:
+Datadog publishes new releases of the `serverless-init` container image to Google’s gcr.io, AWS’s ECR, and on Docker Hub:
 
 | dockerhub.io | gcr.io | public.ecr.aws |
 | ------------ | ------ | -------------- |
@@ -99,17 +99,17 @@ Then, build your application by running the following command:
 pack build --builder=gcr.io/buildpacks/builder \
 --buildpack from=builder \
 --buildpack datadog/serverless-buildpack:latest \
-gcr.io/YOUR_PROJECT/YOUR_APP_NAME
+gcr.io/<YOUR_PROJECT>/<YOUR_APP_NAME>
 ```
 
-**Note**: Buildpack instrumentation is not compatible with Alpine images
+**Note**: Buildpack instrumentation is not compatible with Alpine images.
 
 ## Configure your application
 
 Once the container is built and pushed to your registry, the last step is to set the required environment variables for the Datadog Agent:
-- `DD_API_KEY`: Datadog API key, used to send data to your Datadog account. It should be configured as a [Google Cloud Secret][11] for privacy and safety issue.
+- `DD_API_KEY`: Datadog API key, used to send data to your Datadog account. It should be configured as a [Google Cloud Secret][11] for privacy and safety.
 - `DD_SITE`: Datadog endpoint and website. Select your site on the right side of this page. Your site is: {{< region-param key="dd_site" code="true" >}}.
-- `DD_TRACE_ENABLED`: set to `true` to enable tracing
+- `DD_TRACE_ENABLED`: Set to `true` to enable tracing.
 - `DD_TRACE_PROPAGATION_STYLE`: Set this to `datadog` to use context propagation and log trace correlation.
 
 For more environment variables and their function, see [Additional Configurations](#additional-configurations).
@@ -118,7 +118,7 @@ The following command deploys the service and allows any external connection to 
 
 ```
 shell
-gcloud run deploy APP_NAME --image=gcr.io/YOUR_PROJECT/APP_NAME \
+gcloud run deploy <APP_NAME> --image=gcr.io/<YOUR_PROJECT>/<APP_NAME> \
   --port=8080 \
   --update-env-vars=DD_API_KEY=$DD_API_KEY \
   --update-env-vars=DD_TRACE_ENABLED=true \
@@ -128,7 +128,7 @@ gcloud run deploy APP_NAME --image=gcr.io/YOUR_PROJECT/APP_NAME \
 
 ## Results
 
-Once the deployment is completed, your metrics and traces are sent to Datadog. In Datadog, navigate to **Infrastructure->Serverless** to see your serverless metrics and traces.
+Once the deployment is completed, your metrics and traces are sent to Datadog. In Datadog, navigate to **Infrastructure > Serverless** to see your serverless metrics and traces.
 
 ## Additional configurations
 
@@ -136,13 +136,13 @@ Once the deployment is completed, your metrics and traces are sent to Datadog. I
 
 - **Logs:** If you use the [Google Cloud integration][1], your logs are already being collected. Alternatively, you can set the `DD_LOGS_ENABLED` environment variable to `true` to capture application logs through the serverless instrumentation directly.
 
-- **Custom Metrics:** You can submit custom metrics using a [DogStatsd client][4]. For monitoring Cloud Run and other serverless applications, use [distribution][9] metrics. Distributions provide `avg`, `sum`, `max`, `min`, and `count` aggregations by default. On the Metric Summary page, you can enable percentile aggregations (p50, p75, p90, p95, p99) and also manage tags. To monitor a distribution for a gauge metric type, use `avg` for both the [time and space aggregations][11]. To monitor a distribution for a count metric type, use `sum` for both the time and space aggregations.
+- **Custom Metrics:** You can submit custom metrics using a [DogStatsD client][4]. For monitoring Cloud Run and other serverless applications, use [distribution][9] metrics. Distributions provide `avg`, `sum`, `max`, `min`, and `count` aggregations by default. On the Metric Summary page, you can enable percentile aggregations (p50, p75, p90, p95, p99) and also manage tags. To monitor a distribution for a gauge metric type, use `avg` for both the [time and space aggregations][11]. To monitor a distribution for a count metric type, use `sum` for both the time and space aggregations.
 
 ### Environment Variables
 
 | Variable | Description |
 | -------- | ----------- |
-|`DD_API_KEY`| [Datadog API Key][7] - **Required**|
+|`DD_API_KEY`| [Datadog API key][7] - **Required**|
 | `DD_SITE` | [Datadog site][5] - **Required** |
 | `DD_LOGS_ENABLED` | When true, send logs (stdout and stderr) to Datadog. Defaults to false. |
 | `DD_LOGS_INJECTION`| When true, enrich all logs with trace data for supported loggers in [Java][19], [Node][20], [.NET][21], and [PHP][22]. See additional docs for [Python][23], [Go][24], and [Ruby][25]. |
