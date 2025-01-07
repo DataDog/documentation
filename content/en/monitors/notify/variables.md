@@ -357,11 +357,10 @@ Service metadata variables:
 
 - Service name: `{{service.name}}`
 - Team name: `{{service.dd-team}}`
-- Contacts: `{{service.contacts}}`
 - Docs: `{{service.docs}}`
 - Links: `{{service.links}}`
 
-For Contacts, Docs and Links you can also access a specific item with the following syntax `[<name>]`. For example, for services that have a definition schema like the one defined in this [example][11], you can access the runbook link using the following syntax
+For Docs and Links you can also access a specific item with the following syntax `[<name>]`. For example, for services that have a definition schema like the one defined in this [example][11], you can access the "Runbook" link using the following syntax
 
 ```text
 {{service.links[Runbook]}}
