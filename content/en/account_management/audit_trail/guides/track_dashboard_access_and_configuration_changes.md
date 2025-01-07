@@ -50,6 +50,7 @@ You can use [event queries][7] in Audit Trail to see a list of dashboards that h
    | [Recently modified dashboards][5] | `@evt.name:Dashboard @asset.type:dashboard @action:modified` |
    | [Recently deleted dashboards][6]  | `@evt.name:Dashboard @asset.type:dashboard @action:deleted`  |
 
+1. Optionally, on the facet panel, use filters like **Asset ID** or **Asset Name** to narrow your results down to a specific dashboard.
 1. For each event in the table, you can see the email address of the user who performed the last change, and a summary of what happened. 
 
    To see additional information about a specific change, click the row in the table. Then, click the **Inspect Changes (Diff)** tab to see the changes that were made to the dashboard's configuration:
