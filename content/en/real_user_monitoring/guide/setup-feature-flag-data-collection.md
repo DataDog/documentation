@@ -597,7 +597,7 @@ gb.init();
 {{% /tab %}}
 {{% tab "iOS" %}}
 
-Currently GrowthBook does not support this integration. Reach out to GrowthBook to request this feature.
+GrowthBook does not support this integration. Reach out to GrowthBook to request this feature.
 
 {{% /tab %}}
 {{% tab "Android" %}}
