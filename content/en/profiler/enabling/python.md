@@ -127,7 +127,7 @@ disabled by default, you can turn it on by setting
 
 ### Stack V2
 
-Stack V2 is the new stack profiler implementation for CPython. It enhances
+Stack V2 is the new stack profiler implementation for CPython 3.8+. It enhances
 the performance and accuracy of Python CPU profiling. To enable Stack V2, set
 the environment variable `DD_PROFILING_STACK_V2_ENABLED=1`. Doing so activates
 our new stack sampling, collection, and export system. Use the most recent
