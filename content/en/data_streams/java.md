@@ -55,15 +55,31 @@ To set up Data Streams Monitoring from the Datadog UI without needing to restart
 Data Streams Monitoring uses one [message attribute][3] to track a message's path through an SQS queue. As Amazon SQS has a maximum limit of 10 message attributes allowed per message, all messages streamed through the data pipelines must have 9 or fewer message attributes set, allowing the remaining attribute for Data Streams Monitoring.
 
 ### Monitoring SNS-to-SQS pipelines
-To monitor a data pipeline where Amazon SNS talks directly to Amazon SQS, set the environment variable `DD_TRACE_SQS_BODY_PROPAGATION_ENABLED` to `true`.
+To monitor a data pipeline where Amazon SNS talks directly to Amazon SQS, you must perform the following additional configuration steps:
 
-For example:
-```yaml
-environment:
-  - DD_DATA_STREAMS_ENABLED: "true"
-  - DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED: "true"
-  - DD_TRACE_SQS_BODY_PROPAGATION_ENABLED: "true"
-```
+{{< tabs >}}
+{{% tab "SQS v1" %}}
+- Set the environment variable `DD_TRACE_SQS_BODY_PROPAGATION_ENABLED` to `true`.
+
+   For example:
+   ```yaml
+   environment:
+     - DD_DATA_STREAMS_ENABLED: "true"
+     - DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED: "true"
+     - DD_TRACE_SQS_BODY_PROPAGATION_ENABLED: "true"
+   ```
+- Ensure that you are using [Java tracer v1.44.0+][1].
+
+[1]: https://github.com/DataDog/dd-trace-java/releases
+{{% /tab %}}
+{{% tab "SQS v2" %}}
+Enable [Amazon SNS raw message delivery][1].
+
+[1]: https://docs.aws.amazon.com/sns/latest/dg/sns-large-payload-raw-message-delivery.html
+{{% /tab %}}
+{{< /tabs >}}
+
+
 
 ### Monitoring Kinesis pipelines
 There are no message attributes in Kinesis to propagate context and track a message's full path through a Kinesis stream. As a result, Data Streams Monitoring's end-to-end latency metrics are approximated based on summing latency on segments of a message's path, from the producing service through a Kinesis Stream, to a consumer service. Throughput metrics are based on segments from the producing service through a Kinesis Stream, to the consumer service. The full topology of data streams can still be visualized through instrumenting services.
