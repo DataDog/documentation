@@ -17,7 +17,7 @@ This guide is for [dbt-core][2] pipelines.
 
 ## Setup
 
-Follow these  steps to enable dbt traces:
+Follow these steps to enable dbt traces:
 
 1. Install `openlineage` provider by adding the following into your `requirements.txt`.
     ```text
@@ -49,7 +49,7 @@ Say you are using the [jaffle-shop][8] project.
 dbt-ol run --select orders
 ```
 
-The above will consume dbt [artifacts][9] and send OpenLineage events **after** the job finishes.
+The above consumes dbt [artifacts][9] and sends OpenLineage events **after** the job finishes.
 If you want to receive events in realtime you can use the `--consume-structured-logs` of `dbt-ol`.
 ```shell
 dbt-ol --consume-structured-logs run --select orders
