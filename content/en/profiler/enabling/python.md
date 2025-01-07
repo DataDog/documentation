@@ -124,6 +124,15 @@ insight into the library that is running the code. While this is
 disabled by default, you can turn it on by setting
 `DD_PROFILING_ENABLE_CODE_PROVENANCE=1`.
 
+
+### Stack V2
+
+Stack V2 is the new stack profiler implementation for CPython. It enhances
+the performance and accuracy of Python CPU profiling. To enable Stack V2, set
+the environment variable `DD_PROFILING_STACK_V2_ENABLED=1`. Doing so activates
+our new stack sampling, collection, and export system. Use the most recent
+release of `ddtrace` to benefit from the latest improvements and optimizations.
+
 ## Not sure what to do next?
 
 The [Getting Started with Profiler][7] guide takes a sample service with a performance problem and shows you how to use Continuous Profiler to understand and fix the problem.
