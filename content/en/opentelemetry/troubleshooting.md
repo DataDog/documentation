@@ -20,41 +20,36 @@ When using OpenTelemetry with Datadog, you might encounter various hostname-rela
 
 1. Configure the `k8s.pod.ip` attribute for your application deployment: 
 
-```yaml
-env:
-  - name: MY_POD_IP
-    valueFrom:
-      fieldRef:
-        apiVersion: v1
-        fieldPath: status.podIP
-  - name: OTEL_RESOURCE
-    value: k8s.pod.ip=$(MY_POD_IP)
-```
+   ```yaml
+   env:
+     - name: MY_POD_IP
+       valueFrom:
+         fieldRef:
+           apiVersion: v1
+           fieldPath: status.podIP
+     - name: OTEL_RESOURCE
+       value: k8s.pod.ip=$(MY_POD_IP)
+   ```
 
 2. Enable the `k8sattributes` processor in your Collector:
 
-```yaml
-k8sattributes:
-[...]
-processors:
-  - k8sattributes
-```
+   ```yaml
+   k8sattributes:
+   [...]
+   processors:
+     - k8sattributes
+   ```
 
 Alternatively, you can override the hostname using the `datadog.host.name` attribute:
 
-```yaml
-processors:
-  transform:
-    trace_statements:
-      - context: resource
-        statements:
-          - set(attributes["datadog.host.name"], "${NODE_NAME}")
-```
-
-Note: When overriding hostnames, consider:
-- Potential impacts on billing if using more granular hostname assignments.
-- Effects on correlation between different types of telemetry.
-- Consistency across your observability pipeline.
+   ```yaml
+   processors:
+     transform:
+       trace_statements:
+         - context: resource
+           statements:
+             - set(attributes["datadog.host.name"], "${NODE_NAME}")
+   ```
 
 For more information on host-identifying attributes, see [Mapping OpenTelemetry Semantic Conventions to Hostnames][2].
 
@@ -107,17 +102,6 @@ processors:
      datadog:
        hostname_source: resource_attribute
    ```
-
-3. Enable monitoring for missing hostname attributes:
-
-   ```yaml
-   service:
-     telemetry:
-       metrics:
-         level: detailed
-   ```
-
-   This enables the `otelcol_datadog_otlp_translator_resources_missing_source` metric to track resources missing hostname-identifying attributes.
 
 For more information, see [Mapping OpenTelemetry Semantic Conventions to Infrastructure List Host Information][3].
 
@@ -217,7 +201,7 @@ processors:
           - set(attributes["ddtags"], Concat(["team:", resource.attributes["team"]],""))
 ```
 
-Note: Replace `resource.attributes["team"]` with the actual attribute name if different in your setup (e.g., `resource.attributes["arm.team.name"]`).
+<div class="alert alert-info">Replace <code>resource.attributes["team"]</code> with the actual attribute name if different in your setup (for example, <code>resource.attributes["arm.team.name"]</code>).</div>
 
 To verify the configuration:
 
@@ -232,15 +216,12 @@ To verify the configuration:
 
 **Resolution**:
 
-When using OTLP ingestion in the Datadog Agent, you need to set specific resource attributes to ensure proper container metadata association. Configure one of the following resource attributes:
-
-- `container.id` ([Resource Semantic Conventions][4]).
-- `k8s.node.uid` ([Resource Semantic Conventions][5]).
+When using OTLP ingestion in the Datadog Agent, you need to set specific resource attributes to ensure proper container metadata association. For more information, see [Resource Attribute Mapping][4].
 
 To verify the configuration:
 
 1. Check the raw trace data to confirm that container IDs and tags are properly translated into Datadog format (for example, `container.id` should become `container_id`).
-2. Verify that container metadata appears in the `meta._dd.tags.container` object.
+2. Verify that container metadata appears on the Containers page.
 
 ## Missing metrics in Service Catalog and dashboards
 
@@ -297,5 +278,4 @@ Note: Service name consistency is crucial for proper correlation. Ensure that yo
 [1]: /help/
 [2]: /opentelemetry/schema_semantics/hostname/
 [3]: /opentelemetry/schema_semantics/host_metadata/
-[4]: https://opentelemetry.io/docs/reference/specification/resource/semantic_conventions/container/
-[5]: https://opentelemetry.io/docs/reference/specification/resource/semantic_conventions/container/
+[4]: /opentelemetry/schema_semantics/semantic_mapping/
