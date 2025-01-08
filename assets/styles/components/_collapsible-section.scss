@@ -15,6 +15,11 @@
     transition: background-color 0.3s;
 }
 
+/* hide marker on safari */
+.collapsible-header::-webkit-details-marker {
+  display: none;
+}
+
 .collapsible-header:hover { 
     background-color: #eae2f8;
 }
