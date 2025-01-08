@@ -14,6 +14,48 @@ further_reading:
 
 Follow this guide to migrate between major versions of the Browser RUM and Browser Logs SDKs. See [the SDK documentation][26] for details on its features and capabilities.
 
+## From v5 to v6
+
+### Breaking changes
+
+#### Browser support
+We remove support for IE11 and other older browsers. We now require at least support for ES2018.
+If you still wish to use datadog on older browsers, you can keep using browser SDK v5 or earlier.
+
+#### Add tracestate header when using tracecontext propagator
+We have added a new tracing header, if you are using the `tracecontext` propagator (default), then you need to allow this new header for all urls using it:
+
+```
+Access-Control-Allow-Headers: tracestate
+```
+
+#### Strongly type `site` option
+The `site` option now has a stronger type definition. If you use typescript you might have an error if you use a non-standard value. We recommend using [proxy][27] to send RUM data on a non standard url.
+
+#### Tracking Actions, Resources and LongTask are now enabled by default
+We're now tracking user interactions, resources and long tasks by default. This change does not impact billing. To opt-out, set `trackUserInteractions`, `trackResources`, and `trackLongTasks`  [initialization parameters][28] to `false`.
+
+#### Increased cookies expiration date
+To support anonymous user tracking, the session cookie (`_dd_s`) expiration is extended to 1 year. To opt-out, set `trackAnonymousUser` [initialization parameters][28] to `false`.
+
+#### Removed useCrossSiteSessionCookie initialization parameter
+This parameter was deprecated and is now unsupported, use `usePartitionedCrossSiteSessionCookie` [initialization parameters][28] instead.
+
+#### Lazy load session replay
+TODO
+
+#### Do not inject trace context for non sampled traces.
+We changed the default value for `traceContextInjection` initialization parameter to `sampled` to ensure the backend services' sampling decisions are still applied when traces are not sampled in the browser SDK. See: [Connect Rum and Traces documentation][29]
+
+
+Note: If you're using a `traceSampleRate` of 100% (default), this change will not have any impact for you.
+
+### Future breaking changes
+
+#### Enabling compression for Datadog intake requests
+We plan to enable compression for Datadog intake requests by default in a future major version. However we recommend opt-in compression already via the `compressIntakeRequest` [initialization parameters][28].
+Because the compression is done in a Worker thread. you will need to configure your Content Security Policy, see [CSP guidelines][18] for more information.
+
 ## From v4 to v5
 
 V5 introduces the following changes and more:
@@ -337,3 +379,6 @@ The RUM Browser SDK no longer lets you specify the source of an error collected 
 [24]: /help/
 [26]: /real_user_monitoring/browser/
 [25]: /real_user_monitoring/platform/connect_rum_and_traces#opentelemetry-support
+[27]: /real_user_monitoring/guide/proxy-rum-data
+[28]: /real_user_monitoring/browser/setup/#initialization-parameters
+[29]: /real_user_monitoring/platform/connect_rum_and_traces/?tab=browserrum#:~:text=configure%20the%20traceContextInjection
