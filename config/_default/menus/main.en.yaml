@@ -1696,6 +1696,11 @@ menu:
       parent: infrastructure_resource_catalog
       identifier: infrastructure_resource_catalog_schema
       weight: 501
+    - name: Governance
+      url: infrastructure/resource_catalog/governance/
+      parent: infrastructure_resource_catalog
+      identifier: infrastructure_resource_catalog_governance
+      weight: 502
     - name: Metrics
       url: metrics/
       identifier: metrics_top_level
