@@ -1,15 +1,17 @@
 import { describe, test, expect } from 'vitest';
 import { MdocFileParser } from '../../../src/helperModules/MdocFileParser';
 import { PageBuilder } from '../../../src/helperModules/PageBuilder';
-import { YamlConfigParser } from '../../../src/helperModules/YamlConfigParser';
-import { FiltersManifestBuilder } from '../../../src/helperModules/FiltersManifestBuilder';
+import {
+  YamlConfigParser,
+  FiltersManifestBuilder,
+  PageFiltersManifestSchema
+} from 'cdocs-core';
 import {
   VALID_CONTENT_DIR,
   VALID_PARTIALS_DIR,
   VALID_FILTERS_CONFIG_DIR,
   SNAPSHOTS_DIR
 } from '../../config/constants';
-import { PageFiltersManifestSchema } from '../../../src/schemas/pageFilters';
 import { mockHugoGlobalConfig, mockPageConfig } from '../../mocks/valid/hugoConfig';
 
 describe('PageBuilder.build', () => {

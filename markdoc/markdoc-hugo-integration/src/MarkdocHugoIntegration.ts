@@ -1,19 +1,21 @@
 import fs from 'fs';
-import { FilterOptionsConfig } from './schemas/yaml/filterOptions';
+import {
+  FilterOptionsConfig,
+  PageFiltersManifestSchema,
+  Glossary,
+  YamlConfigParser,
+  FileSearcher,
+  FiltersManifestBuilder
+} from 'cdocs-core';
 import { IntegrationConfig } from './schemas/config/integration';
 import { HugoGlobalConfig } from './schemas/config/hugo';
 import { MdocFileParser } from './helperModules/MdocFileParser';
-import { FileNavigator } from './helperModules/FileNavigator';
-import { YamlConfigParser } from './helperModules/YamlConfigParser';
 import { PageBuilder } from './helperModules/PageBuilder';
 import {
   CompilationError,
   ParsedFile,
   CompilationResult
 } from './schemas/compilationResults';
-import { PageFiltersManifestSchema } from './schemas/pageFilters';
-import { Glossary } from './schemas/yaml/glossary';
-import { FiltersManifestBuilder } from './helperModules/FiltersManifestBuilder';
 import { HugoGlobalConfigBuilder } from './helperModules/HugoGlobalConfigBuilder';
 import { AuthorConsoleData } from './schemas/authorConsole';
 import { AuthorConsoleBuilder } from './helperModules/AuthorConsoleBuilder';
@@ -185,7 +187,7 @@ export class MarkdocHugoIntegration {
     this.#resetErrors();
     this.compiledFilePaths = [];
 
-    const markdocFilepaths = FileNavigator.findInDir(
+    const markdocFilepaths = FileSearcher.findInDir(
       this.hugoGlobalConfig.dirs.content,
       /\.mdoc.md$/
     );

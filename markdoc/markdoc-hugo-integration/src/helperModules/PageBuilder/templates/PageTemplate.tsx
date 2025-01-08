@@ -1,6 +1,5 @@
-import { resolvePageFilters } from '../../filterResolution';
+import { resolvePageFilters, PageFiltersManifest } from 'cdocs-core';
 import { buildCustomizationMenuUi } from '../components/CustomizationMenu';
-import { PageFiltersManifest } from '../../../schemas/pageFilters';
 
 /**
  * A JSX template for the main content area of a page,

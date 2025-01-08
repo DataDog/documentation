@@ -1438,6 +1438,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"cdocs-core@file:../cdocs-core::locator=markdoc-hugo-integration%40workspace%3A.":
+  version: 1.0.0
+  resolution: "cdocs-core@file:../cdocs-core#../cdocs-core::hash=d0109c&locator=markdoc-hugo-integration%40workspace%3A."
+  dependencies:
+    js-yaml: ^4.1.0
+    lodash: ^4.17.21
+    rimraf: ^5.0.5
+    zod: ^3.22.4
+  checksum: 816fcd15eb4b3c69c6da09076bfa00904929871dbbf73c18324f4a7c7fed7e2d35dde758d6df43b74c53daf9b348e9b8d0978e3ea0cb5c10408d3255f0486e6a
+  languageName: node
+  linkType: hard
+
 "chai@npm:^5.1.2":
   version: 5.1.2
   resolution: "chai@npm:5.1.2"
@@ -2209,6 +2221,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"lodash@npm:^4.17.21":
+  version: 4.17.21
+  resolution: "lodash@npm:4.17.21"
+  checksum: eb835a2e51d381e561e508ce932ea50a8e5a68f4ebdd771ea240d3048244a8d13658acbd502cd4829768c56f2e16bdd4340b9ea141297d472517b83868e677f7
+  languageName: node
+  linkType: hard
+
 "loose-envify@npm:^1.1.0":
   version: 1.4.0
   resolution: "loose-envify@npm:1.4.0"
@@ -2312,6 +2331,7 @@ __metadata:
     "@types/uuid": ^10.0.0
     "@vitejs/plugin-react": ^4.3.3
     "@vitest/coverage-v8": ^2.0.2
+    cdocs-core: "file:../cdocs-core"
     chroma-highlight: ^2.4.2
     esbuild: 0.20.2
     interweave: ^13.1.0
@@ -2337,7 +2357,7 @@ __metadata:
 
 "markdoc-static-compiler@file:../markdoc-static-compiler::locator=markdoc-hugo-integration%40workspace%3A.":
   version: 0.1.0
-  resolution: "markdoc-static-compiler@file:../markdoc-static-compiler#../markdoc-static-compiler::hash=d0fb0d&locator=markdoc-hugo-integration%40workspace%3A."
+  resolution: "markdoc-static-compiler@file:../markdoc-static-compiler#../markdoc-static-compiler::hash=d85440&locator=markdoc-hugo-integration%40workspace%3A."
   dependencies:
     "@types/markdown-it": 12.2.3
     markdown-it-deflist: ^3.0.0
@@ -2345,7 +2365,7 @@ __metadata:
   dependenciesMeta:
     "@types/markdown-it":
       optional: true
-  checksum: 3c4253e2e5b8e5ff31ccdf77ff6fdb85e9edd355b3a5c32eeed64b137ee0a4fe677e526ff1066c8b0b2e2ce4d22d5a6f5645dcbd3bb6bfcfe4553d794490f0a3
+  checksum: cccb5746434737edecd106f81767067de849a9a02cc40fa547efcf9bff5ff00b0995943c0a703f98ebdfede3c02aca08712675f91418e17f0c1e210f528f6651
   languageName: node
   linkType: hard
 

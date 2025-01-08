@@ -12,16 +12,30 @@ export {
 export { CdocsCoreError, CdocsCoreErrorSchema } from './schemas/errors';
 
 export {
-  FilterOptionsConfig,
-  FilterOptionsConfigSchema,
-} from './schemas/filterOptions';
+  Frontmatter,
+  FrontmatterSchema,
+  PageFilterConfig,
+  PageFilterConfigSchema,
+} from './schemas/frontMatter';
+
+export { FilterOptionsConfig, FilterOptionsConfigSchema } from './schemas/filterOptions';
 
 export {
   Glossary,
+  GlossarySchema,
+  GlossaryConfig,
   GlossaryConfigSchema,
   GlossaryEntryConfig,
+  GlossaryEntryConfigSchema,
 } from './schemas/glossary';
 
-export { PageFilterConfigSchema } from './schemas/frontMatter';
-
-export { ResolvedPageFilterSchema } from './schemas/pageFilters';
+export {
+  PageFiltersManifest,
+  PageFiltersManifestSchema,
+  ResolvedPageFilter,
+  ResolvedPageFilterSchema,
+  PageFiltersClientSideManifest,
+  PageFiltersClientSideManifestSchema,
+  ResolvedPageFilters,
+  ResolvedPageFiltersSchema,
+} from './schemas/pageFilters';

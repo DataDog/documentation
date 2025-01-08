@@ -19,14 +19,14 @@
  */
 
 import { buildCustomizationMenuUi } from './PageBuilder/components/CustomizationMenu';
-import { resolvePageFilters } from './filterResolution';
+import { resolvePageFilters } from 'cdocs-core/dist/modules/filterResolution';
+import { PageFiltersClientSideManifest } from 'cdocs-core/dist/schemas/pageFilters';
 import { ClientFunction } from 'markdoc-static-compiler/src/types';
 import { reresolveFunctionNode } from './renderer/reresolver';
 import {
   expandClientFunction,
   MinifiedClientFunction
 } from './PageBuilder/pageConfigMinification';
-import { PageFiltersClientSideManifest } from '../schemas/pageFilters';
 
 const PILLS_MENU_ID = 'cdoc-filters-pill-menu';
 const DROPDOWN_MENU_ID = 'cdoc-filters-dropdown-menu';

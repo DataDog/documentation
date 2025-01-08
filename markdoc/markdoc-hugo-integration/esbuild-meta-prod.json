@@ -5,16 +5,16 @@
       "imports": [],
       "format": "cjs"
     },
-    "dist/schemas/regexes.js": {
+    "node_modules/cdocs-core/dist/schemas/regexes.js": {
       "bytes": 1198,
       "imports": [],
       "format": "cjs"
     },
-    "dist/helperModules/filterResolution.js": {
-      "bytes": 3996,
+    "node_modules/cdocs-core/dist/modules/filterResolution.js": {
+      "bytes": 4040,
       "imports": [
         {
-          "path": "dist/schemas/regexes.js",
+          "path": "node_modules/cdocs-core/dist/schemas/regexes.js",
           "kind": "require-call",
           "original": "../schemas/regexes"
         }
@@ -22,7 +22,7 @@
       "format": "cjs"
     },
     "node_modules/markdoc-static-compiler/dist/index.js": {
-      "bytes": 428141,
+      "bytes": 428902,
       "imports": [],
       "format": "cjs"
     },
@@ -43,7 +43,7 @@
       "format": "cjs"
     },
     "dist/helperModules/ClientFiltersManager.js": {
-      "bytes": 18581,
+      "bytes": 18603,
       "imports": [
         {
           "path": "dist/helperModules/PageBuilder/components/CustomizationMenu.js",
@@ -51,9 +51,9 @@
           "original": "./PageBuilder/components/CustomizationMenu"
         },
         {
-          "path": "dist/helperModules/filterResolution.js",
+          "path": "node_modules/cdocs-core/dist/modules/filterResolution.js",
           "kind": "require-call",
-          "original": "./filterResolution"
+          "original": "cdocs-core/dist/modules/filterResolution"
         },
         {
           "path": "dist/helperModules/renderer/reresolver.js",
@@ -89,14 +89,14 @@
         "dist/helperModules/PageBuilder/components/CustomizationMenu.js": {
           "bytesInOutput": 2298
         },
-        "dist/schemas/regexes.js": {
+        "node_modules/cdocs-core/dist/schemas/regexes.js": {
           "bytesInOutput": 411
         },
-        "dist/helperModules/filterResolution.js": {
-          "bytesInOutput": 985
+        "node_modules/cdocs-core/dist/modules/filterResolution.js": {
+          "bytesInOutput": 1001
         },
         "node_modules/markdoc-static-compiler/dist/index.js": {
-          "bytesInOutput": 206970
+          "bytesInOutput": 207588
         },
         "dist/helperModules/renderer/reresolver.js": {
           "bytesInOutput": 790
@@ -111,7 +111,7 @@
           "bytesInOutput": 140
         }
       },
-      "bytes": 220519
+      "bytes": 221153
     }
   }
 }

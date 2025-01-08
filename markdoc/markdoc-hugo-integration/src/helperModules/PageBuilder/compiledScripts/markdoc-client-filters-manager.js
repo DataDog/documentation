@@ -107,9 +107,9 @@
     }
   });
 
-  // dist/schemas/regexes.js
+  // node_modules/cdocs-core/dist/schemas/regexes.js
   var require_regexes = __commonJS({
-    "dist/schemas/regexes.js"(exports) {
+    "node_modules/cdocs-core/dist/schemas/regexes.js"(exports) {
       "use strict";
       Object.defineProperty(exports, "__esModule", { value: true });
       exports.FILTER_OPTIONS_ID_REGEX = exports.GLOBAL_PLACEHOLDER_REGEX = exports.PLACEHOLDER_REGEX = exports.SNAKE_CASE_REGEX = void 0;
@@ -120,9 +120,9 @@
     }
   });
 
-  // dist/helperModules/filterResolution.js
+  // node_modules/cdocs-core/dist/modules/filterResolution.js
   var require_filterResolution = __commonJS({
-    "dist/helperModules/filterResolution.js"(exports) {
+    "node_modules/cdocs-core/dist/modules/filterResolution.js"(exports) {
       "use strict";
       Object.defineProperty(exports, "__esModule", { value: true });
       exports.resolvePageFilters = resolvePageFilters;
@@ -137,7 +137,7 @@
         pageFiltersConfig.forEach((filterConfig) => {
           const filterConfigDup = resolveFilterOptionsSource({
             pageFilterConfig: filterConfig,
-            valsByFilterId: valsByFilterIdDup
+            selectedValsByFilterId: valsByFilterIdDup
           });
           const defaultValue = filterConfigDup.default_value || p.filtersManifest.optionSetsById[filterConfigDup.options_source].find((option) => option.default).id;
           const possibleVals = p.filtersManifest.optionSetsById[filterConfigDup.options_source].map((option) => option.id);
@@ -164,7 +164,7 @@
         const filterConfigDup = Object.assign({}, p.pageFilterConfig);
         if (regexes_1.GLOBAL_PLACEHOLDER_REGEX.test(filterConfigDup.options_source)) {
           filterConfigDup.options_source = filterConfigDup.options_source.replace(regexes_1.GLOBAL_PLACEHOLDER_REGEX, (_match, placeholder) => {
-            return p.valsByFilterId[placeholder.toLowerCase()];
+            return p.selectedValsByFilterId[placeholder.toLowerCase()];
           });
         }
         return filterConfigDup;
@@ -3475,7 +3475,7 @@
             if (state.sCount[nextLine] < state.blkIndent) {
               return false;
             }
-            if (state.sCount[nextLine] - state.blkIndent >= 4) {
+            if (!state.md.options.allowIndentation && state.sCount[nextLine] - state.blkIndent >= 4) {
               return false;
             }
             pos = state.bMarks[nextLine] + state.tShift[nextLine];
@@ -3530,7 +3530,7 @@
             if (lineText.indexOf("|") === -1) {
               return false;
             }
-            if (state.sCount[startLine] - state.blkIndent >= 4) {
+            if (!state.md.options.allowIndentation && state.sCount[startLine] - state.blkIndent >= 4) {
               return false;
             }
             columns = escapedSplit(lineText);
@@ -3584,7 +3584,7 @@
               if (!lineText) {
                 break;
               }
-              if (state.sCount[nextLine] - state.blkIndent >= 4) {
+              if (!state.md.options.allowIndentation && state.sCount[nextLine] - state.blkIndent >= 4) {
                 break;
               }
               columns = escapedSplit(lineText);
@@ -3626,6 +3626,9 @@
         "node_modules/markdown-it/lib/rules_block/code.js"(exports2, module2) {
           "use strict";
           module2.exports = function code2(state, startLine, endLine) {
+            if (state.md.options.allowIndentation) {
+              return false;
+            }
             var nextLine, last, token;
             if (state.sCount[startLine] - state.blkIndent < 4) {
               return false;
@@ -3656,7 +3659,7 @@
           "use strict";
           module2.exports = function fence3(state, startLine, endLine, silent) {
             var marker, len, params, nextLine, mem, token, markup, haveEndMarker = false, pos = state.bMarks[startLine] + state.tShift[startLine], max2 = state.eMarks[startLine];
-            if (state.sCount[startLine] - state.blkIndent >= 4) {
+            if (!state.md.options.allowIndentation && state.sCount[startLine] - state.blkIndent >= 4) {
               return false;
             }
             if (pos + 3 > max2) {
@@ -3696,7 +3699,7 @@
               if (state.src.charCodeAt(pos) !== marker) {
                 continue;
               }
-              if (state.sCount[nextLine] - state.blkIndent >= 4) {
+              if (!state.md.options.allowIndentation && state.sCount[nextLine] - state.blkIndent >= 4) {
                 continue;
               }
               pos = state.skipChars(pos, marker);
@@ -3727,7 +3730,7 @@
           var isSpace = require_utils().isSpace;
           module2.exports = function blockquote2(state, startLine, endLine, silent) {
             var adjustTab, ch, i, initial, l, lastLineEmpty, lines, nextLine, offset, oldBMarks, oldBSCount, oldIndent, oldParentType, oldSCount, oldTShift, spaceAfterMarker, terminate, terminatorRules, token, isOutdented, oldLineMax = state.lineMax, pos = state.bMarks[startLine] + state.tShift[startLine], max2 = state.eMarks[startLine];
-            if (state.sCount[startLine] - state.blkIndent >= 4) {
+            if (!state.md.options.allowIndentation && state.sCount[startLine] - state.blkIndent >= 4) {
               return false;
             }
             if (state.src.charCodeAt(pos++) !== 62) {
@@ -3888,7 +3891,7 @@
           var isSpace = require_utils().isSpace;
           module2.exports = function hr2(state, startLine, endLine, silent) {
             var marker, cnt, ch, token, pos = state.bMarks[startLine] + state.tShift[startLine], max2 = state.eMarks[startLine];
-            if (state.sCount[startLine] - state.blkIndent >= 4) {
+            if (!state.md.options.allowIndentation && state.sCount[startLine] - state.blkIndent >= 4) {
               return false;
             }
             marker = state.src.charCodeAt(pos++);
@@ -3984,10 +3987,10 @@
           }
           module2.exports = function list2(state, startLine, endLine, silent) {
             var ch, contentStart, i, indent, indentAfterMarker, initial, isOrdered, itemLines, l, listLines, listTokIdx, markerCharCode, markerValue, max2, nextLine, offset, oldListIndent, oldParentType, oldSCount, oldTShift, oldTight, pos, posAfterMarker, prevEmptyEnd, start, terminate, terminatorRules, token, isTerminatingParagraph = false, tight = true;
-            if (state.sCount[startLine] - state.blkIndent >= 4) {
+            if (!state.md.options.allowIndentation && state.sCount[startLine] - state.blkIndent >= 4) {
               return false;
             }
-            if (state.listIndent >= 0 && state.sCount[startLine] - state.listIndent >= 4 && state.sCount[startLine] < state.blkIndent) {
+            if (!state.md.options.allowIndentation && state.listIndent >= 0 && state.sCount[startLine] - state.listIndent >= 4 && state.sCount[startLine] < state.blkIndent) {
               return false;
             }
             if (silent && state.parentType === "paragraph") {
@@ -4051,7 +4054,7 @@
               } else {
                 indentAfterMarker = offset - initial;
               }
-              if (indentAfterMarker > 4) {
+              if (!state.md.options.allowIndentation && indentAfterMarker > 4) {
                 indentAfterMarker = 1;
               }
               indent = initial + indentAfterMarker;
@@ -4095,7 +4098,7 @@
               if (state.sCount[nextLine] < state.blkIndent) {
                 break;
               }
-              if (state.sCount[startLine] - state.blkIndent >= 4) {
+              if (!state.md.options.allowIndentation && state.sCount[startLine] - state.blkIndent >= 4) {
                 break;
               }
               terminate = false;
@@ -4147,7 +4150,7 @@
           var isSpace = require_utils().isSpace;
           module2.exports = function reference(state, startLine, _endLine, silent) {
             var ch, destEndPos, destEndLineNo, endLine, href, i, l, label, labelEnd, oldParentType, res, start, str, terminate, terminatorRules, title, lines = 0, pos = state.bMarks[startLine] + state.tShift[startLine], max2 = state.eMarks[startLine], nextLine = startLine + 1;
-            if (state.sCount[startLine] - state.blkIndent >= 4) {
+            if (!state.md.options.allowIndentation && state.sCount[startLine] - state.blkIndent >= 4) {
               return false;
             }
             if (state.src.charCodeAt(pos) !== 91) {
@@ -4169,7 +4172,7 @@
             oldParentType = state.parentType;
             state.parentType = "reference";
             for (; nextLine < endLine && !state.isEmpty(nextLine); nextLine++) {
-              if (state.sCount[nextLine] - state.blkIndent > 3) {
+              if (!state.md.options.allowIndentation && state.sCount[nextLine] - state.blkIndent > 3) {
                 continue;
               }
               if (state.sCount[nextLine] < 0) {
@@ -4397,7 +4400,7 @@
           ];
           module2.exports = function html_block(state, startLine, endLine, silent) {
             var i, nextLine, token, lineText, pos = state.bMarks[startLine] + state.tShift[startLine], max2 = state.eMarks[startLine];
-            if (state.sCount[startLine] - state.blkIndent >= 4) {
+            if (!state.md.options.allowIndentation && state.sCount[startLine] - state.blkIndent >= 4) {
               return false;
             }
             if (!state.md.options.html) {
@@ -4449,7 +4452,7 @@
           var isSpace = require_utils().isSpace;
           module2.exports = function heading2(state, startLine, endLine, silent) {
             var ch, level, tmp, token, pos = state.bMarks[startLine] + state.tShift[startLine], max2 = state.eMarks[startLine];
-            if (state.sCount[startLine] - state.blkIndent >= 4) {
+            if (!state.md.options.allowIndentation && state.sCount[startLine] - state.blkIndent >= 4) {
               return false;
             }
             ch = state.src.charCodeAt(pos);
@@ -4492,13 +4495,13 @@
           "use strict";
           module2.exports = function lheading(state, startLine, endLine) {
             var content, terminate, i, l, token, pos, max2, level, marker, nextLine = startLine + 1, oldParentType, terminatorRules = state.md.block.ruler.getRules("paragraph");
-            if (state.sCount[startLine] - state.blkIndent >= 4) {
+            if (!state.md.options.allowIndentation && state.sCount[startLine] - state.blkIndent >= 4) {
               return false;
             }
             oldParentType = state.parentType;
             state.parentType = "paragraph";
             for (; nextLine < endLine && !state.isEmpty(nextLine); nextLine++) {
-              if (state.sCount[nextLine] - state.blkIndent > 3) {
+              if (!state.md.options.allowIndentation && state.sCount[nextLine] - state.blkIndent > 3) {
                 continue;
               }
               if (state.sCount[nextLine] >= state.blkIndent) {
@@ -4557,7 +4560,7 @@
             oldParentType = state.parentType;
             state.parentType = "paragraph";
             for (; nextLine < endLine && !state.isEmpty(nextLine); nextLine++) {
-              if (state.sCount[nextLine] - state.blkIndent > 3) {
+              if (!state.md.options.allowIndentation && state.sCount[nextLine] - state.blkIndent > 3) {
                 continue;
               }
               if (state.sCount[nextLine] < 0) {

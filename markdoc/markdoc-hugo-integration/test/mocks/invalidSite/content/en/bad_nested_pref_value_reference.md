@@ -3,8 +3,56 @@ title: Primary Colors
 aliases:
   - /primary_colors_alias/
 ---
-<div id="cdoc-selector"><div><div class="cdoc-dropdown-container"><p 
-    id="cdoc-color-label" 
+<div id="cdoc-selector"><div id="cdoc-filters-menu"><div class="filter-selector-menu" id="cdoc-filters-pill-menu"><div class="cdoc-pills-container"><p 
+    id="cdoc-color-pills-label" 
+    class="cdoc-filter-label"
+  >Color</p><button
+      class="cdoc-filter__option cdoc-pill " 
+      data-filter-id="color" 
+      data-option-id="red"
+      aria-selected="false"
+      tabIndex="0"
+    >Red</button><button
+      class="cdoc-filter__option cdoc-pill " 
+      data-filter-id="color" 
+      data-option-id="yellow"
+      aria-selected="false"
+      tabIndex="0"
+    >Yellow</button><button
+      class="cdoc-filter__option cdoc-pill selected" 
+      data-filter-id="color" 
+      data-option-id="blue"
+      aria-selected="true"
+      tabIndex="0"
+    >Blue</button></div><div class="cdoc-pills-container"><p 
+    id="cdoc-item-pills-label" 
+    class="cdoc-filter-label"
+  >Item</p><button
+      class="cdoc-filter__option cdoc-pill " 
+      data-filter-id="item" 
+      data-option-id="ocean"
+      aria-selected="false"
+      tabIndex="0"
+    >Ocean</button><button
+      class="cdoc-filter__option cdoc-pill selected" 
+      data-filter-id="item" 
+      data-option-id="sky"
+      aria-selected="true"
+      tabIndex="0"
+    >Sky</button><button
+      class="cdoc-filter__option cdoc-pill " 
+      data-filter-id="item" 
+      data-option-id="jeans"
+      aria-selected="false"
+      tabIndex="0"
+    >Jeans</button><button
+      class="cdoc-filter__option cdoc-pill " 
+      data-filter-id="item" 
+      data-option-id="blueberry"
+      aria-selected="false"
+      tabIndex="0"
+    >Blueberry</button></div></div><div class="filter-selector-menu cdoc-offscreen" id="cdoc-filters-dropdown-menu"><div class="cdoc-dropdown-container"><p 
+    id="cdoc-color-dropdown-label" 
     class="cdoc-filter-label"
   >Color</p><div 
     id="cdoc-dropdown-color" 
@@ -15,7 +63,7 @@ aliases:
       tabIndex="0"
       aria-haspopup="listbox"
       aria-expanded="false" 
-      aria-labelledby="cdoc-color-label">
+      aria-labelledby="cdoc-color-dropdown-label">
       <span 
         id="cdoc-dropdown-color-label" 
         class="cdoc-btn-label"
@@ -24,13 +72,13 @@ aliases:
     </button><div 
     class="cdoc-dropdown-options-list" 
     role="listbox" 
-    aria-labelledby="cdoc-color-label"><a 
+    aria-labelledby="cdoc-color-dropdown-label"><a 
       class="cdoc-dropdown-option 
       cdoc-filter__option " 
       data-filter-id="color" 
       data-option-id="red"
       role="option" 
-      aria-selected=""
+      aria-selected="false"
       tabIndex="0"
     >Red</a><a 
       class="cdoc-dropdown-option 
@@ -38,7 +86,7 @@ aliases:
       data-filter-id="color" 
       data-option-id="yellow"
       role="option" 
-      aria-selected=""
+      aria-selected="false"
       tabIndex="0"
     >Yellow</a><a 
       class="cdoc-dropdown-option 
@@ -46,10 +94,10 @@ aliases:
       data-filter-id="color" 
       data-option-id="blue"
       role="option" 
-      aria-selected="selected"
+      aria-selected="true"
       tabIndex="0"
     >Blue</a></div></div></div><div class="cdoc-dropdown-container"><p 
-    id="cdoc-item-label" 
+    id="cdoc-item-dropdown-label" 
     class="cdoc-filter-label"
   >Item</p><div 
     id="cdoc-dropdown-item" 
@@ -60,7 +108,7 @@ aliases:
       tabIndex="0"
       aria-haspopup="listbox"
       aria-expanded="false" 
-      aria-labelledby="cdoc-item-label">
+      aria-labelledby="cdoc-item-dropdown-label">
       <span 
         id="cdoc-dropdown-item-label" 
         class="cdoc-btn-label"
@@ -69,13 +117,13 @@ aliases:
     </button><div 
     class="cdoc-dropdown-options-list" 
     role="listbox" 
-    aria-labelledby="cdoc-item-label"><a 
+    aria-labelledby="cdoc-item-dropdown-label"><a 
       class="cdoc-dropdown-option 
       cdoc-filter__option " 
       data-filter-id="item" 
       data-option-id="ocean"
       role="option" 
-      aria-selected=""
+      aria-selected="false"
       tabIndex="0"
     >Ocean</a><a 
       class="cdoc-dropdown-option 
@@ -83,7 +131,7 @@ aliases:
       data-filter-id="item" 
       data-option-id="sky"
       role="option" 
-      aria-selected="selected"
+      aria-selected="true"
       tabIndex="0"
     >Sky</a><a 
       class="cdoc-dropdown-option 
@@ -91,7 +139,7 @@ aliases:
       data-filter-id="item" 
       data-option-id="jeans"
       role="option" 
-      aria-selected=""
+      aria-selected="false"
       tabIndex="0"
     >Jeans</a><a 
       class="cdoc-dropdown-option 
@@ -99,9 +147,9 @@ aliases:
       data-filter-id="item" 
       data-option-id="blueberry"
       role="option" 
-      aria-selected=""
+      aria-selected="false"
       tabIndex="0"
-    >Blueberry</a></div></div></div><hr /></div></div><div id="cdoc-content" class="customizable"><article>
+    >Blueberry</a></div></div></div></div></div><hr /></div><div id="cdoc-content" class="customizable"><article>
   <div class="alert alert-warning">
     <p>Warning: This is just a test page. It's not real.</p>
   </div>

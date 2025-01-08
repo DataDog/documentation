@@ -1,4 +1,4 @@
-import { ResolvedPageFilters, ResolvedPageFilter } from '../../../schemas/pageFilters';
+import { ResolvedPageFilters, ResolvedPageFilter } from 'cdocs-core';
 
 /**
  * Given a resolved page filters object, build the UI for the filter selector

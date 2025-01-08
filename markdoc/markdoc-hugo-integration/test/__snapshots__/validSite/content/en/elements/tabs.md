@@ -1,8 +1,29 @@
 ---
 title: Tabs
 ---
-<div id="cdoc-selector"><div><div class="cdoc-dropdown-container"><p 
-    id="cdoc-color-label" 
+<div id="cdoc-selector"><div id="cdoc-filters-menu"><div class="filter-selector-menu" id="cdoc-filters-pill-menu"><div class="cdoc-pills-container"><p 
+    id="cdoc-color-pills-label" 
+    class="cdoc-filter-label"
+  >Color</p><button
+      class="cdoc-filter__option cdoc-pill " 
+      data-filter-id="color" 
+      data-option-id="red"
+      aria-selected="false"
+      tabIndex="0"
+    >Red</button><button
+      class="cdoc-filter__option cdoc-pill " 
+      data-filter-id="color" 
+      data-option-id="yellow"
+      aria-selected="false"
+      tabIndex="0"
+    >Yellow</button><button
+      class="cdoc-filter__option cdoc-pill selected" 
+      data-filter-id="color" 
+      data-option-id="blue"
+      aria-selected="true"
+      tabIndex="0"
+    >Blue</button></div></div><div class="filter-selector-menu cdoc-offscreen" id="cdoc-filters-dropdown-menu"><div class="cdoc-dropdown-container"><p 
+    id="cdoc-color-dropdown-label" 
     class="cdoc-filter-label"
   >Color</p><div 
     id="cdoc-dropdown-color" 
@@ -13,7 +34,7 @@ title: Tabs
       tabIndex="0"
       aria-haspopup="listbox"
       aria-expanded="false" 
-      aria-labelledby="cdoc-color-label">
+      aria-labelledby="cdoc-color-dropdown-label">
       <span 
         id="cdoc-dropdown-color-label" 
         class="cdoc-btn-label"
@@ -22,13 +43,13 @@ title: Tabs
     </button><div 
     class="cdoc-dropdown-options-list" 
     role="listbox" 
-    aria-labelledby="cdoc-color-label"><a 
+    aria-labelledby="cdoc-color-dropdown-label"><a 
       class="cdoc-dropdown-option 
       cdoc-filter__option " 
       data-filter-id="color" 
       data-option-id="red"
       role="option" 
-      aria-selected=""
+      aria-selected="false"
       tabIndex="0"
     >Red</a><a 
       class="cdoc-dropdown-option 
@@ -36,7 +57,7 @@ title: Tabs
       data-filter-id="color" 
       data-option-id="yellow"
       role="option" 
-      aria-selected=""
+      aria-selected="false"
       tabIndex="0"
     >Yellow</a><a 
       class="cdoc-dropdown-option 
@@ -44,9 +65,9 @@ title: Tabs
       data-filter-id="color" 
       data-option-id="blue"
       role="option" 
-      aria-selected="selected"
+      aria-selected="true"
       tabIndex="0"
-    >Blue</a></div></div></div><hr /></div></div><div id="cdoc-content" class="customizable"><article>
+    >Blue</a></div></div></div></div></div><hr /></div><div id="cdoc-content" class="customizable"><article>
   <h2 id="usage">Usage</h2>
   <ul>
     <li>

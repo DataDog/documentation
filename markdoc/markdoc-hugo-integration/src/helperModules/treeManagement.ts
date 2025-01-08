@@ -21,7 +21,7 @@ import {
 } from './PageBuilder/pageConfigMinification';
 import { transformConfig } from '../markdocParserConfig';
 import { HugoFunctions } from './HugoFunctions';
-import { PageFiltersManifest } from '../schemas/pageFilters';
+import { PageFiltersManifest } from 'cdocs-core';
 
 /**
  * Collect the top-level client functions inside the renderable tree,

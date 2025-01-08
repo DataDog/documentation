@@ -7,8 +7,7 @@ import {
   VALID_FILTERS_CONFIG_DIR
 } from '../config/constants';
 import { buildRenderableTree } from '../../src/helperModules/treeManagement';
-import { YamlConfigParser } from '../../src/helperModules/YamlConfigParser';
-import { FiltersManifestBuilder } from '../../src/helperModules/FiltersManifestBuilder';
+import { YamlConfigParser, FiltersManifestBuilder } from 'cdocs-core';
 
 describe('treeManagement', () => {
   const LANG_DIR = VALID_FILTERS_CONFIG_DIR + '/en';

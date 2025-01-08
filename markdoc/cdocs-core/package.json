@@ -2,6 +2,7 @@
   "name": "cdocs-core",
   "version": "1.0.0",
   "description": "Types and utilities for configuring, validating, and building customizable documentation",
+  "main": "dist/index.js",
   "scripts": {
     "test": "yarn build; vitest run --coverage --reporter=verbose",
     "test:watch": "yarn build; vitest",

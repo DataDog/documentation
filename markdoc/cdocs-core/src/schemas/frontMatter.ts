@@ -36,15 +36,10 @@ export const PageFiltersConfigSchema = z
   .array(PageFilterConfigSchema)
   .refine((filtersConfig) => {
     // Page filter names must be unique within a page
-    const filterNames = filtersConfig.map(
-      (filterConfig) => filterConfig.display_name,
-    );
+    const filterNames = filtersConfig.map((filterConfig) => filterConfig.display_name);
     const uniqueFilterNames = new Set(filterNames);
     if (filterNames.length !== uniqueFilterNames.size) {
-      console.error(
-        'Duplicate page filter display names found in list:',
-        filterNames,
-      );
+      console.error('Duplicate page filter display names found in list:', filterNames);
       return false;
     }
 
@@ -53,15 +48,12 @@ export const PageFiltersConfigSchema = z
     const definedParamNames = new Set();
     for (const filterConfig of filtersConfig) {
       definedParamNames.add(filterConfig.display_name);
-      const bracketedPlaceholders =
-        filterConfig.display_name.match(/<([a-z0-9_]+)>/g);
+      const bracketedPlaceholders = filterConfig.display_name.match(/<([a-z0-9_]+)>/g);
       if (bracketedPlaceholders) {
         for (const placeholder of bracketedPlaceholders) {
           const paramName = placeholder.slice(1, -1);
           if (!definedParamNames.has(paramName)) {
-            console.error(
-              `Invalid placeholder reference found: ${placeholder}`,
-            );
+            console.error(`Invalid placeholder reference found: ${placeholder}`);
             return false;
           }
         }
@@ -78,41 +70,6 @@ export const PageFiltersConfigSchema = z
 export type PageFiltersConfig = z.infer<typeof PageFiltersConfigSchema>;
 
 /**
- * The list of further reading links, as parsed directly from
- * the front matter YAML of a given file.
- */
-export const FurtherReadingConfigSchema = z
-  .array(
-    z
-      .object({
-        link: z.string(),
-        text: z.string(),
-        tag: z.string().optional(),
-      })
-      .strict(),
-  )
-  .min(1);
-
-/**
- * The list of further reading links, as parsed directly from
- * the front matter YAML of a given file.
- *
- * @example
- * [
- *   {
- *     link: "https://exampleblogpost.com",
- *     text: "Example blog post",
- *     tag: "blog"
- *   },
- *   {
- *     link: "https://random.com",
- *     text: "Some random link with no applicable tag"
- *   }
- * ]
- */
-export type FurtherReadingConfig = z.infer<typeof FurtherReadingConfigSchema>;
-
-/**
  * The front matter of a document required by the integration
  * (additional keys are allowed in the front matter YAML,
  * but are ignored by the integration).
@@ -120,7 +77,6 @@ export type FurtherReadingConfig = z.infer<typeof FurtherReadingConfigSchema>;
 export const FrontmatterSchema = z.object({
   title: z.string(),
   content_filters: PageFiltersConfigSchema.optional(),
-  further_reading: FurtherReadingConfigSchema.optional(),
 });
 
 /**

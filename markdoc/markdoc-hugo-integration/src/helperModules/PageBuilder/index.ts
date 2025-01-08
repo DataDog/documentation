@@ -3,18 +3,17 @@ import { RenderableTreeNode } from 'markdoc-static-compiler';
 import prettier from 'prettier';
 import fs from 'fs';
 import path from 'path';
-import { Frontmatter } from '../../schemas/yaml/frontMatter';
+import { PageFiltersManifest, FiltersManifestBuilder } from 'cdocs-core';
 import { buildRenderableTree, getMinifiedIfFunctionsByRef } from '../treeManagement';
 import { customComponents } from '../../markdocParserConfig';
 import yaml from 'js-yaml';
 import { PageTemplate } from './templates/PageTemplate';
 import { renderToString } from 'react-dom/server';
 import { HugoConfig } from '../../schemas/config/hugo';
-import { PageFiltersManifest } from '../../schemas/pageFilters';
 import { render } from '../renderer';
 import { FurtherReadingTemplate } from '../../components/furtherReading';
-import { FiltersManifestBuilder } from '../FiltersManifestBuilder';
 import { CompilationError } from '../../schemas/compilationResults';
+import { Frontmatter } from '../../schemas/frontmatter';
 
 const stylesStr = fs.readFileSync(path.resolve(__dirname, 'assets/styles.css'), 'utf8');
 

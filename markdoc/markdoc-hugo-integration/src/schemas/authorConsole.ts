@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { GlossarySchema } from './yaml/glossary';
+import { GlossarySchema } from 'cdocs-core';
 import { CompilationErrorSchema } from './compilationResults';
 
 export const AuthorConsoleDataSchema = z.object({

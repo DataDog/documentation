@@ -1,5 +1,5 @@
 import { Node } from 'markdoc-static-compiler';
-import { Frontmatter } from './yaml/frontMatter';
+import { Frontmatter } from './frontmatter';
 import { z } from 'zod';
 
 /**
