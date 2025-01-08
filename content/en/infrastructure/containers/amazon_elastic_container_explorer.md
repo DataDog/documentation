@@ -160,6 +160,7 @@ Some resources have specific tags. The following tags are available in addition 
 | **Container Instance**         | ~24 hours               | ~24 hours                 |
 
 * Installing the Datadog Agent in your cluster enables visibility into task lifecycle changes. Without the Datadog Agent, stopped tasks can appear as running for up to two days.
+* Installing the Datadog Agent in your cluster provides additional relevant host-level tags, such as `availability_zone`.
 
 [1]: https://app.datadoghq.com/orchestration/explorer/ecsTask
 [2]: /integrations/amazon_ecs
