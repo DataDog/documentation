@@ -6,7 +6,7 @@ further_reading:
   tag: "Documentation"
   text: "Set up Audit Trail"
 aliases:
-- /guides/track_dashboard_usage/
+- ./track_dashboard_usage/
 ---
 
 ## Overview
