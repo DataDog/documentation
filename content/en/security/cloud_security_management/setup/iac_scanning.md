@@ -1,7 +1,5 @@
 ---
 title: Setting up IaC Scanning for Cloud Security Management
-aliases:
-  - /security/cloud_security_management/setup/source_code_integrations
 further_reading:
     - link: "/security/cloud_security_management/setup"
       tag: "Documentation"
@@ -13,6 +11,10 @@ further_reading:
       tag: "Guide"
       text: "CSM Identity Risks"
 ---
+
+{{< callout url="https://www.datadoghq.com/product-preview/iac-security/" >}}
+  Static Infrastructure as Code (IaC) scanning is in Preview. To request access, complete the form.
+{{< /callout >}}
 
 Use the following instructions to enable Infrastructure as Code (IaC) scanning for Cloud Security Management (CSM). IaC scanning is available for [CSM Misconfigurations][1] and [CSM Identity Risks][2].
 
