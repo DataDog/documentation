@@ -18,10 +18,6 @@ further_reading:
   text: "Service Overrides"
 ---
 
-{{< callout url="https://docs.google.com/forms/d/1imGm-4SfOPjwAr6fwgMgQe88mp4Y-n_zV0K3DcNW4UA/edit" d_target="#signupModal" btn_hidden="true" btn_hidden="false" header="Request access to the Preview!" >}}
-Inferred service dependencies are in Preview. To request access, complete the form.
-{{< /callout >}}
-
 ## Overview
 
 Datadog can automatically discover the dependencies for an instrumented service, such as a database, a queue, or a third-party API, even if that dependency hasn't been instrumented yet. By analyzing outbound requests from your instrumented services, Datadog infers the presence of these dependencies and collects associated performance metrics.

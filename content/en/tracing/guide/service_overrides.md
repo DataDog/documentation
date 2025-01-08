@@ -8,10 +8,6 @@ further_reading:
   text: "Opting-in to the new service representation"
 ---
 
-{{< callout url="https://docs.google.com/forms/d/1imGm-4SfOPjwAr6fwgMgQe88mp4Y-n_zV0K3DcNW4UA/edit" d_target="#signupModal" btn_hidden="false" header="Request access to the Preview!" >}}
-Inferred service dependencies are in Preview. To request access, complete the form. For opt-in instructions, see the <a href="/tracing/guide/inferred-service-opt-in/">Inferred Service dependencies guide</a>.
-{{< /callout >}}
-
 ## Overview
 
 [Inferred services][1] improve how Datadog represents service dependencies. This document explains the changes and how to adapt your configuration.
