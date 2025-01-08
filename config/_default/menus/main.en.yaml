@@ -2448,7 +2448,7 @@ menu:
       pre: workflows
       identifier: workflows
       parent: actions_heading
-      weight: 60000
+      weight: 10000
     - name: Build Workflows
       url: service_management/workflows/build/
       parent: workflows
@@ -2544,7 +2544,7 @@ menu:
       pre: app-builder
       identifier: app_builder
       parent: actions_heading
-      weight: 70000
+      weight: 20000
     - name: Build Apps
       url: service_management/app_builder/build/
       parent: app_builder
