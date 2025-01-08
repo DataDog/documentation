@@ -1,1 +1,0 @@
-baseURL: https://docs-staging.datadoghq.com/$CI_COMMIT_REF_NAME/
