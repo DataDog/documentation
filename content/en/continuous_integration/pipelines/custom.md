@@ -69,6 +69,7 @@ To send pipeline events programmatically to Datadog, ensure that your [`DD_API_K
    {
      "data": {
        "attributes": {
+         "provider_name": "my-ci-provider",
          "resource": {
            "level": "pipeline",
            "unique_id": "b3262537-a573-44eb-b777-4c0f37912b05",
