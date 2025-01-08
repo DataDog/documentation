@@ -5,7 +5,7 @@ aliases:
     - /logs/troubleshooting/livetail_troubleshoot
 ---
 
-If you are seeing an error in your Live Tail page or logs not loading, please follow the troubleshooting process below - 
+If you are seeing an error in your Live Tail page or logs not loading, follow the troubleshooting process below - 
 
 * Open your browser in Incognito mode and verify if you can view logs in the Live Tail view.
 * Try a different browser and check if Live Tail is loading logs.
@@ -17,7 +17,7 @@ If you are seeing an error in your Live Tail page or logs not loading, please fo
 	   - ensure that `live.logs.datadoghq.com` is allowed on inbound traffic to your local or company network.
 	   - Available IP ranges can also be found at `https://ip-ranges.datadoghq.com` or similar for your Datadog environment.
 
-## Tracing Requests:
+## Tracing requests:
 
 Traceroute can be used for network diagnostics to track the path of a packet taken from source to destination. This can be used to identify any client-side network issues that may stop Live Tail from being loaded, between the Datadog user and the destination live stream of logs.
 
@@ -27,19 +27,19 @@ traceroute live.logs.datadoghq.com
 ```
 
 -   If at any point, the request times out, this is an indication that the request has been blocked between the client and Datadog servers. Checking with your network administration team can help to address these issues.    
--   If a hop ( a step in the route ) indicates `* * *` - this indicates that a host did not reply to the traceroute, or a router does not provide replies for that protocol. This does not always indicate that a timeout has occurred, but changing the discovery protocol to ICMP/PING using the `-I` option could provide more detailed results.
+-   If a hop (a step in the route) indicates `* * *` - this indicates that a host did not reply to the traceroute, or a router does not provide replies for that protocol. This does not always indicate that a timeout has occurred, but changing the discovery protocol to ICMP/PING using the `-I` option could provide more detailed results.
 
-## Clear Browser Cache:
+## Clear browser cache:
 
-### Browser Cache:
+### Browser cache:
 
 Here is how to do it in Google Chrome - [link](https://support.google.com/accounts/answer/32050?hl=en&co=GENIE.Platform%3DDesktop).
 
-### DNS Cache:
+### DNS cache:
 
 Launch chrome browser. Type `chrome://net-internals/#dns` in the address bar, then press Enter. Click on “Clear host cache” button. Chrome Browser DNS cache will be cleared.
 
-## Browser Plugins / Extensions:
+## Browser plugins / extensions:
 
 -   Check if your browser / OS has any ad-blocker app installed. Uninstall it and then check if you are able to see logs in the live tail.
 -   Pause / stop / uninstall any browser plugins / extensions.
@@ -54,11 +54,11 @@ Moreover, check if you have a role assigned which has logs [live tail permission
 
 [More information on Datadog Roles and Permissions](https://docs.datadoghq.com/account_management/rbac/permissions/).
 
-## Create a Support Ticket:
+## Create a support ticket:
 
 If the above troubleshooting steps doesn’t resolve the issue with logs live tail, please create a [support ticket](https://help.datadoghq.com/hc/en-us/requests/new?_gl=1*glz742*_gcl_aw*R0NMLjE3Mjc2ODY1MTEuQ2owS0NRandtT20zQmhDOEFSSXNBT1NiYXBWWkYyLXNtNWhxNXZEZWMyYzRKOWdHallUOGlnVmxFbGlnVmxGSGZRT2NKdkJubnU4TC1Ld2FBcXByRUFMd193Y0I.*_gcl_au*MTc4Nzg4NDk2NC4xNzMwODc5MjQw*_ga*MTM3Njg5NDYzMy4xNzIyOTAyNDI2*_ga_KN80RDFSQK*MTczMjY3MzYzMy42OC4xLjE3MzI2NzM2NDMuMC4wLjIwNjg5ODUwOTA.*_fplc*OXFtRVFHUzdxUDhwUDRxbVBhS05lUlR3V0tWUXFEcEoyVWNQd0h1cWZ0JTJGTHFZcGxtZ3lLVjFsQ3g5OCUyQjJoN3FmU012SXhjSktuNmNCQkxNczVJNXFNU1NYJTJGblpLU0ZxNngyTlFkV0I3SyUyQmJWMHUxMDdycGdLRXdwRndOdUElM0QlM0Q.). Please collect the following information before creating a support ticket.
 
-### OS/Browser Details:
+### OS/Browser details:
 
 1.  Browser name and version. 
 2.  Plugins and/or extensions.
