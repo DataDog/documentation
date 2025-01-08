@@ -105,7 +105,7 @@ You can use RUM-based custom metrics for the following actions:
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
+[0]
 [1]: /real_user_monitoring/guide/sampling-browser-plans
 [2]: https://app.datadoghq.com/rum/explorer
 [3]: /metrics/custom_metrics/
