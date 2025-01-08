@@ -56,7 +56,7 @@ LLM Observability provides metrics to help you monitor and manage the token usag
 - `ml_obs.estimated_usage.llm.output.tokens`
 - `ml_obs.estimated_usage.llm.total.tokens`
 
-Each of these metrics is tagged with `ml_app`, `model_server`, `model_provider`, `model_name`, and `evaluation_name`, allowing you to pinpoint specific applications, models, and evaluations contributing to your usage. These metrics help you maintain visibility over the LLM-powered features in LLM Obs.
+Each of these metrics has `ml_app`, `model_server`, `model_provider`, `model_name`, and `evaluation_name` tags, allowing you to pinpoint specific applications, models, and evaluations contributing to your usage.
 
 ## Provide topics for topic relevancy
 
