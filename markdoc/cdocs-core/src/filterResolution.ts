@@ -1,13 +1,7 @@
 /**
- * Functions for resolving filters config into filters content
- * (such as options displayed in the filtering UI).
- * The resolution steps must run every time the user
- * updates their filters.
- *
- * Examples:
- * - Replace placeholders in an options source with actual values.
- * - Replace a previously chosen value with the default value
- *   if the chosen value is not valid.
+ * Functions for determining ("resolving") which
+ * filters and options should be displayed in a given user's
+ * page customization menu, based on their existing preferences.
  *
  * Organized as isolated functions to control bundle size,
  * since this code must run in the browser to support precompiled pages.
@@ -26,8 +20,19 @@ import { PageFilterConfig } from './schemas/yaml/frontMatter';
 
 /**
  * Resolve the page filters object that is used
- * to populate the content filtering UI (AKA the filter selector),
- * replacing any placeholders with actual values.
+ * to populate the page customization menu.
+ *
+ * If the user chooses Postgres as their database,
+ * this impacts what options should show
+ * in the "Database version" filter. Resolution is the process
+ * that populates the correct values.
+ *
+ * Resolution merges a user's customization choices in the UI
+ * with the page's filter configuration (defined in its frontmatter)
+ * to determine which customization values and options to display.
+ * Resolution involves replacing placeholders
+ * with user-selected values, determining any default values
+ * resulting from the user's earlier selections, and so on.
  */
 export function resolvePageFilters(p: {
   valsByFilterId: Record<string, string>;
@@ -44,7 +49,7 @@ export function resolvePageFilters(p: {
     // If the options source contains a placeholder, resolve it
     const filterConfigDup = resolveFilterOptionsSource({
       pageFilterConfig: filterConfig,
-      valsByFilterId: valsByFilterIdDup
+      selectedValsByFilterId: valsByFilterIdDup
     });
 
     // Update the value for the filter,
@@ -85,17 +90,14 @@ export function resolvePageFilters(p: {
 }
 
 /**
- * Resolve any placeholders in the options source of a page filter.
+ * Replace any placeholders in the options source of a page filter.
  * For example, if the options source is "<COLOR>_<FINISH>_paint_options",
- * and the values of the dependencies are { color: 'red', finish: 'gloss' },
+ * and the user's existing preferences are { color: 'red', finish: 'gloss' },
  * the resolved options source would be "red_gloss_paint_options".
- *
- * @param p The page filter configuration object and the selected values by filter ID.
- * @returns A copy of the page filter configuration object with any placeholders in the options source resolved.
  */
 export function resolveFilterOptionsSource(p: {
   pageFilterConfig: PageFilterConfig;
-  valsByFilterId: Record<string, string>;
+  selectedValsByFilterId: Record<string, string>;
 }): PageFilterConfig {
   // Make a copy in order to preserve the placeholders
   // for future use
@@ -107,7 +109,7 @@ export function resolveFilterOptionsSource(p: {
     filterConfigDup.options_source = filterConfigDup.options_source.replace(
       GLOBAL_PLACEHOLDER_REGEX,
       (_match: string, placeholder: string) => {
-        return p.valsByFilterId[placeholder.toLowerCase()];
+        return p.selectedValsByFilterId[placeholder.toLowerCase()];
       }
     );
   }
