@@ -106,7 +106,7 @@ See the following GitHub issues for more information and other potential methods
 
 ## Permissions issues when running the Agent as a system daemon on MacOS
 
-If you installed the Agent as a system-wide LaunchDaemon using the `DD_SYSTEMDAEMON_INSTALL` and `DD_SYSTEMDAEMON_USER_GROUP` options, verify that the user and group you used for `DD_SYSTEMDAEMON_USER_GROUP` are valid and have the correct permissions.
+If you installed the Agent as a system-wide launch daemon using the `DD_SYSTEMDAEMON_INSTALL` and `DD_SYSTEMDAEMON_USER_GROUP` options, verify that the user and group you used for `DD_SYSTEMDAEMON_USER_GROUP` are valid and have the correct permissions.
 
 ## Further Reading
 
