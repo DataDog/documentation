@@ -77,7 +77,7 @@ Pipelines appear immediately after enabling CI Visibility for any account or rep
 To disable the CI Visibility GitHub Actions integration:
 
 1. Go to the [CI GitHub Settings][14] page.
-2. Choose the GitHub account that you want to disable CI Visibility for, and click on **Edit**.
+2. Choose the GitHub account that you want to disable CI Visibility for, and click **Account Enabled**.
 3. Untoggle **Enable CI Visibility**, or choose which repository you want to disable it for individually.
 
 ### Collect job logs
