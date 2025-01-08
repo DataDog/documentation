@@ -6,21 +6,21 @@ Types and utilities for building customizable docs.
 
 A customizable doc uses *content filters* to hide irrelevant content on a documentation page. For example, if the user sets a page's "Programming language" filter to Python, all code examples would be in Python, and sections irrelevant to Python would be hidden. A content filter should represent a user characteristic or preference, such as their operating system.
 
-## Scope of this package
+All customizable docs at Datadog use the same configuration patterns and runtime data, regardless of whether the page was created in Hugo or Astro.
 
-The compilation/rendering of customizable docs is out of scope for this package, since it varies depending on which documentation platform is used, whether server-side rendering is used, and so on. 
-
-But all customizable docs at Datadog use the same configuration patterns and runtime data, regardless of whether the page was created in Hugo or Astro. This package contains types and utility functions for safely ingesting and validating configuration, and for updating runtime data based on updates to the user's preferences. 
+## What does this package provide?
 
 Because a customizable document has many content filter combinations that are difficult to test manually, it's crucial that all configuration data is valid to avoid unexpected behavior in production.
 
-This package provides utilities for
+This package contains types and utility functions for safely ingesting and validating configuration, and for mutating runtime data in response to changes in the user's preferences. It includes utilities for
 
 - processing YAML configuration files into validated JavaScript objects that can be consumed by site generators like Astro and Hugo
 - handling ongoing changes to the user's preferences (for example, in a site's client-side JavaScript if the page is statically rendered)
 - protecting against translation errors in configuration files
 
 For example, if a user changes their "Database" filter from "Postgres" to "Mongo", the options for the "Database version" filter should change accordingly. This package provides a function that re-resolves such options.
+
+The compilation/rendering of customizable docs is out of scope for this package, since it varies depending on which documentation platform is used, whether server-side rendering is used, and so on. 
 
 ## How are content filters configured?
 
