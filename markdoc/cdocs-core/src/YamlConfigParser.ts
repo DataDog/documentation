@@ -4,7 +4,7 @@ import {
   RawFilterOptionsConfig,
   RawFilterOptionsConfigSchema
 } from './schemas/yaml/filterOptions';
-import { FileNavigator } from './FileNavigator';
+import { FileSearcher } from './FileSearcher';
 import {
   Glossary,
   GlossaryConfigSchema,
@@ -153,7 +153,7 @@ export class YamlConfigParser {
    * @returns A read-only FilterOptionsConfig object.
    */
   private static loadFilterOptionsFromDir(dir: string): RawFilterOptionsConfig {
-    const filenames = FileNavigator.findInDir(dir, /\.ya?ml$/);
+    const filenames = FileSearcher.findInDir(dir, /\.ya?ml$/);
     const rawFilterOptions: RawFilterOptionsConfig = {};
 
     filenames.forEach((filename) => {

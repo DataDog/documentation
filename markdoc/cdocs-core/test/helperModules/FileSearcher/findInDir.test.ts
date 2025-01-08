@@ -1,10 +1,10 @@
-import { FileNavigator } from '../../../src/FileNavigator';
+import { FileSearcher } from '../../../src/FileSearcher';
 import { describe, test, expect } from 'vitest';
-import { VALID_CONTENT_DIR, SNAPSHOTS_DIR } from '../../config/constants';
+import { VALID_CONTENT_DIR } from '../../config/constants';
 
-describe('FileNavigator.findInDir', () => {
+describe('FileSearcher.findInDir', () => {
   test('finds the .mdoc.md files in the valid site', () => {
-    const files = FileNavigator.findInDir(VALID_CONTENT_DIR, /\.mdoc.md$/);
+    const files = FileSearcher.findInDir(VALID_CONTENT_DIR, /\.mdoc.md$/);
     expect(files.length).toBeGreaterThan(0);
 
     const sanitizedFilenames = files.map((filename) =>

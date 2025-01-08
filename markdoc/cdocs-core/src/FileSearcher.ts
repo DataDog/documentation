@@ -6,7 +6,7 @@
 import fs from 'fs';
 import path from 'path';
 
-export class FileNavigator {
+export class FileSearcher {
   /**
    * Find all files in a directory that match a given regular expression.
    *
