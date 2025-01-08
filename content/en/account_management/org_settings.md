@@ -142,11 +142,8 @@ Users with the `Org Management` permission can set a maximum session duration fo
 
 The session duration can be configured within the following limits:
 
-
 - **Minimum duration**: 10 minutes
-- **Maximum duration**: {{< site-region region="gov" >}}12 hours{{< /site-region >}}{{< site-region region="us, eu, us3, us5, ap1" >}}30 days{{< /site-region >}}
-
-
+- **Maximum duration**: <span>{{< site-region region="gov" >}}12 hours{{< /site-region >}}{{< site-region region="us, eu, us3, us5, ap1" >}}30 days{{< /site-region >}}</span>
 
 {{< img src="account_management/org_settings/max_session_duration.png" alt="Max Session Duration Setting" style="width:70%;" >}}
 
