@@ -43,7 +43,7 @@ To set up logging in your application, see [Node.js Log Collection][3]. To set u
 {{% tab "Python" %}}
 #### Tracing
 
-In your main application, add the `dd-trace-py` library. See [Tracing Python applications][1] for instructions. You can also use [Tutorial - Enabling tracing for a Python application and Datadog Agent in containers][5].
+In your main application, add the `dd-trace-py` library. See [Tracing Python Applications][1] for instructions. You can also use [Tutorial - Enabling Tracing for a Python Application and Datadog Agent in Containers][5].
 
 #### Metrics
 The tracing library also collects custom metrics. See the [code examples][2].
@@ -51,7 +51,7 @@ The tracing library also collects custom metrics. See the [code examples][2].
 #### Logs
 The Datadog sidecar collects logs through a shared volume. To forward logs from your main container to the sidecar, configure your application to write all logs to a location such as `shared-volume/logs/*.log`. 
 
-To set up logging in your application, see [Python Log Collection][3]. [Python logging best practices][6] can also be helpful. To set up trace log correlation, see [Correlating Python Logs and Traces][4].
+To set up logging in your application, see [Python Log Collection][3]. [Python Logging Best Practices][6] can also be helpful. To set up trace log correlation, see [Correlating Python Logs and Traces][4].
 
 [1]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/python
 [2]: /metrics/custom_metrics/dogstatsd_metrics_submission/#code-examples
@@ -64,7 +64,7 @@ To set up logging in your application, see [Python Log Collection][3]. [Python l
 {{% tab "Java" %}}
 #### Tracing
 
-In your main application, add the `dd-trace-java` library. Follow the instructions in [Tracing Java applications][1] or use the following example Dockerfile to add and start the tracing library with automatic instrumentation:
+In your main application, add the `dd-trace-java` library. Follow the instructions in [Tracing Java Applications][1] or use the following example Dockerfile to add and start the tracing library with automatic instrumentation:
 
 ```dockerfile
 FROM eclipse-temurin:17-jre-jammy
@@ -100,7 +100,7 @@ To set up logging in your application, see [Java Log Collection][3]. To set up t
 {{% tab "Go" %}}
 #### Tracing
 
-In your main application, add the `dd-trace-go` library. See [Tracing Go applications][1] for instructions.
+In your main application, add the `dd-trace-go` library. See [Tracing Go Applications][1] for instructions.
 
 #### Metrics
 The tracing library also collects custom metrics. See the [code examples][2].
@@ -118,7 +118,7 @@ To set up logging in your application, see [Go Log Collection][3]. To set up tra
 {{% tab ".NET" %}}
 #### Tracing
 
-In your main application, add the .NET tracing library. See [Tracing .NET applications][1] for instructions.
+In your main application, add the .NET tracing library. See [Tracing .NET Applications][1] for instructions.
 
 Example Dockerfile:
 
@@ -155,7 +155,7 @@ To set up logging in your application, see [C# Log Collection][3]. To set up tra
 [4]: /tracing/other_telemetry/connect_logs_and_traces/dotnet/?tab=serilog
 {{% /tab %}}
 {{% tab "PHP" %}}
-In your main application, add the `dd-trace-php` library. See [Tracing PHP applications][1] for instructions.
+In your main application, add the `dd-trace-php` library. See [Tracing PHP Applications][1] for instructions.
 
 #### Metrics
 The tracing library also collects custom metrics. See the [code examples][2].

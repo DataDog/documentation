@@ -109,22 +109,20 @@ gcr.io/<YOUR_PROJECT>/<YOUR_APP_NAME>
 Once the container is built and pushed to your registry, the last step is to set the required environment variables for the Datadog Agent:
 - `DD_API_KEY`: Datadog API key, used to send data to your Datadog account. It should be configured as a [Google Cloud Secret][11] for privacy and safety.
 - `DD_SITE`: Datadog endpoint and website. Select your site on the right side of this page. Your site is: {{< region-param key="dd_site" code="true" >}}.
-- `DD_TRACE_ENABLED`: Set to `true` to enable tracing.
-- `DD_TRACE_PROPAGATION_STYLE`: Set this to `datadog` to use context propagation and log trace correlation.
 
-For more environment variables and their function, see [Additional Configurations](#additional-configurations).
+For more environment variables and their function, see [Environment Variables](#environment-variables).
 
-The following command deploys the service and allows any external connection to reach it. Set `DD_API_KEY` as an environment variable, and set your service listening to port 8080.
+The following command deploys the service and allows any external connection to reach it. In this example, your service listening is set to port 8080. Ensure that this port number matches the exposed port inside of your Dockerfile.
 
 ```
 shell
 gcloud run deploy <APP_NAME> --image=gcr.io/<YOUR_PROJECT>/<APP_NAME> \
   --port=8080 \
   --update-env-vars=DD_API_KEY=$DD_API_KEY \
-  --update-env-vars=DD_TRACE_ENABLED=true \
-  --update-env-vars=DD_SITE='datadoghq.com' \
-  --update-env-vars=DD_TRACE_PROPAGATION_STYLE='datadog' \
+  --update-env-vars=DD_SITE=$DD_SITE \
 ```
+
+See [all arguments and flags for `gcloud run deploy`][26].
 
 ## Results
 
@@ -146,7 +144,6 @@ Once the deployment is completed, your metrics and traces are sent to Datadog. I
 | `DD_SITE` | [Datadog site][5] - **Required** |
 | `DD_LOGS_ENABLED` | When true, send logs (stdout and stderr) to Datadog. Defaults to false. |
 | `DD_LOGS_INJECTION`| When true, enrich all logs with trace data for supported loggers in [Java][19], [Node][20], [.NET][21], and [PHP][22]. See additional docs for [Python][23], [Go][24], and [Ruby][25]. |
-| `DD_TRACE_SAMPLE_RATE`|  Controls the trace ingestion sample rate `0.0` and `1.0`. |
 | `DD_SERVICE`      | See [Unified Service Tagging][6].                                  |
 | `DD_VERSION`      | See [Unified Service Tagging][6].                                  |
 | `DD_ENV`          | See [Unified Service Tagging][6].                                  |
@@ -192,3 +189,4 @@ RUN apt-get update && apt-get install -y ca-certificates
 [23]: /tracing/other_telemetry/connect_logs_and_traces/python
 [24]: /tracing/other_telemetry/connect_logs_and_traces/go
 [25]: /tracing/other_telemetry/connect_logs_and_traces/ruby
+[26]: https://cloud.google.com/sdk/gcloud/reference/run/deploy
