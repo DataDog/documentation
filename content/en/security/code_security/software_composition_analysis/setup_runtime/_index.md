@@ -10,18 +10,11 @@ SCA can detect vulnerabilities that affect open source libraries running in your
 scan dependency management files in your repositories to statically detect open source libraries used in your codebase. 
 
 Before setting up runtime deteciton, ensure the following prerequisites are met:
-3. **Supported Tracing Library:** The Datadog Tracing Library used by your application or service supports Software Composition Analysis capabilities for the language of your application or service. See supported tracing libraries below:
 
-## Select a configuration option
-|----------------------------------------|---------|----------|--------------------------------------------------|---------------|-----------------|---------------|---------------|
-### Quick start for in-app service enablement
-
-Select your application language for details about framework compatibility and feature support.
-
-{{< partial name="security-platform/appsec-languages-sca.html" >}}
-1. **Datadog Agent Installation:** The Datadog Agent is installed and configured for your application's operating system or container, cloud, or virtual environment.
-2. **Datadog APM Configuration:** Datadog APM is configured for your application or service, and web traces (`type:web`) are being received by Datadog.
-3. **Supported Tracing Library:** The Datadog Tracing Library used by your application or service supports Software Composition Analysis capabilities for the language of your application or service. For more details, refer to the [Library Compatibility][5] page for each ASM product.
+1. **Supported Tracing Library:** The Datadog Tracing Library used by your application or service supports Software Composition Analysis capabilities for the language of your application or service.
+2. **Datadog Agent Installation:** The Datadog Agent is installed and configured for your application's operating system or container, cloud, or virtual environment.
+3. **Datadog APM Configuration:** Datadog APM is configured for your application or service, and web traces (`type:web`) are being received by Datadog.
+4. **Supported Tracing Library:** The Datadog Tracing Library used by your application or service supports Software Composition Analysis capabilities for the language of your application or service. For more details, refer to the [Library Compatibility][5] page for each ASM product.
 
 ## Software Composition Analysis enablement types
 
