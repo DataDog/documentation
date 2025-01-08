@@ -2077,6 +2077,12 @@ Enables collection of resource events.
 **Default**: `true` <br/>
 Enables collection of long task events.
 
+`trackAnonymousUser`
+: Optional<br/>
+**Type**: Boolean<br/>
+**Default**: `true` <br/>
+Enables collection of anonymous user id across sessions.
+
 `defaultPrivacyLevel`
 : Optional<br/>
 **Type**: String<br/>
