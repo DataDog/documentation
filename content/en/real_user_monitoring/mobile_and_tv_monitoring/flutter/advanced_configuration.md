@@ -135,7 +135,7 @@ The sampling rate for resource tracing. Must be between `0.0` (no resources incl
 `traceContextInjection`
 : Optional<br/>
 **Type**: Enum<br/>
-**Default**: `all`<br/>
+**Default**: `sampled`<br/>
 The strategy for injecting trace context into requests. Enum values can be `all` (inject trace context into all requests) or `sampled` (inject trace context into only sampled requests).
 
 `detectLongTasks`

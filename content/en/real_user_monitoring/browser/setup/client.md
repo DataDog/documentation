@@ -2062,19 +2062,19 @@ Allows you to control RUM views creation. See [override default RUM view names][
 `trackUserInteractions`
 : Optional<br/>
 **Type**: Boolean<br/>
-**Default**: `false` <br/>
+**Default**: `true` <br/>
 Enables [automatic collection of users actions][6].
 
 `trackResources`
 : Optional<br/>
 **Type**: Boolean<br/>
-**Default**: `false` <br/>
+**Default**: `true` <br/>
 Enables collection of resource events.
 
 `trackLongTasks`
 : Optional<br/>
 **Type**: Boolean<br/>
-**Default**: `false` <br/>
+**Default**: `true` <br/>
 Enables collection of long task events.
 
 `defaultPrivacyLevel`
@@ -2187,12 +2187,6 @@ Use a secure session cookie. This disables RUM events sent on insecure (non-HTTP
 **Type**: Boolean<br/>
 **Default**:`false`<br/>
 Use a partitioned secure cross-site session cookie. This allows the RUM Browser SDK to run when the site is loaded from another one (iframe). Implies `useSecureSessionCookie`.
-
-`useCrossSiteSessionCookie`
-: Optional - **Deprecated**<br/>
-**Type**: Boolean<br/>
-**Default**:`false`<br/>
-See `usePartitionedCrossSiteSessionCookie`.
 
 `allowFallbackToLocalStorage`
 : Optional<br/>
@@ -2360,12 +2354,6 @@ Use a secure session cookie. This disables events sent on insecure (non-HTTPS) c
 **Type**: Boolean<br/>
 **Default**:`false`<br/>
 Use a partitioned secure cross-site session cookie. This allows the Browser SDK to run when the site is loaded from another one (iframe). Implies `useSecureSessionCookie`.
-
-`useCrossSiteSessionCookie`
-: Optional - **Deprecated**<br/>
-**Type**: Boolean<br/>
-**Default**:`false`<br/>
-See `usePartitionedCrossSiteSessionCookie`.
 
 `allowFallbackToLocalStorage`
 : Optional<br/>
