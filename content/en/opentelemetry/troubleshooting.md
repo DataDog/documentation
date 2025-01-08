@@ -123,7 +123,7 @@ For more information, see [Mapping OpenTelemetry Semantic Conventions to Infrast
             statements:
               - set(attributes["datadog.host.name"], "shared-hostname")
     ```
-4. Validate in Datadog (Infrastructure List, Host Map, etc.) to confirm the host now appears under a single name.
+4. Validate in Datadog (Infrastructure List, host map, etc.) to confirm the host now appears under a single name.
 
 ## Host tag delays after startup
 
