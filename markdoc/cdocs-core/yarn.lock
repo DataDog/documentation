@@ -1438,6 +1438,43 @@ __metadata:
   languageName: node
   linkType: hard
 
+"cdocs-core@workspace:.":
+  version: 0.0.0-use.local
+  resolution: "cdocs-core@workspace:."
+  dependencies:
+    "@types/js-yaml": ^4.0.9
+    "@types/lodash": ^4.17.7
+    "@types/markdown-it": ^14.1.2
+    "@types/md5": ^2.3.5
+    "@types/node": ^20.11.30
+    "@types/react": ^18.3.3
+    "@types/react-dom": ^18.3.0
+    "@types/uuid": ^10.0.0
+    "@vitejs/plugin-react": ^4.3.3
+    "@vitest/coverage-v8": ^2.0.2
+    chroma-highlight: ^2.4.2
+    esbuild: 0.20.2
+    interweave: ^13.1.0
+    js-yaml: ^4.1.0
+    lit: ^3.1.4
+    markdoc-static-compiler: "file:../markdoc-static-compiler"
+    markdown-it: 12.3.2
+    markdown-it-deflist: ^3.0.0
+    md5: ^2.3.0
+    react: ^18.3.1
+    react-dom: ^18.3.1
+    rimraf: ^5.0.5
+    rollup: ^4.19.1
+    stringcase: ^4.3.1
+    typescript: ^5.4.3
+    uuid: ^10.0.0
+    vite: ^5.4.10
+    vite-plugin-singlefile: ^2.0.2
+    vitest: ^2.0.2
+    zod: ^3.22.4
+  languageName: unknown
+  linkType: soft
+
 "chai@npm:^5.1.2":
   version: 5.1.2
   resolution: "chai@npm:5.1.2"
@@ -2298,46 +2335,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"markdoc-hugo-integration@workspace:.":
-  version: 0.0.0-use.local
-  resolution: "markdoc-hugo-integration@workspace:."
-  dependencies:
-    "@types/js-yaml": ^4.0.9
-    "@types/lodash": ^4.17.7
-    "@types/markdown-it": ^14.1.2
-    "@types/md5": ^2.3.5
-    "@types/node": ^20.11.30
-    "@types/react": ^18.3.3
-    "@types/react-dom": ^18.3.0
-    "@types/uuid": ^10.0.0
-    "@vitejs/plugin-react": ^4.3.3
-    "@vitest/coverage-v8": ^2.0.2
-    chroma-highlight: ^2.4.2
-    esbuild: 0.20.2
-    interweave: ^13.1.0
-    js-yaml: ^4.1.0
-    lit: ^3.1.4
-    markdoc-static-compiler: "file:../markdoc-static-compiler"
-    markdown-it: 12.3.2
-    markdown-it-deflist: ^3.0.0
-    md5: ^2.3.0
-    react: ^18.3.1
-    react-dom: ^18.3.1
-    rimraf: ^5.0.5
-    rollup: ^4.19.1
-    stringcase: ^4.3.1
-    typescript: ^5.4.3
-    uuid: ^10.0.0
-    vite: ^5.4.10
-    vite-plugin-singlefile: ^2.0.2
-    vitest: ^2.0.2
-    zod: ^3.22.4
-  languageName: unknown
-  linkType: soft
-
-"markdoc-static-compiler@file:../markdoc-static-compiler::locator=markdoc-hugo-integration%40workspace%3A.":
+"markdoc-static-compiler@file:../markdoc-static-compiler::locator=cdocs-core%40workspace%3A.":
   version: 0.1.0
-  resolution: "markdoc-static-compiler@file:../markdoc-static-compiler#../markdoc-static-compiler::hash=d0fb0d&locator=markdoc-hugo-integration%40workspace%3A."
+  resolution: "markdoc-static-compiler@file:../markdoc-static-compiler#../markdoc-static-compiler::hash=d85440&locator=cdocs-core%40workspace%3A."
   dependencies:
     "@types/markdown-it": 12.2.3
     markdown-it-deflist: ^3.0.0
@@ -2345,7 +2345,7 @@ __metadata:
   dependenciesMeta:
     "@types/markdown-it":
       optional: true
-  checksum: 3c4253e2e5b8e5ff31ccdf77ff6fdb85e9edd355b3a5c32eeed64b137ee0a4fe677e526ff1066c8b0b2e2ce4d22d5a6f5645dcbd3bb6bfcfe4553d794490f0a3
+  checksum: cccb5746434737edecd106f81767067de849a9a02cc40fa547efcf9bff5ff00b0995943c0a703f98ebdfede3c02aca08712675f91418e17f0c1e210f528f6651
   languageName: node
   linkType: hard
 
