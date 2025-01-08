@@ -138,7 +138,7 @@ The setting applies to **all** Monitor alert notifications, as it's an org-wide 
 
 #### Max session duration configuration
 
-Users with the `Org Management` permission can set a maximum session duration for their organization. All **new sessions created after this update** follow to the configured duration, which applies to **all users**, regardless of their role in the organization. 
+Users with the `Org Management` permission can set a maximum session duration for their organization. All **new sessions created after this update** follow the configured duration, which applies to **all users**, regardless of their role in the organization. 
 
 The session duration can be configured within the following limits:
 
