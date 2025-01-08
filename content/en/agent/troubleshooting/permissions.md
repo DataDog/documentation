@@ -104,6 +104,10 @@ See the following GitHub issues for more information and other potential methods
 * https://github.com/DataDog/dd-agent/issues/853
 * https://github.com/DataDog/dd-agent/issues/2033
 
+## Permissions issues when running the Agent as a system daemon on MacOS
+
+If you installed the Agent as a system-wide LaunchDaemon using the `DD_SYSTEMDAEMON_INSTALL` and `DD_SYSTEMDAEMON_USER_GROUP` options, verify that the user and group you used for `DD_SYSTEMDAEMON_USER_GROUP` are valid and have the correct permissions.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
