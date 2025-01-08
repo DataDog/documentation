@@ -13,6 +13,9 @@ further_reading:
 - link: /monitors/manage/
   tag: Documentation
   text: モニターの管理
+- link: https://learn.datadoghq.com/courses/alert-monitor-notifications
+  tag: ラーニングセンター
+  text: アラートモニター通知をカスタマイズするコースを受講する
 title: 変数
 ---
 
@@ -28,9 +31,9 @@ title: 変数
 |----------------------------|--------------------------------------------------------------------|
 | `{{#is_alert}}`            | モニターがアラートする                                                 |
 | `{{^is_alert}}`            | モニターがアラートしない                                         |
-| `{{#is_match}}`            | コンテキストが指定された部分文字列と一致する                         |
+| `{{#is_match}}`            | コンテキストは指定されたサブストリングに一致します。数値が使用された場合、文字列に変換されます。|
 | `{{^is_match}}`            | コンテキストが指定された部分文字列と一致しない                  |
-| `{{#is_exact_match}}`      | コンテキストが指定された文字列と完全に一致する                    |
+| `{{#is_exact_match}}`      | コンテキストは指定された文字列と正確に一致します。<br>数値が使用された場合、その型に関係なく数値として扱われます。つまり、2 つの数値が同じ値である限り、この関数はそれらを等しいとみなします。 |
 | `{{^is_exact_match}}`      | コンテキストが指定された文字列と完全に一致しない             |
 | `{{#is_no_data}}`          | 不足しているデータに対してモニターがトリガーされる                          |
 | `{{^is_no_data}}`          | 不足しているデータに対してモニターがトリガーされない                      |
@@ -176,7 +179,7 @@ title: 変数
 {{/is_exact_match}}
 ```
 
-モニターのしきい値を突破した値が 5 であった場合に開発チームに通知するには、次のようにします。
+モニターで設定したしきい値を超過した値が 5 (または 5.0 ) の場合に、開発チームへ通知するには、以下を使用してください。
 
 ```text
 {{#is_exact_match "value" "5"}}
@@ -256,17 +259,6 @@ title: 変数
 
 {{< img src="monitors/notifications/multi_alert_variable.png" alt="マルチアラート変数の構文" style="width:90%;">}}
 
-#### ホストごとのクエリグループ
-
-モニターが各 `host` に対してアラートをトリガーする場合、タグ変数 `{{host.name}}` と `{{host.ip}}` 、およびこのホストで使用可能なホストタグを使用できます。タグの選択に基づいてタグ変数のリストを表示するには、**Say what's happening** セクションで **Use message template variables** をクリックします。
-
-いくつかの特定のホストメタデータ変数が利用可能です。
-
-- Agent Version: `{{host.metadata_agent_version}}`
-- Machine: `{{host.metadata_machine}}`
-- Platform: `{{host.metadata_platform}}`
-- Processor: `{{host.metadata_processor}}`
-
 #### ピリオドを含むタグキー
 
 タグのキーにピリオドが含まれている場合は、タグ変数を使用するときに、キー全体を角括弧で囲みます。
@@ -307,9 +299,58 @@ This alert was triggered on {{ @machine_id.name }}
 {{% /tab %}}
 {{< /tabs >}}
 
+#### 通知をグループごとにカスタマイズする
+
+クエリが特定のディメンションでグループ化されている場合、そのグループに関連する動的メタデータを活用して通知を拡充できます。
+
+##### ホストごとのクエリグループ
+
+モニターが各 `host` に対してアラートをトリガーする場合、タグ変数 `{{host.name}}` と `{{host.ip}}` 、およびこのホストで使用可能なホストタグを使用できます。タグの選択に基づいてタグ変数のリストを表示するには、**Say what's happening** セクションで **Use message template variables** をクリックします。
+
+特定のホストのメタデータ変数:
+
+- Agent Version: `{{host.metadata_agent_version}}`
+- Machine: `{{host.metadata_machine}}`
+- Platform: `{{host.metadata_platform}}`
+- Processor: `{{host.metadata_processor}}`
+
+##### クエリを kube_namespace および kube_cluster_name でグループ化する
+
+モニターが `kube_namespace` と `kube_cluster_name` ごとにアラートをトリガーする場合、ネームスペースの任意の属性にアクセスできます。
+
+ネームスペースのメタデータ変数:
+
+- クラスター名: `{{kube_namespace.cluster_name}}`
+- ネームスペース名: `{{kube_namespace.display_name}}`
+- ネームスペースのステータス: `{{kube_namespace.status}}`
+- ネームスペースのラベル: `{{kube_namespace.labels}}`
+
+以下の表には、利用可能なすべての属性が含まれています。
+
+| 変数構文   | 第 1 レベルの属性 |
+|-------------------|------------------------|
+| `{{kube_namespace.key}}`     | `k8s_namespace_key`、`tags`、`annotations`、`cluster_id`、`cluster_name`、`creation_timestamp`、`deletion_timestamp`、`display_name`、`external_id`、`finalizers`、`first_seen_at`、`group_size`、`labels`、`name`、`namespace`、`status`、`uid`|
+
+##### クエリを pod_name、kube_namespace、kube_cluster_name でグループ化する
+
+モニターが `pod_name`、`kube_namespace`、`kube_cluster_name` ごとにアラートを発生させる場合、ポッドの任意の属性にアクセスできます。
+
+ポッドのメタデータ変数:
+- クラスター名: `{{pod_name.cluster_name}}`
+- ポッド名: `{{pod_name.name}}`
+- ポッドのフェーズ: `{{pod_name.phase}}`
+
+以下の表には、利用可能なすべての属性が含まれています。
+
+| 変数構文   | 第 1 レベルの属性 |
+|-------------------|------------------------|
+| `{{pod_name.key}}`     | `k8s_pod_key`、`tags`、`annotations`、`cluster_id`、`cluster_name`、`conditions`、`container_statuses`、`creation_timestamp`、`deletion_timestamp`、`display_name`、`external_id`、`finalizers`、`first_seen_at`、`host_id`、`host_key`、`hostname`、`init_container_statuses`、`ip`、`labels`、`name`、`namespace`、`node_name`、`nominated_node_name`、`phase`、`pod_scheduled_timestamp`、`priority_class_name`、`qosclass`、`resource_requirements`、`uid`|
+
+
+
 ### 一致する属性/タグ変数
 
-_[ログモニター][2]、[トレース分析モニター][3] (APM)、[RUM モニター][4]、[CI モニター][5]、[Database Monitoring モニター][6]で使用できます。_
+これらは [Log モニター][2]、[Trace Analytics モニター][3] (APM)、[Error Tracking モニター][9]、[RUM モニター][4]、[CI モニター][5]、[Database Monitoring モニター][6]で利用できます。
 
 モニタークエリに一致するログ、トレーススパン、RUM イベント、CI パイプラインまたは CI テストイベントから**任意の**属性またはタグを含めるには、次の変数を使用します。
 
@@ -317,7 +358,7 @@ _[ログモニター][2]、[トレース分析モニター][3] (APM)、[RUM モ�
 |-----------------|--------------------------------------------------|
 | ログ             | `{{log.attributes.key}}` または `{{log.tags.key}}`   |
 | トレース分析 | `{{span.attributes.key}}` または `{{span.tags.key}}` |
-| Error Tracking  | トレース: `{{span.attributes.[error.message]}}`<br>RUM イベント: `{{rum.attributes.[error.message]}}`<br>ログ: `{{log.attributes.[error.message]}}`             |
+| Error Tracking  | `{{issue.attributes.key}}`                         |
 | RUM             | `{{rum.attributes.key}}` または `{{rum.tags.key}}`   |
 | Audit trail（監査証跡）     | `{{audit.attributes.key}}` または `{{audit.message}}`    |
 | CI Pipeline     | `{{cipipeline.attributes.key}}`                  |
@@ -465,6 +506,17 @@ _[ログモニター][2]、[トレース分析モニター][3] (APM)、[RUM モ�
 @slack-ad-server There is an ongoing issue with ad-server.
 ```
 
+常に存在するとは限らない属性を用いて動的ハンドルを構築する場合、通知の配信に問題が生じる可能性があります。属性が欠けている場合、その変数は通知メッセージ内で空としてレンダリングされ、無効なハンドルとなり得ます。
+
+これらの変数を用いた動的ハンドルで通知が失われないよう、フォールバックハンドルを必ず追加してください。
+
+```text
+{{#is_match "kube_namespace.owner" ""}}
+  @slack-example
+{{/is_match}}
+```
+
+
 ### ダイナミックリンク
 
 [タグ変数](#attribute-and-tag-variables)を使用して、チームを適切なリソースにリンクする動的 URL 構築を有効にします。たとえば、ダッシュボード、ホストマップ、モニターなどの Datadog 内のページへのリンクを提供できます。
@@ -609,3 +661,4 @@ https://app.datadoghq.com/services/{{urlencode "service.name"}}
 [6]: /ja/monitors/types/database_monitoring/
 [7]: /ja/monitors/guide/template-variable-evaluation/
 [8]: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+[9]: /ja/monitors/types/error_tracking/
