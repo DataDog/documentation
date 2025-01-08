@@ -19,11 +19,11 @@ This guide is for [dbt-core][2] pipelines.
 
 Follow these steps to enable dbt traces:
 
-1. Install `openlineage` provider by adding the following into your `requirements.txt`.
+1. Install the `openlineage` provider by adding the following into your `requirements.txt`.
     ```text
     openlineage-dbt>=1.26.0
     ```
-2. Configure `openlineage` provider. The simplest option is to set the following environment variables:
+2. Configure the `openlineage` provider. The simplest option is to set the following environment variables:
     ```shell
     export OPENLINEAGE_URL=<DD_DATA_OBSERVABILITY_INTAKE>
     export OPENLINEAGE_API_KEY=<DD_API_KEY>
@@ -36,14 +36,14 @@ Follow these steps to enable dbt traces:
 
 **Optional**
 
-1. Setup `OPENLINEAGE_DBT_LOGGING` environment variable, you can establish the logging level for the `openlineage.dbt` and its child modules.
+1. Set up the `OPENLINEAGE_DBT_LOGGING` environment variable. This will establish the logging level for the `openlineage.dbt` and its child modules.
 
 Check official documentation ([python client][6] and [dbt integration][7]) for other supported configurations of OpenLineage.
 
 ## Validation
 
-In your setup you can run the following `dbt-ol` command to see traces in Datadog.
-Say you are using the [jaffle-shop][8] project.
+In your setup, you can run the following `dbt-ol` command to see traces in Datadog.
+For example, if you are using the [jaffle-shop][8] project:
 
 ```shell
 dbt-ol run --select orders
@@ -72,7 +72,7 @@ This wrapper will send OpenLineage events ...
 Emitted XX OpenLineage events
 ```
 
-## Further Readings
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
