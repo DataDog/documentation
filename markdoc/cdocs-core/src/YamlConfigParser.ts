@@ -3,13 +3,13 @@ import {
   FilterOptionsConfigSchema,
   RawFilterOptionsConfig,
   RawFilterOptionsConfigSchema
-} from '../schemas/yaml/filterOptions';
+} from './schemas/yaml/filterOptions';
 import { FileNavigator } from './FileNavigator';
 import {
   Glossary,
   GlossaryConfigSchema,
   GlossaryEntryConfig
-} from '../schemas/yaml/glossary';
+} from './schemas/yaml/glossary';
 import fs from 'fs';
 import yaml from 'js-yaml';
 

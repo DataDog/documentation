@@ -4,7 +4,7 @@ import {
   SNAPSHOTS_DIR,
   MOCKS_DIR
 } from '../../config/constants';
-import { YamlConfigParser } from '../../../src/helperModules/YamlConfigParser';
+import { YamlConfigParser } from '../../../src/YamlConfigParser';
 import fs from 'fs';
 
 const INVALID_FILTER_MOCKS_DIR = `${MOCKS_DIR}/invalid/filtersConfigDirs`;

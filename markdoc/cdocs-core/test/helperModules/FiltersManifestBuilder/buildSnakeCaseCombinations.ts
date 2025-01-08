@@ -1,5 +1,5 @@
 import { describe, test, expect } from 'vitest';
-import { FiltersManifestBuilder } from '../../../src/helperModules/FiltersManifestBuilder';
+import { FiltersManifestBuilder } from '../../../src/FiltersManifestBuilder';
 
 describe('FiltersManifestBuilder.buildSnakeCaseCombinations', () => {
   test('returns all possible options source names', () => {

@@ -1,5 +1,5 @@
 import { describe, test, expect } from 'vitest';
-import { FiltersManifestBuilder } from '../../../src/helperModules/FiltersManifestBuilder';
+import { FiltersManifestBuilder } from '../../../src/FiltersManifestBuilder';
 import {
   paintColorsFrontmatter,
   paintColorsFilterOptionsConfig,

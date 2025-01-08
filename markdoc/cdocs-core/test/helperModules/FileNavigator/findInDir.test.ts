@@ -1,4 +1,4 @@
-import { FileNavigator } from '../../../src/helperModules/FileNavigator';
+import { FileNavigator } from '../../../src/FileNavigator';
 import { describe, test, expect } from 'vitest';
 import { VALID_CONTENT_DIR, SNAPSHOTS_DIR } from '../../config/constants';
 

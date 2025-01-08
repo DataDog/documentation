@@ -9,21 +9,20 @@
  * - Replace a previously chosen value with the default value
  *   if the chosen value is not valid.
  *
- * Organized as isolated functions to control bundle size.
- * This code must run on both the server and the client.
- * It cannot contain or import anything containing features unique to Node
- * (for example, file system access), or esbuild will fail to bundle it
- * for the client.
+ * Organized as isolated functions to control bundle size,
+ * since this code must run in the browser to support precompiled pages.
+ * It should not use Node features / backend logic
+ * (for example, file system access).
  */
 
-import { GLOBAL_PLACEHOLDER_REGEX } from '../schemas/regexes';
+import { GLOBAL_PLACEHOLDER_REGEX } from './schemas/regexes';
 import {
   ResolvedPageFilters,
   ResolvedPageFilter,
   PageFiltersManifest,
   PageFiltersClientSideManifest
-} from '../schemas/pageFilters';
-import { PageFilterConfig } from '../schemas/yaml/frontMatter';
+} from './schemas/pageFilters';
+import { PageFilterConfig } from './schemas/yaml/frontMatter';
 
 /**
  * Resolve the page filters object that is used

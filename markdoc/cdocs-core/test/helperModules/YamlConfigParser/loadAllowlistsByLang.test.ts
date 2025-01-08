@@ -1,5 +1,5 @@
 import { describe, test, expect } from 'vitest';
-import { YamlConfigParser } from '../../../src/helperModules/YamlConfigParser';
+import { YamlConfigParser } from '../../../src/YamlConfigParser';
 import { SNAPSHOTS_DIR } from '../../config/constants';
 import { VALID_FILTERS_CONFIG_DIR } from '../../config/constants';
 

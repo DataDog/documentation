@@ -1,14 +1,14 @@
-import { FilterOptionsConfig } from '../schemas/yaml/filterOptions';
-import { GLOBAL_PLACEHOLDER_REGEX } from '../schemas/regexes';
-import { Frontmatter } from '../schemas/yaml/frontMatter';
-import { Glossary } from '../schemas/yaml/glossary';
-import { PLACEHOLDER_REGEX } from '../schemas/regexes';
+import { FilterOptionsConfig } from './schemas/yaml/filterOptions';
+import { GLOBAL_PLACEHOLDER_REGEX } from './schemas/regexes';
+import { Frontmatter } from './schemas/yaml/frontMatter';
+import { Glossary } from './schemas/yaml/glossary';
+import { PLACEHOLDER_REGEX } from './schemas/regexes';
 import {
   PageFiltersManifest,
   PageFiltersClientSideManifest
-} from '../schemas/pageFilters';
-import { PageFilterConfig } from '../schemas/yaml/frontMatter';
-import { CdocsCoreError } from '../schemas/errors';
+} from './schemas/pageFilters';
+import { PageFilterConfig } from './schemas/yaml/frontMatter';
+import { CdocsCoreError } from './schemas/errors';
 
 /**
  * A module responsible for combining ingested configuration data
