@@ -1,7 +1,13 @@
 ---
 title: Governance
 description: Learn how to create infrastructure governance policies in Resource Catalog.
-
+further_reading:
+  - link: "/infrastructure/resource_catalog/"
+    tag: "Documentation"
+    text: "Datadog Resource Catalog"
+  - link: "https://www.datadoghq.com/blog/datadog-resource-catalog/"
+    tag: "Blog"
+    text: "Govern your infrastructure resources with the Datadog Resource Catalog"
 ---
 
 {{< callout url="https://www.datadoghq.com/product-preview/infra-governance-policies/" btn_hidden="false" header="Join the Preview!">}}
