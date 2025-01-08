@@ -1,8 +1,4 @@
 {
-  "ListAwsScanOptions": {
-    "description": "Fetches the scan options configured for AWS accounts.",
-    "summary": "Get AWS Scan Options"
-  },
   "ListAPIKeys": {
     "description": "List all API keys available for your account.",
     "summary": "Get all API keys"

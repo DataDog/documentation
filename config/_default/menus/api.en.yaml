@@ -4540,22 +4540,6 @@ menu:
           - ListApmRetentionFilters
         unstable: []
         order: 1
-    - name: Agentless Scanning
-      url: /api/latest/agentless-scanning/
-      identifier: agentless-scanning
-      generated: true
-    - name: Get AWS Scan Options
-      url: '#get-aws-scan-options'
-      identifier: agentless-scanning-get-aws-scan-options
-      parent: agentless-scanning
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - ListAwsScanOptions
-        unstable: []
-        order: 3
     - name: Audit
       url: /api/latest/audit/
       identifier: audit

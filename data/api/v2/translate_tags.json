@@ -15,10 +15,6 @@
     "name": "AWS Logs Integration",
     "description": "Configure your Datadog-AWS-Logs integration directly through Datadog API.\nFor more information, see the [AWS integration page](https://docs.datadoghq.com/integrations/amazon_web_services/#log-collection)."
   },
-  "agentless-scanning": {
-    "name": "Agentless Scanning",
-    "description": "Datadog Agentless Scanning provides visibility into risks and vulnerabilities\nwithin your hosts, running containers, and serverless functions—all without\nrequiring teams to install Agents on every host or where Agents cannot be installed.\nGo to https://www.datadoghq.com/blog/agentless-scanning/ to learn more"
-  },
   "audit": {
     "name": "Audit",
     "description": "Search your Audit Logs events over HTTP."
