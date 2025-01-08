@@ -1,5 +1,5 @@
 import { describe, test, expect } from 'vitest';
-import { YamlConfigParser } from '../../../src/YamlConfigParser';
+import { YamlConfigParser } from '../../../src/modules/YamlConfigParser';
 import _ from 'lodash';
 import { SNAPSHOTS_DIR } from '../../config/constants';
 import { VALID_FILTERS_CONFIG_DIR } from '../../config/constants';
@@ -14,100 +14,100 @@ describe('YamlConfigParser.loadGlossaryFromLangDir', () => {
       filtersById: {
         color: {
           id: 'color',
-          display_name: 'Color'
+          display_name: 'Color',
         },
         item: {
           id: 'item',
-          display_name: 'Item'
-        }
+          display_name: 'Item',
+        },
       },
       optionsById: {
         red: {
           id: 'red',
-          display_name: 'Red'
+          display_name: 'Red',
         },
         blue: {
           id: 'blue',
-          display_name: 'Blue'
+          display_name: 'Blue',
         },
         yellow: {
           id: 'yellow',
-          display_name: 'Yellow'
+          display_name: 'Yellow',
         },
         green: {
           id: 'green',
-          display_name: 'Green'
+          display_name: 'Green',
         },
         ocean: {
           id: 'ocean',
-          display_name: 'Ocean'
+          display_name: 'Ocean',
         },
         sky: {
           id: 'sky',
-          display_name: 'Sky'
+          display_name: 'Sky',
         },
         jeans: {
           id: 'jeans',
-          display_name: 'Jeans'
+          display_name: 'Jeans',
         },
         blueberry: {
           id: 'blueberry',
-          display_name: 'Blueberry'
+          display_name: 'Blueberry',
         },
         grass: {
           id: 'grass',
-          display_name: 'Grass'
+          display_name: 'Grass',
         },
         emerald: {
           id: 'emerald',
-          display_name: 'Emerald'
+          display_name: 'Emerald',
         },
         lime: {
           id: 'lime',
-          display_name: 'Lime'
+          display_name: 'Lime',
         },
         frog: {
           id: 'frog',
-          display_name: 'Frog'
+          display_name: 'Frog',
         },
         ruby: {
           id: 'ruby',
-          display_name: 'Ruby'
+          display_name: 'Ruby',
         },
         apple: {
           id: 'apple',
-          display_name: 'Apple'
+          display_name: 'Apple',
         },
         firetruck: {
           id: 'firetruck',
-          display_name: 'Firetruck'
+          display_name: 'Firetruck',
         },
         stop_sign: {
           id: 'stop_sign',
-          display_name: 'Stop sign'
+          display_name: 'Stop sign',
         },
         banana: {
           id: 'banana',
-          display_name: 'Banana'
+          display_name: 'Banana',
         },
         sunflower: {
           id: 'sunflower',
-          display_name: 'Sunflower'
+          display_name: 'Sunflower',
         },
         lemon: {
           id: 'lemon',
-          display_name: 'Lemon'
+          display_name: 'Lemon',
         },
         school_bus: {
           id: 'school_bus',
-          display_name: 'School bus'
-        }
-      }
+          display_name: 'School bus',
+        },
+      },
     };
 
     expect(_.isEqual(glossary, expectedGlossary)).toBe(true);
     await expect(glossary).toMatchFileSnapshot(
-      `${SNAPSHOTS_DIR}/helperModules/YamlConfigParser/valid/glossary.snap.json`
+      `${SNAPSHOTS_DIR}/helperModules/YamlConfigParser/valid/glossary.snap.json`,
     );
   });
 });

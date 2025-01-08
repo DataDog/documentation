@@ -1,5 +1,5 @@
 import { describe, test, expect } from 'vitest';
-import { YamlConfigParser } from '../../../src/YamlConfigParser';
+import { YamlConfigParser } from '../../../src/modules/YamlConfigParser';
 import { SNAPSHOTS_DIR } from '../../config/constants';
 import { VALID_FILTERS_CONFIG_DIR } from '../../config/constants';
 
@@ -9,11 +9,11 @@ describe('YamlConfigParser.loadGlossariesByLang', () => {
   test('matches the snapshot', async () => {
     const glossariesByLang = YamlConfigParser.loadGlossariesByLang({
       langs,
-      filtersConfigDir: VALID_FILTERS_CONFIG_DIR
+      filtersConfigDir: VALID_FILTERS_CONFIG_DIR,
     });
 
     await expect(glossariesByLang).toMatchFileSnapshot(
-      `${SNAPSHOTS_DIR}/helperModules/YamlConfigParser/valid/glossariesByLang.test.snap`
+      `${SNAPSHOTS_DIR}/helperModules/YamlConfigParser/valid/glossariesByLang.test.snap`,
     );
   });
 });

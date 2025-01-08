@@ -2,9 +2,9 @@ import { describe, test, expect } from 'vitest';
 import {
   VALID_FILTERS_CONFIG_DIR,
   SNAPSHOTS_DIR,
-  MOCKS_DIR
+  MOCKS_DIR,
 } from '../../config/constants';
-import { YamlConfigParser } from '../../../src/YamlConfigParser';
+import { YamlConfigParser } from '../../../src/modules/YamlConfigParser';
 import fs from 'fs';
 
 const INVALID_FILTER_MOCKS_DIR = `${MOCKS_DIR}/invalid/filtersConfigDirs`;
@@ -15,10 +15,10 @@ describe('YamlConfigParser', () => {
     const glossary = YamlConfigParser.loadGlossaryFromLangDir(LANG_DIR);
     const filterOptionsConfig = YamlConfigParser.loadFiltersConfigFromLangDir({
       dir: LANG_DIR,
-      glossary
+      glossary,
     });
     await expect(JSON.stringify(filterOptionsConfig, null, 2)).toMatchFileSnapshot(
-      `${SNAPSHOTS_DIR}/helperModules/YamlConfigParser/valid/ingestedFilterOptions.snap.json`
+      `${SNAPSHOTS_DIR}/helperModules/YamlConfigParser/valid/ingestedFilterOptions.snap.json`,
     );
   });
 
@@ -30,7 +30,7 @@ describe('YamlConfigParser', () => {
         const glossary = YamlConfigParser.loadGlossaryFromLangDir(invalidDir);
         YamlConfigParser.loadFiltersConfigFromLangDir({
           dir: `${INVALID_FILTER_MOCKS_DIR}/${invalidDir}`,
-          glossary
+          glossary,
         });
       }).toThrow();
     });
@@ -40,12 +40,12 @@ describe('YamlConfigParser', () => {
         const glossary = YamlConfigParser.loadGlossaryFromLangDir(invalidDir);
         YamlConfigParser.loadFiltersConfigFromLangDir({
           dir: `${INVALID_FILTER_MOCKS_DIR}/${invalidDir}`,
-          glossary
+          glossary,
         });
       } catch (error) {
         const sanitizedErrorMessage = error.message.replace(INVALID_FILTER_MOCKS_DIR, '');
         await expect(sanitizedErrorMessage).toMatchFileSnapshot(
-          `${SNAPSHOTS_DIR}/helperModules/YamlConfigParser/invalid/ingestedFiltersConfig/${invalidDir}.snap.txt`
+          `${SNAPSHOTS_DIR}/helperModules/YamlConfigParser/invalid/ingestedFiltersConfig/${invalidDir}.snap.txt`,
         );
       }
     });

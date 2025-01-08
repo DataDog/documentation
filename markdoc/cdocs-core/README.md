@@ -29,7 +29,7 @@ The name of each filter (such as "Favorite color") and the options for the filte
 Key concepts:
 
 - **Filters and their options are defined at the site level, not the page level.**
-- **A page's configuration doesn't create any new filters** -- it just reuses filters and options that already exist in the site configuration.
+- **A page's configuration doesn't create any new filters** -- it just reuses filters and options that already exist in the site configuration. A *page filter* is just a sitewide content filter whose options have been configured to match the context of the page.
 - **A filter can (and usually does) have more than one set of options.** For example, two different pages can have the same `host` filter, but offer different host options based on the page's context. This package includes utility functions to facilitate graceful transitions between pages that use different options for the same filter.
 
 ### Site configuration scope
