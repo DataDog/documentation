@@ -3,6 +3,7 @@ title: Kubernetes Basic Agent Usage in Agent v5
 private: true
 aliases:
   - /agent/faq/agent-5-kubernetes-basic-agent-usage
+private: true
 ---
 
 {{< img src="integrations/kubernetes/k8sdashboard.png" alt="Kubernetes Dashboard" >}}

@@ -1,7 +1,7 @@
 ---
 assets:
   dashboards:
-    Nvidia Jetson: assets/dashboards/nvidia_jetson.json
+    NVIDIA Jetson: assets/dashboards/nvidia_jetson.json
   logs: {}
   metrics_metadata: metadata.csv
   monitors: {}
@@ -13,12 +13,12 @@ creates_events: false
 ddtype: check
 dependencies:
   - https://github.com/DataDog/integrations-core/blob/master/nvidia_jetson/README.md
-display_name: Nvidia Jetson
+display_name: NVIDIA Jetson
 draft: false
 git_integration_title: nvidia_jetson
 guid: 72845bb7-c3a6-4017-96f6-c232171102f8
 integration_id: nvidia-jetson
-integration_title: Nvidia Jetson
+integration_title: NVIDIA Jetson
 integration_version: ''
 is_public: true
 custom_kind: integration
@@ -27,22 +27,22 @@ manifest_version: 1.0.0
 metric_prefix: nvidia.jetson.
 metric_to_check: nvidia.jetson.mem.used
 name: nvidia_jetson
-public_title: Nvidia Jetson
-short_description: "Obtenir des métriques à propos de votre carte Nvidia\_Jetson"
+public_title: NVIDIA Jetson
+short_description: "Obtenir des métriques à propos de votre carte NVIDIA\_Jetson"
 support: core
 supported_os:
   - linux
 ---
 ## Présentation
 
-Ce check permet de surveiller une carte [Nvidia Jetson][1].
+Ce check permet de surveiller une carte [NVIDIA Jetson][1].
 Il transmet les métriques recueillies à partir de `tegrastats`.
 
 ## Configuration
 
 ### Installation
 
-Le check Nvidia Jetson est inclus avec le package de l'[Agent Datadog][2].
+Le check NVIDIA Jetson est inclus avec le package de l'[Agent Datadog][2].
 Vous n'avez donc rien d'autre à installer sur votre serveur.
 
 ### Configuration
@@ -63,7 +63,7 @@ Lancez la [sous-commande status de l'Agent][5] et cherchez `jetson` dans la sect
 {{< get-metrics-from-git "nvidia_jetson" >}}
 
 
-Certaines métriques sont uniquement transmises lorsque `use_sudo` est défini sur true : 
+Certaines métriques sont uniquement transmises lorsque `use_sudo` est défini sur true :
 - `nvidia.jetson.iram.used`
 - `nvidia.jetson.iram.total`
 - `nvidia.jetson.iram.lfb`
@@ -73,11 +73,11 @@ Certaines métriques sont uniquement transmises lorsque `use_sudo` est défini s
 
 ### Checks de service
 
-L'intégration Nvidia Jetson n'inclut aucun check de service.
+L'intégration NVIDIA Jetson n'inclut aucun check de service.
 
 ### Événements
 
-L'intégration Nvidia Jetson n'inclut aucun événement.
+L'intégration NVIDIA Jetson n'inclut aucun événement.
 
 ## Dépannage
 

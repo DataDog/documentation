@@ -87,6 +87,14 @@ The test framework compatibility is the same as [Test Optimization Compatibility
 
 {{% /tab %}}
 
+{{% tab "Python" %}}
+
+<div class="alert alert-info">Early Flake Detection is available using the beta of the new pytest plugin. Set the <code>DD_PYTEST_USE_NEW_PLUGIN_BETA</code> environment variable to <code>true</code> to enable it.</div>
+
+`dd-trace-py>=2.18.0` (`pytest>=7.2.0`)
+
+{{% /tab %}}
+
 {{% tab "Ruby" %}}
 
 `datadog-ci-rb>=1.5.0`
@@ -98,6 +106,12 @@ The test framework compatibility is the same as [Test Optimization Compatibility
 <div class="alert alert-info">Test optimization for Go is in Preview.</div>
 
 `orchestrion >= 0.9.4 + dd-trace-go >= 1.69.1`
+
+{{% /tab %}}
+
+{{% tab "Swift" %}}
+
+`dd-sdk-swift-testing>=2.5.2`
 
 {{% /tab %}}
 

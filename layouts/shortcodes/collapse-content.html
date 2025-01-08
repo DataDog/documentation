@@ -1,6 +1,7 @@
 {{- $headingLevel := default "h3" (.Get "level") -}}
-<details class="collapsible-section">
-  <summary class="collapsible-header" tabindex="0" aria-expanded="false">
+{{- $isExpanded := default false (.Get "expanded") -}}
+<details class="collapsible-section" {{ if $isExpanded }}open{{ end }}>
+  <summary class="collapsible-header" tabindex="0" aria-expanded="{{ $isExpanded }}">
     <div class="header-content">
       <div class="header-icon">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="icon-chevron-right">
