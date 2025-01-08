@@ -114,7 +114,7 @@ To disable Flex Logs:
 
 1. Remove Flex Storage from each index where Flex Logs is enabled.
 1. Navigate back to the [Flex Logs Control][5] page.
-1. Click **Disable Flex Logs**.
+1. Click the gear icon and select **Disable Flex Logs**.
 
 ## Upgrade and downgrade Flex Logs compute
 
@@ -206,7 +206,7 @@ The following list is an example of log sources that are good candidates for sen
 
 ### Flex Logs for multiple-organization accounts
 
-For each organization in which you want Flex Logs, you must enable a compute size per organization. Compute sizes cannot be shared across organizations.
+For each organization in which you want Flex Logs, you must enable a compute size per organization. Compute is one per organization, compute sizes cannot be shared across organizations. Starter and scalable compute cannot be used simultaneously in an organization.
 
 Datadog generally recommends Flex Logs scalable compute sizes (XS, S, M, and L) for organizations with large log volumes. In a multi-organization setup, there are often many organizations with lower log volumes, so for these organizations, Datadog recommends the Starter compute size for Flex Logs.
 
