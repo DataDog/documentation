@@ -74,12 +74,11 @@ Pipelines appear immediately after enabling CI Visibility for any account or rep
 
 ### Disable GitHub Actions tracing
 
-To disable the CI Visibility GitHub Actions integration, make sure the GitHub app is no longer subscribed to the
-workflow job and workflow run events. To remove the events:
+To disable the CI Visibility GitHub Actions integration:
 
-1. Go to the [GitHub Apps][14] page.
-2. Click **Edit > Permission & events** on the relevant Datadog GitHub App (if you have multiple apps, you have to repeat the process for each).
-3. Scroll to the **Subscribe to events** section, and make sure that **Workflow job** and **Workflow run** are not selected.
+1. Go to the [CI GitHub Settings][14] page.
+2. Choose the GitHub account that you want to disable CI Visibility for, and click on **Edit**.
+3. Untoggle **Enable CI Visibility**, or choose which repository you want to disable it for individually.
 
 ### Collect job logs
 
@@ -125,7 +124,7 @@ The **CI Pipeline List** page shows data for only the default branch of each rep
 [11]: https://docs.github.com/developers/apps/getting-started-with-apps/about-apps
 [12]: https://app.datadoghq.com/integrations/github/
 [13]: https://app.datadoghq.com/ci/setup/pipeline?provider=github
-[14]: https://github.com/settings/apps
+[14]: https://app.datadoghq.com/ci/settings/provider
 [15]: /logs/
 [16]: /logs/guide/best-practices-for-log-management/
 [17]: https://app.datadoghq.com/ci/pipelines
