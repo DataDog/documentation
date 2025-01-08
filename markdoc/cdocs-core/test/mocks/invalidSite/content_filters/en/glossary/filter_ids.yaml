@@ -1,0 +1,5 @@
+allowed:
+- id: color
+  display_name: Color
+- id: item
+  display_name: Item

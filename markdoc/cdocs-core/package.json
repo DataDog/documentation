@@ -1,0 +1,47 @@
+{
+    "name": "cdocs-core",
+    "version": "1.0.0",
+    "description": "Types and utilities for configuring, validating, and building customizable documentation",
+    "scripts": {
+        "test": "yarn build; vitest run --coverage --reporter=verbose",
+        "test:watch": "yarn build; vitest",
+        "build": "rimraf ./dist && npx tsc"
+    },
+    "engines": {
+        "node": ">= 20.11.0"
+    },
+    "dependencies": {
+        "@types/markdown-it": "^14.1.2",
+        "@vitejs/plugin-react": "^4.3.3",
+        "chroma-highlight": "^2.4.2",
+        "interweave": "^13.1.0",
+        "js-yaml": "^4.1.0",
+        "lit": "^3.1.4",
+        "markdoc-static-compiler": "file:../markdoc-static-compiler",
+        "markdown-it": "12.3.2",
+        "markdown-it-deflist": "^3.0.0",
+        "md5": "^2.3.0",
+        "react": "^18.3.1",
+        "react-dom": "^18.3.1",
+        "rimraf": "^5.0.5",
+        "rollup": "^4.19.1",
+        "stringcase": "^4.3.1",
+        "uuid": "^10.0.0",
+        "vite": "^5.4.10",
+        "vite-plugin-singlefile": "^2.0.2",
+        "zod": "^3.22.4"
+    },
+    "devDependencies": {
+        "@types/js-yaml": "^4.0.9",
+        "@types/lodash": "^4.17.7",
+        "@types/md5": "^2.3.5",
+        "@types/node": "^20.11.30",
+        "@types/react": "^18.3.3",
+        "@types/react-dom": "^18.3.0",
+        "@types/uuid": "^10.0.0",
+        "@vitest/coverage-v8": "^2.0.2",
+        "esbuild": "0.20.2",
+        "typescript": "^5.4.3",
+        "vitest": "^2.0.2"
+    }
+}

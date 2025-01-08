@@ -1,0 +1,8 @@
+red_item_options:
+  - id: ruby
+  - id: apple
+    default: true
+  - id: firetruck
+    # test of individual display name overrides
+    display_name: "Ja firetruck"
+  - id: stop_sign

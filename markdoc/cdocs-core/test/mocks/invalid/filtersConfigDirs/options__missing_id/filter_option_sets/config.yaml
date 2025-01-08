@@ -1,0 +1,17 @@
+# This options set is missing the ID for red
+primary_color_options:
+  - display_name: Red
+  - display_name: Yellow
+    id: yellow
+  - display_name: Blue
+    id: blue
+    default: true
+
+traffic_light_color_options:
+  - display_name: Red
+    id: red
+  - display_name: Yellow
+    id: yellow
+  - display_name: Green
+    id: green
+    default: true

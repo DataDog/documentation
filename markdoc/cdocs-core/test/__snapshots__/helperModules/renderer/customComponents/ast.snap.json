@@ -1,0 +1,504 @@
+{
+  "$$mdtype": "Node",
+  "errors": [],
+  "lines": [],
+  "inline": false,
+  "attributes": {},
+  "children": [
+    {
+      "$$mdtype": "Node",
+      "errors": [],
+      "lines": [
+        0,
+        1
+      ],
+      "inline": false,
+      "attributes": {
+        "level": 1
+      },
+      "children": [
+        {
+          "$$mdtype": "Node",
+          "errors": [],
+          "lines": [
+            0,
+            1
+          ],
+          "inline": false,
+          "attributes": {},
+          "children": [
+            {
+              "$$mdtype": "Node",
+              "errors": [],
+              "lines": [
+                0,
+                1
+              ],
+              "inline": true,
+              "attributes": {
+                "content": "Custom components test"
+              },
+              "children": [],
+              "type": "text",
+              "annotations": [],
+              "slots": {},
+              "location": {
+                "start": {
+                  "line": 0
+                },
+                "end": {
+                  "line": 1
+                }
+              }
+            }
+          ],
+          "type": "inline",
+          "annotations": [],
+          "slots": {},
+          "location": {
+            "start": {
+              "line": 0
+            },
+            "end": {
+              "line": 1
+            }
+          }
+        }
+      ],
+      "type": "heading",
+      "annotations": [],
+      "slots": {},
+      "location": {
+        "start": {
+          "line": 0
+        },
+        "end": {
+          "line": 1
+        }
+      }
+    },
+    {
+      "$$mdtype": "Node",
+      "errors": [],
+      "lines": [
+        2,
+        3
+      ],
+      "inline": false,
+      "attributes": {},
+      "children": [
+        {
+          "$$mdtype": "Node",
+          "errors": [],
+          "lines": [
+            2,
+            3
+          ],
+          "inline": false,
+          "attributes": {},
+          "children": [
+            {
+              "$$mdtype": "Node",
+              "errors": [],
+              "lines": [
+                2,
+                3
+              ],
+              "inline": true,
+              "attributes": {
+                "content": "A check to determine if the custom components are working correctly."
+              },
+              "children": [],
+              "type": "text",
+              "annotations": [],
+              "slots": {},
+              "location": {
+                "start": {
+                  "line": 2
+                },
+                "end": {
+                  "line": 3
+                }
+              }
+            }
+          ],
+          "type": "inline",
+          "annotations": [],
+          "slots": {},
+          "location": {
+            "start": {
+              "line": 2
+            },
+            "end": {
+              "line": 3
+            }
+          }
+        }
+      ],
+      "type": "paragraph",
+      "annotations": [],
+      "slots": {},
+      "location": {
+        "start": {
+          "line": 2
+        },
+        "end": {
+          "line": 3
+        }
+      }
+    },
+    {
+      "$$mdtype": "Node",
+      "errors": [],
+      "lines": [
+        5,
+        6
+      ],
+      "inline": false,
+      "attributes": {
+        "level": 2
+      },
+      "children": [
+        {
+          "$$mdtype": "Node",
+          "errors": [],
+          "lines": [
+            5,
+            6
+          ],
+          "inline": false,
+          "attributes": {},
+          "children": [
+            {
+              "$$mdtype": "Node",
+              "errors": [],
+              "lines": [
+                5,
+                6
+              ],
+              "inline": true,
+              "attributes": {
+                "content": "Alert"
+              },
+              "children": [],
+              "type": "text",
+              "annotations": [],
+              "slots": {},
+              "location": {
+                "start": {
+                  "line": 5
+                },
+                "end": {
+                  "line": 6
+                }
+              }
+            }
+          ],
+          "type": "inline",
+          "annotations": [],
+          "slots": {},
+          "location": {
+            "start": {
+              "line": 5
+            },
+            "end": {
+              "line": 6
+            }
+          }
+        }
+      ],
+      "type": "heading",
+      "annotations": [],
+      "slots": {},
+      "location": {
+        "start": {
+          "line": 5
+        },
+        "end": {
+          "line": 6
+        }
+      }
+    },
+    {
+      "$$mdtype": "Node",
+      "errors": [],
+      "lines": [
+        7,
+        8,
+        9,
+        10
+      ],
+      "inline": false,
+      "attributes": {
+        "level": "info"
+      },
+      "children": [
+        {
+          "$$mdtype": "Node",
+          "errors": [],
+          "lines": [
+            8,
+            9
+          ],
+          "inline": false,
+          "attributes": {},
+          "children": [
+            {
+              "$$mdtype": "Node",
+              "errors": [],
+              "lines": [
+                8,
+                9
+              ],
+              "inline": false,
+              "attributes": {},
+              "children": [
+                {
+                  "$$mdtype": "Node",
+                  "errors": [],
+                  "lines": [
+                    8,
+                    9
+                  ],
+                  "inline": true,
+                  "attributes": {
+                    "content": "This is an info alert!"
+                  },
+                  "children": [],
+                  "type": "text",
+                  "annotations": [],
+                  "slots": {},
+                  "location": {
+                    "start": {
+                      "line": 8
+                    },
+                    "end": {
+                      "line": 9
+                    }
+                  }
+                }
+              ],
+              "type": "inline",
+              "annotations": [],
+              "slots": {},
+              "location": {
+                "start": {
+                  "line": 8
+                },
+                "end": {
+                  "line": 9
+                }
+              }
+            }
+          ],
+          "type": "paragraph",
+          "annotations": [],
+          "slots": {},
+          "location": {
+            "start": {
+              "line": 8
+            },
+            "end": {
+              "line": 9
+            }
+          }
+        }
+      ],
+      "type": "tag",
+      "tag": "alert",
+      "annotations": [
+        {
+          "type": "attribute",
+          "name": "level",
+          "value": "info"
+        }
+      ],
+      "slots": {},
+      "location": {
+        "start": {
+          "line": 7
+        },
+        "end": {
+          "line": 8
+        }
+      }
+    },
+    {
+      "$$mdtype": "Node",
+      "errors": [],
+      "lines": [
+        11,
+        12,
+        13,
+        14
+      ],
+      "inline": false,
+      "attributes": {
+        "level": "warning"
+      },
+      "children": [
+        {
+          "$$mdtype": "Node",
+          "errors": [],
+          "lines": [
+            12,
+            13
+          ],
+          "inline": false,
+          "attributes": {},
+          "children": [
+            {
+              "$$mdtype": "Node",
+              "errors": [],
+              "lines": [
+                12,
+                13
+              ],
+              "inline": false,
+              "attributes": {},
+              "children": [
+                {
+                  "$$mdtype": "Node",
+                  "errors": [],
+                  "lines": [
+                    12,
+                    13
+                  ],
+                  "inline": true,
+                  "attributes": {
+                    "content": "This is a warning alert!"
+                  },
+                  "children": [],
+                  "type": "text",
+                  "annotations": [],
+                  "slots": {},
+                  "location": {
+                    "start": {
+                      "line": 12
+                    },
+                    "end": {
+                      "line": 13
+                    }
+                  }
+                }
+              ],
+              "type": "inline",
+              "annotations": [],
+              "slots": {},
+              "location": {
+                "start": {
+                  "line": 12
+                },
+                "end": {
+                  "line": 13
+                }
+              }
+            }
+          ],
+          "type": "paragraph",
+          "annotations": [],
+          "slots": {},
+          "location": {
+            "start": {
+              "line": 12
+            },
+            "end": {
+              "line": 13
+            }
+          }
+        }
+      ],
+      "type": "tag",
+      "tag": "alert",
+      "annotations": [
+        {
+          "type": "attribute",
+          "name": "level",
+          "value": "warning"
+        }
+      ],
+      "slots": {},
+      "location": {
+        "start": {
+          "line": 11
+        },
+        "end": {
+          "line": 12
+        }
+      }
+    },
+    {
+      "$$mdtype": "Node",
+      "errors": [],
+      "lines": [
+        15,
+        16
+      ],
+      "inline": false,
+      "attributes": {},
+      "children": [
+        {
+          "$$mdtype": "Node",
+          "errors": [],
+          "lines": [
+            15,
+            16
+          ],
+          "inline": false,
+          "attributes": {},
+          "children": [
+            {
+              "$$mdtype": "Node",
+              "errors": [],
+              "lines": [
+                15,
+                16
+              ],
+              "inline": true,
+              "attributes": {
+                "content": "An alert should appear above."
+              },
+              "children": [],
+              "type": "text",
+              "annotations": [],
+              "slots": {},
+              "location": {
+                "start": {
+                  "line": 15
+                },
+                "end": {
+                  "line": 16
+                }
+              }
+            }
+          ],
+          "type": "inline",
+          "annotations": [],
+          "slots": {},
+          "location": {
+            "start": {
+              "line": 15
+            },
+            "end": {
+              "line": 16
+            }
+          }
+        }
+      ],
+      "type": "paragraph",
+      "annotations": [],
+      "slots": {},
+      "location": {
+        "start": {
+          "line": 15
+        },
+        "end": {
+          "line": 16
+        }
+      }
+    }
+  ],
+  "type": "document",
+  "annotations": [],
+  "slots": {}
+}

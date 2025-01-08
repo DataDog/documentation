@@ -1,0 +1,116 @@
+environment: default
+# do not delete repo_name, used by websites-modules as context
+repo_name: "documentation"
+integrations_img_url: "https://static.datadoghq.com/static/images/logos/"
+code_languages:
+  'py':
+    extension: py
+    name: python-legacy
+    syntax: python
+    command: python
+    example_file: example.py
+  'pybeta':
+    extension: py
+    name: python
+    syntax: python
+    command: python3
+    example_file: example.py
+  'rb':
+    extension: rb
+    name: ruby-legacy
+    syntax: ruby
+    command: rb
+    example_file: example.rb
+  'rbbeta':
+    extension: rbbeta
+    name: ruby
+    syntax: ruby
+    command: rb
+    example_file: example.rb
+  'sh':
+    extension: sh
+    name: curl
+    syntax: curl
+  'go':
+    extension: go
+    name: go
+    syntax: go
+    command: go run
+    example_file: main.go
+  'java':
+    extension: java
+    name: java
+    syntax: java
+    command: java
+    example_file: Example.java
+  'cs':
+    extension: cs
+    name: csharp
+    syntax: csharp
+  'php':
+    extension: php
+    name: php
+    syntax: php
+  'ts':
+    extension: ts
+    name: typescript
+    syntax: typescript
+    command: tsc
+    example_file: example.ts
+  'rs':
+    extension: rs
+    name: rust
+    syntax: rust
+    command: rustc
+    example_file: src/main.rs
+
+code_language_ids:
+    client: Client-Side
+    server: Server-Side (Auto-Instrumentation)
+    android: Android
+    ios: iOS
+    expo: Expo
+    flutter: Flutter
+    reactnative: React Native
+    codepush: CodePush
+    roku: Roku
+    unity: Unity
+    kotlin-multiplatform: Kotlin Multiplatform
+    swiftui: Swift UI
+    java: Java
+    cpp: 'C++'
+    php: PHP
+    nodejs: "Node.js"
+    NodeJS: "Node.js"
+    "Node.js": "Node.js"
+    python-legacy: Python [legacy]
+    python: Python
+    ruby-legacy: Ruby [legacy]
+    ruby: Ruby
+    go: Go
+    typescript: Typescript
+    ".NET": ".NET"
+    dotnet: ".NET"
+    dotnet-core: ".NET Core"
+    dotnet-framework: ".NET Framework"
+    curl: Curl
+    nginx: Nginx
+    native: Native
+    other: Other
+    linux: Linux
+    windows: Windows
+    opentelemetry: OpenTelemetry
+    ddprof: "Rust/C/C++"
+    serverless: "Serverless"
+    javascript: "JavaScript"
+    swift: "Swift"
+    junit_xml: "JUnit XML"
+    kubernetes: "Kubernetes"
+    docker: "Docker"
+    hosts: "Hosts"
+    ecs_ec2: "ECS EC2"
+    elixir: "Elixir"
+    rust: "Rust"
+    dd-api: "Datadog API"
+    otel: "OpenTelemetry API"
+branch: ""

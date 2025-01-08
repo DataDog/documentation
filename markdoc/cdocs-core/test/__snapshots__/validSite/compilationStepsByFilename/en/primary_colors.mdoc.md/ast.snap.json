@@ -1,0 +1,1965 @@
+{
+  "$$mdtype": "Node",
+  "errors": [],
+  "lines": [],
+  "inline": false,
+  "attributes": {
+    "frontmatter": "title: Primary Colors\ncontent_filters:\n  - display_name: \"Color\"\n    id: color\n    options_source: primary_color_options\n  - display_name: \"Item\"\n    id: item\n    options_source: <COLOR>_item_options\naliases:\n  - /primary_colors_alias/"
+  },
+  "children": [
+    {
+      "$$mdtype": "Node",
+      "errors": [],
+      "lines": [
+        13,
+        14,
+        15,
+        16
+      ],
+      "inline": false,
+      "attributes": {
+        "level": "warning"
+      },
+      "children": [
+        {
+          "$$mdtype": "Node",
+          "errors": [],
+          "lines": [
+            14,
+            15
+          ],
+          "inline": false,
+          "attributes": {},
+          "children": [
+            {
+              "$$mdtype": "Node",
+              "errors": [],
+              "lines": [
+                14,
+                15
+              ],
+              "inline": false,
+              "attributes": {},
+              "children": [
+                {
+                  "$$mdtype": "Node",
+                  "errors": [],
+                  "lines": [
+                    14,
+                    15
+                  ],
+                  "inline": true,
+                  "attributes": {
+                    "content": "Warning: This is just a test page. It's not real."
+                  },
+                  "children": [],
+                  "type": "text",
+                  "annotations": [],
+                  "slots": {},
+                  "location": {
+                    "start": {
+                      "line": 14
+                    },
+                    "end": {
+                      "line": 15
+                    }
+                  }
+                }
+              ],
+              "type": "inline",
+              "annotations": [],
+              "slots": {},
+              "location": {
+                "start": {
+                  "line": 14
+                },
+                "end": {
+                  "line": 15
+                }
+              }
+            }
+          ],
+          "type": "paragraph",
+          "annotations": [],
+          "slots": {},
+          "location": {
+            "start": {
+              "line": 14
+            },
+            "end": {
+              "line": 15
+            }
+          }
+        }
+      ],
+      "type": "tag",
+      "tag": "alert",
+      "annotations": [
+        {
+          "type": "attribute",
+          "name": "level",
+          "value": "warning"
+        }
+      ],
+      "slots": {},
+      "location": {
+        "start": {
+          "line": 13
+        },
+        "end": {
+          "line": 14
+        }
+      }
+    },
+    {
+      "$$mdtype": "Node",
+      "errors": [],
+      "lines": [
+        17,
+        18
+      ],
+      "inline": false,
+      "attributes": {},
+      "children": [
+        {
+          "$$mdtype": "Node",
+          "errors": [],
+          "lines": [
+            17,
+            18
+          ],
+          "inline": false,
+          "attributes": {},
+          "children": [
+            {
+              "$$mdtype": "Node",
+              "errors": [],
+              "lines": [
+                17,
+                18
+              ],
+              "inline": true,
+              "attributes": {
+                "content": "This test page explores everyday items that are blue, yellow, or red -- which also happen to be the primary colors of the color wheel. If this seems contrived and odd, that's only because test pages are often both of those things."
+              },
+              "children": [],
+              "type": "text",
+              "annotations": [],
+              "slots": {},
+              "location": {
+                "start": {
+                  "line": 17
+                },
+                "end": {
+                  "line": 18
+                }
+              }
+            }
+          ],
+          "type": "inline",
+          "annotations": [],
+          "slots": {},
+          "location": {
+            "start": {
+              "line": 17
+            },
+            "end": {
+              "line": 18
+            }
+          }
+        }
+      ],
+      "type": "paragraph",
+      "annotations": [],
+      "slots": {},
+      "location": {
+        "start": {
+          "line": 17
+        },
+        "end": {
+          "line": 18
+        }
+      }
+    },
+    {
+      "$$mdtype": "Node",
+      "errors": [],
+      "lines": [
+        19,
+        20
+      ],
+      "inline": false,
+      "attributes": {
+        "content": "blue"
+      },
+      "children": [],
+      "type": "comment",
+      "annotations": [],
+      "slots": {},
+      "location": {
+        "start": {
+          "line": 19
+        },
+        "end": {
+          "line": 20
+        }
+      }
+    },
+    {
+      "$$mdtype": "Node",
+      "errors": [],
+      "lines": [
+        20,
+        21,
+        64,
+        65
+      ],
+      "inline": false,
+      "attributes": {
+        "primary": {
+          "$$mdtype": "Function",
+          "name": "equals",
+          "parameters": {
+            "0": {
+              "$$mdtype": "Variable",
+              "path": [
+                "color"
+              ]
+            },
+            "1": "blue"
+          }
+        }
+      },
+      "children": [
+        {
+          "$$mdtype": "Node",
+          "errors": [],
+          "lines": [
+            22,
+            23
+          ],
+          "inline": false,
+          "attributes": {
+            "level": 2,
+            "id": "blue-header-id-override"
+          },
+          "children": [
+            {
+              "$$mdtype": "Node",
+              "errors": [],
+              "lines": [
+                22,
+                23
+              ],
+              "inline": false,
+              "attributes": {},
+              "children": [
+                {
+                  "$$mdtype": "Node",
+                  "errors": [],
+                  "lines": [
+                    22,
+                    23
+                  ],
+                  "inline": true,
+                  "attributes": {
+                    "content": "Blue "
+                  },
+                  "children": [],
+                  "type": "text",
+                  "annotations": [],
+                  "slots": {},
+                  "location": {
+                    "start": {
+                      "line": 22
+                    },
+                    "end": {
+                      "line": 23
+                    }
+                  }
+                }
+              ],
+              "type": "inline",
+              "annotations": [],
+              "slots": {},
+              "location": {
+                "start": {
+                  "line": 22
+                },
+                "end": {
+                  "line": 23
+                }
+              }
+            }
+          ],
+          "type": "heading",
+          "annotations": [
+            {
+              "type": "attribute",
+              "name": "id",
+              "value": "blue-header-id-override"
+            }
+          ],
+          "slots": {},
+          "location": {
+            "start": {
+              "line": 22
+            },
+            "end": {
+              "line": 23
+            }
+          }
+        },
+        {
+          "$$mdtype": "Node",
+          "errors": [],
+          "lines": [
+            24,
+            25
+          ],
+          "inline": false,
+          "attributes": {},
+          "children": [
+            {
+              "$$mdtype": "Node",
+              "errors": [],
+              "lines": [
+                24,
+                25
+              ],
+              "inline": false,
+              "attributes": {},
+              "children": [
+                {
+                  "$$mdtype": "Node",
+                  "errors": [],
+                  "lines": [
+                    24,
+                    25
+                  ],
+                  "inline": true,
+                  "attributes": {
+                    "content": "Blue is a calming and serene color that is often associated with tranquility, stability, and trust."
+                  },
+                  "children": [],
+                  "type": "text",
+                  "annotations": [],
+                  "slots": {},
+                  "location": {
+                    "start": {
+                      "line": 24
+                    },
+                    "end": {
+                      "line": 25
+                    }
+                  }
+                }
+              ],
+              "type": "inline",
+              "annotations": [],
+              "slots": {},
+              "location": {
+                "start": {
+                  "line": 24
+                },
+                "end": {
+                  "line": 25
+                }
+              }
+            }
+          ],
+          "type": "paragraph",
+          "annotations": [],
+          "slots": {},
+          "location": {
+            "start": {
+              "line": 24
+            },
+            "end": {
+              "line": 25
+            }
+          }
+        },
+        {
+          "$$mdtype": "Node",
+          "errors": [],
+          "lines": [
+            26,
+            27
+          ],
+          "inline": false,
+          "attributes": {
+            "content": "blue > ocean"
+          },
+          "children": [],
+          "type": "comment",
+          "annotations": [],
+          "slots": {},
+          "location": {
+            "start": {
+              "line": 26
+            },
+            "end": {
+              "line": 27
+            }
+          }
+        },
+        {
+          "$$mdtype": "Node",
+          "errors": [],
+          "lines": [
+            27,
+            28,
+            34,
+            35
+          ],
+          "inline": false,
+          "attributes": {
+            "primary": {
+              "$$mdtype": "Function",
+              "name": "equals",
+              "parameters": {
+                "0": {
+                  "$$mdtype": "Variable",
+                  "path": [
+                    "item"
+                  ]
+                },
+                "1": "ocean"
+              }
+            }
+          },
+          "children": [
+            {
+              "$$mdtype": "Node",
+              "errors": [],
+              "lines": [
+                29,
+                30
+              ],
+              "inline": false,
+              "attributes": {
+                "level": 3
+              },
+              "children": [
+                {
+                  "$$mdtype": "Node",
+                  "errors": [],
+                  "lines": [
+                    29,
+                    30
+                  ],
+                  "inline": false,
+                  "attributes": {},
+                  "children": [
+                    {
+                      "$$mdtype": "Node",
+                      "errors": [],
+                      "lines": [
+                        29,
+                        30
+                      ],
+                      "inline": true,
+                      "attributes": {
+                        "content": "Ocean"
+                      },
+                      "children": [],
+                      "type": "text",
+                      "annotations": [],
+                      "slots": {},
+                      "location": {
+                        "start": {
+                          "line": 29
+                        },
+                        "end": {
+                          "line": 30
+                        }
+                      }
+                    }
+                  ],
+                  "type": "inline",
+                  "annotations": [],
+                  "slots": {},
+                  "location": {
+                    "start": {
+                      "line": 29
+                    },
+                    "end": {
+                      "line": 30
+                    }
+                  }
+                }
+              ],
+              "type": "heading",
+              "annotations": [],
+              "slots": {},
+              "location": {
+                "start": {
+                  "line": 29
+                },
+                "end": {
+                  "line": 30
+                }
+              }
+            },
+            {
+              "$$mdtype": "Node",
+              "errors": [],
+              "lines": [
+                31,
+                32
+              ],
+              "inline": false,
+              "attributes": {},
+              "children": [
+                {
+                  "$$mdtype": "Node",
+                  "errors": [],
+                  "lines": [
+                    31,
+                    32
+                  ],
+                  "inline": false,
+                  "attributes": {},
+                  "children": [
+                    {
+                      "$$mdtype": "Node",
+                      "errors": [],
+                      "lines": [
+                        31,
+                        32
+                      ],
+                      "inline": true,
+                      "attributes": {
+                        "content": "The ocean is a vast and expansive body of saltwater that covers approximately 70% of the Earth's surface. It plays a crucial role in regulating the planet's climate and weather patterns, as well as supporting a diverse array of marine life."
+                      },
+                      "children": [],
+                      "type": "text",
+                      "annotations": [],
+                      "slots": {},
+                      "location": {
+                        "start": {
+                          "line": 31
+                        },
+                        "end": {
+                          "line": 32
+                        }
+                      }
+                    }
+                  ],
+                  "type": "inline",
+                  "annotations": [],
+                  "slots": {},
+                  "location": {
+                    "start": {
+                      "line": 31
+                    },
+                    "end": {
+                      "line": 32
+                    }
+                  }
+                }
+              ],
+              "type": "paragraph",
+              "annotations": [],
+              "slots": {},
+              "location": {
+                "start": {
+                  "line": 31
+                },
+                "end": {
+                  "line": 32
+                }
+              }
+            },
+            {
+              "$$mdtype": "Node",
+              "errors": [],
+              "lines": [
+                33,
+                34
+              ],
+              "inline": false,
+              "attributes": {},
+              "children": [
+                {
+                  "$$mdtype": "Node",
+                  "errors": [],
+                  "lines": [
+                    33,
+                    34
+                  ],
+                  "inline": false,
+                  "attributes": {},
+                  "children": [
+                    {
+                      "$$mdtype": "Node",
+                      "errors": [],
+                      "lines": [
+                        33,
+                        34
+                      ],
+                      "inline": true,
+                      "attributes": {
+                        "content": "The ocean is a source of food, recreation, and transportation for humans, and its depths remain largely unexplored, holding many mysteries and wonders. The sight and sound of the ocean waves can evoke a sense of calm and tranquility, making it a popular destination for relaxation and reflection."
+                      },
+                      "children": [],
+                      "type": "text",
+                      "annotations": [],
+                      "slots": {},
+                      "location": {
+                        "start": {
+                          "line": 33
+                        },
+                        "end": {
+                          "line": 34
+                        }
+                      }
+                    }
+                  ],
+                  "type": "inline",
+                  "annotations": [],
+                  "slots": {},
+                  "location": {
+                    "start": {
+                      "line": 33
+                    },
+                    "end": {
+                      "line": 34
+                    }
+                  }
+                }
+              ],
+              "type": "paragraph",
+              "annotations": [],
+              "slots": {},
+              "location": {
+                "start": {
+                  "line": 33
+                },
+                "end": {
+                  "line": 34
+                }
+              }
+            }
+          ],
+          "type": "tag",
+          "tag": "if",
+          "annotations": [
+            {
+              "type": "attribute",
+              "name": "primary",
+              "value": {
+                "$$mdtype": "Function",
+                "name": "equals",
+                "parameters": {
+                  "0": {
+                    "$$mdtype": "Variable",
+                    "path": [
+                      "item"
+                    ]
+                  },
+                  "1": "ocean"
+                }
+              }
+            }
+          ],
+          "slots": {},
+          "location": {
+            "start": {
+              "line": 27
+            },
+            "end": {
+              "line": 28
+            }
+          }
+        },
+        {
+          "$$mdtype": "Node",
+          "errors": [],
+          "lines": [
+            36,
+            37
+          ],
+          "inline": false,
+          "attributes": {
+            "content": "blue > sky"
+          },
+          "children": [],
+          "type": "comment",
+          "annotations": [],
+          "slots": {},
+          "location": {
+            "start": {
+              "line": 36
+            },
+            "end": {
+              "line": 37
+            }
+          }
+        },
+        {
+          "$$mdtype": "Node",
+          "errors": [],
+          "lines": [
+            37,
+            38,
+            44,
+            45
+          ],
+          "inline": false,
+          "attributes": {
+            "primary": {
+              "$$mdtype": "Function",
+              "name": "equals",
+              "parameters": {
+                "0": {
+                  "$$mdtype": "Variable",
+                  "path": [
+                    "item"
+                  ]
+                },
+                "1": "sky"
+              }
+            }
+          },
+          "children": [
+            {
+              "$$mdtype": "Node",
+              "errors": [],
+              "lines": [
+                39,
+                40
+              ],
+              "inline": false,
+              "attributes": {
+                "level": 3
+              },
+              "children": [
+                {
+                  "$$mdtype": "Node",
+                  "errors": [],
+                  "lines": [
+                    39,
+                    40
+                  ],
+                  "inline": false,
+                  "attributes": {},
+                  "children": [
+                    {
+                      "$$mdtype": "Node",
+                      "errors": [],
+                      "lines": [
+                        39,
+                        40
+                      ],
+                      "inline": true,
+                      "attributes": {
+                        "content": "Sky"
+                      },
+                      "children": [],
+                      "type": "text",
+                      "annotations": [],
+                      "slots": {},
+                      "location": {
+                        "start": {
+                          "line": 39
+                        },
+                        "end": {
+                          "line": 40
+                        }
+                      }
+                    }
+                  ],
+                  "type": "inline",
+                  "annotations": [],
+                  "slots": {},
+                  "location": {
+                    "start": {
+                      "line": 39
+                    },
+                    "end": {
+                      "line": 40
+                    }
+                  }
+                }
+              ],
+              "type": "heading",
+              "annotations": [],
+              "slots": {},
+              "location": {
+                "start": {
+                  "line": 39
+                },
+                "end": {
+                  "line": 40
+                }
+              }
+            },
+            {
+              "$$mdtype": "Node",
+              "errors": [],
+              "lines": [
+                41,
+                42
+              ],
+              "inline": false,
+              "attributes": {},
+              "children": [
+                {
+                  "$$mdtype": "Node",
+                  "errors": [],
+                  "lines": [
+                    41,
+                    42
+                  ],
+                  "inline": false,
+                  "attributes": {},
+                  "children": [
+                    {
+                      "$$mdtype": "Node",
+                      "errors": [],
+                      "lines": [
+                        41,
+                        42
+                      ],
+                      "inline": true,
+                      "attributes": {
+                        "content": "The sky is the expanse of atmosphere that we see when we look up from the Earth's surface. During the day, it appears blue due to the scattering of sunlight by the molecules in the air, a phenomenon known as Rayleigh scattering."
+                      },
+                      "children": [],
+                      "type": "text",
+                      "annotations": [],
+                      "slots": {},
+                      "location": {
+                        "start": {
+                          "line": 41
+                        },
+                        "end": {
+                          "line": 42
+                        }
+                      }
+                    }
+                  ],
+                  "type": "inline",
+                  "annotations": [],
+                  "slots": {},
+                  "location": {
+                    "start": {
+                      "line": 41
+                    },
+                    "end": {
+                      "line": 42
+                    }
+                  }
+                }
+              ],
+              "type": "paragraph",
+              "annotations": [],
+              "slots": {},
+              "location": {
+                "start": {
+                  "line": 41
+                },
+                "end": {
+                  "line": 42
+                }
+              }
+            },
+            {
+              "$$mdtype": "Node",
+              "errors": [],
+              "lines": [
+                43,
+                44
+              ],
+              "inline": false,
+              "attributes": {},
+              "children": [
+                {
+                  "$$mdtype": "Node",
+                  "errors": [],
+                  "lines": [
+                    43,
+                    44
+                  ],
+                  "inline": false,
+                  "attributes": {},
+                  "children": [
+                    {
+                      "$$mdtype": "Node",
+                      "errors": [],
+                      "lines": [
+                        43,
+                        44
+                      ],
+                      "inline": true,
+                      "attributes": {
+                        "content": "The sky changes color at sunrise and sunset, displaying beautiful hues of red, orange, and pink. It is home to various weather phenomena, including clouds, rainbows, and storms, and serves as the backdrop for celestial bodies like the sun, moon, and stars. The sky's vastness and ever-changing nature inspire a sense of wonder and curiosity."
+                      },
+                      "children": [],
+                      "type": "text",
+                      "annotations": [],
+                      "slots": {},
+                      "location": {
+                        "start": {
+                          "line": 43
+                        },
+                        "end": {
+                          "line": 44
+                        }
+                      }
+                    }
+                  ],
+                  "type": "inline",
+                  "annotations": [],
+                  "slots": {},
+                  "location": {
+                    "start": {
+                      "line": 43
+                    },
+                    "end": {
+                      "line": 44
+                    }
+                  }
+                }
+              ],
+              "type": "paragraph",
+              "annotations": [],
+              "slots": {},
+              "location": {
+                "start": {
+                  "line": 43
+                },
+                "end": {
+                  "line": 44
+                }
+              }
+            }
+          ],
+          "type": "tag",
+          "tag": "if",
+          "annotations": [
+            {
+              "type": "attribute",
+              "name": "primary",
+              "value": {
+                "$$mdtype": "Function",
+                "name": "equals",
+                "parameters": {
+                  "0": {
+                    "$$mdtype": "Variable",
+                    "path": [
+                      "item"
+                    ]
+                  },
+                  "1": "sky"
+                }
+              }
+            }
+          ],
+          "slots": {},
+          "location": {
+            "start": {
+              "line": 37
+            },
+            "end": {
+              "line": 38
+            }
+          }
+        },
+        {
+          "$$mdtype": "Node",
+          "errors": [],
+          "lines": [
+            46,
+            47
+          ],
+          "inline": false,
+          "attributes": {
+            "content": "blue > jeans"
+          },
+          "children": [],
+          "type": "comment",
+          "annotations": [],
+          "slots": {},
+          "location": {
+            "start": {
+              "line": 46
+            },
+            "end": {
+              "line": 47
+            }
+          }
+        },
+        {
+          "$$mdtype": "Node",
+          "errors": [],
+          "lines": [
+            47,
+            48,
+            53,
+            54
+          ],
+          "inline": false,
+          "attributes": {
+            "primary": {
+              "$$mdtype": "Function",
+              "name": "equals",
+              "parameters": {
+                "0": {
+                  "$$mdtype": "Variable",
+                  "path": [
+                    "item"
+                  ]
+                },
+                "1": "jeans"
+              }
+            }
+          },
+          "children": [
+            {
+              "$$mdtype": "Node",
+              "errors": [],
+              "lines": [
+                48,
+                49
+              ],
+              "inline": false,
+              "attributes": {
+                "level": 3
+              },
+              "children": [
+                {
+                  "$$mdtype": "Node",
+                  "errors": [],
+                  "lines": [
+                    48,
+                    49
+                  ],
+                  "inline": false,
+                  "attributes": {},
+                  "children": [
+                    {
+                      "$$mdtype": "Node",
+                      "errors": [],
+                      "lines": [
+                        48,
+                        49
+                      ],
+                      "inline": true,
+                      "attributes": {
+                        "content": "Jeans"
+                      },
+                      "children": [],
+                      "type": "text",
+                      "annotations": [],
+                      "slots": {},
+                      "location": {
+                        "start": {
+                          "line": 48
+                        },
+                        "end": {
+                          "line": 49
+                        }
+                      }
+                    }
+                  ],
+                  "type": "inline",
+                  "annotations": [],
+                  "slots": {},
+                  "location": {
+                    "start": {
+                      "line": 48
+                    },
+                    "end": {
+                      "line": 49
+                    }
+                  }
+                }
+              ],
+              "type": "heading",
+              "annotations": [],
+              "slots": {},
+              "location": {
+                "start": {
+                  "line": 48
+                },
+                "end": {
+                  "line": 49
+                }
+              }
+            },
+            {
+              "$$mdtype": "Node",
+              "errors": [],
+              "lines": [
+                50,
+                51
+              ],
+              "inline": false,
+              "attributes": {},
+              "children": [
+                {
+                  "$$mdtype": "Node",
+                  "errors": [],
+                  "lines": [
+                    50,
+                    51
+                  ],
+                  "inline": false,
+                  "attributes": {},
+                  "children": [
+                    {
+                      "$$mdtype": "Node",
+                      "errors": [],
+                      "lines": [
+                        50,
+                        51
+                      ],
+                      "inline": true,
+                      "attributes": {
+                        "content": "Jeans are a type of durable clothing typically made from denim fabric. They are known for their versatility and comfort, making them a staple in wardrobes around the world."
+                      },
+                      "children": [],
+                      "type": "text",
+                      "annotations": [],
+                      "slots": {},
+                      "location": {
+                        "start": {
+                          "line": 50
+                        },
+                        "end": {
+                          "line": 51
+                        }
+                      }
+                    }
+                  ],
+                  "type": "inline",
+                  "annotations": [],
+                  "slots": {},
+                  "location": {
+                    "start": {
+                      "line": 50
+                    },
+                    "end": {
+                      "line": 51
+                    }
+                  }
+                }
+              ],
+              "type": "paragraph",
+              "annotations": [],
+              "slots": {},
+              "location": {
+                "start": {
+                  "line": 50
+                },
+                "end": {
+                  "line": 51
+                }
+              }
+            },
+            {
+              "$$mdtype": "Node",
+              "errors": [],
+              "lines": [
+                52,
+                53
+              ],
+              "inline": false,
+              "attributes": {},
+              "children": [
+                {
+                  "$$mdtype": "Node",
+                  "errors": [],
+                  "lines": [
+                    52,
+                    53
+                  ],
+                  "inline": false,
+                  "attributes": {},
+                  "children": [
+                    {
+                      "$$mdtype": "Node",
+                      "errors": [],
+                      "lines": [
+                        52,
+                        53
+                      ],
+                      "inline": true,
+                      "attributes": {
+                        "content": "Originally designed as workwear for miners and laborers in the 19th century, jeans have evolved into a fashion icon, available in various styles, cuts, and colors. They can be dressed up or down, suitable for casual outings or more formal occasions. The durability and timeless appeal of jeans have made them a beloved garment for people of all ages."
+                      },
+                      "children": [],
+                      "type": "text",
+                      "annotations": [],
+                      "slots": {},
+                      "location": {
+                        "start": {
+                          "line": 52
+                        },
+                        "end": {
+                          "line": 53
+                        }
+                      }
+                    }
+                  ],
+                  "type": "inline",
+                  "annotations": [],
+                  "slots": {},
+                  "location": {
+                    "start": {
+                      "line": 52
+                    },
+                    "end": {
+                      "line": 53
+                    }
+                  }
+                }
+              ],
+              "type": "paragraph",
+              "annotations": [],
+              "slots": {},
+              "location": {
+                "start": {
+                  "line": 52
+                },
+                "end": {
+                  "line": 53
+                }
+              }
+            }
+          ],
+          "type": "tag",
+          "tag": "if",
+          "annotations": [
+            {
+              "type": "attribute",
+              "name": "primary",
+              "value": {
+                "$$mdtype": "Function",
+                "name": "equals",
+                "parameters": {
+                  "0": {
+                    "$$mdtype": "Variable",
+                    "path": [
+                      "item"
+                    ]
+                  },
+                  "1": "jeans"
+                }
+              }
+            }
+          ],
+          "slots": {},
+          "location": {
+            "start": {
+              "line": 47
+            },
+            "end": {
+              "line": 48
+            }
+          }
+        },
+        {
+          "$$mdtype": "Node",
+          "errors": [],
+          "lines": [
+            55,
+            56
+          ],
+          "inline": false,
+          "attributes": {
+            "content": "blue > blueberry"
+          },
+          "children": [],
+          "type": "comment",
+          "annotations": [],
+          "slots": {},
+          "location": {
+            "start": {
+              "line": 55
+            },
+            "end": {
+              "line": 56
+            }
+          }
+        },
+        {
+          "$$mdtype": "Node",
+          "errors": [],
+          "lines": [
+            56,
+            57,
+            62,
+            63
+          ],
+          "inline": false,
+          "attributes": {
+            "primary": {
+              "$$mdtype": "Function",
+              "name": "equals",
+              "parameters": {
+                "0": {
+                  "$$mdtype": "Variable",
+                  "path": [
+                    "item"
+                  ]
+                },
+                "1": "blueberry"
+              }
+            }
+          },
+          "children": [
+            {
+              "$$mdtype": "Node",
+              "errors": [],
+              "lines": [
+                57,
+                58
+              ],
+              "inline": false,
+              "attributes": {
+                "level": 3
+              },
+              "children": [
+                {
+                  "$$mdtype": "Node",
+                  "errors": [],
+                  "lines": [
+                    57,
+                    58
+                  ],
+                  "inline": false,
+                  "attributes": {},
+                  "children": [
+                    {
+                      "$$mdtype": "Node",
+                      "errors": [],
+                      "lines": [
+                        57,
+                        58
+                      ],
+                      "inline": true,
+                      "attributes": {
+                        "content": "Blueberry"
+                      },
+                      "children": [],
+                      "type": "text",
+                      "annotations": [],
+                      "slots": {},
+                      "location": {
+                        "start": {
+                          "line": 57
+                        },
+                        "end": {
+                          "line": 58
+                        }
+                      }
+                    }
+                  ],
+                  "type": "inline",
+                  "annotations": [],
+                  "slots": {},
+                  "location": {
+                    "start": {
+                      "line": 57
+                    },
+                    "end": {
+                      "line": 58
+                    }
+                  }
+                }
+              ],
+              "type": "heading",
+              "annotations": [],
+              "slots": {},
+              "location": {
+                "start": {
+                  "line": 57
+                },
+                "end": {
+                  "line": 58
+                }
+              }
+            },
+            {
+              "$$mdtype": "Node",
+              "errors": [],
+              "lines": [
+                59,
+                60
+              ],
+              "inline": false,
+              "attributes": {},
+              "children": [
+                {
+                  "$$mdtype": "Node",
+                  "errors": [],
+                  "lines": [
+                    59,
+                    60
+                  ],
+                  "inline": false,
+                  "attributes": {},
+                  "children": [
+                    {
+                      "$$mdtype": "Node",
+                      "errors": [],
+                      "lines": [
+                        59,
+                        60
+                      ],
+                      "inline": true,
+                      "attributes": {
+                        "content": "Blueberries are small, round fruits that are known for their sweet and slightly tart flavor. They are rich in antioxidants, vitamins, and fiber, making them a nutritious addition to any diet. Blueberries can be eaten fresh, added to cereals and yogurt, or used in baking to make delicious treats like muffins and pies."
+                      },
+                      "children": [],
+                      "type": "text",
+                      "annotations": [],
+                      "slots": {},
+                      "location": {
+                        "start": {
+                          "line": 59
+                        },
+                        "end": {
+                          "line": 60
+                        }
+                      }
+                    }
+                  ],
+                  "type": "inline",
+                  "annotations": [],
+                  "slots": {},
+                  "location": {
+                    "start": {
+                      "line": 59
+                    },
+                    "end": {
+                      "line": 60
+                    }
+                  }
+                }
+              ],
+              "type": "paragraph",
+              "annotations": [],
+              "slots": {},
+              "location": {
+                "start": {
+                  "line": 59
+                },
+                "end": {
+                  "line": 60
+                }
+              }
+            },
+            {
+              "$$mdtype": "Node",
+              "errors": [],
+              "lines": [
+                61,
+                62
+              ],
+              "inline": false,
+              "attributes": {},
+              "children": [
+                {
+                  "$$mdtype": "Node",
+                  "errors": [],
+                  "lines": [
+                    61,
+                    62
+                  ],
+                  "inline": false,
+                  "attributes": {},
+                  "children": [
+                    {
+                      "$$mdtype": "Node",
+                      "errors": [],
+                      "lines": [
+                        61,
+                        62
+                      ],
+                      "inline": true,
+                      "attributes": {
+                        "content": "Blueberries are also popular in smoothies and jams. The vibrant blue color of blueberries adds a visual appeal to dishes, and their health benefits make them a favorite among health-conscious individuals."
+                      },
+                      "children": [],
+                      "type": "text",
+                      "annotations": [],
+                      "slots": {},
+                      "location": {
+                        "start": {
+                          "line": 61
+                        },
+                        "end": {
+                          "line": 62
+                        }
+                      }
+                    }
+                  ],
+                  "type": "inline",
+                  "annotations": [],
+                  "slots": {},
+                  "location": {
+                    "start": {
+                      "line": 61
+                    },
+                    "end": {
+                      "line": 62
+                    }
+                  }
+                }
+              ],
+              "type": "paragraph",
+              "annotations": [],
+              "slots": {},
+              "location": {
+                "start": {
+                  "line": 61
+                },
+                "end": {
+                  "line": 62
+                }
+              }
+            }
+          ],
+          "type": "tag",
+          "tag": "if",
+          "annotations": [
+            {
+              "type": "attribute",
+              "name": "primary",
+              "value": {
+                "$$mdtype": "Function",
+                "name": "equals",
+                "parameters": {
+                  "0": {
+                    "$$mdtype": "Variable",
+                    "path": [
+                      "item"
+                    ]
+                  },
+                  "1": "blueberry"
+                }
+              }
+            }
+          ],
+          "slots": {},
+          "location": {
+            "start": {
+              "line": 56
+            },
+            "end": {
+              "line": 57
+            }
+          }
+        }
+      ],
+      "type": "tag",
+      "tag": "if",
+      "annotations": [
+        {
+          "type": "attribute",
+          "name": "primary",
+          "value": {
+            "$$mdtype": "Function",
+            "name": "equals",
+            "parameters": {
+              "0": {
+                "$$mdtype": "Variable",
+                "path": [
+                  "color"
+                ]
+              },
+              "1": "blue"
+            }
+          }
+        }
+      ],
+      "slots": {},
+      "location": {
+        "start": {
+          "line": 20
+        },
+        "end": {
+          "line": 21
+        }
+      }
+    },
+    {
+      "$$mdtype": "Node",
+      "errors": [],
+      "lines": [
+        66,
+        67
+      ],
+      "inline": false,
+      "attributes": {
+        "content": "yellow"
+      },
+      "children": [],
+      "type": "comment",
+      "annotations": [],
+      "slots": {},
+      "location": {
+        "start": {
+          "line": 66
+        },
+        "end": {
+          "line": 67
+        }
+      }
+    },
+    {
+      "$$mdtype": "Node",
+      "errors": [],
+      "lines": [
+        67,
+        68,
+        70,
+        71
+      ],
+      "inline": false,
+      "attributes": {
+        "primary": {
+          "$$mdtype": "Function",
+          "name": "equals",
+          "parameters": {
+            "0": {
+              "$$mdtype": "Variable",
+              "path": [
+                "color"
+              ]
+            },
+            "1": "yellow"
+          }
+        }
+      },
+      "children": [
+        {
+          "$$mdtype": "Node",
+          "errors": [],
+          "lines": [
+            68,
+            69
+          ],
+          "inline": false,
+          "attributes": {
+            "level": 2
+          },
+          "children": [
+            {
+              "$$mdtype": "Node",
+              "errors": [],
+              "lines": [
+                68,
+                69
+              ],
+              "inline": false,
+              "attributes": {},
+              "children": [
+                {
+                  "$$mdtype": "Node",
+                  "errors": [],
+                  "lines": [
+                    68,
+                    69
+                  ],
+                  "inline": true,
+                  "attributes": {
+                    "content": "Yellow"
+                  },
+                  "children": [],
+                  "type": "text",
+                  "annotations": [],
+                  "slots": {},
+                  "location": {
+                    "start": {
+                      "line": 68
+                    },
+                    "end": {
+                      "line": 69
+                    }
+                  }
+                }
+              ],
+              "type": "inline",
+              "annotations": [],
+              "slots": {},
+              "location": {
+                "start": {
+                  "line": 68
+                },
+                "end": {
+                  "line": 69
+                }
+              }
+            }
+          ],
+          "type": "heading",
+          "annotations": [],
+          "slots": {},
+          "location": {
+            "start": {
+              "line": 68
+            },
+            "end": {
+              "line": 69
+            }
+          }
+        },
+        {
+          "$$mdtype": "Node",
+          "errors": [],
+          "lines": [
+            69,
+            70
+          ],
+          "inline": false,
+          "attributes": {
+            "file": "yellow.mdoc.md"
+          },
+          "children": [],
+          "type": "tag",
+          "tag": "partial",
+          "annotations": [
+            {
+              "type": "attribute",
+              "name": "file",
+              "value": "yellow.mdoc.md"
+            }
+          ],
+          "slots": {},
+          "location": {
+            "start": {
+              "line": 69
+            },
+            "end": {
+              "line": 70
+            }
+          }
+        }
+      ],
+      "type": "tag",
+      "tag": "if",
+      "annotations": [
+        {
+          "type": "attribute",
+          "name": "primary",
+          "value": {
+            "$$mdtype": "Function",
+            "name": "equals",
+            "parameters": {
+              "0": {
+                "$$mdtype": "Variable",
+                "path": [
+                  "color"
+                ]
+              },
+              "1": "yellow"
+            }
+          }
+        }
+      ],
+      "slots": {},
+      "location": {
+        "start": {
+          "line": 67
+        },
+        "end": {
+          "line": 68
+        }
+      }
+    },
+    {
+      "$$mdtype": "Node",
+      "errors": [],
+      "lines": [
+        72,
+        73
+      ],
+      "inline": false,
+      "attributes": {
+        "content": "red"
+      },
+      "children": [],
+      "type": "comment",
+      "annotations": [],
+      "slots": {},
+      "location": {
+        "start": {
+          "line": 72
+        },
+        "end": {
+          "line": 73
+        }
+      }
+    },
+    {
+      "$$mdtype": "Node",
+      "errors": [],
+      "lines": [
+        73,
+        74,
+        76,
+        77
+      ],
+      "inline": false,
+      "attributes": {
+        "primary": {
+          "$$mdtype": "Function",
+          "name": "equals",
+          "parameters": {
+            "0": {
+              "$$mdtype": "Variable",
+              "path": [
+                "color"
+              ]
+            },
+            "1": "red"
+          }
+        }
+      },
+      "children": [
+        {
+          "$$mdtype": "Node",
+          "errors": [],
+          "lines": [
+            74,
+            75
+          ],
+          "inline": false,
+          "attributes": {
+            "level": 2
+          },
+          "children": [
+            {
+              "$$mdtype": "Node",
+              "errors": [],
+              "lines": [
+                74,
+                75
+              ],
+              "inline": false,
+              "attributes": {},
+              "children": [
+                {
+                  "$$mdtype": "Node",
+                  "errors": [],
+                  "lines": [
+                    74,
+                    75
+                  ],
+                  "inline": true,
+                  "attributes": {
+                    "content": "Red"
+                  },
+                  "children": [],
+                  "type": "text",
+                  "annotations": [],
+                  "slots": {},
+                  "location": {
+                    "start": {
+                      "line": 74
+                    },
+                    "end": {
+                      "line": 75
+                    }
+                  }
+                }
+              ],
+              "type": "inline",
+              "annotations": [],
+              "slots": {},
+              "location": {
+                "start": {
+                  "line": 74
+                },
+                "end": {
+                  "line": 75
+                }
+              }
+            }
+          ],
+          "type": "heading",
+          "annotations": [],
+          "slots": {},
+          "location": {
+            "start": {
+              "line": 74
+            },
+            "end": {
+              "line": 75
+            }
+          }
+        },
+        {
+          "$$mdtype": "Node",
+          "errors": [],
+          "lines": [
+            75,
+            76
+          ],
+          "inline": false,
+          "attributes": {
+            "file": "red.mdoc.md"
+          },
+          "children": [],
+          "type": "tag",
+          "tag": "partial",
+          "annotations": [
+            {
+              "type": "attribute",
+              "name": "file",
+              "value": "red.mdoc.md"
+            }
+          ],
+          "slots": {},
+          "location": {
+            "start": {
+              "line": 75
+            },
+            "end": {
+              "line": 76
+            }
+          }
+        }
+      ],
+      "type": "tag",
+      "tag": "if",
+      "annotations": [
+        {
+          "type": "attribute",
+          "name": "primary",
+          "value": {
+            "$$mdtype": "Function",
+            "name": "equals",
+            "parameters": {
+              "0": {
+                "$$mdtype": "Variable",
+                "path": [
+                  "color"
+                ]
+              },
+              "1": "red"
+            }
+          }
+        }
+      ],
+      "slots": {},
+      "location": {
+        "start": {
+          "line": 73
+        },
+        "end": {
+          "line": 74
+        }
+      }
+    }
+  ],
+  "type": "document",
+  "annotations": [],
+  "slots": {}
+}

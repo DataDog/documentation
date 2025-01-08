@@ -1,0 +1,8 @@
+allowed:
+- id: red
+  display_name: Red
+- id: green
+  display_name: Green
+# Mistake: The option id 'red' is used twice.
+- id: red
+  display_name: Red Number Two
