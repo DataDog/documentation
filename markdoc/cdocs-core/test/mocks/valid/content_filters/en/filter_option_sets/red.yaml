@@ -1,0 +1,6 @@
+red_item_options:
+  - id: ruby
+  - id: apple
+  - id: firetruck
+  - id: stop_sign
+    default: true
