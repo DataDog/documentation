@@ -158,8 +158,6 @@ The session duration can be configured within the following limits:
 
 **Note**: This setting applies only to web sessions. Sessions from the Datadog mobile application are not impacted.
 
-
-
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
