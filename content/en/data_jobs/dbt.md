@@ -34,10 +34,6 @@ Follow these steps to enable dbt traces:
   * Replace `DD_API_KEY` with your valid [Datadog API key][5].
   * Replace `NAMESPACE` if you want to use something other than the `default` namespace for job namespace.
 
-**Optional**
-
-1. Set up the `OPENLINEAGE_DBT_LOGGING` environment variable. This will establish the logging level for the `openlineage.dbt` and its child modules.
-
 Check official documentation ([python client][6] and [dbt integration][7]) for other supported configurations of OpenLineage.
 
 ## Validation
@@ -70,6 +66,11 @@ Running OpenLineage dbt wrapper version X.XX.X
 This wrapper will send OpenLineage events ...
 ...
 Emitted XX OpenLineage events
+```
+
+Set up the `OPENLINEAGE_DBT_LOGGING` environment variable. This will establish the logging level for the `openlineage.dbt` and its child modules.
+```bash
+export OPENLINEAGE_DBT_LOGGING="DEBUG"
 ```
 
 ## Further Reading
