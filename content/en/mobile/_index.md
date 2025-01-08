@@ -19,7 +19,7 @@ further_reading:
   text: "Getting started with the Datadog mobile app"
 ---
 
-The Datadog Mobile app enables you to view alerts from Datadog on your mobile device. When receiving an alert via On-Call, Slack or e-mail, you'll be able to investigate issues by opening monitor graphs and dashboards on your mobile device.
+The Datadog Mobile app enables you to view alerts from Datadog on your mobile device. When receiving an alert through On-Call, Slack, or email, you can investigate issues by opening monitor graphs and dashboards on your mobile device.
 
 ## Installing
 
