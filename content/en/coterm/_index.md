@@ -57,11 +57,9 @@ You can review your recorded terminal sessions and process data in Datadog:
 - The maximum duration of a recorded session is approximately 24 hours.
 - [Sensitive data redaction][2] may fail if the sensitive data is spread across multiple lines.
 - On Linux, `seccomp`-based tracing prevents you from elevating your permissions during a recording.
-- On macOS, [Apple SIP][6] prevents the observation of some commands under `/bin`, `/sbin`, etc.
 
 [1]: https://app.datadoghq.com/organization-settings/api-keys
 [2]: /sensitive_data_scanner/
 [3]: http://app.datadoghq.com/terminal-streams
 [4]: http://app.datadoghq.com/event/explorer?query=source%3Acoterm_process_info
 [5]: https://app.datadoghq.com/logs?query=service%3Addcoterm
-[6]: https://support.apple.com/en-us/102149
