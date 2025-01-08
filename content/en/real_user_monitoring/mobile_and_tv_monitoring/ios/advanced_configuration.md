@@ -100,7 +100,7 @@ func onHeroImageLoaded() {
 {{% /tab %}}
 {{< /tabs >}}
 
-Use the `override` option to replace the previously calculated loading time for the current view..
+Use the `override` option to replace the previously calculated loading time for the current view.
 
 After the loading time is sent, it is accessible as `@view.loading_time` and is visible in the RUM UI.
 
