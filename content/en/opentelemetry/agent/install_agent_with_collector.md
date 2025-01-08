@@ -7,8 +7,8 @@ further_reading:
   text: "Use Custom OpenTelemetry Components with Datadog Agent"
 ---
 
-{{< callout url="https://www.datadoghq.com/private-beta/agent-with-embedded-opentelemetry-collector/" btn_hidden="false" header="Join the Beta!">}}
-  The Datadog Agent with embedded OpenTelemetry Collector is in private beta. To request access, fill out this form.
+{{< callout url="https://www.datadoghq.com/private-beta/agent-with-embedded-opentelemetry-collector/" btn_hidden="false" header="Join the Preview!">}}
+  The Datadog Agent with embedded OpenTelemetry Collector is in Preview. To request access, fill out this form.
 {{< /callout >}}
 
 ## Overview
@@ -78,12 +78,12 @@ datadog:
 agents:
   image:
     repository: gcr.io/datadoghq/agent
-    tag: 7.57.0-v1.0-ot-beta-jmx
+    tag: 7.59.0-v1.1.0-ot-beta-jmx
     doNotCheckTag: true
 ...
    {{< /code-block >}}
    <div class="alert alert-info">This guide uses a Java application example. The <code>-jmx</code> suffix in the image tag enables JMX utilities. For non-Java applications, use <code>7.57.0-v1.0-ot-beta</code> instead.<br> For more details, see <a href="/containers/guide/autodiscovery-with-jmx/?tab=helm">Autodiscovery and JMX integration guide</a>.</div>
-   
+
    By default, the Agent image is pulled from Google Artifact Registry (`gcr.io/datadoghq`). If Artifact Registry is not accessible in your deployment region, [use another registry][53].
 1. Enable the OpenTelemetry Collector and configure the essential ports:
    {{< code-block lang="yaml" filename="datadog-values.yaml" collapsible="true" >}}
@@ -144,7 +144,7 @@ Your `datadog-values.yaml` file should look something like this:
 agents:
   image:
     repository: gcr.io/datadoghq/agent
-    tag: 7.57.0-v1.0-ot-beta-jmx
+    tag: 7.59.0-v1.1.0-ot-beta-jmx
     doNotCheckTag: true
 
 datadog:
@@ -263,10 +263,10 @@ exporters:
   datadog:
     api:
       key: ${env:DD_API_KEY}
-      site: datadoghq.com
+      site: ${env:DD_SITE}
 {{< /code-block >}}
 
-Set `datadog.site` to your [Datadog site][52]. Otherwise, it defaults to `datadoghq.com`, the US1 site.
+**Note**: If `key` is not specified or set to a secret, or if `site` is not specified, the system uses values from the core Agent configuration. By default, the core Agent sets site to `datadoghq.com` (US1).
 
 ##### Prometheus receiver
 

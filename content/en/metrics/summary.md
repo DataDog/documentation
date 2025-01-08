@@ -189,29 +189,29 @@ This table shows the mapping between the metric origin as seen in the facet and 
 
 | Metric Origin           | Submitted from                                                                |
 | ------------------------| ----------------------------------------------------------------------------- |
-| API Catalog             | Standard Metrics sent by the Datadog [API Catalog][13] product from the APIM Endpoint.
-| APM                     | Custom Metrics sent by the Datadog APM product for metrics generated from traces and span metrics.
-| Agent                   | Standard Metrics sent by the Datadog agent, collected from [Agent integrations][10], or [built-in integrations][9].
-| CSM                     | Standard Metrics sent by the Datadog [Cloud Security Monitoring][14] product.
-| Cloud Integrations      | Standard Metrics collected from cloud providers like AWS, Azure, and Google Cloud etc. from their respective integrations. 
-| DBM                     | Standard Metrics sent by the Datadog [Database Monitoring][15] product, including insights into MySQL, Oracle, and Postgres activities/queries/locks.
-| DSM                     | Standard Metrics sent by the Datadog [Data Streams Monitoring][16] product, for metrics generated from the DSM spans and traces.
-| Datadog Exporter        | Standard Metrics sent by the [OpenTelemetry Collector][17] or the [Datadog Exporter][18].
-| Datadog Platform        | Standard Metrics sent by metrics intake that are used to [report metrics usage][11].
-| Events                  | Custom Metrics generated from the Datadog Events platform.
-| LLM Observability       | Custom Metrics emitted by the LLM Observability product using the `lmobs_to_metrics` service.
-| Logs                    | Custom Metrics generated from the Datadog [Logs][28] platform.
-| Metrics API             | Custom Metrics sent using Datadog's [OTLP Ingestion endpoint][21] and OTel receiver with a Datadog integration counterparts or points for estimated usage metrics or Datadog API Client.
-| NPM                     | Standard Metrics sent by the Datadog [Network Performance Monitoring][19] product.
-| Observability Pipelines | Standard Metrics sent by the Datadog [Observability Pipielines][20] including error and performance metrics.
-| Other                   | Custom Metrics that don't have a DD integration counterpart.
-| Processes               | Custom Metrics generated from the Datadog [Processes][22] product.
-| RUM                     | Standard Metrics generated from the Datadog [Real User Monitoring][23] product.
-| SAAS Integrations       | Standard Metrics collected from popular SAAS platforms like Slack, Docker, PagerDuty etc.
-| Serverless               | Custom Metrics sent by the Datadog [Serverless][24] platform including Function, App Services, Cloud Run, and Container App Metrics.
-| Service Catalog         | Standard Metrics sent by the Datadog [Service Catalog][25] product including [Scorecard][29] metrics.
+| API Catalog             | Timeseries sent by the Datadog [API Catalog][13] product from the APIM Endpoint.
+| APM                     | Timeseries sent by the Datadog APM product for metrics generated from traces and span metrics.
+| Agent                   | Timeseries sent by the Datadog Agent, collected from [Agent integrations][10], [built-in integrations][9], [DogStatsD][32], or [custom Agent checks][33].
+| CSM                     | Timeseries sent by the Datadog [Cloud Security Monitoring][14] product.
+| Cloud Integrations      | Timeseries collected from cloud providers like AWS, Azure, and Google Cloud etc. from their respective integrations. 
+| DBM                     | Timeseries sent by the Datadog [Database Monitoring][15] product, including insights into MySQL, Oracle, and Postgres activities/queries/locks.
+| DSM                     | Timeseries sent by the Datadog [Data Streams Monitoring][16] product, for metrics generated from the DSM spans and traces.
+| Datadog Exporter        | Timeseries sent by the [OpenTelemetry Collector][17] or the [Datadog Exporter][18].
+| Datadog Platform        | Timeseries sent by metrics intake that are used to [report metrics usage][11].
+| Events                  | Timeseries generated from the Datadog Events platform.
+| LLM Observability       | Timeseries emitted by the LLM Observability product using the `lmobs_to_metrics` service.
+| Logs                    | Timeseries generated from the Datadog [Logs][28] platform.
+| Metrics API             | Timeseries sent using Datadog's [OTLP Ingestion endpoint][21] and OTel receiver with a Datadog integration counterparts or points for estimated usage metrics or Datadog API Client.
+| CNM                     | Timeseries sent by the Datadog [Cloud Network Monitoring][19] product.
+| Observability Pipelines | Timeseries sent by the Datadog [Observability Pipielines][20] including error and performance metrics.
+| Other                   | Timeseries that don't have a DD integration counterpart.
+| Processes               | Timeseries generated from the Datadog [Processes][22] product.
+| RUM                     | Timeseries generated from the Datadog [Real User Monitoring][23] product.
+| SAAS Integrations       | Timeseries collected from popular SAAS platforms like Slack, Docker, PagerDuty etc.
+| Serverless              | Timeseries sent by the Datadog [Serverless][24] platform including Function, App Services, Cloud Run, and Container App Metrics.
+| Service Catalog         | Timeseries sent by the Datadog [Service Catalog][25] product including [Scorecard][29] metrics.
 | Synthetic Monitoring    | Synthetic monitoring and continuous testing metrics generated from the Datadog [Synthetic Monitoring][26] product. 
-| USM                     | Custom Metrics generated from the Datadog [Universal Service Monitoring][27] product. 
+| USM                     | Timeseries generated from the Datadog [Universal Service Monitoring][27] product. 
 
 ## Further reading
 
@@ -236,7 +236,7 @@ This table shows the mapping between the metric origin as seen in the facet and 
 [16]: /data_streams/
 [17]: /opentelemetry/collector_exporter/otel_collector_datadog_exporter/?tab=onahost
 [18]: /opentelemetry/collector_exporter/
-[19]: /network_monitoring/performance/
+[19]: /network_monitoring/cloud_network_monitoring/
 [20]: /observability_pipelines/
 [21]: /opentelemetry/interoperability/otlp_ingest_in_the_agent/?tab=host
 [22]: /integrations/process/
@@ -249,3 +249,5 @@ This table shows the mapping between the metric origin as seen in the facet and 
 [29]: /service_catalog/scorecards/
 [30]: /metrics/custom_metrics/historical_metrics/#bulk-configuration-for-multiple-metrics
 [31]: /metrics/distributions/#bulk-configuration-for-multiple-metrics
+[32]: /metrics/custom_metrics/dogstatsd_metrics_submission/
+[33]: /metrics/custom_metrics/agent_metrics_submission/

@@ -37,14 +37,14 @@ Antes de instrumentar tu aplicación, revisa la [Terminología de APM][2] de Dat
 
 Si utilizas un estándar abierto para instrumentar tu código, consulta [Instrumentar con OpenTracing][3] o [Instrumentar con OpenTelemetry][4].
 
-{{< nombre parcial="apm/apm-manual-instrumentation.html" >}}
+{{< partial name="apm/apm-manual-instrumentation.html" >}}
 
 
 <br>
 
 ## Leer más
 
-{{< nombre parcial="whats-next/whats-next.html" >}}
+{{< partial name="whats-next/whats-next.html" >}}
 
 
 [2]: /es/tracing/glossary

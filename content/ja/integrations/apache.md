@@ -23,8 +23,8 @@ assets:
     source_type_id: 30
     source_type_name: Apache
   monitors:
-    '[Apache] Low number of idle workers': assets/monitors/apache_low_idle_workers.json
-    '[Apache] resource utilization': assets/monitors/high_keep_alive_and_cpu.json
+    CPU load is running high: assets/monitors/high_keep_alive_and_cpu.json
+    Idle workers number is low: assets/monitors/apache_low_idle_workers.json
   saved_views:
     4xx_errors: assets/saved_views/4xx_errors.json
     5xx_errors: assets/saved_views/5xx_errors.json
@@ -38,7 +38,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - log collection
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/apache/README.md
 display_on_public_website: true
@@ -46,7 +46,7 @@ draft: false
 git_integration_title: apache
 integration_id: apache
 integration_title: Apache
-integration_version: 4.5.1
+integration_version: 6.0.0
 is_public: true
 manifest_version: 2.0.0
 name: apache

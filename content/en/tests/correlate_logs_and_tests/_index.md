@@ -4,16 +4,16 @@ description: Correlate your logs with your test traces.
 further_reading:
   - link: "/tests"
     tag: "Documentation"
-    text: "Learn about Test Visibility"
+    text: "Learn about Test Optimization"
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">Test Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
+<div class="alert alert-warning">Test Optimization is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
 ## Overview
 
-You can correlate Test Visibility data with [logs injected into Datadog][1], which allows you to view and analyze logs for specific test cases.
+You can correlate Test Optimization data with [logs injected into Datadog][1], which allows you to view and analyze logs for specific test cases.
 
 {{< img src="continuous_integration/correlate_logs_and_tests.png"
   alt="Examine logs for specific test cases with logs and tests correlation." style="width:90%" >}}
@@ -64,6 +64,26 @@ Use the following environment variables to enable and configure Agentless log su
 [2]: /tracing/other_telemetry/connect_logs_and_traces/
 {{% /tab %}}
 {{< /tabs >}}
+
+### .NET
+Agentless log submission is supported for the following languages and frameworks:
+
+- `dd-trace-dotnet >= 2.50.0` and XUnit TestOutputHelper.
+
+Use the following environment variables to enable and configure Agentless log submission:
+
+| Name | Description | Default value |
+|---|---|---|
+| `DD_CIVISIBILITY_LOGS_ENABLED` (required) | Enables/disables CI Visibility log submission | `false`
+
+### Swift
+
+Use the following environment variables to enable and configure log submission:
+
+| Name | Description | Default value |
+|---|---|---|
+| `DD_ENABLE_STDOUT_INSTRUMENTATION` | Enables/disables stdout log submission | `false`
+| `DD_ENABLE_STDERR_INSTRUMENTATION` | Enables/disables stderr log submission | `false`
 
 ## Further Reading
 

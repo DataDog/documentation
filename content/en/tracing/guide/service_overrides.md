@@ -1,20 +1,15 @@
 ---
 title: Service Overrides
 disable_toc: false
-private: true
 further_reading:
 - link: "/tracing/guide/inferred-service-opt-in"
   tag: "Documentation"
   text: "Opting-in to the new service representation"
 ---
 
-{{< callout url="https://docs.google.com/forms/d/1imGm-4SfOPjwAr6fwgMgQe88mp4Y-n_zV0K3DcNW4UA/edit" d_target="#signupModal" btn_hidden="false" header="Request access to the Preview!" >}}
-Inferred service dependencies are in Preview. To request access, complete the form. For opt-in instructions, see the <a href="/tracing/guide/inferred-service-opt-in/">Inferred Service dependencies guide</a>.
-{{< /callout >}}
-
 ## Overview
 
-Inferred services improve how Datadog represents service dependencies. This document explains the changes and how to adapt your configuration.
+[Inferred services][1] improve how Datadog represents service dependencies. This document explains the changes and how to adapt your configuration.
 
 ### Before inferred services
 
@@ -136,7 +131,7 @@ Similarly, for a span representing a call to a mySQL database:
 ## Glossary
 
 ##### Service override
-A service name set for a span which differs from the default `DD_SERVICE` name. It can be set [automatically]((#integration-service-overrides)) by some Datadog integrations, or [manually]((#custom-service-overrides)) by users.
+A service name set for a span which differs from the default `DD_SERVICE` name. It can be set [automatically](#integration-service-overrides) by some Datadog integrations, or [manually](#custom-service-overrides) by users.
 
 ##### Base service
 The default `DD_SERVICE` name.

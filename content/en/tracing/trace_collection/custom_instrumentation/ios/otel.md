@@ -1,6 +1,6 @@
 ---
-title: iOS and tvOS Custom Instrumentation using OpenTelemetry API
-description: 'Instrument your iOS and tvOS application with OpenTelemetry API to send traces to Datadog.'
+title: iOS and tvOS Custom Instrumentation using the OpenTelemetry API
+description: 'Instrument your iOS and tvOS application with the OpenTelemetry API to send traces to Datadog.'
 aliases:
 - /tracing/trace_collection/otel_instrumentation/ios/
 - /tracing/trace_collection/custom_instrumentation/otel_instrumentation/ios

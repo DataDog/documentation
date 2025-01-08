@@ -12,8 +12,9 @@ further_reading:
 
 Follow these steps to enable Data Jobs Monitoring for Databricks.
 
-1. [Configure the Datadog-Databricks integration](#configure-the-datadog-databricks-integration) with your Databricks API token.
-1. [Install the Datadog Agent](#install-the-datadog-agent-on-your-databricks-clusters) on your Databricks cluster(s).
+1. [Configure the Datadog-Databricks integration](#configure-the-datadog-databricks-integration) for a Databricks workspace.
+1. [Install the Datadog Agent](#install-the-datadog-agent-on-your-databricks-clusters) on your Databricks cluster(s) in the workspace.
+
 
 ### Configure the Datadog-Databricks integration
 
@@ -27,17 +28,44 @@ Follow these steps to enable Data Jobs Monitoring for Databricks.
    As an alternative, follow the [official Databricks documentation][10] to generate access token for a [service principal][11].
 
 1. In Datadog, open the Databricks integration tile.
-1. On the **Configure** tab, click **Add New**.
+1. On the **Configure** tab, click **Add Databricks Workspace**.
 1. Enter a workspace name, your Databricks workspace URL, and the Databricks token you generated.
-   {{< img src="data_jobs/databricks/configure-token.png" alt="In the Datadog-Databricks integration tile, a Databricks workspace is displayed. This workspace has a name, URL, and API token." style="width:100%;" >}}
+   {{< img src="data_jobs/databricks/configure-workspace-form.png" alt="In the Datadog-Databricks integration tile, a Databricks workspace is displayed. This workspace has a name, URL, and API token." style="width:100%;" >}}
+1. In the **Select products to set up integration** section, make sure the Data Jobs Monitoring product is **Enabled**.
+1. In the **Datadog Agent Setup** section, chooose either
+  - [Managed by Datadog (recommended)](?tab=datadogmanagedglobalinitscriptrecommended#install-the-datadog-agent): Datadog installs and manages the Agent with a global init script in the workspace.
+  - [Manually](?tab=manuallyinstallaglobalinitscript#install-the-datadog-agent): Follow the [instructions below](?tab=manuallyinstallaglobalinitscript#install-the-datadog-agent) to install and manage the init script for installing the Agent globally or on specific Databricks clusters.
 
+### Install the Datadog Agent
 
-### Install the Datadog Agent on your Databricks cluster(s)
-
-You can choose to install the Agent globally, or on a specific Databricks cluster.
+The Datadog Agent must be installed on Databricks clusters to monitor Databricks jobs that run on all-purpose or job clusters.
 
 {{< tabs >}}
-{{% tab "Global init (Recommended)" %}}
+{{% tab "Datadog managed global init script (Recommended)" %}}
+
+Datadog can install and manage a global init script in the Databricks workspace. The Datadog Agent is installed on all clusters in the workspace, when they start.
+
+#### When integrating a workspace with Datadog
+
+1. In the **Select products to set up integration** section, make sure the Data Jobs Monitoring product is **Enabled**.
+1. In the **Datadog Agent Setup** section, select the **Managed by Datadog** toggle button.
+1. Click **Select API Key** to either select an existing Datadog API key or create a new Datadog API key.
+1. Click **Save Databricks Workspace**.
+   {{< img src="data_jobs/databricks/configure-data-jobs-monitoring-new.png" alt="In the Datadog-Databricks integration tile, Datadog Agent Setup when adding a Databricks workspace. Datadog can install and manage a global init script." style="width:100%;" >}}
+
+#### When adding the init script to a Databricks workspace already integrated with Datadog
+
+1. On the **Configure** tab, click the workspace in the list of workspaces
+1. Click the **Configured Products** tab
+1. Make sure the Data Jobs Monitoring product is **Enabled**.
+1. In the **Datadog Agent Setup** section, select the **Managed by Datadog** toggle button.
+1. Click **Select API Key** to either select an existing Datadog API key or create a new Datadog API key.
+1. Click **Save** at the bottom of the browser window.
+   {{< img src="data_jobs/databricks/configure-data-jobs-monitoring-existing.png" alt="In the Datadog-Databricks integration tile, Datadog Agent Setup for a Databricks workspace already added to the integration. Datadog can install and manage a global init script." style="width:100%;" >}}
+
+{{% /tab %}}
+
+{{% tab "Manually install a global init script" %}}
 
 1. In Databricks, click your display name (email address) in the upper right corner of the page.
 1. Select **Settings** and click the **Compute** tab.
@@ -87,7 +115,8 @@ Optionally, you can also set other init script parameters and Datadog environmen
 [2]: /getting_started/site/
 
 {{% /tab %}}
-{{% tab "On a specific cluster" %}}
+
+{{% tab "Manually install on a specific cluster" %}}
 
 1. In Databricks, create a init script file in **Workspace** with the following content. Be sure to make note of the file path.
    ```shell
@@ -101,7 +130,9 @@ Optionally, you can also set other init script parameters and Datadog environmen
 
 1. On the cluster configuration page, click the **Advanced options** toggle.
 1. At the bottom of the page, go to the **Init Scripts** tab.
+   
    {{< img src="data_jobs/databricks/init_scripts.png" alt="Databricks UI, cluster configuration advanced options,  Init Scripts tab. A 'Destination' drop-down and an 'Init script path' file selector." style="width:80%;" >}}
+   
    - Under the **Destination** drop-down, select `Workspace`.
    - Under **Init script path**, enter the path to your init script.
    - Click **Add**.
@@ -141,9 +172,21 @@ Optionally, you can also set other init script parameters and Datadog environmen
 
 {{< /tabs >}}
 
+### Restart already-running clusters
+
+The init script installs the Agent when clusters start.
+
+Already-running all-purpose clusters or long-lived job clusters must be manually restarted for the init script to install the Datadog Agent.
+
+For scheduled jobs that run on job clusters, the init script installs the Datadog Agent automatically on the next run.
+
 ## Validation
 
 In Datadog, view the [Data Jobs Monitoring][6] page to see a list of all your Databricks jobs.
+
+## Troubleshooting
+
+{{% djm-install-troubleshooting %}}
 
 ## Advanced Configuration
 
@@ -154,7 +197,7 @@ In Datadog, view the [Data Jobs Monitoring][6] page to see a list of all your Da
 ### Aggregate cluster metrics from one-time job runs
    This configuration is applicable if you want cluster resource utilization data about your jobs and create a new job and cluster for each run via the [one-time run API endpoint][8] (common when using orchestration tools outside of Databricks such as Airflow or Azure Data Factory).
 
-   If you are submitting Databricks Jobs via the [one-time run API endpoint][8], each job run will have a unique job ID. This can make it difficult to group and analyze cluster metrics for jobs that use ephemeral clusters. To aggregate cluster utilization from the same job and assess performance across multiple runs, you must set the `DD_JOB_NAME` variable inside the `spark_env_vars` of every `new_cluster` to the same value as your request payload's `run_name`.
+   If you are submitting Databricks Jobs through the [one-time run API endpoint][8], each job run has a unique job ID. This can make it difficult to group and analyze cluster metrics for jobs that use ephemeral clusters. To aggregate cluster utilization from the same job and assess performance across multiple runs, you must set the `DD_JOB_NAME` variable inside the `spark_env_vars` of every `new_cluster` to the same value as your request payload's `run_name`.
 
    Here's an example of a one-time job run request body:
 
@@ -189,7 +232,14 @@ With [Databricks Networking Restrictions][12], Datadog may not have access to yo
 
 If you are controlling Databricks API access through IP access lists, allow-listing Datadog's specific {{< region-param key="ip_ranges_url_webhooks" link="true" text="IP addresses" >}} allows your cluster to perform all these interactions with Datadog services. Please see [Databricks documentation][13] for more details on how to manage IP access lists in Databricks.
 
-If you are using [Databricks Private Connectivity][14], it's recommended that you contact the Datadog [support team][15].
+If you are using [Databricks Private Connectivity][14], the steps to configure the connection depend on your cloud provider.
+{{< whatsnext desc="Refer to the guide for your cloud environment:" >}}
+    {{< nextlink href="agent/guide/private-link" >}}Connect to Datadog over AWS PrivateLink{{< /nextlink >}}
+    {{< nextlink href="agent/guide/azure-private-link" >}}Connect to Datadog over Azure Private Link{{< /nextlink >}}
+    {{< nextlink href="agent/guide/gcp-private-service-connect" >}}Connect to Datadog over GCP Private Service Connect{{< /nextlink >}}
+{{< /whatsnext >}}
+
+For further assistance, contact the Datadog [support team][15].
 
 ## Further Reading
 

@@ -92,7 +92,7 @@ En la siguiente tabla se muestra el número de tramos de errores por `Env`, `Ser
 
 ## Leer más
 
-{{< nombre parcial="whats-next/whats-next.html" >}}
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /es/tracing/trace_explorer/query_syntax/#search-syntax
 [2]: /es/tracing/trace_explorer/query_syntax/#time-range

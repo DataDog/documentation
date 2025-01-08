@@ -41,7 +41,8 @@ Datadog は、Amazon Data Firehose で Datadog の宛先を使用する場合、
    b. 宛先を `Datadog` にします。 
    c. 配信ストリームの名前を指定します。
    d. **Destination settings** で、[Datadog サイト][5]に対応する `Datadog logs` HTTP エンドポイント URL を選択します。 
-   e. API キーを **API key** フィールドに貼り付けます。API キーは、[Datadog API Keys ページ][3]から取得または作成できます。 
+   e. **API key** フィールドに API キーを貼り付けてください。API キーは [Datadog API Keys ページ][3]で取得または作成できます。Secrets Manager 認証を使用する場合は、次のように JSON 形式で value フィールドに Datadog API キーを追加してください: `{"api_key":"<YOUR_API_KEY>"}`。
+
    f. オプションとして、**Retry duration**、バッファの設定を構成するか、またはログにタグとしてアタッチされる **Parameters** を追加することができます。 
    **注**: Datadog は、ログが 1 行のメッセージである場合、**Buffer size** を `2 MiB` に設定することを推奨します。
    g. **Backup settings** で、再試行期間を超える失敗したイベントを受け取る S3 バックアップバケットを選択します。 
@@ -141,7 +142,7 @@ AWS CLI で設定する例としては、[Kinesis データストリームを使
 
 ### 検証
 
-[CloudWatch][1] のロググループの詳細ページの **Subscription filters** 田部井をチェックして、新しい Kinesis ストリームまたは Amazon Data Firehose ストリームがロググループをサブスクライブしているかを確認します。
+[CloudWatch][1] のロググループの詳細ページの **Subscription filters** タブをチェックして、新しい Kinesis ストリームまたは Amazon Data Firehose ストリームがロググループをサブスクライブしているかを確認します。
 
 ### Datadog でログを確認する
 

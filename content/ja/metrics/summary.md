@@ -35,25 +35,27 @@ title: メトリクスの概要
 - **Historical Metrics**: 履歴メトリクスの取り込みが有効になっているメトリクス
 - **Query Activity** (ベータ版) : 過去 30 日間にアプリまたは API でクエリされていないメトリクス
 - **Metric Type**: ディストリビューションメトリクスと非ディストリビューションメトリクス (カウント、ゲージ、レート) を区別します
-- **Distribution Metric Origin**: メトリクスが生成された製品 (例えば、Logs や APM Spans から生成されたメトリクス)
+- **メトリクスの起源 (Metric Origin)**: メトリクスがどの製品から発生したか (例: Logs や APM Spans から生成されたメトリクス)。様々なメトリクス起源タイプの詳細については[メトリクス起源の定義][12]を参照してください。
 
 **注**: ダッシュボードに含まれるメトリクスで、過去 30 日間にユーザーによってロードされていないものは、アクティブにクエリされたとは見なされません。
 
 {{< img src="metrics/summary/facets4.png" alt="メトリクスファセットパネル" style="width:75%;">}}
 
 ## 複数のメトリクスのコンフィギュレーション
-一度に複数のメトリクスを構成できる 2 つのボタンがあります。
 
-{{< img src="metrics/summary/configurationbuttons2.png" alt="一括構成ボタン" style="width:75%;">}}
+**Configure Metrics** (メトリクスを構成) をクリックすると、一度に複数のメトリクスを構成できるさまざまなオプションが表示されます。
 
-* **Calculate Percentiles**: 複数のディストリビューションメトリクスにパーセンタイル集計を追加します。
+{{< img src="metrics/summary/configurationbuttons10-11-2024.png" alt="一括構成用ボタン" style="width:100%;">}}
 
-{{< img src="metrics/summary/bulkpercentiles.jpg" alt="一括パーセンタイル" style="width:75%;">}}
-
-* **Configure Tags**: Metrics without Limits™ を使用して、ネームスペースに一致する複数のカスタムメトリクスにタグを構成します
+* **タグの管理 (Manage tags)**: Metrics without Limits™ を使用して、特定のネームスペースに一致する複数のカスタムメトリクスにタグを構成します。
 
 {{< img src="metrics/summary/bulkconfig_new-compressed.mp4" alt="一括メトリクスタグ構成" video="true" style="width:100%;" >}}
 
+* **パーセンタイルを有効または無効にする**: 複数の分布系メトリクスにわたってパーセンタイル集計を管理します。詳細は[分布ページ][31]をご覧ください。
+
+{{< img src="metrics/summary/percentile_aggregations_toggle.png" alt="パーセンタイル集計を管理するためのトグル" style="width:100%;">}}
+
+* **過去のメトリクス取り込みを有効または無効にする**: 過去のメトリクスデータの取り込みを管理します。詳細は[過去のメトリクス取り込みページ][30]をご覧ください。
 
 ## メトリクスの詳細サイドパネル
 
@@ -73,7 +75,7 @@ title: メトリクスの概要
 
 ### インデックスされたカスタムメトリクス
 
-インジェストされたカスタムメトリクスとは異なり、インデックスされたカスタムメトリクスは、Datadog プラットフォーム全体でクエリ可能な状態を維持するものを表しています。この数は、パーセンタイル集計の追加や削除、または Metrics without Limits™ の使用によって影響を受ける可能性があります。詳しくは、[Metrics without Limits™][10] のドキュメントを参照してください。<br>
+取り込まれたカスタムメトリクスとは異なり、インデックス化されたカスタムメトリクスは Datadog プラットフォーム全体でクエリ可能な状態を維持します。この数値は、パーセンタイル集計の追加または削除、あるいは Metrics without Limits™ の使用によって影響を受ける可能性があります。詳細は [Metrics without Limits™][0] のドキュメントをご覧ください。
 
 ### ホスト
 
@@ -181,11 +183,41 @@ Metrics without LimitsTM は、Agent やコードレベルの変更を必要と�
 
 **注**: カウント、レート、ゲージのメトリクスを構成し、集計を削除すると、既存のダッシュボードやモニターに影響を与える可能性があります。
 
+### メトリクス起源の定義
+
+以下の表は、ファセットに表示されるメトリクス起源と、そのメトリクスがどこから送信されたかの対応関係を示しています。
+
+| メトリクス起源           | 送信元                                                                |
+| ------------------------| ----------------------------------------------------------------------------- |
+| API カタログ             | Datadog [API Catalog][13] 製品から APIM エンドポイントを介して送信された時系列データ。
+| APM                     | Datadog APM 製品から送信された、トレースやスパンメトリクスにより生成された時系列データ。
+| Agent                   | Datadog Agent によって送信され、[Agent インテグレーション][10]、[組み込みインテグレーション][9]、[DogStatsD][32]、または[カスタム Agent チェック][33]から収集された時系列データ。
+| CSM                     | Datadog [Cloud Security Monitoring][14] 製品から送信された時系列データ。
+| Cloud Integrations      | AWS、Azure、Google Cloud など、各クラウドプロバイダーのインテグレーションから収集された時系列データ。
+| DBM                     | Datadog [Database Monitoring][15] 製品から送信された時系列データ (MySQL、Oracle、Postgres のアクティビティ/クエリ/ロックに関するインサイトを含む)。
+| DSM                     | Datadog [Data Streams Monitoring][16] 製品から送信された時系列データ (DSM スパンやトレースから生成されたメトリクス)。
+| Datadog エクスポーター        | [OpenTelemetry Collector][17] または [Datadog Exporter][18] から送信された時系列データ。
+| Datadog Platform        | [メトリクス使用状況を報告する][11]ために用いられるメトリクスインテークによって送信された時系列データ。
+| イベント                  | Datadog Events プラットフォームから生成された時系列データ。
+| LLM Observability       | `lmobs_to_metrics` サービスを使用して LLM Observability 製品から出力された時系列データ。
+| ログ                    | Datadog [Logs][28] プラットフォームから生成された時系列データ。
+| Metrics API             | Datadog の [OTLP Ingestion エンドポイント][21]および OTel レシーバーを使用して送信され、Datadog インテグレーションに対応するもの、推定使用量メトリクス、または Datadog API クライアント由来の時系列データ。
+| CNM                     | Datadog [Cloud Network Monitoring][19] 製品から送信された時系列データ。
+| Observability Pipelines | Datadog [Observability Pipelines][20] から送信された時系列データ (エラーおよびパフォーマンスメトリクスを含む)。
+| その他                   | DD インテグレーション対応がない時系列データ。
+| プロセス               | Datadog [Processes][22] 製品から生成された時系列データ。
+| RUM                     | Datadog [Real User Monitoring][23] 製品から生成された時系列データ。
+| SAAS Integrations       | Slack、Docker、PagerDuty などの一般的な SaaS プラットフォームから収集された時系列データ。
+| サーバーレス              | Datadog [Serverless][24] プラットフォームから送信された時系列データ (Function、App Services、Cloud Run、Container App Metrics を含む)。
+| サービスカタログ         | Datadog [Service Catalog][25] 製品から送信された時系列データ ([Scorecard][29] メトリクスを含む)。
+| Synthetic Monitoring    | Datadog [Synthetic Monitoring][26] 製品から生成された、Synthetic モニタリングおよび継続的テスト用メトリクス。
+| USM                     | Datadog [Universal Service Monitoring][27] 製品から生成された時系列データ。
+
 ## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[10]: /ja/metrics/metrics-without-limits
+[0]: /ja/metrics/metrics-without-limits
 [1]: https://app.datadoghq.com/metric/summary
 [2]: /ja/metrics/explorer/
 [3]: /ja/dashboards/
@@ -195,3 +227,27 @@ Metrics without LimitsTM は、Agent やコードレベルの変更を必要と�
 [7]: /ja/metrics/units/
 [8]: /ja/metrics/types/
 [9]: /ja/integrations/
+[10]: /ja/integrations/agent_metrics/
+[11]: /ja/account_management/billing/usage_metrics/
+[12]: /ja/metrics/summary/#metric-origin-definitions
+[13]: /ja/api_catalog/
+[14]: /ja/security/cloud_security_management/
+[15]: /ja/database_monitoring/
+[16]: /ja/data_streams/
+[17]: /ja/opentelemetry/collector_exporter/otel_collector_datadog_exporter/?tab=onahost
+[18]: /ja/opentelemetry/collector_exporter/
+[19]: /ja/network_monitoring/cloud_network_monitoring/
+[20]: /ja/observability_pipelines/
+[21]: /ja/opentelemetry/interoperability/otlp_ingest_in_the_agent/?tab=host
+[22]: /ja/integrations/process/
+[23]: /ja/monitors/types/real_user_monitoring/
+[24]: /ja/serverless/
+[25]: /ja/service_catalog/
+[26]: /ja/synthetics/
+[27]: /ja/universal_service_monitoring/
+[28]: /ja/logs/
+[29]: /ja/service_catalog/scorecards/
+[30]: /ja/metrics/custom_metrics/historical_metrics/#bulk-configuration-for-multiple-metrics
+[31]: /ja/metrics/distributions/#bulk-configuration-for-multiple-metrics
+[32]: /ja/metrics/custom_metrics/dogstatsd_metrics_submission/
+[33]: /ja/metrics/custom_metrics/agent_metrics_submission/

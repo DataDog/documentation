@@ -152,7 +152,7 @@ The Inspect Changes (Diff) tab in the audit event details panel compares the con
 
 ## Filter audit events based on Reference Tables
 
-<div class="alert alert-warning">Reference Tables are in beta. Reference Tables containing over 40,000 rows cannot be used to filter events. See <a href="https://docs.datadoghq.com/integrations/guide/reference-tables/">Add Custom Metadata with Reference Tables</a> for more information on how to create and manage Reference Tables. </div>
+<div class="alert alert-warning">Reference Tables containing over 40,000 rows cannot be used to filter events. See <a href="https://docs.datadoghq.com/integrations/guide/reference-tables/">Add Custom Metadata with Reference Tables</a> for more information on how to create and manage Reference Tables. </div>
 
 Reference Tables allow you to combine metadata with audit events, providing more information to investigate Datadog user behavior. Add a query filter based on a Reference Table to perform lookup queries. For more information on activating and managing this feature, see the [Reference Tables][2] guide.
 
@@ -162,7 +162,7 @@ To apply a query filter with Reference Tables, click on the `+ Add` button next 
 
 ### API key auditing
 
-<div class="alert alert-warning">API key auditing is in private beta.</div>
+<div class="alert alert-warning">API key auditing is in Preview.</div>
 
 Log management users can audit API key usage with Audit Trail. For API key auditing, logs have a `datadog.api_key_uuid` tag that contains the UUID of the API key used for collecting those logs. Use this information to determine:
 - How API keys are used across your organization and telemetry sources.

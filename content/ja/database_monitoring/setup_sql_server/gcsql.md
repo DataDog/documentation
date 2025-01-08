@@ -4,10 +4,13 @@ further_reading:
 - link: /integrations/sqlserver/
   tag: ドキュメント
   text: SQL Server インテグレーション
+- link: /database_monitoring/guide/sql_deadlock/
+  tag: ドキュメント
+  text: デッドロックモニタリングの構成
 title: Google Cloud SQL マネージド SQL Server のデータベースモニタリングの設定
 ---
 
-データベースモニタリングは、クエリメトリクス、クエリサンプル、実行計画、データベースの状態、フェイルオーバー、イベントを公開することで、Microsoft SQL Server データベースを詳細に可視化します。
+Database Monitoring は、クエリメトリクス、クエリサンプル、実行計画、データベースの状態、フェイルオーバー、イベントを公開することで、Microsoft SQL Server データベースを詳細に可視化します。
 
 データベースでデータベースモニタリングを有効にするには、以下の手順を実行します。
 
@@ -78,7 +81,7 @@ instances:
 
 `service` と `env` タグを使用して、共通のタグ付けスキームでデータベースのテレメトリーを他のテレメトリーにリンクします。これらのタグが Datadog 全体でどのように使用されるかについては、[統合サービスタグ付け][5]を参照してください。
 
-### Securely store your password
+### パスワードを安全に保管
 {{% dbm-secret %}}
 
 ### 対応ドライバー
@@ -139,10 +142,10 @@ instances:
     password: 'ENC[datadog_user_database_password]'
     connector: odbc
     driver: '<Driver from the `odbcinst.ini` file>'
-    tags:  # Optional
+    tags:  # オプション
       - 'service:<CUSTOM_SERVICE>'
       - 'env:<CUSTOM_ENV>'
-    # After adding your project and instance, configure the Datadog Google Cloud (GCP) integration to pull additional cloud data such as CPU, Memory, etc.
+    # プロジェクトとインスタンスを追加した後、Datadog Google Cloud (GCP) インテグレーションを構成して、CPU やメモリなどの追加のクラウドデータを取得します。
     gcp:
       project_id: '<PROJECT_ID>'
       instance_id: '<INSTANCE_ID>'
@@ -242,7 +245,7 @@ Kubernetes クラスターでクラスターチェックがまだ有効になっ
             username: datadog
             password: 'ENC[datadog_user_database_password]'
             connector: 'odbc'
-            driver: 'ODBC Driver 18 for SQL Server'
+            driver: '{ODBC Driver 18 for SQL Server}'
             tags:  # Optional
               - 'service:<CUSTOM_SERVICE>'
               - 'env:<CUSTOM_ENV>'
@@ -272,7 +275,7 @@ Windows の場合は、<code>helm install</code> コマンドに <code>--set tar
 マウントされたコンフィギュレーションファイルを使ってクラスターチェックを構成するには、コンフィギュレーションファイルを Cluster Agent コンテナのパス `/conf.d/sqlserver.yaml` にマウントします。
 
 ```yaml
-cluster_check: true  # Make sure to include this flag
+cluster_check: true  # このフラグを必ず入れてください
 init_config:
 instances:
   - dbm: true
@@ -281,11 +284,11 @@ instances:
     username: datadog
     password: 'ENC[datadog_user_database_password]'
     connector: "odbc"
-    driver: "ODBC Driver 18 for SQL Server"
-    tags:  # Optional
+    driver: '{ODBC Driver 18 for SQL Server}'
+    tags:  # オプション
       - 'service:<CUSTOM_SERVICE>'
       - 'env:<CUSTOM_ENV>'
-    # After adding your project and instance, configure the Datadog Google Cloud (GCP) integration to pull additional cloud data such as CPU, Memory, etc.
+    # プロジェクトとインスタンスを追加した後、Datadog Google Cloud (GCP) インテグレーションを構成して、CPU やメモリなどの追加のクラウドデータを取得します。
     gcp:
       project_id: '<PROJECT_ID>'
       instance_id: '<INSTANCE_ID>'
@@ -314,7 +317,7 @@ metadata:
           "password": "ENC[datadog_user_database_password]",
           "connector": "odbc",
           "driver": "ODBC Driver 18 for SQL Server",
-          "tags": ["service:<CUSTOM_SERVICE>", "env:<CUSTOM_ENV>"],  # Optional
+          "tags": ["service:<CUSTOM_SERVICE>", "env:<CUSTOM_ENV>"],  # オプション
           "gcp": {
             "project_id": "<PROJECT_ID>",
             "instance_id": "<INSTANCE_ID>"

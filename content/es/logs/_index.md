@@ -1,4 +1,7 @@
 ---
+algolia:
+  tags:
+  - Logs
 aliases:
 - /es/guides/logs/
 - /es/en/logs
@@ -45,8 +48,15 @@ further_reading:
 - link: https://www.datadoghq.com/blog/monitor-dns-logs-for-network-and-security-datadog/
   tag: Blog
   text: Monitoriza logs de DNS para red y análisis de seguridad
+- link: https://www.datadoghq.com/architecture/a-guide-to-log-management-indexing-strategies-with-datadog/
+  tag: Centro de arquitectura
+  text: Guía de estrategias de indexación de la gestión de logs con Datadog
 title: Gestión de logs
 ---
+
+{{< learning-center-callout header="Join an enablement webinar session" hide_image="true" btn_title="Sign Up" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=Logs">}}
+Participa en una sesión de capacitación introductoria o intermedia para aprender cómo la gestión de logs de Datadog unifica logs, métricas, y trazas (traces) en una única vista, ofreciéndote un contexto enriquecido para el análisis de los datos de logs.
+{{< /learning-center-callout >}}
 
 ## Información general
 
@@ -60,7 +70,7 @@ Logging without Limits\* permite agilizar la experiencia de solucionar problemas
 
 {{< vimeo url="https://player.vimeo.com/progressive_redirect/playback/293195142/rendition/1080p/file.mp4?loc=external&signature=8a45230b500688315ef9c8991ce462f20ed1660f3edff3d2904832e681bd6000" poster="/images/poster/logs.png" >}}
 
-</br>
+Accede a dashboards preconfigurados
 
 ## Recopilar
 
@@ -85,6 +95,8 @@ Aprovecha los pilares de la observabilidad conectando tus logs a métricas y tra
 
 Comienza a explorar tus logs ingeridos en el [Log Explorer][1].
 
+**Consejo**: Para abrir el Explorador de logs desde la búsqueda global de Datadog, pulsa <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>K</kbd> y busca `logs`.
+
 {{< img src="/logs/explore.png" alt="Explora tus logs ingeridos" style="width:80%;">}}
 
 - [Buscar][8]: busca a través de todos tus logs.
@@ -98,7 +110,7 @@ Comienza a explorar tus logs ingeridos en el [Log Explorer][1].
   Aprende sin coste alguno sobre la capacidad real de computación en la nube y una cuenta de prueba de Datadog. Inscríbete hoy mismo para obtener más información sobre la recopilación, consulta, análisis, métricas, monitorización, procesamiento, almacenamiento y control de acceso de logs.
 {{< /learning-center-callout >}}
 
-## Leer más
+## Configurar tests de API y tests de API multupaso
 
 {{< partial name="whats-next/whats-next.html" >}}
 <br>

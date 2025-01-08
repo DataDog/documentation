@@ -2,7 +2,6 @@
 title: Enable Dynamic Instrumentation for Java
 aliases:
     - /tracing/dynamic_instrumentation/enabling/java/
-is_beta: false
 private: false
 code_lang: java
 type: multi-code-lang
@@ -18,7 +17,7 @@ Dynamic Instrumentation is a feature of supporting Datadog tracing libraries. If
 ## Requirements
 
 - The Datadog Dynamic Instrumentation library is supported in JDK version 8 and above.
-- For a better experience, Datadog recommends enabling [autocomplete and search (open beta)][7].
+- For a better experience, Datadog recommends enabling [autocomplete and search (in Preview)][7].
 
 ## Installation
 
@@ -94,7 +93,7 @@ Configure Dynamic Instrumentation using the following environment variables:
 | ------------------------------------------------ | ------------- | ------------------------------------------------------------------------------------------------------------------------- |
 | `DD_DYNAMIC_INSTRUMENTATION_ENABLED`             | Boolean       | Alternate for `-Ddd.dynamic.instrumentation.enabled` argument. Set to `true` to enable Dynamic Instrumentation.           |
 | `DD_SERVICE`                                     | String        | The [service][5] name, for example, `web-backend`.                                                                        |
-| `DD_ENV`                                         | String        | The [environment][5] name, for example: `production`.                                                                     |
+| `DD_ENV`                                         | String        | The [environment][5] name, for example, `production`.                                                                     |
 | `DD_VERSION`                                     | String        | The [version][5] of your service.                                                                                         |
 | `DD_TAGS`                                        | String        | Tags to apply to produced data. Must be a list of `<key>:<value>` separated by commas such as: `layer:api,team:intake`.   |
 
@@ -102,7 +101,7 @@ Configure Dynamic Instrumentation using the following environment variables:
 
 See [Dynamic Instrumentation][6] for information about setting snapshot and metric probes and browsing and indexing the data.
 
-## Further Reading
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 

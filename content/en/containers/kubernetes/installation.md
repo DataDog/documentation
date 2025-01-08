@@ -28,11 +28,11 @@ For dedicated documentation and examples for monitoring the Kubernetes control p
 
 Some features related to later Kubernetes versions require a minimum Datadog Agent version.
 
-| Kubernetes version | Agent version  | Reason                                |
-|--------------------|----------------|---------------------------------------|
-| 1.16.0+            | 7.19.0+        | Kubelet metrics deprecation           |
-| 1.21.0+            | 7.36.0+        |  Kubernetes resource deprecation       |
-| 1.22.0+            | 7.37.0+        |  Support dynamic service account token |
+| Kubernetes version | Agent version | Reason                                |
+| ------------------ | ------------- | ------------------------------------- |
+| 1.16.0+            | 7.19.0+       | Kubelet metrics deprecation           |
+| 1.21.0+            | 7.36.0+       | Kubernetes resource deprecation       |
+| 1.22.0+            | 7.37.0+       | Support dynamic service account token |
 
 See also: [Minimum Kubernetes and Cluster Agent versions][8].
 
@@ -79,7 +79,7 @@ Use the [Installing on Kubernetes][16] page in Datadog to guide you through the 
            secretName: datadog-secret
            keyName: api-key
    ```
-   - Replace `<CLUSTER_NAME>` with a name for your cluster.
+   - Replace `<CLUSTER_NAME>` with a name for your cluster. 
    - Replace `<DATADOG_SITE>` with your [Datadog site][2]. Your site is {{< region-param key="dd_site" code="true" >}}. (Ensure the correct SITE is selected on the right).
 
 4. **Deploy Agent with the above configuration file**
@@ -138,6 +138,17 @@ Use the [Installing on Kubernetes][16] page in Datadog to guide you through the 
 5. **Confirm Agent installation**
 
    Verify that Agent pods (tagged with `app.kubernetes.io/component:agent`) appear on the [Containers][13] page in Datadog. Agent pods are detected within a few minutes of deployment.
+
+<div class="alert alert-info">
+
+<code>&lt;CLUSTER_NAME&gt;</code> allows you to scope hosts and Cluster Checks. This unique name must be dot-separated tokens and abide by the following restrictions:
+<ul>
+  <li/>Must only contain lowercase letters, numbers, and hyphens
+  <li/>Must start with a letter
+  <li/>Must end with a number or a letter
+  <li/>Must be less than or equal to 80 characters
+</ul>
+</div>
 
 ### Unprivileged installation
 
@@ -203,11 +214,11 @@ helm install datadog-agent -f datadog-values.yaml datadog/datadog
 
 ### Container registries
 
-Datadog publishes container images to Google Artifact Registry, Amazon ECR, and Docker Hub:
+Datadog publishes container images to Google Artifact Registry, Amazon ECR, Azure ACR, and Docker Hub:
 
-| gcr.io | public.ecr.aws | docker hub |
-| ------ | -------------- | ------------ |
-| gcr.io/datadoghq | public.ecr.aws/datadog | docker.io/datadog |
+| Google Artifact Registry | Amazon ECR             | Azure ACR            | Docker Hub        |
+| ------------------------ | ---------------------- | -------------------- | ----------------- |
+| gcr.io/datadoghq         | public.ecr.aws/datadog | datadoghq.azurecr.io | docker.io/datadog |
 
 By default, the Agent image is pulled from Google Artifact Registry (`gcr.io/datadoghq`). If Artifact Registry is not accessible in your deployment region, use another registry.
 

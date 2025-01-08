@@ -26,11 +26,12 @@ By enriching your RUM data with feature flag data, you can be confident that you
 
 Feature flag tracking is available in the RUM Browser SDK. To start, set up [RUM browser monitoring][1]. You need the Browser RUM SDK version >= 4.25.0.
 
-To start collecting feature flag data, initialize the RUM SDK and configure the `enableExperimentalFeatures` initialization parameter with ` ["feature_flags"]`.
+<details>
+  <summary>Before <code>v5.17.0</code></summary>
 
-<details open>
-  <summary>npm</summary>
+If you are using a version previous to 5.17.0, initialize the RUM SDK and configure the `enableExperimentalFeatures` initialization parameter with `["feature_flags"]` to start collecting feature flag data.
 
+{{% collapse-content title="NPM" level="h4" %}}
 ```javascript
   import { datadogRum } from '@datadog/browser-rum';
 
@@ -41,12 +42,9 @@ To start collecting feature flag data, initialize the RUM SDK and configure the 
     ...
 });
 ```
+{{% /collapse-content %}} 
 
-</details>
-
-<details>
-  <summary>CDN async</summary>
-
+{{% collapse-content title="CDN async" level="h4" %}}
 ```javascript
 window.DD_RUM.onReady(function() {
     window.DD_RUM.init({
@@ -56,11 +54,9 @@ window.DD_RUM.onReady(function() {
     })
 })
 ```
-</details>
+{{% /collapse-content %}} 
 
-<details>
-  <summary>CDN sync</summary>
-
+{{% collapse-content title="CDN sync" level="h4" %}}
 ```javascript
 window.DD_RUM &&
     window.DD_RUM.init({
@@ -69,34 +65,48 @@ window.DD_RUM &&
       ...
     })
 ```
+{{% /collapse-content %}}
+
 </details>
 <br/>
 
-[1]: /real_user_monitoring/browser#setup
-{{% /tab %}}
-{{% tab "iOS" %}}
-
-Feature flag tracking is available in the RUM iOS SDK. To start, set up [RUM iOS monitoring][1]. You need the iOS RUM SDK version >= 1.16.0.
-
-[1]: https://docs.datadoghq.com/real_user_monitoring/ios/?tab=swift
+[1]: /real_user_monitoring/browser/setup/
 {{% /tab %}}
 {{% tab "Android" %}}
 
 Feature flag tracking is available in the RUM Android SDK. To start, set up [RUM Android monitoring][1]. You need the Android RUM SDK version >= 1.18.0.
 
-[1]: https://docs.datadoghq.com/real_user_monitoring/android/?tab=kotlin
+[1]: /real_user_monitoring/mobile_and_tv_monitoring/android/setup/
 {{% /tab %}}
 {{% tab "Flutter" %}}
 
 Feature flag tracking is available for your Flutter applications. To start, set up [RUM Flutter monitoring][1]. You need the Flutter Plugin version >= 1.3.2.
 
-[1]: https://docs.datadoghq.com/real_user_monitoring/mobile_and_tv_monitoring/setup/flutter/
+[1]: /real_user_monitoring/mobile_and_tv_monitoring/flutter/setup/
+{{% /tab %}}
+{{% tab "iOS" %}}
+
+Feature flag tracking is available in the RUM iOS SDK. To start, set up [RUM iOS monitoring][1]. You need the iOS RUM SDK version >= 1.16.0.
+
+[1]: /real_user_monitoring/mobile_and_tv_monitoring/ios/setup
+{{% /tab %}}
+{{% tab "Kotlin Multiplatform" %}}
+
+Feature flag tracking is available for your Kotlin Multiplatform applications. To start, set up [RUM Kotlin Multiplatform monitoring][1].
+
+[1]: /real_user_monitoring/mobile_and_tv_monitoring/kotlin_multiplatform
 {{% /tab %}}
 {{% tab "React Native" %}}
 
 Feature flag tracking is available for your React Native applications. To start, set up [RUM React Native monitoring][1]. You need the React Native RUM SDK version >= 1.7.0.
 
-[1]: https://docs.datadoghq.com/real_user_monitoring/reactnative/
+[1]: /real_user_monitoring/mobile_and_tv_monitoring/react_native/setup
+{{% /tab %}}
+{{% tab "Unity" %}}
+
+Feature flag tracking is available for your Unity applications. To start, set up [RUM Unity monitoring][1].
+
+[1]: /real_user_monitoring/mobile_and_tv_monitoring/unity/setup
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -676,7 +686,7 @@ LaunchDarkly does not currently support this integration. Create a ticket with L
 {{< tabs >}}
 {{% tab "Browser" %}}
 
-Initialize Split's SDK and and create an impression listener reporting feature flag evaluations to Datadog using the following snippet of code:
+Initialize Split's SDK and create an impression listener reporting feature flag evaluations to Datadog using the following snippet of code:
 
 For more information about initializing Split's SDK, see Split's [JavaScript SDK documentation][1].
 
@@ -774,7 +784,7 @@ For more information about initializing Split's SDK, see Split's [Flutter plugin
 {{% /tab %}}
 {{% tab "React Native" %}}
 
-Initialize Split's SDK and and create an impression listener reporting feature flag evaluations to Datadog using the following snippet of code:
+Initialize Split's SDK and create an impression listener reporting feature flag evaluations to Datadog using the following snippet of code:
 
 For more information about initializing Split's SDK, see Split's [React Native SDK documentation][1].
 
@@ -903,7 +913,7 @@ datadogRum.addFeatureFlagEvaluation(key.replace(':', '_'), value);
 ## Further Reading
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/browser/setup
+[1]: /real_user_monitoring/browser/setup/
 [2]: https://app.datadoghq.com/rum/explorer
 [3]: /dashboards/
 [4]: /monitors/#create-monitors

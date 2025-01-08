@@ -472,6 +472,18 @@ If a variable is assigned different values along your browser test steps (for ex
 
 Some variables only compute at runtime, such as a variable from an HTTP request or a JavaScript step. For example, assume you have a `Type text` step featuring `{{ <YOUR_VARIABLE_NAME> }}`. At test execution, `{{ <YOUR_VARIABLE_NAME> }}` is systematically replaced by your variable's associated value. To record a step using one of these variables, record a step with the actual variable value, and replace the actual value with `{{ <YOUR_VARIABLE_NAME> }}` in the step's definition before saving your test. 
 
+### Use multiple variables
+
+You can add multiple variables to your browser test recording steps.
+
+In your browser test recording, click the **+ Add Variable** button to add one or more variables to your test:
+
+  {{< img src="synthetics/browser_tests/extract_multiple_variables.png" alt="Defining a local variable from global variables" width="90%" >}}
+
+In your browser test's recorder, add a step recording, and click **Extract variables from the response(optional)** to extract and use the variables in your browser test:
+
+  {{< img src="synthetics/browser_tests/edit_test_extract_multiple_variables.png" alt="Injecting a local variable into a field during a browser recording" width="90%" >}}
+
 ## Edit a recording 
 
 To edit a browser recording after it's saved:

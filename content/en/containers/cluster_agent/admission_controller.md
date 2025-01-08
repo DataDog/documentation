@@ -12,6 +12,12 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/auto-instrument-kubernetes-tracing-with-datadog/"
   tag: "Blog"
   text: "Use library injection to auto-instrument tracing for Kubernetes applications with Datadog APM"
+- link: "https://www.datadoghq.com/architecture/instrument-your-app-using-the-datadog-operator-and-admission-controller/"
+  tag: "Architecture Center"
+  text: "Instrument your app using the Datadog Operator and Admission Controller"
+- link: "/containers/guide/cluster_agent_disable_admission_controller"
+  tag: "Documentation"
+  text: "Disable the Datadog Admission Controller with the Cluster Agent"
 ---
 
 ## Overview
