@@ -41,11 +41,17 @@ Averages involving cardinality can also present challenges.
 
 For example, hourly averages for the proportion of distinct users without errors may consistently appear high, even at 99.5%. Yet, weekly averages can reveal a lower percentage, decreasing to 97.5% due to the broader time frame.
 
-This discrepancy is due to the weekly calculation aggregating more unique user visits, which means more error occurrences over a longer period.
+This discrepancy is due to the weekly calculation aggregating multiple visits for each unique user, which means more users are likely to see at least one error over the longer period.
 
 ### Example calculation
 
-Suppose a site experiences 18,000 error events among 13,000 users in a week. Hourly, this might average to about 107 error-afflicted users out of 20,000 total users per hour, resulting in a lower error rate. However, weekly aggregation reveals a higher error rate due to more users encountering errors across the entire week.
+Suppose, over the course of a week, 2,000 users on a site experiences a total of 6,000 error events, while the remaining 22,000 users don't experience any errors.  Since a user's multiple errors may occur nearly simultaneously or in different hours, there could be an average of as many as 35 users experiencing errors per hour or as few as 11.
+The number of distinct users per hour also varies depending on how often users visit the site: for example, a typically user might visit daily, so the 24,000 total distinct weekly users produce an average of 1,000 distinct users per hour.
+The error rate for distinct users is then between 0.11% and 0.35%.
+
+However, over the course of the week, 2,000 out of the 24,000 users experienced at least one error, for an error rate of 8.3%, significantly higher.
+
+While very few users had an issue in any particular hour, aggregating over the week provides more opportunities for an individual user to see an error, resulting in a significantly higher error rate.
 
 When aggregating errors at a weekly scale, the total count of errors appears higher as more users experience errors over the extended duration, contrasting with the lower average seen hourly.
 
