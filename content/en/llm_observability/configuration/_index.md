@@ -47,7 +47,7 @@ After you click **Save**, LLM Observability invokes a `GPT-4o mini` model using 
 
 For more information about evaluations, see [Terms and Concepts][1].
 
-## Estimated Token Usage
+### Estimated Token Usage
 
 Datadog provides metrics to help you monitor and manage the token usage associated with evaluations that power LLM Observability (LLM Obs). While LLM Obs enables you to monitor your LLM applications, these metrics allow you to track the resources consumed by the LLMs behind the features of LLM Obs itself, ensuring efficient usage and cost management.
 
