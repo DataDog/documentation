@@ -35,7 +35,7 @@ To see usage information for the dashboard, use Audit Trail to search for all AP
 <br>**Note**: You can also use the facet panel on the left side of the page to formulate the search query.
 3. Select the timeframe in the upper right side of the page to see the events for a specific time period.
 4. You can configure the **Group into fields** section and select different visualization tools to break down and analyze the data based on your use case. For example, if you set the `group by` field to `User Email` and click **Top List** in the **Visualize as** section, you get a top list of users who accessed the dashboard.
-5. See [Create a dashboard or graph][3] if you want to put this information into a dashboard or graph.
+5. See [Create a dashboard or a graph][3] if you want to put this information into a dashboard or graph.
 
 ## View recent dashboard configuration changes
 
@@ -57,7 +57,7 @@ You can use [event queries][7] in Audit Trail to see a list of dashboards that h
 
    {{< img src="account_management/audit_logs/dashboard_change_diff.png" alt="A text diff showing a new widget being added to the dashboard" style="width:100%;" >}}
 
-1. See [Create a dashboard or graph][3] if you want to put this information into a dashboard or graph.
+1. See [Create a dashboard or a graph][3] if you want to put this information into a dashboard or graph.
 
 ## Further reading
 
