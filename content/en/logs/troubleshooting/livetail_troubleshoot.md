@@ -37,16 +37,16 @@ Here is how to do it in Google Chrome - [link](https://support.google.com/accoun
 
 **DNS cache:**
 
-Launch chrome browser. Type 'chrome://net-internals/#dns' in the address bar, then press Enter. Click on 'Clear host cache' button. Chrome Browser DNS cache will be cleared.
+Launch chrome browser. Type 'chrome://net-internals/#dns' in the address bar, then press Enter. Click on 'Clear host cache' button.
 
 ## Check browser plugins / extensions:
 
 -   Check if your browser / OS has any ad-blocker app installed. Uninstall it and then check if you are able to see logs in the live tail.
 -   Pause / stop / uninstall any browser plugins / extensions.
 
-## Check access (RBAC):
+## Check logs live tail access:
 
-Verify if your Datadog account has a [logs restriction query (RBAC)](https://docs.datadoghq.com/logs/guide/logs-rbac/?tab=ui) configured. If you don’t have the necessary permissions to access the logs you are querying in Live Tail, no logs will be visible. If you believe you should have access to these logs, please contact your Datadog account administrator to grant the required permissions.
+Verify if your Datadog account has a [logs restriction query (RBAC)](https://docs.datadoghq.com/logs/guide/logs-rbac/?tab=ui) configured. If you don't have the necessary permissions to access the logs you are querying in Live Tail, no logs will be visible. If you believe you should have access to these logs, contact your Datadog account administrator to grant the required permissions.
 
 Moreover, check if you have a role assigned which has logs [live tail permission](https://docs.datadoghq.com/logs/guide/logs-rbac-permissions/?tab=ui#logs_live_tail).
 
@@ -56,7 +56,7 @@ Moreover, check if you have a role assigned which has logs [live tail permission
 
 ## Create a support ticket:
 
-If the above troubleshooting steps doesn’t resolve the issue with logs live tail, please create a [support ticket](https://help.datadoghq.com/hc/en-us/requests/new?_gl=1*glz742*_gcl_aw*R0NMLjE3Mjc2ODY1MTEuQ2owS0NRandtT20zQmhDOEFSSXNBT1NiYXBWWkYyLXNtNWhxNXZEZWMyYzRKOWdHallUOGlnVmxFbGlnVmxGSGZRT2NKdkJubnU4TC1Ld2FBcXByRUFMd193Y0I.*_gcl_au*MTc4Nzg4NDk2NC4xNzMwODc5MjQw*_ga*MTM3Njg5NDYzMy4xNzIyOTAyNDI2*_ga_KN80RDFSQK*MTczMjY3MzYzMy42OC4xLjE3MzI2NzM2NDMuMC4wLjIwNjg5ODUwOTA.*_fplc*OXFtRVFHUzdxUDhwUDRxbVBhS05lUlR3V0tWUXFEcEoyVWNQd0h1cWZ0JTJGTHFZcGxtZ3lLVjFsQ3g5OCUyQjJoN3FmU012SXhjSktuNmNCQkxNczVJNXFNU1NYJTJGblpLU0ZxNngyTlFkV0I3SyUyQmJWMHUxMDdycGdLRXdwRndOdUElM0QlM0Q.). Please collect the following information before creating a support ticket.
+If the above troubleshooting steps does not resolve the issue with logs live tail, create a [support ticket](https://help.datadoghq.com/hc/en-us/requests/new?_gl=1*glz742*_gcl_aw*R0NMLjE3Mjc2ODY1MTEuQ2owS0NRandtT20zQmhDOEFSSXNBT1NiYXBWWkYyLXNtNWhxNXZEZWMyYzRKOWdHallUOGlnVmxFbGlnVmxGSGZRT2NKdkJubnU4TC1Ld2FBcXByRUFMd193Y0I.*_gcl_au*MTc4Nzg4NDk2NC4xNzMwODc5MjQw*_ga*MTM3Njg5NDYzMy4xNzIyOTAyNDI2*_ga_KN80RDFSQK*MTczMjY3MzYzMy42OC4xLjE3MzI2NzM2NDMuMC4wLjIwNjg5ODUwOTA.*_fplc*OXFtRVFHUzdxUDhwUDRxbVBhS05lUlR3V0tWUXFEcEoyVWNQd0h1cWZ0JTJGTHFZcGxtZ3lLVjFsQ3g5OCUyQjJoN3FmU012SXhjSktuNmNCQkxNczVJNXFNU1NYJTJGblpLU0ZxNngyTlFkV0I3SyUyQmJWMHUxMDdycGdLRXdwRndOdUElM0QlM0Q.). Collect the following information before creating a support ticket.
 
 **OS/Browser details:**
 
