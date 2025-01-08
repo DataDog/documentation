@@ -51,7 +51,6 @@ For more information about evaluations, see [Terms and Concepts][1].
 
 LLM Observability provides metrics to help you monitor and manage the token usage associated with evaluations that power LLM Observability. The following metrics allow you to track the LLM resources consumed to power evaluations:
 
-The following metrics provide detailed insights into token usage during evaluations:
 
 - `ml_obs.estimated_usage.llm.input.tokens`
 - `ml_obs.estimated_usage.llm.output.tokens`
