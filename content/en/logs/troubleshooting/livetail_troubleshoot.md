@@ -44,9 +44,9 @@ Launch chrome browser. Type 'chrome://net-internals/#dns' in the address bar, th
 -   Check if your browser / OS has any ad-blocker app installed. Uninstall it and then check if you are able to see logs in the live tail.
 -   Pause / stop / uninstall any browser plugins / extensions.
 
-## Check logs live tail access:
+## Check access:
 
-Verify if your Datadog account has a [logs restriction query (RBAC)](https://docs.datadoghq.com/logs/guide/logs-rbac/?tab=ui) configured. If you don't have the necessary permissions to access the logs you are querying in Live Tail, no logs will be visible. If you believe you should have access to these logs, contact your Datadog account administrator to grant the required permissions.
+Verify if your Datadog account has a [logs restriction query (RBAC)](https://docs.datadoghq.com/logs/guide/logs-rbac/?tab=ui) configured. If you don't have the necessary permissions to access the logs you are querying in Live Tail, no logs are visible. If you believe you should have access to these logs, contact your Datadog account administrator to grant the required permissions.
 
 Moreover, check if you have a role assigned which has logs [live tail permission](https://docs.datadoghq.com/logs/guide/logs-rbac-permissions/?tab=ui#logs_live_tail).
 
