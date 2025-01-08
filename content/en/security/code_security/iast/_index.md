@@ -2,7 +2,7 @@
 title: IAST
 disable_toc: false
 aliases:
-- /path-to-old-doc/
+- /security/application_security/code_security/
 ---
 
 ## Overview
@@ -58,7 +58,7 @@ The Code Security detection rules support the following languages.
 
 The [Vulnerability Explorer][1] uses real-time threat data to help you understand vulnerabilities endangering your system. Vulnerabilities are ordered by severity.
 
-{{< img src="/security/application_security/code_security/vulnerability_explorer_code_vulnerabilities.png" alt="Code Security in the Vulnerability Explorer" style="width:100%;" >}}
+{{< img src="/code_security/vulnerability_explorer_code_vulnerabilities.png" alt="Code Security in the Vulnerability Explorer" style="width:100%;" >}}
 
 To triage vulnerabilities, each vulnerability contains a brief description of the issue, including:
 
@@ -67,31 +67,31 @@ To triage vulnerabilities, each vulnerability contains a brief description of th
 - First detection.
 - The exact file and line number where the vulnerability was found.
 
-{{< img src="/security/application_security/code_security/vulnerability-details.png" alt="Code Security vulnerability details" style="width:100%;" >}}
+{{< img src="/code_security/vulnerability-details.png" alt="Code Security vulnerability details" style="width:100%;" >}}
 
 Each vulnerability detail includes a risk score (see screenshot below) and a severity rating: critical, high, medium, or low.
 
 The risk score is tailored to the specific runtime context, including factors such as where the vulnerability is deployed and whether the service is targeted by active attacks.
 
-{{< img src="/security/application_security/code_security/vulnerability_prioritization.png" alt="Code Security vulnerability prioritization" style="width:100%;" >}}
+{{< img src="/code_security/vulnerability_prioritization.png" alt="Code Security vulnerability prioritization" style="width:100%;" >}}
 
 ## Remediation
 
 Datadog Code Security automatically provides the information teams need to identify where a vulnerability is in an application, from the affected filename down to the exact method and line number.
 
-{{< img src="/security/application_security/code_security/code_security_remediation.png" alt="Code Security vulnerability remediation" style="width:100%;" >}}
+{{< img src="/code_security/code_security_remediation.png" alt="Code Security vulnerability remediation" style="width:100%;" >}}
 
 When the [GitHub integration][7] is enabled, Code Security shows the first impacted version of a service, the commit that introduced the vulnerability, and a snippet of the vulnerable code. This information gives teams insight into where and when a vulnerability occurred and helps to prioritize their work.
 
-{{< img src="/security/application_security/code_security/vulnerability_code_snippet.png" alt="Code vulnerability snippet" style="width:100%;" >}}
+{{< img src="/code_security/vulnerability_code_snippet.png" alt="Code vulnerability snippet" style="width:100%;" >}}
 
 Detailed remediation steps are provided for each detected vulnerability.
 
-{{< img src="/security/application_security/code_security/remediation_recommendations.png" alt="Remediation recommendations" style="width:100%;" >}}
+{{< img src="/code_security/remediation_recommendations.png" alt="Remediation recommendations" style="width:100%;" >}}
 
 Recommendations enable you to change the status of a vulnerability, assign it to a team member for review, and create a Jira issue for tracking.
 
-{{< img src="/security/application_security/code_security/vulnerability_jira_ticket.png" alt="creating a Jira ticket from a vulnerability" style="width:100%;" >}}
+{{< img src="/code_security/vulnerability_jira_ticket.png" alt="creating a Jira ticket from a vulnerability" style="width:100%;" >}}
 
 **Note:** To create Jira issues for vulnerabilities, you must configure the Jira integration, and have the `manage_integrations` permission. For detailed instructions, see the [Jira integration][3] documentation, as well as the [Role Based Access Control][4] documentation.
 
@@ -107,13 +107,13 @@ For information on disabling Code Security, see [Disabling Code Security][12].
 
 
 [1]: https://app.datadoghq.com/security/appsec/vm/code
-[2]: /security/application_security/code_security/setup/java/
+[2]: /security/code_security/iast/setup/java/
 [3]: /integrations/jira/
 [4]: /account_management/rbac/permissions/#integrations
-[5]: /security/application_security/code_security/setup/compatibility/
+[5]: /security/code_security/iast/setup/compatibility/
 [6]: https://docs.google.com/forms/d/1wsgbd80eImvJSjXe5y5VCjAW0zzn5p3CoCLsOy0vqsk/
 [7]: /integrations/github/
-[9]: /security/application_security/code_security/setup/
+[9]: /security/code_security/iast/setup/
 [10]: https://app.datadoghq.com/security/configuration/asm/setup
 [11]: https://www.datadoghq.com/support/
 [12]: /security/application_security/troubleshooting/#disabling-code-security

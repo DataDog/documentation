@@ -2,7 +2,9 @@
 title: Software Composition Analysis
 disable_toc: false
 aliases:
-- /path-to-old-doc/
+- /security/application_security/software_composition_analysis/setup/
+- /security/application_security/software_composition_analysis/
+- /code_analysis/software_composition_analysis/
 ---
 ## Overview
 Software Composition Analysis (SCA) detects open source libraries in both your repositories and running services, providing end-to-end visibility of library vulnerabilities and license management from development to production.
@@ -78,7 +80,7 @@ Every row represents a unique library and version combination. Each combination 
 
 Click on a library with a vulnerability to open a side panel that contains information about remediation steps.
 
-{{< img src="code_analysis/software_composition_analysis/sca-violation.png" alt="Side panel for a SCA violation" style="width:80%;">}}
+{{< img src="code_security/software_composition_analysis/sca-violation.png" alt="Side panel for a SCA violation" style="width:80%;">}}
 
 ### Library vulnerability context in APM
 

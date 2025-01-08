@@ -14,10 +14,10 @@ further_reading:
 - link: "/integrations/guide/source-code-integration/"
   tag: "Documentation"
   text: "Learn about the Source Code Integration"
-- link: "/code_analysis/static_analysis"
+- link: "/security/code_security/static_analysis"
   tag: "Documentation"
   text: "Learn about Static Analysis"
-- link: "/security/application_security/software_composition_analysis"
+- link: "/security/code_security/software_composition_analysis"
   tag: "Documentation"
   text: "Learn about Software Composition Analysis"
 algolia:
@@ -36,7 +36,7 @@ Code Analysis is in Preview.
 
 ## Overview
 
-<div class="alert alert-info">Datadog Software Composition Analysis can find vulnerable libraries across the software development lifecycle (SDLC). Code Analysis summarizes results found by directly scanning your repositories. To view all vulnerabilities found in repositories and at runtime consolidated together, see <a href="/security/application_security/software_composition_analysis" target="_blank">Application Security</a> for more details.</div>
+<div class="alert alert-info">Datadog Software Composition Analysis can find vulnerable libraries across the software development lifecycle (SDLC). Code Analysis summarizes results found by directly scanning your repositories. To view all vulnerabilities found in repositories and at runtime consolidated together, see <a href="/security/code_security/software_composition_analysis" target="_blank">Application Security</a> for more details.</div>
 
 Code Analysis scans your repositories to find security vulnerabilities and code quality issues. It encompasses two capabilities: [Static Analysis][1] for your first-party code, and [Software Composition Analysis (SCA)][2] for open-source dependencies in your codebase. 
 
@@ -68,7 +68,7 @@ Optionally, you can select specific GitHub repositories to enable SCA by clickin
 
 {{< img src="code_analysis/setup/enable_repository.png" alt="Enable Software Composition Analysis on a GitHub repository" style="width:100%;">}}
 
-[101]: /code_analysis/software_composition_analysis
+[101]: /security/code_security/software_composition_analysis
 [102]: /integrations/github/
 
 {{% /tab %}}
@@ -86,13 +86,13 @@ See the following documentation to configure your CI/CD provider to run Static A
 - [Software Composition Analysis and GitHub Actions][104]
 - [Software Composition Analysis and Generic CI Providers][105]
 
-[101]: /code_analysis/static_analysis/github_actions 
-[102]: /code_analysis/static_analysis/circleci_orbs 
-[103]: /code_analysis/static_analysis/generic_ci_providers 
-[104]: /code_analysis/software_composition_analysis/github_actions 
-[105]: /code_analysis/software_composition_analysis/generic_ci_providers 
-[106]: /code_analysis/static_analysis
-[107]: /code_analysis/software_composition_analysis
+[101]: /security/code_security/static_analysis/github_actions 
+[102]: /security/code_security/static_analysis/circleci_orbs 
+[103]: /security/code_security/static_analysis/generic_ci_providers 
+[104]: /security/code_security/software_composition_analysis/setup_static/#github-actions 
+[105]: /security/code_security/software_composition_analysis/setup_static/#generic-ci-providers 
+[106]: /security/code_security/static_analysis
+[107]: /security/code_security/software_composition_analysis
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -156,15 +156,15 @@ Manage the full list of libraries detected by SCA that have imported into your c
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /code_analysis/static_analysis
-[2]: /code_analysis/software_composition_analysis
+[1]: /security/code_security/static_analysis
+[2]: /security/code_security/software_composition_analysis
 [3]: /developers/ide_plugins/vscode/#static-analysis
 [4]: /developers/ide_plugins/idea/#static-analysis
-[5]: /code_analysis/github_pull_requests/
-[6]: /code_analysis/static_analysis_rules
+[5]: /security/code_security/dev_tool_int/github_pull_requests/
+[6]: /security/code_security/static_analysis/static_analysis_rules
 [7]: /integrations/github/#link-a-repository-in-your-organization-or-personal-account
 [8]: /integrations/guide/source-code-integration
 [9]: https://app.datadoghq.com/ci/code-analysis
 [10]: /integrations/guide/source-code-integration/?tab=codeanalysis
-[11]: /code_analysis/ide_plugins/
-[12]: /getting_started/code_analysis/?tab=incipipelines#linking-services-to-code-violations-and-libraries
+[11]: /security/code_security/dev_tool_int/ide_plugins/
+[12]: /getting_started/code_security/?tab=incipipelines#linking-services-to-code-violations-and-libraries

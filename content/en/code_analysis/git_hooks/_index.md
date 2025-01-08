@@ -5,10 +5,10 @@ further_reading:
 - link: "/code_analysis/"
   tag: "Documentation"
   text: "Learn about Code Analysis"
-- link: "/code_analysis/static_analysis/"
+- link: "/security/code_security/static_analysis/"
   tag: "Documentation"
   text: "Learn about Static Analysis"
-- link: "/code_analysis/software_composition_analysis/"
+- link: "/security/code_security/software_composition_analysis/"
   tag: "Documentation"
   text: "Learn about Software Composition Analysis"
 ---
@@ -28,7 +28,7 @@ The Datadog Git hook warns developers before they push any code
 containing coding errors, vulnerabilities, or secrets. When you commit code with an
 error, a prompt like the following appears in the user terminal:
 
-{{< img src="code_analysis/git_hooks/git_hook.png" alt="Datadog Git Hook detecting vulnerabilities" style="width:100%;">}}
+{{< img src="code_security/git_hooks/git_hook.png" alt="Datadog Git Hook detecting vulnerabilities" style="width:100%;">}}
 
 ## Setup
 

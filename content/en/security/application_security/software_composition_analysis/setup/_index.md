@@ -4,7 +4,7 @@ disable_toc: false
 aliases:
 - /security/application_security/enabling/tracing_libraries/sca/
 further_reading:
-- link: "/security/application_security/software_composition_analysis"
+- link: "/security/code_security/software_composition_analysis"
   tag: "Documentation"
   text: "Software Composition Analysis (SCA)"
 - link: "https://www.datadoghq.com/blog/sca-prioritize-vulnerabilities/"
@@ -178,8 +178,8 @@ java -javaagent:dd-java-agent.jar \
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /security/application_security/software_composition_analysis/setup/compatibility/java
+[1]: /security/code_security/software_composition_analysis/setup_runtime/compatibility/java
 [2]: https://app.datadoghq.com/security/configuration/asm/onboarding
 [3]: https://app.datadoghq.com/security/configuration/asm/setup
 [4]: /integrations/github/
-[5]: /security/application_security/software_composition_analysis/setup/compatibility/
+[5]: /security/code_security/software_composition_analysis/setup_runtime/compatibility/

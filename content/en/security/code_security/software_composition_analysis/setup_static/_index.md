@@ -3,7 +3,9 @@ title: Set up static SCA in your repositories
 description: Learn about Datadog Software Composition Analysis to scan your imported open-source libraries for known security vulnerabilities before you ship to production.
 disable_toc: false
 aliases:
-- /path-to-old-doc/
+- /code_analysis/software_composition_analysis/generic_ci_providers/
+- /code_analysis/software_composition_analysis/github_actions/
+- /code_analysis/software_composition_analysis/setup/
 ---
 
 SCA can scan dependency management files in your repositories to statically detect open source libraries used in your codebase. SCA supports scanning for libraries in the following languages and lockfiles below:
@@ -25,7 +27,7 @@ SCA can scan dependency management files in your repositories to statically dete
 
 ## Search and filter results
 
-<div class="alert alert-info">Datadog Software Composition Analysis can find vulnerable libraries across the software development lifecycle (SDLC). Code Analysis summarizes results found by directly scanning your repositories. To view all vulnerabilities found in repositories and at runtime consolidated together, see <a href="/security/application_security/software_composition_analysis" target="_blank">Application Security</a> for more details.</div>
+<div class="alert alert-info">Datadog Software Composition Analysis can find vulnerable libraries across the software development lifecycle (SDLC). Code Analysis summarizes results found by directly scanning your repositories. To view all vulnerabilities found in repositories and at runtime consolidated together, see <a href="/security/code_security/software_composition_analysis" target="_blank">Application Security</a> for more details.</div>
 
 After you configure your CI pipelines to run Datadog SCA, violations are summarized per repository on the [**Code Analysis Repositories** page][4]. Click on a repository to analyze **Library Vulnerabilities** and **Library Catalog** results from Software Composition Analysis. 
 
@@ -151,15 +153,15 @@ When installing a GitHub App, the following permissions are required to enable c
 If you are using another source code management provider, configure SCA to run in your CI pipelines using the `datadog-ci` CLI tool and [upload the results][8] to Datadog.
 You **must** run an analysis of your repository on the default branch before results can begin appearing on the **Code Analysis** page.
 
-[1]: /security/application_security/software_composition_analysis/
+[1]: /security/code_security/software_composition_analysis/
 [2]: https://app.datadoghq.com/ci/setup/code-analysis
-[3]: /code_analysis/software_composition_analysis/setup
+[3]: /security/code_security/software_composition_analysis/setup_static
 [4]: https://app.datadoghq.com/ci/code-analysis
-[5]: /getting_started/code_analysis/?tab=datadoghosted#linking-services-to-code-violations-and-libraries
+[5]: /getting_started/code_security/?tab=datadoghosted#linking-services-to-code-violations-and-libraries
 [6]: /account_management/api-app-keys/
 [7]: /integrations/github
 [8]: /integrations/guide/source-code-integration
-[9]: /code_analysis/github_pull_requests/
+[9]: /security/code_security/dev_tool_int/github_pull_requests/
 [10]: /actions/security-guides/using-secrets-in-github-actions#creating-secrets-for-a-repository
 [11]: /actions/security-guides/
 [12]: /getting_started/site/

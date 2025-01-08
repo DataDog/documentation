@@ -4,6 +4,7 @@ disable_toc: false
 aliases:
 - /security/application_security/enabling/single_step/code_security/
 - /security/application_security/enabling/tracing_libraries/code_security/
+- /security/application_security/code_security/setup/
 ---
 
 ## Prerequisites
@@ -20,4 +21,4 @@ Select your application language for details on how to enable Code Security for 
 {{< partial name="security-platform/appsec-languages-code-security.html" >}}</br>
 
 
-[1]: /security/application_security/code_security/setup/compatibility/
+[1]: /security/code_security/iast/setup/compatibility/

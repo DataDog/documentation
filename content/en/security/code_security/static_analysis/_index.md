@@ -2,7 +2,7 @@
 title: Static Code Analysis (SAST)
 description: Learn about Datadog Static Code Analysis to scan code for quality issues and security vulnerabilities before your code reaches production.
 aliases:
-- /path-to-old-doc/
+- /code_analysis/static_analysis
 is_beta: false
 algolia:
   tags: ['static analysis', 'datadog static analysis', 'code quality', 'SAST']

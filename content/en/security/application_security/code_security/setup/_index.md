@@ -8,7 +8,7 @@ further_reading:
 - link: "logs/processing/pipelines"
   tag: "Documentation"
   text: "Log processing pipelines"
-- link: "/security/application_security/code_security"
+- link: "/security/code_security/iast"
   tag: "Documentation"
   text: "Code Security"
 - link: "https://www.datadoghq.com/blog/iast-datadog-code-security/"
@@ -38,4 +38,4 @@ Select your application language for details on how to enable Code Security for 
 
 
 
-[1]: /security/application_security/code_security/setup/compatibility/
+[1]: /security/code_security/iast/setup/compatibility/

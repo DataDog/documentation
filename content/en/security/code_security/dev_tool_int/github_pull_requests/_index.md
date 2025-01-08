@@ -3,6 +3,7 @@ title: GitHub Pull Requests
 description: Learn how to use Code Analysis in GitHub pull requests.
 aliases:
 - /static_analysis/github_pull_requests
+- /code_analysis/github_pull_requests/
 ---
 
 ## Overview
@@ -88,4 +89,4 @@ To commit a suggested fix:
 [3]: https://app.datadoghq.com/integrations/github/add
 [4]: https://app.datadoghq.com/ci/settings/static-analysis
 [5]: https://app.datadoghq.com/integrations/github/configuration
-[6]: /code_analysis/static_analysis/github_actions/
+[6]: /security/code_security/static_analysis/github_actions/

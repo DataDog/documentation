@@ -7,10 +7,10 @@ further_reading:
 - link: "/getting_started/application_security/software_composition_analysis"
   tag: "Guide"
   text: "Getting started with Software Composition Analysis"
-- link: "/security/application_security/code_security"
+- link: "/security/code_security/iast"
   tag: "documentation"
   text: "Enable code security vulnerability detection on your services"
-- link: "/code_analysis/software_composition_analysis/"
+- link: "/security/code_security/software_composition_analysis/"
   tag: "documentation"
   text: "Setup Software Composition Analysis on your CI pipelines"
 - link: "https://www.datadoghq.com/blog/datadog-software-composition-analysis/"
@@ -54,11 +54,11 @@ The Datadog SCA Library Inventory helps you understand the list of libraries and
 
 With Datadog SCA spanning your software development lifecycle from code to production, it detects libraries throughout the lifecycle of an application and alerts you to vulnerabilities, risks, licenses, and more.
 
-{{< img src="/security/application_security/software_composition_analysis/asm_library_explorer.png" alt="Software Composition Analysis (SCA) library explorer page showing library vulnerabilities grouped by library." style="width:100%;" >}}
+{{< img src="/code_security/software_composition_analysis/asm_library_explorer.png" alt="Software Composition Analysis (SCA) library explorer page showing library vulnerabilities grouped by library." style="width:100%;" >}}
 
 ## Explore and manage SCA vulnerabilities
 
-<div class="alert alert-info">Datadog Software Composition Analysis can find vulnerable libraries across the software development lifecycle (SDLC). Application Security summarizes results found in the default branches of your repositories and in your running services. To view vulnerabilities found in different branches and commits, see <a href="/code_analysis/software_composition_analysis" target="_blank">Code Analysis</a> for more details.</div>
+<div class="alert alert-info">Datadog Software Composition Analysis can find vulnerable libraries across the software development lifecycle (SDLC). Application Security summarizes results found in the default branches of your repositories and in your running services. To view vulnerabilities found in different branches and commits, see <a href="/security/code_security/software_composition_analysis" target="_blank">Code Analysis</a> for more details.</div>
 
 The [Vulnerability Explorer][3] shows a complete list of the open source libraries detected by Datadog SCA and reports security vulnerabilities associated with them.
 
@@ -73,7 +73,7 @@ To switch to the code repository commit point of view, select **Static**. The st
 
 To switch to the _real-time_ point of view for the applications already running, select **Runtime**. The runtime view is the live view of the services monitored by Datadog.
 
-{{< img src="/security/application_security/software_composition_analysis/asm_sca_vulnerabilities.png" alt="Software Composition Analysis (SCA) explorer page showing vulnerabilities sorted by static or runtime." style="width:100%;" >}}
+{{< img src="/code_security/software_composition_analysis/asm_sca_vulnerabilities.png" alt="Software Composition Analysis (SCA) explorer page showing vulnerabilities sorted by static or runtime." style="width:100%;" >}}
 
 Select a specific vulnerability to see its details, including the affected services, severity breakdown score, and recommended remediation steps.
 
@@ -136,7 +136,7 @@ For information on disabling Software Composition Analysis, see [Disabling Softw
 [5]: https://app.datadoghq.com/security/appsec/landing
 [7]: /getting_started/application_security/software_composition_analysis
 [8]: https://app.datadoghq.com/security/appsec/inventory/libraries
-[9]: /code_analysis/software_composition_analysis/setup/?tab=githubactions
+[9]: /security/code_security/software_composition_analysis/setup_static/?tab=githubactions
 [10]: /account_management/rbac/permissions/#integrations
 [11]: /integrations/jira/
 [12]: https://app.datadoghq.com/security/configuration/asm/setup

@@ -2,7 +2,7 @@
 title: Troubleshooting
 disable_toc: false
 aliases:
-- /path-to-old-doc/
+   - /code_analysis/troubleshooting/
 ---
 
 If you experience issues setting up or configuring Datadog Code Analysis, use this page to start troubleshooting. If you continue to have trouble, [contact Datadog Support][1].
@@ -174,11 +174,11 @@ To disable SCA manually:
 To disable IAST, remove the `DD_IAST_ENABLED=true` environment variable from your application configuration or set it to `false` as `DD_IAST_ENABLED=false`, and restart your service.
 
 [1]: /help/
-[2]: /code_analysis/static_analysis/github_actions
-[3]: /code_analysis/static_analysis/github_actions#inputs
+[2]: /security/code_security/static_analysis/github_actions
+[3]: /security/code_security/static_analysis/github_actions#inputs
 [4]: https://app.datadoghq.com/ci/settings/repository
 [5]: https://www.oasis-open.org/committees/tc_home.php?wg_abbrev=sarif
-[6]: https://docs.datadoghq.com/code_analysis/static_analysis/setup/#diff-aware-scanning
+[6]: https://docs.datadoghq.com/security/code_security/static_analysis/setup/#diff-aware-scanning
 [7]: https://github.com/DataDog/osv-scanner
 [8]: https://github.com/aquasecurity/trivy
 [9]: https://learn.microsoft.com/en-us/nuget/consume-packages/package-references-in-project-files#enabling-the-lock-file

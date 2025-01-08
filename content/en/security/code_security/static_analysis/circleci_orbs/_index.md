@@ -2,6 +2,7 @@
 aliases:
 - /continuous_integration/static_analysis/circleci_orbs
 - /static_analysis/circleci_orbs
+- /security/code_security/static_analysis/circleci_orbs
 dependencies:
 - https://github.com/DataDog/datadog-static-analyzer-circleci-orb/blob/main/README.md
 description: Use Datadog and CircleCI to run Static Analysis jobs in a CI pipeline.
@@ -89,7 +90,7 @@ Additional helpful documentation, links, and articles:
 
 - [Learn about Code Analysis][1]
 
-[1]: https://docs.datadoghq.com/code_analysis/static_analysis
+[1]: https://docs.datadoghq.com/security/code_security/static_analysis
 [2]: https://circleci.com/docs/set-environment-variable/#set-an-environment-variable-in-a-project
 [3]: https://docs.datadoghq.com/account_management/api-app-keys/#api-keys
 [4]: https://docs.datadoghq.com/account_management/api-app-keys/#application-keys

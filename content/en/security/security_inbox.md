@@ -88,8 +88,8 @@ For more information, see [Vulnerability Pipeline][11] and [Add to Security Inbo
 [1]: /security/default_rules/?category=all#all
 [2]: /security/cloud_security_management/misconfigurations/
 [3]: /security/cloud_security_management/identity_risks/
-[4]: /security/application_security/software_composition_analysis
-[5]: /security/application_security/code_security
+[4]: /security/code_security/software_composition_analysis
+[5]: /security/code_security/iast
 [6]: /security/cloud_security_management/guide/public-accessibility-logic/
 [7]: https://www.cisa.gov/
 [8]: https://www.exploit-db.com/

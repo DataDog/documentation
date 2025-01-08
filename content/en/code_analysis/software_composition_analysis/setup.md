@@ -9,13 +9,13 @@ further_reading:
 - link: "/getting_started/application_security/software_composition_analysis"
   tag: "Documentation"
   text: "Getting Started with Software Composition Analysis"
-- link: "/security/application_security/software_composition_analysis/"
+- link: "/security/code_security/software_composition_analysis/"
   tag: "Documentation"
   text: "Learn about Software Composition Analysis"
 - link: "/integrations/guide/source-code-integration/"
   tag: "Documentation"
   text: "Learn about the Source Code Integration"
-- link: "/code_analysis/static_analysis/"
+- link: "/security/code_security/static_analysis/"
   tag: "Documentation"
   text: "Learn about Static Analysis"
 algolia:
@@ -44,8 +44,8 @@ SCA scans can be run directly on Datadog's infrastructure. To get started, navig
 SCA can be run in your CI pipelines using the [`datadog-ci` CLI][5]. Configure your [Datadog API and application keys (requires the `code_analysis_read` scope)][3] and run SCA jobs in the respective CI provider.
 
 {{< whatsnext desc="See the documentation for your CI provider:">}}
-    {{< nextlink href="code_analysis/software_composition_analysis/github_actions" >}}GitHub Actions{{< /nextlink >}}
-    {{< nextlink href="code_analysis/software_composition_analysis/generic_ci_providers" >}}Generic CI Providers{{< /nextlink >}}
+    {{< nextlink href="security/code_security/software_composition_analysis/setup_static/#github-actions" >}}GitHub Actions{{< /nextlink >}}
+    {{< nextlink href="security/code_security/software_composition_analysis/setup_static/#generic-ci-providers" >}}Generic CI Providers{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Select your source code management provider
@@ -73,7 +73,7 @@ You **must** run an analysis of your repository on the default branch before res
 [5]: https://github.com/DataDog/datadog-ci
 [6]: https://app.datadoghq.com/ci/code-analysis
 [7]: /integrations/github/#link-a-repository-in-your-organization-or-personal-account
-[8]: /code_analysis/software_composition_analysis/generic_ci_providers/
+[8]: /security/code_security/software_composition_analysis/setup_static/#generic-ci-providers/
 [9]: /integrations/github
 [10]: /integrations/guide/source-code-integration
-[11]: /code_analysis/github_pull_requests/
+[11]: /security/code_security/dev_tool_int/github_pull_requests/

@@ -54,9 +54,9 @@ To get started, you can set up Static Analysis on the [**Code Analysis** page][1
 
 ### CI providers
 {{< whatsnext desc="You can run Static Analysis on any CI platform provider of your choice. See provider-specific documentation to set up Static Analysis in your CI pipelines:">}}
-    {{< nextlink href="code_analysis/static_analysis/circleci_orbs" >}}CircleCI Orbs{{< /nextlink >}}
-    {{< nextlink href="code_analysis/static_analysis/github_actions" >}}GitHub Actions{{< /nextlink >}}
-    {{< nextlink href="code_analysis/static_analysis/generic_ci_providers" >}}Other CI Providers{{< /nextlink >}}
+    {{< nextlink href="security/code_security/static_analysis/circleci_orbs" >}}CircleCI Orbs{{< /nextlink >}}
+    {{< nextlink href="security/code_security/static_analysis/github_actions" >}}GitHub Actions{{< /nextlink >}}
+    {{< nextlink href="security/code_security/static_analysis/generic_ci_providers" >}}Other CI Providers{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ### Source code management
@@ -83,7 +83,7 @@ To filter your results, use the facets to the left of the list, or search. Resul
 Every row represents a violation. Each violation is associated with the specific commit and branch that is selected in the filters at the top of the page (by default, results are shown for the latest commit on the default branch of the repository you are viewing).
 
 Click on a violation to open a side panel that contains information about the scope of the violation and where it originated.
-{{< img src="code_analysis/static_analysis/static-analysis-violation.png" alt="Side panel for a static analysis violation" style="width:80%;">}} 
+{{< img src="code_security/static_analysis/static-analysis-violation.png" alt="Side panel for a static analysis violation" style="width:80%;">}} 
 
 The content of the violation is shown in tabs:
 
@@ -92,7 +92,7 @@ The content of the violation is shown in tabs:
 - **Event**: JSON metadata regarding the Static Analysis violation event.
 
 ### Using suggested fixes
-{{< img src="code_analysis/static_analysis/static-analysis-fixes.png" alt="Fixes tab of a static analysis violation" style="width:80%;">}}
+{{< img src="code_security/static_analysis/static-analysis-fixes.png" alt="Fixes tab of a static analysis violation" style="width:80%;">}}
 
 In Datadog Static Analysis, there are two types of suggested fixes:
 
@@ -102,10 +102,10 @@ In Datadog Static Analysis, there are two types of suggested fixes:
 The two types of fixes are distinguished visually in the UI with different labels.
 
 *Default Suggested Fixes:*
-{{< img src="code_analysis/static_analysis/static-analysis-default-fix.png" alt="Visual indicator of a default static analysis suggested fix" style="width:60%;">}}
+{{< img src="code_security/static_analysis/static-analysis-default-fix.png" alt="Visual indicator of a default static analysis suggested fix" style="width:60%;">}}
 
 *AI Suggested Fixes:*
-{{< img src="code_analysis/static_analysis/static-analysis-ai-fix.png" alt="Visual indicator of an AI static analysis suggested fix" style="width:60%;">}}
+{{< img src="code_security/static_analysis/static-analysis-ai-fix.png" alt="Visual indicator of an AI static analysis suggested fix" style="width:60%;">}}
 
 <div class="alert alert-warning">AI Suggested Fixes are in Preview. To request access, contact <a href="/help/">Support.</div>
 
@@ -140,19 +140,19 @@ To customize which Static Analysis rules are configured in your repositories, se
 ### Reporting false positives
 If you believe a specific violation is a false positive, you can flag it as a false positive with a reason for flagging, which sends a report to Datadog. Submissions are reviewed on a regular basis to improve ruleset quality over time.
 
-{{< img src="code_analysis/static_analysis/flag-false-positive.png" alt="Button for reporting a Static Analysis violation as a false positive" style="width:60%;">}}
+{{< img src="code_security/static_analysis/flag-false-positive.png" alt="Button for reporting a Static Analysis violation as a false positive" style="width:60%;">}}
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/ci/code-analysis
-[2]: /code_analysis/static_analysis_rules?categories=Security
-[3]: /code_analysis/static_analysis_rules?categories=Best+Practices&categories=Code+Style&categories=Error+Prone&categories=Performance
+[2]: /security/code_security/static_analysis/static_analysis_rules?categories=Security
+[3]: /security/code_security/static_analysis/static_analysis_rules?categories=Best+Practices&categories=Code+Style&categories=Error+Prone&categories=Performance
 [4]: /integrations/github/
 [6]: https://en.wikipedia.org/wiki/Camel_case
 [7]: https://en.wikipedia.org/wiki/Snake_case
-[8]: /code_analysis/static_analysis/setup/#customize-your-configuration
-[9]: /code_analysis/static_analysis/setup
-[10]: /code_analysis/github_pull_requests/
-[11]: /getting_started/code_analysis/?tab=datadoghosted#linking-services-to-code-violations-and-libraries
+[8]: /security/code_security/static_analysis/setup/#customize-your-configuration
+[9]: /security/code_security/static_analysis/setup
+[10]: /security/code_security/dev_tool_int/github_pull_requests/
+[11]: /getting_started/code_security/?tab=datadoghosted#linking-services-to-code-violations-and-libraries

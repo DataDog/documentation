@@ -66492,82 +66492,6 @@ menu:
       parent: tests
       identifier: tests_troubleshooting
       weight: 15
-    - name: Code Analysis
-      url: code_analysis/
-      pre: ci
-      parent: software_delivery_heading
-      identifier: code_analysis
-      weight: 40000
-    - name: Static Analysis (SAST)
-      url: code_analysis/static_analysis
-      parent: code_analysis
-      identifier: code_analysis_static_analysis
-      weight: 1
-    - name: Setup
-      url: code_analysis/static_analysis/setup
-      parent: code_analysis_static_analysis
-      identifier: code_analysis_static_analysis_setup
-      weight: 101
-    - name: CircleCI Orbs
-      url: code_analysis/static_analysis/circleci_orbs
-      parent: code_analysis_static_analysis
-      identifier: code_analysis_static_analysis_circleci_orbs
-      weight: 102
-    - name: GitHub Actions
-      url: code_analysis/static_analysis/github_actions
-      parent: code_analysis_static_analysis
-      identifier: code_analysis_static_analysis_github_actions
-      weight: 103
-    - name: Generic CI Providers
-      url: code_analysis/static_analysis/generic_ci_providers
-      parent: code_analysis_static_analysis
-      identifier: code_analysis_static_analysis_other_providers
-      weight: 104
-    - name: Software Composition Analysis (SCA)
-      url: code_analysis/software_composition_analysis
-      parent: code_analysis
-      identifier: code_analysis_software_composition_analysis
-      weight: 2
-    - name: Setup
-      url: code_analysis/software_composition_analysis/setup
-      parent: code_analysis_software_composition_analysis
-      identifier: code_analysis_software_composition_analysis_setup
-      weight: 201
-    - name: GitHub Actions
-      url: code_analysis/software_composition_analysis/github_actions
-      parent: code_analysis_software_composition_analysis
-      identifier: code_analysis_software_composition_analysis_github_actions
-      weight: 202
-    - name: Generic CI Providers
-      url: code_analysis/software_composition_analysis/generic_ci_providers
-      parent: code_analysis_software_composition_analysis
-      identifier: code_analysis_software_composition_analysis_other_providers
-      weight: 203
-    - name: Static Analysis (SAST) Rules
-      url: code_analysis/static_analysis_rules
-      parent: code_analysis
-      identifier: code_analysis_static_analysis_rules
-      weight: 3
-    - name: GitHub Pull Requests
-      url: code_analysis/github_pull_requests
-      parent: code_analysis
-      identifier: code_analysis_github_prs
-      weight: 4
-    - name: IDE Plugins
-      url: code_analysis/ide_plugins
-      parent: code_analysis
-      identifier: code_analysis_ide_plugins
-      weight: 5
-    - name: Git Hooks
-      url: code_analysis/git_hooks
-      parent: code_analysis
-      identifier: code_analysis_git_hooks
-      weight: 6
-    - name: Troubleshooting
-      url: code_analysis/troubleshooting
-      parent: code_analysis
-      identifier: code_analysis_troubleshooting
-      weight: 7
     - name: Quality Gates
       url: quality_gates/
       pre: ci
@@ -67041,21 +66965,6 @@ menu:
         security/application_security/software_composition_analysis/setup/compatibility/
       parent: application_security_software_composition_analysis_setup
       identifier: appsec_compat_sca
-      weight: 101
-    - name: Code Security
-      url: security/application_security/code_security/
-      parent: application_security
-      identifier: application_security_code_security
-      weight: 4
-    - name: Setup
-      url: security/application_security/code_security/setup/
-      parent: application_security_code_security
-      identifier: application_security_code_security_setup
-      weight: 401
-    - name: Library Compatibility
-      url: security/application_security/code_security/setup/compatibility/
-      parent: application_security_code_security_setup
-      identifier: appsec_compat_code_security
       weight: 101
     - name: Threat Management
       url: security/application_security/threats/

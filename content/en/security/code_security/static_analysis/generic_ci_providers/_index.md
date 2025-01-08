@@ -2,10 +2,8 @@
 title: Generic CI Providers
 description: Learn about Datadog Static Analysis to scan code for quality issues and security vulnerabilities before your code reaches production.
 is_beta: false
-further_reading:
-- link: "https://www.datadoghq.com/blog/monitor-ci-pipelines/"
-  tag: "Blog"
-  text: "Monitor all your CI pipelines with Datadog"
+aliases:
+- /security/code_security/static_analysis/generic_ci_providers
 algolia:
   tags: ['static analysis', 'ci pipeline', 'SAST']
 ---

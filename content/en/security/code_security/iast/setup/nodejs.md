@@ -7,7 +7,7 @@ aliases:
   - /security_platform/application_security/getting_started/nodejs
   - /security/application_security/getting_started/nodejs
 further_reading:
-  - link: "/security/application_security/code_security/#code-level-vulnerabilities-list"
+  - link: "/security/code_security/iast/#code-level-vulnerabilities-list"
     tag: "Documentation"
     text: "Supported code-level vulnerabilities list"
   - link: "https://www.datadoghq.com/blog/iast-datadog-code-security/"
@@ -107,8 +107,8 @@ If you need additional assistance, contact [Datadog support][6].
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/DataDog/dd-trace-js/blob/master/MIGRATING.md
-[2]: /security/application_security/code_security/setup/nodejs/
-[3]: /security/application_security/code_security/setup/compatibility/
+[2]: /security/code_security/iast/setup/nodejs/
+[3]: /security/code_security/iast/setup/compatibility/
 [4]: /agent/versions/upgrade_between_agent_minor_versions/
 [5]: https://app.datadoghq.com/security/appsec/vm/code
 [6]: /help

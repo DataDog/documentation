@@ -2,6 +2,7 @@
 aliases:
 - /continuous_integration/static_analysis/github_actions
 - /static_analysis/github_actions
+- /security/code_security/static_analysis/github_actions
 dependencies:
 - https://github.com/DataDog/datadog-static-analyzer-github-action/blob/main/README.md
 description: Use Datadog and GitHub to run Static Analysis jobs in a CI pipeline.
@@ -109,11 +110,11 @@ Additional helpful documentation, links, and articles:
 
 - [Learn about Code Analysis][1]
 
-[1]: https://docs.datadoghq.com/code_analysis/static_analysis
+[1]: https://docs.datadoghq.com/security/code_security/static_analysis
 [2]: https://docs.datadoghq.com/account_management/api-app-keys/
 [3]: https://docs.datadoghq.com/getting_started/site/
 [4]: https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions#creating-secrets-for-a-repository
 [5]: https://github.com/DataDog/datadog-static-analyzer/blob/main/README.md#diff-aware-scanning
-[6]: https://docs.datadoghq.com/code_analysis/static_analysis_rules/
+[6]: https://docs.datadoghq.com/security/code_security/static_analysis/static_analysis_rules/
 [7]: https://github.com/DataDog/datadog-sca-github-action
 [8]: https://github.com/DataDog/datadog-static-analyzer

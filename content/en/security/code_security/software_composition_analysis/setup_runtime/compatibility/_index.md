@@ -1,6 +1,8 @@
 ---
 title: Compatibility Requirements
 type: multi-code-lang
+aliases:
+- /security/application_security/software_composition_analysis/setup/compatibility/
 ---
 
 The following ASM capabilities are supported relative to each language's tracing library:

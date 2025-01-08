@@ -166,8 +166,8 @@ java -javaagent:dd-java-agent.jar \
    {{< /tabs >}}
 
 
-[1]: /security/application_security/software_composition_analysis/setup/compatibility/java
+[1]: /security/code_security/software_composition_analysis/setup_runtime/compatibility/java
 [2]: https://app.datadoghq.com/security/configuration/asm/onboarding
 [3]: https://app.datadoghq.com/security/configuration/asm/setup
 [4]: /integrations/github/
-[5]: /security/application_security/software_composition_analysis/setup/compatibility/
+[5]: /security/code_security/software_composition_analysis/setup_runtime/compatibility/

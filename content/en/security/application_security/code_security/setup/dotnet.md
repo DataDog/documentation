@@ -7,7 +7,7 @@ aliases:
   - /security_platform/application_security/getting_started/dotnet
   - /security/application_security/getting_started/dotnet
 further_reading:
-  - link: "/security/application_security/code_security/#code-level-vulnerabilities-list"
+  - link: "/security/code_security/iast/#code-level-vulnerabilities-list"
     tag: "Documentation"
     text: "Supported code-level vulnerabilities list"
   - link: "https://www.datadoghq.com/blog/iast-datadog-code-security/"
@@ -146,6 +146,6 @@ If you need additional assistance, contact [Datadog support][5].
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/DataDog/dd-trace-dotnet/releases/latest
-[2]: /security/application_security/code_security/setup/compatibility/dotnet/
+[2]: /security/code_security/iast/setup/compatibility/dotnet/
 [3]: /agent/versions/upgrade_between_agent_minor_versions/
-[4]: /security/application_security/code_security/setup/compatibility/
+[4]: /security/code_security/iast/setup/compatibility/

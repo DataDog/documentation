@@ -265,4 +265,4 @@ Code Analysis is in Preview.
 
 Datadog Static Analysis provides out-of-the-box rules to help detect violations in your CI/CD pipelines in code reviews and identify bugs, security, and maintainability issues. For more information, see the [Setup documentation][1].
 
-[1]: /code_analysis/static_analysis/setup
+[1]: /security/code_security/static_analysis/setup

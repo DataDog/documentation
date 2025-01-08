@@ -42,9 +42,9 @@ You can run Datadog Static Analysis scans directly on Datadog's infrastructure. 
 Datadog Static Analysis runs in your CI pipelines using the [`datadog-ci` CLI][8]. Configure your [Datadog API and application keys (requires the `code_analysis_read` scope)][3] and run Static Analysis in the respective CI provider.
 
 {{< whatsnext desc="See instructions based on your CI provider:">}}
-    {{< nextlink href="code_analysis/static_analysis/circleci_orbs" >}}CircleCI Orbs{{< /nextlink >}}
-    {{< nextlink href="code_analysis/static_analysis/github_actions" >}}GitHub Actions{{< /nextlink >}}
-    {{< nextlink href="code_analysis/static_analysis/generic_ci_providers" >}}Generic CI Providers{{< /nextlink >}}
+    {{< nextlink href="security/code_security/static_analysis/circleci_orbs" >}}CircleCI Orbs{{< /nextlink >}}
+    {{< nextlink href="security/code_security/static_analysis/github_actions" >}}GitHub Actions{{< /nextlink >}}
+    {{< nextlink href="security/code_security/static_analysis/generic_ci_providers" >}}Generic CI Providers{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Select your source code management provider
@@ -281,10 +281,10 @@ datadog-static-analyzer -i /path/to/directory -g -o sarif.json -f sarif –-diff
 [2]: https://www.oasis-open.org/committees/tc_home.php?wg_abbrev=sarif
 [3]: /developers/ide_plugins/idea/#static-analysis
 [4]: /account_management/api-app-keys/
-[6]: /code_analysis/static_analysis_rules
+[6]: /security/code_security/static_analysis/static_analysis_rules
 [7]: /getting_started/site/
 [8]: https://github.com/DataDog/datadog-ci
 [9]: /integrations/github/#link-a-repository-in-your-organization-or-personal-account
 [10]: /integrations/guide/source-code-integration
-[11]: /code_analysis/github_pull_requests/
-[12]: /code_analysis/github_pull_requests#fixing-a-vulnerability-directly-from-datadog
+[11]: /security/code_security/dev_tool_int/github_pull_requests/
+[12]: /security/code_security/dev_tool_int/github_pull_requests#fixing-a-vulnerability-directly-from-datadog

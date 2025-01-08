@@ -4,6 +4,7 @@ description: Learn about Datadog Static Analysis to scan code for quality issues
 aliases:
 - /continuous_integration/static_analysis
 - /static_analysis
+- /security/code_security/static_analysis/setup
 is_beta: false
 further_reading:
 - link: "https://www.datadoghq.com/blog/monitor-ci-pipelines/"

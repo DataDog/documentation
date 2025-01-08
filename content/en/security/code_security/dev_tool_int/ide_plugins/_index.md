@@ -1,6 +1,8 @@
 ---
 title: Datadog IDE Plugins for Code Security
 description: Learn how to set up Datadog IDE plugins for enhanced code security and quality assurance in your development environment.
+aliases:
+    - /code_analysis/ide_plugins/
 disable_toc: false
 ---
 

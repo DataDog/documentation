@@ -1,6 +1,8 @@
 ---
 title: Git Hooks
 description: Prevent the merging of code with errors
+aliases:
+    - /code_analysis/git_hooks/
 ---
 
 ## Overview
@@ -18,7 +20,7 @@ The Datadog Git hook warns developers before they push any code
 containing coding errors, vulnerabilities, or secrets. When you commit code with an
 error, a prompt like the following appears in the user terminal:
 
-{{< img src="code_analysis/git_hooks/git_hook.png" alt="Datadog Git Hook detecting vulnerabilities" style="width:100%;">}}
+{{< img src="code_security/git_hooks/git_hook.png" alt="Datadog Git Hook detecting vulnerabilities" style="width:100%;">}}
 
 ## Setup
 

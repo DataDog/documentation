@@ -1,6 +1,8 @@
 ---
 title: Automate open source risk reduction with Datadog SCA
 disable_toc: false
+aliases:
+  - /security/application_security/guide/automate_risk_reduction_sca/
 further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-software-composition-analysis/"
   tag: "Blog"
@@ -37,7 +39,7 @@ The catalog surfaces all library details using several public data sources (Guar
 
 To use the Libraries catalog, see [Libraries][1] or select **Security > Application Security > Catalogs > Libraries**.
 
-{{< img src="/security/application_security/software_composition_analysis/libraries_catalog.png" alt="Libraries catalog dashboard" style="width:100%;" >}}
+{{< img src="/code_security/software_composition_analysis/libraries_catalog.png" alt="Libraries catalog dashboard" style="width:100%;" >}}
 
 
 In the Libraries catalog, you can:
@@ -55,7 +57,7 @@ In the Libraries catalog, you can:
 
 In the **Vulnerabilities** explorer, you can view the vulnerabilities and risks for the libraries you are using.
 
-{{< img src="/security/application_security/software_composition_analysis/vulnerabilities_library_vulnerabilities.png" alt="Libraries vulnerabilities dashboard" style="width:100%;" >}}
+{{< img src="/code_security/software_composition_analysis/vulnerabilities_library_vulnerabilities.png" alt="Libraries vulnerabilities dashboard" style="width:100%;" >}}
 
 ### Library vulnerabilities
 
@@ -63,7 +65,7 @@ A library vulnerability is a security bug in a library.
 
 To view your library vulnerabilities, see [Library Vulnerabilities][3] or navigate to **Security > Vulnerabilities > Library Vulnerabilities**.
 
-{{< img src="/security/application_security/software_composition_analysis/vulnerabilities_library_vulnerabilities_detail.png" alt="Libraries vulnerability example expanded in dashboard" style="width:100%;" >}}
+{{< img src="/code_security/software_composition_analysis/vulnerabilities_library_vulnerabilities_detail.png" alt="Libraries vulnerability example expanded in dashboard" style="width:100%;" >}}
 
 In **Library Vulnerabilities**, you can:
 
@@ -77,7 +79,7 @@ In **Library Vulnerabilities**, you can:
   - Severity breakdown
   - Remediation steps
 
-{{< img src="/security/application_security/software_composition_analysis/vulnerabilities_library_vulnerabilities_remediation_steps.png" alt="Libraries vulnerability remediation steps" style="width:100%;" >}}
+{{< img src="/code_security/software_composition_analysis/vulnerabilities_library_vulnerabilities_remediation_steps.png" alt="Libraries vulnerability remediation steps" style="width:100%;" >}}
 
 ### Library risks
 
@@ -85,7 +87,7 @@ A library's risks are a group of weaknesses that are not directly tied to securi
 
 To view your library risks, see [Library Risks][4] or select **Security > Vulnerabilities > Library Risks**.
 
-{{< img src="/security/application_security/software_composition_analysis/library_risks.png" alt="library risks example" style="width:100%;" >}}
+{{< img src="/code_security/software_composition_analysis/library_risks.png" alt="library risks example" style="width:100%;" >}}
 
 In Library Risks, you can:
 - In **View**, select **Runtime** to view risks detected at runtime.

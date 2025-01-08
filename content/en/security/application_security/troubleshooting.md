@@ -625,8 +625,8 @@ If you continue to have issues with ASM, contact [Datadog support][1] with the f
 [9]: /tracing/glossary/#spans
 [10]: /tracing/troubleshooting/#tracer-debug-logs
 [12]: https://app.datadoghq.com/security/appsec/vm
-[13]: /security/application_security/code_security/
-[14]: /security/application_security/software_composition_analysis
+[13]: /security/code_security/iast/
+[14]: /security/code_security/software_composition_analysis
 [15]: https://app.datadoghq.com/security/configuration/asm/services-config
 [16]: https://app.datadoghq.com/organization-settings/remote-config
 [17]: https://ddtrace.readthedocs.io/en/stable/integrations.html#flask

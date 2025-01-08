@@ -1,7 +1,7 @@
 ---
 title: Getting Started with Code Security
 aliases:
-- /foo/bar
+- /getting_started/code_analysis/
 ---
 
 ## Overview
@@ -52,15 +52,15 @@ Select a source code management (SCM) provider such as [GitHub](#github) or [ano
 
 If you are using a GitHub repository, you can set up the [GitHub integration][103] and connect your repository to enable Static Analysis and Software Composition Analysis scans.
 
-{{< img src="/getting_started/code_analysis/github_accounts.png" alt="Click the Connect Repositories button for your GitHub account." style="width:100%" >}}
+{{< img src="/getting_started/code_security/github_accounts.png" alt="Click the Connect Repositories button for your GitHub account." style="width:100%" >}}
 
 Comments in [GitHub pull requests][105] are enabled by default. Click **Connect Repositories** on the Code Analysis Setup page and hover over the Missing flag on the PR Permissions column to see which permissions you need to update for your account.
 
-{{< img src="/getting_started/code_analysis/missing_permissions.png" alt="Hover over the Missing pill to see which permissions must be updated for your repository." style="width:100%" >}}
+{{< img src="/getting_started/code_security/missing_permissions.png" alt="Hover over the Missing pill to see which permissions must be updated for your repository." style="width:100%" >}}
 
 To disable this feature, navigate to the [**Code Analysis Settings** page][106] and click the toggle in the GitHub Comments column.
 
-{{< img src="/getting_started/code_analysis/github_comments_setting.png" alt="Click the toggle in the GitHub Comments column to enable or disable Code Analysis for a connected GitHub repository." style="width:100%" >}}
+{{< img src="/getting_started/code_security/github_comments_setting.png" alt="Click the toggle in the GitHub Comments column to enable or disable Code Analysis for a connected GitHub repository." style="width:100%" >}}
 
 ### Other providers
 
@@ -193,14 +193,14 @@ datadog-ci sbom upload --service "shopist" --env "ci" /tmp/sbom.json
 
 Once you’ve configured these scripts, run an analysis of your repository on the default branch. Then, results will start appearing on the **Repositories** page.
 
-[101]: /code_analysis/static_analysis
-[102]: /code_analysis/software_composition_analysis
+[101]: /security/code_security/static_analysis
+[102]: /security/code_security/software_composition_analysis
 [103]: /integrations/github
 [104]: https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions
-[105]: /code_analysis/github_pull_requests
+[105]: /security/code_security/dev_tool_int/github_pull_requests
 [106]: https://app.datadoghq.com/ci/settings/code-analysis
-[107]: /code_analysis/static_analysis/generic_ci_providers
-[108]: /code_analysis/software_composition_analysis/generic_ci_providers
+[107]: /security/code_security/static_analysis/generic_ci_providers
+[108]: /security/code_security/software_composition_analysis/setup_static/#generic-ci-providers
 [109]: https://app.datadoghq.com/ci/code-analysis
 [110]: /account_management/api-app-keys/
 [111]: https://www.npmjs.com/package/@datadog/datadog-ci
@@ -223,7 +223,7 @@ To start running Static Analysis scans in your IDE, see the respective documenta
 
 You can integrate Code Analysis with GitHub pull requests to automatically flag code violations and enhance code quality in the review process. 
 
-{{< img src="/getting_started/code_analysis/github_suggestion.png" alt="A suggestion from Code Analysis in a GitHub pull request" style="width:100%" >}}
+{{< img src="/getting_started/code_security/github_suggestion.png" alt="A suggestion from Code Analysis in a GitHub pull request" style="width:100%" >}}
 
 When configured, Code Analysis directly comments on the PR, indicating violations with details such as the name, ID, severity, and suggested fixes, which you can directly apply from the GitHub UI. 
 
@@ -231,7 +231,7 @@ After adding the [appropriate configuration files][10] to your repository, creat
 
 Once you've configured your app, navigate to the **Code Analysis Settings** page and click the toggle in the **GitHub Comments** column for each repository. 
 
-{{< img src="/getting_started/code_analysis/github_comments_setting.png" alt="Toggles for each repository to enable or disable Code Analysis comments in GitHub pull requests" style="width:100%" >}}
+{{< img src="/getting_started/code_security/github_comments_setting.png" alt="Toggles for each repository to enable or disable Code Analysis comments in GitHub pull requests" style="width:100%" >}}
 
 For more information, see [GitHub Pull Requests][12].
 
@@ -239,7 +239,7 @@ For more information, see [GitHub Pull Requests][12].
 
 Click on a repository on the [**Repositories** page][6] to access a more detailed view where you can customize the search query by branch (with the default branch appearing first) and by commit (starting with the latest). 
 
-{{< img src="/getting_started/code_analysis/sca_vulnerabilities.png" alt="The Library Vulnerabilities view of the Code Analysis results from a repository's default branch and latest commit" style="width:100%" >}}
+{{< img src="/getting_started/code_security/sca_vulnerabilities.png" alt="The Library Vulnerabilities view of the Code Analysis results from a repository's default branch and latest commit" style="width:100%" >}}
 
 {{< tabs >}}
 {{% tab "Static Analysis" %}}
@@ -260,7 +260,7 @@ You can use the following out-of-the-box facets to create a search query for ide
 
 You can access suggested fixes directly from the results to improve code quality practices and address security vulnerabilities.
 
-{{< img src="/getting_started/code_analysis/suggested_fix.png" alt="A suggested code fix on the Fixes tab of a Code Analysis result" style="width:100%" >}}
+{{< img src="/getting_started/code_security/suggested_fix.png" alt="A suggested code fix on the Fixes tab of a Code Analysis result" style="width:100%" >}}
 
 {{% /tab %}}
 {{% tab "Software Composition Analysis" %}}
@@ -278,7 +278,7 @@ You can use the following out-of-the-box facets to create a search query for ide
 
 You can access vulnerability reports and locate the source files where the vulnerability was discovered in your projects, along with information about the file’s code owners.
 
-{{< img src="/getting_started/code_analysis/sci_vulnerabilities.png" alt="A link to the source code directly in GitHub from a detected library vulnerability" style="width:100%" >}}
+{{< img src="/getting_started/code_security/sci_vulnerabilities.png" alt="A link to the source code directly in GitHub from a detected library vulnerability" style="width:100%" >}}
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -287,11 +287,11 @@ You can access vulnerability reports and locate the source files where the vulne
 
 Investigate code violations associated with your services and code violations identified from Static Analysis to troubleshoot slowdowns and failures. Navigate to [**Service Management** > **Services** > **Service Catalog**][13] and click on the **Delivery** view to analyze the pre-production status of your services. 
 
-{{< img src="/getting_started/code_analysis/catalog_view.png" alt="A link to the source code directly in GitHub from a detected library vulnerability" style="width:100%" >}}
+{{< img src="/getting_started/code_security/catalog_view.png" alt="A link to the source code directly in GitHub from a detected library vulnerability" style="width:100%" >}}
 
 Click on a service to access information about CI pipelines from Pipeline Visibility, in addition to security vulnerabilities and code quality issues from Code Analysis on the **Delivery** tab of the side panel.
 
-{{< img src="/getting_started/code_analysis/catalog_service.png" alt="A link to the source code directly in GitHub from a detected library vulnerability" style="width:100%" >}}
+{{< img src="/getting_started/code_security/catalog_service.png" alt="A link to the source code directly in GitHub from a detected library vulnerability" style="width:100%" >}}
 
 ### Linking services to code violations and libraries
 
@@ -355,16 +355,16 @@ in your repository. The `CODEOWNERS` file determines which team owns a file in y
 **Note**: You must accurately map your Git provider teams to your [Datadog teams][16] for this feature to function properly.
 
 [1]: /code_analysis/
-[2]: /code_analysis/static_analysis
-[3]: /code_analysis/software_composition_analysis
-[4]: /security/application_security/software_composition_analysis
+[2]: /security/code_security/static_analysis
+[3]: /security/code_security/software_composition_analysis
+[4]: /security/code_security/software_composition_analysis
 [5]: https://www.npmjs.com/package/@datadog/datadog-ci
 [6]: https://app.datadoghq.com/ci/code-analysis
-[7]: /code_analysis/ide_plugins
+[7]: /security/code_security/dev_tool_int/ide_plugins
 [9]: https://app.datadoghq.com/dash/integration/31166/software-delivery---static-analysis-overview
-[10]: /code_analysis/static_analysis/github_actions/
-[11]: /code_analysis/github_pull_requests/#update-an-existing-github-app
-[12]: /code_analysis/github_pull_requests
+[10]: /security/code_security/static_analysis/github_actions/
+[11]: /security/code_security/dev_tool_int/github_pull_requests/#update-an-existing-github-app
+[12]: /security/code_security/dev_tool_int/github_pull_requests
 [13]: https://app.datadoghq.com/services 
 [14]: https://en.wikipedia.org/wiki/Glob_(programming)
 [15]: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners

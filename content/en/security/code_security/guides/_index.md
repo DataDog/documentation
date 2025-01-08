@@ -1,8 +1,7 @@
 ---
 title: Guides
 disable_toc: false
-aliases:
-- /path-to-old-doc/
+
 ---
 
 
