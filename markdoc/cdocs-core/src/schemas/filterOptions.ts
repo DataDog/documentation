@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { SNAKE_CASE_REGEX, FILTER_OPTIONS_ID_REGEX } from '../regexes';
+import { SNAKE_CASE_REGEX, FILTER_OPTIONS_ID_REGEX } from './regexes';
 
 /**
  * A single option for a filter,
@@ -17,7 +17,7 @@ export const FilterOptionSchema = z
   .object({
     display_name: z.string(),
     default: z.boolean().optional(),
-    id: z.string().regex(SNAKE_CASE_REGEX)
+    id: z.string().regex(SNAKE_CASE_REGEX),
   })
   .strict();
 
@@ -33,8 +33,8 @@ export const RawFilterOptionsConfigSchema = z.record(
   z
     .array(
       FilterOptionSchema.omit({ display_name: true }).extend({
-        display_name: z.string().optional()
-      })
+        display_name: z.string().optional(),
+      }),
     )
     .refine((options) => {
       // Verify that only one default option is identified
@@ -58,7 +58,7 @@ export const RawFilterOptionsConfigSchema = z.record(
       }
 
       return true;
-    })
+    }),
 );
 
 /**
@@ -68,7 +68,9 @@ export const RawFilterOptionsConfigSchema = z.record(
  * from an option when the intention is to use the default
  * display name as defined in the options glossary.
  */
-export type RawFilterOptionsConfig = z.infer<typeof RawFilterOptionsConfigSchema>;
+export type RawFilterOptionsConfig = z.infer<
+  typeof RawFilterOptionsConfigSchema
+>;
 
 /**
  * The validated filter options configuration
@@ -100,7 +102,7 @@ export const FilterOptionsConfigSchema = z.record(
         ids.add(option.id);
       }
       return true;
-    })
+    }),
 );
 
 /**

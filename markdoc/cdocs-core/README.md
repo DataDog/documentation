@@ -10,7 +10,7 @@ All customizable docs at Datadog use the same configuration patterns and runtime
 
 ## What does this package provide?
 
-Because a customizable document has many content filter combinations that are difficult to test manually, it's crucial that all configuration data is valid to avoid unexpected behavior in production.
+Because it's difficult to test every version of a customizable document manually, it's crucial to use valid configuration data that won't cause undetected issues in production.
 
 This package contains types and utility functions for safely ingesting and validating configuration, and for mutating runtime data in response to changes in the user's preferences. It includes utilities for
 

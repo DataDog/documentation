@@ -1,14 +1,14 @@
-import { FilterOptionsConfig } from './schemas/yaml/filterOptions';
-import { GLOBAL_PLACEHOLDER_REGEX } from './schemas/regexes';
-import { Frontmatter } from './schemas/yaml/frontMatter';
-import { Glossary } from './schemas/yaml/glossary';
-import { PLACEHOLDER_REGEX } from './schemas/regexes';
+import { FilterOptionsConfig } from '../schemas/filterOptions';
+import { GLOBAL_PLACEHOLDER_REGEX } from '../schemas/regexes';
+import { Frontmatter } from '../schemas/frontMatter';
+import { Glossary } from '../schemas/glossary';
+import { PLACEHOLDER_REGEX } from '../schemas/regexes';
 import {
   PageFiltersManifest,
-  PageFiltersClientSideManifest
-} from './schemas/pageFilters';
-import { PageFilterConfig } from './schemas/yaml/frontMatter';
-import { CdocsCoreError } from './schemas/errors';
+  PageFiltersClientSideManifest,
+} from '../schemas/pageFilters';
+import { PageFilterConfig } from '../schemas/frontMatter';
+import { CdocsCoreError } from '../schemas/errors';
 
 /**
  * A module responsible for combining ingested configuration data
@@ -20,18 +20,20 @@ export class FiltersManifestBuilder {
    * Convert a standard compile-time page filters manifest
    * to a lighter version to be used client-side.
    */
-  static minifyManifest(manifest: PageFiltersManifest): PageFiltersClientSideManifest {
+  static minifyManifest(
+    manifest: PageFiltersManifest,
+  ): PageFiltersClientSideManifest {
     const result: PageFiltersClientSideManifest = {
       filtersById: {},
       defaultValsByFilterId: { ...manifest.defaultValsByFilterId },
-      optionSetsById: { ...manifest.optionSetsById }
+      optionSetsById: { ...manifest.optionSetsById },
     };
 
     Object.keys(manifest.filtersById).forEach((filterId) => {
       const filter = manifest.filtersById[filterId];
       result.filtersById[filterId] = {
         config: { ...filter.config },
-        defaultValsByOptionsSetId: { ...filter.defaultValsByOptionsSetId }
+        defaultValsByOptionsSetId: { ...filter.defaultValsByOptionsSetId },
       };
     });
 
@@ -53,7 +55,7 @@ export class FiltersManifestBuilder {
       filtersById: {},
       optionSetsById: {},
       errors: [],
-      defaultValsByFilterId: {}
+      defaultValsByFilterId: {},
     };
 
     // Return the empty manifest if the page has no filters
@@ -65,14 +67,14 @@ export class FiltersManifestBuilder {
     // used to resolve placeholders in options sources
     manifest.defaultValsByFilterId = this.getDefaultValsByFilterId({
       filterOptionsConfig: p.filterOptionsConfig,
-      filterConfigs: p.frontmatter.content_filters
+      filterConfigs: p.frontmatter.content_filters,
     });
 
     // Key the configs by filter ID, for convenient access during processing
     const filterConfigByFilterId: Record<string, PageFilterConfig> =
       p.frontmatter.content_filters.reduce(
         (obj, filterConfig) => ({ ...obj, [filterConfig.id]: filterConfig }),
-        {}
+        {},
       );
 
     // Keep track of the filter IDs that have been processed,
@@ -86,7 +88,7 @@ export class FiltersManifestBuilder {
       if (!p.glossary.filtersById[pageFilterConfig.id]) {
         manifest.errors.push({
           message: `Unrecognized filter ID: The filter ID '${pageFilterConfig.id}' is not in the glossary.`,
-          searchTerm: pageFilterConfig.id
+          searchTerm: pageFilterConfig.id,
         });
       }
 
@@ -94,7 +96,8 @@ export class FiltersManifestBuilder {
       // so each one can have its range of values processed
       // and the options set itself can be attached to the manifest
       let optionsSetIds: string[] = [];
-      const hasDynamicOptions = pageFilterConfig.options_source.match(PLACEHOLDER_REGEX);
+      const hasDynamicOptions =
+        pageFilterConfig.options_source.match(PLACEHOLDER_REGEX);
 
       if (hasDynamicOptions) {
         const { optionsSetIds: dynamicOptionsSetIds, errors } =
@@ -102,7 +105,7 @@ export class FiltersManifestBuilder {
             filterId: pageFilterConfig.id,
             filterOptionsConfig: p.filterOptionsConfig,
             filterConfigsByFilterId: filterConfigByFilterId,
-            precedingFilterIds: processedFilterIds
+            precedingFilterIds: processedFilterIds,
           });
 
         if (errors.length > 0) {
@@ -121,7 +124,7 @@ export class FiltersManifestBuilder {
           filterId: pageFilterConfig.id,
           optionsSetIds,
           glossary: p.glossary,
-          filterOptionsConfig: p.filterOptionsConfig
+          filterOptionsConfig: p.filterOptionsConfig,
         });
 
       if (errors.length > 0) {
@@ -131,7 +134,7 @@ export class FiltersManifestBuilder {
       manifest.filtersById[pageFilterConfig.id] = {
         config: pageFilterConfig,
         defaultValsByOptionsSetId: defaultValsByOptionsSetId,
-        possibleVals: possibleVals
+        possibleVals: possibleVals,
       };
 
       processedFilterIds.push(pageFilterConfig.id);
@@ -140,10 +143,13 @@ export class FiltersManifestBuilder {
     // Attach any options sets that were referenced by the filters
     Object.keys(manifest.filtersById).forEach((filterId) => {
       const filterManifest = manifest.filtersById[filterId];
-      const optionsSetIds = Object.keys(filterManifest.defaultValsByOptionsSetId);
+      const optionsSetIds = Object.keys(
+        filterManifest.defaultValsByOptionsSetId,
+      );
       optionsSetIds.forEach((optionsSetId) => {
         if (!manifest.optionSetsById[optionsSetId]) {
-          manifest.optionSetsById[optionsSetId] = p.filterOptionsConfig[optionsSetId];
+          manifest.optionSetsById[optionsSetId] =
+            p.filterOptionsConfig[optionsSetId];
         }
       });
     });
@@ -175,7 +181,7 @@ export class FiltersManifestBuilder {
       const optionsSet = p.filterOptionsConfig[optionsSetId];
       if (!optionsSet) {
         errors.push({
-          message: `Invalid options source: The options source '${optionsSetId}', which is required for the filter ID '${p.filterId}', does not exist.`
+          message: `Invalid options source: The options source '${optionsSetId}', which is required for the filter ID '${p.filterId}', does not exist.`,
         });
         return;
       }
@@ -183,7 +189,7 @@ export class FiltersManifestBuilder {
       optionsSet.forEach((option) => {
         if (!p.glossary.optionsById[option.id]) {
           errors.push({
-            message: `Invalid option ID: The option ID '${option.id}' is not in the options glossary.`
+            message: `Invalid option ID: The option ID '${option.id}' is not in the options glossary.`,
           });
         }
 
@@ -222,11 +228,15 @@ export class FiltersManifestBuilder {
 
       // build placeholder segment (array of all possible values)
       const referencedFilterId = segment.slice(1, -1).toLowerCase();
-      const referencedFilterConfig = p.filterConfigsByFilterId[referencedFilterId];
-      if (!referencedFilterConfig || !p.precedingFilterIds.includes(referencedFilterId)) {
+      const referencedFilterConfig =
+        p.filterConfigsByFilterId[referencedFilterId];
+      if (
+        !referencedFilterConfig ||
+        !p.precedingFilterIds.includes(referencedFilterId)
+      ) {
         errors.push({
           message: `Invalid placeholder: The placeholder ${segment} in the options source '${filter.options_source}' refers to an unrecognized filter ID. The file frontmatter must contain a filter with the ID '${referencedFilterId}', and it must be defined before the filter with the ID ${filter.id}.`,
-          searchTerm: filter.options_source
+          searchTerm: filter.options_source,
         });
         return [segment];
       }
@@ -267,7 +277,7 @@ export class FiltersManifestBuilder {
         (_match: string, placeholder: string) => {
           const value = defaultValsByFilterId[placeholder.toLowerCase()];
           return value || '';
-        }
+        },
       );
 
       // Resolve the default option set for this filter
@@ -296,18 +306,22 @@ export class FiltersManifestBuilder {
    * FiltersManifestBuilder.buildSnakeCaseCombinations(segments);
    * // returns ['red_gloss_paint_options', 'red_matte_paint_options', 'blue_gloss_paint_options', 'blue_matte_paint_options']
    */
-  static buildSnakeCaseCombinations(arr: any[], str: string = '', final: any[] = []) {
+  static buildSnakeCaseCombinations(
+    arr: any[],
+    str: string = '',
+    final: any[] = [],
+  ) {
     if (arr.length > 1) {
       arr[0].forEach((segment: string) =>
         this.buildSnakeCaseCombinations(
           arr.slice(1),
           str + (str === '' ? '' : '_') + segment,
-          final
-        )
+          final,
+        ),
       );
     } else {
       arr[0].forEach((segment: string) =>
-        final.push(str + (str === '' ? '' : '_') + segment)
+        final.push(str + (str === '' ? '' : '_') + segment),
       );
     }
     return final;

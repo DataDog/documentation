@@ -1,9 +1,9 @@
 import { describe, test, expect } from 'vitest';
-import { FiltersManifestBuilder } from '../../../src/FiltersManifestBuilder';
+import { FiltersManifestBuilder } from '../../../src/modules/FiltersManifestBuilder';
 import {
   paintColorsFrontmatter,
   paintColorsFilterOptionsConfig,
-  paintColorsGlossary
+  paintColorsGlossary,
 } from '../../mocks/valid/paintColorsConfig';
 import _ from 'lodash';
 import { SNAPSHOTS_DIR } from '../../config/constants';
@@ -14,7 +14,7 @@ describe('FiltersManifestBuilder.build', () => {
     const manifest = FiltersManifestBuilder.build({
       frontmatter: paintColorsFrontmatter,
       filterOptionsConfig: paintColorsFilterOptionsConfig,
-      glossary: paintColorsGlossary
+      glossary: paintColorsGlossary,
     });
 
     const expectedManifest: PageFiltersManifest = {
@@ -23,29 +23,29 @@ describe('FiltersManifestBuilder.build', () => {
           config: {
             display_name: 'Color',
             id: 'color',
-            options_source: 'color_options'
+            options_source: 'color_options',
           },
           defaultValsByOptionsSetId: {
-            color_options: 'blue'
+            color_options: 'blue',
           },
-          possibleVals: ['blue', 'red']
+          possibleVals: ['blue', 'red'],
         },
         finish: {
           config: {
             display_name: 'Finish',
             id: 'finish',
-            options_source: 'finish_options'
+            options_source: 'finish_options',
           },
           defaultValsByOptionsSetId: {
-            finish_options: 'eggshell'
+            finish_options: 'eggshell',
           },
-          possibleVals: ['matte', 'eggshell', 'gloss']
+          possibleVals: ['matte', 'eggshell', 'gloss'],
         },
         paint: {
           config: {
             display_name: 'Paint color',
             id: 'paint',
-            options_source: '<FINISH>_<COLOR>_paint_options'
+            options_source: '<FINISH>_<COLOR>_paint_options',
           },
           defaultValsByOptionsSetId: {
             matte_blue_paint_options: 'powder_blue',
@@ -53,7 +53,7 @@ describe('FiltersManifestBuilder.build', () => {
             eggshell_blue_paint_options: 'elegant_royal',
             eggshell_red_paint_options: 'rose',
             gloss_blue_paint_options: 'sky_blue',
-            gloss_red_paint_options: 'fire_engine'
+            gloss_red_paint_options: 'fire_engine',
           },
           possibleVals: [
             'powder_blue',
@@ -66,110 +66,110 @@ describe('FiltersManifestBuilder.build', () => {
             'sky_blue',
             'navy',
             'fire_engine',
-            'crimson'
-          ]
-        }
+            'crimson',
+          ],
+        },
       },
       optionSetsById: {
         color_options: [
           {
             id: 'blue',
             display_name: 'Blue',
-            default: true
+            default: true,
           },
           {
             id: 'red',
-            display_name: 'Red'
-          }
+            display_name: 'Red',
+          },
         ],
         finish_options: [
           {
             id: 'matte',
-            display_name: 'Matte'
+            display_name: 'Matte',
           },
           {
             id: 'eggshell',
             display_name: 'Eggshell',
-            default: true
+            default: true,
           },
           {
             id: 'gloss',
-            display_name: 'Gloss'
-          }
+            display_name: 'Gloss',
+          },
         ],
         matte_blue_paint_options: [
           {
             id: 'powder_blue',
             display_name: 'Powder Blue',
-            default: true
-          }
+            default: true,
+          },
         ],
         matte_red_paint_options: [
           {
             id: 'brick',
             display_name: 'Brick',
-            default: true
+            default: true,
           },
           {
             id: 'scarlet',
-            display_name: 'Scarlet'
-          }
+            display_name: 'Scarlet',
+          },
         ],
         eggshell_blue_paint_options: [
           {
             id: 'elegant_royal',
             display_name: 'Elegant Royal',
-            default: true
+            default: true,
           },
           {
             id: 'robins_egg',
-            display_name: "Robin's Egg"
-          }
+            display_name: "Robin's Egg",
+          },
         ],
         eggshell_red_paint_options: [
           {
             id: 'rose',
             display_name: 'Rose',
-            default: true
+            default: true,
           },
           {
             id: 'ruby',
-            display_name: 'Ruby'
-          }
+            display_name: 'Ruby',
+          },
         ],
         gloss_blue_paint_options: [
           {
             id: 'sky_blue',
             display_name: 'Sky Blue',
-            default: true
+            default: true,
           },
           {
             id: 'navy',
-            display_name: 'Navy'
-          }
+            display_name: 'Navy',
+          },
         ],
         gloss_red_paint_options: [
           {
             id: 'fire_engine',
             display_name: 'Fire Engine',
-            default: true
+            default: true,
           },
           {
             id: 'crimson',
-            display_name: 'Crimson'
-          }
-        ]
+            display_name: 'Crimson',
+          },
+        ],
       },
       errors: [],
       defaultValsByFilterId: {
         color: 'blue',
         finish: 'eggshell',
-        paint: 'elegant_royal'
-      }
+        paint: 'elegant_royal',
+      },
     };
     expect(_.isEqual(manifest, expectedManifest)).toBe(true);
     await expect(JSON.stringify(manifest, null, 2)).toMatchFileSnapshot(
-      `${SNAPSHOTS_DIR}/helperModules/FiltersManifestBuilder/valid/filtersManifest.snap.json`
+      `${SNAPSHOTS_DIR}/helperModules/FiltersManifestBuilder/valid/filtersManifest.snap.json`,
     );
   });
 
@@ -180,26 +180,26 @@ describe('FiltersManifestBuilder.build', () => {
         {
           display_name: 'Color',
           id: 'color',
-          options_source: 'color_options'
+          options_source: 'color_options',
         },
         {
           display_name: 'Finish',
           id: 'finish',
-          options_source: 'finish_options'
+          options_source: 'finish_options',
         },
         {
           display_name: 'Paint color',
           id: 'paint',
           // invalid placeholder 'COLOUR'
-          options_source: '<FINISH>_<COLOUR>_paint_options'
-        }
-      ]
+          options_source: '<FINISH>_<COLOUR>_paint_options',
+        },
+      ],
     };
 
     const manifest = FiltersManifestBuilder.build({
       frontmatter: invalidFrontmatter,
       filterOptionsConfig: paintColorsFilterOptionsConfig,
-      glossary: paintColorsGlossary
+      glossary: paintColorsGlossary,
     });
 
     expect(manifest.errors.length).toEqual(1);
@@ -210,12 +210,12 @@ describe('FiltersManifestBuilder.build', () => {
     const invalidFilterOptionsConfig = {
       color_options: [
         { id: 'blue', display_name: 'Blue', default: true },
-        { id: 'red', display_name: 'Red' }
+        { id: 'red', display_name: 'Red' },
       ],
       finish_options: [
         { id: 'matte', display_name: 'Matte' },
         { id: 'eggshell', display_name: 'Eggshell', default: true },
-        { id: 'gloss', display_name: 'Gloss' }
+        { id: 'gloss', display_name: 'Gloss' },
       ],
       /* Intentionally omitted options:
       matte_blue_paint_options: [
@@ -224,30 +224,30 @@ describe('FiltersManifestBuilder.build', () => {
       */
       eggshell_blue_paint_options: [
         { id: 'elegant_royal', display_name: 'Elegant Royal', default: true },
-        { id: 'robins_egg', display_name: "Robin's Egg" }
+        { id: 'robins_egg', display_name: "Robin's Egg" },
       ],
       gloss_blue_paint_options: [
         { id: 'sky_blue', display_name: 'Sky Blue', default: true },
-        { id: 'navy', display_name: 'Navy' }
+        { id: 'navy', display_name: 'Navy' },
       ],
       matte_red_paint_options: [
         { id: 'brick', display_name: 'Brick', default: true },
-        { id: 'scarlet', display_name: 'Scarlet' }
+        { id: 'scarlet', display_name: 'Scarlet' },
       ],
       eggshell_red_paint_options: [
         { id: 'rose', display_name: 'Rose', default: true },
-        { id: 'ruby', display_name: 'Ruby' }
+        { id: 'ruby', display_name: 'Ruby' },
       ],
       gloss_red_paint_options: [
         { id: 'fire_engine', display_name: 'Fire Engine', default: true },
-        { id: 'crimson', display_name: 'Crimson' }
-      ]
+        { id: 'crimson', display_name: 'Crimson' },
+      ],
     };
 
     const manifest = FiltersManifestBuilder.build({
       frontmatter: paintColorsFrontmatter,
       filterOptionsConfig: invalidFilterOptionsConfig,
-      glossary: paintColorsGlossary
+      glossary: paintColorsGlossary,
     });
 
     expect(manifest.errors.length).toEqual(1);

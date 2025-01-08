@@ -12,7 +12,7 @@
  * The glossary is defined in the filters configuration YAML.
  */
 import { z } from 'zod';
-import { SNAKE_CASE_REGEX } from '../regexes';
+import { SNAKE_CASE_REGEX } from './regexes';
 
 /**
  * A single entry in a glossary.
@@ -21,7 +21,7 @@ export const GlossaryEntryConfigSchema = z
   .object({
     id: z.string().regex(SNAKE_CASE_REGEX),
     display_name: z.string(),
-    description: z.string().optional()
+    description: z.string().optional(),
   })
   .strict();
 
@@ -47,11 +47,13 @@ export const GlossaryConfigSchema = z
       const uniqueIds = new Set(ids);
       if (ids.length !== uniqueIds.size) {
         const duplicates = ids.filter((id, index) => ids.indexOf(id) !== index);
-        console.error(`Duplicate IDs found in glossary: ${duplicates.join(', ')}`);
+        console.error(
+          `Duplicate IDs found in glossary: ${duplicates.join(', ')}`,
+        );
         return false;
       }
       return true;
-    })
+    }),
   })
   .strict();
 
@@ -67,7 +69,7 @@ export type GlossaryConfig = z.infer<typeof GlossaryConfigSchema>;
 export const GlossarySchema = z
   .object({
     filtersById: z.record(GlossaryEntryConfigSchema),
-    optionsById: z.record(GlossaryEntryConfigSchema)
+    optionsById: z.record(GlossaryEntryConfigSchema),
   })
   .strict();
 

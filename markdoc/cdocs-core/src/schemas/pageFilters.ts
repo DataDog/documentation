@@ -1,7 +1,7 @@
 import { z } from 'zod';
 import { FILTER_OPTIONS_ID_REGEX, SNAKE_CASE_REGEX } from './regexes';
-import { FilterOptionsConfigSchema } from './yaml/filterOptions';
-import { PageFilterConfigSchema } from './yaml/frontMatter';
+import { FilterOptionsConfigSchema } from './filterOptions';
+import { PageFilterConfigSchema } from './frontMatter';
 import { CdocsCoreErrorSchema } from './errors';
 
 /**
@@ -13,7 +13,7 @@ const ResolvedPageFilterOptionSchema = z
     // The value of the option, to be used in routes and params
     id: z.string().regex(SNAKE_CASE_REGEX),
     // The display name of the option in the UI
-    displayName: z.string()
+    displayName: z.string(),
   })
   .strict();
 
@@ -39,7 +39,7 @@ export const ResolvedPageFilterSchema = z
     displayName: z.string(),
     defaultValue: z.string().regex(SNAKE_CASE_REGEX),
     options: z.array(ResolvedPageFilterOptionSchema),
-    currentValue: z.string().regex(SNAKE_CASE_REGEX)
+    currentValue: z.string().regex(SNAKE_CASE_REGEX),
   })
   .strict();
 
@@ -115,9 +115,9 @@ export const PageFilterManifestSchema = z
     config: PageFilterConfigSchema,
     defaultValsByOptionsSetId: z.record(
       z.string().regex(FILTER_OPTIONS_ID_REGEX),
-      z.string().regex(SNAKE_CASE_REGEX)
+      z.string().regex(SNAKE_CASE_REGEX),
     ),
-    possibleVals: z.array(z.string().regex(SNAKE_CASE_REGEX))
+    possibleVals: z.array(z.string().regex(SNAKE_CASE_REGEX)),
   })
   .strict();
 
@@ -161,13 +161,16 @@ export type PageFilterManifest = z.infer<typeof PageFilterManifestSchema>;
  */
 export const PageFiltersManifestSchema = z
   .object({
-    filtersById: z.record(z.string().regex(SNAKE_CASE_REGEX), PageFilterManifestSchema),
+    filtersById: z.record(
+      z.string().regex(SNAKE_CASE_REGEX),
+      PageFilterManifestSchema,
+    ),
     optionSetsById: FilterOptionsConfigSchema,
     defaultValsByFilterId: z.record(
       z.string().regex(SNAKE_CASE_REGEX),
-      z.string().regex(SNAKE_CASE_REGEX)
+      z.string().regex(SNAKE_CASE_REGEX),
     ),
-    errors: z.array(CdocsCoreErrorSchema)
+    errors: z.array(CdocsCoreErrorSchema),
   })
   .strict();
 
@@ -225,8 +228,8 @@ export const PageFilterClientSideManifestSchema = z
     config: PageFilterConfigSchema,
     defaultValsByOptionsSetId: z.record(
       z.string().regex(FILTER_OPTIONS_ID_REGEX),
-      z.string().regex(SNAKE_CASE_REGEX)
-    )
+      z.string().regex(SNAKE_CASE_REGEX),
+    ),
   })
   .strict();
 
@@ -242,13 +245,13 @@ export const PageFiltersClientSideManifestSchema = z
   .object({
     filtersById: z.record(
       z.string().regex(SNAKE_CASE_REGEX),
-      PageFilterClientSideManifestSchema
+      PageFilterClientSideManifestSchema,
     ),
     optionSetsById: FilterOptionsConfigSchema,
     defaultValsByFilterId: z.record(
       z.string().regex(SNAKE_CASE_REGEX),
-      z.string().regex(SNAKE_CASE_REGEX)
-    )
+      z.string().regex(SNAKE_CASE_REGEX),
+    ),
   })
   .strict();
 

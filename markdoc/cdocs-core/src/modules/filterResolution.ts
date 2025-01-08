@@ -9,14 +9,14 @@
  * (for example, file system access).
  */
 
-import { GLOBAL_PLACEHOLDER_REGEX } from './schemas/regexes';
+import { GLOBAL_PLACEHOLDER_REGEX } from '../schemas/regexes';
 import {
   ResolvedPageFilters,
   ResolvedPageFilter,
   PageFiltersManifest,
-  PageFiltersClientSideManifest
-} from './schemas/pageFilters';
-import { PageFilterConfig } from './schemas/yaml/frontMatter';
+  PageFiltersClientSideManifest,
+} from '../schemas/pageFilters';
+import { PageFilterConfig } from '../schemas/frontMatter';
 
 /**
  * Resolve the page filters object that is used
@@ -41,15 +41,17 @@ export function resolvePageFilters(p: {
   const resolvedPageFilters: ResolvedPageFilters = {};
   const valsByFilterIdDup = { ...p.valsByFilterId };
 
-  const pageFiltersConfig = Object.values(p.filtersManifest.filtersById).map((filter) => {
-    return filter.config;
-  });
+  const pageFiltersConfig = Object.values(p.filtersManifest.filtersById).map(
+    (filter) => {
+      return filter.config;
+    },
+  );
 
   pageFiltersConfig.forEach((filterConfig) => {
     // If the options source contains a placeholder, resolve it
     const filterConfigDup = resolveFilterOptionsSource({
       pageFilterConfig: filterConfig,
-      selectedValsByFilterId: valsByFilterIdDup
+      selectedValsByFilterId: valsByFilterIdDup,
     });
 
     // Update the value for the filter,
@@ -57,7 +59,7 @@ export function resolvePageFilters(p: {
     const defaultValue =
       filterConfigDup.default_value ||
       p.filtersManifest.optionSetsById[filterConfigDup.options_source].find(
-        (option) => option.default
+        (option) => option.default,
       )!.id;
 
     const possibleVals = p.filtersManifest.optionSetsById[
@@ -75,12 +77,12 @@ export function resolvePageFilters(p: {
       displayName: filterConfigDup.display_name,
       defaultValue,
       currentValue,
-      options: p.filtersManifest.optionSetsById[filterConfigDup.options_source].map(
-        (option) => ({
-          id: option.id,
-          displayName: option.display_name
-        })
-      )
+      options: p.filtersManifest.optionSetsById[
+        filterConfigDup.options_source
+      ].map((option) => ({
+        id: option.id,
+        displayName: option.display_name,
+      })),
     };
 
     resolvedPageFilters[filterConfigDup.id] = resolvedFilter;
@@ -110,7 +112,7 @@ export function resolveFilterOptionsSource(p: {
       GLOBAL_PLACEHOLDER_REGEX,
       (_match: string, placeholder: string) => {
         return p.selectedValsByFilterId[placeholder.toLowerCase()];
-      }
+      },
     );
   }
 

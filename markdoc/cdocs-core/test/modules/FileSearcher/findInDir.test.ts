@@ -1,4 +1,4 @@
-import { FileSearcher } from '../../../src/FileSearcher';
+import { FileSearcher } from '../../../src/modules/FileSearcher';
 import { describe, test, expect } from 'vitest';
 import { VALID_CONTENT_DIR } from '../../config/constants';
 
@@ -8,7 +8,7 @@ describe('FileSearcher.findInDir', () => {
     expect(files.length).toBeGreaterThan(0);
 
     const sanitizedFilenames = files.map((filename) =>
-      filename.replace(VALID_CONTENT_DIR, '')
+      filename.replace(VALID_CONTENT_DIR, ''),
     );
 
     expect(sanitizedFilenames).toContain('/en/primary_colors.mdoc.md');

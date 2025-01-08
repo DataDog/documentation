@@ -2,14 +2,14 @@ import {
   FilterOptionsConfig,
   FilterOptionsConfigSchema,
   RawFilterOptionsConfig,
-  RawFilterOptionsConfigSchema
-} from './schemas/yaml/filterOptions';
+  RawFilterOptionsConfigSchema,
+} from '../schemas/filterOptions';
 import { FileSearcher } from './FileSearcher';
 import {
   Glossary,
   GlossaryConfigSchema,
-  GlossaryEntryConfig
-} from './schemas/yaml/glossary';
+  GlossaryEntryConfig,
+} from '../schemas/glossary';
 import fs from 'fs';
 import yaml from 'js-yaml';
 
@@ -31,15 +31,17 @@ export class YamlConfigParser {
     const filterOptionsConfig = this.loadFilterOptionsFromDir(optionSetsDir);
 
     Object.values(filterOptionsConfig).forEach((optionsList) => {
-      const displayNamesByAllowedOptionId: Record<string, string> = Object.values(
-        p.glossary.optionsById
-      ).reduce((acc, entry) => ({ ...acc, [entry.id]: entry.display_name }), {});
+      const displayNamesByAllowedOptionId: Record<string, string> =
+        Object.values(p.glossary.optionsById).reduce(
+          (acc, entry) => ({ ...acc, [entry.id]: entry.display_name }),
+          {},
+        );
 
       optionsList.forEach((option) => {
         const defaultDisplayName = displayNamesByAllowedOptionId[option.id];
         if (!defaultDisplayName) {
           throw new Error(
-            `The option ID '${option.id}' does not exist in the options glossary.`
+            `The option ID '${option.id}' does not exist in the options glossary.`,
           );
         }
         if (!option.display_name) {
@@ -64,7 +66,7 @@ export class YamlConfigParser {
     const glossariesByLang: Record<string, Glossary> = {};
 
     const defaultGlossary = this.loadGlossaryFromLangDir(
-      `${p.filtersConfigDir}/${defaultLang}`
+      `${p.filtersConfigDir}/${defaultLang}`,
     );
 
     p.langs.forEach((lang) => {
@@ -79,12 +81,12 @@ export class YamlConfigParser {
       const mergedGlossary: Glossary = {
         filtersById: {
           ...defaultGlossary.filtersById,
-          ...translatedGlossary.filtersById
+          ...translatedGlossary.filtersById,
         },
         optionsById: {
           ...defaultGlossary.optionsById,
-          ...translatedGlossary.optionsById
-        }
+          ...translatedGlossary.optionsById,
+        },
       };
 
       glossariesByLang[lang] = mergedGlossary;
@@ -102,9 +104,12 @@ export class YamlConfigParser {
     // Load and validate the filters glossary
     const filtersGlossaryFilePath = `${dir}/glossary/filter_ids.yaml`;
     try {
-      const filtersGlossaryConfigStr = fs.readFileSync(filtersGlossaryFilePath, 'utf8');
+      const filtersGlossaryConfigStr = fs.readFileSync(
+        filtersGlossaryFilePath,
+        'utf8',
+      );
       const filtersGlossary = GlossaryConfigSchema.parse(
-        yaml.load(filtersGlossaryConfigStr)
+        yaml.load(filtersGlossaryConfigStr),
       );
       result.filtersById = filtersGlossary.allowed.reduce<
         Record<string, GlossaryEntryConfig>
@@ -124,8 +129,13 @@ export class YamlConfigParser {
     // Load and validate the options glossary
     const optionsGlossaryFilePath = `${dir}/glossary/filter_options.yaml`;
     try {
-      const optionsGlossaryStr = fs.readFileSync(optionsGlossaryFilePath, 'utf8');
-      const optionsGlossary = GlossaryConfigSchema.parse(yaml.load(optionsGlossaryStr));
+      const optionsGlossaryStr = fs.readFileSync(
+        optionsGlossaryFilePath,
+        'utf8',
+      );
+      const optionsGlossary = GlossaryConfigSchema.parse(
+        yaml.load(optionsGlossaryStr),
+      );
       result.optionsById = optionsGlossary.allowed.reduce<
         Record<string, GlossaryEntryConfig>
       >((acc, entry) => {
@@ -158,13 +168,15 @@ export class YamlConfigParser {
 
     filenames.forEach((filename) => {
       const filterOptionsConfig = RawFilterOptionsConfigSchema.parse(
-        this.loadFiltersYamlFromStr(filename)
+        this.loadFiltersYamlFromStr(filename),
       );
-      for (const [optionsListId, optionsList] of Object.entries(filterOptionsConfig)) {
+      for (const [optionsListId, optionsList] of Object.entries(
+        filterOptionsConfig,
+      )) {
         // Verify that no duplicate options set IDs exist
         if (rawFilterOptions[optionsListId]) {
           throw new Error(
-            `Duplicate options list ID '${optionsListId}' found in file ${filename}`
+            `Duplicate options list ID '${optionsListId}' found in file ${filename}`,
           );
         }
         rawFilterOptions[optionsListId] = optionsList;

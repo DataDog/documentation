@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { SNAKE_CASE_REGEX, FILTER_OPTIONS_ID_REGEX } from './../regexes';
+import { SNAKE_CASE_REGEX, FILTER_OPTIONS_ID_REGEX } from './regexes';
 
 /**
  * The configuration of an individual page filter,
@@ -10,7 +10,7 @@ export const PageFilterConfigSchema = z
     display_name: z.string(),
     id: z.string().regex(SNAKE_CASE_REGEX),
     options_source: z.string().regex(FILTER_OPTIONS_ID_REGEX),
-    default_value: z.string().regex(SNAKE_CASE_REGEX).optional()
+    default_value: z.string().regex(SNAKE_CASE_REGEX).optional(),
   })
   .strict();
 
@@ -36,10 +36,15 @@ export const PageFiltersConfigSchema = z
   .array(PageFilterConfigSchema)
   .refine((filtersConfig) => {
     // Page filter names must be unique within a page
-    const filterNames = filtersConfig.map((filterConfig) => filterConfig.display_name);
+    const filterNames = filtersConfig.map(
+      (filterConfig) => filterConfig.display_name,
+    );
     const uniqueFilterNames = new Set(filterNames);
     if (filterNames.length !== uniqueFilterNames.size) {
-      console.error('Duplicate page filter display names found in list:', filterNames);
+      console.error(
+        'Duplicate page filter display names found in list:',
+        filterNames,
+      );
       return false;
     }
 
@@ -48,12 +53,15 @@ export const PageFiltersConfigSchema = z
     const definedParamNames = new Set();
     for (const filterConfig of filtersConfig) {
       definedParamNames.add(filterConfig.display_name);
-      const bracketedPlaceholders = filterConfig.display_name.match(/<([a-z0-9_]+)>/g);
+      const bracketedPlaceholders =
+        filterConfig.display_name.match(/<([a-z0-9_]+)>/g);
       if (bracketedPlaceholders) {
         for (const placeholder of bracketedPlaceholders) {
           const paramName = placeholder.slice(1, -1);
           if (!definedParamNames.has(paramName)) {
-            console.error(`Invalid placeholder reference found: ${placeholder}`);
+            console.error(
+              `Invalid placeholder reference found: ${placeholder}`,
+            );
             return false;
           }
         }
@@ -79,9 +87,9 @@ export const FurtherReadingConfigSchema = z
       .object({
         link: z.string(),
         text: z.string(),
-        tag: z.string().optional()
+        tag: z.string().optional(),
       })
-      .strict()
+      .strict(),
   )
   .min(1);
 
@@ -112,7 +120,7 @@ export type FurtherReadingConfig = z.infer<typeof FurtherReadingConfigSchema>;
 export const FrontmatterSchema = z.object({
   title: z.string(),
   content_filters: PageFiltersConfigSchema.optional(),
-  further_reading: FurtherReadingConfigSchema.optional()
+  further_reading: FurtherReadingConfigSchema.optional(),
 });
 
 /**
