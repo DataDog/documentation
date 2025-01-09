@@ -34,11 +34,13 @@ To validate your service definition file in-app:
 3. Select the **Code** tab.
 4. Paste the schema content.
 
+## Validate with an IDE extension
+
 Built-in validation mechanisms prevent you from sending incorrect metadata into Service Catalog. 
 
 {{< img src="tracing/service_catalog/service_catalog_definition_yaml.png" alt="Service metadata editor showing sample service definition." >}}
 
-## Validate Github Ingestion with Datadog Event Management
+## Validate with Datadog Event Management and Github Integration
 
 To validate your service definitions ingested by Datadog's Github integration, you can view events when services or updated or when there is an error. You can view validation errors in [Event Management][4] by filtering by `source:service_catalog` and `status:error`. Adjust the timeframe as needed.
 
