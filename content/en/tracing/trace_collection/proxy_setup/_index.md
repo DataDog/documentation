@@ -317,16 +317,10 @@ get_latest_release() {
 
 get_architecture() {
   case "$(uname -m)" in
-    aarch64)
+    aarch64|arm64)
       echo "arm64"
       ;;
-    arm64)
-      echo "arm64"
-      ;;
-    x86_64)
-      echo "amd64"
-      ;;
-    amd64)
+    x86_64|amd64)
       echo "amd64"
       ;;
     *)
@@ -381,9 +375,9 @@ http {
 Datadog offers support for monitoring Ingress-NGINX controller in Kubernetes.
 Depending of on your version and requirements, you can choose from the following instrumentation methods:
 
-1. [v1.10.0 and newer using Datadog's features](#controller-v1100-using-datadogs-features).
-2. [v1.10.0 and newer using OpenTelemetry](#controller-v1100-using-opentelemetry).
-3. [v1.9.0 and older using Datadog's OpenTracing](#controller-v190-and-older).
+- [v1.10.0+ using Datadog's features](#controller-v1100-using-datadogs-features).
+- [v1.10.0+ using OpenTelemetry](#controller-v1100-using-opentelemetry).
+- [v1.9.0 and older](#controller-v190-and-older).
 
 ### Controller v1.10.0+ using Datadog's features
 
@@ -436,7 +430,7 @@ data:
     load_module /opt/datadog-modules/ngx_http_datadog_module.so;
 ```
 
-5. **Apply the ConfigMap**
+5. **Apply the ConfigMap** <br>
 Apply the updated `ConfigMap` to ensure the Datadog module is correctly loaded.
 
 This configuration ensures that the Datadog module is loaded and ready to trace incoming requests.
@@ -463,9 +457,12 @@ Mismatched versions can prevent Ingress-NGINX from starting:
 
 ### Controller v1.10.0+ using OpenTelemetry
 
-**1. Prepare the Datadog Agent:** Ensure that your Datadog Agent has [gRPC OTLP Ingestion enabled][5] to act as an OpenTelemetry Collector.
+**1. Prepare the Datadog Agent** <br>
+Ensure that your Datadog Agent has [gRPC OTLP Ingestion enabled][5] to act as an OpenTelemetry Collector.
 
-**2. Configure the Ingress controller:** To begin, verify that your Ingress controller's pod spec has the `HOST_IP` environment variable set. If not, add the following entry to the `env` block within the pod's specification:
+**2. Configure the Ingress controller** <br>
+To begin, verify that your Ingress controller's pod spec has the `HOST_IP` environment variable set. If not, add the following entry to the `env` block within the pod's specification:
+
 ```yaml
 - name: HOST_IP
   valueFrom:
