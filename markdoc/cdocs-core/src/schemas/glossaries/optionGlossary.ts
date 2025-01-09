@@ -64,7 +64,7 @@ export type OptionGlossary = z.infer<typeof OptionGlossarySchema>;
  * site generators such as Hugo require a top-level key
  * in any configuration YAML.
  */
-export const OptionGlossaryYamlSchema = z
+export const RawOptionGlossarySchema = z
   .object({
     allowed: z.array(OptionGlossaryEntrySchema).refine((entries) => {
       const ids = entries.map((entry) => entry.id);
@@ -79,4 +79,4 @@ export const OptionGlossaryYamlSchema = z
   })
   .strict();
 
-export type OptionGlossaryYaml = z.infer<typeof OptionGlossaryYamlSchema>;
+export type RawOptionGlossary = z.infer<typeof RawOptionGlossarySchema>;

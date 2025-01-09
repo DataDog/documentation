@@ -55,7 +55,7 @@ export type FilterGlossary = z.infer<typeof FilterGlossarySchema>;
  * A glossary of all filters that can be used on a site,
  * as it is parsed directly from the YAML file.
  */
-export const FilterGlossaryYamlSchema = z
+export const RawFilterGlossarySchema = z
   .object({
     allowed: z.array(FilterGlossaryEntrySchema).refine((entries) => {
       const ids = entries.map((entry) => entry.id);
@@ -70,4 +70,4 @@ export const FilterGlossaryYamlSchema = z
   })
   .strict();
 
-export type FilterGlossaryYaml = z.infer<typeof FilterGlossaryYamlSchema>;
+export type RawFilterGlossary = z.infer<typeof RawFilterGlossarySchema>;
