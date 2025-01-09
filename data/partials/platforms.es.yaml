@@ -1,152 +1,153 @@
 gs:
-- link: https://app.datadoghq.com/account/settings/Agent/latest?platform=macos
+- image: platform_macosx.png
+  link: https://app.datadoghq.com/account/settings/agent/latest?platform=macos
   name: osx
-- image: plataforma_windows.png
-  link: https://app.datadoghq.com/account/settings/Agent/latest?platform=Windows
+- image: platform_windows.png
+  link: https://app.datadoghq.com/account/settings/agent/latest?platform=windows
   name: windows
-- image: plataforma_debian.png
-  link: https://app.datadoghq.com/account/settings/Agent/latest?platform=Debian
+- image: platform_debian.png
+  link: https://app.datadoghq.com/account/settings/agent/latest?platform=debian
   name: deb
-- image: plataforma_ubuntu.png
-  link: https://app.datadoghq.com/account/settings/Agent/latest?platform=Ubuntu
+- image: platform_ubuntu.png
+  link: https://app.datadoghq.com/account/settings/agent/latest?platform=ubuntu
   name: ubuntu
-- image: plataforma_amazonlinux.png
-  link: https://app.datadoghq.com/account/settings/Agent/latest?platform=aws
+- image: platform_amazonlinux.png
+  link: https://app.datadoghq.com/account/settings/agent/latest?platform=aws
   name: amazonlinux
-- image: plataforma_centos.png
-  link: https://app.datadoghq.com/account/settings/Agent/latest?platform=CentOS
+- image: platform_centos.png
+  link: https://app.datadoghq.com/account/settings/agent/latest?platform=centos
   name: centos
-- image: plataforma_redhat.png
-  link: https://app.datadoghq.com/account/settings/Agent/latest?platform=CentOS
+- image: platform_redhat.png
+  link: https://app.datadoghq.com/account/settings/agent/latest?platform=centos
   name: redhat
-- image: plataforma_rockylinux.png
-  link: https://app.datadoghq.com/account/settings/Agent/latest?platform=CentOS
+- image: platform_rockylinux.png
+  link: https://app.datadoghq.com/account/settings/agent/latest?platform=centos
   name: rockylinux
-- image: plataforma_almalinux.png
-  link: https://app.datadoghq.com/account/settings/Agent/latest?platform=CentOS
+- image: platform_almalinux.png
+  link: https://app.datadoghq.com/account/settings/agent/latest?platform=centos
   name: almalinux
-- image: plataforma_fedora.png
-  link: https://app.datadoghq.com/account/settings/Agent/latest?platform=Fedora
+- image: platform_fedora.png
+  link: https://app.datadoghq.com/account/settings/agent/latest?platform=fedora
   name: fedora
-- image: plataforma_suse.png
-  link: https://app.datadoghq.com/account/settings/Agent/latest?platform=SUSE
+- image: platform_suse.png
+  link: https://app.datadoghq.com/account/settings/agent/latest?platform=suse
   name: suse
-- image: plataforma_aix.png
-  link: https://app.datadoghq.com/account/settings/Agent/latest?platform=aix
+- image: platform_aix.png
+  link: https://app.datadoghq.com/account/settings/agent/latest?platform=aix
   name: aix
-- image: plataforma_coreos.png
-  link: https://app.datadoghq.com/account/settings/Agent/latest?platform=coreos
+- image: platform_coreos.png
+  link: https://app.datadoghq.com/account/settings/agent/latest?platform=coreos
   name: coreos
-- image: plataforma_docker.png
-  link: https://app.datadoghq.com/account/settings/Agent/latest?platform=Docker
+- image: platform_docker.png
+  link: https://app.datadoghq.com/account/settings/agent/latest?platform=docker
   name: docker
-- image: plataforma_kubernetes.png
-  link: https://app.datadoghq.com/account/settings/Agent/latest?platform=Kubernetes
+- image: platform_kubernetes.png
+  link: https://app.datadoghq.com/account/settings/agent/latest?platform=kubernetes
   name: kubernetes
-- image: plataforma_openshift.png
-  link: https://app.datadoghq.com/account/settings/Agent/latest?platform=openshift
+- image: platform_openshift.png
+  link: https://app.datadoghq.com/account/settings/agent/latest?platform=openshift
   name: openshift
-- image: plataforma_chef.png
-  link: https://app.datadoghq.com/account/settings/Agent/latest?platform=chef
+- image: platform_chef.png
+  link: https://app.datadoghq.com/account/settings/agent/latest?platform=chef
   name: chef
-- image: plataforma_marioneta.png
-  link: https://app.datadoghq.com/account/settings/Agent/latest?platform=puppet
+- image: platform_puppet.png
+  link: https://app.datadoghq.com/account/settings/agent/latest?platform=puppet
   name: marioneta
-- image: plataforma_ansible.png
-  link: https://app.datadoghq.com/account/settings/Agent/latest?platform=ansible
+- image: platform_ansible.png
+  link: https://app.datadoghq.com/account/settings/agent/latest?platform=ansible
   name: ansible
-- image: plataforma_nube_fundición.png
-  link: https://app.datadoghq.com/account/settings/Agent/latest?platform=cloud_foundry
+- image: platform_cloud_foundry.png
+  link: https://app.datadoghq.com/account/settings/agent/latest?platform=cloud_foundry
   name: cloud_foundry
-- image: plataforma_saltstack.png
-  link: https://app.datadoghq.com/account/settings/Agent/latest?platform=saltstack
+- image: platform_saltstack.png
+  link: https://app.datadoghq.com/account/settings/agent/latest?platform=saltstack
   name: salt
-- image: plataforma_heroku.png
-  link: https://app.datadoghq.com/account/settings/Agent/latest?platform=Heroku
+- image: platform_heroku.png
+  link: https://app.datadoghq.com/account/settings/agent/latest?platform=heroku
   name: heroku
-- image: plataforma_fromsource.png
-  link: https://app.datadoghq.com/account/settings/Agent/latest?platform=source
+- image: platform_fromsource.png
+  link: https://app.datadoghq.com/account/settings/agent/latest?platform=source
   name: fuente
 platforms:
 - category: Linux
-  image: plataforma_aix.png
-  link: Agent/uso_agente_basico/aix/
+  image: platform_aix.png
+  link: agent/basic_agent_usage/aix/
   name: aix
 - category: Linux
-  image: plataforma_almalinux.png
-  link: Agent/uso_agente_basico/CentOS/
+  image: platform_almalinux.png
+  link: agent/basic_agent_usage/centos/
   name: almalinux
 - category: Linux
-  image: plataforma_amazonlinux.png
-  link: Agent/uso_agente_basico/amazonlinux/
+  image: platform_amazonlinux.png
+  link: agent/basic_agent_usage/amazonlinux/
   name: amazonlinux
 - category: configuration_management
-  image: plataforma_ansible.png
-  link: Agent/uso_agente_basico/ansible/
+  image: platform_ansible.png
+  link: agent/basic_agent_usage/ansible/
   name: ansible
 - category: Linux
-  image: plataforma_centos.png
-  link: Agent/uso_agente_basico/CentOS/
+  image: platform_centos.png
+  link: agent/basic_agent_usage/centos/
   name: centos
 - category: configuration_management
-  image: plataforma_chef.png
-  link: Agent/uso_agente_basico/chef/
+  image: platform_chef.png
+  link: agent/basic_agent_usage/chef/
   name: chef
 - category: Linux
-  image: plataforma_debian.png
-  link: Agent/uso_del_agente_basico/deb/
+  image: platform_debian.png
+  link: agent/basic_agent_usage/deb/
   name: deb
 - category: cloud_and_container
-  image: plataforma_docker.png
-  link: Agent/Docker/
+  image: platform_docker.png
+  link: agent/docker/
   name: docker
 - category: Linux
-  image: plataforma_fedora.png
-  link: Agent/uso_agente_basico/Fedora/
+  image: platform_fedora.png
+  link: agent/basic_agent_usage/fedora/
   name: fedora
 - category: cloud_and_container
-  image: plataforma_heroku.png
-  link: Agent/uso_agente_basico/Heroku/
+  image: platform_heroku.png
+  link: agent/basic_agent_usage/heroku/
   name: heroku
 - category: cloud_and_container
-  image: plataforma_kubernetes.png
-  link: Agent/Kubernetes/
+  image: platform_kubernetes.png
+  link: agent/kubernetes/
   name: kubernetes
 - category: macOS
-  image: plataforma_macos.png
-  link: Agent/uso_agente_basico/osx/
+  image: platform_macos.png
+  link: agent/basic_agent_usage/osx/
   name: osx
 - category: Linux
-  image: plataforma_oracle.png
-  link: Agent/uso_agente_basico/oracle/
+  image: platform_oracle.png
+  link: agent/basic_agent_usage/oracle/
   name: Oracle
 - category: configuration_management
-  image: plataforma_marioneta.png
-  link: Agent/uso_agente_basico/puppet/
+  image: platform_puppet.png
+  link: agent/basic_agent_usage/puppet/
   name: puppet
 - category: Linux
-  image: plataforma_redhat.png
-  link: Agent/uso_agente_basico/redhat/
+  image: platform_redhat.png
+  link: agent/basic_agent_usage/redhat/
   name: redhat
 - category: Linux
-  image: plataforma_rockylinux.png
-  link: Agent/uso_agente_basico/CentOS/
+  image: platform_rockylinux.png
+  link: agent/basic_agent_usage/centos/
   name: rockylinux
 - category: configuration_management
-  image: plataforma_saltstack.png
-  link: Agent/uso_agente_basico/saltstack/
+  image: platform_saltstack.png
+  link: agent/basic_agent_usage/saltstack/
   name: salt
 - category: Linux
-  image: plataforma_suse.png
-  link: Agent/uso_agente_basico/SUSE/
+  image: platform_suse.png
+  link: agent/basic_agent_usage/suse/
   name: suse
 - category: Linux
-  image: plataforma_ubuntu.png
-  link: Agent/uso_agente_basico/Ubuntu/
+  image: platform_ubuntu.png
+  link: agent/basic_agent_usage/ubuntu/
   name: ubuntu
 - category: Windows
-  image: plataforma_windows.png
-  link: Agent/uso_agente_basico/Windows/
+  image: platform_windows.png
+  link: agent/basic_agent_usage/windows/
   name: windows
 - category: Windows
   image: platform_sccm.png
