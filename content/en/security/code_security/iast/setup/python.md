@@ -7,9 +7,6 @@ aliases:
   - /security_platform/application_security/getting_started/python
   - /security/application_security/getting_started/python
 further_reading:
-    - link: "/security/application_security/code_security/#code-level-vulnerabilities-list"
-      tag: "Documentation"
-      text: "Supported code-level vulnerabilities list"
     - link: "https://www.datadoghq.com/blog/iast-datadog-code-security/"
       tag: "Blog"
       text: "Enhance application security in production with Datadog Code Security"

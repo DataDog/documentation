@@ -5907,21 +5907,6 @@ menu:
       parent: application_security
       identifier: appsec_howitworks
       weight: 3
-    - name: Software Composition Analysis
-      url: security/application_security/software_composition_analysis/
-      parent: application_security
-      identifier: application_security_software_composition_analysis
-      weight: 5
-    - name: Setup
-      url: security/application_security/software_composition_analysis/setup/
-      parent: application_security_software_composition_analysis
-      identifier: application_security_software_composition_analysis_setup
-      weight: 1
-    - name: Library Compatibility
-      url: security/application_security/software_composition_analysis/setup/compatibility/
-      parent: application_security_software_composition_analysis_setup
-      identifier: appsec_compat_sca
-      weight: 2
     - name: Threat Management
       url: security/application_security/threats/
       parent: application_security
@@ -6092,11 +6077,6 @@ menu:
       identifier: sec_iast_setup
       url: /security/code_security/iast/setup/
       parent: sec_iast
-      weight: 1
-    - name: Library Compatibility
-      identifier: sec_iast_setup_compatibility
-      url: /security/code_security/iast/setup/compatibility/
-      parent: sec_iast_setup
       weight: 1
     - name: Dev tool integrations
       identifier: dev_tool_int

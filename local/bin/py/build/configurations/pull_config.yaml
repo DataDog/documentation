@@ -341,7 +341,7 @@
           globs:
           - 'README.md'
           options:
-            dest_path: '/code_analysis/static_analysis/'
+            dest_path: '/security/code_security/static_analysis/'
             file_name: 'circleci_orbs.md'
             front_matters:
               dependencies: ["https://github.com/DataDog/datadog-static-analyzer-circleci-orb/blob/main/README.md"]
@@ -358,7 +358,7 @@
           globs:
           - 'README.md'
           options:
-            dest_path: '/code_analysis/static_analysis/'
+            dest_path: '/security/code_security/static_analysis/'
             file_name: 'github_actions.md'
             front_matters:
               dependencies: ["https://github.com/DataDog/datadog-static-analyzer-github-action/blob/main/README.md"]
@@ -375,7 +375,7 @@
           globs:
           - rulesets/**/*.md
           options:
-            dest_dir: 'security/code_security/static_analysis/static_analysis_rules/'
+            dest_dir: '/security/code_security/static_analysis/static_analysis_rules/'
             path_to_remove: 'rulesets/'
             front_matters:
               disable_edit: true
@@ -387,7 +387,7 @@
           globs:
           - 'README.md'
           options:
-            dest_path: '/code_analysis/software_composition_analysis/'
+            dest_path: '/security/code_security/software_composition_analysis/'
             file_name: 'github_actions.md'
             front_matters:
               dependencies: ["https://github.com/DataDog/datadog-sca-github-action/blob/main/README.md"]
