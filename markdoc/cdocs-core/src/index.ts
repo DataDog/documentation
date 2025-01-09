@@ -39,3 +39,5 @@ export {
   ResolvedPageFilters,
   ResolvedPageFiltersSchema,
 } from './schemas/pageFilters';
+
+export { CdocsDataManager } from './modules/CdocsDataManager';

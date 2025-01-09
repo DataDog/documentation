@@ -5,11 +5,7 @@ import {
   RawFilterOptionsConfigSchema,
 } from '../schemas/filterOptions';
 import { FileSearcher } from './FileSearcher';
-import {
-  Glossary,
-  GlossaryConfigSchema,
-  GlossaryEntryConfig,
-} from '../schemas/glossary';
+import { Glossary, GlossaryConfigSchema, GlossaryEntryConfig } from '../schemas/glossary';
 import fs from 'fs';
 import yaml from 'js-yaml';
 
@@ -31,11 +27,9 @@ export class YamlConfigParser {
     const filterOptionsConfig = this.loadFilterOptionsFromDir(optionSetsDir);
 
     Object.values(filterOptionsConfig).forEach((optionsList) => {
-      const displayNamesByAllowedOptionId: Record<string, string> =
-        Object.values(p.glossary.optionsById).reduce(
-          (acc, entry) => ({ ...acc, [entry.id]: entry.display_name }),
-          {},
-        );
+      const displayNamesByAllowedOptionId: Record<string, string> = Object.values(
+        p.glossary.optionsById,
+      ).reduce((acc, entry) => ({ ...acc, [entry.id]: entry.display_name }), {});
 
       optionsList.forEach((option) => {
         const defaultDisplayName = displayNamesByAllowedOptionId[option.id];
@@ -104,10 +98,7 @@ export class YamlConfigParser {
     // Load and validate the filters glossary
     const filtersGlossaryFilePath = `${dir}/glossary/filter_ids.yaml`;
     try {
-      const filtersGlossaryConfigStr = fs.readFileSync(
-        filtersGlossaryFilePath,
-        'utf8',
-      );
+      const filtersGlossaryConfigStr = fs.readFileSync(filtersGlossaryFilePath, 'utf8');
       const filtersGlossary = GlossaryConfigSchema.parse(
         yaml.load(filtersGlossaryConfigStr),
       );
@@ -129,13 +120,8 @@ export class YamlConfigParser {
     // Load and validate the options glossary
     const optionsGlossaryFilePath = `${dir}/glossary/filter_options.yaml`;
     try {
-      const optionsGlossaryStr = fs.readFileSync(
-        optionsGlossaryFilePath,
-        'utf8',
-      );
-      const optionsGlossary = GlossaryConfigSchema.parse(
-        yaml.load(optionsGlossaryStr),
-      );
+      const optionsGlossaryStr = fs.readFileSync(optionsGlossaryFilePath, 'utf8');
+      const optionsGlossary = GlossaryConfigSchema.parse(yaml.load(optionsGlossaryStr));
       result.optionsById = optionsGlossary.allowed.reduce<
         Record<string, GlossaryEntryConfig>
       >((acc, entry) => {
@@ -170,9 +156,7 @@ export class YamlConfigParser {
       const filterOptionsConfig = RawFilterOptionsConfigSchema.parse(
         this.loadFiltersYamlFromStr(filename),
       );
-      for (const [optionsListId, optionsList] of Object.entries(
-        filterOptionsConfig,
-      )) {
+      for (const [optionsListId, optionsList] of Object.entries(filterOptionsConfig)) {
         // Verify that no duplicate options set IDs exist
         if (rawFilterOptions[optionsListId]) {
           throw new Error(
