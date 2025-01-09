@@ -11,36 +11,35 @@ further_reading:
     text: "Datadog Application Security Management"
 ---
 
-With Service Catalog, organizations can seamlessly integrate security into every stage of development, ensuring a robust AppSec posture across teams and systems.
+The Service Catalog enables organizations to seamlessly incorporate security into every development stage, ensuring a strong security posture across teams, applications, and systems.
 
-Service Catalog centralizes security signals and helps developers prioritize actions and remediate vulnerabilities. Developers gain immediate visibility into application security, while managers can monitor risks, drive improvements, and ensure compliance across the organization.
+Service Catalog surfaces and centralizes security signals, enabling developers to prioritize actions and address vulnerabilities promptly. Meanwhile, managers can oversee risks, drive improvements, and ensure organizational compliance.
 
 {{< img src="tracing/service_catalog/appsec-use-case.png" alt="The Security tab of the Service Catalog, showing vulnerability risk, attack exposure, and coverage for each service." >}}
 
-## Make Applications Secure By Design
+## Build secure applications by design
 
-Service Catalog helps teams create secure-by-default processes using golden paths and guardrails. Developers can scaffold new services [link to scaffolding action] or add cloud resources confidently, knowing security standards are enforced at every step. The Security view provides multiple ways to assess and improve the security posture of your services. By using APM Security views, you can automatically identify which services are exposed to application attacks—such as SQL injections, SSRF, or log4Shell attacks—when those services are instrumented with APM.This allows you to drill down into each service and type of attack your organization is exposed to, understand the associated security risks, and effectively manage your application attack surface area with runtime context.
+Service Catalog provides default paths and guardrails to helps teams create, assess, and improve secure processes. Developers can [scaffold new services][1] or integrate cloud resources confidently, assured that security standards are enforced at every step. 
 
-## Track Third-Party Software and Dependencies
+For services instrumented with APM, APM Security views automatically detect services vulnerable to application attacks, such as SQL injections, SSRF, or Log4Shell attacks. You can investigate each service and type of attack your organization encounters, understand the associated security risks, and effectively manage your application attack surface with runtime context.
 
-Service Catalog makes third-party dependencies—from open-source libraries to programming languages—organized and visible. Teams can monitor versions, launch upgrades, and stay ahead of vulnerabilities.
+## Track third-party software and dependencies
 
-- DevSecOps: Use the catalog to track all dependencies and drive upgrade initiatives.
+Service Catalog organizes and highlights third-party dependencies, ranging from open-source libraries to programming languages. Teams can monitor versions, launch upgrades, and proactively address vulnerabilities.
+
+- DevSecOps: Use Service Catalog to track dependencies and spearhead upgrade initiatives.
 - Managers: Access real-time reports on upgrade progress and compliance.
-- Developers: Manage dependency updates as part of daily routines with minimal disruption.
+- Developers: Incorporate dependency updates into daily workflows with minimal disruption.
 
-## Configuration Details
+## Configuration details
 
-Click a service in Service Catalog to open the service side panel, then select Active library configuration:
+Click a service in Service Catalog to open the service side panel, select the Performance tab at the top of the panel, and then find the Libraries sub-tab, which lists all external libraries used and their versions. 
 
-
-**Active library configuration** for Java and .NET services with the latest Agent configured with [Remote Configuration][1] enabled, you can adjust the [trace sampling rate][3] (from 0.0 to 1.0), enable [Log Injection][2] to correlate traces and logs data, and specify HTTP header tags to be applied to all traces coming into Datadog from this service. In the Setup Guidance tab, beside **Active Library Configuration**, click **Edit** to change these settings and immediately apply them without restarting the service.
-
-  {{< img src="tracing/service_catalog/service_details_remote_config.png" alt="Configuration options for the service in the Datadog UI" style="width:80%;" >}}
-
-Click **View Related** and select a page from the dropdown menu to navigate into related pages in Datadog, such as the [APM Service Page][6] and service map for this service, or related telemetry data pages, such as for distributed tracing, infrastructure, network performance, Log Management, RUM, and Continuous Profiler.
+{{< img src="tracing/service_catalog/appsec-use-case-libraries.png" alt="The Security tab of the Service Catalog, showing vulnerability risk, attack exposure, and coverage for each service." >}}
 
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://app.datadoghq.com/app-builder/blueprints
