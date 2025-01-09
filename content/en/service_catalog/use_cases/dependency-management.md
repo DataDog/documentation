@@ -1,5 +1,5 @@
 ---
-title: Managing and Mapping Dependencies
+title: Managing and Mapping uluDependencies
 aliases:
   - /tracing/service_catalog/guides/dependency_management
   - /service_catalog/use_cases/dependency_management
@@ -17,37 +17,29 @@ further_reading:
     text: "Datadog Real User Monitoring"
 ---
 
-Datadog’s Service Catalog provides robust dependency mapping capabilities, helping teams document, track, and assess upstream and downstream relationships. These features combine automatic discovery with manual definition options to offer flexibility and accuracy in representing your system architecture.
+Datadog’s Service Catalog offers powerful dependency mapping capabilities to help teams document, track, and assess upstream and downstream relationships. These features support both automatic discovery and manual definition so you can flexibly and accurately define your system architecture.
 
-## Automatic Dependency Mapping and Entity Discovery
+## Automatic dependency mapping and entity discovery
 
-Automatic Discovery:
+- **Automatic discovery:** By default, Service Catalog includes all discovered services from APM, USM, and RUM. When you instrument additional applications across your environments, their dependencies are automatically added to the Catalog.
 
-- Datadog Service Catalog includes all discovered services from APM, USM, and RUM by default.
-- As you instrument more applications across your environments, their dependencies are automatically added to the catalog.
-
-Telemetry Integration:
-
-- Dependency relationships are auto-detected using application telemetry collected by APM, USM, and RUM.
-- Teams gain an immediate, real-time overview of service relationships and performance impacts across teams and services.
+- **Telemetry integration:** Service Catalog auto-detects dependency relationships using application telemetry collected by APM, USM, and RUM, providing teams with real-time insights into service relationships and performance impacts.
 
 {{< img src="tracing/service_catalog/dependency-mgmt-use-case-auto-discovery.png" alt="The Dependencies tab in the side panel for a service, showing a flow chart of service dependencies, ." >}}
 
-## Manual Dependency Definition in Service Catalog Schema v3.0
+## Manual dependency definition in service catalog schema v3.0
 
-Enhanced Relationship Mapping:
-- Service Catalog schema v3.0 allows teams to manually define relationships to supplement auto-detected topologies.
-- This feature lets teams represent dependencies that reflect institutional knowledge and team collaboration, ensuring a more complete view of system relationships.
+In Service Catalog schema v3.0, teams can manually define relationships to supplement auto-detected topologies. This features is particularly helpful for defining dependencies that reflect institutional knowledge and team collaboration, ensuring a more complete view of system relationships.
 
 {{< img src="tracing/service_catalog/dependency-mgmt-use-case-relationship-mapping.png" alt="A hierarchical relationships diagram showing a service's dependencies." >}}
 
+### Configure a manual dependency 
 
-Keys for Manual Dependency Definition:
-- Teams can specify relationships in the spec section of the entity definition using these keys:
+To define a manual dependency, update the `spec` section of the relevant entity definition using the following keys:
 
-  - dependsOn: Specifies dependencies (e.g., service A depends on service B).
-  - ownedBy: Assigns ownership to a team or group (e.g., service A is owned by Team A).
-  - partOf: Groups components under a system (e.g., service A is part of System A).
+  - dependsOn: Specifies dependencies (e.g., Service A depends on Service B).
+  - ownedBy: Assigns ownership to a team or group (e.g., Service A is owned by Team A).
+  - partOf: Groups components under a system (e.g., Service A is part of System A).
 
 Example YAML configuration:
 
@@ -61,20 +53,26 @@ spec:
     - service: cws-webapp
 ```
 
-UI Display:
+### View manual dependencies
+
+To view manual dependencies in the Datadog app, navigate to [Service Catalog][1], select your service to open the side panel, find the Performance tab, and then select the Dependencies sub-tab. You can also open the full Service Page for a particular service and select the Dependencies section in the left-hand navigation. 
+
+All dependencies, including manual dependencies, will be shown, and you can use the "Include Detected" feature to modify your view: 
 
 - When "Include Detected" is disabled: Only manually defined dependencies are shown.
-- When "Include Detected" is enabled: Manually added dependencies are shown above auto-detected ones, providing a clear distinction.
+- When "Include Detected" is enabled: Manually added dependencies are shown above auto-detected ones to create a clear distinction.
 
 {{< img src="tracing/service_catalog/dependency-mgmt-use-case-include-detected.png" alt="A diagram showing the dependencies of a service, where 'Include Detected' is disabled." >}}
 
-## Benefits of Manual Dependency Definition
+### Benefits of manual dependency definitions
 
-- Improved Accuracy: Ensures the catalog reflects shared team knowledge, avoiding gaps left by automated tools.
-- Enhanced Collaboration: Promotes better alignment and understanding during incident response and architecture planning.
-- Contextual Knowledge: Helps developers and new team members quickly grasp complex system architectures and dependencies.
+- Improved accuracy: By defining dependencies manually, teams can incorporate their specific understanding and insights into the Service Catalog, ensuring it accurately represents real-world system architectures, which automated tools might miss.
+- Enhanced collaboration: Manually defined dependencies support better communication and coordination by making relationships explicit, aiding in incident response efforts and strategic architecture planning.
+- Contextual knowledge: Providing manual definitions helps developers and new team members quickly understand the complexities of system dependencies and architectures, facilitating smoother onboarding and knowledge transfer.
 
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://app.datadoghq.com/services
