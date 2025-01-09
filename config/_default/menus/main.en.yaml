@@ -9,30 +9,33 @@ menu:
     - name: Service Management
       identifier: service_management_heading
       weight: 3000000
+    - name: Actions
+      identifier: actions_heading
+      weight: 4000000
     - name: Infrastructure
       identifier: infrastructure_heading
-      weight: 4000000
+      weight: 5000000
     - name: Application Performance
       identifier: apm_heading
-      weight: 5000000
+      weight: 6000000
     - name: Digital Experience
       identifier: digital_experience_heading
-      weight: 6000000
+      weight: 7000000
     - name: Software Delivery
       identifier: software_delivery_heading
-      weight: 7000000
+      weight: 8000000
     - name: Security
       identifier: security_platform_heading
-      weight: 8000000
+      weight: 9000000
     - name: AI Observability
       identifier: ai_observability_heading
-      weight: 9000000
+      weight: 10000000
     - name: Log Management
       identifier: log_management_heading
-      weight: 10000000
+      weight: 11000000
     - name: Administration
       identifier: administration_heading
-      weight: 11000000
+      weight: 12000000
     - name: Getting Started
       identifier: getting_started
       url: getting_started/
@@ -2444,8 +2447,8 @@ menu:
       url: service_management/workflows/
       pre: workflows
       identifier: workflows
-      parent: service_management_heading
-      weight: 60000
+      parent: actions_heading
+      weight: 10000
     - name: Build Workflows
       url: service_management/workflows/build/
       parent: workflows
@@ -2540,8 +2543,8 @@ menu:
       url: service_management/app_builder/
       pre: app-builder
       identifier: app_builder
-      parent: service_management_heading
-      weight: 70000
+      parent: actions_heading
+      weight: 20000
     - name: Build Apps
       url: service_management/app_builder/build/
       parent: app_builder
