@@ -1,7 +1,6 @@
 ---
 aliases:
 - /ko/developers/faq/query-data-to-a-text-file-step-by-step
-kind: 가이드
 title: 데이터를 텍스트 파일로 쿼리하는 단계별 과정
 ---
 

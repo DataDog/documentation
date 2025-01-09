@@ -1,24 +1,75 @@
 *                         @DataDog/documentation
 
-/assets/                  @DataDog/corpweb @DataDog/documentation
-/data/                    @DataDog/corpweb @DataDog/documentation
-/data/api/                @DataDog/documentation
-/local/                   @DataDog/corpweb @DataDog/documentation
-/layouts/                 @DataDog/corpweb @DataDog/documentation
-/src/                     @DataDog/corpweb @DataDog/documentation
-/config/                  @DataDog/corpweb @DataDog/documentation
-/config/_default/menus/   @DataDog/documentation
-package.json              @DataDog/corpweb @DataDog/documentation
-go.mod                    @DataDog/corpweb @DataDog/documentation
-go.sum                    @DataDog/corpweb @DataDog/documentation
+# Corpweb
+assets/                           @DataDog/corpweb
+data/                             @DataDog/corpweb
+layouts/                          @DataDog/corpweb
+config/                           @DataDog/corpweb
+package.json                      @DataDog/corpweb
+go.mod                            @DataDog/corpweb
+go.sum                            @DataDog/corpweb
+i18n/                             @DataDog/corpweb
+archetypes/                       @DataDog/corpweb
+
+# Websites Platform
+babel.config.js                                         @DataDog/WebOps-Platform
+data/reference/                                         @DataDog/WebOps-Platform
+datadog-ci.preview.json                                 @DataDog/WebOps-Platform
+docker-compose-docs.yml                                 @DataDog/WebOps-Platform
+.general.preview.synthetics.json                        @DataDog/WebOps-Platform
+.gitattributes                                          @DataDog/WebOps-Platform
+.gitignore                                              @DataDog/WebOps-Platform
+.github/                                                @DataDog/WebOps-Platform
+.gitlab-ci.yml                                          @DataDog/WebOps-Platform
+.htmltest.yml                                           @DataDog/WebOps-Platform
+jest.config.js                                          @DataDog/WebOps-Platform
+.local/                                                 @DataDog/WebOps-Platform
+Makefile                                                @DataDog/WebOps-Platform
+Makefile.config.example                                 @DataDog/WebOps-Platform
+.nvmrc                                                  @DataDog/WebOps-Platform
+postcss.config.js                                       @DataDog/WebOps-Platform
+.prettierignore                                         @DataDog/WebOps-Platform
+prettier.config.js                                      @DataDog/WebOps-Platform
+static-analysis.datadog.yml                             @DataDog/WebOps-Platform
+.translate                                              @DataDog/WebOps-Platform
+translate.yaml                                          @DataDog/WebOps-Platform
+yarn.lock                                               @DataDog/WebOps-Platform
+.yarnrc.yml                                             @DataDog/WebOps-Platform
+
+# Scoped Docs/WebOps
+.github/                                                      @DataDog/WebOps-Platform
+/data/api/                                                    @DataDog/documentation
+/config/_default/menus/                                       @DataDog/documentation
+.github/ISSUE_TEMPLATE                                        @DataDog/documentation
+.github/PULL_REQUEST_TEMPLATE.md                              @DataDog/documentation
+README.md                                                     @DataDog/documentation
+local/bin/py/vale                                             @DataDog/documentation
+.github/CODEOWNERS                                            @DataDog/WebOps-Platform @DataDog/documentation
+.github/workflows/check_cache_value.yml                       @DataDog/documentation
+.github/workflows/code-freeze.yml                             @DataDog/documentation
+.github/workflows/gif_check.yml                               @DataDog/documentation
+.github/workflows/preview_link.yml                            @DataDog/documentation
+.github/workflows/vale_linter.yml                             @DataDog/documentation
+local/bin/py/check_cache_values.py                            @DataDog/documentation
+local/bin/py/integration-finder.py                            @DataDog/documentation
+local/bin/py/missing_metrics.py                               @DataDog/documentation
+local/bin/py/preview_links.py                                 @DataDog/documentation
+local/bin/py/preview-links-template.mako                      @DataDog/documentation
+local/bin/py/build/configurations/pull_config_preview.yaml    @DataDog/WebOps-Platform @DataDog/documentation
+local/bin/py/build/configurations/pull_config.yaml            @DataDog/WebOps-Platform @DataDog/documentation
+local/**/*                                                    @DataDog/WebOps-Platform
+data/sdk_versions.json                                        @Datadog/documentation
+
+# markdown shortcodes
+layouts/shortcodes/**/*.md                                    @DataDog/documentation
 
 # SDK versions
-.github/workflows/bump_versions.yml   @DataDog/api-clients @DataDog/documentation
+.github/workflows/bump_versions.yml   @DataDog/api-clients @DataDog/documentation @DataDog/WebOps-Platform
 /data/sdk_versions.json               @DataDog/api-clients @DataDog/documentation
 
 # Serverless
 
-/content/en/serverless/                                 @DataDog/serverless-product @DataDog/documentation
+/content/en/serverless/                                 @DataDog/serverless @DataDog/documentation
 /layouts/shortcodes/latest-lambda-layer-version.html    @DataDog/documentation
 
 # Database Management
@@ -47,24 +98,15 @@ layouts/shortcodes/integration-assets.md                                    @Dat
 layouts/shortcodes/integration-assets-reference.md                          @Datadog/marketplace-product-management @DataDog/documentation
 layouts/shortcodes/integration_categories.md                                @Datadog/marketplace-product-management @DataDog/documentation
 
-# Websites Platform (Devops)
-.github/workflows                                       @DataDog/WebOps-Platform
-.gitlab-ci.yml                                          @DataDog/WebOps-Platform
-Makefile                                                @DataDog/WebOps-Platform
-translate.yaml                                          @DataDog/WebOps-Platform
-.translate                                              @DataDog/WebOps-Platform
-docker-compose-docs.yml                                 @DataDog/WebOps-Platform
-.htmltest.yml                                           @DataDog/WebOps-Platform
-datadog-ci.preview.json                                 @DataDog/WebOps-Platform
-general.preview.synthetics.json                         @DataDog/WebOps-Platform
-
 # Cloud Cost Management
 documentation/content/en/cloud_cost_management/*.md              @DataDog/cloud-cost-management-visibility @DataDog/documentation
 
 # Log collection
 content/en/logs/log_collection/android.md                        @Datadog/rum-mobile @DataDog/documentation
 content/en/logs/log_collection/flutter.md                        @Datadog/rum-mobile @DataDog/documentation
+content/en/logs/log_collection/unity.md                          @Datadog/rum-mobile @DataDog/documentation
 content/en/logs/log_collection/ios.md                            @Datadog/rum-mobile @DataDog/documentation
+content/en/logs/log_collection/kotlin-multiplatform.md           @Datadog/rum-mobile @DataDog/documentation
 
 # Traces
 content/en/tracing/trace_collection/dd_libraries/android.md     @Datadog/rum-mobile @DataDog/documentation
@@ -72,17 +114,21 @@ content/en/tracing/trace_collection/dd_libraries/ios.md         @Datadog/rum-mob
 content/en/tracing/**/*dotnet*                                  @DataDog/tracing-dotnet @DataDog/documentation
 
 # Mobile SDK
-content/en/real_user_monitoring/mobile_and_tv_monitoring/setup/android/                        @Datadog/rum-mobile @DataDog/documentation
-content/en/real_user_monitoring/mobile_and_tv_monitoring/setup/flutter/                        @Datadog/rum-mobile @DataDog/documentation
-content/en/real_user_monitoring/mobile_and_tv_monitoring/setup/ios/                            @Datadog/rum-mobile @DataDog/documentation
-content/en/real_user_monitoring/mobile_and_tv_monitoring/setup/reactnative/                    @Datadog/rum-mobile @DataDog/documentation
-content/en/real_user_monitoring/mobile_and_tv_monitoring/setup/roku/                           @Datadog/rum-mobile @DataDog/documentation
+content/en/real_user_monitoring/mobile_and_tv_monitoring/android/setup/                        @Datadog/rum-mobile @DataDog/documentation
+content/en/real_user_monitoring/mobile_and_tv_monitoring/flutter/setup/                       @Datadog/rum-mobile @DataDog/documentation
+content/en/real_user_monitoring/mobile_and_tv_monitoring/ios/setup/                           @Datadog/rum-mobile @DataDog/documentation
+content/en/real_user_monitoring/mobile_and_tv_monitoring/react_native/setup/                    @Datadog/rum-mobile @DataDog/documentation
+content/en/real_user_monitoring/mobile_and_tv_monitoring/roku/setup/                           @Datadog/rum-mobile @DataDog/documentation
+content/en/real_user_monitoring/mobile_and_tv_monitoring/unity/setup/                          @Datadog/rum-mobile @DataDog/documentation
+content/en/real_user_monitoring/mobile_and_tv_monitoring/kotlin_multiplatform/setup/           @Datadog/rum-mobile @DataDog/documentation
 content/en/real_user_monitoring/mobile_and_tv_monitoring/session_replay/mobile                 @Datadog/rum-mobile @DataDog/documentation
-content/en/real_user_monitoring/error_tracking/android.md       @Datadog/rum-mobile @DataDog/documentation
-content/en/real_user_monitoring/error_tracking/expo.md          @Datadog/rum-mobile @DataDog/documentation
-content/en/real_user_monitoring/error_tracking/flutter.md       @Datadog/rum-mobile @DataDog/documentation
-content/en/real_user_monitoring/error_tracking/ios.md           @Datadog/rum-mobile @DataDog/documentation
-content/en/real_user_monitoring/error_tracking/reactnative.md   @Datadog/rum-mobile @DataDog/documentation
+content/en/real_user_monitoring/error_tracking/android.md                @Datadog/rum-mobile @DataDog/documentation
+content/en/real_user_monitoring/error_tracking/expo.md                   @Datadog/rum-mobile @DataDog/documentation
+content/en/real_user_monitoring/error_tracking/flutter.md                @Datadog/rum-mobile @DataDog/documentation
+content/en/real_user_monitoring/error_tracking/mobile/unity.md           @Datadog/rum-mobile @DataDog/documentation
+content/en/real_user_monitoring/error_tracking/ios.md                    @Datadog/rum-mobile @DataDog/documentation
+content/en/real_user_monitoring/error_tracking/reactnative.md            @Datadog/rum-mobile @DataDog/documentation
+content/en/real_user_monitoring/error_tracking/kotlin-multiplatform.md   @Datadog/rum-mobile @DataDog/documentation
 
 # Browser SDK
 content/en/real_user_monitoring/browser/                        @Datadog/rum-browser @DataDog/documentation
@@ -91,6 +137,10 @@ content/en/real_user_monitoring/session_replay/browser          @Datadog/rum-bro
 content/en/logs/log_collection/javascript.md                    @Datadog/rum-browser @DataDog/documentation
 content/en/logs/error_tracking/browser_and_mobile.md            @Datadog/rum-browser @DataDog/documentation
 content/en/real_user_monitoring/error_tracking/browser.md       @Datadog/rum-browser @DataDog/documentation
+
+# Threat Intel
+content/en/security/threat_intelligence.md  @DataDog/documentation @datamarmot @DataDog/asm-monitor-backend
+content/en/security/application_security/threats/threat_intelligence.md  @DataDog/documentation @datamarmot @DataDog/asm-monitor-backend
 
 # Observability Pipelines
 static/resources/yaml/observability_pipelines/                  @DataDog/observability-pipelines-worker-admin  @DataDog/documentation
@@ -104,9 +154,15 @@ content/en/mobile_app_testing/*.md                              @Datadog/synthet
 # Software Delivery
 
 content/en/tests/                                 @Datadog/ci-app-libraries @Datadog/documentation
-content/en/intelligent_test_runner/               @Datadog/ci-app-libraries @Datadog/documentation
+content/en/tests/test_impact_analysis               @Datadog/ci-app-libraries @Datadog/documentation
 content/en/continuous_integration/                @Datadog/ci-app-backend @Datadog/documentation
 content/en/continuous_delivery/                   @Datadog/ci-app-backend @Datadog/documentation
 content/en/dora_metrics/                          @Datadog/ci-app-backend @Datadog/documentation
 content/en/code_analysis/                         @Datadog/static-analysis @Datadog/documentation
 content/en/quality_gates/                         @Datadog/ci-app-backend @Datadog/documentation
+
+# DDSQL Editor References
+content/en/ddsql_editor/reference/*.md              @Datadog/xpq @Datadog/documentation
+
+# Data Streams Monitoring
+content/en/data_streams/*.md                      @Datadog/data-streams-monitoring @Datadog/documentation

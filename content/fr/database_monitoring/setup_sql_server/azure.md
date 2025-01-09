@@ -8,17 +8,12 @@ further_reading:
 - link: /database_monitoring/troubleshooting/?tab=sqlserver
   tag: Documentation
   text: Résoudre les problèmes courants
-kind: documentation
 title: Configuration de Database Monitoring pour Azure SQL Server
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">La solution Database Monitoring n'est pas prise en charge pour ce site.</div>
-{{< /site-region >}}
+La solution Database Monitoring vous permet de bénéficier d'une visibilité complète sur vos bases de données Microsoft SQL Server, en exposant des métriques de requête, des échantillons de requête, des plans d'exécution, ainsi que des états, des failovers et des événements de base de données.
 
-La solution Database Monitoring vous permet de bénéficier d'une visibilité complète sur vos bases de données Microsoft SQL Server, en exposant des métriques de requête, des échantillons de requête, des plans d'exécution, des états, des failovers et des événements de base de données.
-
-Pour activer la solution Database Monitoring pour votre base de données, suivez les étapes ci-dessous :
+Pour activer la solution Database Monitoring pour votre base de données, suivez les étapes ci-dessous :
 
 1. [Autoriser l'Agent à accéder à la base de données](#accorder-un-acces-a-l-agent)
 2. [Installer l'Agent](#installer-l-agent)

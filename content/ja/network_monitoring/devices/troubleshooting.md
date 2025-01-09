@@ -5,7 +5,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/monitor-snmp-with-datadog/
   tag: ブログ
   text: Datadog での SNMP モニタリング
-kind: documentation
 title: NDM トラブルシューティング
 ---
 
@@ -84,6 +83,12 @@ snmpwalk -O bentU -v 2c -c <COMMUNITY_STRING> <IP_ADDRESS>:<PORT> 1.3.6
 
 **注**: デバイスの `sysobjectid` が不明な場合は、インターネットで調べるか、デバイスに到達できるホストで `snmpwalk` を実行します。この結果を使用して、プロファイルをリストアップします。 
 
+#### How do I extract information about devices and interfaces of my network devices?
+
+- Use the [Network API][2] to extract the following information about your network devices:
+  * [Get the list of interfaces for your devices.][3]
+  - [Get the list of tags for your devices.][4]
+  - [Update the list of tags for your devices.][5]
 
 ## その他の参考資料
 
@@ -91,3 +96,7 @@ snmpwalk -O bentU -v 2c -c <COMMUNITY_STRING> <IP_ADDRESS>:<PORT> 1.3.6
 
 
 [1]: /ja/help
+[2]: /ja/api/latest/network-device-monitoring/
+[3]: /ja/api/latest/network-device-monitoring/#get-the-list-of-interfaces-of-the-device
+[4]: /ja/api/latest/network-device-monitoring/#get-the-list-of-tags-for-a-device
+[5]: /ja/api/latest/network-device-monitoring/#update-the-tags-for-a-device

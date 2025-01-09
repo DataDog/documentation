@@ -1,6 +1,5 @@
 ---
 title: Connect to Datadog over Azure Private Link
-kind: guide
 ---
 
 {{% site-region region="us,us5,eu,gov,ap1" %}}
@@ -56,21 +55,35 @@ You can configure Azure Private Link to expose a private IP address for each Dat
    - For **Name**, enter `*`.
    - For **Type**, select **A - Address record**.
    - For **IP address**, enter the IP address you noted at the end of the previous section.
-   
+
    Select **OK** to finish.
+### Additional required steps for metrics and traces
+Two Datadog Intake Services are subdomains of the `agent.`{{< region-param key="dd_site" code="true" >}} domain. Because of this, the Private DNS zone is slightly different from other intakes.
+
+Create a Private DNS Zone for `agent.`{{< region-param key="dd_site" code="true" >}}, as outlined in the section above. Then add the three records below.
+
+| DNS name | Resource record type | IPv4 address |
+| -------- |----------------------| ------------ |
+| `(apex)` | A                    | IP address for your metrics endpoint |
+| `*`      | A                    | IP address for your metrics endpoint |
+| `trace`  | A                    | IP address for your traces endpoint |
+
+**Note**: This zone requires a wildcard (`*`) record that points to the IP address for your metrics endpoint. This is because Datadog Agents submit telemetry using a versioned endpoint in the form (`<version>-app.agent.`{{< region-param key="dd_site" code="true" >}}).
+
 
 ## Published services
 
 | Datadog intake service | Private Link service name | Private DNS name |
 | --- | --- | --- |
 | Logs (Agent) | `logs-pl-1.9941bd04-f840-4e6d-9449-368592d2f7da.westus2.azure.privatelinkservice` | `agent-http-intake.logs.us3.datadoghq.com` |
+| Logs (OTel Collector with Datadog Exporter) | `logs-pl-1.9941bd04-f840-4e6d-9449-368592d2f7da.westus2.azure.privatelinkservice` | `http-intake.logs.us3.datadoghq.com` |
 | Logs (User HTTP Intake) | `logs-pl-1.9941bd04-f840-4e6d-9449-368592d2f7da.westus2.azure.privatelinkservice` | `http-intake.logs.us3.datadoghq.com` |
 | API | `api-pl-1.0962d6fc-b0c4-40f5-9f38-4e9b59ea1ba5.westus2.azure.privatelinkservice` | `api.us3.datadoghq.com` |
-| Metrics | `metrics-agent-pl-1.77764c37-633a-4c24-ac9b-0069ce5cd344.westus2.azure.privatelinkservice` | `metrics.agent.us3.datadoghq.com` |
+| Metrics | `metrics-agent-pl-1.77764c37-633a-4c24-ac9b-0069ce5cd344.westus2.azure.privatelinkservice` | `agent.us3.datadoghq.com` |
 | Containers  | `orchestrator-pl-1.8ca24d19-b403-4c46-8400-14fde6b50565.westus2.azure.privatelinkservice` | `orchestrator.us3.datadoghq.com` |
 | Process | `process-pl-1.972de3e9-3b00-4215-8200-e1bfed7f05bd.westus2.azure.privatelinkservice` | `process.us3.datadoghq.com` |
 | Profiling | `profile-pl-1.3302682b-5bc9-4c76-a80a-0f2659e1ffe7.westus2.azure.privatelinkservice` | `intake.profile.us3.datadoghq.com` |
-| Traces | `trace-edge-pl-1.d668729c-d53a-419c-b208-9d09a21b0d54.westus2.azure.privatelinkservice` | `trace.agent.us3.datadoghq.com` |
+| Traces | `trace-edge-pl-1.d668729c-d53a-419c-b208-9d09a21b0d54.westus2.azure.privatelinkservice` | `agent.us3.datadoghq.com` |
 | Remote Configuration | `fleet-pl-1.37765ebe-d056-432f-8d43-fa91393eaa07.westus2.azure.privatelinkservice` | `config.us3.datadoghq.com` |
 | Database Monitoring | `dbm-metrics-pl-1.e391d059-0e8f-4bd3-9f21-708e97a708a9.westus2.azure.privatelinkservice` | `dbm-metrics-intake.us3.datadoghq.com` |
 

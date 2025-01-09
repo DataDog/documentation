@@ -12,7 +12,8 @@ categories:
 - モニター
 - apm
 - ネットワーク
-- profiler_troubleshooting
+- tracing
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/rum_android/README.md
 display_on_public_website: true
@@ -22,7 +23,6 @@ integration_id: rum-android
 integration_title: Android
 integration_version: ''
 is_public: true
-kind: integration
 manifest_version: 2.0.0
 name: rum_android
 public_title: Android
@@ -38,10 +38,14 @@ tile:
   - Category::Network
   - Category::Tracing
   - Supported OS::Android
+  - Offering::Integration
   configuration: README.md#Setup
   description: Datadog RUM を使用した Android アプリケーションの監視とメトリクス生成
   media: []
   overview: README.md#Overview
+  resources:
+  - resource_type: documentation
+    url: https://docs.datadoghq.com/real_user_monitoring/android/
   support: README.md#Support
   title: Android
 ---
@@ -54,7 +58,7 @@ tile:
 Datadog [Android インテグレーション][1]を利用することで、問題のトリアージに費やす時間を減らし、より多くの時間を新機能のリリースに費やすことができるようになります。
 
 - サードパーティライブラリ、ネットワークリクエスト、大容量メディアファイルにおけるパフォーマンス低下やアプリケーションクラッシュの根本的な原因をデバッグ
-- アプリケーションの応答性向上、サービスレベルインジケータ (SLI) の設定、すぐに使えるダッシュボード、リアルタイムメトリクス、難読化されたクラッシュレポートによる問題の診断
+- Improving application responsiveness, setting up service level indicators (SLIs), and diagnosing issues with out-of-the-box dashboards, real-time metrics, and deobfuscated crash reports
 - 大量のアプリケーションエラーを管理可能な固有の問題群にインテリジェントにグループ化
 
 ユーザーエクスペリエンスがビジネスに与える影響を関連付けます。
@@ -69,7 +73,7 @@ Datadog [Android インテグレーション][1]を利用することで、問�
 - クライアントサイドとサーバーサイドのメトリクス、トレース、ログを統合し、クラッシュのデバッグを高速化
 - フロントエンドとバックエンドのチーム向けに、フルスタックモニタリングを単一プラットフォームで実現
 
-## 計画と使用
+## セットアップ
 
 ### RUM イベントの収集
 
@@ -83,21 +87,21 @@ Android アプリケーションのトレースを Datadog に送信し始める
 
 Android アプリケーションのログを Datadog に転送し始めるには、[Android ログ収集][5]をご覧ください。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 
 Android インテグレーションには、メトリクスは含まれていません。RUM アプリケーションからカスタムメトリクスを生成するには、[メトリクスの生成][6]を参照してください。
 
-### ヘルプ
+### イベント
 
 イベントや属性の詳細については、[RUM Android データ収集][7]を参照してください。
 
-### ヘルプ
+### サービスチェック
 
 Android インテグレーションには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
 

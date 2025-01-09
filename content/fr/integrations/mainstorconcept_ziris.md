@@ -52,7 +52,7 @@ integration_id: mainstorconcept-ziris
 integration_title: z/IRIS
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 legal_terms:
   eula: EULA.pdf
 manifest_version: 2.0.0
@@ -235,7 +235,7 @@ Vous trouverez ci-dessous une liste complète de tous les tags créés avec z/IR
 | zos.cics.connection.type                          | Type de connexion CICS                          |
 | zos.cics.ipconn_name                              | Nom de l'ipconn CICS                              |
 | zos.cics.net.peer.name                            | CICS net peer name                            |
-| zos.cics.nodejs_application_name                  | Nom de l'application CICS NodeJS                   |
+| zos.cics.nodejs_application_name                  | Nom de l'application CICS Node.js                   |
 | zos.cics.pipeline_name                            | Nom du pipeline CICS                            |
 | zos.cics.region_name                              | Nom de la région CICS                              |
 | zos.cics.session.id                               | ID de la session CICS                               |

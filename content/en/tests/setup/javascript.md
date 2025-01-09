@@ -1,6 +1,5 @@
 ---
 title: JavaScript and TypeScript Tests
-kind: documentation
 code_lang: javascript
 type: multi-code-lang
 code_lang_weight: 20
@@ -15,21 +14,17 @@ further_reading:
     - link: "/continuous_integration/tests"
       tag: "Documentation"
       text: "Explore Test Results and Performance"
-    - link: "/continuous_integration/intelligent_test_runner/javascript"
+    - link: "/tests/test_impact_analysis/javascript"
       tag: "Documentation"
-      text: "Speed up your test jobs with Intelligent Test Runner"
-    - link: "/continuous_integration/troubleshooting/"
+      text: "Speed up your test jobs with Test Impact Analysis"
+    - link: "/tests/troubleshooting/"
       tag: "Documentation"
-      text: "Troubleshooting CI Visibility"
+      text: "Troubleshooting Test Optimization"
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
+<div class="alert alert-warning">Test Optimization is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
-
-<div class="alert alert-info">
-  If your CI provider is Jenkins, you can use <a href="/continuous_integration/pipelines/jenkins/#enable-with-the-jenkins-configuration-ui-1">UI-based configuration</a> to enable Test Visibility for your jobs and pipelines.
-</div>
 
 ## Compatibility
 
@@ -37,11 +32,12 @@ Supported test frameworks:
 
 | Test Framework | Version | Notes |
 |---|---|---|
-| Jest | >= 24.8.0 | Only `jsdom` (in the `jest-environment-jsdom` package) and `node` (in the `jest-environment-node` package) are supported as test environments. Custom environments like `@jest-runner/electron/environment` in `jest-electron-runner` are not supported.<br><br>Only [`jest-circus`][1] is supported as [`testRunner`][2].<br><br>Jest >= 28 is only supported from `dd-trace>=2.7.0`.<br><br>[`test.concurrent`](#jests-testconcurrent) is not supported. |
-| Mocha | >= 5.2.0 | Mocha >= 9.0.0 has [partial support](#known-limitations).<br><br>Mocha [parallel mode](#mocha-parallel-tests) is not supported. |
-| Cucumber | >= 7.0.0 | Cucumber-js [parallel mode](#cucumber-parallel-tests) is not supported. |
-| Cypress | >= 6.7.0 | From `dd-trace>=1.4.0`. |
-| Playwright | >= 1.18.0 | From `dd-trace>=3.13.0` and `dd-trace>=2.26.0` for 2.x release line. |
+| Jest | >= 24.8.0 | Only `jsdom` (in the `jest-environment-jsdom` package) and `node` (in the `jest-environment-node` package) are supported as test environments. Custom environments like `@jest-runner/electron/environment` in `jest-electron-runner` are not supported.<br><br>Only [`jest-circus`][1] is supported as [`testRunner`][2].<br><br>[`test.concurrent`](#jests-testconcurrent) is not supported. |
+| Mocha | >= 5.2.0 | Mocha >= 9.0.0 has [partial support](#known-limitations). |
+| Cucumber | >= 7.0.0 |
+| Cypress | >= 6.7.0 |
+| Playwright | >= 1.18.0 |
+| Vitest | >= 1.16.0 | Supported from `dd-trace>=4.42.0` and `dd-trace>=5.18.0`. Only supported from Node.js>=18.19 or Node.js>=20.6 |
 
 The instrumentation works at runtime, so any transpilers such as TypeScript, Webpack, or Babel are supported out-of-the-box.
 
@@ -50,17 +46,22 @@ The instrumentation works at runtime, so any transpilers such as TypeScript, Web
 To report test results to Datadog, you need to configure the Datadog JavaScript library:
 
 {{< tabs >}}
-{{% tab "Cloud CI provider (Agentless)" %}}
+{{% tab "CI Provider with Auto-Instrumentation Support" %}}
+{{% ci-autoinstrumentation %}}
 
+<div class="alert alert-warning">
+  <strong>Note</strong>: Auto-instrumentation is not supported for Cypress tests. To instrument Cypress tests, follow the manual instrumentation steps outlined below.
+</div>
+
+{{% /tab %}}
+
+{{% tab "Other Cloud CI Provider" %}}
 <div class="alert alert-info">Agentless mode is available in Datadog JavaScript library versions >= 2.5.0</div>
-
 {{% ci-agentless %}}
 
 {{% /tab %}}
-{{% tab "On-Premises CI Provider (Datadog Agent)" %}}
-
+{{% tab "On-Premises CI Provider" %}}
 {{% ci-agent %}}
-
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -107,7 +108,7 @@ You can add custom tags to your tests by using the current active span:
   })
 ```
 
-To create filters or `group by` fields for these tags, you must first create facets. For more information about adding tags, see the [Adding Tags][101] section of the Node.js custom instrumentation documentation.
+To create filters or `group by` fields for these tags, you must first create facets. For more information about adding tags, see the [Adding Tags][1] section of the Node.js custom instrumentation documentation.
 
 
 ### Adding custom measures to tests
@@ -123,10 +124,16 @@ Just like tags, you can add custom measures to your tests by using the current a
   })
 ```
 
-For more information about custom measures, see the [Add Custom Measures Guide][102].
+For more information about custom measures, see the [Add Custom Measures Guide][2].
 
-[101]: /tracing/trace_collection/custom_instrumentation/nodejs?tab=locally#adding-tags
-[102]: /tests/guides/add_custom_measures/?tab=javascripttypescript
+### Mocha ECMAScript modules (ESM)
+[Mocha >=9.0.0][3] uses an ESM-first approach to load test files. Set `NODE_OPTIONS` to `-r dd-trace/ci/init --import dd-trace/register.js` to get full visibility into your tests. See [`dd-trace-js` ESM support][4] for more information.
+
+
+[1]: /tracing/trace_collection/custom_instrumentation/nodejs?tab=locally#adding-tags
+[2]: /tests/guides/add_custom_measures/?tab=javascripttypescript
+[3]: https://github.com/mochajs/mocha/releases/tag/v9.0.0
+[4]: https://github.com/datadog/dd-trace-js?tab=readme-ov-file#ecmascript-modules-esm-support
 {{% /tab %}}
 
 {{% tab "Playwright" %}}
@@ -148,7 +155,7 @@ NODE_OPTIONS="-r dd-trace/ci/init" DD_ENV=ci DD_SERVICE=my-javascript-app yarn t
 
 ### Adding custom tags to tests
 
-You can add custom tags to your tests by using the [custom annotations API from Playwright][101]:
+You can add custom tags to your tests by using the [custom annotations API from Playwright][1]:
 
 ```javascript
 test('user profile', async ({ page }) => {
@@ -179,6 +186,7 @@ The format of the annotations is the following, where `$TAG_NAME` and `$TAG_VALU
   "type": "DD_TAGS[$TAG_NAME]",
   "description": "$TAG_VALUE"
 }
+```
 
 ### Adding custom measures to tests
 
@@ -201,14 +209,14 @@ The format of the annotations is the following, where `$TAG_NAME` is a *string* 
   "description": $TAG_VALUE
 }
 ```
-**Note**: `description` values in annotations are [typed as strings][102]. Numbers also work, but you may need to disable the typing error with `// @ts-expect-error`.
+**Note**: `description` values in annotations are [typed as strings][2]. Numbers also work, but you may need to disable the typing error with `// @ts-expect-error`.
 
 <div class="alert alert-warning">
   <strong>Important</strong>: The <code>DD_TAGS</code> prefix is mandatory and case sensitive.
 </div>
 
-[101]: https://playwright.dev/docs/test-annotations#custom-annotations
-[102]: https://playwright.dev/docs/api/class-testinfo#test-info-annotations
+[1]: https://playwright.dev/docs/test-annotations#custom-annotations
+[2]: https://playwright.dev/docs/api/class-testinfo#test-info-annotations
 {{% /tab %}}
 
 {{% tab "Cucumber" %}}
@@ -241,7 +249,7 @@ You can add custom tags to your test by grabbing the current active span:
   })
 ```
 
-To create filters or `group by` fields for these tags, you must first create facets. For more information about adding tags, see the [Adding Tags][101] section of the Node.js custom instrumentation documentation.
+To create filters or `group by` fields for these tags, you must first create facets. For more information about adding tags, see the [Adding Tags][1] section of the Node.js custom instrumentation documentation.
 
 
 ### Adding custom measures to tests
@@ -257,10 +265,10 @@ You may also add custom measures to your test by grabbing the current active spa
   })
 ```
 
-For more information about custom measures, see the [Add Custom Measures Guide][102].
+For more information about custom measures, see the [Add Custom Measures Guide][2].
 
-[101]: /tracing/trace_collection/custom_instrumentation/nodejs?tab=locally#adding-tags
-[102]: /tests/guides/add_custom_measures/?tab=javascripttypescript
+[1]: /tracing/trace_collection/custom_instrumentation/nodejs?tab=locally#adding-tags
+[2]: /tests/guides/add_custom_measures/?tab=javascripttypescript
 {{% /tab %}}
 
 {{% tab "Cypress" %}}
@@ -310,7 +318,7 @@ module.exports = defineConfig({
 {{< /code-block >}}
 
 #### Cypress `after:run` event
-Datadog requires the [`after:run`][10] Cypress event to work, and Cypress does not allow multiple handlers for that event. If you defined handlers for `after:run` already, add the Datadog handler manually by importing `'dd-trace/ci/cypress/after-run'`:
+Datadog requires the [`after:run`][2] Cypress event to work, and Cypress does not allow multiple handlers for that event. If you defined handlers for `after:run` already, add the Datadog handler manually by importing `'dd-trace/ci/cypress/after-run'`:
 
 {{< code-block lang="javascript" filename="cypress.config.js" >}}
 const { defineConfig } = require('cypress')
@@ -331,7 +339,7 @@ module.exports = defineConfig({
 {{< /code-block >}}
 
 #### Cypress `after:spec` event
-Datadog requires the [`after:spec`][11] Cypress event to work, and Cypress does not allow multiple handlers for that event. If you defined handlers for `after:spec` already, add the Datadog handler manually by importing `'dd-trace/ci/cypress/after-spec'`:
+Datadog requires the [`after:spec`][3] Cypress event to work, and Cypress does not allow multiple handlers for that event. If you defined handlers for `after:spec` already, add the Datadog handler manually by importing `'dd-trace/ci/cypress/after-spec'`:
 
 {{< code-block lang="javascript" filename="cypress.config.js" >}}
 const { defineConfig } = require('cypress')
@@ -354,9 +362,9 @@ module.exports = defineConfig({
 
 ### Cypress before version 10
 
-These are the instructions if you're using a version older than `cypress@10`. See the [Cypress documentation][9] for more information about migrating to a newer version.
+These are the instructions if you're using a version older than `cypress@10`. See the [Cypress documentation][4] for more information about migrating to a newer version.
 
-1. Set [`pluginsFile`][2] to `"dd-trace/ci/cypress/plugin"`, for example, through [`cypress.json`][3]:
+1. Set [`pluginsFile`][5] to `"dd-trace/ci/cypress/plugin"`, for example, through [`cypress.json`][6]:
 {{< code-block lang="json" filename="cypress.json" >}}
 {
   "pluginsFile": "dd-trace/ci/cypress/plugin"
@@ -371,7 +379,7 @@ module.exports = (on, config) => {
 }
 {{< /code-block >}}
 
-2. Add the following line to the **top level** of your [`supportFile`][4]:
+2. Add the following line to the **top level** of your [`supportFile`][7]:
 {{< code-block lang="javascript" filename="cypress/support/index.js" >}}
 // Your code can be before this line
 // require('./commands')
@@ -381,7 +389,7 @@ require('dd-trace/ci/cypress/support')
 {{< /code-block >}}
 
 #### Cypress `after:run` event
-Datadog requires the [`after:run`][10] Cypress event to work, and Cypress does not allow multiple handlers for that event. If you defined handlers for `after:run` already, add the Datadog handler manually by importing `'dd-trace/ci/cypress/after-run'`:
+Datadog requires the [`after:run`][2] Cypress event to work, and Cypress does not allow multiple handlers for that event. If you defined handlers for `after:run` already, add the Datadog handler manually by importing `'dd-trace/ci/cypress/after-run'`:
 
 {{< code-block lang="javascript" filename="cypress/plugins/index.js" >}}
 module.exports = (on, config) => {
@@ -396,7 +404,7 @@ module.exports = (on, config) => {
 {{< /code-block >}}
 
 #### Cypress `after:spec` event
-Datadog requires the [`after:spec`][11] Cypress event to work, and Cypress does not allow multiple handlers for that event. If you defined handlers for `after:spec` already, add the Datadog handler manually by importing `'dd-trace/ci/cypress/after-spec'`:
+Datadog requires the [`after:spec`][3] Cypress event to work, and Cypress does not allow multiple handlers for that event. If you defined handlers for `after:spec` already, add the Datadog handler manually by importing `'dd-trace/ci/cypress/after-spec'`:
 
 {{< code-block lang="javascript" filename="cypress/plugins/index.js" >}}
 module.exports = (on, config) => {
@@ -440,7 +448,7 @@ it('renders a hello world', () => {
 })
 ```
 
-To create filters or `group by` fields for these tags, you must first create facets. For more information about adding tags, see the [Adding Tags][5] section of the Node.js custom instrumentation documentation.
+To create filters or `group by` fields for these tags, you must first create facets. For more information about adding tags, see the [Adding Tags][8] section of the Node.js custom instrumentation documentation.
 
 ### Adding custom measures to tests
 
@@ -458,24 +466,53 @@ it('renders a hello world', () => {
 })
 ```
 
-For more information about custom measures, see the [Add Custom Measures Guide][6].
+For more information about custom measures, see the [Add Custom Measures Guide][9].
 
 ### Cypress - RUM integration
 
-If the browser application being tested is instrumented using [Browser Monitoring][7], the Cypress test results and their generated RUM browser sessions and session replays are automatically linked. For more information, see the [Instrumenting your browser tests with RUM guide][8].
+If the browser application being tested is instrumented using [Browser Monitoring][10], the Cypress test results and their generated RUM browser sessions and session replays are automatically linked. For more information, see the [Instrumenting your browser tests with RUM guide][11].
 
 
 [1]: https://docs.cypress.io/guides/tooling/plugins-guide#Using-a-plugin
-[2]: https://docs.cypress.io/guides/core-concepts/writing-and-organizing-tests#Plugins-file
-[3]: https://docs.cypress.io/guides/references/configuration#cypress-json
-[4]: https://docs.cypress.io/guides/core-concepts/writing-and-organizing-tests#Support-file
-[5]: /tracing/trace_collection/custom_instrumentation/nodejs?tab=locally#adding-tags
-[6]: /tests/guides/add_custom_measures/?tab=javascripttypescript
-[7]: /real_user_monitoring/browser/#setup
-[8]: /continuous_integration/guides/rum_integration/
-[9]: https://docs.cypress.io/guides/references/migration-guide#Migrating-to-Cypress-100
-[10]: https://docs.cypress.io/api/plugins/after-run-api
-[11]: https://docs.cypress.io/api/plugins/after-spec-api
+[2]: https://docs.cypress.io/api/plugins/after-run-api
+[3]: https://docs.cypress.io/api/plugins/after-spec-api
+[4]: https://docs.cypress.io/guides/references/migration-guide#Migrating-to-Cypress-100
+[5]: https://docs.cypress.io/guides/core-concepts/writing-and-organizing-tests#Plugins-file
+[6]: https://docs.cypress.io/guides/references/configuration#cypress-json
+[7]: https://docs.cypress.io/guides/core-concepts/writing-and-organizing-tests#Support-file
+[8]: /tracing/trace_collection/custom_instrumentation/nodejs?tab=locally#adding-tags
+[9]: /tests/guides/add_custom_measures/?tab=javascripttypescript
+[10]: /real_user_monitoring/browser/setup/
+[11]: /continuous_integration/guides/rum_integration/
+{{% /tab %}}
+
+{{% tab "Vitest" %}}
+<div class="alert alert-warning">
+  <strong>Note</strong>: <a href="https://github.com/vitest-dev/vitest?tab=readme-ov-file#features">Vitest is ESM first</a>, so its configuration is different from other test frameworks.
+</div>
+
+`vitest` and `dd-trace` require Node.js>=18.19 or Node.js>=20.6 to work.
+
+Set the `NODE_OPTIONS` environment variable to `--import dd-trace/register.js -r dd-trace/ci/init`. Run your tests as you normally would, specifying the environment where the tests are run in the `DD_ENV` environment variable. For example, set `DD_ENV` to `local` when running tests on a developer workstation, or `ci` when running them on a CI provider:
+
+```bash
+NODE_OPTIONS="--import dd-trace/register.js -r dd-trace/ci/init" DD_ENV=ci DD_SERVICE=my-javascript-app yarn test
+```
+
+**Note**: If you set a value for `NODE_OPTIONS`, make sure it does not overwrite `--import dd-trace/register.js -r dd-trace/ci/init`. This can be done using the `${NODE_OPTIONS:-}` clause:
+
+{{< code-block lang="json" filename="package.json" >}}
+{
+  "scripts": {
+    "test": "NODE_OPTIONS=\"--max-old-space-size=12288 ${NODE_OPTIONS:-}\" vitest run"
+  }
+}
+{{< /code-block >}}
+
+### Adding custom tags or measures to tests
+
+Not supported.
+
 {{% /tab %}}
 
 {{< /tabs >}}
@@ -579,7 +616,7 @@ The following is a list of the most important configuration settings that can be
 **Environment variable**: `DD_TRACE_AGENT_URL`<br/>
 **Default**: `http://localhost:8126`
 
-For more information about `service` and `env` reserved tags, see [Unified Service Tagging][20]. All other [Datadog Tracer configuration][7] options can also be used.
+For more information about `service` and `env` reserved tags, see [Unified Service Tagging][7]. All other [Datadog Tracer configuration][8] options can also be used.
 
 ## Collecting Git metadata
 
@@ -588,14 +625,10 @@ For more information about `service` and `env` reserved tags, see [Unified Servi
 ## Manual testing API
 
 <div class="alert alert-warning">
-  <strong>Note</strong>: To use the manual testing API, you must pass <code>DD_CIVISIBILITY_MANUAL_API_ENABLED=1</code> as an environment variable.
+  <strong>Note</strong>: The manual testing API is available starting in <code>dd-trace</code> versions <code>5.23.0</code> and <code>4.47.0</code>.
 </div>
 
-<div class="alert alert-warning">
-  <strong>Note</strong>: The manual testing API is in <strong>beta</strong>, so its API might change. It is available starting in <code>dd-trace</code> versions <code>4.4.0</code>, <code>3.25.0</code>, and <code>2.38.0</code>.
-</div>
-
-If you use Jest, Mocha, Cypress, Playwright, or Cucumber, **do not use the manual testing API**, as CI Visibility automatically instruments them and sends the test results to Datadog. The manual testing API is **incompatible** with already supported testing frameworks.
+If you use Jest, Mocha, Cypress, Playwright, Cucumber, or Vitest, **do not use the manual testing API**, as Test Optimization automatically instruments them and sends the test results to Datadog. The manual testing API is **incompatible** with already supported testing frameworks.
 
 Use the manual testing API only if you use an unsupported testing framework or have a different testing mechanism.
 
@@ -697,43 +730,34 @@ The payload to be published is a dictionary `<string, string|number>` of tags or
 When the test start and end channels are in your code, run your testing framework like you normally do, including the following environment variables:
 
 ```shell
-NODE_OPTIONS="-r dd-trace/ci/init" DD_CIVISIBILITY_MANUAL_API_ENABLED=1 DD_ENV=ci DD_SERVICE=my-custom-framework-tests yarn run-my-test-framework
+NODE_OPTIONS="-r dd-trace/ci/init" DD_ENV=ci DD_SERVICE=my-custom-framework-tests yarn run-my-test-framework
 ```
 
 
 
 ## Known limitations
 
-### ES modules
-[Mocha >=9.0.0][8] uses an ESM-first approach to load test files. That means that if [ES modules][9] are used (for example, by defining test files with the `.mjs` extension), _the instrumentation is limited_. Tests are detected, but there isn't visibility into your test. For more information about ES modules, see the [Node.js documentation][9].
-
 ### Browser tests
-Browser tests executed with `mocha`, `jest`, `cucumber`, `cypress`, and `playwright` are instrumented by `dd-trace-js`, but visibility into the browser session itself is not provided by default (for example, network calls, user actions, page loads, and more.).
+Browser tests executed with `mocha`, `jest`, `cucumber`, `cypress`, `playwright`, and `vitest` are instrumented by `dd-trace-js`, but visibility into the browser session itself is not provided by default (for example, network calls, user actions, page loads, and more.).
 
-If you want visibility into the browser process, consider using [RUM & Session Replay][10]. When using Cypress, test results and their generated RUM browser sessions and session replays are automatically linked. For more information, see the [Instrumenting your browser tests with RUM guide][11].
+If you want visibility into the browser process, consider using [RUM & Session Replay][9]. When using Cypress, test results and their generated RUM browser sessions and session replays are automatically linked. For more information, see the [Instrumenting your browser tests with RUM guide][10].
 
 ### Cypress interactive mode
 
-Cypress interactive mode (which you can enter by running `cypress open`) is not supported by CI Visibility because some cypress events, such as [`before:run`][12], are not fired. If you want to try it anyway, pass `experimentalInteractiveRunEvents: true` to the [cypress configuration file][13].
-
-### Mocha parallel tests
-Mocha's [parallel mode][15] is not supported. Tests run in parallel mode are not instrumented by CI Visibility.
-
-### Cucumber parallel tests
-Cucumber's [parallel mode][16] is not supported. Tests run in parallel mode are not instrumented by CI Visibility.
+Cypress interactive mode (which you can enter by running `cypress open`) is not supported by Test Optimization because some cypress events, such as [`before:run`][11], are not fired. If you want to try it anyway, pass `experimentalInteractiveRunEvents: true` to the [cypress configuration file][12].
 
 ### Jest's `test.concurrent`
-Jest's [test.concurrent][17] is not supported.
+Jest's [test.concurrent][13] is not supported.
 
 ### Jest's `--forceExit`
-Jest's [--forceExit][21] option may cause data loss. Datadog tries to send data immediately after your tests finish, but shutting down the process abruptly can cause some requests to fail. Use `--forceExit` with caution.
+Jest's [--forceExit][14] option may cause data loss. Datadog tries to send data immediately after your tests finish, but shutting down the process abruptly can cause some requests to fail. Use `--forceExit` with caution.
 
 ### Mocha's `--exit`
-Mocha's [--exit][22] option may cause data loss. Datadog tries to send data immediately after your tests finish, but shutting down the process abruptly can cause some requests to fail. Use `--exit` with caution.
+Mocha's [--exit][15] option may cause data loss. Datadog tries to send data immediately after your tests finish, but shutting down the process abruptly can cause some requests to fail. Use `--exit` with caution.
 
 ## Best practices
 
-Follow these practices to take full advantage of the testing framework and CI Visibility.
+Follow these practices to take full advantage of the testing framework and Test Optimization.
 
 ### Parameterized tests
 
@@ -748,7 +772,7 @@ Avoid this:
 })
 {{< /code-block >}}
 
-And use [`test.each`][18] instead:
+And use [`test.each`][16] instead:
 
 {{< code-block lang="javascript" >}}
 test.each([[1,2,3], [3,4,7]])('sums correctly %i and %i', (a,b,expected) => {
@@ -756,7 +780,7 @@ test.each([[1,2,3], [3,4,7]])('sums correctly %i and %i', (a,b,expected) => {
 })
 {{< /code-block >}}
 
-For `mocha`, use [`mocha-each`][19]:
+For `mocha`, use [`mocha-each`][17]:
 
 {{< code-block lang="javascript" >}}
 const forEach = require('mocha-each');
@@ -769,7 +793,7 @@ forEach([
 });
 {{< /code-block >}}
 
-When you use this approach, both the testing framework and CI Visibility can tell your tests apart.
+When you use this approach, both the testing framework and Test Optimization can tell your tests apart.
 
 ## Further reading
 
@@ -781,18 +805,14 @@ When you use this approach, both the testing framework and CI Visibility can tel
 [4]: https://github.com/DataDog/dd-trace-js#version-release-lines-and-maintenance
 [5]: https://istanbul.js.org/
 [6]: /tests/code_coverage/?tab=javascripttypescript
-[7]: /tracing/trace_collection/library_config/nodejs/?tab=containers#configuration
-[8]: https://github.com/mochajs/mocha/releases/tag/v9.0.0
-[9]: https://nodejs.org/api/packages.html#packages_determining_module_system
-[10]: /real_user_monitoring/browser/
-[11]: /continuous_integration/guides/rum_integration/
-[12]: https://docs.cypress.io/api/plugins/before-run-api
-[13]: https://docs.cypress.io/guides/references/configuration#Configuration-File
-[15]: https://mochajs.org/#parallel-tests
-[16]: https://github.com/cucumber/cucumber-js/blob/63f30338e6b8dbe0b03ddd2776079a8ef44d47e2/docs/parallel.md
-[17]: https://jestjs.io/docs/api#testconcurrentname-fn-timeout
-[18]: https://jestjs.io/docs/api#testeachtablename-fn-timeout
-[19]: https://www.npmjs.com/package/mocha-each
-[20]: /getting_started/tagging/unified_service_tagging
-[21]: https://jestjs.io/docs/cli#--forceexit
-[22]: https://mochajs.org/#-exit
+[7]: /getting_started/tagging/unified_service_tagging
+[8]: /tracing/trace_collection/library_config/nodejs/?tab=containers#configuration
+[9]: /real_user_monitoring/browser/
+[10]: /continuous_integration/guides/rum_integration/
+[11]: https://docs.cypress.io/api/plugins/before-run-api
+[12]: https://docs.cypress.io/guides/references/configuration#Configuration-File
+[13]: https://jestjs.io/docs/api#testconcurrentname-fn-timeout
+[14]: https://jestjs.io/docs/cli#--forceexit
+[15]: https://mochajs.org/#-exit
+[16]: https://jestjs.io/docs/api#testeachtablename-fn-timeout
+[17]: https://www.npmjs.com/package/mocha-each

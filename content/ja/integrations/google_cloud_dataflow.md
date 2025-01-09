@@ -3,6 +3,7 @@ categories:
 - cloud
 - google cloud
 - ログの収集
+custom_kind: インテグレーション
 dependencies: []
 description: Google Cloud Dataflow のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/google_cloud_dataflow/
@@ -17,10 +18,9 @@ integration_id: google-cloud-dataflow
 integration_title: Google Cloud Dataflow
 integration_version: ''
 is_public: true
-kind: integration
 manifest_version: '1.0'
 monitors:
-  job-backlog-time: assets/monitors/backlog_monitor.json
+  Job backlog time is high: assets/monitors/backlog_monitor.json
 name: google_cloud_dataflow
 public_title: Datadog-Google Cloud Dataflow インテグレーション
 short_description: Google Cloud Dataflow のキーメトリクスを追跡
@@ -34,11 +34,11 @@ Google Cloud Dataflow は、ストリーム (リアルタイム) モードとバ
 
 Datadog Google Cloud インテグレーションを使用して、Google Cloud Dataflow からメトリクスを収集できます。
 
-## 計画と使用
+## セットアップ
 
 ### メトリクスの収集
 
-#### インフラストラクチャーリスト
+#### インストール
 
 [Google Cloud Platform インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。それ以上のインストール手順はありません。
 
@@ -50,12 +50,12 @@ Google Cloud Dataflow のログは Google Cloud Logging で収集され、Cloud 
 
 1. [Google Cloud Logging のページ][3]に移動し、Google Cloud Dataflow のログを絞り込みます。
 2. **シンクを作成**し、シンクに適宜名前を付けます。
-3. エクスポート先として「Cloud Pub/Sub」を選択し、エクスポート用に作成された Pub/Sub を選択します。**注**: この Pub/Sub は別のプロジェクト内に配置することもできます。
+3. 宛先として "Cloud Pub/Sub" を選択し、その目的で作成された Pub/Sub トピックを選択します。**注**: Pub/Sub トピックは別のプロジェクトに配置できます。
 4. **作成**をクリックし、確認メッセージが表示されるまで待ちます。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "google_cloud_dataflow" >}}
 
 
@@ -64,15 +64,15 @@ Google Cloud Dataflow を使って Apache Beam パイプラインのメトリク
 </div>
 
 
-### ヘルプ
+### イベント
 
 Google Cloud Dataflow インテグレーションには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 
 Google Cloud Dataflow インテグレーションには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
 

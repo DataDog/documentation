@@ -1,6 +1,5 @@
 ---
 title: Managing Multiple-Organization Accounts
-kind: documentation
 aliases:
   - /guides/multiaccountorg
   - /account_management/mult_account
@@ -61,10 +60,20 @@ Onboarding a new sub-organization with a set of baseline dashboards and monitors
 The custom sub-domain feature is not enabled by default. Contact [Datadog support][1] to have it enabled.
 
 If you are a member of multiple organizations, custom sub-domains help you identify the source of an alert or notification. Also, they can immediately switch you to the organization associated with the sub-domain.
-
+{{% site-region region="us,us3,us5,ap1" %}}
 For example, the URL `https://app.datadoghq.com/event/event?id=1` is associated with an event in Organization A. If a user is a member of both Organization A and Organization B, but is viewing Datadog within the context of Organization B, then that URL returns a `404 Not Found error`. The user must switch to Organization A using the [user account settings menu][2], then revisit the URL. However, with custom sub-domains, the user could navigate to `https://org-a.datadoghq.com/event/event?id=1` which would automatically switch the user's context to Organization A and display the correct page.
 
-**Note**: If you have a custom Datadog subdomain, manually edit the links from the Datadog documentation with your subdomain name. For example, a link redirecting to `https://**app**.datadoghq.com/account/settings` becomes `https://**<custom_sub-domain_name>**.datadoghq.com/account/settings`.
+**Note**: If you have a custom Datadog subdomain, manually edit the links from the Datadog documentation with your subdomain name. For example, a link redirecting to `https://**app**.datadoghq.com/account/settings` becomes `https://**<custom_sub-domain_name>**.datadoghq.com/account/settings`. {{% /site-region %}}
+
+{{% site-region region="eu" %}}
+For example, the URL `https://app.datadoghq.eu/event/event?id=1` is associated with an event in Organization A. If a user is a member of both Organization A and Organization B, but is viewing Datadog within the context of Organization B, then that URL returns a `404 Not Found error`. The user must switch to Organization A using the [user account settings menu][2], then revisit the URL. However, with custom sub-domains, the user could navigate to `https://org-a.datadoghq.eu/event/event?id=1` which would automatically switch the user's context to Organization A and display the correct page.
+
+**Note**: If you have a custom Datadog subdomain, manually edit the links from the Datadog documentation with your subdomain name. For example, a link redirecting to `https://**app**.datadoghq.eu/account/settings` becomes `https://**<custom_sub-domain_name>**.datadoghq.eu/account/settings`. {{% /site-region %}}
+
+{{% site-region region="gov" %}}
+For example, the URL `https://app.ddog-gov.com/event/event?id=1` is associated with an event in Organization A. If a user is a member of both Organization A and Organization B, but is viewing Datadog within the context of Organization B, then that URL returns a `404 Not Found error`. The user must switch to Organization A using the [user account settings menu][2], then revisit the URL. However, with custom sub-domains, the user could navigate to `https://org-a.ddog-gov.com/event/event?id=1` which would automatically switch the user's context to Organization A and display the correct page.
+
+**Note**: If you have a custom Datadog subdomain, manually edit the links from the Datadog documentation with your subdomain name. For example, a link redirecting to `https://**app**.ddog-gov.com/account/settings` becomes `https://**<custom_sub-domain_name>**.ddog-gov.com/account/settings`. {{% /site-region %}}
 
 ## Set up SAML
 
@@ -94,7 +103,7 @@ If you already created the child organization and are locked out, following the 
 
 ## Multi-org usage
 
-The parent-organization can view the total and billable usage of all their organizations (child and parent organizations) by hovering over their username on the bottom left corner and navigating to **Plan & Usage** > **Usage**.
+The parent-organization can view the total and billable usage of all their organizations (child and parent organizations) by hovering over their username on the bottom left corner and navigating to [**Plan & Usage** > **Usage & Cost**][11].
 
 The Usage page shows the aggregate usage of the parent-organization and all its child-organizations. There are two tabs on the Usage page:
 
@@ -131,15 +140,13 @@ This data can be downloaded as a CSV file.
 
 On the **Individual Organizations** usage tab, you can view the usage of your child organizations in absolute units or as a percentage of total usage.
 
-{{< img src="account_management/multi-org-percent-billable-v2.png" alt="Individual Percent Usage" >}}
-
 The default view is the "Billable" view, which shows usage that contributes to your final bill. This view removes child organizations that are not billable such as trial organizations, and other adjustments that provide a more accurate summary of what drives your bill. Switch to the "All" view to see the unadjusted, raw usage of your parent-organization and all child-organizations. Both views can be downloaded as a CSV file.
 
-To view the [Usage Details][11] of a child-organization, you can click on the child-organization's name.
+To view the [Usage Details][12] of a child-organization, you can click on the child-organization's name.
 
 ## Usage attribution
 
-The parent-organization can view the usage of child-organizations by existing tag keys in the [Usage Attribution][12] page. Admins can hover over their username at the bottom left, then navigate to: `Plan & Usage`--> `Usage Attribution`.
+The parent-organization can view the usage of child-organizations by existing tag keys in the [Usage Attribution][13] page. Admins can hover over their username at the bottom left, then navigate to: [**Plan & Usage > Usage Attribution**][14].
 
 When enabled at the parent-organization level, usage attribution shows usage aggregated across all organizations. This can be useful if you would like to attribute the usage of your child-organizations to certain projects, teams, or other groupings.
 
@@ -152,12 +159,6 @@ Functionalities include:
 {{< img src="account_management/billing/usage_attribution/Usage-Attribution-Monthly-Facets.png" alt="Monthly Usage Attribution Report" style="width:100%;" >}}
 
 Usage attribution can also be enabled at the child-organization level. When enabled at this level, the tags are only applied to that specific child-organization and can only be viewed in that child-organization. Tags applied at the child-organization level do not rollup and cannot be viewed in the parent-organization.
-
-Note: the following usage types are not supported in this tool:
-
-* Indexed Log Events
-* Ingested Logs
-* Indexed Spans (retained with retention filters)
 
 Usage Attribution is an advanced feature included in the Enterprise plan. For all other plans, contact your account representative or <a href="mailto:success@datadoghq.com">success@datadoghq.com</a>.
 
@@ -175,5 +176,7 @@ Usage Attribution is an advanced feature included in the Enterprise plan. For al
 [8]: https://www.datadoghq.com/blog/managing-datadog-with-terraform
 [9]: /monitors/manage/
 [10]: /account_management/saml/
-[11]: /account_management/plan_and_usage/usage_details/
-[12]: /account_management/billing/usage_attribution/
+[11]: https://app.datadoghq.com/billing/usage?cost_summary
+[12]: /account_management/plan_and_usage/usage_details/
+[13]: /account_management/billing/usage_attribution/
+[14]: https://app.datadoghq.com/billing/usage-attribution

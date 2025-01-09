@@ -1,6 +1,5 @@
 ---
 title: Troubleshooting Cloud Security Management Threats
-kind: documentation
 aliases:
   - /security_platform/cloud_workload_security/troubleshooting/
   - /security_platform/cloud_security_management/troubleshooting/
@@ -9,8 +8,6 @@ further_reading:
   tag: "Documentation"
   text: "Troubleshooting CSM Vulnerabilities"
 ---
-
-## Overview
 
 If you experience issues with Cloud Security Management (CSM) Threats, use the following troubleshooting guidelines. If you need further assistance, contact [Datadog support][1].
 
@@ -84,6 +81,88 @@ datadog:
 ```bash
 DD_RUNTIME_SECURITY_CONFIG_NETWORK_ENABLED=false
 ```
+## Disable CSM Threats
+
+To disable CSM Threats, follow the steps for your Agent platform.
+
+### Helm
+
+In the Helm `values.yaml`, set `securityAgent.runtime` to `enabled: false` as follows:
+
+{{< code-block lang="yaml" filename="values.yaml" disable_copy="false" collapsible="true" >}}
+
+# values.yaml file
+datadog:
+
+# Set to false to Disable CWS
+securityAgent:
+  runtime:
+    enabled: false
+{{< /code-block >}}
+
+### Daemonset/Docker
+
+Apply the following environment variable change to both the System Probe and the Security Agent deployment for a Daemonset:
+
+{{< code-block lang="json" filename="daemon.json" disable_copy="false" collapsible="true" >}}
+
+DD_RUNTIME_SECURITY_CONFIG_ENABLED=false
+{{< /code-block >}}
+
+### Host
+
+Modify the `system-probe.yaml` and `security-agent.yaml` to disable the runtime config:
+
+1. Disable CSM in `/etc/datadog-agent/system-probe.yaml`. Ensure that `runtime_security_config` is set to `enabled: false`:
+    {{< code-block lang="yaml" filename="system-probe.yaml" disable_copy="false" collapsible="true" >}}
+
+    ##########################################
+    ## Security Agent Runtime Configuration ##
+    ##                                      ##
+    ## Settings to send logs to Datadog are ##
+    ## fetched from section `logs_config`   ##
+    ## in datadog-agent.yaml                ##
+    ##########################################
+
+    runtime_security_config:
+    ## @param enabled - boolean - optional - default: false
+    ## Set to true to enable full CSM.
+    #
+    enabled: false
+
+    ## @param fim_enabled - boolean - optional - default: false
+    ## Set to true to only enable the File Integrity Monitoring feature.
+    # fim_enabled: false
+
+    ## @param socket - string - optional - default: /opt/datadog-agent/run/runtime-security.sock
+    ## The full path of the unix socket where the security runtime module is accessed.
+    #
+    # socket: /opt/datadog-agent/run/runtime-security.sock
+    {{< /code-block >}}
+2. Disable CSM in `/etc/datadog-agent/security-agent.yaml`. Ensure that `runtime_security_config` is set to `enabled: false`:
+    {{< code-block lang="yaml" filename="security-agent.yaml" disable_copy="false" collapsible="true" >}}
+
+    ##########################################
+    ## Security Agent Runtime Configuration ##
+    ##                                      ##
+    ## Settings to send logs to Datadog are ##
+    ## fetched from section `logs_config`   ##
+    ## in datadog-agent.yaml                ##
+    ##########################################
+
+    runtime_security_config:
+    ## @param enabled - boolean - optional - default: false
+    ## Set to true to enable the Security Runtime Module.
+    #
+    enabled: false
+
+    ## @param socket - string - optional - default: /opt/datadog-agent/run/runtime-security.sock
+    ## The full path of the unix socket where the security runtime module is accessed.
+    #
+    # socket: /opt/datadog-agent/run/runtime-security.sock
+    {{< /code-block >}}
+3. Restart your agents.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}

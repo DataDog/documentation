@@ -8,7 +8,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/monitor-snmp-with-datadog/
   tag: 블로그
   text: Datadog으로 SNMP 모니터링하기
-kind: 설명서
 title: NDM 프로필
 ---
 

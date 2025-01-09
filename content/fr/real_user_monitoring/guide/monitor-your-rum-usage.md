@@ -11,7 +11,7 @@ further_reading:
 - link: /monitors/
   tag: Documentation
   text: En savoir plus sur les monitors
-kind: guide
+
 title: Surveiller votre utilisation du RUM
 ---
 

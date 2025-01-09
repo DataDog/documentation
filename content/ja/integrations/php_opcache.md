@@ -17,13 +17,14 @@ assets:
     source_type_id: 10141
     source_type_name: PHP OPcache
   monitors:
-    '[php_opcache] Cache Full has been detected': assets/monitors/php-opcache_expunges.json
+    OPcache is full: assets/monitors/php-opcache_expunges.json
 author:
   homepage: https://github.com/DataDog/integrations-extras
   name: コミュニティ
   sales_email: noname@withgod.jp
   support_email: noname@withgod.jp
 categories: []
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/php_opcache/README.md
 display_on_public_website: true
@@ -33,7 +34,6 @@ integration_id: php-opcache
 integration_title: PHP OPcache
 integration_version: 0.0.1
 is_public: true
-kind: integration
 manifest_version: 2.0.0
 name: php_opcache
 public_title: PHP OPcache
@@ -48,6 +48,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::macOS
   - Supported OS::Windows
+  - Offering::Integration
   configuration: README.md#Setup
   description: PHP OPcache バイトコードキャッシュシステムを監視します。
   media: []
@@ -63,11 +64,11 @@ tile:
 
 このチェックは、Datadog Agent を通じて [PHP OPcache][1] を監視します。
 
-## 計画と使用
+## セットアップ
 
 ホストで実行されている Agent 用にこのチェックをインストールおよび構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][2]のガイドを参照してこの手順を行ってください。
 
-### インフラストラクチャーリスト
+### インストール
 
 `php_opcache` チェックをホストにインストールするには
 
@@ -102,7 +103,7 @@ Alias /opcache-status /opt/datadog-agent/embedded/lib/python3.8/site-packages/da
 </Location>
 ```
 
-### ブラウザトラブルシューティング
+### 構成
 
 1. `php_opcache` のパフォーマンスデータの収集を開始するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `php_opcache.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル `php_opcache.d/conf.yaml` ファイル][6]を参照してください。
     ```
@@ -115,21 +116,21 @@ Alias /opcache-status /opt/datadog-agent/embedded/lib/python3.8/site-packages/da
 
 [Agent の status サブコマンドを実行][8]し、Checks セクションの `php_opcache` を探します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "php_opcache" >}}
 
 
-### ヘルプ
+### イベント
 
 PHP OPcache インテグレーションには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 {{< get-service-checks-from-git "php_opcache" >}}
 
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][11]までお問合せください。
 

@@ -23,6 +23,7 @@ author:
   support_email: brent@bmontague.com
 categories:
 - ログの収集
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/resin/README.md
 display_on_public_website: true
@@ -32,7 +33,6 @@ integration_id: resin
 integration_title: Resin
 integration_version: 1.0.0
 is_public: true
-kind: integration
 manifest_version: 2.0.0
 name: resin
 public_title: Resin
@@ -48,6 +48,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: Resin 内のスレッドプールと接続プールの設定を追跡
   media: []
@@ -63,13 +64,13 @@ tile:
 
 このチェックは、Datadog Agent を通じて [Resin][1] を監視します。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 Resin チェックは [Datadog Agent][2] パッケージに含まれていないため、お客様自身でインストールする必要があります。
 
-### ブラウザトラブルシューティング
+### 構成
 
 1. 以下の JVM 引数を追加して [Resin のデフォルトサーバー][3]を構成し、JMX を有効にします。
 
@@ -88,7 +89,7 @@ Resin チェックは [Datadog Agent][2] パッケージに含まれていない
 
 [Agent の status サブコマンドを実行][5]し、Checks セクションで `resin` を探します。
 
-### 収集データ
+### ログ収集
 
 Linux プラットフォームの場合は、`/etc/datadog-agent/datadog.yaml` で Datadog Agent のログ収集を有効にします。その他のプラットフォームの場合は、[Agent コンフィギュレーションファイルガイド][6]を参照し、コンフィギュレーションファイルの場所を調べてください。
 
@@ -104,21 +105,21 @@ logs_enabled: true
         source: resin
     ```
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "resin" >}}
 
 
-### ヘルプ
+### イベント
 
 Resin には、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 {{< get-service-checks-from-git "resin" >}}
 
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
 

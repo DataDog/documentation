@@ -1,24 +1,27 @@
 ---
-title: Calculer votre score Apdex et des indicateurs de performance personnalisés avec les données RUM
-kind: guide
-description: Guide pour calculer votre score Apdex et des indicateurs de performance personnalisés avec les données RUM
+description: Guide pour calculer votre score Apdex et des indicateurs de performance
+  personnalisés avec les données RUM
 further_reading:
-  - link: /tracing/guide/configure_an_apdex_for_your_traces_with_datadog_apm
-    tag: Documentation
-    text: Configurer un score Apdex par service
-  - link: /real_user_monitoring/explorer
-    tag: Documentation
-    text: Dashboards RUM
-  - link: /real_user_monitoring/browser/data_collected
-    tag: Documentation
-    text: Données RUM recueillies (Browser)
-  - link: /real_user_monitoring/android/data_collected
-    tag: Documentation
-    text: Données RUM recueillies (Android)
-  - link: /real_user_monitoring/ios/data_collected
-    tag: Documentation
-    text: Données RUM recueillies (iOS)
+- link: /tracing/guide/configure_an_apdex_for_your_traces_with_datadog_apm
+  tag: Documentation
+  text: Configurer un score Apdex par service
+- link: /real_user_monitoring/explorer
+  tag: Documentation
+  text: Dashboards RUM
+- link: /real_user_monitoring/browser/data_collected
+  tag: Documentation
+  text: Données RUM recueillies (Browser)
+- link: /real_user_monitoring/android/data_collected
+  tag: Documentation
+  text: Données RUM recueillies (Android)
+- link: /real_user_monitoring/ios/data_collected
+  tag: Documentation
+  text: Données RUM recueillies (iOS)
+
+title: Calculer votre score Apdex et des indicateurs de performance personnalisés
+  avec les données RUM
 ---
+
 ## Présentation
 
 Datadog recueille des événements Real User Monitoring (RUM) depuis les SDK RUM Browser et Mobile, que vous pouvez utiliser pour créer des graphiques rapides et calculer des indicateurs de performance tels que le score Apdex.
@@ -58,7 +61,7 @@ L'exemple ci-dessous permet de calculer un score Apdex en utilisant la métrique
 
 1. Pour créer la requête `b`, cliquez sur **+ Add Query**.
 2. Sélectionnez `RUM` comme source de données pour la requête `b` et saisissez `@view.largest_contentful_paint:[2s TO 8s]`.
-3. Appuyez sur Entrée ou cliquez sur **Update query** dans le menu déroulant. La requête `Largest Contentful Paint:[2s - 3s]` apparaît à proximité de `RUM` pour la requête `b`.
+3. Appuyez sur Entrée ou cliquez sur **Update query** dans le menu déroulant. La requête `Largest Contentful Paint:[2s - 8s]` apparaît à proximité de `RUM` pour la requête `b`.
 
 #### Requête C
 
@@ -144,7 +147,7 @@ Dans l'exemple qui précède, le score Apdex prend en compte les événements RU
 Vous pouvez également calculer d'autres scores Apdex à l'aide des méthodes suivantes :
 
 - Pour visualiser l'évolution d'un score Apdex dans le temps, sélectionnez `Timeseries` au lieu de `Query Value` dans **Select your visualization**.
-- Pour calculer le score Apdex d'une application spécifique, ajoutez une requête `@application.id` supplémentaire et mettez à jour votre formule.
+- Pour calculer le score Apdex d'une application spécifique, ajoutez une requête `@application.name` supplémentaire et mettez à jour votre formule.
 - Pour calculer le score Apdex à partir d'une autre métrique de performance RUM, telle que First Contentful Paint, remplacez `@view.LargestContentfulPaint` par `@view.FirstContentfulPaint` dans les requêtes.
 
 Pour calculer d'autres indicateurs de performance pour vos applications, déterminez les points de données dont vous avez besoin ainsi que les événements RUM à prendre en compte avant de [créer un graphique rapide](#creer-un-graphique-rapide).

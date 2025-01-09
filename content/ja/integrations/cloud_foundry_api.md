@@ -22,6 +22,7 @@ author:
 categories:
 - cloud
 - orchestration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/cloud_foundry_api/README.md
 display_on_public_website: true
@@ -29,9 +30,8 @@ draft: false
 git_integration_title: cloud_foundry_api
 integration_id: cloud-foundry-api
 integration_title: Cloud Foundry API
-integration_version: 3.3.0
+integration_version: 5.0.0
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: cloud_foundry_api
 public_title: Cloud Foundry API
@@ -48,6 +48,7 @@ tile:
   - Supported OS::Windows
   - Category::Cloud
   - Category::Orchestration
+  - Offering::Integration
   configuration: README.md#Setup
   description: Cloud Foundry 監査イベントの収集。
   media: []
@@ -63,16 +64,16 @@ tile:
 
 このチェックは、[Cloud Foundry API][1] にクエリを実行して監査イベントを収集し、Agent 経由で Datadog に送信します。
 
-## 計画と使用
+## セットアップ
 
 ホストで実行されている Agent 用にこのチェックをインストールおよび構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][2]のガイドを参照してこの手順を行ってください。
 
-### インフラストラクチャーリスト
+### インストール
 
 Cloud Foundry API チェックは [Datadog Agent][3] パッケージに含まれています。
 サーバーに追加でインストールする必要はありません。
 
-### ブラウザトラブルシューティング
+### 構成
 
 1. Cloud Foundry API のデータを収集するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `cloud_foundry_api.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル cloud_foundry_api.d/conf.yaml][4] を参照してください。
 
@@ -82,21 +83,21 @@ Cloud Foundry API チェックは [Datadog Agent][3] パッケージに含まれ
 
 [Agent の status サブコマンドを実行][6]し、Checks セクションで `cloud_foundry_api` を探します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "cloud_foundry_api" >}}
 
 
-### ヘルプ
+### イベント
 
 Cloud Foundry API インテグレーションは、構成された監査イベントを収集します。
 
-### ヘルプ
+### サービスチェック
 {{< get-service-checks-from-git "cloud_foundry_api" >}}
 
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
 

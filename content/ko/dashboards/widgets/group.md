@@ -6,23 +6,27 @@ further_reading:
 - link: /dashboards/graphing_json/
   tag: 설명서
   text: JSON을 사용하여 대시보드 구축
-kind: 설명서
 title: 그룹 위젯
+widget_type: 그룹
 ---
 
-그룹 위젯을 사용하면 [타임보드][1]에 있는 유사한 그래프들을 함께 보관할 수 있습니다. 각 그룹에는 커스텀 헤더가 있고, 일대다 그래프를 보유할 수 있으며, 접을 수도 있습니다.
+## 개요
+<div class="alert alert-info">스크린보드 위젯은 그룹에 배치할 수 없습니다. </a></div>
 
-{{< img src="dashboards/widgets/group/group.mp4" alt="그룹 위젯" video="true" >}}
+그룹 위젯을 사용하면 대시보드에 유사한 그래프들을 함께 보관할 수 있습니다. 각 그룹에는 커스텀 헤더가 있고, 접어서 축소할 수도 있습니다. 그룹을 사용하여 대시보드의 위젯을 구성해 보세요.
 
-## 구성
+## 설정
 
-그룹의 오른쪽 상단 모서리에 있는 톱니바퀴 아이콘을 사용하여 그룹 이름을 선택하세요.
+1. 대시보드에 위젯을 여러 개 추가합니다.
+2. 클릭 앤 드래그하여 위젯을 여러 개 선택하거나 Shift 키를 누른 상태에서 클릭합니다.
+3. **그룹** 옵션을 클릭합니다.
+  {{< img src="dashboards/widgets/group/widget-group-button.png" alt="위젯을 여러 개 선택한 후에 표시되는 그룹 옵션" style="width:100%;" >}}
+4. 그룹 오른쪽 상단의 연필 아이콘을 클릭하여 이름을 선택하고 그룹에 스타일을 적용합니다.
 
 ## API
+<div class="alert alert-info">스크린보드 위젯은 그룹에 배치할 수 없습니다. </a></div>
 
-이 위젯은 **대시보드 API**와 함께 사용할 수 있습니다. 자세한 내용은 [대시보드 API 가이드][2]를 참조하세요.
-
-변경 위젯의 전용 [위젯 JSON 스키마 정의][3]는 다음과 같습니다.
+이 위젯은 **[대시보드 API][2]**와 함께 사용할 수 있습니다. [위젯 JSON 스키마 정의][3]에 대한 다음 표를 참조하세요.
 
 {{< dashboards-widgets-api >}}
 
@@ -31,5 +35,5 @@ title: 그룹 위젯
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ko/dashboards/#timeboards
-[2]: /ko/api/v1/dashboards/
+[2]: /ko/api/latest/dashboards/
 [3]: /ko/dashboards/graphing_json/widget_json/

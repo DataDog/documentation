@@ -4,11 +4,10 @@ further_reading:
 - link: agent/basic_agent_usage/
   tag: 설명서
   text: Agent 기본 사용법
-kind: 설명서
 title: 지원되는 플랫폼
 ---
 
-Datadog Agent는 널리 사용되는 다양한 운영 체제 및 플랫폼에서 지원됩니다. 해당 운영 체제가 아래 목록에 없으면 [소스 설치][1]가 적합할 수 있습니다.
+Datadog Agent는 널리 사용되는 다양한 운영 체제 및 플랫폼에서 지원됩니다. 운영 체제가 아래 목록에 없으면 [소스 설치][1]가 적합할 수 있습니다.
 
 {{< tabs >}}
 {{% tab "Linux" %}}
@@ -17,11 +16,11 @@ Datadog Agent는 널리 사용되는 다양한 운영 체제 및 플랫폼에서
 
 <table>
   <thead>
-    <th>운영 시스템</th>
-    <th>OS 버전</th>
+    <th>운영 체제</th>
+    <th>OS 버전 </th>
     <th>Agent 5 버전</th>
-    <th>Agent 6 버전</th>
-    <th>Agent 7 버전</th>
+    <th>Agent 6 버전 </th>
+    <th>Agent 7 버전 </th>
   </thead>
   <tr>
     <th rowspan='3'><a href='/agent/basic_agent_usage/amazonlinux/'>Amazon Linux</a></th>
@@ -82,7 +81,8 @@ Datadog Agent는 널리 사용되는 다양한 운영 체제 및 플랫폼에서
     <td><i class='icon-check-bold'></td>
   </tr>
   <tr>
-    <th rowspan='2'><a href='/agent/basic_agent_usage/redhat/'>RedHat /<br>CentOS<br></a></th>
+    <th rowspan='3'><a href='/agent/basic_agent_usage/redhat/'>RedHat/<br>CentOS/</a><br>
+    <a href="/agent/basic_agent_usage/oracle">Oracle Linux</a><br></th>
     <td>5.0</td>
     <td><i class='icon-check-bold'></td>
     <td></td>
@@ -91,6 +91,12 @@ Datadog Agent는 널리 사용되는 다양한 운영 체제 및 플랫폼에서
   <tr>
     <td>>= 6.0</td>
     <td><i class='icon-check-bold'></td>
+    <td><= 6.51.1</td>
+    <td><= 7.51.1</td>
+  </tr>
+  <tr>
+    <td>>= 7.0</td>
+    <td></td>
     <td><i class='icon-check-bold'></td>
     <td><i class='icon-check-bold'></td>
   </tr>
@@ -137,15 +143,15 @@ Datadog Agent는 널리 사용되는 다양한 운영 체제 및 플랫폼에서
   </tr>
 </table>
 
-확인 표시 ({{< X >}})는 모든 부 버전과 패치 버전이 지원됨을 나타냅니다.
+확인 표시({{< X >}})가 있으면 모든 부 버전과 패치 버전을 지원합니다.
 
 ## 64-BIT ARM V8
 
 <table>
   <thead>
-    <th>운영 시스템</th>
+    <th>운영 체제 </th>
     <th>OS 버전</th>
-    <th>Agent 6 버전</th>
+    <th>Agent 6 버전 </th>
     <th>Agent 7 버전</th>
   </thead>
   <tr>
@@ -177,7 +183,8 @@ Datadog Agent는 널리 사용되는 다양한 운영 체제 및 플랫폼에서
     <td>>= 7.16.0</td>
   </tr>
   <tr>
-    <th><a href='/agent/basic_agent_usage/redhat/'>RedHat /<br>CentOS<br></a></th>
+    <th><a href='/agent/basic_agent_usage/redhat/'>RedHat /<br>CentOS/</a><br>
+    <a href='/agent/basic_agent_usage/oracle/'>Oracle Linux<br></a></th>
     <td>>= 8.0</td>
     <td>>= 6.16.0</td>
     <td>>= 7.16.0</td>
@@ -203,28 +210,41 @@ Datadog Agent는 널리 사용되는 다양한 운영 체제 및 플랫폼에서
 [7]: /ko/agent/basic_agent_usage/fedora/
 
 {{% /tab %}}
-
 {{% tab "Windows" %}}
 
 <table>
   <thead>
     <th>운영 시스템</th>
     <th>OS 버전</th>
-    <th>Agent 5 버전</th>
-    <th>Agent 6 버전</th>
-    <th>Agent 7 버전</th>
+    <th>에이전트 5 버전</th>
+    <th>에이전트 6 버전</th>
+    <th>에이전트 7 버전</th>
     <th>참고</th>
   </thead>
   <tr>
-    <th rowspan=2><a href='/agent/basic_agent_usage/windows/'>Windows Server</a></th>
+    <th rowspan=4><a href='/agent/basic_agent_usage/windows/'>Windows 서버</a></th>
     <td>2008 R2</td>
     <td><i class='icon-check-bold'></td>
-    <td><= 6.45.1 </td>
+    <td><= 6.45.1</td>
     <td><= 7.45.1</td>
-    <td>서버 2008 R2는 <a href="https://github.com/golang/go/issues/24489">클럭 드리프트 및 Go와 관련된 알려진 문제</a>의 영향을 받음.</td>
+    <td>서버 2008 R2에는 <a href="https://github.com/golang/go/issues/24489">시간 불일치와 Go와 관련해 알려진 문제가 있습니다</a>.</td>
   </tr>
   <tr>
-    <td>>= 2012</td>
+    <td>2012</td>
+    <td></td>
+    <td><= 6.46.0</td>
+    <td><= 7.46.0</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>2012 R2</td>
+    <td></td>
+    <td><= 6.49.0</td>
+    <td><= 7.49.0</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>>= 2016</td>
     <td></td>
     <td><i class='icon-check-bold'></td>
     <td><i class='icon-check-bold'></td>
@@ -232,17 +252,17 @@ Datadog Agent는 널리 사용되는 다양한 운영 체제 및 플랫폼에서
   </tr>
   <tr>
     <td rowspan=4>Windows</td>
-    <td>>= 7</td>
+    <td>7</td>
     <td><i class='icon-check-bold'></td>
     <td></td>
     <td></td>
     <td></td>
   </tr>
   <tr>
-    <td>>= 8.1</td>
+    <td>8.1</td>
     <td></td>
-    <td><i class='icon-check-bold'></td>
-    <td><i class='icon-check-bold'></td>
+    <td><= 6.46.0</td>
+    <td><= 7.46.0</td>
     <td></td>
   </tr>
   <tr>
@@ -261,7 +281,11 @@ Datadog Agent는 널리 사용되는 다양한 운영 체제 및 플랫폼에서
   </tr>
 </table>
 
-확인 표시 ({{< X >}})는 모든 부 버전과 패치 버전이 지원됨을 나타냅니다.
+확인 표시({{< X >}})는 모든 부 버전과 패치 버전을 지원함을 나타냅니다.
+
+특정 버전의 윈도우즈(Windows) 에이전트를 설치하려면 [설치 관리자 목록][8]를 참조하세요.
+
+[8]: https://ddagent-windows-stable.s3.amazonaws.com/installers_v2.json
 
 {{% /tab %}}
 {{% tab "macOS" %}}
@@ -283,22 +307,22 @@ Datadog Agent는 널리 사용되는 다양한 운영 체제 및 플랫폼에서
 
 {{% /tab %}}
 
-{{% tab "클라우드 및 컨테이너" %}}
+{{% tab "Cloud and containers" %}}
 
-## 64-BIT X86 지원
+## 64-BIT X86 지원 
 
 | Agent | [Docker][5] | [Kubernetes][6] | [Azure Stack HCI OS][7]  |
 |-------|-------------|-----------------|--------------------------|
 | 5 | >= 1.14 | 1.3 - 1.8 ||
 | 6 | >= 1.14 | >= 1.3 | 모든 버전 |
-| 7 | >= 1.14 | >= 1.3 | 모든 버전 |
+| 7 | >= 1.14 | >= 1.3 | 모든 버전  |
 
 
 ## 64-BIT ARM V8 지원
 
-Agent 6 및 7은 다음과 같은 64-BIT ARM V8 플랫폼을 지원합니다:
+Agent 6 및 7은 다음과 같은 64-BIT ARM V8 플랫폼을 지원합니다.
 
-| 플랫폼    | 지원되는 버전 | 64-BIT ARM V8 지원 | 64-BIT X86 지원 |
+| 플랫폼    | 지원 버전 | 64-BIT ARM V8 지원 | 64-BIT X86 지원  |
 |-------------|--------------------|-----------------------|--------------------|
 | [Docker][5] | >= 1.14     | <i class='icon-check-bold'> | <i class='icon-check-bold'> |
 | [Kubernetes][6] | >= 1.3   | <i class='icon-check-bold'> | <i class='icon-check-bold'> |
@@ -312,7 +336,7 @@ Agent 6 및 7은 다음과 같은 64-BIT ARM V8 플랫폼을 지원합니다:
 
 {{% tab "Unix" %}}
 
-Agent 6 및 7은 다음 [AIX][1] 버전을 지원합니다:
+Agent 6 및 7은 다음 [AIX][1] 버전을 지원합니다.
 
 - 6.1 TL9 SP6
 - 7.1 TL5 SP3
@@ -326,6 +350,5 @@ Agent 6 및 7은 다음 [AIX][1] 버전을 지원합니다:
 ## 참고 자료
 
 {{< partial name="whats-next/whats-next.html" >}}
-
 
 [1]: /ko/agent/basic_agent_usage/source/

@@ -33,6 +33,7 @@ author:
   support_email: support@agora.io
 categories:
 - コラボレーション
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/agora_analytics/README.md
 display_on_public_website: true
@@ -42,7 +43,6 @@ integration_id: agora-analytics
 integration_title: Agora Analytics
 integration_version: ''
 is_public: true
-kind: integration
 manifest_version: 2.0.0
 name: agora_analytics
 public_title: Agora Analytics
@@ -80,21 +80,21 @@ Agora Analytics は、音声やビデオの使用状況、品質、パフォー�
 
 このインテグレーションは、使用率、品質、パフォーマンスなどのメトリクスを Datadog アカウントに直接送信します。
 
-## 計画と使用
+## セットアップ
 
 Agora Analytics Datadog Connector の構成については、Agora Analytics インテグレーション[ドキュメント][1]を参照してください。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 
 Agora Analytics は Datadog にメトリクスを送信します。
 
-### ヘルプ
+### イベント
 
 Agora Analytics には、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 
 Agora Analytics には、サービスのチェック機能は含まれません。
 

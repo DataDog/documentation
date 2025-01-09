@@ -1,6 +1,5 @@
 ---
 title: Monitor Guides
-kind: guide
 private: true
 disable_toc: true
 cascade:
@@ -30,20 +29,24 @@ cascade:
 
 {{< whatsnext desc="API:" >}}
     {{< nextlink href="monitors/guide/monitor_api_options" >}}Monitor API options{{< /nextlink >}}
+    {{< nextlink href="monitors/guide/on_missing_data" >}}Migrating to On Missing Data Configuration{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="General Guides:" >}}
+    {{< nextlink href="/monitors/guide/monitor_best_practices" >}}Monitor Best Practices{{< /nextlink >}}
     {{< nextlink href="monitors/guide/how-to-set-up-rbac-for-monitors" >}}How to set up RBAC for monitors{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/synthetic-test-monitors" >}}How to create monitors in synthetic tests{{< /nextlink >}}
     {{< nextlink href="monitors/guide/non_static_thresholds" >}}How to monitor non-static thresholds{{< /nextlink >}}
     {{< nextlink href="monitors/guide/anomaly-monitor" >}}Anomaly monitors{{< /nextlink >}}
-    {{< nextlink href="monitors/guide/change-alert" >}}Change Alert monitors{{< /nextlink >}}
     {{< nextlink href="monitors/guide/monitor-ephemeral-servers-for-reboots" >}}Monitor ephemeral servers for reboots{{< /nextlink >}}
     {{< nextlink href="monitors/guide/how-to-update-anomaly-monitor-timezone" >}}How to update an anomaly detection monitor to account for local timezone{{< /nextlink >}}
     {{< nextlink href="monitors/guide/history_and_evaluation_graphs" >}}Monitor History and Evaluation Graph{{< /nextlink >}}
     {{< nextlink href="monitors/guide/why-did-my-monitor-settings-change-not-take-effect" >}}Monitor settings changes not taking effect{{< /nextlink >}}
     {{< nextlink href="monitors/guide/integrate-monitors-with-statuspage" >}}Integrate monitors with Statuspage{{< /nextlink >}}
     {{< nextlink href="monitors/guide/github_gating" >}}Gating your GitHub Actions Deployments with Datadog Monitors{{< /nextlink >}}
+    {{< nextlink href="monitors/guide/monitoring-available-disk-space" >}}Monitoring Available Disk Space{{< /nextlink >}}
+    {{< nextlink href="monitors/guide/on_missing_data" >}}Migrating to On Missing Data Configuration{{< /nextlink >}}
+    {{< nextlink href="monitors/guide/composite_use_cases" >}}Composite monitor use cases{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Querying:" >}}

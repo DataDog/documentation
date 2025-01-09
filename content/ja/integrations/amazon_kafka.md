@@ -25,6 +25,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - AWS
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/amazon_msk/README.md
 display_on_public_website: true
@@ -32,9 +33,8 @@ draft: false
 git_integration_title: amazon_kafka
 integration_id: amazon-kafka
 integration_title: Amazon MSK (Agent)
-integration_version: 4.6.0
+integration_version: 6.0.0
 is_public: true
-kind: integration
 manifest_version: 2.0.0
 name: amazon_kafka
 public_title: Amazon MSK (Agent)
@@ -50,10 +50,15 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
+  - 製品::Data Streams Monitoring
   configuration: README.md#Setup
   description: Amazon MSK クラスターの健全性とパフォーマンスを監視。
   media: []
   overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/monitor-amazon-msk/
   support: README.md#Support
   title: Amazon MSK (Agent)
 ---
@@ -67,7 +72,7 @@ Amazon Managed Streaming for Apache Kafka (MSK) は、Apache Kafka を使用し�
 
 このインテグレーションからメトリクスを収集する方法は、[Datadog Agent](#setup) を使用する方法と、[クローラー][1]を使用して CloudWatch からメトリクスを収集する方法の 2 通りあります。
 
-## 計画と使用
+## セットアップ
 
 Agent チェックは、Datadog Agent を通じて、Amazon Managed Streaming for Apache Kafka ([Amazon MSK][2]) を監視します。
 
@@ -75,14 +80,14 @@ Agent チェックは、Datadog Agent を通じて、Amazon Managed Streaming fo
 
 この OpenMetrics ベースのインテグレーションには、最新モード (`use_openmetrics`: true) とレガシーモード (`use_openmetrics`: false) があります。すべての最新機能を利用するために、Datadog は最新モードを有効にすることを推奨します。詳しくは、[OpenMetrics ベースのインテグレーションにおける最新バージョニングとレガシーバージョニング][4]を参照してください。
 
-### インフラストラクチャーリスト
+### インストール
 
 1. まだ作成していない場合は、[クライアントマシンを作成します][5]。
 2. クライアントマシンに権限ポリシー ([arn:aws:iam::aws:policy/AmazonMSKReadOnlyAccess][7]) が[付与][6]されている、または同等の[資格情報][8]が利用可能であることを確認します。
 3. MSK 側で [Prometheus によるオープンモニタリング][9]を有効にし、JmxExporter および NodeExporter を有効にします。
 4. 作成したクライアントマシンに [Datadog Agent][10] をインストールします。
 
-### ブラウザトラブルシューティング
+### 構成
 
 1. Amazon MSK のパフォーマンスデータの収集を開始するには、Agent の構成ディレクトリのルートにある `conf.d/` フォルダーの `amazon_msk.d/conf.yaml` ファイルを編集します。
 
@@ -102,21 +107,21 @@ Agent チェックは、Datadog Agent を通じて、Amazon Managed Streaming fo
 
 [Agent の status サブコマンドを実行][15]し、Checks セクションで `amazon_msk` を探します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "amazon_kafka" >}}
 
 
-### ヘルプ
+### イベント
 
 Amazon MSK チェックには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 
 このインテグレーションによって提供されるサービスチェックのリストについては、[service_checks.json][17] を参照してください。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][18]までお問合せください。
 

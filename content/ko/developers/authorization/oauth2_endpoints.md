@@ -4,7 +4,6 @@ further_reading:
 - link: /developers/authorization/
   tag: 설명서
   text: OAuth2 인증에 대해 알아보기
-kind: 설명서
 title: OAuth2 인증 엔드포인트 레퍼런스
 ---
 {{< callout btn_hidden="true" >}}

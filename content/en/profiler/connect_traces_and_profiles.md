@@ -1,6 +1,5 @@
 ---
 title: Investigate Slow Traces or Endpoints
-kind: Documentation
 further_reading:
     - link: 'tracing'
       tag: 'Documentation'
@@ -17,17 +16,15 @@ aliases:
 
 If your application is showing performance problems in production, integrating distributed tracing with code stack trace benchmarks from profiling is a powerful way to identify the performance bottlenecks. Application processes that have both APM distributed tracing and continuous profiler enabled are automatically linked.
 
-You can move directly from span information to profiling data on the Code Hotspots tab, and find specific lines of code related to performance issues. Similarly, you can also debug slow and resource consuming endpoints directly in the Profiling UI.
+You can move directly from span information to profiling data on the **Profiles** tab, and find specific lines of code related to performance issues. Similarly, you can also debug slow and resource consuming endpoints directly in the Profiling UI.
 
-## Identify code hotspots in slow traces
-
-{{< img src="profiler/code_hotspots_tab.png" alt="Code Hotspots tab shows profiling information for a APM trace span" >}}
+## Identify code performance issues in slow traces
 
 ### Prerequisites
 
 {{< programming-lang-wrapper langs="java,python,go,ruby,nodejs,dotnet,php" >}}
 {{< programming-lang lang="java" >}}
-Code Hotspots identification is enabled by default when you [turn on profiling for your Java service][1] on Linux and macOS. 
+The Trace to Profiling integration is enabled by default when you [turn on profiling for your Java service][1] on Linux and macOS.
 The feature is not available on Windows.
 
 For manually instrumented code, continuous profiler requires scope activation of spans:
@@ -51,40 +48,29 @@ It's highly recommended to <a href="/profiler/enabling/java/?tab=datadog#require
 {{< /programming-lang >}}
 {{< programming-lang lang="python" >}}
 
-Code Hotspots identification is enabled by default when you [turn on profiling for your Python service][1].
-
-Requires `dd-trace-py` version 0.44.0+.
+The Trace to Profiling integration is enabled when you:
+- Upgrade `dd-trace-py` to version 2.12.0+, 2.11.4+, or 2.10.7+.
+- Set environment variable `DD_PROFILING_TIMELINE_ENABLED` to `true`
 
 [1]: /profiler/enabling/python
 {{< /programming-lang >}}
 {{< programming-lang lang="ruby" >}}
 
-Code Hotspots identification is enabled by default when you [turn on profiling for your Ruby service][1].
-
-The new [timeline feature](#span-execution-timeline-view) (beta) is enabled by default in `dd-trace-rb` 1.21.1+.
-
-To additionally enable showing [GC in timeline](#span-execution-timeline-view):
-- set `DD_PROFILING_FORCE_ENABLE_GC=true`
+The Trace to Profiling integration is enabled by default when you [turn on profiling for your Ruby service][1] and update `dd-trace-rb` to 1.22.0+.
 
 [1]: /profiler/enabling/ruby
 {{< /programming-lang >}}
 {{< programming-lang lang="nodejs" >}}
 
-Code Hotspots identification is enabled by default when you [turn on profiling for your Node.js service][1] on Linux and macOS. The feature is not available on Windows.
+The Trace to Profiling integration is enabled by default when you [turn on profiling for your Node.js service][1] on Linux and macOS. The feature is not available on Windows.
 
-Requires `dd-trace-js` version 5.0.0+, 4.24.0+ or 3.45.0+.
-
-To enable the [timeline feature](#span-execution-timeline-view) (beta):
-- upgrade to `dd-trace-js` 5.1.0+, 4.25.0+, or 3.46.0+
-- set `DD_PROFILING_TIMELINE_ENABLED=1`
+Requires `dd-trace-js` 5.11.0+, 4.35.0+, and 3.56.0+.
 
 [1]: /profiler/enabling/nodejs
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
 
-Code Hotspots identification is enabled by default when you [turn on profiling for your Go service][1].
-
-To enable the new [timeline feature](#span-execution-timeline-view) (beta), set the environment variables below:
+The Trace to Profiling integration is enabled when you [turn on profiling for your Go service][1] and set the environment variables below:
 
 ```go
 os.Setenv("DD_PROFILING_EXECUTION_TRACE_ENABLED", "true")
@@ -96,11 +82,11 @@ Setting these variables will record up to 1 minute (or 5 MiB) of execution traci
 You can find this data:
 
 - In the [Profile List][3] by adding `go_execution_traced:yes` to your search query. Click on a profile to view the [Profile Timeline][4]. To go even deeper, download the profile and use `go tool trace` or [gotraceui][5] to view the contained `go.trace` files.
-- In the [Trace Explorer][6] by adding `@go_execution_traced:yes` (note the `@`) to your search query. Click on a span and then select the `Code Hotspots` tab to view the [Span Timeline](#span-execution-timeline-view).
+- In the [Trace Explorer][6] by adding `@go_execution_traced:yes` (note the `@`) to your search query. Click on a span and then select the **Profiles** tab to view the [Span Timeline](#span-execution-timeline-view).
 
 While recording execution traces, your application may observe an increase in CPU usage similar to a garbage collection. Although this should not have a significant impact for most applications, Go 1.21 includes [patches][7] to eliminate this overhead.
 
-This capability requires `dd-trace-go` version 1.37.0+ (1.52.0+ for timeline beta) and works best with Go version 1.18 or later (1.21 or later for timeline beta).
+This capability requires `dd-trace-go` version 1.37.0+ (1.52.0+ for timeline view) and works best with Go version 1.18 or later (1.21 or later for timeline view).
 
 [1]: /profiler/enabling/go
 [2]: https://github.com/DataDog/dd-trace-go/issues/2099
@@ -112,7 +98,7 @@ This capability requires `dd-trace-go` version 1.37.0+ (1.52.0+ for timeline bet
 {{< /programming-lang >}}
 {{< programming-lang lang="dotnet" >}}
 
-Code Hotspots identification is enabled by default when you [turn on profiling for your .NET service][1].
+The Trace to Profiling integration is enabled by default when you [turn on profiling for your .NET service][1].
 
 This capability requires `dd-trace-dotnet` version 2.30.0+.
 
@@ -120,70 +106,21 @@ This capability requires `dd-trace-dotnet` version 2.30.0+.
 {{< /programming-lang >}}
 {{< programming-lang lang="php" >}}
 
-Code Hotspots identification is enabled by default when you [turn on profiling for your PHP service][1].
-
-Requires `dd-trace-php` version 0.71+.
-
-To enable the [timeline feature](#span-execution-timeline-view) (beta):
-- Upgrade to `dd-trace-php` version 0.98+.
-- Set the environment variable `DD_PROFILING_TIMELINE_ENABLED=1` or INI setting `datadog.profiling.timeline_enabled=1`
+The Trace to Profiling integration is enabled when you [turn on profiling for your PHP service][1] and meet the following criteria:
+- You are on `dd-trace-php` version 0.98+
+- You set the environment variable `DD_PROFILING_TIMELINE_ENABLED=1` or INI setting `datadog.profiling.timeline_enabled=1`
 
 [1]: /profiler/enabling/php
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
-### Span execution breakdown
-
-From the view of each trace, the Code Hotspots tab highlights profiling data scoped on the selected spans.
-
-The values on the left side represent the time spent in that method call during the selected span. Depending on the runtime and language, the categories vary:
-{{< programming-lang-wrapper langs="java,python,go,ruby,nodejs,dotnet,php" >}}
-{{< programming-lang lang="java" >}}
-- **CPU** shows the time taken executing CPU tasks.
-- **Synchronization** shows the time spent waiting on monitors, the time a thread is sleeping and the time it is parked.
-- **VM operations** shows the time taken waiting for VM operations (for example, garbage collections, compilation, safepoints, and heap dumps).
-- **File I/O** shows the time taken waiting for a disk read/write operation to execute.
-- **Socket I/O** shows the time taken waiting for a network read/write operation to execute.
-- **Monitor enter** shows the time a thread is blocked on a lock.
-- **Uncategorized** shows the time taken to execute the span that cannot be placed into one of the previous categories.
-{{< /programming-lang >}}
-{{< programming-lang lang="python" >}}
-- **CPU** shows the time taken executing CPU tasks.
-- **Lock Wait** shows the time a thread is blocked on a lock.
-- **Uncategorized** shows the time taken to execute the span that cannot be placed into one of the previous categories.
-{{< /programming-lang >}}
-{{< programming-lang lang="ruby" >}}
-- **CPU** shows the time taken executing CPU tasks.
-- **Uncategorized** shows the time taken to execute the span that is not CPU execution.
-{{< /programming-lang >}}
-{{< programming-lang lang="nodejs" >}}
-- **CPU** shows the time taken executing CPU tasks. Only shown for profiles collected with the Node.js experimental CPU profiler.
-- **Uncategorized** shows the time taken to execute the span that is not CPU execution.
-{{< /programming-lang >}}
-{{< programming-lang lang="go" >}}
-- **CPU** shows the time taken executing CPU tasks.
-- **Off-CPU** shows the time taken to execute the span that is not CPU execution.
-{{< /programming-lang >}}
-{{< programming-lang lang="dotnet" >}}
-- **CPU** shows the time taken executing CPU tasks.
-- **Lock Wait** shows the time a thread is blocked on a lock.
-- **Uncategorized** shows the time taken to execute the span that cannot be placed into one of the previous categories.
-{{< /programming-lang >}}
-{{< programming-lang lang="php" >}}
-- **CPU** shows the time taken executing CPU tasks.
-- **Uncategorized** shows the time taken to execute the span that is not CPU execution.
-{{< /programming-lang >}}
-{{< /programming-lang-wrapper >}}
-
-Click the plus icon `+` to expand the stack trace to that method **in reverse order**. Hover over the value to see the percentage of time explained by category.
-
 ### Span execution timeline view
 
-{{< img src="profiler/code_hotspots_tab-timeline.png" alt="Code Hotspots tab has a timeline view that breakdown execution over time and threads" >}}
+{{< img src="profiler/profiles_tab.png" alt="Profiles tab has a timeline view that breaks down threads and execution over time" >}}
 
-The **Timeline** view surfaces time-based patterns and work distribution over the period of the span.
+The timeline view surfaces time-based patterns and work distribution over the period of the span.
 
-With the span **Timeline** view, you can:
+With the span timeline view, you can:
 
 - Isolate time-consuming methods.
 - Sort out complex interactions between threads.
@@ -191,7 +128,7 @@ With the span **Timeline** view, you can:
 
 Depending on the runtime and language, the lanes vary:
 
-{{< programming-lang-wrapper langs="java,go,ruby,nodejs,dotnet,php" >}}
+{{< programming-lang-wrapper langs="java,python,go,ruby,nodejs,dotnet,php" >}}
 {{< programming-lang lang="java" >}}
 Each lane represents a **thread**. Threads from a common pool are grouped together. You can expand the pool to view details for each thread.
 
@@ -200,6 +137,11 @@ Lanes on top are runtime activities that may add extra latency. They can be unre
 For additional information about debugging slow p95 requests or timeouts using the timeline, see the blog post [Understanding Request Latency with Profiling][1].
 
 [1]: https://www.datadoghq.com/blog/request-latency-profiling/
+{{< /programming-lang >}}
+{{< programming-lang lang="python" >}}
+See [prerequisites](#prerequisites) to learn how to enable this feature for Python.
+
+Each lane represents a **thread**. Threads from a common pool are grouped together. You can expand the pool to view details for each thread.
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
 Each lane represents a **goroutine**. This includes the goroutine that started the selected span, as well as any goroutines it created and their descendants. Goroutines created by the same `go` statement are grouped together. You can expand the group to view details for each goroutine.
@@ -230,7 +172,7 @@ Lanes on the top are garbage collector **runtime activities** that may add extra
 {{< programming-lang lang="php" >}}
 See [prerequisites](#prerequisites) to learn how to enable this feature for PHP.
 
-There is one lane for each PHP **thread**. In PHP NTS, this is one lane; in PHP ZTS, there is one lane per **thread**. Fibers that run in this **thread** are represented in the same lane.
+There is one lane for each PHP **thread** (in PHP NTS, this is only one lane). Fibers that run in this **thread** are represented in the same lane.
 
 Lanes on the top are runtime activities that may add extra latency to your request, due to file compilation and garbage collection.
 {{< /programming-lang >}}
@@ -240,7 +182,7 @@ Lanes on the top are runtime activities that may add extra latency to your reque
 
 {{< img src="profiler/view_profile_from_trace.png" alt="Opening a view of the profile in a flame graph" >}}
 
-For each type from the breakdown, click **Open in Profiling** to see the same data opened up in a new page. From there, you can change the visualization to a flame graph.
+From the timeline, click **Open in Profiling** to see the same data on a new page. From there, you can change the visualization to a flame graph.
 Click the **Focus On** selector to define the scope of the data:
 
 - **Span & Children** scopes the profiling data to the selected span and all descendant spans in the same service.
@@ -279,8 +221,6 @@ Requires `dd-trace-go` version 1.37.0+ and works best with Go version 1.18 or ne
 {{< programming-lang lang="ruby" >}}
 
 Endpoint profiling is enabled by default when you [turn on profiling for your Ruby service][1].
-
-Requires `dd-trace-rb` version 0.54.0+.
 
 [1]: /profiler/enabling/ruby
 {{< /programming-lang >}}

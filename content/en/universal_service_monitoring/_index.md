@@ -1,6 +1,5 @@
 ---
 title: Universal Service Monitoring
-kind: documentation
 aliases:
 - /tracing/universal_service_monitoring/
 further_reading:
@@ -22,6 +21,9 @@ further_reading:
 - link: "/tracing/services/services_map/"
   tag: "Documentation"
   text: "Read about the Service Map"
+- link: "https://www.datadoghq.com/blog/monitor-connection-churn-datadog/"
+  tag: "Blog"
+  text: "Best practices for monitoring and remediating connection churn"
 cascade:
     algolia:
         rank: 70
@@ -41,7 +43,7 @@ Universal Service Monitoring (USM) provides visibility into your service health 
 
 For information about supported platforms and protocols, and for instructions on getting started, read [Setting Up Universal Service Monitoring][7].
 
-<div class="alert alert-info"><strong>Beta: Additional protocols and encryption methods</strong><p>USM has beta support for discovering cloud services and for decoding additional protocols and traffic encryption methods. For more information and to request access to the private beta, read <a href="/universal_service_monitoring/additional_protocols/">Cloud Service Discovery and Additional Protocols</a>.</p></div>
+<div class="alert alert-info"><strong>Preview: Additional protocols and encryption methods</strong><p>USM are in Preview for discovering cloud services and for decoding additional protocols and traffic encryption methods. For more information and to request access, read <a href="/universal_service_monitoring/additional_protocols/">Cloud Service Discovery and Additional Protocols</a>.</p></div>
 
 ## Automatic service tagging
 

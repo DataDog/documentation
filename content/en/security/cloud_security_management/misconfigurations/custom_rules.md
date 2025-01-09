@@ -1,6 +1,5 @@
 ---
 title: Create Custom Rules
-kind: documentation
 aliases:
   - /security/cspm/custom_rules
   - /security/misconfigurations/custom_rules
@@ -20,10 +19,6 @@ cascade:
         rank: 30
         subcategory: Cloud Security Posture Management
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Cloud Security Management Misconfigurations is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
 
 ## Overview
 

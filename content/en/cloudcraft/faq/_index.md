@@ -1,6 +1,5 @@
 ---
 title: FAQ
-kind: guide
 ---
 
 {{< whatsnext desc="General:" >}}
@@ -12,11 +11,11 @@ kind: guide
     {{< nextlink href="cloudcraft/faq/why-cant-export-diagram-to-terraform">}}Why can't I export diagrams as Terraform code anymore?{{< /nextlink >}}
     {{< nextlink href="cloudcraft/faq/multiple-accounts-same-blueprint">}}Can I scan multiple accounts onto the same blueprint?{{< /nextlink >}}
     {{< nextlink href="cloudcraft/faq/how-cloudcraft-connects-to-aws">}}How does Cloudcraft connect to my AWS account?{{< /nextlink >}}
+    {{< nextlink href="cloudcraft/faq/how-cloudcraft-connects-to-azure">}}How does Cloudcraft connect to my Azure account?{{< /nextlink >}}
     {{< nextlink href="cloudcraft/faq/account-data-storage">}}Where is my data stored?{{< /nextlink >}}
     {{< nextlink href="cloudcraft/faq/error-429-too-many-requests">}}Why do I get error 429 Too Many Requests when using the API?{{< /nextlink >}}
     {{< nextlink href="cloudcraft/faq/cloudcraft-pro-demo">}}Can you give me a demo of the product?{{< /nextlink >}}
     {{< nextlink href="cloudcraft/faq/disable-google-sign-in">}}How do I disable Google Sign in?{{< /nextlink >}}
-    {{< nextlink href="cloudcraft/faq/schools-non-profit-organizations-discounts">}}Do you offer discounts for schools and non-profit organizations?{{< /nextlink >}}
     {{< nextlink href="cloudcraft/faq/govcloud-support">}}Is GovCloud supported?{{< /nextlink >}}
     {{< nextlink href="cloudcraft/faq/diagram-limitation">}}How many diagrams can I have on my account?{{< /nextlink >}}
     {{< nextlink href="cloudcraft/faq/what-happens-downgrade">}}Will I lose my diagrams if I downgrade?{{< /nextlink >}}

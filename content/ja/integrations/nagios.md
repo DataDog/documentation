@@ -3,6 +3,7 @@ app_id: nagios
 app_uuid: 7e61b923-1847-4c43-85cf-5f4c49ff4806
 assets:
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -15,9 +16,8 @@ assets:
     - nagios
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 3
     source_type_name: Nagios
-  logs:
-    source: nagios
   saved_views:
     nagios_processes: assets/saved_views/nagios_processes.json
 author:
@@ -27,7 +27,8 @@ author:
   support_email: help@datadoghq.com
 categories:
 - log collection
-- notification
+- notifications
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/nagios/README.md
 display_on_public_website: true
@@ -35,9 +36,8 @@ draft: false
 git_integration_title: nagios
 integration_id: nagios
 integration_title: Nagios
-integration_version: 1.12.1
+integration_version: 3.0.0
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: nagios
 public_title: Nagios
@@ -50,18 +50,23 @@ tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Category::ログの収集
-  - Category::通知
+  - Category::Notifications
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: Nagios からサービスフラップやホストアラートなどを Datadog イベントストリームに送信。
   media: []
   overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/nagios-monitoring
   support: README.md#Support
   title: Nagios
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ## 概要
@@ -83,16 +88,16 @@ Nagios が監視するインフラストラクチャーから Datadog にイベ�
 
 Nagios チェックは [Datadog Agent][1] パッケージに含まれています。Nagios サーバーに追加でインストールする必要はありません。
 
-### コンフィギュレーション
+### 構成
 
 ホストで実行中の Agent でこのチェックを構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[コンテナ化](#コンテナ化)セクションを参照してください。
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{% tab "ホスト" %}}
 
 #### ホスト
 
-ホストで実行中の Agent に対してこのチェックを構成するには:
+ホストで実行中の Agent に対してこのチェックを構成するには
 
 1. [Agent のコンフィギュレーションディレクトリ][1]のルートにある `conf.d/` フォルダーの `nagios.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル nagios.d/conf.yaml][2] を参照してください。
 
@@ -106,7 +111,7 @@ Nagios チェックは [Datadog Agent][1] パッケージに含まれていま�
 [4]: https://docs.datadoghq.com/ja/developers/metrics/custom_metrics/
 [5]: https://docs.datadoghq.com/ja/account_management/billing/custom_metrics/
 {{% /tab %}}
-{{% tab "Containerized" %}}
+{{% tab "コンテナ化" %}}
 
 #### コンテナ化
 
@@ -114,9 +119,9 @@ Nagios チェックは [Datadog Agent][1] パッケージに含まれていま�
 
 | パラメーター            | 値                                        |
 | -------------------- | -------------------------------------------- |
-| `<インテグレーション名>` | `nagios`                                     |
-| `<初期コンフィギュレーション>`      | 空白または `{}`                                |
-| `<インスタンスコンフィギュレーション>`  | `{&quot;nagios_conf&quot;: &quot;/etc/nagios3/nagios.cfg&quot;}` |
+| `<INTEGRATION_NAME>` | `nagios`                                     |
+| `<INIT_CONFIG>`      | 空白または `{}`                                |
+| `<INSTANCE_CONFIG>`  | `{&quot;nagios_conf&quot;: &quot;/etc/nagios3/nagios.cfg&quot;}` |
 
 **注**: コンテナ化された Agent から `/etc/nagios3/nagios.cfg` ファイルにアクセスして Datadog-Nagios インテグレーションを有効化できます。
 
@@ -134,7 +139,7 @@ Nagios チェックは [Datadog Agent][1] パッケージに含まれていま�
 
 デフォルトの構成では、Nagios チェックはメトリクスを収集しません。ただし、`collect_host_performance_data` や `collect_service_performance_data` を `True` に設定すると、チェックは Nagios パフォーマンスデータを監視し、それをゲージメトリクスとして Datadog に送信します。
 
-### ログの収集
+### ログ収集
 
 1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` ファイルでこれを有効にします。
 
@@ -169,13 +174,13 @@ Nagios チェックは [Datadog Agent][1] パッケージに含まれていま�
 - PROCESS_SERVICE_CHECK_RESULT
 - SERVICE DOWNTIME ALERT
 
-### サービスのチェック
+### サービスチェック
 
 Nagios チェックには、サービスのチェック機能は含まれません。
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][5]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
 
 ## その他の参考資料
 

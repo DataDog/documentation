@@ -40,7 +40,6 @@ integration_id: avmconsulting-workday
 integration_title: Workday
 integration_version: ''
 is_public: true
-kind: integration
 legal_terms:
   eula: assets/eula.pdf
 manifest_version: 2.0.0
@@ -93,18 +92,18 @@ tile:
 
 この Workday インテグレーションは、Workday におけるインテグレーションの状態を監視し、ジョブ実行の合計、失敗したジョブ実行、各ジョブの実行時間など、ジョブ実行に関する豊富なメトリクスを提供します。また、このインテグレーションは、ジョブ実行ログを取得し、各インテグレーションの状態について警告するモニターを提供します。
 
-### ログ管理
+### Monitors
 
 このインテグレーションには、以下の推奨モニターが含まれています。
 
 1. Connect to Workday: Workday への接続を監視します。
 2. Workday Integration Status: インテグレーションごとにグループ化され、最後の Workdayインテグレーションイベントの状態を確認するマルチモニターです。
 
-### ライブラリ
+### ダッシュボード
 
 このインテグレーションには、**Workday Integrations Trends** という名前のすぐに使えるダッシュボードが含まれており、Workday のジョブ実行の概要や、各 Workdayインテグレーションに構成されているモニターの状態を視覚的に確認することができます。
 
-### レート
+### ログ収集
 
 このインテグレーションは、Workday API を使用してインテグレーション実行のログを収集し、Datadog REST API を通じてそれらのログを Datadog に送信します。実行に関連するタグは、これらのログに動的に割り当てられます。
 
@@ -112,8 +111,8 @@ tile:
 
 サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから AVM Consulting にお問い合わせください。
 
- - メール: [integrations@avmconsulting.net][6] 
- - 電話: 855-AVM-0555 
+ - メール: [integrations@avmconsulting.net][6]
+ - 電話: 855-AVM-0555
 
 ### その他の参考資料
 

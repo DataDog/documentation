@@ -5,6 +5,7 @@ assets:
   dashboards:
     '[calico] dashboard overview': ./assets/dashboards/calico_overview.json
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -17,14 +18,13 @@ assets:
     - calico-node
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10236
     source_type_name: Calico
-  logs:
-    source: calico
   monitors:
-    '[calico] monitor dataplane failures': ./assets/monitors/dataplane_failures.json
-    '[calico] monitor ipsets error': ./assets/monitors/ipset_error.json
-    '[calico] monitor iptables restore errors': ./assets/monitors/iptables_restore_errors.json
-    '[calico] monitor iptables save errors': ./assets/monitors/iptables_save_errors.json
+    '[calico] monitor dataplane failures': assets/monitors/dataplane_failures.json
+    '[calico] monitor ipsets error': assets/monitors/ipset_error.json
+    '[calico] monitor iptables restore errors': assets/monitors/iptables_restore_errors.json
+    '[calico] monitor iptables save errors': assets/monitors/iptables_save_errors.json
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
@@ -34,6 +34,9 @@ categories:
 - ログの収集
 - メトリクス
 - ネットワーク
+- セキュリティ
+- kubernetes
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/calico/README.md
 display_on_public_website: true
@@ -41,9 +44,8 @@ draft: false
 git_integration_title: calico
 integration_id: calico
 integration_title: calico
-integration_version: 1.2.0
+integration_version: 2.2.2
 is_public: true
-kind: integration
 manifest_version: 2.0.0
 name: calico
 public_title: calico
@@ -61,17 +63,26 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Category::Security
+  - Category::Kubernetes
+  - Submitted Data Type::Metrics
+  - Submitted Data Type::Logs
+  - Offering::Integration
   configuration: README.md#Setup
   description: Calico は、コンテナ向けのネットワーク & ネットワークセキュリティソリューションです。
   media: []
   overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/monitor-calico-with-datadog/
   support: README.md#Support
   title: calico
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-## 概要
+## Overview
 
 このチェックは、Datadog Agent を通じて [Calico][1] を監視します。
 
@@ -81,7 +92,7 @@ Calico チェックは、Calico で設定した Kubernetes クラスターのネ
 
 ### インストール
 
-Calico チェックは [Datadog Agent][2] パッケージに含まれています。
+The Calico check is included in the [Datadog Agent][2] package.
 
 #### Kubernetes クラスターベースの Agent でのインストール
 
@@ -131,11 +142,11 @@ Calico チェックは [Datadog Agent][2] パッケージに含まれていま�
 ホストで実行中の Agent でこのチェックを構成する場合は、手順に従ってください。コンテナ環境の場合は、[コンテナ化](#コンテナ化)セクションを参照してください。
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{% tab "ホスト" %}}
 
 #### ホスト
 
-ホストで実行中の Agent に対してこのチェックを構成するには:
+ホストで実行中の Agent に対してこのチェックを構成するには
 
 1. Calico のパフォーマンスデータの収集を開始するには、Agent の構成ディレクトリのルートにある `conf.d/` フォルダーの `calico.d/conf.yaml` ファイルを編集します。
    必須パラメーターは `openmetrics_endpoint` の URL のみです。利用可能なすべての構成オプションは [sample calico.d/conf.yaml][1] を参照してください。
@@ -147,11 +158,11 @@ Calico チェックは [Datadog Agent][2] パッケージに含まれていま�
 
 ##### メトリクスの収集
 
-1. `cassandra.d/conf.yaml` ファイルは、デフォルトのコンフィギュレーションで、[Calico メトリクス](#metrics)の収集が有効になっています。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル calico.d/conf.yaml][1] を参照してください。
+1. The default configuration of your `calico.d/conf.yaml` file activate the collection of your [Calico metrics](#metrics). See the [sample calico.d/conf.yaml][1] for all available configuration options.
 
 2. [Agent を再起動します][2]。
 
-##### ログの収集
+##### ログ収集
 
 Calico の構造は Kubernetes クラスターで設定されているため、デプロイメント、ポッド、サービスなどで構築されています。Kubernetes インテグレーションでは、コンテナからログを取得します。
 
@@ -177,11 +188,11 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 
 | パラメーター            | 値                                                      |
 |----------------------|------------------------------------------------------------|
-| `<インテグレーション名>` | `calico`                                                   |
-| `<初期コンフィギュレーション>`      | 空白または `{}`                                              |
-| `<インスタンスコンフィギュレーション>`  | `{openmetrics_endpoint: <OPENMETRICS_ENDPOINT>}`           |
+| `<INTEGRATION_NAME>` | `calico`                                                   |
+| `<INIT_CONFIG>`      | 空白または `{}`                                              |
+| `<INSTANCE_CONFIG>`  | `{openmetrics_endpoint: <OPENMETRICS_ENDPOINT>}`           |
 
-##### ログの収集
+##### ログ収集
 
 Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集][2]を参照してください。
 
@@ -206,14 +217,14 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 
 Calico インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 {{< get-service-checks-from-git "calico" >}}
 
 
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][5]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
 
 ## その他の参考資料
 
@@ -223,7 +234,7 @@ Calico インテグレーションには、イベントは含まれません。
 
 
 [1]: https://www.tigera.io/project-calico/
-[2]: https://app.datadoghq.com/account/settings#agent
+[2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://docs.tigera.io/calico/3.25/operations/monitor/monitor-component-metrics
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [5]: https://docs.datadoghq.com/ja/help/

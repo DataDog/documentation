@@ -17,7 +17,6 @@ further_reading:
 - link: /real_user_monitoring/session_replay
   tag: 설명서
   text: 세션 재생
-kind: 설명서
 title: 모바일 세션 재생이 앱 성능에 미치는 영향
 ---
 

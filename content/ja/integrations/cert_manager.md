@@ -27,6 +27,7 @@ categories:
 - security
 - 構成 & デプロイ
 - containers
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/cert_manager/README.md
 display_on_public_website: true
@@ -34,9 +35,8 @@ draft: false
 git_integration_title: cert_manager
 integration_id: cert-manager
 integration_title: cert-manager
-integration_version: 4.1.0
+integration_version: 5.1.0
 is_public: true
-kind: integration
 manifest_version: 2.0.0
 name: cert_manager
 public_title: cert-manager
@@ -54,6 +54,7 @@ tile:
   - Category::Security
   - Category::Configuration & Deployment
   - Category::Containers
+  - Offering::Integration
   configuration: README.md#Setup
   description: cert-manager のすべてのメトリクスを Datadog で追跡
   media: []
@@ -71,16 +72,16 @@ tile:
 
 ![Cert-Manager 概要ダッシュボード][2]
 
-## 計画と使用
+## セットアップ
 
 ホストで実行されている Agent 用にこのチェックをインストールおよび構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][3]のガイドを参照してこの手順を行ってください。
 
-### インフラストラクチャーリスト
+### インストール
 
 cert_manager チェックは [Datadog Agent][3] パッケージに含まれています。
 サーバーに追加でインストールする必要はありません。
 
-### ブラウザトラブルシューティング
+### 構成
 
 1. cert_manager のパフォーマンスデータの収集を開始するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `cert_manager.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル cert_manager.d/conf.yaml][4] を参照してください。
 
@@ -90,21 +91,21 @@ cert_manager チェックは [Datadog Agent][3] パッケージに含まれて�
 
 [Agent の status サブコマンドを実行][6]し、Checks セクションで `cert_manager` を探します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "cert_manager" >}}
 
 
-### ヘルプ
+### イベント
 
 cert_manager インテグレーションには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 {{< get-service-checks-from-git "cert_manager" >}}
 
 
-## ヘルプ
+## トラブルシューティング
 
 ### 重複する name タグ
 

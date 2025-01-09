@@ -21,7 +21,6 @@ further_reading:
 - link: /metrics/#querying-metrics
   tag: 설명서
   text: 메트릭 쿼리
-kind: 설명서
 title: 함수
 ---
 

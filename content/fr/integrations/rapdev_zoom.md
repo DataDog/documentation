@@ -45,7 +45,7 @@ integration_id: rapdev-zoom
 integration_title: Zoom
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 legal_terms:
   eula: assets/EULA.pdf
 manifest_version: 2.0.0

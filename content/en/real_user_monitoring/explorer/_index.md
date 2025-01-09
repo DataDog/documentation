@@ -1,6 +1,5 @@
 ---
 title: RUM Explorer
-kind: documentation
 aliases:
 - /real_user_monitoring/rum_explorer
 further_reading:
@@ -36,6 +35,7 @@ Use the application selector in the top navigation to select and view all RUM da
 ## Search and filter
 
 Search and filter your RUM events by typing in the search bar and selecting a visualization type in the [RUM Explorer][1]. You can narrow down, broaden, and shift your focus on subsets of events you are interested in.
+Use autocomplete suggestions to view facets and recent queries.
 
 ## Group
 

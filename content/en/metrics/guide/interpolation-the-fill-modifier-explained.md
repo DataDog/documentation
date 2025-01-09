@@ -1,6 +1,5 @@
 ---
 title: Interpolation and the Fill Modifier
-kind: faq
 aliases:
     - /graphing/faq/interpolation-the-fill-modifier-explained
     - /dashboards/faq/interpolation-the-fill-modifier-explained

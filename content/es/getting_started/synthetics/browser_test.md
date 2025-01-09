@@ -19,7 +19,6 @@ further_reading:
 - link: /synthetics/guide/synthetic-test-monitors
   tag: Documentación
   text: Más información sobre los monitores de test sintéticos
-kind: documentación
 title: Empezando con los tests de navegador
 ---
 

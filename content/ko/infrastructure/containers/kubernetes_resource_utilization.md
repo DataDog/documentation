@@ -5,7 +5,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/rightsize-kubernetes-workloads/
   tag: 블로그
   text: Kubernetes 워크로드 규모 효율화를 위한 실용적인 팁
-kind: 설명서
 title: Kubernetes 리소스 활용도
 ---
 
@@ -22,7 +21,7 @@ Datadog의 [Kubernetes 리소스 활용도][3] 보기를 사용하면 인프라�
 
 ## 사용법
 
-Datadog에서 **Infrastructure**> [**Kubernetes**][2]로 이동하여 [**Resource Utilization** 탭][3]을 선택합니다.
+Datadog에서 [**쿠버네티스(Kubernetes) 개요** 페이지][2]로 이동하여 [** 리소스 활용** 탭][3]을 선택합니다.
 
 **Pods**에서 페이지가 열리며, 기본적으로 `kube_cluster_name`, `kube_namespace`, `kube_deployment`에 의해 그룹화됩니다.
 

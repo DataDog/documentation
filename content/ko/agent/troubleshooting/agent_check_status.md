@@ -6,7 +6,6 @@ further_reading:
 - link: /agent/troubleshooting/send_a_flare/
   tag: 에이전트 트러블슈팅
   text: 에이전트 플레어 전송
-kind: 설명서
 title: 에이전트 점검 상태
 ---
 

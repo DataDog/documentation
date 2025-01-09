@@ -1,15 +1,14 @@
 ---
 further_reading:
 - link: /tracing/trace_collection
-  tags: ドキュメント
+  tag: ドキュメント
   text: トレース収集の設定
 - link: /integrations/kafka
-  tags: ドキュメント
+  tag: ドキュメント
   text: Kafka インテグレーション
 - link: /data_streams/
-  tags: ドキュメント
+  tag: ドキュメント
   text: データストリーム モニタリング
-kind: ガイド
 title: Kafka キューの監視
 ---
 
@@ -27,7 +26,7 @@ title: Kafka キューの監視
 
 [Datadog Data Streams Monitoring][3] は、パイプラインの健全性と、システムを通過するイベントのエンドツーエンドのレイテンシーを測定するための標準的な方法を提供します。Data Streams Monitoring が提供する深い可視性により、パイプラインの遅延や遅れを引き起こしている不良のプロデューサー、コンシューマー、またはキューを正確に特定することが可能になります。ブロックされたメッセージ、ホットパーティション、オフラインのコンシューマーなど、デバッグが困難なパイプラインの問題を発見することができます。また、関連するインフラストラクチャーやアプリのチーム間でシームレスに連携することができます。
 
-{{< img src="tracing/guide/monitor_kafka_queues/dash-2022-data-streams-compressed-blurb.mp4" alt="Data Streams Monitoring のデモ" video="true">}}
+{{< img src="tracing/guide/monitor_kafka_queues/dash-2022-data-streams-compressed-blurb2.mp4" alt="Data Streams Monitoring Demo" video="true">}}
 
 ### 分散型トレース
 
@@ -79,38 +78,42 @@ Kafka アプリケーションをトレースするために、Datadog は Kafka
 
 {{% tab "Java" %}}
 
-Datadog Kafka インテグレーションは、Header API をサポートする Kafka バージョン 0.11+ で動作します。この API は、トレースコンテキストの挿入と抽出に使用されます。バージョンが混在する環境を実行する場合、Kafka ブローカーは、Kafka の新しいバージョンを誤って報告することがあります。これは、トレーサーがローカルプロデューサーによってサポートされていないヘッダーを挿入しようとしたときに問題が発生します。さらに、ヘッダーが存在するため、古いコンシューマーはメッセージを消費することができません。これらの問題を防ぐには、0.11 より古いバージョンの Kafka が混在する環境を実行する場合、環境変数 `DD_KAFKA_CLIENT_PROPAGATION_ENABLED=false` でコンテキストの伝搬を無効化します。
+See [Java's tracer documentation][7] for configuration of Kafka.
 
-{{< /tabs >}}
+[7]: /ja/tracing/trace_collection/compatibility/java/#networking-framework-compatibility
+
+{{% /tab %}}
 
 {{% tab ".NET" %}}
 
-[Kafka .NET Client ドキュメント][1]によると、典型的な Kafka コンシューマーアプリケーションは、Consume ループが中心で、Consume メソッドを繰り返し呼び出してレコードを 1 つずつ取得するとあります。`Consume` メソッドは、システムに対してメッセージをポーリングします。したがって、デフォルトでは、コンシューマースパンはメッセージが返されたときに作成され、次のメッセージを消費する前に終了します。スパンの長さは、あるメッセージを消費してから次のメッセージを消費するまでの計算を代表するものです。
+The [Kafka .NET Client documentation][9] states that a typical Kafka consumer application is centered around a consume loop, which repeatedly calls the Consume method to retrieve records one-by-one. The `Consume` method polls the system for messages. Thus, by default, the consumer span is created when a message is returned and closed before consuming the next message. The span duration is then representative of the computation between one message consumption and the next.
 
-メッセージを完全に処理してから次のメッセージを消費する場合、あるいは複数のメッセージを一度に消費する場合、消費するアプリケーションで `DD_TRACE_KAFKA_CREATE_CONSUMER_SCOPE_ENABLED` を `false` に設定することができます。この設定が `false` の場合、コンシューマースパンが作成され、すぐに閉じられます。トレースする子スパンがある場合は、[.NET カスタムインストルメンテーションのヘッダー抽出と挿入のドキュメント][2]に従って、トレースコンテキストを抽出してください。
+When a message is not processed completely before consuming the next one, or when multiple messages are consumed at once, you can set `DD_TRACE_KAFKA_CREATE_CONSUMER_SCOPE_ENABLED` to `false` in your consuming application. When this setting is `false`, the consumer span is created and immediately closed. If you have child spans to trace, follow [the headers extraction and injection documentation for .NET custom instrumentation][10] to extract the trace context.
 
-.NET トレーサーは [v1.27.0][3] から Confluent.Kafka をトレースできるようになりました。トレースコンテキスト伝搬 API は [v2.7.0][4] から利用可能です。
+The .NET tracer allows tracing Confluent.Kafka since [v1.27.0][11]. The trace context propagation API is available since [v2.7.0][12].
 
-[1]: https://docs.confluent.io/kafka-clients/dotnet/current/overview.html#the-consume-loop
-[2]: /ja/tracing/trace_collection/custom_instrumentation/dotnet/#headers-extraction-and-injection
-[3]: https://github.com/DataDog/dd-trace-dotnet/releases/tag/v1.27.0
-[4]: https://github.com/DataDog/dd-trace-dotnet/releases/tag/v2.7.0
-{{< /tabs >}}
+[9]: https://docs.confluent.io/kafka-clients/dotnet/current/overview.html#the-consume-loop
+[10]: /ja/tracing/trace_collection/custom_instrumentation/dotnet/#headers-extraction-and-injection
+[11]: https://github.com/DataDog/dd-trace-dotnet/releases/tag/v1.27.0
+[12]: https://github.com/DataDog/dd-trace-dotnet/releases/tag/v2.7.0
+
+{{% /tab %}}
 
 {{% tab "Ruby" %}}
 
-Kafka インテグレーションでは、`ruby-kafka` gem のトレーシング機能を提供しています。[Ruby のトレーサードキュメント][1]に従って有効化してください。
+The Kafka integration provides tracing of the `ruby-kafka` gem. Follow [Ruby's tracer documentation][8] to enable it.
 
-[1]: /ja/tracing/trace_collection/dd_libraries/ruby/#kafka
-{{< /tabs >}}
+[8]: /ja/tracing/trace_collection/dd_libraries/ruby/#kafka
+
+{{% /tab %}}
 
 {{< /tabs >}}
 
 ### Kafka のトレースを無効にする
 
-アプリケーションの Kafka トレースを無効にしたい場合は、`DD_TRACE_KAFKA_ENABLED` 設定を `false` に設定します。
+If you want to disable Kafka tracing on an application, set the appropriate [language-specific configuration][6].
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -119,3 +122,4 @@ Kafka インテグレーションでは、`ruby-kafka` gem のトレーシング
 [3]: https://app.datadoghq.com/data-streams/onboarding
 [4]: /ja/tracing/trace_collection/compatibility/
 [5]: /ja/tracing/trace_collection/
+[6]: /ja/tracing/trace_collection/library_config/

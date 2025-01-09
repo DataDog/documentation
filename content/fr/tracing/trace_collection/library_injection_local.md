@@ -3,7 +3,6 @@ aliases:
 - /fr/tracing/trace_collection/admission_controller/
 - /fr/tracing/trace_collection/library_injection/
 description: Injecter des bibliothèques d'instrumentation dans des applications
-kind: documentation
 title: Injecter des bibliothèques localement
 ---
 
@@ -29,7 +28,7 @@ Pour en savoir plus sur le contrôleur d'admission Kubernetes, consultez la [ré
 ## Prérequis
 
 * Kubernetes v1.14+
-* [Agent de cluster Datadog v7.40+][3] pour Java, Python, NodeJS ; [Agent de cluster Datadog v7.44+][3] pour .NET et Ruby
+* [Agent de cluster Datadog v7.40+][3] pour Java, Python, Node.js ; [Agent de cluster Datadog v7.44+][3] pour .NET et Ruby
 * Activation du contrôleur d'admission Datadog. **Remarque** : depuis la version 2.35.0 du chart Helm, le contrôleur d'admission Datadog est activé par défaut dans l'Agent de cluster.
 * Pour Python, les applications uWSGI ne sont actuellement pas prises en charge.
 * Pour Ruby, l'injection de bibliothèque est disponible en bêta. L'instrumentation fonctionne uniquement pour les applications Ruby on Rails avec une version de Bundler ultérieure à la v2.3 et sans gems fournis (mode déploiement ou `BUNDLE_PATH`).
@@ -191,7 +190,7 @@ L'instrumentation commence également à envoyer des données de télémétrie �
 
 ### Résolution des problèmes d'installation
 
-Si le lancement du pod de l'application échoue, exécutez `kubectl logs <my-pod> --all-containers` pour afficher les logs afin de déterminer si vous rencontrez l'un des problèmes connus ci-dessous. 
+Si le lancement du pod de l'application échoue, exécutez `kubectl logs <my-pod> --all-containers` pour afficher les logs afin de déterminer si vous rencontrez l'un des problèmes connus ci-dessous.
 
 #### Problèmes d'installation .NET
 ##### `dotnet: error while loading shared libraries: libc.musl-x86_64.so.1: cannot open shared object file: No such file or directory`
@@ -265,13 +264,13 @@ Lorsque l'Agent et vos services s'exécutent sur un host réel ou virtuel, Datad
 Si l'Agent Datadog n'est pas encore installé sur le host, ou si vous souhaitez mettre à niveau votre installation de l'Agent Datadog, utilisez le script d'installation dédié pour installer à la fois les bibliothèques d'injection et l'Agent Datadog :
 
 ```shell
-DD_APM_INSTRUMENTATION_ENABLED=host DD_API_KEY=<VOTRE_CLÉ> DD_SITE="<VOTRE_SITE>" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
+DD_APM_INSTRUMENTATION_ENABLED=host DD_API_KEY=<VOTRE_CLÉ> DD_SITE="<VOTRE_SITE>" bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 ```
 
-Par défaut, l'exécution du script entraîne la prise en charge de Java, Node.js, Python, Ruby et .NET. Si vous souhaitez spécifier les langages à prendre en charge, définissez également la variable d'environnement `DD_APM_INSTRUMENTATION_LANGUAGES` (valeurs autorisées : `java`, `js`, `python`, `ruby` et `dotnet`). Pour spécifier plusieurs langages, séparez les valeurs par des virgules :
+Par défaut, l'exécution du script entraîne la prise en charge de Java, Node.js, Python, Ruby et .NET. Si vous souhaitez spécifier les langages à prendre en charge, définissez également la variable d'environnement `DD_APM_INSTRUMENTATION_LIBRARIES` (valeurs autorisées : `java`, `js`, `python`, `ruby` et `dotnet`). Pour spécifier plusieurs langages, séparez les valeurs par des virgules :
 
 ```shell
-DD_APM_INSTRUMENTATION_LANGUAGES=java,js DD_APM_INSTRUMENTATION_ENABLED=host DD_API_KEY=<VOTRE_CLÉ> DD_SITE="<VOTRE_SITE>" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
+DD_APM_INSTRUMENTATION_LIBRARIES="java,js" DD_APM_INSTRUMENTATION_ENABLED=host DD_API_KEY=<VOTRE_CLÉ> DD_SITE="<VOTRE_SITE>" bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 ```
 
 Quittez et ouvrez un nouveau shell pour utiliser la bibliothèque d'injection.
@@ -334,8 +333,8 @@ Les valeurs des variables d'environnement remplacent les paramètres du fichier 
 
 ### Fichier de configuration
 
-| Nom de la propriété | Description | Valeur par défaut | Valeurs valides | 
-| --------- | ----------- | ------------- | ----------- | 
+| Nom de la propriété | Description | Valeur par défaut | Valeurs valides |
+| --------- | ----------- | ------------- | ----------- |
 |`log_level`  | Le niveau de journalisation|`off`|`off`, `debug`, `info`, `warn`, `error`|
 |`output_paths`|L'emplacement où sont enregistrés les logs|`stderr`|`stderr` ou une URL de type `file://`|
 |`env`|L'environnement par défaut attribué au processus|aucune|non applicable|
@@ -360,7 +359,7 @@ Les variables d'environnement suivantes permettent de configurer l'injection de 
 Chacun des champs du fichier de configuration correspond à une variable d'environnement. Les variables d'environnement sont lues à partir de l'environnement du processus en cours de lancement et affectent uniquement ce processus.
 
 |Propriété du fichier de configuration|Variable d'environnement|
-| --------- | ----------- |  
+| --------- | ----------- |
 |`log_level`|`DD_APM_INSTRUMENTATION_DEBUG`|
 |`output_paths`|`DD_APM_INSTRUMENTATION_OUTPUT_PATHS`|
 |`env`|`DD_ENV`|
@@ -381,7 +380,7 @@ Par défaut, les paramètres suivants sont activés au sein d'un processus instr
 Vous pouvez modifier ces paramètres pour l'ensemble des processus instrumentés. Pour ce faire, définissez la propriété `config_sources` dans le fichier de configuration. Pour modifier les paramètres pour un seul processus, définissez la variable d'environnement `DD_CONFIG_SOURCES` du processus. Voici les paramètres autorisés pour les sources de configuration :
 
 |Nom de la source de configuration|Utilité|
-| --------- | ----------- |  
+| --------- | ----------- |
 |`BASIC`|Applique la configuration spécifiée plus haut. Si aucune source de configuration n'est spécifiée, celle-ci est utilisée par défaut.|
 |`LOCAL:CHEMIN`|Applique la configuration au chemin spécifié dans le système de fichiers local. Le format du fichier de configuration est décrit plus bas. Exemple : `LOCAL:/opt/config/my_process_config.yaml`.|
 |`BLOB:URL`| Applique la configuration au chemin spécifié dans un stockage d'objet compatible avec S3. L'URL de connexion et le format du fichier de configuration sont décrits plus bas. Exemple : `BLOB:s3://config_bucket/my_process_config.yaml?region=us-east-1`. |
@@ -476,7 +475,7 @@ Si plusieurs langages sont utilisés, ne définissez pas `service_language`.
 
 Le tableau suivant répertorie les valeurs de configuration d'injection et les [options de configuration des bibliothèques de tracing][4] correspondantes :
 
-| Injection | Traceur Java | Traceur NodeJS | Tracer .NET | Traceur Python |
+| Injection | Traceur Java | Traceur Node.js | Tracer .NET | Traceur Python |
 | --------- | ----------- | ------------- | ----------- | ------------- |
 | `tracing_enabled` | `dd.trace.enabled` | `DD_TRACE_ENABLED` | `DD_TRACE_ENABLED` |  `DD_TRACE_ENABLED` |
 | `log_injection_enabled` | `dd.logs.injection` | `DD_LOGS_INJECTION` | `DD_LOGS_INJECTION` |  `DD_LOGS_INJECTION` |
@@ -567,18 +566,18 @@ Tous les processus lancés récemment sont interceptés et la bibliothèque d'in
 Si l'Agent Datadog n'est pas encore installé sur le host, ou si vous souhaitez mettre à niveau votre installation de l'Agent Datadog, utilisez le script d'installation dédié pour installer à la fois les bibliothèques d'injection et l'Agent Datadog :
 
 ```shell
-DD_APM_INSTRUMENTATION_ENABLED=all DD_API_KEY=<VOTRE_CLÉ> DD_SITE="<VOTRE_SITE>" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
+DD_APM_INSTRUMENTATION_ENABLED=all DD_API_KEY=<VOTRE_CLÉ> DD_SITE="<VOTRE_SITE>" bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 ```
 
-Par défaut, l'exécution du script entraîne la prise en charge de Java, Node.js, Python, Ruby et .NET. Si vous souhaitez spécifier les langages à prendre en charge, définissez également la variable d'environnement `DD_APM_INSTRUMENTATION_LANGUAGES` (valeurs autorisées : `java`, `js`, `python`, `ruby` et `dotnet`). Pour spécifier plusieurs langages, séparez les valeurs par des virgules :
+Par défaut, l'exécution du script entraîne la prise en charge de Java, Node.js, Python, Ruby et .NET. Si vous souhaitez spécifier les langages à prendre en charge, définissez également la variable d'environnement `DD_APM_INSTRUMENTATION_LIBRARIES` (valeurs autorisées : `java`, `js`, `python`, `ruby` et `dotnet`). Pour spécifier plusieurs langages, séparez les valeurs par des virgules :
 
 ```shell
-DD_APM_INSTRUMENTATION_LANGUAGES=java,js DD_APM_INSTRUMENTATION_ENABLED=all DD_API_KEY=<VOTRE_CLÉ> DD_SITE="<VOTRE_SITE>" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
+DD_APM_INSTRUMENTATION_LIBRARIES="java,js" DD_APM_INSTRUMENTATION_ENABLED=all DD_API_KEY=<VOTRE_CLÉ> DD_SITE="<VOTRE_SITE>" bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 ```
 
 ## Installer uniquement l'injection de bibliothèque
 
-**Prérequis** : 
+**Prérequis** :
 - Un host exécutant Linux
 - Une installation récente de l'[Agent Datadog v7][1]
 - [Docker Engine][2]
@@ -729,7 +728,7 @@ Dans ce fichier de configuration, `version` a toujours pour valeur `1`. Il s'agi
 
 Le tableau suivant répertorie les valeurs de configuration d'injection et les [options de configuration des bibliothèques de tracing][4] correspondantes :
 
-| Injection | Traceur Java | Traceur NodeJS | Tracer .NET | Traceur Python |
+| Injection | Traceur Java | Traceur Node.js | Tracer .NET | Traceur Python |
 | --------- | ----------- | ------------- | ----------- | ------------- |
 | `tracing_enabled` | `dd.trace.enabled` | `DD_TRACE_ENABLED` | `DD_TRACE_ENABLED` |  `DD_TRACE_ENABLED` |
 | `log_injection_enabled` | `dd.logs.injection` | `DD_LOGS_INJECTION` | `DD_LOGS_INJECTION` |  `DD_LOGS_INJECTION` |
@@ -804,16 +803,16 @@ Tous les processus lancés récemment sont interceptés et la bibliothèque d'in
 
 ## Installer la bibliothèque préchargée
 
-Utilisez le script shell `install_script_docker_injection` pour installer automatiquement la prise en charge de l'injection Docker. Vous devez au préalable avoir installé Docker sur la machine du host.
+Utilisez le script shell `install_script_agent7.sh` pour installer automatiquement la prise en charge de l'injection Docker. Vous devez au préalable avoir installé Docker sur la machine du host.
 
 ```shell
-bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_docker_injection.sh)"
+DD_APM_INSTRUMENTATION_ENABLED=docker DD_NO_AGENT_INSTALL=true bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 ```
 
-Cela permet d'installer les bibliothèques de tous les langages pris en charge. Pour installer seulement les bibliothèques de certains langages, définissez la variable d'environnement `DD_APM_INSTRUMENTATION_LANGUAGES`. Les valeurs `java`, `js`, `python`, `ruby` et `dotnet` sont autorisées :
+Cela permet d'installer les bibliothèques de tous les langages pris en charge. Pour installer seulement les bibliothèques de certains langages, définissez la variable d'environnement `DD_APM_INSTRUMENTATION_LIBRARIES`. Les valeurs `java`, `js`, `python`, `ruby` et `dotnet` sont autorisées :
 
 ```shell
-DD_APM_INSTRUMENTATION_LANGUAGES=java,js bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_docker_injection.sh)"
+DD_APM_INSTRUMENTATION_LIBRARIES="java:1.25.0,python" DD_APM_INSTRUMENTATION_ENABLED=docker DD_NO_AGENT_INSTALL=true bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 ```
 
 ## Configurer l'injection Docker
@@ -927,7 +926,7 @@ Dans ce fichier de configuration, `version` a toujours pour valeur `1`. Il s'agi
 
 Le tableau suivant répertorie les valeurs de configuration d'injection et les [options de configuration des bibliothèques de tracing][3] correspondantes :
 
-| Injection | Traceur Java | Traceur NodeJS | Tracer .NET | Traceur Python |
+| Injection | Traceur Java | Traceur Node.js | Tracer .NET | Traceur Python |
 | --------- | ----------- | ------------- | ----------- | ------------- |
 | `tracing_enabled` | `dd.trace.enabled` | `DD_TRACE_ENABLED` | `DD_TRACE_ENABLED` |  `DD_TRACE_ENABLED` |
 | `log_injection_enabled` | `dd.logs.injection` | `DD_LOGS_INJECTION` | `DD_LOGS_INJECTION` |  `DD_LOGS_INJECTION` |
@@ -967,7 +966,7 @@ runtime_metrics_enabled: true
 
 ## Configurer l'Agent
 
-Dans le fichier Docker Compose qui lance vos conteneurs, utilisez les paramètres suivants pour l'Agent., en définissant en toute sécurité votre propre clé d'API Datadog pour `${DD_API_KEY}` 
+Dans le fichier Docker Compose qui lance vos conteneurs, utilisez les paramètres suivants pour l'Agent., en définissant en toute sécurité votre propre clé d'API Datadog pour `${DD_API_KEY}`
 
 ```yaml
   dd-agent:

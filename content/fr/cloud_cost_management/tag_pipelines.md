@@ -3,7 +3,6 @@ further_reading:
 - link: /cloud_cost_management/
   tag: Documentation
   text: Cloud Cost Management
-kind: Documentation
 title: Pipelines de tags
 ---
 

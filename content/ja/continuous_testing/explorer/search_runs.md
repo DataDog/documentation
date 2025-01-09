@@ -3,14 +3,15 @@ description: すべてのテスト実行を調査し、失敗したテスト結�
 further_reading:
 - link: /continuous_testing/explorer
   tag: ドキュメント
-  text: Synthetic Monitoring &amp; Continuous Testing Explorer について
-kind: documentation
+  text: Learn about the Synthetic Monitoring & Testing Results Explorer
 title: テスト実行の検索
 ---
 
 ## 概要
 
-右上のドロップダウンメニューから時間帯を選択した後、[Synthetic Monitoring & Continuous Testing Explorer][1] の **Test Runs** イベントタイプをクリックすると、テスト実行を検索することができます。
+After selecting a time frame from the dropdown menu on the top right, you can search for test runs by clicking on the **Test Runs** event type in the [Synthetic Monitoring & Testing Results Explorer][1].
+
+{{< img src="continuous_testing/explorer_test_runs_1.png" alt="Search and manage your test runs in the Synthetic Monitoring & Testing Results Explorer" style="width:100%;">}}
 
 ファセットを使用すると、以下のアクションを実行できます。
 
@@ -23,7 +24,7 @@ title: テスト実行の検索
 
 ### Common テスト実行属性
 
-**Commmon** ファセットを使用すると、テスト実行の属性でフィルタリングできます。
+**Common** facets allow you to filter on your test runs' attributes.
 
 | ファセット            | 説明                                                                                             |
 |------------------|---------------------------------------------------------------------------------------------------------|

@@ -23,7 +23,7 @@ integration_id: ibm-i
 integration_title: IBM i
 integration_version: 1.4.0
 is_public: true
-kind: integration
+custom_kind: integration
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0
 metric_prefix: ibm_i.

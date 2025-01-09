@@ -1,6 +1,5 @@
 ---
 title: Interpolation
-kind: documentation
 aliases:
     - /graphing/functions/interpolation/
 further_reading:

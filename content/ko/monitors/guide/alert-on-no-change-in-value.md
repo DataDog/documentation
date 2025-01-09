@@ -8,7 +8,6 @@ further_reading:
 - link: /monitors/notify/
   tag: 설명서
   text: 모니터 알림 구성
-kind: 가이드
 title: 값에 변화가 없을 시 경고
 ---
 

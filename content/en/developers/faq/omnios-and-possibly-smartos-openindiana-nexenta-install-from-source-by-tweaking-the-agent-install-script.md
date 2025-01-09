@@ -1,6 +1,6 @@
 ---
 title: OmniOS Install From Source
-kind: faq
+
 ---
 
 OmniOS is not supported by Datadog, and the [install from source][1] doesn't directly work.

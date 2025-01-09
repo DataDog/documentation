@@ -13,7 +13,6 @@ further_reading:
 - link: /agent/kubernetes/metrics/
   tag: 도움말
   text: Kubernetes 메트릭
-kind: guide
 title: 레거시 Kubernetes 버전
 ---
 

@@ -1,13 +1,12 @@
 ---
 aliases:
 - /ko/graphing/functions/count/
-kind: 설명서
 title: 계산
 ---
 
 ## 0 제외 계산
 
-| 기능          | 설명                           | 예시                           |
+| 함수          | 설명                           | 예시                           |
 | :----             | :-------                              | :---------                        |
 | `count_nonzero()` | 0이 아닌 모든 값의 개수를 계산합니다. | `count_nonzero(<METRIC_NAME>{*})` |
 
@@ -21,7 +20,7 @@ title: 계산
 
 ## null 제외 계산
 
-| 기능           | 설명                           | 예시                            |
+| 함수           | 설명                           | 예시                            |
 | :----              | :-------                              | :---------                         |
 | `count_not_null()` | null이 아닌 모든 값의 개수를 계산합니다. | `count_not_null(<METRIC_NAME>{*})` |
 

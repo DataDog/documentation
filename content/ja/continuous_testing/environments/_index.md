@@ -1,7 +1,7 @@
 ---
 aliases:
 - /ja/synthetics/testing_tunnel
-- /ja/real_user_monitoring/error_tracking/custom_grouping
+- /ja/continuous_testing/testing_tunnel
 description: ローカル環境およびリモート環境での Continuous Testing の活用について学びましょう。
 further_reading:
 - link: https://www.datadoghq.com/blog/shift-left-testing-best-practices/
@@ -11,7 +11,7 @@ further_reading:
   tag: ブログ
   text: Datadog Synthetic テストを CI/CD パイプラインに組み込む
 - link: https://learn.datadoghq.com/courses/synthetic-tests-ci-cd-pipeline
-  tag: ガイド
+  tag: ラーニングセンター
   text: CI/CD パイプラインでテストを実行する方法を学ぶ
 - link: /continuous_testing/environments/multiple_env
   tag: ドキュメント
@@ -22,7 +22,6 @@ further_reading:
 - link: /synthetics/private_locations
   tag: ドキュメント
   text: プライベートロケーションの詳細
-kind: ドキュメント
 title: ローカル環境とステージング環境のテスト
 ---
 
@@ -48,7 +47,7 @@ Continuous Testing は、プロキシ、ファイアウォール、VPN で保護
 
 Continuous Testing は、Synthetic が管理するロケーションからプライベート環境にアクセスできるようにする[テストトンネル][5]を提供します。詳しくは、[プロキシ、ファイアウォール、VPN 使用中のテスト][6]を参照してください。
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

@@ -1,12 +1,11 @@
 ---
 title: Troubleshooting Cloud Security Management Vulnerabilities
-kind: documentation
 aliases:
   - /security/vulnerabilities/troubleshooting/
 further_reading:
-- link: "/security/cloud_security_management/setup/csm_pro/?tab=aws#configure-the-agent-for-containers"
+- link: "/infrastructure/containers/container_images/#enable-sbom-collection"
   tag: "Documentation"
-  text: "Setting up container image vulnerabilities"
+  text: "Enable SBOM collection in CSM Vulnerabilities"
 - link: "/security/cloud_security_management/setup/csm_enterprise/?tab=aws#hosts"
   tag: "Documentation"
   text: "Setting up host vulnerabilities"
@@ -18,26 +17,6 @@ further_reading:
 ## Overview
 
 If you experience issues with Cloud Security Management (CSM) Vulnerabilities, use the following troubleshooting guidelines. If you need further assistance, contact [Datadog support][1].
-
-## Confirm CSM Vulnerabilities is enabled
-
-Review the documentation for [configuring the Agent for vulnerability scanning][2] to ensure your hosts and containers are configured for Software Bill of Materials (SBOM) collection. Additionally, review the in-app [Cloud Security Management][3] instructions to confirm that all steps for the initial setup are complete.
-
-## Prerequisites
-
-Ensure all the prerequisites are met for CSM Vulnerabilities:
-
-| Component                | Version/Requirement                     |
-| ------------------------ | ----------------------------------------|
-| [Helm Chart][6]            | v3.49.6 or later (Kubernetes only)      |
-| [containerd][7]              | v1.5.6 or later (Kubernetes and hosts only)|</br>
-
-CSM Vulnerabilities is **not** available for the following environments:
-
-  - Windows
-  - AWS Fargate 
-  - CRI-O runtime
-  - podman runtime
 
 ## Error messages
 
@@ -65,16 +44,34 @@ The resulting error appears as:
 ERROR | (pkg/workloadmeta/collectors/internal/containerd/image_sbom_trivy.go:80 in func2) | Failed to generate SBOM for containerd image: unable to marshal report to sbom format, err: analyze error: failed to analyze layer:  : unable to get uncompressed layer
 ```
 
-The workaround for this issue is to set the configuration option `discard_unpacked_layers=false` in the containerd configuration file.
+The workaround for this issue is to set the configuration option:
+- For containerd: set `discard_unpacked_layers=false` in the containerd configuration file.
+- For Helm: set `datadog.sbom.containerImage.uncompressedLayersSupport: true` in your `values.yaml` file.
+- For Datadog Operator: set `features.sbom.containerImage.uncompressedLayersSupport` to `true` in your DatadogAgent CRD.
 
-## View related metrics
+## Disable CSM Vulnerabilities
 
-1. Go to **[Metrics > Summary][4]** in Datadog.
-2. Search for the following metrics to aid in troubleshooting:
-    -  `datadog.agent.sbom_attempts`: Tracks sbom collection attempts by `source` and `type`.
-    -  `datadog.agent.sbom_generation_duration`: Measures the time that it takes to generate SBOMs in seconds.
-    -  `datadog.agent.sbom_errors`: Number of sbom failures by `source`, `type`, and `reason`.
-    -  `datadog.agent.export_size`: The size of the archive written on disk. 
+In the `datadog-values.yaml` file for the Agent, set the following configuration settings to `false`:
+
+```
+# datadog-values.yaml file
+datadog:
+  sbom:
+    containerImage:
+      enabled: false
+
+      # Uncomment the following line if you are using Google Kubernetes Engine (GKE) or Amazon Elastic Kubernetes (EKS)
+      # uncompressedLayersSupport: true
+
+    # Enables Host Vulnerability Management
+    host:
+      enabled: false
+
+    # Enables Container Vulnerability Management
+    # Image collection is enabled by default with Datadog Helm version `>= 3.46.0`
+      containerImageCollection:
+        enabled: false
+```
 
 ## Further Reading
 
@@ -84,5 +81,3 @@ The workaround for this issue is to set the configuration option `discard_unpack
 [2]: /security/cloud_security_management/setup/csm_enterprise?tab=aws#configure-the-agent-for-vulnerabilities
 [3]: https://app.datadoghq.com/security/configuration/csm/setup
 [4]: https://app.datadoghq.com/metric/summary
-[6]: /security/cloud_security_management/troubleshooting
-[7]: /containers/kubernetes/installation/?tab=helm

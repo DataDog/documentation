@@ -1,11 +1,10 @@
 ---
 title: vSphere Integration Billing
-kind: documentation
 ---
 
 ## Overview
 
-Datadog bills for each Agent installed on a vCenter server and each VM monitored.
+Datadog bills for each Agent installed on a vCenter server and each VM and ESXi host monitored.
 
 ## vSphere VM exclusion
 

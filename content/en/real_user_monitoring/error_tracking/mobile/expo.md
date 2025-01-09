@@ -1,6 +1,5 @@
 ---
 title: Expo Crash Reporting and Error Tracking
-kind: documentation
 description: Capture Expo crash reports in Datadog.
 aliases:
 - /real_user_monitoring/error_tracking/expo
@@ -19,7 +18,7 @@ further_reading:
   text: Learn about Error Tracking
 - link: /real_user_monitoring/error_tracking/explorer
   tag: Documentation
-  text: Visualize Error Tracking data in the RUM Explorer
+  text: Visualize Error Tracking data in the Explorer
 
 ---
 ## Overview
@@ -54,18 +53,6 @@ yarn add -D @datadog/datadog-ci
 
 Run `eas secret:create` to set `DATADOG_API_KEY` to your Datadog API key.
 
-### Add git repository data to your mapping files on Expo Application Services (EAS)
-
-If you are using EAS to build your Expo application, set `cli.requireCommit` to `true` in your `eas.json` file to add git repository data to your mapping files.
-
-```json
-{
-    "cli": {
-        "requireCommit": true
-    }
-}
-```
-
 ### Setting the Datadog site
 
 Run `eas secret:create` to set `DATADOG_SITE` to the host of your Datadog site, for example: `datadoghq.eu`. By default, `datadoghq.com` is used.
@@ -80,14 +67,73 @@ Run `eas secret:create` to set `DATADOG_SITE` to the host of your Datadog site, 
 | `androidProguardMappingFiles` | `true`  | Enables the uploading of Proguard mapping files to deobfuscate native Android crashes (is only applied if obfuscation is enabled). |
 | `datadogGradlePluginVersion`  | `"1.+"` | Version of `dd-sdk-android-gradle-plugin` used for uploading Proguard mapping files.     |
 
-### Limitations
+## Get deobfuscated stack traces
+
+### Add git repository data to your mapping files on Expo Application Services (EAS)
+
+If you are using EAS to build your Expo application, set `cli.requireCommit` to `true` in your `eas.json` file to add git repository data to your mapping files.
+
+```json
+{
+    "cli": {
+        "requireCommit": true
+    }
+}
+```
+### List uploaded source maps
+
+See the [RUM Debug Symbols][4] page to view all uploaded symbols.
+
+## Limitations
 
 {{< site-region region="us,us3,us5,eu,gov" >}}
 Source maps, mapping files, and dSYM files are limited to **500** MB each.
 {{< /site-region >}}
 {{< site-region region="ap1" >}}
-Source maps, mapping files, and dSYM files  are limited to **500** MB each.
+Source maps, mapping files, and dSYM files are limited to **500** MB each.
 {{< /site-region >}}
+
+## Test your implementation
+
+To verify your Expo Crash Reporting and Error Tracking configuration, you need to issue an error in your application and confirm that the error appears in Datadog.
+
+To test your implementation:
+
+1. Run your application on a simulator, emulator, or a real device. If you are running on iOS, ensure that the debugger is not attached. Otherwise, Xcode captures the crash before the Datadog SDK does.
+2. Execute some code containing an error or crash. For example:
+
+   ```javascript
+   const throwError = () => {
+    throw new Error("My Error")
+   }
+   ```
+
+3. For obfuscated error reports that do not result in a crash, you can verify symbolication and deobfuscation in [**Error Tracking**][1].
+4. For crashes, after the crash happens, restart your application and wait for the React Native SDK to upload the crash report in [**Error Tracking**][1].
+
+To make sure your source maps are correctly sent and linked to your application, you can also generate crashes with the [`react-native-performance-limiter`][14] package.
+
+Install it with yarn or npm then re-install your pods:
+
+```shell
+yarn add react-native-performance-limiter # or npm install react-native-performance-limiter
+(cd ios && pod install)
+```
+
+Crash the JavaScript thread from your app:
+
+```javascript
+import { crashJavascriptThread } from 'react-native-performance-limiter';
+
+const crashApp = () => {
+    crashJavascriptThread('custom error message');
+};
+```
+
+Re-build your application for release to send the new source maps, trigger the crash and wait on the [Error Tracking][1] page for the error to appear.
+```
+
+## Additional configuration options
 
 ### Disable file uploads
 
@@ -113,9 +159,9 @@ You can disable some files from uploading by setting the `iosDsyms`, `iosSourcem
 If you want to disable **all file uploads**, remove `expo-datadog` from the list of plugins.
 
 
-### Using with Sentry
+### Using Expo with Datadog and Sentry
 
-Both Datadog and Sentry config plugins use regular expressions to modify the "Bundle React Native code and images" iOS build phase to send the sourcemap. This can make your EAS builds fail with a `error: Found argument 'datadog-ci' which wasn't expected, or isn't valid in this context` error.
+Both Datadog and Sentry config plugins use regular expressions to modify the "Bundle React Native code and images" iOS build phase to send the source map. This can make your EAS builds fail with a `error: Found argument 'datadog-ci' which wasn't expected, or isn't valid in this context` error.
 
 To use both plugins, make sure to add the `expo-datadog` plugin first in order in your `app.json` file:
 
@@ -134,4 +180,5 @@ If you are using the `expo-dev-client` and already have the `expo-datadog` plugi
 
 [1]: https://app.datadoghq.com/rum/error-tracking
 [2]: https://github.com/DataDog/expo-datadog
-[3]: /real_user_monitoring/mobile_and_tv_monitoring/setup/expo/#usage
+[3]: /real_user_monitoring/mobile_and_tv_monitoring/react_native/setup/expo/#usage
+[4]: https://app.datadoghq.com/source-code/setup/rum

@@ -1,6 +1,6 @@
 ---
 title: Azure Integration Manual Setup Guide
-kind: guide
+
 description: "Steps for manually setting up the Datadog Azure integration"
 further_reading:
 - link: "https://docs.datadoghq.com/agent/faq/why-should-i-install-the-agent-on-my-cloud-instances/"
@@ -188,11 +188,10 @@ A form to create a new app registration is displayed:
 #### Creating the app registration
 
 1. Under **Azure Active Directory**, navigate to **App Registrations** and click **New registration**.
-2. Enter the following and click the **Create** button. The name and sign-on URL are not used but are required for the setup process.
+2. Enter the following and click the **Create** button.
 
     - Name: `Datadog Auth`
-    - Supported Account Types: `Accounts in this organizational directory only (Datadog)`
-    - Redirect URI: {{< region-param key="dd_full_site" code="true" >}}
+    - Supported Account Types: `Accounts in this organizational directory only`
 
 {{< img src="integrations/guide/azure_manual_setup/Azure_create_ad.png" alt="Azure create app" popup="true" style="width:80%;" >}}
 
@@ -321,6 +320,6 @@ See the [Azure Logging guide][5] to set up log forwarding from your Azure enviro
 [6]: /integrations/guide/azure-native-manual-setup/
 [7]: https://azure.microsoft.com/en-us/documentation/articles/xplat-cli-install
 [8]: https://app.datadoghq.com/monitors/recommended
-[9]: /monitors/notify/#notify-your-team
+[9]: /monitors/notify/#configure-notifications-and-automations
 [12]: https://learn.microsoft.com/en-us/azure/partner-solutions/datadog/overview
 [13]: /integrations/guide/azure-native-manual-setup/

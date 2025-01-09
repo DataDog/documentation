@@ -1,6 +1,5 @@
 ---
 title: "File share Component"
-kind: documentation
 ---
 
 ## Overview

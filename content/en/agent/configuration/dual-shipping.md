@@ -1,12 +1,14 @@
 ---
 title: Dual Shipping
-kind: guide
 aliases:
 - /agent/guide/dual-shipping
 further_reading:
 - link: "/agent/configuration/network/"
   tag: "Guide"
   text: "Network Traffic"
+- link: "/observability_pipelines/"
+  tag: "documentation"
+  text: "Send logs to external destinations with Observability Pipelines"
 ---
 
 <div class="alert alert-danger">
@@ -15,9 +17,11 @@ Dual shipping can impact billing if you are sending data to multiple Datadog org
 
 ## Overview
 
-If you wish to send data to more than one destination, such as a second Datadog organization or other internal infrastructure, you can configure the Agent to send data to additional endpoints. To set up the Agent to send different kinds of data to multiple endpoints or API keys, use the configurations below.
+This document provides examples of Agent configurations for dual shipping different types of data (for example, APM, logs, Cluster Agent metrics, and so on) to multiple Datadog organizations.
 
-For a full list of network traffic destinations, see [Network Traffic][1].
+**Note**: Use [Observability Pipelines][1] if you want to dual ship logs or split log traffic across different logging vendors, cloud storages, or SIEM providers.
+
+For a full list of network traffic destinations, see [Network Traffic][2].
 
 ## Metrics and service checks
 
@@ -170,7 +174,7 @@ agents:
     orchestrator_explorer:
       orchestrator_additional_endpoints:
         "https://orchestrator.datadoghq.com":
-        - apikey2 
+        - apikey2
 
 clusterAgent:
 ...
@@ -178,7 +182,7 @@ clusterAgent:
     orchestrator_explorer:
       orchestrator_additional_endpoints:
         "https://orchestrator.ddog-gov.com":
-        - apikey2 
+        - apikey2
 ```
 
 
@@ -214,6 +218,8 @@ DD_EVP_PROXY_CONFIG_ADDITIONAL_ENDPOINTS='{\"https://<VERSION>-app.agent.datadog
 
 ## Logs
 
+Use the Agent if you want to dual ship logs to multiple Datadog organizations. Use [Observability Pipelines][2] if you want to send logs to Datadog and external destinations.
+
 TCP requires Agent version >= 6.6.<br/>
 HTTPS requires Agent version >= 6.13.
 
@@ -221,7 +227,7 @@ HTTPS requires Agent version >= 6.13.
 In `datadog.yaml`:
 ```yaml
 logs_config:
-  use_http: true
+  force_use_http: true
   additional_endpoints:
   - api_key: "apiKey2"
     Host: "agent-http-intake.logs.datadoghq.com"
@@ -234,7 +240,7 @@ logs_config:
 Requires Agent >= 6.18 or 7.18.
 
 ```bash
-DD_LOGS_CONFIG_USE_HTTP=true
+DD_LOGS_CONFIG_FORCE_USE_HTTP=true
 DD_LOGS_CONFIG_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"Host\": \"agent-http-intake.logs.datadoghq.com\", \"Port\": 443, \"is_reliable\": true}]"
 ```
 
@@ -250,21 +256,21 @@ In `datadog.yaml`:
 ```yaml
 database_monitoring:
   samples:
-    use_http: true
+    force_use_http: true
     additional_endpoints:
     - api_key: "apiKey2"
       Host: "dbm-metrics-intake.datadoghq.com"
       Port: 443
       is_reliable: true
   activity:
-    use_http: true
+    force_use_http: true
     additional_endpoints:
     - api_key: "apiKey2"
       Host: "dbquery-intake.datadoghq.com"
       Port: 443
       is_reliable: true
   metrics:
-    use_http: true
+    force_use_http: true
     additional_endpoints:
     - api_key: "apiKey2"
       Host: "dbm-metrics-intake.datadoghq.com"
@@ -295,7 +301,7 @@ In `datadog.yaml`:
 ```yaml
 network_devices:
   metadata:
-    use_http: true
+    force_use_http: true
     additional_endpoints:
     - api_key: "apiKey2"
       Host: "ndm-intake.datadoghq.com"
@@ -303,7 +309,7 @@ network_devices:
       is_reliable: true
   snmp_traps:
     forwarder:
-      use_http: true
+      force_use_http: true
       additional_endpoints:
       - api_key: "apiKey2"
         Host: "ndm-intake.datadoghq.com"
@@ -311,7 +317,7 @@ network_devices:
         is_reliable: true
   netflow:
     forwarder:
-      use_http: true
+      force_use_http: true
       additional_endpoints:
       - api_key: "apiKey2"
         Host: "ndm-intake.datadoghq.com"
@@ -328,6 +334,33 @@ DD_NETWORK_DEVICES_METADATA_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"
 
 {{% agent-dual-shipping %}}
 
+## Network Path
+
+### YAML configuration
+
+Requires Agent >= 6.55 or 7.55.
+
+In `datadog.yaml`:
+```yaml
+network_path:
+  forwarder:
+    use_http: true
+    additional_endpoints:
+    - api_key: "apiKey2"
+      Host: "netpath-intake.datadoghq.com"
+      Port: 443
+      is_reliable: true
+```
+
+### Environment variable configuration
+
+```bash
+DD_NETWORK_PATH_FORWARDER_USE_HTTP=true
+DD_NETWORK_PATH_FORWARDER_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"Host\": \"netpath-intake.datadoghq.com\", \"Port\": 443, \"is_reliable\": true}]"
+```
+
+{{% agent-dual-shipping %}}
+
 ## Cloud Security Management Misconfigurations
 
 ### YAML configuration
@@ -336,7 +369,7 @@ In `datadog.yaml`:
 ```yaml
 compliance_config:
   endpoints:
-    use_http: true
+    force_use_http: true
     additional_endpoints:
     - api_key: "apiKey2"
       Host: "https://<VERSION>-app.agent.datadoghq.eu"
@@ -360,7 +393,7 @@ In `datadog.yaml`:
 ```yaml
 runtime_security_config:
   endpoints:
-    use_http: true
+    force_use_http: true
     additional_endpoints:
     - api_key: "apiKey2"
       Host: "https://<VERSION>-app.agent.datadoghq.eu"
@@ -379,7 +412,9 @@ DD_RUNTIME_SECURITY_CONFIG_ENDPOINTS_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiK
 
 ## Dual shipping in Kubernetes
 
-If you're using the [Datadog Agent Helm chart][2], you must configure these settings with a configmap. In the `values.yaml`, set `useConfigMap: true`
+{{< tabs >}} {{% tab "Helm" %}}
+
+If you're using the [Datadog Agent Helm chart][1], you can configure these settings with a configmap. In the `values.yaml`, set `useConfigMap: true`
 and add the relevant settings to `customAgentConfig`.
 
 ```yaml
@@ -399,22 +434,98 @@ and add the relevant settings to `customAgentConfig`.
       - apikey4
 
     logs_config:
-      use_http: true
+      force_use_http: true
       additional_endpoints:
       - api_key: "apiKey2"
-        Host: "{{< region-param key=agent_http_endpoint >}}"
+        Host: "agent-http-intake.logs.datadoghq.com"
         Port: 443
         is_reliable: true
 ```
 
-If you're using the [Datadog Agent operator][3], similarly, you can set the `agent.customConfig.configData` key. All configurable keys are documented in [v1][4] and [v2][5].
+To avoid exposing your API key(s) in clear text inside the `ConfigMap`, you can also use the environment variable configuration and reference a Kubernetes secret. Here is an example to send metrics to an additional region:
+
+1. Create a Kubernetes secret with your environment variable configuration value from this guide:
+    ```bash
+    kubectl create -n <DATADOG AGENT NAMESPACE> secret generic dual-shipping --from-literal metrics='{"https://app.datadoghq.eu": ["apikey4"]}'
+    ```
+2. Use the [Helm chart parameters][2] `datadog.env` or `datadog.envFrom` to reference this secret in your configuration:
+    ```yaml
+    datadog:
+      [...]
+      env:
+      - name: DD_ADDITIONAL_ENDPOINTS
+        valueFrom:
+          secretKeyRef:
+            name: dual-shipping
+            key: metrics
+    ```
+
+[1]: https://github.com/DataDog/helm-charts
+[2]: https://github.com/DataDog/helm-charts/blob/e1ec85127de74c8b876eef6a81bb1579d17b49bf/charts/datadog/values.yaml#L563-L578
+
+{{% /tab %}}
+
+{{% tab "Datadog Operator" %}}
+
+If you're using the [Datadog Agent operator][1], you can set the `[key].customConfigurations.[key].configData` [override][2] key to set these settings. The example below replaces the `datadog.yaml` configuration file of the node Agent to send metrics and logs to additional regions.
+
+```yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  override:
+    nodeAgent:
+      customConfigurations:
+        datadog.yaml:
+          configData: |-
+            additional_endpoints:
+              "https://app.datadoghq.com":
+              - apikey2
+              - apikey3
+              "https://app.datadoghq.eu":
+              - apikey4
+            logs_config:
+              force_use_http: true
+              additional_endpoints:
+              - api_key: "apiKey2"
+                Host: "agent-http-intake.logs.datadoghq.com"
+                Port: 443
+                is_reliable: true
+```
+
+To avoid exposing your API key(s) in clear text inside the `ConfigMap`, you can also use the environment variable configuration and reference a Kubernetes secret. Here is an example to send metrics to an additional region:
+
+1. Create a Kubernetes secret with your environment variable configuration value from this guide:
+    ```bash
+    kubectl create -n <DATADOG AGENT NAMESPACE> secret generic dual-shipping --from-literal metrics='{"https://app.datadoghq.eu": ["apikey4"]}'
+    ```
+2. Use the `[key].env` parameter to reference this secret in your configuration:
+    ```yaml
+    apiVersion: datadoghq.com/v2alpha1
+    kind: DatadogAgent
+    metadata:
+      name: datadog
+    spec:
+      override:
+        nodeAgent:
+          env:
+          - name: DD_ADDITIONAL_ENDPOINTS
+            valueFrom:
+              secretKeyRef:
+                name: dual-shipping
+                key: metrics
+    ```
+
+[1]: https://github.com/DataDog/datadog-operator
+[2]: https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v2alpha1.md
+
+{{% /tab %}} {{< /tabs >}}
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/configuration/network/
-[2]: https://github.com/DataDog/helm-charts
-[3]: https://github.com/DataDog/datadog-operator
-[4]: https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v1alpha1.md
-[5]: https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v2alpha1.md
+[1]: /observability_pipelines/
+[2]: /agent/configuration/network/

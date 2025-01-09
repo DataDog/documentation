@@ -1,6 +1,5 @@
 ---
 title: Using the Bits menu
-kind: documentation
 ---
 
 ## Overview

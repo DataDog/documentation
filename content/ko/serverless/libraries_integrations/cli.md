@@ -4,7 +4,6 @@ aliases:
 - /ko/serverless/serverless_integrations/cli/
 dependencies:
 - https://github.com/DataDog/datadog-ci/blob/master/src/commands/lambda/README.md
-kind: 설명서
 title: Datadog 서버리스 CLI
 ---
 CLI를 사용하여 Datadog으로 AWS 람다 함수를 계측할 수 있습니다. CLI는 기존 람다 함수의 설정을 수정하여 계측을 활성화하므로 재배치할 필요가 *없습니다*. Datadog 서버리스 모니터링을 시작하는 가장 빠른 방법입니다.
@@ -114,7 +113,7 @@ datadog-ci lambda uninstrument -f <function-name> -f <another-function-name> -r 
 | `--no-source-code-integration` |           | Datadog 소스 코드 통합을 비활성화합니다.                                                                                                                                                                                                                                                                                                     |         |
 | `--upload-git-metadata`        | `-u`      | 소스 코드 통합의 일부로 Git 메타데이터 업로드를 사용할지 여부입니다. Datadog Github 통합을 설치하지 않은 경우에만 Git 메타데이터 업로드가 필요합니다.                                                                                                                                                           | `true`  |
 | `--no-upload-git-metadata`     |           | 소스 코드 통합의 일부로 Git 메타데이터 업로드를 비활성화합니다. Datadog Github 통합을 설치한 경우 Git 메타데이터 업로드가 불필요하므로 이 플래그를 사용합니다.                                                                                                                                                  |         |
-| `--apm-flush-deadline`         |           | 밀리초에서 시간 초과하기 전에 기간을 제출할 시기를 결정하는 데 사용됩니다. AWS 람다 호출의 남은 시간이 설정된 값보다 작으면 추적기는 현재 활성 스팬(span)과 완료된 모든 스팬(span)을 제출하려고 시도합니다. NodeJS 및 파이썬(Python)에서 지원됩니다. 기본값은 `100`밀리초입니다.                              |         |
+| `--apm-flush-deadline`         |           | 밀리초에서 시간 초과하기 전에 기간을 제출할 시기를 결정하는 데 사용됩니다. AWS 람다 호출의 남은 시간이 설정된 값보다 작으면 추적기는 현재 활성 스팬(span)과 완료된 모든 스팬(span)을 제출하려고 시도합니다. Node.js 및 파이썬(Python)에서 지원됩니다. 기본값은 `100`밀리초입니다.                              |         |
 <br />
 
 #### `uninstrument`

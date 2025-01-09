@@ -1,6 +1,5 @@
 ---
 title: Visualize
-kind: documentation
 further_reading:
 - link: "/real_user_monitoring/explorer/search/"
   tag: "Documentation"
@@ -85,13 +84,48 @@ Visualize a single [measure][5] (or a [facet][5] unique count of values) on the 
 The RUM Analytics geomap shows the 75th percentile of the **Largest Contentful Paint** over the past day.
 
 ## Funnels
-Learn about [funnel analysis][9].
-## Tree Maps
-A tree map helps you organize and show data as a percentage of a whole in a visually appealing format. Tree maps display data in nested rectangles. Compare different dimensions using both size and colors of the rectangles. You can also select multiple attributes to view a hierarchy of rectangles.
 
-The following tree map shows the percentage breakdown by **View Name**.
+Funnel analysis helps you track conversion rates across key workflows to identify and address any bottlenecks in end-to-end user journeys. Specifically, you can:
 
-{{< img src="real_user_monitoring/explorer/visualize/tree-map.png" alt="Tree map in the RUM Explorer" style="width:90%;">}}
+- See if customers drop off at a certain point due to poor website performance
+- Track how the conversion rate changes over time as new features are built
+- Measure how adding new steps to a workflow impacts drop off rate
+
+**Note**: The conversion rate is the number of visitors to your website that completed a desired goal (a conversion) out of the total number of visitors.
+
+### Build a funnel
+
+To build a funnel, choose your starting view or action and click on the plus icon to build additional steps. You can also use drag and drop functionality to move steps around.
+
+{{< img src="real_user_monitoring/funnel_analysis/funnel-analysis-building-a-funnel-1.mp4" alt="Filtering network map with search" video=true >}}
+
+### Suggested next steps
+
+When you have a starting point in mind, but aren't sure what your users did next, expand the **Quickly add a step** panel (available in a drawer on the right) to view suggested next steps. After inputting steps, this panel automatically loads the top five most common **views** and **actions** that users typically see and take next. This allows you to build funnels quicker knowing the paths your users are taking in sequence.
+
+{{< img src="real_user_monitoring/funnel_analysis/funnel-analysis-suggested-next-steps.jpg" alt="Build a funnel" style="width:90%;" >}}
+
+**Note**: Any action or view that happens between two steps in a funnel does not impact the step-by-step or overall conversion rate. As long as step 1 and step 2 happen in the right order in a given session at least once, it counts as a single converted session.
+
+### Filtering
+
+When constructing your funnel, you can add [default attributes][2] (core, device, operating system, geo-location, and user) and [session-specific][3] attributes to analyze the data further. Click the **Add Filter** button to view the full list of available attributes.
+
+{{< img src="real_user_monitoring/funnel_analysis/funnel-analysis-filtering.png" alt="Use attributes to filter information when constructing your funnel" style="width:80%;" >}}
+
+### Analyze your funnel
+
+After you build a funnel, click on **View Funnel Insights** to open the **Funnel Analysis** panel, which offers correlated data on performance and user behavior trends. This information helps you understand the conversion rate.
+
+- For high level trends, you can see the end-to-end conversion rate for your entire workflow and also see individual steps to step conversion to dropoff rates. If you want to understand what it looks like for someone who converted versus someone who dropped off, you can watch a [Session Replay][4] for each case.
+
+  {{< img src="real_user_monitoring/funnel_analysis/funnel-analysis-analyzing-funnel.jpg" alt="Use the Funnel Insights panel to review performance and user behavior trends" style="width:90%;" >}}
+
+- The **Performance** section allows you to understand if poor performance could have affected conversion. You can view a graph with a correlation between the load time of that page and the conversion rate and also see if any issues (detected by [Error Tracking][5]) occurred on that page.
+- The **User Behavior** section allows you to compare the average frustration count (from [frustration signals][6]) with the conversion rate, and further analyze the frustration signals detected from individual actions. Next to this section is a chart showing the conversion and drop off rate for specific countries, allowing you to understand if geographic region plays a role in a user converting. 
+
+{{< img src="real_user_monitoring/funnel_analysis/funnel-analysis-user-behavior.jpg" alt="User behavior section within funnel analysis" style="width:90%;" >}}
+
 ## Pie charts
 A pie chart helps you organize and show data as a percentage of a whole. It is useful when comparing the relationship between different dimensions such as services, users, hosts, countries, etc. within your log data.
 
@@ -101,11 +135,9 @@ The following pie chart shows the percentage breakdown by **View Path**.
 
 ## Related events
 
-For all visualizations besides the [funnel](#funnels), select a section of the graph or click on the graph to either zoom in or see a list of events that correspond to your selection.
+For all visualizations, select a section of the graph or click on the graph to either zoom in or see a list of events that correspond to your selection.
 
 {{< img src="real_user_monitoring/explorer/visualize/related-events-2.png" alt="Related events link available when you click on the graph" width="90%" >}}
-
-For funnel graphs, click on the graph to see a list of converted and dropped off sessions that correspond to your queries.
 
 For the remaining visualization options, click on the graph and click **View events** to see a list of events that correspond to your selection. 
 
@@ -121,4 +153,3 @@ For the remaining visualization options, click on the graph and click **View eve
 [6]: /notebooks
 [7]: /real_user_monitoring/explorer/export/
 [8]: /dashboards/widgets/list/
-[9]: /real_user_monitoring/product_analytics/funnel_analysis

@@ -18,7 +18,6 @@ further_reading:
 - link: /agent/configuration/agent-fips-proxy
   tag: Documentation
   text: Conformité de Datadog à la norme FIPS
-kind: documentation
 title: Configuration de l'Agent pour un proxy
 ---
 
@@ -125,7 +124,7 @@ Sur les hosts Unix, un proxy peut être appliqué à l'ensemble du système via 
 
 L'Agent utilise les valeurs suivantes par ordre de priorité :
 
-1. Les variables d'environnement `DD_PROXY_HTTPS`, `DD_PROXY_HTTP` et `DD_PROXY_NO_PROXY` 
+1. Les variables d'environnement `DD_PROXY_HTTPS`, `DD_PROXY_HTTP` et `DD_PROXY_NO_PROXY`
 2. Les variables d'environnement `HTTPS_PROXY`, `HTTP_PROXY` et `NO_PROXY`
 3. Les valeurs spécifiées dans `datadog.yaml`
 
@@ -356,7 +355,7 @@ frontend logs_http_frontend
     option tcplog
     default_backend datadog-logs-http
 
-# Si les logs sont envoyés avec use_tcp: true
+# Si les logs sont envoyés avec force_use_tcp: true
 # frontend logs_frontend
 #    bind *:10514
 #    mode tcp
@@ -622,7 +621,7 @@ frontend logs_http_frontend
     option tcplog
     default_backend datadog-logs-http
 
-# Si les logs sont envoyés avec use_tcp: true
+# Si les logs sont envoyés avec force_use_tcp: true
 # frontend logs_frontend
 #    bind *:10514 ssl crt <CHEMIN_VERS_PEM_CERTIFICATS_PROXY>
 #    mode tcp

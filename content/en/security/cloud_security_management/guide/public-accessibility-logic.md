@@ -1,6 +1,5 @@
 ---
 title: How Datadog Determines if Resources are Publicly Accessible
-kind: guide
 further_reading:
 - link: "/security/cloud_security_management/misconfigurations/"
   tag: "Documentation"
@@ -10,13 +9,7 @@ further_reading:
   text: "Out-of-the-box Detection Rules"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Cloud Security Management Misconfigurations is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
 Datadog uses a graph processing framework to map relationships between cloud resources to determine whether they are accessible from the internet. This guide outlines the logic used to classify resources as publicly accessible within the graph framework.
-
-For more information on network reachability, see the [AWS documentation][34] and the [AWS Network Reachability Analyser][35]. Currently, the `Is Publicly Accessible` facet is only available for AWS resources.
 
 ## Resource dependency graph
 
@@ -38,6 +31,8 @@ The following diagrams show how related resources are used to determine whether 
 {{< img src="security/cloud_security_management/guide/public_accessibility_relationships_gcp.png" alt="A graph diagram showing the relationships between resources that are used to determine public accessibility for Google Cloud" width="50%">}}
 
 ## AWS public accessibility logic by resource
+
+For more information on AWS network reachability, see the [AWS documentation][34] and the [AWS Network Reachability Analyser][35].
 
 ### Amazon S3 bucket
 

@@ -10,7 +10,6 @@ algolia:
 aliases:
 - /ko/agent/faq/agent-configuration-files
 - /ko/agent/guide/agent-configuration-files
-kind: guide
 title: Agent 설정 파일
 ---
 

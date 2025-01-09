@@ -11,6 +11,7 @@ author:
 categories:
 - コスト管理
 - クラウド
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/cloudzero/README.md
 display_on_public_website: true
@@ -20,7 +21,6 @@ integration_id: cloudzero
 integration_title: CloudZero
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: cloudzero
 public_title: CloudZero
@@ -38,6 +38,7 @@ tile:
   - Offering::Integration
   - Category::Cost Management
   - Category::Cloud
+  - Queried Data Type::Metrics
   configuration: README.md#Setup
   description: Datadog のコストを CloudZero プラットフォームで表示・分析する
   media:
@@ -64,15 +65,15 @@ CloudZero は、エンジニアリングチームが費用対効果の高いソ�
 
 CloudZero プラットフォームが接続されると、すべての Datadog 製品を対象に、確約コストとオンデマンドコストの両方について、Datadog の請求情報が定期的に取り込まれます。CloudZero はこのデータを他のクラウドコストと統合し、クラウド投資総額を包括的に評価します。CloudZero プラットフォームは、すべてのクラウド費用をさまざまな分析機能で分析することで、効率化の余地を明らかにし、ユーザーによるカスタムレポートの作成と送信を可能にします。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 [Datadog インテグレーションタイル][1]の **Install Integration* をクリックします。インテグレーション がインストールされたら、**Configure** タブの下にある **Connect Accounts** をクリックして、CloudZero に Datadog アカウントへのアクセスを許可します。CloudZero アプリケーションが開いたら接続を作成して、名前を追加し、Datadog の親アカウントが割り当てられているサイトを選択します。
 
 接続が作成されたら、**Continue** をクリックして、CloudZero が Datadog アカウントから CloudZero プラットフォームにデータを取り込むことを許可します。
 
-### ブラウザトラブルシューティング
+### 構成
 
 CloudZero の Datadog 接続の詳細ページから設定を調整できます。
 
@@ -87,7 +88,7 @@ CloudZero の Datadog 接続の詳細ページから設定を調整できます�
 - このインテグレーションをアンインストールすると、それ以前に与えられた認可は全て取り消されます。
 - また、[API Keys ページ][4]でインテグレーション名を検索して、このインテグレーションに紐付けられた全ての API キーが無効になったことを確認してください。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[CloudZero サポート][5]までお問い合わせください。
 

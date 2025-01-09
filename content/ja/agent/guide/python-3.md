@@ -6,7 +6,6 @@ further_reading:
 - link: /agent/guide/agent-v6-python-3/
   tag: ドキュメント
   text: Datadog Agent v6 で Python 3 を使用する
-kind: ガイド
 title: Python 3 カスタムチェックの移行
 ---
 
@@ -44,7 +43,7 @@ Python 2 インタープリターへのパスが異なる場合は、上記の�
 $ python2 -m pylint -sn --py3k CHECK
 ```
 
-たとえば、以下のとおりです。
+例:
 
 ```bash
 $ python2 -m pylint -sn --py3k ~/dev/my-check.py
@@ -107,7 +106,7 @@ Python 3 では、`dict.iterkeys()`、`dict.iteritems()`、`dict.itervalues()` �
 | `for key, value in mydict.iteritems():`<br/> &nbsp;&nbsp;`  ...` | `from six import iteritems` <br/><br/> `for key, value in iteritems(mydict):`<br/> &nbsp;&nbsp;`  ...` |
 | `for value in mydict.itervalues():`<br/> &nbsp;&nbsp;`  ...`     | `from six import itervalues` <br/><br/> `for value in itervalues(mydict):`<br/> &nbsp;&nbsp;`  ...`    |
 
-また、Python 3では、`dict.keys()`、`dict.items()`、`dict.values()` の各メソッドはイテレータを返します。そのため、イテレーションの間に辞書を修正する必要がある場合は、先にコピーを作成します。辞書のキー、項目、値をリストとして取得するには、
+また、Python 3 では、`dict.keys()`、`dict.items()`、`dict.values()` の各メソッドはイテレータを返します。そのため、イテレーションの間に辞書を修正する必要がある場合は、先にコピーを作成します。辞書のキー、項目、値をリストとして取得するには、
 
 | Python 2                        | Python 2 および 3                       |
 |---------------------------------|--------------------------------------|

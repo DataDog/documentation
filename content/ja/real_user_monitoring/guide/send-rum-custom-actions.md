@@ -1,4 +1,7 @@
 ---
+algolia:
+  tags:
+  - addaction
 aliases:
 - /ja/real_user_monitoring/guide/send-custom-user-actions/
 beta: true
@@ -7,7 +10,6 @@ further_reading:
 - link: /real_user_monitoring/explorer
   tag: Documentation
   text: RUM エクスプローラーで RUM データを視覚化する
-kind: ガイド
 private: true
 title: RUM カスタムアクションの送信
 ---
@@ -100,6 +102,6 @@ function onCheckoutButtonClick(cart) {
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/real_user_monitoring/browser/data_collected/?tab=useraction#automatic-collection-of-actions
-[2]: /ja/real_user_monitoring/browser/modifying_data_and_context/#replace-global-context
+[1]: /ja/real_user_monitoring/browser/data_collected/?tab=useraction#action-attributes
+[2]: /ja/real_user_monitoring/browser/advanced_configuration/#replace-global-context
 [3]: /ja/real_user_monitoring/explorer

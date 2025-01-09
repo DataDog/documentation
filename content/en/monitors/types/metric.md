@@ -1,6 +1,5 @@
 ---
 title: Metric Monitor
-kind: documentation
 description: "Compare values of a metric with a user defined threshold"
 aliases:
 - /monitors/monitor_types/metric
@@ -13,10 +12,10 @@ further_reading:
 - link: "/monitors/downtimes/"
   tag: "Documentation"
   text: "Schedule a downtime to mute a monitor"
-- link: "/monitors/manage/status/"
+- link: "/monitors/status/"
   tag: "Documentation"
   text: "Consult your monitor status"
-- link: "/monitors/guide/change-alert"
+- link: "/monitors/types/change-alert"
   tag: "Documentation"
   text: "Troubleshoot change alert monitors"
 ---
@@ -50,7 +49,7 @@ This type of alert is useful to track spikes, drops, or slow changes in a metric
 
 For more information, see the [Change alert monitors][1] guide.
 
-[1]: /monitors/guide/change-alert/
+[1]: /monitors/types/change-alert/
 {{% /tab %}}
 {{% tab "Anomaly" %}}
 
@@ -152,6 +151,7 @@ Any metric reporting to Datadog is available for monitors. Use the editor and th
   - **max/min**: These descriptions of max and min assume that the monitor alerts when the metric goes above the threshold. For monitors that alert when below the threshold, the max and min behavior is reversed.
   - Defining metrics for monitors is similar to defining metrics for graphs. For details on using the `Advanced...` option, see [Advanced graphing][2].
   - There are different behaviors when utilizing `as_count()`. See [as_count() in Monitor Evaluations][3] for details.
+  - `N/A` groups are not included in monitors, so tag keys must have a value. 
 
 ## Set alert conditions
 
@@ -189,7 +189,7 @@ The following logic determines the bucket size:
 In order to be considered as a "full window", the monitor requires:
 
 1. At least one data point in the first bucket. The first bucket is chronologically the earliest bucket in the window.
-2. At most three buckets in total with no data points (including the first one).
+2. No more than three buckets in total with no data points.
 
 If the conditions are met, the monitor is evaluated. Otherwise, the evaluation is canceled and the monitor state is unchanged.
 
@@ -210,7 +210,7 @@ For instructions on the advanced alert options (no data, auto resolve), see the 
 
 ## Notifications
 
-For instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][7] and [Monitor configuration][8] pages.
+For instructions on the **Configure notifications and automations** section, see the [Notifications][7] and [Monitor configuration][8] pages.
 
 ## Further Reading
 
@@ -222,4 +222,4 @@ For instructions on the **Say what's happening** and **Notify your team** sectio
 [5]: /monitors/configuration/?tab=thresholdalert#evaluation-window
 [6]: /monitors/configuration/#advanced-alert-conditions
 [7]: /monitors/notify/
-[8]: /monitors/configuration/?tab=thresholdalert#notify-your-team
+[8]: /monitors/configuration/?tab=thresholdalert#configure-notifications-and-automations

@@ -20,6 +20,46 @@
       "description": "Update a retention filter returns \"OK\" response"
     }
   ],
+  "CreateAWSAccount": [
+    {
+      "group": "aws_integration",
+      "suffix": "_1716720881",
+      "description": "Create an AWS account returns \"AWS Account object\" response"
+    },
+    {
+      "group": "aws_integration",
+      "suffix": "",
+      "description": "Create an AWS integration returns \"AWS Account object\" response"
+    }
+  ],
+  "UpdateAWSAccount": [
+    {
+      "group": "aws_integration",
+      "suffix": "",
+      "description": "Update an AWS integration returns \"AWS Account object\" response"
+    }
+  ],
+  "CreateApp": [
+    {
+      "group": "apps",
+      "suffix": "",
+      "description": "Create App returns \"App Created\" response"
+    }
+  ],
+  "DeleteApps": [
+    {
+      "group": "apps",
+      "suffix": "",
+      "description": "Delete Multiple Apps returns \"OK\" response"
+    }
+  ],
+  "UpdateApp": [
+    {
+      "group": "apps",
+      "suffix": "",
+      "description": "Update App returns \"OK\" response"
+    }
+  ],
   "SearchAuditLogs": [
     {
       "group": "audit",
@@ -73,8 +113,8 @@
     },
     {
       "group": "ci_visibility_pipelines",
-      "suffix": "_129899466",
-      "description": "Send pipeline job event returns \"Request accepted for processing\" response"
+      "suffix": "_2341150096",
+      "description": "Send running pipeline event returns \"Request accepted for processing\" response"
     }
   ],
   "AggregateCIAppTestEvents": [
@@ -94,6 +134,34 @@
       "group": "ci_visibility_tests",
       "suffix": "_1675695429",
       "description": "Search tests events returns \"OK\" response with pagination"
+    }
+  ],
+  "CreateCSMThreatsAgentRule": [
+    {
+      "group": "csm_threats",
+      "suffix": "",
+      "description": "Create a CSM Threats Agent rule returns \"OK\" response"
+    }
+  ],
+  "CreateCloudWorkloadSecurityAgentRule": [
+    {
+      "group": "csm_threats",
+      "suffix": "",
+      "description": "Create a Cloud Workload Security Agent rule returns \"OK\" response"
+    }
+  ],
+  "UpdateCSMThreatsAgentRule": [
+    {
+      "group": "csm_threats",
+      "suffix": "",
+      "description": "Update a CSM Threats Agent rule returns \"OK\" response"
+    }
+  ],
+  "UpdateCloudWorkloadSecurityAgentRule": [
+    {
+      "group": "csm_threats",
+      "suffix": "",
+      "description": "Update a Cloud Workload Security Agent rule returns \"OK\" response"
     }
   ],
   "ArchiveCase": [
@@ -173,32 +241,11 @@
       "description": "Update Cloud Cost Management Azure config returns \"OK\" response"
     }
   ],
-  "CreateCSMThreatsAgentRule": [
+  "UploadCustomCostsFile": [
     {
-      "group": "cloud_workload_security",
-      "suffix": "",
-      "description": "Create a CSM Threats Agent rule returns \"OK\" response"
-    }
-  ],
-  "CreateCloudWorkloadSecurityAgentRule": [
-    {
-      "group": "cloud_workload_security",
-      "suffix": "",
-      "description": "Create a Cloud Workload Security Agent rule returns \"OK\" response"
-    }
-  ],
-  "UpdateCSMThreatsAgentRule": [
-    {
-      "group": "cloud_workload_security",
-      "suffix": "",
-      "description": "Update a CSM Threats Agent rule returns \"OK\" response"
-    }
-  ],
-  "UpdateCloudWorkloadSecurityAgentRule": [
-    {
-      "group": "cloud_workload_security",
-      "suffix": "",
-      "description": "Update a Cloud Workload Security Agent rule returns \"OK\" response"
+      "group": "cloud_cost_management",
+      "suffix": "_4125168396",
+      "description": "Upload Custom Costs File returns \"Accepted\" response"
     }
   ],
   "CreateCloudflareAccount": [
@@ -272,6 +319,20 @@
       "group": "dashboard_lists",
       "suffix": "",
       "description": "Update items of a dashboard list returns \"OK\" response"
+    }
+  ],
+  "CreateDataDeletionRequest": [
+    {
+      "group": "data_deletion",
+      "suffix": "",
+      "description": "Creates a data deletion request returns \"OK\" response"
+    }
+  ],
+  "PatchDomainAllowlist": [
+    {
+      "group": "domain_allowlist",
+      "suffix": "",
+      "description": "Sets Domain Allowlist returns \"OK\" response"
     }
   ],
   "CreateDowntime": [
@@ -450,6 +511,13 @@
       "description": "Create an incident todo returns \"CREATED\" response"
     }
   ],
+  "CreateIncidentType": [
+    {
+      "group": "incidents",
+      "suffix": "",
+      "description": "Create an incident type returns \"CREATED\" response"
+    }
+  ],
   "UpdateIncidentIntegration": [
     {
       "group": "incidents",
@@ -462,6 +530,13 @@
       "group": "incidents",
       "suffix": "",
       "description": "Update an incident todo returns \"OK\" response"
+    }
+  ],
+  "UpdateIncidentType": [
+    {
+      "group": "incidents",
+      "suffix": "",
+      "description": "Update an incident type returns \"OK\" response"
     }
   ],
   "CreateAPIKey": [
@@ -524,7 +599,7 @@
   "ListLogs": [
     {
       "group": "logs",
-      "suffix": "",
+      "suffix": "_3400928236",
       "description": "Search logs returns \"OK\" response"
     },
     {
@@ -645,6 +720,20 @@
       "description": "Update a tag configuration returns \"OK\" response"
     }
   ],
+  "CreateTenantBasedHandle": [
+    {
+      "group": "microsoft_teams_integration",
+      "suffix": "_1540689753",
+      "description": "Create api handle returns \"CREATED\" response"
+    }
+  ],
+  "UpdateTenantBasedHandle": [
+    {
+      "group": "microsoft_teams_integration",
+      "suffix": "_419892746",
+      "description": "Update api handle returns \"OK\" response"
+    }
+  ],
   "CreateMonitorConfigPolicy": [
     {
       "group": "monitors",
@@ -657,6 +746,13 @@
       "group": "monitors",
       "suffix": "",
       "description": "Edit a monitor configuration policy returns \"OK\" response"
+    }
+  ],
+  "UpdateDeviceUserTags": [
+    {
+      "group": "network_device_monitoring",
+      "suffix": "",
+      "description": "Update the tags for a device returns \"OK\" response"
     }
   ],
   "CreateOktaAccount": [
@@ -685,6 +781,13 @@
       "group": "opsgenie_integration",
       "suffix": "",
       "description": "Update a single service object returns \"OK\" response"
+    }
+  ],
+  "UpdateOrgConfig": [
+    {
+      "group": "organizations",
+      "suffix": "",
+      "description": "Update a specific Org Config returns \"OK\" response"
     }
   ],
   "CreatePowerpack": [
@@ -783,6 +886,20 @@
       "description": "Revoke permission returns \"OK\" response"
     }
   ],
+  "CreateRumMetric": [
+    {
+      "group": "rum_metrics",
+      "suffix": "",
+      "description": "Create a rum-based metric returns \"Created\" response"
+    }
+  ],
+  "UpdateRumMetric": [
+    {
+      "group": "rum_metrics",
+      "suffix": "",
+      "description": "Update a rum-based metric returns \"OK\" response"
+    }
+  ],
   "EditSecurityMonitoringSignalIncidents": [
     {
       "group": "security_monitoring",
@@ -795,6 +912,13 @@
       "group": "security_monitoring",
       "suffix": "",
       "description": "Change the triage state of a security signal returns \"OK\" response"
+    }
+  ],
+  "ConvertSecurityMonitoringRuleFromJSONToTerraform": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Convert a rule from JSON to Terraform returns \"OK\" response"
     }
   ],
   "CreateSecurityMonitoringRule": [
@@ -867,6 +991,20 @@
       "group": "security_monitoring",
       "suffix": "",
       "description": "Mute or unmute a batch of findings returns \"OK\" response"
+    }
+  ],
+  "RunHistoricalJob": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Run a historical job returns \"Status created\" response"
+    }
+  ],
+  "TestSecurityMonitoringRule": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Test a rule returns \"OK\" response"
     }
   ],
   "UpdateSecurityMonitoringRule": [
@@ -1015,6 +1153,20 @@
       "description": "Create outcomes batch returns \"OK\" response"
     }
   ],
+  "UpdateScorecardRule": [
+    {
+      "group": "service_scorecards",
+      "suffix": "",
+      "description": "Update an existing rule returns \"Rule updated successfully\" response"
+    }
+  ],
+  "UpsertCatalogEntity": [
+    {
+      "group": "software_catalog",
+      "suffix": "_586948155",
+      "description": "Create or update software catalog entity using schema v3 returns \"ACCEPTED\" response"
+    }
+  ],
   "AggregateSpans": [
     {
       "group": "spans",
@@ -1114,6 +1266,13 @@
       "group": "users",
       "suffix": "",
       "description": "Update a user returns \"OK\" response"
+    }
+  ],
+  "CreateWorkflowInstance": [
+    {
+      "group": "workflow_automation",
+      "suffix": "",
+      "description": "Execute a workflow returns \"Created\" response"
     }
   ]
 }

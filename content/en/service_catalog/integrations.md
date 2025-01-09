@@ -1,6 +1,5 @@
 ---
-title: Using Integrations with Service Catalog
-kind: documentation
+title: Use Integrations with Service Catalog
 aliases:
   - /tracing/service_catalog/integrations
 further_reading:
@@ -76,11 +75,6 @@ You can add OpsGenie metadata to a service so that the Service Catalog displays 
 Once you've completed these steps, an **On Call** information box appears in the **Ownership** tab of a service in the Service Catalog.
 
 {{< img src="tracing/service_catalog/oncall_information.png" alt="On Call information box displaying information from OpsGenie in the Service Catalog" style="width:85%;" >}}
-## IDE integrations
-
-Datadog provides a [JSON Schema][6] for service definitions so that when you are editing a service definition in a [supporting IDE][7], features such as autocomplete and validation are provided.
-
-The [JSON schema for Datadog service definitions][8] is registered with the open source [Schema Store][7].
 
 ## Further reading
 

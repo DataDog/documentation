@@ -16,7 +16,6 @@ further_reading:
 - link: /real_user_monitoring/ios/data_collected
   tag: 설명서
   text: 수집한 RUM iOS 데이터
-kind: 지침
 title: RUM 데이터로 애플리케이션 성능지표(Apdex) 및 커스텀 성능 지표 계산하기
 ---
 

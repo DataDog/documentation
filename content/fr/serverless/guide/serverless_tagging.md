@@ -6,7 +6,7 @@ further_reading:
 - link: /getting_started/tagging/unified_service_tagging/#fonctions-lambda-aws
   tag: Documentation
   text: Tagging de service unifié
-kind: guide
+
 title: Tagging de fonctions sans serveur
 ---
 

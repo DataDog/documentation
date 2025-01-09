@@ -1,9 +1,8 @@
 announcement_banner:
-  desktop_message: Datadogではじめる モダンなモニタリング
-  external_link: https://www.datadoghq.com/ja/free-datadog-trial/
-  mobile_message: Datadogではじめる モダンなモニタリング
-disclaimer: このページは日本語には対応しておりません。随時翻訳に取り組んでいます。翻訳に関してご質問やご意見ございましたら、お気軽にご連絡ください。
-exclude: []
+  desktop_message: Read the 2024 State of Cloud Security Study!
+  external_link: https://www.datadoghq.com/state-of-cloud-security/?utm_source=inbound&utm_medium=corpsite-display&utm_campaign=dg-security-ww-docs-announcement-report-cloudsecurity2024
+  mobile_message: Read the State of Cloud Security Study!
+disclaimer: このページは日本語には対応しておりません。随時翻訳に取り組んでいます。<br>翻訳に関してご質問やご意見ございましたら、<a href="https://docs.datadoghq.com/fr/help/">お気軽にご連絡ください</a>。
 meta_description: Datadogが大規模なクラウドのモニタリングサービスをリードします。
 meta_title: Datadogを始めてみましょう
 site_name: Datadogでインフラストラクチャーとアプリケーションのモニタリング

@@ -15,7 +15,7 @@ integration_id: google-cloud-spanner
 integration_title: Google Spanner
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: google_cloud_spanner
 public_title: Intégration Datadog/Google Spanner

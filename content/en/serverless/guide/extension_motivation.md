@@ -1,6 +1,6 @@
 ---
 title: Deciding to migrate to the Datadog Lambda extension
-kind: guide
+
 further_reading:
   - link: '/serverless/configuration/#migrate-to-the-datadog-lambda-extension'
     tag: 'Documentation'

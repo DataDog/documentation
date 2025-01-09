@@ -8,7 +8,7 @@ further_reading:
 - link: /getting_started/tagging/
   tag: 설명서
   text: 태그 시작하기
-kind: faq
+
 title: 메트릭과 태그 이름을 지정할 때 참고할 수 있는 모범 사례가 있나요?
 ---
 

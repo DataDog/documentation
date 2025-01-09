@@ -1,7 +1,6 @@
 ---
 aliases:
 - /ja/integrations/faq/connection-issues-with-the-sql-server-integration
-kind: ガイド
 title: SQL Server インテグレーションでの接続の問題
 ---
 

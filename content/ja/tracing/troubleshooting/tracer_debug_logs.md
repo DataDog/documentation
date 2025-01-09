@@ -3,11 +3,32 @@ further_reading:
 - link: /tracing/troubleshooting/connection_errors/
   tag: ドキュメント
   text: APM 接続エラーのトラブルシューティング
-kind: Documentation
 title: トレーサーデバッグログ
 ---
 
-## デバッグモードを有効にする
+## 自動化されたデバッグログ収集
+
+<div class="alert alert-warning">自動化されたデバッグログは、Java、.NET、Node.js、Python でサポートされています。他の言語の場合は、代わりに<a href="/tracing/troubleshooting/tracer_debug_logs/#manual-debug-log-collection">手動でのデバッグログ収集</a>をご利用ください。</div>
+
+フレアを使用すると、機密データを除去したうえで、必要なトラブルシューティング情報 (レーサーログを含む) を Datadog サポートチームに送信できます。これは、高い CPU 使用率やメモリ使用率、スパンの欠落などの問題をトラブルシューティングする際に有用です。
+
+### 前提条件
+
+- Datadog サイトからフレアを送信するには、Agent で [Fleet Automation][4] と [Remote Configuration][5] を有効にしてください。
+- 対応するトレーサーバージョンが必要です。
+  - Java: `1.26.0` 以上
+  - Python: `2.11.0` 以上
+  - Node.js: `5.15.0` 以上または `4.39.0` 以上
+  - .NET: `2.48.0` 以上
+
+### フレアの送信
+
+{{% remote-flare %}}
+例:
+
+{{< img src="agent/fleet_automation/fleet-automation-flare-agent-and-tracer-debuglevel.png" alt="Send Ticket ボタンは、既存または新規のサポートチケットにフレアを送信するためのフォームを起動します" style="width:60%;" >}}
+
+## 手動でのデバッグログ収集
 
 Datadog デバッグ設定を使用して、問題を診断したり、トレースデータを監査したりできます。ロガーに送信されるイベントの数が増えるため、実稼働システムでデバッグモードを有効にすることはお勧めできません。デバッグモードはデバッグ目的でのみ使用してください。
 
@@ -32,7 +53,28 @@ Datadog Java トレーサーのデバッグモードを有効にするには、J
 
 Datadog Python Tracer のデバッグモードを有効にする手順は、アプリケーションが使用しているトレーサーのバージョンに依存します。該当するシナリオを選択してください。
 
-### シナリオ 1: ddtrace バージョン 1.3.2 以上
+### シナリオ 1: ddtrace バージョン 2.x 以上
+
+1. デバッグモードを有効にするには: `DD_TRACE_DEBUG=true`
+
+2. デバッグログをログファイルにルーティングするには、 `DD_TRACE_LOG_FILE` をそのログファイルのファイル名に、現在の作業ディレクトリからの相対パスで設定します。例えば、`DD_TRACE_LOG_FILE=ddtrace_logs.log` とします。
+   デフォルトでは、ファイルサイズは 15728640 バイト (約 15MB) で、1 つのバックアップログファイルが作成されます。デフォルトのログファイルのサイズを大きくするには、`DD_TRACE_LOG_FILE_SIZE_BYTES` の設定でサイズをバイト単位で指定します。
+
+**注:** アプリケーションがルートロガーを使用し、ログレベルを `DEBUG` に変更すると、デバッグトレーサーログが有効になります。この動作をオーバーライドしたい場合は、以下のように `ddtrace` ロガーをオーバーライドします。
+
+```
+import logging
+
+# ルートロガー構成
+root_logger = logging.getLogger()
+root_logger.setLevel(logging.DEBUG)
+
+# ddtrace 構成を WARNING ログレベルにオーバーライド
+logging.getLogger("ddtrace").setLevel(logging.WARNING)
+```
+
+
+### シナリオ 2: ddtrace バージョン 1.3.2〜<2.x
 
 1. デバッグモードを有効にするには: `DD_TRACE_DEBUG=true`
 
@@ -42,19 +84,19 @@ Datadog Python Tracer のデバッグモードを有効にする手順は、ア�
 3. ログをコンソールにルーティングするには、**Python 2** アプリケーションでは、 `logging.basicConfig()` 等を構成してください。**Python 3** のアプリケーションでは、ログは自動的にコンソールに送られます。
 
 
-### シナリオ 2: ddtrace バージョン 1.0.x〜1.2.x
+### シナリオ 3: ddtrace バージョン 1.0.x〜1.2.x
 
 1. デバッグモードを有効にするには: `DD_TRACE_DEBUG=true`
 
 2. **Python 2 または Python 3** アプリケーションでログをコンソールにルーティングするには、`logging.basicConfig()` を構成するか、`DD_CALL_BASIC_CONFIG=true` を使用します。
 
-### シナリオ 3: ddtrace バージョン 0.x
+### シナリオ 4: ddtrace バージョン 0.x
 
 1. デバッグモードを有効にするには: `DD_TRACE_DEBUG=true`
 
 2. **Python 2 または Python 3** アプリケーションでログをコンソールにルーティングするには、`logging.basicConfig()` を構成するか、`DD_CALL_BASIC_CONFIG=true` を使用します。
 
-### シナリオ 4: 標準のロギングライブラリを使用した、アプリケーションコードでのデバッグログの構成
+### シナリオ 5: 標準のロギングライブラリを使用した、アプリケーションコードでのデバッグログの構成
 
 どのバージョンの ddtrace でも、トレーサー環境変数 `DD_TRACE_DEBUG` を設定する代わりに、標準ライブラリ `logging` を直接使用して、アプリケーションコード内でデバッグログを有効にすることができます。
 
@@ -94,7 +136,7 @@ Datadog::Tracing.logger.info { "this is typically called by tracing code" }
 
 {{< programming-lang lang="go" >}}
 
-Datadog Goトレーサのデバッグモードを有効にするには、`Start` 構成中にデバッグモードを有効にします。
+Datadog Go トレーサーのデバッグモードを有効にするには、環境変数 `DD_TRACE_DEBUG=true` を設定するか、`Start` 構成中にデバッグモードを有効にします。
 
 ```go
 package main
@@ -103,6 +145,27 @@ import "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
 
 func main() {
     tracer.Start(tracer.WithDebugMode(true))
+    defer tracer.Stop()
+}
+```
+
+#### 放棄されたスパンログ
+
+Datadog Go トレーサーは、潜在的に放棄されたスパンのロギングもサポートしています。Go でこのデバッグモードを有効にするには、環境変数 `DD_TRACE_DEBUG_ABANDONED_SPANS=true` を設定します。スパンが放棄されたとみなされる時間 (デフォルト=`10m`) を変更するには、環境変数 `DD_TRACE_ABANDONED_SPAN_TIMEOUT` に希望の時間を設定します。放棄されたスパンのログは Info レベルに表示されます。
+
+また、`Start` の構成中に放棄されたスパンのデバッグを有効にすることもできます。
+
+```go
+package main
+
+import (
+  "time"
+
+  "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+)
+
+func main() {
+    tracer.Start(tracer.WithDebugSpansMode(10 * time.Minute))
     defer tracer.Stop()
 }
 ```
@@ -176,6 +239,8 @@ GlobalSettings.SetDebugEnabled(true);
 
 **注**: Linux では、デバッグモードを有効にする前にログディレクトリを作成する必要があります。
 
+バージョン `2.19.0` 以降では、`DD_TRACE_LOGFILE_RETENTION_DAYS` 設定を使うことで、起動時に現在のロギングディレクトリからログファイルを削除するようにトレーサーを構成することができます。トレーサーは指定された日数より古いログファイルと同じ年齢のログファイルを削除します。デフォルト値は `31` です。
+
 .NET Tracer の構成方法の詳細については、[構成][2]セクションを参照してください。
 
 これらのパスで作成されるログには、次の 2 つのタイプがあります。
@@ -191,6 +256,22 @@ GlobalSettings.SetDebugEnabled(true);
 
 <mrk mid="78" mtype="seg"/><mrk mid="79" mtype="seg">この環境変数値をトレーサーが適切に処理できるように設定する方法とタイミングについては、[PHP 構成に関するドキュメント][1]を参照してください。</mrk>
 
+デバッグトレーサーログをファイルにルーティングするには、2 つのオプションがあります。
+
+**オプション 1:**
+
+dd-trace-php 0.98.0 以降では、特定のデバッグトレーサーログのログファイルへのパスを指定できます。
+
+- **環境変数**: `DD_TRACE_LOG_FILE`
+
+- **INI**: `datadog.trace.log_file`
+
+**注**:
+  - どこで `DD_TRACE_LOG_FILE` を設定するかについての詳細は、[PHP トレーシングライブラリの構成][2]を参照ください。
+  - `DD_TRACE_LOG_FILE` が指定されていない場合、ログは PHP のデフォルトのエラー場所に出力されます (詳細は**オプション 2**を参照してください)。
+
+**オプション 2:**
+
 `error_log` メッセージを置く場所を PHP に指示するには、それをサーバーレベルで設定するか、PHP `ini` パラメーターで設定します。後者が PHP の動作を構成する標準的な方法です。
 
 <mrk mid="81" mtype="seg">Apache サーバーを使用している場合は、`ErrorLog` ディレクティブを使用します。</mrk>
@@ -199,6 +280,7 @@ GlobalSettings.SetDebugEnabled(true);
 
 
 [1]: https://www.php-fig.org/psr/psr-3
+[2]: /ja/tracing/trace_collection/library_config/php/
 {{< /programming-lang >}}
 
 {{< programming-lang lang="cpp" >}}
@@ -206,10 +288,9 @@ GlobalSettings.SetDebugEnabled(true);
 すべてのリリースバイナリライブラリは、最適化されたリリースにデバッグシンボルが追加されコンパイルされています。GDB または LLDB を使用してライブラリをデバッグしたり、コアダンプを読み取ることができます。ソースからライブラリを構築する場合は、引数 `-DCMAKE_BUILD_TYPE=RelWithDebInfo` を cmake に渡して、最適化されたビルドをデバッグシンボル付きでコンパイルします。
 
 ```bash
-cd .build
-cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo ..
-make
-make install
+cmake -B .build -DCMAKE_BUILD_TYPE=RelWithDebInfo ..
+cmake --build .build -j
+cmake --install .build
 ```
 
 {{< /programming-lang >}}
@@ -218,7 +299,8 @@ make install
 
 ## デバッグログを確認する
 
-トレーサーのデバッグモードが有効になっている場合、トレーサー固有のログメッセージはトレーサーの初期化方法およびトレーサーが Agent に送信されたかを報告します。**このログは、フレアでは Datadog Agent に送信できません。また、ロギングコンフィギュレーションによっては別のパスに保存されます**。以下は、ご使用のログファイルに表示されるログの例になります。
+
+トレーサーのデバッグモードを有効にすると、トレーサー固有のログメッセージによって、初期化状況やトレースが Agent へ送信されたかを確認できます。デバッグログはログ設定に応じて別のパスに格納されます。アプリケーションレベルのトレーサー情報を有効にすると、デバッグログは[対応する言語](#prerequisites)向けのフレアにも送信されます。以下は、ログファイルに出力されうるログメッセージの例です。
 
 理解できないエラーがある場合、またはトレースが Datadog にフラッシュされたと報告されたものの　Datadog UI に表示されない場合は、[Datadog サポートに連絡][1]し、[フレア][2] で関連するログエントリを入力します。
 
@@ -389,26 +471,26 @@ YYYY-MM-DD HH:MM:SS.<integer> +00:00 [ERR] An error occurred while sending trace
 
 {{< programming-lang lang="php" >}}
 
+**インテグレーションのロード:**
 
-**スパンの生成:**
+注: このログは `DD_TRACE_LOG_FILE` (ini: `datadog.trace.log_file`) には**従わず**、常に ErrorLog ディレクティブにルーティングされます。
 
 ```text
-[Mon MM  DD 19:41:13 YYYY] [YYYY-MM-DDT19:41:13+00:00] [ddtrace] [debug] - Encoding span <span id> op: 'laravel.request' serv: 'Sample_Laravel_App' res: 'Closure unnamed_route' type 'web'
+[Mon MM  DD 19:56:23 YYYY] [YYYY-MM-DDT19:56:23+00:00] [ddtrace] [debug] - Loaded integration web
 ```
 
+**スパン情報:**
 
-
-**Agent へのトレース送信試行:**
+0.98.0 から利用可能です。
 
 ```text
-[Mon MM  DD 19:56:23 YYYY] [YYYY-MM-DDT19:56:23+00:00] [ddtrace] [debug] - About to send trace(s) to the agent
+[Mon MM  DD 19:56:23 YYYY] [YYYY-MM-DDT19:56:23+00:00] [ddtrace] [span] Encoding span <SPAN ID>: trace_id=<TRACE ID>, name='wpdb.query', service='wordpress', resource: '<RESOURCE NAME>', type 'sql' with tags: component='wordpress'; and metrics: -
 ```
 
-
-**トレースが Agent に正常に送信されました:**
+**トレースの送信試行:**
 
 ```text
-[Mon MM  DD 19:56:23 2019] [YYYY-MM-DDT19:56:23+00:00] [ddtrace] [debug] - Traces successfully sent to the agent
+[Mon MM  DD 19:56:23 YYYY] [YYYY-MM-DDT19:56:23+00:00] [ddtrace] [info] Flushing trace of size 56 to send-queue for http://datadog-agent:8126
 ```
 
 
@@ -422,3 +504,6 @@ YYYY-MM-DD HH:MM:SS.<integer> +00:00 [ERR] An error occurred while sending trace
 
 [1]: /ja/help/
 [2]: /ja/agent/troubleshooting/#send-a-flare
+[3]: /ja/agent/remote_config
+[4]: /ja/agent/fleet_automation/
+[5]: /ja/agent/remote_config#enabling-remote-configuration

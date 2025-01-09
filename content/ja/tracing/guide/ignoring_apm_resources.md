@@ -1,5 +1,4 @@
 ---
-kind: documentation
 title: APM で不要なリソースを無視する
 ---
 
@@ -29,15 +28,19 @@ Datadog に送信したくないトレースのセットをプログラムで特
 
 フィルタータグオプションでは、文字列の完全一致が必要です。正規表現により除外したい場合は、「[リソースに基づいて無視する](#ignoring-based-on-resources)」を参照してください。
 
-環境変数のキーと値をカンマで区切ったリストを使って、必要とするスパンタグや拒否するスパンタグを指定することができます。
+環境変数でキーと値をスペースで区切ったリストを使うことで、require または reject するスパンタグを指定することができます。
 
 `DD_APM_FILTER_TAGS_REQUIRE`
-: 指定されたスパンのタグと値が完全に一致する root スパンを持つトレースのみを収集します。このルールに一致しない場合、トレースは無視されます。例えば、`DD_APM_FILTER_TAGS_REQUIRE="key1:value1 key2:value2"` です。
+: 指定されたスパンタグとその値が完全に一致する root スパンを持つトレースのみを収集します。このルールに一致しないトレースは破棄されます。例えば、`DD_APM_FILTER_TAGS_REQUIRE="key1:value1 key2:value2"` です。Datadog Agent 7.49 以降では、正規表現は `DD_APM_FILTER_TAGS_REGEX_REQUIRE` で指定できます。
 
 `DD_APM_FILTER_TAGS_REJECT`
-: 指定されたスパンのタグと値が完全に一致する root スパンを持つトレースを拒否します。このルールに一致した場合、トレースは無視されます。例えば、`DD_APM_FILTER_TAGS_REJECT="key1:value1 key2:value2"` です。
+: 指定されたスパンタグとその値が完全に一致する root スパンを持つトレースを拒否します。このルールに一致するトレースは破棄されます。例えば、`DD_APM_FILTER_TAGS_REJECT="key1:value1 key2:value2"` です。Datadog Agent 7.49 以降では、正規表現は `DD_APM_FILTER_TAGS_REGEX_REJECT` で指定できます。
 
-または、Agent のコンフィギュレーションファイルでこれらを設定することもできます。
+
+{{< tabs >}}
+{{% tab "datadog.yaml" %}}
+
+代わりに、Agent 構成でカンマ区切りのリストで設定することもできます。
 
 {{< code-block lang="yaml" filename="datadog.yaml" >}}
 apm_config:
@@ -54,9 +57,48 @@ apm_config:
     reject: ["http.url:http://localhost:5050/healthcheck"]
 {{< /code-block >}}
 
+{{% /tab %}}
+{{% tab "Kubernetes" %}}
+#### Datadog Operator
+
+{{< code-block lang="yaml" filename="datadog-agent.yaml" >}}
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  override:
+    nodeAgent:
+      containers:
+        trace-agent:
+          env:
+            - name: DD_APM_FILTER_TAGS_REJECT
+              value: tag_key1:tag_val2 tag_key2:tag_val2
+{{< /code-block >}}
+
+{{% k8s-operator-redeploy %}}
+
+#### Helm
+
+{{< code-block lang="yaml" filename="datadog-values.yaml" >}}
+agents:
+  containers:
+    traceAgent:
+      env:
+        - name: DD_APM_FILTER_TAGS_REJECT
+          value: tag_key1:tag_val2 tag_key2:tag_val2
+
+{{< /code-block >}}
+
+{{% k8s-helm-redeploy %}}
+
+[1]: /ja/agent/kubernetes/?tab=helm#installation
+{{% /tab %}}
+{{< /tabs >}}
+
 この方法でトレースをフィルターすると、[トレースメトリクス][3]からこれらのリクエストが削除されます。トレースメトリクスに影響を与えずに取り込みを減らす方法については、[Ingestion Controls][4] を参照してください。
 
-バックエンドでは、Datadog は取り込み後に以下のスパンタグを作成し、スパンに追加します。これらのタグは、Datadog Agent レベルでトレースをドロップするために使用することはできません。
+バックエンドでは、Datadog は取り込み後に以下のスパンタグを作成し、スパンに追加します。なお、これらのタグは Datadog Agent レベルでトレースをドロップするためには使用できません。エージェントは取り込み前に利用可能なタグに基づいてのみフィルタリングを行うためです。
 
 
 | 名前                                    | 説明                                      |
@@ -86,7 +128,7 @@ apm_config:
 | **名前**                       | **Remap from**                                                                                        |
 |--------------------------------|-------------------------------------------------------------------------------------------------------|
 | `http.route`                   | `aspnet_core.route` - .NET<br>`aspnet.route` - .NET<br>`laravel.route` - PHP<br>`symfony.route` - PHP |
-| `http.useragent`               | `user_agent` - Java                                                                                   |
+| `http.useragent`               | `user_agent` - Java、C++                                                                                   |
 | `http.url_details.queryString` | `http.query.string` - Python                                                                          |
 
 #### データベース
@@ -287,7 +329,7 @@ trace-agent 専用コンテナに、環境変数 `DD_APM_IGNORE_RESOURCES` を�
 
 {{< code-block lang="yaml" >}}
         - name: DD_APM_IGNORE_RESOURCES
-          value: ["value1","Api::HealthchecksController#index$"]
+          value: '"value1","Api::HealthchecksController#index$"'
 {{< /code-block >}}
 
 {{% /tab %}}
@@ -323,9 +365,9 @@ helm install dd-agent -f values.yaml \
 
 [1]: /ja/agent/kubernetes/?tab=helm#installation
 {{% /tab %}}
-{{% tab "AWS ECS タスク定義" %}}
+{{% tab "Amazon ECS タスク定義" %}}
 
-AWS ECS を使用している場合 (EC2など) は、Datadog Agent のコンテナ定義で、環境変数 `DD_APM_IGNORE_RESOURCES` および JSON が以下のように評価されるような値を追加します。
+Amazon ECS を使用している場合 (例えば、EC2 上で)、Datadog Agent のコンテナ定義に環境変数 `DD_APM_IGNORE_RESOURCES` を追加し、その値が次のような JSON に評価されるようにします。
 
 {{< code-block lang="json" >}}
     "environment": [
@@ -388,21 +430,28 @@ tracer.configure(settings={
 
 {{< programming-lang lang="nodeJS" >}}
 
-[Http][1] プラグインにブロックリストを設定します。ブロックリストが一致する対象については API ドキュメントを参照してください。例えば、Http は URL に一致するため、トレースの `http.url` スパンタグが `http://<domain>/healthcheck` であれば、`healthcheck` URL に一致するルールを記述します。
+[Http][1] プラグインにブロックリストを設定します。ブロックリストが一致する対象については API ドキュメントを参照してください。例えば、受信 Http リクエストは URL パスに一致するため、トレースの `http.url` スパンタグが `http://<domain>/healthcheck` であれば、`healthcheck` URL に一致するルールを記述します。
 
 
 ```
 const tracer = require('dd-trace').init();
 tracer.use('http', {
-  blocklist: ["/healthcheck"]
+  // 受信 http リクエストはパスに一致する
+  server: {
+    blocklist: ['/healthcheck']
+  },
+  // 発信 http リクエストは完全な URL で一致する
+  client: {
+    blocklist: ['https://telemetry.example.org/api/v1/record']
+  }
 })
 
-// http をインポート
+//import http
 
 ```
 <div class="alert alert-info"><strong>注</strong>: インテグレーションのためのトレーサーコンフィギュレーションは、インスツルメントされたモジュールがインポートされる<em>前に</em>行う必要があります。</div>
 
-[1]: https://datadoghq.dev/dd-trace-js/interfaces/plugins.connect.html#blocklist
+[1]: https://datadoghq.dev/dd-trace-js/interfaces/export_.plugins.connect.html#blocklist
 {{< /programming-lang >}}
 
 {{< programming-lang lang="java" >}}
@@ -441,7 +490,7 @@ public class GreetingController {
 <div class="alert alert-warning"><strong>注</strong>: このようにトレースをフィルタリングすると、<a href="/tracing/guide/metrics_namespace/">トレースメトリクス</a>からこれらのリクエストが削除されます。トレースメトリクスに影響を与えずに取り込み量を削減する方法については、<a href="/tracing/trace_ingestion/ingestion_controls">取り込みコントロール</a>を参照してください。</div>
 
 [1]: /ja/help/
-[2]: /ja/tracing/guide/add_span_md_and_graph_it/
+[2]: /ja/tracing/trace_collection/custom_instrumentation/otel_instrumentation/
 [3]: /ja/tracing/guide/metrics_namespace/
 [4]: /ja/tracing/trace_ingestion/ingestion_controls
 [5]: /ja/tracing/configure_data_security/?tab=mongodb#exclude-resources-from-being-collected

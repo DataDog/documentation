@@ -17,7 +17,6 @@ further_reading:
 - link: /logs/
   tag: 설명서
   text: Log Management
-kind: 설명서
 title: 로그 아카이브
 ---
 

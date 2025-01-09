@@ -1,10 +1,9 @@
 ---
 title: Flutter Log Collection
-kind: documentation
 description: Collect Logs data from your Flutter projects.
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-flutter
-  tag: GitHub
+  tag: "Source Code"
   text: dd-sdk-flutter Source code
 - link: logs/explorer/
   tag: Documentation
@@ -154,7 +153,7 @@ final datadogLogger = DatadogSdk.instance.logs?.createLogger(
 
 
 [1]: https://pub.dev/packages/datadog_flutter_plugin
-[2]: /real_user_monitoring/mobile_and_tv_monitoring/setup/flutter
+[2]: /real_user_monitoring/mobile_and_tv_monitoring/flutter/setup
 [3]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/DatadogLoggerConfiguration-class.html
 [4]: /getting_started/tagging/
 [5]: https://api.flutter.dev/flutter/services/StandardMessageCodec-class.html

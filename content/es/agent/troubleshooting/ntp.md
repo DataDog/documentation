@@ -1,17 +1,16 @@
 ---
 aliases:
 - /es/agent/faq/network-time-protocol-ntp-offset-issues
-kind: documentación
 title: Problemas con el protocolo de tiempo de la red (NTP)
 ---
 
-Si has detectado alguno de los siguientes problemas, es posible que se deban al desfase del NTP en los hosts que envían métricas a través del Agent:
+Si has observado alguno de los siguientes problemas, es posible que estén relacionados con el desplazamiento de NTP en los hosts que informan métricas a través del Agent:
 
 * Activación de alertas incorrecta
-* Retrasos en las métricas
+* Retraso en el tiempo de respuesta de las métricas
 * Vacíos en los gráficos de métricas
 
-Para comprobar el desfase del NTP en un host, ejecuta el [comando de estado][1] del Agent, sigue las instrucciones que correspondan a tu sistema operativo y busca la sección Clocks:
+A fin de comprobar el desplazamiento de NTP de un host, ejecuta el [comando de estado][1] del Agent, con las instrucciones apropiadas para tu sistema operativo, y busca la sección Clocks (Relojes):
 
 ```
   Clocks
@@ -20,19 +19,19 @@ Para comprobar el desfase del NTP en un host, ejecuta el [comando de estado][1] 
     System UTC time: 2015-02-12 22:10:49.524660
 ```
 
-Cualquier desfase significativo puede tener repercusiones no deseadas. Para evitar problemas relacionados con el NTP, haz uso del monitor reservado al desfase del NPT de Datadog para que te avise cuando se produzca algún cambio en un host debido a la [integración del NTP][2].
-Si lo prefieres, también puedes utilizar la [página Check Summary][3] (Resumen de checks) de Datadog e inspeccionar el check `ntp.in_sync` para ver la lista de hosts que tienen problemas relacionados con el NTP.
+Cualquier desplazamiento significativo puede tener efectos no deseados. Para evitar problemas de NTP, aprovecha el monitor de Datadog a fin de que el desplazamiento de NTP te avise cuando haya desviación en un host gracias a la [integración de NTP][2].
+De manera alternativa, usa la [página Resumen de checks][3] de Datadog e inspecciona la `ntp.in_sync` del check para ver la lista de hosts que tienen problemas de NTP.
 
-**Nota**: Se debe autorizar el tráfico de UDP saliente a través del puerto `123` para que el Agent pueda confirmar que la hora del servidor local es razonablemente precisa según los servidores NTP de Datadog.
+**Nota**: Se debe permitir el tráfico de UDP saliente a través del puerto `123` para que el Agent pueda confirmar que la hora del servidor local es razonablemente precisa según los servidores de NTP de Datadog.
 
-## Leer más
+## Referencias adicionales
 
-{{< whatsnext desc="La sincronización del reloj del sistema con el NTP varía en función del sistema operativo utilizado:">}}
-    {{< nextlink href="https://support.microsoft.com/en-us/help/816042/how-to-configure-an-authoritative-time-server-in-windows-server" tag="Windows" >}}Cómo sincronizar Microsoft Windows con un servidor NTP{{< /nextlink >}}
-    {{< nextlink href="http://askubuntu.com/questions/254826/how-to-force-a-clock-update-using-ntp" tag="Linux" >}}¿Cómo se puede forzar la actualización del reloj mediante el NTP?{{< /nextlink >}}
-    {{< nextlink href="http://www.freebsd.org/doc/en/books/handbook/network-ntp.html" tag="FreeBSD">}}Sincronización del reloj con el NTP{{< /nextlink >}}
+{{< whatsnext desc="Las instrucciones para sincronizar el reloj del sistema con NTP varían en función del sistema operativo que se use:">}}
+    {{< nextlink href="https://support.microsoft.com/en-us/help/816042/how-to-configure-an-authoritative-time-server-in-windows-server" tag="Windows" >}}Cómo sincronizar Microsoft Windows con un servidor de NTP{{< /nextlink >}}
+    {{< nextlink href="http://askubuntu.com/questions/254826/how-to-force-a-clock-update-using-ntp" tag="Linux" >}}¿Cómo se fuerza una actualización del reloj con NTP?{{< /nextlink >}}
+    {{< nextlink href="http://www.freebsd.org/doc/en/books/handbook/network-ntp.html" tag="FreeBSD">}}Sincronización del reloj con NTP{{< /nextlink >}}
 {{< /whatsnext >}}
 
-[1]: /es/agent/guide/agent-commands/#agent-status-and-information
+[1]: /es/agent/configuration/agent-commands/#agent-status-and-information
 [2]: /es/integrations/ntp/
 [3]: https://app.datadoghq.com/check/summary

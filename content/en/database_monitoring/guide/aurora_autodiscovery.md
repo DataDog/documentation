@@ -1,11 +1,7 @@
 ---
 title: Configuring Database Monitoring for Amazon Aurora DB Clusters
-kind: guide
----
 
-{{< beta-callout url="#" btn_hidden="true" >}}
-Autodiscovery for Aurora clusters is a beta feature. If you have any feedback about this feature, contact support at support@datadoghq.com.
-{{< /beta-callout >}}
+---
 
 This guide assumes you have configured Database Monitoring for your Amazon Aurora [Postgres][1] or [MySQL][11] databases.
 
@@ -15,38 +11,20 @@ Supported databases
 : Postgres, MySQL
 
 Supported Agent versions
-: 7.53.0+ (beta)
-
-To use this feature, you must install the beta version of the Agent. See the [Install Datadog Agent 7.53.0+](#install-datadog-agent-7530) section on this page.
+: 7.53.0+
 
 ## Overview
 
-Datadog's [Autodiscovery][4] enables you to configure monitoring in dynamic infrastructures. You can use this feature to monitor your Aurora clusters without having to list individual database host endpoints. This is especially helpful for clusters that use [Aurora Auto Scaling][6], which dynamically adjusts the number of Aurora Replicas in response to variations in connectivity or workload. Autodiscovery automatically discovers and monitors both primary and replica endpoint instances.
+Datadog's [Autodiscovery][4] enables you to configure monitoring in dynamic infrastructures. You can use this feature to monitor your Aurora clusters without having to list individual database host endpoints (for example, `postgres.d/conf.yaml`). This is especially helpful for clusters that use [Aurora Auto Scaling][6], which dynamically adjusts the number of Aurora Replicas in response to variations in connectivity or workload. Autodiscovery automatically discovers and monitors both primary and replica endpoint instances.
 
 With Autodiscovery and Database Monitoring, you can define configuration templates for Postgres or MySQL checks and specify which clusters to apply each check to.
 
 ## Enabling Autodiscovery for Aurora clusters
 
-1. [Install Datadog Agent 7.53.0+](#install-datadog-agent-7530)
-2. [Grant AWS permissions](#grant-aws-permissions)
-3. [Configure Aurora tags](#configure-aurora-tags)
-4. [Configure the Datadog Agent](#configure-the-datadog-agent)
-5. [Create a configuration template](#create-a-configuration-template)
-
-### Install Datadog Agent 7.53.0+
-
-To use this feature, you need to install a [beta version][9] of the Agent.
-
-You can use the Agent installation script to install the correct version by running the following command:
-
-```bash
-DD_API_KEY=<API_KEY> DD_SITE="{{< region-param key="dd_site" code="true" >}}" \
-DD_AGENT_DIST_CHANNEL=beta DD_AGENT_MAJOR_VERSION=7 \
-DD_AGENT_MINOR_VERSION=52.0~dbm~aurora~autodiscovery~beta~0.3-1 \
-bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
-```
-
-For more information on installing the Datadog Agent, see [Basic Agent Usage for Amazon Linux][10].
+1. [Grant AWS permissions](#grant-aws-permissions)
+2. [Configure Aurora tags](#configure-aurora-tags)
+3. [Configure the Datadog Agent](#configure-the-datadog-agent)
+4. [Create a configuration template](#create-a-configuration-template)
 
 ### Grant AWS permissions
 

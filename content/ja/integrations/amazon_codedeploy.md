@@ -8,6 +8,7 @@ categories:
 - configuration & deployment
 - log collection
 - provisioning
+custom_kind: インテグレーション
 dependencies: []
 description: 行われているデプロイをリアルタイムで表示し、その所要時間を追跡。
 doc_link: https://docs.datadoghq.com/integrations/amazon_codedeploy/
@@ -18,7 +19,6 @@ integration_id: amazon-codedeploy
 integration_title: AWS CodeDeploy
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: '1.0'
 name: amazon_codedeploy
 public_title: Datadog-AWS CodeDeploy インテグレーション
@@ -26,7 +26,8 @@ short_description: 行われているデプロイをリアルタイムで表示�
 version: '1.0'
 ---
 
-{{< img src="integrations/amazon_codedeploy/monitor-aws-codedeploy-dashboard.png" alt="CodeDeploy デフォルトダッシュボード" popup="true">}}
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
+{{< img src="integrations/amazon_codedeploy/monitor-aws-codedeploy-dashboard.png" alt="CodeDeploy のデフォルトダッシュボード" popup="true">}}
 
 ## 概要
 
@@ -80,13 +81,13 @@ AWS から取得される各メトリクスには、ホスト名やセキュリ�
 
 ### イベント
 
-AWS Codedeploy インテグレーションには、成功したデプロイ、失敗したデプロイ、および停止されたデプロイのイベントが含まれます。以下はイベントの例です。
+AWS CodeDeploy インテグレーションには、成功したデプロイ、失敗したデプロイ、および停止されたデプロイのイベントが含まれます。以下はイベントの例です。
 
-{{< img src="integrations/amazon_codedeploy/aws_codedeploy_events.png" alt="AWS Codedeploy イベント" >}}
+{{< img src="integrations/amazon_codedeploy/aws_codedeploy_events.png" alt="AWS CodeDeploy イベント" >}}
 
 ### サービスのチェック
 
-AWS Codedeploy インテグレーションには、サービスのチェック機能は含まれません。
+AWS CodeDeploy インテグレーションには、サービスのチェック機能は含まれません。
 
 ## トラブルシューティング
 
@@ -97,7 +98,7 @@ AWS Codedeploy インテグレーションには、サービスのチェック�
 [3]: https://docs.aws.amazon.com/codedeploy/latest/userguide/security-iam.html
 [4]: https://app.datadoghq.com/integrations/amazon_codedeploy
 [5]: https://docs.datadoghq.com/ja/logs/guide/forwarder/
-[6]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-s3-buckets
-[7]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-cloudwatch-log-group
+[6]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-s3-buckets
+[7]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
 [8]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_codedeploy/amazon_codedeploy_metadata.csv
 [9]: https://docs.datadoghq.com/ja/help/

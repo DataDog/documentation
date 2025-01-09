@@ -1,6 +1,6 @@
 ---
 title: Run Tests On Applications Using A Shadow DOM
-kind: guide
+
 further_reading:
     - link: '/synthetics/browser_tests'
       tag: 'Documentation'

@@ -1,16 +1,15 @@
 ---
 title: Host and Container Maps
-kind: documentation
 aliases:
   - /graphing/infrastructure/hostmap/
   - /infrastructure/containermap/
   - /guides/hostmap
 further_reading:
 - link: "/infrastructure/livecontainers/"
-  tag: "Graphing"
+  tag: "Documentation"
   text: "Get real-time visibility of all of the containers across your environment"
 - link: "/infrastructure/process/"
-  tag: "Graphing"
+  tag: "Documentation"
   text: "Understand what is going on at any level of your system"
 ---
 
@@ -74,6 +73,8 @@ The Datadog Agent also collects host metadata and application information, some 
 - `field:metadata_processor`
 - `field:metadata_machine`
 - `field:apps`
+
+The `field:apps` is derived from the metrics collected by the Datadog Agent on a host, and it indicates which integrations or Datadog products are active. For example, a value of `field:apps:universal` indicates that Universal Service Monitoring is running on that host.
 
 ### Zoom in
 

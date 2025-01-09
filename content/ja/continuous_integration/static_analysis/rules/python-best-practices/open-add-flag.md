@@ -1,7 +1,6 @@
 ---
 dependencies: []
 disable_edit: true
-kind: documentation
 title: 読み取り用のオープンフラグを定義しない
 ---
 ## メタデータ

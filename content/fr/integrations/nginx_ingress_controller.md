@@ -31,7 +31,7 @@ guid: 27f6a498-6b3e-41b0-bec4-68db4d3322c3
 integration_id: nginx-ingress-controller
 integration_title: nginx-ingress-controller
 is_public: true
-kind: integration
+custom_kind: integration
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0
 metric_prefix: nginx_ingress.

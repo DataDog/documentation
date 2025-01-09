@@ -63,28 +63,28 @@ assets:
     source_type_id: 10122
     source_type_name: RapDev SNMP プロファイル
   monitors:
-    Barracuda CPU Monitor: assets/monitors/rapdev_barracuda-cpu.json
-    Barracuda Memory Monitor: assets/monitors/rapdev_barracuda-memory.json
-    Barracuda Service State Monitor: assets/monitors/rapdev_barracuda-servicestate.json
-    CPU Utilization Monitor: assets/monitors/rapdev_cpu_utilization.json
-    Fortigate Tunnel Monitor: assets/monitors/rapdev_fortigate_tunnel.json
-    Interface Status Monitor: assets/monitors/rapdev_interface_operstatus.json
-    Memory Utilization Monitor: assets/monitors/rapdev_memory_utilization.json
-    Printer Issue Monitor: assets/monitors/rapdev_printer_issue.json
-    iDRAC Bios Status Monitor: assets/monitors/rapdev_idrac-biosstatus.json
-    iDRAC CMOS Monitor: assets/monitors/rapdev_idrac-cmos.json
-    iDRAC Disk Status Monitor: assets/monitors/rapdev_idrac-diskstatus.json
-    iDRAC Fan Status Monitor: assets/monitors/rapdev_idrac-fanstatus.json
-    iDRAC LCD Status Monitor: assets/monitors/rapdev_idrac-lcdstatus.json
-    iDRAC Memory Status Monitor: assets/monitors/rapdev_idrac-memorystatus.json
-    iDRAC NIC Connection Status Monitor: assets/monitors/rapdev_idrac-nicconnectionstatus.json
-    iDRAC Overall Power Status Monitor: assets/monitors/rapdev_idrac-overallpowerstatus.json
-    iDRAC Overall Storage State Monitor: assets/monitors/rapdev_idrac-overallstoragestate.json
-    iDRAC PSU Sensor State Monitor: assets/monitors/rapdev_idrac-psu-sensorstate.json
-    iDRAC PSU State Settings Monitor: assets/monitors/rapdev_idrac-psu-statesettings.json
-    iDRAC RAID Controller State Monitor: assets/monitors/rapdev_idrac-raidcontrollerstate.json
-    iDRAC Temp Sensor Status: assets/monitors/rapdev_idrac-tempsensorstatus.json
-    iDRAC Voltage Status Monitor: assets/monitors/rapdev_idrac-voltagestatus.json
+    Barracuda memory usage is high: assets/monitors/rapdev_barracuda-memory.json
+    CMOS battery has an issue: assets/monitors/rapdev_idrac-cmos.json
+    CPU load is high: assets/monitors/rapdev_barracuda-cpu.json
+    CPU utilization is high: assets/monitors/rapdev_cpu_utilization.json
+    Controller has an issue: assets/monitors/rapdev_idrac-raidcontrollerstate.json
+    Disk has an issue: assets/monitors/rapdev_idrac-diskstatus.json
+    Fan has an issue: assets/monitors/rapdev_idrac-fanstatus.json
+    LCD has an issue: assets/monitors/rapdev_idrac-lcdstatus.json
+    Memory DIMM has an issue: assets/monitors/rapdev_idrac-memorystatus.json
+    Memory usage is high: assets/monitors/rapdev_memory_utilization.json
+    Network port is down: assets/monitors/rapdev_idrac-nicconnectionstatus.json
+    Operation status is in a bad state: assets/monitors/rapdev_interface_operstatus.json
+    Power supply Sensor has an issue: assets/monitors/rapdev_idrac-psu-sensorstate.json
+    Power supply has an issue: assets/monitors/rapdev_idrac-overallpowerstatus.json
+    Power supply state settings has an issue: assets/monitors/rapdev_idrac-psu-statesettings.json
+    Printer is in alert: assets/monitors/rapdev_printer_issue.json
+    Service state changed: assets/monitors/rapdev_barracuda-servicestate.json
+    Storage has an issue: assets/monitors/rapdev_idrac-overallstoragestate.json
+    System BIOS has an issue: assets/monitors/rapdev_idrac-biosstatus.json
+    Temperature sensor has an issue: assets/monitors/rapdev_idrac-tempsensorstatus.json
+    VPN tunnel is downr: assets/monitors/rapdev_fortigate_tunnel.json
+    Voltage has an issue: assets/monitors/rapdev_idrac-voltagestatus.json
 author:
   homepage: https://www.rapdev.io
   name: RapDev
@@ -95,6 +95,7 @@ categories:
 - マーケットプレイス
 - ネットワーク
 - snmp
+custom_kind: インテグレーション
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -103,7 +104,6 @@ integration_id: rapdev-snmp-profiles
 integration_title: SNMP プロファイル
 integration_version: ''
 is_public: true
-kind: integration
 legal_terms:
   eula: assets/EULA.pdf
 manifest_version: 2.0.0
@@ -238,4 +238,4 @@ RapDev SNMP プロファイルパッケージは 150 以上のデバイスプロ
 *お探しのインテグレーションが見つかりませんか？組織に役立つ重要なツールの導入をお考えですか？[こちら](mailto:support@rapdev.io)からメッセージをお送りいただければ、導入をサポートいたします！*
 
 ---
-このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/rapdev-snmp-profiles" target="_blank">こちらをクリック</a>してください。
+このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。利用するには、<a href="https://app.datadoghq.com/marketplace/app/rapdev-snmp-profiles" target="_blank">Marketplace でこのアプリケーションを購入してください</a>。

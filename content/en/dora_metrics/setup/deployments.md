@@ -1,17 +1,16 @@
 ---
-title: Sending Deployment Events for DORA Metrics
-kind: documentation
+title: How to Set Up Deployment Data for DORA Metrics
 description: Learn how to send deployment events for DORA Metrics.
 aliases:
 - /continuous_integration/dora_metrics/setup/deployments
+- /dora_metrics/deployments/apm
+- /dora_metrics/deployments/deployment_api
+- /dora_metrics/deployments
 is_beta: true
 further_reading:
-- link: "https://app.datadoghq.com/release-notes?category=Software%20Delivery"
-  tag: "Release Notes"
-  text: "Check out the latest Software Delivery releases! (App login required)"
-- link: "/continuous_integration/dora_metrics/setup/incidents"
+- link: "/dora_metrics/setup/failures"
   tag: "Documentation"
-  text: "Learn about sending incident events"
+  text: "Learn about setting up failure data in DORA Metrics"
 - link: "/tracing/service_catalog"
   tag: "Documentation"
   text: "Learn about the Service Catalog"
@@ -27,30 +26,48 @@ further_reading:
 <div class="alert alert-warning">DORA Metrics is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
-{{< callout url="https://forms.gle/Eqq6uXfGjYxmqpjDA" header="false" >}}
-The DORA Metrics private beta is closed. Fill out the form below to be added to the waitlist.
-{{< /callout >}}
+<div class="alert alert-warning">DORA Metrics is in Preview.</div>
 
 ## Overview
 
-Deployment events are used to compute Deployment Frequency, Change Lead Time, and Change Failure Rate.
-To send deployment events, use the [DORA Metrics API][1] or the [`datadog-ci dora deployment`][2] command. The following attributes are required:
+Deployment events are used to compute [deployment frequency](#calculating-deployment-frequency), [change lead time](#calculating-change-lead-time), and [change failure rate](#calculating-change-failure-rate).
+
+## Selecting and configuring a deployment data source
+
+{{< tabs >}}
+{{% tab "APM Deployment Tracking" %}}
+
+[APM Deployment Tracking][15] can be configured as a data source for deployments in DORA Metrics.
+
+To ensure your service deployments tracked by APM contribute to DORA Metrics, the following requirements must be met:
+
+- Your service has [metadata][16] defined in the Service Catalog.
+- Your service has [unified service tagging][17] enabled. Deployments are identified using the `version` tag.
+
+For more information about ensuring service deployments that are tracked by APM contribute to change lead time, see [Deployment Data Sources][18].
+
+[15]: /tracing/services/deployment_tracking
+[16]: /service_catalog/adding_metadata
+[17]: /getting_started/tagging/unified_service_tagging/?tab=kubernetes
+[18]: /dora_metrics/setup/deployments/?tab=apmdeploymenttracking#selecting-a-deployment-data-source
+
+{{% /tab %}}
+{{% tab "API or CLI" %}}
+
+To send your own deployment events, use the [DORA Metrics API][21] or the [`datadog-ci dora deployment`][22] command.
+
+The following attributes are required:
 - `started_at`: The time the deployment started.
 - `finished_at`: The time the deployment finished.
-- `service`: The service that was deployed. The provided service must be registered in the [Service Catalog][3] (see [Adding Entries to Service Catalog][4]) with metadata set up (see [Adding Metadata][5]).
-The `team` ownership of the service is automatically inferred from the Service Catalog and associated with all metrics.
+- `service`: The service that was deployed. If the provided service is registered in the [Service Catalog][23] with metadata set up (see [Adding Metadata][24]), the `team` of the service is automatically retrieved and associated with all metrics.
 
-The `repository_url` and `commit_sha` attributes are required for calculating the Change Lead Time metric. For more information, see [Calculating Change Lead Time](#calculating-change-lead-time).
+The `repository_url` and `commit_sha` attributes are also required for calculating the Change Lead Time metric. Optionally, you can specify a `team` attribute to associate a deployment with a different `team` than is found automatically for the service. You can also specify the `env` attribute to filter your DORA metrics by environment on the [**DORA Metrics** page][25].
 
-You can optionally specify the `env` attribute to accurately filter your DORA metrics by environment.
+### API (cURL) Example
 
-### Example
-{{< tabs >}}
-{{% tab "API - cURL" %}}
+See the [DORA Metrics API reference documentation][26] for the full spec and additional code samples.
 
-See the [DORA Metrics API reference documentation][1] for the full spec and more examples with the API SDKs.
-
-For the following example, replace `<DD_SITE>` in the URL with {{< region-param key="dd_site" code="true" >}} and `${DD_API_KEY}` with your [Datadog API Key][2]:
+For the following example, replace `<DD_SITE>` in the URL with {{< region-param key="dd_site" code="true" >}} and `${DD_API_KEY}` with your [Datadog API Key][27]:
 ```shell
   curl -X POST "https://api.<DD_SITE>/api/v2/dora/deployment" \
   -H "Accept: application/json" \
@@ -67,22 +84,19 @@ For the following example, replace `<DD_SITE>` in the URL with {{< region-param 
           "commit_sha": "66adc9350f2cc9b250b69abddab733dd55e1a588",
           "repository_url": "https://github.com/organization/example-repository"
         },
-        "env": "prod"
+        "env": "prod",
+        "team": "backend"
       }
     }
   }
 EOF
 ```
 
-[1]: /api/latest/dora-metrics/#send-a-deployment-event-for-dora-metrics
-[2]: https://app.datadoghq.com/organization-settings/api-keys
-{{% /tab %}}
+### CLI Example
 
-{{% tab "datadog-ci CLI" %}}
+The [`datadog-ci`][22] CLI tool provides a shortcut to send deployment events within your Continuous Integration environment.
 
-The [`datadog-ci`][1] CLI tool provides a shortcut to send deployment events within your Continuous Integration environment.
-
-For the following example, set the `DD_SITE` environment variable to {{< region-param key="dd_site" code="true" >}} and set the `DD_API_KEY` environment variable to your [Datadog API Key][2]:
+For the following example, set the `DD_SITE` environment variable to {{< region-param key="dd_site" code="true" >}} and set the `DD_API_KEY` environment variable to your [Datadog API Key][27]:
 ```shell
 export DD_BETA_COMMANDS_ENABLED=1
 export DD_SITE="<DD_SITE>"
@@ -98,39 +112,58 @@ datadog-ci dora deployment --service shopist --env prod \
 
 The deployment finish time is automatically set to now if `--finished-at` is not provided.
 
-If the deployment CI job is running on the exact same Git revision that is being deployed, `git-repository-url` and `git-commit-sha` can be omitted and will be automatically inferred from the CI context.
-The `--skip-git` option can be provided to disable sending the repository URL and commit SHA. When this option is added, the Change Lead Time metric will not be available.
+If the deployment CI job is running on the exact same Git revision that is being deployed, `git-repository-url` and `git-commit-sha` can be omitted and are automatically inferred from the CI context.
 
-[1]: https://www.npmjs.com/package/@datadog/datadog-ci
-[2]: https://app.datadoghq.com/organization-settings/api-keys
+The `--skip-git` option can be provided to disable sending the repository URL and commit SHA. When this option is added, the Change Lead Time metric becomes unavailable.
+
+[21]: /api/latest/dora-metrics/#send-a-deployment-event-for-dora-metrics
+[22]: https://github.com/DataDog/datadog-ci?tab=readme-ov-file#how-to-install-the-cli
+[23]: /tracing/service_catalog
+[24]: /tracing/service_catalog/adding_metadata
+[25]: https://app.datadoghq.com/ci/dora
+[26]: /api/latest/dora-metrics/#send-a-deployment-event-for-dora-metrics
+[27]: https://app.datadoghq.com/organization-settings/api-keys
+
 {{% /tab %}}
 {{< /tabs >}}
 
-## Calculating Change Lead Time
+## Calculating deployment frequency
 
-For a single Git commit, the Change Lead Time (CLT) is calculated as time from the creation of the commit to when the deployment including that commit was executed.
-To calculate the Change Lead Time for a deployment, Datadog runs [`git log`][6] between the deployment commit SHA and the previous deployment commit SHA to find all the commits being deployed. Then, it computes the average of the related Change Lead Time values.
-Datadog doesn't store the actual content of files in your repository, only Git commit and tree objects.
+Deployment frequency is calculated based on the `dora.deployments.count` metric that is generated and increased with each deployment detected from your selected deployment data source. Frequency is calculated by dividing `dora.deployments.count` over a specific time frame.
 
-There are two requirements for calculating Change Lead Time:
-1. Both the Git repository URL and commit SHA are provided when sending deployment events.
-2. Your repository metadata is being [synchronized to Datadog](#synchronize-repository-metadata-to-datadog).
+## Calculating change lead time
 
-### Breakdown metrics
+For a single Git commit, change lead time (CLT) is calculated as time from the creation of the commit to when the deployment including that commit was executed.
 
-Datadog also provides the following breakdown metrics, which represent the different stages since a commit is made until it is deployed.
+To calculate change lead time for a deployment, Datadog runs [`git log`][6] between the deployment commit SHA and the previous deployment commit SHA to find all the commits being deployed. Then, it computes the average of the related change lead time values for all these commits. Datadog doesn't store the actual content of files in your repository, only Git commit and tree objects.
 
-To compute these metrics, the PR associated with a commit must be identified, if any. A commit is associated with a PR if the commit is first introduced to the target branch when merging that PR.
+{{< tabs >}}
+{{% tab "APM Deployment Tracking" %}}
 
-If a commit does not have an associated PR, only Time to Deploy and Deploy Time are available.
+For deployments identified through APM Deployment Tracking, the change lead time of a commit is computed from the time of commit creation to when that commit is first seen in a new version. It means that the `dora.deploy_time` metric is not available.
 
-- `dora.time_to_pr_ready`: Time from the commit creation until the PR is ready for review. This metric is only available for commits that were made before the PR is ready for review.
-- `dora.review_time`: Time from when the PR is marked ready for review until it receives the last approval. This metric is only available for commits that were made before the PR is approved.
-- `dora.merge_time`: Time from the last approval until the PR is merged.
-- `dora.time_to_deploy`: Time from PR merge to start of deployment. If a commit does not have an associated PR, this metric is calculated as the time from commit creation to start of deployment.
-- `dora.deploy_time`: Time from start of deployment to end of deployment. This metric is not available if there is no deployment duration information.
+For service deployments tracked by APM to contribute to change lead time, ensure the following:
 
-**Note:** These metrics are emitted for every commit and not per deployment.
+- Your application telemetry is tagged with Git information. You can enable this [in APM][101] or see the [Source Code Integration documentation][102].
+- Your repository metadata is synchronized to Datadog through the [GitHub integration][103] or by the `datadog-ci git-metadata upload` command.
+
+[101]: https://app.datadoghq.com/source-code/setup/apm
+[102]: /integrations/guide/source-code-integration/?tab=go#tag-your-telemetry-with-git-information
+[103]: /integrations/github/
+
+{{% /tab %}}
+{{% tab "API or CLI" %}}
+
+For service deployments tracked by the DORA Metrics API or the `datadog-ci dora deployment` command to contribute to change lead time, ensure the following:
+
+- Your repository metadata is synchronized to Datadog through the [GitHub integration][101] or by the `datadog-ci git-metadata upload` command.
+
+[101]: /integrations/github/
+
+{{% /tab %}}
+{{< /tabs >}}
+
+For more information about the breakdown of change lead time metrics, see [Data Collected][7].
 
 ### Synchronize repository metadata to Datadog
 
@@ -168,7 +201,7 @@ Run this command in CI for every new commit. If a deployment is executed for a s
 
 <div class="alert alert-warning">
 Do not provide the <code>--no-gitsync</code> option to the <code>datadog-ci git-metadata upload</code> command.
-When that option is included, the commit information is not sent to Datadog and the Change Lead Time metric is not calculated.
+When that option is included, the commit information is not sent to Datadog and the change lead time metric is not calculated.
 </div>
 
 You can validate the correct setup of the command by checking the command output. An example of a correct output is:
@@ -185,7 +218,8 @@ Reporting commit 007f7f466e035b052415134600ea899693e7bb34 from repository git@gi
 
 ### Handling multiple services in the same repository
 
-If the source code of multiple services is present in the same repository, further actions are needed to ensure that the Change Lead Time is calculated by taking into account only the commits affecting the specific service being deployed.
+If the source code of multiple services is present in the same repository, further actions are needed to ensure that the change lead time is calculated by taking into account only the commits affecting the specific service being deployed.
+
 To filter the commits measured to only the ones that affect the service, specify the source code glob file path patterns in the [service definition][5].
 
 If the service definition contains a **full** GitHub URL to the application folder, a single path pattern is automatically used.
@@ -214,19 +248,29 @@ extensions:
 
 DORA Metrics for the service `shopist` only consider the Git commits that include changes within `src/apps/shopist/**` or `src/libs/utils/**`.
 
+If the two metadata entries are defined for a service, only `extensions[datadoghq.com/dora-metrics]` is considered to filter the commits.
+
 ### Limitations
 
-- The retention of Git metadata is 1 month. Commits older than 1 month might not be taken into account when computing Change Lead Time.
-- Change Lead Time is not available for the first deployment of a service that includes Git information.
+- Change lead time stage breakdown metrics are only available for GitHub.
+- Change lead time is not available for the first deployment of a service that includes Git information.
+- For rebased branches, *change lead time* calculations consider the new commits created during the rebase, not the original commits.
+- When using "Squash" to merge pull requests:
+  - For GitHub: Metrics are emitted for the original commits.
+  - For other git providers: Metrics are emitted for the new commit added to the target branch.
 
+## Calculating change failure rate
+
+Change failure rate is calculated by dividing `dora.incidents.count` over `dora.deployments.count` for the same services and/or teams associated to both an incident and a deployment event.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /api/latest/dora-metrics/#send-a-deployment-event-for-dora-metrics
-[2]: https://www.npmjs.com/package/@datadog/datadog-ci
+[2]: https://github.com/DataDog/datadog-ci?tab=readme-ov-file#how-to-install-the-cli
 [3]: /tracing/service_catalog
 [4]: /tracing/service_catalog/setup
 [5]: /tracing/service_catalog/adding_metadata
 [6]: https://git-scm.com/docs/git-log
+[7]: /dora_metrics/data_collected

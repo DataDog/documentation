@@ -35,7 +35,7 @@ integration_id: cloudsmith
 integration_title: Cloudsmith
 integration_version: 0.0.2
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: cloudsmith
 public_title: Cloudsmith

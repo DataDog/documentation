@@ -5,6 +5,7 @@ assets:
   dashboards:
     Cloudera Data Platform Overview: assets/dashboards/cloudera_overview.json
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -17,9 +18,10 @@ assets:
     - cdp
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10318
     source_type_name: Cloudera
   monitors:
-    Cloudera High CPU Usage: assets/recommended_monitors/cloudera_high_cpu.json
+    Cloudera High CPU Usage: assets/monitors/cloudera_high_cpu.json
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
@@ -27,6 +29,8 @@ author:
   support_email: help@datadoghq.com
 categories:
 - クラウド
+- data stores
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/cloudera/README.md
 display_on_public_website: true
@@ -34,9 +38,8 @@ draft: false
 git_integration_title: cloudera
 integration_id: cloudera
 integration_title: Cloudera
-integration_version: 1.1.0
+integration_version: 2.2.0
 is_public: true
-kind: integration
 manifest_version: 2.0.0
 name: cloudera
 public_title: Cloudera
@@ -52,14 +55,21 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Category::Data Stores
+  - Submitted Data Type::Metrics
+  - Offering::Integration
   configuration: README.md#Setup
   description: Cloudera
   media: []
   overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/cloudera-integration-announcement/
   support: README.md#Support
   title: Cloudera
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ## 概要
@@ -75,7 +85,10 @@ tile:
 Cloudera チェックは [Datadog Agent][3] パッケージに含まれています。
 サーバーに追加でインストールする必要はありません。
 
-### コンフィギュレーション
+### 構成
+
+#### 要件
+The Cloudera check requires version 7 of Cloudera Manager.
 
 #### Prepare Cloudera Manager
 1. Cloudera Data Platform で、Management Console に移動し、**User Management** タブをクリックします。
@@ -88,7 +101,7 @@ Cloudera チェックは [Datadog Agent][3] パッケージに含まれていま
 ![Set Workload Password][6]
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{% tab "ホスト" %}}
 
 #### ホスト
 1. Cloudera クラスターとホストのデータの収集を開始するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `cloudera.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[cloudera.d/conf.yaml のサンプル][1]を参照してください。
@@ -98,13 +111,13 @@ Cloudera チェックは [Datadog Agent][3] パッケージに含まれていま
    init_config:
 
       ## @param workload_username - string - required
-      ## The Workload username. This value can be found in the `User Management` tab of the Management 
+      ## The Workload username. This value can be found in the `User Management` tab of the Management
       ## Console in the `Workload User Name`.
       #
       workload_username: <WORKLOAD_USERNAME>
 
       ## @param workload_password - string - required
-      ## The Workload password. This value can be found in the `User Management` tab of the Management 
+      ## The Workload password. This value can be found in the `User Management` tab of the Management
       ## Console in the `Workload Password`.
       #
       workload_password: <WORKLOAD_PASSWORD>
@@ -114,11 +127,11 @@ Cloudera チェックは [Datadog Agent][3] パッケージに含まれていま
    instances:
 
       ## @param api_url - string - required
-      ## The URL endpoint for the Cloudera Manager API. This can be found under the Endpoints tab for 
-      ## your Data Hub to monitor. 
+      ## The URL endpoint for the Cloudera Manager API. This can be found under the Endpoints tab for
+      ## your Data Hub to monitor.
       ##
-      ## Note: The version of the Cloudera Manager API needs to be appended at the end of the URL. 
-      ## For example, using v48 of the API for Data Hub `cluster_1` should result with a URL similar 
+      ## Note: The version of the Cloudera Manager API needs to be appended at the end of the URL.
+      ## For example, using v48 of the API for Data Hub `cluster_1` should result with a URL similar
       ## to the following:
       ## `https://cluster1.cloudera.site/cluster_1/cdp-proxy-api/cm-api/v48`
       #
@@ -130,7 +143,7 @@ Cloudera チェックは [Datadog Agent][3] パッケージに含まれていま
 [1]: https://github.com/DataDog/integrations-core/blob/master/cloudera/datadog_checks/cloudera/data/conf.yaml.example
 [2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
-{{% tab "Containerized" %}}
+{{% tab "コンテナ化" %}}
 
 #### コンテナ化
 
@@ -138,9 +151,9 @@ Cloudera チェックは [Datadog Agent][3] パッケージに含まれていま
 
 | パラメーター            | 値                                                                                                            |
 | -------------------- | ---------------------------------------------------------------------------------------------------------------- |
-| `<インテグレーション名>` | `cloudera`                                                                                                       |
-| `<初期コンフィギュレーション>`      | `{"workload_username": "<WORKLOAD_USERNAME>", 'workload_password": "<WORKLOAD_PASSWORD>"}`                       |
-| `<インスタンスコンフィギュレーション>`  | `{"api_url": <API_URL>"}`                                                                                        |
+| `<INTEGRATION_NAME>` | `cloudera`                                                                                                       |
+| `<INIT_CONFIG>`      | `{"workload_username": "<WORKLOAD_USERNAME>", 'workload_password": "<WORKLOAD_PASSWORD>"}`                       |
+| `<INSTANCE_CONFIG>`  | `{"api_url": <API_URL>"}`                                                                                        |
 
 [1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
 {{% /tab %}}
@@ -155,7 +168,7 @@ Cloudera チェックは [Datadog Agent][3] パッケージに含まれていま
 **デフォルト値**: `None` (全クラスターが処理されます)
 
 - `include`
-: 正規表現キーとコンポーネント設定値の自動検出へのマッピング。 
+: 正規表現キーとコンポーネント設定値の自動検出へのマッピング。
 **デフォルト値**: empty map
 
 - `exclude`
@@ -163,7 +176,7 @@ Cloudera チェックは [Datadog Agent][3] パッケージに含まれていま
 **デフォルト値**: empty list
 
 - `interval`
-: エンドポイントを通じて取得した最後のクラスター一覧の有効時間 (秒)。 
+: エンドポイントを通じて取得した最後のクラスター一覧の有効時間 (秒)。
 **デフォルト値**: `None` (キャッシュを使用しない)
 
 **例**:
@@ -225,7 +238,7 @@ Cloudera インテグレーションは、Cloudera Manager API の `/events` エ
 | `IMPORTANT`               | `info`                         |
 | `CRITICAL`                | `error`                        |
 
-### サービスのチェック
+### サービスチェック
 {{< get-service-checks-from-git "cloudera" >}}
 
 
@@ -274,7 +287,7 @@ Cloudera ホストからメトリクスを収集する際に、Agent のステ�
 
 [1]: https://www.cloudera.com/products/cloudera-data-platform.html
 [2]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
-[3]: https://app.datadoghq.com/account/settings#agent
+[3]: https://app.datadoghq.com/account/settings/agent/latest
 [4]: https://raw.githubusercontent.com/DataDog/integrations-core/master/cloudera/images/user_management.png
 [5]: https://raw.githubusercontent.com/DataDog/integrations-core/master/cloudera/images/create_machine_user.png
 [6]: https://raw.githubusercontent.com/DataDog/integrations-core/master/cloudera/images/set_workload_password.png

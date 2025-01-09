@@ -1,5 +1,4 @@
 ---
-kind: documentation
 title: 課金
 ---
 
@@ -7,13 +6,13 @@ title: 課金
 
 課金サイクルは、いつサインアップしたかに関係なく月初から始まります。最初の月 (UTC) は、実際のサインアップ日に基づいて日割り計算されます。
 
-Datadog は、ホストとカスタムメトリクスの数を毎時間測定します。ホストの課金対象数は、この下位 99% の時間の最大数として月末に計算されます。上位 1% を除外することで、使用量の短期急上昇が課金額に影響しないようにしています。カスタムメトリクスの課金対象数は、その月のカスタムメトリクスの時間平均として計算されます。Datadog で[使用量][1]を確認できます。請求ページは Datadog の管理者権限を有するユーザーのみアクセス可能です。
+Datadog は、ホストとカスタムメトリクスの数を毎時間測定します。ホストの課金対象数は、その時間の使用量の下位 99% の最大数 (高水位) を用いて月末に計算されます。Datadog は上位 1% を除外することで、使用量の急上昇が課金に与える影響を軽減します。カスタムメトリクスの課金対象数は、その月のカスタムメトリクスの時間数の平均に基づいて計算されます。Datadog で[使用量][1]を確認できます。請求ページには、Datadog の管理者権限を持つユーザーのみがアクセス可能です。 
 
-### ホスト
+### Hosts
 
-ホストとは、Datadog で監視する実際のまたは仮想の OS インスタンスで、サーバー、VM、ノード (Kubernetes の場合)、App Service Plan インスタンス (Azure App Service の場合)、または  Heroku dyno (Heroku プラットフォームの場合)  などがあります。Datadog Agent がインストールされているすべてのインスタンスのほか、Datadog インテグレーションを使用して監視されているすべての Amazon EC2、Google Cloud、Azure、vSphere VM がホストになり得ます。Agent がインストールされている EC2 や VM は、1 つのインスタンスとしてカウントされます (二重課金はありません)。
+ホストとは、Datadog で監視する物理的または仮想の OS インスタンスであり、サーバー、VM、ノード (Kubernetes の場合)、App Service Plan インスタンス (Azure App Service の場合)、または Heroku dyno (Heroku プラットフォームの場合) などが含まれます。ホストには、Datadog Agent がインストールされたインスタンスのほか、Datadog インテグレーションを使用して監視されているすべての Amazon EC2、Google Cloud、Azure、vSphere VM が含まれます。Agent がインストールされている EC2 または VM は、1 つのインスタンスとしてカウントされます (二重課金はされません)。
 
-報告を行っていないホスト ([インフラストラクチャーリスト][2]でステータスが `???`) は、課金の対象になりません。そのようなホストが[インフラストラクチャーリスト][2]から除外されるまで、最大 2 時間かかることがあります。Datadog は、これらのホスト (有料アカウント) の履歴データを保持します。ホスト名またはタグがわかれば、メトリクスをダッシュボードでグラフ化できます。
+報告を行っていないホスト ([インフラストラクチャーリスト][2]でステータスが `INACTIVE`) は、課金の対象になりません。そのようなホストが[インフラストラクチャーリスト][2]から除外されるまで、最大 2 時間かかることがあります。Datadog は、これらのホスト (有料アカウント) の履歴データを保持します。ホスト名またはタグがわかれば、メトリクスをダッシュボードでグラフ化できます。
 
 ### コンテナ
 
@@ -29,15 +28,19 @@ Datadog は、ホストとカスタムメトリクスの数を毎時間測定し
 
 ### IoT
 
-Datadog は、IoT デバイスの数を毎時間測定します。IoT デバイスの課金対象数は、この下位 99 % の時間の最大数として月末に計算されます。上位 1% を除外することで、使用量の短期的な急上昇が課金額に影響しないようにしています。
+Datadog は、IoT デバイスの数を毎時間測定します。IoT デバイスの課金対象数は、その時間の使用量の下位 99% の最大数 (高水位) を用いて月末に計算されます。上位 1% を除外することで、使用量の急上昇が課金に与える影響を軽減します。
 
 IoT のご請求に関する詳細については、[Datadog 料金ページ][7]をご参照ください。
 
 ## プランの詳細
 
+**支払い方法**を管理し、**サブスクリプションの詳細**を表示するには、Datadog 管理者ユーザーである必要があります。
+
+あるいは、Billing Read (`billing_read`) および Billing Edit  (`billing_edit`) [権限][8]を持つロールは、このデータにアクセスすることができます。
+
 ### 支払い方法の管理
 
-[**Payment Method**][8] セクションには、支払い方法の詳細が記載されています。
+[**Payment Method**][9] セクションには、支払い方法の詳細が記載されています。
 
 {{< img src="account_management/billing/PaymentMethodOverview.png" alt="プランページの支払い方法" style="width:90%;" >}}
 
@@ -47,7 +50,7 @@ IoT のご請求に関する詳細については、[Datadog 料金ページ][7]
 
 ### 請求先情報の管理
 
-請求先情報は、[**Billing Contact Details**][8] セクションで確認することができます。
+請求先情報は、[**Billing Contact Details**][9] セクションで確認することができます。
 
 {{< img src="account_management/billing/BillingContactDetailsOverview.png" alt="プランページの請求先情報" style="width:90%;" >}}
 
@@ -59,7 +62,7 @@ IoT のご請求に関する詳細については、[Datadog 料金ページ][7]
 
 ### サブスクリプションの詳細を表示する
 
-[Subscription Details][8] セクションには、コミットされたすべての製品の数量、契約価格、オンデマンド価格が記載されています。
+[Subscription Details][9] セクションには、コミットされたすべての製品の数量、契約価格、オンデマンド価格が記載されています。
 
 {{< img src="/account_management/billing/subscription_details.png" alt="Account Plan & Usage ページで Subscription Details セクションをハイライトしています" style="width:90%;" >}}
 
@@ -73,13 +76,13 @@ IoT のご請求に関する詳細については、[Datadog 料金ページ][7]
 
 ### クレジットカード
 
-クレジットカード払いの場合は、[管理者][9]に [Billing History][10] で前月の領収書が発行されます。請求書のコピーについては、[Datadog の請求担当][11]にメールでお問い合わせください。
+クレジットカード払いの場合は、[管理者][10]に [Billing History][11] で前月の領収書が発行されます。請求書のコピーについては、[Datadog の請求担当][13]にメールでお問い合わせください。
 
 詳細については、[クレジットカード請求][12]を参照してください。
 
 ### 請求
 
-小切手、ACH、または電信送金でお支払いの場合、請求書は毎月 10 営業日近くに請求先のメールアドレスにメールで送信されます。追加のコピーをリクエストするには、[Datadog の請求担当][11]にメールを送信してください。支払い先の詳細は請求書に記載されています。
+小切手、ACH、または電信送金でお支払いの場合、請求書は毎月 10 営業日近くに請求先のメールアドレスにメールで送信されます。追加のコピーをリクエストするには、[Datadog の請求担当][13]にメールを送信してください。支払い先の詳細は請求書に記載されています。
 
 ## お問い合わせ
 
@@ -92,24 +95,26 @@ IoT のご請求に関する詳細については、[Datadog 料金ページ][7]
 
 ## その他の参考資料
 
-{{< whatsnext desc="課金に関するトピック:">}}
-    {{< nextlink href="account_management/billing/pricing/" >}}料金{{< /nextlink >}}
-    {{< nextlink href="account_management/plan_and_usage/usage_details/" >}}使用量の詳細{{< /nextlink >}}
-    {{< nextlink href="account_management/billing/usage_metrics/" >}}使用量のメトリクス{{< /nextlink >}}
-    {{< nextlink href="account_management/billing/credit_card/" >}}クレジットカード{{< /nextlink >}}
-    {{< nextlink href="account_management/billing/custom_metrics/" >}}カスタムメトリクス{{< /nextlink >}}
-    {{< nextlink href="account_management/billing/containers/" >}}コンテナ{{< /nextlink >}}
-    {{< nextlink href="account_management/billing/log_management/" >}}ログ管理{{< /nextlink >}}
-    {{< nextlink href="account_management/billing/apm_tracing_profiler/" >}}APM (分散型トレーシング & 継続的プロファイリング){{< /nextlink >}}
-    {{< nextlink href="account_management/billing/serverless/" >}}サーバーレス{{< /nextlink >}}
-    {{< nextlink href="account_management/billing/rum/" >}}リアルユーザーモニタリング{{< /nextlink >}}
-    {{< nextlink href="account_management/billing/aws/" >}}AWS インテグレーション{{< /nextlink >}}
-    {{< nextlink href="account_management/billing/azure/" >}}Azure インテグレーション{{< /nextlink >}}
-    {{< nextlink href="account_management/billing/alibaba/" >}}Alibaba インテグレーション{{< /nextlink >}}
-    {{< nextlink href="account_management/billing/google_cloud/" >}}Google Cloud インテグレーション{{< /nextlink >}}
-    {{< nextlink href="account_management/billing/vsphere/" >}}vSphere インテグレーション{{< /nextlink >}}
-    {{< nextlink href="account_management/billing/usage_attribution/" >}}使用属性{{< /nextlink >}}
+{{< whatsnext desc="Specific billing topics:">}}
+    {{< nextlink href="account_management/billing/pricing/" >}}Pricing{{< /nextlink >}}
+    {{< nextlink href="account_management/plan_and_usage/usage_details/" >}}Usage details{{< /nextlink >}}
+    {{< nextlink href="account_management/billing/usage_metrics/" >}}Usage Metrics{{< /nextlink >}}
+    {{< nextlink href="account_management/billing/credit_card/" >}}Credit card{{< /nextlink >}}
+    {{< nextlink href="account_management/billing/custom_metrics/" >}}Custom metrics{{< /nextlink >}}
+    {{< nextlink href="account_management/billing/containers/" >}}Containers{{< /nextlink >}}
+    {{< nextlink href="account_management/billing/log_management/" >}}Log management{{< /nextlink >}}
+    {{< nextlink href="account_management/billing/apm_tracing_profiler/" >}}APM (Distributed Tracing & Continuous Profiler){{< /nextlink >}}
+    {{< nextlink href="account_management/billing/serverless/" >}}Serverless{{< /nextlink >}}
+    {{< nextlink href="account_management/billing/rum/" >}}Real User Monitoring{{< /nextlink >}}
+    {{< nextlink href="account_management/billing/ci_visibility/" >}}CI Visibility{{< /nextlink >}}
+    {{< nextlink href="account_management/billing/aws/" >}}AWS integration{{< /nextlink >}}
+    {{< nextlink href="account_management/billing/azure/" >}}Azure integration{{< /nextlink >}}
+    {{< nextlink href="account_management/billing/alibaba/" >}}Alibaba integration{{< /nextlink >}}
+    {{< nextlink href="account_management/billing/google_cloud/" >}}Google Cloud integration{{< /nextlink >}}
+    {{< nextlink href="account_management/billing/vsphere/" >}}vSphere integration{{< /nextlink >}}
+    {{< nextlink href="account_management/billing/usage_attribution/" >}}Usage attribution{{< /nextlink >}}
 {{< /whatsnext >}}
+
 
 
 [1]: https://app.datadoghq.com/account/usage/hourly
@@ -119,8 +124,9 @@ IoT のご請求に関する詳細については、[Datadog 料金ページ][7]
 [5]: /ja/account_management/billing/serverless
 [6]: https://www.datadoghq.com/pricing/?product=serverless#serverless
 [7]: https://www.datadoghq.com/pricing/
-[8]: https://app.datadoghq.com/billing/plan
-[9]: /ja/account_management/rbac/#datadog-default-roles
-[10]: https://app.datadoghq.com/account/billing_history
-[11]: mailto:billing@datadoghq.com
+[8]: /ja/account_management/rbac/permissions/#billing-and-usage
+[9]: https://app.datadoghq.com/billing/plan
+[10]: /ja/account_management/rbac/#datadog-default-roles
+[11]: https://app.datadoghq.com/account/billing_history
 [12]: /ja/account_management/billing/credit_card/
+[13]: mailto:billing@datadoghq.com

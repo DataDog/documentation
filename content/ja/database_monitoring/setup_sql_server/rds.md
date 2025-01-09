@@ -7,47 +7,57 @@ further_reading:
 - link: /database_monitoring/troubleshooting/?tab=sqlserver
   tag: ドキュメント
   text: よくある問題のトラブルシューティング
-kind: documentation
+- link: /database_monitoring/guide/sql_deadlock/
+  tag: ドキュメント
+  text: デッドロックモニタリングの構成
 title: Amazon RDS 上の SQL Server のデータベースモニタリングの設定
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">データベースモニタリングはこのサイトでサポートされていません。</div>
-{{< /site-region >}}
+Database Monitoring は、クエリメトリクス、クエリサンプル、実行計画、データベースの状態、フェイルオーバー、イベントを公開することで、Microsoft SQL Server データベースを詳細に可視化します。
 
-データベースモニタリングは、クエリメトリクス、クエリサンプル、実行計画、データベースの状態、フェイルオーバー、イベントを公開することで、Microsoft SQL Server データベースを詳細に可視化します。
+データベースで Database Monitoring を有効にするには、以下の手順を実行します。
 
-データベースでデータベースモニタリングを有効にするには、以下の手順を実行します。
-
-1. [Agent にデータベースへのアクセスを付与する](#grant-the-agent-access)
-2. [Agent をインストールする](#install-the-agent)
-3. [RDS インテグレーションをインストールする](#install-the-rds-integration)
+1. [AWS インテグレーションを構成する](#configure-the-aws-integration)
+1. [Agent にアクセスを付与する](#grant-the-agent-access)
+1. [Agent をインストールする](#install-the-agent)
+1. [RDS インテグレーションをインストールする](#install-the-rds-integration)
 
 ## はじめに
 
 サポートされている SQL Server バージョン
-: 2014、2016、2017、2019
+: 2014、2016、2017、2019、2022
 
 {{% dbm-sqlserver-before-you-begin %}}
+
+## AWS インテグレーションの構成
+
+[Amazon Web Services インテグレーションタイル][2]の **Resource Collection** セクションで **Standard Collection** を有効にします。
 
 ## Agent にアクセスを付与する
 
 Datadog Agent が統計やクエリを収集するためには、データベースサーバーへの読み取り専用のアクセスが必要となります。
 
-サーバーに接続するための読み取り専用ログインを作成し、必要な権限を付与します。
+サーバーに接続するために読み取り専用ログインを作成し、必要な権限を付与します。
 
 ```SQL
 USE [master];
 CREATE LOGIN datadog WITH PASSWORD = '<PASSWORD>';
 GO
---Set context to msdb database and create datadog user
+-- msdb データベースにコンテキストを切り替え、datadog ユーザーを作成
 USE [msdb];
 CREATE USER datadog FOR LOGIN datadog;
+-- Log Shipping Monitoring (Agent v7.50 以降で利用可能) を使用しない場合は、以下の行をコメントアウトしてください。
+GRANT SELECT ON dbo.log_shipping_monitor_primary TO datadog;
+GRANT SELECT ON dbo.log_shipping_monitor_secondary TO datadog;
+-- SQL Server Agent Monitoring (Agent v7.57 以降で利用可能) を使用しない場合は、以下の 3 行をコメントアウトしてください。
+GRANT SELECT ON dbo.sysjobs TO datadog;
+GRANT SELECT ON dbo.sysjobhistory TO datadog;
+GRANT SELECT ON dbo.sysjobactivity TO datadog;
 GO
---Switch back to master and grant datadog user server permissions
+-- master に戻り、datadog ユーザーにサーバー権限を付与
 USE [master];
-GRANT VIEW SERVER STATE to datadog;
-GRANT VIEW ANY DEFINITION to datadog;
+GRANT VIEW SERVER STATE TO datadog;
+GRANT VIEW ANY DEFINITION TO datadog;
 GO
 ```
 
@@ -59,23 +69,28 @@ CREATE USER datadog FOR LOGIN datadog;
 
 これは、RDS が `CONNECT ANY DATABASE` の付与を許可していないため、必要です。Datadog Agent は、データベース固有のファイル I/O 統計情報を収集するために、各データベースに接続する必要があります。
 
+### パスワードを安全に保管
+{{% dbm-secret %}}
+
 ## Agent のインストール
 
 AWS はホストへの直接アクセスを許可しないため、Datadog Agent は SQL Server ホストと通信可能な別のホストにインストールする必要があります。Agent のインストールと実行には、いくつかのオプションがあります。
 
-**AlwaysOn ユーザーの場合**、Agent は別のサーバーにインストールし、リスナーエンドポイントを介してクラスターに接続する必要があります。これは、Availability Group (AG) のセカンダリレプリカに関する情報がプライマリレプリカから収集されるからです。さらに、この方法で Agent をインストールすると、フェイルオーバー時に Agent を稼働させ続けることができます。
-
 {{< tabs >}}
 {{% tab "Windows Host" %}}
+{{% dbm-alwayson %}}
 {{% dbm-sqlserver-agent-setup-windows %}}
 {{% /tab %}}
 {{% tab "Linux Host" %}}
+{{% dbm-alwayson %}}
 {{% dbm-sqlserver-agent-setup-linux %}}
 {{% /tab %}}
 {{% tab "Docker" %}}
+{{% dbm-alwayson %}}
 {{% dbm-sqlserver-agent-setup-docker %}}
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
+{{% dbm-alwayson %}}
 {{% dbm-sqlserver-agent-setup-kubernetes %}}
 {{% /tab %}}
 {{< /tabs >}}
@@ -87,8 +102,9 @@ AWS はホストへの直接アクセスを許可しないため、Datadog Agent
 
 AWS からより包括的なデータベースメトリクスとログを収集するには、[RDS インテグレーション][1]をインストールします。
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/integrations/amazon_rds
+[2]: https://app.datadoghq.com/integrations/amazon-web-services

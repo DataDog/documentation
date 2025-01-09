@@ -4,6 +4,7 @@ categories:
 - クラウド
 - data stores
 - ログの収集
+custom_kind: integration
 dependencies: []
 description: Amazon RDS Proxy のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/amazon_rds_proxy/
@@ -14,7 +15,6 @@ integration_id: ''
 integration_title: Amazon RDS Proxy
 integration_version: ''
 is_public: true
-kind: integration
 manifest_version: '1.0'
 name: amazon_rds_proxy
 public_title: Datadog-Amazon RDS Proxy インテグレーション
@@ -29,9 +29,9 @@ Amazon RDS Proxy は、Amazon Relational Database Service (RDS) 用のフルマ�
 
 このインテグレーションを有効にすると、Datadog にすべての RDS Proxy メトリクスを表示できます。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 まだの方は、[Amazon Web Services とのインテグレーション][1]を最初に設定してください。
 また、[Amazon RDS とのインテグレーション][2]の有効化も必要です。
@@ -54,21 +54,21 @@ RDS Proxy を作成する際に、詳細設定でロギングを有効にする�
 
 完了したら、[Datadog ログエクスプローラー][7]でログを解析します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "amazon_rds_proxy" >}}
 
 
-### ヘルプ
+### イベント
 
 Amazon RDS Proxy インテグレーションには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 
 Amazon RDS Proxy インテグレーションには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
 

@@ -1,6 +1,6 @@
 ---
 title: Collecter plusieurs logs avec Pagination
-kind: guide
+
 further_reading:
   - link: /logs/log_configuration/processors
     tag: Documentation

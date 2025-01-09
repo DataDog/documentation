@@ -14,7 +14,7 @@ integration_id: amazon-service-quotas
 integration_title: ServiceQuotas
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: amazon_service_quotas
 public_title: Intégration Datadog/ServiceQuotas

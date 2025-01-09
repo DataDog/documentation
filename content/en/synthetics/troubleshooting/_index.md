@@ -1,6 +1,5 @@
 ---
 title: Synthetic Monitoring Troubleshooting
-kind: documentation
 description: Troubleshoot common Synthetic Monitoring issues.
 further_reading:
 - link: "/synthetics/"
@@ -111,6 +110,12 @@ To fix it, go edit your recording, open the advanced options of the step that is
 
 Automated browsers do not support emulating the CSS `pointer` media feature. Browser tests have `pointer: none` for all tests and devices (laptop, tablet, or mobile).
 
+### Resource duration
+
+#### A resource is of a longer duration than the actual step duration
+
+Long-loading resources may span across multiple steps. Within a test result's step, Datadog returns all resources initiated during that specific step. However, Datadog allows roughly 20 seconds for important network calls to finish. After this period, the synthetics worker proceeds to the subsequent step. The worker uses a hierarchy of timeouts, allowing it to balance speed and reliability. Because of this, Datadog does not advise using step duration to measure the speed or slowness of a web application. The step duration reflects the balanced time the worker needs to deliver a reliable result.
+
 ## API and browser tests
 
 ### Unauthorized errors
@@ -135,6 +140,12 @@ Additionally, you might also have to ensure [Datadog Synthetic Monitoring IP ran
 ### Missing notifications
 
 Synthetic tests by default do not [renotify][12]. This means that if you add your notification handle such as your email address or Slack handle after a transition is generated (for example: a test going into alert or recovering from a previous alert), a notification is not sent for that transition. A notification is sent for the next transition.
+
+## Mobile tests
+
+### Unable to launch a device recording
+
+If there are security checks during application startup, such as verifying if USB debugging is enabled, Datadog recommends uploading a version of the application that does not contain these checks. 
 
 ## Private locations
 
@@ -231,5 +242,5 @@ Additionally, in Private Location versions `>v1.27`, Datadog depends on the use 
 [9]: /synthetics/settings/?tab=createfromhttptest#global-variables
 [10]: /synthetics/browser_tests/#use-global-variables
 [11]: https://ip-ranges.datadoghq.com/synthetics.json
-[12]: /synthetics/api_tests/?tab=httptest#notify-your-team
+[12]: /synthetics/api_tests/?tab=httptest#configure-the-test-monitor
 [13]: https://docs.docker.com/engine/security/seccomp/

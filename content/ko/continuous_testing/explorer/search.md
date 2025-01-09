@@ -5,14 +5,15 @@ description: 실행된 CI 작업의 배치를 검사하고 실패한 테스트 �
 further_reading:
 - link: /continuous_testing/explorer
   tag: 설명서
-  text: 신서틱 모니터링 및 연속 테스트 탐색기에 대해 알아보기
-kind: 설명서
+  text: 신서틱 모니터링 및 테스트 결과 탐색기에 대해 자세히 알아보기
 title: 검색 테스트 배치
 ---
 
 ## 개요
 
-오른쪽 상단의 드롭다운 메뉴에서 시간 프레임을 선택한 후, [신서틱 모니터링 및 연속 테스트 탐색기][1]에서 **CI 배치** 이벤트 유형을 클릭하여 CI 작업 배치를 검색할 수 있습니다.
+오른쪽 상단의 드롭다운 메뉴에서 기간을 선택한 후 [신서틱(Synthetic) 모니터링 및 테스트 결과 탐색기][1]에서 **CI 배치** 이벤트 유형을 클릭하여 CI 작업의 배치를 검색할 수 있습니다.
+
+{{< img src="continuous_testing/explorer/results_explorer.png" alt="CI batches in the Synthetic Monitoring & Testing Results Explorer" style="width:100%;">}}
 
 패싯을 사용하여 다음 작업을 수행할 수 있습니다.
 

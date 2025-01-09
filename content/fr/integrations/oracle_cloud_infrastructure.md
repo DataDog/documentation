@@ -17,7 +17,7 @@ integration_id: oracle-cloud-infrastructure
 integration_title: Oracle Cloud Infrastructure
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: oracle_cloud_infrastructure
 public_title: Intégration Oracle Cloud Infrastructure/Datadog

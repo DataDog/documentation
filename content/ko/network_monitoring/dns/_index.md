@@ -16,7 +16,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/dns-resolution-datadog/
   tag: 블로그
   text: DNS 확인을 사용하여 클라우드 및 외부 엔드포인트 모니터링
-kind: 설명서
 title: DNS 모니터링
 ---
 

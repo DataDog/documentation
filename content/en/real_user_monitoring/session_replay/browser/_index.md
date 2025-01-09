@@ -1,6 +1,5 @@
 ---
 title: Browser Session Replay
-kind: documentation
 description: Learn about how to capture and visually replay your users' web browsing experience with Session Replay.
 aliases:
 - /real_user_monitoring/guide/session-replay-getting-started/
@@ -72,11 +71,21 @@ if (user.isAuthenticated) {
 
 To stop the Session Replay recording, call `stopSessionReplayRecording()`.
 
-<div class="alert alert-warning">When using a version of the RUM Browser SDK older than v5.0.0, Session Replay recording does not begin automatically. Call `startSessionReplayRecording()` to begin recording.</div>
+<div class="alert alert-warning">When using a version of the RUM Browser SDK older than v5.0.0, Session Replay recording does not begin automatically. Call <code>startSessionReplayRecording()</code> to begin recording.</div>
+
+## Force Session Replay
+
+In some scenarios, you may want to begin recording a session after it has already started, even if it was initially sampled out of replay. For instance, you might want to force Session Replay on a newly deployed page for closer monitoring, or start recording after detecting an error to ensure complete replay data.
+
+To force Session Replay recording for the rest of the current session, call `startSessionReplayRecording({ force: true })`
+
+When using the force option, the session is upgraded to a replayed session for the remainder of its duration, regardless of its initial sampling decision.
 
 ## Disable Session Replay
 
 To stop session recordings, set `sessionReplaySampleRate` to `0`. This stops collecting data for the [Browser RUM & Session Replay plan][6].
+
+<div class="alert alert-warning">If you're using a version of the RUM Browser SDK previous to v5.0.0, set <code>replaySampleRate</code> to <code>0</code>.</div>
 
 ## Retention
 

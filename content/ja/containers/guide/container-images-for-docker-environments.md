@@ -8,7 +8,6 @@ further_reading:
 - link: /agent/cluster_agent/
   tag: Documentation
   text: クラスター Agent の概要
-kind: documentation
 title: Docker 環境のコンテナイメージ
 ---
 
@@ -62,7 +61,7 @@ Docker を使用している場合は、GCR と ECR を介して利用できる�
 
 Docker Hub を使用する必要がある場合は、[Docker Hub][1] を参照してください。
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

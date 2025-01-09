@@ -1,6 +1,5 @@
 ---
 title: Trace Metrics
-kind: documentation
 further_reading:
     - link: 'tracing/trace_collection/'
       tag: 'Documentation'
@@ -58,7 +57,7 @@ With the following definitions:
 
 `trace.<SPAN_NAME>.hits`
 : **Prerequisite:** This metric exists for any APM service.<br>
-**Description:** Represent the count of hits for a given span.<br>
+**Description:** Represent the count of spans created with a specific name (for example, `redis.command`, `pylons.request`, `rails.request`, or `mysql.query`).<br>
 **Metric type:** [COUNT][5].<br>
 **Tags:** `env`, `service`, `version`, `resource`, `resource_name`, `http.status_code`, all host tags from the Datadog Host Agent, and [the second primary tag][4].
 
@@ -74,7 +73,7 @@ With the following definitions:
 : **Prerequisite:** This metric exists for any APM service.<br>
 **Description:** Represent the latency distribution for all services, resources, and versions across different environments and second primary tags.<br>
 **Metric type:** [DISTRIBUTION][6].<br>
-**Tags:** `env`, `service`, `resource`, `resource_name`, `version`, `synthetics`, and [the second primary tag][4].
+**Tags:** `env`, `service`,`version`, `resource`, `resource_name`, `http.status_code`, `synthetics`, and [the second primary tag][4].
 
 ### Errors
 
@@ -96,29 +95,48 @@ With the following definitions:
 : **Prerequisite:** This metric exists for any HTTP or web-based APM service.<br>
 **Description:** Measures the [Apdex][10] score for each web service.<br>
 **Metric type:** [GAUGE][7].<br>
-**Tags:** `env`, `service`, `resource` / `resource_name`, `version`, `synthetics`, and [the second primary tag][4].
+**Tags:** `env`, `service`, `version`, `resource` / `resource_name`, `synthetics`, and [the second primary tag][4].
 
 ### Duration
 
-<div class="alert alert-warning">Datadog recommends <a href="/tracing/guide/ddsketch_trace_metrics/">tracing distribution metrics using DDSketch</a> instead.</div>
+<div class="alert alert-warning">Datadog recommends <a href="/tracing/guide/ddsketch_trace_metrics/">tracing distribution metrics using DDSketch</a>.</div>
 
 `trace.<SPAN_NAME>.duration`
 : **Prerequisite:** This metric exists for any APM service.<br>
 **Description:** Measure the total time for a collection of spans within a time interval, including child spans seen in the collecting service. For most use cases, Datadog recommends using the [Latency Distribution](#latency-distribution) for calculation of average latency or percentiles. To calculate the average latency with host tag filters, you can use this metric with the following formula: <br>
-`sum:trace.<SPAN_NAME>.duration{<FILTER>}.rollup(sum).fill(zero) / sum:trace.<SPAN_NAME>.hits{<FILTER>}` <br>
+`sum:trace.<SPAN_NAME>.duration{<FILTER>}.rollup(sum).fill(zero) / sum:trace.<SPAN_NAME>.hits{<FILTER>}.rollup(sum).fill(zero)` <br>
 This metric does not support percentile aggregations. Read the [Latency Distribution](#latency-distribution) section for more information.
 **Metric type:** [GAUGE][7].<br>
 **Tags:** `env`, `service`, `resource`, `http.status_code`, all host tags from the Datadog Host Agent, and [the second primary tag][4].
 
 ### Duration by
 
-<div class="alert alert-warning">This method of using trace metrics is outdated. Instead, <a href="/tracing/guide/ddsketch_trace_metrics/">tracing distribution metrics using DDSketch</a> is recommended.</div>
+<div class="alert alert-warning">Datadog recommends <a href="/tracing/guide/ddsketch_trace_metrics/">tracing distribution metrics using DDSketch</a>.</div>
 
 `trace.<SPAN_NAME>.duration.by_http_status`
 : **Prerequisite:** This metric exists for HTTP/WEB APM services if http metadata exists.<br>
 **Description:** Measure the total time for a collection of spans for each HTTP status. Specifically, it is the relative share of time spent by all spans over an interval and a given HTTP status - including time spent waiting on child processes.<br>
 **Metric type:** [GAUGE][7].<br>
 **Tags:** `env`, `service`, `resource`, `http.status_class`, `http.status_code`, all host tags from the Datadog Host Agent, and [the second primary tag][4].
+
+## Sampling impact on trace metrics
+
+In most cases, trace metrics are calculated based on all application traffic. However, with certain trace ingestion sampling configurations, the metrics represent only a subset of all requests.
+
+### Application-side sampling 
+
+Some tracing libraries support application-side sampling, which reduces the number of spans before they are sent to the Datadog Agent. For example, the Ruby tracing library offers application-side sampling to lower performance overhead. However, this can affect trace metrics, as the Datadog Agent needs all spans to calculate accurate metrics. 
+
+Very few tracing libraries support this setting, and using it is generally not recommended.
+
+### OpenTelemetry sampling
+
+The OpenTelemetry SDK's native sampling mechanisms lower the number of spans sent to the Datadog collector, resulting in sampled and potentially inaccurate trace metrics.
+
+### XRay sampling
+
+XRay spans are sampled before they are sent to Datadog, which means trace metrics might not reflect all traffic.
+
 
 ## Further Reading
 

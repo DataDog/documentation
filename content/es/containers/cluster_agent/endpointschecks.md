@@ -10,10 +10,9 @@ further_reading:
 - link: /containers/cluster_agent/clusterchecks/
   tag: Documentación
   text: Checks de clúster
-- link: /containers/cluster_agent/troubleshooting#endpoint-checks
+- link: /containers/troubleshooting/cluster-and-endpoint-checks
   tag: Documentación
   text: Solucionar problemas en los checks de endpoint
-kind: documentación
 title: Checks de endpoint con Autodiscovery
 ---
 
@@ -160,7 +159,7 @@ DD_EXTRA_CONFIG_PROVIDERS="endpointschecks clusterchecks"
 [Reinicia el Agent][2] para aplicar el cambio de configuración.
 
 [1]: /es/agent/cluster_agent/clusterchecks/
-[2]: /es/agent/guide/agent-commands/
+[2]: /es/agent/configuration/agent-commands/
 {{% /tab %}}
 {{< /tabs >}}
 

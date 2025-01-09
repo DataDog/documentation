@@ -1,13 +1,34 @@
 ---
 title: Tracer Debug Logs
-kind: Documentation
 further_reading:
 - link: "/tracing/troubleshooting/connection_errors/"
   tag: "Documentation"
   text: "Troubleshooting APM Connection Errors"
 ---
 
-## Enable debug mode
+## Automated debug log collection
+
+<div class="alert alert-warning">Automated debug logs are supported for Java, .NET, Node.js, and Python. For other languages, use <a href="/tracing/troubleshooting/tracer_debug_logs/#manual-debug-log-collection">manual debug log collection</a> instead.</div>
+
+A flare allows you to send necessary troubleshooting information to the Datadog support team, including tracer logs, with sensitive data removed. Flares are useful for troubleshooting issues like high CPU usage, high memory usage, and missing spans.
+
+### Prerequisites
+
+- To send a flare from the Datadog site, make sure you've enabled [Fleet Automation][4] and [Remote Configuration][5] on the Agent.
+- You must have a supported tracer version:
+  - Java: `1.26.0` or greater
+  - Python: `2.11.0` or greater
+  - Node.js: `5.15.0` or greater, or `4.39.0` or greater
+  - .NET: `2.48.0` or greater
+
+### Send a flare
+
+{{% remote-flare %}}
+For example:
+
+{{< img src="agent/fleet_automation/fleet-automation-flare-agent-and-tracer-debuglevel.png" alt="The Send Ticket button launches a form to send a flare for an existing or new support ticket" style="width:60%;" >}}
+
+## Manual debug log collection
 
 Use Datadog debug settings to diagnose issues or audit trace data. Datadog does not recommend that you enable debug mode in production systems because it increases the number of events that are sent to your loggers. Use debug mode for debugging purposes only.
 
@@ -246,9 +267,9 @@ With dd-trace-php 0.98.0+, you can specify a path to a log file for certain debu
 
 - **INI**: `datadog.trace.log_file`
 
-**Notes**: 
+**Notes**:
   - For details about where to set `DD_TRACE_LOG_FILE`, review [Configuring the PHP Tracing Library][2].
-  - If `DD_TRACE_LOG_FILE` is not specified, logs go to the default PHP error location (See **Option 2** for more details). 
+  - If `DD_TRACE_LOG_FILE` is not specified, logs go to the default PHP error location (See **Option 2** for more details).
 
 **Option 2:**
 
@@ -268,10 +289,9 @@ If you are configuring instead at the PHP level, use PHP's `error_log` ini param
 The release binary libraries are all compiled with debug symbols added to the optimized release. You can use GDB or LLDB to debug the library and to read core dumps. If you are building the library from source, pass the argument `-DCMAKE_BUILD_TYPE=RelWithDebInfo` to cmake to compile an optimized build with debug symbols.
 
 ```bash
-cd .build
-cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo ..
-make
-make install
+cmake -B .build -DCMAKE_BUILD_TYPE=RelWithDebInfo ..
+cmake --build .build -j
+cmake --install .build
 ```
 
 {{< /programming-lang >}}
@@ -280,7 +300,8 @@ make install
 
 ## Review debug logs
 
-When debug mode for your tracer is enabled, tracer-specific log messages report how the tracer was initialized and whether traces were sent to the Agent. **These logs are not sent to the Datadog Agent in the flare and are stored in a separate path depending on your logging configuration**. The following log examples show what might appear in your log file.
+
+When debug mode for your tracer is enabled, tracer-specific log messages report how the tracer was initialized and whether traces were sent to the Agent. Debug logs are stored in a separate path depending on your logging configuration. If you enable application-level tracer information, debug logs are also sent in the flare for [supported languages](#prerequisites). The following log examples show what might appear in your log file.
 
 If there are errors that you don't understand, or if traces are reported as flushed to Datadog but you cannot see them in the Datadog UI, [contact Datadog support][1] and provide the relevant log entries with [a flare][2].
 
@@ -453,7 +474,7 @@ YYYY-MM-DD HH:MM:SS.<integer> +00:00 [ERR] An error occurred while sending trace
 
 **Loading an integration:**
 
-Note: This log **does not** follow `DD_TRACE_LOG_FILE` (ini: `datadog.trace.log_file`) and is always routed to the ErrorLog directive. 
+Note: This log **does not** follow `DD_TRACE_LOG_FILE` (ini: `datadog.trace.log_file`) and is always routed to the ErrorLog directive.
 
 ```text
 [Mon MM  DD 19:56:23 YYYY] [YYYY-MM-DDT19:56:23+00:00] [ddtrace] [debug] - Loaded integration web
@@ -484,3 +505,6 @@ Available starting in 0.98.0:
 
 [1]: /help/
 [2]: /agent/troubleshooting/#send-a-flare
+[3]: /agent/remote_config
+[4]: /agent/fleet_automation/
+[5]: /agent/remote_config#enabling-remote-configuration

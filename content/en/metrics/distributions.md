@@ -1,6 +1,5 @@
 ---
 title: Distributions
-kind: documentation
 description: Compute global percentiles across your entire dataset.
 aliases:
   - /developers/faq/characteristics-of-datadog-histograms/
@@ -38,9 +37,7 @@ Distributions provide enhanced query functionality and configuration options tha
 
 * **Customization of tagging**: This functionality allows you to control the tagging scheme for custom metrics for which host-level granularity is not necessary (for example, transactions per second for a checkout service).
 
-See the [Developer Tools section][1] for more implementation details. 
-
-**Note:** Because distributions are a new metric type, they should be instrumented under new metric names during submission to Datadog.
+**Note:** Because distributions metric data is stored differently from other types, any metric name used for a `distribution` should not be used for any other metric types.
 
 ## Enabling advanced query functionality
 
@@ -66,11 +63,18 @@ You can use percentile aggregations in a variety of other widgets and for alerti
 
 {{< img src="metrics/distributions/percentile_monitor.jpg" alt="Percentile threshold being set with a dropdown for alert conditions in a monitor " style="width:80%;">}}
 
-### Threshold Queries
+### Bulk configuration for multiple metrics
 
-<div class="alert alert-warning">
-Threshold queries are in public beta.
-</div>
+You can enable or disable percentile aggregations for multiple metrics at once, rather than having to configure each one individually.
+
+1. Navigate to the [Metrics Summary Page][4] and click the **Configure Metrics** dropdown.
+1. Select **Enable percentiles**.
+1. Specify a metric namespace prefix to select all metrics that match that namespace.
+1. (Optional) To disable percentiles for all metrics in the namespace, click the **Percentile aggregations** toggle.
+
+{{< img src="metrics/summary/percentile_aggregations_toggle.png" alt="Toggle to manage percentile aggregations" style="width:100%;" >}}
+
+### Threshold Queries
 
 Enabling DDSketch-calculated globally-accurate percentiles on your distribution metrics unlocks threshold queries where you can count the number of raw distribution metric values if they exceed or fall below a numerical threshold. You can use this functionality to count the number of errors or violations compared to an anomalous numerical threshold on dashboards. Or you can also use threshold queries to define SLOs like "95% of requests were completed in under 10 seconds over the past 30 days". 
 
@@ -125,3 +129,4 @@ https://app.datadoghq.com/event/stream?tags_execution=and&per_page=30&query=tags
 [1]: /metrics/types/
 [2]: https://www.datadoghq.com/blog/engineering/computing-accurate-percentiles-with-ddsketch/
 [3]: https://app.datadoghq.com/event/explorer
+[4]: https://app.datadoghq.com/metric/summary

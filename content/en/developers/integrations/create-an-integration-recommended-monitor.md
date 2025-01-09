@@ -3,7 +3,6 @@ further_reading:
 - link: https://docs.datadoghq.com/monitors/configuration/
   tag: Documentation
   text: Configure Monitors
-kind: documentation
 title: Create an Integration-Recommended Monitor
 description: Learn how to create a monitor for your integration.
 ---

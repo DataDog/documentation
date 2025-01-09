@@ -1,6 +1,5 @@
 ---
 title: Set up Tracing on a Jenkins Pipeline
-kind: documentation
 aliases:
   - /continuous_integration/setup_pipelines/jenkins
 further_reading:
@@ -12,7 +11,7 @@ further_reading:
       text: "Extend Pipeline Visibility by tracing individual commands"
     - link: "/continuous_integration/troubleshooting/"
       tag: "Documentation"
-      text: "Troubleshooting CI"
+      text: "Troubleshooting CI Visibility"
 ---
 
 {{< site-region region="gov" >}}
@@ -27,38 +26,59 @@ Set up tracing in Jenkins to collect data across various stages of your pipeline
 
 ### Compatibility
 
-| Pipeline Visibility | Platform | Definition |
-|---|---|---|
-| [Manual steps][20] | Manual steps | View manually triggered pipelines. |
-| [Queue time][21] | Queue time | View the amount of time pipeline jobs sit in the queue before processing. |
-| Logs correlation | Logs correlation | Correlate pipeline spans to logs and enable [job log collection][10]. |
-| Infrastructure metric correlation | Infrastructure metric correlation | Correlate jobs to [infrastructure host metrics][11] for Jenkins workers. |
-| [Custom spans][26] | Custom spans | Configure custom spans for your pipelines. |
-| Custom pre-defined tags | Custom pre-defined tags | Set [custom tags][12] to all generated pipeline, stages, and job spans. |
-| [Custom tags][22] [and measures at runtime][23] | Custom tags and measures at runtime | Configure [custom tags and measures][12] at runtime. |
+| Pipeline Visibility | Platform | Definition                                                                                               |
+|---|---|----------------------------------------------------------------------------------------------------------|
+| [Manual steps][20] | Manual steps | View manually triggered pipelines.                                                                       |
+| [Queue time][21] | Queue time | View the amount of time pipeline jobs sit in the queue before processing.                                |
+| Logs correlation | Logs correlation | Correlate pipeline spans to logs and enable [job logs collection][10].                                   |
+| Infrastructure metric correlation | Infrastructure metric correlation | Correlate jobs to [infrastructure host metrics][11] for Jenkins workers.                                 |
+| [Custom spans][26] | Custom spans | Configure custom spans for your pipelines.                                                               |
+| Custom pre-defined tags | Custom pre-defined tags | Set [custom tags][12] to all generated pipeline, stages, and job spans.                                  |
+| [Custom tags][22] [and measures at runtime][23] | Custom tags and measures at runtime | Configure [custom tags and measures][12] at runtime.                                                     |
 | [Parameters][24] | Parameters | Set custom parameters (such as the default branch name or Git information) when a pipeline is triggered. |
-| [Pipeline failure reasons][25] | Pipeline failure reasons | Identify pipeline failure reasons from error messages. |
+| [Pipeline failure reasons][25] | Pipeline failure reasons | Identify pipeline failure reasons from error messages.                                                   |
+| [Running pipelines][32] | Running pipelines | View pipeline executions that are running. Requires Jenkins plugin version >= 8.0.0                      |
 
 The following Jenkins versions are supported:
 
 - Jenkins >= 2.346.1
 
-This integration supports both [Agentless](#install-the-datadog-jenkins-plugin-agentless) and [Agent-based](#install-the-datadog-agent) installation. For infrastructure metric correlation, installing with the Agent-based mode is recommended.
+This integration supports both Agentless and Agent-based installation.
+Installing the Agent is required for infrastructure metrics correlation.
 
-## Install the Datadog Jenkins plugin (agentless)
+## Install the Datadog Agent
 
-Install and enable the [Datadog Jenkins plugin][3] v3.3.0 or later:
+Skip this step if you do not need infrastructure metrics correlation.
+
+Install Datadog Agent on your Jenkins controller node and on your worker nodes by following the [Agent installation instructions][14].
+
+If the Jenkins controller and the Datadog Agent have been deployed to a Kubernetes cluster, Datadog recommends using the [Admission Controller][2], which automatically sets the `DD_AGENT_HOST` environment variable in the Jenkins controller pod to communicate with the local Datadog Agent.
+
+If you want to report the logs of your Jenkins jobs to Datadog, make sure that custom logs collection over TCP is [enabled and configured][29] in the Agent.
+
+If your Agent runs in a container, add the `DD_DOGSTATSD_NON_LOCAL_TRAFFIC=true` environment variable to it and make sure the following ports are accessible by the Jenkins controller:
+- [DogStadsD][30] port, defaults to `8125/udp`
+- [APM traces port][31], defaults to `8126/tcp`
+- [logs collection port][29], defaults to `10518/tcp`
+
+<div class="alert alert-info"><strong>Note</strong>: Sending CI Visibility traces through UNIX domain sockets is not supported.</div>
+
+## Install the Datadog Jenkins plugin
+
+<div class="alert alert-info">Whether you choose to use Agentless mode or the Agent-based mode to report your data to Datadog, you are <strong>required</strong> to use the plugin.</div>
+
+Install and enable the [Datadog Jenkins plugin][3] v3.1.0 or later:
 
 1. In your Jenkins instance web interface, go to **Manage Jenkins > Manage Plugins**.
 2. In the [Update Center][4] on the **Available** tab, search for `Datadog Plugin`.
 3. Select the checkbox next to the plugin, and install using one of the two install buttons at the bottom of the screen.
 4. To verify that the plugin is installed, search for `Datadog Plugin` on the **Installed** tab.
 
-### Enable CI Visibility on the plugin
+## Configure the Datadog Jenkins plugin
 
 There are several ways you can configure the Datadog Jenkins plugin.
 
-#### Configure with the Jenkins configuration UI
+### Configure with the Jenkins configuration UI
 
 {{< tabs >}}
 {{% tab "Agentless (using an API key)" %}}
@@ -67,32 +87,43 @@ Use this option to make the Jenkins plugin report directly to Datadog without us
 
 1. In your Jenkins instance web interface, go to **Manage Jenkins > Configure System**.
 2. Go to the `Datadog Plugin` section, scrolling down the configuration screen.
-3. Select the mode `Use Datadog API URL and Key to report to Datadog`.
-4. For Datadog sites other that `datadoghq.com`, change the `Datadog API URL`, `Log Intake URL`, and `Webhook Intake URL` to point to your Datadog site.
-5. Enter a valid `Datadog API Key`.
-6. Mark the `Enable CI Visibility` checkbox.
-7. (Optional) Configure your CI Instance name.
-8. Save your configuration.
+3. Select the mode `Use Datadog site and API key to report to Datadog`.
+4. Select your [Datadog site][1] in the `Pick a site` dropdown.
+5. Enter a valid `Datadog API Key` (or use `Select from credentials` option).
+6. Click the `Test Key` button to verify that your API key is valid.
+7. Configure CI Visibility:
+   1. Enable the `Enable CI Visibility` checkbox.
+   2. (Optional) Configure your CI Instance name.
+8. (Optional) Configure logs collection:
+   1. Enable the `Enable Log Collection` checkbox.
+9. Save your configuration.
 
 {{< img src="ci/jenkins_plugin_agentless_urls_blurred.png" alt="Datadog Plugin configuration for Jenkins" style="width:100%;">}}
+
+[1]: /getting_started/site/#access-the-datadog-site
 {{% /tab %}}
-{{% tab "Report through the Datadog Agent - recommended" %}}
+{{% tab "Report through the Datadog Agent (recommended)" %}}
 
 1. In your Jenkins instance web interface, go to **Manage Jenkins > Configure System**.
 2. Go to the `Datadog Plugin` section, scrolling down the configuration screen.
 3. Select the mode `Use the Datadog Agent to report to Datadog`.
 4. Configure the `Agent` host.
-5. Configure the `Traces Collection Port` if not using the default port `8126`.
-6. Mark the `Enable CI Visibility` checkbox.
-7. (Optional) Configure your CI Instance name.
-8. Check the connectivity with the Datadog Agent.
-9. Save your configuration.
+5. Configure CI Visibility:
+   1. Configure the `Traces Collection Port` if not using the default port `8126`.
+   2. Click the `Test traces connection` button to verify that your configuration is valid.
+   3. Enable the `Enable CI Visibility` checkbox.
+   4. (Optional) Configure your CI Instance name.
+6. (Optional) Configure logs collection:
+   1. Configure the `Log Collection` port as configured in the Datadog Agent.
+   2. Click the `Test logs connection` button to verify that your configuration is valid.
+   3. Enable the `Enable Log Collection` checkbox.
+7. Save your configuration.
 
 {{< img src="ci/ci-jenkins-plugin-config-agentful.png" alt="Datadog Plugin configuration for Jenkins" style="width:100%;">}}
 {{% /tab %}}
 {{< /tabs >}}
 
-#### Configuration-as-code
+### Use Configuration-as-Code
 
 {{< tabs >}}
 
@@ -104,108 +135,150 @@ If your Jenkins instance uses the Jenkins [`configuration-as-code`][1] plugin:
 
     {{% site-region region="us" %}}
     {{< code-block lang="yaml" disable_copy="true" collapsible="true" >}}
-    unclassified:
-        datadogGlobalConfiguration:
-            # Select the `Agentless` mode (HTTP).
-            reportWith: "HTTP"
-            # Update the endpoints if reporting to Datadog sites other that `datadoghq.com`
-            targetApiURL: "https://api.datadoghq.com/api/"
-            targetLogIntakeURL: "https://http-intake.logs.datadoghq.com/v1/input/"
-            targetWebhookIntakeURL: "https://webhook-intake.datadoghq.com/api/v2/webhook/"
-            # Configure your API key
-            targetCredentialsApiKey: "<your-api-key>"
-            # (Optional) Configure your CI Instance name
-            ciInstanceName: "jenkins"
+unclassified:
+  datadogGlobalConfiguration:
+    datadogClientConfiguration:
+      # Select the `Agentless` mode (using API key).
+      datadogApiConfiguration:
+        intake:
+          datadogIntakeSite:
+            # Configure your Datadog site
+            site: 'US1'
+        apiKey:
+          datadogCredentialsApiKey:
+            # Configure ID of Jenkins credentials that store your API key
+            credentialsId: 'my-api-key-credentials-id'
+    # Enable CI Visibility flag
+    enableCiVisibility: true
+    # (Optional) Configure your CI Instance name
+    ciInstanceName: 'jenkins'
+    # (Optional) Enable logs collection
+    collectBuildLogs: true
     {{< /code-block >}}
 
     {{% /site-region %}}
     {{% site-region region="eu" %}}
 
     {{< code-block lang="yaml" disable_copy="true" collapsible="true" >}}
-    unclassified:
-        datadogGlobalConfiguration:
-            # Select the `Agentless` mode (HTTP).
-            reportWith: "HTTP"
-            # Update the endpoints if reporting to Datadog sites other that `datadoghq.com`
-            targetApiURL: "https://api.datadoghq.eu/api/"
-            targetLogIntakeURL: "https://http-intake.logs.datadoghq.eu/v1/input/"
-            targetWebhookIntakeURL: "https://webhook-intake.datadoghq.eu/api/v2/webhook/"
-            # Configure your API key
-            targetCredentialsApiKey: "<your-api-key>"
-            # (Optional) Configure your CI Instance name
-            ciInstanceName: "jenkins"
+unclassified:
+  datadogGlobalConfiguration:
+    datadogClientConfiguration:
+      # Select the `Agentless` mode (using API key).
+      datadogApiConfiguration:
+        intake:
+          datadogIntakeSite:
+            # Configure your Datadog site
+            site: 'EU1'
+        apiKey:
+          datadogCredentialsApiKey:
+            # Configure ID of Jenkins credentials that store your API key
+            credentialsId: 'my-api-key-credentials-id'
+    # Enable CI Visibility flag
+    enableCiVisibility: true
+    # (Optional) Configure your CI Instance name
+    ciInstanceName: 'jenkins'
+    # (Optional) Enable logs collection
+    collectBuildLogs: true
     {{< /code-block >}}
 
     {{% /site-region %}}
     {{% site-region region="gov" %}}
 
     {{< code-block lang="yaml" disable_copy="true" collapsible="true" >}}
-    unclassified:
-        datadogGlobalConfiguration:
-            # Select the `Agentless` mode (HTTP).
-            reportWith: "HTTP"
-            # Update the endpoints if reporting to Datadog sites other that `datadoghq.com`
-            targetApiURL: "https://api.dd-gov.com/api/"
-            targetLogIntakeURL: "https://http-intake.logs.dd-gov.com/v1/input/"
-            targetWebhookIntakeURL: "https://webhook-intake.dd-gov.com/api/v2/webhook/"
-            # Configure your API key
-            targetCredentialsApiKey: "<your-api-key>"
-            # (Optional) Configure your CI Instance name
-            ciInstanceName: "jenkins"
+unclassified:
+  datadogGlobalConfiguration:
+    datadogClientConfiguration:
+      # Select the `Agentless` mode (using API key).
+      datadogApiConfiguration:
+        intake:
+          datadogIntakeSite:
+            # Configure your Datadog site
+            site: 'US1_FED'
+        apiKey:
+          datadogCredentialsApiKey:
+            # Configure ID of Jenkins credentials that store your API key
+            credentialsId: 'my-api-key-credentials-id'
+    # Enable CI Visibility flag
+    enableCiVisibility: true
+    # (Optional) Configure your CI Instance name
+    ciInstanceName: 'jenkins'
+    # (Optional) Enable logs collection
+    collectBuildLogs: true
     {{< /code-block >}}
 
     {{% /site-region %}}
     {{% site-region region="us3" %}}
 
     {{< code-block lang="yaml" disable_copy="true" collapsible="true" >}}
-    unclassified:
-        datadogGlobalConfiguration:
-            # Select the `Agentless` mode (HTTP).
-            reportWith: "HTTP"
-            # Update the endpoints if reporting to Datadog sites other that `datadoghq.com`
-            targetApiURL: "https://api.us3.datadoghq.com/api/"
-            targetLogIntakeURL: "https://http-intake.logs.us3.datadoghq.com/v1/input/"
-            targetWebhookIntakeURL: "https://webhook-intake.us3.datadoghq.com/api/v2/webhook/"
-            # Configure your API key
-            targetCredentialsApiKey: "<your-api-key>"
-            # (Optional) Configure your CI Instance name
-            ciInstanceName: "jenkins"
+unclassified:
+  datadogGlobalConfiguration:
+    datadogClientConfiguration:
+      # Select the `Agentless` mode (using API key).
+      datadogApiConfiguration:
+        intake:
+          datadogIntakeSite:
+            # Configure your Datadog site
+            site: 'US3'
+        apiKey:
+          datadogCredentialsApiKey:
+            # Configure ID of Jenkins credentials that store your API key
+            credentialsId: 'my-api-key-credentials-id'
+    # Enable CI Visibility flag
+    enableCiVisibility: true
+    # (Optional) Configure your CI Instance name
+    ciInstanceName: 'jenkins'
+    # (Optional) Enable logs collection
+    collectBuildLogs: true
     {{< /code-block >}}
 
     {{% /site-region %}}
     {{% site-region region="us5" %}}
 
     {{< code-block lang="yaml" disable_copy="true" collapsible="true" >}}
-    unclassified:
-        datadogGlobalConfiguration:
-            # Select the `Agentless` mode (HTTP).
-            reportWith: "HTTP"
-            # Update the endpoints if reporting to Datadog sites other that `datadoghq.com`
-            targetApiURL: "https://api.us5.datadoghq.com/api/"
-            targetLogIntakeURL: "https://http-intake.logs.us5.datadoghq.com/v1/input/"
-            targetWebhookIntakeURL: "https://webhook-intake.us5.datadoghq.com/api/v2/webhook/"
-            # Configure your API key
-            targetCredentialsApiKey: "<your-api-key>"
-            # (Optional) Configure your CI Instance name
-            ciInstanceName: "jenkins"
+unclassified:
+  datadogGlobalConfiguration:
+    datadogClientConfiguration:
+      # Select the `Agentless` mode (using API key).
+      datadogApiConfiguration:
+        intake:
+          datadogIntakeSite:
+            # Configure your Datadog site
+            site: 'US5'
+        apiKey:
+          datadogCredentialsApiKey:
+            # Configure ID of Jenkins credentials that store your API key
+            credentialsId: 'my-api-key-credentials-id'
+    # Enable CI Visibility flag
+    enableCiVisibility: true
+    # (Optional) Configure your CI Instance name
+    ciInstanceName: 'jenkins'
+    # (Optional) Enable logs collection
+    collectBuildLogs: true
     {{< /code-block >}}
 
     {{% /site-region %}}
     {{% site-region region="ap1" %}}
 
     {{< code-block lang="yaml" disable_copy="true" collapsible="true" >}}
-    unclassified:
-        datadogGlobalConfiguration:
-            # Select the `Agentless` mode (HTTP).
-            reportWith: "HTTP"
-            # Update the endpoints if reporting to Datadog sites other that `datadoghq.com`
-            targetApiURL: "https://api.ap1.datadoghq.com/api/"
-            targetLogIntakeURL: "https://http-intake.logs.ap1.datadoghq.com/v1/input/"
-            targetWebhookIntakeURL: "https://webhook-intake.ap1.datadoghq.com/api/v2/webhook/"
-            # Configure your API key
-            targetCredentialsApiKey: "<your-api-key>"
-            # (Optional) Configure your CI Instance name
-            ciInstanceName: "jenkins"
+unclassified:
+  datadogGlobalConfiguration:
+    datadogClientConfiguration:
+      # Select the `Agentless` mode (using API key).
+      datadogApiConfiguration:
+        intake:
+          datadogIntakeSite:
+            # Configure your Datadog site
+            site: 'AP1'
+        apiKey:
+          datadogCredentialsApiKey:
+            # Configure ID of Jenkins credentials that store your API key
+            credentialsId: 'my-api-key-credentials-id'
+    # Enable CI Visibility flag
+    enableCiVisibility: true
+    # (Optional) Configure your CI Instance name
+    ciInstanceName: 'jenkins'
+    # (Optional) Enable logs collection
+    collectBuildLogs: true
     {{< /code-block >}}
     {{% /site-region %}}
 
@@ -215,26 +288,33 @@ If your Jenkins instance uses the Jenkins [`configuration-as-code`][1] plugin:
 
 [1]: https://github.com/jenkinsci/configuration-as-code-plugin/blob/master/README.md
 {{% /tab %}}
-{{% tab "Report through the Datadog Agent - recommended" %}}
+{{% tab "Report through the Datadog Agent (recommended)" %}}
 
 If your Jenkins instance uses the Jenkins [`configuration-as-code`][1] plugin:
 
 1. Create or modify the configuration YAML by adding an entry for `datadogGlobalConfiguration`:
 
-    ```yaml
-    unclassified:
-        datadogGlobalConfiguration:
-            # Select the `Datadog Agent` mode (DSD).
-            reportWith: "DSD"
-            # Configure the `Agent` host
-            targetHost: "<your-agent-host>"
-            # Configure the `Traces Collection` port
-            targetTraceCollectionPort: 8126
-            # Enable CI Visibility flag
-            enableCiVisibility: true
-            # (Optional) Configure your CI Instance name
-            ciInstanceName: "jenkins"
-    ```
+   {{< code-block lang="yaml" disable_copy="true" collapsible="true" >}}
+unclassified:
+  datadogGlobalConfiguration:
+    datadogClientConfiguration:
+      # Select the `Datadog Agent` mode
+      datadogAgentConfiguration:
+        # Configure Datadog Agent host
+        agentHost: '<your-agent-host>'
+        # Configure Datadog Agent port
+        agentPort: 8125
+        # (Optional) Configure logs collection port as configured in your Datadog Agent
+        agentLogCollectionPort: 10518
+        # Configure traces collection port
+        agentTraceCollectionPort: 8126
+    # Enable CI Visibility flag
+    enableCiVisibility: true
+    # (Optional) Configure your CI Instance name
+    ciInstanceName: 'jenkins'
+    # (Optional) Enable logs collection
+    collectBuildLogs: true
+   {{< /code-block >}}
 
 2. In your Jenkins instance web interface, go to **Manage Jenkins > Configuration as Code**.
 3. Apply or reload the configuration.
@@ -245,7 +325,7 @@ If your Jenkins instance uses the Jenkins [`configuration-as-code`][1] plugin:
 {{% /tab %}}
 {{< /tabs >}}
 
-#### Configure with Groovy
+### Configure with Groovy
 
 {{< tabs >}}
 {{% tab "Agentless (using an API key)" %}}
@@ -255,226 +335,205 @@ If your Jenkins instance uses the Jenkins [`configuration-as-code`][1] plugin:
 
     {{% site-region region="us" %}}
     {{< code-block lang="groovy" disable_copy="true" collapsible="true" >}}
-    import jenkins.model.*
-    import org.datadog.jenkins.plugins.datadog.DatadogGlobalConfiguration
+import hudson.util.Secret
+import jenkins.model.Jenkins
+import org.datadog.jenkins.plugins.datadog.DatadogGlobalConfiguration
+import org.datadog.jenkins.plugins.datadog.configuration.DatadogApiConfiguration
+import org.datadog.jenkins.plugins.datadog.configuration.api.intake.DatadogIntakeSite
+import org.datadog.jenkins.plugins.datadog.configuration.api.intake.DatadogSite
+import org.datadog.jenkins.plugins.datadog.configuration.api.key.DatadogTextApiKey
 
-    def j = Jenkins.getInstance()
-    def d = j.getDescriptor("org.datadog.jenkins.plugins.datadog.DatadogGlobalConfiguration")
+def jenkins = Jenkins.getInstance()
+def datadog = jenkins.getDescriptorByType(DatadogGlobalConfiguration)
 
-    // Select the Datadog Agent mode
-    d.setReportWith('HTTP')
+def site = new DatadogIntakeSite(DatadogSite.US1) // Pick your Datadog site
+def apiKey = new DatadogTextApiKey(Secret.fromString('<YOUR_API_KEY>')) // or `new DatadogCredentialsApiKey('<YOUR_CREDENTIALS_ID>')`
+datadog.datadogClientConfiguration = new DatadogApiConfiguration(site, apiKey)
 
-    // Endpoint URLs correspond to your Datadog site
-    d.setTargetApiURL("https://api.datadoghq.com/api/")
-    d.setTargetLogIntakeURL("https://http-intake.logs.datadoghq.com/v1/input/")
-    d.setTargetWebhookIntakeURL("https://webhook-intake.datadoghq.com/api/v2/webhook/")
+datadog.enableCiVisibility = true
+datadog.collectBuildLogs = true // (Optional) Enable logs collection
 
-    // Configure your API key
-    d.setTargetApiKey("your-api-key")
+datadog.ciInstanceName = 'jenkins' // (Optional) Set your CI Instance name
 
-    // Enable CI Visibility
-    d.setEnableCiVisibility(true)
-
-    // (Optional) Configure your CI Instance name
-    d.setCiInstanceName("jenkins")
-
-    // Save config
-    d.save()
+// Save config
+datadog.save()
     {{< /code-block >}}
 
     {{% /site-region %}}
     {{% site-region region="eu" %}}
 
     {{< code-block lang="groovy" disable_copy="true" collapsible="true" >}}
-    import jenkins.model.*
-    import org.datadog.jenkins.plugins.datadog.DatadogGlobalConfiguration
+import hudson.util.Secret
+import jenkins.model.Jenkins
+import org.datadog.jenkins.plugins.datadog.DatadogGlobalConfiguration
+import org.datadog.jenkins.plugins.datadog.configuration.DatadogApiConfiguration
+import org.datadog.jenkins.plugins.datadog.configuration.api.intake.DatadogIntakeSite
+import org.datadog.jenkins.plugins.datadog.configuration.api.intake.DatadogSite
+import org.datadog.jenkins.plugins.datadog.configuration.api.key.DatadogTextApiKey
 
-    def j = Jenkins.getInstance()
-    def d = j.getDescriptor("org.datadog.jenkins.plugins.datadog.DatadogGlobalConfiguration")
+def jenkins = Jenkins.getInstance()
+def datadog = jenkins.getDescriptorByType(DatadogGlobalConfiguration)
 
-    // Select the Datadog Agent mode
-    d.setReportWith('HTTP')
+def site = new DatadogIntakeSite(DatadogSite.EU1) // Pick your Datadog site
+def apiKey = new DatadogTextApiKey(Secret.fromString('<YOUR_API_KEY>')) // or `new DatadogCredentialsApiKey('<YOUR_CREDENTIALS_ID>')`
+datadog.datadogClientConfiguration = new DatadogApiConfiguration(site, apiKey)
 
-    // Endpoint URLs correspond to your Datadog site
-    d.setTargetApiURL("https://api.ap1.datadoghq.eu/api/")
-    d.setTargetLogIntakeURL("https://http-intake.logs.ap1.datadoghq.eu/v1/input/")
-    d.setTargetWebhookIntakeURL("https://webhook-intake.ap1.datadoghq.eu/api/v2/webhook/")
+datadog.enableCiVisibility = true
+datadog.collectBuildLogs = true // (Optional) Enable logs collection
 
-    // Configure your API key
-    d.setTargetApiKey("your-api-key")
+datadog.ciInstanceName = 'jenkins' // (Optional) Set your CI Instance name
 
-    // Enable CI Visibility
-    d.setEnableCiVisibility(true)
-
-    // (Optional) Configure your CI Instance name
-    d.setCiInstanceName("jenkins")
-
-    // Save config
-    d.save()
+// Save config
+datadog.save()
     {{< /code-block >}}
 
     {{% /site-region %}}
     {{% site-region region="gov" %}}
 
     {{< code-block lang="groovy" disable_copy="true" collapsible="true" >}}
-    import jenkins.model.*
-    import org.datadog.jenkins.plugins.datadog.DatadogGlobalConfiguration
+import hudson.util.Secret
+import jenkins.model.Jenkins
+import org.datadog.jenkins.plugins.datadog.DatadogGlobalConfiguration
+import org.datadog.jenkins.plugins.datadog.configuration.DatadogApiConfiguration
+import org.datadog.jenkins.plugins.datadog.configuration.api.intake.DatadogIntakeSite
+import org.datadog.jenkins.plugins.datadog.configuration.api.intake.DatadogSite
+import org.datadog.jenkins.plugins.datadog.configuration.api.key.DatadogTextApiKey
 
-    def j = Jenkins.getInstance()
-    def d = j.getDescriptor("org.datadog.jenkins.plugins.datadog.DatadogGlobalConfiguration")
+def jenkins = Jenkins.getInstance()
+def datadog = jenkins.getDescriptorByType(DatadogGlobalConfiguration)
 
-    // Select the Datadog Agent mode
-    d.setReportWith('HTTP')
+def site = new DatadogIntakeSite(DatadogSite.US1_FED) // Pick your Datadog site
+def apiKey = new DatadogTextApiKey(Secret.fromString('<YOUR_API_KEY>')) // or `new DatadogCredentialsApiKey('<YOUR_CREDENTIALS_ID>')`
+datadog.datadogClientConfiguration = new DatadogApiConfiguration(site, apiKey)
 
-    // Endpoint URLs correspond to your Datadog site
-    d.setTargetApiURL("https://api.dd-gov.com/api/")
-    d.setTargetLogIntakeURL("https://http-intake.logs.dd-gov.com/v1/input/")
-    d.setTargetWebhookIntakeURL("https://webhook-intake.dd-gov.com/api/v2/webhook/")
+datadog.enableCiVisibility = true
+datadog.collectBuildLogs = true // (Optional) Enable logs collection
 
-    // Configure your API key
-    d.setTargetApiKey("your-api-key")
+datadog.ciInstanceName = 'jenkins' // (Optional) Set your CI Instance name
 
-    // Enable CI Visibility
-    d.setEnableCiVisibility(true)
-
-    // (Optional) Configure your CI Instance name
-    d.setCiInstanceName("jenkins")
-
-    // Save config
-    d.save()
+// Save config
+datadog.save()
     {{< /code-block >}}
 
     {{% /site-region %}}
     {{% site-region region="us3" %}}
 
     {{< code-block lang="groovy" disable_copy="true" collapsible="true" >}}
-    import jenkins.model.*
-    import org.datadog.jenkins.plugins.datadog.DatadogGlobalConfiguration
+import hudson.util.Secret
+import jenkins.model.Jenkins
+import org.datadog.jenkins.plugins.datadog.DatadogGlobalConfiguration
+import org.datadog.jenkins.plugins.datadog.configuration.DatadogApiConfiguration
+import org.datadog.jenkins.plugins.datadog.configuration.api.intake.DatadogIntakeSite
+import org.datadog.jenkins.plugins.datadog.configuration.api.intake.DatadogSite
+import org.datadog.jenkins.plugins.datadog.configuration.api.key.DatadogTextApiKey
 
-    def j = Jenkins.getInstance()
-    def d = j.getDescriptor("org.datadog.jenkins.plugins.datadog.DatadogGlobalConfiguration")
+def jenkins = Jenkins.getInstance()
+def datadog = jenkins.getDescriptorByType(DatadogGlobalConfiguration)
 
-    // Select the Datadog Agent mode
-    d.setReportWith('HTTP')
+def site = new DatadogIntakeSite(DatadogSite.US3) // Pick your Datadog site
+def apiKey = new DatadogTextApiKey(Secret.fromString('<YOUR_API_KEY>')) // or `new DatadogCredentialsApiKey('<YOUR_CREDENTIALS_ID>')`
+datadog.datadogClientConfiguration = new DatadogApiConfiguration(site, apiKey)
 
-    // Endpoint URLs correspond to your Datadog site
-    d.setTargetApiURL("https://api.us3.datadoghq.com/api/")
-    d.setTargetLogIntakeURL("https://http-intake.logs.us3.datadoghq.com/v1/input/")
-    d.setTargetWebhookIntakeURL("https://webhook-intake.us3.datadoghq.com/api/v2/webhook/")
+datadog.enableCiVisibility = true
+datadog.collectBuildLogs = true // (Optional) Enable logs collection
 
-    // Configure your API key
-    d.setTargetApiKey("your-api-key")
+datadog.ciInstanceName = 'jenkins' // (Optional) Set your CI Instance name
 
-    // Enable CI Visibility
-    d.setEnableCiVisibility(true)
-
-    // (Optional) Configure your CI Instance name
-    d.setCiInstanceName("jenkins")
-
-    // Save config
-    d.save()
+// Save config
+datadog.save()
     {{< /code-block >}}
 
     {{% /site-region %}}
     {{% site-region region="us5" %}}
 
     {{< code-block lang="groovy" disable_copy="true" collapsible="true" >}}
-    import jenkins.model.*
-    import org.datadog.jenkins.plugins.datadog.DatadogGlobalConfiguration
+import hudson.util.Secret
+import jenkins.model.Jenkins
+import org.datadog.jenkins.plugins.datadog.DatadogGlobalConfiguration
+import org.datadog.jenkins.plugins.datadog.configuration.DatadogApiConfiguration
+import org.datadog.jenkins.plugins.datadog.configuration.api.intake.DatadogIntakeSite
+import org.datadog.jenkins.plugins.datadog.configuration.api.intake.DatadogSite
+import org.datadog.jenkins.plugins.datadog.configuration.api.key.DatadogTextApiKey
 
-    def j = Jenkins.getInstance()
-    def d = j.getDescriptor("org.datadog.jenkins.plugins.datadog.DatadogGlobalConfiguration")
+def jenkins = Jenkins.getInstance()
+def datadog = jenkins.getDescriptorByType(DatadogGlobalConfiguration)
 
-    // Select the Datadog Agent mode
-    d.setReportWith('HTTP')
+def site = new DatadogIntakeSite(DatadogSite.US5) // Pick your Datadog site
+def apiKey = new DatadogTextApiKey(Secret.fromString('<YOUR_API_KEY>')) // or `new DatadogCredentialsApiKey('<YOUR_CREDENTIALS_ID>')`
+datadog.datadogClientConfiguration = new DatadogApiConfiguration(site, apiKey)
 
-    // Endpoint URLs correspond to your Datadog site
-    d.setTargetApiURL("https://api.us5.datadoghq.com/api/")
-    d.setTargetLogIntakeURL("https://http-intake.logs.us5.datadoghq.com/v1/input/")
-    d.setTargetWebhookIntakeURL("https://webhook-intake.us5.datadoghq.com/api/v2/webhook/")
+datadog.enableCiVisibility = true
+datadog.collectBuildLogs = true // (Optional) Enable logs collection
 
-    // Configure your API key
-    d.setTargetApiKey("your-api-key")
+datadog.ciInstanceName = 'jenkins' // (Optional) Set your CI Instance name
 
-    // Enable CI Visibility
-    d.setEnableCiVisibility(true)
-
-    // (Optional) Configure your CI Instance name
-    d.setCiInstanceName("jenkins")
-
-    // Save config
-    d.save()
+// Save config
+datadog.save()
     {{< /code-block >}}
 
     {{% /site-region %}}
     {{% site-region region="ap1" %}}
 
     {{< code-block lang="groovy" disable_copy="true" collapsible="true" >}}
-    import jenkins.model.*
-    import org.datadog.jenkins.plugins.datadog.DatadogGlobalConfiguration
+import hudson.util.Secret
+import jenkins.model.Jenkins
+import org.datadog.jenkins.plugins.datadog.DatadogGlobalConfiguration
+import org.datadog.jenkins.plugins.datadog.configuration.DatadogApiConfiguration
+import org.datadog.jenkins.plugins.datadog.configuration.api.intake.DatadogIntakeSite
+import org.datadog.jenkins.plugins.datadog.configuration.api.intake.DatadogSite
+import org.datadog.jenkins.plugins.datadog.configuration.api.key.DatadogTextApiKey
 
-    def j = Jenkins.getInstance()
-    def d = j.getDescriptor("org.datadog.jenkins.plugins.datadog.DatadogGlobalConfiguration")
+def jenkins = Jenkins.getInstance()
+def datadog = jenkins.getDescriptorByType(DatadogGlobalConfiguration)
 
-    // Select the Datadog Agent mode
-    d.setReportWith('HTTP')
+def site = new DatadogIntakeSite(DatadogSite.AP1) // Pick your Datadog site
+def apiKey = new DatadogTextApiKey(Secret.fromString('<YOUR_API_KEY>')) // or `new DatadogCredentialsApiKey('<YOUR_CREDENTIALS_ID>')`
+datadog.datadogClientConfiguration = new DatadogApiConfiguration(site, apiKey)
 
-    // Endpoint URLs correspond to your Datadog site
-    d.setTargetApiURL("https://api.ap1.datadoghq.com/api/")
-    d.setTargetLogIntakeURL("https://http-intake.logs.ap1.datadoghq.com/v1/input/")
-    d.setTargetWebhookIntakeURL("https://webhook-intake.ap1.datadoghq.com/api/v2/webhook/")
+datadog.enableCiVisibility = true
+datadog.collectBuildLogs = true // (Optional) Enable logs collection
 
-    // Configure your API key
-    d.setTargetApiKey("your-api-key")
+datadog.ciInstanceName = 'jenkins' // (Optional) Set your CI Instance name
 
-    // Enable CI Visibility
-    d.setEnableCiVisibility(true)
-
-    // (Optional) Configure your CI Instance name
-    d.setCiInstanceName("jenkins")
-
-    // Save config
-    d.save()
+// Save config
+datadog.save()
     {{< /code-block >}}
 
     {{% /site-region %}}
 
 {{% /tab %}}
-{{% tab "Report through the Datadog Agent - recommended" %}}
+{{% tab "Report through the Datadog Agent (recommended)" %}}
 
 1. In your Jenkins instance web interface, go to **Manage Jenkins > Script Console**.
 2. Run the configuration script:
 
-    ```groovy
-    import jenkins.model.*
-    import org.datadog.jenkins.plugins.datadog.DatadogGlobalConfiguration
+   {{< code-block lang="groovy" disable_copy="true" collapsible="true" >}}
+import jenkins.model.Jenkins
+import org.datadog.jenkins.plugins.datadog.DatadogGlobalConfiguration
+import org.datadog.jenkins.plugins.datadog.configuration.DatadogAgentConfiguration
 
-    def j = Jenkins.getInstance()
-    def d = j.getDescriptor("org.datadog.jenkins.plugins.datadog.DatadogGlobalConfiguration")
+def jenkins = Jenkins.getInstance()
+def datadog = jenkins.getDescriptorByType(DatadogGlobalConfiguration)
 
-    // Select the Datadog Agent mode
-    d.setReportWith('DSD')
+def agentHost = 'localhost' // Configure your Datadog Agent host
+def agentPort = 8125
+def agentLogCollectionPort = 8126 // (Optional) Configure logs collection port as configured in your Datadog Agent
+def agentTraceCollectionPort = 8126 // Configure traces collection port
+datadog.datadogClientConfiguration = new DatadogAgentConfiguration(agentHost, agentPort, agentLogCollectionPort, agentTraceCollectionPort)
 
-    // Configure the Agent host.
-    d.setTargetHost('<your-agent-host>')
+datadog.enableCiVisibility = true
+datadog.collectBuildLogs = true // (Optional) Enable logs collection
 
-    // Configure the Traces Collection port (default 8126)
-    d.setTargetTraceCollectionPort(8126)
+datadog.ciInstanceName = 'jenkins' // (Optional) Set your CI Instance name
 
-    // Enable CI Visibility
-    d.setEnableCiVisibility(true)
-
-    // (Optional) Configure your CI Instance name
-    d.setCiInstanceName("jenkins")
-
-    // Save config
-    d.save()
-    ```
+// Save config
+datadog.save()
+    {{< /code-block >}}
 
 {{% /tab %}}
 {{< /tabs >}}
 
-#### Use environment variables
+### Use environment variables
 
 {{< tabs >}}
 {{% tab "Agentless (using an API key)" %}}
@@ -486,10 +545,8 @@ If your Jenkins instance uses the Jenkins [`configuration-as-code`][1] plugin:
     # Select the Datadog Agent mode
     DATADOG_JENKINS_PLUGIN_REPORT_WITH=HTTP
 
-    # Endpoint URLs correspond to your Datadog site
-    DATADOG_JENKINS_PLUGIN_TARGET_API_URL="https://api.datadoghq.com/api/"
-    DATADOG_JENKINS_PLUGIN_TARGET_LOG_INTAKE_URL="https://http-intake.logs.datadoghq.com/v1/input/"
-    DATADOG_JENKINS_TARGET_WEBHOOK_INTAKE_URL="https://webhook-intake.datadoghq.com/api/v2/webhook/"
+    # Configure your Datadog site
+    DATADOG_JENKINS_PLUGIN_DATADOG_SITE=US1
 
     # Configure your API key
     DATADOG_JENKINS_PLUGIN_TARGET_API_KEY=your-api-key
@@ -499,6 +556,9 @@ If your Jenkins instance uses the Jenkins [`configuration-as-code`][1] plugin:
 
     # (Optional) Configure your CI Instance name
     DATADOG_JENKINS_PLUGIN_CI_VISIBILITY_CI_INSTANCE_NAME=jenkins
+
+    # (Optional) Enable logs collection
+    DATADOG_JENKINS_PLUGIN_COLLECT_BUILD_LOGS=true
     {{< /code-block >}}
 
     {{% /site-region %}}
@@ -508,10 +568,8 @@ If your Jenkins instance uses the Jenkins [`configuration-as-code`][1] plugin:
     # Select the Datadog Agent mode
     DATADOG_JENKINS_PLUGIN_REPORT_WITH=HTTP
 
-    # Endpoint URLs correspond to your Datadog site
-    DATADOG_JENKINS_PLUGIN_TARGET_API_URL="https://api.datadoghq.eu/api/"
-    DATADOG_JENKINS_PLUGIN_TARGET_LOG_INTAKE_URL="https://http-intake.logs.datadoghq.eu/v1/input/"
-    DATADOG_JENKINS_TARGET_WEBHOOK_INTAKE_URL="https://webhook-intake.datadoghq.eu/api/v2/webhook/"
+    # Configure your Datadog site
+    DATADOG_JENKINS_PLUGIN_DATADOG_SITE=EU1
 
     # Configure your API key
     DATADOG_JENKINS_PLUGIN_TARGET_API_KEY=your-api-key
@@ -521,6 +579,9 @@ If your Jenkins instance uses the Jenkins [`configuration-as-code`][1] plugin:
 
     # (Optional) Configure your CI Instance name
     DATADOG_JENKINS_PLUGIN_CI_VISIBILITY_CI_INSTANCE_NAME=jenkins
+
+    # (Optional) Enable logs collection
+    DATADOG_JENKINS_PLUGIN_COLLECT_BUILD_LOGS=true
     {{< /code-block >}}
 
     {{% /site-region %}}
@@ -530,10 +591,8 @@ If your Jenkins instance uses the Jenkins [`configuration-as-code`][1] plugin:
     # Select the Datadog Agent mode
     DATADOG_JENKINS_PLUGIN_REPORT_WITH=HTTP
 
-    # Endpoint URLs correspond to your Datadog site
-    DATADOG_JENKINS_PLUGIN_TARGET_API_URL="https://api.dd-gov.com/api/"
-    DATADOG_JENKINS_PLUGIN_TARGET_LOG_INTAKE_URL="https://http-intake.logs.dd-gov.com/v1/input/"
-    DATADOG_JENKINS_TARGET_WEBHOOK_INTAKE_URL="https://webhook-intake.dd-gov.com/api/v2/webhook/"
+    # Configure your Datadog site
+    DATADOG_JENKINS_PLUGIN_DATADOG_SITE=US1_FED
 
     # Configure your API key
     DATADOG_JENKINS_PLUGIN_TARGET_API_KEY=your-api-key
@@ -543,6 +602,9 @@ If your Jenkins instance uses the Jenkins [`configuration-as-code`][1] plugin:
 
     # (Optional) Configure your CI Instance name
     DATADOG_JENKINS_PLUGIN_CI_VISIBILITY_CI_INSTANCE_NAME=jenkins
+
+    # (Optional) Enable logs collection
+    DATADOG_JENKINS_PLUGIN_COLLECT_BUILD_LOGS=true
     {{< /code-block >}}
 
     {{% /site-region %}}
@@ -552,10 +614,8 @@ If your Jenkins instance uses the Jenkins [`configuration-as-code`][1] plugin:
     # Select the Datadog Agent mode
     DATADOG_JENKINS_PLUGIN_REPORT_WITH=HTTP
 
-    # Endpoint URLs correspond to your Datadog site
-    DATADOG_JENKINS_PLUGIN_TARGET_API_URL="https://api.us3.datadoghq.com/api/"
-    DATADOG_JENKINS_PLUGIN_TARGET_LOG_INTAKE_URL="https://http-intake.logs.us3.datadoghq.com/v1/input/"
-    DATADOG_JENKINS_TARGET_WEBHOOK_INTAKE_URL="https://webhook-intake.us3.datadoghq.com/api/v2/webhook/"
+    # Configure your Datadog site
+    DATADOG_JENKINS_PLUGIN_DATADOG_SITE=US3
 
     # Configure your API key
     DATADOG_JENKINS_PLUGIN_TARGET_API_KEY=your-api-key
@@ -565,6 +625,9 @@ If your Jenkins instance uses the Jenkins [`configuration-as-code`][1] plugin:
 
     # (Optional) Configure your CI Instance name
     DATADOG_JENKINS_PLUGIN_CI_VISIBILITY_CI_INSTANCE_NAME=jenkins
+
+    # (Optional) Enable logs collection
+    DATADOG_JENKINS_PLUGIN_COLLECT_BUILD_LOGS=true
     {{< /code-block >}}
 
     {{% /site-region %}}
@@ -574,10 +637,8 @@ If your Jenkins instance uses the Jenkins [`configuration-as-code`][1] plugin:
     # Select the Datadog Agent mode
     DATADOG_JENKINS_PLUGIN_REPORT_WITH=HTTP
 
-    # Endpoint URLs correspond to your Datadog site
-    DATADOG_JENKINS_PLUGIN_TARGET_API_URL="https://api.us5.datadoghq.com/api/"
-    DATADOG_JENKINS_PLUGIN_TARGET_LOG_INTAKE_URL="https://http-intake.logs.us5.datadoghq.com/v1/input/"
-    DATADOG_JENKINS_TARGET_WEBHOOK_INTAKE_URL="https://webhook-intake.us5.datadoghq.com/api/v2/webhook/"
+    # Configure your Datadog site
+    DATADOG_JENKINS_PLUGIN_DATADOG_SITE=US5
 
     # Configure your API key
     DATADOG_JENKINS_PLUGIN_TARGET_API_KEY=your-api-key
@@ -587,6 +648,9 @@ If your Jenkins instance uses the Jenkins [`configuration-as-code`][1] plugin:
 
     # (Optional) Configure your CI Instance name
     DATADOG_JENKINS_PLUGIN_CI_VISIBILITY_CI_INSTANCE_NAME=jenkins
+
+    # (Optional) Enable logs collection
+    DATADOG_JENKINS_PLUGIN_COLLECT_BUILD_LOGS=true
     {{< /code-block >}}
 
     {{% /site-region %}}
@@ -596,10 +660,8 @@ If your Jenkins instance uses the Jenkins [`configuration-as-code`][1] plugin:
     # Select the Datadog Agent mode
     DATADOG_JENKINS_PLUGIN_REPORT_WITH=HTTP
 
-    # Endpoint URLs correspond to your Datadog site
-    DATADOG_JENKINS_PLUGIN_TARGET_API_URL="https://api.ap1.datadoghq.com/api/"
-    DATADOG_JENKINS_PLUGIN_TARGET_LOG_INTAKE_URL="https://http-intake.logs.ap1.datadoghq.com/v1/input/"
-    DATADOG_JENKINS_TARGET_WEBHOOK_INTAKE_URL="https://webhook-intake.ap1.datadoghq.com/api/v2/webhook/"
+    # Configure your Datadog site
+    DATADOG_JENKINS_PLUGIN_DATADOG_SITE=AP1
 
     # Configure your API key
     DATADOG_JENKINS_PLUGIN_TARGET_API_KEY=your-api-key
@@ -609,12 +671,15 @@ If your Jenkins instance uses the Jenkins [`configuration-as-code`][1] plugin:
 
     # (Optional) Configure your CI Instance name
     DATADOG_JENKINS_PLUGIN_CI_VISIBILITY_CI_INSTANCE_NAME=jenkins
+
+    # (Optional) Enable logs collection
+    DATADOG_JENKINS_PLUGIN_COLLECT_BUILD_LOGS=true
     {{< /code-block >}}
     {{% /site-region %}}
 
 2. Restart your Jenkins instance.
 {{% /tab %}}
-{{% tab "Report through the Datadog Agent - recommended" %}}
+{{% tab "Report through the Datadog Agent (recommended)" %}}
 
 1. Set the following environment variables on your Jenkins instance machine:
 
@@ -633,6 +698,12 @@ If your Jenkins instance uses the Jenkins [`configuration-as-code`][1] plugin:
 
     # (Optional) Configure your CI Instance name
     DATADOG_JENKINS_PLUGIN_CI_VISIBILITY_CI_INSTANCE_NAME=jenkins
+
+    # (Optional) Configure Log Collection port as configured in your Datadog Agent
+    DATADOG_JENKINS_PLUGIN_TARGET_LOG_COLLECTION_PORT=10518
+
+    # (Optional) Enable logs collection
+    DATADOG_JENKINS_PLUGIN_COLLECT_BUILD_LOGS=true
     ```
 
 2. Restart your Jenkins instance.
@@ -640,87 +711,16 @@ If your Jenkins instance uses the Jenkins [`configuration-as-code`][1] plugin:
 {{% /tab %}}
 {{< /tabs >}}
 
-### Validate the configuration
+## Collect job logs
 
-To verify that CI Visibility is enabled, go to `Jenkins Log` and search for:
+Job logs collection can be enabled optionally when configuring the Jenkins plugin (see previous section).
+Both Agentless and Agent-based options are supported.
 
-{{< code-block lang="text" >}}
-Re/Initialize Datadog-Plugin Agent Http Client
-TRACE -> http://<HOST>:<TRACE_PORT>/v0.3/traces
-{{< /code-block >}}
+Logs are billed separately from CI Visibility.
 
-## Install the Datadog Agent
+Log retention, exclusion, and indexes are configured in [Log Management][27]. Logs for Jenkins jobs can be identified by the `source:jenkins` tag.
 
-The Datadog Jenkins plugin can either report metrics through the Datadog Agent or directly to Datadog if an API key is provided. If you don't have a Datadog Agent running on the Jenkins controller instance, Datadog recommends installing it first by following the [Agent installation instructions][14]. Whether you choose to use Agentless mode or the Agent-based mode, you are **required** to use the plugin. 
-
-If the Jenkins controller and the Datadog Agent have been deployed to a Kubernetes cluster, Datadog recommends using the [Admission Controller][2], which automatically sets the `DD_AGENT_HOST` environment variable in the Jenkins controller pod to communicate with the local Datadog Agent.
-
-<div class="alert alert-info"><strong>Note</strong>: Sending CI Visibility traces through UNIX domain sockets is not supported.</div>
-
-### Configure the Agent for log collection
-
-To enable [collecting logs from your jobs](#enable-job-log-collection), configure the Datadog Agent to listen for logs on a TCP port:
-
-{{< tabs >}}
-{{% tab "Linux" %}}
-1. Add `logs_enabled: true` to your Agent's `datadog.yaml` configuration file, or set the `DD_LOGS_ENABLED` environment variable to true.
-
-2. Create a file at `/etc/datadog-agent/conf.d/jenkins.d/conf.yaml` with the following. Ensure the `service` matches the CI instance name provided earlier.
-
-   ```yaml
-   logs:
-   - type: tcp
-     port: 10518
-     service: my-jenkins-instance
-     source: jenkins
-   ```
-
-3. [Restart the Agent][101] for the changes to take effect.
-
-[101]: /agent/configuration/agent-commands/?tab=agentv6v7#restart-the-agent
-{{% /tab %}}
-
-{{% tab "Windows" %}}
-1. Add `logs_enabled: true` to your Agent's `datadog.yaml`  configuration file, or set the `DD_LOGS_ENABLED` environment variable to true.
-
-2. Create a file at `%ProgramData%\Datadog\conf.d\jenkins.d\conf.yaml` with the following. Ensure the `service` matches the CI instance name provided earlier.
-
-   ```yaml
-   logs:
-   - type: tcp
-     port: 10518
-     service: my-jenkins-instance
-     source: jenkins
-   ```
-
-3. [Restart the Agent][101] for the changes to take effect.
-
-[101]: /agent/configuration/agent-commands/?tab=agentv6v7#restart-the-agent
-{{% /tab %}}
-
-{{% tab "macOS" %}}
-1. Add `logs_enabled: true` to your Agent's `datadog.yaml` configuration file, or set the `DD_LOGS_ENABLED` environment variable to true.
-
-2. Create a file at `~/.datadog-agent/conf.d/jenkins.d/conf.yaml` with the following contents. Ensure the `service` matches the CI instance name provided earlier.
-
-   ```yaml
-   logs:
-   - type: tcp
-     port: 10518
-     service: my-jenkins-instance
-     source: jenkins
-   ```
-
-3. [Restart the Agent][101] for the changes to take effect.
-
-[101]: /agent/configuration/agent-commands/?tab=agentv6v7#restart-the-agent
-{{% /tab %}}
-
-{{< /tabs >}}
-
-With this configuration, the Agent listens for logs on port `10518`.
-
-### Correlate infrastructure metrics
+## Correlate infrastructure metrics
 
 If you are using Jenkins workers, you can correlate pipelines with the infrastructure that is running them. For this feature to work:
 
@@ -737,400 +737,15 @@ If you are using Kubernetes to manage your Jenkins instances, add the `DD_CI_HOS
 
 This is only required for Jenkins workers. For the Jenkins controller, the infrastructure metric correlation does not require additional actions.
 
-**Note**: Infrastructure metric correlation is supported since Jenkins Plugin v5.0.0+
+**Note**: Infrastructure metric correlation is supported since Jenkins Plugin v5.0.0 or later.
 
-## Enable job log collection
+## Enable Test Optimization
 
-This is an optional step that enables the collection of job logs. Both Agentless and Agent-based options are supported.
+This is an optional step that enables the collection of tests data using [Test Optimization][16].
 
-### Enable with the Jenkins configuration UI
+See the [Test Optimization documentation][17] for your language to make sure that the testing framework that you use is supported.
 
-{{< tabs >}}
-
-{{% tab "Agentless (using an API key)" %}}
-
-1. In the web interface of your Jenkins instance, go to **Manage Jenkins > Configure System**.
-2. Go to the `Datadog Plugin` section, scrolling down the configuration screen.
-3. Double check that `Use the Datadog Agent to report to Datadog` is selected and that `Log Intake URL` points to a URL in your current Datadog site.
-4. Click on the `Enable Log Collection` checkbox to activate it.
-5. Save your configuration.
-
-{{% /tab %}}
-
-{{% tab "Report through the Datadog Agent - recommended" %}}
-
-1. In the web interface of your Jenkins instance, go to **Manage Jenkins > Configure System**.
-2. Go to the `Datadog Plugin` section, scrolling down the configuration screen.
-3. Double check that the `Use the Datadog Agent to report to Datadog` option is selected.
-4. Configure the `Log Collection` port, as configured in the Datadog Agent.
-5. Click on the `Enable Log Collection` checkbox to activate it.
-6. Check the connectivity with the Datadog Agent.
-7. Save your configuration.
-{{% /tab %}}
-
-{{< /tabs >}}
-
-### Enable with configuration-as-code
-
-{{< tabs >}}
-
-{{% tab "Agentless (using an API key)" %}}
-
-If your Jenkins instance uses the Jenkins [`configuration-as-code`][1] plugin:
-
-1. Modify the configuration YAML for the entry `datadogGlobalConfiguration` to include the following:
-
-    {{% site-region region="us" %}}
-    {{< code-block lang="yaml" disable_copy="true" collapsible="true" >}}
-    unclassified:
-    datadogGlobalConfiguration:
-        # Endpoint URLs correspond to your Datadog site
-        targetLogIntakeURL: "https://http-intake.logs.datadoghq.com/v1/input/"
-        # Enable Log collection
-        collectBuildLogs: true
-    {{< /code-block >}}
-
-    {{% /site-region %}}
-
-    {{% site-region region="eu" %}}
-    {{< code-block lang="yaml" disable_copy="true" collapsible="true" >}}
-    unclassified:
-    datadogGlobalConfiguration:
-        # Endpoint URLs correspond to your Datadog site
-        targetLogIntakeURL: "https://http-intake.logs.datadoghq.eu/v1/input/"
-        # Enable Log collection
-        collectBuildLogs: true
-    {{< /code-block >}}
-
-    {{% /site-region %}}
-    {{% site-region region="gov" %}}
-
-    {{< code-block lang="yaml" disable_copy="true" collapsible="true" >}}
-    unclassified:
-    datadogGlobalConfiguration:
-        # Endpoint URLs correspond to your Datadog site
-        targetLogIntakeURL: "https://http-intake.logs.dd-gov.com/v1/input/"
-        # Enable Log collection
-        collectBuildLogs: true
-    {{< /code-block >}}
-
-    {{% /site-region %}}
-    {{% site-region region="us3" %}}
-
-    {{< code-block lang="yaml" disable_copy="true" collapsible="true" >}}
-    unclassified:
-    datadogGlobalConfiguration:
-        # Endpoint URLs correspond to your Datadog site
-        targetLogIntakeURL: "https://http-intake.logs.us3.datadoghq.com/v1/input/"
-        # Enable Log collection
-        collectBuildLogs: true
-    {{< /code-block >}}
-
-    {{% /site-region %}}
-    {{% site-region region="us5" %}}
-
-    {{< code-block lang="yaml" disable_copy="true" collapsible="true" >}}
-    unclassified:
-    datadogGlobalConfiguration:
-        # Endpoint URLs correspond to your Datadog site
-        targetLogIntakeURL: "https://http-intake.logs.us5.datadoghq.com/v1/input/"
-        # Enable Log collection
-        collectBuildLogs: true
-    {{< /code-block >}}
-
-    {{% /site-region %}}
-    {{% site-region region="ap1" %}}
-
-    {{< code-block lang="yaml" disable_copy="true" collapsible="true" >}}
-    unclassified:
-    datadogGlobalConfiguration:
-        # Endpoint URLs correspond to your Datadog site
-        targetLogIntakeURL: "https://http-intake.logs.ap1.datadoghq.com/v1/input/"
-        # Enable Log collection
-        collectBuildLogs: true
-    {{< /code-block >}}
-    {{% /site-region %}}
-
-2. In your Jenkins instance web interface, go to **Manage Jenkins > Configuration as Code**.
-3. Apply or reload the configuration.
-4. Check the configuration using the `View Configuration` button.
-
-[1]: https://github.com/jenkinsci/configuration-as-code-plugin/blob/master/README.md
-{{% /tab %}}
-
-{{% tab "Report through the Datadog Agent - recommended" %}}
-
-If your Jenkins instance uses the Jenkins [`configuration-as-code`][1] plugin:
-
-1. Modify the configuration YAML for the entry `datadogGlobalConfiguration` to include the following:
-    ```yaml
-    unclassified:
-    datadogGlobalConfiguration:
-        # Configure the `Log Collection` port, as configured in the Datadog Agent,
-        targetLogCollectionPort: 10518
-        # Enable Log collection
-        collectBuildLogs: true
-    ```
-2. In your Jenkins instance web interface, go to **Manage Jenkins > Configuration as Code**.
-3. Apply or reload the configuration.
-4. Check the configuration using the `View Configuration` button.
-
-[1]: https://github.com/jenkinsci/configuration-as-code-plugin/blob/master/README.md
-{{% /tab %}}
-
-{{< /tabs >}}
-
-### Enable with Groovy
-
-{{< tabs >}}
-
-{{% tab "Agentless (using an API key)" %}}
-
-1. In your Jenkins instance web interface, go to **Manage Jenkins > Script Console**.
-2. Update your configuration script to include the following:
-    {{% site-region region="us" %}}
-    {{< code-block lang="groovy" disable_copy="true" collapsible="true" >}}
-    import jenkins.model.*
-    import org.datadog.jenkins.plugins.datadog.DatadogGlobalConfiguration
-
-    def j = Jenkins.getInstance()
-    def d = j.getDescriptor("org.datadog.jenkins.plugins.datadog.DatadogGlobalConfiguration")
-
-    // Endpoint URLs correspond to your Datadog site
-    d.setTargetLogIntakeURL("https://http-intake.logs.datadoghq.com/v1/input/")
-
-    // Enable log collection
-    d.setCollectBuildLogs(true)
-
-    // Save config
-    d.save()
-    {{< /code-block >}}
-
-    {{% /site-region %}}
-
-    {{% site-region region="eu" %}}
-    {{< code-block lang="groovy" disable_copy="true" collapsible="true" >}}
-    import jenkins.model.*
-    import org.datadog.jenkins.plugins.datadog.DatadogGlobalConfiguration
-
-    def j = Jenkins.getInstance()
-    def d = j.getDescriptor("org.datadog.jenkins.plugins.datadog.DatadogGlobalConfiguration")
-
-    // Endpoint URLs correspond to your Datadog site
-    d.setTargetLogIntakeURL("https://http-intake.logs.datadoghq.eu/v1/input/")
-
-    // Enable log collection
-    d.setCollectBuildLogs(true)
-
-    // Save config
-    d.save()
-    {{< /code-block >}}
-
-    {{% /site-region %}}
-    {{% site-region region="us3" %}}
-
-    {{< code-block lang="groovy" disable_copy="true" collapsible="true" >}}
-    import jenkins.model.*
-    import org.datadog.jenkins.plugins.datadog.DatadogGlobalConfiguration
-
-    def j = Jenkins.getInstance()
-    def d = j.getDescriptor("org.datadog.jenkins.plugins.datadog.DatadogGlobalConfiguration")
-
-    // Endpoint URLs correspond to your Datadog site
-    d.setTargetLogIntakeURL("https://http-intake.logs.us3.datadoghq.com/v1/input/")
-
-    // Enable log collection
-    d.setCollectBuildLogs(true)
-
-    // Save config
-    d.save()
-    {{< /code-block >}}
-
-    {{% /site-region %}}
-    {{% site-region region="us5" %}}
-
-    {{< code-block lang="groovy" disable_copy="true" collapsible="true" >}}
-    import jenkins.model.*
-    import org.datadog.jenkins.plugins.datadog.DatadogGlobalConfiguration
-
-    def j = Jenkins.getInstance()
-    def d = j.getDescriptor("org.datadog.jenkins.plugins.datadog.DatadogGlobalConfiguration")
-
-    // Endpoint URLs correspond to your Datadog site
-    d.setTargetLogIntakeURL("https://http-intake.logs.us5.datadoghq.com/v1/input/")
-
-    // Enable log collection
-    d.setCollectBuildLogs(true)
-
-    // Save config
-    d.save()
-    {{< /code-block >}}
-
-    {{% /site-region %}}
-    {{% site-region region="gov" %}}
-
-    {{< code-block lang="groovy" disable_copy="true" collapsible="true" >}}
-    import jenkins.model.*
-    import org.datadog.jenkins.plugins.datadog.DatadogGlobalConfiguration
-
-    def j = Jenkins.getInstance()
-    def d = j.getDescriptor("org.datadog.jenkins.plugins.datadog.DatadogGlobalConfiguration")
-
-    // Endpoint URLs correspond to your Datadog site
-    d.setTargetLogIntakeURL("https://http-intake.logs.dd-gov.com/v1/input/")
-
-    // Enable log collection
-    d.setCollectBuildLogs(true)
-
-    // Save config
-    d.save()
-    {{< /code-block >}}
-
-    {{% /site-region %}}
-    {{% site-region region="ap1" %}}
-
-    {{< code-block lang="groovy" disable_copy="true" collapsible="true" >}}
-    import jenkins.model.*
-    import org.datadog.jenkins.plugins.datadog.DatadogGlobalConfiguration
-
-    def j = Jenkins.getInstance()
-    def d = j.getDescriptor("org.datadog.jenkins.plugins.datadog.DatadogGlobalConfiguration")
-
-    // Endpoint URLs correspond to your Datadog site
-    d.setTargetLogIntakeURL("https://http-intake.logs.ap1.datadoghq.com/v1/input/")
-
-    // Enable log collection
-    d.setCollectBuildLogs(true)
-
-    // Save config
-    d.save()
-    {{< /code-block >}}
-    {{% /site-region %}}
-{{% /tab %}}
-
-{{% tab "Report through the Datadog Agent - recommended" %}}
-
-1. In your Jenkins instance web interface, go to **Manage Jenkins > Script Console**.
-2. Update your configuration script to include the following:
-    ```groovy
-    import jenkins.model.*
-    import org.datadog.jenkins.plugins.datadog.DatadogGlobalConfiguration
-
-    def j = Jenkins.getInstance()
-    def d = j.getDescriptor("org.datadog.jenkins.plugins.datadog.DatadogGlobalConfiguration")
-
-    // Configure the Log Collection port, as configured in the Datadog Agent.
-    d.setTargetLogCollectionPort(10518)
-
-    // Enable log collection
-    d.setCollectBuildLogs(true)
-
-    // Save config
-    d.save()
-    ```
-{{% /tab %}}
-
-{{< /tabs >}}
-
-### Use environment variables
-
-{{< tabs >}}
-
-{{% tab "Agentless (using an API key)" %}}
-
-1. Add the following environment variables on your Jenkins instance machine:
-  
-   {{% site-region region="us" %}}
-   {{< code-block lang="bash" disable_copy="true" collapsible="true" >}}
-   # Endpoint URLs correspond to your Datadog site
-   DATADOG_JENKINS_PLUGIN_TARGET_LOG_INTAKE_URL="https://http-intake.logs.datadoghq.com/v1/input/"
-
-   # Enable log collection
-   DATADOG_JENKINS_PLUGIN_COLLECT_BUILD_LOGS=true
-   {{< /code-block >}}
-
-   {{% /site-region %}}
-
-   {{% site-region region="eu" %}}
-   {{< code-block lang="bash" disable_copy="true" collapsible="true" >}}
-   # Endpoint URLs correspond to your Datadog site
-   DATADOG_JENKINS_PLUGIN_TARGET_LOG_INTAKE_URL="https://http-intake.logs.datadoghq.eu/v1/input/"
-
-   # Enable log collection
-   DATADOG_JENKINS_PLUGIN_COLLECT_BUILD_LOGS=true
-   {{< /code-block >}}
-
-   {{% /site-region %}}
-   {{% site-region region="us3" %}}
-
-   {{< code-block lang="bash" disable_copy="true" collapsible="true" >}}
-   # Endpoint URLs correspond to your Datadog site
-   DATADOG_JENKINS_PLUGIN_TARGET_LOG_INTAKE_URL="https://http-intake.logs.us3.datadoghq.com/v1/input/"
-
-   # Enable log collection
-   DATADOG_JENKINS_PLUGIN_COLLECT_BUILD_LOGS=true
-   {{< /code-block >}}
-
-   {{% /site-region %}}
-   {{% site-region region="us5" %}}
-
-   {{< code-block lang="bash" disable_copy="true" collapsible="true" >}}
-   # Endpoint URLs correspond to your Datadog site
-   DATADOG_JENKINS_PLUGIN_TARGET_LOG_INTAKE_URL="https://http-intake.logs.us5.datadoghq.com/v1/input/"
-
-   # Enable log collection
-   DATADOG_JENKINS_PLUGIN_COLLECT_BUILD_LOGS=true
-   {{< /code-block >}}
-
-   {{% /site-region %}}
-   {{% site-region region="gov" %}}
-
-   {{< code-block lang="bash" disable_copy="true" collapsible="true" >}}
-   # Endpoint URLs correspond to your Datadog site
-   DATADOG_JENKINS_PLUGIN_TARGET_LOG_INTAKE_URL="https://http-intake.logs.dd-gov.com/v1/input/"
-
-   # Enable log collection
-   DATADOG_JENKINS_PLUGIN_COLLECT_BUILD_LOGS=true
-   {{< /code-block >}}
-
-   {{% /site-region %}}
-   {{% site-region region="ap1" %}}
-
-   {{< code-block lang="bash" disable_copy="true" collapsible="true" >}}
-   # Endpoint URLs correspond to your Datadog site
-   DATADOG_JENKINS_PLUGIN_TARGET_LOG_INTAKE_URL="https://http-intake.logs.ap1.datadoghq.com/v1/input/"
-
-   # Enable log collection
-   DATADOG_JENKINS_PLUGIN_COLLECT_BUILD_LOGS=true
-   {{< /code-block >}}
-   {{% /site-region %}}
-
-2. Restart your Jenkins instance.
-
-{{% /tab %}}
-
-{{% tab "Report through the Datadog Agent - recommended" %}}
-
-1. Add the following environment variables on your Jenkins instance machine:
-    ```bash
-    # Configure the Log Collection port, as configured in the previous step.
-    DATADOG_JENKINS_PLUGIN_TARGET_LOG_COLLECTION_PORT=10518
-
-    # Enable log collection
-    DATADOG_JENKINS_PLUGIN_COLLECT_BUILD_LOGS=true
-    ```
-2. Restart your Jenkins instance.
-{{% /tab %}}
-
-{{< /tabs >}}
-
-## Enable Test Visibility
-
-This is an optional step that enables the collection of tests data using [Test Visibility][16].
-
-See the [Test Visibility documentation][17] for your language to make sure that the testing framework that you use is supported.
-
-There are different ways to enable Test Visibility inside a Jenkins job or pipeline:
+There are different ways to enable Test Optimization inside a Jenkins job or pipeline:
 1. Using the Jenkins configuration UI.
 2. Adding the `datadog` step inside the pipeline script.
 3. Configuring the tracer manually.
@@ -1139,20 +754,20 @@ For pipelines that spin up a Docker container to execute tests, you can only con
 
 ### Enable with the Jenkins configuration UI
 
-UI-based Test Visibility configuration is available in Datadog Jenkins plugin v5.6.0 or later.
+UI-based Test Optimization configuration is available in Datadog Jenkins plugin v5.6.0 or later.
 
 This option is not suitable for pipelines that are configured entirely in `Jenkinsfile` (for example, Multibranch pipelines or pipelines from Organization Folder).
 For these pipelines use declarative configuration with the `datadog` step (described in the next section).
 
-To enable Test Visibility via UI do the following:
+To enable Test Optimization through the UI do the following:
 1. In your Jenkins instance web interface, go to the job or pipeline that you want to instrument and choose the **Configure** option.
-2. In the **General** configuration section, tick the **Enable Datadog Test Visibility** checkbox.
+2. In the **General** configuration section, tick the **Enable Datadog Test Optimization** checkbox.
 3. Enter the name of the service or library being tested into the **Service Name** input. You can choose any value that makes sense to you.
-4. Choose the languages for which you want to enable tests instrumentation. Some of the languages do not support configuration through the UI. To configure Test Visibility for these languages, follow the manual [configuration instructions][18].
+4. Choose the languages for which you want to enable tests instrumentation. Some of the languages do not support configuration through the UI. To configure Test Optimization for these languages, follow the manual [configuration instructions][18].
 5. Optionally, provide [additional configuration settings][18].
 6. Click **Save**.
 
-{{< img src="ci/ci-jenkins-plugin-tests-config.png" alt="Datadog Test Visibility configuration for Jenkins" style="width:100%;">}}
+{{< img src="ci/ci-jenkins-plugin-tests-config-2.png" alt="Datadog Test Optimization configuration for Jenkins" style="width:100%;">}}
 
 ### Enable with the `datadog` pipeline step
 
@@ -1164,10 +779,10 @@ In declarative pipelines, add the step to a top-level `options` block like so:
 pipeline {
     agent any
     options {
-        datadog(testVisibility: [
+        datadog(testOptimization: [
             enabled: true,
             serviceName: "my-service", // the name of service or library being tested
-            languages: ["JAVA"], // languages that should be instrumented (available options are "JAVA", "JAVASCRIPT", "PYTHON", "DOTNET")
+            languages: ["JAVA"], // languages that should be instrumented (available options are "JAVA", "JAVASCRIPT", "PYTHON", "DOTNET", "RUBY")
             additionalVariables: ["my-var": "value"]  // additional tracer configuration settings (optional)
         ])
     }
@@ -1184,7 +799,7 @@ pipeline {
 In a scripted pipeline, wrap the relevant section with the `datadog` step like so:
 
 ```groovy
-datadog(testVisibility: [ enabled: true, serviceName: "my-service", languages: ["JAVASCRIPT"], additionalVariables: [:] ]) {
+datadog(testOptimization: [ enabled: true, serviceName: "my-service", languages: ["JAVASCRIPT"], additionalVariables: [:] ]) {
   node {
     stage('Example') {
       echo "Hello world."
@@ -1193,32 +808,20 @@ datadog(testVisibility: [ enabled: true, serviceName: "my-service", languages: [
 }
 ```
 
-The other `datadog` settings, such as `collectLogs` or `tags` can be added alongside the `testVisibility` block.
+The other `datadog` settings, such as `collectLogs` or `tags` can be added alongside the `testOptimization` block.
 
 ### Enable with manual tracer configuration
 
-Follow the manual Test Visibility [configuration instructions][17] that are specific to your language.
+Follow the manual Test Optimization [configuration instructions][17] that are specific to your language.
 
-## Set the default branch name
+## Propagate Git information
 
-To report pipeline results, attach the default branch name (for example, `main`) to pipeline spans in an attribute called `git.default_branch`. This is usually done automatically, but in some cases the plugin cannot extract this information because it might not be provided by Jenkins.
+Some features of the Datadog Jenkins plugin need Git information associated with the Jenkins builds to work correctly.
 
-If this happens, set the default branch manually using the `DD_GIT_DEFAULT_BRANCH` environment variable in your build. For example:
+The minimum required Git info for a build is repository URL, branch, commit SHA, and commit author email.
+This information can be determined by the plugin automatically, propagated from SCM, provided manually with environment variables, or obtained by combining these approaches.
 
-{{< code-block lang="groovy" >}}
-pipeline {
-    agent any
-    environment {
-        DD_GIT_DEFAULT_BRANCH = 'main'
-        ...
-    }
-    stages {
-        ...
-    }
-}
-{{< /code-block >}}
-
-## Propagate Git information from SCM
+### Propagate Git information from SCM
 
 The Jenkins plugin is capable of automatically detecting Git information associated with a build or a pipeline.
 However, depending on the Jenkins version and the pipeline details, there may be cases when automatic Git data detection is not possible.
@@ -1285,7 +888,7 @@ node {
 {{< /tabs >}}
 
 
-## Set Git information manually
+### Set Git information manually
 
 In case the plugin cannot detect Git information automatically and propagating Git data via SCM is not an option,
 the necessary Git information can be set manually.
@@ -1294,7 +897,7 @@ To do so, set the following environment variables.
 
 **Note:** These variables are optional, but if they are set, they take precedence over the Git information set by other Jenkins plugins.
 
-`DD_GIT_REPOSITORY` (Optional)
+`DD_GIT_REPOSITORY_URL` (Optional)
 : The repository URL of your service.<br/>
 **Example**: `https://github.com/my-org/my-repo.git`
 
@@ -1367,7 +970,50 @@ pipeline {
 }
 {{< /code-block >}}
 
-## Customization
+## Include or exclude pipelines
+
+You can configure the Jenkins Plugin to include or exclude specific pipelines:
+
+1. In the web interface of your Jenkins instance, go to **Manage Jenkins > Configure System**.
+2. Go to the `Datadog Plugin` section by scrolling down the configuration screen.
+3. Click on the `Advanced` button.
+4. Configure the `Excluded Jobs`.
+5. Configure the `Included Jobs`.
+6. Save your configuration.
+
+**Excluded jobs**
+: A comma-separated list of Jenkins jobs that should not be monitored. The exclusion applies to all metrics, traces, events, and service checks. Excluded jobs can use regular expressions to reference multiple jobs.<br/>
+**Environment variable**: `DATADOG_JENKINS_PLUGIN_EXCLUDED`<br/>
+**Example**: `susans-job,johns-.*,prod_folder/prod_release`
+
+**Included jobs**
+: A comma-separated list of Jenkins job names that should be monitored. If the included jobs list is empty, all jobs that are not excluded explicitly are monitored. The inclusion applies to all metrics, traces, events, and service checks. Included jobs can use regular expressions to reference multiple jobs.<br/>
+**Environment variable**: `DATADOG_JENKINS_PLUGIN_INCLUDED`<br/>
+**Example**: `susans-job,johns-.*,prod_folder/prod_release`
+
+Lists of included and excluded jobs can contain regular expressions, but not glob patterns. To include a job with a specific prefix, use `prefix-.*`—not `prefix-*`.
+
+## Advanced configuration
+
+### Set the default branch name
+
+To report pipeline results, attach the default branch name (for example, `main`) to pipeline spans in an attribute called `git.default_branch`. This is usually done automatically, but in some cases the plugin cannot extract this information because it might not be provided by Jenkins.
+
+If this happens, set the default branch manually using the `DD_GIT_DEFAULT_BRANCH` environment variable in your build. For example:
+
+{{< code-block lang="groovy" >}}
+pipeline {
+    agent any
+    environment {
+        DD_GIT_DEFAULT_BRANCH = 'main'
+        ...
+    }
+    stages {
+        ...
+    }
+}
+{{< /code-block >}}
+
 
 ### Set custom tags for your pipelines
 
@@ -1409,7 +1055,7 @@ To display and filter the teams associated with your pipelines, add `team:<your-
 
 ### Set global custom tags
 
-You can configure the Jenkins Plugin to send custom tags in all pipeline traces:
+You can configure the Jenkins Plugin to send custom tags (like global tags and global job tags) in all pipeline traces:
 
 1. In the web interface of your Jenkins instance, go to **Manage Jenkins > Configure System**.
 2. Go to the `Datadog Plugin` section, scrolling down the configuration screen.
@@ -1428,36 +1074,23 @@ You can configure the Jenkins Plugin to send custom tags in all pipeline traces:
 **Environment variable**: `DATADOG_JENKINS_PLUGIN_GLOBAL_JOB_TAGS`<br/>
 **Example**: `(.*?)_job_(.*?)_release, owner:$1, release_env:$2, optional:Tag3`
 
-### Include or exclude pipelines
-
-You can configure the Jenkins Plugin to include or exclude some pipelines:
-
-1. In the web interface of your Jenkins instance, go to **Manage Jenkins > Configure System**.
-2. Go to the `Datadog Plugin` section by scrolling down the configuration screen.
-3. Click on the `Advanced` button.
-4. Configure the `Excluded Jobs`.
-5. Configure the `Included Jobs`.
-6. Save your configuration.
-
-**Excluded jobs**
-: A comma-separated list of Jenkins jobs that should not be monitored. The exclusion applies to all metrics, traces, events, and service checks. Excluded jobs can use regular expressions to reference multiple jobs.<br/>
-**Environment variable**: `DATADOG_JENKINS_PLUGIN_EXCLUDED`<br/>
-**Example**: `susans-job,johns-.*,prod_folder/prod_release`
-
-**Included jobs**
-: A comma-separated list of Jenkins job names that should be monitored. If the included jobs list is empty, all jobs that are not excluded explicitly are monitored. The inclusion applies to all metrics, traces, events, and service checks. Included jobs can use regular expressions to reference multiple jobs.<br/>
-**Environment variable**: `DATADOG_JENKINS_PLUGIN_INCLUDED`<br/>
-**Example**: `susans-job,johns-.*,prod_folder/prod_release`
-
-Lists of included and excluded jobs can contain regular expressions, but not glob patterns. To include a job with a specific prefix, use `prefix-.*`—not `prefix-*`.
-
 ## Visualize pipeline data in Datadog
 
-Once the integration is successfully configured, both the [Pipelines][7] and [Pipeline Executions][8] pages populate with data after pipelines finish.
+Once the integration is successfully configured, both the [**CI Pipeline List**][7] and [**Executions**][8] pages populate with data after pipelines finish.
 
-**Note**: The Pipelines page shows data for only the default branch of each repository.
+The **CI Pipeline List** page shows data for only the default branch of each repository. For more information, see [Search and Manage CI Pipelines][28].
 
 ## Troubleshooting
+
+### Generate diagnostic flare
+
+When reporting an issue to the Datadog support team, generate a plugin diagnostic flare and provide it along with the issue description.
+
+To generate the flare do the following:
+
+1. In your Jenkins instance web interface, go to **Manage Jenkins > Troubleshooting > Datadog**.
+2. In the Diagnostic Flare form, check which information you want to include in the flare. The default selection works best. The more information you provide, the easier it is to diagnose your issue.
+3. Click **Download** to generate and download the flare archive.
 
 ### Enable DEBUG log level for the Datadog Plugin
 
@@ -1487,7 +1120,23 @@ Send pipeline traces.
 ...
 {{< /code-block >}}
 
-### The Datadog Plugin cannot write payloads to the server
+### Pipeline executions data is not available in Datadog
+
+#### HTTP connectivity check
+
+If your Jenkins instance is behind an HTTP proxy, go to **Manage Jenkins** > **Manage Plugins** > **Advanced tab** and make sure the proxy configuration is correct:
+- If the Datadog plugin is configured to send data to a Datadog Agent, check that the Agent host has been added to the `No Proxy Hosts` section.
+- If the Datadog plugin is configured to send data directly to Datadog (Agentless mode), check that Datadog host has been added to the `No Proxy Hosts` section. The table below shows the supported Datadog sites and their corresponding host values:
+
+| Datadog site | Host value |
+| ------------ | ----------------------- |
+| US1          | datadoghq.com           |
+| US3          | us3.datadoghq.com       |
+| US5          | us5.datadoghq.com       |
+| EU1          | datadoghq.eu            |
+| AP1          | ap1.datadoghq.com       |
+
+#### The Datadog Plugin cannot write payloads to the server
 
 If the following error message appears in the **Jenkins Log**, make sure that the plugin configuration is correct.
 
@@ -1495,19 +1144,13 @@ If the following error message appears in the **Jenkins Log**, make sure that th
 Error writing to server
 {{< /code-block >}}
 
-1. If you are using `localhost` as the hostname, try to change it to the server hostname instead.
-2. If your Jenkins instance is behind an HTTP proxy, go to **Manage Jenkins** > **Manage Plugins** > **Advanced tab** and make sure the proxy configuration is correct.
+If you are using `localhost` as the hostname, change it to the server hostname instead.
 
-#### HTTP 504
+### Jenkins logs are not available in Datadog
 
-If the HTTP 504 error message appears, make sure that the Jenkins proxy configuration is correct.
-
-{{< code-block lang="text" >}}
-Failed to send HTTP request: PUT http://localhost:8126/v0.3/traces - Status: HTTP 504
-{{< /code-block >}}
-
-1. If your Jenkins instance is behind an HTTP proxy, go to **Manage Jenkins** > **Manage Plugins** > **Advanced tab** and make sure the proxy configuration is correct.
-  1. Check that `localhost` has been configured in the `No Proxy Hosts` section.
+If the Datadog plugin is configured to send data to a Datadog Agent, do the following:
+- Make sure that custom logs collection over TCP is [enabled and configured][29] in the Agent.
+- Go to the plugin configuration UI and click **Test logs connection** to verify logs connectivity.
 
 ### The Datadog Plugin section does not appear in the Jenkins configuration
 
@@ -1527,13 +1170,12 @@ If the CI Visibility option does not appear in the Datadog Plugin section, make 
 3. Check that the installed version is correct.
 4. Restart your Jenkins instance using the `/safeRestart` URL path.
 
-### The Plugin's Tracer fails to initialize due to APM Java Tracer is being used to instrument Jenkins.
+### Infrastructure metrics do not get correlated with Jenkins pipelines
 
-If this error message appears in the **Jenkins Log**, make sure that you are using the Jenkins plugin v3.1.0+
+Make sure you have gone through the steps to [correlate infrastructure metrics with Jenkins pipelines][11].
 
-{{< code-block lang="text" >}}
-Failed to reinitialize Datadog-Plugin Tracer, Cannot enable traces collection via plugin if the Datadog Java Tracer is being used as javaagent in the Jenkins startup command. This error will not affect your pipelines executions.
-{{< /code-block >}}
+If, even after following the steps, infrastructure metrics are still not correlated with Jenkins pipelines,
+try restarting the Jenkins instance.
 
 ## Further reading
 
@@ -1547,7 +1189,7 @@ Failed to reinitialize Datadog-Plugin Tracer, Cannot enable traces collection vi
 [8]: https://app.datadoghq.com/ci/pipeline-executions
 [9]: https://plugins.jenkins.io/kubernetes/#plugin-content-pod-template
 [10]: /continuous_integration/pipelines/jenkins/?tab=linux#enable-job-log-collection
-[11]: /continuous_integration/pipelines/jenkins/?tab=linux#correlate-infrastructure-metrics
+[11]: /continuous_integration/pipelines/jenkins/?tab=agentlessusinganapikey#correlate-infrastructure-metrics
 [12]: /continuous_integration/pipelines/custom_tags_and_measures/
 [14]: /agent/
 [15]: /account_management/teams/
@@ -1562,4 +1204,9 @@ Failed to reinitialize Datadog-Plugin Tracer, Cannot enable traces collection vi
 [24]: /glossary/#parameter
 [25]: /glossary/#pipeline-failure
 [26]: /glossary/#custom-span
-
+[27]: /logs/guide/best-practices-for-log-management/
+[28]: /continuous_integration/search/#search-for-pipelines
+[29]: /agent/logs/?tab=tcpudp#custom-log-collection
+[30]: /developers/dogstatsd/
+[31]: /containers/docker/apm/#tracing-from-the-host
+[32]: /glossary/#running-pipeline

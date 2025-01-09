@@ -22,7 +22,7 @@ integration_id: pihole
 integration_title: Pi-hole
 integration_version: 3.14.1
 is_public: true
-kind: integration
+custom_kind: integration
 maintainer: monganai@tcd.ie
 manifest_version: 1.0.0
 metric_prefix: pihole.

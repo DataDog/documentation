@@ -15,48 +15,52 @@ further_reading:
 - link: tracing/trace_collection/compatibility
   tag: ドキュメント
   text: 互換性要件
-kind: documentation
-title: Python
+title: アプリケーションインスツルメンテーション
 ---
 
 ## 概要
 
-Datadog APM を使い始めるには、以下の主要手順に従う必要があります。
+Datadog APM を始めるには、次の重要なステップに従う必要があります。
 
 1. Datadog Agent をインストールして構成します。
 2. アプリケーションをインスツルメントします。
 
 <div class="alert alert-info"><strong>セットアップを簡素化しましょう！</strong><a href="https://docs.datadoghq.com/tracing/trace_collection/single-step-apm/">Single Step Instrumentation</a> により、Agent のインストールとアプリケーションのインスツルメンテーションをワンステップで行うことができます。</div>
 
-アプリケーションのインスツルメンテーションにより、可観測性データが Agent へ送信され、その後 Agent が Datadog バックエンドにデータを送り UI に表示されます。
+アプリケーションをインスツルメントすることで、可観測性データが Agent に送信され、その後 Datadog のバックエンドに渡されて UI に表示されます。
 
 {{< img src="tracing/visualization/troubleshooting_pipeline.png" alt="APM パイプライン">}}
 
 ## インスツルメンテーションの種類
 
-アプリケーションのインスツルメンテーションには、主に自動インスツルメンテーションとカスタムインスツルメンテーションの 2 つのアプローチがあります。
+アプリケーションをインスツルメントするには、主に自動またはカスタムの {{< tooltip glossary="instrumentation" >}} の 2 つのアプローチがあります。
 
 ### 自動インスツルメンテーション
 
-最小限の手作業でアプリケーションのスパンを作成しましょう。アプリケーションを自動的にインスツルメントするには、以下のいずれかのオプションを使用できます。
+最小限の手動ステップでアプリケーションの {{< tooltip glossary="span" >}} を作成します。自動的にアプリケーションをインスツルメントするには、次のいずれかのオプションを使用できます。
 
-- [Single Step Instrumentation (ベータ版)][7]: Datadog Agent をインストールし、APM を有効にし、Linux ホスト、VM、またはコンテナ上のすべてのサービスをインスツルメントするための、1 行のインストールコマンドを実行します。
-- [Datadog ライブラリ][8]: Datadog トレーシングライブラリをアプリケーションに追加します。
+- [Single Step Instrumentation (プレビュー版)][7]: 1 行のインストールコマンドを実行して Datadog Agent をインストールし、APM を有効化し、Linux ホスト、VM、またはコンテナ上のすべてのサービスをインスツルメントします。
+- [Datadog ライブラリ][8]: アプリケーションに Datadog トレーシング ライブラリを追加します。
 
-詳しくは、[自動インスツルメンテーション][5]をご覧ください。
+詳細は[自動インスツルメンテーション][5]を参照してください。
 
 ### カスタムインスツルメンテーション
 
-自動インスツルメンテーションではキャプチャされない社内コードや複雑な関数から可観測性データをキャプチャします。アプリケーションをカスタムインスツルメントするには、以下のいずれかのオプションを使用できます。
+自動インスツルメンテーションでキャプチャされない自社コードや複雑な機能から可観測性データを取得します。カスタムでアプリケーションをインスツルメントするには、次のいずれかのオプションを使用できます。
 
-- [Datadog ライブラリ][9]: Datadog のトレーシングライブラリを使用して、Datadog 内で可観測性を追加、カスタマイズします。
-- [OpenTelemetry API][10]: Datadog ライブラリの OpenTelemetry API サポートを使用して、コードのインスツルメンテーションをベンダーニュートラルに行います。
+- [Datadog ライブラリ][9]: Datadog トレーシングライブラリを使用して、Datadog 内で可観測性を追加およびカスタマイズします。
+- [OpenTelemetry API][10]: Datadog ライブラリでの OpenTelemetry API サポートを使用して、ベンダーに依存しないコードのインスツルメンテーションを行います。
 
-詳しくは、[カスタムインスツルメンテーション][6]をご覧ください。
+詳細は[カスタムインスツルメンテーション][6]を参照してください。
+
+{{< callout url="https://www.datadoghq.com/product-preview/service-discovery/" btn_hidden="false" header="サービスディスカバリーは現在プレビュー版として提供されています">}}
+サービスディスカバリーは、アプリケーション監視の現状を完全に可視化し、システム内の重大なギャップや途切れたトレースを明らかにします。
+{{< /callout >}}
+
 
 ## APM セットアップチュートリアル
 
-以下のチュートリアルでは、様々なインフラストラクチャーシナリオ上のサンプルアプリケーションに対して、自動インスツルメンテーションとカスタムインスツルメンテーションの両方を用いて、分散型トレーシングを設定する方法を、Datadog トレーシングライブラリを用いて説明します。
+以下のチュートリアルでは、Datadog トレーシングライブラリを使用して、自動およびカスタムインスツルメンテーションの両方を備えたさまざまなインフラストラクチャーシナリオで、サンプルアプリケーションの分散型トレーシングをセットアップする方法を案内します。
 
 {{< whatsnext desc="言語と環境を選択してください。" >}}
     {{< nextlink href="tracing/guide/tutorial-enable-python-host" >}}<img src="/images/integrations_logos/python-avatar.png" /> <img src="/images/tracing/guide/tutorials/tutorial-host-icon.png" /> Datadog Agent と同じホスト上の Python アプリケーションでトレースを有効にする{{< /nextlink >}}
@@ -65,18 +69,18 @@ Datadog APM を使い始めるには、以下の主要手順に従う必要が�
     {{< nextlink href="tracing/guide/tutorial-enable-java-host" >}}<img src="/images/integrations_logos/java-avatar.png" /> <img src="/images/tracing/guide/tutorials/tutorial-host-icon.png" /> Datadog Agent と同じホスト上の Java アプリケーションでトレースを有効にする{{< /nextlink >}}
     {{< nextlink href="tracing/guide/tutorial-enable-java-containers" >}}<img src="/images/integrations_logos/java-avatar.png" /> <img src="/images/tracing/guide/tutorials/tutorial-container-icon.png" /> コンテナ内の Java アプリケーションと Datadog Agent でトレースを有効にする{{< /nextlink >}}
     {{< nextlink href="tracing/guide/tutorial-enable-java-container-agent-host" >}}<img src="/images/integrations_logos/java-avatar.png" /> <img src="/images/tracing/guide/tutorials/tutorial-container-icon.png" /> <img src="/images/tracing/guide/tutorials/tutorial-host-icon.png" /> コンテナ内の Java アプリケーションとホスト上の Agent でトレースを有効にする{{< /nextlink >}}
-    {{< nextlink href="tracing/guide/tutorial-enable-java-gke" >}}<img src="/images/integrations_logos/java-avatar.png" /> <img src="/images/tracing/guide/tutorials/tutorial-gke-icon.png" /> GKE 上で Java アプリケーションのトレースを有効にする{{< /nextlink >}}
-    {{< nextlink href="tracing/guide/tutorial-enable-java-aws-eks" >}}<img src="/images/integrations_logos/java-avatar.png" /> <img src="/images/tracing/guide/tutorials/tutorial-eks-icon.png" /> Java アプリケーション用の AWS EKS のトレースを有効にする{{< /nextlink >}}
-    {{< nextlink href="tracing/guide/tutorial-enable-java-aws-ecs-ec2" >}}<img src="/images/integrations_logos/java-avatar.png" /> <img src="/images/tracing/guide/tutorials/tutorial-ec2-icon.png" /> Java アプリケーション用の Amazon ECS with EC2 のトレースを有効にする{{< /nextlink >}}
-    {{< nextlink href="tracing/guide/tutorial-enable-java-aws-ecs-fargate" >}}<img src="/images/integrations_logos/java-avatar.png" /> <img src="/images/tracing/guide/tutorials/tutorial-fargate-icon.png" /> Java アプリケーション用の Amazon ECS with Fargate のトレースを有効にする{{< /nextlink >}}
-    {{< nextlink href="tracing/guide/tutorial-enable-java-admission-controller" >}}<img src="/images/integrations_logos/java-avatar.png" /> Admission Controller を使用して Java アプリケーションのトレースを有効にする{{< /nextlink >}}
+    {{< nextlink href="tracing/guide/tutorial-enable-java-gke" >}}<img src="/images/integrations_logos/java-avatar.png" /> <img src="/images/tracing/guide/tutorials/tutorial-gke-icon.png" /> GKE で Java アプリケーションのトレースを有効にする{{< /nextlink >}}
+    {{< nextlink href="tracing/guide/tutorial-enable-java-aws-eks" >}}<img src="/images/integrations_logos/java-avatar.png" /> <img src="/images/tracing/guide/tutorials/tutorial-eks-icon.png" /> AWS EKS で Java アプリケーションのトレースを有効にする{{< /nextlink >}}
+    {{< nextlink href="tracing/guide/tutorial-enable-java-aws-ecs-ec2" >}}<img src="/images/integrations_logos/java-avatar.png" /> <img src="/images/tracing/guide/tutorials/tutorial-ec2-icon.png" /> Amazon ECS with EC2 で Java アプリケーションのトレースを有効にする{{< /nextlink >}}
+    {{< nextlink href="tracing/guide/tutorial-enable-java-aws-ecs-fargate" >}}<img src="/images/integrations_logos/java-avatar.png" /> <img src="/images/tracing/guide/tutorials/tutorial-fargate-icon.png" /> Amazon ECS with Fargate で Java アプリケーションのトレースを有効にする{{< /nextlink >}}
+    {{< nextlink href="tracing/guide/tutorial-enable-java-admission-controller" >}}<img src="/images/integrations_logos/java-avatar.png" /> Admission Controller で Java アプリケーションのトレースを有効にする{{< /nextlink >}}
     {{< nextlink href="tracing/guide/tutorial-enable-go-host" >}}<img src="/images/integrations_logos/golang-avatar.png" /><img src="/images/tracing/guide/tutorials/tutorial-host-icon.png" /> Datadog Agent と同じホストの Go アプリケーションでトレースを有効にする{{< /nextlink >}}
     {{< nextlink href="tracing/guide/tutorial-enable-go-containers" >}}<img src="/images/integrations_logos/golang-avatar.png" /><img src="/images/tracing/guide/tutorials/tutorial-container-icon.png" /> Go アプリケーションとコンテナ内の Datadog Agent でトレースを有効にする{{< /nextlink >}}
     {{< nextlink href="tracing/guide/tutorial-enable-go-aws-ecs-ec2" >}}<img src="/images/integrations_logos/golang-avatar.png" /><img src="/images/tracing/guide/tutorials/tutorial-ec2-icon.png" /> EC2 で Amazon ECS の Go アプリケーションのトレースを有効にする{{< /nextlink >}}
     {{< nextlink href="tracing/guide/tutorial-enable-go-aws-ecs-fargate" >}}<img src="/images/integrations_logos/golang-avatar.png" /><img src="/images/tracing/guide/tutorials/tutorial-fargate-icon.png" /> Fargate で Amazon ECS の Go アプリケーションのトレースを有効にする{{< /nextlink >}}
 
 {{< /whatsnext >}}
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

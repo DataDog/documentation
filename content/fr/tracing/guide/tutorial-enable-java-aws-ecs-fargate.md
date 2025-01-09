@@ -15,7 +15,7 @@ further_reading:
 - link: https://github.com/DataDog/dd-trace-java
   tags: GitHub
   text: Référentiel du code open source de la bibliothèque de tracing
-kind: guide
+
 title: 'Tutoriel : Activer le tracing pour une application Java sur Amazon ECS avec
   Fargate'
 ---

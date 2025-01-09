@@ -15,6 +15,7 @@ categories:
 - クラウド
 - 構成 & デプロイ
 - マーケットプレイス
+custom_kind: integration
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -23,7 +24,6 @@ integration_id: firefly-license
 integration_title: Firefly
 integration_version: ''
 is_public: true
-kind: integration
 legal_terms:
   eula: assets/eula.pdf
 manifest_version: 2.0.0

@@ -33,6 +33,7 @@ categories:
 - caching
 - data stores
 - log collection
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/couchbase/README.md
 display_on_public_website: true
@@ -40,9 +41,8 @@ draft: false
 git_integration_title: couchbase
 integration_id: couchbase
 integration_title: CouchBase
-integration_version: 3.2.0
+integration_version: 5.0.0
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: couchbase
 public_title: CouchBase
@@ -60,10 +60,14 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: Couchbase のアクティビティとパフォーマンスのメトリクスを追跡およびグラフ化
   media: []
   overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/monitoring-couchbase-performance-datadog
   support: README.md#Support
   title: CouchBase
 ---
@@ -85,18 +89,18 @@ tile:
 
 その他にも多数あります。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 Couchbase チェックは [Datadog Agent][2] パッケージに含まれています。Couchbase ノードに追加でインストールする必要はありません。
 
-### ブラウザトラブルシューティング
+### 構成
 
 {{< tabs >}}
 {{% tab "ホスト" %}}
 
-#### メトリクスベース SLO
+#### ホスト
 
 ホストで実行中の Agent に対してこのチェックを構成するには
 
@@ -116,7 +120,7 @@ Couchbase チェックは [Datadog Agent][2] パッケージに含まれてい�
 
 2. [Agent を再起動します][3]。
 
-#### 収集データ
+#### ログ収集
 
 _Agent バージョン 6.0 以降で利用可能_
 
@@ -165,21 +169,21 @@ _Agent バージョン 6.0 以降で利用可能_
 
 [Agent の `status` サブコマンドを実行][3]し、Checks セクションで `couchbase` を探します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "couchbase" >}}
 
 
-### ヘルプ
+### イベント
 
 Couchbase チェックは、クラスターのバランスが再調整されるたびに Datadog にイベントを送信します。
 
-### ヘルプ
+### サービスチェック
 {{< get-service-checks-from-git "couchbase" >}}
 
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
 

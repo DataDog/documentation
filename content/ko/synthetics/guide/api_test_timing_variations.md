@@ -6,7 +6,6 @@ further_reading:
 - link: https://docs.datadoghq.com/synthetics/metrics/#api-tests
   tag: 설명서
   text: 신서틱 API 테스트 메트릭
-kind: 설명서
 title: API 테스트 타이밍 이해와 시간 변형 문제 해결
 ---
 

@@ -6,7 +6,6 @@ further_reading:
 - link: /account_management/rbac/log_management/
   tag: Documentation
   text: RBAC pour Log Management
-kind: documentation
 title: API de mappage d'attributs d'authentification fédérée à un rôle
 ---
 

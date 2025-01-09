@@ -20,7 +20,6 @@ integration_id: aws-pricing
 integration_title: "AWS\_Pricing"
 integration_version: 1.0.0
 is_public: true
-kind: Twislock
 maintainer: tsein@brightcove.com
 manifest_version: 1.0.0
 metric_prefix: aws.pricing.

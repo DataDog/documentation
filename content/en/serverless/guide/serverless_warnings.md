@@ -1,10 +1,12 @@
 ---
 title: Serverless Warnings
-kind: guide
 further_reading:
 - link: "https://www.datadoghq.com/blog/serverless-insights/"
   tag: "Blog"
   text: "Read more about serverless insights"
+- link: "https://www.datadoghq.com/blog/identifying-deprecated-lambda-functions/"
+  tag: "Blog"
+  text: "Identify deprecated Lambda functions with Datadog"
 aliases:
     - /serverless/troubleshooting/insights/
     - /serverless/insights/
@@ -84,7 +86,7 @@ More than 10% of invocations in the selected time range were throttled. Throttli
 
 ### High iterator age
 
-The function's iterator was older than two hours. Iterator age measures the age of the last record for each batch of records processed from a stream. When this value increases, it means your function cannot process data fast enough.
+The function's iterator age was too high. Iterator age measures the age of the last record for each batch of records processed from a stream. When this value increases, it means your function cannot process data fast enough.
 
 **Resolution:** Enable [distributed tracing][7] to isolate why your function has so much data being streamed to it. You can also consider increasing the shard count and batch size of the stream your function reads from.
 
@@ -99,6 +101,38 @@ No invocation in the selected time range used more than 10% of the allocated mem
 Attack attempts were detected targeting the serverless application. 
 
 **Resolution:** Investigate the attack attempts in ASM by clicking the **Security Signals** button to determine how to respond. If immediate action is needed, you can block the attacking IP in your WAF through the [Workflows integration][11].
+
+### Under provisioned
+
+CPU utilization for this function averaged more than 80%. This means your function may see increased performance from additional CPU resources.
+
+**Resolution:** Consider increasing the amount of [allocated memory][12] on your Lambda function. Increasing the amount of memory scales available CPU resources. Note this may affect your AWS bill.
+
+### Overallocated provisioned concurrency
+
+The function's provisioned concurrency utilization was below 60%. According to AWS, [provisioned concurrency is best optimized for cost when utilization is consistently greater than 60%][13].
+
+**Resolution:** Consider decreasing the amount of configured provisioned concurrency for your function.
+
+### Deprecated runtime
+
+The function's runtime is [no longer supported][14].
+
+**Resolution:** Upgrade to the latest runtime to ensure you are up to date on the latest security, performance, and reliability standards.
+
+### Reaching maximum duration
+
+At least one invocation in the selected time range approached the maximum duration limit of 15 minutes.
+
+[Distributed tracing][7] can help you pinpoint slow API calls in your application.
+
+**Resolution:** Lambda functions approaching the maximum timeout limit of 15 minutes risk termination by the Lambda runtime. This could lead to slow or failed responses to incoming requests. Consider improving the performance of your Lambda function, using smaller lambdas in a Step Function, or moving your workload to a longer running environment like ECS Fargate.
+
+### Recursive invocations dropped
+
+Invocations in this function have a recursive loop, generally caused by recursive triggering between AWS entities (for example, Lambda -> SQS -> Lambda). When this exceeds your `maxReceiveCount` (default 16), then it adds to this metric. For more information, see [Use Lambda recursive loop detection to prevent infinite loops][15].
+
+**Resolution:** Find recursive calls in your AWS entities related to this function. Look for related entities such as [SQS, SNS, and S3][16].
 
 ## Further Reading
 
@@ -115,3 +149,8 @@ Attack attempts were detected targeting the serverless application.
 [9]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-concurrency.html
 [10]: /integrations/amazon_lambda/#metrics
 [11]: https://app.datadoghq.com/workflow/blueprints?selected_category=SECURITY
+[12]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-memory.html
+[13]: https://aws.amazon.com/blogs/compute/optimizing-your-aws-lambda-costs-part-1/
+[14]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html
+[15]: https://docs.aws.amazon.com/lambda/latest/dg/invocation-recursion.html
+[16]: https://docs.aws.amazon.com/lambda/latest/dg/invocation-recursion.html#invocation-recursion-supported

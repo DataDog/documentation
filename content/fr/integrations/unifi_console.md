@@ -31,7 +31,7 @@ integration_id: unifi-console
 integration_title: Unifi Console
 integration_version: 1.2.0
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: unifi_console
 public_title: Unifi Console

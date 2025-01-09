@@ -1,113 +1,126 @@
 ---
-kind: documentación
 title: Configurar la monitorización de secuencias de datos para Go
 ---
 
-{{< site-region region="ap1" >}}
-<div class="alert alert-info">La monitorización de secuencias de datos no es compatible en la región AP1.</a></div>
-{{< /site-region >}}
+Están disponibles los siguientes tipos de instrumentación:
+* [Instrumentación automática para cargas de trabajo basadas en Kafka](#automatic-instrumentation)
+* [Instrumentación manual para cargas de trabajo basadas en Kafka](#kafka-based-workloads)
+* [Instrumentación manual para otra tecnología o protocolo de colas](#other-queuing-technologies-or-protocols)
 
-### Requisitos previos
+### {{< learning-center-callout header="Join an enablement webinar session" hide_image="true" btn_title="Sign Up" btn_url="https://www.datadoghq.com/technical-enablement/session/synthetics/">}}
+  Explore y regístrese en las sesiones de Foundation Enablement. Descubra cómo Datadog Sintético Monitorización es una solución proactiva Monitorización que le permite crear pruebas de API, navegador y móvil sin código para simular automáticamente los flujos y las solicitudes de los usuarios a sus aplicaciones, puntos finales clave y capas red.
+{{< /learning-center-callout >}}
 
-Para empezar con la monitorización de secuencias de datos, necesitas versiones recientes de las bibliotecas del Datadog Agent y Data Streams Monitoring:
-* [Datadog Agent 7.34.0 y versiones posteriores][1]
-* [Data Streams Library 0.2 y versiones posteriores][2]
+Para empezar con Data Streams Monitoring, necesitas versiones recientes de las bibliotecas del Datadog Agent y de Data Streams Monitoring:
+
+* [Datadog Agent v7.34.0 o más reciente][1]
+* [dd-trace-go v1.56.1 o más reciente][2]
+
+### Bibliotecas compatibles
+
+| Tecnología | Biblioteca                                                                  | Versión mínima del rastreador | Versión de rastreador recomendada |
+|------------|--------------------------------------------------------------------------|------------------------|----------------------------|
+| Kafka      | [confluent-kafka-go][8]                                                  | 1.56.1                | 1.66.0 o posterior            |
+| Kafka      | [Sarama][9]                                                             | 1.56.1                 | 1.66.0 o posterior            |
 
 ### Instalación
 
-Inicia una ruta de secuencias de datos con `datastreams.Start()` al principio de tu pipeline.
+#### Instrumentación automática
 
-Existen dos tipos de instrumentación:
-- Instrumentación para cargas de trabajo basadas en Kafka
-- Instrumentación personalizada para cualquier otro protocolo o tecnología de colas
+La instrumentación automática utiliza la [Orquestación][4] para instalar dd-trace-go y es compatible tanto con Sarama como con bibliotecas Confluent Kafka.
 
-<div class="alert alert-info">La URL predeterminada del Agent de trazas es <code>localhost:8126</code>. Si esta es distinta para tu aplicación, usa la opción <code>datastreams.Start(datastreams.WithAgentAddr("notlocalhost:8126"))</code>.</div>
+Para instrumentar automáticamente tu servicio:
 
-### Instrumentación de Kafka
+1. Sigue la guía [Empezando con la orquestación][5] para compilar o ejecutar tu servicio utilizando la [Orquestación][4].
+2. Configura la variable de entorno `DD_DATA_STREAMS_ENABLED=true`.
 
-1. Configura los productores para que llamen a `TraceKafkaProduce()` antes de enviar un mensaje de Kafka:
+#### Instrumentación manual
 
-   ```go
-   import (ddkafka "github.com/DataDog/data-streams-go/integrations/kafka")
-   ...
-   ctx = ddkafka.TraceKafkaProduce(ctx, &kafkaMsg)
-   ```
+##### Cliente de Sarama Kafka
 
-   Esta función añade un nuevo punto de control a cualquier ruta existente en el contexto de Go proporcionado, o crea una nueva ruta si no se encuentra ninguna. A continuación, añade la ruta en los encabezados de tus mensajes de Kafka.
+Para instrumentar manualmente el cliente Sarama Kafka con la Monitorización de flujos de datos:
 
-2. Configura los consumidores para llamar a `TraceKafkaConsume()`:
-
-   ```go
-   import ddkafka "github.com/DataDog/data-streams-go/integrations/kafka"
-   ...
-   ctx = ddkafka.TraceKafkaConsume(ctx, &kafkaMsg, consumer_group)
-   ```
-
-   Esta función extrae la ruta por la que ha transcurrido un mensaje de Kafka hasta el momento. Establece un nuevo punto de control en la ruta para registrar el consumo de un mensaje y almacena la ruta en el contexto de Go proporcionado.
-
-   **Nota**: Tanto la salida `ctx` desde `TraceKafkaProduce()` como la salida `ctx` desde `TraceKafkaConsume()` contienen información sobre la ruta actualizada.
-
-Para `TraceKafkaProduce()`, si envías varios mensajes de Kafka a la vez (fan-out), no reutilices el `ctx` de salida entre llamadas.
-
-Para `TraceKafkaConsume()`, si añades varios mensajes para crear un número menor de cargas útiles (fan-in), llama a `MergeContext()` para fusionar los contextos en uno solo que pueda pasarse a la siguiente llamada `TraceKafkaProduce()`:
+1. Importa la biblioteca go `ddsarama`
 
 ```go
 import (
-    datastreams "github.com/DataDog/data-streams-go"
-    ddkafka "github.com/DataDog/data-streams-go/integrations/kafka"
+  ddsarama "gopkg.in/DataDog/dd-trace-go.v1/contrib/Shopify/sarama"
 )
 
-...
-
-contexts := []Context{}
-for (...) {
-    contexts.append(contexts, ddkafka.TraceKafkaConsume(ctx, &consumedMsg, consumer_group))
-}
-mergedContext = datastreams.MergeContexts(contexts...)
+2. Envuelve el productor con `ddsarama.WrapAsyncProducer`
 
 ...
+config := sarama.NewConfig()
+producer, err := sarama.NewAsyncProducer([]string{bootStrapServers}, config)
 
-ddkafka.TraceKafkaProduce(mergedContext, &producedMsg)
+// AÑADE ESTA LÍNEA
+producer = ddsarama.WrapAsyncProducer(config, producer, ddsarama.WithDataStreams())
 ```
 
-### Instrumentación manual
+##### Cliente de Confluent Kafka
 
-También puedes utilizar la instrumentación manual. Por ejemplo, en HTTP, es posible propagar la ruta con cabeceras HTTP.
+Para instrumentar manualmente Confluent Kafka con la Monitorización de flujos de datos:
 
-Para insertar una ruta:
+1. Importa la biblioteca go `ddkafka`
 
 ```go
-req, err := http.NewRequest(...)
-...
-p, ok := datastreams.PathwayFromContext(ctx)
-if ok {
-   req.Headers.Set(datastreams.PropagationKeyBase64, p.EncodeStr())
+import (
+  ddkafka "gopkg.in/DataDog/dd-trace-go.v1/contrib/confluentinc/confluent-kafka-go/kafka.v2"
+)
+```
+
+2. Envuelve la creación del productor con `ddkafka.NewProducer` y utiliza la configuración`ddkafka.WithDataStreams()`
+
+```go
+// CREA EL PRODUCTOR CON ESTE WRAPPER
+producer, err := ddkafka.NewProducer(&kafka.ConfigMap{
+        "bootstrap.servers": bootStrapServers,
+}, ddkafka.WithDataStreams())
+```
+
+Si un servicio consume datos de un punto y produce a otro punto, propaga el contexto entre los dos lugares utilizando la estructura de contexto de Go:
+
+3. Extraer el contexto de las cabeceras
+  ```go
+  ctx = datastreams.ExtractFromBase64Carrier(ctx, ddsarama.NewConsumerMessageCarrier(message))
+  ```
+
+4. Inyectarlo en la cabecera antes de producir aguas abajo
+    ```go
+    datastreams.InjectToBase64Carrier(ctx, ddsarama.NewProducerMessageCarrier(message))
+    ```
+
+#### Otras tecnologías o protocolos de colas
+
+También puedes utilizar la instrumentación manual. Por ejemplo, puedes propagar el contexto a través de Kinesis.
+
+##### Instrumentación de la llamada a producción
+
+1. Asegúrate de que tu mensaje es compatible con la interfaz [TextMapWriter][6].
+2. Inserta el contexto en tu mensaje e instrumenta la llamada a producción llamando a:
+
+```ir
+ctx, ok := tracer.SetDataStreamsCheckpointWithParams(ctx, options.CheckpointParams{PayloadSize: getProducerMsgSize(msg)}, "direction:out", "type:kinesis", "topic:kinesis_arn")
+si ok {
+  datastreams.InjectToBase64Carrier(ctx, message)
 }
+
 ```
 
-Para extraer una ruta:
+##### Instrumentación de la llamada al consumo
 
-```go
-func extractPathwayToContext(req *http.Request) context.Context {
-    ctx := req.Context()
-    p, err := datastreams.DecodeStr(req.Header.Get(datastreams.PropagationKeyBase64))
-    if err != nil {
-        return ctx
-    }
-    ctx = datastreams.ContextWithPathway(ctx, p)
-    _, ctx = datastreams.SetCheckpoint(ctx, "type:http")
-}
+1. Asegúrate de que tu mensaje es compatible con la interfaz [TextMapReader][7].
+2. Extrae el contexto de tu mensaje e instrumenta la llamada a consumir llamando a:
+
+```ir
+    ctx, ok := tracer.SetDataStreamsCheckpointWithParams(datastreams.ExtractFromBase64Carrier(context.Background(), message), options.CheckpointParams{PayloadSize: payloadSize}, "direction:in", "type:kinesis", "topic:kinesis_arn")
 ```
-
-### Añadir una dimensión
-
-Puedes añadir una dimensión adicional a las métricas de latencia de extremo a extremo con la etiqueta `event_type`:
-
-```go
-_, ctx = datastreams.SetCheckpoint(ctx, "type:internal", "event_type:sell")
-```
-
-Basta con añadir la etiqueta `event_type` para el primer servicio en cada ruta. Los datos de alta cardinalidad (como hosts o ID de solicitud) no se admiten como valores para la etiqueta `event_type`.
-
-[1]: /es/agent
-[2]: https://github.com/DataDog/data-streams-go
+[1]: /es/agent/
+[2]: https://github.com/DataDog/dd-trace-go
+[3]: https://docs.datadoghq.com/es/tracing/trace_collection/library_config/go/
+[4]: https://datadoghq.dev/orchestrion/
+[5]: https://datadoghq.dev/orchestrion/docs/getting-started/
+[6]: https://github.com/DataDog/dd-trace-go/blob/main/datastreams/propagation.go#L37
+[7]: https://github.com/DataDog/dd-trace-go/blob/main/datastreams/propagation.go#L44
+[8]: https://github.com/confluentinc/confluent-kafka-go
+[9]: https://github.com/Shopify/sarama

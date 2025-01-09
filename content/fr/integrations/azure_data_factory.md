@@ -15,7 +15,7 @@ integration_id: azure-datafactory
 integration_title: Microsoft Azure Data Factory
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: azure_data_factory
 public_title: Intégration Datadog/Microsoft Azure Data Factory

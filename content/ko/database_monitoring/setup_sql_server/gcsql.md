@@ -4,30 +4,25 @@ further_reading:
 - link: /integrations/sqlserver/
   tag: 설명서
   text: SQL Server 통합
-kind: 설명서
 title: Google Cloud SQL 관리형 SQL Server에서 데이터베이스 모니터링 설정
 ---
-
-{{< site-region region="gov" >}}
-해당 지역에서는 데이터베이스 모니터링이 지원되지 않습니다
-{{< /site-region >}}
 
 데이터베이스 모니터링은 쿼리 메트릭, 쿼리 샘플, 실행 계획, 데이터베이스 상태, 장애 조치, 이벤트와 같은 정보를 수집해 Microsoft SQL Server 데이터베이스에 관한 상세한 정보를 가시화합니다.
 
 데이터베이스에서 데이터베이스 모니터링을 활성화하려면 다음 단계를 완료하세요.
 
 1. [에이전트에 데이터베이스 접근 권한 부여](#grant-the-agent-access)
-2. [에이전트 설치](#install-the-agent)
+2. [에이전트를 설치 및 설정합니다](#install-and-configure-the-agent).
 3. [Cloud SQL 통합 설치](#Install-the-cloud-sql-integration)
 
 ## 시작 전 참고 사항
 
 지원되는 SQL Server 버전
-: 2012, 2014, 2016, 2017, 2019, 2022
+: 2014, 2016, 2017, 2019, 2022
 
 {{% dbm-sqlserver-before-you-begin %}}
 
-## 에이전트 액세스 권한 부여
+## 에이전트에 접근 권한 부여
 
 Datadog 에이전트가 통계와 쿼리를 수집하려면 데이터베이스에 읽기 전용 액세스가 필요합니다.
 
@@ -49,7 +44,7 @@ CREATE USER datadog FOR LOGIN datadog;
 
 Google Cloud SQL에서는 `CONNECT ANY DATABASE`를 허용하지 않기 때문에 이 단계를 실행해야 합니다. Datadog 에이전트가 각 데이터베이스에 연결되어 있어야 해당 데이터베이스에 맞는 파일 I/O 통계를 수집할 수 있습니다.
 
-## 에이전트 설치하기
+## 에이전트 설치 및 구성
 
 Google Cloud에서는 호스트에 바로 액세스하는 것을 허용하지 않기 때문에 SQL 서버 호스트와 통신할 수 있는 별도 호스트에 Datadog 에이전트를 설치해야 합니다. 에이전트를 설치하고 실행하는 데는 여러 가지 방법이 있습니다.
 
@@ -83,6 +78,9 @@ instances:
 
 `service`와 `env` 태그를 사용하여 일반적인 태깅 체계를 통해 데이터베이스 텔레메트리를 다른 텔레메트리와 연결합니다. Datadog에서 이 같은 태그를 사용하는 방법을 알아보려면 [통합 서비스 태깅][5]을 참고하세요.
 
+### 비밀번호를 안전하게 저장하기
+{{% dbm-secret %}}
+
 ### 지원되는 드라이버
 
 #### Microsoft ADO
@@ -97,11 +95,11 @@ adoprovider: MSOLEDBSQL19  # 버전 18 이하에서는 MSOLEDBSQL로 교체
 
 #### ODBC
 
-권장하는 ODBC 드라이버는 [Microsoft ODBC DB Driver][8]입니다. 에이전트가 실행되는 호스트에 드라이버를 설치했는지 확인하세요.
+권장되는 ODBC 드라이버는 [Microsoft ODBC Driver][8]입니다. Agent 7.51부터 SQL Server용 ODBC Driver 18이 Linux용 Agent에 포함됩니다. Windows의 경우 Agent가 실행 중인 호스트에 드라이버가 설치되어 있는지 확인하세요.
 
 ```yaml
 connector: odbc
-driver: '{ODBC Driver 17 for SQL Server}'
+driver: '{ODBC Driver 18 for SQL Server}'
 ```
 
 에이전트 설정이 모두 완료되면 [Datadog 에이전트를 다시 시작][9]하세요.
@@ -119,12 +117,12 @@ driver: '{ODBC Driver 17 for SQL Server}'
 [6]: https://docs.microsoft.com/en-us/sql/ado/microsoft-activex-data-objects-ado
 [7]: https://docs.microsoft.com/en-us/sql/connect/oledb/oledb-driver-for-sql-server
 [8]: https://docs.microsoft.com/en-us/sql/connect/odbc/download-odbc-driver-for-sql-server
-[9]: /ko/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[10]: /ko/agent/guide/agent-commands/#agent-status-and-information
+[9]: /ko/agent/configuration/agent-commands/#start-stop-and-restart-the-agent
+[10]: /ko/agent/configuration/agent-commands/#agent-status-and-information
 [11]: https://app.datadoghq.com/databases
 {{% /tab %}}
 {{% tab "Linux Host" %}}
-SQL Server 텔레메트리를 수집하려면 먼저 [Datadog 에이전트를 설치][1]합니다.
+SQL Server 원격 측정을 수집하려면 먼저 [Datadog 에이전트를 설치][1]합니다.
 
 Linux의 경우 Datadog 에이전트에 ODBC SQL Server 드라이버(예: [Microsoft ODBC 드라이버][2])를 추가 설치해야 합니다. ODBC SQL Server가 설치되면 `odbc.ini`과 `odbcinst.ini` 파일을 `/opt/datadog-agent/embedded/etc` 폴더에 복사하세요.
 
@@ -138,13 +136,13 @@ instances:
   - dbm: true
     host: '<HOSTNAME>,<SQL_PORT>'
     username: datadog
-    password: '<PASSWORD>'
+    password: 'ENC[datadog_user_database_password]'
     connector: odbc
     driver: '<Driver from the `odbcinst.ini` file>'
     tags:  # Optional
       - 'service:<CUSTOM_SERVICE>'
       - 'env:<CUSTOM_ENV>'
-    # 프로젝트와 인스턴스를 추가한 후에는 CPU, 메모리 등과 같은 추가 클라우드 데이터를 풀하도록 Datadog Google Cloud(GCP) 통합을 설정합니다.
+    # 프로젝트 및 인스턴스를 추가한 후, GCP(Datadog Google Cloud) 통합을 설정하여 CPU, 메모리 등과 같은 추가 클라우드 데이터를 가져옵니다.
     gcp:
       project_id: '<PROJECT_ID>'
       instance_id: '<INSTANCE_ID>'
@@ -166,20 +164,20 @@ instances:
 [3]: https://github.com/DataDog/integrations-core/blob/master/sqlserver/datadog_checks/sqlserver/data/conf.yaml.example
 [4]: https://github.com/DataDog/integrations-core/blob/master/sqlserver/assets/configuration/spec.yaml#L324-L351
 [5]: /ko/getting_started/tagging/unified_service_tagging
-[6]: /ko/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[7]: /ko/agent/guide/agent-commands/#agent-status-and-information
+[6]: /ko/agent/configuration/agent-commands/#start-stop-and-restart-the-agent
+[7]: /ko/agent/configuration/agent-commands/#agent-status-and-information
 [8]: https://app.datadoghq.com/databases
 {{% /tab %}}
 {{% tab "Docker" %}}
-도커 컨테이너에서 실행하는 데이터베이스 모니터링 에이전트를 구성하려면 에이전트 컨테이너에서 [Autodiscovery Integration Templates][1]을 도커 레이블로 설정합니다.
+Docker 컨테이너에서 실행하는 데이터베이스 모니터링 에이전트를 구성하려면 에이전트 컨테이너에서 [자동탐지 통합 템플릿][1]을 Docker 레이블로 설정합니다.
 
-**참고**: 에이전트에 도커 자동탐지 레이블에 대한 읽기 권한이 있어야 작동합니다. 
+**참고**: 에이전트에 Docker 자동탐지 레이블을 읽을 수 있는 권한이 있어야 작동합니다. 
 
 값을 내 계정과 환경에 맞게 변경하세요. 사용할 수 있는 설정 옵션을 모두 보려면 [설정 파일 샘플][2]을 참고하세요.
 
 ```bash
 export DD_API_KEY=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-export DD_AGENT_VERSION=7.35.0
+export DD_AGENT_VERSION=7.51.0
 
 docker run -e "DD_API_KEY=${DD_API_KEY}" \
   -v /var/run/docker.sock:/var/run/docker.sock:ro \
@@ -190,7 +188,7 @@ docker run -e "DD_API_KEY=${DD_API_KEY}" \
     "host": "<HOSTNAME>",
     "port": <SQL_PORT>,
     "connector": "odbc",
-    "driver": "FreeTDS",
+    "driver": "ODBC Driver 18 for SQL Server",
     "username": "datadog",
     "password": "<PASSWORD>",
     "tags": [
@@ -217,7 +215,7 @@ docker run -e "DD_API_KEY=${DD_API_KEY}" \
 [2]: https://github.com/DataDog/integrations-core/blob/master/sqlserver/datadog_checks/sqlserver/data/conf.yaml.example
 [3]: https://github.com/DataDog/integrations-core/blob/master/sqlserver/assets/configuration/spec.yaml#L324-L351
 [4]: /ko/getting_started/tagging/unified_service_tagging
-[5]: /ko/agent/guide/agent-commands/#agent-status-and-information
+[5]: /ko/agent/configuration/agent-commands/#agent-status-and-information
 [6]: https://app.datadoghq.com/databases
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
@@ -225,35 +223,49 @@ docker run -e "DD_API_KEY=${DD_API_KEY}" \
 
 쿠버네티스 클러스터에서 클러스터 점검을 아직 활성화하지 않은 경우 [클러스터 확인 활성화][2] 지침에 따라 활성화합니다. 클러스터 에이전트 컨테이너에 연결된 정적 파일을 이용하거나 쿠버네티스 서비스 주석을 이용해 클러스터 에이전트를 설정할 수 있습니다.
 
-### Helm을 사용한 명령줄
+### Helm
 
-다음 [Helm][3] 명령을 실행해 쿠버네티스(Kubernetes) 클러스터에서 [Datadog 클러스터 에이전트][1]를 설치하세요. 계정 및 환경에 맞게 값을 교체하세요.
+다음 단계를 완료해 쿠버네티스 클러스터에서 [Datadog 클러스터 에이전트][1]를 설치하세요. 내 계정과 환경에 맞게 값을 변경하세요.
 
-```bash
-helm repo add datadog https://helm.datadoghq.com
-helm repo update
+1. Helm용 [Datadog 에이전트 설치 지침][3]을 완료하세요.
+2. 다음을 포함하도록 YAML 설정 파일(클러스터 에이전트 설치 지침의 `datadog-values.yaml`)을 업데이트하세요.
+    ```yaml
+    clusterAgent:
+      confd:
+        sqlserver.yaml: |-
+          cluster_check: true
+          init_config:
+          instances:
+          - dbm: true
+            host: <HOSTNAME>
+            port: 1433
+            username: datadog
+            password: 'ENC[datadog_user_database_password]'
+            connector: 'odbc'
+            driver: 'ODBC Driver 18 for SQL Server'
+            tags:  # Optional
+              - 'service:<CUSTOM_SERVICE>'
+              - 'env:<CUSTOM_ENV>'
+            gcp:
+              project_id: '<PROJECT_ID>'
+              instance_id: '<INSTANCE_ID>'
 
-helm install <RELEASE_NAME> \
-  --set 'datadog.apiKey=<DATADOG_API_KEY>' \
-  --set 'clusterAgent.enabled=true' \
-  --set 'clusterAgent.confd.sqlserver\.yaml=cluster_check: true
-init_config:
-instances:
-  - dbm: true
-    host: <HOSTNAME>
-    port: 1433
-    username: datadog
-    password: "<PASSWORD>"
-    connector: "odbc"
-    driver: "FreeTDS"
-    tags:  # Optional
-      - "service:<CUSTOM_SERVICE>"
-      - "env:<CUSTOM_ENV>"
-    gcp:
-      project_id: "<PROJECT_ID>"
-      instance_id: "<INSTANCE_ID>"' \
-  datadog/datadog
-```
+    clusterChecksRunner:
+      enabled: true
+    ```
+
+3. 명령줄에서 위의 설정 파일로 에이전트를 배포합니다.
+    ```shell
+    helm install datadog-agent -f datadog-values.yaml datadog/datadog
+    ```
+
+<div class="alert alert-info">
+Windows의 경우 <code>--set targetSystem=windows</code>를 <code>helm 설치</code>명령에 추가하세요.
+</div>
+
+[1]: https://app.datadoghq.com/organization-settings/api-keys
+[2]: /ko/getting_started/site
+[3]: /ko/containers/kubernetes/installation/?tab=helm#installation
 
 ### 연결된 파일로 설정
 
@@ -267,13 +279,13 @@ instances:
     host: '<HOSTNAME>'
     port: <SQL_PORT>
     username: datadog
-    password: '<PASSWORD>'
+    password: 'ENC[datadog_user_database_password]'
     connector: "odbc"
-    driver: "FreeTDS"
+    driver: "ODBC Driver 18 for SQL Server"
     tags:  # Optional
       - 'service:<CUSTOM_SERVICE>'
       - 'env:<CUSTOM_ENV>'
-    # 프로젝트와 인스턴스를 추가한 후에는 CPU, 메모리 등과 같은 추가 클라우드 데이터를 풀하도록 Datadog Google Cloud(GCP) 통합을 설정합니다.
+    # 프로젝트 및 인스턴스를 추가한 후, GCP(Datadog Google Cloud) 통합을 설정하여 CPU, 메모리 등과 같은 추가 클라우드 데이터를 가져옵니다.
     gcp:
       project_id: '<PROJECT_ID>'
       instance_id: '<INSTANCE_ID>'
@@ -299,9 +311,9 @@ metadata:
           "host": "<HOSTNAME>",
           "port": <SQL_PORT>,
           "username": "datadog",
-          "password": "<PASSWORD>",
+          "password": "ENC[datadog_user_database_password]",
           "connector": "odbc",
-          "driver": "FreeTDS",
+          "driver": "ODBC Driver 18 for SQL Server",
           "tags": ["service:<CUSTOM_SERVICE>", "env:<CUSTOM_ENV>"],  # Optional
           "gcp": {
             "project_id": "<PROJECT_ID>",
@@ -327,7 +339,7 @@ spec:
 [2]: /ko/agent/cluster_agent/clusterchecks/
 [3]: https://helm.sh
 [4]: https://github.com/DataDog/integrations-core/blob/master/sqlserver/assets/configuration/spec.yaml#L324-L351
-[5]: /ko/agent/guide/secrets-management
+[5]: /ko/agent/configuration/secrets-management
 {{% /tab %}}
 {{< /tabs >}}
 

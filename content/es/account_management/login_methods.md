@@ -1,5 +1,4 @@
 ---
-kind: documentación
 title: Configuración de métodos de inicio de sesión
 ---
 

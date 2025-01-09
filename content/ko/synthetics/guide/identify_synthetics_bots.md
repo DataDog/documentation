@@ -15,7 +15,6 @@ further_reading:
 - link: /synthetics/api_tests/
   tag: 설명서
   text: API 테스트 설정
-kind: 설명서
 title: 신서틱 봇 확인하기
 ---
 

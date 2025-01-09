@@ -1,100 +1,110 @@
 ---
 algolia:
   tags:
-  - tests continuos
+  - continuous testing
 further_reading:
 - link: https://learn.datadoghq.com/courses/synthetic-tests-ci-cd-pipeline
   tag: Centro de aprendizaje
-  text: Introducción a los tests Synthetic en una canalización de CI/CD
-- link: /synthetics/api_tests
+  text: Introducción a los tests de Synthetic en un pipeline de CI/CD
+- link: https://www.datadoghq.com/blog/best-practices-datadog-continuous-testing/
+  tag: Blog
+  text: Prácticas recomendadas para Continuous Testing con Datadog
+- link: https://www.datadoghq.com/blog/release-confidently-with-datadog-continuous-testing/
+  tag: Blog
+  text: Utiliza Datadog Continuous Testing para publicar con confianza
+- link: /continuous_testing/environments
   tag: Documentación
-  text: Más información sobre los tests de API
-- link: /synthetics/multistep
-  tag: Documentación
-  text: Más información sobre los tests de API multipaso
-- link: /synthetics/browser_tests
-  tag: Documentación
-  text: Más información sobre los tests de navegador
+  text: Más información sobre los entornos locales y de staging
 - link: /continuous_testing/cicd_integrations
   tag: Documentación
-  text: Más información sobre los tests Synthetic en la canalización de integración
-    continua (CI)
-kind: documentación
-title: Empezando con los tests continuos
+  text: Más información sobre Continuous Testing y CI/CD
+title: Empezando con Continuous Testing
 ---
 {{< jqmath-vanilla >}}
 
 ## Información general
 
-Los tests continuos te permiten ejecutar y monitorear los mismos [test Synthetic][1] que has configurado en los entornos de preparación, QA y preproducción de forma automática, para alertar bien a tu equipo y bloquear los despliegues de canalizaciones si los cambios de código causan errores de prueba.
+Los tests continuos te permiten ejecutar y monitorizar automáticamente los mismos [tests de Synthetic][1] que has configurado en tus [entornos de staging, control de calidad y preproducción][14], que alertan de manera proactiva a tu equipo y bloquean los despliegues de pipelines cuando los cambios de código causan fallas en los tests.
 
-Los tests sin código pueden servir para lo siguiente:
+Tus tests de Continuous Testing pueden:
+
 * [Lanzar solicitudes API en tus sistemas][2]
 * [Simular escenarios de navegación dentro de tu aplicación web][3]
 * [Probar la funcionalidad de tus aplicaciones para iOS y Android][4].
 
-Una vez ejecutados los tests, mira los resultados y los lotes de CI en el [Explorador de monitorización Synthetic y tests continuos][5].
+Puedes configurar la [paralelización][24], que te permite ejecutar varios tests en tus pipelines de CI/CD simultáneamente en lugar de secuencialmente para ayudar a acelerar los procesos de creación, testing y despliegue. Una vez que se ejecuten los tests, examina los resultados de los tests y los lotes de CI en el [Explorador de resultados de tests y Synthetic Monitoring][5].
 
-Mejora el flujo de trabajo de tus desarrolladores con los tests continuos:
-* Utiliza el [Paquete NPM de `datadog-ci`][6] para ejecutar estos tests directamente en tu canalización de CI.
-* Utiliza [Datadog Synthetics frente a la integración de código][7] para ejecutar tests en tu IDE.
+Para mejorar el flujo de trabajo de tu desarrollador con Continuous Testing, puedes:
 
-Los test continuos también ofrecen [paralelización][24], que permite ejecutar varios tests en tus canalizaciones de CI/CD de forma simultánea, en lugar de en forma secuencial, para acelerar los procesos de creación, prueba y despliegue.
+* Usa el [paquete NPM `datadog-ci`][6] para ejecutar tests directamente en tu pipeline CI.
+* Utiliza la [Integración de Datadog Synthetics con VS Code][7] para ejecutar tests directamente en tu IDE.
+
+Continuous Testing acelera el desarrollo de aplicaciones de tu organización al automatizar los tests de extremo a extremo durante todo el ciclo de vida del software. Puedes ejecutar tests en entornos locales y de staging, paralelizar ejecuciones de tests e integrar con proveedores de CI.
 
 ## Requisitos previos
 
 Si aún no lo has hecho, crea una [cuenta de Datadog][8].
 
-## Crear un test de Tests continuos
+## Crear un test de Continuous Testing
 
-Para configurar un test de Tests continuos, primero crea un test Synthetic en Datadog. En este ejemplo, crea un [test de navegador][3] en el sitio `https://www.shopist.io`, una aplicación web de comercio electrónico de prueba.
+Para configurar un test de Continuous Testing, primero crea un test de Synthetic en Datadog. En este ejemplo, crea un [test de navegador][3] en el sitio `https://www.shopist.io`, una aplicación web de comercio electrónico de prueba.
 
-Los tests de navegador simulan el recorrido de un usuario a través de su aplicación web comenzando en tu **URL de inicio**. Si garantizas que tu **URL de inicio** es un recurso del entorno de preparación, te resultará más fácil probar los cambios antes de pasarlos a producción.
+Los tests de navegador simulan el recorrido de un usuario a través de su aplicación web a partir de su **URL de inicio**. Si te aseguras de que tu **URL de inicio** sea un recurso en su entorno de staging, será más fácil probar los cambios antes de pasarlos a producción.
 
-### Configura los detalles de tu test
+### Configurar los detalles de tu test
 
-1. En el sitio de Datadog, sitúa el cursor sobre **Monitorización UX** y haz clic en **Tests continuos**.
-2. En la esquina superior derecha, haz clic en **Nuevo test** > **Prueba de navegador**.
+1. Ve a [**Digital Experience** > **Synthetic Monitoring & Testing** > **New Test**][26].
+2. En la esquina superior derecha, haz clic en **New Test** > **Browser Test**.
+
+   {{< img src="continuous_testing/new_browser_test.png" alt="new_browser_test" style="width:80%;" >}}
+
 3. Define tu test de navegador:
 
-    - Añade la URL del sitio web que desea monitorear en el campo URL de inicio. En este ejemplo, introduce `https://www.shopist.io`.
-    - Selecciona **Opciones avanzadas** para establecer opciones de solicitud personalizadas, certificados, credenciales de autenticación, etc. En este ejemplo, no se necesita ninguna opción avanzada específica.
-    - Nombra tu prueba y establece una etiqueta (tag) de equipo como **team-checkout**. Las etiquetas (tags) te permiten mantener tu conjunto de tests organizado y encontrar los tests que te interesan a través del Explorador de monitorización Synthetic y tests continuos.
-    - Elija los navegadores y dispositivos que desea probar.
+    - Agrega la URL del sitio web que deseas monitorizar en el campo URL de inicio. Para este ejemplo, ingresa `https://www.shopist.io`.
+    - Selecciona **Advanced Options** para configurar opciones de solicitud personalizadas, certificados, credenciales de autenticación y más. En este ejemplo, no se necesita ninguna opción avanzada específica.
+    - Asigna un nombre a tu test y establece una etiqueta (tag) de equipo, como **team-checkout**. Las etiquetas te permiten mantener organizado tu conjunto de tests y encontrar los tests que te interesan con el Explorador de resultados de tests y Synthetic Monitoring.
+    - Elige los navegadores y dispositivos que deseas probar.
 
-4. Continúa [rellenando los datos de test y tu grabación como lo haría normalmente][9].
+4. Continúa [completando los detalles de tu test y tu grabación como lo harías normalmente][9].
 
-{{< img src="continuous_testing/new_browser_test.png" alt="new_browser_test" style="width:100%;" >}}
+## Integrar con un proveedor de CI o una herramienta de colaboración
 
+Acelera el desarrollo de tu aplicación combinando testing y solución de problemas en Continuous Testing, agilizando tus flujos de trabajo y minimizando el cambio de contexto.
 
-## Ejecuta tus pruebas de Tests continuos
+Para integrar con un proveedor de CI o una herramienta de colaboración como [Slack][28] o [Jira][29], consulta la documentación correspondiente:
 
-Para mejorar tu flujo de trabajo de desarrollo, puedes utilizar `datadog-ci` en tu CLI como un entorno de CI para configurar el test. A continuación, ejecuta el test directamente en tu IDE como un entorno de desarrollo.
+{{< partial name="getting_started/continuous_testing/providers.html" >}}
 
-### Ejecución de pruebas en la CLI
+</br>
 
-Amplía el uso de los tests continuos mediante el [paquete NPM de `datadog-ci`][6]. `datadog-ci` te permite ejecutar comandos desde tus scripts de CI/CD para probar tu aplicación antes del despliegue. Puedes automatizar el bloqueo y la reversión de cambios cuando las pruebas den error. Lee la página [página de Configuración de `datadog-ci` para instrucciones de instalación y configuración][10].
+## Ejecutar los tests de Continuous Testing
 
-Puedes utilizar `datadog-ci` para ejecutar solo los tests etiquetados con [Etiquetas (tags) de equipo][25] específicas. Por ejemplo, para ejecutar todos los tests etiquetados como `team-checkout`:
+Para mejorar el flujo de trabajo de desarrollo, puedes utilizar `datadog-ci` en tu CLI como un entorno de CI para configurar tu test. Luego, ejecuta tu test directamente en tu IDE como un entorno de desarrollador.
 
-1. Navega hasta la línea de comandos.
-2. Ejecuta lo siguiente:
+### Ejecución de tests en la CLI
+
+Amplía el uso de Continuous Testing mediante el [paquete NPM `datadog-ci`][6]. `datadog-ci` te permite ejecutar comandos desde tus scripts de CI/CD para probar tu aplicación antes del despliegue. Puedes automatizar el bloqueo y la reversión de cambios cuando fallan los tests. Lee la [página de configuración de `datadog-ci` para obtener instrucciones de instalación y configuración][10].
+
+Puedes utilizar `datadog-ci` para ejecutar solo los tests etiquetados con [etiquetas de equipos de Datadog][25] específicas. Por ejemplo, para ejecutar todos los tests etiquetados como `team-checkout`:
+
+1. Navega hasta tu línea de comandos.
+2. Ejecuta el siguiente comando:
 
    ```
    datadog-ci synthetics run-tests -search 'tag:team-checkout' --config global.config.json
    ```
 
-Para obtener más información sobre la ejecución del comando Synthetics y el uso de reporteros, consulta la [Documentación de configuración][11].
+Para más información sobre la ejecución del comando Synthetics y el uso de informes, consulta la [documentación de configuración][11].
 
-### Ejecutar pruebas en tu IDE
+### Ejecutar tests en tu IDE
 
-Por separado, puedes utilizar la [Integración Datadog Synthetics frente a código][12] para ayudarte a:
+Por separado, puedes utilizar la [Integración de Datadog Synthetics con VS Code][12] para ayudarte a:
 
-* Utiliza una [Localización privada][13] o [Túnel][14] para acelerar el desarrollo a nivel local.
-* Ejecuta tests de API HTTP y tests de navegador y ve tus resultados dentro de VS Code.
+* Utiliza una [localización privada][13] o [un entorno local ][14] para acelerar el desarrollo a nivel local.
+* Ejecuta tests de API HTTP y tests de navegador y consulta tus resultados en VS Code.
 * Prueba solo lo importante ejecutando los tests pertinentes al mismo tiempo.
 
-{{< img src="developers/ide_integrations/vscode/vscode-extension-demo.png" alt="vscode-extension-demo" style="width:100%;" >}}
+{{< img src="developers/ide_plugins/vscode/vscode-extension-demo.png" alt="vscode-extension-demo" style="width:100%;" >}}
 
 ### Ejecución de pruebas en VS Code
 
@@ -104,51 +114,58 @@ Por separado, puedes utilizar la [Integración Datadog Synthetics frente a códi
 4. Establece una URL de inicio.
 5. Haz la prueba.
 
-## Examina los resultados en el Explorador de monitorización Synthetic y tests continuos
+## Examinar los resultados en el Explorador de resultados de tests y Synthetic Monitoring
 
-El Explorador de monitorización Synthetic y los tests continuos te permite crear visualizaciones y filtrar [lotes de CI][22] y [ejecuciones de tests][23] para tus tests Tests continuos. Navega a **Monitorización UX** > **Tests continuos**.
+El Explorador de resultados de tests y Synthetic Monitoring te permite crear visualizaciones y filtrar [lotes de CI][22] y [ejecuciones de tests][23] para tus tests de Continuous Testing.
 
-Selecciona **Lotes de CI** o **Ejecuciones de test** para ver los resultados de tus lotes de CI o ejecutar tests en el Explorador. Selecciona un lote de CI o un test de la lista para obtener una vista más detallada del resultado.
+Ve a [**Digital Experience** > **Synthetic Monitoring & Testing** > **New Test**][26] y, luego, selecciona **CI Batches** o **Test Runs** para ver los resultados de tus lotes de CI o ejecuciones de tests en el explorador. Selecciona un lote de CI o un test de la lista para obtener una vista más detallada del resultado.
 
-{{< img src="continuous_testing/ci_explorer_test_results.png" alt="ci_explorer_test_results" style="width:100%;" >}}
+{{< tabs >}}
+{{% tab "Lotes de CI" %}}
+{{< img src="continuous_testing/explorer_ci_batches_1.png" alt="Busca y gestiona tus lotes de CI en el Explorador de resultados de tests y Synthetic Monitoring" style="width:100%;">}}
+{{% /tab %}}
+{{% tab "Ejecucione de tests" %}}
+{{< img src="continuous_testing/explorer_test_runs_1.png" alt="Busca y gestiona tus ejecuciones de tests en el Explorador de resultados de tests y Synthetic Monitoring" style="width:100%;">}}
+{{% /tab %}}
+{{< /tabs >}}
 
 ### Crear una consulta de búsqueda
 
-Haz clic en una de las siguientes consultas de búsqueda listas para usar para filtrar tus lotes de CI o ejecuciones de test:
-- [Todas las pruebas fallidas][19]
-- [Pruebas inicialmente fallidas pero ahora superadas][20]
-- [Pruebas no utilizadas][21]
+Explora una de las siguientes consultas de búsqueda listas para usar para comenzar a filtrar tus lotes de CI o ejecuciones de tests.
 
-{{< img src="continuous_testing/example_search_queries.png" alt="example-search-queries" style="width:100%;" >}}
+{{< img src="continuous_testing/explorer/search_queries.png" alt="Consultas de búsqueda listas para usar en el Explorador de resultados de tests y Synthetic Monitoring" style="width:100%;" >}}
 
-Opcionalmente, puedes crear una consulta para [Buscar tus ejecuciones de test][15]. Con el test de navegador que has creado anteriormente, localiza el ID del test y crea una consulta de búsqueda mediante las facetas comunes de ejecución de tests. Para encontrar el ID de tu test de navegador:
-1. Ve a la página Test Synthetic.
+Opcionalmente, puedes crear una consulta para [buscar tus ejecuciones de tests][15]. Con el test de navegador que creaste anteriormente, localiza el ID de test y crea una consulta de búsqueda utilizando las facetas comunes de ejecución de test.
+
+Para encontrar el ID de tu test de navegador:
+
+{{< img src="continuous_testing/example_test_id.png" alt="El ID de test de navegador resaltado en la sección Properties de una ejecución de test" style="width:60%;" >}}
+
+1. Ve a la página [**Tests**][19].
 2. Selecciona un test.
 3. Busca el ID del test en la sección **Propiedades**.
 
-{{< img src="continuous_testing/example_test_id.png" alt="example_test_id" style="width:70%;" >}}
+Para obtener más información sobre el uso de facetas en tu consulta de búsqueda, consulta [Buscar ejecuciones de test][17].
 
-Para exportar tu vista del Explorador de monitorización Synthetic y tests continuos, haz clic en **>Vistas** y haz clic en **Guardar**. Para obtener más información, consulta [Vistas guardadas][16].
-
-Para obtener más información sobre el uso de facetas en te consulta de búsqueda, consulta [Buscar ejecuciones de test][17].
+Para exportar tu vista del Explorador de resultados de tests y Synthetic Monitoring, haz clic en **> Views**. Para más información, consulta [Vistas guardadas][16].
 
 ## Establecer preferencias de paralelización
 
 Por defecto, los tests Synthetic no están paralelizados. La paralelización permite ejecutar varios tests en tus canalizaciones de CI/CD simultáneamente. Si deseas paralelizar tus tests, puedes utilizar la calculadora **Estimar paralelización** para determinar tus necesidades.
 
-Navega a **Monitorización UX** > **Configuración** y haz clic en **Configuración de paralelización** para localizar la calculadora.
-
 {{< img src="continuous_testing/parallelization_estimate.png" alt="parallelization_estimate" style="width:100%;" >}}
 
-Por ejemplo, si tienes 24 tests por lote de CI, cada uno de los cuales tarda 2 minutos en completarse, y su objetivo es que todos los tests se completen en 4 minutos, necesitas ejecutar 12 tests en paralelo.
+Navega a [**Digital Experience** > **Synthetic Monitoring & Testing** > **Settings**][27] para localizar la calculadora.
+
+Por ejemplo, si tienes 24 tests por lote de CI, cada uno de los cuales tarda 2 minutos en completarse, y tu objetivo es que todos los tests se completen en 4 minutos, necesitas ejecutar 12 tests en paralelo.
 
 $$\text"paralelización estimada" = {\text"24 tests por lote de CI"* \text"duración de 2 minutos"} / \text"duración estimada de 4 minutos en tu canalización de CI"$$
 
 Una vez que hayas terminado de estimar tu paralelización, introduce el número de ejecuciones de test que deseas ejecutar al mismo tiempo en el modo de Paralelización. A continuación, haz clic en **Guardar selección**.
 
-Consulta la [Documentación sobre paralelización][18] para obtener más detalles.
+Para más información, consulta la [documentación sobre paralelización][18].
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -158,22 +175,24 @@ Consulta la [Documentación sobre paralelización][18] para obtener más detalle
 [4]: /es/mobile_app_testing/
 [5]: /es/synthetics/explorer?track=synbatch
 [6]: /es/continuous_testing/cicd_integrations/configuration/?tab=npm
-[7]: /es/developers/ide_integrations/
+[7]: /es/developers/ide_plugins/
 [8]: https://datadoghq.com
 [9]: /es/getting_started/synthetics/browser_test/#create-a-browser-test
 [10]: /es/continuous_testing/cicd_integrations/configuration/?tab=npm#install-the-package
 [11]: /es/continuous_testing/cicd_integrations/configuration/?tab=npm#reporters
-[12]: /es/developers/ide_integrations/vscode/
+[12]: /es/developers/ide_plugins/vscode/
 [13]: /es/getting_started/synthetics/private_location/
-[14]: /es/continuous_testing/
+[14]: /es/continuous_testing/environments/
 [15]: /es/continuous_testing/explorer/?tab=testruns#create-a-search-query
 [16]: /es/continuous_testing/explorer/saved_views/
 [17]: /es/continuous_testing/explorer/search_runs/
 [18]: /es/continuous_testing/settings/#parallelization
-[19]: https://app.datadoghq.com/synthetics/explorer?query=%40type%3Aresult%20-%40result.result.httpStatusCode%3A%5B100%20TO%20399%5D%20%40result.result.passed%3Afalse&agg_m=count&agg_q=%40result.result.httpStatusCode&cols=&index=%2A&top_n=100&track=synthetics&viz=timeseries
-[20]: https://app.datadoghq.com/synthetics/explorer?query=%40type%3Aresult%20%40result.result.initialResultID%3A%2A%20%40result.status%3A0&agg_m=count&agg_q=%40result.result.httpStatusCode&cols=&index=%2A&top_n=100&track=synthetics&viz=stream
-[21]: https://app.datadoghq.com/synthetics/explorer?query=%40ci.job.name%3A%2A&agg_m=count&agg_q=%40result.test_public_id&cols=&index=%2A&top_n=100&track=synbatch&viz=query_table
+[19]: https://app.datadoghq.com/synthetics/tests
 [22]: /es/glossary/?product=synthetic-monitoring#test-batch
 [23]: /es/glossary/?product=synthetic-monitoring#test-run
 [24]: /es/glossary/?product=synthetic-monitoring#parallelization
 [25]: /es/account_management/teams/
+[26]: https://app.datadoghq.com/synthetics/explorer?query=%40type%3Aresult%20-%40result.result.unhealthy%3Atrue&index=%2A&track=synthetics&viz=stream&from_ts=1713544430419&to_ts=1713548030419&live=true
+[27]: https://app.datadoghq.com/synthetics/settings/continuous-testing
+[28]: /es/integrations/slack/
+[29]: /es/integrations/jira/

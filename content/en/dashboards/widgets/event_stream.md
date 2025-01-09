@@ -1,6 +1,5 @@
 ---
 title: Event Stream Widget
-kind: documentation
 description: "Display filtered events from the Event Stream."
 private: true
 aliases:

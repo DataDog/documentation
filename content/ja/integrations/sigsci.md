@@ -5,6 +5,7 @@ assets:
   dashboards:
     sigsci: assets/dashboards/overview.json
   integration:
+    auto_install: true
     configuration: {}
     events:
       creates_events: true
@@ -14,6 +15,7 @@ assets:
       prefix: sigsci.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10037
     source_type_name: Signal Sciences
   monitors:
     Excessive blocked http requests: assets/monitors/excessiveblockedHTTP.json
@@ -24,6 +26,7 @@ author:
   support_email: info@signalsciences.com
 categories:
 - security
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/sigsci/README.md
 display_on_public_website: true
@@ -33,7 +36,6 @@ integration_id: sigsci
 integration_title: Signal Sciences
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: sigsci
 public_title: Signal Sciences
@@ -49,14 +51,19 @@ tile:
   - Supported OS::macOS
   - Supported OS::Windows
   - Category::Security
+  - Offering::Integration
   configuration: README.md#Setup
   description: Signal Sciences からデータを収集して異常値を表示し、攻撃を阻止
   media: []
   overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.signalsciences.com/blog/
   support: README.md#Support
   title: Signal Sciences
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 ## 概要
 
 Signal Sciences のメトリクスとイベントを Datadog に送信することで、アプリケーション、API、マイクロサービスなどに対する攻撃や悪用をリアルタイムに監視できます。また、Signal Sciences が正しく機能し、トラフィックを検査していることを確認できます。
@@ -148,9 +155,9 @@ Signal Sciences-Datadog インテグレーションを使用するには、Signa
 
 ### イベント
 
-すべての Signal Sciences イベントが [Datadog のイベントストリーム][9]に送信されます
+Signal Sciences で IP アドレスにフラグが立てられると、イベントが作成され、[Datadog イベントストリーム][9]に送信されます。
 
-### サービスのチェック
+### サービスチェック
 
 Signal Sciences インテグレーションには、サービスのチェック機能は含まれません。
 

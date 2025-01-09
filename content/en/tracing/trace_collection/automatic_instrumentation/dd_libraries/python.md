@@ -1,6 +1,5 @@
 ---
 title: Tracing Python Applications
-kind: documentation
 code_lang: python
 type: multi-code-lang
 code_lang_weight: 10
@@ -14,16 +13,16 @@ aliases:
     - /tracing/trace_collection/dd_libraries/python/
 further_reading:
     - link: 'https://github.com/DataDog/dd-trace-py'
-      tag: 'GitHub'
+      tag: "Source Code"
       text: 'Source code'
     - link: 'https://ddtrace.readthedocs.io/en/stable/'
-      tag: 'Pypi'
+      tag: 'External Site'
       text: 'API Docs'
     - link: 'tracing/glossary/'
       tag: 'Documentation'
       text: 'Explore your services, resources, and traces'
     - link: 'tracing/'
-      tag: 'Advanced Usage'
+      tag: 'Documentation'
       text: 'Advanced Usage'
 ---
 ## Compatibility requirements

@@ -16,7 +16,6 @@ further_reading:
 - link: /dashboards/functions/exclusion/
   tag: Documentation
   text: Fonctions d'exclusion
-kind: documentation
 title: Filtrage avancé
 ---
 

@@ -9,7 +9,6 @@ further_reading:
 - link: tracing/trace_collection/dd_libraries/nodejs
   tag: ドキュメント
   text: アプリケーションのインスツルメンテーション
-kind: documentation
 title: Node.js 互換性要件
 type: multi-code-lang
 ---
@@ -26,7 +25,7 @@ Datadog Node.js のトレーシングライブラリのバージョンは、[sem
 | 旧バージョンと互換性のない機能の変更点。 | 機能の追加                                                 | |
 | Node.js のバージョン、対応ライブラリ、その他の機能など、あらゆるもののサポートを打ち切る。     | Node.js のバージョン、対応ライブラリ、その他の機能など、あらゆるもののテスト済みのサポートを追加する。   |  |
 
-リリースに複数のカテゴリーがある場合、最も高いカテゴリーが選択されます。 [リリースノート][2]は、GitHub の各リリースに掲載されています。
+When a release has changes that could go in multiple semver categories, the highest one is chosen. [Release notes][2] are posted with each GitHub release.
 
 ### メンテナンス
 
@@ -73,102 +72,131 @@ APM は、プラグインシステムを使用することで追加設定なし�
 
 | モジュール                  | バージョン | サポートの種類    | 注                                      |
 | ----------------------- | -------- | --------------- | ------------------------------------------ |
-| [connect][6]           | `2 以降`    | 完全対応 |                                            |
-| [express][7]           | `4 以降`    | 完全対応 | Sails、Loopback、[その他][8]に対応   |
-| [fastify][9]           | `1 以降`    | 完全対応 |                                            |
+| [connect][6]           | `2 以降`    | 完全対応 |                                             |
+| [express][7]           | `4 以降`    | 完全対応 | Sails、Loopback、[その他][8]に対応     |
+| [fastify][9]           | `1 以降`    | 完全対応 |                                             |
 | [graphql][10]           | `0.10 以降` | 完全対応 | Apollo Server および express-graphql に対応 |
+| [graphql-yoga][65]      | `>=3.6.0`| 完全対応 | Supports graphql-yoga v3 executor          |
 | [gRPC][11]              | `>=1.13` | 完全対応 |                                            |
 | [hapi][12]              | `2 以降`    | 完全対応 | 対応 [@hapi/hapi] バージョン `17.9 以降`    |
 | [koa][13]               | `2 以降`    | 完全対応 |                                            |
 | [microgateway-core][14] | `2.1 以降`  | 完全対応 | Apigee Edge 用のコアライブラリ。[edgemicro][15] CLI への対応には [@datadog/cli][16] を使用した静的パッチが必要。 |
 | [moleculer][17]         | `>=0.14` | 完全対応 |                                            |
-| [next][18]              | `>=9.5`  | 完全対応 | CLI で使用する場合は、`NODE_OPTIONS='-r dd-trace/init'` が必要です。 <br><br>トレーサーは、次のNext.jsの機能をサポートしています：<ul><li>Standalone (`output: 'standalone'`)</li><li>App Router</li><li>Middleware: トレースされません。最適な体験のためには、トレーサーのバージョン `4.18.0` と `3.39.0` またはそれ以上を使用してください。</li></ul> |
+| [next][18]              | `>=9.5`  | 完全対応 | See note on Complex framework usage.<br /><br />The tracer supports the following Next.js features: <ul><li>Standalone (`output: 'standalone'`)</li><li>App Router</li><li>Middleware: Not traced, use tracer versions `4.18.0` and `3.39.0` or higher for best experience.</li></ul> |
 | [paperplane][19]        | `2.3 以降`  | 完全対応 | [serverless-mode][20] では非対応     |
 | [restify][21]           | `3 以降`    | 完全対応 |                                            |
 
-### ネイティブモジュールの互換性
+#### Complex framework usage
 
-| モジュール      | サポートの種類        | 注 |
+Some modern complex Node.js frameworks, such as Next.js and Nest.js, provide their own entry-point into an application. For example, instead of running `node app.js`, you may need to run `next start`. In these cases, the entry point is a file that ships in the framework package, not a local application file (`app.js`).
+
+Loading the Datadog tracer early in your application code isn't effective because the framework could have already loaded modules that should be instrumented.
+
+To load the tracer before the framework, use one of the following methods:
+
+Prefix all commands you run with an environment variable:
+
+```shell
+NODE_OPTIONS='--require dd-trace/init' npm start
+```
+
+Or, modify the `package.json` file if you typically start an application with npm or yarn run scripts:
+
+```plain
+    // existing command
+    "start": "next start",
+
+    // suggested command
+    "start": "node --require dd-trace/initialize ./node_modules/next start",
+    "start": "NODE_OPTIONS='--require dd-trace/initialize' ./node_modules/next start",
+```
+
+**Note**: The previous examples use Next.js, but the same approach applies to other frameworks with custom entry points, such as Nest.js. Adapt the commands to fit your specific framework and setup. Either command should work, but using `NODE_OPTIONS`  also applies to any child Node.js processes.
+
+
+### Native module compatibility
+
+| Module      | Support Type        | Notes |
 | ----------- | ------------------- | ------------------------------------------ |
 | [dns][22]   | 完全対応     |       |
 | [http][24]  | 完全対応     |       |
-| [https][25] | 完全対応     |       |
-| [http2][26] | 一部対応 | 現在、HTTP2 クライアントのみ対応。サーバーは非対応。 |
-| [net][27]   | 完全対応     |       |
+| [https][25] | Fully supported     |       |
+| [http2][26] | Partially supported | Only HTTP2 clients are currently supported and not servers. |
+| [net][27]   | Fully supported     |       |
 
-### データストアの互換性
+### Data store compatibility
 
-| モジュール                 | バージョン | サポートの種類    | 注                                            |
+| Module                 | Versions | Support Type    | Notes                                            |
 | ---------------------- | -------- | --------------- | ------------------------------------------------ |
-| [cassandra-driver][28] | `3 以降`    | 完全対応 |                                                  |
-| [couchbase][29]        | `2.4.2 以降` | 完全対応 |                                                  |
-| [elasticsearch][30]    | `10 以降`   | 完全対応 | バージョン 5 以降の `@elastic/elasticsearch` に対応 |
-| [ioredis][31]          | `2 以降`    | 完全対応 |                                                  |
-| [knex][32]             | `0.8 以降`  | 完全対応 | このインテグレーションはコンテキストの伝搬のみが目的 |
-| [mariadb][63]          | `3 以降`    | 完全対応 |                                                  |
-| [memcached][33]        | `2.2 以降`  | 完全対応 |                                                  |
-| [mongodb-core][34]     | `2 以降`    | 完全対応 | Mongoose に対応                                |
-| [mysql][35]            | `2 以降`    | 完全対応 |                                                  |
-| [mysql2][36]           | `1 以降`    | 完全対応 |                                                  |
-| [oracledb][37]         | `>=5`    | 完全対応 |                                                  |
-| [pg][38]               | `4 以降`    | 完全対応 | `pg` と共に使用した場合 `pg-native` に対応         |
-| [redis][39]            | `0.12 以降` | 完全対応 |                                                  |
-| [sharedb][40]          | `1 以降`    | 完全対応 |                                                  |
-| [tedious][41]          | `1 以降`    | 完全対応 | `mssql` および `sequelize` 用の SQL Server ドライバー    |
+| [cassandra-driver][28] | `>=3`    | Fully supported |                                                  |
+| [couchbase][29]        | `^2.4.2` | Fully supported |                                                  |
+| [elasticsearch][30]    | `>=10`   | Fully supported | Supports `@elastic/elasticsearch` versions `>=5` |
+| [ioredis][31]          | `>=2`    | Fully supported |                                                  |
+| [knex][32]             | `>=0.8`  | Fully supported | This integration is only for context propagation |
+| [mariadb][63]          | `>=3`    | Fully supported |                                                  |
+| [memcached][33]        | `>=2.2`  | Fully supported |                                                  |
+| [mongodb-core][34]     | `>=2`    | Fully supported | Supports Mongoose                                |
+| [mysql][35]            | `>=2`    | Fully supported |                                                  |
+| [mysql2][36]           | `>=1`    | Fully supported |                                                  |
+| [oracledb][37]         | `>=5`    | Fully supported |                                                  |
+| [pg][38]               | `>=4`    | Fully supported | Supports `pg-native` when used with `pg`         |
+| [redis][39]            | `>=0.12` | Fully supported |                                                  |
+| [sharedb][40]          | `>=1`    | Fully supported |                                                  |
+| [tedious][41]          | `>=1`    | Fully supported | SQL Server driver for `mssql` and `sequelize`    |
 
-### ワーカーの互換性
+### Worker compatibility
 
-| モジュール                     | バージョン | サポートの種類    | 注                                                  |
+| Module                     | Versions | Support Type    | Notes                                                  |
 | -------------------------- | -------- | --------------- | ------------------------------------------------------ |
-| [@google-cloud/pubsub][42] | `1.2 以降`  | 完全対応 |                                                        |
-| [amqp10][43]               | `3 以降`    | 完全対応 | AMQP 1.0 ブローカー (ActiveMQ、または Apache Qpid など) に対応 |
-| [amqplib][44]              | `0.5 以降`  | 完全対応 | AMQP 0.9 ブローカー (RabbitMQ、または Apache Qpid など) に対応 |
-| [generic-pool][45]         | `2 以降`    | 完全対応 |                                                        |
-| [kafkajs][46]         | `>=1.4`    | 完全対応 |                                                        |
-| [kafka-node][47]           |          | 間もなく対応     |                                                        |
-| [rhea][48]                 | `1 以降`    | 完全対応 |                                                        |
+| [@google-cloud/pubsub][42] | `>=1.2`  | Fully supported |                                                        |
+| [amqp10][43]               | `>=3`    | Fully supported | Supports AMQP 1.0 brokers (such as ActiveMQ, or Apache Qpid) |
+| [amqplib][44]              | `>=0.5`  | Fully supported | Supports AMQP 0.9 brokers (such as RabbitMQ, or Apache Qpid) |
+| [generic-pool][45]         | `>=2`    | Fully supported |                                                        |
+| [kafkajs][46]         | `>=1.4`    | Fully supported |                                                        |
+| [rhea][48]                 | `>=1`    | Fully supported |                                                        |
 
-### SDK の互換性
+### SDK compatibility
 
-| モジュール             | バージョン   | サポートの種類    | 注                                                  |
+| Module             | Versions   | Support Type    | Notes                                                  |
 | ------------------ | ---------- | --------------- | ------------------------------------------------------ |
-| [aws-sdk][49]      | `>=2.1.35` | 完全対応 | CloudWatch、DynamoDB、Kinesis、Redshift、S3、SNS、SQS、一般的なリクエスト。 |
+| [aws-sdk][49]      | `>=2.1.35` | Fully supported | CloudWatch, DynamoDB, Kinesis, Redshift, S3, SNS, SQS, and generic requests. |
+| [openai][64]       | `3.x`      | Fully supported |                                                        |
 
-### Promise ライブラリの互換性
+### Promise library compatibility
 
-| モジュール           | バージョン  | サポートの種類    |
+| Module           | Versions  | Support Type    |
 | ---------------- | --------- | --------------- |
-| [bluebird][50]   | `2 以降`     | 完全対応 |
-| [promise][51]    | `7 以降`     | 完全対応 |
-| [promise-js][52] | `0.0.3 以降` | 完全対応 |
-| [q][53]          | `1 以降`     | 完全対応 |
-| [when][54]       | `3 以降`     | 完全対応 |
+| [bluebird][50]   | `>=2`     | Fully supported |
+| [promise][51]    | `>=7`     | Fully supported |
+| [promise-js][52] | `>=0.0.3` | Fully supported |
+| [q][53]          | `>=1`     | Fully supported |
+| [when][54]       | `>=3`     | Fully supported |
 
-### ロガーの互換性
+### Logger compatibility
 
-| モジュール           | バージョン  | サポートの種類    |
+| Module           | Versions  | Support Type    |
 | ---------------- | --------- | --------------- |
-| [bunyan][55]     | `1 以降`     | 完全対応 |
-| [paperplane][56] | `2.3.2 以降` | 完全対応 |
-| [pino][57]       | `2 以降`     | 完全対応 |
-| [winston][58]    | `1 以降`     | 完全対応 |
+| [bunyan][55]     | `>=1`     | Fully supported |
+| [paperplane][56] | `>=2.3.2` | Fully supported |
+| [pino][57]       | `>=2`     | Fully supported |
+| [winston][58]    | `>=1`     | Fully supported |
 
-## 非対応のライブラリ
+## Unsupported libraries
 
 ### Fibers
 
-[`fibers`][59] は `async_hooks` と互換性がありません。これは Node.js の[モジュール][60]で、`dd-trace-js` が非同期コンテキストを追跡するために使用し、それによって正確なトレースを保証しています。`fibers` と `async_hooks` の間の相互作用は、予防できないクラッシュや未定義の挙動につながる可能性があります。そのため、`fibers` を直接、あるいは [Meteor][61] などのフレームワークを介して間接的に呼び出すアプリケーションで `dd-trace-js` を使用すると、不安定 (クラッシュ) や不正確なトレースが発生する可能性があります。
+[`fibers`][59] is incompatible with `async_hooks`, a Node.js [module][60] that is used by `dd-trace-js` to track asynchronous contexts thereby ensuring accurate tracing. Interactions between `fibers` and `async_hooks` may lead to unpreventable crashes and undefined behavior. So, the use of `dd-trace-js` with applications that invoke `fibers` directly or indirectly through frameworks such as [Meteor][61] may result in instability (crashes) or incorrect tracing.
 
-追加情報または議論については、[この github 問題にコメントを残す][62]か、[サポートにお問い合わせ][3]ください。
+For additional information or to discuss [leave a comment on this github issue][62] or [reach out to support][3] to discuss further.
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://semver.org/
 [2]: https://github.com/DataDog/dd-trace-js/releases
 [3]: /ja/help/
-[4]: https://nodejs.org/en/about/releases/
+[4]: https://github.com/nodejs/release#release-schedule
 [5]: https://datadog.github.io/dd-trace-js/#integrations
 [6]: https://github.com/senchalabs/connect
 [7]: https://expressjs.com
@@ -211,7 +239,6 @@ APM は、プラグインシステムを使用することで追加設定なし�
 [44]: https://github.com/squaremo/amqp.node
 [45]: https://github.com/coopernurse/node-pool
 [46]: https://github.com/tulios/kafkajs
-[47]: https://github.com/SOHU-Co/kafka-node
 [48]: https://github.com/amqp/rhea
 [49]: https://github.com/aws/aws-sdk-js
 [50]: https://github.com/petkaantonov/bluebird
@@ -228,3 +255,5 @@ APM は、プラグインシステムを使用することで追加設定なし�
 [61]: https://www.meteor.com/
 [62]: https://github.com/DataDog/dd-trace-js/issues/1229
 [63]: https://github.com/mariadb-corporation/mariadb-connector-nodejs
+[64]: https://github.com/openai/openai-node
+[65]: https://github.com/dotansimha/graphql-yoga

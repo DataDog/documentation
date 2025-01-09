@@ -1,7 +1,6 @@
 ---
 dependencies: []
 disable_edit: true
-kind: documentation
 title: パスステートメントを持つ例外を無視しない
 ---
 ## メタデータ

@@ -11,9 +11,13 @@ further_reading:
 - link: /integrations/pagerduty/
   tag: ドキュメント
   text: PagerDuty インテグレーションについて
-kind: ドキュメント
-title: サービスカタログとのインテグレーションを利用する
+title: Use Integrations with Service Catalog
 ---
+{{% site-region region="gov" %}}
+<div class="alert alert-warning">
+PagerDuty and OpsGenie integrations for Service Catalog are not supported in the {{< region-param key=dd_datacenter code="true" >}} site.
+</div>
+{{% /site-region %}}
 
 ## 概要
 
@@ -23,7 +27,7 @@ title: サービスカタログとのインテグレーションを利用する
 
 PagerDuty メタデータをサービスに追加することで、サービスカタログに、誰がオンコールしているか、そのサービスに対してアクティブな PagerDuty インシデントがあるかなどの情報を表示したり、リンクしたりすることができます。オンコールは 1 人のみ表示可能なため、Datadog はまずエスカレーションレベルで最初のユーザーを選択し、次にメールアドレスのアルファベット順で選択します。
 
-### Audit trail（監査証跡）
+### セットアップ
 
 [PagerDuty サービスディレクトリ][1]にあるどのサービスでも接続できます。サービスカタログの各サービスに対して、1 つの PagerDuty サービスをマッピングすることができます。
 
@@ -48,7 +52,7 @@ PagerDuty メタデータをサービスに追加することで、サービス�
 
 OpsGenie メタデータをサービスに追加することで、サービスカタログに、そのサービスに対して誰がオンコールしているかなどの情報を表示したり、リンクしたりすることができます。
 
-### Audit trail（監査証跡）
+### セットアップ
 
 1. まだの場合は、[Datadog OpsGenie インテグレーション][12]をセットアップします。
 2. OpsGenie の [API キー管理][13]ドキュメントに記載されているように、OpsGenie の API アクセスキーを取得します。この API キーは、**構成アクセス**および**読み取り**アクセス権を必要とします。
@@ -71,7 +75,8 @@ OpsGenie メタデータをサービスに追加することで、サービス�
 この手順が完了すると、サービスカタログのサービスの **Ownership** タブに、**On Call** 情報ボックスが表示されます。
 
 {{< img src="tracing/service_catalog/oncall_information.png" alt="サービスカタログの OpsGenie からの情報を表示する On Call 情報ボックス" style="width:85%;" >}}
-## IDE インテグレーション
+
+## IDE プラグイン
 
 Datadog では、サービス定義に [JSON スキーマ][6]を提供しており、[対応 IDE][7] でサービス定義を編集する際に、オートコンプリートや検証などの機能が提供されるようになっています。
 

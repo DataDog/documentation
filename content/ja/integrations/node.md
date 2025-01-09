@@ -5,6 +5,7 @@ categories:
 - languages
 - log collection
 - tracing
+custom_kind: integration
 dependencies: []
 description: Node.js サービスから DogStatsD または Datadog API 経由でカスタムメトリクスを送信。
 doc_link: https://docs.datadoghq.com/integrations/nodejs/
@@ -19,13 +20,12 @@ further_reading:
 git_integration_title: node
 has_logo: true
 integration_id: node
-integration_title: NodeJS
+integration_title: Node.js
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: '1.0'
 name: node
-public_title: Datadog-NodeJS インテグレーション
+public_title: Datadog-Node.js インテグレーション
 short_description: Node.js サービスから DogStatsD または Datadog API 経由でカスタムメトリクスを送信。
 version: '1.0'
 ---
@@ -35,7 +35,7 @@ version: '1.0'
 
 Node.js インテグレーションを利用して、Node.js アプリケーションのログ、トレース、カスタムメトリクスを収集および監視できます。
 
-## 計画と使用
+## セットアップ
 
 ### メトリクスの収集
 
@@ -81,9 +81,13 @@ _Agent v6.0 以上で使用可能_
 
 ログを Datadog に転送するには、[Node.js ログ収集][3]のセットアップに関するドキュメントを参照してください。
 
-## ヘルプ
+### プロファイルの収集
 
-ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
+[Node.js プロファイラを有効にするための][4]専用ドキュメントをご覧ください。
+
+## トラブルシューティング
+
+ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
 
 ## その他の参考資料
 
@@ -92,4 +96,5 @@ _Agent v6.0 以上で使用可能_
 [1]: https://docs.datadoghq.com/ja/metrics/custom_metrics/dogstatsd_metrics_submission/?code-lang=nodejs
 [2]: https://docs.datadoghq.com/ja/tracing/setup/nodejs/
 [3]: https://docs.datadoghq.com/ja/logs/log_collection/nodejs/
-[4]: https://docs.datadoghq.com/ja/help/
+[4]: https://docs.datadoghq.com/ja/profiler/enabling/nodejs/
+[5]: https://docs.datadoghq.com/ja/help/

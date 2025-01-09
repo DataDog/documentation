@@ -1,6 +1,5 @@
 ---
 title: Span Links
-kind: documentation
 further_reading:
     - link: 'https://opentelemetry.io/docs/concepts/signals/traces/#span-links'
       tag: 'Documentation'
@@ -13,19 +12,23 @@ further_reading:
       text: 'Custom Instrumentation with Datadog Libraries'
 ---
 
-<div class="alert alert-info">Span link support is in beta.</a></div>
+{{< img src="tracing/span_links/span_links_tab_2.png" alt="Span Links tab" style="width:90%;">}}
 
 ## Overview
 
 Span links are an [OpenTelemetry concept][5] and a part of the [OpenTelemetry Tracing API][2]. Datadog supports span links for:
 
 - Applications instrumented with [OpenTelemetry SDKs][6].
-- Applications instrumented with Datadog client libraries using the OpenTelemetry API.  
-  **Note**: This beta release only supports the [PHP client library][1].
+- Applications instrumented with [Datadog SDKs][9].
 
 Span links correlate one or more spans together that are causally related but don't have a typical parent-child relationship. These links may correlate spans within the same trace or across different traces.
 
 Span links help trace operations in distributed systems, where workflows often deviate from linear execution patterns. They are useful to trace the flow of operations in systems that execute requests in batches or process events asynchronously.
+
+Datadog supports both forward and backward span links, allowing users to visualize and navigate span relationships across traces in both directions.
+
+- Forward Links: A span can be linked to another span that occurs later in time, whether it belongs to the same trace or a different one. This enables you to navigate from earlier operations to subsequent ones across traces.
+- Backward Links: Similarly, a span can be linked to a span that occurred earlier in time, either within the same trace or across different traces. This allows you to trace back from later operations to previous ones.
 
 ## Common use cases
 
@@ -46,7 +49,7 @@ For example:
 If your application is instrumented with:
 
 - The OpenTelemetry SDK, follow the OpenTelemetry manual instrumentation documentation for your language. For example, [Create spans with links for Java][3].
-- The PHP Datadog library, follow the [Adding span links][1] examples.
+- The Datadog SDK, follow the [Adding span links][1] examples.
 
 ## Minimum support
 
@@ -56,14 +59,14 @@ Agent v7.52.0 or greater is required to generate span links using [Datadog traci
 
 | Language  | Minimum tracing library version |
 |-----------|---------------------------------|
-| C++/Proxy | Not yet supported                   |
+| C++/Proxy | Not yet supported               |
 | Go        | 1.61.0                          |
 | Java      | 1.26.0                          |
-| .NET      | Not yet supported                   |
+| .NET      | 2.53.0                          |
 | Node      | 5.3.0                           |
 | PHP       | 0.97.0                          |
 | Python    | 2.5.0                           |
-| Ruby      | Not yet supported                   |
+| Ruby      | 2.0.0                           |
 
 ## Viewing span links
 
@@ -81,4 +84,4 @@ You can view span links from the [Trace Explorer][4] in Datadog.
 [6]: https://opentelemetry.io/docs/specs/otel/trace/sdk/
 [7]: https://docs.datadoghq.com/tracing/trace_collection/automatic_instrumentation/dd_libraries/
 [8]: https://docs.datadoghq.com/opentelemetry/interoperability/otlp_ingest_in_the_agent
-
+[9]: /tracing/trace_collection/custom_instrumentation/?tab=datadogapi

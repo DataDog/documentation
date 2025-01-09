@@ -1,6 +1,5 @@
 ---
 title: Datadog Service Catalog
-kind: documentation
 aliases:
   - /tracing/faq/service_catalog/
   - /tracing/services/services_list/
@@ -11,11 +10,8 @@ further_reading:
   tag: "Documentation"
   text: "Registering Services with the Service Definition API"
 - link: "https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/service_definition_yaml"
-  tag: "Terraform"
+  tag: "External Site"
   text: "Create and manage service definitions with Terraform"
-- link: "/tracing/service_catalog/guides/understanding-service-configuration"
-  tag: "Guide"
-  text: "Understanding Your Service Configuration"
 - link: "/tracing/service_catalog/guides/upstream-downstream-dependencies"
   tag: "Guide"
   text: "See Upstream and Downstream Dependencies During an Active Incident"
@@ -37,6 +33,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/service-ownership-best-practices-datadog/"
   tag: "Blog"
   text: "Best practices for end-to-end service ownership with Datadog Service Catalog"
+- link: "https://www.datadoghq.com/blog/service-catalog-schema-v3/"
+  tag: "Blog"
+  text: "Improve developer experience and collaboration with Service Catalog schema version 3.0"
 algolia:
   tags: ['service catalog']
 ---
@@ -46,6 +45,9 @@ algolia:
 ## Overview
 
 Datadog [Service Catalog][1] provides a consolidated view of your services, combining ownership metadata, performance insights, security analysis, cost allocation, and much more. It makes it easy for organizations to achieve end-to-end service ownership at scale, get real-time performance insights, detect and address reliability and security risks, and manage application dependencies all in one place. 
+
+{{< callout url="https://www.datadoghq.com/product-preview/internal-developer-portal/" d_target="#signupModal" btn_hidden="false" header="Opt in to the preview for our Internal Developer Portal!" >}}
+{{< /callout >}}
 
 ### Use cases
 
@@ -82,8 +84,8 @@ Datadog [Service Catalog][1] provides a consolidated view of your services, comb
 ## Getting started
 
 {{< whatsnext desc="Explore what Service Catalog has to offer:" >}}
-    {{< nextlink href="tracing/service_catalog/browsing/" >}}Browsing the Service Catalog{{< /nextlink >}}
-    {{< nextlink href="tracing/service_catalog/investigating" >}}Investigating a service{{< /nextlink >}}
+    {{< nextlink href="/service_catalog/navigating/" >}}Navigating the Service Catalog{{< /nextlink >}}
+    {{< nextlink href="/service_catalog/investigating" >}}Investigating a service{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Role based access and permissions
@@ -108,6 +110,7 @@ The Service Catalog write permission allows a user to modify service catalog dat
 
 The permission is enabled by default in the **Datadog Admin Role** and **Datadog Standard Role**.
 
+{{< site-region region="gov" >}}
 ## Services types
 
 Every monitored service is associated with a type. Datadog automatically determines this type based on the `span.type` attribute attached to incoming spans data. The type specifies the name of the application or framework that the Datadog Agent is integrating with.
@@ -123,19 +126,29 @@ The type of the service can be one of:
 *  Web
 
 Some integrations alias to types. For example, Postgres, MySQL, and Cassandra map to the type "DB". Redis and Memcache integrations map to the type "Cache".
+{{< /site-region >}}
+{{< site-region region="ap1,us3,us5,eu,us" >}}
+## Filtering service catalog entries by component
 
-### Updating service type and language
-With [Service Catalog metadata schema 2.2][5], you can specify the type and language for user-defined services or overwrite the auto-detected type and language for instrumented services. Correctly label the service type and language to help other teams further understand what your services do and how to interact with them. 
+Every entry showing up in the Service Catalog is categorized as a component type:
 
-## Changing service color
+*  Services
+*  Datastores
+*  Queues
+*  RUM Apps
+*  External providers
 
-Service color is used in trace visualizations. Click the service type icon to change it.
+{{< img src="tracing/service_catalog/component_selector.png" alt="Service Catalog component selector" style="width:30%;" >}}
 
-{{< img src="tracing/service_catalog/change_service_color.png" alt="Click the service icon to select a different icon color." style="width:80%;" >}}
+Datadog populates Service Catalog entries and determines their associated component type based on collected span attributes for APM ([peer tags][10]), but also based other collected telemetry types (USM, DSM, RUM, etc...).
+
+**Note**: The component supersedes the `type` filter (derived from the `span.type` span attribute), as it detects more reliably and more granularly the different entity types. For instance, you can filter by datastore technology using the `datastore type` facet.
+
+[10]: /tracing/services/inferred_services#peer-tags
+{{< /site-region >}}
 
 ## Data retention
 The services and resources statistics, and span summaries on the **Service List** and **Service Page** are retained for up to 30 days. For customized queries on APM trace metrics, use Metric Explorer. [Learn more about data retention for APM][4].
-
 
 ## Further reading
 

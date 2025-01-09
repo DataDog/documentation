@@ -1,4 +1,7 @@
 ---
+algolia:
+  tags:
+  - rbac
 aliases:
 - /es/guides/rbac
 - /es/account_management/rbac/role_api
@@ -22,7 +25,6 @@ further_reading:
   tag: Blog
   text: Incrementa el cumplimiento, la gobernabilidad y la transparencia en todos
     tus equipos con Datadog Audit Trail
-kind: documentación
 title: Control de acceso
 ---
 
@@ -62,14 +64,14 @@ La función de roles personalizados ofrece a tu organización la posibilidad de 
 
 ### Habilitar roles personalizados
 
-1. Ve a [Organization Settings (parámetros de organización)][9].
+1. Ve a [Parámetros de organización][9].
 2. En el lado izquierdo de la página, selecciona **Roles**.
 3. Haz clic en el engranaje de la esquina superior derecha. Aparecerá la ventana emergente de Roles personalizados.
 4. En la ventana emergente de Roles personalizados, haz clic en **Enable** (Activar).
 
 {{< img src="account_management/rbac/enable_custom_roles.png" alt="Ventana emergente de Roles personalizados con el botón Activar" style="width:90%;">}}
 
-Como alternativa, al realizar una invocación POST a [Create Role API endpoint (crear endpoint  de rol de API][10] se habilitan automáticamente los roles personalizados para tu organización.
+Como alternativa, al realizar una invocación POST a [Create Role API endpoint (crear endpoint  de rol de API)][10] se habilitan automáticamente los roles personalizados para tu organización.
 
 ### Crear un rol personalizado
 
@@ -193,7 +195,7 @@ Al crear o actualizar un rol en el sitio Datadog, utiliza una plantilla de roles
 
 {{< img src="account_management/rbac/role_templates.png" alt="Menú desplegable de plantillas de rol con el rol de administrador de facturación de Datadog seleccionado" style="width:90%;">}}
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 

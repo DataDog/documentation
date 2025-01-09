@@ -1,5 +1,6 @@
 ---
 aliases:
+- /ja/tracing/search_syntax/
 - /ja/tracing/trace_search_analytics/
 - /ja/tracing/trace_search/
 - /ja/tracing/search
@@ -23,20 +24,19 @@ further_reading:
 - link: /tracing/trace_explorer/trace_view/
   tag: ドキュメント
   text: Datadog トレースの読み方を理解する
-- link: /tracing/services/services_list/
+- link: /tracing/service_catalog/
   tag: ドキュメント
-  text: Datadog に報告するサービスの一覧
+  text: Datadog に報告するサービスの発見とカタログ化
 - link: /tracing/services/service_page/
   tag: ドキュメント
   text: Datadog のサービスについて
 - link: /tracing/services/resource_page/
   tag: ドキュメント
   text: リソースのパフォーマンスとトレースの詳細
-kind: documentation
 title: 検索構文
 ---
 
-## 検索バー
+## 検索クエリ
 
 すべての検索パラメーターは、ページの URL に含まれているので、ビューを共有するのに便利です。
 
@@ -46,9 +46,8 @@ title: 検索構文
 
 *条件*には 2 種類あります。
 
-* [**ファセット**](#facet-search)
-
-* [**タグ**](#tags-search)
+* **Span タグ**: スパンに関連するコンテキスト情報を拡張するためのタグです。例えば、サービスが稼働しているインフラストラクチャーを示すホストやコンテナタグなどが含まれます。
+* **Span 属性**: アプリケーション内で自動または手動のインスツルメントによって収集されたスパンの内容を指します。
 
 複合クエリで複数の*条件*を組み合わせるには、以下のブール演算子のいずれかを使用します。
 
@@ -58,17 +57,29 @@ title: 検索構文
 | `OR`         | **和**: いずれかの条件を含むイベントが選択されます。                                            | authentication OR password   |
 | `-`          | **排他**: 後続の条件はイベントに含まれません。                                                  | authentication AND -password |
 
-### ファセット検索
+### Attribute 検索
 
-特定の[ファセット](#facets)を検索するには、[まずそれをファセットとして追加](#create-a-facet)し、次に `@` を追加してファセット検索を指定します。
+特定のスパン属性を検索するには、属性キーの先頭に `@` を付けてください。
 
-たとえば、ファセット名が **url** で、**url** の値 *www.datadoghq.com* で絞り込む場合は、次のように入力します。
+例えば、以下の属性を持つスパンにアクセスしたい場合は、次のクエリを使用します:
 
-`@url:www.datadoghq.com`
+`@git.commit.sha:12345`
+
+```json
+  "git": {
+    "commit": {
+      "sha": "12345"
+    },
+    "repository": {
+      "id": "github.com/datadog/datadog"
+    }
+  }
+```
+**注:** [予約属性][17] (`env`, `operation_name`, `resource_name`, `service`, `status`, `span_id`, `timestamp`, `trace_id`, `type`, `link`) については、属性キーの先頭に `@` を付ける必要はありません。
 
 ### タグ検索
 
-トレースは、タグを生成するホストと[インテグレーション][1]からタグを引き継ぎます。これらも、ファセットとして検索で使用できます。
+スパンは、それらを生成するホストやインテグレーションからタグを継承します。これらのタグは検索クエリで利用可能です。
 
 | クエリ                                                          | 一致                                                                       |
 |:---------------------------------------------------------------|:----------------------------------------------------------------------------|
@@ -76,9 +87,16 @@ title: 検索構文
 | `(service:srvA OR service:srvB)` または `(service:(srvA OR srvB))` | タグ `#service:srvA` または `#service:srvB` を含むすべてのトレース。            |
 | `("env:prod" AND -"version:beta")`                             | `#env:prod` を含み、`#version:beta` を含まないすべてのトレース |
 
-タグが[タグのベストプラクティス][2]に従わず、`key:value` 構文も使用していない場合は、次の検索クエリを使用します。
+もしタグが[タグ運用ベストプラクティス][2]に従っていない場合、`key:value` 形式は使用せず、以下のような検索クエリを利用してください:
 
 * `tags:<MY_TAG>`
+
+ベストプラクティスに従っていないタグの例:
+
+<img width="867" alt="tagging-not-recommended" src="https://github.com/user-attachments/assets/4a3d5246-b6e7-4ab2-908a-bc2137062573">
+
+この特定のタグを検索するクエリ:
+`tags:"auto-discovery.cluster-autoscaler.k8s.io/daffy"`
 
 ### ワイルドカード
 
@@ -123,42 +141,67 @@ title: 検索構文
 
 保存された検索を削除するには、Trace search ドロップダウンメニューの下にあるごみ箱のアイコンをクリックします。
 
+### サービスおよびエンティティの検索
+
+{{< site-region region="ap1,us3,us5,eu,us" >}}
+サービスを検索するには `service` 属性を使用します。
+データベース、キュー、サードパーティプロバイダなど、他の[エンティティタイプ][20]を検索するには、[ピア属性][21]を使用します。これらは、APM でインスツルメントされていない依存関係を記述するために Datadog が用いる属性です。
+例えば、Postgres データベースの `users` テーブルへの呼び出しを表すスパンを検索するには、次のクエリを使用します:
+`@peer.db.name:users @peer.db.system:postgres`
+
+**注**: [グローバルサービスネーミング][22]へ移行し、`DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAME_ENABLED=true` を設定している場合、スパンの `service` タグはそのスパンを**発行している**サービスを表します。
+
+[20]: /ja/tracing/services/inferred_services
+[21]: /ja/tracing/services/inferred_services#peer-tags
+[22]: /ja/tracing/services/inferred_services#migrate-to-global-default-service-naming
+{{< /site-region >}}
+
 ## タイムレンジ
 
 タイムレンジを使用すると、特定の期間内のトレースを表示できます。タイムレンジをすばやく変更するには、プリセットされたレンジをドロップダウンメニューから選択します（または、[カスタムタイムフレームを入力します][3]):
 
 {{< img src="tracing/app_analytics/search/time_frame2.png" style="width:50%;" alt="タイムフレームを選択" >}}
 
-## トレースストリーム
+## Span テーブル
 
-トレースストリームは、選択されたコンテキストに一致するトレースのリストです。コンテキストは、[検索バー](#search-bar)のフィルターと[タイムレンジ](#time-range)で定義されます。
+Span テーブルは、選択されたコンテキスト ([検索バー](#search-bar)フィルタおよび[時間範囲](#time-range)で定義) に一致するスパンの一覧を表示します。
+
+{{< site-region region="ap1,us3,us5,eu,us" >}}
+### Service 列
+
+デフォルトでは、Service 列はスパンの `service` 予約属性を表示します。
+
+{{< img src="tracing/app_analytics/search/span_table_service.png" style="width:60%;" alt="スパンテーブルのサービス列" >}}
+
+スパンがインスツルメント済みサービスから推論されたサービスへのクライアント呼び出しを表す場合、Service 列には以下が表示されます。
+- **service**: `service` 予約属性で識別されるサービス
+- **[inferred service][4]**: ベースサービスから呼び出される推論先エンティティ名で、[ピア属性][5]のいずれかで識別されます。
+
+{{< img src="tracing/app_analytics/search/span_table_inferred_service.png" style="width:90%;" alt="推論サービスを含むスパンテーブルのサービス列" >}}
+
+サービス名がベースサービス名からオーバーライドされている場合、Service 列には以下が表示されます:
+- **[base service][2]**: `@base_service` 属性によって識別されるスパン発行元のサービス
+- **[service override][3]**: Datadogインテグレーションによって自動設定、またはプログラマティックAPIによって変更されたベースサービス名とは異なるサービス名で、`service` 予約属性によって識別されます。
+
+{{< img src="tracing/app_analytics/search/span_table_service_override.png" style="width:80%;" alt="サービスオーバーライドを含むスパンテーブルのサービス列" >}}
+
+[2]: /ja/tracing/guide/service_overrides#base-service
+[3]: /ja/tracing/guide/service_overrides
+[4]: /ja/tracing/services/inferred_services
+[5]: /ja/tracing/services/inferred_services#peer-tags
+{{< /site-region >}}
 
 ### 完全なトレースの表示
 
-トレースをクリックして、詳細を表示します。
+任意のスパンをクリックすると、関連するトレースの詳細を確認できます。
 
 {{< img src="tracing/app_analytics/search/trace_in_tracestream.png" alt="トレースストリームのトレース" style="width:80%;">}}
 
 ### 列
 
-リストにトレースの詳細を追加するには、**Options** ボタンをクリックして、表示するファセットを選択します。
+リストに他の[スパンタグや属性][23]を列として追加するには、**Options** ボタンをクリックして、追加したい任意のディメンションを選択します。
 
 {{< img src="tracing/app_analytics/search/trace_list_with_column.png" alt="列を含むトレースリスト" style="width:80%;">}}
-
-### 複数行表示
-
-{{< img src="tracing/app_analytics/search/multi_line_display.png" alt="複数行表示" style="width:30%;">}}
-
-トレースの表示行数を 1 行、3 行、10 行 から選択します。3 行と 10 行で表示すると、`error.stack` 属性に関する情報をより多く得ることができます。
-
-* 1 行表示の場合
-{{< img src="tracing/app_analytics/search/1_multi_line.png" alt="1 行の複数行表示" style="width:80%;">}}
-
-* 3 行表示の場合
-{{< img src="tracing/app_analytics/search/3_multi_line.png" alt="2 行の複数行表示" style="width:80%;">}}
-
-* 10 行表示の場合
-{{< img src="tracing/app_analytics/search/10_multi_line.png" alt="10 行の複数行表示" style="width:80%;">}}
 
 ## ファセット
 
@@ -168,9 +211,11 @@ title: 検索構文
 
 {{< img src="tracing/app_analytics/search/facets_demo.png" alt="ファセットデモ" style="width:80%;">}}
 
-### 定量 (メジャー)
+### メジャー
 
-**必要に応じてメジャーを使用します。**
+メジャー (Measures) は定量的な値に対応する特定のファセットです。
+
+次が必要な場合は、メジャーを使用します。
 * 複数のトレースから値を集計する。たとえば、Cassandra の行数にメジャーを作成し、リクエストされたファイルサイズの合計ごとに最上位の参照元または P95 を表示します。
 * ショッピングカートの値が $1000 を超えるサービスの最もレイテンシーの高いものを数値的に計算します。
 * 連続する値をフィルタリングします。たとえば、ビデオストリームの各ペイロードチャンクのサイズ（バイト単位）。
@@ -191,46 +236,13 @@ title: 検索構文
 
 {{< img src="tracing/app_analytics/search/create_facet.png" style="width:50%;" alt="ファセットの作成" style="width:50%;">}}
 
-これで、この属性の値が**すべての新しいトレースに**格納され、[検索バー](#search-bar)、[ファセットパネル](#facet-panel)、およびトレースグラフクエリで使用できるようになります。
+新しいファセットを作成すると、フィルタリングや基本分析のために、そのファセットがファセットパネルで利用可能になります。
 
 ### ファセットパネル
 
 ファセットを使用し、トレースをフィルタリングします。検索バーと URL には、選択内容が自動的に反映されます。
 
 {{< img src="tracing/app_analytics/search/facet_panel.png" alt="ファセットパネル" style="width:30%;">}}
-
-## Analytics の概要
-
-[Analytics][4] を使用して、アプリケーション性能メトリクスや [Indexed Span][5] をタグで絞り込むことができます。これにより、サービスを流れるウェブリクエストを詳細に調べることができます。
-
-Analytics は、15 分間 (ローリングウィンドウ) で収集されたデータを 100% 有するすべての APM [サービス][6]に対して自動的に有効化されます。カスタム [Retention Filter][7] およびレガシー版の App Analytics でインデックス化されたスパンは Analytics で 15 日間利用可能です。
-
-データベースやキャッシュレイヤーなどのダウンストリームのサービスは、トレースを生成しないため利用可能なサービス一覧には含まれませんが、それらの情報は呼び出し側の上位レベルのサービスから取得されます。
-
-## Analytics クエリ
-
-クエリを使用して、Analytics に表示させるデータを制御できます。
-
-1. 分析する `Duration` メトリクスまたは [ファセット][8]を選択します。`Duration` メトリクスを選択した場合は、集計関数を選択します。ファセットを選択した場合は、ユニーク数が表示されます。
-
-    {{< img src="tracing/app_analytics/analytics/choose_measure_facet.png" alt="メジャーファセットを選択" style="width:50%;">}}
-
-2. `Duration` メトリクスには集計関数を選択します。
-
-    {{< img src="tracing/app_analytics/analytics/agg_function.png" alt="集計関数" style="width:50%;">}}
-
-3. タグまたはファセットを使用して、分析を分割します。
-
-    {{< img src="tracing/app_analytics/analytics/split_by.png" alt="分割条件" style="width:50%;">}}
-
-4. 選択したファセットに応じて、上位 (**top**) X 個と下位 (**bottom**) X 個のどちらの値を表示するかを選択します。
-
-    {{< img src="tracing/app_analytics/analytics/top_bottom_button.png" alt="上位下位ボタン" style="width:20%;">}}
-
-5. 分析タイムステップを選択します。
- グローバルタイムフレームを変更すると、使用可能なタイムステップ値のリストも変更されます。
-
-    {{< img src="tracing/app_analytics/analytics/timesteps.png" alt="タイムステップ" style="width:30%;">}}
 
 ## 視覚化
 
@@ -261,7 +273,7 @@ Analytics は、15 分間 (ローリングウィンドウ) で収集されたデ
 選択した[メジャー][9] (リストで選択した最初のメジャー) に基づいてファセットから上位の値を可視化し、この上位のリストに現れる要素に対して他のメジャーの値を表示します。検索クエリを更新したり、いずれかのディメンションに対応するログを調査することができます。
 
 * 複数のディメンションがある場合、上位の値は最初のディメンションに基づき決定されます。その後最初のディメンション内の上位値内の 2 番めのディメンション、次に 2 番目のディメンション内の上位値内の 3 番めのディメンションに基づき決定されます。
-* メジャーが複数ある場合、最初のメジャーに応じて上位または下位リストが決定されます。
+* メジャーが複数ある場合、最初のメジャーに基づいて上位または下位リストが決定されます。 
 * サブセット（上位または下位）のみが表示されるため、小計がグループ内の実際の合計値とは異なる場合があります。このディメンジョンに対する、値が null または空欄のイベントは、サブグループとして表示されません。
 
 **注**: 単一のメジャーと単一のディメンジョンで使用されるテーブルの可視化は、表示が異なりますが、上位リストと同じです。
@@ -280,18 +292,15 @@ Analytics は、15 分間 (ローリングウィンドウ) で収集されたデ
 
 {{< img src="tracing/app_analytics/analytics/export_button.png" alt="分析をエクスポートボタン" style="width:40%;">}}
 
-Analyticsをエクスポート
+クエリのエクスポート先:
 
-* 新しい[APMモニター][11]宛
-* 既存の[タイムボード][12]宛。この機能はベータ版です。組織内でこれを有効にするには、[Datadogのサポートチームまでお問い合わせ][13]ください。
+* [モニター][11]
+* [ダッシュボード][12]
+* [ノートブック][18]
 
-**注:** Analytics は [Indexed Span][14] ベースでのみエクスポートできます。
+また、このクエリから新たなメトリクスを生成することも可能です。
 
-## ダッシュボード内のトレース
-
-トレース検索から [Analytics][4] をエクスポートするか、[ダッシュボード][15]でメトリクスおよびログと共に直接構築します。 
-
-[時系列ウィジェットに関する詳細][16]
+**注**: ダッシュボードおよびノートブック内の APM クエリは、すべての[インデックス化されたスパン][14]に基づきます。一方、モニター内の APM クエリは、[カスタム保持フィルター][19]でインデックス化されたスパンにのみ基づきます。
 
 ## その他の参考資料
 
@@ -308,8 +317,12 @@ Analyticsをエクスポート
 [9]: /ja/tracing/trace_search_and_analytics/query_syntax/#measures
 [10]: /ja/tracing/glossary/#trace
 [11]: /ja/monitors/types/apm/
-[12]: /ja/dashboards/#timeboards
+[12]: /ja/dashboards/#get-started
 [13]: /ja/help/
 [14]: /ja/tracing/glossary/#indexed-span
 [15]: /ja/dashboards/
 [16]: /ja/dashboards/widgets/timeseries/
+[17]: /ja/monitors/notify/variables/?tab=is_alert#reserved-attributes
+[18]: /ja/notebooks/
+[19]: /ja/tracing/trace_pipeline/trace_retention/#retention-filters
+[23]: /ja/tracing/trace_explorer/span_tags_attributes

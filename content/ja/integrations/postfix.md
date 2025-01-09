@@ -5,6 +5,7 @@ assets:
   dashboards:
     postfix: assets/dashboards/postfix_dashboard.json
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -18,9 +19,8 @@ assets:
     - sendmail -bd
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 66
     source_type_name: Postfix
-  logs:
-    source: postfix
   saved_views:
     postfix_processes: assets/saved_views/postfix_processes.json
 author:
@@ -30,6 +30,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - log collection
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/postfix/README.md
 display_on_public_website: true
@@ -37,9 +38,8 @@ draft: false
 git_integration_title: postfix
 integration_id: postfix
 integration_title: Postfix
-integration_version: 1.13.1
+integration_version: 3.0.0
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: postfix
 public_title: Postfix
@@ -53,14 +53,19 @@ tile:
   - Category::ログの収集
   - Supported OS::Linux
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: すべての Postfix キューのサイズを監視する。
   media: []
   overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/monitor-postfix-queues
   support: README.md#Support
   title: Postfix
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ![Postfix Graph][1]
@@ -75,7 +80,7 @@ tile:
 
 Postfix チェックは [Datadog Agent][2] パッケージに含まれています。Postfix サーバーに追加でインストールする必要はありません。
 
-### コンフィギュレーション
+### 構成
 
 このチェックは、`find` コマンドを使用するように構成できます。このコマンドを使用するには、`incoming`、`active`、および `deferred` メールキュー内のメッセージカウントを取得するために、`dd-agent` への `sudo` アクセスを許可する必要があります。
 
@@ -184,7 +189,7 @@ Postfix チェックは [Datadog Agent][2] パッケージに含まれていま�
 
 3. [Agent を再起動します][5]。
 
-#### ログの収集
+#### ログ収集
 
 _Agent バージョン 6.0 以降で利用可能_
 
@@ -228,7 +233,7 @@ Postfix は syslog デーモンにログを送信し、そのログがファイ�
 
 Postfix チェックには、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 
 Postfix チェックには、サービスのチェック機能は含まれません。
 

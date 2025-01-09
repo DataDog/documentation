@@ -5,6 +5,7 @@ assets:
   dashboards:
     riakcs: assets/dashboards/riakcs_dashboard.json
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -17,6 +18,7 @@ assets:
     - riak-cs start
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 110
     source_type_name: RiakCS
   saved_views:
     riak-cs_processes: assets/saved_views/riak-cs_processes.json
@@ -26,7 +28,8 @@ author:
   sales_email: info@datadoghq.com
   support_email: help@datadoghq.com
 categories:
-- data store
+- data stores
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/riakcs/README.md
 display_on_public_website: true
@@ -34,9 +37,8 @@ draft: false
 git_integration_title: riakcs
 integration_id: riak-cs
 integration_title: Riak CS
-integration_version: 2.10.1
+integration_version: 4.0.0
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: riakcs
 public_title: Riak CS
@@ -51,15 +53,20 @@ tile:
   - Supported OS::Linux
   - Supported OS::macOS
   - Supported OS::Windows
-  - Category::データストア
+  - Category::Data Stores
+  - Offering::Integration
   configuration: README.md#Setup
   description: GET、PUT、DELETE などの速度と平均レイテンシーを追跡。
   media: []
   overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/monitor-riak-cs-performance-and-availability
   support: README.md#Support
   title: Riak CS
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ![RiakCS ダッシュボード][1]
@@ -77,7 +84,7 @@ Datadog で RiakCS のメトリクスをキャプチャして、以下のこと�
 
 RiakCS チェックは [Datadog Agent][2] パッケージに含まれています。RiakCS ノードに追加でインストールする必要はありません。
 
-### コンフィギュレーション
+### 構成
 
 1. [Agent のコンフィギュレーションディレクトリ][3]のルートにある `conf.d/` フォルダーの `riakcs.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル riakcs.d/conf.yaml][4] を参照してください。
 
@@ -123,7 +130,7 @@ RiakCS チェックは [Datadog Agent][2] パッケージに含まれていま�
 
 RiakCS チェックには、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 {{< get-service-checks-from-git "riakcs" >}}
 
 

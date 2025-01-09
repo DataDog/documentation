@@ -15,6 +15,7 @@ assets:
       prefix: mailgun.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 623
     source_type_name: Mailgun
 author:
   homepage: https://www.datadoghq.com
@@ -22,9 +23,9 @@ author:
   sales_email: info@datadoghq.com (日本語対応)
   support_email: help@datadoghq.com
 categories:
-- web
 - ログの収集
-- メトリクス
+- モニター
+custom_kind: integration
 dependencies: []
 description: Datadog で Mailgun のメール配信とエンゲージメントの統計情報を監視します。
 display_on_public_website: true
@@ -36,7 +37,6 @@ integration_id: mailgun
 integration_title: Mailgun
 integration_version: ''
 is_public: true
-kind: integration
 manifest_version: 2.0.0
 name: mailgun
 public_title: Mailgun
@@ -46,9 +46,9 @@ team: web-integrations
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Category::Web
   - Category::Log Collection
   - Category::Metrics
+  - Offering::Integration
   configuration: README.md#Setup
   description: 開発者のメール送信、追跡、受信を支援するクラウドベースのメールサービス
   media: []
@@ -58,9 +58,17 @@ tile:
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
 ## 概要
 
-Mailgun のメール配信およびエンゲージメントのメトリクスとログを収集します。
+Mailgun is an API-based email delivery platform that allows you to:
+
+- Build and manage large-scale email marketing applications.
+- トランザクションメッセージを送信し、追跡する。
+- 無効なメールアドレスをリストから削除する。
+- 配信率を向上させ、コンバージョン率を高める。
+
+Datadog とインテグレーションすることで、メール配信やエンゲージメントのメトリクスやログを収集し、Mailgun サービスのパフォーマンスを追跡することができます。
 
 ## セットアップ
 
@@ -108,7 +116,7 @@ Mailgun にサインアップすると、プライマリアカウントの API �
 {{< get-metrics-from-git "mailgun" >}}
 
 
-### ログ管理
+### Logs
 
 Mailgun のイベントは、ソース `mailgun` の下にログとして表示されます。
 
@@ -116,7 +124,7 @@ Mailgun のイベントは、ソース `mailgun` の下にログとして表示�
 
 Mailgun インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 
 Mailgun インテグレーションには、サービスのチェック機能は含まれません。
 

@@ -23,7 +23,7 @@ guid: 884d1895-6791-487c-ac8e-7ccaad45db0b
 integration_id: vertica
 integration_title: Vertica
 is_public: true
-kind: integration
+custom_kind: integration
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0
 metric_prefix: vertica.

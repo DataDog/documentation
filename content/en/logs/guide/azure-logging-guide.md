@@ -1,25 +1,29 @@
 ---
 title: Send Azure Logs to Datadog
-kind: documentation
 further_reading:
 - link: "/logs/explorer/"
   tag: "Documentation"
   text: "Learn how to explore your logs"
+- link: "/logs/guide/reduce_data_transfer_fees"
+  tag: "Guide"
+  text: "How to send logs to Datadog while reducing data transfer fees"
 ---
 
 ## Overview
 
 Use this guide to set up logging from your Azure subscriptions to Datadog.
 
-Datadog recommends sending logs from Azure to Datadog with the Agent or DaemonSet. For some resources it may not be possible. In these cases, you can create a log forwarding pipeline using an Azure Event Hub to collect [Azure Platform Logs][2]. For resources that cannot stream Azure Platform Logs to an Event Hub, you can use the Blob Storage forwarding option.
+Datadog recommends using the Agent or DaemonSet to send logs from Azure. If direct streaming isn't possible, create a log forwarding pipeline using an Azure Event Hub to collect [Azure Platform Logs][2]. For resources that cannot stream to an Event Hub, use the Blob Storage forwarding option. To collect logs from Azure Log Analytics workspaces, use the Azure Event Hub process.
 
-**All sites**: All Datadog sites can use the steps on this page to send Azure logs to Datadog.
+Follow these steps to send Azure logs to any Datadog site.
 
-**US3**: If your organization is on the Datadog US3 site, you can use the Azure Native integration to simplify configuration for your Azure log forwarding. Datadog recommends using this method when possible. Configuration is done through the [Datadog resource in Azure][5]. This replaces the Azure Event Hub process for log forwarding. See the [Azure Native Logging Guide][4] for more information.
+**US3**: Organizations on the Datadog US3 site can simplify Azure log forwarding using the Azure Native integration. This method is recommended and is configured through the [Datadog resource in Azure][5], replacing the Azure Event Hub process. See the [Azure Native Logging Guide][4] for more details.
+
+## Setup
 
 {{< tabs >}}
 
-{{% tab "Automated Installation" %}}
+{{% tab "Automated installation" %}}
 
 To get started, click the button below and fill in the form on Azure Portal. The Azure resources required to get activity logs streaming into your Datadog account will be deployed for you.
 
@@ -32,25 +36,17 @@ Alternatively, Datadog provides automated scripts you can use for sending Azure 
 Follow these steps to run the script that creates and configures the Azure resources required to stream activity logs into your Datadog account. These resources include activity log diagnostic settings, Azure Functions, Event Hub namespaces, and Event Hubs.
 
 1. In the Azure portal, navigate to your **Cloud Shell**.
-
-{{< img src="integrations/azure/azure_cloud_shell.png" alt="azure cloud shell" popup="true" style="width:100%">}}
-
-2. Run the command below to download the automation script into your Cloud Shell environment. 
+  {{< img src="integrations/azure/azure_cloud_shell.png" alt="azure cloud shell" popup="true" style="width:100%">}}
+2. Run the command below to download the automation script into your Cloud Shell environment. You can also [view the contents of the script][100].
 
 {{< code-block lang="powershell" filename="Activity Logs Step 1" >}}
-
 (New-Object System.Net.WebClient).DownloadFile("https://raw.githubusercontent.com/DataDog/datadog-serverless-functions/master/azure/eventhub_log_forwarder/activity_logs_deploy.ps1", "activity_logs_deploy.ps1")
-
 {{< /code-block >}}
 
-You can also [view the contents of the script](https://github.com/DataDog/datadog-serverless-functions/blob/master/azure/eventhub_log_forwarder/activity_logs_deploy.ps1).
-
-3. Invoke the script by running the command below, while replacing **`<API_KEY>`**, with your [Datadog API token](https://app.datadoghq.com/organization-settings/api-keys), and **`<SUBSCRIPTION_ID>`**, with your Azure Subscription ID. Add [Optional Parameters](#optional-parameters) to configure your deployment.
+3. Invoke the script by running the command below, while replacing **`<API_KEY>`**, with your [Datadog API token][101], and **`<SUBSCRIPTION_ID>`**, with your Azure Subscription ID. Add [Optional Parameters](#optional-parameters) to configure your deployment.
 
 {{< code-block lang="powershell" filename="Activity Logs Step 2" >}}
-
 ./activity_logs_deploy.ps1 -ApiKey <API_KEY> -SubscriptionId <SUBSCRIPTION_ID> 
-
 {{< /code-block >}}
 
 ### Azure platform logs
@@ -58,25 +54,21 @@ You can also [view the contents of the script](https://github.com/DataDog/datado
 To send Azure platform logs (including resource logs), you can deploy an Event Hub and log forwarder function pair. 
 After deploying, create diagnostic settings for each of the log sources to stream logs to Datadog.
 
+**Note**: Resources can only stream to Event Hubs in the same Azure region.
+
 1. In the Azure portal, navigate to your **Cloud Shell**.
 
-2. Run the Powershell command below to download the automation script into your Cloud Shell environment. 
+2. Run the PowerShell command below to download the automation script into your Cloud Shell environment. You can also [view the contents of the script][102].
 
-   {{< code-block lang="powershell" filename="Platform Logs Step 1" >}}
+{{< code-block lang="powershell" filename="Platform Logs Step 1" >}}
+(New-Object System.Net.WebClient).DownloadFile("https://raw.githubusercontent.com/DataDog/datadog-serverless-functions/master/azure/eventhub_log_forwarder/resource_deploy.ps1", "resource_deploy.ps1")
+{{< /code-block >}}
 
-   (New-Object System.Net.WebClient).DownloadFile("https://raw.githubusercontent.com/DataDog/datadog-serverless-functions/master/azure/eventhub_log_forwarder/resource_deploy.ps1", "resource_deploy.ps1")
+3. Invoke the script by running the PowerShell command below, replacing **`<API_KEY>`**, with your [Datadog API token][101], and **`<SUBSCRIPTION_ID>`**, with your Azure Subscription ID. You can also add other optional parameters to configure your deployment. See [Optional Parameters](#optional-parameters).
 
-   {{< /code-block >}}
-
-   You can also [view the contents of the script](https://github.com/DataDog/datadog-serverless-functions/blob/master/azure/eventhub_log_forwarder/resource_deploy.ps1).
-
-3. Invoke the script by running the Powershell command below, replacing **`<API_KEY>`**, with your [Datadog API token](https://app.datadoghq.com/organization-settings/api-keys), and **`<SUBSCRIPTION_ID>`**, with your Azure Subscription ID. You can also add other optional parameters to configure your deployment. See [Optional Parameters](#optional-parameters).
-
-   {{< code-block lang="powershell" filename="Platform Logs Step 2" >}}
-
-   ./resource_deploy.ps1 -ApiKey <API_KEY> -SubscriptionId <SUBSCRIPTION_ID> 
-
-   {{< /code-block >}}
+{{< code-block lang="powershell" filename="Platform Logs Step 2" >}}
+./resource_deploy.ps1 -ApiKey <API_KEY> -SubscriptionId <SUBSCRIPTION_ID> 
+{{< /code-block >}}
 
 4. Create diagnostic settings for all Azure resources sending logs to Datadog. Configure these diagnostic settings to stream to the Event Hub you just created.
 
@@ -106,112 +98,170 @@ To stream both activity logs and resource logs, run the first script including t
 | -FunctionName `<datadog-function>`                                  | Customize the name of your Azure Function by adding this flag with an updated parameter.                                                                              |
 | -DiagnosticSettingName `<datadog-activity-logs-diagnostic-setting>` | Customize the name of your Azure diagnostic setting by adding this flag with an updated parameter. **(Only relevant for sending activity logs)**                      |
 
-Installation errors? See [Automated log collection][1] for common error cases.
+Installation errors? See [Automated log collection][103] for common error cases.
 
-[1]: /integrations/guide/azure-troubleshooting/#automated-log-collection
+
+[100]: https://github.com/DataDog/datadog-serverless-functions/blob/master/azure/eventhub_log_forwarder/activity_logs_deploy.ps1
+[101]: https://app.datadoghq.com/organization-settings/api-keys
+[102]: https://github.com/DataDog/datadog-serverless-functions/blob/master/azure/eventhub_log_forwarder/resource_deploy.ps1
+[103]: /integrations/guide/azure-troubleshooting/#automated-log-collection
+
 {{% /tab %}}
 
 {{% tab "Manual installation" %}}
 
-To send logs from Azure to Datadog, follow this general process:
+This section describes the manual setup process to forward your Azure logs to Datadog:
 
-1. Create an [Azure Event Hub][1].
-2. Set up the Datadog-Azure [function with an Event hub trigger][2] to forward logs to Datadog.
-3. Configure your Azure services to stream logs to the Event Hub by creating a [diagnostic setting][3].
+1. Create an [Azure Event Hub](#create-an-azure-event-hub).
+2. Set up the [Datadog-Azure function with an Event hub trigger](#create-the-datadog-azure-function) to forward logs to Datadog.
+3. Create [diagnostic settings](#create-diagnostic-settings) to forward your Azure [Activity logs](#activity-logs), [resource logs](#resource-logs), or both to your Event Hub.
 
-The instructions below walk through a basic, initial setup using the Azure Portal. All of these steps can be performed with the CLI, Powershell, or resource templates by referring to the Azure documentation.
+The instructions below walk through a basic, initial setup using the Azure Portal. All of these steps can be performed with the CLI, PowerShell, or resource templates by referring to the Azure documentation.
 
-#### Azure Event Hub
+**Note**: Resources can only stream to Event Hubs in the same Azure region.
 
-Create an [Azure Event Hub][1]:
+#### Create an Azure Event Hub
 
-Create a new namespace or add a new Event Hub to an existing namespace by following the instructions below.
+##### Create an Event Hubs namespace
 
-1. In the Azure portal, navigate to the **Event Hubs** overview and click **Create**.
-2. Enter the name, pricing tier, subscription, and resource group.
-3. Select Location. **Note**: The Event Hub must be in the same Location as the resource you want to submit logs from. For activity logs or other account-wide log sources, you can choose any region.
-4. Select your desired options for throughput units, availability-zones, and auto-inflation.
-5. Click **Create**.
+If you already have an Event Hubs namespace configured with an Event Hub connection string, skip to [Add an Event Hub to your Event Hubs namespace](#add-an-event-hub-to-your-event-hubs-namespace).
 
-Add an Event Hub to your Event Hub namespace.
+1. In the Azure portal, navigate to the [Event Hubs][208] overview and click **Create**.
+2. Fill in the **Project Details** and **Instance Details** sections as desired.  
+  **Note**: If you plan to collect [Azure resource logs][209], the Event Hub must be in the same **Location** as the resource you want to collect logs from. For activity logs or other account-wide log sources, you can choose any region.
+3. Click **Review + create** to validate the resource. If validation is successful, click **Create**.
 
-1. In the Azure portal, navigate to a new or existing namespace.
+See the [Azure Event Hubs Quickstart][201] for additional information.
+
+##### Add an Event Hub to your Event Hubs namespace
+
+1. In the Azure portal, navigate to your new or existing Event Hubs namespace.
 2. Click **+ Event Hub**.
-3. Select your desired options for name, partition-count, and message-retention.
-4. Click **Create**.
+3. Configure the **Basics** and **Capture** tabs as desired.
+4. Click **Review + create** to validate the resource. If validation is successful, click **Create**.
 
-#### Datadog Azure function
+##### Configure shared access
 
-Set up the Datadog-Azure [Function with an Event Hub trigger][2] to forward logs to Datadog:
+1. In the detail page of your Event Hub, click **Shared access policies** under the **Settings** tab to the left.
+2. Click **+ Add**.
+3. Provide a policy name and select **Listen**.
+4. Copy the **Connection string-primary key** value and keep it somewhere safe. This is needed to allow the Datadog-Azure function to communicate with the Event Hub.
 
-Create a new Function App or use an existing Function App and skip to the next section.
+{{< img src="integrations/azure/eventhub_connection_string.png" alt="The connection string primary-key value of an event hub's shared access policy" popup="true" style="width:100%">}}
 
-1. In the Azure portal, navigate to the **Function Apps** overview and click **Create**.
-2. Select a subscription, resource group, region, and enter a name for your function app.
-3. Select **Publish to Code, Runtime stack to Node.js, and Version to 18 LTS**.
-4. Select an operating system and plan type.
-5. Click **Next:Hosting**.
-6. Select a storage account.
-7. Review and create the new function app.
-8. Wait for your deployment to finish.
+#### Create the Datadog-Azure function
 
-Add a new function to your Function App using the Event Hub trigger template.
+##### Create a function app
 
-1. Select a new/existing function app from the function apps list.
-2. Select **Functions** from the functions menu and click **Create**. 
-3. Select [Azure Event Hub trigger][2] from the templates menu.
+If you already have a function app configured with an Event Hub connection string, skip to [Add a new function to your Function App using the Event Hub trigger template](#add-a-new-function-to-your-function-app-using-the-event-hub-trigger-template).
+
+1. In the Azure portal, navigate to the [Function App overview][211] and click **Create**.
+2. In the **Instance Details** section, configure the following settings:
+   a. Select the **Code** radio button
+   b. For **Runtime stack**, select `Node.js` 
+   c. For **Version**, select `18 LTS`.
+3. Configure other settings as desired.
+4. Click **Review + create** to validate the resource. If validation is successful, click **Create**.
+
+See [Azure Event Hubs trigger for Azure Functions][202] for more information.
+
+##### Configure your function app with the Event Hub connection string
+
+1. In the detail page of your function app, click **Environment variables** under the **Settings** tab to the left.
+2. In the **App settings** tab, provide a name for the connection string.
+3. Paste the value obtained earlier from the [Configure shared access section](#configure-shared-access).
+4. Click **Apply**.
+
+**Note**: If you don't want to paste your Datadog API key value directly into the function's code, create an additional environment variable for the Datadog API key value.
+
+##### Add a new function to your Function App using the Event Hub trigger template
+
+1. Select your new or existing function app from the [Function App overview][211].
+2. Under the **Functions** tab, click **Create**. 
+3. For the **Development environment** field, select **Develop in portal**.
+3. Under **Select a template**, choose [Azure Event Hub trigger][202].
 4. Under **Event Hub connection**, select your namespace and Event Hub.
 5. Click **Create**.
 
-Point your Event Hub trigger to Datadog.
+See [Getting started with Azure functions][215] for more information.
 
-1. Select your new Event Hub trigger from the functions view.
-2. Click on **Code + Test** under the developer side menu.
-3. Add the [Datadog-Azure Function code][4] to your index.js file.
-4. Add your API key by creating a `DD_API_KEY` environment variable under the configuration tab of your function app, or copy it into the function code by replacing `<DATADOG_API_KEY>` on line 22.  
-5. If you're not using the Datadog US1 site, set your [Datadog site][7] with a `DD_SITE` environment variable under the configuration tab of your function app, or copy the site parameter into the function code on line 23.
-6. Save the function.
-7. Click on **Integration** then **Azure Event Hubs** under trigger and check the following settings:  
-    a. Event Parameter Name is set to `eventHubMessages`.  
-    b. Event Hub Cardinality is set to `Many`.  
-    c. Event Hub Data Type is left empty.  
-8. Click **Save**.
-9. Verify your setup is correct by running the function and then checking the [Datadog log explorer][6] for the test message.  
-**Note**: The test log event must be in valid JSON format.
+##### Point your Event Hub trigger to Datadog
 
-#### Activity logs
+1. On the detail page of your Event Hub trigger function, click **Code + Test** under the **Developer** side menu.
+2. Add the [Datadog-Azure Function code][204] to the function's `index.js` file.
+3. Add your Datadog API key through a `DD_API_KEY` environment variable, or copy it into the function code by replacing `<DATADOG_API_KEY>` on line 21.  
+4. If you're not using the Datadog US1 site, set your [Datadog site][207] with a `DD_SITE` environment variable under the configuration tab of your function app, or copy the site parameter into the function code on line 22.
+5. **Save** the function.
+6. Click **Integration** under the **Developer** side menu.
+7. Click **Azure Event Hubs** under **Trigger and inputs**.
+8. Confirm the following settings are in place:  
+  a. **Event hub connection** is set to the name of your connection string environment variable.  
+  b. **Event parameter name** is set to `eventHubMessages`.  
+  c. **Event hub name** is set to the name of your Event Hub.  
+  d. **Event hub cardinality** is set to `Many`.  
+  e. **Event hub data type** is left empty.  
+9. To validate your setup, click **Code + Test** under the **Developer** side menu.
+10. Click **Test/Run** and enter a test message in valid JSON format. 
+11. Find your test message in the [Datadog Log Explorer][206].  
 
-1. In the Azure portal, navigate to the **Activity Log**.
-2. Click on **Diagnostic Settings**.
+#### Create diagnostic settings
+
+##### Activity logs
+
+1. In the Azure portal, navigate to the [Activity log][212].
+2. Click **Export Activity Logs**.
+3. Click **+ Add diagnostic setting**.
+4. Under **Categories**, select the categories of logs you want to send to Datadog.
+5. Under **Destination details**, select **Stream to an event hub**.
+6. Set the **Event hub namespace** and **Event hub name** with the names of the Event Hub namespace and Event Hub name, respectively, that were used to create your Event Hub trigger.
+7. For **Event hub policy name**, you can select `RootManageSharedAccessKey` if desired. **Optionally**, create your own shared access policy at the Event Hub **namespace** level:  
+  a. In the Event Hub **namespace**, click **Shared access policies** under the **Settings** tab to the left.  
+  b. Click **+ Add**.  
+  c. Provide a policy name and select **Send** or **Manage**.  
+  d. Click **Save**.  
+  e. Return to the diagnostic setting page and select your shared access policy for the **Event hub policy name** field. You may need to refresh the page.  
+  **Note**: See [Authorizing access to Event Hubs resources using Shared Access Signatures][214] for more information.  
+8. Verify your setup is correct by checking the [Datadog Log Explorer][206] for your activity logs.
+
+See [Diagnostic settings in Azure monitor][213] for more information.
+
+##### Resource logs
+
+Configure your Azure resources to forward their logs to the Event Hub with a [diagnostic setting][203].
+
+1. In the Azure portal, navigate to the resource that you want to forward logs to Datadog.
+2. In the **Monitoring** section of the resource blade, click **Diagnostic settings**.
 3. Click **Add diagnostic setting**.
-4. Under category details, select the categories of logs you want to send to Datadog.
-5. Under destination details, select **Stream to an event hub**.
-6. Set the Event Hub namespace and name. These should match the Event Hub namespace and name that you used to create your Event Hub trigger.
-7. Set the shared access key. This key should be configured with send or manage access.
+4. Provide a name and select the sources of the data you want to forward..
+5. Under **Destination details**, select **Stream to an event hub**.
+6. Set the **Event hub namespace** and **Event hub name** with the names of the Event Hub namespace and Event Hub name, respectively, that were used to create your Event Hub trigger.
+7. For **Event hub policy name**, you can select `RootManageSharedAccessKey` if desired. **Optionally**, create your own shared access policy at the Event Hub **namespace** level:  
+  a. In the Event Hub **namespace**, click **Shared access policies** under the **Settings** tab to the left.  
+  b. Click **+ Add**.  
+  c. Provide a policy name and select **Send** or **Manage**.  
+  d. Click **Save**.  
+  e. Return to the diagnostic setting page and select your shared access policy for the **Event hub policy name** field. You may need to refresh the page.  
+  **Note**: See [Authorizing access to Event Hubs resources using Shared Access Signatures][214] for more information.  
 8. Click **Save**.
-9. Verify your setup is correct by checking the [Datadog log explorer][6] for logs from this resource.
+9. Verify your setup is correct by checking the [Datadog Log Explorer][206] for logs from this resource.
 
-#### Resource logs
+See [Diagnostic settings in Azure monitor][213] for more information.
 
-Configure your Azure services to forward their logs to the Event Hub by creating a [diagnostic setting][3].
-
-1. In the Azure portal, navigate to the resource of the logs you want to send to Datadog.
-2. Under the monitoring section of the resource blade, click **Diagnostic settings**.
-3. Click **Add diagnostic setting**.
-4. Under category details, select the categories of logs you want to send to Datadog.
-5. Under destination details, select **Stream to an event hub**.
-6. Set the Event Hub namespace and name. These should match the Event Hub namespace and name that you used to create your Event Hub trigger.
-7. Set the shared access key. This key should be configured with send or manage access.
-8. Click **Save**.
-9. Verify your setup is correct by checking the [Datadog log explorer][6] for logs from this resource.
-
-[1]: https://docs.microsoft.com/en-us/azure/event-hubs/event-hubs-create
-[2]: https://docs.microsoft.com/en-us/azure/azure-functions/functions-bindings-event-hubs-trigger
-[3]: https://docs.microsoft.com/en-us/azure/azure-monitor/platform/diagnostic-settings
-[4]: https://github.com/DataDog/datadog-serverless-functions/blob/master/azure/activity_logs_monitoring/index.js
-[5]: https://app.datadoghq.com/organization-settings/api-keys
-[6]: https://app.datadoghq.com/logs
-[7]: https://docs.datadoghq.com/getting_started/site/
+[201]: https://docs.microsoft.com/en-us/azure/event-hubs/event-hubs-create
+[202]: https://docs.microsoft.com/en-us/azure/azure-functions/functions-bindings-event-hubs-trigger
+[203]: https://docs.microsoft.com/en-us/azure/azure-monitor/platform/diagnostic-settings
+[204]: https://github.com/DataDog/datadog-serverless-functions/blob/master/azure/activity_logs_monitoring/index.js
+[205]: https://app.datadoghq.com/organization-settings/api-keys
+[206]: https://app.datadoghq.com/logs
+[207]: https://docs.datadoghq.com/getting_started/site/
+[208]: https://portal.azure.com/#view/HubsExtension/BrowseResource/resourceType/Microsoft.EventHub%2Fnamespaces
+[209]: https://learn.microsoft.com/en-us/azure/azure-monitor/essentials/tutorial-resource-logs
+[210]: https://docs.microsoft.com/en-us/azure/azure-functions/functions-create-first-azure-function
+[211]: https://portal.azure.com/#view/HubsExtension/BrowseResource/resourceType/Microsoft.Web%2Fsites/kind/functionapp
+[212]: https://portal.azure.com/#view/Microsoft_Azure_Monitoring/AzureMonitoringBrowseBlade/~/activityLog
+[213]: https://learn.microsoft.com/en-us/azure/azure-monitor/essentials/diagnostic-settings?WT.mc_id=Portal-Microsoft_Azure_Monitoring
+[214]: https://learn.microsoft.com/en-us/azure/event-hubs/authorize-access-shared-access-signature
+[215]: https://learn.microsoft.com/en-us/azure/azure-functions/functions-get-started
 
 {{% /tab %}}
 
@@ -223,44 +273,87 @@ Configure your Azure services to forward their logs to the Event Hub by creating
 </div>
 {{% /site-region %}}
 
-Datadog recommends using the Event Hub setup for Azure log collection. However, you can also follow the steps below to forward all of your Azure App Services logs from Blob storage:
+Datadog recommends using the Event Hub setup for Azure log collection. However, you can also follow the steps in this section to forward all of your Azure App Services logs from Azure Blob Storage:
 
-1. Set up [Azure Blob Storage][1] from the [Azure portal][2], [Azure Storage Explorer][3], [Azure CLI][4], or [Powershell][5].
-2. Set up the [Datadog-Azure Function](#create-a-new-azure-blob-storage-function) which forwards logs from your blob storage to Datadog.
-3. Configure your Azure App Services to [forward their logs to the Blob Storage][6].
+1. If you haven't already set up [Azure Blob Storage][301], use one of the following methods to get started: 
+   - [Azure portal][302]
+   - [Azure Storage Explorer][303]
+   - [Azure CLI][304]
+   - [PowerShell][305]
+2. Set up the Datadog-Azure Function to forward logs from Blob Storage using the instructions below.
+3. Configure your Azure App Services to [forward their logs to Blob Storage][306].
 
-#### Create a new Azure Blob Storage function
+##### Create a function app
 
-If you are unfamiliar with Azure functions, see [Getting started with Azure Functions][7].
+If you already have a function app configured for this purpose, skip to [Add a new function to your Function App using the Event Hub trigger template](#add-a-new-function-to-your-function-app-using-the-azure-blob-storage-trigger-template).
 
-1. In the [Azure portal][2], navigate to the **Function Apps** overview and click **Create**.
-2. Select a subscription, resource group, region, and enter a name for your function apps. 
-3. Select **Publish to Code, Runtime stack to Node.js, and Version to 18 LTS**.
-4. Select Operating System **Windows** and a plan type.
-5. Click **Next:Hosting**.
-6. Select a storage account.
-7. Review and **Create** the new function.
-8. Once deployment has finished, select your new function from the function apps list.
-9. Select to build your function **In-portal** and use the Blog Storage trigger template (under **More templates…**). If prompted, install the `Microsoft.Azure.WebJobs.Extensions.EventHubs` extension.
-10. Select or add your **Storage account connection** and click **Create**.
-11. Create an `index.js` file and add the [Datadog-Azure Function code][8] (replace `<DATADOG_API_KEY>` with your [Datadog API Key][9]).
-12. Save the function.
-13. Under **Integrate**, set the **Blob Parameter Name** to `blobContent` and click **Save**.
-14. Verify your setup is correct by checking the [Datadog Log explorer][10] for your logs.
+1. In the Azure portal, navigate to the [Function App overview][309] and click **Create**.
+2. In the **Instance Details** section, configure the following settings:  
+  a. Select the **Code** radio button  
+  b. For **Runtime stack**, select `Node.js`  
+  c. For **Version**, select `18 LTS`.  
+  d. For **Operating System**, select `Windows`.  
+3. Configure other settings as desired.
+4. Click **Review + create** to validate the resource. If validation is successful, click **Create**.
 
-[1]: https://azure.microsoft.com/en-us/services/storage/blobs/
-[2]: https://docs.microsoft.com/en-us/azure/storage/blobs/storage-quickstart-blobs-portal
-[3]: https://docs.microsoft.com/en-us/azure/storage/blobs/storage-quickstart-blobs-storage-explorer
-[4]: https://docs.microsoft.com/en-us/azure/storage/blobs/storage-quickstart-blobs-cli
-[5]: https://docs.microsoft.com/en-us/azure/storage/blobs/storage-quickstart-blobs-powershell
-[6]: https://docs.microsoft.com/en-us/learn/modules/store-app-data-with-azure-blob-storage/
-[7]: https://docs.microsoft.com/en-us/azure/azure-functions/functions-create-first-azure-function
-[8]: https://github.com/DataDog/datadog-serverless-functions/blob/master/azure/blobs_logs_monitoring/index.js
-[9]: https://app.datadoghq.com/organization-settings/api-keys
-[10]: https://app.datadoghq.com/logs
+##### Add a new function to your Function App using the Azure Blob Storage trigger template
+
+1. Select your new or existing function app from the [Function App overview][309].
+2. Under the **Functions** tab, click **Create**. 
+3. For the **Development environment** field, select **Develop in portal**.
+4. Under **Select a template**, choose [Azure Blob storage trigger][313].
+5. Select your **Storage account connection**.
+   **Note**: See [Configure a connection string for an Azure storage account][311] for more information.
+6. Click **Create**.
+
+See [Getting started with Azure Functions][307] for more information.
+
+##### Point your Blob Storage trigger to Datadog
+
+1. On the detail page of your Event Hub trigger function, click **Code + Test** under the **Developer** side menu.
+2. Add the [Datadog-Azure Function code][308] to the function's `index.js` file.
+3. Add your Datadog API key with a `DD_API_KEY` environment variable, or copy it into the function code by replacing `<DATADOG_API_KEY>` on line 20.  
+4. If you're not using the Datadog US1 site, set your [Datadog site][312] with a `DD_SITE` environment variable under the configuration tab of your function app, or copy the site parameter into the function code on line 21.
+5. **Save** the function.
+6. Click **Integration** under the **Developer** side menu.
+7. Click **Azure Blob Storage** under **Trigger and inputs**.
+8. Set the **Blob Parameter Name** to `blobContent` and click **Save**.
+9. Verify your setup is correct by checking the [Datadog Log Explorer][310] for logs from this resource.
+
+[301]: https://azure.microsoft.com/en-us/services/storage/blobs/
+[302]: https://docs.microsoft.com/en-us/azure/storage/blobs/storage-quickstart-blobs-portal
+[303]: https://docs.microsoft.com/en-us/azure/storage/blobs/storage-quickstart-blobs-storage-explorer
+[304]: https://docs.microsoft.com/en-us/azure/storage/blobs/storage-quickstart-blobs-cli
+[305]: https://docs.microsoft.com/en-us/azure/storage/blobs/storage-quickstart-blobs-powershell
+[306]: https://learn.microsoft.com/en-us/training/modules/store-app-data-with-azure-blob-storage/
+[307]: https://learn.microsoft.com/en-us/azure/azure-functions/functions-get-started
+[308]: https://github.com/DataDog/datadog-serverless-functions/blob/master/azure/blobs_logs_monitoring/index.js
+[309]: https://portal.azure.com/#view/HubsExtension/BrowseResource/resourceType/Microsoft.Web%2Fsites/kind/functionapp
+[310]: https://app.datadoghq.com/logs
+[311]: https://learn.microsoft.com/en-us/azure/storage/common/storage-configure-connection-string#configure-a-connection-string-for-an-azure-storage-account
+[312]: https://docs.datadoghq.com/getting_started/site/
+[313]: https://learn.microsoft.com/en-us/azure/azure-functions/functions-bindings-storage-blob-trigger?tabs=python-v2%2Cisolated-process%2Cnodejs-v4%2Cextensionv5&pivots=programming-language-csharp
 
 {{% /tab %}}
 {{< /tabs >}}
+
+## Advanced configuration
+Refer to the following topics to configure your installation according to your monitoring needs.
+
+### PCI compliance
+
+<div class="alert alert-warning">
+PCI DSS compliance for APM and Log Management is only available for Datadog organizations in the <a href="/getting_started/site/">US1 site</a>.
+</div>
+
+To set up PCI-compliant Log Management, you must meet the requirements outlined in [PCI DSS Compliance][6]. Send your logs to the dedicated PCI compliant endpoint:
+- `agent-http-intake-pci.logs.datadoghq.com:443` for Agent traffic
+- `http-intake-pci.logs.datadoghq.com:443` for non-Agent traffic
+
+```
+const DD_SITE = process.env.DD_SITE || 'datadoghq.com';
+const DD_HTTP_URL = process.env.DD_URL || 'http-intake-pci.logs.' + DD_SITE;
+```
 
 ## Log Archiving
 
@@ -279,3 +372,4 @@ Once you have an App Registration configured, you can [create a log archive][3] 
 [3]: /logs/log_configuration/archives/
 [4]: /logs/guide/azure-native-logging-guide/
 [5]: https://learn.microsoft.com/en-us/azure/partner-solutions/datadog/overview
+[6]: /data_security/pci_compliance/?tab=logmanagement

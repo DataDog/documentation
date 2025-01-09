@@ -1,15 +1,22 @@
 ---
-algolia:
-  tags:
-  - agent
 aliases:
 - /ja/agent/faq/agent-check-directory-structure
 - /ja/agent/faq/install-core-extra
 - /ja/logs/faq/can-the-datadog-agent-be-used-to-send-only-logs
 - /ja/agent/faq/the-datadog-agent-for-logs-or-traces-only
 cascade:
+- _target:
+    lang: en
+    path: /agent/basic_agent_usage/chef
+  tags:
+  - uninstall
+- _target:
+    lang: en
+    path: /infrastructure/**/*
   algolia:
-    rank: 70
+    rank: 80
+    tags:
+    - agent
 description: Agent をインストールして、データ収集のために構成する
 further_reading:
 - link: /logs/
@@ -27,7 +34,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/dont-fear-the-agent/
   tag: ブログ
   text: Agent は難しくない
-kind: documentation
 title: Agent
 ---
 
@@ -61,11 +67,10 @@ Datadog Agent のリリース番号は、<a href="https://semver.org/">SemVer</a
   {{< nextlink href="/agent/basic_agent_usage">}}<u>基本的なエージェントの利用方法</u>: アーキテクチャの詳細、CLI、オーバーヘッド、構成管理ツールなど、Datadog Agent について詳しく説明します。{{< /nextlink >}}
   {{< nextlink href="/agent/docker">}}<u>Docker</u>: Datadog Agent を Docker にインストールして構成します。{{< /nextlink >}}
   {{< nextlink href="/agent/kubernetes">}}<u>Kubernetes</u>: Datadog Agent を Kubernetes にインストールして構成します。{{< /nextlink >}}
-  {{< nextlink href="/agent/cluster_agent">}}<u>Cluster Agent</u>: オーケストレーションされたクラスターからモニタリングデータを効率的に収集するよう設計された Datadog Agent のバージョン、Cluster Agent for Kubernetes をインストールして構成します。{{< /nextlink >}}
-  {{< nextlink href="/agent/amazon_ecs">}}<u>Amazon ECS</u>: Amazon ECS に Datadog Agent をインストールし構成します。{{< /nextlink >}}
-  {{< nextlink href="integrations/ecs_fargate/">}}<u>AWS Fargate</u>: AWS Fargate上の Amazon ECS で Datadog Agent をインストールし、構成します。{{< /nextlink >}}
-  {{< nextlink href="/agent/iot">}}<u>IoT</u>:  IoT デバイスや組み込みアプリケーションの監視に最適化された Datadog Agent のバージョンである Datadog IoT Agent をインストールし構成します。{{< /nextlink >}}
-  {{< nextlink href="/agent/logs">}}<u>ログ収集</u>: Datadog Agent でログ収集を有効にし、構成します。{{< /nextlink >}}
+  {{< nextlink href="/agent/cluster_agent">}}<u>Cluster Agent</u>: オーケストレーションされたクラスターからモニタリングデータを効率的に収集するよう設計された Datadog Agent のバージョン、Cluster Agent for Kubernetes をインストールして構成します。{{< /nextlink >}} {{< nextlink href="/agent/amazon_ecs">}}<u>Amazon ECS</u>: Amazon ECS に Datadog Agent をインストールし構成します。{{< /nextlink >}}
+{{< nextlink href="integrations/ecs_fargate/">}}<u>AWS Fargate</u>: AWS Fargate上の Amazon ECS で Datadog Agent をインストールし、構成します。{{< /nextlink >}}
+ {{< nextlink href="/agent/iot">}}<u>IoT</u>: IoT デバイスおよび組み込みアプリケーションの監視に最適化された Datadog Agent のバージョン、Datadog IoT Agent をインストールし構成します。{{< /nextlink >}}
+  {{< nextlink href="/agent/logs">}}<u>ログ収集</u>: Datadog Agent でのログ収集を有効にし、構成します。{{< /nextlink >}}
   {{< nextlink href="/agent/configuration/proxy">}}<u>プロキシ</u>: ネットワーク構成によってアウトバウンドトラフィックが制限される場合は、Agent トラフィックにプロキシを使用します。{{< /nextlink >}}
   {{< nextlink href="/agent/versions/">}}<u>バージョン</u>: Agent 7 は Datadog Agent の最新メジャーバージョンです。Agent のメジャーバージョン間の違いやアップグレード方法について説明します。{{< /nextlink >}}
   {{< nextlink href="/agent/troubleshooting">}}<u>トラブルシューティング</u>: Datadog Agent のトラブルシューティング情報をご紹介します。{{< /nextlink >}}

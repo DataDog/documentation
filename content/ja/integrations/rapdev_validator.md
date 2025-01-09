@@ -24,8 +24,8 @@ assets:
     source_type_name: RapDev Validator
   logs: {}
   monitors:
-    Host has non-compliant value for tag key: assets/monitors/host_non_compliant_value.json
-    Host is missing required tag key: assets/monitors/host_missing_tag_key.json
+    Host has a non-compliant value for their tag key: assets/monitors/host_non_compliant_value.json
+    Host is missing their required tag key: assets/monitors/host_missing_tag_key.json
 author:
   homepage: https://www.rapdev.io
   name: RapDev
@@ -36,6 +36,7 @@ categories:
 - コンプライアンス
 - 構成 & デプロイ
 - マーケットプレイス
+custom_kind: インテグレーション
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -44,7 +45,6 @@ integration_id: rapdev-validator
 integration_title: Tag Validator
 integration_version: ''
 is_public: true
-kind: integration
 legal_terms:
   eula: assets/EULA.pdf
 manifest_version: 2.0.0
@@ -90,12 +90,12 @@ tile:
 ## 概要
 RapDev Validator は、Datadog 環境でのタグモニタリングと Agent のコンプライアンス問題を解決するのに役立ちます。インテグレーションはタグキーのリストと、お使いの環境のタグ付け戦略に基づく許容値を受け取り、それらをメトリクスおよびサービスチェックとして Datadog インスタンスに報告します。このようにして、お使いの環境内のホストに正しいタグが割り当てられているかを表示することができます。
 
-### ライブラリ
+### ダッシュボード
 1. RapDev Validator ホストダッシュボード
 2. RapDev Validator Synthetic ダッシュボード
 3. RapDev Validator ダッシュボード
 
-### ログ管理
+### モニター
 1. ホストに必要なタグキーが割り当てられていない
 2. ホストのタグキーに非準拠の値が割り当てられている
 
@@ -112,4 +112,4 @@ RapDev Validator は、Datadog 環境でのタグモニタリングと Agent の
 *お探しのインテグレーションが見つかりませんか？組織に役立つ重要なツールの導入をお考えですか？[こちら](mailto:support@rapdev.io)からメッセージをお送りいただければ、導入をサポートいたします！*
 
 ---
-このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/rapdev-validator" target="_blank">こちらをクリック</a>してください。
+このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。利用するには、<a href="https://app.datadoghq.com/marketplace/app/rapdev-validator" target="_blank">Marketplace でこのアプリケーションを購入してください</a>。

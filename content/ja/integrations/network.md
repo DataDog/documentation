@@ -20,8 +20,8 @@ author:
   sales_email: info@datadoghq.com
   support_email: help@datadoghq.com
 categories:
-- web
 - network
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/network/README.md
 display_on_public_website: true
@@ -29,9 +29,8 @@ draft: false
 git_integration_title: ネットワーク
 integration_id: システム
 integration_title: Network
-integration_version: 3.0.0
+integration_version: 5.1.0
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: ネットワーク
 public_title: Network
@@ -46,8 +45,8 @@ tile:
   - Supported OS::Linux
   - Supported OS::macOS
   - Supported OS::Windows
-  - Category::Web
-  - Category::Network
+  - Category::ネットワーク
+  - Offering::Integration
   configuration: README.md#Setup
   description: 送受信バイト数およびパケット数、接続状態、ラウンドトリップ回数などを追跡
   media: []
@@ -56,6 +55,7 @@ tile:
   title: Network
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ![Network ダッシュボード][1]
@@ -82,7 +82,7 @@ sudo modprobe nf_conntrack_ipv6
 
 *注*: Agent イメージに conntrack バイナリをインストールする必要がある場合があります。
 
-### コンフィギュレーション
+### 構成
 
 1. Agent はデフォルトでネットワークチェックを有効にしますが、チェックを自分で構成する場合は、[Agent の構成ディレクトリ][3]のルートにある `conf.d/` フォルダーの `network.d/conf.yaml` ファイルを編集します。使用可能なすべての構成オプションの詳細については、[サンプル network.d/conf.yaml][4] を参照してください。
 
@@ -111,14 +111,14 @@ Datadog [Helm Chart][7] のデプロイでは、チャートの値を以下で�
 
 ```yaml
 datadog:
- # ネットワークチェックのために AWS ENA のメトリクス収集を有効にします
- confd:
-   network.yaml: |-
-     init_config:
-     instances:
-       - collect_aws_ena_metrics: true
+  # ネットワークチェック用に AWS ENA メトリクスの収集を有効にします
+  confd:
+    network.yaml: |-
+      init_config:
+      instances:
+        - collect_aws_ena_metrics: true
 
-# Agent コンテナが NET_ADMIN 機能を持つホストネットワークを使用するようにします
+# エージェントコンテナが NET_ADMIN 権限を持つホストネットワークを使用するようにします
 agents:
   useHostNetwork: true
   containers:
@@ -169,7 +169,7 @@ spec:
 
 ネットワークチェックには、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 
 ネットワークチェックには、サービスのチェック機能は含まれません。
 

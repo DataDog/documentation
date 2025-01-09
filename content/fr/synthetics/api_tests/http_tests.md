@@ -20,7 +20,6 @@ further_reading:
 - link: /synthetics/multistep
   tag: Documentation
   text: Exécuter des tests HTTP à plusieurs étapes
-kind: documentation
 title: Tests HTTP
 ---
 ## Présentation

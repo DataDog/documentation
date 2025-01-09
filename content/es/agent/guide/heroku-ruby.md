@@ -6,7 +6,6 @@ further_reading:
 - link: /logs/guide/collect-heroku-logs
   tag: Documentación
   text: Recopilar logs de Heroku
-kind: guía
 title: Instrumentar una aplicación de Ruby on Rails en Heroku con Datadog
 ---
 
@@ -616,10 +615,10 @@ Dirígete a la [sección de trazas de APM][19] para ver tus trazas:
 
 {{< img src="agent/guide/heroku_ruby/traces.png" alt="Trazas de aplicaciones de Ruby en Datadog" >}}
 
-Navega al [catálogo de servicios][20] para ver todos tus servicios de aplicación y una vista de tu servicio de aplicación:
+Accede al [Catálogo de servicios][20] para ver todos tus servicios de aplicaciones y una vista de tus servicios de aplicaciones:
 
-{{< img src="agent/guide/heroku_ruby/ruby_service.png" alt="Service Catalog in Datadog" >}}
-{{< img src="agent/guide/heroku_ruby/service_page.png" alt="Ruby application service details page in Datadog" >}}
+{{< img src="agent/guide/heroku_ruby/ruby_service.png" alt="Catálogo de servicios en Datadog" >}}
+{{< img src="agent/guide/heroku_ruby/service_page.png" alt="Página de detalles de servicios de la aplicación Ruby en Datadog" >}}
 
 ## Logs
 
@@ -833,7 +832,7 @@ Agent (v7.27.0)
 [...]
 ```
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 

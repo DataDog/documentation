@@ -14,7 +14,7 @@ integration_id: amazon-nat-gateway
 integration_title: "Amazon\_NAT\_Gateway"
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: amazon_nat_gateway
 public_title: "Intégration Datadog/Amazon\_NAT\_Gateway"

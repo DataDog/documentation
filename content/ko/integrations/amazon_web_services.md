@@ -27,7 +27,7 @@ integration_id: amazon-web-services
 integration_title: AWS
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: amazon_web_services
 public_title: Datadog-AWS 통합

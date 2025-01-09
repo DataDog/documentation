@@ -1,6 +1,5 @@
 ---
 title: Enabling the .NET Profiler
-kind: Documentation
 code_lang: dotnet
 type: multi-code-lang
 code_lang_weight: 60
@@ -45,7 +44,8 @@ Supported .NET runtimes (64-bit applications)
 .NET 5<br/>
 .NET 6<br/>
 .NET 7<br/>
-.NET 8
+.NET 8<br/>
+.NET 9
 
 <div class="alert alert-warning">
   <strong>Note:</strong> For containers, <strong>at least one core</strong> is required. Read the <a href="/profiler/profiler_troubleshooting/dotnet#linux-containers">Troubleshooting documentation</a> for more details.
@@ -61,12 +61,14 @@ The following profiling features are available in the following minimum versions
 | Wall time profiling       | 2.7.0+                             | All supported runtime versions.                                                          |
 | CPU profiling             | 2.15.0+                            | All supported runtime versions.                                                          |
 | Exceptions profiling      | 2.31.0+                            | All supported runtime versions.                                                          |
-| Allocations profiling     | beta, 2.18.0+                      | .NET 6+                                                                                  |
+| Allocations profiling     | Preview, 2.18.0+                   | .NET Framework beta (requires Datadog Agent 7.51+) and .NET 6+                           |
 | Lock Contention profiling | 2.49.0+                            | .NET Framework beta (requires Datadog Agent 7.51+) and .NET 5+                           |
-| Live heap profiling       | beta, 2.22.0+                      | .NET 7+                                                                                  |
-| [Code Hotspots][12]       | 2.7.0+                             | All supported runtime versions.                                                          |
+| Live heap profiling       | Preview, 2.22.0+                   | .NET 7+                                                                                  |
+| [Trace to Profiling integration][12]       | 2.30.0+                            | All supported runtime versions.                                                          |
 | [Endpoint Profiling][13]  | 2.15.0+                            | All supported runtime versions.                                                          |
 | Timeline                  | 2.30.0+                            | All supported runtime versions (except .NET 5+ required for garbage collection details). |
+
+Continuous Profiler is not supported for AWS Lambda.
 
 ## Installation
 
@@ -100,7 +102,7 @@ To install the .NET Profiler machine-wide:
    : `sudo tar -C /opt/datadog -xzf datadog-dotnet-apm<TRACER_VERSION>-musl.tar.gz && sudo sh /opt/datadog/createLogPath.sh`
 
    Other distributions
-   : `sudo tar -C /opt/datadog -xzf datadog-dotnet-apm<TRACER_VERSION>-tar.gz && sudo /opt/datadog/createLogPath.sh`
+   : `sudo tar -C /opt/datadog -xzf datadog-dotnet-apm-<TRACER_VERSION>.tar.gz && sudo /opt/datadog/createLogPath.sh`
 
 
 [1]: https://github.com/DataDog/dd-trace-dotnet/releases
@@ -173,25 +175,6 @@ To install the .NET Profiler per-webapp:
 5. A minute or two after starting your application, your profiles appear on the [Datadog APM > Profiler page][1].
 
 [1]: https://app.datadoghq.com/profiling
-{{% /tab %}}
-
-{{% tab "Linux with Single Step Instrumentation" %}}
-
-1. With [Single Step Instrumentation][2], set the following required environment variables for automatic instrumentation to attach to your application:
-
-   ```
-   LD_PRELOAD=/opt/datadog/apm/library/dotnet/continuousprofiler/Datadog.Linux.ApiWrapper.x64.so
-   DD_PROFILING_ENABLED=1
-   DD_ENV=production
-   DD_VERSION=1.2.3
-   ```
-
-2. For standalone applications, manually restart the application as you normally would.
-
-3. A minute or two after starting your application, your profiles appear on the [Datadog APM > Profiler page][1].
-
-[1]: https://app.datadoghq.com/profiling
-[2]: https://docs.datadoghq.com/tracing/trace_collection/automatic_instrumentation/?tab=singlestepinstrumentationbeta
 {{% /tab %}}
 
 {{% tab "Internet Information Services (IIS)" %}}
@@ -411,10 +394,10 @@ You can configure the profiler using the following environment variables. Note t
 | `DD_PROFILING_ENABLED`     | Boolean        | If set to `true`, enables the .NET Profiler. Defaults to `false`.  |
 | `DD_PROFILING_WALLTIME_ENABLED` | Boolean        | If set to `false`, disables the Wall time profiling. Defaults to `true`.  |
 | `DD_PROFILING_CPU_ENABLED` | Boolean        | If set to `false`, disables the CPU profiling. Defaults to `true`.  |
-| `DD_PROFILING_EXCEPTION_ENABLED` | Boolean        | If set to `true`, enables the Exceptions profiling (beta). Defaults to `false`.  |
-| `DD_PROFILING_ALLOCATION_ENABLED` | Boolean        | If set to `true`, enables the Allocations profiling (beta). Defaults to `false`.  |
-| `DD_PROFILING_LOCK_ENABLED` | Boolean        | If set to `true`, enables the Lock Contention profiling (beta). Defaults to `false`.  |
-| `DD_PROFILING_HEAP_ENABLED` | Boolean        | If set to `true`, enables the Live Heap profiling (beta). Defaults to `false`.  |
+| `DD_PROFILING_EXCEPTION_ENABLED` | Boolean        | If set to `true`, enables Exception profiling. Defaults to `false`.  |
+| `DD_PROFILING_ALLOCATION_ENABLED` | Boolean        | If set to `true`, enables Allocation profiling (in Preview). Defaults to `false`.  |
+| `DD_PROFILING_LOCK_ENABLED` | Boolean        | If set to `true`, enables Lock Contention profiling. Defaults to `false`.  |
+| `DD_PROFILING_HEAP_ENABLED` | Boolean        | If set to `true`, enables Live Heap profiling (in Preview). Defaults to `false`.  |
 | `DD_PROFILING_GC_ENABLED` | Boolean        | If set to `false`, disable Garbage Collection profiling used in Timeline user interface. Defaults to `true`.  |
 
 <div class="alert alert-warning">

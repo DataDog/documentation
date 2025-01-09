@@ -9,7 +9,6 @@ further_reading:
 - link: synthetics/settings/?tab=specifyvalue#global-variables
   tag: 설명서
   text: 전역 변수에 대해 자세히 알아보기
-kind: 가이드
 title: 브라우저 테스트에서 MFA(다단계 인증)에 TOTP(시간 기반 일회용 비밀번호) 사용하기
 ---
 

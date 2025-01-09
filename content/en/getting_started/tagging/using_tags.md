@@ -1,6 +1,5 @@
 ---
 title: Using Tags
-kind: documentation
 description: Learn how to use tags in Datadog products.
 aliases:
 - /tagging/using_tags/
@@ -27,9 +26,9 @@ When including or excluding multiple tags:
 
 ## Events
 
-The [Events Explorer][2] shows the events from your environment over a specified time period. Use tags to filter the events list and focus on a subset of events. Enter `tags:` followed by a tag to see all the events coming from a host, [integration][3], or service with that tag. For example, use `tags:service:coffee-house` to search for the tag `service:coffee-house`.
+The [Events Explorer][2] shows the events from your environment over a specified time period. Use tags to filter the events list and focus on a subset of events. Enter `tags:` followed by a tag to see all the events coming from a host, [integration][3], or service with that tag. For example, use `tags:(service:coffee-house)` to search for the tag `service:coffee-house`.
 
-To search multiple tags inclusively, use parentheses and separate each tag with OR: `tags:(service:coffee-house OR host:coffeehouseprod)`. To search multiple tags exclusively, separate each tag with AND: `tags:(service:coffee-house AND host:coffeehouseprod)`.
+To search multiple tags inclusively, separate each tag with OR: `tags:(service:coffee-house OR host:coffeehouseprod)`. To search multiple tags exclusively, separate each tag with AND: `tags:(service:coffee-house AND host:coffeehouseprod)`.
 
 ## Dashboards
 
@@ -252,32 +251,7 @@ To exclude tags, use `</>` to edit the text then add the tag in the form `!<KEY>
 
 For Logs [Search][10], [Analytics][11], [Patterns][12], and [Live Tail][13], filter logs with tags using the search bar or facet checkboxes. The search bar format is `<KEY>:<VALUE>`, for example: `service:coffee-house`. For advanced search, see [Search Logs][10].
 
-{{< tabs >}}
-{{% tab "Search" %}}
-
-{{< img src="tagging/using_tags/logsearchtags.png" alt="Log Search Tags" style="width:80%;">}}
-
-{{% /tab %}}
-{{% tab "Analytics" %}}
-
-{{< img src="tagging/using_tags/loganalyticstags.png" alt="Log Analytics Tags" style="width:80%;">}}
-
-{{% /tab %}}
-{{% tab "Patterns" %}}
-
-{{< img src="tagging/using_tags/logpatternstags.png" alt="Log Patterns Tags" style="width:80%;">}}
-
-{{% /tab %}}
-{{% tab "Live Tail" %}}
-
-{{< img src="tagging/using_tags/livetailtags.mp4" alt="Live Tail Tags" video="true" width="80%">}}
-
-{{% /tab %}}
-{{< /tabs >}}
-
-Additionally, tags are used to filter a logs [Pipeline][14]. In the example below, the pipeline filters logs by the tag `service:coffee-house`.
-
-{{< img src="tagging/using_tags/logpipelinetags.png" alt="Pipeline Tags" style="width:80%;">}}
+Additionally, tags are used to filter a logs [Pipeline][14]. For example, if you only want logs from the coffee-house service to go through the pipeline, add the tag `service:coffee-house` to the filter field.
 
 ## RUM & Session Replay
 
@@ -358,12 +332,12 @@ When creating a [monitor-based SLO][1] using a single [grouped monitor][2], use 
 
 The [CI Visibility Explorer][101] displays your test runs run in a CI pipeline.
 
-To filter test runs by tags, use the search bar or facet checkboxes. The search bar format is `<KEY>:<VALUE>`. For example: `@test.status:failed`. For advanced search, see [Search and Manage CI Tests][102].
+To filter test runs by tags, use the search bar or facet checkboxes. The search bar format is `<KEY>:<VALUE>`. For example: `@test.status:failed`. For advanced search, see [Test Optimization Explorer Search Syntax][102].
 
 {{< img src="/continuous_integration/test_runs.png" alt="Test runs in the CI Visibility Explorer" style="width:80%;">}}
 
 [101]: https://app.datadoghq.com/ci/test-runs
-[102]: /tests/search/
+[102]: /tests/explorer/search_syntax
 
 {{% /tab %}}
 {{% tab "Pipeline Executions" %}}

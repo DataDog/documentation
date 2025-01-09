@@ -1,4 +1,8 @@
 ---
+algolia:
+  tags:
+  - uninstall
+  - uninstalling
 aliases:
 - /ja/guides/basic_agent_usage/source/
 further_reading:
@@ -14,11 +18,10 @@ further_reading:
 - link: /agent/basic_agent_usage/#agent-architecture
   tag: Documentation
   text: Agent のアーキテクチャを詳しく見る
-- link: /agent/guide/network#configure-ports
+- link: /agent/configuration/network#configure-ports
   tag: Documentation
   text: インバウンドポートの構成
-kind: documentation
-platform: Source
+platform: ソース
 title: Source Installation 用 Agent の基本的な使用方法
 ---
 ## 概要
@@ -31,9 +34,6 @@ title: Source Installation 用 Agent の基本的な使用方法
 
 Datadog Agent に含まれるコマンドのうち、`start`/`stop`/`restart`/`status` などの_ライフサイクルコマンド_だけは `sudo` で実行する必要があります。
 
-{{< tabs >}}
-{{% tab "Agent v6 & v7" %}}
-
 | 説明                   | コマンド                                 |
 | ----------------------------- | --------------------------------------- |
 | Agent の起動                   | `sudo ./bin/agent/agent start`          |
@@ -42,55 +42,24 @@ Datadog Agent に含まれるコマンドのうち、`start`/`stop`/`restart`/`s
 | フレアの送信                    | `sudo ./bin/agent/agent flare`         |
 | コマンドの使用方法の表示         | `sudo ./bin/agent/agent help`          |
 
-{{% /tab %}}
-{{% tab "Agent v5" %}}
-
-| 説明                   | コマンド                                 |
-| ----------------------------- | --------------------------------------- |
-| Agent の起動                   | `sudo ~/.datadog-agent/bin/agent start` |
-| Agent の停止                    | `sudo ~/.datadog-agent/bin/agent stop`  |
-| 実行中の Agent のステータスページ  | `sudo ~/.datadog-agent/bin/agent info`  |
-| フレアの送信                    | `sudo ~/.datadog-agent/bin/agent flare` |
-| コマンドの使用方法の表示         | `sudo ~/.datadog-agent/bin/agent help`  |
-
-{{% /tab %}}
-{{< /tabs >}}
-
-## コンフィギュレーション
-
-{{< tabs >}}
-{{% tab "Agent v6 & v7" %}}
-Agent の構成ファイルおよびフォルダーの場所:
-
-* `/etc/datadog-agent/datadog.yaml`
-
-[インテグレーション][1]用構成ファイルの場所
-
-* `/etc/datadog-agent/conf.d/`
-
-[1]: /ja/integrations/
-{{% /tab %}}
-{{% tab "Agent v5" %}}
+## 構成
 
 Agent の構成ファイルおよびフォルダーの場所
 
-* `/etc/dd-agent/datadog.conf`
+* `/etc/datadog-agent/datadog.yaml`
 
-[インテグレーション][1]用構成ファイルの場所
+[インテグレーション][2]用コンフィギュレーションファイルの場所
 
-* `/etc/dd-agent/conf.d/`
-
-[1]: /ja/integrations/
-{{% /tab %}}
-{{< /tabs >}}
+* `/etc/datadog-agent/conf.d/`
 
 ## トラブルシューティング
 
-[Agent のトラブルシューティングに関するドキュメント][2]を参照してください。
+[Agent のトラブルシューティングに関するドキュメント][3]を参照してください。
 
-
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/account/settings#agent/source
-[2]: /ja/agent/troubleshooting/
+[1]: https://app.datadoghq.com/account/settings/agent/latest?platform=source
+[2]: /ja/integrations/
+[3]: /ja/agent/troubleshooting/

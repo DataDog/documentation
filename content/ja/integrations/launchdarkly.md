@@ -5,6 +5,7 @@ assets:
   dashboards:
     launchdarkly: assets/dashboards/launchdarkly.json
   integration:
+    auto_install: true
     configuration: {}
     events:
       creates_events: true
@@ -14,6 +15,7 @@ assets:
       prefix: launchdarkly_relay.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10025
     source_type_name: LaunchDarkly
 author:
   homepage: https://launchdarkly.com
@@ -22,7 +24,8 @@ author:
   support_email: support@launchdarkly.com
 categories:
 - 構成 & デプロイ
-- notification
+- notifications
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/launchdarkly/README.md
 display_on_public_website: true
@@ -32,7 +35,6 @@ integration_id: launchdarkly
 integration_title: LaunchDarkly
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: launchdarkly
 public_title: LaunchDarkly
@@ -45,8 +47,7 @@ tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Category::Configuration & Deployment
-  - Category::Notification
-  - Offering::Integration
+  - Category::Notifications
   - Offering::UI Extension
   - Supported OS::Linux
   - Supported OS::Windows
@@ -65,13 +66,25 @@ tile:
     image_url: images/toggle-flag.png
     media_type: image
   overview: README.md#Overview
+  resources:
+  - resource_type: その他
+    url: https://launchdarkly.com
+  - resource_type: documentation
+    url: https://docs.launchdarkly.com/integrations/datadog/events
   support: README.md#Support
   title: LaunchDarkly
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
+
+
+{{% site-region region="gov" %}}
+**Datadog {{< region-param key="dd_site_name" >}} サイトでは LaunchDarkly インテグレーションはサポートされていません**。
+{{% /site-region %}}
+
 
 LaunchDarkly は、Datadog と以下のインテグレーションを提供しています。
 
@@ -157,7 +170,7 @@ LaunchDarkly Relay Proxy は、以下のメトリクスを Datadog に送信す�
 
 LaunchDarkly イベントインテグレーションは、LaunchDarkly から Datadog にフラグ、プロジェクト、環境イベントを送信します。
 
-### サービスのチェック
+### サービスチェック
 
 LaunchDarkly インテグレーションには、サービスのチェック機能は含まれません。
 

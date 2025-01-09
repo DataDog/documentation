@@ -1,7 +1,6 @@
 ---
-title: Python Custom Instrumentation using OpenTelemetry API
-kind: documentation
-description: 'Instrument your Python application with OpenTelemetry API to send traces to Datadog.'
+title: Python Custom Instrumentation using the OpenTelemetry API
+description: 'Instrument your Python application with the OpenTelemetry API to send traces to Datadog.'
 code_lang: otel
 type: multi-code-lang
 code_lang_weight: 2
@@ -17,50 +16,99 @@ further_reading:
       text: 'Interoperability of OpenTelemetry API and Datadog instrumented traces'
 ---
 
-{{% otel-custom-instrumentation %}}
-
-## Requirements and limitations
-
-- Datadog python tracing library `dd-trace-py` version 1.12.0 or greater.
-- Python version 3.7 or greater.
-
-The following OpenTelemetry features implemented in the Datadog library as noted:
-
-| Feature                               | Support notes                       |
-|---------------------------------------|---------------------------------------|
-| [OpenTelemetry Context propagation][1]         | [W3C Trace Context and Datadog header formats][9] are enabled by default. | 
-| [Span processors][2]                  | Unsupported                                          | 
-| [Span Exporters][3]                   | Unsupported                                            |
-| Trace/span [ID generators][4]         | ID generation is performed by the tracing library, with support for [128-bit trace IDs][12].  |
+{{% otel-custom-instrumentation-lang %}}
 
 
-## Configuring OpenTelemetry to use the Datadog Tracer Provider
+## Setup
 
-1. Add your desired manual OpenTelemetry instrumentation to your Python code following the [OpenTelemetry Python Manual Instrumentation documentation][5]. **Important!** Where those instructions indicate that your code should call the OpenTelemetry SDK, call the Datadog tracing library instead.
+To configure OpenTelemetry to use the Datadog trace provider:
 
-2. Install the python tracer:
+1. If you have not yet read the instructions for auto-instrumentation and setup, start with the [Python Setup Instructions][1].
 
-    ```
-    pip install "ddtrace>=1.12.0"
-    ```
+1. Set `DD_TRACE_OTEL_ENABLED` environment variable to `true`.
 
-3. Set `DD_TRACE_OTEL_ENABLED` environment variable to `True`.
+### Creating custom spans
 
-4. Run your application with `ddtrace-run`. This automatically configures the `Datadog Tracer Provider`. If your application cannot use `ddtrace-run` read [the `dd-trace-py` OpenTelemetry API docs][11] for additional configurations.
+To create custom spans within an existing trace context:
 
-Datadog combines these OpenTelemetry spans with other Datadog APM spans into a single trace of your application. It supports [OpenTelemetry Automatic instrumentation][8] also.
+{{< highlight python "hl_lines=6" >}}
+from opentelemetry import trace
 
-## Further Reading
+tracer = trace.get_tracer(__name__)
+
+def do_work():
+    with tracer.start_as_current_span("operation_name") as span:
+        # Perform the work that you want to track with the span
+        print("Doing work...")
+        # When the 'with' block ends, the span is automatically closed
+{{< /highlight >}}
+
+## Accessing active spans
+
+To access the currently active span, use the `get_current_span()` function:
+
+```python
+from opentelemetry import trace
+
+current_span = trace.get_current_span()
+# enrich 'current_span' with information
+```
+
+## Adding span tags
+
+Add attributes to a span to provide additional context or metadata.
+
+Here's an example of how to add attributes to the current span:
+
+```python
+from opentelemetry import trace
+
+current_span = trace.get_current_span()
+
+current_span.set_attribute("attribute_key1", 1)
+```
+
+## Adding span events
+
+<div class="alert alert-info">Adding span events requires SDK version 2.9.0 or higher.</div>
+
+You can add span events using the `add_event` API. This method requires a `name` parameter and optionally accepts `attributes` and `timestamp` parameters. The method creates a new span event with the specified properties and associates it with the corresponding span.
+
+- **Name** [_required_]: A string representing the event's name.
+- **Attributes** [_optional_]: Zero or more key-value pairs with the following properties:
+  - The key must be a non-empty string.
+  - The value can be either:
+    - A primitive type: string, Boolean, or number.
+    - A homogeneous array of primitive type values (for example, an array of strings).
+  - Nested arrays and arrays containing elements of different data types are not allowed.
+- **Timestamp** [_optional_]: A UNIX timestamp representing the event's occurrence time. Expects `microseconds`.
+
+The following examples demonstrate different ways to add events to a span:
+
+```python
+span.add_event("Event With No Attributes")
+span.add_event("Event With Some Attributes", {"int_val": 1, "string_val": "two", "int_array": [3, 4], "string_array": ["5", "6"], "bool_array": [True, False]})
+```
+
+Read the [OpenTelemetry][2] specification for more information.
+
+### Recording exceptions
+
+To record exceptions, use the `record_exception` API. This method requires an `exception` parameter and optionally accepts a UNIX `timestamp` parameter. It creates a new span event that includes standardized exception attributes and associates it with the corresponding span.
+
+The following examples demonstrate different ways to record exceptions:
+
+```python
+span.record_exception(Exception("Error Message"))
+span.record_exception(Exception("Error Message"), {"status": "failed"})
+```
+
+Read the [OpenTelemetry][3] specification for more information.
+
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://opentelemetry.io/docs/instrumentation/python/manual/#change-the-default-propagation-format
-[2]: https://opentelemetry.io/docs/reference/specification/trace/sdk/#span-processor
-[3]: https://opentelemetry.io/docs/reference/specification/trace/sdk/#span-exporter
-[4]: https://opentelemetry.io/docs/reference/specification/trace/sdk/#id-generators
-[5]: https://opentelemetry.io/docs/instrumentation/python/manual/
-[8]: https://opentelemetry.io/docs/instrumentation/python/automatic/
-[9]: /tracing/trace_collection/trace_context_propagation/python/
-[10]: /tracing/trace_collection/dd_libraries/python/#custom-logging
-[11]: https://ddtrace.readthedocs.io/en/stable/api.html#opentelemetry-api
-[12]: /opentelemetry/guide/otel_api_tracing_interoperability/
+[1]: /tracing/setup/python/
+[2]: https://opentelemetry.io/docs/specs/otel/trace/api/#add-events
+[3]: https://opentelemetry.io/docs/specs/otel/trace/api/#record-exception

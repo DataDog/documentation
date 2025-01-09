@@ -6,6 +6,7 @@ assets:
     IIS-Overview: assets/dashboards/iis_overview.json
     iis: assets/dashboards/iis_dashboard.json
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -16,13 +17,12 @@ assets:
       prefix: iis.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 46
     source_type_name: IIS
-  logs:
-    source: iis
   monitors:
-    '[IIS] Anomalous amount of requests for site: {{site.name}}': assets/monitors/req.json
-    '[IIS] Increase of locked error per second for site: {{site.name}}': assets/monitors/lock.json
-    '[IIS] Increase of not found error per second for site: {{site.name}}': assets/monitors/err.json
+    404 errors is high: assets/monitors/err.json
+    Locked errors is high: assets/monitors/lock.json
+    Request number is high: assets/monitors/req.json
   saved_views:
     4xx_errors: assets/saved_views/4xx_errors.json
     5xx_errors: assets/saved_views/5xx_errors.json
@@ -36,6 +36,8 @@ author:
   support_email: help@datadoghq.com
 categories:
 - ログの収集
+- windows
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/iis/README.md
 display_on_public_website: true
@@ -43,9 +45,8 @@ draft: false
 git_integration_title: iis
 integration_id: iis
 integration_title: IIS
-integration_version: 2.19.1
+integration_version: 5.0.0
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: iis
 public_title: IIS
@@ -56,7 +57,9 @@ tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Category::Log Collection
+  - カテゴリー::Windows
   - Supported OS::Windows
+  - Offering::Integration
   configuration: README.md#Setup
   description: 全体またはサイトごとのメトリクスを追跡し、各サイトの稼働/停止状態を監視。
   media: []
@@ -65,6 +68,7 @@ tile:
   title: IIS
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ![IIS グラフ][1]
@@ -81,7 +85,7 @@ IIS チェックは Agent にパッケージ化されています。IIS メト�
 
 #### ホスト
 
-ホストで実行中の Agent に対してこのチェックを構成するには:
+ホストで実行中の Agent に対してこのチェックを構成するには
 
 ##### メトリクスの収集
 
@@ -91,7 +95,7 @@ IIS チェックは Agent にパッケージ化されています。IIS メト�
 
 **注**: このチェックのバージョン 2.14.0 以降では、メトリクスの収集に新しい実装を使用し、これには Python 3 が必要です。Python 3 の使用が不可能なホストの場合や、このチェックのレガシーバージョンを使用する場合は、以下の[コンフィグ][7]を参照してください。
 
-##### ログの収集
+##### ログ収集
 
 1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` ファイルでこれを有効にします。
 
@@ -113,7 +117,7 @@ IIS チェックは Agent にパッケージ化されています。IIS メト�
 
 3. [Agent を再起動します][6]。
 
-**注**: `datadog-agent` ユーザーが、収集したいログファイルを追跡するための読み取りアクセス権を持っていることを確認してください。詳細は、[ログファイルの追跡における権限の問題][8]を参照してください。
+**注**: `datadog-agent` ユーザーが、収集したいログファイルをテールするための読み取りアクセスと実行アクセスを持っていることを確認してください。IIS が新しいサブフォルダを作成するとき (新しいサイトが作成されるときなど)、親フォルダの権限は自動的に継承されません。詳細については、[ログファイルのテールに関する権限の問題][8]を参照してください。
 
 
 ### 検証
@@ -130,7 +134,7 @@ IIS チェックは Agent にパッケージ化されています。IIS メト�
 
 IIS チェックには、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 {{< get-service-checks-from-git "iis" >}}
 
 

@@ -6,7 +6,6 @@ further_reading:
 - link: /developers/custom_checks/write_agent_check/
   tag: 설명서
   text: Agent 커스텀 점검 생성하기
-kind: 설명서
 title: '메트릭 제출: 커스텀 에이전트 점검'
 ---
 
@@ -33,11 +32,11 @@ self.monotonic_count(name, value, tags=None, hostname=None, device_name=None)
 
 | 파라미터     | 유형            | 필수 | 기본값 | 설명                                                                         |
 |---------------|-----------------|----------|---------------|-------------------------------------------------------------------------------------|
-| `name`        | 스트링          | 예      | -             | 메트릭 이름.                                                             |
-| `value`       | Float           | 예      | -             | 메트릭 값.                                                           |
-| `tags`        | 스트링 목록 | 아니요       | -             | 해당 메트릭과 연관된 태그 목록.                                       |
-| `hostname`    | 스트링          | 아니요       | 현재 호스트  | 해당 메트릭과 연관된 호스트네임.                                           |
-| `device_name` | 스트링          | 아니요       | -             | 더 이상 사용되지 않음. 대신 `device:<DEVICE_NAME>` 타입의 태그를 태그 목록에 추가합니다. |
+| `name`        | 문자열          | Yes      | -             | 메트릭 이름.                                                             |
+| `value`       | Float           | Yes      | -             | 메트릭 값.                                                           |
+| `tags`        | 문자열 목록 | 아니요       | -             | 해당 메트릭과 연관된 태그 목록.                                       |
+| `hostname`    | 문자열          | 아니요       | 현재 호스트  | 해당 메트릭과 연관된 호스트네임.                                           |
+| `device_name` | 문자열          | 아니요       | -             | 더 이상 사용되지 않음. 대신 `device:<DEVICE_NAME>` 타입의 태그를 태그 목록에 추가합니다. |
 
 ### `count()`
 
@@ -53,11 +52,11 @@ self.count(name, value, tags=None, hostname=None, device_name=None)
 
 | 파라미터     | 유형            | 필수 | 기본값 | 설명                                                                         |
 |---------------|-----------------|----------|---------------|-------------------------------------------------------------------------------------|
-| `name`        | 스트링          | 예      | -             | 메트릭 이름.                                                             |
-| `value`       | Float           | 예      | -             | 메트릭 값.                                                           |
-| `tags`        | 스트링 목록 | 아니요       | -             | 해당 메트릭과 연관된 태그 목록.                                       |
-| `hostname`    | 스트링          | 아니요       | 현재 호스트  | 해당 메트릭과 연관된 호스트네임.                                           |
-| `device_name` | 스트링          | 아니요       | -             | 더 이상 사용되지 않음. 대신 `device:<DEVICE_NAME>` 타입의 태그를 태그 목록에 추가합니다. |
+| `name`        | 문자열          | Yes      | -             | 메트릭 이름.                                                             |
+| `value`       | Float           | Yes      | -             | 메트릭 값.                                                           |
+| `tags`        | 문자열 목록 | 아니요       | -             | 해당 메트릭과 연관된 태그 목록.                                       |
+| `hostname`    | 문자열          | 아니요       | 현재 호스트  | 해당 메트릭과 연관된 호스트네임.                                           |
+| `device_name` | 문자열          | 아니요       | -             | 더 이상 사용되지 않음. 대신 `device:<DEVICE_NAME>` 타입의 태그를 태그 목록에 추가합니다. |
 
 {{% /tab %}}
 {{% tab "Gauge" %}}
@@ -76,11 +75,11 @@ self.gauge(name, value, tags=None, hostname=None, device_name=None)
 
 | 파라미터     | 유형            | 필수 | 기본값 | 설명                                                                         |
 |---------------|-----------------|----------|---------------|-------------------------------------------------------------------------------------|
-| `name`        | 스트링          | 예      | -             | 메트릭 이름.                                                             |
-| `value`       | Float           | 예      | -             | 메트릭 값.                                                           |
-| `tags`        | 스트링 목록 | 아니요       | -             | 해당 메트릭과 연관된 태그 목록.                                       |
-| `hostname`    | 스트링          | 아니요       | 현재 호스트  | 해당 메트릭과 연관된 호스트네임.                                           |
-| `device_name` | 스트링          | 아니요       | -             | 더 이상 사용되지 않음. 대신 `device:<DEVICE_NAME>` 타입의 태그를 태그 목록에 추가합니다. |
+| `name`        | 문자열          | Yes      | -             | 메트릭 이름.                                                             |
+| `value`       | Float           | Yes      | -             | 메트릭 값.                                                           |
+| `tags`        | 문자열 목록 | 아니요       | -             | 해당 메트릭과 연관된 태그 목록.                                       |
+| `hostname`    | 문자열          | 아니요       | 현재 호스트  | 해당 메트릭과 연관된 호스트네임.                                           |
+| `device_name` | 문자열          | 아니요       | -             | 더 이상 사용되지 않음. 대신 `device:<DEVICE_NAME>` 타입의 태그를 태그 목록에 추가합니다. |
 
 {{% /tab %}}
 {{% tab "Rate" %}}
@@ -99,11 +98,11 @@ self.rate(name, value, tags=None, hostname=None, device_name=None)
 
 | 파라미터     | 유형            | 필수 | 기본값 | 설명                                                                         |
 |---------------|-----------------|----------|---------------|-------------------------------------------------------------------------------------|
-| `name`        | 스트링          | 예      | -             | 메트릭 이름.                                                             |
-| `value`       | Float           | 예      | -             | 메트릭 값.                                                           |
-| `tags`        | 스트링 목록 | 아니요       | -             | 해당 메트릭과 연관된 태그 목록.                                       |
-| `hostname`    | 스트링          | 아니요       | 현재 호스트  | 해당 메트릭과 연관된 호스트네임.                                           |
-| `device_name` | 스트링          | 아니요       | -             | 더 이상 사용되지 않음. 대신 `device:<DEVICE_NAME>` 타입의 태그를 태그 목록에 추가합니다. |
+| `name`        | 문자열          | Yes      | -             | 메트릭 이름.                                                             |
+| `value`       | Float           | Yes      | -             | 메트릭 값.                                                           |
+| `tags`        | 문자열 목록 | 아니요       | -             | 해당 메트릭과 연관된 태그 목록.                                       |
+| `hostname`    | 문자열          | 아니요       | 현재 호스트  | 해당 메트릭과 연관된 호스트네임.                                           |
+| `device_name` | 문자열          | 아니요       | -             | 더 이상 사용되지 않음. 대신 `device:<DEVICE_NAME>` 타입의 태그를 태그 목록에 추가합니다. |
 
 {{% /tab %}}
 
@@ -123,11 +122,11 @@ self.histogram(name, value, tags=None, hostname=None, device_name=None)
 
 | 파라미터     | 유형            | 필수 | 기본값 | 설명                                                                         |
 |---------------|-----------------|----------|---------------|-------------------------------------------------------------------------------------|
-| `name`        | 스트링          | 예      | -             | 메트릭 이름.                                                             |
-| `value`       | Float           | 예      | -             | 메트릭 값.                                                           |
-| `tags`        | 스트링 목록 | 아니요       | -             | 해당 메트릭과 연관된 태그 목록.                                       |
-| `hostname`    | 스트링          | 아니요       | 현재 호스트  | 해당 메트릭과 연관된 호스트네임.                                           |
-| `device_name` | 스트링          | 아니요       | -             | 더 이상 사용되지 않음. 대신 `device:<DEVICE_NAME>` 타입의 태그를 태그 목록에 추가합니다. |
+| `name`        | 문자열          | Yes      | -             | 메트릭 이름.                                                             |
+| `value`       | Float           | Yes      | -             | 메트릭 값.                                                           |
+| `tags`        | 문자열 목록 | 아니요       | -             | 해당 메트릭과 연관된 태그 목록.                                       |
+| `hostname`    | 문자열          | 아니요       | 현재 호스트  | 해당 메트릭과 연관된 호스트네임.                                           |
+| `device_name` | 문자열          | 아니요       | -             | 더 이상 사용되지 않음. 대신 `device:<DEVICE_NAME>` 타입의 태그를 태그 목록에 추가합니다. |
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -200,7 +199,7 @@ self.histogram(name, value, tags=None, hostname=None, device_name=None)
             )
     ```
 
-4. [Agent를 다시 시작합니다][4].
+4. [Agent를 재시작합니다][4].
 5. [에이전트 상태 하위 명령어][5] 실행으로 커스텀 점검이 올바로 동작하는지 확인합니다. 점검 섹션에서 `metrics_example`을 찾습니다.
 
     ```text
@@ -233,7 +232,7 @@ self.histogram(name, value, tags=None, hostname=None, device_name=None)
 
 [1]: /ko/developers/custom_checks/write_agent_check/
 [2]: /ko/metrics/types/
-[3]: /ko/agent/guide/agent-configuration-files/#agent-configuration-directory
-[4]: /ko/agent/guide/agent-commands/#restart-the-agent
-[5]: /ko/agent/guide/agent-commands/#agent-information
+[3]: /ko/agent/configuration/agent-configuration-files/#agent-configuration-directory
+[4]: /ko/agent/configuration/agent-commands/#restart-the-agent
+[5]: /ko/agent/configuration/agent-commands/#agent-information
 [6]: https://app.datadoghq.com/metric/summary

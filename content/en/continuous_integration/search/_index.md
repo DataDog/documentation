@@ -7,6 +7,9 @@ further_reading:
 - link: "/continuous_integration/explorer"
   tag: "Documentation"
   text: "Search and filter pipeline executions"
+- link: "/continuous_integration/guides/identify_highest_impact_jobs_with_critical_path/"
+  tag: "Documentation"
+  text: "Identify CI Jobs on the Critical Path to reduce the Pipeline Duration"
 ---
 
 {{< site-region region="gov" >}}
@@ -33,7 +36,7 @@ You can access high-level accumulation and trends, including:
 
 ## Search for pipelines
 
-To see your pipelines, navigate to [**CI** > **Pipelines**][1].
+To see your pipelines, navigate to [**Software Delivery** > **CI Visibility** > **CI Pipeline List**][1].
 
 The [Pipelines page][1] shows aggregate stats for the default branch of each pipeline over the selected time frame, as well as the status of the latest pipeline execution. Use this page to see all your pipelines and get a quick view of their health. Only pipelines with Git information associated to the default branch (usually named `main` or `prod`), as well as pipelines without any Git information, are displayed on this page.
 
@@ -51,6 +54,20 @@ Get insights on the selected pipeline such as total and failed executions over t
 
 The pipeline execution list shows all the times that pipeline (or its stages or jobs) ran during the selected time frame, for the selected branch. Use the facets on the left side to filter the list to exactly the pipelines, stages, or jobs you want to see.
 
+### View unified pipeline trace
+
+To see the unified pipeline trace, click on the `View unified trace` checkbox on the pipeline execution page.
+
+The unified trace shows in a single trace all pipeline traces generated due to the different partial retries of your pipeline. If the pipeline execution has no partial retries, the unified trace shows only the trace of a single pipeline execution.
+
+### Highlight critical path
+
+To highlight the critical path on the trace, click on the `Critical path` checkbox on the pipeline execution page.
+
+The critical path highlights the spans that you need to speed up if you want to reduce the overall execution time of your pipeline. If a CI job is on the critical path, it means it is part of the longest path through the trace in terms of execution time. Speeding up the CI Jobs on the critical path is strictly necessary to speed up the CI pipeline.
+
+You can use [this guide][11] to identify the CI jobs on the critical path to help you determine which jobs to prioritize in order to reduce the overall duration of the CI pipelines.
+
 ### Explore connections to services, resources, and network events
 
 Click one of the executions to open the pipeline execution view and see the flame graph or span list for the pipeline and its stages. The _Executions (n)_ list on the left side gives you quick access to the data for each retry of the pipeline for the same commit.
@@ -65,13 +82,16 @@ If job log collection is supported and enabled for the CI provider, related log 
 
 Job log collection is supported for the following providers:
 
+- [AWS CodePipeline][8]
+- [Azure][9]
+- [CircleCI][10]
 - [GitHub Actions][3]
 - [GitLab][4]
 - [Jenkins][5]
 
 #### AI-generated log summaries
 
-<div class="alert alert-info">AI-generated log summaries are in private beta. To request access, fill out <a href="https://docs.google.com/forms/d/e/1FAIpQLSfBuPfdyhgqjjduDYpOM5twJdkdDnTTxJdCCWonauaBxWTCnQ/viewform">this form</a>.</div>
+<div class="alert alert-info">AI-generated log summaries are in Preview. To request access, fill out <a href="https://docs.google.com/forms/d/e/1FAIpQLSfBuPfdyhgqjjduDYpOM5twJdkdDnTTxJdCCWonauaBxWTCnQ/viewform">this form</a>.</div>
 
 Pipeline Visibility provides AI-generated explanations for pipeline errors based on your CI job logs. These explanations can be found on the **Failed Jobs** tab for each pipeline execution. You can use these summaries to determine whether an error in CI is associated with developer-written code or the CI pipeline itself, as well as troubleshoot execution failures.
 
@@ -81,7 +101,11 @@ Pipeline Visibility provides AI-generated explanations for pipeline errors based
 
 [1]: https://app.datadoghq.com/ci/pipelines
 [3]: /continuous_integration/pipelines/github/#enable-log-collection
-[4]: /continuous_integration/pipelines/gitlab/#enable-job-log-collection-beta
+[4]: /continuous_integration/pipelines/gitlab/#enable-job-log-collection
 [5]: /continuous_integration/pipelines/jenkins#enable-job-log-collection
 [6]: /account_management/teams/ 
 [7]: /continuous_integration/pipelines/custom_tags_and_measures/?tab=linux
+[8]: /continuous_integration/pipelines/awscodepipeline/#enable-log-correlation
+[9]: /continuous_integration/pipelines/azure/#enable-job-log-collection
+[10]: /continuous_integration/pipelines/circleci/#enable-log-collection
+[11]: /continuous_integration/guides/identify_highest_impact_jobs_with_critical_path

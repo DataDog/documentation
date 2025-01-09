@@ -1,6 +1,5 @@
 ---
 title: Graphing Guides
-kind: guide
 private: true
 disable_toc: true
 aliases:
@@ -24,6 +23,7 @@ cascade:
     {{< nextlink href="dashboards/guide/context-links" >}}Context Links{{< /nextlink >}}
     {{< nextlink href="dashboards/guide/unit-override" >}}Unit override{{< /nextlink >}}
     {{< nextlink href="dashboards/guide/how-to-use-terraform-to-restrict-dashboards" >}}Using Terraform to restrict the editing of a dashboard{{< /nextlink >}}
+    {{< nextlink href="dashboards/guide/is-read-only-deprecation" >}}Dashboards API: Migrate from is_read_only by December 13, 2024{{< /nextlink >}}
     {{< nextlink href="dashboards/guide/embeddable-graphs-with-template-variables" >}}Embeddable graphs with template variables{{< /nextlink >}}
     {{< nextlink href="dashboards/guide/unable-to-iframe" >}}Why am I unable to iFrame certain HTTPS URLs?{{< /nextlink >}}
     {{< nextlink href="dashboards/guide/powerpacks-best-practices" >}}Powerpacks best practices{{< /nextlink >}}
@@ -31,7 +31,11 @@ cascade:
     {{< nextlink href="/dashboards/guide/slo_graph_query" >}}Scope metric-based SLO queries{{< /nextlink >}}
     {{< nextlink href="/dashboards/guide/apm-stats-graph" >}}Configuring an APM stats graph{{< /nextlink >}}
     {{< nextlink href="/dashboards/guide/version_history" >}}Version History{{< /nextlink >}}
+    {{< nextlink href="/dashboards/guide/graphing_json/" >}}Graphing with JSON{{< /nextlink >}}
+    {{< nextlink href="/dashboards/guide/using_vega_lite_in_wildcard_widgets/" >}}Using Vega-Lite with Wildcard Widgets in Datadog{{< /nextlink >}}
     {{< nextlink href="/dashboards/guide/graphing_json/" >}}Graphing with JSON
+    {{< /nextlink >}}
+    {{< nextlink href="/dashboards/guide/tv_mode" >}}Using TV mode for Dashboards
     {{< /nextlink >}}
 {{< /whatsnext >}}
 

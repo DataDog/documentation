@@ -14,10 +14,9 @@ further_reading:
 - link: https://www.datadoghq.com/blog/incident-postmortem-process-best-practices/
   tag: ブログ
   text: インシデントの事後分析を作成するためのベストプラクティス
-- link: https://www.datadoghq.com/blog/automate-security-tasks-with-workflows-and-cloud-siem/
+- link: https://www.datadoghq.com/blog/observability-pipelines-transform-and-enrich-logs/
   tag: blog
-  text: Datadog Workflows と Cloud SIEM で、一般的なセキュリティタスクを自動化し、脅威の先を行く
-kind: documentation
+  text: Datadog Observability Pipelines によるログの変換と強化
 title: ノートブック
 ---
 
@@ -27,7 +26,7 @@ title: ノートブック
 
 ## はじめに
 
-1. メインナビゲーションの **Notebooks > New Notebook** から、[新しいノートブック][1]を構築します。
+1. [Notebook List][1] ページで、**+ New Notebook** をクリックします。
 
 2. **Save Notebook** ボタンをクリックします。</br>
   **注**: 新しいノートブックは、デフォルトでは保存されません。
@@ -68,23 +67,55 @@ title: ノートブック
 
 ノートブックをドキュメントエディタにコピーするには、**Copy formatted contents** をクリックします。Google ドキュメントや Microsoft Word などのドキュメントエディタに貼り付けて、グラフを含むノートブックのコンテンツを元の形式で表示します。
 
-{{< img src="notebooks/export-to-gdocs.jpeg" alt="Google ドキュメントでのノートブックのエクスポートの例"  style="width:100%;">}}
-
 ### ノートブック JSON のインポートまたはエクスポート
 
 ノートブックの定義を含む JSON ファイルをダウンロードするには、**Export Notebook JSON** を使用します。**Import Notebook JSON** を使用すると、ノートブックのすべてのコンテンツがアップロード済みの JSON コンテンツで上書きされます。
 
 ### 個々のセルへのリンク設定
 
-セルの **Share** メニューの **Link directly to cell** をクリックすると、特定のセルの URL をコピーすることができます。直接リンクは、視覚化のセルと Markdown のセルの両方で利用できます。
+特定のセルの URL をコピーするには、セルの **Share** メニューをクリックし、**Link directly to cell** を選択します。直接リンクは、視覚化セルとマークダウンセルの両方で利用できます。
 
 ユーザーが特定のセルの URL にアクセスすると、ノートブックが開き、ビューポートの上部にセルが表示されます。絶対リンクのため、セルの URL はノートブック内で新しい位置に移されたとしても、変わることはありません。
+
+## ノートブックに画像を追加する
+
+<div class="alert alert-info">ファイル形式は PNG、JPG、JPEG、GIF のみ対応しており、アップロードの最大ファイルサイズは 4MB です。</a></div>
+
+ノートブックに画像を追加するには、[イメージセル](#image-cell)または [Markdown エディタ](#markdown-editor)のいずれかを使用します。
+
+### イメージセル
+
+この方法では、画像をテキストとは別のセルに配置し、サイズ変更、整列、キャプションの追加が可能です。イメージセルでアップロードされた画像は Datadog によってホストされます。
+
+画像を追加するには、**Add New Cell** メニューの **Image** セルオプションをクリックします。
+
+{{< img src="notebooks/image_cell.png" alt="Add New Cell メニューのイメージセル" style="width:70%;" >}}
+
+Datadog にホストする画像をアップロードするには、以下のいずれかの方法を使用します。
+- アップロード領域に画像ファイルをドロップします。
+- **Choose File** をクリックし、ファイルディレクトリから画像を選択します。
+- 画像の公開 URL を貼り付けます。
+
+セルのアクショントレイにあるアイコンをクリックして、サイズや配置を調整したり、キャプションを追加したり、フルスクリーンモードで画像を表示したりします。
+
+{{< img src="notebooks/notebooks_image_edit_action_tray.png" alt="イメージセルのアクショントレイで画像の配置を調整し、キャプションを追加する" style="width:70%;" >}}
+
+### Markdown エディタ
+
+この方法では画像はテキストとインラインで配置されますが、画像のサイズを変更するオプションはありません。
+
+任意の Markdown セルの編集モードに入り、以下のいずれかの方法で画像を追加します。
+- 画像ファイルをテキストセル領域にドロップします。
+- 画像をコピーしてテキストセル領域に直接貼り付けます。
+- ヘッダーの画像ウィジェットを使用するか、[公式 Markdown ガイド][2]を参照して外部画像をハイパーリンクします。**注**: この方法では Datadog にホストする画像をアップロードしません。
+
+画像をノートブックに保存する前に、Preview タブで画像を確認できます。
 
 ## ノートブック一覧
 
 {{< img src="notebooks/notebook_list.png" alt="選択したノートブックのセルの種類をプレビューするノートブック一覧" style="width:100%;">}}
 
-[ノートブック一覧][2]で、以前に作成したノートブックの表示と検索ができます。各ノートブックの名前、作成者、最終更新日が表示されます。ノートブックは以下のグループに分けられます。
+[ノートブック一覧][1]で、以前に作成したノートブックの表示と検索ができます。各ノートブックの名前、作成者、最終更新日が表示されます。ノートブックは以下のグループに分けられます。
 
 * **Your Notebooks**: 自分が作成したノートブック。
 * **All Notebooks**: 組織内のすべてのノートブック。
@@ -166,22 +197,27 @@ title: ノートブック
 
 ノートブック内のグラフは、Datadog のすべてのデータソースに対応しています（メトリクス、ログイベント、インデックス化されたスパン、ライブプロセス、ネットワークトラフィック、RUM イベント、プロファイリングのメトリクス、セキュリティシグナルなど）。グラフは、Datadog のクエリエディターで作成します。ノートブックは以下に対応しています。
 
-* [時系列][8]
-* [トップリスト][9]
-* [Table][10]
-* [ヒートマップ][11]
-* [ディストリビューション][12]
-* [リスト][13]
-* [クエリ値][14]
-* [ファネル][15]
-* [パイ][16]
-* [SLO サマリー][17]
+* [テキスト][8]
+* [画像](#add-images-to-cells)
+* [時系列][9]
+* [トップリスト][10]
+* [テーブル][11]
+* [クエリ値][12]
+* [ヒートマップ][13]
+* [分布][14]
+* [リスト][15]
+* [プロファイリングフレームグラフ][16]
+* [ファネル][17]
+* [円グラフ][18]
+* [ツリーマップ][16]
+* [ジオマップ][19]
+* [SLO][20]
 
 ### 編集アクセス権の制限
 
 デフォルトでは、すべてのユーザーがノートブックにフルアクセスできます。
 
-きめ細かいアクセス制御を使用して、特定のノートブックを編集できる[ロール][18]を制限することができます。
+きめ細かいアクセス制御を使用して、特定のノートブックを編集できる[ロール][21]を制限することができます。
 1. ノートブックを表示中に、右上の歯車をクリックします。設定メニューが開きます。
 1. **Permissions** を選択します。
 1. **Restrict Access** をクリックします。
@@ -197,27 +233,30 @@ title: ノートブック
 1. ノートブックを表示中に、右上の歯車をクリックします。設定メニューが開きます。
 1. **Permissions** を選択します。
 1. **Restore Full Access** をクリックします。
-1. **保存**をクリックします。
+1. **Save** をクリックします。
 
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/notebook
-[2]: https://app.datadoghq.com/notebook/list
+[1]: https://app.datadoghq.com/notebook/list
+[2]: https://www.markdownguide.org/basic-syntax/#images-1
 [3]: https://app.datadoghq.com/notebook/template-gallery
 [4]: /ja/notebooks/guide/version_history
 [5]: /ja/dashboards/template_variables/
 [6]: https://daringfireball.net/projects/markdown/
 [7]: https://mermaid.js.org/
-[8]: /ja/dashboards/widgets/timeseries/
-[9]: /ja/dashboards/widgets/top_list/
-[10]: /ja/dashboards/widgets/table/
-[11]: /ja/dashboards/widgets/heatmap/
-[12]: /ja/dashboards/widgets/distribution/
-[13]: /ja/dashboards/widgets/list/
-[14]: /ja/dashboards/widgets/query_value/
-[15]: /ja/dashboards/widgets/funnel/
-[16]: /ja/dashboards/widgets/pie_chart/
-[17]: /ja/dashboards/widgets/slo/
-[18]: /ja/account_management/rbac/
+[8]: /ja/dashboards/widgets/free_text/
+[9]: /ja/dashboards/widgets/timeseries/
+[10]: /ja/dashboards/widgets/top_list/
+[11]: /ja/dashboards/widgets/table/
+[12]: /ja/dashboards/widgets/query_value/
+[13]: /ja/dashboards/widgets/heatmap/
+[14]: /ja/dashboards/widgets/distribution/
+[15]: /ja/dashboards/widgets/list/
+[16]: /ja/dashboards/widgets/treemap/
+[17]: /ja/dashboards/widgets/funnel/
+[18]: /ja/dashboards/widgets/pie_chart/
+[19]: /ja/dashboards/widgets/geomap/
+[20]: /ja/dashboards/widgets/slo/
+[21]: /ja/account_management/rbac/

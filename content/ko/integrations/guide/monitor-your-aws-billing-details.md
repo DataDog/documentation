@@ -1,7 +1,6 @@
 ---
 aliases:
 - /ko/integrations/faq/how-do-i-monitor-my-aws-billing-details
-kind: 가이드
 title: AWS 빌링 상세 내용 모니터링하기
 ---
 

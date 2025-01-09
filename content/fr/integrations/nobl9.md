@@ -23,7 +23,7 @@ integration_id: nobl9
 integration_title: Nobl9
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 maintainer: support@nobl9.com
 manifest_version: 1.0.0
 metric_prefix: nobl9.

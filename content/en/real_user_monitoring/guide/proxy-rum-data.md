@@ -1,6 +1,6 @@
 ---
 title: Proxy Your Browser RUM Data
-kind: guide
+
 aliases:
   - /real_user_monitoring/faq/proxy_rum_data/
 further_reading:
@@ -106,6 +106,13 @@ This function receives an object with the following properties:
 - `path`: the path for the Datadog requests (example: `/api/v2/rum`)
 - `parameters`: the parameters of the Datadog requests (example: `ddsource=browser&...`)
 
+**Note**:
+
+- **JSP web applications** need to use the `\` escape character to properly propagate these parameters to the browser. For example:
+  ```javascript
+  proxy: (options) => 'http://proxyURL:proxyPort\${options.path}?\${options.parameters}',
+  ```
+
 {{< tabs >}}
 {{% tab "NPM" %}}
 
@@ -162,7 +169,7 @@ The Datadog intake origin needs to be defined in your proxy implementation to en
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/browser/#initialization-parameters
+[1]: /real_user_monitoring/browser/setup/#initialization-parameters
 [2]: https://github.com/easylist/easylist/blob/997fb6533c719a015c21723b34e0cedefcc0d83d/easyprivacy/easyprivacy_general.txt#L3840
 
 

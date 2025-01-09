@@ -15,7 +15,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/engineering/how-we-optimized-our-akka-application-using-datadogs-continuous-profiler/
   tag: 블로그
   text: Datadog의 지속적 프로파일러를 사용해 Akka 애플리케이션을 최적화하는 방법
-kind: 설명서
 title: 프로파일 비교
 ---
 

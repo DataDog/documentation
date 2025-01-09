@@ -1,6 +1,5 @@
 ---
 title: Detection Rules
-kind: documentation
 aliases:
   - /security_monitoring/detection_rules/
   - /cloud_siem/detection_rules/
@@ -33,20 +32,20 @@ products:
 
 {{< product-availability >}}
 
-Detection rules define conditional logic that is applied to all ingested logs and cloud configurations. When at least one case defined in a rule is matched over a given period of time, a security signal is generated. You can view these signals in the [Signals Explorer][16].
+Detection rules define conditional logic that is applied to all ingested logs and cloud configurations. When at least one case defined in a rule is matched over a given period of time, a security signal is generated. You can view these signals in the [Signals Explorer][1].
 
 ## Out-of-the-box detection rules
 
-Datadog provides [out-of-the-box detection rules][1] to flag attacker techniques and potential misconfigurations. When new detection rules are released, they are automatically imported into your account, your Application Security Management library, and the Agent, depending on your configuration.
+Datadog provides [out-of-the-box detection rules][2] to flag attacker techniques and potential misconfigurations. When new detection rules are released, they are automatically imported into your account, your Application Security Management library, and the Agent, depending on your configuration.
 
 Out-of-the box rules are available for the following security products:
 
-- [Cloud SIEM][2] uses log detection to analyze ingested logs in real-time.
+- [Cloud SIEM][3] uses log detection to analyze ingested logs in real-time.
 - Cloud Security Management (CSM):
     - [CSM Misconfigurations][4] uses cloud configuration and infrastructure configuration detection rules to scan the state of your cloud environment.
     - [CSM Threats][5] uses the Datadog Agent and detection rules to actively monitor and evaluate system activity.
-    - [CSM Identity Risks][14] uses detection rules to detect IAM-based risks in your cloud infrastructure.
-- [Application Security Management][6] (ASM) leverages Datadog [APM][7], the [Datadog Agent][8], and detection rules to detect threats in your application environment.
+    - [CSM Identity Risks][6] uses detection rules to detect IAM-based risks in your cloud infrastructure.
+- [Application Security Management][7] (ASM) leverages Datadog [APM][8], the [Datadog Agent][9], and detection rules to detect threats in your application environment.
 
 ## Beta detection rules
 
@@ -60,7 +59,7 @@ To [create custom rules](#create-detection-rules), you can clone the default rul
 
 ## Search and filter detection rules
 
-To view out-of-the-box and custom detection rules in Datadog, navigate to the [**Security Settings**][15] page. Rules are listed on separate pages for each product (Application Security, Cloud Security Management, and Cloud SIEM).
+To view out-of-the-box and custom detection rules in Datadog, navigate to the [**Security Settings**][10] page. Rules are listed on separate pages for each product (Application Security, Cloud Security Management, and Cloud SIEM).
 
 To search and filter the rules, use the search box and facets to query by value. For example, to only show rules for a given rule type, hover over the rule type and select `only`. You can also filter by facets such as `source` and `severity` when investigating and triaging incoming issues.
 
@@ -72,10 +71,10 @@ To create a custom detection rule, click the **New Rule** button in the upper-ri
 
 For detailed instructions, see the following articles:
 
-- [Cloud SIEM][3]
-- [ASM][11]
-- [CSM Misconfigurations][12]
-- [CSM Threats][13]
+- [Cloud SIEM][11]
+- [ASM][12]
+- [CSM Misconfigurations][13]
+- [CSM Threats][14]
 
 ## Manage detection rules
 
@@ -111,25 +110,11 @@ To delete a custom rule, click the vertical three-dot menu for the rule and sele
 
 ### Restrict edit permissions
 
-By default, all users have full access to the detection rules. To use granular access controls to limit the [roles][10] that may edit a single rule:
-
-1. Click the vertical three-dot menu for the rule and select **Permissions**.
-1. Click **Restrict Access**. The dialog box updates to show that members of your organization have **Viewer** access by default.
-1. Use the dropdown menu to select one or more roles, teams, or users that may edit the security rule.
-1. Click **Add**.
-1. Click **Save**.
-
-**Note:** To maintain your edit access to the rule, the system requires you to include at least one role that you are a member of before saving.
-
-To restore access to a rule:
-
-1. Click the vertical three-dot menu for the rule and select **Permissions**.
-1. Click **Restore Full Access**.
-1. Click **Save**.
+{{% security-products/detection-rules-granular-access %}}
 
 ### View generated signals
 
-To view the security signals for a rule in the [Signals Explorer][16], click the vertical three-dot menu and select **View generated signals**. This is useful when correlating signals across multiple sources by rule, or when completing an audit of rules.
+To view the security signals for a rule in the [Signals Explorer][1], click the vertical three-dot menu and select **View generated signals**. This is useful when correlating signals across multiple sources by rule, or when completing an audit of rules.
 
 ### Export a rule as JSON
 
@@ -144,7 +129,7 @@ The rule deprecation process is as follows:
 1. There is a warning with the deprecation date on the rule. In the UI, the warning is shown in the:
     - Signal side panel's **Rule Details > Playbook** section
     - Misconfigurations side panel (CSM Misconfigurations only)
-    - [Rule editor][15] for that specific rule 
+    - [Rule editor][10] for that specific rule 
 2. Once the rule is deprecated, there is a 15 month period before the rule is deleted. This is due to the signal retention period of 15 months. During this time, you can re-enable the rule by [cloning the rule](#clone-a-rule) in the UI.
 3. Once the rule is deleted, you can no longer clone and re-enable it.
 
@@ -152,19 +137,17 @@ The rule deprecation process is as follows:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security/default_rules/
-[2]: /security/cloud_siem/
-[3]: /security/cloud_siem/log_detection_rules/
+[1]: https://app.datadoghq.com/security
+[2]: /security/default_rules/
+[3]: /security/cloud_siem/
 [4]: /security/cloud_security_management/misconfigurations/
 [5]: /security/threats/
-[6]: /security/application_security/
-[7]: /tracing/
-[8]: /agent/
-[9]: https://app.datadoghq.com/security/configuration/rules
-[10]: /account_management/rbac/
-[11]: /security/application_security/threats/custom_rules/
-[12]: /security/cloud_security_management/misconfigurations/custom_rules
-[13]: /security/threats/workload_security_rules?tab=host#create-custom-rules
-[14]: /security/cloud_security_management/identity_risks/
-[15]: https://app.datadoghq.com/security/configuration/
-[16]: https://app.datadoghq.com/security
+[6]: /security/cloud_security_management/identity_risks/
+[7]: /security/application_security/
+[8]: /tracing/
+[9]: /agent/
+[10]: https://app.datadoghq.com/security/configuration/
+[11]: /security/cloud_siem/detection_rules/
+[12]: /security/application_security/threats/custom_rules/
+[13]: /security/cloud_security_management/misconfigurations/custom_rules
+[14]: /security/threats/workload_security_rules?tab=host#create-custom-rules

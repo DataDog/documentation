@@ -24,6 +24,7 @@ author:
 categories:
 - キャッシュ
 - data stores
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/eventstore/README.md
 display_on_public_website: true
@@ -33,7 +34,6 @@ integration_id: eventstore
 integration_title: Eventstore
 integration_version: 2.0.0
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: eventstore
 public_title: Eventstore
@@ -50,6 +50,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: Eventstore のメトリクスを収集
   media: []
@@ -68,11 +69,11 @@ EventStore からメトリクスをリアルタイムに取得して、以下の
 * EventStore のキューを視覚化および監視できます。
 * 以下の API エンドポイントで、使用可能なすべてのメトリクスをキャプチャします。統計、ノード情報、非過渡的な予測、サブスクリプション、クラスターゴシップ（スクレープするエンドポイントのリストは構成できます）
 
-## 計画と使用
+## セットアップ
 
 EventStore チェックは [Datadog Agent][1] パッケージに含まれていないため、お客様自身でインストールする必要があります。
 
-### インフラストラクチャーリスト
+### インストール
 
 Agent v7.21 / v6.21 以降の場合は、下記の手順に従い EventStore チェックをホストにインストールします。Docker Agent または 上記バージョン以前の Agent でインストールする場合は、[コミュニティインテグレーションの使用][2]をご参照ください。
 
@@ -84,7 +85,7 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い EventStore チ
 
 2. コアの[インテグレーション][3]と同様にインテグレーションを構成します。
 
-### ブラウザトラブルシューティング
+### 構成
 
 1. EventStore の[メトリクス](#metrics)の収集を開始するには、[Agent のコンフィギュレーションディレクトリ][4]のルートにある `conf.d/` フォルダーの `eventstore.d/conf.yaml` ファイルを編集します。
    使用可能なすべてのコンフィギュレーションオプションについては、[サンプル eventstore.d/conf.yaml][5] を参照してください。
@@ -99,21 +100,21 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い EventStore チ
 
 このチェックは、すべての主要プラットフォームと互換性があります。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "eventstore" >}}
 
 
-### ヘルプ
+### イベント
 
 eventstore チェックには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 
 eventstore チェックには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、このインテグレーションの[メインテナー][9]までお問い合わせください。
 

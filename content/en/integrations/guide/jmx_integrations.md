@@ -1,6 +1,6 @@
 ---
 title: Which Integrations use Jmxfetch?
-kind: guide
+
 further_reading:
 - link: "/agent/faq/log4j_mitigation/"
   tag: "Documentation"

@@ -16,7 +16,7 @@ integration_id: ''
 integration_title: Amazon 기계 학습
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: amazon_machine_learning
 public_title: Datadog-Amazon 기계 학습 통합

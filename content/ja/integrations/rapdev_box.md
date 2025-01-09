@@ -32,6 +32,7 @@ categories:
 - マーケットプレイス
 - メトリクス
 - notifications
+custom_kind: integration
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -40,7 +41,6 @@ integration_id: rapdev-box
 integration_title: Box
 integration_version: ''
 is_public: true
-kind: integration
 legal_terms:
   eula: assets/EULA.pdf
 manifest_version: 2.0.0
@@ -105,7 +105,7 @@ tile:
  + [ユーザーソースオブジェクト](https://developer.box.com/guides/events/event-triggers/event-source/#user-source-object)
  + [シールドイベント](https://developer.box.com/guides/events/event-triggers/shield-alert-events/)
  + [サインイベント](https://developer.box.com/guides/events/event-triggers/sign-events/)
-### データセキュリティ
+### メトリクス
 このインテグレーションは、Box エンタープライズアカウントのユーザーに関するストレージメトリクスを収集します。
 以下のメトリクスを送信します。
 ```
@@ -113,7 +113,7 @@ rapdev.box.users.count
 rapdev.box.users.storage.max
 rapdev.box.users.storage.used
 ```
-### ワークフローの自動化
+### Logs
 このインテグレーションは、`admin_logs_streaming` エンドポイントを使用して Box 管理者ログを収集します。
 以下のトリガーは、ログとして Datadog に送信されます。
  + [ユーザーソースオブジェクト](https://developer.box.com/guides/events/event-triggers/event-source/#user-source-object)
@@ -208,7 +208,7 @@ rapdev.box.users.storage.used
     }
 }
  ```
-### ライブラリ
+### ダッシュボード
 このインテグレーションは、**Box Integration Overview** という名前のすぐに使えるダッシュボードを提供します。ダッシュボードは、メトリクスとログが収集されると、ポップアップ表示されます。
 
 Agent がログを収集するためには、メインの `datadog.yaml` ファイルで `logs_enabled: true` を設定します。

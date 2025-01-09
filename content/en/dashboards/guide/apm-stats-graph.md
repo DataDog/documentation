@@ -1,6 +1,5 @@
 ---
 title: Configuring An APM Stats Graph
-kind: guide
 disable_toc: false
 aliases:
 - /dashboards/querying/#configuring-an-apm-stats-graph

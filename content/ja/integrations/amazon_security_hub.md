@@ -3,6 +3,7 @@ categories:
 - cloud
 - AWS
 - ログの収集
+custom_kind: integration
 dependencies: []
 description: AWS Security Hub イベントをログとして取り込みます。
 doc_link: ''
@@ -13,7 +14,6 @@ integration_id: amazon-security-hub
 integration_title: AWS Security Hub
 integration_version: ''
 is_public: true
-kind: integration
 manifest_version: '1.0'
 name: amazon_security_hub
 public_title: Datadog-AWS Security Hub インテグレーション
@@ -30,7 +30,7 @@ AWS Security Hub は、AWS のセキュリティ状態の包括的なビュー�
 
 **注**: Datadog のセキュリティシグナルを Security Hub に送信し、AWS 環境での追加イベントのオーケストレーションを行うことも可能です。[securityhub-eventbridge-example][1] リポジトリの指示に従ってセットアップしてください。
 
-## 計画と使用
+## セットアップ
 
 Datadog は Amazon EventBridge を使用して、Security Hub イベントをログとして Datadog に転送します。
 
@@ -46,7 +46,7 @@ Datadog は Amazon EventBridge を使用して、Security Hub イベントをロ
 10. [Datadog forwarder][3] を選択して、Datadog にログを送信します。
 11. **Create** をクリックします。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
 

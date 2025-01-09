@@ -1,6 +1,6 @@
 ---
 title: Setting Up APM with C++
-kind: guide
+
 further_reading:
 - link: "/tracing/trace_collection/dd_libraries/cpp/"
   tag: "Documentation"
@@ -34,61 +34,27 @@ sudo apt-get update
 sudo apt-get -y install g++ cmake
 ```
 
-Run these two lines together to get the latest C++ version:
-
-```cpp
-get_latest_release() {
-  wget -qO- "https://api.github.com/repos/$1/releases/latest" |
-    grep '"tag_name":' |
-    sed -E 's/.*"([^"]+)".*/\1/';
-}
-DD_OPENTRACING_CPP_VERSION="$(get_latest_release DataDog/dd-opentracing-cpp)"
-```
-
-If you get a rate limited message from GitHub, wait a few minutes and run the command again. When the update is complete, confirm that this is successful by checking your C++ version with:
+Download and install `dd-trace-cpp` library with:
 
 ```shell
-echo $DD_OPENTRACING_CPP_VERSION
+wget https://github.com/DataDog/dd-trace-cpp/archive/v0.2.0.tar.gz -O dd-trace-cpp.tar.gz
 ```
 
-Then, download and install the `dd-opentracing-cpp` library with:
+If you get a rate limited message from GitHub, wait a few minutes and run the command again.
 
-```shell
-wget https://github.com/DataDog/dd-opentracing-cpp/archive/${DD_OPENTRACING_CPP_VERSION}.tar.gz -O dd-opentracing-cpp.tar.gz
-```
-
-After downloading the `tar` file, create a new directory and a `.build` file for the library:
-
-```shell
-mkdir -p dd-opentracing-cpp/.build
-```
-
-Then unzip it:
+After downloading the `tar` file, unzip it:
 
 ```bash
-tar zxvf dd-opentracing-cpp.tar.gz -C ./dd-opentracing-cpp/ --strip-components=1
+tar zxvf dd-trace-cpp.tar.gz -C ./dd-trace-cpp/ --strip-components=1
 ```
 
-You should see a list of the library contents in your console:
-
-```shell
-dd-opentracing-cpp-1.0.1/test/integration/nginx/nginx.conf
-dd-opentracing-cpp-1.0.1/test/integration/nginx/nginx_integration_test.sh
-```
-
-Next, go in your `.build` directory:
-
-```shell
-cd dd-opentracing-cpp/.build
-```
-
-Finally, install dependencies with:
+Finally, build and install the library:
 
 ```bash
-sudo ../scripts/install_dependencies.sh
-cmake ..
-make
-sudo make install
+cd dd-trace-cpp
+cmake -B build .
+cmake --build build -j
+cmake --install build
 ```
 
 ## Building a simple app
@@ -96,33 +62,44 @@ sudo make install
 Create a new file called `tracer_example.cpp` and populate it with the below code:
 
 ```cpp
-#include <datadog/opentracing.h>
+#include <datadog/tracer.h>
 #include <iostream>
 #include <string>
 
 int main(int argc, char* argv[]) {
-  datadog::opentracing::TracerOptions tracer_options{"localhost", 8126, "compiled-in example"};
-  auto tracer = datadog::opentracing::makeTracer(tracer_options);
+  datadog::tracing::TracerConfig tracer_config;
+  tracer_config.service = "compiled-in example";
+
+  const auto validated_config = dd::finalize_config(tracer_options);
+  if (!validated_config) {
+    std::cerr << validated_config.error() << '\n';
+    return 1;
+  }
+
+  dd::Tracer tracer{*validated_config};
 
   // Create some spans.
   {
-    auto span_a = tracer->StartSpan("A");
-    span_a->SetTag("tag", 123);
-    auto span_b = tracer->StartSpan("B", {opentracing::ChildOf(&span_a->context())});
-    span_b->SetTag("tag", "value");
+    datadog::tracing::SpanConfig options;
+    options.name = "A";
+    options.tags.emplace("tag", "123");
+    auto span_a = tracer.create_span(options);
+
+    auto span_b = span_a.create_child();
+    span_b.set_name("B");
+    span_b.set_tag("tag", "value");
   }
 
-  tracer->Close();
   return 0;
 }
 ```
 
 This creates a tracer that generates two spans, a parent span `span_a` and a child span `span_b`, and tags them.
 
-Then, link against `libdd_opentracing` and `libopentracing` with:
+Then, compile and link against `libdd_trace_cpp` with:
 
 ```shell
-g++ -std=c++14 -o tracer_example tracer_example.cpp -ldd_opentracing -lopentracing
+g++ -std=c++17 -o tracer_example tracer_example.cpp -ldd_trace_cpp
 ```
 
 Finally, run the app with:
@@ -150,7 +127,7 @@ LD_LIBRARY_PATH=/usr/local/lib/ ./tracer_example
 On the Trace Agent tab, you will see something similar to:
 
 ```text
-2019-08-09 20:02:26 UTC | TRACE | INFO | (pkg/trace/info/stats.go:108 in LogStats) | [lang:cpp lang_version:201402 tracer_version:v1.0.1] -> traces received: 1, traces filtered: 0, traces amount: 363 bytes, events extracted: 0, events sampled: 0
+2019-08-09 20:02:26 UTC | TRACE | INFO | (pkg/trace/info/stats.go:108 in LogStats) | [lang:cpp lang_version:201402 tracer_version:0.2.0] -> traces received: 1, traces filtered: 0, traces amount: 363 bytes, events extracted: 0, events sampled: 0
 ```
 
 The service then shows up in the Service Catalog in Datadog.
@@ -165,5 +142,5 @@ Click on the service to view your traces.
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/setup/cpp/#compile-against-dd-opentracing-cpp
+[1]: /tracing/setup/cpp/
 [2]: https://app.datadoghq.com/account/settings/agent/latest?platform=ubuntu

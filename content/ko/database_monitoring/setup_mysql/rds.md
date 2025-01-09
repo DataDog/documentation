@@ -4,7 +4,6 @@ further_reading:
 - link: /integrations/mysql/
   tag: 설명서
   text: 기본 MySQL 통합
-kind: 설명서
 title: Amazon RDS 매니지드 MySQL에 대한 데이터베이스 모니터링 설정
 ---
 

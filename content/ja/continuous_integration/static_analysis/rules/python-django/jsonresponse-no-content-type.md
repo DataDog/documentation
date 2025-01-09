@@ -1,7 +1,6 @@
 ---
 dependencies: []
 disable_edit: true
-kind: documentation
 title: JsonResponse に content-type を指定しない
 ---
 ## メタデータ

@@ -21,6 +21,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - containers
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/kubelet/README.md
 display_on_public_website: true
@@ -28,9 +29,8 @@ draft: false
 git_integration_title: kubelet
 integration_id: kubelet
 integration_title: Kubelet
-integration_version: 7.9.1
+integration_version: 9.0.0
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: kubelet
 public_title: Kubelet
@@ -45,7 +45,8 @@ tile:
   - Supported OS::Linux
   - Supported OS::macOS
   - Supported OS::Windows
-  - Category::Containers
+  - Category::コンテナ
+  - Offering::Integration
   configuration: README.md#Setup
   description: Kubelet からコンテナ統計を収集。
   media: []
@@ -54,6 +55,7 @@ tile:
   title: Kubelet
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ## 概要
@@ -69,7 +71,7 @@ tile:
 
 Kubelet チェックは [Datadog Agent][1] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 
-### コンフィギュレーション
+### 構成
 
 [Agent のコンフィギュレーションディレクトリ][2]のルートにある `conf.d/` フォルダーの `kubelet.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル kubelet.d/conf.yaml][3] を参照してください。
 
@@ -108,7 +110,7 @@ kubeletArguments:
 
 ## 収集データ
 
-### サービスのチェック
+### サービスチェック
 {{< get-service-checks-from-git "kubelet" >}}
 
 

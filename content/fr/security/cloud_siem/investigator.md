@@ -6,7 +6,6 @@ further_reading:
 - link: /cloud_siem/explorer/
   tag: Documentation
   text: En savoir plus sur le Security Signals Explorer
-kind: documentation
 title: Investigator
 ---
 

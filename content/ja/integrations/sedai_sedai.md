@@ -18,6 +18,7 @@ categories:
 - notifications
 - orchestration
 - プロビジョニング
+custom_kind: integration
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -26,7 +27,6 @@ integration_id: sedai-sedai-license
 integration_title: Sedai
 integration_version: ''
 is_public: true
-kind: integration
 legal_terms:
   eula: assets/eula.pdf
 manifest_version: 2.0.0
@@ -82,6 +82,9 @@ tile:
     image_url: images/sedai_7.png
     media_type: image
   overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/autonomous-cloud-management-aws-lambda-sedai-datadog/
   support: README.md#Support
   title: Sedai
   uninstallation: README.md#Uninstallation
@@ -94,7 +97,7 @@ Sedai は、本番環境をプロアクティブに管理し、問題を防止�
 
 ソフトウェアライセンスと Datadog インテグレーションを組み合わせることで、Sedai が本番環境で自律的に実行するアクションについて、Datadog で通知を受け取ることができます。
 
-### UDS の仕組み
+### 仕組み
 
 * **エージェントレス:** クラウドアカウントにシームレスに接続し、本番環境を自動的に検知・把握します。
 
@@ -102,7 +105,7 @@ Sedai は、本番環境をプロアクティブに管理し、問題を防止�
 
 * **プロアクティブアクション:** お客様に代わって本番稼動を安全に行い、リソースの可用性問題を回避し、常に最適な状態で稼動することを保証します。
 
-## Agent
+## サポート
 
 サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから Sedai にお問い合わせください。
 

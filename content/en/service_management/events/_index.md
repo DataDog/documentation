@@ -1,7 +1,5 @@
 ---
 title: Event Management
-kind: documentation
-is_beta: true
 aliases:
 - /guides/eventcorrelation/
 - /guides/markdown/
@@ -19,6 +17,12 @@ further_reading:
 - link: "https://app.datadoghq.com/event/configuration/quick-start"
   tag: "App"
   text: "Quick Start Guide"
+- link: "https://www.datadoghq.com/blog/datadog-event-management"
+  tag: "Blog"
+  text: "Aggregate, correlate, and act on alerts faster with AIOps-powered Event Management"
+- link: "https://www.datadoghq.com/blog/datadog-service-management/"
+  tag: "Blog"
+  text: "Ensure high service availability with Datadog Service Management"
 ---
 
 {{< site-region region="gov" >}}
@@ -29,9 +33,11 @@ further_reading:
 
 ## Overview
 
-Ingest, enrich and normalize, and correlate (see public beta) your events from any source into actionable insights. Datadog automatically creates events from various products including monitors, Watchdog, and Error Tracking. You can also track events generated from the Agent and installed integrations. Event Management can also ingest events from any sources, including alert events from third parties, change requests, deployments, configuration changes.
+Ingest, enrich and normalize, and correlate your events from any source into actionable insights. Datadog automatically creates events from various products including monitors, Watchdog, and Error Tracking. You can also track events generated from the Agent and installed integrations. Event Management can also ingest events from any sources, including alert events from third parties, change requests, deployments, configuration changes.
 
 More than 100 Datadog integrations support events collection, including [Kubernetes][1], [Docker][2], [Jenkins][3], [Chef][4], [Puppet][5], [Amazon ECS][6] or [Autoscaling][7], [Sentry][8], and [Nagios][9]. 
+
+**Tip**: To open the Event Management page from Datadog's global search, press <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>K</kbd> and search for `event explorer`.
 
 {{< callout url="https://docs.datadoghq.com/api/latest/events/" header="false" >}}
 **Update to the aggregation_key for Datadog monitor events starting March1st:** Currently, the aggregation_key is unique per Monitor ID. Starting March 1st, we will update it to be unique per Monitor ID and Monitor Group. If you’re using monitor events aggregation_key in dashboard queries or the Event API, please migrate to using @monitor.id. Please reach out to [support](https://www.datadoghq.com/support/) if you have any question.

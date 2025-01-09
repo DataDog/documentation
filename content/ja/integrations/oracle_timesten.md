@@ -30,6 +30,7 @@ categories:
 - data stores
 - マーケットプレイス
 - oracle
+custom_kind: integration
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -38,7 +39,6 @@ integration_id: rapdev-oracle-timesten
 integration_title: Oracle TimesTen
 integration_version: ''
 is_public: true
-kind: integration
 legal_terms:
   eula: assets/EULA.pdf
 manifest_version: 2.0.0
@@ -114,4 +114,4 @@ Oracle TimesTen インテグレーションにより、TimesTen インメモリ�
 *お探しのインテグレーションが見つかりませんか？組織に役立つ重要なツールの導入をお考えですか？[こちら](mailto:support@rapdev.io)からメッセージをお送りいただければ、導入をサポートいたします！*
 
 ---
-このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/rapdev-oracle-timesten" target="_blank">こちらをクリック</a>してください。
+このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。利用するには、<a href="https://app.datadoghq.com/marketplace/app/rapdev-oracle-timesten" target="_blank">Marketplace でこのアプリケーションを購入してください</a>。

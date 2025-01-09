@@ -1,6 +1,5 @@
 ---
 title: Metrics Summary
-kind: documentation
 description: "Consult the full list of metrics reporting to Datadog."
 aliases:
   - /graphing/faq/how-can-i-set-up-custom-units-for-custom-metrics
@@ -36,25 +35,27 @@ The search bars provide the most comprehensive set of actions to filter the list
 - **Historical Metrics**: Metrics that have historical metrics ingestion enabled 
 - **Query Activity** (Beta): Metrics not queried in the app or by the API in the past 30 days
 - **Metric Type**: Differentiate between distribution and non-distribution metrics (counts, gauges, rates)
-- **Distribution Metric Origin**: The product from which the metric originated (for example, metrics generated from Logs or APM Spans)
+- **Metric Origin**: The product from which the metric originated (for example, metrics generated from Logs or APM Spans). To learn more about the different metric origin types, see [Metric origin definitions][12].
 
 **Note**: A metric included on a Dashboard that has not been loaded by a user in the last 30 days would not be considered actively queried.
 
 {{< img src="metrics/summary/facets4.png" alt="Metrics Facet Panel" style="width:75%;">}}
 
 ## Configuration of multiple metrics 
-There are two buttons that allow you to configure multiple metrics at a time: 
 
-{{< img src="metrics/summary/configurationbuttons2.png" alt="Bulk Configuration Buttons" style="width:75%;">}}
+Clicking on **Configure Metrics** gives you multiple options that you can use to configure more than one metric at a time: 
 
-* **Calculate Percentiles**: Add percentile aggregations to multiple distribution metrics.
+{{< img src="metrics/summary/configurationbuttons10-11-2024.png" alt="Bulk configuration buttons" style="width:100%;">}}
 
-{{< img src="metrics/summary/bulkpercentiles.jpg" alt="Bulk Percentiles" style="width:75%;">}}
-
-* **Configure Tags**: Configure tags on multiple custom metrics matching a namespace using Metrics without Limits™
+* **Manage tags**: Configure tags on multiple custom metrics matching a namespace using Metrics without Limits™.
 
 {{< img src="metrics/summary/bulkconfig_new-compressed.mp4" alt="Bulk Metric Tag Configuration" video="true" style="width:100%;" >}}
 
+* **Enable or disable percentiles**: Manage percentile aggregations across multiple distribution metrics. See the [Distributions page][31] for more information.
+
+{{< img src="metrics/summary/percentile_aggregations_toggle.png" alt="Toggle to manage percentile aggregations" style="width:100%;">}}
+
+* **Enable or disable historical metrics ingestion**: Manage the ingestion of historical metric data. See the [Historical Metrics Ingestion page][30] for more information.
 
 ## Metric details sidepanel
 
@@ -74,7 +75,7 @@ Learn more in the [custom metrics][4] documentation.
 
 ### Indexed custom metrics
 
-Unlike ingested custom metrics, indexed custom metrics represent those that remain queryable across the Datadog platform. This number may be impacted by adding or removing percentile aggregations or by use of Metrics without Limits™. Learn more in the [Metrics without Limits™][10] documentation.
+Unlike ingested custom metrics, indexed custom metrics represent those that remain queryable across the Datadog platform. This number may be impacted by adding or removing percentile aggregations or by use of Metrics without Limits™. Learn more in the [Metrics without Limits™][0] documentation.
 
 ### Hosts
 
@@ -182,11 +183,41 @@ More aggregations are available should they be valuable to you. You can add or r
 
 **Note**: Configuring your count, rate, or gauge metric and removing an aggregation may impact existing dashboards and monitors.
 
+### Metric origin definitions
+
+This table shows the mapping between the metric origin as seen in the facet and where it was submitted from:
+
+| Metric Origin           | Submitted from                                                                |
+| ------------------------| ----------------------------------------------------------------------------- |
+| API Catalog             | Timeseries sent by the Datadog [API Catalog][13] product from the APIM Endpoint.
+| APM                     | Timeseries sent by the Datadog APM product for metrics generated from traces and span metrics.
+| Agent                   | Timeseries sent by the Datadog Agent, collected from [Agent integrations][10], [built-in integrations][9], [DogStatsD][32], or [custom Agent checks][33].
+| CSM                     | Timeseries sent by the Datadog [Cloud Security Monitoring][14] product.
+| Cloud Integrations      | Timeseries collected from cloud providers like AWS, Azure, and Google Cloud etc. from their respective integrations. 
+| DBM                     | Timeseries sent by the Datadog [Database Monitoring][15] product, including insights into MySQL, Oracle, and Postgres activities/queries/locks.
+| DSM                     | Timeseries sent by the Datadog [Data Streams Monitoring][16] product, for metrics generated from the DSM spans and traces.
+| Datadog Exporter        | Timeseries sent by the [OpenTelemetry Collector][17] or the [Datadog Exporter][18].
+| Datadog Platform        | Timeseries sent by metrics intake that are used to [report metrics usage][11].
+| Events                  | Timeseries generated from the Datadog Events platform.
+| LLM Observability       | Timeseries emitted by the LLM Observability product using the `lmobs_to_metrics` service.
+| Logs                    | Timeseries generated from the Datadog [Logs][28] platform.
+| Metrics API             | Timeseries sent using Datadog's [OTLP Ingestion endpoint][21] and OTel receiver with a Datadog integration counterparts or points for estimated usage metrics or Datadog API Client.
+| CNM                     | Timeseries sent by the Datadog [Cloud Network Monitoring][19] product.
+| Observability Pipelines | Timeseries sent by the Datadog [Observability Pipielines][20] including error and performance metrics.
+| Other                   | Timeseries that don't have a DD integration counterpart.
+| Processes               | Timeseries generated from the Datadog [Processes][22] product.
+| RUM                     | Timeseries generated from the Datadog [Real User Monitoring][23] product.
+| SAAS Integrations       | Timeseries collected from popular SAAS platforms like Slack, Docker, PagerDuty etc.
+| Serverless              | Timeseries sent by the Datadog [Serverless][24] platform including Function, App Services, Cloud Run, and Container App Metrics.
+| Service Catalog         | Timeseries sent by the Datadog [Service Catalog][25] product including [Scorecard][29] metrics.
+| Synthetic Monitoring    | Synthetic monitoring and continuous testing metrics generated from the Datadog [Synthetic Monitoring][26] product. 
+| USM                     | Timeseries generated from the Datadog [Universal Service Monitoring][27] product. 
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[10]: /metrics/metrics-without-limits
+[0]: /metrics/metrics-without-limits
 [1]: https://app.datadoghq.com/metric/summary
 [2]: /metrics/explorer/
 [3]: /dashboards/
@@ -196,3 +227,27 @@ More aggregations are available should they be valuable to you. You can add or r
 [7]: /metrics/units/
 [8]: /metrics/types/
 [9]: /integrations/
+[10]: /integrations/agent_metrics/
+[11]: /account_management/billing/usage_metrics/
+[12]: /metrics/summary/#metric-origin-definitions
+[13]: /api_catalog/
+[14]: /security/cloud_security_management/
+[15]: /database_monitoring/
+[16]: /data_streams/
+[17]: /opentelemetry/collector_exporter/otel_collector_datadog_exporter/?tab=onahost
+[18]: /opentelemetry/collector_exporter/
+[19]: /network_monitoring/cloud_network_monitoring/
+[20]: /observability_pipelines/
+[21]: /opentelemetry/interoperability/otlp_ingest_in_the_agent/?tab=host
+[22]: /integrations/process/
+[23]: /monitors/types/real_user_monitoring/
+[24]: /serverless/
+[25]: /service_catalog/
+[26]: /synthetics/
+[27]: /universal_service_monitoring/
+[28]: /logs/
+[29]: /service_catalog/scorecards/
+[30]: /metrics/custom_metrics/historical_metrics/#bulk-configuration-for-multiple-metrics
+[31]: /metrics/distributions/#bulk-configuration-for-multiple-metrics
+[32]: /metrics/custom_metrics/dogstatsd_metrics_submission/
+[33]: /metrics/custom_metrics/agent_metrics_submission/

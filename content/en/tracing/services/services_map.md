@@ -1,6 +1,5 @@
 ---
 title: Service Map
-kind: documentation
 description: "The Service Map visualizes data that is being collected by Datadog APM."
 aliases:
   - /tracing/servicemap

@@ -1,10 +1,9 @@
 ---
 description: Session Replay와의 Shadow DOM 호환성에 대한 안내입니다.
 further_reading:
-- link: /real_user_monitoring/session_replay/
+- link: /real_user_monitoring/session_replay/browser/
   tag: 설명서
   text: 세션 재생에 대해 알아보기
-kind: 가이드
 title: Shadow DOM 구성요소로 세션 재생 강화
 ---
 

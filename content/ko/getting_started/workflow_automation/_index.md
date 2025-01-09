@@ -9,7 +9,6 @@ further_reading:
 - link: /security/cloud_security_management/workflows/
   tag: 설명서
   text: 보안 워크플로 자동화
-kind: 설명서
 title: 워크플로 자동화 시작
 ---
 

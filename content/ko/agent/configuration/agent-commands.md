@@ -11,7 +11,6 @@ further_reading:
 - link: /agent/troubleshooting/
   tag: 설명서
   text: Agent 트러블슈팅
-kind: guide
 title: Agent 명령
 ---
 

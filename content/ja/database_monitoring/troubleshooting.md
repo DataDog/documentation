@@ -1,24 +1,22 @@
 ---
 description: データベースモニタリングセットアップのトラブルシューティング
-kind: documentation
 title: データベースモニタリングのトラブルシューティング
 ---
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">データベースモニタリングはこのサイトでサポートされていません。</div>
-{{< /site-region >}}
 
 このページでは、データベースモニタリングのセットアップおよび使用に関する一般的な問題と、その解決方法について詳しく説明します。Agent のバージョンリリースにより内容が変更となる可能性があるため、最新の安定した Agent バージョンを使用し、最新の[セットアップドキュメント][1]に従っていただくことをお勧めします。
 
 特定のデータベースセットアップに関するトラブルシューティングは、対応するトラブルシューティングページをご利用ください。
 
 * [MySQL セットアップのトラブルシューティング][2]
+* [Oracle セットアップのトラブルシューティング][8]
 * [Postgres セットアップのトラブルシューティング][3]
 * [SQL Server セットアップのトラブルシューティング][4]
+* [MongoDB セットアップのトラブルシューティング][9]
 
 ## 一般的な問題の診断
 ### クエリのバインドパラメータが表示されない
 
-現時点では、クエリサンプルおよび実行計画における生のクエリバインドパラメータは難読化され、`?` に置き換えられます。将来的なリリースでは、難読化されていないクエリバインドパラメータを公開する設定が予定されています。
+現時点では、クエリサンプルおよび実行計画における生のクエリバインドパラメータは難読化され、`?` に置き換えられます。
 
 
 ### DBM ホスト制限
@@ -30,7 +28,7 @@ title: データベースモニタリングのトラブルシューティング
 
 ### Datadog で DBM のデータが表示されません。接続の問題でしょうか？
 
-設定が正しいと思っても、DBM ページにデータが表示されない場合、Agent が Datadog のデータ収集エンドポイントにデータを送信できていない可能性があります。接続の問題を診断するには、Agent を実行している場所から、以下の接続トラブルシューティングの手順を実行します。
+設定が正しいと思っても、DBM ページにデータが表示されない場合、Agent が Datadog のデータ収集エンドポイントにデータを送信できていない可能性があります。接続の問題を診断するには、Agent を実行している場所から、以下の接続トラブルシューティング手順を実行します。
 
 1. DBM 収集エンドポイントの TCP 接続をテストします。
 
@@ -70,4 +68,6 @@ curl -vvv -X POST "https://dbquery-intake.datadoghq.com/api/v2/databasequery" \
 [3]: /ja/database_monitoring/setup_postgres/troubleshooting/
 [4]: /ja/database_monitoring/setup_sql_server/troubleshooting/
 [5]: /ja/help/
-[7]: /ja/agent/proxy/?tab=linux
+[7]: /ja/agent/configuration/proxy/?tab=linux
+[8]: /ja/database_monitoring/setup_oracle/troubleshooting/
+[9]: /ja/database_monitoring/setup_mongodb/troubleshooting/

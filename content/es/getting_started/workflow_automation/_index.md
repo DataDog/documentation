@@ -10,7 +10,6 @@ further_reading:
 - link: /security/cloud_security_management/workflows/
   tag: Documentación
   text: Automatiza los flujos de trabajo de seguridad
-kind: documentación
 title: Empezando con la automatización del flujo de trabajo
 ---
 

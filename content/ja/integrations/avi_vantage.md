@@ -23,7 +23,7 @@ assets:
     source_type_id: 10189
     source_type_name: Avi Vantage
   monitors:
-    Avi Vantage - Error Rate Monitor: assets/monitors/error_rate_monitor.json
+    Virtual service has a high number of errors: assets/monitors/error_rate_monitor.json
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
@@ -32,6 +32,7 @@ author:
 categories:
 - クラウド
 - ネットワーク
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/avi_vantage/README.md
 display_on_public_website: true
@@ -39,9 +40,8 @@ draft: false
 git_integration_title: avi_vantage
 integration_id: avi-vantage
 integration_title: Avi Vantage
-integration_version: 4.2.0
+integration_version: 5.1.0
 is_public: true
-kind: integration
 manifest_version: 2.0.0
 name: avi_vantage
 public_title: Avi Vantage
@@ -58,6 +58,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: Avi Vantage インスタンスの健全性とパフォーマンスを監視。
   media: []
@@ -73,16 +74,16 @@ tile:
 
 このチェックは、Datadog Agent を通じて [Avi Vantage][1] を監視します。
 
-## 計画と使用
+## セットアップ
 
 ホストで実行されている Agent 用にこのチェックをインストールおよび構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][2]のガイドを参照してこの手順を行ってください。
 
-### インフラストラクチャーリスト
+### インストール
 
 Avi Vantage チェックは [Datadog Agent][3] パッケージに含まれています。
 サーバーに追加でインストールする必要はありません。
 
-### ブラウザトラブルシューティング
+### 構成
 
 1. avi_vantage のパフォーマンスデータの収集を開始するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `avi_vantage.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル avi_vantage.d/conf.yaml][4] を参照してください。
 
@@ -92,17 +93,17 @@ Avi Vantage チェックは [Datadog Agent][3] パッケージに含まれてい
 
 [Agent の status サブコマンドを実行][6]し、Checks セクションの `avi_vantage` を探します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "avi_vantage" >}}
 
 
-### ヘルプ
+### イベント
 
 Avi Vantage には、イベントは含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
 

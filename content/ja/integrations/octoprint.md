@@ -27,6 +27,7 @@ categories:
 - developer tools
 - ログの収集
 - orchestration
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/octoprint/README.md
 display_on_public_website: true
@@ -36,7 +37,6 @@ integration_id: octoprint
 integration_title: Datadog OctoPrint
 integration_version: 1.0.0
 is_public: true
-kind: integration
 manifest_version: 2.0.0
 name: octoprint
 public_title: Datadog OctoPrint
@@ -50,6 +50,7 @@ tile:
   - Category::Log Collection
   - Category::Orchestration
   - Supported OS::Linux
+  - Offering::Integration
   configuration: README.md#Setup
   description: 3D プリンターを管理する Web インターフェイス、OctoPrint を監視
   media: []
@@ -65,11 +66,11 @@ tile:
 
 このチェックは、Datadog Agent を通じて [OctoPrint][1] を監視します。
 
-## 計画と使用
+## セットアップ
 
 ホストで実行されている Agent 用にこのチェックをインストールおよび構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][2]のガイドを参照してこの手順を行ってください。
 
-### インフラストラクチャーリスト
+### インストール
 
 以下を実行して OctoPrint チェックをホストにインストールするには
 
@@ -91,7 +92,7 @@ sudo -u dd-agent -- datadog-agent integration install datadog-octoprint==<VERSIO
  `datadog-agent integration install -w
  path/to/octoprint/dist/datadog_octoprint*.whl`.
 
-### ブラウザトラブルシューティング
+### 構成
 
 1. OctoPrint の Web インターフェースから、Datadog で使用する API キーを作成します。作成したキーは Settings --> Application Keys に表示されます。
 
@@ -103,7 +104,7 @@ sudo -u dd-agent -- datadog-agent integration install datadog-octoprint==<VERSIO
 
 [Agent の status サブコマンドを実行][7]し、Checks セクションで `octoprint` を探します。
 
-### ワークフローの自動化
+### Logs
 
 デフォルトでは、このインテグレーションは、Raspberry Pi から OctoPrint  を実行するように予め構成された [OctoPi][8] イメージを使うことを想定しています。
 
@@ -129,21 +130,21 @@ OctoPrint は独自のログ形式（オブジェクト形式ではない）を�
 
 詳細については、[Datadog ログ処理ドキュメント][9]を参照してください。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "octoprint" >}}
 
 
-### ヘルプ
+### イベント
 
 OctoPrint には、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 {{< get-service-checks-from-git "octoprint" >}}
 
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][12]までお問合せください。
 

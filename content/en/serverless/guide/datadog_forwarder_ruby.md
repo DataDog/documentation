@@ -1,6 +1,6 @@
 ---
 title: Instrumenting Ruby Serverless Applications Using the Datadog Forwarder
-kind: guide
+
 ---
 
 ## Overview

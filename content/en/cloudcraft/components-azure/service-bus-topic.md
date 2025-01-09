@@ -1,6 +1,5 @@
 ---
 title: "Service bus topic Component"
-kind: documentation
 ---
 
 ## Overview

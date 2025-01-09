@@ -1,6 +1,5 @@
 ---
 title: Configure
-kind: Documentation
 disable_toc: false
 further_reading:
 - link: "/dashboards/"
@@ -51,13 +50,13 @@ Click **Configure** to open a menu of configuration options available for your d
 | Keyboard&nbsp;shortcuts | View a list of available keyboard shortcuts. |
 | Display UTC time | Toggle between UTC time and your default time zone. |
 | Increase density | High-density mode displays group widgets in a dashboard side-by-side for increased widget density. This mode turns on by default on large screens for dashboards that use group widgets. |
-| TV Mode | Toggle to display key performance metrics on large screens or TVs. |
+| TV Mode | Toggle to display key performance metrics on large screens or TVs. For more information, see [Using TV mode for Dashboards][5]. |
 
 ### Notifications
 
 Enable notifications tracking to receive change notifications for a dashboard. Any user in the organization can enable this for themselves, regardless of administrative privileges.
 
-When notifications are activated for a dashboard, an event is created in the [Events Explorer][5]. This event provides information on text changes, widget changes, dashboard cloning, and dashboard deletion, along with the name of the user performing the action. View change events for a specific dashboard in the event explorer by searching:
+When notifications are activated for a dashboard, an event is created in the [Events Explorer][6]. This event provides information on text changes, widget changes, dashboard cloning, and dashboard deletion, along with the name of the user performing the action. View change events for a specific dashboard in the event explorer by searching:
 
 ```text
 tags:(audit AND dash) <DASHBOARD_NAME>
@@ -77,15 +76,15 @@ Copy, import, or export a dashboard's JSON using the export icon (upper right) w
 
 <div class="alert alert-warning">Dashboards must be unstarred before deletion.</div>
 
-Use this option to permanently delete your dashboard. Use the preset **Recently Deleted** list to restore deleted dashboards. Dashboards in **Recently Deleted** are permanently deleted after 30 days. For more information, see the [Dashboard list][6] documentation.
+Use this option to permanently delete your dashboard. Use the preset **Recently Deleted** list to restore deleted dashboards. Dashboards in **Recently Deleted** are permanently deleted after 30 days. For more information, see the [Dashboard list][7] documentation.
 
 ## Permissions
 
-<div class="alert alert-info"><em>View</em> restrictions on individual dashboards are available to anyone on an <strong>Enterprise</strong> tier plan. Reach out to your account team or <a href="/help/">Datadog support</a> to enable this feature. </div>
+<div class="alert alert-info"><em>View</em> restrictions on individual dashboards are available upon request to anyone on a paid plan. Reach out to your account team or <a href="/help/">Datadog support</a> to enable this feature.</div>
 
 {{< img src="dashboards/access_popup.png" alt="Dialog box with dropdown menu allowing users to choose a role to access the dashboard." style="width:70%;">}}
 
-Use granular access controls to limit the [roles][7] that may edit a particular dashboard:
+Use granular access controls to limit the [roles][8] that may edit a particular dashboard:
 1. While viewing a dashboard, click on the cog **Configure** in the upper right.
 1. Select **Permissions**.
 1. Click **Restrict Access**.
@@ -95,7 +94,7 @@ Use granular access controls to limit the [roles][7] that may edit a particular 
 1. The dialog box updates to show that the role you selected has the **Editor** permission.
 1. Click **Save**.
 
-**Note:** To maintain your edit access to the dashboard, the system requires you to include at least one role that you are a member of before saving. For more information about roles, see the [RBAC documentation][7].
+**Note:** To maintain your edit access to the dashboard, the system requires you to include at least one role that you are a member of before saving. For more information about roles, see the [RBAC documentation][8].
 
 To restore general access to a dashboard with restricted access, follow the steps below:
 1. While viewing a dashboard, click on the cog **Configure** in the upper right.
@@ -105,7 +104,7 @@ To restore general access to a dashboard with restricted access, follow the step
 
 If the dashboard was created with the deprecated "read only" setting, the access control list pre-populates with a list of roles that have the Access Management (`user_access_manage`) permission.
 
-If you manage your dashboards with Terraform, you can use the latest version of the Datadog Terraform provider to control which roles can edit your dashboards. For more information, see the [Terraform Dashboard role restriction guide][8].
+If you manage your dashboards with Terraform, you can use the latest version of the Datadog Terraform provider to control which roles can edit your dashboards. For more information, see the [Terraform Dashboard role restriction guide][9].
 
 The access indicator appears at the top right of each edit-restricted dashboard. Depending on your permissions, it may say **Gain Edit Access** or **Request Edit Access**. Click the access indicator to understand your access permissions and what steps to take to edit the dashboard.
 
@@ -118,7 +117,8 @@ The access indicator appears at the top right of each edit-restricted dashboard.
 [2]: /dashboards/template_variables/
 [3]: /dashboards/guide/version_history/
 [4]: /account_management/audit_trail/
-[5]: /events/
-[6]: /dashboards/list
-[7]: /account_management/rbac/
-[8]: /dashboards/guide/how-to-use-terraform-to-restrict-dashboard-edit/
+[5]: /dashboards/guide/tv_mode
+[6]: /events/
+[7]: /dashboards/list
+[8]: /account_management/rbac/
+[9]: /dashboards/guide/how-to-use-terraform-to-restrict-dashboard-edit/

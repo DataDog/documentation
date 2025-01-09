@@ -12,17 +12,22 @@ further_reading:
 - link: /monitors/manage/
   tag: 설명서
   text: 모니터링 관리
-kind: 설명서
+- link: https://learn.datadoghq.com/courses/alert-monitor-notifications
+  tag: 학습 센터
+  text: 알림 모니터 알림 커스터마이즈를 위한 수강
 title: 알림
 ---
 
 ## 개요
 
-알림은 팀에게 문제를 알리고 문제 해결을 지원하는 모니터링의 핵심 구성 요소입니다. [모니터링 생성][1] 시 **진행 상황 전달(Say what's happening)** 및 **팀에 알리기(Notify your team)** 섹션에 추가하세요.
+알림은 팀에 문제에 대한 정보를 제공하고 문제 해결을 지원하는 모니터의 핵심 구성 요소입니다. [모니터 생성][1] 시 **알림 및 자동화 구성** 섹션에 추가하세요.
 
-## 진행 상황 전달
+## 알림 및 자동화 설정
 
-이 섹션에서 팀에 보내는 알림을 설정할 수 있습니다.
+**알림 및 자동화 설정** 섹션을 이용해 다음을 수행하세요.
+- 이메일, Slack, PagerDuty 및 추가적인 통합을 통해 알림을 팀에 보냅니다.
+- 모니터에서 워크플로를 생성하거나 트리거합니다.
+- 모니터에 사례를 추가합니다.
 
 ### 타이틀
 
@@ -30,7 +35,7 @@ title: 알림
 
 ### 메시지
 
-메시지 필드에는 표준 [마크다운 서식][3] 및 [변수][4]를 사용할 수 있습니다. [조건부 변수][5]를 사용하면[@notifications](#notifications)를 통해 여러 연락처로 전송되는 알림 텍스트를 설정할 수 있습니다.
+메시지 필드는 표준 [마크타운 형식][3]과 [변수][4]를 지원합니다. [조건부 변수][5]를 사용해 알림 텍스트를 조절하여 [@notifications](#알림)을 사용해 각기 다른 역락처에 알림 텍스트를 전송할 수 있습니다.
 
 모니터링 메시지의 일반적인 사용 사례는 다음과 같이 단계별 문제 해결 방법을 포함하는 것입니다:
 
@@ -42,79 +47,58 @@ title: 알림
 4. 중복 파일 삭제
 ```
 
-### 태그
+### 알림
 
-모니터에 태그를 추가합니다. 모니터 태그는 메트릭 태그와 다릅니다. UI에서 모니터를 그룹화하고 검색하는 데 사용됩니다. 태그 정책이 설정된 경우 필요한 태그와 태그 값을 추가해야 합니다. 자세한 내용은 [태그 정책][6]을 참조하세요.
+`@notification`을 사용해 팀 구성원, 통합, 워크플로, 사례를 알림에 추가합니다. 입력을 시작하면 Datadog에서 드롭다운 메뉴로 기존 옵션을 추천합니다. 옵션을 클릭해 알림을 추가합니다. 또는 ****@ 멘션 추가**, **워크플로 추가** 또는 **사례 추가**를 클릭합니다.
 
-{{< img src="monitors/notifications/notifications_add_required_tags.png" alt="정책 태그 설정 보기. '정책 태그' 아래에는 'Select value' 드롭다운 메뉴 옆에 cost_center, product_id, env라는 세 가지 예시 태그가 있습니다." style="width:100%;" >}}
+**참고**: `@notification`의 경우 대상과 마지막 줄 문자 사이에 공백이 있어야 합니다. 예는 다음과 같습니다.
 
-### 재알림
+```text
+Disk space is low @ops-team@company.com
+```
+`@notifications`은 다음에 전송될 수 있습니다.
 
-모니터 재알림(선택 사항)을 활성화하여 문제가 해결되지 않았음을 팀에게 알릴 수 있습니다.
+#### 이메일
 
-  {{< img src="monitors/notifications/renotify_options.png" alt="재알림 활성화" style="width:90%;" >}}
+{{% notifications-email %}}
 
-재알림 간격, 모니터가 재알림을 보내는 모니터 상태(`alert`, `no data`, `warn`)를 설정하고 필요 시 재알림 메시지 전송 횟수에 대한 제한을 설정합니다.
+#### Teams
 
-예를 들어, 기본 알림 후 에스컬레이션 메시지를 한 번만 수신하도록 모니터를 `stop renotifying after 1 occurrence`로 설정합니다.
-**참고: 재알림의 [속성 및 태그 변수][7]는 재알림 기간 동안 모니터에서 사용할 수 있는 데이터로 채워집니다.
+알림 채널이 설정되면 알림을 특정 팀에 라우팅할 수 있습니다. @team-handle을 대상으로 하는 모니터 알림은 선택한 커뮤니케이션 채널로 리디렉션됩니다. 팀에 알림 채널을 설정하는 자세한 벙법은 [Teams][6] 설명서를 참조하세요.
 
-재알림을 활성화하면 모니터가 지정된 기간 동안 선택한 상태 중 하나로 유지될 경우 에스컬레이션 메시지를 전송하는 옵션이 제공됩니다.
+#### 통합
 
+{{% notifications-integrations %}}
 
-에스컬레이션 메시지는 다음과 같은 방법으로 추가할 수 있습니다:
+### 워크플로
+[워크플로 자동화][7]를 트리거하거나 모니터링에서 새 워크플로를 만들 수 있습니다. 
 
-* 원래 알림 메시지의 `{{#is_renotify}}` 블록에서 추가합니다 (권장).
-* `Say what's happening` 섹션의 *Renotification message* 필드에서 추가합니다.
-* API의 `escalation_message` 속성을 사용합니다.
+모니터에 워크플로를 추가하기 전에 [워크플로에 모니터 트리거를 추가][17]하세요.
 
-`{{#is_renotify}}` 블록을 사용하면 원래 알림 메시지도 재알림에 포함됩니다. 그렇기 때문에:
+모니터 트리거를 추가한 후 [모니터에 기존 워크플로를 추가하거나[8] 새 워크플로를 만듭니다. 모니터 페이지에서 새 워크플로를 만들려면 다음과 같이 하세요.
 
-1. `{{#is_renotify}}` 블록에는 추가 정보만 포함하고 원래 메시지에 있던 세부 정보는 추가하지 마세요.
-2. 그룹의 하위 집합에 에스컬레이션 메시지를 보냅니다.
+1. **워크플로 추가**를 클릭합니다.
+1. **+** 아이콘을 클릭해 Blueprint를 선택하거나 **처음부터 시작**을 선택합니다.
+   {{< img src="/monitors/notifications/create-workflow.png" alt="+ 버튼을 클릭해 새로운 워크플로 추가" style="width:90%;">}}
 
-[예제 섹션][8]에서 이러한 사용 사례에 맞게 모니터를 설정하는 방법을 알아보세요.
+워크플로 빌드에 대한 자세한 정보는 [워크플로 빌드][9]를 참조하세요.
 
 ### 우선순위
 
-모니터와 관련된 우선순위(선택 사항)를 추가합니다. 값의 범위는 P1에서 P5까지이며, P1이 가장 높은 우선순위이고 P5가 가장 낮은 우선순위입니다.
-알림 메시지에서 모니터 우선순위를 재정의하려면 `Pi`가 P1과 P5 사이에 있는 `{{override_priority 'Pi'}}`를 사용합니다.
+모니터와 관련된 우선순위(선택 사항)를 추가합니다. 값 범위는 P1~P5로 P1이 가장 높은 우선순위고 P5가 가장 낮은 우선순위입니다. 알림 메시지에서 모니터 우선순위를 재정의하려면, `{{override_priority 'Pi'}}`를 사용합니다. 이때 `Pi`는 P1~P5 사이입니다.
 
-예를 들어, `alert`와 `warning`알림에 대해 다른 우선순위를 설정할 수 있습니다:
+예를 들어, `alert` 및 `warning` 알림에 대해 각기 다른 우선순위를 설정할 수 있습니다.
 
 ```
 {{#is_alert}}
 {{override_priority 'P1'}}
  ...
 {{/is_alert}}
-
 {{#is_warning}}
 {{override_priority 'P4'}}
 ...
 {{/is_warning}}
 ```
-
-## 팀에 알림 전송하기
-
-이 섹션을 사용하여 이메일, Slack, PagerDuty 등을 통해 팀에 알림을 보낼 수 있습니다. 드롭다운 상자를 사용하여 팀원 및 연결된 통합을 검색할 수 있습니다. 이 섹션에 `@notification`을 추가하면 [message](#message) 필드에 알림이 자동으로 추가됩니다.
-
-**참고**: 예를 들어 `@notification`과 마지막 줄 문자 사이에는 다음과 같이 반드시 공백이 있어야 합니다:
-
-```text
-디스크 공간 부족 @ops-team@company.com
-```
-
-### 알림
-
-`@notifications`는 다음으로 전송됩니다:
-
-#### 이메일
-
-{{% notifications-email %}}
-
-#### 통합
-
-{{% notifications-integrations %}}
 
 ### 추가 콘텐츠 토글
 
@@ -133,37 +117,55 @@ title: 알림
 
 **참고**: 통합 설정에 따라 일부 콘텐츠가 기본값으로 표시되지 않을 수도 있습니다.
 
-### 수정 사항
+### 메타데이터
 
-모니터링이 생성, 수정, 뮤트 또는 삭제될 때마다 [이벤트][9]가 생성됩니다. `Notify` 옵션을 설정하여 팀원, 채팅 서비스, 모니터링 생성자에게 해당 이벤트를 알립니다.
+메타데이터(우선순위, 태그, Datadog 팀)을 모니터에 추가하려면 모니터 우선순위를 사용하여 모니터의 중요도를 P 수준(P1~P5)로 설정할 수 있습니다. 메트릭 태그와는 다른 모니터 태그는 UI에서 모니터를 그룹화하고 검색하는 데 사용됩니다. 태그 정책이 설정되면 필수 태그와 태그 값을 추가해야 합니다. 자세한 내용은 [태그 정책][10]을 참조하세요. Datadog Teams는 이 모니터의 소유권 계층을 설정할 수 있도록 해줍니다. 또한 모니터와 연결된 모든 모니터를 확인할 수 있도록 해줍니다. 자세히 알아보려면 [Datadog Teams][11]를 참조하세요.
 
-### 권한
+{{< img src="monitors/notifications/notifications_metadata.png" alt="정책 태그 구성 보기 '정책 태그' 아래에는 '값 선택' 드롭다운 옆에 cost_center, product_id, env라는 세 가지 예시 태그가 있습니다." style="width:100%;" >}}
 
-모든 사용자는 관련 역할과 상관없이 모니터링을 모두 확인할 수 있습니다.
+### 다시 알리기
 
-기본적으로 [모니터링 쓰기 권한][10]이 부여된 역할의 사용자만 모니터링을 편집할 수 있습니다. [Datadog 관리자 역할 및 Datadog 표준 역할][11]에는 모니터링 쓰기 권한이 기본값으로 부여됩니다. 조직에서 [커스텀 역할][12]을 활용하는 경우 다른 커스텀 역할에 모니터링 쓰기 권한이 부여되었을 수 있습니다.
+모니터 다시 알림(선택 사항)을 활성화하여 팀에 문제가 해결되지 않았음을 다시 알릴 수 있습니다.
 
-편집이 허용된 [역할][13] 목록을 특정하여 모니터링을 더 제한할 수 있습니다. 모니터링 생성자는 언제든지 해당 모니터링을 편집할 수 있습니다.
+  {{< img src="monitors/notifications/renotify_options.png" alt="다시 알리기 활성화" style="width:90%;" >}}
 
-  {{< img src="monitors/notifications/monitor_rbac_restricted.jpg" alt="RBAC 제한 모니터링" style="width:90%;" >}}
+다시 알리기 간격, 모니터가 다시 알리는 대상의 모니터 상태(`alert`, `no data` 및 `warn`)를 설정합니다. 부수적으로 전송되는 다시 알림 메시지의 수를 제한하도록 설정할 수 있습니다. 
 
-편집 권한에는 모니터링 설정 업데이트, 모니터링 삭제, 원하는 기간 만큼 모니터링 뮤트가 포함됩니다.
+예를 들어, 모니터를 `stop renotifying after 1 occurrence`로 보내면 기본 알림 이후 하나의 에스컬레이션 메시지를 받게 됩니다.
+**참고: 재알림의 [속성 및 태그 변수][2]는 재알림 기간 동안 모니터에서 사용할 수 있는 데이터로 채워집니다.
 
-**참고**: 제한 사항은 UI와 API에 모두 적용됩니다.
+재알림이 활성화되면 모니터가 특정 기간 동안 선택한 상태 중 하나로 남아 있을 경우 전송되는 에스컬레이션 메시지를 포함할 것인지를 선택할 수 있는 옵션이 있습니다.
 
-모니터링용 RBAC 설정과 모니터링을 잠긴 설정 상태에서 제한된 역할로 마이그레이션하는 방법에 대한 자세한 내용을 확인하려면 [모니터용 RBAC 설정 방법][14]을 참조하세요.
+
+에스컬레이션 메시지는 다음 방법으로 추가할 수 있습니다.
+
+* 원본 알림 메시지의 `{{#is_renotify}}` 블록(권장)
+* `Configure notifications and automations` 섹션의 *재알림 메시지* 필드
+* API 내의 `escalation_message` 속성
+
+`{{#is_renotify}}` 블록을 사용하는 경우 원본 알림 메시지가 재알림에도 포함됩니다. 그러므로 다음을 수행합니다.
+
+1. `{{#is_renotify}}` 블록에 추가되는 상세 설명만 포함해 원본 메시지 상세 정보가 반복되지 않도록 합니다.
+2. 그룹 하위 집합에 에스컬레이션 메시지를 전송합니다.
+
+[예시 섹션][12]에서 이러한 사용 사례에 맞게 모니터를 설정하는 방법을 알아보세요.
+
+
+## 감사 알림
+
+모니터가 생성, 수정, 무음 또는 삭제될 때마다 감사 [이벤트][13]가 생성됩니다. **권한 및 감사 정의 알림** 섹션에서 **알림**을 선택하여 팀원, 채팅 서비스, 그리고 모니터 생성자(이벤트)에게 알립니다.
 
 ## 알림 테스트
 
-알림 테스트는 다음 [모니터링 유형][15]별로 지원됩니다: 호스트, 메트릭, 이상 상태, 아웃라이어(outlier), 예측, 로그, rum, 애플리케이션 성능 모니터링(APM), 통합(점검만 해당), 프로세스(점검만 해당), 네트워크(점검만 해당), 커스텀 점검, 이벤트, 및 컴포짓(composite).
+테스트 알림은 호스트, 메트릭, 이상, 아웃라이어(outlier), 예측, 로그, 럼, 애플리케이션 성능 모니터링(APM), 통합 (점검만), 프로세스 (점검만), 네트워크 (점검만), 커스텀 점검, 이벤트 및 컴포짓과 같은 [모니터 유형][14]에 대해 지원됩니다. 
 
 ### 테스트 실행
 
 1. 모니터링을 정의한 후 모니터링 페이지 우하단의 **알림 테스트** 버튼으로 해당 알림을 테스트합니다.
 
-2. 알림 테스트 팝업에서 테스트하려는 모니터링 케이스를 선택합니다. 경고 조건에 지정된 임계값에 대하여 모니터링 설정에서 사용 가능한 상태만 테스트할 수 있습니다. 모니터링이 더 이상 경고 상태가 아니거나 경고 조건이 없는 경우 Datadog이 복구 알림을 전송하므로 [복구 임계값][16]은 예외로 간주됩니다.
+2. 테스트 알림 팝업에서 테스트할 모니터 전환과 그룹을 선택합니다. 쿼리에 [그룹화][15]가 있는 경우에만 사용 가능). 경고 조건에 지정된 임계값에 대해 모니터의 설정에서 사용할 수 있는 상태만 테스트할 수 있습니다. [복구 임계값][16]은 모니터가 더 이상 경고 상태가 아니거나 경고 조건이 없는 경우 Datadog가 이 복구 알림을 전송하므로 예외입니다.
 
-    {{< img src="monitors/notifications/test-notif-select.png" alt="본 모니터링용 알림 테스트" style="width:70%;" >}}
+    {{< img src="/monitors/notifications/test_notification_modal.png" alt="이 모니터에 대한 알림 테스트" style="width:70%;" >}}
 
 3. **테스트 실행**을 클릭하여 팀원과 모니터링에 명시한 서비스에 알림을 전송합니다.
 
@@ -187,18 +189,19 @@ title: 알림
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ko/monitors/configuration
-[2]: /ko/monitors/notify/variables/#tag-variables
+[2]: /ko/monitors/notify/variables/?tabs=is_alert#attribute-and-tag-variables
 [3]: http://daringfireball.net/projects/markdown/syntax
 [4]: /ko/monitors/notify/variables/
 [5]: /ko/monitors/notify/variables/#conditional-variables
-[6]: /ko/monitors/settings/
-[7]: /ko/monitors/notify/variables/?tabs=is_alert#attribute-and-tag-variables
-[8]: /ko/monitors/notify/variables/?tab=is_renotify#examples
-[9]: /ko/events/
-[10]: /ko/account_management/rbac/permissions/#monitors
-[11]: /ko/account_management/rbac/?tab=datadogapplication#datadog-default-roles
-[12]: /ko/account_management/rbac/?tab=datadogapplication#custom-roles
-[13]: /ko/account_management/rbac/?tab=datadogapplication
-[14]: /ko/monitors/guide/how-to-set-up-rbac-for-monitors/
-[15]: /ko/monitors/types
+[6]: /ko/account_management/teams/#send-notifications-to-a-specific-communication-channel
+[7]: /ko/service_management/workflows/
+[8]: /ko/service_management/workflows/trigger/#add-the-workflow-to-your-monitor
+[9]: /ko/service_management/workflows/build/
+[10]: /ko/monitors/settings/#tag-policies
+[11]: /ko/account_management/teams/
+[12]: /ko/monitors/notify/variables/?tab=is_renotify#examples
+[13]: /ko/events/
+[14]: /ko/monitors/types
+[15]: /ko/monitors/configuration/
 [16]: /ko/monitors/guide/recovery-thresholds/
+[17]: /ko/service_management/workflows/trigger/#add-a-monitor-trigger-to-your-workflow

@@ -6,17 +6,19 @@ further_reading:
 - link: /dashboards/
   tag: ドキュメント
   text: データを可視化して詳細な情報を把握
-kind: documentation
+- link: /dashboards/guide/unit-override/
+  tag: ドキュメント
+  text: 単位のオーバーライドで視覚化をカスタマイズする
 title: メトリクスのユニット
 ---
 
 ## 概要
 
-メトリクス単位は、時系列グラフ、クエリ値ウィジェット、トップリストなどの場所に表示されます。
+メトリクス単位は、時系列グラフ、クエリ値ウィジェット、トップリストなどに表示されます。
 
 {{< img src="metrics/units/redis_dash_metrics_units.png" alt="Redis ダッシュボードのメトリクス単位" style="width:100%;">}}
 
-時系列グラフでは、任意のグラフにカーソルを合わせると、関連する単位が表示されます。単位は手動で指定する必要がありますが、単位が設定されていない場合は、桁表記 (たとえば、それぞれ千単位、百万単位、十億単位を表す K、M、G) が使用されます。単位が設定されている場合、生データは、関連する桁数を使用して、読み取り可能な表示単位に自動的に変換されます。
+時系列グラフでは、任意のグラフにカーソルを合わせると、関連する単位が表示されます。単位は手動で指定する必要がありますが、設定されていない場合は、桁表記 (例えば、千、百万、十億を表す K、M、G) が使用されます。単位が設定されている場合、生データは関連する桁数を使用して自動的に読みやすい表示単位に変換されます。
 
 たとえば、3,000,000,000 のデータポイントがある場合:
 
@@ -35,32 +37,32 @@ title: メトリクスのユニット
 
 | type        | 単位                                                                                                                                                                                                                                                                                                                    |
 |-------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| バイト       | bit / byte / kibibyte / mebibyte / gibibyte / tebibyte / pebibyte / exbibyte                                                                                                                                                                                                                                               |
-| 時間        | nanosecond / microsecond / millisecond / second / minute / hour / day / week                                                                                                                                                                                                                                               |
-| 割合  | percent_nano / percent / apdex / fraction                                                                                                                                                                                                                                                                                  |
-| ネットワーク     | connection / request / packet / segment / response / message / payload / timeout / datagram / route / session / hop                                                                                                                                                                                                             |
-| システム      | process / thread / host / node / fault / service / instance / cpu                                                                                                                                                                                                                                                          |
-| ディスク        | file / inode / sector / block                                                                                                                                                                                                                                                                                              |
-| 一般     | buffer / error / read / write / occurrence / event / time / unit / operation / item / task / worker / resource / garbage collection / email / sample / stage / monitor / location / check / attempt / device / update / method / job / container / execution / throttle / invocation / user / success / build / prediction / exception |
-| DB          | table / index / lock / transaction / query / row / key / command / offset / record / object / cursor / assertion / scan / document / shard / flush / merge / refresh / fetch / column / commit / wait / ticket / question                                                                                                  |
+| バイト       | bit / byte (b) / kibibyte(KiB) / mebibyte (MiB) / gibibyte (GB) / tebibyte (TiB) / pebibyte (PiB) / exbibyte (EiB)                                                                                                                                                                                                         |
+| 時間        | nanosecond (ns) / microsecond (μs) / millisecond (ms) / second (s) / minute (min) / hour (hr) / day / week (wk)                                                                                                                                                                                                            |
+| 割合  | percent_nano (n%) / percent (%) / apdex / fraction                                                                                                                                                                                                                                                                         |
+| ネットワーク     | connection (conn) / request (req) / packet (pkt) / segment (seg) / response (rsp) / message (msg) / payload / timeout / datagram / route / session / hop                                                                                                                                                                   |
+| システム      | process (proc) / thread / host / node / fault / service (svc) / instance / cpu                                                                                                                                                                                                                                             |
+| ディスク        | file / inode / sector / block (blk)                                                                                                                                                                                                                                                                                        |
+| 一般     | buffer / error (err) / read (rd) / write (wr) / occurrence / event / time / unit / operation (op) / item / task / worker / resource (res) / garbage collection (gc) / email / sample (smpl) / stage / monitor / location / check / attempt / device (dev) / update (up) / method (mthd) / job / container / execution / throttle / invocation / user / success / build / prediction / exception |
+| DB          | table / index (idx) / lock / transaction (tx) / query / row / key / command (cmd) / offset / record / object / cursor / assertion (assert) / scan / document / shard / flush / merge / refresh / fetch / column (col) / commit / wait / ticket / question                                                                  |
 | キャッシュ       | hit / miss / eviction / get / set                                                                                                                                                                                                                                                                                          |
-| 金額       | ドル / セント / マイクロドル / ユーロ                                                                                                                                                                                                                                                                                         |
-| メモリ      | page / split                                                                                                                                                                                                                                                                                                               |
-| 周波数   | hertz / kilohertz / megahertz / gigahertz                                                                                                                                                                                                                                                                                  |
+| 金額       | ドル ($) / セント (¢) / マイクロドル (μ$) / ユーロ (€) / ポンド (£) / ペンス (p) / 円 (¥)                                                                                                                                                                                                                                      |
+| メモリ      | page (pg) / split                                                                                                                                                                                                                                                                                                          |
+| 周波数   | hertz (Hz) / kilohertz (kHz) / megahertz (MHz) / gigahertz (GHz)                                                                                                                                                                                                                                                           |
 | ログ     | entry                                                                                                                                                                                                                                                                                                                      |
-| 温度 | decidegree celsius / degree celsius / degree fahrenheit                                                                                                                                                                                                                                                                    |
-| CPU         | nanocore / microcore / millicore / core / kilocore / megacore / gigacore / teracore / petacore / exacore                                                                                                                                                                                                                   |
-| 電力       | nanowatt / microwatt / milliwatt / deciwatt / watt / kilowatt / megawatt / gigawatt / terrawatt                                                                                                                                                                                                                            |
-| 電流     | milliampere / ampere                                                                                                                                                                                                                                                                                                       |
-| 電位   | millivolt / volt                                                                                                                                                                                                                                                                                                           |
+| 温度 | decidegree celsius (d°C) / degree celsius (°C) / degree fahrenheit (°F)                                                                                                                                                                                                                                                    |
+| CPU         | nanocore (ncores) / microcore (μcores) / millicore (mcores) / core / kilocore (Kcores) / megacore (Mcores) / gigacore (Gcores) / teracore (Tcores) / petacore (Pcores) / exacore (Ecores)                                                                                                                                  |
+| 電力       | nanowatt (nW) / microwatt (μW) / milliwatt (mW) / deciwatt (dW) / watt / kilowatt / megawatt / gigawatt / terrawatt                                                                                                                                                                                                        |
+| 電流     | milliampere (mA) / ampere (A)                                                                                                                                                                                                                                                                                              |
+| 電位   | millivolt (mV) / volt (V)                                                                                                                                                                                                                                                                                                  |
 | APM         | スパン                                                                                                                                                                                                                                                                                                                       |
-| SYNTHETICS  | 実行 / ステップ                                                                                                                                                                                                                                                                                                                       |
+| SYNTHETICS  | 実行 / ステップ                                                                                                                                                                                                                                                                                                                 |
 
 ## 数値のフォーマット
 
 ### 単位のないフォーマット
 
-単位のないメトリクスの場合、Datadog は [SI プレフィックス][2] `K`、`M`、`G`、`T` を使用します。`T` の後、数値は指数表記に変換されます。これは微小な数値にも使用されます。デフォルトでは、Datadog は小数点以下 2 桁に丸められます。指数表記の場合、デフォルトは小数点以下ゼロです。
+単位のないメトリクスの場合、Datadog は [SI プレフィックス][2] `K`、`M`、`G`、`T` を使用します。`T` の後、数値は指数表記に変換され、微小な数値にも使用されます。デフォルトでは、Datadog は小数点以下 2 桁に丸めます。指数表記の場合、デフォルトは小数点以下ゼロです。
 
 #### 例
 
@@ -78,7 +80,7 @@ title: メトリクスのユニット
 
 ### 単位処理
 
-単位は、読みやすくするためにグラフ上で自動的にフォーマットされます。
+単位は可読性を高めるためにグラフ上で自動的にフォーマットされます。単位ラベルのカスタマイズ方法については、[単位オーバーライドで可視化をカスタマイズする][3]をご覧ください。
 
 #### 例
 
@@ -98,7 +100,7 @@ title: メトリクスのユニット
 
 - 短い時間は 10 進形式でフォーマットされます。
 - 最小の時間単位はナノ秒です。
-- 長い時間は、10 進形式の日数としてフォーマットされます。
+- 長時間は、10 進形式の日数としてフォーマットされます。
 
 
 #### 例
@@ -121,3 +123,4 @@ title: メトリクスのユニット
 
 [1]: https://app.datadoghq.com/metric/summary
 [2]: https://en.wikipedia.org/wiki/Metric_prefix#List_of_SI_prefixes
+[3]: /ja/dashboards/guide/unit-override/

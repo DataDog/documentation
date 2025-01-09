@@ -1,6 +1,6 @@
 ---
 title: Synthetic Monitoring Guides
-kind: guide
+
 aliases:
   - /synthetics/faq/uptime-check-internal-website/ 
 private: true
@@ -20,7 +20,6 @@ cascade:
 {{< whatsnext desc="Alerting:" >}}
     {{< nextlink href="synthetics/guide/synthetic-test-monitors/" >}}Use monitors in Synthetic tests{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/synthetic-test-retries-monitor-status/" >}}Understand how Synthetic test retries determine monitor status{{< /nextlink >}}
-    {{< nextlink href="synthetics/guide/synthetic-test-monitors/" >}}Use monitors in Synthetic tests{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/uptime-percentage-widget" >}}Monitor website uptime with SLOs{{< /nextlink >}}
 {{< /whatsnext >}}
 

@@ -4,7 +4,6 @@ further_reading:
 - link: https://www.datadoghq.com/container-report/
   tag: Datadog 리서치
   text: Datadog의 연간 컨테이너 현황 보고서
-kind: 설명서
 title: 컨테이너 모니터링
 ---
 

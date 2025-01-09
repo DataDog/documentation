@@ -6,7 +6,6 @@ aliases:
 - /fr/security/cloud_workload_security/backend/
 - /fr/security/threats/security_profiles
 - /fr/security/threats/runtime_anomaly_detection
-kind: documentation
 title: Cloud Security Management Threats
 ---
 

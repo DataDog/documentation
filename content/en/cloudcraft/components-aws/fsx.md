@@ -1,6 +1,5 @@
 ---
 title: "FSx Component"
-kind: documentation
 ---
 ## Overview
 

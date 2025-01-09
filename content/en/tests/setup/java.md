@@ -1,6 +1,5 @@
 ---
 title: Java Tests
-kind: documentation
 code_lang: java
 type: multi-code-lang
 code_lang_weight: 10
@@ -9,24 +8,29 @@ aliases:
   - /continuous_integration/tests/java
   - /continuous_integration/tests/setup/java
 further_reading:
-    - link: "/continuous_integration/tests/containers/"
+    - link: "/tests/containers/"
       tag: "Documentation"
       text: "Forwarding Environment Variables for Tests in Containers"
-    - link: "/continuous_integration/tests"
+    - link: "/tests/explorer"
       tag: "Documentation"
       text: "Explore Test Results and Performance"
-    - link: "/continuous_integration/troubleshooting/"
+    - link: "/tests/flaky_test_management/early_flake_detection"
       tag: "Documentation"
-      text: "Troubleshooting CI Visibility"
+      text: "Detect test flakiness with Early Flake Detection"
+    - link: "/tests/flaky_test_management/auto_test_retries"
+      tag: "Documentation"
+      text: "Retry failing test cases with Auto Test Retries"
+    - link: "/tests/correlate_logs_and_tests"
+      tag: "Documentation"
+      text: "Correlate logs and test traces"
+    - link: "/tests/troubleshooting/"
+      tag: "Documentation"
+      text: "Troubleshooting Test Optimization"
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
+<div class="alert alert-warning">Test Optimization is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
-
-<div class="alert alert-info">
-  If your CI provider is Jenkins, you can use <a href="/continuous_integration/pipelines/jenkins/#enable-with-the-jenkins-configuration-ui-1">UI-based configuration</a> to enable Test Visibility for your jobs and pipelines.
-</div>
 
 ## Compatibility
 
@@ -58,26 +62,20 @@ Other build systems, such as Ant or Bazel, are supported with the following limi
 
 ## Setup
 
-Setting up Test Visibility for Java includes the following steps:
-1. Configure tracer reporting method.
-2. Download tracer library to the hosts where your tests are executed.
-3. Run your tests with the tracer attached.
+You may follow interactive setup steps on the [Datadog site][2] or the instructions below.
 
-You may follow interactive setup steps on the [Datadog site][2] or with the instructions below.
-
-### Configuring reporting method
-
-This step involves configuring how Datadog Java Tracer reports data to Datadog.
-There are two main options:
-* Reporting the data to Datadog Agent, which will forward it to Datadog.
-* Reporting the data directly to Datadog.
+Configuring the Datadog Java Tracer varies depending on your CI provider.
 
 {{< tabs >}}
-{{% tab "Cloud CI provider (Agentless)" %}}
+{{% tab "CI Provider with Auto-Instrumentation Support" %}}
+{{% ci-autoinstrumentation %}}
+{{% /tab %}}
+
+{{% tab "Other Cloud CI Provider" %}}
 {{% ci-agentless %}}
 {{% /tab %}}
 
-{{% tab "On-Premises CI Provider (Datadog Agent)" %}}
+{{% tab "On-Premises CI Provider" %}}
 {{% ci-agent %}}
 {{% /tab %}}
 {{< /tabs >}}
@@ -110,7 +108,7 @@ You can run the `java -jar $DD_TRACER_FOLDER/dd-java-agent.jar` command to check
 Set the following environment variables to configure the tracer:
 
 `DD_CIVISIBILITY_ENABLED=true` (Required)
-: Enables the CI Visibility product.
+: Enables the Test Optimization product.
 
 `DD_ENV` (Required)
 : Environment where the tests are being run (for example: `local` when running tests on a developer workstation or `ci` when running them on a CI provider).
@@ -129,27 +127,24 @@ Run your tests as you normally do (for example: `mvn test` or `mvn verify`).
 {{% /tab %}}
 {{% tab "Gradle" %}}
 
-Make sure to set the `DD_TRACER_FOLDER` variable to the path where you have downloaded the tracer.
+Set the following environment variables to configure the tracer:
 
-Run your tests using the `org.gradle.jvmargs` system property to specify the path to the Datadog Java Tracer JAR.
+`DD_CIVISIBILITY_ENABLED=true` (Required)
+: Enables the Test Optimization product.
 
-When specifying tracer arguments, include the following:
+`DD_ENV` (Required)
+: Environment where the tests are being run (for example: `local` when running tests on a developer workstation or `ci` when running them on a CI provider).
 
-* Enable CI visibility by setting the `dd.civisibility.enabled` property to `true`.
-* Define the environment where the tests are being run using the `dd.env` property (for example: `local` when running tests on a developer workstation or `ci` when running them on a CI provider).
-* Define the name of the service or library being tested in the `dd.service` property.
+`DD_SERVICE` (Required)
+: Name of the service or library being tested.
 
-For example:
+`DD_TRACER_FOLDER` (Required)
+: Path to the folder where the downloaded Java Tracer is located.
 
-{{< code-block lang="shell" >}}
-./gradlew cleanTest test -Dorg.gradle.jvmargs=\
--javaagent:$DD_TRACER_FOLDER/dd-java-agent.jar=\
-dd.civisibility.enabled=true,\
-dd.env=ci,\
-dd.service=my-java-app
-{{< /code-block >}}
+`GRADLE_OPTS=-javaagent:$DD_TRACER_FOLDER/dd-java-agent.jar` (Required)
+: Injects the tracer into the Gradle launcher process.
 
-Specifying `org.gradle.jvmargs` in the command line overrides the value specified elsewhere. If you have this property specified in a `gradle.properties` file, be sure to replicate the necessary settings in the command line invocation.
+Run your tests as you normally do (for example: `./gradlew clean test`).
 
 {{% /tab %}}
 {{% tab "Other" %}}
@@ -157,7 +152,7 @@ Specifying `org.gradle.jvmargs` in the command line overrides the value specifie
 Set the following environment variables to configure the tracer:
 
 `DD_CIVISIBILITY_ENABLED=true` (Required)
-: Enables Test Visibility.
+: Enables Test Optimization.
 
 `DD_ENV` (Required)
 : Environment where the tests are being run (for example: `local` when running tests on a developer workstation or `ci` when running them on a CI provider).
@@ -361,7 +356,7 @@ Always call ``datadog.trace.api.civisibility.DDTestSession#end`` at the end so t
 
 ### Deterministic test parameters representation
 
-Test Visibility works best when the [test parameters are deterministic][8] and stay the same between test runs.
+Test Optimization works best when the [test parameters are deterministic][8] and stay the same between test runs.
 If a test case has a parameter that varies between test executions (such as a current date, a random number, or an instance of a class whose `toString()` method is not overridden), some of the product features may not work as expected.
 For example, the history of executions may not be available, or the test case may not be classified as flaky even if it exhibits flakiness.
 
@@ -408,7 +403,7 @@ static Stream<Arguments> randomArguments() {
 
 ## Troubleshooting
 
-### The tests are not appearing in Datadog after enabling CI Visibility in the tracer
+### The tests are not appearing in Datadog after enabling Test Optimization in the tracer
 
 Verify that the tracer is injected into your build process by examining your build's logs.
 If the injection is successful, you can see a line containing `DATADOG TRACER CONFIGURATION`.
@@ -417,7 +412,7 @@ A common mistake is to set the variables in a build step and run the tests in an
 
 Ensure that you are using the latest version of the tracer.
 
-Verify that your build system and testing framework are supported by CI Visibility. See the list of [supported build systems and test frameworks](#compatibility).
+Verify that your build system and testing framework are supported by Test Optimization. See the list of [supported build systems and test frameworks](#compatibility).
 
 Ensure that the `dd.civisibility.enabled` property (or `DD_CIVISIBILITY_ENABLED` environment variable) is set to `true` in the tracer arguments.
 
@@ -426,7 +421,7 @@ Check the build output for any errors that indicate tracer misconfiguration, suc
 
 ### Tests or source code compilation fails when building a project with the tracer attached
 
-By default, CI Visibility runs Java code compilation with a compiler plugin attached.
+By default, Test Optimization runs Java code compilation with a compiler plugin attached.
 
 The plugin is optional, as it only serves to reduce the performance overhead.
 

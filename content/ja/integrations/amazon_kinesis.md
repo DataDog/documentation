@@ -5,6 +5,7 @@ categories:
 - aws
 - cloud
 - log collection
+custom_kind: integration
 dependencies: []
 description: Amazon Kinesis のキーメトリクスを追跡。
 doc_link: https://docs.datadoghq.com/integrations/amazon_kinesis/
@@ -15,7 +16,6 @@ integration_id: ''
 integration_title: Amazon Kinesis
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: '1.0'
 name: amazon_kinesis
 public_title: Datadog-Amazon Kinesis インテグレーション
@@ -30,9 +30,9 @@ Amazon Kinesis は、膨大な分散型データストリームをリアルタ�
 
 このインテグレーションを有効にすると、すべての Kinesis メトリクスが Datadog に表示され、カスタム Kinesis タグが収集されます。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 [Amazon Web Services インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。これ以外に必要なインストール手順はありません。
 
@@ -53,9 +53,9 @@ Amazon Kinesis は、膨大な分散型データストリームをリアルタ�
 
 #### ログの有効化
 
-Datadog は、Amazon Kinesis Delivery ストリームのデフォルトの宛先の 1 つです。 AWS は Amazon Kinesis Data Firehose を完全に管理しているため、ストリーミングログ用の追加のインフラストラクチャーや転送構成を維持する必要はありません。
+Datadog は、Amazon Kinesis Data Firehose 配信ストリームのデフォルトの宛先の一つです。AWS が Amazon Kinesis Data Firehose を完全に管理するため、ログのストリーミングに追加のインフラストラクチャーや転送構成を用意する必要はありません。
 
-AWS Firehose コンソールで Kinesis Firehose Delivery Stream を設定するか、CloudFormation テンプレートを使用して宛先を自動的に設定できます。
+AWS Firehose コンソールで Amazon Data 配信ストリームを設定するか、CloudFormation テンプレートを使用して宛先を自動的に設定できます。
 
 - [AWS Firehose コンソール][6]
 - [CloudFormation テンプレート][7]
@@ -68,23 +68,23 @@ AWS Firehose コンソールで Kinesis Firehose Delivery Stream を設定する
     - [S3 バケットに手動トリガーを追加][9]
     - [CloudWatch ロググループに手動トリガーを追加][10]
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "amazon_kinesis" >}}
 
 
 AWS から取得される各メトリクスには、ホスト名やセキュリティ グループなど、AWS コンソールに表示されるのと同じタグが割り当てられます。
 
-### ヘルプ
+### イベント
 
 Amazon Kinesis インテグレーションには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 
 Amazon Kinesis インテグレーションには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][12]までお問合せください。
 
@@ -93,7 +93,7 @@ Amazon Kinesis インテグレーションには、サービスのチェック�
 [3]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/#installation
 [4]: https://docs.aws.amazon.com/streams/latest/dev/controlling-access.html
 [5]: https://app.datadoghq.com/integrations/amazon-kinesis
-[6]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-kinesis-firehose-destination/?tab=kinesisfirehosedeliverystream
+[6]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-kinesis-firehose-destination/?tab=amazondatafirehosedeliverystream
 [7]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-kinesis-firehose-destination/?tab=cloudformationtemplate
 [8]: https://docs.datadoghq.com/ja/logs/guide/forwarder/
 [9]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-s3-buckets

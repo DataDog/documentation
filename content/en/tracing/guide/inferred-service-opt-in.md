@@ -1,8 +1,6 @@
 ---
-title: Inferred Entities
-kind: Guide
+title: Inferred Service dependencies
 disable_toc: false
-private: true
 further_reading:
 - link: "/tracing/services/"
   tag: "Documentation"
@@ -13,48 +11,81 @@ further_reading:
 - link: "/tracing/trace_collection/dd_libraries/"
   tag: "Documentation"
   text: "Add the Datadog Tracing Library"
+- link: "/tracing/guide/service_overrides"
+  tag: "Documentation"
+  text: "Service Overrides"
 ---
 
-{{< callout url="https://docs.google.com/forms/d/1imGm-4SfOPjwAr6fwgMgQe88mp4Y-n_zV0K3DcNW4UA/edit" d_target="#signupModal" btn_hidden="true" btn_hidden="false" header="Opt in to the private beta!" >}}
-Inferred entities is in private beta. To request access, complete the form.
-{{< /callout >}}
+## Overview
 
-Follow the steps below to enable the new dependency map on the [Service Page][1], and add _inferred services_ to the [Service Map][2] and [Service Catalog][3] pages.
+Datadog can automatically discover the dependencies for an instrumented service, such as a database, a queue, or a third-party API, even if that dependency hasn't been instrumented yet. By analyzing outbound requests from your instrumented services, Datadog infers the presence of these dependencies and collects associated performance metrics.
 
-## Inferred entities
+With the new inferred entities experience, you can filter [Service Catalog][3] entries by entity type, such as database, queue, or third-party API. This allows you to better visualize service dependencies using the [Service Page dependency map](#service-page-dependency-map) and APM features.
 
-Datadog can automatically discover the dependencies for an instrumented service, such as a database, a queue, or a third-party API even if that dependency hasn't been instrumented yet. Datadog infers the presence of these dependencies and their performance based on information on the outbound requests of your instrumented services.
+To determine the names and types of the inferred service dependencies, Datadog uses standard span attributes and maps them to `peer.*` attributes. For the full list of `peer.*` attributes, see [Inferred service dependencies nomenclature](#inferred-service-dependencies-nomemclature). Inferred external APIs use the default naming scheme `net.peer.name`. For example, `api.stripe.com`, `api.twilio.com`, `us6.api.mailchimp.com`. Inferred databases use the default naming scheme `db.instance`.
 
-To determine the names and types of the inferred entities, Datadog uses span attributes. Inferred external APIs use the default naming scheme `net.peer.name`. For example, `api.stripe.com`, `api.twilio.com`, `us6.api.mailchimp.com`. Inferred databases use the default naming scheme `db.instance`.
+If you're using the Go, Java, Node.js, PHP, .NET, or Ruby tracer, you can customize the default names for inferred entities.
 
-If you're using the Go, Java, NodeJS, PHP, .NET, or Ruby tracer, you can customize the default names for inferred entities. 
-
-**Note:** If you configure monitors, dashboards, or notebooks for a given inferred service during the beta, you may need to update them if the naming scheme changes.
-
-## Dependency map
+### Service page Dependency map
 
 Use the dependency map to visualize service-to-service communication and gain insight into system components such as databases, queues, and third-party dependencies. You can group dependencies by type and filter by Requests, Latency, or Errors to identify slow or failing connections.
 
-{{< img src="tracing/services/service_page/dependencies.png" alt="The dependency section" style="width:100%;">}}
+{{< img src="tracing/services/service_page/dependencies.png" alt="Service page service dependency map" style="width:100%;">}}
 
 ## Opt in
 
-To opt in, you must adjust your Datadog Agent and APM Tracer configurations. Check the [Global default service naming migration](#global-default-service-naming-migration), to see if you need to take any migration actions.
+<div class="alert alert-warning">Only go through migration steps once Datadog support confirmed the feature is enabled for you on the Datadog side.</div>
+
+To opt in, Datadog recommends you adjust your:
+- [Datadog Agent](#datadog-agent-configuration) (or [OpenTelemetry collector](#opentelemetry-collector)) configuration
+- [APM tracing libraries](#apm-tracing-library-configuration) configuration
 
 ### Datadog Agent configuration
 
-Requirements:
-- Datadog Agent version >= [7.50.3][4].
+#### Datadog Agent 7.55.1 and higher
 
-Set the following in your `datadog.yaml` [configuration file][5]:
+From Datadog Agent version >= [7.55.1][9], update your `datadog.yaml` configuration file with the following:
 
 {{< code-block lang="yaml" filename="datadog.yaml" collapsible="true" >}}
 
-DD_APM_COMPUTE_STATS_BY_SPAN_KIND=true 
-DD_APM_PEER_TAGS_AGGREGATION=true
-DD_APM_PEER_TAGS='["_dd.base_service","amqp.destination","amqp.exchange","amqp.queue","aws.queue.name","bucketname","cassandra.cluster","cassandra.keyspace","db.cassandra.contact.points","db.couchbase.seed.nodes","db.hostname","db.instance","db.name","db.system","grpc.host","hazelcast.instance","hostname","http.host","messaging.destination","messaging.destination.name","messaging.kafka.bootstrap.servers","messaging.rabbitmq.exchange","messaging.system","mongodb.db","msmq.queue.path","net.peer.name","network.destination.name","peer.hostname","peer.service","queuename","rpc.service","rpc.system","server.address","streamname","tablename","topicname"]'
+apm_config:
+  compute_stats_by_span_kind: true
+  peer_tags_aggregation: true
 
 {{< /code-block >}}
+
+Alternatively, configure this by setting the following environment variables in your Datadog Agent launch configuration:
+
+{{< code-block collapsible="true" lang="yaml" >}}
+
+DD_APM_COMPUTE_STATS_BY_SPAN_KIND=true 
+DD_APM_PEER_TAGS_AGGREGATION=true
+
+{{< /code-block >}}
+
+#### Datadog Agent version between 7.50.3 and 7.54.1
+
+If you use a Datadog Agent version >= [7.50.3][4] and <= 7.54.1, update your `datadog.yaml` configuration file with the following:
+
+{{< code-block lang="yaml" filename="datadog.yaml" collapsible="true" >}}
+
+apm_config:
+  compute_stats_by_span_kind: true
+  peer_tags_aggregation: true
+  peer_tags: ["_dd.base_service","amqp.destination","amqp.exchange","amqp.queue","aws.queue.name","aws.s3.bucket","bucketname","cassandra.keyspace","db.cassandra.contact.points","db.couchbase.seed.nodes","db.hostname","db.instance","db.name","db.namespace","db.system","grpc.host","hostname","http.host","http.server_name","messaging.destination","messaging.destination.name","messaging.kafka.bootstrap.servers","messaging.rabbitmq.exchange","messaging.system","mongodb.db","msmq.queue.path","net.peer.name","network.destination.name","peer.hostname","peer.service","queuename","rpc.service","rpc.system","server.address","streamname","tablename","topicname"]
+
+{{< /code-block >}}
+
+Alternatively, configure this by setting the following environment variables in your Datadog Agent launch configuration:
+
+{{< code-block collapsible="true" lang="yaml" >}}
+
+DD_APM_COMPUTE_STATS_BY_SPAN_KIND=true 
+DD_APM_PEER_TAGS_AGGREGATION=true
+DD_APM_PEER_TAGS='["_dd.base_service","amqp.destination","amqp.exchange","amqp.queue","aws.queue.name","aws.s3.bucket","bucketname","cassandra.keyspace","db.cassandra.contact.points","db.couchbase.seed.nodes","db.hostname","db.instance","db.name","db.namespace","db.system","grpc.host","hostname","http.host","http.server_name","messaging.destination","messaging.destination.name","messaging.kafka.bootstrap.servers","messaging.rabbitmq.exchange","messaging.system","mongodb.db","msmq.queue.path","net.peer.name","network.destination.name","peer.hostname","peer.service","queuename","rpc.service","rpc.system","server.address","streamname","tablename","topicname"]'
+
+{{< /code-block >}}
+
 
 #### Helm 
 Include the same set of environment variables in your `values.yaml` [file][8].
@@ -73,7 +104,7 @@ connectors:
     traces:
       compute_stats_by_span_kind: true
       peer_tags_aggregation: true
-      peer_tags: ["_dd.base_service","amqp.destination","amqp.exchange","amqp.queue","aws.queue.name","bucketname","cassandra.cluster","db.cassandra.contact.points","db.couchbase.seed.nodes","db.hostname","db.instance","db.name","db.system","grpc.host","hazelcast.instance","hostname","http.host","messaging.destination","messaging.destination.name","messaging.kafka.bootstrap.servers","messaging.rabbitmq.exchange","messaging.system","mongodb.db","msmq.queue.path","net.peer.name","network.destination.name","peer.hostname","peer.service","queuename","rpc.service","rpc.system","server.address","streamname","tablename","topicname"]
+      peer_tags: ["_dd.base_service","amqp.destination","amqp.exchange","amqp.queue","aws.queue.name","aws.s3.bucket","bucketname","db.cassandra.contact.points","db.couchbase.seed.nodes","db.hostname","db.instance","db.name","db.namespace","db.system","grpc.host","hostname","http.host","http.server_name","messaging.destination","messaging.destination.name","messaging.kafka.bootstrap.servers","messaging.rabbitmq.exchange","messaging.system","mongodb.db","msmq.queue.path","net.peer.name","network.destination.name","peer.hostname","peer.service","queuename","rpc.service","rpc.system","server.address","streamname","tablename","topicname"]
 
 {{< /code-block >}}
 
@@ -87,12 +118,14 @@ exporters:
     traces:
       compute_stats_by_span_kind: true
       peer_tags_aggregation: true
-      peer_tags: ["_dd.base_service","amqp.destination","amqp.exchange","amqp.queue","aws.queue.name","bucketname","cassandra.cluster","db.cassandra.contact.points","db.couchbase.seed.nodes","db.hostname","db.instance","db.name","db.system","grpc.host","hazelcast.instance","hostname","http.host","messaging.destination","messaging.destination.name","messaging.kafka.bootstrap.servers","messaging.rabbitmq.exchange","messaging.system","mongodb.db","msmq.queue.path","net.peer.name","network.destination.name","peer.hostname","peer.service","queuename","rpc.service","rpc.system","server.address","streamname","tablename","topicname"]   
+      peer_tags: ["_dd.base_service","amqp.destination","amqp.exchange","amqp.queue","aws.queue.name","aws.s3.bucket","bucketname","db.cassandra.contact.points","db.couchbase.seed.nodes","db.hostname","db.instance","db.name","db.namespace","db.system","grpc.host","hostname","http.host","http.server_name","messaging.destination","messaging.destination.name","messaging.kafka.bootstrap.servers","messaging.rabbitmq.exchange","messaging.system","mongodb.db","msmq.queue.path","net.peer.name","network.destination.name","peer.hostname","peer.service","queuename","rpc.service","rpc.system","server.address","streamname","tablename","topicname"]   
 
 {{< /code-block >}}
 
 
-### APM tracer configuration
+### APM tracing library configuration
+
+<div class="alert alert-warning">The following steps introduce a <b>breaking change</b>: Datadog will change the way service names are captured by default. Refer to <a href="#global-default-service-naming-migration">Global default service naming migration</a>, to determine if you need to take any migration actions.</div>
 
 {{< tabs >}}
 {{% tab "Java" %}}
@@ -133,9 +166,9 @@ To opt in, add the following environment variables or system properties to your 
 
 {{% /tab %}}
 
-{{% tab "NodeJS" %}}
+{{% tab "Node.js" %}}
 
-The minimum NodeJS tracer versions required are [2.44.0][1], [3.31.0][2], or [4.10.0][3]. Regular updates to the latest version are recommended to access changes and bug fixes.
+The minimum Node.js tracer versions required are [2.44.0][1], [3.31.0][2], or [4.10.0][3]. Regular updates to the latest version are recommended to access changes and bug fixes.
 
 To opt in, add the following environment variables or system properties to your tracer settings:
 
@@ -198,32 +231,47 @@ To opt in, add the following environment variables to your tracer settings or sy
 
 {{< /tabs >}}
 
+
+
+## The new nomenclature: What is changing
+
+### List of newly introduced peer.* tags 
+
+`peer.*` dimensions | Remapped from ...
+--------------------|-------------------
+`peer.aws.dynamodb.table` | `tablename`
+`peer.aws.kinesis.stream` | `streamname`
+`peer.aws.s3.bucket` | `bucketname`, `aws.s3.bucket`
+`peer.aws.sqs.queue` | `queuename`
+`peer.cassandra.contact.points` | `db.cassandra.contact.points`
+`peer.couchbase.seed.nodes` | `db.couchbase.seed.nodes`
+`peer.db.name` | `db.name`, `mongodb.db`, `db.instance`, `cassandra.keyspace`, `db.namespace`
+`peer.db.system` | `db.system`
+`peer.hostname` | `peer.hostname`, `hostname`, `net.peer.name`, `db.hostname`, `network.destination.name`, `grpc.host`, `http.host`, `server.address`, `http.server_name`
+`peer.kafka.bootstrap.servers` | `messaging.kafka.bootstrap.servers`
+`peer.messaging.destination` | `topicname`, `messaging.destination`, `messaging.destination.name`, `messaging.rabbitmq.exchange`, `amqp.destination`, `amqp.queue`, `amqp.exchange`, `msmq.queue.path`, `aws.queue.name`
+`peer.messaging.system` | `messaging.system`
+`peer.rpc.service` | `rpc.service`
+`peer.rpc.system` | `rpc.system`
+`peer.service` | `peer.service`
+
 ### Global default service naming migration
 
-When you enable the `DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED` environment variable, it improves how service-to-service connections and inferred services are represented in Datadog visualizations, across all supported tracing library languages and integrations.
+With inferred services, service names are automatically detected from span attributes. When you enable the `DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED` environment variable, it improves how service-to-service connections and inferred services are represented in Datadog visualizations, across all supported tracing library languages and integrations.
 
-Previously, some tracing libraries included the name of the associated integration in service name tagging. For example, .NET tagged gRPC calls as `service:<DD_SERVICE>-grpc-client` while Python tagged them as `service:grpc-client`. With this option enabled, all supported tracing libraries tag spans from the downstream services with the calling service's name, `service:<DD_SERVICE>`, thereby providing a _global default service name_.
+<div class="alert alert-warning">Enabling this option may impact existing APM metrics, custom span metrics, trace analytics, retention filters, sensitive data scans, monitors, dashboards, or notebooks that reference the old service names. Update these assets to use the global default service tag (<code>service:&lt;DD_SERVICE&gt;</code>).</div>
 
-Consequently, if you have existing:
-
-- APM metrics
-- APM custom span metrics
-- Trace analytics
-- Retention filters
-- Sensitive data scans
-- Monitors, dashboards, or notebooks that query those things
-
-Update those items to use the global default service tag (`service:<DD_SERVICE>`) instead.
+For instructions on how to remove service overrides and migrate to inferred services, see the [Service Overrides guide][10].
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/services/service_page/
-[2]: /tracing/services/services_map/
 [3]: /tracing/service_catalog/
 [4]: https://github.com/DataDog/datadog-agent/releases/tag/7.50.3
 [5]: /agent/guide/agent-configuration-files/?tab=agentv6v7
 [6]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/collector.yaml#L335-L357
 [7]: https://github.com/open-telemetry/opentelemetry-collector-contrib/releases
 [8]: https://github.com/DataDog/helm-charts/blob/main/charts/datadog/values.yaml#L517-L538 
+[9]: https://github.com/DataDog/datadog-agent/releases/tag/7.55.1
+[10]: /tracing/guide/service_overrides

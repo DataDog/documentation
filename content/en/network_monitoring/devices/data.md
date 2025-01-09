@@ -1,14 +1,9 @@
 ---
-title: NDM Data Collected
-kind: documentation
+title: SNMP Metrics Reference
 disable_toc: true
 aliases:
     - /network_performance_monitoring/devices/data/
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Network Device Monitoring is not supported for this site.</div>
-{{< /site-region >}}
 
 ## Events
 

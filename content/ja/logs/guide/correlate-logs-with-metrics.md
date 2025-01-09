@@ -9,7 +9,6 @@ further_reading:
 - link: /logs/live_tail/
   tag: Documentation
   text: Datadog Live Tail 機能
-kind: ガイド
 title: ログとメトリクスの相関
 ---
 
@@ -28,7 +27,7 @@ Datadog アプリ内には、ログをメトリクスと相関させるいくつ
 
 {{< img src="logs/guide/correlate-logs-with-metrics/log-explorer-metrics-tab.jpg" alt="ログエクスプローラーメトリクス" >}}
 
-## ダッシュボード
+## Dashboards
 
 [ダッシュボード][5]でログとメトリクスを相関させるには
 
@@ -43,13 +42,13 @@ Datadog アプリ内には、ログをメトリクスと相関させるいくつ
 
 ## メトリクスエクスプローラー
 
-[ログエクスプローラー][7]ページでログとメトリクスを相関させるには
+To correlate logs and metrics on the [Metrics Explorer][7] page:
 
 1. グラフ化するメトリクスを選択します。
 2. グラフ内の任意のポイントをクリックして、グラフメニューに入力します。
 3. **View related logs** を選択します。
 
-## その他の参考資料
+## 参考資料
 {{< partial name="whats-next/whats-next.html" >}}
 <br>
 \*Logging without Limits は Datadog, Inc. の商標です。
@@ -59,5 +58,5 @@ Datadog アプリ内には、ログをメトリクスと相関させるいくつ
 [3]: /ja/metrics/explorer/
 [4]: https://app.datadoghq.com/logs
 [5]: https://app.datadoghq.com/dashboard/lists
-[6]: /ja/dashboards/#graph-menu
+[6]: /ja/dashboards/widgets/#graph-menu
 [7]: https://app.datadoghq.com/metric/explorer

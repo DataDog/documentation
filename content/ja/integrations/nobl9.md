@@ -23,6 +23,7 @@ author:
 categories:
 - メトリクス
 - notifications
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/nobl9/README.md
 display_on_public_website: true
@@ -32,7 +33,6 @@ integration_id: nobl9
 integration_title: Nobl9
 integration_version: ''
 is_public: true
-kind: integration
 manifest_version: 2.0.0
 name: nobl9
 public_title: Nobl9
@@ -49,6 +49,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: Nobl9 は、SLI 収集、SLO 計算、エラーバジェットアラートを可能にします
   media: []
@@ -81,7 +82,7 @@ Datadog Nobl9 との連携で、以下のことが可能になります。
 ### サービスヘルスダッシュボード
 ![サービスヘルスダッシュボード][4]
 
-## 計画と使用
+## セットアップ
 
 構成はすべて Nobl9 SLO Platform 上で行われます。
 
@@ -93,7 +94,7 @@ Datadog Nobl9 との連携で、以下のことが可能になります。
 
 Nobl9 プラットフォームでの SLO 作成の詳細については、Nobl9 の[ユーザーガイド][5]を参照してください。
 
-## ヘルプ
+## トラブルシューティング
 
 ヘルプが必要ですか？[Nobl9 サポート][6]または [Datadog サポート][7]にお問い合わせください。
 

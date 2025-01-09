@@ -15,7 +15,7 @@ git_integration_title: amazon_ses
 has_logo: true
 integration_title: Amazon SES
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: amazon_ses
 public_title: "Intégration Datadog/Amazon\_SES"

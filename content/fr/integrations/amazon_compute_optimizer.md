@@ -16,7 +16,7 @@ integration_id: amazon-compute-optimizer
 integration_title: AWS Compute Optimizer
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: amazon_compute_optimizer
 public_title: Datadog/AWS Compute Optimizer

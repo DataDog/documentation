@@ -14,7 +14,7 @@ integration_id: google-cloud-dataproc
 integration_title: "Google\_Cloud\_Dataproc"
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: google_cloud_dataproc
 public_title: "Intégration Datadog/Google\_Cloud\_Dataproc"

@@ -1,8 +1,7 @@
 ---
-title: Software Composition Analysis
-kind: documentation
+title: Software Composition Analysis (SCA)
 description: Learn about Datadog Software Composition Analysis to scan your imported open-source libraries for known security vulnerabilities before you ship to production.
-is_beta: true
+is_beta: false
 further_reading:
 - link: "https://www.datadoghq.com/blog/iast-datadog-application-vulnerability-management/"
   tag: "Blog"
@@ -19,7 +18,13 @@ further_reading:
 - link: "/integrations/guide/source-code-integration/"
   tag: "Documentation"
   text: "Learn about the Source Code Integration"
+algolia:
+  tags: ['software composition analysis', 'datadog software composition analysis', 'library vulnerabilities', 'SCA']
 ---
+
+{{< callout url="#" btn_hidden="true" header="Join the Preview!" >}}
+Software Composition Analysis is in Preview.
+{{< /callout >}}
 
 {{% site-region region="gov" %}}
 <div class="alert alert-danger">
@@ -27,30 +32,23 @@ further_reading:
 </div>
 {{% /site-region %}}
 
-{{< callout url="#" btn_hidden="true" header="Try the Beta!" >}}
-Code Analysis is in public beta.
-{{< /callout >}}
-
 ## Overview
 
-Software Composition Analysis (SCA) scans open source libraries imported into repositories through package managers such as `npm` for [known vulnerabilities][1]. SCA enables engineering teams to identify vulnerable libraries early on in the development life cycle so they can update them to non-vulnerable versions or remove them entirely to ensure their production codebase is secure.
+Software Composition Analysis (SCA) scans open source libraries imported into repositories through package managers such as `npm` for [known vulnerabilities][1], and creates a catalog of libraries used across your repositories that identifies risky licenses, end-of-life libraries, and vulnerabilities to ensure a high quality, secure codebase.
 
-SCA can run in CI pipelines by using [Code Analysis][3] and provide runtime monitoring capabilities by using [Datadog Application Security][1].
+SCA scans can be run directly through Datadog or in your CI pipelines using [Code Analysis][3] to detect library vulnerabilities before they reach production. Datadog also offers runtime detection through [Datadog Application Security][1].
 
+## Set up Software Composition Analysis
 
-## Languages
+SCA supports scanning for libraries in the following languages and technologies:
 
-SCA currently supports scanning the following languages and technologies for vulnerable libraries:
+{{< partial name="code_analysis/sca-getting-started.html" >}}
 
-- .NET
-- Go
-- JVM
-- Node.js
-- PHP
-- Python
-- Ruby
+To get started, set up Software Composition Analysis on the [**Code Analysis** page][2] or see the [Setup documentation][3].
 
-SCA performs scans by looking at the libraries contained in your lockfiles. Below are the supported lockfiles:
+### Lockfiles
+
+SCA scans libraries contained in your lockfiles. The following lockfiles are supported:
 
 | Package Manager | Lockfile                                 |
 |-----------------|------------------------------------------|
@@ -66,22 +64,24 @@ SCA performs scans by looking at the libraries contained in your lockfiles. Belo
 | Python (poetry) | `poetry.lock`                            |
 | Ruby (bundler)  | `Gemfile.lock`                           |
 
-## Integrations
+## Integrate Software Composition Analysis into your software development lifecycle
 
 ### CI providers
-{{< whatsnext desc="With Software Composition Analysis, you can identify vulnerable open source libraries that have been imported into your codebase. See the documentation for information about the following integrations:">}}
+{{< whatsnext desc="You can run SCA on any CI platform provider of your choice. See provider-specific documentation to set up SCA in your CI pipelines:">}}
     {{< nextlink href="code_analysis/software_composition_analysis/github_actions" >}}GitHub Actions{{< /nextlink >}}
     {{< nextlink href="code_analysis/software_composition_analysis/generic_ci_providers" >}}Generic CI Providers{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Search and filter results
 
-After you configure your CI pipelines to run Datadog SCA, violations are summarized per repository on the [Code Analysis page][4]. Click on a repository to analyze **Library Vulnerabilities** and **Library List** results from Software Composition Analysis. 
+<div class="alert alert-info">Datadog Software Composition Analysis can find vulnerable libraries across the software development lifecycle (SDLC). Code Analysis summarizes results found by directly scanning your repositories. To view all vulnerabilities found in repositories and at runtime consolidated together, see <a href="/security/application_security/software_composition_analysis" target="_blank">Application Security</a> for more details.</div>
+
+After you configure your CI pipelines to run Datadog SCA, violations are summarized per repository on the [**Code Analysis Repositories** page][4]. Click on a repository to analyze **Library Vulnerabilities** and **Library Catalog** results from Software Composition Analysis. 
 
 * The **Library Vulnerabilities** tab contains the vulnerable library versions found by Datadog SCA.
-* The **Library List** tab contains all of the libraries (vulnerable or not) found by Datadog SCA.
+* The **Library Catalog** tab contains all of the libraries (vulnerable or not) found by Datadog SCA.
 
-To filter your results, use the facets to the left of the list, or search.
+To filter your results, use the facets to the left of the list or the search bar at the top. Results can be filtered by service or team facets. For more information about how results are linked to Datadog services and teams, see [Getting Started with Code Analysis][5].
 
 Every row represents a unique library and version combination. Each combination is associated with the specific commit and branch that is selected in the filters at the top of the page (by default, the latest commit on the default branch of the repository you selected).
 
@@ -102,3 +102,4 @@ The content of the violation is shown in tabs:
 [2]: https://app.datadoghq.com/ci/setup/code-analysis
 [3]: /code_analysis/software_composition_analysis/setup
 [4]: https://app.datadoghq.com/ci/code-analysis
+[5]: /getting_started/code_analysis/?tab=datadoghosted#linking-services-to-code-violations-and-libraries

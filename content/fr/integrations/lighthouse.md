@@ -18,7 +18,7 @@ integration_id: lighthouse
 integration_title: Lighthouse
 integration_version: 2.1.0
 is_public: true
-kind: integration
+custom_kind: integration
 maintainer: mustin.eric@gmail.com
 manifest_version: 1.0.0
 metric_prefix: lighthouse.

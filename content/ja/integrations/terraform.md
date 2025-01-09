@@ -3,11 +3,13 @@ app_id: terraform
 app_uuid: 05198ed5-6fe5-417b-8711-e124718e9715
 assets:
   integration:
+    auto_install: true
     configuration: {}
     events:
       creates_events: false
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10153
     source_type_name: terraform
 author:
   homepage: https://www.datadoghq.com
@@ -18,19 +20,19 @@ categories:
 - 構成 & デプロイ
 - developer tools
 - orchestration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/terraform/README.md
 display_on_public_website: true
 draft: false
 git_integration_title: terraform
 integration_id: terraform
-integration_title: terraform
+integration_title: Terraform
 integration_version: ''
 is_public: true
-kind: integration
 manifest_version: 2.0.0
 name: terraform
-public_title: terraform
+public_title: Terraform
 short_description: Terraform を使用して Datadog アカウントを管理する
 supported_os:
 - linux
@@ -45,14 +47,16 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: Terraform を使用して Datadog アカウントを管理する
   media: []
   overview: README.md#Overview
   support: README.md#Support
-  title: terraform
+  title: Terraform
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ## 概要
@@ -65,9 +69,9 @@ Datadog Terraform プロバイダーは Terraform コンフィギュレーショ
 
 Datadog Terraform プロバイダーは [Terraform レジストリ][1]を介して利用することができます。
 
-### コンフィギュレーション
+### 構成
 
-1. [Terraform のインストール][2]
+1. [Terraform をインストールします][2]。
 2. Terraform のコンフィギュレーションファイルを含むディレクトリを作成します。例: `terraform_config/`
 3. `terraform_config/` ディレクトリに、以下の内容の `main.tf` ファイルを作成します。
     ```
@@ -86,12 +90,20 @@ Datadog Terraform プロバイダーは [Terraform レジストリ][1]を介し�
     }
     ```
 
+   **注**: Datadog US1 サイトを使用していない場合は、`api_url` [オプションパラメーター][3]を [Datadog サイト][4]に設定する必要があります。ページの右側にあるドキュメントサイトセレクタが正しい Datadog サイトに設定されていることを確認してから、`api_url` パラメーターの値として以下の URL を使用してください。
+
+
+    ```
+    https://api.{{< region-param key="dd_site" code="true" >}}/
+    ```
+
+
 4. `terraform init` を実行します。これにより、Terraform での利用のためにディレクトリが初期化され、Datadog プロバイダーがプルされます。
 5. `terraform_config/` ディレクトリ内に任意の `.tf` ファイルを作成し、Datadog リソースの作成を開始します。
 
 ## モニターの作成
 
-この例では、[ライブプロセスモニター][3]を作成する `monitor.tf` ファイルを示します。
+この例では、[ライブプロセスモニター][5]を作成する `monitor.tf` ファイルを示します。
 
     ```
     # monitor.tf
@@ -121,7 +133,7 @@ Datadog Terraform プロバイダーは [Terraform レジストリ][1]を介し�
   pip install datadog
   ```
 
-詳しくは、[Datadog Python ライブラリ][4]をご覧ください。
+詳しくは、[Datadog Python ライブラリ][6]をご覧ください。
 
 `terraform apply` イベントを送信します:
 
@@ -141,7 +153,7 @@ Datadog Terraform プロバイダーは [Terraform レジストリ][1]を介し�
 
 Terraform には、メトリクスは含まれません。
 
-### サービスのチェック
+### サービスチェック
 
 Terraform には、サービスのチェック機能は含まれません。
 
@@ -151,10 +163,12 @@ Terraform には、イベントは含まれません。
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][5]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][7]までお問い合わせください。
 
 [1]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs
 [2]: https://learn.hashicorp.com/tutorials/terraform/install-cli
-[3]: https://docs.datadoghq.com/ja/monitors/types/process/
-[4]: https://github.com/DataDog/datadogpy
-[5]: https://docs.datadoghq.com/ja/help/
+[3]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs#optional
+[4]: https://docs.datadoghq.com/ja/getting_started/site/
+[5]: https://docs.datadoghq.com/ja/monitors/types/process/
+[6]: https://github.com/DataDog/datadogpy
+[7]: https://docs.datadoghq.com/ja/help/

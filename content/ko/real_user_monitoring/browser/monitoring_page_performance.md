@@ -18,7 +18,6 @@ further_reading:
 - link: /real_user_monitoring/platform/dashboards/
   tag: 설명서
   text: RUM 대시보드에 대해 알아보기
-kind: 설명서
 title: 페이지 성능 모니터링
 ---
 
@@ -41,17 +40,16 @@ RUM 보기 이벤트는 모든 페이지 보기에 대한 광범위한 성능 �
 
 [Google의 Core Web Vitals][5]은 사이트의 사용자 경험을 모니터링하기 위해 고안된 세 가지 메트릭 세트입니다. 이러한 메트릭은 로드 성능, 상호 작용 및 시각적 안정성을 파악하는 데 중점을 둡니다. 각 메트릭에는 우수한 사용자 경험으로 해석되는 값의 범위에 대한 지침이 함께 제공됩니다. Datadog은 이러한 메트릭의 75번째 백분위수를 모니터링할 것을 권장합니다.
 
-{{< img src="real_user_monitoring/browser/core-web-vitals.png" alt="Core Web Vitals 요약 시각화" >}}
+{{< img src="real_user_monitoring/browser/core-web-vitals-1.png" alt="핵심 웹 바이탈 요약 가시화" >}}
 
-- 백그라운드에서 열린 페이지(예: 새 탭 또는 초점이 없는 창)에 대해서는 첫 번째 Input Delay 및 Largest Contentful Paint가 수집되지 않습니다.
+- 백그라운드에서 열린 페이지(예: 새 탭 또는 초점이 없는 창)에서는 Next Paint 및 Largest Contentful Paint에 대한 상호 작용이 수집되지 않습니다.
 - 실제 사용자의 페이지 보기에서 수집된 메트릭은 [Synthetic 브라우저 테스트][6]와 같이 고정되고 통제된 환경에서 로드된 페이지에 대해 계산된 메트릭과 다를 수 있습니다. Synthetic 모니터링은 실제 메트릭이아닌 실험실 메트릭으로 Largest Contentful Paint 및 Cumulative Layout Shift를 표시합니다.
 
 | 메트릭                   | 초점            | 설명                                                                                           | 대상 값 |
 |--------------------------|------------------|-------------------------------------------------------------------------------------------------------|--------------|
 | [Largest Contentful Paint][7] | 로드 성능 | 뷰포트 내 최대의 DOM 오브젝트 (즉, 화면에 표시됨)가 렌더링 되는 페이지 로드 타임 라인의 순간.         | <2.5s       |
-| [First Input Delay][8]        | 상호 작용    | 사용자가 페이지와 처음 상호 작용한 후 브라우저의 응답까지 경과한 시간.             | <100ms      |
-| [Cumulative Layout Shift][9]  | 시각적 안정성 | 동적으로 로드된 콘텐츠(예: 타사 광고)로 인한 예기치 않은 페이지 이동을 정량화합니다. 여기서 0은 이동이 발생하지 않음을 의미합니다. | <0.1        |
 | [Next Paint와 상호작용][19]| 상호 작용    | 사용자의 페이지 상호작용과 다음 페인트 간에 경과한 가장 긴 시간. RUM SDK v5.1.0이 필요함. | <200ms        |
+| [Cumulative Layout Shift][9]  | 시각적 안정성 | 동적으로 로드된 콘텐츠(예: 타사 광고)로 인한 예기치 않은 페이지 이동을 정량화합니다. 여기서 0은 이동이 발생하지 않음을 의미합니다. | <0.1        |
 
 ### Core Web Vitals 대상 요소
 
@@ -67,8 +65,8 @@ RUM에서는 각 Core Web Vital 인스턴스와 연관된 요소를 보고합니
 
 | 속성                       | 유형        | 설명                                                                                                                                                                                                                      |
 |---------------------------------|-------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `view.time_spent`               | 숫자 (ns) | 현재 보기에 소요된 시간.                                                                                                                                                                                                  |
-| `view.first_byte`               | 숫자 (ns) | 보기의 첫 번째 바이트가 수신될 때까지 경과된 시간.                                                                                                |
+| `view.time_spent`               | 숫자(ns) | 현재 보기에 소요된 시간.                                                                                                                                                                                                  |
+| `view.first_byte`               | 숫자(ns) | 보기의 첫 번째 바이트가 수신될 때까지 경과된 시간.                                                                                                |
 | `view.largest_contentful_paint` | 숫자(ns) | 뷰포트의 가장 큰 DOM 객체가 렌더링되고 화면에 나타나는 페이지 로드 타임라인의 순간입니다.                                                                                                               |
 | `view.largest_contentful_paint_target_selector` | 문자열(CSS 선택기) | 최대 컨텐츠풀 페인트에 해당하는 요소의 CSS 선택기.                                                                                     |
 | `view.first_input_delay`        | 숫자(ns) | 사용자가 페이지와 처음 상호 작용한 후 브라우저의 응답까지 경과한 시간.                                                                                                                                        |
@@ -146,7 +144,50 @@ window.DD_RUM.init({
 
 RUM SDK는 해시(`#`) 탐색에 의존하는 프레임워크를 자동으로 모니터링합니다. SDK는 `HashChangeEvent`를 감시하고 새 보기를 발행합니다. 현재 보기 컨텍스트에 영향을 주지 않는 HTML 앵커 태그에서 오는 이벤트는 무시됩니다.
 
-## 자체 성능 타이밍 추가
+## 커스텀 성능 메트릭 생성
+
+### 커스텀 바이탈을 통해 구성 요소 수준 성능 측정
+
+`customVital` API를 사용하여 구성 요소 수준에서 애플리케이션의 성능을 측정하세요. 예를 들어 페이지의 일부가 렌더링되는 데 걸리는 시간이나 구성 요소가 사용자 상호 작용에 응답하는 데 걸리는 시간을 측정할 수 있습니다. **참고**: 커스텀 필수 이름에는 공백이나 특수 문자를 포함할 수 없습니다.
+
+#### 지속 시간 측정 시작 및 중지
+
+`startDurationVital`을 호출하여 지속 시간 측정을 시작하고 `stopDurationVital`로 측정을 중지합니다:
+
+```javascript
+window.DD_RUM.startDurationVital("dropdownRendering")
+window.DD_RUM.stopDurationVital("dropdownRendering")
+```
+
+`stopDurationVital` 메서드를 호출하면 커스텀 바이탈 기간이 Datadog로 전송되며 `@vital.name:dropdownRendering`을 사용하여 조회할 수 있습니다. 예를 들어 `@vital.duration:>10`을 사용하여 기간별로 필터링할 수도 있습니다.
+
+#### 참조 및 설명 사용
+
+`startDurationVital`에서 반환된 참조를 사용하고 `description` 문자열을 지정하여 여러 페이지에서 동일한 커스텀 바이탈의 인스턴스를 구분합니다. 예를 들어 `login` 페이지에서 `dropdownRendering`의 지속 시간을 추적하는 경우입니다.
+
+```javascript
+const reference = window.DD_RUM.startDurationVital("dropdownRendering", { description: "login" })
+window.DD_RUM.stopDurationVital(reference)
+```
+
+이 코드는 `@vital.description`으로 그룹화하여 여러 페이지에서 동일한 구성 요소의 렌더링 동작을 추적할 수 있습니다.
+
+`context` 속성을 사용하여 커스텀 바이탈에 컨텍스트를 추가할 수도 있습니다.
+
+```javascript
+window.DD_RUM.startDurationVital("dropdownRendering", {context: { clientId: "xxx" }})
+window.DD_RUM.stopDurationVital("dropdownRendering")
+```
+
+#### `addDurationVital`로 커스텀 바이탈 보고
+
+커스텀 바이탈 변수를 개별적으로 설정하는 대신 `addDurationVital`을 사용하여 한 번의 작업으로 커스텀 바이탈을 보고할 수 있습니다.
+
+```javascript
+window.DD_RUM.addDurationVital("dropdownRendering", {startTime: 1707755888000, duration: 10000})
+```
+
+### 추가 성능 타이밍 추적
 
 RUM의 기본 성능 타이밍 외에도 애플리케이션이 시간을 소비하는 위치를 보다 유연하게 측정할 수 있습니다. `addTiming` API는 성능 타이밍을 추가할 수 있는 간단한 방법입니다.
 

@@ -1,6 +1,5 @@
 ---
 title: Deprecation notice for TLS version < 1.2
-kind: guide
 ---
 
 

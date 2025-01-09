@@ -24,7 +24,7 @@ integration_id: rapdev-snmp-trap-logs
 integration_title: SNMP Trap Logs
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 legal_terms:
   eula: assets/EULA.pdf
 manifest_version: 2.0.0

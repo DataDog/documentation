@@ -17,6 +17,7 @@ categories:
 - インシデント
 - マーケットプレイス
 - メトリクス
+custom_kind: integration
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -25,7 +26,6 @@ integration_id: zigiwave-micro-focus-opsbridge-integration
 integration_title: OpsBridge
 integration_version: ''
 is_public: true
-kind: integration
 legal_terms:
   eula: assets/eula.pdf
 manifest_version: 2.0.0
@@ -53,6 +53,7 @@ tile:
   - Submitted Data Type::Metrics
   - Submitted Data Type::Events
   - Submitted Data Type::Incidents
+  - Offering::Integration
   configuration: README.md#Setup
   description: Datadog と OpsBridge のノーコードインテグレーション
   media:
@@ -95,7 +96,10 @@ Datadog オートディスカバリーは、OpsBridge データベースにな�
 ZigiOps は、Datadog のイベントを収集し、イベントとして OpsBridge に報告します。
 このプラットフォームは、メトリクスやトポロジーなど、関連するホストの詳細をすべて同期します。
 
-ZigiOps は Datadog のメトリクスを収集し、関連するホスト情報とともに MF Operations Connector にレポートします。これらのメトリクスは、OpsBridge Performance Perspective からアクセスでき、ダッシュボードの構築に使用することができます。
+ZigiOps collects Datadog metrics and reports them, along with related host information, to the MF Operations
+Connector. These metrics can then be
+accessed by the OpsBridge Performance Perspective and used for
+building dashboards.
 
 このインテグレーションにより、IT 運用チームは OpsBridge インフラストラクチャーを俯瞰的に把握し、問題が現実の問題となる前に検出できるようになります。
 
@@ -103,7 +107,7 @@ ZigiOps は Datadog のメトリクスを収集し、関連するホスト情報
 
 ZigiOps では、Datadog - Micro Focus OBM インテグレーションの 4 つのユースケースに対して、完全にカスタマイズ可能なインテグレーションテンプレートを提供しています。このテンプレートにより、ユーザーはデータの流れを素早く確認し始めることができます。ユーザーは、テンプレートで提供されるデータマッピングとフィルターを、ユースケースに合わせて変更することができます。現在利用できるテンプレートは、OpsBridge イベント - Datadog インシデント、Datadog イベント - OpsBridge イベント、Datadog メトリクス - OBM メトリクス、Datadog ホスト - OBM トポロジーです。ユースケースがこれらのテンプレートのどれにも当てはまらない場合、ゼロから独自のインテグレーションを作成することもできます。インテグレーションコンサルタントが、その方法を指導します。
 
-## Agent
+## サポート
 
 ZigiWave は、ユーザーの皆様に最高のカスタマーエクスペリエンスを提供することに専念しています。 既存ユーザーの方は、support.zigiwave.com からチケットを送信していただくか、弊社チームまでメール (support@zigiwave.com) をお送りください。
 

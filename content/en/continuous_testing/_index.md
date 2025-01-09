@@ -1,6 +1,5 @@
 ---
 title: Continuous Testing
-kind: documentation
 description: Customize the number of Continuous Testing tests running in parallel in your CI/CD pipelines to increase your testing coverage.
 disable_sidebar: true
 further_reading:
@@ -28,6 +27,9 @@ further_reading:
 - link: 'https://www.datadoghq.com/blog/best-practices-datadog-continuous-testing/'
   tag: 'Blog'
   text: 'Best practices for continuous testing with Datadog'
+- link: 'https://www.datadoghq.com/blog/progressive-web-application-monitoring/'
+  tag: 'Blog'
+  text: 'Best practices for monitoring progressive web applications'
 cascade:
     algolia:
         rank: 70

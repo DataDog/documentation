@@ -10,7 +10,6 @@ further_reading:
 - link: /service_management/service_level_objectives/
   tag: Documentation
   text: SLO の概要、構成、計算
-kind: documentation
 title: メトリクスベース SLO
 ---
 
@@ -18,11 +17,11 @@ title: メトリクスベース SLO
 
 メトリクスベースの SLO は、計数ベースのデータストリームでイベントの良し悪しを判断する場合に有用です。メトリクスクエリは良質なイベントの合計を同様の時間軸におけるイベント総数で割り、サービスレベル指標 (SLI) を算出します。SLO の作成には、[APM スパン][1]、[RUM イベント][2]、[ログ][3]から生成されるカスタムメトリクスを含め、あらゆるメトリクスを使用することができます。SLO の構成と計算方法については、[サービスレベル目標][4]のページを参照してください。
 
-{{< img src="service_management/service_level_objectives/metric-based-slo-example.png" alt="メトリクスベース SLO の例" >}}
+{{< img src="service_management/service_level_objectives/metric_slo_side_panel.png" alt="example metric-based SLO" >}}
 
 ## セットアップ
 
-[SLO ステータスページ][5]で、**New SLO +** を選択します。その後、[**Metric**][6] をクリックします。
+On the [SLO status page][5], click **+ New SLO**. Then select, [**By Count**][6].
 
 ### クエリの定義
 
@@ -38,17 +37,15 @@ title: メトリクスベース SLO
 
 #### メトリクスベース SLI のマルチグループ
 
-メトリクスベース SLI を使用すると、SLI の最も重要な属性に集中できます。エディターでメトリクスベース SLI にグループを追加するには、`datacenter`、`partition`、`availability-zone`、`resource` などのタグ、またはその他の関連グループを使用します。
+Metric-based SLIs allow you to focus on the most important attributes of your SLIs. You can add groups to your metric-based SLIs in the editor by using tags like `datacenter`, `env`, `availability-zone`, `resource`, or any other relevant group:
 
-{{< img src="service_management/service_level_objectives/metric_editor.png" alt="グループ化されたメトリクスベース SLO エディター" >}}
+{{< img src="service_management/service_level_objectives/metric_slo_creation.png" alt="grouped metric-based SLO editor" >}}
 
 これらの SLI をグループ化すると、個々のグループのステータス、適切なリクエスト数、残りのエラーバジェットを詳細パネルで視覚化できます。
 
-{{< img src="service_management/service_level_objectives/metric_results.png" alt="メトリクスベースの SLO グループ結果" >}}
+{{< img src="service_management/service_level_objectives/metric_slo_history_groups.png" alt="metric-based SLO group results" >}}
 
 デフォルトで、棒グラフは SLO 全体の正しい/正しくない要求すべての全体数を表示します。テーブルの該当する行をクリックすると、個別のグループの正しい/正しくない要求の棒グラフを詳しく確認できます。さらに、棒グラフの下にある凡例でオプションを選択し、正しいまたは正しくない要求の数を表示/非表示にすることも可能です。
-
-**注**: モニターベース SLI を使用している場合は、[モニターグループを表示][8]することもできます。
 
 ### SLO ターゲットの設定
 
@@ -65,7 +62,7 @@ SLO がターゲットパーセンテージを上回っている間、SLO のス
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://docs.datadoghq.com/ja/tracing/generate_metrics/
-[2]: https://docs.datadoghq.com/ja/real_user_monitoring/generate_metrics
+[2]: https://docs.datadoghq.com/ja/real_user_monitoring/platform/generate_metrics
 [3]: https://docs.datadoghq.com/ja/logs/log_configuration/logs_to_metrics/#overview
 [4]: /ja/service_management/service_level_objectives
 [5]: https://app.datadoghq.com/slo

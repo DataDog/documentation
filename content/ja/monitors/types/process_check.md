@@ -13,7 +13,6 @@ further_reading:
 - link: /monitors/manage/status/
   tag: ドキュメント
   text: モニターステータスを確認
-kind: documentation
 title: プロセスチェックモニター
 ---
 
@@ -78,7 +77,7 @@ Datadog で[プロセスチェックモニター][2]を作成するには、メ�
 
 ### 通知
 
-**Say what's happening** と **Notify your team** のセクションに関する詳しい説明は、[通知][7] のページを参照してください。
+For detailed instructions on the **Configure notifications and automations** section, see the [Notifications][7] page.
 
 ## その他の参考資料
 

@@ -1,6 +1,5 @@
 ---
 title: Geomap Widget
-kind: documentation
 widget_type: geomap
 aliases:
 - /graphing/widgets/geomap/
@@ -71,6 +70,10 @@ The geomap widget visualizes geographic data with shaded regions or points. It c
 #### Context links
 
 [Context links][7] are enabled by default, you can toggle them on or off. Context links connect dashboard widgets with other pages (in Datadog, or third-party).
+
+#### Visual formatting rules
+
+Customize the region layer color of your Geomap widget with conditional rules.
 
 ## API
 

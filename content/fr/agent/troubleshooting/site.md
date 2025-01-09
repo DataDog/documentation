@@ -1,6 +1,5 @@
 ---
 title: Problèmes liés au site de l'Agent
-kind: documentation
 ---
 Par défaut, l'Agent envoie ses données au site américain de Datadog : `app.datadoghq.com`. Si votre organisation utilise un autre site, vous devez le spécifier en modifiant le paramètre `site` dans le [fichier de configuration principal de votre Agent][1] ou définir la variable d'environnement `DD_SITE`:
 

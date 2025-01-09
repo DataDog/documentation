@@ -4,7 +4,6 @@ further_reading:
 - link: /integrations/postgres/
   tag: 설명서
   text: 기본 Postgres 통합
-kind: 설명서
 title: Aurora 관리형 Postgres에서 데이터베이스 모니터링 설정
 ---
 

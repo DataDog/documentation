@@ -1,3 +1,3 @@
 ---
-title: Go
+title: Case Management
 ---

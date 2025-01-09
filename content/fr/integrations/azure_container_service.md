@@ -15,7 +15,7 @@ integration_id: azure-containerservice
 integration_title: Microsoft Azure Kubernetes Service
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: azure_container_service
 public_title: Intégration Datadog/Microsoft Azure Kubernetes Service

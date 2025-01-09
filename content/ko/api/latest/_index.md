@@ -29,21 +29,21 @@ Datadog API는 HTTP REST API입니다. API는 리소스 중심의 URL을 사용�
 
 `DD-API-KEY` 헤더를 사용하여 [API 키][1]로 API를 인증합니다. 일부 엔드포인트의 경우 `DD-APPLICATION-KEY` 헤더를 사용하는 [애플리케이션 키][2]가 필요합니다.
 
-API를 사용하려면 [![Postman에서 실행하세요][3]](https://god.gw.postman.com/run-collection/20651290-809b13c1-4ada-46c1-af65-ab276c434068?action=collection%2Ffork&source=rip_markdown&collection-url=entityId%3D20651290-809b13c1-4ada-46c1-af65-ab276c434068%26entityType%3Dcollection%26workspaceId%3Dbf049f54-c695-4e91-b879-0cad1854bafa#?env%5BDatadog%20Authentication%5D=W3sia2V5IjoiYXBpX2tleSIsInZhbHVlIjoiIiwiZW5hYmxlZCI6dHJ1ZSwic2Vzc2lvblZhbHVlIjoiIiwic2Vzc2lvbkluZGV4IjowfSx7ImtleSI6ImFwcGxpY2F0aW9uX2tleSIsInZhbHVlIjoiIiwiZW5hYmxlZCI6dHJ1ZSwic2Vzc2lvblZhbHVlIjoiIiwic2Vzc2lvbkluZGV4IjoxfV0=)
+API[![Postman에서 실행][3]] 시도해 보기(https://god.gw.postman.com/run-collection/20651290-809b13c1-4ada-46c1-af65-ab276c434068?action=collection%2Ffork&source=rip_markdown&collection-url=entityId%3D20651290-809b13c1-4ada-46c1-af65-ab276c434068%26entityType%3Dcollection%26workspaceId%3Dbf049f54-c695-4e91-b879-0cad1854bafa)
 
-**참고**: Postman을 통해 Datadog API에 인증하려면 Datadog API 및 애플리케이션 키 값을 Datadog Postman 컬렉션에 포함된 **Datadog Authentication** 환경에 추가하세요.
+**참고**: Postman을 통해 Datadog API를 인증하려면 Datadog API와 애플리케이션 키 값을 Datadog API 수집의 **수집 변수**에 추가해야 합니다.
 
 [API 사용하기][4]는 엔드포인트에 대한 가이드입니다.
 
 **참고**: 
-   - API 및 애플리케이션 키를 사용하여 Datadog Postman 컬렉션의 Datadog Authentication 환경을 설정합니다. 
+   - API 및 애플리케이션 키 값을 Datadog API 수집의 **변수** 탭에 추가하세요.
    - cURL 코드 예제에서는 BASH 및 GNU coreutils를 사용한다고 가정합니다. macOS에서는 [Homebrew 패키지 관리자][5]를 사용하여 coreutils를 설치할 수 있습니다: `brew install coreutils`
 
 ### 클라이언트 라이브러리
 
 기본적으로 Datadog API 설명서는 cURL로 예제를 보여줍니다. 각 엔드포인트에서 공식 [클라이언트 라이브러리][6] 언어 중 하나를 선택하면 해당 라이브러리의 코드 예제를 볼 수 있습니다. 각 라이브러리를 설치하려면:
 
-{{< programming-lang-wrapper langs="java,python-legacy,python,ruby-legacy,ruby,go,typescript" class="api-reference" >}}
+{{< programming-lang-wrapper langs="java,python-legacy,python,ruby-legacy,ruby,go,typescript,rust" class="api-reference" >}}
 
 {{< programming-lang lang="java" >}}
 #### 설치
@@ -201,13 +201,44 @@ import { <VERSION> } from 'datadog-api-client';
 [1]: https://www.npmjs.com/package/@datadog/datadog-api-client
 {{< /programming-lang >}}
 
+{{< programming-lang lang="rust" >}}
+#### 설치
+`cargo add datadog-api-client`를 실행하거나 다음을 `[dependencies]` 아래에 있는 `Cargo.toml`에 추가하세요.
+
+```
+datadog-api-client = "0"
+```
+
+#### 사용량
+다음 코드 조각을 사용해 Datadog API 키를 인증하세요.
+```rust
+use datadog_api_client::datadog::Configuration;
+use datadog_api_client::datadogV1::api_authentication::AuthenticationAPI;
+
+#[tokio::main]
+async fn main() {
+    let configuration = Configuration::new();
+    let api = AuthenticationAPI::with_config(configuration);
+    let resp = api.validate().await;
+    if let Ok(value) = resp {
+        println!("{:#?}", value);
+    } else {
+        println!("{:#?}", resp.unwrap_err());
+    }
+}
+```
+
+[1]: https://crates.io/crates/datadog-api-client
+[2]: https://docs.rs/datadog-api-client/latest/datadog_api_client/
+{{< /programming-lang >}}
+
 {{< /programming-lang-wrapper >}}
 
-또는 라이브러리를 직접 확인하세요:
+또는 라이브러리를 바로 확인하세요.
 
 {{< partial name="api/sdk-languages.html" >}}
 </br>
-애플리케이션을 시작하려고 하시나요? Datadog의 [시작하기 문서][7]를 확인하세요.
+대신 애플리케이션으로 시작하고 싶나요? Datadog 일반 [시작하기 설명서][7]를 참고하세요.
 
 ## 참고 자료
 

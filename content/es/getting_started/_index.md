@@ -11,7 +11,6 @@ further_reading:
 - link: https://learn.datadoghq.com/
   tag: Centro de aprendizaje
   text: Haz un curso para empezar a utilizar Datadog
-kind: documentación
 title: Empezando
 ---
 

@@ -1,6 +1,5 @@
 ---
 title: Explore Misconfigurations
-kind: documentation
 aliases:
   - /security_platform/findings
   - /security_platform/cspm/findings
@@ -14,10 +13,6 @@ further_reading:
   tag: "Documentation"
   text: "Learn about frameworks and industry benchmarks"
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Cloud Security Management Misconfigurations is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
 
 The Cloud Security Management Misconfigurations (CSM Misconfigurations) [Explorer][1] allows you to:
 

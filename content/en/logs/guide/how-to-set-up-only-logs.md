@@ -2,16 +2,24 @@
 title: Use the Datadog Agent for Log Collection Only
 aliases:
   - /logs/faq/how-to-set-up-only-logs
-kind: documentation
+further_reading:
+- link: "/containers/docker/log/?tab=containerinstallation"
+  tag: "Documentation"
+  text: "Docker Log Collection"
+- link: "/containers/kubernetes/log/"
+  tag: "Documentation"
+  text: "Kubenetes Log Collection"
 ---
 
-To disable payloads, you must be running Agent v6.4+. This disables metric data submission so that hosts stop showing up in Datadog. Follow these steps:
+<div class="alert alert-danger">Infrastructure Monitoring is a prerequisite to using APM. If you are an APM customer, do not turn off metric collection or you might lose critical telemetry and metric collection information.</div>
+
+To disable payloads, you must be running Agent v6.4+. This disables metric data submission (including Custom Metrics) so that hosts stop showing up in Datadog. Follow these steps:
 
 {{< tabs >}}
 {{% tab "Host " %}}
 
 1. Open the [datadog.yaml configuration file][1].
-2. Add the `enable_payloads` attribute with the following settings:
+2. Add the `enable_payloads` as a top-level attribute anywhere in the configuration file with the following settings:
 
     ```yaml
     enable_payloads:
@@ -30,7 +38,13 @@ To disable payloads, you must be running Agent v6.4+. This disables metric data 
 {{% /tab %}}
 {{% tab "Docker" %}}
 
-If you are using the Docker containerized Agent, set the `DD_ENABLE_PAYLOADS_EVENTS`, `DD_ENABLE_PAYLOADS_SERIES`, `DD_ENABLE_PAYLOADS_SERVICE_CHECKS`, and `DD_ENABLE_PAYLOADS_SKETCHES` environment variables to `false` in addition to your Agent configuration:
+If you're using the Docker containerized Agent, set the following environment variables to `false`:
+- `DD_ENABLE_PAYLOADS_EVENTS`
+- `DD_ENABLE_PAYLOADS_SERIES`
+- `DD_ENABLE_PAYLOADS_SERVICE_CHECKS`
+- `DD_ENABLE_PAYLOADS_SKETCHES`
+
+Here's an example of how you can include these settings in your Docker run command:
 
 ```shell
 docker run -d --name datadog-agent \
@@ -54,22 +68,32 @@ docker run -d --name datadog-agent \
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
-If you are deploying the Agent in Kubernetes, set the `DD_ENABLE_PAYLOADS_EVENTS`, `DD_ENABLE_PAYLOADS_SERIES`, `DD_ENABLE_PAYLOADS_SERVICE_CHECKS`, and `DD_ENABLE_PAYLOADS_SKETCHES` environment variables to `false` in addition to your Agent configuration.
+If you're deploying the Agent in Kubernetes, make the following changes in your Helm chart in addition to your Agent configuration:
 
 ```yaml
  ## Send logs only
- datadog:
- [...]
-   env:
-      - name: DD_ENABLE_PAYLOADS_EVENTS
-        value: "false"
-      - name: DD_ENABLE_PAYLOADS_SERIES
-        value: "false"
-      - name: DD_ENABLE_PAYLOADS_SERVICE_CHECKS
-        value: "false"
-      - name: DD_ENABLE_PAYLOADS_SKETCHES
-        value: "false"
+clusterAgent:
+  enabled: false
+datadog:
+[...]
+  processAgent:
+    enabled: false
+    containerCollection: false
+[...]
+  env:
+    - name: DD_ENABLE_PAYLOADS_EVENTS
+      value: "false"
+    - name: DD_ENABLE_PAYLOADS_SERIES
+      value: "false"
+    - name: DD_ENABLE_PAYLOADS_SERVICE_CHECKS
+      value: "false"
+    - name: DD_ENABLE_PAYLOADS_SKETCHES
+      value: "false"
 ```
 
 {{% /tab %}}
 {{< /tabs >}}
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}

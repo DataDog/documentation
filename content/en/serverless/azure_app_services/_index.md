@@ -1,6 +1,5 @@
 ---
 title: Monitoring Azure App Service
-kind: documentation
 aliases:
   - /infrastructure/serverless/azure_app_services/
 further_reading:

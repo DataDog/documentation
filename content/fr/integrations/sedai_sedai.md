@@ -24,7 +24,7 @@ integration_id: sedai-sedai-license
 integration_title: Sedai
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 legal_terms:
   eula: assets/eula.pdf
 manifest_version: 2.0.0

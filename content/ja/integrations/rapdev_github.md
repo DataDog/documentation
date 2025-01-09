@@ -31,6 +31,7 @@ categories:
 - コラボレーション
 - マーケットプレイス
 - メトリクス
+custom_kind: integration
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -39,7 +40,6 @@ integration_id: rapdev-github
 integration_title: GitHub
 integration_version: ''
 is_public: true
-kind: integration
 legal_terms:
   eula: assets/EULA.pdf
 manifest_version: 2.0.0
@@ -99,7 +99,7 @@ tile:
 + セルフホストランナーとインストール型ランナー
 + GitHub ワークフローモニタリング
 
-### ライブラリ
+### ダッシュボード
 このインテグレーションは、**RapDev GitHub Dashboard** と呼ばれるすぐに使えるダッシュボードを提供します。このダッシュボードは、データが Datadog に送信されるたびにポップアップし、特定のリポジトリや作成者の検索をさらに絞り込むための環境変数が含まれています。
 
 ## Agent

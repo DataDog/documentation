@@ -21,7 +21,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - network
-- web
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/tcp_check/README.md
 display_on_public_website: true
@@ -29,9 +29,8 @@ draft: false
 git_integration_title: tcp_check
 integration_id: システム
 integration_title: TCP チェック
-integration_version: 4.8.0
+integration_version: 6.0.0
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: tcp_check
 public_title: TCP チェック
@@ -47,7 +46,7 @@ tile:
   - Supported OS::macOS
   - Supported OS::Windows
   - Category::ネットワーク
-  - Category::Web
+  - Offering::Integration
   configuration: README.md#Setup
   description: リモートホストへの TCP 接続を監視
   media: []
@@ -65,20 +64,20 @@ tile:
 
 任意のホストおよびポートの TCP 接続と応答時間を監視します。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 TCP チェックは [Datadog Agent][2] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 
 多くのメトリクスチェックは、監視するサービスと同じホストで実行するのが最適です。しかし、このチェックの場合は、リモート接続をテストするために、監視する TCP サービスを実行していないホストから実行することをお勧めします。
 
-### ブラウザトラブルシューティング
+### 構成
 
 {{< tabs >}}
 {{% tab "ホスト" %}}
 
-#### メトリクスベース SLO
+#### ホスト
 
 ホストで実行中の Agent に対してこのチェックを構成するには
 
@@ -129,23 +128,23 @@ instances:
 
 [Agent の `status` サブコマンドを実行][3]し、Checks セクションで `tcp_check` を探します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "tcp_check" >}}
 
 
-### ヘルプ
+### イベント
 
 TCP チェックには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 {{< get-service-checks-from-git "tcp_check" >}}
 
 
 **注:** このサービスチェックにアラートを設定するには、[ネットワークモニター][4]を作成します。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
 

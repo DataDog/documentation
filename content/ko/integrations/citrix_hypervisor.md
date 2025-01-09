@@ -38,7 +38,7 @@ integration_id: citrix-hypervisor
 integration_title: Citrix Hypervisor
 integration_version: 3.2.0
 is_public: true
-kind: 통합
+custom_kind: 통합
 manifest_version: 2.0.0
 name: citrix_hypervisor
 public_title: Citrix Hypervisor

@@ -15,7 +15,6 @@ further_reading:
 - link: /agent/configuration/agent-commands/
   tag: FAQ
   text: Agent 명령어
-kind: guide
 title: Agent 로그 파일
 ---
 

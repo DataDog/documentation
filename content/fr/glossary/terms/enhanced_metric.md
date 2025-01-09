@@ -1,4 +1,6 @@
 ---
+core_product:
+- serverless monitoring
 synonyms:
 - métrique Lambda optimisée
 title: métrique optimisée

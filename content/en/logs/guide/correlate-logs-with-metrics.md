@@ -1,6 +1,6 @@
 ---
 title: Correlate Logs with Metrics
-kind: guide
+
 further_reading:
 - link: "/logs/explorer/"
   tag: "Documentation"

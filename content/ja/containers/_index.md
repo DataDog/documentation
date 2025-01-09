@@ -2,12 +2,14 @@
 algolia:
   tags:
   - コンテナ
+cascade:
+  algolia:
+    rank: 70
 description: コンテナ型インフラストラクチャーのデータを収集するための Agent のインストールと構成
 further_reading:
 - link: https://www.datadoghq.com/container-report/
   tag: Datadog リサーチ
   text: Datadog による「コンテナの現状」年次レポート
-kind: documentation
 title: コンテナモニタリング
 ---
 
@@ -23,6 +25,6 @@ title: コンテナモニタリング
   {{< nextlink href="integrations/ecs_fargate/">}}<u>AWS Fargate</u>: AWS Fargate に Amazon ECS で Datadog Agent をインストールし、構成します。{{< /nextlink >}}
 {{< /whatsnext >}}
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}

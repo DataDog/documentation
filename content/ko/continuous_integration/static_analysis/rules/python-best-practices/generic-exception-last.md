@@ -1,7 +1,6 @@
 ---
 dependencies: []
 disable_edit: true
-kind: 도움말
 title: 제네릭 예외처리를 사용할 경우 마지막에 넣기
 ---
 ## 메타데이터

@@ -2,7 +2,6 @@
 aliases:
 - /fr/graphing/faq/what-is-the-granularity-of-my-graphs-am-i-seeing-raw-data-or-aggregates-on-my-graph
 - /fr/dashboards/faq/what-is-the-granularity-of-my-graphs-am-i-seeing-raw-data-or-aggregates-on-my-graph
-kind: guide
 title: Quel est le niveau de granularité de mes graphiques ? Présentent-ils des données
   brutes ou agrégées ?
 ---

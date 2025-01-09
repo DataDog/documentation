@@ -4,7 +4,7 @@ further_reading:
 - link: /real_user_monitoring/session_replay/browser/
   tag: Documentation
   text: En savoir plus sur Session Replay
-kind: guide
+
 title: Enrichissez les rediffusions de vos sessions avec les composants du Shadow DOM
 ---
 

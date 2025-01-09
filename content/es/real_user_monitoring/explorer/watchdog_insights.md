@@ -14,7 +14,6 @@ further_reading:
 - link: /real_user_monitoring/explorer/search/
   tag: Documentación
   text: Descubre cómo buscar en el navegador RUM
-kind: documentación
 title: Watchdog Insights para RUM
 ---
 
@@ -26,13 +25,13 @@ Para más información, consulta [Watchdog Insights][1].
 
 ## Explora la información recopilada
 
-El banner rosa de Watchdog Insights se puede ver en el [navegador de RUM][2] y muestra la información relacionada con las consultas de búsqueda realizadas durante un período de tiempo concreto. En este ejemplo, se puede ver cómo señala Watchdog Insights los problemas presentes en una instancia de una aplicación implementada de `view.url_host:www.shopist.io` que han causado un determinado número de errores durante un intervalo de tiempo concreto (por ejemplo, “ayer”).
+El banner rosa de Watchdog Insights se puede ver en el [navegador de RUM][2] y muestra la información relacionada con las consultas de búsqueda realizadas durante un período de tiempo concreto. En este ejemplo, se puede ver cómo señala Watchdog Insights los problemas presentes en una instancia desplegada de la aplicación `view.url_host:www.shopist.io` que han causado un determinado número de errores durante un intervalo de tiempo concreto (por ejemplo, “ayer”).
 
-{{< img src="real_user_monitoring/explorer/watchdog_insights/overview.png" alt="Fichas del banner de Watchdog Insights en el navegador de RUM" style="width:100%;" >}}
+{{< img src="real_user_monitoring/explorer/watchdog_insights/overview.png" alt="Tarjetas de banner de Watchdog Insights en el Explorador RUM" style="width:100%;" >}}
 
 Haz clic en un [outlier con errores](#error-outliers) o [de latencia](#latency-outliers) para trabajar con las visualizaciones insertadas en el panel lateral y buscar vistas en la lista de eventos afectados. Haz clic en **View all** (Ver todo) para consultar todos los outliers con errores pendientes en un panel lateral.
 
-{{< img src="real_user_monitoring/explorer/watchdog_insights/error_outlier_m_card.png" alt="Vista de la ficha del banner de un outlier con errores y de la ficha de un panel lateral en el navegador de RUM" style="width:100%;" >}}
+{{< img src="real_user_monitoring/explorer/watchdog_insights/error_outlier_m_card-3.png" alt="Tarjeta banner de outlier de error y vista de panel lateral de tarjeta en el Explorador RUM" style="width:100%;" >}}
 
 Pasa el cursor por encima de una ficha del banner y haz clic en **Filter on Insight** (Filtrar información) para que tu consulta de búsqueda tenga en cuenta el comportamiento anómalo de la información proporcionada. Por ejemplo, puedes definir la ruta de una vista en particular o un continente concreto, como `North America`, para acotar la búsqueda.
 
@@ -48,15 +47,15 @@ En la vista **ficha del banner**, se muestra lo siguiente:
 * La proporción de errores totales y eventos RUM generales a los que contribuye el campo
 * Etiquetas relacionadas
 
-En el **panel lateral completo**, puedes ver un gráfico cronológico del número total de errores RUM con ese campo, así como una lista de eventos RUM que contienen el campo.
+En el **panel lateral completo**, puedes ver un gráfico de series temporales sobre el número total de errores RUM en el campo, junto con un gráfico circular de impacto y una lista de eventos RUM que contienen el campo.
 
-{{< img src="real_user_monitoring/explorer/watchdog_insights/error_outlier_side_panel.png" alt="Vista del panel lateral completo de outliers con errores" style="width:100%;" >}}
+{{< img src="real_user_monitoring/explorer/watchdog_insights/error_outlier_side_panel-1.png" alt="Panel lateral completo del outlier de error" style="width:100%;" >}}
 
 ## Outliers de latencia
 
 Los outliers de latencia muestran campos como [atributos o etiquetas en categorías][3] que están relacionados con cuellos de botella en el rendimiento y que coinciden con la consulta de búsqueda actual. Los pares `key:value` con peor rendimiento que la base de referencia pueden dar pistas sobre los atascos en el rendimiento entre un subconjunto de usuarios reales.
 
-Los outliers de latencia se calculan para las métricas de [Core Web Vitals][4], como First Contentful Paint (despliegue del contenido más extenso), First Input Delay (respuesta a la primera interacción) y Cumulative Layout Shift (movimiento inesperado de contenido), y para el [tiempo de carga][3]. Si necesitas más información, consulta la sección [Rendimiento de las páginas de monitorización][4].
+Los outliers de latencia se calculan para las métricas de [Core Web Vitals][4], como First Contentful Paint (despliegue del contenido más extenso), First Input Delay (respuesta a la primera interacción) y Cumulative Layout Shift (movimiento inesperado de contenido), y [Loading Time (Tiempo de carga)][3]. Si necesitas más información, consulta la sección [Rendimiento de las páginas de monitorización][4].
 
 En la vista **ficha del banner**, se muestra lo siguiente:
 
@@ -65,9 +64,9 @@ En la vista **ficha del banner**, se muestra lo siguiente:
 
 En el **panel lateral completo**, puedes ver un gráfico cronológico de la métrica de rendimiento con un eje X de incrementos de `p50`, `p75`, `p99` y `max`, así como una lista de eventos RUM que contienen el campo.
 
-{{< img src="real_user_monitoring/explorer/watchdog_insights/latency_outlier_side_panel.png" alt="Vista del panel lateral completo de outliers de latencia" style="width:100%;" >}}
+{{< img src="real_user_monitoring/explorer/watchdog_insights/latency_outlier_side_panel-1.png" alt="Vista del panel lateral completo del outlier de latencia" style="width:100%;" >}}
 
-Es gráfico cronológico puede servirte de punto de partida a la hora de investigar el origen de un problema de rendimiento.
+Este gráfico cronológico puede servirte de punto de partida a la hora de investigar el origen de un problema de rendimiento.
 
 ## Leer más
 
@@ -76,5 +75,5 @@ Es gráfico cronológico puede servirte de punto de partida a la hora de investi
 [1]: /es/watchdog/insights/
 [2]: /es/real_user_monitoring/explorer
 [3]: /es/real_user_monitoring/explorer/search/#facets
-[4]: /es/real_user_monitoring/browser/monitoring_page_performance/#core-web-vitals
+[4]: /es/real_user_monitoring/browser/monitoring_page_performance/#event-timings-and-core-web-vitals
 [5]: /es/real_user_monitoring/browser/monitoring_page_performance/#monitoring-single-page-applications-spa

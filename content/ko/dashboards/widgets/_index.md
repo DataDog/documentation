@@ -7,7 +7,9 @@ further_reading:
 - link: /dashboards/guide/context-links/
   tag: 설명서
   text: 커스텀 링크
-kind: 설명서
+- link: https://www.datadoghq.com/blog/observability-pipelines-transform-and-enrich-logs/
+  tag: 블로그
+  text: Datadog Observability Pipelines를 사용하여 로그를 변환하고 강화하세요.
 title: 위젯
 ---
 
@@ -16,11 +18,11 @@ title: 위젯
 위젯은 대시보드의 구성 요소로, 인프라스트럭처 전체에서 데이터를 시각화하고 연계할 수 있도록 해줍니다.
 
 ### 그래프
-{{< whatsnext desc="Datadog 제품에서 데이터 그래프화를 위한 일반 위젯: ">}}
+{{< whatsnext desc="Datadog 제품의 데이터를 그래프로 표시하는 일반 위젯: ">}}
     {{< nextlink href="/dashboards/widgets/change" 
-        img="dashboards/widgets/icons/change_light_large.png">}} 변경 {{< /nextlink >}}
+        img="dashboards/widgets/icons/change_light_large.png">}} 변화 {{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/distribution"
-        img="dashboards/widgets/icons/distribution_light_large.png">}} 배포{{< /nextlink >}}
+        img="dashboards/widgets/icons/distribution_light_large.png">}} 분포{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/funnel"
         img="dashboards/widgets/icons/funnel_light_large.png">}} 퍼널{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/geomap" 
@@ -28,9 +30,10 @@ title: 위젯
     {{< nextlink href="/dashboards/widgets/heat_map"
         img="dashboards/widgets/icons/heatmap_light_large.png">}} 히트맵{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/pie_chart"
-        img="dashboards/widgets/icons/pie_light_large.png">}} 원형 차트{{< /nextlink >}}
+        img="dashboards/widgets/icons/pie_light_large.png">}} 파이 차트{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/query_value"
         img="dashboards/widgets/icons/query-value_light_large.png">}} 쿼리 값{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/sankey" img="dashboards/widgets/icons/sankey_light_large.svg">}} 생키{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/scatter_plot"
         img="dashboards/widgets/icons/scatter-plot_light_large.png">}} 산점도{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/table"
@@ -43,7 +46,7 @@ title: 위젯
         img="dashboards/widgets/icons/top-list_light_large.png">}} 상위 목록{{< /nextlink >}}
 {{< /whatsnext >}}
 
-### 그룹
+### Groups
 {{< whatsnext desc="그룹 아래 위젯 표시: ">}}
     {{< nextlink href="/dashboards/widgets/group"
         img="dashboards/widgets/icons/group_default_light_large.svg">}} 그룹{{< /nextlink >}}
@@ -85,7 +88,7 @@ title: 위젯
         img="dashboards/widgets/icons/run-workflow_light_small.svg">}} 워크플로우 실행{{< /nextlink >}}
 {{< /whatsnext >}}
 
-### 모니터 관리
+### 아키텍처
 {{< whatsnext desc="인프라스트럭처 및 아키텍처 데이터 시각화: ">}}
     {{< nextlink href="/dashboards/widgets/hostmap" 
         img="dashboards/widgets/icons/host-map_light_large.png">}} 호스트맵{{< /nextlink >}}
@@ -96,14 +99,7 @@ title: 위젯
 {{< /whatsnext >}}
 
 ### 성능 및 안정성
-{{< whatsnext desc="사이트 안정성 시각화: ">}}
-    {{< nextlink href="/dashboards/widgets/profiling_flame_graph"
-        img="dashboards/widgets/icons/profiling_flame_graph.svg">}} 화염 그래프 프로파일링{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/slo" 
-        img="dashboards/widgets/icons/slo-summary_light_large.png">}} 서비스 수준 목표(SLO) 요약{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/slo_list" 
-        img="dashboards/widgets/icons/slo-list_light_large.png">}} 서비스 수준 목표(SLO) 목록{{< /nextlink >}}
-{{< /whatsnext >}}
+{{< whatsnext desc="사이트 안정성 시각화: ">}} {{< nextlink href="/dashboards/widgets/profiling_flame_graph" img="dashboards/widgets/icons/profiling_flame_graph.svg">}} 불꽃 그래프 프로파일링 {{< /nextlink >}} {{< nextlink href="/dashboards/widgets/slo" img="dashboards/widgets/icons/slo-summary_light_large.png">}} 서비스 수준 목표(SLO) 요약 {{< /nextlink >}} {{< nextlink href="/dashboards/widgets/slo_list" img="dashboards/widgets/icons/slo-list_light_large.png">}} 서비스 수준 목표(SLO){{< /nextlink >}}{{< /whatsnext >}}
 
 ## 전체 화면
 

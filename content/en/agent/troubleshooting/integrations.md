@@ -1,17 +1,16 @@
 ---
 title: Getting Integrations Working
-kind: documentation
 aliases:
     - /integrations/faq/issues-getting-integrations-working
 further_reading:
 - link: "/agent/troubleshooting/debug_mode/"
-  tag: "Agent Troubleshooting"
+  tag: "Documentation"
   text: "Agent debug mode"
 - link: "/agent/troubleshooting/send_a_flare/"
-  tag: "Agent Troubleshooting"
+  tag: "Documentation"
   text: "Send an Agent flare"
 - link: "/agent/troubleshooting/agent_check_status/"
-  tag: "Agent Troubleshooting"
+  tag: "Documentation"
   text: "Get the status of an Agent check"
 ---
 

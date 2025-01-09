@@ -10,7 +10,7 @@ has_logo: true
 integration_id: amazon-cloudhsm
 integration_title: AWS CloudHSM
 is_public: true
-kind: integration
+custom_kind: integration
 name: amazon_cloudhsm
 public_title: Datadog-AWS Cloudhsm 통합
 short_description: Datadog 조직에서 HSM 감사 로그 모으기

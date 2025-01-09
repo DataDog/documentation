@@ -3,6 +3,7 @@ categories:
 - cloud
 - AWS
 - ログの収集
+custom_kind: integration
 dependencies: []
 description: Amazon Kinesis Data Analytics のキーメトリクスを追跡します。
 doc_link: https://docs.datadoghq.com/integrations/amazon_kinesis_data_analytics/
@@ -13,7 +14,6 @@ integration_id: ''
 integration_title: Amazon Kinesis Data Analytics
 integration_version: ''
 is_public: true
-kind: integration
 manifest_version: '1.0'
 name: amazon_kinesis_data_analytics
 public_title: Datadog-Amazon Kinesis Data Analytics インテグレーション
@@ -28,9 +28,9 @@ Amazon Kinesis Data Analytics は、Apache Flink を使用して、ストリー�
 
 このインテグレーションを有効にすると、Datadog で Amazon Kinesis Data Analytics のすべてのメトリクスを見ることができます。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 [Amazon Web Services インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。
 
@@ -39,21 +39,21 @@ Amazon Kinesis Data Analytics は、Apache Flink を使用して、ストリー�
 1. [AWS インテグレーションページ][2]で、`Metric Collection` タブの下にある `Kinesis Analytics` が有効になっていることを確認します。
 2. [Datadog - Amazon Kinesis Data Analytics インテグレーション][3]をインストールします。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "amazon_kinesis_data_analytics" >}}
 
 
-### ヘルプ
+### イベント
 
 Amazon Kinesis Data Analytics インテグレーションには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 
 Amazon Kinesis Data Analytics インテグレーションには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
 

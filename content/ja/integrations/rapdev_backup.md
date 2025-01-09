@@ -26,6 +26,7 @@ author:
   vendor_id: rapdev
 categories:
 - マーケットプレイス
+custom_kind: インテグレーション
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -34,7 +35,6 @@ integration_id: rapdev-backup
 integration_title: Backup Automator
 integration_version: ''
 is_public: true
-kind: integration
 legal_terms:
   eula: assets/EULA.pdf
 manifest_version: 2.0.0
@@ -75,17 +75,17 @@ tile:
 
 この Agent チェックの目的は、Datadog アカウントのダッシュボード、Synthetic テスト、モニター、ノートブックの zip バックアップを作成することです。そのバックアップは、ローカルマシン、またはサポートされている他のプラットフォーム (AWS、Azure、GitHub など) の 1 つに保存できます。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 
 このインテグレーションには、メトリクスは含まれません。
 
-### ヘルプ
+### サービスチェック
 
 このインテグレーションには、Agent が Datadog API と通信できる場合は `OK` を返すサービスチェック `rapdev.backup.can_connect` があり、それ以外の場合は `CRITICAL` を報告します。
 
-### ヘルプ
+### イベント
 
 このインテグレーションには、イベントは含まれません。
 
@@ -114,4 +114,4 @@ tile:
 [10]: https://boto3.amazonaws.com/v1/documentation/api/latest/guide/credentials.html
 
 ---
-このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/rapdev-backup" target="_blank">こちらをクリック</a>してください。
+このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。利用するには、<a href="https://app.datadoghq.com/marketplace/app/rapdev-backup" target="_blank">Marketplace でこのアプリケーションを購入してください</a>。

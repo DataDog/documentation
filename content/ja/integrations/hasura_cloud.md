@@ -29,6 +29,7 @@ categories:
 - クラウド
 - ログの収集
 - トレーシング
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/hasura_cloud/README.md
 display_on_public_website: true
@@ -38,7 +39,6 @@ integration_id: hasura-cloud
 integration_title: Hasura Cloud
 integration_version: ''
 is_public: true
-kind: integration
 manifest_version: 2.0.0
 name: hasura_cloud
 public_title: Hasura Cloud
@@ -56,6 +56,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: Hasura Cloud プロジェクトを監視します
   media: []
@@ -74,7 +75,7 @@ tile:
 
 Datadog インテグレーションは Hasura Cloud の観測可能性機能で、Hasura Cloud プロジェクトのオペレーションログ、メトリクス、トレースを Datadog ダッシュボードにエクスポートします。
 
-## 計画と使用
+## セットアップ
 
 Hasura Cloud プロジェクトに Hasura Cloud Datadog インテグレーションをセットアップするには、Datadog API キーとリージョンを Hasura Cloud に提供します。
 
@@ -91,21 +92,21 @@ Hasura Cloud プロジェクトの Datadog インテグレーションを構成�
 
 Hasura Cloud プロジェクトのログ、メトリクス、トレースは、プロジェクトがトラフィックを受けると、自動的に Datadog に送信されます。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "hasura_cloud" >}}
 
 
-### ヘルプ
+### サービスチェック
 
 Hasura Cloud インテグレーションには、サービスのチェック機能は含まれません。
 
-### ヘルプ
+### イベント
 
 Hasura Cloud インテグレーションには、イベントは含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
 

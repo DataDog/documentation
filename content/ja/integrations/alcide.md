@@ -1,21 +1,22 @@
 ---
 categories:
-  - ログの収集
-  - セキュリティ
+- ログの収集
+- セキュリティ
+custom_kind: integration
+dependencies:
+- https://github.com/DataDog/documentation/blob/master/content/en/integrations/alcide.md
 description: Alcide のログを収集・処理
 doc_link: https://docs.datadoghq.com/integrations/alcide/
-dependencies:
-  - https://github.com/DataDog/documentation/blob/master/content/en/integrations/alcide.md
 has_logo: true
+integration_id: alcide
 integration_title: Alcide
 is_public: true
-kind: インテグレーション
 name: alcide
 public_title: Datadog-Alcide インテグレーション
 short_description: Alcide のログを収集・処理
 version: '1.0'
-integration_id: alcide
 ---
+
 ## 概要
 
 Alcide は Kubernetes の監査と異常検知モニタリングに特化したサービスです。インテグレーションを行うことで、Alcide のログを Datadog 側で収集および処理できるようになります。

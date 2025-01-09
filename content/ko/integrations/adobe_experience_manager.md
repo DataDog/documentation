@@ -16,7 +16,7 @@ has_logo: true
 integration_id: adobe
 integration_title: Adobe Experience Manager
 is_public: true
-kind: integration
+custom_kind: integration
 name: adobe_experience_manager
 public_title: Datadog-Adobe Experience Manager
 short_description: 오류 추적, 응답 시간 요청 등을 위해 로그를 수집합니다.

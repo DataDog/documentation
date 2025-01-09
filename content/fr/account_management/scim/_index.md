@@ -11,7 +11,6 @@ further_reading:
 - link: account_management/scim/okta
   tag: Documentation
   text: Configurer SCIM avec Okta
-kind: documentation
 title: Provisionnement d'utilisateurs SCIM
 ---
 

@@ -1,6 +1,5 @@
 ---
 title: Log Analytics
-kind: documentation
 description: 'Group queried logs into fields, patterns, and transactions, and create multiple search queries, formulas, and functions for in-depth analysis.'
 aliases:
     - /logs/explorer/group

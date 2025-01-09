@@ -1,6 +1,5 @@
 ---
 title: Testing With Proxies, Firewalls, or VPNs
-kind: documentation
 description: Learn how to set up Continuous Testing on a private environment.
 further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-synthetic-ci-cd-testing/"

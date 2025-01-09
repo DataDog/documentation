@@ -1,70 +1,118 @@
 {{ $dot := . }}
 <div class="rum-feature-flag">
-  <div class="container cards-dd">
-    <div class="row row-cols-2 row-cols-sm-4 g-2 g-xl-3 justify-content-sm-center">
-     <div class="col">
-      <a class="card h-100"
-        href="/real_user_monitoring/guide/setup-feature-flag-data-collection/?tab=browser#amplitude-integration">
-        <div class="card-body text-center py-2 px-1">
-          {{ partial "img.html" (dict "root" . "src" "integrations_logos/amplitude_large.svg" "class" "img-fluid" "alt"
-          "amplitude" "width" "200") }}
+    <div class="container cards-dd">
+        <div class="row row-cols-2 row-cols-sm-4 g-2 g-xl-3 justify-content-sm-center">
+            <div class="col">
+                <a
+                    class="card h-100"
+                    href="/real_user_monitoring/guide/setup-feature-flag-data-collection/?tab=browser#amplitude-integration"
+                >
+                    <div class="card-body text-center py-2 px-1">
+                        {{ partial "img.html" (dict "root" . "src" "integrations_logos/amplitude_large.svg" "class"
+                        "img-fluid" "alt" "amplitude" "width" "200") }}
+                    </div>
+                </a>
+            </div>
+            <div class="col">
+                <a
+                    class="card h-100"
+                    href="/real_user_monitoring/guide/setup-feature-flag-data-collection/?tab=browser#configcat-integration"
+                >
+                    <div class="card-body text-center py-2 px-1">
+                        {{ partial "img.html" (dict "root" . "src" "integrations_logos/configcat_large.svg" "class"
+                        "img-fluid" "alt" "custom" "width" "200") }}
+                    </div>
+                </a>
+            </div>
+            <div class="col">
+                <a
+                    class="card h-100"
+                    href="/real_user_monitoring/guide/setup-feature-flag-data-collection/?tab=browser#custom-feature-flag-management"
+                >
+                    <div class="card-body text-center py-2 px-1">
+                        {{ partial "img.html" (dict "root" . "src"
+                        "integrations_logos/docs_custom_feature_flag_systems_card.png" "class" "img-fluid" "alt"
+                        "custom" "width" "200") }}
+                    </div>
+                </a>
+            </div>
+            <div class="col">
+                <a
+                    class="card h-100"
+                    href="/real_user_monitoring/guide/setup-feature-flag-data-collection/?tab=npm#devcycle-integration"
+                >
+                    <div class="card-body text-center py-2 px-1">
+                        {{ partial "img.html" (dict "root" . "src" "integrations_logos/devcycle_large.svg" "class"
+                        "img-fluid" "alt" "devcycle" "width" "200") }}
+                    </div>
+                </a>
+            </div>
+            <div class="col">
+                <a
+                    class="card h-100"
+                    href="/real_user_monitoring/guide/setup-feature-flag-data-collection/?tab=browser#eppo-integration"
+                >
+                    <div class="card-body text-center py-2 px-1">
+                        {{ partial "img.html" (dict "root" . "src" "integrations_logos/eppo_large.svg" "class"
+                        "img-fluid" "alt" "eppo" "width" "200") }}
+                    </div>
+                </a>
+            </div>
+            <div class="col">
+                <a
+                    class="card h-100"
+                    href="/real_user_monitoring/guide/setup-feature-flag-data-collection/?tab=npm#flagsmith-integration"
+                >
+                    <div class="card-body text-center py-2 px-1">
+                        {{ partial "img.html" (dict "root" . "src" "integrations_logos/flagsmith_large.svg" "class"
+                        "img-fluid" "alt" "flagsmith" "width" "200") }}
+                    </div>
+                </a>
+            </div>
+            <div class="col">
+                <a
+                    class="card h-100"
+                    href="/real_user_monitoring/guide/setup-feature-flag-data-collection/?tab=npm#kameleoon-integration"
+                >
+                    <div class="card-body text-center py-2 px-1">
+                        {{ partial "img.html" (dict "root" . "src" "integrations_logos/kameleoon.png" "class"
+                        "img-fluid" "alt" "kameleoon" "width" "200") }}
+                    </div>
+                </a>
+            </div>
+            <div class="col">
+                <a
+                    class="card h-100"
+                    href="/real_user_monitoring/guide/setup-feature-flag-data-collection/?tab=npm#launchdarkly-integration"
+                >
+                    <div class="card-body text-center py-2 px-1">
+                        {{ partial "img.html" (dict "root" . "src" "integrations_logos/launchdarkly_large.svg" "class"
+                        "img-fluid" "alt" "launchdarkly" "width" "200") }}
+                    </div>
+                </a>
+            </div>
+            <div class="col">
+                <a
+                    class="card h-100"
+                    href="/real_user_monitoring/guide/setup-feature-flag-data-collection/?tab=npm#split-integration"
+                >
+                    <div class="card-body text-center py-2 px-1">
+                        {{ partial "img.html" (dict "root" . "src" "integrations_logos/split_large.svg" "class"
+                        "img-fluid" "alt" "split" "width" "200") }}
+                    </div>
+                </a>
+            </div>
+            <div class="col">
+                <a
+                    class="card h-100"
+                    href="/real_user_monitoring/guide/setup-feature-flag-data-collection/?tab=npm#statsig-integration"
+                >
+                    <div class="card-body text-center py-2 px-1">
+                        {{ partial "img.html" (dict "root" . "src" "integrations_logos/statsig_large.svg" "class"
+                        "img-fluid" "alt" "statsig" "width" "200") }}
+                    </div>
+                </a>
+            </div>
         </div>
-      </a>
     </div>
-    <div class="col">
-     <a class="card h-100"
-       href="/real_user_monitoring/guide/setup-feature-flag-data-collection/?tab=browser#custom-feature-flag-management">
-       <div class="card-body text-center py-2 px-1">
-         {{ partial "img.html" (dict "root" . "src" "integrations_logos/docs_custom_feature_flag_systems_card.png" "class" "img-fluid" "alt"
-         "custom" "width" "200") }}
-       </div>
-     </a>
-   </div>
-     <div class="col">
-      <a class="card h-100"
-        href="/real_user_monitoring/guide/setup-feature-flag-data-collection/?tab=npm#devcycle-integration">
-        <div class="card-body text-center py-2 px-1">
-          {{ partial "img.html" (dict "root" . "src" "integrations_logos/devcycle_large.svg" "class" "img-fluid" "alt"
-          "devcycle" "width" "200") }}
-        </div>
-      </a>
-    </div>
-    <div class="col">
-     <a class="card h-100"
-       href="/real_user_monitoring/guide/setup-feature-flag-data-collection/?tab=npm#flagsmith-integration">
-       <div class="card-body text-center py-2 px-1">
-         {{ partial "img.html" (dict "root" . "src" "integrations_logos/flagsmith_large.svg" "class" "img-fluid"
-         "alt" "flagsmith" "width" "200") }}
-       </div>
-     </a>
-   </div>
-      <div class="col">
-        <a class="card h-100"
-          href="/real_user_monitoring/guide/setup-feature-flag-data-collection/?tab=npm#launchdarkly-integration">
-          <div class="card-body text-center py-2 px-1">
-            {{ partial "img.html" (dict "root" . "src" "integrations_logos/launchdarkly_large.svg" "class" "img-fluid"
-            "alt" "launchdarkly" "width" "200") }}
-          </div>
-        </a>
-      </div>
-      <div class="col">
-        <a class="card h-100"
-          href="/real_user_monitoring/guide/setup-feature-flag-data-collection/?tab=npm#split-integration">
-          <div class="card-body text-center py-2 px-1">
-            {{ partial "img.html" (dict "root" . "src" "integrations_logos/split_large.svg" "class" "img-fluid" "alt"
-            "split" "width" "200") }}
-          </div>
-        </a>
-      </div>
-      <div class="col">
-       <a class="card h-100"
-         href="/real_user_monitoring/guide/setup-feature-flag-data-collection/?tab=npm#statsig-integration">
-         <div class="card-body text-center py-2 px-1">
-           {{ partial "img.html" (dict "root" . "src" "integrations_logos/statsig_large.svg" "class" "img-fluid" "alt"
-           "statsig" "width" "200") }}
-         </div>
-       </a>
-     </div>
-    </div>
-  </div>
 </div>

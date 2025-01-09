@@ -24,6 +24,7 @@ categories:
 - ログの収集
 - orchestration
 - プロビジョニング
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/eks_anywhere/README.md
 display_on_public_website: true
@@ -33,7 +34,6 @@ integration_id: eks-anywhere
 integration_title: Amazon EKS Anywhere
 integration_version: ''
 is_public: true
-kind: integration
 manifest_version: 2.0.0
 name: eks_anywhere
 public_title: Amazon EKS Anywhere
@@ -55,10 +55,18 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: オンプレミスで Kubernetes クラスターを運用するための EKS デプロイメントオプション
   media: []
   overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/announcing-eks
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/eks-cluster-metrics
+  - resource_type: documentation
+    url: https://docs.datadoghq.com/integrations/eks_fargate/
   support: README.md#Support
   title: Amazon EKS Anywhere
 ---
@@ -74,7 +82,7 @@ Amazon Elastic Kubernetes Service (EKS) は、標準 Kubernetes 環境のデプ�
 
 [Amazon EKS Anywhere][2]は、仮想マシン (VMware vSphere など) やベアメタルサーバーなど、オンプレミスで Kubernetes クラスターを作成・運用できるデプロイメントオプションです。
 
-## 計画と使用
+## セットアップ
 
 Datadog は既に Kubernetes や AWS と統合されているため、すぐに EKS を監視することができます。Kubernetes クラスターで実行中の Agent を EKS に移行する予定がある場合に、Datadog でクラスターの監視を続行できます。
 
@@ -108,7 +116,7 @@ EKS のモニタリングには、以下の Datadog インテグレーション�
 - [AWS][8]
 - [AWS EC2][9]
 
-### 収集データ
+### ログ収集
 
 _Agent バージョン 6.0 以降で利用可能_
 
@@ -119,7 +127,7 @@ _Agent バージョン 6.0 以降で利用可能_
 
 環境変数の詳細とさらに高度なセットアップオプションについては、[コンテナログの収集手順][12]を参照してください。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][13]までお問合せください。
 

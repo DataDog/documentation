@@ -3,7 +3,7 @@ further_reading:
 - link: /tracing/trace_pipeline/ingestion_controls/
   tag: Documentation
   text: Page de contrôle de l'ingestion
-kind: guide
+
 title: Contrôle du volume d'ingestion avec le tracing distribué d'APM
 ---
 

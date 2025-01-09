@@ -1,6 +1,5 @@
 ---
 title: Application Instrumentation
-kind: documentation
 description: "Get Started with Datadog APM"
 aliases:
     - /tracing/setup
@@ -34,13 +33,13 @@ Instrumenting your application allows observability data to be sent to the Agent
 
 ## Instrumentation types
 
-There are two main approaches to instrument your application: automatic or custom instrumentation.
+There are two main approaches to instrument your application: automatic or custom {{< tooltip glossary="instrumentation" >}}.
 
 ### Automatic instrumentation
 
-Create spans for your application with minimal manual steps. To automatically instrument your application, you can use either of these options:
+Create {{< tooltip glossary="span" >}}s for your application with minimal manual steps. To automatically instrument your application, you can use either of these options:
 
-- [Single Step Instrumentation (Beta)][7]: Run a one-line install command to install the Datadog Agent, enable APM, and instrument all of your services on your Linux host, VM, or container.
+- [Single Step Instrumentation (Preview)][7]: Run a one-line install command to install the Datadog Agent, enable APM, and instrument all of your services on your Linux host, VM, or container.
 - [Datadog libraries][8]: Add Datadog tracing libraries to your application.
 
 To learn more, see [automatic instrumentation][5].
@@ -53,6 +52,11 @@ Capture observability data from in-house code or complex functions that aren't c
 - [OpenTelemetry APIs][10]: Use OpenTelemetry API support in Datadog libraries to have vendor-neutral instrumentation of your code.
 
 To learn more, see [custom instrumentation][6].
+
+{{< callout url="https://www.datadoghq.com/product-preview/service-discovery/" btn_hidden="false" header="Service discovery is in Preview">}}
+Service discovery provides complete visibility into the current state of application monitoring, highlighting any major gaps or broken traces in your system. 
+{{< /callout >}}
+
 
 ## APM setup tutorials
 

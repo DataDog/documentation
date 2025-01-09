@@ -15,6 +15,7 @@ categories:
 - マーケットプレイス
 - notifications
 - ai/ml
+custom_kind: インテグレーション
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -23,7 +24,6 @@ integration_id: superwise-license
 integration_title: Superwise モデル観測性
 integration_version: ''
 is_public: true
-kind: integration
 legal_terms:
   eula: assets/eula.pdf
 manifest_version: 2.0.0
@@ -70,6 +70,11 @@ tile:
     image_url: images/4_4.png
     media_type: image
   overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/superwise-datadog-marketplace/
+  - resource_type: documentation
+    url: https://docs.superwise.ai
   support: README.md#Support
   title: Superwise モデル観測性
   uninstallation: README.md#Uninstallation
@@ -88,7 +93,7 @@ Superwise のモデル観測性プラットフォームにより、本番用 ML 
 
 Superwise のインテグレーションにより、Datadog ユーザーは既存の Datadog ワークフロー内で ML モデルを総合的に監視し、Superwise のメトリクスとインシデントを含めることで観測性を高め、モデルの問題をより深く調査することができます。Superwise ユーザーは、ビジネスにとって重要なカスタムメトリクスを Superwise 内で監視するように構成し、その情報を Datadog に送信して、あらゆるユースケースに対して観測性を拡張することができます。
 
-## Agent
+## サポート
 
 サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから Superwise にお問い合わせください。
 
@@ -105,4 +110,4 @@ Superwise のインテグレーションにより、Datadog ユーザーは既�
 [4]: https://www.datadoghq.com/blog/superwise-datadog-marketplace/
 [5]: https://docs.superwise.ai
 ---
-このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/superwise-license" target="_blank">こちらをクリック</a>してください。
+このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。利用するには、<a href="https://app.datadoghq.com/marketplace/app/superwise-license" target="_blank">Marketplace でこのアプリケーションを購入してください</a>。

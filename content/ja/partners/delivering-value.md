@@ -1,6 +1,5 @@
 ---
 description: Datadog にデータを流した後の推奨ステップ。
-kind: documentation
 private: true
 title: 価値の提供
 ---
@@ -143,27 +142,25 @@ Watchdog が新たな不正を検出したときに通知を受け取ること�
 
 複数組織のアカウント設定において、Datadog プラットフォームの個々のクライアントおよび集計使用量を監視する方法を、[請求と使用量報告][51]でご確認ください。
 
-
-
 [1]: /ja/monitors
 [2]: https://www.datadoghq.com/blog/monitoring-101-alerting/
 [3]: https://learn.datadoghq.com/courses/introduction-to-observability
-[4]: /ja/monitors/create/types/anomaly/
+[4]: /ja/monitors/types/anomaly/
 [5]: /ja/monitors/guide/monitor-arithmetic-and-sparse-metrics/
-[6]: /ja/monitors/create/types/metric/?tab=change
-[7]: /ja/monitors/create/types/forecasts/?tab=linear
-[8]: /ja/monitors/create/types/outlier/?tab=dbscan
-[9]: /ja/monitors/create/types/composite/
+[6]: /ja/monitors/types/metric/?tab=change
+[7]: /ja/monitors/types/forecasts/?tab=linear
+[8]: /ja/monitors/types/outlier/?tab=dbscan
+[9]: /ja/monitors/types/composite/
 [10]: /ja/api/latest/monitors/
 [11]: https://www.youtube.com/watch?v=Ell_kU4gEGI
 [12]: https://learn.hashicorp.com/tutorials/terraform/datadog-provider
 [13]: https://www.datadoghq.com/blog/tagging-best-practices-monitors/
 [14]: https://www.datadoghq.com/blog/datadog-recommended-monitors/
 [15]: /ja/monitors/manage/
-[16]: /ja/monitors/create/
+[16]: /ja/monitors/
 [17]: https://www.youtube.com/watch?v=Ma5pr-u9bjk
 [18]: /ja/monitors/guide/why-did-my-monitor-settings-change-not-take-effect/
-[19]: /ja/monitors/notify/downtimes/
+[19]: /ja/monitors/downtimes/
 [20]: https://www.datadoghq.com/blog/mute-datadog-alerts-planned-downtime/
 [21]: https://www.datadoghq.com/blog/managing-datadog-with-terraform/
 [22]: /ja/api/latest/downtimes/
@@ -190,9 +187,9 @@ Watchdog が新たな不正を検出したときに通知を受け取ること�
 [43]: /ja/api/latest/embeddable-graphs/
 [44]: /ja/dashboards/guide/embeddable-graphs-with-template-variables/
 [45]: https://www.datadoghq.com/blog/establishing-service-level-objectives/
-[46]: /ja/monitors/guide/slo-checklist/
+[46]: /ja/service_management/service_level_objectives/guide/slo-checklist
 [47]: https://www.datadoghq.com/blog/define-and-manage-slos/
 [48]: https://www.datadoghq.com/blog/slo-monitoring-tracking/
 [49]: /ja/api/latest/service-level-objectives/
-[50]: /ja/monitors/create/types/watchdog/
+[50]: /ja/monitors/types/watchdog/
 [51]: /ja/partners/billing-and-usage-reporting/

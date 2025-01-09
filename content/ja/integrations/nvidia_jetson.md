@@ -16,7 +16,7 @@ assets:
     service_checks:
       metadata_path: assets/service_checks.json
     source_type_id: 10134
-    source_type_name: Nvidia Jetson
+    source_type_name: NVIDIA Jetson
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
@@ -24,20 +24,20 @@ author:
   support_email: help@datadoghq.com
 categories:
 - iot
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/nvidia_jetson/README.md
 display_on_public_website: true
 draft: false
 git_integration_title: nvidia_jetson
 integration_id: nvidia-jetson
-integration_title: Nvidia Jetson
+integration_title: NVIDIA Jetson
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: nvidia_jetson
-public_title: Nvidia Jetson
-short_description: Nvidia Jetson ボードに関するメトリクスを収集します
+public_title: NVIDIA Jetson
+short_description: NVIDIA Jetson ボードに関するメトリクスを収集します
 supported_os:
 - linux
 tile:
@@ -45,12 +45,13 @@ tile:
   classifier_tags:
   - Supported OS::Linux
   - Category::IoT
+  - Offering::Integration
   configuration: README.md#Setup
-  description: Nvidia Jetson ボードに関するメトリクスを収集します
+  description: NVIDIA Jetson ボードに関するメトリクスを収集します
   media: []
   overview: README.md#Overview
   support: README.md#Support
-  title: Nvidia Jetson
+  title: NVIDIA Jetson
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
@@ -58,17 +59,17 @@ tile:
 
 ## 概要
 
-このチェックは [Nvidia Jetson][1] ボードを監視します。
+このチェックは [NVIDIA Jetson][1] ボードを監視します。
 `tegrastats` から収集されたメトリクスを報告します。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
-Nvidia Jetson チェックは [Datadog Agent][2] パッケージに含まれています。
+NVIDIA Jetson チェックは [Datadog Agent][2] パッケージに含まれています。
 サーバーに追加でインストールする必要はありません。
 
-### ブラウザトラブルシューティング
+### 構成
 
 1. Agent の構成ディレクトリのルートにある `conf.d/` フォルダーに `jetson.d/conf.yaml` ファイルを作成して、
    Jetson パフォーマンスデータの収集を開始します。 
@@ -80,9 +81,9 @@ Nvidia Jetson チェックは [Datadog Agent][2] パッケージに含まれて�
 
 [Agent の status サブコマンド][5]を実行し、Checks セクションで `jetson` を探します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "nvidia_jetson" >}}
 
 
@@ -94,15 +95,15 @@ Nvidia Jetson チェックは [Datadog Agent][2] パッケージに含まれて�
 - `nvidia.jetson.gpu.freq`
 - `nvidia.jetson.cpu.freq`
 
-### ヘルプ
+### サービスチェック
 
-Nvidia Jetson インテグレーションには、サービスのチェック機能は含まれません。
+NVIDIA Jetson インテグレーションには、サービスのチェック機能は含まれません。
 
-### ヘルプ
+### イベント
 
-Nvidia Jetson インテグレーションには、イベントは含まれません。
+NVIDIA Jetson インテグレーションには、イベントは含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][7]までお問い合わせください。
 

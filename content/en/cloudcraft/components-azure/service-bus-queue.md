@@ -1,6 +1,5 @@
 ---
 title: "Service bus queue Component"
-kind: documentation
 ---
 
 ## Overview

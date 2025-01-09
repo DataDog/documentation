@@ -11,6 +11,7 @@ categories:
 - 自動化
 - data stores
 - developer tools
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/eversql/README.md
 display_on_public_website: true
@@ -20,7 +21,6 @@ integration_id: eversql
 integration_title: 'EverSQL: データベースのチューニング'
 integration_version: ''
 is_public: true
-kind: integration
 manifest_version: 2.0.0
 name: eversql
 public_title: 'EverSQL: データベースのチューニング'
@@ -38,6 +38,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: MySQL、PostgreSQL、Aurora のための自動 SQL およびデータベースチューニング
   media:
@@ -67,16 +68,16 @@ tile:
 
 EverSQL は非侵入型であり、データベースの機密データには一切アクセスしません。
 
-### API
+### 使用方法
 
 Datadog データベースモニタリングダッシュボードで見つかった遅い SQL クエリは、EverSQL を使用して最適化することができます。Datadog から遅い SQL クエリをコピーし、EverSQL の [SQL Optimization][2] プロセスに直接ペーストします。遅いクエリのトラブルシューティングについては、[データベースモニタリングの概要][3]ガイドを参照してください。
 
 ### 対応データベース:
 MySQL、PostgreSQL、AWS Aurora、Google Cloud SQL、Azure DB、Percona、MariaDB
 
-## 計画と使用
+## セットアップ
 
-### ブラウザトラブルシューティング
+### 構成
 Datadog によって特定された遅い SQL クエリを高速化するには
 1. [Datadog データベースモニタリング][4]ダッシュボードに移動し、遅い SQL クエリテーブルを見つけます。
 2. 関連するデータベースのフィルターを追加し、Average Latency などの関連するパフォーマンスメトリクスでソートします。
@@ -85,21 +86,21 @@ Datadog によって特定された遅い SQL クエリを高速化するには
 5. 最適化レポートから、データベースに最適なインデックスをコピーして作成します。
 6. 書き換えた最適化クエリをアプリケーションコードにコピーします。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 
 EverSQL には、メトリクスは含まれません。
 
-### ヘルプ
+### サービスチェック
 
 EverSQL には、サービスのチェック機能は含まれません。
 
-### ヘルプ
+### イベント
 
 EverSQL には、イベントは含まれません。
 
-## Agent
+## サポート
 
 ご不明な点は、[EverSQL のサポートチーム][5]までお問合せください。
 

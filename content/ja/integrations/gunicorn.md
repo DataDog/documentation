@@ -20,8 +20,6 @@ assets:
       metadata_path: assets/service_checks.json
     source_type_id: 60
     source_type_name: Gunicorn
-  logs:
-    source: gunicorn
   saved_views:
     4xx_errors: assets/saved_views/4xx_errors.json
     5xx_errors: assets/saved_views/5xx_errors.json
@@ -35,6 +33,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - log collection
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/gunicorn/README.md
 display_on_public_website: true
@@ -42,9 +41,8 @@ draft: false
 git_integration_title: gunicorn
 integration_id: gunicorn
 integration_title: Gunicorn
-integration_version: 2.7.0
+integration_version: 4.0.0
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: gunicorn
 public_title: Gunicorn
@@ -58,10 +56,14 @@ tile:
   - Category::ログの収集
   - Supported OS::Linux
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: リクエスト率、リクエスト処理時間、ログメッセージ率、ワーカープロセス数を監視。
   media: []
   overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/monitor-gunicorn-performance
   support: README.md#Support
   title: Gunicorn
 ---
@@ -82,15 +84,15 @@ Gunicorn 自身は、これ以外にも以下のようなメトリクスを DogS
 - リクエスト処理時間 (平均値、中央値、最大値、95 パーセンタイルなど)
 - ログレベル (重大、エラー、警告、例外) 別のログメッセージ率
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 Datadog Agent の Gunicorn チェックは [Datadog Agent][2] パッケージに含まれています。Gunicorn サーバーに追加でインストールする必要はありません。
 
 Gunicorn チェックでは、Gunicorn アプリの Python 環境に [`setproctitle`][3] パッケージが含まれている必要があります。これがないと、Datadog Agent は常に `gunicorn` マスタープロセスが見つからない (したがって、ワーカーも見つからない) と報告します。`gunicorn.workers` メトリクスを収集する場合は、アプリの Python 環境に `setproctitle` パッケージをインストールしてください。
 
-### ブラウザトラブルシューティング
+### 構成
 
 Gunicorn の[メトリクス](#metric-collection)と[ログ](#log-collection)の収集を開始するには、[Agent の構成ディレクトリ][4]のルートにある `conf.d/` フォルダーの `gunicorn.d/conf.yaml` ファイルを編集します。
 使用可能なすべての構成オプションの詳細については、[サンプル gunicorn.yaml][5] を参照してください。
@@ -118,7 +120,7 @@ instances:
 
 3. [Agent を再起動][8]すると、Datadog への Gunicorn メトリクスの送信が開始されます。
 
-#### 収集データ
+#### ログ収集
 
 _Agent バージョン 6.0 以降で利用可能_
 
@@ -170,21 +172,21 @@ $ sudo netstat -nup | grep "127.0.0.1:8125.*ESTABLISHED"
 udp        0      0 127.0.0.1:38374         127.0.0.1:8125          ESTABLISHED 15500/gunicorn: mas
 ```
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "gunicorn" >}}
 
 
-### ヘルプ
+### イベント
 
 Gunicorn チェックには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 {{< get-service-checks-from-git "gunicorn" >}}
 
 
-## ヘルプ
+## トラブルシューティング
 
 ### Agent が Gunicorn プロセスを見つけられない
 

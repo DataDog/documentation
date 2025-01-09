@@ -3,6 +3,7 @@ aliases:
 - /ko/logs/log_collection/nxlog
 categories:
 - 로그 수집
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/documentation/blob/master/content/en/integrations/sinatra.md
 description: Sinatra 애플리케이션 로그 수집.
@@ -10,7 +11,6 @@ has_logo: true
 integration_id: sinatra
 integration_title: Sinatra
 is_public: true
-kind: integration
 name: Sinatra
 public_title: Datadog-Sinatra 통합
 short_description: Sinatra 애플리케이션 로그 수집.

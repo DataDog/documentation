@@ -18,8 +18,8 @@ author:
   name: Datadog
   sales_email: info@datadoghq.com
   support_email: help@datadoghq.com
-categories:
-- monitoring
+categories: []
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/agent_metrics/README.md
 display_on_public_website: true
@@ -29,7 +29,6 @@ integration_id: datadog-agent
 integration_title: Agent メトリクス
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: agent_metrics
 public_title: Agent メトリクス
@@ -44,7 +43,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::macOS
   - Supported OS::Windows
-  - Category::モニタリング
+  - Offering::Integration
   configuration: README.md#Setup
   description: agent_metrics の説明。
   media: []
@@ -62,13 +61,13 @@ Datadog Agent から内部メトリクスを取得し、Datadog で視覚化や�
 
 **注:** このインテグレーションによって収集されるメトリクスのリストは、マイナーな Agent のバージョン間で変更される可能性があります。そのような変更は、Agent の変更履歴に記載されない場合があります。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 [go_expvar][1] チェックに基づく Agent Metrics インテグレーションは [Datadog Agent][2] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 
-### ブラウザトラブルシューティング
+### 構成
 
 1. [Agent のコンフィギュレーションディレクトリ][4]のルートにある `conf.d/` フォルダ内の [`go_expvar.d/agent_stats.yaml.example`][3] ファイルの名前を `go_expvar.d/agent_stats.yaml` に変更します。
 
@@ -78,21 +77,21 @@ Datadog Agent から内部メトリクスを取得し、Datadog で視覚化や�
 
 [Agent の status サブコマンドを実行][6]し、Checks セクションの `go_expvar` を探します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 
 Agent Metrics インテグレーションは、[`agent_stats.yaml.example`][3] で定義されたメトリクスを収集します。
 
-### ヘルプ
+### イベント
 
 Agent Metrics インテグレーションには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 
 Agent Metrics インテグレーションには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][7]までお問い合わせください。
 

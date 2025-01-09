@@ -1,6 +1,5 @@
 ---
 title: AWS Lambda metrics
-kind: documentation
 aliases:
   - /serverless/custom_metrics
   - /serverless/enhanced_lambda_metrics
@@ -8,9 +7,11 @@ aliases:
   - /serverless/real_time_enhanced_metrics
 ---
 
-This page discusses metrics for monitoring serverless applications on AWS Lambda. 
+This page discusses metrics for monitoring serverless applications on AWS Lambda. There are 3 ways to get metrics from AWS Lambda:
 
-After you [install Serverless Monitoring for AWS Lambda][1], Datadog generates [enhanced metrics](#enhanced-lambda-metrics) from your Lambda runtime. You can also [submit custom metrics](#submit-custom-metrics) to Datadog from your Lambda functions.
+- You can get Cloudwatch Lambda metrics from the [Datadog AWS integration][5]
+- You can get [enhanced metrics](#enhanced-lambda-metrics) by [installing Serverless Monitoring for AWS Lambda][1] through the Datadog Lambda Extension.
+- You can [submit custom metrics](#submit-custom-metrics) to Datadog from your Lambda functions.
 
 {{< img src="serverless/serverless_custom_metrics.png" alt="Collecting Enhanced Metrics from AWS Lambda" >}}
 
@@ -36,7 +37,7 @@ Enhanced Lambda metrics are in addition to the default [Lambda metrics][6] enabl
 
 The following real-time enhanced Lambda metrics are available, and they are tagged with corresponding `aws_account`, `region`, `functionname`, `cold_start`, `memorysize`, `executedversion`, `resource` and `runtime` tags. 
 
-These metrics are [distributions][8]: you can query them using the `count`, `min`, `max`, `sum`, and `avg` aggregations.
+These metrics are [distributions][8]: you can query them using the `count`, `min`, `max`, `sum`, and `avg` aggregations. Enhanced metrics are enabled automatically with [Serverless Monitoring][1] but can be disabled by setting the `DD_ENHANCED_METRICS` environment variable to `false` on your Lambda function. 
 
 `aws.lambda.enhanced.invocations`
 : Measures the number of times a function is invoked in response to an event or an invocation of an API call.
@@ -80,6 +81,45 @@ These metrics are [distributions][8]: you can query them using the `count`, `min
 `aws.lambda.enhanced.out_of_memory`
 : Measures the number of times a function runs out of memory.
 
+`aws.lambda.enhanced.cpu_total_utilization`
+: Measures the total CPU utilization of the function as a number of cores.
+
+`aws.lambda.enhanced.cpu_total_utilization_pct`
+: Measures the total CPU utilization of the function as a percent.
+
+`aws.lambda.enhanced.cpu_max_utilization`
+: Measures the CPU utilization on the most utilized core.
+
+`aws.lambda.enhanced.cpu_min_utilization`
+: Measures the CPU utilization on the least utilized core.
+
+`aws.lambda.enhanced.cpu_system_time`
+: Measures the amount of time the CPU spent running in kernel mode.
+
+`aws.lambda.enhanced.cpu_user_time`
+: Measures the amount of time the CPU spent running in user mode.
+
+`aws.lambda.enhanced.cpu_total_time`
+: Measures the total amount of time the CPU spent running.
+
+`aws.lambda.enhanced.num_cores`
+: Measures the number of cores available.
+
+`aws.lambda.enhanced.rx_bytes`
+: Measures the bytes received by the function.
+
+`aws.lambda.enhanced.tx_bytes`
+: Measures the bytes sent by the function.
+
+`aws.lambda.enhanced.total_network`
+: Measures the bytes sent and received by the function.
+
+`aws.lambda.enhanced.tmp_max`
+: Measures the total available space in the /tmp directory.
+
+`aws.lambda.enhanced.tmp_used`
+: Measures the space used in the /tmp directory.
+
 [6]: /integrations/amazon_lambda/#metric-collection
 [7]: https://app.datadoghq.com/screen/integration/aws_lambda_enhanced_metrics
 [8]: /metrics/distributions/
@@ -96,6 +136,8 @@ You can also generate metrics from all ingested spans, regardless of whether the
 ### Submit custom metrics directly from a Lambda function
 
 All custom metrics are submitted as [distributions](#understanding-distribution-metrics).
+
+**Note**: Distribution metrics must be submitted with a new name, do not re-use a name of a previously submitted metric.
 
 1. [Install Serverless Monitoring for AWS Lambda][1] and ensure that you have installed the Datadog Lambda extension.
 
@@ -183,6 +225,22 @@ public class Handler implements RequestHandler<APIGatewayV2ProxyRequestEvent, AP
         APIGatewayV2ProxyResponseEvent response = new APIGatewayV2ProxyResponseEvent();
         response.setStatusCode(200);
         return response;
+    }
+
+    static {
+        // ensure all metrics are flushed before shutdown
+        Runtime.getRuntime().addShutdownHook(new Thread() {
+            @Override
+            public void run() {
+                System.out.println("[runtime] shutdownHook triggered");
+                try {
+                    Thread.sleep(300);
+                } catch (InterruptedException e) {
+                    System.out.println("[runtime] sleep interrupted");
+                }
+                System.out.println("[runtime] exiting");
+            }
+        });
     }
 }
 ```
@@ -428,9 +486,16 @@ A Lambda function may launch many concurrent execution environments when traffic
 
 Distributions provide `avg`, `sum`, `max`, `min`, `count` aggregations by default. On the Metric Summary page, you can enable percentile aggregations (p50, p75, p90, p95, p99) and also [manage tags][12]. To monitor a distribution for a gauge metric type, use `avg` for both the [time and space aggregations][13]. To monitor a distribution for a count metric type, use `sum` for both the [time and space aggregations][13]. Refer to the guide [Query to the Graph][14] for how time and space aggregations work.
 
+### Understanding your metrics usage, volume, and pricing in Datadog
+
+Datadog provides granular information about the custom metrics you're ingesting, the tag cardinality, and management tools for your custom metrics within the [Metrics Summary page][15] of the Datadog app. You can view all serverless custom metrics under the 'Serverless' tag in the Distribution Metric Origin [facet panel][16]. You can also control custom metrics volumes and costs with [Metrics without Limits™][17]. 
+
 [9]: /logs/logs_to_metrics/
 [10]: /tracing/trace_pipeline/generate_metrics/
 [11]: /metrics/distributions/
 [12]: /metrics/distributions/#customize-tagging
 [13]: /metrics/#time-and-space-aggregation
 [14]: /dashboards/guide/query-to-the-graph/
+[15]: https://app.datadoghq.com/metric/summary
+[16]: /metrics/summary/#facet-panel
+[17]: /metrics/summary/#metrics-without-limits

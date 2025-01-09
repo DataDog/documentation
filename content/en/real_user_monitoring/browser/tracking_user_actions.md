@@ -1,6 +1,5 @@
 ---
 title: Tracking User Actions
-kind: documentation
 further_reading:
     - link: 'https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/'
       tag: 'Blog'
@@ -32,7 +31,7 @@ You can accomplish the following objectives:
 
 The `trackUserInteractions` initialization parameter enables the collection of user clicks in your application, which means sensitive and private data contained in your pages may be included to identify elements that a user interacted with.
 
-To control which information is sent to Datadog, [manually set an action name](#declare-a-name-for-click-actions), or [implement a global scrubbing rule in the Datadog Browser SDK for RUM][1].
+To control which information is sent to Datadog, you can [mask action names with privacy options][6], [manually set an action name](#declare-a-name-for-click-actions), or [implement a global scrubbing rule in the Datadog Browser SDK for RUM][1].
 
 ## Track user interactions
 
@@ -41,6 +40,8 @@ The RUM Browser SDK automatically tracks clicks. A click action is created if **
 * Activity following the click is detected. See [How page activity is calculated][2] for details.
 * The click does not lead to a new page being loaded, in which case, the Datadog Browser SDK generates another RUM View event.
 * A name can be computed for the action. See [Declaring a name for click actions](#declare-a-name-for-click-actions) for details.
+
+**Note**: When an action is being tracked, other actions within the next `100 ms` do not get sent, unless they are [custom actions][5].
 
 ## Action timing metrics
 
@@ -101,6 +102,14 @@ For example:
 
 `data-dd-action-name` is favored when both attributes are present on an element.
 
+### How action names are computed
+
+The Datadog Browser SDK uses different strategies to compute click action names:
+
+1. If the `data-dd-action-name` attribute or a custom attribute (as explained above) is explicitly set by the user on the clicked element (or one of its parents), its value is used as the action name.
+
+2. If `data-dd-action-name` attribute or its equivalent is not set, depending on the element type, the sdk uses other attributes such as `label`, `placeholder`, `aria-label` from the element or its parents to construct the action name. If none of these attributes is found, the sdk uses the inner text as name for the action.
+
 ## Send custom actions
 
 To extend the collection of user interactions, send your custom actions using the `addAction` API. These custom actions send information relative to an event that occurs during a user journey.
@@ -116,3 +125,4 @@ For more information, see [Send Custom Actions][5].
 [3]: /real_user_monitoring/browser/data_collected/#default-attributes
 [4]: https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md#v2160
 [5]: /real_user_monitoring/guide/send-rum-custom-actions
+[6]: /data_security/real_user_monitoring/#mask-action-names

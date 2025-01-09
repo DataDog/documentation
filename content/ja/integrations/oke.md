@@ -17,10 +17,13 @@ author:
   sales_email: info@datadoghq.com (日本語対応)
   support_email: help@datadoghq.com
 categories:
-- コンテナ
+- 構成とデプロイ
+- incident-teams
 - kubernetes
+- モニター
 - oracle
-- orchestration
+- オーケストレーション
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/oke/README.md
 display_on_public_website: true
@@ -30,11 +33,10 @@ integration_id: oke
 integration_title: Oracle Container Engine for Kubernetes
 integration_version: ''
 is_public: true
-kind: integration
 manifest_version: 2.0.0
 name: oke
 public_title: Oracle Container Engine for Kubernetes
-short_description: OKE は、Oracle が管理するコンテナオーケストレーションサービスです。
+short_description: OKE は、OCI が管理するコンテナオーケストレーションサービスです。
 supported_os:
 - linux
 - windows
@@ -42,17 +44,23 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
+  - Category::Configuration & Deployment
   - Category::Containers
   - Category::Kubernetes
+  - Category::Metrics
   - Category::Oracle
   - Category::Orchestration
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
-  description: OKE は、Oracle が管理するコンテナオーケストレーションサービスです。
+  description: OKE は、OCI が管理するコンテナオーケストレーションサービスです。
   media: []
   overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/monitor-oracle-kubernetes-engine/
   support: README.md#Support
   title: Oracle Container Engine for Kubernetes
 ---
@@ -62,22 +70,40 @@ tile:
 
 ## 概要
 
-Oracle Cloud Infrastructure Container Engine for Kubernetes (OKE) は、Oracle Cloud 上でコンテナ化されたアプリケーションをデプロイして実行するための、フルマネージド Kubernetes サービスです。Datadog は、OKE によって管理される Kubernetes クラスターに対する包括的な可視性を提供します。Datadog のインテグレーションを有効にすると、Kubernetes インフラストラクチャーの表示、ライブ・プロセスの監視、すべてのポッドとコンテナからの主要メトリクスの追跡を 1 箇所で行うことができます。
+Oracle Cloud Infrastructure Container Engine for Kubernetes (OKE) は、大規模なエンタープライズ級 Kubernetes 環境の運用を簡略化するマネージド Kubernetes サービスです。
 
-## 計画と使用
+このインテグレーションは、[`oci_oke`][1] ネームスペースからメトリクスとタグを収集して、Kubernetes コントロールプレーン、クラスター、ノードの状態を監視するのに役立ちます。
+
+OKE クラスター上に [Datadog Agent][2] をデプロイすることで、クラスター、ポッド、各ノードの負荷を追跡し、リソースのプロビジョニングおよびデプロイ方法に関するより的確な洞察を得ることができます。
+
+ノード、ポッド、コンテナの監視に加え、Agent はクラスター内で稼働するサービスからメトリクスを収集・報告することもでき、以下が可能になります。
+
+- [事前構成済みの Kubernetes ダッシュボード][3]を使用して OKE クラスターを探索する
+- コンテナおよびプロセスをリアルタイムで監視する
+- コンテナ化されたサービスを自動的に追跡・監視する
+
+## セットアップ
+
+[Oracle Cloud Infrastructure][4] インテグレーションを設定したら、`oci_oke` ネームスペースが [Connector Hub][5] に含まれていることを確認してください。
 
 Datadog は既に Kubernetes と統合されているため、すぐに OKE を監視することができます。Kubernetes クラスターで実行中の Agent を OKE に移行する予定がある場合に、Datadog でクラスターの監視を続行できます。
 
-さらに、OKE ノードプールもサポートされています。
+[Helm チャート][6] を使用して Agent を DaemonSet としてデプロイすることは、最もシンプルで推奨される方法です。これにより、クラスター内のすべてのノードで Agent がポッドとして実行され、新しいノードが追加されるたびに自動的に Agent がインストールされます。また、Helm の values ファイルに数行追加するだけで、Agent がプロセスデータ、トレース、ログを収集するよう構成できます。さらに、OKE ノードプールにも対応しています。
 
 
-## ヘルプ
+## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][1]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][7]までお問い合わせください。
 
 ## その他の参考資料
 
-- [Datadog を使用した OKE の監視方法][2]
+- [Datadog で OKE を 監視する方法][8]
 
-[1]: https://docs.datadoghq.com/ja/help/
-[2]: https://www.datadoghq.com/blog/monitor-oracle-kubernetes-engine/
+[1]: https://docs.oracle.com/en-us/iaas/Content/ContEng/Reference/contengmetrics.htm
+[2]: https://docs.datadoghq.com/ja/agent/kubernetes/#installation
+[3]: https://app.datadoghq.com/dashboard/lists/preset/3?q=kubernetes
+[4]: https://docs.datadoghq.com/ja/integrations/oracle_cloud_infrastructure/
+[5]: https://cloud.oracle.com/connector-hub/service-connectors
+[6]: https://docs.datadoghq.com/ja/agent/kubernetes/?tab=helm
+[7]: https://docs.datadoghq.com/ja/help/
+[8]: https://www.datadoghq.com/blog/monitor-oracle-kubernetes-engine/

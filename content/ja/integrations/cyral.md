@@ -26,6 +26,7 @@ author:
 categories:
 - data stores
 - security
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/cyral/README.md
 display_on_public_website: true
@@ -35,7 +36,6 @@ integration_id: cyral
 integration_title: Cyral
 integration_version: 0.0.1
 is_public: true
-kind: integration
 manifest_version: 2.0.0
 name: cyral
 public_title: Cyral
@@ -48,6 +48,7 @@ tile:
   - Category::Data Stores
   - Category::Security
   - Supported OS::Linux
+  - Offering::Integration
   configuration: README.md#Setup
   description: Cyral インスタンスモニタリング MySQL からランタイムメトリクスを収集。
   media: []
@@ -63,11 +64,11 @@ tile:
 
 このチェックは、Datadog Agent を通じて [Cyral][1] MySQL サイドカーを監視します。
 
-## 計画と使用
+## セットアップ
 
 Cyral チェックは [Datadog Agent][2] パッケージに含まれていないため、お客様自身でインストールする必要があります。
 
-### インフラストラクチャーリスト
+### インストール
 
 Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Cyral チェックをホストにインストールします。Docker Agent または 上記バージョン以前の Agent でインストールする場合は、[コミュニティインテグレーションの使用][3]をご参照ください。
 
@@ -79,7 +80,7 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Cyral チェ�
 
 2. コアの[インテグレーション][4]と同様にインテグレーションを構成します。
 
-### ブラウザトラブルシューティング
+### 構成
 
 1. cyral のパフォーマンスデータの収集を開始するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `cyral.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル cyral.d/conf.yaml][5] を参照してください。
 
@@ -97,21 +98,21 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Cyral チェ�
 
 [Agent の status サブコマンドを実行][7]し、Checks セクションで `cyral` を探します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "cyral" >}}
 
 
-### ヘルプ
+### サービスチェック
 
 Cyral には、サービスのチェック機能は含まれません。
 
-### ヘルプ
+### イベント
 
 Cyral には、イベントは含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ### Agent が接続できない
 

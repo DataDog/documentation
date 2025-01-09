@@ -4,7 +4,6 @@ further_reading:
 - link: getting_started/tagging/unified_service_tagging/
   tag: Documentation
   text: En savoir plus sur le tagging de service unifié et les tags réservés
-kind: documentation
 title: Observabilité des services
 ---
 

@@ -1,39 +1,34 @@
 ---
+aliases:
+- /ja/error_tracking/standalone_frontend/collecting_browser_errors
 further_reading:
-- link: /real_user_monitoring/error_tracking/
-  tag: Documentation
-  text: エラー追跡
-- link: https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/
-  tag: ブログ
-  text: リアルユーザーの監視
-- link: /real_user_monitoring/explorer/
-  tag: Documentation
-  text: Datadog でビューを検索する
-- link: /real_user_monitoring/explorer/visualize/
-  tag: Documentation
-  text: イベントへの視覚化の適用
-- link: /real_user_monitoring/platform/dashboards/
-  tag: Documentation
-  text: RUM ダッシュボード
-kind: documentation
+- link: /error_tracking/explorer/
+  text: Datadog 内でエラーを探索する
+  タグ: ドキュメント
+- link: /error_tracking/monitors/
+  text: 影響の大きい問題について積極的にアラートを発信する
+  タグ: ドキュメント
+- link: /real_user_monitoring
+  text: パフォーマンスとユーザーへの影響を測定する
+  タグ: ドキュメント
 title: ブラウザエラーの収集
 ---
 ## 概要
 
-フロントエンドのエラーはリアルユーザーモニタリング (RUM) で収集されます。エラーメッセージとスタックトレースが利用できる場合は含まれます。
+フロントエンドのエラーは Browser SDK で収集されます。エラーメッセージとスタックトレースが利用できる場合は含まれます。
 
 ## エラーソース
 フロントエンドのエラーは、いくつかの異なるソースから発生します。
 
 - **agent**: SDK の実行から
 - **console**: `console.error()` API コールから
-- **custom**: [RUM `addError` API](#collect-errors-manually) と共に送信される
+- **custom**: [`addError` API](#collect-errors-manually) を使用して送信される
 - **report**: `ReportingObserver` API から
 - **source**: ソースコードの未処理の例外または未処理の約束拒否から
 
 ## エラー属性
 
-すべての RUM イベントタイプのデフォルト属性に関する詳細は、[収集されるデータ][1]をご覧ください。サンプリングまたはグローバルコンテキストの構成に関する情報は、[RUM データとコンテキストの変更][2]をご覧ください。
+すべてのイベントタイプのデフォルト属性に関する詳細は、[収集されるデータ][1]をご覧ください。サンプリングまたはグローバルコンテキストの構成に関する情報は、[データとコンテキストの変更][2]をご覧ください。
 
 | 属性       | タイプ   | 説明                                                       |
 |-----------------|--------|-------------------------------------------------------------------|
@@ -52,7 +47,7 @@ title: ブラウザエラーの収集
 
 ## エラーを手動で収集する
 
-`addError()` API を使用して、RUM ブラウザ SDK により自動的に追跡されない処理済みの例外、処理済みのプロミス拒否、およびその他のエラーを監視します。
+処理済みの例外、処理済みのプロミス拒否、および Browser SDK で自動的に追跡されないその他のエラーを、`addError()` API を使用して監視します。
 
 {{< code-block lang="javascript" >}}
 addError(
@@ -61,7 +56,7 @@ addError(
 );
 {{< /code-block >}}
 
-**注**: [エラー追跡][4]機能は、ソースを `custom` または `source` に設定し、スタックトレースを含むエラーを処理します。その他のソース (`console` など) で送られたか、ブラウザ拡張機能で送られたエラーは、エラー追跡では処理されません。
+**注**: [Error Tracking][4] は、ソースを `custom`、`source` または `report` に設定し、スタックトレースを含むエラーを処理します。その他のソース (`console` など) で送られたか、ブラウザ拡張機能で送られたエラーは、エラー追跡では処理されません。
 
 {{< tabs >}}
 {{% tab "NPM" %}}
@@ -89,7 +84,7 @@ try {
 }
 ```
 {{% /tab %}}
-{{% tab "CDN 非同期" %}}
+{{% tab "CDN async" %}}
 
 ```javascript
 // コンテキスト付きでカスタムエラーを送信
@@ -118,7 +113,7 @@ try {
 }
 ```
 {{% /tab %}}
-{{% tab "CDN 同期" %}}
+{{% tab "CDN sync" %}}
 
 ```javascript
 // コンテキスト付きでカスタムエラーを送信
@@ -174,7 +169,7 @@ class ErrorBoundary extends React.Component {
 ```
 
 {{% /tab %}}
-{{% tab "CDN 非同期" %}}
+{{% tab "CDN async" %}}
 
 ```javascript
 class ErrorBoundary extends React.Component {
@@ -196,7 +191,7 @@ class ErrorBoundary extends React.Component {
 ```
 
 {{% /tab %}}
-{{% tab "CDN 同期" %}}
+{{% tab "CDN sync" %}}
 
 ```javascript
 class ErrorBoundary extends React.Component {
@@ -221,7 +216,7 @@ class ErrorBoundary extends React.Component {
 {{< /tabs >}}
 
 
-## ヘルプ
+## トラブルシューティング
 
 ### スクリプトエラー
 

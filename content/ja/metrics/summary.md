@@ -10,7 +10,6 @@ further_reading:
 - link: /metrics/distributions/
   tag: ドキュメント
   text: ディストリビューションメトリクス
-kind: documentation
 title: メトリクスの概要
 ---
 
@@ -20,7 +19,7 @@ title: メトリクスの概要
 
 **Metric** または **Tag** 検索フィールドを使用して、メトリクス名またはタグでメトリクスを検索します。
 
-{{< img src="metrics/summary/tag_advancedfiltering.mp4" alt="タグ検索バーに NOT team:* が入力されたメトリクスサマリーページ" video=true style="width:75%;">}}
+{{< img src="metrics/summary/tag_advancedfiltering3.mp4" alt="タグ検索バーに NOT team:* が入力されたメトリクスサマリーページ" video=true style="width:75%;">}}
 
 タグフィルターは、ブーリアンやワイルドカードの構文に対応しており、以下を素早く識別することができます。
 * 特定のタグキーでタグ付けされたメトリクス。例: `team`: `team:*`
@@ -29,27 +28,34 @@ title: メトリクスの概要
 
 ## ファセットパネル
 
-検索バーは、メトリクスのリストをフィルタリングするための最も包括的なアクションのセットを提供します。ただし、ファセットは次の方法でメトリクスをすばやくフィルタリングすることもできます。
-* **Configuration** :タグコンフィギュレーションまたは追加のパーセンタイル集計を使用して、メトリクスをすばやく識別します
-* **Metric Type** : ディストリビューションと非ディストリビューション (カウント、ゲージ、レート) をすばやく特定します
-* **Distribution Metric Origin**: ディストリビューションメトリクスがどの製品から発生したかをすばやく特定します (例: ログからメトリクスを生成、スパンからメトリクスを生成、など)。
+検索バーは、メトリクスのリストをフィルタリングするための最も包括的なアクションのセットを提供しますが、ファセットも次の方法でメトリクスをフィルタリングできます。 
 
-{{< img src="metrics/summary/facets2.jpg" alt="メトリクスファセットパネル" style="width:75%;">}}
+- **Configuration**: タグ構成によるメトリクス
+- **Percentiles**: パーセンタイル / 高度なクエリ機能で有効なディストリビューションメトリクス
+- **Historical Metrics**: 履歴メトリクスの取り込みが有効になっているメトリクス
+- **Query Activity** (ベータ版) : 過去 30 日間にアプリまたは API でクエリされていないメトリクス
+- **Metric Type**: ディストリビューションメトリクスと非ディストリビューションメトリクス (カウント、ゲージ、レート) を区別します
+- **メトリクスの起源 (Metric Origin)**: メトリクスがどの製品から発生したか (例: Logs や APM Spans から生成されたメトリクス)。様々なメトリクス起源タイプの詳細については[メトリクス起源の定義][12]を参照してください。
 
+**注**: ダッシュボードに含まれるメトリクスで、過去 30 日間にユーザーによってロードされていないものは、アクティブにクエリされたとは見なされません。
+
+{{< img src="metrics/summary/facets4.png" alt="メトリクスファセットパネル" style="width:75%;">}}
 
 ## 複数のメトリクスのコンフィギュレーション
-一度に複数のメトリクスを構成できる 2 つのボタンがあります。
 
-{{< img src="metrics/summary/configurationbuttons.jpg" alt="一括コンフィギュレーションボタン" style="width:75%;">}}
+**Configure Metrics** (メトリクスを構成) をクリックすると、一度に複数のメトリクスを構成できるさまざまなオプションが表示されます。
 
-* **Calculate Percentiles**: 複数のディストリビューションメトリクスにパーセンタイル集計を追加します。
+{{< img src="metrics/summary/configurationbuttons10-11-2024.png" alt="一括構成用ボタン" style="width:100%;">}}
 
-{{< img src="metrics/summary/bulkpercentiles.jpg" alt="一括パーセンタイル" style="width:75%;">}}
-
-* **Configure Tags**: Metrics without Limits™ を使用して、ネームスペースに一致する複数のカスタムメトリクスにタグを構成します
+* **タグの管理 (Manage tags)**: Metrics without Limits™ を使用して、特定のネームスペースに一致する複数のカスタムメトリクスにタグを構成します。
 
 {{< img src="metrics/summary/bulkconfig_new-compressed.mp4" alt="一括メトリクスタグ構成" video="true" style="width:100%;" >}}
 
+* **パーセンタイルを有効または無効にする**: 複数の分布系メトリクスにわたってパーセンタイル集計を管理します。詳細は[分布ページ][31]をご覧ください。
+
+{{< img src="metrics/summary/percentile_aggregations_toggle.png" alt="パーセンタイル集計を管理するためのトグル" style="width:100%;">}}
+
+* **過去のメトリクス取り込みを有効または無効にする**: 過去のメトリクスデータの取り込みを管理します。詳細は[過去のメトリクス取り込みページ][30]をご覧ください。
 
 ## メトリクスの詳細サイドパネル
 
@@ -61,7 +67,7 @@ title: メトリクスの概要
 
 [メトリクスエクスプローラー][2]や[ダッシュボード][3]などに表示されるメトリクスの名前です。
 
-### Ingested Custom Metrics
+### 取り込まれたカスタムメトリクス
 
 メトリクス名は、関連するタグ値の組み合わせによって、複数のインジェストされたカスタムメトリクスを発行することができます。インジェストされたカスタムメトリクスは、元々コードで送信されたすべてのデータを表します。
 
@@ -69,7 +75,7 @@ title: メトリクスの概要
 
 ### インデックスされたカスタムメトリクス
 
-インジェストされたカスタムメトリクスとは異なり、インデックスされたカスタムメトリクスは、Datadog プラットフォーム全体でクエリ可能な状態を維持するものを表しています。この数は、パーセンタイル集計の追加や削除、または Metrics without Limits™ の使用によって影響を受ける可能性があります。詳しくは、[Metrics without Limits™][10] のドキュメントを参照してください。<br>
+取り込まれたカスタムメトリクスとは異なり、インデックス化されたカスタムメトリクスは Datadog プラットフォーム全体でクエリ可能な状態を維持します。この数値は、パーセンタイル集計の追加または削除、あるいは Metrics without Limits™ の使用によって影響を受ける可能性があります。詳細は [Metrics without Limits™][0] のドキュメントをご覧ください。
 
 ### ホスト
 
@@ -133,10 +139,20 @@ Datadog にカスタムメトリクスを送信する際、グラフのメトリ
 
 [タグ付けに関する詳しい説明][5]。
 
-## Metrics without Limits™
-Metrics without Limits™ は、Agent やコードレベルの変更を必要とせずに、カスタムメトリクスのサイズを制御できます。
+## メトリクス関連アセット
 
-**注:** Metrics without Limits™ は、カスタムメトリクスでのみ利用可能です。
+{{< img src="metrics/summary/related_assets_dashboards.png" alt="指定したメトリクス名の関連アセット" style="width:80%;">}}
+
+組織にとってのメトリクス名の価値を判断するには、メトリクス関連アセットを使用します。メトリクス関連アセットとは、特定のメトリクスをクエリするダッシュボード、ノートブック、モニター、または SLO を指します。
+
+1. メトリクスの詳細サイドパネルの一番下までスクロールして、"Related Assets" セクションに移動します。
+2. ドロップダウンボタンをクリックして、関心のある関連アセットタイプ (ダッシュボード、モニター、ノートブック、SLO) を表示します。さらに、検索バーを活用して特定のアセットを検証できます。
+
+
+## Metrics without LimitsTM
+Metrics without LimitsTM は、Agent やコードレベルの変更を必要とせずに、カスタムメトリクスのサイズを制御できます。
+
+**注:** Metrics without LimitsTM は、カスタムメトリクスでのみ利用可能です。
 
 タグの構成は、メトリクスのタグ一括構成ボタン、またはメトリクスの詳細サイドパネルの **Manage Tags** ボタンで行えます。
 
@@ -145,18 +161,18 @@ Metrics without Limits™ は、Agent やコードレベルの変更を必要と
 1. **Metrics Summary** テーブルでカスタムディストリビューションのメトリクス名をクリックし、メトリクス詳細のサイドパネルを開きます。
 2. **Manage Tags** ボタンをクリックして、タグコンフィギュレーションモーダルを開きます。
 
-3. **Include tags...** または **Exclude tags...** を選択して、クエリに含めるタグまたは除外するタグをカスタマイズします。タグ構成の詳細については、[Metrics without Limits][10] ドキュメントを参照してください。
-4. **Save** を選択する前に、カーディナリティ推定機能を用いて提案されたタグ構成の効果をプレビューします。
+3. **Include tags...** または **Exclude tags...** を選択して、クエリするタグまたはクエリしないタグをカスタマイズします。タグ構成の詳細については、[Metrics without Limits][10] のドキュメントを参照してください。
+4. **Save** を選択する前に、カーディナリティ推定機能を使用して提案したタグ構成の効果をプレビューします。
 
 **注**: カーディナリティ推定機能では、メトリクスが 48 時間より古い必要があります。
 
 ### クエリ可能なタグ 
 
-メトリクスが Metrics without Limits™ で構成されると、どのタグが Queryable のままか、つまり _Indexed Custom Metrics_ のボリュームに寄与するタグを表示することができます。また、_Ingested Custom Metrics_ のボリュームに寄与する、最初に送信されインジェストされたすべてのタグにトグルバックすることができます。
+メトリクスが Metrics without LimitsTM で構成されると、どのタグが Queryable のままか、つまり _Indexed Custom Metrics_ のボリュームに寄与するタグを表示することができます。また、_Ingested Custom Metrics_ のボリュームに寄与する、最初に送信されインジェストされたすべてのタグにトグルバックすることができます。
 
 ### アドバンスドモードでの集計によるメトリクスの最適化
 
-カウント、ゲージ、レートの各メトリクスタイプのカスタムメトリクスでは、Metrics without Limits™ のアドバンスモードでオプションで追加の集計を含めることにより、メトリクスの構成をさらに洗練させることができます。デフォルトでは、Datadog は、構成されたメトリクスのクエリの数学的精度を維持するために、メトリクスのタイプに応じて最も頻繁にクエリされる集計の組み合わせを以下に示すように保存します。
+カウント、ゲージ、レートの各メトリクスタイプのカスタムメトリクスでは、Metrics without LimitsTM のアドバンスモードでオプションで追加の集計を含めることにより、メトリクスの構成をさらに洗練させることができます。デフォルトでは、Datadog は、構成されたメトリクスのクエリの数学的精度を維持するために、メトリクスのタイプに応じて最も頻繁にクエリされる集計の組み合わせを以下に示すように保存します。
 
 - 構成されたカウント/レートは `SUM` の時間/空間集計でクエリ可能です
 - 構成されたゲージは `AVG` の時間/空間集計ででクエリ可能です
@@ -167,11 +183,41 @@ Metrics without Limits™ は、Agent やコードレベルの変更を必要と
 
 **注**: カウント、レート、ゲージのメトリクスを構成し、集計を削除すると、既存のダッシュボードやモニターに影響を与える可能性があります。
 
-## その他の参考資料
+### メトリクス起源の定義
+
+以下の表は、ファセットに表示されるメトリクス起源と、そのメトリクスがどこから送信されたかの対応関係を示しています。
+
+| メトリクス起源           | 送信元                                                                |
+| ------------------------| ----------------------------------------------------------------------------- |
+| API カタログ             | Datadog [API Catalog][13] 製品から APIM エンドポイントを介して送信された時系列データ。
+| APM                     | Datadog APM 製品から送信された、トレースやスパンメトリクスにより生成された時系列データ。
+| Agent                   | Datadog Agent によって送信され、[Agent インテグレーション][10]、[組み込みインテグレーション][9]、[DogStatsD][32]、または[カスタム Agent チェック][33]から収集された時系列データ。
+| CSM                     | Datadog [Cloud Security Monitoring][14] 製品から送信された時系列データ。
+| Cloud Integrations      | AWS、Azure、Google Cloud など、各クラウドプロバイダーのインテグレーションから収集された時系列データ。
+| DBM                     | Datadog [Database Monitoring][15] 製品から送信された時系列データ (MySQL、Oracle、Postgres のアクティビティ/クエリ/ロックに関するインサイトを含む)。
+| DSM                     | Datadog [Data Streams Monitoring][16] 製品から送信された時系列データ (DSM スパンやトレースから生成されたメトリクス)。
+| Datadog エクスポーター        | [OpenTelemetry Collector][17] または [Datadog Exporter][18] から送信された時系列データ。
+| Datadog Platform        | [メトリクス使用状況を報告する][11]ために用いられるメトリクスインテークによって送信された時系列データ。
+| イベント                  | Datadog Events プラットフォームから生成された時系列データ。
+| LLM Observability       | `lmobs_to_metrics` サービスを使用して LLM Observability 製品から出力された時系列データ。
+| ログ                    | Datadog [Logs][28] プラットフォームから生成された時系列データ。
+| Metrics API             | Datadog の [OTLP Ingestion エンドポイント][21]および OTel レシーバーを使用して送信され、Datadog インテグレーションに対応するもの、推定使用量メトリクス、または Datadog API クライアント由来の時系列データ。
+| CNM                     | Datadog [Cloud Network Monitoring][19] 製品から送信された時系列データ。
+| Observability Pipelines | Datadog [Observability Pipelines][20] から送信された時系列データ (エラーおよびパフォーマンスメトリクスを含む)。
+| その他                   | DD インテグレーション対応がない時系列データ。
+| プロセス               | Datadog [Processes][22] 製品から生成された時系列データ。
+| RUM                     | Datadog [Real User Monitoring][23] 製品から生成された時系列データ。
+| SAAS Integrations       | Slack、Docker、PagerDuty などの一般的な SaaS プラットフォームから収集された時系列データ。
+| サーバーレス              | Datadog [Serverless][24] プラットフォームから送信された時系列データ (Function、App Services、Cloud Run、Container App Metrics を含む)。
+| サービスカタログ         | Datadog [Service Catalog][25] 製品から送信された時系列データ ([Scorecard][29] メトリクスを含む)。
+| Synthetic Monitoring    | Datadog [Synthetic Monitoring][26] 製品から生成された、Synthetic モニタリングおよび継続的テスト用メトリクス。
+| USM                     | Datadog [Universal Service Monitoring][27] 製品から生成された時系列データ。
+
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[10]: /ja/metrics/metrics-without-limits
+[0]: /ja/metrics/metrics-without-limits
 [1]: https://app.datadoghq.com/metric/summary
 [2]: /ja/metrics/explorer/
 [3]: /ja/dashboards/
@@ -181,3 +227,27 @@ Metrics without Limits™ は、Agent やコードレベルの変更を必要と
 [7]: /ja/metrics/units/
 [8]: /ja/metrics/types/
 [9]: /ja/integrations/
+[10]: /ja/integrations/agent_metrics/
+[11]: /ja/account_management/billing/usage_metrics/
+[12]: /ja/metrics/summary/#metric-origin-definitions
+[13]: /ja/api_catalog/
+[14]: /ja/security/cloud_security_management/
+[15]: /ja/database_monitoring/
+[16]: /ja/data_streams/
+[17]: /ja/opentelemetry/collector_exporter/otel_collector_datadog_exporter/?tab=onahost
+[18]: /ja/opentelemetry/collector_exporter/
+[19]: /ja/network_monitoring/cloud_network_monitoring/
+[20]: /ja/observability_pipelines/
+[21]: /ja/opentelemetry/interoperability/otlp_ingest_in_the_agent/?tab=host
+[22]: /ja/integrations/process/
+[23]: /ja/monitors/types/real_user_monitoring/
+[24]: /ja/serverless/
+[25]: /ja/service_catalog/
+[26]: /ja/synthetics/
+[27]: /ja/universal_service_monitoring/
+[28]: /ja/logs/
+[29]: /ja/service_catalog/scorecards/
+[30]: /ja/metrics/custom_metrics/historical_metrics/#bulk-configuration-for-multiple-metrics
+[31]: /ja/metrics/distributions/#bulk-configuration-for-multiple-metrics
+[32]: /ja/metrics/custom_metrics/dogstatsd_metrics_submission/
+[33]: /ja/metrics/custom_metrics/agent_metrics_submission/

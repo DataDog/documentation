@@ -45,7 +45,7 @@ integration_id: iis
 integration_title: IIS
 integration_version: 2.19.1
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: iis
 public_title: IIS

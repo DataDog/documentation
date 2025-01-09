@@ -1,6 +1,5 @@
 ---
 title: Case Management
-kind: documentation
 aliases:
 - /monitors/case_management/
 further_reading:
@@ -13,6 +12,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/scaling-sensitive-data-scanner/"
   tag: "blog"
   text: "Discover, triage, and remediate sensitive data issues at scale with Sensitive Data Scanner"
+- link: "https://www.datadoghq.com/blog/datadog-service-management/"
+  tag: "Blog"
+  text: "Ensure high service availability with Datadog Service Management"
 algolia:
   tags: ['inbox', 'case management']
 ---
@@ -33,10 +35,13 @@ While investigating, populate the case with graphs, logs, and other telemetry da
 
 ## Getting started
 {{< whatsnext desc="Learn more about case management:">}}
-    {{< nextlink href="/service_management/case_management/projects" >}}Projects{{< /nextlink >}}
     {{< nextlink href="/service_management/case_management/create_case" >}}Create a case{{< /nextlink >}}
+    {{< nextlink href="/service_management/case_management/projects" >}}Projects{{< /nextlink >}}
+    {{< nextlink href="/service_management/case_management/create_notifications_and_third_party_tickets" >}}Create notifications and third party tickets{{< /nextlink >}}
     {{< nextlink href="/service_management/case_management/view_and_manage" >}}View and manage cases{{< /nextlink >}}
-    {{< nextlink href="/service_management/case_management/settings" >}}Manage membership, status transitions, and third-party integrations{{< /nextlink >}}
+    {{< nextlink href="/service_management/case_management/settings" >}}Manage membership and status transitions within projects{{< /nextlink >}}
+    
+
 {{< /whatsnext >}}
 
 ## Further Reading

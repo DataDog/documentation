@@ -12,7 +12,6 @@ further_reading:
 - link: https://github.com/DataDog/dd-trace-dotnet/tree/master/tracer/samples
   tag: GitHub
   text: Exemples d'instrumentation personnalisée
-kind: documentation
 title: Exigences de compatibilité .NET Framework
 type: multi-code-lang
 ---

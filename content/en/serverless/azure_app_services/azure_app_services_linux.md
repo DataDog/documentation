@@ -1,6 +1,5 @@
 ---
 title: Azure App Service - Linux Code
-kind: documentation
 further_reading:
 - link: "https://www.datadoghq.com/blog/monitor-azure-app-service-linux/"
   tag: "Blog"
@@ -20,7 +19,7 @@ This solution uses the startup command setting and Application Settings for Linu
 
 ### Setup
 #### Set application settings
-To instrument your application, begin by adding the following key-value pairs under **Application Settings** in your Azure configuration settings.
+To instrument your application, begin by adding the following key-value pairs under **App settings** in your Azure "Environment variables" settings.
 
 {{< img src="serverless/azure_app_service/application-settings.jpg" alt="Azure App Service Configuration: the Application Settings, under the Configuration section of Settings in the Azure UI. Three settings are listed: DD_API_KEY, DD_SERVICE, and DD_START_APP." style="width:80%;" >}}
 
@@ -60,7 +59,7 @@ Set these values in the `DD_START_APP` environment variable. Examples below are 
 Go to **General settings** and add the following to the **Startup Command** field:
 
 ```
-curl -s https://raw.githubusercontent.com/DataDog/datadog-aas-linux/v1.10.4/datadog_wrapper | bash
+curl -s https://raw.githubusercontent.com/DataDog/datadog-aas-linux/v1.10.13/datadog_wrapper | bash
 ```
 
 {{< img src="serverless/azure_app_service/startup-command-1.jpeg" alt="Azure App Service Configuration: the Stack settings, under the Configuration section of Settings in the Azure UI. Underneath the stack, major version, and minor version fields is a 'Startup Command' field that is populated by the above curl command." style="width:100%;" >}}

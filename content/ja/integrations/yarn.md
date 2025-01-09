@@ -6,6 +6,7 @@ assets:
     hadoop: assets/dashboards/hadoop_dashboard.json
     yarn: assets/dashboards/yarn_dashboard.json
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -19,9 +20,8 @@ assets:
     - java org.apache.hadoop.yarn.server.nodemanager.NodeManager
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 134
     source_type_name: Yarn
-  logs:
-    source: yarn
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
@@ -29,6 +29,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - log collection
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/yarn/README.md
 display_on_public_website: true
@@ -36,9 +37,8 @@ draft: false
 git_integration_title: yarn
 integration_id: yarn
 integration_title: Yarn
-integration_version: 4.3.2
+integration_version: 5.3.1
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: yarn
 public_title: Yarn
@@ -54,14 +54,25 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: クラスター全体の健全性メトリクスを収集し、アプリケーションの進捗状況を追跡。
   media: []
   overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/hadoop-architecture-overview
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/monitor-hadoop-metrics
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/collecting-hadoop-metrics
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/monitor-hadoop-metrics-datadog
   support: README.md#Support
   title: Yarn
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ![Hadoop Yarn][1]
@@ -84,14 +95,14 @@ tile:
 
 YARN チェックは [Datadog Agent][2] パッケージに含まれています。YARN ResourceManager に追加でインストールする必要はありません。
 
-### コンフィギュレーション
+### 構成
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{% tab "ホスト" %}}
 
 #### ホスト
 
-ホストで実行中の Agent に対してこのチェックを構成するには:
+ホストで実行中の Agent に対してこのチェックを構成するには
 
 1. [Agent の構成ディレクトリ][1]のルートにある `conf.d/` フォルダーの `yarn.d/conf.yaml` ファイルを編集します。
 
@@ -126,7 +137,7 @@ YARN チェックは [Datadog Agent][2] パッケージに含まれています�
 [2]: https://github.com/DataDog/integrations-core/blob/master/yarn/datadog_checks/yarn/data/conf.yaml.example
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
-{{% tab "Containerized" %}}
+{{% tab "コンテナ化" %}}
 
 #### コンテナ化
 
@@ -134,11 +145,11 @@ YARN チェックは [Datadog Agent][2] パッケージに含まれています�
 
 | パラメーター            | 値                                                                                   |
 | -------------------- | --------------------------------------------------------------------------------------- |
-| `<インテグレーション名>` | `yarn`                                                                                  |
-| `<初期コンフィギュレーション>`      | 空白または `{}`                                                                           |
-| `<インスタンスコンフィギュレーション>`  | `{"resourcemanager_uri": "http://%%host%%:%%port%%", "cluster_name": "<クラスター名>"}` |
+| `<INTEGRATION_NAME>` | `yarn`                                                                                  |
+| `<INIT_CONFIG>`      | 空白または `{}`                                                                           |
+| `<INSTANCE_CONFIG>`  | `{"resourcemanager_uri": "http://%%host%%:%%port%%", "cluster_name": "<クラスター名>"}` |
 
-##### ログの収集
+##### ログ収集
 
 1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` ファイルでこれを有効にします。
 
@@ -186,7 +197,7 @@ Docker 環境のログを有効にするには、[Docker ログ収集][4]を参�
 
 Yarn チェックには、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 {{< get-service-checks-from-git "yarn" >}}
 
 

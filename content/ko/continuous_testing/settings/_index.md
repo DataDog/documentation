@@ -16,18 +16,17 @@ further_reading:
   tag: 설명서
   text: 신서틱에서 RUM & 세션 리플레이 살펴보기
 - link: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_test
-  tag: 테라폼
+  tag: 외부 사이트
   text: 테라폼으로 테스트 생성 및 관리
-kind: 설명서
 title: 연속 테스트 설정
 ---
 {{< jqmath-vanilla >}}
 
 ## 개요
 
-[신서틱 모니터링 & 연속 테스트 설정 페이지][1]에서 연속 테스트 설정에 접근할 수 있습니다.
+[신서틱 모니터링 & 테스트 설정 페이지][1]에서 연속 테스트 설정에 접근할 수 있습니다.
 
-{{< img src="continuous_testing/continuous_testing_settings_default.png" alt="연속 테스트 기본 설정" style="width:100%;">}}
+{{< img src="continuous_testing/settings/parallelization.png" alt="설정 페이지에서 연속 테스트 병렬화 설정" style="width:100%;">}}
 
 기본적으로 CI/CD 파이프라인에서 실행 중인 모든 테스트는 순차적으로(차례대로) 실행됩니다. 해당 동작을 변경하려면 [병렬화 값](#set-parallelization)을 설정하고 선택 사항을 저장합니다.
 
@@ -60,9 +59,9 @@ $$\text"estimated parallelization" = {\text"average numbers of tests per CI batc
 3. **선택 사항 저장**을 클릭합니다.
 4. 선택 사항을 확인합니다.
 
-{{< img src="continuous_testing/continuous_testing_settings_parallelization.png" alt="연속 테스트 병렬화 설정" style="width:100%;">}}
+{{< img src="continuous_testing/settings/parallelization.png" alt="25개 병렬 연속 테스트 실행 병렬화 설정" style="width:100%;">}}
 
-## 권한 허용
+## 권한
 
 연속 테스트 병렬화를 사용자 지정하려면 `billing_edit` 권한이 있어야 합니다. 
 

@@ -1,6 +1,5 @@
 ---
 title: Troubleshooting Cluster and Endpoint Checks
-kind: documentation
 further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-cluster-agent/"
   tag: "Blog"

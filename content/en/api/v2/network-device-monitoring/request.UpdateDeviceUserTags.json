@@ -1,0 +1,12 @@
+{
+  "data": {
+    "attributes": {
+      "tags": [
+        "tag:test",
+        "tag:testbis"
+      ]
+    },
+    "id": "default_device",
+    "type": "tags"
+  }
+}

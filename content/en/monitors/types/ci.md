@@ -1,6 +1,5 @@
 ---
 title: CI Monitor
-kind: documentation
 aliases:
 - /monitors/monitor_types/ci_pipelines/
 - /monitors/create/types/ci_pipelines/
@@ -12,7 +11,7 @@ further_reading:
 - link: "/monitors/downtimes/"
   tag: "Documentation"
   text: "Schedule a downtime to mute a monitor"
-- link: "/monitors/manage/status/"
+- link: "/monitors/status/"
   tag: "Documentation"
   text: "Check your monitor status"
 - link: "https://www.datadoghq.com/blog/configure-pipeline-alerts-with-ci-monitors/"
@@ -141,7 +140,7 @@ For detailed instructions on the advanced alert options (such as evaluation dela
 
 ### Notifications
 
-For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][4] page.
+For detailed instructions on the **Configure notifications and automations** section, see the [Notifications][4] page.
 
 #### Samples and breaching values top list
 

@@ -3,7 +3,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/azure-container-apps/
   tag: 블로그
   text: 컨테이너 앱 서비스에서 트레이스, 로그 및 커스텀 메트릭 수집
-kind: 설명서
 title: Azure 컨테이너 앱
 ---
 

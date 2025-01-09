@@ -1,6 +1,5 @@
 ---
 title: Widgets
-kind: documentation
 aliases:
     - /graphing/dashboards/widgets
     - /graphing/faq/widgets
@@ -9,6 +8,9 @@ further_reading:
     - link: '/dashboards/guide/context-links/'
       tag: 'Documentation'
       text: 'Custom Links'
+    - link: "https://www.datadoghq.com/blog/observability-pipelines-transform-and-enrich-logs/"
+      tag: "blog"
+      text: "Transform and enrich your logs with Datadog Observability Pipelines"
 
 ---
 
@@ -22,8 +24,6 @@ Widgets are building blocks for your dashboards. They allow you to visualize and
         img="dashboards/widgets/icons/change_light_large.png">}} Change {{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/distribution"
         img="dashboards/widgets/icons/distribution_light_large.png">}} Distribution{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/funnel"
-        img="dashboards/widgets/icons/funnel_light_large.png">}} Funnel{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/geomap" 
         img="dashboards/widgets/icons/geomap_light_large.png">}} Geomap{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/heat_map"
@@ -42,6 +42,8 @@ Widgets are building blocks for your dashboards. They allow you to visualize and
         img="dashboards/widgets/icons/timeseries_light_large.png">}} Timeseries{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/top_list"
         img="dashboards/widgets/icons/top-list_light_large.png">}} Top List{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/wildcard"
+        img="/dashboards/widgets/icons/wildcard_light_large.svg">}} Wildcard{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ### Groups
@@ -52,6 +54,26 @@ Widgets are building blocks for your dashboards. They allow you to visualize and
         img="dashboards/widgets/icons/group_powerpack_light_large.svg">}} Powerpack{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/split_graph"
         img="dashboards/widgets/icons/group-split_light_small.svg">}} Split Graph{{< /nextlink >}}
+{{< /whatsnext >}}
+
+### Product Analytics
+{{< whatsnext desc="Visualize Product Analytics data: ">}}
+    {{< nextlink href="/dashboards/widgets/sankey" 
+        img="dashboards/widgets/icons/sankey_light_large.svg">}} Sankey{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/funnel" 
+        img="dashboards/widgets/icons/funnel_light_large.png">}} Funnel{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/retention" 
+        img="/dashboards/widgets/icons/cohort_light_small.svg">}} Retention{{< /nextlink >}}
+{{< /whatsnext >}}
+
+### Architecture
+{{< whatsnext desc="Visualize infrastructure and architecture data: ">}}
+    {{< nextlink href="/dashboards/widgets/hostmap" 
+        img="dashboards/widgets/icons/host-map_light_large.png">}} Hostmap{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/topology_map" 
+        img="dashboards/widgets/icons/service-map_light_large.png">}} Topology Map{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/service_summary" 
+        img="dashboards/widgets/icons/service-summary_light_large.png">}} Service Summary{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ### Annotations and embeds
@@ -86,16 +108,6 @@ Widgets are building blocks for your dashboards. They allow you to visualize and
         img="dashboards/widgets/icons/run-workflow_light_small.svg">}} Run Workflow{{< /nextlink >}}
 {{< /whatsnext >}}
 
-### Architecture
-{{< whatsnext desc="Visualize infrastructure and architecture data: ">}}
-    {{< nextlink href="/dashboards/widgets/hostmap" 
-        img="dashboards/widgets/icons/host-map_light_large.png">}} Hostmap{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/topology_map" 
-        img="dashboards/widgets/icons/service-map_light_large.png">}} Topology Map{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/service_summary" 
-        img="dashboards/widgets/icons/service-summary_light_large.png">}} Service Summary{{< /nextlink >}}
-{{< /whatsnext >}}
-
 ### Performance and reliability
 {{< whatsnext desc="Site reliability visualizations: ">}}
     {{< nextlink href="/dashboards/widgets/profiling_flame_graph"
@@ -103,7 +115,7 @@ Widgets are building blocks for your dashboards. They allow you to visualize and
     {{< nextlink href="/dashboards/widgets/slo" 
         img="dashboards/widgets/icons/slo-summary_light_large.png">}} Service Level Objective (SLO) Summary{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/slo_list" 
-        img="dashboards/widgets/icons/slo-list_light_large.png">}} Service Level Objective (SLO) List{{< /nextlink >}}
+        img="dashboards/widgets/icons/slo-list_light_large.png">}} Service Level Objective (SLO){{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Full screen

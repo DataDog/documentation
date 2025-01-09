@@ -1,6 +1,5 @@
 ---
 title: Selecting the right colors for your graphs
-kind: guide
 ---
 
 In Datadog graphs, color is the primary method by which you can distinguish between series of data. Selecting the right color for your graph ensures that your teammates can parse data in your graphs, draw insights, and troubleshoot effectively.

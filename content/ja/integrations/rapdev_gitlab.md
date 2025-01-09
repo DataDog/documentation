@@ -30,6 +30,7 @@ categories:
 - マーケットプレイス
 - クラウド
 - メトリクス
+custom_kind: integration
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -38,7 +39,6 @@ integration_id: rapdev-gitlab
 integration_title: GitLab
 integration_version: ''
 is_public: true
-kind: integration
 legal_terms:
   eula: assets/EULA.pdf
 manifest_version: 2.0.0
@@ -98,7 +98,7 @@ GitLab は、ソフトウェアの開発、セキュリティ、運用の機能�
 + インストールしたランナー
 + 合計および未解決の問題
 
-### ライブラリ
+### ダッシュボード
 このインテグレーションは、**RapDev GitLab Dashboard** と呼ばれるすぐに使えるダッシュボードを提供します。これは、Datadog に送信されたデータを表示し、特定のプロジェクトやホストの検索をさらに絞り込むための環境変数が含まれています。
 
 ## Agent

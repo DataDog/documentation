@@ -1,6 +1,5 @@
 ---
 title: Error Tracking for Logs
-kind: documentation
 description: Learn about Error Tracking for Log Management.
 is_beta: true
 further_reading:
@@ -20,11 +19,11 @@ further_reading:
 
 ## Overview
 
-{{< img src="logs/error_tracking/logs-error-tracking-explorer.png" alt="The details of an issue in the Error Tracking Explorer" style="width:100%;" >}}
+{{< img src="error_tracking/error-tracking-overview-2.png" alt="The details of an issue in the Error Tracking Explorer" style="width:100%;" >}}
 
 {{% error-tracking-description %}}
 
-Take a tour of key Error Tracking features in the [Error Tracking Explorer][3] documentation. To view the Error Tracking Explorer for Logs in Datadog, navigate to [**Logs** > **Error Tracking**][1].
+Take a tour of key Error Tracking features in the [Error Tracking Explorer][3] documentation. To view the Error Tracking Explorer for Logs in Datadog, navigate to [**Error Tracking**][1].
 
 ## Setup
 
@@ -39,6 +38,6 @@ Error Tracking for Logs processes properly configured error logs with stack trac
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/logs/error-tracking
+[1]: https://app.datadoghq.com/error-tracking
 [2]: /logs/log_collection
 [3]: /error_tracking/explorer

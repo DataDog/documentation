@@ -1,6 +1,5 @@
 ---
 title: Log Management
-kind: Documentation
 description: "Configure your Datadog Agent to gather logs from your host, containers & services."
 disable_sidebar: true
 aliases:
@@ -38,10 +37,22 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/filter-logs-by-subqueries-with-datadog/"
     tag: "Blog"
     text: "Filter and correlate logs dynamically using Subqueries"
+  - link: "https://www.datadoghq.com/blog/monitor-dns-logs-for-network-and-security-datadog/"
+    tag: "Blog"
+    text: "Monitor DNS logs for network and security analysis"
+  - link: "https://www.datadoghq.com/architecture/a-guide-to-log-management-indexing-strategies-with-datadog/"
+    tag: "Architecture Center"
+    text: "A guide to Log Management Indexing Strategies with Datadog"
 cascade:
     algolia:
         rank: 70
+algolia:
+    tags: ['logs']
 ---
+
+{{< learning-center-callout header="Join an enablement webinar session" hide_image="true" btn_title="Sign Up" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=Logs">}}
+  Join an introductory or intermediate enablement session to learn how Datadog Log Management unifies logs, metrics, and traces in a single view, giving you rich context for analyzing log data.
+{{< /learning-center-callout >}}
 
 ## Overview
 
@@ -79,6 +90,8 @@ Leverage the pillars of observability by connecting your logs to metrics and tra
 ## Explore
 
 Start exploring your ingested logs in the [Log Explorer][1].
+
+**Tip**: To open the Log Explorer from Datadog's global search, press <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>K</kbd> and search for `logs`.
 
 {{< img src="/logs/explore.png" alt="Explore your ingested logs" style="width:80%;">}}
 

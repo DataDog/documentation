@@ -1,10 +1,8 @@
 ---
 title: Enabling Dynamic Instrumentation
-kind: Documentation
 type: multi-code-lang
 aliases:
     - /tracing/dynamic_instrumentation/enabling/
-is_beta: false
 private: false
 further_reading:
     - link: '/agent/'
@@ -18,7 +16,7 @@ Select your runtime below to learn how to enable Dynamic Instrumentation for you
 
 {{< partial name="dynamic_instrumentation/dynamic-instrumentation-languages.html" >}}
 
-## Further Reading
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 

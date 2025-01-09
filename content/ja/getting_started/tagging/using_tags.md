@@ -12,7 +12,6 @@ further_reading:
 - link: /getting_started/tagging/assigning_tags/
   tag: ドキュメント
   text: タグの割り当て方法
-kind: ドキュメント
 title: タグの使用方法
 ---
 
@@ -27,18 +26,18 @@ title: タグの使用方法
 
 ## イベント
 
-[イベントエクスプローラー][2]は、指定された期間の環境からのイベントを表示します。タグを使用して、イベントリストをフィルターし、イベントのサブセットに焦点を当てることができます。`tags:` の後にタグを入力すると、そのタグを持つホスト、[インテグレーション][3]、またはサービスからのすべてのイベントを見ることができます。例えば、`service:coffee-house` というタグを検索するには、`tags:service:coffee-house` を使用します。
+[イベントエクスプローラー][2]は、指定された期間の環境からのイベントを表示します。タグを使用して、イベントリストをフィルターし、イベントのサブセットに焦点を当てることができます。`tags:` の後にタグを入力すると、そのタグを持つホスト、[インテグレーション][3]、またはサービスからのすべてのイベントを見ることができます。例えば、`service:coffee-house` というタグを検索するには、`tags:(service:coffee-house)` を使用します。
 
-複数のタグを包括的に検索する場合は、括弧を使用し、各タグを OR で区切ってください: `tags:(service:coffee-house OR host:coffeehouseprod)`。複数のタグを排他的に検索するには、各タグを AND で区切ってください: `tags:(service:coffee-house AND host:coffeehouseprod)`。
+複数のタグを包括的に検索する場合は、各タグを OR で区切ってください: `tags:(service:coffee-house OR host:coffeehouseprod)`。複数のタグを排他的に検索するには、各タグを AND で区切ってください: `tags:(service:coffee-house AND host:coffeehouseprod)`。
 
-## ダッシュボード  
+## ダッシュボード
 
 {{< tabs >}}
 {{% tab "Assignment" %}}
 
-タグを使用し、メトリクスを絞り込んで[ダッシュボード グラフ][1]に表示するか、表示するメトリクスのグループを作成します。表示するメトリクスを絞り込むには、**from** テキストボックスにタグを入力します。こうすることで、選択したメトリクスに、この特定のタグ (この例では `service:coffee-house`) が割り当てられたすべてのソースが表示されます。
+タグを使用し、メトリクスを絞り込んで[ダッシュボード グラフ][1]に表示するか、表示するメトリクスのグループを作成します。表示するメトリクスを絞り込むには、**from** テキストボックスにタグを入力します。このメトリクスに、この特定のタグ (この例では `service:web-store`) が割り当てられたすべてのソースが表示されます。
 
-{{< img src="tagging/using_tags/dashboardtags_1.png" alt="ダッシュボードの from テキストボックスに入力されたタグ" style="width:80%;">}}
+{{< img src="tagging/using_tags/dashboards_tags_example.png" alt="'from' フィールドにタグを追加することで、ダッシュボードのメトリクスをフィルタリング。この例では、メトリクスが 'service:web-store' でフィルタリングされています" style="width:80%;">}}
 
 高度なタグ値のフィルタリングはブールフィルターでも使用できます。次のブール構文がサポートされます。
 
@@ -50,24 +49,24 @@ title: タグの使用方法
 
 `AND`、`OR` を使用して、特定のタグ全体のメトリクスを確認します。
 
-{{< img src="tagging/using_tags/dashboard_boolean_1.png" alt="AND/OR を使用したブールフィルター" style="width:80%;">}}
+{{< img src="tagging/using_tags/dashboard_advanced_tags_AND_OR.png" alt="AND/OR を使用したブールフィルター" style="width:80%;">}}
 
 `IN`、`NOT IN` を使用して、メトリクスを特定のタグにフィルタリングします。
 
-{{< img src="tagging/using_tags/dashboards_boolean_2.png" alt="IN/NOT IN によるブールフィルター" style="width:80%;">}}
+{{< img src="tagging/using_tags/dashboard_advanced_tags_NOT_IN.png" alt="IN/NOT IN を使用したブールフィルター" style="width:80%;">}}
 
-タグを使用して集計されたグループを作成するには、**avg by** テキストボックスにタグのキー部分を入力します。たとえば、`service:coffee-house` のようにキー `service` でタグ付けされたメトリクスを表示する時系列グラフでは、**avg by** テキストボックスに `service` を入力すると、`service` のタグ値ごとに 1 つの行が表示されます。各行は、この `service` タグ値を共有するすべてのソースの平均のメトリクス値を表します。
+タグを使用して集計されたグループを作成するには、**avg by** テキストボックスにタグのキー部分を入力します。たとえば、`service:web-store` のようにキー `service` でタグ付けされたメトリクスを表示する時系列グラフでは、**avg by** テキストボックスに `service` を入力すると、`service` のタグ値ごとに 1 つの行が表示されます。各行は、この `service` タグ値を共有するすべてのソースの平均のメトリクス値を表します。
 
-{{< img src="tagging/using_tags/dashboardtags.png" alt="ダッシュボードの avg by テキストボックスに入力されたタグ" style="width:80%;">}}
+{{< img src="tagging/using_tags/dashboard_group_by_tags.png" alt="ダッシュボードの avg by テキストボックスに入力されたタグ" style="width:80%;">}}
 
 タグを使用して、ダッシュボードでイベントを重ねることもできます。これは、[イベントエクスプローラー][2]と同じように機能します。
-`tags:` に続けてタグを入力します。一致するイベントは、縦棒としてグラフに重なります。以下の例は、`tags:service:coffee-house` を使用します。
+一致するイベントは、縦棒としてグラフに重なります。以下の例は、`service:web-store` を使用します。
 
-{{< img src="tagging/using_tags/dashboardeventtags.png" alt="ダッシュボードでのイベントオーバーレイ" style="width:80%;">}}
+{{< img src="tagging/using_tags/dashboard_event_overlays.png" alt="タグを使用してダッシュボードでイベントオーバーレイを追加" style="width:80%;">}}
 
 ダッシュボードのグラフの **from** タグの切り替え時間を短縮するには、[テンプレート変数][3]を使用します。以下の例では、`service` を使用して `service` タグキーを表します。テンプレート変数を使用するには、グラフ クエリの **from** テキストボックスに `$service` テンプレート変数を追加します。
 
-{{< img src="tagging/using_tags/dashboardtemplatevariables.png" alt="ダッシュボードテンプレート変数" style="width:80%;">}}
+{{< img src="tagging/using_tags/dashboard_dynamic_template_variables.png" alt="ダッシュボードテンプレート変数" style="width:80%;">}}
 
 [1]: /ja/dashboards/
 [2]: /ja/events/
@@ -75,17 +74,17 @@ title: タグの使用方法
 {{% /tab %}}
 {{% tab "Examples" %}}
 
-以下は、時系列チャートエディターを使用したタグの例です。最初のスクリーンショットでは、タグは適用されていません。すべてのホストでの平均 CPU 使用率が表示されます。
+以下は、時系列グラフエディターを使用したタグの例です。最初のスクリーンショットでは、タグは適用されていません。すべてのホストでの平均 CPU 使用率が表示されます。
 
-{{< img src="tagging/using_tags/Tags_1.png" alt="Tags_1" style="width:75%;">}}
+{{< img src="tagging/using_tags/dashboard_timeseries_graph_editor_no_tags.png" alt="タグが追加されていない時系列グラフエディター" style="width:75%;">}}
 
 次に、タグ (`region:eastus`) を **from** テキストボックスに含めるようにエディターを更新します。これにより、Datadog は米国東部リージョンでの CPU 使用率を参照できます。この例では `region` タグを使用しますが、`application`、`service`、`environment` など、Datadog プラットフォームに送信された任意のタグを使用できます。
 
-{{< img src="tagging/using_tags/Tags_2.png" alt="Tags_2" style="width:75%;">}}
+{{< img src="tagging/using_tags/dashboard_timeseries_graph_editor_from_tag.png" alt="'region:us-east-1' タグでフィルタリングされた時系列グラフエディター" style="width:75%;">}}
 
-最後に、2 番目の空フィールド (**avg by** テキストボックス) を使用して、各 `host` の個別の時系列線を表示します。米国東部リージョンで実行されている個別のホストのサーバー CPU が表示されます。
+最後に、2 番目の空フィールド (**avg by** テキストボックス) を使用して、各 `host` の個別の時系列ラインを表示します。米国東部リージョンで実行されている各ホストのサーバー CPU 使用率が表示されます。
 
-{{< img src="tagging/using_tags/Tags_3.png" alt="Tags_3" style="width:75%;">}}
+{{< img src="tagging/using_tags/dashboard_timeseries_graph_editor_sumby_tag.png" alt="'region:us-east-1' でフィルタリングされ、'host' でグループ化された時系列グラフエディター" style="width:75%;">}}
 
 必要に応じて、タグを追加して範囲をさらに絞り込みます。たとえば、`region:eastus` や `env:production` のホストなどです。タグは Datadog 全体で使用でき、すべてのコア要素 (メトリクス、トレース、ログ) に適用されます。
 
@@ -110,27 +109,27 @@ title: タグの使用方法
 
 {{% tab "Infrastructure List" %}}
 
-以下は、インフラストラクチャーリストページのテキストボックスによる絞り込みまたはグループ化です。
+以下は、インフラストラクチャーリストページのフィルターおよびグループ化用テキストボックスです。
 
 {{< img src="tagging/using_tags/infrastructuretags.png" alt="インフラストラクチャーリストにあるタグ" style="width:80%;">}}
 {{% /tab %}}
 
 {{% tab "Containers" %}}
 
-以下は、ライブコンテナページのテキストボックスによる絞り込みまたはグループ化です。
+以下は、ライブコンテナページのフィルターおよびグループ化用テキストボックスです。
 
 {{< img src="tagging/using_tags/livecontainertags.png" alt="ライブコンテナタグ" style="width:80%;">}}
 {{% /tab %}}
 
 {{% tab "Processes" %}}
 
-以下は、ライブプロセスページのテキストボックスによる絞り込みまたはグループ化です。
+以下は、ライブプロセスページのフィルターおよびグループ化用テキストボックスです。
 
 {{< img src="tagging/using_tags/liveprocessestags.png" alt="ライブプロセスタグ" style="width:80%;">}}
 {{% /tab %}}
 {{< /tabs >}}
 
-## アラート設定
+## モニター
 
 [割り当てられたタグ][32]によってモニターや[モニターのダウンタイム][31]を絞り込むには、検索バーかファセットのチェックボックスを使用します。検索バーの形式は `tag:<キー>:<値>` で、`tag:service:coffee-house` などです。特定のタグを持つモニターを検索から除外するには、 `-` を使用して、`tag:-service:coffee-house` とします。
 
@@ -182,7 +181,7 @@ AWS のタグ付けに関する詳細は、[EC2][2] および [Lambda][3] ドキ
 
 [Azure インテグレーションタイル][1] には、`Optionally filter to VMs with tag` というタグフィルターがあります。
 
-このフィールドでは、Azure VM からメトリクスを収集する際に使用されるフィルターを定義する、カンマ区切りのタグのリスト（`<KEY>:<VALUE>` 形式）を受け付けます。`?` (1 文字の場合) や `*` (複数文字の場合) などのワイルドカードも使用できます。定義されたタグのいずれかに一致する VM だけが Datadog にインポートされ、それ以外は無視されます。
+このフィールドでは、Azure VM からメトリクスを収集する際に使用されるフィルターを定義する、カンマ区切りのタグのリスト (`<KEY>:<VALUE>` 形式) を受け付けます。`?` (1 文字の場合) や `*` (複数文字の場合) などのワイルドカードも使用できます。定義されたラベルのいずれかに一致する VM だけが Datadog にインポートされ、それ以外は無視されます。
 
 特定のタグと一致する VM は、タグの前に `!` を加えることで除外することもできます。たとえば、
 
@@ -196,7 +195,7 @@ datadog:monitored,env:production,!env:staging,instance-type:c1.*
 
 [Google Cloud インテグレーションタイル][1] には、タグフィルター `to hosts with tag` があります。
 
-このフィールドでは、GCP からメトリクスを収集する際に使用されるフィルターを定義する、カンマ区切りの GCP ラベルのリスト（`<KEY>:<VALUE>` 形式）を受け付けます。`?` (1 文字の場合) や `*` (複数文字の場合) などのワイルドカードも使用できます。定義されたタグのいずれかに一致するホストだけが Datadog にインポートされ、それ以外は無視されます。
+このフィールドでは、GCP からメトリクスを収集する際に使用されるフィルターを定義する、カンマ区切りの GCP ラベルのリスト (`<KEY>:<VALUE>` 形式) を受け付けます。`?` (1 文字の場合) や `*` (複数文字の場合) などのワイルドカードも使用できます。定義されたタグのいずれかに一致するホストだけが Datadog にインポートされ、それ以外は無視されます。
 
 特定のラベルと一致するホストは、タグの前に `!` を加えることで除外することができます。たとえば、
 
@@ -248,36 +247,11 @@ datadog:monitored,env:production,!env:staging,instance-type:c1.*
 
 {{< img src="tagging/using_tags/notebooktagsexclude.mp4" alt="ノートブック除外タグ" video="true" width="80%">}}
 
-## ログ管理
+## Logs
 
 ログ[検索][10]、[分析][11]、[パターン][12]、[Live Tail][13]は、検索バーまたはファセットのチェックボックスを使用して、タグでログを絞り込みます。検索バーの形式は `<KEY>:<VALUE>` で、`service:coffee-house` などです。高度な検索については、[ログ検索][10]を参照してください。
 
-{{< tabs >}}
-{{% tab "Search" %}}
-
-{{< img src="tagging/using_tags/logsearchtags.png" alt="ログ検索タグ" style="width:80%;">}}
-
-{{% /tab %}}
-{{% tab "Analytics" %}}
-
-{{< img src="tagging/using_tags/loganalyticstags.png" alt="ログ分析タグ" style="width:80%;">}}
-
-{{% /tab %}}
-{{% tab "Patterns" %}}
-
-{{< img src="tagging/using_tags/logpatternstags.png" alt="Log Patterns タグ" style="width:80%;">}}
-
-{{% /tab %}}
-{{% tab "Live Tail" %}}
-
-{{< img src="tagging/using_tags/livetailtags.mp4" alt="Live Tail タグ" video="true" width="80%">}}
-
-{{% /tab %}}
-{{< /tabs >}}
-
-さらに、タグを使用してログ [パイプライン][14]を絞り込みます。以下の例では、パイプラインはタグ `service:coffee-house` でログを絞り込みます。
-
-{{< img src="tagging/using_tags/logpipelinetags.png" alt="パイプラインタグ" style="width:80%;">}}
+さらに、タグはログの [Pipeline][14] をフィルタリングするために使用されます。例えば、coffee-house サービスのログのみをパイプラインに通したい場合は、フィルターフィールドにタグ `service:coffee-house` を追加してください。
 
 ## RUM & セッションリプレイ
 
@@ -304,7 +278,7 @@ RUM のイベントデータをタグでフィルターするには、検索バ�
 {{% /tab %}}
 {{% tab "エクスプローラー" %}}
 
-[Synthetic Monitoring & Continuous Testing Explorer][1] は、[CI パイプライン][2]内のテスト実行や実行のバッチを表示します。
+[Synthetic Monitoring & Testing Results Explorer][1] は、[CI パイプライン][2]内でのテスト実行や実行のバッチを表示します。
 
 テスト実行をタグでフィルターするには、検索バーまたはファセットチェックボックスを使用します。検索バーのフォーマットは `<KEY>:<VALUE>` で、例えば `@ci.provider.name:github` のようになります。詳細な検索については、[テストバッチを検索する][3]を参照してください。
 
@@ -338,8 +312,6 @@ SLO タグは、SLO の基礎となるメトリクスまたはモニターで使
 * これらのタグのみにメトリクス範囲を制限する **from** テキストボックス。
 * SLO 全体と各タグ値のステータス割合および残りのエラーバジェットを表示する、グループ化されたメトリクスベースの SLO を作成するための **sum by** テキストボックス。
 
-{{< img src="tagging/using_tags/metric_based_slo_tags.png" alt="メトリクスベースの SLO タグ" style="width:80%;">}}
-
 [1]: /ja/service_management/service_level_objectives/metric/
 {{% /tab %}}
 {{% tab "Monitor-based SLOs" %}}
@@ -350,6 +322,35 @@ SLO タグは、SLO の基礎となるメトリクスまたはモニターで使
 
 [1]: /ja/service_management/service_level_objectives/monitor/
 [2]: /ja/getting_started/tagging/using_tags/?tab=newmonitor#monitors
+{{% /tab %}}
+{{< /tabs >}}
+
+## CI Visibility
+
+{{< tabs >}}
+{{% tab "テスト実行" %}}
+
+[CI Visibility Explorer][101] は、CI パイプラインで実行されているテストランを表示します。
+
+テストランをタグでフィルターするには、検索バーまたはファセットチェックボックスを使用します。検索バーのフォーマットは `<KEY>:<VALUE>` で、例えば `@test.status:failed` のようになります。詳細な検索については、[Test Optimization Explorer の検索構文][102]を参照してください。
+
+{{< img src="/continuous_integration/test_runs.png" alt="CI Visibility Explorer のテストラン" style="width:80%;">}}
+
+[101]: https://app.datadoghq.com/ci/test-runs
+[102]: /ja/tests/explorer/search_syntax
+
+{{% /tab %}}
+{{% tab "パイプラインの実行" %}}
+
+[CI Visibility Explorer][101] は、CI パイプラインの実行を表示します。
+
+パイプライン実行をタグでフィルターするには、検索バーまたはファセットチェックボックスを使用します。検索バーのフォーマットは `<KEY>:<VALUE>` で、例えば `@ci.provider.name:gitlab` のようになります。詳細な検索については、[CI パイプラインの検索と管理][102]を参照してください。
+
+{{< img src="/continuous_integration/pipeline_executions.png" alt="CI Visibility Explorer のパイプライン実行" style="width:80%;">}}
+
+[101]: https://app.datadoghq.com/ci/pipeline-executions
+[102]: /ja/continuous_testing/explorer/search/
+
 {{% /tab %}}
 {{< /tabs >}}
 

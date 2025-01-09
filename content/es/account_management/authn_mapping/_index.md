@@ -6,7 +6,6 @@ further_reading:
 - link: /account_management/rbac/log_management/
   tag: Documentación
   text: Control de acceso basado en roles para gestionar logs
-kind: documentación
 title: API para asignar atributos de autenticación federada a un rol
 ---
 

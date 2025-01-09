@@ -22,6 +22,8 @@ author:
   support_email: help@datadoghq.com
 categories:
 - OS & システム
+- windows
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/winkmem/README.md
 display_on_public_website: true
@@ -31,7 +33,6 @@ integration_id: winkmem
 integration_title: Windows Kernel Memory
 integration_version: ''
 is_public: true
-kind: integration
 manifest_version: 2.0.0
 name: winkmem
 public_title: Windows Kernel Memory
@@ -43,6 +44,8 @@ tile:
   classifier_tags:
   - Supported OS::Windows
   - Category::OS & System
+  - カテゴリー::Windows
+  - Offering::Integration
   configuration: README.md#Setup
   description: Windows カーネルのメモリ割り当てを監視します。
   media: []
@@ -60,13 +63,13 @@ Datadog で視覚化とモニターを作成するために、Windows カーネ�
 
 **注:** このインテグレーションによって収集されるメトリクスのリストは、マイナーな Agent のバージョン間で変更される可能性があります。そのような変更は、Agent の変更履歴に記載されない場合があります。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 Windows Kernel Memory インテグレーションは [Datadog Agent][1] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 
-### ブラウザトラブルシューティング
+### 構成
 
 1. [Agent のコンフィギュレーションディレクトリ][2]のルートにある `conf.d/` フォルダーの `winkmem.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル winkmem.d/conf.yaml.example][3] を参照してください。
 
@@ -76,21 +79,21 @@ Windows Kernel Memory インテグレーションは [Datadog Agent][1] パッ�
 
 [Agent の status サブコマンドを実行][5]し、Checks セクションで `winkmem` を探します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "winkmem" >}}
 
 
-### ヘルプ
+### イベント
 
 Windows Kernel Memory インテグレーションには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 
 Windows Kernel Memory インテグレーションには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][6]までお問合せください。
 

@@ -6,7 +6,6 @@ further_reading:
 - link: /security/explorer/
   tag: Documentation
   text: Commencer à étudier les signaux dans le Signals Explorer
-kind: guide
 title: Automatiser la correction des menaces détectées grâce aux webhooks
 ---
 

@@ -1,7 +1,6 @@
 ---
 aliases:
 - /ko/tracing/faq/trace-agent-from-source/
-kind: 가이드
 title: 소스에서 트레이스 에이전트 설치하기
 ---
 

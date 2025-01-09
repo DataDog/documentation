@@ -23,11 +23,9 @@ assets:
       metadata_path: assets/service_checks.json
     source_type_id: 10259
     source_type_name: Traffic Server
-  logs:
-    source: traffic_server
   monitors:
-    '[Traffic Server] 4xx Errors higher than usual': assets/monitors/4xx.json
-    '[Traffic Server] 5xx Errors higher than usual': assets/monitors/5xx.json
+    4xx errors number is high: assets/monitors/4xx.json
+    5xx errors number is high: assets/monitors/5xx.json
   saved_views:
     traffic_server_error_logs: assets/saved_views/traffic_server_error_logs.json
     traffic_server_overview: assets/saved_views/traffic_server_overview.json
@@ -40,6 +38,7 @@ author:
 categories:
 - キャッシュ
 - ログの収集
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/traffic_server/README.md
 display_on_public_website: true
@@ -47,9 +46,8 @@ draft: false
 git_integration_title: traffic_server
 integration_id: traffic-server
 integration_title: Traffic Server
-integration_version: 2.2.0
+integration_version: 3.1.0
 is_public: true
-kind: integration
 manifest_version: 2.0.0
 name: traffic_server
 public_title: Traffic Server
@@ -66,6 +64,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: 接続、キャッシュ、DNS のメトリクスの監視
   media: []
@@ -89,11 +88,11 @@ Datadog-Apache Traffic Server インテグレーションを有効にすると�
 - システムログ、エラーログを監視する。
 
 
-## 計画と使用
+## セットアップ
 
 ホストで実行されている Agent 用にこのチェックをインストールおよび構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][2]のガイドを参照してこの手順を行ってください。
 
-### インフラストラクチャーリスト
+### インストール
 
 Traffic Server チェックは [Datadog Agent][3] パッケージに含まれています。
 
@@ -103,7 +102,7 @@ Traffic Server で監視を有効にするには、Traffic Server で [Stats Ove
 stats_over_http.so
 ```
 
-### ブラウザトラブルシューティング
+### 構成
 
 1. Traffic Server のパフォーマンスデータの収集を開始するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `traffic_server.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル sample traffic_server.d/conf.yaml][5] を参照してください。
 
@@ -130,13 +129,13 @@ stats_over_http.so
 
 [Agent の `status` サブコマンドを実行][7]し、Checks セクションで `traffic_server` を探します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "traffic_server" >}}
 
 
-### 収集データ
+### ログ収集
 
 _Agent バージョン 6.0 以降で利用可能_
 
@@ -163,15 +162,15 @@ _Agent バージョン 6.0 以降で利用可能_
         source: traffic_server
    ```
 
-### ヘルプ
+### イベント
 
 Traffic Server インテグレーションには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 {{< get-service-checks-from-git "traffic_server" >}}
 
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][12]までお問合せください。
 

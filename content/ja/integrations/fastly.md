@@ -18,10 +18,10 @@ assets:
     source_type_id: 57
     source_type_name: Fastly
   monitors:
-    '[Fastly] 5xx Errors higher than usual for service: {{service.name}}': assets/monitors/rec_monitor_5xx_errors.json
-    '[Fastly] Abnormal bandwidth being sent for service: {{service.name}}': assets/monitors/rec_monitor_bandwidth.json
-    '[Fastly] High volume of requests triggering a Web Application Firewall rule on service: {{service.name}}': assets/monitors/waf_rules.json
-    '[Fastly] Low Hit Ratio for service: {{service.name}}': assets/monitors/rec_monitor_hit_ratio.json
+    5XX errors are higher than usual: assets/monitors/rec_monitor_5xx_errors.json
+    'Hit Ratio is low ': assets/monitors/rec_monitor_hit_ratio.json
+    Sent bandwidth is abnormally high: assets/monitors/rec_monitor_bandwidth.json
+    Web application firewall rule is triggered: assets/monitors/waf_rules.json
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
@@ -31,6 +31,7 @@ categories:
 - caching
 - log collection
 - metrics
+custom_kind: インテグレーション
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -39,7 +40,6 @@ integration_id: fastly
 integration_title: Fastly
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: fastly
 public_title: Fastly
@@ -51,10 +51,18 @@ tile:
   - Category::キャッシュ
   - Category::ログの収集
   - Category::Metrics
+  - Offering::Integration
   configuration: README.md#Setup
   description: Fastly のキーメトリクスを Datadog の他のメトリクスと関連付けて表示します。
   media: []
   overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/monitor-fastly-performance-metrics/
+  - resource_type: その他
+    url: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/integration_fastly_account
+  - resource_type: その他
+    url: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/integration_fastly_service
   support: README.md#Troubleshooting
   title: Fastly
 ---
@@ -68,13 +76,13 @@ Fastly を Datadog に接続して、Fastly のキーメトリクス (キャッ�
 
 このインテグレーションには、即座に使用可能なモニターとダッシュボードが含まれており、それによってメトリクスを総合的に表示し、Fastly メトリクスと関連ログとの間で比較し、メトリクスがユーザー定義のしきい値を超えたり異常な振る舞いを示したりした際に通知するモニターを作成することが可能です。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 必要なインストール手順はありません。
 
-### ブラウザトラブルシューティング
+### 構成
 
 #### メトリクスの収集
 
@@ -88,7 +96,7 @@ ServiceID は英数字のコードです。例: <code>5VqE6MOOy1QFJbgmCK41pY</co
 
 アカウント名はアカウントの整理に使用されるものであり、データ取り込みプロセスには使用されません。
 
-#### 収集データ
+#### ログ収集
 
 
 {{< site-region region="us3" >}}
@@ -122,7 +130,7 @@ Fastly ログを Datadog に転送するように Datadog エンドポイント�
 ##### Syslog エンドポイントの構成
 
 1. エンドポイントに名前を付けます (例: `Datadog`)。
-2. ログ形式を構成して、推奨される[Datadog-Fastly ログ形式][2]の先頭に[Datadog API キー][3]を含めます。
+2. ログ形式を構成して、推奨される[Datadog-Fastly ログ形式][2]の先頭に[Datadog API キー][3]を含めます。例については、Fastly のドキュメントの [JSON ログ形式の使用][2]を参照してください。
 
     ```text
     <DATADOG_API_KEY> <DATADOG_FASTLY_LOG_FORMAT>
@@ -137,7 +145,7 @@ Fastly ログを Datadog に転送するように Datadog エンドポイント�
 7. Advanced options セクションで、**log line format** として `Blank` を選択します。
 8. 最後に、エンドポイントを保存し、サービスをデプロイします。[Datadog のログエクスプローラー][5] でログを確認できます。
 
-[2]: https://docs.datadoghq.com/resources/json/fastly_format.json
+[2]: https://docs.fastly.com/en/guides/log-streaming-datadog#using-the-json-logging-format
 [3]: https://app.datadoghq.com/organization-settings/api-keys
 [4]: https://docs.fastly.com/guides/streaming-logs/useful-variables-to-log
 [5]: https://app.datadoghq.com/logs
@@ -145,25 +153,25 @@ Fastly ログを Datadog に転送するように Datadog エンドポイント�
 {{< /site-region >}}
 
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "fastly" >}}
 
 
-### ヘルプ
+### イベント
 
 Fastly インテグレーションには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 
 Fastly インテグレーションには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
 
-## その他の参考資料
+## 参考資料
 
 - [Datadog を使用した Fastly パフォーマンスの監視][4]
 - [Terraform による Fastly アカウントの作成と管理][5]

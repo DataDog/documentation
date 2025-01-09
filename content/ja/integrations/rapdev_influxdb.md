@@ -33,6 +33,7 @@ categories:
 - data stores
 - マーケットプレイス
 - メトリクス
+custom_kind: integration
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -41,7 +42,6 @@ integration_id: rapdev-influxdb
 integration_title: InfluxDB
 integration_version: ''
 is_public: true
-kind: integration
 legal_terms:
   eula: assets/EULA.pdf
 manifest_version: 2.0.0
@@ -97,7 +97,7 @@ tile:
 
 このインテグレーションは、[InfluxDB][1] v2.0+ の健全性と運用に関するメトリクスを報告します。
 
-### ライブラリ
+### ダッシュボード
 
 このインテグレーションでは、**InfluxDB Summary**、**InfluxDB API Statistics**、**InfluxDB System**、**InfluxDB Tasks and Services** という名前の、すぐに使えるダッシュボードをいくつか 提供します。これらのダッシュボードは、インテグレーションによって生成されたメトリクスを表示し、異なるカテゴリーに分割します。
 

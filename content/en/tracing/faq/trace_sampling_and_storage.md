@@ -1,7 +1,5 @@
 ---
 title: Trace Sampling and Storage
-kind: documentation
-is_beta: true
 aliases:
     - /tracing/faq/traces-sampling-and-storage/
     - /tracing/faq/how-long-is-tracing-data-stored/

@@ -11,7 +11,6 @@ further_reading:
 - link: /agent/troubleshooting/send_a_flare/
   tag: 설명서
   text: Agent Flare 보내기
-kind: 설명서
 title: 자동탐지 트러블슈팅
 ---
 

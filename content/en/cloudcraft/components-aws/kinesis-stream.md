@@ -1,6 +1,5 @@
 ---
 title: "Kinesis Stream Component"
-kind: documentation
 ---
 ## Overview
 

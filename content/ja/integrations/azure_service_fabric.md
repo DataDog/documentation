@@ -2,6 +2,7 @@
 categories:
 - cloud
 - azure
+custom_kind: integration
 dependencies: []
 description: Azure Service Fabric からメトリクスを追跡する
 doc_link: https://docs.datadoghq.com/integrations/azure_service_fabric/
@@ -12,7 +13,6 @@ integration_id: azure-service-fabric
 integration_title: Microsoft Azure Service Fabric
 integration_version: ''
 is_public: true
-kind: integration
 manifest_version: '1.0'
 name: azure_service_fabric
 public_title: Datadog-Microsoft Azure Service Fabric インテグレーション
@@ -25,8 +25,8 @@ version: '1.0'
 
 Azure Service Fabric は、スケーラブルで信頼性の高いマイクロサービスとコンテナをパッケージ化、デプロイ、管理するために使用される分散型システムプラットフォームです。
 
-## 計画と使用
-### インフラストラクチャーリスト
+## セットアップ
+### インストール
 
 [Microsoft Azure インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。
 
@@ -64,20 +64,20 @@ Azure CLI にログインし、更新されたコマンドを実行して、ク�
 
 別のインストール方法は、Datadog Azure 仮想マシン拡張機能を Service Fabric クラスターの [ARM テンプレート][4]に直接追加することです。
 
-## リアルユーザーモニタリング
-### データセキュリティ
+## 収集データ
+### メトリクス
 
 Datadog Agent は Service Fabric クラスター内のノードにインストールされているため、メトリクスは Agent の[コアチェック][5]から Datadog に報告されます。
 
 Service Fabric でコンテナ化されたアプリを実行している場合、Agent は [Service Fabric Mesh メトリクス][6]を報告します。
 
-### ヘルプ
+### イベント
 Azure Service Fabric インテグレーションには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 Azure Service Fabric インテグレーションには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## トラブルシューティング
 ご不明な点は、[Datadog のサポートチーム][7]までお問い合わせください。
 
 [1]: https://docs.datadoghq.com/ja/integrations/azure/

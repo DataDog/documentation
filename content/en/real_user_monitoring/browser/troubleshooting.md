@@ -1,6 +1,5 @@
 ---
 title: Troubleshooting
-kind: documentation
 further_reading:
 - link: 'https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/'
   tag: 'Blog'
@@ -41,7 +40,15 @@ You can also check your browser developer tools console or network tab if you no
 
 ### Data to the Datadog intake
 
-The RUM Browser SDK sends batches of data periodically to the Datadog intake. If data is being sent, you should see network requests targeting `/v1/input` (the URL origin part may differ due to RUM configuration) in the Network section of your browser developer tools:
+
+The RUM SDK sends batches of event data to Datadog's intake every time one of these conditions have been met:
+
+- Every 30 seconds
+- When 50 events have been reached
+- When the payload is >16 kB
+- On `visibility:hidden` or `beforeUnload`
+
+If data is being sent, you should see network requests targeting `/v1/input` (the URL origin part may differ due to RUM configuration) in the Network section of your browser developer tools:
 
 {{< img src="real_user_monitoring/browser/troubleshooting/network_intake.png" alt="RUM requests to Datadog intake">}}
 
@@ -123,13 +130,17 @@ On Chromium-based browsers, when the RUM Browser SDK sends data to the Datadog i
 
 The warning is shown because the intake returns a non-empty JSON object. This behavior is a reported [Chromium issue][8]. It does not impact the RUM Browser SDK and can safely be ignored.
 
+## "Deobfuscation failed" warning
+
+A warning appears when deobfuscation fails for a stack trace. If the stack trace is not obfuscated to begin with, you can ignore this warning. Otherwise, use the [RUM Debug Symbols page][14] to view all your uploaded source maps. See [Investigate Obfuscated Stack Traces with RUM Debug Symbols][15].
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /help
 [2]: https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md
-[3]: /real_user_monitoring/browser/#npm
+[3]: /real_user_monitoring/browser/setup/#npm
 [4]: /real_user_monitoring/guide/proxy-rum-data/
 [5]: /integrations/content_security_policy_logs/#use-csp-with-real-user-monitoring-and-session-replay
 [6]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#override-default-rum-view-names
@@ -139,4 +150,6 @@ The warning is shown because the intake returns a non-empty JSON object. This be
 [10]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#global-context
 [11]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#user-session
 [12]: /real_user_monitoring/guide/setup-feature-flag-data-collection/?tab=browser
-[13]: /real_user_monitoring/browser/#initialization-parameters
+[13]: /real_user_monitoring/browser/setup/#initialization-parameters
+[14]: https://app.datadoghq.com/source-code/setup/rum
+[15]: /real_user_monitoring/guide/debug-symbols

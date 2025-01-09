@@ -1,6 +1,5 @@
 ---
 title: Help! My Password email never came through!
-kind: faq
 ---
 
 When a new user creates an account, your login email (or "handle") defaults to your email address. This can cause some confusion when a user wants to update their email.

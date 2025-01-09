@@ -9,7 +9,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/datadog-events/
   tag: ブログ
   text: Datadog イベントの改善によるトラブルシューティングの迅速化
-kind: documentation
 title: イベントエクスプローラー
 ---
 

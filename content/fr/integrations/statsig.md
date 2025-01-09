@@ -20,7 +20,7 @@ integration_id: statsig
 integration_title: Statsig
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 maintainer: support@statsig.com
 manifest_version: 1.0.0
 metric_prefix: statsig.

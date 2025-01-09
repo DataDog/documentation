@@ -1,20 +1,19 @@
 ---
 aliases:
 - /ja/tracing/trace_queries
-description: データセキュリティ
+description: トレースクエリ
 further_reading:
 - link: https://www.datadoghq.com/blog/trace-queries/
   tag: ブログ
   text: Trace Queries を使用して、本番環境の問題の根本原因とビジネスへの影響を分析する
 - link: tracing/trace_explorer
   tag: ドキュメント
-  text: プロファイラーの有効化
+  text: トレースエクスプローラー
 - link: /tracing/trace_explorer/query_syntax/
   tag: ドキュメント
   text: スパンクエリ構文
 is_beta: true
-kind: ドキュメント
-title: データセキュリティ
+title: トレースクエリ
 ---
 
 ## 概要
@@ -52,6 +51,7 @@ Trace Queries を使用して、調査を加速し、関連するトレースを
 | `\|\|` | **Or**: どちらか一方のスパンがトレース内にある | サービス `web-store` またはサービス `mobile-store` からのスパンを含むトレース: <br/>`service:web-store \|\| service:mobile-store` |
 | `->` | **間接関係**: 右のクエリにマッチするスパンのアップストリームにある、左のクエリにマッチするスパンを含むトレース | サービス `checkoutservice` がサービス `quoteservice` のアップストリームにある場合のトレース: <br/>`service:checkoutservice -> service:quoteservice` |
 | `=>` | **直接関係**: 右のクエリにマッチするスパンの直接の親である、左のクエリにマッチするスパンを含むトレース | サービス `checkoutservice` がサービス `shippingservice` を直接呼び出している場合のトレース: <br/>`service:checkoutservice => service:shippingservice` |
+| `NOT` | **Exclusion**: Traces that **do not** contain spans matching the query | Traces that contain spans from the service `web-store`, but not from the service `payments-go`:  <br/>`service:web-store && NOT(service:payments-go)` |
 
 ### トレースレベルのフィルター
 
@@ -89,7 +89,7 @@ Trace Queries を使用して、調査を加速し、関連するトレースを
 
 **注**: テーブルに表示される情報は、トレースの root スパンからの属性であり、期間を含みます。トレースのエンドツーエンド期間を表すものでは**ありません**。
 
-## デフォルトの検出ルール
+## 分析
 
 `Timeseries`、`Top List`、`Table` などの他の視覚化のいずれかを選択すると、1 つまたは複数のディメンションでグループ化された結果を経時的に集計することができます。集計オプションの詳細については、[スパンの視覚化][2]を参照してください。
 
@@ -102,15 +102,27 @@ Trace Queries を使用して、調査を加速し、関連するトレースを
 
 ## Trace Queries ソースデータの仕組み
 
+Datadog uses the [Intelligent Retention Filter][3] to index data for Trace Queries. It does so by performing:
+
+- [フラットサンプリング](#1-flat-sampling): 取り込まれたスパンの均一な 1% サンプル。
+- [多様性サンプリング](#diversity-sampling): 各環境、サービス、オペレーション、リソースの可視性を維持するための、代表的で多様なトレースの選択。
+
+These two sampling mechanisms capture **complete traces**, meaning that all spans of a trace are always indexed to ensure that Trace Queries return accurate results.
+
 {{< img src="tracing/trace_queries/trace_queries_new_dataset.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="1% フラットサンプリングと多様性サンプリング" >}}
 
-Trace Queries は、[取り込まれたスパン][3]の**均一な 1% サンプル**に基づいています。詳しくは、[1% フラットサンプリング][6]をお読みください。
+**注**: フラットサンプリングと多様性サンプリングによってインデックス化されたスパンは、インデックス化されたスパンの使用量にカウントされないため、**請求には影響しません**。
 
-フラット 1% サンプリングは `trace_id` に基づいて適用され、これは同じトレースに属するすべてのスパンが同じサンプリング決定を共有することを意味します。1% サンプリングでインデックス化されたスパンは、[トレースエクスプローラー][4]でクエリして見つけることもできます。
+### 1% フラットサンプリング
+`retained_by:flat_sampled`
 
-[タグベースの保持フィルター][5]によってインデックス化されたスパンは、Trace Queries では使用できません。保持フィルターは、トレースからのすべてのスパンがインデックス化されていることを保証していないからです。
+Flat 1% sampling is applied based on the `trace_id`, meaning that all spans belonging to the same trace share the same sampling decision. To learn more, read the [one percent flat sampling documentation][4].
 
-**注**: フラット 1% サンプリングでインデックス化されたスパンは、インデックス化されたスパンの使用量にはカウントされないため、**請求には影響しません**。
+### 多様性サンプリング
+`retained_by:diversity_sampling`
+
+Every 15 minutes, diversity sampling retains at least one span and the associated trace for each combination of environment, service, operation, and resource. This occurs for the `p75`, `p90`, and `p95` percentile of latencies to ensure that you can always find example traces in service and resource pages, even for low traffic endpoints. To learn more, read the [diversity sampling documentation][5].
+
 
 ## その他の参考資料
 
@@ -118,7 +130,6 @@ Trace Queries は、[取り込まれたスパン][3]の**均一な 1% サンプ�
 
 [1]: /ja/tracing/trace_explorer/query_syntax/
 [2]: /ja/tracing/trace_explorer/visualize/#timeseries
-[3]: /ja/tracing/trace_pipeline/ingestion_controls/
-[4]: /ja/tracing/trace_explorer/
-[5]: /ja/tracing/trace_pipeline/trace_retention/#create-your-own-retention-filter
-[6]: /ja/tracing/trace_retention/#one-percent-flat-sampling
+[3]: /ja/tracing/trace_pipeline/trace_retention/#datadog-intelligent-retention-filter
+[4]: /ja/tracing/trace_pipeline/trace_retention/#one-percent-flat-sampling
+[5]: /ja/tracing/trace_pipeline/trace_retention/#diversity-sampling

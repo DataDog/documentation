@@ -13,7 +13,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/online-archives-datadog/
   tag: 블로그
   text: Online Archive로 기록 로그 분석 및 조사
-kind: 설명서
 private: true
 title: Online Archives
 ---
@@ -46,7 +45,7 @@ Online Archives는 로그 인덱스별로 설정됩니다. 해당 인덱스에 �
 
 ## Online Archives에서 검색하는 방법
 
-Log Explorer의 드롭다운 메뉴에서 Online Archives를 선택해 인덱스 대신 Online Archives에서 검색을 시작합니다. 드롭다운 메뉴는 시간 선택 메뉴 옆에 있습니다. 사전 설정 옵션을 선택해 최대 3개월까지 시간을 조정할 수 있습니다. 또는 달력 보기를 선택해 그보다 더 이전 시간을 선택할 수 있습니다. 
+로그 탐색기의 드롭다운에서 온라인 아카이브를 선택하여 색인 대신 온라인 아카이브에서 검색을 시작합니다. 시간 선택기 옆의 드롭다운을 찾습니다. 사전 설정된 옵션(최대 3개월)을 선택하여 시간 선택기를 조정하거나 달력 보기(검색)를 선택하여 더 이전 시간을 확인할 수 있습니다.
 
 
 {{< img src="logs/log_configuration/online_archives/searching.png" alt="온라인 아카이브에서 검색하는 방법" style="width:100%;">}}

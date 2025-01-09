@@ -21,6 +21,7 @@ categories:
 - ネットワーク
 - notifications
 - snmp
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/snmp_check_point/README.md
 display_on_public_website: true
@@ -30,7 +31,6 @@ integration_id: snmp-check-point
 integration_title: Check Point
 integration_version: ''
 is_public: true
-kind: integration
 manifest_version: 2.0.0
 name: snmp_check_point
 public_title: Check Point
@@ -48,10 +48,14 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: Check Point のネットワークデバイスから SNMP メトリクスを収集します。
   media: []
   overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/monitor-snmp-with-datadog/
   support: README.md#Support
   title: Check Point
 ---
@@ -65,17 +69,17 @@ Check Point は、ネットワークセキュリティをはじめとする IT �
 
 Check Point とのインテグレーションを構成し、Check Point ファイアウォールなどのデバイスから SNMP メトリクスを収集します。
 
-## 計画と使用
+## セットアップ
 
 SNMP インテグレーションをインストールして構成するには、[ネットワークデバイスモニタリング][1]のドキュメントを参照してください。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 
 監視対象となるメトリクスの詳細については、[収集される SNMP データ][2]のセクションを参照してください。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
 

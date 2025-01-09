@@ -1,6 +1,6 @@
 ---
 title: SLO Checklist
-kind: guide
+
 aliases:
 - /monitors/guide/slo-checklist/
 further_reading:
@@ -10,11 +10,14 @@ further_reading:
 - link: 'https://learn.datadoghq.com/courses/intro-to-slo'
   tag: 'Learning Center'
   text: 'Introduction to Service Level Objectives'
+- link: "/service_management/service_level_objectives/guide/slo_types_comparison/"
+  tag: "Documentation"
+  text: "Comparison of Datadog SLO Types"
+- link: "https://www.datadoghq.com/blog/define-and-manage-slos/"
+  tag: "Blog"
+  text: "Best practices for managing your SLOs with Datadog"
 ---
 
-<div class="alert alert-info">
-Click <a href="https://www.datadoghq.com/pdf/SLOChecklist_200619.pdf">here</a> to find a PDF version of this page.
-</div>
 
 ## Getting started
 
@@ -33,7 +36,7 @@ Click <a href="https://www.datadoghq.com/pdf/SLOChecklist_200619.pdf">here</a> t
 
 #### Response/Request
 
-|              |                                                                |
+|  Type of SLI |  Description                                                   |
 | ------------ | -------------------------------------------------------------- |
 | Availability | Could the server respond to the request successfully?          |
 | Latency      | How long did it take for the server to respond to the request? |
@@ -41,7 +44,7 @@ Click <a href="https://www.datadoghq.com/pdf/SLOChecklist_200619.pdf">here</a> t
 
 #### Storage
 
-|              |                                              |
+|  Type of SLI |  Description                                 |
 | ------------ | -------------------------------------------- |
 | Availability | Can the data be accessed on demand?          |
 | Latency      | How long does it take to read or write data? |
@@ -49,32 +52,52 @@ Click <a href="https://www.datadoghq.com/pdf/SLOChecklist_200619.pdf">here</a> t
 
 #### Pipeline
 
-|             |                                                                    |
+| Type of SLI |   Description                                                      |
 | ----------- | ------------------------------------------------------------------ |
 | Correctness | Was the right data returned?                                       |
 | Freshness   | How long does it take for new data or processed results to appear? |
 
 ### STEP 2
 
-**Do you require a time-based or count-based SLI?**
+#### Best practices for choosing an SLO Type
 
-**Time-based SLIs use Datadog monitors**:
+- Whenever possible, use metric-based SLOs. It's best practice to have SLOs where the error budget reflects the number of bad events you have left before you breach your SLO. Your SLO calculations will also be volume weighted based on the number of events.
+- If, instead, you want an SLO that tracks uptime and uses a time-based SLI calculation, use time slice SLOs. Unlike monitor-based SLOs, time slice SLOs don't require you to maintain an underlying monitor for your SLO.
+- Finally, consider monitor-based SLOs for use cases that are not covered by time slice SLOs, which include SLOs based on non-metric monitors or multiple monitors.
+
+For a detailed comparison of the SLO types, see the [SLO Type Comparison][8] guide.
+
+**Do you require an SLI calculation that is time-based or count-based?**
+
+The following SLO types are available in Datadog: 
+
+**Metric-based SLOs**
+
+_Example: 99% of requests should complete in less than 250 ms over a 30-day window._
+
+- Count-based SLI calculation
+- SLI is calculated as the sum of good events divided by the sum of total events
+
+**Monitor-based SLOs**
 
 _Example: the latency of all user requests should be less than 250 ms 99% of the time in any
 30-day window._
 
-1. Select a single monitor,
-2. Select multiple monitors (up to 20), or
-3. Select a single multi alert monitor and pick specific monitor groups (up to 20) to include in
-   the SLO calculation
+- Time-based SLI calculation
+- SLI calculated based on the underlying Monitor’s uptime
+- You can select a single monitor, multiple monitors (up to 20), or a single multi alert monitor with groups
 
 If you need to create a new monitor go to the [Monitor create][2] page.
 
-**Count-based SLIs use metrics in your Datadog account and do not require a monitor**:
+**Time Slice SLOs**
 
-_Example: 99% of requests should complete in less than 250 ms over a 30-day window._
+_Example: the latency of all user requests should be less than 250 ms 99% of the time in any
+30-day window._
 
-## Implementing your SLIs
+- Time-based SLI calculation
+- SLI calculated based on your custom uptime definition using a metric query
+
+## Implement your SLIs
 
 1. [Custom metrics][3] (for example, counters)
 2. [Integration metrics][4] (for example, load balancer, http requests)
@@ -83,8 +106,8 @@ _Example: 99% of requests should complete in less than 250 ms over a 30-day wind
 
 ## Set your target objective and time window
 
-1. Select your target: `99%`, `99.5%`, `99.9%`, `99.95%`, or whatever makes sense for your requirements.
-2. Select your time window: over the last `7`, `30`, or `90 days`
+1. Select your target: `99%`, `99.5%`, `99.9%`, `99.95%`, or any other target value that makes sense for your requirements.
+2. Select your time window: over the last rolling `7`, `30`, or `90 days`
 
 ## Name, describe, and tag your SLOs
 
@@ -101,9 +124,10 @@ _Example: 99% of requests should complete in less than 250 ms over a 30-day wind
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/slo/manage
-[2]: https://app.datadoghq.com/monitors#create/metric
+[2]: https://app.datadoghq.com/monitors/create/metric
 [3]: /metrics
 [4]: /integrations
 [5]: /tracing/trace_pipeline/generate_metrics/
 [6]: /logs/logs_to_metrics/
 [7]: /service_management/service_level_objectives/#searching-and-viewing-slos
+[8]: /service_management/service_level_objectives/guide/slo_types_comparison

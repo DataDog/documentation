@@ -6,7 +6,6 @@ further_reading:
 - link: /dashboards/graphing_json/
   tag: Documentation
   text: Découvrir comment créer des dashboards avec JSON
-kind: documentation
 title: Widget Notes et liens
 ---
 

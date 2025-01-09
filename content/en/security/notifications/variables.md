@@ -1,6 +1,5 @@
 ---
 title: Variables
-kind: documentation
 aliases:
   - /security_platform/notifications/variables
 further_reading:
@@ -101,6 +100,8 @@ HIPAA-enabled Datadog organizations have access to only <a href="#template-varia
 Use attribute variables to customize signal notifications with specific information about the triggered signal. 
 
 To see a signal's list of event attributes, click **JSON** at the bottom of the **Overview** tab in the signal's side panel. Use the following syntax to add these event attributes in your rule notifications: `{{@attribute}}`. To access inner keys of the event attributes, use JSON dot notation, for example, `{{@attribute.inner_key}})`.
+
+If the signal's JSON does not contain an attribute that is present in the related log's JSON, use the previously outlined syntax with the attribute name from the log's JSON. This attribute is then included in both the signal's JSON and the signal notifications.
 
 The following is an example JSON object with event attributes that may be associated with a security signal:
 

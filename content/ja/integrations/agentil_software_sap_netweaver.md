@@ -32,8 +32,9 @@ author:
   support_email: support@agentil-software.com
   vendor_id: agentil-software
 categories:
-- マーケットプレイス
+- marketplace
 - sap
+custom_kind: インテグレーション
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -42,7 +43,6 @@ integration_id: agentil-software-sap-netweaver
 integration_title: SAP S/4HANA & NetWeaver
 integration_version: ''
 is_public: true
-kind: integration
 legal_terms:
   eula: assets/eula.pdf
 manifest_version: 2.0.0
@@ -94,6 +94,9 @@ tile:
     image_url: images/abap_background_jobs.png
     media_type: image
   overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/sap-netweaver-monitoring-agentil-datadog-marketplace/
   support: README.md#Support
   title: SAP S/4HANA & NetWeaver
   uninstallation: README.md#Uninstallation
@@ -148,7 +151,7 @@ SAP NetWeaver インテグレーションは、SAP **NetWeaver** および **S/4
 - 更新サービス
 - ワークプロセス
 
-## Agent
+## サポート
 
 サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから AGENTIL Software にお問い合わせください。
 
@@ -171,4 +174,4 @@ SAP NetWeaver インテグレーションは、SAP **NetWeaver** および **S/4
 [4]: https://wiki.agentil-software.com/doku.php?id=products:promonitor:6.8:userguide:configuration
 [5]: https://www.datadoghq.com/blog/sap-netweaver-monitoring-agentil-datadog-marketplace/
 ---
-このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/agentil-software-sap-netweaver" target="_blank">こちらをクリック</a>してください。
+このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。利用するには、<a href="https://app.datadoghq.com/marketplace/app/agentil-software-sap-netweaver" target="_blank">Marketplace でこのアプリケーションを購入してください</a>。

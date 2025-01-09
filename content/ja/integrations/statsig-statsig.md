@@ -26,6 +26,7 @@ author:
 categories:
 - 構成 & デプロイ
 - マーケットプレイス
+custom_kind: インテグレーション
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -34,7 +35,6 @@ integration_id: statsig-statsig
 integration_title: Statsig
 integration_version: ''
 is_public: true
-kind: integration
 legal_terms:
   eula: assets/eula.pdf
 manifest_version: 2.0.0
@@ -79,6 +79,9 @@ tile:
     image_url: images/tile_datadog_dashboard.png
     media_type: image
   overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/feature-monitoring-statsig-datadog-marketplace/
   support: README.md#Support
   title: Statsig
   uninstallation: README.md#Uninstallation
@@ -101,17 +104,17 @@ Datadog Marketplace の製品には、Statsig のプラットフォームへの�
 
 {{< img src="marketplace/statsig-statsig/images/statsig_metrics.png" alt="Statsig メトリクス" >}}
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 
 このインテグレーションによって提供されるメトリクスのリストについては、[metadata.csv][3] を参照してください。
 
-### ヘルプ
+### イベント
 
 Statsig インテグレーションにより、Statsig でのコンフィギュレーション変更イベントが Datadog に送信されます（たとえば、新規または更新された機能ゲートまたは新しいインテグレーションが有効になった時）。
 
-## Agent
+## サポート
 
 サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから Statsig サポートにお問い合わせください。
 
@@ -132,4 +135,4 @@ Statsig インテグレーションにより、Statsig でのコンフィギュ�
 [6]: https://www.datadoghq.com/blog/feature-monitoring-statsig-datadog-marketplace/
 
 ---
-このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/statsig-statsig" target="_blank">こちらをクリック</a>してください。
+このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。利用するには、<a href="https://app.datadoghq.com/marketplace/app/statsig-statsig" target="_blank">Marketplace でこのアプリケーションを購入してください</a>。

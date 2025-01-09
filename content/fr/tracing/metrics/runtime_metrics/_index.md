@@ -4,7 +4,6 @@ aliases:
 - /fr/tracing/runtime_metrics/
 description: Consultez des statistiques supplémentaires sur les performances d'une
   application grâce aux métriques runtime associées à vos traces.
-kind: documentation
 title: Métriques runtime
 type: multi-code-lang
 ---

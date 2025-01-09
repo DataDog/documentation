@@ -1,6 +1,5 @@
 ---
 title: Send AWS Services Logs with the Datadog Amazon Data Firehose Destination
-kind: documentation
 further_reading:
 - link: "/logs/explorer/"
   tag: "Documentation"
@@ -14,6 +13,9 @@ further_reading:
 - link: https://www.datadoghq.com/blog/send-amazon-vpc-flow-logs-to-data-firehose-and-datadog/
   tag: "Blog"
   text: "Send Amazon VPC flow logs to Amazon Kinesis Data Firehose and Datadog"
+- link: "/logs/guide/reduce_data_transfer_fees"
+  tag: "Guide"
+  text: "How to send logs to Datadog while reducing data transfer fees"
 ---
 
 ## Overview
@@ -39,7 +41,8 @@ Datadog recommends using a Kinesis Data Stream as input when using the Datadog d
    b. Set the destination as `Datadog`.  
    c. Provide a name for the delivery stream.  
    d. In the **Destination settings**, choose the `Datadog logs` HTTP endpoint URL that corresponds to your [Datadog site][5].  
-   e. Paste your API key into the **API key** field. You can get or create an API key from the [Datadog API Keys page][3].  
+   e. Paste your API key into the **API key** field. You can get or create an API key from the [Datadog API Keys page][3]. If you prefer to use Secrets Manager authentication, add in your Datadog API key in the full JSON format in the value field as follows: `{"api_key":"<YOUR_API_KEY>"}`.
+   
    f. Optionally, configure the **Retry duration**, the buffer settings, or add **Parameters**, which are attached as tags to your logs.  
    **Note**: Datadog recommends setting the **Buffer size** to `2 MiB` if the logs are single line messages.  
    g. In the **Backup settings**, select an S3 backup bucket to receive any failed events that exceed the retry duration.  
@@ -150,7 +153,7 @@ To populate all logs by ARN:
 1. Go to the [Log Explorer][5] in Datadog.
 2. In the search bar, type `@aws.firehose.arn:"<ARN>"`, replace `<ARN>` with your Amazon Data Firehose ARN, and press **Enter** to see all of your subscribed logs.
 
-**Note**: A single Kinesis payload must not be be more than 65,000 log messages. Log messages after that limit are dropped.
+**Note**: A single Kinesis payload must not be more than 65,000 log messages. Log messages after that limit are dropped.
 
 ## Further Reading
 

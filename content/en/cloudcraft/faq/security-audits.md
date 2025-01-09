@@ -1,10 +1,9 @@
 ---
 title: Has Cloudcraft gone through security audits?
-kind: faq
 ---
 
-Yes, we hire an external security company every year to run penetration and security tests in our platform.
+Yes, we hire an external security company every year to run penetration and security tests on our platform.
 
-To get a copy of the latest report, contact Cloudcraft at [security@cloudcraft.co][1].
+To get a copy of the latest report, access the [Datadog Trust Center][1].
 
-[1]: mailto:security@cloudcraft.co
+[1]: https://trust.datadoghq.com/

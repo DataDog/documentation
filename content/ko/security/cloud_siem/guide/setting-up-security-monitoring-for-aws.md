@@ -2,7 +2,6 @@
 aliases:
 - /ko/security_platform/guide/setting-up-security-monitoring-for-aws
 - /ko/security_platform/cloud_siem/guide/setting-up-security-monitoring-for-aws
-kind: 가이드
 title: AWS용 Cloud SIEM 설정
 ---
 

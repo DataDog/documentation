@@ -1,12 +1,7 @@
 ---
 title: Troubleshooting DBM Setup for SQL Server
-kind: documentation
 description: Troubleshoot Database Monitoring setup for SQL Server
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
-{{< /site-region >}}
 
 This page details common issues with setting up and using Database Monitoring with SQL Server, and how to resolve them. Datadog recommends staying on the latest stable Agent version and adhering to the latest [setup documentation][1], as it can change with Agent version releases.
 
@@ -275,7 +270,7 @@ To connect SQL Server (either hosted on Linux or Windows) to a Linux host:
         # enable the odbc connector
         connector: odbc
         # enable the ODBC driver
-        driver: ODBC Driver 13 for SQL Server
+        driver: '{ODBC Driver 13 for SQL Server}'
         username: <USERNAME>
         password: <PASSWORD>
     ```
@@ -324,6 +319,16 @@ The `user` tag is available for Query Activity events and Database Load metrics.
 ### Why are there so many "CREATE PROCEDURE" queries?
 
 In versions of the agent older than 7.40.0, there exists a bug where `PROCEDURE` statistics are over counted. This leads to seeing many executions of `CREATE PROCEDURE...` in the database-monitoring Query Metrics UI. In order to fix this issue, please upgrade to the latest version of the Datadog agent.
+
+### SQL Server Agent Jobs are not being collected with error "The SELECT permission was denied on the object 'sysjobs'"
+
+The SQL Server Agent Jobs check requires the `SELECT` permission on the `msdb` database. If you are seeing the error `The SELECT permission was denied on the object 'sysjobs'`, you should grant the `SELECT` permission to the user that the Agent is using to connect to the SQL Server instance.
+
+```SQL
+USE msdb;
+CREATE USER datadog FOR LOGIN datadog;
+GRANT SELECT to datadog;
+```
 
 ## Known limitations
 

@@ -6,7 +6,6 @@ further_reading:
 - link: /agent/guide/
   tag: Documentación
   text: Guías del Agent
-kind: documentación
 title: Configuración del Agent
 ---
 

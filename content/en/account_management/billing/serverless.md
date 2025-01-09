@@ -1,6 +1,5 @@
 ---
 title: Serverless Billing
-kind: documentation
 ---
 
 ## Managing usage

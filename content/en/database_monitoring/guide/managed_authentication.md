@@ -1,11 +1,7 @@
 ---
 title: Connecting with Managed Authentication
-kind: guide
----
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
-{{< /site-region >}}
 
+---
 
 This guide assumes that you have configured [Database Monitoring][1].
 
@@ -37,11 +33,16 @@ Supported authentication types and Agent versions
 ## Configure IAM authentication
 
 
-AWS supports IAM authentication to RDS and Aurora databases. In order to configure the Agent to connect using IAM, do the following:
+AWS supports IAM authentication to RDS and Aurora databases. Starting with Datadog Agent version 7.57, cross-account IAM authentication is supported for RDS and Aurora databases.
+In order to configure the Agent to connect using IAM, follow the steps to complete the setup for the database and the Datadog Agent.
 
+### Enable IAM authentication for your database
 
 1. Turn on IAM authentication on your [RDS][3] or [Aurora][4] instance.
-2. Create an IAM role, and then attach the following policy, replacing `<YOUR_IAM_ROLE>` with the IAM role information:
+2. Create an IAM policy for DB authentication. Replace `<YOUR_IAM_AUTH_DB_USER>` with the local database user in the IAM policy document:
+{{< tabs >}}
+{{% tab "RDS" %}}
+
 ```json
 {
    "Version": "2012-10-17",
@@ -52,7 +53,45 @@ AWS supports IAM authentication to RDS and Aurora databases. In order to configu
                "rds-db:connect"
            ],
            "Resource": [
-               "arn:aws:rds-db:REGION:ACCOUNT:dbuser:RESOURCE_ID/<YOUR_IAM_ROLE>"
+               "arn:aws:rds-db:REGION:ACCOUNT:dbuser:db-<RESOURCE_ID>/<YOUR_IAM_AUTH_DB_USER>"
+           ]
+       }
+   ]
+}
+```
+
+For example, if you want to use the `datadog` user, use the following resource ARN:
+
+```json
+{
+   "Version": "2012-10-17",
+   "Statement": [
+       {
+           "Effect": "Allow",
+           "Action": [
+               "rds-db:connect"
+           ],
+           "Resource": [
+               "arn:aws:rds-db:REGION:ACCOUNT:dbuser:db-<RESOURCE_ID>/datadog"
+           ]
+       }
+   ]
+}
+```
+{{% /tab %}}
+{{% tab "Aurora" %}}
+
+```json
+{
+   "Version": "2012-10-17",
+   "Statement": [
+       {
+           "Effect": "Allow",
+           "Action": [
+               "rds-db:connect"
+           ],
+           "Resource": [
+               "arn:aws:rds-db:REGION:ACCOUNT:dbuser:cluster-<RESOURCE_ID>/<YOUR_IAM_AUTH_DB_USER>"
            ]
        }
    ]
@@ -71,12 +110,14 @@ For example, if you wanted to use the `datadog` user, you would use the followin
                "rds-db:connect"
            ],
            "Resource": [
-               "arn:aws:rds-db:REGION:ACCOUNT:dbuser:RESOURCE_ID/datadog"
+               "arn:aws:rds-db:REGION:ACCOUNT:dbuser:cluster-<RESOURCE_ID>/datadog"
            ]
        }
    ]
 }
 ```
+{{% /tab %}}
+{{< /tabs >}}
 
 AWS also supports wildcards for specifying the resource, for example if you wanted to allow the `datadog` user to authenticate across all instances for an account add the following:
 
@@ -107,11 +148,102 @@ GRANT rds_iam TO datadog;
 
 4. Complete the Agent setup steps for your [RDS][6] or [Aurora][7] instance.
 
+### Enable IAM authentication for the Agent host in the same AWS account as the RDS instance
 
-5. [Attach the role][5] with each EC2 instance that is running the agent. Note, this can be done at EC2 launch time.
+{{< tabs >}}
+{{% tab "EC2" %}}
+
+1. Create an IAM role and attach the IAM policy created for DB authentication to the role.
+
+```bash
+# Create an IAM role for EC2 instance
+# Replace `<YOUR_IAM_AUTH_DB_ROLE>` with the name of the IAM role
+aws iam create-role --role-name <YOUR_IAM_AUTH_DB_ROLE> --assume-role-policy-document '{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "Service": "ec2.amazonaws.com"
+      },
+      "Action": "sts:AssumeRole"
+    }
+  ]
+}'
+
+# Attach the IAM policy to the IAM role
+# Replace `<YOUR_IAM_AUTH_DB_POLICY_ARN>` with the ARN of the IAM policy from step 2
+aws iam attach-role-policy --role-name <YOUR_IAM_AUTH_DB_ROLE> --policy-arn <YOUR_IAM_AUTH_DB_POLICY_ARN>
+```
+
+Attach the IAM role to the EC2 instance where the Agent is running. For more information, see [IAM roles for Amazon EC2][1].
+
+[1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-roles-for-amazon-ec2.html
+
+{{% /tab %}}
+{{% tab "ECS Fargate" %}}
+
+1. Create an IAM role and attach the IAM policy created for DB authentication to the role.
+
+```bash
+# Create an IAM role for ECS task
+# Replace `<YOUR_IAM_AUTH_DB_ROLE>` with the name of the IAM role
+aws iam create-role --role-name <YOUR_IAM_AUTH_DB_ROLE> --assume-role-policy-document '{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "Service": "ecs-tasks.amazonaws.com"
+      },
+      "Action": "sts:AssumeRole"
+    }
+  ]
+}'
+
+# Attach the IAM policy to the IAM role
+# Replace `<YOUR_IAM_AUTH_DB_POLICY_ARN>` with the ARN of the IAM policy from step 2
+aws iam attach-role-policy --role-name <YOUR_IAM_AUTH_DB_ROLE> --policy-arn <YOUR_IAM_AUTH_DB_POLICY_ARN>
+```
+
+In the ECS task definition, attach the IAM role to the task role where the Agent container is defined. For more information, see [IAM roles for Amazon ECS][1].
+
+[1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-iam-roles.html
+
+{{% /tab %}}
+{{% tab "EKS" %}}
+
+1. Create an IAM role and attach the IAM policy created for DB authentication to the role.
+
+```bash
+# Create an IAM OIDC provider for your cluster
+# Replace `<YOUR_ESK_REGION>` and `<YOUR_ESK_CLUSTER>` with the region and name of your ESK cluster
+$ eksctl utils associate-iam-oidc-provider \
+  --region=<YOUR_ESK_REGION> \
+  --cluster=<YOUR_ESK_CLUSTER> \
+  --approve
+
+# Create a service account
+# Replace `<YOUR_IAM_AUTH_DB_POLICY_ARN>` with the ARN of the IAM policy from step 2
+# Replace `<YOUR_IAM_AUTH_SERVICE_ACCOUNT>` and `<YOUR_IAM_AUTH_SERVICE_ACCOUNT_NAMESPACE>` with the name and namespace of the service account
+$ eksctl create iamserviceaccount \
+  --cluster <YOUR_ESK_CLUSTER> \
+  --name <YOUR_IAM_AUTH_SERVICE_ACCOUNT> \
+  --namespace <YOUR_IAM_AUTH_SERVICE_ACCOUNT_NAMESPACE> \
+  --attach-policy-arn <YOUR_IAM_AUTH_DB_POLICY_ARN> \
+  --override-existing-serviceaccounts \
+  --approve
+```
+
+Map the IAM role to the Kubernetes service account where the Agent is running. For more information, see [IAM roles for Amazon EKS service account][1].
+
+[1]: https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html
+
+{{% /tab %}}
+{{< /tabs >}}
 
 
-6. Update your Postgres instance config with an `aws` block specifying the `region` of the RDS instance, and set `managed_authentication.enabled` to `true`:
+2. Update your Postgres instance config with an `aws` block specifying the `region` of the RDS instance, and set `managed_authentication.enabled` to `true`:
 
 
 ```yaml
@@ -125,6 +257,191 @@ instances:
       region: us-east-2
       managed_authentication:
         enabled: true
+```
+
+### Enable IAM authentication for the Agent host in a different AWS account than the RDS instance
+
+**NOTE: Cross-account IAM authentication is supported starting from Agent version 7.57.**
+
+{{< tabs >}}
+{{% tab "EC2" %}}
+
+1. Create an IAM role in the account where the RDS instance is located, and attach the IAM policy created for DB authentication to the role using the example below.
+   - Replace `<YOUR_IAM_AUTH_DB_ROLE>` with the name of the IAM role
+   - Replace `<YOUR_AWS_ACCOUNT_FOR_AGENT>` with the AWS account ID where the Agent is running
+   - Replace `<YOUR_AGENT_EC2_ROLE>` with the IAM role of the EC2 instance where the Agent is running
+   - Replace `<YOUR_IAM_AUTH_DB_POLICY_ARN>` with the ARN of the IAM policy created for DB authentication
+
+```bash
+aws iam create-role --role-name <YOUR_IAM_AUTH_DB_ROLE> --assume-role-policy-document '{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "AWS": "arn:aws:iam::<YOUR_AWS_ACCOUNT_FOR_AGENT>:role/<YOUR_AGENT_EC2_ROLE>"
+      },
+      "Action": "sts:AssumeRole"
+    }
+  ]
+}'
+
+aws iam attach-role-policy --role-name <YOUR_IAM_AUTH_DB_ROLE> --policy-arn <YOUR_IAM_AUTH_DB_POLICY_ARN>
+```
+
+2. Modify the IAM role permission policies of the EC2 instance where the Agent is running, to allow assuming the IAM role created in the previous step.
+   - Replace `<YOUR_AGENT_EC2_ROLE>` with the IAM role of the EC2 instance where the Agent is running
+   - Replace `<YOUR_IAM_AUTH_DB_ROLE>` with the name of the IAM role created for DB authentication
+   - Replace `<YOUR_AWS_ACCOUNT_FOR_DB>` with the AWS account ID where the RDS instance is located
+
+```bash
+aws iam update-assume-role-policy --role-name <YOUR_AGENT_EC2_ROLE> --policy-document '{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "AWS": "arn:aws:iam::<YOUR_AWS_ACCOUNT_FOR_DB>:role/<YOUR_IAM_AUTH_DB_ROLE>"
+      },
+      "Action": "sts:AssumeRole"
+    }
+  ]
+}'
+```
+
+{{% /tab %}}
+{{% tab "ECS Fargate" %}}
+
+1. Create an IAM role in the account where the RDS instance is located, and attach the IAM policy created for DB authentication to the role using the example below.
+   - Replace `<YOUR_IAM_AUTH_DB_ROLE>` with the name of the IAM role created for DB authentication
+   - Replace `<YOUR_AWS_ACCOUNT_FOR_AGENT>` with the AWS account ID where the Agent is running
+   - Replace `<YOUR_AGENT_ECS_ROLE>` with the IAM role of the ECS task where the Agent is running
+   - Replace `<YOUR_IAM_AUTH_DB_POLICY_ARN>` with the ARN of the IAM policy created for DB authentication
+
+```bash
+aws iam create-role --role-name <YOUR_IAM_AUTH_DB_ROLE> --assume-role-policy-document '{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "AWS": "arn:aws:iam::<YOUR_AWS_ACCOUNT_FOR_AGENT>:role/<YOUR_AGENT_ECS_ROLE>"
+      },
+      "Action": "sts:AssumeRole"
+    }
+  ]
+}'
+
+aws iam attach-role-policy --role-name <YOUR_IAM_AUTH_DB_ROLE> --policy-arn <YOUR_IAM_AUTH_DB_POLICY_ARN>
+```
+
+2. Modify the IAM role permission policies of the ECS task where the Agent is running to allow the agent to assume the IAM role created in the previous step.
+   - Replace `<YOUR_AGENT_ECS_ROLE>` with the IAM role of the ECS task where the Agent is running
+   - Replace `<YOUR_IAM_AUTH_DB_ROLE>` with the name of the IAM role
+   - Replace `<YOUR_AWS_ACCOUNT_FOR_DB>` with the AWS account ID where the RDS instance is located
+
+```bash
+aws iam update-assume-role-policy --role-name <YOUR_AGENT_ECS_ROLE> --policy-document '{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "AWS": "arn:aws:iam::<YOUR_AWS_ACCOUNT_FOR_DB>:role/<YOUR_IAM_AUTH_DB_ROLE>"
+      },
+      "Action": "sts:AssumeRole"
+    }
+  ]
+}'
+```
+
+{{% /tab %}}
+{{% tab "EKS" %}}
+
+1. Create an IAM role in the account where the RDS instance is located, and attach the IAM policy created for DB authentication to the role using the example below.
+   - Replace `<YOUR_IAM_AUTH_DB_ROLE>` with the name of the IAM role
+   - Replace `<YOUR_AWS_ACCOUNT_FOR_AGENT>` with the AWS account ID where the Agent is running
+   - Replace `<YOUR_AGENT_EKS_ROLE>` with the IAM role to be used by the EKS pods where the Agent is running
+   - Replace `<YOUR_IAM_AUTH_DB_POLICY_ARN>` with the ARN of the IAM policy created for DB authentication
+
+```bash
+aws iam create-role --role-name <YOUR_IAM_AUTH_DB_ROLE> --assume-role-policy-document '{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "AWS": "arn:aws:iam::<YOUR_AWS_ACCOUNT_FOR_AGENT>:role/<YOUR_AGENT_EKS_ROLE>"
+      },
+      "Action": "sts:AssumeRole"
+    }
+  ]
+}'
+
+aws iam attach-role-policy --role-name <YOUR_IAM_AUTH_DB_ROLE> --policy-arn <YOUR_IAM_AUTH_DB_POLICY_ARN>
+```
+
+2. Modify the IAM role for the EKS Service Account where the Agent is running to allow assuming the IAM role created in the previous step.
+   - Replace `<YOUR_AGENT_EKS_ROLE>` with the EKS Service Account IAM role the Agent is using
+   - Replace `<YOUR_IAM_AUTH_DB_ROLE>` with the name of the IAM role
+   - Replace `<YOUR_AWS_ACCOUNT_FOR_DB>` with the AWS account ID where the RDS instance is located
+
+```bash
+aws iam update-assume-role-policy --role-name <YOUR_AGENT_EKS_ROLE> --policy-document '{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "AWS": "arn:aws:iam::<YOUR_AWS_ACCOUNT_FOR_DB>:role/<YOUR_IAM_AUTH_DB_ROLE>"
+      },
+      "Action": "sts:AssumeRole"
+    }
+  ]
+}'
+```
+
+3. Create an IAM OIDC provider for your cluster and a service account for the Agent using the example below.
+   - Replace `<YOUR_EKS_REGION>` and `<YOUR_EKS_CLUSTER>` with the region and name of your EKS cluster
+   - Replace `<YOUR_IAM_AUTH_DB_POLICY_ARN>` with the ARN of the IAM policy created for DB authentication
+   - Replace `<YOUR_IAM_AUTH_SERVICE_ACCOUNT>` and `<YOUR_IAM_AUTH_SERVICE_ACCOUNT_NAMESPACE>` with the name and namespace of the service account
+   - Replace `<YOUR_AGENT_EKS_ROLE>` with the IAM role to be used by the EKS pods where the Agent is running
+
+```bash
+$ eksctl utils associate-iam-oidc-provider \
+  --region <YOUR_EKS_REGION> \
+  --cluster <YOUR_EKS_CLUSTER> \
+  --approve
+
+$ eksctl create iamserviceaccount \
+  --cluster <YOUR_EKS_CLUSTER> \
+  --name <YOUR_IAM_AUTH_SERVICE_ACCOUNT> \
+  --namespace <YOUR_IAM_AUTH_SERVICE_ACCOUNT_NAMESPACE> \
+  --role-name arn:aws:iam::<YOUR_AWS_ACCOUNT_FOR_AGENT>:role/<YOUR_AGENT_EKS_ROLE> \
+  --override-existing-serviceaccounts \
+  --approve
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+Update your Postgres instance config with an `aws` block as shown below:
+ - Specify the `region` of the RDS instance
+ - Set `managed_authentication.enabled` to `true`
+ - Specify the role ARN, replacing `<YOUR_AWS_ACCOUNT_FOR_DB>` with the AWS account ID where the RDS instance is located, and `<YOUR_IAM_AUTH_DB_ROLE>` with the name of the IAM role created in step 1
+
+```yaml
+instances:
+  - host: example-endpoint.us-east-2.rds.amazonaws.com
+    port: 5432
+    username: datadog
+    dbm: true
+    aws:
+      instance_endpoint: example-endpoint.us-east-2.rds.amazonaws.com
+      region: us-east-2
+      managed_authentication:
+        enabled: true
+        role_arn: arn:aws:iam::<YOUR_AWS_ACCOUNT_FOR_DB>:role/<YOUR_IAM_AUTH_DB_ROLE>
 ```
 
 

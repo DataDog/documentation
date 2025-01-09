@@ -1,6 +1,5 @@
 ---
 title: Trace Qualification
-kind: documentation
 aliases:  
 further_reading:
 - link: "/security/application_security/"

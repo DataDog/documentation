@@ -1,6 +1,5 @@
 ---
 title: "Application Gateway Component"
-kind: documentation
 ---
 
 ## Overview

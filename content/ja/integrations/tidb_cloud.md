@@ -25,6 +25,7 @@ author:
 categories:
 - cloud
 - data stores
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/tidb_cloud/README.md
 display_on_public_website: true
@@ -34,7 +35,6 @@ integration_id: tidb-cloud
 integration_title: TiDB Cloud
 integration_version: ''
 is_public: true
-kind: integration
 manifest_version: 2.0.0
 name: tidb_cloud
 public_title: TiDB Cloud
@@ -51,6 +51,7 @@ tile:
   - Supported OS::Windows
   - Category::Cloud
   - Category::Data Stores
+  - Offering::Integration
   configuration: README.md#Setup
   description: Datadog による TiDB Cloud クラスターのモニタリング
   media: []
@@ -72,27 +73,27 @@ TiDB Cloud と Datadog のインテグレーションを使用して、TiDB Clou
 >
 > - オンプレミスの TiDB クラスターについては、[TiDB インテグレーション][2]を参照してください。
 
-## 計画と使用
+## セットアップ
 
 クラスターに対して TiDB Cloud と Datadog のインテグレーションを設定するには、Datadog API キーとリージョンを TiDB Cloud に提供します。
 
 TiDB Cloud プロジェクトの Datadog インテグレーションを構成するには、[TiDB Cloud Preferences][3] を参照してください。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "tidb_cloud" >}}
 
 
-### ヘルプ
+### サービスチェック
 
 TiDB Cloud インテグレーションには、サービスのチェック機能は含まれません。
 
-### ヘルプ
+### イベント
 
 TiDB Cloud インテグレーションには、イベントは含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
 

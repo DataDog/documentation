@@ -1,6 +1,7 @@
 ---
 categories:
 - Collaboration
+custom_kind: integration
 dependencies: []
 description: 選択した Datadog のアラートとグラフをチームの Campfire チャンネルに送信。
 doc_link: https://docs.datadoghq.com/integrations/campfire/
@@ -15,7 +16,6 @@ integration_id: ''
 integration_title: Campfire
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: '1.0'
 name: campfire
 public_title: Datadog-Campfire インテグレーション
@@ -34,27 +34,27 @@ Campfire インテグレーションにより、以下のことが可能にな�
 - ストリームでポストが行われたときに通知を受けることができます。
 - メトリクスアラートがトリガーされたときに通知を受けることができます。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 [Basecamp アカウント][2]でサインインします。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 
 Campfire インテグレーションには、メトリクスは含まれません。
 
-### ヘルプ
+### イベント
 
 Campfire インテグレーションには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 
 Campfire インテグレーションには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
 

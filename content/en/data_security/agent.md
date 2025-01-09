@@ -1,6 +1,5 @@
 ---
 title: Agent Data Security
-kind: documentation
 description: "Datadog Agent Security measures"
 aliases:
     - /agent/security/
@@ -19,10 +18,12 @@ You can send data to the Datadog service by using a locally installed [Agent][1]
 The official repositories and binary packages of the Agent are signed. Verify the distribution channel by checking the signature against one of the following public keys:
 
 - Linux DEB packages and repo metadata:
+  - [D18886567EABAD8B2D2526900D826EB906462314][22]
   - [5F1E256061D813B125E156E8E6266D4AC0962C7D][19]
   - [D75CEA17048B9ACBF186794B32637D44F14F620E][4]
   - [A2923DFF56EDA6E76E55E492D3A80E30382E94DE][3]
 - Linux RPM packages and repo metadata:
+  - [2416A37757B1BB0268B3634B52AFC5994F09D16B][21]
   - [7408BFD56BC5BF0C361AAAE85D88EEA3B01082D3][20]
   - [C6559B690CA882F023BDF3F63F4D1729FD4BF915][5]
   - [A4C0B90D7443CF6E4E8AA341F1068E14E09422B3][6]
@@ -87,6 +88,101 @@ If you have a requirement to avoid storing secrets in plaintext in the Agent's c
 
 For more information, see the [Secrets Management][18] documentation.
 
+## Telemetry collection
+
+{{< site-region region="gov" >}}
+
+Agent on non-government sites collects environmental, performance, and feature usage information about the Datadog Agent. When the Agent detects a government site, or the [Datadog Agent FIPS Proxy][1] is used, the Agent automatically disables this telemetry collection. When such detection is impossible (for example, if a proxy is being used), Agent telemetry is emitted, but immediately dropped at Datadog's intake. To avoid this data from being emitted in the first place, Datadog recommends disabling Agent telemetry explicitly by updating the `agent_telemetry` setting in the Agent configuration file, as shown in the example below.
+
+{{< tabs >}}
+{{% tab "datadog.yaml" %}}
+
+```yaml
+agent_telemetry:
+  enabled: false
+```
+{{% /tab %}}
+{{% tab "Environment variables" %}}
+
+```bash
+DD_AGENT_TELEMETRY_ENABLED=false
+```
+{{% /tab %}}
+{{< /tabs >}}
+[1]: https://docs.datadoghq.com/agent/configuration/agent-fips-proxy/?tab=hostorvm&site=gov
+{{< /site-region >}}
+{{< site-region region="us,us3,us5,eu,ap1" >}}
+Datadog may collect environmental, performance, and feature usage information about the Datadog Agent. This may include diagnostic logs and crash dumps of the Datadog Agent with obfuscated stack traces to support and further improve the Datadog Agent.
+
+You can disable this telemetry collection by updating the `agent_telemetry` setting in the Agent configuration file, as shown in the example below.
+{{< tabs >}}
+{{% tab "datadog.yaml" %}}
+
+```yaml
+agent_telemetry:
+  enabled: false
+```
+{{% /tab %}}
+{{% tab "Environment variables" %}}
+
+```bash
+DD_AGENT_TELEMETRY_ENABLED=false
+```
+{{% /tab %}}
+{{< /tabs >}}
+
+**Telemetry content:**
+| Metadata ([source][1]) |
+| ---------------------- |
+| Machine id             |
+| Machine name           |
+| OS                     |
+| OS version             |
+| Agent version          |
+
+| Metrics ([source][2])                       | Description                                                                                       |
+| ------------------------------------------- | ------------------------------------------------------------------------------------------------- |
+| checks.execution_time                       | Check's execution time in milliseconds                                                            |
+| pymem.inuse                                 | Number of bytes allocated by the Python interpreter                                               |
+| pymem.alloc                                 | Total number of bytes allocated by the Python interpreter since the start of the Agent            |
+| api_server.request_duration_seconds         | CLI commands execution performance (if executed)                                                  |
+| logs.decoded                                | Total number of decoded logs                                                                      |
+| logs.processed                              | Total number of processed logs                                                                    |
+| logs.sender_latency                         | HTTP sender latency in milliseconds                                                               |
+| logs.bytes_missed                           | Total number of bytes lost before they could be consumed by the Agent, such as after log rotation |
+| logs.sent                                   | Total number of sent logs                                                                         |
+| logs.dropped                                | Total number of logs dropped                                                                      |
+| logs.bytes_sent                             | Total number of bytes send before encoding, if any                                                |
+| logs.encoded_bytes_sent                     | Total number of sent bytes after encoding, if any                                                 |
+| dogstatsd.udp_packets                       | DogStatsD UDP packets bytes                                                                       |
+| dogstatsd.uds_packets                       | DogStatsD UDS packets bytes                                                                       |
+| transactions.input_count                    | Incoming transaction count                                                                        |
+| transactions.requeued                       | Transaction requeue count                                                                         |
+| transactions.retries                        | Transaction retry count                                                                           |
+| point.sent                                  | Total number of sent metrics                                                                      |
+| point.dropped                               | Total number of dropped metrics                                                                   |
+| oracle.activity_samples_count               | Number of rows fetched in measuring query activity (Number of activity samples collected)         |
+| oracle.activity_latency                     | Time to retrieve query activity in milliseconds                                                   |
+| oracle.statement_metrics                    | Time to retrieve database metrics in milliseconds                                                 |
+| oracle.statement_plan_errors                | Number of errors in retrieving execution plans                                                    |
+| postgres.collect_relations_autodiscovery_ms | Time to collect autodiscoverty relations in milliseconds                                          |
+| postgres.collect_stat_autodiscovery_ms      | Time to collect Autodiscovery stats in milliseconds                                               |
+| postgres.get_new_pg_stat_activity_ms        | Time to get `pg_stat_activity` in milliseconds                                                    |
+| postgres.get_new_pg_stat_activity_count     | Total rows fetched to collect `pg_stat_activity`                                                  |
+| postgres.get_active_connections_ms          | Time to get active connections in milliseconds                                                    |
+| postgres.get_active_connections_count       | Total rows fetched to get active connections                                                      |
+| postgres.collect_activity_snapshot_ms       | Time to get activity snapshot in milliseconds                                                     |
+| postgres.collect_statement_samples_ms       | Time to get statement samples in milliseconds                                                     |
+| postgres.collect_statement_samples_count    | Total rows fetched to collect statement samples                                                   |
+
+Only applicable metrics are emitted. For example, if DBM is not enabled, none of the database related metrics are emitted.
+
+
+[1]: https://github.com/DataDog/datadog-agent/blob/4dc6ed6eb069bdea7e93f2d267ac5086a98c968c/comp/core/agenttelemetry/impl/sender.go#L218-L221
+[2]: https://github.com/DataDog/datadog-agent/blob/4dc6ed6eb069bdea7e93f2d267ac5086a98c968c/comp/core/agenttelemetry/impl/config.go#L156
+
+{{< /site-region >}}
+
 ### Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -111,3 +207,5 @@ For more information, see the [Secrets Management][18] documentation.
 [18]: /agent/configuration/secrets-management/
 [19]: https://keys.datadoghq.com/DATADOG_APT_KEY_C0962C7D.public
 [20]: https://keys.datadoghq.com/DATADOG_RPM_KEY_B01082D3.public
+[21]: https://keys.datadoghq.com/DATADOG_RPM_KEY_4F09D16B.public
+[22]: https://keys.datadoghq.com/DATADOG_APT_KEY_06462314.public

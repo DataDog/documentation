@@ -4,7 +4,6 @@ algolia:
   - 브라우저 로그
 aliases:
 - /ko/logs/log_collection/web_browser
-kind: 설명서
 title: 브라우저 로그 수집
 ---
 
@@ -13,11 +12,11 @@ title: 브라우저 로그 수집
 브라우저 로그 SDK를 사용해 웹 브라우저 페이지에서 바로 Datadog로 로그를 전송하고 다음 기능을 활용할 수 있습니다.
 
 - SDK를 로거로 사용합니다. 모든 항목이 JSON 문서로 Datadog에 전달됩니다.
-- `context` 및 그외 커스텀 속성을 전송된 각 로그에 추가합니다.
+- `context` 및 그 외 커스텀 속성을 전송된 각 로그에 추가합니다.
 - 모든 프런트엔드 오류를 자동으로 래핑하여 전달합니다.
 - 프런트엔드 오류를 전달합니다.
 - 실제 클라이언트 IP 주소와 사용자 에이전트를 기록합니다.
-- 자동 대량 포스트로 네트워크 사용량을 최적화했습니다.
+- 자동 대량 포스트로 네트워크 사용을 최적화합니다.
 
 ## 설정
 
@@ -350,32 +349,34 @@ window.DD_LOGS.init({
 
 | 파라미터                  | 유형                                                                      | 필수 | 기본값         | 설명                                                                                                                                                                           |
 |----------------------------|---------------------------------------------------------------------------|----------|-----------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `clientToken`              | 문자열                                                                    | 네      |                 | [Datadog 클라이언트 토큰][2].                                                                                                                                                          |
-| `site`                     | 문자열                                                                    | 네      | `datadoghq.com` |  [조직의 Datadog 사이트 파라미터][9]                                                                                                                                 |
-| `service`                  | 문자열                                                                    | 아니요       |                 | 애플리케이션의 서비스 이름. [태그 구문 요건][7] 뒤에 와야 합니다.                                                                                             |
-| `env`                      | 문자열                                                                    | 아니요       |                 | 애플리케이션의 환경. 예:  prod, pre-prod, staging 등. [태그 구문 요건][7] 뒤에 와야 합니다.                                                    |
-| `version`                  | 문자열                                                                    | 아니요       |                 | 애플리케이션 버전. 예: .2.3, 6c44da20, 2020.02.13 등. [태그 구문 요건][7] 뒤에 와야 합니다.                                                    |
-| `forwardErrorsToLogs`      | 부울 연산자                                                                   | 아니요       | `true`          | `false`로 설정해 콘솔 오류 로그, 발견되지 않은 예외와 네트워크 오류가 Datadog로 전달되는 것을 막습니다.                                                                              |
-| `forwardConsoleLogs`       | `"all"` 또는 `"log"` `"debug"` `"info"` `"warn"` `"error"` 어레이      | 아니요       | `[]`            | `console.*`에서 Datadog로 로그를 전달합니다. `"all"`을 사용해 전체를 전달하거나 콘솔 API 이름 어레이를 사용해 하위 집합만 전달합니다.                                                |
-| `forwardReports`           | `"all"` 또는 `"intervention"` `"deprecation"` `"csp_violation"` 어레이 | 아니요       | `[]`            | [보고 API][8]에서 Datadog로 보고서를 전달합니다. `"all"`을 사용해 전체를 전달하거나 보고 유형 어레이를 사용해 하위 집합만 전달합니다.                                       |
-| `sampleRate`               | 숫자                                                                    | 아니요       | `100`           | **지원 중단됨** - `sessionSampleRate` 참조                                                                                                                                             |
-| `sessionSampleRate`        | 숫자                                                                    | 아니요       | `100`           | 추적할 세션 비율: 전체의 경우 `100`, 전체 해제의 경우 `0`. 추적된 세션만 로그를 전송합니다.                                                                                    |
-| `trackingConsent`          | `"granted"` 또는 `"not-granted"`                                            | 아니요       | `"granted"`     | 초기 사용자 추적 동의 상태를 설정합니다. [사용자 추적 동의][15]를 참조하세요.                                                                                                         |
-| `silentMultipleInit`       | 부울 연산자                                                                   | 아니요       |                 | 여러 init을 포함하면서 오류를 기록하는 것을 방지합니다.                                                                                                                                    |
-| `proxy`                    | 문자열                                                                    | 아니요       |                 | 부수적 프록시 URL(예: https://www.proxy.com/path). 자세한 정보는 전체 [프록시 설정 가이드][6]를 참조합니다.                                                                        |
-| `telemetrySampleRate`      | 숫자                                                                    | 아니요       | `20`            | SDK 실행에 대한 텔레메트리 데이터(오류, 디버그 로그)는 잠재적 문제를 감지하고 해결하기 위해 Datadog로 전송됩니다. 이 옵션을 `0`으로 설정해 텔레메트리 수집을 사용 중지합니다. |
-| `storeContextsAcrossPages` | 부울 연산자                                                                   | 아니요       |                 | `localStorage`에 글로벌 컨텍스트와 사용자 컨텍스트를 저장하여 사용자 탐색 시 이를 보존합니다. 자세한 정보와 구체적인 제한은 [컨텍스트 라이프사이클][11]을 참조하세요.          |
-| `allowUntrustedEvents`     | 부울 연산자                                                                   | 아니요       |                 | 자동화된 UI 테스트 예시의 경우 [신뢰할 수 없는 이벤트][13] 수집을 허용합니다.                                                                                                           |
+| `clientToken`              | 문자열                                                                    | Yes      |                 | [Datadog 클라이언트 토큰][2].                                                                                                                                                          |
+| `site`                     | 문자열                                                                    | Yes      | `datadoghq.com` |  [조직의 Datadog 사이트 파라미터][9]                                                                                                                                 |
+| `service`                  | 문자열                                                                    | No       |                 | 애플리케이션의 서비스 이름. [태그 구문 요건][7] 뒤에 와야 합니다.                                                                                             |
+| `env`                      | 문자열                                                                    | No       |                 | 애플리케이션의 환경. 예:  prod, pre-prod, staging 등. [태그 구문 요건][7] 뒤에 와야 합니다.                                                    |
+| `version`                  | 문자열                                                                    | No       |                 | 애플리케이션 버전. 예: .2.3, 6c44da20, 2020.02.13 등. [태그 구문 요건][7] 뒤에 와야 합니다.                                                    |
+| `forwardErrorsToLogs`      | Boolean                                                                   | No       | `true`          | `false`로 설정해 콘솔 오류 로그, 발견되지 않은 예외와 네트워크 오류가 Datadog로 전달되는 것을 막습니다.                                                                              |
+| `forwardConsoleLogs`       | `"all"` 또는 `"log"` `"debug"` `"info"` `"warn"` `"error"` 어레이      | No       | `[]`            | `console.*`에서 Datadog로 로그를 전달합니다. `"all"`을 사용해 전체를 전달하거나 콘솔 API 이름 어레이를 사용해 하위 집합만 전달합니다.                                                |
+| `forwardReports`           | `"all"` 또는 `"intervention"` `"deprecation"` `"csp_violation"` 어레이 | No       | `[]`            | [보고 API][8]에서 Datadog로 보고서를 전달합니다. `"all"`을 사용해 전체를 전달하거나 보고 유형 어레이를 사용해 하위 집합만 전달합니다.                                       |
+| `sampleRate`               | 숫자                                                                    | No       | `100`           | **지원 중단됨** - `sessionSampleRate` 참조                                                                                                                                             |
+| `sessionSampleRate`        | 숫자                                                                    | No       | `100`           | 추적할 세션 비율: 전체의 경우 `100`, 전체 해제의 경우 `0`. 추적된 세션만 로그를 전송합니다.                                                                                    |
+| `trackingConsent`          | `"granted"` 또는 `"not-granted"`                                            | No       | `"granted"`     | 초기 사용자 추적 동의 상태를 설정합니다. [사용자 추적 동의][15]를 참조하세요.                                                                                                         |
+| `silentMultipleInit`       | Boolean                                                                   | No       |                 | 여러 init을 포함하면서 오류를 기록하는 것을 방지합니다.                                                                                                                                    |
+| `proxy`                    | 문자열                                                                    | No       |                 | 부수적 프록시 URL(예: https://www.proxy.com/path). 자세한 정보는 전체 [프록시 설정 가이드][6]를 참조합니다.                                                                        |
+| `telemetrySampleRate`      | 숫자                                                                    | No       | `20`            | SDK 실행에 대한 텔레메트리 데이터(오류, 디버그 로그)는 잠재적 문제를 감지하고 해결하기 위해 Datadog로 전송됩니다. 이 옵션을 `0`으로 설정해 텔레메트리 수집을 사용 중지합니다. |
+| `storeContextsAcrossPages` | Boolean                                                                   | No       |                 | `localStorage`에 글로벌 컨텍스트와 사용자 컨텍스트를 저장하여 사용자 탐색 시 이를 보존합니다. 자세한 정보와 구체적인 제한은 [컨텍스트 라이프사이클][11]을 참조하세요.          |
+| `allowUntrustedEvents`     | Boolean                                                                   | No       |                 | 자동화된 UI 테스트 예시의 경우 [신뢰할 수 없는 이벤트][13] 수집을 허용합니다.                                                                                                           |
+| `sendLogsAfterSessionExpiration` | Boolean                                                             | No       |                 | 세션이 만료된 후에도 로그를 계속 전송하세요.
 
 
 `RUM` SDK를 사용할 때 옵션에 일치하는 설정이 있어야 합니다.
 
 | 파라미터                              | 유형    | 필수 | 기본값 | 설명                                                                                                                                                              |
 |----------------------------------------| ------- | -------- | ------- |--------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `trackSessionAcrossSubdomains`         | 부울 연산자 | 아니요       | `false` | 동일한 사이트에 대한 하위 도메인에서 세션을 보존합니다.                                                                                                                |
-| `useSecureSessionCookie`               | 부울 연산자 | 아니요       | `false` | 보안 세션 쿠키를 사용합니다. 이를 통해 안전하지 않은(비-HTTPS) 연결에서 전송된 로그를 비활성화합니다.                                                                                |
-| `usePartitionedCrossSiteSessionCookie` | 부울 연산자 | 아니요       | `false` | 파티션된 보안 크로스 사이트 세션 쿠키를 사용합니다. 이를 통해 사이트가 또 다른 iframe에서 로딩될 때 로그 SDK가 실행되도록 할 수 있습니다. `useSecureSessionCookie`를 의미합니다. |
-| `useCrossSiteSessionCookie`            | 부울 연산자 | 아니요       | `false` | **지원 중단됨** `usePartitionedCrossSiteSessionCookie`를 참조합니다.                                                                                                              |
+| `trackSessionAcrossSubdomains`         | Boolean | No       | `false` | 동일한 사이트에 대한 하위 도메인에서 세션을 보존합니다.                                                                                                                |
+| `useSecureSessionCookie`               | Boolean | No       | `false` | 보안 세션 쿠키를 사용합니다. 이를 통해 안전하지 않은(비-HTTPS) 연결에서 전송된 로그를 비활성화합니다.                                                                                |
+| `usePartitionedCrossSiteSessionCookie` | Boolean | No       | `false` | 파티션된 보안 크로스 사이트 세션 쿠키를 사용합니다. 이를 통해 사이트가 또 다른 iframe에서 로딩될 때 로그 SDK가 실행되도록 할 수 있습니다. `useSecureSessionCookie`를 의미합니다. |
+| `useCrossSiteSessionCookie`            | Boolean | No       | `false` | **지원 중단됨** `usePartitionedCrossSiteSessionCookie`를 참조합니다.                                                                                                              |
+| `usePciIntake`                         | Boolean | No       | `false` | 로그를 [PCI 호환 인테이크][16]로 전달하려면 `true`로 설정합니다. PCI 호환 인테이크는 US1 사이트의 Datadog 조직에서만 사용할 수 있습니다. `usePciIntake`가 `true`로 설정되어 있고 사이트가 US1(datadoghq.com)이 아닌 경우 로그가 기본 인테이크에 전송됩니다. |
 
 ## 사용법
 
@@ -573,7 +574,7 @@ window.DD_LOGS && window.DD_LOGS.logger.log(<MESSAGE>,<JSON_ATTRIBUTES>,<STATUS>
 | `<MESSAGE>`         | Datadog가 완전히 인덱싱한 로그 메시지입니다.                               |
 | `<JSON_ATTRIBUTES>` | `<MESSAGE>`와 연결된 모든 속성을 포함하는 유효한 JSON 개체입니다.         |
 | `<STATUS>`          | 로그 상태로, 허용되는 상태 값은 `debug`, `info`, `warn` 또는 `error`입니다. |
-| `<ERROR>`           | [자바스크립트 오류][10] 개체의 인스턴스입니다.                                         |
+| `<ERROR>`           | [자바스크립트 오류][10] 개체의 인스턴스입니다.                                         |
 
 ## 고급 사용량
 
@@ -754,7 +755,7 @@ window.DD_LOGS.onReady(function () {
     level: 'info',
     handler: 'http',
     context: { env: 'staging' }
-  )
+  })
 })
 ```
 
@@ -787,7 +788,7 @@ if (window.DD_LOGS) {
 
 ```javascript
 if (window.DD_LOGS) {
-  const signupLogger = window.window.DD_LOGS.getLogger('signupLogger')
+  const signupLogger = window.DD_LOGS.getLogger('signupLogger')
   signupLogger.info('Test sign up completed')
 }
 ```
@@ -1261,3 +1262,4 @@ window.DD_LOGS && window.DD_LOGS.getInternalContext() // { session_id: "xxxx-xxx
 [13]: https://developer.mozilla.org/en-US/docs/Web/API/Event/isTrusted
 [14]: /ko/integrations/content_security_policy_logs/#use-csp-with-real-user-monitoring-and-session-replay
 [15]: #user-tracking-consent
+[16]: https://docs.datadoghq.com/ko/data_security/logs/#pci-dss-compliance-for-log-management

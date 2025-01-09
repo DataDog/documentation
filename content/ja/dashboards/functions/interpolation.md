@@ -8,7 +8,6 @@ further_reading:
 - link: /metrics/guide/interpolation-the-fill-modifier-explained/
   tag: ドキュメント
   text: 補間とフィル修飾子
-kind: documentation
 title: 補間
 ---
 
@@ -93,7 +92,7 @@ default_zero(avg:custom_metric{*})
 +---------------------+-----------------------------+
 ```
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

@@ -12,7 +12,7 @@ integration_id: azure-app-services
 integration_title: Microsoft Azure App Service
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: azure_app_services
 public_title: Intégration Datadog/Microsoft Azure App Service

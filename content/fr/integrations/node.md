@@ -20,13 +20,13 @@ further_reading:
 git_integration_title: node
 has_logo: true
 integration_id: node
-integration_title: NodeJS
+integration_title: Node.js
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: node
-public_title: Intégration Datadog/NodeJS
+public_title: Intégration Datadog/Node.js
 short_description: Envoyez des métriques custom à partir de vos services Node.js via
   DogStatsD ou notre API.
 version: '1.0'

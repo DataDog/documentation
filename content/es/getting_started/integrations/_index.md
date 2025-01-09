@@ -6,7 +6,6 @@ further_reading:
 - link: /integrations/
   tag: Documentación
   text: Consulta la lista de integraciones de Datadog
-kind: documentación
 title: Introducción a las integraciones
 ---
 

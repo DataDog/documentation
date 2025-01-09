@@ -1,6 +1,6 @@
 ---
 title: Use Multiple Instances of the Mobile SDK
-kind: guide
+
 further_reading:
 - link: '/real_user_monitoring/explorer'
   tag: 'Documentation'
@@ -15,6 +15,8 @@ further_reading:
 Follow this guide to use multiple named instances of the SDK. Many methods of the SDK optionally take an SDK instance as an argument. If none is provided, the call is associated with the default (nameless) SDK instance.
 
 **Note**: The SDK instance name should be consistent between application runs. Storage paths for SDK events depend on this.
+
+**Note**: Session Replay can only run on a single core at once. To switch to a different one, first stop the existing core it is running on.
 
 {{< tabs >}}
 {{% tab "Android" %}}
@@ -41,6 +43,15 @@ GlobalRumMonitor.get(namedSdkInstance)
 NdkCrashReports.enable(namedSdkInstance)
 
 WebViewTracking.enable(webView, allowedHosts, namedSdkInstance)
+
+SessionReplay.enable(sessionReplayConfig, namedSdkInstance)
+```
+
+**Note**:
+In order for instrumentation to work on the WebView component, it is very important that the JavaScript is enabled on the WebView. To enable it, you can use the following code snippet:
+
+```kotlin
+    webView.settings.javaScriptEnabled = true
 ```
 
 You can retrieve the named SDK instance by calling `Datadog.getInstance(<name>)` and use the `Datadog.isInitialized(<name>)` method to check if the particular SDK instance is initialized.
@@ -68,6 +79,8 @@ RUM.enable(
 Logs.enable(in: core)
 
 Trace.enable(in: core)
+
+SessionReplay.enable(with: sessionReplayConfig, in: core)
 ```
 
 Once the named SDK instance is initialized, you can retrieve it by calling `Datadog.sdkInstance(named: "<name>")` and use it as shown below.

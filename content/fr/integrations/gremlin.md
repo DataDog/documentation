@@ -19,7 +19,7 @@ integration_id: gremlin
 integration_title: Gremlin
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 maintainer: support@gremlin.com
 manifest_version: 1.0.0
 name: gremlin

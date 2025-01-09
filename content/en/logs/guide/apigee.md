@@ -1,13 +1,15 @@
 ---
 title: Apigee
 name: apigee
-kind: Guide
 description: 'Collect Apigee proxy logs to track errors, request response time, duration, latency and monitor performance and issues of the proxies aggregated in one place.'
 short_description: 'Collect Apigee logs'
 aliases:
 - /logs/log_collection/apigee
 - /integrations/apigee
 further_reading:
+- link: 'https://docs.apigee.com/api-platform/reference/policies/javascript-policy'
+  tag: 'Apigee'
+  text: 'Apigee JavaScript Policy'
 - link: 'logs/'
   tag: 'Documentation'
   text: 'Log Management'
@@ -41,26 +43,26 @@ Use the MessageLogging policy type with the syslog parameter on your API to log 
         <Port><site_port></Port>
         <Protocol>TCP</Protocol>
     </Syslog>
+    <logLevel>ALERT</logLevel>
 </MessageLogging>
 ```
 
-[1]: https://docs.apigee.com/api-platform/reference/policies/javascript-policy
-[2]: https://docs.apigee.com/api-platform/reference/policies/message-logging-policy#samples
+[1]: https://cloud.google.com/apigee/docs/api-platform/reference/policies/javascript-policy?hl=en
+[2]: https://cloud.google.com/apigee/docs/api-platform/reference/policies/message-logging-policy
 
 {{% /site-region %}}
 #### JavaScript policy
 
-Send Apigee proxy logs to Datadog using Apigee's [JavaScript policy][1].
-
-The JavaScript has been configured to capture the essential flow variables as log attributes in Datadog. The attributes are named according to the [list of standard attributes][2].
+Send Apigee proxy logs to Datadog using Apigee's JavaScript policy. For detailed instructions, see the [Apigee documentation][1].
 
 1. Select the Apigee proxy from which you want to send logs to Datadog.
-2. In the selected proxy overview page, click the **DEVELOP** tab located in the top-right corner.
+2. In the selected proxy overview page, click the **DEVELOP** tab.
+3. Select **New Script**.
+4. Select JavaScript and add flow variables into JavaScript from the [Apigee flow variable reference][4]. 
 
-{{< img src="static/images/logs/guide/apigee/apigee_develop.png" alt="Develop" style="width:75%;">}}
+{{% collapse-content title="Example JavaScript code snippet" level="h4" expanded=false %}}
 
-3. Under **Navigator**, go to add a new JavaScript policy and edit the JavaScript file created under the **Resources --> jsc** dropdown menu.
-4. Add the following JavaScript code snippet in it. Make sure to replace `<DATADOG_API_KEY>` in the `dd_api_url` variable with your [Datadog API KEY][3].
+See the following example JavaScript code snippet. Replace `<DATADOG_API_KEY>` in the `dd_api_url` variable with your [Datadog API KEY][3]. The JavaScript has been configured to capture the essential flow variables as log attributes in Datadog. The attributes are named according to the list of standard attributes.
 
 ```
 // Set the Datadog API URL here.
@@ -92,13 +94,12 @@ var appName = context.getVariable("developer.app.name");
 var httpMethod = context.getVariable("request.verb");
 var httpUrl = '' + context.getVariable("client.scheme") + '://' + context.getVariable("request.header.host") + context.getVariable("request.uri");
 var httpStatusCode = context.getVariable("message.status.code");
-var statusResponse = context.getVariable("message.reason.phrase");
+var statusResponse = context.getVariable("response.reason.phrase");
 var clientLatency = total_client_time;
 var targetLatency = total_target_time;
 var totalLatency = total_request_time;
 var userAgent = context.getVariable('request.header.User-Agent');
 var messageContent = context.getVariable('message.content');
-
 
 // Datadog log attributes
 var logObject = {
@@ -124,11 +125,9 @@ var logObject = {
     "message": messageContent,
 };
 
-
 var headers = {
     'Content-Type': 'application/json'
 };
-
 
 // Debug
 // print('LOGGING OBJECT' + JSON.stringify(logObject));
@@ -139,7 +138,8 @@ var myLoggingRequest = new Request(dd_api_url, "POST", headers, JSON.stringify(l
 httpClient.send(myLoggingRequest);
 ```
 
-**Note**: Add more flow variables into JavaScript from the official [Apigee flow variable reference][4].
+{{% /collapse-content %}}
+
 
 ## Troubleshooting
 

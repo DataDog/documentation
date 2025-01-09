@@ -1,6 +1,5 @@
 ---
 title: Basic Agent Usage
-kind: documentation
 aliases:
     - /guides/basic_agent_usage/
     - /agent/faq/where-is-the-configuration-file-for-the-agent/
@@ -38,7 +37,7 @@ Use the Datadog Agent Manager GUI to:
 - Add or edit Agent checks
 - Send flares
 
-The Datadog Agent Manager GUI is enabled by default on Windows and macOS, and runs on port `5052`. Use the `datadog-agent launch-gui` command to open the GUI in your default web browser.
+The Datadog Agent Manager GUI is enabled by default on Windows and macOS, and runs on port `5002`. Use the `datadog-agent launch-gui` command to open the GUI in your default web browser.
 
 You can change the GUI's default port in your `datadog.yaml` configuration file. To disable the GUI, set the port's value to `-1`. On Linux, the GUI is disabled by default.
 

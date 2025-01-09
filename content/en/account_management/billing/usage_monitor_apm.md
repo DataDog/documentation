@@ -1,6 +1,5 @@
 ---
 title: View and Alert on APM Usage
-kind: documentation
 ---
 
 Datadog has many pricing plans to fit your needs. For more information, see the [Pricing page][1].
@@ -46,7 +45,7 @@ To reduce the number of indexed spans, check your configuration for retention fi
 [1]: https://www.datadoghq.com/pricing
 [2]: /account_management/billing/apm_distributed_tracing/
 [3]: https://app.datadoghq.com/account/usage
-[4]: https://app.datadoghq.com/monitors#create/metric
+[4]: https://app.datadoghq.com/monitors/create/metric
 [5]: /monitors/types/apm/?tab=traceanalytics#monitor-creation
 [6]: https://app.datadoghq.com/apm/traces?viz=timeseries
 [7]: /tracing/guide/trace_ingestion_volume_control/

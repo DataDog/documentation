@@ -2,7 +2,6 @@
 title: OpenTelemetry Java Runtime Metrics
 aliases:
 - /opentelemetry/runtime_metrics/java/
-kind: documentation
 code_lang: java
 type: multi-code-lang
 code_lang_weight: 10
@@ -35,10 +34,10 @@ The following table lists the Datadog runtime metrics that are supported by mapp
 | `jvm.non_heap_memory_committed` | The total Java non-heap memory committed to be used. | `process.runtime.jvm.memory.committed` <br> `jvm.memory.committed` |
 | `jvm.non_heap_memory_init` | The initial Java non-heap memory allocated. | `process.runtime.jvm.memory.init` <br> `jvm.memory.init` |
 | `jvm.non_heap_memory_max` | The maximum Java non-heap memory available. | `process.runtime.jvm.memory.limit` <br> `jvm.memory.limit` |
-| `jvm.gc.old_gen_size` | | `process.runtime.jvm.memory.usage` <br> `jvm.memory.used` |
-| `jvm.gc.eden_size` | | `process.runtime.jvm.memory.usage` <br> `jvm.memory.used` |
-| `jvm.gc.survivor_size` | | `process.runtime.jvm.memory.usage` <br> `jvm.memory.used` |
-| `jvm.gc.metaspace_size` | | `process.runtime.jvm.memory.usage` <br> `jvm.memory.used` |
+| `jvm.gc.old_gen_size` | The current Java heap memory usage of the Old Generation memory pool. | `process.runtime.jvm.memory.usage` <br> `jvm.memory.used` |
+| `jvm.gc.eden_size` | The current Java heap memory usage of the Eden memory pool. | `process.runtime.jvm.memory.usage` <br> `jvm.memory.used` |
+| `jvm.gc.survivor_size` | The current Java heap memory usage of the Survivor memory pool. | `process.runtime.jvm.memory.usage` <br> `jvm.memory.used` |
+| `jvm.gc.metaspace_size` | The current Java non-heap memory usage of the Metaspace memory pool. | `process.runtime.jvm.memory.usage` <br> `jvm.memory.used` |
 | `jvm.thread_count` | The number of live threads. | `process.runtime.jvm.threads.count` <br> `jvm.thread.count` |
 | `jvm.loaded_classes` | Number of classes currently loaded. | `process.runtime.jvm.classes.current_loaded` <br> `jvm.class.count` |
 | `jvm.cpu_load.system` | Recent CPU utilization for the whole system. | `process.runtime.jvm.system.cpu.utilization` <br> `jvm.system.cpu.utilization` |

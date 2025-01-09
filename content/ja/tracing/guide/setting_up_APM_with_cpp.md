@@ -3,7 +3,6 @@ further_reading:
 - link: /tracing/trace_collection/dd_libraries/cpp/
   tag: ドキュメント
   text: C++ によるトレースアプリケーションの詳細
-kind: ガイド
 title: C++ による APM の設定
 ---
 
@@ -34,61 +33,27 @@ sudo apt-get update
 sudo apt-get -y install g++ cmake
 ```
 
-この 2 行を実行すると、最新バージョンの C++ を入手できます。
-
-```cpp
-get_latest_release() {
-  wget -qO- "https://api.github.com/repos/$1/releases/latest" |
-    grep '"tag_name":' |
-    sed -E 's/.*"([^"]+)".*/\1/';
-}
-DD_OPENTRACING_CPP_VERSION="$(get_latest_release DataDog/dd-opentracing-cpp)"
-```
-
-GitHub からレート制限のメッセージが表示された場合は、数分間待ってからもう一度コマンドを実行してください。アップデートが完了したら、正しく実行されたことを C++ のバージョンをチェックして確認します。
+以下のコマンドで `dd-trace-cpp` ライブラリをダウンロードしてインストールします。
 
 ```shell
-echo $DD_OPENTRACING_CPP_VERSION
+wget https://github.com/DataDog/dd-trace-cpp/archive/v0.2.0.tar.gz -O dd-trace-cpp.tar.gz
 ```
 
-次に、`dd-opentracing-cpp` ライブラリをダウンロードしてインストールします。
+GitHub からレート制限のメッセージが表示された場合は、数分待ってからもう一度コマンドを実行してください。
 
-```shell
-wget https://github.com/DataDog/dd-opentracing-cpp/archive/${DD_OPENTRACING_CPP_VERSION}.tar.gz -O dd-opentracing-cpp.tar.gz
-```
-
-`tar` ファイルをダウンロードしたら、ライブラリ用に新しいディレクトリと `.build` ファイルを作成します。
-
-```shell
-mkdir -p dd-opentracing-cpp/.build
-```
-
-続いて、ファイルを解凍します。
+`tar` ファイルをダウンロードした後、解凍します。
 
 ```bash
-tar zxvf dd-opentracing-cpp.tar.gz -C ./dd-opentracing-cpp/ --strip-components=1
+tar zxvf dd-trace-cpp.tar.gz -C ./dd-trace-cpp/ --strip-components=1
 ```
 
-ライブラリのコンテンツリストがコンソールに表示されます。
-
-```shell
-dd-opentracing-cpp-1.0.1/test/integration/nginx/nginx.conf
-dd-opentracing-cpp-1.0.1/test/integration/nginx/nginx_integration_test.sh
-```
-
-次に、`.build` ディレクトリに移動します。
-
-```shell
-cd dd-opentracing-cpp/.build
-```
-
-最後に、依存関係をインストールします。
+最後に、以下のコマンドでライブラリをビルドしてインストールします。
 
 ```bash
-sudo ../scripts/install_dependencies.sh
-cmake ..
-make
-sudo make install
+cd dd-trace-cpp
+cmake -B build .
+cmake --build build -j
+cmake --install build
 ```
 
 ## 簡単なアプリの作成
@@ -96,33 +61,44 @@ sudo make install
 新しいファイルを `tracer_example.cpp` という名前で作成し、以下のコードを入力します。
 
 ```cpp
-#include <datadog/opentracing.h>
-#include <iostream>
-#include <string>
+#<datadog/tracer.h> を含めます
+#<iostream> を含めます
+#<string> を含めます
 
 int main(int argc, char* argv[]) {
-  datadog::opentracing::TracerOptions tracer_options{"localhost", 8126, "compiled-in example"};
-  auto tracer = datadog::opentracing::makeTracer(tracer_options);
+  datadog::tracing::TracerConfig tracer_config;
+  tracer_config.service = "compiled-in example";
 
-  // スパンを作成する。
-  {
-    auto span_a = tracer->StartSpan("A");
-    span_a->SetTag("tag", 123);
-    auto span_b = tracer->StartSpan("B", {opentracing::ChildOf(&span_a->context())});
-    span_b->SetTag("tag", "value");
+  const auto validated_config = dd::finalize_config(tracer_options);
+  if (!validated_config) {
+    std::cerr << validated_config.error() << '\n';
+    return 1;
   }
 
-  tracer->Close();
+  dd::Tracer tracer{*validated_config};
+
+  // いくつかのスパンを作成します。
+  {
+    datadog::tracing::SpanConfig options;
+    options.name = "A";
+    options.tags.emplace("tag", "123");
+    auto span_a = tracer.create_span(options);
+
+    auto span_b = span_a.create_child();
+    span_b.set_name("B");
+    span_b.set_tag("tag", "value");
+  }
+
   return 0;
 }
 ```
 
 これで、親スパンである `span_a` と、子スパンである `span_b` の 2 つのスパンが生成され、タグ付けされます。
 
-次に、`libdd_opentracing` と `libopentracing` に対してリンクを作成します。
+次に、コンパイルして `libdd_trace_cpp` に対してリンクします。
 
 ```shell
-g++ -std=c++14 -o tracer_example tracer_example.cpp -ldd_opentracing -lopentracing
+g++ -std=c++17 -o tracer_example tracer_example.cpp -ldd_trace_cpp
 ```
 
 最後に、アプリを実行します。
@@ -150,10 +126,10 @@ LD_LIBRARY_PATH=/usr/local/lib/ ./tracer_example
 トレース Agent タブに、次のように表示されます。
 
 ```text
-2019-08-09 20:02:26 UTC | TRACE | INFO | (pkg/trace/info/stats.go:108 in LogStats) | [lang:cpp lang_version:201402 tracer_version:v1.0.1] -> traces received: 1, traces filtered: 0, traces amount: 363 bytes, events extracted: 0, events sampled: 0
+2019-08-09 20:02:26 UTC | TRACE | INFO | (pkg/trace/info/stats.go:108 in LogStats) | [lang:cpp lang_version:201402 tracer_version:0.2.0] -> traces received: 1, traces filtered: 0, traces amount: 363 bytes, events extracted: 0, events sampled: 0
 ```
 
-その後、そのサービスは Datadog のサービスカタログに表示されます。
+その後、サービスは Datadog のサービスカタログに表示されます。
 
 {{< img src="tracing/guide/setting_up_APM_with_cpp/apm_services_page.png" alt="APM Services ページ" >}}
 
@@ -165,5 +141,5 @@ LD_LIBRARY_PATH=/usr/local/lib/ ./tracer_example
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/tracing/setup/cpp/#compile-against-dd-opentracing-cpp
+[1]: /ja/tracing/setup/cpp/
 [2]: https://app.datadoghq.com/account/settings/agent/latest?platform=ubuntu

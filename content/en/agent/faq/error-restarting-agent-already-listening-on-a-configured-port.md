@@ -1,6 +1,5 @@
 ---
 title: Error Restarting Agent, Already Listening on a Configured Port
-kind: faq
 further_reading:
 - link: "/agent/"
   tag: "Documentation"

@@ -23,7 +23,6 @@ further_reading:
   tag: Blog
   text: Appliquer aux composants Datadog des mises à jour en temps réel grâce à la
     configuration à distance
-kind: documentation
 title: Configuration à distance
 ---
 

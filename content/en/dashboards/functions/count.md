@@ -1,6 +1,5 @@
 ---
 title: Count
-kind: documentation
 aliases:
     - /graphing/functions/count/
 ---

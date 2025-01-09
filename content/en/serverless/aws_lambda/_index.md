@@ -1,6 +1,5 @@
 ---
 title: Serverless Monitoring for AWS Lambda
-kind: documentation
 further_reading:
 - link: '/serverless/configuration/'
   tag: 'Documentation'
@@ -26,6 +25,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/serverless-cold-start-traces/"
   tag: "Blog"
   text: "Understand serverless function performance with Cold Start Tracing"
+- link: "https://www.datadoghq.com/blog/identifying-deprecated-lambda-functions/"
+  tag: "Blog"
+  text: "Identify deprecated Lambda functions with Datadog"
 ---
 
 Datadog Serverless Monitoring for AWS Lambda gives you visibility into your Lambda functions.

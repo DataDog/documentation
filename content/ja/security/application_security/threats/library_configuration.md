@@ -7,9 +7,6 @@ further_reading:
 - link: /security/application_security/
   tag: Documentation
   text: Datadog Application Security Management で脅威から守る
-- link: /security/application_security/enabling/
-  tag: Documentation
-  text: サービスの ASM を有効にする
 - link: /security/default_rules/?category=cat-application-security
   tag: Documentation
   text: すぐに使える Application Security Management ルール
@@ -22,7 +19,6 @@ further_reading:
 - link: /security/application_security/how-appsec-works/
   tag: Documentation
   text: Datadog における Application Security Management の仕組み
-kind: documentation
 title: ライブラリ構成
 ---
 
@@ -41,7 +37,7 @@ Datadog トレーシングライブラリは、互換性のある認証フレー
 
 ## 特定のパラメーターを検出のトリガーから除外する
 
-ASM のシグナル、つまりセキュリティトレースが誤検出される場合があります。例えば、ASM が同じセキュリティトレースを繰り返し検出し、シグナルが発生したが、そのシグナルは確認され、脅威ではないことがあります。
+ASM のシグナル、あるいはセキュリティトレースが誤検出される場合があります。例えば、ASM が同じセキュリティトレースを繰り返し検出し、シグナルが発生したものの、そのシグナルが確認され、脅威ではないと判断されることがあります。
 
 パスリストにエントリーを追加して、ルールからイベントを無視することで、ノイズの多いシグナルパターンを排除し、正当にセキュリティトレースに焦点を当てることができます。
 
@@ -56,12 +52,14 @@ ASM のシグナル、つまりセキュリティトレースが誤検出され�
 
 Datadog で収集するデータには、除外、難読化、フィルタリング、修正したり、収集しないことを選択したりするべき機密情報が含まれることがあります。さらに、データは脅威検出が不正確になったり、サービスのセキュリティが Datadog で正確にされないという問題の原因となるシンセティックトラフィックを含む場合もあります。
 
-デフォルトでは、ASM はセキュリティトレースから情報を収集して、なぜそのリクエストが疑わしいとマークされたのかを理解するのに役立ちます。データを送信する前に、ASM はデータが機密であることを示すパターンとキーワードをスキャンします。データが機密であると判断された場合、それは `<redacted>` フラグに置き換えられます。これにより、リクエストは疑わしいが、データセキュリティの懸念からリクエストデータを収集されなかったことがわかります。
+デフォルトでは、ASM はセキュリティトレースから情報を収集し、そのリクエストが疑わしいと判定された理由を理解するのに役立ちます。データを送信する前に、ASM はデータが機密であることを示すパターンとキーワードをスキャンします。データが機密であると判断された場合、それは `<redacted>` フラグに置き換えられます。これにより、リクエストは疑わしいが、データセキュリティの懸念からリクエストデータを収集されなかったことがわかります。認証済みリクエストのユーザー ID などのユーザー関連データは、マスキングされるデータの対象ではありません。
 
-ユーザーのデータを保護するために、ASM では機密データスキャンがデフォルトで有効になっています。以下の環境変数を使用することで、構成をカスタマイズすることができます。スキャンは [RE2 構文][2]に基づいています。スキャンをカスタマイズするには、これらの環境変数の値を有効な RE2 パターンに設定します。
+ユーザーのデータを保護するために、**ASM では機密データスキャンがデフォルトで有効になっています**。以下の環境変数を使用することで、構成をカスタマイズすることができます。スキャンは [RE2 構文][2]に基づいています。スキャンをカスタマイズするには、これらの環境変数の値を有効な [RE2][9] パターンに設定します。
 
 * `DD_APPSEC_OBFUSCATION_PARAMETER_KEY_REGEXP` - 値が一般的に機密データを含むキーをスキャンするためのパターン。見つかった場合、そのキーと関連する値およびすべての子ノードが編集されます。
 * `DD_APPSEC_OBFUSCATION_PARAMETER_VALUE_REGEXP` - 機密データを示す可能性のある値をスキャンするためのパターン。見つかった場合、その値とすべての子ノードが編集されます。
+
+
 
 <div class="alert alert-info"><strong>Ruby のみ、ddtrace バージョン 1.1.0 から</strong>
 
@@ -95,6 +93,9 @@ end
 
 Datadog Agent やライブラリの他のメカニズムで、機密データを削除するために使用できるものについては、[APM データセキュリティ][3]を参照してください。
 
+[自動ユーザーアクティビティイベントトラッキングモード][10]で、自動ユーザーアクティビティトラッキングモードとその構成方法に関する情報をご覧ください。Datadog ライブラリが、モードの略称 (`ident|anon|disabled`) を使用して `DD_APPSEC_AUTO_USER_INSTRUMENTATION_MODE` 環境変数を使用して自動インスツルメンテーションを構成できる方法についてもご覧ください。
+
+
 ## カスタムブロッキングページまたはペイロードの構成
 
 {{% asm-protection-page-configuration %}}
@@ -113,3 +114,5 @@ Datadog Agent やライブラリの他のメカニズムで、機密データを
 [6]: /ja/help/
 [7]: /ja/security/application_security/threats/add-user-info/?tab=set_user#disabling-automatic-user-activity-event-tracking
 [8]: https://app.datadoghq.com/security/configuration/asm/services-config
+[9]: https://github.com/google/re2/wiki/Syntax
+[10]: /ja/security/application_security/threats/add-user-info/?tab=set_user#automatic-user-activity-event-tracking-modes

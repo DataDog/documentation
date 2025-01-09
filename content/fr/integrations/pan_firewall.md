@@ -27,7 +27,7 @@ integration_id: pan-firewall
 integration_title: Pare-feu Palo Alto Networks
 integration_version: 1.1.0
 is_public: true
-kind: integration
+custom_kind: integration
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0
 metric_prefix: pan.firewall

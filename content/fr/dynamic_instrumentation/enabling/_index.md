@@ -5,8 +5,6 @@ further_reading:
 - link: /agent/
   tag: Documentation
   text: Bien débuter avec lʼAgent Datadog
-is_beta: false
-kind: Documentation
 private: false
 title: Activation de lʼinstrumentation dynamique
 type: multi-code-lang

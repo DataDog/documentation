@@ -1,6 +1,5 @@
 ---
 title: Build Apps
-kind: documentation
 aliases:
 - /app_builder/build
 disable_toc: false
@@ -13,10 +12,6 @@ further_reading:
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">App Builder is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
-
-{{< callout url="https://www.datadoghq.com/dg/datadog-app-builder/" btn_hidden="false" header="Join the Beta!">}}
-Datadog App Builder is in private beta. Complete the form to request access.
-{{< /callout >}}
 
 You can create an app or edit existing apps from the [App Builder][1] page. The page lists information about existing apps, including the following:
 - Author
@@ -32,7 +27,7 @@ On the App Builder page, you can access and filter your apps. Hover over an app 
 
 ### Build an app from a blueprint
 
-Blueprints are helpful starter apps. They cover common use cases and come loaded with demo data that you can use to familiarize yourself with the app.
+Blueprints are helpful starter apps that cover common use cases. They come loaded with demo data that you can use to familiarize yourself with the app. Blueprints also showcase best practices for setting up app functionality and visual presentation.
 
 1. From [App Builder][1], click the [Blueprints][2] tab.
 1. Find the blueprint that you want to use and click **Preview**.
@@ -73,132 +68,55 @@ Each component features a list of corresponding configuration options that contr
 
 To delete or duplicate a component, select the component and click the three dot ellipsis (*...*) to display the **Delete** or **Duplicate** options.
 
-Available UI components:
-- Button
-- Callout value
-- Checkbox
-- Container
-- Date range picker
-- JSON input
-- Modal
-- Number input
-- Radio
-- Search
-- Select
-- Table
-- Text
-- Text input
+For a list of available UI components and their properties, see [Components][9].
 
-#### Events
+UI components can trigger reactions on an [Event][11]. 
 
-UI components can trigger reactions on an **Event**. Event triggers differ according to the component. For example, a button component can trigger a reaction on a click event, and a table component event can trigger a reaction on a page change or table row click event.
+[Queries][12] populate your app with data from Datadog APIs or supported integrations. They take inputs from other queries or from UI components and return outputs for use in other queries or in UI components.
 
-An event can set the state of a UI component, open or close a modal, trigger another query, or even run custom JavaScript.
+You can use [JavaScript Expressions][13] anywhere in App Builder to create custom interactions between the different parts of your app.
 
-For example, the [GitHub PR summarizer][4] blueprint uses a **Summarize** button with an event that triggers on a click. The event uses the **Trigger Query** reaction which runs the `summarizePulls` query.
 
-#### Dynamic table values
+## View app version history
 
-Similar to [post-query transformation](#post-query-transformation), the table UI component allows you to customize the data source for the table. You can use the **Data Source** field to dynamically fill table values and constrain which objects are pulled into the table as columns.
+App Builder keeps a record of every saved version of your app.
 
-For example, the [GitHub PR Summarizer][4] blueprint uses a series of GitHub queries to summarize a list of pull requests in a repository. The query uses the data source entry below to constrain the table to 6 columns: `title`,`Summary`,`updated_at`,`user`,`html_url`, and `state`. The highlighted code dynamically populates the user column for each pull request with the author's avatar and GitHub username.
+To view the version history for your app, in the left-hand menu of your app, click the version history icon {{< img src="service_management/app_builder/version-history-icon.png" inline="true">}}.
 
-{{< highlight js "hl_lines=17" >}}
-${(() => {
-    const summaryById = Object.fromEntries(
-        summarizePulls.outputs.map(({id, summary}) => [id, summary])
-    );
-    return listPulls.outputs.map(result => {
-        const {title, updated_at, user, state, html_url} = result;
-        const updatedAt = new Date(result.updated_at);
-        let summary;
-        if (summarizePulls.isLoading) {
-            summary = 'Summarizing';
-        } else {
-            summary = summaryById[result.id] ?? 'N/A';
-        }
-        return {
-            title: `**${title}**`,
-            updated_at: updatedAt.toLocaleString(),
-            user: {label: user.login, src: user.avatar_url},
-            summary,
-            state, html_url};
-    })
-})()}
-{{< /highlight >}}
+The UI displays up to 50 saved or published versions of your app, along with the icon of the user who saved or published the version:
 
-In the table, the **User** column fills with an avatar and GitHub username for each PR author.
+{{< img src="service_management/app_builder/version-history-example.png" alt="An example App Builder version history list with two items, the current version and a previous version" style="width:70%;" >}}
 
-### Queries
+You can perform the following operations:
 
-Queries populate your app with data from Datadog APIs or supported integrations. They take inputs from other queries or from UI components and return outputs for use in other queries or in UI components.
+* To view an app version, click the version in the list.
+* To overwrite an existing app with a previous version, select the version, then click **Restore Version** in the upper right.
+* To create a new app that is a copy of a version, select the version, then click **Clone Version** in the upper right.
 
-To add a query, click the plus (**+**) icon in the **Queries** section and search for a query to add to your app. After you've added a query, it appears in the query list above the query editor. Click and drag queries to reorder them. Select a query to configure it.
 
-Queries rely on [Connections][5] for authentication. App Builder shares connections with [Workflow Automation][6].
+## Interact with an app in JSON
 
-#### Run settings
-
-**Run Settings** determine when a query is executed. There are two options:
-
-- **Auto**: The query runs when the app loads and whenever any query arguments change.
-- **Manual**: The query runs when another portion of the app triggers it. For example, use a manual trigger if you want a query to execute only when a user clicks a UI button component. For more information on event triggers, see [Events](#events).
-
-#### Debounce
-
-Configuring debounce ensures that your query is only triggered once per user input. By default, debounce is set to `0` milliseconds (ms). To prevent a query from being called too frequently, increase the debounce. Configure debounce in the **Advanced** section of a query.
-
-#### Conditional queries
-
-You can set a condition that must be met before a query can run. To set the condition for a query, enter an expression in the **Condition** field in the **Advanced** section of the query. This condition must evaluate to true before the query can run. For example, if you want a given query to run only if a UI component named `select0` exists and is not empty, use the following expression:
-
-{{< code-block lang="js" >}}${select0.value && select0.value.length > 0}{{< /code-block >}}
-
-#### Post-query transformation
-
-Perform a post-query transformation to simplify or transform the output of a query. Add a post-query transformation in the **Advanced** section of a query.
-
-For example, the Slack _List Channels_ action returns an array of dictionaries containing the ID and name for each channel. To discard the IDs and return only an array of names, add the following query transformation:
-
-{{< code-block lang="js" collapsible="false" >}}
-// Use `outputs` to reference the query's unformatted output.
-// TODO: Apply transformations to the raw query output
-arr = []
-object = outputs.channels
-for (var item in object) {
-    arr.push(object[item].name);
-}
-
-return arr
-{{< /code-block >}}
-
-#### Post-query hooks
-
-Similar to UI component events, you can configure a reaction to trigger after a query executes. A **post-query hook** can set a UI component state, open or close a modal, trigger another query, or even run custom JavaScript. For example, the [ECS Task Manager][7] blueprint's `scaleService` query uses a post-query hook to rerun the `describeService` query after it executes.
-
-#### Error notifications
-
-To display a toast (a brief notification message) to the user when the system returns an error, toggle **Show Toast on Errors** in the **Advanced** section of a query.
-
-#### Confirmation prompts
-
-To prompt a user for confirmation before the query runs, toggle the **Requires Confirmation** option in the **Advanced** section of a query.
-
-### Variables
-
-Use app variables to pass data from one part of your app to another. Additionally, you can use app variables to pass in data from your dashboard using [dashboard template variables][3].
-
-Variables are enclosed in braces and are preceded by a dollar sign (`${}`). To use a variable, enter the query or UI component name. Access the child fields using dot notation. For example, if you have a select component named `select0` and you want to access its default value field, use the syntax `${select0.defaultValue}`. If you're not sure what to enter as a variable, type `${` to open a suggestion menu with all available variables.
-
-{{< img src="service_management/app_builder/app-builder-variable.mp4" alt="If you're not sure what to enter as a variable, type ${ to open a suggestion menu with all available variables" video=true >}}
-
-### Customize an app with JSON
+### Edit an app
 
 To edit an app with JSON, click the cog (**Settings**) icon and select **Switch to JSON**. The **Switch to GUI** option in the settings menu takes you back to the GUI editor.
+
+### Export an app
+
+To copy an app layout across organizations or back it up, click the cog (**Settings**) icon and select **Switch to JSON**. This shows the JSON code for the entire app. Copy this JSON code and save it in a text editor. You can save intermediate states of your app during development and return to them if necessary.
+
+To copy the app to another organization:
+1. Create an app. 
+1. Click the cog (**Settings**) icon and select **Switch to JSON**. 
+1. Replace the existing JSON with the JSON that you previously copied. 
+
+The **Switch to GUI** option in the settings menu takes you back to the GUI editor.
+
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+<br>Do you have questions or feedback? Join the **#app-builder** channel on the [Datadog Community Slack][8].
 
 [1]: https://app.datadoghq.com/app-builder/
 [2]: https://app.datadoghq.com/app-builder/blueprints
@@ -207,3 +125,9 @@ To edit an app with JSON, click the cog (**Settings**) icon and select **Switch 
 [5]: /service_management/workflows/connections
 [6]: /service_management/workflows
 [7]: https://app.datadoghq.com/app-builder/apps/edit?viewMode=edit&template=ecs_task_manager
+[8]: https://datadoghq.slack.com/
+[9]: /service_management/app_builder/components
+[10]: https://app.datadoghq.com/app-builder/action-catalog
+[11]: /service_management/app_builder/events
+[12]: /service_management/app_builder/queries
+[13]: /service_management/app_builder/expressions

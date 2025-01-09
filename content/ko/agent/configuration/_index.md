@@ -6,7 +6,6 @@ further_reading:
 - link: /agent/guide/
   tag: 설명서
   text: Agent 가이드
-kind: documentation
 title: Agent 설정
 ---
 

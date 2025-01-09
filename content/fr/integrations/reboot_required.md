@@ -18,7 +18,7 @@ integration_id: reboot-required
 integration_title: Reboot required
 integration_version: 1.0.0
 is_public: true
-kind: integration
+custom_kind: integration
 maintainer: support@krugerheavyindustries.com
 manifest_version: 1.0.0
 name: reboot_required

@@ -1,6 +1,5 @@
 ---
 title: Set up Tracing on Codefresh Pipelines
-kind: documentation
 aliases:
   - /continuous_integration/setup_pipelines/codefresh
 further_reading:
@@ -9,7 +8,7 @@ further_reading:
       text: "Explore Pipeline Execution Results and Performance"
     - link: "/continuous_integration/troubleshooting/"
       tag: "Documentation"
-      text: "Troubleshooting CI"
+      text: "Troubleshooting CI Visibility"
 ---
 
 {{< site-region region="gov" >}}
@@ -35,18 +34,18 @@ Set up tracing in Codefresh to collect data on each step of your pipelines, anal
 
 To set up the Datadog integration for [Codefresh][1]:
 
-1. Go to **[Account Settings > Configuration > Integrations][2]** in Codefresh and click **CONFIGURE** on the Datadog row.
-2. Click **ADD INTEGRATION**.
+1. Go to **[Account Settings > Configuration > Integrations][2]** in Codefresh and click **Configure** on the Datadog row.
+2. Click **Add Integration**.
 3. Fill the form with the following information:
-   * **Datadog site**: Select {{< region-param key="dd_site" code="true" >}} from the dropdown.
-   * **Token**: Add your [Datadog API Key][3].
-4. Click **SAVE** to save the integration.
+   * **Datadog site**: Select `{{< region-param key="dd_site" code="true" >}}` from the dropdown.
+   * **Token**: Add your [Datadog API key][3].
+4. Click **Save** to save the integration.
 
 ## Visualize pipeline data in Datadog
 
-The [Pipelines][4] and [Pipeline Executions][5] pages populate with data after the pipelines finish.
+The [**CI Pipeline List**][4] and [**Executions**][5] pages populate with data after the pipelines finish.
 
-**Note**: The Pipelines page shows data for only the default branch of each repository.
+The **CI Pipeline List** page shows data for only the default branch of each repository. For more information, see [Search and Manage CI Pipelines][11].
 
 ## Further reading
 
@@ -62,3 +61,4 @@ The [Pipelines][4] and [Pipeline Executions][5] pages populate with data after t
 [8]: /glossary/#manual-step
 [9]: /glossary/#parameter
 [10]: /glossary/#pipeline-failure
+[11]: /continuous_integration/search/#search-for-pipelines 

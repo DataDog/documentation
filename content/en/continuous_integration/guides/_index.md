@@ -1,6 +1,5 @@
 ---
 title: CI Visibility Guides
-kind: guide
 private: true
 disable_toc: true
 cascade:
@@ -14,4 +13,6 @@ cascade:
     {{< nextlink href="/continuous_integration/guides/ingestion_control" >}}Creating Exclusion Filters for Ingestion Control{{< /nextlink >}}
     {{< nextlink href="/continuous_integration/guides/pipeline_data_model" >}}Understanding the Pipeline Data Model and Execution Types{{< /nextlink >}}
     {{< nextlink href="/continuous_integration/guides/infrastructure_metrics_with_gitlab" >}}Correlating Infrastructure Metrics with GitLab Jobs in Datadog{{< /nextlink >}}
+    {{< nextlink href="/account_management/billing/ci_visibility/" >}}CI Visibility Billing Considerations{{< /nextlink >}}
+    {{< nextlink href="/continuous_integration/guides/identify_highest_impact_jobs_with_critical_path/" >}}Identify CI Jobs on the Critical Path to Reduce the Pipeline Duration{{< /nextlink >}}
 {{< /whatsnext >}}

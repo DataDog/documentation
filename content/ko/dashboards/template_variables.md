@@ -22,15 +22,12 @@ further_reading:
 - link: /dashboards/widgets/
   tag: 설명서
   text: 대시보드용 위젯 살펴보기
-kind: 설명서
 title: 템플릿 변수
 ---
 
-템플릿 변수를 사용하면 대시보드에서 하나 이상의 위젯을 동적으로 필터링할 수 있습니다.
+## 개요
 
-## 생성
-
-대시보드에서 첫 번째 템플릿 변수를 만들려면 **Add Template Variables**를 클릭합니다. 템플릿 변수가 이미 정의되어 있으면 *연필* 아이콘을 클릭하여 템플릿 변수 편집기를 엽니다. 편집 모드에서 **Add Variable +**를 클릭하여 템플릿 변수를 추가합니다.
+템플릿 변수를 사용하면 대시보드에 있는 여러 위젯을 역동적으로 필터링할 수 있습니다. 템플릿 변수 선택 항목에서 저장된 뷰를 구축해 드롭다운 선택 항목으로 시각 자료를 탐색하고 정리할 수 있습니다.
 
 템플릿 변수는 다음에 의해 정의됩니다.
 
@@ -39,73 +36,99 @@ title: 템플릿 변수
     * 속성: [패싯 또는 메트릭을 템플릿 변수로]  사용합니다(#logs-apm-and-rum-queries).
 * **이름**: 대시보드의 쿼리에 표시되는 템플릿 변수의 고유한 이름입니다. 템플릿 변수는 선택한 태그 또는 속성에 따라 자동으로 이름이 지정됩니다.
 * **기본값**: 대시보드가 로드될 때 자동으로 나타나는 태그 또는 속성값입니다. 기본값은 `*`입니다.
-* **사용 가능 값**: 드롭다운에서 선택할 수 있는 태그 또는 속성값입니다. 기본값은 `(all)`입니다. 사용 가능 값 목록에는 항상 태그 또는 속성의 모든 값을 쿼리하는 `*`이(가) 포함됩니다.
+* **사용 가능 값**: 드롭다운 메뉴에서 선택할 수 있는 태그 또는 속성 값입니다. 기본값은 `(all)`입니다. 사용 가능 값 목록에는 항상 태그 또는 속성의 모든 값을 쿼리하는 `*`가 포함됩니다.
 
-템플릿 변수를 생성한 후 Datadog은 변수를 사용하는 소스의 수를 표시합니다. 아래 예에서 템플릿 변수 `team`은(는) 대시보드의 두 그래프에서 사용됩니다.
+## 템플릿 변수 추가
 
-{{< img src="dashboards/template_variables/stats_tv_modal.png" alt="여러 변수 세트가 있는 템플릿 변수" style="width:90%;">}}
+대시보드에서 템플릿 변수를 추가하는 방법:
+1. **Add Variables**를 클릭합니다. 
+1. 템플릿 변수가 이미 정의된 경우, 대시보드 헤더에 마우스 커서를 올리고 **Edit** 버튼을 누르고 편집 모드를 입력합니다.
+1. 편집 모드에서 **+(플러스)** 아이콘을 클릭해 새 템플릿 변수를 생성합니다.
+1. (선택) 태그를 선택한 후 **+ Configure Dropdown Values** 버튼을 클릭해 변수 이름을 다시 지정하고 기본값 또는 사용 가능한 값을 설정합니다.
+  {{< img src="dashboards/template_variables/add_template_variable_configure_dropdown_values.png" alt="구성 드롭다운 값 버튼을 나타내는 변수 팝오버 추가" style="width:80%;" >}}
 
-개별 위젯에서 [템플릿 변수를 사용](#use)하거나 **add to All** 옵션을 클릭합니다. 모든 위젯에서 템플릿 변수를 제거하려면 **Remove From All** 옵션을 클릭합니다.
+## 템플릿 변수 편집
+
+대시보드에서 템플릿 변수를 편집하는 방법:
+1. 대시보드 헤더에서 **Edit** 버튼을 클릭합니다.
+1. 편집 모드에서 템플릿 변수를 클릭하고 팝오버에서 필요한 사항을 변경합니다.
+1. 헤더에서 변수를 재정렬하려면 변수에 마우스 커서를 올리고 아이콘 핸들을 클릭하여 드래그합니다.
+  {{< img src="dashboards/template_variables/edit_template_variable_drag.png" alt="순서를 재정렬할 수 있는 드래그 아이콘이 있는 템플릿 변수 편집 모드 팝오버" style="width:100%;" >}}
+
+## 위젯에 템플릿 변수 적용
+
+위젯 쿼리에 템플릿 변수를 추가하는 방법:
+1. 대시보드 헤더에서 **Edit** 버튼을 클릭합니다.
+1. 편집 모드에서 템플릿 변수를 클릭해 팝오버를 엽니다.
+1. **Select Widgets**을 클릭해 위젯 선택 모드를 엽니다.
+1. 배너에 변수를 사용한 여러 소스가 나타납니다. 아래 예시의 경우, 템플릿 변수 `env`가 대시보드의 그래프 20개에 사용 중입니다.
+  {{< img src="dashboards/template_variables/apply_template_variable_to_widgets.png" alt="'env' 템플릿 변수가 20개 위젯에 적용된 것을 보여주는 대시보드 예시" style="width:100%;" >}}
+1. 개별 위젯을 클릭하면 템플릿 변수가 선으로 연결된 그래프를 미리 볼 수 있습니다.
+1. 그룹에 있는 모든 위젯을 추가하거나 제거하려면 그룹 우측 코너에 있는 체크 박스를 토글합니다.
+1. 대시보드에 있는 모든 위젯을 추가하거나 제거하려면 선택 배너에서 **Select All** 또는 **Deselect All**을 클릭합니다.
+1. 배너에서 **Save** 또는 **X*를 클릭해 위젯 항목 모드에서 나갈 수 있습니다.
+
+## 저장된 페이지
+
+### 생성
+
+대시보드 템플릿 변수 좌측에 있는 **Saved Views** 드롭다운 메뉴를 클릭합니다. 템플릿 변수 값을 업데이트해도 값이 자동으로 보기를 저장하지 않습니다.
+
+{{< img src="dashboards/template_variables/saved_views_dropdown_options.png" alt="저장된 보기 드롭다운 옵션. 선택한 템플릿 변수를 기본값 보기 또는 저장된 보기를 설정할 수 있음" style="width:90%;" >}}
+
+보기에서 현재 템플릿 변수 값을 저장하려면 **Saved Views** 드롭다운 메뉴에서 **Save selections as view**를 선택합니다. 고유 이름을 입력하고 **Save**를 선택합니다.
+
+저장된 보기가 드롭다운 메뉴에 나타납니다. 보기를 클릭해 이전 저장된 템플릿 변수 값을 가져올 수 있습니다.
+
+### 삭제
+
+보기를 삭제하려면 저장된 보기 드롭다운 메뉴를 클릭하고 **Manage views...**를 선택합니다. 여기에서 각 보기 옆에 휴지통 아이콘과 저장된 보기가 포함된 팝업이 표시됩니다. 해당 휴지통 아이콘을 클릭하여 보기를 삭제합니다.
+
+### 수정
+
+ **Default view** 보기를 수정하려면 연필 아이콘을 클릭하고 템플릿 변수 값을 업데이트합니다. 그런 다음 **Done**을 클릭하여 저장합니다. 다른 보기의 값이 변경되면 해당 값을 새 보기로 저장한 다음 원래 보기를 삭제하세요. 
+
+## 사용량
+
+템플릿 변수는 위젯 및 이벤트 오버레이에서 사용됩니다.
 
 ### 로그, APM 및 RUM 쿼리
 
-메트릭, 로그, APM 및 RUM은 동일한 태그를 공유하므로 템플릿 변수는 로그, APM 및 RUM 위젯에서 작동합니다.
-또한 [로그][2], APM 또는 [RUM][3] 패싯을 기반으로 로그, APM 및 RUM 템플릿 변수를 정의할 수 있습니다. 이러한 변수는 `@`(으)로 시작합니다(예: `@http.status_code`).
+메트릭, 로그, APM, RUM의 경우 동일한 태그를 공유하기 때문에 템플릿 변수는 이들과 작동합니다. 또한 패싯을 기반으로 로그, APM, RUM 템플릿 변수를 정의할 수 있습니다. 이러한 변수는 `@`으로 시작합니다(예: `@http.status_code`).
 
 로그, APM 및 RUM 위젯에서 값 중간에 와일드카드를 사용하거나(예: `eng*@example.com`), 하나의 값에 여러 와일드카드를 사용할 수 있습니다(예: `*prod*`).
 
 **참고**: 이 유형의 템플릿 변수에 대해 **Add to all**를 사용하면 변수가 모든 로그, APM 및 RUM 위젯에 추가됩니다.
 
-### 저장된 보기
-
-#### 생성
-
-{{< img src="dashboards/template_variables/default_view.png" alt="기본 저장된 보기" style="width:85%;">}}
-
-대시보드의 템플릿 변수 왼쪽에는 *(Default Value)*으로 나열된 드롭다운이 있습니다. 템플릿 변수값을 변경하면 해당 값이 보기에 자동으로 저장되지 않습니다.
-템플릿 변수의 현재 값을 보기에 저장하려면 드롭다운 메뉴를 클릭하고 *Save selections as view*를 클릭합니다. 여기에서 해당 보기의 고유한 이름을 입력하라는 메시지가 표시됩니다. 저장 후 이 보기가 드롭다운 메뉴에 나열됩니다. 템플릿 변수의 이전에 저장된 값을 검색하려면 이 보기를 클릭합니다.
-
-#### 삭제
-
-보기를 삭제하려면 저장된 보기 드롭다운을 클릭하고 *Manage views...*를 선택합니다. 여기에서 각 보기 옆에 휴지통 아이콘과 저장된 보기가 포함된 팝업이 표시됩니다. 해당 휴지통 아이콘을 클릭하여 보기를 삭제합니다.
-
-{{< img src="dashboards/template_variables/manage_views.png" alt="보기 팝업 관리" style="width:75%;">}}
-
-#### 수정
-
-*(Default Value)* 보기를 수정하려면 연필 아이콘을 클릭하고 템플릿 변수 값을 업데이트합니다. 그런 다음 *Done*을 클릭하여 저장합니다. 다른 보기의 값이 변경되면 해당 값을 새 보기로 저장한 다음 원래 보기를 삭제하세요. 
-
-## 사용
-
-템플릿 변수는 위젯 및 이벤트 오버레이에서 사용됩니다.
-
 ### 위젯
 
-위젯을 생성하거나 편집할 때 기존 템플릿 변수는 `from` 필드에 옵션으로 표시됩니다. 예를 들어, 템플릿 변수 `env`을(를) 생성하면 옵션 `$env`을(를) 사용할 수 있습니다.
+위젯을 생성하거나 편집할 때 기존 템플릿 변수는 `from` 필드에 옵션으로 표시됩니다. 예를 들어, 템플릿 변수 `environment`를 구성하면 `$environment` 옵션을 위젯의 역동적인 변수로 사용할 수 있습니다.
 
-위젯이 저장된 후 템플릿 변수 값은 대시보드 상단에서 선택한 값이 됩니다.
+{{< img src="dashboards/template_variables/dynamic_template_variable.png" alt="위젯에서 템플릿 변수를 역동적으로 설정할 수 있음" style="width:100%;">}}
 
-{{< img src="dashboards/template_variables/selecting_template_variables.png" alt="템플릿 변수 선택하기" style="width:75%;">}}
-
-접두사 또는 접미사만 기반으로 쿼리하려면 템플릿 변수 값의 시작 또는 끝에 와일드카드 문자(`*`)를 사용하세요. 예를 들어, `us*`을(를) 사용하여 `us`(으)로 시작하는 모든 리전을 찾거나, `*@example.com`을(를) 사용하여 `example.com` 도메인에 속하는 모든 이메일을 찾습니다.
+`environment` 값에 **production**을 선택하면 `$environment` 변수가 있는 위젯을 역동적으로 생산 환경으로 범위 지정합니다. 
 
 템플릿 변수의 값을 변경하면 `&tpl_var_<TEMPLATE_VARIABLE_NAME>=<TEMPLATE_VARIABLE_VALUE>` 형식의 템플릿 변수 값을 반영하도록 대시보드 URL이 업데이트됩니다. 예를 들어, 템플릿 변수 `$env`이(가) `prod`으(로) 변경된 대시보드는 URL 파라미터 `&tpl_var_env=prod`을(를) 가지게 됩니다.
 
-쿼리에 해당 값만 포함하려면 `{TX-PL-LABEL}lt;TEMPLATE_VARIABLE_NAME>.value` 구문을 추가합니다. 예를 들어, `service`라는 템플릿 변수에 `env:staging-$service.value`을(를) 사용합니다.
+쿼리에 값을 포함하려면 `{TX-PL-LABEL}lt;TEMPLATE_VARIABLE_NAME>.value` 구문을 추가합니다. 예를 들어, `service`라는 템플릿 변수에 `env:staging-$service.value`를 사용합니다.
+
+템플릿 변수 필드에 마우스 커서를 올려 빠른 보기를 확인할 수 있고, 해당 변수를 사용하는 위젯이 대시보드에서 강조 표시됩니다.
 
 #### 관련 템플릿 변수
-템플릿 변수 값을 선택하면 **Associated Values** 및 **Other Values** 섹션이 표시됩니다. 관련 값은 페이지에서 선택한 다른 템플릿 변수 값에서 계산되며, 별도 설정 없이 관련 값을 원활하게 식별합니다.
 
-{{< img src="dashboards/template_variables/associated_template_variables.png" alt="연결된 템플릿 변수" style="width:75%;">}}
+템플릿 변수 값을 선택할 때 연관된 값이 선택기 상단에 표시됩니다. 연관된 값은 페이지에서 선택된 다른 템플릿 변수 값에서 계산되고, 별도 설정 없이 관련 값을 원활하게 파악합니다.
 
 #### 텍스트
 
-텍스트 기반 위젯의 경우 템플릿 변수의 태그/속성 및 값을`{TX-PL-LABEL}lt;TEMPLATE_VARIABLE_NAME>`(으)로, 그 키만`{TX-PL-LABEL}lt;TEMPLATE_VARIABLE_NAME>.key`(으)로 또는 그 값만 `{TX-PL-LABEL}lt;TEMPLATE_VARIABLE_NAME>.value`(으)로 표시할 수 있습니다. 이것은 영숫자가 아닌 문자 뒤에 올 수 있으며, 공백 또는 `#`, `{TX-PL-LABEL}#x60;, `%`, `=`, `;`, `"`, `(`, `)`, `[`, `]`, `{`, `}`, `^`, `*`, `+`, `|`, `?` 등 문자가 올 수도 있습니다.
+텍스트 기반 위젯의 경우 템플릿 변수의 태그/속성 및 값을`{TX-PL-LABEL}lt;TEMPLATE_VARIABLE_NAME>`으로, 해당 키를`{TX-PL-LABEL}lt;TEMPLATE_VARIABLE_NAME>.key`로, 또는 해당 값을 `{TX-PL-LABEL}lt;TEMPLATE_VARIABLE_NAME>.value`로 표시할 수 있습니다. 이것은 영숫자가 아닌 문자 뒤에 올 수 있으며, 공백 또는 `#`, `{TX-PL-LABEL}#x60;, `%`, `=`, `;`, `"`, `(`, `)`, `[`, `]`, `{`, `}`, `^`, `*`, `+`, `|`, `?` 등 문자가 올 수도 있습니다.
+
+**참고**: 다음 템플릿에는 와일드카드 구문이 지원되지 않습니다.
 
 예를 들어, `env`(이)라는 템플릿 변수, `environment` 태그/속성 및 `dev` 값이 선택된 경우에는 다음과 같습니다.
 * `$env`은(는) `environment:dev`을(를) 표시합니다.
 * `$env.key`은(는) `environment`을(를) 표시합니다.
 * `$env.value`은(는) `dev`을(를) 표시합니다.
+* `$env*`의 경우 `dev*`와 정확히 일치하는 값을 찾습니다(`dev{dynamic-wildcard-value}` 아님).
 
 ### 이벤트 오버레이
 
@@ -127,7 +150,7 @@ title: 템플릿 변수
 
 여러 템플릿 변수(예: `role:$role.value,env:$env.value`)를 사용하여 검색하려면 쉼표를 사용하세요.
 
-**참고**: *enter*를 눌러 검색하면 `$region.value`이(가) 템플릿 변수 드롭다운의 값으로 업데이트됩니다.
+**참고**: *enter*를 눌러 검색하면 `$region.value`가 템플릿 변수 드롭다운 메뉴 값으로 업데이트됩니다.
 
 #### 위젯
 
@@ -137,12 +160,12 @@ title: 템플릿 변수
 $<TEMPLATE_VARIABLE_NAME>
 ```
 
-예를 들어, 이벤트 오버레이 검색 상자에 `$region`을(를) 입력합니다. 그러면 `region` 템플릿 변수 드롭다운의 값이 있는 이벤트를 검색합니다.
+예를 들어, 이벤트 오버레이 검색 상자에 `$region`을 입력합니다. 그러면 `region` 템플릿 변수 드롭다운 메뉴 값이 있는 이벤트를 검색합니다.
 
 ## 참고 자료
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ko/getting_started/tagging/#defining-tags
+[1]: /ko/getting_started/tagging/#define-tags
 [2]: /ko/logs/explorer/facets/
 [3]: /ko/real_user_monitoring/explorer/?tab=facets#setup-facets-measures

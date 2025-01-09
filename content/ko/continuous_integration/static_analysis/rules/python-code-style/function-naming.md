@@ -1,7 +1,6 @@
 ---
 dependencies: []
 disable_edit: true
-kind: 도움말
 title: 함수 이름과 파라미터에는 snake_case를 사용해야 함
 ---
 ## 메타데이터

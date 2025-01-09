@@ -3,10 +3,9 @@ aliases:
 - /ja/security_platform/guide/automate-the-remediation-of-detected-threats/
 - /ja/security_platform/cloud_siem/guide/automate-the-remediation-of-detected-threats/
 further_reading:
-- link: /security/explorer/
+- link: /security/cloud_siem/investigate_security_signals
   tag: ドキュメント
   text: シグナルエクスプローラーでシグナルの調査を開始する
-kind: ガイド
 title: Webhooks で検出された脅威の修復を自動化する
 ---
 
@@ -22,7 +21,7 @@ title: Webhooks で検出された脅威の修復を自動化する
 
 {{< img src="security/security_monitoring/guide/automate-the-remediation-of-detected-threats/automation-diagram.png" alt="クラウドプロバイダーの API に送信される Webhook の図" >}}
 
-一度構成すると、AWS ユーザーが AWS 環境内で不適切にリソースを構成した場合 (例: 過度に許可されたセキュリティグループやユーザーロールなど)、Datadog ログ管理が関連するログを取り込み、これがセキュリティグループベースの検出ルールをトリガーします。このプロセスは、Webhook の JSON ペイロードを指定された Amazon API Gateway の URL に自動的に送信し、それによって問題のあるリソースを自動的に削除する AWS Lambda 関数が起動されます。
+Once configured, if an AWS user creates a poorly configured resource (for example, an overly permissive security group, or user role) within your AWS environment, Datadog Log Management ingests the related log, which triggers a security group-based Detection Rule. This process automatically sends the webhook's JSON payload to the designated Amazon API Gateway URL, which in turn activates an AWS Lambda function that automatically deletes the offending resource.
 
 ## 不審な IP アドレスを禁止する
 

@@ -6,7 +6,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/core-web-vitals-monitoring-datadog-rum-synthetics/#what-are-the-core-web-vitals
   tag: Blog
   text: Surveiller les signaux Web essentiels avec la surveillance Synthetic
-kind: documentation
 title: Résultats de tests Browser
 ---
 

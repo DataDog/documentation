@@ -1,6 +1,6 @@
 ---
 title: Trace Sampling Use Cases
-kind: guide
+
 further_reading:
 - link: "/tracing/guide/trace_ingestion_volume_control/"
   tag: "Guide"

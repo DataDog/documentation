@@ -1,6 +1,5 @@
 ---
 title: Google Cloud Run
-kind: documentation
 further_reading:
 
 - link: 'https://www.datadoghq.com/blog/collect-traces-logs-from-cloud-run-with-datadog/'
@@ -23,11 +22,11 @@ You can instrument your application in one of two ways: [Dockerfile](#dockerfile
 
 ### Dockerfile
 
-Datadog publishes new releases of the `serverless-init` container image to Google’s gcr.io, AWS’ ECR, and on Docker Hub:
+Datadog publishes new releases of the `serverless-init` container image to Google’s gcr.io, Azure ACR, AWS’ ECR, and on Docker Hub:
 
-| dockerhub.io | gcr.io | public.ecr.aws |
-| ------------ | ------ | -------------- |
-| datadog/serverless-init | gcr.io/datadoghq/serverless-init | public.ecr.aws/datadog/serverless-init |
+| dockerhub.io            | gcr.io                           | public.ecr.aws                         | datadoghq.azurecr.io                 |
+| ----------------------- | -------------------------------- | -------------------------------------- | ------------------------------------ |
+| datadog/serverless-init | gcr.io/datadoghq/serverless-init | public.ecr.aws/datadog/serverless-init | datadoghq.azurecr.io/serverless-init |
 
 Images are tagged based on semantic versioning, with each new version receiving three relevant tags:
 
@@ -139,18 +138,18 @@ Once the deployment is completed, your metrics and traces are sent to Datadog. I
 
 ### Environment Variables
 
-| Variable | Description |
-| -------- | ----------- |
-|`DD_API_KEY`| [Datadog API Key][7] - **Required**|
-| `DD_SITE` | [Datadog site][5] - **Required** |
-| `DD_LOGS_ENABLED` | When true, send logs (stdout and stderr) to Datadog. Defaults to false. |
-| `DD_LOGS_INJECTION`| When true, enrich all logs with trace data for supported loggers in [Java][19], [Node][20], [.NET][21], and [PHP][22]. See additional docs for [Python][23], [Go][24], and [Ruby][25]. |
-| `DD_TRACE_SAMPLE_RATE`|  Controls the trace ingestion sample rate `0.0` and `1.0`. |
-| `DD_SERVICE`      | See [Unified Service Tagging][6].                                  |
-| `DD_VERSION`      | See [Unified Service Tagging][6].                                  |
-| `DD_ENV`          | See [Unified Service Tagging][6].                                  |
-| `DD_SOURCE`       | See [Unified Service Tagging][6].                                  |
-| `DD_TAGS`         | See [Unified Service Tagging][6].                                  |
+| Variable               | Description                                                                                                                                                                            |
+| ---------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `DD_API_KEY`           | [Datadog API Key][7] - **Required**                                                                                                                                                    |
+| `DD_SITE`              | [Datadog site][5] - **Required**                                                                                                                                                       |
+| `DD_LOGS_ENABLED`      | When true, send logs (stdout and stderr) to Datadog. Defaults to false.                                                                                                                |
+| `DD_LOGS_INJECTION`    | When true, enrich all logs with trace data for supported loggers in [Java][19], [Node][20], [.NET][21], and [PHP][22]. See additional docs for [Python][23], [Go][24], and [Ruby][25]. |
+| `DD_TRACE_SAMPLE_RATE` | Controls the trace ingestion sample rate `0.0` and `1.0`.                                                                                                                              |
+| `DD_SERVICE`           | See [Unified Service Tagging][6].                                                                                                                                                      |
+| `DD_VERSION`           | See [Unified Service Tagging][6].                                                                                                                                                      |
+| `DD_ENV`               | See [Unified Service Tagging][6].                                                                                                                                                      |
+| `DD_SOURCE`            | See [Unified Service Tagging][6].                                                                                                                                                      |
+| `DD_TAGS`              | See [Unified Service Tagging][6].                                                                                                                                                      |
 
 ## Troubleshooting
 

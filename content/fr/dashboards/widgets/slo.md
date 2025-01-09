@@ -1,6 +1,5 @@
 ---
 title: Widget Résumé des SLO
-kind: documentation
 description: Suivi de vos SLO
 aliases:
   - /fr/monitors/monitor_uptime_widget/

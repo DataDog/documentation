@@ -5,13 +5,12 @@ further_reading:
 - link: /monitors/downtimes/
   tag: ドキュメント
   text: モニターをミュートするダウンタイムのスケジュール
-kind: ガイド
 title: アラートのバタつきを抑える
 ---
 
 アラートの疲労や、アラートが「バタバタ」する (「OK」から「アラート」状態に急激に切り替わる) ことは、よくある問題や悩みの種です。
 
-Datadog のアラートには、デフォルトで[通知][1]ロールアップが設定されていますが、Datadog には、よりノイズの少ない、より意味のあるアラートを実現するための機能があります。
+There is functionality within Datadog that often leads to less noisy, more meaningful alerts.
 
 * アラートしきい値の再評価
     * アラート <-> OK や状態変化が頻繁に起こる場合のバタつきを抑えるには、しきい値条件を大きくしたり小さくしたりするのが一番簡単な方法かもしれません。
@@ -19,13 +18,13 @@ Datadog のアラートには、デフォルトで[通知][1]ロールアップ�
     * これは、時間枠内のメトリクスのすべてのデータポイントがしきい値に違反した場合にのみアラートをトリガーします
 
 * 関数-レート、移動平均、タイムシフトの差分を用いてクエリを再構築する
-    * つまり、あるメトリクスストリームの値と 1 週間前の値の差を比較し、その差に基づいてアラート条件を設定することができるのです
+    * This means, you can compare the difference between a metric stream's values with the values from a week ago and set alert conditions based off the difference
     * タイムシフトの差分では、関数を組み合わせることができ、また、履歴を表示することも可能です。例:
- abs(system.cpu.system{*} - week_before(system.cpu.system{*}))
+ `abs(system.cpu.system{*} - week_before(system.cpu.system{*}))`
     * メトリクスが頻繁に急上昇し、その急上昇が本質的に問題を示すものではない場合、レートまたは平均を適用することで、より意味のあるしきい値を設定することができます。
 
 * 複合条件アラートで他のモニターの状態を考慮する
-    * Datadog のアラート機能に最も新しく追加された複合条件アラートは、以前に作成した 2 つ以上のアラートを組み合わせることができるようになります。
+    * [Composite Monitor][6] allows you to combine two or more previously created alerts.
     例えば、あるホストで CPU が高く、かつディスクが高い場合、アラートをトリガーします。
 
 * 異常検知や外れ値と一緒にいくつかのビルトイン分析モジュールを使用する
@@ -37,8 +36,8 @@ Datadog のアラートには、デフォルトで[通知][1]ロールアップ�
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://www.datadoghq.com/blog/alert-rollup
 [2]: /ja/monitors/types/anomaly/
 [3]: /ja/monitors/types/outlier/
 [4]: /ja/monitors/notify/variables/?tab=is_alert#template-variables
 [5]: /ja/monitors/notify/variables/?tab=is_alert#conditional-variables
+[6]: /ja/monitors/types/composite/

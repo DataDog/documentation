@@ -1,6 +1,5 @@
 ---
 title: "SES Component"
-kind: documentation
 ---
 ## Overview
 

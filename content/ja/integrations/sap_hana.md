@@ -26,6 +26,7 @@ author:
 categories:
 - data stores
 - sap
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/sap_hana/README.md
 display_on_public_website: true
@@ -33,9 +34,8 @@ draft: false
 git_integration_title: sap_hana
 integration_id: sap-hana
 integration_title: SAP HANA
-integration_version: 3.2.0
+integration_version: 5.0.0
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: sap_hana
 public_title: SAP HANA
@@ -52,6 +52,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: SAP HANA システムのメモリ、ネットワーク、ボリューム、およびその他のメトリクスを監視します。
   media: []
@@ -67,9 +68,9 @@ tile:
 
 このチェックは、Datadog Agent を通じて [SAP HANA][1] 2.0, SPS 2 を監視します。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 SAP HANA チェックは、[Datadog Agent][2] のパッケージに含まれています。このインテグレーションを使用するには、[hdbcli][3] ライブラリを手動でインストールする必要があります。
 
@@ -77,13 +78,13 @@ SAP HANA チェックは、[Datadog Agent][2] のパッケージに含まれて�
 Unix: の場合:
 
 ```text
-sudo -Hu dd-agent /opt/datadog-agent/embedded/bin/pip install hdbcli==2.10.15
+sudo -Hu dd-agent /opt/datadog-agent/embedded/bin/pip install hdbcli==2.21.28
 ```
 
 Windows の場合:
 
 ```text
-"C:\Program Files\Datadog\Datadog Agent\embedded<PYTHON_MAJOR_VERSION>\python.exe" -m pip install hdbcli==2.10.15
+"C:\Program Files\Datadog\Datadog Agent\embedded<PYTHON_MAJOR_VERSION>\python.exe" -m pip install hdbcli==2.21.28
 ```
 
 #### HANA の準備
@@ -148,31 +149,52 @@ HANA テナント、シングルテナント、システムデータベースの
    GRANT DD_MONITOR TO <USER>;
    ```
 
-### ブラウザトラブルシューティング
+### 構成
 
 1. sap_hana のパフォーマンスデータの収集を開始するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `sap_hana.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル sap_hana.d/conf.yaml][5] を参照してください。
 
 2. [Agent を再起動します][6]。
 
+#### ログ収集
+
+1. Datadog Agent で、ログの収集はデフォルトで無効になっています。`datadog.yaml` で有効にします。
+
+   ```yaml
+   logs_enabled: true
+   ```
+
+2. このコンフィギュレーションブロックを `sap_hana.d/conf.yaml` ファイルに追加して、SAP HANA ログの収集を開始します。このとき、お使いの環境に応じて構成するために `service` の値が調整されます。
+
+   ```yaml
+   logs:
+     - type: integration
+       source: sap_hana
+       service: sap_hana
+   ```
+
+    使用可能なすべての構成オプションの詳細については、[サンプル sap_hana.d/conf.yaml][5] を参照してください。
+
+3. [Agent を再起動します][6]。
+
 ### 検証
 
 [Agent の status サブコマンドを実行][7]し、Checks セクションの `sap_hana` を探します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "sap_hana" >}}
 
 
-### ヘルプ
+### イベント
 
 SAP HANA には、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 {{< get-service-checks-from-git "sap_hana" >}}
 
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][10]までお問合せください。
 

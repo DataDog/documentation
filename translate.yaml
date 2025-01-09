@@ -9,7 +9,8 @@ sync_dry_run_enabled: false
 
 # These files will be ignored or deleted when syncing with Transifex.
 ignores:
-  - "content/en/**/faq/!(agent_v6_changes|certificate_verify_failed-error).md"
+  - "content/en/observability_pipelines/legacy/*.md"
+  - "content/en/**/faq/*.md"
   - "content/en/security/default_rules/*.md"
   - "content/en/security/cspm/custom_rules/*.md"
   - "content/en/infrastructure/resource_catalog/*.md"
@@ -40,8 +41,8 @@ sources:
   dst: "data/partials/*.{lang}.yaml"
 - src: "i18n/en.json"
   dst: "i18n/{lang}.json"
-- src: "layouts/shortcodes/*.md"
-  dst: "layouts/shortcodes/*.{lang}.md"
+- src: "layouts/shortcodes/**/*.en.md"
+  dst: "layouts/shortcodes/**/*.{lang}.md"
 - src: "config/_default/params.en.yaml"
   dst: "config/_default/params.{lang}.yaml"
 - src: "config/_default/menus/main.en.yaml"

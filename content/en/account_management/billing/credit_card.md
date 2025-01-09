@@ -1,6 +1,5 @@
 ---
 title: Credit Card Billing
-kind: documentation
 ---
 
 ## Overview

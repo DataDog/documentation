@@ -1,6 +1,5 @@
 ---
 title: Continuous Profiler for AWS Lambda
-kind: documentation
 further_reading:
     - link: '/profiler/'
       tag: 'Documentation'
@@ -15,7 +14,7 @@ further_reading:
 Datadog's [Continuous Profiler][1] for AWS Lambda functions gives you visibility into the exact method name, class name, and line number in your Lambda code that is causing CPU or I/O bottlenecks.
 
 <div class="alert alert-warning">
-Continuous Profiler for AWS Lambda is in public beta. During the beta period, profiling for Node and Python is available at no additional cost.
+Continuous Profiler for AWS Lambda is in Preview.
 </div>
 
 ## Usage
@@ -36,8 +35,8 @@ Depending on your runtime, this feature requires the following tracer and layer 
 
 | Runtime | Minimum tracer version | Minimum layer version |
 | ------- | ---------------------- | --------------------- |
-| Python | 4.62.0 | 62 |
-| Node.js | 6.87.0 | 87 |
+| Python | 1.4.0 | 62 |
+| Node.js | 2.22.1, 3.9.0 | 87 |
 
 ## Further Reading
 

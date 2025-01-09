@@ -4,13 +4,8 @@ further_reading:
 - link: /integrations/mysql/
   tag: ドキュメント
   text: 基本的な MySQL インテグレーション
-kind: documentation
 title: Amazon RDS マネージド MySQL のデータベースモニタリングの設定
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">データベースモニタリングはこのサイトでサポートされていません。</div>
-{{< /site-region >}}
 
 データベースモニタリングは、InnoDB ストレージエンジンのクエリメトリクス、クエリサンプル、説明プラン、接続データ、システムメトリクス、テレメトリを公開することにより、MySQL データベースの詳細な可視性を提供します。
 
@@ -19,13 +14,17 @@ Agent は、読み取り専用のユーザーとしてログインすること�
 1. [AWS インテグレーションを構成する](#configure-the-aws-integration)
 1. [データベースのパラメーターを構成する](#configure-mysql-settings)
 1. [Agent にデータベースへのアクセスを付与する](#grant-the-agent-access)
-1. [Agent をインストールする](#install-the-agent)
+1. [Agent のインストールと構成](#install-and-configure-the-agent)
 1. [RDS インテグレーションをインストールする](#install-the-rds-integration)
 
 ## はじめに
 
 サポートされている MySQL バージョン
 : 5.6、5.7、または 8.0+
+
+対応している MariaDB バージョン
+: 10.5, 10.6, 10.11<br/><br/>
+MariaDB の Database Monitoring は、[既知の制限事項][11]付きでサポートされています。
 
 サポート対象の Agent バージョン
 : 7.36.1+
@@ -49,17 +48,6 @@ Agent は、読み取り専用のユーザーとしてログインすること�
 [DB パラメーターグループ][3]で以下を構成してから、設定を有効にするために**サーバーを再起動**します。
 
 {{< tabs >}}
-{{% tab "MySQL 5.6" %}}
-| パラメーター | 値 | 説明 |
-| --- | --- | --- |
-| `performance_schema` | `1` | 必須。[パフォーマンススキーマ][1]を有効にします。 |
-| `max_digest_length` | `4096` | より大きなクエリの収集に必要です。`events_statements_*` テーブルの SQL ダイジェストテキストのサイズを増やします。デフォルト値のままにすると、`1024` 文字より長いクエリは収集されません。 |
-| `performance_schema_max_digest_length` | `4096` | `max_digest_length` と一致する必要があります。 |
-
-
-[1]: https://dev.mysql.com/doc/refman/8.0/en/performance-schema-quick-start.html
-{{% /tab %}}
-
 {{% tab "MySQL ≥ 5.7" %}}
 | パラメーター | 値 | 説明 |
 | --- | --- | --- |
@@ -67,6 +55,16 @@ Agent は、読み取り専用のユーザーとしてログインすること�
 | `max_digest_length` | `4096` | より大きなクエリの収集に必要です。`events_statements_*` テーブルの SQL ダイジェストテキストのサイズを増やします。デフォルト値のままにすると、`1024` 文字より長いクエリは収集されません。 |
 | `performance_schema_max_digest_length` | `4096` | `max_digest_length` と一致する必要があります。 |
 | `performance_schema_max_sql_text_length` | `4096` | `max_digest_length` と一致する必要があります。 |
+
+[1]: https://dev.mysql.com/doc/refman/8.0/en/performance-schema-quick-start.html
+{{% /tab %}}
+{{% tab "MySQL 5.6" %}}
+| パラメーター | 値 | 説明 |
+| --- | --- | --- |
+| `performance_schema` | `1` | 必須。[パフォーマンススキーマ][1]を有効にします。 |
+| `max_digest_length` | `4096` | より大きなクエリの収集に必要です。`events_statements_*` テーブルの SQL ダイジェストテキストのサイズを増やします。デフォルト値のままにすると、`1024` 文字より長いクエリは収集されません。 |
+| `performance_schema_max_digest_length` | `4096` | `max_digest_length` と一致する必要があります。 |
+
 
 [1]: https://dev.mysql.com/doc/refman/8.0/en/performance-schema-quick-start.html
 {{% /tab %}}
@@ -79,18 +77,6 @@ Datadog Agent が統計やクエリを収集するためには、データベー
 次の手順では、`datadog@'%'` を使用して任意のホストからログインするアクセス許可を Agent に付与します。`datadog@'localhost'` を使用して、`datadog` ユーザーが localhost からのみログインできるように制限できます。詳細については、[MySQL ドキュメント][4]を参照してください。
 
 {{< tabs >}}
-{{% tab "MySQL 5.6" %}}
-
-`datadog` ユーザーを作成し、基本的なアクセス許可を付与します。
-
-```sql
-CREATE USER datadog@'%' IDENTIFIED BY '<UNIQUEPASSWORD>';
-GRANT REPLICATION CLIENT ON *.* TO datadog@'%' WITH MAX_USER_CONNECTIONS 5;
-GRANT PROCESS ON *.* TO datadog@'%';
-GRANT SELECT ON performance_schema.* TO datadog@'%';
-```
-
-{{% /tab %}}
 {{% tab "MySQL ≥ 5.7" %}}
 
 `datadog` ユーザーを作成し、基本的なアクセス許可を付与します。
@@ -99,6 +85,18 @@ GRANT SELECT ON performance_schema.* TO datadog@'%';
 CREATE USER datadog@'%' IDENTIFIED by '<UNIQUEPASSWORD>';
 ALTER USER datadog@'%' WITH MAX_USER_CONNECTIONS 5;
 GRANT REPLICATION CLIENT ON *.* TO datadog@'%';
+GRANT PROCESS ON *.* TO datadog@'%';
+GRANT SELECT ON performance_schema.* TO datadog@'%';
+```
+
+{{% /tab %}}
+{{% tab "MySQL 5.6" %}}
+
+`datadog` ユーザーを作成し、基本的なアクセス許可を付与します。
+
+```sql
+CREATE USER datadog@'%' IDENTIFIED BY '<UNIQUEPASSWORD>';
+GRANT REPLICATION CLIENT ON *.* TO datadog@'%' WITH MAX_USER_CONNECTIONS 5;
 GRANT PROCESS ON *.* TO datadog@'%';
 GRANT SELECT ON performance_schema.* TO datadog@'%';
 ```
@@ -160,7 +158,10 @@ DELIMITER ;
 GRANT EXECUTE ON PROCEDURE datadog.enable_events_statements_consumers TO datadog@'%';
 ```
 
-## Agent のインストール
+### パスワードを安全に保管
+{{% dbm-secret %}}
+
+## Agent のインストールと構成
 
 RDS ホストを監視するには、インフラストラクチャーに Datadog Agent をインストールし、各インスタンスのエンドポイントにリモートで接続するよう構成します。Agent はデータベース上で動作する必要はなく、データベースに接続するだけで問題ありません。ここに記載されていないその他の Agent のインストール方法については、[Agent のインストール手順][5]を参照してください。
 
@@ -181,14 +182,12 @@ instances:
     host: '<AWS_INSTANCE_ENDPOINT>'
     port: 3306
     username: datadog
-    password: '<YOUR_CHOSEN_PASSWORD>' # 先ほどの CREATE USER のステップから
+    password: 'ENC[datadog_user_database_password]' # シークレットとして保存された、先ほどの CREATE USER のステップから
 
-     # プロジェクトとインスタンスを追加した後、CPU やメモリなどの追加のクラウドデータをプルするために Datadog AWS インテグレーションを構成します。
+    # ロジェクトとインスタンスを追加した後、CPU やメモリなどの追加のクラウドデータをプルするために Datadog AWS インテグレーションを構成します。
     aws:
       instance_endpoint: '<AWS_INSTANCE_ENDPOINT>'
 ```
-
-**注**: パスワードに特殊文字が含まれる場合は、単一引用符で囲んでください。
 
 [Agent を再起動][3]すると、Datadog への MySQL メトリクスの送信が開始されます。
 
@@ -234,15 +233,10 @@ FROM gcr.io/datadoghq/agent:7.36.1
 
 LABEL "com.datadoghq.ad.check_names"='["mysql"]'
 LABEL "com.datadoghq.ad.init_configs"='[{}]'
-LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<AWS_INSTANCE_ENDPOINT>", "port": 3306,"username": "datadog","password": "<UNIQUEPASSWORD>"}]'
+LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<AWS_INSTANCE_ENDPOINT>", "port": 3306,"username": "datadog","password": "ENC[datadog_user_database_password]"}]'
 ```
 
-`datadog` ユーザーのパスワードをプレーンテキストで公開しないようにするには、Agent の[シークレット管理パッケージ][2]を使用し、`ENC[]` 構文を使ってパスワードを宣言するか、[オートディスカバリーテンプレート変数に関するドキュメント][3]でパスワードを環境変数として渡す方法をご確認ください。
-
-
 [1]: /ja/agent/docker/integrations/?tab=docker
-[2]: /ja/agent/configuration/secrets-management
-[3]: /ja/agent/faq/template_variables/
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
@@ -250,27 +244,41 @@ Kubernetes クラスターをお使いの場合は、データベースモニタ
 
 Kubernetes クラスターでまだチェックが有効になっていない場合は、手順に従って[クラスターチェックを有効][2]にしてください。MySQL のコンフィギュレーションは、Cluster Agent コンテナにマウントされた静的ファイル、またはサービスアノテーションのいずれかを使用して宣言できます。
 
-### Helm のコマンドライン
+### Helm
 
-以下の [Helm][3] コマンドを実行して、Kubernetes クラスターに [Datadog Cluster Agent][1] をインストールします。お使いのアカウントや環境に合わせて値を変更してください。
+以下の手順に従って、Kubernetes クラスターに [Datadog Cluster Agent][1] をインストールしてください。お使いのアカウントや環境に合わせて値を変更してください。
 
-```bash
-helm repo add datadog https://helm.datadoghq.com
-helm repo update
+1. Helm の [Datadog Agent インストール手順][3]に従います。
+2. YAML コンフィギュレーションファイル (Cluster Agent インストール手順の `datadog-values.yaml`) を更新して、以下を含めます。
+    ```yaml
+    clusterAgent:
+      confd:
+        mysql.yaml: |-
+          cluster_check: true
+          init_config:
+          instances:
+            - dbm: true
+              host: <INSTANCE_ADDRESS>
+              port: 3306
+              username: datadog
+              password: 'ENC[datadog_user_database_password]'
 
-helm install <RELEASE_NAME> \
-  --set 'datadog.apiKey=<DATADOG_API_KEY>' \
-  --set 'clusterAgent.enabled=true' \
-  --set 'clusterAgent.confd.mysql\.yaml=cluster_check: true
-init_config:
-instances:
-  - dbm: true
-    host: <INSTANCE_ADDRESS>
-    port: 3306
-    username: datadog
-    password: "<UNIQUEPASSWORD>"' \
-  datadog/datadog
-```
+    clusterChecksRunner:
+      enabled: true
+    ```
+
+3. コマンドラインから上記のコンフィギュレーションファイルを使用して Agent をデプロイします。
+    ```shell
+    helm install datadog-agent -f datadog-values.yaml datadog/datadog
+    ```
+
+<div class="alert alert-info">
+Windows の場合は、<code>helm install</code> コマンドに <code>--set targetSystem=windows</code> を追加します。
+</div>
+
+[1]: https://app.datadoghq.com/organization-settings/api-keys
+[2]: /ja/getting_started/site
+[3]: /ja/containers/kubernetes/installation/?tab=helm#installation
 
 ### マウントされたファイルで構成する
 
@@ -284,7 +292,7 @@ instances:
     host: '<AWS_INSTANCE_ENDPOINT>'
     port: 3306
     username: datadog
-    password: '<UNIQUEPASSWORD>'
+    password: 'ENC[datadog_user_database_password]'
 ```
 
 ### Kubernetes サービスアノテーションで構成する
@@ -310,7 +318,7 @@ metadata:
           "host": "<AWS_INSTANCE_ENDPOINT>",
           "port": 3306,
           "username": "datadog",
-          "password": "<UNIQUEPASSWORD>"
+          "password": "ENC[datadog_user_database_password]"
         }
       ]
 spec:
@@ -323,25 +331,22 @@ spec:
 
 Cluster Agent は自動的にこのコンフィギュレーションを登録し、MySQL チェックを開始します。
 
-`datadog` ユーザーのパスワードをプレーンテキストで公開しないよう、Agent の[シークレット管理パッケージ][4]を使用し、`ENC[]` 構文を使ってパスワードを宣言します。
-
 [1]: /ja/agent/cluster_agent
 [2]: /ja/agent/cluster_agent/clusterchecks/
 [3]: https://helm.sh
-[4]: /ja/agent/configuration/secrets-management
 {{% /tab %}}
 {{< /tabs >}}
 
-### 検証
+### UpdateAzureIntegration
 
-[Agent の status サブコマンドを実行][6]し、Checks セクションで `mysql` を探します。または、[データベース][7]のページを参照してください。
+[Agent の status サブコマンドを実行][6]し、Checks セクションで `mysql` を探すか、[データベース][7]のページを参照してください。
 
 ## Agent の構成例
 {{% dbm-mysql-agent-config-examples %}}
 
 ## RDS インテグレーションをインストール
 
-AWS からより包括的なデータベースメトリクスを収集するには、[RDS インテグレーション][8]をインストールします (オプション)。
+DBM でデータベースのテレメトリーとともに CPU などの AWS からのインフラストラクチャーメトリクスを確認するには、[RDS インテグレーション][8]をインストールします (オプション)。
 
 ## トラブルシューティング
 
@@ -351,7 +356,7 @@ AWS からより包括的なデータベースメトリクスを収集するに�
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/agent/basic_agent_usage#agent-overhead
+[1]: /ja/database_monitoring/agent_integration_overhead/?tab=mysql
 [2]: /ja/database_monitoring/data_collected/#sensitive-information
 [3]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithParamGroups.html
 [4]: https://dev.mysql.com/doc/refman/8.0/en/creating-accounts.html
@@ -361,3 +366,4 @@ AWS からより包括的なデータベースメトリクスを収集するに�
 [8]: /ja/integrations/amazon_rds
 [9]: /ja/database_monitoring/troubleshooting/?tab=mysql
 [10]: https://app.datadoghq.com/integrations/amazon-web-services
+[11]: /ja/database_monitoring/setup_mysql/troubleshooting/#mariadb-known-limitations

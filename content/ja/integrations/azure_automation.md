@@ -3,6 +3,7 @@ categories:
 - 自動化
 - azure
 - クラウド
+custom_kind: integration
 dependencies: []
 description: Azure Automation のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/azure_automation/
@@ -13,7 +14,6 @@ integration_id: azure-automation
 integration_title: Microsoft Azure Automation
 integration_version: ''
 is_public: true
-kind: integration
 manifest_version: '1.0'
 name: azure_automation
 public_title: Datadog-Microsoft Azure Automation インテグレーション
@@ -28,27 +28,27 @@ Azure Automation は、Azure 環境と非 Azure 環境の両方を一貫して�
 
 Datadog Azure インテグレーションを使用して、Azure Automation からメトリクスを収集できます。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 [Microsoft Azure インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。それ以上のインストール手順はありません。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "azure_automation" >}}
 
 
-### ヘルプ
+### イベント
 
 Azure Automation インテグレーションには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 
 Azure Automation インテグレーションには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
 

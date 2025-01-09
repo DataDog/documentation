@@ -10,23 +10,28 @@ cascade:
     tags:
     - メトリクスを送信する
     - メトリクスの送信
-kind: documentation
 title: メトリクス
 ---
-Datadog のメトリクスとその有用性についてご紹介します。このセクションには以下のトピックが含まれます。
 
-{{< whatsnext desc="Datadog へのメトリクス送信" >}}
-    {{< nextlink href="/metrics/custom_metrics">}}<u>カスタムメトリクスの送信</u> - カスタムメトリクスとその送信方法をご紹介します。{{< /nextlink >}}
-    {{< nextlink href="/opentelemetry/otel_metrics" >}}<u>OpenTelemetry メトリクスの送信</u> - Datadog Agent や OpenTelemetry Collector の構成方法について学びます。{{< /nextlink >}}
-    {{< nextlink href="/metrics/types" >}}<u>メトリクスタイプ</u> - Datadog に送信できるメトリクスのタイプ。{{< /nextlink >}}
+{{< learning-center-callout header="イネーブルメントウェビナーセッションに参加" hide_image="true" btn_title="登録" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=Metrics">}}
+  カスタムメトリクスのための Foundation Enablement セッションにご登録ください。カスタムメトリクスが、訪問者数、平均顧客バスケットサイズ、リクエストレイテンシー、カスタムアルゴリズムのパフォーマンス分布など、アプリケーション KPI の追跡にどのように役立つかを学びましょう。
+{{< /learning-center-callout >}}
+
+これは Datadog におけるメトリクスの紹介と、それらがなぜ有用であるかについての説明です。このセクションには以下のトピックが含まれます。
+
+{{< whatsnext desc="メトリクスを Datadog に送信する" >}}
+    {{< nextlink href="/metrics/custom_metrics">}}<u>カスタムメトリクスの送信</u> - カスタムメトリクスの意味と送信方法をご紹介します。{{< /nextlink >}}
+    {{< nextlink href="/opentelemetry/otel_metrics" >}}<u>OpenTelemetry メトリクスの送信</u> - Datadog Agent または OpenTelemetry Collector を構成します。{{< /nextlink >}}
+    {{< nextlink href="/metrics/types" >}}<u>メトリクスタイプ</u> - Datadog に送信できるメトリクスの種類。{{< /nextlink >}}
     {{< nextlink href="/metrics/distributions" >}}<u>ディストリビューションメトリクス</u> - ディストリビューションメトリクスとグローバルに正確なパーセンタイルについてご紹介します。{{< /nextlink >}}
     {{< nextlink href="/metrics/units" >}}<u>メトリクス単位</u> - メトリクスに関連付けられる単位についてご紹介します。{{< /nextlink >}}
 {{< /whatsnext >}}
 
-{{< whatsnext desc="メトリクスの視覚化とクエリ" >}}
+{{< whatsnext desc="メトリクスを可視化およびクエリする" >}}
     {{< nextlink href="/metrics/explorer" >}}<u>メトリクスエクスプローラー</u> - すべてのメトリクスを探索し、分析を行います。{{< /nextlink >}}
-    {{< nextlink href="/metrics/summary" >}}<u>メトリクスサマリー</u> - Datadog メトリクスのアクティブなレポートを理解します。{{< /nextlink >}}
+    {{< nextlink href="/metrics/summary" >}}<u>メトリクスサマリー</u> - Datadog メトリクスのアクティブなレポートについて理解します。{{< /nextlink >}}
     {{< nextlink href="/metrics/advanced-filtering" >}}<u>高度なフィルタリング</u> - データをフィルタリングして、返されるメトリクスの範囲を絞り込みます。{{< /nextlink >}}
+    {{< nextlink href="/metrics/nested_queries" >}}<u>ネストされたクエリ</u> - 集計の追加レイヤーを適用して、高度なクエリ機能を活用します。{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="カスタムメトリクスのボリュームとコストの把握と管理" >}}
@@ -101,6 +106,8 @@ Datadog Agent が、送信するデータポイントごとに Datadog のサー
 
 [メトリクスエクスプローラー][3]、[ダッシュボード][4]、または[ノートブック][5]の Datadog 全体でメトリクスを視覚化してグラフを作成できます。
 
+**ヒント**: Datadog のグローバル検索から Metrics Summary ページを開くには、<kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>K</kbd> を押し、`metrics` を検索してください。
+
 以下は、時系列を視覚化した場合の例です。
 
 {{< img src="metrics/introduction/timeseries_example.png" alt="時系列グラフでは、レイテンシーメトリクスを 1 本の青い線で表し、いくつかのスパイクを付けて表示します。" >}}
@@ -172,6 +179,10 @@ Datadog は大量のポイントを保管しており、ほとんどの場合、
 
 Aggregator を使用するときに適用できる集計には、_合計_、_最小_、_最大_、_平均_の 4 つがあります。上記の例を使用して、ホストが us-east-1、us-east-2、us-west-1、us-west-2 の 4 つのリージョンに分散しているとします。各リージョンのホストは、集計関数を使用して組み合わせる必要があります。_最大_アグリゲーターを使用すると、各リージョンのホスト間で最大のレイテンシーが発生し、_平均_アグリゲーターを使用すると、リージョンごとの平均レイテンシーが発生します。
 
+#### ネストされたクエリ
+UI のネストされたクエリまたは [API][27] を使用して、時間と空間における既存のクエリの結果に追加の集計レイヤーを追加します。詳細については、[ネストされたクエリ][26]のドキュメントを参照してください。
+
+
 ### メトリクスに関するリアルタイム情報を表示する
 
 [メトリクスの概要ページ][20]には、過去 1 時間、1 日、または 1 週間の指定されたタイムフレームで Datadog に報告されたメトリクスのリストが表示されます。メトリクスは、メトリクス名またはタグでフィルタリングできます。
@@ -182,7 +193,7 @@ Aggregator を使用するときに適用できる集計には、_合計_、_最
 
 詳細については、[メトリクスの概要ドキュメント][22]をお読みください。
 
-## その他の参考資料
+## 参考資料
 
 {{< whatsnext desc="メトリクスに関するトピックを続行する場合は、以下を確認してください。">}}
     {{< nextlink href="/metrics/advanced-filtering" >}}<u>高度なフィルタリング</u> - フィルターを使用して返されたメトリクスのスコープを絞り込みます。{{< /nextlink >}}
@@ -216,3 +227,5 @@ Aggregator を使用するときに適用できる集計には、_合計_、_最
 [23]: /ja/dashboards/functions/rollup/#rollup-with-calendar-aligned-queries
 [24]: /ja/dashboards/functions/
 [25]: /ja/metrics/custom_metrics/type_modifiers/?tab=count#in-application-modifiers
+[26]: /ja/metrics/nested_queries
+[27]: https://docs.datadoghq.com/ja/api/latest/metrics/#query-timeseries-data-across-multiple-products

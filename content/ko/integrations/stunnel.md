@@ -8,7 +8,7 @@ has_logo: true
 integration_id: stunnel
 integration_title: Stunnel
 is_public: true
-kind: integration
+custom_kind: integration
 name: Stunnel
 public_title: Datadog-Stunnel 통합
 short_description: Stunnel 프록시에서 로그를 수집하여 Datadog으로 전송하세요.

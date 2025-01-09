@@ -1,6 +1,5 @@
 ---
 title: Container Images View
-kind: documentation
 further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-container-image-view/"
   tag: "Blog"
@@ -8,9 +7,9 @@ further_reading:
 - link: "/security/cloud_security_management/vulnerabilities"
   tag: "Documentation"
   text: "Cloud Security Management Vulnerabilities"
-- link: "/security/cloud_security_management/setup/csm_pro/?tab=aws#configure-the-agent-for-containers"
+- link: "/infrastructure/containers/container_images/#enable-sbom-collection"
   tag: "Documentation"
-  text: "Setting up container image vulnerabilities"
+  text: "Enable SBOM collection in CSM Vulnerabilities"
 - link: "/security/cloud_security_management/troubleshooting/vulnerabilities/"
   tag: "Documentation"
   text: "Troubleshooting Cloud Security Management Vulnerabilities"
@@ -38,18 +37,78 @@ To enable live container collection, see the [containers][3] documentation. It p
 
 Datadog collects container image metadata to provide enhanced debugging context for related containers and [Cloud Security Management][8] (CSM) vulnerabilities.
 
-#### Configure the Agent
-
-The following instructions enable the container image metadata collection and [Software Bill of Materials][5] (SBOM) collection in the Datadog Agent for CSM Vulnerabilities. This allows you to scan the libraries in container images to detect vulnerabilities. Vulnerabilities are evaluated and scanned against your containers every hour.
-
-**Note**: The CSM Vulnerabilities feature is not available for AWS Fargate or Windows environments.
-
+#### Enable container image collection
 
 {{< tabs >}}
 {{% tab "Kubernetes (Operator)" %}}
 
-Image collection is enabled by default with Datadog Operator version `>= 1.3.0`.</br>
-Or, add the following to the spec section of your `values.yaml` file:
+In Datadog Operator v1.3.0+, image collection is enabled by default. If you are using an older version of the Datadog Operator, Datadog recommends that you update it to v1.3.0+.
+
+
+{{% /tab %}}
+
+{{% tab "Kubernetes (Helm)" %}}
+
+In the Datadog Helm chart v3.46.0+, image collection is [enabled by default][1]. To verify this, or if you are using an earlier Helm chart version, ensure that `datadog.containerImageCollection.enabled` is set to `true` in `datadog-values.yaml`.
+
+```yaml
+datadog:
+  containerImageCollection:
+    enabled: true
+```
+[1]: https://github.com/DataDog/helm-charts/blob/main/charts/datadog/values.yaml#L651
+{{% /tab %}}
+
+{{% tab "ECS EC2" %}}
+
+To enable container image collection on your [ECS EC2 instances][1], add the following environment variables to your `datadog-agent` container definition:
+
+```yaml
+{
+    "containerDefinitions": [
+        {
+            "name": "datadog-agent",
+             ...
+            "environment": [
+              ...
+              {
+                "name": "DD_CONTAINER_IMAGE_ENABLED",
+                "value": "true"
+              }
+            ]
+        }
+    ]
+  ...
+}
+```
+
+[1]: https://docs.datadoghq.com/containers/amazon_ecs/?tab=awscli#setup
+
+{{% /tab %}}
+
+{{% tab "Hosts" %}}
+
+Add the following to your `datadog.yaml` configuration file:
+
+```yaml
+container_image:
+  enabled: true
+```
+
+[1]: /containers/amazon_ecs/?tab=awscli#setup
+{{% /tab %}}
+{{< /tabs >}}
+
+#### Enable SBOM collection
+
+The following instructions turn on [Software Bill of Materials][5] (SBOM) collection for CSM Vulnerabilities. SBOM collection enables automatic detection of container image vulnerabilities. Vulnerabilities are evaluated and scanned against your containers every hour. Vulnerability management for container images is included in [CSM Pro and Enterprise plans][10].
+
+**Note**: The CSM Vulnerabilities feature is not available for AWS Fargate or Windows environments.
+
+{{< tabs >}}
+{{% tab "Kubernetes (Operator)" %}}
+
+Add the following to the spec section of your `datadog-agent.yaml` file:
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -69,13 +128,10 @@ spec:
 
 {{% tab "Kubernetes (Helm)" %}}
 
-If you are using Helm version `>= 3.46.0`, image collection is [enabled by default][1].</br>
-Or, add the following to your `values.yaml` Helm configuration file:
+Add the following to your `datadog-values.yaml` Helm configuration file:
 
 ```yaml
 datadog:
-  containerImageCollection:
-    enabled: true
   sbom:
     containerImage:
       enabled: true
@@ -95,10 +151,6 @@ To enable container image vulnerability scanning on your [ECS EC2 instances][1],
              ...
             "environment": [
               ...
-              {
-                "name": "DD_CONTAINER_IMAGE_ENABLED",
-                "value": "true"
-              },
               {
                 "name": "DD_SBOM_ENABLED",
                 "value": "true"
@@ -141,8 +193,6 @@ sbom:
   enabled: true
   container_image:
     enabled: true
-container_image:
-  enabled: true
 ```
 
 [1]: /containers/amazon_ecs/?tab=awscli#setup
@@ -179,3 +229,4 @@ Tag and enrich your container images with arbitrary tags by using [extract label
 [6]: /containers/docker/tag/?tab=containerizedagent#extract-labels-as-tags
 [8]: /security/cloud_security_management/vulnerabilities
 [9]: https://app.datadoghq.com/container-images/image-trends
+[10]: https://www.datadoghq.com/pricing/?product=cloud-security-management#products

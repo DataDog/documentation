@@ -1,6 +1,6 @@
 ---
 title: Cloud Foundry Setup Guide
-kind: guide
+
 description: "Steps for setting up the Cloud Foundry Integration"
 aliases:
 - /integrations/guide/pivotal-cloud-foundry-manual-setup

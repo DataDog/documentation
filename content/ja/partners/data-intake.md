@@ -1,6 +1,5 @@
 ---
 description: Datadog にデータを取り込む方法と、クライアントの環境で満たす必要のある前提条件。
-kind: documentation
 private: true
 title: データの取り込み
 ---
@@ -180,7 +179,7 @@ Datadog にデータが流れ込んだら、次はクライアントに[価値�
 [11]: /ja/api/latest/events
 [12]: /ja/api/latest/tracing/
 [13]: /ja/developers/custom_checks/
-[14]: /ja/events/guides/dogstatsd/
+[14]: /ja/service_management/events/guides/dogstatsd/
 [15]: /ja/metrics/custom_metrics/
 [16]: /ja/developers/community/libraries/#api-and-dogstatsd-client-libraries
 [17]: /ja/api/latest/
@@ -192,8 +191,8 @@ Datadog にデータが流れ込んだら、次はクライアントに[価値�
 [23]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
 [24]: /ja/serverless/serverless_tagging/?tab=serverlessframework#overview
 [25]: /ja/infrastructure/livecontainers
-[26]: /ja/agent/guide/network/
-[27]: /ja/agent/proxy/
+[26]: /ja/agent/configuration/network/
+[27]: /ja/agent/configuration/proxy/
 [28]: https://www.datadoghq.com/blog/deploying-datadog-with-chef-roles/
 [29]: https://www.datadoghq.com/blog/monitor-puppet-datadog/
 [30]: https://www.datadoghq.com/blog/deploying-datadog-with-cloudformation/

@@ -1,6 +1,5 @@
 ---
 title: RUM Error Dashboards
-kind: documentation
 aliases:
 - '/real_user_monitoring/platform/dashboards/errors_dashboard'
 further_reading:
@@ -46,4 +45,4 @@ For more information about the data displayed, see our documentation for each pl
 [3]: /real_user_monitoring/ios/data_collected/
 [4]: /real_user_monitoring/android/data_collected/
 [5]: /real_user_monitoring/reactnative/data_collected/
-[6]: /real_user_monitoring/mobile_and_tv_monitoring/data_collected/flutter
+[6]: /real_user_monitoring/mobile_and_tv_monitoring/flutter/data_collected/

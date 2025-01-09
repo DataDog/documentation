@@ -1,0 +1,426 @@
+---
+title: Conexión con la autenticación gestionada
+---
+
+Esta guía asume que has configurado la [Monitorización de base de datos][1].
+
+
+[La Monitorización de base de datos de Datadog (DBM)][8] te permite ver planes de explicación y muestras de consultas que se ejecutan en tus hosts de base de datos. Esta guía te muestra cómo utilizar las funciones de autenticación gestionadas en la nube, como IAM, para conectar el Agent a tu base de datos. Esto proporciona una forma más segura de autenticación y te ahorra tener que gestionar las credenciales de la base de datos a través de tus hosts de Agent.
+
+
+## Antes de empezar
+
+
+Bases de datos compatibles
+: Postgres, SQL Server
+
+
+Tipos de autenticación admitidos y versiones del Agent 
+:
+
+
+| Tipo de autenticación                      | Versión del Agent | Postgres  | SQL Server |
+|:-----------------------------------------|:--------------|:---------:|:----------:|
+| [IAM][2]                                 |               |           |            |
+|                                          | 7.46          | {{< X >}} |            |
+| [Identidad gestionada de Microsoft Entra ID][9] |               |           |            |
+|                                          | 7.48          | {{< X >}} | {{< X >}}  |
+
+
+
+
+## Configurar la autenticación de IAM
+
+
+AWS admite la autenticación de IAM para bases de datos de RDS y Aurora. Solo se admite la autenticación de IAM en instancias de bases de datos que residan en la misma cuenta que el Datadog Agent. Para configurar el Agent para que se conecte mediante IAM, haz lo siguiente:
+
+
+1. Activa la autenticación de IAM en tu instancia de [RDS][3] o [Aurora][4].
+2. Crea una política de IAM para la autenticación de la base de datos. Sustituye `<YOUR_IAM_AUTH_DB_USER>` por el usuario de la base de datos local en el documento de la política de IAM:
+{{< tabs >}}
+{{% tab "RDS" %}}
+
+```json
+{
+   "Version": "2012-10-17",
+   "Statement": [
+       {
+           "Effect": "Allow",
+           "Action": [
+               "rds-db:connect"
+           ],
+           "Resource": [
+               "arn:aws:rds-db:REGION:ACCOUNT:dbuser:db-<RESOURCE_ID>/<YOUR_IAM_AUTH_DB_USER>"
+           ]
+       }
+   ]
+}
+```
+
+Por ejemplo, si deseas utilizar el usuario `datadog`, utiliza el siguiente ARN de recurso:
+
+```json
+{
+   "Version": "2012-10-17",
+   "Statement": [
+       {
+           "Effect": "Allow",
+           "Action": [
+               "rds-db:connect"
+           ],
+           "Resource": [
+               "arn:aws:rds-db:REGION:ACCOUNT:dbuser:db-<RESOURCE_ID>/datadog"
+           ]
+       }
+   ]
+}
+```
+{{% /tab %}}
+{{% tab "Aurora" %}}
+
+```json
+{
+   "Version": "2012-10-17",
+   "Statement": [
+       {
+           "Effect": "Allow",
+           "Action": [
+               "rds-db:connect"
+           ],
+           "Resource": [
+               "arn:aws:rds-db:REGION:ACCOUNT:dbuser:cluster-<RESOURCE_ID>/<YOUR_IAM_AUTH_DB_USER>"
+           ]
+       }
+   ]
+}
+```
+
+Por ejemplo, si quisieras utilizar el usuario `datadog`, utilizarías el siguiente ARN de recurso:
+
+```json
+{
+   "Version": "2012-10-17",
+   "Statement": [
+       {
+           "Effect": "Allow",
+           "Action": [
+               "rds-db:connect"
+           ],
+           "Resource": [
+               "arn:aws:rds-db:REGION:ACCOUNT:dbuser:cluster-<RESOURCE_ID>/datadog"
+           ]
+       }
+   ]
+}
+```
+{{% /tab %}}
+{{< /tabs >}}
+
+AWS también admite comodines para especificar el recurso; por ejemplo, si deseas permitir que el usuario `datadog` se autentique en todas las instancias de una cuenta, añade lo siguiente:
+
+```json
+  "Resource": [
+    "arn:aws:rds-db:*:ACCOUNT:dbuser:cluster-*/datadog",
+    "arn:aws:rds-db:*:ACCOUNT:dbuser:db-*/datadog"
+  ],
+```
+
+3. Inicia sesión en tu instancia de base de datos como usuario raíz y concede el [rol][20] `rds_iam` al nuevo usuario:
+
+
+```tsql
+CREATE USER <YOUR_IAM_ROLE> WITH LOGIN;
+GRANT rds_iam TO <YOUR_IAM_ROLE>;
+```
+
+Por ejemplo, para el usuario `datadog` se ejecutaría:
+
+```tsql
+CREATE USER datadog WITH LOGIN;
+GRANT rds_iam TO datadog;
+```
+
+
+**Nota:** Este tiene que ser un nuevo usuario creado sin contraseña, o la autenticación de IAM fallará.
+
+4. Completa los pasos de configuración del Agent para tu instancia de [RDS][6] o [Aurora][7].
+
+
+{{< tabs >}}
+{{% tab "EC2" %}}
+
+5. Crea un rol de IAM y adjunta la política de IAM creada en el paso 2 al rol.
+
+```bash
+# Crea un rol de IAM para la instancia de EC2
+# Reemplaza `<YOUR_IAM_AUTH_DB_ROLE>` con el nombre del rol de IAM
+aws iam create-role --role-name <YOUR_IAM_AUTH_DB_ROLE> --assume-role-policy-document '{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "Service": "ec2.amazonaws.com"
+      },
+      "Action": "sts:AssumeRole"
+    }
+  ]
+}'
+
+# Adjunta la política de IAM al rol de IAM
+# Reemplaza `<YOUR_IAM_AUTH_DB_POLICY_ARN>` con el ARN de la política de IAM del paso 2
+aws iam attach-role-policy --role-name <YOUR_IAM_AUTH_DB_ROLE> --policy-arn <YOUR_IAM_AUTH_DB_POLICY_ARN>
+```
+
+Adjunta el rol de IAM a la instancia de EC2 en la que se ejecuta el Agent. Para obtener más información, consulta [Roles de IAM para Amazon EC2][1].
+
+[1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-roles-for-amazon-ec2.html
+
+{{% /tab %}}
+{{% tab "ECS Fargate" %}}
+
+5. Crea un rol de IAM y adjunta la política de IAM creada en el paso 2 al rol.
+
+```bash
+# Crea un rol de IAM para la tarea de ECS
+# Reemplaza `<YOUR_IAM_AUTH_DB_ROLE>` con el nombre del rol de IAM
+aws iam create-role --role-name <YOUR_IAM_AUTH_DB_ROLE> --assume-role-policy-document '{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "Service": "ecs-tasks.amazonaws.com"
+      },
+      "Action": "sts:AssumeRole"
+    }
+  ]
+}'
+
+# Adjunta la política de IAM al rol de IAM
+# Reemplaza `<YOUR_IAM_AUTH_DB_POLICY_ARN>` con el ARN de la política de IAM del paso 2
+aws iam attach-role-policy --role-name <YOUR_IAM_AUTH_DB_ROLE> --policy-arn <YOUR_IAM_AUTH_DB_POLICY_ARN>
+```
+
+En la definición de la tarea de ECS, adjunta el rol de IAM al rol de la tarea donde se define el contenedor del Agent. Para obtener más información, consulta [Roles de IAM para Amazon ECS][1].
+
+[1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-iam-roles.html
+
+{{% /tab %}}
+{{% tab "EKS" %}}
+
+5. Crea un rol de IAM y adjunta la política de IAM creada en el paso 2 al rol.
+
+```bash
+# Crea un proveedor de IAM OIDC para tu clúster
+# Reemplaza `<YOUR_ESK_REGION>` y `<YOUR_ESK_CLUSTER>` con la región y el nombre de tu clúster de ESK
+$ eksctl utils associate-iam-oidc-provider \
+  --region=<YOUR_ESK_REGION> \
+  --cluster=<YOUR_ESK_CLUSTER> \
+  --approve
+
+# Crea una cuenta de servicio
+# Reemplaza `<YOUR_IAM_AUTH_DB_POLICY_ARN>` con el ARN de la política de IAM del paso 2
+# Reemplaza `<YOUR_IAM_AUTH_SERVICE_ACCOUNT>` y `<YOUR_IAM_AUTH_SERVICE_ACCOUNT_NAMESPACE>` con el nombre y espacio de nombres de la cuenta de servicio
+$ eksctl create iamserviceaccount \
+  --cluster <YOUR_ESK_CLUSTER> \
+  --name <YOUR_IAM_AUTH_SERVICE_ACCOUNT> \
+  --namespace <YOUR_IAM_AUTH_SERVICE_ACCOUNT_NAMESPACE> \
+  --attach-policy-arn <YOUR_IAM_AUTH_DB_POLICY_ARN> \
+  --override-existing-serviceaccounts \
+  --approve
+```
+
+Asigna el rol de IAM a la cuenta de servicio de Kubernetes donde se ejecuta el Agent. Para obtener más información, consulta [Roles de IAM para la cuenta de servicio de Amazon EKS][1].
+
+[1]: https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html
+
+{{% /tab %}}
+{{< /tabs >}}
+
+
+6. Actualiza la configuración de tu instancia de Postgres con un bloque `aws` en el que se especifique la `region` de la instancia RDS, y establece `managed_authentication.enabled` en `true`:
+
+
+```yaml
+instances:
+  - host: example-endpoint.us-east-2.rds.amazonaws.com
+    port: 5432
+    username: datadog
+    dbm: true
+    aws:
+      instance_endpoint: example-endpoint.us-east-2.rds.amazonaws.com
+      region: us-east-2
+      managed_authentication:
+        enabled: true
+```
+
+
+## Configurar la autenticación de identidad gestionada de Microsoft Entra ID
+
+
+Azure permite a los usuarios configurar la autenticación de identidad gestionada para cualquier recurso que pueda acceder a [Microsoft Entra ID][15], anteriormente Azure Active Directory. Datadog Agent admite tanto la autenticación de identidad gestionada [asignada por el usuario como por el sistema][10] para tus bases de datos en la nube.
+
+
+### Conectarse a PostgreSQL
+
+
+Para configurar la autenticación a tu instancia de PostgreSQL Flexible o Single Server, haz lo siguiente:
+
+
+1. Crea tu [identidad gestionada][11] en el portal de Azure y asígnala a tu máquina virtual de Azure en la que está desplegado el Agent.
+2. Configura un [usuario de administrador de Microsoft Entra ID][12] en tu instancia de PostgreSQL.
+3. Conéctate a tu instancia de PostgreSQL como el [usuario de administrador de Microsoft Entra ID][13], y ejecuta el siguiente comando:
+
+
+```tsql
+select * from pgaadauth_create_principal('<IDENTITY_NAME>', false, false);
+```
+4. Sigue los [pasos de configuración del Agent][14] para Azure. Por ejemplo:
+
+
+Crea el siguiente esquema **en cada base de datos**:
+
+
+```tsql
+CREATE SCHEMA datadog;
+GRANT USAGE ON SCHEMA datadog TO "<IDENTITY_NAME>";
+GRANT USAGE ON SCHEMA public TO "<IDENTITY_NAME>";
+GRANT pg_monitor TO datadog;
+```
+
+
+Crea la función **en cada base de datos** para permitir al Agent recopilar planes de explicación.
+
+
+```tsql
+CREATE OR REPLACE FUNCTION datadog.explain_statement(
+  l_query TEXT,
+  OUT explain JSON
+)
+RETURNS SETOF JSON AS
+$$
+DECLARE
+curs REFCURSOR;
+plan JSON;
+
+
+BEGIN
+  OPEN curs FOR EXECUTE pg_catalog.concat('EXPLAIN (FORMAT JSON) ', l_query);
+  FETCH curs INTO plan;
+  CLOSE curs;
+  RETURN QUERY SELECT plan;
+END;
+$$
+LANGUAGE 'plpgsql'
+RETURNS NULL ON NULL INPUT
+SECURITY DEFINER
+```
+
+
+5. Establece la configuración de tu instancia con el bloque YAML `azure.managed_authentication`, donde `CLIENT_ID` es el ID de cliente de la identidad gestionada:
+
+
+```yaml
+instances:
+  - host: example-flex-server.postgres.database.azure.com
+    dbm: true
+    username: "<IDENTITY_NAME>"
+    ssl: "require"
+    azure:
+      deployment_type: flexible_server
+      fully_qualified_domain_name: example-flex-server.postgres.database.azure.com
+      managed_authentication:
+        enabled: true
+        client_id: "<CLIENT_ID>"
+        # Opcionalmente, configura el alcance desde dónde solicitar el token de identidad
+        identity_scope: "https://ossrdbms-aad.database.windows.net/.default"
+```
+
+
+### Conectarse a SQL Server
+
+
+Para configurar la autenticación a tu instancia de base de datos de Azure SQL o instancia gestionada de Azure, haz lo siguiente:
+
+
+1. Crea tu [identidad gestionada][11] en el portal de Azure y asígnala a tu máquina virtual de Azure en la que está desplegado el Agent.
+2. Configura un [usuario de administrador de Microsoft Entra ID][16] en tu instancia de SQL Server.
+3. Conéctate a tu instancia de SQL Server como el usuario de administrador de Microsoft Entra ID y ejecuta el siguiente comando:
+
+
+```tsql
+CREATE LOGIN <MANAGED_IDENTITY_NAME> FROM EXTERNAL PROVIDER;
+```
+4. Procede con los pasos normales de configuración del Agent, para Azure. Por ejemplo, para la [instancia gestionada de Azure][17]:
+
+
+```tsql
+CREATE USER <MANAGED_IDENTITY_NAME> FOR LOGIN <MANAGED_IDENTITY_NAME>;
+GRANT CONNECT ANY DATABASE to <MANAGED_IDENTITY_NAME>;
+GRANT VIEW SERVER STATE to <MANAGED_IDENTITY_NAME>;
+GRANT VIEW ANY DEFINITION to <MANAGED_IDENTITY_NAME>;
+GO
+```
+
+
+Si utilizas [Azure SQL DB][19], ejecuta lo siguiente desde la base de datos `master`:
+
+
+```tsql
+CREATE LOGIN <MANAGED_IDENTITY_NAME> FROM EXTERNAL PROVIDER;
+CREATE USER datadog FOR LOGIN <MANAGED_IDENTITY_NAME>;
+ALTER SERVER ROLE ##MS_ServerStateReader## ADD MEMBER <MANAGED_IDENTITY_NAME>;
+ALTER SERVER ROLE ##MS_DefinitionReader## ADD MEMBER <MANAGED_IDENTITY_NAME>;
+```
+
+
+Y luego crea el usuario **en cada base de datos**:
+
+
+```tsql
+CREATE USER <DBM_DATADOG_TEST_IDENTITY> FOR LOGIN <DBM_DATADOG_TEST_IDENTITY>;
+```
+
+
+5. Actualiza la configuración de tu instancia con el bloque de configuración `managed_identity`:
+
+
+**Nota**: Se requiere [ODBC Driver 17 para SQL Server][18] o posterior para utilizar esta función.
+
+
+```yaml
+instances:
+ - host: "example.cfcc2366ab90.database.windows.net,1433"
+   connector: "odbc"
+   driver: "{ODBC Driver 18 for SQL Server}"
+   dbm: true
+   connection_string: "TrustServerCertificate=no;Encrypt=yes;"
+   managed_identity:
+     client_id: "<CLIENT_ID>"
+   azure:
+     deployment_type: managed_instance
+     fully_qualified_domain_name: example.cfcc2366ab90.database.windows.net
+```
+
+
+[1]: /es/database_monitoring/#getting-started
+[2]: https://repost.aws/knowledge-center/rds-postgresql-connect-using-iam
+[3]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.Enabling.html
+[4]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.IAMDBAuth.Enabling.html
+[5]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-roles-for-amazon-ec2.html
+[6]: /es/database_monitoring/setup_postgres/rds/#grant-the-agent-access
+[7]: /es/database_monitoring/setup_postgres/aurora/#grant-the-agent-access
+[8]: /es/database_monitoring
+[9]: https://learn.microsoft.com/en-us/azure/active-directory/managed-identities-azure-resources/overview
+[10]: https://learn.microsoft.com/en-us/azure/active-directory/managed-identities-azure-resources/overview#managed-identity-types
+[11]: https://learn.microsoft.com/en-us/azure/active-directory/managed-identities-azure-resources/how-manage-user-assigned-managed-identities?pivots=identity-mi-methods-azp#create-a-user-assigned-managed-identity
+[12]: https://learn.microsoft.com/en-us/azure/postgresql/single-server/how-to-configure-sign-in-azure-ad-authentication
+[13]: https://learn.microsoft.com/en-us/azure/postgresql/flexible-server/how-to-configure-sign-in-azure-ad-authentication#authenticate-with-azure-ad
+[14]: /es/database_monitoring/setup_postgres/azure/#grant-the-agent-access
+[15]: https://learn.microsoft.com/en-us/azure/active-directory/fundamentals/whatis
+[16]: https://learn.microsoft.com/en-us/azure/azure-sql/database/authentication-aad-configure?view=azuresql&tabs=azure-powershell#provision-azure-ad-admin-sql-managed-instance
+[17]: /es/database_monitoring/setup_sql_server/azure/?tab=azuresqlmanagedinstance
+[18]: https://learn.microsoft.com/en-us/sql/connect/odbc/download-odbc-driver-for-sql-server?view=sql-server-ver16
+[19]: /es/database_monitoring/setup_sql_server/azure/?tab=azuresqldatabase
+[20]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.DBAccounts.html#UsingWithRDS.IAMDBAuth.DBAccounts.PostgreSQL

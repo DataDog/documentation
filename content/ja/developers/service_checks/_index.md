@@ -4,7 +4,6 @@ aliases:
 - /ja/developers/service_checks/visualize-your-service-check-in-the-datadog-ui
 - /ja/guides/services_checks/
 - /ja/monitors/guide/visualize-your-service-check-in-the-datadog-ui
-kind: documentation
 title: Service Check
 ---
 
@@ -38,13 +37,11 @@ title: Service Check
 
 ### チェック内容のサマリー
 
-**Monitors** > **Check Summary** をクリックし、[チェック内容のサマリー][1]ページを表示します。
+[Check Summary][1] ページには、過去 1 日間にインフラストラクチャー全体で報告されたすべてのチェックが一覧表示されます。チェックを選択すると、そのチェックに関連するステータスとタグに関する洞察が表示されます。
 
 {{< img src="developers/service_checks/check_summary.png" alt="チェック内容のサマリー" >}}
 
-これは、インフラストラクチャー全体の前日のチェックとステータス報告のリストです。チェックの 1 つを選択すると、関連付けられたタグごとに個別チェックの数が表示されます。
-
-### スクリーンボード
+### シグナルの詳細を取得する
 
 スクリーンボードの**チェックステータス**ウィジェットを使用して、サービスチェックを視覚化できます。
 
@@ -63,8 +60,7 @@ title: Service Check
 
 ## サービスチェックモニター
 
-サービスチェックは、メトリクスのように時間をかけてグラフ化できなくても、モニターすることは可能です。
-**Monitors** > **New Monitor** で、**Service Check** を選択します。
+サービスチェックをメトリクスのように時系列でグラフ化できなくても、[Service Check Monitor][3] で監視することができます。
 
 {{< img src="developers/service_checks/service_check_monitor.png" alt="チェックモニター" >}}
 
@@ -73,13 +69,13 @@ title: Service Check
 - **Pick a service check**: 監視するチェックステータス名を選択します。
 - **Pick monitor scope**: モニターのコンテキストを選択します (タグの選択/除外)。
 - **Set alert conditions**: シンプルチェックアラートまたはクラスターアラートを選択します。
-- **Notify your team**: このモニターを誰に通知するかを選択します。
-- **Say what's happening**: 送信する通知を編集します (詳細は [Datadog 通知][4]を参照)。
+- **通知と自動化の構成**: このモニターで誰に通知するかを選択し、送信される通知を編集します ([Datadog の通知][4]に関する詳細はこちら)。
+- **アクセス許可と監査通知の定義**: モニターのアクセス許可を編集し、監査通知を設定します。
 
 サービスチェックの作成については、[サービスチェックモニター][5]を参照してください。
 
 [1]: https://app.datadoghq.com/check/summary
 [2]: https://app.datadoghq.com/dashboard
-[3]: https://app.datadoghq.com/monitors#create/custom
+[3]: https://app.datadoghq.com/monitors/create/custom
 [4]: /ja/monitors/notify/
 [5]: /ja/monitors/types/service_check/
