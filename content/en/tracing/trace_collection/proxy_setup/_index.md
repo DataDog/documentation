@@ -378,7 +378,7 @@ http {
 
 ## Ingress-NGINX Controller for Kubernetes
 
-Datadog offers for monitoring ingress-nginx controller in Kubernetes.
+Datadog offers support for monitoring Ingress-NGINX controller in Kubernetes.
 Depending of on your version and requirements, you can choose from the following instrumentation methods:
 
 1. [v1.10.0 and newer using Datadog's features][].
@@ -387,15 +387,15 @@ Depending of on your version and requirements, you can choose from the following
 
 ### Controller v1.10.0+ using Datadog's features
 
-This instrumentation method uses [nginx-datadog][6], Datadog's module for NGINX and leverages Kubernetes [init-container][7] mechanism
+This instrumentation method uses [nginx-datadog][6] and leverages Kubernetes [init-container][7] mechanism
 to install the module within the Ingress-NGINX Controller instance.
 
-To instrument Ingress-NGINX <b>v1.10.0+</b> using Datadog’s module, follow these steps:
+To instrument Ingress-NGINX <b>v1.10.0+</b> using Datadog's module, follow these steps:
 1. **Verify your Ingress-NGINX version**<br>
 Check the version of your Ingress-NGINX Controller and ensure an appropriate init-container is available.
 Refer to the [compatibility table][] below to ensure the correct configuration.
 
-2. **Modify your controller’s pod specification:**<br>
+2. **Modify your controller's pod specification:**<br>
 Update the controller pod specification to include the init-container and configure the Datadog Agent host environment variable:
 
 ```yaml
@@ -439,14 +439,14 @@ data:
 5. **Apply the ConfigMap**
 Apply the updated `ConfigMap` to ensure the Datadog module is correctly loaded.
 
-This configuration will ensure that the Datadog module is loaded and ready to trace incoming requests.
+This configuration ensures that the Datadog module is loaded and ready to trace incoming requests.
 
-#### Compatibility Version Table
+#### Compatibility version table
 
 Ensure the init-container version matches the version of your Ingress-NGINX Controller.
 Mismatched versions can prevent Ingress-NGINX from starting:
 
-| ingress-nginx version | init-container |
+| Ingress-NGINX version | init-container |
 | - | - |
 | v1.11.3 | datadog/ingress-nginx-injection:v1.11.3 |
 | v1.11.2 | datadog/ingress-nginx-injection:v1.11.2 |
