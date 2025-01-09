@@ -46,8 +46,15 @@ To support anonymous user tracking, the session cookie (`_dd_s`) expiration is e
 #### Removed useCrossSiteSessionCookie initialization parameter
 This parameter was deprecated and is now unsupported, use `usePartitionedCrossSiteSessionCookie` [initialization parameters][28] instead.
 
-#### Lazy load session replay
-TODO
+#### Lazy load Session Replay
+
+Session Replay module is now lazy-loaded using [dynamic imports](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import). This loads the module only for sessions sampled for Session Replay, reducing the bundle size for others.
+
+**If you're using the SDK via NPM**, ensure your bundler supports dynamic imports. Most modern bundlers support this feature out of the box, but some may require configuration changes. Refer to your bundler's documentation for guidance: [Webpack](https://webpack.js.org/guides/code-splitting/#dynamic-imports), [Esbuild](https://esbuild.github.io/api/#splitting), [Rollup](https://rollupjs.org/tutorial/#code-splitting), [Parcel](https://parceljs.org/features/code-splitting).
+
+**If you're using the SDK via a CDN**, there are no breaking changes. However, note that in addition to the main script being loaded (e.g.,
+`datadog-rum.js`), the SDK will dynamically load an additional chunk when needed: (e.g.
+`recorder-d7628536637b074ddc3b-datadog-rum.js`).
 
 #### Do not inject trace context for non sampled traces.
 We changed the default value for `traceContextInjection` initialization parameter to `sampled` to ensure the backend services' sampling decisions are still applied when traces are not sampled in the browser SDK. See: [Connect Rum and Traces documentation][29]
