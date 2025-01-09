@@ -16,18 +16,20 @@ Follow this guide to migrate between major versions of the Browser RUM and Brows
 
 ## From v5 to v6
 
-V6's main improvement is the bundle size reduction. By dropping support for IE11 and leveraging lazy loading, we have been able to reduce the size of the the rum bunlde by 10% and the logs bundle by almost 9%.
-Aditionally we've changed a few default initialization parameters and prepared for future improvements.
+V6's main improvement is the bundle size reduction. By dropping support for IE11 and leveraging lazy loading, the size of the RUM bundle has been reduced by 10% and the Logs bundle by nearly 9%
+Additionally we've changed a few default initialization parameters and prepared for future improvements.
 
 Take notice of the below breaking changes as you upgrade your SDK.
 
 ### Breaking changes
 
 #### Browser support
-We removed support for IE11 and other older browsers. We now require at least support for ES2018.
-If you still wish to use Datadog on older browsers, you can keep using Browser SDK v5 or earlier.
+
+Support for IE11 and other older browsers has been discontinued. Browsers must now support at least ES2018.
+To use Datadog on older browsers, you can keep using Browser SDK v5 or earlier.
 
 #### Add tracestate header when using tracecontext propagator
+
 The default `tracecontext` propagator now sends a new `tracestate` header with additional metadata that allows better attribution of your traces. If you are using this propagator, then you need to allow this new header for all traced endpoints, in addition to the existing `traceparent` header:
 
 ```
@@ -35,16 +37,20 @@ Access-Control-Allow-Headers: traceparent, tracestate
 ```
 
 #### Strongly type `site` option
+
 The `site` option now has a stronger type definition. If you use TypeScript you might have an error if you use a non-standard value. We recommend using [proxy][27] to send RUM data to a nonstandard URL.
 
 #### Tracking Actions, Resources and LongTask are now enabled by default
-We're now tracking user interactions, resources and long tasks by default. This change does not impact billing. To opt-out, set `trackUserInteractions`, `trackResources`, and `trackLongTasks`  [initialization parameters][28] to `false`.
+
+User interactions, resources, and long tasks are now tracked by default. This change does not impact billing. To opt-out, set `trackUserInteractions`, `trackResources`, and `trackLongTasks`  [initialization parameters][28] to `false`.
 
 #### Increased cookies expiration date
+
 To support anonymous user tracking, the session cookie (`_dd_s`) expiration is extended to 1 year. To opt-out, set `trackAnonymousUser` [initialization parameters][28] to `false`.
 
 #### Removed useCrossSiteSessionCookie initialization parameter
-This parameter was deprecated and is now unsupported, use `usePartitionedCrossSiteSessionCookie` [initialization parameters][28] instead.
+
+`useCrossSiteSessionCookie` was deprecated and is now unsupported. Use `usePartitionedCrossSiteSessionCookie` [initialization parameters][28] instead.
 
 #### Lazy load Session Replay
 
@@ -56,16 +62,19 @@ Session Replay module is now lazy-loaded using [dynamic imports](https://develop
 `datadog-rum.js`), the SDK will dynamically load an additional chunk when needed: (e.g.
 `recorder-d7628536637b074ddc3b-datadog-rum.js`).
 
-#### Do not inject trace context for non sampled traces.
-We changed the default value for `traceContextInjection` initialization parameter to `sampled` to ensure the backend services' sampling decisions are still applied when traces are not sampled in the browser SDK. See: [Connect Rum and Traces documentation][29]
+#### Do not inject trace context for non sampled traces
+
+The default value for the `traceContextInjection` initialization parameter has been updated to `sampled` to ensure backend services' sampling decisions are applied when traces are not sampled in the Browser SDK. See: [Connect Rum and Traces documentation][29]
 
 Note: If you're using a `traceSampleRate` of 100% (default), this change will not have any impact for you.
 
 ### Future breaking changes
 
 #### Enabling compression for Datadog intake requests
-We plan to enable compression for Datadog intake requests by default in a future major version. However we recommend opt-in compression already via the `compressIntakeRequest` [initialization parameters][28].
-Because the compression is done in a Worker thread. you will need to configure your Content Security Policy; see [CSP guidelines][18] for more information.
+
+Compression for Datadog intake requests will be enabled by default in a future major version.
+It is recommended to opt-in to compression now using the `compressIntakeRequest` [initialization parameter][28].
+Since compression is performed in a Worker thread, configuring the Content Security Policy is necessary. See [CSP guidelines][18] for more information.
 
 ## From v4 to v5
 
