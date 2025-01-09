@@ -18,13 +18,13 @@ further_reading:
 
 Datadog’s [Service Catalog][4], [Scorecards][2], and [Workflow Automation][5] enable organizations to monitor and optimize cloud costs with team-level granularity, ensuring appropriate cost allocation and protocol compliance.
 
-## Proactively Monitor Cost Spikes
+## Proactively monitor cost spikes
 
 [Datadog's Cloud Cost Management][1] integrates with the Service Catalog to detect and alert on cost anomalies in real time. Teams can quickly investigate spikes by correlating them with service-level changes like traffic fluctuations, deployments, or PR merges. 
 
 {{< img src="tracing/service_catalog/ccm-use-cases-cost-spikes.png" alt="The Costs tab for a service in the Service Catalog, showing cost metrics for different components of the infrastructure." >}}
 
-## Ensure FinOps Compliance and Cost Transparency
+## Ensure cost compliance and transparency
 
 Teams can monitor and optimize cost allocation by tagging cloud resources and tracking compliance with [Scorecards][2]. 
 

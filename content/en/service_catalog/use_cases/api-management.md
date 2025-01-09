@@ -14,17 +14,17 @@ Service Catalog simplifies API management by providing a centralized platform fo
 
 {{< img src="tracing/service_catalog/api-management-use-case.png" alt="The side panel view of an API in Service Catalog, showing API metadata and an OpenAI preview." >}}
 
-## API Discovery and Usability:
+## API discovery and usability:
 
 1. Developers: Quickly access API documentation, code snippets, rate limits, health metrics, and reliability scores for faster integration and reuse.
 1. Platform Engineers and Managers: Driect teams use existing APIs to reduce redundancy, save time, and improve efficiency.
 
-## API Ownership and Accountability:
+## API ownership and accountability:
 
 1. Developers: Monitor API health and usage, streamline communications with API consumers, and assume full ownership of their APIs.
 1. Platform Engineers and Managers:  Promote a culture of accountability by providing tools for developers to manage their APIs and ensure reliability.
 
-## API Governance at Scale:
+## API governance at scale:
 
 1. Developers: Receive clear feedback on adherence to quality, security, and governance standards.
 1. Platform Engineers and Managers: Establish and uphold API standards to ensure high-quality APIs throughout the organization.
