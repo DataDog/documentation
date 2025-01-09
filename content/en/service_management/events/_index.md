@@ -39,6 +39,8 @@ More than 100 Datadog integrations support events collection, including [Kuberne
 
 **Tip**: To open the Event Management page from Datadog's global search, press <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>K</kbd> and search for `event explorer`.
 
+**Update to Datadog monitor events `aggregation_key` starting March 1, 2025:** The Datadog monitor events `aggregation_key` is unique to each Monitor ID. Starting March 1st, this key will also include Monitor Group, making it unique per *Monitor ID and Monitor Group*. If you're using monitor events `aggregation_key` in dashboard queries or the Event API, you must migrate to use `@monitor.id`. Reach out to [support](https://www.datadoghq.com/support/) if you have any question.
+
 ## Components
 
 {{< whatsnext desc="Event Management features:">}}
