@@ -254,6 +254,7 @@ If the two metadata entries are defined for a service, only `extensions[datadogh
 
 - Change lead time stage breakdown metrics are only available for GitHub.
 - Change lead time is not available for the first deployment of a service that includes Git information.
+- The maximum number of commits considered when computing Change Lead Time for a specific deployment is 5000.
 - For rebased branches, *change lead time* calculations consider the new commits created during the rebase, not the original commits.
 - When using "Squash" to merge pull requests:
   - For GitHub: Metrics are emitted for the original commits.
