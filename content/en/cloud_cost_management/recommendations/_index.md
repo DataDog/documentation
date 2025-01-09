@@ -175,6 +175,53 @@ multifiltersearch:
       recommendation_type: DynamoDB Delete Extra On-Demand Backups
       recommendation_description: A DynamoDB table has charges for more than 2 on-demand backups.
       recommendation_prerequisites: ""
+    - category: Unused resource
+      cloud_provider: Azure
+      resource_type: Azure AKS Cluster
+      recommendation_type: Terminate AKS Cluster
+      recommendation_description: An AKS cluster with less than 5% CPU usage
+      recommendation_prerequisites: ""
+    - category: Unused resource
+      cloud_provider: Azure
+      resource_type: Azure Container Registry
+      recommendation_type: Terminate Azure Container Registry
+      recommendation_description: A container registry that has never received successful pulls  
+      recommendation_prerequisites: ""
+    - category: Unused resource
+      cloud_provider: Azure
+      resource_type: Azure Load Balancer
+      recommendation_type: Delete Azure Load Balancer
+      recommendation_description: Azure load balancer with 0 bytes transferred
+      recommendation_prerequisites: ""
+    - category: Unused resource
+      cloud_provider: Azure
+      resource_type: Azure Managed Disk
+      recommendation_type: Delete Unattached Azure Managed Disk
+      recommendation_description: Azure managed disk is unattached and can be deleted
+      recommendation_prerequisites: ""
+    - category: Unused resource
+      cloud_provider: Azure
+      resource_type: Azure Managed Disk
+      recommendation_type: Delete Unused Azure Managed Disk
+      recommendation_description: Azure managed disk with no read/write operations can be deleted
+      recommendation_prerequisites: ""
+    - category: Unused resource
+      cloud_provider: Azure
+      resource_type: Azure MySQL
+      recommendation_type: Terminate Database for MySQL
+      recommendation_description: Database server with no connections can be terminated
+      recommendation_prerequisites: ""
+    - category: Unused resource
+      cloud_provider: Azure
+      resource_type: Azure SQL Server Database
+      recommendation_type: Terminate SQL Server Database
+      recommendation_description: Azure SQL Server Database with no successful connections and very minimal CPU can be terminated
+      recommendation_prerequisites: ""
+    - category: Unused resource
+      cloud_provider: Azure
+      resource_type: Azure VM Instance
+      recommendation_type: Terminate VM Instance
+      recommendation_description: VM instance with less than 5% user CPU and over 90% usable memory
     - category: Previous generation resource
       cloud_provider: AWS
       resource_type: EC2
@@ -271,6 +318,12 @@ multifiltersearch:
       recommendation_type: Over-provisioned DynamoDB Capacity
       recommendation_description: A provisioned DynamoDB table using less than 80% of its read and write capacity more than 80% of the time.
       recommendation_prerequisites: ""
+    - category: Over-provisioned resource
+      cloud_provider: Azure
+      resource_type: Azure Container App
+      recommendation_type: Downsize Azure Container App
+      recommendation_description: An Azure Container App has higher than necessary minimum replicas
+      recommendation_prerequisites: ""
     - category: Rate optimization
       cloud_provider: AWS
       resource_type: RDS Reserved Instances
@@ -324,6 +377,30 @@ multifiltersearch:
       resource_type: DynamoDB
       recommendation_type: Migrate DynamoDB to Standard Table Class
       recommendation_description: Migrating to the Standard table class offers potential savings from capacity rates compared to the additional costs from storage rates, or it uses the Standard table class' free tier for storage.
+      recommendation_prerequisites: ""
+    - category: Rate optimization
+      cloud_provider: Azure
+      resource_type: SQL Server Database
+      recommendation_type: Purchase Reservation for SQL Server Database
+      recommendation_description: SQL server database has no reservation coverage and is more than 45 days old
+      recommendation_prerequisites: ""
+    - category: Rate optimization
+      cloud_provider: Azure
+      resource_type: Database for MySQL
+      recommendation_type: Purchase Reservation for Azure MySQL
+      recommendation_description: Database for MySQL has no reservation coverage and is more than 45 days old
+      recommendation_prerequisites: ""
+    - category: Rate optimization
+      cloud_provider: Azure
+      resource_type: Database for PostgreSQL
+      recommendation_type: Purchase Reservation for PostgreSQL
+      recommendation_description: Database for PostgreSQL has no reservation coverage and is more than 45 days old
+      recommendation_prerequisites: ""
+    - category: Rate optimization
+      cloud_provider: Azure
+      resource_type: SQL Server Managed Instance
+      recommendation_type: Purchase Reservation for SQL Server Managed Instance
+      recommendation_description: Purchase reservation for SQL Server Managed Instance with no reservation coverage and is more than 45 days old
       recommendation_prerequisites: ""
     - category: Rate optimization
       cloud_provider: AWS
