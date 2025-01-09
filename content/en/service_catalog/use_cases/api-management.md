@@ -10,22 +10,24 @@ further_reading:
     text: "Datadog Service Catalog"
 ---
 
-Service Catalog simplifies API management by providing a centralized solution for API discovery, ownership, and governance. It empowers developers and managers to collaborate effectively, ensuring APIs are easy to find, use, and maintain.
+Service Catalog simplifies API management by providing a centralized platform for API discovery, ownership, and governance. By ensuring APIs are easy to find, use, and maintain, Service Catalog fosters effective collaboration between developers and managers.
 
-{{< img src="tracing/service_catalog/api-management-use-case.png" alt="The side panel view of an API in the Service Catalog, showing API metadata and an OpenAI preview." >}}
+{{< img src="tracing/service_catalog/api-management-use-case.png" alt="The side panel view of an API in Service Catalog, showing API metadata and an OpenAI preview." >}}
 
-## API Discovery and Usability
+## API Discovery and Usability:
 
-1. Developers: Quickly access API documentation, code snippets, rate limits, health metrics, and reliability scores, enabling faster integration and reuse.
-1. Platform Engineers and Managers: Ensure teams leverage existing APIs instead of duplicating efforts, saving time and fostering efficiency.
+1. Developers: Quickly access API documentation, code snippets, rate limits, health metrics, and reliability scores for faster integration and reuse.
+1. Platform Engineers and Managers: Driect teams use existing APIs to reduce redundancy, save time, and improve efficiency.
 
 ## API Ownership and Accountability:
-1. Developers: Monitor API health and usage, streamline communications with API consumers, and take full ownership of their APIs.
-1. Platform Engineers and Managers:  Promote a culture of accountability by providing developers with the tools to manage their APIs and ensure reliability.
+
+1. Developers: Monitor API health and usage, streamline communications with API consumers, and assume full ownership of their APIs.
+1. Platform Engineers and Managers:  Promote a culture of accountability by providing tools for developers to manage their APIs and ensure reliability.
 
 ## API Governance at Scale:
-1. Developers: Receive clear feedback on compliance with quality, security, and governance standards.
-1. Platform Engineers and Managers:  Set and enforce API standards while maintaining high-quality APIs across the organization.
+
+1. Developers: Receive clear feedback on adherence to quality, security, and governance standards.
+1. Platform Engineers and Managers: Establish and uphold API standards to ensure high-quality APIs throughout the organization.
 
 ## Further reading
 
