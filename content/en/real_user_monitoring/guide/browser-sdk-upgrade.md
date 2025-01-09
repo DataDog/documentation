@@ -16,6 +16,11 @@ Follow this guide to migrate between major versions of the Browser RUM and Brows
 
 ## From v5 to v6
 
+V6's main improvement is the bundle size reduction. By dropping support for IE11 and leveraging lazy loading, we have been able to reduce the size of the the rum bunlde by 10% and the logs bundle by almost 9%.
+Aditionally we've changed a few default initialization parameters and prepared for future improvements.
+
+Take notice of the below breaking changes as you upgrade your SDK.
+
 ### Breaking changes
 
 #### Browser support
@@ -46,7 +51,6 @@ TODO
 
 #### Do not inject trace context for non sampled traces.
 We changed the default value for `traceContextInjection` initialization parameter to `sampled` to ensure the backend services' sampling decisions are still applied when traces are not sampled in the browser SDK. See: [Connect Rum and Traces documentation][29]
-
 
 Note: If you're using a `traceSampleRate` of 100% (default), this change will not have any impact for you.
 
