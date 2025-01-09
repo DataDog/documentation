@@ -36,20 +36,14 @@ Follow these steps to enable dbt traces:
 
 Check official documentation ([python client][6] and [dbt integration][7]) for other supported configurations of OpenLineage.
 
+In your setup, use `dbt-ol` instead of `dbt`. It's a light wrapper that supports all the subcommands `dbt` does.
+Use the `--consume-structured-logs` option to get OpenLineage events in real time.
+
+```shell
+dbt-ol --consume-structured-logs run --select <your_model_name>
+```
+
 ## Validation
-
-In your setup, you can run the following `dbt-ol` command to see traces in Datadog.
-For example, if you are using the [jaffle-shop][8] project:
-
-```shell
-dbt-ol run --select orders
-```
-
-The above consumes dbt [artifacts][9] and sends OpenLineage events **after** the job finishes.
-If you want to receive events in realtime you can use the `--consume-structured-logs` of `dbt-ol`.
-```shell
-dbt-ol --consume-structured-logs run --select orders
-```
 
 In Datadog, you can see the traces by using the following APM query:
 ```text
