@@ -19,7 +19,7 @@ Follow this guide to migrate between major versions of the Browser RUM and Brows
 ### Breaking changes
 
 #### Browser support
-We remove support for IE11 and other older browsers. We now require at least support for ES2018.
+We removed support for IE11 and other older browsers. We now require at least support for ES2018.
 If you still wish to use datadog on older browsers, you can keep using browser SDK v5 or earlier.
 
 #### Add tracestate header when using tracecontext propagator

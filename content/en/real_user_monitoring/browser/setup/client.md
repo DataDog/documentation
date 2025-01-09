@@ -21,7 +21,7 @@ The Datadog Browser SDK can be used to instrument your application for both [Rea
 
 After your applications have been manually instrumented, you can begin managing your RUM and Error Tracking configurations per application in Datadog.
 
-The Browser SDK supports all modern desktop and mobile browsers including IE11. For more information, see the [Browser Support][3] table.
+The Browser SDK supports all modern desktop and mobile browsers. For more information, see the [Browser Support][3] table.
 
 
 ## Setup
