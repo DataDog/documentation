@@ -5,6 +5,12 @@ import { FilterGlossary } from '../schemas/glossaries/filterGlossary';
 import { OptionGlossary } from '../schemas/glossaries/optionGlossary';
 import { OptionGroupGlossary } from '../schemas/glossaries/optionGroupGlossary';
 
+// TODO: In the config directory, use a glossary folder for each glossary type,
+// and update the load functions.
+// TODO: Support more than one file in every glossary folder.
+// TODO: Protect against accidental translation. No ID should appear in translated YAML
+// that does not appear in the default language YAML.
+
 // TODO: Option set -> option group.
 
 // TODO: Start the docs with a config object that includes
