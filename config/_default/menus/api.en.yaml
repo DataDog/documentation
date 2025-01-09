@@ -1959,9 +1959,9 @@ menu:
           - CreateMonitor
         unstable: []
         order: 1
-    - name: Get all monitor details
-      url: '#get-all-monitor-details'
-      identifier: monitors-get-all-monitor-details
+    - name: Get all monitors
+      url: '#get-all-monitors'
+      identifier: monitors-get-all-monitors
       parent: monitors
       generated: true
       params:
