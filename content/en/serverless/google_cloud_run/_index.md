@@ -312,7 +312,7 @@ To deploy your Cloud Run service with a YAML service specification:
    - `<DATADOG_SITE>`: Your [Datadog site][3], {{< region-param key="dd_site" code="true" >}}.
    - `<API_KEY>`: Your [Datadog API key][1]. 
    - `<VERSION>`: The version number of your deployment. See [Unified Service Tagging][2].
-   - `<CONTAINER_IMAGE>`: The image of the code you are deploying to Cloud Run.
+   - `<CONTAINER_IMAGE>`: The image of the code you are deploying to Cloud Run. For example, `us-docker.pkg.dev/cloudrun/container/hello`.
    - `<SERVICE_ACCOUNT>`: The name of your Google Cloud service account.
    
 1. Run:
