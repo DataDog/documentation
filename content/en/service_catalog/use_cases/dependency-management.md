@@ -1,5 +1,5 @@
 ---
-title: Managing and Mapping uluDependencies
+title: Managing and Mapping Dependencies
 aliases:
   - /tracing/service_catalog/guides/dependency_management
   - /service_catalog/use_cases/dependency_management
