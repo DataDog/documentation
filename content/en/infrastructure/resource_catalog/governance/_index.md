@@ -16,7 +16,7 @@ further_reading:
 
 ## Overview
 
-{{< img src="/infrastructure/resource_catalog/governance/custom-policy-list.png" alt="The Resource Catalog page showing the Governance tab and list of custom policies" width="100%">}}
+{{< img src="/infrastructure/resource_catalog/governance/custom-policy-list-1.png" alt="The Resource Catalog page showing the Governance tab and list of custom policies" width="100%">}}
 
 
 With infrastructure governance policies in Resource Catalog, you can define custom policies on any resource type in your infrastructure based on governance best practices in your organization, such as improving ownership tag coverage on resources or ensuring versioning on critical resources is up-to-date. Instead of writing custom scripts or lambdas that scan every resource, Datadog gives you visibility into problematic resources so that you can focus on remediation.
@@ -30,7 +30,7 @@ Specifically, you can:
 
 ## Create a custom policy
 
-{{< img src="/infrastructure/resource_catalog/governance/custom-policy-example.png" alt="A custom policy reflecting a compliance score of thirty percent." width="100%">}}
+{{< img src="/infrastructure/resource_catalog/governance/custom-policy-example-1.png" alt="A custom policy reflecting a compliance score of thirty percent." width="100%">}}
 
 Custom policies require specific values in your cloud resource attributes within Datadog based on your organization's infrastructure best practices.
 
