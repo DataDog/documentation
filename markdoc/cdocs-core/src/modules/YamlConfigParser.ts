@@ -231,16 +231,55 @@ export class YamlConfigParser {
     return glossariesByLang;
   }
 
+  static loadOptionGroupGlossaries(p: {
+    configDir: string;
+    langs: string[];
+    optionGlossariesByLang: Record<string, OptionGlossary>;
+    defaultLang?: string;
+  }): Record<string, OptionGroupGlossary> {
+    const defaultLang = p.defaultLang || 'en';
+    const glossariesByLang: Record<string, OptionGroupGlossary> = {};
+
+    const defaultGlossary = this.loadOptionGroupGlossary({
+      langDir: `${p.configDir}/${defaultLang}`,
+      optionGlossary: p.optionGlossariesByLang[defaultLang],
+    });
+
+    p.langs.forEach((lang) => {
+      if (lang === defaultLang) {
+        glossariesByLang[lang] = defaultGlossary;
+        return;
+      }
+
+      const langDir = `${p.configDir}/${lang}`;
+      const translatedGlossary = this.loadOptionGroupGlossary({
+        langDir,
+        optionGlossary: p.optionGlossariesByLang[lang],
+      });
+
+      // merge the translated glossary with the default glossary
+      const mergedGlossary: OptionGroupGlossary = {
+        ...defaultGlossary,
+        ...translatedGlossary,
+      };
+
+      glossariesByLang[lang] = mergedGlossary;
+    });
+
+    return glossariesByLang;
+  }
+
   static loadOptionGroupGlossary(p: {
     langDir: string;
     optionGlossary: OptionGlossary;
   }): OptionGroupGlossary {
-    const filenames = FileSearcher.findInDir(p.langDir, /\.ya?ml$/);
+    const optionGroupGlossaryDir = `${p.langDir}/filter_option_sets`;
+    const filePaths = FileSearcher.findInDir(optionGroupGlossaryDir, /\.ya?ml$/);
     const mergedGlossary: OptionGroupGlossary = {};
 
     // Merge all files into the result glossary
-    filenames.forEach((filename) => {
-      const filePath = `${p.langDir}/${filename}`;
+    filePaths.forEach((filePath) => {
+      console.log('loading raw option group glossary from', filePath);
       const glossaryStr = fs.readFileSync(filePath, 'utf8');
       const rawGlossary = RawOptionGroupGlossarySchema.parse(yaml.load(glossaryStr));
 
@@ -248,7 +287,7 @@ export class YamlConfigParser {
         // Verify that the merged glossary does not already contain this option group ID
         if (mergedGlossary[optionGroupId]) {
           throw new Error(
-            `Duplicate option group ID '${optionGroupId}' found in file ${filename}`,
+            `Duplicate option group ID '${optionGroupId}' found in file ${filePath}`,
           );
         }
 

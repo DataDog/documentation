@@ -29,7 +29,7 @@ export class CdocsDataManager {
     filterOptionsConfigByLang: Record<string, FilterOptionsConfig>;
     filterGlossariesByLang: Record<string, FilterGlossary>;
     optionGlossariesByLang: Record<string, OptionGlossary>;
-    // optionGroupGlossariesByLang: Record<string, OptionGroupGlossary>;
+    optionGroupGlossariesByLang: Record<string, OptionGroupGlossary>;
   } {
     const defaultLang = p.defaultLang || 'en';
 
@@ -49,6 +49,12 @@ export class CdocsDataManager {
     // Load the option glossaries for all languages
     const optionGlossariesByLang =
       YamlConfigParser.loadOptionGlossaries(glossaryLoadingConfig);
+
+    // Load the option group glossaries for all languages
+    const optionGroupGlossariesByLang = YamlConfigParser.loadOptionGroupGlossaries({
+      ...glossaryLoadingConfig,
+      optionGlossariesByLang,
+    });
 
     // Load the legacy glossaries for all languages
     const glossariesByLang = YamlConfigParser.loadGlossariesByLang({
@@ -98,6 +104,7 @@ export class CdocsDataManager {
       filterOptionsConfigByLang,
       filterGlossariesByLang,
       optionGlossariesByLang,
+      optionGroupGlossariesByLang,
     };
   }
 }
