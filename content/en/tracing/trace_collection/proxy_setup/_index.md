@@ -378,12 +378,90 @@ http {
 
 ## Ingress-NGINX Controller for Kubernetes
 
-### Controller v1.10.0+
+Datadog offers for monitoring ingress-nginx controller in Kubernetes.
+Depending of on your version and requirements, you can choose from the following instrumentation methods:
 
-<div class="alert alert-warning">
-  <strong>Important Note:</strong> With the release of <b>v1.10.0</b>, the Ingress controller's OpenTracing and Datadog integration have been deprecated. As an alternative, the OpenTelemetry integration is recommended.<br><br>
-  For older versions, see the <a href="#controller-v190-and-older">OpenTracing-based instructions</a>.
-</div>
+1. [v1.10.0 and newer using Datadog's features][].
+2. [v1.10.0 and newer using OpenTelemetry][].
+3. [v1.9.0 and older using Datadog's OpenTracing][].
+
+### Controller v1.10.0+ using Datadog's features
+
+This instrumentation method uses [nginx-datadog][6], Datadog's module for NGINX and leverages Kubernetes [init-container][7] mechanism
+to install the module within the Ingress-NGINX Controller instance.
+
+To instrument Ingress-NGINX <b>v1.10.0+</b> using Datadog’s module, follow these steps:
+1. **Verify your Ingress-NGINX version**<br>
+Check the version of your Ingress-NGINX Controller and ensure an appropriate init-container is available.
+Refer to the [compatibility table][] below to ensure the correct configuration.
+
+2. **Modify your controller’s pod specification:**<br>
+Update the controller pod specification to include the init-container and configure the Datadog Agent host environment variable:
+
+```yaml
+spec:
+  template:
+    spec:
+      initContainers:
+        - name: init-datadog
+          image: datadog/ingress-nginx-injection:<MY_INGRESS_NGINX_VERSION>
+          command: ['/datadog/init_module.sh', '/opt/datadog-modules']
+          volumeMounts:
+            - name: nginx-module
+              mountPath: /opt/datadog-modules
+      containers:
+        - name: controller
+          image: registry.k8s.io/ingress-nginx/controller:<MY_INGRESS_NGINX_VERSION>
+          env:
+            - ...
+            - name: DD_AGENT_HOST
+              # or another way to access the datadog-agent
+              # see https://docs.datadoghq.com/containers/kubernetes/installation/
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.hostIP
+```
+
+4. **Configure Ingress-NGINX** <br>
+Create or modify the `ConfigMap` to load the Datadog module:
+
+```yaml
+kind: ConfigMap
+apiVersion: v1
+...
+data:
+  enable-opentelemetry: "false"
+  error-log-level: notice
+  main-snippet: |
+    load_module /opt/datadog-modules/ngx_http_datadog_module.so;
+```
+
+5. **Apply the ConfigMap**
+Apply the updated `ConfigMap` to ensure the Datadog module is correctly loaded.
+
+This configuration will ensure that the Datadog module is loaded and ready to trace incoming requests.
+
+#### Compatibility Version Table
+
+Ensure the init-container version matches the version of your Ingress-NGINX Controller.
+Mismatched versions can prevent Ingress-NGINX from starting:
+
+| ingress-nginx version | init-container |
+| - | - |
+| v1.11.3 | datadog/ingress-nginx-injection:v1.11.3 |
+| v1.11.2 | datadog/ingress-nginx-injection:v1.11.2 |
+| v1.11.1 | datadog/ingress-nginx-injection:v1.11.1 |
+| v1.11.0 | datadog/ingress-nginx-injection:v1.11.0 |
+| v1.10.6 | datadog/ingress-nginx-injection:v1.10.6 |
+| v1.10.5 | datadog/ingress-nginx-injection:v1.10.5 |
+| v1.10.4 | datadog/ingress-nginx-injection:v1.10.4 |
+| v1.10.3 | datadog/ingress-nginx-injection:v1.10.3 |
+| v1.10.2 | datadog/ingress-nginx-injection:v1.10.2 |
+| v1.10.1 | datadog/ingress-nginx-injection:v1.10.1 |
+| v1.10.0 | datadog/ingress-nginx-injection:v1.10.0 |
+| v1.9.6 | datadog/ingress-nginx-injection:v1.9.6 |
+
+### Controller v1.10.0+ using OpenTelemetry
 
 **1. Prepare the Datadog Agent:** Ensure that your Datadog Agent has [gRPC OTLP Ingestion enabled][5] to act as an OpenTelemetry Collector.
 
@@ -461,6 +539,8 @@ The above overrides the default `nginx-ingress-controller.ingress-nginx` service
 [3]: https://hub.docker.com/layers/library/amazonlinux/2.0.20230119.1/images/sha256-db0bf55c548efbbb167c60ced2eb0ca60769de293667d18b92c0c089b8038279?context=explore
 [4]: https://github.com/DataDog/nginx-datadog/blob/master/doc/API.md
 [5]: /opentelemetry/otlp_ingest_in_the_agent/
+[6]: https://github.com/DataDog/nginx-datadog/
+[7]: https://kubernetes.io/docs/concepts/workloads/pods/init-containers/
 {{% /tab %}}
 
 {{% tab "Istio" %}}
