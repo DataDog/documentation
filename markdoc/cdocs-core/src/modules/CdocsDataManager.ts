@@ -4,6 +4,7 @@ import { Glossary } from '../schemas/glossary';
 import { FilterGlossary } from '../schemas/glossaries/filterGlossary';
 import { OptionGlossary } from '../schemas/glossaries/optionGlossary';
 import { OptionGroupGlossary } from '../schemas/glossaries/optionGroupGlossary';
+import { ContentFiltersConfig } from '../schemas/contentFiltersConfig';
 
 // TODO: In the config directory, use a glossary folder for each glossary type,
 // and update the load functions.
@@ -27,9 +28,7 @@ export class CdocsDataManager {
   }): {
     glossariesByLang: Record<string, Glossary>;
     filterOptionsConfigByLang: Record<string, FilterOptionsConfig>;
-    filterGlossariesByLang: Record<string, FilterGlossary>;
-    optionGlossariesByLang: Record<string, OptionGlossary>;
-    optionGroupGlossariesByLang: Record<string, OptionGroupGlossary>;
+    contentFiltersConfig: ContentFiltersConfig;
   } {
     const defaultLang = p.defaultLang || 'en';
 
@@ -102,9 +101,11 @@ export class CdocsDataManager {
     return {
       glossariesByLang,
       filterOptionsConfigByLang,
-      filterGlossariesByLang,
-      optionGlossariesByLang,
-      optionGroupGlossariesByLang,
+      contentFiltersConfig: {
+        filterGlossariesByLang,
+        optionGlossariesByLang,
+        optionGroupGlossariesByLang,
+      },
     };
   }
 }

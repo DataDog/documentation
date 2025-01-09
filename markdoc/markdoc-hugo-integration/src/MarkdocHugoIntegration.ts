@@ -4,7 +4,10 @@ import {
   PageFiltersManifestSchema,
   Glossary,
   FileSearcher,
-  FiltersManifestBuilder
+  FiltersManifestBuilder,
+  FilterGlossary,
+  OptionGlossary,
+  OptionGroupGlossary
 } from 'cdocs-core';
 import { IntegrationConfig } from './schemas/config/integration';
 import { HugoGlobalConfig } from './schemas/config/hugo';
@@ -29,9 +32,18 @@ import { CdocsDataManager } from 'cdocs-core';
  */
 export class MarkdocHugoIntegration {
   hugoGlobalConfig: HugoGlobalConfig;
+  private compiledFilePaths: string[] = [];
+
+  // New data types
+  // TODO: Do we even need the option glossary here, or is it just
+  // for validation/population of the option groups?
+  filterGlossariesByLang: Record<string, FilterGlossary>;
+  optionGlossariesByLang: Record<string, OptionGlossary>;
+  optionGroupGlossariesByLang: Record<string, OptionGroupGlossary>;
+
+  // legacy data types
   filterOptionsConfigByLang: Record<string, FilterOptionsConfig>;
   glossariesByLang: Record<string, Glossary> = {};
-  private compiledFilePaths: string[] = [];
 
   errorsByFilePath: Record<string, CompilationError[]> = {};
 
@@ -46,8 +58,14 @@ export class MarkdocHugoIntegration {
       langs: this.hugoGlobalConfig.languages
     });
 
+    // legacy data types
     this.glossariesByLang = filtersConfig.glossariesByLang;
     this.filterOptionsConfigByLang = filtersConfig.filterOptionsConfigByLang;
+
+    // new data types
+    this.filterGlossariesByLang = filtersConfig.filterGlossariesByLang;
+    this.optionGlossariesByLang = filtersConfig.optionGlossariesByLang;
+    this.optionGroupGlossariesByLang = filtersConfig.optionGroupGlossariesByLang;
   }
 
   async injectAuthorConsole() {
