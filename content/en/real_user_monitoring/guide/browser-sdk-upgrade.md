@@ -25,17 +25,17 @@ Take notice of the below breaking changes as you upgrade your SDK.
 
 #### Browser support
 We removed support for IE11 and other older browsers. We now require at least support for ES2018.
-If you still wish to use datadog on older browsers, you can keep using browser SDK v5 or earlier.
+If you still wish to use Datadog on older browsers, you can keep using Browser SDK v5 or earlier.
 
 #### Add tracestate header when using tracecontext propagator
-We have added a new tracing header, if you are using the `tracecontext` propagator (default), then you need to allow this new header for all urls using it:
+The default `tracecontext` propagator now sends a new `tracestate` header with additional metadata that allows better attribution of your traces. If you are using this propagator, then you need to allow this new header for all traced endpoints, in addition to the existing `traceparent` header:
 
 ```
-Access-Control-Allow-Headers: tracestate
+Access-Control-Allow-Headers: traceparent, tracestate
 ```
 
 #### Strongly type `site` option
-The `site` option now has a stronger type definition. If you use typescript you might have an error if you use a non-standard value. We recommend using [proxy][27] to send RUM data on a non standard url.
+The `site` option now has a stronger type definition. If you use TypeScript you might have an error if you use a non-standard value. We recommend using [proxy][27] to send RUM data to a nonstandard URL.
 
 #### Tracking Actions, Resources and LongTask are now enabled by default
 We're now tracking user interactions, resources and long tasks by default. This change does not impact billing. To opt-out, set `trackUserInteractions`, `trackResources`, and `trackLongTasks`  [initialization parameters][28] to `false`.
@@ -58,7 +58,7 @@ Note: If you're using a `traceSampleRate` of 100% (default), this change will no
 
 #### Enabling compression for Datadog intake requests
 We plan to enable compression for Datadog intake requests by default in a future major version. However we recommend opt-in compression already via the `compressIntakeRequest` [initialization parameters][28].
-Because the compression is done in a Worker thread. you will need to configure your Content Security Policy, see [CSP guidelines][18] for more information.
+Because the compression is done in a Worker thread. you will need to configure your Content Security Policy; see [CSP guidelines][18] for more information.
 
 ## From v4 to v5
 
