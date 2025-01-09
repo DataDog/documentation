@@ -33,6 +33,10 @@ Ingest, enrich and normalize, and correlate (see public beta) your events from a
 
 More than 100 Datadog integrations support events collection, including [Kubernetes][1], [Docker][2], [Jenkins][3], [Chef][4], [Puppet][5], [Amazon ECS][6] or [Autoscaling][7], [Sentry][8], and [Nagios][9]. 
 
+{{< callout url="https://docs.datadoghq.com/api/latest/events/" header="false" >}}
+**Update to the aggregation_key for Datadog monitor events starting March1st:** Currently, the aggregation_key is unique per Monitor ID. Starting March 1st, we will update it to be unique per Monitor ID and Monitor Group. If you’re using monitor events aggregation_key in dashboard queries or the Event API, please migrate to using @monitor.id. Please reach out to [support](https://www.datadoghq.com/support/) if you have any question.
+{{< /callout >}}
+
 ## Components
 
 {{< whatsnext desc="Event Management features:">}}
