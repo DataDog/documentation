@@ -433,7 +433,7 @@ NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConf
 
 ### Instrument views
 
-The Datadog iOS SDK for allows you to instrument views of `SwiftUI` applications. The instrumentation also works with hybrid `UIKit` and `SwiftUI` applications.
+The Datadog iOS SDK allows you to instrument views of `SwiftUI` applications. The instrumentation also works with hybrid `UIKit` and `SwiftUI` applications.
 
 To instrument a `SwiftUI.View`, add the following method to your view declaration:
 
@@ -509,7 +509,7 @@ This means that even if users open your application while offline, no data is lo
 
 ## Supported versions
 
-See [Supported versions][10] for a list operating system versions and platforms that are compatible with the RUM iOS SDK.
+See [Supported versions][10] for a list operating system versions and platforms that are compatible with the iOS SDK.
 
 ## Further Reading
 
