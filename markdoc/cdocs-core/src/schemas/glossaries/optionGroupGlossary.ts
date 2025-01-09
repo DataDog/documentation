@@ -68,6 +68,8 @@ export const RawOptionGroupGlossarySchema = z.record(
     }),
 );
 
+export type RawOptionGroupGlossary = z.infer<typeof RawOptionGroupGlossarySchema>;
+
 // TODO: Do the validations run in the raw schema above
 // also need to run below?
 

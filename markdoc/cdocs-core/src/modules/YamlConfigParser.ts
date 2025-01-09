@@ -11,8 +11,21 @@ import yaml from 'js-yaml';
 import {
   FilterGlossary,
   FilterGlossaryEntry,
+  FilterGlossarySchema,
   RawFilterGlossarySchema,
 } from '../schemas/glossaries/filterGlossary';
+import {
+  OptionGlossary,
+  OptionGlossaryEntry,
+  OptionGlossarySchema,
+  RawOptionGlossarySchema,
+} from '../schemas/glossaries/optionGlossary';
+import {
+  OptionGroupGlossary,
+  OptionGroupGlossarySchema,
+  RawOptionGroupGlossary,
+  RawOptionGroupGlossarySchema,
+} from '../schemas/glossaries/optionGroupGlossary';
 
 /**
  * A module responsible for all data ingestion from
@@ -27,14 +40,12 @@ export class YamlConfigParser {
   static loadFilterGlossary(p: { langDir: string }): FilterGlossary {
     let result: FilterGlossary;
 
-    const filtersGlossaryFilePath = `${p.langDir}/glossary/filter_ids.yaml`;
+    const glossaryPath = `${p.langDir}/glossary/filter_ids.yaml`;
 
     try {
-      const filtersGlossaryConfigStr = fs.readFileSync(filtersGlossaryFilePath, 'utf8');
-      const filtersGlossary = RawFilterGlossarySchema.parse(
-        yaml.load(filtersGlossaryConfigStr),
-      );
-      result = filtersGlossary.allowed.reduce<Record<string, FilterGlossaryEntry>>(
+      const glossaryYamlStr = fs.readFileSync(glossaryPath, 'utf8');
+      const rawGlossary = RawFilterGlossarySchema.parse(yaml.load(glossaryYamlStr));
+      result = rawGlossary.allowed.reduce<Record<string, FilterGlossaryEntry>>(
         (acc, entry) => {
           acc[entry.id] = entry;
           return acc;
@@ -50,10 +61,71 @@ export class YamlConfigParser {
       }
     }
 
+    FilterGlossarySchema.parse(result);
     return result;
   }
 
-  static loadFilterGlossariesByLang(p: {
+  static loadOptionGlossary(p: { langDir: string }) {
+    let result: OptionGlossary;
+
+    const glossaryFilePath = `${p.langDir}/glossary/filter_options.yaml`;
+
+    try {
+      const glossaryStr = fs.readFileSync(glossaryFilePath, 'utf8');
+      const rawGlossary = RawOptionGlossarySchema.parse(yaml.load(glossaryStr));
+      result = rawGlossary.allowed.reduce<Record<string, OptionGlossaryEntry>>(
+        (acc, entry) => {
+          acc[entry.id] = entry;
+          return acc;
+        },
+        {},
+      );
+    } catch (e) {
+      // If the file is not found, use an empty list
+      if (e instanceof Object && 'code' in e && e.code === 'ENOENT') {
+        result = {};
+      } else {
+        throw e;
+      }
+    }
+
+    OptionGlossarySchema.parse(result);
+    return result;
+  }
+
+  static loadOptionGlossaries(p: {
+    configDir: string;
+    langs: string[];
+    defaultLang?: string;
+  }): Record<string, OptionGlossary> {
+    const defaultLang = p.defaultLang || 'en';
+    const glossariesByLang: Record<string, OptionGlossary> = {};
+
+    const defaultGlossary = this.loadOptionGlossary({
+      langDir: `${p.configDir}/${defaultLang}`,
+    });
+
+    p.langs.forEach((lang) => {
+      if (lang === defaultLang) {
+        glossariesByLang[lang] = defaultGlossary;
+        return;
+      }
+      const langDir = `${p.configDir}/${lang}`;
+      const translatedGlossary = this.loadOptionGlossary({ langDir });
+
+      // merge the translated glossary with the default glossary
+      const mergedGlossary: OptionGlossary = {
+        ...defaultGlossary,
+        ...translatedGlossary,
+      };
+
+      glossariesByLang[lang] = mergedGlossary;
+    });
+
+    return glossariesByLang;
+  }
+
+  static loadFilterGlossaries(p: {
     configDir: string;
     langs: string[];
     defaultLang?: string;
@@ -157,6 +229,49 @@ export class YamlConfigParser {
     });
 
     return glossariesByLang;
+  }
+
+  static loadOptionGroupGlossary(p: {
+    langDir: string;
+    optionGlossary: OptionGlossary;
+  }): OptionGroupGlossary {
+    const filenames = FileSearcher.findInDir(p.langDir, /\.ya?ml$/);
+    const mergedGlossary: OptionGroupGlossary = {};
+
+    // Merge all files into the result glossary
+    filenames.forEach((filename) => {
+      const filePath = `${p.langDir}/${filename}`;
+      const glossaryStr = fs.readFileSync(filePath, 'utf8');
+      const rawGlossary = RawOptionGroupGlossarySchema.parse(yaml.load(glossaryStr));
+
+      for (const [optionGroupId, optionGroup] of Object.entries(rawGlossary)) {
+        // Verify that the merged glossary does not already contain this option group ID
+        if (mergedGlossary[optionGroupId]) {
+          throw new Error(
+            `Duplicate option group ID '${optionGroupId}' found in file ${filename}`,
+          );
+        }
+
+        // Add the entry to the merged glossary
+        mergedGlossary[optionGroupId] = optionGroup.map((option) => {
+          // Verify that each option referenced by the group exists
+          if (!p.optionGlossary[option.id]) {
+            throw new Error(
+              `The option ID '${option.id}' does not exist in the options glossary.`,
+            );
+          }
+
+          // Add default display names where needed
+          return {
+            ...option,
+            display_name: option.display_name || p.optionGlossary[option.id].display_name,
+          };
+        });
+      }
+    });
+
+    OptionGroupGlossarySchema.parse(mergedGlossary);
+    return mergedGlossary;
   }
 
   /**
