@@ -297,7 +297,6 @@ To deploy your Cloud Run service with a YAML service specification:
              volumeMounts:
                - mountPath: /shared-volume
                  name: shared-volume
-         serviceAccountName: '<SERVICE_ACCOUNT>' # You do not have to add the serviceAccountName field to the Cloud Run service YAML. If you don't specify it, Cloud Run will use the default service account for your project, which is typically named PROJECT_NUMBER-compute@developer.gserviceaccount.com. This default service account will have limited permissions by default.
          volumes:
            - emptyDir:
                medium: Memory
