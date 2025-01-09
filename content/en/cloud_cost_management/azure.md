@@ -147,6 +147,8 @@ If your exports are in different storage containers, repeat steps one to seven f
 
 This ensures complete cost accuracy by allowing periodic cost calculations against Microsoft Cost Management.
 
+**Note:** Data can take up to 48 to 72 hours after setup to stabilize in Datadog.
+
 [1]: https://portal.azure.com/#view/Microsoft_Azure_Billing/SubscriptionsBlade
 
 {{% /tab %}}
