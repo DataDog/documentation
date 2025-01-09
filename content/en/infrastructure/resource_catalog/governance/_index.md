@@ -19,7 +19,7 @@ further_reading:
 {{< img src="/infrastructure/resource_catalog/governance/custom-policy-list-1.png" alt="The Resource Catalog page showing the Governance tab and list of custom policies" width="100%">}}
 
 
-With infrastructure governance policies in Resource Catalog, you can define custom policies on any resource type in your infrastructure based on governance best practices in your organization, such as improving ownership tag coverage on resources or ensuring versioning on critical resources is up-to-date. Instead of writing custom scripts or lambdas that scan every resource, Datadog gives you visibility into problematic resources so that you can focus on remediation.
+In the Resource Catalog's Governance view, you can define policies on your infrastructure resources based on governance best practices in your organization, such as improving ownership tag coverage on resources or ensuring versioning on critical resources is up-to-date. Instead of writing custom scripts or lambdas that scan every resource, Datadog gives you visibility into problematic resources so that you can focus on remediation.
 
 Specifically, you can:
 
@@ -71,7 +71,7 @@ To update a policy:
 1. Click the policy.
 2. Click the **Edit** button.
 3. Modify the policy as needed.
-4. CLick **Update Custom Policy** or **Update Tagging Policy**.
+4. Click **Update Custom Policy** or **Update Tagging Policy**.
 
 ## Deleting policies
 
@@ -79,7 +79,7 @@ To delete a custom or tagging policy, click the policy, then click the **Delete*
 
 ## Exporting policies
 
-To export a policy, click the policy, then click the **Export as CSV** button.
+To export the list of non-compliant resources for a policy, click the policy, then click the **Export as CSV** button.
 
 ## Further Reading
 
