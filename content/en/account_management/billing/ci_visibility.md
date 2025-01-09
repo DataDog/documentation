@@ -25,7 +25,7 @@ A committer is an active Git contributor, identified by their Git author email a
 
 ## Charges for bot or actions in the GitHub UI
 
-Datadog does not charge for bot or actions made in the GitHub UI. These types of committers are excluded from billing calculations.
+Datadog does not charge for bot or commits resulting from actions made in the GitHub UI. These types of commits are excluded from billing calculations.
 
 ## Excluding commits from specific people
 
