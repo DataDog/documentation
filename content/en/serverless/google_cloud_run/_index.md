@@ -30,7 +30,7 @@ Set `ENV NODE_OPTIONS="--require dd-trace/init"`. This specifies that the `dd-tr
 The tracing library also collects custom metrics. See the [code examples][2].
 
 #### Logs
-The Datadog sidecar collects logs through a shared volume. To forward logs from your main container to the sidecar, configure your application to write all logs to a location such as `shared-volume/logs/*.log`. 
+The Datadog sidecar collects logs through a shared volume. To forward logs from your main container to the sidecar, configure your application to write all logs to a location such as `shared-volume/logs/*.log`. Ensure that you set the environment variable `DD_SERVERLESS_LOG_PATH` to this location on both the main application container and sidecar container.
 
 To set up logging in your application, see [Node.js Log Collection][3]. To set up trace log correlation, see [Correlating Node.js Logs and Traces][4].
 
@@ -49,7 +49,7 @@ In your main application, add the `dd-trace-py` library. See [Tracing Python App
 The tracing library also collects custom metrics. See the [code examples][2].
 
 #### Logs
-The Datadog sidecar collects logs through a shared volume. To forward logs from your main container to the sidecar, configure your application to write all logs to a location such as `shared-volume/logs/*.log`. 
+The Datadog sidecar collects logs through a shared volume. To forward logs from your main container to the sidecar, configure your application to write all logs to a location such as `shared-volume/logs/*.log`. Ensure that you set the environment variable `DD_SERVERLESS_LOG_PATH` to this location on both the main application container and sidecar container.
 
 To set up logging in your application, see [Python Log Collection][3]. [Python Logging Best Practices][6] can also be helpful. To set up trace log correlation, see [Correlating Python Logs and Traces][4].
 
@@ -87,7 +87,7 @@ ENTRYPOINT [ "java", "-javaagent:dd-java-agent.jar", "-jar", "cloudrun-java-1.ja
 To collect custom metrics, [install the Java DogStatsD client][2].
 
 #### Logs
-The Datadog sidecar collects logs through a shared volume. To forward logs from your main container to the sidecar, configure your application to write all logs to a location such as `shared-volume/logs/*.log`. 
+The Datadog sidecar collects logs through a shared volume. To forward logs from your main container to the sidecar, configure your application to write all logs to a location such as `shared-volume/logs/*.log`. Ensure that you set the environment variable `DD_SERVERLESS_LOG_PATH` to this location on both the main application container and sidecar container.
 
 To set up logging in your application, see [Java Log Collection][3]. To set up trace log correlation, see [Correlating Java Logs and Traces][4].
 
@@ -106,7 +106,7 @@ In your main application, add the `dd-trace-go` library. See [Tracing Go Applica
 The tracing library also collects custom metrics. See the [code examples][2].
 
 #### Logs
-The Datadog sidecar collects logs through a shared volume. To forward logs from your main container to the sidecar, configure your application to write all logs to a location such as `shared-volume/logs/*.log`. 
+The Datadog sidecar collects logs through a shared volume. To forward logs from your main container to the sidecar, configure your application to write all logs to a location such as `shared-volume/logs/*.log`. Ensure that you set the environment variable `DD_SERVERLESS_LOG_PATH` to this location on both the main application container and sidecar container.
 
 To set up logging in your application, see [Go Log Collection][3]. To set up trace log correlation, see [Correlating Go Logs and Traces][4].
 
@@ -145,7 +145,7 @@ ENTRYPOINT ["dotnet", "dotnet.dll"]
 The tracing library also collects custom metrics. See the [code examples][2].
 
 #### Logs
-The Datadog sidecar collects logs through a shared volume. To forward logs from your main container to the sidecar, configure your application to write all logs to a location such as `shared-volume/logs/*.log`. 
+The Datadog sidecar collects logs through a shared volume. To forward logs from your main container to the sidecar, configure your application to write all logs to a location such as `shared-volume/logs/*.log`. Ensure that you set the environment variable `DD_SERVERLESS_LOG_PATH` to this location on both the main application container and sidecar container.
 
 To set up logging in your application, see [C# Log Collection][3]. To set up trace log correlation, see [Correlating .NET Logs and Traces][4].
 
@@ -161,7 +161,7 @@ In your main application, add the `dd-trace-php` library. See [Tracing PHP Appli
 The tracing library also collects custom metrics. See the [code examples][2].
 
 #### Logs
-The Datadog sidecar collects logs through a shared volume. To forward logs from your main container to the sidecar, configure your application to write all logs to a location such as `shared-volume/logs/*.log`. 
+The Datadog sidecar collects logs through a shared volume. To forward logs from your main container to the sidecar, configure your application to write all logs to a location such as `shared-volume/logs/*.log`. Ensure that you set the environment variable `DD_SERVERLESS_LOG_PATH` to this location on both the main application container and sidecar container.
 
 To set up logging in your application, see [PHP Log Collection][3]. To set up trace log correlation, see [Correlating PHP Logs and Traces][4].
 
