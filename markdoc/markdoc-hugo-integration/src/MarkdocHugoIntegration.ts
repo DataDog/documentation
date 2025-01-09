@@ -3,7 +3,6 @@ import {
   FilterOptionsConfig,
   PageFiltersManifestSchema,
   Glossary,
-  YamlConfigParser,
   FileSearcher,
   FiltersManifestBuilder
 } from 'cdocs-core';
