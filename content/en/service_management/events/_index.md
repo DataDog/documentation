@@ -66,4 +66,4 @@ More than 100 Datadog integrations support events collection, including [Kuberne
 [7]: /integrations/amazon_auto_scaling/#events
 [8]: /integrations/sentry/
 [9]: /integrations/nagios/#events
-[10]: /support
+[10]: /help/
