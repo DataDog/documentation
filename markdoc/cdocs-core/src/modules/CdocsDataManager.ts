@@ -1,6 +1,9 @@
 import { YamlConfigParser } from './YamlConfigParser';
 import { FilterOptionsConfig } from '../schemas/filterOptions';
 import { Glossary } from '../schemas/glossary';
+import { FilterGlossary } from '../schemas/glossaries/filterGlossary';
+import { OptionGlossary } from '../schemas/glossaries/optionGlossary';
+import { OptionGroupGlossary } from '../schemas/glossaries/optionGroupGlossary';
 
 // TODO: Option set -> option group.
 
@@ -18,6 +21,9 @@ export class CdocsDataManager {
   }): {
     glossariesByLang: Record<string, Glossary>;
     filterOptionsConfigByLang: Record<string, FilterOptionsConfig>;
+    filterGlossariesByLang: Record<string, FilterGlossary>;
+    // optionGlossariesByLang: Record<string, OptionGlossary>;
+    // optionGroupGlossariesByLang: Record<string, OptionGroupGlossary>;
   } {
     const defaultLang = p.defaultLang || 'en';
 
@@ -25,7 +31,13 @@ export class CdocsDataManager {
       throw new Error('The default language must be included in the `langs` option.');
     }
 
-    // Load the glossaries for all languages
+    // Load the filter glossaries for all languages
+    const filterGlossariesByLang = YamlConfigParser.loadFilterGlossariesByLang({
+      configDir: p.configDir,
+      langs: p.langs,
+    });
+
+    // Load the legacy glossaries for all languages
     const glossariesByLang = YamlConfigParser.loadGlossariesByLang({
       filtersConfigDir: p.configDir,
       langs: p.langs,
@@ -68,6 +80,6 @@ export class CdocsDataManager {
       };
     });
 
-    return { glossariesByLang, filterOptionsConfigByLang };
+    return { glossariesByLang, filterOptionsConfigByLang, filterGlossariesByLang };
   }
 }

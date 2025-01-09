@@ -8,6 +8,11 @@ import { FileSearcher } from './FileSearcher';
 import { Glossary, GlossaryConfigSchema, GlossaryEntryConfig } from '../schemas/glossary';
 import fs from 'fs';
 import yaml from 'js-yaml';
+import {
+  FilterGlossary,
+  FilterGlossaryEntry,
+  RawFilterGlossarySchema,
+} from '../schemas/glossaries/filterGlossary';
 
 /**
  * A module responsible for all data ingestion from
@@ -15,6 +20,71 @@ import yaml from 'js-yaml';
  * and their options.
  */
 export class YamlConfigParser {
+  /**
+   * Load and validate the filter glossary from the content filters
+   * configuration for a given language (such as 'ja').
+   */
+  static loadFilterGlossary(p: { langDir: string }): FilterGlossary {
+    let result: FilterGlossary;
+
+    const filtersGlossaryFilePath = `${p.langDir}/glossary/filter_ids.yaml`;
+
+    try {
+      const filtersGlossaryConfigStr = fs.readFileSync(filtersGlossaryFilePath, 'utf8');
+      const filtersGlossary = RawFilterGlossarySchema.parse(
+        yaml.load(filtersGlossaryConfigStr),
+      );
+      result = filtersGlossary.allowed.reduce<Record<string, FilterGlossaryEntry>>(
+        (acc, entry) => {
+          acc[entry.id] = entry;
+          return acc;
+        },
+        {},
+      );
+    } catch (e) {
+      // If the file is not found, use an empty list
+      if (e instanceof Object && 'code' in e && e.code === 'ENOENT') {
+        result = {};
+      } else {
+        throw e;
+      }
+    }
+
+    return result;
+  }
+
+  static loadFilterGlossariesByLang(p: {
+    configDir: string;
+    langs: string[];
+    defaultLang?: string;
+  }): Record<string, FilterGlossary> {
+    const defaultLang = p.defaultLang || 'en';
+    const glossariesByLang: Record<string, FilterGlossary> = {};
+
+    const defaultGlossary = this.loadFilterGlossary({
+      langDir: `${p.configDir}/${defaultLang}`,
+    });
+
+    p.langs.forEach((lang) => {
+      if (lang === defaultLang) {
+        glossariesByLang[lang] = defaultGlossary;
+        return;
+      }
+      const langDir = `${p.configDir}/${lang}`;
+      const translatedGlossary = this.loadFilterGlossary({ langDir });
+
+      // merge the translated glossary with the default glossary
+      const mergedGlossary: FilterGlossary = {
+        ...defaultGlossary,
+        ...translatedGlossary,
+      };
+
+      glossariesByLang[lang] = mergedGlossary;
+    });
+
+    return glossariesByLang;
+  }
+
   /**
    * For a given language directory, load the filter options
    * associated with that language, and validate the object as a whole.

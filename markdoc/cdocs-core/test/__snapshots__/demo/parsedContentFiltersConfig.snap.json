@@ -406,5 +406,27 @@
         }
       ]
     }
+  },
+  "filterGlossariesByLang": {
+    "en": {
+      "color": {
+        "id": "color",
+        "display_name": "Color"
+      },
+      "item": {
+        "id": "item",
+        "display_name": "Item"
+      }
+    },
+    "ja": {
+      "color": {
+        "id": "color",
+        "display_name": "Color(ja)"
+      },
+      "item": {
+        "id": "item",
+        "display_name": "Item"
+      }
+    }
   }
 }
