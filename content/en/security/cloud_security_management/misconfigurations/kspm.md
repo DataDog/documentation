@@ -24,12 +24,12 @@ This allows Datadog to detect risks in your Kubernetes deployments for each of t
 
 | Resource Type                     | Install Method    | Framework        |
 |-----------------------------------|-------------------|------------------|
-| `aws_eks_cluster`                 | cloud integration | `cis-eks`        |
+| `aws_eks_cluster`                 | Cloud integration | `cis-eks`        |
 | `aws_eks_worker_node`             | Agent             | `cis-eks`        |
-| `azure_aks_cluster`               | cloud integration | `cis-aks`        |
+| `azure_aks_cluster`               | Cloud integration | `cis-aks`        |
 | `azure_aks_worker_node`           | Agent             | `cis-aks`        |
-| `gcp_kubernetes_engine_cluster`   | cloud integration | `cis-gke`        |
-| `gcp_kubernetes_engine_node_pool` | cloud integration | `cis-gke`        |
+| `gcp_kubernetes_engine_cluster`   | Cloud integration | `cis-gke`        |
+| `gcp_kubernetes_engine_node_pool` | Cloud integration | `cis-gke`        |
 | `gcp_gke_worker_node`             | Agent             | `cis-gke`        |
 | `kubernetes_master_node`          | Agent             | `cis-kubernetes` |
 | `kubernetes_worker_node`          | Agent             | `cis-kubernetes` |
