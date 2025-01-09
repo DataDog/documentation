@@ -19,6 +19,7 @@ import {
 import { HugoGlobalConfigBuilder } from './helperModules/HugoGlobalConfigBuilder';
 import { AuthorConsoleData } from './schemas/authorConsole';
 import { AuthorConsoleBuilder } from './helperModules/AuthorConsoleBuilder';
+import { CdocsDataManager } from 'cdocs-core';
 
 /**
  * The external interface of the integration.
@@ -36,52 +37,18 @@ export class MarkdocHugoIntegration {
   errorsByFilePath: Record<string, CompilationError[]> = {};
 
   /**
-   * Validate and store the provided configuration.
+   * Load the configuration objects from YAML
    */
   constructor(args: { config: IntegrationConfig }) {
     this.hugoGlobalConfig = HugoGlobalConfigBuilder.build(args.config);
 
-    // Load the English glossary configuration
-    this.glossariesByLang = YamlConfigParser.loadGlossariesByLang({
-      filtersConfigDir: this.hugoGlobalConfig.dirs.filtersConfig,
+    const filtersConfig = CdocsDataManager.loadContentFiltersConfig({
+      configDir: this.hugoGlobalConfig.dirs.filtersConfig,
       langs: this.hugoGlobalConfig.languages
     });
 
-    // Load English filter configuration
-    this.filterOptionsConfigByLang = {
-      en: YamlConfigParser.loadFiltersConfigFromLangDir({
-        dir: this.hugoGlobalConfig.dirs.filtersConfig + '/en',
-        glossary: this.glossariesByLang.en
-      })
-    };
-
-    // Load translated filter configurations, backfilling with English
-    this.hugoGlobalConfig.languages.forEach((lang) => {
-      if (lang === 'en') {
-        return;
-      }
-
-      let translatedFilterOptionsConfig: FilterOptionsConfig;
-      try {
-        translatedFilterOptionsConfig = YamlConfigParser.loadFiltersConfigFromLangDir({
-          dir: this.hugoGlobalConfig.dirs.filtersConfig + '/' + lang,
-          glossary: this.glossariesByLang[lang]
-        });
-      } catch (e) {
-        // If no filters config directory exists for this language,
-        // assume no translated filters exist
-        if (e instanceof Object && 'code' in e && e.code === 'ENOENT') {
-          translatedFilterOptionsConfig = {};
-        } else {
-          throw e;
-        }
-      }
-
-      this.filterOptionsConfigByLang[lang] = {
-        ...this.filterOptionsConfigByLang.en,
-        ...translatedFilterOptionsConfig
-      };
-    });
+    this.glossariesByLang = filtersConfig.glossariesByLang;
+    this.filterOptionsConfigByLang = filtersConfig.filterOptionsConfigByLang;
   }
 
   async injectAuthorConsole() {
