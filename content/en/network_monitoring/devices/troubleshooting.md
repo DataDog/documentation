@@ -65,6 +65,10 @@ The output should look similar to the following:
 
 If either the SNMP status or Agent walk shows an error, it could indicate one of the following issues:
 
+#### Permission denied
+
+If you see a permission denied error while port binding in agent logs, the port number you've indicated may require elevated permissions. To bind to a port number under 1024, see [Using the default SNMP Trap port 162][8].
+
 #### Unreachable or misconfigured device:
 
    **Error**:
@@ -195,3 +199,4 @@ If either the SNMP status or Agent walk shows an error, it could indicate one of
 [5]: /api/latest/network-device-monitoring/#get-the-list-of-interfaces-of-the-device
 [6]: /api/latest/network-device-monitoring/#get-the-list-of-tags-for-a-device
 [7]: /api/latest/network-device-monitoring/#update-the-tags-for-a-device
+[8]: /network_monitoring/devices/snmp_traps/#using-the-default-snmp-trap-port-162

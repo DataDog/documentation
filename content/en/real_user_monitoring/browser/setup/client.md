@@ -122,7 +122,7 @@ Add [`@datadog/browser-rum`][4] to your `package.json` file, then initialize it 
 {{< tabs >}}
 {{% tab "RUM" %}}
 
-{{% collapse-content title="Latest version" level="h4" %}}
+{{% collapse-content title="Latest version" level="h4" expanded="true" %}}
 
 ```javascript
 import { datadogRum } from '@datadog/browser-rum'
@@ -275,7 +275,7 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
 {{< tabs >}}
 {{% tab "RUM" %}}
 
-{{% collapse-content title="Latest version" level="h4" %}}
+{{% collapse-content title="Latest version" level="h4" expanded="true" %}}
 
 {{< site-region region="us" >}}
 ```html
@@ -1187,7 +1187,7 @@ Add the generated code snippet to the head tag (in front of any other script tag
 {{< tabs >}}
 {{% tab "RUM" %}}
 
-{{% collapse-content title="Latest version" level="h4" %}}
+{{% collapse-content title="Latest version" level="h4" expanded="true" %}}
 
 {{< site-region region="us" >}}
 ```html
@@ -2170,6 +2170,12 @@ Allow capture of [untrusted events][18], for example in automated UI tests.
 
 Options that must have matching configuration when you are using the Logs Browser SDK:
 
+`sessionPersistence`
+: Optional<br/>
+**Type**: `"cookie" | "local-storage"`<br/>
+**Default**: `"cookie"`<br/>
+Which storage strategy to use for persisting sessions. Can be either `cookie` or `local-storage`.
+
 `trackSessionAcrossSubdomains`
 : Optional<br/>
 **Type**: Boolean<br/>
@@ -2195,10 +2201,10 @@ Use a partitioned secure cross-site session cookie. This allows the RUM Browser 
 See `usePartitionedCrossSiteSessionCookie`.
 
 `allowFallbackToLocalStorage`
-: Optional<br/>
+: Optional - **Deprecated**<br/>
 **Type**: Boolean<br/>
 **Default**: `false`<br/>
-Allows the use of `localStorage` when cookies cannot be set. This enables the RUM Browser SDK to run in environments that do not provide cookie support. See [Monitor Electron Applications Using the Browser SDK][19] for a typical use-case.
+Use `sessionPersistence` instead.
 
 [1]: /account_management/api-app-keys/#client-tokens
 [2]: /getting_started/site/
@@ -2343,6 +2349,12 @@ Allow capture of [untrusted events][12], for example in automated UI tests.
 
 Options that must have matching configuration when you are using the Logs Browser SDK:
 
+`sessionPersistence`
+: Optional<br/>
+**Type**: `"cookie" | "local-storage"`<br/>
+**Default**: `"cookie"`<br/>
+Which storage strategy to use for persisting sessions. Can be either `cookie` or `local-storage`.
+
 `trackSessionAcrossSubdomains`
 : Optional<br/>
 **Type**: Boolean<br/>
@@ -2368,10 +2380,10 @@ Use a partitioned secure cross-site session cookie. This allows the Browser SDK 
 See `usePartitionedCrossSiteSessionCookie`.
 
 `allowFallbackToLocalStorage`
-: Optional<br/>
+: Optional - **Deprecated**<br/>
 **Type**: Boolean<br/>
 **Default**: `false`<br/>
-Allows the use of `localStorage` when cookies cannot be set. This enables the Browser SDK to run in environments that do not provide cookie support. See [Monitor Electron Applications Using the Browser SDK][13] for a typical use case.
+Use `sessionPersistence` instead.
 
 [1]: /account_management/api-app-keys/#client-tokens
 [2]: /getting_started/site/

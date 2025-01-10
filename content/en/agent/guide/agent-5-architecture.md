@@ -1,6 +1,7 @@
 ---
 title: Agent 5 architecture
 disable_toc: false
+private: true
 ---
 
 This page covers Agent 5 architecture. To find out about architecture for the latest version of the Agent, see [Agent Architecture][1].
