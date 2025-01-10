@@ -306,6 +306,7 @@ To deploy your Cloud Run service with a YAML service specification:
        - latestRevision: true
          percent: 100
    ```
+   In this example, the environment variables, startup health check, and volume mount are already added. If you don't want to enable logs, remove the shared volume. Ensure the container port for the main container is the same as the one exposed in your Dockerfile/service. 
 1. Supply placeholder values:
    - `<SERVICE_NAME>`: A name for your service. For example, `gcr-sidecar-test`. See [Unified Service Tagging][2].
    - `<LOCATION>`: The region you are deploying your service in. For example, `us-central`.
@@ -326,7 +327,7 @@ To deploy your Cloud Run service with a YAML service specification:
 
 {{% /tab %}}
 {{% tab "Terraform deploy" %}}
-To deploy your Cloud Run service with Terraform, use the following example configuration file:
+To deploy your Cloud Run service with Terraform, use the following example configuration file. In this example, the environment variables, startup health check, and volume mount are already added. If you don't want to enable logs, remove the shared volume. Ensure the container port for the main container is the same as the one exposed in your Dockerfile/service. If you do not want to allow public access, remove the IAM policy section.
 
 ```
 provider "google" {
