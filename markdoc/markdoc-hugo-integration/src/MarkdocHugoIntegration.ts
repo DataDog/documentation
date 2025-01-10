@@ -7,7 +7,8 @@ import {
   FiltersManifestBuilder,
   FilterGlossary,
   OptionGlossary,
-  OptionGroupGlossary
+  OptionGroupGlossary,
+  ContentFiltersConfig
 } from 'cdocs-core';
 import { IntegrationConfig } from './schemas/config/integration';
 import { HugoGlobalConfig } from './schemas/config/hugo';
@@ -35,15 +36,13 @@ export class MarkdocHugoIntegration {
   private compiledFilePaths: string[] = [];
 
   // New data types
-  // TODO: Do we even need the option glossary here, or is it just
+  // TODO: Do we even need the option glossary in the content filters config, or is it just
   // for validation/population of the option groups?
-  filterGlossariesByLang: Record<string, FilterGlossary>;
-  optionGlossariesByLang: Record<string, OptionGlossary>;
-  optionGroupGlossariesByLang: Record<string, OptionGroupGlossary>;
+  contentFiltersConfig: ContentFiltersConfig;
 
   // legacy data types
   filterOptionsConfigByLang: Record<string, FilterOptionsConfig>;
-  glossariesByLang: Record<string, Glossary> = {};
+  // glossariesByLang: Record<string, Glossary> = {};
 
   errorsByFilePath: Record<string, CompilationError[]> = {};
 
@@ -59,13 +58,11 @@ export class MarkdocHugoIntegration {
     });
 
     // legacy data types
-    this.glossariesByLang = filtersConfig.glossariesByLang;
+    // this.glossariesByLang = filtersConfig.glossariesByLang;
     this.filterOptionsConfigByLang = filtersConfig.filterOptionsConfigByLang;
 
     // new data types
-    this.filterGlossariesByLang = filtersConfig.filterGlossariesByLang;
-    this.optionGlossariesByLang = filtersConfig.optionGlossariesByLang;
-    this.optionGroupGlossariesByLang = filtersConfig.optionGroupGlossariesByLang;
+    this.contentFiltersConfig = filtersConfig.contentFiltersConfig;
   }
 
   async injectAuthorConsole() {
@@ -241,6 +238,7 @@ export class MarkdocHugoIntegration {
    * depending on the configuration, and write the output to a file.
    * If the compilation succeeds, return the path to the compiled file.
    */
+
   #compileMdocFile(p: {
     markdocFilepath: string;
     parsedFile: ParsedFile;
