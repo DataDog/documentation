@@ -278,9 +278,13 @@ After these steps, CI Visibility adds the hostname to each job. To see the metri
 
 CI Visibility also supports Infrastructure metrics for "Instance" and "Docker Autoscaler" executors. For more information, see the [Correlate Infrastructure Metrics with GitLab Jobs guide][18].
 
+#### Kubernetes executor
+
+CI Visibility supports Infrastructure metrics for the Kubernetes executor. For this, it is necessary to have the Datadog Agent monitoring the Kubernetes Gitlab infrastructure. See [Install the Datadog Agent on Kubernetes][30]
+
 #### Other executors
 
-CI Visibility does not support Infrastructure metrics for other executors such as the Kubernetes executor.
+CI Visibility does not support Infrastructure metrics for other executors.
 
 ### View error messages for pipeline failures
 
@@ -425,3 +429,4 @@ The **CI Pipeline List** page shows data for only the default branch of each rep
 [27]: /continuous_integration/explorer
 [28]: /continuous_integration/search/#search-for-pipelines
 [29]: /logs/guide/best-practices-for-log-management/
+[30]: /containers/kubernetes/installation/?tab=datadogoperator
