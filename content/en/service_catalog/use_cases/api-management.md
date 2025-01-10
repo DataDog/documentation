@@ -17,7 +17,7 @@ Service Catalog simplifies API management by providing a centralized platform fo
 ## API discovery and usability:
 
 1. Developers: Quickly access API documentation, code snippets, rate limits, health metrics, and reliability scores for faster integration and reuse.
-1. Platform Engineers and Managers: Driect teams use existing APIs to reduce redundancy, save time, and improve efficiency.
+1. Platform Engineers and Managers: Direct teams use existing APIs to reduce redundancy, save time, and improve efficiency.
 
 ## API ownership and accountability:
 
