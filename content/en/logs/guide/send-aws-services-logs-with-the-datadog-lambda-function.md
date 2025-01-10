@@ -180,7 +180,7 @@ data "aws_cloudwatch_log_group" "some_log_group" {
 resource "aws_lambda_permission" "lambda_permission" {
   action        = "lambda:InvokeFunction"
   function_name = "datadog-forwarder" # this is the default but may be different in your case
-  principal     = "logs.amazonaws.com" # or logs.amazonaws.com.cn for china
+  principal     = "logs.amazonaws.com" # or logs.amazonaws.com.cn for China
   source_arn    = data.aws_cloudwatch_log_group.some_log_group.arn
 }
 
@@ -191,6 +191,7 @@ resource "aws_cloudwatch_log_subscription_filter" "datadog_log_subscription_filt
   filter_pattern  = ""
 }
 ```
+_*All use of Datadog Services in (or in connection with environments within) mainland China is subject to the disclaimer published in the [Restricted Service Locations](https://www.datadoghq.com/legal/restricted-service-locations/) section on our website._
 
 [1]: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_log_subscription_filter
 {{% /tab %}}
