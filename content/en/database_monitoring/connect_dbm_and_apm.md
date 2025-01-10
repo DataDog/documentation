@@ -196,14 +196,12 @@ public class Application {
 }
 ```
 
-**Note**:
-
-**Tracer versions 1.44 and greater**:
+**Tracer versions 1.44 and above**:
 Enable the prepared statements tracing for Postgres using **one** of the following methods:
 - Set the system property `dd.dbm.trace_prepared_statements=true`
 - Set the environment variable `export DD_DBM_TRACE_PREPARED_STATEMENTS=true`
 
-The prepared statements instrumentation will overwrite the `Application` property, and will cause an extra roundtrip to the database.
+**Note**: The prepared statements instrumentation overwrites the `Application` property and causes an extra roundtrip to the database. This additional roundtrip has a negligible impact on latency.
 
 **Tracer versions below 1.44**:
 Prepared statements are not supported in `full` mode for Postgres and MySQL, and all JDBC API calls that use prepared statements are automatically downgraded to `service` mode. Since most Java SQL libraries use prepared statements by default, this means that **most** Java applications are only able to use `service` mode.
