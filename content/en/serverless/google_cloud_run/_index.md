@@ -540,7 +540,6 @@ Supply placeholder values:
 |`DD_API_KEY`| [Datadog API key][4] - **Required**|
 | `DD_SITE` | [Datadog site][5] - **Required** |
 | `DD_LOGS_INJECTION`| When true, enrich all logs with trace data for supported loggers in [Java][6], [Node][7], [.NET][8], and [PHP][9]. See additional docs for [Python][10], [Go][11], and [Ruby][12]. |
-| `DD_TRACE_SAMPLE_RATE`|  Controls the trace ingestion sample rate `0.0` and `1.0`. |
 | `DD_SERVICE`      | See [Unified Service Tagging][13].                                  |
 | `DD_VERSION`      | See [Unified Service Tagging][13].                                  |
 | `DD_ENV`          | See [Unified Service Tagging][13].                                  |
