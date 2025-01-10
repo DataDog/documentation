@@ -68,6 +68,7 @@ Datadog does not officially support any early-access versions of Java.
 | ----------------------- | ---------- | --------------- | ---------------------------------------------- | ---------------------------------------------- |
 | Grizzly                 | 2.0+       |  {{< X >}} |  {{< X >}} |  {{< X >}} |
 | Glassfish               |            |  {{< X >}} |  {{< X >}} |  {{< X >}} |
+| gRPC                    | 1.5+       |  {{< X >}} |  Not supported |  {{< X >}} |
 | Java Servlet | 2.3+, 3.0+ |   {{< X >}} |  {{< X >}} |  {{< X >}} |
 | Jetty                   | 7.0-9.x, 10.x    |  {{< X >}} |  {{< X >}} |  {{< X >}} |
 | Spring Boot             | 1.5        |  {{< X >}} |  {{< X >}} |  {{< X >}} |
@@ -75,7 +76,6 @@ Datadog does not officially support any early-access versions of Java.
 | Spring WebFlux          | 5.0+       |            |            |  {{< X >}} |
 | Tomcat                  | 5.5+       |   {{< X >}} |  {{< X >}} |  {{< X >}} |
 | Vert.x                  | 3.4-3.9.x  |   {{< X >}} |  {{< X >}} |  {{< X >}} |
-| gRPC                   | TBD  |   {{< X >}} |  Not supported |  {{< X >}} |
 
 **Note**: Many application servers are Servlet compatible and are automatically covered by that instrumentation, such as Websphere, Weblogic, and JBoss. Also, frameworks like Spring Boot (version 3) inherently work because they usually use a supported embedded application server, such as Tomcat, Jetty, or Netty.
 
