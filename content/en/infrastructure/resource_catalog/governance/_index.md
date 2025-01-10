@@ -23,10 +23,10 @@ In the Resource Catalog's Governance view, you can define policies on your infra
 
 Specifically, you can:
 
-- Define a [custom policy](#create-a-custom-policy), which involves choosing a resource type, the attribute on the resource type, and target value(s) the attribute should have
-- Define a [tagging policy](#create-a-tagging-policy), which involves a resource type and the desired tag key and value the resource type should have
-- Access a dedicated view for each policy where you can see its list of non-compliant resources and compliance score
-- Filter, group, and export the list of non-compliant resources for a policy so you can prioritize and assign the work
+- Define a [custom policy](#create-a-custom-policy), which involves choosing a resource type, the attribute on the resource type, and target values the attribute should have.
+- Define a [tagging policy](#create-a-tagging-policy), which involves a resource type and the desired tag key and value the resource type should have.
+- Access a dedicated view for each policy where you can see its list of non-compliant resources and compliance score.
+- Filter, group, and export the list of non-compliant resources for a policy so you can prioritize and assign the work.
 
 ## Create a custom policy
 
@@ -38,14 +38,14 @@ To create a custom policy:
 
 1. Navigate to **Infrastructure > Resource Catalog** and click the [**Governance**][1] tab.
 2. Click the **New Custom Policy** button.
-3. Select a Resource Type from the dropdown menu.
+3. Select a resource type from the dropdown menu.
 4. Optionally, search for additional dataset filters.
 5. Select a target resource attribute and desired value.
 6. Optionally, add instructions for remediation.
 7. A name is automatically generated based on the data entered, but you can modify it.
 8. Click **Create Custom Policy**.
 
-By clicking the new policy, you can review all non-compliant resources and filter them by region, environment, account, service, or team. You can also group them by attributes or tags.
+Click the new policy to review all non-compliant resources and filter them by region, environment, account, service, or team. You can also group them by attributes or tags.
 
 ## Create a tagging policy
 
@@ -60,18 +60,13 @@ To create a tagging policy:
 5. A name is automatically generated based on the data entered, but you can modify it.
 6. Click **Create Tagging Policy**.
 
-By clicking the new policy, you can review all non-compliant resources and filter them by cloud, region, environment, account, service, team, or tag. You can also group them by attributes or tags.
+Click the new policy to review all non-compliant resources and filter them by cloud, region, environment, account, service, team, or tag. You can also group them by attributes or tags.
 
 [1]: https://app.datadoghq.com/infrastructure/catalog/governance
 
 ## Updating policies
 
-To update a policy:
-
-1. Click the policy.
-2. Click the **Edit** button.
-3. Modify the policy as needed.
-4. Click **Update Custom Policy** or **Update Tagging Policy**.
+To update a policy, click the policy, then click the **Edit** button and modify as needed.
 
 ## Deleting policies
 
