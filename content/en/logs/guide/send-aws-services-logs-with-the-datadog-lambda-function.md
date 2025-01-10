@@ -180,7 +180,7 @@ data "aws_cloudwatch_log_group" "some_log_group" {
 resource "aws_lambda_permission" "lambda_permission" {
   action        = "lambda:InvokeFunction"
   function_name = "datadog-forwarder" # this is the default but may be different in your case
-  principal     = "logs.amazonaws.com" # or logs.amazonaws.com.cn for China
+  principal     = "logs.amazonaws.com" # or logs.amazonaws.com.cn for China*
   source_arn    = data.aws_cloudwatch_log_group.some_log_group.arn
 }
 
