@@ -58,7 +58,7 @@ To set up a custom rule evaluation using Workflow Automation:
 1. Create a custom rule in Scorecards.
 2. [Create a Workflow][5].
 3. Set a schedule for your Workflow to run on.
-4. Click the plus icon (+) to add a step.
+4. Click plus (+) icon to add a step.
 5. Use the ["List service definitions" action][6] to fetch all defined services from Service Catalog.
 6. Insert a [For loop][7] to iterate over each service one-by-one.
 7. Search for an action to find the one needed to fetch the data you are evaluating.
