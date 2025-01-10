@@ -356,7 +356,7 @@ If your monitor triggers an alert for each `service`, then you can access some a
 Service metadata variables:
 
 - Service name: `{{service.name}}`
-- Team name: `{{service.dd-team}}`
+- Team name: `{{service.team}}`
 - Docs: `{{service.docs}}`
 - Links: `{{service.links}}`
 
@@ -365,8 +365,6 @@ For Docs and Links you can also access a specific item with the following syntax
 ```text
 {{service.links[Runbook]}}
 ```
-
-**Note**: Only services using V2, V2.1 or V2.2 schema are currently supported.
 {{% /collapse-content %}}
 
 
