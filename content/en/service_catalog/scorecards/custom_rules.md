@@ -49,9 +49,9 @@ To evaluate and add custom rules in the Scorecards UI:
 
 ## Evaluate custom rules using Workflow Automation
 
-Workflow Automation allows you to automate the evaluation of your custom rules in Datadog using the ["Update scorecard rule outcome" action][3]. To set up a custom rule evaluation, create a Workflow from scratch or use one of the [Scorecards blueprints][4]. 
+Workflow Automation allows you to automate the evaluation of your custom rules in Datadog using the [**Update scorecard rule outcome** action][3]. To set up a custom rule evaluation, create a Workflow from scratch or use one of the [Scorecards blueprints][4]. 
 
-{{< img src="/tracing/service_catalog/scorecard-workflow-example.png" alt="Workflow evaluating whether a service has a tier defined in Service Catalog" style="width:90%;" >}}
+{{< img src="/tracing/service_catalog/scorecards_workflow_example.png" alt="Workflow evaluating whether a service has a tier defined in Service Catalog" style="width:90%;" >}}
 
 To set up a custom rule evaluation using Workflow Automation: 
 
@@ -59,11 +59,11 @@ To set up a custom rule evaluation using Workflow Automation:
 2. [Create a Workflow][5].
 3. Set a schedule for your Workflow to run on.
 4. Click plus (+) icon to add a step.
-5. Use the ["List service definitions" action][6] to fetch all defined services from Service Catalog.
+5. Use the [**List service definitions** action][6] to fetch all defined services from Service Catalog.
 6. Insert a [For loop][7] to iterate over each service one-by-one.
-7. Search for an action to find the one needed to fetch the data you are evaluating.
-8. Transform the data returned using a custom Javascript function to return a pass or fail outcome for each service.
-9. Pass the outcome to Scorecards using the ["Update scorecard rule outcome" action][3].
+7. Select the action needed to fetch your evaluation data.
+8. Transform the returned data using a custom JavaScript function to generate pass/fail outcomes for each service.
+9. Use the [**Update scorecard rule outcome** action][3] to send results to Scorecards.
 10. Run the Workflow and see your evaluations populate in Scorecards for your custom rule. 
 
 ## Further reading
