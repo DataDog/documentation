@@ -2174,7 +2174,7 @@ Options that must have matching configuration when you are using the Logs Browse
 : Optional<br/>
 **Type**: `"cookie" | "local-storage"`<br/>
 **Default**: `"cookie"`<br/>
-Which storage strategy to use for persisting sessions. Can be either 'cookie' or 'local-storage'.
+Which storage strategy to use for persisting sessions. Can be either `cookie` or `local-storage`.
 
 `trackSessionAcrossSubdomains`
 : Optional<br/>
@@ -2353,7 +2353,7 @@ Options that must have matching configuration when you are using the Logs Browse
 : Optional<br/>
 **Type**: `"cookie" | "local-storage"`<br/>
 **Default**: `"cookie"`<br/>
-Which storage strategy to use for persisting sessions. Can be either 'cookie' or 'local-storage'.
+Which storage strategy to use for persisting sessions. Can be either `cookie` or `local-storage`.
 
 `trackSessionAcrossSubdomains`
 : Optional<br/>
