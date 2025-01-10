@@ -54,9 +54,9 @@ To support anonymous user tracking, the session cookie (`_dd_s`) expiration is e
 
 #### Lazy load Session Replay
 
-Session Replay module is now lazy-loaded using [dynamic imports](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import). This loads the module only for sessions sampled for Session Replay, reducing the bundle size for others.
+Session Replay module is now lazy-loaded using [dynamic imports][30]. This loads the module only for sessions sampled for Session Replay, reducing the bundle size for others.
 
-**If you're using the SDK via NPM**, ensure your bundler supports dynamic imports. Most modern bundlers support this feature out of the box, but some may require configuration changes. Refer to your bundler's documentation for guidance: [Webpack](https://webpack.js.org/guides/code-splitting/#dynamic-imports), [Esbuild](https://esbuild.github.io/api/#splitting), [Rollup](https://rollupjs.org/tutorial/#code-splitting), [Parcel](https://parceljs.org/features/code-splitting).
+**If you're using the SDK via NPM**, ensure your bundler supports dynamic imports. Most modern bundlers support this feature out of the box, but some may require configuration changes. Refer to your bundler's documentation for guidance: [Webpack][31], [Esbuild][32], [Rollup][33], [Parcel][34].
 
 **If you're using the SDK via a CDN**, there are no breaking changes. However, note that in addition to the main script being loaded (e.g.,
 `datadog-rum.js`), the SDK will dynamically load an additional chunk when needed: (e.g.
@@ -402,3 +402,8 @@ The RUM Browser SDK no longer lets you specify the source of an error collected 
 [27]: /real_user_monitoring/guide/proxy-rum-data
 [28]: /real_user_monitoring/browser/setup/#initialization-parameters
 [29]: /real_user_monitoring/platform/connect_rum_and_traces/?tab=browserrum#:~:text=configure%20the%20traceContextInjection
+[30]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import
+[31]: https://webpack.js.org/guides/code-splitting/#dynamic-imports
+[32]: https://esbuild.github.io/api/#splitting
+[33]: https://rollupjs.org/tutorial/#code-splitting
+[34]: https://parceljs.org/features/code-splitting
