@@ -19,7 +19,7 @@ Product Analytics is in limited availability. To request access, complete the fo
 
 ## Overview
 
-{{< img src="product_analytics/overview.png" alt="Landing page of Product Analytics.">}}
+{{< img src="product_analytics/overview-1.png" alt="Landing page of Product Analytics.">}}
 
 Product Analytics helps you gain insight into user behavior and make data-driven decisions. It can help solve the following types of use cases in your application:
 
@@ -55,7 +55,7 @@ User retention is a metric for measuring the percentage of active users who cont
 See different visualizations of the user experience when interacting with your application:
 
 - **[Funnel][4]**: Measure the conversion rate end-to-end of a given workflow.
-- **[Sankey][5]**: Explore aggregated workflows in a single visualization to aid in answering questions about user journeys.
+- **[Pathways][5]**: Explore aggregated workflows in a single visualization to aid in answering questions about user journeys.
 - **[Conversion][6]**: Track conversion rates over time and compare it against specific attributes that may have affected conversion rates, such as browser type or geography.
 
 ## Create user segments
@@ -75,7 +75,7 @@ Segments are users grouped by specific characteristics or behaviors. [Segmentati
 [2]: /product_analytics/user_retention
 [3]: /product_analytics/journeys
 [4]: /product_analytics/journeys/funnel_analysis
-[5]: /product_analytics/journeys/sankey
+[5]: /product_analytics/journeys/pathways
 [6]: /product_analytics/journeys#conversion
 [7]: /product_analytics/segmentation/
 [8]: /product_analytics/heatmaps
