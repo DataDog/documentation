@@ -68,7 +68,7 @@ Datadog does not officially support any early-access versions of Java.
 | ----------------------- | ---------- | --------------- | ---------------------------------------------- | ---------------------------------------------- |
 | Grizzly                 | 2.0+       |  {{< X >}} |  {{< X >}} |  {{< X >}} |
 | Glassfish               |            |  {{< X >}} |  {{< X >}} |  {{< X >}} |
-| gRPC                    | 1.5+       |  {{< X >}} |  Not supported |  {{< X >}} |
+| gRPC                    | 1.5+       |  {{< X >}} | {{< tooltip text="N/A" tooltip="Blocking not yet available for gRPC" >}} |  {{< X >}} |
 | Java Servlet | 2.3+, 3.0+ |   {{< X >}} |  {{< X >}} |  {{< X >}} |
 | Jetty                   | 7.0-9.x, 10.x    |  {{< X >}} |  {{< X >}} |  {{< X >}} |
 | Spring Boot             | 1.5        |  {{< X >}} |  {{< X >}} |  {{< X >}} |
