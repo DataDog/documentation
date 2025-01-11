@@ -3,6 +3,9 @@ title: Multisource Querying
 is_beta: true
 description: Learn how to use Multisource Querying to query costs across multiple providers in Cloud Cost Management.
 further_reading:
+- link: "https://www.datadoghq.com/blog/focus-cost-data/"
+  tag: "Blog"
+  text: "Monitor your multi-cloud costs with Cloud Cost Management and FOCUS"
 - link: "/cloud_cost_management/"
   tag: "Documentation"
   text: "Learn about Cloud Cost Management"
