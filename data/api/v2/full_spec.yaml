@@ -47562,7 +47562,8 @@ paths:
         required: false
         schema:
           type: string
-      - description: Maximum number of spans in the response.
+      - description: Maximum number of spans in the response. Defaults to 10 and allows
+          up to 5000.
         example: 25
         in: query
         name: page[limit]
