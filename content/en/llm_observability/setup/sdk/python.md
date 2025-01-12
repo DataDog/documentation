@@ -519,7 +519,92 @@ def rag_workflow(user_question):
 
 ## Evaluations
 
-The LLM Observability SDK provides the methods `LLMObs.export_span()` and `LLMObs.submit_evaluation()` to help your traced LLM application submit evaluations to LLM Observability.
+The LLM Observability SDK provides the method `LLMObs.submit_evaluation_for()` and s `LLMObs.export_span()` to help your traced LLM application submit evaluations to LLM Observability.
+
+Evaluations must be joined to a unique span. You can identify the target span using either of these two methods:
+1. Tag based joining - Join an evaluation using a custom tag key-value pair that uniquely identifies a single span. The evaluation will fail to join if the tag key-value pair matches multiple spans or no spans.
+2. Direct span reference - join an evaluation using the span's unique trace ID and span ID combination.
+
+### Submit evaluations
+
+`LLMObs.submit_evaluation_for()` can be used to submit your custom evaluation associated with a given span.
+
+#### Arguments
+
+The `LLMObs.submit_evaluation_for()` method accepts the following arguments:
+
+`label`
+: required - _string_
+<br />The name of the evaluation.
+
+`metric_type`
+: required - _string_
+<br />The type of the evaluation. Must be `categorical` or `score`.
+
+`value`
+: required - _string or numeric type_
+<br />The value of the evaluation. Must be a string (`metric_type==categorical`) or integer/float (`metric_type==score`).
+
+`span`
+: required - _dictionary_
+<br />A dictionary that uniquely identifies the span associated with this evaluation. Must contain span_id (string) and trace_id (string). Use [LLMObs.export_span()](#exporting-a-span) to generate this dictionary.
+
+`span_with_tag_value`
+: required - _dictionary_
+<br />A dictionary that uniquely identifies the span associated with this evaluation. Must contain tag_key (string) and tag_value (string).
+
+`ml_app`
+: required - _string_
+<br />The name of the ML application.
+
+`timestamp_ms`
+: optional - _integer_
+<br />The unix timestamp in milliseconds when the evaluation metric result was generated. If not provided, the current time will be used.
+
+`tags`
+: optional - _dictionary_
+<br />A dictionary of string key-value pairs that users can add as tags regarding the evaluation. For more information about tags, see [Getting Started with Tags][9].
+
+### Example
+
+{{< code-block lang="python" >}}
+from ddtrace.llmobs import LLMObs
+from ddtrace.llmobs.decorators import llm
+
+@llm(model_name="claude", name="invoke_llm", model_provider="anthropic")
+def llm_call():
+    completion = ... # user application logic to invoke LLM
+
+    # joining an evaluation to a span via a tag key-value pair
+    msg_id = get_msg_id()
+    LLMObs.annotate(
+        tags = {'msg_id': msg_id}
+    )
+
+    LLMObs.submit_evaluation(
+        span_with_tag_value = {
+            "tag": "msg_id",
+            "value": msg_id
+        },
+        ml_app = "chatbot",
+        label="harmfulness",
+        metric_type="score",
+        value=10,
+        tags={"evaluation_provider": "ragas"},
+    )
+
+    # joining an evaluation to a span via span ID and trace ID
+    span_context = LLMObs.export_span(span=None)
+    LLMObs.submit_evaluation(
+        span = span_context,
+        ml_app = "chatbot",
+        label="harmfulness",
+        metric_type="score",
+        value=10,
+        tags={"evaluation_provider": "ragas"},
+    )
+    return completion
+{{< /code-block >}}
 
 ### Exporting a span
 
@@ -543,55 +628,6 @@ from ddtrace.llmobs.decorators import llm
 def llm_call():
     completion = ... # user application logic to invoke LLM
     span_context = LLMObs.export_span(span=None)
-    return completion
-{{< /code-block >}}
-
-
-### Submit evaluations
-
-`LLMObs.submit_evaluation()` can be used to submit your custom evaluation associated with a given span.
-
-#### Arguments
-
-The `LLMObs.submit_evaluation()` method accepts the following arguments:
-
-`span_context`
-: required - _dictionary_
-<br />The span context to associate the evaluation with. This should be the output of `LLMObs.export_span()`.
-
-`label`
-: required - _string_
-<br />The name of the evaluation.
-
-`metric_type`
-: required - _string_
-<br />The type of the evaluation. Must be `categorical` or `score`.
-
-`value`
-: required - _string or numeric type_
-<br />The value of the evaluation. Must be a string (`metric_type==categorical`) or integer/float (`metric_type==score`).
-
-`tags`
-: optional - _dictionary_
-<br />A dictionary of string key-value pairs that users can add as tags regarding the evaluation. For more information about tags, see [Getting Started with Tags][9].
-
-### Example
-
-{{< code-block lang="python" >}}
-from ddtrace.llmobs import LLMObs
-from ddtrace.llmobs.decorators import llm
-
-@llm(model_name="claude", name="invoke_llm", model_provider="anthropic")
-def llm_call():
-    completion = ... # user application logic to invoke LLM
-    span_context = LLMObs.export_span(span=None)
-    LLMObs.submit_evaluation(
-        span_context,
-        label="harmfulness",
-        metric_type="score",
-        value=10,
-        tags={"evaluation_provider": "ragas"},
-    )
     return completion
 {{< /code-block >}}
 
