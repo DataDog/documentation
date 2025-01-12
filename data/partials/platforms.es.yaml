@@ -1,5 +1,6 @@
 gs:
-- link: https://app.datadoghq.com/account/settings/Agent/latest?platform=macos
+- image: plataforma_macosx.png
+  link: https://app.datadoghq.com/account/settings/Agent/latest?platform=macos
   name: osx
 - image: plataforma_windows.png
   link: https://app.datadoghq.com/account/settings/Agent/latest?platform=Windows
