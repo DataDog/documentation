@@ -11,7 +11,7 @@ aliases:
 
 ## Overview
 
-The LLM Observability API provides an interface for developers to send LLM-related traces and spans to Datadog. If your application is written in Python, you can use the [LLM Observability SDK for Python][1].
+The LLM Observability API provides an interface for developers to send LLM-related traces and evaluations to Datadog. For Python and Node.js applications, use the official [LLM Observability SDK][1]. 
 
 ## Spans API
 
@@ -239,14 +239,15 @@ The name can be up to 193 characters long and may not contain contiguous or trai
 Use this endpoint to send evaluations associated with a given span to Datadog.
 
 Endpoint
-: `https://api.{{< region-param key="dd_site" code="true" >}}/api/intake/llm-obs/v1/eval-metric`
+: `https://api.{{< region-param key="dd_site" code="true" >}}/api/intake/llm-obs/v2/eval-metric`
 
 Method
 : `POST`
 
-Evaluations require a `span_id` and `trace_id`.
-- If you are not using the LLM Observability SDK, send the `span_id` and `trace_id` that you used to create your target span.
-- If you are using the LLM Observability SDK, obtain the `span_id` and `trace_id` by finding your target span, and accessing the `root_span.span_id` and the `root_span.trace_id` attributes.
+Evaluations must be joined to a unique span. You can identify the target span using either of these two methods:
+1. Tag based joining - Join an evaluation using a custom tag key-value pair that uniquely identifies a single span. The evaluation will fail to join if the tag key-value pair matches multiple spans or no spans.
+2. Direct span reference - join an evaluation using the span's unique trace ID and span ID combination.
+
 
 ### Request
 
@@ -271,17 +272,25 @@ Evaluations require a `span_id` and `trace_id`.
     "attributes": {
       "metrics": [
         {
-          "span_id": "61399242116139924211",
-          "trace_id": "13932955089405749200",
+          "join_on": {
+            "span": {
+              "span_id": "20245611112024561111",
+              "trace_id": "13932955089405749200"
+            }
+          },
           "ml_app": "weather-bot",
           "timestamp_ms": 1609459200,
           "metric_type": "categorical",
           "label": "Sentiment",
-          "categorical_value": "Positive"
+          "categorical_value": "Positive",
         },
         {
-          "span_id": "20245611112024561111",
-          "trace_id": "13932955089405749200",
+          "join_on": {
+            "tag": {
+              "key": "msg_id",
+              "value": "1123132"
+            }
+          },
           "ml_app": "weather-bot",
           "timestamp_ms": 1609479200,
           "metric_type": "score",
@@ -316,8 +325,12 @@ Evaluations require a `span_id` and `trace_id`.
       "metrics": [
         {
           "id": "d4f36434-f0cd-47fc-884d-6996cee26da4",
-          "span_id": "61399242116139924211",
-          "trace_id": "13932955089405749200",
+          "join_on": {
+            "span": {
+              "span_id": "20245611112024561111",
+              "trace_id": "13932955089405749200"
+            }
+          },
           "ml_app": "weather-bot",
           "timestamp_ms": 1609459200,
           "metric_type": "categorical",
@@ -326,6 +339,12 @@ Evaluations require a `span_id` and `trace_id`.
         },
         {
           "id": "cdfc4fc7-e2f6-4149-9c35-edc4bbf7b525",
+          "join_on": {
+            "tag": {
+              "key": "msg_id",
+              "value": "1123132"
+            }
+          },
           "span_id": "20245611112024561111",
           "trace_id": "13932955089405749200",
           "ml_app": "weather-bot",
@@ -344,7 +363,7 @@ Evaluations require a `span_id` and `trace_id`.
 
 ### API standards
 
-#### Attribute
+#### Attributes
 
 | Field   | Type         | Description                                         |
 |---------|--------------|-----------------------------------------------------|
@@ -356,8 +375,7 @@ Evaluations require a `span_id` and `trace_id`.
 | Field                  | Type   | Description  |
 |------------------------|--------|--------------|
 | ID                     | string | Evaluation metric UUID (generated upon submission). |
-| span_id [*required*]    | string | The ID of the span that this evaluation is associated with. |
-| trace_id [*required*]   | string | The ID of the trace that this evaluation is associated with. |
+| join_on [*required*]    | [[JoinOn](#JoinOn)] | How the evaluation is joined to a span. |
 | timestamp_ms [*required*] | int64  | A UTC UNIX timestamp in milliseconds representing the time the request was sent. |
 | ml_app [*required*] | string | The name of your LLM application. See [Application naming guidelines](#application-naming-guidelines). |
 | metric_type [*required*]| string | The type of evaluation: `"categorical"` or `"score"`. |
@@ -366,12 +384,34 @@ Evaluations require a `span_id` and `trace_id`.
 | score_value [*required if the metric_type is "score"*]    | number | A score value of the evaluation. |
 | tags        | [[Tag](#tag)] | A list of tags to apply to this particular evaluation metric.       |
 
+#### JoinOn
+
+| Field      | Type            | Description  |
+|------------|-----------------|--------------|
+| span | [[Span](#SpanContext)] | Uniquely identifies the span associated with this evaluation using span ID & trace ID. |
+| tag | [[Tag](#TagContext)] | Uniquely identifies the span associated with this evaluation using a tag key-value pair. |
+
+#### SpanContext
+
+| Field      | Type            | Description  |
+|------------|-----------------|--------------|
+| span_id | string | The span ID of the span that this evaluation is associated with. |
+| trace_id | string | The trace ID of the span that this evaluation is associated with. |
+
+#### TagContext
+
+| Field      | Type            | Description  |
+|------------|-----------------|--------------|
+| key | string | The tag key name. This must be the same key used when setting the tag on the span.  |
+| value | string | The tag value. This value must match exactly one span with the specified tag key/value pair. |
+
+
 #### EvalMetricsRequestData
 
 | Field      | Type            | Description  |
 |------------|-----------------|--------------|
 | type [*required*]      | string | Identifier for the request. Set to `evaluation_metric`. |
-| attributes [*required*] | [[EvalMetric](#evalmetric)] | The body of the request. |
+| attributes [*required*] | [[Attributes](#attributes)] | The body of the request. |
 
 [1]: /llm_observability/setup/sdk/
 [2]: /llm_observability/terms/
