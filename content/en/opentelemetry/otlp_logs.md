@@ -37,7 +37,7 @@ If you are using [OpenTelemetry automatic instrumentation][3], set the following
 
 ```shell
 export OTEL_EXPORTER_OTLP_LOGS_PROTOCOL="http/protobuf"
-export OTEL_EXPORTER_OTLP_LOGS_ENDPOINT="{{< region-param key="otlp_logs_endpoint" >}}"
+export OTEL_EXPORTER_OTLP_LOGS_ENDPOINT="${YOUR_ENDPOINT}" // Replace this with the correct endpoint
 export OTEL_EXPORTER_OTLP_LOGS_HEADERS="dd-protocol=otlp,dd-api-key=${DD_API_KEY}"
 ```
 
@@ -91,7 +91,7 @@ Configure your `config.yaml` like this:
 ```yaml
 exporters:
   otlphttp:
-    logs_endpoint: {{< region-param key="otlp_logs_endpoint" >}}
+    logs_endpoint: ${YOUR_ENDPOINT} // Replace this with the correct endpoint
     headers:
       dd-protocol: "otlp"
       dd-api-key: ${env:DD_API_KEY}

@@ -307,12 +307,16 @@ dependencies {
 {{< tabs >}}
 {{% tab "Kotlin" %}}
 ```kotlin
+import io.opentracing.util.GlobalTracer
+
 val tracer = AndroidTracer.Builder().build()
 GlobalTracer.registerIfAbsent(tracer)
 ```
 {{% /tab %}} 
 {{% tab "Java" %}}
 ```java
+import io.opentracing.util.GlobalTracer;
+
 AndroidTracer tracer = new AndroidTracer.Builder().build();
 GlobalTracer.registerIfAbsent(tracer);
 ```

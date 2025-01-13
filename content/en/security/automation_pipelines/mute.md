@@ -1,16 +1,18 @@
 ---
 title: Mute Rules
+aliases:
+  - /security/vulnerability_pipeline/mute
 ---
 
 {{< callout url="https://www.datadoghq.com/product-preview/security-automation-pipelines/" >}}
-  Vulnerability Pipeline is in Preview. To enroll in the Preview for mute rules, click <strong>Request Access</strong>.
-{{< /callout >}} 
+  Automation Pipelines is in Preview. To enroll in the Preview for mute rules, click <strong>Request Access</strong>.
+{{< /callout >}}
 
 Configure mute rules to streamline security alerts by automatically filtering out non-urgent findings. This approach helps reduce noise from known false positives and accepted risks, allowing you to focus on addressing the most critical threats.
 
 ## Create a mute rule
 
-1. On the [Vulnerability Pipeline][2] page, click **Add a New Rule** and select **Mute**.
+1. On the [Automation Pipelines][2] page, click **Add a New Rule** and select **Mute**.
 1. Enter a descriptive name for the rule, for example, Cloud Infrastructure Anomaly Warnings.
 1. Use the following boxes to configure the rule criteria:
     - **Any of these types**: The types of findings that the rule should check for. Available types include **Misconfiguration**, **Attack Path**, **Identity Risk**, and **API Security Finding**.
