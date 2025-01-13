@@ -60,4 +60,6 @@ export {
 export {
   ContentFiltersConfig,
   ContentFiltersConfigSchema,
+  ContentFiltersConfigByLang,
+  ContentFiltersConfigByLangSchema,
 } from './schemas/contentFiltersConfig';

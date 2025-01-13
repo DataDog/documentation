@@ -1,9 +1,5 @@
 import { describe, test, expect } from 'vitest';
 import { FiltersManifestBuilder } from '../../../src/modules/FiltersManifestBuilder';
-import {
-  FilterOptionsConfig,
-  FilterOptionsConfigSchema,
-} from '../../../src/schemas/filterOptions';
 import { Frontmatter, FrontmatterSchema } from '../../../src/schemas/frontMatter';
 import { paintColorsContentFiltersConfig } from '../../mocks/valid/paintColorsConfig';
 

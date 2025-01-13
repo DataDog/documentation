@@ -48,7 +48,7 @@ export class FiltersManifestBuilder {
     frontmatter: Frontmatter;
     // filterOptionsConfig: FilterOptionsConfig;
     contentFiltersConfig: ContentFiltersConfig;
-    glossary: Glossary;
+    // glossary: Glossary;
   }): PageFiltersManifest {
     // Create an empty manifest to populate
     const manifest: PageFiltersManifest = {
@@ -85,7 +85,7 @@ export class FiltersManifestBuilder {
     // in the order that the filters appeared in the frontmatter
     p.frontmatter.content_filters.forEach((pageFilterConfig) => {
       // Validate the filter ID
-      if (!p.glossary.filtersById[pageFilterConfig.id]) {
+      if (!p.contentFiltersConfig.filterGlossary[pageFilterConfig.id]) {
         manifest.errors.push({
           message: `Unrecognized filter ID: The filter ID '${pageFilterConfig.id}' is not in the glossary.`,
           searchTerm: pageFilterConfig.id,
@@ -123,7 +123,7 @@ export class FiltersManifestBuilder {
         this.getPossibleDefaultsAndSelectedValues({
           filterId: pageFilterConfig.id,
           optionsSetIds,
-          glossary: p.glossary,
+          // glossary: p.glossary,
           contentFiltersConfig: p.contentFiltersConfig,
           // filterOptionsConfig: p.filterOptionsConfig,
         });
@@ -164,7 +164,7 @@ export class FiltersManifestBuilder {
   static getPossibleDefaultsAndSelectedValues(p: {
     filterId: string;
     optionsSetIds: string[];
-    glossary: Glossary;
+    // glossary: Glossary;
     // filterOptionsConfig: FilterOptionsConfig;
     contentFiltersConfig: ContentFiltersConfig;
   }): {
@@ -187,7 +187,7 @@ export class FiltersManifestBuilder {
       }
 
       optionsSet.forEach((option) => {
-        if (!p.glossary.optionsById[option.id]) {
+        if (!p.contentFiltersConfig.optionGlossary[option.id]) {
           errors.push({
             message: `Invalid option ID: The option ID '${option.id}' is not in the options glossary.`,
           });

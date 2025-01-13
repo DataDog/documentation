@@ -2,13 +2,10 @@ import fs from 'fs';
 import {
   FilterOptionsConfig,
   PageFiltersManifestSchema,
-  Glossary,
   FileSearcher,
   FiltersManifestBuilder,
-  FilterGlossary,
-  OptionGlossary,
-  OptionGroupGlossary,
-  ContentFiltersConfig
+  ContentFiltersConfigByLang,
+  CdocsDataManager
 } from 'cdocs-core';
 import { IntegrationConfig } from './schemas/config/integration';
 import { HugoGlobalConfig } from './schemas/config/hugo';
@@ -22,7 +19,6 @@ import {
 import { HugoGlobalConfigBuilder } from './helperModules/HugoGlobalConfigBuilder';
 import { AuthorConsoleData } from './schemas/authorConsole';
 import { AuthorConsoleBuilder } from './helperModules/AuthorConsoleBuilder';
-import { CdocsDataManager } from 'cdocs-core';
 
 /**
  * The external interface of the integration.
@@ -38,7 +34,7 @@ export class MarkdocHugoIntegration {
   // New data types
   // TODO: Do we even need the option glossary in the content filters config, or is it just
   // for validation/population of the option groups?
-  contentFiltersConfig: ContentFiltersConfig;
+  contentFiltersConfigByLang: ContentFiltersConfigByLang;
 
   // legacy data types
   filterOptionsConfigByLang: Record<string, FilterOptionsConfig>;
@@ -52,19 +48,21 @@ export class MarkdocHugoIntegration {
   constructor(args: { config: IntegrationConfig }) {
     this.hugoGlobalConfig = HugoGlobalConfigBuilder.build(args.config);
 
-    const filtersConfig = CdocsDataManager.loadContentFiltersConfig({
-      configDir: this.hugoGlobalConfig.dirs.filtersConfig,
-      langs: this.hugoGlobalConfig.languages
-    });
+    const { contentFiltersConfigByLang, filterOptionsConfigByLang } =
+      CdocsDataManager.loadContentFiltersConfig({
+        configDir: this.hugoGlobalConfig.dirs.filtersConfig,
+        langs: this.hugoGlobalConfig.languages
+      });
 
     // legacy data types
     // this.glossariesByLang = filtersConfig.glossariesByLang;
-    this.filterOptionsConfigByLang = filtersConfig.filterOptionsConfigByLang;
+    this.filterOptionsConfigByLang = filterOptionsConfigByLang;
 
     // new data types
-    this.contentFiltersConfig = filtersConfig.contentFiltersConfig;
+    this.contentFiltersConfigByLang = contentFiltersConfigByLang;
   }
 
+  /*
   async injectAuthorConsole() {
     const consoleData: AuthorConsoleData = {
       glossary: this.glossariesByLang.en,
@@ -91,6 +89,7 @@ export class MarkdocHugoIntegration {
 
     return consoleHtml;
   }
+  */
 
   /**
    * Provide a string that includes the shared styles and scripts
@@ -261,8 +260,7 @@ export class MarkdocHugoIntegration {
     // generate the filters manifest
     const draftFiltersManifest = FiltersManifestBuilder.build({
       frontmatter: p.parsedFile.frontmatter,
-      filterOptionsConfig: this.filterOptionsConfigByLang[lang],
-      glossary: this.glossariesByLang[lang]
+      contentFiltersConfig: this.contentFiltersConfigByLang[lang]
     });
 
     if (draftFiltersManifest.errors.length > 0) {
