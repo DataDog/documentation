@@ -139,8 +139,8 @@
             pageFilterConfig: filterConfig,
             selectedValsByFilterId: valsByFilterIdDup
           });
-          const defaultValue = filterConfigDup.default_value || p.filtersManifest.optionGroupsById[filterConfigDup.options_source].find((option) => option.default).id;
-          const possibleVals = p.filtersManifest.optionGroupsById[filterConfigDup.options_source].map((option) => option.id);
+          const defaultValue = filterConfigDup.default_value || p.filtersManifest.optionGroupsById[filterConfigDup.option_group].find((option) => option.default).id;
+          const possibleVals = p.filtersManifest.optionGroupsById[filterConfigDup.option_group].map((option) => option.id);
           let currentValue = p.valsByFilterId[filterConfigDup.id];
           if (currentValue && !possibleVals.includes(currentValue)) {
             currentValue = defaultValue;
@@ -151,7 +151,7 @@
             displayName: filterConfigDup.display_name,
             defaultValue,
             currentValue,
-            options: p.filtersManifest.optionGroupsById[filterConfigDup.options_source].map((option) => ({
+            options: p.filtersManifest.optionGroupsById[filterConfigDup.option_group].map((option) => ({
               id: option.id,
               displayName: option.display_name
             }))
@@ -162,8 +162,8 @@
       }
       function resolveFilterOptionsSource(p) {
         const filterConfigDup = Object.assign({}, p.pageFilterConfig);
-        if (regexes_1.GLOBAL_PLACEHOLDER_REGEX.test(filterConfigDup.options_source)) {
-          filterConfigDup.options_source = filterConfigDup.options_source.replace(regexes_1.GLOBAL_PLACEHOLDER_REGEX, (_match, placeholder) => {
+        if (regexes_1.GLOBAL_PLACEHOLDER_REGEX.test(filterConfigDup.option_group)) {
+          filterConfigDup.option_group = filterConfigDup.option_group.replace(regexes_1.GLOBAL_PLACEHOLDER_REGEX, (_match, placeholder) => {
             return p.selectedValsByFilterId[placeholder.toLowerCase()];
           });
         }
