@@ -522,7 +522,7 @@ def rag_workflow(user_question):
 The LLM Observability SDK provides the method `LLMObs.submit_evaluation_for()` and s `LLMObs.export_span()` to help your traced LLM application submit evaluations to LLM Observability.
 
 Evaluations must be joined to a single span. You can identify the target span using either of these two methods:
-1. Tag based joining - Join an evaluation using a custom tag key-value pair that uniquely identifies a single span. The evaluation will fail to join if the tag key-value pair matches multiple spans or no spans.
+1. Tag based joining - Join an evaluation using a unique key-value tag pair that is set on a single span. The evaluation will fail to join if the tag key-value pair matches multiple spans or no spans.
 2. Direct span reference - join an evaluation using the span's unique trace ID and span ID combination.
 
 ### Submit evaluations
@@ -549,7 +549,7 @@ The `LLMObs.submit_evaluation_for()` method accepts the following arguments:
 
 `span`
 : required - _dictionary_
-<br />A dictionary that uniquely identifies the span associated with this evaluation. Must contain span_id (string) and trace_id (string). Use [LLMObs.export_span()](#exporting-a-span) to generate this dictionary.
+<br />A dictionary that uniquely identifies the span associated with this evaluation. Must contain span_id (string) and trace_id (string). Use [`LLMObs.export_span()`](#exporting-a-span) to generate this dictionary.
 
 `span_with_tag_value`
 : required - _dictionary_
@@ -561,7 +561,7 @@ The `LLMObs.submit_evaluation_for()` method accepts the following arguments:
 
 `timestamp_ms`
 : optional - _integer_
-<br />The unix timestamp in milliseconds when the evaluation metric result was generated. If not provided, the current time will be used.
+<br />The unix timestamp in milliseconds when the evaluation metric result was generated. If not provided, this defaults to the current time.
 
 `tags`
 : optional - _dictionary_
