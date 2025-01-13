@@ -28,7 +28,7 @@ This [example query][5] searches for spans meeting the criteria for inclusion in
 
 ### RUM
 
-Error Tracking only processes errors that are sent with the source set to `custom`, `source`, `report`, `network` or `console`, and contain a stack trace.
+Error Tracking only processes errors that are sent with the source set to `custom`, `source`, `report`, or `console`, and contain a stack trace. Errors sent with any other source (such as `network`) or sent from browser extensions are not processed by Error Tracking.
 
 This [example query][6] shows RUM errors that meet the criteria for inclusion in Error Tracking.
 
