@@ -127,12 +127,24 @@ disabled by default, you can turn it on by setting
 
 ### Stack V2
 
-Stack V2 is the new stack sampler implementation for CPython 3.8+ on x86_64 Linux. 
-It enhances the performance and accuracy of Python CPU profiling. To enable 
-Stack V2, set the environment variable `DD_PROFILING_STACK_V2_ENABLED=1`. 
-Doing so activates our new stack sampling, collection, and export system. 
-Use the most recent release of `ddtrace` to benefit from the latest improvements 
-and optimizations.
+Stack V2 is the new stack sampler implementation for CPython 3.8+ on x86_64 Linux.
+It enhances the performance, accuracy, and reliability of Python CPU profiling.
+The feature is enabled by default from `ddtrace` versions 2.20+ and we highly recommend
+using the most recent release of the library to benefit from latest improvements
+and bug fixes. This feature activates our new stack sampling, collection and
+export system.
+
+The following are known issues and missing features from Stack V2:
+
+- `gunicorn` and Stack V2 results in performance degradation of services
+- `gevent` support is lacking
+- Exception sampling is missing
+
+If you find these as a blocker for enabling Stack V2 for your services, you can
+turn it off via setting `DD_PROFILING_STACK_V2_ENABLED=0`. If you find any other
+issue, then please proceed to escalate using appropriate support channels or
+file an issue on the [GitHub repository](https://github.com/DataDog/dd-trace-py).
+
 
 ## Not sure what to do next?
 
