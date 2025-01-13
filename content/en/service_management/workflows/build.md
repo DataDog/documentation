@@ -9,7 +9,7 @@ further_reading:
 - link: "/getting_started/workflow_automation/"
   tag: "Documentation"
   text: "Getting Started with Workflow Automation"
-- link: "/service_management/workflows/actions_catalog"
+- link: "/actions/actions_catalog"
   tag: "Documentation"
   text: "Browse the available actions in the Actions Catalog"
 - link: "/security/cloud_security_management/workflows"
@@ -181,7 +181,7 @@ To perform tasks using the API, see the [Workflow Automation API documentation][
 [3]: /service_management/workflows/trigger
 [4]: https://www.datadoghq.com/pricing/?product=workflow-automation#products
 [5]: https://app.datadoghq.com/workflow/blueprints
-[6]: /service_management/workflows/actions_catalog/generic_actions/#testing-expressions-and-functions
+[6]: /service_management/workflows/actions/#testing-expressions-and-functions
 [7]: /getting_started/tagging/
 [8]: /glossary/#service
 [9]: /account_management/teams/
