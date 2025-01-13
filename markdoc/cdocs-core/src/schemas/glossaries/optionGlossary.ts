@@ -11,7 +11,7 @@ import { SNAKE_CASE_REGEX } from '../regexes';
 export const OptionGlossaryEntrySchema = z
   .object({
     id: z.string().regex(SNAKE_CASE_REGEX),
-    display_name: z.string(),
+    label: z.string(),
     description: z.string().optional(),
   })
   .strict();
@@ -22,7 +22,7 @@ export const OptionGlossaryEntrySchema = z
  * @example
  * {
  *   id: 'linux',
- *   display_name: 'Linux',
+ *   label: 'Linux',
  *   description: 'Optional additional information on what this option represents',
  * }
  */
@@ -41,16 +41,16 @@ export const OptionGlossarySchema = z.record(OptionGlossaryEntrySchema);
  * {
  *   linux: {
  *     id: 'linux',
- *     display_name: 'Linux',
+ *     label: 'Linux',
  *     description: 'Optional additional information on what this option represents',
  *   },
  *   windows: {
  *     id: 'windows',
- *     display_name: 'Windows',
+ *     label: 'Windows',
  *   },
  *   ios: {
  *     id: 'ios',
- *     display_name: 'iOS',
+ *     label: 'iOS',
  *   }
  * }
  */

@@ -10,7 +10,7 @@ import { SNAKE_CASE_REGEX, FILTER_OPTIONS_ID_REGEX } from '../regexes';
  */
 export const OptionGroupItemSchema = z
   .object({
-    display_name: z.string(),
+    label: z.string(),
     default: z.boolean().optional(),
     id: z.string().regex(SNAKE_CASE_REGEX),
   })
@@ -29,12 +29,12 @@ export const OptionGroupGlossaryEntrySchema = z.array(OptionGroupItemSchema);
  * @example
  * [
  *   {
- *     display_name: "Postgres",
+ *     label: "Postgres",
  *     id: "postgres",
  *     default: true
  *   },
  *   {
- *     display_name: "MySQL",
+ *     label: "MySQL",
  *     id: "mysql"
  *   }
  * ]
@@ -52,8 +52,8 @@ export const RawOptionGroupGlossarySchema = z.record(
   z.string().regex(FILTER_OPTIONS_ID_REGEX),
   z
     .array(
-      OptionGroupItemSchema.omit({ display_name: true }).extend({
-        display_name: z.string().optional(),
+      OptionGroupItemSchema.omit({ label: true }).extend({
+        label: z.string().optional(),
       }),
     )
     .refine((options) => {
@@ -126,14 +126,14 @@ export const OptionGroupGlossarySchema = z.record(
  * @example
  * {
  *  primary_color_options: [
- *   { id: 'red', display_name: 'Red', default: true },
- *   { id: 'blue', display_name: 'Blue' },
- *   { id: 'yellow', display_name: 'Yellow' }
+ *   { id: 'red', label: 'Red', default: true },
+ *   { id: 'blue', label: 'Blue' },
+ *   { id: 'yellow', label: 'Yellow' }
  *  ],
  *  traffic_light_color_options: [
- *   { id: 'red', display_name: 'Red', default: true },
- *   { id: 'green', display_name: 'Green' },
- *   { id: 'yellow', display_name: 'Yellow' }
+ *   { id: 'red', label: 'Red', default: true },
+ *   { id: 'green', label: 'Green' },
+ *   { id: 'yellow', label: 'Yellow' }
  *  ],
  * }
  */

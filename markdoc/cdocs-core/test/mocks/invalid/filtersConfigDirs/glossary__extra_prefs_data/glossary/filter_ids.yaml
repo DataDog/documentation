@@ -1,4 +1,4 @@
 - id: color
-  display_name: Color
+  label: Color
   # Mistake: This key is not in the YAML validation schema.
   unexpected_key: unexpected_value

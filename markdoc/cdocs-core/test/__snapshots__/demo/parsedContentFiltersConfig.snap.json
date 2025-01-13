@@ -3,200 +3,200 @@
     "filterGlossary": {
       "color": {
         "id": "color",
-        "display_name": "Color"
+        "label": "Color"
       },
       "item": {
         "id": "item",
-        "display_name": "Item"
+        "label": "Item"
       }
     },
     "optionGlossary": {
       "red": {
         "id": "red",
-        "display_name": "Red"
+        "label": "Red"
       },
       "blue": {
         "id": "blue",
-        "display_name": "Blue"
+        "label": "Blue"
       },
       "yellow": {
         "id": "yellow",
-        "display_name": "Yellow"
+        "label": "Yellow"
       },
       "green": {
         "id": "green",
-        "display_name": "Green"
+        "label": "Green"
       },
       "ocean": {
         "id": "ocean",
-        "display_name": "Ocean"
+        "label": "Ocean"
       },
       "sky": {
         "id": "sky",
-        "display_name": "Sky"
+        "label": "Sky"
       },
       "jeans": {
         "id": "jeans",
-        "display_name": "Jeans"
+        "label": "Jeans"
       },
       "blueberry": {
         "id": "blueberry",
-        "display_name": "Blueberry"
+        "label": "Blueberry"
       },
       "grass": {
         "id": "grass",
-        "display_name": "Grass"
+        "label": "Grass"
       },
       "emerald": {
         "id": "emerald",
-        "display_name": "Emerald"
+        "label": "Emerald"
       },
       "lime": {
         "id": "lime",
-        "display_name": "Lime"
+        "label": "Lime"
       },
       "frog": {
         "id": "frog",
-        "display_name": "Frog"
+        "label": "Frog"
       },
       "ruby": {
         "id": "ruby",
-        "display_name": "Ruby"
+        "label": "Ruby"
       },
       "apple": {
         "id": "apple",
-        "display_name": "Apple"
+        "label": "Apple"
       },
       "firetruck": {
         "id": "firetruck",
-        "display_name": "Firetruck"
+        "label": "Firetruck"
       },
       "stop_sign": {
         "id": "stop_sign",
-        "display_name": "Stop sign"
+        "label": "Stop sign"
       },
       "banana": {
         "id": "banana",
-        "display_name": "Banana"
+        "label": "Banana"
       },
       "sunflower": {
         "id": "sunflower",
-        "display_name": "Sunflower"
+        "label": "Sunflower"
       },
       "lemon": {
         "id": "lemon",
-        "display_name": "Lemon"
+        "label": "Lemon"
       },
       "school_bus": {
         "id": "school_bus",
-        "display_name": "School bus"
+        "label": "School bus"
       }
     },
     "optionGroupGlossary": {
       "blue_item_options": [
         {
           "id": "ocean",
-          "display_name": "Ocean"
+          "label": "Ocean"
         },
         {
           "default": true,
           "id": "sky",
-          "display_name": "Sky"
+          "label": "Sky"
         },
         {
           "id": "jeans",
-          "display_name": "Jeans"
+          "label": "Jeans"
         },
         {
           "id": "blueberry",
-          "display_name": "Blueberry"
+          "label": "Blueberry"
         }
       ],
       "traffic_light_color_options": [
         {
           "id": "red",
-          "display_name": "Red"
+          "label": "Red"
         },
         {
           "id": "yellow",
-          "display_name": "Yellow"
+          "label": "Yellow"
         },
         {
           "default": true,
           "id": "green",
-          "display_name": "Green"
+          "label": "Green"
         }
       ],
       "primary_color_options": [
         {
           "id": "red",
-          "display_name": "Red"
+          "label": "Red"
         },
         {
           "id": "yellow",
-          "display_name": "Yellow"
+          "label": "Yellow"
         },
         {
           "default": true,
           "id": "blue",
-          "display_name": "Blue"
+          "label": "Blue"
         }
       ],
       "green_item_options": [
         {
           "default": true,
           "id": "grass",
-          "display_name": "Grass"
+          "label": "Grass"
         },
         {
           "id": "emerald",
-          "display_name": "Emerald"
+          "label": "Emerald"
         },
         {
           "id": "lime",
-          "display_name": "Lime"
+          "label": "Lime"
         },
         {
           "id": "frog",
-          "display_name": "Frog"
+          "label": "Frog"
         }
       ],
       "red_item_options": [
         {
           "id": "ruby",
-          "display_name": "Ruby"
+          "label": "Ruby"
         },
         {
           "id": "apple",
-          "display_name": "Apple"
+          "label": "Apple"
         },
         {
           "id": "firetruck",
-          "display_name": "Firetruck"
+          "label": "Firetruck"
         },
         {
           "default": true,
           "id": "stop_sign",
-          "display_name": "Stop sign"
+          "label": "Stop sign"
         }
       ],
       "yellow_item_options": [
         {
           "default": true,
           "id": "banana",
-          "display_name": "Banana"
+          "label": "Banana"
         },
         {
           "id": "sunflower",
-          "display_name": "Sunflower"
+          "label": "Sunflower"
         },
         {
           "id": "lemon",
-          "display_name": "Lemon"
+          "label": "Lemon"
         },
         {
           "id": "school_bus",
-          "display_name": "School bus"
+          "label": "School bus"
         }
       ]
     }
@@ -205,200 +205,200 @@
     "filterGlossary": {
       "color": {
         "id": "color",
-        "display_name": "Color(ja)"
+        "label": "Color(ja)"
       },
       "item": {
         "id": "item",
-        "display_name": "Item"
+        "label": "Item"
       }
     },
     "optionGlossary": {
       "red": {
         "id": "red",
-        "display_name": "Red (ja)"
+        "label": "Red (ja)"
       },
       "blue": {
         "id": "blue",
-        "display_name": "Blue (ja)"
+        "label": "Blue (ja)"
       },
       "yellow": {
         "id": "yellow",
-        "display_name": "Yellow (ja)"
+        "label": "Yellow (ja)"
       },
       "green": {
         "id": "green",
-        "display_name": "Green (ja)"
+        "label": "Green (ja)"
       },
       "ocean": {
         "id": "ocean",
-        "display_name": "Ocean (ja)"
+        "label": "Ocean (ja)"
       },
       "sky": {
         "id": "sky",
-        "display_name": "Sky (ja)"
+        "label": "Sky (ja)"
       },
       "jeans": {
         "id": "jeans",
-        "display_name": "Jeans (ja)"
+        "label": "Jeans (ja)"
       },
       "blueberry": {
         "id": "blueberry",
-        "display_name": "Blueberry (ja)"
+        "label": "Blueberry (ja)"
       },
       "grass": {
         "id": "grass",
-        "display_name": "Grass (ja)"
+        "label": "Grass (ja)"
       },
       "emerald": {
         "id": "emerald",
-        "display_name": "Emerald (ja)"
+        "label": "Emerald (ja)"
       },
       "lime": {
         "id": "lime",
-        "display_name": "Lime (ja)"
+        "label": "Lime (ja)"
       },
       "frog": {
         "id": "frog",
-        "display_name": "Frog (ja)"
+        "label": "Frog (ja)"
       },
       "ruby": {
         "id": "ruby",
-        "display_name": "Ruby"
+        "label": "Ruby"
       },
       "apple": {
         "id": "apple",
-        "display_name": "Apple (ja)"
+        "label": "Apple (ja)"
       },
       "firetruck": {
         "id": "firetruck",
-        "display_name": "Firetruck (ja)"
+        "label": "Firetruck (ja)"
       },
       "stop_sign": {
         "id": "stop_sign",
-        "display_name": "Stop sign (ja)"
+        "label": "Stop sign (ja)"
       },
       "banana": {
         "id": "banana",
-        "display_name": "Banana (ja)"
+        "label": "Banana (ja)"
       },
       "sunflower": {
         "id": "sunflower",
-        "display_name": "Sunflower (ja)"
+        "label": "Sunflower (ja)"
       },
       "lemon": {
         "id": "lemon",
-        "display_name": "Lemon (ja)"
+        "label": "Lemon (ja)"
       },
       "school_bus": {
         "id": "school_bus",
-        "display_name": "School bus (ja)"
+        "label": "School bus (ja)"
       }
     },
     "optionGroupGlossary": {
       "blue_item_options": [
         {
           "id": "ocean",
-          "display_name": "Ocean"
+          "label": "Ocean"
         },
         {
           "default": true,
           "id": "sky",
-          "display_name": "Sky"
+          "label": "Sky"
         },
         {
           "id": "jeans",
-          "display_name": "Jeans"
+          "label": "Jeans"
         },
         {
           "id": "blueberry",
-          "display_name": "Blueberry"
+          "label": "Blueberry"
         }
       ],
       "traffic_light_color_options": [
         {
           "id": "red",
-          "display_name": "Red (ja)"
+          "label": "Red (ja)"
         },
         {
           "id": "yellow",
-          "display_name": "Yellow (ja)"
+          "label": "Yellow (ja)"
         },
         {
           "default": true,
           "id": "green",
-          "display_name": "Green (ja)"
+          "label": "Green (ja)"
         }
       ],
       "primary_color_options": [
         {
           "id": "red",
-          "display_name": "Red (ja)"
+          "label": "Red (ja)"
         },
         {
           "id": "yellow",
-          "display_name": "Yellow (ja)"
+          "label": "Yellow (ja)"
         },
         {
           "default": true,
           "id": "blue",
-          "display_name": "Blue (ja)"
+          "label": "Blue (ja)"
         }
       ],
       "green_item_options": [
         {
           "default": true,
           "id": "grass",
-          "display_name": "Grass"
+          "label": "Grass"
         },
         {
           "id": "emerald",
-          "display_name": "Emerald"
+          "label": "Emerald"
         },
         {
           "id": "lime",
-          "display_name": "Lime"
+          "label": "Lime"
         },
         {
           "id": "frog",
-          "display_name": "Frog"
+          "label": "Frog"
         }
       ],
       "red_item_options": [
         {
           "id": "ruby",
-          "display_name": "Ruby"
+          "label": "Ruby"
         },
         {
           "default": true,
           "id": "apple",
-          "display_name": "Apple (ja)"
+          "label": "Apple (ja)"
         },
         {
           "id": "firetruck",
-          "display_name": "Ja firetruck"
+          "label": "Ja firetruck"
         },
         {
           "id": "stop_sign",
-          "display_name": "Stop sign (ja)"
+          "label": "Stop sign (ja)"
         }
       ],
       "yellow_item_options": [
         {
           "default": true,
           "id": "banana",
-          "display_name": "Banana"
+          "label": "Banana"
         },
         {
           "id": "sunflower",
-          "display_name": "Sunflower"
+          "label": "Sunflower"
         },
         {
           "id": "lemon",
-          "display_name": "Lemon"
+          "label": "Lemon"
         },
         {
           "id": "school_bus",
-          "display_name": "School bus"
+          "label": "School bus"
         }
       ]
     }

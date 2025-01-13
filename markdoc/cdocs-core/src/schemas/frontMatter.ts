@@ -7,7 +7,7 @@ import { SNAKE_CASE_REGEX, FILTER_OPTIONS_ID_REGEX } from './regexes';
  */
 export const PageFilterConfigSchema = z
   .object({
-    display_name: z.string(),
+    label: z.string(),
     id: z.string().regex(SNAKE_CASE_REGEX),
     option_group: z.string().regex(FILTER_OPTIONS_ID_REGEX),
     default_value: z.string().regex(SNAKE_CASE_REGEX).optional(),
@@ -20,7 +20,7 @@ export const PageFilterConfigSchema = z
  *
  * @example
  * {
- *   display_name: "Database",
+ *   label: "Database",
  *   id: "database",
  *   option_group: "dbm_database_options",
  *   default_value: "postgres" // optional override
@@ -36,7 +36,7 @@ export const PageFiltersConfigSchema = z
   .array(PageFilterConfigSchema)
   .refine((filtersConfig) => {
     // Page filter names must be unique within a page
-    const filterNames = filtersConfig.map((filterConfig) => filterConfig.display_name);
+    const filterNames = filtersConfig.map((filterConfig) => filterConfig.label);
     const uniqueFilterNames = new Set(filterNames);
     if (filterNames.length !== uniqueFilterNames.size) {
       console.error('Duplicate page filter display names found in list:', filterNames);
@@ -47,8 +47,8 @@ export const PageFiltersConfigSchema = z
     // that is defined earlier in the list than the placeholder
     const definedParamNames = new Set();
     for (const filterConfig of filtersConfig) {
-      definedParamNames.add(filterConfig.display_name);
-      const bracketedPlaceholders = filterConfig.display_name.match(/<([a-z0-9_]+)>/g);
+      definedParamNames.add(filterConfig.label);
+      const bracketedPlaceholders = filterConfig.label.match(/<([a-z0-9_]+)>/g);
       if (bracketedPlaceholders) {
         for (const placeholder of bracketedPlaceholders) {
           const paramName = placeholder.slice(1, -1);
@@ -89,17 +89,17 @@ export const FrontmatterSchema = z.object({
  *   title: "Decorative Painting Tips",
  *   content_filters: [
  *     {
- *       display_name: "Color",
+ *       label: "Color",
  *       id: "color",
  *       option_group: "color_options"
  *     },
  *     {
- *       display_name: "Finish",
+ *       label: "Finish",
  *       id: "finish",
  *       option_group: "paint_finish_options"
  *     },
  *     {
- *       display_name: "Paint color",
+ *       label: "Paint color",
  *       id: "paint_color",
  *       option_group: "<FINISH>_<COLOR>_paint_options"
  *     }

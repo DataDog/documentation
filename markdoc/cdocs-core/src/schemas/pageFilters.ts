@@ -13,7 +13,7 @@ const ResolvedPageFilterOptionSchema = z
     // The value of the option, to be used in routes and params
     id: z.string().regex(SNAKE_CASE_REGEX),
     // The display name of the option in the UI
-    displayName: z.string(),
+    label: z.string(),
   })
   .strict();
 
@@ -36,7 +36,7 @@ export const ResolvedPageFilterSchema = z
     // The unique ID of the variable
     id: z.string().regex(SNAKE_CASE_REGEX),
     // The display name of the filter in the UI
-    displayName: z.string(),
+    label: z.string(),
     defaultValue: z.string().regex(SNAKE_CASE_REGEX),
     options: z.array(ResolvedPageFilterOptionSchema),
     currentValue: z.string().regex(SNAKE_CASE_REGEX),
@@ -60,12 +60,12 @@ export const ResolvedPageFilterSchema = z
  * @example
  * {
  *   id: 'category',
- *   displayName: 'Category',
+ *   label: 'Category',
  *   defaultValue: 'all',
  *   options: [
- *     { id: 'all', displayName: 'All' },
- *     { id: 'news', displayName: 'News' },
- *     { id: 'events', displayName: 'Events' }
+ *     { id: 'all', label: 'All' },
+ *     { id: 'news', label: 'News' },
+ *     { id: 'events', label: 'Events' }
  *   ]
  * }
  */
@@ -90,12 +90,12 @@ export const ResolvedPageFiltersSchema = z.record(ResolvedPageFilterSchema);
  * {
  *   category: {
  *      id: 'category',
- *      displayName: 'Category',
+ *      label: 'Category',
  *      defaultValue: 'all',
  *      options: [
- *        { id: 'all', displayName: 'All' },
- *        { id: 'news', displayName: 'News' },
- *        { id: 'events', displayName: 'Events' }
+ *        { id: 'all', label: 'All' },
+ *        { id: 'news', label: 'News' },
+ *        { id: 'events', label: 'Events' }
  *      ]
  *   }
  * }

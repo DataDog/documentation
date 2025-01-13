@@ -1,5 +1,5 @@
 allowed:
 - id: BAD_PREF_ID
-  display_name: Bad Pref ID
+  label: Bad Pref ID
 - id: color
-  display_name: Color
+  label: Color

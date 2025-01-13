@@ -79,10 +79,10 @@ An annotated list of the choices the user can make, and descriptions of what thi
 
 ```yaml
 - id: host
-  display_name: Host
+  label: Host
   description: "A cloud hosting provider, such as AWS or GCP. The value should be a vendor, not an operating system."
 - id: database
-  display_name: Database
+  label: Database
   description: "Any database, such as Postgres or Mongo."
 ```
 
@@ -95,18 +95,18 @@ An option can be reused across option sets. For example, `product_a_operating_sy
 ```yaml
 # cloud hosting providers
 - id: aws
-  display_name: AWS
+  label: AWS
 - id: gcp
-  display_name: GCP
+  label: GCP
 - id: azure
-  display_name: Azure
+  label: Azure
 # databases
 - id: postgress
-  display_name: Postgres
+  label: Postgres
 - id: my_sql
-  display_name: MySQL
+  label: MySQL
 - id: mongo
-  display_name: Mongo
+  label: Mongo
 ```
 
 ##### `<SITE>/<CONFIG_FOLDER>/option_sets.yaml`

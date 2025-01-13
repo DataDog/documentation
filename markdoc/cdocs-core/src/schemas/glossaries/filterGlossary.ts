@@ -11,7 +11,7 @@ import { SNAKE_CASE_REGEX } from '../regexes';
 export const FilterGlossaryEntrySchema = z
   .object({
     id: z.string().regex(SNAKE_CASE_REGEX),
-    display_name: z.string(),
+    label: z.string(),
     description: z.string().optional(),
   })
   .strict();
@@ -22,7 +22,7 @@ export const FilterGlossaryEntrySchema = z
  * @example
  * {
  *   id: 'host',
- *   display_name: 'Host',
+ *   label: 'Host',
  *   description: 'The host of a service or Datadog Agent',
  * }
  */
@@ -40,12 +40,12 @@ export const FilterGlossarySchema = z.record(FilterGlossaryEntrySchema);
  * {
  *   host: {
  *     id: 'host',
- *     display_name: 'Host',
+ *     label: 'Host',
  *     description: 'A cloud hosting provider, such as AWS', // optional
  *   },
  *   operating_system: {
  *     id: 'os',
- *     display_name: 'Operating system'
+ *     label: 'Operating system'
  *   }
  * }
  */

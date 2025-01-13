@@ -8,17 +8,17 @@ describe('FiltersManifestBuilder.getDefaultValsByFilterId', () => {
     title: 'My Page',
     content_filters: [
       {
-        display_name: 'Color',
+        label: 'Color',
         id: 'color',
         option_group: 'color_options',
       },
       {
-        display_name: 'Finish',
+        label: 'Finish',
         id: 'finish',
         option_group: 'finish_options',
       },
       {
-        display_name: 'Paint color',
+        label: 'Paint color',
         id: 'paint',
         option_group: '<FINISH>_<COLOR>_paint_options',
       },

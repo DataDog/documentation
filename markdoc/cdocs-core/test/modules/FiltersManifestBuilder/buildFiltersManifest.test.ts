@@ -19,7 +19,7 @@ describe('FiltersManifestBuilder.build', () => {
       filtersById: {
         color: {
           config: {
-            display_name: 'Color',
+            label: 'Color',
             id: 'color',
             option_group: 'color_options',
           },
@@ -30,7 +30,7 @@ describe('FiltersManifestBuilder.build', () => {
         },
         finish: {
           config: {
-            display_name: 'Finish',
+            label: 'Finish',
             id: 'finish',
             option_group: 'finish_options',
           },
@@ -41,7 +41,7 @@ describe('FiltersManifestBuilder.build', () => {
         },
         paint: {
           config: {
-            display_name: 'Paint color',
+            label: 'Paint color',
             id: 'paint',
             option_group: '<FINISH>_<COLOR>_paint_options',
           },
@@ -72,89 +72,89 @@ describe('FiltersManifestBuilder.build', () => {
         color_options: [
           {
             id: 'blue',
-            display_name: 'Blue',
+            label: 'Blue',
             default: true,
           },
           {
             id: 'red',
-            display_name: 'Red',
+            label: 'Red',
           },
         ],
         finish_options: [
           {
             id: 'matte',
-            display_name: 'Matte',
+            label: 'Matte',
           },
           {
             id: 'eggshell',
-            display_name: 'Eggshell',
+            label: 'Eggshell',
             default: true,
           },
           {
             id: 'gloss',
-            display_name: 'Gloss',
+            label: 'Gloss',
           },
         ],
         matte_blue_paint_options: [
           {
             id: 'powder_blue',
-            display_name: 'Powder Blue',
+            label: 'Powder Blue',
             default: true,
           },
         ],
         matte_red_paint_options: [
           {
             id: 'brick',
-            display_name: 'Brick',
+            label: 'Brick',
             default: true,
           },
           {
             id: 'scarlet',
-            display_name: 'Scarlet',
+            label: 'Scarlet',
           },
         ],
         eggshell_blue_paint_options: [
           {
             id: 'elegant_royal',
-            display_name: 'Elegant Royal',
+            label: 'Elegant Royal',
             default: true,
           },
           {
             id: 'robins_egg',
-            display_name: "Robin's Egg",
+            label: "Robin's Egg",
           },
         ],
         eggshell_red_paint_options: [
           {
             id: 'rose',
-            display_name: 'Rose',
+            label: 'Rose',
             default: true,
           },
           {
             id: 'ruby',
-            display_name: 'Ruby',
+            label: 'Ruby',
           },
         ],
         gloss_blue_paint_options: [
           {
             id: 'sky_blue',
-            display_name: 'Sky Blue',
+            label: 'Sky Blue',
             default: true,
           },
           {
             id: 'navy',
-            display_name: 'Navy',
+            label: 'Navy',
           },
         ],
         gloss_red_paint_options: [
           {
             id: 'fire_engine',
-            display_name: 'Fire Engine',
+            label: 'Fire Engine',
             default: true,
           },
           {
             id: 'crimson',
-            display_name: 'Crimson',
+            label: 'Crimson',
           },
         ],
       },
@@ -176,17 +176,17 @@ describe('FiltersManifestBuilder.build', () => {
       title: 'My Page',
       content_filters: [
         {
-          display_name: 'Color',
+          label: 'Color',
           id: 'color',
           option_group: 'color_options',
         },
         {
-          display_name: 'Finish',
+          label: 'Finish',
           id: 'finish',
           option_group: 'finish_options',
         },
         {
-          display_name: 'Paint color',
+          label: 'Paint color',
           id: 'paint',
           // invalid placeholder 'COLOUR'
           option_group: '<FINISH>_<COLOUR>_paint_options',

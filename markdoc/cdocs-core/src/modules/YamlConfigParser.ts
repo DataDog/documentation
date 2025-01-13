@@ -249,7 +249,7 @@ export class YamlConfigParser {
           // Add default display names where needed
           return {
             ...option,
-            display_name: option.display_name || p.optionGlossary[option.id].display_name,
+            label: option.label || p.optionGlossary[option.id].label,
           };
         });
       }

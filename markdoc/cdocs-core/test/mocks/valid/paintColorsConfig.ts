@@ -8,17 +8,17 @@ export const paintColorsFrontmatter: Frontmatter = {
   title: 'My Page',
   content_filters: [
     {
-      display_name: 'Color',
+      label: 'Color',
       id: 'color',
       option_group: 'color_options',
     },
     {
-      display_name: 'Finish',
+      label: 'Finish',
       id: 'finish',
       option_group: 'finish_options',
     },
     {
-      display_name: 'Paint color',
+      label: 'Paint color',
       id: 'paint',
       option_group: '<FINISH>_<COLOR>_paint_options',
     },
@@ -30,115 +30,115 @@ export const paintColorsContentFiltersConfig: ContentFiltersConfig = {
   filterGlossary: {
     color: {
       id: 'color',
-      display_name: 'Color',
+      label: 'Color',
     },
     finish: {
       id: 'finish',
-      display_name: 'Finish',
+      label: 'Finish',
     },
     paint: {
       id: 'paint',
-      display_name: 'Paint color',
+      label: 'Paint color',
     },
   },
   optionGlossary: {
     blue: {
       id: 'blue',
-      display_name: 'Blue',
+      label: 'Blue',
     },
     red: {
       id: 'red',
-      display_name: 'Red',
+      label: 'Red',
     },
     matte: {
       id: 'matte',
-      display_name: 'Matte',
+      label: 'Matte',
     },
     eggshell: {
       id: 'eggshell',
-      display_name: 'Eggshell',
+      label: 'Eggshell',
     },
     gloss: {
       id: 'gloss',
-      display_name: 'Gloss',
+      label: 'Gloss',
     },
     powder_blue: {
       id: 'powder_blue',
-      display_name: 'Powder Blue',
+      label: 'Powder Blue',
     },
     elegant_royal: {
       id: 'elegant_royal',
-      display_name: 'Elegant Royal',
+      label: 'Elegant Royal',
     },
     robins_egg: {
       id: 'robins_egg',
-      display_name: "Robin's Egg",
+      label: "Robin's Egg",
     },
     sky_blue: {
       id: 'sky_blue',
-      display_name: 'Sky Blue',
+      label: 'Sky Blue',
     },
     navy: {
       id: 'navy',
-      display_name: 'Navy',
+      label: 'Navy',
     },
     brick: {
       id: 'brick',
-      display_name: 'Brick',
+      label: 'Brick',
     },
     scarlet: {
       id: 'scarlet',
-      display_name: 'Scarlet',
+      label: 'Scarlet',
     },
     rose: {
       id: 'rose',
-      display_name: 'Rose',
+      label: 'Rose',
     },
     ruby: {
       id: 'ruby',
-      display_name: 'Ruby',
+      label: 'Ruby',
     },
     fire_engine: {
       id: 'fire_engine',
-      display_name: 'Fire Engine',
+      label: 'Fire Engine',
     },
     crimson: {
       id: 'crimson',
-      display_name: 'Crimson',
+      label: 'Crimson',
     },
   },
   optionGroupGlossary: {
     color_options: [
-      { id: 'blue', display_name: 'Blue', default: true },
-      { id: 'red', display_name: 'Red' },
+      { id: 'blue', label: 'Blue', default: true },
+      { id: 'red', label: 'Red' },
     ],
     finish_options: [
-      { id: 'matte', display_name: 'Matte' },
-      { id: 'eggshell', display_name: 'Eggshell', default: true },
-      { id: 'gloss', display_name: 'Gloss' },
+      { id: 'matte', label: 'Matte' },
+      { id: 'eggshell', label: 'Eggshell', default: true },
+      { id: 'gloss', label: 'Gloss' },
     ],
     matte_blue_paint_options: [
-      { id: 'powder_blue', display_name: 'Powder Blue', default: true },
+      { id: 'powder_blue', label: 'Powder Blue', default: true },
     ],
     eggshell_blue_paint_options: [
-      { id: 'elegant_royal', display_name: 'Elegant Royal', default: true },
-      { id: 'robins_egg', display_name: "Robin's Egg" },
+      { id: 'elegant_royal', label: 'Elegant Royal', default: true },
+      { id: 'robins_egg', label: "Robin's Egg" },
     ],
     gloss_blue_paint_options: [
-      { id: 'sky_blue', display_name: 'Sky Blue', default: true },
-      { id: 'navy', display_name: 'Navy' },
+      { id: 'sky_blue', label: 'Sky Blue', default: true },
+      { id: 'navy', label: 'Navy' },
     ],
     matte_red_paint_options: [
-      { id: 'brick', display_name: 'Brick', default: true },
-      { id: 'scarlet', display_name: 'Scarlet' },
+      { id: 'brick', label: 'Brick', default: true },
+      { id: 'scarlet', label: 'Scarlet' },
     ],
     eggshell_red_paint_options: [
-      { id: 'rose', display_name: 'Rose', default: true },
-      { id: 'ruby', display_name: 'Ruby' },
+      { id: 'rose', label: 'Rose', default: true },
+      { id: 'ruby', label: 'Ruby' },
     ],
     gloss_red_paint_options: [
-      { id: 'fire_engine', display_name: 'Fire Engine', default: true },
-      { id: 'crimson', display_name: 'Crimson' },
+      { id: 'fire_engine', label: 'Fire Engine', default: true },
+      { id: 'crimson', label: 'Crimson' },
     ],
   },
 };

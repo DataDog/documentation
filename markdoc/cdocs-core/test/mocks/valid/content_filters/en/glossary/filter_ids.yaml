@@ -1,5 +1,5 @@
 allowed:
 - id: color
-  display_name: Color
+  label: Color
 - id: item
-  display_name: Item
+  label: Item

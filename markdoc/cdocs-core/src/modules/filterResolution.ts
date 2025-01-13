@@ -72,13 +72,13 @@ export function resolvePageFilters(p: {
     // Add the resolved filter to the returned object
     const resolvedFilter: ResolvedPageFilter = {
       id: filterConfigDup.id,
-      displayName: filterConfigDup.display_name,
+      label: filterConfigDup.label,
       defaultValue,
       currentValue,
       options: p.filtersManifest.optionGroupsById[filterConfigDup.option_group].map(
         (option) => ({
           id: option.id,
-          displayName: option.display_name,
+          label: option.label,
         }),
       ),
     };
