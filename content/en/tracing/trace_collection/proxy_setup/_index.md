@@ -384,7 +384,7 @@ Choose from the following instrumentation methods based on your controller versi
 This instrumentation method uses [nginx-datadog][6] and leverages Kubernetes [init-container][7] mechanism
 to install the module within the Ingress-NGINX Controller instance.
 
-To instrument Ingress-NGINX <b>v1.10.0+</b> using Datadog's module, follow these steps:
+To instrument Ingress-NGINX **v1.10.0+** using Datadog's module, follow these steps:
 1. **Verify your Ingress-NGINX version**<br>
 Check the version of your Ingress-NGINX Controller and ensure an appropriate init-container is available.
 Refer to the [compatibility table](#compatibility-version-table) below to ensure the correct configuration.
