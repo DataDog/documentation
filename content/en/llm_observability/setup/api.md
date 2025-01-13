@@ -245,7 +245,7 @@ Method
 : `POST`
 
 Evaluations must be joined to a unique span. You can identify the target span using either of these two methods:
-1. Tag based joining - Join an evaluation using a custom tag key-value pair that uniquely identifies a single span. The evaluation will fail to join if the tag key-value pair matches multiple spans or no spans.
+1. Tag based joining - Join an evaluation using a custom tag key-value pair that uniquely identifies a single span.
 2. Direct span reference - join an evaluation using the span's unique trace ID and span ID combination.
 
 
