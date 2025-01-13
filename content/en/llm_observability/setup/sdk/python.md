@@ -529,7 +529,7 @@ Evaluations must be joined to a unique span. You can identify the target span us
 
 `LLMObs.submit_evaluation_for()` can be used to submit your custom evaluation associated with a given span.
 
-<div class="alert alert-info">`LLMObs.submit_evaluation` is deprecated and will be removed in ddtrace 3.0.0. As an alternative to `LLMObs.submit_evaluation`, you can use `LLMObs.submit_evaluation_for` instead.</div>
+<div class="alert alert-info"><code>`LLMObs.submit_evaluation`</code> is deprecated and will be removed in ddtrace 3.0.0. As an alternative to <code>`LLMObs.submit_evaluation`</code>, use <code>`LLMObs.submit_evaluation_for`</code>.</div>
 
 #### Arguments
 
