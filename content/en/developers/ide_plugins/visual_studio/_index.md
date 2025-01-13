@@ -81,7 +81,8 @@ When you start editing a source file supported by Static Analysis, the extension
 4. Open a solution in Visual Studio.
 5. Go to **Extensions > Datadog > Linked Services**.
 6. Add services, and save your solution.
-7. Go to **Extensions > Datadog > Code Insights**.
+7. Go to **Tools > Options > Datadog** and enable **Code Insights**.
+8. Sign in to Datadog by clicking the plus (**+**) icon. Changes do not affect existing connections to Datadog.
 
 ### Custom subdomains
 
