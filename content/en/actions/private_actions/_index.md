@@ -1,6 +1,9 @@
 ---
 title: Private Actions Overview
 disable_toc: false
+aliases:
+- service_management/workflows/private_actions/
+- service_management/app_builder/private_actions/
 further_reading:
 - link: "service_management/app_builder/connections"
   tag: "Documentation"

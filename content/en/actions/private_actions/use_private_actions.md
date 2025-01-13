@@ -1,6 +1,9 @@
 ---
 title: Use Private Actions
 disable_toc: false
+aliases:
+- service_management/workflows/private_actions/use_private_actions
+- service_management/app_builder/private_actions/use_private_actions
 further_reading:
 - link: "service_management/app_builder/connections"
   tag: "Documentation"
@@ -8,15 +11,12 @@ further_reading:
 - link: "service_management/workflows/connections"
   tag: "Documentation"
   text: "Workflow Connections"
-- link: "service_management/workflows/private_actions/"
+- link: "actions/private_actions/"
   tag: "Documentation"
   text: "Private Actions Overview"
-- link: "service_management/workflows/private_actions/private_action_credentials"
+- link: "actions/private_actions/private_action_credentials"
   tag: "Documentation"
-  text: "Handling Private Action Credentials for Workflow Automation"
-- link: "service_management/app_builder/private_actions/private_action_credentials"
-  tag: "Documentation"
-  text: "Handling Private Action Credentials for App Builder"
+  text: "Handling Private Action Credentials"
 ---
 
 {{< callout url="https://www.datadoghq.com/product-preview/private-actions/" btn_hidden="false" header="Join the Preview!">}}

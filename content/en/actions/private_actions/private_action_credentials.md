@@ -1,6 +1,8 @@
 ---
 title: Handling Private Action Credentials
-
+aliases:
+- service_management/workflows/private_actions/private_action_credentials
+- service_management/app_builder/private_actions/private_action_credentials
 disable_toc: false
 ---
 
