@@ -38,6 +38,12 @@ export class YamlConfigParser {
    * configuration for a given language (such as 'ja').
    */
   static loadFilterGlossary(p: { langDir: string }): FilterGlossary {
+    // If the lang dir does not exist, return an empty object,
+    // which can later be backfilled by the default language
+    if (!fs.existsSync(p.langDir)) {
+      return {};
+    }
+
     let result: FilterGlossary;
 
     const glossaryPath = `${p.langDir}/glossary/filter_ids.yaml`;
@@ -66,6 +72,12 @@ export class YamlConfigParser {
   }
 
   static loadOptionGlossary(p: { langDir: string }) {
+    // If the lang dir does not exist, return an empty object,
+    // which can later be backfilled by the default language
+    if (!fs.existsSync(p.langDir)) {
+      return {};
+    }
+
     let result: OptionGlossary;
 
     const glossaryFilePath = `${p.langDir}/glossary/filter_options.yaml`;
@@ -273,6 +285,12 @@ export class YamlConfigParser {
     langDir: string;
     optionGlossary: OptionGlossary;
   }): OptionGroupGlossary {
+    // If the lang dir does not exist, return an empty object,
+    // which will be backfilled by the default language
+    if (!fs.existsSync(p.langDir)) {
+      return {};
+    }
+
     const optionGroupGlossaryDir = `${p.langDir}/filter_option_sets`;
     const filePaths = FileSearcher.findInDir(optionGroupGlossaryDir, /\.ya?ml$/);
     const mergedGlossary: OptionGroupGlossary = {};
