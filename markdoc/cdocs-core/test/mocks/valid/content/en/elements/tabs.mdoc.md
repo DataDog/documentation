@@ -1,9 +1,9 @@
 ---
 title: Tabs
 content_filters:
-  - display_name: "Color"
-    id: color
-    option_group: primary_color_options
+  - label: "Color"
+    filter_id: color
+    option_group_id: primary_color_options
 ---
 
 ## Usage

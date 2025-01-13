@@ -56,26 +56,26 @@ export function resolvePageFilters(p: {
     // if the current value is no longer valid after placeholder resolution
     const defaultValue =
       filterConfigDup.default_value ||
-      p.filtersManifest.optionGroupsById[filterConfigDup.option_group].find(
+      p.filtersManifest.optionGroupsById[filterConfigDup.option_group_id].find(
         (option) => option.default,
       )!.id;
 
     const possibleVals = p.filtersManifest.optionGroupsById[
-      filterConfigDup.option_group
+      filterConfigDup.option_group_id
     ].map((option) => option.id);
-    let currentValue = p.valsByFilterId[filterConfigDup.id];
+    let currentValue = p.valsByFilterId[filterConfigDup.filter_id];
     if (currentValue && !possibleVals.includes(currentValue)) {
       currentValue = defaultValue;
-      valsByFilterIdDup[filterConfigDup.id] = defaultValue;
+      valsByFilterIdDup[filterConfigDup.filter_id] = defaultValue;
     }
 
     // Add the resolved filter to the returned object
     const resolvedFilter: ResolvedPageFilter = {
-      id: filterConfigDup.id,
+      id: filterConfigDup.filter_id,
       label: filterConfigDup.label,
       defaultValue,
       currentValue,
-      options: p.filtersManifest.optionGroupsById[filterConfigDup.option_group].map(
+      options: p.filtersManifest.optionGroupsById[filterConfigDup.option_group_id].map(
         (option) => ({
           id: option.id,
           label: option.label,
@@ -83,7 +83,7 @@ export function resolvePageFilters(p: {
       ),
     };
 
-    resolvedPageFilters[filterConfigDup.id] = resolvedFilter;
+    resolvedPageFilters[filterConfigDup.filter_id] = resolvedFilter;
   });
 
   return resolvedPageFilters;
@@ -104,9 +104,9 @@ export function resolveFilterOptionsSource(p: {
   const filterConfigDup = { ...p.pageFilterConfig };
 
   // Replace any placeholder in the options source with the selected value
-  if (GLOBAL_PLACEHOLDER_REGEX.test(filterConfigDup.option_group)) {
+  if (GLOBAL_PLACEHOLDER_REGEX.test(filterConfigDup.option_group_id)) {
     // Resolve the options source
-    filterConfigDup.option_group = filterConfigDup.option_group.replace(
+    filterConfigDup.option_group_id = filterConfigDup.option_group_id.replace(
       GLOBAL_PLACEHOLDER_REGEX,
       (_match: string, placeholder: string) => {
         return p.selectedValsByFilterId[placeholder.toLowerCase()];

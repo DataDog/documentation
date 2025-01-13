@@ -20,8 +20,8 @@ describe('FiltersManifestBuilder.build', () => {
         color: {
           config: {
             label: 'Color',
-            id: 'color',
-            option_group: 'color_options',
+            filter_id: 'color',
+            option_group_id: 'color_options',
           },
           defaultValsByOptionGroupId: {
             color_options: 'blue',
@@ -31,8 +31,8 @@ describe('FiltersManifestBuilder.build', () => {
         finish: {
           config: {
             label: 'Finish',
-            id: 'finish',
-            option_group: 'finish_options',
+            filter_id: 'finish',
+            option_group_id: 'finish_options',
           },
           defaultValsByOptionGroupId: {
             finish_options: 'eggshell',
@@ -42,8 +42,8 @@ describe('FiltersManifestBuilder.build', () => {
         paint: {
           config: {
             label: 'Paint color',
-            id: 'paint',
-            option_group: '<FINISH>_<COLOR>_paint_options',
+            filter_id: 'paint',
+            option_group_id: '<FINISH>_<COLOR>_paint_options',
           },
           defaultValsByOptionGroupId: {
             matte_blue_paint_options: 'powder_blue',
@@ -177,19 +177,19 @@ describe('FiltersManifestBuilder.build', () => {
       content_filters: [
         {
           label: 'Color',
-          id: 'color',
-          option_group: 'color_options',
+          filter_id: 'color',
+          option_group_id: 'color_options',
         },
         {
           label: 'Finish',
-          id: 'finish',
-          option_group: 'finish_options',
+          filter_id: 'finish',
+          option_group_id: 'finish_options',
         },
         {
           label: 'Paint color',
-          id: 'paint',
+          filter_id: 'paint',
           // invalid placeholder 'COLOUR'
-          option_group: '<FINISH>_<COLOUR>_paint_options',
+          option_group_id: '<FINISH>_<COLOUR>_paint_options',
         },
       ],
     };

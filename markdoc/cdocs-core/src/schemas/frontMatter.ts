@@ -8,8 +8,8 @@ import { SNAKE_CASE_REGEX, FILTER_OPTIONS_ID_REGEX } from './regexes';
 export const PageFilterConfigSchema = z
   .object({
     label: z.string(),
-    id: z.string().regex(SNAKE_CASE_REGEX),
-    option_group: z.string().regex(FILTER_OPTIONS_ID_REGEX),
+    filter_id: z.string().regex(SNAKE_CASE_REGEX),
+    option_group_id: z.string().regex(FILTER_OPTIONS_ID_REGEX),
     default_value: z.string().regex(SNAKE_CASE_REGEX).optional(),
   })
   .strict();

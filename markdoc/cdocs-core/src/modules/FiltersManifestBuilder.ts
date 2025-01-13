@@ -71,7 +71,7 @@ export class FiltersManifestBuilder {
     // Key the configs by filter ID, for convenient access during processing
     const filterConfigByFilterId: Record<string, PageFilterConfig> =
       p.frontmatter.content_filters.reduce(
-        (obj, filterConfig) => ({ ...obj, [filterConfig.id]: filterConfig }),
+        (obj, filterConfig) => ({ ...obj, [filterConfig.filter_id]: filterConfig }),
         {},
       );
 
@@ -83,10 +83,10 @@ export class FiltersManifestBuilder {
     // in the order that the filters appeared in the frontmatter
     p.frontmatter.content_filters.forEach((pageFilterConfig) => {
       // Validate the filter ID
-      if (!p.contentFiltersConfig.filterGlossary[pageFilterConfig.id]) {
+      if (!p.contentFiltersConfig.filterGlossary[pageFilterConfig.filter_id]) {
         manifest.errors.push({
-          message: `Unrecognized filter ID: The filter ID '${pageFilterConfig.id}' is not in the glossary.`,
-          searchTerm: pageFilterConfig.id,
+          message: `Unrecognized filter ID: The filter ID '${pageFilterConfig.filter_id}' is not in the glossary.`,
+          searchTerm: pageFilterConfig.filter_id,
         });
       }
 
@@ -94,12 +94,12 @@ export class FiltersManifestBuilder {
       // so each one can have its range of values processed
       // and the options set itself can be attached to the manifest
       let optionGroupIds: string[] = [];
-      const hasDynamicOptions = pageFilterConfig.option_group.match(PLACEHOLDER_REGEX);
+      const hasDynamicOptions = pageFilterConfig.option_group_id.match(PLACEHOLDER_REGEX);
 
       if (hasDynamicOptions) {
         const { optionGroupIds: dynamicOptionGroupIds, errors } =
           this.buildDynamicOptionGroupIds({
-            filterId: pageFilterConfig.id,
+            filterId: pageFilterConfig.filter_id,
             // filterOptionsConfig: p.filterOptionsConfig,
             contentFiltersConfig: p.contentFiltersConfig,
             filterConfigsByFilterId: filterConfigByFilterId,
@@ -112,14 +112,14 @@ export class FiltersManifestBuilder {
 
         optionGroupIds = dynamicOptionGroupIds;
       } else {
-        optionGroupIds = [pageFilterConfig.option_group];
+        optionGroupIds = [pageFilterConfig.option_group_id];
       }
 
       // Collect a default value for every possible options set ID,
       // along with all possible selected values for the filter
       const { defaultValsByOptionGroupId, possibleVals, errors } =
         this.getPossibleDefaultsAndSelectedValues({
-          filterId: pageFilterConfig.id,
+          filterId: pageFilterConfig.filter_id,
           optionGroupIds: optionGroupIds,
           // glossary: p.glossary,
           contentFiltersConfig: p.contentFiltersConfig,
@@ -130,13 +130,13 @@ export class FiltersManifestBuilder {
         manifest.errors.push(...errors);
       }
 
-      manifest.filtersById[pageFilterConfig.id] = {
+      manifest.filtersById[pageFilterConfig.filter_id] = {
         config: pageFilterConfig,
         defaultValsByOptionGroupId,
         possibleVals: possibleVals,
       };
 
-      processedFilterIds.push(pageFilterConfig.id);
+      processedFilterIds.push(pageFilterConfig.filter_id);
     });
 
     // Attach any options sets that were referenced by the filters
@@ -218,12 +218,12 @@ export class FiltersManifestBuilder {
     precedingFilterIds: string[];
     contentFiltersConfig: ContentFiltersConfig;
   }): { optionGroupIds: string[]; errors: CdocsCoreError[] } {
-    const filter = p.filterConfigsByFilterId[p.filterId];
+    const filterConfig = p.filterConfigsByFilterId[p.filterId];
 
     let optionGroupIds: string[] = [];
     const errors: CdocsCoreError[] = [];
 
-    const segments = filter.option_group.split('_').map((segment) => {
+    const segments = filterConfig.option_group_id.split('_').map((segment) => {
       // build non-placeholder segment (array of solitary possible value)
       if (!segment.match(PLACEHOLDER_REGEX)) {
         return [segment];
@@ -234,14 +234,16 @@ export class FiltersManifestBuilder {
       const referencedFilterConfig = p.filterConfigsByFilterId[referencedFilterId];
       if (!referencedFilterConfig || !p.precedingFilterIds.includes(referencedFilterId)) {
         errors.push({
-          message: `Invalid placeholder: The placeholder ${segment} in the options source '${filter.option_group}' refers to an unrecognized filter ID. The file frontmatter must contain a filter with the ID '${referencedFilterId}', and it must be defined before the filter with the ID ${filter.id}.`,
-          searchTerm: filter.option_group,
+          message: `Invalid placeholder: The placeholder ${segment} in the options source '${filterConfig.option_group_id}' refers to an unrecognized filter ID. The file frontmatter must contain a filter with the ID '${referencedFilterId}', and it must be defined before the filter with the ID ${filterConfig.filter_id}.`,
+          searchTerm: filterConfig.option_group_id,
         });
         return [segment];
       }
 
       const referencedOptionGroup =
-        p.contentFiltersConfig.optionGroupGlossary[referencedFilterConfig.option_group];
+        p.contentFiltersConfig.optionGroupGlossary[
+          referencedFilterConfig.option_group_id
+        ];
 
       return referencedOptionGroup.map((option) => option.id);
     });
@@ -271,7 +273,7 @@ export class FiltersManifestBuilder {
     // Process each entry in the frontmatter's content_filters list
     for (const fmFilterConfig of p.filterConfigs) {
       // Replace any placeholders in the options source
-      const optionGroupId = fmFilterConfig.option_group;
+      const optionGroupId = fmFilterConfig.option_group_id;
       const resolvedOptionGroupId = optionGroupId.replace(
         GLOBAL_PLACEHOLDER_REGEX,
         (_match: string, placeholder: string) => {
@@ -285,7 +287,7 @@ export class FiltersManifestBuilder {
         p.contentFiltersConfig.optionGroupGlossary[resolvedOptionGroupId];
 
       if (resolvedOptionGroup) {
-        defaultValsByFilterId[fmFilterConfig.id] =
+        defaultValsByFilterId[fmFilterConfig.filter_id] =
           fmFilterConfig.default_value ||
           resolvedOptionGroup.find((option) => option.default)!.id;
       }

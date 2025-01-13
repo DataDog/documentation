@@ -1,12 +1,12 @@
 ---
 title: Primary Colors (ja)
 content_filters:
-  - display_name: "Color"
-    id: color
-    option_group: primary_color_options
-  - display_name: "Item"
-    id: item
-    option_group: <COLOR>_item_options
+  - label: "Color"
+    filter_id: color
+    option_group_id: primary_color_options
+  - label: "Item"
+    filter_id: item
+    option_group_id: <COLOR>_item_options
 aliases:
   - /primary_colors_alias/
 ---

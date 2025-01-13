@@ -2,11 +2,11 @@
 title: Traffic Light Colors
 content_filters:
   - label: "Color"
-    id: color
-    option_group: traffic_light_color_options
+    filter_id: color
+    option_group_id: traffic_light_color_options
   - label: "Item"
-    id: item
-    option_group: <COLOR>_item_options
+    filter_id: item
+    option_group_id: <COLOR>_item_options
 ---
 
 {% alert level="info" %}

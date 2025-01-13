@@ -9,18 +9,18 @@ export const paintColorsFrontmatter: Frontmatter = {
   content_filters: [
     {
       label: 'Color',
-      id: 'color',
-      option_group: 'color_options',
+      filter_id: 'color',
+      option_group_id: 'color_options',
     },
     {
       label: 'Finish',
-      id: 'finish',
-      option_group: 'finish_options',
+      filter_id: 'finish',
+      option_group_id: 'finish_options',
     },
     {
       label: 'Paint color',
-      id: 'paint',
-      option_group: '<FINISH>_<COLOR>_paint_options',
+      filter_id: 'paint',
+      option_group_id: '<FINISH>_<COLOR>_paint_options',
     },
   ],
 };

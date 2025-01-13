@@ -3,8 +3,8 @@
     "color": {
       "config": {
         "label": "Color",
-        "id": "color",
-        "option_group": "color_options"
+        "filter_id": "color",
+        "option_group_id": "color_options"
       },
       "defaultValsByOptionGroupId": {
         "color_options": "blue"
@@ -17,8 +17,8 @@
     "finish": {
       "config": {
         "label": "Finish",
-        "id": "finish",
-        "option_group": "finish_options"
+        "filter_id": "finish",
+        "option_group_id": "finish_options"
       },
       "defaultValsByOptionGroupId": {
         "finish_options": "eggshell"
@@ -32,8 +32,8 @@
     "paint": {
       "config": {
         "label": "Paint color",
-        "id": "paint",
-        "option_group": "<FINISH>_<COLOR>_paint_options"
+        "filter_id": "paint",
+        "option_group_id": "<FINISH>_<COLOR>_paint_options"
       },
       "defaultValsByOptionGroupId": {
         "matte_blue_paint_options": "powder_blue",
