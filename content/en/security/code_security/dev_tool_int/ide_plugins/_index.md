@@ -8,7 +8,7 @@ disable_toc: false
 
 ## Overview
 
-[Code Analysis][1] integrates directly with integrated development environment (IDE) tools to provide real-time feedback on the quality and security of your first-party code as it's being written.
+[Code Security][1] integrates directly with integrated development environment (IDE) tools to provide real-time feedback on the quality and security of your first-party code as it's being written.
 
 {{< whatsnext desc="See the documentation for information about the following integrations:">}}
     {{< nextlink href="developers/ide_plugins/idea/#static-analysis" >}}<u>JetBrains IDEs</u>: IntelliJ IDEA, GoLand, PhpStorm, and PyCharm{{< /nextlink >}}
@@ -17,4 +17,4 @@ disable_toc: false
 {{< /whatsnext >}}
 
 
-[1]: /code_analysis/
+[1]: /security/code_security/

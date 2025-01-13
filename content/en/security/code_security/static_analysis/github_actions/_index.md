@@ -108,7 +108,7 @@ and detect vulnerabilities and licenses. You can use this product with the [`dat
 
 Additional helpful documentation, links, and articles:
 
-- [Learn about Code Analysis][1]
+- [Learn about Code Security][1]
 
 [1]: https://docs.datadoghq.com/security/code_security/static_analysis
 [2]: https://docs.datadoghq.com/account_management/api-app-keys/

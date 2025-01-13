@@ -74,7 +74,7 @@ From the Repositories page, click on a repository to analyze **Library Vulnerabi
 * The **Library Vulnerabilities** tab contains the vulnerable library versions found by Datadog SCA.
 * The **Library Catalog** tab contains all of the libraries (vulnerable or not) found by Datadog SCA.
 
-To filter your results, use the facets to the left of the list or the search bar at the top. Results can be filtered by service or team facets. For more information about how results are linked to Datadog services and teams, see [Getting Started with Code Analysis][5].
+To filter your results, use the facets to the left of the list or the search bar at the top. Results can be filtered by service or team facets. For more information about how results are linked to Datadog services and teams, see [Getting Started with Code Security][5].
 
 Every row represents a unique library and version combination. Each combination is associated with the specific commit and branch that is selected in the filters at the top of the page (by default, the latest commit on the default branch of the repository you selected).
 
@@ -96,7 +96,7 @@ Datadog SCA uses a curated proprietary database. The database is sourced from Op
 
 SCA scans open source libraries imported into repositories through package managers such as npm for known vulnerabilities, and creates a catalog of libraries used across your repositories that identifies risky licenses, end-of-life libraries, and vulnerabilities to ensure a high quality, secure codebase.
 
-SCA scans can be run directly through Datadog (Datadog-hosted) or in your CI pipelines using Code Analysis to detect library vulnerabilities before they reach production.
+SCA scans can be run directly through Datadog (Datadog-hosted) or in your CI pipelines using Code Security to detect library vulnerabilities before they reach production.
 
 For set up instructions, see [SCA Static Setup][1].
 

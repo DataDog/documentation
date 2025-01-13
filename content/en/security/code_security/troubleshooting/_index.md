@@ -5,7 +5,7 @@ aliases:
    - /code_analysis/troubleshooting/
 ---
 
-If you experience issues setting up or configuring Datadog Code Analysis, use this page to start troubleshooting. If you continue to have trouble, [contact Datadog Support][1].
+If you experience issues setting up or configuring Datadog Code Security, use this page to start troubleshooting. If you continue to have trouble, [contact Datadog Support][1].
 
 ## Static Analysis (SAST)
 
@@ -79,7 +79,7 @@ It means that you are either:
 
 ### Results are not being surfaced in the Datadog UI
 
-**If you are running Code Analysis on a non-GitHub repository**, ensure that the first scan is ran on your default branch (for example, a branch name like
+**If you are running Code Security on a non-GitHub repository**, ensure that the first scan is ran on your default branch (for example, a branch name like
 `master`, `main`, `prod`, or `production`). After you commit on your default branch, non-default branches are analyzed. You can always configure your default branch in-app under [Repository Settings][4].
 
 If you are using Datadog's analyzer, [diff-aware scanning][6] is enabled by default. If you running the tool within your CI pipeline, make sure that `datadog-ci` runs **at the root** of the repository being analyzed.
@@ -118,7 +118,7 @@ datadog-ci sbom upload /path/to/sbom-file.json
 
 ### Results are not being surfaced in the Datadog UI
 
-**If you are running Code Analysis on a non-GitHub repository**, ensure that the first scan is ran on your default branch (for example, a branch name like
+**If you are running Code Security on a non-GitHub repository**, ensure that the first scan is ran on your default branch (for example, a branch name like
 `master`, `main`, `prod`, or `production`). After you commit on your default branch, non-default branches are analyzed.
 
 You can always configure your default branch in-app under [Repository Settings][4].

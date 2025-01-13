@@ -27,9 +27,9 @@ SCA can scan dependency management files in your repositories to statically dete
 
 ## Search and filter results
 
-<div class="alert alert-info">Datadog Software Composition Analysis can find vulnerable libraries across the software development lifecycle (SDLC). Code Analysis summarizes results found by directly scanning your repositories. To view all vulnerabilities found in repositories and at runtime consolidated together, see <a href="/security/code_security/software_composition_analysis" target="_blank">Application Security</a> for more details.</div>
+<div class="alert alert-info">Datadog Software Composition Analysis can find vulnerable libraries across the software development lifecycle (SDLC). Code Security summarizes results found by directly scanning your repositories. To view all vulnerabilities found in repositories and at runtime consolidated together, see <a href="/security/code_security/software_composition_analysis" target="_blank">Application Security</a> for more details.</div>
 
-After you configure your CI pipelines to run Datadog SCA, violations are summarized per repository on the [**Code Analysis Repositories** page][4]. Click on a repository to analyze **Library Vulnerabilities** and **Library Catalog** results from Software Composition Analysis. 
+After you configure your CI pipelines to run Datadog SCA, violations are summarized per repository on the [**Code Security Repositories** page][4]. Click on a repository to analyze **Library Vulnerabilities** and **Library Catalog** results from Software Composition Analysis. 
 
 * The **Library Vulnerabilities** tab contains the vulnerable library versions found by Datadog SCA.
 * The **Library Catalog** tab contains all of the libraries (vulnerable or not) found by Datadog SCA.
@@ -155,7 +155,7 @@ When installing a GitHub App, the following permissions are required to enable c
 
 ### Other source code management providers
 If you are using another source code management provider, configure SCA to run in your CI pipelines using the `datadog-ci` CLI tool and [upload the results][8] to Datadog.
-You **must** run an analysis of your repository on the default branch before results can begin appearing on the **Code Analysis** page.
+You **must** run an analysis of your repository on the default branch before results can begin appearing on the **Code Security** page.
 
 [1]: /security/code_security/software_composition_analysis/
 [2]: https://app.datadoghq.com/ci/setup/code-analysis

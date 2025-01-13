@@ -11,8 +11,8 @@ A [Git hook](https://git-scm.com/docs/githooks) is a program executed before a u
 or pushes code to a remote location. A Git hook is generally used to run verifications
 and enforce requirements on the code before it is pushed to the remote branch.
 
-Datadog Code Analysis provides a Git hook to check for static analysis
-violations or secrets before code is pushed or committed. The Datadog Code Analysis Git hook
+Datadog Code Security provides a Git hook to check for static analysis
+violations or secrets before code is pushed or committed. The Datadog Code Security Git hook
 checks the code from the latest commit and the default branch and surfaces
 any errors it detects.
 

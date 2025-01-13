@@ -18,17 +18,17 @@ algolia:
 ---
 
 {{< callout url="#" btn_hidden="true" header="Join the Preview!" >}}
-Code Analysis is in Preview.
+Code Security is in Preview.
 {{< /callout >}}
 
 {{% site-region region="gov" %}}
 <div class="alert alert-danger">
-    Code Analysis is not available for the {{< region-param key="dd_site_name" >}} site.
+    Code Security is not available for the {{< region-param key="dd_site_name" >}} site.
 </div>
 {{% /site-region %}}
 
 ## Overview
-To set up Datadog Static Analysis, navigate to [**Software Delivery** > **Code Analysis**][1].
+To set up Datadog Static Analysis, navigate to [**Software Delivery** > **Code Security**][1].
 
 ## Select where to run Static Analysis scans
 ### Scan with Datadog-hosted scanning
@@ -37,7 +37,7 @@ To set up Datadog Static Analysis, navigate to [**Software Delivery** > **Code A
   Datadog-hosted Static Analysis scans are in Preview. Contact your Customer Success Manager to request access.
 {{< /callout >}}
 
-You can run Datadog Static Analysis scans directly on Datadog's infrastructure. To get started, navigate to the [**Code Analysis** page][1].
+You can run Datadog Static Analysis scans directly on Datadog's infrastructure. To get started, navigate to the [**Code Security** page][1].
 
 ### Scan in CI pipelines
 Datadog Static Analysis runs in your CI pipelines using the [`datadog-ci` CLI][8]. Configure your [Datadog API and application keys (requires the `code_analysis_read` scope)][3] and run Static Analysis in the respective CI provider.
@@ -60,7 +60,7 @@ When installing a GitHub App, the following permissions are required to enable c
 
 ### Other source code management providers
 If you are using another source code management provider, configure Static Analysis to run in your CI pipelines using the `datadog-ci` CLI tool and [upload the results](#upload-third-party-static-analysis-results-to-datadog) to Datadog.
-You **must** run an analysis of your repository on the default branch before results can begin appearing on the **Code Analysis** page.
+You **must** run an analysis of your repository on the default branch before results can begin appearing on the **Code Security** page.
 
 ## Customize your configuration
 By default, Datadog Static Analysis scans your repositories with [Datadog's rulesets][6] for your programming language(s). To customize which rulesets you want to apply and where, add a `static-analysis.datadog.yml` file to your repository's **root directory**.

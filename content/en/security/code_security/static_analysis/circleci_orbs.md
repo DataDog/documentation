@@ -87,9 +87,9 @@ To customize your workflow, you can set the following parameters for Static Anal
 
 Additional helpful documentation, links, and articles:
 
-- [Learn about Code Analysis][1]
+- [Learn about Code Security][1]
 
-[1]: https://docs.datadoghq.com/code_analysis/static_analysis
+[1]: /security/code_security/
 [2]: https://circleci.com/docs/set-environment-variable/#set-an-environment-variable-in-a-project
 [3]: https://docs.datadoghq.com/account_management/api-app-keys/#api-keys
 [4]: https://docs.datadoghq.com/account_management/api-app-keys/#application-keys

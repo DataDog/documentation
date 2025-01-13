@@ -7,11 +7,11 @@ aliases:
 
 ## Overview
 
-Datadog Runtime Code Analysis (IAST) identifies code-level vulnerabilities in your services and provides actionable insights and recommended fixes.
+Datadog Runtime Code Security (IAST) identifies code-level vulnerabilities in your services and provides actionable insights and recommended fixes.
 
 For a list of supported services, see the [Library Compatibility Requirements][5].
 
-Runtime Code Analysis uses an Interactive Application Security Testing (IAST) approach to find vulnerabilities within your application code based on your Datadog application instrumentation.
+Runtime Code Security uses an Interactive Application Security Testing (IAST) approach to find vulnerabilities within your application code based on your Datadog application instrumentation.
 
 IAST enables Datadog to identify vulnerabilities using legitimate application traffic instead of relying on external tests that could require extra configuration or periodic scheduling. It also monitors your code’s interactions with other components of your stack, such as libraries and infrastructure, providing an up-to-date view of your attack surface area.
 

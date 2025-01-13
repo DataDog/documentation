@@ -9,12 +9,12 @@ algolia:
 ---
 
 {{< callout url="#" btn_hidden="true" header="Join the Preview!" >}}
-Code Analysis is in Preview.
+Code Security is in Preview.
 {{< /callout >}}
 
 {{% site-region region="gov" %}}
 <div class="alert alert-danger">
-    Code Analysis is not available for the {{< region-param key="dd_site_name" >}} site.
+    Code Security is not available for the {{< region-param key="dd_site_name" >}} site.
 </div>
 {{% /site-region %}}
 

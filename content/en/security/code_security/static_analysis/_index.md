@@ -1,6 +1,6 @@
 ---
-title: Static Code Analysis (SAST)
-description: Learn about Datadog Static Code Analysis to scan code for quality issues and security vulnerabilities before your code reaches production.
+title: Static Code Security (SAST)
+description: Learn about Datadog Static Code Security to scan code for quality issues and security vulnerabilities before your code reaches production.
 aliases:
 - /code_analysis/static_analysis
 is_beta: false
@@ -9,19 +9,19 @@ algolia:
 ---
 
 {{< callout url="#" btn_hidden="true" header="Join the Preview!" >}}
-Code Analysis is in Preview.
+Code Security is in Preview.
 {{< /callout >}}
 
 {{% site-region region="gov" %}}
 <div class="alert alert-danger">
-    Code Analysis is not available for the {{< region-param key="dd_site_name" >}} site.
+    Code Security is not available for the {{< region-param key="dd_site_name" >}} site.
 </div>
 {{% /site-region %}}
 
 
 ## Overview
 
-Static Code Analysis is Datadog's Static Application Security Testing (SAST) capability. SAST is a clear-box software testing technique that analyzes a program's pre-production code without the need to execute the program, meaning that the program is static because it isn't running. 
+Static Code Security is Datadog's Static Application Security Testing (SAST) capability. SAST is a clear-box software testing technique that analyzes a program's pre-production code without the need to execute the program, meaning that the program is static because it isn't running. 
 
 Static Analysis helps you identify maintainability issues and security vulnerabilities early in the software development life cycle (SDLC) to ensure only the highest quality, most secure code makes it to production. Static Analysis tools that scan for security vulnerabilities are also commonly referred to as Static Application Security Testing (SAST) tools.
 
@@ -40,7 +40,7 @@ Static Analysis supports scanning for poor coding practices and security vulnera
 
 </br> 
 
-To get started, you can set up Static Analysis on the [**Code Analysis** page][1] or see the [Setup documentation][9].
+To get started, you can set up Static Analysis on the [**Code Security** page][1] or see the [Setup documentation][9].
 
 ## Integrate Static Analysis into your software development lifecycle
 
@@ -65,12 +65,12 @@ To get started, you can set up Static Analysis on the [**Code Analysis** page][1
 
 ## Search and filter results
 
-After you configure your CI pipelines to run the Datadog Static Analyzer, violations are summarized per repository on the [**Code Analysis Repositories** page][1]. Click on a repository to analyze **Code Vulnerabilities** and **Code Quality** results from Static Analysis. 
+After you configure your CI pipelines to run the Datadog Static Analyzer, violations are summarized per repository on the [**Code Security Repositories** page][1]. Click on a repository to analyze **Code Vulnerabilities** and **Code Quality** results from Static Analysis. 
 
 * The **Code Vulnerabilities** tab contains the violations found by Datadog's rules in the [Security category][2].
 * The **Code Quality** tab contains the violations found by Datadog's rules in the [Best Practices, Code Style, Error Prone, or Performance categories][3].
 
-To filter your results, use the facets to the left of the list, or search. Results can be filtered by service or team facets. For more information about how results are linked to Datadog services and teams, see [Getting Started with Code Analysis][11].
+To filter your results, use the facets to the left of the list, or search. Results can be filtered by service or team facets. For more information about how results are linked to Datadog services and teams, see [Getting Started with Code Security][11].
 
 Every row represents a violation. Each violation is associated with the specific commit and branch that is selected in the filters at the top of the page (by default, results are shown for the latest commit on the default branch of the repository you are viewing).
 
@@ -102,15 +102,15 @@ The two types of fixes are distinguished visually in the UI with different label
 <div class="alert alert-warning">AI Suggested Fixes are in Preview. To request access, contact <a href="/help/">Support.</div>
 
 ### Fixing a vulnerability or quality issue directly from Datadog
-{{< img src="ci/sast_one_click_light.png" alt="Example of one-click remediation for Code Analysis" style="width:90%;" >}}
+{{< img src="ci/sast_one_click_light.png" alt="Example of one-click remediation for Code Security" style="width:90%;" >}}
 
-You can push a code change to fix an issue found by Code Analysis directly from a result in Datadog in two ways.
+You can push a code change to fix an issue found by Code Security directly from a result in Datadog in two ways.
 
 #### Opening a pull request 
 If your GitHub app's **Pull Requests** permission is set to **Read & Write**, one-click remediation is enabled for all Static Analysis findings with an available suggested fix. For more information about setting up the GitHub integration, see [GitHub Pull Requests][10]. 
 
 Follow these steps to fix a vulnerability and open a pull request:
-1. View a specific result in Code Analysis.
+1. View a specific result in Code Security.
 2. Click **Fix Violation** in the side panel of the result. 
 3. Select **Open a Pull Request**.
 4. Enter a pull request title and commit message.
@@ -121,7 +121,7 @@ You can also fix a vulnerability by committing directly to the branch the result
 
 To commit a suggested fix:
 
-1. View a specific result in Code Analysis.
+1. View a specific result in Code Security.
 2. Click **Fix Violation** in the side panel of the result.
 3. Click **Commit to current branch**.
 

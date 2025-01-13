@@ -1,6 +1,6 @@
 ---
 title: SAST Rules
-description: View rules for multiple languages for Static Code Analysis.
+description: View rules for multiple languages for Static Code Security.
 aliases:
 - /continuous_integration/static_analysis/rules
 - /static_analysis/rules
@@ -167,7 +167,7 @@ rulesets:
   ruby-code-style:
     title: "Rules to enforce Ruby code style."
     description: |
-      Code Analysis rules to write Ruby rules that follows established coding standards.
+      Code Security rules to write Ruby rules that follows established coding standards.
   ruby-inclusive:
     title: "Rules for inclusive Ruby code"
     description: |
@@ -215,14 +215,14 @@ rulesets:
 
 cascade:
   modal:
-    title: Try this rule and analyze your code with Datadog Code Analysis
+    title: Try this rule and analyze your code with Datadog Code Security
     top_box:
       title: How to use this rule
       steps:
         - Create a static-analysis.datadog.yml with the content above at the root of your repository
-        - Use our free IDE Plugins or add Code Analysis scans to your CI pipelines
+        - Use our free IDE Plugins or add Code Security scans to your CI pipelines
         - Get feedback on your code
-      footer: For more information, please read the <a href="/code_analysis">Code Analysis documentation</a>
+      footer: For more information, please read the <a href="/security/code_security/">Code Security documentation</a>
     bottom_boxes:
       - title: VS Code Extension
         icon: vscode
@@ -235,30 +235,30 @@ cascade:
         cta_title: Download Plugin
         cta_url: https://plugins.jetbrains.com/plugin/19495-datadog
     footer:
-      text: Use Datadog Code Analysis to catch code issues at every step of your development process
+      text: Use Datadog Code Security to catch code issues at every step of your development process
       link:
-        name: Datadog Code Analysis
-        url: https://www.datadoghq.com/code-analysis/
+        name: Datadog Code Security
+        url: https://www.datadoghq.com/security/code_security/
 
   banner:
-    title: "<span>Seamless integrations.</span> Try Datadog Code Analysis"
+    title: "<span>Seamless integrations.</span> Try Datadog Code Security"
     link:
-      name: Datadog Code Analysis
-      url: https://www.datadoghq.com/code-analysis/
+      name: Datadog Code Security
+      url: https://www.datadoghq.com/security/code_security/
 
 further_reading:
-  - link: "/code_analysis/"
+  - link: "/security/code_security/"
     tag: "Documentation"
-    text: "Learn about Datadog Code Analysis"
+    text: "Learn about Datadog Code Security"
 ---
 
 {{< callout url="#" btn_hidden="true" header="Join the Preview!" >}}
-Code Analysis is in Preview.
+Code Security is in Preview.
 {{< /callout >}}
 
 {{% site-region region="gov" %}}
 <div class="alert alert-danger">
-    Code Analysis is not available for the {{< region-param key="dd_site_name" >}} site.
+    Code Security is not available for the {{< region-param key="dd_site_name" >}} site.
 </div>
 {{% /site-region %}}
 
