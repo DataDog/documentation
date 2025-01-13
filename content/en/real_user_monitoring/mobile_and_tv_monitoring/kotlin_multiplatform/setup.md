@@ -378,18 +378,6 @@ val ktorClient = HttpClient {
 
 This records each request processed by the `HttpClient` as a resource in RUM, with all the relevant information automatically filled (URL, method, status code, and error). Only the network requests that started when a view is active are tracked. To track requests when your application is in the background, [create a view manually][11] or enable [background view tracking](#track-background-events).
 
-## Track background events
-
-You can track events such as crashes and network requests when your application is in the background (for example, no active view is available). 
-
-Add the following snippet during RUM configuration:
-
-```kotlin
-.trackBackgroundEvents(true)
-```
-<div class="alert alert-info"><p>Tracking background events may lead to additional sessions, which can impact billing. For questions, <a href="https://docs.datadoghq.com/help/">contact Datadog support.</a></p>
-</div>
-
 ## Track errors
 
 [Kotlin Multiplatform Crash Reporting and Error Tracking][12] displays any issues in your application and the latest available errors. You can view error details and attributes including JSON in the [RUM Explorer][13].

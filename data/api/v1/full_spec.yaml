@@ -6033,6 +6033,9 @@ components:
 
         Make sure to use an application key created by an admin.'
       properties:
+        description:
+          description: A description of the pipeline.
+          type: string
         filter:
           $ref: '#/components/schemas/LogsFilter'
         id:
@@ -6055,6 +6058,12 @@ components:
           items:
             $ref: '#/components/schemas/LogsProcessor'
           type: array
+        tags:
+          description: A list of tags associated with the pipeline.
+          items:
+            description: A single tag using the format `key:value`.
+            type: string
+          type: array
         type:
           description: Type of pipeline.
           example: pipeline
@@ -6064,7 +6073,7 @@ components:
       - name
       type: object
     LogsPipelineList:
-      description: Array of pipeline ID strings.
+      description: Array of all log pipeline objects configured for the organization.
       items:
         $ref: '#/components/schemas/LogsPipeline'
       type: array
@@ -29985,7 +29994,7 @@ paths:
         type: idempotent
   /api/v1/monitor:
     get:
-      description: Get details about the specified monitor from your organization.
+      description: Get all monitors from your organization.
       operationId: ListMonitors
       parameters:
       - description: 'When specified, shows additional information about the group
@@ -30068,6 +30077,7 @@ paths:
           content:
             application/json:
               schema:
+                description: An array of monitor objects.
                 items:
                   $ref: '#/components/schemas/Monitor'
                 type: array
@@ -30091,7 +30101,7 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - monitors_read
-      summary: Get all monitor details
+      summary: Get all monitors
       tags:
       - Monitors
       x-menu-order: 2
@@ -38762,10 +38772,17 @@ tags:
     for more information.
   name: Embeddable Graphs
 - description: 'The Event Management API allows you to programmatically post events
-    to the Events Explorer
+    to the Events Explorer and fetch events from the Events Explorer. See the [Event
+    Management page](https://docs.datadoghq.com/service_management/events/) for more
+    information.
 
-    and fetch events from the Events Explorer. See the [Event Management page](https://docs.datadoghq.com/service_management/events/)
-    for more information.'
+
+    **Update to Datadog monitor events `aggregation_key` starting March 1, 2025:**
+    The Datadog monitor events `aggregation_key` is unique to each Monitor ID. Starting
+    March 1st, this key will also include Monitor Group, making it unique per *Monitor
+    ID and Monitor Group*. If you''re using monitor events `aggregation_key` in dashboard
+    queries or the Event API, you must migrate to use `@monitor.id`. Reach out to
+    [support](https://www.datadoghq.com/support/) if you have any question.'
   name: Events
 - description: 'Configure your Datadog-Google Cloud Platform (GCP) integration directly
 
