@@ -15,6 +15,7 @@ cascade:
 {{< whatsnext desc="General Guides:" >}}
     {{< nextlink href="synthetics/guide/identify_synthetics_bots/" >}}Identify Synthetic bots{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/clone-test" >}}Clone your Synthetic tests{{< /nextlink >}}
+    {{< nextlink href="synthetics/guide/otp-email-synthetics-test" >}}Extract a One-Time-Passcode from Email Body using Synthetic Tests{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Alerting:" >}}
