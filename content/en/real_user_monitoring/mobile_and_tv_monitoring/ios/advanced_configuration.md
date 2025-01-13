@@ -122,7 +122,7 @@ let rum = RUMMonitor.shared()
 @IBAction func didTapDownloadResourceButton(_ sender: UIButton) {
     rum.addAction(
         type: .tap,
-        name: sender.currentTitle ?? "",
+        name: sender.currentTitle ?? ""
     )
 }
 ```
@@ -261,6 +261,26 @@ Datadog.setUserInfo(id: "1234", name: "John Doe", email: "john@doe.com")
 ```
 {{% /tab %}}
 {{< /tabs >}}
+
+## Track background events
+
+<div class="alert alert-info"><p>Tracking background events may lead to additional sessions, which can impact billing. For questions, <a href="https://docs.datadoghq.com/help/">contact Datadog support.</a></p>
+</div>
+
+You can track events such as crashes and network requests when your application is in the background (for example, no active view is available).
+
+To track background events, add the following snippet during initialization in your Datadog configuration:
+
+```swift
+import DatadogRUM
+
+RUM.enable(
+  with: RUM.Configuration(
+    ...
+    trackBackgroundEvents: true
+  )
+)
+```
 
 ## Initialization Parameters
 

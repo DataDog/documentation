@@ -1,28 +1,18 @@
 ---
-title: Fluent Bit
+title: Send Fluent Bit Logs to Datadog
 name: fluentbit
-custom_kind: integration
 description: 'Configure Fluent Bit to collect, parse, and forward log data from several sources.'
-short_description: 'Collect, parse, and forward log data from several sources.'
-categories:
-    - log collection
-doc_link: /integrations/fluentbit/
-dependencies:
-    ['https://github.com/DataDog/documentation/blob/master/content/en/integrations/fluentbit.md']
-has_logo: true
-integration_title: Fluent Bit
-is_public: true
-public_title: Datadog-Fluent Bit Integration
 further_reading:
     - link: 'https://www.datadoghq.com/blog/fluentbit-integration-announcement/'
       tag: 'Blog'
       text: 'Centralize your logs with Datadog and Fluent Bit'
-integration_id: "fluentbit"
 ---
 
 ## Overview
 
 Configure Fluent Bit to collect, parse, and forward log data from several different sources to Datadog for monitoring. Fluent Bit has a small memory footprint (~450 KB), so you can use it to collect logs in environments with limited resources, such as containerized services and embedded Linux systems. [Datadog's Fluent Bit output plugin][1] supports Fluent Bit v1.3.0+.
+
+To configure the Fluent Bit Agent check, see [Fluent Bit (Agent)][13].
 
 ## Setup
 
@@ -87,3 +77,5 @@ Need help? Contact [Datadog support][11].
 [10]: /getting_started/tagging/
 [11]: /help/
 [12]: /logs/log_configuration/pipelines/?tab=host#preprocessing
+[13]: /integrations/fluentbit/
+
