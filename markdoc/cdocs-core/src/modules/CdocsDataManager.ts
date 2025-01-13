@@ -1,19 +1,7 @@
 import { YamlConfigParser } from './YamlConfigParser';
 import { ContentFiltersConfigByLang } from '../schemas/contentFiltersConfig';
 
-// TODO: In the config directory, use a glossary folder for each glossary type,
-// and update the load functions.
 // TODO: Support more than one file in every glossary folder.
-// TODO: Protect against accidental translation. No ID should appear in translated YAML
-// that does not appear in the default language YAML.
-
-// TODO: Option set -> option group.
-
-// TODO: Start the docs with a config object that includes
-// the filter glossary, the option glossary,
-// and the option set glossary.
-
-// TODO: Eventually make the data manager the only export of this package.
 
 export class CdocsDataManager {
   static loadContentFiltersConfig(p: {

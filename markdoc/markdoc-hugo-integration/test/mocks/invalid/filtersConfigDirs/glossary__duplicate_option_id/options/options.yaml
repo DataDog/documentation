@@ -1,8 +1,0 @@
-options:
-- id: red
-  label: Red
-- id: green
-  label: Green
-# Mistake: The option id 'red' is used twice.
-- id: red
-  label: Red Number Two

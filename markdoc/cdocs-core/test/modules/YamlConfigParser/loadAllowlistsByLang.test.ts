@@ -9,17 +9,4 @@ describe('YamlConfigParser.loadGlossariesByLang', () => {
   test('true is true', () => {
     expect(true).toBe(true);
   });
-
-  /*
-  test('matches the snapshot', async () => {
-    const glossariesByLang = YamlConfigParser.loadGlossariesByLang({
-      langs,
-      filtersConfigDir: VALID_FILTERS_CONFIG_DIR,
-    });
-
-    await expect(glossariesByLang).toMatchFileSnapshot(
-      `${SNAPSHOTS_DIR}/helperModules/YamlConfigParser/valid/glossariesByLang.test.snap`,
-    );
-  });
-  */
 });

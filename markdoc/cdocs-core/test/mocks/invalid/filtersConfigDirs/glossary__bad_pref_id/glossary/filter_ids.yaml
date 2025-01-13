@@ -1,5 +1,0 @@
-filters:
-- id: BAD_FILTER_ID
-  label: Bad Filter ID
-- id: color
-  label: Color

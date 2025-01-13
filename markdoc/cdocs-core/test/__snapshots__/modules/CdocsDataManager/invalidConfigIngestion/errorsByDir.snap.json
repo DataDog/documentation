@@ -1,0 +1,174 @@
+{
+  "duplicate_id_in_options_glossary": {
+    "issues": [
+      {
+        "code": "custom",
+        "message": "Invalid input",
+        "path": [
+          "options"
+        ]
+      }
+    ],
+    "name": "ZodError"
+  },
+  "extra_filter_data": {
+    "issues": [
+      {
+        "code": "unrecognized_keys",
+        "keys": [
+          "unexpected_key"
+        ],
+        "path": [
+          "filters",
+          0
+        ],
+        "message": "Unrecognized key(s) in object: 'unexpected_key'"
+      }
+    ],
+    "name": "ZodError"
+  },
+  "extra_option_data": {
+    "issues": [
+      {
+        "code": "unrecognized_keys",
+        "keys": [
+          "default"
+        ],
+        "path": [
+          "options",
+          0
+        ],
+        "message": "Unrecognized key(s) in object: 'default'"
+      }
+    ],
+    "name": "ZodError"
+  },
+  "invalid_id_in_filter": {
+    "issues": [
+      {
+        "validation": "regex",
+        "code": "invalid_string",
+        "message": "Invalid",
+        "path": [
+          "filters",
+          0,
+          "id"
+        ]
+      }
+    ],
+    "name": "ZodError"
+  },
+  "missing_default_value_in_option_group": {
+    "issues": [
+      {
+        "code": "custom",
+        "message": "Invalid input",
+        "path": [
+          "primary_color_options"
+        ]
+      }
+    ],
+    "name": "ZodError"
+  },
+  "missing_label_in_filter": {
+    "issues": [
+      {
+        "code": "invalid_type",
+        "expected": "string",
+        "received": "undefined",
+        "path": [
+          "filters",
+          0,
+          "label"
+        ],
+        "message": "Required"
+      }
+    ],
+    "name": "ZodError"
+  },
+  "missing_option_id_in_option_group": {
+    "issues": [
+      {
+        "code": "invalid_type",
+        "expected": "string",
+        "received": "undefined",
+        "path": [
+          "primary_color_options",
+          0,
+          "id"
+        ],
+        "message": "Required"
+      }
+    ],
+    "name": "ZodError"
+  },
+  "missing_options_glossary": {
+    "issues": [
+      {
+        "code": "custom",
+        "message": "Invalid input",
+        "path": [
+          "color_options"
+        ]
+      }
+    ],
+    "name": "ZodError"
+  },
+  "multiple_defaults_in_option_group": {
+    "issues": [
+      {
+        "code": "custom",
+        "message": "Invalid input",
+        "path": [
+          "primary_color_options"
+        ]
+      }
+    ],
+    "name": "ZodError"
+  },
+  "multiword_id_in_option_group": {
+    "issues": [
+      {
+        "validation": "regex",
+        "code": "invalid_string",
+        "message": "Invalid",
+        "path": [
+          "primary_color_options",
+          0,
+          "id"
+        ]
+      }
+    ],
+    "name": "ZodError"
+  },
+  "options__spinal_case_id": {
+    "issues": [
+      {
+        "validation": "regex",
+        "code": "invalid_string",
+        "message": "Invalid",
+        "path": [
+          "primary_color_options",
+          0,
+          "id"
+        ]
+      }
+    ],
+    "name": "ZodError"
+  },
+  "punctuated_id_in_option_group": {
+    "issues": [
+      {
+        "validation": "regex",
+        "code": "invalid_string",
+        "message": "Invalid",
+        "path": [
+          "primary_color_options",
+          0,
+          "id"
+        ]
+      }
+    ],
+    "name": "ZodError"
+  }
+}

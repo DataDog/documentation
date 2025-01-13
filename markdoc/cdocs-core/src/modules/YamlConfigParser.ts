@@ -89,6 +89,12 @@ export class YamlConfigParser {
       const rawGlossary = RawOptionGlossarySchema.parse(yaml.load(glossaryStr));
       result = rawGlossary.options.reduce<Record<string, OptionGlossaryEntry>>(
         (acc, entry) => {
+          // Disallow duplicate entries
+          if (acc[entry.id]) {
+            throw new Error(
+              `Duplicate option ID '${entry.id}' found in file ${glossaryFilePath}`,
+            );
+          }
           acc[entry.id] = entry;
           return acc;
         },
@@ -225,7 +231,6 @@ export class YamlConfigParser {
 
     // Merge all files into the result glossary
     filePaths.forEach((filePath) => {
-      console.log('loading raw option group glossary from', filePath);
       const glossaryStr = fs.readFileSync(filePath, 'utf8');
       const rawGlossary = RawOptionGroupGlossarySchema.parse(yaml.load(glossaryStr));
 
