@@ -1,7 +1,5 @@
-import { FilterOptionsConfig } from '../schemas/filterOptions';
 import { GLOBAL_PLACEHOLDER_REGEX } from '../schemas/regexes';
 import { Frontmatter } from '../schemas/frontMatter';
-import { Glossary } from '../schemas/glossary';
 import { PLACEHOLDER_REGEX } from '../schemas/regexes';
 import {
   PageFiltersManifest,

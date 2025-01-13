@@ -1,6 +1,4 @@
 import { YamlConfigParser } from './YamlConfigParser';
-import { FilterOptionsConfig } from '../schemas/filterOptions';
-import { Glossary } from '../schemas/glossary';
 import { ContentFiltersConfigByLang } from '../schemas/contentFiltersConfig';
 
 // TODO: In the config directory, use a glossary folder for each glossary type,
@@ -23,8 +21,6 @@ export class CdocsDataManager {
     langs: string[];
     defaultLang?: string;
   }): {
-    glossariesByLang: Record<string, Glossary>;
-    filterOptionsConfigByLang: Record<string, FilterOptionsConfig>;
     contentFiltersConfigByLang: ContentFiltersConfigByLang;
   } {
     const defaultLang = p.defaultLang || 'en';
@@ -52,49 +48,6 @@ export class CdocsDataManager {
       optionGlossariesByLang,
     });
 
-    // Load the legacy glossaries for all languages
-    const glossariesByLang = YamlConfigParser.loadGlossariesByLang({
-      filtersConfigDir: p.configDir,
-      langs: p.langs,
-    });
-
-    // Load the option sets for the default language
-    const filterOptionsConfigByLang: Record<string, FilterOptionsConfig> = {
-      en: YamlConfigParser.loadFiltersConfigFromLangDir({
-        dir: p.configDir + `/${defaultLang}`,
-        glossary: glossariesByLang[defaultLang],
-      }),
-    };
-
-    // Load translated filter configurations,
-    // backfilling with the default language
-    p.langs.forEach((lang) => {
-      if (lang === 'en') {
-        return;
-      }
-
-      let translatedFilterOptionsConfig: FilterOptionsConfig;
-      try {
-        translatedFilterOptionsConfig = YamlConfigParser.loadFiltersConfigFromLangDir({
-          dir: p.configDir + '/' + lang,
-          glossary: glossariesByLang[lang],
-        });
-      } catch (e) {
-        // If no filters config directory exists for this language,
-        // assume no translated filters exist
-        if (e instanceof Object && 'code' in e && e.code === 'ENOENT') {
-          translatedFilterOptionsConfig = {};
-        } else {
-          throw e;
-        }
-      }
-
-      filterOptionsConfigByLang[lang] = {
-        ...filterOptionsConfigByLang[defaultLang],
-        ...translatedFilterOptionsConfig,
-      };
-    });
-
     const contentFiltersConfigByLang: ContentFiltersConfigByLang = {};
 
     p.langs.forEach((lang) => {
@@ -106,8 +59,6 @@ export class CdocsDataManager {
     });
 
     return {
-      glossariesByLang,
-      filterOptionsConfigByLang,
       contentFiltersConfigByLang,
     };
   }

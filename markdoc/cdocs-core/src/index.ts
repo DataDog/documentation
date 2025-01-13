@@ -18,17 +18,6 @@ export {
   PageFilterConfigSchema,
 } from './schemas/frontMatter';
 
-export { FilterOptionsConfig, FilterOptionsConfigSchema } from './schemas/filterOptions';
-
-export {
-  Glossary,
-  GlossarySchema,
-  GlossaryConfig,
-  GlossaryConfigSchema,
-  GlossaryEntryConfig,
-  GlossaryEntryConfigSchema,
-} from './schemas/glossary';
-
 export {
   PageFiltersManifest,
   PageFiltersManifestSchema,

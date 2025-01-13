@@ -6,7 +6,7 @@ import { z } from 'zod';
 import { SNAKE_CASE_REGEX } from '../regexes';
 
 /**
- * A single entry in a filter glossary,
+ * A single entry in a filter glossary.
  */
 export const FilterGlossaryEntrySchema = z
   .object({

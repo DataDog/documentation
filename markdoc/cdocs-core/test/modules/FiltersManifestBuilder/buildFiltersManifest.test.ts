@@ -2,8 +2,6 @@ import { describe, test, expect } from 'vitest';
 import { FiltersManifestBuilder } from '../../../src/modules/FiltersManifestBuilder';
 import {
   paintColorsFrontmatter,
-  paintColorsFilterOptionsConfig,
-  paintColorsGlossary,
   paintColorsContentFiltersConfig,
 } from '../../mocks/valid/paintColorsConfig';
 import _ from 'lodash';
@@ -15,7 +13,6 @@ describe('FiltersManifestBuilder.build', () => {
     const manifest = FiltersManifestBuilder.build({
       frontmatter: paintColorsFrontmatter,
       contentFiltersConfig: paintColorsContentFiltersConfig,
-      glossary: paintColorsGlossary,
     });
 
     const expectedManifest: PageFiltersManifest = {
@@ -200,7 +197,6 @@ describe('FiltersManifestBuilder.build', () => {
     const manifest = FiltersManifestBuilder.build({
       frontmatter: invalidFrontmatter,
       contentFiltersConfig: paintColorsContentFiltersConfig,
-      glossary: paintColorsGlossary,
     });
 
     expect(manifest.errors.length).toEqual(1);
@@ -221,7 +217,6 @@ describe('FiltersManifestBuilder.build', () => {
     const manifest = FiltersManifestBuilder.build({
       frontmatter: paintColorsFrontmatter,
       contentFiltersConfig: invalidContentFiltersConfig,
-      glossary: paintColorsGlossary,
     });
 
     expect(manifest.errors.length).toEqual(1);

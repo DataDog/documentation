@@ -1,8 +1,8 @@
 import { z } from 'zod';
 import { FILTER_OPTIONS_ID_REGEX, SNAKE_CASE_REGEX } from './regexes';
-import { FilterOptionsConfigSchema } from './filterOptions';
 import { PageFilterConfigSchema } from './frontMatter';
 import { CdocsCoreErrorSchema } from './errors';
+import { OptionGroupGlossarySchema } from './glossaries/optionGroupGlossary';
 
 /**
  * An option available in a resolved page filter
@@ -161,11 +161,8 @@ export type PageFilterManifest = z.infer<typeof PageFilterManifestSchema>;
  */
 export const PageFiltersManifestSchema = z
   .object({
-    filtersById: z.record(
-      z.string().regex(SNAKE_CASE_REGEX),
-      PageFilterManifestSchema,
-    ),
-    optionSetsById: FilterOptionsConfigSchema,
+    filtersById: z.record(z.string().regex(SNAKE_CASE_REGEX), PageFilterManifestSchema),
+    optionSetsById: OptionGroupGlossarySchema,
     defaultValsByFilterId: z.record(
       z.string().regex(SNAKE_CASE_REGEX),
       z.string().regex(SNAKE_CASE_REGEX),
@@ -247,7 +244,7 @@ export const PageFiltersClientSideManifestSchema = z
       z.string().regex(SNAKE_CASE_REGEX),
       PageFilterClientSideManifestSchema,
     ),
-    optionSetsById: FilterOptionsConfigSchema,
+    optionSetsById: OptionGroupGlossarySchema,
     defaultValsByFilterId: z.record(
       z.string().regex(SNAKE_CASE_REGEX),
       z.string().regex(SNAKE_CASE_REGEX),

@@ -25,6 +25,19 @@ export const OptionGroupGlossaryEntrySchema = z.array(OptionGroupItemSchema);
 
 /**
  * A single entry in an option group glossary.
+ *
+ * @example
+ * [
+ *   {
+ *     display_name: "Postgres",
+ *     id: "postgres",
+ *     default: true
+ *   },
+ *   {
+ *     display_name: "MySQL",
+ *     id: "mysql"
+ *   }
+ * ]
  */
 export type OptionGroupGlossaryEntry = z.infer<typeof OptionGroupGlossaryEntrySchema>;
 
