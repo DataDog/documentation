@@ -553,7 +553,7 @@ The `LLMObs.submit_evaluation_for()` method accepts the following arguments:
 
 `span_with_tag_value`
 : required - _dictionary_
-<br />A dictionary that uniquely identifies the span associated with this evaluation. Must contain tag_key (string) and tag_value (string).
+<br />A dictionary that uniquely identifies the span associated with this evaluation. Must contain `tag_key` (string) and `tag_value` (string).
 
 `ml_app`
 : required - _string_
@@ -583,10 +583,10 @@ def llm_call():
         tags = {'msg_id': msg_id}
     )
 
-    LLMObs.submit_evaluation(
+    LLMObs.submit_evaluation_for(
         span_with_tag_value = {
-            "tag": "msg_id",
-            "value": msg_id
+            "tag_key": "msg_id",
+            "tag_value": msg_id
         },
         ml_app = "chatbot",
         label="harmfulness",
