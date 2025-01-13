@@ -9,6 +9,9 @@ further_reading:
 - link: /sensitive_data_scanner/regular_expression_syntax
   tag: ドキュメント
   text: カスタムスキャンルールのための正規表現構文
+- link: /sensitive_data_scanner/guide/best_practices_for_creating_custom_rules
+  tag: ドキュメント
+  text: カスタムルール作成のベストプラクティス
 - link: https://www.datadoghq.com/blog/scaling-sensitive-data-scanner/
   tag: ブログ
   text: 機密データスキャナーを使用して、機密データの問題を大規模に発見、トリアージ、そして修復する
@@ -57,7 +60,7 @@ title: Sensitive Data Scanner
 **環境:**
 
 {{< callout url="https://www.datadoghq.com/private-beta/sensitive-data-scanner-using-agent-in-your-premises/" >}}
-Datadog Agent の Sensitive Data Scanner サポートはベータ版です。参加するには、<strong>Request Access</strong> をクリックしてください。
+Datadog Agent の Sensitive Data Scanner サポートはプレビュー版です。参加するには、<strong>Request Access</strong> をクリックしてください。
 {{< /callout >}}
 
 - **Sensitive Data Scanner using the Agent** では、ログを Datadog バックエンドに送信する前に Datadog がログをマスキングし、マスキングされていないログはプレミス外に出る必要がなくなります。この方法では、組織ごとに 1 つのスキャングループに制限され、定義済みのライブラリルールしか使用できません。
@@ -185,7 +188,7 @@ Terraform については、[Datadog Sensitive Data Scanner ルール][1]のリ�
 1. **Create keyword dictionary** では、正規表現条件とマッチする際の検出精度を高めるためにキーワードを追加します。例えば、16 桁の Visa クレジットカード番号をスキャンする場合、`visa`、`credit`、`card` などのキーワードを追加できます。また、これらのキーワードがマッチした値から指定された文字数以内に存在するよう条件を設定することも可能です。デフォルトでは、キーワードはマッチした値の前に 30 文字以内に配置されている必要があります。
 {{% sds-scanning-rule %}}
 1. **Add Rule** をクリックします。
-{{< /collapse-content >}} 
+{{< /collapse-content >}}
 
 **注**:
 
@@ -331,17 +334,17 @@ Datadog プラットフォームが機能上必要とする予約キーワード
 {{% /tab %}}
 {{< /tabs >}}
 
-## Data Security
+## Cloud Storage のスキャン
 
-"{{< callout url="https://www.datadoghq.com/private-beta/data-security" >}}
-Data Security はベータ版です。参加するには、<strong>Request Access</strong> をクリックしてください。
-{{< /callout >}}"
+{{< callout header="Limited Availability" url="https://www.datadoghq.com/private-beta/data-security" >}}
+  Scanning support for Amazon S3 buckets and RDS instances is in Limited Availability. To enroll, click <strong>Request Access</strong>.
+{{< /callout >}}
 
-もし [Sensitive Data Scanner][6] と [Cloud Security Management][7] が有効になっている場合、Data Security を使用して機密データを見つけ、Amazon S3 バケットや RDS インスタンスに影響を与えるセキュリティ問題を修正できます。
+[Sensitive Data Scanner][6] を有効にしている場合、Amazon S3 バケットや RDS インスタンス内の機密データをカタログ化し、分類することができます。
 
-Data Security は、クラウド環境に[エージェントレススキャナー][8]をデプロイして機密データをスキャンします。これらのスキャンインスタンスは、[Remote Configuration][9] を通じてすべての S3 バケットと RDS インスタンスのリストを取得し、時間をかけてすべてのデータストア内の CSV や JSON などのテキストファイルやテーブルをスキャンする指示を設定します。Data Security は、Sensitive Data Scanner が提供するルールを利用してマッチを見つけます。マッチが見つかると、マッチの場所がスキャンインスタンスから Datadog に送信されます。データストアとそのファイルはお客様の環境でのみ読み取られ、機密データが Datadog に送信されることはありません。
+Sensitive Data Scanner は、クラウド環境に[エージェントレススキャナー][8]をデプロイして機密データをスキャンします。これらのスキャンインスタンスは、[Remote Configuration][9] を通じてすべての S3 バケットと RDS インスタンスのリストを取得し、CSV や JSON などのテキストファイルや、各データストア内のテーブルを時間をかけてスキャンするように設定されています。Sensitive Data Scanner は、[全ルールライブラリ][11]を活用して一致を検出します。一致が見つかると、その場所がスキャンインスタンスから Datadog に送信されます。データストアとそのファイルはお客様の環境内でのみ読み取られ、機密データが Datadog に送信されることはありません。
 
-機密データとの一致を表示すると同時に、Data Security は、機密データストアに影響を与える Cloud Security Management によって検出されたセキュリティ問題も表示します。問題をクリックすると、Cloud Security Management 内でトリアージと修復を続けることができます。
+Cloud Storage は、機密データの一致を表示するだけでなく、[Cloud Security Management][7] によって検出された、機密データストアに影響を与えるセキュリティ問題も表示します。問題をクリックすると、Cloud Security Management 内でトリアージと修正を続けることができます。
 
 ## すぐに使えるダッシュボード
 
@@ -362,8 +365,9 @@ Sensitive Data Scanner を完全にオフにするには、各スキャングル
 [3]: /ja/observability_pipelines/processors/#sensitive-data-scanner
 [4]: /ja/observability_pipelines/
 [5]: /ja/logs/guide/logs-rbac/
-[6]: /ja/sensitive_data_scanner/investigate_sensitive_data_issues/
+[6]: /ja/sensitive_data_scanner/
 [7]: /ja/security/cloud_security_management
 [8]: /ja/security/cloud_security_management/setup/agentless_scanning
 [9]: /ja/agent/remote_config
 [10]: https://app.datadoghq.com/dash/integration/sensitive_data_scanner
+[11]: /ja/sensitive_data_scanner/library_rules/

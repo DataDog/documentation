@@ -1,5 +1,6 @@
 ---
 title: Agent 5 Permission Issues
+private: true
 ---
 
 The Agent needs a specific set of permissions in order to collect your data on your host, find the most common permission issues below and how to solve them.

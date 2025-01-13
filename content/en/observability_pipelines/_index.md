@@ -32,6 +32,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/observability-pipelines/"
   tag: "blog"
   text: "Aggregate, process, and route logs easily with Datadog Observability Pipelines"
+- link: "https://www.datadoghq.com/blog/observability-pipelines-stream-logs-in-ocsf-format/"
+  tag: "blog"
+  text: "Stream logs in the OCSF format to your preferred security vendors or data lakes with Observability Pipelines"
 ---
 
 {{< site-region region="gov" >}}
@@ -44,7 +47,7 @@ Datadog recommends you update Observability Pipelines Worker (OPW) with every mi
 
 ## Overview
 
-{{< img src="observability_pipelines/op_marketecture_08232024.png" alt="A graphic showing different data sources on the left that flows into three hexagons named transform, reduce, and route, with arrows pointing to different destinations for the modified data" style="width:100%;" >}}
+{{< img src="observability_pipelines/op_marketecture_11042024.png" alt="A graphic showing data being aggregated from a variety of sources, processed and enriched by the observability pipelines worker in your own environment, and then being routed to the security, analytics, and storage destinations of your choice" style="width:100%;" >}}
 
 Observability Pipelines allows you to collect and process logs within your own infrastructure, before routing them to downstream integrations. Use out-of-the-box [templates](#start-building-pipelines-with-out-of-the-box-templates) to build and deploy pipelines based on your use case.
 

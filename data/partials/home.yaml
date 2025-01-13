@@ -57,9 +57,13 @@ nav_sections:
         icon: events
         desc: Track notable changes and alerts in your applications and infrastructure
       - title: Workflow Automation
-        link: workflows
+        link: service_management/workflows/
         icon: workflows
         desc: Automate and orchestrate processes across your tech stack
+      - title: App Builder
+        link: service_management/app_builder/
+        icon: app-builder
+        desc: Create low-code applications to streamline your internal tools
   - nav_section:
     - name: 'Products'
     - navtiles:
@@ -131,7 +135,7 @@ nav_sections:
         link: continuous_integration/
         icon: ci
         desc: Monitor the health and performance of your CI pipelines
-      - title: Test Visibility
+      - title: Test Optimization
         link: tests/
         icon: ci
         desc: Detect flaky tests and identify commits introducing flaky tests

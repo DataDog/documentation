@@ -6,7 +6,7 @@ categories:
 - rastreo de problemas
 - suministrar
 - control de fuentes
-custom_kind: integración
+custom_kind: integration
 dependencies: []
 description: Rastrea las métricas principales de Azure DevOps.
 doc_link: https://docs.datadoghq.com/integrations/azure_devops
@@ -145,8 +145,8 @@ La duración del elemento de trabajo se genera a partir de eventos _work item up
 
 **Nota**: Si se vuelve a abrir un elemento de trabajo de `Done`, la próxima vez que se pase a `Done` se generará otro punto de datos. El punto de datos inicial no se modifica y el nuevo punto de datos sigue midiendo desde el momento en que se creó inicialmente el elemento de trabajo.
 
-#### Tu test de suscripción de enlace de servicio devuelve un mensaje de éxito, ¿por qué no llegan <txprotected>eventos</txprotected> a Datadog?
-El test de suscripción de enlace de servicio solo hace checks si Azure DevOps puede enviar <txprotected>eventos</txprotected> a Datadog. No valida tu clave de la API ni el sitio de tu organización Datadog (EE. UU. o UE). Asegúrate de que la clave de la API y el sitio sean correctos.
+#### Tu test de suscripción de enlace de servicio devuelve un mensaje de éxito, ¿por qué no llegan eventos a Datadog?
+El test de suscripción de enlace de servicio solo hace checks si Azure DevOps puede enviar eventos a Datadog. No valida tu clave de la API ni el sitio de tu organización Datadog (EE. UU. o UE). Asegúrate de que la clave de la API y el sitio sean correctos.
 
 ## Leer más
 

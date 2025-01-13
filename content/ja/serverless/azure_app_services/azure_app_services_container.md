@@ -29,11 +29,11 @@ This instrumentation method uses `serverless-init` and provides the following ad
 
 ### Dockerfile
 
-Datadog publishes new releases of the serverless-init container image to Google's gcr.io, AWS's ECR, and on Docker Hub:
+Datadog publishes new releases of the serverless-init container image to Google's gcr.io, Azure ACR, AWS's ECR, and on Docker Hub:
 
-| dockerhub.io | gcr.io | public.ecr.aws |
-| ---- | ---- | ---- |
-| datadog/serverless-init | gcr.io/datadoghq/serverless-init | public.ecr.aws/datadog/serverless-init |
+| datadoghq.azurecr.io                 | dockerhub.io            | gcr.io                           | public.ecr.aws                         |
+| ------------------------------------ | ----------------------- | -------------------------------- | -------------------------------------- |
+| datadoghq.azurecr.io/serverless-init | datadog/serverless-init | gcr.io/datadoghq/serverless-init | public.ecr.aws/datadog/serverless-init |
 
 イメージはセマンティックバージョニングに基づいてタグ付けされ、新しいバージョンごとに 3 つの関連タグが付与されます。
 
@@ -110,18 +110,18 @@ Datadog publishes new releases of the serverless-init container image to Google'
 
 ### 環境変数
 
-| 変数 | 説明 |
-| -------- | ----------- |
-|`DD_API_KEY`| [Datadog API キー][6] - **必須**|
-| `DD_SITE` | [Datadog サイト][4] - **必須** |
-| `DD_LOGS_ENABLED` | true の場合、ログ (stdout と stderr) を Datadog に送信します。デフォルトは false です。 |
-| `DD_LOGS_INJECTION`| true の場合、[Java][10]、[Node.js][11]、[.NET][12]、および [PHP][13] でサポートされているロガーのトレースデータですべてのログをリッチ化します。[Python][14]、[Go][15]、[Ruby][16] については追加のドキュメントを参照してください。 |
-| `DD_TRACE_SAMPLE_RATE`|  トレース取り込みのサンプルレート `0.0` と `1.0` をコントロールします|
-| `DD_SERVICE`      | [統合サービスタグ付け][5]を参照してください。                                       |
-| `DD_VERSION`      | [統合サービスタグ付け][5]を参照してください。                                       |
-| `DD_ENV`          | [統合サービスタグ付け][5]を参照してください。                                       |
-| `DD_SOURCE`       | [統合サービスタグ付け][5]を参照してください。                                       |
-| `DD_TAGS`         | [統合サービスタグ付け][5]を参照してください。                                       |
+| 変数                   | 説明                                                                                                                                                                                                                               |
+| ---------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `DD_API_KEY`           | [Datadog API キー][6] - **必須**                                                                                                                                                                                                   |
+| `DD_SITE`              | [Datadog サイト][4] - **必須**                                                                                                                                                                                                     |
+| `DD_LOGS_ENABLED`      | true の場合、ログ (stdout と stderr) を Datadog に送信します。デフォルトは false です。                                                                                                                                            |
+| `DD_LOGS_INJECTION`    | true の場合、[Java][10]、[Node.js][11]、[.NET][12]、および [PHP][13] でサポートされているロガーのトレースデータですべてのログをリッチ化します。[Python][14]、[Go][15]、[Ruby][16] については追加のドキュメントを参照してください。 |
+| `DD_TRACE_SAMPLE_RATE` | トレース取り込みのサンプルレート `0.0` と `1.0` をコントロールします                                                                                                                                                               |
+| `DD_SERVICE`           | [統合サービスタグ付け][5]を参照してください。                                                                                                                                                                                      |
+| `DD_VERSION`           | [統合サービスタグ付け][5]を参照してください。                                                                                                                                                                                      |
+| `DD_ENV`               | [統合サービスタグ付け][5]を参照してください。                                                                                                                                                                                      |
+| `DD_SOURCE`            | [統合サービスタグ付け][5]を参照してください。                                                                                                                                                                                      |
+| `DD_TAGS`              | [統合サービスタグ付け][5]を参照してください。                                                                                                                                                                                      |
 
 ## トラブルシューティング
 

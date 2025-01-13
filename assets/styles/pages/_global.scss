@@ -608,6 +608,7 @@ h5 {
     
     ul,
     ol,
+    dl,
     p {
         &:lang(ja) {
             font-size: 14px;
@@ -923,6 +924,7 @@ table,
 
 dl {
     border: 1px solid $ddgray;
+    font-size: 18px;
 
     a {
         border-bottom: 1px solid;

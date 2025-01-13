@@ -2,7 +2,7 @@
 categories:
 - gestión de eventos
 - notificaciones
-custom_kind: integración
+custom_kind: integration
 dependencies: []
 description: Ingiere alertas desde SolarWinds Orion a tus flujos de eventos de Datadog.
 doc_link: https://docs.datadoghq.com/integrations/solarwinds/

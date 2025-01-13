@@ -29,9 +29,11 @@ cascade:
 
 {{< whatsnext desc="API:" >}}
     {{< nextlink href="monitors/guide/monitor_api_options" >}}Monitor API options{{< /nextlink >}}
+    {{< nextlink href="monitors/guide/on_missing_data" >}}Migrating to On Missing Data Configuration{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="General Guides:" >}}
+    {{< nextlink href="/monitors/guide/monitor_best_practices" >}}Monitor Best Practices{{< /nextlink >}}
     {{< nextlink href="monitors/guide/how-to-set-up-rbac-for-monitors" >}}How to set up RBAC for monitors{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/synthetic-test-monitors" >}}How to create monitors in synthetic tests{{< /nextlink >}}
     {{< nextlink href="monitors/guide/non_static_thresholds" >}}How to monitor non-static thresholds{{< /nextlink >}}
@@ -43,6 +45,8 @@ cascade:
     {{< nextlink href="monitors/guide/integrate-monitors-with-statuspage" >}}Integrate monitors with Statuspage{{< /nextlink >}}
     {{< nextlink href="monitors/guide/github_gating" >}}Gating your GitHub Actions Deployments with Datadog Monitors{{< /nextlink >}}
     {{< nextlink href="monitors/guide/monitoring-available-disk-space" >}}Monitoring Available Disk Space{{< /nextlink >}}
+    {{< nextlink href="monitors/guide/on_missing_data" >}}Migrating to On Missing Data Configuration{{< /nextlink >}}
+    {{< nextlink href="monitors/guide/composite_use_cases" >}}Composite monitor use cases{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Querying:" >}}

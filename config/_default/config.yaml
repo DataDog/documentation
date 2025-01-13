@@ -113,6 +113,9 @@ module:
     - source: content/ko
       target: content
       lang: ko
+    - source: content/es
+      target: content
+      lang: es
     - source: static
       target: static
     - source: layouts

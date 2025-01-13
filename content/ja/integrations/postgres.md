@@ -26,8 +26,8 @@ assets:
     source_type_id: 28
     source_type_name: Postgres
   monitors:
-    percent_usage_connections: assets/monitors/percent_usage_connections.json
-    replication_delay: assets/monitors/replication_delay.json
+    Connection pool is reaching saturation point: assets/monitors/percent_usage_connections.json
+    Replication delay is high: assets/monitors/replication_delay.json
   saved_views:
     operations: assets/saved_views/operations.json
     postgres_pattern: assets/saved_views/postgres_pattern.json
@@ -52,7 +52,7 @@ draft: false
 git_integration_title: postgres
 integration_id: postgres
 integration_title: Postgres
-integration_version: 19.1.0
+integration_version: 22.2.0
 is_public: true
 manifest_version: 2.0.0
 name: postgres
@@ -102,6 +102,8 @@ tile:
 Postgres インテグレーションは、Postgres データベースの健全性とパフォーマンスに関するメトリクスをほぼリアルタイムで提供します。提供されるダッシュボードでこれらのメトリクスを可視化するとともに、モニターを作成して PostgreSQL の状態についてチームに警告を発することができます。
 
 [データベースモニタリング][2] (DBM) を有効にすると、クエリのパフォーマンスとデータベースの健全性について詳細なインサイトを取得できます。標準のインテグレーションに加え、Datadog DBM では、クエリレベルのメトリクス、リアルタイムおよび過去のクエリスナップショット、待機イベントの分析情報、データベースの負荷、クエリ実行計画、ブロッキングを引き起こしているクエリについてのインサイトが提供されます。
+
+Postgres バージョン 9.6〜16 がサポートされています。
 
 ## セットアップ
 
@@ -182,26 +184,26 @@ grant SELECT ON pg_stat_activity_dd to datadog;
       #
       - host: localhost
 
-        ## @param port - integer - required
-        ## Port to use when connecting to PostgreSQL.
+        ## @param port - integer - optional - default: 5432
+        ## The port to use when connecting to PostgreSQL.
         #
-        port: 5432
+        # port: 5432
 
-        ## @param user - string - required
-        ## Datadog Username created to connect to PostgreSQL.
+        ## @param username - string - required
+        ## The Datadog username created to connect to PostgreSQL.
         #
         username: datadog
 
-        ## @param pass - string - required
-        ## Password associated with the Datadog user.
+        ## @param password - string - optional
+        ## The password associated with the Datadog user.
         #
-        password: "<PASSWORD>"
+        # password: <PASSWORD>
 
         ## @param dbname - string - optional - default: postgres
-        ## Name of the PostgresSQL database to monitor.
-        ## Note: If omitted, the default system postgres database is queried.
+        ## The name of the PostgresSQL database to monitor.
+        ## Note: If omitted, the default system Postgres database is queried.
         #
-        dbname: "<DB_NAME>"
+        # dbname: <DBNAME>
 
         # @param disable_generic_tags - boolean - optional - default: false
         # The integration will stop sending server tag as is redundant with host tag
@@ -215,7 +217,7 @@ grant SELECT ON pg_stat_activity_dd to datadog;
     ```yaml
     instances:
       - host: localhost
-        port: 5432
+        # port: 5432
         database_autodiscovery:
           enabled: true
           # Optionally, set the include field to specify
@@ -232,14 +234,14 @@ grant SELECT ON pg_stat_activity_dd to datadog;
     ```yaml
     instances:
       - host: example-service-primary.example-host.com
-        port: 5432
+        # port: 5432
         username: datadog
         password: '<PASSWORD>'
         relations:
           - relation_name: products
           - relation_name: external_seller_products
       - host: example-service-replica-1.example-host.com
-        port: 5432
+        # port: 5432
         username: datadog
         password: '<PASSWORD>'
         relations:
@@ -248,7 +250,7 @@ grant SELECT ON pg_stat_activity_dd to datadog;
               - r
               - i
       - host: example-service-replica-2.example-host.com
-        port: 5432
+        # port: 5432
         username: datadog
         password: '<PASSWORD>'
         relations:

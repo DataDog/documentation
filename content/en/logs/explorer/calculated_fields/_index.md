@@ -8,6 +8,9 @@ further_reading:
 - link: "/logs/explorer/"
   tag: "Documentation"
   text: "Log Explorer"
+- link: "https://www.datadoghq.com/blog/calculated-fields-log-management-datadog/"
+  tag: "Blog"
+  text: "Transform and enrich your logs at query time with Calculated Fields"  
 ---
 
 

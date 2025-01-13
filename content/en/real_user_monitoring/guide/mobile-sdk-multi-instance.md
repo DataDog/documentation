@@ -16,6 +16,8 @@ Follow this guide to use multiple named instances of the SDK. Many methods of th
 
 **Note**: The SDK instance name should be consistent between application runs. Storage paths for SDK events depend on this.
 
+**Note**: Session Replay can only run on a single core at once. To switch to a different one, first stop the existing core it is running on.
+
 {{< tabs >}}
 {{% tab "Android" %}}
 
@@ -41,6 +43,8 @@ GlobalRumMonitor.get(namedSdkInstance)
 NdkCrashReports.enable(namedSdkInstance)
 
 WebViewTracking.enable(webView, allowedHosts, namedSdkInstance)
+
+SessionReplay.enable(sessionReplayConfig, namedSdkInstance)
 ```
 
 **Note**:
@@ -75,6 +79,8 @@ RUM.enable(
 Logs.enable(in: core)
 
 Trace.enable(in: core)
+
+SessionReplay.enable(with: sessionReplayConfig, in: core)
 ```
 
 Once the named SDK instance is initialized, you can retrieve it by calling `Datadog.sdkInstance(named: "<name>")` and use it as shown below.

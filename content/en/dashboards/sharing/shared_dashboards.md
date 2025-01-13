@@ -25,14 +25,14 @@ further_reading:
 
 Shared dashboards allow external viewers or users who prefer not to log into Datadog to access them. You can manage access using different sharing types, each with specific configuration options.
 
-Shared dashboards refresh every 30 seconds and this [refresh rate][1] cannot be customized.
+Shared dashboards refresh approximately every 60 seconds, and this [refresh rate][1] cannot be customized.
 
 ## Share states
 
 Shared dashboards can be in one of two share states:
 
 **Active**
-: The shared dashboard is assigned a specific URL and is available to viewers who are configured to access the dashboard. 
+: The shared dashboard is assigned a specific URL and is available to viewers who are configured to access the dashboard.
 
 **Paused**
 : Viewers cannot access the shared dashboard, even if invited. However, the shared dashboard URL remains linked to the dashboard, and previous access is restored if the dashboard is reset to **Active**.
@@ -41,20 +41,22 @@ Shared dashboards can be in one of two share states:
 
 ## Invite-only shared dashboards
 
-Invite-only dashboards allow you to share a dashboard with individual email addresses or specific email domains. 
+Invite-only dashboards allow you to share a dashboard with individual email addresses or specific email domains.
 
 To share a dashboard with one or more email addresses:
 
-1. Click the **Share** options in the upper right corner of the dashboard you want to share.  
-2. Select **Share Dashboard.**  
-3. Select **Invite only**.  
-4. Configure the desired options time, variable, and color options. For more details, see the [Configuration Options](#configuration-options).   
-5. Add the emails or email domains you want to grant access to. Add a domain to prevent public access and limit dashboard access to anyone with that domain address.  
+1. Click the **Share** options in the upper right corner of the dashboard you want to share.
+2. Select **Share Dashboard.**
+3. Select **Invite only**.
+4. Configure the desired options time, variable, and color options. For more details, see the [Configuration Options](#configuration-options).
+5. Add the emails or email domains you want to grant access to, and set the expiration date for each invite. Add a domain to prevent public access and limit dashboard access to anyone with that domain address.
 6. Click **Share Dashboard** to generate a share URL and email an access link to specific invitees. Emails are only sent to specific email addresses. For email domains, you need to manually distribute the dashboard link, as no email is sent.
+
+**Note**: Invited emails lose access at 12:00 a.m. local time on the expiration date.
 
 ### Access an invite-only shared dashboard
 
-Invitees to shared dashboards are sent an email with a limited-time access link. The email recipients need to click on the link within 1 hour to gain access to the shared dashboard.   
+Invitees to shared dashboards are sent an email with a limited-time access link. The email recipients need to click on the link within 1 hour to gain access to the shared dashboard.
 
 {{< img src="/dashboards/sharing/shared_dashboards/invite_only_dashboard_link.png" alt="Example of an email invite with a private dashboard access link" style="width:90%;" >}}
 
@@ -76,13 +78,24 @@ Public dashboards allow users to make a shared dashboard available to anyone on 
 
 To share a public dashboard:
 
-1. Click the **Share** options in the upper right corner of the dashboard you want to share.  
-2. Select **Share Dashboard**.  
-3. Select the **Public** option in the **Select a Share Type** step and acknowledge that you understand the dashboard will be accessible to anyone with the link.   
-4. Configure the desired options time, variable, and color options in the **Configure Dashboard** step.  
-5. Click **Share Dashboard** to create the share URL. 
+1. Click the **Share** options in the upper right corner of the dashboard you want to share.
+2. Select **Share Dashboard**.
+3. Select the **Public** option in the **Select a Share Type** step and acknowledge that you understand the dashboard will be accessible to anyone with the link.
+4. Configure the desired options time, variable, and color options in the **Configure Dashboard** step.
+5. Click **Share Dashboard** to create the share URL.
 
 By default, public dashboards are accessible for one year before they expire and switch to a **Paused** state. You can turn off or adjust the expiration date in the **Select a Share Type** step.
+
+## Embedded shared dashboards
+
+You can add embedded shared dashboards to a website with an iframe. Embedded shared dashboards can only be accessed through the allowlisted website base URLs. To share an embedded dashboard:
+
+1. Click **Share** in the upper-right corner of the dashboard.
+2. Select **Share Dashboard**.
+3. Select the **Embed** option in the **Select a Share Type** step.
+4. Configure the desired time, variable, and color options in the **Configure Dashboard** step.
+5. Add the website base URLs that you want to allowlist.
+6. Click **Share Dashboard** to create the share URL.
 
 ## Configuration Options
 
@@ -92,30 +105,30 @@ In the **Configure Dashboard** step, make changes to the shared dashboard.
 
 **Note**: Configuration changes to shared dashboards may take up to 5 minutes to propagate to all viewers. If changes don't appear immediately, wait a few minutes and refresh the dashboard.
 
-**Published Name**  
-: The published name will replace the dashboard title on the shared dashboard. This name is also the name the shared dashboard is listed under on the Shared Dashboard list page. 
+**Published Name**
+: The published name will replace the dashboard title on the shared dashboard. This name is also the name the shared dashboard is listed under on the Shared Dashboard list page.
 
-**Default Timeframe**  
+**Default Timeframe**
 : This sets the default timeframe for viewers of the shared dashboard. If "Allow viewers to change the timeframe" is toggled off, this is the only available timeframe. Toggling it on provides viewers with a fixed set of timeframe options to choose from, though custom timeframes and timeframe scrubbing are not supported.
 
-**Variables**  
+**Variables**
 : This setting lets users specify which template variables on the dashboard are available to viewers. Setting the same default and available value for a template variable makes it unchangeable by viewers. <br>**Note**: This applies even if the values are set to a wildcard (\*). <br><br>By default, the shared dashboard inherits the selected and available values currently used by the sharer.
 
-**Default Theme**  
+**Default Theme**
 : This setting lets users choose whether the shared dashboard is displayed in light or dark mode by default. Viewers can override this option at any time.
 
 ## Restrictions on Shared Dashboards
 
 ### Dashboards cannot be shared by deactivated users
 
-Shared dashboards must be shared by an active user within your organization. If the sharer is deactivated, the shared dashboard automatically enters a **Paused** state and cannot be reenabled until an active user claims it. The shared dashboard URL and configuration options are preserved during the paused state.
+Shared dashboards must be shared by an active user within your organization. If the sharer is deactivated, the shared dashboard **no longer displays data** until an active user claims ownership of it. The shared dashboard URL and configuration options are preserved during this state.
 
 ### Not all widget types are available
 
 The following widget types are not supported on shared dashboards. Widgets of these types on shared dashboards will not display data.
 
-* Topology Map  
-* List Widget (all data sources)  
+* Topology Map
+* List Widget (all data sources)
 * Legacy treemap widget
 
 ### Limited timeframe options
@@ -128,9 +141,9 @@ Shared dashboards support a limited number of timeframe options and do not allow
 
 To make a change to the share type, configuration, or recipients of a shared dashboard:
 
-1. Click the **Share** options in the upper right corner of the dashboard.   
-2. Select **Edit shared dashboard**.  
-3. Adjust the desired settings.  
+1. Click the **Share** options in the upper right corner of the dashboard.
+2. Select **Edit shared dashboard**.
+3. Adjust the desired settings.
 4. Click **Save** for the changes to take effect.
 
 You can temporarily pause or re-enable access to a shared dashboard from this menu.

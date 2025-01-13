@@ -404,7 +404,7 @@
                 "createdAt": "2019-09-19T10:00:00.000Z",
                 "createdBy": "00000000-0000-0000-0000-000000000000",
                 "description": "Any incidents that harm (or have the potential to) the confidentiality, integrity, or availability of our data.",
-                "is_default": true,
+                "is_default": false,
                 "lastModifiedBy": "00000000-0000-0000-0000-000000000000",
                 "modifiedAt": "2019-09-19T10:00:00.000Z",
                 "name": "Security Incident",
@@ -465,7 +465,7 @@
               "createdAt": "2019-09-19T10:00:00.000Z",
               "createdBy": "00000000-0000-0000-0000-000000000000",
               "description": "Any incidents that harm (or have the potential to) the confidentiality, integrity, or availability of our data.",
-              "is_default": true,
+              "is_default": false,
               "lastModifiedBy": "00000000-0000-0000-0000-000000000000",
               "modifiedAt": "2019-09-19T10:00:00.000Z",
               "name": "Security Incident",
@@ -531,7 +531,7 @@
         "data": {
           "attributes": {
             "description": "Any incidents that harm (or have the potential to) the confidentiality, integrity, or availability of our data.",
-            "is_default": true,
+            "is_default": false,
             "name": "Security Incident"
           },
           "type": "incident_types"
@@ -598,7 +598,7 @@
               "createdAt": "2019-09-19T10:00:00.000Z",
               "createdBy": "00000000-0000-0000-0000-000000000000",
               "description": "Any incidents that harm (or have the potential to) the confidentiality, integrity, or availability of our data.",
-              "is_default": true,
+              "is_default": false,
               "lastModifiedBy": "00000000-0000-0000-0000-000000000000",
               "modifiedAt": "2019-09-19T10:00:00.000Z",
               "name": "Security Incident",
@@ -666,7 +666,7 @@
               "createdAt": "2019-09-19T10:00:00.000Z",
               "createdBy": "00000000-0000-0000-0000-000000000000",
               "description": "Any incidents that harm (or have the potential to) the confidentiality, integrity, or availability of our data.",
-              "is_default": true,
+              "is_default": false,
               "lastModifiedBy": "00000000-0000-0000-0000-000000000000",
               "modifiedAt": "2019-09-19T10:00:00.000Z",
               "name": "Security Incident",
@@ -731,7 +731,7 @@
         "data": {
           "attributes": {
             "description": "Any incidents that harm (or have the potential to) the confidentiality, integrity, or availability of our data. Note: This will notify the security team.",
-            "is_default": true,
+            "is_default": false,
             "name": "Security Incident"
           },
           "id": "00000000-0000-0000-0000-000000000000",

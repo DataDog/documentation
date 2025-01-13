@@ -2,17 +2,34 @@
 app_id: databricks
 app_uuid: f99b6e79-f50a-479d-b916-955a577e4f41
 assets:
+  dashboards:
+    Databricks Clusters Dashboard: assets/dashboards/clusters_dashboard.json
+    Databricks Model Serving Overview: assets/dashboards/model_serving_overview.json
+    Databricks Overview Dashboard: assets/dashboards/overview_dashboard.json
+    databricks_cost_overview: assets/dashboards/databricks_cost_overview.json
   integration:
     auto_install: true
     configuration: {}
     events:
       creates_events: false
+    metrics:
+      check: databricks.model_serving.provisioned_concurrent_requests_total
+      metadata_path: metadata.csv
+      prefix: databricks.model_serving.
     service_checks:
       metadata_path: assets/service_checks.json
     source_type_id: 10152
     source_type_name: Databricks
   logs:
     source: spark
+  monitors:
+    'Databricks Model Serving: High CPU memory usage': assets/monitors/cpu_memory_usage_high.json
+    'Databricks Model Serving: High CPU usage': assets/monitors/cpu_usage_high.json
+    'Databricks Model Serving: High GPU memory usage': assets/monitors/gpu_memory_usage_high.json
+    'Databricks Model Serving: High GPU usage': assets/monitors/gpu_usage_high.json
+    'Databricks Model Serving: High count 4xx errors': assets/monitors/4xx_errors.json
+    'Databricks Model Serving: High count 5xx errors': assets/monitors/5xx_errors.json
+    'Databricks Model Serving: High request latency': assets/monitors/request_latency_high.json
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
@@ -35,8 +52,7 @@ is_public: true
 manifest_version: 2.0.0
 name: databricks
 public_title: Databricks
-short_description: Monitoriza el rendimiento, la fiabilidad y el costo de tus trabajos
-  de Apache Spark y Databricks.
+short_description: Monitoriza la fiabilidad y el coste de tu entorno de Databricks.
 supported_os:
 - Linux
 - Windows
@@ -52,8 +68,7 @@ tile:
   - Supported OS::macOS
   - Offering::Integration
   configuration: README.md#Setup
-  description: Monitoriza el rendimiento, la fiabilidad y el costo de tus trabajos
-    de Apache Spark y Databricks.
+  description: Monitoriza la fiabilidad y el coste de tu entorno de Databricks.
   media: []
   overview: README.md#Overview
   resources:
@@ -67,7 +82,7 @@ tile:
   title: Databricks
 ---
 
-<!--  CON ORIGEN EN https://github.com/DataDog/integrations-core -->
+<!--  EXTRAÍDO DE https://github.com/DataDog/integrations-core -->
 
 
 <div class="alert alert-warning">
@@ -79,17 +94,22 @@ Esta página se limita a la documentación para la ingesta de las métricas y lo
 
 ## Información general
 
-Monitoriza tus clústeres de [Databricks][2] con la [integración de Spark][3] de Datadog.
+Datadog ofrece varias capacidades de monitorización de Databricks.
 
-Esta integración unifica logs, métricas de la infraestructura y del rendimiento de Spark, proporcionando visibilidad en tiempo real del estado de tus nodos y el rendimiento de tus trabajos. Puede ayudarte a depurar errores, ajustar el rendimiento e identificar problemas como particiones de datos ineficientes o clústeres con la memoria agotada.
+[Data Jobs Monitoring][2] proporciona monitorización para los trabajos y clústeres de Databricks. Puedes detectar trabajos y flujos de trabajo problemáticos de Databricks en cualquier parte de tus pipelines de datos, solucionar trabajos fallidos o de larga duración con mayor rapidez y optimizar los recursos del clúster para reducir costes.
 
-Para más detalles, consulta [Monitorizar Databricks con Datadog][4].
+[Cloud Cost Management][3] te brinda una vista para analizar todos los costes de DBU de Databricks junto con el gasto en la nube asociado.
 
+[Log Management][4] te permite agregar y analizar logs de tus trabajos y clústeres de Databricks. Puedes recopilar estos logs como parte de [Data Jobs Monitoring][2].
+
+La [Monitorización de la infraestructura][5] te brinda un subconjunto limitado de las funciones de Data Jobs Monitoring: visibilidad de la utilización de los recursos de tus clústeres de Databricks y métricas de rendimiento de Apache Spark.
+
+Las métricas de servicio de modelos brindan información sobre el rendimiento de la infraestructura de servicio de modelos de Databricks. Con estas métricas, puedes detectar endpoints que tienen una tasa de errores alta, una latencia alta, un aprovisionamiento excesivo o insuficiente, entre otros.
 ## Configuración
 
 ### Instalación
 
-Monitoriza Databricks Spark con la [integración de Datadog Spark][5]. Instala el [Datadog Agent ][6] en tus clústeres siguiendo las instrucciones para la [configuración](#configuration) para tu clúster apropiado. Después, instala la [integración de Spark][5] en Datadog para autoinstalar el dashboard de Información general de Databricks.
+Monitoriza las aplicaciones de Databricks con Spark con la [integración de Datadog con Spark][6]. Instala el [Datadog Agent][7] en tus clústeres con las instrucciones de [configuración](#configuration) para el clúster correspondiente. Luego, instala la [integración de Spark][6] en Datadog para instalar de manera automática el dashboard de información general de Databricks.
 
 ### Configuración
 
@@ -114,10 +134,10 @@ También puedes definir o modificar variables de entorno con la ruta del script 
 
 #### Con un script de inicio global
 
-Un script de inicial global se ejecuta en cada clúster creado en tu espacio de trabajo. Las secuencias de scripts de inicio globales son útiles cuando se desea aplicar configuraciones o pantallas de seguridad de bibliotecas en toda la organización. 
+Un script de inicio global se ejecuta en cada clúster creado en tu área de trabajo. Las secuencias de scripts de inicio globales son útiles cuando se desea aplicar configuraciones o pantallas de seguridad de bibliotecas en toda la organización. 
 
-<div class="alert alert-info">Solo los administradores del espacio de trabajo pueden gestionar scripts de inicio globales.</div>
-<div class="alert alert-info">Los scripts de inicio globales solo se ejecutan en clústeres configurados con un único usuario o en el modo de acceso compartido sin aislamiento de legacy. Por lo tanto, Databricks recomienda configurar todos los scripts de inicio como ámbito de clúster y gestionarlos en todo el espacio de trabajo mediante políticas de clúster.</div>
+<div class="alert alert-info">Solo los administradores del área de trabajo pueden gestionar scripts de inicio globales.</div>
+<div class="alert alert-info">Los scripts de inicio globales solo se ejecutan en clústeres configurados con un único usuario o en el modo de acceso compartido sin aislamiento de legacy. Por lo tanto, Databricks recomienda configurar todos los scripts de inicio como ámbito de clúster y gestionarlos en toda el área de trabajo mediante políticas de clúster.</div>
 
 Utiliza la interfaz de usuario de Databricks para editar los scripts de inicio globales:
 
@@ -129,15 +149,15 @@ Utiliza la interfaz de usuario de Databricks para editar los scripts de inicio g
 6. Haz clic en el conmutador **Habilitado** para activarlo.
 7. Haz clic en el botón **Añadir**.
 
-Después de estos pasos, cualquier nuevo clúster utiliza el script en forma automática. Puedes encontrar más información sobre scripts de inicio globales en la [documentación oficial de Databricks][7].
+Después de estos pasos, cualquier clúster nuevo usa el script de manera automática. Puedes encontrar más información sobre los scripts de inicio globales en la [documentación oficial de Databricks][8].
 
 <div class="alert alert-info">Puedes definir varios scripts de inicio y especificar su orden en la interfaz de usuario.</div>
 
-{{< <txprotected>pestañas</txprotected> >}}
-{{% pestaña "Solo controlador" %}}
+{{< tabs >}}
+{{% tab "Solo controlador" %}}
 ##### Instala el Datadog Agent en el controlador
 
-Instala el Datadog Agent en el nodo del controlador del clúster. 
+Instala el Datadog Agent en el nodo controlador del clúster. 
 
 <div class="alert alert-warning">Es necesario definir el valor de la variable `DD_API_KEY` en el script.</div>
 
@@ -157,7 +177,7 @@ si [[ \${DB_IS_DRIVER} = "TRUE" ]]; entonces
   eco "Installing Datadog Agent on the driver..."
 
   # CONFIGURAR ETIQUETAS (TAGS) DEL HOST PARA EL CONTROLADOR
-  DD_TAGS="entorno:\${DD_ENV}", "databricks_cluster_id:\${DB_CLUSTER_ID}", "databricks_cluster_name:\${DB_CLUSTER_NAME}", "spark_host_ip:\${DB_DRIVER_IP}", "spark_node:driver", "databricks_instance_type:\${DB_INSTANCE_TYPE}", "databricks_is_job_cluster:\${DB_IS_JOB_CLUSTER}".
+  DD_TAGS="entorno:\${DD_ENV}","databricks_cluster_id:\${DB_CLUSTER_ID}","databricks_cluster_name:\${DB_CLUSTER_NAME}","spark_host_ip:\${DB_DRIVER_IP}","spark_node:driver","databricks_instance_type:\${DB_INSTANCE_TYPE}","databricks_is_job_cluster:\${DB_IS_JOB_CLUSTER}"
 
   # INSTALAR LA ÚLTIMA VERSIÓN DEL DATADOG AGENT 7 EN LOS NODOS CONTROLADOR Y TRABAJADOR
   DD_INSTALL_ONLY=true \
@@ -172,7 +192,7 @@ si [[ \${DB_IS_DRIVER} = "TRUE" ]]; entonces
 
   eco "Datadog Agent is installed"
 
-  mientras[ -z \$DB_DRIVER_PORT ]; haz
+  si bien[ -z \$DB_DRIVER_PORT ]; haz
     si [ -e "/tmp/driver-env.sh" ]; entonces
       DB_DRIVER_PORT="\$(grep -i "CONF_UI_PORT" /tmp/driver-env.sh | cut -d'=' -f2)"
     fi
@@ -182,7 +202,7 @@ si [[ \${DB_IS_DRIVER} = "TRUE" ]]; entonces
 
   eco "DB_DRIVER_PORT=\$DB_DRIVER_PORT"
 
-  # ESCRIBIR ARCHIVO DE CONFIGURACIÓN PARA INTEGRACIÓN DE SPARK CON MÉTRICAS DE STREAMING ESTRUCTURADAS ACTIVADAS
+  # ESCRIBIR ARCHIVO DE CONFIGURACIÓN DE INTEGRACIÓN DE SPARK CON MÉTRICAS DE STREAMING ESTRUCTURADAS ACTIVADAS
   # MODIFICAR PARA INCLUIR OTRAS OPCIONES EN spark.d/conf.yaml.example
   eco "init_config:
 instancias:
@@ -203,7 +223,7 @@ logs:
 
   eco "Spark integration configured"
 
-  # ACTIVAR LOGS EN datadog.yaml PARA RECOPILAR LOGS DEL CONTROLADOR
+  # ACTIVAR LOGS EN Datadog.yaml PARA RECOPILAR LOGS DEL CONTROLADOR
   sed -i '/.*logs_enabled:.*/a logs_enabled: true' /etc/datadog-agent/datadog.yaml
 fi
 
@@ -215,8 +235,8 @@ chmod a+x /tmp/start_datadog.sh
 /tmp/start_datadog.sh >> /tmp/datadog_start.log 2>&1 & disown
 ```
 
-{{% /pestaña %}}
-{{% pestaña "Todos los nodos" %}}
+{{% /tab %}}
+{{% tab "Todos los nodos" %}}
 ##### Instale el Datadog Agent en los nodos controlador y trabajador del clúster
 
 Instale el Datadog Agent en los nodos controlador y trabajador del clúster
@@ -317,7 +337,7 @@ chmod a+x /tmp/start_datadog.sh
 
 Los scripts de inicio de ámbito de clúster son scripts de inicio definidos en la configuración del clúster. Los scripts de inicio de ámbito de clúster se aplican a los clústeres que creas y a los creados para ejecutar trabajos. Databricks admite la configuración y el almacenamiento de scripts de inicio a través de:
 - Archivos de área de trabajo
-- Volúmenes de Unity Catalog
+- Unity Catalog Volumes
 - Almacenamiento de objetos en la nube
 
 Utiliza la interfaz de usuario de Databricks para editar el clúster y ejecutar el script de inicio:
@@ -336,12 +356,12 @@ Si guardaste tu `datadog_init_script.sh` directamente en el área de trabajo `Sh
 
 Si guardaste tu `datadog_init_script.sh` directamente en un área de trabajo del usuario, puedes acceder al archivo en la siguiente ruta: `/Users/$EMAIL_ADDRESS/datadog_init_script.sh`.
 
-Si guardaste to `datadog_init_script.sh` directamente en un `Unity Catalog Volume`, puedes acceder al archivo en la siguiente ruta: `/Volumes/$VOLUME_PATH/datadog_init_script.sh`.
+Si guardaste tu `datadog_init_script.sh` directamente en un `Unity Catalog Volume`, puedes acceder al archivo en la siguiente ruta: `/Volumes/$VOLUME_PATH/datadog_init_script.sh`.
 
-Puedes encontrar más información sobre los scripts de inicio del clúster en la [documentación oficial de Databricks][7].
+Puedes encontrar más información sobre los scripts de inicio del clúster en la [documentación oficial de Databricks][8].
 
-{{< pestañas >}}
-{{% pestaña "Solo controlador" %}}
+{{< tabs >}}
+{{% tab "Solo controlador" %}}
 ##### Instala el Datadog Agent en el controlador
 
 Instala el Datadog Agent en el nodo controlador del clúster. 
@@ -376,7 +396,7 @@ si [[ \${DB_IS_DRIVER} = "TRUE" ]]; entonces
 
   eco "Datadog Agent is installed"
 
-  si bien [ -z \$DB_DRIVER_PORT ]; haz
+  si bien[ -z \$DB_DRIVER_PORT ]; haz
     si [ -e "/tmp/driver-env.sh" ]; entonces
       DB_DRIVER_PORT="\$(grep -i "CONF_UI_PORT" /tmp/driver-env.sh | cut -d'=' -f2)"
     fi
@@ -420,8 +440,8 @@ chmod a+x /tmp/start_datadog.sh
 /tmp/start_datadog.sh >> /tmp/datadog_start.log 2>&1 & disown
 ```
 
-{{% /pestaña %}}
-{{% pestaña "Todos los nodos" %}}
+{{% /tab %}}
+{{% tab "Todos los nodos" %}}
 ##### Instalar el Datadog Agent en los nodos controlador y trabajador
 
 Instalar el Datadog Agent en los nodos controlador y trabajador del clúster
@@ -478,7 +498,7 @@ logs:
       fuente: spark
       servicio: databricks
       log_processing_rules:
-        - type: multi_line
+        - tipo: multi_line
           nombre: new_log_start_with_date
           patrón: \d{2,4}[\-\/]\d{2,4}[\-\/]\d{2,4}.*" > /etc/datadog-agent/conf.d/spark.d/spark.yaml
 
@@ -511,47 +531,48 @@ chmod a+x /tmp/start_datadog.sh
 /tmp/start_datadog.sh >> /tmp/datadog_start.log 2>&1 & disown
 ```
 
-{{% /pestaña %}}
-{{< /pestaña >}}
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Datos recopilados
 
 ### Métricas
 
-Consulta la [documentación de la integración de Spark][8] para obtener una lista de métricas recopiladas.
+Consulta la [documentación de la integración de Spark][9] para obtener una lista de las métricas recopiladas.
 
 ### Checks de servicio
 
-Consulta la [documentación de la integración de Spark][9] para obtener la lista de chechs de servicio recopilados.
+Consulta la [documentación de la integración de Spark][10] para obtener la lista de los checks de servicio recopilados.
 
 ### Eventos
 
 La integración de Databricks no incluye ningún evento.
 
-## Solucionar problemas
+## Resolución de problemas
 
-Puedes solucionar los problemas tú mismo habilitando el [terminal web de Databricks][10] o utilizando una [notebook Databricks][11]. Consulta la documentación de [Solucionar problemas del Agent][12] para obtener información sobre pasos útiles para solucionar problemas. 
+Puedes solucionar los problemas por tu cuenta al habilitar el [terminal web de Databricks][11] o mediante un [notebook de Databricks][12]. Consulta la documentación de [Solucionar problemas del Agent][13] a fin de obtener información sobre los pasos útiles para solucionar problemas. 
 
-¿Necesitas ayuda? Ponte en contacto con [soporte técnico de Datadog][13].
+¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][14].
 
-## Referencias adicionales
+## Configurar tests de API y tests de API multupaso
 
 Más enlaces, artículos y documentación útiles:
 
-- [Cargar un script en el Unity Catalog Volume][14]
+- [Cargar un script en el Unity Catalog Volume][15]
 
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/databricks/images/databricks_dashboard.png
-[2]: https://databricks.com/
-[3]: https://docs.datadoghq.com/es/integrations/spark/?tab=host
-[4]: https://www.datadoghq.com/blog/databricks-monitoring-datadog/
-[5]: https://app.datadoghq.com/integrations/spark
-[6]: https://app.datadoghq.com/account/settings/agent/latest
-[7]: https://docs.databricks.com/clusters/init-scripts.html#global-init-scripts
-[8]: https://docs.datadoghq.com/es/integrations/spark/#metrics
-[9]: https://docs.datadoghq.com/es/integrations/spark/#service-checks
-[10]: https://docs.databricks.com/en/clusters/web-terminal.html
-[11]: https://docs.databricks.com/en/notebooks/index.html
-[12]: https://docs.datadoghq.com/es/agent/troubleshooting/
-[13]: https://docs.datadoghq.com/es/help/
-[14]: https://docs.databricks.com/en/ingestion/add-data/upload-to-volume.html#upload-files-to-a-unity-catalog-volume
+[2]: https://www.datadoghq.com/product/data-jobs-monitoring/
+[3]: https://www.datadoghq.com/product/cloud-cost-management/
+[4]: https://www.datadoghq.com/product/log-management/
+[5]: https://docs.datadoghq.com/es/integrations/databricks/?tab=driveronly
+[6]: https://app.datadoghq.com/integrations/spark
+[7]: https://app.datadoghq.com/account/settings/agent/latest
+[8]: https://docs.databricks.com/clusters/init-scripts.html#global-init-scripts
+[9]: https://docs.datadoghq.com/es/integrations/spark/#metrics
+[10]: https://docs.datadoghq.com/es/integrations/spark/#service-checks
+[11]: https://docs.databricks.com/en/clusters/web-terminal.html
+[12]: https://docs.databricks.com/en/notebooks/index.html
+[13]: https://docs.datadoghq.com/es/agent/troubleshooting/
+[14]: https://docs.datadoghq.com/es/help/
+[15]: https://docs.databricks.com/en/ingestion/add-data/upload-to-volume.html#upload-files-to-a-unity-catalog-volume

@@ -60,6 +60,12 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/datadog-detection-as-code/"
     tag: "Blog"
     text: "How we use Datadog for detection as code"
+  - link: "https://www.datadoghq.com/blog/lateral-movement-entra-id-azure/"
+    tag: "Blog"
+    text: "Detect lateral movement in hybrid Azure environments"
+  - link: "https://www.datadoghq.com/blog/secrets-management/"
+    tag: "Blog"
+    text: "Identify the secrets that make your cloud environment more vulnerable to an attack"
 cascade:
     algolia:
         rank: 70
@@ -76,6 +82,14 @@ Datadog Security includes [Application Security](#application-security-managemen
 Datadog [Application Security][1] provides observability into application-level attacks that aim to exploit code-level vulnerabilities, such as Server-Side-Request-Forgery (SSRF), SQL injection, Log4Shell, and Reflected Cross-Site-Scripting (XSS). ASM leverages [Datadog APM][2], the [Datadog Agent][3], and in-app detection rules to detect threats in your application environment. Check out the product [Guided Tour](https://www.datadoghq.com/guided-tour/security/application-security-management/) to see more.
 
 {{< img src="/security/application_security/app-sec-landing-page.png" alt="A security signal panel in Datadog, which displays attack flows and flame graphs" width="75%">}}
+
+### Disable ASM
+
+For information on disabling ASM or its features, see the following:
+
+- [Disabling threat management and protection][17]
+- [Disabling Software Composition Analysis][18]
+- [Disabling Code Security][19]
 
 ## Cloud SIEM
 
@@ -111,3 +125,6 @@ To get started with Datadog Security, navigate to the [**Security** > **Setup**]
 [14]: https://www.datadoghq.com/guided-tour/security/
 [15]: /security/cloud_security_management/identity_risks/
 [16]: /security/cloud_security_management/vulnerabilities/
+[17]: /security/application_security/troubleshooting/#disabling-threat-management-and-protection
+[18]: /security/application_security/troubleshooting/#disabling-software-composition-analysis
+[19]: /security/application_security/troubleshooting/#disabling-code-security
