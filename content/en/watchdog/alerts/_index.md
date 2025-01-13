@@ -136,7 +136,7 @@ Watchdog looks at infrastructure metrics from the following integrations:
   * [MySQL][15]
   * [SQLServer][16]
   * [Cassandra][17]
-  * [Oracle][18]
+  * [Oracle Database][18]
   * [NGINX][4]
   * [Docker][13]
   * [Kubernetes][14]
