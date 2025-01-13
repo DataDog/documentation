@@ -44,6 +44,10 @@ The `site` option now has a stronger type definition. If you use TypeScript you 
 
 User interactions, resources, and long tasks are now tracked by default. This change does not impact billing. To opt-out, set `trackUserInteractions`, `trackResources`, and `trackLongTasks`  [initialization parameters][28] to `false`.
 
+#### Collect Long Animation Frames as Long Tasks
+
+On supported Browsers, [Long Animation Frames][35] are now collected instead of Long Tasks. The event type in the RUM Explorer is still `long_task`, but they will contain information about the long animation frame.
+
 #### Increased cookies expiration date
 
 To support anonymous user tracking, the session cookie (`_dd_s`) expiration is extended to 1 year. To opt-out, set `trackAnonymousUser` [initialization parameters][28] to `false`.
@@ -67,6 +71,8 @@ Session Replay module is now lazy-loaded using [dynamic imports][30]. This loads
 The default value for the `traceContextInjection` initialization parameter has been updated to `sampled` to ensure backend services' sampling decisions are applied when traces are not sampled in the Browser SDK. See: [Connect Rum and Traces documentation][29]
 
 Note: If you're using a `traceSampleRate` of 100% (default), this change will not have any impact for you.
+
+
 
 ### Future breaking changes
 
@@ -407,3 +413,4 @@ The RUM Browser SDK no longer lets you specify the source of an error collected 
 [32]: https://esbuild.github.io/api/#splitting
 [33]: https://rollupjs.org/tutorial/#code-splitting
 [34]: https://parceljs.org/features/code-splitting
+[35]: https://developer.chrome.com/docs/web-platform/long-animation-frames#long-frames-api
