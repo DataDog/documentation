@@ -372,8 +372,8 @@ http {
 
 ## Ingress-NGINX Controller for Kubernetes
 
-Datadog offers support for monitoring Ingress-NGINX controller in Kubernetes.
-Depending of on your version and requirements, you can choose from the following instrumentation methods:
+Datadog offers support for monitoring the Ingress-NGINX controller in Kubernetes.
+Choose from the following instrumentation methods based on your controller version and requirements:
 
 - [v1.10.0+ using Datadog's features](#controller-v1100-using-datadogs-features).
 - [v1.10.0+ using OpenTelemetry](#controller-v1100-using-opentelemetry).
@@ -409,13 +409,11 @@ spec:
           env:
             - ...
             - name: DD_AGENT_HOST
-              # or another way to access the datadog-agent
-              # see https://docs.datadoghq.com/containers/kubernetes/installation/
               valueFrom:
                 fieldRef:
                   fieldPath: status.hostIP
 ```
-
+Note: For an alternative way to access the Datadog Agent, see the [Kubernetes installation guide][8].
 4. **Configure Ingress-NGINX** <br>
 Create or modify the `ConfigMap` to load the Datadog module:
 
@@ -437,23 +435,10 @@ This configuration ensures that the Datadog module is loaded and ready to trace 
 
 #### Compatibility version table
 
-Ensure the init-container version matches the version of your Ingress-NGINX Controller.
-Mismatched versions can prevent Ingress-NGINX from starting:
+Ensure the init-container version for [datadog/ingress-nginx-injection][8] exactly matches the version of your Ingress-NGINX Controller.
+Mismatched versions can prevent Ingress-NGINX from starting.
 
-| Ingress-NGINX version | init-container |
-| - | - |
-| v1.11.3 | datadog/ingress-nginx-injection:v1.11.3 |
-| v1.11.2 | datadog/ingress-nginx-injection:v1.11.2 |
-| v1.11.1 | datadog/ingress-nginx-injection:v1.11.1 |
-| v1.11.0 | datadog/ingress-nginx-injection:v1.11.0 |
-| v1.10.6 | datadog/ingress-nginx-injection:v1.10.6 |
-| v1.10.5 | datadog/ingress-nginx-injection:v1.10.5 |
-| v1.10.4 | datadog/ingress-nginx-injection:v1.10.4 |
-| v1.10.3 | datadog/ingress-nginx-injection:v1.10.3 |
-| v1.10.2 | datadog/ingress-nginx-injection:v1.10.2 |
-| v1.10.1 | datadog/ingress-nginx-injection:v1.10.1 |
-| v1.10.0 | datadog/ingress-nginx-injection:v1.10.0 |
-| v1.9.6 | datadog/ingress-nginx-injection:v1.9.6 |
+For example, Ingress-NGINX version `v1.11.3` must be paired with [datadog/ingress-nginx-injection:v1.11.3][9]
 
 ### Controller v1.10.0+ using OpenTelemetry
 
@@ -538,6 +523,8 @@ The above overrides the default `nginx-ingress-controller.ingress-nginx` service
 [5]: /opentelemetry/otlp_ingest_in_the_agent/
 [6]: https://github.com/DataDog/nginx-datadog/
 [7]: https://kubernetes.io/docs/concepts/workloads/pods/init-containers/
+[8] https://hub.docker.com/r/datadog/ingress-nginx-injection
+[9] https://hub.docker.com/layers/datadog/ingress-nginx-injection/v1.11.3/images/sha256-19ea2874d8a4ebbe4de0bf08faeb84c755cd71f1e8740ce2d145c5cf954a33a1
 {{% /tab %}}
 
 {{% tab "Istio" %}}
