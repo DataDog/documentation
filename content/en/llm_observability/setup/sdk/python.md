@@ -553,7 +553,7 @@ The `LLMObs.submit_evaluation_for()` method accepts the following arguments:
 
 `span_with_tag_value`
 : required - _dictionary_
-<br />A dictionary that uniquely identifies the span associated with this evaluation. Must contain tag_key (string) and tag_value (string).
+<br />A dictionary that uniquely identifies the span associated with this evaluation. Must contain `tag_key` (string) and `tag_value` (string).
 
 `ml_app`
 : required - _string_
