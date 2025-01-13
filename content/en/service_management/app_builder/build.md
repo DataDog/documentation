@@ -76,6 +76,15 @@ UI components can trigger reactions on an [Event][11].
 
 You can use [JavaScript Expressions][13] anywhere in App Builder to create custom interactions between the different parts of your app.
 
+## Favorite an app
+
+To favorite an app and pin it to the top of your list of apps, click the star next to the name of the app in the [app list][14]:
+
+{{< img src="service_management/app_builder/app-list-star.png" alt="An app list with four apps, none of which are starred" style="width:40%;" >}}
+
+When you refresh the page, the starred app appears in a section at the top of your list of apps:
+
+{{< img src="service_management/app_builder/app-list-with-favorited-app.png" alt="An app list with four apps, one of which is starred and pinned to the top of the list" style="width:40%;" >}}
 
 ## View app version history
 
@@ -131,3 +140,4 @@ The **Switch to GUI** option in the settings menu takes you back to the GUI edit
 [11]: /service_management/app_builder/events
 [12]: /service_management/app_builder/queries
 [13]: /service_management/app_builder/expressions
+[14]: https://app.datadoghq.com/app-builder/apps/list
