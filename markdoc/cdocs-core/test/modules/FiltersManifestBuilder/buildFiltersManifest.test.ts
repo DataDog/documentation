@@ -4,6 +4,7 @@ import {
   paintColorsFrontmatter,
   paintColorsFilterOptionsConfig,
   paintColorsGlossary,
+  paintColorsContentFiltersConfig,
 } from '../../mocks/valid/paintColorsConfig';
 import _ from 'lodash';
 import { SNAPSHOTS_DIR } from '../../config/constants';
@@ -13,7 +14,7 @@ describe('FiltersManifestBuilder.build', () => {
   test('creates the expected object when given valid data', async () => {
     const manifest = FiltersManifestBuilder.build({
       frontmatter: paintColorsFrontmatter,
-      filterOptionsConfig: paintColorsFilterOptionsConfig,
+      contentFiltersConfig: paintColorsContentFiltersConfig,
       glossary: paintColorsGlossary,
     });
 
@@ -198,7 +199,7 @@ describe('FiltersManifestBuilder.build', () => {
 
     const manifest = FiltersManifestBuilder.build({
       frontmatter: invalidFrontmatter,
-      filterOptionsConfig: paintColorsFilterOptionsConfig,
+      contentFiltersConfig: paintColorsContentFiltersConfig,
       glossary: paintColorsGlossary,
     });
 
@@ -207,46 +208,19 @@ describe('FiltersManifestBuilder.build', () => {
   });
 
   test('detects a nonexistent options source', () => {
-    const invalidFilterOptionsConfig = {
-      color_options: [
-        { id: 'blue', display_name: 'Blue', default: true },
-        { id: 'red', display_name: 'Red' },
-      ],
-      finish_options: [
-        { id: 'matte', display_name: 'Matte' },
-        { id: 'eggshell', display_name: 'Eggshell', default: true },
-        { id: 'gloss', display_name: 'Gloss' },
-      ],
-      /* Intentionally omitted options:
-      matte_blue_paint_options: [
-        { id: 'powder_blue', display_name: 'Powder Blue', default: true }
-      ],
-      */
-      eggshell_blue_paint_options: [
-        { id: 'elegant_royal', display_name: 'Elegant Royal', default: true },
-        { id: 'robins_egg', display_name: "Robin's Egg" },
-      ],
-      gloss_blue_paint_options: [
-        { id: 'sky_blue', display_name: 'Sky Blue', default: true },
-        { id: 'navy', display_name: 'Navy' },
-      ],
-      matte_red_paint_options: [
-        { id: 'brick', display_name: 'Brick', default: true },
-        { id: 'scarlet', display_name: 'Scarlet' },
-      ],
-      eggshell_red_paint_options: [
-        { id: 'rose', display_name: 'Rose', default: true },
-        { id: 'ruby', display_name: 'Ruby' },
-      ],
-      gloss_red_paint_options: [
-        { id: 'fire_engine', display_name: 'Fire Engine', default: true },
-        { id: 'crimson', display_name: 'Crimson' },
-      ],
+    // Intentionally omit a referenced option group from the mock config
+    const { matte_blue_paint_options, ...invalidOptionGroupGlossary } =
+      paintColorsContentFiltersConfig.optionGroupGlossary;
+
+    const invalidContentFiltersConfig = {
+      filterGlossary: { ...paintColorsContentFiltersConfig.filterGlossary },
+      optionGlossary: { ...paintColorsContentFiltersConfig.optionGlossary },
+      optionGroupGlossary: invalidOptionGroupGlossary,
     };
 
     const manifest = FiltersManifestBuilder.build({
       frontmatter: paintColorsFrontmatter,
-      filterOptionsConfig: invalidFilterOptionsConfig,
+      contentFiltersConfig: invalidContentFiltersConfig,
       glossary: paintColorsGlossary,
     });
 
