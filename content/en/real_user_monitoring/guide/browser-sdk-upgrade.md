@@ -16,7 +16,7 @@ Follow this guide to migrate between major versions of the Browser RUM and Brows
 
 ## From v5 to v6
 
-V6's main improvement is the bundle size reduction. By dropping support for IE11 and leveraging lazy loading, the size of the RUM bundle has been reduced by 10% and the Logs bundle by nearly 9%
+V6's main improvement is the bundle size reduction. By dropping support for IE11 and leveraging lazy loading, the size of the RUM bundle has been reduced by 10% and the Logs bundle by nearly 9%.
 Additionally we've changed a few default initialization parameters and prepared for future improvements.
 
 Take notice of the below breaking changes as you upgrade your SDK.
