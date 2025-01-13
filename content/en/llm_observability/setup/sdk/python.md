@@ -549,7 +549,7 @@ The `LLMObs.submit_evaluation_for()` method accepts the following arguments:
 
 `span`
 : required - _dictionary_
-<br />A dictionary that uniquely identifies the span associated with this evaluation. Must contain span_id (string) and trace_id (string). Use [LLMObs.export_span()](#exporting-a-span) to generate this dictionary.
+<br />A dictionary that uniquely identifies the span associated with this evaluation. Must contain span_id (string) and trace_id (string). Use [`LLMObs.export_span()`](#exporting-a-span) to generate this dictionary.
 
 `span_with_tag_value`
 : required - _dictionary_
