@@ -57,7 +57,7 @@ export type FilterGlossary = z.infer<typeof FilterGlossarySchema>;
  */
 export const RawFilterGlossarySchema = z
   .object({
-    allowed: z.array(FilterGlossaryEntrySchema).refine((entries) => {
+    filters: z.array(FilterGlossaryEntrySchema).refine((entries) => {
       const ids = entries.map((entry) => entry.id);
       const uniqueIds = new Set(ids);
       if (ids.length !== uniqueIds.size) {

@@ -11,7 +11,7 @@
       "format": "cjs"
     },
     "node_modules/cdocs-core/dist/modules/filterResolution.js": {
-      "bytes": 4008,
+      "bytes": 4054,
       "imports": [
         {
           "path": "node_modules/cdocs-core/dist/schemas/regexes.js",
@@ -93,7 +93,7 @@
           "bytesInOutput": 625
         },
         "node_modules/cdocs-core/dist/modules/filterResolution.js": {
-          "bytesInOutput": 2420
+          "bytesInOutput": 2466
         },
         "node_modules/markdoc-static-compiler/dist/index.js": {
           "bytesInOutput": 499748
@@ -111,7 +111,7 @@
           "bytesInOutput": 354
         }
       },
-      "bytes": 530365
+      "bytes": 530411
     }
   }
 }

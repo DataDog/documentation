@@ -1,10 +1,10 @@
 ---
 title: Tabs
 private: true
-content_filters:
-  - display_name: "Color"
-    id: color
-    option_group: primary_color_options
+customizations:
+  - label: "Color"
+    filter_id: color
+    option_group_id: primary_color_options
 ---
 
 ## Usage

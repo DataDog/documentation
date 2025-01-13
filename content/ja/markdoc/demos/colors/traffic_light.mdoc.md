@@ -1,12 +1,12 @@
 ---
 title: Traffic Light Colors (ja)
-content_filters:
-  - display_name: "Color"
-    id: color
-    option_group: traffic_light_color_options
-  - display_name: "Item"
-    id: item
-    option_group: <COLOR>_item_options
+customizations:
+  - label: "Color"
+    filter_id: color
+    option_group_id: traffic_light_color_options
+  - label: "Item"
+    filter_id: item
+    option_group_id: <COLOR>_item_options
 ---
 
 {% alert level="info" %}

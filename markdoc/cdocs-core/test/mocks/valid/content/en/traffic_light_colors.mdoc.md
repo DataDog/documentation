@@ -1,6 +1,6 @@
 ---
 title: Traffic Light Colors
-content_filters:
+customizations:
   - label: "Color"
     filter_id: color
     option_group_id: traffic_light_color_options

@@ -1,6 +1,6 @@
 ---
 title: The Primary Colors of the Color Wheel
-content_filters:
+customizations:
   - label: "Color"
     filter_id: color
     option_group_id: rainbow_color_options # mistake, not all of these colors will yield a valid options source for the item preference

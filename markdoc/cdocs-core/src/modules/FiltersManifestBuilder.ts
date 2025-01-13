@@ -57,7 +57,7 @@ export class FiltersManifestBuilder {
     };
 
     // Return the empty manifest if the page has no filters
-    if (!p.frontmatter.content_filters) {
+    if (!p.frontmatter.customizations) {
       return manifest;
     }
 
@@ -65,12 +65,12 @@ export class FiltersManifestBuilder {
     // used to resolve placeholders in options sources
     manifest.defaultValsByFilterId = this.getDefaultValsByFilterId({
       contentFiltersConfig: p.contentFiltersConfig,
-      filterConfigs: p.frontmatter.content_filters,
+      customizations: p.frontmatter.customizations,
     });
 
     // Key the configs by filter ID, for convenient access during processing
     const filterConfigByFilterId: Record<string, PageFilterConfig> =
-      p.frontmatter.content_filters.reduce(
+      p.frontmatter.customizations.reduce(
         (obj, filterConfig) => ({ ...obj, [filterConfig.filter_id]: filterConfig }),
         {},
       );
@@ -81,12 +81,12 @@ export class FiltersManifestBuilder {
 
     // Fill out the manifest for each filter,
     // in the order that the filters appeared in the frontmatter
-    p.frontmatter.content_filters.forEach((pageFilterConfig) => {
+    p.frontmatter.customizations.forEach((customization) => {
       // Validate the filter ID
-      if (!p.contentFiltersConfig.filterGlossary[pageFilterConfig.filter_id]) {
+      if (!p.contentFiltersConfig.filterGlossary[customization.filter_id]) {
         manifest.errors.push({
-          message: `Unrecognized filter ID: The filter ID '${pageFilterConfig.filter_id}' is not in the glossary.`,
-          searchTerm: pageFilterConfig.filter_id,
+          message: `Unrecognized filter ID: The filter ID '${customization.filter_id}' is not in the glossary.`,
+          searchTerm: customization.filter_id,
         });
       }
 
@@ -94,12 +94,12 @@ export class FiltersManifestBuilder {
       // so each one can have its range of values processed
       // and the options set itself can be attached to the manifest
       let optionGroupIds: string[] = [];
-      const hasDynamicOptions = pageFilterConfig.option_group_id.match(PLACEHOLDER_REGEX);
+      const hasDynamicOptions = customization.option_group_id.match(PLACEHOLDER_REGEX);
 
       if (hasDynamicOptions) {
         const { optionGroupIds: dynamicOptionGroupIds, errors } =
           this.buildDynamicOptionGroupIds({
-            filterId: pageFilterConfig.filter_id,
+            filterId: customization.filter_id,
             // filterOptionsConfig: p.filterOptionsConfig,
             contentFiltersConfig: p.contentFiltersConfig,
             filterConfigsByFilterId: filterConfigByFilterId,
@@ -112,14 +112,14 @@ export class FiltersManifestBuilder {
 
         optionGroupIds = dynamicOptionGroupIds;
       } else {
-        optionGroupIds = [pageFilterConfig.option_group_id];
+        optionGroupIds = [customization.option_group_id];
       }
 
       // Collect a default value for every possible options set ID,
       // along with all possible selected values for the filter
       const { defaultValsByOptionGroupId, possibleVals, errors } =
         this.getPossibleDefaultsAndSelectedValues({
-          filterId: pageFilterConfig.filter_id,
+          filterId: customization.filter_id,
           optionGroupIds: optionGroupIds,
           // glossary: p.glossary,
           contentFiltersConfig: p.contentFiltersConfig,
@@ -130,13 +130,13 @@ export class FiltersManifestBuilder {
         manifest.errors.push(...errors);
       }
 
-      manifest.filtersById[pageFilterConfig.filter_id] = {
-        config: pageFilterConfig,
+      manifest.filtersById[customization.filter_id] = {
+        config: customization,
         defaultValsByOptionGroupId,
         possibleVals: possibleVals,
       };
 
-      processedFilterIds.push(pageFilterConfig.filter_id);
+      processedFilterIds.push(customization.filter_id);
     });
 
     // Attach any options sets that were referenced by the filters
@@ -265,15 +265,15 @@ export class FiltersManifestBuilder {
    */
   static getDefaultValsByFilterId(p: {
     // filterOptionsConfig: FilterOptionsConfig;
-    filterConfigs: PageFilterConfig[];
+    customizations: PageFilterConfig[];
     contentFiltersConfig: ContentFiltersConfig;
   }): Record<string, string> {
     const defaultValsByFilterId: Record<string, string> = {};
 
-    // Process each entry in the frontmatter's content_filters list
-    for (const fmFilterConfig of p.filterConfigs) {
+    // Process each entry in the frontmatter's customizations list
+    for (const customization of p.customizations) {
       // Replace any placeholders in the options source
-      const optionGroupId = fmFilterConfig.option_group_id;
+      const optionGroupId = customization.option_group_id;
       const resolvedOptionGroupId = optionGroupId.replace(
         GLOBAL_PLACEHOLDER_REGEX,
         (_match: string, placeholder: string) => {
@@ -287,8 +287,8 @@ export class FiltersManifestBuilder {
         p.contentFiltersConfig.optionGroupGlossary[resolvedOptionGroupId];
 
       if (resolvedOptionGroup) {
-        defaultValsByFilterId[fmFilterConfig.filter_id] =
-          fmFilterConfig.default_value ||
+        defaultValsByFilterId[customization.filter_id] =
+          customization.default_value ||
           resolvedOptionGroup.find((option) => option.default)!.id;
       }
     }

@@ -1,4 +1,4 @@
-allowed:
+options:
 - id: red
   label: Red
 - id: green

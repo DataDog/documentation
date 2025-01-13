@@ -1440,13 +1440,13 @@ __metadata:
 
 "cdocs-core@file:../cdocs-core::locator=markdoc-hugo-integration%40workspace%3A.":
   version: 1.0.0
-  resolution: "cdocs-core@file:../cdocs-core#../cdocs-core::hash=1486fd&locator=markdoc-hugo-integration%40workspace%3A."
+  resolution: "cdocs-core@file:../cdocs-core#../cdocs-core::hash=977dfc&locator=markdoc-hugo-integration%40workspace%3A."
   dependencies:
     js-yaml: ^4.1.0
     lodash: ^4.17.21
     rimraf: ^5.0.5
     zod: ^3.22.4
-  checksum: bbdd12aa0a375fd541a6dd681dfd2d7a90dee8432eb2d53d8b54cac1e2feff2e33ed63d4e52229f1dcdbda74e9aea5f231b7c1704fc34813b311600bb7d9629b
+  checksum: 4c06867fe93b64ab7be6cbda1013f73567631788c485319a518a6bc89479fc8536aaa64d897af92f8673eae0169afd81b01df6445640e8651ea6cea0993628a1
   languageName: node
   linkType: hard
 

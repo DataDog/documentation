@@ -1,4 +1,4 @@
-  allowed:
+  options:
   # Colors
   - id: red
     label: Red (ja)

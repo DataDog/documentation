@@ -1,7 +1,7 @@
 ---
 title: Primary Colors
 private: true
-content_filters:
+customizations:
   - display_name: "Color"
     id: color
     option_group: primary_color_options

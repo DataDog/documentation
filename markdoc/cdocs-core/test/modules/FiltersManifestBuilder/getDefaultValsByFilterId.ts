@@ -6,21 +6,21 @@ import { paintColorsContentFiltersConfig } from '../../mocks/valid/paintColorsCo
 describe('FiltersManifestBuilder.getDefaultValsByFilterId', () => {
   const frontmatter: Frontmatter = {
     title: 'My Page',
-    content_filters: [
+    customizations: [
       {
         label: 'Color',
-        id: 'color',
-        option_group: 'color_options',
+        filter_id: 'color',
+        option_group_id: 'color_options',
       },
       {
         label: 'Finish',
-        id: 'finish',
-        option_group: 'finish_options',
+        filter_id: 'finish',
+        option_group_id: 'finish_options',
       },
       {
         label: 'Paint color',
-        id: 'paint',
-        option_group: '<FINISH>_<COLOR>_paint_options',
+        filter_id: 'paint',
+        option_group_id: '<FINISH>_<COLOR>_paint_options',
       },
     ],
   };
@@ -28,7 +28,7 @@ describe('FiltersManifestBuilder.getDefaultValsByFilterId', () => {
 
   test('derives the default values for each filter', () => {
     const defaultValsByFilterId = FiltersManifestBuilder.getDefaultValsByFilterId({
-      filterConfigs: frontmatter.content_filters!,
+      customizations: frontmatter.customizations!,
       contentFiltersConfig: paintColorsContentFiltersConfig,
     });
     expect(defaultValsByFilterId).toEqual({

@@ -1,4 +1,4 @@
-allowed:
+filters:
 - id: color
   label: Color
 - id: item

@@ -1,3 +1,3 @@
-allowed:
+filters:
 - id: color
   label: Color

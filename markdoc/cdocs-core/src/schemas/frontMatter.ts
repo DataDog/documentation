@@ -76,7 +76,7 @@ export type PageFiltersConfig = z.infer<typeof PageFiltersConfigSchema>;
  */
 export const FrontmatterSchema = z.object({
   title: z.string(),
-  content_filters: PageFiltersConfigSchema.optional(),
+  customizations: PageFiltersConfigSchema.optional(),
 });
 
 /**
@@ -87,21 +87,21 @@ export const FrontmatterSchema = z.object({
  * @example
  * {
  *   title: "Decorative Painting Tips",
- *   content_filters: [
+ *   customizations: [
  *     {
  *       label: "Color",
- *       id: "color",
- *       option_group: "color_options"
+ *       filter_id: "color",
+ *       option_group_id: "color_options"
  *     },
  *     {
  *       label: "Finish",
- *       id: "finish",
- *       option_group: "paint_finish_options"
+ *       filter_id: "finish",
+ *       option_group_id: "paint_finish_options"
  *     },
  *     {
  *       label: "Paint color",
- *       id: "paint_color",
- *       option_group: "<FINISH>_<COLOR>_paint_options"
+ *       filter_id: "paint_color",
+ *       option_group_id: "<FINISH>_<COLOR>_paint_options"
  *     }
  *   ]
  * }

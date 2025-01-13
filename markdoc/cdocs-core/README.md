@@ -62,11 +62,11 @@ Your page's frontmatter would look something like this:
 
 ```yaml
 title: An Example Page
-content_filters:
-  - id: host
-    option_group: host_options
-  - id: database
-    option_group: database_options
+customizations:
+  - filter_id: host
+    option_group_id: host_options
+  - filter_id: database
+    option_group_id: database_options
 ```
 
 #### Site configuration

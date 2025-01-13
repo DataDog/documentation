@@ -1,15 +1,15 @@
 ---
 title: Postgres Integration Setup
-content_filters:
-  - id: postgres_version
-    option_group: postgres_integration_version_options
-    display_name: "Postgres version"
-  - id: agent_version
-    option_group: major_agent_version_options
-    display_name: "Agent version"
-  - id: agent_host
-    option_group: postgres_integration_host_options
-    display_name: "Agent host"
+customizations:
+  - filter_id: postgres_version
+    option_group_id: postgres_integration_version_options
+    label: "Postgres version"
+  - filter_id: agent_version
+    option_group_id: major_agent_version_options
+    label: "Agent version"
+  - filter_id: agent_host
+    option_group_id: postgres_integration_host_options
+    label: "Agent host"
 ---
 
 {% alert %}

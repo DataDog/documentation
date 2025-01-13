@@ -174,7 +174,7 @@ describe('FiltersManifestBuilder.build', () => {
   test('detects an invalid placeholder', () => {
     const invalidFrontmatter = {
       title: 'My Page',
-      content_filters: [
+      customizations: [
         {
           label: 'Color',
           filter_id: 'color',

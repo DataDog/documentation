@@ -139,31 +139,31 @@
             pageFilterConfig: filterConfig,
             selectedValsByFilterId: valsByFilterIdDup
           });
-          const defaultValue = filterConfigDup.default_value || p.filtersManifest.optionGroupsById[filterConfigDup.option_group].find((option) => option.default).id;
-          const possibleVals = p.filtersManifest.optionGroupsById[filterConfigDup.option_group].map((option) => option.id);
-          let currentValue = p.valsByFilterId[filterConfigDup.id];
+          const defaultValue = filterConfigDup.default_value || p.filtersManifest.optionGroupsById[filterConfigDup.option_group_id].find((option) => option.default).id;
+          const possibleVals = p.filtersManifest.optionGroupsById[filterConfigDup.option_group_id].map((option) => option.id);
+          let currentValue = p.valsByFilterId[filterConfigDup.filter_id];
           if (currentValue && !possibleVals.includes(currentValue)) {
             currentValue = defaultValue;
-            valsByFilterIdDup[filterConfigDup.id] = defaultValue;
+            valsByFilterIdDup[filterConfigDup.filter_id] = defaultValue;
           }
           const resolvedFilter = {
-            id: filterConfigDup.id,
+            id: filterConfigDup.filter_id,
             label: filterConfigDup.label,
             defaultValue,
             currentValue,
-            options: p.filtersManifest.optionGroupsById[filterConfigDup.option_group].map((option) => ({
+            options: p.filtersManifest.optionGroupsById[filterConfigDup.option_group_id].map((option) => ({
               id: option.id,
               label: option.label
             }))
           };
-          resolvedPageFilters[filterConfigDup.id] = resolvedFilter;
+          resolvedPageFilters[filterConfigDup.filter_id] = resolvedFilter;
         });
         return resolvedPageFilters;
       }
       function resolveFilterOptionsSource(p) {
         const filterConfigDup = Object.assign({}, p.pageFilterConfig);
-        if (regexes_1.GLOBAL_PLACEHOLDER_REGEX.test(filterConfigDup.option_group)) {
-          filterConfigDup.option_group = filterConfigDup.option_group.replace(regexes_1.GLOBAL_PLACEHOLDER_REGEX, (_match, placeholder) => {
+        if (regexes_1.GLOBAL_PLACEHOLDER_REGEX.test(filterConfigDup.option_group_id)) {
+          filterConfigDup.option_group_id = filterConfigDup.option_group_id.replace(regexes_1.GLOBAL_PLACEHOLDER_REGEX, (_match, placeholder) => {
             return p.selectedValsByFilterId[placeholder.toLowerCase()];
           });
         }

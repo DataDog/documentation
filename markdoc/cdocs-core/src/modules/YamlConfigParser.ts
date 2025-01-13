@@ -53,7 +53,7 @@ export class YamlConfigParser {
     try {
       const glossaryYamlStr = fs.readFileSync(glossaryPath, 'utf8');
       const rawGlossary = RawFilterGlossarySchema.parse(yaml.load(glossaryYamlStr));
-      result = rawGlossary.allowed.reduce<Record<string, FilterGlossaryEntry>>(
+      result = rawGlossary.filters.reduce<Record<string, FilterGlossaryEntry>>(
         (acc, entry) => {
           acc[entry.id] = entry;
           return acc;
@@ -87,7 +87,7 @@ export class YamlConfigParser {
     try {
       const glossaryStr = fs.readFileSync(glossaryFilePath, 'utf8');
       const rawGlossary = RawOptionGlossarySchema.parse(yaml.load(glossaryStr));
-      result = rawGlossary.allowed.reduce<Record<string, OptionGlossaryEntry>>(
+      result = rawGlossary.options.reduce<Record<string, OptionGlossaryEntry>>(
         (acc, entry) => {
           acc[entry.id] = entry;
           return acc;

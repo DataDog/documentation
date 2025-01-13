@@ -1,6 +1,6 @@
 ---
 title: Primary Colors (ja)
-content_filters:
+customizations:
   - label: "Color"
     filter_id: color
     option_group_id: primary_color_options

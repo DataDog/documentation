@@ -60,13 +60,13 @@ export type OptionGlossary = z.infer<typeof OptionGlossarySchema>;
  * A glossary of all options that can be used on a site,
  * as it is parsed directly from the YAML file.
  *
- * The data is wrapped in an "allowed" key because
+ * The data is wrapped in an "options" key because
  * site generators such as Hugo require a top-level key
  * in any configuration YAML.
  */
 export const RawOptionGlossarySchema = z
   .object({
-    allowed: z.array(OptionGlossaryEntrySchema).refine((entries) => {
+    options: z.array(OptionGlossaryEntrySchema).refine((entries) => {
       const ids = entries.map((entry) => entry.id);
       const uniqueIds = new Set(ids);
       if (ids.length !== uniqueIds.size) {
