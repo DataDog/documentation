@@ -1696,6 +1696,11 @@ menu:
       parent: infrastructure_resource_catalog
       identifier: infrastructure_resource_catalog_schema
       weight: 501
+    - name: Governance
+      url: infrastructure/resource_catalog/governance/
+      parent: infrastructure_resource_catalog
+      identifier: infrastructure_resource_catalog_governance
+      weight: 502
     - name: Metrics
       url: metrics/
       identifier: metrics_top_level
@@ -5554,20 +5559,20 @@ menu:
       parent: security_platform
       identifier: security_suppressions
       weight: 3
-    - name: Vulnerability Pipeline
-      url: security/vulnerability_pipeline/
+    - name: Automation Pipelines
+      url: security/automation_pipelines/
       parent: security_platform
-      identifier: vulnerability_pipeline
+      identifier: automation_pipelines
       weight: 4
     - name: Mute
-      url: security/vulnerability_pipeline/mute
-      parent: vulnerability_pipeline
-      identifier: vulnerability_pipeline_mute
+      url: security/automation_pipelines/mute
+      parent: automation_pipelines
+      identifier: automation_pipelines_mute
       weight: 10001
     - name: Add to Security Inbox
-      url: security/vulnerability_pipeline/security_inbox
-      parent: vulnerability_pipeline
-      identifier: vulnerability_pipeline_inbox
+      url: security/automation_pipelines/security_inbox
+      parent: automation_pipelines
+      identifier: automation_pipelines_inbox
       weight: 10002
     - name: Security Inbox
       url: security/security_inbox
