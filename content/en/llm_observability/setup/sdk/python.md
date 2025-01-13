@@ -561,7 +561,7 @@ The `LLMObs.submit_evaluation_for()` method accepts the following arguments:
 
 `timestamp_ms`
 : optional - _integer_
-<br />The unix timestamp in milliseconds when the evaluation metric result was generated. If not provided, the current time will be used.
+<br />The unix timestamp in milliseconds when the evaluation metric result was generated. If not provided, this defaults to the current time.
 
 `tags`
 : optional - _dictionary_
