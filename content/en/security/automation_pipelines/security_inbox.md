@@ -1,5 +1,7 @@
 ---
 title: Add to Security Inbox Rules
+aliases:
+  - /security/vulnerability_pipeline/security_inbox
 further_reading:
   - link: "/security/security_inbox"
     tag: "Documentation"
@@ -7,14 +9,14 @@ further_reading:
 ---
 
 {{< callout url="https://www.datadoghq.com/product-preview/customize-your-security-inbox/" >}}
-  Vulnerability Pipeline is in Preview. To enroll in the Preview for Add to Security Inbox rules, click <strong>Request Access</strong>.
+  Automation Pipelines is in Preview. To enroll in the Preview for Add to Security Inbox rules, click <strong>Request Access</strong>.
 {{< /callout >}} 
 
 Configure inbox rules to manage your Security Inbox effectively, ensuring only the most relevant security issues are highlighted. By customizing conditions, you can focus on critical concerns, prioritize key risks, support compliance, and bring attention to issues that might otherwise be overlooked.
 
 ## Create an inbox rule
 
-1. On the [Vulnerability Pipeline][2] page, click **Add a New Rule** and select **Add to Security Inbox**.
+1. On the [Automation Pipelines][2] page, click **Add a New Rule** and select **Add to Security Inbox**.
 1. Enter a descriptive name for the rule, for example, Cloud Infrastructure Anomaly Warnings.
 1. Use the following boxes to configure the rule criteria:
     - **Any of these types**: The types of findings that the rule should check for. Available types include **Misconfiguration**, **Attack Path**, **Identity Risk**, and **API Security Finding**.
