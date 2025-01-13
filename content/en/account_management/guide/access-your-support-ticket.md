@@ -40,7 +40,7 @@ If you have opened at least one Datadog support ticket, follow this process to a
 
 ## Password requirements
 
-To ensure the security of your account, any password used to sign in to Datadog’s Zendesk support portal must meet the following requirements:
+To ensure the security of your account, any password used to sign in to Datadog's Zendesk support portal must meet the following requirements:
 
 1. Password complexity:
     - Must include at least **12 characters**.
@@ -48,7 +48,7 @@ To ensure the security of your account, any password used to sign in to Datadog�
     - Must include at least **one number (0-9)**.
     - Must include at least **one special character** (for example, `!`, `@`, `#`, or `%`).
     - Must **not resemble an email address**.
-    - Must **not include the word “Zendesk”**.
+    - Must **not include the word "Zendesk"**.
 1. Failed attempts and lockout:
     - Users are allowed a maximum of **5 attempts** before the account is locked out temporarily.
 1. Prohibited sequences:
