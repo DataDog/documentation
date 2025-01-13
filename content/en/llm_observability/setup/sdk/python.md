@@ -610,7 +610,7 @@ def llm_call():
 
 ### Exporting a span
 
-`LLMObs.export_span()` can be used to extract the span context from a span. You'll need to use this method to associate your evaluation with the corresponding span.
+`LLMObs.export_span()` can be used to extract the span context from a span. This method is helpful for associating your evaluation with the corresponding span.
 
 #### Arguments
 
