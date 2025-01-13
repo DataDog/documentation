@@ -219,7 +219,7 @@ export class YamlConfigParser {
       return {};
     }
 
-    const optionGroupGlossaryDir = `${p.langDir}/filter_option_sets`;
+    const optionGroupGlossaryDir = `${p.langDir}/option_groups`;
     const filePaths = FileSearcher.findInDir(optionGroupGlossaryDir, /\.ya?ml$/);
     const mergedGlossary: OptionGroupGlossary = {};
 
