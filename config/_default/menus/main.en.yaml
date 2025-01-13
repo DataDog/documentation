@@ -9,30 +9,33 @@ menu:
     - name: Service Management
       identifier: service_management_heading
       weight: 3000000
+    - name: Actions
+      identifier: actions_heading
+      weight: 4000000
     - name: Infrastructure
       identifier: infrastructure_heading
-      weight: 4000000
+      weight: 5000000
     - name: Application Performance
       identifier: apm_heading
-      weight: 5000000
+      weight: 6000000
     - name: Digital Experience
       identifier: digital_experience_heading
-      weight: 6000000
+      weight: 7000000
     - name: Software Delivery
       identifier: software_delivery_heading
-      weight: 7000000
+      weight: 8000000
     - name: Security
       identifier: security_platform_heading
-      weight: 8000000
+      weight: 9000000
     - name: AI Observability
       identifier: ai_observability_heading
-      weight: 9000000
+      weight: 10000000
     - name: Log Management
       identifier: log_management_heading
-      weight: 10000000
+      weight: 11000000
     - name: Administration
       identifier: administration_heading
-      weight: 11000000
+      weight: 12000000
     - name: Getting Started
       identifier: getting_started
       url: getting_started/
@@ -1693,6 +1696,11 @@ menu:
       parent: infrastructure_resource_catalog
       identifier: infrastructure_resource_catalog_schema
       weight: 501
+    - name: Governance
+      url: infrastructure/resource_catalog/governance/
+      parent: infrastructure_resource_catalog
+      identifier: infrastructure_resource_catalog_governance
+      weight: 502
     - name: Metrics
       url: metrics/
       identifier: metrics_top_level
@@ -2444,8 +2452,8 @@ menu:
       url: service_management/workflows/
       pre: workflows
       identifier: workflows
-      parent: service_management_heading
-      weight: 60000
+      parent: actions_heading
+      weight: 10000
     - name: Build Workflows
       url: service_management/workflows/build/
       parent: workflows
@@ -2540,8 +2548,8 @@ menu:
       url: service_management/app_builder/
       pre: app-builder
       identifier: app_builder
-      parent: service_management_heading
-      weight: 70000
+      parent: actions_heading
+      weight: 20000
     - name: Build Apps
       url: service_management/app_builder/build/
       parent: app_builder
@@ -5627,20 +5635,20 @@ menu:
       parent: security_platform
       identifier: security_suppressions
       weight: 3
-    - name: Vulnerability Pipeline
-      url: security/vulnerability_pipeline/
+    - name: Automation Pipelines
+      url: security/automation_pipelines/
       parent: security_platform
-      identifier: vulnerability_pipeline
+      identifier: automation_pipelines
       weight: 4
     - name: Mute
-      url: security/vulnerability_pipeline/mute
-      parent: vulnerability_pipeline
-      identifier: vulnerability_pipeline_mute
+      url: security/automation_pipelines/mute
+      parent: automation_pipelines
+      identifier: automation_pipelines_mute
       weight: 10001
     - name: Add to Security Inbox
-      url: security/vulnerability_pipeline/security_inbox
-      parent: vulnerability_pipeline
-      identifier: vulnerability_pipeline_inbox
+      url: security/automation_pipelines/security_inbox
+      parent: automation_pipelines
+      identifier: automation_pipelines_inbox
       weight: 10002
     - name: Security Inbox
       url: security/security_inbox

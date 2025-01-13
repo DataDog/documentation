@@ -1,25 +1,27 @@
 ---
-title: Vulnerability Pipeline
+title: Automation Pipelines
+aliases:
+  - /security/vulnerability_pipeline
 further_reading:
-  - link: "/security/vulnerability_pipeline/mute"
+  - link: "/security/automation_pipelines/mute"
     tag: "Documentation"
     text: "Mute Rules"
-  - link: "/security/vulnerability_pipeline/security_inbox"
+  - link: "/security/automation_pipelines/security_inbox"
     tag: "Documentation"
     text: "Add to Security Inbox Rules"
 ---
 
 {{< callout btn_hidden="true">}}
-  Vulnerability Pipeline is in Preview. To enroll and access the automated rules, you must register for each set of rules separately:
+  Automation Pipelines is in Preview. To enroll and access the automated rules, you must register for each set of rules separately:
   <ul><li><a href="https://www.datadoghq.com/product-preview/security-automation-pipelines/">Mute and Assign Due Date</a></li>
   <li><a href="https://www.datadoghq.com/product-preview/customize-your-security-inbox/">Add to Security Inbox</a></li></ul>
 {{< /callout >}} 
 
-Vulnerability Pipeline allows you to set up automated rules for newly discovered vulnerabilities, thus accelerating triage and remediation efforts at scale.
+Automation Pipelines allows you to set up automated rules for newly discovered vulnerabilities, thus accelerating triage and remediation efforts at scale.
 
 ## Availability
 
-Vulnerability Pipeline is available for:
+Automation Pipelines is available for:
 
 - Misconfigurations
 - Attack paths
@@ -28,10 +30,10 @@ Vulnerability Pipeline is available for:
 
 ## How it works
 
-Vulnerability Pipeline operates through a rules-based system that allows you to automate how new vulnerabilities are managed. Here's how it works:
+Automation Pipelines operates through a rules-based system that allows you to automate how new vulnerabilities are managed. Here's how it works:
 
 - **Rule configuration**: Each rule consists of multiple criteria, designed to filter vulnerabilities based on specific attributes. Within a rule, the combination of these criteria operates as a logical AND; however, if any criteria include multiple values, those values operate as a logical OR. This structure gives you the flexibility to create rules that precisely target your needs.
-- **Rule matching**: Vulnerability Pipeline evaluates vulnerabilities against your rules in the order you've listed them. As each vulnerability is processed, Vulnerability Pipeline moves through the list until it finds a matching rule, at which point the specified action—such as muting non-urgent issues or highlighting critical threats—is triggered.
+- **Rule matching**: Automation Pipelines evaluates vulnerabilities against your rules in the order you've listed them. As each vulnerability is processed, Automation Pipelines moves through the list until it finds a matching rule, at which point the specified action—such as muting non-urgent issues or highlighting critical threats—is triggered.
 
 ## Use cases
 
