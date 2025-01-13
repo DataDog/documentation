@@ -11,7 +11,7 @@ further_reading:
     text: "Datadog Scorecards"
   - link: "/service_catalog/software_templates/"
     tag: "Documentation"
-    text: "Datadog Scorecards"
+    text: "Datadog Software Templates"
 ---
 
 Datadog's Service Catalog automates key tasks and centralizes essential resources-such as docs, runbooks, [scorecards][1], and [templates][2]-to reduce time-to-first-commit and optimize the overall developer experience.

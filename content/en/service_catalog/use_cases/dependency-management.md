@@ -29,7 +29,7 @@ Datadog’s Service Catalog offers powerful dependency mapping capabilities to h
 
 ## Manual dependency definition in service catalog schema v3.0
 
-In Service Catalog schema v3.0, teams can manually define relationships to supplement auto-detected topologies. This features is particularly helpful for defining dependencies that reflect institutional knowledge and team collaboration, ensuring a more complete view of system relationships.
+In [Service Catalog schema v3.0][2], teams can manually define relationships to supplement auto-detected topologies. This features is particularly helpful for defining dependencies that reflect institutional knowledge and team collaboration, ensuring a more complete view of system relationships.
 
 {{< img src="tracing/service_catalog/dependency-mgmt-use-case-relationship-mapping.png" alt="A hierarchical relationships diagram showing a service's dependencies." >}}
 
@@ -37,9 +37,9 @@ In Service Catalog schema v3.0, teams can manually define relationships to suppl
 
 To define a manual dependency, update the `spec` section of the relevant entity definition using the following keys:
 
-  - dependsOn: Specifies dependencies (e.g., Service A depends on Service B).
-  - ownedBy: Assigns ownership to a team or group (e.g., Service A is owned by Team A).
-  - partOf: Groups components under a system (e.g., Service A is part of System A).
+  - ``dependsOn``: Specifies dependencies (e.g., Service A depends on Service B).
+  - ``ownedBy``: Assigns ownership to a team or group (e.g., Service A is owned by Team A).
+  - ``partOf``: Groups components under a system (e.g., Service A is part of System A).
 
 Example YAML configuration:
 
@@ -76,3 +76,4 @@ All dependencies, including manual dependencies, will be shown, and you can use 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/services
+[2]: /service_catalog/service_definitions/v3-0/

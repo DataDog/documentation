@@ -14,6 +14,9 @@ further_reading:
   - link: "/cloud_cost_management/"
     tag: "Documentation"
     text: "Datadog Cloud Cost Management"
+  - link: "https://www.datadoghq.com/blog/monitor-cloud-costs-with-scorecards/"
+    tag: "Blog"
+    text: "Best practices for monitoring cloud costs with Scorecards"
 ---
 
 Datadog’s [Service Catalog][4], [Scorecards][2], and [Workflow Automation][5] enable organizations to monitor and optimize cloud costs with team-level granularity, ensuring appropriate cost allocation and protocol compliance.
