@@ -72,7 +72,7 @@ Read more about container tags in the [Kubernetes][104] and [Docker][105] taggin
 
 ### DogStatsD protocol v1.3
 
-Agents v6.40.0+ and v7.40.0+ support an optional Unix timestamp field.
+Agents `v6.40.0+` and `v7.40.0+` supports an optional Unix timestamp field.
 
 When this field is provided, the Datadog Agent doesn't do any processing with the metrics (no aggregation) except from enriching the metrics with tags. This can be useful if you already aggregate your metrics in your application, and you want to send them to Datadog without extra processing.
 
@@ -86,11 +86,51 @@ The value is a Unix timestamp (UTC) and must be prefixed by `T`, for example:
 
 - `page.views:15|c|#env:dev|T1656581400`: A COUNT indicating that 15 page views happened on the 30th of June, 2022 at 9:30am UTC
 
+### DogStatsD protocol v1.4
+
+Starting with the Agent `>=v7.51.0`, a new inode value is supported for the container ID field.
+The container ID field can now contain two values to enrich DogStatsD metrics with additional container tags:
+- The container ID if available.
+- The cgroup node inode if the container ID is unavailable.
+
+The container ID field is still prefixed by `c:`, with the value being either:
+
+- `c:ci-<CONTAINER_ID>`
+- `c:in-<CGROUP_INODE>`
+
+### DogStatsD protocol v1.5
+
+Starting with the Agent `>=v7.57.0`, a new External Data field is supported.
+The Datadog Agent uses the External Data value to enrich DogStatsD metrics with additional container tags when the container ID is unavailable.
+
+The container ID is prefixed by `e:`, for example:
+
+`<METRIC_NAME>:<VALUE>|<TYPE>|#<TAG_KEY_1>:<TAG_VALUE_1>,<TAG_2>|e:<EXTERNAL_DATA>`
+
+This data is supplied by the [Datadog Agent Admission Controller][106] and will contain:
+- If the container is an init container or not.
+- The container name.
+- The pod UID.
+
+### DogStatsD protocol v1.6
+
+Starting with the Agent `>=v7.63.0`, a new Cardinality field is supported.
+The Datadog Agent uses the cardinality value to enrich DogStatsD metrics with additional container tags corresponding to their cardinality.
+
+The cardinality field is prefixed by `d:`, for example:
+
+`<METRIC_NAME>:<VALUE>|<TYPE>|#<TAG_KEY_1>:<TAG_VALUE_1>,<TAG_2>|d:<CARDINALITY>`
+
+Cardinality will impact tags enrichment for both:
+- [Docker Tags][105]
+- [Kubernetes Tags][104]
+
 [101]: /metrics/#metric-name
 [102]: /metrics/types/
 [103]: /getting_started/tagging/
 [104]: /containers/kubernetes/tag/?tab=containerizedagent#out-of-the-box-tags
 [105]: /containers/docker/tag/?tab=containerizedagent#out-of-the-box-tagging
+[106]: /containers/cluster_agent/admission_controller
 {{% /tab %}}
 {{% tab "Events" %}}
 
