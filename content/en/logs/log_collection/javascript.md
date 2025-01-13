@@ -23,7 +23,7 @@ With the browser logs SDK, you can send logs directly to Datadog from web browse
 
 **Datadog browser logs SDK**: Configure the SDK through [NPM](#npm) or use the [CDN async](#cdn-async) or [CDN sync](#cdn-sync) code snippets in the head tag.
 
-**Supported browsers**: The browser logs SDK supports all modern desktop and mobile browsers. See the [browser support][4] table.
+**Supported browsers**: The browser logs SDK supports all modern desktop and mobile browsers. See the [Browser Support][4] table.
 
 ### Choose the right installation method
 

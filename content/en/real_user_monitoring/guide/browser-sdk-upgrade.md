@@ -16,8 +16,8 @@ Follow this guide to migrate between major versions of the Browser RUM and Brows
 
 ## From v5 to v6
 
-V6's main improvement is the bundle size reduction. By dropping support for IE11 and leveraging lazy loading, the size of the RUM bundle has been reduced by 10% and the Logs bundle by nearly 9%.
-Additionally we've changed a few default initialization parameters and prepared for future improvements.
+The main improvement V6 offers is the bundle size reduction. By dropping support for IE11 and leveraging lazy loading, the size of the RUM bundle has been reduced by 10% and the Logs bundle by nearly 9%.
+Additionally, we've changed a few default initialization parameters and prepared for future improvements.
 
 Take notice of the below breaking changes as you upgrade your SDK.
 
@@ -60,17 +60,17 @@ To support anonymous user tracking, the session cookie (`_dd_s`) expiration is e
 
 Session Replay module is now lazy-loaded using [dynamic imports][30]. This loads the module only for sessions sampled for Session Replay, reducing the bundle size for others.
 
-**If you're using the SDK via NPM**, ensure your bundler supports dynamic imports. Most modern bundlers support this feature out of the box, but some may require configuration changes. Refer to your bundler's documentation for guidance: [Webpack][31], [Esbuild][32], [Rollup][33], [Parcel][34].
+**If you're using the SDK through NPM**, ensure your bundler supports dynamic imports. Most modern bundlers support this feature out of the box, but some may require configuration changes. Refer to your bundler's documentation for guidance: [Webpack][31], [Esbuild][32], [Rollup][33], [Parcel][34].
 
-**If you're using the SDK via a CDN**, there are no breaking changes. However, note that in addition to the main script being loaded (e.g.,
-`datadog-rum.js`), the SDK will dynamically load an additional chunk when needed: (e.g.
+**If you're using the SDK through a CDN**, there are no breaking changes. However, note that in addition to the main script being loaded (for example, 
+`datadog-rum.js`), the SDK will dynamically load an additional chunk when needed (for example, 
 `recorder-d7628536637b074ddc3b-datadog-rum.js`).
 
-#### Do not inject trace context for non sampled traces
+#### Do not inject trace context for non-sampled traces
 
-The default value for the `traceContextInjection` initialization parameter has been updated to `sampled` to ensure backend services' sampling decisions are applied when traces are not sampled in the Browser SDK. See: [Connect Rum and Traces documentation][29]
+The default value for the `traceContextInjection` initialization parameter has been updated to `sampled` to ensure backend services' sampling decisions are applied when traces are not sampled in the Browser SDK. See the [Connect RUM and Traces documentation][29] for more information.
 
-Note: If you're using a `traceSampleRate` of 100% (default), this change will not have any impact for you.
+**Note**: If you're using a `traceSampleRate` of 100% (default), this change does not have any impact for you.
 
 
 
@@ -79,7 +79,7 @@ Note: If you're using a `traceSampleRate` of 100% (default), this change will no
 #### Enabling compression for Datadog intake requests
 
 Compression for Datadog intake requests will be enabled by default in a future major version.
-It is recommended to opt-in to compression now using the `compressIntakeRequest` [initialization parameter][28].
+Datadog recommends that you opt-in to compression now using the `compressIntakeRequest` [initialization parameter][28].
 Since compression is performed in a Worker thread, configuring the Content Security Policy is necessary. See [CSP guidelines][18] for more information.
 
 ## From v4 to v5
