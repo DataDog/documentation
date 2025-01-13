@@ -1,11 +1,11 @@
 import fs from 'fs';
 import {
-  FilterOptionsConfig,
   PageFiltersManifestSchema,
   FileSearcher,
   FiltersManifestBuilder,
   ContentFiltersConfigByLang,
-  CdocsDataManager
+  CdocsDataManager,
+  ContentFiltersConfig
 } from 'cdocs-core';
 import { IntegrationConfig } from './schemas/config/integration';
 import { HugoGlobalConfig } from './schemas/config/hugo';
@@ -31,15 +31,7 @@ export class MarkdocHugoIntegration {
   hugoGlobalConfig: HugoGlobalConfig;
   private compiledFilePaths: string[] = [];
 
-  // New data types
-  // TODO: Do we even need the option glossary in the content filters config, or is it just
-  // for validation/population of the option groups?
   contentFiltersConfigByLang: ContentFiltersConfigByLang;
-
-  // legacy data types
-  filterOptionsConfigByLang: Record<string, FilterOptionsConfig>;
-  // glossariesByLang: Record<string, Glossary> = {};
-
   errorsByFilePath: Record<string, CompilationError[]> = {};
 
   /**
@@ -48,15 +40,10 @@ export class MarkdocHugoIntegration {
   constructor(args: { config: IntegrationConfig }) {
     this.hugoGlobalConfig = HugoGlobalConfigBuilder.build(args.config);
 
-    const { contentFiltersConfigByLang, filterOptionsConfigByLang } =
-      CdocsDataManager.loadContentFiltersConfig({
-        configDir: this.hugoGlobalConfig.dirs.filtersConfig,
-        langs: this.hugoGlobalConfig.languages
-      });
-
-    // legacy data types
-    // this.glossariesByLang = filtersConfig.glossariesByLang;
-    this.filterOptionsConfigByLang = filterOptionsConfigByLang;
+    const { contentFiltersConfigByLang } = CdocsDataManager.loadContentFiltersConfig({
+      configDir: this.hugoGlobalConfig.dirs.filtersConfig,
+      langs: this.hugoGlobalConfig.languages
+    });
 
     // new data types
     this.contentFiltersConfigByLang = contentFiltersConfigByLang;
@@ -188,7 +175,7 @@ export class MarkdocHugoIntegration {
       const compiledFilepath = this.#compileMdocFile({
         markdocFilepath,
         parsedFile,
-        filterOptionsConfig: this.filterOptionsConfigByLang[lang]
+        contentFiltersConfig: this.contentFiltersConfigByLang[lang]
       });
 
       if (compiledFilepath) {
@@ -241,7 +228,7 @@ export class MarkdocHugoIntegration {
   #compileMdocFile(p: {
     markdocFilepath: string;
     parsedFile: ParsedFile;
-    filterOptionsConfig: FilterOptionsConfig;
+    contentFiltersConfig: ContentFiltersConfig;
   }): string | null {
     const lang = p.markdocFilepath
       .replace(this.hugoGlobalConfig.dirs.content, '')
@@ -260,7 +247,7 @@ export class MarkdocHugoIntegration {
     // generate the filters manifest
     const draftFiltersManifest = FiltersManifestBuilder.build({
       frontmatter: p.parsedFile.frontmatter,
-      contentFiltersConfig: this.contentFiltersConfigByLang[lang]
+      contentFiltersConfig: p.contentFiltersConfig
     });
 
     if (draftFiltersManifest.errors.length > 0) {
