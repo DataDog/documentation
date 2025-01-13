@@ -4,7 +4,7 @@
  * page customization menu, based on their existing preferences.
  *
  * Organized as isolated functions to control bundle size,
- * since this code must run in the browser to support precompiled pages.
+ * since this code must run in the browser to support static pages.
  * It should not use Node features / backend logic
  * (for example, file system access).
  */

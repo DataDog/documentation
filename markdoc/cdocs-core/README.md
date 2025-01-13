@@ -1,125 +1,83 @@
 # cdocs-core
 
-Types and utilities for building customizable docs.
+Utilities for ingesting, validating, and mutating configuration data for customizable docs.
 
 ## What is a customizable doc?
 
-A customizable doc uses *content filters* to hide irrelevant content on a documentation page. For example, if the user sets a page's "Programming language" filter to Python, all code examples would be in Python, and sections irrelevant to Python would be hidden. A content filter should represent a user characteristic or preference, such as their operating system.
+A customizable doc uses filters to hide irrelevant content on a documentation page. For example, if the user sets the "Programming language" filter to Python, all code examples would be in Python, and sections irrelevant to Python would be hidden.
 
-All customizable docs at Datadog use the same configuration patterns and runtime data, regardless of whether the page was created in Hugo or Astro.
+## Configuration overview
 
-## What does this package provide?
+Most of the configuration data for customizable docs is sitewide, written in YAML files. 
 
-Because it's difficult to test every version of a customizable document manually, it's crucial to use valid configuration data that won't cause undetected issues in production.
+Sitewide configuration requires the definition of three entities: 
 
-This package contains types and utility functions for safely ingesting and validating configuration, and for mutating runtime data in response to changes in the user's preferences. It includes utilities for
+- *filters*, such as `operating_system`.
+- *options*, such as `linux`.
+- *option groups*, which are ordered lists of existing options that include a designated default option. 
+    - For example, an option group intended for use with the `operating_system` filter might include the options `linux`, `windows`, and `ios`, with `linux` configured as the default option.
 
-- processing YAML configuration files into validated JavaScript objects that can be consumed by site generators like Astro and Hugo
-- handling ongoing changes to the user's preferences (for example, in a site's client-side JavaScript if the page is statically rendered)
-- protecting against translation errors in configuration files
+The configuration for a given page can mix and match filters and options based on that page's specific context.
 
-For example, if a user changes their "Database" filter from "Postgres" to "Mongo", the options for the "Database version" filter should change accordingly. This package provides a function that re-resolves such options.
+## Sitewide configuration
 
-The compilation/rendering of customizable docs is out of scope for this package, since it varies depending on which documentation platform is used, whether server-side rendering is used, and so on. 
+### Filters
 
-## How are content filters configured?
-
-The name of each filter (such as "Favorite color") and the options for the filter (such as "purple" and "pink") are defined with YAML.
-
-Key concepts:
-
-- **Filters and their options are defined at the site level, not the page level.**
-- **A page's configuration doesn't create any new filters** -- it just reuses filters and options that already exist in the site configuration. A *page filter* is just a sitewide content filter whose options have been configured to match the context of the page.
-- **A filter can (and usually does) have more than one set of options.** For example, two different pages can have the same `host` filter, but offer different host options based on the page's context. This package includes utility functions to facilitate graceful transitions between pages that use different options for the same filter.
-
-### Site configuration scope
-
-The exact location of the sitewide configuration YAML files depends on the site generation platform. But the following entities must be defined somewhere in the site's files:
-
-- The list of filters, representing all of the choices the user can make on the site.
-- The list of options, representing every possible option that can be chosen on the site.
-- The *option sets*, which arrange the existing options into named, context-dependent lists, such as `product_abc_host_options` and `product_xyz_host_options`, and identify a default option for each named list.
-
-If you've worked with databases, think of `options sets` as a join table between the `filters` table and the `options` table. Customizable docs are configured this way to prevent sprawl and avoid redundant data that can fall out of sync.
-
-### Page configuration scope
-
-The page's frontmatter answers two questions:
-
-- Which existing filter do I want to use on this page?
-- Which existing options set should that filter use?
-
-### Example
-
-It can be easier to work backward from an example page, so imagine you want to create a page with two filters:
-
-- The user's host, such as `AWS`
-- The user's database, such as `Postgres`
-
-#### Page configuration
-
-Your page's frontmatter would look something like this:
+Customization requires at least one filter, such as `database`:
 
 ```yaml
-title: An Example Page
-customizations:
-  - filter_id: host
-    option_group_id: host_options
-  - filter_id: database
-    option_group_id: database_options
+filters:
+  - id: database
+    label: Database
 ```
 
-#### Site configuration
+Filters can be used in multiple pages, and a user's selection for a filter (for example, the selection of Python as the programming language) travels between pages whenever possible. 
 
-Below is a site configuration example that would support the example frontmatter above.
+The options for a filter can vary from page to page, so when the user's previous selection is not available, the default option is applied instead.
 
-##### `<SITE>/<CONFIG_FOLDER>/filters.yaml`
+### Options
 
-An annotated list of the choices the user can make, and descriptions of what this filter represents, and when it is appropriate to use on a page.
+Customization requires least two *options*, such as `postgres`:
 
 ```yaml
-- id: host
-  label: Host
-  description: "A cloud hosting provider, such as AWS or GCP. The value should be a vendor, not an operating system."
-- id: database
-  label: Database
-  description: "Any database, such as Postgres or Mongo."
+options:
+  - id: postgres
+    label: Postgres
+  - id: mysql
+    label: MySQL
+  - id: sqlite3
+    label: Sqlite3
+  - id: mongo
+    label: Mongo
 ```
 
-##### `<SITE>/<CONFIG_FOLDER>/options.yaml`
+Options can be used for more than one filter.
 
-A list of every possible option on the site. 
+### Option groups
 
-An option can be reused across option sets. For example, `product_a_operating_system_options` and `product_b_operating_system_options` might both include the same Linux option.
+Customization requires at least one *option group*, an ordered list of existing options (defined above).
 
 ```yaml
-# cloud hosting providers
-- id: aws
-  label: AWS
-- id: gcp
-  label: GCP
-- id: azure
-  label: Azure
-# databases
-- id: postgress
-  label: Postgres
-- id: my_sql
-  label: MySQL
-- id: mongo
-  label: Mongo
-```
-
-##### `<SITE>/<CONFIG_FOLDER>/option_sets.yaml`
-```yaml
-host_options:
-  - id: aws
-    default: true
-    id: gcp
-    id: azure
-
-database_options:
+product_one_db_options:
   - id: postgres
     default: true
-  - id: my_sql
+  - id: mysql
+
+product_two_db_options:
   - id: mongo
+    default: true
+  - id: mysql
+  - id: postgres
+  - id: sqlite3
+```
+
+## Page configuration
+
+A *customization*, which is defined in a page's frontmatter, pairs a filter and an options group for use on that page:
+
+```yaml
+title: My Example Doc
+customizations:
+  - filter_id: database
+    option_group_id: product_two_db_options
 ```
