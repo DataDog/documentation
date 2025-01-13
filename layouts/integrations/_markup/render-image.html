@@ -1,3 +1,4 @@
-{{- $url := .Destination | safeURL -}}
-{{- $alt := .PlainText | default "" -}}
-{{< img src="(print $url)" alt="(print $alt)" popup="true" >}}
+<img src="https://s3.amazonaws.com/dd-app-listings/{{ $app_id }}/media/{{ replaceRE `(./)?images/` "" .Destination }}"
+  {{- with .PlainText }} alt="{{ . }}"{{ end -}}
+  {{- with .Title }} title="{{ . }}"{{ end -}}
+>
