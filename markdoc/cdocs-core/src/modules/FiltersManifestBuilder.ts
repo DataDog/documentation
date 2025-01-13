@@ -93,12 +93,12 @@ export class FiltersManifestBuilder {
       // Get all possible options set IDs for this filter,
       // so each one can have its range of values processed
       // and the options set itself can be attached to the manifest
-      let optionsSetIds: string[] = [];
+      let optionGroupIds: string[] = [];
       const hasDynamicOptions = pageFilterConfig.options_source.match(PLACEHOLDER_REGEX);
 
       if (hasDynamicOptions) {
-        const { optionsSetIds: dynamicOptionsSetIds, errors } =
-          this.buildDynamicOptionsSetIds({
+        const { optionGroupIds: dynamicOptionGroupIds, errors } =
+          this.buildDynamicOptionGroupIds({
             filterId: pageFilterConfig.id,
             // filterOptionsConfig: p.filterOptionsConfig,
             contentFiltersConfig: p.contentFiltersConfig,
@@ -110,17 +110,17 @@ export class FiltersManifestBuilder {
           manifest.errors.push(...errors);
         }
 
-        optionsSetIds = dynamicOptionsSetIds;
+        optionGroupIds = dynamicOptionGroupIds;
       } else {
-        optionsSetIds = [pageFilterConfig.options_source];
+        optionGroupIds = [pageFilterConfig.options_source];
       }
 
       // Collect a default value for every possible options set ID,
       // along with all possible selected values for the filter
-      const { defaultValsByOptionsSetId, possibleVals, errors } =
+      const { defaultValsByOptionGroupId, possibleVals, errors } =
         this.getPossibleDefaultsAndSelectedValues({
           filterId: pageFilterConfig.id,
-          optionsSetIds,
+          optionGroupIds: optionGroupIds,
           // glossary: p.glossary,
           contentFiltersConfig: p.contentFiltersConfig,
           // filterOptionsConfig: p.filterOptionsConfig,
@@ -132,7 +132,7 @@ export class FiltersManifestBuilder {
 
       manifest.filtersById[pageFilterConfig.id] = {
         config: pageFilterConfig,
-        defaultValsByOptionGroupId: defaultValsByOptionsSetId,
+        defaultValsByOptionGroupId,
         possibleVals: possibleVals,
       };
 
@@ -161,30 +161,30 @@ export class FiltersManifestBuilder {
    */
   static getPossibleDefaultsAndSelectedValues(p: {
     filterId: string;
-    optionsSetIds: string[];
+    optionGroupIds: string[];
     // glossary: Glossary;
     // filterOptionsConfig: FilterOptionsConfig;
     contentFiltersConfig: ContentFiltersConfig;
   }): {
-    defaultValsByOptionsSetId: Record<string, string>;
+    defaultValsByOptionGroupId: Record<string, string>;
     possibleVals: string[];
     errors: CdocsCoreError[];
   } {
     // Populate the default value for each options set ID
-    const defaultValsByOptionsSetId: Record<string, string> = {};
+    const defaultValsByOptionGroupId: Record<string, string> = {};
     const possibleVals: string[] = [];
     const errors: CdocsCoreError[] = [];
 
-    p.optionsSetIds.forEach((optionsSetId) => {
-      const optionsSet = p.contentFiltersConfig.optionGroupGlossary[optionsSetId];
-      if (!optionsSet) {
+    p.optionGroupIds.forEach((optionGroupId) => {
+      const optionGroup = p.contentFiltersConfig.optionGroupGlossary[optionGroupId];
+      if (!optionGroup) {
         errors.push({
-          message: `Invalid options source: The options source '${optionsSetId}', which is required for the filter ID '${p.filterId}', does not exist.`,
+          message: `Invalid options source: The options source '${optionGroupId}', which is required for the filter ID '${p.filterId}', does not exist.`,
         });
         return;
       }
 
-      optionsSet.forEach((option) => {
+      optionGroup.forEach((option) => {
         if (!p.contentFiltersConfig.optionGlossary[option.id]) {
           errors.push({
             message: `Invalid option ID: The option ID '${option.id}' is not in the options glossary.`,
@@ -192,31 +192,35 @@ export class FiltersManifestBuilder {
         }
 
         if (option.default) {
-          defaultValsByOptionsSetId[optionsSetId] = option.id;
+          defaultValsByOptionGroupId[optionGroupId] = option.id;
         }
 
         possibleVals.push(option.id);
       });
     });
 
-    return { defaultValsByOptionsSetId, possibleVals, errors };
+    return {
+      defaultValsByOptionGroupId: defaultValsByOptionGroupId,
+      possibleVals,
+      errors,
+    };
   }
 
   /**
    * For filters whose options source contains placeholders,
-   * build all possible options set IDs that could be referenced
+   * build all possible option group IDs that could be referenced
    * by the filter, based on the preceding filters.
    */
-  static buildDynamicOptionsSetIds(p: {
+  static buildDynamicOptionGroupIds(p: {
     filterId: string;
     // filterOptionsConfig: FilterOptionsConfig;
     filterConfigsByFilterId: Record<string, PageFilterConfig>;
     precedingFilterIds: string[];
     contentFiltersConfig: ContentFiltersConfig;
-  }): { optionsSetIds: string[]; errors: CdocsCoreError[] } {
+  }): { optionGroupIds: string[]; errors: CdocsCoreError[] } {
     const filter = p.filterConfigsByFilterId[p.filterId];
 
-    let optionsSetIds: string[] = [];
+    let optionGroupIds: string[] = [];
     const errors: CdocsCoreError[] = [];
 
     const segments = filter.options_source.split('_').map((segment) => {
@@ -236,21 +240,21 @@ export class FiltersManifestBuilder {
         return [segment];
       }
 
-      const referencedOptionsSet =
+      const referencedOptionGroup =
         p.contentFiltersConfig.optionGroupGlossary[referencedFilterConfig.options_source];
 
-      return referencedOptionsSet.map((option) => option.id);
+      return referencedOptionGroup.map((option) => option.id);
     });
 
     // Only finish building the options set IDs if there are no errors,
     // to avoid generating invalid options set IDs
     if (errors.length === 0) {
-      optionsSetIds = this.buildSnakeCaseCombinations(segments);
+      optionGroupIds = this.buildSnakeCaseCombinations(segments);
     } else {
-      optionsSetIds = [];
+      optionGroupIds = [];
     }
 
-    return { optionsSetIds, errors };
+    return { optionGroupIds: optionGroupIds, errors };
   }
 
   /**
@@ -267,8 +271,8 @@ export class FiltersManifestBuilder {
     // Process each entry in the frontmatter's content_filters list
     for (const fmFilterConfig of p.filterConfigs) {
       // Replace any placeholders in the options source
-      const optionsSetId = fmFilterConfig.options_source;
-      const resolvedOptionsSetId = optionsSetId.replace(
+      const optionGroupId = fmFilterConfig.options_source;
+      const resolvedOptionGroupId = optionGroupId.replace(
         GLOBAL_PLACEHOLDER_REGEX,
         (_match: string, placeholder: string) => {
           const value = defaultValsByFilterId[placeholder.toLowerCase()];
@@ -277,13 +281,13 @@ export class FiltersManifestBuilder {
       );
 
       // Resolve the default option set for this filter
-      const resolvedOptionSet =
-        p.contentFiltersConfig.optionGroupGlossary[resolvedOptionsSetId];
+      const resolvedOptionGroup =
+        p.contentFiltersConfig.optionGroupGlossary[resolvedOptionGroupId];
 
-      if (resolvedOptionSet) {
+      if (resolvedOptionGroup) {
         defaultValsByFilterId[fmFilterConfig.id] =
           fmFilterConfig.default_value ||
-          resolvedOptionSet.find((option) => option.default)!.id;
+          resolvedOptionGroup.find((option) => option.default)!.id;
       }
     }
 

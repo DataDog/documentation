@@ -139,8 +139,8 @@
             pageFilterConfig: filterConfig,
             selectedValsByFilterId: valsByFilterIdDup
           });
-          const defaultValue = filterConfigDup.default_value || p.filtersManifest.optionSetsById[filterConfigDup.options_source].find((option) => option.default).id;
-          const possibleVals = p.filtersManifest.optionSetsById[filterConfigDup.options_source].map((option) => option.id);
+          const defaultValue = filterConfigDup.default_value || p.filtersManifest.optionGroupsById[filterConfigDup.options_source].find((option) => option.default).id;
+          const possibleVals = p.filtersManifest.optionGroupsById[filterConfigDup.options_source].map((option) => option.id);
           let currentValue = p.valsByFilterId[filterConfigDup.id];
           if (currentValue && !possibleVals.includes(currentValue)) {
             currentValue = defaultValue;
@@ -151,7 +151,7 @@
             displayName: filterConfigDup.display_name,
             defaultValue,
             currentValue,
-            options: p.filtersManifest.optionSetsById[filterConfigDup.options_source].map((option) => ({
+            options: p.filtersManifest.optionGroupsById[filterConfigDup.options_source].map((option) => ({
               id: option.id,
               displayName: option.display_name
             }))

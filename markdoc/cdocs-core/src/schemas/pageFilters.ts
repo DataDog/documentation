@@ -139,7 +139,7 @@ export const PageFilterManifestSchema = z
  *     options_source: 'aws_host_types',
  *     default_value: 'ec2'
  *   },
- *   defaultValsByOptionsSetId: {
+ *   defaultValsByOptionGroupId: {
  *     aws_host_types: 'ec2',
  *     gcp_host_types: 'gce',
  *     azure_host_types: 'vm'
@@ -190,7 +190,7 @@ export const PageFiltersManifestSchema = z
  *       options_source: 'host_options',
  *       default_value: 'aws'
  *     },
- *     defaultValsByOptionsSetId: {
+ *     defaultValsByOptionGroupId: {
  *       host_options: 'aws',
  *     },
  *     possibleVals: ['aws', 'gcp', 'azure']
@@ -205,7 +205,7 @@ export const PageFiltersManifestSchema = z
  *       options_source: 'aws_host_types',
  *       default_value: 'ec2'
  *     },
- *     defaultValsByOptionsSetId: {
+ *     defaultValsByOptionGroupId: {
  *       aws_host_types: 'ec2',
  *       gcp_host_types: 'gce',
  *       azure_host_types: 'vm'
