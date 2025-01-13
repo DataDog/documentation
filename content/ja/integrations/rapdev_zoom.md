@@ -143,4 +143,4 @@ Zoom インテグレーションにより、ミーティング、Rooms、ユー�
 
 
 ---
-このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/rapdev-zoom" target="_blank">こちらをクリック</a>してください。
+このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。利用するには、<a href="https://app.datadoghq.com/marketplace/app/rapdev-zoom" target="_blank">Marketplace でこのアプリケーションを購入してください</a>。

@@ -11,7 +11,7 @@ further_reading:
 SQL in [Analysis cells][1] allows you to analyze and manipulate data within Log Workspaces. This documentation covers the SQL support available in Log Workspaces and includes:
 - [Syntax compatible with PostgreSQL](#syntax)
 - [SQL functions](#functions)
-
+- [Window functions](#window-functions)
 
 {{< img src="/logs/workspace/sql_reference/sql_syntax_analysis_cell.png" alt="Example workspace cell with SQL syntax" style="width:100%;" >}}
 
@@ -39,12 +39,19 @@ WHERE department = 'Sales' AND name LIKE 'J%' {{< /code-block >}} |
     ELSE 'Standard Order' 
   END AS order_type 
 FROM orders {{< /code-block >}} |
+| `WINDOW` | Performs a calculation across a set of table rows that are related to the current row.                 | {{< code-block lang="sql" >}}SELECT
+  timestamp,
+  service_name,
+  cpu_usage_percent,
+  AVG(cpu_usage_percent) OVER (PARTITION BY service_name ORDER BY timestamp ROWS BETWEEN 2 PRECEDING AND CURRENT ROW) AS moving_avg_cpu
+FROM
+  cpu_usage_data {{< /code-block >}} |
 | Arithmetic Operations | Performs basic calculations using operators like `+`, `-`, `*`, `/`.                 | {{< code-block lang="sql" >}}SELECT price, tax, (price * tax) AS total_cost 
 FROM products {{< /code-block >}} |
 
 ## Functions
 
-The following SQL functions are supported:
+The following SQL functions are supported. For Window function, see the separate [Window function](#window-functions) section in this documentation.
 
 | Function               | Return Type                     | Description                                                             |
 |------------------------|---------------------------------|-------------------------------------------------------------------------|
@@ -60,7 +67,9 @@ The following SQL functions are supported:
 | `upper(string s)`      | string                        | Returns the string as uppercase.                                          |
 | `abs(numeric n)`       | numeric                       | Returns the absolute value.                                               |
 | `coalesce(args a)`     | typeof first non-null a OR null | Returns the first non-null value or null if all are null.               |
-
+| `cast(value AS type)`  | type                          | Converts the given value to the specified data type.                      |
+| `length(string s)`      | integer                       | Returns the number of characters in the string.                           |
+| `INTERVAL value unit`  | interval                      | Represents a time duration specified in a given unit.                     |
 
 
 {{% collapse-content title="Examples" level="h3" %}}
@@ -136,11 +145,51 @@ FROM accounts
 
 ### `COALESCE`  
 {{< code-block lang="sql" >}}
- SELECT COALESCE(phone_number, email) AS contact_info 
+SELECT COALESCE(phone_number, email) AS contact_info 
 FROM users 
 {{< /code-block >}} 
 
+### `CAST`  
+{{< code-block lang="sql" >}}
+SELECT
+  CAST(order_id AS VARCHAR) AS order_id_string,
+  'Order-' || CAST(order_id AS VARCHAR) AS order_label
+FROM
+  orders
+{{< /code-block >}} 
+
+### `LENGTH`  
+{{< code-block lang="sql" >}}
+SELECT
+  customer_name,
+  LENGTH(customer_name) AS name_length
+FROM
+  customers
+{{< /code-block >}} 
+
+### `INTERVAL`  
+{{< code-block lang="sql" >}}
+SELECT
+  TIMESTAMP '2023-10-01 10:00:00' + INTERVAL '30 days' AS future_date
+{{< /code-block >}} 
+
 {{% /collapse-content %}} 
+
+## Window functions
+
+This table provides an overview of the supprted window functions. For comprehensive details and examples, see to the [PostgreSQL documentation][2].
+
+| Function                | Return Type       | Description                                                            |
+|-------------------------|-------------------|------------------------------------------------------------------------|
+| `OVER`                  | N/A               | Defines a window for a set of rows for other window functions to operate on. |
+| `PARTITION BY`          | N/A               | Divides the result set into partitions, specifically for applying window functions. |
+| `RANK()`                | integer           | Assigns a rank to each row within a partition, with gaps for ties.     |
+| `ROW_NUMBER()`          | integer           | Assigns a unique sequential number to each row within a partition.     |
+| `LEAD(column n)`        | typeof column     | Returns the value from the next row in the partition.                  |
+| `LAG(column n)`         | typeof column     | Returns the value from the previous row in the partition.              |
+| `FIRST_VALUE(column n)` | typeof column     | Returns the first value in an ordered set of values.                   |
+| `LAST_VALUE(column n)`  | typeof column     | Returns the last value in an ordered set of values.                    |
+| `NTH_VALUE(column n, offset)`| typeof column | Returns the value at the specified offset in an ordered set of values. |
 
 
 ## Further reading
@@ -148,3 +197,4 @@ FROM users
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /logs/workspaces/#analysis-cell
+[2]: https://www.postgresql.org/docs/current/functions-window.html

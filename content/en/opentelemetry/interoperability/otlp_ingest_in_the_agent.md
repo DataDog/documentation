@@ -206,6 +206,35 @@ This enables each protocol in the default port (`4317` for OTLP/gRPC and `4318` 
 
 [1]: /agent/kubernetes/?tab=helm
 {{% /tab %}}
+{{% tab "Kubernetes (Operator)" %}}
+
+1. Follow the [Kubernetes Agent setup][1].
+
+2. Enable the preferred protocol in your Operator's manifest:
+
+   For gRPC:
+   ```yaml
+   features:
+     otlp:
+       receiver:
+         protocols:
+           grpc:
+             enabled: true
+   ```
+   For HTTP:
+   ```yaml
+   features:
+     otlp:
+       receiver:
+         protocols:
+           http:
+             enabled: true
+   ```
+
+This enables each protocol in the default port (`4317` for OTLP/gRPC and `4318` for OTLP/HTTP).
+
+[1]: /agent/kubernetes/?tab=helm
+{{% /tab %}}
 {{% tab "AWS Lambda" %}}
 
 For detailed instructions on using OpenTelemetry with AWS Lambda and Datadog, including:

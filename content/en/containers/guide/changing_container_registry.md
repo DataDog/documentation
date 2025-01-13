@@ -4,7 +4,7 @@ aliases:
  - /agent/guide/changing_container_registry
 ---
 
-Datadog publishes container images in Google's gcr.io, AWS' ECR, and on Docker Hub:
+Datadog publishes container images in Google's gcr.io, Azure ACR, AWS' ECR, and on Docker Hub:
 
 {{% container-images-table %}}
 
