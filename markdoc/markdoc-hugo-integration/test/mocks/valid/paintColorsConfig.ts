@@ -47,17 +47,17 @@ export const paintColorsFrontmatter: Frontmatter = {
     {
       display_name: 'Color',
       id: 'color',
-      options_source: 'color_options'
+      option_group: 'color_options'
     },
     {
       display_name: 'Finish',
       id: 'finish',
-      options_source: 'finish_options'
+      option_group: 'finish_options'
     },
     {
       display_name: 'Paint color',
       id: 'paint',
-      options_source: '<FINISH>_<COLOR>_paint_options'
+      option_group: '<FINISH>_<COLOR>_paint_options'
     }
   ]
 };

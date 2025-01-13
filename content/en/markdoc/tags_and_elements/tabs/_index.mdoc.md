@@ -4,7 +4,7 @@ private: true
 content_filters:
   - display_name: "Color"
     id: color
-    options_source: primary_color_options
+    option_group: primary_color_options
 ---
 
 ## Usage

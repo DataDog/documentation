@@ -3,10 +3,10 @@ title: The Primary Colors of the Color Wheel
 page_filters:
   - display_name: Color
     id: color
-    options_source: rainbow_color_options
+    option_group: rainbow_color_options
   - display_name: Item
     id: item
-    options_source: <COLOR>_item_options
+    option_group: <COLOR>_item_options
 ---
 <div id="mdoc-content" class="customizable"><article>
   <p>

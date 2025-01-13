@@ -136,7 +136,7 @@ export const PageFilterManifestSchema = z
  * {
  *   config: {
  *     id: 'host_type',
- *     options_source: 'aws_host_types',
+ *     option_group: 'aws_host_types',
  *     default_value: 'ec2'
  *   },
  *   defaultValsByOptionGroupId: {
@@ -187,7 +187,7 @@ export const PageFiltersManifestSchema = z
  *   host: {
  *     config: {
  *       id: 'host',
- *       options_source: 'host_options',
+ *       option_group: 'host_options',
  *       default_value: 'aws'
  *     },
  *     defaultValsByOptionGroupId: {
@@ -202,7 +202,7 @@ export const PageFiltersManifestSchema = z
  *   host_type: {
  *     config: {
  *       id: 'host_type',
- *       options_source: 'aws_host_types',
+ *       option_group: 'aws_host_types',
  *       default_value: 'ec2'
  *     },
  *     defaultValsByOptionGroupId: {

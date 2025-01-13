@@ -21,7 +21,7 @@ describe('FiltersManifestBuilder.build', () => {
           config: {
             display_name: 'Color',
             id: 'color',
-            options_source: 'color_options',
+            option_group: 'color_options',
           },
           defaultValsByOptionGroupId: {
             color_options: 'blue',
@@ -32,7 +32,7 @@ describe('FiltersManifestBuilder.build', () => {
           config: {
             display_name: 'Finish',
             id: 'finish',
-            options_source: 'finish_options',
+            option_group: 'finish_options',
           },
           defaultValsByOptionGroupId: {
             finish_options: 'eggshell',
@@ -43,7 +43,7 @@ describe('FiltersManifestBuilder.build', () => {
           config: {
             display_name: 'Paint color',
             id: 'paint',
-            options_source: '<FINISH>_<COLOR>_paint_options',
+            option_group: '<FINISH>_<COLOR>_paint_options',
           },
           defaultValsByOptionGroupId: {
             matte_blue_paint_options: 'powder_blue',
@@ -178,18 +178,18 @@ describe('FiltersManifestBuilder.build', () => {
         {
           display_name: 'Color',
           id: 'color',
-          options_source: 'color_options',
+          option_group: 'color_options',
         },
         {
           display_name: 'Finish',
           id: 'finish',
-          options_source: 'finish_options',
+          option_group: 'finish_options',
         },
         {
           display_name: 'Paint color',
           id: 'paint',
           // invalid placeholder 'COLOUR'
-          options_source: '<FINISH>_<COLOUR>_paint_options',
+          option_group: '<FINISH>_<COLOUR>_paint_options',
         },
       ],
     };

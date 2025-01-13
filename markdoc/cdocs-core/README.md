@@ -64,9 +64,9 @@ Your page's frontmatter would look something like this:
 title: An Example Page
 content_filters:
   - id: host
-    options_source: host_options
+    option_group: host_options
   - id: database
-    options_source: database_options
+    option_group: database_options
 ```
 
 #### Site configuration

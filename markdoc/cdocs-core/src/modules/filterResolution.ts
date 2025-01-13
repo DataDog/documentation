@@ -56,12 +56,12 @@ export function resolvePageFilters(p: {
     // if the current value is no longer valid after placeholder resolution
     const defaultValue =
       filterConfigDup.default_value ||
-      p.filtersManifest.optionGroupsById[filterConfigDup.options_source].find(
+      p.filtersManifest.optionGroupsById[filterConfigDup.option_group].find(
         (option) => option.default,
       )!.id;
 
     const possibleVals = p.filtersManifest.optionGroupsById[
-      filterConfigDup.options_source
+      filterConfigDup.option_group
     ].map((option) => option.id);
     let currentValue = p.valsByFilterId[filterConfigDup.id];
     if (currentValue && !possibleVals.includes(currentValue)) {
@@ -75,7 +75,7 @@ export function resolvePageFilters(p: {
       displayName: filterConfigDup.display_name,
       defaultValue,
       currentValue,
-      options: p.filtersManifest.optionGroupsById[filterConfigDup.options_source].map(
+      options: p.filtersManifest.optionGroupsById[filterConfigDup.option_group].map(
         (option) => ({
           id: option.id,
           displayName: option.display_name,
@@ -104,9 +104,9 @@ export function resolveFilterOptionsSource(p: {
   const filterConfigDup = { ...p.pageFilterConfig };
 
   // Replace any placeholder in the options source with the selected value
-  if (GLOBAL_PLACEHOLDER_REGEX.test(filterConfigDup.options_source)) {
+  if (GLOBAL_PLACEHOLDER_REGEX.test(filterConfigDup.option_group)) {
     // Resolve the options source
-    filterConfigDup.options_source = filterConfigDup.options_source.replace(
+    filterConfigDup.option_group = filterConfigDup.option_group.replace(
       GLOBAL_PLACEHOLDER_REGEX,
       (_match: string, placeholder: string) => {
         return p.selectedValsByFilterId[placeholder.toLowerCase()];

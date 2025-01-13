@@ -3,10 +3,10 @@ title: The Primary Colors of the Color Wheel
 content_filters:
   - display_name: "Color"
     id: color
-    options_source: primary_color_options
+    option_group: primary_color_options
   - display_name: "Item"
     id: item
-    options_source: <COLOR>_object_options
+    option_group: <COLOR>_object_options
 ---
 <!-- mistake above: <COLOR>_object_options instead of <COLOR>_item_options -->
 

@@ -9,7 +9,7 @@ export const PageFilterConfigSchema = z
   .object({
     display_name: z.string(),
     id: z.string().regex(SNAKE_CASE_REGEX),
-    options_source: z.string().regex(FILTER_OPTIONS_ID_REGEX),
+    option_group: z.string().regex(FILTER_OPTIONS_ID_REGEX),
     default_value: z.string().regex(SNAKE_CASE_REGEX).optional(),
   })
   .strict();
@@ -22,7 +22,7 @@ export const PageFilterConfigSchema = z
  * {
  *   display_name: "Database",
  *   id: "database",
- *   options_source: "dbm_database_options",
+ *   option_group: "dbm_database_options",
  *   default_value: "postgres" // optional override
  * }
  */
@@ -91,17 +91,17 @@ export const FrontmatterSchema = z.object({
  *     {
  *       display_name: "Color",
  *       id: "color",
- *       options_source: "color_options"
+ *       option_group: "color_options"
  *     },
  *     {
  *       display_name: "Finish",
  *       id: "finish",
- *       options_source: "paint_finish_options"
+ *       option_group: "paint_finish_options"
  *     },
  *     {
  *       display_name: "Paint color",
  *       id: "paint_color",
- *       options_source: "<FINISH>_<COLOR>_paint_options"
+ *       option_group: "<FINISH>_<COLOR>_paint_options"
  *     }
  *   ]
  * }

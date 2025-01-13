@@ -3,10 +3,10 @@ title: Primary Colors
 content_filters:
   - display_name: "Color"
     id: color
-    options_source: primary_color_options
+    option_group: primary_color_options
   - display_name: "Item"
     id: item
-    options_source: <COLOR>_item_options
+    option_group: <COLOR>_item_options
 aliases:
   - /primary_colors_alias/
 ---

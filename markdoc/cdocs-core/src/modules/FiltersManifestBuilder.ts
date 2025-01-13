@@ -94,7 +94,7 @@ export class FiltersManifestBuilder {
       // so each one can have its range of values processed
       // and the options set itself can be attached to the manifest
       let optionGroupIds: string[] = [];
-      const hasDynamicOptions = pageFilterConfig.options_source.match(PLACEHOLDER_REGEX);
+      const hasDynamicOptions = pageFilterConfig.option_group.match(PLACEHOLDER_REGEX);
 
       if (hasDynamicOptions) {
         const { optionGroupIds: dynamicOptionGroupIds, errors } =
@@ -112,7 +112,7 @@ export class FiltersManifestBuilder {
 
         optionGroupIds = dynamicOptionGroupIds;
       } else {
-        optionGroupIds = [pageFilterConfig.options_source];
+        optionGroupIds = [pageFilterConfig.option_group];
       }
 
       // Collect a default value for every possible options set ID,
@@ -223,7 +223,7 @@ export class FiltersManifestBuilder {
     let optionGroupIds: string[] = [];
     const errors: CdocsCoreError[] = [];
 
-    const segments = filter.options_source.split('_').map((segment) => {
+    const segments = filter.option_group.split('_').map((segment) => {
       // build non-placeholder segment (array of solitary possible value)
       if (!segment.match(PLACEHOLDER_REGEX)) {
         return [segment];
@@ -234,14 +234,14 @@ export class FiltersManifestBuilder {
       const referencedFilterConfig = p.filterConfigsByFilterId[referencedFilterId];
       if (!referencedFilterConfig || !p.precedingFilterIds.includes(referencedFilterId)) {
         errors.push({
-          message: `Invalid placeholder: The placeholder ${segment} in the options source '${filter.options_source}' refers to an unrecognized filter ID. The file frontmatter must contain a filter with the ID '${referencedFilterId}', and it must be defined before the filter with the ID ${filter.id}.`,
-          searchTerm: filter.options_source,
+          message: `Invalid placeholder: The placeholder ${segment} in the options source '${filter.option_group}' refers to an unrecognized filter ID. The file frontmatter must contain a filter with the ID '${referencedFilterId}', and it must be defined before the filter with the ID ${filter.id}.`,
+          searchTerm: filter.option_group,
         });
         return [segment];
       }
 
       const referencedOptionGroup =
-        p.contentFiltersConfig.optionGroupGlossary[referencedFilterConfig.options_source];
+        p.contentFiltersConfig.optionGroupGlossary[referencedFilterConfig.option_group];
 
       return referencedOptionGroup.map((option) => option.id);
     });
@@ -271,7 +271,7 @@ export class FiltersManifestBuilder {
     // Process each entry in the frontmatter's content_filters list
     for (const fmFilterConfig of p.filterConfigs) {
       // Replace any placeholders in the options source
-      const optionGroupId = fmFilterConfig.options_source;
+      const optionGroupId = fmFilterConfig.option_group;
       const resolvedOptionGroupId = optionGroupId.replace(
         GLOBAL_PLACEHOLDER_REGEX,
         (_match: string, placeholder: string) => {
