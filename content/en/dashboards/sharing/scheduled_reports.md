@@ -25,7 +25,7 @@ Scheduled reports enable Datadog users to share dashboards as high-density PDFs 
 
 The report PDF is included as an email attachment or as a link, depending on its size.
 
-**{{< img src="dashboards/scheduled_reports/report_pdf.png" alt="Example report PDF attachment" style="width:90%;" >}}**
+{{< img src="dashboards/scheduled_reports/report_pdf.png" alt="Example report PDF attachment" style="width:90%;" >}}
 
 ## Schedule a report
 
