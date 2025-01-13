@@ -112,25 +112,6 @@
           "display_name": "Blueberry"
         }
       ],
-      "green_item_options": [
-        {
-          "default": true,
-          "id": "grass",
-          "display_name": "Grass"
-        },
-        {
-          "id": "emerald",
-          "display_name": "Emerald"
-        },
-        {
-          "id": "lime",
-          "display_name": "Lime"
-        },
-        {
-          "id": "frog",
-          "display_name": "Frog"
-        }
-      ],
       "traffic_light_color_options": [
         {
           "id": "red",
@@ -159,6 +140,25 @@
           "default": true,
           "id": "blue",
           "display_name": "Blue"
+        }
+      ],
+      "green_item_options": [
+        {
+          "default": true,
+          "id": "grass",
+          "display_name": "Grass"
+        },
+        {
+          "id": "emerald",
+          "display_name": "Emerald"
+        },
+        {
+          "id": "lime",
+          "display_name": "Lime"
+        },
+        {
+          "id": "frog",
+          "display_name": "Frog"
         }
       ],
       "red_item_options": [
@@ -314,25 +314,6 @@
           "display_name": "Blueberry"
         }
       ],
-      "green_item_options": [
-        {
-          "default": true,
-          "id": "grass",
-          "display_name": "Grass"
-        },
-        {
-          "id": "emerald",
-          "display_name": "Emerald"
-        },
-        {
-          "id": "lime",
-          "display_name": "Lime"
-        },
-        {
-          "id": "frog",
-          "display_name": "Frog"
-        }
-      ],
       "traffic_light_color_options": [
         {
           "id": "red",
@@ -361,6 +342,25 @@
           "default": true,
           "id": "blue",
           "display_name": "Blue (ja)"
+        }
+      ],
+      "green_item_options": [
+        {
+          "default": true,
+          "id": "grass",
+          "display_name": "Grass"
+        },
+        {
+          "id": "emerald",
+          "display_name": "Emerald"
+        },
+        {
+          "id": "lime",
+          "display_name": "Lime"
+        },
+        {
+          "id": "frog",
+          "display_name": "Frog"
         }
       ],
       "red_item_options": [
