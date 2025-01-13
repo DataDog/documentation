@@ -113,7 +113,7 @@ export type ResolvedPageFilters = z.infer<typeof ResolvedPageFiltersSchema>;
 export const PageFilterManifestSchema = z
   .object({
     config: PageFilterConfigSchema,
-    defaultValsByOptionsSetId: z.record(
+    defaultValsByOptionGroupId: z.record(
       z.string().regex(FILTER_OPTIONS_ID_REGEX),
       z.string().regex(SNAKE_CASE_REGEX),
     ),
@@ -151,7 +151,7 @@ export type PageFilterManifest = z.infer<typeof PageFilterManifestSchema>;
 
 /**
  * A object containing all of the potential page filter IDs
- * and option sets for a page, created by populating the front matter
+ * and option groups for a page, created by populating the front matter
  * placeholders with all possible values, then collecting all
  * configuration data necessary to support the resulting
  * filter and options set IDs.
@@ -162,7 +162,7 @@ export type PageFilterManifest = z.infer<typeof PageFilterManifestSchema>;
 export const PageFiltersManifestSchema = z
   .object({
     filtersById: z.record(z.string().regex(SNAKE_CASE_REGEX), PageFilterManifestSchema),
-    optionSetsById: OptionGroupGlossarySchema,
+    optionGroupsById: OptionGroupGlossarySchema,
     defaultValsByFilterId: z.record(
       z.string().regex(SNAKE_CASE_REGEX),
       z.string().regex(SNAKE_CASE_REGEX),
@@ -173,7 +173,7 @@ export const PageFiltersManifestSchema = z
 
 /**
  * A object containing all of the potential page filter IDs
- * and option sets for a page, created by populating the front matter
+ * and option groups for a page, created by populating the front matter
  * placeholders with all possible values, then collecting all
  * configuration data necessary to support the resulting
  * filter and options set IDs.
@@ -223,7 +223,7 @@ export type PageFiltersManifest = z.infer<typeof PageFiltersManifestSchema>;
 export const PageFilterClientSideManifestSchema = z
   .object({
     config: PageFilterConfigSchema,
-    defaultValsByOptionsSetId: z.record(
+    defaultValsByOptionGroupId: z.record(
       z.string().regex(FILTER_OPTIONS_ID_REGEX),
       z.string().regex(SNAKE_CASE_REGEX),
     ),
@@ -244,7 +244,7 @@ export const PageFiltersClientSideManifestSchema = z
       z.string().regex(SNAKE_CASE_REGEX),
       PageFilterClientSideManifestSchema,
     ),
-    optionSetsById: OptionGroupGlossarySchema,
+    optionGroupsById: OptionGroupGlossarySchema,
     defaultValsByFilterId: z.record(
       z.string().regex(SNAKE_CASE_REGEX),
       z.string().regex(SNAKE_CASE_REGEX),

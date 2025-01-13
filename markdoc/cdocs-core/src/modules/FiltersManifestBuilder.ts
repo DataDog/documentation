@@ -23,14 +23,14 @@ export class FiltersManifestBuilder {
     const result: PageFiltersClientSideManifest = {
       filtersById: {},
       defaultValsByFilterId: { ...manifest.defaultValsByFilterId },
-      optionSetsById: { ...manifest.optionSetsById },
+      optionGroupsById: { ...manifest.optionGroupsById },
     };
 
     Object.keys(manifest.filtersById).forEach((filterId) => {
       const filter = manifest.filtersById[filterId];
       result.filtersById[filterId] = {
         config: { ...filter.config },
-        defaultValsByOptionsSetId: { ...filter.defaultValsByOptionsSetId },
+        defaultValsByOptionGroupId: { ...filter.defaultValsByOptionGroupId },
       };
     });
 
@@ -51,7 +51,7 @@ export class FiltersManifestBuilder {
     // Create an empty manifest to populate
     const manifest: PageFiltersManifest = {
       filtersById: {},
-      optionSetsById: {},
+      optionGroupsById: {},
       errors: [],
       defaultValsByFilterId: {},
     };
@@ -132,7 +132,7 @@ export class FiltersManifestBuilder {
 
       manifest.filtersById[pageFilterConfig.id] = {
         config: pageFilterConfig,
-        defaultValsByOptionsSetId: defaultValsByOptionsSetId,
+        defaultValsByOptionGroupId: defaultValsByOptionsSetId,
         possibleVals: possibleVals,
       };
 
@@ -142,11 +142,11 @@ export class FiltersManifestBuilder {
     // Attach any options sets that were referenced by the filters
     Object.keys(manifest.filtersById).forEach((filterId) => {
       const filterManifest = manifest.filtersById[filterId];
-      const optionsSetIds = Object.keys(filterManifest.defaultValsByOptionsSetId);
-      optionsSetIds.forEach((optionsSetId) => {
-        if (!manifest.optionSetsById[optionsSetId]) {
-          manifest.optionSetsById[optionsSetId] =
-            p.contentFiltersConfig.optionGroupGlossary[optionsSetId];
+      const optionGroupIds = Object.keys(filterManifest.defaultValsByOptionGroupId);
+      optionGroupIds.forEach((optionGroupId) => {
+        if (!manifest.optionGroupsById[optionGroupId]) {
+          manifest.optionGroupsById[optionGroupId] =
+            p.contentFiltersConfig.optionGroupGlossary[optionGroupId];
         }
       });
     });

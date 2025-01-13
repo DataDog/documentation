@@ -23,7 +23,7 @@ describe('FiltersManifestBuilder.build', () => {
             id: 'color',
             options_source: 'color_options',
           },
-          defaultValsByOptionsSetId: {
+          defaultValsByOptionGroupId: {
             color_options: 'blue',
           },
           possibleVals: ['blue', 'red'],
@@ -34,7 +34,7 @@ describe('FiltersManifestBuilder.build', () => {
             id: 'finish',
             options_source: 'finish_options',
           },
-          defaultValsByOptionsSetId: {
+          defaultValsByOptionGroupId: {
             finish_options: 'eggshell',
           },
           possibleVals: ['matte', 'eggshell', 'gloss'],
@@ -45,7 +45,7 @@ describe('FiltersManifestBuilder.build', () => {
             id: 'paint',
             options_source: '<FINISH>_<COLOR>_paint_options',
           },
-          defaultValsByOptionsSetId: {
+          defaultValsByOptionGroupId: {
             matte_blue_paint_options: 'powder_blue',
             matte_red_paint_options: 'brick',
             eggshell_blue_paint_options: 'elegant_royal',
@@ -68,7 +68,7 @@ describe('FiltersManifestBuilder.build', () => {
           ],
         },
       },
-      optionSetsById: {
+      optionGroupsById: {
         color_options: [
           {
             id: 'blue',

@@ -41,11 +41,9 @@ export function resolvePageFilters(p: {
   const resolvedPageFilters: ResolvedPageFilters = {};
   const valsByFilterIdDup = { ...p.valsByFilterId };
 
-  const pageFiltersConfig = Object.values(p.filtersManifest.filtersById).map(
-    (filter) => {
-      return filter.config;
-    },
-  );
+  const pageFiltersConfig = Object.values(p.filtersManifest.filtersById).map((filter) => {
+    return filter.config;
+  });
 
   pageFiltersConfig.forEach((filterConfig) => {
     // If the options source contains a placeholder, resolve it
@@ -58,11 +56,11 @@ export function resolvePageFilters(p: {
     // if the current value is no longer valid after placeholder resolution
     const defaultValue =
       filterConfigDup.default_value ||
-      p.filtersManifest.optionSetsById[filterConfigDup.options_source].find(
+      p.filtersManifest.optionGroupsById[filterConfigDup.options_source].find(
         (option) => option.default,
       )!.id;
 
-    const possibleVals = p.filtersManifest.optionSetsById[
+    const possibleVals = p.filtersManifest.optionGroupsById[
       filterConfigDup.options_source
     ].map((option) => option.id);
     let currentValue = p.valsByFilterId[filterConfigDup.id];
@@ -77,12 +75,12 @@ export function resolvePageFilters(p: {
       displayName: filterConfigDup.display_name,
       defaultValue,
       currentValue,
-      options: p.filtersManifest.optionSetsById[
-        filterConfigDup.options_source
-      ].map((option) => ({
-        id: option.id,
-        displayName: option.display_name,
-      })),
+      options: p.filtersManifest.optionGroupsById[filterConfigDup.options_source].map(
+        (option) => ({
+          id: option.id,
+          displayName: option.display_name,
+        }),
+      ),
     };
 
     resolvedPageFilters[filterConfigDup.id] = resolvedFilter;

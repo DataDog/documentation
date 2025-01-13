@@ -17,8 +17,8 @@ import {
   CompilationResult
 } from './schemas/compilationResults';
 import { HugoGlobalConfigBuilder } from './helperModules/HugoGlobalConfigBuilder';
-import { AuthorConsoleData } from './schemas/authorConsole';
-import { AuthorConsoleBuilder } from './helperModules/AuthorConsoleBuilder';
+// import { AuthorConsoleData } from './schemas/authorConsole';
+// import { AuthorConsoleBuilder } from './helperModules/AuthorConsoleBuilder';
 
 /**
  * The external interface of the integration.
