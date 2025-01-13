@@ -48,7 +48,7 @@ export class YamlConfigParser {
 
     let result: FilterGlossary;
 
-    const glossaryPath = `${p.langDir}/glossary/filter_ids.yaml`;
+    const glossaryPath = `${p.langDir}/filters/filters.yaml`;
 
     try {
       const glossaryYamlStr = fs.readFileSync(glossaryPath, 'utf8');
@@ -82,7 +82,7 @@ export class YamlConfigParser {
 
     let result: OptionGlossary;
 
-    const glossaryFilePath = `${p.langDir}/glossary/filter_options.yaml`;
+    const glossaryFilePath = `${p.langDir}/options/options.yaml`;
 
     try {
       const glossaryStr = fs.readFileSync(glossaryFilePath, 'utf8');
