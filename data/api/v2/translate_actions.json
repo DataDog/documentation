@@ -1149,6 +1149,10 @@
     "request_description": "",
     "request_schema_description": "A request to update an Org Config."
   },
+  "DeleteCustomFramework": {
+    "description": "Delete a custom framework.",
+    "summary": "Delete a custom framework"
+  },
   "ListPermissions": {
     "description": "Returns a list of all permissions, including name, description, and ID.",
     "summary": "List permissions"

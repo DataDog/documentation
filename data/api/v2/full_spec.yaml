@@ -225,6 +225,27 @@ components:
       required: true
       schema:
         type: string
+    CustomFrameworkHandle:
+      description: The framework handle.
+      in: path
+      name: handle
+      required: true
+      schema:
+        type: string
+    CustomFrameworkOrgID:
+      description: The ID of the organization.
+      in: path
+      name: org_id
+      required: true
+      schema:
+        type: string
+    CustomFrameworkVersion:
+      description: The framework version.
+      in: path
+      name: version
+      required: true
+      schema:
+        type: string
     EntityID:
       description: UUID or Entity Ref.
       in: path
@@ -7964,6 +7985,54 @@ components:
             $ref: '#/components/schemas/CustomDestinationResponseDefinition'
           type: array
       type: object
+    CustomFrameworkMetadata:
+      description: Response object for an organization's custom frameworks.
+      properties:
+        created_at:
+          description: Framework Creation Date
+          format: int64
+          type: integer
+        created_by:
+          description: Framework Creator
+          type: string
+        description:
+          description: Framework Description
+          type: string
+        handle:
+          description: Framework Handle
+          example: ''
+          type: string
+        icon_url:
+          description: Framework Icon URL
+          type: string
+        id:
+          description: Custom Framework ID
+          example: ''
+          type: string
+        name:
+          description: Framework Name
+          example: ''
+          type: string
+        org_id:
+          description: Org ID
+          example: 0
+          format: int64
+          type: integer
+        updated_at:
+          description: Framework Update Date
+          format: int64
+          type: integer
+        version:
+          description: Framework Version
+          example: ''
+          type: string
+      required:
+      - id
+      - org_id
+      - handle
+      - version
+      - name
+      type: object
     DORADeploymentRequest:
       description: Request to create a DORA deployment event.
       properties:
@@ -8369,6 +8438,12 @@ components:
             nullable: true
             type: number
           type: array
+      type: object
+    DeleteCustomFrameworkResponse:
+      description: Delete a custom framework.
+      properties:
+        data:
+          $ref: '#/components/schemas/CustomFrameworkMetadata'
       type: object
     DependencyLocation:
       description: Static library vulnerability location.
@@ -40660,6 +40735,42 @@ paths:
         - org_management
       x-undo:
         type: idempotent
+  /api/v2/orgs/{org_id}/cloud_security_management/custom_frameworks/{handle}/{version}:
+    delete:
+      description: Delete a custom framework.
+      operationId: DeleteCustomFramework
+      parameters:
+      - $ref: '#/components/parameters/CustomFrameworkOrgID'
+      - $ref: '#/components/parameters/CustomFrameworkHandle'
+      - $ref: '#/components/parameters/CustomFrameworkVersion'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteCustomFrameworkResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+        '500':
+          $ref: '#/components/responses/BadRequestResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_rules_read
+      summary: Delete a custom framework
+      tags:
+      - Security Monitoring
+      x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - security_monitoring_rules_read
+      x-undo:
+        type: safe
   /api/v2/permissions:
     get:
       description: Returns a list of all permissions, including name, description,
