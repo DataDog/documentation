@@ -375,7 +375,7 @@ Evaluations must be joined to a unique span. You can identify the target span us
 | Field                  | Type   | Description  |
 |------------------------|--------|--------------|
 | ID                     | string | Evaluation metric UUID (generated upon submission). |
-| join_on [*required*]    | [[JoinOn](#JoinOn)] | How the evaluation is joined to a span. |
+| join_on [*required*]    | [[JoinOn](#joinon)] | How the evaluation is joined to a span. |
 | timestamp_ms [*required*] | int64  | A UTC UNIX timestamp in milliseconds representing the time the request was sent. |
 | ml_app [*required*] | string | The name of your LLM application. See [Application naming guidelines](#application-naming-guidelines). |
 | metric_type [*required*]| string | The type of evaluation: `"categorical"` or `"score"`. |
