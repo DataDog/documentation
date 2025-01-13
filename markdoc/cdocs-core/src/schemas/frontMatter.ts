@@ -2,10 +2,10 @@ import { z } from 'zod';
 import { SNAKE_CASE_REGEX, FILTER_OPTIONS_ID_REGEX } from './regexes';
 
 /**
- * The configuration of an individual page filter,
+ * The configuration of an individual page customization,
  * as defined in the front matter of a document.
  */
-export const PageFilterConfigSchema = z
+export const CustomizationConfigSchema = z
   .object({
     label: z.string(),
     filter_id: z.string().regex(SNAKE_CASE_REGEX),
@@ -15,7 +15,7 @@ export const PageFilterConfigSchema = z
   .strict();
 
 /**
- * The configuration of an individual page filter,
+ * The configuration of an individual page customization,
  * as defined in the front matter of a document.
  *
  * @example
@@ -26,14 +26,14 @@ export const PageFilterConfigSchema = z
  *   default_value: "postgres" // optional override
  * }
  */
-export type PageFilterConfig = z.infer<typeof PageFilterConfigSchema>;
+export type CustomizationConfig = z.infer<typeof CustomizationConfigSchema>;
 
 /**
  * The list of page filters, as defined in the front matter
  * of a document, validated as a whole.
  */
-export const PageFiltersConfigSchema = z
-  .array(PageFilterConfigSchema)
+export const CustomizationsConfigSchema = z
+  .array(CustomizationConfigSchema)
   .refine((filtersConfig) => {
     // Page filter names must be unique within a page
     const filterNames = filtersConfig.map((filterConfig) => filterConfig.label);
@@ -64,10 +64,10 @@ export const PageFiltersConfigSchema = z
   });
 
 /**
- * The list of page filters, as defined in the front matter
+ * The list of page customizations, as defined in the front matter
  * of a document.
  */
-export type PageFiltersConfig = z.infer<typeof PageFiltersConfigSchema>;
+export type CustomizationsConfig = z.infer<typeof CustomizationsConfigSchema>;
 
 /**
  * The front matter of a document required by the integration
@@ -76,7 +76,7 @@ export type PageFiltersConfig = z.infer<typeof PageFiltersConfigSchema>;
  */
 export const FrontmatterSchema = z.object({
   title: z.string(),
-  customizations: PageFiltersConfigSchema.optional(),
+  customizations: CustomizationsConfigSchema.optional(),
 });
 
 /**

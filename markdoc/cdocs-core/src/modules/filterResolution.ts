@@ -12,11 +12,11 @@
 import { GLOBAL_PLACEHOLDER_REGEX } from '../schemas/regexes';
 import {
   ResolvedPageFilters,
-  ResolvedPageFilter,
+  ResolvedCustomization,
   PageFiltersManifest,
   PageFiltersClientSideManifest,
 } from '../schemas/pageFilters';
-import { PageFilterConfig } from '../schemas/frontMatter';
+import { CustomizationConfig } from '../schemas/frontMatter';
 
 /**
  * Resolve the page filters object that is used
@@ -70,7 +70,7 @@ export function resolvePageFilters(p: {
     }
 
     // Add the resolved filter to the returned object
-    const resolvedFilter: ResolvedPageFilter = {
+    const resolvedFilter: ResolvedCustomization = {
       id: filterConfigDup.filter_id,
       label: filterConfigDup.label,
       defaultValue,
@@ -96,9 +96,9 @@ export function resolvePageFilters(p: {
  * the resolved options source would be "red_gloss_paint_options".
  */
 export function resolveFilterOptionsSource(p: {
-  pageFilterConfig: PageFilterConfig;
+  pageFilterConfig: CustomizationConfig;
   selectedValsByFilterId: Record<string, string>;
-}): PageFilterConfig {
+}): CustomizationConfig {
   // Make a copy in order to preserve the placeholders
   // for future use
   const filterConfigDup = { ...p.pageFilterConfig };

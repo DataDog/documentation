@@ -5,7 +5,7 @@ import {
   PageFiltersManifest,
   PageFiltersClientSideManifest,
 } from '../schemas/pageFilters';
-import { PageFilterConfig } from '../schemas/frontMatter';
+import { CustomizationConfig } from '../schemas/frontMatter';
 import { CdocsCoreError } from '../schemas/errors';
 import { ContentFiltersConfig } from '../schemas/contentFiltersConfig';
 
@@ -69,7 +69,7 @@ export class FiltersManifestBuilder {
     });
 
     // Key the configs by filter ID, for convenient access during processing
-    const filterConfigByFilterId: Record<string, PageFilterConfig> =
+    const filterConfigByFilterId: Record<string, CustomizationConfig> =
       p.frontmatter.customizations.reduce(
         (obj, filterConfig) => ({ ...obj, [filterConfig.filter_id]: filterConfig }),
         {},
@@ -214,7 +214,7 @@ export class FiltersManifestBuilder {
   static buildDynamicOptionGroupIds(p: {
     filterId: string;
     // filterOptionsConfig: FilterOptionsConfig;
-    filterConfigsByFilterId: Record<string, PageFilterConfig>;
+    filterConfigsByFilterId: Record<string, CustomizationConfig>;
     precedingFilterIds: string[];
     contentFiltersConfig: ContentFiltersConfig;
   }): { optionGroupIds: string[]; errors: CdocsCoreError[] } {
@@ -265,7 +265,7 @@ export class FiltersManifestBuilder {
    */
   static getDefaultValsByFilterId(p: {
     // filterOptionsConfig: FilterOptionsConfig;
-    customizations: PageFilterConfig[];
+    customizations: CustomizationConfig[];
     contentFiltersConfig: ContentFiltersConfig;
   }): Record<string, string> {
     const defaultValsByFilterId: Record<string, string> = {};

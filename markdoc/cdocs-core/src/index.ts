@@ -14,19 +14,19 @@ export { CdocsCoreError, CdocsCoreErrorSchema } from './schemas/errors';
 export {
   Frontmatter,
   FrontmatterSchema,
-  PageFilterConfig,
-  PageFilterConfigSchema,
+  CustomizationConfig as PageFilterConfig,
+  CustomizationConfigSchema as PageFilterConfigSchema,
 } from './schemas/frontMatter';
 
 export {
   PageFiltersManifest,
   PageFiltersManifestSchema,
-  ResolvedPageFilter,
-  ResolvedPageFilterSchema,
+  ResolvedCustomization as ResolvedPageFilter,
+  ResolvedCustomizationSchema as ResolvedPageFilterSchema,
   PageFiltersClientSideManifest,
   PageFiltersClientSideManifestSchema,
   ResolvedPageFilters,
-  ResolvedPageFiltersSchema,
+  ResolvedCustomizationsSchema as ResolvedPageFiltersSchema,
 } from './schemas/pageFilters';
 
 export { CdocsDataManager } from './modules/CdocsDataManager';

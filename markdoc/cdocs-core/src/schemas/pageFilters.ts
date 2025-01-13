@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import { FILTER_OPTIONS_ID_REGEX, SNAKE_CASE_REGEX } from './regexes';
-import { PageFilterConfigSchema } from './frontMatter';
+import { CustomizationConfigSchema } from './frontMatter';
 import { CdocsCoreErrorSchema } from './errors';
 import { OptionGroupGlossarySchema } from './glossaries/optionGroupGlossary';
 
@@ -18,7 +18,7 @@ const ResolvedPageFilterOptionSchema = z
   .strict();
 
 /**
- * A page filter that has been "resolved" into
+ * A page customization that has been "resolved" into
  * its current value and available options.
  * The current value can be derived from default values
  * or user selections, and the available options
@@ -31,7 +31,7 @@ const ResolvedPageFilterOptionSchema = z
  * "resolved" (narrowed) based on the user's selection of dbm_host,
  * since not every possible host type option is valid for all hosts.
  */
-export const ResolvedPageFilterSchema = z
+export const ResolvedCustomizationSchema = z
   .object({
     // The unique ID of the variable
     id: z.string().regex(SNAKE_CASE_REGEX),
@@ -69,19 +69,19 @@ export const ResolvedPageFilterSchema = z
  *   ]
  * }
  */
-export type ResolvedPageFilter = z.infer<typeof ResolvedPageFilterSchema>;
+export type ResolvedCustomization = z.infer<typeof ResolvedCustomizationSchema>;
 
 /**
- * A collection of ResolvedPageFilter objects, indexed by their
+ * A collection of ResolvedCustomization objects, indexed by their
  * unique IDs.
  */
-export const ResolvedPageFiltersSchema = z.record(ResolvedPageFilterSchema);
+export const ResolvedCustomizationsSchema = z.record(ResolvedCustomizationSchema);
 
 /**
- * A collection of ResolvedPageFilter objects, indexed by their
+ * A collection of ResolvedCustomization objects, indexed by their
  * unique IDs.
  *
- * Page filters are resolved by combining data from
+ * Page customizations are resolved by combining data from
  * several sources, such as the page's URL, the frontmatter,
  * the default value for the filter,
  * and the user's stored filters.
@@ -100,19 +100,19 @@ export const ResolvedPageFiltersSchema = z.record(ResolvedPageFilterSchema);
  *   }
  * }
  */
-export type ResolvedPageFilters = z.infer<typeof ResolvedPageFiltersSchema>;
+export type ResolvedPageFilters = z.infer<typeof ResolvedCustomizationsSchema>;
 
 /**
- * The manifest for a single page filter,
+ * The manifest for a single page customization,
  * containing all of the configuration data necessary
- * to support the filter and its options.
+ * to support the customization and its options.
  *
  * This is used to efficiently validate, resolve,
- * and re-resolve the filter.
+ * and re-resolve the customization.
  */
-export const PageFilterManifestSchema = z
+export const CustomizationManifestSchema = z
   .object({
-    config: PageFilterConfigSchema,
+    config: CustomizationConfigSchema,
     defaultValsByOptionGroupId: z.record(
       z.string().regex(FILTER_OPTIONS_ID_REGEX),
       z.string().regex(SNAKE_CASE_REGEX),
@@ -147,7 +147,7 @@ export const PageFilterManifestSchema = z
  *   possibleVals: ['ec2', 'gce', [... many more possible values here]]
  * }
  */
-export type PageFilterManifest = z.infer<typeof PageFilterManifestSchema>;
+export type PageFilterManifest = z.infer<typeof CustomizationManifestSchema>;
 
 /**
  * A object containing all of the potential page filter IDs
@@ -161,7 +161,10 @@ export type PageFilterManifest = z.infer<typeof PageFilterManifestSchema>;
  */
 export const PageFiltersManifestSchema = z
   .object({
-    filtersById: z.record(z.string().regex(SNAKE_CASE_REGEX), PageFilterManifestSchema),
+    filtersById: z.record(
+      z.string().regex(SNAKE_CASE_REGEX),
+      CustomizationManifestSchema,
+    ),
     optionGroupsById: OptionGroupGlossarySchema,
     defaultValsByFilterId: z.record(
       z.string().regex(SNAKE_CASE_REGEX),
@@ -222,7 +225,7 @@ export type PageFiltersManifest = z.infer<typeof PageFiltersManifestSchema>;
  */
 export const PageFilterClientSideManifestSchema = z
   .object({
-    config: PageFilterConfigSchema,
+    config: CustomizationConfigSchema,
     defaultValsByOptionGroupId: z.record(
       z.string().regex(FILTER_OPTIONS_ID_REGEX),
       z.string().regex(SNAKE_CASE_REGEX),
