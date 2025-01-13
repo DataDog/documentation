@@ -43,7 +43,7 @@ In the configuration modal that opens, set a schedule for the report to determin
 
 Define the report title and set a time frame to determine the range of time displayed in the resulting report. The report time frame can be different from the time frame displayed on the dashboard.
 
-**Note:** Modifying the report timeframe will update the **Schedule Preview** dropdown table above.
+**Note:** Modifying the report time frame updates the **Schedule Preview** dropdown table above.
 
 **{{< img src="dashboards/scheduled_reports/configure_report.png" alt="Section for defining a report schedule" style="width:90%;" >}}**
 
