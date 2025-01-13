@@ -122,7 +122,7 @@ Add [`@datadog/browser-rum`][4] to your `package.json` file, then initialize it 
 {{< tabs >}}
 {{% tab "RUM" %}}
 
-{{% collapse-content title="Latest version" level="h4" %}}
+{{% collapse-content title="Latest version" level="h4" expanded="true" %}}
 
 ```javascript
 import { datadogRum } from '@datadog/browser-rum'
@@ -275,7 +275,7 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
 {{< tabs >}}
 {{% tab "RUM" %}}
 
-{{% collapse-content title="Latest version" level="h4" %}}
+{{% collapse-content title="Latest version" level="h4" expanded="true" %}}
 
 {{< site-region region="us" >}}
 ```html
@@ -1187,7 +1187,7 @@ Add the generated code snippet to the head tag (in front of any other script tag
 {{< tabs >}}
 {{% tab "RUM" %}}
 
-{{% collapse-content title="Latest version" level="h4" %}}
+{{% collapse-content title="Latest version" level="h4" expanded="true" %}}
 
 {{< site-region region="us" >}}
 ```html

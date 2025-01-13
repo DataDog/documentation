@@ -47,6 +47,17 @@ After you click **Save**, LLM Observability invokes a `GPT-4o mini` model using 
 
 For more information about evaluations, see [Terms and Concepts][1].
 
+### Estimated Token Usage
+
+LLM Observability provides metrics to help you monitor and manage the token usage associated with evaluations that power LLM Observability. The following metrics allow you to track the LLM resources consumed to power evaluations:
+
+
+- `ml_obs.estimated_usage.llm.input.tokens`
+- `ml_obs.estimated_usage.llm.output.tokens`
+- `ml_obs.estimated_usage.llm.total.tokens`
+
+Each of these metrics has `ml_app`, `model_server`, `model_provider`, `model_name`, and `evaluation_name` tags, allowing you to pinpoint specific applications, models, and evaluations contributing to your usage.
+
 ## Provide topics for topic relevancy
 
 Providing topics allows you to use the [topic relevancy][4] evaluation. 
