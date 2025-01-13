@@ -32,7 +32,7 @@ The Go Tracer v2 is in Preview! See <a href="/tracing/trace_collection/custom_in
 
 | Version	| Preview	   | General Availability (GA)	| Maintenance	| End-of-life (EOL) |
 |---------|------------|----------------------------|-------------|-------------------|
-| v2      | 2024-11-27 | 2025-02-05 (projected)     | TBD         | TBD               |
+| v2      | 2024-11-27 | TBD     | TBD         | TBD               |
 | v1      | 2018-06-06 | 2018-06-06                 | 2025-02-05  | 2025-12-31        |
 | v0      | 2016-12-12 | 2016-12-12                 | 2018-06-06  | 2019-06-06        |
 
