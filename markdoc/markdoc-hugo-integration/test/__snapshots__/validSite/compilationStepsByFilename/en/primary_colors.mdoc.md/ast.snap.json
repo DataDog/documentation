@@ -4,7 +4,7 @@
   "lines": [],
   "inline": false,
   "attributes": {
-    "frontmatter": "title: Primary Colors\ncontent_filters:\n  - display_name: \"Color\"\n    id: color\n    option_group: primary_color_options\n  - display_name: \"Item\"\n    id: item\n    option_group: <COLOR>_item_options\naliases:\n  - /primary_colors_alias/"
+    "frontmatter": "title: Primary Colors\ncontent_filters:\n  - label: \"Color\"\n    id: color\n    option_group: primary_color_options\n  - label: \"Item\"\n    id: item\n    option_group: <COLOR>_item_options\naliases:\n  - /primary_colors_alias/"
   },
   "children": [
     {

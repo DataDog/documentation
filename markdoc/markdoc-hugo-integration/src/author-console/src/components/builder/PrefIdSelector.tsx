@@ -15,7 +15,7 @@ export default function PrefIdSelector(props: {
 }) {
   const prefOptions = Object.keys(props.allowlist.prefsById).map((prefId) => {
     const pref = props.allowlist.prefsById[prefId];
-    const label = `${pref.display_name} (\`${pref.id}\`)${pref.description && ':'} ${
+    const label = `${pref.label} (\`${pref.id}\`)${pref.description && ':'} ${
       pref.description || ''
     }`;
     return { label, value: pref.id };

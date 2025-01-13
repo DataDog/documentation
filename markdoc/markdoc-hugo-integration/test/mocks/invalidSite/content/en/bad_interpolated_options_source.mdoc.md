@@ -1,10 +1,10 @@
 ---
 title: The Primary Colors of the Color Wheel
 content_filters:
-  - display_name: "Color"
+  - label: "Color"
     id: color
     option_group: rainbow_color_options # mistake, not all of these colors will yield a valid options source for the item preference
-  - display_name: "Item"
+  - label: "Item"
     id: item
     option_group: <COLOR>_item_options
 ---

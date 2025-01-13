@@ -4,5 +4,5 @@ red_item_options:
     default: true
   - id: firetruck
     # test of individual display name overrides
-    display_name: "Ja firetruck"
+    label: "Ja firetruck"
   - id: stop_sign

@@ -1,10 +1,10 @@
 ---
 title: Traffic Light Colors
 content_filters:
-  - display_name: "Color"
+  - label: "Color"
     id: color
     option_group: traffic_light_color_options
-  - display_name: "Item"
+  - label: "Item"
     id: item
     option_group: <COLOR>_item_options
 ---

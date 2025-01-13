@@ -1,50 +1,50 @@
   allowed:
   # Colors
   - id: red
-    display_name: Red
+    label: Red
   - id: blue
-    display_name: Blue
+    label: Blue
   - id: yellow
-    display_name: Yellow
+    label: Yellow
   - id: green
-    display_name: Green
+    label: Green
 
   # Blue items
-  - display_name: Ocean
+  - label: Ocean
     id: ocean
-  - display_name: Sky
+  - label: Sky
     id: sky
-  - display_name: Jeans
+  - label: Jeans
     id: jeans
-  - display_name: Blueberry
+  - label: Blueberry
     id: blueberry
 
   # Green items
-  - display_name: Grass
+  - label: Grass
     id: grass
-  - display_name: Emerald
+  - label: Emerald
     id: emerald
-  - display_name: Lime
+  - label: Lime
     id: lime
-  - display_name: Frog
+  - label: Frog
     id: frog
 
   # Red items
   - id: ruby
-    display_name: Ruby
+    label: Ruby
   - id: apple
-    display_name: Apple
+    label: Apple
   - id: firetruck
-    display_name: Firetruck
+    label: Firetruck
   - id: stop_sign
-    display_name: Stop sign
+    label: Stop sign
 
   # Yellow items
   - id: banana
-    display_name: Banana
+    label: Banana
   - id: sunflower
-    display_name: Sunflower
+    label: Sunflower
   - id: lemon
-    display_name: Lemon
+    label: Lemon
   - id: school_bus
-    display_name: School bus
+    label: School bus

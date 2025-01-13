@@ -1,5 +1,5 @@
 allowed:
 - id: red
-  display_name: Red
+  label: Red
 - id: green
-  display_name: Green
+  label: Green

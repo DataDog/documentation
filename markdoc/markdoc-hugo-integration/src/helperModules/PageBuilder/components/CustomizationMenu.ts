@@ -40,7 +40,7 @@ function buildFilterSelectorPills(p: { filter: ResolvedPageFilter }) {
   selectorHtml += `<p 
     id="cdoc-${p.filter.id}-pills-label" 
     class="cdoc-filter-label"
-  >${p.filter.displayName}</p>`;
+  >${p.filter.label}</p>`;
 
   // Render each option
   p.filter.options.forEach((option) => {
@@ -51,7 +51,7 @@ function buildFilterSelectorPills(p: { filter: ResolvedPageFilter }) {
       data-option-id="${option.id}"
       aria-selected="${isSelected}"
       tabIndex="0"
-    >${option.displayName}</button>`;
+    >${option.label}</button>`;
   });
 
   // Close the top-level container
@@ -82,7 +82,7 @@ function buildFilterSelectorDropdown(p: { filter: ResolvedPageFilter }) {
   selectorHtml += `<p 
     id="${filterLabelElementId}" 
     class="cdoc-filter-label"
-  >${p.filter.displayName}</p>`;
+  >${p.filter.label}</p>`;
 
   // Open the wrapper for the button and options list
   selectorHtml += `<div 
@@ -101,7 +101,7 @@ function buildFilterSelectorDropdown(p: { filter: ResolvedPageFilter }) {
       <span 
         id="cdoc-dropdown-${p.filter.id}-label" 
         class="cdoc-btn-label"
-      >${p.filter.options.find((o) => o.id === currentValue)!.displayName}</span>
+      >${p.filter.options.find((o) => o.id === currentValue)!.label}</span>
       <div class="cdoc-chevron"></div>
     </button>`;
 
@@ -122,7 +122,7 @@ function buildFilterSelectorDropdown(p: { filter: ResolvedPageFilter }) {
       role="option" 
       aria-selected="${isSelected}"
       tabIndex="0"
-    >${option.displayName}</a>`;
+    >${option.label}</a>`;
   });
 
   // Close the options list

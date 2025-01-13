@@ -35,7 +35,7 @@
         selectorHtml += `<p 
     id="cdoc-${p.filter.id}-pills-label" 
     class="cdoc-filter-label"
-  >${p.filter.displayName}</p>`;
+  >${p.filter.label}</p>`;
         p.filter.options.forEach((option) => {
           const isSelected = option.id === currentValue;
           selectorHtml += `<button
@@ -44,7 +44,7 @@
       data-option-id="${option.id}"
       aria-selected="${isSelected}"
       tabIndex="0"
-    >${option.displayName}</button>`;
+    >${option.label}</button>`;
         });
         selectorHtml += "</div>";
         return selectorHtml;
@@ -65,7 +65,7 @@
         selectorHtml += `<p 
     id="${filterLabelElementId}" 
     class="cdoc-filter-label"
-  >${p.filter.displayName}</p>`;
+  >${p.filter.label}</p>`;
         selectorHtml += `<div 
     id="cdoc-dropdown-${p.filter.id}" 
     class="cdoc-dropdown">`;
@@ -80,7 +80,7 @@
       <span 
         id="cdoc-dropdown-${p.filter.id}-label" 
         class="cdoc-btn-label"
-      >${p.filter.options.find((o) => o.id === currentValue).displayName}</span>
+      >${p.filter.options.find((o) => o.id === currentValue).label}</span>
       <div class="cdoc-chevron"></div>
     </button>`;
         selectorHtml += `<div 
@@ -97,7 +97,7 @@
       role="option" 
       aria-selected="${isSelected}"
       tabIndex="0"
-    >${option.displayName}</a>`;
+    >${option.label}</a>`;
         });
         selectorHtml += "</div>";
         selectorHtml += "</div>";
@@ -148,12 +148,12 @@
           }
           const resolvedFilter = {
             id: filterConfigDup.id,
-            displayName: filterConfigDup.display_name,
+            label: filterConfigDup.label,
             defaultValue,
             currentValue,
             options: p.filtersManifest.optionGroupsById[filterConfigDup.option_group].map((option) => ({
               id: option.id,
-              displayName: option.display_name
+              label: option.label
             }))
           };
           resolvedPageFilters[filterConfigDup.id] = resolvedFilter;

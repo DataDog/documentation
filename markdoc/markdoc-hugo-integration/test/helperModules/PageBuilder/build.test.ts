@@ -2,7 +2,6 @@ import { describe, test, expect } from 'vitest';
 import { MdocFileParser } from '../../../src/helperModules/MdocFileParser';
 import { PageBuilder } from '../../../src/helperModules/PageBuilder';
 import {
-  YamlConfigParser,
   FiltersManifestBuilder,
   PageFiltersManifestSchema,
   CdocsDataManager
@@ -16,7 +15,6 @@ import {
 import { mockHugoGlobalConfig, mockPageConfig } from '../../mocks/valid/hugoConfig';
 
 describe('PageBuilder.build', () => {
-  const LANG_DIR = VALID_FILTERS_CONFIG_DIR + '/en';
   const testFilePath = VALID_CONTENT_DIR + '/en/primary_colors.mdoc.md';
   const { contentFiltersConfigByLang } = CdocsDataManager.loadContentFiltersConfig({
     configDir: VALID_FILTERS_CONFIG_DIR,

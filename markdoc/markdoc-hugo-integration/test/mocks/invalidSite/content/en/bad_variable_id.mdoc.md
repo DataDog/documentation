@@ -1,10 +1,10 @@
 ---
 title: The Primary Colors of the Color Wheel
 content_filters:
-  - display_name: "Color"
+  - label: "Color"
     id: color
     option_group: primary_color_options
-  - display_name: "Item"
+  - label: "Item"
     id: item
     option_group: <COLOR>_item_options
 ---

@@ -1,9 +1,9 @@
 allowed:
 - id: red
-  display_name: Red
+  label: Red
 - id: yellow
-  display_name: Yellow
+  label: Yellow
 - id: green
-  display_name: Green
+  label: Green
 - id: blue
-  display_name: Blue
+  label: Blue

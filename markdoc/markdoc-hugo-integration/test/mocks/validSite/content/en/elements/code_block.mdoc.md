@@ -1,7 +1,7 @@
 ---
 title: Code Block
 content_filters:
-  - display_name: "Color"
+  - label: "Color"
     id: color
     option_group: primary_color_options
 ---
