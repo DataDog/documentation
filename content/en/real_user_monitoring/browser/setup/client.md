@@ -21,7 +21,7 @@ The Datadog Browser SDK can be used to instrument your application for both [Rea
 
 After your applications have been manually instrumented, you can begin managing your RUM and Error Tracking configurations per application in Datadog.
 
-The Browser SDK supports all modern desktop and mobile browsers including IE11. For more information, see the [Browser Support][3] table.
+The Browser SDK supports all modern desktop and mobile browsers. For more information, see the [Browser Support][3] table.
 
 
 ## Setup
@@ -2062,20 +2062,26 @@ Allows you to control RUM views creation. See [override default RUM view names][
 `trackUserInteractions`
 : Optional<br/>
 **Type**: Boolean<br/>
-**Default**: `false` <br/>
+**Default**: `true` <br/>
 Enables [automatic collection of users actions][6].
 
 `trackResources`
 : Optional<br/>
 **Type**: Boolean<br/>
-**Default**: `false` <br/>
+**Default**: `true` <br/>
 Enables collection of resource events.
 
 `trackLongTasks`
 : Optional<br/>
 **Type**: Boolean<br/>
-**Default**: `false` <br/>
+**Default**: `true` <br/>
 Enables collection of long task events.
+
+`trackAnonymousUser`
+: Optional<br/>
+**Type**: Boolean<br/>
+**Default**: `true` <br/>
+Enables collection of anonymous user id across sessions.
 
 `defaultPrivacyLevel`
 : Optional<br/>
@@ -2193,12 +2199,6 @@ Use a secure session cookie. This disables RUM events sent on insecure (non-HTTP
 **Type**: Boolean<br/>
 **Default**:`false`<br/>
 Use a partitioned secure cross-site session cookie. This allows the RUM Browser SDK to run when the site is loaded from another one (iframe). Implies `useSecureSessionCookie`.
-
-`useCrossSiteSessionCookie`
-: Optional - **Deprecated**<br/>
-**Type**: Boolean<br/>
-**Default**:`false`<br/>
-See `usePartitionedCrossSiteSessionCookie`.
 
 `allowFallbackToLocalStorage`
 : Optional - **Deprecated**<br/>
@@ -2372,12 +2372,6 @@ Use a secure session cookie. This disables events sent on insecure (non-HTTPS) c
 **Type**: Boolean<br/>
 **Default**:`false`<br/>
 Use a partitioned secure cross-site session cookie. This allows the Browser SDK to run when the site is loaded from another one (iframe). Implies `useSecureSessionCookie`.
-
-`useCrossSiteSessionCookie`
-: Optional - **Deprecated**<br/>
-**Type**: Boolean<br/>
-**Default**:`false`<br/>
-See `usePartitionedCrossSiteSessionCookie`.
 
 `allowFallbackToLocalStorage`
 : Optional - **Deprecated**<br/>

@@ -23,7 +23,7 @@ With the browser logs SDK, you can send logs directly to Datadog from web browse
 
 **Datadog browser logs SDK**: Configure the SDK through [NPM](#npm) or use the [CDN async](#cdn-async) or [CDN sync](#cdn-sync) code snippets in the head tag.
 
-**Supported browsers**: The browser logs SDK supports all modern desktop and mobile browsers including IE11. See the [browser support][4] table.
+**Supported browsers**: The browser logs SDK supports all modern desktop and mobile browsers. See the [Browser Support][4] table.
 
 ### Choose the right installation method
 
@@ -373,10 +373,10 @@ Options that must have a matching configuration when using the `RUM` SDK:
 | Parameter                              | Type                            | Required | Default    | Description                                                                                                                                                                                                                                                              |
 | -------------------------------------- | ------------------------------- | -------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `sessionPersistence`                   | `"cookie"` or `"local-storage"` | No       | `"cookie"` | Which storage strategy to use for persisting sessions. Can be either `cookie` or `local-storage`.                                                                                                                                                                        |
+| `trackAnonymousUser`                   | Boolean                         | No       | `true`     | Enables collection of anonymous user id across sessions.                                                                                                                                                                        |
 | `trackSessionAcrossSubdomains`         | Boolean                         | No       | `false`    | Preserve the session across subdomains for the same site.                                                                                                                                                                                                                |
 | `useSecureSessionCookie`               | Boolean                         | No       | `false`    | Use a secure session cookie. This disables logs sent on insecure (non-HTTPS) connections.                                                                                                                                                                                |
 | `usePartitionedCrossSiteSessionCookie` | Boolean                         | No       | `false`    | Use a partitioned secure cross-site session cookie. This allows the logs SDK to run when the site is loaded from another one (iframe). Implies `useSecureSessionCookie`.                                                                                                 |
-| `useCrossSiteSessionCookie`            | Boolean                         | No       | `false`    | **Deprecated**, see `usePartitionedCrossSiteSessionCookie`.                                                                                                                                                                                                              |
 | `usePciIntake`                         | Boolean                         | No       | `false`    | To forward logs to the [PCI-compliant intake][16], set to `true`. The PCI-compliant intake is only available for Datadog organizations in the US1 site. If `usePciIntake` is set to `true` and the site is not US1 (datadoghq.com), logs are sent to the default intake. |
 
 ## Usage
