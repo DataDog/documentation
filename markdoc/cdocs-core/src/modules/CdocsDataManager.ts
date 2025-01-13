@@ -1,10 +1,7 @@
 import { YamlConfigParser } from './YamlConfigParser';
 import { FilterOptionsConfig } from '../schemas/filterOptions';
 import { Glossary } from '../schemas/glossary';
-import { FilterGlossary } from '../schemas/glossaries/filterGlossary';
-import { OptionGlossary } from '../schemas/glossaries/optionGlossary';
-import { OptionGroupGlossary } from '../schemas/glossaries/optionGroupGlossary';
-import { ContentFiltersConfig } from '../schemas/contentFiltersConfig';
+import { ContentFiltersConfigByLang } from '../schemas/contentFiltersConfig';
 
 // TODO: In the config directory, use a glossary folder for each glossary type,
 // and update the load functions.
@@ -28,7 +25,7 @@ export class CdocsDataManager {
   }): {
     glossariesByLang: Record<string, Glossary>;
     filterOptionsConfigByLang: Record<string, FilterOptionsConfig>;
-    contentFiltersConfig: ContentFiltersConfig;
+    contentFiltersConfigByLang: ContentFiltersConfigByLang;
   } {
     const defaultLang = p.defaultLang || 'en';
 
@@ -98,14 +95,20 @@ export class CdocsDataManager {
       };
     });
 
+    const contentFiltersConfigByLang: ContentFiltersConfigByLang = {};
+
+    p.langs.forEach((lang) => {
+      contentFiltersConfigByLang[lang] = {
+        filterGlossary: filterGlossariesByLang[lang],
+        optionGlossary: optionGlossariesByLang[lang],
+        optionGroupGlossary: optionGroupGlossariesByLang[lang],
+      };
+    });
+
     return {
       glossariesByLang,
       filterOptionsConfigByLang,
-      contentFiltersConfig: {
-        filterGlossariesByLang,
-        optionGlossariesByLang,
-        optionGroupGlossariesByLang,
-      },
+      contentFiltersConfigByLang,
     };
   }
 }

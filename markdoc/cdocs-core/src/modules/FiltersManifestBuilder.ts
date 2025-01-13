@@ -9,6 +9,7 @@ import {
 } from '../schemas/pageFilters';
 import { PageFilterConfig } from '../schemas/frontMatter';
 import { CdocsCoreError } from '../schemas/errors';
+import { ContentFiltersConfig } from '../schemas/contentFiltersConfig';
 
 /**
  * A module responsible for combining ingested configuration data
@@ -20,9 +21,7 @@ export class FiltersManifestBuilder {
    * Convert a standard compile-time page filters manifest
    * to a lighter version to be used client-side.
    */
-  static minifyManifest(
-    manifest: PageFiltersManifest,
-  ): PageFiltersClientSideManifest {
+  static minifyManifest(manifest: PageFiltersManifest): PageFiltersClientSideManifest {
     const result: PageFiltersClientSideManifest = {
       filtersById: {},
       defaultValsByFilterId: { ...manifest.defaultValsByFilterId },
@@ -47,7 +46,8 @@ export class FiltersManifestBuilder {
    */
   static build(p: {
     frontmatter: Frontmatter;
-    filterOptionsConfig: FilterOptionsConfig;
+    // filterOptionsConfig: FilterOptionsConfig;
+    contentFiltersConfig: ContentFiltersConfig;
     glossary: Glossary;
   }): PageFiltersManifest {
     // Create an empty manifest to populate
@@ -66,7 +66,7 @@ export class FiltersManifestBuilder {
     // Collect default values for each filter, keyed by filter ID,
     // used to resolve placeholders in options sources
     manifest.defaultValsByFilterId = this.getDefaultValsByFilterId({
-      filterOptionsConfig: p.filterOptionsConfig,
+      contentFiltersConfig: p.contentFiltersConfig,
       filterConfigs: p.frontmatter.content_filters,
     });
 
@@ -96,14 +96,14 @@ export class FiltersManifestBuilder {
       // so each one can have its range of values processed
       // and the options set itself can be attached to the manifest
       let optionsSetIds: string[] = [];
-      const hasDynamicOptions =
-        pageFilterConfig.options_source.match(PLACEHOLDER_REGEX);
+      const hasDynamicOptions = pageFilterConfig.options_source.match(PLACEHOLDER_REGEX);
 
       if (hasDynamicOptions) {
         const { optionsSetIds: dynamicOptionsSetIds, errors } =
           this.buildDynamicOptionsSetIds({
             filterId: pageFilterConfig.id,
-            filterOptionsConfig: p.filterOptionsConfig,
+            // filterOptionsConfig: p.filterOptionsConfig,
+            contentFiltersConfig: p.contentFiltersConfig,
             filterConfigsByFilterId: filterConfigByFilterId,
             precedingFilterIds: processedFilterIds,
           });
@@ -124,7 +124,8 @@ export class FiltersManifestBuilder {
           filterId: pageFilterConfig.id,
           optionsSetIds,
           glossary: p.glossary,
-          filterOptionsConfig: p.filterOptionsConfig,
+          contentFiltersConfig: p.contentFiltersConfig,
+          // filterOptionsConfig: p.filterOptionsConfig,
         });
 
       if (errors.length > 0) {
@@ -143,13 +144,11 @@ export class FiltersManifestBuilder {
     // Attach any options sets that were referenced by the filters
     Object.keys(manifest.filtersById).forEach((filterId) => {
       const filterManifest = manifest.filtersById[filterId];
-      const optionsSetIds = Object.keys(
-        filterManifest.defaultValsByOptionsSetId,
-      );
+      const optionsSetIds = Object.keys(filterManifest.defaultValsByOptionsSetId);
       optionsSetIds.forEach((optionsSetId) => {
         if (!manifest.optionSetsById[optionsSetId]) {
           manifest.optionSetsById[optionsSetId] =
-            p.filterOptionsConfig[optionsSetId];
+            p.contentFiltersConfig.optionGroupGlossary[optionsSetId];
         }
       });
     });
@@ -166,7 +165,8 @@ export class FiltersManifestBuilder {
     filterId: string;
     optionsSetIds: string[];
     glossary: Glossary;
-    filterOptionsConfig: FilterOptionsConfig;
+    // filterOptionsConfig: FilterOptionsConfig;
+    contentFiltersConfig: ContentFiltersConfig;
   }): {
     defaultValsByOptionsSetId: Record<string, string>;
     possibleVals: string[];
@@ -178,7 +178,7 @@ export class FiltersManifestBuilder {
     const errors: CdocsCoreError[] = [];
 
     p.optionsSetIds.forEach((optionsSetId) => {
-      const optionsSet = p.filterOptionsConfig[optionsSetId];
+      const optionsSet = p.contentFiltersConfig.optionGroupGlossary[optionsSetId];
       if (!optionsSet) {
         errors.push({
           message: `Invalid options source: The options source '${optionsSetId}', which is required for the filter ID '${p.filterId}', does not exist.`,
@@ -211,9 +211,10 @@ export class FiltersManifestBuilder {
    */
   static buildDynamicOptionsSetIds(p: {
     filterId: string;
-    filterOptionsConfig: FilterOptionsConfig;
+    // filterOptionsConfig: FilterOptionsConfig;
     filterConfigsByFilterId: Record<string, PageFilterConfig>;
     precedingFilterIds: string[];
+    contentFiltersConfig: ContentFiltersConfig;
   }): { optionsSetIds: string[]; errors: CdocsCoreError[] } {
     const filter = p.filterConfigsByFilterId[p.filterId];
 
@@ -228,12 +229,8 @@ export class FiltersManifestBuilder {
 
       // build placeholder segment (array of all possible values)
       const referencedFilterId = segment.slice(1, -1).toLowerCase();
-      const referencedFilterConfig =
-        p.filterConfigsByFilterId[referencedFilterId];
-      if (
-        !referencedFilterConfig ||
-        !p.precedingFilterIds.includes(referencedFilterId)
-      ) {
+      const referencedFilterConfig = p.filterConfigsByFilterId[referencedFilterId];
+      if (!referencedFilterConfig || !p.precedingFilterIds.includes(referencedFilterId)) {
         errors.push({
           message: `Invalid placeholder: The placeholder ${segment} in the options source '${filter.options_source}' refers to an unrecognized filter ID. The file frontmatter must contain a filter with the ID '${referencedFilterId}', and it must be defined before the filter with the ID ${filter.id}.`,
           searchTerm: filter.options_source,
@@ -242,7 +239,7 @@ export class FiltersManifestBuilder {
       }
 
       const referencedOptionsSet =
-        p.filterOptionsConfig[referencedFilterConfig.options_source];
+        p.contentFiltersConfig.optionGroupGlossary[referencedFilterConfig.options_source];
 
       return referencedOptionsSet.map((option) => option.id);
     });
@@ -263,8 +260,9 @@ export class FiltersManifestBuilder {
    * and return them keyed by filter ID.
    */
   static getDefaultValsByFilterId(p: {
-    filterOptionsConfig: FilterOptionsConfig;
+    // filterOptionsConfig: FilterOptionsConfig;
     filterConfigs: PageFilterConfig[];
+    contentFiltersConfig: ContentFiltersConfig;
   }): Record<string, string> {
     const defaultValsByFilterId: Record<string, string> = {};
 
@@ -281,7 +279,8 @@ export class FiltersManifestBuilder {
       );
 
       // Resolve the default option set for this filter
-      const resolvedOptionSet = p.filterOptionsConfig[resolvedOptionsSetId];
+      const resolvedOptionSet =
+        p.contentFiltersConfig.optionGroupGlossary[resolvedOptionsSetId];
 
       if (resolvedOptionSet) {
         defaultValsByFilterId[fmFilterConfig.id] =
@@ -306,11 +305,7 @@ export class FiltersManifestBuilder {
    * FiltersManifestBuilder.buildSnakeCaseCombinations(segments);
    * // returns ['red_gloss_paint_options', 'red_matte_paint_options', 'blue_gloss_paint_options', 'blue_matte_paint_options']
    */
-  static buildSnakeCaseCombinations(
-    arr: any[],
-    str: string = '',
-    final: any[] = [],
-  ) {
+  static buildSnakeCaseCombinations(arr: any[], str: string = '', final: any[] = []) {
     if (arr.length > 1) {
       arr[0].forEach((segment: string) =>
         this.buildSnakeCaseCombinations(

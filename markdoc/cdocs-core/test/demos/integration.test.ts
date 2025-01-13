@@ -1,11 +1,10 @@
-import { Glossary, GlossarySchema } from '../../src/schemas/glossary';
+import { GlossarySchema } from '../../src/schemas/glossary';
 import { FilterOptionsConfigSchema } from '../../src/schemas/filterOptions';
-import { YamlConfigParser } from '../../src/modules/YamlConfigParser';
 import { describe, test, expect } from 'vitest';
 import { SNAPSHOTS_DIR } from '../config/constants';
-import { FilterOptionsConfig } from '../../src/schemas/filterOptions';
 import { z } from 'zod';
 import { CdocsDataManager } from '../../src/modules/CdocsDataManager';
+import { ContentFiltersConfigByLangSchema } from '../../src/schemas/contentFiltersConfig';
 
 /**
  * TODO: Add a loadContentFiltersConfig that takes the top-level
@@ -22,17 +21,12 @@ const langs = ['en', 'ja']; // TODO: Change to piglatin
 
 describe('Demo', () => {
   test('parses the content filter configuration from YAML', async () => {
-    const contentFiltersConfig = CdocsDataManager.loadContentFiltersConfig({
+    const { contentFiltersConfigByLang } = CdocsDataManager.loadContentFiltersConfig({
       configDir,
       langs,
     });
 
-    z.record(GlossarySchema).parse(contentFiltersConfig.glossariesByLang);
-    z.record(FilterOptionsConfigSchema).parse(
-      contentFiltersConfig.filterOptionsConfigByLang,
-    );
-
-    const stringifiedConfig = JSON.stringify(contentFiltersConfig, null, 2);
+    const stringifiedConfig = JSON.stringify(contentFiltersConfigByLang, null, 2);
 
     await expect(stringifiedConfig).toMatchFileSnapshot(
       SNAPSHOTS_DIR + '/demo/parsedContentFiltersConfig.snap.json',
