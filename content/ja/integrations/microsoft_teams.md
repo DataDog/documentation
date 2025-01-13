@@ -2,7 +2,7 @@
 categories:
 - コラボレーション
 - notifications
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies: []
 description: Microsoft Teams で Datadog アラートとイベントの通知を受信
 doc_link: https://docs.datadoghq.com/integrations/microsoft_teams/
@@ -27,48 +27,54 @@ Microsoft Teams と統合して、以下のことができます。
 
 - Microsoft Teams で Datadog アラートとイベントの通知を受信
 - Microsoft Teams の中からインシデントを管理することができます。
+- Microsoft Teams から直接トリガーされたモニターをミュートします。
 
-## Microsoft Teams チャンネルへのモニター通知の送信
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">テナントベースのインテグレーション (このインテグレーションの非レガシーバージョン) は、 US1-FED サイトではサポートされていません。</div>
+{{< /site-region >}}
+
+## Microsoft Teams のチャンネルにモニター通知を送信する
 
 ### セットアップ
 
-Microsoft のテナントを Datadog に接続します。
+あなたの Microsoft テナントを Datadog に接続します。
 
-1. Datadogで、[**Integrations > Microsoft Teams**][1] の順に移動します。
-2. **Add Tenant** をクリックすると、Microsoft に移動します。
-3. 画面の指示に従って、**OK** をクリックします。
+1. Datadog で、[**Integrations > Microsoft Teams**][1] に移動します。
+2. **Add Tenant** をクリックすると、Microsoft にリダイレクトされます。
+3. 指示に従って **OK** をクリックします。
 
-Datadog 通知を受信させたいすべてのチームに Datadog アプリが追加されていることを確認します。
+Datadog の通知を受信させたいすべてのチームに Datadog アプリを追加したことを確認してください。
 
-1. Microsoft Teams の左サイドバーで、**Apps** をクリックし、Datadog アプリを検索します。
+1. Microsoft Teams の左側のサイドバーで、**Apps** をクリックし、Datadog アプリを検索します。
 2. **Add** ボタンの横にあるドロップダウン矢印をクリックし、**Add to a team** をクリックします。
-3. Datadog 通知を受信させたいチームを選択します。
+3. Datadog の通知を受信させたいチームを選択します。
 4. **Set up a bot** をクリックします。
 
-ボットをチームに追加したら、Datadog で通知ハンドルを構成します。
+ボットがチームに追加されたら、Datadog で通知ハンドルを構成します。
 
 1. 構成されたテナントの下で、**Add Handle** をクリックします。ハンドルに名前を付け、ドロップダウンメニューから希望のチームとチャンネルを選択し、**Save** をクリックします。
 
 {{< site-region region="us,ap1,us5,us3,eu" >}}
-### 旧来コネクタのテナントベースインテグレーションへの移行
+### レガシーコネクタをテナントベースのインテグレーションに移行する
 
-Microsoft は、Microsoft Teams 用の Office 365 コネクタが非推奨となり、2025 年 12 月 31 日 (従来は 2024 年 10 月 1 日) に機能停止することを発表しました。コネクタの新規作成は 2024 年 8 月 15 日からブロックされます。詳細は同社の[ブログ記事][1]を参照してください。
-旧来の Office 365 コネクタを現在使用しているすべての通知ハンドルを Datadog のテナントベースのインテグレーションに移行するには、以下の手順に従います。
+Microsoft は、 Microsoft Teams の Office 365 コネクタが非推奨となり、2025 年 12 月 31 日 (以前は 2024 年 10 月 1 日) に動作を停止すると発表しました。新しいコネクタの作成は 2024 年 8 月 15 日からブロックされます。詳細については、同社の[ブログ投稿][1]を参照してください。
 
-1. [セットアップ手順](#setup) に従って Microsoft テナントを Datadog に接続します。
-2. 旧来の Office 365 コネクタが構成されているすべてのチームに Datadog アプリを追加します。
-3. [Microsoft Teams インテグレーションタイル][2]の各レガシー通知コネクタハンドルについて:
-   1. 構成されているテナントの下にある **Add Handle** をクリックします。
-   2. 新しいハンドルに、コネクタハンドルと同じ名前を付けます。例えば、旧来のコネクタハンドルの名前が `channel-123` の場合、テナント構成に `channel-123` という名前で新しいハンドルを作成します。
-   3. 旧来のコネクタハンドルがメッセージを送信していたドロップダウンメニューから希望するチームとチャンネルを選択し、**Save** をクリックします。この新しいハンドルは既存の旧来のコネクタハンドルをオーバーライドします。
+現在レガシーの Office 365 コネクタを使用しているすべての通知ハンドルを Datadog のテナントベースのインテグレーションに移行するには
+
+1. [セットアップ手順](#setup)に従って、Microsoft テナントを Datadog に接続します。
+2. レガシーの Office 365 コネクタが構成されているすべてのチームに Datadog アプリを追加します。
+3. [Microsoft Teams Integration Tile][2] 内の各レガシー通知コネクタハンドルについて、
+1. 構成されたテナントの下で、**Add Handle** をクリックします。
+2. 新しいハンドルにコネクタハンドルと同じ名前を付けます。例えば、あなたのレガシーコネクタハンドルが `channel-123` という名前の場合、テナント構成で同じ `channel-123` という名前の新しいハンドルを作成します。
+3. レガシーコネクタハンドルがメッセージを送信していたドロップダウンメニューから、希望のチームとチャンネルを選択し、**Save** をクリックします。この新しいハンドルは既存のレガシーコネクタハンドルをオーバーライドします。
 
 [1]: https://devblogs.microsoft.com/microsoft365dev/retirement-of-office-365-connectors-within-microsoft-teams/
 [2]: https://app.datadoghq.com/integrations/microsoft-teams
 {{< /site-region >}}
 
-### コネクターのセットアップ (レガシー)
+### コネクタ設定 (レガシー)
 <div class="alert alert-info">
-レガシー通知ハンドルは、同じ <code>@teams-HANDLE_NAME</code> を<em>使用しない限り</em>新しいセットアップの影響を受けませんが、使用する場合は新しい構成がレガシー構成をオーバーライドします。
+レガシー通知ハンドルは、新しいセットアップの影響を受けません。<em>ただし</em>、同じ <code>@teams-HANDLE_NAME</code> を使用する場合は、新しい構成がレガシー構成をオーバーライドします。
 </div>
 
 1. チャンネルのリストで、チャンネル名の横にある `...` ボタンを選択し、**Connectors** を選択します。
@@ -86,7 +92,7 @@ Microsoft は、Microsoft Teams 用の Office 365 コネクタが非推奨とな
 
 ### 使用方法
 
-Datadog モニターから、[`@-notification` 機能][2]を使用して、Microsoft Teams に通知を送信します。通知を `@teams-<HANDLE>` というアドレスに送信し、`<HANDLE>` を Microsoft Teams のハンドル名に置き換えます。
+Datadog モニターから、[`@-notification` 機能][2]を使用して Microsoft Teams に通知を送信します。通知を `@teams-<HANDLE>` のアドレスに送信します。なお、`<HANDLE>` はあなたの Microsoft Teams ハンドル名に置き換えてください。Microsoft Teams からトリガーされたモニターをミュートするには、**Mute Monitor** をクリックし、**Mute Duration** を選択して、**Mute** をクリックします。
 
 ## Microsoft Teams における Datadog Incident Management
 
@@ -206,7 +212,7 @@ Microsoft Teams アプリがインストールされたら、**Incident Settings
 4. 新しいチャンネルを自動的に作成するチームを選択します。
 5. 設定を保存します。
 
-{{< img src="integration/microsoft_teams/ms_teams_incident_updates_v2.png" alt="Microsoft Teams インシデント更新チャンネル設定." >}}
+{{< img src="integration/microsoft_teams/ms_teams_incident_updates_v2.png" alt="Microsoft Teams インシデント更新チャンネル設定" >}}
 
 ## データ収集
 
@@ -289,6 +295,10 @@ Microsoft Teams インテグレーションで Incident Management 機能を使�
 ### インテグレーションタイルにチームが表示されないのはなぜですか？
 テナントを Datadog に追加する前にボットをチームに追加した場合、Datadog はチーム参加イベントを見逃し、チームの存在を知ることができません。
 以下のいずれかを試すことができます。
+- そのチームの任意の標準チャンネルに `@Datadog sync` を投稿して、チームの標準チャンネルを Datadog と同期します。
+1. 同期したい Team 内の標準チャンネルに移動します。
+2. そのチャンネルで投稿を開始します。
+3. チャンネルに `@Datadog sync` を投稿し、操作が成功したことを示す確認メッセージがスレッドに表示されるのを待ちます。
 - Datadog アプリをチームから削除し、再度追加します。**注**: この操作により、そのチームの構成コネクタが削除されます。そのチームのすべてのコネクタをテナントベースのインテグレーションに移動する準備ができたら、このアクションを実行してください。
 1. 左サイドバーのチーム名の横にある 3 つの点をクリックします。
 2. **Manage Team** をクリックします。
@@ -296,12 +306,6 @@ Microsoft Teams インテグレーションで Incident Management 機能を使�
 4. Datadog アプリの横にある 3 つの点をクリックします。
 5. **Remove** をクリックします。
 6. [セットアップ手順](#setup)に従って Datadog アプリを追加します。
-- Datadog が利用可能なすべての Microsoft Teams チャンネルをクロールするための管理者同意を認可します。
-1. Datadog で [Microsoft Teams インテグレーションタイル][1]に移動します。
-2. 管理者同意を付与したいテナントで、右側の歯車アイコンをクリックします。
-3. **Authorize Tenant** をクリックすると Microsoft にリダイレクトされます。この手順を実行するには、テナント全体に対する管理者同意を与えることができるユーザーが必要です。**注**: Microsoft のユーザーが Datadog のアカウントを持っている必要はありません。
-4. 画面の指示に従って、**OK** をクリックします。
-5. 数時間以内にクローラーが実行され、利用可能なすべてのチームとチャンネルが入力されます。
 
 ### プライベートチャンネルはボットでサポートされていますか？
 [Microsoft Teams][8] のプライベートチャンネルの制限により、プライベートチャンネルはボットでサポートされていません。

@@ -42,10 +42,10 @@ title: プライベートロケーションの概要
 1. Datadog サイトで **Digital Experience** にカーソルを合わせ、**Settings** > [**Private Locations][5]** の順に選択します。
 2. **Add Private Location** をクリックします。
 3. プライベートロケーションの詳細を入力します。`Name` と `API key` フィールドのみが必須です。
-4. Click **Save Location and Generate Configuration File** to generate the configuration file associated with your private location on your worker. 
+4. **Save Location and Generate Configuration File** をクリックして、ワーカーのプライベートロケーションと関連付けられたコンフィギュレーションファイルを生成します。
 5. プライベートロケーションをインストールした場所によっては、コンフィギュレーションファイルに追加のパラメーターを入力する必要があります。
     - プロキシをご利用の場合は、URL を`http://<YOUR_USER>:<YOUR_PWD>@<YOUR_IP>:<YOUR_PORT>` のように入力します。
-    - If you want to block reserved IPs, toggle **Block reserved IPs** and enter the IP ranges. 
+    - 予約した IP をブロックする場合は、**Block reserved IPs** を切り替えて、IP 範囲を入力します。
 
     詳しくは、[プライベートロケーションの構成オプション][6]、[プライベートロケーションからの Synthetic テストの実行][7]をご覧ください。
 
@@ -54,7 +54,7 @@ title: プライベートロケーションの概要
     **注**: コンフィギュレーションファイルには、プライベートロケーションの認証、テストコンフィギュレーションの復号、テスト結果の暗号といった秘密情報が含まれています。Datadog は秘密情報を保存しないため、**プライベートロケーション**作成フォームを離れる前に、これらの情報をローカルに保存してください。**プライベートロケーションにワーカーをさらに追加するには、この秘密情報を再度参照できる必要があります。**
 7. 準備ができたら、**View Installation Instructions** をクリックします。
 8. プライベートロケーションワーカーを実行したい環境に応じて、インストール手順に従います。
-9. If you are using Docker, launch your worker as a standalone container using the Docker `run` command and your configuration file:
+9. Docker を使っている場合、Docker の `run` コマンドとコンフィギュレーションファイルを使って、ワーカーをスタンドアロンコンテナとして起動します。
 
     ```shell
     docker run --rm -v $PWD/worker-config-<LOCATION_ID>.json:/etc/datadog/synthetics-check-runner.json datadog/synthetics-private-location-worker
@@ -98,6 +98,8 @@ title: プライベートロケーションの概要
 
 {{< partial name="whats-next/whats-next.html" >}}
 
+
+
 [1]: /ja/continuous_testing/cicd_integrations
 [2]: https://console.cloud.google.com/gcr/images/datadoghq/GLOBAL/synthetics-private-location-worker?pli=1
 [3]: /ja/getting_started/synthetics/
@@ -110,5 +112,5 @@ title: プライベートロケーションの概要
 [10]: https://podman.io/
 [11]: https://app.vagrantup.com/ubuntu/boxes/jammy64
 [12]: /ja/synthetics/private_locations?tab=windows#install-your-private-location
-[13]: https://dd-public-oss-mirror.s3.amazonaws.com/synthetics-windows-pl/datadog-synthetics-worker-{{< synthetics-worker-version "synthetics-windows-pl" >}}.amd64.msi
+[13]: https://ddsynthetics-windows.s3.amazonaws.com/datadog-synthetics-worker-{{< synthetics-worker-version "synthetics-windows-pl" >}}.amd64.msi
 [14]: https://www.datadoghq.com/legal/eula/

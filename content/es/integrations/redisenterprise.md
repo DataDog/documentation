@@ -29,7 +29,7 @@ author:
 categories:
 - almacenes de datos
 - almacenamiento en caché
-custom_kind: integración
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/redisenterprise/README.md
 display_on_public_website: true

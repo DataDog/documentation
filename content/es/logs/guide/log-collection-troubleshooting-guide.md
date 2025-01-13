@@ -15,7 +15,6 @@ further_reading:
   tag: Guía
   text: ¿Por qué mis logs aparecen con el estado de información, incluso cuando se
     trata de advertencias o errores?
-kind: guía
 title: Guía para la resolución de problemas con la recopilación de logs
 ---
 

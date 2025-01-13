@@ -3,4 +3,4 @@ description: Personaliza cómo se agrupan los tramos (spans) de errores en probl
 title: Agrupación personalizada
 ---
 
-{{< include-markdown "content/en/error_tracking/custom_grouping.md" >}}
+{{< include-markdown "error_tracking/custom_grouping" >}}

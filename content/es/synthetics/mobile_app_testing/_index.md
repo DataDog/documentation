@@ -151,7 +151,7 @@ Puedes restringir el acceso a un test de aplicación móvil en función de los r
 
 ## Referencias adicionales
 
-{{< nombre parcial="whats-next/whats-next.html" >}}
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /es/continuous_testing/cicd_integrations/
 [2]: https://app.datadoghq.com/synthetics/settings/mobile-applications

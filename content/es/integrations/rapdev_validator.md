@@ -36,7 +36,7 @@ categories:
 - cumplimiento
 - configuración y despliegue
 - marketplace
-custom_kind: integración
+custom_kind: integration
 dependencies: []
 display_on_public_website: true
 draft: false

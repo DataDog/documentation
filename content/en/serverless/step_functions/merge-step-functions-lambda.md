@@ -8,6 +8,50 @@ further_reading:
 
 This page describes how to merge your AWS Step Functions traces with related AWS Lambda traces or nested Step Functions traces. These instructions assume that you have already instrumented these [AWS Step Functions][1] and [Lambda functions][2] to send traces to Datadog.
 
+<div class="alert alert-info">Datadog recommends using <code>JSONata</code> to define your Step Function payloads for the most complete end-to-end tracing experience. If you are using <code>JSONPath</code> to define your Step Function payloads, see the below sections for supported configurations</a>.</div>
+
+## Merge upstream traces with Step Functions and downstream Lambda traces
+
+### Requirements
+Node.js (layer v116+) or Python (layer v103+) runtimes.
+
+Your State Machine Definition must be using [JSONata][1] as the query language. This can be enabled by setting `"QueryLanguage": "JSONata"` at the top-level of the State Machine Definition.
+
+### Setup
+
+On the Lambda Task, set the `Arguments` key as follows: 
+
+```json
+"Arguments": {
+  "Payload": "{% ($execInput := $states.context.Execution.Input; $hasDatadogTraceId := $exists($execInput._datadog.`x-datadog-trace-id`); $hasDatadogRootExecutionId := $exists($execInput._datadog.RootExecutionId); $ddTraceContext := $hasDatadogTraceId ? {'x-datadog-trace-id': $execInput._datadog.`x-datadog-trace-id`, 'x-datadog-tags': $execInput._datadog.`x-datadog-tags`} : {'RootExecutionId': $hasDatadogRootExecutionId ? $execInput._datadog.RootExecutionId : $states.context.Execution.Id}; $sfnContext := $merge([$states.context, {'Execution': $sift($states.context.Execution, function($v, $k) { $k != 'Input' })}]); $merge([$states.input, {'_datadog': $merge([$sfnContext, $ddTraceContext, {'serverless-version': 'v1'}])}])) %}",
+  ...
+}
+```
+
+The `JSONata` expression merges the upstream service's context with the current Step Functions context object and the Lambda state's input payload.
+
+Alternatively, if you have business logic defined in the payload, you can replace `$states.input` at the end of the `JSONata` expression with your intended value for the `Payload` key.
+
+[1]: https://docs.aws.amazon.com/step-functions/latest/dg/transforming-data.html
+
+## Merge upstream traces with Step Functions and nested Step Functions traces
+
+### Requirements
+Your State Machine Definition must be using `JSONata` as the query language. This can be enabled by setting `"QueryLanguage": "JSONata"` at the top-level of the State Machine Definition.
+
+### Setup
+
+On the Step Functions Task, set the `_datadog` field in the `Input` key as follows: 
+
+```json
+"Arguments": {
+  "Input": {
+    "_datadog": "{% ($execInput := $states.context.Execution.Input; $hasDatadogTraceId := $exists($execInput._datadog.`x-datadog-trace-id`); $hasDatadogRootExecutionId := $exists($execInput._datadog.RootExecutionId); $ddTraceContext := $hasDatadogTraceId ? {'x-datadog-trace-id': $execInput._datadog.`x-datadog-trace-id`, 'x-datadog-tags': $execInput._datadog.`x-datadog-tags`} : {'RootExecutionId': $hasDatadogRootExecutionId ?  $execInput._datadog.RootExecutionId : $states.context.Execution.Id}; $sfnContext := $merge([$states.context, {'Execution': $sift($states.context.Execution, function($v, $k) { $k != 'Input' })}]); $merge([$sfnContext, $ddTraceContext, {'serverless-version': 'v1'}])) %}",
+    ...
+  }
+}
+```
+
 ## Merge Step Functions traces with downstream Lambda traces
 
 ### Requirements
@@ -18,34 +62,77 @@ Node.js (layer v112+) or Python (layer v95+) runtimes.
 {{< tabs >}}
 {{% tab "Serverless Framework" %}}
 
-In your `serverless.yaml` file, set `mergeStepFunctionAndLambdaTraces` to `true`. For example:
+1. If you have not already, install the [Datadog Serverless Framework Plugin][1] v5.40.0+:
 
-{{< highlight yaml "hl_lines=8" >}}
-custom:
-  datadog:
-    site: <DATADOG_SITE>
-    apiKeySecretArn: <DATADOG_API_KEY_SECRET_ARN>
-    forwarderArn: <FORWARDER_ARN>
-    enableStepFunctionsTracing: true
-    propagateUpstreamTrace: true
-    mergeStepFunctionAndLambdaTraces: true
-{{< /highlight >}}
+    ```shell
+    serverless plugin install --name serverless-plugin-datadog
+    ```
+
+2. Ensure you have deployed the [Datadog Lambda Forwarder][2], a Lambda function that ships logs from AWS to Datadog, and that you are using v3.130.0+. You might need to [update your Forwarder][5].
+
+   Take note of your Forwarder's ARN.
+
+3. Add the following to your `serverless.yml`:
+
+   ```yaml
+   custom:
+     datadog:
+       site: <DATADOG_SITE>
+       apiKeySecretArn: <DATADOG_API_KEY_SECRET_ARN>
+       forwarderArn: <FORWARDER_ARN>
+       enableStepFunctionsTracing: true
+       propagateUpstreamTrace: true
+       mergeStepFunctionAndLambdaTraces: true
+   ```
+
+    - Replace `<DATADOG_SITE>` with {{< region-param key="dd_site" code="true" >}} (ensure the correct SITE is selected on the right).
+    - Replace `<DATADOG_API_KEY_SECRET_ARN>` with the ARN of the AWS secret where your [Datadog API key][3] is securely stored. The key needs to be stored as a plaintext string (not a JSON blob). The `secretsmanager:GetSecretValue` permission is required. For quick testing, you can instead use `apiKey` and set the Datadog API key in plaintext.
+    - Replace `<FORWARDER_ARN>` with the ARN of your Datadog Lambda Forwarder. This step configures the log stream subscription for the Forwarder. Ensure that the Step Function log group name begins with "/aws/vendedlogs/states/". If it does not, you will need to set it up manually.
+
+    For additional settings, see [Datadog Serverless Framework Plugin - Configuration parameters][7].
+
+
+[1]: https://docs.datadoghq.com/serverless/libraries_integrations/plugin/
+[2]: /logs/guide/forwarder/
+[3]: https://app.datadoghq.com/organization-settings/api-keys
+[4]: https://www.serverless.com/
+[5]: /logs/guide/forwarder/?tab=cloudformation#upgrade-to-a-new-version
+[6]: logs/guide/forwarder/?tab=cloudformation#installation
+[7]: https://github.com/datadog/serverless-plugin-datadog?tab=readme-ov-file#configuration-parameters
 
 {{% /tab %}}
 {{% tab "Datadog CLI" %}}
 
-Run the following `datadog-ci` command:
+1. If you have not already, install the [Datadog CLI][1] v2.18.0+.
 
-{{< highlight yaml "hl_lines=6" >}}
-datadog-ci stepfunctions instrument \
- --step-function <STEP_FUNCTION_ARN> \
- --forwarder <FORWARDER_ARN> \
- --env <ENVIRONMENT> \
- --propagate-upstream-trace \
- --merge-step-function-and-lambda-traces
-{{< /highlight >}}
+   ```shell
+   npm install -g @datadog/datadog-ci
+   ```
+2. Ensure you have deployed the [Datadog Lambda Forwarder][2], a Lambda function that ships logs from AWS to Datadog, and that you are using v3.130.0+. You may need to [update your Forwarder][3].
 
-The `merge-step-function-and-lambda-traces` flag lets you inject Step Functions context into downstream Lambda and Step Functions invocations.
+   Take note of your Forwarder's ARN.
+3. Instrument your Step Function.
+
+   ```shell
+   datadog-ci stepfunctions instrument \
+    --step-function <STEP_FUNCTION_ARN> \
+    --forwarder <FORWARDER_ARN> \
+    --env <ENVIRONMENT> \
+    --propagate-upstream-trace \
+    --merge-step-function-and-lambda-traces
+   ```
+   - Replace `<STEP_FUNCTION_ARN>` with the ARN of your Step Function. Repeat the `--step-function` flag for each Step Function you wish to instrument.
+   - Replace `<FORWARDER_ARN>` with the ARN of your Datadog Lambda Forwarder, as noted previously. This step configures the log stream subscription for the Forwarder. Ensure that the Step Function log group name begins with "/aws/vendedlogs/states/". If it does not, you will need to set it up manually.
+   - Replace `<ENVIRONMENT>` with the environment tag you would like to apply to your Step Functions.
+
+   For more information about the `datadog-ci stepfunctions` command, see the [Datadog CLI documentation][5].
+
+
+[1]: /serverless/libraries_integrations/cli/
+[2]: /logs/guide/forwarder/
+[3]: /logs/guide/forwarder/?tab=cloudformation#upgrade-to-a-new-version
+[4]: logs/guide/forwarder/?tab=cloudformation#installation
+[5]: https://github.com/DataDog/datadog-ci/blob/master/src/commands/stepfunctions/README.md
 
 {{% /tab %}}
 {{% tab "Custom" %}}
@@ -111,6 +198,8 @@ For Python: Datadog Lambda Library for Python layer 99+ **or** `dd-trace-py` v2.
 
 If the layer or tracer version requirements are fulfilled, no further setup is required.
 
+<div class="alert alert-info">To ensure proper trace merging, provide input to the Step Functions Start Execution command, even if the input is an empty JSON object.</div>
+
 ## Merge Step Functions traces with nested Step Functions traces
 
 To link your Step Function traces to nested Step Function traces, configure your task according to the following example:
@@ -122,7 +211,6 @@ To link your Step Function traces to nested Step Function traces, configure your
     "StateMachineArn": "${stateMachineArn}",
     "Input": {
       "StatePayload": "Hello from Step Functions!",
-      "AWS_STEP_FUNCTIONS_STARTED_BY_EXECUTION_ID.$": "$$.Execution.Id",
       "CONTEXT": {
         "Execution.$": "$$.Execution",
         "State.$": "$$.State",
@@ -134,9 +222,5 @@ To link your Step Function traces to nested Step Function traces, configure your
 }
 {{< /highlight >}}
 
-## Merge Lambda -> Step Functions -> Lambda
-
-This capability is not supported.
-
-[1]: /serverless/installation/#installation-instructions
-[2]: /serverless/step_functions/installation
+[1]: /serverless/step_functions/installation
+[2]: /serverless/installation/#installation-instructions

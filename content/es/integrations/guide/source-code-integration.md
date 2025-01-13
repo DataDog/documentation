@@ -18,7 +18,7 @@ further_reading:
   text: Más información sobre Serverless Monitoring
 - link: /tests/developer_workflows/
   tag: Documentación
-  text: Más información sobre Test Visibility
+  text: Más información sobre la optimización de test
 - link: /code_analysis/
   tag: Documentación
   text: Más información sobre Code Analysis
@@ -174,8 +174,8 @@ Si utilizas un host, tienes dos opciones.
 
 <div class="alert alert-info">Se requiere la biblioteca del cliente .NET versión 2.24.1 o posterior.</div>
 
-Como primer paso, asegúrate de que los archivos `.pdb` se despliegan junto con los ensamblados .NET (`.dll` o `.exe`) en la misma carpeta. 
-Luego, sigue el resto de las instrucciones según tu modelo de despliegue específico:
+Como primer paso, asegúrate de que tus archivos `.pdb` se despliegan junto con tus ensamblados .NET (`.dll` o `.exe`) en la misma carpeta.
+A continuación, sigue el resto de las instrucciones en función de tu modelo de despliegue específico:
 
 #### Contenedores
 
@@ -224,7 +224,13 @@ Si utilizas un host, tienes dos opciones: utilizar Microsoft SourceLink o config
 {{% /tab %}}
 {{% tab "Node.js" %}}
 
-<div class="alert alert-info">Se requiere la biblioteca del cliente Node.js versión 3.21.0 o posterior.</div>
+<div class="alert alert-info">Se requiere la biblioteca cliente Node.js versión 3.21.0 o posterior.
+</br>
+</br>
+La visualización de enlaces y fragmentos de código para aplicaciones TypeScript requiere que tu aplicación Node se ejecute con: 
+</br>
+<a href="https://nodejs.org/dist/v12.22.12/docs/api/cli.html#cli_enable_source_maps"><code>--enable-source-maps</code></a>.
+</div>
 
 #### Contenedores
 
@@ -296,6 +302,8 @@ Si utilizas un host, configura tu aplicación con la variable de entorno `DD_TAG
 
 <div class="alert alert-info">Se requiere la biblioteca del cliente Java versión 1.12.0 o posterior.</div>
 
+#### Contenedores
+
 Si utilizas contenedores Docker, tienes dos opciones: utilizar Docker o configurar tu aplicación con variables de entorno `DD_GIT_*`.
 
 ##### Opción 1: Docker
@@ -313,6 +321,29 @@ Si utilizas la opción serverless, tienes dos opciones en función de la configu
 ##### Opción 1: Herramientas de Datadog
 
 {{% sci-dd-serverless %}}
+
+##### Opción 2: Variables de entorno `DD_GIT_*`
+
+{{% sci-dd-git-env-variables %}}
+
+#### Host
+
+Si utilizas un host, configura tu aplicación con variables de entorno `DD_GIT_*`.
+
+{{% sci-dd-git-env-variables %}}
+
+{{% /tab %}}
+{{% tab "PHP" %}}
+
+<div class="alert alert-info">Se requiere la biblioteca del cliente PHP versión 1.2.0 o posterior.</div>
+
+#### Contenedores
+
+Si utilizas contenedores Docker, tienes dos opciones: utilizar Docker o configurar tu aplicación con variables de entorno `DD_GIT_*`.
+
+##### Opción 1: Docker
+
+{{% sci-docker %}}
 
 ##### Opción 2: Variables de entorno `DD_GIT_*`
 
@@ -359,13 +390,13 @@ La integración del código fuente admite los siguientes proveedores Git:
 
 | Proveedor | Compatibilidad con enlaces contextuales | Compatibilidad con fragmentos de código |
 |---|---|---|
-| SaaS GitHub (github.com) | Sí | Sí |
-| GitHub Enterprise Server | Sí | Sí |
-| SaaS GitLab (gitlab.com) | Sí | Sí |
-| GitLab autogestionado | Sí | No |
-| Bitbucket | Sí | No |
-| Servicios Azure DevOps | Sí | No |
-| Azure DevOps Server | Sí | No |
+| SaaS GitHub (github.com) | Sí | Accede a dashboards preconfigurados |
+| GitHub Enterprise Server | Sí | Accede a dashboards preconfigurados |
+| SaaS GitLab (gitlab.com) | Sí | Accede a dashboards preconfigurados |
+| GitLab autogestionado | Accede a dashboards preconfigurados | {{< img src="synthetics/test_coverage/test_coverage.png" alt="Continuous Testing Explorer" style="width:100%;">}} |
+| Bitbucket | Accede a dashboards preconfigurados | {{< img src="synthetics/test_coverage/test_coverage.png" alt="Continuous Testing Explorer" style="width:100%;">}} |
+| Servicios Azure DevOps | Accede a dashboards preconfigurados | {{< img src="synthetics/test_coverage/test_coverage.png" alt="Continuous Testing Explorer" style="width:100%;">}} |
+| Azure DevOps Server | Accede a dashboards preconfigurados | {{< img src="synthetics/test_coverage/test_coverage.png" alt="Continuous Testing Explorer" style="width:100%;">}} |
 
 {{< tabs >}}
 {{% tab "GitHub" %}}
@@ -389,7 +420,7 @@ Configurar la integración GitHub también te permite ver fragmentos de código 
 Los repositorios de las instancias autogestionadas de GitLab no son compatibles con la integración del código fuente. Para habilitar esta función, <a href="/help">ponte en contacto con el servicio de asistencia</a>.
 </div>
 
-Para vincular la telemetría con tu código fuente, carga los metadatos de tu repositorio con el comando [`datadog-ci git-metadata upload`][2].
+Para vincular la telemetría con tu código fuente, carga los metadatos de tu repositorio con el comando [`datadog-ci git-metadata upload`][2]. Se requiere `datadog-ci v2.10.0` o posterior.
 
 Cuando se ejecuta `datadog-ci git-metadata upload` dentro de un repositorio Git, Datadog recibe la URL del repositorio, la función SHA de confirmación de la rama actual y una lista de rutas de archivos rastreados.
 
@@ -406,7 +437,10 @@ Puedes esperar ver el siguiente resultado:
 ```
 Reporting commit 007f7f466e035b052415134600ea899693e7bb34 from repository git@my-git-server.com:my-org/my-repository.git.
 180 tracked file paths will be reported.
-✅  Handled in 0.077 seconds.
+Successfully uploaded tracked files in 1.358 seconds.
+Syncing GitDB...
+Successfully synced git DB in 3.579 seconds.
+✅ Uploaded in 5.207 seconds.
 ```
 
 [1]: https://gitlab.com
@@ -424,7 +458,7 @@ Reporting commit 007f7f466e035b052415134600ea899693e7bb34 from repository git@my
 Los repositorios en instancias autoalojadas o URL privadas no son compatibles con la integración del código fuente. Para habilitar esta función, <a href="/help">ponte en contacto con el servicio de asistencia</a>.
 </div>
 
-Para vincular la telemetría con tu código fuente, carga los metadatos de tu repositorio con el comando [`datadog-ci git-metadata upload`][1].
+Para vincular la telemetría con tu código fuente, carga los metadatos de tu repositorio con el comando [`datadog-ci git-metadata upload`][1]. Se requiere `datadog-ci v2.10.0` o posterior.
 
 Cuando se ejecuta `datadog-ci git-metadata upload` dentro de un repositorio Git, Datadog recibe la URL del repositorio, la función SHA de confirmación de la rama actual y una lista de rutas de archivos rastreados.
 
@@ -439,14 +473,17 @@ Puedes esperar ver el siguiente resultado:
 ```
 Reporting commit 007f7f466e035b052415134600ea899693e7bb34 from repository git@my-git-server.com:my-org/my-repository.git.
 180 tracked file paths will be reported.
-✅  Handled in 0.077 seconds.
+Successfully uploaded tracked files in 1.358 seconds.
+Syncing GitDB...
+Successfully synced git DB in 3.579 seconds.
+✅ Uploaded in 5.207 seconds.
 ```
 
 [1]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/git-metadata
 {{% /tab %}}
 {{< /tabs >}}
 
-## Uso
+## Utilización
 
 ### Enlaces a proveedores Git
 
@@ -502,11 +539,11 @@ Si utilizas la integración GitHub, haz clic en **Connect to preview** en los cu
 [101]: https://app.datadoghq.com/functions?cloud=aws&entity_view=lambda_functions
 
 {{% /tab %}}
-{{% tab "Test Visibility" %}}
+{{% tab "Optimización de test" %}}
 
-En **Test Visibility**, puedes ver los enlaces de ejecuciones de tests fallidas hasta su repositorio de origen.
+Puedes ver los enlaces de los tests fallidos a tu repositorio fuente en **Optimización de test**.
 
-1. Ve a [**Software Delivery** > **Test Visibility** > **Test Runs**][101] y selecciona un test fallido.
+1. Ve a [**Software Delivery** > **Test Optimization** > **Test Runs**][101] (Entrega de software > Optimización de test > Ejecuciones de test) y selecciona un test fallido.
 2. Haz clic en el botón **View on GitHub** para abrir el test en su repositorio de código fuente.
 
 {{< img src="integrations/guide/source_code_integration/test_run_blurred.png" alt="Enlace a GitHub desde CI Visibility Explorer" style="width:100%;">}}
@@ -549,7 +586,7 @@ Si utilizas la integración GitHub, haz clic en **Connect to preview** en los ma
 {{% /tab %}}
 {{< /tabs >}}
 
-## Referencias adicionales
+## Configurar tests de API y tests de API multupaso
 
 {{< partial name="whats-next/whats-next.html" >}}
 

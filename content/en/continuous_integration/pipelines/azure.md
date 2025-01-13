@@ -112,7 +112,7 @@ You can set custom tags for all pipeline and job spans from your Azure projects 
 
 ### Collect job logs
 
-<div class="alert alert-info">Azure Log Collection is in private beta. To request access, fill out <a href="https://forms.gle/vXEQQcPLARdSDLd27">this form</a>.</div>
+<div class="alert alert-info">Azure Log Collection is in Preview. To request access, fill out <a href="https://forms.gle/vXEQQcPLARdSDLd27">this form</a>.</div>
 
 Datadog supports log collection for your Azure DevOps pipelines.
 
@@ -120,7 +120,12 @@ To enable job log collection:
 
 1. Install a Datadog app registration on your Azure console. Follow the steps in the [Azure integration tile][14].
 
-2. Add the Datadog app registration to your Azure DevOps organization and to each project you want to enable log collection. Navigate to **Organization settings** in your DevOps console, and select **Add to all projects** to configure all projects in bulk.
+2. Add the Datadog app registration to your Azure DevOps organization:  
+  a. Navigate to **Organization settings** in your DevOps console.  
+  b. Click **Users** from the left side panel, then click on **Add Users**.  
+  **Note**: If you don't see the **Add Users** button, you may not have the necessary permissions.
+
+To enable log collection, add your app registration as a user with Basic Access Level to each project. Alternatively, you can click  **Add to all projects** to configure all projects in bulk.
 
 Logs are billed separately from CI Visibility. Log retention, exclusion, and indexes are configured in [Log Management][18]. Logs for Azure jobs can be identified by the `datadog.product:cipipeline` and `source:azurepipelines` tags.
 

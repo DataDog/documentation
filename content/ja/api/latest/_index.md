@@ -203,14 +203,14 @@ import { <VERSION> } from 'datadog-api-client';
 
 {{< programming-lang lang="rust" >}}
 #### インストール
-Run `cargo add datadog-api-client`, or add the following to `Cargo.toml` under `[dependencies]`:
+`cargo add datadog-api-client` を実行するか、または `[dependencies]` の下の `Cargo.toml` に次を追加します。
 
 ```
 datadog-api-client = "0"
 ```
 
 #### 使用方法
-Try the following snippet to validate your Datadog API key:
+Datadog API キーを検証するには、次のスニペットを試してください。
 ```rust
 use datadog_api_client::datadog::Configuration;
 use datadog_api_client::datadogV1::api_authentication::AuthenticationAPI;

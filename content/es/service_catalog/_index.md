@@ -14,9 +14,6 @@ further_reading:
 - link: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/service_definition_yaml
   tag: Sitio externo
   text: Crear y gestionar definiciones de servicio con Terraform
-- link: /tracing/service_catalog/guides/understanding-service-configuration
-  tag: Guía
-  text: Comprender tu configuración de servicio
 - link: /tracing/service_catalog/guides/upstream-downstream-dependencies
   tag: Guía
   text: Ver dependencias ascendentes y descendentes durante una incidencia activa
@@ -26,12 +23,12 @@ further_reading:
     definición de servicios
 - link: https://www.datadoghq.com/blog/apm-security-view/
   tag: Blog
-  text: Obtén visibilidad sobre riesgos, vulnerabilidades y ataques con la vista de
-    seguridad de APM
+  text: Obtener visibilidad sobre riesgos, vulnerabilidades y ataques con la vista
+    de seguridad de APM
 - link: https://www.datadoghq.com/blog/service-catalog-setup/
   tag: Blog
-  text: Añadir fácilmente etiquetas y metadatos a tus servicios mediante la configuración
-    simplificada del Catálogo de servicios
+  text: Añadir fácilmente etiquetas (tags) y metadatos a tus servicios mediante la
+    configuración simplificada del Catálogo de servicios
 - link: https://www.datadoghq.com/blog/github-actions-service-catalog/
   tag: Blog
   text: Yo utilizo acciones de GitHub para el Catálogo de servicios de Datadog, y
@@ -56,6 +53,9 @@ title: Catálogo de servicios de Datadog
 ## Información general
 
 El [Catálogo de servicios][1] de Datadog proporciona una visión consolidada de tus servicios, combinando metadatos de propiedad, perspectivas de rendimiento, análisis de seguridad, asignación de costes y mucho más. Facilita que las organizaciones consigan la propiedad integral del servicio a escala, obtengan información sobre el rendimiento en tiempo real, detecten y aborden los riesgos de fiabilidad y seguridad, y gestionen las dependencias de las aplicaciones, todo en un único lugar.
+
+{{< callout url="https://www.datadoghq.com/product-preview/internal-developer-portal/" d_target="#signupModal" btn_hidden="false" header="Suscribirse para obtener una vista previa de nuestro Portal para desarrolladores" >}}
+{{< /callout >}}
 
 ### Casos de uso
 
@@ -89,7 +89,7 @@ El [Catálogo de servicios][1] de Datadog proporciona una visión consolidada de
 - Aceleración de la recuperación ante incidencias aumentando la confianza y simplificando la localización de propietarios de servicios y dependencias ascendentes y descendentes.
 
 
-## Empezando
+## Para empezar
 
 {{< whatsnext desc="Explorar qué tiene para ofrecer el Catálogo de servicios:" >}}
     {{< nextlink href="/service_catalog/navigating/" >}}Navegar el Catálogo de servicios{{< /nextlink >}}
@@ -118,6 +118,7 @@ El permiso de escritura del Catálogo de servicios permite a un usuario modifica
 
 El permiso está habilitado por defecto en los roles **Datadog Admin Role** (Rol de administrador de Datadog) y **Datadog Standard Role** (Rol estándar de Datadog).
 
+{{< site-region region="gov" >}}
 ## Tipos de servicios
 
 Cada servicio monitorizado se asocia a un tipo. Datadog determina automáticamente este tipo según el atributo `span.type` adjunto a los datos de tramos (spans) entrantes. El tipo especifica el nombre de la aplicación o marco con el que el Datadog Agent se está integrando.
@@ -128,19 +129,38 @@ El tipo de servicio puede ser uno de los siguientes:
 
 *  Caché
 *  Personalizado
-*  Base de datos
+*  BASE DE DATOS
 *  Función serverless
 *  Web
 
-Algunas integraciones asignan alias a tipos. Por ejemplo, Postgres, MySQL y Cassandra corresponden al tipo "DB" (Base de datos). Las integraciones de Redis y Memcache se asignan al tipo "Cache" (Caché).
+Algunas integraciones se asocian a diversos tipos. Por ejemplo, Postgres, MySQL y Cassandra apuntan al tipo "DB". Las integraciones  Redis y Memcache apuntan al tipo "Cache".
+{{< /site-region >}}
+{{< site-region region="ap1,us3,us5,eu,us" >}}
+## Filtrado de entradas del catálogo de servicios por componente
+
+Cada entrada que aparece en el Catálogo de servicios se clasifica como un tipo de componente:
+
+*  Servicios
+*  Almacenes de datos
+*  Colas
+*  Aplicaciones RUM
+*  Proveedores externos
+
+{{< img src="tracing/service_catalog/component_selector.png" alt="Selctor del componente Catálogo de servicios" style="width:30%;" >}}
+
+Datadog rellena las entradas del Catálogo de servicios y determina su tipo de componente asociado basándose en atributos de tramos recopilados de ([etiquetas iguales][10]) de APM, pero también en otros tipos de telemetrías recopiladas (USM, DSM, RUM, etc...).
+
+**Nota**: Este componente sustituye al filtro `type` (derivado del atributo de tramo `span.type`), ya que detecta de forma más fiable y granular los distintos tipos de entidades. Por ejemplo, puedes filtrar por tecnología de almacén de datos utilizando la faceta `datastore type`.
+
+[10]: /es/tracing/services/inferred_services#peer-tags
+{{< /site-region >}}
 
 ## Conservación de datos
 Los servicios y las estadísticas de recursos, y los resúmenes de tramo en la **Lista de servicio** y **Página de servicios** se conservan hasta 30 días. Para consultas personalizadas en métricas de trazas de APM, utiliza Metric Explorer. [Más información sobre la conservación de datos en APM][4].
 
+## {{< img src="synthetics/browser_test.mp4" alt="Browser tests" video=true style="width:100%;">}}
 
-## Referencias adicionales
-
-{{< partial name="whats-next/whats-next.html" >}}
+Grabar pruebas de aplicaciones móviles
 
 [1]: https://app.datadoghq.com/services
 [2]: /es/account_management/rbac/

@@ -7,7 +7,6 @@ further_reading:
   tag: Documentación
   text: Términos y conceptos de seguridad de las aplicaciones
 - link: /security/application_security/how-appsec-works
- 
   tag: Documentación
   text: Cómo funciona la gestión de la seguridad de las aplicaciones
 - link: /security/application_security/enabling/

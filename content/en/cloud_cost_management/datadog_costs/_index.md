@@ -27,9 +27,9 @@ further_reading:
   text: "Quickly and comprehensively analyze the cloud and SaaS costs behind your services"
 ---
 
-{{< beta-callout url="https://www.datadoghq.com/private-beta/daily-datadog-costs/" >}}
-Daily Datadog costs in Cloud Cost Management are in private beta. To request access, complete the form.
-{{< /beta-callout >}}
+{{< callout url="https://www.datadoghq.com/product-preview/daily-datadog-costs/" btn_hidden="false" header="Join the Preview!">}}
+Daily Datadog costs in Cloud Cost Management are in Preview. If you're interested in this feature, complete the form to request access.
+{{< /callout >}}
 
 ## Overview
 
@@ -37,19 +37,21 @@ Daily Datadog costs give you visibility into daily Datadog spending across dashb
 
 You can view daily Datadog costs in [Cloud Cost Management][1], and access additional [Datadog costs capabilities][7] like [Cost Summary][9] and [Cost Chargebacks][10] on the [**Usage & Cost** page][4].
 
+Please note that there is **no additional charge** for Datadog Costs.
+
 <div class="alert alert-info">Costs outside of <a href="https://app.datadoghq.com/billing/usage">Plan and Usage</a> are based on usage only and do not include historical credits and adjustments.</div>
 
 ## Permissions
 
 To view costs in Cloud Cost Management, you must have the `cloud_cost_management_read` permission, which is enabled for users with the Datadog Read Only Role.
 
-<div class="alert alert-info">Only existing Cloud Cost Management customers within the parent organization can access daily Datadog costs outside of <a href="https://app.datadoghq.com/billing/usage">Plan and Usage</a>.</div>
-
 To see costs on the [**Usage & Cost** page][4], see the [Cost Details documentation][7].
 
 ## Visualize and break down costs
 
 Costs in Cloud Cost Management may not match the estimated month-to-date (MTD) costs on the [**Plan and Usage** page][4] because Plan and Usage costs are cumulative and are prorated monthly. Only Cloud Cost Management provides a daily calculation.
+
+Datadog cost data is available at the parent or sub-organization level. For sub-organizations, [Cost Summary (sub-organization)][5] also needs to be enabled.
 
 Datadog cost data is available for the past 15 months and can be used in dashboards and notebooks under the **Cloud Costs** data source. Create dashboards to monitor daily costs, identify trends, and optimize resource usage.
 
@@ -74,9 +76,10 @@ You can use out-of-the-box tags to break down and allocate your Datadog cost dat
 [2]: /cloud_cost_management/monitors
 [3]: /cloud_cost_management/saas_costs
 [4]: https://app.datadoghq.com/billing/usage
-[5]: /account_management/rbac/
-[6]: /account_management/rbac/permissions
-[7]: /account_management/plan_and_usage/cost_details/
-[8]: /account_management/billing/usage_attribution/
-[9]: /account_management/plan_and_usage/cost_details/#cost-summary
-[10]: /account_management/plan_and_usage/cost_details/#cost-chargebacks
+[5]: /account_management/plan_and_usage/cost_details/#cost-summary-sub-organization
+[6]: /account_management/rbac/
+[7]: /account_management/rbac/permissions
+[8]: /account_management/plan_and_usage/cost_details/
+[9]: /account_management/billing/usage_attribution/
+[10]: /account_management/plan_and_usage/cost_details/#cost-summary
+[11]: /account_management/plan_and_usage/cost_details/#cost-chargebacks

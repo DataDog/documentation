@@ -11,6 +11,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/app-builder-remediation/"
   tag: "Blog"
   text: "Remediate apps built using Datadog App Builder"
+- link: "https://www.datadoghq.com/blog/ai-assistant-workflows-apps/"
+  tag: "Blog"
+  text: "Build Datadog workflows and apps in minutes with our AI assistant"
 ---
 
 {{< site-region region="gov" >}}
@@ -58,6 +61,12 @@ For example, the [EC2 integration dashboard][7] offers an EC2 instance managemen
 To use the app with your data, click **+ Connect Data**, then either create a new connection or select an existing one. After you save your selection, the app displays data from your connection.
 
 You can change the selected connection by clicking **Change Connection** in the app.
+
+## App Builder Overview dashboard
+
+The App Builder Overview dashboard provides a high-level overview of your Datadog apps. To find the dashboard, go to your [Dashboard list][3] and search for `App Builder Overview`.
+
+{{< img src="service_management/app_builder/app-builder-dashboard.png" alt="The App Builder Overview dashboard" style="width:100%;" >}}
 
 ## Further reading
 

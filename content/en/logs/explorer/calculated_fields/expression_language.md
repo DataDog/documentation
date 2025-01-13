@@ -9,15 +9,15 @@ further_reading:
 
 ## Basic syntax and language constructs
 
-| Construct                                                                                          | Syntax and Notation                                                    |
-| -------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
-| Reserved attribute or tag named `tag`                                                             | `tag` (no prefix required)                                             |
-| Attribute named `attr`                                                                             | `@attr` (use an `@` prefix)                                            |
-| Calculated field named `field`                                                                     | `#field` (use a `#` prefix)                                            |
-| String literal (quote)<br>For example, `text` or `Quoted "text"`.                                   | `"text"`<br> `"Quoted \"text\""`<br>(<a href="https://docs.datadoghq.com/logs/explorer/search_syntax/">Log Search Syntax</a> applies)|
-| Numeric literal (number)<br>For example, `ten`.                                                     | `10`                                                                   |
-| Function named `func` with parameters `x` and `y`                                                  | `func(x, y)`                                                           |
-| Operator<br>For example, a binary operator `*` with operands `x` and `y`.                          | `x*y`                                                                  |
+| Construct                                                                 | Syntax and Notation                                                                                                                  |
+| --------------------------------------------------------------------------| ------------------------------------------------------------------------------------------------------------------------------------ |
+| Reserved attribute or tag named `tag`                                     | `tag` (no prefix required)                                                                                                           |
+| Attribute named `attr`                                                    | `@attr` (use an `@` prefix)                                                                                                          |
+| Calculated field named `field`                                            | `#field` (use a `#` prefix)                                                                                                          |
+| String literal (quote)<br>For example, `text` or `Quoted "text"`.         | `"text"`<br> `"Quoted \"text\""`<br>(<a href="https://docs.datadoghq.com/logs/explorer/search_syntax/">Log Search Syntax</a> applies)|
+| Numeric literal (number)<br>For example, `ten`.                           | `10`                                                                                                                                 |
+| Function named `func` with parameters `x` and `y`                         | `func(x, y)`                                                                                                                         |
+| Operator<br>For example, a binary operator `*` with operands `x` and `y`. | `x*y`                                                                                                                                |
 
 ## Operators
 
@@ -54,7 +54,7 @@ Returns the absolute value of a number.
 
 | Example  | Formula | Result |
 |----------|-------------|---------|
-| A log event has the following attributes: <br> - `@client_latency` = 2 <br> - `@server_latency` = 3 | #discrepancy = abs(`@client_latency` - `@server_latency`) | #discrepancy = 1 |
+| A log event has the following attributes: <br> - `@client_latency` = 2 <br> - `@server_latency` = 3 | `#discrepancy = abs(@client_latency - @server_latency)` | `#discrepancy` = 1 |
 
 </details>
 
@@ -68,7 +68,7 @@ Rounds number up to the nearest integer.
 
 | Example  | Formula | Result |
 |----------|-------------|---------|
-| A log event has the following attribute:<br>`@value` = 2.2 | #rounded_up = ceil(`@value`) | #rounded_up = 3 |
+| A log event has the following attribute:<br>`@value` = 2.2 | `#rounded_up = ceil(@value)` | `#rounded_up` = 3 |
 
 </details>
 
@@ -82,12 +82,12 @@ Rounds number down to the nearest integer.
 
 | Example  | Formula | Result |
 |----------|-------------|---------|
-| A log event has the following attribute:<br>`@value` = 9.99 | #rounded_down = floor(`@value`) | #rounded_down = 9 |
+| A log event has the following attribute:<br>`@value` = 9.99 | `#rounded_down = floor(@value)` | `#rounded_down` = 9 |
 
 </details>
 
 
-<h4>max(<i>num</i> value [, <i>num</i> value, …])</h4>
+<h4>max(<i>num</i> value, [ <i>num</i> value, …])</h4>
 
 Finds maximum value amongst a set of numbers.
 
@@ -96,12 +96,12 @@ Finds maximum value amongst a set of numbers.
 
 | Example  | Formula | Result |
 |----------|-------------|---------|
-| A log event has the following attribute:<br>`@CPU_temperatures` = [-1, 1, 5, 5] | #highest_temp = max(`@CPU_temperatures`) | #highest_temp = 5 |
+| A log event has the following attribute:<br>`@CPU_temperatures` = [-1, 1, 5, 5] | `#highest_temp = max(@CPU_temperatures)` | `#highest_temp` = 5 |
 
 </details>
 
 
-<h4>min(<i>num</i> value [, <i>num</i> value, …])</h4>
+<h4>min(<i>num</i> value, [<i>num</i> value, …])</h4>
 
 Finds the minimum value amongst a set of numbers.
 
@@ -110,7 +110,7 @@ Finds the minimum value amongst a set of numbers.
 
 | Example  | Formula | Result |
 |----------|-------------|---------|
-| A log event has the following attribute:<br>`@CPU_temperatures` = [-1, 1, 5, 5] | #lowest_temp = min(`@CPU_temperatures`) | #lowest_temp = -1 |
+| A log event has the following attribute:<br>`@CPU_temperatures` = [-1, 1, 5, 5] | `#lowest_temp = min(@CPU_temperatures)` | `#lowest_temp` = -1 |
 
 </details>
 
@@ -124,7 +124,7 @@ Rounds a number. Optionally, define how many decimal places to maintain.
 
 | Example  | Formula | Result |
 |----------|-------------|---------|
-| A log event has the following attribute:<br>`@value` = -1234.01 | #rounded_to_tens = round(`@value`, -1) | #rounded_to_tens = -1230 |
+| A log event has the following attribute:<br>`@value` = -1234.01 | `#rounded_to_tens = round(@value, -1)` | `#rounded_to_tens` = -1230 |
 
 </details>
 
@@ -132,7 +132,7 @@ Rounds a number. Optionally, define how many decimal places to maintain.
 
 ### String
 
-<h4>concat(<i>str</i> value [, <i>expr</i> value, …])</h4>
+<h4>concat(<i>str</i> string [<i>str</i> string, <i>expr</i> value, …])</h4>
 
 Combines multiple values into a single string.
 
@@ -141,7 +141,7 @@ Combines multiple values into a single string.
 
 | Example  | Formula | Result |
 |----------|-------------|---------|
-| A log event has the following attributes: <br> - `@city` = "Paris" <br> - `@country` = "France" | #concatenated_region = concat(`@city`, ", " `@country`) | #concatenated_region = "Paris, France" |
+| A log event has the following attributes: <br> - `@city` = "Paris" <br> - `@country` = "France" | `#region = concat(@city, ", ", @country)` | `#region` = "Paris, France" |
 
 </details>
 
@@ -155,7 +155,7 @@ Converts string to lowercase.
 
 | Example  | Formula | Result |
 |----------|-------------|---------|
-| A log event has the following attribute:<br>`@first_name` = "Bob" | #lower_name = lower(`@first_name`) | #lower_name = "bob" |
+| A log event has the following attribute:<br>`@first_name` = "Bob" | `#lower_name = lower(@first_name)` | `#lower_name` = "bob" |
 
 </details>
 
@@ -169,7 +169,7 @@ Extracts a portion of text from the beginning of a string.
 
 | Example  | Formula | Result |
 |----------|-------------|---------|
-| A log event has the following attribute:<br>`@price` = "USD10.50" | #currency = left(`@price`, 3) | #currency = "USD" |
+| A log event has the following attribute:<br>`@price` = "USD10.50" | `#currency = left(@price, 3)` | `#currency` = "USD" |
 
 </details>
 
@@ -183,7 +183,7 @@ Converts string to proper case.
 
 | Example  | Formula | Result |
 |----------|-------------|---------|
-| A log event has the following attribute:<br>`@address` = "123 main st" | #formatted_address = proper(`@address`) | #formatted_address = "123 Main St" |
+| A log event has the following attribute:<br>`@address` = "123 main st" | `#formatted_address = proper(@address)` | `#formatted_address` = "123 Main St" |
 
 </details>
 
@@ -203,12 +203,12 @@ Extracts the portion of text preceding a certain pattern in a string.
   </tr>
   <tr>
     <td rowspan ="2">A log event has the following attribute:<br><code>@url</code> = "www.example.com/path/to/split"</td>
-    <td>#url_extraction = split_before(<code>@url</code>, "/", 1)</td>
-    <td>#url_extraction = "www.example.com/path"</td>
+    <td><code>#url_extraction = split_before(@url, "/", 1)</code></td>
+    <td><code>#url_extraction</code> = "www.example.com/path"</td>
   </tr>
   <tr>
-    <td>#url_extraction = split_before(<code>@url</code>, "/", 2)</td>
-    <td>#url_extraction = "www.example.com/path/to"</td>
+    <td><code>#url_extraction = split_before(@url, "/", 2)</code></td>
+    <td><code>#url_extraction</code> = "www.example.com/path/to"</td>
   </tr>
 </table>
 
@@ -230,12 +230,12 @@ Extracts the portion of text following a certain pattern in a string.
   </tr>
   <tr>
     <td rowspan ="2">A log event has the following attribute:<br><code>@url</code> = "www.example.com/path/to/split"</td>
-    <td>#url_extraction = split_after(<code>@url</code>, "/", 1)</td>
-    <td>#url_extraction = "path/to/split"</td>
+    <td><code>#url_extraction = split_after(@url, "/", 0)</code></td>
+    <td><code>#url_extraction</code> = "path/to/split"</td>
   </tr>
   <tr>
-    <td>#url_extraction = split_after(<code>@url</code>, "/", 2)</td>
-    <td>#url_extraction = "to/split"
+    <td><code>#url_extraction = split_after(@url, "/", 1)</code></td>
+    <td><code>#url_extraction</code> = "to/split"
 </table>
 
 </details>
@@ -250,7 +250,7 @@ Extracts a portion of text from the middle of a string.
 
 | Example  | Formula | Result |
 |----------|-------------|---------|
-| A log event has the following attribute:<br>`@price` = "USD10.50" | #dollar_value = substring(`@price`, 2, 2) | #dollar_value = "10" |
+| A log event has the following attribute:<br>`@price` = "USD10.50" | `#dollar_value = substring(@price, 2, 2)` | `#dollar_value` = "10" |
 
 
 </details>
@@ -265,12 +265,12 @@ Extracts a portion of text from the end of a string.
 
 | Example  | Formula | Result |
 |----------|-------------|---------|
-| A log event has the following attribute:<br>`@price` = "USD10.50" | #cent_value = right(`@price`, 2) | #cent_value = "50" |
+| A log event has the following attribute:<br>`@price` = "USD10.50" | `#cent_value = right(@price, 2)` | `#cent_value` = "50" |
 
 </details>
 
 
-<h4>textjoin(<i>str</i> delimiter, <i>bool</i> ignore, <i>expr</i> value [, <i>expr</i> value, …])</h4>
+<h4>textjoin(<i>str</i> delimiter, <i>bool</i> ignore_empty, <i>str</i> string [<i>str</i> string, <i>expr</i> value, …])</h4>
 
 Combines multiple values into a single string with a delimiter in between.
 
@@ -279,7 +279,7 @@ Combines multiple values into a single string with a delimiter in between.
 
 | Example  | Formula | Result |
 |----------|-------------|---------|
-| A log event has the following attributes: <br> - `@city` = "Paris" <br> - `@country` = "France" | #join_region = textjoin(", ", "false", `@city`, `@country`) | #join_region = "Paris, France" |
+| A log event has the following attributes: <br> - `@city` = "Paris" <br> - `@country` = "France" | `#region = textjoin(", ", "false", @city, @country)` | `#region` = "Paris, France" |
 
 </details>
 
@@ -293,7 +293,7 @@ Converts string to uppercase.
 
 | Example  | Formula | Result |
 |----------|-------------|---------|
-| A log event has the following attribute: `@first_name` = "Bob" | #upper_name = upper(`@first_name`) | #upper_name = "BOB" |
+| A log event has the following attribute: `@first_name` = "Bob" | `#upper_name = upper(@first_name)` | `#upper_name` = "BOB" |
 
 </details>
 
@@ -310,7 +310,7 @@ Evaluates a condition and returns a value accordingly.
 
 | Example  | Formula | Result |
 |----------|-------------|---------|
-| A log event has the following attributes: <br> - `@location` = "Paris, France" <br> - `@home` = "New York, USA" | #abroad = if(`@location` == `@home`, "false", "true") | #abroad = "true" |
+| A log event has the following attributes: <br> - `@location` = "Paris, France" <br> - `@home` = "New York, USA" | `#abroad = if(@location == @home, "false", "true")` | `#abroad` = "true" |
 
 </details>
 
@@ -324,7 +324,7 @@ Checks if an attribute or expression is null.
 
 | Example  | Formula | Result |
 |----------|-------------|---------|
-| A log event has the following attributes: <br> - `@users_online` = 5 <br> - `@max_capacity` = 0 | is_null(`@users_online` / `@max_capacity`) | "true" |
+| A log event has the following attributes: <br> - `@users_online` = 5 <br> - `@max_capacity` = 0 | `is_null(@users_online / @max_capacity)` | "true" |
 
 </details>
 

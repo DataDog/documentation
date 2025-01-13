@@ -2,6 +2,9 @@
 title: Advanced Log Collection Configurations
 description: Use the Datadog Agent to collect your logs and send them to Datadog
 further_reading:
+- link: "/logs/guide/getting-started-lwl/"
+  tag: "Documentation"
+  text: "Getting started with Logging without Limits™"
 - link: "/logs/guide/how-to-set-up-only-logs/"
   tag: "Documentation"
   text: "Use the Datadog Agent for log collection only"
@@ -17,9 +20,6 @@ further_reading:
 - link: "/logs/explorer/"
   tag: "Documentation"
   text: "See how to explore your logs"
-- link: "/logs/logging_without_limits/"
-  tag: "Documentation"
-  text: "Logging without Limits*"
 - link: "/glossary/#tail"
   tag: Glossary
   text: 'Glossary entry for "tail"'
@@ -259,7 +259,7 @@ spec:
 ## Scrub sensitive data from your logs
 
 {{< callout url="https://www.datadoghq.com/private-beta/sensitive-data-scanner-using-agent-in-your-premises/" >}}
-  Sensitive Data Scanner using the Agent is in private beta. See the <a href="https://www.datadoghq.com/blog/sensitive-data-scanner-using-the-datadog-agent/">blog post</a> and <a href="https://docs.datadoghq.com/sensitive_data_scanner/">documentation</a> for more information. To request access, fill out this form.
+  Sensitive Data Scanner using the Agent is in Preview. See the <a href="https://www.datadoghq.com/blog/sensitive-data-scanner-using-the-datadog-agent/">blog post</a> and <a href="https://docs.datadoghq.com/sensitive_data_scanner/">documentation</a> for more information. To request access, fill out this form.
 {{< /callout >}}
 
 If your logs contain sensitive information that need redacting, configure the Datadog Agent to scrub sensitive sequences by using the `log_processing_rules` parameter in your configuration file with the `mask_sequences` type.
@@ -453,7 +453,7 @@ spec:
 {{% /tab %}}
 {{< /tabs >}}
 
-<div class="alert alert-warning"><strong>Important!</strong> Regex patterns for multi-line logs must start at the <em>beginning</em> of a log. Patterns cannot be matched mid-line. <em>A never matching pattern may cause log line losses.</em></div>
+<div class="alert alert-warning"><strong>Important!</strong> Regex patterns for multi-line logs must start at the <em>beginning</em> of a log. Patterns cannot be matched mid-line. <em>A never matching pattern may cause log line losses.</em> <br><br>Log collection works with precision of up to millisecond. Logs with greater precision are not sent even if they match the pattern.</div>
 
 More examples:
 

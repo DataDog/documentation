@@ -29,7 +29,7 @@ categories:
 - nube
 - almacenes de datos
 - suministrar
-custom_kind: integración
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/silk/README.md
 display_on_public_website: true
