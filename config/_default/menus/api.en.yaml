@@ -2640,6 +2640,18 @@ menu:
         unstable:
           - v2
         order: 1
+    - name: Delete a custom framework
+      url: '#delete-a-custom-framework'
+      identifier: security-monitoring-delete-a-custom-framework
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteCustomFramework
+        unstable: []
+        order: 4
     - name: Change the triage state of a security signal
       url: '#change-the-triage-state-of-a-security-signal'
       identifier: security-monitoring-change-the-triage-state-of-a-security-signal
