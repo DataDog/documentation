@@ -299,7 +299,7 @@ También tienes que conectar el contenedor a Datadog en el puerto 5678 realizand
 
 {{% /tab %}}
 
-{{% pestaña "Modo adjunto" %}}
+{{% tab "Modo adjunto" %}}
 Se recomienda el modo envolvente, ya que el modo adjunto tiene las siguientes limitaciones:
 
 - Se pierde toda la inicialización realizada por la aplicación hasta que Datadog se adjunta a ella.
