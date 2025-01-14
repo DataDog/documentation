@@ -1,6 +1,6 @@
 ---
 title: SAST Rules
-description: View rules for multiple languages for Static Code Security.
+description: View rules for multiple languages for Static Analysis.
 aliases:
 - /continuous_integration/static_analysis/rules
 - /static_analysis/rules
@@ -252,10 +252,6 @@ further_reading:
     text: "Learn about Datadog Code Security"
 ---
 
-{{< callout url="#" btn_hidden="true" header="Join the Preview!" >}}
-Code Security is in Preview.
-{{< /callout >}}
-
 {{% site-region region="gov" %}}
 <div class="alert alert-danger">
     Code Security is not available for the {{< region-param key="dd_site_name" >}} site.
@@ -266,4 +262,4 @@ Code Security is in Preview.
 
 Datadog Static Analysis provides out-of-the-box rules to help detect violations in your CI/CD pipelines in code reviews and identify bugs, security, and maintainability issues. For more information, see the [Setup documentation][1].
 
-[1]: security/code_security/static_analysis/setup
+[1]: /security/code_security/static_analysis/setup/

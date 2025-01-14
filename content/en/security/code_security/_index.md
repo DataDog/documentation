@@ -7,11 +7,11 @@ aliases:
 
 Code Security scans your pre-production code, open source libraries, and repositories to find security vulnerabilities and code quality issues. It encompasses the following capabilities:
 
-- [Static Code Security (SAST)][1] for your first-party code
+- [Static Analysis (SAST)][1] for your first-party code
 - [Software Composition Analysis][2] for open source dependencies in your codebase
 - [Interactive Application Security Testing (IAST)][3] for code-level vulnerabilities in your services
 
-## Static Code Security (SAST)
+## Static Analysis (SAST)
 
 SAST analyzes static pre-production code to identify maintainability and security issues.
 

@@ -16,28 +16,29 @@ Using Software Composition Analysis provides organizations with the following be
 
 ### Static vulnerability detection in repositories
 SCA supports scanning for libraries in the following languages and technologies:
-SCA detects open source libraries imported into your repositories by scanning dependency management and manifest files.
-SCA detects open source libraries imported into your repositories by scanning dependency management and manifest files.
-SCA supports scanning for libraries in the following languages and technologies:
 
 {{< partial name="code_security/sca-getting-started.html" >}}
-SCA supports scanning for libraries in the following languages and technologies:
+
+
 ### Runtime vulnerability detection in services
 {{< partial name="code_security/sca-getting-started.html" >}}
-SCA can also detect vulnerable libraries running in your services based on your Datadog application telemetry.
+
+SCA can also detect vulnerable libraries running in your services based on your Datadog telemetry.
 
 Runtime detection allows for risk-based prioritization of library vulnerabilities in your deployment environments.
 
-{{< partial name="code_security/sca-getting-started.html" >}}
 ## Search and filter results
+
 ### Library Catalog
+
 {{< partial name="code_security/sca-getting-started.html" >}}
+
 The Datadog SCA [Library Catalog][8] helps you understand the list of libraries and its versions that compose your application.
 
-For each library version, you can assess:
-- How often it is used across your codebase and running in your services
+For each library version, you can assess how often it is used across your codebase and running in your services
 
 ### Vulnerability Explorer
+
 The Vulnerability Explorer lists library vulnerabilities detected by SCA, alongside vulnerabilities detected by other Code Security capabilities (SAST and IAST).
 
 #### Datadog severity score
@@ -58,15 +59,6 @@ Datadog shows how the base CVSS score is adjusted to the Datadog Severity Score 
 The Repositories page provides a repository-oriented view of your libraries and library vulnerabilities found from static scanning (either from scanning directly with Datadog or through your CI pipelines). 
 Recommended steps for remediating detected vulnerabilities can be found in the side panel for each vulnerability in SCA.
 
-
-
-
-Steps are provided for upgrading the library to the safest (non-vulnerable) version, as well as the closest version.
-
-
-Steps are provided for upgrading the library to the safest (non-vulnerable) version, as well as the closest version.
-
-
 Steps are provided for upgrading the library to the safest (non-vulnerable) version, as well as the closest version.
 
 From the Repositories page, click on a repository to analyze **Library Vulnerabilities** and **Library Catalog** results from SCA.
@@ -80,7 +72,7 @@ Every row represents a unique library and version combination. Each combination 
 
 Click on a library with a vulnerability to open a side panel that contains information about remediation steps.
 
-{{< img src="code_security/software_composition_analysis/sca-violation.png" alt="Side panel for a SCA violation" style="width:80%;">}}
+<!-- {{< img src="code_security/software_composition_analysis/sca-violation.png" alt="Side panel for a SCA violation" style="width:80%;">}} -->
 
 ### Library vulnerability context in APM
 
@@ -132,11 +124,11 @@ Datadog shows how the base CVSS score is adjusted to the Datadog Severity Score 
 
 See [Getting Started with Software Composition Analysis][7] for more information on the adjusted vulnerability score.
 
-### Remediation
+<!-- ### Remediation
 
-The Vulnerability Explorer offers remediation recommendations for detected vulnerabilities. Recommendations enable you to change the status of a vulnerability, assign it to a team member for review, and create a Jira issue for tracking. They also include a collection of links and references to websites or information sources to help you understand the context behind each vulnerability.
+The Vulnerability Explorer offers remediation recommendations for detected vulnerabilities. Recommendations enable you to change the status of a vulnerability, assign it to a team member for review, and create a Jira issue for tracking. They also include a collection of links and references to websites or information sources to help you understand the context behind each vulnerability. -->
 
-**Note**: To create Jira issues for SCA vulnerabilities, you must configure the Jira integration, and have the `manage_integrations` permission. For detailed instructions, see the [Jira integration][11] documentation, as well as the [Role Based Access Control][9] documentation.
+<!-- **Note**: To create Jira issues for SCA vulnerabilities, you must configure the Jira integration, and have the `manage_integrations` permission. For detailed instructions, see the [Jira integration][11] documentation, as well as the [Role Based Access Control][9] documentation. -->
 
 ## Risk information in APM views
 
@@ -145,6 +137,7 @@ Software Composition Analysis enriches the information APM is already collecting
 [1]: /security/code_security/software_composition_analysis/setup_static/
 [2]: /security/code_security/software_composition_analysis/setup_runtime/
 [3]: https://app.datadoghq.com/security/appsec/vm
+[5]: /getting_started/code_security/
 [7]: /getting_started/application_security/software_composition_analysis
 [8]: https://app.datadoghq.com/security/appsec/inventory/libraries
 [9]: /account_management/rbac/permissions/#integrations

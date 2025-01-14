@@ -17,10 +17,6 @@ algolia:
   tags: ['static analysis', 'static analysis rules', 'static application security testing', 'SAST']
 ---
 
-{{< callout url="#" btn_hidden="true" header="Join the Preview!" >}}
-Code Security is in Preview.
-{{< /callout >}}
-
 {{% site-region region="gov" %}}
 <div class="alert alert-danger">
     Code Security is not available for the {{< region-param key="dd_site_name" >}} site.
@@ -32,10 +28,6 @@ To set up Datadog Static Analysis, navigate to [**Software Delivery** > **Code S
 
 ## Select where to run Static Analysis scans
 ### Scan with Datadog-hosted scanning
-
-{{< callout url="#" header="false" btn_hidden="true" >}}
-  Datadog-hosted Static Analysis scans are in Preview. Contact your Customer Success Manager to request access.
-{{< /callout >}}
 
 You can run Datadog Static Analysis scans directly on Datadog's infrastructure. To get started, navigate to the [**Code Security** page][1].
 
@@ -274,9 +266,9 @@ datadog-static-analyzer -i /path/to/directory -g -o sarif.json -f sarif –-diff
 
 **Note:** When a diff-aware scan cannot be completed, the entire directory is scanned.
 
-## Further Reading
+<!-- ## Further Reading
 
-{{< partial name="whats-next/whats-next.html" >}}
+{{< partial name="whats-next/whats-next.html" >}} -->
 
 [1]: https://app.datadoghq.com/ci/setup/code-analysis
 [2]: https://www.oasis-open.org/committees/tc_home.php?wg_abbrev=sarif

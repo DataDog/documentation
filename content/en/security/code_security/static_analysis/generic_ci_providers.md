@@ -2,19 +2,17 @@
 title: Generic CI Providers
 description: Learn about Datadog Static Analysis to scan code for quality issues and security vulnerabilities before your code reaches production.
 is_beta: false
-aliases:
-- /security/code_security/static_analysis/generic_ci_providers
+further_reading:
+- link: "https://www.datadoghq.com/blog/monitor-ci-pipelines/"
+  tag: "Blog"
+  text: "Monitor all your CI pipelines with Datadog"
 algolia:
   tags: ['static analysis', 'ci pipeline', 'SAST']
 ---
 
-{{< callout url="#" btn_hidden="true" header="Join the Preview!" >}}
-Code Security is in Preview.
-{{< /callout >}}
-
 {{% site-region region="gov" %}}
 <div class="alert alert-danger">
-    Code Security is not available for the {{< region-param key="dd_site_name" >}} site.
+    Code Analysis is not available for the {{< region-param key="dd_site_name" >}} site.
 </div>
 {{% /site-region %}}
 
@@ -104,9 +102,9 @@ datadog-static-analyzer -i /path/to/directory -g -o sarif.json -f sarif –-diff
 
 **Note:** When a diff-aware scan cannot be completed, the entire directory is scanned.
 
-## Further Reading
+<!-- ## Further Reading
 
-{{< partial name="whats-next/whats-next.html" >}}
+{{< partial name="whats-next/whats-next.html" >}} -->
 
 [1]: /account_management/api-app-keys/#api-keys
 [2]: /account_management/api-app-keys/#application-keys

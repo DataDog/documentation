@@ -2,8 +2,6 @@
 aliases:
 - /continuous_integration/static_analysis/circleci_orbs
 - /static_analysis/circleci_orbs
-dependencies:
-- https://github.com/DataDog/datadog-static-analyzer-circleci-orb/blob/main/README.md
 description: Use Datadog and CircleCI to run Static Analysis jobs in a CI pipeline.
 title: Static Analysis and CircleCI Orbs
 ---
@@ -83,11 +81,11 @@ To customize your workflow, you can set the following parameters for Static Anal
 | `cpu_count`  | Set the number of CPUs used to by the analyzer.                                                                            | No      | `2`             |
 | `enable_performance_statistics` | Get the execution time statistics for analyzed files.                                                   | No      | `false`         |
 
-## Further Reading
+<!-- ## Further Reading
 
 Additional helpful documentation, links, and articles:
 
-- [Learn about Code Security][1]
+- [Learn about Code Security][1] -->
 
 [1]: /security/code_security/
 [2]: https://circleci.com/docs/set-environment-variable/#set-an-environment-variable-in-a-project

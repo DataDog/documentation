@@ -2,8 +2,6 @@
 aliases:
 - /continuous_integration/static_analysis/github_actions
 - /static_analysis/github_actions
-dependencies:
-- https://github.com/DataDog/datadog-static-analyzer-github-action/blob/main/README.md
 description: Use Datadog and GitHub to run Static Analysis jobs in a CI pipeline.
 title: Static Analysis and GitHub Actions
 ---
@@ -103,11 +101,11 @@ Datadog Software Composition Analysis (SCA) also offers the ability to scan your
 and detect vulnerabilities and licenses. You can use this product with the [`datadog-sca-github-action`][7].
 
 
-## Further Reading
+<!-- ## Further Reading
 
 Additional helpful documentation, links, and articles:
 
-- [Learn about Code Security][1]
+- [Learn about Code Security][1] -->
 
 [1]: /security/code_security/
 [2]: https://docs.datadoghq.com/account_management/api-app-keys/
