@@ -5,7 +5,7 @@ import { SNAKE_CASE_REGEX, FILTER_OPTIONS_ID_REGEX } from './regexes';
  * The configuration of an individual page customization,
  * as defined in the front matter of a document.
  */
-export const CustomizationConfigSchema = z
+export const FilterConfigSchema = z
   .object({
     label: z.string(),
     trait_id: z.string().regex(SNAKE_CASE_REGEX),
@@ -15,7 +15,7 @@ export const CustomizationConfigSchema = z
   .strict();
 
 /**
- * The configuration of an individual page customization,
+ * The configuration of an individual filter,
  * as defined in the front matter of a document.
  *
  * @example
@@ -26,50 +26,46 @@ export const CustomizationConfigSchema = z
  *   default_value: "postgres" // optional override
  * }
  */
-export type CustomizationConfig = z.infer<typeof CustomizationConfigSchema>;
+export type FilterConfig = z.infer<typeof FilterConfigSchema>;
 
 /**
  * The list of page filters, as defined in the front matter
  * of a document, validated as a whole.
  */
-export const CustomizationsConfigSchema = z
-  .array(CustomizationConfigSchema)
-  .refine((customizationsConfig) => {
-    // Page filter names must be unique within a page
-    const customizationLabels = customizationsConfig.map(
-      (customizationConfig) => customizationConfig.label,
-    );
-    const uniqueCustomizationLabels = new Set(customizationLabels);
-    if (customizationLabels.length !== uniqueCustomizationLabels.size) {
-      console.error('Duplicate customization labels found in list:', customizationLabels);
-      return false;
-    }
+export const FiltersConfigSchema = z.array(FilterConfigSchema).refine((filtersConfig) => {
+  // Page filter names must be unique within a page
+  const filterLabels = filtersConfig.map((filterConfig) => filterConfig.label);
+  const uniqueFilterLabels = new Set(filterLabels);
+  if (filterLabels.length !== uniqueFilterLabels.size) {
+    console.error('Duplicate customization labels found in list:', filterLabels);
+    return false;
+  }
 
-    // Placeholders must refer to a valid filter name
-    // that is defined earlier in the list than the placeholder
-    const definedParamNames = new Set();
-    for (const filterConfig of customizationsConfig) {
-      definedParamNames.add(filterConfig.label);
-      const bracketedPlaceholders = filterConfig.label.match(/<([a-z0-9_]+)>/g);
-      if (bracketedPlaceholders) {
-        for (const placeholder of bracketedPlaceholders) {
-          const paramName = placeholder.slice(1, -1);
-          if (!definedParamNames.has(paramName)) {
-            console.error(`Invalid placeholder reference found: ${placeholder}`);
-            return false;
-          }
+  // Placeholders must refer to a valid filter name
+  // that is defined earlier in the list than the placeholder
+  const definedParamNames = new Set();
+  for (const filterConfig of filtersConfig) {
+    definedParamNames.add(filterConfig.label);
+    const bracketedPlaceholders = filterConfig.label.match(/<([a-z0-9_]+)>/g);
+    if (bracketedPlaceholders) {
+      for (const placeholder of bracketedPlaceholders) {
+        const paramName = placeholder.slice(1, -1);
+        if (!definedParamNames.has(paramName)) {
+          console.error(`Invalid placeholder reference found: ${placeholder}`);
+          return false;
         }
       }
     }
+  }
 
-    return true;
-  });
+  return true;
+});
 
 /**
- * The list of page customizations, as defined in the front matter
+ * The list of page filters, as defined in the front matter
  * of a document.
  */
-export type CustomizationsConfig = z.infer<typeof CustomizationsConfigSchema>;
+export type FiltersConfig = z.infer<typeof FiltersConfigSchema>;
 
 /**
  * The front matter of a document required by the integration
@@ -78,7 +74,7 @@ export type CustomizationsConfig = z.infer<typeof CustomizationsConfigSchema>;
  */
 export const FrontmatterSchema = z.object({
   title: z.string(),
-  customizations: CustomizationsConfigSchema.optional(),
+  content_filters: FiltersConfigSchema.optional(),
 });
 
 /**
@@ -89,7 +85,7 @@ export const FrontmatterSchema = z.object({
  * @example
  * {
  *   title: "Decorative Painting Tips",
- *   customizations: [
+ *   content_filters: [
  *     {
  *       label: "Color",
  *       trait_id: "color",

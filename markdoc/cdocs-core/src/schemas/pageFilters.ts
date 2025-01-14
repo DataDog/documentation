@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import { FILTER_OPTIONS_ID_REGEX, SNAKE_CASE_REGEX } from './regexes';
-import { CustomizationConfigSchema } from './frontMatter';
+import { FilterConfigSchema } from './frontMatter';
 import { CdocsCoreErrorSchema } from './errors';
 import { OptionGroupGlossarySchema } from './glossaries/optionGroupGlossary';
 
@@ -8,7 +8,7 @@ import { OptionGroupGlossarySchema } from './glossaries/optionGroupGlossary';
  * An option available in a resolved page filter
  * (see next schema).
  */
-const ResolvedCustomizationOptionSchema = z
+const ResolvedFilterOptionSchema = z
   .object({
     // The value of the option, to be used in routes and params
     id: z.string().regex(SNAKE_CASE_REGEX),
@@ -18,7 +18,7 @@ const ResolvedCustomizationOptionSchema = z
   .strict();
 
 /**
- * A page customization that has been "resolved" into
+ * A page filter that has been "resolved" into
  * its current value and available options.
  * The current value can be derived from default values
  * or user selections, and the available options
@@ -31,14 +31,14 @@ const ResolvedCustomizationOptionSchema = z
  * "resolved" (narrowed) based on the user's selection of dbm_host,
  * since not every possible host type option is valid for all hosts.
  */
-export const ResolvedCustomizationSchema = z
+export const ResolvedFilterSchema = z
   .object({
     // The unique ID of the variable
     id: z.string().regex(SNAKE_CASE_REGEX),
     // The display name of the filter in the UI
     label: z.string(),
     defaultValue: z.string().regex(SNAKE_CASE_REGEX),
-    options: z.array(ResolvedCustomizationOptionSchema),
+    options: z.array(ResolvedFilterOptionSchema),
     currentValue: z.string().regex(SNAKE_CASE_REGEX),
   })
   .strict();
@@ -69,19 +69,19 @@ export const ResolvedCustomizationSchema = z
  *   ]
  * }
  */
-export type ResolvedCustomization = z.infer<typeof ResolvedCustomizationSchema>;
+export type ResolvedFilter = z.infer<typeof ResolvedFilterSchema>;
 
 /**
- * A collection of ResolvedCustomization objects, indexed by their
+ * A collection of ResolvedFilter objects, indexed by their
  * unique IDs.
  */
-export const ResolvedCustomizationsSchema = z.record(ResolvedCustomizationSchema);
+export const ResolvedFiltersSchema = z.record(ResolvedFilterSchema);
 
 /**
- * A collection of ResolvedCustomization objects, indexed by their
+ * A collection of ResolvedFilter objects, indexed by their
  * unique IDs.
  *
- * Page customizations are resolved by combining data from
+ * Page filters are resolved by combining data from
  * several sources, such as the page's URL, the frontmatter,
  * the default value for the filter,
  * and the user's stored filters.
@@ -100,7 +100,7 @@ export const ResolvedCustomizationsSchema = z.record(ResolvedCustomizationSchema
  *   }
  * }
  */
-export type ResolvedCustomizations = z.infer<typeof ResolvedCustomizationsSchema>;
+export type ResolvedFilters = z.infer<typeof ResolvedFiltersSchema>;
 
 /**
  * The manifest for a single page customization,
@@ -110,9 +110,9 @@ export type ResolvedCustomizations = z.infer<typeof ResolvedCustomizationsSchema
  * This is used to efficiently validate, resolve,
  * and re-resolve the customization.
  */
-export const CustomizationManifestSchema = z
+export const FilterManifestSchema = z
   .object({
-    config: CustomizationConfigSchema,
+    config: FilterConfigSchema,
     defaultValsByOptionGroupId: z.record(
       z.string().regex(FILTER_OPTIONS_ID_REGEX),
       z.string().regex(SNAKE_CASE_REGEX),
@@ -147,7 +147,7 @@ export const CustomizationManifestSchema = z
  *   possibleVals: ['ec2', 'gce', [... many more possible values here]]
  * }
  */
-export type CustomizationManifest = z.infer<typeof CustomizationManifestSchema>;
+export type FilterManifest = z.infer<typeof FilterManifestSchema>;
 
 /**
  * A object containing all of the potential page filter IDs
@@ -159,12 +159,9 @@ export type CustomizationManifest = z.infer<typeof CustomizationManifestSchema>;
  * Useful for efficiently validating, resolving,
  * and re-resolving filters.
  */
-export const CustomizationsManifestSchema = z
+export const FiltersManifestSchema = z
   .object({
-    filtersByTraitId: z.record(
-      z.string().regex(SNAKE_CASE_REGEX),
-      CustomizationManifestSchema,
-    ),
+    filtersByTraitId: z.record(z.string().regex(SNAKE_CASE_REGEX), FilterManifestSchema),
     optionGroupsById: OptionGroupGlossarySchema,
     defaultValsByTraitId: z.record(
       z.string().regex(SNAKE_CASE_REGEX),
@@ -217,15 +214,15 @@ export const CustomizationsManifestSchema = z
  *   }
  * }
  */
-export type CustomizationsManifest = z.infer<typeof CustomizationsManifestSchema>;
+export type FiltersManifest = z.infer<typeof FiltersManifestSchema>;
 
 /**
  * A lighter version of the PageFilterManifest schema,
  * designed to be used client-side.
  */
-export const ClientCustomizationManifestSchema = z
+export const ClientSideFilterManifestSchema = z
   .object({
-    config: CustomizationConfigSchema,
+    config: FilterConfigSchema,
     defaultValsByOptionGroupId: z.record(
       z.string().regex(FILTER_OPTIONS_ID_REGEX),
       z.string().regex(SNAKE_CASE_REGEX),
@@ -233,19 +230,17 @@ export const ClientCustomizationManifestSchema = z
   })
   .strict();
 
-export type ClientCustomizationManifest = z.infer<
-  typeof ClientCustomizationManifestSchema
->;
+export type ClientSideFilterManifest = z.infer<typeof ClientSideFilterManifestSchema>;
 
 /**
  * A lighter version of the PageFiltersManifest schema,
  * designed to be used client-side.
  */
-export const ClientCustomizationsManifestSchema = z
+export const ClientSideFiltersManifestSchema = z
   .object({
     filtersByTraitId: z.record(
       z.string().regex(SNAKE_CASE_REGEX),
-      ClientCustomizationManifestSchema,
+      ClientSideFilterManifestSchema,
     ),
     optionGroupsById: OptionGroupGlossarySchema,
     defaultValsByTraitId: z.record(
@@ -255,6 +250,4 @@ export const ClientCustomizationsManifestSchema = z
   })
   .strict();
 
-export type ClientCustomizationsManifest = z.infer<
-  typeof ClientCustomizationsManifestSchema
->;
+export type ClientSideFiltersManifest = z.infer<typeof ClientSideFiltersManifestSchema>;

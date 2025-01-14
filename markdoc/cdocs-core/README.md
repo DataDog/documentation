@@ -6,20 +6,18 @@ Utilities for ingesting, validating, and mutating configuration data for customi
 
 A customizable doc uses filters to hide irrelevant content on a documentation page. For example, if the user sets the "Programming language" filter to Python, all code examples would be in Python, and sections irrelevant to Python would be hidden.
 
-## Configuration overview
+## Filters overview
 
-Most of the configuration data for customizable docs is sitewide, written in YAML files. 
+A *filter* is the combination of two entities:
 
-Sitewide configuration requires the definition of three entities: 
+- A *trait*, which represents an end user's characteristics or preferences, such as `programming_language`.
+- An *option group* that contains an ordered list of options for the trait, such as `python` or `go`.
 
-- *traits*, representing some characteristic of the user, such as their `operating_system`.
-- *options*, such as `linux`.
-- *option groups*, which are ordered lists of existing options that include a designated default option. 
-    - For example, an option group intended for use with the `operating_system` filter might include the options `linux`, `windows`, and `ios`, with `linux` configured as the default option.
+Traits and option groups (along with the individual options referenced by the option groups) are reusable throughout the entire docs site, and are defined in the site's *customization config*, a set of YAML files.
 
-The configuration for a given page can mix and match filters and options based on that page's specific context.
+Filters are defined in a page's frontmatter, and only apply to that page. But if two filters on two separate pages reference the same trait (such as `database`), the user's preference travels between pages when their choice on the previous page is a valid option on the next page.
 
-## Sitewide configuration
+## Configuration examples
 
 ### Traits
 
@@ -30,10 +28,6 @@ traits:
   - id: database
     label: Database
 ```
-
-Filters can be used in multiple pages, and a user's selection for a filter (for example, the selection of Python as the programming language) travels between pages whenever possible. 
-
-The options for a filter can vary from page to page, so when the user's previous selection is not available, the default option is applied instead.
 
 ### Options
 
@@ -50,8 +44,6 @@ options:
   - id: mongo
     label: Mongo
 ```
-
-Options can be used for more than one filter.
 
 ### Option groups
 
@@ -71,13 +63,13 @@ product_two_db_options:
   - id: sqlite3
 ```
 
-## Page configuration
+### Filters
 
-A *customization*, which is defined in a page's frontmatter, pairs a filter and an options group for use on that page:
+A *filter*, which is defined in a page's frontmatter, combines a trait and an options group for use on that page:
 
 ```yaml
 title: My Example Doc
-customizations:
+content_filters:
   - trait_id: database
     option_group_id: product_two_db_options
 ```

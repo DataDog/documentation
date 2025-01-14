@@ -6,7 +6,7 @@ import { Frontmatter, FrontmatterSchema } from '../../../src/schemas/frontMatter
 
 export const paintColorsFrontmatter: Frontmatter = {
   title: 'My Page',
-  customizations: [
+  content_filters: [
     {
       label: 'Color',
       trait_id: 'color',

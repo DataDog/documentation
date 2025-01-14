@@ -6,7 +6,7 @@ import { paintColorsContentFiltersConfig } from '../../mocks/valid/paintColorsCo
 describe('FiltersManifestBuilder.getDefaultValsByFilterId', () => {
   const frontmatter: Frontmatter = {
     title: 'My Page',
-    customizations: [
+    content_filters: [
       {
         label: 'Color',
         trait_id: 'color',
@@ -28,7 +28,7 @@ describe('FiltersManifestBuilder.getDefaultValsByFilterId', () => {
 
   test('derives the default values for each filter', () => {
     const defaultValsByFilterId = FiltersManifestBuilder.getDefaultValsByFilterId({
-      customizations: frontmatter.customizations!,
+      filters: frontmatter.content_filters!,
       contentFiltersConfig: paintColorsContentFiltersConfig,
     });
     expect(defaultValsByFilterId).toEqual({

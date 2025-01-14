@@ -1,6 +1,6 @@
 ---
 title: Tabs
-customizations:
+content_filters:
   - label: "Color"
     trait_id: color
     option_group_id: primary_color_options

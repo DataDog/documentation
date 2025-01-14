@@ -11,12 +11,12 @@
 
 import { GLOBAL_PLACEHOLDER_REGEX } from '../schemas/regexes';
 import {
-  ResolvedCustomizations,
-  ResolvedCustomization,
-  CustomizationsManifest,
-  ClientCustomizationsManifest,
-} from '../schemas/customizations';
-import { CustomizationConfig } from '../schemas/frontMatter';
+  ResolvedFilters,
+  ResolvedFilter,
+  FiltersManifest,
+  ClientSideFiltersManifest,
+} from '../schemas/pageFilters';
+import { FilterConfig } from '../schemas/frontMatter';
 
 /**
  * Resolve the page filters object that is used
@@ -34,11 +34,11 @@ import { CustomizationConfig } from '../schemas/frontMatter';
  * with user-selected values, determining any default values
  * resulting from the user's earlier selections, and so on.
  */
-export function resolveCustomizations(p: {
+export function resolveFilters(p: {
   valsByFilterId: Record<string, string>;
-  filtersManifest: CustomizationsManifest | ClientCustomizationsManifest;
-}): ResolvedCustomizations {
-  const resolvedCustomizations: ResolvedCustomizations = {};
+  filtersManifest: FiltersManifest | ClientSideFiltersManifest;
+}): ResolvedFilters {
+  const resolvedFilters: ResolvedFilters = {};
   const valsByFilterIdDup = { ...p.valsByFilterId };
 
   const customizationsConfig = Object.values(p.filtersManifest.filtersByTraitId).map(
@@ -72,7 +72,7 @@ export function resolveCustomizations(p: {
     }
 
     // Add the resolved filter to the returned object
-    const resolvedFilter: ResolvedCustomization = {
+    const resolvedFilter: ResolvedFilter = {
       id: customizationConfigDup.trait_id,
       label: customizationConfigDup.label,
       defaultValue,
@@ -85,10 +85,10 @@ export function resolveCustomizations(p: {
       })),
     };
 
-    resolvedCustomizations[customizationConfigDup.trait_id] = resolvedFilter;
+    resolvedFilters[customizationConfigDup.trait_id] = resolvedFilter;
   });
 
-  return resolvedCustomizations;
+  return resolvedFilters;
 }
 
 /**
@@ -98,9 +98,9 @@ export function resolveCustomizations(p: {
  * the resolved options source would be "red_gloss_paint_options".
  */
 export function resolveFilterOptionsSource(p: {
-  pageFilterConfig: CustomizationConfig;
+  pageFilterConfig: FilterConfig;
   selectedValsByFilterId: Record<string, string>;
-}): CustomizationConfig {
+}): FilterConfig {
   // Make a copy in order to preserve the placeholders
   // for future use
   const filterConfigDup = { ...p.pageFilterConfig };

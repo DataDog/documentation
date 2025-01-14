@@ -1,6 +1,6 @@
 ---
 title: Traffic Light Colors (ja)
-customizations:
+content_filters:
   - label: "Color"
     trait_id: color
     option_group_id: traffic_light_color_options

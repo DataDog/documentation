@@ -6,7 +6,7 @@ import {
 } from '../../mocks/valid/paintColorsConfig';
 import _ from 'lodash';
 import { SNAPSHOTS_DIR } from '../../config/constants';
-import { CustomizationsManifest } from '../../../src/schemas/customizations';
+import { FiltersManifest } from '../../../src/schemas/pageFilters';
 
 describe('FiltersManifestBuilder.build', () => {
   test('creates the expected object when given valid data', async () => {
@@ -15,7 +15,7 @@ describe('FiltersManifestBuilder.build', () => {
       contentFiltersConfig: paintColorsContentFiltersConfig,
     });
 
-    const expectedManifest: CustomizationsManifest = {
+    const expectedManifest: FiltersManifest = {
       filtersByTraitId: {
         color: {
           config: {
@@ -174,7 +174,7 @@ describe('FiltersManifestBuilder.build', () => {
   test('detects an invalid placeholder', () => {
     const invalidFrontmatter = {
       title: 'My Page',
-      customizations: [
+      content_filters: [
         {
           label: 'Color',
           trait_id: 'color',

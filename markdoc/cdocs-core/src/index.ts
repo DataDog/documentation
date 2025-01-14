@@ -5,7 +5,7 @@ export { FiltersManifestBuilder } from './modules/FiltersManifestBuilder';
 export { YamlConfigParser } from './modules/YamlConfigParser';
 
 export {
-  resolveCustomizations as resolvePageFilters,
+  resolveFilters as resolvePageFilters,
   resolveFilterOptionsSource,
 } from './modules/filterResolution';
 
@@ -14,20 +14,20 @@ export { CdocsCoreError, CdocsCoreErrorSchema } from './schemas/errors';
 export {
   Frontmatter,
   FrontmatterSchema,
-  CustomizationConfig as PageFilterConfig,
-  CustomizationConfigSchema as PageFilterConfigSchema,
+  FilterConfig as PageFilterConfig,
+  FilterConfigSchema as PageFilterConfigSchema,
 } from './schemas/frontMatter';
 
 export {
-  CustomizationsManifest as PageFiltersManifest,
-  CustomizationsManifestSchema as PageFiltersManifestSchema,
-  ResolvedCustomization as ResolvedPageFilter,
-  ResolvedCustomizationSchema as ResolvedPageFilterSchema,
-  ClientCustomizationsManifest as PageFiltersClientSideManifest,
-  ClientCustomizationsManifestSchema as PageFiltersClientSideManifestSchema,
-  ResolvedCustomizations as ResolvedPageFilters,
-  ResolvedCustomizationsSchema as ResolvedPageFiltersSchema,
-} from './schemas/customizations';
+  FiltersManifest as PageFiltersManifest,
+  FiltersManifestSchema as PageFiltersManifestSchema,
+  ResolvedFilter as ResolvedPageFilter,
+  ResolvedFilterSchema as ResolvedPageFilterSchema,
+  ClientSideFiltersManifest as PageFiltersClientSideManifest,
+  ClientSideFiltersManifestSchema as PageFiltersClientSideManifestSchema,
+  ResolvedFilters as ResolvedPageFilters,
+  ResolvedFiltersSchema as ResolvedPageFiltersSchema,
+} from './schemas/pageFilters';
 
 export { CdocsDataManager } from './modules/CdocsDataManager';
 
