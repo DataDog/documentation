@@ -24,6 +24,19 @@ To take action on a Step Function in Datadog:
 4. Click on the **Failed** pill to open a redrive modal.
 5. Click the **Redrive** button.
 
+## Tracing redrives
+When monitoring redriven executions, use the Waterfall view, as the large gap between the original execution and redrive can make the Flame Graph view imperceptible.
+
+### Merge Lambda traces
+Supported runtimes: Node.js (layer v119+) or Python (layer v105+)
+
+For instructions on how to merge redriven Step Functions and Lambda traces, see [Merge Step Functions and Lambda Traces][5]. 
+
+### Troubleshooting missing redrive traces
+If a redrive is triggered within one minute of the original execution's failure, its corresponding trace may not appear.
+
+Also, a redrive may not always share the same sampling decision as the original execution. To ensure that the redriven execution is also sampled, you can reference the `@redrive:true` span tag in a retention query.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -32,3 +45,4 @@ To take action on a Step Function in Datadog:
 [2]: https://app.datadoghq.com/functions?cloud=aws&entity_view=step_functions
 [3]: https://docs.aws.amazon.com/dtconsole/latest/userguide/welcome-connections.html
 [4]: /service_management/app_builder/
+[5]: /serverless/step_functions/merge-step-functions-lambda
