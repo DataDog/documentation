@@ -39556,7 +39556,8 @@ paths:
   /api/v2/metrics/{metric_name}/active-configurations:
     get:
       description: List tags and aggregations that are actively queried on dashboards,
-        notebooks, monitors, and the Metrics Explorer for a given metric name.
+        notebooks, monitors, the Metrics Explorer, and using the API for a given metric
+        name.
       operationId: ListActiveMetricConfigurations
       parameters:
       - $ref: '#/components/parameters/MetricName'
