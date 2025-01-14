@@ -47,7 +47,7 @@ If no one is on-call for a given schedule, the escalation step gracefully skips 
 ### Users
 {{< img src="service_management/oncall/escalation_policy_notify_user.png" alt="A sample escalation policy that specifies a user in the escalation policy." style="width:100%;" >}}
 
-You can directly include specific users in an escalation policy. This ensures that certain key individuals are always notified in the event of a Page. Common use cases for directly paging a user are:
+You can include specific users in an escalation policy to ensure key individuals are always notified in the event of a Page. Common use cases for directly paging a user are:
 
 - Notifying a senior engineer for high-severity incidents requiring specialized knowledge.
 - Alerting a product manager or director in case of customer-facing incidents.
@@ -65,7 +65,7 @@ Common use cases for paging an entire Team are:
 ## Limitations
 
 - Maximum escalation steps: 10
-- Maximum number of notify targets (individual or schedule) per escalation step: 10
+- Maximum number of notify targets (individuals, teams, or schedules) per escalation step: 10
 - Minimum time before escalation to the next step: one minute
 
 [1]: /service_management/on-call/teams
