@@ -44,7 +44,7 @@ To enable resource scanning for your cloud accounts, you must first set up the i
 
 1. On the [**Cloud Security Management Setup**][1] page, click **Cloud Integrations**.
 1. Expand the **AWS** section.
-1. To stop resource collection for an account, click the **Edit** button {{< img src="security/csm/setup/edit-button.png" inline="true" style="width:24px;">}} and switch the **Enable Resource Scanning** toggle to the off position.
+1. To stop resource collection for an account, click the **Edit** button ({{< img src="security/csm/setup/edit-button.png" inline="true" style="width:24px;">}}) and switch the **Enable Resource Scanning** toggle to the off position.
 1. Click **Done**.
 
 [1]: https://app.datadoghq.com/security/configuration/csm/setup
