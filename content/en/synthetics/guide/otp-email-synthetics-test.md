@@ -14,30 +14,27 @@ further_reading:
 
 When testing a sign up or login flow, a one-time-passcode (OTP) may be sent to an email address for authentication. This OTP token can be extracted from an email body and used to test a sign-up flow within an application.
 
-{{< img src="synthetics/guide/http-tests-with-hmac/test_with_hmac_authentication.png" alt="HTTP test with HMAC authentication" style="width:100%;" >}}
-
 This guide walks you through how to configure the extraction for your browser test.
 
 ## Setup
 
-### Create the building blocks of HMAC authentication using local variables
+### Create an email variable
 
-Create a [Synthetic HTTP test][3] and click **Create a Local Variable** to add the following variables:
+In your [Synthetic browser test][3] click **Create a Local Variable** to add the following variables:
 
-### Create an Email Variable
+Add an Email Address variable within a synthetic test to generate a unique email address for that synthetic test run.
 
-Create a [Synthetic HTTP test][3] and click **Create a Local Variable** to add the following variables:
+Note: If you want to use a static email address this can be done by adding it as a [global variable][4] and inserting it in your test.
 
-Add an Email Address variable within a synthetic test to generate a unique email address for that synthetic test run. 
+### Inject the email address variable
 
-### Inject the Email Address variable
+The user can add a step to input the email within their application and the previously created variable can be added ---
 
 A step will need to be recorded to imitate how a user would input their email address within your application. The Email Address variable can be injected into an input field to imitate this step.
 
 {{< img src="synthetics/guide/http-tests-with-hmac/test_with_hmac_authentication.png" alt="HTTP test with HMAC authentication" style="width:100%;" >}}
 
 The synthetic test can then access the email body to be used in the rest of the sign-up flow.
-
 
 ### Extract the OTP from the email body
 
@@ -47,13 +44,12 @@ Under `Add a variable`, select `from Email body`. In this example, the variable 
 
 For example, the following regex can be used to parse out a 6-digit code from the email body.
 
-
-| **Type**                        | **Example**                                     | **Regex Rule**                           |
-|:--------------------------------|:------------------------------------------------|:-----------------------------------------|
-| 4 Digit OTP                     | 1234                                            | `/[0-9]{6,6}/`                           |
-| 6 Digit OTP                     | 123456                                          | `/[0-9]{6,6}/`                           |
-| Alphanumerical OTP              | a1b2cd34                                        | `/[0-9,a-z]{8,8}/`                       |
-
+| **Type**                           | **Example**                                  | **Regex Rule**                           |
+|:-----------------------------------|:---------------------------------------------|:-----------------------------------------|
+| 4 Digit OTP                        | 1234                                         | `/[0-9]{6,6}/`                           |
+| 6 Digit OTP                        | 123456                                       | `/[0-9]{6,6}/`                           |
+| 5 Character                        | abcde                                        | `/[0-9]{6,6}/`                           |
+| Alphanumerical OTP                 | a1b2cd34                                     | `/[0-9,a-z]{8,8}/`                       |
 
 ### Use a JavaScript assertion to insert the OTP
 
@@ -64,16 +60,16 @@ A [JavaScript assertion][5] step can be added to input the OTP within your appli
 JavaScript lets you trigger an event on a DOM element programmatically, making it possible to mimic user interactions or other events. Depending on how your input element is built, dispatching an event may be required to enable custom behaviors or testing event listeners tied to the element.
 
 For example, the extracted variable can be inserted into a simple text field as follows:
-```
+{{< code-block lang="java" filename="block.java" disable_copy="true" collapsible="true" >}}
 function (vars, element) {
   element.setAttribute('value', vars.OTP_FROM_EMAIL);
   element.dispatchEvent(new Event("input", { bubbles: true }));
   return true;
 }
-```
+{{< /code-block >}}
 
 A more complex example might be that each digit of the OTP has its own respective input field. The OTP can be inserted as follows:
-```
+{{< code-block lang="java" filename="block.java" disable_copy="true" collapsible="true" >}}
 function (vars) {
   const inputList = document.querySelectorAll('input');
   inputList.forEach((element) => {
@@ -82,7 +78,7 @@ function (vars) {
   });
   return true;
 }
-```
+{{< /code-block >}}
 
 ### Continue testing the rest of your application flow
 
@@ -96,10 +92,9 @@ Once the OTP is inserted and verified, continue recording the appropriate steps 
 [2]: /synthetics/api_tests/http_tests/
 [3]: https://app.datadoghq.com/synthetics/create
 [4]: /synthetics/settings/?tab=specifyvalue#global-variables
-[5]: /synthetics/browser_tests/actions/?tab
-for 5: https://docs.datadoghq.com/synthetics/browser_tests/actions/?tab=testanelementontheactivepage#javascript
+[5]: /synthetics/browser_tests/actions/?tab=testanelementontheactivepage#javascript
+[6]: /
 
-
-
-[5]: https://jsr.io/@std
-[6]: https://developer.mozilla.org/en-US/docs/Web/API/Crypto
+captcha - 
+local variable
+- 
