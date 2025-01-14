@@ -8,7 +8,7 @@ import { OptionGroupGlossarySchema } from './glossaries/optionGroupGlossary';
  * An option available in a resolved page filter
  * (see next schema).
  */
-const ResolvedPageFilterOptionSchema = z
+const ResolvedCustomizationOptionSchema = z
   .object({
     // The value of the option, to be used in routes and params
     id: z.string().regex(SNAKE_CASE_REGEX),
@@ -38,7 +38,7 @@ export const ResolvedCustomizationSchema = z
     // The display name of the filter in the UI
     label: z.string(),
     defaultValue: z.string().regex(SNAKE_CASE_REGEX),
-    options: z.array(ResolvedPageFilterOptionSchema),
+    options: z.array(ResolvedCustomizationOptionSchema),
     currentValue: z.string().regex(SNAKE_CASE_REGEX),
   })
   .strict();
@@ -100,7 +100,7 @@ export const ResolvedCustomizationsSchema = z.record(ResolvedCustomizationSchema
  *   }
  * }
  */
-export type ResolvedPageFilters = z.infer<typeof ResolvedCustomizationsSchema>;
+export type ResolvedCustomizations = z.infer<typeof ResolvedCustomizationsSchema>;
 
 /**
  * The manifest for a single page customization,
@@ -147,7 +147,7 @@ export const CustomizationManifestSchema = z
  *   possibleVals: ['ec2', 'gce', [... many more possible values here]]
  * }
  */
-export type PageFilterManifest = z.infer<typeof CustomizationManifestSchema>;
+export type CustomizationManifest = z.infer<typeof CustomizationManifestSchema>;
 
 /**
  * A object containing all of the potential page filter IDs
@@ -159,7 +159,7 @@ export type PageFilterManifest = z.infer<typeof CustomizationManifestSchema>;
  * Useful for efficiently validating, resolving,
  * and re-resolving filters.
  */
-export const PageFiltersManifestSchema = z
+export const CustomizationsManifestSchema = z
   .object({
     filtersById: z.record(
       z.string().regex(SNAKE_CASE_REGEX),
@@ -175,7 +175,7 @@ export const PageFiltersManifestSchema = z
   .strict();
 
 /**
- * A object containing all of the potential page filter IDs
+ * A object containing all of the potential customization IDs
  * and option groups for a page, created by populating the front matter
  * placeholders with all possible values, then collecting all
  * configuration data necessary to support the resulting
@@ -186,7 +186,7 @@ export const PageFiltersManifestSchema = z
  *
  * @example
  * {
- *   // a simple filter with no dependencies
+ *   // a simple customization with no dependencies
  *   host: {
  *     config: {
  *       id: 'host',
@@ -199,7 +199,7 @@ export const PageFiltersManifestSchema = z
  *     possibleVals: ['aws', 'gcp', 'azure']
  *   },
  *
- *   // a filter that depends on the user's selection of `host`,
+ *   // a customization that depends on the user's selection of `host`,
  *   // yielding different options for each host type
  *   // and a wide variety of possible values overall
  *   host_type: {
@@ -217,13 +217,13 @@ export const PageFiltersManifestSchema = z
  *   }
  * }
  */
-export type PageFiltersManifest = z.infer<typeof PageFiltersManifestSchema>;
+export type CustomizationsManifest = z.infer<typeof CustomizationsManifestSchema>;
 
 /**
  * A lighter version of the PageFilterManifest schema,
  * designed to be used client-side.
  */
-export const PageFilterClientSideManifestSchema = z
+export const ClientCustomizationManifestSchema = z
   .object({
     config: CustomizationConfigSchema,
     defaultValsByOptionGroupId: z.record(
@@ -233,19 +233,19 @@ export const PageFilterClientSideManifestSchema = z
   })
   .strict();
 
-export type PageFilterClientSideManifest = z.infer<
-  typeof PageFilterClientSideManifestSchema
+export type ClientCustomizationManifest = z.infer<
+  typeof ClientCustomizationManifestSchema
 >;
 
 /**
  * A lighter version of the PageFiltersManifest schema,
  * designed to be used client-side.
  */
-export const PageFiltersClientSideManifestSchema = z
+export const ClientCustomizationsManifestSchema = z
   .object({
     filtersById: z.record(
       z.string().regex(SNAKE_CASE_REGEX),
-      PageFilterClientSideManifestSchema,
+      ClientCustomizationManifestSchema,
     ),
     optionGroupsById: OptionGroupGlossarySchema,
     defaultValsByFilterId: z.record(
@@ -255,6 +255,6 @@ export const PageFiltersClientSideManifestSchema = z
   })
   .strict();
 
-export type PageFiltersClientSideManifest = z.infer<
-  typeof PageFiltersClientSideManifestSchema
+export type ClientCustomizationsManifest = z.infer<
+  typeof ClientCustomizationsManifestSchema
 >;

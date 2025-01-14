@@ -2,9 +2,9 @@ import { GLOBAL_PLACEHOLDER_REGEX } from '../schemas/regexes';
 import { Frontmatter } from '../schemas/frontMatter';
 import { PLACEHOLDER_REGEX } from '../schemas/regexes';
 import {
-  PageFiltersManifest,
-  PageFiltersClientSideManifest,
-} from '../schemas/pageFilters';
+  CustomizationsManifest,
+  ClientCustomizationsManifest,
+} from '../schemas/customizations';
 import { CustomizationConfig } from '../schemas/frontMatter';
 import { CdocsCoreError } from '../schemas/errors';
 import { ContentFiltersConfig } from '../schemas/contentFiltersConfig';
@@ -19,8 +19,8 @@ export class FiltersManifestBuilder {
    * Convert a standard compile-time page filters manifest
    * to a lighter version to be used client-side.
    */
-  static minifyManifest(manifest: PageFiltersManifest): PageFiltersClientSideManifest {
-    const result: PageFiltersClientSideManifest = {
+  static minifyManifest(manifest: CustomizationsManifest): ClientCustomizationsManifest {
+    const result: ClientCustomizationsManifest = {
       filtersById: {},
       defaultValsByFilterId: { ...manifest.defaultValsByFilterId },
       optionGroupsById: { ...manifest.optionGroupsById },
@@ -47,9 +47,9 @@ export class FiltersManifestBuilder {
     // filterOptionsConfig: FilterOptionsConfig;
     contentFiltersConfig: ContentFiltersConfig;
     // glossary: Glossary;
-  }): PageFiltersManifest {
+  }): CustomizationsManifest {
     // Create an empty manifest to populate
-    const manifest: PageFiltersManifest = {
+    const manifest: CustomizationsManifest = {
       filtersById: {},
       optionGroupsById: {},
       errors: [],

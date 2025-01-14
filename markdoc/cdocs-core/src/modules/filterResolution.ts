@@ -11,11 +11,11 @@
 
 import { GLOBAL_PLACEHOLDER_REGEX } from '../schemas/regexes';
 import {
-  ResolvedPageFilters,
+  ResolvedCustomizations,
   ResolvedCustomization,
-  PageFiltersManifest,
-  PageFiltersClientSideManifest,
-} from '../schemas/pageFilters';
+  CustomizationsManifest,
+  ClientCustomizationsManifest,
+} from '../schemas/customizations';
 import { CustomizationConfig } from '../schemas/frontMatter';
 
 /**
@@ -34,59 +34,61 @@ import { CustomizationConfig } from '../schemas/frontMatter';
  * with user-selected values, determining any default values
  * resulting from the user's earlier selections, and so on.
  */
-export function resolvePageFilters(p: {
+export function resolveCustomizations(p: {
   valsByFilterId: Record<string, string>;
-  filtersManifest: PageFiltersManifest | PageFiltersClientSideManifest;
-}): ResolvedPageFilters {
-  const resolvedPageFilters: ResolvedPageFilters = {};
+  filtersManifest: CustomizationsManifest | ClientCustomizationsManifest;
+}): ResolvedCustomizations {
+  const resolvedCustomizations: ResolvedCustomizations = {};
   const valsByFilterIdDup = { ...p.valsByFilterId };
 
-  const pageFiltersConfig = Object.values(p.filtersManifest.filtersById).map((filter) => {
-    return filter.config;
-  });
+  const customizationsConfig = Object.values(p.filtersManifest.filtersById).map(
+    (filter) => {
+      return filter.config;
+    },
+  );
 
-  pageFiltersConfig.forEach((filterConfig) => {
+  customizationsConfig.forEach((customizationConfig) => {
     // If the options source contains a placeholder, resolve it
-    const filterConfigDup = resolveFilterOptionsSource({
-      pageFilterConfig: filterConfig,
+    const customizationConfigDup = resolveFilterOptionsSource({
+      pageFilterConfig: customizationConfig,
       selectedValsByFilterId: valsByFilterIdDup,
     });
 
     // Update the value for the filter,
     // if the current value is no longer valid after placeholder resolution
     const defaultValue =
-      filterConfigDup.default_value ||
-      p.filtersManifest.optionGroupsById[filterConfigDup.option_group_id].find(
+      customizationConfigDup.default_value ||
+      p.filtersManifest.optionGroupsById[customizationConfigDup.option_group_id].find(
         (option) => option.default,
       )!.id;
 
     const possibleVals = p.filtersManifest.optionGroupsById[
-      filterConfigDup.option_group_id
+      customizationConfigDup.option_group_id
     ].map((option) => option.id);
-    let currentValue = p.valsByFilterId[filterConfigDup.filter_id];
+    let currentValue = p.valsByFilterId[customizationConfigDup.filter_id];
     if (currentValue && !possibleVals.includes(currentValue)) {
       currentValue = defaultValue;
-      valsByFilterIdDup[filterConfigDup.filter_id] = defaultValue;
+      valsByFilterIdDup[customizationConfigDup.filter_id] = defaultValue;
     }
 
     // Add the resolved filter to the returned object
     const resolvedFilter: ResolvedCustomization = {
-      id: filterConfigDup.filter_id,
-      label: filterConfigDup.label,
+      id: customizationConfigDup.filter_id,
+      label: customizationConfigDup.label,
       defaultValue,
       currentValue,
-      options: p.filtersManifest.optionGroupsById[filterConfigDup.option_group_id].map(
-        (option) => ({
-          id: option.id,
-          label: option.label,
-        }),
-      ),
+      options: p.filtersManifest.optionGroupsById[
+        customizationConfigDup.option_group_id
+      ].map((option) => ({
+        id: option.id,
+        label: option.label,
+      })),
     };
 
-    resolvedPageFilters[filterConfigDup.filter_id] = resolvedFilter;
+    resolvedCustomizations[customizationConfigDup.filter_id] = resolvedFilter;
   });
 
-  return resolvedPageFilters;
+  return resolvedCustomizations;
 }
 
 /**

@@ -11,7 +11,7 @@
       "format": "cjs"
     },
     "node_modules/cdocs-core/dist/modules/filterResolution.js": {
-      "bytes": 4054,
+      "bytes": 4049,
       "imports": [
         {
           "path": "node_modules/cdocs-core/dist/schemas/regexes.js",

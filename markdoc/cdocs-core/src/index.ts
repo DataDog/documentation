@@ -5,7 +5,7 @@ export { FiltersManifestBuilder } from './modules/FiltersManifestBuilder';
 export { YamlConfigParser } from './modules/YamlConfigParser';
 
 export {
-  resolvePageFilters,
+  resolveCustomizations as resolvePageFilters,
   resolveFilterOptionsSource,
 } from './modules/filterResolution';
 
@@ -19,15 +19,15 @@ export {
 } from './schemas/frontMatter';
 
 export {
-  PageFiltersManifest,
-  PageFiltersManifestSchema,
+  CustomizationsManifest as PageFiltersManifest,
+  CustomizationsManifestSchema as PageFiltersManifestSchema,
   ResolvedCustomization as ResolvedPageFilter,
   ResolvedCustomizationSchema as ResolvedPageFilterSchema,
-  PageFiltersClientSideManifest,
-  PageFiltersClientSideManifestSchema,
-  ResolvedPageFilters,
+  ClientCustomizationsManifest as PageFiltersClientSideManifest,
+  ClientCustomizationsManifestSchema as PageFiltersClientSideManifestSchema,
+  ResolvedCustomizations as ResolvedPageFilters,
   ResolvedCustomizationsSchema as ResolvedPageFiltersSchema,
-} from './schemas/pageFilters';
+} from './schemas/customizations';
 
 export { CdocsDataManager } from './modules/CdocsDataManager';
 
