@@ -261,16 +261,10 @@ This excludes executors that are autoscaling the infrastructure in order to run 
 
 For existing runners:
 
-{{< tabs >}}
-{{% tab "GitLab &gt;&equals; 15.8" %}}
-Add tags through the UI by going to **Settings > CI/CD > Runners** and editing the appropriate runner.
-{{% /tab %}}
+GitLab >= 15.8: Add tags through the UI by going to **Settings > CI/CD > Runners** and editing the appropriate runner.
 
-{{% tab "GitLab &lt; 15.8" %}}
-Add tags by updating the runner's `config.toml`. Or add tags
-through the UI by going to **Settings > CI/CD > Runners** and editing the appropriate runner.
-{{% /tab %}}
-{{< /tabs >}}
+GitLab < 15.8: Add tags by updating the runner's `config.toml`. Or add tags through the UI by going to **Settings > CI/CD > Runners** and editing the appropriate runner.
+
 After these steps, CI Visibility adds the hostname to each job. To see the metrics, click on a job span in the trace view. In the drawer, a new tab named **Infrastructure** appears which contains the host metrics.
 {{% /tab %}}
 
