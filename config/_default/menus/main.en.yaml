@@ -1178,6 +1178,10 @@ menu:
       identifier: watchdog_faulty_deployment_detection
       parent: watchdog_top_level
       weight: 5
+    - name: Faulty Cloud & SaaS API Detection
+      url: watchdog/faulty_cloud_saas_api_detection
+      parent: watchdog_top_level
+      weight: 6
     - name: Bits AI
       url: bits_ai/
       pre: bits-ai
@@ -5787,21 +5791,26 @@ menu:
       parent: csm_setup
       identifier: csm_setup_cloudtrail
       weight: 103
-    - name: Set Up Iac Remediation
+    - name: Set Up IaC Scanning
+      url: security/cloud_security_management/setup/iac_scanning
+      parent: csm_setup
+      identifier: csm_setup_iac_scanning
+      weight: 104
+    - name: Set Up IaC Remediation
       url: security/cloud_security_management/setup/iac_remediation
       parent: csm_setup
       identifier: csm_setup_iac_remediation
-      weight: 104
+      weight: 105
     - name: Set Up without Infrastructure Monitoring
       url: security/cloud_security_management/setup/without_infrastructure_monitoring
       parent: csm_setup
       identifier: csm_setup_without_infrastructure_monitoring
-      weight: 105
+      weight: 106
     - name: Deploy via Cloud Integrations
       url: security/cloud_security_management/setup/cloud_integrations
       parent: csm_setup
       identifier: csm_setup_cloud_integrations
-      weight: 106
+      weight: 107
     - name: Threats
       url: security/threats/
       parent: csm
