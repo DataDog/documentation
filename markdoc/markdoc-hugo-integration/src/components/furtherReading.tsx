@@ -1,6 +1,6 @@
 import { WhatsnextTemplate } from './whatsnext';
 import { NextlinkTemplate } from './nextlink';
-import { FurtherReadingConfig } from '../schemas/frontmatter';
+import { FurtherReadingConfig } from '../schemas/frontMatter';
 import { HugoConfig } from '../schemas/config/hugo';
 import { renderToString } from 'react-dom/server';
 

@@ -107,9 +107,9 @@
     }
   });
 
-  // node_modules/cdocs-core/dist/schemas/regexes.js
+  // node_modules/cdocs-data/dist/schemas/regexes.js
   var require_regexes = __commonJS({
-    "node_modules/cdocs-core/dist/schemas/regexes.js"(exports) {
+    "node_modules/cdocs-data/dist/schemas/regexes.js"(exports) {
       "use strict";
       Object.defineProperty(exports, "__esModule", { value: true });
       exports.FILTER_OPTIONS_ID_REGEX = exports.GLOBAL_PLACEHOLDER_REGEX = exports.PLACEHOLDER_REGEX = exports.SNAKE_CASE_REGEX = void 0;
@@ -120,34 +120,34 @@
     }
   });
 
-  // node_modules/cdocs-core/dist/modules/filterResolution.js
+  // node_modules/cdocs-data/dist/modules/filterResolution.js
   var require_filterResolution = __commonJS({
-    "node_modules/cdocs-core/dist/modules/filterResolution.js"(exports) {
+    "node_modules/cdocs-data/dist/modules/filterResolution.js"(exports) {
       "use strict";
       Object.defineProperty(exports, "__esModule", { value: true });
-      exports.resolvePageFilters = resolvePageFilters;
+      exports.resolveFilters = resolveFilters;
       exports.resolveFilterOptionsSource = resolveFilterOptionsSource;
       var regexes_1 = require_regexes();
-      function resolvePageFilters(p) {
-        const resolvedPageFilters = {};
-        const valsByFilterIdDup = Object.assign({}, p.valsByFilterId);
-        const pageFiltersConfig = Object.values(p.filtersManifest.filtersById).map((filter) => {
+      function resolveFilters(p) {
+        const resolvedFilters = {};
+        const valsByTraitIdDup = Object.assign({}, p.valsByTraitId);
+        const filterConfigs = Object.values(p.filtersManifest.filtersByTraitId).map((filter) => {
           return filter.config;
         });
-        pageFiltersConfig.forEach((filterConfig) => {
+        filterConfigs.forEach((filterConfig) => {
           const filterConfigDup = resolveFilterOptionsSource({
             pageFilterConfig: filterConfig,
-            selectedValsByFilterId: valsByFilterIdDup
+            selectedValsByTraitId: valsByTraitIdDup
           });
           const defaultValue = filterConfigDup.default_value || p.filtersManifest.optionGroupsById[filterConfigDup.option_group_id].find((option) => option.default).id;
           const possibleVals = p.filtersManifest.optionGroupsById[filterConfigDup.option_group_id].map((option) => option.id);
-          let currentValue = p.valsByFilterId[filterConfigDup.filter_id];
+          let currentValue = p.valsByTraitId[filterConfigDup.trait_id];
           if (currentValue && !possibleVals.includes(currentValue)) {
             currentValue = defaultValue;
-            valsByFilterIdDup[filterConfigDup.filter_id] = defaultValue;
+            valsByTraitIdDup[filterConfigDup.trait_id] = defaultValue;
           }
           const resolvedFilter = {
-            id: filterConfigDup.filter_id,
+            id: filterConfigDup.trait_id,
             label: filterConfigDup.label,
             defaultValue,
             currentValue,
@@ -156,15 +156,15 @@
               label: option.label
             }))
           };
-          resolvedPageFilters[filterConfigDup.filter_id] = resolvedFilter;
+          resolvedFilters[filterConfigDup.trait_id] = resolvedFilter;
         });
-        return resolvedPageFilters;
+        return resolvedFilters;
       }
       function resolveFilterOptionsSource(p) {
         const filterConfigDup = Object.assign({}, p.pageFilterConfig);
         if (regexes_1.GLOBAL_PLACEHOLDER_REGEX.test(filterConfigDup.option_group_id)) {
           filterConfigDup.option_group_id = filterConfigDup.option_group_id.replace(regexes_1.GLOBAL_PLACEHOLDER_REGEX, (_match, placeholder) => {
-            return p.selectedValsByFilterId[placeholder.toLowerCase()];
+            return p.selectedValsByTraitId[placeholder.toLowerCase()];
           });
         }
         return filterConfigDup;
@@ -12827,7 +12827,7 @@
          * and it is created lazily.
          */
         constructor() {
-          this.selectedValsByFilterId = {};
+          this.selectedValsByTraitId = {};
           this.ifFunctionsByRef = {};
           this.storedFilters = {};
         }
@@ -12851,7 +12851,7 @@
          */
         initialize(p) {
           this.filtersManifest = p.filtersManifest;
-          this.selectedValsByFilterId = p.filtersManifest.defaultValsByFilterId || {};
+          this.selectedValsByTraitId = p.filtersManifest.defaultValsByTraitId || {};
           this.ifFunctionsByRef = {};
           const contentIsCustomizable = this.locateFilterSelectorEl();
           if (contentIsCustomizable) {
@@ -12887,7 +12887,7 @@
          */
         updateStoredFilterSelections() {
           const storedFilters = JSON.parse(localStorage.getItem("content-filters") || "{}");
-          const newStoredFilters = Object.assign(Object.assign({}, storedFilters), this.selectedValsByFilterId);
+          const newStoredFilters = Object.assign(Object.assign({}, storedFilters), this.selectedValsByTraitId);
           this.storedFilters = newStoredFilters;
           localStorage.setItem("content-filters", JSON.stringify(newStoredFilters));
         }
@@ -12898,13 +12898,13 @@
         getSelectedValsFromUrl() {
           const url = new URL(window.location.href);
           const searchParams = url.searchParams;
-          const selectedValsByFilterId = {};
+          const selectedValsByTraitId = {};
           searchParams.forEach((val, key) => {
-            if (key in Object.keys(this.selectedValsByFilterId)) {
-              selectedValsByFilterId[key] = val;
+            if (key in Object.keys(this.selectedValsByTraitId)) {
+              selectedValsByTraitId[key] = val;
             }
           });
-          return selectedValsByFilterId;
+          return selectedValsByTraitId;
         }
         /**
          * Update the URL with the selected filter values.
@@ -12912,9 +12912,9 @@
         syncUrlWithSelectedVals() {
           const url = new URL(window.location.href);
           const searchParams = url.searchParams;
-          const sortedFilterIds = Object.keys(this.selectedValsByFilterId).sort();
+          const sortedFilterIds = Object.keys(this.selectedValsByTraitId).sort();
           sortedFilterIds.forEach((filterId) => {
-            searchParams.set(filterId, this.selectedValsByFilterId[filterId]);
+            searchParams.set(filterId, this.selectedValsByTraitId[filterId]);
           });
           window.history.replaceState({}, "", url.toString());
         }
@@ -12936,7 +12936,7 @@
           if (!optionId) {
             return;
           }
-          this.selectedValsByFilterId[filterId] = optionId;
+          this.selectedValsByTraitId[filterId] = optionId;
           this.rerender();
           this.syncUrlWithSelectedVals();
           this.updateStoredFilterSelections();
@@ -13005,7 +13005,7 @@
             const clientFunction = this.ifFunctionsByRef[ref];
             const oldValue = clientFunction.value;
             const resolvedFunction = (0, reresolver_1.reresolveFunctionNode)(clientFunction, {
-              variables: this.selectedValsByFilterId
+              variables: this.selectedValsByTraitId
             });
             this.ifFunctionsByRef[ref] = resolvedFunction;
             if (oldValue !== resolvedFunction.value) {
@@ -13096,18 +13096,18 @@
          * default values, etc.) into a single set of selected values.
          */
         applyFilterSelectionOverrides() {
-          const relevantFilterIds = Object.keys(this.selectedValsByFilterId);
+          const relevantFilterIds = Object.keys(this.selectedValsByTraitId);
           let filterOverrideFound = false;
           Object.keys(this.storedFilters).forEach((filterId) => {
-            if (relevantFilterIds.includes(filterId) && this.selectedValsByFilterId[filterId] !== this.storedFilters[filterId]) {
-              this.selectedValsByFilterId[filterId] = this.storedFilters[filterId];
+            if (relevantFilterIds.includes(filterId) && this.selectedValsByTraitId[filterId] !== this.storedFilters[filterId]) {
+              this.selectedValsByTraitId[filterId] = this.storedFilters[filterId];
               filterOverrideFound = true;
             }
           });
           const urlFilters = this.getSelectedValsFromUrl();
           Object.keys(urlFilters).forEach((filterId) => {
-            if (relevantFilterIds.includes(filterId) && this.selectedValsByFilterId[filterId] !== urlFilters[filterId]) {
-              this.selectedValsByFilterId[filterId] = urlFilters[filterId];
+            if (relevantFilterIds.includes(filterId) && this.selectedValsByTraitId[filterId] !== urlFilters[filterId]) {
+              this.selectedValsByTraitId[filterId] = urlFilters[filterId];
               filterOverrideFound = true;
             }
           });
@@ -13156,13 +13156,13 @@
           if (!this.filterSelectorEl || !this.filtersManifest) {
             throw new Error("Cannot rerender filter selector without filtersManifest and filterSelectorEl");
           }
-          const resolvedPageFilters = (0, filterResolution_1.resolvePageFilters)({
+          const resolvedPageFilters = (0, filterResolution_1.resolveFilters)({
             filtersManifest: this.filtersManifest,
-            valsByFilterId: this.selectedValsByFilterId
+            valsByTraitId: this.selectedValsByTraitId
           });
           Object.keys(resolvedPageFilters).forEach((filterId) => {
             const resolvedFilter = resolvedPageFilters[filterId];
-            this.selectedValsByFilterId[filterId] = resolvedFilter.currentValue;
+            this.selectedValsByTraitId[filterId] = resolvedFilter.currentValue;
           });
           const newFilterSelectorHtml = (0, CustomizationMenu_1.buildCustomizationMenuUi)(resolvedPageFilters);
           this.filterSelectorEl.innerHTML = newFilterSelectorHtml;

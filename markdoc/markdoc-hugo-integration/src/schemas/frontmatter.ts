@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { FrontmatterSchema as CdocsFrontmatterSchema } from 'cdocs-core';
+import { FrontMatterSchema as CdocsFrontMatterSchema } from 'cdocs-data';
 
 /**
  * The list of further reading links, as parsed directly from
@@ -36,8 +36,8 @@ export const FurtherReadingConfigSchema = z
  */
 export type FurtherReadingConfig = z.infer<typeof FurtherReadingConfigSchema>;
 
-export const FrontmatterSchema = CdocsFrontmatterSchema.extend({
+export const FrontMatterSchema = CdocsFrontMatterSchema.extend({
   further_reading: FurtherReadingConfigSchema.optional()
 });
 
-export type Frontmatter = z.infer<typeof FrontmatterSchema>;
+export type FrontMatter = z.infer<typeof FrontMatterSchema>;

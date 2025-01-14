@@ -1,8 +1,8 @@
 ---
 title: Code Block
-customizations:
+content_filters:
   - label: "Color"
-    filter_id: color
+    trait_id: color
     option_group_id: primary_color_options
 ---
 

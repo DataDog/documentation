@@ -1,14 +1,14 @@
 ---
 title: "DebugIt: A Fake Debugging Library"
-customizations:
+content_filters:
   - label: Language
-    filter_id: prog_lang
+    trait_id: prog_lang
     option_group_id: debugit_programming_lang_options
   - label: Operating system
-    filter_id: os
+    trait_id: os
     option_group_id: debugit_os_options
   - label: Database
-    filter_id: database
+    trait_id: database
     option_group_id: debugit_database_options
 ---
 

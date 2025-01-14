@@ -7,7 +7,7 @@ const langs = ['en', 'ja']; // TODO: Change to piglatin
 
 describe('Demo', () => {
   test('parses the content filter configuration from YAML', async () => {
-    const { customizationConfigByLang } = CdocsDataManager.loadContentFiltersConfig({
+    const { customizationConfigByLang } = CdocsDataManager.loadCustomizationConfig({
       configDir: VALID_CUSTOMIZATION_CONFIG_DIR,
       langs,
     });

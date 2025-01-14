@@ -35,23 +35,23 @@ import { FilterConfig } from '../schemas/frontMatter';
  * resulting from the user's earlier selections, and so on.
  */
 export function resolveFilters(p: {
-  valsByFilterId: Record<string, string>;
+  valsByTraitId: Record<string, string>;
   filtersManifest: FiltersManifest | ClientSideFiltersManifest;
 }): ResolvedFilters {
   const resolvedFilters: ResolvedFilters = {};
-  const valsByFilterIdDup = { ...p.valsByFilterId };
+  const valsByTraitIdDup = { ...p.valsByTraitId };
 
-  const filtersConfig = Object.values(p.filtersManifest.filtersByTraitId).map(
+  const filterConfigs = Object.values(p.filtersManifest.filtersByTraitId).map(
     (filter) => {
       return filter.config;
     },
   );
 
-  filtersConfig.forEach((filterConfig) => {
+  filterConfigs.forEach((filterConfig) => {
     // If the options source contains a placeholder, resolve it
     const filterConfigDup = resolveFilterOptionsSource({
       pageFilterConfig: filterConfig,
-      selectedValsByFilterId: valsByFilterIdDup,
+      selectedValsByTraitId: valsByTraitIdDup,
     });
 
     // Update the value for the filter,
@@ -65,10 +65,10 @@ export function resolveFilters(p: {
     const possibleVals = p.filtersManifest.optionGroupsById[
       filterConfigDup.option_group_id
     ].map((option) => option.id);
-    let currentValue = p.valsByFilterId[filterConfigDup.trait_id];
+    let currentValue = p.valsByTraitId[filterConfigDup.trait_id];
     if (currentValue && !possibleVals.includes(currentValue)) {
       currentValue = defaultValue;
-      valsByFilterIdDup[filterConfigDup.trait_id] = defaultValue;
+      valsByTraitIdDup[filterConfigDup.trait_id] = defaultValue;
     }
 
     // Add the resolved filter to the returned object
@@ -99,7 +99,7 @@ export function resolveFilters(p: {
  */
 export function resolveFilterOptionsSource(p: {
   pageFilterConfig: FilterConfig;
-  selectedValsByFilterId: Record<string, string>;
+  selectedValsByTraitId: Record<string, string>;
 }): FilterConfig {
   // Make a copy in order to preserve the placeholders
   // for future use
@@ -111,7 +111,7 @@ export function resolveFilterOptionsSource(p: {
     filterConfigDup.option_group_id = filterConfigDup.option_group_id.replace(
       GLOBAL_PLACEHOLDER_REGEX,
       (_match: string, placeholder: string) => {
-        return p.selectedValsByFilterId[placeholder.toLowerCase()];
+        return p.selectedValsByTraitId[placeholder.toLowerCase()];
       },
     );
   }

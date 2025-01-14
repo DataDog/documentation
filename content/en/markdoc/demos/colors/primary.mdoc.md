@@ -1,13 +1,13 @@
 ---
 title: Primary Colors
 private: true
-customizations:
-  - display_name: "Color"
-    id: color
-    option_group: primary_color_options
-  - display_name: "Item"
-    id: item
-    option_group: <COLOR>_item_options
+content_filters:
+  - label: "Color"
+    trait_id: color
+    option_group_id: primary_color_options
+  - label: "Item"
+    trait_id: item
+    option_group_id: <COLOR>_item_options
 aliases:
   - /primary_colors_alias/
 ---

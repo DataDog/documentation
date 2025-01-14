@@ -18,7 +18,11 @@ A *filter* is the combination of two entities:
 
 Traits and option groups (along with the individual options referenced by the option groups) are reusable throughout the entire docs site, and are defined in the site's *customization config*, a set of YAML files.
 
-Filters are defined in a page's front matter, and only apply to that page. But if two filters on two separate pages reference the same trait (such as `database`), the user's preference travels between pages when their choice on the previous page is a valid option on the next page.
+Filters are defined in a page's front matter, and only apply to that page. But if two filters on two separate pages reference the same trait (such as `operating_system`), the user's preference travels between pages when their preference is available on the new page.
+
+In the `operating_system` example, the user's selection for `linux` transfers between two pages automatically if the destination page uses `linux` as an option for the `operating_system` trait. Otherwise, the destination page's default option for the `operating_system` trait automatically becomes the user's new selection.
+
+Future versions might distinguish between explicit selections (something the user has chosen) and implicit selections (a default that has been chosen for the user, so this selection should still be overwritten by the explicit selection on any pages that support the explicit selection). But the current logic does not have this distinction, and the implicit selection travels until the user sets it to something else.
 
 ## Configuration examples
 
@@ -26,11 +30,11 @@ Filters are defined in a page's front matter, and only apply to that page. But i
 
 #### Traits
 
-Customization requires at least one user trait, such as their preferred `database` or `operating_system`:
+Customization requires at least one user trait, such as their preferred database or operating system:
 
 ```yaml
 traits:
-  - id: database
+  - id: db
     label: Database
 ```
 
@@ -79,6 +83,6 @@ A *filter*, which is defined in a page's front matter, combines a trait and an o
 ```yaml
 title: My Example Doc
 content_filters:
-  - trait_id: database
+  - trait_id: db
     option_group_id: product_two_db_options
 ```

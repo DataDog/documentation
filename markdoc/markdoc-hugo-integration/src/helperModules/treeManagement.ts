@@ -21,7 +21,7 @@ import {
 } from './PageBuilder/pageConfigMinification';
 import { transformConfig } from '../markdocParserConfig';
 import { HugoFunctions } from './HugoFunctions';
-import { PageFiltersManifest } from 'cdocs-core';
+import { FiltersManifest } from 'cdocs-data';
 
 /**
  * Collect the top-level client functions inside the renderable tree,
@@ -68,13 +68,13 @@ export function getMinifiedIfFunctionsByRef(
 export function buildRenderableTree(p: {
   parsedFile: ParsedFile;
   variables: Record<string, any>;
-  filtersManifest: PageFiltersManifest;
+  filtersManifest: FiltersManifest;
 }): { renderableTree: RenderableTreeNode; errors: CompilationError[] } {
   const errors: CompilationError[] = [];
 
   const renderableTree = MarkdocStaticCompiler.transform(p.parsedFile.ast, {
     variables: {
-      ...p.filtersManifest.defaultValsByFilterId,
+      ...p.filtersManifest.defaultValsByTraitId,
       ...JSON.parse(JSON.stringify(p.variables))
     },
     partials: p.parsedFile.partials,
@@ -83,19 +83,17 @@ export function buildRenderableTree(p: {
 
   addHeaderAnchorstoTree(renderableTree);
 
-  const referencedValsByFilterId = collectReferencedValsByVarId(renderableTree);
+  const referencedValsByTraitId = collectReferencedValsByVarId(renderableTree);
 
-  const referencedFilterIds = Object.keys(referencedValsByFilterId);
+  const referencedTraitIds = Object.keys(referencedValsByTraitId);
 
   // ensure that all variable ids appearing
   // in the renderable tree are valid page filter ids
-  const pageFilterIds = Object.keys(p.filtersManifest.defaultValsByFilterId);
-  const invalidFilterIds = referencedFilterIds.filter(
-    (id) => !pageFilterIds.includes(id)
-  );
+  const traitIds = Object.keys(p.filtersManifest.defaultValsByTraitId);
+  const invalidTraitIds = referencedTraitIds.filter((id) => !traitIds.includes(id));
 
-  if (invalidFilterIds.length > 0) {
-    invalidFilterIds.forEach((id) => {
+  if (invalidTraitIds.length > 0) {
+    invalidTraitIds.forEach((id) => {
       errors.push({
         message: `Invalid filter ID found in markup: ${id}`,
         searchTerm: id
@@ -104,9 +102,9 @@ export function buildRenderableTree(p: {
   }
 
   // ensure that all referenced values are valid
-  Object.keys(referencedValsByFilterId).forEach((filterId) => {
-    const referencedVals = referencedValsByFilterId[filterId];
-    const possibleVals = p.filtersManifest.filtersById[filterId]?.possibleVals;
+  Object.keys(referencedValsByTraitId).forEach((traitId) => {
+    const referencedVals = referencedValsByTraitId[traitId];
+    const possibleVals = p.filtersManifest.filtersByTraitId[traitId]?.possibleVals;
 
     // Skip adding error for a bad filter ID,
     // since those are already caught above
@@ -118,7 +116,7 @@ export function buildRenderableTree(p: {
     if (invalidVals.length > 0) {
       invalidVals.forEach((val) => {
         errors.push({
-          message: `Invalid value found in markup: "${val}" is not a valid value for the filter ID "${filterId}".`,
+          message: `Invalid value found in markup: "${val}" is not a valid value for the filter ID "${traitId}".`,
           searchTerm: val
         });
       });

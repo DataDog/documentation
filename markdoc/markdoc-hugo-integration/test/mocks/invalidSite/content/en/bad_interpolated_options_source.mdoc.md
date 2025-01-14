@@ -1,11 +1,11 @@
 ---
 title: The Primary Colors of the Color Wheel
-customizations:
+content_filters:
   - label: "Color"
-    filter_id: color
+    trait_id: color
     option_group_id: rainbow_color_options # mistake, not all of these colors will yield a valid options source for the item preference
   - label: "Item"
-    filter_id: item
+    trait_id: item
     option_group_id: <COLOR>_item_options
 ---
 

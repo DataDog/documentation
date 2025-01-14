@@ -7,12 +7,11 @@ import {
   VALID_FILTERS_CONFIG_DIR
 } from '../config/constants';
 import { buildRenderableTree } from '../../src/helperModules/treeManagement';
-import { FiltersManifestBuilder, CdocsDataManager } from 'cdocs-core';
+import { FiltersManifestBuilder, CdocsDataManager } from 'cdocs-data';
 
 describe('treeManagement', () => {
-  const LANG_DIR = VALID_FILTERS_CONFIG_DIR + '/en';
   const testFilePath = VALID_CONTENT_DIR + '/en/primary_colors.mdoc.md';
-  const { contentFiltersConfigByLang } = CdocsDataManager.loadContentFiltersConfig({
+  const { customizationConfigByLang } = CdocsDataManager.loadCustomizationConfig({
     configDir: VALID_FILTERS_CONFIG_DIR,
     langs: ['en']
   });
@@ -25,7 +24,7 @@ describe('treeManagement', () => {
 
   const filtersManifest = FiltersManifestBuilder.build({
     frontmatter: parsedFile.frontmatter,
-    contentFiltersConfig: contentFiltersConfigByLang['en']
+    customizationConfig: customizationConfigByLang['en']
   });
 
   test(`builds a renderable tree for ${sanitizedMarkdocFilename} that matches the snapshot`, async () => {

@@ -12,7 +12,7 @@ describe('FiltersManifestBuilder.build', () => {
   test('creates the expected object when given valid data', async () => {
     const manifest = FiltersManifestBuilder.build({
       frontmatter: paintColorsFrontmatter,
-      contentFiltersConfig: paintColorsCustomizationConfig,
+      customizationConfig: paintColorsCustomizationConfig,
     });
 
     const expectedManifest: FiltersManifest = {
@@ -196,7 +196,7 @@ describe('FiltersManifestBuilder.build', () => {
 
     const manifest = FiltersManifestBuilder.build({
       frontmatter: invalidFrontmatter,
-      contentFiltersConfig: paintColorsCustomizationConfig,
+      customizationConfig: paintColorsCustomizationConfig,
     });
 
     expect(manifest.errors.length).toEqual(1);
@@ -208,7 +208,7 @@ describe('FiltersManifestBuilder.build', () => {
     const { matte_blue_paint_options, ...invalidOptionGroupGlossary } =
       paintColorsCustomizationConfig.optionGroupGlossary;
 
-    const invalidContentFiltersConfig = {
+    const invalidCustomizationConfig = {
       traitGlossary: { ...paintColorsCustomizationConfig.traitGlossary },
       optionGlossary: { ...paintColorsCustomizationConfig.optionGlossary },
       optionGroupGlossary: invalidOptionGroupGlossary,
@@ -216,7 +216,7 @@ describe('FiltersManifestBuilder.build', () => {
 
     const manifest = FiltersManifestBuilder.build({
       frontmatter: paintColorsFrontmatter,
-      contentFiltersConfig: invalidContentFiltersConfig,
+      customizationConfig: invalidCustomizationConfig,
     });
 
     expect(manifest.errors.length).toEqual(1);

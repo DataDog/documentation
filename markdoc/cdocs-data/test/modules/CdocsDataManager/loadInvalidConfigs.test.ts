@@ -12,7 +12,7 @@ describe('CdocsDataManager', () => {
     let thrownError: any = null;
 
     try {
-      const { customizationConfigByLang } = CdocsDataManager.loadContentFiltersConfig({
+      const { customizationConfigByLang } = CdocsDataManager.loadCustomizationConfig({
         configDir: `${INVALID_CONFIGS_DIR}/${invalidDir}`,
         langs,
       });

@@ -1,4 +1,4 @@
-import { resolvePageFilters, PageFiltersManifest } from 'cdocs-core';
+import { resolvePageFilters, FiltersManifest } from 'cdocs-data';
 import { buildCustomizationMenuUi } from '../components/CustomizationMenu';
 
 /**
@@ -9,16 +9,16 @@ import { buildCustomizationMenuUi } from '../components/CustomizationMenu';
  * only rendered once, at compile time.
  */
 export const PageTemplate = (props: {
-  valsByFilterId: Record<string, string>;
-  filtersManifest: PageFiltersManifest;
+  valsByTraitId: Record<string, string>;
+  filtersManifest: FiltersManifest;
   articleHtml: string;
 }) => {
-  const { valsByFilterId, articleHtml, filtersManifest } = props;
+  const { valsByTraitId, articleHtml, filtersManifest } = props;
 
   return (
     <>
       <FilterSelectorTemplate
-        valsByFilterId={valsByFilterId}
+        valsByTraitId={valsByTraitId}
         filtersManifest={filtersManifest}
       />
       <div
@@ -31,12 +31,12 @@ export const PageTemplate = (props: {
 };
 
 function FilterSelectorTemplate(props: {
-  valsByFilterId: Record<string, string>;
-  filtersManifest: PageFiltersManifest;
+  valsByTraitId: Record<string, string>;
+  filtersManifest: FiltersManifest;
 }) {
-  const { valsByFilterId, filtersManifest } = props;
+  const { valsByTraitId, filtersManifest } = props;
 
-  if (Object.keys(filtersManifest.filtersById).length === 0) {
+  if (Object.keys(filtersManifest.filtersByTraitId).length === 0) {
     return null;
   }
 
@@ -46,7 +46,7 @@ function FilterSelectorTemplate(props: {
       dangerouslySetInnerHTML={{
         __html: buildCustomizationMenuUi(
           resolvePageFilters({
-            valsByFilterId,
+            valsByTraitId,
             filtersManifest
           })
         )

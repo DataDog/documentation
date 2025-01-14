@@ -1,4 +1,4 @@
-import { ResolvedPageFilters, ResolvedPageFilter } from 'cdocs-core';
+import { ResolvedFilters, ResolvedFilter } from 'cdocs-data';
 
 /**
  * Given a resolved page filters object, build the UI for the filter selector
@@ -8,7 +8,7 @@ import { ResolvedPageFilters, ResolvedPageFilter } from 'cdocs-core';
  * so JSX templating is not available.
  */
 export const buildCustomizationMenuUi = (
-  resolvedPageFilters: ResolvedPageFilters
+  resolvedPageFilters: ResolvedFilters
 ): string => {
   let menuHtml = '<div id="cdoc-filters-menu">';
   // Build the displayed pills menu
@@ -20,7 +20,7 @@ export const buildCustomizationMenuUi = (
   return menuHtml;
 };
 
-function buildFilterSelectorPillsMenu(p: { filters: ResolvedPageFilters }) {
+function buildFilterSelectorPillsMenu(p: { filters: ResolvedFilters }) {
   let menuHtml = '<div class="filter-selector-menu" id="cdoc-filters-pill-menu">';
   Object.keys(p.filters).forEach((filterId) => {
     const resolvedFilter = p.filters[filterId];
@@ -30,7 +30,7 @@ function buildFilterSelectorPillsMenu(p: { filters: ResolvedPageFilters }) {
   return menuHtml;
 }
 
-function buildFilterSelectorPills(p: { filter: ResolvedPageFilter }) {
+function buildFilterSelectorPills(p: { filter: ResolvedFilter }) {
   const currentValue = p.filter.currentValue || p.filter.defaultValue;
 
   // Open the top-level container
@@ -60,7 +60,7 @@ function buildFilterSelectorPills(p: { filter: ResolvedPageFilter }) {
   return selectorHtml;
 }
 
-function buildFilterSelectorDropdownsMenu(p: { filters: ResolvedPageFilters }) {
+function buildFilterSelectorDropdownsMenu(p: { filters: ResolvedFilters }) {
   let menuHtml =
     '<div class="filter-selector-menu cdoc-offscreen" id="cdoc-filters-dropdown-menu">';
   Object.keys(p.filters).forEach((filterId) => {
@@ -71,7 +71,7 @@ function buildFilterSelectorDropdownsMenu(p: { filters: ResolvedPageFilters }) {
   return menuHtml;
 }
 
-function buildFilterSelectorDropdown(p: { filter: ResolvedPageFilter }) {
+function buildFilterSelectorDropdown(p: { filter: ResolvedFilter }) {
   const currentValue = p.filter.currentValue || p.filter.defaultValue;
   const filterLabelElementId = `cdoc-${p.filter.id}-dropdown-label`;
 

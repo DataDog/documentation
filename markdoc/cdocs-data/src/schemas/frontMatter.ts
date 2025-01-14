@@ -21,8 +21,8 @@ export const FilterConfigSchema = z
  * @example
  * {
  *   label: "Database",
- *   id: "database",
- *   option_group: "dbm_database_options",
+ *   trait_id: "database",
+ *   option_group_id: "dbm_database_options",
  *   default_value: "postgres" // optional override
  * }
  */

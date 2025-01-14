@@ -1,13 +1,13 @@
 ---
 title: Postgres Integration Setup
-customizations:
-  - filter_id: postgres_version
+content_filters:
+  - trait_id: postgres_version
     option_group_id: postgres_integration_version_options
     label: "Postgres version"
-  - filter_id: agent_version
+  - trait_id: agent_version
     option_group_id: major_agent_version_options
     label: "Agent version"
-  - filter_id: agent_host
+  - trait_id: agent_host
     option_group_id: postgres_integration_host_options
     label: "Agent host"
 ---

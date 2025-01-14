@@ -136,8 +136,8 @@ export const FilterManifestSchema = z
  * // the user's previous selection of `host`.
  * {
  *   config: {
- *     id: 'host_type',
- *     option_group: 'aws_host_types',
+ *     trait_id: 'host_type',
+ *     option_group_id: 'aws_host_types',
  *     default_value: 'ec2'
  *   },
  *   defaultValsByOptionGroupId: {
@@ -187,8 +187,8 @@ export const FiltersManifestSchema = z
  *   // a simple filter with no dependencies
  *   host: {
  *     config: {
- *       id: 'host',
- *       option_group: 'host_options',
+ *       trait_id: 'host',
+ *       option_group_id: 'host_options',
  *       default_value: 'aws'
  *     },
  *     defaultValsByOptionGroupId: {
@@ -202,8 +202,8 @@ export const FiltersManifestSchema = z
  *   // and a wide variety of possible values overall
  *   host_type: {
  *     config: {
- *       id: 'host_type',
- *       option_group: 'aws_host_types',
+ *       trait_id: 'host_type',
+ *       option_group_id: 'aws_host_types',
  *       default_value: 'ec2'
  *     },
  *     defaultValsByOptionGroupId: {

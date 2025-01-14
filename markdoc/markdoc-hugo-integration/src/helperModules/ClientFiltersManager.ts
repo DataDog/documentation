@@ -19,8 +19,8 @@
  */
 
 import { buildCustomizationMenuUi } from './PageBuilder/components/CustomizationMenu';
-import { resolvePageFilters } from 'cdocs-core/dist/modules/filterResolution';
-import { PageFiltersClientSideManifest } from 'cdocs-core/dist/schemas/pageFilters';
+import { resolveFilters } from 'cdocs-data/dist/modules/filterResolution';
+import { ClientSideFiltersManifest } from 'cdocs-data/dist/schemas/pageFilters';
 import { ClientFunction } from 'markdoc-static-compiler/src/types';
 import { reresolveFunctionNode } from './renderer/reresolver';
 import {
@@ -36,9 +36,9 @@ const OFFSCREEN_CLASS = 'cdoc-offscreen';
 export class ClientFiltersManager {
   static #instance: ClientFiltersManager;
 
-  private filtersManifest?: PageFiltersClientSideManifest;
+  private filtersManifest?: ClientSideFiltersManifest;
   private filterSelectorEl?: HTMLElement;
-  private selectedValsByFilterId: Record<string, string> = {};
+  private selectedValsByTraitId: Record<string, string> = {};
   private ifFunctionsByRef: Record<string, ClientFunction> = {};
   private storedFilters: Record<string, string> = {};
 
@@ -102,10 +102,10 @@ export class ClientFiltersManager {
    */
   initialize(p: {
     ifFunctionsByRef: Record<string, MinifiedClientFunction>;
-    filtersManifest: PageFiltersClientSideManifest;
+    filtersManifest: ClientSideFiltersManifest;
   }) {
     this.filtersManifest = p.filtersManifest;
-    this.selectedValsByFilterId = p.filtersManifest.defaultValsByFilterId || {};
+    this.selectedValsByTraitId = p.filtersManifest.defaultValsByTraitId || {};
     this.ifFunctionsByRef = {};
 
     const contentIsCustomizable = this.locateFilterSelectorEl();
@@ -152,7 +152,7 @@ export class ClientFiltersManager {
     const storedFilters = JSON.parse(localStorage.getItem('content-filters') || '{}');
     const newStoredFilters = {
       ...storedFilters,
-      ...this.selectedValsByFilterId
+      ...this.selectedValsByTraitId
     };
     this.storedFilters = newStoredFilters;
     localStorage.setItem('content-filters', JSON.stringify(newStoredFilters));
@@ -166,14 +166,14 @@ export class ClientFiltersManager {
     const url = new URL(window.location.href);
     const searchParams = url.searchParams;
 
-    const selectedValsByFilterId: Record<string, string> = {};
+    const selectedValsByTraitId: Record<string, string> = {};
     searchParams.forEach((val, key) => {
-      if (key in Object.keys(this.selectedValsByFilterId)) {
-        selectedValsByFilterId[key] = val;
+      if (key in Object.keys(this.selectedValsByTraitId)) {
+        selectedValsByTraitId[key] = val;
       }
     });
 
-    return selectedValsByFilterId;
+    return selectedValsByTraitId;
   }
 
   /**
@@ -183,11 +183,11 @@ export class ClientFiltersManager {
     const url = new URL(window.location.href);
     const searchParams = url.searchParams;
 
-    const sortedFilterIds = Object.keys(this.selectedValsByFilterId).sort();
+    const sortedFilterIds = Object.keys(this.selectedValsByTraitId).sort();
 
     // Apply selected values
     sortedFilterIds.forEach((filterId) => {
-      searchParams.set(filterId, this.selectedValsByFilterId[filterId]);
+      searchParams.set(filterId, this.selectedValsByTraitId[filterId]);
     });
 
     window.history.replaceState({}, '', url.toString());
@@ -212,7 +212,7 @@ export class ClientFiltersManager {
       return;
     }
 
-    this.selectedValsByFilterId[filterId] = optionId;
+    this.selectedValsByTraitId[filterId] = optionId;
     this.rerender();
     this.syncUrlWithSelectedVals();
     this.updateStoredFilterSelections();
@@ -295,7 +295,7 @@ export class ClientFiltersManager {
       const clientFunction = this.ifFunctionsByRef[ref];
       const oldValue = clientFunction.value;
       const resolvedFunction = reresolveFunctionNode(clientFunction, {
-        variables: this.selectedValsByFilterId
+        variables: this.selectedValsByTraitId
       });
       this.ifFunctionsByRef[ref] = resolvedFunction;
       if (oldValue !== resolvedFunction.value) {
@@ -406,16 +406,16 @@ export class ClientFiltersManager {
    * default values, etc.) into a single set of selected values.
    */
   applyFilterSelectionOverrides() {
-    const relevantFilterIds = Object.keys(this.selectedValsByFilterId);
+    const relevantFilterIds = Object.keys(this.selectedValsByTraitId);
     let filterOverrideFound = false;
 
     // Override default values with stored filters
     Object.keys(this.storedFilters).forEach((filterId) => {
       if (
         relevantFilterIds.includes(filterId) &&
-        this.selectedValsByFilterId[filterId] !== this.storedFilters[filterId]
+        this.selectedValsByTraitId[filterId] !== this.storedFilters[filterId]
       ) {
-        this.selectedValsByFilterId[filterId] = this.storedFilters[filterId];
+        this.selectedValsByTraitId[filterId] = this.storedFilters[filterId];
         filterOverrideFound = true;
       }
     });
@@ -425,9 +425,9 @@ export class ClientFiltersManager {
     Object.keys(urlFilters).forEach((filterId) => {
       if (
         relevantFilterIds.includes(filterId) &&
-        this.selectedValsByFilterId[filterId] !== urlFilters[filterId]
+        this.selectedValsByTraitId[filterId] !== urlFilters[filterId]
       ) {
-        this.selectedValsByFilterId[filterId] = urlFilters[filterId];
+        this.selectedValsByTraitId[filterId] = urlFilters[filterId];
         filterOverrideFound = true;
       }
     });
@@ -491,9 +491,9 @@ export class ClientFiltersManager {
      * can have a cascading impact on the interpolated placeholder values,
      * and thus the valid options for each filter.
      */
-    const resolvedPageFilters = resolvePageFilters({
+    const resolvedPageFilters = resolveFilters({
       filtersManifest: this.filtersManifest,
-      valsByFilterId: this.selectedValsByFilterId
+      valsByTraitId: this.selectedValsByTraitId
     });
 
     /**
@@ -503,7 +503,7 @@ export class ClientFiltersManager {
      */
     Object.keys(resolvedPageFilters).forEach((filterId) => {
       const resolvedFilter = resolvedPageFilters[filterId];
-      this.selectedValsByFilterId[filterId] = resolvedFilter.currentValue;
+      this.selectedValsByTraitId[filterId] = resolvedFilter.currentValue;
     });
 
     const newFilterSelectorHtml = buildCustomizationMenuUi(resolvedPageFilters);

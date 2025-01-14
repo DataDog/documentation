@@ -1,12 +1,11 @@
 import fs from 'fs';
 import {
-  PageFiltersManifestSchema,
-  FileSearcher,
+  FiltersManifestSchema,
   FiltersManifestBuilder,
-  ContentFiltersConfigByLang,
+  CustomizationConfigByLang,
   CdocsDataManager,
-  ContentFiltersConfig
-} from 'cdocs-core';
+  CustomizationConfig
+} from 'cdocs-data';
 import { IntegrationConfig } from './schemas/config/integration';
 import { HugoGlobalConfig } from './schemas/config/hugo';
 import { MdocFileParser } from './helperModules/MdocFileParser';
@@ -16,6 +15,7 @@ import {
   ParsedFile,
   CompilationResult
 } from './schemas/compilationResults';
+import { FileSearcher } from './helperModules/FileSearcher';
 import { HugoGlobalConfigBuilder } from './helperModules/HugoGlobalConfigBuilder';
 // import { AuthorConsoleData } from './schemas/authorConsole';
 // import { AuthorConsoleBuilder } from './helperModules/AuthorConsoleBuilder';
@@ -31,7 +31,7 @@ export class MarkdocHugoIntegration {
   hugoGlobalConfig: HugoGlobalConfig;
   private compiledFilePaths: string[] = [];
 
-  contentFiltersConfigByLang: ContentFiltersConfigByLang;
+  customizationConfigByLang: CustomizationConfigByLang;
   errorsByFilePath: Record<string, CompilationError[]> = {};
 
   /**
@@ -40,13 +40,13 @@ export class MarkdocHugoIntegration {
   constructor(args: { config: IntegrationConfig }) {
     this.hugoGlobalConfig = HugoGlobalConfigBuilder.build(args.config);
 
-    const { contentFiltersConfigByLang } = CdocsDataManager.loadContentFiltersConfig({
-      configDir: this.hugoGlobalConfig.dirs.filtersConfig,
+    const { customizationConfigByLang } = CdocsDataManager.loadCustomizationConfig({
+      configDir: this.hugoGlobalConfig.dirs.customizationConfig,
       langs: this.hugoGlobalConfig.languages
     });
 
     // new data types
-    this.contentFiltersConfigByLang = contentFiltersConfigByLang;
+    this.customizationConfigByLang = customizationConfigByLang;
   }
 
   /*
@@ -175,7 +175,7 @@ export class MarkdocHugoIntegration {
       const compiledFilepath = this.#compileMdocFile({
         markdocFilepath,
         parsedFile,
-        contentFiltersConfig: this.contentFiltersConfigByLang[lang]
+        customizationConfig: this.customizationConfigByLang[lang]
       });
 
       if (compiledFilepath) {
@@ -228,7 +228,7 @@ export class MarkdocHugoIntegration {
   #compileMdocFile(p: {
     markdocFilepath: string;
     parsedFile: ParsedFile;
-    contentFiltersConfig: ContentFiltersConfig;
+    customizationConfig: CustomizationConfig;
   }): string | null {
     const lang = p.markdocFilepath
       .replace(this.hugoGlobalConfig.dirs.content, '')
@@ -247,7 +247,7 @@ export class MarkdocHugoIntegration {
     // generate the filters manifest
     const draftFiltersManifest = FiltersManifestBuilder.build({
       frontmatter: p.parsedFile.frontmatter,
-      contentFiltersConfig: p.contentFiltersConfig
+      customizationConfig: p.customizationConfig
     });
 
     if (draftFiltersManifest.errors.length > 0) {
@@ -258,7 +258,7 @@ export class MarkdocHugoIntegration {
       return null;
     }
 
-    const filtersManifest = PageFiltersManifestSchema.parse(draftFiltersManifest);
+    const filtersManifest = FiltersManifestSchema.parse(draftFiltersManifest);
 
     // build the HTML and write it to an .md file
     try {

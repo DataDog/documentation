@@ -3,7 +3,7 @@ import { FiltersManifestBuilder } from '../../../src/modules/FiltersManifestBuil
 import { FrontMatter, FrontMatterSchema } from '../../../src/schemas/frontMatter';
 import { paintColorsCustomizationConfig } from '../../mocks/valid/paintColorsConfig';
 
-describe('FiltersManifestBuilder.getDefaultValsByFilterId', () => {
+describe('FiltersManifestBuilder.getDefaultValsByTraitId', () => {
   const frontmatter: FrontMatter = {
     title: 'My Page',
     content_filters: [
@@ -27,11 +27,11 @@ describe('FiltersManifestBuilder.getDefaultValsByFilterId', () => {
   FrontMatterSchema.parse(frontmatter);
 
   test('derives the default values for each filter', () => {
-    const defaultValsByFilterId = FiltersManifestBuilder.getDefaultValsByFilterId({
-      filters: frontmatter.content_filters!,
-      contentFiltersConfig: paintColorsCustomizationConfig,
+    const defaultValsByTraitId = FiltersManifestBuilder.getDefaultValsByTraitId({
+      filterConfigs: frontmatter.content_filters!,
+      customizationConfig: paintColorsCustomizationConfig,
     });
-    expect(defaultValsByFilterId).toEqual({
+    expect(defaultValsByTraitId).toEqual({
       color: 'blue',
       finish: 'eggshell',
       paint: 'elegant_royal',

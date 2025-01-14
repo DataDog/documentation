@@ -32,7 +32,7 @@
   ],
   "/en/bad_placeholder.mdoc.md": [
     {
-      "message": "Invalid placeholder: The placeholder <COLOUR> in the options source '<COLOUR>_item_options' refers to an unrecognized filter ID. The file frontmatter must contain a filter with the ID 'colour', and it must be defined before the filter with the ID item.",
+      "message": "Invalid placeholder: The placeholder <COLOUR> in the options source '<COLOUR>_item_options' refers to an unrecognized trait ID. The file frontmatter must contain a filter with the trait ID 'colour', and it must be defined before the filter with the trait ID item.",
       "searchTerm": "<COLOUR>_item_options"
     }
   ],

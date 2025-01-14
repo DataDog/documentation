@@ -4,7 +4,7 @@ import { CustomizationConfigByLang } from '../schemas/customizationConfig';
 // TODO: Support more than one file in every glossary folder.
 
 export class CdocsDataManager {
-  static loadContentFiltersConfig(p: {
+  static loadCustomizationConfig(p: {
     configDir: string;
     langs: string[];
     defaultLang?: string;
@@ -36,10 +36,10 @@ export class CdocsDataManager {
       optionGlossariesByLang,
     });
 
-    const contentFiltersConfigByLang: CustomizationConfigByLang = {};
+    const customizationConfigByLang: CustomizationConfigByLang = {};
 
     p.langs.forEach((lang) => {
-      contentFiltersConfigByLang[lang] = {
+      customizationConfigByLang[lang] = {
         traitGlossary: filterGlossariesByLang[lang],
         optionGlossary: optionGlossariesByLang[lang],
         optionGroupGlossary: optionGroupGlossariesByLang[lang],
@@ -47,7 +47,7 @@ export class CdocsDataManager {
     });
 
     return {
-      customizationConfigByLang: contentFiltersConfigByLang,
+      customizationConfigByLang,
     };
   }
 }

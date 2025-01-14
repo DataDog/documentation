@@ -1438,15 +1438,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cdocs-core@file:../cdocs-core::locator=markdoc-hugo-integration%40workspace%3A.":
+"cdocs-data@file:../cdocs-data::locator=markdoc-hugo-integration%40workspace%3A.":
   version: 1.0.0
-  resolution: "cdocs-core@file:../cdocs-core#../cdocs-core::hash=aa7feb&locator=markdoc-hugo-integration%40workspace%3A."
+  resolution: "cdocs-data@file:../cdocs-data#../cdocs-data::hash=af64ee&locator=markdoc-hugo-integration%40workspace%3A."
   dependencies:
     js-yaml: ^4.1.0
     lodash: ^4.17.21
     rimraf: ^5.0.5
     zod: ^3.22.4
-  checksum: 284953ad29fce700e14f7f1c585a720ece8f26a549fed78ac245711b27c254b2b860645d1ead92d980e17736788ffa369515a28dca77040c38ab6860d72a7a3b
+  checksum: a41d10f5704c3b8cd91090ee0f8588c8f5a6cc0b5ae3c9dfb9915226907bdbf4de468509c08cdba0bb8bb3971e3fa7c85611758507abafc9cba2246373d8252e
   languageName: node
   linkType: hard
 
@@ -2331,7 +2331,7 @@ __metadata:
     "@types/uuid": ^10.0.0
     "@vitejs/plugin-react": ^4.3.3
     "@vitest/coverage-v8": ^2.0.2
-    cdocs-core: "file:../cdocs-core"
+    cdocs-data: "file:../cdocs-data"
     chroma-highlight: ^2.4.2
     esbuild: 0.20.2
     interweave: ^13.1.0

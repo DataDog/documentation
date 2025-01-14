@@ -42,7 +42,7 @@ export class FiltersManifestBuilder {
   static build(p: {
     frontmatter: FrontMatter;
     // filterOptionsConfig: FilterOptionsConfig;
-    contentFiltersConfig: CustomizationConfig;
+    customizationConfig: CustomizationConfig;
     // glossary: Glossary;
   }): FiltersManifest {
     // Create an empty manifest to populate
@@ -60,9 +60,9 @@ export class FiltersManifestBuilder {
 
     // Collect default values for each filter, keyed by filter ID,
     // used to resolve placeholders in options sources
-    manifest.defaultValsByTraitId = this.getDefaultValsByFilterId({
-      contentFiltersConfig: p.contentFiltersConfig,
-      filters: p.frontmatter.content_filters,
+    manifest.defaultValsByTraitId = this.getDefaultValsByTraitId({
+      customizationConfig: p.customizationConfig,
+      filterConfigs: p.frontmatter.content_filters,
     });
 
     // Key the configs by filter ID, for convenient access during processing
@@ -80,7 +80,7 @@ export class FiltersManifestBuilder {
     // in the order that the filters appeared in the frontmatter
     p.frontmatter.content_filters.forEach((filter) => {
       // Validate the filter ID
-      if (!p.contentFiltersConfig.traitGlossary[filter.trait_id]) {
+      if (!p.customizationConfig.traitGlossary[filter.trait_id]) {
         manifest.errors.push({
           message: `Unrecognized trait ID: The trait ID '${filter.trait_id}' is not in the glossary.`,
           searchTerm: filter.trait_id,
@@ -98,7 +98,7 @@ export class FiltersManifestBuilder {
           this.buildDynamicOptionGroupIds({
             traitId: filter.trait_id,
             // filterOptionsConfig: p.filterOptionsConfig,
-            contentFiltersConfig: p.contentFiltersConfig,
+            customizationConfig: p.customizationConfig,
             filterConfigsByTraitId: filterConfigByTraitId,
             precedingFilterIds: processedTraitIds,
           });
@@ -119,7 +119,7 @@ export class FiltersManifestBuilder {
           traitId: filter.trait_id,
           optionGroupIds: optionGroupIds,
           // glossary: p.glossary,
-          contentFiltersConfig: p.contentFiltersConfig,
+          customizationConfig: p.customizationConfig,
           // filterOptionsConfig: p.filterOptionsConfig,
         });
 
@@ -143,7 +143,7 @@ export class FiltersManifestBuilder {
       optionGroupIds.forEach((optionGroupId) => {
         if (!manifest.optionGroupsById[optionGroupId]) {
           manifest.optionGroupsById[optionGroupId] =
-            p.contentFiltersConfig.optionGroupGlossary[optionGroupId];
+            p.customizationConfig.optionGroupGlossary[optionGroupId];
         }
       });
     });
@@ -159,7 +159,7 @@ export class FiltersManifestBuilder {
   static getPossibleDefaultsAndSelectedValues(p: {
     traitId: string;
     optionGroupIds: string[];
-    contentFiltersConfig: CustomizationConfig;
+    customizationConfig: CustomizationConfig;
   }): {
     defaultValsByOptionGroupId: Record<string, string>;
     possibleVals: string[];
@@ -171,7 +171,7 @@ export class FiltersManifestBuilder {
     const errors: CdocsError[] = [];
 
     p.optionGroupIds.forEach((optionGroupId) => {
-      const optionGroup = p.contentFiltersConfig.optionGroupGlossary[optionGroupId];
+      const optionGroup = p.customizationConfig.optionGroupGlossary[optionGroupId];
       if (!optionGroup) {
         errors.push({
           message: `Invalid options source: The options source '${optionGroupId}', which is required for the filter ID '${p.traitId}', does not exist.`,
@@ -180,7 +180,7 @@ export class FiltersManifestBuilder {
       }
 
       optionGroup.forEach((option) => {
-        if (!p.contentFiltersConfig.optionGlossary[option.id]) {
+        if (!p.customizationConfig.optionGlossary[option.id]) {
           errors.push({
             message: `Invalid option ID: The option ID '${option.id}' is not in the options glossary.`,
           });
@@ -211,12 +211,14 @@ export class FiltersManifestBuilder {
     // filterOptionsConfig: FilterOptionsConfig;
     filterConfigsByTraitId: Record<string, FilterConfig>;
     precedingFilterIds: string[];
-    contentFiltersConfig: CustomizationConfig;
+    customizationConfig: CustomizationConfig;
   }): { optionGroupIds: string[]; errors: CdocsError[] } {
     const filterConfig = p.filterConfigsByTraitId[p.traitId];
 
     let optionGroupIds: string[] = [];
     const errors: CdocsError[] = [];
+
+    console.log('filterConfig', filterConfig);
 
     const segments = filterConfig.option_group_id.split('_').map((segment) => {
       // build non-placeholder segment (array of solitary possible value)
@@ -229,16 +231,22 @@ export class FiltersManifestBuilder {
       const referencedFilterConfig = p.filterConfigsByTraitId[referencedTraitId];
       if (!referencedFilterConfig || !p.precedingFilterIds.includes(referencedTraitId)) {
         errors.push({
-          message: `Invalid placeholder: The placeholder ${segment} in the options source '${filterConfig.option_group_id}' refers to an unrecognized filter ID. The file frontmatter must contain a filter with the trait ID '${referencedTraitId}', and it must be defined before the filter with the trait ID ${filterConfig.trait_id}.`,
+          message: `Invalid placeholder: The placeholder ${segment} in the options source '${filterConfig.option_group_id}' refers to an unrecognized trait ID. The file frontmatter must contain a filter with the trait ID '${referencedTraitId}', and it must be defined before the filter with the trait ID ${filterConfig.trait_id}.`,
           searchTerm: filterConfig.option_group_id,
         });
         return [segment];
       }
 
       const referencedOptionGroup =
-        p.contentFiltersConfig.optionGroupGlossary[
-          referencedFilterConfig.option_group_id
-        ];
+        p.customizationConfig.optionGroupGlossary[referencedFilterConfig.option_group_id];
+
+      if (!referencedOptionGroup) {
+        errors.push({
+          message: `The option group ID '${referencedFilterConfig.option_group_id}' referenced by the placeholder ${segment} in the options source '${filterConfig.option_group_id}' does not exist.`,
+          searchTerm: filterConfig.option_group_id,
+        });
+        return [segment];
+      }
 
       return referencedOptionGroup.map((option) => option.id);
     });
@@ -258,15 +266,15 @@ export class FiltersManifestBuilder {
    * Derive the default values for each filter,
    * and return them keyed by filter ID.
    */
-  static getDefaultValsByFilterId(p: {
+  static getDefaultValsByTraitId(p: {
     // filterOptionsConfig: FilterOptionsConfig;
-    filters: FilterConfig[];
-    contentFiltersConfig: CustomizationConfig;
+    filterConfigs: FilterConfig[];
+    customizationConfig: CustomizationConfig;
   }): Record<string, string> {
     const defaultValsByTraitId: Record<string, string> = {};
 
     // Process each entry in the frontmatter's filters list
-    for (const filter of p.filters) {
+    for (const filter of p.filterConfigs) {
       // Replace any placeholders in the options source
       const optionGroupId = filter.option_group_id;
       const resolvedOptionGroupId = optionGroupId.replace(
@@ -279,7 +287,7 @@ export class FiltersManifestBuilder {
 
       // Resolve the default option set for this filter
       const resolvedOptionGroup =
-        p.contentFiltersConfig.optionGroupGlossary[resolvedOptionGroupId];
+        p.customizationConfig.optionGroupGlossary[resolvedOptionGroupId];
 
       if (resolvedOptionGroup) {
         defaultValsByTraitId[filter.trait_id] =
