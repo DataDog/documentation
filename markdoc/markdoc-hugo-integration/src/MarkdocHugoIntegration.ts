@@ -1,9 +1,9 @@
 import fs from 'fs';
 import {
   FiltersManifestSchema,
-  FiltersManifestBuilder,
+  buildFiltersManifest,
   CustomizationConfigByLang,
-  CdocsDataManager,
+  loadCustomizationConfig,
   CustomizationConfig
 } from 'cdocs-data';
 import { IntegrationConfig } from './schemas/config/integration';
@@ -40,7 +40,7 @@ export class MarkdocHugoIntegration {
   constructor(args: { config: IntegrationConfig }) {
     this.hugoGlobalConfig = HugoGlobalConfigBuilder.build(args.config);
 
-    const { customizationConfigByLang } = CdocsDataManager.loadCustomizationConfig({
+    const { customizationConfigByLang } = loadCustomizationConfig({
       configDir: this.hugoGlobalConfig.dirs.customizationConfig,
       langs: this.hugoGlobalConfig.languages
     });
@@ -245,7 +245,7 @@ export class MarkdocHugoIntegration {
     }
 
     // generate the filters manifest
-    const draftFiltersManifest = FiltersManifestBuilder.build({
+    const draftFiltersManifest = buildFiltersManifest({
       frontmatter: p.parsedFile.frontmatter,
       customizationConfig: p.customizationConfig
     });

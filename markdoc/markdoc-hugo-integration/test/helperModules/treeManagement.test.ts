@@ -7,11 +7,11 @@ import {
   VALID_FILTERS_CONFIG_DIR
 } from '../config/constants';
 import { buildRenderableTree } from '../../src/helperModules/treeManagement';
-import { FiltersManifestBuilder, CdocsDataManager } from 'cdocs-data';
+import { buildFiltersManifest, loadCustomizationConfig } from 'cdocs-data';
 
 describe('treeManagement', () => {
   const testFilePath = VALID_CONTENT_DIR + '/en/primary_colors.mdoc.md';
-  const { customizationConfigByLang } = CdocsDataManager.loadCustomizationConfig({
+  const { customizationConfigByLang } = loadCustomizationConfig({
     configDir: VALID_FILTERS_CONFIG_DIR,
     langs: ['en']
   });
@@ -22,7 +22,7 @@ describe('treeManagement', () => {
     partialsDir: VALID_PARTIALS_DIR
   });
 
-  const filtersManifest = FiltersManifestBuilder.build({
+  const filtersManifest = buildFiltersManifest({
     frontmatter: parsedFile.frontmatter,
     customizationConfig: customizationConfigByLang['en']
   });

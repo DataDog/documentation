@@ -3,7 +3,7 @@ import { RenderableTreeNode } from 'markdoc-static-compiler';
 import prettier from 'prettier';
 import fs from 'fs';
 import path from 'path';
-import { FiltersManifest, FiltersManifestBuilder } from 'cdocs-data';
+import { FiltersManifest, buildClientFiltersManifest } from 'cdocs-data';
 import { buildRenderableTree, getMinifiedIfFunctionsByRef } from '../treeManagement';
 import { customComponents } from '../../markdocParserConfig';
 import yaml from 'js-yaml';
@@ -142,9 +142,7 @@ export class PageBuilder {
     const initFunctionStr = `const ${initFunctionName} = () => { 
 clientFiltersManager.initialize({
     ifFunctionsByRef: ${JSON.stringify(getMinifiedIfFunctionsByRef(p.renderableTree))},
-    filtersManifest: ${JSON.stringify(
-      FiltersManifestBuilder.minifyManifest(p.filtersManifest)
-    )}
+    filtersManifest: ${JSON.stringify(buildClientFiltersManifest(p.filtersManifest))}
   });
 }; `;
 

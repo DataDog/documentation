@@ -10,7 +10,7 @@
       "imports": [],
       "format": "cjs"
     },
-    "node_modules/cdocs-data/dist/modules/filterResolution.js": {
+    "node_modules/cdocs-data/dist/utils/resolveFilters.js": {
       "bytes": 4004,
       "imports": [
         {
@@ -43,7 +43,7 @@
       "format": "cjs"
     },
     "dist/helperModules/ClientFiltersManager.js": {
-      "bytes": 18579,
+      "bytes": 18571,
       "imports": [
         {
           "path": "dist/helperModules/PageBuilder/components/CustomizationMenu.js",
@@ -51,9 +51,9 @@
           "original": "./PageBuilder/components/CustomizationMenu"
         },
         {
-          "path": "node_modules/cdocs-data/dist/modules/filterResolution.js",
+          "path": "node_modules/cdocs-data/dist/utils/resolveFilters.js",
           "kind": "require-call",
-          "original": "cdocs-data/dist/modules/filterResolution"
+          "original": "cdocs-data/dist/utils/resolveFilters"
         },
         {
           "path": "dist/helperModules/renderer/reresolver.js",
@@ -92,7 +92,7 @@
         "node_modules/cdocs-data/dist/schemas/regexes.js": {
           "bytesInOutput": 411
         },
-        "node_modules/cdocs-data/dist/modules/filterResolution.js": {
+        "node_modules/cdocs-data/dist/utils/resolveFilters.js": {
           "bytesInOutput": 1008
         },
         "node_modules/markdoc-static-compiler/dist/index.js": {

@@ -120,9 +120,9 @@
     }
   });
 
-  // node_modules/cdocs-data/dist/modules/filterResolution.js
-  var require_filterResolution = __commonJS({
-    "node_modules/cdocs-data/dist/modules/filterResolution.js"(exports) {
+  // node_modules/cdocs-data/dist/utils/resolveFilters.js
+  var require_resolveFilters = __commonJS({
+    "node_modules/cdocs-data/dist/utils/resolveFilters.js"(exports) {
       "use strict";
       Object.defineProperty(exports, "__esModule", { value: true });
       exports.resolveFilters = resolveFilters;
@@ -12790,7 +12790,7 @@
       Object.defineProperty(exports, "__esModule", { value: true });
       exports.ClientFiltersManager = void 0;
       var CustomizationMenu_1 = require_CustomizationMenu();
-      var filterResolution_1 = require_filterResolution();
+      var resolveFilters_1 = require_resolveFilters();
       var reresolver_1 = require_reresolver();
       var pageConfigMinification_1 = require_pageConfigMinification();
       var PILLS_MENU_ID = "cdoc-filters-pill-menu";
@@ -13156,7 +13156,7 @@
           if (!this.filterSelectorEl || !this.filtersManifest) {
             throw new Error("Cannot rerender filter selector without filtersManifest and filterSelectorEl");
           }
-          const resolvedPageFilters = (0, filterResolution_1.resolveFilters)({
+          const resolvedPageFilters = (0, resolveFilters_1.resolveFilters)({
             filtersManifest: this.filtersManifest,
             valsByTraitId: this.selectedValsByTraitId
           });

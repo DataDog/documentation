@@ -1,4 +1,4 @@
-import { resolvePageFilters, FiltersManifest } from 'cdocs-data';
+import { resolveFilters, FiltersManifest } from 'cdocs-data';
 import { buildCustomizationMenuUi } from '../components/CustomizationMenu';
 
 /**
@@ -45,7 +45,7 @@ function FilterSelectorTemplate(props: {
       id="cdoc-selector"
       dangerouslySetInnerHTML={{
         __html: buildCustomizationMenuUi(
-          resolvePageFilters({
+          resolveFilters({
             valsByTraitId,
             filtersManifest
           })

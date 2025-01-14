@@ -1,11 +1,7 @@
 import { describe, test, expect } from 'vitest';
 import { MdocFileParser } from '../../../src/helperModules/MdocFileParser';
 import { PageBuilder } from '../../../src/helperModules/PageBuilder';
-import {
-  FiltersManifestBuilder,
-  FiltersManifestSchema,
-  CdocsDataManager
-} from 'cdocs-data';
+import { buildFiltersManifest, loadCustomizationConfig } from 'cdocs-data';
 import {
   VALID_CONTENT_DIR,
   VALID_PARTIALS_DIR,
@@ -16,7 +12,7 @@ import { mockHugoGlobalConfig, mockPageConfig } from '../../mocks/valid/hugoConf
 
 describe('PageBuilder.build', () => {
   const testFilePath = VALID_CONTENT_DIR + '/en/primary_colors.mdoc.md';
-  const { customizationConfigByLang } = CdocsDataManager.loadCustomizationConfig({
+  const { customizationConfigByLang } = loadCustomizationConfig({
     configDir: VALID_FILTERS_CONFIG_DIR,
     langs: ['en']
   });
@@ -28,12 +24,10 @@ describe('PageBuilder.build', () => {
     partialsDir: VALID_PARTIALS_DIR
   });
 
-  const draftFiltersManifest = FiltersManifestBuilder.build({
+  const filtersManifest = buildFiltersManifest({
     frontmatter: parsedFile.frontmatter,
     customizationConfig: customizationConfigByLang['en']
   });
-
-  const filtersManifest = FiltersManifestSchema.parse(draftFiltersManifest);
 
   const { html } = PageBuilder.build({
     parsedFile,
