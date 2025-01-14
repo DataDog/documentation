@@ -255,17 +255,19 @@ Datadog infrastructure correlation is possible using different methods:
 
 {{< tabs >}}
 {{% tab "Non autoscaling executors" %}}
-The GitLab runner must have a tag of the form `host:<hostname>`. Tags can be added while [registering a new runner][6]. As a result, this method is only available when the runner is directly running the job.
+The GitLab runner must have a tag of the form `host:<hostname>`. Tags can be added while [registering a new runner][1]. As a result, this method is only available when the runner is directly running the job.
 
 This excludes executors that are autoscaling the infrastructure in order to run the job (such as the Kubernetes, Docker Autoscaler, or Instance executors) as it is not possible to add tags dynamically for those runners.
 
 For existing runners:
 
-GitLab >= 15.8: Add tags through the UI by going to **Settings > CI/CD > Runners** and editing the appropriate runner.
+- GitLab >= 15.8: Add tags through the UI by going to **Settings > CI/CD > Runners** and editing the appropriate runner.
 
-GitLab < 15.8: Add tags by updating the runner's `config.toml`. Or add tags through the UI by going to **Settings > CI/CD > Runners** and editing the appropriate runner.
+- GitLab < 15.8: Add tags by updating the runner's `config.toml`. Or add tags through the UI by going to **Settings > CI/CD > Runners** and editing the appropriate runner.
 
 After these steps, CI Visibility adds the hostname to each job. To see the metrics, click on a job span in the trace view. In the drawer, a new tab named **Infrastructure** appears which contains the host metrics.
+
+[1]: https://docs.gitlab.com/runner/register/
 {{% /tab %}}
 
 {{% tab "Docker Autoscaler" %}}
@@ -376,7 +378,7 @@ The <a href="https://docs.gitlab.com/ee/administration/object_storage.html#amazo
 {{% /tab %}}
 {{< /tabs >}}
 
-Logs are billed separately from CI Visibility. Log retention, exclusion, and indexes are configured in [Log Management][28]. Logs for GitLab jobs can be identified by the `datadog.product:cipipeline` and `source:gitlab` tags.
+Logs are billed separately from CI Visibility. Log retention, exclusion, and indexes are configured in [Log Management][6]. Logs for GitLab jobs can be identified by the `datadog.product:cipipeline` and `source:gitlab` tags.
 
 For more information about processing job logs collected from the GitLab integration, see the [Processors documentation][17].
 
@@ -411,7 +413,7 @@ The **CI Pipeline List** page shows data for only the default branch of each rep
 [3]: https://docs.gitlab.com/ee/user/project/integrations/webhooks.html
 [4]: https://app.datadoghq.com/ci/pipelines
 [5]: https://app.datadoghq.com/ci/pipeline-executions
-[6]: https://docs.gitlab.com/runner/register/
+[6]: /logs/guide/best-practices-for-log-management/
 [7]: https://docs.gitlab.com/ee/administration/job_artifacts.html#using-object-storage
 [8]: https://docs.gitlab.com/ee/administration/feature_flags.html
 [9]: /logs/
@@ -433,4 +435,3 @@ The **CI Pipeline List** page shows data for only the default branch of each rep
 [25]: /glossary/#custom-span
 [26]: /continuous_integration/explorer
 [27]: /continuous_integration/search/#search-for-pipelines
-[28]: /logs/guide/best-practices-for-log-management/
