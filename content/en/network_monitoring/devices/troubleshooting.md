@@ -14,7 +14,7 @@ Use the information below for troubleshooting Datadog Network Device Monitoring.
 
 ### Device not visible in Datadog
 
-The following assumes you are running Datadog Agent v7.59.0+.
+The following assumes you are running Datadog Agent v7.61.0+.
 
 If your device is not visible on the [Devices][2] page:
 
