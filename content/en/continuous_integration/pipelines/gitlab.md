@@ -292,16 +292,6 @@ CI Visibility does not support Infrastructure metrics for other executors.
 
 {{< /tabs >}}
 
-
-#### Instance and Docker Autoscaler executors
-
-CI Visibility also supports Infrastructure metrics for "Instance" and "Docker Autoscaler" executors. For more information, see the [Correlate Infrastructure Metrics with GitLab Jobs guide][18].
-
-#### Kubernetes executor
-
-
-
-
 ### View error messages for pipeline failures
 
 Error messages are supported for GitLab versions 15.2.0 and above.
