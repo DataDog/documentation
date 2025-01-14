@@ -1,9 +1,9 @@
 import { describe, test, expect } from 'vitest';
-import { FiltersManifestBuilder } from '../../../src/modules/FiltersManifestBuilder';
+import { getDefaultValsByTraitId } from '../../../src/utils/buildFiltersManifest';
 import { FrontMatter, FrontMatterSchema } from '../../../src/schemas/frontMatter';
 import { paintColorsCustomizationConfig } from '../../mocks/valid/paintColorsConfig';
 
-describe('FiltersManifestBuilder.getDefaultValsByTraitId', () => {
+describe('getDefaultValsByTraitId', () => {
   const frontmatter: FrontMatter = {
     title: 'My Page',
     content_filters: [
@@ -27,7 +27,7 @@ describe('FiltersManifestBuilder.getDefaultValsByTraitId', () => {
   FrontMatterSchema.parse(frontmatter);
 
   test('derives the default values for each filter', () => {
-    const defaultValsByTraitId = FiltersManifestBuilder.getDefaultValsByTraitId({
+    const defaultValsByTraitId = getDefaultValsByTraitId({
       filterConfigs: frontmatter.content_filters!,
       customizationConfig: paintColorsCustomizationConfig,
     });

@@ -1,10 +1,30 @@
 import { describe, test, expect } from 'vitest';
-import { CdocsDataManager } from '../../../src/modules/CdocsDataManager';
-import { INVALID_CONFIGS_DIR, SNAPSHOTS_DIR } from '../../config/constants';
+import { loadCustomizationConfig } from '../../src';
+import {
+  INVALID_CONFIGS_DIR,
+  VALID_CUSTOMIZATION_CONFIG_DIR,
+  SNAPSHOTS_DIR,
+} from '../config/constants';
 import fs from 'fs';
 
-describe('CdocsDataManager', () => {
-  const langs = ['en', 'ja'];
+describe('loadCustomizationConfig', () => {
+  const langs = ['en', 'ja']; // TODO: Change to piglatin
+
+  // Valid data handling
+  test('loads a valid configuration from YAML', async () => {
+    const { customizationConfigByLang } = loadCustomizationConfig({
+      configDir: VALID_CUSTOMIZATION_CONFIG_DIR,
+      langs,
+    });
+
+    const stringifiedConfig = JSON.stringify(customizationConfigByLang, null, 2);
+
+    await expect(stringifiedConfig).toMatchFileSnapshot(
+      SNAPSHOTS_DIR + '/publicUtilities/validConfig.snap.json',
+    );
+  });
+
+  // Invalid data handling
   const invalidDirs = fs.readdirSync(INVALID_CONFIGS_DIR);
   const errorsByDir: Record<string, Array<any>> = {};
 
@@ -12,7 +32,7 @@ describe('CdocsDataManager', () => {
     let thrownError: any = null;
 
     try {
-      const { customizationConfigByLang } = CdocsDataManager.loadCustomizationConfig({
+      const { customizationConfigByLang } = loadCustomizationConfig({
         configDir: `${INVALID_CONFIGS_DIR}/${invalidDir}`,
         langs,
       });
@@ -32,7 +52,7 @@ describe('CdocsDataManager', () => {
       errorsByDir[invalidDir] = error;
     }
 
-    test(`throws an error when processing the '${invalidDir}' directory`, () => {
+    test(`throws an error when processing the invalid directory: '${invalidDir}'`, () => {
       expect(thrownError).not.toBeNull();
     });
   });
@@ -40,7 +60,7 @@ describe('CdocsDataManager', () => {
   test(`the errors match the snapshot`, async () => {
     const stringifiedErrors = JSON.stringify(errorsByDir, null, 2);
     await expect(stringifiedErrors).toMatchFileSnapshot(
-      `${SNAPSHOTS_DIR}/modules/CdocsDataManager/invalidConfigIngestion/errorsByDir.snap.json`,
+      `${SNAPSHOTS_DIR}/utilities/loadCustomizationConfig/invalidDirectoryErrors.snap.json`,
     );
   });
 });

@@ -15,7 +15,6 @@ import {
 import {
   OptionGroupGlossary,
   OptionGroupGlossarySchema,
-  RawOptionGroupGlossary,
   RawOptionGroupGlossarySchema,
 } from '../schemas/glossaries/optionGroupGlossary';
 import path from 'path';

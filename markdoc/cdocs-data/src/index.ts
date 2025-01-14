@@ -1,12 +1,3 @@
-export { FiltersManifestBuilder } from './modules/FiltersManifestBuilder';
-
-export { YamlConfigParser } from './modules/YamlConfigParser';
-
-export {
-  resolveFilters as resolvePageFilters,
-  resolveFilterOptionsSource,
-} from './modules/filterResolution';
-
 export {
   CdocsError as CdocsCoreError,
   CdocsErrorSchema as CdocsCoreErrorSchema,
@@ -30,8 +21,6 @@ export {
   ResolvedFiltersSchema,
 } from './schemas/pageFilters';
 
-export { CdocsDataManager } from './modules/CdocsDataManager';
-
 export {
   TraitGlossary as FilterGlossary,
   TraitGlossarySchema as FilterGlossarySchema,
@@ -53,3 +42,9 @@ export {
   CustomizationConfigByLang,
   CustomizationConfigByLangSchema,
 } from './schemas/customizationConfig';
+
+// Utilities
+export { loadCustomizationConfig } from './utils/loadCustomizationConfig';
+export { buildFiltersManifest } from './utils/buildFiltersManifest';
+export { buildClientFiltersManifest } from './utils/buildClientFiltersManifest';
+export { resolveFilters } from './utils/resolveFilters';

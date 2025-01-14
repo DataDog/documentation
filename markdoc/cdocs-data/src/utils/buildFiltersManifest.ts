@@ -236,7 +236,7 @@ function buildDynamicOptionGroupIds(p: {
  * Derive the default values for each filter,
  * and return them keyed by filter ID.
  */
-function getDefaultValsByTraitId(p: {
+export function getDefaultValsByTraitId(p: {
   // filterOptionsConfig: FilterOptionsConfig;
   filterConfigs: FilterConfig[];
   customizationConfig: CustomizationConfig;
@@ -281,7 +281,11 @@ function getDefaultValsByTraitId(p: {
  * FiltersManifestBuilder.buildSnakeCaseCombinations(segments);
  * // returns ['red_gloss_paint_options', 'red_matte_paint_options', 'blue_gloss_paint_options', 'blue_matte_paint_options']
  */
-function buildSnakeCaseCombinations(arr: any[], str: string = '', final: any[] = []) {
+export function buildSnakeCaseCombinations(
+  arr: any[],
+  str: string = '',
+  final: any[] = [],
+) {
   if (arr.length > 1) {
     arr[0].forEach((segment: string) =>
       buildSnakeCaseCombinations(

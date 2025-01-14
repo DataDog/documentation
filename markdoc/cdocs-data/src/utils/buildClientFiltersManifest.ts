@@ -4,7 +4,7 @@ import { FiltersManifest, ClientSideFiltersManifest } from '../schemas/pageFilte
  * Convert a standard compile-time page filters manifest
  * to a lighter version to be used client-side.
  */
-export function buildClientManifest(
+export function buildClientFiltersManifest(
   manifest: FiltersManifest,
 ): ClientSideFiltersManifest {
   const result: ClientSideFiltersManifest = {

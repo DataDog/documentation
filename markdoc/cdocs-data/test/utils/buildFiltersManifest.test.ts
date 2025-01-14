@@ -1,16 +1,16 @@
 import { describe, test, expect } from 'vitest';
-import { FiltersManifestBuilder } from '../../../src/modules/FiltersManifestBuilder';
+import { buildFiltersManifest } from '../../src';
 import {
   paintColorsFrontmatter,
   paintColorsCustomizationConfig,
-} from '../../mocks/valid/paintColorsConfig';
+} from '../mocks/valid/paintColorsConfig';
 import _ from 'lodash';
-import { SNAPSHOTS_DIR } from '../../config/constants';
-import { FiltersManifest } from '../../../src/schemas/pageFilters';
+import { SNAPSHOTS_DIR } from '../config/constants';
+import { FiltersManifest } from '../../src/schemas/pageFilters';
 
-describe('FiltersManifestBuilder.build', () => {
+describe('buildFiltersManifest', () => {
   test('creates the expected object when given valid data', async () => {
-    const manifest = FiltersManifestBuilder.build({
+    const manifest = buildFiltersManifest({
       frontmatter: paintColorsFrontmatter,
       customizationConfig: paintColorsCustomizationConfig,
     });
@@ -167,7 +167,7 @@ describe('FiltersManifestBuilder.build', () => {
     };
     expect(_.isEqual(manifest, expectedManifest)).toBe(true);
     await expect(JSON.stringify(manifest, null, 2)).toMatchFileSnapshot(
-      `${SNAPSHOTS_DIR}/modules/FiltersManifestBuilder/valid/filtersManifest.snap.json`,
+      `${SNAPSHOTS_DIR}/utilities/buildFiltersManifest/validManifest.snap.json`,
     );
   });
 
@@ -194,7 +194,7 @@ describe('FiltersManifestBuilder.build', () => {
       ],
     };
 
-    const manifest = FiltersManifestBuilder.build({
+    const manifest = buildFiltersManifest({
       frontmatter: invalidFrontmatter,
       customizationConfig: paintColorsCustomizationConfig,
     });
@@ -214,7 +214,7 @@ describe('FiltersManifestBuilder.build', () => {
       optionGroupGlossary: invalidOptionGroupGlossary,
     };
 
-    const manifest = FiltersManifestBuilder.build({
+    const manifest = buildFiltersManifest({
       frontmatter: paintColorsFrontmatter,
       customizationConfig: invalidCustomizationConfig,
     });
