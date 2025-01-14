@@ -2508,26 +2508,21 @@ menu:
       parent: workflows
       identifier: workflows_connections
       weight: 7
-    - name: Datastore
-      url: service_management/workflows/datastore/
-      parent: workflows
-      identifier: workflows_datastore
-      weight: 8
     - name: Test and Debug
       url: service_management/workflows/test_and_debug/
       parent: workflows
       identifier: workflows_test_and_debug
-      weight: 9
+      weight: 8
     - name: Track Workflows
       url: service_management/workflows/track
       parent: workflows
       identifier: workflows_track
-      weight: 10
+      weight: 9
     - name: Limits
       url: service_management/workflows/limits/
       parent: workflows
       identifier: workflows_limits
-      weight: 11
+      weight: 10
     - name: App Builder
       url: service_management/app_builder/
       pre: app-builder
@@ -2584,21 +2579,16 @@ menu:
       parent: app_builder_components
       identifier: app_builder_tables
       weight: 702
-    - name: Datastore
-      url: service_management/app_builder/datastore/
-      parent: app_builder
-      identifier: app_builder_datastore
-      weight: 8
     - name: JavaScript Expressions
       url: service_management/app_builder/expressions/
       parent: app_builder
       identifier: app_builder_expressions
-      weight: 9
+      weight: 8
     - name: Embedded Apps
       url: service_management/app_builder/embedded_apps/
       parent: app_builder
       identifier: app_builder_embedded_apps
-      weight: 10
+      weight: 9
     - name: Datastore
       url: actions/datastore/
       pre: server
