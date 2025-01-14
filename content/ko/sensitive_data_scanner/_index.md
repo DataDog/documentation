@@ -60,7 +60,7 @@ title: 민감 데이터 스캐너
 **환경:**
 
 {{< callout url="https://www.datadoghq.com/private-beta/sensitive-data-scanner-using-agent-in-your-premises/" >}}
-  Datadog 에이전트에 대한 Sensitive Data Scanner 지원은 베타 버전입니다. 등록하려면 <strong>액세스 요청</strong>을 클릭하세요.
+  Datadog 에이전트 Sensitive Data Scanner는 현재 평가판 버전입니다. 등록하려면 <strong>액세스 요청</strong>을 클릭하세요.
 {{< /callout >}}
 
 - **에이전트를 사용한 민감 데이터 스캐너**를 사용하면 Datadog 백엔드에 전송되기 전에 Datadog가 로그를 수정하고, 수정된 로그가 프레미스를 벗어날 필요가 없습니다. 이 방법을 사용하면 조직당 스캐닝 그룹 하나만 할당할 수 있고,  사전 정의된 라이브러리 규칙을 하나만 사용할 수 있습니다.
@@ -173,7 +173,7 @@ OOTB 검색 규칙을 추가한 후 각 규칙을 개별적으로 편집하고 �
 민감한 데이터에 대한 정규식 패턴을 사용해 커스텀 검사 규칙을 생성할 수 있습니다.
 
 1. 검사 그룹 내에서 이 규칙을 생성하지 않은 경우 검사 그룹을 선택합니다.
-1. **일치 조건 정의** 섹션의 **정규식 정의** 필드에 이벤트에 일치시키는 데 사용하려는 정규식 패턴을 정의합니다. **샘플 데이터 추가** 필드에서 샘플 데이터를 입력하여 정규식 패턴이 유효한지 확인합니다.
+1. **Define match conditions** 섹션의 **Define the regex** 필드에 이벤트에 일치시키는 데 사용하려는 정규식 패턴을 정의합니다. **Add sample data** 필드에서 샘플 데이터를 입력하여 정규식 패턴이 유효한지 확인합니다.
     민감 데이터 스캐너는 Perl 호환 정규식(PCRE)을 지원하나 다음 패턴은 지원하지 않습니다.
     - 역참조 및 하위 표현식 캡처(lookaround)
     - 임의의 너비 0 어서션
@@ -188,7 +188,7 @@ OOTB 검색 규칙을 추가한 후 각 규칙을 개별적으로 편집하고 �
 1. **키워드 사전 생성**의 경우, 키워드를 추가하여 정규식 조건과 일치할 때 검색 정확도를 개선할 수 있습니다. 예를 들어 16자리 Visa 신용카드 번호를 검색하는 경우 `visa`, `credit`, `card`와 같은 키워드를 추가할 수 있습니다. 이러한 키워드가 지정된 글자 수 이내가 되도록 설정할 수도 있습니다. 기본적으로 키워드는 일치하는 값 앞에서 30자 이내여야 합니다.
 {{% sds-scanning-rule %}}
 1. **규칙 추가**를 클릭합니다.
-{{< /collapse-content >}} 
+{{< /collapse-content >}}
 
 **참고**:
 
@@ -336,8 +336,8 @@ Datadog 플랫폼 기능에 필요한 예약 키워드가 있습니다. 스캔�
 
 ## Cloud Storage 검사
 
-{{< callout header="Join the Preview!" url="https://www.datadoghq.com/private-beta/data-security" >}}
-  미리 보기에서 Amazon S3 버킷 및 RDS 인스턴스에 대해 검사를 지원합니다. 등록하려면 <strong>액세스 요청</strong>을 클릭하세요.
+{{< callout header="Limited Availability" url="https://www.datadoghq.com/private-beta/data-security" >}}
+  Amazon S3 버킷 및 RDS 인스턴스에 검사는 서비스 지원이 제한되어 있습니다. 서비스 사용을 신청하려면 <strong>액세스 요청</strong>을 클릭하세요.
 {{< /callout >}}
 
 [Sensitive Data Scanner][6]를 활성화하면, Amazon S3 버킷 및 RDS 인스턴스에서 민감한 데이터를 분류하고 구분할 수 있습니다.
