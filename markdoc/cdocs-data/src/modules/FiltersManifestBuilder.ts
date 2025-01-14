@@ -16,7 +16,7 @@ export class FiltersManifestBuilder {
    * Convert a standard compile-time page filters manifest
    * to a lighter version to be used client-side.
    */
-  static minifyManifest(manifest: FiltersManifest): ClientSideFiltersManifest {
+  static buildClientManifest(manifest: FiltersManifest): ClientSideFiltersManifest {
     const result: ClientSideFiltersManifest = {
       filtersByTraitId: {},
       defaultValsByTraitId: { ...manifest.defaultValsByTraitId },
@@ -41,9 +41,7 @@ export class FiltersManifestBuilder {
    */
   static build(p: {
     frontmatter: FrontMatter;
-    // filterOptionsConfig: FilterOptionsConfig;
     customizationConfig: CustomizationConfig;
-    // glossary: Glossary;
   }): FiltersManifest {
     // Create an empty manifest to populate
     const manifest: FiltersManifest = {
@@ -156,7 +154,7 @@ export class FiltersManifestBuilder {
    * and all possible selected values,
    * for a given list of options set IDs.
    */
-  static getPossibleDefaultsAndSelectedValues(p: {
+  private static getPossibleDefaultsAndSelectedValues(p: {
     traitId: string;
     optionGroupIds: string[];
     customizationConfig: CustomizationConfig;

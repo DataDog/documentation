@@ -26,7 +26,7 @@ import path from 'path';
  * and their options.
  */
 export class YamlConfigParser {
-  static findInDir(dir: string, filter: RegExp) {
+  private static findInDir(dir: string, filter: RegExp) {
     let fileList: string[] = [];
     const files = fs.readdirSync(dir);
 

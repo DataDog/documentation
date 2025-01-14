@@ -1,7 +1,20 @@
 import { YamlConfigParser } from './YamlConfigParser';
-import { CustomizationConfigByLang } from '../schemas/customizationConfig';
+import {
+  CustomizationConfigByLang,
+  CustomizationConfig,
+} from '../schemas/customizationConfig';
+import { FiltersManifestBuilder } from './FiltersManifestBuilder';
+import { FrontMatter } from '../schemas/frontMatter';
+import { ClientSideFiltersManifest, FiltersManifest } from '../schemas/pageFilters';
 
 // TODO: Support more than one file in every glossary folder.
+
+/*
+loadCustomizationConfig
+buildFiltersManifest
+buildClientManifest
+resolveFilters
+*/
 
 export class CdocsDataManager {
   static loadCustomizationConfig(p: {
@@ -49,5 +62,16 @@ export class CdocsDataManager {
     return {
       customizationConfigByLang,
     };
+  }
+
+  static buildFiltersManifest(p: {
+    frontmatter: FrontMatter;
+    customizationConfig: CustomizationConfig;
+  }): FiltersManifest {
+    return FiltersManifestBuilder.build(p);
+  }
+
+  static buildClientManifest(manifest: FiltersManifest): ClientSideFiltersManifest {
+    return FiltersManifestBuilder.buildClientManifest(manifest);
   }
 }
