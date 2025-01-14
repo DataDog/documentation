@@ -212,10 +212,10 @@ Puede utilizar uno de estos nombres hostpara Configurar el Agent.
 
 {{< tabs >}}
 {{% tab "Replica Set" %}}
-{{% dbm-mongodb-agent-config-replica-set %}}
+{{% dbm-mongodb-Agent-config-replica-set %}}
 {{% /tab %}}
 {{% tab "Sharded clúster" %}}
-{{% dbm-mongodb-agent-config-sharded-cluster %}}
+{{% dbm-mongodb-Agent-config-sharded-clúster %}}
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -223,13 +223,13 @@ Puede utilizar uno de estos nombres hostpara Configurar el Agent.
 
 {{< tabs >}}
 {{% tab "Linux host" %}}
-{{% dbm-mongodb-agent-setup-linux %}}
+{{% dbm-mongodb-Agent-setup-linux %}}
 {{% /tab %}}
 {{% tab "Docker" %}}
-{{% dbm-mongodb-agent-setup-docker %}}
+{{% dbm-mongodb-Agent-setup-Docker %}}
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
-{{% dbm-mongodb-agent-setup-kubernetes %}}
+{{% dbm-mongodb-Agent-setup-Kubernetes %}}
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -245,9 +245,9 @@ Para ver una lista completa de las métricas recopiladas por la integración Mon
 
 {{% dbm-mongodb-agent-data-collected %}}
 
-## Configurar tests de API y tests de API multupaso
+## Para leer más
 
-Grabar pruebas de aplicaciones móviles
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /es/database_monitoring/architecture/#cloud-managed-databases
 [2]: /es/account_management/api-app-keys/
