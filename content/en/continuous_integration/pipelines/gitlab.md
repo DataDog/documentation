@@ -20,7 +20,7 @@ further_reading:
 
 ## Overview
 
-[GitLab][18] is a DevOps platform that automates the software development lifecycle with integrated CI/CD features, enabling you to deploy applications fast and securely.
+[GitLab][18] is a DevOps platform that automates the software development lifecycle with integrated CI/CD features, enabling automated, continuous deployment of applications with built-in security controls.
 
 Set up tracing in GitLab to collect data on your pipeline executions, analyze performance bottlenecks, troubleshoot operational issues, and optimize your deployment workflows.
 
