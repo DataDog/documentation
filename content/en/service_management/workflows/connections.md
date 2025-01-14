@@ -26,10 +26,13 @@ Workflow actions can be authenticated in two ways:
 ## Integration tile credentials
 
 Credentials and account authentication that you set up in the following Datadog integration tiles automatically propagate to the corresponding actions in Workflow Automation:
+- GitHub
 - Jira
+- Microsoft Teams
+- Opsgenie
 - PagerDuty
 - Slack
-- GitHub
+- Statuspage
 
 Configure the integration tiles by following instructions in [Datadog Integrations][6].
 
@@ -177,12 +180,11 @@ To delete a connection group:
 
 <br>Do you have questions or feedback? Join the **#workflows** channel on the [Datadog Community Slack][11].
 
-[1]: /service_management/workflows/actions_catalog/generic_actions/
 [2]: https://app.datadoghq.com/workflow
 [3]: https://app.datadoghq.com/workflow/connections
 [4]: /service_management/workflows/access/#restrict-connection-use
 [6]: /integrations/
-[8]: /service_management/workflows/actions_catalog/generic_actions/
+[8]: /service_management/workflows/actions/
 [9]: https://app.datadoghq.com/workflow
 [10]: /service_management/workflows/actions/http/
 [11]: https://datadoghq.slack.com/

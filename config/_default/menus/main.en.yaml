@@ -9,30 +9,33 @@ menu:
     - name: Service Management
       identifier: service_management_heading
       weight: 3000000
+    - name: Actions
+      identifier: actions_heading
+      weight: 4000000
     - name: Infrastructure
       identifier: infrastructure_heading
-      weight: 4000000
+      weight: 5000000
     - name: Application Performance
       identifier: apm_heading
-      weight: 5000000
+      weight: 6000000
     - name: Digital Experience
       identifier: digital_experience_heading
-      weight: 6000000
+      weight: 7000000
     - name: Software Delivery
       identifier: software_delivery_heading
-      weight: 7000000
+      weight: 8000000
     - name: Security
       identifier: security_platform_heading
-      weight: 8000000
+      weight: 9000000
     - name: AI Observability
       identifier: ai_observability_heading
-      weight: 9000000
+      weight: 10000000
     - name: Log Management
       identifier: log_management_heading
-      weight: 10000000
+      weight: 11000000
     - name: Administration
       identifier: administration_heading
-      weight: 11000000
+      weight: 12000000
     - name: Getting Started
       identifier: getting_started
       url: getting_started/
@@ -1175,6 +1178,10 @@ menu:
       identifier: watchdog_faulty_deployment_detection
       parent: watchdog_top_level
       weight: 5
+    - name: Faulty Cloud & SaaS API Detection
+      url: watchdog/faulty_cloud_saas_api_detection
+      parent: watchdog_top_level
+      weight: 6
     - name: Bits AI
       url: bits_ai/
       pre: bits-ai
@@ -1693,6 +1700,11 @@ menu:
       parent: infrastructure_resource_catalog
       identifier: infrastructure_resource_catalog_schema
       weight: 501
+    - name: Governance
+      url: infrastructure/resource_catalog/governance/
+      parent: infrastructure_resource_catalog
+      identifier: infrastructure_resource_catalog_governance
+      weight: 502
     - name: Metrics
       url: metrics/
       identifier: metrics_top_level
@@ -2440,12 +2452,34 @@ menu:
       parent: case_management
       identifier: case_management_troubleshooting
       weight: 3
+    - name: Private Actions
+      url: actions/private_actions/
+      pre: server
+      parent: actions_heading
+      identifier: private_actions
+      weight: 10000
+    - name: Use Private Actions
+      url: actions/private_actions/use_private_actions/
+      parent: private_actions
+      identifier: use_private_actions
+      weight: 101
+    - name: Private Action Credentials
+      url: actions/private_actions/private_action_credentials/
+      parent: private_actions
+      identifier: private_actions_creds
+      weight: 102
+    - name: Actions Catalog
+      url: actions/actions_catalog/
+      pre: books
+      parent: actions_heading
+      identifier: actions_catalog
+      weight: 20000
     - name: Workflow Automation
       url: service_management/workflows/
       pre: workflows
       identifier: workflows
-      parent: service_management_heading
-      weight: 60000
+      parent: actions_heading
+      weight: 30000
     - name: Build Workflows
       url: service_management/workflows/build/
       parent: workflows
@@ -2486,62 +2520,42 @@ menu:
       parent: workflows_actions
       identifier: workflows_http
       weight: 504
-    - name: Private Actions
-      url: service_management/workflows/private_actions/
-      parent: workflows
-      identifier: workflows_private_actions
-      weight: 6
-    - name: Use Private Actions
-      url: service_management/workflows/private_actions/use_private_actions/
-      parent: workflows_private_actions
-      identifier: workflows_use_private_actions
-      weight: 601
-    - name: Private Action Credentials
-      url: service_management/workflows/private_actions/private_action_credentials/
-      parent: workflows_private_actions
-      identifier: workflows_private_actions_creds
-      weight: 602
     - name: Save and Reuse Actions
       url: service_management/workflows/saved_actions/
       parent: workflows
       identifier: workflows_saved_actions
-      weight: 7
+      weight: 6
     - name: Connections
       url: service_management/workflows/connections/
       parent: workflows
       identifier: workflows_connections
-      weight: 8
+      weight: 7
     - name: Datastore
       url: service_management/workflows/datastore/
       parent: workflows
       identifier: workflows_datastore
-      weight: 9
+      weight: 8
     - name: Test and Debug
       url: service_management/workflows/test_and_debug/
       parent: workflows
       identifier: workflows_test_and_debug
-      weight: 10
+      weight: 9
     - name: Track Workflows
       url: service_management/workflows/track
       parent: workflows
       identifier: workflows_track
-      weight: 11
+      weight: 10
     - name: Limits
       url: service_management/workflows/limits/
       parent: workflows
       identifier: workflows_limits
-      weight: 12
-    - name: Actions Catalog
-      url: service_management/workflows/actions_catalog/
-      parent: workflows
-      identifier: workflows_actions_catalog
-      weight: 13
+      weight: 11
     - name: App Builder
       url: service_management/app_builder/
       pre: app-builder
       identifier: app_builder
-      parent: service_management_heading
-      weight: 70000
+      parent: actions_heading
+      weight: 40000
     - name: Build Apps
       url: service_management/app_builder/build/
       parent: app_builder
@@ -2577,51 +2591,36 @@ menu:
       parent: app_builder
       identifier: app_builder_events
       weight: 6
-    - name: Private Actions
-      url: service_management/app_builder/private_actions/
-      parent: app_builder
-      identifier: app_builder_private_actions
-      weight: 7
-    - name: Use Private Actions
-      url: service_management/app_builder/private_actions/use_private_actions/
-      parent: app_builder_private_actions
-      identifier: app_builder_use_private_actions
-      weight: 701
-    - name: Private Action Credentials
-      url: service_management/app_builder/private_actions/private_action_credentials/
-      parent: app_builder_private_actions
-      identifier: app_builder_private_actions_creds
-      weight: 702
     - name: Components
       url: service_management/app_builder/components/
       parent: app_builder
       identifier: app_builder_components
-      weight: 8
+      weight: 7
     - name: Custom Charts
       url: service_management/app_builder/components/custom_charts/
       parent: app_builder_components
       identifier: app_builder_custom_charts
-      weight: 801
+      weight: 701
     - name: Tables
       url: service_management/app_builder/components/tables/
       parent: app_builder_components
       identifier: app_builder_tables
-      weight: 802
+      weight: 702
     - name: Datastore
       url: service_management/app_builder/datastore/
       parent: app_builder
       identifier: app_builder_datastore
-      weight: 9
+      weight: 8
     - name: JavaScript Expressions
       url: service_management/app_builder/expressions/
       parent: app_builder
       identifier: app_builder_expressions
-      weight: 10
+      weight: 9
     - name: Embedded Apps
       url: service_management/app_builder/embedded_apps/
       parent: app_builder
       identifier: app_builder_embedded_apps
-      weight: 11
+      weight: 10
     - name: Universal Service Monitoring
       url: universal_service_monitoring/
       pre: usm
@@ -3031,51 +3030,66 @@ menu:
       parent: nm_parent
       identifier: ndm
       weight: 3
-    - name: Getting Started
-      url: network_monitoring/devices/getting_started
+    - name: NDM Terms and Concepts
+      url: network_monitoring/devices/glossary
       parent: ndm
-      identifier: ndm_getting_started
+      identifier: ndm_glossary
       weight: 301
+    - name: Setup
+      url: network_monitoring/devices/setup
+      parent: ndm
+      identifier: ndm_setup
+      weight: 302
     - name: Supported Devices
       url: network_monitoring/devices/supported_devices
-      parent: ndm
+      parent: ndm_setup
       identifier: ndm_supported_devices
-      weight: 302
+      weight: 30001
     - name: SNMP Metrics
       url: network_monitoring/devices/snmp_metrics
-      parent: ndm
+      parent: ndm_setup
       identifier: ndm_snmp_metrics
-      weight: 303
+      weight: 30002
+    - name: Ping
+      url: network_monitoring/devices/ping
+      parent: ndm_setup
+      identifier: ndm_snmp_ping
+      weight: 30003
     - name: SNMP Traps
       url: network_monitoring/devices/snmp_traps
-      parent: ndm
+      parent: ndm_setup
       identifier: ndm_snmptraps
-      weight: 304
+      weight: 30004
+    - name: SD-WAN 
+      url: network_monitoring/devices/sd-wan
+      parent: ndm_setup
+      identifier: ndm_sd-wan
+      weight: 30005
     - name: Profiles
       url: network_monitoring/devices/profiles
       parent: ndm
       identifier: ndm_profiles
-      weight: 305
+      weight: 303
     - name: Device Topology Map
       url: network_monitoring/devices/device_topology_map
       parent: ndm
       identifier: ndm_topology_map
-      weight: 306
-    - name: Data Collected
+      weight: 304
+    - name: SNMP Metrics Reference
       url: network_monitoring/devices/data
       parent: ndm
       identifier: ndm_data
-      weight: 307
+      weight: 305
     - name: Troubleshooting
       url: network_monitoring/devices/troubleshooting
       parent: ndm
       identifier: ndm_trouble
-      weight: 308
+      weight: 306
     - name: Guides
       url: network_monitoring/devices/guide/
       parent: ndm
       identifier: ndm_guide
-      weight: 309
+      weight: 307
     - name: NetFlow Monitoring
       url: /network_monitoring/netflow/
       parent: nm_parent
@@ -5612,20 +5626,20 @@ menu:
       parent: security_platform
       identifier: security_suppressions
       weight: 3
-    - name: Vulnerability Pipeline
-      url: security/vulnerability_pipeline/
+    - name: Automation Pipelines
+      url: security/automation_pipelines/
       parent: security_platform
-      identifier: vulnerability_pipeline
+      identifier: automation_pipelines
       weight: 4
     - name: Mute
-      url: security/vulnerability_pipeline/mute
-      parent: vulnerability_pipeline
-      identifier: vulnerability_pipeline_mute
+      url: security/automation_pipelines/mute
+      parent: automation_pipelines
+      identifier: automation_pipelines_mute
       weight: 10001
     - name: Add to Security Inbox
-      url: security/vulnerability_pipeline/security_inbox
-      parent: vulnerability_pipeline
-      identifier: vulnerability_pipeline_inbox
+      url: security/automation_pipelines/security_inbox
+      parent: automation_pipelines
+      identifier: automation_pipelines_inbox
       weight: 10002
     - name: Security Inbox
       url: security/security_inbox
@@ -5749,6 +5763,11 @@ menu:
       parent: csm_setup_agentless_scanning
       identifier: csm_setup_agentless_scanning_terraform
       weight: 10002
+    - name: Azure Resource Manager
+      url: security/cloud_security_management/setup/agentless_scanning/azure_resource_manager
+      parent: csm_setup_agentless_scanning
+      identifier: csm_setup_agentless_scanning_azure_resource_manager
+      weight: 10003
     - name: Deploy the Agent
       url: security/cloud_security_management/setup/agent
       parent: csm_setup
@@ -5759,21 +5778,26 @@ menu:
       parent: csm_setup
       identifier: csm_setup_cloudtrail
       weight: 103
-    - name: Set Up Iac Remediation
+    - name: Set Up IaC Scanning
+      url: security/cloud_security_management/setup/iac_scanning
+      parent: csm_setup
+      identifier: csm_setup_iac_scanning
+      weight: 104
+    - name: Set Up IaC Remediation
       url: security/cloud_security_management/setup/iac_remediation
       parent: csm_setup
       identifier: csm_setup_iac_remediation
-      weight: 104
+      weight: 105
     - name: Set Up without Infrastructure Monitoring
       url: security/cloud_security_management/setup/without_infrastructure_monitoring
       parent: csm_setup
       identifier: csm_setup_without_infrastructure_monitoring
-      weight: 105
+      weight: 106
     - name: Deploy via Cloud Integrations
       url: security/cloud_security_management/setup/cloud_integrations
       parent: csm_setup
       identifier: csm_setup_cloud_integrations
-      weight: 106
+      weight: 107
     - name: Threats
       url: security/threats/
       parent: csm
@@ -6823,16 +6847,11 @@ menu:
       parent: rum_mobile_unity
       identifier: rum_mobile_unity_mobile_vitals
       weight: 105
-    - name: Web View Tracking
-      url: real_user_monitoring/mobile_and_tv_monitoring/unity/web_view_tracking
-      parent: rum_mobile_unity
-      identifier: rum_mobile_unity_web_view_tracking
-      weight: 106
     - name: Troubleshooting
       url: real_user_monitoring/mobile_and_tv_monitoring/unity/troubleshooting
       parent: rum_mobile_unity
       identifier: rum_mobile_unity_troubleshooting
-      weight: 107
+      weight: 106
     - name: Platform
       identifier: real_user_monitoring_platform
       url: real_user_monitoring/platform
