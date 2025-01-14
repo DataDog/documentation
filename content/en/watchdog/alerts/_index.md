@@ -133,6 +133,10 @@ Watchdog looks at infrastructure metrics from the following integrations:
   * [System][1], for host-level memory usage (memory leaks) and TCP retransmit rate.
   * [Redis][2]
   * [PostgreSQL][3]
+  * [MySQL][15]
+  * [SQLServer][16]
+  * [Cassandra][17]
+  * [Oracle Database][18]
   * [NGINX][4]
   * [Docker][13]
   * [Kubernetes][14]
@@ -164,6 +168,10 @@ Watchdog starts finding anomalies after the minimum required history is availabl
 [12]: /serverless/
 [13]: /containers/docker/?tab=standard
 [14]: /containers/kubernetes/installation/?tab=operator
+[15]: /integrations/mysql/
+[16]: /integrations/mysql/
+[17]: /integrations/cassandra/
+[18]: /integrations/oracle/
 {{% /tab %}}
 {{< /tabs >}}
 

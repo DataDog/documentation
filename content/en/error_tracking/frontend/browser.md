@@ -43,12 +43,7 @@ See the [Debug Symbols][15] page to view all uploaded symbols.
 
 ### Limitations
 
-{{< site-region region="us,us3,us5,eu,gov" >}}
-Source maps are limited to **500** MB each.
-{{< /site-region >}}
-{{< site-region region="ap1" >}}
-Source maps are limited to **500** MB each.
-{{< /site-region >}}
+Source maps are limited in size to **500 MB** each.
 
 ## Collect errors
 
