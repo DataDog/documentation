@@ -1,5 +1,3 @@
-export { FileSearcher } from './modules/FileSearcher';
-
 export { FiltersManifestBuilder } from './modules/FiltersManifestBuilder';
 
 export { YamlConfigParser } from './modules/YamlConfigParser';
@@ -9,24 +7,27 @@ export {
   resolveFilterOptionsSource,
 } from './modules/filterResolution';
 
-export { CdocsCoreError, CdocsCoreErrorSchema } from './schemas/errors';
+export {
+  CdocsError as CdocsCoreError,
+  CdocsErrorSchema as CdocsCoreErrorSchema,
+} from './schemas/errors';
 
 export {
-  Frontmatter,
-  FrontmatterSchema,
-  FilterConfig as PageFilterConfig,
-  FilterConfigSchema as PageFilterConfigSchema,
+  FrontMatter,
+  FrontMatterSchema,
+  FilterConfig,
+  FilterConfigSchema,
 } from './schemas/frontMatter';
 
 export {
-  FiltersManifest as PageFiltersManifest,
-  FiltersManifestSchema as PageFiltersManifestSchema,
-  ResolvedFilter as ResolvedPageFilter,
-  ResolvedFilterSchema as ResolvedPageFilterSchema,
-  ClientSideFiltersManifest as PageFiltersClientSideManifest,
-  ClientSideFiltersManifestSchema as PageFiltersClientSideManifestSchema,
-  ResolvedFilters as ResolvedPageFilters,
-  ResolvedFiltersSchema as ResolvedPageFiltersSchema,
+  FiltersManifest,
+  FiltersManifestSchema,
+  ResolvedFilter,
+  ResolvedFilterSchema,
+  ClientSideFiltersManifest,
+  ClientSideFiltersManifestSchema,
+  ResolvedFilters,
+  ResolvedFiltersSchema,
 } from './schemas/pageFilters';
 
 export { CdocsDataManager } from './modules/CdocsDataManager';
@@ -47,8 +48,8 @@ export {
 } from './schemas/glossaries/optionGroupGlossary';
 
 export {
-  ContentFiltersConfig,
-  ContentFiltersConfigSchema,
-  ContentFiltersConfigByLang,
-  ContentFiltersConfigByLangSchema,
-} from './schemas/contentFiltersConfig';
+  CustomizationConfig,
+  CustomizationConfigSchema,
+  CustomizationConfigByLang,
+  CustomizationConfigByLangSchema,
+} from './schemas/customizationConfig';

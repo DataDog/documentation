@@ -1,10 +1,10 @@
 import { GLOBAL_PLACEHOLDER_REGEX } from '../schemas/regexes';
-import { Frontmatter } from '../schemas/frontMatter';
+import { FrontMatter } from '../schemas/frontMatter';
 import { PLACEHOLDER_REGEX } from '../schemas/regexes';
 import { FiltersManifest, ClientSideFiltersManifest } from '../schemas/pageFilters';
 import { FilterConfig } from '../schemas/frontMatter';
-import { CdocsCoreError } from '../schemas/errors';
-import { ContentFiltersConfig } from '../schemas/contentFiltersConfig';
+import { CdocsError } from '../schemas/errors';
+import { CustomizationConfig } from '../schemas/customizationConfig';
 
 /**
  * A module responsible for combining ingested configuration data
@@ -40,9 +40,9 @@ export class FiltersManifestBuilder {
    * that defines the filters available on the page.
    */
   static build(p: {
-    frontmatter: Frontmatter;
+    frontmatter: FrontMatter;
     // filterOptionsConfig: FilterOptionsConfig;
-    contentFiltersConfig: ContentFiltersConfig;
+    contentFiltersConfig: CustomizationConfig;
     // glossary: Glossary;
   }): FiltersManifest {
     // Create an empty manifest to populate
@@ -159,16 +159,16 @@ export class FiltersManifestBuilder {
   static getPossibleDefaultsAndSelectedValues(p: {
     traitId: string;
     optionGroupIds: string[];
-    contentFiltersConfig: ContentFiltersConfig;
+    contentFiltersConfig: CustomizationConfig;
   }): {
     defaultValsByOptionGroupId: Record<string, string>;
     possibleVals: string[];
-    errors: CdocsCoreError[];
+    errors: CdocsError[];
   } {
     // Populate the default value for each options set ID
     const defaultValsByOptionGroupId: Record<string, string> = {};
     const possibleVals: string[] = [];
-    const errors: CdocsCoreError[] = [];
+    const errors: CdocsError[] = [];
 
     p.optionGroupIds.forEach((optionGroupId) => {
       const optionGroup = p.contentFiltersConfig.optionGroupGlossary[optionGroupId];
@@ -211,12 +211,12 @@ export class FiltersManifestBuilder {
     // filterOptionsConfig: FilterOptionsConfig;
     filterConfigsByTraitId: Record<string, FilterConfig>;
     precedingFilterIds: string[];
-    contentFiltersConfig: ContentFiltersConfig;
-  }): { optionGroupIds: string[]; errors: CdocsCoreError[] } {
+    contentFiltersConfig: CustomizationConfig;
+  }): { optionGroupIds: string[]; errors: CdocsError[] } {
     const filterConfig = p.filterConfigsByTraitId[p.traitId];
 
     let optionGroupIds: string[] = [];
-    const errors: CdocsCoreError[] = [];
+    const errors: CdocsError[] = [];
 
     const segments = filterConfig.option_group_id.split('_').map((segment) => {
       // build non-placeholder segment (array of solitary possible value)
@@ -261,11 +261,11 @@ export class FiltersManifestBuilder {
   static getDefaultValsByFilterId(p: {
     // filterOptionsConfig: FilterOptionsConfig;
     filters: FilterConfig[];
-    contentFiltersConfig: ContentFiltersConfig;
+    contentFiltersConfig: CustomizationConfig;
   }): Record<string, string> {
     const defaultValsByTraitId: Record<string, string> = {};
 
-    // Process each entry in the frontmatter's customizations list
+    // Process each entry in the frontmatter's filters list
     for (const filter of p.filters) {
       // Replace any placeholders in the options source
       const optionGroupId = filter.option_group_id;

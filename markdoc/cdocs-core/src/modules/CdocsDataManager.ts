@@ -1,5 +1,5 @@
 import { YamlConfigParser } from './YamlConfigParser';
-import { ContentFiltersConfigByLang } from '../schemas/contentFiltersConfig';
+import { CustomizationConfigByLang } from '../schemas/customizationConfig';
 
 // TODO: Support more than one file in every glossary folder.
 
@@ -9,7 +9,7 @@ export class CdocsDataManager {
     langs: string[];
     defaultLang?: string;
   }): {
-    contentFiltersConfigByLang: ContentFiltersConfigByLang;
+    customizationConfigByLang: CustomizationConfigByLang;
   } {
     const defaultLang = p.defaultLang || 'en';
 
@@ -36,7 +36,7 @@ export class CdocsDataManager {
       optionGlossariesByLang,
     });
 
-    const contentFiltersConfigByLang: ContentFiltersConfigByLang = {};
+    const contentFiltersConfigByLang: CustomizationConfigByLang = {};
 
     p.langs.forEach((lang) => {
       contentFiltersConfigByLang[lang] = {
@@ -47,7 +47,7 @@ export class CdocsDataManager {
     });
 
     return {
-      contentFiltersConfigByLang,
+      customizationConfigByLang: contentFiltersConfigByLang,
     };
   }
 }

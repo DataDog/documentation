@@ -2,7 +2,7 @@ import { z } from 'zod';
 import { SNAKE_CASE_REGEX, FILTER_OPTIONS_ID_REGEX } from './regexes';
 
 /**
- * The configuration of an individual page customization,
+ * The configuration of an individual page filter,
  * as defined in the front matter of a document.
  */
 export const FilterConfigSchema = z
@@ -15,7 +15,7 @@ export const FilterConfigSchema = z
   .strict();
 
 /**
- * The configuration of an individual filter,
+ * The configuration of an individual page filter,
  * as defined in the front matter of a document.
  *
  * @example
@@ -37,7 +37,7 @@ export const FiltersConfigSchema = z.array(FilterConfigSchema).refine((filtersCo
   const filterLabels = filtersConfig.map((filterConfig) => filterConfig.label);
   const uniqueFilterLabels = new Set(filterLabels);
   if (filterLabels.length !== uniqueFilterLabels.size) {
-    console.error('Duplicate customization labels found in list:', filterLabels);
+    console.error('Duplicate filter labels found in list:', filterLabels);
     return false;
   }
 
@@ -72,7 +72,7 @@ export type FiltersConfig = z.infer<typeof FiltersConfigSchema>;
  * (additional keys are allowed in the front matter YAML,
  * but are ignored by the integration).
  */
-export const FrontmatterSchema = z.object({
+export const FrontMatterSchema = z.object({
   title: z.string(),
   content_filters: FiltersConfigSchema.optional(),
 });
@@ -104,4 +104,4 @@ export const FrontmatterSchema = z.object({
  *   ]
  * }
  */
-export type Frontmatter = z.infer<typeof FrontmatterSchema>;
+export type FrontMatter = z.infer<typeof FrontMatterSchema>;

@@ -29,7 +29,7 @@ import { FilterConfig } from '../schemas/frontMatter';
  *
  * Resolution merges a user's customization choices in the UI
  * with the page's filter configuration (defined in its frontmatter)
- * to determine which customization values and options to display.
+ * to determine which filter values and options to display.
  * Resolution involves replacing placeholders
  * with user-selected values, determining any default values
  * resulting from the user's earlier selections, and so on.
@@ -41,51 +41,51 @@ export function resolveFilters(p: {
   const resolvedFilters: ResolvedFilters = {};
   const valsByFilterIdDup = { ...p.valsByFilterId };
 
-  const customizationsConfig = Object.values(p.filtersManifest.filtersByTraitId).map(
+  const filtersConfig = Object.values(p.filtersManifest.filtersByTraitId).map(
     (filter) => {
       return filter.config;
     },
   );
 
-  customizationsConfig.forEach((customizationConfig) => {
+  filtersConfig.forEach((filterConfig) => {
     // If the options source contains a placeholder, resolve it
-    const customizationConfigDup = resolveFilterOptionsSource({
-      pageFilterConfig: customizationConfig,
+    const filterConfigDup = resolveFilterOptionsSource({
+      pageFilterConfig: filterConfig,
       selectedValsByFilterId: valsByFilterIdDup,
     });
 
     // Update the value for the filter,
     // if the current value is no longer valid after placeholder resolution
     const defaultValue =
-      customizationConfigDup.default_value ||
-      p.filtersManifest.optionGroupsById[customizationConfigDup.option_group_id].find(
+      filterConfigDup.default_value ||
+      p.filtersManifest.optionGroupsById[filterConfigDup.option_group_id].find(
         (option) => option.default,
       )!.id;
 
     const possibleVals = p.filtersManifest.optionGroupsById[
-      customizationConfigDup.option_group_id
+      filterConfigDup.option_group_id
     ].map((option) => option.id);
-    let currentValue = p.valsByFilterId[customizationConfigDup.trait_id];
+    let currentValue = p.valsByFilterId[filterConfigDup.trait_id];
     if (currentValue && !possibleVals.includes(currentValue)) {
       currentValue = defaultValue;
-      valsByFilterIdDup[customizationConfigDup.trait_id] = defaultValue;
+      valsByFilterIdDup[filterConfigDup.trait_id] = defaultValue;
     }
 
     // Add the resolved filter to the returned object
     const resolvedFilter: ResolvedFilter = {
-      id: customizationConfigDup.trait_id,
-      label: customizationConfigDup.label,
+      id: filterConfigDup.trait_id,
+      label: filterConfigDup.label,
       defaultValue,
       currentValue,
-      options: p.filtersManifest.optionGroupsById[
-        customizationConfigDup.option_group_id
-      ].map((option) => ({
-        id: option.id,
-        label: option.label,
-      })),
+      options: p.filtersManifest.optionGroupsById[filterConfigDup.option_group_id].map(
+        (option) => ({
+          id: option.id,
+          label: option.label,
+        }),
+      ),
     };
 
-    resolvedFilters[customizationConfigDup.trait_id] = resolvedFilter;
+    resolvedFilters[filterConfigDup.trait_id] = resolvedFilter;
   });
 
   return resolvedFilters;

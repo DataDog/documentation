@@ -1,4 +1,3 @@
-import { FileSearcher } from './FileSearcher';
 import fs from 'fs';
 import yaml from 'js-yaml';
 import {
@@ -19,6 +18,7 @@ import {
   RawOptionGroupGlossary,
   RawOptionGroupGlossarySchema,
 } from '../schemas/glossaries/optionGroupGlossary';
+import path from 'path';
 
 /**
  * A module responsible for all data ingestion from
@@ -26,6 +26,24 @@ import {
  * and their options.
  */
 export class YamlConfigParser {
+  static findInDir(dir: string, filter: RegExp) {
+    let fileList: string[] = [];
+    const files = fs.readdirSync(dir);
+
+    files.forEach((file) => {
+      const filePath = path.join(dir, file);
+      const fileStat = fs.lstatSync(filePath);
+
+      if (fileStat.isDirectory()) {
+        fileList = [...fileList, ...this.findInDir(filePath, filter)];
+      } else if (filter.test(filePath)) {
+        fileList.push(filePath);
+      }
+    });
+
+    return fileList;
+  }
+
   /**
    * Load and validate the trait glossary from the content filters
    * configuration for a given language (such as 'ja').
@@ -217,7 +235,7 @@ export class YamlConfigParser {
     }
 
     const optionGroupGlossaryDir = `${p.langDir}/option_groups`;
-    const filePaths = FileSearcher.findInDir(optionGroupGlossaryDir, /\.ya?ml$/);
+    const filePaths = this.findInDir(optionGroupGlossaryDir, /\.ya?ml$/);
     const mergedGlossary: OptionGroupGlossary = {};
 
     // Merge all files into the result glossary

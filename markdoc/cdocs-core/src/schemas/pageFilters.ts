@@ -1,7 +1,7 @@
 import { z } from 'zod';
 import { FILTER_OPTIONS_ID_REGEX, SNAKE_CASE_REGEX } from './regexes';
 import { FilterConfigSchema } from './frontMatter';
-import { CdocsCoreErrorSchema } from './errors';
+import { CdocsErrorSchema } from './errors';
 import { OptionGroupGlossarySchema } from './glossaries/optionGroupGlossary';
 
 /**
@@ -103,12 +103,13 @@ export const ResolvedFiltersSchema = z.record(ResolvedFilterSchema);
 export type ResolvedFilters = z.infer<typeof ResolvedFiltersSchema>;
 
 /**
- * The manifest for a single page customization,
+ * The manifest for a single page filter,
  * containing all of the configuration data necessary
- * to support the customization and its options.
+ * to support the filter and its options.
  *
  * This is used to efficiently validate, resolve,
- * and re-resolve the customization.
+ * and re-resolve the filter's current value
+ * and available options.
  */
 export const FilterManifestSchema = z
   .object({
@@ -167,12 +168,12 @@ export const FiltersManifestSchema = z
       z.string().regex(SNAKE_CASE_REGEX),
       z.string().regex(SNAKE_CASE_REGEX),
     ),
-    errors: z.array(CdocsCoreErrorSchema),
+    errors: z.array(CdocsErrorSchema),
   })
   .strict();
 
 /**
- * A object containing all of the potential customization IDs
+ * A object containing all of the potential trait IDs
  * and option groups for a page, created by populating the front matter
  * placeholders with all possible values, then collecting all
  * configuration data necessary to support the resulting
@@ -183,7 +184,7 @@ export const FiltersManifestSchema = z
  *
  * @example
  * {
- *   // a simple customization with no dependencies
+ *   // a simple filter with no dependencies
  *   host: {
  *     config: {
  *       id: 'host',
@@ -196,7 +197,7 @@ export const FiltersManifestSchema = z
  *     possibleVals: ['aws', 'gcp', 'azure']
  *   },
  *
- *   // a customization that depends on the user's selection of `host`,
+ *   // a filter whose options depend on the user's selection of `host`,
  *   // yielding different options for each host type
  *   // and a wide variety of possible values overall
  *   host_type: {
@@ -217,7 +218,7 @@ export const FiltersManifestSchema = z
 export type FiltersManifest = z.infer<typeof FiltersManifestSchema>;
 
 /**
- * A lighter version of the PageFilterManifest schema,
+ * A lighter version of the FilterManifest schema,
  * designed to be used client-side.
  */
 export const ClientSideFilterManifestSchema = z
@@ -233,7 +234,7 @@ export const ClientSideFilterManifestSchema = z
 export type ClientSideFilterManifest = z.infer<typeof ClientSideFilterManifestSchema>;
 
 /**
- * A lighter version of the PageFiltersManifest schema,
+ * A lighter version of the FiltersManifest schema,
  * designed to be used client-side.
  */
 export const ClientSideFiltersManifestSchema = z

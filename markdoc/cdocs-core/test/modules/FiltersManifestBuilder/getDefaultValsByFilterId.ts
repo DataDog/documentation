@@ -1,10 +1,10 @@
 import { describe, test, expect } from 'vitest';
 import { FiltersManifestBuilder } from '../../../src/modules/FiltersManifestBuilder';
-import { Frontmatter, FrontmatterSchema } from '../../../src/schemas/frontMatter';
-import { paintColorsContentFiltersConfig } from '../../mocks/valid/paintColorsConfig';
+import { FrontMatter, FrontMatterSchema } from '../../../src/schemas/frontMatter';
+import { paintColorsCustomizationConfig } from '../../mocks/valid/paintColorsConfig';
 
 describe('FiltersManifestBuilder.getDefaultValsByFilterId', () => {
-  const frontmatter: Frontmatter = {
+  const frontmatter: FrontMatter = {
     title: 'My Page',
     content_filters: [
       {
@@ -24,12 +24,12 @@ describe('FiltersManifestBuilder.getDefaultValsByFilterId', () => {
       },
     ],
   };
-  FrontmatterSchema.parse(frontmatter);
+  FrontMatterSchema.parse(frontmatter);
 
   test('derives the default values for each filter', () => {
     const defaultValsByFilterId = FiltersManifestBuilder.getDefaultValsByFilterId({
       filters: frontmatter.content_filters!,
-      contentFiltersConfig: paintColorsContentFiltersConfig,
+      contentFiltersConfig: paintColorsCustomizationConfig,
     });
     expect(defaultValsByFilterId).toEqual({
       color: 'blue',

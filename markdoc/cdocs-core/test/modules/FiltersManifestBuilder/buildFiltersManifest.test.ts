@@ -2,7 +2,7 @@ import { describe, test, expect } from 'vitest';
 import { FiltersManifestBuilder } from '../../../src/modules/FiltersManifestBuilder';
 import {
   paintColorsFrontmatter,
-  paintColorsContentFiltersConfig,
+  paintColorsCustomizationConfig,
 } from '../../mocks/valid/paintColorsConfig';
 import _ from 'lodash';
 import { SNAPSHOTS_DIR } from '../../config/constants';
@@ -12,7 +12,7 @@ describe('FiltersManifestBuilder.build', () => {
   test('creates the expected object when given valid data', async () => {
     const manifest = FiltersManifestBuilder.build({
       frontmatter: paintColorsFrontmatter,
-      contentFiltersConfig: paintColorsContentFiltersConfig,
+      contentFiltersConfig: paintColorsCustomizationConfig,
     });
 
     const expectedManifest: FiltersManifest = {
@@ -196,7 +196,7 @@ describe('FiltersManifestBuilder.build', () => {
 
     const manifest = FiltersManifestBuilder.build({
       frontmatter: invalidFrontmatter,
-      contentFiltersConfig: paintColorsContentFiltersConfig,
+      contentFiltersConfig: paintColorsCustomizationConfig,
     });
 
     expect(manifest.errors.length).toEqual(1);
@@ -206,11 +206,11 @@ describe('FiltersManifestBuilder.build', () => {
   test('detects a nonexistent options source', () => {
     // Intentionally omit a referenced option group from the mock config
     const { matte_blue_paint_options, ...invalidOptionGroupGlossary } =
-      paintColorsContentFiltersConfig.optionGroupGlossary;
+      paintColorsCustomizationConfig.optionGroupGlossary;
 
     const invalidContentFiltersConfig = {
-      traitGlossary: { ...paintColorsContentFiltersConfig.traitGlossary },
-      optionGlossary: { ...paintColorsContentFiltersConfig.optionGlossary },
+      traitGlossary: { ...paintColorsCustomizationConfig.traitGlossary },
+      optionGlossary: { ...paintColorsCustomizationConfig.optionGlossary },
       optionGroupGlossary: invalidOptionGroupGlossary,
     };
 

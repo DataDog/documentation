@@ -1,9 +1,11 @@
 import { z } from 'zod';
 
-export const CdocsCoreErrorSchema = z.object({
+export const CdocsErrorSchema = z.object({
   message: z.string(),
+  // TODO: Absorb lines and searchTerm into data
   lines: z.array(z.number()).optional(),
-  searchTerm: z.string().optional()
+  searchTerm: z.string().optional(),
+  data: z.record(z.any()).optional(),
 });
 
-export type CdocsCoreError = z.infer<typeof CdocsCoreErrorSchema>;
+export type CdocsError = z.infer<typeof CdocsErrorSchema>;

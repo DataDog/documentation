@@ -15,7 +15,7 @@ A *filter* is the combination of two entities:
 
 Traits and option groups (along with the individual options referenced by the option groups) are reusable throughout the entire docs site, and are defined in the site's *customization config*, a set of YAML files.
 
-Filters are defined in a page's frontmatter, and only apply to that page. But if two filters on two separate pages reference the same trait (such as `database`), the user's preference travels between pages when their choice on the previous page is a valid option on the next page.
+Filters are defined in a page's front matter, and only apply to that page. But if two filters on two separate pages reference the same trait (such as `database`), the user's preference travels between pages when their choice on the previous page is a valid option on the next page.
 
 ## Configuration examples
 
@@ -69,7 +69,7 @@ product_two_db_options:
 
 ### Filters
 
-A *filter*, which is defined in a page's frontmatter, combines a trait and an options group for use on that page:
+A *filter*, which is defined in a page's front matter, combines a trait and an options group for use on that page:
 
 ```yaml
 title: My Example Doc

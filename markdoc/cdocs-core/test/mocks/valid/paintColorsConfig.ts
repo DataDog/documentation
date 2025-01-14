@@ -1,10 +1,10 @@
 import {
-  ContentFiltersConfig,
-  ContentFiltersConfigSchema,
-} from '../../../src/schemas/contentFiltersConfig';
-import { Frontmatter, FrontmatterSchema } from '../../../src/schemas/frontMatter';
+  CustomizationConfig,
+  CustomizationConfigSchema,
+} from '../../../src/schemas/customizationConfig';
+import { FrontMatter, FrontMatterSchema } from '../../../src/schemas/frontMatter';
 
-export const paintColorsFrontmatter: Frontmatter = {
+export const paintColorsFrontmatter: FrontMatter = {
   title: 'My Page',
   content_filters: [
     {
@@ -24,9 +24,9 @@ export const paintColorsFrontmatter: Frontmatter = {
     },
   ],
 };
-FrontmatterSchema.parse(paintColorsFrontmatter);
+FrontMatterSchema.parse(paintColorsFrontmatter);
 
-export const paintColorsContentFiltersConfig: ContentFiltersConfig = {
+export const paintColorsCustomizationConfig: CustomizationConfig = {
   traitGlossary: {
     color: {
       id: 'color',
@@ -142,4 +142,4 @@ export const paintColorsContentFiltersConfig: ContentFiltersConfig = {
     ],
   },
 };
-ContentFiltersConfigSchema.parse(paintColorsContentFiltersConfig);
+CustomizationConfigSchema.parse(paintColorsCustomizationConfig);
