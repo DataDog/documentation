@@ -19,7 +19,9 @@ Filters are defined in a page's frontmatter, and only apply to that page. But if
 
 ## Configuration examples
 
-### Traits
+### Customization config (sitewide)
+
+#### Traits
 
 Customization requires at least one user trait, such as their preferred `database` or `operating_system`:
 
@@ -29,7 +31,7 @@ traits:
     label: Database
 ```
 
-### Options
+#### Options
 
 Customization requires least two *options*, such as `postgres`:
 
@@ -45,7 +47,7 @@ options:
     label: Mongo
 ```
 
-### Option groups
+#### Option groups
 
 Customization requires at least one *option group*, an ordered list of existing options (defined above).
 
@@ -62,6 +64,8 @@ product_two_db_options:
   - id: postgres
   - id: sqlite3
 ```
+
+## Page configuration
 
 ### Filters
 
