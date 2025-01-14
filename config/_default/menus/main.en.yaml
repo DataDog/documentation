@@ -5787,12 +5787,12 @@ menu:
       parent: csm_setup
       identifier: csm_setup_cloudtrail
       weight: 103
-    - name: Set Up Iac Scanning
+    - name: Set Up IaC Scanning
       url: security/cloud_security_management/setup/iac_scanning
       parent: csm_setup
       identifier: csm_setup_iac_scanning
       weight: 104
-    - name: Set Up Iac Remediation
+    - name: Set Up IaC Remediation
       url: security/cloud_security_management/setup/iac_remediation
       parent: csm_setup
       identifier: csm_setup_iac_remediation
