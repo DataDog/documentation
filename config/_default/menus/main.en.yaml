@@ -9,7 +9,7 @@ menu:
     - name: Service Management
       identifier: service_management_heading
       weight: 3000000
-    - name: Actions
+    - name: Actions & Remediations
       identifier: actions_heading
       weight: 4000000
     - name: Infrastructure
@@ -2452,34 +2452,12 @@ menu:
       parent: case_management
       identifier: case_management_troubleshooting
       weight: 3
-    - name: Private Actions
-      url: actions/private_actions/
-      pre: server
-      parent: actions_heading
-      identifier: private_actions
-      weight: 10000
-    - name: Use Private Actions
-      url: actions/private_actions/use_private_actions/
-      parent: private_actions
-      identifier: use_private_actions
-      weight: 101
-    - name: Private Action Credentials
-      url: actions/private_actions/private_action_credentials/
-      parent: private_actions
-      identifier: private_actions_creds
-      weight: 102
-    - name: Actions Catalog
-      url: actions/actions_catalog/
-      pre: books
-      parent: actions_heading
-      identifier: actions_catalog
-      weight: 20000
     - name: Workflow Automation
       url: service_management/workflows/
       pre: workflows
       identifier: workflows
       parent: actions_heading
-      weight: 30000
+      weight: 10000
     - name: Build Workflows
       url: service_management/workflows/build/
       parent: workflows
@@ -2555,7 +2533,7 @@ menu:
       pre: app-builder
       identifier: app_builder
       parent: actions_heading
-      weight: 40000
+      weight: 20000
     - name: Build Apps
       url: service_management/app_builder/build/
       parent: app_builder
@@ -2621,6 +2599,33 @@ menu:
       parent: app_builder
       identifier: app_builder_embedded_apps
       weight: 10
+    - name: Datastore
+      url: actions/datastore/
+      pre: server
+      parent: actions_heading
+      identifier: datastore
+      weight: 30000
+    - name: Action Catalog
+      url: actions/actions_catalog/
+      pre: books
+      parent: actions_heading
+      identifier: action_catalog
+      weight: 40000
+    - name: Private Actions
+      url: actions/private_actions/
+      parent: action_catalog
+      identifier: private_actions
+      weight: 1
+    - name: Use Private Actions
+      url: actions/private_actions/use_private_actions/
+      parent: private_actions
+      identifier: use_private_actions
+      weight: 101
+    - name: Private Action Credentials
+      url: actions/private_actions/private_action_credentials/
+      parent: private_actions
+      identifier: private_actions_creds
+      weight: 102
     - name: Universal Service Monitoring
       url: universal_service_monitoring/
       pre: usm
