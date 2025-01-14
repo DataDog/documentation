@@ -37,7 +37,7 @@ Select a topic cluster from the list to examine how inputs or outputs about spec
 
 {{< img src="llm_observability/cluster_map/box.png" alt="The box packing layout displays clusters of traces represented by colored circles, and includes a panel listing clusters with topics, trace counts, and failure rates." style="width:100%;" >}}
 
-<div class="alert alert-info">Cluster Map feature includes components built with Llama™</div>
+<div class="alert alert-info">Cluster Map feature includes components built with Llama</div>
 
 ## Further Reading
 
