@@ -6,7 +6,7 @@ import {
 } from '../../mocks/valid/paintColorsConfig';
 import _ from 'lodash';
 import { SNAPSHOTS_DIR } from '../../config/constants';
-import { PageFiltersManifest } from '../../../src/schemas/pageFilters';
+import { CustomizationsManifest } from '../../../src/schemas/customizations';
 
 describe('FiltersManifestBuilder.build', () => {
   test('creates the expected object when given valid data', async () => {
@@ -15,12 +15,12 @@ describe('FiltersManifestBuilder.build', () => {
       contentFiltersConfig: paintColorsContentFiltersConfig,
     });
 
-    const expectedManifest: PageFiltersManifest = {
-      filtersById: {
+    const expectedManifest: CustomizationsManifest = {
+      filtersByTraitId: {
         color: {
           config: {
             label: 'Color',
-            filter_id: 'color',
+            trait_id: 'color',
             option_group_id: 'color_options',
           },
           defaultValsByOptionGroupId: {
@@ -31,7 +31,7 @@ describe('FiltersManifestBuilder.build', () => {
         finish: {
           config: {
             label: 'Finish',
-            filter_id: 'finish',
+            trait_id: 'finish',
             option_group_id: 'finish_options',
           },
           defaultValsByOptionGroupId: {
@@ -42,7 +42,7 @@ describe('FiltersManifestBuilder.build', () => {
         paint: {
           config: {
             label: 'Paint color',
-            filter_id: 'paint',
+            trait_id: 'paint',
             option_group_id: '<FINISH>_<COLOR>_paint_options',
           },
           defaultValsByOptionGroupId: {
@@ -159,7 +159,7 @@ describe('FiltersManifestBuilder.build', () => {
         ],
       },
       errors: [],
-      defaultValsByFilterId: {
+      defaultValsByTraitId: {
         color: 'blue',
         finish: 'eggshell',
         paint: 'elegant_royal',
@@ -177,17 +177,17 @@ describe('FiltersManifestBuilder.build', () => {
       customizations: [
         {
           label: 'Color',
-          filter_id: 'color',
+          trait_id: 'color',
           option_group_id: 'color_options',
         },
         {
           label: 'Finish',
-          filter_id: 'finish',
+          trait_id: 'finish',
           option_group_id: 'finish_options',
         },
         {
           label: 'Paint color',
-          filter_id: 'paint',
+          trait_id: 'paint',
           // invalid placeholder 'COLOUR'
           option_group_id: '<FINISH>_<COLOUR>_paint_options',
         },
@@ -209,7 +209,7 @@ describe('FiltersManifestBuilder.build', () => {
       paintColorsContentFiltersConfig.optionGroupGlossary;
 
     const invalidContentFiltersConfig = {
-      filterGlossary: { ...paintColorsContentFiltersConfig.filterGlossary },
+      traitGlossary: { ...paintColorsContentFiltersConfig.traitGlossary },
       optionGlossary: { ...paintColorsContentFiltersConfig.optionGlossary },
       optionGroupGlossary: invalidOptionGroupGlossary,
     };

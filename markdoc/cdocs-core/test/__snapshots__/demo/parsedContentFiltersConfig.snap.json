@@ -1,6 +1,6 @@
 {
   "en": {
-    "filterGlossary": {
+    "traitGlossary": {
       "color": {
         "id": "color",
         "label": "Color"
@@ -202,7 +202,7 @@
     }
   },
   "ja": {
-    "filterGlossary": {
+    "traitGlossary": {
       "color": {
         "id": "color",
         "label": "Color(ja)"

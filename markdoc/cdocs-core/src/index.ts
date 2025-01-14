@@ -32,9 +32,9 @@ export {
 export { CdocsDataManager } from './modules/CdocsDataManager';
 
 export {
-  FilterGlossary,
-  FilterGlossarySchema,
-} from './schemas/glossaries/filterGlossary';
+  TraitGlossary as FilterGlossary,
+  TraitGlossarySchema as FilterGlossarySchema,
+} from './schemas/glossaries/traitGlossary';
 
 export {
   OptionGlossary,

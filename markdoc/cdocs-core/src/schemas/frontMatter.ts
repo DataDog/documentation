@@ -8,7 +8,7 @@ import { SNAKE_CASE_REGEX, FILTER_OPTIONS_ID_REGEX } from './regexes';
 export const CustomizationConfigSchema = z
   .object({
     label: z.string(),
-    filter_id: z.string().regex(SNAKE_CASE_REGEX),
+    trait_id: z.string().regex(SNAKE_CASE_REGEX),
     option_group_id: z.string().regex(FILTER_OPTIONS_ID_REGEX),
     default_value: z.string().regex(SNAKE_CASE_REGEX).optional(),
   })
@@ -34,19 +34,21 @@ export type CustomizationConfig = z.infer<typeof CustomizationConfigSchema>;
  */
 export const CustomizationsConfigSchema = z
   .array(CustomizationConfigSchema)
-  .refine((filtersConfig) => {
+  .refine((customizationsConfig) => {
     // Page filter names must be unique within a page
-    const filterNames = filtersConfig.map((filterConfig) => filterConfig.label);
-    const uniqueFilterNames = new Set(filterNames);
-    if (filterNames.length !== uniqueFilterNames.size) {
-      console.error('Duplicate page filter display names found in list:', filterNames);
+    const customizationLabels = customizationsConfig.map(
+      (customizationConfig) => customizationConfig.label,
+    );
+    const uniqueCustomizationLabels = new Set(customizationLabels);
+    if (customizationLabels.length !== uniqueCustomizationLabels.size) {
+      console.error('Duplicate customization labels found in list:', customizationLabels);
       return false;
     }
 
     // Placeholders must refer to a valid filter name
     // that is defined earlier in the list than the placeholder
     const definedParamNames = new Set();
-    for (const filterConfig of filtersConfig) {
+    for (const filterConfig of customizationsConfig) {
       definedParamNames.add(filterConfig.label);
       const bracketedPlaceholders = filterConfig.label.match(/<([a-z0-9_]+)>/g);
       if (bracketedPlaceholders) {
@@ -90,17 +92,17 @@ export const FrontmatterSchema = z.object({
  *   customizations: [
  *     {
  *       label: "Color",
- *       filter_id: "color",
+ *       trait_id: "color",
  *       option_group_id: "color_options"
  *     },
  *     {
  *       label: "Finish",
- *       filter_id: "finish",
+ *       trait_id: "finish",
  *       option_group_id: "paint_finish_options"
  *     },
  *     {
  *       label: "Paint color",
- *       filter_id: "paint_color",
+ *       trait_id: "paint_color",
  *       option_group_id: "<FINISH>_<COLOR>_paint_options"
  *     }
  *   ]

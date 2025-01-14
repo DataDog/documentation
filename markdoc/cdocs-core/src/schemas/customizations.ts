@@ -161,12 +161,12 @@ export type CustomizationManifest = z.infer<typeof CustomizationManifestSchema>;
  */
 export const CustomizationsManifestSchema = z
   .object({
-    filtersById: z.record(
+    filtersByTraitId: z.record(
       z.string().regex(SNAKE_CASE_REGEX),
       CustomizationManifestSchema,
     ),
     optionGroupsById: OptionGroupGlossarySchema,
-    defaultValsByFilterId: z.record(
+    defaultValsByTraitId: z.record(
       z.string().regex(SNAKE_CASE_REGEX),
       z.string().regex(SNAKE_CASE_REGEX),
     ),
@@ -243,12 +243,12 @@ export type ClientCustomizationManifest = z.infer<
  */
 export const ClientCustomizationsManifestSchema = z
   .object({
-    filtersById: z.record(
+    filtersByTraitId: z.record(
       z.string().regex(SNAKE_CASE_REGEX),
       ClientCustomizationManifestSchema,
     ),
     optionGroupsById: OptionGroupGlossarySchema,
-    defaultValsByFilterId: z.record(
+    defaultValsByTraitId: z.record(
       z.string().regex(SNAKE_CASE_REGEX),
       z.string().regex(SNAKE_CASE_REGEX),
     ),

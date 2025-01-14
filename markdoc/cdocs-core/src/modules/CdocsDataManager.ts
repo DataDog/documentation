@@ -24,7 +24,7 @@ export class CdocsDataManager {
 
     // Load the filter glossaries for all languages
     const filterGlossariesByLang =
-      YamlConfigParser.loadFilterGlossaries(glossaryLoadingConfig);
+      YamlConfigParser.loadTraitGlossaries(glossaryLoadingConfig);
 
     // Load the option glossaries for all languages
     const optionGlossariesByLang =
@@ -40,7 +40,7 @@ export class CdocsDataManager {
 
     p.langs.forEach((lang) => {
       contentFiltersConfigByLang[lang] = {
-        filterGlossary: filterGlossariesByLang[lang],
+        traitGlossary: filterGlossariesByLang[lang],
         optionGlossary: optionGlossariesByLang[lang],
         optionGroupGlossary: optionGroupGlossariesByLang[lang],
       };

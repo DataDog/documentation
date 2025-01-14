@@ -11,22 +11,6 @@
     ],
     "name": "ZodError"
   },
-  "extra_filter_data": {
-    "issues": [
-      {
-        "code": "unrecognized_keys",
-        "keys": [
-          "unexpected_key"
-        ],
-        "path": [
-          "filters",
-          0
-        ],
-        "message": "Unrecognized key(s) in object: 'unexpected_key'"
-      }
-    ],
-    "name": "ZodError"
-  },
   "extra_option_data": {
     "issues": [
       {
@@ -43,14 +27,30 @@
     ],
     "name": "ZodError"
   },
-  "invalid_id_in_filter": {
+  "extra_trait_data": {
+    "issues": [
+      {
+        "code": "unrecognized_keys",
+        "keys": [
+          "unexpected_key"
+        ],
+        "path": [
+          "traits",
+          0
+        ],
+        "message": "Unrecognized key(s) in object: 'unexpected_key'"
+      }
+    ],
+    "name": "ZodError"
+  },
+  "invalid_id_in_trait": {
     "issues": [
       {
         "validation": "regex",
         "code": "invalid_string",
         "message": "Invalid",
         "path": [
-          "filters",
+          "traits",
           0,
           "id"
         ]
@@ -70,14 +70,14 @@
     ],
     "name": "ZodError"
   },
-  "missing_label_in_filter": {
+  "missing_label_in_trait": {
     "issues": [
       {
         "code": "invalid_type",
         "expected": "string",
         "received": "undefined",
         "path": [
-          "filters",
+          "traits",
           0,
           "label"
         ],

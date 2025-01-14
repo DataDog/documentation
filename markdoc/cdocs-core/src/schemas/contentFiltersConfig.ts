@@ -1,10 +1,10 @@
 import { z } from 'zod';
-import { FilterGlossarySchema } from './glossaries/filterGlossary';
+import { TraitGlossarySchema } from './glossaries/traitGlossary';
 import { OptionGlossarySchema } from './glossaries/optionGlossary';
 import { OptionGroupGlossarySchema } from './glossaries/optionGroupGlossary';
 
 export const ContentFiltersConfigSchema = z.object({
-  filterGlossary: FilterGlossarySchema,
+  traitGlossary: TraitGlossarySchema,
   optionGlossary: OptionGlossarySchema,
   optionGroupGlossary: OptionGroupGlossarySchema,
 });

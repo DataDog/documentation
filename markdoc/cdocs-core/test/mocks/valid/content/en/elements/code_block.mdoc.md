@@ -2,7 +2,7 @@
 title: Code Block
 customizations:
   - label: "Color"
-    filter_id: color
+    trait_id: color
     option_group_id: primary_color_options
 ---
 

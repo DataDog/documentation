@@ -1,21 +1,12 @@
-/*
-import {
-  FilterOptionsConfig,
-  FilterOptionsConfigSchema,
-  RawFilterOptionsConfig,
-  RawFilterOptionsConfigSchema,
-} from '../schemas/filterOptions';
-import { Glossary, GlossaryConfigSchema, GlossaryEntryConfig } from '../schemas/glossary';
-*/
 import { FileSearcher } from './FileSearcher';
 import fs from 'fs';
 import yaml from 'js-yaml';
 import {
-  FilterGlossary,
-  FilterGlossaryEntry,
-  FilterGlossarySchema,
-  RawFilterGlossarySchema,
-} from '../schemas/glossaries/filterGlossary';
+  TraitGlossary,
+  TraitGlossaryEntry,
+  TraitGlossarySchema,
+  RawTraitGlossarySchema,
+} from '../schemas/glossaries/traitGlossary';
 import {
   OptionGlossary,
   OptionGlossaryEntry,
@@ -31,29 +22,29 @@ import {
 
 /**
  * A module responsible for all data ingestion from
- * the YAML files that define the available filters
+ * the YAML files that define the available traits
  * and their options.
  */
 export class YamlConfigParser {
   /**
-   * Load and validate the filter glossary from the content filters
+   * Load and validate the trait glossary from the content filters
    * configuration for a given language (such as 'ja').
    */
-  static loadFilterGlossary(p: { langDir: string }): FilterGlossary {
+  static loadTraitGlossary(p: { langDir: string }): TraitGlossary {
     // If the lang dir does not exist, return an empty object,
     // which can later be backfilled by the default language
     if (!fs.existsSync(p.langDir)) {
       return {};
     }
 
-    let result: FilterGlossary;
+    let result: TraitGlossary;
 
-    const glossaryPath = `${p.langDir}/filters/filters.yaml`;
+    const glossaryPath = `${p.langDir}/traits/traits.yaml`;
 
     try {
       const glossaryYamlStr = fs.readFileSync(glossaryPath, 'utf8');
-      const rawGlossary = RawFilterGlossarySchema.parse(yaml.load(glossaryYamlStr));
-      result = rawGlossary.filters.reduce<Record<string, FilterGlossaryEntry>>(
+      const rawGlossary = RawTraitGlossarySchema.parse(yaml.load(glossaryYamlStr));
+      result = rawGlossary.traits.reduce<Record<string, TraitGlossaryEntry>>(
         (acc, entry) => {
           acc[entry.id] = entry;
           return acc;
@@ -69,7 +60,7 @@ export class YamlConfigParser {
       }
     }
 
-    FilterGlossarySchema.parse(result);
+    TraitGlossarySchema.parse(result);
     return result;
   }
 
@@ -145,15 +136,15 @@ export class YamlConfigParser {
     return glossariesByLang;
   }
 
-  static loadFilterGlossaries(p: {
+  static loadTraitGlossaries(p: {
     configDir: string;
     langs: string[];
     defaultLang?: string;
-  }): Record<string, FilterGlossary> {
+  }): Record<string, TraitGlossary> {
     const defaultLang = p.defaultLang || 'en';
-    const glossariesByLang: Record<string, FilterGlossary> = {};
+    const glossariesByLang: Record<string, TraitGlossary> = {};
 
-    const defaultGlossary = this.loadFilterGlossary({
+    const defaultGlossary = this.loadTraitGlossary({
       langDir: `${p.configDir}/${defaultLang}`,
     });
 
@@ -163,10 +154,10 @@ export class YamlConfigParser {
         return;
       }
       const langDir = `${p.configDir}/${lang}`;
-      const translatedGlossary = this.loadFilterGlossary({ langDir });
+      const translatedGlossary = this.loadTraitGlossary({ langDir });
 
       // merge the translated glossary with the default glossary
-      const mergedGlossary: FilterGlossary = {
+      const mergedGlossary: TraitGlossary = {
         ...defaultGlossary,
         ...translatedGlossary,
       };

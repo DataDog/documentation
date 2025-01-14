@@ -1,0 +1,5 @@
+traits:
+- id: color
+  label: Color
+- id: item
+  label: Item

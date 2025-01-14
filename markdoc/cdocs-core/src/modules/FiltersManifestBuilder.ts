@@ -21,14 +21,14 @@ export class FiltersManifestBuilder {
    */
   static minifyManifest(manifest: CustomizationsManifest): ClientCustomizationsManifest {
     const result: ClientCustomizationsManifest = {
-      filtersById: {},
-      defaultValsByFilterId: { ...manifest.defaultValsByFilterId },
+      filtersByTraitId: {},
+      defaultValsByTraitId: { ...manifest.defaultValsByTraitId },
       optionGroupsById: { ...manifest.optionGroupsById },
     };
 
-    Object.keys(manifest.filtersById).forEach((filterId) => {
-      const filter = manifest.filtersById[filterId];
-      result.filtersById[filterId] = {
+    Object.keys(manifest.filtersByTraitId).forEach((traitId) => {
+      const filter = manifest.filtersByTraitId[traitId];
+      result.filtersByTraitId[traitId] = {
         config: { ...filter.config },
         defaultValsByOptionGroupId: { ...filter.defaultValsByOptionGroupId },
       };
@@ -50,10 +50,10 @@ export class FiltersManifestBuilder {
   }): CustomizationsManifest {
     // Create an empty manifest to populate
     const manifest: CustomizationsManifest = {
-      filtersById: {},
+      filtersByTraitId: {},
       optionGroupsById: {},
       errors: [],
-      defaultValsByFilterId: {},
+      defaultValsByTraitId: {},
     };
 
     // Return the empty manifest if the page has no filters
@@ -63,30 +63,30 @@ export class FiltersManifestBuilder {
 
     // Collect default values for each filter, keyed by filter ID,
     // used to resolve placeholders in options sources
-    manifest.defaultValsByFilterId = this.getDefaultValsByFilterId({
+    manifest.defaultValsByTraitId = this.getDefaultValsByFilterId({
       contentFiltersConfig: p.contentFiltersConfig,
       customizations: p.frontmatter.customizations,
     });
 
     // Key the configs by filter ID, for convenient access during processing
-    const filterConfigByFilterId: Record<string, CustomizationConfig> =
+    const filterConfigByTraitId: Record<string, CustomizationConfig> =
       p.frontmatter.customizations.reduce(
-        (obj, filterConfig) => ({ ...obj, [filterConfig.filter_id]: filterConfig }),
+        (obj, filterConfig) => ({ ...obj, [filterConfig.trait_id]: filterConfig }),
         {},
       );
 
-    // Keep track of the filter IDs that have been processed,
+    // Keep track of the trait IDs that have been processed,
     // to ensure correct definition order in frontmatter
-    const processedFilterIds: string[] = [];
+    const processedTraitIds: string[] = [];
 
     // Fill out the manifest for each filter,
     // in the order that the filters appeared in the frontmatter
     p.frontmatter.customizations.forEach((customization) => {
       // Validate the filter ID
-      if (!p.contentFiltersConfig.filterGlossary[customization.filter_id]) {
+      if (!p.contentFiltersConfig.traitGlossary[customization.trait_id]) {
         manifest.errors.push({
-          message: `Unrecognized filter ID: The filter ID '${customization.filter_id}' is not in the glossary.`,
-          searchTerm: customization.filter_id,
+          message: `Unrecognized trait ID: The trait ID '${customization.trait_id}' is not in the glossary.`,
+          searchTerm: customization.trait_id,
         });
       }
 
@@ -99,11 +99,11 @@ export class FiltersManifestBuilder {
       if (hasDynamicOptions) {
         const { optionGroupIds: dynamicOptionGroupIds, errors } =
           this.buildDynamicOptionGroupIds({
-            filterId: customization.filter_id,
+            traitId: customization.trait_id,
             // filterOptionsConfig: p.filterOptionsConfig,
             contentFiltersConfig: p.contentFiltersConfig,
-            filterConfigsByFilterId: filterConfigByFilterId,
-            precedingFilterIds: processedFilterIds,
+            filterConfigsByTraitId: filterConfigByTraitId,
+            precedingFilterIds: processedTraitIds,
           });
 
         if (errors.length > 0) {
@@ -119,7 +119,7 @@ export class FiltersManifestBuilder {
       // along with all possible selected values for the filter
       const { defaultValsByOptionGroupId, possibleVals, errors } =
         this.getPossibleDefaultsAndSelectedValues({
-          filterId: customization.filter_id,
+          traitId: customization.trait_id,
           optionGroupIds: optionGroupIds,
           // glossary: p.glossary,
           contentFiltersConfig: p.contentFiltersConfig,
@@ -130,18 +130,18 @@ export class FiltersManifestBuilder {
         manifest.errors.push(...errors);
       }
 
-      manifest.filtersById[customization.filter_id] = {
+      manifest.filtersByTraitId[customization.trait_id] = {
         config: customization,
         defaultValsByOptionGroupId,
         possibleVals: possibleVals,
       };
 
-      processedFilterIds.push(customization.filter_id);
+      processedTraitIds.push(customization.trait_id);
     });
 
     // Attach any options sets that were referenced by the filters
-    Object.keys(manifest.filtersById).forEach((filterId) => {
-      const filterManifest = manifest.filtersById[filterId];
+    Object.keys(manifest.filtersByTraitId).forEach((traitId) => {
+      const filterManifest = manifest.filtersByTraitId[traitId];
       const optionGroupIds = Object.keys(filterManifest.defaultValsByOptionGroupId);
       optionGroupIds.forEach((optionGroupId) => {
         if (!manifest.optionGroupsById[optionGroupId]) {
@@ -160,10 +160,8 @@ export class FiltersManifestBuilder {
    * for a given list of options set IDs.
    */
   static getPossibleDefaultsAndSelectedValues(p: {
-    filterId: string;
+    traitId: string;
     optionGroupIds: string[];
-    // glossary: Glossary;
-    // filterOptionsConfig: FilterOptionsConfig;
     contentFiltersConfig: ContentFiltersConfig;
   }): {
     defaultValsByOptionGroupId: Record<string, string>;
@@ -179,7 +177,7 @@ export class FiltersManifestBuilder {
       const optionGroup = p.contentFiltersConfig.optionGroupGlossary[optionGroupId];
       if (!optionGroup) {
         errors.push({
-          message: `Invalid options source: The options source '${optionGroupId}', which is required for the filter ID '${p.filterId}', does not exist.`,
+          message: `Invalid options source: The options source '${optionGroupId}', which is required for the filter ID '${p.traitId}', does not exist.`,
         });
         return;
       }
@@ -212,13 +210,13 @@ export class FiltersManifestBuilder {
    * by the filter, based on the preceding filters.
    */
   static buildDynamicOptionGroupIds(p: {
-    filterId: string;
+    traitId: string;
     // filterOptionsConfig: FilterOptionsConfig;
-    filterConfigsByFilterId: Record<string, CustomizationConfig>;
+    filterConfigsByTraitId: Record<string, CustomizationConfig>;
     precedingFilterIds: string[];
     contentFiltersConfig: ContentFiltersConfig;
   }): { optionGroupIds: string[]; errors: CdocsCoreError[] } {
-    const filterConfig = p.filterConfigsByFilterId[p.filterId];
+    const filterConfig = p.filterConfigsByTraitId[p.traitId];
 
     let optionGroupIds: string[] = [];
     const errors: CdocsCoreError[] = [];
@@ -230,11 +228,11 @@ export class FiltersManifestBuilder {
       }
 
       // build placeholder segment (array of all possible values)
-      const referencedFilterId = segment.slice(1, -1).toLowerCase();
-      const referencedFilterConfig = p.filterConfigsByFilterId[referencedFilterId];
-      if (!referencedFilterConfig || !p.precedingFilterIds.includes(referencedFilterId)) {
+      const referencedTraitId = segment.slice(1, -1).toLowerCase();
+      const referencedFilterConfig = p.filterConfigsByTraitId[referencedTraitId];
+      if (!referencedFilterConfig || !p.precedingFilterIds.includes(referencedTraitId)) {
         errors.push({
-          message: `Invalid placeholder: The placeholder ${segment} in the options source '${filterConfig.option_group_id}' refers to an unrecognized filter ID. The file frontmatter must contain a filter with the ID '${referencedFilterId}', and it must be defined before the filter with the ID ${filterConfig.filter_id}.`,
+          message: `Invalid placeholder: The placeholder ${segment} in the options source '${filterConfig.option_group_id}' refers to an unrecognized filter ID. The file frontmatter must contain a filter with the trait ID '${referencedTraitId}', and it must be defined before the filter with the trait ID ${filterConfig.trait_id}.`,
           searchTerm: filterConfig.option_group_id,
         });
         return [segment];
@@ -268,7 +266,7 @@ export class FiltersManifestBuilder {
     customizations: CustomizationConfig[];
     contentFiltersConfig: ContentFiltersConfig;
   }): Record<string, string> {
-    const defaultValsByFilterId: Record<string, string> = {};
+    const defaultValsByTraitId: Record<string, string> = {};
 
     // Process each entry in the frontmatter's customizations list
     for (const customization of p.customizations) {
@@ -277,7 +275,7 @@ export class FiltersManifestBuilder {
       const resolvedOptionGroupId = optionGroupId.replace(
         GLOBAL_PLACEHOLDER_REGEX,
         (_match: string, placeholder: string) => {
-          const value = defaultValsByFilterId[placeholder.toLowerCase()];
+          const value = defaultValsByTraitId[placeholder.toLowerCase()];
           return value || '';
         },
       );
@@ -287,13 +285,13 @@ export class FiltersManifestBuilder {
         p.contentFiltersConfig.optionGroupGlossary[resolvedOptionGroupId];
 
       if (resolvedOptionGroup) {
-        defaultValsByFilterId[customization.filter_id] =
+        defaultValsByTraitId[customization.trait_id] =
           customization.default_value ||
           resolvedOptionGroup.find((option) => option.default)!.id;
       }
     }
 
-    return defaultValsByFilterId;
+    return defaultValsByTraitId;
   }
 
   /**

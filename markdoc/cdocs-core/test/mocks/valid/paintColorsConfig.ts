@@ -9,17 +9,17 @@ export const paintColorsFrontmatter: Frontmatter = {
   customizations: [
     {
       label: 'Color',
-      filter_id: 'color',
+      trait_id: 'color',
       option_group_id: 'color_options',
     },
     {
       label: 'Finish',
-      filter_id: 'finish',
+      trait_id: 'finish',
       option_group_id: 'finish_options',
     },
     {
       label: 'Paint color',
-      filter_id: 'paint',
+      trait_id: 'paint',
       option_group_id: '<FINISH>_<COLOR>_paint_options',
     },
   ],
@@ -27,7 +27,7 @@ export const paintColorsFrontmatter: Frontmatter = {
 FrontmatterSchema.parse(paintColorsFrontmatter);
 
 export const paintColorsContentFiltersConfig: ContentFiltersConfig = {
-  filterGlossary: {
+  traitGlossary: {
     color: {
       id: 'color',
       label: 'Color',

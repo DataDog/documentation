@@ -1,5 +1,0 @@
-filters:
-- id: color
-  label: Color
-  # Mistake: This key is not in the YAML validation schema.
-  unexpected_key: unexpected_value

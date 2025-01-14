@@ -12,7 +12,7 @@ Most of the configuration data for customizable docs is sitewide, written in YAM
 
 Sitewide configuration requires the definition of three entities: 
 
-- *filters*, such as `operating_system`.
+- *traits*, representing some characteristic of the user, such as their `operating_system`.
 - *options*, such as `linux`.
 - *option groups*, which are ordered lists of existing options that include a designated default option. 
     - For example, an option group intended for use with the `operating_system` filter might include the options `linux`, `windows`, and `ios`, with `linux` configured as the default option.
@@ -21,12 +21,12 @@ The configuration for a given page can mix and match filters and options based o
 
 ## Sitewide configuration
 
-### Filters
+### Traits
 
-Customization requires at least one filter, such as `database`:
+Customization requires at least one user trait, such as their preferred `database` or `operating_system`:
 
 ```yaml
-filters:
+traits:
   - id: database
     label: Database
 ```
@@ -78,6 +78,6 @@ A *customization*, which is defined in a page's frontmatter, pairs a filter and 
 ```yaml
 title: My Example Doc
 customizations:
-  - filter_id: database
+  - trait_id: database
     option_group_id: product_two_db_options
 ```

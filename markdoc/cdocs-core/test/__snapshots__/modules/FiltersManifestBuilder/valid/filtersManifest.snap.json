@@ -1,9 +1,9 @@
 {
-  "filtersById": {
+  "filtersByTraitId": {
     "color": {
       "config": {
         "label": "Color",
-        "filter_id": "color",
+        "trait_id": "color",
         "option_group_id": "color_options"
       },
       "defaultValsByOptionGroupId": {
@@ -17,7 +17,7 @@
     "finish": {
       "config": {
         "label": "Finish",
-        "filter_id": "finish",
+        "trait_id": "finish",
         "option_group_id": "finish_options"
       },
       "defaultValsByOptionGroupId": {
@@ -32,7 +32,7 @@
     "paint": {
       "config": {
         "label": "Paint color",
-        "filter_id": "paint",
+        "trait_id": "paint",
         "option_group_id": "<FINISH>_<COLOR>_paint_options"
       },
       "defaultValsByOptionGroupId": {
@@ -149,7 +149,7 @@
     ]
   },
   "errors": [],
-  "defaultValsByFilterId": {
+  "defaultValsByTraitId": {
     "color": "blue",
     "finish": "eggshell",
     "paint": "elegant_royal"

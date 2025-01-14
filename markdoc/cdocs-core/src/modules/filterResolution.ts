@@ -41,7 +41,7 @@ export function resolveCustomizations(p: {
   const resolvedCustomizations: ResolvedCustomizations = {};
   const valsByFilterIdDup = { ...p.valsByFilterId };
 
-  const customizationsConfig = Object.values(p.filtersManifest.filtersById).map(
+  const customizationsConfig = Object.values(p.filtersManifest.filtersByTraitId).map(
     (filter) => {
       return filter.config;
     },
@@ -65,15 +65,15 @@ export function resolveCustomizations(p: {
     const possibleVals = p.filtersManifest.optionGroupsById[
       customizationConfigDup.option_group_id
     ].map((option) => option.id);
-    let currentValue = p.valsByFilterId[customizationConfigDup.filter_id];
+    let currentValue = p.valsByFilterId[customizationConfigDup.trait_id];
     if (currentValue && !possibleVals.includes(currentValue)) {
       currentValue = defaultValue;
-      valsByFilterIdDup[customizationConfigDup.filter_id] = defaultValue;
+      valsByFilterIdDup[customizationConfigDup.trait_id] = defaultValue;
     }
 
     // Add the resolved filter to the returned object
     const resolvedFilter: ResolvedCustomization = {
-      id: customizationConfigDup.filter_id,
+      id: customizationConfigDup.trait_id,
       label: customizationConfigDup.label,
       defaultValue,
       currentValue,
@@ -85,7 +85,7 @@ export function resolveCustomizations(p: {
       })),
     };
 
-    resolvedCustomizations[customizationConfigDup.filter_id] = resolvedFilter;
+    resolvedCustomizations[customizationConfigDup.trait_id] = resolvedFilter;
   });
 
   return resolvedCustomizations;
