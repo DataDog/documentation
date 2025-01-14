@@ -72,7 +72,7 @@ Read more about container tags in the [Kubernetes][104] and [Docker][105] taggin
 
 ### DogStatsD protocol v1.3
 
-Agents `v6.40.0+` and `v7.40.0+` supports an optional Unix timestamp field.
+Agents `v6.40.0+` and `v7.40.0+` support an optional Unix timestamp field.
 
 When this field is provided, the Datadog Agent doesn't do any processing with the metrics (no aggregation) except from enriching the metrics with tags. This can be useful if you already aggregate your metrics in your application, and you want to send them to Datadog without extra processing.
 
