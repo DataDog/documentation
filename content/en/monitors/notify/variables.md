@@ -263,7 +263,7 @@ If a metric is tagged with any tag in the `key:value` format and the monitor que
 {{ key.name }}
 ```
 
-This variable inserts the `value` associated with the `key` into each alert notification. For example, if your monitor triggers an alert for each `env`, then the variable `{{env.name}}` is available in your notification message. 
+This variable inserts the `value` associated with the `key` into each alert notification. For example, if your monitor triggers an alert for each `env`, then the variable `{{env.name}}` is available in your notification message.
 
 If a group has multiple `values` associated with the same `key`, the alert message displays a comma-separated string of all values, in lexicographic order.
 
@@ -302,11 +302,11 @@ If your facet has periods, use brackets around the facet, for example:
 
 #### Customize the notification based on the group
 
-When your query is grouped by specific dimensions, you can enrich notifications with dynamic metadata associated with the group.
+When your query is grouped by specific dimensions, you can enrich notifications with dynamic metadata associated with the group. To see a list of tag variables based on your tag selection, click **Use message template variables** in the **Configure notifications & automations** section.
 
 {{% collapse-content title="Query group by host" level="h5" %}}
 
-If your monitor triggers an alert for each `host`, then the tag variables `{{host.name}}` and `{{host.ip}}` are available as well as any host tag that is available on this host. To see a list of tag variables based on your tag selection, click **Use message template variables** in the **Say what's happening** section.
+If your monitor triggers an alert for each `host`, then the tag variables `{{host.name}}` and `{{host.ip}}` are available as well as any host tag that is available on this host.
 
 Specific host metadata variables:
 
@@ -314,10 +314,10 @@ Specific host metadata variables:
 - Machine: `{{host.metadata_machine}}`
 - Platform: `{{host.metadata_platform}}`
 - Processor: `{{host.metadata_processor}}`
-{{% /collapse-content %}} 
+{{% /collapse-content %}}
 
 {{% collapse-content title="Query group by kube_namespace and kube_cluster_name" level="h5" %}}
-If your monitor triggers an alert for each `kube_namespace` and `kube_cluster_name`, then you can access any attribute of the namespace. 
+If your monitor triggers an alert for each `kube_namespace` and `kube_cluster_name`, then you can access any attribute of the namespace.
 
 Namespace metadata variables:
 
@@ -331,10 +331,10 @@ The following table contains all available attributes:
 | Variable syntax   | First level attributes |
 |-------------------|------------------------|
 | `{{kube_namespace.key}}`     | `k8s_namespace_key`, `tags`, `annotations`, `cluster_id`, `cluster_name`, `creation_timestamp`, `deletion_timestamp`, `display_name`, `external_id`, `finalizers`, `first_seen_at`, `group_size`, `labels`, `name`, `namespace`, `status`, `uid`|
-{{% /collapse-content %}} 
+{{% /collapse-content %}}
 
 {{% collapse-content title="Query group by pod_name and kube_namespace and kube_cluster_name" level="h5" %}}
-If your monitor triggers an alert for each `pod_name` and `kube_namespace` and `kube_cluster_name`, then you can access any attribute of the pod. 
+If your monitor triggers an alert for each `pod_name` and `kube_namespace` and `kube_cluster_name`, then you can access any attribute of the pod.
 
 Pod metadata variables:
 - Cluster name: `{{pod_name.cluster_name}}`
@@ -346,18 +346,37 @@ The following table contains all available attributes:
 | Variable syntax   | First level attributes |
 |-------------------|------------------------|
 | `{{pod_name.key}}`     | `k8s_pod_key`, `tags`, `annotations`, `cluster_id`, `cluster_name`, `conditions`, `container_statuses`, `creation_timestamp`, `deletion_timestamp`, `display_name`, `external_id`, `finalizers`, `first_seen_at`, `host_id`, `host_key`, `hostname`, `init_container_statuses`, `ip`, `labels`, `name`, `namespace`, `node_name`, `nominated_node_name`, `phase`, `pod_scheduled_timestamp`, `priority_class_name`, `qosclass`, `resource_requirements`, `uid`|
+{{% /collapse-content %}}
 
-{{% /collapse-content %}} 
+
+{{% collapse-content title="Query group by service" level="h5" %}}
+
+If your monitor triggers an alert for each `service`, then you can access some attribute of the service, as defined in the [Service Catalog][10].
+
+Service metadata variables:
+
+- Service name: `{{service.name}}`
+- Team name: `{{service.team}}`
+- Docs: `{{service.docs}}`
+- Links: `{{service.links}}`
+
+For Docs and Links you can also access a specific item with the following syntax `[<name>]`. For example, for services that have a definition schema like the one defined in this [example][11], you can access the "Runbook" link using the following syntax
+
+```text
+{{service.links[Runbook]}}
+```
+{{% /collapse-content %}}
+
 
 
 ### Matching attribute/tag variables
 
-<div class="alert alert-info">Available for 
-  <a href="/monitors/types/log/">Log monitors </a>, 
-  <a href="/monitors/types/apm/?tab=analytics">Trace Analytics monitors (APM)</a>, 
-  <a href="/monitors/types/error_tracking/"> Error Tracking monitors </a>, 
-  <a href="/monitors/types/real_user_monitoring/">RUM monitors </a>, 
-  <a href="/monitors/types/ci/">CI monitors </a>, and 
+<div class="alert alert-info">Available for
+  <a href="/monitors/types/log/">Log monitors </a>,
+  <a href="/monitors/types/apm/?tab=analytics">Trace Analytics monitors (APM)</a>,
+  <a href="/monitors/types/error_tracking/"> Error Tracking monitors </a>,
+  <a href="/monitors/types/real_user_monitoring/">RUM monitors </a>,
+  <a href="/monitors/types/ci/">CI monitors </a>, and
   <a href="/monitors/types/database_monitoring/">Database Monitoring monitors</a>.
 </div>
 
@@ -377,7 +396,7 @@ To include **any** attribute or tag from a log, a trace span, a RUM event, a CI 
 {{% collapse-content title="Example syntax usage" level="h4" %}}
 - For any `key:value` pair, the variable `{{log.tags.key}}` renders `value` in the alert message.
 - The `@` that prefixes all attributes is not included. For example, if a log monitor is grouped by `@http.status_code`, you can include the error message or infrastructure tags in the notification message by using the variables:
-  
+
   ```text
   {{ log.attributes.[error.message] }}
   {{ log.tags.env }}
@@ -393,7 +412,7 @@ To include **any** attribute or tag from a log, a trace span, a RUM event, a CI 
   ```
 
 
-{{% /collapse-content %}} 
+{{% /collapse-content %}}
 
 
 #### Important notes
@@ -525,7 +544,7 @@ If your monitor starts failing on the `service:ad-server` group, the notificatio
 @slack-ad-server There is an ongoing issue with ad-server.
 ```
 
-When building dynamic handles with attributes that might not always be present, you may encounter issues with notification delivery. If an attribute is missing, the variable renders empty in the notification message, resulting in an invalid handle. 
+When building dynamic handles with attributes that might not always be present, you may encounter issues with notification delivery. If an attribute is missing, the variable renders empty in the notification message, resulting in an invalid handle.
 
 To avoid missed notifications when using dynamic handles with these variables, make sure to add a fallback handle:
 
@@ -681,3 +700,5 @@ https://app.datadoghq.com/services/{{urlencode "service.name"}}
 [7]: /monitors/guide/template-variable-evaluation/
 [8]: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
 [9]: /monitors/types/error_tracking/
+[10]: /service_catalog/service_definitions/
+[11]: https://docs.datadoghq.com/service_catalog/service_definitions/v2-2/#example-yaml
