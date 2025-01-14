@@ -1,4 +1,4 @@
-# cdocs-core
+# cdocs-data
 
 This package contains utilities for handling customizable docs data:
 
