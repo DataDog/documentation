@@ -30904,7 +30904,7 @@ paths:
       x-permission:
         operator: OR
         permissions:
-        - monitors_write
+        - monitors_read
       x-undo:
         type: idempotent
   /api/v1/monitor/{monitor_id}:
@@ -31358,7 +31358,7 @@ paths:
       x-permission:
         operator: OR
         permissions:
-        - monitors_write
+        - monitors_read
       x-undo:
         type: idempotent
   /api/v1/monthly_custom_reports:
