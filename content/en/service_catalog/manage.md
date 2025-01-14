@@ -94,80 +94,73 @@ Click **View Related** and select a page from the dropdown menu to navigate into
 
 ## Add metadata to endpoints
 
-You can add metadata to APIs through the Datadog UI or API, or use automated pipelines through the GitHub integration or Terraform.
+You can add metadata to APIs through the Datadog UI or [API][13], or use automated pipelines through the [GitHub integration][14] or [Terraform][15].
 
 ### Metadata structure and supported versions
 
 API Catalog supports OpenAPI 2 and 3 as the format for defining APIs. 
 
-Datadog supports custom OpenAPI fields to help manage metadata:
-- **API owner**: Add the following to the top level of the OpenAPI file:
-  ```yaml
-  x-datadog:
-   teamHandle: dd-team
-  ```
+Combine [metadata schema v3.0][10] with OpenAPI definitions by setting `kind: api` and specifying the `owner` field:
 
-- **Scope to service**: Add the `service` parameter to the top level of an OpenAPI file to scope the API to a specific service. If you don't define a specific service, Datadog matches all endpoints that fit your definition:
-  ```yaml
-  x-datadog:
-   service: web-store
-  ```
-  The name of the service should be the exact service name as it appears on Datadog traces.
+```yaml
+apiVersion: v3
+kind: api
+metadata:
+  name: API Name
+  description: API Description 
+  displayName: API Name
+  owner: dd-team
+spec:
+  type: openapi
+  interface:
+    definition:
+      info:
+        title: API Name
+      openapi: 3.0.2
+      paths:
+        /api/v2/customers/{id}:
+          get:
+            summary: get customer information
+            operationId: getCustomerInfo
+            tags:
+              - public
+              - important
+            parameters:
+              - in: path
+                name: id
+            responses:
+              '200':
+                description: Successful operation
+                content:
+                  application/vnd.api+json:
+                    schema:
+                      type: object
+                      properties:
+                        data:
+                          type: array
+                          description: Contains customer information
+              '400':
+                description: Invalid arguments
+              '401':
+                description: Unauthorized operation
+              '500':
+                description: Internal server error
+```
 
-Example OpenAPI file:
-
-{{< code-block lang="yaml" disable_copy="true" >}}
-openapi: 3.0.2
-info:
- title: API Name
- description: API Description
- version: 1.0.0
-x-datadog:
- teamHandle: dd-team
- service: web-store
-paths:
- /api/v2/customers/{id}:
-   get:
-     summary: get customer information
-     operationId: getCustomerInfo
-     tags:
-       - public
-       - important
-     parameters:
-       - in: path
-         name: id
-     responses:
-       '200':
-         description: Successful operation
-         content:
-           application/vnd.api+json:
-             schema:
-               type: object
-               properties:
-                 data:
-                   type: array
-                   description: Contains all customer information
-       '400':
-         description: Invalid arguments
-       '401':
-         description: Unauthorized operation
-       '500':
-         description: An internal server error
-{{< /code-block >}}
-
-### Automations for adding metadata
-
-#### Add API metadata from a GitHub repository
+### Import API metadata from GitHub
 
 Use the Datadog GitHub integration to import API definitions and keep them updated. After connecting, the API automatically updates whenever the file content changes in the repository.
 
+{{< img src="tracing/api_catalog/add-metadata.png" alt="Service Catalog modal showing how to add API metadata." style="width:100%;" >}}
+
 To import an OpenAPI or Swagger file using the GitHub integration:
+
 1. Set up the [Datadog GitHub integration][12].
-1. Navigate to the API Catalog in Datadog.
-1. Click on the **Manage** tab, and select **Add API**.
-1. Select **GitHub**.
-1. Choose the repository and the file you want to register.
-1. Select Create.
+1. Navigate to API Catalog.
+1. Select **Setup & Config** > **Create New Entry**.
+1. Select **API** from the **Kind** dropdown.
+1. Select your repository and OpenAPI/Swagger file.
+1. Click **Save Entry**.
 
 {{< img src="tracing/api_catalog/api-catalog-create-from-github2.png" alt="API Catalog modal showing how to create a new API from GitHub" style="width:100%;" >}}
 
@@ -187,3 +180,6 @@ To import an OpenAPI or Swagger file using the GitHub integration:
 [10]: /service_catalog/service_definitions/v3-0/
 [11]: https://app.datadoghq.com/apis/catalog
 [12]: /tracing/service_catalog/
+[13]: /api/latest/software-catalog/#create-or-update-entities
+[14]: /service_catalog/service_definitions/#store-and-edit-definitions-in-github
+[15]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/software_catalog
