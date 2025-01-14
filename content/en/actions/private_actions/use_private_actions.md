@@ -1,6 +1,9 @@
 ---
 title: Use Private Actions
 disable_toc: false
+aliases:
+- service_management/workflows/private_actions/use_private_actions
+- service_management/app_builder/private_actions/use_private_actions
 further_reading:
 - link: "service_management/app_builder/connections"
   tag: "Documentation"
@@ -8,15 +11,12 @@ further_reading:
 - link: "service_management/workflows/connections"
   tag: "Documentation"
   text: "Workflow Connections"
-- link: "service_management/workflows/private_actions/"
+- link: "actions/private_actions/"
   tag: "Documentation"
   text: "Private Actions Overview"
-- link: "service_management/workflows/private_actions/private_action_credentials"
+- link: "actions/private_actions/private_action_credentials"
   tag: "Documentation"
-  text: "Handling Private Action Credentials for Workflow Automation"
-- link: "service_management/app_builder/private_actions/private_action_credentials"
-  tag: "Documentation"
-  text: "Handling Private Action Credentials for App Builder"
+  text: "Handling Private Action Credentials"
 ---
 
 {{< callout url="https://www.datadoghq.com/product-preview/private-actions/" btn_hidden="false" header="Join the Preview!">}}
@@ -195,9 +195,7 @@ To pair a runner to a connection:
 1. From the [Workflow Automation][8] or [App Builder][9] Connections page, click **New Connection**.
 1. Select the integration you want to connect with your private action runner. For a list of integrations that support private actions, see [Supported private actions](#supported-private-actions).
 1. Add a **Connection Name** and select your runner from the **Private Action Runner** dropdown.
-1. Add the paths to any required credential files. For more information on credentials, see:
-   - [Handling Private Action Credentials for Workflows][10].
-   - [Handling Private Action Credentials for App Builder][16].
+1. Add the paths to any required credential files. For more information on credentials, see [Handling Private Action Credentials][10].
 
 ## Use a private action
 
@@ -417,11 +415,10 @@ To edit the allowlist for a Private Action Runner:
 [7]: https://app.datadoghq.com/app-builder/private-action-runners
 [8]: https://app.datadoghq.com/workflow/connections
 [9]: https://app.datadoghq.com/app-builder/connections
-[10]: /service_management/workflows/private_actions/private_action_credentials
+[10]: /actions/private_actions/private_action_credentials
 [11]: https://app.datadoghq.com/workflow/
 [12]: https://app.datadoghq.com/app-builder/
 [13]: /service_management/workflows/build
 [14]: /service_management/app_builder/build
 [15]: /service_management/workflows/build/#build-a-workflow-with-the-workflow-builder
-[16]: /service_management/app_builder/private_actions/private_action_credentials
-[17]: /service_management/workflows/private_actions/
+[17]: /actions/private_actions/
