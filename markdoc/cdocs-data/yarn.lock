@@ -874,9 +874,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cdocs-core@workspace:.":
+"cdocs-data@workspace:.":
   version: 0.0.0-use.local
-  resolution: "cdocs-core@workspace:."
+  resolution: "cdocs-data@workspace:."
   dependencies:
     "@types/js-yaml": ^4.0.9
     "@types/node": ^20.11.30

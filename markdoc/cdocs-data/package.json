@@ -1,7 +1,7 @@
 {
-  "name": "cdocs-core",
+  "name": "cdocs-data",
   "version": "1.0.0",
-  "description": "Types and utilities for configuring, validating, and building customizable documentation",
+  "description": "Utilities for working with customizable docs data",
   "main": "dist/index.js",
   "scripts": {
     "test": "yarn build; vitest run --coverage --reporter=verbose",

@@ -1,6 +1,9 @@
 # cdocs-core
 
-Utilities for ingesting, validating, and mutating configuration data for customizable docs.
+This package contains utilities for handling customizable docs data:
+
+- loading and validating configuration data
+- creating and mutating runtime data
 
 ## What is a customizable doc?
 
@@ -64,6 +67,8 @@ product_two_db_options:
   - id: postgres
   - id: sqlite3
 ```
+
+Option groups do not define any new options.
 
 ## Page configuration
 
