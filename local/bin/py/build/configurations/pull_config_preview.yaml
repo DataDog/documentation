@@ -362,23 +362,6 @@
                 tag: "Documentation"
                 text: "Learn about the Testing Tunnel"
 
-      - repo_name: datadog-static-analyzer-circleci-orb
-        contents:
-        - action: pull-and-push-file
-          branch: main
-          globs:
-          - 'README.md'
-          options:
-            dest_path: '/security/code_security/static_analysis/'
-            file_name: 'circleci_orbs.md'
-            front_matters:
-              dependencies: ["https://github.com/DataDog/datadog-static-analyzer-circleci-orb/blob/main/README.md"]
-              title: Static Analysis and CircleCI Orbs
-              description: Use Datadog and CircleCI to run Static Analysis jobs in a CI pipeline.
-              aliases:
-              - /continuous_integration/static_analysis/circleci_orbs
-              - /static_analysis/circleci_orbs
-
       - repo_name: datadog-static-analyzer-github-action
         contents:
         - action: pull-and-push-file
@@ -386,7 +369,7 @@
           globs:
           - 'README.md'
           options:
-            dest_path: '/security/code_security/static_analysis/'
+            dest_path: '/security/code_security/static_analysis/circleci_orbs/'
             file_name: 'github_actions.md'
             front_matters:
               dependencies: ["https://github.com/DataDog/datadog-static-analyzer-github-action/blob/main/README.md"]
