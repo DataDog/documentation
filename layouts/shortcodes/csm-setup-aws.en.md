@@ -1,6 +1,6 @@
 ### Set up the Datadog AWS integration
 
-If you haven't already, set up the [Amazon Web Services integration][1]. You must also add the [required permissions][2] for resource collection.
+If you haven't already, set up the [Amazon Web Services integration][1]. You must also [enable resource collection][2] by attaching the AWS-managed SecurityAudit Policy to the Datadog IAM role in your AWS account.
 
 ### Enable CSM for your AWS accounts
 
@@ -12,7 +12,7 @@ If you haven't already, set up the [Amazon Web Services integration][1]. You mus
 1. Click **Done**.
 
 [1]: https://docs.datadoghq.com/integrations/amazon_web_services/
-[2]: /integrations/amazon_web_services/?tab=roledelegation#cloud-security-management-misconfigurations
+[2]: /integrations/amazon_web_services/?tab=roledelegation#cloud-security-management
 [3]: https://app.datadoghq.com/security/configuration/csm/setup
 [4]: https://app.datadoghq.com/integrations/amazon-web-services
 [5]: /security/cloud_security_management/guide/resource_evaluation_filters
