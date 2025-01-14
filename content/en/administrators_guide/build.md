@@ -11,6 +11,12 @@ After you plan your Datadog installation design and best practices, concentrate 
 
 As your IT footprint grows, you need to establish standards for software installation and usage. To do this, it's important to develop precise, repeatable steps for reliably configuring software while maintaining the flexibility you need. This section explains how Datadog can efficiently integrate with these standards.
 
+Apache
+{{< semantic resource="apache.csv" >}}
+
+Podman
+{{< semantic resource="podman.csv">}}
+
 ## Iterating on your environment
 
 In the [plan][7] section, you explored a range of topics within a Datadog design specification. Ideally, every one of those questions would be fully researched and answered before executing a large rollout. However, enterprise IT engineering often requires you to pause and adapt as you build out your installation.

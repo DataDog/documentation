@@ -133,7 +133,7 @@ config:
 
 # Automatically download the latest module from websites-sources repo
 update_websites_sources_module:
-	node_modules/hugo-bin/vendor/hugo mod get github.com/DataDog/websites-sources@main
+	node_modules/hugo-bin/vendor/hugo mod get github.com/DataDog/websites-sources@auto-build-preview-2af686c5
 	node_modules/hugo-bin/vendor/hugo mod clean
 	node_modules/hugo-bin/vendor/hugo mod tidy
 	cat go.mod
