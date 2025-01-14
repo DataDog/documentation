@@ -7,6 +7,12 @@ further_reading:
 - link: "/logs/guide/reduce_data_transfer_fees"
   tag: "Guide"
   text: "How to send logs to Datadog while reducing data transfer fees"
+- link: "/logs/guide/reduce_data_transfer_fees"
+  tag: "Guide"
+  text: "How to send logs to Datadog while reducing data transfer fees"
+- link: "https://github.com/Azure-Samples/terraform-azure-datadog-log-forwarder"
+  tag: "External Site"
+  text: "Terraform Azure Datadog Log Forwarder"
 ---
 
 ## Overview
