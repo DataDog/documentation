@@ -6851,16 +6851,11 @@ menu:
       parent: rum_mobile_unity
       identifier: rum_mobile_unity_mobile_vitals
       weight: 105
-    - name: Web View Tracking
-      url: real_user_monitoring/mobile_and_tv_monitoring/unity/web_view_tracking
-      parent: rum_mobile_unity
-      identifier: rum_mobile_unity_web_view_tracking
-      weight: 106
     - name: Troubleshooting
       url: real_user_monitoring/mobile_and_tv_monitoring/unity/troubleshooting
       parent: rum_mobile_unity
       identifier: rum_mobile_unity_troubleshooting
-      weight: 107
+      weight: 106
     - name: Platform
       identifier: real_user_monitoring_platform
       url: real_user_monitoring/platform
