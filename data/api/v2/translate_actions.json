@@ -1,4 +1,8 @@
 {
+  "ListAwsScanOptions": {
+    "description": "Fetches the scan options configured for AWS accounts.",
+    "summary": "Get AWS Scan Options"
+  },
   "ListAPIKeys": {
     "description": "List all API keys available for your account.",
     "summary": "Get all API keys"
@@ -1042,7 +1046,7 @@
     "request_schema_description": "Wrapper object for a single bulk tag configuration request."
   },
   "ListActiveMetricConfigurations": {
-    "description": "List tags and aggregations that are actively queried on dashboards, notebooks, monitors, and the Metrics Explorer for a given metric name.",
+    "description": "List tags and aggregations that are actively queried on dashboards, notebooks, monitors, the Metrics Explorer, and using the API for a given metric name.",
     "summary": "List active tags and aggregations"
   },
   "ListTagsByMetricName": {

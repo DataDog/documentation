@@ -6064,7 +6064,7 @@ components:
       - name
       type: object
     LogsPipelineList:
-      description: Array of pipeline ID strings.
+      description: Array of all log pipeline objects configured for the organization.
       items:
         $ref: '#/components/schemas/LogsPipeline'
       type: array
@@ -20506,7 +20506,7 @@ components:
           type: integer
         profiling_host_top99p:
           description: Shows the 99th percentile of all profiled hosts over all hours
-            in the current date for all organizations.
+            within the current date for all organizations.
           format: int64
           type: integer
         rum_browser_and_mobile_session_count:
@@ -20595,8 +20595,23 @@ components:
           type: integer
         rum_mobile_lite_session_count_roku_sum:
           description: Shows the sum of all mobile RUM lite sessions on Roku over
-            all hours in the current date for all organizations (To be introduced
+            all hours within the current date for all organizations (To be introduced
             on October 1st, 2024).
+          format: int64
+          type: integer
+        rum_mobile_replay_session_count_android_sum:
+          description: Shows the sum of all mobile RUM replay sessions on Android
+            over all hours within the current date for the given org.
+          format: int64
+          type: integer
+        rum_mobile_replay_session_count_ios_sum:
+          description: Shows the sum of all mobile RUM replay sessions on iOS over
+            all hours within the current date for the given org.
+          format: int64
+          type: integer
+        rum_mobile_replay_session_count_reactnative_sum:
+          description: Shows the sum of all mobile RUM replay sessions on React Native
+            over all hours within the current date for the given org.
           format: int64
           type: integer
         rum_replay_session_count_sum:
@@ -21359,7 +21374,7 @@ components:
           type: integer
         profiling_host_top99p:
           description: Shows the 99th percentile of all profiled hosts over all hours
-            in the current date for the given org.
+            within the current date for the given org.
           format: int64
           type: integer
         public_id:
@@ -21456,6 +21471,21 @@ components:
           description: Shows the sum of all mobile RUM lite sessions on Roku over
             all hours in the current date for the given org (To be introduced on October
             1st, 2024).
+          format: int64
+          type: integer
+        rum_mobile_replay_session_count_android_sum:
+          description: Shows the sum of all mobile RUM replay sessions on Android
+            over all hours within the current date for the given org.
+          format: int64
+          type: integer
+        rum_mobile_replay_session_count_ios_sum:
+          description: Shows the sum of all mobile RUM replay sessions on iOS over
+            all hours within the current date for the given org.
+          format: int64
+          type: integer
+        rum_mobile_replay_session_count_reactnative_sum:
+          description: Shows the sum of all mobile RUM replay sessions on React Native
+            over all hours within the current date for the given org.
           format: int64
           type: integer
         rum_replay_session_count_sum:
@@ -22346,8 +22376,23 @@ components:
           type: integer
         rum_mobile_lite_session_count_roku_agg_sum:
           description: Shows the sum of all mobile RUM lite sessions on Roku over
-            all hours in the current month for all organizations (To be introduced
+            all hours within the current month for all organizations (To be introduced
             on October 1st, 2024).
+          format: int64
+          type: integer
+        rum_mobile_replay_session_count_android_agg_sum:
+          description: Shows the sum of all mobile RUM replay sessions on Android
+            over all hours within the current month for all organizations.
+          format: int64
+          type: integer
+        rum_mobile_replay_session_count_ios_agg_sum:
+          description: Shows the sum of all mobile RUM replay sessions on iOS over
+            all hours within the current month for all organizations.
+          format: int64
+          type: integer
+        rum_mobile_replay_session_count_reactnative_agg_sum:
+          description: Shows the sum of all mobile RUM replay sessions on React Native
+            over all hours within the current month for all organizations.
           format: int64
           type: integer
         rum_replay_session_count_agg_sum:
@@ -29985,7 +30030,7 @@ paths:
         type: idempotent
   /api/v1/monitor:
     get:
-      description: Get details about the specified monitor from your organization.
+      description: Get all monitors from your organization.
       operationId: ListMonitors
       parameters:
       - description: 'When specified, shows additional information about the group
@@ -30068,6 +30113,7 @@ paths:
           content:
             application/json:
               schema:
+                description: An array of monitor objects.
                 items:
                   $ref: '#/components/schemas/Monitor'
                 type: array
@@ -30091,7 +30137,7 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - monitors_read
-      summary: Get all monitor details
+      summary: Get all monitors
       tags:
       - Monitors
       x-menu-order: 2
@@ -38762,10 +38808,17 @@ tags:
     for more information.
   name: Embeddable Graphs
 - description: 'The Event Management API allows you to programmatically post events
-    to the Events Explorer
+    to the Events Explorer and fetch events from the Events Explorer. See the [Event
+    Management page](https://docs.datadoghq.com/service_management/events/) for more
+    information.
 
-    and fetch events from the Events Explorer. See the [Event Management page](https://docs.datadoghq.com/service_management/events/)
-    for more information.'
+
+    **Update to Datadog monitor events `aggregation_key` starting March 1, 2025:**
+    The Datadog monitor events `aggregation_key` is unique to each Monitor ID. Starting
+    March 1st, this key will also include Monitor Group, making it unique per *Monitor
+    ID and Monitor Group*. If you''re using monitor events `aggregation_key` in dashboard
+    queries or the Event API, you must migrate to use `@monitor.id`. Reach out to
+    [support](https://www.datadoghq.com/support/) if you have any question.'
   name: Events
 - description: 'Configure your Datadog-Google Cloud Platform (GCP) integration directly
 
