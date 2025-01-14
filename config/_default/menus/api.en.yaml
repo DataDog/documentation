@@ -4540,6 +4540,58 @@ menu:
           - ListApmRetentionFilters
         unstable: []
         order: 1
+    - name: Action Connection
+      url: /api/latest/action-connection/
+      identifier: action-connection
+      generated: true
+    - name: Update an existing Action Connection
+      url: '#update-an-existing-action-connection'
+      identifier: action-connection-update-an-existing-action-connection
+      parent: action-connection
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateActionConnection
+        unstable: []
+        order: 3
+    - name: Get an existing Action Connection
+      url: '#get-an-existing-action-connection'
+      identifier: action-connection-get-an-existing-action-connection
+      parent: action-connection
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetActionConnection
+        unstable: []
+        order: 1
+    - name: Delete an existing Action Connection
+      url: '#delete-an-existing-action-connection'
+      identifier: action-connection-delete-an-existing-action-connection
+      parent: action-connection
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteActionConnection
+        unstable: []
+        order: 4
+    - name: Create a new Action Connection
+      url: '#create-a-new-action-connection'
+      identifier: action-connection-create-a-new-action-connection
+      parent: action-connection
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateActionConnection
+        unstable: []
+        order: 2
     - name: Agentless Scanning
       url: /api/latest/agentless-scanning/
       identifier: agentless-scanning
