@@ -24,15 +24,15 @@ In your [Synthetic browser test][3] click **Create a Local Variable** to add the
 
 Add an Email Address variable within a synthetic test to generate a unique email address for that synthetic test run.
 
-Note: If you want to use a static email address this can be done by adding it as a [global variable][4] and inserting it in your test.
+{{< img src="synthetics/guide/otp-from-email-body/email_variable.png" alt="Add the email variable" style="width:100%;" >}}
+
+Note: If you want to use a static email address instead this can be done by adding it as a [global variable][4] and inserting it in your test.
 
 ### Inject the email address variable
 
-The user can add a step to input the email within their application and the previously created variable can be added ---
+You can now add a step to imitate how a user would input their email address within your application. The Email Address variable can be injected into an input field to imitate this step.
 
-A step will need to be recorded to imitate how a user would input their email address within your application. The Email Address variable can be injected into an input field to imitate this step.
-
-{{< img src="synthetics/guide/http-tests-with-hmac/test_with_hmac_authentication.png" alt="HTTP test with HMAC authentication" style="width:100%;" >}}
+{{< img src="synthetics/guide/otp-from-email-body/email_address_variable.png" alt="Inject the email variable" style="width:100%;" >}}
 
 The synthetic test can then access the email body to be used in the rest of the sign-up flow.
 
@@ -40,9 +40,9 @@ The synthetic test can then access the email body to be used in the rest of the 
 
 Under `Add a variable`, select `from Email body`. In this example, the variable is named `OTP_FROM_EMAIL` for later reference within the test. You can then define a test step to extract the relevant information from the email body once it has been sent. 
 
-{{< img src="synthetics/guide/http-tests-with-hmac/test_with_hmac_authentication.png" alt="HTTP test with HMAC authentication" style="width:100%;" >}}
+{{< img src="synthetics/guide/otp-from-email-body/otp_from_email.png" alt="OTP variable as used in the email body step" style="width:100%;" >}}
 
-For example, the following regex can be used to parse out a 6-digit code from the email body.
+Here are some examples of regex that can be used to parse the otp code from the email body:
 
 | **Type**                           | **Example**                                  | **Regex Rule**                           |
 |:-----------------------------------|:---------------------------------------------|:-----------------------------------------|
@@ -55,7 +55,7 @@ For example, the following regex can be used to parse out a 6-digit code from th
 
 A [JavaScript assertion][5] step can be added to input the OTP within your application. (fix tone)
 
-{{< img src="synthetics/guide/http-tests-with-hmac/test_with_hmac_authentication.png" alt="HTTP test with HMAC authentication" style="width:100%;" >}}
+{{< img src="synthetics/guide/otp-from-email-body/js_assertion.png" alt="Javascript assertion" style="width:100%;" >}}
 
 JavaScript lets you trigger an event on a DOM element programmatically, making it possible to mimic user interactions or other events. Depending on how your input element is built, dispatching an event may be required to enable custom behaviors or testing event listeners tied to the element.
 
@@ -80,6 +80,8 @@ function (vars) {
 }
 {{< /code-block >}}
 
+{{< img src="synthetics/guide/otp-from-email-body/bubble_otp.png" alt="example of an otp with individual numerical fields" style="width:100%;" >}}
+
 ### Continue testing the rest of your application flow
 
 Once the OTP is inserted and verified, continue recording the appropriate steps to assert that the user has completed the sign-up flow of your application. An example would be asserting that specific text is present on the page.
@@ -93,8 +95,3 @@ Once the OTP is inserted and verified, continue recording the appropriate steps 
 [3]: https://app.datadoghq.com/synthetics/create
 [4]: /synthetics/settings/?tab=specifyvalue#global-variables
 [5]: /synthetics/browser_tests/actions/?tab=testanelementontheactivepage#javascript
-[6]: /
-
-captcha - 
-local variable
-- 
