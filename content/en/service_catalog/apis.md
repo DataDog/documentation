@@ -1,9 +1,11 @@
 ---
-title: Service Catalog APIs
+title: Service Catalog API Definitions
 aliases:
   - /tracing/faq/service_definition_api/
   - /tracing/service_catalog/service_definition_api
   - /service_catalog/service_definition_api
+  - /tracing/api_catalog/api_catalog_api/
+  - /api_catalog/api_catalog_api
 further_reading:
 - link: "/tracing/service_catalog/"
   tag: "Documentation"
@@ -27,7 +29,13 @@ algolia:
   tags: ['service definition']
 ---
 
-## Overview
+This page outlines Datadog's API reference documentation for each schema version.
+
+## v3.0 and later
+
+To create, get, and delete definitions for all entity types like endpoints, systems, datastores, and queues, see the [Software Catalog API reference][3].
+
+## v2.2 and earlier
 
 - To create, get, and delete service definitions, see the [Service Definitions API reference][1].
 - To create, get, and delete definitions for new component types like systems, datastores, and queues, see the [Software Catalog API reference][3].

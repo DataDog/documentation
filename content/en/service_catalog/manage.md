@@ -5,6 +5,8 @@ aliases:
   - /service_catalog/investigating/
   - /tracing/service_catalog/guides/understanding-service-configuration
   - /service_catalog/guides/understanding-service-configuration/
+  - /api_catalog/add_metadata
+  - /api_catalog/owners_and_tags
 further_reading:
 - link: "/tracing/service_catalog/service_definition_api/"
   tag: "Documentation"
@@ -33,6 +35,7 @@ algolia:
 `Service` is the only component type in Service Catalog schema versions v2, v2.1, and v2.2. [v3.0][10] and above supports multiple kinds of components, including `kind:system`, `kind:service`, `kind:queue`, `kind:api`, and `kind:datastore`.
 
 ## Assigning an owner 
+
 You can assign a `team` to entries in the Service Catalog either in the UI or by creating a [Service Definition][4]. Datadog recommends that you set up [Datadog Teams][5] so that you can specify individual members of the team and take advantage of *Teams* filters across common views like Dashboards and Notebook lists. 
 
 ## Determining and communicating criticality 
@@ -89,6 +92,78 @@ Click a service in Service Catalog to open the side panel with the following det
 
 Click **View Related** and select a page from the dropdown menu to navigate into related pages in Datadog, such as the [APM Service Page][6] and service map for this service, or related telemetry data pages, such as for distributed tracing, infrastructure, network performance, Log Management, RUM, and Continuous Profiler.
 
+## Add metadata to endpoints
+
+You can add metadata to APIs through the Datadog UI or [API][13], or use automated pipelines through the [GitHub integration][14] or [Terraform][15].
+
+### Metadata structure and supported versions
+
+API Catalog supports OpenAPI 2 and 3 as the format for defining APIs. 
+
+Combine [metadata schema v3.0][10] with OpenAPI definitions by setting `kind: api` and specifying the `owner` field:
+
+```yaml
+apiVersion: v3
+kind: api
+metadata:
+  name: API Name
+  description: API Description 
+  displayName: API Name
+  owner: dd-team
+spec:
+  type: openapi
+  interface:
+    definition:
+      info:
+        title: API Name
+      openapi: 3.0.2
+      paths:
+        /api/v2/customers/{id}:
+          get:
+            summary: get customer information
+            operationId: getCustomerInfo
+            tags:
+              - public
+              - important
+            parameters:
+              - in: path
+                name: id
+            responses:
+              '200':
+                description: Successful operation
+                content:
+                  application/vnd.api+json:
+                    schema:
+                      type: object
+                      properties:
+                        data:
+                          type: array
+                          description: Contains customer information
+              '400':
+                description: Invalid arguments
+              '401':
+                description: Unauthorized operation
+              '500':
+                description: Internal server error
+```
+
+### Import API metadata from GitHub
+
+Use the Datadog GitHub integration to import API definitions and keep them updated. After connecting, the API automatically updates whenever the file content changes in the repository.
+
+{{< img src="tracing/api_catalog/add-metadata.png" alt="Service Catalog modal showing how to add API metadata." style="width:100%;" >}}
+
+To import an OpenAPI or Swagger file using the GitHub integration:
+
+1. Set up the [Datadog GitHub integration][12].
+1. Navigate to API Catalog.
+1. Select **Setup & Config** > **Create New Entry**.
+1. Select **API** from the **Kind** dropdown.
+1. Select your repository and OpenAPI/Swagger file.
+1. Click **Save Entry**.
+
+{{< img src="tracing/api_catalog/api-catalog-create-from-github2.png" alt="API Catalog modal showing how to create a new API from GitHub" style="width:100%;" >}}
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -103,3 +178,8 @@ Click **View Related** and select a page from the dropdown menu to navigate into
 [8]: /tracing/services/service_page/
 [9]: /tracing/service_catalog/service_definition_api/
 [10]: /service_catalog/service_definitions/v3-0/
+[11]: https://app.datadoghq.com/apis/catalog
+[12]: /tracing/service_catalog/
+[13]: /api/latest/software-catalog/#create-or-update-entities
+[14]: /service_catalog/service_definitions/#store-and-edit-definitions-in-github
+[15]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/software_catalog
