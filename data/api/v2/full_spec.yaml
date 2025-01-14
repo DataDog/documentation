@@ -309,6 +309,20 @@ components:
       required: false
       schema:
         $ref: '#/components/schemas/RelationType'
+    FrameworkHandle:
+      description: The framework handle
+      in: path
+      name: handle
+      required: true
+      schema:
+        type: string
+    FrameworkVersion:
+      description: The framework version
+      in: path
+      name: version
+      required: true
+      schema:
+        type: string
     GCPSTSServiceAccountID:
       description: Your GCP STS enabled service account's unique ID.
       in: path
@@ -6832,6 +6846,10 @@ components:
       type: string
       x-enum-varnames:
       - COST_BY_ORG
+    CreateCustomFrameworkRequest:
+      $ref: '#/components/schemas/FrameworkData'
+      description: Create a custom framework.
+      type: object
     CreateOpenAPIResponse:
       description: Response for `CreateOpenAPI` operation.
       properties:
@@ -11333,6 +11351,72 @@ components:
           type: integer
         order:
           $ref: '#/components/schemas/QuerySortOrder'
+      type: object
+    FrameworkControl:
+      description: Framework Control.
+      properties:
+        name:
+          description: Control Name.
+          example: ''
+          type: string
+        rule_ids:
+          description: Rule IDs.
+          example:
+          - ''
+          items:
+            type: string
+          type: array
+      required:
+      - name
+      - rule_ids
+      type: object
+    FrameworkData:
+      description: Framework Data.
+      properties:
+        description:
+          description: Framework Description
+          type: string
+        handle:
+          description: Framework Handle
+          example: ''
+          type: string
+        icon_url:
+          description: Framework Icon URL
+          type: string
+        name:
+          description: Framework Name
+          example: ''
+          type: string
+        requirements:
+          description: Framework Requirements
+          items:
+            $ref: '#/components/schemas/FrameworkRequirement'
+          type: array
+        version:
+          description: Framework Version
+          example: ''
+          type: string
+      required:
+      - handle
+      - version
+      - name
+      - requirements
+      type: object
+    FrameworkRequirement:
+      description: Framework Requirement.
+      properties:
+        controls:
+          description: Requirement Controls.
+          items:
+            $ref: '#/components/schemas/FrameworkControl'
+          type: array
+        name:
+          description: Requirement Name.
+          example: ''
+          type: string
+      required:
+      - name
+      - controls
       type: object
     FullAPIKey:
       description: Datadog API key.
@@ -28388,6 +28472,10 @@ components:
           example: min
           type: string
       type: object
+    UpdateCustomFrameworkRequest:
+      $ref: '#/components/schemas/FrameworkData'
+      description: Update a custom framework.
+      type: object
     UpdateOpenAPIResponse:
       description: Response for `UpdateOpenAPI`.
       properties:
@@ -32363,6 +32451,83 @@ paths:
         - ci_visibility_read
       x-undo:
         type: safe
+  /api/v2/cloud_security_management/custom_frameworks:
+    post:
+      description: Create a custom framework.
+      operationId: CreateCustomFramework
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateCustomFrameworkRequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+        '500':
+          $ref: '#/components/responses/BadRequestResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_rules_read
+        - security_monitoring_rules_write
+      summary: Create a custom framework
+      tags:
+      - Security Monitoring
+      x-codegen-request-body-name: body
+      x-menu-order: 4
+      x-permission:
+        operator: AND
+        permissions:
+        - security_monitoring_rules_read
+        - security_monitoring_rules_write
+      x-undo:
+        type: idempotent
+  /api/v2/cloud_security_management/custom_frameworks/{handle}/{version}:
+    put:
+      description: Update a custom framework.
+      operationId: UpdateCustomFramework
+      parameters:
+      - $ref: '#/components/parameters/FrameworkHandle'
+      - $ref: '#/components/parameters/FrameworkVersion'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateCustomFrameworkRequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+        '500':
+          $ref: '#/components/responses/BadRequestResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_rules_read
+        - security_monitoring_rules_write
+      summary: Update a custom framework
+      tags:
+      - Security Monitoring
+      x-codegen-request-body-name: body
+      x-menu-order: 4
+      x-permission:
+        operator: AND
+        permissions:
+        - security_monitoring_rules_read
+        - security_monitoring_rules_write
+      x-undo:
+        type: idempotent
   /api/v2/container_images:
     get:
       description: Get all Container Images for your organization.
