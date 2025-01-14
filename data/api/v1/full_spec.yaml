@@ -1209,13 +1209,8 @@ components:
         reflow_type:
           $ref: '#/components/schemas/DashboardReflowType'
         restricted_roles:
-          deprecated: true
-          description: 'A list of role identifiers. Only the author and users associated
+          description: A list of role identifiers. Only the author and users associated
             with at least one of these roles can edit this dashboard.
-
-
-            This property is deprecated; please use the [Restriction Policies API](https://docs.datadoghq.com/api/latest/restriction-policies/)
-            instead to manage write authorization for individual dashboards.'
           items:
             description: A role UUID.
             type: string
@@ -6069,7 +6064,7 @@ components:
       - name
       type: object
     LogsPipelineList:
-      description: Array of pipeline ID strings.
+      description: Array of all log pipeline objects configured for the organization.
       items:
         $ref: '#/components/schemas/LogsPipeline'
       type: array
@@ -20206,6 +20201,73 @@ components:
             over all hours in the current date for all organizations.
           format: int64
           type: integer
+        eph_infra_host_agent_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts with the
+            Datadog Agent over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        eph_infra_host_alibaba_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts on Alibaba
+            over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        eph_infra_host_aws_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts on AWS
+            over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        eph_infra_host_azure_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts on Azure
+            over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        eph_infra_host_ent_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts for Enterprise
+            over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        eph_infra_host_gcp_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts on GCP
+            over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        eph_infra_host_heroku_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts on Heroku
+            over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        eph_infra_host_only_aas_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts with only
+            Azure App Services over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        eph_infra_host_only_vsphere_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts with only
+            vSphere over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        eph_infra_host_opentelemetry_apm_sum:
+          description: Shows the sum of all ephemeral APM hosts reported by the Datadog
+            exporter for the OpenTelemetry Collector over all hours in the current
+            date for the given org.
+          format: int64
+          type: integer
+        eph_infra_host_opentelemetry_sum:
+          description: Shows the sum of all ephemeral hosts reported by the Datadog
+            exporter for the OpenTelemetry Collector over all hours in the current
+            date for the given org.
+          format: int64
+          type: integer
+        eph_infra_host_pro_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts for Pro
+            over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        eph_infra_host_proplus_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts for Pro
+            Plus over all hours in the current date for the given org.
+          format: int64
+          type: integer
         error_tracking_error_events_sum:
           description: Shows the sum of all Error Tracking error events over all hours
             in the current date for the given org.
@@ -20444,7 +20506,7 @@ components:
           type: integer
         profiling_host_top99p:
           description: Shows the 99th percentile of all profiled hosts over all hours
-            in the current date for all organizations.
+            within the current date for all organizations.
           format: int64
           type: integer
         rum_browser_and_mobile_session_count:
@@ -20533,8 +20595,23 @@ components:
           type: integer
         rum_mobile_lite_session_count_roku_sum:
           description: Shows the sum of all mobile RUM lite sessions on Roku over
-            all hours in the current date for all organizations (To be introduced
+            all hours within the current date for all organizations (To be introduced
             on October 1st, 2024).
+          format: int64
+          type: integer
+        rum_mobile_replay_session_count_android_sum:
+          description: Shows the sum of all mobile RUM replay sessions on Android
+            over all hours within the current date for the given org.
+          format: int64
+          type: integer
+        rum_mobile_replay_session_count_ios_sum:
+          description: Shows the sum of all mobile RUM replay sessions on iOS over
+            all hours within the current date for the given org.
+          format: int64
+          type: integer
+        rum_mobile_replay_session_count_reactnative_sum:
+          description: Shows the sum of all mobile RUM replay sessions on React Native
+            over all hours within the current date for the given org.
           format: int64
           type: integer
         rum_replay_session_count_sum:
@@ -20994,6 +21071,73 @@ components:
             queries over all hours in the current month for the given org.
           format: int64
           type: integer
+        eph_infra_host_agent_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts with the
+            Datadog Agent over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        eph_infra_host_alibaba_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts on Alibaba
+            over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        eph_infra_host_aws_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts on AWS
+            over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        eph_infra_host_azure_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts on Azure
+            over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        eph_infra_host_ent_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts for Enterprise
+            over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        eph_infra_host_gcp_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts on GCP
+            over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        eph_infra_host_heroku_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts on Heroku
+            over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        eph_infra_host_only_aas_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts with only
+            Azure App Services over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        eph_infra_host_only_vsphere_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts with only
+            vSphere over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        eph_infra_host_opentelemetry_apm_sum:
+          description: Shows the sum of all ephemeral APM hosts reported by the Datadog
+            exporter for the OpenTelemetry Collector over all hours in the current
+            date for the given org.
+          format: int64
+          type: integer
+        eph_infra_host_opentelemetry_sum:
+          description: Shows the sum of all ephemeral hosts reported by the Datadog
+            exporter for the OpenTelemetry Collector over all hours in the current
+            date for the given org.
+          format: int64
+          type: integer
+        eph_infra_host_pro_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts for Pro
+            over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        eph_infra_host_proplus_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts for Pro
+            Plus over all hours in the current date for the given org.
+          format: int64
+          type: integer
         error_tracking_error_events_sum:
           description: Shows the sum of all Error Tracking error events over all hours
             in the current date for the given org.
@@ -21230,7 +21374,7 @@ components:
           type: integer
         profiling_host_top99p:
           description: Shows the 99th percentile of all profiled hosts over all hours
-            in the current date for the given org.
+            within the current date for the given org.
           format: int64
           type: integer
         public_id:
@@ -21327,6 +21471,21 @@ components:
           description: Shows the sum of all mobile RUM lite sessions on Roku over
             all hours in the current date for the given org (To be introduced on October
             1st, 2024).
+          format: int64
+          type: integer
+        rum_mobile_replay_session_count_android_sum:
+          description: Shows the sum of all mobile RUM replay sessions on Android
+            over all hours within the current date for the given org.
+          format: int64
+          type: integer
+        rum_mobile_replay_session_count_ios_sum:
+          description: Shows the sum of all mobile RUM replay sessions on iOS over
+            all hours within the current date for the given org.
+          format: int64
+          type: integer
+        rum_mobile_replay_session_count_reactnative_sum:
+          description: Shows the sum of all mobile RUM replay sessions on React Native
+            over all hours within the current date for the given org.
           format: int64
           type: integer
         rum_replay_session_count_sum:
@@ -21788,6 +21947,73 @@ components:
           description: Shows the last date of usage in the current month for all organizations.
           format: date-time
           type: string
+        eph_infra_host_agent_agg_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts with the
+            Datadog Agent over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        eph_infra_host_alibaba_agg_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts on Alibaba
+            over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        eph_infra_host_aws_agg_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts on AWS
+            over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        eph_infra_host_azure_agg_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts on Azure
+            over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        eph_infra_host_ent_agg_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts for Enterprise
+            over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        eph_infra_host_gcp_agg_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts on GCP
+            over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        eph_infra_host_heroku_agg_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts on Heroku
+            over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        eph_infra_host_only_aas_agg_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts with only
+            Azure App Services over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        eph_infra_host_only_vsphere_agg_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts with only
+            vSphere over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        eph_infra_host_opentelemetry_agg_sum:
+          description: Shows the sum of all ephemeral hosts reported by the Datadog
+            exporter for the OpenTelemetry Collector over all hours in the current
+            month for all organizations.
+          format: int64
+          type: integer
+        eph_infra_host_opentelemetry_apm_agg_sum:
+          description: Shows the sum of all ephemeral APM hosts reported by the Datadog
+            exporter for the OpenTelemetry Collector over all hours in the current
+            month for all organizations.
+          format: int64
+          type: integer
+        eph_infra_host_pro_agg_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts for Pro
+            over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        eph_infra_host_proplus_agg_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts for Pro
+            Plus over all hours in the current month for all organizations.
+          format: int64
+          type: integer
         error_tracking_error_events_agg_sum:
           description: Shows the sum of all Error Tracking error events over all hours
             in the current month for all organizations.
@@ -22150,8 +22376,23 @@ components:
           type: integer
         rum_mobile_lite_session_count_roku_agg_sum:
           description: Shows the sum of all mobile RUM lite sessions on Roku over
-            all hours in the current month for all organizations (To be introduced
+            all hours within the current month for all organizations (To be introduced
             on October 1st, 2024).
+          format: int64
+          type: integer
+        rum_mobile_replay_session_count_android_agg_sum:
+          description: Shows the sum of all mobile RUM replay sessions on Android
+            over all hours within the current month for all organizations.
+          format: int64
+          type: integer
+        rum_mobile_replay_session_count_ios_agg_sum:
+          description: Shows the sum of all mobile RUM replay sessions on iOS over
+            all hours within the current month for all organizations.
+          format: int64
+          type: integer
+        rum_mobile_replay_session_count_reactnative_agg_sum:
+          description: Shows the sum of all mobile RUM replay sessions on React Native
+            over all hours within the current month for all organizations.
           format: int64
           type: integer
         rum_replay_session_count_agg_sum:
@@ -29789,7 +30030,7 @@ paths:
         type: idempotent
   /api/v1/monitor:
     get:
-      description: Get details about the specified monitor from your organization.
+      description: Get all monitors from your organization.
       operationId: ListMonitors
       parameters:
       - description: 'When specified, shows additional information about the group
@@ -29872,6 +30113,7 @@ paths:
           content:
             application/json:
               schema:
+                description: An array of monitor objects.
                 items:
                   $ref: '#/components/schemas/Monitor'
                 type: array
@@ -29895,7 +30137,7 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - monitors_read
-      summary: Get all monitor details
+      summary: Get all monitors
       tags:
       - Monitors
       x-menu-order: 2
@@ -38566,10 +38808,17 @@ tags:
     for more information.
   name: Embeddable Graphs
 - description: 'The Event Management API allows you to programmatically post events
-    to the Events Explorer
+    to the Events Explorer and fetch events from the Events Explorer. See the [Event
+    Management page](https://docs.datadoghq.com/service_management/events/) for more
+    information.
 
-    and fetch events from the Events Explorer. See the [Event Management page](https://docs.datadoghq.com/service_management/events/)
-    for more information.'
+
+    **Update to Datadog monitor events `aggregation_key` starting March 1, 2025:**
+    The Datadog monitor events `aggregation_key` is unique to each Monitor ID. Starting
+    March 1st, this key will also include Monitor Group, making it unique per *Monitor
+    ID and Monitor Group*. If you''re using monitor events `aggregation_key` in dashboard
+    queries or the Event API, you must migrate to use `@monitor.id`. Reach out to
+    [support](https://www.datadoghq.com/support/) if you have any question.'
   name: Events
 - description: 'Configure your Datadog-Google Cloud Platform (GCP) integration directly
 
