@@ -386,8 +386,8 @@ to install the module within the Ingress-NGINX Controller instance.
 
 To instrument Ingress-NGINX **v1.10.0+** using Datadog's module, follow these steps:
 1. **Verify your Ingress-NGINX version**<br>
-Check the version of your Ingress-NGINX Controller and ensure an appropriate init-container is available.
-Refer to the [compatibility table](#compatibility-version-table) below to ensure the correct configuration.
+Check your Ingress-NGINX Controller version and ensure you have the matching Datadog init-container available. The init-container version ([datadog/ingress-nginx-injection][8]) must exactly match your controller version to prevent startup issues.
+For example, if you're running Ingress-NGINX v1.11.3, you'll need [datadog/ingress-nginx-injection:v1.11.3][9].
 
 2. **Modify your controller's pod specification:**<br>
 Update the controller pod specification to include the init-container and configure the Datadog Agent host environment variable:
@@ -433,12 +433,6 @@ Apply the updated `ConfigMap` to ensure the Datadog module is correctly loaded.
 
 This configuration ensures that the Datadog module is loaded and ready to trace incoming requests.
 
-#### Compatibility version table
-
-Ensure the init-container version for [datadog/ingress-nginx-injection][8] exactly matches the version of your Ingress-NGINX Controller.
-Mismatched versions can prevent Ingress-NGINX from starting.
-
-For example, Ingress-NGINX version `v1.11.3` must be paired with [datadog/ingress-nginx-injection:v1.11.3][9]
 
 ### Controller v1.10.0+ using OpenTelemetry
 
@@ -523,8 +517,8 @@ The above overrides the default `nginx-ingress-controller.ingress-nginx` service
 [5]: /opentelemetry/otlp_ingest_in_the_agent/
 [6]: https://github.com/DataDog/nginx-datadog/
 [7]: https://kubernetes.io/docs/concepts/workloads/pods/init-containers/
-[8] https://hub.docker.com/r/datadog/ingress-nginx-injection
-[9] https://hub.docker.com/layers/datadog/ingress-nginx-injection/v1.11.3/images/sha256-19ea2874d8a4ebbe4de0bf08faeb84c755cd71f1e8740ce2d145c5cf954a33a1
+[8]: https://hub.docker.com/r/datadog/ingress-nginx-injection
+[9]: https://hub.docker.com/layers/datadog/ingress-nginx-injection/v1.11.3/images/sha256-19ea2874d8a4ebbe4de0bf08faeb84c755cd71f1e8740ce2d145c5cf954a33a1
 {{% /tab %}}
 
 {{% tab "Istio" %}}
