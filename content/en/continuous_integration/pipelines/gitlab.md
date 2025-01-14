@@ -253,8 +253,8 @@ If you are using self-hosted GitLab runners, you can correlate jobs with the inf
 
 Datadog infrastructure correlation is possible using different methods:
 
-#### Tagging runners with hostname
-
+{{< tabs >}}
+{{% tab "Non autoscaling executors" %}}
 The GitLab runner must have a tag of the form `host:<hostname>`. Tags can be added while [registering a new runner][6]. As a result, this method is only available when the runner is directly running the job.
 
 This excludes executors that are autoscaling the infrastructure in order to run the job (such as the Kubernetes, Docker Autoscaler, or Instance executors) as it is not possible to add tags dynamically for those runners.
@@ -271,8 +271,27 @@ Add tags by updating the runner's `config.toml`. Or add tags
 through the UI by going to **Settings > CI/CD > Runners** and editing the appropriate runner.
 {{% /tab %}}
 {{< /tabs >}}
-
 After these steps, CI Visibility adds the hostname to each job. To see the metrics, click on a job span in the trace view. In the drawer, a new tab named **Infrastructure** appears which contains the host metrics.
+{{% /tab %}}
+
+{{% tab "Docker Autoscaler" %}}
+CI Visibility supports Infrastructure metrics for "Docker Autoscaler" executors. For more information, see the [Correlate Infrastructure Metrics with GitLab Jobs guide][18].
+{{% /tab %}}
+
+{{% tab "Instance" %}}
+CI Visibility supports Infrastructure metrics for "Instance" executors. For more information, see the [Correlate Infrastructure Metrics with GitLab Jobs guide][18].
+{{% /tab %}}
+
+{{% tab "Kubernetes" %}}
+CI Visibility supports Infrastructure metrics for the Kubernetes executor. For this, it is necessary to have the Datadog Agent monitoring the Kubernetes Gitlab infrastructure. See [Install the Datadog Agent on Kubernetes][30] to install the Datadog agent in a Kubernetes cluster.
+{{% /tab %}}
+
+{{% tab "Other executors" %}}
+CI Visibility does not support Infrastructure metrics for other executors.
+{{% /tab %}}
+
+{{< /tabs >}}
+
 
 #### Instance and Docker Autoscaler executors
 
@@ -280,11 +299,8 @@ CI Visibility also supports Infrastructure metrics for "Instance" and "Docker Au
 
 #### Kubernetes executor
 
-CI Visibility supports Infrastructure metrics for the Kubernetes executor. For this, it is necessary to have the Datadog Agent monitoring the Kubernetes Gitlab infrastructure. See [Install the Datadog Agent on Kubernetes][30]
 
-#### Other executors
 
-CI Visibility does not support Infrastructure metrics for other executors.
 
 ### View error messages for pipeline failures
 
