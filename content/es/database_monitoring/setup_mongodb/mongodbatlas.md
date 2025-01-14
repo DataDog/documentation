@@ -212,10 +212,10 @@ Puede utilizar uno de estos nombres hostpara Configurar el Agent.
 
 {{< tabs >}}
 {{% tab "Replica Set" %}}
-{{% dbm-mongodb-Agent-config-replica-set %}}
+{{% dbm-mongodb-agent-config-replica-set %}}
 {{% /tab %}}
 {{% tab "Sharded clúster" %}}
-{{% dbm-mongodb-Agent-config-sharded-clúster %}}
+{{% dbm-mongodb-agent-config-sharded-cluster %}}
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -223,13 +223,13 @@ Puede utilizar uno de estos nombres hostpara Configurar el Agent.
 
 {{< tabs >}}
 {{% tab "Linux host" %}}
-{{% dbm-mongodb-Agent-setup-linux %}}
+{{% dbm-mongodb-agent-setup-linux %}}
 {{% /tab %}}
 {{% tab "Docker" %}}
-{{% dbm-mongodb-Agent-setup-Docker %}}
+{{% dbm-mongodb-agent-setup-docker %}}
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
-{{% dbm-mongodb-Agent-setup-Kubernetes %}}
+{{% dbm-mongodb-agent-setup-kubernetes %}}
 {{% /tab %}}
 {{< /tabs >}}
 
