@@ -14,7 +14,7 @@ Use the information below for troubleshooting Datadog Network Device Monitoring.
 
 ### Device not visible in Datadog
 
-The following assumes you are running Datadog Agent v7.59.0+.
+The following assumes you are running Datadog Agent v7.61.0+.
 
 If your device is not visible on the [Devices][2] page:
 
@@ -38,7 +38,26 @@ The output should look similar to the following:
      No traceback
    ```
 
-2. If your device is not listed, and you are using Autodiscovery, it likely means the Agent could not connect to your device. Try running an `snmp walk` on the device's admin IP. 
+2. If your device is not listed, and you are using Autodiscovery, it likely means the Agent could not connect to your device. 
+
+   - Run the `datadog-agent status` command, and wait for the `autodiscovery` section to report that all possible device IPs have been scanned. On large networks this can take a several minutes. The output should look similar to the following:
+  
+    ``` 
+    Autodiscovery
+    =============
+    Subnet 127.0.0.1/24 is queued for scanning.
+    No IPs found in the subnet.
+    Scanning subnet 127.0.10.1/30... Currently scanning IP 127.0.10.2, 4 IPs out of 4 scanned.
+    Found the following IP(s) in the subnet:
+       - 127.0.10.1
+       - 127.0.10.2
+    Subnet 127.0.10.1/30 scanned.
+    No IPs found in the subnet.
+    ```
+
+    If Autodiscovery completed and your device is still not appearing on the [Devices][2] page, it means the Agent could not connect to your device.
+
+   - Run an `snmp walk` on the device's admin IP to determine why the Agent cannot connect to your device. 
 
    **Note**: Provide your credentials directly in the CLI. If credentials aren't provided, the Agent attempts to locate them in your running Agent configuration files. 
 
