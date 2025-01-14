@@ -1,6 +1,9 @@
 ---
-title: Apps Datastore
+title: Datastore
 disable_toc: false
+aliases:
+- service_management/workflows/datastore/
+- service_management/app_builder/datastore/
 further_reading:
 - link: "service_management/app_builder/build"
   tag: "Documentation"
