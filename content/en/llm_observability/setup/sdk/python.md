@@ -523,7 +523,7 @@ The LLM Observability SDK provides the method `LLMObs.submit_evaluation_for()` a
 
 Evaluations must be joined to a single span. You can identify the target span using either of these two methods:
 1. Tag based joining - Join an evaluation using a unique key-value tag pair that is set on a single span. The evaluation will fail to join if the tag key-value pair matches multiple spans or no spans.
-2. Direct span reference - join an evaluation using the span's unique trace ID and span ID combination.
+2. Direct span reference - Join an evaluation using the span's unique trace ID and span ID combination.
 
 ### Submit evaluations
 
