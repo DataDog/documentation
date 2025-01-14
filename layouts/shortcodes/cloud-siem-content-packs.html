@@ -2,25 +2,21 @@
 
 {{ if ne $data nil }}
     {{- range $category, $content_packs := $data -}}
-        <h2>{{ $category | humanize | title }} Content Packs</h2>
-        
-        {{- range $content_packs -}}
-            <h3>{{.name}}</h3>
-            <p>{{.description}}</p>
-            <p><a href={{.app_link}}>{{.name}}</a> Content Pack includes:</p>
-            <h2>{{.}}</h2>
+    <h2>{{ $category | humanize | title }} Content Packs</h2>
 
-            {{ with .threat_detection }}
-                Threat!!
-            {{ end }}
+    {{- range $content_packs -}}
+        <h3>{{- .name -}}</h3>
+        <p>{{- .description -}}</p>
+        <p><a href={{- .app_link -}}>{{- .name -}}</a> Content Pack includes:</p>
 
-            {{/*
-                1. Detection Rules
-                2. An interactive dashboard
-                3. Investigator
-                4. Workflow Automation
-                5. Configuration guide
-            */}}
-        {{- end -}}
-    {{- end -}}
+{{/* Dont fix indentation, Hugo will think it's a code block */}}
+<ul>
+{{- with .threat_detection -}}<li>Detection Rules</li>{{- end -}}
+{{- with .dashboard -}}<li>An interactive dashboard</li>{{- end -}}
+{{- with .investigator -}}<li>{{ upper . }} Investigator</li>{{- end -}}
+{{- with .workflow_automation -}}<li>Workflow Automation</li>{{- end -}}
+{{- with .documentation_href -}}<li><a href="{{.}}">Configuration guide</a></li>{{- end -}}
+</ul>
+{{- end -}}
+{{- end -}}
 {{ end }}
