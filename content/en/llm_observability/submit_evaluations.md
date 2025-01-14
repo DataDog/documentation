@@ -21,10 +21,7 @@ While LLM Observability provides a few out-of-the-box evaluations for your trace
 
 ## Submitting evaluations with the SDK
 
-To submit evaluations from your traced LLM application to Datadog, you'll need to associate it with a span using the below steps:
-
-1. Extract the span context from the given span by using `LLMObs.export_span(span)`. If `span` is not provided (as when using function decorators), the SDK exports the current active span. See [Exporting a span][2] for more details.
-2. Use `LLMObs.submit_evaluation()` with the extracted span context and evaluation information. See [Submitting evaluations][3] in the SDK documentation for details.
+The LLM Observability SDK provides the method `LLMObs.submit_evaluation_for()` and s `LLMObs.export_span()` to help your traced LLM application submit evaluations to LLM Observability. See [submitting evaluations][3] in the SDK documentation for details.
 
 ### Example
 
@@ -35,14 +32,25 @@ from ddtrace.llmobs.decorators import llm
 @llm(model_name="claude", name="invoke_llm", model_provider="anthropic")
 def llm_call():
     completion = ... # user application logic to invoke LLM
-    span_context = LLMObs.export_span(span=None)
-    LLMObs.submit_evaluation(
-        span_context,
-        label="sentiment",
+
+    # tag your span with a `msg_id`
+    msg_id = get_msg_id()
+    LLMObs.annotate(
+        tags = {'msg_id': msg_id}
+    )
+
+    # submit an evaluation on a span tagged with a matching `msg_id`
+    LLMObs.submit_evaluation_for(
+        span_with_tag_value = {
+            "tag_key": "msg_id",
+            "tag_value": msg_id
+        },
+        ml_app = "chatbot",
+        label="harmfulness",
         metric_type="score",
         value=10,
+        tags={"evaluation_provider": "ragas"},
     )
-    return completion
 {{< /code-block >}}
 
 
