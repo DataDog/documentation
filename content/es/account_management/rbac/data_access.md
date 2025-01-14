@@ -2,7 +2,7 @@
 description: Definir un conjunto de datos restringido para el control de acceso
 further_reading:
 - link: /data_security/
-  tag: documentation
+  tag: Documentación
   text: Reducir los riesgos que amenazan los datos
 is_public: true
 title: Control de acceso a los datos
@@ -17,9 +17,7 @@ Tus datos en Datadog pueden contener datos confidenciales y deben manejarse con 
 
 Cuando se define un _Conjunto de datos restringido_, cualquier dato dentro de los límites de ese conjunto de datos queda restringido. Los datos fuera de cualquier conjunto de datos restringido permanecen sin restricciones y accesibles a los usuarios con los permisos apropiados. El control de acceso a los datos proporciona una interfaz intuitiva que permite a los gestores de acceso conceder únicamente a los usuarios autorizados acceso a los datos confidenciales incluidos en los conjuntos de datos.
 
-## {{< learning-center-callout header="Join an enablement webinar session" hide_image="true" btn_title="Sign Up" btn_url="https://www.datadoghq.com/technical-enablement/session/synthetics/">}}
-  Explore y regístrese en las sesiones de Foundation Enablement. Descubra cómo Datadog Sintético Monitorización es una solución proactiva Monitorización que le permite crear pruebas de API, navegador y móvil sin código para simular automáticamente los flujos y las solicitudes de los usuarios a sus aplicaciones, puntos finales clave y capas red.
-{{< /learning-center-callout >}}
+## Requisitos previos
 
 ### Configurar controles de acceso
 
@@ -170,9 +168,9 @@ De forma similar a la exploración de datos en un explorador de datos como el Ex
 
 Cuando se consultan datos a través de las API Datadog con restricciones activadas, los usuarios sin permisos **no** ven los resultados de las consultas que han sido restringidas por los conjuntos de datos restringidos.
 
-## {{< img src="synthetics/browser_test.mp4" alt="Browser tests" video=true style="width:100%;">}}
+## Referencias adicionales
 
-Grabar pruebas de aplicaciones móviles
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /es/account_management/teams/
 [2]: /es/account_management/rbac/?tab=datadogapplication#role-based-access-control
