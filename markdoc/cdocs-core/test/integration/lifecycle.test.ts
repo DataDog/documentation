@@ -1,6 +1,6 @@
 import { describe, test, expect } from 'vitest';
 import { SNAPSHOTS_DIR } from '../config/constants';
-import { VALID_FILTERS_CONFIG_DIR } from '../config/constants';
+import { VALID_CUSTOMIZATION_CONFIG_DIR } from '../config/constants';
 import { CdocsDataManager } from '../../src/modules/CdocsDataManager';
 
 const langs = ['en', 'ja']; // TODO: Change to piglatin
@@ -8,7 +8,7 @@ const langs = ['en', 'ja']; // TODO: Change to piglatin
 describe('Demo', () => {
   test('parses the content filter configuration from YAML', async () => {
     const { customizationConfigByLang } = CdocsDataManager.loadContentFiltersConfig({
-      configDir: VALID_FILTERS_CONFIG_DIR,
+      configDir: VALID_CUSTOMIZATION_CONFIG_DIR,
       langs,
     });
 

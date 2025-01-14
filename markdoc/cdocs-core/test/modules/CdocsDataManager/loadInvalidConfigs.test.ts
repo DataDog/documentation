@@ -12,12 +12,12 @@ describe('CdocsDataManager', () => {
     let thrownError: any = null;
 
     try {
-      const { contentFiltersConfigByLang } = CdocsDataManager.loadContentFiltersConfig({
+      const { customizationConfigByLang } = CdocsDataManager.loadContentFiltersConfig({
         configDir: `${INVALID_CONFIGS_DIR}/${invalidDir}`,
         langs,
       });
       console.log('----------------------------------');
-      console.log(contentFiltersConfigByLang);
+      console.log(customizationConfigByLang);
     } catch (error) {
       thrownError = error;
       if ('message' in thrownError && typeof thrownError.message === 'string') {

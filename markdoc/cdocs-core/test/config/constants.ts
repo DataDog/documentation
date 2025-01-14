@@ -9,8 +9,8 @@ export const MOCKS_DIR = path.join(__dirname, '..', 'mocks');
 // Where all valid mock data should be stored
 export const VALID_MOCKS_DIR = path.join(__dirname, '..', 'mocks', 'valid');
 export const INVALID_MOCKS_DIR = path.join(__dirname, '..', 'mocks', 'invalid');
-export const INVALID_CONFIGS_DIR = INVALID_MOCKS_DIR + '/filtersConfigDirs';
+export const INVALID_CONFIGS_DIR = INVALID_MOCKS_DIR + '/customizationConfigDirs';
 
 // Valid configuration data
-export const VALID_FILTERS_CONFIG_DIR = VALID_MOCKS_DIR + '/content_filters/';
+export const VALID_CUSTOMIZATION_CONFIG_DIR = VALID_MOCKS_DIR + '/customization_config/';
 export const VALID_CONTENT_DIR = VALID_MOCKS_DIR + '/content';
