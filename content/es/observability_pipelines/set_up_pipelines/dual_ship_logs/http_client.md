@@ -94,8 +94,8 @@ Introduce la siguiente información en función del destino seleccionado para lo
 
 {{% observability_pipelines/processors/filter %}}
 
-{{% /pestaña %}}
-{{% pestaña "Editar campos" %}}
+{{% /tab %}}
+{{% tab "Editar campos" %}}
 
 {{% observability_pipelines/processors/remap %}}
 
