@@ -436,7 +436,7 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Before v6.0.0" level="h4" expanded="true" %}}
+{{% collapse-content title="Before v6.0.0" level="h4" %}}
 
 {{< site-region region="us" >}}
 ```html
@@ -1477,7 +1477,7 @@ Add the generated code snippet to the head tag (in front of any other script tag
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Before v6.0.0" level="h4" expanded="true" %}}
+{{% collapse-content title="Before v6.0.0" level="h4" %}}
 
 {{< site-region region="us" >}}
 ```html
