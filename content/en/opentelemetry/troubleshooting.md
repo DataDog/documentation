@@ -139,14 +139,9 @@ Host tags configured in either the Datadog exporter configuration (`host_metadat
 
 Configure the `expected_tags_duration` parameter to bridge the gap until host tags are resolved:
 
-```yaml
-receivers:
-  otlp:
-    protocols:
-      grpc:
-        endpoint: 0.0.0.0:4317
-    expected_tags_duration: "15m"
-```
+{{< code-block lang="yaml" filename="datadog.yaml" disable_copy="true" collapsible="false" >}}
+expected_tags_duration: "15m"
+{{< /code-block >}}
 
 This configuration adds the expected tags to all telemetry for the specified duration (in this example, 15 minutes).
 
@@ -160,21 +155,14 @@ processors:
     trace_statements:
       - context: resource
         statements:
-          - set(attributes["env"], "prod")
-          - set(attributes["team"], "backend")
-    metric_statements:
-      - context: resource
-        statements:
-          - set(attributes["env"], "prod")
-          - set(attributes["team"], "backend")
-    log_statements:
-      - context: resource
-        statements:
-          - set(attributes["env"], "prod")
-          - set(attributes["team"], "backend")
+          # OpenTelemetry semantic conventions
+          - set(attributes["deployment.environment.name"], "prod")
+          # Datadog-specific host tags
+          - set(attributes["ddtags"], "env:prod,team:backend")
+...
 ```
 
-This approach adds the tags permanently as standard OTLP attributes, following OpenTelemetry protocol conventions.
+This approach combines OpenTelemetry semantic conventions with Datadog-specific host tags to ensure proper functionality in both OpenTelemetry and Datadog environments.
 
 ## Unable to map 'team' attribute to Datadog team tag
 
@@ -236,40 +224,6 @@ To verify the configuration:
 3. Confirm metrics are being properly translated to Datadog format.
 
 Note: When working with semantic conventions, ensure you're following the latest OpenTelemetry specification for metric naming and attributes.
-
-## Logs and traces correlation issues
-
-**Symptom**: Logs and traces are not properly correlated in the Datadog UI due to a mismatch between `service.name` and `service` identifiers.
-
-**Resolution**:
-
-1. Configure a pipeline processor in the Datadog Logs UI:
-   ```yaml
-   processors:
-     - type: attribute_remapper
-       sources:
-         - attributes["service.name"]
-       target: service
-   ```
-
-2. If using the OpenTelemetry Collector, ensure consistent service naming:
-   ```yaml
-   processors:
-     transform:
-       log_statements:
-         - context: resource
-           statements:
-             - set(attributes["service"], resource.attributes["service.name"])
-   ```
-
-To verify the configuration:
-
-1. Generate test logs and traces for your service.
-2. Navigate to a trace in the Datadog UI.
-3. Click on a span and verify that related logs appear in the side panel.
-4. Confirm that the service name matches between logs and traces.
-
-Note: Service name consistency is crucial for proper correlation. Ensure that your logging and tracing configurations use identical service naming conventions across your observability pipeline.
 
 ## Further reading
 
