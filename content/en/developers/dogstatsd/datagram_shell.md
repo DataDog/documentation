@@ -117,9 +117,9 @@ This data is supplied by the [Datadog Agent Admission Controller][106] and will 
 Starting with the Agent `>=v7.63.0`, a new Cardinality field is supported.
 The Datadog Agent uses the cardinality value to enrich DogStatsD metrics with additional container tags corresponding to their cardinality.
 
-The cardinality field is prefixed by `d:`, for example:
+The cardinality field is prefixed by `D:`, for example:
 
-`<METRIC_NAME>:<VALUE>|<TYPE>|#<TAG_KEY_1>:<TAG_VALUE_1>,<TAG_2>|d:<CARDINALITY>`
+`<METRIC_NAME>:<VALUE>|<TYPE>|#<TAG_KEY_1>:<TAG_VALUE_1>,<TAG_2>|D:<CARDINALITY>`
 
 Cardinality will impact tags enrichment for both:
 - [Docker Tags][105]
