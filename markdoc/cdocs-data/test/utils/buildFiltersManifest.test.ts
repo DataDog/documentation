@@ -3,7 +3,7 @@ import { buildFiltersManifest } from '../../src';
 import {
   paintColorsFrontmatter,
   paintColorsCustomizationConfig,
-} from '../mocks/valid/paintColorsConfig';
+} from '../config/mocks/valid/paintColorsConfig';
 import _ from 'lodash';
 import { SNAPSHOTS_DIR } from '../config/constants';
 import { FiltersManifest } from '../../src/schemas/pageFilters';

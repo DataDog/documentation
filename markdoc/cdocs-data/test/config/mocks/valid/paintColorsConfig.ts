@@ -1,8 +1,8 @@
 import {
   CustomizationConfig,
   CustomizationConfigSchema,
-} from '../../../src/schemas/customizationConfig';
-import { FrontMatter, FrontMatterSchema } from '../../../src/schemas/frontMatter';
+} from '../../../../src/schemas/customizationConfig';
+import { FrontMatter, FrontMatterSchema } from '../../../../src/schemas/frontMatter';
 
 export const paintColorsFrontmatter: FrontMatter = {
   title: 'My Page',

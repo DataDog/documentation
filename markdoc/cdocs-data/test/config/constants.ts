@@ -4,13 +4,12 @@ import path from 'path';
 export const SNAPSHOTS_DIR = __dirname + '/../__snapshots__';
 
 // Where all mock data should be stored
-export const MOCKS_DIR = path.join(__dirname, '..', 'mocks');
+export const MOCKS_DIR = path.join(__dirname, 'mocks');
+export const VALID_MOCKS_DIR = path.join(MOCKS_DIR, 'valid');
+export const INVALID_MOCKS_DIR = path.join(MOCKS_DIR, 'invalid');
 
-// Where all valid mock data should be stored
-export const VALID_MOCKS_DIR = path.join(__dirname, '..', 'mocks', 'valid');
-export const INVALID_MOCKS_DIR = path.join(__dirname, '..', 'mocks', 'invalid');
+// A collection of invalid customization config directories
 export const INVALID_CONFIGS_DIR = INVALID_MOCKS_DIR + '/customizationConfigDirs';
 
-// Valid configuration data
+// Valid data
 export const VALID_CUSTOMIZATION_CONFIG_DIR = VALID_MOCKS_DIR + '/customization_config/';
-export const VALID_CONTENT_DIR = VALID_MOCKS_DIR + '/content';
