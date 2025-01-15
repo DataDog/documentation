@@ -21,7 +21,7 @@ While LLM Observability provides a few out-of-the-box evaluations for your trace
 
 ## Submitting evaluations with the SDK
 
-The LLM Observability SDK provides the method `LLMObs.submit_evaluation_for()` and s `LLMObs.export_span()` to help your traced LLM application submit evaluations to LLM Observability. See [submitting evaluations][3] in the SDK documentation for details.
+The LLM Observability SDK provides the methods `LLMObs.submit_evaluation_for()` and `LLMObs.export_span()` to help your traced LLM application submit evaluations to LLM Observability. See [submitting evaluations][3] in the SDK documentation for details.
 
 ### Example
 
