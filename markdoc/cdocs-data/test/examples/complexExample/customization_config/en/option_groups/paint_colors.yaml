@@ -1,0 +1,26 @@
+matte_paint_color_options:
+  # beige
+  - id: whispered_sandstorm
+    default: true
+  # blue
+  - id: stormlit_horizon
+  # gray
+  - id: ashen_reverie
+
+eggshell_paint_color_options:
+  # beige
+  - id: sunlit_sands
+    default: true
+  # blue
+  - id: azure_dreamscape
+  # gray
+  - id: silver_serenade
+
+glossy_paint_color_options:
+    # beige
+  - id: golden_mirage
+    default: true
+    # blue
+  - id: sapphire_glitz
+    # gray
+  - id: platinum_prestige

@@ -4,13 +4,13 @@ import {
   loadCustomizationConfig,
   buildFiltersManifest,
   resolveFilters,
-} from '../../src';
+} from '../../../src';
 
 const GENERATED_DATA_DIR = __dirname + '/generatedData';
 const CUSTOMIZATION_CONFIG_DIR = __dirname + '/customization_config';
 
-describe('Simple example', () => {
-  const langs = ['en', 'piglatin'];
+describe('Complex example', () => {
+  const langs = ['en'];
 
   // Load the customization config
   const { customizationConfigByLang } = loadCustomizationConfig({
@@ -21,12 +21,19 @@ describe('Simple example', () => {
   // "Parse" the frontmatter (the parse result
   // is hardcoded here, but would come from parsing a file)
   const frontmatter: FrontMatter = {
-    title: 'Simple Example Page',
+    title: 'Paint Catalog',
     content_filters: [
       {
-        label: 'Favorite color',
-        trait_id: 'favorite_color',
-        option_group_id: 'favorite_color_options',
+        label: 'Finish',
+        trait_id: 'paint_finish',
+        option_group_id: 'paint_finish_options',
+      },
+      {
+        label: 'Color',
+        trait_id: 'paint_color',
+        option_group_id: '<PAINT_FINISH>_paint_color_options',
+        // The option group will dynamically resolve to 'matte_paint_color_options',
+        // 'eggshell_paint_color_options', or 'glossy_paint_color_options'.
       },
     ],
   };
@@ -37,28 +44,33 @@ describe('Simple example', () => {
     customizationConfig: customizationConfigByLang.en,
   });
 
+  console.log('manifest errors', manifest.errors);
+
   // Resolve the filters using the default value (purple)
   const defaultResolvedFilters = resolveFilters({
     valsByTraitId: manifest.defaultValsByTraitId,
     filtersManifest: manifest,
   });
 
-  // Change the user's selection to pink
+  // Update the user's paint finish selection
+  // to a non-default option
   const userSelectionsByTraitId = {
-    favorite_color: 'pink',
+    ...manifest.defaultValsByTraitId,
+    paint_finish: 'gloss',
   };
 
   // Resolve the filters again
-  const customResolvedFilters = resolveFilters({
+  const glossyResolvedFilters = resolveFilters({
     valsByTraitId: userSelectionsByTraitId,
     filtersManifest: manifest,
   });
 
   // Change the user's selection to an invalid value
   // (for example, carried over in local storage from a previous page
-  // that had different options for its favorite_color filter)
+  // that had different options for paint finish)
   const invalidUserSelectionsByTraitId = {
-    favorite_color: 'red',
+    ...manifest.defaultValsByTraitId,
+    paint_finish: 'semi_gloss',
   };
 
   // Resolve the filters again -- the value should reset to the default,
@@ -92,15 +104,15 @@ describe('Simple example', () => {
     );
   });
 
-  test('resolves custom filters that match the snapshot', async () => {
-    const snapshot = JSON.stringify(customResolvedFilters, null, 2);
+  test('resolves glossy filters that match the snapshot', async () => {
+    const snapshot = JSON.stringify(glossyResolvedFilters, null, 2);
 
     await expect(snapshot).toMatchFileSnapshot(
-      GENERATED_DATA_DIR + '/04_customResolvedFilters.snap.json',
+      GENERATED_DATA_DIR + '/04_glossyResolvedFilters.snap.json',
     );
   });
 
-  test('gracefully resolves invalid values to filters that match the default filters', async () => {
+  test('resolves gracefully filters that match the default resolved filters and the snapshot', async () => {
     expect(gracefullyResolvedFilters).toEqual(defaultResolvedFilters);
 
     const snapshot = JSON.stringify(gracefullyResolvedFilters, null, 2);

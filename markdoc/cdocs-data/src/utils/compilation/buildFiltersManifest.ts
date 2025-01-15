@@ -67,7 +67,6 @@ export function buildFiltersManifest(p: {
       const { optionGroupIds: dynamicOptionGroupIds, errors } =
         buildDynamicOptionGroupIds({
           traitId: filter.trait_id,
-          // filterOptionsConfig: p.filterOptionsConfig,
           customizationConfig: p.customizationConfig,
           filterConfigsByTraitId: filterConfigByTraitId,
           precedingFilterIds: processedTraitIds,
@@ -81,6 +80,8 @@ export function buildFiltersManifest(p: {
     } else {
       optionGroupIds = [filter.option_group_id];
     }
+
+    console.log('optionGroupIds', optionGroupIds);
 
     // Collect a default value for every possible options set ID,
     // along with all possible selected values for the filter
@@ -144,7 +145,7 @@ function getPossibleDefaultsAndSelectedValues(p: {
     const optionGroup = p.customizationConfig.optionGroupGlossary[optionGroupId];
     if (!optionGroup) {
       errors.push({
-        message: `Invalid options source: The options source '${optionGroupId}', which is required for the filter ID '${p.traitId}', does not exist.`,
+        message: `Invalid options source: The options source '${optionGroupId}', which is required for the trait ID '${p.traitId}', does not exist.`,
       });
       return;
     }
@@ -178,7 +179,6 @@ function getPossibleDefaultsAndSelectedValues(p: {
  */
 function buildDynamicOptionGroupIds(p: {
   traitId: string;
-  // filterOptionsConfig: FilterOptionsConfig;
   filterConfigsByTraitId: Record<string, FilterConfig>;
   precedingFilterIds: string[];
   customizationConfig: CustomizationConfig;

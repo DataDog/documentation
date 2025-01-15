@@ -54,6 +54,8 @@ export function resolveFilters(p: {
       selectedValsByTraitId: valsByTraitIdDup,
     });
 
+    console.log('manifest option groups by id', p.filtersManifest.optionGroupsById);
+
     // Update the value for the filter,
     // if the current value is no longer valid after placeholder resolution
     const defaultValue =
@@ -105,8 +107,17 @@ export function resolveFilterOptionsSource(p: {
   // for future use
   const filterConfigDup = { ...p.pageFilterConfig };
 
+  console.log(
+    '\n\n\n---\nResolving options source for option group ID',
+    filterConfigDup.option_group_id,
+  );
+
   // Replace any placeholder in the options source with the selected value
   if (GLOBAL_PLACEHOLDER_REGEX.test(filterConfigDup.option_group_id)) {
+    console.log(
+      'Placeholder detected, resolving options source with selected values',
+      p.selectedValsByTraitId,
+    );
     // Resolve the options source
     filterConfigDup.option_group_id = filterConfigDup.option_group_id.replace(
       GLOBAL_PLACEHOLDER_REGEX,
@@ -116,5 +127,6 @@ export function resolveFilterOptionsSource(p: {
     );
   }
 
+  console.log('Resolved options source:', filterConfigDup.option_group_id);
   return filterConfigDup;
 }

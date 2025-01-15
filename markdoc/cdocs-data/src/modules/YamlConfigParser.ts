@@ -227,6 +227,7 @@ export class YamlConfigParser {
     langDir: string;
     optionGlossary: OptionGlossary;
   }): OptionGroupGlossary {
+    console.log('Loading options glossary from', p.langDir);
     // If the lang dir does not exist, return an empty object,
     // which will be backfilled by the default language
     if (!fs.existsSync(p.langDir)) {
@@ -235,6 +236,7 @@ export class YamlConfigParser {
 
     const optionGroupGlossaryDir = `${p.langDir}/option_groups`;
     const filePaths = this.findInDir(optionGroupGlossaryDir, /\.ya?ml$/);
+    console.log('Found option group glossary files:', filePaths);
     const mergedGlossary: OptionGroupGlossary = {};
 
     // Merge all files into the result glossary
@@ -267,6 +269,8 @@ export class YamlConfigParser {
         });
       }
     });
+
+    console.log('Merged option group glossary:', mergedGlossary);
 
     OptionGroupGlossarySchema.parse(mergedGlossary);
     return mergedGlossary;

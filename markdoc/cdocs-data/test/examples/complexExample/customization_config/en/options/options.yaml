@@ -1,0 +1,41 @@
+options:
+  # paint finishes
+  - id: matte
+    label: Matte
+    description: "A flat finish with no shine."
+  - id: eggshell
+    label: Eggshell
+    description: "A soft, low-luster finish."
+  - id: glossy
+    label: Glossy
+    description: "A shiny finish that reflects light."
+  # beige paint colors
+  - id: whispered_sandstorm
+    label: Whispered Sandstorm
+    description: "A matte beige."
+  - id: sunlit_sands
+    label: Sunlit Sands
+    description: "An eggshell beige."
+  - id: golden_mirage
+    label: Golden Mirage
+    description: "A glossy beige."
+  # blue paint colors
+  - id: stormlit_horizon
+    label: Stormlit Horizon
+    description: "A matte blue."
+  - id: azure_dreamscape
+    label: Azure Dreamscape
+    description: "An eggshell blue."
+  - id: sapphire_glitz
+    label: Sapphire Glitz
+    description: "A glossy blue."
+  # gray paint colors
+  - id: ashen_reverie
+    label: Ashen Reverie
+    description: "A matte gray."
+  - id: silver_serenade
+    label: Silver Serenade
+    description: "An eggshell gray."
+  - id: platinum_prestige
+    label: Platinum Prestige
+    description: "A glossy gray."
