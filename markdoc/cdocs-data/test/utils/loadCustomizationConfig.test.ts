@@ -36,20 +36,9 @@ describe('loadCustomizationConfig', () => {
         configDir: `${INVALID_CONFIGS_DIR}/${invalidDir}`,
         langs,
       });
-      console.log('----------------------------------');
-      console.log(customizationConfigByLang);
     } catch (error) {
       thrownError = error;
-      if ('message' in thrownError && typeof thrownError.message === 'string') {
-        console.log(thrownError);
-        /*
-        thrownError.message = thrownError.message.replace(
-          INVALID_CONFIGS_DIR,
-          '<SANITIZED_INVALID_CONFIGS_DIR>',
-        );
-        */
-      }
-      errorsByDir[invalidDir] = error;
+      errorsByDir[invalidDir] = thrownError;
     }
 
     test(`throws an error when processing the invalid directory: '${invalidDir}'`, () => {

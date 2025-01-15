@@ -44,11 +44,14 @@ describe('Complex example', () => {
     customizationConfig: customizationConfigByLang.en,
   });
 
-  // Resolve the filters using the default value (purple)
+  // Resolve the filters using the default values
   const defaultResolvedFilters = resolveFilters({
     valsByTraitId: manifest.defaultValsByTraitId,
     filtersManifest: manifest,
   });
+
+  console.log('default paint_finish:', defaultResolvedFilters.paint_finish.currentValue);
+  console.log('default paint_color:', defaultResolvedFilters.paint_color.currentValue);
 
   // Update the user's paint finish selection
   // to a non-default option

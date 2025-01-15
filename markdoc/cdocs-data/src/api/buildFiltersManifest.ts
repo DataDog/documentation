@@ -188,8 +188,6 @@ function buildDynamicOptionGroupIds(p: {
   let optionGroupIds: string[] = [];
   const errors: CdocsError[] = [];
 
-  console.log('filterConfig', filterConfig);
-
   const segments = filterConfig.option_group_id.split('_').map((segment) => {
     // build non-placeholder segment (array of solitary possible value)
     if (!segment.match(PLACEHOLDER_REGEX)) {

@@ -82,8 +82,6 @@ export function buildFiltersManifest(p: {
       optionGroupIds = [filter.option_group_id];
     }
 
-    console.log('optionGroupIds', optionGroupIds);
-
     // Collect a default value for every possible options set ID,
     // along with all possible selected values for the filter
     const { defaultValsByOptionGroupId, possibleVals, errors } =
@@ -211,7 +209,6 @@ function buildDynamicOptionGroupIds(p: {
     // If it's not a placeholder, just return it
     // as a single-item array of possible values for that segment
     if (!Object.keys(placeholdersByUuid).includes(segment)) {
-      console.log('non-placeholder segment', segment);
       return [segment];
     }
 
