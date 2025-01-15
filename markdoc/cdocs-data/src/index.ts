@@ -1,3 +1,4 @@
+// Types and schemas
 export {
   CdocsError as CdocsCoreError,
   CdocsErrorSchema as CdocsCoreErrorSchema,
@@ -21,10 +22,7 @@ export {
   ResolvedFiltersSchema,
 } from './schemas/pageFilters';
 
-export {
-  TraitGlossary as FilterGlossary,
-  TraitGlossarySchema as FilterGlossarySchema,
-} from './schemas/glossaries/traitGlossary';
+export { TraitGlossary, TraitGlossarySchema } from './schemas/glossaries/traitGlossary';
 
 export {
   OptionGlossary,
@@ -46,5 +44,5 @@ export {
 // Utilities
 export { loadCustomizationConfig } from './utils/loadCustomizationConfig';
 export { buildFiltersManifest } from './utils/buildFiltersManifest';
-export { buildClientFiltersManifest } from './utils/buildClientFiltersManifest';
+export { pruneManifestForClient } from './utils/pruneManifestForClient';
 export { resolveFilters } from './utils/resolveFilters';

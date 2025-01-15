@@ -24,6 +24,17 @@ In the `operating_system` example, the user's selection for `linux` transfers be
 
 Future versions might distinguish between explicit selections (something the user has chosen) and implicit selections (a default that has been chosen for the user, so this selection should still be overwritten by the explicit selection on any pages that support the explicit selection). But the current logic does not have this distinction, and the implicit selection travels until the user sets it to something else.
 
+## cdocs-data utilities
+
+This package provides four utility functions:
+
+- `loadCustomizationConfig`, which merges all of a site's YAML files into one customization config object
+- `buildFiltersManifest`, which combines the frontmatter of a page with the site's customization config to produce a `FiltersManifest`, an object that contains all the necessary data for filtering the page, such as which options should be available for each trait
+- `pruneManifestForClient`, which removes manifest keys that are unnecessary for client-side filtering
+- `resolveFilters`, which updates the filters manifest based on changes in the user's filter selections
+
+The packages also exports types and schemas for data, such as the `FiltersManifest`.
+
 ## Configuration examples
 
 ### Customization config (sitewide)
@@ -78,7 +89,7 @@ Option groups do not define any new options.
 
 ### Filters
 
-A *filter*, which is defined in a page's front matter, combines a trait and an options group for use on that page:
+A *filter config*, which is defined in a page's front matter, combines a trait and an options group for use on that page:
 
 ```yaml
 title: My Example Doc

@@ -1,9 +1,8 @@
 import fs from 'fs';
 import {
-  FiltersManifestSchema,
   buildFiltersManifest,
-  CustomizationConfigByLang,
   loadCustomizationConfig,
+  CustomizationConfigByLang,
   CustomizationConfig
 } from 'cdocs-data';
 import { IntegrationConfig } from './schemas/config/integration';
@@ -245,20 +244,18 @@ export class MarkdocHugoIntegration {
     }
 
     // generate the filters manifest
-    const draftFiltersManifest = buildFiltersManifest({
+    const filtersManifest = buildFiltersManifest({
       frontmatter: p.parsedFile.frontmatter,
       customizationConfig: p.customizationConfig
     });
 
-    if (draftFiltersManifest.errors.length > 0) {
+    if (filtersManifest.errors.length > 0) {
       this.#addFileErrors({
         filePath: p.markdocFilepath,
-        errors: draftFiltersManifest.errors
+        errors: filtersManifest.errors
       });
       return null;
     }
-
-    const filtersManifest = FiltersManifestSchema.parse(draftFiltersManifest);
 
     // build the HTML and write it to an .md file
     try {
