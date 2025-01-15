@@ -17,7 +17,7 @@ further_reading:
 
 | Technology     | Library                                                                                         | Minimal tracer version | Recommended tracer version |
 |----------------|-------------------------------------------------------------------------------------------------|------------------------|-----------------------------
-| Kafka          | [kafka-clients](https://mvnrepository.com/artifact/org.apache.kafka/kafka-clients) (v3.7 is not supported)              | 1.9.0                  | 1.43.0 or later            |
+| Kafka          | [kafka-clients](https://mvnrepository.com/artifact/org.apache.kafka/kafka-clients) (v3.7 is not fully supported)              | 1.9.0                  | 1.43.0 or later            |
 | RabbitMQ       | [amqp-client](https://mvnrepository.com/artifact/com.rabbitmq/amqp-client)                      | 1.9.0                  | 1.42.2 or later            |
 | Amazon SQS     | [aws-java-sdk-sqs (v1)](https://mvnrepository.com/artifact/com.amazonaws/aws-java-sdk-sqs)      | 1.27.0                 | 1.42.2 or later            |
 | Amazon SQS     | [sqs (v2)](https://mvnrepository.com/artifact/software.amazon.awssdk/sqs)                       | 1.27.0                 | 1.42.2 or later            |
