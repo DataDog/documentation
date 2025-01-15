@@ -1,10 +1,10 @@
-import { GLOBAL_PLACEHOLDER_REGEX } from '../schemas/regexes';
-import { FrontMatter } from '../schemas/frontMatter';
-import { PLACEHOLDER_REGEX } from '../schemas/regexes';
-import { FiltersManifest, ClientSideFiltersManifest } from '../schemas/pageFilters';
-import { FilterConfig } from '../schemas/frontMatter';
-import { CdocsError } from '../schemas/errors';
-import { CustomizationConfig } from '../schemas/customizationConfig';
+import { GLOBAL_PLACEHOLDER_REGEX } from '../../schemas/regexes';
+import { FrontMatter } from '../../schemas/frontMatter';
+import { PLACEHOLDER_REGEX } from '../../schemas/regexes';
+import { FiltersManifest } from '../../schemas/pageFilters';
+import { FilterConfig } from '../../schemas/frontMatter';
+import { CdocsError } from '../../schemas/errors';
+import { CustomizationConfig } from '../../schemas/customizationConfig';
 
 /**
  * Combine a page's frontmatter, the global glossary,

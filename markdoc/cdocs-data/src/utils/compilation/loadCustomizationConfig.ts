@@ -1,5 +1,5 @@
-import { YamlConfigParser } from '../modules/YamlConfigParser';
-import { CustomizationConfigByLang } from '../schemas/customizationConfig';
+import { YamlConfigParser } from '../../modules/YamlConfigParser';
+import { CustomizationConfigByLang } from '../../schemas/customizationConfig';
 
 export function loadCustomizationConfig(p: {
   configDir: string;

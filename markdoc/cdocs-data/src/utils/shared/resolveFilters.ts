@@ -9,14 +9,14 @@
  * (for example, file system access).
  */
 
-import { GLOBAL_PLACEHOLDER_REGEX } from '../schemas/regexes';
+import { GLOBAL_PLACEHOLDER_REGEX } from '../../schemas/regexes';
 import {
   ResolvedFilters,
   ResolvedFilter,
   FiltersManifest,
   ClientSideFiltersManifest,
-} from '../schemas/pageFilters';
-import { FilterConfig } from '../schemas/frontMatter';
+} from '../../schemas/pageFilters';
+import { FilterConfig } from '../../schemas/frontMatter';
 
 /**
  * Resolve the page filters object that is used

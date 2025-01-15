@@ -42,7 +42,7 @@ export {
 } from './schemas/customizationConfig';
 
 // Utilities
-export { loadCustomizationConfig } from './utils/loadCustomizationConfig';
-export { buildFiltersManifest } from './utils/buildFiltersManifest';
-export { pruneManifestForClient } from './utils/pruneManifestForClient';
-export { resolveFilters } from './utils/resolveFilters';
+export { loadCustomizationConfig } from './utils/compilation/loadCustomizationConfig';
+export { buildFiltersManifest } from './utils/compilation/buildFiltersManifest';
+export { pruneManifestForClient } from './utils/compilation/pruneManifestForClient';
+export { resolveFilters } from './utils/shared/resolveFilters';

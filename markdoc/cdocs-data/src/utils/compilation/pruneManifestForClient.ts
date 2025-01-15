@@ -1,4 +1,4 @@
-import { FiltersManifest, ClientSideFiltersManifest } from '../schemas/pageFilters';
+import { FiltersManifest, ClientSideFiltersManifest } from '../../schemas/pageFilters';
 
 /**
  * Convert a standard compile-time page filters manifest

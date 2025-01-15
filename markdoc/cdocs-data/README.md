@@ -11,14 +11,24 @@ A customizable doc uses filters to hide irrelevant content on a documentation pa
 
 ## Filters overview
 
-A *filter* is the combination of two entities:
+### Key terms
+
+A *filter* is a pairing of:
 
 - A *trait*, which represents an end user's characteristics or preferences, such as `programming_language`.
-- An *option group* that contains an ordered list of options for the trait, such as `python` or `go`.
+- An *option group* that contains an ordered list of options for that trait, such as `python` or `go`.
+
+A *resolved filter* includes a trait, an option group, and a *value* (the option that the filter is currently set to). The value might come from the default option in the option group, the URL of a page, or the user's stored preferences. Filters are *resolved* each time the user changes their preferences.
+
+### Configuration
 
 Traits and option groups (along with the individual options referenced by the option groups) are reusable throughout the entire docs site, and are defined in the site's *customization config*, a set of YAML files.
 
-Filters are defined in a page's front matter, and only apply to that page. But if two filters on two separate pages reference the same trait (such as `operating_system`), the user's preference travels between pages when their preference is available on the new page.
+Filters are defined in a page's front matter, and only apply to that page.
+
+### Filter-value transfers between pages
+
+If two filters on two separate pages reference the same trait (such as `operating_system`), the user's preference travels between pages when their preference is available on the new page.
 
 In the `operating_system` example, the user's selection for `linux` transfers between two pages automatically if the destination page uses `linux` as an option for the `operating_system` trait. Otherwise, the destination page's default option for the `operating_system` trait automatically becomes the user's new selection.
 
