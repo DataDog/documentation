@@ -1,6 +1,6 @@
 {
   "en": {
-    "traitGlossary": {
+    "traitsById": {
       "color": {
         "id": "color",
         "label": "Color"
@@ -10,7 +10,7 @@
         "label": "Item"
       }
     },
-    "optionGlossary": {
+    "optionsById": {
       "red": {
         "id": "red",
         "label": "Red"
@@ -92,7 +92,7 @@
         "label": "School bus"
       }
     },
-    "optionGroupGlossary": {
+    "optionGroupsById": {
       "blue_item_options": [
         {
           "id": "ocean",
@@ -202,7 +202,7 @@
     }
   },
   "ja": {
-    "traitGlossary": {
+    "traitsById": {
       "color": {
         "id": "color",
         "label": "Color(ja)"
@@ -212,7 +212,7 @@
         "label": "Item"
       }
     },
-    "optionGlossary": {
+    "optionsById": {
       "red": {
         "id": "red",
         "label": "Red (ja)"
@@ -294,7 +294,7 @@
         "label": "School bus (ja)"
       }
     },
-    "optionGroupGlossary": {
+    "optionGroupsById": {
       "blue_item_options": [
         {
           "id": "ocean",

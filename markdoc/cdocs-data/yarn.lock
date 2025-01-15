@@ -943,6 +943,7 @@ __metadata:
     typedoc-plugin-markdown: ^4.4.1
     typedoc-plugin-zod: ^1.3.1
     typescript: ^5.4.3
+    uuid: ^11.0.5
     vitest: ^2.0.2
     zod: ^3.22.4
   languageName: unknown
@@ -2675,6 +2676,15 @@ __metadata:
   dependencies:
     imurmurhash: ^0.1.4
   checksum: 222d0322bc7bbf6e45c08967863212398313ef73423f4125e075f893a02405a5ffdbaaf150f7dd1e99f8861348a486dd079186d27c5f2c60e465b7dcbb1d3e5b
+  languageName: node
+  linkType: hard
+
+"uuid@npm:^11.0.5":
+  version: 11.0.5
+  resolution: "uuid@npm:11.0.5"
+  bin:
+    uuid: dist/esm/bin/uuid
+  checksum: 8a8ed824c77ccc9387eed3049e75268a862379f0d41222716020743c438f31e9acfbe6495bd4cb1a7727c91fcf5ae20be40b306826a62c96f9ff42db48e8ed93
   languageName: node
   linkType: hard
 

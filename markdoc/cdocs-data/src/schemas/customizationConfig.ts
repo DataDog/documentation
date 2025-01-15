@@ -4,9 +4,9 @@ import { OptionGlossarySchema } from './glossaries/optionGlossary';
 import { OptionGroupGlossarySchema } from './glossaries/optionGroupGlossary';
 
 export const CustomizationConfigSchema = z.object({
-  traitGlossary: TraitGlossarySchema,
-  optionGlossary: OptionGlossarySchema,
-  optionGroupGlossary: OptionGroupGlossarySchema,
+  traitsById: TraitGlossarySchema,
+  optionsById: OptionGlossarySchema,
+  optionGroupsById: OptionGroupGlossarySchema,
 });
 
 export type CustomizationConfig = z.infer<typeof CustomizationConfigSchema>;

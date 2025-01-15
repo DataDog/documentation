@@ -37,9 +37,9 @@ export function loadCustomizationConfig(p: {
 
   p.langs.forEach((lang) => {
     customizationConfigByLang[lang] = {
-      traitGlossary: filterGlossariesByLang[lang],
-      optionGlossary: optionGlossariesByLang[lang],
-      optionGroupGlossary: optionGroupGlossariesByLang[lang],
+      traitsById: filterGlossariesByLang[lang],
+      optionsById: optionGlossariesByLang[lang],
+      optionGroupsById: optionGroupGlossariesByLang[lang],
     };
   });
 

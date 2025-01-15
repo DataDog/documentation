@@ -27,7 +27,7 @@ export const paintColorsFrontmatter: FrontMatter = {
 FrontMatterSchema.parse(paintColorsFrontmatter);
 
 export const paintColorsCustomizationConfig: CustomizationConfig = {
-  traitGlossary: {
+  traitsById: {
     color: {
       id: 'color',
       label: 'Color',
@@ -41,7 +41,7 @@ export const paintColorsCustomizationConfig: CustomizationConfig = {
       label: 'Paint color',
     },
   },
-  optionGlossary: {
+  optionsById: {
     blue: {
       id: 'blue',
       label: 'Blue',
@@ -107,7 +107,7 @@ export const paintColorsCustomizationConfig: CustomizationConfig = {
       label: 'Crimson',
     },
   },
-  optionGroupGlossary: {
+  optionGroupsById: {
     color_options: [
       { id: 'blue', label: 'Blue', default: true },
       { id: 'red', label: 'Red' },

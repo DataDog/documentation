@@ -1,0 +1,139 @@
+{
+  "en": {
+    "traitsById": {
+      "paint_finish": {
+        "id": "paint_finish",
+        "label": "Finish",
+        "description": "The sheen of the paint, such as matte or glossy. Does not refer to texture or application style."
+      },
+      "paint_color": {
+        "id": "paint_color",
+        "label": "Color"
+      }
+    },
+    "optionsById": {
+      "matte": {
+        "id": "matte",
+        "label": "Matte",
+        "description": "A flat finish with no shine."
+      },
+      "eggshell": {
+        "id": "eggshell",
+        "label": "Eggshell",
+        "description": "A soft, low-luster finish."
+      },
+      "glossy": {
+        "id": "glossy",
+        "label": "Glossy",
+        "description": "A shiny finish that reflects light."
+      },
+      "whispered_sandstorm": {
+        "id": "whispered_sandstorm",
+        "label": "Whispered Sandstorm",
+        "description": "A matte beige."
+      },
+      "sunlit_sands": {
+        "id": "sunlit_sands",
+        "label": "Sunlit Sands",
+        "description": "An eggshell beige."
+      },
+      "golden_mirage": {
+        "id": "golden_mirage",
+        "label": "Golden Mirage",
+        "description": "A glossy beige."
+      },
+      "stormlit_horizon": {
+        "id": "stormlit_horizon",
+        "label": "Stormlit Horizon",
+        "description": "A matte blue."
+      },
+      "azure_dreamscape": {
+        "id": "azure_dreamscape",
+        "label": "Azure Dreamscape",
+        "description": "An eggshell blue."
+      },
+      "sapphire_glitz": {
+        "id": "sapphire_glitz",
+        "label": "Sapphire Glitz",
+        "description": "A glossy blue."
+      },
+      "ashen_reverie": {
+        "id": "ashen_reverie",
+        "label": "Ashen Reverie",
+        "description": "A matte gray."
+      },
+      "silver_serenade": {
+        "id": "silver_serenade",
+        "label": "Silver Serenade",
+        "description": "An eggshell gray."
+      },
+      "platinum_prestige": {
+        "id": "platinum_prestige",
+        "label": "Platinum Prestige",
+        "description": "A glossy gray."
+      }
+    },
+    "optionGroupsById": {
+      "matte_paint_color_options": [
+        {
+          "default": true,
+          "id": "whispered_sandstorm",
+          "label": "Whispered Sandstorm"
+        },
+        {
+          "id": "stormlit_horizon",
+          "label": "Stormlit Horizon"
+        },
+        {
+          "id": "ashen_reverie",
+          "label": "Ashen Reverie"
+        }
+      ],
+      "eggshell_paint_color_options": [
+        {
+          "default": true,
+          "id": "sunlit_sands",
+          "label": "Sunlit Sands"
+        },
+        {
+          "id": "azure_dreamscape",
+          "label": "Azure Dreamscape"
+        },
+        {
+          "id": "silver_serenade",
+          "label": "Silver Serenade"
+        }
+      ],
+      "glossy_paint_color_options": [
+        {
+          "default": true,
+          "id": "golden_mirage",
+          "label": "Golden Mirage"
+        },
+        {
+          "id": "sapphire_glitz",
+          "label": "Sapphire Glitz"
+        },
+        {
+          "id": "platinum_prestige",
+          "label": "Platinum Prestige"
+        }
+      ],
+      "paint_finish_options": [
+        {
+          "id": "matte",
+          "label": "Matte"
+        },
+        {
+          "default": true,
+          "id": "eggshell",
+          "label": "Eggshell"
+        },
+        {
+          "id": "glossy",
+          "label": "Glossy"
+        }
+      ]
+    }
+  }
+}

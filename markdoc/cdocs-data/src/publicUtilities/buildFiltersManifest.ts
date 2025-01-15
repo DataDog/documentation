@@ -1,11 +1,10 @@
-import { GLOBAL_PLACEHOLDER_REGEX } from '../../schemas/regexes';
-import { FrontMatter } from '../../schemas/frontMatter';
-import { PLACEHOLDER_REGEX } from '../../schemas/regexes';
-import { FiltersManifest } from '../../schemas/pageFilters';
-import { FilterConfig } from '../../schemas/frontMatter';
-import { CdocsError } from '../../schemas/errors';
-import { CustomizationConfig } from '../../schemas/customizationConfig';
-import { v4 as uuidv4 } from 'uuid';
+import { GLOBAL_PLACEHOLDER_REGEX } from '../schemas/regexes';
+import { FrontMatter } from '../schemas/frontMatter';
+import { PLACEHOLDER_REGEX } from '../schemas/regexes';
+import { FiltersManifest, ClientSideFiltersManifest } from '../schemas/pageFilters';
+import { FilterConfig } from '../schemas/frontMatter';
+import { CdocsError } from '../schemas/errors';
+import { CustomizationConfig } from '../schemas/customizationConfig';
 
 /**
  * Combine a page's frontmatter, the global glossary,
@@ -68,6 +67,7 @@ export function buildFiltersManifest(p: {
       const { optionGroupIds: dynamicOptionGroupIds, errors } =
         buildDynamicOptionGroupIds({
           traitId: filter.trait_id,
+          // filterOptionsConfig: p.filterOptionsConfig,
           customizationConfig: p.customizationConfig,
           filterConfigsByTraitId: filterConfigByTraitId,
           precedingFilterIds: processedTraitIds,
@@ -81,8 +81,6 @@ export function buildFiltersManifest(p: {
     } else {
       optionGroupIds = [filter.option_group_id];
     }
-
-    console.log('optionGroupIds', optionGroupIds);
 
     // Collect a default value for every possible options set ID,
     // along with all possible selected values for the filter
@@ -146,7 +144,7 @@ function getPossibleDefaultsAndSelectedValues(p: {
     const optionGroup = p.customizationConfig.optionGroupsById[optionGroupId];
     if (!optionGroup) {
       errors.push({
-        message: `Invalid options source: The options source '${optionGroupId}', which is required for the trait ID '${p.traitId}', does not exist.`,
+        message: `Invalid options source: The options source '${optionGroupId}', which is required for the filter ID '${p.traitId}', does not exist.`,
       });
       return;
     }
@@ -180,6 +178,7 @@ function getPossibleDefaultsAndSelectedValues(p: {
  */
 function buildDynamicOptionGroupIds(p: {
   traitId: string;
+  // filterOptionsConfig: FilterOptionsConfig;
   filterConfigsByTraitId: Record<string, FilterConfig>;
   precedingFilterIds: string[];
   customizationConfig: CustomizationConfig;
@@ -189,39 +188,16 @@ function buildDynamicOptionGroupIds(p: {
   let optionGroupIds: string[] = [];
   const errors: CdocsError[] = [];
 
-  // Remove the placeholders from the option group ID,
-  // since any underscores in the placeholder will cause unwanted segmentation.
-  // The placeholders are stored for later use.
-  let segmentableOptionGroupId = filterConfig.option_group_id;
-  const placeholdersByUuid: Record<string, string> = {};
+  console.log('filterConfig', filterConfig);
 
-  const placeholders = filterConfig.option_group_id.match(GLOBAL_PLACEHOLDER_REGEX);
-
-  placeholders?.forEach((placeholder) => {
-    const uuid = uuidv4();
-    placeholdersByUuid[uuid] = placeholder;
-    segmentableOptionGroupId = segmentableOptionGroupId.replace(placeholder, uuid);
-  });
-
-  // TODO: Make this its own function
-  // A segment is an array of possible values for a single part of the option group ID.
-  // The segment for a <COLOR> placeholder might be ['purple', 'green', 'blue'].
-  // The segment for a non-placeholder is just its literal value in the option group ID, such as ['paint'].
-  const segments = segmentableOptionGroupId.split('_').map((segment) => {
-    // If it's not a placeholder, just return it
-    // as a single-item array of possible values for that segment
-    if (!Object.keys(placeholdersByUuid).includes(segment)) {
-      console.log('non-placeholder segment', segment);
+  const segments = filterConfig.option_group_id.split('_').map((segment) => {
+    // build non-placeholder segment (array of solitary possible value)
+    if (!segment.match(PLACEHOLDER_REGEX)) {
       return [segment];
     }
 
-    // Otherwise, build the placeholder segment
-    // (an array of all possible values for that placeholder)
-    const placeholderText = placeholdersByUuid[segment]; // e.g. "<COLOR>"
-    const referencedTraitId = placeholderText.slice(1, -1).toLowerCase(); // e.g. "color"
-
-    // If the referenced trait has not been encountered in a filter config
-    // yet, the placeholder is invalid
+    // build placeholder segment (array of all possible values)
+    const referencedTraitId = segment.slice(1, -1).toLowerCase();
     const referencedFilterConfig = p.filterConfigsByTraitId[referencedTraitId];
     if (!referencedFilterConfig || !p.precedingFilterIds.includes(referencedTraitId)) {
       errors.push({
@@ -231,7 +207,6 @@ function buildDynamicOptionGroupIds(p: {
       return [segment];
     }
 
-    // Return the current options for the referenced trait
     const referencedOptionGroup =
       p.customizationConfig.optionGroupsById[referencedFilterConfig.option_group_id];
 

@@ -1,12 +1,12 @@
 {
   "en": {
-    "traitGlossary": {
+    "traitsById": {
       "favorite_color": {
         "id": "favorite_color",
         "label": "Favorite color"
       }
     },
-    "optionGlossary": {
+    "optionsById": {
       "purple": {
         "id": "purple",
         "label": "purple"
@@ -16,7 +16,7 @@
         "label": "pink"
       }
     },
-    "optionGroupGlossary": {
+    "optionGroupsById": {
       "favorite_color_options": [
         {
           "default": true,
@@ -31,13 +31,13 @@
     }
   },
   "piglatin": {
-    "traitGlossary": {
+    "traitsById": {
       "favorite_color": {
         "id": "favorite_color",
         "label": "Avoritefay olorcay"
       }
     },
-    "optionGlossary": {
+    "optionsById": {
       "purple": {
         "id": "purple",
         "label": "urplepay"
@@ -47,7 +47,7 @@
         "label": "inkpay"
       }
     },
-    "optionGroupGlossary": {
+    "optionGroupsById": {
       "favorite_color_options": [
         {
           "default": true,

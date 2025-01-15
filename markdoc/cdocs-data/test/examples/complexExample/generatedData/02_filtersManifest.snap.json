@@ -1,0 +1,109 @@
+{
+  "filtersByTraitId": {
+    "paint_finish": {
+      "config": {
+        "label": "Finish",
+        "trait_id": "paint_finish",
+        "option_group_id": "paint_finish_options"
+      },
+      "defaultValsByOptionGroupId": {
+        "paint_finish_options": "eggshell"
+      },
+      "possibleVals": [
+        "matte",
+        "eggshell",
+        "glossy"
+      ]
+    },
+    "paint_color": {
+      "config": {
+        "label": "Color",
+        "trait_id": "paint_color",
+        "option_group_id": "<PAINT_FINISH>_paint_color_options"
+      },
+      "defaultValsByOptionGroupId": {
+        "matte_paint_color_options": "whispered_sandstorm",
+        "eggshell_paint_color_options": "sunlit_sands",
+        "glossy_paint_color_options": "golden_mirage"
+      },
+      "possibleVals": [
+        "whispered_sandstorm",
+        "stormlit_horizon",
+        "ashen_reverie",
+        "sunlit_sands",
+        "azure_dreamscape",
+        "silver_serenade",
+        "golden_mirage",
+        "sapphire_glitz",
+        "platinum_prestige"
+      ]
+    }
+  },
+  "optionGroupsById": {
+    "paint_finish_options": [
+      {
+        "id": "matte",
+        "label": "Matte"
+      },
+      {
+        "default": true,
+        "id": "eggshell",
+        "label": "Eggshell"
+      },
+      {
+        "id": "glossy",
+        "label": "Glossy"
+      }
+    ],
+    "matte_paint_color_options": [
+      {
+        "default": true,
+        "id": "whispered_sandstorm",
+        "label": "Whispered Sandstorm"
+      },
+      {
+        "id": "stormlit_horizon",
+        "label": "Stormlit Horizon"
+      },
+      {
+        "id": "ashen_reverie",
+        "label": "Ashen Reverie"
+      }
+    ],
+    "eggshell_paint_color_options": [
+      {
+        "default": true,
+        "id": "sunlit_sands",
+        "label": "Sunlit Sands"
+      },
+      {
+        "id": "azure_dreamscape",
+        "label": "Azure Dreamscape"
+      },
+      {
+        "id": "silver_serenade",
+        "label": "Silver Serenade"
+      }
+    ],
+    "glossy_paint_color_options": [
+      {
+        "default": true,
+        "id": "golden_mirage",
+        "label": "Golden Mirage"
+      },
+      {
+        "id": "sapphire_glitz",
+        "label": "Sapphire Glitz"
+      },
+      {
+        "id": "platinum_prestige",
+        "label": "Platinum Prestige"
+      }
+    ]
+  },
+  "errors": [],
+  "defaultValsByTraitId": {
+    "paint_finish": "eggshell",
+    "paint_color": "sunlit_sands"
+  }
+}

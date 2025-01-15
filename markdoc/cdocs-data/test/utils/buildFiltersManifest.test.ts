@@ -206,12 +206,12 @@ describe('buildFiltersManifest', () => {
   test('detects a nonexistent options source', () => {
     // Intentionally omit a referenced option group from the mock config
     const { matte_blue_paint_options, ...invalidOptionGroupGlossary } =
-      paintColorsCustomizationConfig.optionGroupGlossary;
+      paintColorsCustomizationConfig.optionGroupsById;
 
     const invalidCustomizationConfig = {
-      traitGlossary: { ...paintColorsCustomizationConfig.traitGlossary },
-      optionGlossary: { ...paintColorsCustomizationConfig.optionGlossary },
-      optionGroupGlossary: invalidOptionGroupGlossary,
+      traitsById: { ...paintColorsCustomizationConfig.traitsById },
+      optionsById: { ...paintColorsCustomizationConfig.optionsById },
+      optionGroupsById: invalidOptionGroupGlossary,
     };
 
     const manifest = buildFiltersManifest({
