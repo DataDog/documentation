@@ -115,7 +115,7 @@
         contents:
 
         - action: integrations
-          branch: moreauowen/fix-docs-images
+          branch: main
           globs:
           - "*/metadata.csv"
           - "*/manifest.json"
