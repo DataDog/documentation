@@ -209,11 +209,14 @@ _Requires: .NET Framework (with Datadog Agent 7.51+ and v3.2+) / .NET 6+_
 
 Lock (v2.49+)
 : The number of times threads are waiting for a lock and for how long.<br />
-_Requires: Preview .NET Framework (requires Datadog Agent 7.51+) / .NET 5+_
+_Requires: .NET Framework (requires Datadog Agent 7.51+) / .NET 5+_
 
 Live Heap (in Preview, v2.22+)
 : A subset of the allocated objects (with their class name) that are still in memory.<br />
 _Requires: .NET 7+_
+
+Note: **Allocations** and **Live Heap** profiling are in preview until .NET 10 where required better statistical allocation sampling will be available.
+
 
 [1]: /profiler/enabling/dotnet/#requirements
 {{< /programming-lang >}}
