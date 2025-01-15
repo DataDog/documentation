@@ -126,13 +126,16 @@ In order to publish an OAuth client, you first need to open a pull request for y
 As a part of your pull request, complete the following steps:
 
 1. Update your README file with an `## Uninstallation` section under `## Setup` that includes the following instructions (along with any custom instructions you would like to add):
-       - Once this integration has been uninstalled, any previous authorizations are revoked. 
-       - Additionally, ensure that all API keys associated with this integration have been disabled by searching for the integration name on the [API Keys page][10].
+   
+   - Once this integration has been uninstalled, any previous authorizations are revoked. 
+   - Additionally, ensure that all API keys associated with this integration have been disabled by searching for the integration name on the [API Keys page][10].
+   
 2. Update your `manifest.json` file to reference this new `## Uninstallation` section. This reference should appear directly beneath the support field:
-       - ```
-           "support": "README.md#Support",
-           "uninstallation": "README.md#Uninstallation",
-         ```
+
+   ```
+   "support": "README.md#Support",
+   "uninstallation": "README.md#Uninstallation",
+   ```
 
 #### Initiate publishing process in Developer Platform
 
