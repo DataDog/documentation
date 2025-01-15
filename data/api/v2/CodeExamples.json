@@ -599,7 +599,7 @@
   "ListLogs": [
     {
       "group": "logs",
-      "suffix": "",
+      "suffix": "_3400928236",
       "description": "Search logs returns \"OK\" response"
     },
     {

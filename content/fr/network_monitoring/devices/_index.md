@@ -56,11 +56,11 @@ Le profil générique recueille des métriques pour tous les périphériques non
 
 ### SD-WAN
 
-Datadog offre une surveillance SD-WAN (Software-Defined Wide Area Network) pour certains fournisseurs. Le SD-WAN est un type de technologie de réseau qui utilise les principes du réseau défini par logiciel (SDN) pour gérer et optimiser les performances des réseaux étendus (WAN). Cette technologie est principalement utilisée pour interconnecter les bureaux distants et les centres de données à travers différents transports (MPLS, Broadband, 5G, etc.). Le SD-WAN bénéficie de l'équilibrage automatique de la charge et de la détection des défaillances entre ces transports. 
+Datadog offre une surveillance SD-WAN (Software-Defined Wide Area Network) pour certains fournisseurs. Le SD-WAN est un type de technologie de réseau qui utilise les principes du réseau défini par logiciel (SDN) pour gérer et optimiser les performances des réseaux étendus (WAN). Cette technologie est principalement utilisée pour interconnecter les bureaux distants et les centres de données à travers différents transports (MPLS, Broadband, 5G, etc.). Le SD-WAN bénéficie de l'équilibrage automatique de la charge et de la détection des défaillances entre ces transports.
 
 Datadog prend en charge les fournisseurs suivants pour la surveillance de réseau SD-WAN :
 
-- [Meraki SD-WAN][7] 
+- [Meraki SD-WAN][7]
 - [Cisco SD-WAN][223] (version Bêta publique)
 
 ### Profils fournisseur
@@ -69,80 +69,80 @@ Les périphériques suivants sont pris en charge via des profils dédiés. Si un
   - personnaliser votre propre profil YAML (consultez la [page des questions/réponses pour le dépannage de NDM][8] pour savoir comment).
   - créer de nouveaux [profils][9] pour commencer à surveiller de nouveaux modèles d'appareils.
 
-| Fournisseur | Fichiers de configuration |
-| ---  | ----------- |
-| 3com | [3com.yaml][10] <br> |
-| TP-Link | [tp-link.yaml][11] <br> |
-| A10 | [a10.yaml][12] <br> |
-| Alcatel-lucent | [alcatel-lucent.yaml][13] <br> |
-| Anue | [anue.yaml][14] <br> |
-| Apc | [_apc.yaml][15] <br>[apc_ups.yaml][16] <br> |
-| [Arista][17] | [arista.yaml][18] <br>[_arista.yaml][19] <br> |
-| [Aruba][20] | [aruba-switch.yaml][21] <br>[_aruba-base.yaml][22] <br>[aruba-access-point.yaml][23] <br>[aruba.yaml][24] <br> |
-| Audiocodes | [audiocodes-mediant-sbc.yaml][25] <br> |
-| Avaya | [avaya.yaml][26] <br> |
-| Avocent | [avocent-acs.yaml][27] <br> |
-| Avtech | [avtech.yaml][28] <br> |
-| [Barracuda][200] | [barracuda.yaml][29]<br> |
-| Bluecat | [bluecat-server.yaml][30] <br> |
-| Brocade | [brocade.yaml][31] <br> |
-| Brother | [brother.yaml][32] <br> |
-| [Chatsworth][201] | [chatsworth_pdu.yaml][33] <br> |
-| Checkpoint | [checkpoint.yaml][34] <br>[checkpoint-firewall.yaml][35] <br> |
-| Chrysalis | [chrysalis.yaml][36] <br> |
+| Fournisseur                                                                                                                                                                                                              | Fichiers de configuration |
+|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------| ----------- |
+| 3com                                                                                                                                                                                                                     | [3com.yaml][10] <br> |
+| TP-Link                                                                                                                                                                                                                  | [tp-link.yaml][11] <br> |
+| A10                                                                                                                                                                                                                      | [a10.yaml][12] <br> |
+| Alcatel-lucent                                                                                                                                                                                                           | [alcatel-lucent.yaml][13] <br> |
+| Anue                                                                                                                                                                                                                     | [anue.yaml][14] <br> |
+| Apc                                                                                                                                                                                                                      | [_apc.yaml][15] <br>[apc_ups.yaml][16] <br> |
+| [Arista][17]                                                                                                                                                                                                             | [arista.yaml][18] <br>[_arista.yaml][19] <br> |
+| [Aruba][20]                                                                                                                                                                                                              | [aruba-switch.yaml][21] <br>[_aruba-base.yaml][22] <br>[aruba-access-point.yaml][23] <br>[aruba.yaml][24] <br> |
+| Audiocodes                                                                                                                                                                                                               | [audiocodes-mediant-sbc.yaml][25] <br> |
+| Avaya                                                                                                                                                                                                                    | [avaya.yaml][26] <br> |
+| Avocent                                                                                                                                                                                                                  | [avocent-acs.yaml][27] <br> |
+| Avtech                                                                                                                                                                                                                   | [avtech.yaml][28] <br> |
+| [Barracuda][200]                                                                                                                                                                                                         | [barracuda.yaml][29]<br> |
+| Bluecat                                                                                                                                                                                                                  | [bluecat-server.yaml][30] <br> |
+| Brocade                                                                                                                                                                                                                  | [brocade.yaml][31] <br> |
+| Brother                                                                                                                                                                                                                  | [brother.yaml][32] <br> |
+| [Chatsworth][201]                                                                                                                                                                                                        | [chatsworth_pdu.yaml][33] <br> |
+| Checkpoint                                                                                                                                                                                                               | [checkpoint.yaml][34] <br>[checkpoint-firewall.yaml][35] <br> |
+| Chrysalis                                                                                                                                                                                                                | [chrysalis.yaml][36] <br> |
 | [Cisco][202] </br> [Cisco ACI][203] </br> [Cisco ASA][204] </br> Cisco ASR </br> Cisco Catalyst </br> Cisco ICM </br> [Cisco ISE][205] </br> Cisco ISR </br> Cisco Nexus </br> Cisco SB </br> Cisco UCS  </br> Cisco WLC | [cisco-3850.yaml][37]</br> [cisco-asa.yaml][38]  </br>[cisco-asa-5525.yaml][39]  </br>[cisco-asr.yaml][40]  </br>[cisco-catalyst-wlc.yaml][41]  </br>[cisco-catalyst.yaml][42]  </br>[cisco-csr1000v.yaml][43]  </br>[cisco_icm.yaml][44]  </br>[cisco-ise.yaml][45]  </br>[cisco-isr.yaml][46]  </br>[cisco_isr_4431.yaml][47]  </br>[cisco-nexus.yaml][48]  </br>[cisco-sb.yaml][49]  </br>[cisco-ucs.yaml][50]  </br>[_cisco-metadata.yaml][51]  </br>[_cisco-wlc.yaml][52] </br>[cisco-legacy-wlc.yaml][53]  </br>[cisco_uc_virtual_machine.yaml][54] |
-| Citrix | [citrix.yaml][55] <br> |
-| Cradlepoint | [cradlepoint.yaml][56] <br> |
-| Cyberpower | [cyberpower-pdu.yaml][57] <br> |
-| [Dell][206] | [dell-poweredge.yaml][58] <br>[_dell.yaml][59] <br>[idrac.yaml][60] <br>[isilon.yaml][61] <br> |
-| Dialogic | [dialogic-media-gateway.yaml][62] <br> |
-| Dlink | [dlink.yaml][63] <br> |
-| Eaton | [eaton-epdu.yaml][64] <br> |
-| Exagrid | [exagrid.yaml][65] <br> |
-| Extreme Networks | [extreme-switching.yaml][66] <br> |
-| [F5][207] | [f5-big-ip.yaml][67] <br> |
-| Fireeye | [fireeye.yaml][68] <br> |
-| [Fortinet][208] | [fortinet.yaml][70] <br>[fortinet-fortigate.yaml][71] <br> |
-| Gigamon | [gigamon.yaml][72] <br> |
-| [HP][209] | [hp-ilo4.yaml][73] <br>[_hp.yaml][74] <br>[hpe-proliant.yaml][75] <br> |
-| Huawei | [_huawei.yaml][76] <br> |
-| iXsystems | [ixsystems-truenas.yaml][77] <br> |
-| IBM | [ibm.yaml][78] <br> |
-| Infinera | [infinera-coriant-groove.yaml][79] <br> |
-| [Infoblox][213] | [infoblox-ipam.yaml][80] <br> |
-| [Juniper Networks][210] | [_juniper.yaml][81] <br>[juniper-ex.yaml][82] <br>[_juniper-junos-generic.yaml][83] <br>[juniper-mx.yaml][84]
-| Linksys | [linksys.yaml][87] <br> |
-| McAfee | [mcafee-web-gateway.yaml][88] <br> |
-| [Meraki][7] | [meraki-cloud-controller.yaml][89] <br>[meraki.yaml][90] <br> |
-| Mikrotik | [mikrotik-router.yaml][91] <br> |
-| Nasuni | [nasuni-filer.yaml][92] <br> |
-| NEC | [nec-univerge.yaml][93] <br> |
-| NetApp | [netapp.yaml][94] <br> |
-| Netgear | [netgear.yaml][95] <br> |
-| Nvidia | [nvidia.yaml][96] <br> |
-| Omron | [omron-cj-ethernet-ip.yaml][97] <br> |
-| Opengear | [_opengear.yaml][98] <br> |
-| [Palo Alto Networks][222] | [palo-alto.yaml][100] <br>[_palo-alto.yaml][101] <br> |
-| Peplink | [peplink.yaml][102] <br> |
-| [pfSense][212] | [pf-sense.yaml][103] <br> |
-| Raritan | [raritan-dominion.yaml][104] <br> |
-| Riverbed | [riverbed.yaml][105] <br> |
-| Ruckus | [ruckus.yaml][106] <br> |
-| Server Iron | [server-iron-switch.yaml][107] <br> |
-| Servertech | [servertech.yaml][108] <br> |
-| Silverpeak | [silverpeak-edgeconnect.yaml][109] <br> |
-| Sinetica | [sinetica-eagle-i.yaml][110] <br> |
-| Sophos | [sophos-xgs-firewall.yaml][111] <br> |
-| Synology | [synology-disk-station.yaml][112] <br> |
-| Tripplite | [tripplite.yaml][113] <br> |
-| Ubiquiti | [_ubiquiti.yaml][114] <br> |
-| Velocloud | [velocloud-edge.yaml][115] <br> |
-| Vertiv | [_vertiv.yaml][116] <br> |
-| VMware | [vmware-esx.yaml][117] <br> |
-| Watchguard | [watchguard.yaml][118] <br> |
-| Western Digital | [western-digital-mycloud-ex2-ultra.yaml][119] <br> |
-| Zebra | [zebra-printer.yaml][120] <br> |
-| Zyxel | [zyxel-switch.yaml][121] <br> |
+| Citrix                                                                                                                                                                                                                   | [citrix.yaml][55] <br> |
+| Cradlepoint                                                                                                                                                                                                              | [cradlepoint.yaml][56] <br> |
+| Cyberpower                                                                                                                                                                                                               | [cyberpower-pdu.yaml][57] <br> |
+| [Dell][206]                                                                                                                                                                                                              | [dell-poweredge.yaml][58] <br>[_dell.yaml][59] <br>[idrac.yaml][60] <br>[isilon.yaml][61] <br> |
+| Dialogic                                                                                                                                                                                                                 | [dialogic-media-gateway.yaml][62] <br> |
+| Dlink                                                                                                                                                                                                                    | [dlink.yaml][63] <br> |
+| Eaton                                                                                                                                                                                                                    | [eaton-epdu.yaml][64] <br> |
+| Exagrid                                                                                                                                                                                                                  | [exagrid.yaml][65] <br> |
+| Extreme Networks                                                                                                                                                                                                         | [extreme-switching.yaml][66] <br> |
+| [F5][207]                                                                                                                                                                                                                | [f5-big-ip.yaml][67] <br> |
+| Fireeye                                                                                                                                                                                                                  | [fireeye.yaml][68] <br> |
+| [Fortinet][208]                                                                                                                                                                                                          | [fortinet.yaml][70] <br>[fortinet-fortigate.yaml][71] <br> |
+| Gigamon                                                                                                                                                                                                                  | [gigamon.yaml][72] <br> |
+| [HP][209]                                                                                                                                                                                                                | [hp-ilo4.yaml][73] <br>[_hp.yaml][74] <br>[hpe-proliant.yaml][75] <br> |
+| Huawei                                                                                                                                                                                                                   | [_huawei.yaml][76] <br> |
+| iXsystems                                                                                                                                                                                                                | [ixsystems-truenas.yaml][77] <br> |
+| IBM                                                                                                                                                                                                                      | [ibm.yaml][78] <br> |
+| Infinera                                                                                                                                                                                                                 | [infinera-coriant-groove.yaml][79] <br> |
+| [Infoblox][213]                                                                                                                                                                                                          | [infoblox-ipam.yaml][80] <br> |
+| [Juniper Networks][210]                                                                                                                                                                                                  | [_juniper.yaml][81] <br>[juniper-ex.yaml][82] <br>[_juniper-junos-generic.yaml][83] <br>[juniper-mx.yaml][84]
+| Linksys                                                                                                                                                                                                                  | [linksys.yaml][87] <br> |
+| McAfee                                                                                                                                                                                                                   | [mcafee-web-gateway.yaml][88] <br> |
+| [Meraki][7]                                                                                                                                                                                                              | [meraki-cloud-controller.yaml][89] <br>[meraki.yaml][90] <br> |
+| Mikrotik                                                                                                                                                                                                                 | [mikrotik-router.yaml][91] <br> |
+| Nasuni                                                                                                                                                                                                                   | [nasuni-filer.yaml][92] <br> |
+| NEC                                                                                                                                                                                                                      | [nec-univerge.yaml][93] <br> |
+| NetApp                                                                                                                                                                                                                   | [netapp.yaml][94] <br> |
+| Netgear                                                                                                                                                                                                                  | [netgear.yaml][95] <br> |
+| NVIDIA                                                                                                                                                                                                                   | [nvidia.yaml][96] <br> |
+| Omron                                                                                                                                                                                                                    | [omron-cj-ethernet-ip.yaml][97] <br> |
+| Opengear                                                                                                                                                                                                                 | [_opengear.yaml][98] <br> |
+| [Palo Alto Networks][222]                                                                                                                                                                                                | [palo-alto.yaml][100] <br>[_palo-alto.yaml][101] <br> |
+| Peplink                                                                                                                                                                                                                  | [peplink.yaml][102] <br> |
+| [pfSense][212]                                                                                                                                                                                                           | [pf-sense.yaml][103] <br> |
+| Raritan                                                                                                                                                                                                                  | [raritan-dominion.yaml][104] <br> |
+| Riverbed                                                                                                                                                                                                                 | [riverbed.yaml][105] <br> |
+| Ruckus                                                                                                                                                                                                                   | [ruckus.yaml][106] <br> |
+| Server Iron                                                                                                                                                                                                              | [server-iron-switch.yaml][107] <br> |
+| Servertech                                                                                                                                                                                                               | [servertech.yaml][108] <br> |
+| Silverpeak                                                                                                                                                                                                               | [silverpeak-edgeconnect.yaml][109] <br> |
+| Sinetica                                                                                                                                                                                                                 | [sinetica-eagle-i.yaml][110] <br> |
+| Sophos                                                                                                                                                                                                                   | [sophos-xgs-firewall.yaml][111] <br> |
+| Synology                                                                                                                                                                                                                 | [synology-disk-station.yaml][112] <br> |
+| Tripplite                                                                                                                                                                                                                | [tripplite.yaml][113] <br> |
+| Ubiquiti                                                                                                                                                                                                                 | [_ubiquiti.yaml][114] <br> |
+| Velocloud                                                                                                                                                                                                                | [velocloud-edge.yaml][115] <br> |
+| Vertiv                                                                                                                                                                                                                   | [_vertiv.yaml][116] <br> |
+| VMware                                                                                                                                                                                                                   | [vmware-esx.yaml][117] <br> |
+| Watchguard                                                                                                                                                                                                               | [watchguard.yaml][118] <br> |
+| Western Digital                                                                                                                                                                                                          | [western-digital-mycloud-ex2-ultra.yaml][119] <br> |
+| Zebra                                                                                                                                                                                                                    | [zebra-printer.yaml][120] <br> |
+| Zyxel                                                                                                                                                                                                                    | [zyxel-switch.yaml][121] <br> |
 
 
 
@@ -183,12 +183,12 @@ Les périphériques suivants sont pris en charge via des profils dédiés. Si un
 [31]:https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/brocade.yaml
 [32]:https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/brother.yaml
 [33]:https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/chatsworth_pdu.yaml
-[34]:https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/checkpoint.yaml 
+[34]:https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/checkpoint.yaml
 [35]:https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/checkpoint-firewall.yaml
 [36]:https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/chrysalis.yaml
-[37]:https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/cisco-3850.yaml  
+[37]:https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/cisco-3850.yaml
 [38]:https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/cisco-asa.yaml
-[39]:https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/cisco-asa-5525.yaml 
+[39]:https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/cisco-asa-5525.yaml
 [40]:https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/cisco-asr.yaml
 [41]:https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/cisco-catalyst-wlc.yaml
 [42]:https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/cisco-catalyst.yaml
@@ -199,15 +199,15 @@ Les périphériques suivants sont pris en charge via des profils dédiés. Si un
 [47]:https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/cisco_isr_4431.yaml
 [48]:https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/cisco-nexus.yaml
 [49]:https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/cisco-sb.yaml
-[50]:https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/cisco-ucs.yaml 
-[51]:https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/_cisco-metadata.yaml 
+[50]:https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/cisco-ucs.yaml
+[51]:https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/_cisco-metadata.yaml
 [52]:https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/_cisco-wlc.yaml
-[53]:https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/cisco-legacy-wlc.yaml 
+[53]:https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/cisco-legacy-wlc.yaml
 [54]:https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/cisco_uc_virtual_machine.yaml
 [55]:https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/citrix.yaml
 [56]:https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/cradlepoint.yaml
 [57]:https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/cyberpower-pdu.yaml
-[58]:https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/dell-poweredge.yaml 
+[58]:https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/dell-poweredge.yaml
 [59]:https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/_dell.yaml
 [60]:https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/idrac.yaml
 [61]:https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/isilon.yaml
@@ -220,7 +220,7 @@ Les périphériques suivants sont pris en charge via des profils dédiés. Si un
 [68]:https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/fireeye.yaml
 [70]:https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/fortinet.yaml
 [71]:https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/fortinet-fortigate.yaml
-[72]:https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/gigamon.yaml 
+[72]:https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/gigamon.yaml
 [73]:https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/hp-ilo4.yaml
 [74]:https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/_hp.yaml
 [75]:https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/hpe-proliant.yaml
@@ -248,7 +248,7 @@ Les périphériques suivants sont pris en charge via des profils dédiés. Si un
 [96]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/nvidia.yaml
 [97]:https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/omron-cj-ethernet-ip.yaml
 [98]:https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/_opengear.yaml
-[100]:https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/palo-alto.yaml 
+[100]:https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/palo-alto.yaml
 [101]:https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/_palo-alto.yaml
 [102]:https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/peplink.yaml
 [103]:https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/pf-sense.yaml

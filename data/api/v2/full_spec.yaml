@@ -1628,6 +1628,25 @@ components:
       type: string
       x-enum-varnames:
       - BILLING_DIMENSIONS
+    Advisory:
+      description: Advisory.
+      properties:
+        base_severity:
+          description: Advisory base severity.
+          example: Critical
+          type: string
+        id:
+          description: Advisory id.
+          example: GHSA-4wrc-f8pq-fpqp
+          type: string
+        severity:
+          description: Advisory Datadog severity.
+          example: Medium
+          type: string
+      required:
+      - id
+      - base_severity
+      type: object
     ApiID:
       description: API identifier.
       example: 90646597-5fdb-4a17-a240-647003f8c028
@@ -1803,6 +1822,131 @@ components:
       type: string
       x-enum-varnames:
       - APPLICATION_KEYS
+    Asset:
+      description: A single vulnerable asset
+      properties:
+        attributes:
+          $ref: '#/components/schemas/AssetAttributes'
+        id:
+          description: The unique ID for this asset.
+          example: Repository|github.com/DataDog/datadog-agent.git
+          type: string
+        type:
+          $ref: '#/components/schemas/AssetEntityType'
+      required:
+      - id
+      - type
+      - attributes
+      type: object
+    AssetAttributes:
+      description: The JSON:API attributes of the asset.
+      properties:
+        arch:
+          description: Asset architecture.
+          example: arm64
+          type: string
+        environments:
+          description: List of environments where the asset is deployed.
+          example:
+          - staging
+          items:
+            example: staging
+            type: string
+          type: array
+        name:
+          description: Asset name.
+          example: github.com/DataDog/datadog-agent.git
+          type: string
+        operating_system:
+          $ref: '#/components/schemas/AssetAttributesOperatingSystem'
+        risks:
+          $ref: '#/components/schemas/AssetAttributesRisks'
+        type:
+          $ref: '#/components/schemas/AssetType'
+        version:
+          $ref: '#/components/schemas/AssetAttributesVersion'
+      required:
+      - name
+      - type
+      - risks
+      - environments
+      type: object
+    AssetAttributesOperatingSystem:
+      description: Asset operating system.
+      properties:
+        description:
+          description: Operating system version.
+          example: '24.04'
+          type: string
+        name:
+          description: Operating system name.
+          example: ubuntu
+          type: string
+      required:
+      - name
+      type: object
+    AssetAttributesRisks:
+      description: Asset risks.
+      properties:
+        has_access_to_sensitive_data:
+          description: Whether the asset has access to sensitive data or not.
+          example: false
+          type: boolean
+        has_privileged_access:
+          description: Whether the asset has privileged access or not.
+          example: false
+          type: boolean
+        in_production:
+          description: Whether the asset is in production or not.
+          example: false
+          type: boolean
+        is_publicly_accessible:
+          description: Whether the asset is publicly accessible or not.
+          example: false
+          type: boolean
+        under_attack:
+          description: Whether the asset is under attack or not.
+          example: false
+          type: boolean
+      required:
+      - in_production
+      type: object
+    AssetAttributesVersion:
+      description: Asset version.
+      properties:
+        first:
+          description: Asset first version.
+          example: _latest
+          type: string
+        last:
+          description: Asset last version.
+          example: _latest
+          type: string
+      type: object
+    AssetEntityType:
+      description: The JSON:API type.
+      enum:
+      - assets
+      example: assets
+      type: string
+      x-enum-varnames:
+      - ASSETS
+    AssetType:
+      description: The asset type
+      enum:
+      - Repository
+      - Service
+      - Host
+      - HostImage
+      - Image
+      example: Repository
+      type: string
+      x-enum-varnames:
+      - REPOSITORY
+      - SERVICE
+      - HOST
+      - HOSTIMAGE
+      - IMAGE
     AuditLogsEvent:
       description: Object description of an Audit Logs event after it is processed
         and stored by Datadog.
@@ -2525,6 +2669,57 @@ components:
             $ref: '#/components/schemas/AwsCURConfig'
           type: array
       type: object
+    AwsScanOptionsAttributes:
+      description: Attributes for the AWS scan options.
+      properties:
+        lambda:
+          description: Indicates if scanning of Lambda functions is enabled.
+          example: true
+          type: boolean
+        sensitive_data:
+          description: Indicates if scanning for sensitive data is enabled.
+          example: false
+          type: boolean
+        vuln_containers_os:
+          description: Indicates if scanning for vulnerabilities in containers is
+            enabled.
+          example: true
+          type: boolean
+        vuln_host_os:
+          description: Indicates if scanning for vulnerabilities in hosts is enabled.
+          example: true
+          type: boolean
+      type: object
+    AwsScanOptionsData:
+      description: Single AWS Scan Options entry.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/AwsScanOptionsAttributes'
+        id:
+          description: The ID of the AWS account.
+          example: '184366314700'
+          type: string
+        type:
+          $ref: '#/components/schemas/AwsScanOptionsType'
+      type: object
+    AwsScanOptionsResponse:
+      description: Response object that includes a list of AWS scan options.
+      properties:
+        data:
+          description: A list of AWS scan options.
+          items:
+            $ref: '#/components/schemas/AwsScanOptionsData'
+          type: array
+      type: object
+    AwsScanOptionsType:
+      default: aws_scan_options
+      description: The type of the resource. The value should always be `aws_scan_options`.
+      enum:
+      - aws_scan_options
+      example: aws_scan_options
+      type: string
+      x-enum-varnames:
+      - AWS_SCAN_OPTIONS
     AzureUCConfig:
       description: Azure config.
       properties:
@@ -4430,6 +4625,25 @@ components:
       type: string
       x-enum-varnames:
       - DATADOG_AGENT
+    CVSS:
+      description: Vulnerability severity.
+      properties:
+        score:
+          description: Vulnerability severity score.
+          example: 4.5
+          format: double
+          type: number
+        severity:
+          $ref: '#/components/schemas/VulnerabilitySeverity'
+        vector:
+          description: Vulnerability CVSS vector.
+          example: CVSS:3.0/AV:L/AC:L/PR:L/UI:N/S:U/C:N/I:N/A:H
+          type: string
+      required:
+      - score
+      - severity
+      - vector
+      type: object
     CalculatedField:
       description: Calculated field.
       properties:
@@ -5588,6 +5802,24 @@ components:
           items:
             $ref: '#/components/schemas/CloudflareAccountResponseData'
           type: array
+      type: object
+    CodeLocation:
+      description: Code vulnerability location.
+      properties:
+        file_path:
+          description: Vulnerability location file path.
+          example: src/Class.java:100
+          type: string
+        location:
+          description: Vulnerability extracted location.
+          example: com.example.Class:100
+          type: string
+        method:
+          description: Vulnerability location method.
+          example: FooBar
+          type: string
+      required:
+      - location
       type: object
     ConfluentAccountCreateRequest:
       description: Payload schema when adding a Confluent account.
@@ -6758,6 +6990,140 @@ components:
           type: array
         meta:
           $ref: '#/components/schemas/CSMAgentsMetadata'
+      type: object
+    CsmCloudAccountsCoverageAnalysisAttributes:
+      description: CSM Cloud Accounts Coverage Analysis attributes.
+      properties:
+        aws_coverage:
+          $ref: '#/components/schemas/CsmCoverageAnalysis'
+        azure_coverage:
+          $ref: '#/components/schemas/CsmCoverageAnalysis'
+        gcp_coverage:
+          $ref: '#/components/schemas/CsmCoverageAnalysis'
+        org_id:
+          description: The ID of your organization.
+          example: 123456
+          format: int64
+          type: integer
+        total_coverage:
+          $ref: '#/components/schemas/CsmCoverageAnalysis'
+      type: object
+    CsmCloudAccountsCoverageAnalysisData:
+      description: CSM Cloud Accounts Coverage Analysis data.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/CsmCloudAccountsCoverageAnalysisAttributes'
+        id:
+          description: The ID of your organization.
+          example: 66b3c6b5-5c9a-457e-b1c3-f247ca23afa3
+          type: string
+        type:
+          default: get_cloud_accounts_coverage_analysis_response_public_v0
+          description: The type of the resource. The value should always be `get_cloud_accounts_coverage_analysis_response_public_v0`.
+          example: get_cloud_accounts_coverage_analysis_response_public_v0
+          type: string
+      type: object
+    CsmCloudAccountsCoverageAnalysisResponse:
+      description: CSM Cloud Accounts Coverage Analysis response.
+      properties:
+        data:
+          $ref: '#/components/schemas/CsmCloudAccountsCoverageAnalysisData'
+      type: object
+    CsmCoverageAnalysis:
+      description: CSM Coverage Analysis.
+      properties:
+        configured_resources_count:
+          description: The number of fully configured resources.
+          example: 8
+          format: int64
+          type: integer
+        coverage:
+          description: The coverage percentage.
+          example: 0.8
+          format: double
+          type: number
+        partially_configured_resources_count:
+          description: The number of partially configured resources.
+          example: 0
+          format: int64
+          type: integer
+        total_resources_count:
+          description: The total number of resources.
+          example: 10
+          format: int64
+          type: integer
+      type: object
+    CsmHostsAndContainersCoverageAnalysisAttributes:
+      description: CSM Hosts and Containers Coverage Analysis attributes.
+      properties:
+        cspm_coverage:
+          $ref: '#/components/schemas/CsmCoverageAnalysis'
+        cws_coverage:
+          $ref: '#/components/schemas/CsmCoverageAnalysis'
+        org_id:
+          description: The ID of your organization.
+          example: 123456
+          format: int64
+          type: integer
+        total_coverage:
+          $ref: '#/components/schemas/CsmCoverageAnalysis'
+        vm_coverage:
+          $ref: '#/components/schemas/CsmCoverageAnalysis'
+      type: object
+    CsmHostsAndContainersCoverageAnalysisData:
+      description: CSM Hosts and Containers Coverage Analysis data.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/CsmHostsAndContainersCoverageAnalysisAttributes'
+        id:
+          description: The ID of your organization.
+          example: 66b3c6b5-5c9a-457e-b1c3-f247ca23afa3
+          type: string
+        type:
+          default: get_hosts_and_containers_coverage_analysis_response_public_v0
+          description: The type of the resource. The value should always be `get_hosts_and_containers_coverage_analysis_response_public_v0`.
+          example: get_hosts_and_containers_coverage_analysis_response_public_v0
+          type: string
+      type: object
+    CsmHostsAndContainersCoverageAnalysisResponse:
+      description: CSM Hosts and Containers Coverage Analysis response.
+      properties:
+        data:
+          $ref: '#/components/schemas/CsmHostsAndContainersCoverageAnalysisData'
+      type: object
+    CsmServerlessCoverageAnalysisAttributes:
+      description: CSM Serverless Resources Coverage Analysis attributes.
+      properties:
+        cws_coverage:
+          $ref: '#/components/schemas/CsmCoverageAnalysis'
+        org_id:
+          description: The ID of your organization.
+          example: 123456
+          format: int64
+          type: integer
+        total_coverage:
+          $ref: '#/components/schemas/CsmCoverageAnalysis'
+      type: object
+    CsmServerlessCoverageAnalysisData:
+      description: CSM Serverless Resources Coverage Analysis data.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/CsmServerlessCoverageAnalysisAttributes'
+        id:
+          description: The ID of your organization.
+          example: 66b3c6b5-5c9a-457e-b1c3-f247ca23afa3
+          type: string
+        type:
+          default: get_serverless_coverage_analysis_response_public_v0
+          description: The type of the resource. The value should always be `get_serverless_coverage_analysis_response_public_v0`.
+          example: get_serverless_coverage_analysis_response_public_v0
+          type: string
+      type: object
+    CsmServerlessCoverageAnalysisResponse:
+      description: CSM Serverless Resources Coverage Analysis response.
+      properties:
+        data:
+          $ref: '#/components/schemas/CsmServerlessCoverageAnalysisData'
       type: object
     CustomCostGetResponseMeta:
       description: Meta for the response from the Get Custom Costs endpoints.
@@ -8004,6 +8370,40 @@ components:
             type: number
           type: array
       type: object
+    DependencyLocation:
+      description: Static library vulnerability location.
+      properties:
+        column_end:
+          description: Location column end.
+          example: 140
+          format: int64
+          type: integer
+        column_start:
+          description: Location column start.
+          example: 5
+          format: int64
+          type: integer
+        file_name:
+          description: Location file name.
+          example: src/go.mod
+          type: string
+        line_end:
+          description: Location line end.
+          example: 10
+          format: int64
+          type: integer
+        line_start:
+          description: Location line start.
+          example: 1
+          format: int64
+          type: integer
+      required:
+      - file_name
+      - line_start
+      - line_end
+      - column_start
+      - column_end
+      type: object
     DetailedFinding:
       description: A single finding with with message and resource configuration.
       properties:
@@ -8838,6 +9238,20 @@ components:
       - id
       - type
       - attributes
+      type: object
+    EPSS:
+      description: Vulnerability EPSS severity.
+      properties:
+        score:
+          description: Vulnerability EPSS severity score.
+          example: 0.2
+          format: double
+          type: number
+        severity:
+          $ref: '#/components/schemas/VulnerabilitySeverity'
+      required:
+      - score
+      - severity
       type: object
     EmailTypeType:
       description: The type of email.
@@ -13995,6 +14409,12 @@ components:
             the error.
           example: Missing required attribute in body
           type: string
+        meta:
+          additionalProperties: {}
+          description: Non-standard meta-information about the error
+          type: object
+        source:
+          $ref: '#/components/schemas/JSONAPIErrorItemSource'
         status:
           description: Status code of the response.
           example: '400'
@@ -14002,6 +14422,24 @@ components:
         title:
           description: Short human-readable summary of the error.
           example: Bad Request
+          type: string
+      type: object
+    JSONAPIErrorItemSource:
+      description: References to the source of the error.
+      properties:
+        header:
+          description: A string indicating the name of a single request header which
+            caused the error.
+          example: Authorization
+          type: string
+        parameter:
+          description: A string indicating which URI query parameter caused the error.
+          example: limit
+          type: string
+        pointer:
+          description: A JSON pointer to the value in the request document that caused
+            the error.
+          example: /data/attributes/title
           type: string
       type: object
     JSONAPIErrorResponse:
@@ -14246,6 +14684,48 @@ components:
       type: string
       x-enum-varnames:
       - LEAKED_KEYS
+    Library:
+      description: Vulnerability library.
+      properties:
+        name:
+          description: Vulnerability library name.
+          example: linux-aws-5.15
+          type: string
+        version:
+          description: Vulnerability library version.
+          example: 5.15.0
+          type: string
+      required:
+      - name
+      type: object
+    Links:
+      description: The JSON:API links related to pagination.
+      properties:
+        first:
+          description: First page link.
+          example: https://api.datadoghq.com/api/v2/security/vulnerabilities?page%5Bnumber%5D=1&page%5Btoken%5D=b82cef018aab81ed1d4bb4xb35xxfc065da7efa685fbcecdbd338f3015e3afabbbfa3a911b4984_721ee28a-zecb-4e45-9960-c42065b574f4
+          type: string
+        last:
+          description: Last page link.
+          example: https://api.datadoghq.com/api/v2/security/vulnerabilities?page%5Bnumber%5D=15&page%5Btoken%5D=b82cef018aab81ed1d4bb4xb35xxfc065da7efa685fbcecdbd338f3015e3afabbbfa3a911b4984_721ee28a-zecb-4e45-9960-c42065b574f4
+          type: string
+        next:
+          description: Next page link.
+          example: https://api.datadoghq.com/api/v2/security/vulnerabilities?page%5Bnumber%5D=16&page%5Btoken%5D=b82cef018aab81ed1d4bb4xb35xxfc065da7efa685fbcecdbd338f3015e3afabbbfa3a911b4984_721ee28a-zecb-4e45-9960-c42065b574f4
+          type: string
+        previous:
+          description: Previous page link.
+          example: https://api.datadoghq.com/api/v2/security/vulnerabilities?page%5Bnumber%5D=14&page%5Btoken%5D=b82cef018aab81ed1d4bb4xb35xxfc065da7efa685fbcecdbd338f3015e3afabbbfa3a911b4984_721ee28a-zecb-4e45-9960-c42065b574f4
+          type: string
+        self:
+          description: Request link.
+          example: https://api.datadoghq.com/api/v2/security/vulnerabilities?filter%5Btool%5D=Infra
+          type: string
+      required:
+      - self
+      - first
+      - last
+      type: object
     ListAPIsResponse:
       description: Response for `ListAPIs`.
       properties:
@@ -14794,6 +15274,36 @@ components:
       - _NAME
       - USER_COUNT
       - _USER_COUNT
+    ListVulnerabilitiesResponse:
+      description: The expected response schema when listing vulnerabilities.
+      properties:
+        data:
+          description: List of vulnerabilities.
+          items:
+            $ref: '#/components/schemas/Vulnerability'
+          type: array
+        links:
+          $ref: '#/components/schemas/Links'
+        meta:
+          $ref: '#/components/schemas/Metadata'
+      required:
+      - data
+      type: object
+    ListVulnerableAssetsResponse:
+      description: The expected response schema when listing vulnerable assets.
+      properties:
+        data:
+          description: List of vulnerable assets.
+          items:
+            $ref: '#/components/schemas/Asset'
+          type: array
+        links:
+          $ref: '#/components/schemas/Links'
+        meta:
+          $ref: '#/components/schemas/Metadata'
+      required:
+      - data
+      type: object
     Log:
       description: Object description of a log after being processed and stored by
         Datadog.
@@ -15964,6 +16474,28 @@ components:
       - ms_channel_id
       - ms_channel_name
       - redirect_url
+      type: object
+    Metadata:
+      description: The metadata related to this request.
+      properties:
+        count:
+          description: Number of entities included in the response.
+          example: 150
+          format: int64
+          type: integer
+        token:
+          description: The token that identifies the request.
+          example: b82cef018aab81ed1d4bb4xb35xxfc065da7efa685fbcecdbd338f3015e3afabbbfa3a911b4984_721ee28a-zecb-4e45-9960-c42065b574f4
+          type: string
+        total:
+          description: Total number of entities across all pages.
+          example: 152431
+          format: int64
+          type: integer
+      required:
+      - count
+      - total
+      - token
       type: object
     Metric:
       description: Object for a single metric tag configuration.
@@ -20717,6 +21249,56 @@ components:
       required:
       - data
       type: object
+    Remediation:
+      description: Vulnerability remediation.
+      properties:
+        auto_solvable:
+          description: Whether the vulnerability can be resolved when recompiling
+            the package or not.
+          example: false
+          type: boolean
+        avoided_advisories:
+          description: Avoided advisories.
+          items:
+            $ref: '#/components/schemas/Advisory'
+          type: array
+        fixed_advisories:
+          description: Remediation fixed advisories.
+          items:
+            $ref: '#/components/schemas/Advisory'
+          type: array
+        library_name:
+          description: Library name remediating the vulnerability.
+          example: stdlib
+          type: string
+        library_version:
+          description: Library version remediating the vulnerability.
+          example: Upgrade to a version >= 1.20.0
+          type: string
+        new_advisories:
+          description: New advisories.
+          items:
+            $ref: '#/components/schemas/Advisory'
+          type: array
+        remaining_advisories:
+          description: Remaining advisories.
+          items:
+            $ref: '#/components/schemas/Advisory'
+          type: array
+        type:
+          description: Remediation type.
+          example: text
+          type: string
+      required:
+      - type
+      - library_name
+      - library_version
+      - auto_solvable
+      - fixed_advisories
+      - remaining_advisories
+      - new_advisories
+      - avoided_advisories
+      type: object
     ReorderRetentionFiltersRequest:
       description: A list of retention filters to reorder.
       properties:
@@ -24046,6 +24628,12 @@ components:
             as the search bar for detection rules.
           example: type:log_detection source:cloudtrail
           type: string
+        start_date:
+          description: A Unix millisecond timestamp giving the start date for the
+            suppression rule. After this date, it starts suppressing signals.
+          example: 1703187336000
+          format: int64
+          type: integer
         suppression_query:
           description: The suppression query of the suppression rule. If a signal
             matches this query, it is suppressed and not triggered. Same syntax as
@@ -24101,6 +24689,12 @@ components:
             as the search bar for detection rules.
           example: type:log_detection source:cloudtrail
           type: string
+        start_date:
+          description: A Unix millisecond timestamp giving the start date for the
+            suppression rule. After this date, it starts suppressing signals.
+          example: 1703187336000
+          format: int64
+          type: integer
         suppression_query:
           description: The suppression query of the suppression rule. If a signal
             matches this query, it is suppressed and is not triggered. It uses the
@@ -24187,6 +24781,15 @@ components:
             as the search bar for detection rules.
           example: type:log_detection source:cloudtrail
           type: string
+        start_date:
+          description: A Unix millisecond timestamp giving the start date for the
+            suppression rule. After this date, it starts suppressing signals. If unset,
+            the start date of the suppression rule is left untouched. If set to `null`,
+            the start date is removed.
+          example: 1703187336000
+          format: int64
+          nullable: true
+          type: integer
         suppression_query:
           description: The suppression query of the suppression rule. If a signal
             matches this query, it is suppressed and not triggered. Same syntax as
@@ -28463,6 +29066,378 @@ components:
       type: string
       x-enum-varnames:
       - USERS
+    VulnerabilitiesType:
+      description: The JSON:API type.
+      enum:
+      - vulnerabilities
+      example: vulnerabilities
+      type: string
+      x-enum-varnames:
+      - VULNERABILITIES
+    Vulnerability:
+      description: A single vulnerability
+      properties:
+        attributes:
+          $ref: '#/components/schemas/VulnerabilityAttributes'
+        id:
+          description: The unique ID for this vulnerability.
+          example: 3ecdfea798f2ce8f6e964805a344945f
+          type: string
+        relationships:
+          $ref: '#/components/schemas/VulnerabilityRelationships'
+        type:
+          $ref: '#/components/schemas/VulnerabilitiesType'
+      required:
+      - id
+      - type
+      - attributes
+      - relationships
+      type: object
+    VulnerabilityAttributes:
+      description: The JSON:API attributes of the vulnerability.
+      properties:
+        advisory_id:
+          description: Vulnerability advisory ID.
+          example: TRIVY-CVE-2023-0615
+          type: string
+        code_location:
+          $ref: '#/components/schemas/CodeLocation'
+        cve_list:
+          description: Vulnerability CVE list.
+          example:
+          - CVE-2023-0615
+          items:
+            example: CVE-2023-0615
+            type: string
+          type: array
+        cvss:
+          $ref: '#/components/schemas/VulnerabilityAttributesCvss'
+        dependency_locations:
+          $ref: '#/components/schemas/VulnerabilityAttributesDependencyLocations'
+        description:
+          description: Vulnerability description.
+          example: LDAP Injection is a security vulnerability that occurs when untrusted
+            user input is improperly handled and directly incorporated into LDAP queries
+            without appropriate sanitization or validation. This vulnerability enables
+            attackers to manipulate LDAP queries and potentially gain unauthorized
+            access, modify data, or extract sensitive information from the directory
+            server. By exploiting the LDAP injection vulnerability, attackers can
+            execute malicious commands, bypass authentication mechanisms, and perform
+            unauthorized actions within the directory service.
+          type: string
+        ecosystem:
+          $ref: '#/components/schemas/VulnerabilityEcosystem'
+        exposure_time:
+          description: Vulnerability exposure time in seconds.
+          example: 5618604
+          format: int64
+          type: integer
+        first_detection:
+          description: First detection of the vulnerability in [RFC 3339](https://datatracker.ietf.org/doc/html/rfc3339)
+            format
+          example: 2024-09-19 21:23:08+00:00
+          type: string
+        fix_available:
+          description: Whether the vulnerability has a remediation or not.
+          example: false
+          type: boolean
+        language:
+          description: Vulnerability language.
+          example: ubuntu
+          type: string
+        last_detection:
+          description: Last detection of the vulnerability in [RFC 3339](https://datatracker.ietf.org/doc/html/rfc3339)
+            format
+          example: 2024-09-01 21:23:08+00:00
+          type: string
+        library:
+          $ref: '#/components/schemas/Library'
+        remediations:
+          description: List of remediations.
+          items:
+            $ref: '#/components/schemas/Remediation'
+          type: array
+        repo_digests:
+          description: Vulnerability `repo_digest` list (when the vulnerability is
+            related to `Image` asset).
+          items:
+            example: sha256:0ae7da091191787229d321e3638e39c319a97d6e20f927d465b519d699215bf7
+            type: string
+          type: array
+        risks:
+          $ref: '#/components/schemas/VulnerabilityRisks'
+        status:
+          $ref: '#/components/schemas/VulnerabilityStatus'
+        title:
+          description: Vulnerability title.
+          example: LDAP Injection
+          type: string
+        tool:
+          $ref: '#/components/schemas/VulnerabilityTool'
+        type:
+          $ref: '#/components/schemas/VulnerabilityType'
+      required:
+      - type
+      - cvss
+      - status
+      - tool
+      - title
+      - description
+      - cve_list
+      - risks
+      - language
+      - first_detection
+      - last_detection
+      - exposure_time
+      - remediations
+      - fix_available
+      type: object
+    VulnerabilityAttributesCvss:
+      description: Vulnerability severities.
+      properties:
+        base:
+          $ref: '#/components/schemas/CVSS'
+        datadog:
+          $ref: '#/components/schemas/CVSS'
+      required:
+      - base
+      - datadog
+      type: object
+    VulnerabilityAttributesDependencyLocations:
+      description: Static library vulnerability location.
+      properties:
+        block:
+          $ref: '#/components/schemas/DependencyLocation'
+        name:
+          $ref: '#/components/schemas/DependencyLocation'
+        version:
+          $ref: '#/components/schemas/DependencyLocation'
+      required:
+      - block
+      type: object
+    VulnerabilityEcosystem:
+      description: The related vulnerability asset ecosystem.
+      enum:
+      - PyPI
+      - Maven
+      - NuGet
+      - Npm
+      - RubyGems
+      - Go
+      - Packagist
+      - Ddeb
+      - Rpm
+      - Apk
+      - Windows
+      type: string
+      x-enum-varnames:
+      - PYPI
+      - MAVEN
+      - NUGET
+      - NPM
+      - RUBY_GEMS
+      - GO
+      - PACKAGIST
+      - D_DEB
+      - RPM
+      - APK
+      - WINDOWS
+    VulnerabilityRelationships:
+      description: Related entities object.
+      properties:
+        affects:
+          $ref: '#/components/schemas/VulnerabilityRelationshipsAffects'
+      required:
+      - affects
+      type: object
+    VulnerabilityRelationshipsAffects:
+      description: Relationship type.
+      properties:
+        data:
+          $ref: '#/components/schemas/VulnerabilityRelationshipsAffectsData'
+      required:
+      - data
+      type: object
+    VulnerabilityRelationshipsAffectsData:
+      description: Asset affected by this vulnerability.
+      properties:
+        id:
+          description: The unique ID for this related asset.
+          example: Repository|github.com/DataDog/datadog-agent.git
+          type: string
+        type:
+          $ref: '#/components/schemas/AssetEntityType'
+      required:
+      - id
+      - type
+      type: object
+    VulnerabilityRisks:
+      description: Vulnerability risks.
+      properties:
+        epss:
+          $ref: '#/components/schemas/EPSS'
+        exploit_available:
+          description: Vulnerability public exploit availability.
+          example: false
+          type: boolean
+        exploit_sources:
+          description: Vulnerability exploit sources.
+          example:
+          - NIST
+          items:
+            example: NIST
+            type: string
+          type: array
+        exploitation_probability:
+          description: Vulnerability exploitation probability.
+          example: false
+          type: boolean
+        poc_exploit_available:
+          description: Vulnerability POC exploit availability.
+          example: false
+          type: boolean
+      required:
+      - exploitation_probability
+      - poc_exploit_available
+      - exploit_available
+      - exploit_sources
+      type: object
+    VulnerabilitySeverity:
+      description: The vulnerability severity.
+      enum:
+      - Unknown
+      - None
+      - Low
+      - Medium
+      - High
+      - Critical
+      example: Medium
+      type: string
+      x-enum-varnames:
+      - UNKNOWN
+      - NONE
+      - LOW
+      - MEDIUM
+      - HIGH
+      - CRITICAL
+    VulnerabilityStatus:
+      description: The vulnerability status.
+      enum:
+      - Open
+      - Muted
+      - Remediated
+      - InProgress
+      - AutoClosed
+      example: Open
+      type: string
+      x-enum-varnames:
+      - OPEN
+      - MUTED
+      - REMEDIATED
+      - INPROGRESS
+      - AUTOCLOSED
+    VulnerabilityTool:
+      description: The vulnerability tool.
+      enum:
+      - IAST
+      - SCA
+      - Infra
+      example: SCA
+      type: string
+      x-enum-varnames:
+      - IAST
+      - SCA
+      - INFRA
+    VulnerabilityType:
+      description: The vulnerability type.
+      enum:
+      - AdminConsoleActive
+      - CodeInjection
+      - CommandInjection
+      - ComponentWithKnownVulnerability
+      - DangerousWorkflows
+      - DefaultAppDeployed
+      - DefaultHtmlEscapeInvalid
+      - DirectoryListingLeak
+      - EmailHtmlInjection
+      - EndOfLife
+      - HardcodedPassword
+      - HardcodedSecret
+      - HeaderInjection
+      - HstsHeaderMissing
+      - InsecureAuthProtocol
+      - InsecureCookie
+      - InsecureJspLayout
+      - LdapInjection
+      - MaliciousPackage
+      - MandatoryRemediation
+      - NoHttpOnlyCookie
+      - NoSameSiteCookie
+      - NoSqlMongoDbInjection
+      - PathTraversal
+      - ReflectionInjection
+      - RiskyLicense
+      - SessionRewriting
+      - SessionTimeout
+      - SqlInjection
+      - Ssrf
+      - StackTraceLeak
+      - TrustBoundaryViolation
+      - Unmaintained
+      - UntrustedDeserialization
+      - UnvalidatedRedirect
+      - VerbTampering
+      - WeakCipher
+      - WeakHash
+      - WeakRandomness
+      - XContentTypeHeaderMissing
+      - XPathInjection
+      - Xss
+      example: WeakCipher
+      type: string
+      x-enum-varnames:
+      - ADMIN_CONSOLE_ACTIVE
+      - CODE_INJECTION
+      - COMMAND_INJECTION
+      - COMPONENT_WITH_KNOWN_VULNERABILITY
+      - DANGEROUS_WORKFLOWS
+      - DEFAULT_APP_DEPLOYED
+      - DEFAULT_HTML_ESCAPE_INVALID
+      - DIRECTORY_LISTING_LEAK
+      - EMAIL_HTML_INJECTION
+      - END_OF_LIFE
+      - HARDCODED_PASSWORD
+      - HARDCODED_SECRET
+      - HEADER_INJECTION
+      - HSTS_HEADER_MISSING
+      - INSECURE_AUTH_PROTOCOL
+      - INSECURE_COOKIE
+      - INSECURE_JSP_LAYOUT
+      - LDAP_INJECTION
+      - MALICIOUS_PACKAGE
+      - MANDATORY_REMEDIATION
+      - NO_HTTP_ONLY_COOKIE
+      - NO_SAME_SITE_COOKIE
+      - NO_SQL_MONGO_DB_INJECTION
+      - PATH_TRAVERSAL
+      - REFLECTION_INJECTION
+      - RISKY_LICENSE
+      - SESSION_REWRITING
+      - SESSION_TIMEOUT
+      - SQL_INJECTION
+      - SSRF
+      - STACK_TRACE_LEAK
+      - TRUST_BOUNDARY_VIOLATION
+      - UNMAINTAINED
+      - UNTRUSTED_DESERIALIZATION
+      - UNVALIDATED_REDIRECT
+      - VERB_TAMPERING
+      - WEAK_CIPHER
+      - WEAK_HASH
+      - WEAK_RANDOMNESS
+      - X_CONTENT_TYPE_HEADER_MISSING
+      - X_PATH_INJECTION
+      - XSS
     WidgetLiveSpan:
       description: The available timeframes depend on the widget you are using.
       enum:
@@ -28749,6 +29724,27 @@ info:
   version: '1.0'
 openapi: 3.0.0
 paths:
+  /api/v2/agentless_scanning/accounts/aws:
+    get:
+      description: Fetches the scan options configured for AWS accounts.
+      operationId: ListAwsScanOptions
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AwsScanOptionsResponse'
+          description: OK
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get AWS Scan Options
+      tags:
+      - Agentless Scanning
+      x-menu-order: 3
+      x-undo:
+        type: safe
   /api/v2/api_keys:
     get:
       description: List all API keys available for your account.
@@ -32214,6 +33210,81 @@ paths:
       tags:
       - CSM Agents
       x-menu-order: 3
+      x-undo:
+        type: safe
+  /api/v2/csm/onboarding/coverage_analysis/cloud_accounts:
+    get:
+      description: 'Get the CSM Coverage Analysis of your Cloud Accounts.
+
+        This is calculated based on the number of your Cloud Accounts that are
+
+        scanned for security issues.'
+      operationId: GetCSMCloudAccountsCoverageAnalysis
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CsmCloudAccountsCoverageAnalysisResponse'
+          description: OK
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get the CSM Cloud Accounts Coverage Analysis
+      tags:
+      - CSM Coverage Analysis
+      x-menu-order: 1
+      x-undo:
+        type: safe
+  /api/v2/csm/onboarding/coverage_analysis/hosts_and_containers:
+    get:
+      description: 'Get the CSM Coverage Analysis of your Hosts and Containers.
+
+        This is calculated based on the number of agents running on your Hosts
+
+        and Containers with CSM feature(s) enabled.'
+      operationId: GetCSMHostsAndContainersCoverageAnalysis
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CsmHostsAndContainersCoverageAnalysisResponse'
+          description: OK
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get the CSM Hosts and Containers Coverage Analysis
+      tags:
+      - CSM Coverage Analysis
+      x-menu-order: 1
+      x-undo:
+        type: safe
+  /api/v2/csm/onboarding/coverage_analysis/serverless:
+    get:
+      description: 'Get the CSM Coverage Analysis of your Serverless Resources.
+
+        This is calculated based on the number of agents running on your Serverless
+
+        Resources with CSM feature(s) enabled.'
+      operationId: GetCSMServerlessCoverageAnalysis
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CsmServerlessCoverageAnalysisResponse'
+          description: OK
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get the CSM Serverless Coverage Analysis
+      tags:
+      - CSM Coverage Analysis
+      x-menu-order: 1
       x-undo:
         type: safe
   /api/v2/csm/onboarding/serverless/agents:
@@ -38035,7 +39106,7 @@ paths:
         [Results are paginated][1].
 
 
-        Use this endpoint to see your latest logs.
+        Use this endpoint to search and filter your logs.
 
 
         **If you are considering archiving logs for your organization,
@@ -38132,7 +39203,7 @@ paths:
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      summary: Get a list of logs
+      summary: Search logs (GET)
       tags:
       - Logs
       x-menu-order: 4
@@ -38154,7 +39225,7 @@ paths:
         [Results are paginated][1].
 
 
-        Use this endpoint to build complex logs filtering and search.
+        Use this endpoint to search and filter your logs.
 
 
         **If you are considering archiving logs for your organization,
@@ -38187,7 +39258,7 @@ paths:
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      summary: Search logs
+      summary: Search logs (POST)
       tags:
       - Logs
       x-codegen-request-body-name: body
@@ -38485,7 +39556,8 @@ paths:
   /api/v2/metrics/{metric_name}/active-configurations:
     get:
       description: List tags and aggregations that are actively queried on dashboards,
-        notebooks, monitors, and the Metrics Explorer for a given metric name.
+        notebooks, monitors, the Metrics Explorer, and using the API for a given metric
+        name.
       operationId: ListActiveMetricConfigurations
       parameters:
       - $ref: '#/components/parameters/MetricName'
@@ -40608,6 +41680,14 @@ paths:
       operationId: UpdateRestrictionPolicy
       parameters:
       - $ref: '#/components/parameters/ResourceID'
+      - description: Allows admins (users with the `user_access_manage` permission)
+          to remove their own access from the resource if set to `true`. By default,
+          this is set to `false`, preventing admins from locking themselves out.
+        in: query
+        name: allow_self_lockout
+        required: false
+        schema:
+          type: boolean
       requestBody:
         content:
           application/json:
@@ -42844,6 +43924,192 @@ paths:
       x-unstable: '**Note**: This endpoint is in public beta.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/security/assets:
+    get:
+      description: 'Get a list of vulnerable assets.
+
+
+        ### Pagination
+
+
+        Please review the [Pagination section for the "List Vulnerabilities"](#pagination)
+        endpoint.
+
+
+        ### Filtering
+
+
+        Please review the [Filtering section for the "List Vulnerabilities"](#filtering)
+        endpoint.
+
+
+        ### Metadata
+
+
+        Please review the [Metadata section for the "List Vulnerabilities"](#metadata)
+        endpoint.
+
+        '
+      operationId: ListVulnerableAssets
+      parameters:
+      - description: Its value must come from the `links` section of the response
+          of the first request. Do not manually edit it.
+        example: b82cef018aab81ed1d4bb4xb35xxfc065da7efa685fbcecdbd338f3015e3afabbbfa3a911b4984_721ee28a-zecb-4e45-9960-c42065b574f4
+        in: query
+        name: page[token]
+        required: false
+        schema:
+          type: string
+      - description: The page number to be retrieved. It should be equal or greater
+          than `1`
+        example: 1
+        in: query
+        name: page[number]
+        required: false
+        schema:
+          format: int64
+          minimum: 1
+          type: integer
+      - description: Filter by name.
+        example: datadog-agent
+        in: query
+        name: filter[name]
+        required: false
+        schema:
+          type: string
+      - description: Filter by type.
+        example: Host
+        in: query
+        name: filter[type]
+        required: false
+        schema:
+          $ref: '#/components/schemas/AssetType'
+      - description: Filter by the first version of the asset since it has been vulnerable.
+        example: v1.15.1
+        in: query
+        name: filter[version.first]
+        required: false
+        schema:
+          type: string
+      - description: Filter by the last detected version of the asset.
+        example: v1.15.1
+        in: query
+        name: filter[version.last]
+        required: false
+        schema:
+          type: string
+      - description: Filter by the repository url associated to the asset.
+        example: github.com/DataDog/datadog-agent.git
+        in: query
+        name: filter[repository_url]
+        required: false
+        schema:
+          type: string
+      - description: Filter whether the asset is in production or not.
+        example: false
+        in: query
+        name: filter[risks.in_production]
+        required: false
+        schema:
+          type: boolean
+      - description: Filter whether the asset (Service) is under attack or not.
+        example: false
+        in: query
+        name: filter[risks.under_attack]
+        required: false
+        schema:
+          type: boolean
+      - description: Filter whether the asset (Host) is publicly accessible or not.
+        example: false
+        in: query
+        name: filter[risks.is_publicly_accessible]
+        required: false
+        schema:
+          type: boolean
+      - description: Filter whether the asset (Host) has privileged access or not.
+        example: false
+        in: query
+        name: filter[risks.has_privileged_access]
+        required: false
+        schema:
+          type: boolean
+      - description: Filter whether the asset (Host)  has access to sensitive data
+          or not.
+        example: false
+        in: query
+        name: filter[risks.has_access_to_sensitive_data]
+        required: false
+        schema:
+          type: boolean
+      - description: Filter by environment.
+        example: staging
+        in: query
+        name: filter[environments]
+        required: false
+        schema:
+          type: string
+      - description: Filter by architecture.
+        example: arm64
+        in: query
+        name: filter[arch]
+        required: false
+        schema:
+          type: string
+      - description: Filter by operating system name.
+        example: ubuntu
+        in: query
+        name: filter[operating_system.name]
+        required: false
+        schema:
+          type: string
+      - description: Filter by operating system version.
+        example: '24.04'
+        in: query
+        name: filter[operating_system.version]
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListVulnerableAssetsResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: 'Bad request: The server cannot process the request due to
+            invalid syntax in the request.'
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: 'Forbidden: Access denied'
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: 'Not found: There is no request associated with the provided
+            token.'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: List vulnerable assets
+      tags:
+      - Security Monitoring
+      x-menu-order: 4
+      x-undo:
+        type: safe
+      x-unstable: '**Note**: Note: This endpoint is a private preview.
+
+        If you are interested in accessing this API, please [fill this form](https://forms.gle/kMYC1sDr6WDUBDsx9).'
   /api/v2/security/cloud_workload/policy/download:
     get:
       description: 'The download endpoint generates a Cloud Workload Security policy
@@ -42876,6 +44142,388 @@ paths:
         - security_monitoring_cws_agent_rules_read
       x-undo:
         type: safe
+  /api/v2/security/vulnerabilities:
+    get:
+      description: "Get a list of vulnerabilities.\n\n### Pagination\n\nPagination
+        is enabled by default in both `vulnerabilities` and `assets`. The size of
+        the page varies depending on the endpoint and cannot be modified. To automate
+        the request of the next page, you can use the links section in the response.\n\nThis
+        endpoint will return paginated responses. The pages are stored in the links
+        section of the response:\n\n```JSON\n{\n  \"data\": [...],\n  \"meta\": {...},\n
+        \ \"links\": {\n    \"self\": \"https://.../api/v2/security/vulnerabilities\",\n
+        \   \"first\": \"https://.../api/v2/security/vulnerabilities?page[number]=1&page[token]=abc\",\n
+        \   \"last\": \"https://.../api/v2/security/vulnerabilities?page[number]=43&page[token]=abc\",\n
+        \   \"next\": \"https://.../api/v2/security/vulnerabilities?page[number]=2&page[token]=abc\"\n
+        \ }\n}\n```\n\n\n- `links.previous` is empty if the first page is requested.\n-
+        `links.next` is empty if the last page is requested.\n\n#### Token\n\nVulnerabilities
+        can be created, updated or deleted at any point in time.\n\nUpon the first
+        request, a token is created to ensure consistency across subsequent paginated
+        requests.\n\nA token is valid only for 24 hours.\n\n#### First request\n\nWe
+        consider a request to be the first request when there is no `page[token]`
+        parameter.\n\nThe response of this first request contains the newly created
+        token in the `links` section.\n\nThis token can then be used in the subsequent
+        paginated requests.\n\n#### Subsequent requests\n\nAny request containing
+        valid `page[token]` and `page[number]` parameters will be considered a subsequent
+        request.\n\nIf the `token` is invalid, a `404` response will be returned.\n\nIf
+        the page `number` is invalid, a `400` response will be returned.\n\n### Filtering\n\nThe
+        request can include some filter parameters to filter the data to be retrieved.
+        The format of the filter parameters follows the [JSON:API format](https://jsonapi.org/format/#fetching-filtering):
+        `filter[$prop_name]`, where `prop_name` is the property name in the entity
+        being filtered by.\n\nAll filters can include multiple values, where data
+        will be filtered with an OR clause: `filter[title]=Title1,Title2` will filter
+        all vulnerabilities where title is equal to `Title1` OR `Title2`.\n\nString
+        filters are case sensitive.\n\nBoolean filters accept `true` or `false` as
+        values.\n\nNumber filters must include an operator as a second filter input:
+        `filter[$prop_name][$operator]`. For example, for the vulnerabilities endpoint:
+        `filter[cvss.base.score][lte]=8`.\n\nAvailable operators are: `eq` (==), `lt`
+        (<), `lte` (<=), `gt` (>) and `gte` (>=).\n\n### Metadata\n\nFollowing [JSON:API
+        format](https://jsonapi.org/format/#document-meta), object including non-standard
+        meta-information.\n\nThis endpoint includes the meta member in the response.
+        For more details on each of the properties included in this section, check
+        the endpoints response tables.\n\n```JSON\n{\n  \"data\": [...],\n  \"meta\":
+        {\n    \"total\": 1500,\n    \"count\": 18732,\n    \"token\": \"some_token\"\n
+        \ },\n  \"links\": {...}\n}\n```\n"
+      operationId: ListVulnerabilities
+      parameters:
+      - description: Its value must come from the `links` section of the response
+          of the first request. Do not manually edit it.
+        example: b82cef018aab81ed1d4bb4xb35xxfc065da7efa685fbcecdbd338f3015e3afabbbfa3a911b4984_721ee28a-zecb-4e45-9960-c42065b574f4
+        in: query
+        name: page[token]
+        required: false
+        schema:
+          type: string
+      - description: The page number to be retrieved. It should be equal or greater
+          than `1`
+        example: 1
+        in: query
+        name: page[number]
+        required: false
+        schema:
+          format: int64
+          minimum: 1
+          type: integer
+      - description: Filter by vulnerability type.
+        example: WeakCipher
+        in: query
+        name: filter[type]
+        required: false
+        schema:
+          $ref: '#/components/schemas/VulnerabilityType'
+      - description: Filter by vulnerability base (i.e. from the original advisory)
+          severity score.
+        example: 5.5
+        in: query
+        name: filter[cvss.base.score][`$op`]
+        required: false
+        schema:
+          format: double
+          maximum: 10
+          minimum: 0
+          type: number
+      - description: Filter by vulnerability base severity.
+        example: Medium
+        in: query
+        name: filter[cvss.base.severity]
+        required: false
+        schema:
+          $ref: '#/components/schemas/VulnerabilitySeverity'
+      - description: Filter by vulnerability base CVSS vector.
+        example: CVSS:3.0/AV:L/AC:L/PR:L/UI:N/S:U/C:N/I:N/A:H
+        in: query
+        name: filter[cvss.base.vector]
+        required: false
+        schema:
+          type: string
+      - description: Filter by vulnerability Datadog severity score.
+        example: 4.3
+        in: query
+        name: filter[cvss.datadog.score][`$op`]
+        required: false
+        schema:
+          format: double
+          maximum: 10
+          minimum: 0
+          type: number
+      - description: Filter by vulnerability Datadog severity.
+        example: Medium
+        in: query
+        name: filter[cvss.datadog.severity]
+        required: false
+        schema:
+          $ref: '#/components/schemas/VulnerabilitySeverity'
+      - description: Filter by vulnerability Datadog CVSS vector.
+        example: CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:N/I:N/A:H/E:U/RL:X/RC:X/CR:X/IR:X/AR:X/MAV:L/MAC:H/MPR:L/MUI:N/MS:U/MC:N/MI:N/MA:H
+        in: query
+        name: filter[cvss.datadog.vector]
+        required: false
+        schema:
+          type: string
+      - description: Filter by the status of the vulnerability.
+        example: Open
+        in: query
+        name: filter[status]
+        required: false
+        schema:
+          $ref: '#/components/schemas/VulnerabilityStatus'
+      - description: Filter by the tool of the vulnerability.
+        example: SCA
+        in: query
+        name: filter[tool]
+        required: false
+        schema:
+          $ref: '#/components/schemas/VulnerabilityTool'
+      - description: Filter by library name.
+        example: linux-aws-5.15
+        in: query
+        name: filter[library.name]
+        required: false
+        schema:
+          type: string
+      - description: Filter by library version.
+        example: 5.15.0
+        in: query
+        name: filter[library.version]
+        required: false
+        schema:
+          type: string
+      - description: Filter by advisory ID.
+        example: TRIVY-CVE-2023-0615
+        in: query
+        name: filter[advisory_id]
+        required: false
+        schema:
+          type: string
+      - description: Filter by exploitation probability.
+        example: false
+        in: query
+        name: filter[risks.exploitation_probability]
+        required: false
+        schema:
+          type: boolean
+      - description: Filter by POC exploit availability.
+        example: false
+        in: query
+        name: filter[risks.poc_exploit_available]
+        required: false
+        schema:
+          type: boolean
+      - description: Filter by public exploit availability.
+        example: false
+        in: query
+        name: filter[risks.exploit_available]
+        required: false
+        schema:
+          type: boolean
+      - description: Filter by vulnerability [EPSS](https://www.first.org/epss/) severity
+          score.
+        example: 0.00042
+        in: query
+        name: filter[risks.epss.score][`$op`]
+        required: false
+        schema:
+          format: double
+          maximum: 1
+          minimum: 0
+          type: number
+      - description: Filter by vulnerability [EPSS](https://www.first.org/epss/) severity.
+        example: Low
+        in: query
+        name: filter[risks.epss.severity]
+        required: false
+        schema:
+          $ref: '#/components/schemas/VulnerabilitySeverity'
+      - description: Filter by language.
+        example: ubuntu
+        in: query
+        name: filter[language]
+        required: false
+        schema:
+          type: string
+      - description: Filter by ecosystem.
+        example: Deb
+        in: query
+        name: filter[ecosystem]
+        required: false
+        schema:
+          $ref: '#/components/schemas/VulnerabilityEcosystem'
+      - description: Filter by vulnerability location.
+        example: com.example.Class:100
+        in: query
+        name: filter[code_location.location]
+        required: false
+        schema:
+          type: string
+      - description: Filter by vulnerability file path.
+        example: src/Class.java:100
+        in: query
+        name: filter[code_location.file_path]
+        required: false
+        schema:
+          type: string
+      - description: Filter by method.
+        example: FooBar
+        in: query
+        name: filter[code_location.method]
+        required: false
+        schema:
+          type: string
+      - description: Filter by fix availability.
+        example: false
+        in: query
+        name: filter[fix_available]
+        required: false
+        schema:
+          type: boolean
+      - description: Filter by vulnerability `repo_digest` (when the vulnerability
+          is related to `Image` asset).
+        example: sha256:0ae7da091191787229d321e3638e39c319a97d6e20f927d465b519d699215bf7
+        in: query
+        name: filter[repo_digests]
+        required: false
+        schema:
+          type: string
+      - description: Filter by asset name.
+        example: datadog-agent
+        in: query
+        name: filter[asset.name]
+        required: false
+        schema:
+          type: string
+      - description: Filter by asset type.
+        example: Host
+        in: query
+        name: filter[asset.type]
+        required: false
+        schema:
+          $ref: '#/components/schemas/AssetType'
+      - description: Filter by the first version of the asset this vulnerability has
+          been detected on.
+        example: v1.15.1
+        in: query
+        name: filter[asset.version.first]
+        required: false
+        schema:
+          type: string
+      - description: Filter by the last version of the asset this vulnerability has
+          been detected on.
+        example: v1.15.1
+        in: query
+        name: filter[asset.version.last]
+        required: false
+        schema:
+          type: string
+      - description: Filter by the repository url associated to the asset.
+        example: github.com/DataDog/datadog-agent.git
+        in: query
+        name: filter[asset.repository_url]
+        required: false
+        schema:
+          type: string
+      - description: Filter whether the asset is in production or not.
+        example: false
+        in: query
+        name: filter[asset.risks.in_production]
+        required: false
+        schema:
+          type: boolean
+      - description: Filter whether the asset is under attack or not.
+        example: false
+        in: query
+        name: filter[asset.risks.under_attack]
+        required: false
+        schema:
+          type: boolean
+      - description: Filter whether the asset is publicly accessible or not.
+        example: false
+        in: query
+        name: filter[asset.risks.is_publicly_accessible]
+        required: false
+        schema:
+          type: boolean
+      - description: Filter whether the asset is publicly accessible or not.
+        example: false
+        in: query
+        name: filter[asset.risks.has_privileged_access]
+        required: false
+        schema:
+          type: boolean
+      - description: Filter whether the asset  has access to sensitive data or not.
+        example: false
+        in: query
+        name: filter[asset.risks.has_access_to_sensitive_data]
+        required: false
+        schema:
+          type: boolean
+      - description: Filter by asset environments.
+        example: staging
+        in: query
+        name: filter[asset.environments]
+        required: false
+        schema:
+          type: string
+      - description: Filter by asset architecture.
+        example: arm64
+        in: query
+        name: filter[asset.arch]
+        required: false
+        schema:
+          type: string
+      - description: Filter by asset operating system name.
+        example: ubuntu
+        in: query
+        name: filter[asset.operating_system.name]
+        required: false
+        schema:
+          type: string
+      - description: Filter by asset operating system version.
+        example: '24.04'
+        in: query
+        name: filter[asset.operating_system.version]
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListVulnerabilitiesResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: 'Bad request: The server cannot process the request due to
+            invalid syntax in the request.'
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: 'Forbidden: Access denied'
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: 'Not found: There is no request associated with the provided
+            token.'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: List vulnerabilities
+      tags:
+      - Security Monitoring
+      x-menu-order: 3
+      x-undo:
+        type: safe
+      x-unstable: '**Note**: Note: This endpoint is a private preview.
+
+        If you are interested in accessing this API, please [fill this form](https://forms.gle/kMYC1sDr6WDUBDsx9).'
   /api/v2/security_monitoring/cloud_workload_security/agent_rules:
     get:
       description: Get the list of Agent rules.
@@ -48666,6 +50314,11 @@ tags:
   externalDocs:
     url: https://docs.datadoghq.com/integrations/amazon_web_services/#log-collection
   name: AWS Logs Integration
+- description: "Datadog Agentless Scanning provides visibility into risks and vulnerabilities\nwithin
+    your hosts, running containers, and serverless functions\u2014all without\nrequiring
+    teams to install Agents on every host or where Agents cannot be installed.\nGo
+    to https://www.datadoghq.com/blog/agentless-scanning/ to learn more"
+  name: Agentless Scanning
 - description: Search your Audit Logs events over HTTP.
   name: Audit
 - description: '[The AuthN Mappings API](https://docs.datadoghq.com/account_management/authn_mapping/?tab=example)
@@ -48691,6 +50344,15 @@ tags:
 
     Go to https://docs.datadoghq.com/security/cloud_security_management to learn more'
   name: CSM Agents
+- description: 'Datadog Cloud Security Management (CSM) delivers real-time threat
+    detection
+
+    and continuous configuration audits across your entire cloud infrastructure,
+
+    all in a unified view for seamless collaboration and faster remediation.
+
+    Go to https://docs.datadoghq.com/security/cloud_security_management to learn more.'
+  name: CSM Coverage Analysis
 - description: Cloud Security Management Threats (CSM Threats) monitors file, network,
     and process activity across your environment to detect real-time threats to your
     infrastructure. See [Cloud Security Management Threats](https://docs.datadoghq.com/security/threats/)
@@ -48753,10 +50415,17 @@ tags:
     end times, prevent all alerting related to specified Datadog tags.'
   name: Downtimes
 - description: 'The Event Management API allows you to programmatically post events
-    to the Events Explorer
+    to the Events Explorer and fetch events from the Events Explorer. See the [Event
+    Management page](https://docs.datadoghq.com/service_management/events/) for more
+    information.
 
-    and fetch events from the Events Explorer. See the [Event Management page](https://docs.datadoghq.com/service_management/events/)
-    for more information.'
+
+    **Update to Datadog monitor events `aggregation_key` starting March 1, 2025:**
+    The Datadog monitor events `aggregation_key` is unique to each Monitor ID. Starting
+    March 1st, this key will also include Monitor Group, making it unique per *Monitor
+    ID and Monitor Group*. If you''re using monitor events `aggregation_key` in dashboard
+    queries or the Event API, you must migrate to use `@monitor.id`. Reach out to
+    [support](https://www.datadoghq.com/support/) if you have any question.'
   name: Events
 - description: Manage your Datadog Fastly integration accounts and services directly
     through the Datadog API. See the [Fastly integration page](https://docs.datadoghq.com/integrations/fastly/)
