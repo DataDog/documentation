@@ -1,5 +1,0 @@
-paint_finish_options:
-- id: matte
-- id: eggshell
-  default: true
-- id: glossy

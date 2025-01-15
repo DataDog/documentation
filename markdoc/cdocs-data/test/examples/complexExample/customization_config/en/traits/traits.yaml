@@ -1,6 +1,0 @@
-traits:
-- id: paint_finish
-  label: Finish
-  description: "The sheen of the paint, such as matte or glossy. Does not refer to texture or application style."
-- id: paint_color
-  label: Color

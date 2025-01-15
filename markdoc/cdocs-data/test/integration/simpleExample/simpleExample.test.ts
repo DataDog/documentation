@@ -1,5 +1,6 @@
 /**
- * Because this test suite is intended to function as a working example,
+ * Because this test suite is also intended to function as a
+ * continually verified working example,
  * all of its logic is executed up front in the describe block,
  * then the results are tested piece by piece.
  */
