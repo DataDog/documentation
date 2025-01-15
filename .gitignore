@@ -116,9 +116,9 @@ content/en/continuous_testing/cicd_integrations/bitrise_upload.md
 content/en/continuous_testing/cicd_integrations/bitrise_run.md
 
 # Code Analysis
-content/en/security/code_security/static_analysis/github_actions/_index.md
-content/en/security/code_security/software_composition_analysis/setup_static/_index.md
-content/en/security/code_security/static_analysis/circleci_orbs/_index.md
+!content/en/security/code_security/static_analysis/github_actions/_index.md
+!content/en/security/code_security/software_composition_analysis/setup_static/_index.md
+!content/en/security/code_security/static_analysis/circleci_orbs/_index.md
 content/en/security/code_security/static_analysis/static_analysis_rules/*
 !content/en/security/code_security/static_analysis/static_analysis_rules/_index.md
 

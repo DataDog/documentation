@@ -158,7 +158,7 @@ If you are using another source code management provider, configure SCA to run i
 You **must** run an analysis of your repository on the default branch before results can begin appearing on the **Code Security** page.
 
 [1]: /security/code_security/software_composition_analysis/
-[2]: https://app.datadoghq.com/ci/setup/code-analysis
+[2]: https://app.datadoghq.com/security/configuration/code-security/setup
 [3]: /security/code_security/software_composition_analysis/setup_static
 [4]: https://app.datadoghq.com/ci/code-analysis
 [5]: /getting_started/code_security/?tab=datadoghosted#linking-services-to-code-violations-and-libraries

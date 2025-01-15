@@ -24,9 +24,10 @@ algolia:
 {{% /site-region %}}
 
 ## Overview
-To set up Datadog Static Analysis, navigate to [**Software Delivery** > **Code Security**][1].
+To set up Datadog Static Analysis, navigate to [**Security** > **Code Security**][1].
 
 ## Select where to run Static Analysis scans
+
 ### Scan with Datadog-hosted scanning
 
 You can run Datadog Static Analysis scans directly on Datadog's infrastructure. To get started, navigate to the [**Code Security** page][1].
@@ -270,7 +271,7 @@ datadog-static-analyzer -i /path/to/directory -g -o sarif.json -f sarif –-diff
 
 {{< partial name="whats-next/whats-next.html" >}} -->
 
-[1]: https://app.datadoghq.com/ci/setup/code-analysis
+[1]: https://app.datadoghq.com/security/configuration/code-security/setup
 [2]: https://www.oasis-open.org/committees/tc_home.php?wg_abbrev=sarif
 [3]: /developers/ide_plugins/idea/#static-analysis
 [4]: /account_management/api-app-keys/

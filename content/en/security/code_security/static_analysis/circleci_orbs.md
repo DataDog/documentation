@@ -2,15 +2,13 @@
 aliases:
 - /continuous_integration/static_analysis/circleci_orbs
 - /static_analysis/circleci_orbs
-dependencies:
-- https://github.com/DataDog/datadog-static-analyzer-circleci-orb/blob/main/README.md
 description: Use Datadog and CircleCI to run Static Analysis jobs in a CI pipeline.
 title: Static Analysis and CircleCI Orbs
 ---
 
 ## Overview
 
-Run a [Datadog Static Analysis][1] job in your CircleCI workflows.
+Run a Datadog Static Analysis job in your CircleCI workflows.
 
 ## Setup
 

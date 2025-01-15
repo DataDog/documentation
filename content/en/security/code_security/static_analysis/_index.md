@@ -90,20 +90,21 @@ In Datadog Static Analysis, there are two types of suggested fixes:
 
 The two types of fixes are distinguished visually in the UI with different labels.
 
-*Default Suggested Fixes:*
-<!-- {{< img src="code_security/static_analysis/static-analysis-default-fix.png" alt="Visual indicator of a default static analysis suggested fix" style="width:60%;">}} -->
+- Default Suggested Fixes
+- AI Suggested Fixes
 
-*AI Suggested Fixes:*
-<!-- {{< img src="code_security/static_analysis/static-analysis-ai-fix.png" alt="Visual indicator of an AI static analysis suggested fix" style="width:60%;">}} -->
+<!-- {{< img src="code_security/static_analysis/static-analysis-default-fix.png" alt="Visual indicator of a default static analysis suggested fix" style="width:60%;">}}
 
-<div class="alert alert-warning">AI Suggested Fixes are in Preview. To request access, contact <a href="/help/">Support.</div>
+{{< img src="code_security/static_analysis/static-analysis-ai-fix.png" alt="Visual indicator of an AI static analysis suggested fix" style="width:60%;">}} -->
 
 ### Fixing a vulnerability or quality issue directly from Datadog
+
 <!-- {{< img src="ci/sast_one_click_light.png" alt="Example of one-click remediation for Code Security" style="width:90%;" >}} -->
 
 You can push a code change to fix an issue found by Code Security directly from a result in Datadog in two ways.
 
-#### Opening a pull request 
+#### Opening a pull request
+ 
 If your GitHub app's **Pull Requests** permission is set to **Read & Write**, one-click remediation is enabled for all Static Analysis findings with an available suggested fix. For more information about setting up the GitHub integration, see [GitHub Pull Requests][10]. 
 
 Follow these steps to fix a vulnerability and open a pull request:
