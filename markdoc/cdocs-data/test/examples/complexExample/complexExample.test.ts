@@ -1,3 +1,8 @@
+/**
+ * Because this test suite is intended to function as a working example,
+ * all of its logic is executed up front in the describe block,
+ * then the results are tested piece by piece.
+ */
 import { describe, test, expect } from 'vitest';
 import {
   FrontMatter,
@@ -50,8 +55,9 @@ describe('Complex example', () => {
     filtersManifest: manifest,
   });
 
-  console.log('default paint_finish:', defaultResolvedFilters.paint_finish.currentValue);
-  console.log('default paint_color:', defaultResolvedFilters.paint_color.currentValue);
+  console.log('\nDefault paint finish and color:');
+  console.log(defaultResolvedFilters.paint_finish.currentValue); // eggshell
+  console.log(defaultResolvedFilters.paint_color.currentValue); // sunlit_sands
 
   // Update the user's paint finish selection
   // to a non-default option
@@ -65,6 +71,13 @@ describe('Complex example', () => {
     valsByTraitId: userSelectionsByTraitId,
     filtersManifest: manifest,
   });
+
+  // Notice that the paint color automatically updates,
+  // since the glossy finish has a different default paint color
+  // than the default (eggshell) finish
+  console.log(`\nPaint finish and color after the 'glossy' finish is selected:`);
+  console.log(glossyResolvedFilters.paint_finish.currentValue); // glossy
+  console.log(glossyResolvedFilters.paint_color.currentValue); // golden_mirage
 
   // Change the user's selection to an invalid value
   // (for example, carried over in local storage from a previous page
@@ -80,6 +93,10 @@ describe('Complex example', () => {
     valsByTraitId: invalidUserSelectionsByTraitId,
     filtersManifest: manifest,
   });
+
+  console.log('\nGracefully resolved paint finish and color:');
+  console.log(defaultResolvedFilters.paint_finish.currentValue); // eggshell
+  console.log(defaultResolvedFilters.paint_color.currentValue); // sunlit_sands
 
   test('loads a customization config that matches the snapshot', async () => {
     const snapshot = JSON.stringify(customizationConfigByLang, null, 2);

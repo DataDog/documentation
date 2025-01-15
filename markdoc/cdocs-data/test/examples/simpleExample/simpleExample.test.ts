@@ -1,3 +1,8 @@
+/**
+ * Because this test suite is intended to function as a working example,
+ * all of its logic is executed up front in the describe block,
+ * then the results are tested piece by piece.
+ */
 import { describe, test, expect } from 'vitest';
 import {
   FrontMatter,
@@ -43,6 +48,9 @@ describe('Simple example', () => {
     filtersManifest: manifest,
   });
 
+  console.log('\nDefault favorite color value:');
+  console.log(defaultResolvedFilters.favorite_color.currentValue); // purple
+
   // Change the user's selection to pink
   const userSelectionsByTraitId = {
     favorite_color: 'pink',
@@ -53,6 +61,9 @@ describe('Simple example', () => {
     valsByTraitId: userSelectionsByTraitId,
     filtersManifest: manifest,
   });
+
+  console.log('\nManually updated favorite color value:');
+  console.log(defaultResolvedFilters.favorite_color.currentValue); // pink
 
   // Change the user's selection to an invalid value
   // (for example, carried over in local storage from a previous page
@@ -67,6 +78,9 @@ describe('Simple example', () => {
     valsByTraitId: invalidUserSelectionsByTraitId,
     filtersManifest: manifest,
   });
+
+  console.log('\nGracefully resolved favorite color value:');
+  console.log(defaultResolvedFilters.favorite_color.currentValue); // purple
 
   test('loads a customization config that matches the snapshot', async () => {
     const snapshot = JSON.stringify(customizationConfigByLang, null, 2);
