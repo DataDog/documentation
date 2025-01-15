@@ -1,0 +1,64 @@
+{
+  "en": {
+    "traitGlossary": {
+      "favorite_color": {
+        "id": "favorite_color",
+        "label": "Favorite color"
+      }
+    },
+    "optionGlossary": {
+      "purple": {
+        "id": "purple",
+        "label": "purple"
+      },
+      "pink": {
+        "id": "pink",
+        "label": "pink"
+      }
+    },
+    "optionGroupGlossary": {
+      "favorite_color_options": [
+        {
+          "default": true,
+          "id": "purple",
+          "label": "purple"
+        },
+        {
+          "id": "pink",
+          "label": "pink"
+        }
+      ]
+    }
+  },
+  "piglatin": {
+    "traitGlossary": {
+      "favorite_color": {
+        "id": "favorite_color",
+        "label": "Avoritefay olorcay"
+      }
+    },
+    "optionGlossary": {
+      "purple": {
+        "id": "purple",
+        "label": "urplepay"
+      },
+      "pink": {
+        "id": "pink",
+        "label": "inkpay"
+      }
+    },
+    "optionGroupGlossary": {
+      "favorite_color_options": [
+        {
+          "default": true,
+          "id": "purple",
+          "label": "urplepay"
+        },
+        {
+          "id": "pink",
+          "label": "inkpay"
+        }
+      ]
+    }
+  }
+}

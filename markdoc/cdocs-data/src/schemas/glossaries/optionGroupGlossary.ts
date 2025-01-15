@@ -60,10 +60,10 @@ export const RawOptionGroupGlossarySchema = z.record(
       // Verify that only one default option is identified
       const defaultOptions = options.filter((option) => option.default);
       if (defaultOptions.length > 1) {
-        console.error('Only one option can be marked as default');
+        console.error(`Only one option can be marked as default: ${options}`);
         return false;
       } else if (defaultOptions.length === 0) {
-        console.error('One option must be marked as default');
+        console.error(`One option must be marked as default: ${options}`);
         return false;
       }
 
