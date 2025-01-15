@@ -1,6 +1,6 @@
 import { describe, test, expect } from 'vitest';
 import { getDefaultValsByTraitId } from '../../src/utils/compilation/buildFiltersManifest';
-import { FrontMatter, FrontMatterSchema } from '../../src/schemas/frontMatter';
+import { FrontMatter, FrontMatterSchema } from '../../src';
 import { paintColorsCustomizationConfig } from '../config/mocks/valid/paintColorsConfig';
 
 describe('getDefaultValsByTraitId', () => {

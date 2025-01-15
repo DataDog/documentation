@@ -25,9 +25,11 @@ describe('Simple example', () => {
   });
 
   // "Parse" the frontmatter (the parse result
-  // is hardcoded here, but would come from parsing a file)
+  // is hardcoded here, but would come from parsing a file).
+  // This page would customize its content based on
+  // the user's favorite color.
   const frontmatter: FrontMatter = {
-    title: 'Simple Example Page',
+    title: "What's Your Favorite Color?",
     content_filters: [
       {
         label: 'Favorite color',
