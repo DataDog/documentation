@@ -54,10 +54,6 @@ When you create a new **Dataproc Cluster on Compute Engine** in the [Google Clou
    SECRET_NAME=dd_api_key
    DD_API_KEY=$(gcloud secrets versions access latest --secret $SECRET_NAME)
 
-   # Optional parameters
-   # Uncomment the following line to allow adding init script logs when reporting a failure back to Datadog. A failure is reported when the init script fails to start the Datadog Agent successfully.
-   # export DD_DJM_ADD_LOGS_TO_FAILURE_REPORT=true
-
    # Download and run the latest init script
    DD_SITE=$DD_SITE DD_API_KEY=$DD_API_KEY  curl -L https://install.datadoghq.com/scripts/install-dataproc.sh > djm-install-script; bash djm-install-script || true
 
