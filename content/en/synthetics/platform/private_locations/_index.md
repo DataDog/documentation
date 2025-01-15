@@ -424,6 +424,8 @@ Create a new EC2 task definition that matches the following. Replace each parame
 
 {{% tab "Fargate" %}}
 
+If you want to store the configuration in AWS Secret Manager, check the [Fargate with AWS Secret Manager tab](./?tab=fargatewithawssecretmanager#install-your-private-location).
+
 Create a new Fargate task definition that matches the following. Replace each parameter with the corresponding value found in your previously generated private location configuration file:
 
 ```yaml
@@ -440,6 +442,93 @@ Create a new Fargate task definition that matches the following. Replace each pa
                 "--privateKey='-----BEGIN RSA PRIVATE KEY-----XXXXXXXX-----END RSA PRIVATE KEY-----'",
                 "--publicKey.pem='-----BEGIN PUBLIC KEY-----XXXXXXXX-----END PUBLIC KEY-----'",
                 "--publicKey.fingerprint='...'"
+            ],
+            ...
+            "image": "datadog/synthetics-private-location-worker:latest",
+            ...
+        }
+    ],
+    ...
+    "compatibilities": [
+        "EC2",
+        "FARGATE"
+    ],
+    ...
+}
+```
+
+**Note:** Because the private location firewall option is not supported on AWS Fargate, the `enableDefaultBlockedIpRanges` parameter cannot be set to `true`.
+
+{{% /tab %}}
+
+{{% tab "Fargate with AWS Secret Manager" %}}
+
+Create a new secret in secret manager to store all or part of the previously generated private location configuration. Keep in mind that the `publicKey` cannot be kept as it is in the configuration file. The secret should look like this:
+
+```json
+{
+    "datadogApiKey": "...",
+    "id": "...",
+    "site": "...",
+    "accessKey": "...",
+    "secretAccessKey": "...",
+    "privateKey": "...",
+    "pem": "...",
+    "fingerprint": "..."
+}
+```
+
+You will need to set permissions to allow the task definition and the fargate instance to read from the secret manager following this documentation from AWS: [Specifying sensitive data using Secrets Manager secrets in Amazon ECS](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/specifying-sensitive-data-tutorial.html)
+
+Create a new Fargate task definition that matches the following. Replace the values in the list of secrets with the ARN of the secret you created in the previous step, they should be in the format `arn:aws:secretsmanager:<region>:<account-id>:secret:<secret_arn>:<secret_key>::`.
+
+If you didn't save all the configuration in the secret manager, you can still pass the value as hardcoded string arguments, you can check the [Fargate tab](./?tab=fargate#install-your-private-location) and do a mix.
+
+```yaml
+{
+    ...
+    "containerDefinitions": [
+        {
+            "entryPoint": [
+                "/bin/bash",
+                "-c"
+            ],
+            "command": [
+                "/home/dog/scripts/entrypoint.sh --locationID=$locationID --publicKey.fingerprint=$fingerprint"
+            ],
+            "secret": [
+              {
+                "name": "DATADOG_ACCESS_KEY",
+                "valueFrom": "..."
+              },
+              {
+                "name": "DATADOG_API_KEY",
+                "valueFrom": "...",
+              },
+              {
+                "name": "fingerprint",
+                "valueFrom": "...",
+              },
+              {
+                "name": "locationID",
+                "valueFrom": "...",
+              },
+              {
+                "name": "DATADOG_PUBLIC_KEY_PEM",
+                "valueFrom": "...",
+              },
+              {
+                "name": "DATADOG_PRIVATE_KEY",
+                "valueFrom": "...",
+              },
+              {
+                "name": "DATADOG_SECRET_ACCESS_KEY",
+                "valueFrom": "...",
+              },
+              {
+                "name": "DATADOG_SITE",
+                "valueFrom": "...",
+              }
             ],
             ...
             "image": "datadog/synthetics-private-location-worker:latest",
