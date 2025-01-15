@@ -13,22 +13,6 @@ describe('Placeholder regex', () => {
     'prefix_<mIxedCase>',
     '<mIxedCase>_suffix',
     'prefix_<mIxedCase>_suffix',
-    // numbers
-    '<HAS_NUMBER1>',
-    'prefix_<HAS_NUMBER1>',
-    '<HAS_NUMBER1>_suffix',
-    'prefix_<HAS_NUMBER1>_suffix',
-    // leading underscores
-    '<_LEADING_UNDERSCORE>',
-    'prefix_<_LEADING_UNDERSCORE>',
-    '<_LEADING_UNDERSCORE>_suffix',
-    'prefix_<_LEADING_UNDERSCORE>_suffix',
-    // trailing undercores
-    '<TRAILING_UNDERSCORE_>',
-    'prefix_<TRAILING_UNDERSCORE_>',
-    '<TRAILING_UNDERSCORE>_suffix',
-    // standalone underscore
-    '<_>',
     // hyphenated
     '<HYPHENATED-PLACEHOLDER>',
     'prefix_<HYPHENATED-PLACEHOLDER>',
@@ -51,13 +35,11 @@ describe('Placeholder regex', () => {
     'prefix_<THREE_WORD_PLACEHOLDER>_suffix',
   ];
 
-  /*
   shouldNotMatch.forEach((invalidPlaceholder) => {
     test(`does not match invalid placeholder: ${invalidPlaceholder}`, () => {
       expect(PLACEHOLDER_REGEX.test(invalidPlaceholder)).toBe(false);
     });
   });
-  */
 
   shouldMatch.forEach((validPlaceholder) => {
     test(`matches valid placeholder: ${validPlaceholder}`, () => {

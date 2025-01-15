@@ -17,7 +17,7 @@ export const PLACEHOLDER_REGEX = /<([A-Z0-9_]+)>/;
 export const GLOBAL_PLACEHOLDER_REGEX = /<([A-Z0-9_]+)>/g;
 
 /**
- * A regex that matches a filter option set ID.
+ * A regex that matches an option group ID.
  *
  * The ID must:
  * - be in snake case
@@ -31,5 +31,5 @@ export const GLOBAL_PLACEHOLDER_REGEX = /<([A-Z0-9_]+)>/g;
  * - `matte_<COLOR>_paint_options`
  * - `<FINISH>_<COLOR>_paint_options`
  */
-export const FILTER_OPTIONS_ID_REGEX =
+export const OPTION_GROUP_ID_REGEX =
   /^([a-z0-9]+|<([A-Z0-9_]+)>)(_([a-z0-9]+)|_<([A-Z0-9_]+)>)*_options$/;

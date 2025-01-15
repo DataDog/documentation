@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { SNAKE_CASE_REGEX, FILTER_OPTIONS_ID_REGEX } from './regexes';
+import { SNAKE_CASE_REGEX, OPTION_GROUP_ID_REGEX } from './regexes';
 
 /**
  * The configuration of an individual page filter,
@@ -9,7 +9,7 @@ export const FilterConfigSchema = z
   .object({
     label: z.string(),
     trait_id: z.string().regex(SNAKE_CASE_REGEX),
-    option_group_id: z.string().regex(FILTER_OPTIONS_ID_REGEX),
+    option_group_id: z.string().regex(OPTION_GROUP_ID_REGEX),
     default_value: z.string().regex(SNAKE_CASE_REGEX).optional(),
   })
   .strict();

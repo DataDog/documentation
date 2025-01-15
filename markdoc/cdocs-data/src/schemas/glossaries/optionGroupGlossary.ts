@@ -3,7 +3,7 @@
  * names and options between docs pages.
  */
 import { z } from 'zod';
-import { SNAKE_CASE_REGEX, FILTER_OPTIONS_ID_REGEX } from '../regexes';
+import { SNAKE_CASE_REGEX, OPTION_GROUP_ID_REGEX } from '../regexes';
 
 /**
  * A single option in an option group.
@@ -49,7 +49,7 @@ export type OptionGroupGlossaryEntry = z.infer<typeof OptionGroupGlossaryEntrySc
  * display name defined in the option glossary.
  */
 export const RawOptionGroupGlossarySchema = z.record(
-  z.string().regex(FILTER_OPTIONS_ID_REGEX),
+  z.string().regex(OPTION_GROUP_ID_REGEX),
   z
     .array(
       OptionGroupItemSchema.omit({ label: true }).extend({
@@ -91,7 +91,7 @@ export type RawOptionGroupGlossary = z.infer<typeof RawOptionGroupGlossarySchema
  * regardless of which filters they are associated with.
  */
 export const OptionGroupGlossarySchema = z.record(
-  z.string().regex(FILTER_OPTIONS_ID_REGEX),
+  z.string().regex(OPTION_GROUP_ID_REGEX),
   z
     .array(OptionGroupItemSchema)
     // verify that one and only one option is marked as default
