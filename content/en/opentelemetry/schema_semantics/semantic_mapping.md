@@ -105,6 +105,78 @@ Additional cloud provider-specific attributes are also mapped.
 | `url.full` | `http.url` |
 | `user_agent.original` | `http.useragent` |
 
+## Span Type and Resource mapping
+Datadog has a vendor-specific convention of "Span Type" represented by `span.type` attribute.
+
+Based on the attributes included in your span, Datadog Agent and Datadog OpenTelemetry Components will attempt to infer the appropriate span type for better compatibility with other Datadog services. You may also explicitly set `span.type` attribute on any given span to override this logic using an [attributes][5] or [transform][6] processor, as well as by setting appropriate configuration values in OTel SDKs. 
+
+### OTel Span Attributes -> Datadog Span Type
+The following table shows the Span Type mapping logic that is used if feature flag `enable_receive_resource_spans_v2` is set. The chart is in order of precedence.
+| # | Span Attribute | Datadog span.Type |
+|---|----------------|-------------------|
+| 1 | `span.type` | `span.type` attribute value |
+| 2 | [Span Kind Server][7] | `web` |
+| 3 | [Span Kind Client][8] | see 3a/b |
+| 3a | Client span kind, `db.system` attribute not found | `http` |
+| 3b | Client span kind, `db.system` attribute found | see table below [OTel Database System Types -> Datadog Span Type][10] |
+| 4 | None of above conditions were fulfilled | `custom` |
+
+### OTel Database System Types -> Datadog Span Type
+In the table above, if a span is "client" kind and contains [`db.system` attribute][9], the following mapping applies for the Span Type in Datadog. As mentioned above, setting a `span.type` attribute on your span will override this logic.
+
+| `db.system` | Datadog span.Type |
+|-------------|-------------------|
+| SQL Type DBMS (listed below) | `sql` |
+| `adabas` | `sql` |
+| `cache` | `sql` |
+| `clickhouse` | `sql` |
+| `cloudscape` | `sql` |
+| `cockroachdb` | `sql` |
+| `coldfusion` | `sql` |
+| `db2` | `sql` |
+| `derby` | `sql` |
+| `edb` | `sql` |
+| `firebird` | `sql` |
+| `firstsql` | `sql` |
+| `filemaker` | `sql` |
+| `hanadb` | `sql` |
+| `h2` | `sql` |
+| `hsqldb` | `sql` |
+| `informix` | `sql` |
+| `ingres` | `sql` |
+| `instantdb` | `sql` |
+| `interbase` | `sql` |
+| `mariadb` | `sql` |
+| `maxdb` | `sql` |
+| `mssql` | `sql` |
+| `mysql` | `sql` |
+| `netezza` | `sql` |
+| `oracle` | `sql` |
+| `other_sql` | `sql` |
+| `pervasive` | `sql` |
+| `pointbase` | `sql` |
+| `postgresql` | `sql` |
+| `progress` | `sql` |
+| `redshift` | `sql` |
+| `sqlite` | `sql` |
+| `sybase` | `sql` |
+| `teradata` | `sql` |
+| `vertica` | `sql` |
+| Other DB types | see below |
+| `cassandra` | `cassandra` |
+| `couchbase` | `db` |
+| `couchdb` | `db` |
+| `cosmosdb` | `db` |
+| `dynamodb` | `db` |
+| `elasticsearch` | `elasticsearch` |
+| `geode` | `db` |
+| `hive` | `db` |
+| `memcached` | `memcached` |
+| `mongodb` | `mongodb` |
+| `opensearch` | `opensearch` |
+| `redis` | `redis` |
+| any `db.system` value not listed above | `db` |
+
 ## Metrics attribute mapping
 
 For metrics, by default, Datadog only maps the OpenTelemetry resource attributes listed in the previous sections to Datadog metric tags. To map all resource attributes to tags, enable the `metrics::resource_attributes_as_tags` setting:
@@ -146,3 +218,9 @@ Enabling this option adds both the OpenTelemetry resource attributes and the Dat
 [2]: /getting_started/tagging/unified_service_tagging#opentelemetry
 [3]: https://opentelemetry.io/docs/specs/semconv/resource/container/
 [4]: https://github.com/open-telemetry/semantic-conventions/releases/tag/v1.27.0
+[5]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/attributesprocessor
+[6]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/transformprocessor
+[7]: https://opentelemetry.io/docs/concepts/signals/traces/#server
+[8]: https://opentelemetry.io/docs/concepts/signals/traces/#client
+[9]: https://opentelemetry.io/docs/specs/semconv/attributes-registry/db/#db-system
+[10]: #otel-database-system-types---datadog-span-type
