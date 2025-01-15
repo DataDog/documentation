@@ -20,8 +20,8 @@ algolia:
 A flare allows you to send necessary troubleshooting information to the Datadog support team.
 
 This page covers:
-- [Sending a flare using the `flare` command](#send-a-flare-using-the-flare-command).
 - [Sending a flare from the Datadog site](#send-a-flare-from-the-datadog-site) using Remote Configuration.
+- [Sending a flare using the `flare` command](#send-a-flare-using-the-flare-command).
 - [Manual submission](#manual-submission).
 
 A flare gathers all of the Agent's configuration files and logs into an archive file. It removes sensitive information, including passwords, API keys, Proxy credentials, and SNMP community strings. If APM is enabled, the flare includes [tracer debug logs][4] when available.
