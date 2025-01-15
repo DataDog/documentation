@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import { FILTER_OPTIONS_ID_REGEX, SNAKE_CASE_REGEX } from './regexes';
-import { FilterConfigSchema } from './frontMatter';
+import { FilterConfigSchema } from './frontmatter';
 import { CdocsErrorSchema } from './errors';
 import { OptionGroupGlossarySchema } from './glossaries/optionGroupGlossary';
 

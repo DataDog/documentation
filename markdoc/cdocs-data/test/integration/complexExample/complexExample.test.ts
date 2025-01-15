@@ -6,7 +6,7 @@
  */
 import { describe, test, expect } from 'vitest';
 import {
-  FrontMatter,
+  Frontmatter,
   loadCustomizationConfig,
   buildFiltersManifest,
   resolveFilters,
@@ -29,7 +29,7 @@ describe('Complex example', () => {
 
   // "Parse" the frontmatter (the parse result
   // is hardcoded here, but would come from parsing a file)
-  const frontmatter: FrontMatter = {
+  const frontmatter: Frontmatter = {
     title: 'All About Animals',
     content_filters: [
       {

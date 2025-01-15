@@ -6,7 +6,7 @@
  */
 import { describe, test, expect } from 'vitest';
 import {
-  FrontMatter,
+  Frontmatter,
   loadCustomizationConfig,
   buildFiltersManifest,
   resolveFilters,
@@ -28,7 +28,7 @@ describe('Simple example', () => {
   // is hardcoded here, but would come from parsing a file).
   // This page would customize its content based on
   // the user's favorite color.
-  const frontmatter: FrontMatter = {
+  const frontmatter: Frontmatter = {
     title: "What's Your Favorite Color?",
     content_filters: [
       {

@@ -72,7 +72,7 @@ export type FiltersConfig = z.infer<typeof FiltersConfigSchema>;
  * (additional keys are allowed in the front matter YAML,
  * but are ignored by the integration).
  */
-export const FrontMatterSchema = z.object({
+export const FrontmatterSchema = z.object({
   title: z.string(),
   content_filters: FiltersConfigSchema.optional(),
 });
@@ -104,4 +104,4 @@ export const FrontMatterSchema = z.object({
  *   ]
  * }
  */
-export type FrontMatter = z.infer<typeof FrontMatterSchema>;
+export type Frontmatter = z.infer<typeof FrontmatterSchema>;

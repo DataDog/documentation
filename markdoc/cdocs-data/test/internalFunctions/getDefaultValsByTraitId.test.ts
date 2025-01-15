@@ -1,10 +1,10 @@
 import { describe, test, expect } from 'vitest';
 import { getDefaultValsByTraitId } from '../../src/utils/compilation/buildFiltersManifest';
-import { FrontMatter, FrontMatterSchema } from '../../src';
-import { paintColorsCustomizationConfig } from '../config/mocks/valid/paintColorsConfig';
+import { Frontmatter, FrontmatterSchema } from '../../src';
+import { paintColorsCustomizationConfig } from '../config/mocks/valid/paintColors/customizationConfig';
 
 describe('getDefaultValsByTraitId', () => {
-  const frontmatter: FrontMatter = {
+  const frontmatter: Frontmatter = {
     title: 'My Page',
     content_filters: [
       {
@@ -24,7 +24,7 @@ describe('getDefaultValsByTraitId', () => {
       },
     ],
   };
-  FrontMatterSchema.parse(frontmatter);
+  FrontmatterSchema.parse(frontmatter);
 
   test('derives the default values for each filter', () => {
     const defaultValsByTraitId = getDefaultValsByTraitId({

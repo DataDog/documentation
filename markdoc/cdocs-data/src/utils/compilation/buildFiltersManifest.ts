@@ -1,8 +1,8 @@
 import { GLOBAL_PLACEHOLDER_REGEX } from '../../schemas/regexes';
-import { FrontMatter } from '../../schemas/frontMatter';
+import { Frontmatter } from '../../schemas/frontmatter';
 import { PLACEHOLDER_REGEX } from '../../schemas/regexes';
 import { FiltersManifest } from '../../schemas/pageFilters';
-import { FilterConfig } from '../../schemas/frontMatter';
+import { FilterConfig } from '../../schemas/frontmatter';
 import { CdocsError } from '../../schemas/errors';
 import { CustomizationConfig } from '../../schemas/customizationConfig';
 import { v4 as uuidv4 } from 'uuid';
@@ -13,7 +13,7 @@ import { v4 as uuidv4 } from 'uuid';
  * that defines the filters available on the page.
  */
 export function buildFiltersManifest(p: {
-  frontmatter: FrontMatter;
+  frontmatter: Frontmatter;
   customizationConfig: CustomizationConfig;
 }): FiltersManifest {
   // Create an empty manifest to populate

@@ -16,7 +16,7 @@ import {
   FiltersManifest,
   ClientSideFiltersManifest,
 } from '../../schemas/pageFilters';
-import { FilterConfig } from '../../schemas/frontMatter';
+import { FilterConfig } from '../../schemas/frontmatter';
 
 /**
  * Resolve the page filters object that is used

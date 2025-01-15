@@ -5,11 +5,11 @@ export {
 } from './schemas/errors';
 
 export {
-  FrontMatter,
-  FrontMatterSchema,
+  Frontmatter,
+  FrontmatterSchema,
   FilterConfig,
   FilterConfigSchema,
-} from './schemas/frontMatter';
+} from './schemas/frontmatter';
 
 export {
   FiltersManifest,

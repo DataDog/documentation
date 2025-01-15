@@ -10,8 +10,9 @@ import fs from 'fs';
 describe('loadCustomizationConfig', () => {
   const langs = ['en', 'ja']; // TODO: Change to piglatin
 
-  // Valid data handling
-  test('loads a valid configuration from YAML', async () => {
+  // Valid data handling -- more detailed tests can be found
+  // in the integration tests for the complex example
+  test('loads a configuration from YAML that matches the snapshot', async () => {
     const { customizationConfigByLang } = loadCustomizationConfig({
       configDir: VALID_CUSTOMIZATION_CONFIG_DIR,
       langs,
