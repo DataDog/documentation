@@ -5599,6 +5599,11 @@ menu:
       parent: log_management
       identifier: log_troubleshooting
       weight: 10
+    - name: Live Tail
+      url: logs/troubleshooting/live_tail
+      parent: log_troubleshooting
+      identifier: log_troubleshooting_live_tail
+      weight: 1001
     - name: Security Overview
       url: security/
       pre: security-platform
