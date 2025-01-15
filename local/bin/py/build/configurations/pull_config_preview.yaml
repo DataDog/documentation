@@ -115,7 +115,7 @@
         contents:
 
         - action: integrations
-          branch: main
+          branch: nick/chat_display_true
           globs:
           - "*/metadata.csv"
           - "*/manifest.json"
