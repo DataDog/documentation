@@ -98,6 +98,9 @@ The container ID field is still prefixed by `c:`, with the value being either:
 - `c:ci-<CONTAINER_ID>`
 - `c:in-<CGROUP_INODE>`
 
+For backward compatibility, we still support the following format, although it is considered deprecated:
+- `c:<CONTAINER_ID>`
+
 ### DogStatsD protocol v1.5
 
 Starting with the Agent `>=v7.57.0`, a new External Data field is supported.
@@ -108,22 +111,36 @@ The container ID is prefixed by `e:`, for example:
 `<METRIC_NAME>:<VALUE>|<TYPE>|#<TAG_KEY_1>:<TAG_VALUE_1>,<TAG_2>|e:<EXTERNAL_DATA>`
 
 This data is supplied by the [Datadog Agent Admission Controller][106] and will contain:
-- If the container is an init container or not.
+- A boolean representing if the container is an init container or not.
 - The container name.
 - The pod UID.
+
+The format is as follow:
+
+`it-INIT_CONTAINER,cn-CONTAINER_NAME,pu-POD_UID`
+
+It would look like:
+
+`it-false,cn-nginx-webserver,pu-75a2b6d5-3949-4afb-ad0d-92ff0674e759`
 
 ### DogStatsD protocol v1.6
 
 Starting with the Agent `>=v7.63.0`, a new Cardinality field is supported.
 The Datadog Agent uses the cardinality value to enrich DogStatsD metrics with additional container tags corresponding to their cardinality.
 
-The cardinality field is prefixed by `d:`, for example:
+The cardinality field is prefixed by `card:`, for example:
 
-`<METRIC_NAME>:<VALUE>|<TYPE>|#<TAG_KEY_1>:<TAG_VALUE_1>,<TAG_2>|d:<CARDINALITY>`
+`<METRIC_NAME>:<VALUE>|<TYPE>|#<TAG_KEY_1>:<TAG_VALUE_1>,<TAG_2>|card:<CARDINALITY>`
 
 Cardinality will impact tags enrichment for both:
 - [Docker Tags][105]
 - [Kubernetes Tags][104]
+
+The available values for cardinality are:
+- `none`
+- `low`
+- `orchestrator`
+- `high`
 
 [101]: /metrics/#metric-name
 [102]: /metrics/types/
