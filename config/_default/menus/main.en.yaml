@@ -2096,21 +2096,26 @@ menu:
       parent: error_tracking
       identifier: error_tracking_backend
       weight: 9
+    - name: Suspected Causes
+      url: error_tracking/backend/suspected_cause
+      parent: error_tracking_backend
+      identifier: error_tracking_suspected_cause
+      weight: 101
     - name: Exception Replay
       url: error_tracking/backend/exception_replay
       parent: error_tracking_backend
       identifier: error_tracking_exception_replay
-      weight: 101
+      weight: 102
     - name: APM
       url: error_tracking/apm
       parent: error_tracking_backend
       identifier: error_tracking_apm
-      weight: 102
+      weight: 103
     - name: Logs
       url: error_tracking/backend/logs
       parent: error_tracking_backend
       identifier: error_tracking_be_logs
-      weight: 103
+      weight: 104
     - name: Manage Data Collection
       url: error_tracking/manage_data_collection
       parent: error_tracking
