@@ -325,7 +325,7 @@ Displays property and value pairs in JSON format.
 
 
 {{% collapse-content title="Form" level="h3" %}}
-Form input components have the following properties.
+Form components have the following properties.
 
 ### General
 
@@ -386,6 +386,10 @@ Event
 
 Reaction
 : **Values**: custom, set component state, trigger query, open modal, close modal, download file, set state variable value
+
+State Function
+: setValue<br>
+**Example**: `form0.setValue({name: 'node-group-1'})` sets the value of the `form0` component to `{name: 'node-group-1'}`.
 
 For more information on events, see [Events][1].
 
