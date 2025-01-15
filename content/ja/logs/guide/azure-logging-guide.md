@@ -147,7 +147,7 @@ Azure プラットフォームのログ (リソースログを含む) を送信�
 3. ポリシー名を入力し、**Listen** を選択します。
 4. **Connection string-primary key** の値をコピーし、安全な場所に保管してください。これは Datadog-Azure 関数が Event Hub と通信するために必要です。
 
-{{< img src="integration/azure/eventhub_connection_string.png" alt="イベントハブの共有アクセスポリシーの接続文字列プライマリキー値" popup="true" style="width:100%">}}
+{{< img src="integrations/azure/eventhub_connection_string.png" alt="イベントハブの共有アクセスポリシーの接続文字列プライマリキー値" popup="true" style="width:100%">}}
 
 #### Datadog-Azure 関数を作成
 

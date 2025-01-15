@@ -155,7 +155,7 @@ A JSON array of objects. Each object must have a `"sample_rate"`. The `"name"`,`
   
 `DD_TAGS`
 : **Default**: none <br>
-A list of default tags to be added to every span and profile. Tags can be separated by commas or spaces, for example: `layer:api,team:intake,key:value` or `layer:api team:intake key:value`. Key-value pairs must be of string-convertible types.
+A list of default tags to be added to every span, metric, and profile. Tags can be separated by commas or spaces, for example: `layer:api,team:intake,key:value` or `layer:api team:intake key:value`. Key-value pairs must be of string-convertible types.
 
 ### Agent  
 
