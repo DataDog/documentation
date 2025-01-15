@@ -69,7 +69,7 @@ See [Custom Instrumentation][3] for your programming language for detailed infor
 
 When using Datadog, the OpenTracing operation name is a resource and the OpenTracing "component" tag is Datadog's span name. For example, to define (in OpenTracing terms) a span that has the resource "/user/profile", and the span name "http.request":
 
-{{< programming-lang-wrapper langs="java,python,ruby,go,nodejs,.NET,php,cpp" >}}
+{{< programming-lang-wrapper langs="java,python,ruby,nodejs,.NET,php,cpp" >}}
 {{< programming-lang lang="java" >}}
 
 
@@ -124,18 +124,6 @@ For more information, see [Setting up Ruby and OpenTracing][1].
 
 
 [1]: /tracing/trace_collection/opentracing/ruby/#opentracing
-{{< /programming-lang >}}
-{{< programming-lang lang="go" >}}
-
-
-```go
-opentracing.StartSpan("http.request", opentracer.ResourceName("/user/profile"))
-```
-
-For more information, see [Setting up Go and OpenTracing][1].
-
-
-[1]: /tracing/trace_collection/opentracing/go/#opentracing
 {{< /programming-lang >}}
 {{< programming-lang lang="nodejs" >}}
 
