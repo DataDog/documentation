@@ -101,13 +101,16 @@ However, to route traffic to Datadog's PrivateLink offering in {{< region-param 
 
 13. [Restart your Agent][5] to send data to Datadog through AWS PrivateLink.
 
-
-
 [1]: /help/
 [2]: /agent/configuration/agent-configuration-files/#agent-main-configuration-file
 [3]: /agent/logs/?tab=tailexistingfiles#send-logs-over-https
 [4]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/vpc-endpoint-overview.html
 [5]: /agent/configuration/agent-commands/#restart-the-agent
+{{% /tab %}}
+
+{{% tab "Connect cross-region from a region that supports private links" %}}
+
+
 {{% /tab %}}
 
 {{% tab "Connect from another region using VPC Peering" %}}
