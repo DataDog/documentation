@@ -362,20 +362,6 @@
                 tag: "Documentation"
                 text: "Learn about the Testing Tunnel"
 
-      - repo_name: datadog-sca-github-action
-        contents:
-        - action: pull-and-push-file
-          branch: main
-          globs:
-          - 'README.md'
-          options:
-            dest_path: '/security/code_security/static_analysis/static_analysis_rules/'
-            file_name: 'github_actions.md'
-            front_matters:
-              dependencies: ["https://github.com/DataDog/datadog-sca-github-action/blob/main/README.md"]
-              title: Software Composition Analysis and GitHub Actions
-              description: Use Datadog and GitHub to run Software Composition Analysis jobs in a CI pipeline.
-
       - repo_name: datadog-static-analyzer-rule-docs
         contents:
         - action: pull-and-push-folder
