@@ -106,7 +106,7 @@ Additional cloud provider-specific attributes are also mapped.
 | `user_agent.original` | `http.useragent` |
 
 ## Span Type mapping
-Datadog has a vendor-specific convention of "Span Type" represented by `span.type` attribute.
+Datadog has a vendor-specific convention of "Span Type" represented by the `span.type` attribute.
 
 Based on the attributes included in your span, Datadog Agent and Datadog OpenTelemetry Components will attempt to infer the appropriate span type for better compatibility with other Datadog services. You may also explicitly set `span.type` attribute on any given span to override this logic using an [attributes][5] or [transform][6] processor, as well as by setting appropriate configuration values in OTel SDKs. 
 
