@@ -20,7 +20,7 @@ describe('loadCustomizationConfig', () => {
     const stringifiedConfig = JSON.stringify(customizationConfigByLang, null, 2);
 
     await expect(stringifiedConfig).toMatchFileSnapshot(
-      SNAPSHOTS_DIR + '/publicUtilities/validConfig.snap.json',
+      SNAPSHOTS_DIR + '/utils/loadCustomizationConfig/validConfig.snap.json',
     );
   });
 
@@ -60,7 +60,7 @@ describe('loadCustomizationConfig', () => {
   test(`the errors match the snapshot`, async () => {
     const stringifiedErrors = JSON.stringify(errorsByDir, null, 2);
     await expect(stringifiedErrors).toMatchFileSnapshot(
-      `${SNAPSHOTS_DIR}/utilities/loadCustomizationConfig/invalidDirectoryErrors.snap.json`,
+      `${SNAPSHOTS_DIR}/utils/loadCustomizationConfig/invalidDirectoryErrors.snap.json`,
     );
   });
 });

@@ -167,7 +167,7 @@ describe('buildFiltersManifest', () => {
     };
     expect(_.isEqual(manifest, expectedManifest)).toBe(true);
     await expect(JSON.stringify(manifest, null, 2)).toMatchFileSnapshot(
-      `${SNAPSHOTS_DIR}/utilities/buildFiltersManifest/validManifest.snap.json`,
+      `${SNAPSHOTS_DIR}/utils/buildFiltersManifest/validManifest.snap.json`,
     );
   });
 
