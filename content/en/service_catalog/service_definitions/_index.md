@@ -66,7 +66,7 @@ For detailed information about each version, including full schemas and example 
 
 #### Store and edit definitions in GitHub
 
-Configure the [GitHub integration][6] to directly link from where you view the service's definition in the Service Catalog to where it's stored and editable in GitHub. Datadog scans for the `service.datadog.yaml` file at the root of each repository with read permissions.
+Configure the [GitHub integration][6] to directly link from where you view the service's definition in the Service Catalog to where it's stored and editable in GitHub. Datadog scans for the `service.datadog.yaml` and `entity.datadog.yaml` files throughout each repository with read permissions.
 
 To install the GitHub integration:
 1. Navigate to the [integration tile][7].
