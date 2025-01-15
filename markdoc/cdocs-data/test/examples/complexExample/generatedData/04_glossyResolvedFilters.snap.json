@@ -3,7 +3,7 @@
     "id": "paint_finish",
     "label": "Finish",
     "defaultValue": "eggshell",
-    "currentValue": "eggshell",
+    "currentValue": "glossy",
     "options": [
       {
         "id": "matte",
@@ -22,20 +22,20 @@
   "paint_color": {
     "id": "paint_color",
     "label": "Color",
-    "defaultValue": "sunlit_sands",
-    "currentValue": "sunlit_sands",
+    "defaultValue": "golden_mirage",
+    "currentValue": "golden_mirage",
     "options": [
       {
-        "id": "sunlit_sands",
-        "label": "Sunlit Sands"
+        "id": "golden_mirage",
+        "label": "Golden Mirage"
       },
       {
-        "id": "azure_dreamscape",
-        "label": "Azure Dreamscape"
+        "id": "sapphire_glitz",
+        "label": "Sapphire Glitz"
       },
       {
-        "id": "silver_serenade",
-        "label": "Silver Serenade"
+        "id": "platinum_prestige",
+        "label": "Platinum Prestige"
       }
     ]
   }

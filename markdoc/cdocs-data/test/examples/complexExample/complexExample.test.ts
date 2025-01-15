@@ -44,8 +44,6 @@ describe('Complex example', () => {
     customizationConfig: customizationConfigByLang.en,
   });
 
-  console.log('manifest errors', manifest.errors);
-
   // Resolve the filters using the default value (purple)
   const defaultResolvedFilters = resolveFilters({
     valsByTraitId: manifest.defaultValsByTraitId,
@@ -56,7 +54,7 @@ describe('Complex example', () => {
   // to a non-default option
   const userSelectionsByTraitId = {
     ...manifest.defaultValsByTraitId,
-    paint_finish: 'gloss',
+    paint_finish: 'glossy',
   };
 
   // Resolve the filters again
@@ -88,7 +86,9 @@ describe('Complex example', () => {
     );
   });
 
-  test('builds a filters manifest that matches the snapshot', async () => {
+  test('builds an error-free filters manifest that matches the snapshot', async () => {
+    expect(manifest.errors.length).toBe(0);
+
     const snapshot = JSON.stringify(manifest, null, 2);
 
     await expect(snapshot).toMatchFileSnapshot(
@@ -104,7 +104,9 @@ describe('Complex example', () => {
     );
   });
 
-  test('resolves glossy filters that match the snapshot', async () => {
+  test('correctly resolves glossy filters that match the snapshot', async () => {
+    expect(glossyResolvedFilters.paint_finish.currentValue).toBe('glossy');
+
     const snapshot = JSON.stringify(glossyResolvedFilters, null, 2);
 
     await expect(snapshot).toMatchFileSnapshot(
