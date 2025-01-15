@@ -1,0 +1,1 @@
+To use the Amazon Security Lake destination, you need to set up AWS credential files and environment variables. Observability Pipelines uses those credentials to send logs to Amazon Security Lake. Datadog recommends setting up a specific AWS profile that can be used by Observability Pipelines.
