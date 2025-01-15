@@ -106,8 +106,7 @@ When you create a new EMR cluster in the [Amazon EMR console][4], add a bootstra
    DD_API_KEY=$(aws secretsmanager get-secret-value --secret-id $SECRET_NAME | jq -r .SecretString | jq -r '.["dd_api_key"]')
 
    # Download and run the latest init script
-   curl -L https://install.datadoghq.com/scripts/install-emr.sh > djm-install-script
-   DD_SITE=$DD_SITE DD_API_KEY=$DD_API_KEY bash djm-install-script || true
+   DD_SITE=$DD_SITE DD_API_KEY=$DD_API_KEY  curl -L https://install.datadoghq.com/scripts/install-emr.sh > djm-install-script; bash djm-install-script || true
 
    ```
 
