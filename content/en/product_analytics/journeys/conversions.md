@@ -20,8 +20,6 @@ The conversion page provides a starting point for tracking your conversion rates
 
 - **End-to-end conversion rate** - A conversion refers to the moment when a user responds to a call to action. This rate is the percentage of the total number of users that visited your site or application who converted.
 - **Conversion rate over time** - Track changes in conversion rate over time, providing insights into trends and performance fluctuations.
-- **Conversion rate / session count by version** - Track the conversion rate or session count by by 
-
 - **Conversion rate / session count by version** - Track the conversion rate or session count by release version.
 
 From there, you can investigate the specific attributes that may have affected conversion rates, such as page load speed, ease of navigation, or checkout experience.
