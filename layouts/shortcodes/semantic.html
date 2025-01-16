@@ -1,0 +1,18 @@
+<div>
+    {{$resource := .Get "resource"}}
+
+    {{ $data := dict }}
+    {{/*  accessing a global resource in the assets directory  */}}
+    {{ $path := print "_data/semantic-core/" $resource }}
+    {{ with resources.Get $path }}
+        {{ with . | transform.Unmarshal }}
+            {{ $data = . }}
+        {{ end }}
+    {{ else }}
+        {{ errorf "Unable to get global resource %q" $path }}
+    {{ end }}
+
+    {{ range $data }}
+        <p>{{.}}</p>
+    {{ end }}
+</div>
