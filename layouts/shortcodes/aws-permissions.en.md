@@ -93,7 +93,7 @@ The following permissions included in the policy document use wild cards such as
                 "s3:ListAccessGrants",
                 "s3:ListAllMyBuckets",
                 "s3:PutBucketNotification",
-                "s3express:GetBucketPolicy"
+                "s3express:GetBucketPolicy",
                 "s3express:GetEncryptionConfiguration",
                 "s3express:ListAllMyDirectoryBuckets",
                 "savingsplans:DescribeSavingsPlanRates",
