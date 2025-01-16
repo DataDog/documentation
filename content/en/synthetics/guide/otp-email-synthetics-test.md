@@ -95,3 +95,4 @@ Once the OTP is inserted and verified, continue recording the appropriate steps 
 [3]: https://app.datadoghq.com/synthetics/create
 [4]: /synthetics/settings/?tab=specifyvalue#global-variables
 [5]: /synthetics/browser_tests/actions/?tab=testanelementontheactivepage#javascript
+[6]: /synthetics/troubleshooting/?tab=common
