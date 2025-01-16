@@ -172,6 +172,10 @@ To redact the attribute:
 7. Optionally, add tags.
 8. Click **Add Rules**.
 
+## Disable Sensitive Data Scanner
+
+To turn off Sensitive Data Scanner entirely, set the toggle to **off** for each Scanning Group so that they are disabled.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
