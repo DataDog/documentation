@@ -16,14 +16,14 @@ If your Live Tail page shows an error, or the logs do not load, try the followin
 
 Traceroute is a tool that helps you test the path a packet takes from source to destination. You can use `traceroute` to identify any client-side network issues that may stop Live Tail from loading.
 
-To examine the route for live tail logs on Linux or MacOS, run the following command:
+To examine the route for Live Tail logs on Linux or MacOS, run the following command:
 {{< code-block lang="shell">}}
 traceroute live.logs.datadoghq.com
 {{< /code-block >}}
 
 If at any point the request times out, that means the request is blocked somewhere between the client and Datadog servers. Check with your network administration team to address this issue.    
 
-If a step in the route shows `* * *`, then a host did not reply to the traceroute, or a router does not reply to that protocol. The `* * *` pattern does not always indicate a timeout. Changing the discovery protocol to ICMP/PING using the `-I` option may provide more detailed results.
+If a step in the route shows `* * *`, this could indicate a host did not reply to the traceroute, or a router does not reply to that protocol. The `* * *` pattern does not always indicate a timeout. Changing the discovery protocol to ICMP/PING using the `-I` option may provide more detailed results.
 
 ## Clear browser and DNS caches
 
