@@ -103,7 +103,7 @@ Partner APIs
 [1]: https://app.datadoghq.com/apis/catalog
 [3]: /api_catalog/explore_apis/
 [6]: /service_catalog/manage
-[7]: /endpoints/monitor_endpoints/
+[7]: /service_catalog/endpoints/monitor_endpoints/
 [8]: /tracing/trace_collection/
 [9]: /service_catalog/customize/create_entries
 [10]: /service_catalog/manage/#add-metadata-to-endpoints

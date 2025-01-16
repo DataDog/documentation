@@ -163,5 +163,5 @@ Datadog Application Security identifies Log4j Log4Shell attack payloads and prov
 [17]: /security/application_security/threats/library_configuration/#data-security-considerations
 [25]: /security/application_security/threats/add-user-info#adding-business-logic-information-login-success-login-failure-any-business-logic-to-traces
 [26]: /agent/remote_config/#enabling-remote-configuration
-[27]: /endpoints/
+[27]: /service_catalog/endpoints/
 [28]: /security/application_security/code_security/
