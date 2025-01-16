@@ -55,22 +55,7 @@ See [Set Up Sensitive Data Scanner in the Cloud][2] for setup details.
 
 ### In your environment {#in-your-environment}
 
-Use Sensitive Data Scanner for the Agent or Observability Pipelines if you want to scan your data on premises, before the data leaves your environment.
-
-#### Datadog Agent
-
-{{< callout url="https://www.datadoghq.com/private-beta/sensitive-data-scanner-using-agent-in-your-premises/" >}}
->>>>>>> master
-  Sensitive Data Scanner support for the Datadog Agent is in Preview. To enroll, click <strong>Request Access</strong>.
-{{< /callout >}}
-
-With Sensitive Data Scanner using the Agent, Datadog redacts your logs before submitting them to the Datadog backend, and unredacted logs never leave your premises. To use Sensitive Data Scanner, set up a scanning group to define what data to scan. You can set up one scanning group per organization. In the scanning group, add scanning rules from the Rule Library, which are predefined rules that detect email addresses, credit card numbers, API keys, authorization tokens, network and device information, and more. You cannot create your own rules.
-
-See [Set Up Sensitive Data Scanner using the Agent][2] for setup details.
-
-#### Observability Pipelines
-
-[Observability Pipelines][3] collects and processes your data within your environment, and then routes the data to their downstream integrations. When you [set up a pipeline][4] in Observability Pipelines, add the [Sensitive Data Scanner processor][5] to redact sensitive data in your logs before they leave your premises. You can add predefined scanning rules from the Rule Library, such as email address, credit card numbers, API keys, authorization tokens, IP addresses, and more. You can also create your own rules using regex patterns.
+Use [Observability Pipelines' Sensitive Data Scanner processor][5] if you want to scan your data on premises, before the data leaves your environment. [Observability Pipelines][3] collects and processes your data within your environment, and then routes the data to their downstream integrations. When you [set up a pipeline][4] in Observability Pipelines, add the Sensitive Data Scanner processor to redact sensitive data in your logs before they leave your premises. You can add predefined scanning rules from the Rule Library, such as email address, credit card numbers, API keys, authorization tokens, IP addresses, and more. You can also create your own rules using regex patterns.
 
 ## Scan cloud storage
 
