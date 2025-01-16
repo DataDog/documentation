@@ -1,0 +1,8 @@
+matte_blue_paint_options:
+  - id: powder_blue_m
+    default: true
+
+matte_red_paint_options:
+  - id: brick_m
+    default: true
+  - id: scarlet_m

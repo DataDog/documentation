@@ -1,6 +1,9 @@
-import { FiltersManifest, FiltersManifestSchema } from '../../../../../src';
+import {
+  ClientSideFiltersManifest,
+  ClientSideFiltersManifestSchema,
+} from '../../../../../src';
 
-export const paintColorsManifest: FiltersManifest = {
+export const clientSidePaintColorsManifest: ClientSideFiltersManifest = {
   filtersByTraitId: {
     color: {
       config: {
@@ -11,7 +14,6 @@ export const paintColorsManifest: FiltersManifest = {
       defaultValsByOptionGroupId: {
         color_options: 'blue',
       },
-      possibleVals: ['blue', 'red'],
     },
     finish: {
       config: {
@@ -22,7 +24,6 @@ export const paintColorsManifest: FiltersManifest = {
       defaultValsByOptionGroupId: {
         finish_options: 'eggshell',
       },
-      possibleVals: ['matte', 'eggshell', 'gloss'],
     },
     paint: {
       config: {
@@ -31,34 +32,26 @@ export const paintColorsManifest: FiltersManifest = {
         option_group_id: '<FINISH>_<COLOR>_paint_options',
       },
       defaultValsByOptionGroupId: {
-        matte_blue_paint_options: 'powder_blue',
-        matte_red_paint_options: 'brick',
-        eggshell_blue_paint_options: 'elegant_royal',
-        eggshell_red_paint_options: 'rose',
-        gloss_blue_paint_options: 'sky_blue',
-        gloss_red_paint_options: 'fire_engine',
+        matte_blue_paint_options: 'powder_blue_m',
+        matte_red_paint_options: 'brick_m',
+        eggshell_blue_paint_options: 'elegant_royal_e',
+        eggshell_red_paint_options: 'rose_e',
+        gloss_blue_paint_options: 'sky_blue_g',
+        gloss_red_paint_options: 'fire_engine_g',
       },
-      possibleVals: [
-        'powder_blue',
-        'brick',
-        'scarlet',
-        'elegant_royal',
-        'robins_egg',
-        'rose',
-        'ruby',
-        'sky_blue',
-        'navy',
-        'fire_engine',
-        'crimson',
-      ],
     },
+  },
+  defaultValsByTraitId: {
+    color: 'blue',
+    finish: 'eggshell',
+    paint: 'elegant_royal_e',
   },
   optionGroupsById: {
     color_options: [
       {
+        default: true,
         id: 'blue',
         label: 'Blue',
-        default: true,
       },
       {
         id: 'red',
@@ -71,9 +64,9 @@ export const paintColorsManifest: FiltersManifest = {
         label: 'Matte',
       },
       {
+        default: true,
         id: 'eggshell',
         label: 'Eggshell',
-        default: true,
       },
       {
         id: 'gloss',
@@ -82,73 +75,67 @@ export const paintColorsManifest: FiltersManifest = {
     ],
     matte_blue_paint_options: [
       {
-        id: 'powder_blue',
-        label: 'Powder Blue',
         default: true,
+        id: 'powder_blue_m',
+        label: 'Powder Blue',
       },
     ],
     matte_red_paint_options: [
       {
-        id: 'brick',
-        label: 'Brick',
         default: true,
+        id: 'brick_m',
+        label: 'Brick',
       },
       {
-        id: 'scarlet',
+        id: 'scarlet_m',
         label: 'Scarlet',
       },
     ],
     eggshell_blue_paint_options: [
       {
-        id: 'elegant_royal',
-        label: 'Elegant Royal',
         default: true,
+        id: 'elegant_royal_e',
+        label: 'Elegant Royal',
       },
       {
-        id: 'robins_egg',
+        id: 'robins_egg_e',
         label: "Robin's Egg",
       },
     ],
     eggshell_red_paint_options: [
       {
-        id: 'rose',
-        label: 'Rose',
         default: true,
+        id: 'rose_e',
+        label: 'Rose',
       },
       {
-        id: 'ruby',
+        id: 'ruby_e',
         label: 'Ruby',
       },
     ],
     gloss_blue_paint_options: [
       {
-        id: 'sky_blue',
-        label: 'Sky Blue',
         default: true,
+        id: 'sky_blue_g',
+        label: 'Sky Blue',
       },
       {
-        id: 'navy',
+        id: 'navy_g',
         label: 'Navy',
       },
     ],
     gloss_red_paint_options: [
       {
-        id: 'fire_engine',
-        label: 'Fire Engine',
         default: true,
+        id: 'fire_engine_g',
+        label: 'Fire Engine',
       },
       {
-        id: 'crimson',
+        id: 'crimson_g',
         label: 'Crimson',
       },
     ],
   },
-  errors: [],
-  defaultValsByTraitId: {
-    color: 'blue',
-    finish: 'eggshell',
-    paint: 'elegant_royal',
-  },
 };
 
-FiltersManifestSchema.parse(paintColorsManifest);
+ClientSideFiltersManifestSchema.parse(clientSidePaintColorsManifest);

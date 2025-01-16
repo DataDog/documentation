@@ -8,7 +8,7 @@ import {
 import fs from 'fs';
 
 describe('loadCustomizationConfig', () => {
-  const langs = ['en', 'ja']; // TODO: Change to piglatin
+  const langs = ['en', 'piglatin'];
 
   // Valid data handling -- more detailed tests can be found
   // in the integration tests for the complex example

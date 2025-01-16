@@ -3,402 +3,348 @@
     "traitsById": {
       "color": {
         "id": "color",
-        "label": "Color"
+        "label": "Color",
+        "description": "A high-level color that can help the user find the right paint, such as 'red'."
       },
-      "item": {
-        "id": "item",
-        "label": "Item"
+      "finish": {
+        "id": "finish",
+        "label": "Finish",
+        "description": "A sheen such as 'glossy' or 'matte'."
+      },
+      "paint": {
+        "id": "paint",
+        "label": "Paint Color",
+        "description": "A specific color of paint, such as 'Fire Engine Red'."
       }
     },
     "optionsById": {
-      "red": {
-        "id": "red",
-        "label": "Red"
-      },
       "blue": {
         "id": "blue",
         "label": "Blue"
       },
-      "yellow": {
-        "id": "yellow",
-        "label": "Yellow"
+      "red": {
+        "id": "red",
+        "label": "Red"
       },
-      "green": {
-        "id": "green",
-        "label": "Green"
+      "matte": {
+        "id": "matte",
+        "label": "Matte"
       },
-      "ocean": {
-        "id": "ocean",
-        "label": "Ocean"
+      "eggshell": {
+        "id": "eggshell",
+        "label": "Eggshell"
       },
-      "sky": {
-        "id": "sky",
-        "label": "Sky"
+      "gloss": {
+        "id": "gloss",
+        "label": "Gloss"
       },
-      "jeans": {
-        "id": "jeans",
-        "label": "Jeans"
+      "powder_blue_m": {
+        "id": "powder_blue_m",
+        "label": "Powder Blue"
       },
-      "blueberry": {
-        "id": "blueberry",
-        "label": "Blueberry"
+      "elegant_royal_e": {
+        "id": "elegant_royal_e",
+        "label": "Elegant Royal"
       },
-      "grass": {
-        "id": "grass",
-        "label": "Grass"
+      "sky_blue_g": {
+        "id": "sky_blue_g",
+        "label": "Sky Blue"
       },
-      "emerald": {
-        "id": "emerald",
-        "label": "Emerald"
+      "robins_egg_e": {
+        "id": "robins_egg_e",
+        "label": "Robin's Egg"
       },
-      "lime": {
-        "id": "lime",
-        "label": "Lime"
+      "navy_g": {
+        "id": "navy_g",
+        "label": "Navy"
       },
-      "frog": {
-        "id": "frog",
-        "label": "Frog"
+      "brick_m": {
+        "id": "brick_m",
+        "label": "Brick"
       },
-      "ruby": {
-        "id": "ruby",
+      "scarlet_m": {
+        "id": "scarlet_m",
+        "label": "Scarlet"
+      },
+      "rose_e": {
+        "id": "rose_e",
+        "label": "Rose"
+      },
+      "ruby_e": {
+        "id": "ruby_e",
         "label": "Ruby"
       },
-      "apple": {
-        "id": "apple",
-        "label": "Apple"
+      "fire_engine_g": {
+        "id": "fire_engine_g",
+        "label": "Fire Engine"
       },
-      "firetruck": {
-        "id": "firetruck",
-        "label": "Firetruck"
-      },
-      "stop_sign": {
-        "id": "stop_sign",
-        "label": "Stop sign"
-      },
-      "banana": {
-        "id": "banana",
-        "label": "Banana"
-      },
-      "sunflower": {
-        "id": "sunflower",
-        "label": "Sunflower"
-      },
-      "lemon": {
-        "id": "lemon",
-        "label": "Lemon"
-      },
-      "school_bus": {
-        "id": "school_bus",
-        "label": "School bus"
+      "crimson_g": {
+        "id": "crimson_g",
+        "label": "Crimson"
       }
     },
     "optionGroupsById": {
-      "blue_item_options": [
-        {
-          "id": "ocean",
-          "label": "Ocean"
-        },
-        {
-          "default": true,
-          "id": "sky",
-          "label": "Sky"
-        },
-        {
-          "id": "jeans",
-          "label": "Jeans"
-        },
-        {
-          "id": "blueberry",
-          "label": "Blueberry"
-        }
-      ],
-      "traffic_light_color_options": [
-        {
-          "id": "red",
-          "label": "Red"
-        },
-        {
-          "id": "yellow",
-          "label": "Yellow"
-        },
-        {
-          "default": true,
-          "id": "green",
-          "label": "Green"
-        }
-      ],
-      "primary_color_options": [
-        {
-          "id": "red",
-          "label": "Red"
-        },
-        {
-          "id": "yellow",
-          "label": "Yellow"
-        },
+      "color_options": [
         {
           "default": true,
           "id": "blue",
           "label": "Blue"
+        },
+        {
+          "id": "red",
+          "label": "Red"
         }
       ],
-      "green_item_options": [
+      "eggshell_blue_paint_options": [
         {
           "default": true,
-          "id": "grass",
-          "label": "Grass"
+          "id": "elegant_royal_e",
+          "label": "Elegant Royal"
         },
         {
-          "id": "emerald",
-          "label": "Emerald"
-        },
-        {
-          "id": "lime",
-          "label": "Lime"
-        },
-        {
-          "id": "frog",
-          "label": "Frog"
+          "id": "robins_egg_e",
+          "label": "Robin's Egg"
         }
       ],
-      "red_item_options": [
+      "eggshell_red_paint_options": [
         {
-          "id": "ruby",
+          "default": true,
+          "id": "rose_e",
+          "label": "Rose"
+        },
+        {
+          "id": "ruby_e",
           "label": "Ruby"
-        },
-        {
-          "id": "apple",
-          "label": "Apple"
-        },
-        {
-          "id": "firetruck",
-          "label": "Firetruck"
-        },
-        {
-          "default": true,
-          "id": "stop_sign",
-          "label": "Stop sign"
         }
       ],
-      "yellow_item_options": [
+      "finish_options": [
+        {
+          "id": "matte",
+          "label": "Matte"
+        },
         {
           "default": true,
-          "id": "banana",
-          "label": "Banana"
+          "id": "eggshell",
+          "label": "Eggshell"
         },
         {
-          "id": "sunflower",
-          "label": "Sunflower"
+          "id": "gloss",
+          "label": "Gloss"
+        }
+      ],
+      "gloss_blue_paint_options": [
+        {
+          "default": true,
+          "id": "sky_blue_g",
+          "label": "Sky Blue"
         },
         {
-          "id": "lemon",
-          "label": "Lemon"
+          "id": "navy_g",
+          "label": "Navy"
+        }
+      ],
+      "gloss_red_paint_options": [
+        {
+          "default": true,
+          "id": "fire_engine_g",
+          "label": "Fire Engine"
         },
         {
-          "id": "school_bus",
-          "label": "School bus"
+          "id": "crimson_g",
+          "label": "Crimson"
+        }
+      ],
+      "matte_blue_paint_options": [
+        {
+          "default": true,
+          "id": "powder_blue_m",
+          "label": "Powder Blue"
+        }
+      ],
+      "matte_red_paint_options": [
+        {
+          "default": true,
+          "id": "brick_m",
+          "label": "Brick"
+        },
+        {
+          "id": "scarlet_m",
+          "label": "Scarlet"
         }
       ]
     }
   },
-  "ja": {
+  "piglatin": {
     "traitsById": {
       "color": {
         "id": "color",
-        "label": "Color(ja)"
+        "label": "Olorcay",
+        "description": "A high-level color that can help the user find the right paint, such as 'red'."
       },
-      "item": {
-        "id": "item",
-        "label": "Item"
+      "finish": {
+        "id": "finish",
+        "label": "Inishfay",
+        "description": "A sheen such as 'glossy' or 'matte'."
+      },
+      "paint": {
+        "id": "paint",
+        "label": "Paint Color",
+        "description": "A specific color of paint, such as 'Fire Engine Red'."
       }
     },
     "optionsById": {
-      "red": {
-        "id": "red",
-        "label": "Red (ja)"
-      },
       "blue": {
         "id": "blue",
-        "label": "Blue (ja)"
+        "label": "Ueblay"
       },
-      "yellow": {
-        "id": "yellow",
-        "label": "Yellow (ja)"
+      "red": {
+        "id": "red",
+        "label": "Edray"
       },
-      "green": {
-        "id": "green",
-        "label": "Green (ja)"
+      "matte": {
+        "id": "matte",
+        "label": "Attemay"
       },
-      "ocean": {
-        "id": "ocean",
-        "label": "Ocean (ja)"
+      "eggshell": {
+        "id": "eggshell",
+        "label": "Eggshellay"
       },
-      "sky": {
-        "id": "sky",
-        "label": "Sky (ja)"
+      "gloss": {
+        "id": "gloss",
+        "label": "Ossglay"
       },
-      "jeans": {
-        "id": "jeans",
-        "label": "Jeans (ja)"
+      "powder_blue_m": {
+        "id": "powder_blue_m",
+        "label": "Powder Blue"
       },
-      "blueberry": {
-        "id": "blueberry",
-        "label": "Blueberry (ja)"
+      "elegant_royal_e": {
+        "id": "elegant_royal_e",
+        "label": "Elegant Royal"
       },
-      "grass": {
-        "id": "grass",
-        "label": "Grass (ja)"
+      "sky_blue_g": {
+        "id": "sky_blue_g",
+        "label": "Sky Blue"
       },
-      "emerald": {
-        "id": "emerald",
-        "label": "Emerald (ja)"
+      "robins_egg_e": {
+        "id": "robins_egg_e",
+        "label": "Robin's Egg"
       },
-      "lime": {
-        "id": "lime",
-        "label": "Lime (ja)"
+      "navy_g": {
+        "id": "navy_g",
+        "label": "Navy"
       },
-      "frog": {
-        "id": "frog",
-        "label": "Frog (ja)"
+      "brick_m": {
+        "id": "brick_m",
+        "label": "Brick"
       },
-      "ruby": {
-        "id": "ruby",
+      "scarlet_m": {
+        "id": "scarlet_m",
+        "label": "Scarlet"
+      },
+      "rose_e": {
+        "id": "rose_e",
+        "label": "Rose"
+      },
+      "ruby_e": {
+        "id": "ruby_e",
         "label": "Ruby"
       },
-      "apple": {
-        "id": "apple",
-        "label": "Apple (ja)"
+      "fire_engine_g": {
+        "id": "fire_engine_g",
+        "label": "Fire Engine"
       },
-      "firetruck": {
-        "id": "firetruck",
-        "label": "Firetruck (ja)"
-      },
-      "stop_sign": {
-        "id": "stop_sign",
-        "label": "Stop sign (ja)"
-      },
-      "banana": {
-        "id": "banana",
-        "label": "Banana (ja)"
-      },
-      "sunflower": {
-        "id": "sunflower",
-        "label": "Sunflower (ja)"
-      },
-      "lemon": {
-        "id": "lemon",
-        "label": "Lemon (ja)"
-      },
-      "school_bus": {
-        "id": "school_bus",
-        "label": "School bus (ja)"
+      "crimson_g": {
+        "id": "crimson_g",
+        "label": "Crimson"
       }
     },
     "optionGroupsById": {
-      "blue_item_options": [
-        {
-          "id": "ocean",
-          "label": "Ocean"
-        },
-        {
-          "default": true,
-          "id": "sky",
-          "label": "Sky"
-        },
-        {
-          "id": "jeans",
-          "label": "Jeans"
-        },
-        {
-          "id": "blueberry",
-          "label": "Blueberry"
-        }
-      ],
-      "traffic_light_color_options": [
-        {
-          "id": "red",
-          "label": "Red (ja)"
-        },
-        {
-          "id": "yellow",
-          "label": "Yellow (ja)"
-        },
-        {
-          "default": true,
-          "id": "green",
-          "label": "Green (ja)"
-        }
-      ],
-      "primary_color_options": [
-        {
-          "id": "red",
-          "label": "Red (ja)"
-        },
-        {
-          "id": "yellow",
-          "label": "Yellow (ja)"
-        },
+      "color_options": [
         {
           "default": true,
           "id": "blue",
-          "label": "Blue (ja)"
+          "label": "Ueblay"
+        },
+        {
+          "id": "red",
+          "label": "Edray"
         }
       ],
-      "green_item_options": [
+      "eggshell_blue_paint_options": [
         {
           "default": true,
-          "id": "grass",
-          "label": "Grass"
+          "id": "elegant_royal_e",
+          "label": "Elegant Royal"
         },
         {
-          "id": "emerald",
-          "label": "Emerald"
-        },
-        {
-          "id": "lime",
-          "label": "Lime"
-        },
-        {
-          "id": "frog",
-          "label": "Frog"
+          "id": "robins_egg_e",
+          "label": "Robin's Egg"
         }
       ],
-      "red_item_options": [
+      "eggshell_red_paint_options": [
         {
-          "id": "ruby",
+          "default": true,
+          "id": "rose_e",
+          "label": "Rose"
+        },
+        {
+          "id": "ruby_e",
           "label": "Ruby"
-        },
-        {
-          "default": true,
-          "id": "apple",
-          "label": "Apple (ja)"
-        },
-        {
-          "id": "firetruck",
-          "label": "Ja firetruck"
-        },
-        {
-          "id": "stop_sign",
-          "label": "Stop sign (ja)"
         }
       ],
-      "yellow_item_options": [
+      "finish_options": [
+        {
+          "id": "matte",
+          "label": "Attemay"
+        },
         {
           "default": true,
-          "id": "banana",
-          "label": "Banana"
+          "id": "eggshell",
+          "label": "Eggshellay"
         },
         {
-          "id": "sunflower",
-          "label": "Sunflower"
+          "id": "gloss",
+          "label": "Ossglay"
+        }
+      ],
+      "gloss_blue_paint_options": [
+        {
+          "default": true,
+          "id": "sky_blue_g",
+          "label": "Sky Blue"
         },
         {
-          "id": "lemon",
-          "label": "Lemon"
+          "id": "navy_g",
+          "label": "Navy"
+        }
+      ],
+      "gloss_red_paint_options": [
+        {
+          "default": true,
+          "id": "fire_engine_g",
+          "label": "Fire Engine"
         },
         {
-          "id": "school_bus",
-          "label": "School bus"
+          "id": "crimson_g",
+          "label": "Crimson"
+        }
+      ],
+      "matte_blue_paint_options": [
+        {
+          "default": true,
+          "id": "powder_blue_m",
+          "label": "Powder Blue"
+        }
+      ],
+      "matte_red_paint_options": [
+        {
+          "default": true,
+          "id": "brick_m",
+          "label": "Brick"
+        },
+        {
+          "id": "scarlet_m",
+          "label": "Scarlet"
         }
       ]
     }

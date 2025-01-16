@@ -1,22 +1,22 @@
 import { describe, test, expect } from 'vitest';
 import { buildFiltersManifest } from '../../src';
-import { paintColorsFrontmatter } from '../config/mocks/valid/paintColors/frontmatter';
-import { paintColorsCustomizationConfig } from '../config/mocks/valid/paintColors/customizationConfig';
-import { paintColorsManifest } from '../config/mocks/valid/paintColors/filtersManifest';
+import { paintColorsFrontmatter } from '../config/mocks/valid/paintColorsData/frontmatter';
+import { paintColorsCustomizationConfig } from '../config/mocks/valid/paintColorsData/customizationConfig';
+import { paintColorsManifest } from '../config/mocks/valid/paintColorsData/filtersManifest';
 import _ from 'lodash';
 import { SNAPSHOTS_DIR } from '../config/constants';
 
 describe('buildFiltersManifest', () => {
   test('creates the expected object when given valid data', async () => {
-    const manifest = buildFiltersManifest({
+    const actualManifest = buildFiltersManifest({
       frontmatter: paintColorsFrontmatter,
       customizationConfig: paintColorsCustomizationConfig,
     });
 
     const expectedManifest = paintColorsManifest;
 
-    expect(_.isEqual(manifest, expectedManifest)).toBe(true);
-    await expect(JSON.stringify(manifest, null, 2)).toMatchFileSnapshot(
+    expect(_.isEqual(actualManifest, expectedManifest)).toBe(true);
+    await expect(JSON.stringify(actualManifest, null, 2)).toMatchFileSnapshot(
       `${SNAPSHOTS_DIR}/utils/buildFiltersManifest/validManifest.snap.json`,
     );
   });

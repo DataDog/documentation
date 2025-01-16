@@ -40,15 +40,15 @@ export const resolvedPaintColorsFilters: ResolvedFilters = {
   paint: {
     id: 'paint',
     label: 'Paint color',
-    defaultValue: 'elegant_royal',
-    currentValue: 'elegant_royal',
+    defaultValue: 'elegant_royal_e',
+    currentValue: 'elegant_royal_e',
     options: [
       {
-        id: 'elegant_royal',
+        id: 'elegant_royal_e',
         label: 'Elegant Royal',
       },
       {
-        id: 'robins_egg',
+        id: 'robins_egg_e',
         label: "Robin's Egg",
       },
     ],

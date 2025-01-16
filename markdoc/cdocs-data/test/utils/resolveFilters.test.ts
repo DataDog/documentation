@@ -1,6 +1,6 @@
 import { describe, test, expect } from 'vitest';
 import { resolveFilters } from '../../src';
-import { paintColorsManifest } from '../config/mocks/valid/paintColors/filtersManifest';
+import { paintColorsManifest } from '../config/mocks/valid/paintColorsData/filtersManifest';
 
 describe('resolveFilters', () => {
   test('correctly resolves default filters', () => {
@@ -8,8 +8,6 @@ describe('resolveFilters', () => {
       valsByTraitId: paintColorsManifest.defaultValsByTraitId,
       filtersManifest: paintColorsManifest,
     });
-
-    console.log('resolvedFilters', JSON.stringify(resolvedFilters, null, 2));
 
     Object.keys(paintColorsManifest.defaultValsByTraitId).forEach((traitId) => {
       const defaultVal = paintColorsManifest.defaultValsByTraitId[traitId];
@@ -31,6 +29,6 @@ describe('resolveFilters', () => {
     });
 
     const resolvedPaintColor = resolvedFilters.paint.currentValue;
-    expect(resolvedPaintColor).toBe('fire_engine');
+    expect(resolvedPaintColor).toBe('fire_engine_g');
   });
 });

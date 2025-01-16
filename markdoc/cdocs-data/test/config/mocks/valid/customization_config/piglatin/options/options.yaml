@@ -1,0 +1,13 @@
+options:
+# colors
+- id: blue
+  label: Ueblay
+- id: red
+  label: Edray
+# finishes
+- id: matte
+  label: Attemay
+- id: eggshell
+  label: Eggshellay
+- id: gloss
+  label: Ossglay

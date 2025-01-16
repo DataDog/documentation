@@ -1,5 +1,10 @@
 traits:
 - id: color
   label: Color
-- id: item
-  label: Item
+  description: "A high-level color that can help the user find the right paint, such as 'red'."
+- id: finish
+  label: Finish
+  description: "A sheen such as 'glossy' or 'matte'."
+- id: paint
+  label: Paint Color
+  description: "A specific color of paint, such as 'Fire Engine Red'."
