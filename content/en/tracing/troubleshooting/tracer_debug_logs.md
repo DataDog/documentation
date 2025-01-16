@@ -6,6 +6,24 @@ further_reading:
   text: "Troubleshooting APM Connection Errors"
 ---
 
+## Automated debug log collection
+<div class="alert alert-warning">Automated debug logs are supported for Node.js and .NET only. For other languages, use <a href="/tracing/troubleshooting/tracer_debug_logs/#enable-debug-mode">manual debug log collection</a> instead.</div>
+
+A flare allows you to send necessary troubleshooting information to the Datadog support team, including tracer logs, with sensitive data removed. Flares are useful for troubleshooting issues like high CPU usage, high memory usage, and missing spans.
+
+### Prerequisites
+- [Remote Configuration][3] must be enabled.
+- Your API key must be configured for Remote Configuration.
+- You must have a supported tracer version:
+  - Node.js: `5.15.0` or greater, or `4.39.0` or greater
+  - .NET: `2.46.0` or greater
+
+### Send a flare
+To send a flare from the Datadog site, make sure you've enabled [Fleet Automation][4] and [Remote Configuration][5] on the Agent.
+{{% remote-flare %}}
+
+{{< img src="agent/fleet_automation/fleet-automation-flares2.png" alt="The Send Ticket button launches a form to send a flare for an existing or new support ticket" style="width:60%;" >}}
+
 ## Enable debug mode
 
 Use Datadog debug settings to diagnose issues or audit trace data. Datadog does not recommend that you enable debug mode in production systems because it increases the number of events that are sent to your loggers. Use debug mode for debugging purposes only.
@@ -487,3 +505,6 @@ Available starting in 0.98.0:
 
 [1]: /help/
 [2]: /agent/troubleshooting/#send-a-flare
+[3]: /agent/remote_config
+[4]: /agent/fleet_automation/
+[5]: /agent/remote_config#enabling-remote-configuration
