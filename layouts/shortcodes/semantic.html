@@ -1,0 +1,10 @@
+<div>
+    <h2>Semantic</h2>
+    {{ $resource := .Get "resource" }}
+    <p>{{$resource}}</p>
+    {{ with (resources.Get (print "_data/semantic-core/" $resource)) }}
+        {{ range (unmarshal .) }}
+            <p>{{ . }}</p>
+        {{ end }}
+    {{ end }}
+</div>
