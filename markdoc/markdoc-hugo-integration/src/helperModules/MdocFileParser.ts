@@ -6,8 +6,7 @@ import { Frontmatter, FrontmatterSchema } from 'cdocs-data';
 import { CompilationError, ParsedFile } from '../schemas/compilationResults';
 
 /**
- * A module responsible for parsing Markdoc files into data structures
- * such as ASTs and RenderableTreeNodes,
+ * A module responsible for parsing a Markdoc file into a data structure,
  * extracting any validation errors encountered during parsing.
  */
 export class MdocFileParser {

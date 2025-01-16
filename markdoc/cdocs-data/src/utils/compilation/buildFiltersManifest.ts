@@ -218,7 +218,7 @@ function buildDynamicOptionGroupIds(p: {
     const referencedTraitId = placeholderText.slice(1, -1).toLowerCase(); // e.g. "color"
 
     // If the referenced trait has not been encountered in a filter config
-    // yet, the placeholder is invalid
+    // so far, the placeholder is invalid
     const referencedFilterConfig = p.filterConfigsByTraitId[referencedTraitId];
     if (!referencedFilterConfig || !p.precedingFilterIds.includes(referencedTraitId)) {
       errors.push({

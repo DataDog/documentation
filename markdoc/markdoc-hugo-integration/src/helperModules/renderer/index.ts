@@ -1,6 +1,5 @@
 import MarkdownIt from 'markdown-it';
 import type {
-  ClientVariable,
   RenderableTreeNodes,
   Config as MarkdocConfig
 } from 'markdoc-static-compiler';
