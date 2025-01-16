@@ -112,17 +112,17 @@
     "node_modules/cdocs-data/dist/schemas/regexes.js"(exports) {
       "use strict";
       Object.defineProperty(exports, "__esModule", { value: true });
-      exports.FILTER_OPTIONS_ID_REGEX = exports.GLOBAL_PLACEHOLDER_REGEX = exports.PLACEHOLDER_REGEX = exports.SNAKE_CASE_REGEX = void 0;
+      exports.OPTION_GROUP_ID_REGEX = exports.GLOBAL_PLACEHOLDER_REGEX = exports.PLACEHOLDER_REGEX = exports.SNAKE_CASE_REGEX = void 0;
       exports.SNAKE_CASE_REGEX = /^[a-z0-9]+(_[a-z0-9]+)*$/;
       exports.PLACEHOLDER_REGEX = /<([A-Z0-9_]+)>/;
       exports.GLOBAL_PLACEHOLDER_REGEX = /<([A-Z0-9_]+)>/g;
-      exports.FILTER_OPTIONS_ID_REGEX = /^([a-z0-9]+|<([A-Z0-9_]+)>)(_([a-z0-9]+)|_<([A-Z0-9_]+)>)*_options$/;
+      exports.OPTION_GROUP_ID_REGEX = /^([a-z0-9]+|<([A-Z0-9_]+)>)(_([a-z0-9]+)|_<([A-Z0-9_]+)>)*_options$/;
     }
   });
 
-  // node_modules/cdocs-data/dist/utils/resolveFilters.js
+  // node_modules/cdocs-data/dist/utils/shared/resolveFilters.js
   var require_resolveFilters = __commonJS({
-    "node_modules/cdocs-data/dist/utils/resolveFilters.js"(exports) {
+    "node_modules/cdocs-data/dist/utils/shared/resolveFilters.js"(exports) {
       "use strict";
       Object.defineProperty(exports, "__esModule", { value: true });
       exports.resolveFilters = resolveFilters;

@@ -2,7 +2,7 @@ import MarkdocStaticCompiler, { Node } from 'markdoc-static-compiler';
 import fs from 'fs';
 import path from 'path';
 import yaml from 'js-yaml';
-import { FrontMatter, FrontMatterSchema } from 'cdocs-data';
+import { Frontmatter, FrontmatterSchema } from 'cdocs-data';
 import { CompilationError, ParsedFile } from '../schemas/compilationResults';
 
 /**
@@ -20,8 +20,8 @@ export class MdocFileParser {
     const ast = MarkdocStaticCompiler.parse(markdocStr);
 
     // Validate the frontmatter
-    const frontmatter = yaml.load(ast.attributes.frontmatter) as FrontMatter;
-    FrontMatterSchema.parse(frontmatter);
+    const frontmatter = yaml.load(ast.attributes.frontmatter) as Frontmatter;
+    FrontmatterSchema.parse(frontmatter);
 
     // Collect all partials and build their ASTs
     const { partials, errors: partialErrors } = this.#buildPartialASTs(

@@ -1,5 +1,5 @@
 import { Node } from 'markdoc-static-compiler';
-import { FrontMatter } from './frontMatter';
+import { Frontmatter } from './frontmatter';
 import { z } from 'zod';
 
 /**
@@ -33,7 +33,7 @@ export type CompilationError = z.infer<typeof CompilationErrorSchema>;
  */
 export interface ParsedFile {
   ast: Node;
-  frontmatter: FrontMatter;
+  frontmatter: Frontmatter;
   partials: Record<string, Node>;
   errors: CompilationError[];
 }

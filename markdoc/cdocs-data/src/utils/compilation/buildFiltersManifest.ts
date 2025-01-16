@@ -222,7 +222,7 @@ function buildDynamicOptionGroupIds(p: {
     const referencedFilterConfig = p.filterConfigsByTraitId[referencedTraitId];
     if (!referencedFilterConfig || !p.precedingFilterIds.includes(referencedTraitId)) {
       errors.push({
-        message: `Invalid placeholder: The placeholder ${segment} in the options source '${filterConfig.option_group_id}' refers to an unrecognized trait ID. The file frontmatter must contain a filter with the trait ID '${referencedTraitId}', and it must be defined before the filter with the trait ID ${filterConfig.trait_id}.`,
+        message: `Invalid placeholder: The placeholder ${placeholderText} in the options source '${filterConfig.option_group_id}' refers to an unrecognized trait ID. The file frontmatter must contain a filter with the trait ID '${referencedTraitId}', and it must be defined before the filter with the trait ID ${filterConfig.trait_id}.`,
         searchTerm: filterConfig.option_group_id,
       });
       return [segment];

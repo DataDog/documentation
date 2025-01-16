@@ -1,27 +1,27 @@
 {
   "/en/bad_interpolated_options_source.mdoc.md": [
     {
-      "message": "Invalid options source: The options source 'orange_item_options', which is required for the filter ID 'item', does not exist."
+      "message": "Invalid options source: The options source 'orange_item_options', which is required for the trait ID 'item', does not exist."
     },
     {
-      "message": "Invalid options source: The options source 'green_item_options', which is required for the filter ID 'item', does not exist."
+      "message": "Invalid options source: The options source 'green_item_options', which is required for the trait ID 'item', does not exist."
     },
     {
-      "message": "Invalid options source: The options source 'indigo_item_options', which is required for the filter ID 'item', does not exist."
+      "message": "Invalid options source: The options source 'indigo_item_options', which is required for the trait ID 'item', does not exist."
     },
     {
-      "message": "Invalid options source: The options source 'violet_item_options', which is required for the filter ID 'item', does not exist."
+      "message": "Invalid options source: The options source 'violet_item_options', which is required for the trait ID 'item', does not exist."
     }
   ],
   "/en/bad_literal_options_source.mdoc.md": [
     {
-      "message": "Invalid options source: The options source 'red_object_options', which is required for the filter ID 'item', does not exist."
+      "message": "Invalid options source: The options source 'red_object_options', which is required for the trait ID 'item', does not exist."
     },
     {
-      "message": "Invalid options source: The options source 'yellow_object_options', which is required for the filter ID 'item', does not exist."
+      "message": "Invalid options source: The options source 'yellow_object_options', which is required for the trait ID 'item', does not exist."
     },
     {
-      "message": "Invalid options source: The options source 'blue_object_options', which is required for the filter ID 'item', does not exist."
+      "message": "Invalid options source: The options source 'blue_object_options', which is required for the trait ID 'item', does not exist."
     }
   ],
   "/en/bad_nested_pref_value_reference.mdoc.md": [

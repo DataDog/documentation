@@ -11,8 +11,8 @@ import {
   buildFiltersManifest,
   resolveFilters,
 } from '../../../src';
+import { SNAPSHOTS_DIR } from '../../config/constants';
 
-const GENERATED_DATA_DIR = __dirname + '/generatedData';
 const CUSTOMIZATION_CONFIG_DIR = __dirname + '/customization_config';
 
 describe('Complex example', () => {
@@ -116,7 +116,7 @@ describe('Complex example', () => {
     const snapshot = JSON.stringify(customizationConfigByLang, null, 2);
 
     await expect(snapshot).toMatchFileSnapshot(
-      GENERATED_DATA_DIR + '/01_customizationConfigByLang.snap.json',
+      SNAPSHOTS_DIR + '/complexExample/01_customizationConfigByLang.snap.json',
     );
   });
 
@@ -150,7 +150,7 @@ describe('Complex example', () => {
     const snapshot = JSON.stringify(manifest, null, 2);
 
     await expect(snapshot).toMatchFileSnapshot(
-      GENERATED_DATA_DIR + '/02_filtersManifest.snap.json',
+      SNAPSHOTS_DIR + '/complexExample/02_filtersManifest.snap.json',
     );
   });
 
@@ -161,7 +161,7 @@ describe('Complex example', () => {
     const snapshot = JSON.stringify(defaultResolvedFilters, null, 2);
 
     await expect(snapshot).toMatchFileSnapshot(
-      GENERATED_DATA_DIR + '/03_defaultResolvedFilters.snap.json',
+      SNAPSHOTS_DIR + '/complexExample/03_defaultResolvedFilters.snap.json',
     );
   });
 
@@ -172,7 +172,7 @@ describe('Complex example', () => {
     const snapshot = JSON.stringify(forestResolvedFilters, null, 2);
 
     await expect(snapshot).toMatchFileSnapshot(
-      GENERATED_DATA_DIR + '/04_forestResolvedFilters.snap.json',
+      SNAPSHOTS_DIR + '/complexExample/04_forestResolvedFilters.snap.json',
     );
   });
 
@@ -182,7 +182,7 @@ describe('Complex example', () => {
     const snapshot = JSON.stringify(gracefullyResolvedFilters, null, 2);
 
     await expect(snapshot).toMatchFileSnapshot(
-      GENERATED_DATA_DIR + '/05_gracefullyResolvedFilters.snap.json',
+      SNAPSHOTS_DIR + '/complexExample/05_gracefullyResolvedFilters.snap.json',
     );
   });
 });

@@ -3,7 +3,7 @@ import { RenderableTreeNode } from 'markdoc-static-compiler';
 import prettier from 'prettier';
 import fs from 'fs';
 import path from 'path';
-import { FiltersManifest, buildClientFiltersManifest } from 'cdocs-data';
+import { FiltersManifest, pruneManifestForClient } from 'cdocs-data';
 import { buildRenderableTree, getMinifiedIfFunctionsByRef } from '../treeManagement';
 import { customComponents } from '../../markdocParserConfig';
 import yaml from 'js-yaml';
@@ -13,7 +13,7 @@ import { HugoConfig } from '../../schemas/config/hugo';
 import { render } from '../renderer';
 import { FurtherReadingTemplate } from '../../components/furtherReading';
 import { CompilationError } from '../../schemas/compilationResults';
-import { FrontMatter } from '../../schemas/frontMatter';
+import { Frontmatter } from '../../schemas/frontmatter';
 
 const stylesStr = fs.readFileSync(path.resolve(__dirname, 'assets/styles.css'), 'utf8');
 
@@ -117,7 +117,7 @@ export class PageBuilder {
   /**
    * Add a front matter string to a page contents string.
    */
-  static #addFrontMatter(p: { pageContents: string; frontMatter: FrontMatter }): string {
+  static #addFrontMatter(p: { pageContents: string; frontMatter: Frontmatter }): string {
     const { content_filters, ...rest } = p.frontMatter;
     return `---\n${yaml.dump(rest)}---\n${p.pageContents}`;
   }
@@ -142,7 +142,7 @@ export class PageBuilder {
     const initFunctionStr = `const ${initFunctionName} = () => { 
 clientFiltersManager.initialize({
     ifFunctionsByRef: ${JSON.stringify(getMinifiedIfFunctionsByRef(p.renderableTree))},
-    filtersManifest: ${JSON.stringify(buildClientFiltersManifest(p.filtersManifest))}
+    filtersManifest: ${JSON.stringify(pruneManifestForClient(p.filtersManifest))}
   });
 }; `;
 

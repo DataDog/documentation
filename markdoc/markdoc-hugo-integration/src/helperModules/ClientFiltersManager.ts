@@ -19,7 +19,7 @@
  */
 
 import { buildCustomizationMenuUi } from './PageBuilder/components/CustomizationMenu';
-import { resolveFilters } from 'cdocs-data/dist/utils/resolveFilters';
+import { resolveFilters } from 'cdocs-data/dist/utils/shared/resolveFilters';
 import { ClientSideFiltersManifest } from 'cdocs-data/dist/schemas/pageFilters';
 import { ClientFunction } from 'markdoc-static-compiler/src/types';
 import { reresolveFunctionNode } from './renderer/reresolver';

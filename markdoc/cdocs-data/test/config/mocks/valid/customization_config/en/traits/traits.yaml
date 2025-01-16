@@ -6,5 +6,5 @@ traits:
   label: Finish
   description: "A sheen such as 'glossy' or 'matte'."
 - id: paint
-  label: Paint Color
+  label: Paint color
   description: "A specific color of paint, such as 'Fire Engine Red'."

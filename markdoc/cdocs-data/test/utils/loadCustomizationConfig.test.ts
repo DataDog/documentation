@@ -10,14 +10,59 @@ import fs from 'fs';
 describe('loadCustomizationConfig', () => {
   const langs = ['en', 'piglatin'];
 
-  // Valid data handling -- more detailed tests can be found
-  // in the integration tests for the complex example
-  test('loads a configuration from YAML that matches the snapshot', async () => {
-    const { customizationConfigByLang } = loadCustomizationConfig({
-      configDir: VALID_CUSTOMIZATION_CONFIG_DIR,
-      langs,
-    });
+  const { customizationConfigByLang } = loadCustomizationConfig({
+    configDir: VALID_CUSTOMIZATION_CONFIG_DIR,
+    langs,
+  });
 
+  test('uses translated config data when present', () => {
+    const piglatinColorTraitLabel =
+      customizationConfigByLang.piglatin.traitsById.color.label;
+    expect(piglatinColorTraitLabel).toBe('Olorcay');
+  });
+
+  test('backfills English data when translations are not available', () => {
+    const piglatinPaintTraitLabel =
+      customizationConfigByLang.piglatin.traitsById.paint.label;
+    expect(piglatinPaintTraitLabel).toBe('Paint color');
+  });
+
+  test('contains the expected trait IDs in both languages', () => {
+    const expectedTraitIds = ['color', 'finish', 'paint'].sort();
+    const actualEnTraitIds = Object.keys(customizationConfigByLang.en.traitsById).sort();
+    const actualPiglatinTraitIds = Object.keys(
+      customizationConfigByLang.piglatin.traitsById,
+    ).sort();
+
+    expect(actualEnTraitIds).toEqual(expectedTraitIds);
+    expect(actualPiglatinTraitIds).toEqual(expectedTraitIds);
+  });
+
+  test('contains the expected option group IDs in both languages', () => {
+    const expectedOptionGroupIds = [
+      'color_options',
+      'finish_options',
+      'matte_blue_paint_options',
+      'matte_red_paint_options',
+      'eggshell_blue_paint_options',
+      'eggshell_red_paint_options',
+      'gloss_blue_paint_options',
+      'gloss_red_paint_options',
+    ].sort();
+
+    const actualEnOptionGroupIds = Object.keys(
+      customizationConfigByLang.en.optionGroupsById,
+    ).sort();
+
+    const actualPiglatinOptionGroupIds = Object.keys(
+      customizationConfigByLang.piglatin.optionGroupsById,
+    ).sort();
+
+    expect(actualEnOptionGroupIds).toEqual(expectedOptionGroupIds);
+    expect(actualPiglatinOptionGroupIds).toEqual(expectedOptionGroupIds);
+  });
+
+  test('loads a configuration from YAML that matches the snapshot', async () => {
     const stringifiedConfig = JSON.stringify(customizationConfigByLang, null, 2);
 
     await expect(stringifiedConfig).toMatchFileSnapshot(

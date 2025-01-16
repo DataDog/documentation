@@ -13,7 +13,7 @@
       },
       "paint": {
         "id": "paint",
-        "label": "Paint Color",
+        "label": "Paint color",
         "description": "A specific color of paint, such as 'Fire Engine Red'."
       }
     },
@@ -188,7 +188,7 @@
       },
       "paint": {
         "id": "paint",
-        "label": "Paint Color",
+        "label": "Paint color",
         "description": "A specific color of paint, such as 'Fire Engine Red'."
       }
     },
