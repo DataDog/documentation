@@ -1,22 +1,23 @@
 import fs from 'fs';
-import { FilterOptionsConfig } from './schemas/yaml/filterOptions';
+import {
+  buildFiltersManifest,
+  loadCustomizationConfig,
+  CustomizationConfigByLang,
+  CustomizationConfig
+} from 'cdocs-data';
 import { IntegrationConfig } from './schemas/config/integration';
 import { HugoGlobalConfig } from './schemas/config/hugo';
 import { MdocFileParser } from './helperModules/MdocFileParser';
-import { FileNavigator } from './helperModules/FileNavigator';
-import { YamlConfigParser } from './helperModules/YamlConfigParser';
 import { PageBuilder } from './helperModules/PageBuilder';
 import {
   CompilationError,
   ParsedFile,
   CompilationResult
 } from './schemas/compilationResults';
-import { PageFiltersManifestSchema } from './schemas/pageFilters';
-import { Glossary } from './schemas/yaml/glossary';
-import { FiltersManifestBuilder } from './helperModules/FiltersManifestBuilder';
+import { FileSearcher } from './helperModules/FileSearcher';
 import { HugoGlobalConfigBuilder } from './helperModules/HugoGlobalConfigBuilder';
-import { AuthorConsoleData } from './schemas/authorConsole';
-import { AuthorConsoleBuilder } from './helperModules/AuthorConsoleBuilder';
+// import { AuthorConsoleData } from './schemas/authorConsole';
+// import { AuthorConsoleBuilder } from './helperModules/AuthorConsoleBuilder';
 
 /**
  * The external interface of the integration.
@@ -27,61 +28,27 @@ import { AuthorConsoleBuilder } from './helperModules/AuthorConsoleBuilder';
  */
 export class MarkdocHugoIntegration {
   hugoGlobalConfig: HugoGlobalConfig;
-  filterOptionsConfigByLang: Record<string, FilterOptionsConfig>;
-  glossariesByLang: Record<string, Glossary> = {};
   private compiledFilePaths: string[] = [];
 
+  customizationConfigByLang: CustomizationConfigByLang;
   errorsByFilePath: Record<string, CompilationError[]> = {};
 
   /**
-   * Validate and store the provided configuration.
+   * Load the configuration objects from YAML
    */
   constructor(args: { config: IntegrationConfig }) {
     this.hugoGlobalConfig = HugoGlobalConfigBuilder.build(args.config);
 
-    // Load the English glossary configuration
-    this.glossariesByLang = YamlConfigParser.loadGlossariesByLang({
-      filtersConfigDir: this.hugoGlobalConfig.dirs.filtersConfig,
+    const { customizationConfigByLang } = loadCustomizationConfig({
+      configDir: this.hugoGlobalConfig.dirs.customizationConfig,
       langs: this.hugoGlobalConfig.languages
     });
 
-    // Load English filter configuration
-    this.filterOptionsConfigByLang = {
-      en: YamlConfigParser.loadFiltersConfigFromLangDir({
-        dir: this.hugoGlobalConfig.dirs.filtersConfig + '/en',
-        glossary: this.glossariesByLang.en
-      })
-    };
-
-    // Load translated filter configurations, backfilling with English
-    this.hugoGlobalConfig.languages.forEach((lang) => {
-      if (lang === 'en') {
-        return;
-      }
-
-      let translatedFilterOptionsConfig: FilterOptionsConfig;
-      try {
-        translatedFilterOptionsConfig = YamlConfigParser.loadFiltersConfigFromLangDir({
-          dir: this.hugoGlobalConfig.dirs.filtersConfig + '/' + lang,
-          glossary: this.glossariesByLang[lang]
-        });
-      } catch (e) {
-        // If no filters config directory exists for this language,
-        // assume no translated filters exist
-        if (e instanceof Object && 'code' in e && e.code === 'ENOENT') {
-          translatedFilterOptionsConfig = {};
-        } else {
-          throw e;
-        }
-      }
-
-      this.filterOptionsConfigByLang[lang] = {
-        ...this.filterOptionsConfigByLang.en,
-        ...translatedFilterOptionsConfig
-      };
-    });
+    // new data types
+    this.customizationConfigByLang = customizationConfigByLang;
   }
 
+  /*
   async injectAuthorConsole() {
     const consoleData: AuthorConsoleData = {
       glossary: this.glossariesByLang.en,
@@ -108,6 +75,7 @@ export class MarkdocHugoIntegration {
 
     return consoleHtml;
   }
+  */
 
   /**
    * Provide a string that includes the shared styles and scripts
@@ -185,7 +153,7 @@ export class MarkdocHugoIntegration {
     this.#resetErrors();
     this.compiledFilePaths = [];
 
-    const markdocFilepaths = FileNavigator.findInDir(
+    const markdocFilepaths = FileSearcher.findInDir(
       this.hugoGlobalConfig.dirs.content,
       /\.mdoc.md$/
     );
@@ -206,7 +174,7 @@ export class MarkdocHugoIntegration {
       const compiledFilepath = this.#compileMdocFile({
         markdocFilepath,
         parsedFile,
-        filterOptionsConfig: this.filterOptionsConfigByLang[lang]
+        customizationConfig: this.customizationConfigByLang[lang]
       });
 
       if (compiledFilepath) {
@@ -255,10 +223,11 @@ export class MarkdocHugoIntegration {
    * depending on the configuration, and write the output to a file.
    * If the compilation succeeds, return the path to the compiled file.
    */
+
   #compileMdocFile(p: {
     markdocFilepath: string;
     parsedFile: ParsedFile;
-    filterOptionsConfig: FilterOptionsConfig;
+    customizationConfig: CustomizationConfig;
   }): string | null {
     const lang = p.markdocFilepath
       .replace(this.hugoGlobalConfig.dirs.content, '')
@@ -275,21 +244,18 @@ export class MarkdocHugoIntegration {
     }
 
     // generate the filters manifest
-    const draftFiltersManifest = FiltersManifestBuilder.build({
+    const filtersManifest = buildFiltersManifest({
       frontmatter: p.parsedFile.frontmatter,
-      filterOptionsConfig: this.filterOptionsConfigByLang[lang],
-      glossary: this.glossariesByLang[lang]
+      customizationConfig: p.customizationConfig
     });
 
-    if (draftFiltersManifest.errors.length > 0) {
+    if (filtersManifest.errors.length > 0) {
       this.#addFileErrors({
         filePath: p.markdocFilepath,
-        errors: draftFiltersManifest.errors
+        errors: filtersManifest.errors
       });
       return null;
     }
-
-    const filtersManifest = PageFiltersManifestSchema.parse(draftFiltersManifest);
 
     // build the HTML and write it to an .md file
     try {

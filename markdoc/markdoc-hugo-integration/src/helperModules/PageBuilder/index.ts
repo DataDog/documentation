@@ -3,18 +3,17 @@ import { RenderableTreeNode } from 'markdoc-static-compiler';
 import prettier from 'prettier';
 import fs from 'fs';
 import path from 'path';
-import { Frontmatter } from '../../schemas/yaml/frontMatter';
+import { FiltersManifest, pruneManifestForClient } from 'cdocs-data';
 import { buildRenderableTree, getMinifiedIfFunctionsByRef } from '../treeManagement';
 import { customComponents } from '../../markdocParserConfig';
 import yaml from 'js-yaml';
 import { PageTemplate } from './templates/PageTemplate';
 import { renderToString } from 'react-dom/server';
 import { HugoConfig } from '../../schemas/config/hugo';
-import { PageFiltersManifest } from '../../schemas/pageFilters';
 import { render } from '../renderer';
 import { FurtherReadingTemplate } from '../../components/furtherReading';
-import { FiltersManifestBuilder } from '../FiltersManifestBuilder';
 import { CompilationError } from '../../schemas/compilationResults';
+import { Frontmatter } from '../../schemas/frontmatter';
 
 const stylesStr = fs.readFileSync(path.resolve(__dirname, 'assets/styles.css'), 'utf8');
 
@@ -42,9 +41,9 @@ export class PageBuilder {
   static build(p: {
     parsedFile: ParsedFile;
     hugoConfig: HugoConfig;
-    filtersManifest: PageFiltersManifest;
+    filtersManifest: FiltersManifest;
   }): { html: string; errors: CompilationError[] } {
-    const variables = p.filtersManifest.defaultValsByFilterId;
+    const variables = p.filtersManifest.defaultValsByTraitId;
 
     const { renderableTree, errors } = buildRenderableTree({
       parsedFile: p.parsedFile,
@@ -76,7 +75,7 @@ export class PageBuilder {
     }
 
     const pageJsx = PageTemplate({
-      valsByFilterId: p.filtersManifest.defaultValsByFilterId,
+      valsByTraitId: p.filtersManifest.defaultValsByTraitId,
       filtersManifest: p.filtersManifest,
       articleHtml
     });
@@ -84,9 +83,9 @@ export class PageBuilder {
     let pageHtml = renderToString(pageJsx);
     pageHtml += `\n<div x-init='${pageInitScript}'></div>`;
 
-    pageHtml = this.#addFrontmatter({
+    pageHtml = this.#addFrontMatter({
       pageContents: pageHtml,
-      frontmatter: p.parsedFile.frontmatter
+      frontMatter: p.parsedFile.frontmatter
     });
 
     return { html: pageHtml, errors };
@@ -116,10 +115,10 @@ export class PageBuilder {
   }
 
   /**
-   * Add a frontmatter string to a page contents string.
+   * Add a front matter string to a page contents string.
    */
-  static #addFrontmatter(p: { pageContents: string; frontmatter: Frontmatter }): string {
-    const { content_filters, ...rest } = p.frontmatter;
+  static #addFrontMatter(p: { pageContents: string; frontMatter: Frontmatter }): string {
+    const { content_filters, ...rest } = p.frontMatter;
     return `---\n${yaml.dump(rest)}---\n${p.pageContents}`;
   }
 
@@ -130,7 +129,7 @@ export class PageBuilder {
    */
   static #getPageInitScript(p: {
     renderableTree: RenderableTreeNode;
-    filtersManifest: PageFiltersManifest;
+    filtersManifest: FiltersManifest;
   }): string {
     const initFunctionName = 'initPage';
     const docReadyExecutionScript = `if (document.readyState === "complete" || document.readyState === "interactive") {
@@ -143,9 +142,7 @@ export class PageBuilder {
     const initFunctionStr = `const ${initFunctionName} = () => { 
 clientFiltersManager.initialize({
     ifFunctionsByRef: ${JSON.stringify(getMinifiedIfFunctionsByRef(p.renderableTree))},
-    filtersManifest: ${JSON.stringify(
-      FiltersManifestBuilder.minifyManifest(p.filtersManifest)
-    )}
+    filtersManifest: ${JSON.stringify(pruneManifestForClient(p.filtersManifest))}
   });
 }; `;
 

@@ -1,0 +1,9 @@
+options:
+- id: red
+  label: Red
+- id: yellow
+  label: Yellow
+- id: green
+  label: Green
+- id: blue
+  label: Blue

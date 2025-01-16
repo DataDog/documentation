@@ -1,0 +1,10 @@
+desert_animal_options:
+  - id: camel
+    default: true
+  - id: rattlesnake
+
+forest_animal_options:
+  - id: deer
+  - id: squirrel
+  - id: owl
+    default: true

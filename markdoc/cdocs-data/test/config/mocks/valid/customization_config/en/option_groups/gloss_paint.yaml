@@ -1,0 +1,9 @@
+gloss_blue_paint_options:
+  - id: sky_blue_g
+    default: true
+  - id: navy_g
+
+gloss_red_paint_options:
+  - id: fire_engine_g
+    default: true
+  - id: crimson_g

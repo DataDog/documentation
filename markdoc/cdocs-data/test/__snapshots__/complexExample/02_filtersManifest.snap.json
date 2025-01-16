@@ -1,0 +1,109 @@
+{
+  "filtersByTraitId": {
+    "habitat": {
+      "config": {
+        "label": "Habitat",
+        "trait_id": "habitat",
+        "option_group_id": "habitat_options"
+      },
+      "defaultValsByOptionGroupId": {
+        "habitat_options": "ocean"
+      },
+      "possibleVals": [
+        "ocean",
+        "desert",
+        "forest"
+      ]
+    },
+    "animal": {
+      "config": {
+        "label": "Animal",
+        "trait_id": "animal",
+        "option_group_id": "<HABITAT>_animal_options"
+      },
+      "defaultValsByOptionGroupId": {
+        "ocean_animal_options": "octopus",
+        "desert_animal_options": "camel",
+        "forest_animal_options": "owl"
+      },
+      "possibleVals": [
+        "whale",
+        "shark",
+        "octopus",
+        "fish",
+        "camel",
+        "rattlesnake",
+        "deer",
+        "squirrel",
+        "owl"
+      ]
+    }
+  },
+  "optionGroupsById": {
+    "habitat_options": [
+      {
+        "default": true,
+        "id": "ocean",
+        "label": "Ocean"
+      },
+      {
+        "id": "desert",
+        "label": "Desert"
+      },
+      {
+        "id": "forest",
+        "label": "Forest"
+      }
+    ],
+    "ocean_animal_options": [
+      {
+        "id": "whale",
+        "label": "Whale"
+      },
+      {
+        "id": "shark",
+        "label": "Shark"
+      },
+      {
+        "default": true,
+        "id": "octopus",
+        "label": "Octopus"
+      },
+      {
+        "id": "fish",
+        "label": "Fish"
+      }
+    ],
+    "desert_animal_options": [
+      {
+        "default": true,
+        "id": "camel",
+        "label": "Camel"
+      },
+      {
+        "id": "rattlesnake",
+        "label": "Rattlesnake"
+      }
+    ],
+    "forest_animal_options": [
+      {
+        "id": "deer",
+        "label": "Deer"
+      },
+      {
+        "id": "squirrel",
+        "label": "Squirrel"
+      },
+      {
+        "default": true,
+        "id": "owl",
+        "label": "Owl"
+      }
+    ]
+  },
+  "errors": [],
+  "defaultValsByTraitId": {
+    "habitat": "ocean",
+    "animal": "octopus"
+  }
+}

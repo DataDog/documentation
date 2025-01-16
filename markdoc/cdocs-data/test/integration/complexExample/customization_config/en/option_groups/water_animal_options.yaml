@@ -1,0 +1,6 @@
+ocean_animal_options:
+  - id: whale
+  - id: shark
+  - id: octopus
+    default: true
+  - id: fish

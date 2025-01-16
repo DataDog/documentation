@@ -35,7 +35,7 @@
         selectorHtml += `<p 
     id="cdoc-${p.filter.id}-pills-label" 
     class="cdoc-filter-label"
-  >${p.filter.displayName}</p>`;
+  >${p.filter.label}</p>`;
         p.filter.options.forEach((option) => {
           const isSelected = option.id === currentValue;
           selectorHtml += `<button
@@ -44,7 +44,7 @@
       data-option-id="${option.id}"
       aria-selected="${isSelected}"
       tabIndex="0"
-    >${option.displayName}</button>`;
+    >${option.label}</button>`;
         });
         selectorHtml += "</div>";
         return selectorHtml;
@@ -65,7 +65,7 @@
         selectorHtml += `<p 
     id="${filterLabelElementId}" 
     class="cdoc-filter-label"
-  >${p.filter.displayName}</p>`;
+  >${p.filter.label}</p>`;
         selectorHtml += `<div 
     id="cdoc-dropdown-${p.filter.id}" 
     class="cdoc-dropdown">`;
@@ -80,7 +80,7 @@
       <span 
         id="cdoc-dropdown-${p.filter.id}-label" 
         class="cdoc-btn-label"
-      >${p.filter.options.find((o) => o.id === currentValue).displayName}</span>
+      >${p.filter.options.find((o) => o.id === currentValue).label}</span>
       <div class="cdoc-chevron"></div>
     </button>`;
         selectorHtml += `<div 
@@ -97,7 +97,7 @@
       role="option" 
       aria-selected="${isSelected}"
       tabIndex="0"
-    >${option.displayName}</a>`;
+    >${option.label}</a>`;
         });
         selectorHtml += "</div>";
         selectorHtml += "</div>";
@@ -107,64 +107,64 @@
     }
   });
 
-  // dist/schemas/regexes.js
+  // node_modules/cdocs-data/dist/schemas/regexes.js
   var require_regexes = __commonJS({
-    "dist/schemas/regexes.js"(exports) {
+    "node_modules/cdocs-data/dist/schemas/regexes.js"(exports) {
       "use strict";
       Object.defineProperty(exports, "__esModule", { value: true });
-      exports.FILTER_OPTIONS_ID_REGEX = exports.GLOBAL_PLACEHOLDER_REGEX = exports.PLACEHOLDER_REGEX = exports.SNAKE_CASE_REGEX = void 0;
+      exports.OPTION_GROUP_ID_REGEX = exports.GLOBAL_PLACEHOLDER_REGEX = exports.PLACEHOLDER_REGEX = exports.SNAKE_CASE_REGEX = void 0;
       exports.SNAKE_CASE_REGEX = /^[a-z0-9]+(_[a-z0-9]+)*$/;
       exports.PLACEHOLDER_REGEX = /<([A-Z0-9_]+)>/;
       exports.GLOBAL_PLACEHOLDER_REGEX = /<([A-Z0-9_]+)>/g;
-      exports.FILTER_OPTIONS_ID_REGEX = /^([a-z0-9]+|<([A-Z0-9_]+)>)(_([a-z0-9]+)|_<([A-Z0-9_]+)>)*_options$/;
+      exports.OPTION_GROUP_ID_REGEX = /^([a-z0-9]+|<([A-Z0-9_]+)>)(_([a-z0-9]+)|_<([A-Z0-9_]+)>)*_options$/;
     }
   });
 
-  // dist/helperModules/filterResolution.js
-  var require_filterResolution = __commonJS({
-    "dist/helperModules/filterResolution.js"(exports) {
+  // node_modules/cdocs-data/dist/utils/shared/resolveFilters.js
+  var require_resolveFilters = __commonJS({
+    "node_modules/cdocs-data/dist/utils/shared/resolveFilters.js"(exports) {
       "use strict";
       Object.defineProperty(exports, "__esModule", { value: true });
-      exports.resolvePageFilters = resolvePageFilters;
+      exports.resolveFilters = resolveFilters;
       exports.resolveFilterOptionsSource = resolveFilterOptionsSource;
       var regexes_1 = require_regexes();
-      function resolvePageFilters(p) {
-        const resolvedPageFilters = {};
-        const valsByFilterIdDup = Object.assign({}, p.valsByFilterId);
-        const pageFiltersConfig = Object.values(p.filtersManifest.filtersById).map((filter) => {
+      function resolveFilters(p) {
+        const resolvedFilters = {};
+        const valsByTraitIdDup = Object.assign({}, p.valsByTraitId);
+        const filterConfigs = Object.values(p.filtersManifest.filtersByTraitId).map((filter) => {
           return filter.config;
         });
-        pageFiltersConfig.forEach((filterConfig) => {
+        filterConfigs.forEach((filterConfig) => {
           const filterConfigDup = resolveFilterOptionsSource({
             pageFilterConfig: filterConfig,
-            valsByFilterId: valsByFilterIdDup
+            selectedValsByTraitId: valsByTraitIdDup
           });
-          const defaultValue = filterConfigDup.default_value || p.filtersManifest.optionSetsById[filterConfigDup.options_source].find((option) => option.default).id;
-          const possibleVals = p.filtersManifest.optionSetsById[filterConfigDup.options_source].map((option) => option.id);
-          let currentValue = p.valsByFilterId[filterConfigDup.id];
+          const defaultValue = filterConfigDup.default_value || p.filtersManifest.optionGroupsById[filterConfigDup.option_group_id].find((option) => option.default).id;
+          const possibleVals = p.filtersManifest.optionGroupsById[filterConfigDup.option_group_id].map((option) => option.id);
+          let currentValue = p.valsByTraitId[filterConfigDup.trait_id];
           if (currentValue && !possibleVals.includes(currentValue)) {
             currentValue = defaultValue;
-            valsByFilterIdDup[filterConfigDup.id] = defaultValue;
+            valsByTraitIdDup[filterConfigDup.trait_id] = defaultValue;
           }
           const resolvedFilter = {
-            id: filterConfigDup.id,
-            displayName: filterConfigDup.display_name,
+            id: filterConfigDup.trait_id,
+            label: filterConfigDup.label,
             defaultValue,
             currentValue,
-            options: p.filtersManifest.optionSetsById[filterConfigDup.options_source].map((option) => ({
+            options: p.filtersManifest.optionGroupsById[filterConfigDup.option_group_id].map((option) => ({
               id: option.id,
-              displayName: option.display_name
+              label: option.label
             }))
           };
-          resolvedPageFilters[filterConfigDup.id] = resolvedFilter;
+          resolvedFilters[filterConfigDup.trait_id] = resolvedFilter;
         });
-        return resolvedPageFilters;
+        return resolvedFilters;
       }
       function resolveFilterOptionsSource(p) {
         const filterConfigDup = Object.assign({}, p.pageFilterConfig);
-        if (regexes_1.GLOBAL_PLACEHOLDER_REGEX.test(filterConfigDup.options_source)) {
-          filterConfigDup.options_source = filterConfigDup.options_source.replace(regexes_1.GLOBAL_PLACEHOLDER_REGEX, (_match, placeholder) => {
-            return p.valsByFilterId[placeholder.toLowerCase()];
+        if (regexes_1.GLOBAL_PLACEHOLDER_REGEX.test(filterConfigDup.option_group_id)) {
+          filterConfigDup.option_group_id = filterConfigDup.option_group_id.replace(regexes_1.GLOBAL_PLACEHOLDER_REGEX, (_match, placeholder) => {
+            return p.selectedValsByTraitId[placeholder.toLowerCase()];
           });
         }
         return filterConfigDup;
@@ -3475,7 +3475,7 @@
             if (state.sCount[nextLine] < state.blkIndent) {
               return false;
             }
-            if (state.sCount[nextLine] - state.blkIndent >= 4) {
+            if (!state.md.options.allowIndentation && state.sCount[nextLine] - state.blkIndent >= 4) {
               return false;
             }
             pos = state.bMarks[nextLine] + state.tShift[nextLine];
@@ -3530,7 +3530,7 @@
             if (lineText.indexOf("|") === -1) {
               return false;
             }
-            if (state.sCount[startLine] - state.blkIndent >= 4) {
+            if (!state.md.options.allowIndentation && state.sCount[startLine] - state.blkIndent >= 4) {
               return false;
             }
             columns = escapedSplit(lineText);
@@ -3584,7 +3584,7 @@
               if (!lineText) {
                 break;
               }
-              if (state.sCount[nextLine] - state.blkIndent >= 4) {
+              if (!state.md.options.allowIndentation && state.sCount[nextLine] - state.blkIndent >= 4) {
                 break;
               }
               columns = escapedSplit(lineText);
@@ -3626,6 +3626,9 @@
         "node_modules/markdown-it/lib/rules_block/code.js"(exports2, module2) {
           "use strict";
           module2.exports = function code2(state, startLine, endLine) {
+            if (state.md.options.allowIndentation) {
+              return false;
+            }
             var nextLine, last, token;
             if (state.sCount[startLine] - state.blkIndent < 4) {
               return false;
@@ -3656,7 +3659,7 @@
           "use strict";
           module2.exports = function fence3(state, startLine, endLine, silent) {
             var marker, len, params, nextLine, mem, token, markup, haveEndMarker = false, pos = state.bMarks[startLine] + state.tShift[startLine], max2 = state.eMarks[startLine];
-            if (state.sCount[startLine] - state.blkIndent >= 4) {
+            if (!state.md.options.allowIndentation && state.sCount[startLine] - state.blkIndent >= 4) {
               return false;
             }
             if (pos + 3 > max2) {
@@ -3696,7 +3699,7 @@
               if (state.src.charCodeAt(pos) !== marker) {
                 continue;
               }
-              if (state.sCount[nextLine] - state.blkIndent >= 4) {
+              if (!state.md.options.allowIndentation && state.sCount[nextLine] - state.blkIndent >= 4) {
                 continue;
               }
               pos = state.skipChars(pos, marker);
@@ -3727,7 +3730,7 @@
           var isSpace = require_utils().isSpace;
           module2.exports = function blockquote2(state, startLine, endLine, silent) {
             var adjustTab, ch, i, initial, l, lastLineEmpty, lines, nextLine, offset, oldBMarks, oldBSCount, oldIndent, oldParentType, oldSCount, oldTShift, spaceAfterMarker, terminate, terminatorRules, token, isOutdented, oldLineMax = state.lineMax, pos = state.bMarks[startLine] + state.tShift[startLine], max2 = state.eMarks[startLine];
-            if (state.sCount[startLine] - state.blkIndent >= 4) {
+            if (!state.md.options.allowIndentation && state.sCount[startLine] - state.blkIndent >= 4) {
               return false;
             }
             if (state.src.charCodeAt(pos++) !== 62) {
@@ -3888,7 +3891,7 @@
           var isSpace = require_utils().isSpace;
           module2.exports = function hr2(state, startLine, endLine, silent) {
             var marker, cnt, ch, token, pos = state.bMarks[startLine] + state.tShift[startLine], max2 = state.eMarks[startLine];
-            if (state.sCount[startLine] - state.blkIndent >= 4) {
+            if (!state.md.options.allowIndentation && state.sCount[startLine] - state.blkIndent >= 4) {
               return false;
             }
             marker = state.src.charCodeAt(pos++);
@@ -3984,10 +3987,10 @@
           }
           module2.exports = function list2(state, startLine, endLine, silent) {
             var ch, contentStart, i, indent, indentAfterMarker, initial, isOrdered, itemLines, l, listLines, listTokIdx, markerCharCode, markerValue, max2, nextLine, offset, oldListIndent, oldParentType, oldSCount, oldTShift, oldTight, pos, posAfterMarker, prevEmptyEnd, start, terminate, terminatorRules, token, isTerminatingParagraph = false, tight = true;
-            if (state.sCount[startLine] - state.blkIndent >= 4) {
+            if (!state.md.options.allowIndentation && state.sCount[startLine] - state.blkIndent >= 4) {
               return false;
             }
-            if (state.listIndent >= 0 && state.sCount[startLine] - state.listIndent >= 4 && state.sCount[startLine] < state.blkIndent) {
+            if (!state.md.options.allowIndentation && state.listIndent >= 0 && state.sCount[startLine] - state.listIndent >= 4 && state.sCount[startLine] < state.blkIndent) {
               return false;
             }
             if (silent && state.parentType === "paragraph") {
@@ -4051,7 +4054,7 @@
               } else {
                 indentAfterMarker = offset - initial;
               }
-              if (indentAfterMarker > 4) {
+              if (!state.md.options.allowIndentation && indentAfterMarker > 4) {
                 indentAfterMarker = 1;
               }
               indent = initial + indentAfterMarker;
@@ -4095,7 +4098,7 @@
               if (state.sCount[nextLine] < state.blkIndent) {
                 break;
               }
-              if (state.sCount[startLine] - state.blkIndent >= 4) {
+              if (!state.md.options.allowIndentation && state.sCount[startLine] - state.blkIndent >= 4) {
                 break;
               }
               terminate = false;
@@ -4147,7 +4150,7 @@
           var isSpace = require_utils().isSpace;
           module2.exports = function reference(state, startLine, _endLine, silent) {
             var ch, destEndPos, destEndLineNo, endLine, href, i, l, label, labelEnd, oldParentType, res, start, str, terminate, terminatorRules, title, lines = 0, pos = state.bMarks[startLine] + state.tShift[startLine], max2 = state.eMarks[startLine], nextLine = startLine + 1;
-            if (state.sCount[startLine] - state.blkIndent >= 4) {
+            if (!state.md.options.allowIndentation && state.sCount[startLine] - state.blkIndent >= 4) {
               return false;
             }
             if (state.src.charCodeAt(pos) !== 91) {
@@ -4169,7 +4172,7 @@
             oldParentType = state.parentType;
             state.parentType = "reference";
             for (; nextLine < endLine && !state.isEmpty(nextLine); nextLine++) {
-              if (state.sCount[nextLine] - state.blkIndent > 3) {
+              if (!state.md.options.allowIndentation && state.sCount[nextLine] - state.blkIndent > 3) {
                 continue;
               }
               if (state.sCount[nextLine] < 0) {
@@ -4397,7 +4400,7 @@
           ];
           module2.exports = function html_block(state, startLine, endLine, silent) {
             var i, nextLine, token, lineText, pos = state.bMarks[startLine] + state.tShift[startLine], max2 = state.eMarks[startLine];
-            if (state.sCount[startLine] - state.blkIndent >= 4) {
+            if (!state.md.options.allowIndentation && state.sCount[startLine] - state.blkIndent >= 4) {
               return false;
             }
             if (!state.md.options.html) {
@@ -4449,7 +4452,7 @@
           var isSpace = require_utils().isSpace;
           module2.exports = function heading2(state, startLine, endLine, silent) {
             var ch, level, tmp, token, pos = state.bMarks[startLine] + state.tShift[startLine], max2 = state.eMarks[startLine];
-            if (state.sCount[startLine] - state.blkIndent >= 4) {
+            if (!state.md.options.allowIndentation && state.sCount[startLine] - state.blkIndent >= 4) {
               return false;
             }
             ch = state.src.charCodeAt(pos);
@@ -4492,13 +4495,13 @@
           "use strict";
           module2.exports = function lheading(state, startLine, endLine) {
             var content, terminate, i, l, token, pos, max2, level, marker, nextLine = startLine + 1, oldParentType, terminatorRules = state.md.block.ruler.getRules("paragraph");
-            if (state.sCount[startLine] - state.blkIndent >= 4) {
+            if (!state.md.options.allowIndentation && state.sCount[startLine] - state.blkIndent >= 4) {
               return false;
             }
             oldParentType = state.parentType;
             state.parentType = "paragraph";
             for (; nextLine < endLine && !state.isEmpty(nextLine); nextLine++) {
-              if (state.sCount[nextLine] - state.blkIndent > 3) {
+              if (!state.md.options.allowIndentation && state.sCount[nextLine] - state.blkIndent > 3) {
                 continue;
               }
               if (state.sCount[nextLine] >= state.blkIndent) {
@@ -4557,7 +4560,7 @@
             oldParentType = state.parentType;
             state.parentType = "paragraph";
             for (; nextLine < endLine && !state.isEmpty(nextLine); nextLine++) {
-              if (state.sCount[nextLine] - state.blkIndent > 3) {
+              if (!state.md.options.allowIndentation && state.sCount[nextLine] - state.blkIndent > 3) {
                 continue;
               }
               if (state.sCount[nextLine] < 0) {
@@ -12787,7 +12790,7 @@
       Object.defineProperty(exports, "__esModule", { value: true });
       exports.ClientFiltersManager = void 0;
       var CustomizationMenu_1 = require_CustomizationMenu();
-      var filterResolution_1 = require_filterResolution();
+      var resolveFilters_1 = require_resolveFilters();
       var reresolver_1 = require_reresolver();
       var pageConfigMinification_1 = require_pageConfigMinification();
       var PILLS_MENU_ID = "cdoc-filters-pill-menu";
@@ -12824,7 +12827,7 @@
          * and it is created lazily.
          */
         constructor() {
-          this.selectedValsByFilterId = {};
+          this.selectedValsByTraitId = {};
           this.ifFunctionsByRef = {};
           this.storedFilters = {};
         }
@@ -12848,7 +12851,7 @@
          */
         initialize(p) {
           this.filtersManifest = p.filtersManifest;
-          this.selectedValsByFilterId = p.filtersManifest.defaultValsByFilterId || {};
+          this.selectedValsByTraitId = p.filtersManifest.defaultValsByTraitId || {};
           this.ifFunctionsByRef = {};
           const contentIsCustomizable = this.locateFilterSelectorEl();
           if (contentIsCustomizable) {
@@ -12884,7 +12887,7 @@
          */
         updateStoredFilterSelections() {
           const storedFilters = JSON.parse(localStorage.getItem("content-filters") || "{}");
-          const newStoredFilters = Object.assign(Object.assign({}, storedFilters), this.selectedValsByFilterId);
+          const newStoredFilters = Object.assign(Object.assign({}, storedFilters), this.selectedValsByTraitId);
           this.storedFilters = newStoredFilters;
           localStorage.setItem("content-filters", JSON.stringify(newStoredFilters));
         }
@@ -12895,13 +12898,13 @@
         getSelectedValsFromUrl() {
           const url = new URL(window.location.href);
           const searchParams = url.searchParams;
-          const selectedValsByFilterId = {};
+          const selectedValsByTraitId = {};
           searchParams.forEach((val, key) => {
-            if (key in Object.keys(this.selectedValsByFilterId)) {
-              selectedValsByFilterId[key] = val;
+            if (key in Object.keys(this.selectedValsByTraitId)) {
+              selectedValsByTraitId[key] = val;
             }
           });
-          return selectedValsByFilterId;
+          return selectedValsByTraitId;
         }
         /**
          * Update the URL with the selected filter values.
@@ -12909,9 +12912,9 @@
         syncUrlWithSelectedVals() {
           const url = new URL(window.location.href);
           const searchParams = url.searchParams;
-          const sortedFilterIds = Object.keys(this.selectedValsByFilterId).sort();
+          const sortedFilterIds = Object.keys(this.selectedValsByTraitId).sort();
           sortedFilterIds.forEach((filterId) => {
-            searchParams.set(filterId, this.selectedValsByFilterId[filterId]);
+            searchParams.set(filterId, this.selectedValsByTraitId[filterId]);
           });
           window.history.replaceState({}, "", url.toString());
         }
@@ -12933,7 +12936,7 @@
           if (!optionId) {
             return;
           }
-          this.selectedValsByFilterId[filterId] = optionId;
+          this.selectedValsByTraitId[filterId] = optionId;
           this.rerender();
           this.syncUrlWithSelectedVals();
           this.updateStoredFilterSelections();
@@ -13002,7 +13005,7 @@
             const clientFunction = this.ifFunctionsByRef[ref];
             const oldValue = clientFunction.value;
             const resolvedFunction = (0, reresolver_1.reresolveFunctionNode)(clientFunction, {
-              variables: this.selectedValsByFilterId
+              variables: this.selectedValsByTraitId
             });
             this.ifFunctionsByRef[ref] = resolvedFunction;
             if (oldValue !== resolvedFunction.value) {
@@ -13093,18 +13096,18 @@
          * default values, etc.) into a single set of selected values.
          */
         applyFilterSelectionOverrides() {
-          const relevantFilterIds = Object.keys(this.selectedValsByFilterId);
+          const relevantFilterIds = Object.keys(this.selectedValsByTraitId);
           let filterOverrideFound = false;
           Object.keys(this.storedFilters).forEach((filterId) => {
-            if (relevantFilterIds.includes(filterId) && this.selectedValsByFilterId[filterId] !== this.storedFilters[filterId]) {
-              this.selectedValsByFilterId[filterId] = this.storedFilters[filterId];
+            if (relevantFilterIds.includes(filterId) && this.selectedValsByTraitId[filterId] !== this.storedFilters[filterId]) {
+              this.selectedValsByTraitId[filterId] = this.storedFilters[filterId];
               filterOverrideFound = true;
             }
           });
           const urlFilters = this.getSelectedValsFromUrl();
           Object.keys(urlFilters).forEach((filterId) => {
-            if (relevantFilterIds.includes(filterId) && this.selectedValsByFilterId[filterId] !== urlFilters[filterId]) {
-              this.selectedValsByFilterId[filterId] = urlFilters[filterId];
+            if (relevantFilterIds.includes(filterId) && this.selectedValsByTraitId[filterId] !== urlFilters[filterId]) {
+              this.selectedValsByTraitId[filterId] = urlFilters[filterId];
               filterOverrideFound = true;
             }
           });
@@ -13153,13 +13156,13 @@
           if (!this.filterSelectorEl || !this.filtersManifest) {
             throw new Error("Cannot rerender filter selector without filtersManifest and filterSelectorEl");
           }
-          const resolvedPageFilters = (0, filterResolution_1.resolvePageFilters)({
+          const resolvedPageFilters = (0, resolveFilters_1.resolveFilters)({
             filtersManifest: this.filtersManifest,
-            valsByFilterId: this.selectedValsByFilterId
+            valsByTraitId: this.selectedValsByTraitId
           });
           Object.keys(resolvedPageFilters).forEach((filterId) => {
             const resolvedFilter = resolvedPageFilters[filterId];
-            this.selectedValsByFilterId[filterId] = resolvedFilter.currentValue;
+            this.selectedValsByTraitId[filterId] = resolvedFilter.currentValue;
           });
           const newFilterSelectorHtml = (0, CustomizationMenu_1.buildCustomizationMenuUi)(resolvedPageFilters);
           this.filterSelectorEl.innerHTML = newFilterSelectorHtml;

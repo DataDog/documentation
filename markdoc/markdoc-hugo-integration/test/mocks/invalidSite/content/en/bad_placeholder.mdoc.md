@@ -1,12 +1,12 @@
 ---
 title: The Primary Colors of the Color Wheel
 content_filters:
-  - display_name: "Color"
-    id: color
-    options_source: primary_color_options
-  - display_name: "Item"
-    id: item
-    options_source: <COLOUR>_item_options # mistake: <COLOUR> instead of <COLOR>
+  - label: "Color"
+    trait_id: color
+    option_group_id: primary_color_options
+  - label: "Item"
+    trait_id: item
+    option_group_id: <COLOUR>_item_options # mistake: <COLOUR> instead of <COLOR>
 ---
 
 This test page explores everyday items that are blue, yellow, or red -- which also happen to be the primary colors of the color wheel. If this seems contrived and odd, that's only because test pages are often both of those things.

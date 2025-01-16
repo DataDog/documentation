@@ -1,12 +1,12 @@
 ---
 title: The Primary Colors of the Color Wheel
 content_filters:
-  - display_name: "Color"
-    id: color
-    options_source: primary_color_options
-  - display_name: "Item"
-    id: item
-    options_source: <COLOR>_object_options
+  - label: "Color"
+    trait_id: color
+    option_group_id: primary_color_options
+  - label: "Item"
+    trait_id: item
+    option_group_id: <COLOR>_object_options
 ---
 <!-- mistake above: <COLOR>_object_options instead of <COLOR>_item_options -->
 

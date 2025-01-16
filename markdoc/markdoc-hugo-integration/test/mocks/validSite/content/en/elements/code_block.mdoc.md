@@ -1,9 +1,9 @@
 ---
 title: Code Block
 content_filters:
-  - display_name: "Color"
-    id: color
-    options_source: primary_color_options
+  - label: "Color"
+    trait_id: color
+    option_group_id: primary_color_options
 ---
 
 ## Usage

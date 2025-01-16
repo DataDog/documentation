@@ -1,0 +1,6 @@
+traits:
+- id: habitat
+  label: Habitat
+  description: "The surroundings in which an animal lives, such as 'forest' or 'desert'."
+- id: animal
+  label: Animal

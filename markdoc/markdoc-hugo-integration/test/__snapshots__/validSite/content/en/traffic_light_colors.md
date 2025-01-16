@@ -1,8 +1,56 @@
 ---
 title: Traffic Light Colors
 ---
-<div id="cdoc-selector"><div><div class="cdoc-dropdown-container"><p 
-    id="cdoc-color-label" 
+<div id="cdoc-selector"><div id="cdoc-filters-menu"><div class="filter-selector-menu" id="cdoc-filters-pill-menu"><div class="cdoc-pills-container"><p 
+    id="cdoc-color-pills-label" 
+    class="cdoc-filter-label"
+  >Color</p><button
+      class="cdoc-filter__option cdoc-pill " 
+      data-filter-id="color" 
+      data-option-id="red"
+      aria-selected="false"
+      tabIndex="0"
+    >Red</button><button
+      class="cdoc-filter__option cdoc-pill " 
+      data-filter-id="color" 
+      data-option-id="yellow"
+      aria-selected="false"
+      tabIndex="0"
+    >Yellow</button><button
+      class="cdoc-filter__option cdoc-pill selected" 
+      data-filter-id="color" 
+      data-option-id="green"
+      aria-selected="true"
+      tabIndex="0"
+    >Green</button></div><div class="cdoc-pills-container"><p 
+    id="cdoc-item-pills-label" 
+    class="cdoc-filter-label"
+  >Item</p><button
+      class="cdoc-filter__option cdoc-pill selected" 
+      data-filter-id="item" 
+      data-option-id="grass"
+      aria-selected="true"
+      tabIndex="0"
+    >Grass</button><button
+      class="cdoc-filter__option cdoc-pill " 
+      data-filter-id="item" 
+      data-option-id="emerald"
+      aria-selected="false"
+      tabIndex="0"
+    >Emerald</button><button
+      class="cdoc-filter__option cdoc-pill " 
+      data-filter-id="item" 
+      data-option-id="lime"
+      aria-selected="false"
+      tabIndex="0"
+    >Lime</button><button
+      class="cdoc-filter__option cdoc-pill " 
+      data-filter-id="item" 
+      data-option-id="frog"
+      aria-selected="false"
+      tabIndex="0"
+    >Frog</button></div></div><div class="filter-selector-menu cdoc-offscreen" id="cdoc-filters-dropdown-menu"><div class="cdoc-dropdown-container"><p 
+    id="cdoc-color-dropdown-label" 
     class="cdoc-filter-label"
   >Color</p><div 
     id="cdoc-dropdown-color" 
@@ -13,7 +61,7 @@ title: Traffic Light Colors
       tabIndex="0"
       aria-haspopup="listbox"
       aria-expanded="false" 
-      aria-labelledby="cdoc-color-label">
+      aria-labelledby="cdoc-color-dropdown-label">
       <span 
         id="cdoc-dropdown-color-label" 
         class="cdoc-btn-label"
@@ -22,13 +70,13 @@ title: Traffic Light Colors
     </button><div 
     class="cdoc-dropdown-options-list" 
     role="listbox" 
-    aria-labelledby="cdoc-color-label"><a 
+    aria-labelledby="cdoc-color-dropdown-label"><a 
       class="cdoc-dropdown-option 
       cdoc-filter__option " 
       data-filter-id="color" 
       data-option-id="red"
       role="option" 
-      aria-selected=""
+      aria-selected="false"
       tabIndex="0"
     >Red</a><a 
       class="cdoc-dropdown-option 
@@ -36,7 +84,7 @@ title: Traffic Light Colors
       data-filter-id="color" 
       data-option-id="yellow"
       role="option" 
-      aria-selected=""
+      aria-selected="false"
       tabIndex="0"
     >Yellow</a><a 
       class="cdoc-dropdown-option 
@@ -44,10 +92,10 @@ title: Traffic Light Colors
       data-filter-id="color" 
       data-option-id="green"
       role="option" 
-      aria-selected="selected"
+      aria-selected="true"
       tabIndex="0"
     >Green</a></div></div></div><div class="cdoc-dropdown-container"><p 
-    id="cdoc-item-label" 
+    id="cdoc-item-dropdown-label" 
     class="cdoc-filter-label"
   >Item</p><div 
     id="cdoc-dropdown-item" 
@@ -58,7 +106,7 @@ title: Traffic Light Colors
       tabIndex="0"
       aria-haspopup="listbox"
       aria-expanded="false" 
-      aria-labelledby="cdoc-item-label">
+      aria-labelledby="cdoc-item-dropdown-label">
       <span 
         id="cdoc-dropdown-item-label" 
         class="cdoc-btn-label"
@@ -67,13 +115,13 @@ title: Traffic Light Colors
     </button><div 
     class="cdoc-dropdown-options-list" 
     role="listbox" 
-    aria-labelledby="cdoc-item-label"><a 
+    aria-labelledby="cdoc-item-dropdown-label"><a 
       class="cdoc-dropdown-option 
       cdoc-filter__option selected" 
       data-filter-id="item" 
       data-option-id="grass"
       role="option" 
-      aria-selected="selected"
+      aria-selected="true"
       tabIndex="0"
     >Grass</a><a 
       class="cdoc-dropdown-option 
@@ -81,7 +129,7 @@ title: Traffic Light Colors
       data-filter-id="item" 
       data-option-id="emerald"
       role="option" 
-      aria-selected=""
+      aria-selected="false"
       tabIndex="0"
     >Emerald</a><a 
       class="cdoc-dropdown-option 
@@ -89,7 +137,7 @@ title: Traffic Light Colors
       data-filter-id="item" 
       data-option-id="lime"
       role="option" 
-      aria-selected=""
+      aria-selected="false"
       tabIndex="0"
     >Lime</a><a 
       class="cdoc-dropdown-option 
@@ -97,9 +145,9 @@ title: Traffic Light Colors
       data-filter-id="item" 
       data-option-id="frog"
       role="option" 
-      aria-selected=""
+      aria-selected="false"
       tabIndex="0"
-    >Frog</a></div></div></div><hr /></div></div><div id="cdoc-content" class="customizable"><article>
+    >Frog</a></div></div></div></div></div><hr /></div><div id="cdoc-content" class="customizable"><article>
   <div class="alert alert-info">
     <p>This is just a test page. It's not real.</p>
   </div>
@@ -232,4 +280,4 @@ title: Traffic Light Colors
   </div>
 </article>
 </div>
-<div x-init='const initPage = () => { clientFiltersManager.initialize({    ifFunctionsByRef: {"18":{"m":"F","n":"e","p":{"0":{"m":"V","p":["item"],"v":"grass"},"1":"grass"},"v":true,"r":"18"},"19":{"m":"F","n":"e","p":{"0":{"m":"V","p":["item"],"v":"grass"},"1":"emerald"},"v":false,"r":"19"},"20":{"m":"F","n":"e","p":{"0":{"m":"V","p":["item"],"v":"grass"},"1":"lime"},"v":false,"r":"20"},"21":{"m":"F","n":"e","p":{"0":{"m":"V","p":["item"],"v":"grass"},"1":"frog"},"v":false,"r":"21"},"22":{"m":"F","n":"e","p":{"0":{"m":"V","p":["color"],"v":"green"},"1":"green"},"v":true,"r":"22"},"23":{"m":"F","n":"e","p":{"0":{"m":"V","p":["color"],"v":"green"},"1":"yellow"},"v":false,"r":"23"},"24":{"m":"F","n":"e","p":{"0":{"m":"V","p":["color"],"v":"green"},"1":"red"},"v":false,"r":"24"},"25":{"m":"F","n":"e","p":{"0":{"m":"V","p":["item"],"v":"grass"},"1":"banana"},"v":false,"r":"25"},"26":{"m":"F","n":"e","p":{"0":{"m":"V","p":["item"],"v":"grass"},"1":"sunflower"},"v":false,"r":"26"},"27":{"m":"F","n":"e","p":{"0":{"m":"V","p":["item"],"v":"grass"},"1":"lemon"},"v":false,"r":"27"},"28":{"m":"F","n":"e","p":{"0":{"m":"V","p":["item"],"v":"grass"},"1":"school_bus"},"v":false,"r":"28"},"29":{"m":"F","n":"e","p":{"0":{"m":"V","p":["item"],"v":"grass"},"1":"ruby"},"v":false,"r":"29"},"30":{"m":"F","n":"e","p":{"0":{"m":"V","p":["item"],"v":"grass"},"1":"apple"},"v":false,"r":"30"},"31":{"m":"F","n":"e","p":{"0":{"m":"V","p":["item"],"v":"grass"},"1":"firetruck"},"v":false,"r":"31"},"32":{"m":"F","n":"e","p":{"0":{"m":"V","p":["item"],"v":"grass"},"1":"stop_sign"},"v":false,"r":"32"}},    filtersManifest: {"filtersById":{"color":{"config":{"display_name":"Color","id":"color","options_source":"traffic_light_color_options"},"defaultValsByOptionsSetId":{"traffic_light_color_options":"green"}},"item":{"config":{"display_name":"Item","id":"item","options_source":"<COLOR>_item_options"},"defaultValsByOptionsSetId":{"red_item_options":"stop_sign","yellow_item_options":"banana","green_item_options":"grass"}}},"defaultValsByFilterId":{"color":"green","item":"grass"},"optionSetsById":{"traffic_light_color_options":[{"display_name":"Red","id":"red"},{"display_name":"Yellow","id":"yellow"},{"display_name":"Green","default":true,"id":"green"}],"red_item_options":[{"display_name":"Ruby","id":"ruby"},{"display_name":"Apple","id":"apple"},{"display_name":"Firetruck","id":"firetruck"},{"display_name":"Stop sign","default":true,"id":"stop_sign"}],"yellow_item_options":[{"display_name":"Banana","default":true,"id":"banana"},{"display_name":"Sunflower","id":"sunflower"},{"display_name":"Lemon","id":"lemon"},{"display_name":"School bus","id":"school_bus"}],"green_item_options":[{"display_name":"Grass","default":true,"id":"grass"},{"display_name":"Emerald","id":"emerald"},{"display_name":"Lime","id":"lime"},{"display_name":"Frog","id":"frog"}]}}  });}; if (document.readyState === "complete" || document.readyState === "interactive") {  setTimeout(initPage, 1);} else {  document.addEventListener("DOMContentLoaded", initPage);}'></div>
+<div x-init='const initPage = () => { clientFiltersManager.initialize({    ifFunctionsByRef: {"18":{"m":"F","n":"e","p":{"0":{"m":"V","p":["item"],"v":"grass"},"1":"grass"},"v":true,"r":"18"},"19":{"m":"F","n":"e","p":{"0":{"m":"V","p":["item"],"v":"grass"},"1":"emerald"},"v":false,"r":"19"},"20":{"m":"F","n":"e","p":{"0":{"m":"V","p":["item"],"v":"grass"},"1":"lime"},"v":false,"r":"20"},"21":{"m":"F","n":"e","p":{"0":{"m":"V","p":["item"],"v":"grass"},"1":"frog"},"v":false,"r":"21"},"22":{"m":"F","n":"e","p":{"0":{"m":"V","p":["color"],"v":"green"},"1":"green"},"v":true,"r":"22"},"23":{"m":"F","n":"e","p":{"0":{"m":"V","p":["color"],"v":"green"},"1":"yellow"},"v":false,"r":"23"},"24":{"m":"F","n":"e","p":{"0":{"m":"V","p":["color"],"v":"green"},"1":"red"},"v":false,"r":"24"},"25":{"m":"F","n":"e","p":{"0":{"m":"V","p":["item"],"v":"grass"},"1":"banana"},"v":false,"r":"25"},"26":{"m":"F","n":"e","p":{"0":{"m":"V","p":["item"],"v":"grass"},"1":"sunflower"},"v":false,"r":"26"},"27":{"m":"F","n":"e","p":{"0":{"m":"V","p":["item"],"v":"grass"},"1":"lemon"},"v":false,"r":"27"},"28":{"m":"F","n":"e","p":{"0":{"m":"V","p":["item"],"v":"grass"},"1":"school_bus"},"v":false,"r":"28"},"29":{"m":"F","n":"e","p":{"0":{"m":"V","p":["item"],"v":"grass"},"1":"ruby"},"v":false,"r":"29"},"30":{"m":"F","n":"e","p":{"0":{"m":"V","p":["item"],"v":"grass"},"1":"apple"},"v":false,"r":"30"},"31":{"m":"F","n":"e","p":{"0":{"m":"V","p":["item"],"v":"grass"},"1":"firetruck"},"v":false,"r":"31"},"32":{"m":"F","n":"e","p":{"0":{"m":"V","p":["item"],"v":"grass"},"1":"stop_sign"},"v":false,"r":"32"}},    filtersManifest: {"filtersByTraitId":{"color":{"config":{"label":"Color","trait_id":"color","option_group_id":"traffic_light_color_options"},"defaultValsByOptionGroupId":{"traffic_light_color_options":"green"}},"item":{"config":{"label":"Item","trait_id":"item","option_group_id":"<COLOR>_item_options"},"defaultValsByOptionGroupId":{"red_item_options":"stop_sign","yellow_item_options":"banana","green_item_options":"grass"}}},"defaultValsByTraitId":{"color":"green","item":"grass"},"optionGroupsById":{"traffic_light_color_options":[{"id":"red","label":"Red"},{"id":"yellow","label":"Yellow"},{"default":true,"id":"green","label":"Green"}],"red_item_options":[{"id":"ruby","label":"Ruby"},{"id":"apple","label":"Apple"},{"id":"firetruck","label":"Firetruck"},{"default":true,"id":"stop_sign","label":"Stop sign"}],"yellow_item_options":[{"default":true,"id":"banana","label":"Banana"},{"id":"sunflower","label":"Sunflower"},{"id":"lemon","label":"Lemon"},{"id":"school_bus","label":"School bus"}],"green_item_options":[{"default":true,"id":"grass","label":"Grass"},{"id":"emerald","label":"Emerald"},{"id":"lime","label":"Lime"},{"id":"frog","label":"Frog"}]}}  });}; if (document.readyState === "complete" || document.readyState === "interactive") {  setTimeout(initPage, 1);} else {  document.addEventListener("DOMContentLoaded", initPage);}'></div>

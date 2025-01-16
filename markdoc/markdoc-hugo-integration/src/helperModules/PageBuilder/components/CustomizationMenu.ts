@@ -1,4 +1,4 @@
-import { ResolvedPageFilters, ResolvedPageFilter } from '../../../schemas/pageFilters';
+import { ResolvedFilters, ResolvedFilter } from 'cdocs-data';
 
 /**
  * Given a resolved page filters object, build the UI for the filter selector
@@ -8,7 +8,7 @@ import { ResolvedPageFilters, ResolvedPageFilter } from '../../../schemas/pageFi
  * so JSX templating is not available.
  */
 export const buildCustomizationMenuUi = (
-  resolvedPageFilters: ResolvedPageFilters
+  resolvedPageFilters: ResolvedFilters
 ): string => {
   let menuHtml = '<div id="cdoc-filters-menu">';
   // Build the displayed pills menu
@@ -20,7 +20,7 @@ export const buildCustomizationMenuUi = (
   return menuHtml;
 };
 
-function buildFilterSelectorPillsMenu(p: { filters: ResolvedPageFilters }) {
+function buildFilterSelectorPillsMenu(p: { filters: ResolvedFilters }) {
   let menuHtml = '<div class="filter-selector-menu" id="cdoc-filters-pill-menu">';
   Object.keys(p.filters).forEach((filterId) => {
     const resolvedFilter = p.filters[filterId];
@@ -30,7 +30,7 @@ function buildFilterSelectorPillsMenu(p: { filters: ResolvedPageFilters }) {
   return menuHtml;
 }
 
-function buildFilterSelectorPills(p: { filter: ResolvedPageFilter }) {
+function buildFilterSelectorPills(p: { filter: ResolvedFilter }) {
   const currentValue = p.filter.currentValue || p.filter.defaultValue;
 
   // Open the top-level container
@@ -40,7 +40,7 @@ function buildFilterSelectorPills(p: { filter: ResolvedPageFilter }) {
   selectorHtml += `<p 
     id="cdoc-${p.filter.id}-pills-label" 
     class="cdoc-filter-label"
-  >${p.filter.displayName}</p>`;
+  >${p.filter.label}</p>`;
 
   // Render each option
   p.filter.options.forEach((option) => {
@@ -51,7 +51,7 @@ function buildFilterSelectorPills(p: { filter: ResolvedPageFilter }) {
       data-option-id="${option.id}"
       aria-selected="${isSelected}"
       tabIndex="0"
-    >${option.displayName}</button>`;
+    >${option.label}</button>`;
   });
 
   // Close the top-level container
@@ -60,7 +60,7 @@ function buildFilterSelectorPills(p: { filter: ResolvedPageFilter }) {
   return selectorHtml;
 }
 
-function buildFilterSelectorDropdownsMenu(p: { filters: ResolvedPageFilters }) {
+function buildFilterSelectorDropdownsMenu(p: { filters: ResolvedFilters }) {
   let menuHtml =
     '<div class="filter-selector-menu cdoc-offscreen" id="cdoc-filters-dropdown-menu">';
   Object.keys(p.filters).forEach((filterId) => {
@@ -71,7 +71,7 @@ function buildFilterSelectorDropdownsMenu(p: { filters: ResolvedPageFilters }) {
   return menuHtml;
 }
 
-function buildFilterSelectorDropdown(p: { filter: ResolvedPageFilter }) {
+function buildFilterSelectorDropdown(p: { filter: ResolvedFilter }) {
   const currentValue = p.filter.currentValue || p.filter.defaultValue;
   const filterLabelElementId = `cdoc-${p.filter.id}-dropdown-label`;
 
@@ -82,7 +82,7 @@ function buildFilterSelectorDropdown(p: { filter: ResolvedPageFilter }) {
   selectorHtml += `<p 
     id="${filterLabelElementId}" 
     class="cdoc-filter-label"
-  >${p.filter.displayName}</p>`;
+  >${p.filter.label}</p>`;
 
   // Open the wrapper for the button and options list
   selectorHtml += `<div 
@@ -101,7 +101,7 @@ function buildFilterSelectorDropdown(p: { filter: ResolvedPageFilter }) {
       <span 
         id="cdoc-dropdown-${p.filter.id}-label" 
         class="cdoc-btn-label"
-      >${p.filter.options.find((o) => o.id === currentValue)!.displayName}</span>
+      >${p.filter.options.find((o) => o.id === currentValue)!.label}</span>
       <div class="cdoc-chevron"></div>
     </button>`;
 
@@ -122,7 +122,7 @@ function buildFilterSelectorDropdown(p: { filter: ResolvedPageFilter }) {
       role="option" 
       aria-selected="${isSelected}"
       tabIndex="0"
-    >${option.displayName}</a>`;
+    >${option.label}</a>`;
   });
 
   // Close the options list

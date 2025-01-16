@@ -7,16 +7,13 @@ import {
   VALID_FILTERS_CONFIG_DIR
 } from '../config/constants';
 import { buildRenderableTree } from '../../src/helperModules/treeManagement';
-import { YamlConfigParser } from '../../src/helperModules/YamlConfigParser';
-import { FiltersManifestBuilder } from '../../src/helperModules/FiltersManifestBuilder';
+import { buildFiltersManifest, loadCustomizationConfig } from 'cdocs-data';
 
 describe('treeManagement', () => {
-  const LANG_DIR = VALID_FILTERS_CONFIG_DIR + '/en';
   const testFilePath = VALID_CONTENT_DIR + '/en/primary_colors.mdoc.md';
-  const glossary = YamlConfigParser.loadGlossaryFromLangDir(LANG_DIR);
-  const filterOptionsConfig = YamlConfigParser.loadFiltersConfigFromLangDir({
-    dir: LANG_DIR,
-    glossary
+  const { customizationConfigByLang } = loadCustomizationConfig({
+    configDir: VALID_FILTERS_CONFIG_DIR,
+    langs: ['en']
   });
 
   const sanitizedMarkdocFilename = testFilePath.replace(VALID_CONTENT_DIR, '');
@@ -25,10 +22,9 @@ describe('treeManagement', () => {
     partialsDir: VALID_PARTIALS_DIR
   });
 
-  const filtersManifest = FiltersManifestBuilder.build({
+  const filtersManifest = buildFiltersManifest({
     frontmatter: parsedFile.frontmatter,
-    filterOptionsConfig: filterOptionsConfig,
-    glossary
+    customizationConfig: customizationConfigByLang['en']
   });
 
   test(`builds a renderable tree for ${sanitizedMarkdocFilename} that matches the snapshot`, async () => {

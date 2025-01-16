@@ -1,11 +1,11 @@
 import { MarkdocHugoIntegration } from '../../src';
 import { describe, test, expect } from 'vitest';
 import { SNAPSHOTS_DIR, INVALID_SITE_DIR } from '../config/constants';
-import { FileNavigator } from '../../src/helperModules/FileNavigator';
+import { FileSearcher } from '../../src/helperModules/FileSearcher';
 
 const siteDir = INVALID_SITE_DIR;
 const contentDir = siteDir + '/content';
-const markupFiles = FileNavigator.findInDir(contentDir, /\.mdoc.md$/);
+const markupFiles = FileSearcher.findInDir(contentDir, /\.mdoc.md$/);
 
 describe('MarkdocHugoIntegration', async () => {
   const integration = new MarkdocHugoIntegration({
@@ -17,7 +17,7 @@ describe('MarkdocHugoIntegration', async () => {
 
   // compile the bad files
   const { hasErrors, errorsByFilePath } = integration.compileMdocFiles();
-  await integration.injectAuthorConsole();
+  // await integration.injectAuthorConsole();
 
   // sanitize the file paths so snapshots are consistent across machines
   const errorsByFilePathDup = { ...errorsByFilePath };

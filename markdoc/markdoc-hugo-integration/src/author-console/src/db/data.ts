@@ -5,708 +5,708 @@ export const dbData: AuthorConsoleData = {
     filtersById: {
       color: {
         id: 'color',
-        display_name: 'Color',
+        label: 'Color',
         description: 'DO NOT USE, testing purposes only.'
       },
       item: {
         id: 'item',
-        display_name: 'Item',
+        label: 'Item',
         description: 'DO NOT USE, testing purposes only.'
       },
       postgres_version: {
         id: 'postgres_version',
-        display_name: 'Postgres version',
+        label: 'Postgres version',
         description:
           'Any Postgres version regardless of its granularity, such as 15, 9.1.2, or ~10.0.0.'
       },
       agent_version: {
         id: 'agent_version',
-        display_name: 'Agent version',
+        label: 'Agent version',
         description:
           'Any Agent version regardless of its granularity, such as 7, 6.32.1, or ~7.0.0.'
       },
       host: {
         id: 'host',
-        display_name: 'Host',
+        label: 'Host',
         description:
           'Hosting platform, such as AWS. Can also refer to containers like Kubernetes.'
       },
       host_type: {
         id: 'host_type',
-        display_name: 'Host type',
+        label: 'Host type',
         description:
           'The machine or container type within a given host, such as EC2. Use only as a followup to a `host` selection.'
       },
       prog_lang: {
         id: 'prog_lang',
-        display_name: 'Language',
+        label: 'Language',
         description: 'Programming language, such as Python.'
       },
       os: {
         id: 'os',
-        display_name: 'OS',
+        label: 'OS',
         description:
           'Env operating system, such as Linux. Can refer to a mobile OS, but `mobile_os` is preferred for lists of mobile-only options.'
       },
       database: {
         id: 'database',
-        display_name: 'Database'
+        label: 'Database'
       },
       mobile_os: {
         id: 'mobile_os',
-        display_name: 'OS',
+        label: 'OS',
         description: 'Mobile operating system, such as Android.'
       },
       pkg_mgr: {
         id: 'pkg_mgr',
-        display_name: 'Package manager',
+        label: 'Package manager',
         description: 'Software package manager, such as npm.'
       }
     },
     optionsById: {
       dot_net: {
         id: 'dot_net',
-        display_name: '.NET'
+        label: '.NET'
       },
       agent: {
         id: 'agent',
-        display_name: 'Agent'
+        label: 'Agent'
       },
       agent_v5: {
         id: 'agent_v5',
-        display_name: 'v5'
+        label: 'v5'
       },
       agent_v6: {
         id: 'agent_v6',
-        display_name: 'v6'
+        label: 'v6'
       },
       agent_v7: {
         id: 'agent_v7',
-        display_name: 'v7'
+        label: 'v7'
       },
       agentless_using_an_api_key: {
         id: 'agentless_using_an_api_key',
-        display_name: 'Agentless (using an API key)'
+        label: 'Agentless (using an API key)'
       },
       amazon_ecs: {
         id: 'amazon_ecs',
-        display_name: 'Amazon ECS'
+        label: 'Amazon ECS'
       },
       amazon_opensearch: {
         id: 'amazon_opensearch',
-        display_name: 'Amazon OpenSearch'
+        label: 'Amazon OpenSearch'
       },
       android: {
         id: 'android',
-        display_name: 'Android'
+        label: 'Android'
       },
       ansible: {
         id: 'ansible',
-        display_name: 'Ansible'
+        label: 'Ansible'
       },
       api: {
         id: 'api',
-        display_name: 'API'
+        label: 'API'
       },
       auth: {
         id: 'auth',
-        display_name: 'Authentication'
+        label: 'Authentication'
       },
       aws: {
         id: 'aws',
-        display_name: 'AWS'
+        label: 'AWS'
       },
       aws_cdk: {
         id: 'aws_cdk',
-        display_name: 'AWS CDK'
+        label: 'AWS CDK'
       },
       aws_cli: {
         id: 'aws_cli',
-        display_name: 'AWS CLI'
+        label: 'AWS CLI'
       },
       amazon_eks: {
         id: 'amazon_eks',
-        display_name: 'Amazon EKS'
+        label: 'Amazon EKS'
       },
       aws_fargate: {
         id: 'aws_fargate',
-        display_name: 'AWS Fargate'
+        label: 'AWS Fargate'
       },
       aws_s3: {
         id: 'aws_s3',
-        display_name: 'AWS S3'
+        label: 'AWS S3'
       },
       aws_sam: {
         id: 'aws_sam',
-        display_name: 'AWS SAM'
+        label: 'AWS SAM'
       },
       azure: {
         id: 'azure',
-        display_name: 'Azure'
+        label: 'Azure'
       },
       azure_aks: {
         id: 'azure_aks',
-        display_name: 'Azure AKS'
+        label: 'Azure AKS'
       },
       azure_storage: {
         id: 'azure_storage',
-        display_name: 'Azure Storage'
+        label: 'Azure Storage'
       },
       bash: {
         id: 'bash',
-        display_name: 'Bash'
+        label: 'Bash'
       },
       browser: {
         id: 'browser',
-        display_name: 'Browser'
+        label: 'Browser'
       },
       carthage: {
         id: 'carthage',
-        display_name: 'Carthage'
+        label: 'Carthage'
       },
       cdn_async: {
         id: 'cdn_async',
-        display_name: 'CDN async'
+        label: 'CDN async'
       },
       cdn_sync: {
         id: 'cdn_sync',
-        display_name: 'CDN sync'
+        label: 'CDN sync'
       },
       check_alert: {
         id: 'check_alert',
-        display_name: 'Check Alert'
+        label: 'Check Alert'
       },
       chef: {
         id: 'chef',
-        display_name: 'Chef'
+        label: 'Chef'
       },
       chronicle: {
         id: 'chronicle',
-        display_name: 'Chronicle'
+        label: 'Chronicle'
       },
       cloudformation: {
         id: 'cloudformation',
-        display_name: 'CloudFormation'
+        label: 'CloudFormation'
       },
       cluster_alert: {
         id: 'cluster_alert',
-        display_name: 'Cluster Alert'
+        label: 'Cluster Alert'
       },
       cocoapods: {
         id: 'cocoapods',
-        display_name: 'CocoaPods'
+        label: 'CocoaPods'
       },
       configmap: {
         id: 'configmap',
-        display_name: 'ConfigMap'
+        label: 'ConfigMap'
       },
       configuration_file: {
         id: 'configuration_file',
-        display_name: 'Configuration file'
+        label: 'Configuration file'
       },
       container_image: {
         id: 'container_image',
-        display_name: 'Container Image'
+        label: 'Container Image'
       },
       containerized: {
         id: 'containerized',
-        display_name: 'Containerized'
+        label: 'Containerized'
       },
       containerized_agent: {
         id: 'containerized_agent',
-        display_name: 'Containerized Agent'
+        label: 'Containerized Agent'
       },
       cucumber: {
         id: 'cucumber',
-        display_name: 'Cucumber'
+        label: 'Cucumber'
       },
       curl: {
         id: 'curl',
-        display_name: 'curl'
+        label: 'curl'
       },
       daemonset: {
         id: 'daemonset',
-        display_name: 'DaemonSet'
+        label: 'DaemonSet'
       },
       datadog: {
         id: 'datadog',
-        display_name: 'Datadog'
+        label: 'Datadog'
       },
       datadog_application: {
         id: 'datadog_application',
-        display_name: 'Datadog application'
+        label: 'Datadog application'
       },
       datadog_archives: {
         id: 'datadog_archives',
-        display_name: 'Datadog Archives'
+        label: 'Datadog Archives'
       },
       datadog_cli: {
         id: 'datadog_cli',
-        display_name: 'Datadog CLI'
+        label: 'Datadog CLI'
       },
       datadog_operator: {
         id: 'datadog_operator',
-        display_name: 'Datadog Operator'
+        label: 'Datadog Operator'
       },
       debian: {
         id: 'debian',
-        display_name: 'Debian'
+        label: 'Debian'
       },
       ubuntu: {
         id: 'ubuntu',
-        display_name: 'Ubuntu'
+        label: 'Ubuntu'
       },
       dedupe: {
         id: 'dedupe',
-        display_name: 'Dedupe'
+        label: 'Dedupe'
       },
       docker: {
         id: 'docker',
-        display_name: 'Docker'
+        label: 'Docker'
       },
       docker_cli: {
         id: 'docker_cli',
-        display_name: 'Docker CLI'
+        label: 'Docker CLI'
       },
       docker_compose: {
         id: 'docker_compose',
-        display_name: 'Docker Compose'
+        label: 'Docker Compose'
       },
       dockerfile: {
         id: 'dockerfile',
-        display_name: 'Dockerfile'
+        label: 'Dockerfile'
       },
       elasticsearch: {
         id: 'elasticsearch',
-        display_name: 'Elasticsearch'
+        label: 'Elasticsearch'
       },
       flutter: {
         id: 'flutter',
-        display_name: 'Flutter'
+        label: 'Flutter'
       },
       github_actions: {
         id: 'github_actions',
-        display_name: 'Github Actions'
+        label: 'Github Actions'
       },
       go: {
         id: 'go',
-        display_name: 'Go'
+        label: 'Go'
       },
       google: {
         id: 'google',
-        display_name: 'Google'
+        label: 'Google'
       },
       google_cloud: {
         id: 'google_cloud',
-        display_name: 'Google Cloud'
+        label: 'Google Cloud'
       },
       google_cloud_storage: {
         id: 'google_cloud_storage',
-        display_name: 'Google Cloud Storage'
+        label: 'Google Cloud Storage'
       },
       google_gke: {
         id: 'google_gke',
-        display_name: 'Google GKE'
+        label: 'Google GKE'
       },
       gradle: {
         id: 'gradle',
-        display_name: 'Gradle'
+        label: 'Gradle'
       },
       grok_parser: {
         id: 'grok_parser',
-        display_name: 'Grok Parser'
+        label: 'Grok Parser'
       },
       helm: {
         id: 'helm',
-        display_name: 'Helm'
+        label: 'Helm'
       },
       http: {
         id: 'http',
-        display_name: 'HTTP'
+        label: 'HTTP'
       },
       ios: {
         id: 'ios',
-        display_name: 'iOS'
+        label: 'iOS'
       },
       java: {
         id: 'java',
-        display_name: 'Java'
+        label: 'Java'
       },
       jenkins: {
         id: 'jenkins',
-        display_name: 'Jenkins'
+        label: 'Jenkins'
       },
       json: {
         id: 'json',
-        display_name: 'JSON'
+        label: 'JSON'
       },
       kotlin: {
         id: 'kotlin',
-        display_name: 'Kotlin'
+        label: 'Kotlin'
       },
       kubernetes: {
         id: 'kubernetes',
-        display_name: 'Kubernetes'
+        label: 'Kubernetes'
       },
       linux: {
         id: 'linux',
-        display_name: 'Linux'
+        label: 'Linux'
       },
       linux_apt: {
         id: 'linux_apt',
-        display_name: 'Linux (APT)'
+        label: 'Linux (APT)'
       },
       linux_rpm: {
         id: 'linux_rpm',
-        display_name: 'Linux (RPM)'
+        label: 'Linux (RPM)'
       },
       log4j: {
         id: 'log4j',
-        display_name: 'Log4j'
+        label: 'Log4j'
       },
       log4j_2: {
         id: 'log4j_2',
-        display_name: 'Log4j 2'
+        label: 'Log4j 2'
       },
       logs: {
         id: 'logs',
-        display_name: 'Logs'
+        label: 'Logs'
       },
       mac_os: {
         id: 'mac_os',
-        display_name: 'MacOS'
+        label: 'MacOS'
       },
       manual: {
         id: 'manual',
-        display_name: 'Manual'
+        label: 'Manual'
       },
       maven: {
         id: 'maven',
-        display_name: 'Maven'
+        label: 'Maven'
       },
       mongo_db: {
         id: 'mongo_db',
-        display_name: 'MongoDB'
+        label: 'MongoDB'
       },
       multitenant: {
         id: 'multitenant',
-        display_name: 'Multi-tenant'
+        label: 'Multi-tenant'
       },
       mysql: {
         id: 'mysql',
-        display_name: 'MySQL'
+        label: 'MySQL'
       },
       n_log: {
         id: 'n_log',
-        display_name: 'NLog'
+        label: 'NLog'
       },
       node_js: {
         id: 'node_js',
-        display_name: 'Node.js'
+        label: 'Node.js'
       },
       non_cdb: {
         id: 'non_cdb',
-        display_name: 'Non-CDB'
+        label: 'Non-CDB'
       },
       npm: {
         id: 'npm',
-        display_name: 'NPM'
+        label: 'NPM'
       },
       nu_get: {
         id: 'nu_get',
-        display_name: 'NuGet'
+        label: 'NuGet'
       },
       objective_c: {
         id: 'objective_c',
-        display_name: 'Objective-C'
+        label: 'Objective-C'
       },
       on_premises_ci_provider: {
         id: 'on_premises_ci_provider',
-        display_name: 'On-Premises CI Provider'
+        label: 'On-Premises CI Provider'
       },
       open_search: {
         id: 'open_search',
-        display_name: 'OpenSearch'
+        label: 'OpenSearch'
       },
       operator: {
         id: 'operator',
-        display_name: 'Operator'
+        label: 'Operator'
       },
       oracle: {
         id: 'oracle',
-        display_name: 'Oracle'
+        label: 'Oracle'
       },
       php: {
         id: 'php',
-        display_name: 'PHP'
+        label: 'PHP'
       },
       pip: {
         id: 'pip',
-        display_name: 'pip'
+        label: 'pip'
       },
       poetry: {
         id: 'poetry',
-        display_name: 'Poetry'
+        label: 'Poetry'
       },
       postgres: {
         id: 'postgres',
-        display_name: 'Postgres'
+        label: 'Postgres'
       },
       puppet: {
         id: 'puppet',
-        display_name: 'Puppet'
+        label: 'Puppet'
       },
       python: {
         id: 'python',
-        display_name: 'Python'
+        label: 'Python'
       },
       quota: {
         id: 'quota',
-        display_name: 'Quota'
+        label: 'Quota'
       },
       rate: {
         id: 'rate',
-        display_name: 'RATE'
+        label: 'RATE'
       },
       rds: {
         id: 'rds',
-        display_name: 'RDS'
+        label: 'RDS'
       },
       react_native: {
         id: 'react_native',
-        display_name: 'React Native'
+        label: 'React Native'
       },
       redhat: {
         id: 'redhat',
-        display_name: 'RedHat'
+        label: 'RedHat'
       },
       centos: {
         id: 'centos',
-        display_name: 'CentOS'
+        label: 'CentOS'
       },
       suse: {
         id: 'suse',
-        display_name: 'SUSE'
+        label: 'SUSE'
       },
       reduce: {
         id: 'reduce',
-        display_name: 'Reduce'
+        label: 'Reduce'
       },
       replica_set: {
         id: 'replica_set',
-        display_name: 'Replica Set'
+        label: 'Replica Set'
       },
       ruby: {
         id: 'ruby',
-        display_name: 'Ruby'
+        label: 'Ruby'
       },
       sensitive_data_scanner: {
         id: 'sensitive_data_scanner',
-        display_name: 'Sensitive Data Scanner'
+        label: 'Sensitive Data Scanner'
       },
       serilog: {
         id: 'serilog',
-        display_name: 'Serilog'
+        label: 'Serilog'
       },
       serverless_framework: {
         id: 'serverless_framework',
-        display_name: 'Serverless Framework'
+        label: 'Serverless Framework'
       },
       sharded_cluster: {
         id: 'sharded_cluster',
-        display_name: 'Sharded Cluster'
+        label: 'Sharded Cluster'
       },
       splunk_hec: {
         id: 'splunk_hec',
-        display_name: 'Splunk HEC'
+        label: 'Splunk HEC'
       },
       standalone: {
         id: 'standalone',
-        display_name: 'Standalone'
+        label: 'Standalone'
       },
       standard: {
         id: 'standard',
-        display_name: 'Standard'
+        label: 'Standard'
       },
       sumo_logic: {
         id: 'sumo_logic',
-        display_name: 'Sumo Logic'
+        label: 'Sumo Logic'
       },
       swift: {
         id: 'swift',
-        display_name: 'Swift'
+        label: 'Swift'
       },
       spm: {
         id: 'spm',
-        display_name: 'Swift Package Manager (SPM)'
+        label: 'Swift Package Manager (SPM)'
       },
       syslog: {
         id: 'syslog',
-        display_name: 'Syslog'
+        label: 'Syslog'
       },
       tcp: {
         id: 'tcp',
-        display_name: 'TCP'
+        label: 'TCP'
       },
       terraform: {
         id: 'terraform',
-        display_name: 'Terraform'
+        label: 'Terraform'
       },
       terraform_aws: {
         id: 'terraform_aws',
-        display_name: 'Terraform (AWS)'
+        label: 'Terraform (AWS)'
       },
       threshold: {
         id: 'threshold',
-        display_name: 'Threshold'
+        label: 'Threshold'
       },
       toml: {
         id: 'toml',
-        display_name: 'TOML'
+        label: 'TOML'
       },
       wget: {
         id: 'wget',
-        display_name: 'Wget'
+        label: 'Wget'
       },
       windows: {
         id: 'windows',
-        display_name: 'Windows'
+        label: 'Windows'
       },
       windows_host: {
         id: 'windows_host',
-        display_name: 'Windows Host'
+        label: 'Windows Host'
       },
       windows_powershell: {
         id: 'windows_powershell',
-        display_name: 'Windows PowerShell'
+        label: 'Windows PowerShell'
       },
       yaml: {
         id: 'yaml',
-        display_name: 'YAML'
+        label: 'YAML'
       },
       sql_server: {
         id: 'sql_server',
-        display_name: 'SQL Server'
+        label: 'SQL Server'
       },
       self_hosted: {
         id: 'self_hosted',
-        display_name: 'Self-hosted'
+        label: 'Self-hosted'
       },
       fluent: {
         id: 'fluent',
-        display_name: 'Fluent'
+        label: 'Fluent'
       },
       http_client: {
         id: 'http_client',
-        display_name: 'HTTP Client'
+        label: 'HTTP Client'
       },
       splunk_forwarders: {
         id: 'splunk_forwarders',
-        display_name: 'Splunk Forwarders (TCP)'
+        label: 'Splunk Forwarders (TCP)'
       },
       sumo_logic_hosted_collector: {
         id: 'sumo_logic_hosted_collector',
-        display_name: 'Sumo Logic Hosted Collector'
+        label: 'Sumo Logic Hosted Collector'
       },
       red: {
         id: 'red',
-        display_name: 'Red'
+        label: 'Red'
       },
       yellow: {
         id: 'yellow',
-        display_name: 'Yellow'
+        label: 'Yellow'
       },
       green: {
         id: 'green',
-        display_name: 'Green'
+        label: 'Green'
       },
       blue: {
         id: 'blue',
-        display_name: 'Blue'
+        label: 'Blue'
       },
       ocean: {
         id: 'ocean',
-        display_name: 'Ocean'
+        label: 'Ocean'
       },
       sky: {
         id: 'sky',
-        display_name: 'Sky'
+        label: 'Sky'
       },
       jeans: {
         id: 'jeans',
-        display_name: 'Jeans'
+        label: 'Jeans'
       },
       blueberry: {
         id: 'blueberry',
-        display_name: 'Blueberry'
+        label: 'Blueberry'
       },
       grass: {
         id: 'grass',
-        display_name: 'Grass'
+        label: 'Grass'
       },
       emerald: {
         id: 'emerald',
-        display_name: 'Emerald'
+        label: 'Emerald'
       },
       lime: {
         id: 'lime',
-        display_name: 'Lime'
+        label: 'Lime'
       },
       frog: {
         id: 'frog',
-        display_name: 'Frog'
+        label: 'Frog'
       },
       apple: {
         id: 'apple',
-        display_name: 'Apple'
+        label: 'Apple'
       },
       firetruck: {
         id: 'firetruck',
-        display_name: 'Firetruck'
+        label: 'Firetruck'
       },
       stop_sign: {
         id: 'stop_sign',
-        display_name: 'Stop sign'
+        label: 'Stop sign'
       },
       banana: {
         id: 'banana',
-        display_name: 'Banana'
+        label: 'Banana'
       },
       sunflower: {
         id: 'sunflower',
-        display_name: 'Sunflower'
+        label: 'Sunflower'
       },
       lemon: {
         id: 'lemon',
-        display_name: 'Lemon'
+        label: 'Lemon'
       },
       school_bus: {
         id: 'school_bus',
-        display_name: 'School bus'
+        label: 'School bus'
       },
       '7_x_x': {
         id: '7_x_x',
-        display_name: '7'
+        label: '7'
       },
       '6_x_x': {
         id: '6_x_x',
-        display_name: '6'
+        label: '6'
       },
       '5_x_x': {
         id: '5_x_x',
-        display_name: '5'
+        label: '5'
       },
       ecs: {
         id: 'ecs',
-        display_name: 'ECS'
+        label: 'ECS'
       },
       gte_10_x_x: {
         id: 'gte_10_x_x',
-        display_name: '10+'
+        label: '10+'
       },
       lte_9_6_x: {
         id: 'lte_9_6_x',
-        display_name: '9.6 and below'
+        label: '9.6 and below'
       }
     }
   },

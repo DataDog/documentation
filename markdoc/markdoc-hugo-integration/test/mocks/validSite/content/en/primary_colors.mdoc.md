@@ -1,12 +1,12 @@
 ---
 title: Primary Colors
 content_filters:
-  - display_name: "Color"
-    id: color
-    options_source: primary_color_options
-  - display_name: "Item"
-    id: item
-    options_source: <COLOR>_item_options
+  - label: "Color"
+    trait_id: color
+    option_group_id: primary_color_options
+  - label: "Item"
+    trait_id: item
+    option_group_id: <COLOR>_item_options
 aliases:
   - /primary_colors_alias/
 ---
