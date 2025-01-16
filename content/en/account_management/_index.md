@@ -14,6 +14,8 @@ cascade:
 
 ## Personal settings
 
+{{< semantic resource="host.csv">}}
+
 The personal settings pages in Datadog allow you to control how you appear to others in your organization, switch or leave organizations, and manage your notification preferences.
 
 ### Profile
