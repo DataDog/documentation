@@ -463,7 +463,7 @@ Create a new Fargate task definition that matches the following. Replace each pa
 
 {{% tab "Fargate with AWS Secret Manager" %}}
 
-Create a new secret in secret manager to store all or part of the previously generated private location configuration. Keep in mind that the `publicKey` cannot be kept as it is in the configuration file. The secret should look like this:
+Create a secret in AWS secret manager to store all or part of the previously generated private location configuration. Keep in mind that the `publicKey` cannot be kept as it is in the configuration file. The secret should look like this:
 
 ```json
 {
@@ -478,9 +478,9 @@ Create a new secret in secret manager to store all or part of the previously gen
 }
 ```
 
-You will need to set permissions to allow the task definition and the fargate instance to read from the secret manager following this documentation from AWS: [Specifying sensitive data using Secrets Manager secrets in Amazon ECS](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/specifying-sensitive-data-tutorial.html)
+Permissions are required to allow the task definition and the AWS Fargate instance to read from the secret manager. See [Specifying sensitive data using Secrets Manager secrets in Amazon ECS][25]for more information.
 
-Create a new Fargate task definition that matches the following. Replace the values in the list of secrets with the ARN of the secret you created in the previous step, they should be in the format `arn:aws:secretsmanager:<region>:<account-id>:secret:<secret_arn>:<secret_key>::`.
+Create a Fargate task definition that matches the following example, replacing the values in the list of secrets with the ARN of the secret you created in the previous step. For example: `arn:aws:secretsmanager:<region>:<account-id>:secret:<secret_arn>:<secret_key>::`.
 
 If you didn't save all the configuration in the secret manager, you can still pass the value as hardcoded string arguments, you can check the [Fargate tab](./?tab=fargate#install-your-private-location) and do a mix.
 
@@ -1009,3 +1009,5 @@ Use [granular access control][24] to limit who has access to your test based on 
 [22]: https://app.datadoghq.com/synthetics/settings/private-locations
 [23]: /continuous_testing/cicd_integrations/configuration
 [24]: /account_management/rbac/granular_access
+[25]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/specifying-sensitive-data-tutorial.html
+
