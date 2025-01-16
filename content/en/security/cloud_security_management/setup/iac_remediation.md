@@ -16,6 +16,8 @@ further_reading:
 
 Use the following instructions to enable Infrastructure as Code (IaC) remediation for Cloud Security Management (CSM). IaC remediation is available for [CSM Misconfigurations][1] and [CSM Identity Risks][2].
 
+<div class="alert alert-info">Static IaC remediation supports GitHub for version control and Terraform for infrastructure as code.</div>
+
 ## Set up the GitHub integration
 
 Follow [the instructions][3] for creating a GitHub app for your organization.

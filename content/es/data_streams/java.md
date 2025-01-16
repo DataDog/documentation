@@ -9,9 +9,7 @@ further_reading:
 title: Configurar Data Streams Monitoring para Java
 ---
 
-### {{< learning-center-callout header="Join an enablement webinar session" hide_image="true" btn_title="Sign Up" btn_url="https://www.datadoghq.com/technical-enablement/session/synthetics/">}}
-  Explore y regístrese en las sesiones de Foundation Enablement. Descubra cómo Datadog Sintético Monitorización es una solución proactiva Monitorización que le permite crear pruebas de API, navegador y móvil sin código para simular automáticamente los flujos y las solicitudes de los usuarios a sus aplicaciones, puntos finales clave y capas red.
-{{< /learning-center-callout >}}
+### Requisitos previos
 
 * [Datadog Agent v7.34.0 o más reciente][1]
 
@@ -59,9 +57,9 @@ Data Streams Monitoring utiliza un [atributo de mensaje][3] para rastrear la rut
 ### Instrumentación manual
 Data Streams Monitoring propaga el contexto a través de las cabeceras de los mensajes. Si utilizas una tecnología de cola de mensajes no compatible con DSM, una tecnología sin cabeceras (como Kinesis) o Lambda, utiliza la [instrumentación manual para configurar DSM][5].
 
-## Configurar tests de API y tests de API multupaso
+## Para leer más
 
-Grabar pruebas de aplicaciones móviles
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /es/agent
 [2]: /es/tracing/trace_collection/dd_libraries/java/

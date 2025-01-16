@@ -125,7 +125,7 @@ To start sending just your iOS application's traces to Datadog, see [iOS Trace C
     For example, if you set the `traceSampleRate` to 20% in the Browser SDK:
     - When `traceContextInjection` is set to `all`, **20%** of backend traces are kept and **80%** of backend traces are dropped.
 
-  {{< img src="real_user_monitoring/connect_rum_and_traces/traceContextInjection_all-2.png" alt="traceContextInjection set to all" style="width:90%;">}}
+  {{< img src="real_user_monitoring/connect_rum_and_traces/traceContextInjection_all-3.png" alt="traceContextInjection set to all" style="width:90%;">}}
 
   - When `traceContextInjection` is set to `sampled`, **20%** of backend traces are kept. For the remaining **80%**, the browser SDK **does not inject** a sampling decision. The decision is made on the server side and is based on the tracing library head-based sampling [configuration][2]. In the example below, the backend sample rate is set to 40%, and therefore 32% of the remaining backend traces are kept.
 
@@ -418,7 +418,7 @@ The default injection style is `tracecontext`, `Datadog`.
 
     `propagatorTypes` accepts a list of strings for desired propagators:
       - `datadog`: Datadog's propagator (`x-datadog-*`)
-      - `tracecontext`: [W3C Trace Context](https://www.w3.org/TR/trace-context/) (`traceparent`)
+      - `tracecontext`: [W3C Trace Context](https://www.w3.org/TR/trace-context/) (`traceparent`, `tracestate`)
       - `b3`: [B3 single header](https://github.com/openzipkin/b3-propagation#single-header) (`b3`)
       - `b3multi`: [B3 multiple headers](https://github.com/openzipkin/b3-propagation#multiple-headers) (`X-B3-*`)
 
@@ -540,8 +540,8 @@ Datadog uses the distributed tracing protocol and sets up the HTTP headers below
 `x-datadog-origin: rum`
 : To make sure the generated traces from Real User Monitoring don't affect your APM Index Spans counts.
 
-`x-datadog-sampling-priority: 1`
-: To make sure that the Agent keeps the trace.
+`x-datadog-sampling-priority`
+: Set to `1` by the Real User Monitoring SDK if the trace was sampled, or `0` if it was not.
 {{% /tab %}}
 {{% tab "W3C Trace Context" %}}
 
@@ -551,8 +551,15 @@ Datadog uses the distributed tracing protocol and sets up the HTTP headers below
 : `parent id`: 64 bits span ID, hexadecimal on 16 characters.
 : `trace flags`: Sampled (`01`) or not sampled (`00`)
 
+`tracestate: dd=s:[sampling priority];o:[origin]`
+: `dd`: Datadog's vendor prefix.
+: `sampling priority`: Set to `1` if the trace was sampled, or `0` if it was not.
+: `origin`: Always set to `rum` to make sure the generated traces from Real User Monitoring don't affect your APM Index Spans counts.
+
 Example:
 : `traceparent: 00-00000000000000008448eb211c80319c-b7ad6b7169203331s-01`
+: `tracestate: dd=s:1;o:rum`
+
 {{% /tab %}}
 {{% tab "b3 / b3 Multiple Headers" %}}
 `b3: [trace id]-[span id]-[sampled]`

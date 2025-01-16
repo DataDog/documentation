@@ -412,7 +412,7 @@ The `LLMObs.annotate()` method accepts the following arguments:
 
 `tags`
 : optional - _dictionary_
-<br />A dictionary of JSON serializable key-value pairs that users can add as tags regarding the span's context (`session`, `environment`, `system`, `versioning`, etc.). For more information about tags, see [Getting Started with Tags][9].
+<br />A dictionary of JSON serializable key-value pairs that users can add as tags on the span. Example keys: `session`, `env`, `system`, and `version`. For more information about tags, see [Getting Started with Tags][9].
 
 ### Example
 
@@ -467,6 +467,55 @@ def similarity_search():
     return
 
 {{< /code-block >}}
+
+### Annotating auto-instrumented spans
+
+The SDK's `LLMObs.annotate_context()` method returns a context manager that can be used to modify all auto-instrumented spans started while the annotation context is active.
+
+#### Arguments
+
+The `LLMObs.annotation_context()` method accepts the following arguments:
+
+`name` 
+: optional - _str_
+<br />Name that overrides the span name for any auto-instrumented spans that are started within the annotation context.
+
+`prompt` 
+: optional - _dictionary_ 
+<br />A dictionary that represents the prompt used for an LLM call in the following format:<br />`{"template": "...", "id": "...", "version": "...", "variables": {"variable_1": "...", ...}}`.<br />You can also import the `Prompt` object from `ddtrace.utils` and pass it in as the `prompt` argument. **Note**: This argument only applies to LLM spans.
+
+`tags`
+: optional - _dictionary_
+<br />A dictionary of JSON serializable key-value pairs that users can add as tags on the span. Example keys: `session`, `env`, `system`, and `version`. For more information about tags, see [Getting Started with Tags][9].
+
+#### Example
+
+{{< code-block lang="python" >}}
+from ddtrace.llmobs import LLMObs
+from ddtrace.llmobs.decorators import workflow
+
+@workflow
+def rag_workflow(user_question):
+    context_str = retrieve_documents(user_question).join(" ")
+
+    with LLMObs.annotation_context(
+        prompt = Prompt(
+            variables = {
+                "question": user_question,
+                "context": context_str,
+            },
+            template = "Please answer the..."
+        ),
+        tags = {
+            "retrieval_strategy": "semantic_similarity"
+        },
+        name = "augmented_generation"
+    ):
+        completion = openai_client.chat.completions.create(...)
+    return completion.choices[0].message.content
+
+{{< /code-block >}}
+
 
 ## Evaluations
 
