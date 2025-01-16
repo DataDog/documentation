@@ -265,7 +265,7 @@ When running inside a container, DogStatsD needs to run in the host's PID namesp
     },
     ```
 
-2. Add the [`PidMode` parameter][10] in the task definition and set it to `task` as follows:
+2. Add the [PidMode parameter][10] in the task definition and set it to `task` as follows:
 
     ```json
     "pidMode": "task"
