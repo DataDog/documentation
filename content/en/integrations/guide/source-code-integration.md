@@ -18,9 +18,9 @@ further_reading:
 - link: "/tests/developer_workflows/"
   tag: "Documentation"
   text: "Learn about Test Optimization"
-- link: "/code_analysis/"
+- link: "/security/code_security/"
   tag: "Documentation"
-  text: "Learn about Code Analysis"
+  text: "Learn about Code Security"
 - link: "/security/application_security/"
   tag: "Documentation"
   text: "Learn about Application Security Monitoring"
@@ -552,19 +552,19 @@ For more information, see [Enhancing Developer Workflows with Datadog][102].
 [102]: /tests/developer_workflows/#open-tests-in-github-and-your-ide
 
 {{% /tab %}}
-{{% tab "Code Analysis" %}}
+{{% tab "Code Security" %}}
 
-You can see links from failed Static Analysis and Software Composition Analysis scans to their source repository in **Code Analysis**.
+You can see links from failed Static Analysis and Software Composition Analysis scans to their source repository in **Code Security**.
 
-1. Navigate to [**Software Delivery** > **Code Analysis**][101] and select a repository.
+1. Navigate to [**Software Delivery** > **Code Security**][101] and select a repository.
 2. In the **Code Vulnerabilities** or **Code Quality** view, click on a code vulnerability or violation. In the **Details** section, click the **View Code** button to open the flagged code in its source code repository.
 
-{{< img src="integrations/guide/source_code_integration/code-analysis-scan.png" alt="Link to GitHub from the Code Analysis Code Vulnerabilities view" style="width:100%;">}}
+{{< img src="integrations/guide/source_code_integration/code-analysis-scan.png" alt="Link to GitHub from the Code Security Code Vulnerabilities view" style="width:100%;">}}
 
-For more information, see the [Code Analysis documentation][102].
+For more information, see the [Code Security documentation][102].
 
 [101]: https://app.datadoghq.com/ci/code-analysis
-[102]: /code_analysis/
+[102]: /security/code_security/
 
 {{% /tab %}}
 {{% tab "Application Security Monitoring" %}}

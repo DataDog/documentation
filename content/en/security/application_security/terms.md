@@ -8,7 +8,7 @@ further_reading:
 - link: "/security/application_security/threats/"
   tag: "Documentation"
   text: "Threat Management"
-- link: "/security/application_security/software_composition_analysis/"
+- link: "/security/code_security/software_composition_analysis/"
   tag: "Documentation"
   text: "Software Composition Analysis"
 - link: "https://www.datadoghq.com/blog/datadog-threat-intelligence/"

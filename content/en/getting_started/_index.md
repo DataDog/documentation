@@ -35,7 +35,7 @@ The table below lists a few examples of Datadog products:
         <td><p><strong>Development</strong></p></td>
         <td>
         <ul>
-        <li>Highlight code vulnerabilities in your text editor or on GitHub with <a href="/code_analysis/?tab=codevulnerabilities">Code Analysis</a>.</li>
+        <li>Highlight code vulnerabilities in your text editor or on GitHub with <a href="/security/code_security/">Code Security</a>.</li>
         <li>Facilitate a remote pair-programming session with <a href="/coscreen/">CoScreen</a>.</li></ul>
         </td>
     </tr>
@@ -127,7 +127,7 @@ For the fastest introduction to navigating Datadog, try the [Quick Start course]
 {{< nextlink href="/getting_started/ci_visibility" >}}<u>CI Visibility</u>: Collect CI pipeline data by setting up integrations with your CI providers.{{< /nextlink >}}
 {{< nextlink href="/getting_started/test_optimization" >}}<u>Test Optimization</u>: Collect CI test data by setting up test services in Datadog.{{< /nextlink >}}
 {{< nextlink href="/getting_started/test_impact_analysis" >}}<u>Test Impact Analysis</u>: Optimize your test suite and reduce CI costs by only running tests that are relevant to your code changes.{{< /nextlink >}}
-{{< nextlink href="/getting_started/code_analysis" >}}<u>Code Analysis</u>: Analyze your repositories for quality and security issues.{{< /nextlink >}}
+{{< nextlink href="/getting_started/code_security" >}}<u>Code Security</u>: Analyze your repositories for quality and security issues.{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Further Reading

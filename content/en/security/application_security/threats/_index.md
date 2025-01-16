@@ -7,7 +7,7 @@ further_reading:
 - link: "/security/application_security/threats/library_configuration/"
   tag: "Documentation"
   text: "Configuring your ASM setup"
-- link: "/security/application_security/software_composition_analysis/"
+- link: "/security/code_security/software_composition_analysis/"
   tag: "Documentation"
   text: "Software Composition Analysis"
 - link: "/security/application_security/how-appsec-works/"
