@@ -100,9 +100,8 @@ Below is a comprehensive list of actions available for Service Catalog in Datado
 [4]: https://www.cookiecutter.io/
 [5]: https://gist.github.com/enbashi/366c62ee8c5fc350d52ddabc867602d4#file-readme-md
 [6]: /service_management/workflows/build/#create-a-custom-workflow
-[7]: /service_management/workflows/actions_catalog/
-[8]: /service_management/workflows/actions_catalog/aws_lambda_invoke_lambda/
+[7]: /actions/actions_catalog/
 [9]: https://app.datadoghq.com/app-builder/blueprints
 [10]: https://app.datadoghq.com/app-builder/apps/edit?activeTab=queries&showActionCatalog=false&template=create-new-s3-bucket&viewMode=edit
 [11]: https://app.datadoghq.com/app-builder/apps/edit?activeTab=queries&showActionCatalog=false&template=scaffolding&viewMode=edit
-[12]: https://docs.datadoghq.com/service_management/workflows/private_actions/
+[12]: /actions/private_actions/

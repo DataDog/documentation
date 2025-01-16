@@ -24,6 +24,14 @@ To take action on a Step Function in Datadog:
 4. Click on the **Failed** pill to open a redrive modal.
 5. Click the **Redrive** button.
 
+## Tracing redrives
+When monitoring redriven executions, use the Waterfall view, as the large gap between the original execution and redrive can make the Flame Graph view imperceptible.
+
+### Troubleshooting missing redrive traces
+If a redrive is triggered within one minute of the original execution's failure, its corresponding trace may not appear.
+
+Also, a redrive may not always share the same sampling decision as the original execution. To ensure that the redriven execution is also sampled, you can reference the `@redrive:true` span tag in a retention query.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}

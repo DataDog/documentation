@@ -128,6 +128,8 @@ If your integrated Service Account exists in a different Google Cloud Platform p
 ### Configure Cloud Costs
 Continue to follow the steps indicated in [Setup & Configuration][3].
 
+**Note**: Data can take up to 48 to 72 hours after setup to stabilize in Datadog.
+
 ## Cost types
 You can visualize your ingested data using the following cost types:
 

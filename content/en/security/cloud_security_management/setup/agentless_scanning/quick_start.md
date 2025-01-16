@@ -47,7 +47,7 @@ Datadog recommends updating the CloudFormation stack regularly, so you can get a
 ## Disable Agentless Scanning
 
 1. On the [Cloud Security Management Setup][10] page, click **Cloud Integrations** > **AWS**.
-1. To disable Agentless Scanning for an account, click the **Edit** button {{< img src="security/csm/setup/edit-button.png" inline="true" style="width:24px;">}} and toggle the **Agentless Scanning** section to the off position.
+1. To disable Agentless Scanning for an account, click the **Edit** button ({{< img src="security/csm/setup/edit-button.png" inline="true" style="width:24px;">}}) and toggle the **Agentless Scanning** section to the off position.
 1. Click **Done**.
 
 ## Uninstall Agentless Scanning

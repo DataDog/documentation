@@ -22,14 +22,17 @@ To take full advantage of KSPM, you must install both the Datadog Agent and clou
 
 This allows Datadog to detect risks in your Kubernetes deployments for each of the following resource types:
 
-| Resource Type            | Install Method    | Framework        |
-|--------------------------|-------------------|------------------|
-| `aws_eks_cluster`        | cloud integration | `cis-eks`        |
-| `aws_eks_worker_node`    | Agent             | `cis-eks`        |
-| `azure_aks_cluster`      | cloud integration | `cis-aks`        |
-| `azure_aks_worker_node`  | Agent             | `cis-aks`        |
-| `kubernetes_master_node` | Agent             | `cis-kubernetes` |
-| `kubernetes_worker_node` | Agent             | `cis-kubernetes` |
+| Resource Type                     | Install Method    | Framework        |
+|-----------------------------------|-------------------|------------------|
+| `aws_eks_cluster`                 | Cloud integration | `cis-eks`        |
+| `aws_eks_worker_node`             | Agent             | `cis-eks`        |
+| `azure_aks_cluster`               | Cloud integration | `cis-aks`        |
+| `azure_aks_worker_node`           | Agent             | `cis-aks`        |
+| `gcp_kubernetes_engine_cluster`   | Cloud integration | `cis-gke`        |
+| `gcp_kubernetes_engine_node_pool` | Cloud integration | `cis-gke`        |
+| `gcp_gke_worker_node`             | Agent             | `cis-gke`        |
+| `kubernetes_master_node`          | Agent             | `cis-kubernetes` |
+| `kubernetes_worker_node`          | Agent             | `cis-kubernetes` |
 
 ## Monitor risk across Kubernetes deployments
 
