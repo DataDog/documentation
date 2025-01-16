@@ -197,25 +197,25 @@ multifiltersearch:
       cloud_provider: Azure
       resource_type: Azure Managed Disk
       recommendation_type: Delete Unattached Azure Managed Disk
-      recommendation_description: Azure managed disk is unattached and can be deleted
+      recommendation_description: Azure-managed disk is unattached and can be deleted
       recommendation_prerequisites: ""
     - category: Unused resource
       cloud_provider: Azure
       resource_type: Azure Managed Disk
       recommendation_type: Delete Unused Azure Managed Disk
-      recommendation_description: Azure managed disk with no read/write operations can be deleted
+      recommendation_description: Azure-managed disk with no read/write operations, which can be deleted
       recommendation_prerequisites: ""
     - category: Unused resource
       cloud_provider: Azure
       resource_type: Azure MySQL
       recommendation_type: Terminate Database for MySQL
-      recommendation_description: Database server with no connections can be terminated
+      recommendation_description: Database server with no connections, which can be terminated
       recommendation_prerequisites: ""
     - category: Unused resource
       cloud_provider: Azure
       resource_type: Azure SQL Server Database
       recommendation_type: Terminate SQL Server Database
-      recommendation_description: Azure SQL Server Database with no successful connections and very minimal CPU can be terminated
+      recommendation_description: Azure SQL Server Database with no successful connections and very minimal CPU, which can be terminated
       recommendation_prerequisites: ""
     - category: Unused resource
       cloud_provider: Azure
