@@ -41,7 +41,7 @@ For more information, see [Unified Service Tagging][2].
 
 Read more about [Containers semantic conventions in the OpenTelemetry documentation][3]. 
 
-Additional cloud provider-specific attributes are also mapped.
+Additional [cloud provider-specific attributes][11] are also mapped.
 
 ### Cloud
 
@@ -224,3 +224,4 @@ Enabling this option adds both the OpenTelemetry resource attributes and the Dat
 [8]: https://opentelemetry.io/docs/concepts/signals/traces/#client
 [9]: https://opentelemetry.io/docs/specs/semconv/attributes-registry/db/#db-system
 [10]: #mapping-opentelemetry-database-system-type-to-datadog-span-type
+[11]: /opentelemetry/schema_semantics/hostname#cloud-provider-specific-conventions
