@@ -17,7 +17,7 @@ When you have Datadog App Builder apps embedded in your dashboards, you can take
 
 Add a previously published app to your dashboard by dragging the **App** widget type out of the dashboard's widget tray:
 
-{{< img src="/service_management/app_builder/embedded_apps/app-widget-select.png" alt="The dashboard widget tray with the App widget type highlighted" style="width:50%;">}}
+{{< img src="/service_management/app_builder/embedded_apps/app-widget-select.png" alt="The dashboard widget tray with the App widget type highlighted" style="width:30%;">}}
 
 The App Editor modal appears, allowing you to select an app and provide it with a title:
 
