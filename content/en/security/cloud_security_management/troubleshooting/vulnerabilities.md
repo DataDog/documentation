@@ -56,7 +56,7 @@ Datadog doesn't support image streaming with Google Kubernetes Engine (GKE). If 
 The resulting error appears as:
 
 ```sh
-unable to mount containerd image, err: unable to scan image named: gke.gcr.io/{image-name}, image is not unpacked
+unable to mount containerd image, err: unable to scan image named: {image-name}, image is not unpacked
 ```
 
 The workaround for this issue is to disable image streaming in GKE. For more information, see the [Disable Image streaming][5] section of the GKE docs.
