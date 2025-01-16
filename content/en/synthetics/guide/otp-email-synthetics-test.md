@@ -2,38 +2,43 @@
 title: Extract a One-Time-Passcode from an Email Body using Synthetic Tests
 description: Learn how to extract OTP an Email Body using Synthetic Tests.
 further_reading:
-- link: "/synthetics/api_tests/http_tests"
+- link: "/synthetics/browser_tests"
   tag: "Documentation"
-  text: "Learn about HTTP tests"
+  text: "Learn about Browser tests"
 - link: "/synthetics/api_tests/http_tests#variables"
   tag: "Documentation"
   text: "Learn about Synthetic test variables"
+- link: 'https://www.datadoghq.com/blog/test-creation-best-practices/'
+  tag: 'Blog'
+  text: 'Best practices for creating end-to-end tests'
+- link: "/synthetics/troubleshooting/?tab=common"
+  tag: "Documentation"
+  text: "Synthetic Monitoring Troubleshooting"
 ---
 
 ## Overview
 
 When testing a sign up or login flow, a one-time-passcode (OTP) may be sent to an email address for authentication. This OTP token can be extracted from an email body and used to test a sign-up flow within an application.
-This guide walks you through how to configure the extraction for your browser test.
+
+This guide walks you through how to configure the extraction using a browser test.
 
 ## Setup
 
 ### Create an email variable
 
-In your [Synthetic browser test][3] click **Create a Local Variable** to add the following variables:
-
-Add an Email Address variable within a synthetic test to generate a unique email address for that synthetic test run.
+In your [Synthetic browser test][3] click **Create a Local Variable**. Then add an email address variable to generate a unique email address for the synthetic test run.
 
 {{< img src="documentation/static/images/synthetics/guide/otp-from-email-body/email_variable.png" alt="Add the email variable" style="width:100%;" >}}
 
-Note: If you want to use a static email address instead this can be done by adding it as a [global variable][4] and inserting it in your test.
+Note: If you want to use a static email address instead of a dynamic one this can be done by adding it as a [global variable][4] and then inserting it in your test.
 
 ### Inject the email address variable
 
-You can now add a step to imitate how a user would input their email address within your application. The Email Address variable can be injected into an input field to imitate this step.
+Once the email variable is created you can add a step to imitate how a user would input the email address within your application. The email address variable can be injected into an input field to imitate this step.
 
 {{< img src="documentation/static/images/synthetics/guide/otp-from-email-body/email_address_variable.png" alt="Inject the email variable" style="width:100%;" >}}
 
-The synthetic test can then access the email body to be used in the rest of the sign-up flow.
+The synthetic test can now access the email body to be used in the rest of the sign-up flow.
 
 ### Extract the OTP from the email body
 
@@ -52,14 +57,14 @@ Here are some examples of regex that can be used to parse the otp code from the 
 
 ### Use a JavaScript assertion to insert the OTP
 
-A [JavaScript assertion][5] step can be added to input the OTP within your application. (fix tone)
+In addition to the regex a [JavaScript assertion][5] step can also be added to input the OTP within your application.
 
 {{< img src="documentation/static/images/synthetics/guide/otp-from-email-body/js_assertion.png" alt="Javascript assertion" style="width:100%;" >}}
 
 JavaScript lets you trigger an event on a DOM element programmatically, making it possible to mimic user interactions or other events. Depending on how your input element is built, dispatching an event may be required to enable custom behaviors or testing event listeners tied to the element.
 
 For example, the extracted variable can be inserted into a simple text field as follows:
-{{< code-block lang="java" disable_copy="false" collapsible="true" >}}
+{{< code-block lang="java" disable_copy="false" >}}
 function (vars, element) {
   element.setAttribute('value', vars.OTP_FROM_EMAIL);
   element.dispatchEvent(new Event("input", { bubbles: true }));
@@ -68,7 +73,7 @@ function (vars, element) {
 {{< /code-block >}}
 
 A more complex example might be that each digit of the OTP has its own respective input field. The OTP can be inserted as follows:
-{{< code-block lang="java" disable_copy="false" collapsible="true" >}}
+{{< code-block lang="java" disable_copy="false" >}}
 function (vars) {
   const inputList = document.querySelectorAll('input');
   inputList.forEach((element) => {
@@ -81,11 +86,11 @@ function (vars) {
 
 {{< img src="documentation/static/images/synthetics/guide/otp-from-email-body/bubble_otp.png" alt="example of an otp with individual numerical fields" style="width:100%;" >}}
 
-Note: For both of the Javascript examples you will need to replace "OTP_FROM_EMAIL" with the name of the email variable defined
+Note: For both of the Javascript examples you will need to replace "OTP_FROM_EMAIL" with the name of the email variable defined if it was named differently
 
 ### Continue testing the rest of your application flow
 
-Once the OTP is inserted and verified, continue recording the appropriate steps to assert that the user has completed the sign-up flow of your application. An example would be asserting that specific text is present on the page.
+Once the OTP is inserted and verified, you can continue recording the appropriate steps to assert that the user has completed the sign-up flow of your application. An example would be adding an [assertion][6] that specific text is present on the page.
 
 ## Further Reading
 
@@ -96,4 +101,4 @@ Once the OTP is inserted and verified, continue recording the appropriate steps 
 [3]: https://app.datadoghq.com/synthetics/create
 [4]: /synthetics/settings/?tab=specifyvalue#global-variables
 [5]: /synthetics/browser_tests/actions/?tab=testanelementontheactivepage#javascript
-[6]: /synthetics/troubleshooting/?tab=common
+[6]: synthetics/browser_tests/actions/?tab=testanelementontheactivepage#assertion
