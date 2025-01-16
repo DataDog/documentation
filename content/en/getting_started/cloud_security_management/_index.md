@@ -62,6 +62,13 @@ This guide walks you through best practices for getting your team up and running
 2. Use out-of-the-box dashboards or [create your own][22] for faster investigations, reporting, and monitoring.
 3. Subscribe to the weekly [security digest][31] reports to begin investigation and remediation of the most important new security issues discovered in the last seven days. 
 
+## Disable CSM
+
+For information on disabling CSM, see the following:
+
+- [Disable CSM Vulnerabilities][32]
+- [Disable CSM Threats][33]
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -88,3 +95,5 @@ This guide walks you through best practices for getting your team up and running
 [29]: https://app.datadoghq.com/security/identities
 [30]: https://app.datadoghq.com/security/infra-vulnerability
 [31]: https://app.datadoghq.com/security/configuration/reports
+[32]: /security/cloud_security_management/troubleshooting/vulnerabilities/#disable-csm-vulnerabilities
+[33]: /security/cloud_security_management/troubleshooting/threats/#disable-csm-threats

@@ -48,6 +48,7 @@ It's recommended to use <a href="https://www.php.net/supported-versions">officia
 
 | PHP Version    | Support level        | Package version |
 |:---------------|:---------------------|:----------------|
+| 8.4.x          | General Availability | > `1.5.0+`     |
 | 8.3.x          | General Availability | > `0.93.0+`     |
 | 8.2.x          | General Availability | > `0.82.0+`     |
 | 8.1.x          | General Availability | > `0.66.0+`     |
@@ -113,7 +114,7 @@ The following table enumerates some of the frameworks and versions Datadog succe
 | Magento        | 2                                       | All supported PHP versions  | Framework-level instrumentation |
 | Neos Flow      | 1.1                                     | All supported PHP versions  | Generic web tracing             |
 | Phalcon        | 1.3, 3.4                                | All supported PHP versions  | Generic web tracing             |
-| RoadRunner     | 2.x                                     | All supported PHP versions  | Framework-level instrumentation |
+| RoadRunner     | {{< tooltip text="SDK" tooltip="RoadRunner uses two versioning schemes: semantic versioning (3.x) for the SDK component, and calendar versioning (2024.x) for the server. For compatibility purposes, refer to the SDK version." >}} 2.x, 3.x                           | All supported PHP versions  | Framework-level instrumentation |
 | Slim           | 2.x, 3.x, 4.x                           | All supported PHP versions  | Framework-level instrumentation |
 | Symfony        | 2.x, 3.3, 3.4, 4.x, 5.x, 6.x, 7.x       | All supported PHP versions  | Framework-level instrumentation |
 | WordPress      | 4.x, 5.x, 6.x                           | All supported PHP versions  | Framework-level instrumentation |
@@ -123,11 +124,12 @@ The following table enumerates some of the frameworks and versions Datadog succe
 
 Note that even if you don't see your web framework in this list, it is supported out of the box with the latest release of the tracer.
 
+
 Datadog is continuously adding more support for in-depth tracing for PHP web-frameworks. To request support for additional span metadata and framework internals, contact our awesome [support team][3].
 
 #### CLI library compatibility
 
-Tracing from the CLI SAPI is disabled by default. To enable tracing of PHP CLI scripts, set `DD_TRACE_CLI_ENABLED=true`.
+Tracing from the CLI SAPI is enabled by default. To selectively disable tracing of PHP CLI scripts, set `DD_TRACE_CLI_ENABLED=false`.
 
 | Module          | Versions            | Support Type               |
 |:----------------|:--------------------|:---------------------------|
@@ -170,14 +172,6 @@ To request support for additional datastores, contact our awesome [support team]
 
 To request support for additional libraries, contact our awesome [support team][3].
 
-#### Deep call stacks on PHP 5
-
-The call stack is limited on PHP 5. See the [deep call stack troubleshooting page][5] for more details.
-
-### Generators
-
-Instrumenting [generators][6] is not supported on PHP 5 and PHP 7.
-
 ### PCNTL
 
 Datadog supports tracing forked processes using [pcntl][7]. When a call to `pcntl_fork` is detected, a dedicated span is created, and the forked process is instrumented. This can be disabled with `DD_TRACE_FORKED_PROCESS`. Refer to the [library configuration page][9] for more details.
@@ -192,8 +186,6 @@ If the application invokes `pcntl_unshare(CLONE_NEWUSER);` and the tracer is ins
 [2]: https://www.datadoghq.com/support/
 [3]: /help
 [4]: https://pecl.php.net/package/mongo
-[5]: /tracing/troubleshooting/php_5_deep_call_stacks
-[6]: https://www.php.net/manual/en/language.generators.overview.php
 [7]: https://www.php.net/manual/en/book.pcntl.php
 [8]: https://man7.org/linux/man-pages/man2/unshare.2.html
 [9]: /tracing/trace_collection/library_config/php/#environment-variable-configuration

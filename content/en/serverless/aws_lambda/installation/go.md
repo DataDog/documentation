@@ -23,6 +23,8 @@ aliases:
 
 ## Installation
 
+<div class="alert alert-info">A sample application is <a href="https://github.com/DataDog/serverless-sample-app/tree/main/src/go">available on GitHub</a> with instructions on how to deploy with multiple runtimes and infrastructure as code tools.</div>
+
 {{< tabs >}}
 {{% tab "Serverless Framework" %}}
 
@@ -123,11 +125,13 @@ import (
 	"net/http"
 	"time"
 
-	ddlambda "github.com/DataDog/datadog-lambda-go"
-	"github.com/aws/aws-lambda-go/events"
-	"github.com/aws/aws-lambda-go/lambda"
-	httptrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http"
-	"gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+  ddlambda "github.com/DataDog/datadog-lambda-go"
+  "github.com/aws/aws-lambda-go/events"
+  "github.com/aws/aws-lambda-go/lambda"
+  httptrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http" // 1.x
+  "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer" // 1.x
+  // httptrace "github.com/DataDog/dd-trace-go/contrib/net/http/v2" // 2.x
+  // "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer" // 2.x
 )
 
 func main() {

@@ -21,7 +21,7 @@ The Datadog Browser SDK can be used to instrument your application for both [Rea
 
 After your applications have been manually instrumented, you can begin managing your RUM and Error Tracking configurations per application in Datadog.
 
-The Browser SDK supports all modern desktop and mobile browsers including IE11. For more information, see the [Browser Support][3] table.
+The Browser SDK supports all modern desktop and mobile browsers. For more information, see the [Browser Support][3] table.
 
 
 ## Setup
@@ -87,7 +87,7 @@ Until Datadog starts receiving data, your application appears as `pending` on th
 {{% tab "RUM" %}}
 
 Server-side (Auto-instrumentation)
-: This method installs RUM by configuring your server to inject the SDK. RUM SDK injection is in preview. To use this feature, [request access to RUM SDK injection][27].
+: This method installs RUM by configuring your server to inject the SDK. RUM SDK injection is in preview. To use this feature, [request access to RUM SDK injection][1].
 
 npm (node package manager)
 : This method is recommended for modern web applications. The RUM Browser SDK is packaged with the rest of your front-end JavaScript code. It has no impact on page load performance. However, the SDK may miss errors, resources, and user actions triggered before the SDK is initialized. Datadog recommends using a matching version with the Browser Logs SDK.
@@ -97,6 +97,8 @@ CDN async
 
 CDN sync
 : This method is recommended for collecting all RUM events. The RUM Browser SDK loads from our CDN synchronously, ensuring the SDK loads first and collects all errors, resources, and user actions. This method may impact page load performance.
+
+[1]: https://www.datadoghq.com/private-beta/rum-sdk-auto-injection/
 
 {{% /tab %}}
 {{% tab "Error Tracking" %}}
@@ -120,7 +122,7 @@ Add [`@datadog/browser-rum`][4] to your `package.json` file, then initialize it 
 {{< tabs >}}
 {{% tab "RUM" %}}
 
-{{% collapse-content title="Latest version" level="h4" %}}
+{{% collapse-content title="Latest version" level="h4" expanded="true" %}}
 
 ```javascript
 import { datadogRum } from '@datadog/browser-rum'
@@ -273,7 +275,7 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
 {{< tabs >}}
 {{% tab "RUM" %}}
 
-{{% collapse-content title="Latest version" level="h4" %}}
+{{% collapse-content title="Latest version" level="h4" expanded="true" %}}
 
 {{< site-region region="us" >}}
 ```html
@@ -1185,7 +1187,7 @@ Add the generated code snippet to the head tag (in front of any other script tag
 {{< tabs >}}
 {{% tab "RUM" %}}
 
-{{% collapse-content title="Latest version" level="h4" %}}
+{{% collapse-content title="Latest version" level="h4" expanded="true" %}}
 
 {{< site-region region="us" >}}
 ```html
@@ -1966,7 +1968,9 @@ The `trackUserInteractions` parameter enables the automatic collection of user c
 {{< tabs >}}
 {{% tab "RUM" %}}
 
-Types are compatible with TypeScript >= 3.8.2. For earlier versions, import JavaScript sources and use global variables to avoid any compilation issues:
+Types are compatible with TypeScript >= 3.8.2. To initialize the SDK, use the following code snippet.
+
+<div class="alert alert-info"><strong>Note</strong>: For earlier versions of TypeScript, import JavaScript sources and use global variables to avoid any compilation issues.</div>
 
 ```javascript
 import '@datadog/browser-rum/bundle/datadog-rum'
@@ -1982,7 +1986,23 @@ window.DD_RUM.init({
 {{% /tab %}}
 {{% tab "Error Tracking" %}}
 
-TypeScript is not supported for Error Tracking.
+
+Types are compatible with TypeScript >= 3.8.2. To initialize the SDK, use the following code snippet.
+
+<div class="alert alert-info"><strong>Note</strong>: For earlier versions of TypeScript, import JavaScript sources and use global variables to avoid any compilation issues.</div>
+
+```javascript
+import '@datadog/browser-rum/bundle/datadog-rum'
+
+window.DD_RUM.init({
+  applicationId: 'XXX',
+  clientToken: 'XXX',
+  site: 'datadoghq.com',
+  trackUserInteractions: true,
+   trackResources: true,
+  ...
+})
+```
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -2042,20 +2062,26 @@ Allows you to control RUM views creation. See [override default RUM view names][
 `trackUserInteractions`
 : Optional<br/>
 **Type**: Boolean<br/>
-**Default**: `false` <br/>
+**Default**: `true` <br/>
 Enables [automatic collection of users actions][6].
 
 `trackResources`
 : Optional<br/>
 **Type**: Boolean<br/>
-**Default**: `false` <br/>
+**Default**: `true` <br/>
 Enables collection of resource events.
 
 `trackLongTasks`
 : Optional<br/>
 **Type**: Boolean<br/>
-**Default**: `false` <br/>
+**Default**: `true` <br/>
 Enables collection of long task events.
+
+`trackAnonymousUser`
+: Optional<br/>
+**Type**: Boolean<br/>
+**Default**: `true` <br/>
+Enables collection of anonymous user id across sessions.
 
 `defaultPrivacyLevel`
 : Optional<br/>
@@ -2150,6 +2176,12 @@ Allow capture of [untrusted events][18], for example in automated UI tests.
 
 Options that must have matching configuration when you are using the Logs Browser SDK:
 
+`sessionPersistence`
+: Optional<br/>
+**Type**: `"cookie" | "local-storage"`<br/>
+**Default**: `"cookie"`<br/>
+Which storage strategy to use for persisting sessions. Can be either `cookie` or `local-storage`.
+
 `trackSessionAcrossSubdomains`
 : Optional<br/>
 **Type**: Boolean<br/>
@@ -2168,17 +2200,11 @@ Use a secure session cookie. This disables RUM events sent on insecure (non-HTTP
 **Default**:`false`<br/>
 Use a partitioned secure cross-site session cookie. This allows the RUM Browser SDK to run when the site is loaded from another one (iframe). Implies `useSecureSessionCookie`.
 
-`useCrossSiteSessionCookie`
+`allowFallbackToLocalStorage`
 : Optional - **Deprecated**<br/>
 **Type**: Boolean<br/>
-**Default**:`false`<br/>
-See `usePartitionedCrossSiteSessionCookie`.
-
-`allowFallbackToLocalStorage`
-: Optional<br/>
-**Type**: Boolean<br/>
 **Default**: `false`<br/>
-Allows the use of `localStorage` when cookies cannot be set. This enables the RUM Browser SDK to run in environments that do not provide cookie support. See [Monitor Electron Applications Using the Browser SDK][19] for a typical use-case.
+Use `sessionPersistence` instead.
 
 [1]: /account_management/api-app-keys/#client-tokens
 [2]: /getting_started/site/
@@ -2323,6 +2349,12 @@ Allow capture of [untrusted events][12], for example in automated UI tests.
 
 Options that must have matching configuration when you are using the Logs Browser SDK:
 
+`sessionPersistence`
+: Optional<br/>
+**Type**: `"cookie" | "local-storage"`<br/>
+**Default**: `"cookie"`<br/>
+Which storage strategy to use for persisting sessions. Can be either `cookie` or `local-storage`.
+
 `trackSessionAcrossSubdomains`
 : Optional<br/>
 **Type**: Boolean<br/>
@@ -2341,17 +2373,11 @@ Use a secure session cookie. This disables events sent on insecure (non-HTTPS) c
 **Default**:`false`<br/>
 Use a partitioned secure cross-site session cookie. This allows the Browser SDK to run when the site is loaded from another one (iframe). Implies `useSecureSessionCookie`.
 
-`useCrossSiteSessionCookie`
+`allowFallbackToLocalStorage`
 : Optional - **Deprecated**<br/>
 **Type**: Boolean<br/>
-**Default**:`false`<br/>
-See `usePartitionedCrossSiteSessionCookie`.
-
-`allowFallbackToLocalStorage`
-: Optional<br/>
-**Type**: Boolean<br/>
 **Default**: `false`<br/>
-Allows the use of `localStorage` when cookies cannot be set. This enables the Browser SDK to run in environments that do not provide cookie support. See [Monitor Electron Applications Using the Browser SDK][13] for a typical use case.
+Use `sessionPersistence` instead.
 
 [1]: /account_management/api-app-keys/#client-tokens
 [2]: /getting_started/site/

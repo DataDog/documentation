@@ -279,7 +279,7 @@ DD_ENV=ci DD_SERVICE=my-python-service pytest --cov
 
 ### Compatibility
 
-* `datadogg-ci-rb>=1.7.0`
+* `datadog-ci-rb>=1.7.0`
 * `simplecov>=0.18.0`.
 
 <div class="alert alert-warning">
@@ -295,9 +295,7 @@ This feature is enabled by default. Use `DD_CIVISIBILITY_SIMPLECOV_INSTRUMENTATI
 
 {{% tab "Go" %}}
 
-{{< callout url="#" btn_hidden="true" header="Join the Preview!" >}}
-Test optimization for Go is in Preview.
-{{< /callout >}}
+<div class="alert alert-info">Test optimization for Go is in Preview.</div>
 
 ### Compatibility
 
@@ -311,6 +309,20 @@ If your tests are executed with the `-cover` flag, the Datadog library instrumen
 
 {{% /tab %}}
 
+{{% tab "Swift" %}}
+
+### Compatibility
+* `dd-sdk-swift-testing>=2.5.3`.
+* `Xcode>=14.3`.
+
+When code coverage is enabled, the Datadog Tracer reports it under the `test.code_coverage.lines_pct` tag for your test sessions.
+
+To enable code coverage for Xcode projects you can follow this guide from Apple: [Enable code coverage in your test plan][1].
+
+For SPM tests, add the `--enable-code-coverage` parameter to your `swift test` invocation.
+
+[1]: https://developer.apple.com/documentation/xcode/determining-how-much-code-your-tests-cover#Enable-code-coverage-in-your-test-plan
+{{% /tab %}}
 
 {{% tab "JUnit Report Uploads" %}}
 

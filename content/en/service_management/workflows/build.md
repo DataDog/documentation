@@ -9,7 +9,7 @@ further_reading:
 - link: "/getting_started/workflow_automation/"
   tag: "Documentation"
   text: "Getting Started with Workflow Automation"
-- link: "/service_management/workflows/actions_catalog"
+- link: "/actions/actions_catalog"
   tag: "Documentation"
   text: "Browse the available actions in the Actions Catalog"
 - link: "/security/cloud_security_management/workflows"
@@ -166,6 +166,10 @@ Edit a workflow in JSON by clicking **Edit JSON Spec** on your workflow page. Th
 - **Format JSON**: Beautify your JSON.
 - **Export JSON**: Download the workflow.
 
+## Interact with workflows using the API
+
+To perform tasks using the API, see the [Workflow Automation API documentation][13].
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -177,10 +181,11 @@ Edit a workflow in JSON by clicking **Edit JSON Spec** on your workflow page. Th
 [3]: /service_management/workflows/trigger
 [4]: https://www.datadoghq.com/pricing/?product=workflow-automation#products
 [5]: https://app.datadoghq.com/workflow/blueprints
-[6]: /service_management/workflows/actions_catalog/generic_actions/#testing-expressions-and-functions
+[6]: /service_management/workflows/actions/#testing-expressions-and-functions
 [7]: /getting_started/tagging/
 [8]: /glossary/#service
 [9]: /account_management/teams/
 [10]: https://datadoghq.slack.com/
 [11]: /service_management/workflows/test_and_debug/#test-a-step
 [12]: /service_management/workflows/variables/
+[13]: /api/latest/workflow-automation/

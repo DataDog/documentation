@@ -2,6 +2,8 @@
 title: Estimated Usage Metrics
 ---
 
+<style>tbody code {word-break: break-word !important;}</style>
+
 ## Overview
 
 Datadog calculates your current estimated usage in near real-time. Estimated usage metrics enable you to:
@@ -23,7 +25,7 @@ Estimated usage metrics are generally available for the following usage types:
 |-------------------------------|------------------------------------------| ----------- |
 | Infrastructure Hosts          | `datadog.estimated_usage.hosts`, `datadog.estimated_usage.hosts.by_tag`          | Unique hosts seen in the last hour. |
 | Containers                    | `datadog.estimated_usage.containers`, `datadog.estimated_usage.containers.by_tag`     | Unique containers seen in the last hour. |
-| Fargate Tasks                 | `datadog.estimated_usage.fargate_tasks`, `datadog.estimated_usage.fargate_tasks.by_tag`  | Unique Fargate Tasks seen in the last 5 minutes. |
+| Fargate Tasks                 | `datadog.estimated_usage.fargate_tasks`, `datadog.estimated_usage.fargate_tasks.by_tag`  | Unique Fargate Tasks seen in the last 5 minutes.<br/><br/>**Note**: This metric tracks both ECS Fargate and EKS Fargate usage. |
 | Indexed Custom Metrics        | `datadog.estimated_usage.metrics.custom`, `datadog.estimated_usage.metrics.custom.by_metric`, `datadog.estimated_usage.metrics.custom.by_tag`  | Unique indexed Custom Metrics seen in the last hour. |
 | Ingested Custom Metrics       | `datadog.estimated_usage.metrics.custom.ingested`, `datadog.estimated_usage.metrics.custom.ingested.by_metric`, `datadog.estimated_usage.metrics.custom.ingested.by_tag`  | Unique ingested Custom Metrics seen in the last hour. |
 | Logs Ingested Bytes           | `datadog.estimated_usage.logs.ingested_bytes` | Total ingestion of logs in bytes. |
@@ -66,6 +68,10 @@ Estimated usage metrics are generally available for the following usage types:
 
 {{< img src="account_management/billing/usage-metrics-02.png" alt="Metric Names" >}}
 
+## Dashboards
+
+Out-of-the-box estimated usage dashboards are available, offering useful queries with these metrics. You can clone these dashboards to help you get started with usage metrics. To find these dashboards, navigate to [Dashboards preset lists][5] and search for "Estimated Usage."
+
 ## Multi-Org usage
 
 For accounts with multiple organizations, you can roll up estimated usage from child organizations using the `from` field to monitor usage across your entire account.
@@ -82,3 +88,4 @@ For billing questions, contact your [Customer Success][2] Manager.
 [2]: mailto:success@datadoghq.com
 [3]: /monitors/types/metric/?tab=threshold
 [4]: /logs/guide/best-practices-for-log-management/#alert-on-indexed-logs-volume-since-the-beginning-of-the-month
+[5]: https://app.datadoghq.com/dashboard/lists/preset/3?q=estimated%20usage

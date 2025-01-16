@@ -44,6 +44,7 @@ The following table presents the list of collected features and the minimal Agen
 1. For Kubernetes support, install the [**Datadog Agent**][102] in a Kubernetes environment and ensure that you enable the [**Orchestrator Explorer**][103] in your Agent configuration.
 1. For AWS ECS support, set up [**Datadog Container Monitoring**][104] in ECS tasks.
 1. Optionally, enable [AWS Split Cost Allocation][105] for usage-based ECS allocation.
+1. To enable storage cost allocation, set up [EBS metric collection][108].
 1. To enable GPU container cost allocation, install the [Datadog DCGM integration][106].
 1. To enable Data transfer cost allocation, set up [Cloud Network Monitoring][107]. **Note**: additional charges apply
 
@@ -54,6 +55,7 @@ The following table presents the list of collected features and the minimal Agen
 [105]: https://docs.aws.amazon.com/cur/latest/userguide/enabling-split-cost-allocation-data.html
 [106]: /integrations/dcgm/?tab=kubernetes#installation
 [107]: /network_monitoring/cloud_network_monitoring/setup
+[108]: /integrations/amazon_ebs/#metric-collection
 
 {{% /tab %}}
 {{% tab "Azure" %}}

@@ -15,6 +15,10 @@
     "name": "AWS Logs Integration",
     "description": "Configure your Datadog-AWS-Logs integration directly through Datadog API.\nFor more information, see the [AWS integration page](https://docs.datadoghq.com/integrations/amazon_web_services/#log-collection)."
   },
+  "agentless-scanning": {
+    "name": "Agentless Scanning",
+    "description": "Datadog Agentless Scanning provides visibility into risks and vulnerabilities\nwithin your hosts, running containers, and serverless functions—all without\nrequiring teams to install Agents on every host or where Agents cannot be installed.\nGo to https://www.datadoghq.com/blog/agentless-scanning/ to learn more"
+  },
   "audit": {
     "name": "Audit",
     "description": "Search your Audit Logs events over HTTP."
@@ -30,6 +34,14 @@
   "ci-visibility-tests": {
     "name": "CI Visibility Tests",
     "description": "Search or aggregate your CI Visibility test events over HTTP. See the [Test Visibility in Datadog page](https://docs.datadoghq.com/tests/) for more information."
+  },
+  "csm-agents": {
+    "name": "CSM Agents",
+    "description": "Datadog Cloud Security Management (CSM) delivers real-time threat detection\nand continuous configuration audits across your entire cloud infrastructure,\nall in a unified view for seamless collaboration and faster remediation.\nGo to https://docs.datadoghq.com/security/cloud_security_management to learn more"
+  },
+  "csm-coverage-analysis": {
+    "name": "CSM Coverage Analysis",
+    "description": "Datadog Cloud Security Management (CSM) delivers real-time threat detection\nand continuous configuration audits across your entire cloud infrastructure,\nall in a unified view for seamless collaboration and faster remediation.\nGo to https://docs.datadoghq.com/security/cloud_security_management to learn more."
   },
   "csm-threats": {
     "name": "CSM Threats",
@@ -67,10 +79,6 @@
     "name": "Dashboard Lists",
     "description": "Interact with your dashboard lists through the API to\norganize, find, and share all of your dashboards with your team and\norganization."
   },
-  "data-deletion": {
-    "name": "Data Deletion",
-    "description": "The Data Deletion API allows the user to target and delete data from the allowed products. It's currently enabled for Logs and RUM and depends on `logs_delete_data` and `rum_delete_data` permissions respectively."
-  },
   "domain-allowlist": {
     "name": "Domain Allowlist",
     "description": "Configure your Datadog Email Domain Allowlist directly through the Datadog API.\nThe Email Domain Allowlist controls the domains that certain datadog emails can be sent to.\nFor more information, see the [Domain Allowlist docs page](https://docs.datadoghq.com/account_management/org_settings/domain_allowlist)"
@@ -81,7 +89,7 @@
   },
   "events": {
     "name": "Events",
-    "description": "The Event Management API allows you to programmatically post events to the Events Explorer\nand fetch events from the Events Explorer. See the [Event Management page](https://docs.datadoghq.com/service_management/events/) for more information."
+    "description": "The Event Management API allows you to programmatically post events to the Events Explorer and fetch events from the Events Explorer. See the [Event Management page](https://docs.datadoghq.com/service_management/events/) for more information.\n\n**Update to Datadog monitor events `aggregation_key` starting March 1, 2025:** The Datadog monitor events `aggregation_key` is unique to each Monitor ID. Starting March 1st, this key will also include Monitor Group, making it unique per *Monitor ID and Monitor Group*. If you're using monitor events `aggregation_key` in dashboard queries or the Event API, you must migrate to use `@monitor.id`. Reach out to [support](https://www.datadoghq.com/support/) if you have any question."
   },
   "fastly-integration": {
     "name": "Fastly Integration",
@@ -183,6 +191,10 @@
     "name": "Rum Metrics",
     "description": "Manage configuration of [rum-based metrics](https://app.datadoghq.com/rum/generate-metrics) for your organization."
   },
+  "scim": {
+    "name": "SCIM",
+    "description": "Provision Datadog users and teams using SCIM APIs.\n\nNote: SCIM provisioning for Datadog teams is only available for select organizations at this point. Request access by contacting Datadog support, or see the [SCIM page](https://docs.datadoghq.com/account_management/scim/) for more information."
+  },
   "security-monitoring": {
     "name": "Security Monitoring",
     "description": "Create and manage your security rules, signals, filters, and more. See the [Datadog Security page](https://docs.datadoghq.com/security/) for more information."
@@ -197,7 +209,7 @@
   },
   "service-definition": {
     "name": "Service Definition",
-    "description": "API to create, update, retrieve and delete service definitions."
+    "description": "API to create, update, retrieve and delete service definitions.\nNote: Service Catalog [v3.0 schema](https://docs.datadoghq.com/service_catalog/service_definitions/v3-0/) has new API endpoints documented under [Software Catalog](https://docs.datadoghq.com/api/latest/software-catalog/). Use the following Service Definition endpoints for v2.2 and earlier."
   },
   "service-level-objectives": {
     "name": "Service Level Objectives",

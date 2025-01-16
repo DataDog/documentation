@@ -114,9 +114,9 @@ Después de mover el índice a la primera posición, revisa la configuración y 
 1. Configura [reglas de supresión][23] para reducir el ruido. 
 2. Crea [reglas de detección personalizadas][24]. Lee las [prácticas recomendadas para crear reglas de detección][25].
 
-## Configurar tests de API y tests de API multupaso
+## Para leer más
 
-Grabar pruebas de aplicaciones móviles
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /es/security/cloud_siem/
 [2]: https://app.datadoghq.com/security/configuration/siem/log-sources

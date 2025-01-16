@@ -20,6 +20,8 @@ further_reading:
 
 ## Installation
 
+<div class="alert alert-info">A sample application is <a href="https://github.com/DataDog/serverless-sample-app/tree/main/src/dotnet">available on GitHub</a> with instructions on how to deploy with multiple runtimes and infrastructure as code tools.</div>
+
 Datadog offers many different ways to enable instrumentation for your serverless applications. Choose a method below that best suits your needs. Datadog generally recommends using the Datadog CLI. You *must* follow the instructions for "Container Image" if your application is deployed as a container image.
 
 {{< tabs >}}
@@ -310,6 +312,18 @@ To use the optimized extension, disable Application Security Management (ASM), C
 - `DD_SERVERLESS_APPSEC_ENABLED`
 
 Enabling any of these features cause the extension to default back to the fully compatible older version of the extension. You can also force your extension to use the older version by setting `DD_EXTENSION_VERSION` to `compatibility`. Datadog encourages you to report any feedback or bugs by adding an [issue on GitHub][8] and tagging your issue with `version/next`.
+
+## Adding Custom Spans
+
+When using the [Datadog Lambda tracing layer for .NET](https://github.com/DataDog/dd-trace-dotnet-aws-lambda-layer), ensure that a second version of the .NET tracer is not also packaged with your application code. Add `ExcludeAssets` instruction to ensure this extra tracer is excluded.
+
+```xml
+<PackageReference Include="Datadog.Trace" Version="2.38.0">
+    <ExcludeAssets>runtime</ExcludeAssets>
+</PackageReference>
+```
+
+You are now ready to add custom spans and span tags using the .NET tracer. For further instructions on how to add spans, see the [.NET custom instrumentation](https://docs.datadoghq.com/tracing/trace_collection/custom_instrumentation/dotnet/dd-api/) page.
 
 ## What's next?
 - You can now view metrics, logs, and traces on the [Serverless Homepage][1].

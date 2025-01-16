@@ -14,9 +14,6 @@ further_reading:
 - link: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/service_definition_yaml
   tag: 外部サイト
   text: Terraform によるサービス定義の作成と管理
-- link: /tracing/service_catalog/guides/understanding-service-configuration
-  tag: ガイド
-  text: サービス構成を理解する
 - link: /tracing/service_catalog/guides/upstream-downstream-dependencies
   tag: ガイド
   text: アクティブインシデント時の上流と下流の依存関係を見る
@@ -34,7 +31,7 @@ further_reading:
   text: 私は GitHub Actions を Datadog のサービスカタログに使っています。あなたもそうするべきですよ
 - link: https://www.datadoghq.com/blog/shift-left-datadog-service-catalog/
   tag: ブログ
-  text: Datadog サービスカタログを使って、シフトレフトの可観測性を向上させる
+  text: Datadog サービスカタログを活用して、シフトレフト型オブザーバビリティを向上させましょう。
 - link: https://www.datadoghq.com/blog/service-ownership-best-practices-datadog/
   tag: ブログ
   text: Datadog サービスカタログを使ったエンドツーエンドのサービス所有権管理のベストプラクティス
@@ -49,6 +46,9 @@ title: Datadog サービスカタログ
 ## 概要
 
 Datadog [サービスカタログ][1]は、所有権メタデータ、パフォーマンスインサイト、セキュリティ分析、コスト配分などを統合し、サービス全体を一つのビューで提供します。これにより、組織はスケールに応じたエンドツーエンドのサービス所有権を簡単に実現し、リアルタイムのパフォーマンスインサイトを取得し、信頼性やセキュリティリスクを検出・対応し、アプリケーションの依存関係を一元的に管理することができます。
+
+{{< callout url="https://www.datadoghq.com/product-preview/internal-developer-portal/" d_target="#signupModal" btn_hidden="false" header=" 当社の Internal Developer Portal のプレビューにぜひご参加ください！ " >}}
+{{< /callout >}}
 
 ### ユースケース
 
@@ -111,6 +111,7 @@ Datadog [サービスカタログ][1]は、所有権メタデータ、パフォ�
 
 この権限は、**Datadog Admin Role** および **Datadog Standard Role** でデフォルトで有効になっています。
 
+{{< site-region region="gov" >}}
 ## サービスタイプ
 
 アプリケーションによって監視されるすべてのサービスは、タイプに関連付けられています。Datadog は、受信したスパンデータに付けられた `span.type` 属性に基づいて、このタイプを自動的に決定します。このタイプは、Datadog Agent が統合しているアプリケーションやフレームワークの名前を指定します。
@@ -125,11 +126,30 @@ Datadog [サービスカタログ][1]は、所有権メタデータ、パフォ�
 *  サーバーレス関数
 *  Web
 
-いくつかのインテグレーションは、タイプのエイリアスになります。例えば、Postgres、MySQL、Cassandraは "DB" というタイプに対応します。Redis と Memcache のインテグレーションは、"Cache" というタイプにマッピングされます。
+ 一部のインテグレーションには特定のタイプへのエイリアスが設定されています。たとえば、Postgres、MySQL、Cassandra は「DB」タイプに、Redis および Memcache は「Cache」タイプに対応します。
+{{< /site-region >}}
+{{< site-region region="ap1,us3,us5,eu,us" >}}
+## コンポーネント別にサービスカタログエントリをフィルタリング
+
+サービスカタログに表示されるすべてのエントリは、コンポーネントタイプとして分類されます。
+
+*  サービス
+*  データストア
+*  キュー
+*  RUM アプリケーション
+*  外部プロバイダー
+
+{{< img src="tracing/service_catalog/component_selector.png" alt="サービスカタログのコンポーネントセレクター" style="width:30%;" >}}
+
+Datadog は、APM ([peer タグ][10]) で収集したスパン属性だけでなく、USM、DSM、RUM などの他のテレメトリータイプも考慮して、サービスカタログのエントリを自動補完し、関連するコンポーネントタイプを判定します。
+
+**注**: コンポーネントは、`span.type` スパン属性に由来する `type` フィルターよりも優先されます。これは、より信頼性が高く、きめ細かな粒度でさまざまなエンティティタイプを検出できるためです。例えば、`datastore type` ファセットを使用してデータストア技術でフィルタリングできます。
+
+[10]: /ja/tracing/services/inferred_services#peer-tags
+{{< /site-region >}}
 
 ## データ保持
 **サービスリスト**と**サービスページ**のサービスとリソースの統計、およびスパンのサマリーは、最大で 30 日間保持されます。APM トレースメトリクスをカスタムクエリするには、メトリクスエクスプローラーを使用してください。[APM のデータ保持の詳細はこちら][4]。
-
 
 ## 参考資料
 

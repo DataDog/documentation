@@ -1,16 +1,11 @@
 ---
 title: Service Overrides
 disable_toc: false
-private: true
 further_reading:
 - link: "/tracing/guide/inferred-service-opt-in"
   tag: "Documentation"
   text: "Opting-in to the new service representation"
 ---
-
-{{< callout url="https://docs.google.com/forms/d/1imGm-4SfOPjwAr6fwgMgQe88mp4Y-n_zV0K3DcNW4UA/edit" d_target="#signupModal" btn_hidden="false" header="Request access to the Preview!" >}}
-Inferred service dependencies are in Preview. To request access, complete the form. For opt-in instructions, see the <a href="/tracing/guide/inferred-service-opt-in/">Inferred Service dependencies guide</a>.
-{{< /callout >}}
 
 ## Overview
 

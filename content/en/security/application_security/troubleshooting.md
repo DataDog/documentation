@@ -191,13 +191,13 @@ There are no required integrations for PHP.
 
 The following Go frameworks should be instrumented using the out-of-the-box APM integrations:
 
-- [gRPC][2]
-- [net/http][3]
-- [Gorilla Mux][4]
-- [Echo][5]
-- [Chi][6]
+- [gRPC][2] ([v2][8])
+- [net/http][3] ([v2][9])
+- [Gorilla Mux][4] ([v2][10])
+- [Echo][5] ([v2][11])
+- [Chi][6] ([v2][12])
 
-If your framework is not supported, [create a new issue][7] in the Go repository.
+Please be sure to reference the docs appropriate for your version (v1.x or v2.x) of the Go Tracer. If your framework is not supported, [create a new issue][7] in the Go repository.
 
 [2]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/google.golang.org/grpc#example-package-Server
 [3]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http#example-package
@@ -205,6 +205,12 @@ If your framework is not supported, [create a new issue][7] in the Go repository
 [5]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/labstack/echo.v4#example-package
 [6]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/go-chi/chi.v5#example-package
 [7]: https://github.com/DataDog/dd-trace-go/issues/new?title=Missing%20appsec%20framework%20support
+[8]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/contrib/google.golang.org/grpc/v2
+[9]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/contrib/net/http/v2
+[10]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/contrib/gorilla/mux/v2
+[11]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/contrib/labstack/echo.v4/v2
+[12]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/contrib/go-chi/chi.v5/v2
+
 {{< /programming-lang >}}
 {{< programming-lang lang="Node.js" >}}
 
@@ -576,10 +582,17 @@ If no `DD_APPSEC_ENABLED=true` environment variable is set for your service, do 
 
 ## Disabling Software Composition Analysis
 
-To disable [Software Composition Analysis][14]:
+SCA can be enabled using two methods: the UI or manually using an environment variable. When you disable SCA, you must use the *same method* you used to enable SCA. For example, if you enabled SCA manually, you cannot disable it using the UI. You must disable it manually. 
 
-* Go to [Services][15], select **Software Composition Analysis (SCA)**, click on your service and then click **Deactivate**.
+Typically, SCA is enabled and disabled on a service using the UI.
+
+To disable [Software Composition Analysis][14] using the UI:
+
+* Go to [Services][15], select **Software Composition Analysis (SCA)**, click on your service to open the service details, and then, in **Vulnerability Detection**, click **Deactivate**.
 * To disable Software Composition Analysis on your services in bulk, click the check box in the list header and then under **Bulk Actions** select **Deactivate Software Composition Analysis (SCA) on (number of) services**.
+
+To disable SCA manually:
+
 * To disable Software Composition Analysis using the `DD_APPSEC_SCA_ENABLED` environment variable, remove the `DD_APPSEC_SCA_ENABLED=true` environment variable from your application configuration, and restart your service. This does not apply to PHP apps.
 
 ## Disabling Code Security

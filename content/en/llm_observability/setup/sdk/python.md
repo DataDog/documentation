@@ -43,29 +43,29 @@ DD_SITE=<YOUR_DATADOG_SITE> DD_API_KEY=<YOUR_API_KEY> DD_LLMOBS_ENABLED=1 \
 DD_LLMOBS_ML_APP=<YOUR_ML_APP_NAME> ddtrace-run <YOUR_APP_STARTUP_COMMAND>
 {{< /code-block >}}
 
-`DD_API_KEY`
-: required - _string_
-<br />Your Datadog API key.
-
 `DD_SITE`
-: required - _string_ 
+: required - _string_
 <br />The Datadog site to submit your LLM data. Your site is {{< region-param key="dd_site" code="true" >}}.
 
 `DD_LLMOBS_ENABLED`
-: required - _integer or string_ 
+: required - _integer or string_
 <br />Toggle to enable submitting data to LLM Observability. Should be set to `1` or `true`.
 
 `DD_LLMOBS_ML_APP`
-: required - _string_ 
+: required - _string_
 <br />The name of your LLM application, service, or project, under which all traces and spans are grouped. This helps distinguish between different applications or experiments. See [Application naming guidelines](#application-naming-guidelines) for allowed characters and other constraints. To override this value for a given root span, see [Tracing multiple applications](#tracing-multiple-applications).
 
 `DD_LLMOBS_AGENTLESS_ENABLED`
 : optional - _integer or string_ - **default**: `false`
 <br />Only required if you are not using the Datadog Agent, in which case this should be set to `1` or `true`.
 
+`DD_API_KEY`
+: optional - _string_
+<br />Your Datadog API key. Only required if you are not using the Datadog Agent.
+
 ### In-code setup
 
-Enable LLM Observability programatically through the `LLMOBs.enable()` function instead of running with the `ddtrace-run` command. **Note**: Do not use this setup method with the `ddtrace-run` command.
+Enable LLM Observability programatically through the `LLMObs.enable()` function instead of running with the `ddtrace-run` command. **Note**: Do not use this setup method with the `ddtrace-run` command.
 
 {{< code-block lang="python" >}}
 from ddtrace.llmobs import LLMObs
@@ -82,7 +82,7 @@ LLMObs.enable(
 <br />The name of your LLM application, service, or project, under which all traces and spans are grouped. This helps distinguish between different applications or experiments. See [Application naming guidelines](#application-naming-guidelines) for allowed characters and other constraints. To override this value for a given trace, see [Tracing multiple applications](#tracing-multiple-applications). If not provided, this defaults to the value of `DD_LLMOBS_ML_APP`.
 
 `integrations_enabled` - **default**: `true`
-: optional - _boolean_ 
+: optional - _boolean_
 <br />A flag to enable automatically tracing LLM calls for Datadog's supported [LLM integrations][13]. If not provided, all supported LLM integrations are enabled by default. To avoid using the LLM integrations, set this value to `false`.
 
 `agentless_enabled`
@@ -90,12 +90,12 @@ LLMObs.enable(
 <br />Only required if you are not using the Datadog Agent, in which case this should be set to `True`. This configures the `ddtrace` library to not send any data that requires the Datadog Agent. If not provided, this defaults to the value of `DD_LLMOBS_AGENTLESS_ENABLED`.
 
 `site`
-: optional - _string_ 
+: optional - _string_
 <br />The Datadog site to submit your LLM data. Your site is {{< region-param key="dd_site" code="true" >}}. If not provided, this defaults to the value of `DD_SITE`.
 
 `api_key`
-: optional - _string_ 
-<br />Your Datadog API key. If not provided, this defaults to the value of `DD_API_KEY`.
+: optional - _string_
+<br />Your Datadog API key. Only required if you are not using the Datadog Agent. If not provided, this defaults to the value of `DD_API_KEY`.
 
 `env`
 : optional - _string_
@@ -107,7 +107,7 @@ LLMObs.enable(
 
 ### AWS Lambda setup
 
-Enable LLM Observability by specifying the required environment variables in your [command line setup](#command-line-setup) and following the setup instructions for the [Datadog-Python and Datadog-Extension][14] AWS Lambda layers. 
+Enable LLM Observability by specifying the required environment variables in your [command line setup](#command-line-setup) and following the setup instructions for the [Datadog-Python and Datadog-Extension][14] AWS Lambda layers.
 
 **Note**: Using the `Datadog-Python` and `Datadog-Extension` layers automatically turns on all LLM Observability integrations, and force flushes spans at the end of the Lambda function.
 
@@ -192,7 +192,7 @@ from ddtrace.llmobs.decorators import workflow
 @workflow
 def process_message():
     ... # user application logic
-    return 
+    return
 {{< /code-block >}}
 
 ### Agent span
@@ -221,7 +221,7 @@ from ddtrace.llmobs.decorators import agent
 @agent
 def react_agent():
     ... # user application logic
-    return 
+    return
 {{< /code-block >}}
 
 ### Tool span
@@ -250,7 +250,7 @@ from ddtrace.llmobs.decorators import tool
 @tool
 def call_weather_api():
     ... # user application logic
-    return 
+    return
 {{< /code-block >}}
 
 ### Task span
@@ -279,7 +279,7 @@ from ddtrace.llmobs.decorators import task
 @task
 def sanitize_input():
     ... # user application logic
-    return 
+    return
 {{< /code-block >}}
 
 ### Embedding span
@@ -317,7 +317,7 @@ from ddtrace.llmobs.decorators import embedding
 @embedding(model_name="text-embedding-3", model_provider="openai")
 def perform_embedding():
     ... # user application logic
-    return 
+    return
 {{< /code-block >}}
 
 ### Retrieval span
@@ -354,7 +354,7 @@ def get_relevant_docs(question):
             {"id": doc.id, "score": doc.score, "text": doc.text, "name": doc.name} for doc in context_documents
         ]
     )
-    return 
+    return
 {{< /code-block >}}
 
 ## Tracking user sessions
@@ -370,7 +370,7 @@ def process_user_message():
         ...
         tags = {"user_handle": "poodle@dog.com", "user_id": "1234", "user_name": "poodle"}
     )
-    return 
+    return
 {{< /code-block >}}
 
 ### Session Tracking Tags
@@ -384,25 +384,25 @@ def process_user_message():
 
 ## Annotating a span
 
-The SDK provides the method `LLMObs.annotate()` to annotate spans with inputs, outputs, and metadata. 
+The SDK provides the method `LLMObs.annotate()` to annotate spans with inputs, outputs, and metadata.
 
 ### Arguments
 
 The `LLMObs.annotate()` method accepts the following arguments:
 
-`span` 
+`span`
 : optional - _Span_ - **default**: the current active span
 <br />The span to annotate. If `span` is not provided (as when using function decorators), the SDK annotates the current active span.
 
-`input_data` 
-: optional - _JSON serializable type or list of dictionaries_ 
+`input_data`
+: optional - _JSON serializable type or list of dictionaries_
 <br />Either a JSON serializable type (for non-LLM spans) or a list of dictionaries with this format: `{"role": "...", "content": "..."}` (for LLM spans).  **Note**: Embedding spans are a special case and require a string or a dictionary (or a list of dictionaries) with this format: `{"text": "..."}`.
 
-`output_data` 
-: optional - _JSON serializable type or list of dictionaries_ 
+`output_data`
+: optional - _JSON serializable type or list of dictionaries_
 <br />Either a JSON serializable type (for non-LLM spans) or a list of dictionaries with this format: `{"role": "...", "content": "..."}` (for LLM spans). **Note**: Retrieval spans are a special case and require a string or a dictionary (or a list of dictionaries) with this format: `{"text": "...", "name": "...", "score": float, "id": "..."}`.
 
-`metadata` 
+`metadata`
 : optional - _dictionary_
 <br />A dictionary of JSON serializable key-value pairs that users can add as metadata information relevant to the input or output operation described by the span (`model_temperature`, `max_tokens`, `top_k`, etc.).
 
@@ -412,7 +412,7 @@ The `LLMObs.annotate()` method accepts the following arguments:
 
 `tags`
 : optional - _dictionary_
-<br />A dictionary of JSON serializable key-value pairs that users can add as tags regarding the span's context (`session`, `environment`, `system`, `versioning`, etc.). For more information about tags, see [Getting Started with Tags][9].
+<br />A dictionary of JSON serializable key-value pairs that users can add as tags on the span. Example keys: `session`, `env`, `system`, and `version`. For more information about tags, see [Getting Started with Tags][9].
 
 ### Example
 
@@ -467,6 +467,55 @@ def similarity_search():
     return
 
 {{< /code-block >}}
+
+### Annotating auto-instrumented spans
+
+The SDK's `LLMObs.annotate_context()` method returns a context manager that can be used to modify all auto-instrumented spans started while the annotation context is active.
+
+#### Arguments
+
+The `LLMObs.annotation_context()` method accepts the following arguments:
+
+`name` 
+: optional - _str_
+<br />Name that overrides the span name for any auto-instrumented spans that are started within the annotation context.
+
+`prompt` 
+: optional - _dictionary_ 
+<br />A dictionary that represents the prompt used for an LLM call in the following format:<br />`{"template": "...", "id": "...", "version": "...", "variables": {"variable_1": "...", ...}}`.<br />You can also import the `Prompt` object from `ddtrace.utils` and pass it in as the `prompt` argument. **Note**: This argument only applies to LLM spans.
+
+`tags`
+: optional - _dictionary_
+<br />A dictionary of JSON serializable key-value pairs that users can add as tags on the span. Example keys: `session`, `env`, `system`, and `version`. For more information about tags, see [Getting Started with Tags][9].
+
+#### Example
+
+{{< code-block lang="python" >}}
+from ddtrace.llmobs import LLMObs
+from ddtrace.llmobs.decorators import workflow
+
+@workflow
+def rag_workflow(user_question):
+    context_str = retrieve_documents(user_question).join(" ")
+
+    with LLMObs.annotation_context(
+        prompt = Prompt(
+            variables = {
+                "question": user_question,
+                "context": context_str,
+            },
+            template = "Please answer the..."
+        ),
+        tags = {
+            "retrieval_strategy": "semantic_similarity"
+        },
+        name = "augmented_generation"
+    ):
+        completion = openai_client.chat.completions.create(...)
+    return completion.choices[0].message.content
+
+{{< /code-block >}}
+
 
 ## Evaluations
 
