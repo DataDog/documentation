@@ -28,7 +28,7 @@ This guide walks you through how to configure the extraction using a browser tes
 
 In your [Synthetic browser test][3] click **Create a Local Variable**. Then add an email address variable to generate a unique email address for the synthetic test run.
 
-{{< img src="documentation/static/images/synthetics/guide/otp-from-email-body/email_variable.png" alt="Add the email variable" style="width:100%;" >}}
+{{< img src="synthetics/guide/otp-from-email-body/email_variable.png" alt="Add the email variable" style="width:100%;" >}}
 
 Note: If you want to use a static email address instead of a dynamic one this can be done by adding it as a [global variable][4] and then inserting it in your test.
 
@@ -36,7 +36,7 @@ Note: If you want to use a static email address instead of a dynamic one this ca
 
 Once the email variable is created you can add a step to imitate how a user would input the email address within your application. The email address variable can be injected into an input field to imitate this step.
 
-{{< img src="documentation/static/images/synthetics/guide/otp-from-email-body/email_address_variable.png" alt="Inject the email variable" style="width:100%;" >}}
+{{< img src="synthetics/guide/otp-from-email-body/email_address_variable.png" alt="Inject the email variable" style="width:100%;" >}}
 
 The synthetic test can now access the email body to be used in the rest of the sign-up flow.
 
@@ -44,7 +44,7 @@ The synthetic test can now access the email body to be used in the rest of the s
 
 Under `Add a variable`, select `from Email body`. In this example, the variable is named `OTP_FROM_EMAIL` for later reference within the test. You can then define a test step to extract the relevant information from the email body once it has been sent. 
 
-{{< img src="documentation/static/images/synthetics/guide/otp-from-email-body/otp_from_email.png" alt="OTP variable as used in the email body step" style="width:100%;" >}}
+{{< img src="synthetics/guide/otp-from-email-body/otp_from_email.png" alt="OTP variable as used in the email body step" style="width:100%;" >}}
 
 Here are some examples of regex that can be used to parse the otp code from the email body:
 
@@ -59,7 +59,7 @@ Here are some examples of regex that can be used to parse the otp code from the 
 
 In addition to the regex a [JavaScript assertion][5] step can also be added to input the OTP within your application.
 
-{{< img src="documentation/static/images/synthetics/guide/otp-from-email-body/js_assertion.png" alt="Javascript assertion" style="width:100%;" >}}
+{{< img src="synthetics/guide/otp-from-email-body/js_assertion.png" alt="Javascript assertion" style="width:100%;" >}}
 
 JavaScript lets you trigger an event on a DOM element programmatically, making it possible to mimic user interactions or other events. Depending on how your input element is built, dispatching an event may be required to enable custom behaviors or testing event listeners tied to the element.
 
@@ -84,7 +84,7 @@ function (vars) {
 }
 {{< /code-block >}}
 
-{{< img src="documentation/static/images/synthetics/guide/otp-from-email-body/bubble_otp.png" alt="example of an otp with individual numerical fields" style="width:100%;" >}}
+{{< img src="synthetics/guide/otp-from-email-body/bubble_otp.png" alt="example of an otp with individual numerical fields" style="width:100%;" >}}
 
 Note: For both of the Javascript examples you will need to replace "OTP_FROM_EMAIL" with the name of the email variable defined if it was named differently
 
