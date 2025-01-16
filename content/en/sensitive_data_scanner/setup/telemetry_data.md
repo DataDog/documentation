@@ -4,7 +4,7 @@ disable_toc: false
 further_reading:
   - link: "/sensitive_data_scanner/scanning_rules/library_rules"
     tag: "Documentation"
-    text: "Learn more about creating custom rules"
+    text: "Learn more about out-of-the-box library rules"
   - link: "/sensitive_data_scanner/scanning_rules/custom_rules"
     tag: "Documentation"
     text: "Learn more about creating custom rules"

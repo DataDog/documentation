@@ -10,7 +10,7 @@ further_reading:
       text: "Set up Sensitive Data Scanner for telemetry data"
     - link: "/sensitive_data_scanner/setup/cloud_storage"
       tag: "Documentation"
-      text: "Set up Sensitive Data Scanner for cloud storage"
+      text: "Set up Sensitive Data Scanner for Cloud Storage"
     - link: "/sensitive_data_scanner/guide/best_practices_for_creating_custom_rules"
       tag: "Documentation"
       text: "Best practices for creating custom rules"
