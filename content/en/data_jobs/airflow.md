@@ -98,13 +98,12 @@ To get started, follow the instructions below.
    #!/bin/sh
    export OPENLINEAGE_URL=<DD_DATA_OBSERVABILITY_INTAKE>
    export OPENLINEAGE_API_KEY=<DD_API_KEY>
-   # Optional, allows Datadog to tag the jobs with the env name
    export AIRFLOW__OPENLINEAGE__NAMESPACE=${AIRFLOW_ENV_NAME}
    ```
 
    * Replace `<DD_DATA_OBSERVABILITY_INTAKE>` fully with `https://data-obs-intake.`{{< region-param key="dd_site" code="true" >}}.
    * Replace `<DD_API_KEY>` fully with your valid [Datadog API key][5].
-   * If you're using Airflow v2.7 or v2.8, please also add these two environment variables to the startup script. This fixes an OpenLinage config issue reported [here][9].
+   * If you're using **Airflow v2.7 or v2.8**, please also add these two environment variables to the startup script. This fixes an OpenLinage config issue reported [here][9].
       ```shell
       #!/bin/sh
       # Required for Airflow v2.7 & v2.8 only
