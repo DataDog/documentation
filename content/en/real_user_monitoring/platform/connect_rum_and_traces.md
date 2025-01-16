@@ -153,8 +153,8 @@ To start sending just your iOS application's traces to Datadog, see [iOS Trace C
     val tracedHosts = listOf("example.com", "example.eu")
 
     val okHttpClient = OkHttpClient.Builder()
-        .addInterceptor(DatadogInterceptor(tracedHosts))
-        .addNetworkInterceptor(TracingInterceptor(tracedHosts))
+        .addInterceptor(DatadogInterceptor.Builder(tracedHosts).build())
+        .addNetworkInterceptor(TracingInterceptor.Builder(tracedHosts).build())
         .eventListenerFactory(DatadogEventListener.Factory())
         .build()
     ```
@@ -164,8 +164,14 @@ To start sending just your iOS application's traces to Datadog, see [iOS Trace C
 3.  _(Optional)_ Configure the `traceSampler` parameter to keep a defined percentage of the backend traces. If not set, 20% of the traces coming from application requests are sent to Datadog. To keep 100% of backend traces:
 
 ```kotlin
+    val tracedHosts = listOf("example.com")
+
     val okHttpClient = OkHttpClient.Builder()
-       .addInterceptor(DatadogInterceptor(traceSampler = RateBasedSampler(100f)))
+       .addInterceptor(
+           DatadogInterceptor.Builder(tracedHosts)
+               .setTraceSampler(RateBasedSampler(100f))
+               .build()
+       )
        .build()
 ```
 
@@ -461,8 +467,8 @@ The default injection style is `tracecontext`, `Datadog`.
                           "example.eu" to setOf(TracingHeaderType.DATADOG))
 
     val okHttpClient = OkHttpClient.Builder()
-        .addInterceptor(DatadogInterceptor(tracedHosts))
-        .addNetworkInterceptor(TracingInterceptor(tracedHosts))
+        .addInterceptor(DatadogInterceptor.Builder(tracedHosts).build())
+        .addNetworkInterceptor(TracingInterceptor.Builder(tracedHosts).build())
         .eventListenerFactory(DatadogEventListener.Factory())
         .build()
     ```
