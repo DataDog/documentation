@@ -25,7 +25,7 @@ algolia:
 
 ## Overview
 
-This page outlines the basic features of the Datadog Agent for Amazon Linux. If you haven't installed the Agent yet, instructions can be found in the [Datadog Agent Integration][1] documentation.
+This page quickly outlines the basic features of the Datadog Agent for Amazon Linux. If you haven't installed the Agent yet, instructions can be found in the [Datadog Agent Integration][1] documentation.
 
 Packages are available for 64-bit x86 and Arm v8 architectures. For other architectures, use the source install.
 
