@@ -107,11 +107,13 @@ The Docker Stats receiver generates container metrics for the OpenTelemetry Coll
   - `container.name` 
   - `container.id`
 
-  Learn more about [mapping between OpenTelemetry and Datadog semantic conventions for resource attributes][5].
+Learn more about [mapping between OpenTelemetry and Datadog semantic conventions for resource attributes][5].
 
 The following table shows what Datadog container metric names are associated with corresponding OpenTelemetry container metric names
 
-| Datadog Metric Name     | OTel Docker Stats Metric Name         | Metric Description             |
+{{< mapping-table resource="dockerstats.csv">}}
+
+<!-- | Datadog Metric Name     | OTel Docker Stats Metric Name         | Metric Description             |
 |-------------------------|--------------------------------|----------------------|
 | `container.cpu.usage`    | `container.cpu.usage.total`       | The container total CPU Usage     |
 | `container.cpu.user`     | `container.cpu.usage.usermode`         | The container userspace CPU usage   |
@@ -131,7 +133,7 @@ The following table shows what Datadog container metric names are associated wit
 | `container.net.sent`              | `container.network.io. usage.tx_bytes`      | The number of network bytes sent (per interface)    |
 | `container.net.sent.packets`      | `container.network.io. usage.tx_packets`    | The number of network packets sent (per interface)   |
 | `container.net.rcvd`              | `container.network.io. usage.rx_bytes`     | The number of network bytes received (per interface)   |
-| `container.net.rcvd.packets`      | `container.network.io. usage.rx_packets`   | The number of network packets received (per interface)    |
+| `container.net.rcvd.packets`      | `container.network.io. usage.rx_packets`   | The number of network packets received (per interface)    | -->
 
 See [OpenTelemetry Metrics Mapping][2] for more information.
 

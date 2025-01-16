@@ -1,0 +1,31 @@
+{{/*  
+    Render a HTML table from a CSV file located in the assets/_data/semantic-core directory (Global resource).
+    CSV file should be an 2D array with the first array/row as the header.
+    
+    resource: string - name of the CSV file.
+*/}}
+
+{{ $resource_path := print "_data/semantic-core/" (.Get "resource")}}
+{{ $resource := resources.Get $resource_path}}
+
+{{ if not $resource }}
+    {{ warnf "Resource %s not found" $resource_path }}
+    <div class="alert alert-warning">
+        <span>Table not found!</span>
+    </div>
+{{ else }}
+    <table>
+    {{ range $k, $row := (unmarshal $resource) }}
+        <tr>
+        {{ range $row }}
+            {{ if (not $k) }}
+                {{ $header := cond (eq . "dd") "Datadog" .}}
+                <th>{{ $header | upper  }}</th>
+            {{ else }}
+                <td>{{ . | markdownify }}</td>
+            {{ end }}
+        {{ end }}
+        </tr>
+    {{ end }}
+    </table>
+{{ end }}
