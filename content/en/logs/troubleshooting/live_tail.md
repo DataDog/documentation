@@ -48,7 +48,7 @@ Browser plugins and extensions, including ad blockers, sometimes interfere with 
 
 ## Check access
 
-Verify that you have a role assigned to you which has the logs [live tail permission][3]. For more information, see [Datadog roles and permissions][4].
+Verify that you have a role assigned to you which has the [`logs_live_tail`][3] permission. For more information, see [Datadog roles and permissions][4].
 
 Determine whether an administrator configured a [logs restriction query (RBAC)][5] on your Datadog organization. If you lack the necessary permissions to access the logs you are querying in Live Tail, no logs are visible to you. If you believe you should have access to these logs, contact your Datadog account administrator to grant the required permissions.
 
