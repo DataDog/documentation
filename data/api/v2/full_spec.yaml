@@ -11829,6 +11829,233 @@ components:
       type: string
       x-enum-varnames:
       - GCP_SERVICE_ACCOUNT
+    GCPUsageCostConfig:
+      description: GCP Usage Cost config.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/GCPUsageCostConfigAttributes'
+        id:
+          description: The ID of the GCP Usage Cost config.
+          format: int64
+          type: integer
+        type:
+          $ref: '#/components/schemas/GCPUsageCostConfigType'
+      required:
+      - attributes
+      - type
+      type: object
+      x-merge-override:
+        required: false
+    GCPUsageCostConfigAttributes:
+      description: Attributes for a GCP Usage Cost config.
+      properties:
+        account_id:
+          description: The GCP account ID.
+          example: 123456_A123BC_12AB34
+          type: string
+        bucket_name:
+          description: The GCP bucket name used to store the Usage Cost export.
+          example: dd-cost-bucket
+          type: string
+        created_at:
+          description: The timestamp when the GCP Usage Cost config was created.
+          pattern: ^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{6}$
+          type: string
+          x-merge-override:
+            format: false
+        dataset:
+          description: The export dataset name used for the GCP Usage Cost Report.
+          example: billing
+          type: string
+        error_messages:
+          description: The error messages for the GCP Usage Cost config.
+          items:
+            type: string
+          type: array
+        export_prefix:
+          description: The export prefix used for the GCP Usage Cost Report.
+          example: datadog_cloud_cost_usage_export
+          type: string
+        export_project_name:
+          description: The name of the GCP Usage Cost Report.
+          example: dd-cloud-cost-report
+          type: string
+        months:
+          deprecated: true
+          description: The number of months the report has been backfilled.
+          format: int32
+          maximum: 36
+          type: integer
+        project_id:
+          description: The `project_id` of the GCP Usage Cost report.
+          example: my-project-123
+          type: string
+        service_account:
+          description: The unique GCP service account email.
+          example: dd-ccm-gcp-integration@my-environment.iam.gserviceaccount.com
+          type: string
+        status:
+          description: The status of the GCP Usage Cost config.
+          example: active
+          type: string
+        status_updated_at:
+          description: The timestamp when the GCP Usage Cost config status was updated.
+          pattern: ^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{6}$
+          type: string
+          x-merge-override:
+            format: false
+        updated_at:
+          description: The timestamp when the GCP Usage Cost config status was updated.
+          pattern: ^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{6}$
+          type: string
+          x-merge-override:
+            format: false
+      required:
+      - account_id
+      - bucket_name
+      - dataset
+      - export_prefix
+      - export_project_name
+      - service_account
+      - status
+      type: object
+      x-merge-override:
+        required: false
+    GCPUsageCostConfigPatchData:
+      description: GCP Usage Cost config patch data.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/GCPUsageCostConfigPatchRequestAttributes'
+        type:
+          $ref: '#/components/schemas/GCPUsageCostConfigPatchRequestType'
+      required:
+      - attributes
+      - type
+      type: object
+      x-merge-override:
+        required: false
+    GCPUsageCostConfigPatchRequest:
+      description: GCP Usage Cost config patch request.
+      properties:
+        data:
+          $ref: '#/components/schemas/GCPUsageCostConfigPatchData'
+      required:
+      - data
+      type: object
+    GCPUsageCostConfigPatchRequestAttributes:
+      description: Attributes for GCP Usage Cost config patch request.
+      properties:
+        is_enabled:
+          description: Whether or not the Cloud Cost Management account is enabled.
+          example: true
+          type: boolean
+      required:
+      - is_enabled
+      type: object
+    GCPUsageCostConfigPatchRequestType:
+      default: gcp_usage_cost_config_patch_request
+      description: Type of GCP Usage Cost config patch request.
+      enum:
+      - gcp_usage_cost_config_patch_request
+      example: gcp_usage_cost_config_patch_request
+      type: string
+      x-enum-varnames:
+      - GCP_USAGE_COST_CONFIG_PATCH_REQUEST
+    GCPUsageCostConfigPostData:
+      description: GCP Usage Cost config post data.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/GCPUsageCostConfigPostRequestAttributes'
+        type:
+          $ref: '#/components/schemas/GCPUsageCostConfigPostRequestType'
+      required:
+      - attributes
+      - type
+      type: object
+    GCPUsageCostConfigPostRequest:
+      description: GCP Usage Cost config post request.
+      properties:
+        data:
+          $ref: '#/components/schemas/GCPUsageCostConfigPostData'
+      required:
+      - data
+      type: object
+    GCPUsageCostConfigPostRequestAttributes:
+      description: Attributes for GCP Usage Cost config post request.
+      properties:
+        account_id:
+          description: The GCP account ID.
+          example: 123456_A123BC_12AB34
+          type: string
+        bucket_name:
+          description: The GCP bucket name used to store the Usage Cost export.
+          example: dd-cost-bucket
+          type: string
+        dataset:
+          description: The export dataset name used for the GCP Usage Cost report.
+          example: billing
+          type: string
+        export_prefix:
+          description: The export prefix used for the GCP Usage Cost report.
+          example: datadog_cloud_cost_usage_export
+          type: string
+        export_project_name:
+          description: The name of the GCP Usage Cost report.
+          example: dd-cloud-cost-report
+          type: string
+        is_enabled:
+          description: Whether or not the Cloud Cost Management account is enabled.
+          type: boolean
+        months:
+          description: The month of the report.
+          format: int32
+          maximum: 36
+          type: integer
+        service_account:
+          description: The unique GCP service account email.
+          example: dd-ccm-gcp-integration@my-environment.iam.gserviceaccount.com
+          type: string
+      required:
+      - account_id
+      - bucket_name
+      - dataset
+      - export_prefix
+      - export_project_name
+      - service_account
+      type: object
+    GCPUsageCostConfigPostRequestType:
+      default: gcp_usage_cost_config_post_request
+      description: Type of GCP Usage Cost config post request.
+      enum:
+      - gcp_usage_cost_config_post_request
+      example: gcp_usage_cost_config_post_request
+      type: string
+      x-enum-varnames:
+      - GCP_USAGE_COST_CONFIG_POST_REQUEST
+    GCPUsageCostConfigResponse:
+      description: Response of GCP Usage Cost config.
+      properties:
+        data:
+          $ref: '#/components/schemas/GCPUsageCostConfig'
+      type: object
+    GCPUsageCostConfigType:
+      default: gcp_usage_cost_config
+      description: Type of GCP Usage Cost config.
+      enum:
+      - gcp_usage_cost_config
+      example: gcp_usage_cost_config
+      type: string
+      x-enum-varnames:
+      - GCP_USAGE_COST_CONFIG
+    GCPUsageCostConfigsResponse:
+      description: List of GCP Usage Cost configs.
+      properties:
+        data:
+          description: A GCP Usage Cost config.
+          items:
+            $ref: '#/components/schemas/GCPUsageCostConfig'
+          type: array
+      type: object
     GetActionConnectionResponse:
       description: The response for found connection
       properties:
@@ -33601,6 +33828,164 @@ paths:
       x-menu-order: 12
       x-undo:
         type: safe
+  /api/v2/cost/gcp_uc_config:
+    get:
+      description: List the GCP Usage Cost configs.
+      operationId: ListCostGCPUsageCostConfigs
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GCPUsageCostConfigsResponse'
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - cloud_cost_management_read
+      summary: List Cloud Cost Management GCP Usage Cost configs
+      tags:
+      - Cloud Cost Management
+      x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - cloud_cost_management_read
+      x-undo:
+        type: safe
+    post:
+      description: Create a Cloud Cost Management account for an GCP Usage Cost config.
+      operationId: CreateCostGCPUsageCostConfig
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GCPUsageCostConfigPostRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GCPUsageCostConfigResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - cloud_cost_management_write
+      summary: Create Cloud Cost Management GCP Usage Cost config
+      tags:
+      - Cloud Cost Management
+      x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - cloud_cost_management_write
+      x-undo:
+        type: idempotent
+  /api/v2/cost/gcp_uc_config/{cloud_account_id}:
+    delete:
+      description: Archive a Cloud Cost Management account.
+      operationId: DeleteCostGCPUsageCostConfig
+      parameters:
+      - $ref: '#/components/parameters/CloudAccountID'
+      responses:
+        '204':
+          description: No Content
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - cloud_cost_management_write
+      summary: Delete Cloud Cost Management GCP Usage Cost config
+      tags:
+      - Cloud Cost Management
+      x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - cloud_cost_management_write
+      x-undo:
+        type: idempotent
+    patch:
+      description: Update the status of an GCP Usage Cost config (active/archived).
+      operationId: UpdateCostGCPUsageCostConfig
+      parameters:
+      - $ref: '#/components/parameters/CloudAccountID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GCPUsageCostConfigPatchRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GCPUsageCostConfigsResponse'
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - cloud_cost_management_write
+      summary: Update Cloud Cost Management GCP Usage Cost config
+      tags:
+      - Cloud Cost Management
+      x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - cloud_cost_management_write
+      x-undo:
+        type: idempotent
   /api/v2/cost_by_tag/active_billing_dimensions:
     get:
       description: Get active billing dimensions for cost attribution. Cost data for
@@ -51014,8 +51399,8 @@ tags:
     for more information.
   name: Case Management
 - description: The Cloud Cost Management API allows you to set up, edit, and delete
-    Cloud Cost Management accounts for AWS and Azure. You can query your cost data
-    by using the [Metrics endpoint](https://docs.datadoghq.com/api/latest/metrics/#query-timeseries-data-across-multiple-products)
+    Cloud Cost Management accounts for AWS, Azure, and GCP. You can query your cost
+    data by using the [Metrics endpoint](https://docs.datadoghq.com/api/latest/metrics/#query-timeseries-data-across-multiple-products)
     and the `cloud_cost` data source. For more information, see the [Cloud Cost Management
     documentation](https://docs.datadoghq.com/cloud_cost_management/).
   name: Cloud Cost Management

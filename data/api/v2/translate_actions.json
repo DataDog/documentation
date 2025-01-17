@@ -363,6 +363,26 @@
     "description": "Fetch the specified Custom Costs file.",
     "summary": "Get Custom Costs file"
   },
+  "ListCostGCPUsageCostConfigs": {
+    "description": "List the GCP Usage Cost configs.",
+    "summary": "List Cloud Cost Management GCP Usage Cost configs"
+  },
+  "CreateCostGCPUsageCostConfig": {
+    "description": "Create a Cloud Cost Management account for an GCP Usage Cost config.",
+    "summary": "Create Cloud Cost Management GCP Usage Cost config",
+    "request_description": "",
+    "request_schema_description": "GCP Usage Cost config post request."
+  },
+  "DeleteCostGCPUsageCostConfig": {
+    "description": "Archive a Cloud Cost Management account.",
+    "summary": "Delete Cloud Cost Management GCP Usage Cost config"
+  },
+  "UpdateCostGCPUsageCostConfig": {
+    "description": "Update the status of an GCP Usage Cost config (active/archived).",
+    "summary": "Update Cloud Cost Management GCP Usage Cost config",
+    "request_description": "",
+    "request_schema_description": "GCP Usage Cost config patch request."
+  },
   "GetActiveBillingDimensions": {
     "description": "Get active billing dimensions for cost attribution. Cost data for a given month becomes available no later than the 19th of the following month.",
     "summary": "Get active billing dimensions for cost attribution"
