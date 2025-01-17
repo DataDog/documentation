@@ -72,7 +72,7 @@ In Datadog, view the [Data Jobs Monitoring][2] page to see a list of your Airflo
 ## Requirements
 
 * [Apache Airflow 2.5.0][1] or later
-* [apache-airflow-providers-openlineage][2] or [openlineage-airflow][10] depending on your Airflow version
+* [apache-airflow-providers-openlineage][2] or [openlineage-airflow][8] depending on your Airflow version
 
 ## Setup
 
@@ -103,7 +103,7 @@ To get started, follow the instructions below.
 
    * Replace `<DD_DATA_OBSERVABILITY_INTAKE>` fully with `https://data-obs-intake.`{{< region-param key="dd_site" code="true" >}}.
    * Replace `<DD_API_KEY>` fully with your valid [Datadog API key][5].
-   * If you're using **Airflow v2.7 or v2.8**, please also add these two environment variables to the startup script. This fixes an OpenLinage config issue reported [here][9].
+   * If you're using **Airflow v2.7 or v2.8**, please also add these two environment variables to the startup script. This fixes an OpenLinage config issue fixed at `apache-airflow-providers-openlineage` v1.7, while Airflow v2.7 and v2.8 are on previous versions.
       ```shell
       #!/bin/sh
       # Required for Airflow v2.7 & v2.8 only
@@ -122,8 +122,7 @@ To get started, follow the instructions below.
 [5]: https://docs.datadoghq.com/account_management/api-app-keys/#api-keys
 [6]: https://docs.aws.amazon.com/mwaa/latest/userguide/mwaa-create-role.html
 [7]: https://app.datadoghq.com/data-jobs/
-[9]: https://github.com/apache/airflow/pull/37994
-[10]: https://openlineage.io/docs/integrations/airflow/
+[8]: https://openlineage.io/docs/integrations/airflow/
 
 ## Validation
 
