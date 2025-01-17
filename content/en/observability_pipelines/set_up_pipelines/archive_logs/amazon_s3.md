@@ -87,11 +87,6 @@ Enter the following information based on your selected logs destinations.
 {{% observability_pipelines/destination_settings/amazon_opensearch %}}
 
 {{% /tab %}}
-{{% tab "Amazon Security Lake" %}}
-
-{{% observability_pipelines/destination_settings/amazon_security_lake %}}
-
-{{% /tab %}}
 {{% tab "Chronicle" %}}
 
 {{% observability_pipelines/destination_settings/chronicle %}}
@@ -275,11 +270,6 @@ Follow the instructions for the cloud provider you are using to archive your log
 {{% tab "Amazon OpenSearch" %}}
 
 {{% observability_pipelines/destination_env_vars/amazon_opensearch %}}
-
-{{% /tab %}}
-{{% tab "Amazon Security Lake" %}}
-
-{{% observability_pipelines/destination_env_vars/amazon_security_lake %}}
 
 {{% /tab %}}
 {{% tab "Chronicle" %}}

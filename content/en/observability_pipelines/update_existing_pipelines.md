@@ -95,11 +95,6 @@ On the the Worker installation page:
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/amazon_opensearch %}}
 
 {{% /tab %}}
-{{% tab "Amazon Security Lake" %}}
-
-{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/amazon_security_lake %}}
-
-{{% /tab %}}
 {{% tab "Chronicle" %}}
 
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/chronicle %}}

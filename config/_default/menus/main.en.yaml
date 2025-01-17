@@ -5322,11 +5322,6 @@ menu:
       url: observability_pipelines/destinations/amazon_s3/
       parent: observability_pipelines_destinations
       weight: 802
-    - name: Amazon Security Lake
-      identifier: observability_pipelines_destinations_amazon_security_lake
-      url: observability_pipelines/destinations/amazon_security_lake/
-      parent: observability_pipelines_destinations
-      weight: 803
     - name: Azure Storage
       identifier: observability_pipelines_azure_storage
       url: observability_pipelines/destinations/azure_storage/
