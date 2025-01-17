@@ -32,9 +32,6 @@ Error Tracking simplifies debugging by grouping thousands of similar errors into
 - Set monitors on error tracking events, such as high error volume or new issues
 - Follow issues over time to know when they first started, if they are still ongoing, and how often they occur
 - Automatically capture local variable values so you can reproduce exceptions, simplifying the process to resolve errors quickly
-- Review incoming issues organized by the [suspected cause][1], a label that is automatically assigned to better streamline and understand recurring problems
 
 ## Further Reading
 {{< partial name="whats-next/whats-next.html" >}}
-
-[1]: /error_tracking/backend/suspected_cause
