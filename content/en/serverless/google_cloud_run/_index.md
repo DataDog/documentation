@@ -10,7 +10,7 @@ further_reading:
 
 ## Overview
 
-Google Cloud Run is a fully managed serverless platform for deploying and scaling container-based applications. Datadog provides monitoring and log collection for Cloud Run through the [Google Cloud integration][1]. 
+Google Cloud Run is a fully managed serverless platform for deploying and scaling container-based applications. Datadog provides monitoring and log collection for Cloud Run through the [Google Cloud integration][1].
 
 <div class="alert alert-info">To instrument your Google Cloud Run applications with <code>serverless-init</code>, see <a href="/serverless/guide/gcr_serverless_init">Instrument Google Cloud Run with serverless-init</a>.</div>
 
@@ -200,7 +200,7 @@ To set up logging in your application, see [PHP Log Collection][3]. To set up tr
 
 1. Go to **Volume Mounts** and add the same shared volume as you did for the sidecar container.
    **Note**: Save your changes by selecting **Done**. Do not deploy changes until the final step.
-1. Go to **Variables & Secrets** and add the same [environment variables](#environment-variables) that you set for the sidecar container. Omit `DD_HEALTH_PORT`.
+1. Go to **Variables & Secrets** and add the same `DD_SERVICE` environment variable that you set for the sidecar container.
 1. Go to **Settings**. In the **Container start up order** drop-down menu, select your sidecar.
 1. Deploy your main application.
 
@@ -208,7 +208,7 @@ To set up logging in your application, see [PHP Log Collection][3]. To set up tr
 
 {{% /tab %}}
 {{% tab "YAML deploy" %}}
-To deploy your Cloud Run service with a YAML service specification:
+To deploy your Cloud Run service with YAML service specification, use the following example configuration file. In this example, the environment variables, startup health check, and volume mount are already added. If you don't want to enable logs, remove the shared volume. Ensure the container port for the main container is the same as the one exposed in your Dockerfile/service.
 
 1. Create a YAML file that contains the following:
 
@@ -229,22 +229,8 @@ To deploy your Cloud Run service with a YAML service specification:
        spec:
          containers:
            - env:
-               - name: DD_SERVERLESS_LOG_PATH
-                 value: shared-volume/logs/*.log
-               - name: DD_SITE
-                 value: '<DATADOG_SITE>'
-               - name: DD_ENV
-                 value: serverless
-               - name: DD_API_KEY
-                 value: '<API_KEY>'
                - name: DD_SERVICE
                  value: '<SERVICE_NAME>'
-               - name: DD_VERSION
-                 value: '<VERSION>'
-               - name: DD_LOG_LEVEL
-                 value: debug
-               - name: DD_LOGS_INJECTION
-                 value: 'true'
              image: '<CONTAINER_IMAGE>'
              name: run-sidecar-1
              ports:
@@ -306,16 +292,16 @@ To deploy your Cloud Run service with a YAML service specification:
        - latestRevision: true
          percent: 100
    ```
-   In this example, the environment variables, startup health check, and volume mount are already added. If you don't want to enable logs, remove the shared volume. Ensure the container port for the main container is the same as the one exposed in your Dockerfile/service. 
+   In this example, the environment variables, startup health check, and volume mount are already added. If you don't want to enable logs, remove the shared volume. Ensure the container port for the main container is the same as the one exposed in your Dockerfile/service.
 1. Supply placeholder values:
    - `<SERVICE_NAME>`: A name for your service. For example, `gcr-sidecar-test`. See [Unified Service Tagging][2].
    - `<LOCATION>`: The region you are deploying your service in. For example, `us-central`.
    - `<DATADOG_SITE>`: Your [Datadog site][3], {{< region-param key="dd_site" code="true" >}}.
-   - `<API_KEY>`: Your [Datadog API key][1]. 
+   - `<API_KEY>`: Your [Datadog API key][1].
    - `<VERSION>`: The version number of your deployment. See [Unified Service Tagging][2].
    - `<CONTAINER_IMAGE>`: The image of the code you are deploying to Cloud Run. For example, `us-docker.pkg.dev/cloudrun/container/hello`.
    - `<SERVICE_ACCOUNT>`: The name of your Google Cloud service account.
-   
+
 1. Run:
    ```bash
    gcloud run services replace <FILENAME>.yaml
@@ -383,40 +369,8 @@ resource "google_cloud_run_service" "terraform_with_sidecar" {
 
         # Environment variables for the main container
         env {
-          name  = "DD_SITE"
-          value = "<DATADOG_SITE>"
-        }
-        env {
-          name  = "DD_SERVERLESS_LOG_PATH"
-          value = "shared-volume/logs/*.log"
-        }
-        env {
-          name  = "DD_ENV"
-          value = "serverless"
-        }
-        env {
-          name  = "DD_API_KEY"
-          value = "<API_KEY>"
-        }
-        env {
           name  = "DD_SERVICE"
           value = "<SERVICE_NAME>"
-        }
-        env {
-          name  = "DD_VERSION"
-          value = "<VERSION>"
-        }
-        env {
-          name  = "DD_LOG_LEVEL"
-          value = "debug"
-        }
-        env {
-          name  = "DD_LOGS_INJECTION"
-          value = "true"
-        }
-        env {
-          name  = "FUNCTION_TARGET"
-          value = "<FUNCTION_NAME>" # only needed for cloud run functions
         }
 
         # Resource limits for the main container
@@ -450,7 +404,7 @@ resource "google_cloud_run_service" "terraform_with_sidecar" {
           timeout_seconds       = 1
         }
 
-        # Environment variables for the main container
+        # Environment variables for the sidecar container
         env {
           name  = "DD_SITE"
           value = "<DATADOG_SITE>"
@@ -482,10 +436,6 @@ resource "google_cloud_run_service" "terraform_with_sidecar" {
         env {
           name  = "DD_LOGS_INJECTION"
           value = "true"
-        }
-        env {
-          name  = "FUNCTION_TARGET"
-          value = "<FUNCTION_NAME>" # only needed for cloud run functions
         }
         env {
           name  = "DD_HEALTH_PORT"
@@ -521,7 +471,7 @@ resource "google_cloud_run_service_iam_member" "invoker" {
 
 Supply placeholder values:
 - `<PROJECT_ID>`: Your Google Cloud project ID.
-- `<LOCATION>`: The region you are deploying your service in. For example, `us-central1`. 
+- `<LOCATION>`: The region you are deploying your service in. For example, `us-central1`.
 - `<SERVICE_NAME>`: A name for your service. For example, `gcr-sidecar-test`. See [Unified Service Tagging][2].
 - `<CONTAINER_IMAGE>`: The image of the code you are deploying to Cloud Run.
 - `<DATADOG_SITE>`: Your [Datadog site][3], {{< region-param key="dd_site" code="true" >}}.
