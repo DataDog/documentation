@@ -10,7 +10,12 @@
 {{- $url := split $img "/" -}}
 {{- $app_listings_bucket := "dd-app-listings" -}}
 
-{{- if eq (index $url 0) "integrations" -}}
+{{- if strings.Contains .Destination "https://raw.githubusercontent.com" -}}
+<img src="{{ (.Destination | safeURL) }}"
+  {{- with .PlainText }} alt="{{ . }}"{{ end -}}
+  {{- with .Title }} title="{{ . }}"{{ end -}}
+>
+{{- else if eq (index $url 0) "integrations" -}}
 <img src="{{ (print site.Params.img_url "images/" (.Destination | safeURL)) }}"
   {{- with .PlainText }} alt="{{ . }}"{{ end -}}
   {{- with .Title }} title="{{ . }}"{{ end -}}
