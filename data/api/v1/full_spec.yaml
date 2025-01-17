@@ -6891,6 +6891,62 @@ components:
       - FIREFOX_LAPTOP_LARGE
       - FIREFOX_TABLET
       - FIREFOX_MOBILE_SMALL
+    MonitorFormulaAndFunctionCostAggregator:
+      description: Aggregation methods for metric queries.
+      enum:
+      - avg
+      - sum
+      - max
+      - min
+      - last
+      - area
+      - l2norm
+      - percentile
+      - stddev
+      example: avg
+      type: string
+      x-enum-varnames:
+      - AVG
+      - SUM
+      - MAX
+      - MIN
+      - LAST
+      - AREA
+      - L2NORM
+      - PERCENTILE
+      - STDDEV
+    MonitorFormulaAndFunctionCostDataSource:
+      description: Data source for cost queries.
+      enum:
+      - metrics
+      - cloud_cost
+      - datadog_usage
+      example: cloud_cost
+      type: string
+      x-enum-varnames:
+      - METRICS
+      - CLOUD_COST
+      - DATADOG_USAGE
+    MonitorFormulaAndFunctionCostQueryDefinition:
+      description: A formula and functions cost query.
+      properties:
+        aggregator:
+          $ref: '#/components/schemas/MonitorFormulaAndFunctionCostAggregator'
+        data_source:
+          $ref: '#/components/schemas/MonitorFormulaAndFunctionCostDataSource'
+        name:
+          description: Name of the query for use in formulas.
+          example: query1
+          type: string
+        query:
+          description: The monitor query.
+          example: sum:all.cost{*}.rollup(sum, 86400)
+          type: string
+      required:
+      - name
+      - data_source
+      - query
+      type: object
     MonitorFormulaAndFunctionEventAggregation:
       description: Aggregation methods for event platform queries.
       enum:
@@ -7041,6 +7097,7 @@ components:
       description: A formula and function query.
       oneOf:
       - $ref: '#/components/schemas/MonitorFormulaAndFunctionEventQueryDefinition'
+      - $ref: '#/components/schemas/MonitorFormulaAndFunctionCostQueryDefinition'
     MonitorGroupSearchResponse:
       description: The response of a monitor group search.
       example:
@@ -23882,12 +23939,18 @@ components:
             continuous_profiler_pgo_read: Read and query Continuous Profiler data
               for Profile-Guided Optimization (PGO).
             create_webhooks: Create webhooks integrations.
+            dashboards_embed_share: Create, modify, and delete shared dashboards with
+              share type 'embed'.
+            dashboards_invite_share: Create, modify, and delete shared dashboards
+              with share type 'invite'.
             dashboards_public_share: Generate public and authenticated links to share
               dashboards or embeddable graphs externally.
             dashboards_read: View dashboards.
             dashboards_write: Create and change dashboards.
             data_scanner_read: View Data Scanner configurations.
             data_scanner_write: Edit Data Scanner configurations.
+            embeddable_graphs_share: Generate public links to share embeddable graphs
+              externally.
             events_read: Read Events data.
             hosts_read: List hosts and their attributes.
             incident_notification_settings_write: Configure Incidents Notification
@@ -23906,6 +23969,7 @@ components:
               configuring allowed login methods, creating child orgs, subscribing
               & unsubscribing from apps in the marketplace, and enabling & disabling
               Remote Configuration for the entire organization.
+            security_comments_read: Read comments of vulnerabilities.
             security_monitoring_filters_read: Read Security Filters.
             security_monitoring_filters_write: Create, edit, and delete Security Filters.
             security_monitoring_findings_read: View a list of findings that include
@@ -23937,7 +24001,7 @@ components:
               Access Manage permission.
             teams_read: Read Teams data. A User with this permission can view Team
               names, metadata, and which Users are on each Team.
-            test_visibility_read: View Test Visibility.
+            test_optimization_read: View Test Optimization.
             timeseries_query: Query Timeseries data.
             usage_read: View your organization's usage and usage attribution.
             user_access_invite: Invite other users to your organization.
