@@ -21,7 +21,7 @@ All features in Product Analytics are in limited availability. To request access
 
 Pathway diagrams allows you to visualize all user journeys across your application to analyze the critical path.
 
-{{< img src="/product_analytics/journeys/pathways/pathways-overview-3.png" alt="The default Pathways diagram for an app" style="width:90%;" >}}
+{{< img src="/product_analytics/journeys/pathways/pathways-overview.png" alt="The default Pathways diagram for an app" style="width:90%;" >}}
 
 Each node represents a view the user visited. The thickness of each node represents the count of user sessions on that page. A page with fewer visitors have a thinner node in the diagram.
 
@@ -44,7 +44,7 @@ You can use the lefthand menu to customize this diagram to display:
 
 The example below displays the four steps that users in the United States take after visiting `/department/lighting`:
 
-{{< img src="/product_analytics/journeys/pathways/customized-pathways-1.png" alt="A customized Pathways diagram for an app" style="width:90%;" >}}
+{{< img src="/product_analytics/journeys/pathways/customized-pathways.png" alt="A customized Pathways diagram for an app" style="width:90%;" >}}
 
 ### Graph all views containing a given phrase
 
@@ -52,7 +52,7 @@ Pathways diagrams support [Datadog wildcards][2], allowing you to build a diagra
 
 To match multiple routes, type a wildcard instead of choosing a single view name. The example below displays the five steps that users take after visiting any view matching `/department/*`:
 
-{{< img src="/product_analytics/journeys/pathways/pathways-wildcard-2.png" alt="A Pathways diagram that uses a wildcard to match several routes" style="width:90%;" >}}
+{{< img src="/product_analytics/journeys/pathways/pathways-wildcard.png" alt="A Pathways diagram that uses a wildcard to match several routes" style="width:90%;" >}}
 
 ## Analyze a Pathways diagram
 
@@ -60,7 +60,7 @@ You can hover over a diagram node to view the number of sessions that included v
 
 Click a node for a list of analysis options, such as viewing a sample [Session Replay][3] or building a Pathways diagram that starts with that view.
 
-{{< img src="/product_analytics/journeys/pathways/pathways-node-interaction.png" alt="The actions menu of a Pathways diagram node" style="width:90%;" >}}
+{{< img src="/product_analytics/journeys/pathways/pathways-node.png" alt="The actions menu of a Pathways diagram node" style="width:90%;" >}}
 
 ### Convert the diagram to a funnel
 
@@ -68,7 +68,7 @@ Click a node for a list of analysis options, such as viewing a sample [Session R
 2. In the Pathways diagram, click the nodes of the views you want to include in the funnel.
 3. Click **Create Funnel from Selection**.
 
-{{< img src="/product_analytics/journeys/pathways/pathways-funnel-conversion.png" alt="A Pathway to funnel conversion in process" style="width:90%;" >}}
+{{< img src="/product_analytics/journeys/pathways/pathways-build-funnel.png" alt="A Pathway to funnel conversion in process" style="width:90%;" >}}
 
 ## Troubleshooting
 

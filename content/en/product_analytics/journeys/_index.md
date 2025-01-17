@@ -17,7 +17,7 @@ Journeys help you track user journeys from end-to-end to discover the different 
 
 ## Pathways
 
-{{< img src="/product_analytics/journeys/pa-journeys-1.png" alt="Use Pathways to visualize all user journeys across your application to analyze the critical path">}}
+{{< img src="/product_analytics/journeys/pa-pathways-1.png" alt="Use Pathways to visualize all user journeys across your application to analyze the critical path">}}
 
 [Pathway diagrams][1] allow you to visualize all user journeys across your application to identify the most important contributions to a flow.
 
@@ -27,15 +27,8 @@ Journeys help you track user journeys from end-to-end to discover the different 
 
 With [funnel analysis][1], you can understand the end-to-end conversion of a single key workflow. You can get a detailed drilldown in the sidepanel to understand why conversation rates are what they are. For example, was there a performance issue that caused user dropoff? Are they experiencing an error that occurred in a recent release? Watch a Session Replay of a user who converted or dropped off to see exactly what happened.
 
-## Conversion
-
-{{< img src="/product_analytics/journeys/pa-conversions.png" alt="View conversion rate values over time in graphs ">}}
-
-You can view [conversion rates][3] over time by showing the conversion rate value in graphs. **Note**: Only completed RUM sessions contribute to conversion rates.
-
 ## Further reading
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /product_analytics/journeys/funnel_analysis
-[2]: /product_analytics/journeys/sankey
-[3]: https://app.datadoghq.com/product-analytics/user-journey/conversion?
+[1]: /product_analytics/journeys/pathways
+[2]: /product_analytics/journeys/funnel_analysis

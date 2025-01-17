@@ -7093,11 +7093,6 @@ menu:
       parent: pa_journeys
       identifier: pa_funnel_analysis
       weight: 202
-    - name: Conversions
-      url: product_analytics/journeys/conversions
-      parent: pa_journeys
-      identifier: pa_conversions
-      weight: 203
     - name: Heatmaps
       url: product_analytics/heatmaps
       parent: product_analytics

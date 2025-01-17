@@ -50,21 +50,20 @@ User retention is a metric for measuring the percentage of active users who cont
 
 [User journeys][3] allow you to measure and report on the impact of every feature change - from backend bottlenecks to user frustrations - so that they can be appropriately optimized. Identify the ideal path for feature adoption and user conversion.
 
-{{< img src="/product_analytics/journeys/pa-funnel.png" alt="Understand end-to-end conversions with Funnel Analysis.">}}
+{{< img src="/product_analytics/journeys/pa-funnel-1.png" alt="Understand end-to-end conversions with Funnel Analysis.">}}
 
 See different visualizations of the user experience when interacting with your application:
 
-- **[Funnel][4]**: Measure the conversion rate end-to-end of a given workflow.
-- **[Pathways][5]**: Explore aggregated workflows in a single visualization to aid in answering questions about user journeys.
-- **[Conversion][6]**: Track conversion rates over time and compare it against specific attributes that may have affected conversion rates, such as browser type or geography.
+- **[Funnel][4]**: Measure the **conversion rate** and **time to convert** from end-to-end of a given workflow. 
+- **[Pathways][5]**: Explore aggregated workflows in a single visualization to aid in answering questions about user journeys. In addition, track conversion rates over time and compare it against specific attributes that may have affected conversion rates, such as browser type or geography.
 
 ## Create user segments
 
-Segments are users grouped by specific characteristics or behaviors. [Segmentation][7] in Datadog allows you to analyze and understand specific groups or segments of your user base.
+Segments are users grouped by specific characteristics or behaviors. [Segmentation][6] in Datadog allows you to analyze and understand specific groups or segments of your user base.
 
 ## Visualize user interactions with heatmaps
 
-[Heatmaps][8] visualize the most interacted with elements on a page to see where hot spots of activity are, along with analyzing scroll depth to see how far users scrolled down a given page. You can view every swipe, scroll, and click with a pixel-perfect reproduction of exactly what users went through on both browser and mobile applications to identify high-or low-performing content.
+[Heatmaps][7] visualize the most interacted with elements on a page to see where hot spots of activity are, along with analyzing scroll depth to see how far users scrolled down a given page. You can view every swipe, scroll, and click with a pixel-perfect reproduction of exactly what users went through on both browser and mobile applications to identify high-or low-performing content.
 
 {{< img src="real_user_monitoring/heatmaps/heatmap_v2.png" alt="An overview of the heatmap functionality." style="width:100%;">}}
 
@@ -76,7 +75,6 @@ Segments are users grouped by specific characteristics or behaviors. [Segmentati
 [3]: /product_analytics/journeys
 [4]: /product_analytics/journeys/funnel_analysis
 [5]: /product_analytics/journeys/pathways
-[6]: /product_analytics/journeys#conversion
-[7]: /product_analytics/segmentation/
-[8]: /product_analytics/heatmaps
-[9]: https://app.datadoghq.com/rum/
+[6]: /product_analytics/segmentation/
+[7]: /product_analytics/heatmaps
+[8]: https://app.datadoghq.com/rum/
