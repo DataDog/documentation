@@ -115,7 +115,7 @@
         contents:
 
         - action: integrations
-          branch: main
+          branch: moreauowen/update-readmes-with-new-images
           globs:
           - "*/metadata.csv"
           - "*/manifest.json"
