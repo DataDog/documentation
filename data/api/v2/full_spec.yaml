@@ -39961,6 +39961,14 @@ paths:
         required: false
         schema:
           type: string
+      - description: Filter metrics that are used in dashboards, monitors, notebooks,
+          or SLOs.
+        example: true
+        in: query
+        name: filter[related_assets]
+        required: false
+        schema:
+          type: boolean
       - description: 'The number of seconds of look back (from now) to apply to a
           filter[tag] or filter[queried] query.
 
