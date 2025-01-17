@@ -6,6 +6,7 @@ aliases:
   - /real_user_monitoring/flutter/web_view_tracking
   - /real_user_monitoring/reactnative/web_view_tracking
   - /real_user_monitoring/kotlin-multiplatform/web_view_tracking
+  - /real_user_monitoring/mobile_and_tv_monitoring/unity/web_view_tracking
 further_reading:
   - link: https://github.com/DataDog/dd-sdk-android
     tag: "Source Code"

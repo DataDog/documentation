@@ -2,7 +2,7 @@
 title: App Builder
 disable_toc: false
 further_reading:
-- link: "/service_management/workflows/actions_catalog/"
+- link: "/actions/actions_catalog/"
   tag: "Documentation"
   text: "Actions Catalog"
 - link: "https://www.datadoghq.com/blog/datadog-app-builder-low-code-internal-tools/"
