@@ -5172,6 +5172,54 @@ menu:
       url: /api/latest/cloud-cost-management/
       identifier: cloud-cost-management
       generated: true
+    - name: Update Cloud Cost Management GCP Usage Cost config
+      url: '#update-cloud-cost-management-gcp-usage-cost-config'
+      identifier: cloud-cost-management-update-cloud-cost-management-gcp-usage-cost-config
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateCostGCPUsageCostConfig
+        unstable: []
+        order: 2
+    - name: Delete Cloud Cost Management GCP Usage Cost config
+      url: '#delete-cloud-cost-management-gcp-usage-cost-config'
+      identifier: cloud-cost-management-delete-cloud-cost-management-gcp-usage-cost-config
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteCostGCPUsageCostConfig
+        unstable: []
+        order: 4
+    - name: Create Cloud Cost Management GCP Usage Cost config
+      url: '#create-cloud-cost-management-gcp-usage-cost-config'
+      identifier: cloud-cost-management-create-cloud-cost-management-gcp-usage-cost-config
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateCostGCPUsageCostConfig
+        unstable: []
+        order: 3
+    - name: List Cloud Cost Management GCP Usage Cost configs
+      url: '#list-cloud-cost-management-gcp-usage-cost-configs'
+      identifier: cloud-cost-management-list-cloud-cost-management-gcp-usage-cost-configs
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListCostGCPUsageCostConfigs
+        unstable: []
+        order: 1
     - name: Get Custom Costs file
       url: '#get-custom-costs-file'
       identifier: cloud-cost-management-get-custom-costs-file
