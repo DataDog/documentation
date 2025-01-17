@@ -12,17 +12,20 @@ further_reading:
       text: 'Getting Started with Datadog Agent'
 ---
 
-Dynamic Instrumentation is a feature of supporting Datadog tracing libraries. If you are already using [APM to collect traces][1] for your application, ensure your Agent and tracing library are on the required version, and go directly to enabling Dynamic Instrumentation in step 4.
+{{< beta-callout-private url="https://forms.gle/TODO" >}}
+    <p><strong>Dynamic Instrumentation for Ruby is in limited preview</strong></p>
+    <p>It is not available to all customers. Request access to join the waiting list.</p>
+    <p>Certain limitations apply to the limited preview. See <a href="#limitations">Limitations</a> for more information.</p>
+{{< /beta-callout-private >}}
+
+Dynamic Instrumentation is a feature of supporting Datadog tracing libraries. If you are already using [APM to collect traces][1] for your application, ensure your Agent and tracing library are on the required version. Then, go directly to enabling Dynamic Instrumentation in step 4.
 
 ## Installation
 
 1. Install or upgrade your Agent to version [7.45.0][7] or higher.
 2. If you don't already have APM enabled, in your Agent configuration, set the `DD_APM_ENABLED` environment variable to `true` and listening to the port `8126/TCP`.
 3. Install or upgrade the Ruby tracing library to version 2.8.0 or higher, by following the [relevant instructions][2].
-
-   **Note**: Dynamic Instrumentation is available in the `dd-trace-ruby` library in versions 2.8.0 and later. Only log probes are currently supported.
-
-4. Run your service with Dynamic Instrumentation enabled by setting the `DD_DYNAMIC_INSTRUMENTATION_ENABLED` environment variable to `true`. Specify `DD_SERVICE`, `DD_ENV`, and `DD_VERSION` Unified Service Tags so you can filter and group your probes and target active clients across these dimensions.
+4. Run your service with Dynamic Instrumentation enabled by setting the `DD_DYNAMIC_INSTRUMENTATION_ENABLED` environment variable to `true`. Specify `DD_SERVICE`, `DD_ENV`, and `DD_VERSION` Unified Service Tags so you can filter and group your instrumentations and target active clients across these dimensions.
 5. After starting your service with Dynamic Instrumentation enabled, you can start using Dynamic Instrumentation on the [APM > Dynamic Instrumentation page][3].
 
 ## Configuration
@@ -39,7 +42,22 @@ Configure Dynamic Instrumentation using the following environment variables:
 
 ## What to do next
 
-See [Dynamic Instrumentation][5] for information about setting snapshot and metric probes and browsing and indexing the data.
+See [Dynamic Instrumentation][5] for information about adding instrumentations and browsing and indexing the data.
+
+## Limitations
+
+Dynamic Instrumentation for Ruby is currently in limited preview, which means it is not available to all customers. To join the waiting list, [fill out this form][6].
+
+The following limitations apply to the limited preview:
+
+### Supported features
+
+- [Dynamic Logs][8] attached to a function/method
+
+### Unsupported features
+
+- Dynamic Logs attached to a specific file/line
+- Dynamic Metrics, Spans, and Span Tags
 
 ## Further reading
 
@@ -50,4 +68,6 @@ See [Dynamic Instrumentation][5] for information about setting snapshot and metr
 [3]: https://app.datadoghq.com/dynamic-instrumentation
 [4]: /getting_started/tagging/unified_service_tagging
 [5]: /dynamic_instrumentation/
+[6]: https://forms.gle/TODO
 [7]: https://app.datadoghq.com/account/settings/agent/latest?platform=overview
+[8]: /dynamic_instrumentation/#creating-log-probes
