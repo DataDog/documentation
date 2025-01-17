@@ -14,7 +14,9 @@ When using OpenTelemetry with Datadog, you might encounter various hostname-rela
 
 ### Different Kubernetes hostname and node name
 
-**Symptom**: When deploying in Kubernetes, the hostname reported by Datadog does not match the expected node name. This is typically the result of missing `k8s.node.name` (and optionally `k8s.cluster.name`) tags.
+**Symptom**: When deploying in Kubernetes, the hostname reported by Datadog does not match the expected node name.
+
+**Cause**: This is typically the result of missing `k8s.node.name` (and optionally `k8s.cluster.name`) tags.
 
 **Resolution**:
 
@@ -57,6 +59,8 @@ For more information on host-identifying attributes, see [Mapping OpenTelemetry 
 
 **Symptom**: In AWS Fargate environments, an incorrect hostname might be reported for traces.
 
+**Cause**: In Fargate environments, the default resource detection may not properly identify the ECS metadata, leading to incorrect hostname assignment.
+
 **Resolution**:
 
 Configure the `resourcedetection` processor in your Collector configuration and enable the `ecs` detector:
@@ -72,6 +76,8 @@ processors:
 ### Gateway collector not forwarding host metadata
 
 **Symptom**: In a gateway deployment, telemetry from multiple hosts appears to come from a single host, or host metadata isn't being properly forwarded.
+
+**Cause**: This occurs when the gateway collector configuration doesn't preserve or properly forward the host metadata attributes from the agent collectors.
 
 **Resolution**:
 
@@ -127,25 +133,30 @@ For more information, see [Mapping OpenTelemetry Semantic Conventions to Infrast
 
 ## Host tag delays after startup
 
-You may experience a delay in host tags appearing on your telemetry data after starting the Datadog Agent or OpenTelemetry Collector. This delay typically lasts under 10 minutes but can extend up to 40-50 minutes in some cases.
+**Symptom**: You may experience a delay in host tags appearing on your telemetry data after starting the Datadog Agent or OpenTelemetry Collector. This delay typically lasts under 10 minutes but can extend up to 40-50 minutes in some cases.
 
-### Symptom
+**Cause**: This delay occurs because host metadata must be processed and indexed by Datadog's backend before tags can be associated with telemetry data.
+
+**Resolution**:
 
 Host tags configured in either the Datadog exporter configuration (`host_metadata::tags`) or the Datadog Agent's `tags` section are not immediately applied to telemetry data. The tags eventually appear after the backend resolves the host metadata.
 
-### Resolution
+Choose your setup for specific instructions:
 
-#### For Datadog Agent OTLP ingestion
+{{< tabs >}}
+{{% tab "Datadog Agent OTLP Ingestion" %}}
 
-Configure the `expected_tags_duration` parameter to bridge the gap until host tags are resolved:
+Configure `expected_tags_duration` in `datadog.yaml` to bridge the gap until host tags are resolved:
 
-{{< code-block lang="yaml" filename="datadog.yaml" disable_copy="true" collapsible="false" >}}
+```yaml
 expected_tags_duration: "15m"
-{{< /code-block >}}
+```
 
 This configuration adds the expected tags to all telemetry for the specified duration (in this example, 15 minutes).
 
-#### For OpenTelemetry Collector
+{{% /tab %}}
+
+{{% tab "OpenTelemetry Collector" %}}
 
 Use the `transform` processor to set your host tags as OTLP attributes. For example, to add environment and team tags:
 
@@ -164,13 +175,18 @@ processors:
 
 This approach combines OpenTelemetry semantic conventions with Datadog-specific host tags to ensure proper functionality in both OpenTelemetry and Datadog environments.
 
+{{% /tab %}}
+{{< /tabs >}}
+
 ## Unable to map 'team' attribute to Datadog team tag
 
 **Symptom**: The team tag is not appearing in Datadog for logs and traces, despite being set as a resource attribute in OpenTelemetry configurations.
 
+**Cause**: This happens because OpenTelemetry resource attributes need explicit mapping to Datadog's tag format using the `ddtags` attribute.
+
 **Resolution**:
 
-Use the OpenTelemetry Collector's transform processor to map the team resource attribute to the ddtags attribute:
+Use the OpenTelemetry Collector's transform processor to map the team resource attribute to the `ddtags` attribute:
 
 ```yaml
 processors:
@@ -198,9 +214,11 @@ To verify the configuration:
 3. Check if the team tag appears in your Datadog logs and traces.
 4. Verify that the team tag functions as expected in filtering and dashboards.
 
-### Container tags not appearing in Containers page
+## Container tags not appearing on Containers page
 
 **Symptom**: Container tags are not appearing on the Containers page in Datadog, which affects container monitoring and management capabilities.
+
+**Cause**: This occurs when container resource attributes aren't properly mapped to Datadog's expected container metadata format.
 
 **Resolution**:
 
@@ -213,17 +231,19 @@ To verify the configuration:
 
 ## Missing metrics in Service Catalog and dashboards
 
-**Symptom**: Metrics are not appearing in the Service Catalog and dashboards despite being properly collected. This typically occurs due to incorrect or improperly mapped semantic conventions.
+**Symptom**: Metrics are not appearing in the Service Catalog and dashboards despite being properly collected.
+
+**Cause**: This typically occurs due to incorrect or improperly mapped semantic conventions.
 
 **Resolution**:
 
 To verify the configuration:
 
-1. Check that your metrics contain the required semantic conventions.
+1. Check that your metrics contain the required [semantic conventions][4].
 2. Verify metric names follow OpenTelemetry naming conventions.
-3. Confirm metrics are being properly translated to Datadog format.
+3. Confirm metrics are being properly translated to the Datadog format.
 
-Note: When working with semantic conventions, ensure you're following the latest OpenTelemetry specification for metric naming and attributes.
+**Note**: When working with semantic conventions, ensure you're following the latest OpenTelemetry specification for metric naming and attributes.
 
 ## Further reading
 
