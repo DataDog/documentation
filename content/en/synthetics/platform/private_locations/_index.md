@@ -463,7 +463,7 @@ Create a new Fargate task definition that matches the following. Replace each pa
 
 {{% tab "Fargate with AWS Secret Manager" %}}
 
-Create a secret in AWS secret manager to store all or part of the previously generated private location configuration. Keep in mind that the `publicKey` cannot be kept as it is in the configuration file. The secret should look like this:
+Create a secret in AWS secret manager to store all or part of the previously generated private location configuration. Keep in mind that the `publicKey` cannot be kept as it is in the configuration file. For example:
 
 ```json
 {
