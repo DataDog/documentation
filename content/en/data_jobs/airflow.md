@@ -24,105 +24,132 @@ To try the preview for Airflow monitoring, follow the setup instructions below.
 {{% tab "Kubernetes" %}}
 ## Requirements
 
-* [Apache Airflow 2.9.0][1] or later
-* [apache-airflow-providers-openlineage 1.11.0][2] or later
+* [Apache Airflow 2.5.0][1] or later
+* [apache-airflow-providers-openlineage][2] or [openlineage-airflow][5] depending on your Airflow version
 
 ## Setup
 
-Data Jobs Monitoring supports Apache Airflow deployments with [apache-airflow-providers-openlineage][2] installed.
-
 To get started, follow the instructions below.
 
-1. Install `openlineage` provider by adding the following into your `requirements.txt` file or wherever your Airflow depedencies are managed:
+1. Install `openlineage` provider for **both Airflow schedulers and Airflow workers** by adding the following into your `requirements.txt` file or wherever your Airflow depedencies are managed:
 
-   ```text
-   apache-airflow-providers-openlineage>=1.11.0
-   ```
+    For **Airflow 2.7 or later**:
+
+      ```text
+      apache-airflow-providers-openlineage
+      ```
+
+    For **Airflow 2.5 & 2.6** :
+
+      ```text
+      openlineage-airflow
+      ```
 
 2. Configure `openlineage` provider. The simplest option is to set the following environment variables and make them available to pods where you run Airflow schedulers and Airflow workers:
 
    ```shell
-   OPENLINEAGE_URL=<DD_DATA_OBSERVABILITY_INTAKE>
-   OPENLINEAGE_API_KEY=<DD_API_KEY>
+   export OPENLINEAGE_URL=<DD_DATA_OBSERVABILITY_INTAKE>
+   export OPENLINEAGE_API_KEY=<DD_API_KEY>
+   export AIRFLOW__OPENLINEAGE__NAMESPACE=${AIRFLOW_ENV_NAME}
    ```
-
-   * Install and configure `openlineage` provider for **both Airflow schedulers and Airflow workers**.
    * Replace `<DD_DATA_OBSERVABILITY_INTAKE>` with `https://data-obs-intake.`{{< region-param key="dd_site" code="true" >}}.
    * Replace `<DD_API_KEY>` with your valid [Datadog API key][4].
-
-   **Optional:**
-   * Set `AIRFLOW__OPENLINEAGE__NAMESPACE` with a unique name for your Airflow deployment. This allows Datadog to logically separate this deployment's jobs from those of other Airflow deployments.
-   * Set `OPENLINEAGE_CLIENT_LOGGING` to `DEBUG` for OpenLineage client and its child modules. This can be useful in troubleshooting during the configuration of `openlineage` provider.
+   * If you're using **Airflow v2.7 or v2.8**, also add these two environment variables along with the previous ones. This fixes an OpenLinage config issue fixed at `apache-airflow-providers-openlineage` v1.7, while Airflow v2.7 and v2.8 use previous versions.
+      ```shell
+      #!/bin/sh
+      # Required for Airflow v2.7 & v2.8 only
+      export AIRFLOW__OPENLINEAGE__CONFIG_PATH=""
+      export AIRFLOW__OPENLINEAGE__DISABLED_FOR_OPERATORS=""
+      ```
 
    Check official documentation [configuration-openlineage][3] for other supported configurations of the `openlineage` provider.
 
 3. Trigger an update to your Airflow pods and wait for them to finish.
 
-[1]: https://github.com/apache/airflow/releases/tag/2.9.0
+[1]: https://github.com/apache/airflow/releases/tag/2.5.0
 [2]: https://airflow.apache.org/docs/apache-airflow-providers-openlineage/stable/index.html
 [3]: https://airflow.apache.org/docs/apache-airflow-providers-openlineage/stable/configurations-ref.html#configuration-openlineage
 [4]: https://docs.datadoghq.com/account_management/api-app-keys/#api-keys
+[5]: https://openlineage.io/docs/integrations/airflow/
+
 
 ## Validation
 
 In Datadog, view the [Data Jobs Monitoring][2] page to see a list of your Airflow job runs after the setup.
+
+## Troubleshooting
+
+Set `OPENLINEAGE_CLIENT_LOGGING` to `DEBUG` along with the other environment variables set previously for OpenLineage client and its child modules. This can be useful in troubleshooting during the configuration of `openlineage` provider.
+
 {{% /tab %}}
 
 {{% tab "Amazon MWAA" %}}
 ## Requirements
 
-* [Apache Airflow 2.9.0][1] or later
-* [apache-airflow-providers-openlineage 1.11.0][2] or later
+* [Apache Airflow 2.5.0][1] or later
+* [apache-airflow-providers-openlineage][2] or [openlineage-airflow][8] depending on your Airflow version
 
 ## Setup
-
-Data Jobs Monitoring is supported for Apache Airflow deployment with [apache-airflow-providers-openlineage][2] installed.
 
 To get started, follow the instructions below.
 
 1. Install `openlineage` provider by adding the following into your `requirements.txt` file:
 
-   ```text
-   apache-airflow-providers-openlineage>=1.11.0
-   ```
+    For **Airflow 2.7 or later**:
 
-   Ensure the openlineage provider version is compatible with your constraints file. If no constraints file is specified in `requirements.txt`, ensure compatibility with the [default Apache Airflow constraints][8] for your Airflow version. Refer to the [Amazon MWAA User Guide][7] for guidance on specifying Python dependencies in `requirements.txt`.
+      ```text
+      apache-airflow-providers-openlineage
+      ```
+
+    For **Airflow 2.5 & 2.6** :
+
+      ```text
+      openlineage-airflow
+      ```
 
 2. Configure `openlineage` provider. The simplest option is to set the following environment variables in your [Amazon MWAA start script][3]:
 
    ```shell
    #!/bin/sh
-
    export OPENLINEAGE_URL=<DD_DATA_OBSERVABILITY_INTAKE>
    export OPENLINEAGE_API_KEY=<DD_API_KEY>
+   export AIRFLOW__OPENLINEAGE__NAMESPACE=${AIRFLOW_ENV_NAME}
    ```
 
    * Replace `<DD_DATA_OBSERVABILITY_INTAKE>` fully with `https://data-obs-intake.`{{< region-param key="dd_site" code="true" >}}.
    * Replace `<DD_API_KEY>` fully with your valid [Datadog API key][5].
-
-   **Optional:**
-   * Set `AIRFLOW__OPENLINEAGE__NAMESPACE` with a unique name for your Airflow deployment. This allows Datadog to logically separate this deployment's jobs from those of other Airflow deployments.
-   * Set `OPENLINEAGE_CLIENT_LOGGING` to `DEBUG` for OpenLineage client and its child modules. This can be useful in troubleshooting during the configuration of `openlineage` provider.
+   * If you're using **Airflow v2.7 or v2.8**, also add these two environment variables to the startup script. This fixes an OpenLinage config issue fixed at `apache-airflow-providers-openlineage` v1.7, while Airflow v2.7 and v2.8 use previous versions.
+      ```shell
+      #!/bin/sh
+      # Required for Airflow v2.7 & v2.8 only
+      export AIRFLOW__OPENLINEAGE__CONFIG_PATH=""
+      export AIRFLOW__OPENLINEAGE__DISABLED_FOR_OPERATORS=""
+      ```
 
    Check official documentation [configuration-openlineage][4] for other supported configurations of `openlineage` provider.
 
-3. Deploy your updated `requirements.txt` and [Amazon MWAA start script][3] to your Amazon S3 folder configured for your Amazon MWAA Environment.
+3. Deploy your updated `requirements.txt` and [Amazon MWAA startup script][3] to your Amazon S3 folder configured for your Amazon MWAA Environment.
 
-4. Ensure your Execution role configured for your Amazon MWAA Environment has the right permissions to the `requirements.txt` and [Amazon MWAA start script][3]. This is required if you are managing your own Execution role and it's the first time you are adding those supporting files. See official guide [Amazon MWAA execution role][6] for details if needed.
-
-
-[1]: https://github.com/apache/airflow/releases/tag/2.9.0
+[1]: https://github.com/apache/airflow/releases/tag/2.5.0
 [2]: https://airflow.apache.org/docs/apache-airflow-providers-openlineage/stable/index.html
 [3]: https://docs.aws.amazon.com/mwaa/latest/userguide/using-startup-script.html
 [4]: https://airflow.apache.org/docs/apache-airflow-providers-openlineage/stable/configurations-ref.html#configuration-openlineage
 [5]: https://docs.datadoghq.com/account_management/api-app-keys/#api-keys
 [6]: https://docs.aws.amazon.com/mwaa/latest/userguide/mwaa-create-role.html
-[7]: https://docs.aws.amazon.com/mwaa/latest/userguide/working-dags-dependencies.html#working-dags-dependencies-syntax-create
-[8]: https://docs.aws.amazon.com/mwaa/latest/userguide/airflow-versions.html#airflow-versions-official
+[7]: https://app.datadoghq.com/data-jobs/
+[8]: https://openlineage.io/docs/integrations/airflow/
 
 ## Validation
 
-In Datadog, view the [Data Jobs Monitoring][2] page to see a list of your Airflow job runs after the setup.
+In Datadog, view the [Data Jobs Monitoring][7] page to see a list of your Airflow job runs after the setup.
+
+## Troubleshooting
+
+Ensure your Execution role configured for your Amazon MWAA Environment has the right permissions to the `requirements.txt` and [Amazon MWAA start script][3]. This is required if you are managing your own Execution role and it's the first time you are adding those supporting files. See official guide [Amazon MWAA execution role][6] for details if needed.
+
+Set `OPENLINEAGE_CLIENT_LOGGING` to `DEBUG` in the [Amazon MWAA start script][3] for OpenLineage client and its child modules. This can be useful in troubleshooting during the configuration of `openlineage` provider.
+
+
 {{% /tab %}}
 
 {{% tab "Astronomer" %}}
