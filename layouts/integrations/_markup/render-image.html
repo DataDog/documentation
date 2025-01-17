@@ -8,7 +8,7 @@
 {{- $app_id := .Page.Params.integration_id | default .Page.Params.name -}}
 {{- $img := replaceRE `(./)?images/` "" .Destination -}}
 {{- $url := split $img "/" -}}
-{{- $app_listings_bucket := cond (eq (hugo.Environment) "live") "dd-app-listings" "dd-app-listings-staging" -}}
+{{- $app_listings_bucket := "dd-app-listings" -}}
 
 {{- if eq (index $url 0) "integrations" -}}
 <img src="{{ (print site.Params.img_url "images/" (.Destination | safeURL)) }}"
