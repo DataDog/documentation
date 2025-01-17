@@ -599,7 +599,8 @@ components:
         type: string
     ResourceID:
       description: 'Identifier, formatted as `type:id`. Supported types: `connection`,
-        `dashboard`, `notebook`, `reference-table`, `security-rule`, `slo`.'
+        `dashboard`, `notebook`, `reference-table`, `security-rule`, `slo`, `workflow`,
+        `app-builder-app`, `connection`, `connection-group`.'
       example: dashboard:abc-def-ghi
       in: path
       name: resource_id
@@ -41651,6 +41652,14 @@ paths:
 
         - Monitors: `monitor`
 
+        - Workflows: `workflow`
+
+        - App Builder Apps: `app-builder-app`
+
+        - Connections: `connection`
+
+        - Connection Groups: `connection-group`
+
 
         #### Supported relations for resources
 
@@ -41676,7 +41685,15 @@ paths:
 
         Monitors                    | `viewer`, `editor`
 
-        Reference Tables            | `viewer`, `editor`'
+        Reference Tables            | `viewer`, `editor`
+
+        Workflows                   | `viewer`, `editor`
+
+        App Builder Apps            | `viewer`, `runner`, `editor`
+
+        Connections                 | `viewer`, `resolver`, `editor`
+
+        Connection Groups           | `viewer`, `editor`'
       operationId: UpdateRestrictionPolicy
       parameters:
       - $ref: '#/components/parameters/ResourceID'
