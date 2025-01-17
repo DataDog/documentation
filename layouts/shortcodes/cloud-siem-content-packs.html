@@ -1,22 +1,26 @@
 {{ $data := $.Site.Data.cloud_siem_content_packs }}
 
-{{ if ne $data nil }}
+{{- if ne $data nil -}}
     {{- range $category, $content_packs := $data -}}
-    <h2>{{ $category | humanize | title }} Content Packs</h2>
+        <h2><a href="#{{- $category | urlize -}}">{{ (replace $category "_" " ") | title }} Content Packs</a></h2>
 
-    {{- range $content_packs -}}
-        <h3>{{- .name -}}</h3>
-        <p>{{- .description -}}</p>
-        <p><a href={{- .app_link -}}>{{- .name -}}</a> Content Pack includes:</p>
+        {{- range $content_packs -}}
+            <h3>{{- .name -}}</h3>
+            <p>{{- .description -}}</p>
+            <p><a href={{- .app_link -}}>{{- .name -}}</a> Content Pack includes:</p>
 
-{{/* Dont fix indentation, Hugo will think it's a code block */}}
+{{/* Dont fix indentation of this ul, Hugo will think it's a code block */}}
 <ul>
-{{- with .threat_detection -}}<li>Detection Rules</li>{{- end -}}
-{{- with .dashboard -}}<li>An interactive dashboard</li>{{- end -}}
-{{- with .investigator -}}<li>{{ upper . }} Investigator</li>{{- end -}}
-{{- with .workflow_automation -}}<li>Workflow Automation</li>{{- end -}}
-{{- with .documentation_href -}}<li><a href="{{.}}">Configuration guide</a></li>{{- end -}}
+    {{- with .threat_detection -}}
+        {{- $ootb_link := (print "https://docs.datadoghq.com/security/default_rules/#" (index . 0)) -}}
+        <li><a href="{{- $ootb_link -}}">Detection Rules</a></li>
+    {{- end -}}
+
+    {{- with .dashboard -}}<li>An interactive dashboard</li>{{- end -}}
+    {{- with .investigator -}}<li>{{ upper . }} Investigator</li>{{- end -}}
+    {{- with .workflow_automation -}}<li>Workflow Automation</li>{{- end -}}
+    {{- with .documentation_href -}}<li><a href="{{.}}">Configuration guide</a></li>{{- end -}}
 </ul>
 {{- end -}}
 {{- end -}}
-{{ end }}
+{{- end -}}
