@@ -6019,7 +6019,7 @@ menu:
       parent: security_platform_heading
       pre: security-code-security
       weight: 50000
-    - name: Static Analysis (SAST)
+    - name: Static Code Analysis (SAST)
       identifier: sec_static_analysis
       url: /security/code_security/static_analysis/
       parent: code_security
@@ -6044,7 +6044,7 @@ menu:
       url: /security/code_security/static_analysis/generic_ci_providers/
       parent: sec_static_analysis
       weight: 4
-    - name: Static Analysis (SAST) rules
+    - name: Static Code Analysis (SAST) rules
       identifier: sec_static_analysis_rules
       url: /security/code_security/static_analysis/static_analysis_rules/
       parent: sec_static_analysis

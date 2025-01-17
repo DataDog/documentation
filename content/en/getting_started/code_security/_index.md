@@ -50,7 +50,7 @@ Select a source code management (SCM) provider such as [GitHub](#github) or [ano
 
 ### GitHub
 
-If you are using a GitHub repository, you can set up the [GitHub integration][103] and connect your repository to enable Static Analysis and Software Composition Analysis scans.
+If you are using a GitHub repository, you can set up the [GitHub integration][103] and connect your repository to enable SAST and SCA scans.
 
 {{< img src="/getting_started/code_security/github_accounts.png" alt="Click the Connect Repositories button for your GitHub account." style="width:100%" >}}
 

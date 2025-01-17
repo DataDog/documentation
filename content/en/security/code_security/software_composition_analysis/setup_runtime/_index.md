@@ -1,5 +1,5 @@
 ---
-title: Set up runtime SCA in your services
+title: Set up SCA in your running services
 disable_toc: false
 aliases:
 - /security/application_security/enabling/tracing_libraries/sca/
@@ -27,7 +27,7 @@ Before setting up runtime deteciton, ensure the following prerequisites are met:
    4. Select the services where you want to identify library vulnerabilities, and then click **Next**.
    5. Select **Enable for Selected Services**.
 
-### Settings page
+### Settings page for in-app service enablement
 ### Datadog tracing library configuration 
 Alternatively, you can enable Software Composition Analysis through the [Settings][3] page.
 

@@ -7,9 +7,9 @@ aliases:
 
 If you experience issues setting up or configuring Datadog Code Security, use this page to start troubleshooting. If you continue to have trouble, [contact Datadog Support][1].
 
-## Static Analysis (SAST)
+## Static Code Analysis (SAST)
 
-For issues with the Datadog Static Analyzer, include the following information in a bug report to Support as well as your Customer Success Manager.
+For issues with the Datadog static analyzer, include the following information in a bug report to Datadog Support.
 
 - Your `static-analysis.datadog.yml` file
 - The output of your static analysis tool (such as a CLI) that is run locally or in a CI/CD pipeline
@@ -87,7 +87,7 @@ If you are using Datadog's analyzer, [diff-aware scanning][6] is enabled by defa
 
 ## Software Composition Analysis
 
-For issues with Datadog Software Composition Analysis (SCA), include the following information in a bug report to Support as well as your Customer Success Manager.
+For issues with Datadog Software Composition Analysis (SCA), include the following information in a bug report to Datadog Support.
 
 - The output of your SCA tool (such as CLI) that is run locally or in a CI/CD pipeline
 - The SBOM file produced (if there are any available)
@@ -118,7 +118,7 @@ datadog-ci sbom upload /path/to/sbom-file.json
 
 ### Results are not being surfaced in the Datadog UI
 
-**If you are running Code Security on a non-GitHub repository**, ensure that the first scan is ran on your default branch (for example, a branch name like
+**If you are running static scanning on a non-GitHub repository**, ensure that the first scan is ran on your default branch (for example, a branch name like
 `master`, `main`, `prod`, or `production`). After you commit on your default branch, non-default branches are analyzed.
 
 You can always configure your default branch in-app under [Repository Settings][4].
@@ -134,9 +134,9 @@ The generated lock file is used by [`osv-scanner`][7] to extract dependencies an
 
 There are a series of steps that must run successfully for vulnerability information to appear either in the [Service Catalog Security View][16] or in the [Vulnerability Explorer][12]. It is important to check each step when investigating this issue. 
 
-### Confirm ASM is enabled
+### Confirming runtime detection is enabled
 
-You can use the metric `datadog.apm.appsec_host` to check if ASM is running.
+If you have enabled runtime vulnerability detection, you can use the metric `datadog.apm.appsec_host` to check if SCA is running.
 
 1. Go to **Metrics > Summary** in Datadog.
 2. Search for the metric `datadog.apm.appsec_host`. If the metric doesn't exist, then there are no services running ASM. If the metric exists, the services are reported with the metric tags `host` and `service`.
