@@ -6,243 +6,90 @@ aliases:
 
 ## Overview
 
-[Datadog Code Analysis][1] allows you to identify and resolve code quality issues and security vulnerabilities before deploying to production, ensuring safe and clean code throughout the software development lifecycle. 
+Datadog Code Security helps you secure and maintain your applications’ first-party code and open source libraries from development to production.
 
-{{< img src="/code_analysis/repositories.png" alt="Session Replay available button, as well as visualization options" style="width:100%" >}}
+It offers a suite of tools to help you secure your code throughout the software development lifecycle:
 
-Code Analysis offers a comprehensive suite of tools, including [Static Analysis][2] and [Software Composition Analysis][3], to improve overall software delivery.
+- **Software Composition Analysis (SCA)** detects vulnerable open source libraries present in your repositories and affecting your services at runtime, helping you secure and maintain your software supply chain.
+- **Static Code Analysis (SAST)** uses a Static Application Security Testing method to scan your repositories for security and quality issues in first-party code, providing suggested fixes to prevent these issues from reaching production
+- **Runtime Code Analysis (IAST)** uses an Interactive Application Security Testing method to detect vulnerabilities affecting your services at runtime.
 
-* Static Analysis (SAST) scans your repositories for quality and security issues in first-party code, and suggests fixes to prevent these issues from impacting production.
-* Software Composition Analysis (SCA) scans your codebase for imported open source libraries, helping you manage your dependencies and secure your applications from external threats.
+## Set up Code Security
 
-By using [`datadog-ci`][5], you can integrate analyses from other providers into your development workflow, allowing you to send Static Analysis and SCA results directly to Datadog. You can access the latest scan results for each repository on the [**Repositories** page][6] to effectively monitor and enhance code health across all branches.
+### Open source libraries
 
-## Set up Code Analysis
+Datadog Software Composition Analysis detects library vulnerabilities and catalogs dependencies within your codebase as well as on your running services.
 
-You can configure Code Analysis to run scans on code directly in Datadog or on code running in your CI pipelines. To get started, navigate to [**Software Delivery** > **Code Analysis** > **Repositories**][6] and click **+ Add a Repository**.
+See [Software Composition Analysis](1) to set up the static and/or runtime library vulnerability detection.
 
-{{< tabs >}}
-{{% tab "Datadog Hosted" %}}
+### First-party code
 
-With Datadog-hosted scans, your code is scanned within Datadog's infrastructure as opposed to within your CI pipeline. Datadog reads your code, runs the static analyzer to perform Static Analysis and/or Software Composition Analysis, and uploads the results.
+{{< whatsnext desc="There are two ways to secure and maintain your first-party code with Datadog:">}}
+    {{< nextlink href="security/code_security/static_analysis/setup/" >}}Static Code Analysis (SAST) Setup{{< /nextlink >}}
+    {{< nextlink href="security/code_security/iast/setup/" >}}IAST Setup{{< /nextlink >}}
+{{< /whatsnext >}}
 
-Using Datadog-hosted scans eliminates the need for you to configure a CI pipeline so you can use Code Analysis.
+## Development lifecycle integrations
 
-Enable Code Analysis on your GitHub repositories for each GitHub Account you’ve added by setting up the [GitHub integration][101].
+### Enable pull request comments
 
-{{< img src="/code_analysis/setup/enable_account.png" alt="Session Replay available button, as well as visualization options" style="width:100%" >}}
+Datadog can act as an automatic code reviewer to flag vulnerabilities and quality violations in GitHub pull requests. For more information, see [GitHub Pull Requests][2].
 
-You can either enable Software Composition Analysis (SCA) to scan for vulnerabilities, licensing issues, and supply chain risks in your open source libraries for all repositories, or you can enable SCA for individual repositories in the **Repositories** side panel.
+{{< img src="/security/application_security/code_security/github_suggestion.png" alt="Datadog code reviewing in Github" style="width:100%;" >}}
 
-{{< img src="/code_analysis/setup/enable_repository.png" alt="Session Replay available button, as well as visualization options" style="width:100%" >}}
+### Customize your configuration
 
-[101]: /integrations/github/
+In [Code Security Settings][3], you can customize which findings lead to PR comments (e.g. only critical and high severity findings).
 
-{{% /tab %}}
-{{% tab "In CI Pipelines" %}}
+For Static Code Analysis (SAST), you can also configure which [SAST rules][4] apply across your organization or for specific repositories. See Datadog’s default SAST rules here.
 
-Select from the following types of scans you want to run in your repository.
+### Install IDE integrations
 
-* [Static Analysis][101]: Examine your code for poor practices and vulnerabilities.
-* [Software Composition Analysis][102]: Check your third-party libraries for vulnerabilities.
+Install the [Datadog IDE plugins][5] to run Static Code Analysis (SAST) scans locally and see results directly in your code editor. You can detect and fix problems such as security vulnerabilities, maintainability issues, or bugs in your code before you commit your changes.
 
-Select a source code management (SCM) provider such as [GitHub](#github) or [another provider](#other-providers). 
+To start running code scans in your IDE, see the respective documentation for your code editor of choice.
 
-### GitHub
+{{< whatsnext desc="See the documentation for information about the following integrations:">}}
+    {{< nextlink href="developers/ide_plugins/idea/#static-analysis" >}}<u>JetBrains IDEs</u>: IntelliJ IDEA, GoLand, PhpStorm, and PyCharm{{< /nextlink >}}
+    {{< nextlink href="developers/ide_plugins/vscode/#static-analysis" >}}<u>Visual Studio Code</u>{{< /nextlink >}}
+    {{< nextlink href="developers/ide_plugins/visual_studio/#static-analysis" >}}<u>Visual Studio</u>{{< /nextlink >}}
+{{< /whatsnext >}}
 
-If you are using a GitHub repository, you can set up the [GitHub integration][103] and connect your repository to enable SAST and SCA scans.
+### Set up Quality Gates
 
-{{< img src="/getting_started/code_security/github_accounts.png" alt="Click the Connect Repositories button for your GitHub account." style="width:100%" >}}
+Datadog provides [Quality Gates][6] as a platform capability to help you maintain and enforce security and quality standards for changes introduced to your codebase. For more information, see [Quality Gate setup][7].
 
-Comments in [GitHub pull requests][105] are enabled by default. Click **Connect Repositories** on the Code Analysis Setup page and hover over the Missing flag on the PR Permissions column to see which permissions you need to update for your account.
+## Prioritize vulnerabilities with runtime context
 
-{{< img src="/getting_started/code_security/missing_permissions.png" alt="Hover over the Missing pill to see which permissions must be updated for your repository." style="width:100%" >}}
+Code Security offers **vulnerability-centric views** of all library and code vulnerabilities detected from both static repository scanning and runtime service detection.
 
-To disable this feature, navigate to the [**Code Analysis Settings** page][106] and click the toggle in the GitHub Comments column.
+### Library vulnerabilities explorer
 
-{{< img src="/getting_started/code_security/github_comments_setting.png" alt="Click the toggle in the GitHub Comments column to enable or disable Code Analysis for a connected GitHub repository." style="width:100%" >}}
+For library vulnerabilities, each row in the table represents a specific vulnerability affecting a library version. Based on if you have static or runtime detection enabled, the **Detected In** column will display the specific repositories and/or services affected by this vulnerability.
 
-### Other providers
+In the side panel for a single library vulnerability in SCA, in addition to details about the vulnerability, Datadog shows:
 
-For other providers, you can run the Datadog CLI directly in your CI pipeline platform. For more information, see [Generic CI Providers for Static Analysis][107] and [Generic CI Providers for Software Composition Analysis][108].
+- A **Severity breakdown** of the highest severity instance of this vulnerability seen across your repositories and your services. For each detected location of the vulnerability in your repositories and/or services, Datadog adjusts the base severity score of the vulnerability based on environmental factors. To learn more, see [Datadog severity score][8].
+- A **Repositories** table of all instances where the vulnerability was detected in your repositories. For each instance, Datadog shows whether the dependency is classified as direct or transitive, the remediation status of the vulnerability, as well as specific remediation steps.
+- An **Impacted Services** table of all running services affected by this library vulnerability. A service is affected by a library vulnerability if the library was loaded at runtime and detected by Datadog’s application tracing libraries.
 
-You must [run an analysis of your repository](#run-code-analysis-in-your-ci-provider) on the default branch for results to start appearing on the [**Repositories** page][109].
-
-## Run Code Analysis in your CI provider
-
-To upload results to Datadog, ensure you have a [Datadog API key and application key][110]. 
-
-Specify a name for the service or library in the `dd_service` field such as `shopist`.
-
-### GitHub Action
-
-You can configure a GitHub Action to run Static Analysis and Software Composition Analysis scans as part of your CI workflows.
-
-Create a `.github/workflows/datadog-static-analysis.yml` file in your repository with the following content:
-
-```yaml
-on: [push]
-
-name: Datadog Static Analysis
-
-jobs:
-  static-analysis:
-    runs-on: ubuntu-latest
-    name: Datadog Static Analyzer
-    steps:
-    - name: Checkout
-      uses: actions/checkout@v3
-    - name: Check code meets quality and security standards
-      id: datadog-static-analysis
-      uses: DataDog/datadog-static-analyzer-github-action@v1
-      with:
-        dd_api_key: ${{ secrets.DD_API_KEY }}
-        dd_app_key: ${{ secrets.DD_APP_KEY }}
-        dd_service: shopist
-        dd_env: ci
-        dd_site: datadoghq.com
-        cpu_count: 2
-```
-
-Then, create a `.github/workflows/datadog-sca.yml` file in your repository with the following content:
-
-```yaml
-on: [push]
-
-name: Datadog Software Composition Analysis
-
-jobs:
-  software-composition-analysis:
-    runs-on: ubuntu-latest
-    name: Datadog SBOM Generation and Upload
-    steps:
-    - name: Checkout
-      uses: actions/checkout@v3
-    - name: Check imported libraries are secure and compliant
-      id: datadog-software-composition-analysis
-      uses: DataDog/datadog-sca-github-action@main
-      with:
-        dd_api_key: ${{ secrets.DD_API_KEY }}
-        dd_app_key: ${{ secrets.DD_APP_KEY }}
-        dd_service: shopist
-        dd_env: ci
-        dd_site: datadoghq.com
-```
-
-### Customizable script
-
-You can upload a SARIF report with Static Analysis results or an SBOM report with Software Composition Analysis results to Datadog using the [datadog-ci NPM package][111].
-
-#### Static Analysis
-
-To upload Static Analysis reports to Datadog, you must install Unzip and Node.js version 14 or later.
-
-Add the following content to your CI pipeline configuration:
-
-```shell
-# Set the Datadog site to send information to
-export DD_SITE="datadoghq.com"
-
-# Install dependencies
-npm install -g @datadog/datadog-ci 
-                
-# Download the latest Datadog static analyzer:
-# https://github.com/DataDog/datadog-static-analyzer/releases
-DATADOG_STATIC_ANALYZER_URL=https://github.com/DataDog/datadog-static-analyzer/releases/latest/download/datadog-static-analyzer-x86_64-unknown-linux-gnu.zip
-
-curl -L $DATADOG_STATIC_ANALYZER_URL > /tmp/ddog-static-analyzer.zip
-unzip /tmp/ddog-static-analyzer.zip -d /tmp
-mv /tmp/datadog-static-analyzer /usr/local/datadog-static-analyzer
-                
-# Run Static Analysis
-/usr/local/datadog-static-analyzer -i . -o /tmp/report.sarif -f sarif
-                
-# Upload results
-datadog-ci sarif upload /tmp/report.sarif --service "shopist" --env "ci"
-```
-
-#### Software Composition Analysis
-
-To upload Software Composition Analysis results to Datadog, you must install Trivy and Node.js version 14 or later.
-
-Add the following content to your CI pipeline configuration:
-
-```shell
-# Set the Datadog site to send information to
-export DD_SITE="datadoghq.com"
-                        
-# Install dependencies
-npm install -g @datadog/datadog-ci
-
-# Download the latest Datadog OSV Scanner:
-# https://github.com/DataDog/osv-scanner/releases
-DATADOG_OSV_SCANNER_URL=https://github.com/DataDog/osv-scanner/releases/latest/download/osv-scanner_linux_amd64.zip
-
-# Install OSV Scanner
-mkdir /osv-scanner
-curl -L -o /osv-scanner/osv-scanner.zip $DATADOG_OSV_SCANNER_URL
-cd /osv-scanner && unzip osv-scanner.zip
-chmod 755 /osv-scanner/osv-scanner
-
-# Output OSC Scanner results
-/osv-scanner/osv-scanner --skip-git -r --experimental-only-packages --format=cyclonedx-1-5 --paths-relative-to-scan-dir  --output=/tmp/sbom.json /path/to/repository
-
-# Upload results
-datadog-ci sbom upload --service "shopist" --env "ci" /tmp/sbom.json
-```
-
-Once you’ve configured these scripts, run an analysis of your repository on the default branch. Then, results will start appearing on the **Repositories** page.
-
-[101]: /security/code_security/static_analysis
-[102]: /security/code_security/software_composition_analysis
-[103]: /integrations/github
-[104]: https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions
-[105]: /security/code_security/dev_tool_int/github_pull_requests
-[106]: https://app.datadoghq.com/ci/settings/code-analysis
-[107]: /security/code_security/static_analysis/generic_ci_providers
-[108]: /security/code_security/software_composition_analysis/setup_static/#generic-ci-providers
-[109]: https://app.datadoghq.com/ci/code-analysis
-[110]: /account_management/api-app-keys/
-[111]: https://www.npmjs.com/package/@datadog/datadog-ci
-
-{{% /tab %}}
-{{< /tabs >}}
-
-## Run Static Analysis in an IDE
-
-Install the [Datadog IDE plugins][7] to run Static Analysis scans locally and see results directly in your code editor. You can detect and fix problems such as maintainability issues, bugs, or security vulnerabilities in your code before you commit your changes. 
-
-To start running Static Analysis scans in your IDE, see the respective documentation for your code editor of choice.
-
-{{< partial name="code_analysis/ide-plugins.html" >}}
-
-</br>
-
-
-## Enable Code Analysis comments in GitHub pull requests
-
-You can integrate Code Analysis with GitHub pull requests to automatically flag code violations and enhance code quality in the review process. 
-
-{{< img src="/getting_started/code_security/github_suggestion.png" alt="A suggestion from Code Analysis in a GitHub pull request" style="width:100%" >}}
-
-When configured, Code Analysis directly comments on the PR, indicating violations with details such as the name, ID, severity, and suggested fixes, which you can directly apply from the GitHub UI. 
-
-After adding the [appropriate configuration files][10] to your repository, create a [GitHub App][11] in Datadog (a new app or an update to an existing one). Ensure it has the proper read and write access to pull requests. 
-
-Once you've configured your app, navigate to the **Code Analysis Settings** page and click the toggle in the **GitHub Comments** column for each repository. 
-
-{{< img src="/getting_started/code_security/github_comments_setting.png" alt="Toggles for each repository to enable or disable Code Analysis comments in GitHub pull requests" style="width:100%" >}}
-
-For more information, see [GitHub Pull Requests][12].
+ Severities are scored by the following:
+| CVSS Score    | Qualitative Rating
+| --------------| -------------------|  
+|   `0.0`         | None                |
+|   `0.1 - 3.9`   | Low                 |
+|   `4.0 - 6.9`   | Medium              |
+|   `7.0 - 8.9`   | High                |
+|   `9.0 - 10.0`  | Critical            |
 
 ## Search and manage repositories
 
-Click on a repository on the [**Repositories** page][6] to access a more detailed view where you can customize the search query by branch (with the default branch appearing first) and by commit (starting with the latest). 
+Code Security also offers repository-centric views of static scan results, supporting granular filtering across all branches and commits for scanned repositories.
 
-{{< img src="/getting_started/code_security/sca_vulnerabilities.png" alt="The Library Vulnerabilities view of the Code Analysis results from a repository's default branch and latest commit" style="width:100%" >}}
+Click on a repository on the **Repositories** page to access a more detailed view where you can customize the search query by branch (with the default branch appearing first) and by commit (starting with the latest). 
 
 {{< tabs >}}
-{{% tab "Static Analysis" %}}
+{{% tab "Static Code Analysis (SAST)" %}}
 
 You can use the following out-of-the-box facets to create a search query for identifying and resolving poor coding practices in the **Code Quality** tab or security risks in the **Code Vulnerabilities** tab.
 
@@ -260,7 +107,7 @@ You can use the following out-of-the-box facets to create a search query for ide
 
 You can access suggested fixes directly from the results to improve code quality practices and address security vulnerabilities.
 
-{{< img src="/getting_started/code_security/suggested_fix.png" alt="A suggested code fix on the Fixes tab of a Code Analysis result" style="width:100%" >}}
+{{< img src="/getting_started/code_analysis/suggested_fix.png" alt="A suggested code fix on the Fixes tab of a Code Analysis result" style="width:100%" >}}
 
 {{% /tab %}}
 {{% tab "Software Composition Analysis" %}}
@@ -278,22 +125,19 @@ You can use the following out-of-the-box facets to create a search query for ide
 
 You can access vulnerability reports and locate the source files where the vulnerability was discovered in your projects, along with information about the file’s code owners.
 
-{{< img src="/getting_started/code_security/sci_vulnerabilities.png" alt="A link to the source code directly in GitHub from a detected library vulnerability" style="width:100%" >}}
+{{< img src="/security/application_security/code_security/sci_vulnerabilities.png" alt="A link to the source code directly in GitHub from a detected library vulnerability" style="width:100%" >}}
 
 {{% /tab %}}
 {{< /tabs >}}
 
-## Explore results in the Service Catalog
+## Notify, remediate, and report 
 
-Investigate code violations associated with your services and code violations identified from Static Analysis to troubleshoot slowdowns and failures. Navigate to [**Service Management** > **Services** > **Service Catalog**][13] and click on the **Delivery** view to analyze the pre-production status of your services. 
+Code Security helps you set up workflows to track and manage remediation of findings:
 
-{{< img src="/getting_started/code_security/catalog_view.png" alt="A link to the source code directly in GitHub from a detected library vulnerability" style="width:100%" >}}
+- Set up [notification rules][9] to notify your team(s) of new findings via Slack, Jira, email, and more
+- Track vulnerabilities by service and team in the **Code Security Summary** page.
 
-Click on a service to access information about CI pipelines from Pipeline Visibility, in addition to security vulnerabilities and code quality issues from Code Analysis on the **Delivery** tab of the side panel.
-
-{{< img src="/getting_started/code_security/catalog_service.png" alt="A link to the source code directly in GitHub from a detected library vulnerability" style="width:100%" >}}
-
-### Linking services to code violations and libraries
+## Link Datadog services to repository scan results
 
 Datadog associates code violations or libraries with relevant services by using the following mechanisms:
 
@@ -352,20 +196,15 @@ detected in this file.
 If no services or teams are found, Datadog uses the `CODEOWNERS` [file][15]
 in your repository. The `CODEOWNERS` file determines which team owns a file in your Git provider. 
 
-**Note**: You must accurately map your Git provider teams to your [Datadog teams][16] for this feature to function properly.
+**Note**: You must accurately map your Git provider teams to your [Datadog teams][10] for this feature to function properly.
 
-[1]: /code_analysis/
-[2]: /security/code_security/static_analysis
-[3]: /security/code_security/software_composition_analysis
-[4]: /security/code_security/software_composition_analysis
-[5]: https://www.npmjs.com/package/@datadog/datadog-ci
-[6]: https://app.datadoghq.com/ci/code-analysis
-[7]: /security/code_security/dev_tool_int/ide_plugins
-[9]: https://app.datadoghq.com/dash/integration/31166/software-delivery---static-analysis-overview
-[10]: /security/code_security/static_analysis/github_actions/
-[11]: /security/code_security/dev_tool_int/github_pull_requests/#update-an-existing-github-app
-[12]: /security/code_security/dev_tool_int/github_pull_requests
-[13]: https://app.datadoghq.com/services 
-[14]: https://en.wikipedia.org/wiki/Glob_(programming)
-[15]: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
-[16]: /account_management/teams/
+[1]: /security/code_security/software_composition_analysis/
+[2]: /security/code_security/dev_tool_int/github_pull_requests/
+[3]: https://app.datadoghq.com/security/configuration/code-security/setup
+[4]: /security/code_security/static_analysis/static_analysis_rules/
+[5]: /security/code_security/dev_tool_int/ide_plugins/
+[6]: /quality_gates/
+[7]: /quality_gates/setup
+[8]: /security/code_security/software_composition_analysis/#datadog-severity-score
+[9]: https://app.datadoghq.com/security/configuration/notification-rules
+[10]: /account_management/teams/

@@ -6034,14 +6034,14 @@ menu:
       url: /security/code_security/static_analysis/setup/
       parent: sec_static_analysis
       weight: 1
-    - name: CircleCI Orbs
-      identifier: sec_static_analysis_circleci_orbs
-      url: /security/code_security/static_analysis/circleci_orbs/
-      parent: sec_static_analysis
-      weight: 2
     - name: GitHub Actions
       identifier: sec_static_analysis_github_actions
       url: /security/code_security/static_analysis/github_actions/
+      parent: sec_static_analysis
+      weight: 2
+    - name: CircleCI Orbs
+      identifier: sec_static_analysis_circleci_orbs
+      url: /security/code_security/static_analysis/circleci_orbs/
       parent: sec_static_analysis
       weight: 3
     - name: Generic CI Providers
