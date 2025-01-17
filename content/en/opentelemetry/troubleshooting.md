@@ -241,9 +241,9 @@ To verify the configuration:
 
 1. Check that your metrics contain the required [semantic conventions][4].
 2. Verify metric names follow OpenTelemetry naming conventions.
-3. Confirm metrics are being properly translated to the Datadog format.
+3. Confirm metrics are being properly translated to the Datadog format using the [metrics mapping reference][5].
 
-**Note**: When working with semantic conventions, ensure you're following the latest OpenTelemetry specification for metric naming and attributes.
+<div class="alert alert-info">When working with semantic conventions, ensure you're following the latest OpenTelemetry specification for metric naming and attributes.</div>
 
 ## Further reading
 
@@ -253,3 +253,4 @@ To verify the configuration:
 [2]: /opentelemetry/schema_semantics/hostname/
 [3]: /opentelemetry/schema_semantics/host_metadata/
 [4]: /opentelemetry/schema_semantics/semantic_mapping/
+[5]: /opentelemetry/schema_semantics/metrics_mapping/#metrics-mappings
