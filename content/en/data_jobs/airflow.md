@@ -103,7 +103,7 @@ To get started, follow the instructions below.
 
    * Replace `<DD_DATA_OBSERVABILITY_INTAKE>` fully with `https://data-obs-intake.`{{< region-param key="dd_site" code="true" >}}.
    * Replace `<DD_API_KEY>` fully with your valid [Datadog API key][5].
-   * If you're using **Airflow v2.7 or v2.8**, please also add these two environment variables to the startup script. This fixes an OpenLinage config issue fixed at `apache-airflow-providers-openlineage` v1.7, while Airflow v2.7 and v2.8 are on previous versions.
+   * If you're using **Airflow v2.7 or v2.8**, also add these two environment variables to the startup script. This fixes an OpenLinage config issue fixed at `apache-airflow-providers-openlineage` v1.7, while Airflow v2.7 and v2.8 are on previous versions.
       ```shell
       #!/bin/sh
       # Required for Airflow v2.7 & v2.8 only
