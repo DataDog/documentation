@@ -73,7 +73,7 @@ You can select from the following monitor types.
 
 | Cost Type | Description | Usage Examples |
 | ---  | ----------- | ----------- |
-| Cost Anomalies | Detect anomalies by comparing current costs to historical data, using a defined lookback period. Incomplete days are excluded from analysis to ensure accuracy. | Alert if 3 days from the past 30 days show significant cost anomalies compared to historical data. |
+| Cost Anomalies | Detect anomalies by comparing current costs to historical data, using a defined lookback period. Incomplete days are excluded from analysis to ensure accuracy. Anomaly monitors will not evaluate without at least 4 months of cloud cost data, since historical data is required to train the algorithm. | Alert if 3 days from the past 30 days show significant cost anomalies compared to historical data. |
 
 {{% /tab %}}
 {{< /tabs >}}
