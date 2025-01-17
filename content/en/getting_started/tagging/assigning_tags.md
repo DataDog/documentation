@@ -243,6 +243,13 @@ There are two environment variables that set tag cardinality: `DD_CHECKS_TAG_CAR
 
 Depending on the cardinality, there is a different set of out-of-the box tags for [Kubernetes and OpenShift][7], and for [Docker, Rancher, and Mesos][8]. For ECS and Fargate, setting the variable to `orchestrator` adds the `task_arn` tag.
 
+**Note**:
+Sending container tags for Dogstatsd metrics may create more metrics (one per container instead of one per host). This may impact your custom metrics billing.
+
+**Note**:
+Any metrics with fractions of a second timestamps are rounded to the nearest second. If any points have the same timestamp, the latest point overwrites the previous ones. Setting higher cardinality may help prevent this issue.
+
+
 #### Traces
 
 The Datadog tracer can be configured with environment variables, system properties, or through configuration in code. The [Datadog tracing setup][9] documentation has information on tagging options and configuration for each tracer. You can also follow the [unified service tagging][2] documentation to configure your tracer for unified service tagging.
