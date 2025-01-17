@@ -398,7 +398,7 @@ val tracedHostsWithHeaderType = mapOf(
     "example.com" to setOf(
         TracingHeaderType.DATADOG,
         TracingHeaderType.TRACECONTEXT),
-    "example.eu" to  setOf(
+    "example.eu" to setOf(
         TracingHeaderType.DATADOG,
         TracingHeaderType.TRACECONTEXT))
 val okHttpClient = OkHttpClient.Builder()
@@ -408,8 +408,8 @@ val okHttpClient = OkHttpClient.Builder()
 {{% /tab %}}
 {{% tab "Java" %}}
 ```java
-final Map<String, Set<TracingHeaderType>> tracedHostsWithHeaderType = new HashMap<>();
-final Set<TracingHeaderType> datadogAndW3HeadersTypes = new HashSet<>(Arrays.asList(TracingHeaderType.DATADOG, TracingHeaderType.TRACECONTEXT));
+Map<String, Set<TracingHeaderType>> tracedHostsWithHeaderType = new HashMap<>();
+Set<TracingHeaderType> datadogAndW3HeadersTypes = new HashSet<>(Arrays.asList(TracingHeaderType.DATADOG, TracingHeaderType.TRACECONTEXT));
 tracedHostsWithHeaderType.put("example.com", datadogAndW3HeadersTypes);
 tracedHostsWithHeaderType.put("example.eu", datadogAndW3HeadersTypes);
 OkHttpClient okHttpClient = new OkHttpClient.Builder()
