@@ -218,6 +218,13 @@ components:
       required: true
       schema:
         type: string
+    ConnectionId:
+      description: The ID of the action connection
+      in: path
+      name: connection_id
+      required: true
+      schema:
+        type: string
     CustomDestinationId:
       description: The ID of the custom destination.
       in: path
@@ -599,7 +606,8 @@ components:
         type: string
     ResourceID:
       description: 'Identifier, formatted as `type:id`. Supported types: `connection`,
-        `dashboard`, `notebook`, `reference-table`, `security-rule`, `slo`.'
+        `dashboard`, `notebook`, `reference-table`, `security-rule`, `slo`, `workflow`,
+        `app-builder-app`, `connection`, `connection-group`.'
       example: dashboard:abc-def-ghi
       in: path
       name: resource_id
@@ -1236,6 +1244,64 @@ components:
       required:
       - data
       type: object
+    AWSAssumeRole:
+      description: The definition of `AWSAssumeRole` object.
+      properties:
+        account_id:
+          description: AWS account the connection is created for
+          example: '111222333444'
+          pattern: ^\d{12}$
+          type: string
+        external_id:
+          description: External ID used to scope which connection can be used to assume
+            the role
+          example: 33a1011635c44b38a064cf14e82e1d8f
+          readOnly: true
+          type: string
+        principal_id:
+          description: AWS account that will assume the role
+          example: '123456789012'
+          readOnly: true
+          type: string
+        role:
+          description: Role to assume
+          example: my-role
+          type: string
+        type:
+          $ref: '#/components/schemas/AWSAssumeRoleType'
+      required:
+      - type
+      - account_id
+      - role
+      type: object
+    AWSAssumeRoleType:
+      description: The definition of `AWSAssumeRoleType` object.
+      enum:
+      - AWSAssumeRole
+      example: AWSAssumeRole
+      type: string
+      x-enum-varnames:
+      - AWSASSUMEROLE
+    AWSAssumeRoleUpdate:
+      description: The definition of `AWSAssumeRoleUpdate` object.
+      properties:
+        account_id:
+          description: AWS account the connection is created for
+          example: '111222333444'
+          pattern: ^\d{12}$
+          type: string
+        generate_new_external_id:
+          description: The `AWSAssumeRoleUpdate` `generate_new_external_id`.
+          type: boolean
+        role:
+          description: Role to assume
+          example: my-role
+          type: string
+        type:
+          $ref: '#/components/schemas/AWSAssumeRoleType'
+      required:
+      - type
+      type: object
     AWSAuthConfig:
       description: AWS Authentication config.
       oneOf:
@@ -1273,6 +1339,43 @@ components:
           type: string
       required:
       - role_name
+      type: object
+    AWSCredentials:
+      description: The definition of `AWSCredentials` object.
+      oneOf:
+      - $ref: '#/components/schemas/AWSAssumeRole'
+    AWSCredentialsUpdate:
+      description: The definition of `AWSCredentialsUpdate` object.
+      oneOf:
+      - $ref: '#/components/schemas/AWSAssumeRoleUpdate'
+    AWSIntegration:
+      description: The definition of `AWSIntegration` object.
+      properties:
+        credentials:
+          $ref: '#/components/schemas/AWSCredentials'
+        type:
+          $ref: '#/components/schemas/AWSIntegrationType'
+      required:
+      - type
+      - credentials
+      type: object
+    AWSIntegrationType:
+      description: The definition of `AWSIntegrationType` object.
+      enum:
+      - AWS
+      example: AWS
+      type: string
+      x-enum-varnames:
+      - AWS
+    AWSIntegrationUpdate:
+      description: The definition of `AWSIntegrationUpdate` object.
+      properties:
+        credentials:
+          $ref: '#/components/schemas/AWSCredentialsUpdate'
+        type:
+          $ref: '#/components/schemas/AWSIntegrationType'
+      required:
+      - type
       type: object
     AWSLambdaForwarderConfig:
       description: 'Log Autosubscription configuration for Datadog Forwarder Lambda
@@ -1587,6 +1690,73 @@ components:
         xray_services:
           $ref: '#/components/schemas/XRayServicesList'
       type: object
+    ActionConnectionAttributes:
+      description: The definition of `ActionConnectionAttributes` object.
+      properties:
+        integration:
+          $ref: '#/components/schemas/ActionConnectionIntegration'
+        name:
+          description: Name of the connection
+          example: My AWS Connection
+          type: string
+      required:
+      - name
+      - integration
+      type: object
+    ActionConnectionAttributesUpdate:
+      description: The definition of `ActionConnectionAttributesUpdate` object.
+      properties:
+        integration:
+          $ref: '#/components/schemas/ActionConnectionIntegrationUpdate'
+        name:
+          description: Name of the connection
+          example: My AWS Connection
+          type: string
+      type: object
+    ActionConnectionData:
+      description: Data related to the connection.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ActionConnectionAttributes'
+        id:
+          description: The connection identifier
+          readOnly: true
+          type: string
+        type:
+          $ref: '#/components/schemas/ActionConnectionDataType'
+      required:
+      - type
+      - attributes
+      type: object
+    ActionConnectionDataType:
+      description: The definition of `ActionConnectionDataType` object.
+      enum:
+      - action_connection
+      example: action_connection
+      type: string
+      x-enum-varnames:
+      - ACTION_CONNECTION
+    ActionConnectionDataUpdate:
+      description: Data related to the connection update.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ActionConnectionAttributesUpdate'
+        type:
+          $ref: '#/components/schemas/ActionConnectionDataType'
+      required:
+      - type
+      - attributes
+      type: object
+    ActionConnectionIntegration:
+      description: The definition of `ActionConnectionIntegration` object.
+      oneOf:
+      - $ref: '#/components/schemas/AWSIntegration'
+      - $ref: '#/components/schemas/HTTPIntegration'
+    ActionConnectionIntegrationUpdate:
+      description: The definition of `ActionConnectionIntegrationUpdate` object.
+      oneOf:
+      - $ref: '#/components/schemas/AWSIntegrationUpdate'
+      - $ref: '#/components/schemas/HTTPIntegrationUpdate'
     ActiveBillingDimensionsAttributes:
       description: List of active billing dimensions.
       properties:
@@ -6832,6 +7002,20 @@ components:
       type: string
       x-enum-varnames:
       - COST_BY_ORG
+    CreateActionConnectionRequest:
+      description: Request used to create an action connection.
+      properties:
+        data:
+          $ref: '#/components/schemas/ActionConnectionData'
+      required:
+      - data
+      type: object
+    CreateActionConnectionResponse:
+      description: The response for a created connection
+      properties:
+        data:
+          $ref: '#/components/schemas/ActionConnectionData'
+      type: object
     CreateOpenAPIResponse:
       description: Response for `CreateOpenAPI` operation.
       properties:
@@ -11645,6 +11829,12 @@ components:
       type: string
       x-enum-varnames:
       - GCP_SERVICE_ACCOUNT
+    GetActionConnectionResponse:
+      description: The response for found connection
+      properties:
+        data:
+          $ref: '#/components/schemas/ActionConnectionData'
+      type: object
     GetDeviceAttributes:
       description: The device attributes
       properties:
@@ -11839,6 +12029,18 @@ components:
         example: env:production
         type: string
       type: array
+    HTTPBody:
+      description: The definition of `HTTPBody` object.
+      properties:
+        content:
+          description: Serialized body content
+          example: '{"some-json": "with-value"}'
+          type: string
+        content_type:
+          description: Content type of the body
+          example: application/json
+          type: string
+      type: object
     HTTPCIAppError:
       description: List of errors.
       properties:
@@ -11863,6 +12065,88 @@ components:
           items:
             $ref: '#/components/schemas/HTTPCIAppError'
           type: array
+      type: object
+    HTTPCredentials:
+      description: The definition of `HTTPCredentials` object.
+      oneOf:
+      - $ref: '#/components/schemas/HTTPTokenAuth'
+    HTTPCredentialsUpdate:
+      description: The definition of `HTTPCredentialsUpdate` object.
+      oneOf:
+      - $ref: '#/components/schemas/HTTPTokenAuthUpdate'
+    HTTPHeader:
+      description: The definition of `HTTPHeader` object.
+      properties:
+        name:
+          description: The `HTTPHeader` `name`.
+          example: MyHttpHeader
+          pattern: ^[A-Za-z][A-Za-z\\d\\-\\_]*$
+          type: string
+        value:
+          description: The `HTTPHeader` `value`.
+          example: Some header value
+          type: string
+      required:
+      - name
+      - value
+      type: object
+    HTTPHeaderUpdate:
+      description: The definition of `HTTPHeaderUpdate` object.
+      properties:
+        deleted:
+          description: Should the header be deleted.
+          type: boolean
+        name:
+          description: The `HTTPHeaderUpdate` `name`.
+          example: MyHttpHeader
+          pattern: ^[A-Za-z][A-Za-z\\d\\-\\_]*$
+          type: string
+        value:
+          description: The `HTTPHeaderUpdate` `value`.
+          example: Updated Header Value
+          type: string
+      required:
+      - name
+      type: object
+    HTTPIntegration:
+      description: The definition of `HTTPIntegration` object.
+      properties:
+        base_url:
+          description: Base HTTP url for the integration
+          example: http://datadoghq.com
+          pattern: url
+          type: string
+        credentials:
+          $ref: '#/components/schemas/HTTPCredentials'
+        type:
+          $ref: '#/components/schemas/HTTPIntegrationType'
+      required:
+      - type
+      - base_url
+      - credentials
+      type: object
+    HTTPIntegrationType:
+      description: The definition of `HTTPIntegrationType` object.
+      enum:
+      - HTTP
+      example: HTTP
+      type: string
+      x-enum-varnames:
+      - HTTP
+    HTTPIntegrationUpdate:
+      description: The definition of `HTTPIntegrationUpdate` object.
+      properties:
+        base_url:
+          description: Base HTTP url for the integration
+          example: http://datadoghq.com
+          pattern: url
+          type: string
+        credentials:
+          $ref: '#/components/schemas/HTTPCredentialsUpdate'
+        type:
+          $ref: '#/components/schemas/HTTPIntegrationType'
+      required:
+      - type
       type: object
     HTTPLog:
       description: Structured log message.
@@ -11939,6 +12223,105 @@ components:
           type: string
       required:
       - message
+      type: object
+    HTTPToken:
+      description: The definition of `HTTPToken` object.
+      properties:
+        name:
+          description: The `HTTPToken` `name`.
+          example: MyToken
+          pattern: ^[A-Za-z][A-Za-z\\d]*$
+          type: string
+        type:
+          $ref: '#/components/schemas/TokenType'
+        value:
+          description: The `HTTPToken` `value`.
+          example: Some Token Value
+          type: string
+      required:
+      - name
+      - value
+      - type
+      type: object
+    HTTPTokenAuth:
+      description: The definition of `HTTPTokenAuth` object.
+      properties:
+        body:
+          $ref: '#/components/schemas/HTTPBody'
+        headers:
+          description: The `HTTPTokenAuth` `headers`.
+          items:
+            $ref: '#/components/schemas/HTTPHeader'
+          type: array
+        tokens:
+          description: The `HTTPTokenAuth` `tokens`.
+          items:
+            $ref: '#/components/schemas/HTTPToken'
+          type: array
+        type:
+          $ref: '#/components/schemas/HTTPTokenAuthType'
+        url_parameters:
+          description: The `HTTPTokenAuth` `url_parameters`.
+          items:
+            $ref: '#/components/schemas/UrlParam'
+          type: array
+      required:
+      - type
+      type: object
+    HTTPTokenAuthType:
+      description: The definition of `HTTPTokenAuthType` object.
+      enum:
+      - HTTPTokenAuth
+      example: HTTPTokenAuth
+      type: string
+      x-enum-varnames:
+      - HTTPTOKENAUTH
+    HTTPTokenAuthUpdate:
+      description: The definition of `HTTPTokenAuthUpdate` object.
+      properties:
+        body:
+          $ref: '#/components/schemas/HTTPBody'
+        headers:
+          description: The `HTTPTokenAuthUpdate` `headers`.
+          items:
+            $ref: '#/components/schemas/HTTPHeaderUpdate'
+          type: array
+        tokens:
+          description: The `HTTPTokenAuthUpdate` `tokens`.
+          items:
+            $ref: '#/components/schemas/HTTPTokenUpdate'
+          type: array
+        type:
+          $ref: '#/components/schemas/HTTPTokenAuthType'
+        url_parameters:
+          description: The `HTTPTokenAuthUpdate` `url_parameters`.
+          items:
+            $ref: '#/components/schemas/UrlParamUpdate'
+          type: array
+      required:
+      - type
+      type: object
+    HTTPTokenUpdate:
+      description: The definition of `HTTPTokenUpdate` object.
+      properties:
+        deleted:
+          description: Should the header be deleted.
+          type: boolean
+        name:
+          description: The `HTTPToken` `name`.
+          example: MyToken
+          pattern: ^[A-Za-z][A-Za-z\\d]*$
+          type: string
+        type:
+          $ref: '#/components/schemas/TokenType'
+        value:
+          description: The `HTTPToken` `value`.
+          example: Some Token Value
+          type: string
+      required:
+      - name
+      - type
+      - value
       type: object
     HistoricalJobDataType:
       description: Type of payload.
@@ -28360,6 +28743,19 @@ components:
       items:
         $ref: '#/components/schemas/TimeseriesResponseValues'
       type: array
+    TokenName:
+      description: Name for tokens.
+      example: MyTokenName
+      pattern: ^[A-Za-z][A-Za-z\\d]*$
+      type: string
+    TokenType:
+      description: The definition of `TokenType` object.
+      enum:
+      - SECRET
+      example: SECRET
+      type: string
+      x-enum-varnames:
+      - SECRET
     Unit:
       description: Object containing the metric unit family, scale factor, name, and
         short name.
@@ -28387,6 +28783,20 @@ components:
           description: Abbreviation of the unit.
           example: min
           type: string
+      type: object
+    UpdateActionConnectionRequest:
+      description: Request used to update an action connection.
+      properties:
+        data:
+          $ref: '#/components/schemas/ActionConnectionDataUpdate'
+      required:
+      - data
+      type: object
+    UpdateActionConnectionResponse:
+      description: The response for an updated connection.
+      properties:
+        data:
+          $ref: '#/components/schemas/ActionConnectionData'
       type: object
     UpdateOpenAPIResponse:
       description: Response for `UpdateOpenAPI`.
@@ -28467,6 +28877,36 @@ components:
       description: Upsert entity response included item.
       oneOf:
       - $ref: '#/components/schemas/EntityResponseIncludedSchema'
+    UrlParam:
+      description: The definition of `UrlParam` object.
+      properties:
+        name:
+          $ref: '#/components/schemas/TokenName'
+          example: MyUrlParameter
+        value:
+          description: The `UrlParam` `value`.
+          example: Some Url Parameter value
+          type: string
+      required:
+      - name
+      - value
+      type: object
+    UrlParamUpdate:
+      description: The definition of `UrlParamUpdate` object.
+      properties:
+        deleted:
+          description: Should the header be deleted.
+          type: boolean
+        name:
+          $ref: '#/components/schemas/TokenName'
+          example: MyUrlParameter
+        value:
+          description: The `UrlParamUpdate` `value`.
+          example: Some Url Parameter value
+          type: string
+      required:
+      - name
+      type: object
     UsageApplicationSecurityMonitoringResponse:
       description: Application Security Monitoring usage response.
       properties:
@@ -29724,6 +30164,190 @@ info:
   version: '1.0'
 openapi: 3.0.0
 paths:
+  /api/v2/actions/connections:
+    post:
+      description: Create a new Action Connection
+      operationId: CreateActionConnection
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateActionConnectionRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateActionConnectionResponse'
+          description: Successfully created Action Connection
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Forbidden
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Too Many Request
+      summary: Create a new Action Connection
+      tags:
+      - Action Connection
+      x-given:
+        action_connection:
+          parameters:
+          - name: body
+            value: "{\n  \"data\": {\n    \"type\": \"action_connection\",\n    \"attributes\":
+              {\n        \"name\": \"Cassette Connection DELETE\",\n        \"integration\":
+              {\n            \"type\": \"AWS\",\n            \"credentials\": {\n
+              \               \"type\": \"AWSAssumeRole\",\n                \"role\":
+              \"MyRole\",\n                \"account_id\": \"123456789123\"\n            }\n
+              \       }\n    }\n  }\n}"
+          step: there is a valid "action_connection" in the system
+      x-menu-order: 2
+      x-undo:
+        operationId: DeleteActionConnection
+        parameters:
+        - name: connection_id
+          source: data.id
+        type: unsafe
+  /api/v2/actions/connections/{connection_id}:
+    delete:
+      description: Delete an existing Action Connection
+      operationId: DeleteActionConnection
+      parameters:
+      - $ref: '#/components/parameters/ConnectionId'
+      responses:
+        '204':
+          description: The resource was deleted successfully.
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Not Found
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Too Many Request
+      summary: Delete an existing Action Connection
+      tags:
+      - Action Connection
+      x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - connection_write
+      x-undo:
+        type: idempotent
+    get:
+      description: Get an existing Action Connection
+      operationId: GetActionConnection
+      parameters:
+      - $ref: '#/components/parameters/ConnectionId'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetActionConnectionResponse'
+          description: Successfully get Action Connection
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Not Found
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Too Many Request
+      summary: Get an existing Action Connection
+      tags:
+      - Action Connection
+      x-menu-order: 1
+      x-undo:
+        type: safe
+    patch:
+      description: Update an existing Action Connection
+      operationId: UpdateActionConnection
+      parameters:
+      - $ref: '#/components/parameters/ConnectionId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateActionConnectionRequest'
+        description: Update an existing Action Connection request body
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateActionConnectionResponse'
+          description: Successfully updated Action Connection
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Not Found
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Too Many Request
+      summary: Update an existing Action Connection
+      tags:
+      - Action Connection
+      x-menu-order: 3
+      x-undo:
+        type: idempotent
   /api/v2/agentless_scanning/accounts/aws:
     get:
       description: Fetches the scan options configured for AWS accounts.
@@ -41651,6 +42275,14 @@ paths:
 
         - Monitors: `monitor`
 
+        - Workflows: `workflow`
+
+        - App Builder Apps: `app-builder-app`
+
+        - Connections: `connection`
+
+        - Connection Groups: `connection-group`
+
 
         #### Supported relations for resources
 
@@ -41676,7 +42308,15 @@ paths:
 
         Monitors                    | `viewer`, `editor`
 
-        Reference Tables            | `viewer`, `editor`'
+        Reference Tables            | `viewer`, `editor`
+
+        Workflows                   | `viewer`, `runner`, `editor`
+
+        App Builder Apps            | `viewer`, `editor`
+
+        Connections                 | `viewer`, `resolver`, `editor`
+
+        Connection Groups           | `viewer`, `editor`'
       operationId: UpdateRestrictionPolicy
       parameters:
       - $ref: '#/components/parameters/ResourceID'
@@ -50314,6 +50954,17 @@ tags:
   externalDocs:
     url: https://docs.datadoghq.com/integrations/amazon_web_services/#log-collection
   name: AWS Logs Integration
+- description: "Action connections extend your installed integrations and allow you
+    to take action in your third-party systems\n(e.g. AWS, GitLab, and Statuspage)
+    with Datadog\u2019s Workflow Automation and App Builder products.\n\nDatadog\u2019s
+    Integrations automatically provide authentication for Slack, Microsoft Teams,
+    PagerDuty, Opsgenie,\nJIRA, GitHub, and Statuspage. You do not need additional
+    connections in order to access these tools within\nWorkflow Automation and App
+    Builder.\n\nWe offer granular access control for editing and resolving connections."
+  externalDocs:
+    description: Find out more at
+    url: https://docs.datadoghq.com/service_management/workflows/connections/
+  name: Action Connection
 - description: "Datadog Agentless Scanning provides visibility into risks and vulnerabilities\nwithin
     your hosts, running containers, and serverless functions\u2014all without\nrequiring
     teams to install Agents on every host or where Agents cannot be installed.\nGo

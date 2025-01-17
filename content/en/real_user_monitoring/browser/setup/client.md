@@ -284,6 +284,167 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
      h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
      d=o.createElement(u);d.async=1;d.src=n
      n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
+  })(window,document,'script','https://www.datadoghq-browser-agent.com/us1/v6/datadog-rum.js','DD_RUM')
+  window.DD_RUM.onReady(function() {
+    window.DD_RUM.init({
+      clientToken: '<CLIENT_TOKEN>',
+      applicationId: '<APPLICATION_ID>',
+      // `site` refers to the Datadog site parameter of your organization
+      // see https://docs.datadoghq.com/getting_started/site/
+      site: 'datadoghq.com',
+      //  service: 'my-web-application',
+      //  env: 'production',
+      //  version: '1.0.0',
+      sessionSampleRate: 100,
+      sessionReplaySampleRate: 100,
+      enablePrivacyForActionName: true,
+    });
+  })
+</script>
+```
+{{</ site-region>}}
+{{< site-region region="ap1" >}}
+```html
+<script>
+  (function(h,o,u,n,d) {
+     h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
+     d=o.createElement(u);d.async=1;d.src=n
+     n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
+  })(window,document,'script','https://www.datadoghq-browser-agent.com/ap1/v6/datadog-rum.js','DD_RUM')
+  window.DD_RUM.onReady(function() {
+    window.DD_RUM.init({
+      clientToken: '<CLIENT_TOKEN>',
+      applicationId: '<APPLICATION_ID>',
+      // `site` refers to the Datadog site parameter of your organization
+      // see https://docs.datadoghq.com/getting_started/site/
+      site: 'ap1.datadoghq.com',
+      //  service: 'my-web-application',
+      //  env: 'production',
+      //  version: '1.0.0',
+      sessionSampleRate: 100,
+      sessionReplaySampleRate: 100,
+      enablePrivacyForActionName: true,
+    });
+  })
+</script>
+```
+{{</ site-region>}}
+{{< site-region region="eu" >}}
+```html
+<script>
+  (function(h,o,u,n,d) {
+     h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
+     d=o.createElement(u);d.async=1;d.src=n
+     n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
+  })(window,document,'script','https://www.datadoghq-browser-agent.com/eu1/v6/datadog-rum.js','DD_RUM')
+  window.DD_RUM.onReady(function() {
+    window.DD_RUM.init({
+      clientToken: '<CLIENT_TOKEN>',
+      applicationId: '<APPLICATION_ID>',
+      // `site` refers to the Datadog site parameter of your organization
+      // see https://docs.datadoghq.com/getting_started/site/
+      site: 'datadoghq.eu',
+      //  service: 'my-web-application',
+      //  env: 'production',
+      //  version: '1.0.0',
+      sessionSampleRate: 100,
+      sessionReplaySampleRate: 100,
+      enablePrivacyForActionName: true,
+    });
+  })
+</script>
+```
+{{</ site-region>}}
+{{< site-region region="us3" >}}
+```html
+<script>
+  (function(h,o,u,n,d) {
+     h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
+     d=o.createElement(u);d.async=1;d.src=n
+     n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
+  })(window,document,'script','https://www.datadoghq-browser-agent.com/us3/v6/datadog-rum.js','DD_RUM')
+  window.DD_RUM.onReady(function() {
+    window.DD_RUM.init({
+      clientToken: '<CLIENT_TOKEN>',
+      applicationId: '<APPLICATION_ID>',
+      // `site` refers to the Datadog site parameter of your organization
+      // see https://docs.datadoghq.com/getting_started/site/
+      site: 'us3.datadoghq.com',
+      //  service: 'my-web-application',
+      //  env: 'production',
+      //  version: '1.0.0',
+      sessionSampleRate: 100,
+      sessionReplaySampleRate: 100,
+      enablePrivacyForActionName: true,
+    });
+  })
+</script>
+```
+{{</ site-region>}}
+{{< site-region region="us5" >}}
+```html
+<script>
+  (function(h,o,u,n,d) {
+     h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
+     d=o.createElement(u);d.async=1;d.src=n
+     n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
+  })(window,document,'script','https://www.datadoghq-browser-agent.com/us5/v6/datadog-rum.js','DD_RUM')
+  window.DD_RUM.onReady(function() {
+    window.DD_RUM.init({
+      clientToken: '<CLIENT_TOKEN>',
+      applicationId: '<APPLICATION_ID>',
+      // `site` refers to the Datadog site parameter of your organization
+      // see https://docs.datadoghq.com/getting_started/site/
+      site: 'us5.datadoghq.com',
+      //  service: 'my-web-application',
+      //  env: 'production',
+      //  version: '1.0.0',
+      sessionSampleRate: 100,
+      sessionReplaySampleRate: 100,
+      enablePrivacyForActionName: true,
+    });
+  })
+</script>
+```
+{{</ site-region>}}
+{{< site-region region="gov" >}}
+```html
+<script>
+  (function(h,o,u,n,d) {
+     h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
+     d=o.createElement(u);d.async=1;d.src=n
+     n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
+  })(window,document,'script','https://www.datadoghq-browser-agent.com/datadog-rum-v6.js','DD_RUM')
+  window.DD_RUM.onReady(function() {
+    window.DD_RUM.init({
+      clientToken: '<CLIENT_TOKEN>',
+      applicationId: '<APPLICATION_ID>',
+      // `site` refers to the Datadog site parameter of your organization
+      // see https://docs.datadoghq.com/getting_started/site/
+      site: 'ddog-gov.com',
+      //  service: 'my-web-application',
+      //  env: 'production',
+      //  version: '1.0.0',
+      sessionSampleRate: 100,
+      sessionReplaySampleRate: 100,
+      enablePrivacyForActionName: true,
+    });
+  })
+</script>
+```
+{{</ site-region>}}
+
+{{% /collapse-content %}}
+
+{{% collapse-content title="Before v6.0.0" level="h4" %}}
+
+{{< site-region region="us" >}}
+```html
+<script>
+  (function(h,o,u,n,d) {
+     h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
+     d=o.createElement(u);d.async=1;d.src=n
+     n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
   })(window,document,'script','https://www.datadoghq-browser-agent.com/us1/v5/datadog-rum.js','DD_RUM')
   window.DD_RUM.onReady(function() {
     window.DD_RUM.init({
@@ -1157,7 +1318,7 @@ Early RUM API calls must be wrapped in the `window.DD_RUM.onReady()` callback. T
     h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
     d=o.createElement(u);d.async=1;d.src=n
     n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
-  })(window,document,'script','https://www.datadoghq-browser-agent.com/us1/v5/datadog-rum.js','DD_RUM')
+  })(window,document,'script','https://www.datadoghq-browser-agent.com/us1/v6/datadog-rum.js','DD_RUM')
   window.DD_RUM.onReady(function() {
     window.DD_RUM.init({
       clientToken: '<CLIENT_TOKEN>',
@@ -1166,8 +1327,6 @@ Early RUM API calls must be wrapped in the `window.DD_RUM.onReady()` callback. T
       service: '<APP_ID>',
       env: '<ENV_NAME>',
       // version: '1.0.0',
-      trackUserInteractions: true,
-      trackResources: true,
       defaultPrivacyLevel: {default to the selection in form}
     });
   })
@@ -1188,6 +1347,137 @@ Add the generated code snippet to the head tag (in front of any other script tag
 {{% tab "RUM" %}}
 
 {{% collapse-content title="Latest version" level="h4" expanded="true" %}}
+
+{{< site-region region="us" >}}
+```html
+<script src="https://www.datadoghq-browser-agent.com/us1/v6/datadog-rum.js" type="text/javascript"></script>
+<script>
+  window.DD_RUM &&
+    window.DD_RUM.init({
+      clientToken: '<CLIENT_TOKEN>',
+      applicationId: '<APPLICATION_ID>',
+      // `site` refers to the Datadog site parameter of your organization
+      // see https://docs.datadoghq.com/getting_started/site/
+      site: 'datadoghq.com',
+      //  service: 'my-web-application',
+      //  env: 'production',
+      //  version: '1.0.0',
+      sessionSampleRate: 100,
+      sessionReplaySampleRate: 100,
+      enablePrivacyForActionName: true,
+    });
+</script>
+```
+{{</ site-region>}}
+{{< site-region region="ap1" >}}
+```html
+<script src="https://www.datadoghq-browser-agent.com/ap1/v6/datadog-rum.js" type="text/javascript"></script>
+<script>
+  window.DD_RUM &&
+    window.DD_RUM.init({
+      clientToken: '<CLIENT_TOKEN>',
+      applicationId: '<APPLICATION_ID>',
+      // `site` refers to the Datadog site parameter of your organization
+      // see https://docs.datadoghq.com/getting_started/site/
+      site: 'ap1.datadoghq.com',
+      //  service: 'my-web-application',
+      //  env: 'production',
+      //  version: '1.0.0',
+      sessionSampleRate: 100,
+      sessionReplaySampleRate: 100,
+      enablePrivacyForActionName: true,
+    });
+</script>
+```
+{{</ site-region>}}
+{{< site-region region="eu" >}}
+```html
+<script src="https://www.datadoghq-browser-agent.com/eu1/v6/datadog-rum.js" type="text/javascript"></script>
+<script>
+  window.DD_RUM &&
+    window.DD_RUM.init({
+      clientToken: '<CLIENT_TOKEN>',
+      applicationId: '<APPLICATION_ID>',
+      // `site` refers to the Datadog site parameter of your organization
+      // see https://docs.datadoghq.com/getting_started/site/
+      site: 'datadoghq.eu',
+      //  service: 'my-web-application',
+      //  env: 'production',
+      //  version: '1.0.0',
+      sessionSampleRate: 100,
+      sessionReplaySampleRate: 100,
+      enablePrivacyForActionName: true,
+    });
+</script>
+```
+{{</ site-region>}}
+{{< site-region region="us3" >}}
+```html
+<script src="https://www.datadoghq-browser-agent.com/us3/v6/datadog-rum.js" type="text/javascript"></script>
+<script>
+  window.DD_RUM &&
+    window.DD_RUM.init({
+      clientToken: '<CLIENT_TOKEN>',
+      applicationId: '<APPLICATION_ID>',
+      // `site` refers to the Datadog site parameter of your organization
+      // see https://docs.datadoghq.com/getting_started/site/
+      site: 'us3.datadoghq.com',
+      //  service: 'my-web-application',
+      //  env: 'production',
+      //  version: '1.0.0',
+      sessionSampleRate: 100,
+      sessionReplaySampleRate: 100,
+      enablePrivacyForActionName: true,
+    });
+</script>
+```
+{{</ site-region>}}
+{{< site-region region="us5" >}}
+```html
+<script src="https://www.datadoghq-browser-agent.com/us5/v6/datadog-rum.js" type="text/javascript"></script>
+<script>
+  window.DD_RUM &&
+    window.DD_RUM.init({
+      clientToken: '<CLIENT_TOKEN>',
+      applicationId: '<APPLICATION_ID>',
+      // `site` refers to the Datadog site parameter of your organization
+      // see https://docs.datadoghq.com/getting_started/site/
+      site: 'us5.datadoghq.com',
+      //  service: 'my-web-application',
+      //  env: 'production',
+      //  version: '1.0.0',
+      sessionSampleRate: 100,
+      sessionReplaySampleRate: 100,
+      enablePrivacyForActionName: true,
+    });
+</script>
+```
+{{</ site-region>}}
+{{< site-region region="gov" >}}
+```html
+<script src="https://www.datadoghq-browser-agent.com/datadog-rum-v6.js" type="text/javascript"></script>
+<script>
+  window.DD_RUM &&
+    window.DD_RUM.init({
+      clientToken: '<CLIENT_TOKEN>',
+      applicationId: '<APPLICATION_ID>',
+      // `site` refers to the Datadog site parameter of your organization
+      // see https://docs.datadoghq.com/getting_started/site/
+      site: 'ddog-gov.com',
+      //  service: 'my-web-application',
+      //  env: 'production',
+      //  version: '1.0.0',
+      sessionSampleRate: 100,
+      sessionReplaySampleRate: 100,
+      enablePrivacyForActionName: true,
+    });
+</script>
+```
+{{</ site-region>}}
+
+{{% /collapse-content %}}
+
+{{% collapse-content title="Before v6.0.0" level="h4" %}}
 
 {{< site-region region="us" >}}
 ```html
@@ -1939,7 +2229,7 @@ The `window.DD_RUM` check is used to prevent issues if a loading failure occurs 
 
 ```javascript
 <script
-    src="https://www.datadoghq-browser-agent.com/us1/v5/datadog-rum.js"
+    src="https://www.datadoghq-browser-agent.com/us1/v6/datadog-rum.js"
     type="text/javascript">
 </script>
 <script>
@@ -1950,8 +2240,6 @@ The `window.DD_RUM` check is used to prevent issues if a loading failure occurs 
       service: '<APP_ID>',
       env: '<ENV_NAME>',
       // version: '1.0.0',
-      trackUserInteractions: true,
-      trackResources: true,
       defaultPrivacyLevel: {default to the selection in form}
     });
 </script>
