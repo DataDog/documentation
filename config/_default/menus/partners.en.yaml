@@ -1,0 +1,28 @@
+menu:
+  partners:
+    - name: Getting Started
+      url: /partners/
+      identifier: getting_started
+      weight: 1
+    - name: Billing and Usage Reporting
+      url: /partners/billing-and-usage-reporting/
+      identifier: billing-and-usage-reporting
+      weight: 2
+    - name: Data Intake
+      url: /partners/data-intake/
+      identifier: /data-intake
+      weight: 3
+    - name: Delivering Value
+      url: /partners/delivering-value
+      identifier: delivering-value
+      weight: 4
+    - name: Laying Groundwork
+      url: /partners/laying-the-groundwork/
+      identifier: laying-the-groundwork
+      weight: 5
+    - name: Sales Enablement
+      url: /partners/sales-enablement/
+      identifier: sales-enablement
+      weight: 6
+
+

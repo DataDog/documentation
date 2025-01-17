@@ -949,12 +949,18 @@ menu:
       identifier: api
       parent: essentials_heading
       weight: 90000
+    - name: Partners
+      url: partners/
+      pre: colab
+      identifier: partners
+      parent: essentials_heading
+      weight: 100000
     - name: Datadog Mobile App
       url: mobile/
       pre: mobile
       identifier: mobile
       parent: essentials_heading
-      weight: 100000
+      weight: 110000
     - name: Enterprise Configuration
       url: mobile/enterprise_configuration
       identifier: mobile_enterprise_configuration
@@ -965,7 +971,7 @@ menu:
       pre: coscreen
       identifier: coscreen
       parent: essentials_heading
-      weight: 110000
+      weight: 120000
     - name: Troubleshooting
       url: coscreen/troubleshooting
       identifier: coscreen_troubleshooting
