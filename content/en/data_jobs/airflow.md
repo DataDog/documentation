@@ -130,7 +130,7 @@ To get started, follow the instructions below.
 
 3. Deploy your updated `requirements.txt` and [Amazon MWAA startup script][3] to your Amazon S3 folder configured for your Amazon MWAA Environment.
 
-4. Optionally, set up Log Collection by following the steps below:
+4. Optionally, set up Log Collection for correlating task logs to DAG run executions in DJM by following the steps below:
    1. Configure Amazon MWAA to [send logs to CloudWatch][9].
    2. [Send the logs to Datadog][10].
 
