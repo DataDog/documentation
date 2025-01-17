@@ -39,7 +39,7 @@
 "manifest_version": "2.0.0"
 "name": "catchpoint"
 "public_title": "Catchpoint"
-"short_description": "Envía tus alertas de Catchpoint a tu flujo de eventos de Datadog".
+"short_description": "Envía tus alertas de Catchpoint a tu flujo de eventos de Datadog."
 "supported_os": []
 "tile":
   "changelog": "CHANGELOG.md"
@@ -50,7 +50,7 @@
   - "Category::gestión de eventos"
   - "Offering::integración"
   "configuration": "README.md#Setup"
-  "description": "Envía tus alertas de Catchpoint a tu flujo de eventos de Datadog".
+  "description": "Envía tus alertas de Catchpoint a tu flujo de eventos de Datadog."
   "media": []
   "overview": "README.md#Overview"
   "support": "README.md#Support"
