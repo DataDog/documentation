@@ -3476,14 +3476,14 @@ menu:
       identifier: endpoint_observability
       parent: tracing
       weight: 8
-    - name: Monitor Endpoints
-      url: /service_catalog/endpoints/monitor_endpoints
-      identifier: monitor_endpoints
-      parent: endpoint_observability
-      weight: 802
     - name: Explore Endpoints
       url: /service_catalog/endpoints/explore_endpoints
       identifier: explore_endpoints
+      parent: endpoint_observability
+      weight: 802
+    - name: Monitor Endpoints
+      url: /service_catalog/endpoints/monitor_endpoints
+      identifier: monitor_endpoints
       parent: endpoint_observability
       weight: 803
     - name: Dynamic Instrumentation

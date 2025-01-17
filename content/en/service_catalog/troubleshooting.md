@@ -46,21 +46,21 @@ The total monitor count displayed on the **Setup Guidance** tab for a single ser
 
 ### Definition matches too many services
 
-By default, The API Catalog matches a definition to all instances that fit the defined path.
+By default, the Endpoints list matches a definition to all instances that fit the defined path.
 You can scope the definition to a specific service by adding the [service parameter][6] to the API definition.
 
 ### Missing endpoints
 
-API Catalog is based on APM tracing, so the first step is to make sure your services are instrumented. Click **Learn More** in the app, then select **Troubleshoot** to verify this.
+The Endpoints list is based on APM tracing, so the first step is to make sure your services are instrumented. Click **Learn More** in the app, then select **Troubleshoot** to verify this.
 {{< img src="tracing/api_catalog/api-catalog-discovery-learn-more.png" alt="Learn More button in the app" style="width:30%;text-align: left;" >}}
 
 ### No telemetry data for OpenAPI file
 
-API Catalog is based on APM tracing, so info from traffic is displayed only when there are traces for the endpoint. After uploading an OpenAPI file, deployment data (Last Seen, environments, and more) is visible after Datadog ingests a span for the endpoint.
+The Endpoints list is based on APM tracing, so info from traffic is displayed only when there are traces for the endpoint. After uploading an OpenAPI file, deployment data (Last Seen, environments, and more) is visible after Datadog ingests a span for the endpoint.
 
 ### No data for new monitor
 
-API Catalog is based on APM tracing, so info from traffic is displayed only when there are traces for the endpoint. If you do not see data in the monitor graph, one of the options below may apply:
+The Endpoints list is based on APM tracing, so info from traffic is displayed only when there are traces for the endpoint. If you do not see data in the monitor graph, one of the options below may apply:
 - The endpoint has not been used yet since it was registered/uploaded through OpenAPI.
 - Traces are sampled on the Agent side. Read [Ingestion Controls][5] for more information.
 

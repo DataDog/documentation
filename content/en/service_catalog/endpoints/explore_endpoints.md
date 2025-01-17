@@ -11,37 +11,37 @@ aliases:
     - /api_catalog/explore_apis/
 ---
 
-{{< img src="tracing/api_catalog/api-catalog-explorer.png" alt="API Catalog Explorer view" style="width:100%;" >}}
+{{< img src="tracing/service_catalog/endpoints-list.png" alt="**Endpoints** list in the Service Catalog, showing performance-related information for each." style="width:100%;" >}}
 
-## Exploring endpoints
+## Overview
 
-The [Endpoints list][1] shows all endpoints in all environments in your Datadog organization. The performance data shown for each endpoint is scoped to the environment and time frame you select. You can browse and ask questions by querying different properties and metrics for more precise results, and you can filter using facets and tags.
+The [**Endpoints** list][1] provides visibility into all HTTP endpoints across your Datadog organization's environments. Each endpoint displays its HTTP method (for example `GET`), URL path (for example, `/payment/{shop_id}/purchase`), and associated service name (for example, `Payments`).
 
-- **Sort by a column in the table**: Click a header to sort by. For example, click **P99** to see endpoints with the highest 99th percentile for latency. **Note**: the **P99** column may not be displayed by default.
+<div class="alert alert-info">The <strong>Endpoints</strong> list only supports HTTP endpoints.</div>
 
-- **View API ownership information**: View the **TEAM** column for an endpoint. This information is inherited from the associated service definition in the [Service Catalog][2]. The service owner owns all of the endpoints connected to the service.
+## Exploring endpoint performance
 
-- **Filter or search the list of endpoints**: Enter a query in the **Search** field. Search by service, path, or any other primary tag. Alternatively, select a combination of facets to filter by the **Service** or the **Team** the endpoint belongs to.
+The **Endpoints** list shows performance data scoped to your selected environment and time frame:
 
-- **Scope the displayed data**: Specify an environment, another primary tag (such as `datacenter`), and a time frame in **Show performance of:**.
+- **Column sorting**: Click column headers to sort by metrics. For example, click **P95** to see endpoints with the top 95th percentile for latency.
+- **Ownership tracking**: View team ownership in the **TEAM** column. This information is inherited from the associated service definition in the [Service Catalog][2]. The service owner owns all of the endpoints connected to the service.
+- **Filtering and searching**: Search by service, path, or any primary tag, or filter using facets like **Service** and **Team**.
+- **Scoping**: Specify the environment, additional primary tags (for example, `cluster_name`), and time frame.
 
-The following example shows how to scope the displayed data to a specific environment and `cluster-name`:
+{{< img src="tracing/service_catalog/scope-data.png" alt="Changing scope settings changes the data shown in the Endpoints list" >}}
 
-{{< img src="tracing/api_catalog/api-catalog-scope4.png" alt="Showing how changing scope settings changes the metrics shown in API Catalog" >}}
+## Viewing endpoint details
 
-## Detecting underperforming APIs and identifying opportunities for optimization
+Use the endpoints details page to detect underperforming APIs and identify opportunities for optimization.
 
-When exploring an endpoint, getting a higher resolution view of the API endpoint details is helpful.
+To access the endpoint details page:
 
-Use the filtering, sorting, and searching options in the endpoints list to find endpoints of interest.
-Click an endpoint to view its details resource page. Here you can see performance, errors, issues, deployments, monitors, ownership, a dependency map, and metadata information in one central location. From the details page, you can also add custom tags to the endpoint. You can also investigate the various types of telemetry using links to other areas of Datadog. 
+1. Use the filtering, sorting, and searching options in the **Endpoints** list to find endpoints of interest.
+1. Click an endpoint to view its details page.
 
-In the details page, you can:
-- Look up a specific endpoint by path (for example, `/checkout`) when it shows a high error rate and a high request count.
-- View the **Requests & Errors** graph and correlated **Response Code** graph to identify issues.
-- Navigate to related telemetry like traces, logs, and errors.
+The endpoint details page shows you metadata, performance, errors, dependencies, and correlated telemetry from other areas of Datadog.
 
-{{< img src="tracing/api_catalog/api-catalog-endpoint-details-pivot-to-traces3.mp4" alt="Click into an endpoint to see Errors graph and dependency graph. Click through to related traces to investigate." video="true" >}}
+{{< img src="tracing/service_catalog/endpoint-details.png" alt="Click into an endpoint to see Errors graph and dependency graph. Click through to related traces to investigate." >}}
 
 ## Further reading
 
