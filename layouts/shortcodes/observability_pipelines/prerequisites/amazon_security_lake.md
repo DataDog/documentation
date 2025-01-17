@@ -1,3 +1,6 @@
+<div class="alert alert-warning">The Amazon Security Lake destination is in Preview. Complete the <a href="https://www.datadoghq.com/product-preview/route-logs-to-amazon-security-lake/">form</a> to request access.
+</div>
+
 1. Follow the [Getting Started with Amazon Security Lake][10071] to set up Amazon Security Lake, and make sure to:
     - Enable Amazon Security Lake for the AWS account.
     - Select the AWS regions where S3 buckets will be created for OCSF data.
