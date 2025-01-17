@@ -255,7 +255,7 @@ Datadog infrastructure correlation is possible using different methods:
 
 {{< tabs >}}
 {{% tab "Non autoscaling executors" %}}
-The GitLab runner must have a tag of the form `host:<hostname>`. Tags can be added while [registering a new runner][1]. As a result, this method is only available when the runner is directly running the job.
+The GitLab runner must have a tag in the form `host:<hostname>`. Tags can be added while [registering a new runner][1]. As a result, this method is only available when the runner is directly running the job.
 
 This excludes executors that are autoscaling the infrastructure in order to run the job (such as the Kubernetes, Docker Autoscaler, or Instance executors) as it is not possible to add tags dynamically for those runners.
 
@@ -283,7 +283,7 @@ CI Visibility supports Infrastructure metrics for "Instance" executors. For more
 {{% /tab %}}
 
 {{% tab "Kubernetes" %}}
-CI Visibility supports Infrastructure metrics for the Kubernetes executor. For this, it is necessary to have the Datadog Agent monitoring the Kubernetes Gitlab infrastructure. See [Install the Datadog Agent on Kubernetes][1] to install the Datadog agent in a Kubernetes cluster.
+CI Visibility supports Infrastructure metrics for the Kubernetes executor. For this, it is necessary to have the Datadog Agent monitoring the Kubernetes Gitlab infrastructure. See [Install the Datadog Agent on Kubernetes][1] to install the Datadog Agent in a Kubernetes cluster.
 
 [1]: /containers/kubernetes/installation/?tab=datadogoperator
 {{% /tab %}}
