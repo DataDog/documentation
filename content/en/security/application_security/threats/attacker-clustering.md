@@ -24,7 +24,7 @@ Out of the box, the attacker clustering will be computed for the ASM detection r
 
 If you create custom detection rules and want the attacker clustering to be executed, do not forget to add such tags in the detection rule editor (see screenshot below).
 
-{{< img src="static/images/security/application_security/threats/tag-on-detection-rule.png" alt="Screenshot of the Detection rule editor showing where to add tags"  >}}
+{{< img src="security/application_security/threats/tag-on-detection-rule.png" alt="Screenshot of the Detection rule editor showing where to add tags"  >}}
 
 ## Attacker Clustering Attributes
 
@@ -39,7 +39,7 @@ Attacker clustering is computed on the following request attributes of requests:
 
 When the attacker attributes are identified, we show them on the signal side panel and signal full page.
 
-{{< img src="static/images/security/application_security/threats/attacker-attributes.png" alt="Screenshot of an ASM signals with attacker attributes identified"  >}}
+{{< img src="security/application_security/threats/attacker-attributes.png" alt="Screenshot of an ASM signals with attacker attributes identified"  >}}
 
 ## Attacker Clustering Mechanism
 
