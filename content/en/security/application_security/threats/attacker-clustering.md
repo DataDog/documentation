@@ -1,0 +1,52 @@
+---
+title: Attacker Clustering
+disable_toc: false
+further_reading:
+- link: "/security/application_security/threats/fingerprint"
+  tag: "Documentation"
+  text: "Fingerprint"
+---
+
+This topic describes how to use **Attacker Clustering** to block more efficiently distributed attacks.
+
+## Overview
+
+Datadog Application Security Management (ASM) analyses traffic of security signals to find attacker patterns and help you mitigate distributed attacks more efficiently. Attacker clustering highlights a set of common attributes that is shared by a significant portion of the traffic and suggests blocking on those.
+
+Blocking on attacker attributes means you keep your application or api protected even as the attacker rotates between IPs.
+
+## For which attacks are attacker clusters computed?
+
+The attacker clustering is computed for every ASM security signal being emitted from a detection rule tagged with the following:
+`category:account_takeover` or `category:fraud`
+
+Out of the box, the attacker clustering will be computed for the ASM detection rules that detect API abuse, credential stuffing or brute force attacks.
+
+If you create custom detection rules and want the attacker clustering to be executed, do not forget to add such tags in the detection rule editor (see screenshot below).
+
+{{< img src="static/images/security/application_security/threats/tag-on-detection-rule.png" alt="Screenshot of the Detection rule editor showing where to add tags"  >}}
+
+## Attacker Clustering Attributes
+
+Attacker clustering is computed on the following request attributes of requests:
+* Browser name & version
+* OS name & version
+* ASN number
+* ASN domain
+* User agent header
+* [Threat Intelligence](./threat-intelligence.md)
+* [Datadog attacker fingerprinting](./attacker-fingerprint.md)
+
+When the attacker attributes are identified, we show them on the signal side panel and signal full page.
+
+{{< img src="static/images/security/application_security/threats/attacker-attributes.png" alt="Screenshot of an ASM signals with attacker attributes identified"  >}}
+
+## Attacker Clustering Mechanism
+
+The clustering algorithm analyzes frequency of attributes in the traffic of the attack. It selects attributes that appear frequently while also filtering out the noise from your usual traffic. The goal being to suggest an attribute that can be blocked on to stop or slow the attacker down.
+
+The algorithm  tracks the changes in the attack traffic by identifying emerging trends as the attacker changes tactics (ie. change of headers, tool). The attacker cluster gets updated accordingly to the latest traffic trends.
+
+Traffic associated with threat intelligence also weights into the clustering mechanism. The more an attribute is correlated with threat intelligence the higher the chance to create an attacker cluster around this attribute.
+
+The attacker clustering attributes selected are then shown as regular expressions that can be used to block with ASM's [in-app WAF](./inapp_waf_rules.md).
