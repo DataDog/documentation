@@ -20,12 +20,13 @@ In Project Settings, you can manage access control, configure automatic status t
 
 {{< img src="service_management/case_management/settings/granular_access_control.png" alt="Update Access Control of the project from the settings" style="width:100%;" >}}
 
-By default, projects are unrestricted. You can use Granular Access Control setting to limit the permissions of users, teams, roles or your full organization on the project.
-4 relations give a different set of permissions on the project:
-- **No Access**: User can't view any case, view or setting of the project
-- **Viewer**: User can view and watch all cases, views and settings of the project. They can't create, edit or comment cases.
-- **Contributor**: User can also create, comment and edit cases
-- **Manager**: User can also create and edit views, edit the settings and the permissions and the project, and can delete the project.
+By default, access to projects and cases is unrestricted. [Granular Access Control][1] can be used to manage the permissions of users, teams, roles, or your full organization at the project level. There are four sets of permissions that can be used:
+- **Manager**: Users can create and edit cases, views, settings, and permissions of the project, and can delete the project.
+- **Contributor**: Users can create, comment and edit cases, but not change settings or permissions or the project.
+- **Viewer**: Users can view and watch all cases, views and settings of the project. They can’t create, edit, or comment on cases.
+- **No Access**: Users can’t view any cases, views, or settings of the project.
+
+Note that other Datadog products that integrate with Case Management in an automated way such as Monitors are able to create cases within a project regardless of the project’s access settings
 
 ## Status transitions
 
@@ -37,17 +38,18 @@ Case Management offers a range of native and third-party integrations, so you ca
 
 ### Monitors
 
-Navigate to the [Project Settings page][1], click **Integrations** > **Datadog Monitors**, and click on the toggle to get your @case-<project_handle>.
+Navigate to the [Project Settings page][2], click **Integrations** > **Datadog Monitors**, and click on the toggle to get your @case-<project_handle>.
 
 Project handles can be used in monitors to automatically create cases. In the monitor message body, include `@case-<project_handle>`. Datadog suggests a handle based on the project's name. You can accept or modify it as you wish.
 
 ### Third party integrations
-To configure third party integrations, navigate to [Create notifications and tickets ][2]
+To configure third party integrations, navigate to [Create notifications and tickets ][3]
 
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/cases/settings
-[2]: /service_management/case_management/create_notifications_and_third_party_tickets
+[1]: /account_management/rbac/granular_access
+[2]: https://app.datadoghq.com/cases/settings
+[3]: /service_management/case_management/create_notifications_and_third_party_tickets
