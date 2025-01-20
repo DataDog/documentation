@@ -64,14 +64,6 @@ SCA scans libraries contained in your lockfiles. The following lockfiles are sup
 | Python (poetry) | `poetry.lock`                            |
 | Ruby (bundler)  | `Gemfile.lock`                           |
 
-## Integrate Software Composition Analysis into your software development lifecycle
-
-### CI providers
-{{< whatsnext desc="You can run SCA on any CI platform provider of your choice. See provider-specific documentation to set up SCA in your CI pipelines:">}}
-    {{< nextlink href="code_analysis/software_composition_analysis/github_actions" >}}GitHub Actions{{< /nextlink >}}
-    {{< nextlink href="code_analysis/software_composition_analysis/generic_ci_providers" >}}Generic CI Providers{{< /nextlink >}}
-{{< /whatsnext >}}
-
 ## Search and filter results
 
 <div class="alert alert-info">Datadog Software Composition Analysis can find vulnerable libraries across the software development lifecycle (SDLC). Code Analysis summarizes results found by directly scanning your repositories. To view all vulnerabilities found in repositories and at runtime consolidated together, see <a href="/security/application_security/software_composition_analysis" target="_blank">Application Security</a> for more details.</div>

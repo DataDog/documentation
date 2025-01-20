@@ -105,7 +105,7 @@ You can configure a GitHub App by using the [GitHub integration tile][7] and set
 
 For more information, see the [Source Code Integration documentation][10].
 
-## Static Analysis integrations
+## Explore Static Analysis integrations
 
 With Static Analysis, you can receive automated feedback on poor coding practices and security vulnerabilities on the code you write [directly in an IDE][11] such as [VS Code][3] or [IntelliJ & PyCharm][4], and in your [pull requests on GitHub][5]. 
 
