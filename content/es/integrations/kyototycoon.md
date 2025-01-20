@@ -1,68 +1,68 @@
 ---
-"app_id": "kyoto-tycoon"
-"app_uuid": "5cc7578e-8f8e-43c3-890a-4360581634e7"
-"assets":
-  "dashboards":
-    "kyototycoon": "assets/dashboards/kyototycoon_dashboard.json"
-  "integration":
-    "auto_install": true
-    "configuration":
-      "spec": "assets/configuration/spec.yaml"
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": "kyototycoon.records"
-      "metadata_path": "metadata.csv"
-      "prefix": "kyototycoon."
-    "process_signatures":
-    - "ktserver"
-    "service_checks":
-      "metadata_path": "assets/service_checks.json"
-    "source_type_id": !!int "62"
-    "source_type_name": "Kyoto Tycoon"
-  "saved_views":
-    "kyoto-tycoon_processes": "assets/saved_views/kyoto-tycoon_processes.json"
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": "Datadog"
-  "sales_email": "info@datadoghq.com"
-  "support_email": "help@datadoghq.com"
-"categories":
-- "data stores"
-- "log collection"
-"custom_kind": "integración"
-"dependencies":
-- "https://github.com/DataDog/integrations-core/blob/master/kyototycoon/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "kyototycoon"
-"integration_id": "kyoto-tycoon"
-"integration_title": "Kyoto Tycoon"
-"integration_version": "4.1.0"
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "kyototycoon"
-"public_title": "Kyoto Tycoon"
-"short_description": "Realiza un seguimiento de las operaciones get, set, delete y monitoriza los retrasos de replicación".
-"supported_os":
-- "linux"
-- "macos"
-- "windows"
-"tile":
-  "changelog": "CHANGELOG.md"
-  "classifier_tags":
-  - "Supported OS::Linux"
-  - "Supported OS::macOS"
-  - "Supported OS::Windows"
-  - "Category::Almacenes de datos"
-  - "Category::Recopilación de logs"
-  - "Offering::Integración"
-  "configuration": "README.md#Configuración"
-  "description": "Realiza un seguimiento de las operaciones get, set, delete y monitoriza los retrasos de replicación".
-  "media": []
-  "overview": "README.md#Información general"
-  "support": "README.md#Soporte"
-  "title": "Kyoto Tycoon"
+app_id: kyoto-tycoon
+app_uuid: 5cc7578e-8f8e-43c3-890a-4360581634e7
+assets:
+  dashboards:
+    kyototycoon: assets/dashboards/kyototycoon_dashboard.json
+  integration:
+    auto_install: true
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: kyototycoon.records
+      metadata_path: metadata.csv
+      prefix: kyototycoon.
+    process_signatures:
+    - ktserver
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: !!int 62
+    source_type_name: Kyoto Tycoon
+  saved_views:
+    kyoto-tycoon_processes: assets/saved_views/kyoto-tycoon_processes.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
+- data stores
+- log collection
+custom_kind: integración
+dependencies:
+- https://github.com/DataDog/integrations-core/blob/master/kyototycoon/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: kyototycoon
+integration_id: kyoto-tycoon
+integration_title: Kyoto Tycoon
+integration_version: 4.1.0
+is_public: true
+manifest_version: 2.0.0
+name: kyototycoon
+public_title: Kyoto Tycoon
+short_description: Realiza un seguimiento de las operaciones get, set, delete y monitoriza los retrasos de replicación.
+supported_os:
+- linux
+- macos
+- windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Almacenes de datos
+  - Category::Recopilación de logs
+  - Offering::Integración
+  configuration: README.md#Configuración
+  description: Realiza un seguimiento de las operaciones get, set, delete y monitoriza los retrasos de replicación.
+  media: []
+  overview: README.md#Información general
+  support: README.md#Soporte
+  title: Kyoto Tycoon
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->

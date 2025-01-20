@@ -1,68 +1,68 @@
 ---
-"app_id": "marathon"
-"app_uuid": "fe9a038e-3948-4646-9a1c-ea1f1cc59977"
-"assets":
-  "dashboards":
-    "marathon-overview": "assets/dashboards/marathon-overview_dashboard.json"
-  "integration":
-    "auto_install": true
-    "configuration":
-      "spec": "assets/configuration/spec.yaml"
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": "marathon.apps"
-      "metadata_path": "metadata.csv"
-      "prefix": "marathon".
-    "process_signatures":
-    - "start --master mesos marathon"
-    "service_checks":
-      "metadata_path": "assets/service_checks.json"
-    "source_type_id": !!int "82"
-    "source_type_name": "Marathon"
-  "saved_views":
-    "marathon_processes": "assets/saved_views/marathon_processes.json"
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": "Datadog"
-  "sales_email": "info@datadoghq.com"
-  "support_email": "help@datadoghq.com"
-"categories":
-- "configuration & deployment"
-- "containers"
-- "log collection"
-"custom_kind": "integración"
-"dependencies":
-- "https://github.com/DataDog/integrations-core/blob/master/marathon/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "marathon"
-"integration_id": "marathon"
-"integration_title": "Marathon"
-"integration_version": "4.1.0"
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "marathon"
-"public_title": "Marathon"
-"short_description": "Rastrea las métricas de las aplicaciones: memoria y disco necesarios, recuento de instancias y mucho más".
-"supported_os":
-- "linux"
-- "macos"
-"tile":
-  "changelog": "CHANGELOG.md"
-  "classifier_tags":
-  - "Supported OS::Linux"
-  - "Supported OS::macOS"
-  - "Category::Configuración y despliegue"
-  - "Category::Contenedores"
-  - "Category::Recopilación de logs"
-  - "Offering::Integración"
-  "configuration": "README.md#Configuración"
-  "description": "Rastrea las métricas de las aplicaciones: memoria y disco necesarios, recuento de instancias y mucho más".
-  "media": []
-  "overview": "README.md#Información general"
-  "support": "README.md#Soporte"
-  "title": "Marathon"
+app_id: marathon
+app_uuid: fe9a038e-3948-4646-9a1c-ea1f1cc59977
+assets:
+  dashboards:
+    marathon-overview: assets/dashboards/marathon-overview_dashboard.json
+  integration:
+    auto_install: true
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: marathon.apps
+      metadata_path: metadata.csv
+      prefix: marathon.
+    process_signatures:
+    - start --master mesos marathon
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: !!int 82
+    source_type_name: Marathon
+  saved_views:
+    marathon_processes: assets/saved_views/marathon_processes.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
+- configuration & deployment
+- containers
+- log collection
+custom_kind: integración
+dependencies:
+- https://github.com/DataDog/integrations-core/blob/master/marathon/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: marathon
+integration_id: marathon
+integration_title: Marathon
+integration_version: 4.1.0
+is_public: true
+manifest_version: 2.0.0
+name: marathon
+public_title: Marathon
+short_description: Rastrea las métricas de las aplicaciones: memoria y disco necesarios, recuento de instancias y mucho más.
+supported_os:
+- linux
+- macos
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Category::Configuración y despliegue
+  - Category::Contenedores
+  - Category::Recopilación de logs
+  - Offering::Integración
+  configuration: README.md#Configuración
+  description: Rastrea las métricas de las aplicaciones: memoria y disco necesarios, recuento de instancias y mucho más.
+  media: []
+  overview: README.md#Información general
+  support: README.md#Soporte
+  title: Marathon
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->

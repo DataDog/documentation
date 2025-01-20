@@ -1,71 +1,71 @@
 ---
-"app_id": "powerdns"
-"app_uuid": "44e491e1-f7c3-447a-b597-e740196479e0"
-"assets":
-  "dashboards":
-    "powerdns": "assets/dashboards/powerdns_dashboard.json"
-  "integration":
-    "auto_install": true
-    "configuration":
-      "spec": "assets/configuration/spec.yaml"
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": "powerdns.recursor.questions"
-      "metadata_path": "metadata.csv"
-      "prefix": "powerdns."
-    "process_signatures":
-    - "pdns_server"
-    - "systemctl start pdns@"
-    "service_checks":
-      "metadata_path": "assets/service_checks.json"
-    "source_type_id": !!int "144"
-    "source_type_name": "PowerDNS Recursor"
-  "saved_views":
-    "powerdns_processes": "assets/saved_views/powerdns_processes.json"
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": "Datadog"
-  "sales_email": "info@datadoghq.com"
-  "support_email": "help@datadoghq.com"
-"categories":
-- "caching"
-- "log collection"
-- "network"
-"custom_kind": "integración"
-"dependencies":
-- "https://github.com/DataDog/integrations-core/blob/master/powerdns_recursor/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "powerdns_recursor"
-"integration_id": "powerdns"
-"integration_title": "Power DNS Recursor"
-"integration_version": "4.1.0"
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "powerdns_recursor"
-"public_title": "Power DNS Recursor"
-"short_description": "Vigila el tráfico extraño hacia y desde tus Power DNS Recursors".
-"supported_os":
-- "linux"
-- "windows"
-- "macos"
-"tile":
-  "changelog": "CHANGELOG.md"
-  "classifier_tags":
-  - "Category::Caché"
-  - "Category::Recopilación de logs"
-  - "Category::Red"
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  - "Offering::Integración"
-  "configuration": "README.md#Configuración"
-  "description": "Vigila el tráfico extraño hacia y desde tus Power DNS Recursors".
-  "media": []
-  "overview": "README.md#Información general"
-  "support": "README.md#Soporte"
-  "title": "Power DNS Recursor"
+app_id: powerdns
+app_uuid: 44e491e1-f7c3-447a-b597-e740196479e0
+assets:
+  dashboards:
+    powerdns: assets/dashboards/powerdns_dashboard.json
+  integration:
+    auto_install: true
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: powerdns.recursor.questions
+      metadata_path: metadata.csv
+      prefix: powerdns.
+    process_signatures:
+    - pdns_server
+    - systemctl start pdns@
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: !!int 144
+    source_type_name: PowerDNS Recursor
+  saved_views:
+    powerdns_processes: assets/saved_views/powerdns_processes.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
+- caching
+- log collection
+- network
+custom_kind: integración
+dependencies:
+- https://github.com/DataDog/integrations-core/blob/master/powerdns_recursor/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: powerdns_recursor
+integration_id: powerdns
+integration_title: Power DNS Recursor
+integration_version: 4.1.0
+is_public: true
+manifest_version: 2.0.0
+name: powerdns_recursor
+public_title: Power DNS Recursor
+short_description: Vigila el tráfico extraño hacia y desde tus Power DNS Recursors.
+supported_os:
+- linux
+- windows
+- macos
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Caché
+  - Category::Recopilación de logs
+  - Category::Red
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  - Offering::Integración
+  configuration: README.md#Configuración
+  description: Vigila el tráfico extraño hacia y desde tus Power DNS Recursors.
+  media: []
+  overview: README.md#Información general
+  support: README.md#Soporte
+  title: Power DNS Recursor
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
