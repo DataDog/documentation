@@ -25,7 +25,7 @@ Datadog’s Service Catalog offers powerful dependency mapping capabilities to h
 
 - **Telemetry integration:** Service Catalog auto-detects dependency relationships using application telemetry collected by APM, USM, and RUM, providing teams with real-time insights into service relationships and performance impacts.
 
-{{< img src="tracing/service_catalog/dependency-mgmt-use-case-auto-discovery.png" alt="The Dependencies tab in the side panel for a service, showing a flow chart of service dependencies, ." >}}
+{{< img src="tracing/service_catalog/dependency-mgmt-use-case-auto-discovery.png" alt="The Dependencies tab in the side panel for a service, showing a flow chart of service dependencies." >}}
 
 ## Manual dependency definition in service catalog schema v3.0
 
