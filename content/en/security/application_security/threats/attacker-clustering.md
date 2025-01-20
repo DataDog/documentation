@@ -1,10 +1,12 @@
 ---
 title: Attacker Clustering
+aliases:
+  - /security/application_security/threats/attacker_clustering
 disable_toc: false
 further_reading:
-- link: "/security/application_security/threats/fingerprint"
+- link: "/security/application_security/threats/attacker_fingerprint"
   tag: "Documentation"
-  text: "Fingerprint"
+  text: "Attacker Fingerprint"
 ---
 
 This topic describes how to use **Attacker Clustering** to block more efficiently distributed attacks.
@@ -17,7 +19,7 @@ Blocking on attacker attributes means you keep your application or api protected
 
 ## For which attacks are attacker clusters computed?
 
-The attacker clustering is computed for every ASM security signal being emitted from a detection rule tagged with the following:
+The attacker clustering is computed for every [ASM security signal][4] being emitted from a detection rule tagged with the following:
 `category:account_takeover` or `category:fraud`
 
 Out of the box, the attacker clustering will be computed for the ASM detection rules that detect API abuse, credential stuffing or brute force attacks.
@@ -34,8 +36,8 @@ Attacker clustering is computed on the following request attributes of requests:
 * ASN number
 * ASN domain
 * User agent header
-* [Threat Intelligence](./threat-intelligence.md)
-* [Datadog attacker fingerprinting](./attacker-fingerprint.md)
+* [Threat Intelligence][1]
+* [Datadog attacker fingerprinting][2]
 
 When the attacker attributes are identified, we show them on the signal side panel and signal full page.
 
@@ -49,4 +51,13 @@ The algorithm  tracks the changes in the attack traffic by identifying emerging 
 
 Traffic associated with threat intelligence also weights into the clustering mechanism. The more an attribute is correlated with threat intelligence the higher the chance to create an attacker cluster around this attribute.
 
-The attacker clustering attributes selected are then shown as regular expressions that can be used to block with ASM's [in-app WAF](./inapp_waf_rules.md).
+The attacker clustering attributes selected are then shown as regular expressions that can be used to block with ASM's [in-app WAF][3].
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /security/application_security/threats/threat-intelligence/
+[2]: /security/application_security/threats/attacker_fingerprint
+[3]: /security/application_security/threats/event_rules
+[4]: /security/application_security/threats/security_signals/

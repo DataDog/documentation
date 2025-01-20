@@ -1,5 +1,7 @@
 ---
 title: Datadog Attacker Fingerprint
+aliases:
+  - /security/application_security/threats/attacker_fingerprint
 disable_toc: false
 further_reading:
 - link: "/security/application_security/threats/attacker_clustering"
@@ -7,4 +9,4 @@ further_reading:
   text: "Attacker Clustering"
 ---
 
-This topic describes a feature called **Datadog Attacker Explorer** to investigate and block Flagged Attackers.
+This topic describes a feature called **Datadog Attacker Fingerprint** to investigate and block Flagged Attackers.
