@@ -31,7 +31,7 @@ Datadog’s [Service Catalog][4], [Scorecards][2], and [Workflow Automation][5] 
 
 Teams can monitor and optimize cost allocation by tagging cloud resources and tracking compliance with [Scorecards][2]. 
 
-For example, you can enable team-level cost tracking by applying "team” tags to infrastructure components and setting a custom scorecard rule to enforce this practice. 
+For example, you can enable team-level cost tracking by applying the tag "team" to infrastructure components and setting a custom scorecard rule to enforce this practice. 
 
 Datadog offers preconfigured [Workflow blueprints][3] to help you build cost management processes. You can use the blueprints as-is or modify the evaluation logic to fit your use case. 
 
