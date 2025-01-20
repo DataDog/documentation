@@ -44,7 +44,7 @@ is_public: true
 manifest_version: 2.0.0
 name: marathon
 public_title: Marathon
-short_description: Rastrea las métricas de las aplicaciones: memoria y disco necesarios, recuento de instancias y mucho más.
+short_description: "Rastrea las métricas de las aplicaciones: memoria y disco necesarios, recuento de instancias y mucho más."
 supported_os:
 - linux
 - macos
@@ -58,7 +58,7 @@ tile:
   - Category::Recopilación de logs
   - Offering::Integración
   configuration: README.md#Configuración
-  description: Rastrea las métricas de las aplicaciones: memoria y disco necesarios, recuento de instancias y mucho más.
+  description: "Rastrea las métricas de las aplicaciones: memoria y disco necesarios, recuento de instancias y mucho más."
   media: []
   overview: README.md#Información general
   support: README.md#Soporte
