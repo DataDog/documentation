@@ -37,9 +37,9 @@ In [Service Catalog schema v3.0][2], teams can manually define relationships to 
 
 To define a manual dependency, update the `spec` section of the relevant entity definition using the following keys:
 
-  - ``dependsOn``: Specifies dependencies (e.g., Service A depends on Service B).
-  - ``ownedBy``: Assigns ownership to a team or group (e.g., Service A is owned by Team A).
-  - ``partOf``: Groups components under a system (e.g., Service A is part of System A).
+  - `dependsOn`: Specifies dependencies (for example, Service A depends on Service B).
+  - `ownedBy`: Assigns ownership to a team or group (for example, Service A is owned by Team A).
+  - `partOf`: Groups components under a system (for example, Service A is part of System A).
 
 Example YAML configuration:
 
@@ -55,18 +55,24 @@ spec:
 
 ### View manual dependencies
 
-To view manual dependencies in the Datadog app, navigate to [Service Catalog][1], select your service to open the side panel, find the Performance tab, and then select the Dependencies sub-tab. You can also open the full Service Page for a particular service and select the Dependencies section in the left-hand navigation. 
+To view manual dependencies in the Datadog app:
 
-All dependencies, including manual dependencies, will be shown, and you can use the "Include Detected" feature to modify your view: 
+1. Navigate to [Service Catalog][1]
+1. Select your service to open the side panel.
+1. Find the Performance tab, then select the Dependencies sub-tab.
 
-- When "Include Detected" is disabled: Only manually defined dependencies are shown.
-- When "Include Detected" is enabled: Manually added dependencies are shown above auto-detected ones to create a clear distinction.
+You can also open the full Service Page for a particular service and select the Dependencies section in the left-hand navigation. 
+
+All dependencies, including manual dependencies, are shown. You can use the "Include Detected" feature to modify your view: 
+
+- When **Include Detected** is disabled: Only manually defined dependencies are shown.
+- When **Include Detected** is enabled: Manually added dependencies are shown above auto-detected ones to create a clear distinction.
 
 {{< img src="tracing/service_catalog/dependency-mgmt-use-case-include-detected.png" alt="A diagram showing the dependencies of a service, where 'Include Detected' is disabled." >}}
 
 ### Benefits of manual dependency definitions
 
-- Improved accuracy: By defining dependencies manually, teams can incorporate their specific understanding and insights into the Service Catalog, ensuring it accurately represents real-world system architectures, which automated tools might miss.
+- Improved accuracy: By defining dependencies manually, teams can incorporate their specific understanding and insights into the Service Catalog, ensuring it accurately represents architectures of real-world systems that automated tools might miss.
 - Enhanced collaboration: Manually defined dependencies support better communication and coordination by making relationships explicit, aiding in incident response efforts and strategic architecture planning.
 - Contextual knowledge: Providing manual definitions helps developers and new team members quickly understand the complexities of system dependencies and architectures, facilitating smoother onboarding and knowledge transfer.
 
