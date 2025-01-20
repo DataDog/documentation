@@ -2090,10 +2090,10 @@ menu:
       parent: oncall
       identifier: oncall_pages
       weight: 2
-    - name: Processing Rules
-      url: service_management/on-call/processing_rules/
+    - name: Routing Rules
+      url: service_management/on-call/routing_rules/
       parent: oncall
-      identifier: oncall_processing_rules
+      identifier: oncall_routing_rules
       weight: 3
     - name: Escalation Policies
       url: service_management/on-call/escalation_policies/
