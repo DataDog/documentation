@@ -1,63 +1,63 @@
 ---
-"app_id": "expvar-go"
-"app_uuid": "cac5ebe3-fa36-49f7-93c5-22116c745e80"
-"assets":
-  "integration":
-    "auto_install": true
-    "configuration":
-      "spec": "assets/configuration/spec.yaml"
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": "go_expvar.memstats.alloc"
-      "metadata_path": "metadata.csv"
-      "prefix": "expvar-go".
-    "service_checks":
-      "metadata_path": "assets/service_checks.json"
-    "source_type_id": !!int "77"
-    "source_type_name": "Expvar Go"
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": "Datadog"
-  "sales_email": "info@datadoghq.com"
-  "support_email": "help@datadoghq.com"
-"categories":
-- "languages"
-"custom_kind": "integración"
-"dependencies":
-- "https://github.com/DataDog/integrations-core/blob/master/go_expvar/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "expvar-go"
-"integration_id": "expvar-go"
-"integration_title": "Expvar Go"
-"integration_version": "4.1.0"
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "expvar-go"
-"public_title": "Expvar Go"
-"short_description": "Recopila métricas instrumentadas por Expvar y estadísticas de memoria de tu servicio Go."
-"supported_os":
-- "linux"
-- "macos"
-- "windows"
-"tile":
-  "changelog": "CHANGELOG.md"
-  "classifier_tags":
-  - "Supported OS::Linux"
-  - "Supported OS::macOS"
-  - "Supported OS::Windows"
-  - "Category::Lenguajes"
-  - "Offering::Integración"
-  "configuration": "README.md#Configuración"
-  "description": "Recopila métricas instrumentadas por Expvar y estadísticas de memoria de tu servicio Go."
-  "media": []
-  "overview": "README.md#Información general"
-  "resources":
-  - "resource_type": "blog"
-    "url": "https://www.datadoghq.com/blog/instrument-go-apps-expvar-datadog"
-  "support": "README.md#Soporte"
-  "title": "Expvar Go"
+app_id: expvar-go
+app_uuid: cac5ebe3-fa36-49f7-93c5-22116c745e80
+assets:
+  integration:
+    auto_install: true
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: go_expvar.memstats.alloc
+      metadata_path: metadata.csv
+      prefix: expvar-go.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: !!int 77
+    source_type_name: Expvar Go
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
+- languages
+custom_kind: integración
+dependencies:
+- https://github.com/DataDog/integrations-core/blob/master/go_expvar/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: expvar-go
+integration_id: expvar-go
+integration_title: Expvar Go
+integration_version: 4.1.0
+is_public: true
+manifest_version: 2.0.0
+name: expvar-go
+public_title: Expvar Go
+short_description: Recopila métricas instrumentadas por Expvar y estadísticas de memoria de tu servicio Go.
+supported_os:
+- linux
+- macos
+- windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Lenguajes
+  - Offering::Integración
+  configuration: README.md#Configuración
+  description: Recopila métricas instrumentadas por Expvar y estadísticas de memoria de tu servicio Go.
+  media: []
+  overview: README.md#Información general
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/instrument-go-apps-expvar-datadog
+  support: README.md#Soporte
+  title: Expvar Go
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
