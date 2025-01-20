@@ -21,7 +21,7 @@ Service Catalog surfaces and centralizes security signals, enabling developers t
 
 Service Catalog provides default paths and guardrails to helps teams create, assess, and improve secure processes. Developers can [scaffold new services][1] or integrate cloud resources confidently, assured that security standards are enforced at every step. 
 
-For services instrumented with APM, APM Security views automatically detect services vulnerable to application attacks, such as SQL injections, SSRF, or Log4Shell attacks. You can investigate each service and type of attack your organization encounters, understand the associated security risks, and effectively manage your application attack surface with runtime context.
+For services instrumented with APM, APM Security Views automatically detect services vulnerable to application attacks, such as SQL injections, SSRF, or Log4Shell attacks. You can use APM Security Views to investigate each service and type of attack your organization encounters, understand the associated security risks, and effectively manage your application attack surface with runtime context.
 
 ## Track third-party software and dependencies
 
@@ -33,7 +33,9 @@ Service Catalog organizes and highlights third-party dependencies, ranging from 
 
 ## Configuration details
 
-Click a service in Service Catalog to open the service side panel, select the Performance tab at the top of the panel, and then find the Libraries sub-tab, which lists all external libraries used and their versions. 
+1. Click a service in Service Catalog to open the service side panel.
+1. Select the **Performance** tab at the top of the panel.
+1. Find the **Libraries** sub-tab, which lists all external libraries used and their versions.
 
 {{< img src="tracing/service_catalog/appsec-use-case-libraries.png" alt="The Security tab of the Service Catalog, showing vulnerability risk, attack exposure, and coverage for each service." >}}
 
