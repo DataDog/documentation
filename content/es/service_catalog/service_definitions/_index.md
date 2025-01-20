@@ -119,9 +119,9 @@ Datadog proporciona un [Esquema JSON][13] para las definiciones, de modo que cua
 
 El [Esquema JSON para definiciones de Datadog][15] está registrado en el [Almacén de esquemas][14] de código abierto.
 
-## {{< img src="synthetics/browser_test.mp4" alt="Browser tests" video=true style="width:100%;">}}
+## Referencias adicionales
 
-Grabar pruebas de aplicaciones móviles
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /es/service_catalog/service_definitions/v3-0
 [2]: /es/service_catalog/service_definitions/v2-2

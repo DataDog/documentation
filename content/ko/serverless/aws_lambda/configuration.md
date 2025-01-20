@@ -30,7 +30,7 @@ title: AWS Lambda용 서버리스 모니터링 구성
 - [로그와 트레이스 연결](#connect-logs-and-traces)
 - [오류를 소스 코드에 연결](#link-errors-to-your-source-code)
 - [커스텀 메트릭 제출][27]
-- [프로파일링 데이터 수집 (퍼블릭 베타)](#collect-profiling-data-public-beta)
+- [프로파일링 데이터 수집][#collect-profiling-data)
 - [PrivateLink나 프록시를 통해 텔레메트리 전송](#send-telemetry-over-privatelink-or-proxy)
 - [다중 Datadog 조직에 텔레메트리 전송](#send-telemetry-to-multiple-datadog-organizations)
 - [AWS 리소스를 통한 트레이스 컨텍스트 전파](#propagate-trace-context-over-aws-resources)
@@ -507,9 +507,9 @@ Lambda 함수에서 환경 변수 `DD_TRACE_ENABLED`를 `false`로 설정합니�
 
 [101]: /ko/integrations/guide/source-code-integration/?tab=go#serverless
 
-## 프로파일링 데이터 수집(공개 베타)
+## 프로파일링 데이터 수집
 
-Datadog의 [연속 프로파일러][42]는 파이썬(Python) 버전 4.62.0 및 레이어 버전 62 이하에서 베타 버전으로 사용할 수 있습니다. 해당 옵션 기능은 `DD_PROFILING_ENABLED` 환경 변수를 `true`로 설정하여 활성화합니다.
+Datadog의 [연속 프로파일러][42]는 Python 버전 4.62.0 및 레이어 버전 62 이하에서 평가판 버전으로 사용할 수 있습니다. 해당 옵션 기능은 `DD_PROFILING_ENABLED` 환경 변수를 `true`로 설정하여 활성화합니다.
 
 연속 프로파일러는 실행 중인 모든 파이썬(Python) 코드의 CPU 및 힙의 스냅샷을 주기적으로 생성하는 스레드를 생성하는 방식으로 동작합니다. 여기에는 프로파일러 자체가 포함될 수 있습니다. 프로파일러 자체를 무시하려면 `DD_PROFILING_IGNORE_PROFILER`을 `true`으로 설정합니다.
 

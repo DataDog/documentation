@@ -130,9 +130,9 @@ Optionally, you can also set other init script parameters and Datadog environmen
 
 1. On the cluster configuration page, click the **Advanced options** toggle.
 1. At the bottom of the page, go to the **Init Scripts** tab.
-   
+
    {{< img src="data_jobs/databricks/init_scripts.png" alt="Databricks UI, cluster configuration advanced options,  Init Scripts tab. A 'Destination' drop-down and an 'Init script path' file selector." style="width:80%;" >}}
-   
+
    - Under the **Destination** drop-down, select `Workspace`.
    - Under **Init script path**, enter the path to your init script.
    - Click **Add**.
@@ -187,6 +187,13 @@ In Datadog, view the [Data Jobs Monitoring][6] page to see a list of all your Da
 ## Troubleshooting
 
 {{% djm-install-troubleshooting %}}
+
+If the Agent is not installed, view the installation logs located in `/tmp/datadog-djm-init.log`.
+
+If you need further assistance from Datadog support, add the following environment variable to the init script. This ensures that logs are sent to Datadog when a failure occurs.
+  ```shell
+  export DD_DJM_ADD_LOGS_TO_FAILURE_REPORT=true
+  ```
 
 ## Advanced Configuration
 
