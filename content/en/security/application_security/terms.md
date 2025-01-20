@@ -147,3 +147,5 @@ Object-Graph Navigation Language Injection (OGNLi)
 [15]: /security/application_security/threats/trace_qualification/
 [16]: /security/application_security/threats/threat-intelligence/
 [17]: /security/application_security/threats/attacker-explorer/
+[18]: /security/application_security/threats/attacker_fingerprint/
+[19]: /security/application_security/threats/attacker_clustering/

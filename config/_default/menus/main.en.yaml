@@ -3060,7 +3060,7 @@ menu:
       parent: ndm_setup
       identifier: ndm_snmptraps
       weight: 30004
-    - name: SD-WAN 
+    - name: SD-WAN
       url: network_monitoring/devices/sd-wan
       parent: ndm_setup
       identifier: ndm_sd-wan
@@ -6099,6 +6099,16 @@ menu:
       parent: appsec_threats
       identifier: threats_user_info
       weight: 722
+    - name: Attacker Fingerprint
+      url: security/application_security/threats/attacker_fingerprint/
+      parent: appsec_threats
+      identifier: threats_threat_intelligence
+      weight: 723
+    - name: Attacker Clustering
+      url: security/application_security/threats/attacker_clustering/
+      parent: appsec_threats
+      identifier: threats_threat_intelligence
+      weight: 724
     - name: Application Security for Serverless
       url: security/application_security/serverless/
       parent: application_security
