@@ -33,7 +33,7 @@ Service Catalog acts as a single source of truth for your engineering environmen
 
 [Software Templates][2] reduces the manual toil of onboarding by standardizing and streamlining common tasks. With Software Templates, you can:
 
-- Kick off [onboarding workflows][2] that automatically provision Git repos, assign PagerDuty schedules, or notify relevant Slack channels.
+- Kick off onboarding workflows that automatically provision Git repos, assign PagerDuty schedules, or notify relevant Slack channels.
 - Integrate with third-party tools and systems to ensure every new developer starts with the correct permissions, environments, and resources.
 - Scale onboarding processes as your team grows while maintaining consistency and quality across new hires.
 
