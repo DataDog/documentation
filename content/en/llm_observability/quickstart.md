@@ -55,7 +55,7 @@ To generate an LLM Observability trace, you can run a Python or Node.js script.
 
 2. Create a script and save it as `quickstart.py` or `quickstart.js`. This script makes a single OpenAI call.
    
-   <!-- {{< tabs >}}
+   {{< tabs >}}
    {{< tab "Python" >}}
 
    ```python
@@ -91,7 +91,7 @@ To generate an LLM Observability trace, you can run a Python or Node.js script.
    ```
 
    {{% /tab %}}
-   {{< /tabs >}} -->
+   {{< /tabs >}}
 
 3. Run the Python script with the following shell command. This sends a trace of the OpenAI call to Datadog.
 
