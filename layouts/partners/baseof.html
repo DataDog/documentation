@@ -28,7 +28,8 @@
 {{ $ctx := . }}
 
 <body
-  class="{{ .Site.Language.Lang }} {{ if .Kind }}kind-{{.Kind}}{{ end }} {{ if .IsPage }} {{ replace $.Type "/" "-" }} {{ else }} {{ .Section }} {{ end }} {{ $bodyClass }} {{ $customClass }} {{ if .Site.Params.announcement_banner }}announcement{{ end }}">
+  class="{{ .Site.Language.Lang }} {{ if .IsPage }} {{ replace $.Type "/" "-" }} {{ else }} {{ .Section }} {{ end }} {{ $bodyClass }} {{ if .Site.Params.announcement_banner }}announcement{{ end }}">  
+
 
   <div class="greyside">
     <div class="container container__content h-100">
@@ -46,6 +47,13 @@
         {{ partial "sidenav/partners-sidenav.html" . }}
       </div>
 
+      <div class="mainContent-wrapper order-2 order-lg-0 col-12 {{ if eq .Params.disable_sidebar true }}col-lg-9{{ else }}col-lg-7{{ end }} main">
+        <div id="mainContent">
+          {{ block "main" . }}{{ end }}
+          {{ partial "page-edit.html" (dict "ctx" $ctx "type" "contribute") }}
+        </div>
+      </div>
+
       {{ if ne .Params.disable_sidebar true }}
         <aside class="sidebar col-lg-2">
           {{ partial "language-region-select.html" . }}
@@ -58,14 +66,9 @@
     </div>
   </div>
 
-  {{ partial "static_analysis/try-rule-modal.html" . }}
-
   {{ partialCached "footer/footer.html" . }}
-
   {{ partial "footer-scripts.html" . }}
-
   {{ partial "footer-js-dd-docs-methods" . }}
-
   {{ partial "preview_banner/preview_banner" . }}
 </body>
 
