@@ -180,9 +180,11 @@ Use a YAML file to specify the Helm chart parameters for the [Datadog Agent char
 1. Configure the Datadog API and application key secrets:
    {{< code-block lang="yaml" filename="datadog-values.yaml" collapsible="true" >}}
 datadog:
+  site: datadoghq.com
   apiKeyExistingSecret: datadog-secret
   appKeyExistingSecret: datadog-secret
    {{< /code-block >}}
+   Set `datadog.site` to your [Datadog site][10]. Otherwise, it defaults to `datadoghq.com`, the US1 site.
 1. Switch the Datadog Agent Docker repository to use development builds:
    {{< code-block lang="yaml" filename="datadog-values.yaml" collapsible="true" >}}
 agents:
@@ -256,6 +258,7 @@ agents:
     doNotCheckTag: true
 
 datadog:
+  site: datadoghq.com
   apiKeyExistingSecret: datadog-secret
   appKeyExistingSecret: datadog-secret
 
@@ -393,3 +396,4 @@ After you've confirmed that all data is being collected correctly in Datadog, yo
 [7]: /opentelemetry/agent/install_agent_with_collector#configure-the-datadog-agent
 [8]: https://app.datadoghq.com/organization-settings/api-keys/
 [9]: https://app.datadoghq.com/organization-settings/application-keys
+[10]: /getting_started/site/
