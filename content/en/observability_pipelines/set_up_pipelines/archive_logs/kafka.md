@@ -265,7 +265,10 @@ Follow the instructions for the cloud provider you are using to archive your log
 
 ### Install the Observability Pipelines Worker
 1. Select your platform in the **Choose your installation platform** dropdown menu.
-1. TKTK
+1. Enter the host and port of the Kafka bootstrap servers, which connects to the Kafka cluster and discovers all the other hosts in the cluster. Must be entered in the format of `host:port`, such as `10.14.22.123:9092`. If there is more than one server, use commas to separate them.
+
+    If you enabled SASL, enter the Kafka SASL username and Kafka SASL password.
+
 1. Provide the environment variables for each of your selected destinations. See [prerequisites](#prerequisites) for more information.
 {{< tabs >}}
 {{% tab "Amazon OpenSearch" %}}
@@ -383,10 +386,6 @@ For the Datadog Archives destination, follow the instructions for the cloud prov
 
 {{% /tab %}}
 {{< /tabs >}}
-
-## Send logs to the Observability Pipelines Worker
-
-{{% observability_pipelines/log_source_configuration/kafka %}}
 
 [1]: /integrations/amazon_web_services/#setup
 [2]: /integrations/google_cloud_platform/#setup

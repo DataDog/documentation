@@ -1,1 +1,8 @@
-REUSE INSTRUCTIONS
+- The host and port of the Kafka bootstrap servers.
+    - The bootstrap server connects to the Kafka cluster and discovers all the other hosts in the cluster. The host and port must be entered in the format of `host:port`, such as `10.14.22.123:9092`. If there is more than one server, use commas to separate them.
+	- Stored as the environment variable: `DD_OP_SOURCE_KAFKA_BOOTSTRAP_SERVERS`.
+- If you enabled SASL:
+	- Kafka SASL username
+		- Stored as the environment variable: `DD_OP_SOURCE_KAFKA_SASL_USERNAME`.
+	- Kafka SASL password
+		- Stored as the environment variable: `DD_OP_SOURCE_KAFKA_SASL_PASSWORD`.
