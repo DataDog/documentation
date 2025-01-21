@@ -582,9 +582,6 @@ If you're using the GitHub integration, click **Connect to preview** on error fr
 [101]: https://app.datadoghq.com/security/appsec
 
 {{% /tab %}}
-{{< /tabs >}}
-
-{{% /tab %}}
 {{% tab "Dynamic Instrumentation" %}}
 
 You can see full source code files in **Dynamic Instrumentation** when creating or editing an instrumentation (dynamic log, metric, span, or span tags).
