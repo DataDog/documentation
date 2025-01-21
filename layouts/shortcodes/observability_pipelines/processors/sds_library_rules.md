@@ -27,7 +27,7 @@
     }
 ```
 
-#### Add additional keywords
+##### Add additional keywords
 
 After adding scanning rules from the library, you can edit each rule separately and add additional keywords to the keyword dictionary.
 
