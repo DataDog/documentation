@@ -71,7 +71,7 @@ To add a Datadog application key, navigate to [**Organization Settings** > **App
 **Notes:**
 
 - Application key names cannot be blank.
-- - Newly created Application keys typically take a few seconds to become valid.
+- Newly created Application keys typically take a few seconds to become valid.
 
 ## Remove application keys
 
