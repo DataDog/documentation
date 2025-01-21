@@ -622,6 +622,36 @@ menu:
       identifier: otel_integrations
       parent: opentelemetry_top_level
       weight: 4
+    - name: Trace Metrics
+      url: opentelemetry/integrations/trace_metrics/
+      identifier: otel_trace_metrics
+      parent: otel_integrations
+      weight: 401
+    - name: Runtime Metrics
+      url: opentelemetry/integrations/runtime_metrics/
+      identifier: otel_runtime_metrics
+      parent: otel_integrations
+      weight: 402
+    - name: Collector Health Metrics
+      url: opentelemetry/integrations/collector_health_metrics/
+      identifier: otel_health_metrics
+      parent: otel_integrations
+      weight: 403
+    - name: Docker Metrics
+      url: opentelemetry/integrations/docker_metrics/
+      identifier: otel_docker_metrics
+      parent: otel_integrations
+      weight: 404
+    - name: Host Metrics
+      url: opentelemetry/integrations/host_metrics/
+      identifier: otel_host_metrics
+      parent: otel_integrations
+      weight: 405
+    - name: Kafka Metrics
+      url: opentelemetry/integrations/kafka_metrics/
+      identifier: otel_kafka_metrics
+      parent: otel_integrations
+      weight: 406
     - name: Schema and Semantics
       url: opentelemetry/schema_semantics/
       identifier: otel_schema
