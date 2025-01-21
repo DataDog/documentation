@@ -35,7 +35,7 @@ To generate an LLM Observability trace, you can run a Python or Node.js script.
 1. Install the SDK by adding the `ddtrace` and `openai` packages:
 
    {{< tabs >}}
-   {{< tab "Python" >}}
+   {{% tab "Python" %}}
 
    ```shell
    pip install ddtrace
@@ -43,7 +43,7 @@ To generate an LLM Observability trace, you can run a Python or Node.js script.
    ```
 
    {{% /tab %}}
-   {{ tab "Node.js" }}
+   {{% tab "Node.js" %}}
 
    ```shell
    npm install dd-trace
@@ -56,7 +56,7 @@ To generate an LLM Observability trace, you can run a Python or Node.js script.
 2. Create a script and save it as `quickstart.py` or `quickstart.js`. This script makes a single OpenAI call.
    
    {{< tabs >}}
-   {{< tab "Python" >}}
+   {{% tab "Python" %}}
 
    ```python
    import os
@@ -74,7 +74,7 @@ To generate an LLM Observability trace, you can run a Python or Node.js script.
    ```
 
    {{% /tab %}}
-   {{ tab "Node.js" }}
+   {{% tab "Node.js" %}}
 
    ```javascript
    const { OpenAI } = require('openai');
@@ -96,7 +96,7 @@ To generate an LLM Observability trace, you can run a Python or Node.js script.
 3. Run the Python script with the following shell command. This sends a trace of the OpenAI call to Datadog.
 
    {{< tabs >}}
-   {{< tab "Python" >}}
+   {{% tab "Python" %}}
 
    ```shell
    DD_LLMOBS_ENABLED=1 DD_LLMOBS_ML_APP=onboarding-quickstart \
@@ -109,7 +109,7 @@ To generate an LLM Observability trace, you can run a Python or Node.js script.
    [1]: /llm_observability/setup/sdk/python/#command-line-setup
 
    {{% /tab %}}
-   {{ tab "Node.js" }}
+   {{% tab "Node.js" %}}
 
    ```shell
    DD_LLMOBS_ENABLED=1 DD_LLMOBS_ML_APP=onboarding-quickstart \
