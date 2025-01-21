@@ -10,7 +10,7 @@ further_reading:
 
 ## Overview
 
-<div class="alert alert-info">To instrument your Google Cloud Run applications with a sidecar, see <a href="/serverless/google_cloud_run">Instrument Google Cloud Run</a>.</div>
+<div class="alert alert-info">If you are running multiple containers per Google Cloud Run application, Datadog recommends using the Datadog sidecar: <a href="/serverless/google_cloud_run">Instrument Google Cloud Run</a>.</div>
 
 Google Cloud Run is a fully managed serverless platform for deploying and scaling container-based applications. Datadog provides monitoring and log collection for Cloud Run through the [Google Cloud integration][1]. Datadog also provides a solution for instrumenting your Cloud Run applications with a purpose-built Agent to enable tracing, custom metrics, and direct log collection.
 
