@@ -45,6 +45,6 @@ Admins have read and write permissions by default. Standard users only have read
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /rbac/permissions/#observability-pipelines
+[1]: /account_management/rbac/permissions/#observability-pipelines
 [2]: /account_management/rbac/
 [3]: https://app.datadoghq.com/observability-pipelines
