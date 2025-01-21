@@ -143,5 +143,5 @@ If you believe a specific violation is a false positive, you can flag it as a fa
 [7]: https://en.wikipedia.org/wiki/Snake_case
 [8]: /security/code_security/static_analysis/setup/#customize-your-configuration
 [9]: /security/code_security/static_analysis/setup
-[10]: /security/code_security/github_pull_requests/
-[11]: /getting_started/security/code_security/
+[10]: /security/code_security/dev_tool_int/github_pull_requests/
+[11]: /getting_started/code_security/

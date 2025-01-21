@@ -166,7 +166,7 @@ You **must** run an analysis of your repository on the default branch before res
 [7]: /integrations/github
 [8]: /integrations/guide/source-code-integration
 [9]: /security/code_security/dev_tool_int/github_pull_requests/
-[10]: /actions/security-guides/using-secrets-in-github-actions#creating-secrets-for-a-repository
-[11]: /actions/security-guides/
+[10]: https://github.com/DataDog/osv-scanner
+[11]: https://docs.github.com/en/actions/security-for-github-actions/security-guides
 [12]: /getting_started/site/
 [13]: https://github.com/DataDog/datadog-static-analyzer-github-action

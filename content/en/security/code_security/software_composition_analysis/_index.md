@@ -121,9 +121,6 @@ Two are provided by CVE context:
 
 Datadog shows how the base CVSS score is adjusted to the Datadog Severity Score based on the factors above.
 
-
-See [Getting Started with Software Composition Analysis][7] for more information on the adjusted vulnerability score.
-
 <!-- ### Remediation
 
 The Vulnerability Explorer offers remediation recommendations for detected vulnerabilities. Recommendations enable you to change the status of a vulnerability, assign it to a team member for review, and create a Jira issue for tracking. They also include a collection of links and references to websites or information sources to help you understand the context behind each vulnerability. -->
@@ -138,7 +135,6 @@ Software Composition Analysis enriches the information APM is already collecting
 [2]: /security/code_security/software_composition_analysis/setup_runtime/
 [3]: https://app.datadoghq.com/security/appsec/vm
 [5]: /getting_started/code_security/
-[7]: /getting_started/application_security/software_composition_analysis
 [8]: https://app.datadoghq.com/security/appsec/inventory/libraries
 [9]: /account_management/rbac/permissions/#integrations
 [10]: https://app.datadoghq.com/services?lens=Security

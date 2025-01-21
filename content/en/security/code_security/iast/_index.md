@@ -97,7 +97,7 @@ Recommendations enable you to change the status of a vulnerability, assign it to
 
 ## Enabling Code Security
 
-To enable Code Security configure the [Datadog Tracing Library][9]. Detailed instructions for both methods can be found in the [**Security > Application Security > Settings**][10] section.
+To enable Code Security configure the [Datadog Tracing Library][9]. Detailed instructions for both methods can be found in the [**Security > Code Security > Settings**][10] section.
 
 If you need additional help, contact [Datadog support][11].
 
@@ -114,6 +114,6 @@ For information on disabling Code Security, see [Disabling Code Security][12].
 [6]: https://docs.google.com/forms/d/1wsgbd80eImvJSjXe5y5VCjAW0zzn5p3CoCLsOy0vqsk/
 [7]: /integrations/github/
 [9]: /security/code_security/iast/setup/
-[10]: https://app.datadoghq.com/security/configuration/asm/setup
+[10]: https://app.datadoghq.com/security/configuration/code-security/setup
 [11]: https://www.datadoghq.com/support/
 [12]: /security/application_security/troubleshooting/#disabling-code-security

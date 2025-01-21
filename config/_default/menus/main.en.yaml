@@ -212,11 +212,6 @@ menu:
       url: getting_started/application_security
       parent: getting_started
       weight: 23
-    - name: Software Composition Analysis
-      identifier: getting_started_software_composition_analysis
-      url: getting_started/application_security/software_composition_analysis
-      parent: getting_started_application_security
-      weight: 2301
     - name: Workflow Automation
       identifier: getting_started_workflow_automation
       url: getting_started/workflow_automation/
