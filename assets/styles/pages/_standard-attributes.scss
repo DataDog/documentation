@@ -34,24 +34,20 @@
         }
     }
 
-    @include media-breakpoint-up(xl) {    
+    @include media-breakpoint-up(xl) {
         .table-wrapper {
             overflow-x: unset;
-       
             table {
                 thead > tr {
                     th:nth-child(1) {
                         width: 8%;
                     }
-
                     th:nth-child(2) {
                         width: 14%;
                     }
-
                     th:nth-child(3) {
                         width: 30%;
                     }
-
                     th:nth-child(4) {
                         width: 8%;
                     }
