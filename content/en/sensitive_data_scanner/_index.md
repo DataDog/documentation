@@ -65,19 +65,19 @@ With **Observability Pipelines**, collect and process your data within your envi
 
 ### Prerequisites
 
-By default, users with the Datadog Admin role have access to view and set up scanning rules. To allow other users access, grant the `data_scanner_read` or `data_scanner_write` permissions under [Compliance][12] to a custom role. See [Access Control][13] for details on how to set up roles and permissions.
+By default, users with the Datadog Admin role have access to view and set up scanning rules. To allow other users access, grant the `data_scanner_read` or `data_scanner_write` permissions under [Compliance][5] to a custom role. See [Access Control][6] for details on how to set up roles and permissions.
 
 {{< img src="sensitive_data_scanner/read_write_permissions.png" alt="The compliance permissions sections showing data scanner read and writer permissions" style="width:80%;">}}
 
 ### Add a scanning group
 
-A scanning group determines what data to scan. It consists of a query filter and a set of toggles to enable scanning for logs, APM, RUM, and events. See the [Log Search Syntax][20] documentation to learn more about query filters.
+A scanning group determines what data to scan. It consists of a query filter and a set of toggles to enable scanning for logs, APM, RUM, and events. See the [Log Search Syntax][7] documentation to learn more about query filters.
 
-For Terraform, see the [Datadog Sensitive Data Scanner group][21] resource.
+For Terraform, see the [Datadog Sensitive Data Scanner group][8] resource.
 
 To set up a scanning group, perform the following steps:
 
-1. Navigate to the [Sensitive Data Scanner][15] settings page.
+1. Navigate to the [Sensitive Data Scanner][9] settings page.
 1. Click **Add scanning group**. Alternatively, click the **Add** dropdown menu on the top right corner of the page and select **Add Scanning Group**.
 1. Enter a query filter for the data you want to scan. At the top, click **APM Spans** to preview the filtered spans. Click **Logs** to see the filtered logs.
 1. Enter a name and description for the group.
@@ -90,11 +90,11 @@ By default, a newly-created scanning group is disabled. To enable a scanning gro
 
 A scanning rule determines what sensitive information to match within the data defined by a scanning group. You can add predefined scanning rules from Datadog's Scanning Rule Library or create your own rules using regex patterns. The data is scanned at ingestion time during processing. For logs, this means the scan is done before indexing and other routing decisions.
 
-For Terraform, see the [Datadog Sensitive Data Scanner rule][14] resource.
+For Terraform, see the [Datadog Sensitive Data Scanner rule][10] resource.
 
 To add scanning rules, perform the following steps:
 
-1. Navigate to the [Sensitive Data Scanner][15] settings page.
+1. Navigate to the [Sensitive Data Scanner][9] settings page.
 1. Click the scanning group where you want to add the scanning rules.
 1. Click **Add Scanning Rule**. Alternatively, click the **Add** dropdown menu on the top right corner of the page and select **Add Scanning Rule**.
 1. Select whether you want to add a library rule or create a custom scanning rule.
@@ -112,7 +112,7 @@ The Scanning Rule Library contains predefined rules for detecting common pattern
 
 After adding OOTB scanning rules, you can edit each rule separately and add additional keywords to the keyword dictionary.
 
-1. Navigate to the [Sensitive Data Scanner][15] settings page.
+1. Navigate to the [Sensitive Data Scanner][9] settings page.
 1. Click the scanning group with the rule you want to edit.
 1. Hover over the rule, and then click the pencil icon.
 1. The recommended keywords are used by default. To add additional keywords, toggle **Use recommended keywords**, then add your keywords to the list. You can also require that these keywords be within a specified number of characters of a match. By default, keywords must be within 30 characters before a matched value.
@@ -146,7 +146,7 @@ You can create custom scanning rules using regex patterns to scan for sensitive 
 - Sensitive Data Scanner does not affect any rules you define on the Datadog Agent directly.
 - After rules are added, ensure that the toggles for your scanning groups are enabled to begin scanning.
 
-See [Investigate Sensitive Data Issues][16] for details on how to use the [Summary][17] page to triage your sensitive data issues.
+See [Investigate Sensitive Data Issues][11] for details on how to use the [Summary][12] page to triage your sensitive data issues.
 
 #### Excluded namespaces
 
@@ -178,7 +178,7 @@ The excluded namespaces are:
 
 ### Edit scanning rules
 
-1. Navigate to the [Sensitive Data Scanner][15] settings page.
+1. Navigate to the [Sensitive Data Scanner][9] settings page.
 1. Hover over the scanning rule you want to edit and click the **Edit** (pencil) icon.
 
    The **Define match conditions** section shows either the regular expression you wrote for your custom rule or an explanation of the library scanning rule you chose along with examples of matched sensitive information.
@@ -191,15 +191,15 @@ The excluded namespaces are:
 
 ### Control access to logs with sensitive data
 
-To control who can access logs containing sensitive data, use tags added by the Sensitive Data Scanner to build queries with role-based access control (RBAC). You can restrict access to specific individuals or teams until the data ages out after the retention period. See [How to Set Up RBAC for Logs][5] for more information.
+To control who can access logs containing sensitive data, use tags added by the Sensitive Data Scanner to build queries with role-based access control (RBAC). You can restrict access to specific individuals or teams until the data ages out after the retention period. See [How to Set Up RBAC for Logs][13] for more information.
 
 ### Redact sensitive data in tags
 
-To redact sensitive data contained in tags, you must [remap][18] the tag to an attribute and then redact the attribute. Uncheck `Preserve source attribute` in the remapper processor so that the tag is not preserved during the remapping.
+To redact sensitive data contained in tags, you must [remap][14] the tag to an attribute and then redact the attribute. Uncheck `Preserve source attribute` in the remapper processor so that the tag is not preserved during the remapping.
 
 To remap the tag to an attribute:
 
-1. Navigate to your [log pipeline][19].
+1. Navigate to your [log pipeline][15].
 2. Click **Add Processor**.
 3. Select **Remapper** in the processor type dropdown menu.
 4. Name the processor.
@@ -211,7 +211,7 @@ To remap the tag to an attribute:
 
 To redact the attribute:
 
-1. Navigate to your [scanning group][15].
+1. Navigate to your [scanning group][9].
 2. Click **Add Scanning Rule**.
 3. Check the library rules you want to use.
 4. Select **Specific Attributes** for **Scan entire event or portion of it**.
@@ -226,15 +226,15 @@ To redact the attribute:
   Scanning support for Amazon S3 buckets and RDS instances is in Limited Availability. To enroll, click <strong>Request Access</strong>.
 {{< /callout >}}
 
-If you have [Sensitive Data Scanner][6] enabled, you can catalog and classify sensitive data in your Amazon S3 buckets and RDS instances.
+If you have [Sensitive Data Scanner][16] enabled, you can catalog and classify sensitive data in your Amazon S3 buckets and RDS instances.
 
-Sensitive Data Scanner scans for sensitive data by deploying [Agentless scanners][8] in your cloud environments. These scanning instances retrieve a list of all S3 buckets and RDS instances through [Remote Configuration][9], and have set instructions to scan text files—such as CSVs and JSONs—and tables in every datastore over time. Sensitive Data Scanner leverages its [entire rules library][11] to find matches. When a match is found, the location of the match is sent to Datadog by the scanning instance. Data stores and their files are only read in your environment—no sensitive data is sent back to Datadog.
+Sensitive Data Scanner scans for sensitive data by deploying [Agentless scanners][17] in your cloud environments. These scanning instances retrieve a list of all S3 buckets and RDS instances through [Remote Configuration][18], and have set instructions to scan text files—such as CSVs and JSONs—and tables in every datastore over time. Sensitive Data Scanner leverages its [entire rules library][19] to find matches. When a match is found, the location of the match is sent to Datadog by the scanning instance. Data stores and their files are only read in your environment—no sensitive data is sent back to Datadog.
 
-Along with displaying sensitive data matches, Cloud Storage surfaces any security issues detected by [Cloud Security Management][7] affecting the sensitive datastores. You can click any issue to continue triage and remediation within Cloud Security Management.
+Along with displaying sensitive data matches, Cloud Storage surfaces any security issues detected by [Cloud Security Management][20] affecting the sensitive datastores. You can click any issue to continue triage and remediation within Cloud Security Management.
 
 ## Out-of-the-box dashboard
 
-When Sensitive Data Scanner is enabled, an [out-of-the-box dashboard][10] summarizing sensitive data findings is automatically installed in your account. To access this dashboard, go to **Dashboards > Dashboards List** and search for "Sensitive Data Scanner Overview".
+When Sensitive Data Scanner is enabled, an [out-of-the-box dashboard][21] summarizing sensitive data findings is automatically installed in your account. To access this dashboard, go to **Dashboards > Dashboards List** and search for "Sensitive Data Scanner Overview".
 
 {{<img src="sensitive_data_scanner/sdslight.png" alt="Sensitive Data Scanner Overview dashboard" style="width:80%;">}}
 
@@ -250,20 +250,20 @@ To turn off Sensitive Data Scanner entirely, set the toggle to **off** for each 
 [2]: /observability_pipelines/set_up_pipelines/
 [3]: /observability_pipelines/processors/sensitive_data_scanner/
 [4]: /observability_pipelines/
-[5]: /logs/guide/logs-rbac/
-[6]: /sensitive_data_scanner/
-[7]: /security/cloud_security_management
-[8]: /security/cloud_security_management/setup/agentless_scanning
-[9]: /agent/remote_config
-[10]: https://app.datadoghq.com/dash/integration/sensitive_data_scanner
-[11]: /sensitive_data_scanner/library_rules/
-[12]: /account_management/rbac/permissions/#compliance
-[13]: /account_management/rbac/
-[14]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/sensitive_data_scanner_rule
-[15]: https://app.datadoghq.com/organization-settings/sensitive-data-scanner/configuration
-[16]: /sensitive_data_scanner/investigate_sensitive_data_issues/
-[17]: https://app.datadoghq.com/organization-settings/sensitive-data-scanner/summary
-[18]: /logs/log_configuration/processors/?tab=ui#remapper
-[19]: https://app.datadoghq.com/logs/pipelines
-[20]: /logs/explorer/search_syntax/
-[21]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/sensitive_data_scanner_group
+[5]: /account_management/rbac/permissions/#compliance
+[6]: /account_management/rbac/
+[7]: /logs/explorer/search_syntax/
+[8]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/sensitive_data_scanner_group
+[9]: https://app.datadoghq.com/organization-settings/sensitive-data-scanner/configuration
+[10]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/sensitive_data_scanner_rule
+[11]: /sensitive_data_scanner/investigate_sensitive_data_issues/
+[12]: https://app.datadoghq.com/organization-settings/sensitive-data-scanner/summary
+[13]: /logs/guide/logs-rbac/
+[14]: /logs/log_configuration/processors/?tab=ui#remapper
+[15]: https://app.datadoghq.com/logs/pipelines
+[16]: /sensitive_data_scanner/
+[17]: /security/cloud_security_management/setup/agentless_scanning
+[18]: /agent/remote_config
+[19]: /sensitive_data_scanner/library_rules/
+[20]: /security/cloud_security_management
+[21]: https://app.datadoghq.com/dash/integration/sensitive_data_scanner
