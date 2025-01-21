@@ -57,7 +57,7 @@ spec:
 
 To view manual dependencies in the Datadog app:
 
-1. Navigate to [Service Catalog][1]
+1. Navigate to [Service Catalog][1].
 1. Select your service to open the side panel.
 1. Find the Performance tab, then select the Dependencies sub-tab.
 
