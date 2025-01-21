@@ -27,8 +27,9 @@ If you've already [set up Cloud Security Management][3] and want to add a new cl
 1. At the bottom of the AWS section, click **Add AWS accounts by following these steps**. The **Add New AWS Account(s)** dialog is displayed.
 1. Select the AWS region where you want to create the CloudFormation stack.
 1. Select an API key that is already configured for Remote Configuration. If the API key you select does not have Remote Configuration enabled, Remote Configuration is automatically enabled for that key upon selection.
-1. Send **AWS Logs to Datadog** and **Enable Cloud Security Management** are automatically selected by default. Leave the selections as is.
-1. In the **Agentless Scanning** section, toggle **Host Vulnerability Scanning**, **Container Vulnerability Scanning**, **Lambda Vulnerability Scanning**, and **Data Security Scanning** to the on position.
+1. **Send AWS Logs to Datadog** and **Detect security issues** are automatically selected by default. Leave the selections as is.
+1. The **Enable Vulnerability Management (Host, Container and Lambda)** switch is also enabled by default. Leave this selection as is.
+1. Optionally, you can **Enable Sensitive Data Scanner for Cloud Storage**.
 1. Click **Launch CloudFormation Template**. A new window opens, displaying the AWS CloudFormation screen. Use the provided CloudFormation template to create a stack. The template includes the IAM permissions required to deploy and manage Agentless scanners.
 
 [1]: https://app.datadoghq.com/security/configuration/csm/setup
