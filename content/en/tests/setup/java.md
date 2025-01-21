@@ -57,7 +57,7 @@ Supported build systems:
 | Gradle | >= 2.0 |
 | Maven | >= 3.2.1 |
 
-Other build systems, such as Ant or Bazel, are supported with the following limitations:
+Other build systems, such as Ant, Bazel, or SBT are supported with the following limitations:
 - Automatic coverage configuration and reporting is not supported.
 - When building a multi-module project, every module is reported in a separate trace.
 
@@ -148,7 +148,7 @@ Set the following environment variables to configure the tracer:
 Run your tests as you normally do (for example: `./gradlew clean test`).
 
 {{% /tab %}}
-{{% tab "sbt" %}}
+{{% tab "SBT" %}}
 
 Set the following environment variables to configure the tracer:
 
