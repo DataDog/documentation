@@ -33,6 +33,16 @@ import { FilterConfig } from '../../schemas/frontmatter';
  * Resolution involves replacing placeholders
  * with user-selected values, determining any default values
  * resulting from the user's earlier selections, and so on.
+ *
+ * @param p.valsByTraitId The user's existing customization selections,
+ * keyed by trait ID.
+ *
+ * @param p.filtersManifest The page's filters manifest (either
+ * the full version or the client-side version).
+ *
+ * @returns A ResolvedFilters object, keyed by trait ID,
+ * containing the relevant filter values and options
+ * to display in the page customization menu.
  */
 export function resolveFilters(p: {
   valsByTraitId: Record<string, string>;

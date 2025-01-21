@@ -2,13 +2,13 @@
 
 ***
 
-[cdocs-data](../globals.md) / buildFiltersManifest
+[cdocs-data](../README.md) / buildFiltersManifest
 
 # Function: buildFiltersManifest()
 
 > **buildFiltersManifest**(`p`): [`FiltersManifest`](../type-aliases/FiltersManifest.md)
 
-Defined in: [src/utils/buildFiltersManifest.ts:14](https://github.com/DataDog/documentation/blob/cd224ee345504c4db4f79b0b6511b02248729870/markdoc/cdocs-data/src/utils/buildFiltersManifest.ts#L14)
+Defined in: [src/utils/compilation/buildFiltersManifest.ts:26](https://github.com/DataDog/documentation/blob/c275cb05a4877dd5f4ee59df3f5c876b873b090c/markdoc/cdocs-data/src/utils/compilation/buildFiltersManifest.ts#L26)
 
 Combine a page's frontmatter, the global glossary,
 and the global filter config into a single object
@@ -20,23 +20,31 @@ that defines the filters available on the page.
 
 #### customizationConfig
 
-\{ `optionGlossary`: `Record`\<`string`, \{ `description`: `string`; `id`: `string`; `label`: `string`; \}\>; `optionGroupGlossary`: `Record`\<`string`, `object`[]\>; `traitGlossary`: `Record`\<`string`, \{ `description`: `string`; `id`: `string`; `label`: `string`; \}\>; \}
+\{ `optionGroupsById`: `Record`\<`string`, `object`[]\>; `optionsById`: `Record`\<`string`, \{ `description`: `string`; `id`: `string`; `label`: `string`; \}\>; `traitsById`: `Record`\<`string`, \{ `description`: `string`; `id`: `string`; `label`: `string`; \}\>; \}
 
-#### customizationConfig.optionGlossary
+The global customization
+configuration, which includes all traits, options, and
+option groups that are available to the page.
 
-`Record`\<`string`, \{ `description`: `string`; `id`: `string`; `label`: `string`; \}\> = `OptionGlossarySchema`
-
-#### customizationConfig.optionGroupGlossary
+#### customizationConfig.optionGroupsById
 
 `Record`\<`string`, `object`[]\> = `OptionGroupGlossarySchema`
 
-#### customizationConfig.traitGlossary
+#### customizationConfig.optionsById
+
+`Record`\<`string`, \{ `description`: `string`; `id`: `string`; `label`: `string`; \}\> = `OptionGlossarySchema`
+
+#### customizationConfig.traitsById
 
 `Record`\<`string`, \{ `description`: `string`; `id`: `string`; `label`: `string`; \}\> = `TraitGlossarySchema`
 
 #### frontmatter
 
 \{ `content_filters`: `object`[]; `title`: `string`; \}
+
+The frontmatter for a page,
+which has been obtained by parsing the page's Markdown
+(or Markdoc, etc.) file.
 
 #### frontmatter.content_filters
 
@@ -49,3 +57,7 @@ that defines the filters available on the page.
 ## Returns
 
 [`FiltersManifest`](../type-aliases/FiltersManifest.md)
+
+A manifest that defines the filters available
+on the page, including all data required to
+render the filter and respond to user interactions.

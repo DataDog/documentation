@@ -3,6 +3,12 @@ import { FiltersManifest, ClientSideFiltersManifest } from '../../schemas/pageFi
 /**
  * Convert a standard compile-time page filters manifest
  * to a lighter version to be used client-side.
+ *
+ * @param manifest The FiltersManifest for a given page.
+ *
+ * @returns A ClientSideFiltersManifest, which includes only
+ * the data required for rendering and updating filters
+ * in the browser.
  */
 export function pruneManifestForClient(
   manifest: FiltersManifest,

@@ -2,13 +2,13 @@
 
 ***
 
-[cdocs-data](../globals.md) / ResolvedFilter
+[cdocs-data](../README.md) / ResolvedFilter
 
 # Type Alias: ResolvedFilter
 
 > **ResolvedFilter**: `object`
 
-Defined in: [src/schemas/pageFilters.ts:72](https://github.com/DataDog/documentation/blob/cd224ee345504c4db4f79b0b6511b02248729870/markdoc/cdocs-data/src/schemas/pageFilters.ts#L72)
+Defined in: [src/schemas/pageFilters.ts:72](https://github.com/DataDog/documentation/blob/c275cb05a4877dd5f4ee59df3f5c876b873b090c/markdoc/cdocs-data/src/schemas/pageFilters.ts#L72)
 
 A page filter that has been "resolved" into
 its current value and available options.

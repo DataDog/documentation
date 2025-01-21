@@ -2,13 +2,13 @@
 
 ***
 
-[cdocs-data](../globals.md) / FilterConfig
+[cdocs-data](../README.md) / FilterConfig
 
 # Type Alias: FilterConfig
 
 > **FilterConfig**: `object`
 
-Defined in: [src/schemas/frontMatter.ts:29](https://github.com/DataDog/documentation/blob/cd224ee345504c4db4f79b0b6511b02248729870/markdoc/cdocs-data/src/schemas/frontMatter.ts#L29)
+Defined in: src/schemas/frontmatter.ts:29
 
 The configuration of an individual page filter,
 as defined in the front matter of a document.

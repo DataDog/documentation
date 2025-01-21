@@ -2,13 +2,16 @@
 
 ***
 
-[cdocs-data](../globals.md) / loadCustomizationConfig
+[cdocs-data](../README.md) / loadCustomizationConfig
 
 # Function: loadCustomizationConfig()
 
 > **loadCustomizationConfig**(`p`): `object`
 
-Defined in: [src/utils/loadCustomizationConfig.ts:4](https://github.com/DataDog/documentation/blob/cd224ee345504c4db4f79b0b6511b02248729870/markdoc/cdocs-data/src/utils/loadCustomizationConfig.ts#L4)
+Defined in: [src/utils/compilation/loadCustomizationConfig.ts:17](https://github.com/DataDog/documentation/blob/c275cb05a4877dd5f4ee59df3f5c876b873b090c/markdoc/cdocs-data/src/utils/compilation/loadCustomizationConfig.ts#L17)
+
+Loads the customization configuration for all languages into memory,
+including all configured traits, options, and option groups.
 
 ## Parameters
 
@@ -18,17 +21,28 @@ Defined in: [src/utils/loadCustomizationConfig.ts:4](https://github.com/DataDog/
 
 `string`
 
+The top-level directory where the customization configuration
+files are located. The top-level directory should contain subdirectories for each
+supported language.
+
 #### defaultLang
 
 `string`
+
+The default language. Defaults to 'en'.
 
 #### langs
 
 `string`[]
 
+The list of languages for which to load the customization configuration,
+e.g. ['en', 'es', 'fr'].
+
 ## Returns
 
 `object`
+
+The customization configuration for each language, keyed by language code.
 
 ### customizationConfigByLang
 

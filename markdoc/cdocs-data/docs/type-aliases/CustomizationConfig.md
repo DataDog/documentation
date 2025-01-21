@@ -2,24 +2,24 @@
 
 ***
 
-[cdocs-data](../globals.md) / CustomizationConfig
+[cdocs-data](../README.md) / CustomizationConfig
 
 # Type Alias: CustomizationConfig
 
 > **CustomizationConfig**: `object`
 
-Defined in: [src/schemas/customizationConfig.ts:12](https://github.com/DataDog/documentation/blob/cd224ee345504c4db4f79b0b6511b02248729870/markdoc/cdocs-data/src/schemas/customizationConfig.ts#L12)
+Defined in: [src/schemas/customizationConfig.ts:12](https://github.com/DataDog/documentation/blob/c275cb05a4877dd5f4ee59df3f5c876b873b090c/markdoc/cdocs-data/src/schemas/customizationConfig.ts#L12)
 
 ## Type declaration
 
-### optionGlossary
+### optionGroupsById
 
-> **optionGlossary**: `Record`\<`string`, \{ `description`: `string`; `id`: `string`; `label`: `string`; \}\> = `OptionGlossarySchema`
+> **optionGroupsById**: `Record`\<`string`, `object`[]\> = `OptionGroupGlossarySchema`
 
-### optionGroupGlossary
+### optionsById
 
-> **optionGroupGlossary**: `Record`\<`string`, `object`[]\> = `OptionGroupGlossarySchema`
+> **optionsById**: `Record`\<`string`, \{ `description`: `string`; `id`: `string`; `label`: `string`; \}\> = `OptionGlossarySchema`
 
-### traitGlossary
+### traitsById
 
-> **traitGlossary**: `Record`\<`string`, \{ `description`: `string`; `id`: `string`; `label`: `string`; \}\> = `TraitGlossarySchema`
+> **traitsById**: `Record`\<`string`, \{ `description`: `string`; `id`: `string`; `label`: `string`; \}\> = `TraitGlossarySchema`

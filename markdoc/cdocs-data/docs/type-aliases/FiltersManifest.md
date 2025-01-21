@@ -2,13 +2,13 @@
 
 ***
 
-[cdocs-data](../globals.md) / FiltersManifest
+[cdocs-data](../README.md) / FiltersManifest
 
 # Type Alias: FiltersManifest
 
 > **FiltersManifest**: `object`
 
-Defined in: [src/schemas/pageFilters.ts:218](https://github.com/DataDog/documentation/blob/cd224ee345504c4db4f79b0b6511b02248729870/markdoc/cdocs-data/src/schemas/pageFilters.ts#L218)
+Defined in: [src/schemas/pageFilters.ts:218](https://github.com/DataDog/documentation/blob/c275cb05a4877dd5f4ee59df3f5c876b873b090c/markdoc/cdocs-data/src/schemas/pageFilters.ts#L218)
 
 A object containing all of the potential trait IDs
 and option groups for a page, created by populating the front matter

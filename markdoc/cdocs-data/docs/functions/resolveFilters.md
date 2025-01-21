@@ -2,13 +2,13 @@
 
 ***
 
-[cdocs-data](../globals.md) / resolveFilters
+[cdocs-data](../README.md) / resolveFilters
 
 # Function: resolveFilters()
 
 > **resolveFilters**(`p`): [`ResolvedFilters`](../type-aliases/ResolvedFilters.md)
 
-Defined in: [src/utils/resolveFilters.ts:37](https://github.com/DataDog/documentation/blob/cd224ee345504c4db4f79b0b6511b02248729870/markdoc/cdocs-data/src/utils/resolveFilters.ts#L37)
+Defined in: [src/utils/shared/resolveFilters.ts:47](https://github.com/DataDog/documentation/blob/c275cb05a4877dd5f4ee59df3f5c876b873b090c/markdoc/cdocs-data/src/utils/shared/resolveFilters.ts#L47)
 
 Resolve the page filters object that is used
 to populate the page customization menu.
@@ -33,10 +33,20 @@ resulting from the user's earlier selections, and so on.
 
 \{ `defaultValsByTraitId`: `Record`\<`string`, `string`\>; `errors`: `object`[]; `filtersByTraitId`: `Record`\<`string`, \{ `config`: \{ `default_value`: `string`; `label`: `string`; `option_group_id`: `string`; `trait_id`: `string`; \}; `defaultValsByOptionGroupId`: `Record`\<`string`, `string`\>; `possibleVals`: `string`[]; \}\>; `optionGroupsById`: `Record`\<`string`, `object`[]\>; \} \| \{ `defaultValsByTraitId`: `Record`\<`string`, `string`\>; `filtersByTraitId`: `Record`\<`string`, \{ `config`: \{ `default_value`: `string`; `label`: `string`; `option_group_id`: `string`; `trait_id`: `string`; \}; `defaultValsByOptionGroupId`: `Record`\<`string`, `string`\>; \}\>; `optionGroupsById`: `Record`\<`string`, `object`[]\>; \}
 
+The page's filters manifest (either
+the full version or the client-side version).
+
 #### valsByTraitId
 
 `Record`\<`string`, `string`\>
 
+The user's existing customization selections,
+keyed by trait ID.
+
 ## Returns
 
 [`ResolvedFilters`](../type-aliases/ResolvedFilters.md)
+
+A ResolvedFilters object, keyed by trait ID,
+containing the relevant filter values and options
+to display in the page customization menu.

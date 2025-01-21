@@ -1,6 +1,19 @@
 import { YamlConfigParser } from '../../modules/YamlConfigParser';
 import { CustomizationConfigByLang } from '../../schemas/customizationConfig';
 
+/**
+ * Loads the customization configuration for all languages into memory,
+ * including all configured traits, options, and option groups.
+ *
+ * @param p.configDir The top-level directory where the customization configuration
+ * files are located. The top-level directory should contain subdirectories for each
+ * supported language.
+ * @param p.langs The list of languages for which to load the customization configuration,
+ * e.g. ['en', 'es', 'fr'].
+ * @param p.defaultLang The default language. Defaults to 'en'.
+ *
+ * @returns The customization configuration for each language, keyed by language code.
+ */
 export function loadCustomizationConfig(p: {
   configDir: string;
   langs: string[];

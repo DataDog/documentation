@@ -6,7 +6,7 @@
   "scripts": {
     "test": "yarn build; vitest run --coverage --reporter=verbose",
     "test:watch": "yarn build; vitest",
-    "build": "rimraf ./dist && npx tsc",
+    "build": "rimraf ./dist && npx tsc && npx typedoc --readme none --exclude *.ts",
     "format": "prettier --write ."
   },
   "engines": {

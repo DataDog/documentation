@@ -1,8 +1,7 @@
 import { GLOBAL_PLACEHOLDER_REGEX } from '../../schemas/regexes';
-import { Frontmatter } from '../../schemas/frontmatter';
+import { Frontmatter, FilterConfig } from '../../schemas/frontmatter';
 import { PLACEHOLDER_REGEX } from '../../schemas/regexes';
 import { FiltersManifest } from '../../schemas/pageFilters';
-import { FilterConfig } from '../../schemas/frontmatter';
 import { CdocsError } from '../../schemas/errors';
 import { CustomizationConfig } from '../../schemas/customizationConfig';
 import { v4 as uuidv4 } from 'uuid';
@@ -11,6 +10,18 @@ import { v4 as uuidv4 } from 'uuid';
  * Combine a page's frontmatter, the global glossary,
  * and the global filter config into a single object
  * that defines the filters available on the page.
+ *
+ * @param p.frontmatter The frontmatter for a page,
+ * which has been obtained by parsing the page's Markdown
+ * (or Markdoc, etc.) file.
+ *
+ * @param p.customizationConfig The global customization
+ * configuration, which includes all traits, options, and
+ * option groups that are available to the page.
+ *
+ * @returns A manifest that defines the filters available
+ * on the page, including all data required to
+ * render the filter and respond to user interactions.
  */
 export function buildFiltersManifest(p: {
   frontmatter: Frontmatter;

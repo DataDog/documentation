@@ -2,13 +2,13 @@
 
 ***
 
-[cdocs-data](../globals.md) / pruneManifestForClient
+[cdocs-data](../README.md) / pruneManifestForClient
 
 # Function: pruneManifestForClient()
 
 > **pruneManifestForClient**(`manifest`): [`ClientSideFiltersManifest`](../type-aliases/ClientSideFiltersManifest.md)
 
-Defined in: [src/utils/pruneManifestForClient.ts:7](https://github.com/DataDog/documentation/blob/cd224ee345504c4db4f79b0b6511b02248729870/markdoc/cdocs-data/src/utils/pruneManifestForClient.ts#L7)
+Defined in: [src/utils/compilation/pruneManifestForClient.ts:13](https://github.com/DataDog/documentation/blob/c275cb05a4877dd5f4ee59df3f5c876b873b090c/markdoc/cdocs-data/src/utils/compilation/pruneManifestForClient.ts#L13)
 
 Convert a standard compile-time page filters manifest
 to a lighter version to be used client-side.
@@ -16,6 +16,8 @@ to a lighter version to be used client-side.
 ## Parameters
 
 ### manifest
+
+The FiltersManifest for a given page.
 
 #### defaultValsByTraitId
 
@@ -36,3 +38,7 @@ to a lighter version to be used client-side.
 ## Returns
 
 [`ClientSideFiltersManifest`](../type-aliases/ClientSideFiltersManifest.md)
+
+A ClientSideFiltersManifest, which includes only
+the data required for rendering and updating filters
+in the browser.

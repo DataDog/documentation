@@ -4,6 +4,9 @@ This package contains utilities for handling customizable docs data:
 
 - loading and validating configuration data
 - creating and mutating runtime data
+- storing user data in their browser for future retrieval
+
+Eager to get started? Skip to the [usage examples](#usage-examples) or the [env setup instructions](#env-setup-instructions).
 
 ## What is a customizable doc?
 
@@ -18,36 +21,28 @@ A *filter* is a pairing of:
 - A *trait*, which represents an end user's characteristics or preferences, such as `programming_language`.
 - An *option group* that contains an ordered list of options for that trait, such as `python` or `go`.
 
-A *resolved filter* includes a trait, an option group, and a *value* (the option that the filter is currently set to). The value might come from the default option in the option group, the URL of a page, or the user's stored preferences. Filters are *resolved* each time the user changes their preferences.
+A *resolved filter* includes:
+- a trait
+- an option group
+- a *value* (the option that the filter is currently set to)
+
+A resolved filter's value might come from the default option in the option group, the URL of the page, or the user's stored preferences from a previous session on the docs site.
+
+Filters are *resolved* each time the user makes a *selection* (changes their existing filtering preferences).
 
 ### Configuration
 
+#### Sitewide: Traits, options, and option groups
+
 Traits and option groups (along with the individual options referenced by the option groups) are reusable throughout the entire docs site, and are defined in the site's *customization config*, a set of YAML files.
 
-Filters are defined in a page's front matter, and only apply to that page.
+The top-level customization folder ([example](./test/integration/complexExample/customization_config/)) should have the following structure:
+- a folder for each supported language, such as `en`, that contains
+  - a `traits` folder containing 1 YAML file that defines traits ([example](./test/integration/complexExample/customization_config/en/traits/))
+  - an `options` folder containing 1 YAML file that defines options ([example](./test/integration/complexExample/customization_config/en/options/))
+  - an `option_groups` folder containing 1 or more YAML files defining the option groups ([example](./test/integration/complexExample/customization_config/en/option_groups/))
 
-### Filter-value transfers between pages
-
-If two filters on two separate pages reference the same trait (such as `operating_system`), the user's preference travels between pages when their preference is available on the new page.
-
-In the `operating_system` example, the user's selection for `linux` transfers between two pages automatically if the destination page uses `linux` as an option for the `operating_system` trait. Otherwise, the destination page's default option for the `operating_system` trait automatically becomes the user's new selection.
-
-## cdocs-data utilities
-
-This package provides four utility functions:
-
-- `loadCustomizationConfig`, which merges all of a site's YAML files into one customization config object
-- `buildFiltersManifest`, which combines the frontmatter of a page with the site's customization config to produce a `FiltersManifest`, an object that contains all the necessary data for filtering the page, such as which options should be available for each trait
-- `pruneManifestForClient`, which removes manifest keys that are unnecessary for client-side filtering
-- `resolveFilters`, which combines the `FiltersManifest` with the user's selections in order to derive the current value and options for each filter.
-
-The packages also exports types and schemas for data, such as the `FiltersManifest`.
-
-## Configuration examples
-
-### Customization config (sitewide)
-
-#### Traits
+##### Configuring traits
 
 Customization requires at least one user trait, such as their preferred database or operating system:
 
@@ -57,7 +52,7 @@ traits:
     label: Database
 ```
 
-#### Options
+##### Configuring options
 
 Customization requires least two *options*, such as `postgres`:
 
@@ -73,7 +68,7 @@ options:
     label: Mongo
 ```
 
-#### Option groups
+##### Configuring option groups
 
 Customization requires at least one *option group*, an ordered list of existing options (defined above).
 
@@ -93,9 +88,9 @@ product_two_db_options:
 
 Option groups do not define any new options.
 
-## Page configuration
+#### Page-specific: Filters
 
-### Filters
+Filters are defined in a page's front matter, and only apply to that page.
 
 A *filter config*, which is defined in a page's front matter, combines a trait and an options group for use on that page:
 
@@ -105,3 +100,61 @@ content_filters:
   - trait_id: db
     option_group_id: product_two_db_options
 ```
+
+The `option_group_id` of a filter can be *dynamic*:
+
+```yaml
+title: Learn About Animals
+content_filters:
+  - trait_id: habitat
+    option_group_id: habitat_options
+  - trait_id: animal
+    option_group_id: <HABITAT>_animal_options
+```
+
+In the above example, the value for the trait `habitat` will be used to determine the options for `animal`. If the user has selected `desert` as the value for `habitat`, the `option group ID` becomes `desert_animal_options`, which might include options like `lizard` or `snake`.
+
+`cdocs-data` automatically validates the existence of all referenced option groups. If `ocean` is a valid value for `habitat`, but the option group `ocean_animal_options` does not exist, `cdocs-data` reports an error.
+
+## cdocs-data utilities
+
+This package provides four utility functions:
+
+- [`loadCustomizationConfig`](./docs/functions/loadCustomizationConfig.md), which merges all of a site's YAML files into one customization config object
+- [`buildFiltersManifest`](./docs/functions/buildFiltersManifest.md), which combines the frontmatter of a page with the site's customization config to produce a `FiltersManifest`, an object that contains all the necessary data for filtering the page, such as which options should be available for each trait
+- [`pruneManifestForClient`](./docs/functions/pruneManifestForClient.md), which removes manifest keys that are unnecessary for client-side filtering
+- [`resolveFilters`](./docs/functions/resolveFilters.md), which combines the `FiltersManifest` with the user's selections in order to derive the current value and options for each filter.
+
+The packages also exports [types](./docs/type-aliases/) and [schemas](./docs/variables/) for data, such as the `FiltersManifest`.
+
+## Usage examples
+
+Each example includes:
+
+- A complete YAML customization config
+- A test script that ingests the config, then calls the `cdocs-data` functions in the typical order
+- A folder of data snapshots, so you can explore the customization data as it existed at a given point in the test script
+
+### Simple example
+
+The simple example included in this package ([script](./test/integration/simpleExample/simpleExample.test.ts), [configuration data](./test/integration/simpleExample/customization_config/), [resulting data snapshots](./test/__snapshots__/simpleExample/)) provides support for a page where the user can select their favorite color (pink or purple).
+
+### Complex example
+
+The complex example included in this package ([script](./test/integration/complexExample/complexExample.test.ts), [configuration data](./test/integration/complexExample/customization_config/), [resulting data snapshots](./test/__snapshots__/complexExample/)) provides support for a page where the user can select a habitat, then select an animal from that particular habitat. 
+
+The option group for the `animal` filter is dynamic -- it depends on the user's selection for `habitat`.
+
+## Env setup instructions
+
+From the `cdocs-data` directory, run:
+
+```shell
+yarn install && yarn test
+```
+
+To experiment with the package's functionality:
+
+1. Create a new branch.
+2. Make modifications to [the simple example script](./test/integration/simpleExample/simpleExample.test.ts)/[configuration data](./test/integration/simpleExample/customization_config/), or the [complex example script](./test/integration/complexExample/complexExample.test.ts)/[configuration data](./test/integration/complexExample/customization_config/).
+3. Run `yarn test` inside the `cdocs-data` directory to see how your changes have impacted any logs, test snapshots, and so on.

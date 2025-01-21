@@ -2,13 +2,13 @@
 
 ***
 
-[cdocs-data](../globals.md) / CdocsCoreError
+[cdocs-data](../README.md) / CdocsCoreError
 
 # Type Alias: CdocsCoreError
 
 > **CdocsCoreError**: `object`
 
-Defined in: [src/schemas/errors.ts:11](https://github.com/DataDog/documentation/blob/cd224ee345504c4db4f79b0b6511b02248729870/markdoc/cdocs-data/src/schemas/errors.ts#L11)
+Defined in: [src/schemas/errors.ts:11](https://github.com/DataDog/documentation/blob/c275cb05a4877dd5f4ee59df3f5c876b873b090c/markdoc/cdocs-data/src/schemas/errors.ts#L11)
 
 ## Type declaration
 
