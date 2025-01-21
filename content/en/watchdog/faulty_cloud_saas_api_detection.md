@@ -1,9 +1,9 @@
 ---
 title: Automatic Faulty Cloud & SaaS API Detection
 further_reading:
-# - link: "https://www.datadoghq.com/blog/<URL FROM THE BLOGPOST>/"
-#   tag: "Blog"
-#   text: "Stay ahead of service disruptions with Watchdog Cloud and API Outage Detection"
+- link: "https://www.datadoghq.com/blog/watchdog-outage-detection/"
+  tag: "Blog"
+  text: "Stay ahead of service disruptions with Watchdog Cloud and API Outage Detection"
 - link: "watchdog/faulty_deployment_detection/"
   tag: "Documentation"
   text: "Learn about Watchdog Faulty Service Deployment Detections"
