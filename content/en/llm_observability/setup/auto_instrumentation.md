@@ -163,7 +163,7 @@ Datadog's [LLM Observability Node.js SDK][4] provides integrations that automati
 | Framework                               | Supported Versions | Tracer Version       |
 |-----------------------------------------|--------------------|----------------------|
 | [OpenAI](#openai) (common JS)           | >= 3.0.0           | >= 4.49.0, >= 5.25.0 |
-| [LangChain](#langchain) (common JS)     | >= 0.1.0           | >= 4.52.0, >= 5.28.0 |
+| [LangChain](#langchain) (common JS)     | >= 0.1.0           | >= 5.32.0            |
 
 In addition to capturing latency and errors, the integrations capture the input parameters, input and output messages, and token usage (when available) of each traced call.
 
