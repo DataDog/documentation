@@ -58,6 +58,10 @@ See [Trace Metrics][2].
 
 For a full working example configuration with the Datadog exporter, see [`trace-metrics.yaml`][3].
 
+## Known issues
+
+Datadog Connector does not currently support [Datadog Agent host tags](https://docs.datadoghq.com/tracing/metrics/metrics_namespace/) on APM Trace Metrics calculated by the Datadog Connector. Second primary tag can be set via a workaround; contact support for more details.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
