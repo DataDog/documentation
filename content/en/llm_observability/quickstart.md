@@ -13,7 +13,7 @@ further_reading:
 
 ## Overview
 
-This guide uses the [LLM Observability SDK for Python][1]. If your application is written in another language, you can create traces by calling the [API][8] instead.
+This guide uses the LLM Observability SDKs for [Python][1] and [Node.js][2]. If your application is written in another language, you can create traces by calling the [API][8] instead.
 
 ## Setup
 
@@ -23,7 +23,7 @@ To better understand LLM Observability terms and concepts, you can explore the e
 
 ## Command line
 
-To generate an LLM Observability trace, you can run a Python script.
+To generate an LLM Observability trace, you can run a Python or Node.js script.
 
 ### Prerequisites
 
@@ -34,14 +34,26 @@ To generate an LLM Observability trace, you can run a Python script.
 
 1. Install the SDK by adding the `ddtrace` and `openai` packages:
 
-   {{< code-block lang="shell" >}}
+   {{< tabs >}}
+   {{< tab "Python" >}}
+   ```shell
    pip install ddtrace
    pip install openai
-   {{< /code-block >}}
+   ```
+   {{% /tab %}}
+   {{ tab "Node.js" }}
+   ```shell
+   npm install dd-trace
+   npm install openai
+   ```
+   {{% /tab %}}
+   {{< /tabs >}}
 
-1. Create a Python script and save it as `quickstart.py`. This Python script makes a single OpenAI call.
+1. Create a script and save it as `quickstart.py` or `quickstart.js`. This script makes a single OpenAI call.
    
-   {{< code-block lang="python" filename="quickstart.py" >}}
+   {{< tabs >}}
+   {{< tab "Python" >}}
+   ```python
    import os
    from openai import OpenAI
 
@@ -54,17 +66,51 @@ To generate an LLM Observability trace, you can run a Python script.
         {"role": "user", "content": "I'd like to buy a chair for my living room."},
     ],
    )
-   {{< /code-block >}}
+   ```
+   {{% /tab %}}
+   {{ tab "Node.js" }}
+   ```javascript
+   const { OpenAI } = require('openai');
+
+   const oaiClient = new OpenAI(process.env.OPENAI_API_KEY);
+
+   const completion = await oaiClient.chat.completions.create({
+      model: 'gpt-3.5-turbo',
+      messages: [
+         { role: 'system', content: 'You are a helpful customer assistant for a furniture store.' },
+         { role: 'user', content: 'I\'d like to buy a chair for my living room.' },
+      ]
+   });
+   ```
+   {{% /tab %}}
+   {{< /tabs >}}
 
 1. Run the Python script with the following shell command. This sends a trace of the OpenAI call to Datadog.
 
+   {{< tabs >}}
+   {{< tab "Python" >}}
    ```shell
    DD_LLMOBS_ENABLED=1 DD_LLMOBS_ML_APP=onboarding-quickstart \
    DD_API_KEY=<YOUR_DATADOG_API_KEY> DD_SITE={{< region-param key="dd_site" >}} \
    DD_LLMOBS_AGENTLESS_ENABLED=1 ddtrace-run python quickstart.py
    ```
 
-   For more information about required environment variables, see [the SDK documentation][9]. 
+   For more information about required environment variables, see [the SDK documentation][1].
+
+   [1]: /llm_observability/setup/sdk/python/#command-line-setup
+   {{% /tab %}}
+   {{ tab "Node.js" }}
+   ```shell
+   DD_LLMOBS_ENABLED=1 DD_LLMOBS_ML_APP=onboarding-quickstart \
+   DD_API_KEY=<YOUR_DATADOG_API_KEY> DD_SITE={{< region-param key="dd_site" >}} \
+   DD_LLMOBS_AGENTLESS_ENABLED=1 NODE_OPTIONS="--import dd-trace/initialize.mjs" node quickstart.js
+   ```
+
+   For more information about required environment variables, see [the SDK documentation][1].
+
+   [1]: /llm_observability/setup/sdk/nodejs/#command-line-setup
+   {{% /tab %}}
+   {{< /tabs >}}
    
    **Note**: `DD_LLMOBS_AGENTLESS_ENABLED` is only required if you do not have the Datadog Agent running. If the Agent is running in your production environment, make sure this environment variable is unset.
 
@@ -72,7 +118,7 @@ To generate an LLM Observability trace, you can run a Python script.
 
    {{< img src="llm_observability/quickstart_trace_1.png" alt="An LLM Observability trace displaying a single LLM request" style="width:100%;" >}}
 
-The trace you see is composed of a single LLM span. The `ddtrace-run` command automatically traces your LLM calls from [Datadog's list of supported integrations][10].
+The trace you see is composed of a single LLM span. The `ddtrace-run` or `NODE_OPTIONS="--import dd-trace/initialize.mjs"` command automatically traces your LLM calls from [Datadog's list of supported integrations][10].
 
 If your application consists of more elaborate prompting or complex chains or workflows involving LLMs, you can trace it using the [Setup documentation][11] and the [SDK documentation][1].
 
@@ -80,14 +126,14 @@ If your application consists of more elaborate prompting or complex chains or wo
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /llm_observability/setup/sdk/
+[1]: /llm_observability/setup/sdk/python
+[2]: /llm_observability/setup/sdk/nodejs
 [3]: https://app.datadoghq.com/llm/traces
 [4]: https://platform.openai.com/docs/quickstart/account-setup
 [5]: https://platform.openai.com/docs/quickstart/step-1-setting-up-python
 [6]: https://platform.openai.com/docs/quickstart/step-2-set-up-your-api-key
 [7]: /account_management/api-app-keys/#add-an-api-key-or-client-token
 [8]: /llm_observability/setup/api
-[9]: /llm_observability/setup/sdk/#command-line-setup
 [10]: /llm_observability/setup/auto_instrumentation/
 [11]: /llm_observability/setup/
 [12]: https://github.com/DataDog/llm-observability
