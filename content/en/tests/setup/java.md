@@ -148,12 +148,34 @@ Set the following environment variables to configure the tracer:
 Run your tests as you normally do (for example: `./gradlew clean test`).
 
 {{% /tab %}}
+{{% tab "sbt" %}}
+
+Set the following environment variables to configure the tracer:
+
+`DD_CIVISIBILITY_ENABLED=true` (Required)
+: Enables the Test Optimization product.
+
+`DD_ENV` (Required)
+: Environment where the tests are being run (for example: `local` when running tests on a developer workstation or `ci` when running them on a CI provider).
+
+`DD_SERVICE` (Required)
+: Name of the service or library being tested.
+
+`DD_TRACER_FOLDER` (Required)
+: Path to the folder where the downloaded Java Tracer is located.
+
+`SBT_OPTS=-javaagent:$DD_TRACER_FOLDER/dd-java-agent.jar` (Required)
+: Injects the tracer into the JVMs that execute your tests.
+
+Run your tests as you normally do (for example: `sbt test`).
+
+{{% /tab %}}
 {{% tab "Other" %}}
 
 Set the following environment variables to configure the tracer:
 
 `DD_CIVISIBILITY_ENABLED=true` (Required)
-: Enables Test Optimization.
+: Enables the Test Optimization product.
 
 `DD_ENV` (Required)
 : Environment where the tests are being run (for example: `local` when running tests on a developer workstation or `ci` when running them on a CI provider).
