@@ -15,6 +15,8 @@ A flare allows you to send necessary troubleshooting information to the Datadog 
 - [Remote Configuration][3] must be enabled.
 - Your API key must be configured for Remote Configuration.
 - You must have a supported tracer version:
+  - Java: `1.26.0` or greater
+  - Python: `2.11.0` or greater
   - Node.js: `5.15.0` or greater, or `4.39.0` or greater
   - .NET: `2.46.0` or greater
 
