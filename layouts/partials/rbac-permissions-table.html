@@ -15,7 +15,7 @@
         {{- if ne .attributes.name nil -}}
         <tr>
           <td>
-            <code>{{- .attributes.name -}}</code>
+            {{- .attributes.display_name -}} (<code>{{- .attributes.name -}}</code>)
           </td>
           <td>
             {{- if ne .attributes.description_link nil -}}
