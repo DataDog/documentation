@@ -32,7 +32,7 @@ To generate an LLM Observability trace, you can run a Python or Node.js script.
     - An OpenAI API key stored in your environment as `OPENAI_API_KEY`. To create one, see [Account Setup][4] and [Set up your API key][6] in the official OpenAI documentation.
     - The OpenAI Python library installed. See [Setting up Python][5] in the official OpenAI documentation for instructions.
 
-1. Install the SDK by adding the `ddtrace` and `openai` packages:
+1. Install the SDK and OpenAI packages:
 
    {{< tabs >}}
    {{% tab "Python" %}}
@@ -53,7 +53,7 @@ To generate an LLM Observability trace, you can run a Python or Node.js script.
    {{% /tab %}}
    {{< /tabs >}}
 
-2. Create a script and save it as `quickstart.py` or `quickstart.js`. This script makes a single OpenAI call.
+2. Create a script, which will make a single OpenAI call.
    
    {{< tabs >}}
    {{% tab "Python" %}}
@@ -81,19 +81,23 @@ To generate an LLM Observability trace, you can run a Python or Node.js script.
 
    const oaiClient = new OpenAI(process.env.OPENAI_API_KEY);
 
-   const completion = await oaiClient.chat.completions.create({
-      model: 'gpt-3.5-turbo',
-      messages: [
-         { role: 'system', content: 'You are a helpful customer assistant for a furniture store.' },
-         { role: 'user', content: 'I\'d like to buy a chair for my living room.' },
-      ]
-   });
+   function main () {
+      const completion = await oaiClient.chat.completions.create({
+         model: 'gpt-3.5-turbo',
+         messages: [
+            { role: 'system', content: 'You are a helpful customer assistant for a furniture store.' },
+            { role: 'user', content: 'I\'d like to buy a chair for my living room.' },
+         ]
+      });
+   }
+
+   main();
    ```
 
    {{% /tab %}}
    {{< /tabs >}}
 
-3. Run the Python script with the following shell command. This sends a trace of the OpenAI call to Datadog.
+3. Run the script with the following shell command. This sends a trace of the OpenAI call to Datadog.
 
    {{< tabs >}}
    {{% tab "Python" %}}
