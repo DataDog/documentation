@@ -1,7 +1,7 @@
 ---
 title: Evaluating your LLM Application
 kind: documentation
-description: "Evaluate the quality of your LLM applications"
+description: Evaluate the quality of your LLM applications
 aliases:
     - /llm_observability/evaluations
 ---
