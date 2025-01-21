@@ -1,6 +1,7 @@
 ---
 title: NetFlow Monitoring
-is_beta: true
+aliases:
+- /network_monitoring/devices/netflow/
 further_reading:
 - link: "/network_monitoring/devices/profiles"
   tag: "Documentation"

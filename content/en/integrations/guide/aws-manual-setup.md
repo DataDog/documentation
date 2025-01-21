@@ -62,8 +62,8 @@ To set up the AWS integration manually, create an IAM policy and IAM role in you
 ### Generate an external ID
 
 1. In the [AWS integration configuration page][1], click **Add AWS Account**, and then select **Manually**.
-{{< site-region region="us,us3,us5,eu,ap1" >}}
 2. Choose which AWS partition your AWS account is scoped to. The partition is either `aws` for commercial regions, `aws-cn` for China*, or `aws-us-gov` for GovCloud. See [Partitions][9] in the AWS documentation for more information.
+{{< site-region region="us,us3,us5,eu,ap1" >}}
 3. Select `Role Delegation` for the access type. Role delegation is only supported for AWS accounts scoped to AWS commercial regions.
 {{< /site-region >}}
 {{< site-region region="gov" >}}

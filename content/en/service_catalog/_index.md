@@ -36,6 +36,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/service-catalog-schema-v3/"
   tag: "Blog"
   text: "Improve developer experience and collaboration with Service Catalog schema version 3.0"
+- link: "https://www.datadoghq.com/blog/memory-leak-workflow/"
+  tag: "Blog"
+  text: "Investigate memory leaks and OOMs with Datadog's guided workflow"
 algolia:
   tags: ['service catalog']
 ---
