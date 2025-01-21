@@ -18,15 +18,15 @@ A customizable doc uses filters to hide irrelevant content on a documentation pa
 
 A *filter* is a pairing of:
 
-- A *trait*, which represents an end user's characteristics or preferences, such as `programming_language`.
+- A *trait*, which represents a user's characteristics or preferences, such as `programming_language`.
 - An *option group* that contains an ordered list of options for that trait, such as `python` or `go`.
 
 A *resolved filter* includes:
 - a trait
 - an option group
-- a *value* (the option that the filter is currently set to)
+- a *value* (the id of the option that the trait is currently set to, such as `python`)
 
-A resolved filter's value might come from the default option in the option group, the URL of the page, or the user's stored preferences from a previous session on the docs site.
+A resolved filter's value might come from the default option in the option group, the URL of the page, or the user's stored preferences from a previous session on the docs site. But a filter's value always resolves to one of the options in the option group, even if a trait's value must be overwritten with the filter's default value in order to force that alignment.
 
 Filters are *resolved* each time the user makes a *selection* (changes their existing filtering preferences).
 
@@ -132,7 +132,8 @@ The packages also exports [types](./docs/type-aliases/) and [schemas](./docs/var
 Each example includes:
 
 - A complete YAML customization config
-- A test script that ingests the config, then calls the `cdocs-data` functions in the typical order
+- A test script that ingests the config, then calls the `cdocs-data` functions in the typical order 
+  - For example, the script builds the filters for a given page by combining the page's frontmatter with the sitewide configuration data
 - A folder of data snapshots, so you can explore the customization data as it existed at a given point in the test script
 
 ### Simple example
