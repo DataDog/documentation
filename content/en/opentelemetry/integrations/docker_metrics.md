@@ -113,28 +113,6 @@ The following table shows what Datadog container metric names are associated wit
 
 {{< mapping-table resource="dockerstats.csv">}}
 
-<!-- | Datadog Metric Name     | OTel Docker Stats Metric Name         | Metric Description             |
-|-------------------------|--------------------------------|----------------------|
-| `container.cpu.usage`    | `container.cpu.usage.total`       | The container total CPU Usage     |
-| `container.cpu.user`     | `container.cpu.usage.usermode`         | The container userspace CPU usage   |
-| `container.cpu.system`    | `container.cpu.usage.system`    | The container system CPU usage      |
-| `container.cpu.throttled`    | `container.cpu. throttling_data.throttled_time`      | The total cpu throttled time      |
-| `container.cpu.throttled.periods` | `container.cpu. throttling_data.throttled_periods`       | The number of periods during which the container was throttled |
-| `container.memory.usage`          | `container.memory.usage.total`      | The container total memory usage      |
-| `container.memory.kernel`         | `container.memory.active_anon`        | The container kernel memory usage     |
-| `container.memory.limit`          | `container.memory. hierarchical_memory_limit`    | The container memory limit    |
-| `container.memory.soft_limit`     | `container.memory.usage.limit`       | The container memory soft limit     |
-| `container.memory.cache`          | `container.memory.total_cache`      | The container cache usage   |
-| `container.memory.swap`           | `container.memory.total_swap`         | The container swap usage      |
-| `container.io.write`              | `container.blockio. io_service_bytes_recursive` <br>Attribute Filter operation=`write` | The number of bytes written to disks by this container         |
-| `container.io.read`               | `container.blockio. io_service_bytes_recursive` <br>Attribute Filter operation=`read`  | The number of bytes read from disks by this container          |
-| `container.io.write.operations`   | `container.blockio. io_serviced_recursive` <br>Attribute Filter operation=`write`      | The number of write operations done by this container          |
-| `container.io.read.operations`    | `container.blockio. io_serviced_recursive` <br>Attribute Filter operation=`read`       | The number of read operations done by this container           |
-| `container.net.sent`              | `container.network.io. usage.tx_bytes`      | The number of network bytes sent (per interface)    |
-| `container.net.sent.packets`      | `container.network.io. usage.tx_packets`    | The number of network packets sent (per interface)   |
-| `container.net.rcvd`              | `container.network.io. usage.rx_bytes`     | The number of network bytes received (per interface)   |
-| `container.net.rcvd.packets`      | `container.network.io. usage.rx_packets`   | The number of network packets received (per interface)    | -->
-
 See [OpenTelemetry Metrics Mapping][2] for more information.
 
 ## Full example configuration

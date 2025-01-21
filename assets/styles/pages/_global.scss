@@ -817,6 +817,9 @@ video {
 // Tables
 .table-wrapper {
     overflow-x: auto;
+    @include media-breakpoint-up(xl) {
+        overflow-x: unset;
+    }
 }
 
 table,
@@ -911,6 +914,12 @@ table,
 
     @include media-breakpoint-up(xl) {
             table-layout: fixed;
+    }
+}
+
+.table-fixed {
+    @include media-breakpoint-up(xl) {
+        table-layout: fixed;
     }
 }
 

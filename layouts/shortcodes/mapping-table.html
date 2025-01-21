@@ -8,24 +8,30 @@
 {{ $resource_path := print "_data/semantic-core/" (.Get "resource")}}
 {{ $resource := resources.Get $resource_path}}
 
-{{ if not $resource }}
-    {{ warnf "Resource %s not found" $resource_path }}
-    <div class="alert alert-warning">
-        <span>Table not found!</span>
-    </div>
-{{ else }}
-    <table>
-    {{ range $k, $row := (unmarshal $resource) }}
-        <tr>
-        {{ range $row }}
-            {{ if (not $k) }}
+{{ if $resource }}
+<div class="table-wrapper">
+    <table class="table-fixed">
+        <thead>
+            <tr>
+            {{ range (index (unmarshal $resource) 0) }}
                 {{ $header := cond (eq . "dd") "Datadog" .}}
-                <th>{{ $header | upper  }}</th>
-            {{ else }}
-                <td>{{ . | markdownify }}</td>
+                <th>{{ $header | upper }}</th>
+            {{ end }}
+            </tr>
+        </thead>
+        <tbody>
+        {{ range $index, $row := (unmarshal $resource) }}
+            {{ if $index }}
+                <tr>
+                {{ range $row }}
+                    <td>{{ . | markdownify }}</td>
+                {{ end }}
+                </tr>
             {{ end }}
         {{ end }}
-        </tr>
-    {{ end }}
+        </tbody>
+
     </table>
+</div>
+
 {{ end }}
