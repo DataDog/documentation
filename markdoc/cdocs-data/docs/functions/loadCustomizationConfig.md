@@ -8,7 +8,7 @@
 
 > **loadCustomizationConfig**(`p`): `object`
 
-Defined in: [src/utils/compilation/loadCustomizationConfig.ts:17](https://github.com/DataDog/documentation/blob/c275cb05a4877dd5f4ee59df3f5c876b873b090c/markdoc/cdocs-data/src/utils/compilation/loadCustomizationConfig.ts#L17)
+Defined in: [src/utils/compilation/loadCustomizationConfig.ts:17](https://github.com/DataDog/documentation/blob/0066b7ea89bc7b2496bd1acb094be438a1351d3d/markdoc/cdocs-data/src/utils/compilation/loadCustomizationConfig.ts#L17)
 
 Loads the customization configuration for all languages into memory,
 including all configured traits, options, and option groups.

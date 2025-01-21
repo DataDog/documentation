@@ -123,7 +123,7 @@ This package provides four utility functions:
 - [`loadCustomizationConfig`](./docs/functions/loadCustomizationConfig.md), which merges all of a site's YAML files into one customization config object
 - [`buildFiltersManifest`](./docs/functions/buildFiltersManifest.md), which combines the frontmatter of a page with the site's customization config to produce a `FiltersManifest`, an object that contains all the necessary data for filtering the page, such as which options should be available for each trait
 - [`pruneManifestForClient`](./docs/functions/pruneManifestForClient.md), which removes manifest keys that are unnecessary for client-side filtering
-- [`resolveFilters`](./docs/functions/resolveFilters.md), which combines the `FiltersManifest` with the user's selections in order to derive the current value and options for each filter.
+- [`resolveFilters`](./docs/functions/resolveFilters.md), which combines the `FiltersManifest` with the user's selections in order to derive the current value and current option group for each filter.
 
 The packages also exports [types](./docs/type-aliases/) and [schemas](./docs/variables/) for data, such as the `FiltersManifest`.
 

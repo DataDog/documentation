@@ -8,7 +8,7 @@
 
 > **ResolvedFilters**: `Record`\<`string`, \{ `currentValue`: `string`; `defaultValue`: `string`; `id`: `string`; `label`: `string`; `options`: `object`[]; \}\>
 
-Defined in: [src/schemas/pageFilters.ts:103](https://github.com/DataDog/documentation/blob/c275cb05a4877dd5f4ee59df3f5c876b873b090c/markdoc/cdocs-data/src/schemas/pageFilters.ts#L103)
+Defined in: [src/schemas/pageFilters.ts:103](https://github.com/DataDog/documentation/blob/0066b7ea89bc7b2496bd1acb094be438a1351d3d/markdoc/cdocs-data/src/schemas/pageFilters.ts#L103)
 
 A collection of ResolvedFilter objects, indexed by their
 unique IDs.

@@ -8,7 +8,7 @@
 
 > **OptionGlossary**: `Record`\<`string`, \{ `description`: `string`; `id`: `string`; `label`: `string`; \}\>
 
-Defined in: [src/schemas/glossaries/optionGlossary.ts:57](https://github.com/DataDog/documentation/blob/c275cb05a4877dd5f4ee59df3f5c876b873b090c/markdoc/cdocs-data/src/schemas/glossaries/optionGlossary.ts#L57)
+Defined in: [src/schemas/glossaries/optionGlossary.ts:57](https://github.com/DataDog/documentation/blob/0066b7ea89bc7b2496bd1acb094be438a1351d3d/markdoc/cdocs-data/src/schemas/glossaries/optionGlossary.ts#L57)
 
 A glossary of all the options that can be used on a site,
 regardless of which filters they are associated with.

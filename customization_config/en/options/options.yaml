@@ -11,346 +11,346 @@
 # To add a new option, add a new item to the list 
 # and give it a unique ID.
 
-allowed:
-- display_name: .NET
+options:
+- label: .NET
   id: dot_net
-- display_name: Agent
+- label: Agent
   id: agent
-- display_name: v5
+- label: v5
   id: agent_v5
-- display_name: v6
+- label: v6
   id: agent_v6
-- display_name: v7
+- label: v7
   id: agent_v7
-- display_name: Agentless (using an API key)
+- label: Agentless (using an API key)
   id: agentless_using_an_api_key
-- display_name: Amazon ECS
+- label: Amazon ECS
   id: amazon_ecs
-- display_name: Amazon OpenSearch
+- label: Amazon OpenSearch
   id: amazon_opensearch
-- display_name: Android
+- label: Android
   id: android
-- display_name: Ansible
+- label: Ansible
   id: ansible
-- display_name: API
+- label: API
   id: api
-- display_name: Authentication
+- label: Authentication
   id: auth
-- display_name: AWS
+- label: AWS
   id: aws
-- display_name: AWS CDK
+- label: AWS CDK
   id: aws_cdk
-- display_name: AWS CLI
+- label: AWS CLI
   id: aws_cli
-- display_name: Amazon EKS
+- label: Amazon EKS
   id: amazon_eks
-- display_name: AWS Fargate
+- label: AWS Fargate
   id: aws_fargate
-- display_name: AWS S3
+- label: AWS S3
   id: aws_s3
-- display_name: AWS SAM
+- label: AWS SAM
   id: aws_sam
-- display_name: Azure
+- label: Azure
   id: azure
-- display_name: Azure AKS
+- label: Azure AKS
   id: azure_aks
-- display_name: Azure Storage
+- label: Azure Storage
   id: azure_storage
-- display_name: Bash
+- label: Bash
   id: bash
-- display_name: Browser
+- label: Browser
   id: browser
-- display_name: Carthage
+- label: Carthage
   id: carthage
-- display_name: CDN async
+- label: CDN async
   id: cdn_async
-- display_name: CDN sync
+- label: CDN sync
   id: cdn_sync
-- display_name: Check Alert
+- label: Check Alert
   id: check_alert
-- display_name: Chef
+- label: Chef
   id: chef
-- display_name: Chronicle
+- label: Chronicle
   id: chronicle
-- display_name: CloudFormation
+- label: CloudFormation
   id: cloudformation
-- display_name: Cluster Alert
+- label: Cluster Alert
   id: cluster_alert
-- display_name: CocoaPods
+- label: CocoaPods
   id: cocoapods
-- display_name: ConfigMap
+- label: ConfigMap
   id: configmap
-- display_name: Configuration file
+- label: Configuration file
   id: configuration_file
-- display_name: Container Image
+- label: Container Image
   id: container_image
-- display_name: Containerized
+- label: Containerized
   id: containerized
-- display_name: Containerized Agent
+- label: Containerized Agent
   id: containerized_agent
-- display_name: Cucumber
+- label: Cucumber
   id: cucumber
-- display_name: curl
+- label: curl
   id: curl
-- display_name: DaemonSet
+- label: DaemonSet
   id: daemonset
-- display_name: Datadog
+- label: Datadog
   id: datadog
-- display_name: Datadog application
+- label: Datadog application
   id: datadog_application
-- display_name: Datadog Archives
+- label: Datadog Archives
   id: datadog_archives
-- display_name: Datadog CLI
+- label: Datadog CLI
   id: datadog_cli
-- display_name: Datadog Operator
+- label: Datadog Operator
   id: datadog_operator
-- display_name: Debian
+- label: Debian
   id: debian
-- display_name: Ubuntu
+- label: Ubuntu
   id: ubuntu
-- display_name: Dedupe
+- label: Dedupe
   id: dedupe
-- display_name: Docker
+- label: Docker
   id: docker
-- display_name: Docker CLI
+- label: Docker CLI
   id: docker_cli
-- display_name: Docker Compose
+- label: Docker Compose
   id: docker_compose
-- display_name: Dockerfile
+- label: Dockerfile
   id: dockerfile
-- display_name: Elasticsearch
+- label: Elasticsearch
   id: elasticsearch
-- display_name: Flutter
+- label: Flutter
   id: flutter
-- display_name: Github Actions
+- label: Github Actions
   id: github_actions
-- display_name: Go
+- label: Go
   id: go
-- display_name: Google
+- label: Google
   id: google
-- display_name: Google Cloud
+- label: Google Cloud
   id: google_cloud
-- display_name: Google Cloud Storage
+- label: Google Cloud Storage
   id: google_cloud_storage
-- display_name: Google GKE
+- label: Google GKE
   id: google_gke
-- display_name: Gradle
+- label: Gradle
   id: gradle
-- display_name: Grok Parser
+- label: Grok Parser
   id: grok_parser
-- display_name: Helm
+- label: Helm
   id: helm
-- display_name: HTTP
+- label: HTTP
   id: http
-- display_name: iOS
+- label: iOS
   id: ios
-- display_name: Java
+- label: Java
   id: java
-- display_name: JavaScript
+- label: JavaScript
   id: javascript
-- display_name: Jenkins
+- label: Jenkins
   id: jenkins
-- display_name: JSON
+- label: JSON
   id: json
-- display_name: Kotlin
+- label: Kotlin
   id: kotlin
-- display_name: Kubernetes
+- label: Kubernetes
   id: kubernetes
-- display_name: Linux
+- label: Linux
   id: linux
-- display_name: Linux (APT)
+- label: Linux (APT)
   id: linux_apt
-- display_name: Linux (RPM)
+- label: Linux (RPM)
   id: linux_rpm
-- display_name: Log4j
+- label: Log4j
   id: log4j
-- display_name: Log4j 2
+- label: Log4j 2
   id: log4j_2
-- display_name: Logs
+- label: Logs
   id: logs
-- display_name: MacOS
+- label: MacOS
   id: mac_os
-- display_name: Manual
+- label: Manual
   id: manual
-- display_name: Maven
+- label: Maven
   id: maven
-- display_name: MongoDB
+- label: MongoDB
   id: mongo_db
-- display_name: Multi-tenant
+- label: Multi-tenant
   id: multitenant
-- display_name: MySQL
+- label: MySQL
   id: mysql
-- display_name: NLog
+- label: NLog
   id: n_log
-- display_name: Node.js
+- label: Node.js
   id: node_js
-- display_name: Non-CDB
+- label: Non-CDB
   id: non_cdb
-- display_name: NPM
+- label: NPM
   id: npm
-- display_name: NuGet
+- label: NuGet
   id: nu_get
-- display_name: Objective-C
+- label: Objective-C
   id: objective_c
-- display_name: On-Premises CI Provider
+- label: On-Premises CI Provider
   id: on_premises_ci_provider
-- display_name: OpenSearch
+- label: OpenSearch
   id: open_search
-- display_name: Operator
+- label: Operator
   id: operator
-- display_name: Oracle
+- label: Oracle
   id: oracle
-- display_name: PHP
+- label: PHP
   id: php
-- display_name: pip
+- label: pip
   id: pip
-- display_name: Poetry
+- label: Poetry
   id: poetry
-- display_name: Postgres
+- label: Postgres
   id: postgres
-- display_name: Puppet
+- label: Puppet
   id: puppet
-- display_name: Python
+- label: Python
   id: python
-- display_name: Quota
+- label: Quota
   id: quota
-- display_name: RATE
+- label: RATE
   id: rate
-- display_name: RDS
+- label: RDS
   id: rds
-- display_name: React Native
+- label: React Native
   id: react_native
-- display_name: RedHat
+- label: RedHat
   id: redhat
-- display_name: CentOS
+- label: CentOS
   id: centos
-- display_name: SUSE
+- label: SUSE
   id: suse
-- display_name: Reduce
+- label: Reduce
   id: reduce
-- display_name: Replica Set
+- label: Replica Set
   id: replica_set
-- display_name: Ruby
+- label: Ruby
   id: ruby
-- display_name: Sensitive Data Scanner
+- label: Sensitive Data Scanner
   id: sensitive_data_scanner
-- display_name: Serilog
+- label: Serilog
   id: serilog
-- display_name: Serverless Framework
+- label: Serverless Framework
   id: serverless_framework
-- display_name: Sharded Cluster
+- label: Sharded Cluster
   id: sharded_cluster
-- display_name: Splunk HEC
+- label: Splunk HEC
   id: splunk_hec
-- display_name: Standalone
+- label: Standalone
   id: standalone
-- display_name: Standard
+- label: Standard
   id: standard
-- display_name: Sumo Logic
+- label: Sumo Logic
   id: sumo_logic
-- display_name: Swift
+- label: Swift
   id: swift
-- display_name: Swift Package Manager (SPM)
+- label: Swift Package Manager (SPM)
   id: spm
-- display_name: Syslog
+- label: Syslog
   id: syslog
-- display_name: TCP
+- label: TCP
   id: tcp
-- display_name: Terraform
+- label: Terraform
   id: terraform
-- display_name: Terraform (AWS)
+- label: Terraform (AWS)
   id: terraform_aws
-- display_name: Threshold
+- label: Threshold
   id: threshold
-- display_name: TOML
+- label: TOML
   id: toml
-- display_name: Wget
+- label: Wget
   id: wget
-- display_name: Windows
+- label: Windows
   id: windows
-- display_name: Windows Host
+- label: Windows Host
   id: windows_host
-- display_name: Windows PowerShell
+- label: Windows PowerShell
   id: windows_powershell
-- display_name: YAML
+- label: YAML
   id: yaml
-- display_name: SQL Server
+- label: SQL Server
   id: sql_server
-- display_name: Self-hosted
+- label: Self-hosted
   id: self_hosted
-- display_name: Fluent
+- label: Fluent
   id: fluent
-- display_name: HTTP Client
+- label: HTTP Client
   id: http_client
-- display_name: Splunk Forwarders (TCP)
+- label: Splunk Forwarders (TCP)
   id: splunk_forwarders
-- display_name: Sumo Logic Hosted Collector
+- label: Sumo Logic Hosted Collector
   id: sumo_logic_hosted_collector
 
 # Markdoc testing options
 
 # Colors
-- display_name: Red
+- label: Red
   id: red
-- display_name: Yellow
+- label: Yellow
   id: yellow
-- display_name: Green
+- label: Green
   id: green
-- display_name: Blue
+- label: Blue
   id: blue
 
 # Blue items
-- display_name: Ocean
+- label: Ocean
   id: ocean
-- display_name: Sky
+- label: Sky
   id: sky
-- display_name: Jeans
+- label: Jeans
   id: jeans
-- display_name: Blueberry
+- label: Blueberry
   id: blueberry
 
 # Green items
-- display_name: Grass
+- label: Grass
   id: grass
-- display_name: Emerald
+- label: Emerald
   id: emerald
-- display_name: Lime
+- label: Lime
   id: lime
-- display_name: Frog
+- label: Frog
   id: frog
 
 # Red items
-- display_name: Apple
+- label: Apple
   id: apple
-- display_name: Firetruck
+- label: Firetruck
   id: firetruck
-- display_name: Stop sign
+- label: Stop sign
   id: stop_sign
 
 # Yellow items
-- display_name: Banana
+- label: Banana
   id: banana
-- display_name: Sunflower
+- label: Sunflower
   id: sunflower
-- display_name: Lemon
+- label: Lemon
   id: lemon
-- display_name: School bus
+- label: School bus
   id: school_bus
 
 # Agent versions
 - id: 7_x_x
-  display_name: "7"
+  label: "7"
 - id: 6_x_x
-  display_name: "6"
+  label: "6"
 - id: 5_x_x
-  display_name: "5"
+  label: "5"
 
 # Postgres integration host options
 - id: ecs
-  display_name: "ECS"
+  label: "ECS"
 
 # Postgres integration version options
-- display_name: "10+"
+- label: "10+"
   id: gte_10_x_x
-- display_name: "9.6 and below"
+- label: "9.6 and below"
   id: lte_9_6_x

@@ -8,4 +8,4 @@
 
 > `const` **CdocsCoreErrorSchema**: `ZodObject`\<[`CdocsCoreError`](../type-aliases/CdocsCoreError.md)\>
 
-Defined in: [src/schemas/errors.ts:3](https://github.com/DataDog/documentation/blob/c275cb05a4877dd5f4ee59df3f5c876b873b090c/markdoc/cdocs-data/src/schemas/errors.ts#L3)
+Defined in: [src/schemas/errors.ts:3](https://github.com/DataDog/documentation/blob/0066b7ea89bc7b2496bd1acb094be438a1351d3d/markdoc/cdocs-data/src/schemas/errors.ts#L3)
