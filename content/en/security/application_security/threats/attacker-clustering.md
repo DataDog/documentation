@@ -7,6 +7,15 @@ further_reading:
 - link: "/security/application_security/threats/attacker_fingerprint"
   tag: "Documentation"
   text: "Attacker Fingerprint"
+- link: "/security/application_security/threats/threat-intelligence/"
+  tag: "Documentation"
+  text: "Threat Intelligence"
+- link: "/security/application_security/threats/event_rules"
+  tag: "Documentation"
+  text: "In-app WAF Rules"
+- link: "/security/application_security/threats/security_signals/"
+  tag: "Documentation"
+  text: "Security Signals"
 ---
 
 This topic describes how to use **Attacker Clustering** to block more efficiently distributed attacks.
