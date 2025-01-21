@@ -247,6 +247,25 @@ A regex string to redact sensitive data by its value in attack reports.
 **Default**: `'disabled'`<br>
 To enable DBM to APM link using tag injection, can be set to `'service'` or `'full'`. The `'service'` option enables the connection between DBM and APM services. The `'full'` option enables connection between database spans with database query events. Available for Postgres.
 
+### Dynamic Instrumentation
+
+`DD_DYNAMIC_INSTRUMENTATION_ENABLED`
+: **Configuration**: `dynamicInstrumentation.enabled`<br>
+**Default**: `false`<br>
+Enable [Dynamic Instrumentation][7].
+
+`DD_DYNAMIC_INSTRUMENTATION_REDACTED_IDENTIFIERS`
+: **Configuration**: `dynamicInstrumentation.redactedIdentifiers`<br>
+**Default**: N/A<br>
+A comma-separated list of identifiers to redact. For more information, see [Sensitive Data Scrubbing][8].
+
+`DD_DYNAMIC_INSTRUMENTATION_REDACTION_EXCLUDED_IDENTIFIERS`
+: **Configuration**: `dynamicInstrumentation.redactionExcludedIdentifiers`<br>
+**Default**: N/A<br>
+A comma-separated list of identifiers to exclude from redaction. For more information, see [Sensitive Data Scrubbing][8].
+
+{{< partial name="dynamic_instrumentation/config/nodejs.md" markdown="true" >}}
+
 ### Logs
 
 `DD_LOGS_INJECTION`
@@ -311,6 +330,8 @@ For more examples of how to work with the library see [API documentation][2].
 [4]: /help/
 [5]: /tracing/trace_collection/trace_context_propagation/
 [6]: /tracing/guide/aws_payload_tagging/?code-lang=nodejs
+[7]: /dynamic_instrumentation/
+[8]: /dynamic_instrumentation/sensitive-data-scrubbing/
 [13]: /agent/configuration/network/#configure-ports
 [14]: /opentelemetry/interoperability/environment_variable_support
 [15]: /tracing/trace_collection/custom_instrumentation/nodejs/otel/
