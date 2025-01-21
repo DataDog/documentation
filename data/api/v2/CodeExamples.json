@@ -127,6 +127,11 @@
     },
     {
       "group": "ci_visibility_pipelines",
+      "suffix": "_819339921",
+      "description": "Send pipeline event with custom provider returns \"Request accepted for processing\" response"
+    },
+    {
+      "group": "ci_visibility_pipelines",
       "suffix": "_2341150096",
       "description": "Send running pipeline event returns \"Request accepted for processing\" response"
     }
