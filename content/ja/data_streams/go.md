@@ -42,7 +42,8 @@ Data Streams Monitoring を使用して Sarama Kafka クライアントを手動
 
 ```go
 import (
-ddsarama "gopkg.in/DataDog/dd-trace-go.v1/contrib/Shopify/sarama"
+  ddsarama "gopkg.in/DataDog/dd-trace-go.v1/contrib/Shopify/sarama" // 1.x
+  // ddsarama "github.com/DataDog/dd-trace-go/contrib/Shopify/sarama/v2" // 2.x
 )
 
 2. プロデューサーを `ddsarama.WrapAsyncProducer` でラップします
@@ -63,7 +64,8 @@ Data Streams Monitoring を使用して Confluent Kafka を手動でインスツ
 
 ```go
 import (
-  ddkafka "gopkg.in/DataDog/dd-trace-go.v1/contrib/confluentinc/confluent-kafka-go/kafka.v2"
+  ddkafka "gopkg.in/DataDog/dd-trace-go.v1/contrib/confluentinc/confluent-kafka-go/kafka.v2" // 1.x
+  // ddkafka "github.com/DataDog/dd-trace-go/contrib/confluentinc/confluent-kafka-go/kafka.v2/v2" // 2.x
 )
 ```
 
