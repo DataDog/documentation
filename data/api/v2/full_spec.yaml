@@ -3501,6 +3501,9 @@ components:
         env:
           description: The Datadog environment.
           type: string
+        provider_name:
+          description: The name of the CI provider. By default, this is "custom".
+          type: string
         resource:
           $ref: '#/components/schemas/CIAppCreatePipelineEventRequestAttributesResource'
         service:
