@@ -584,6 +584,33 @@ If you're using the GitHub integration, click **Connect to preview** on error fr
 {{% /tab %}}
 {{< /tabs >}}
 
+{{% /tab %}}
+{{% tab "Dynamic Instrumentation" %}}
+
+You can see full source code files in **Dynamic Instrumentation** when creating or editing an instrumentation (dynamic log, metric, span, or span tags).
+
+**Create New Instrumentation**
+
+1. Navigate to [**APM** > **Dynamic Instrumentation**][101] and ensure setup is complete.
+2. Select **Create New Instrumentation** and choose a service to instrument.
+3. Search and select a source code filename or method.
+
+**View or Edit Instrumentation** 
+
+1. Navigate to [**APM** > **Dynamic Instrumentation**][101].
+2. Select an existing instrumentation from the list, then click **View Events**.
+3. Select the instrumentation tile to view its location in the source code.
+
+{{< img src="integrations/guide/source_code_integration/dynamic-instrumentation-create-new.png" alt="Source Code File in Dynamic Instrumentation" style="width:100%;">}}
+
+For more information, see the [Dynamic Instrumentation documentation][102].
+
+[101]: https://app.datadoghq.com/dynamic-instrumentation/events
+[102]: /dynamic_instrumentation/
+
+{{% /tab %}}
+{{< /tabs >}}
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
