@@ -54,29 +54,27 @@ export class YamlConfigParser {
       return {};
     }
 
-    let result: TraitGlossary;
+    let result: TraitGlossary = {};
 
-    const glossaryPath = `${p.langDir}/traits/traits.yaml`;
+    const glossaryDir = `${p.langDir}/traits`;
 
-    try {
-      const glossaryYamlStr = fs.readFileSync(glossaryPath, 'utf8');
+    // Scan for YAML files in the glossaryDir
+    const filePaths = this.findInDir(glossaryDir, /\.ya?ml$/);
+
+    // Merge all files into the result glossary
+    filePaths.forEach((filePath) => {
+      const glossaryYamlStr = fs.readFileSync(filePath, 'utf8');
       const rawGlossary = RawTraitGlossarySchema.parse(yaml.load(glossaryYamlStr));
-      result = rawGlossary.traits.reduce<Record<string, TraitGlossaryEntry>>(
-        (acc, entry) => {
-          acc[entry.id] = entry;
-          return acc;
-        },
-        {},
-      );
-    } catch (e) {
-      // If the file is not found, use an empty list
-      if (e instanceof Object && 'code' in e && e.code === 'ENOENT') {
-        result = {};
-      } else {
-        throw e;
-      }
-    }
+      rawGlossary.traits.forEach((entry) => {
+        // Disallow duplicate entries
+        if (result[entry.id]) {
+          throw new Error(`Duplicate trait ID '${entry.id}' found in file ${filePath}`);
+        }
+        result[entry.id] = entry;
+      });
+    });
 
+    // Validate and return the result
     TraitGlossarySchema.parse(result);
     return result;
   }
@@ -88,35 +86,27 @@ export class YamlConfigParser {
       return {};
     }
 
-    let result: OptionGlossary;
+    let result: OptionGlossary = {};
 
-    const glossaryFilePath = `${p.langDir}/options/options.yaml`;
+    const glossaryDir = `${p.langDir}/options`;
 
-    try {
-      const glossaryStr = fs.readFileSync(glossaryFilePath, 'utf8');
+    // Get all the files in the glossaryDir
+    const filePaths = this.findInDir(glossaryDir, /\.ya?ml$/);
+
+    // Merge all files into the result glossary
+    filePaths.forEach((filePath) => {
+      const glossaryStr = fs.readFileSync(filePath, 'utf8');
       const rawGlossary = RawOptionGlossarySchema.parse(yaml.load(glossaryStr));
-      result = rawGlossary.options.reduce<Record<string, OptionGlossaryEntry>>(
-        (acc, entry) => {
-          // Disallow duplicate entries
-          if (acc[entry.id]) {
-            throw new Error(
-              `Duplicate option ID '${entry.id}' found in file ${glossaryFilePath}`,
-            );
-          }
-          acc[entry.id] = entry;
-          return acc;
-        },
-        {},
-      );
-    } catch (e) {
-      // If the file is not found, use an empty list
-      if (e instanceof Object && 'code' in e && e.code === 'ENOENT') {
-        result = {};
-      } else {
-        throw e;
-      }
-    }
+      rawGlossary.options.forEach((entry) => {
+        // Disallow duplicate entries
+        if (result[entry.id]) {
+          throw new Error(`Duplicate option ID '${entry.id}' found in file ${filePath}`);
+        }
+        result[entry.id] = entry;
+      });
+    });
 
+    // Validate and return the result
     OptionGlossarySchema.parse(result);
     return result;
   }

@@ -8,7 +8,7 @@
 
 > **buildFiltersManifest**(`p`): [`FiltersManifest`](../type-aliases/FiltersManifest.md)
 
-Defined in: [src/utils/compilation/buildFiltersManifest.ts:26](https://github.com/DataDog/documentation/blob/0066b7ea89bc7b2496bd1acb094be438a1351d3d/markdoc/cdocs-data/src/utils/compilation/buildFiltersManifest.ts#L26)
+Defined in: [src/utils/compilation/buildFiltersManifest.ts:26](https://github.com/DataDog/documentation/blob/f6ec1f95d2d416a2bf4e05ae6718fd51d1cfc306/markdoc/cdocs-data/src/utils/compilation/buildFiltersManifest.ts#L26)
 
 Combine a page's frontmatter, the global glossary,
 and the global filter config into a single object

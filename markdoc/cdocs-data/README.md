@@ -38,9 +38,11 @@ Traits and option groups (along with the individual options referenced by the op
 
 The top-level customization folder ([example](./test/integration/complexExample/customization_config/)) should have the following structure:
 - a folder for each supported language, such as `en`, that contains
-  - a `traits` folder containing 1 YAML file that defines traits ([example](./test/integration/complexExample/customization_config/en/traits/))
-  - an `options` folder containing 1 YAML file that defines options ([example](./test/integration/complexExample/customization_config/en/options/))
-  - an `option_groups` folder containing 1 or more YAML files defining the option groups ([example](./test/integration/complexExample/customization_config/en/option_groups/))
+  - a `traits` folder containing YAML files that define traits ([example](./test/integration/complexExample/customization_config/en/traits/))
+  - an `options` folder containing YAML files that define options ([example](./test/integration/complexExample/customization_config/en/options/))
+  - an `option_groups` folder containing YAML files defining the option groups ([example](./test/integration/complexExample/customization_config/en/option_groups/))
+
+The default language is used to backfill data for all other languages, so only the customization config for the default language needs definitions for every trait, option, and option group that is in use.
 
 ##### Configuring traits
 
