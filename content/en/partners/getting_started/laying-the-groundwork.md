@@ -1,7 +1,9 @@
 ---
 title: Laying the groundwork
 description: "How to get started and which key decisions you should make at the very beginning."
-private: true
+type: partners
+aliases:
+  - /partners/laying-the-groundwork/
 ---
 
 This part of the guide covers the key decisions you should make at the very beginning of your journey as a Datadog Managed Service Provider.

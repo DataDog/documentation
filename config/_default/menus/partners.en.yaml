@@ -1,28 +1,32 @@
 menu:
   partners:
     - name: Getting Started
-      url: /partners/
-      identifier: getting_started
+      url: /partners/getting_started/
+      identifier: getting-started
       weight: 1
-    - name: Billing and Usage Reporting
-      url: /partners/billing-and-usage-reporting/
-      identifier: billing-and-usage-reporting
-      weight: 2
-    - name: Data Intake
-      url: /partners/data-intake/
-      identifier: /data-intake
-      weight: 3
-    - name: Delivering Value
-      url: /partners/delivering-value
-      identifier: delivering-value
-      weight: 4
-    - name: Laying Groundwork
-      url: /partners/laying-the-groundwork/
+    - name: Laying the Groundwork
+      url: /partners/getting_started/laying-the-groundwork/
       identifier: laying-the-groundwork
-      weight: 5
+      parent: getting-started
+      weight: 10
+    - name: Data Intake
+      url: /partners/getting_started/data-intake/
+      identifier: /data-intake
+      parent: getting-started
+      weight: 20
+    - name: Delivering Value
+      url: /partners/getting_started/delivering-value
+      identifier: delivering-value
+      parent: getting-started
+      weight: 30
+    - name: Billing and Usage Reporting
+      url: /partners/getting_started/billing-and-usage-reporting/
+      identifier: billing-and-usage-reporting
+      parent: getting-started
+      weight: 40
     - name: Sales Enablement
       url: /partners/sales-enablement/
       identifier: sales-enablement
-      weight: 6
+      weight: 2
 
 
