@@ -18,7 +18,7 @@ LLM Observability provides tools to evaluate and monitor the quality of your LLM
     {{< nextlink href="/llm_observability/evaluations/submit_evaluations" >}}Learn how to submit custom evaluations using the SDK or API{{< /nextlink >}}
 {{< /whatsnext >}}
 
-## Evaluation Integrations
+## Integrations
 
 {{< whatsnext desc="Available evaluation integrations:" >}}
     {{< nextlink href="/llm_observability/evaluations/ragas" >}}Monitor RAG applications with the RAGAS evaluation framework{{< /nextlink >}}
