@@ -36,23 +36,28 @@ To generate an LLM Observability trace, you can run a Python or Node.js script.
 
    {{< tabs >}}
    {{< tab "Python" >}}
+
    ```shell
    pip install ddtrace
    pip install openai
    ```
+
    {{% /tab %}}
    {{ tab "Node.js" }}
+
    ```shell
    npm install dd-trace
    npm install openai
    ```
+
    {{% /tab %}}
    {{< /tabs >}}
 
-1. Create a script and save it as `quickstart.py` or `quickstart.js`. This script makes a single OpenAI call.
+2. Create a script and save it as `quickstart.py` or `quickstart.js`. This script makes a single OpenAI call.
    
    {{< tabs >}}
    {{< tab "Python" >}}
+
    ```python
    import os
    from openai import OpenAI
@@ -67,8 +72,10 @@ To generate an LLM Observability trace, you can run a Python or Node.js script.
     ],
    )
    ```
+
    {{% /tab %}}
    {{ tab "Node.js" }}
+
    ```javascript
    const { OpenAI } = require('openai');
 
@@ -82,13 +89,15 @@ To generate an LLM Observability trace, you can run a Python or Node.js script.
       ]
    });
    ```
+
    {{% /tab %}}
    {{< /tabs >}}
 
-1. Run the Python script with the following shell command. This sends a trace of the OpenAI call to Datadog.
+3. Run the Python script with the following shell command. This sends a trace of the OpenAI call to Datadog.
 
    {{< tabs >}}
    {{< tab "Python" >}}
+
    ```shell
    DD_LLMOBS_ENABLED=1 DD_LLMOBS_ML_APP=onboarding-quickstart \
    DD_API_KEY=<YOUR_DATADOG_API_KEY> DD_SITE={{< region-param key="dd_site" >}} \
@@ -98,8 +107,10 @@ To generate an LLM Observability trace, you can run a Python or Node.js script.
    For more information about required environment variables, see [the SDK documentation][1].
 
    [1]: /llm_observability/setup/sdk/python/#command-line-setup
+
    {{% /tab %}}
    {{ tab "Node.js" }}
+
    ```shell
    DD_LLMOBS_ENABLED=1 DD_LLMOBS_ML_APP=onboarding-quickstart \
    DD_API_KEY=<YOUR_DATADOG_API_KEY> DD_SITE={{< region-param key="dd_site" >}} \
@@ -109,12 +120,13 @@ To generate an LLM Observability trace, you can run a Python or Node.js script.
    For more information about required environment variables, see [the SDK documentation][1].
 
    [1]: /llm_observability/setup/sdk/nodejs/#command-line-setup
+   
    {{% /tab %}}
    {{< /tabs >}}
    
    **Note**: `DD_LLMOBS_AGENTLESS_ENABLED` is only required if you do not have the Datadog Agent running. If the Agent is running in your production environment, make sure this environment variable is unset.
 
-1. View the trace of your LLM call on the **Traces** tab [of the **LLM Observability** page][3] in Datadog.
+4. View the trace of your LLM call on the **Traces** tab [of the **LLM Observability** page][3] in Datadog.
 
    {{< img src="llm_observability/quickstart_trace_1.png" alt="An LLM Observability trace displaying a single LLM request" style="width:100%;" >}}
 
