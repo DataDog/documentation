@@ -1,1 +1,3 @@
-REUSE INSTRUCTIONS
+- Amazon Data Firehose address
+    -  The Observability Pipelines Worker listens to this socket address to receive logs from Amazon Data Firehose.
+    - Stored in the environment variable: `AWS_DATA_FIREHOSE_ADDRESS`.

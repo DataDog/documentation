@@ -15,6 +15,8 @@ Select and set up this source when you [set up a pipeline][1]. The information b
 
 {{% observability_pipelines/source_settings/amazon_data_firehose %}}
 
+## Send logs to the Observability Pipelines Worker over Amazon Data Firehose
+
 {{% observability_pipelines/log_source_configuration/amazon_data_firehose %}}
 
 [1]: /observability_pipelines/set_up_pipelines/
