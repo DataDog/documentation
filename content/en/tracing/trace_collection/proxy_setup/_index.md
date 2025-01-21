@@ -387,48 +387,49 @@ to install the module within the Ingress-NGINX Controller instance.
 To instrument Ingress-NGINX **v1.10.0+** using Datadog's module, follow these steps:
 1. **Verify your Ingress-NGINX version**<br>
 Check your Ingress-NGINX Controller version and ensure you have the matching Datadog init-container available. The init-container version ([datadog/ingress-nginx-injection][8]) must exactly match your controller version to prevent startup issues.
-For example, if you're running Ingress-NGINX v1.11.3, you'll need [datadog/ingress-nginx-injection:v1.11.3][9].
+For example, if you're running Ingress-NGINX v1.11.3, you need [datadog/ingress-nginx-injection:v1.11.3][9].
 
 2. **Modify your controller's pod specification:**<br>
 Update the controller pod specification to include the init-container and configure the Datadog Agent host environment variable:
 
-```yaml
-spec:
-  template:
+    ```yaml
     spec:
-      initContainers:
-        - name: init-datadog
-          image: datadog/ingress-nginx-injection:<MY_INGRESS_NGINX_VERSION>
-          command: ['/datadog/init_module.sh', '/opt/datadog-modules']
-          volumeMounts:
-            - name: nginx-module
-              mountPath: /opt/datadog-modules
-      containers:
-        - name: controller
-          image: registry.k8s.io/ingress-nginx/controller:<MY_INGRESS_NGINX_VERSION>
-          env:
-            - ...
-            - name: DD_AGENT_HOST
-              valueFrom:
-                fieldRef:
-                  fieldPath: status.hostIP
-```
-Note: For an alternative way to access the Datadog Agent, see the [Kubernetes installation guide][8].
-4. **Configure Ingress-NGINX** <br>
+      template:
+        spec:
+          initContainers:
+            - name: init-datadog
+              image: datadog/ingress-nginx-injection:<MY_INGRESS_NGINX_VERSION>
+              command: ['/datadog/init_module.sh', '/opt/datadog-modules']
+              volumeMounts:
+                - name: nginx-module
+                  mountPath: /opt/datadog-modules
+          containers:
+            - name: controller
+              image: registry.k8s.io/ingress-nginx/controller:<MY_INGRESS_NGINX_VERSION>
+              env:
+                - ...
+                - name: DD_AGENT_HOST
+                  valueFrom:
+                    fieldRef:
+                      fieldPath: status.hostIP
+    ```
+    **Note**: For an alternative way to access the Datadog Agent, see the [Kubernetes installation guide][8].
+
+3. **Configure Ingress-NGINX** <br>
 Create or modify the `ConfigMap` to load the Datadog module:
 
-```yaml
-kind: ConfigMap
-apiVersion: v1
-...
-data:
-  enable-opentelemetry: "false"
-  error-log-level: notice
-  main-snippet: |
-    load_module /opt/datadog-modules/ngx_http_datadog_module.so;
-```
+    ```yaml
+    kind: ConfigMap
+    apiVersion: v1
+    ...
+    data:
+      enable-opentelemetry: "false"
+      error-log-level: notice
+      main-snippet: |
+        load_module /opt/datadog-modules/ngx_http_datadog_module.so;
+    ```
 
-5. **Apply the ConfigMap** <br>
+4. **Apply the ConfigMap** <br>
 Apply the updated `ConfigMap` to ensure the Datadog module is correctly loaded.
 
 This configuration ensures that the Datadog module is loaded and ready to trace incoming requests.
@@ -720,7 +721,7 @@ Datadog provides an HTTPd [module][1] to enhance [Apache HTTP Server][2] and [IH
 
 ### Compatibility
 
-Since IHS HTTP Server is essentially a wrapper of the Appache HTTP Server, the module can also be used with IHS without any modifications.
+Since IHS HTTP Server is essentially a wrapper of the Apache HTTP Server, the module can also be used with IHS without any modifications.
 
 ### Installation
 
