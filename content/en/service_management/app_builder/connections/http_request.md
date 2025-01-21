@@ -181,5 +181,5 @@ To configure a private HTTP request:
 [2]: /service_management/app_builder/auth/
 [3]: https://learn.microsoft.com/en-us/azure/active-directory/develop/scopes-oidc#the-default-scope
 [4]: https://datadoghq.slack.com/
-[5]: /service_management/app_builder/private_actions
-[6]: /service_management/app_builder/private_actions/private_action_credentials/?tab=httpsaction#credential-files
+[5]: /actions/private_actions
+[6]: /actions/private_actions/private_action_credentials/?tab=httpsaction#credential-files
