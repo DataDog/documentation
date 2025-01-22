@@ -56,11 +56,18 @@ When constructing your funnel, you can filter globally or on a step.
 - **Filtering on a step** provides insight on how the step changes based on a particular constraint on that step. For example, you may want to see how a specific device, operating system, geolocation, or user impacts conversion between steps.
 
     {{< img src="product_analytics/journeys/funnel_analysis/funnels-step-filters.png" alt="Use attributes to filter information between steps when constructing your funnel" style="width:50%;" >}}
+
 ### Combining events
 
 When constructing your funnel, you can combine multiple events within a given step, as end users may have different ways to achieve the same outcome through different flows. When combining events, any of the events in the step can represent the step. The numerical value you see is the combination of all steps within the combined step.
 
 To combine an event, click the three dots next to an event and select **+ Combine Events**.
+
+### Grouping
+
+Use the Group by dropdown to group the data by a specific attribute.
+
+**Note**: Group by does not work with the funnel steps visualization.
 
 ## Refine conversion
 
@@ -92,7 +99,7 @@ From there, you can click a datapoint to **investigate the specific attributes**
 After you've defined the step events and conversion measurement, you can switch to see a different visualization and better understand conversion of users for your app.
 
 ### Timeseries
-Seeing the conversion as a timeseries can be helpful in understanding conversion trends. Each datapoint across the x-axis represents teh conversion for the identified query.
+Seeing the conversion as a timeseries can be helpful in understanding conversion trends. Each datapoint across the x-axis represents the conversion for the identified query.
 
 You can select the time period for which you want to graph the conversion and view it in percentages or in absolute count.
 
