@@ -23,14 +23,18 @@ Setting up Network Path involves configuring your Linux environment to monitor a
 
 ## Prerequisites
 
-- Agent version `7.59` or higher is required.
-- [CNM][1] must be enabled.
+[CNM][1] must be enabled.
 
 **Note**: If your network configuration restricts outbound traffic, follow the setup instructions on the [Agent proxy configuration][2] documentation.
 
 ## Setup
 
 ### Monitor individual paths
+
+{{< tabs >}}
+{{% tab "Linux" %}}
+
+Agent `v7.59+` is required.
 
 Manually configure individual paths by specifying the exact endpoint you want to test. This allows you to target specific network routes for monitoring.
 
@@ -126,7 +130,34 @@ Manually configure individual paths by specifying the exact endpoint you want to
 
 3. Restart the Agent after making these configuration changes to start seeing network paths.
 
+[4]: https://github.com/DataDog/datadog-agent/blob/main/cmd/agent/dist/conf.d/network_path.d/conf.yaml.example
+
+{{% /tab %}}
+{{% tab "Windows" %}}
+
+Agent `v7.61+` is required.
+
+**Note**: Windows only supports TCP traceroutes.
+
+In Windows environments, the Agent uses UDP by default to monitor individual paths. If the protocol is not specified in the configuration, the Agent attempts a UDP traceroute, and any errors are logged. To work around this, ensure the protocol is set to TCP. For example:
+
+```yaml
+init_config:
+  min_collection_interval: 60 # in seconds, default 60 seconds
+instances:
+  - hostname: api.datadoghq.eu # endpoint hostname or IP
+    protocol: TCP
+    port: 443 # optional port number, default is 80
+```
+{{% /tab %}}
+{{< /tabs >}}
+
 ### Network traffic paths (experimental)
+
+{{< tabs >}}
+{{% tab "Linux" %}}
+
+Agent `v7.59+` is required.
 
 **Note**: Network traffic paths is experimental and is not yet stable. Do not deploy network traffic paths widely in a production environment.
 
@@ -170,7 +201,17 @@ Configure network traffic paths to allow the Agent to automatically discover and
 
 3. Restart the Agent after making these configuration changes to start seeing network paths.
 
-**Note**: Network path is only supported for Linux environments.
+[3]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/config_template.yaml#L1697
+
+{{% /tab %}}
+{{% tab "Windows" %}}
+
+Agent `v7.61+` is required.
+
+For network traffic paths on Windows environments, only detected TCP connections are shown.
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Further Reading
 
@@ -178,5 +219,5 @@ Configure network traffic paths to allow the Agent to automatically discover and
 
 [1]: /network_monitoring/cloud_network_monitoring/setup/
 [2]: https://docs.datadoghq.com/agent/configuration/proxy/?tab=linux
-[3]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/config_template.yaml#L1645
-[4]: https://github.com/DataDog/datadog-agent/blob/main/cmd/agent/dist/conf.d/network_path.d/conf.yaml.example
+
+

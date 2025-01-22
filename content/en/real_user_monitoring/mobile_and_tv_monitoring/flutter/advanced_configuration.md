@@ -179,13 +179,45 @@ A custom endpoint for sending RUM data.
 **Default**: `20.0`
 The sampling rate for telemetry data, such as errors and debug logs.
 
-## Automatic view tracking
+## Automatically track resources
 
-If you are using Flutter Navigator v2.0, your setup for automatic view tracking differs depending on your routing middleware. See [Flutter Integrated Libraries][18] for instructions on how to integrate with [go_router][8], [AutoRoute][9], and [Beamer][10].
+Use the [Datadog Tracking HTTP Client][12] package to enable automatic tracking of resources and HTTP calls from your views.
+
+Add the package to your `pubspec.yaml` and add the following to your initialization file:
+
+```dart
+final configuration = DatadogConfiguration(
+  // configuration
+  firstPartyHosts: ['example.com'],
+)..enableHttpTracking()
+```
+
+**Note**: The Datadog Tracking HTTP Client modifies [`HttpOverrides.global`][27]. If you are using your own custom `HttpOverrides`, you may need to inherit from [`DatadogHttpOverrides`][28]. In this case, you do not need to call `enableHttpTracking`. Versions of `datadog_tracking_http_client` >= 1.3 check the value of `HttpOverrides.current` and use this for client creation, so you only need to make sure to initialize `HttpOverrides.global` prior to initializing Datadog.
+
+In order to enable Datadog [Distributed Tracing][29], you must set the `DatadogConfiguration.firstPartyHosts` property in your configuration object to a domain that supports distributed tracing. You can also modify the sampling rate for distributed tracing by setting the `tracingSamplingRate` on your `DatadogRumConfiguration`.
+
+- `firstPartyHosts` does not allow wildcards, but matches any subdomains for a given domain. For example, `api.example.com` matches `staging.api.example.com` and `prod.api.example.com`, not `news.example.com`.
+
+- `DatadogRumConfiguration.traceSampleRate` sets a default sampling rate of 20%. If you want all resources requests to generate a full distributed trace, set this value to `100.0`.
 
 ## Enrich user sessions
 
 Flutter RUM automatically tracks attributes such as user activity, views (using the `DatadogNavigationObserver`), errors, native crashes, and network requests (using the Datadog Tracking HTTP Client). See the [RUM Data Collection documentation][3] to learn about the RUM events and default attributes. You can further enrich user session information and gain finer control over the attributes collected by tracking custom events.
+
+### Notify the SDK that your view finished loading
+
+iOS RUM tracks the time it takes for your view to load. To notify the SDK that your view has finished loading, call the `addViewLoadingTime` method on `DatadogRum`.
+Call this method when your view is fully loaded and ready to be displayed to the user:
+
+```dart
+  DatadogSdk.instance.rum?.addViewLoadingTime(override);
+```
+
+Use the `override` option to replace the previously calculated loading time for the current view.
+
+After the loading time is sent, it is accessible as `@view.loading_time` and is visible in the RUM UI.
+
+**Note**: This API is still experimental and might change in the future.
 
 ### Add your own performance timing
 
@@ -458,3 +490,8 @@ if (DatadogSdk.instance.isFirstPartyHost(host)){
 [22]: https://github.com/openzipkin/b3-propagation#single-headers
 [23]: https://github.com/openzipkin/b3-propagation#multiple-headers
 [24]: https://www.w3.org/TR/trace-context/#tracestate-header
+[25]: https://pub.dev/packages/go_router
+[26]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/ViewInfoExtractor.html
+[27]: https://api.flutter.dev/flutter/dart-io/HttpOverrides/current.html
+[28]: https://pub.dev/documentation/datadog_tracking_http_client/latest/datadog_tracking_http_client/DatadogTrackingHttpOverrides-class.html
+[29]: /serverless/aws_lambda/distributed_tracing/
