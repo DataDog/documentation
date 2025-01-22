@@ -65,7 +65,7 @@ Those fragments can be used as filters on ASM trace explorer, by filtering on th
 
 {{< img src="security/application_security/threats/attacker-fingerprint-trace.png" alt="Screenshot of an ASM trace with attacker fingerprint in the trace side panel"  >}}
 
-Attacker fingerprints are also used for [Attacker Clustering][1]. If a significant portion of your traffic presents the same fingerprint attributes, attacker clustering will show it has a common attribute of the attack.
+Attacker fingerprints are used in the [Attacker Clustering][1] feature. If a significant portion of your traffic presents the same fingerprint attributes, attacker clustering will show it has a common attribute of the attack.
 
 
 ## Further Reading
