@@ -356,8 +356,8 @@ Content
 **Value**: string or expression
 
 Options
-: The options available in a `select` field. Options must be an array of objects, with a `const` key for the option value and an optional `title` key for the option label.<br>
-You can populate each object using the GUI (default), or toggle **Raw** to use raw JSON input to provide the entire array of objects.<br>**Value**: Each object's `label` and `value` can be a string or expression.
+: The options available in a `select` field. Options must be an array of objects, with a `const` key for the option value and an optional `title` key for the option label.<br>**Value**: Each object's `label` and `value` can be a string or expression.<br>
+You can populate each object using the GUI (default), or toggle **Raw** to use raw JSON input to provide the entire array of objects.
 
 Placeholder text
 : The text that displays in a `textInput` or `textArea` field when no value is entered.<br>
