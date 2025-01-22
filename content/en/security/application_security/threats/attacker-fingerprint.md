@@ -61,7 +61,7 @@ The network identifier fragment provide information about the network part of th
 
 ## How to use Attacker Fingerprints
 
-Those fragments can be used as filters on ASM trace explorer, by filtering on the desired fingerprint field, for example: `@appsec.fingerprint.header.common_headers:*`.
+Those fragments can be used as filters on ASM trace explorer, by filtering on the desired fingerprint field, for example: `@appsec.fingerprint.header.common_headers:0110000110` will filter on all requests that have the same common headers (Connection, Accept-Encoding, Content-Type and Accept).
 
 {{< img src="security/application_security/threats/attacker-fingerprint-trace.png" alt="Screenshot of an ASM trace with attacker fingerprint in the trace side panel"  >}}
 
