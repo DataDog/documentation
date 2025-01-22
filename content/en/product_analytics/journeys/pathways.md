@@ -19,11 +19,11 @@ All features in Product Analytics are in limited availability. To request access
 
 ## Overview
 
-Pathway diagrams allows you to visualize all user journeys across your application to analyze the critical path.
+You can use Pathway diagrams to visualize all user journeys across your application to analyze the critical path.
 
 {{< img src="/product_analytics/journeys/pathways/pathways-overview.png" alt="The default Pathways diagram for an app" style="width:90%;" >}}
 
-Each node represents a view the user visited. The thickness of each node represents the count of user sessions on that page. A page with fewer visitors have a thinner node in the diagram.
+Each node represents a view the user visited. The thickness of each node represents the count of user sessions on that page. A page with fewer visitors has a thinner node in the diagram.
 
 If a user visits the same page multiple times during their session, that page is only counted once.
 
@@ -34,11 +34,11 @@ Actions are not supported in the Pathways diagram.
 ### View the default diagram
 
 1. Navigate to [**Product Analytics > User Journeys**][1].
-2. Click **Pathways** if it's not already selected. This displays the default visualization, which represents the most popular user journeys in your application.
+2. Click **Pathways** if it's not already selected. This displays the default visualization that represents the most popular user journeys in your application.
 
 ### Start or end the diagram at a given view
 
-You can use the lefthand menu to customize this diagram to display:
+You can use the left menu to customize this diagram and display:
 - the steps users took *after* visiting a given view
 - the steps users took *before* visiting a given view
 

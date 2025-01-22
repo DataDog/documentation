@@ -55,7 +55,7 @@ User retention is a metric for measuring the percentage of active users who cont
 See different visualizations of the user experience when interacting with your application:
 
 - **[Funnel][4]**: Measure the **conversion rate** and **time to convert** from end-to-end of a given workflow. 
-- **[Pathways][5]**: Explore aggregated workflows in a single visualization to aid in answering questions about user journeys. In addition, track conversion rates over time and compare it against specific attributes that may have affected conversion rates, such as browser type or geography.
+- **[Pathways][5]**: Explore aggregated workflows in a single visualization to aid in answering questions about user journeys. In addition, track conversion rates over time and compare them against specific attributes that might have affected conversion rates, such as browser type or geography.
 
 ## Create user segments
 
@@ -63,7 +63,7 @@ Segments are users grouped by specific characteristics or behaviors. [Segmentati
 
 ## Visualize user interactions with heatmaps
 
-[Heatmaps][7] visualize the most interacted with elements on a page to see where hot spots of activity are, along with analyzing scroll depth to see how far users scrolled down a given page. You can view every swipe, scroll, and click with a pixel-perfect reproduction of exactly what users went through on both browser and mobile applications to identify high-or low-performing content.
+[Heatmaps][7] visualize the most interacted with elements on a page to see where hot spots of activity are, along with analyzing scroll depth to see how far users scrolled down a given page. You can view every swipe, scroll, and click with a pixel-perfect reproduction of exactly what users went through on both browser and mobile applications to identify high- or low-performing content.
 
 {{< img src="real_user_monitoring/heatmaps/heatmap_v2.png" alt="An overview of the heatmap functionality." style="width:100%;">}}
 
