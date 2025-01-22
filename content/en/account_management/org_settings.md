@@ -141,9 +141,14 @@ The setting applies to **all** Monitor alert notifications, as it's an org-wide 
 Users with the `Org Management` permission can set a maximum session duration for their organization. All **new sessions created after this update** follow the configured duration, which applies to **all users**, regardless of their role in the organization. 
 
 The session duration can be configured within the following limits:
-
-- **Minimum duration**: 1 hour 
-- **Maximum duration**:{{% site-region region="gov" %}} 12 hours{{% /site-region %}}{{% site-region region="us,eu,us3,us5,ap1" %}} 720 hours (30 days){{% /site-region %}}
+{{% site-region region="gov" %}}
+- **Minimum duration:** 1 hour
+- **Maximum duration:** 12 hours
+{{% /site-region %}}
+{{% site-region region="us,eu,us3,us5,ap1" %}}
+- **Minimum duration:** 1 hour
+- **Maximum duration:** 720 hours (30 days)
+{{% /site-region %}}
 
 {{< img src="account_management/org_settings/max_session_duration.png" alt="Max Session Duration Setting" style="width:70%;" >}}
 
