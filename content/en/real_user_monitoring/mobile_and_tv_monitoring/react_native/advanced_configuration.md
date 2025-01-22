@@ -126,7 +126,7 @@ Enables crash reporting for native platforms (iOS, Android).
 **Default**: `100`<br/>
 See `sessionSampleRate`.
 
-`sessionSampleRate`
+`sessionSamplingRate`
 : Optional<br/>
 **Type**: Number<br/>
 **Default**: `100`<br/>
