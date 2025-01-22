@@ -31,34 +31,42 @@ The report PDF is included as an email attachment or as a link, depending on its
 
 Create a report from any [dashboard or timeboard][1] that has at least one [supported widget](#unsupported-widget-types).
 
-Click the **Share** button at the top of your dashboard and select **Schedule a Report**.
+Click the **Share** button at the top of your dashboard and select **Schedule report**.
 
-{{< img src="dashboards/scheduled_reports/report_configuration_modal.png" alt="The configuration modal for an individual dashboard report, with sections to set a schedule, add recipients, and customize email. At the bottom of the modal are buttons to edit template variables, delete report, send preview, cancel, and save" style="width:90%;" >}}
+### 1. Set a schedule
 
-### Set a schedule
+In the configuration modal that opens, set a schedule for the report to determine when and how often the report is sent. 
 
-In the configuration modal that opens, set a schedule for the report to determine when and how often the report is sent. Set a time frame to determine the range of time displayed in the resulting report. The report time frame can be different from the time frame displayed on the dashboard.
+**{{< img src="dashboards/scheduled_reports/set_schedule.png" alt="Section for defining a report schedule. Includes a schedule preview table showing the next 5 scheduled report dates." style="width:90%;" >}}**
 
-### Add recipients
+### 2. Configure report
 
-Add recipients to your report by entering their email addresses. The email associated with your Datadog account is automatically added as a recipient. You can remove yourself as a recipient by hovering over your email and clicking the **X** that appears next to it.
+Define the report title and set a time frame to determine the range of time displayed in the resulting report. The report time frame can be different from the time frame displayed on the dashboard.
+
+**Note:** Modifying the report time frame updates the **Schedule Preview** dropdown table above.
+
+**{{< img src="dashboards/scheduled_reports/configure_report.png" alt="Section for defining a report schedule" style="width:90%;" >}}**
+
+Click **Edit Variables** to modify the filters applied when the report is sent. These values do not affect the dashboard's default template variable values.
+
+**{{< img src="dashboards/scheduled_reports/edit_variables.png" alt="The configuration modal section for customizing the report title, timeframe and variables." style="width:90%;" >}}**
+
+### 3. Add recipients
+
+Add recipients to your report by entering their email addresses. The email associated with your Datadog account is automatically added as a recipient. You can remove yourself as a recipient by hovering over your email and clicking the trash icon that appears next to it.
 
 **Note:** Enterprise and Pro accounts can send reports to recipients outside of their organizations.
 
-### Customize the report
+**{{< img src="dashboards/scheduled_reports/add_recipients.png" alt="The configuration modal for editing scheduled report variables." style="width:90%;" >}}**
 
-Finally, customize the report to provide recipients with more context or a tailored view. The optional description is included in the report email body.
-
-Click **Edit Template Variables** to modify the filters applied when the report is sent. These values do not affect the dashboard's default template variable values.
-
-To see the report before saving the schedule, click **Send Preview**. You can pause a report schedule at any time.
+To see the report before saving the schedule, click **Send Test Email**. You can pause a report schedule at any time.
 
 ## Managing reports
 A single dashboard can have multiple scheduled reports with different settings, which allows you to inform different groups of stakeholders interested in the same dashboard. To see the reports on an existing dashboard, click the **Share** button and select **Configure Reports**.
 
 From the configuration modal that opens, you can pause an existing report or create a new report. To see and edit the details of an existing report, or delete the report, click **Edit**.
 
-{{< img src="dashboards/scheduled_reports/scheduled_reports_configuration_modal.png" alt="The configuration modal for scheduled reports, with two reports displayed, each showing their titles, tags, recipients, frequency, an option to toggle the report on or off, and a button to edit the report. At the bottom is a button to add a new report and a done button" style="width:90%;" >}}
+{{< img src="dashboards/scheduled_reports/manage_reports.png" alt="The configuration modal for scheduled reports, with two reports displayed, each showing their titles, tags, recipients, frequency, an option to toggle the report on or off, and a button to edit the report. At the bottom is a button to add a new report and a cancel button" style="width:90%;" >}}
 
 ## Permissions
 

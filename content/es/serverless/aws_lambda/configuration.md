@@ -46,7 +46,7 @@ Primero, [instala][1] Datadog Serverless Monitoring para comenzar a recopilar m�
 
 ## Habilitar la detección de amenazas para observar los intentos de ataque
 
-Recibe alertas sobre atacantes que tengan como objetivo tus aplicaciones serverless y responde con rapidez. 
+Recibe alertas sobre atacantes que tengan como objetivo tus aplicaciones serverless y responde con rapidez.
 
 Para empezar, asegúrate de tener el [rastreo habilitado][43] para tus funciones.
 
@@ -350,7 +350,9 @@ Para ver qué bibliotecas y marcos instrumenta de forma automática el cliente d
 
 ## Seleccionar las frecuencias de muestreo para la ingesta de tramos de APM
 
-Para gestionar la [frecuencia de muestreo de las invocaciones rastreadas de APM][17] para las funciones serverless, define la variable de entorno `DD_TRACE_SAMPLE_RATE` en una función con un valor entre 0,000 (no se rastrea ninguna invocación de la función de Lambda) y 1,000 (se rastrean todas las invocaciones).
+Para gestionar la [frecuencia de muestreo de las invocaciones rastreadas de APM][17] para las funciones serverless, define la variable de entorno `DD_TRACE_SAMPLING_RULES` en una función con un valor entre 0,000 (no se rastrea ninguna invocación de la función de Lambda) y 1,000 (se rastrean todas las invocaciones).
+
+Nota: El uso de DD_TRACE_SAMPLE_RATE está obsoleto. Utiliza DD_TRACE_SAMPLING_RULES en su lugar. Por ejemplo, si ya has establecido DD_TRACE_SAMPLE_RATE en 0.1, estableceDD_TRACE_SAMPLING_RULES en [{"sample_rate":0.1}] en su lugar.
 
 Las métricas se calculan en función del 100 % del tráfico de la aplicación, y son precisas independientemente de la configuración del muestreo.
 
@@ -370,7 +372,7 @@ Para borrar atributos de trazas por razones de seguridad de los datos, consulta 
 
 ## Habilitar y deshabilitar la recopilación de trazas
 
-La recopilación de trazas a través de la Datadog Lambda Extension está habilitada de forma predeterminada. 
+La recopilación de trazas a través de la Datadog Lambda Extension está habilitada de forma predeterminada.
 
 Si quieres empezar a recopilar las trazas de tus funciones de Lambda, aplica las configuraciones que se indican a continuación:
 
@@ -501,7 +503,7 @@ Si usas un tiempo de ejecución o un logger personalizado no compatible, sigue e
 
 ## Vincular errores al código fuente
 
-La [integración del código fuente de Datadog][26] te permite vincular tu telemetría (como stack traces) al código fuente de tus funciones de Lambda en los repositorios de Git. 
+La [integración del código fuente de Datadog][26] te permite vincular tu telemetría (como stack traces) al código fuente de tus funciones de Lambda en los repositorios de Git.
 
 Para obtener instrucciones sobre cómo configurar la integración del código fuente en tus aplicaciones serverless, consulta la [sección Integrar información de Git en los artefactos de compilación][101].
 

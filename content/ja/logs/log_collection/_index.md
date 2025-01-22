@@ -115,7 +115,7 @@ Datadog のインテグレーションとログ収集は連携しています。
 
 ## データ転送料金を削減
 
-Datadog の [Network Performance Monitoring][7] を利用して、組織内で最もスループットの高いアプリケーションを特定しましょう。サポートされているプライベート接続を通じて Datadog に接続し、データをプライベートネットワークで送信することで、パブリックインターネットを避けてデータ転送料金を削減できます。プライベートリンクに切り替えた後は、Datadog の [Cloud Cost Management][8] ツールを使って効果を確認し、クラウドコストの削減状況を監視しましょう。
+Datadog の [Cloud Network Monitoring][7] を利用して、組織内で最もスループットの高いアプリケーションを特定しましょう。サポートされているプライベート接続を通じて Datadog に接続し、データをプライベートネットワークで送信することで、パブリックインターネットを避けてデータ転送料金を削減できます。プライベートリンクに切り替えた後は、Datadog の [Cloud Cost Management][8] ツールを使って効果を確認し、クラウドコストの削減状況を監視しましょう。
 
 詳細については、[データ転送料金を削減しながら Datadog にログを送信する方法][9]をご覧ください。
 
@@ -125,7 +125,7 @@ Datadog の [Network Performance Monitoring][7] を利用して、組織内で�
 [4]: /ja/agent/kubernetes/log/#autodiscovery
 [5]: /ja/agent/docker/log/#log-integrations
 [6]: /ja/integrations/#cat-log-collection
-[7]: /ja/network_monitoring/performance/
+[7]: /ja/network_monitoring/cloud_network_monitoring/
 [8]: /ja/cloud_cost_management/
 [9]: /ja/logs/guide/reduce_data_transfer_fees/
 
