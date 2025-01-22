@@ -84,7 +84,11 @@ Enable web framework and library instrumentation. When false, the application co
 
 `DD_TRACE_AGENT_PORT`
 : **Default**: `8126` <br>
-Overrides the default trace Agent port for Datadog trace submission. If the [Agent configuration][13] sets `receiver_port` or `DD_APM_RECEIVER_PORT` to something other than the default `8126`, then the library configuration `DD_DOGSTATSD_PORT` must match it.
+Overrides the default trace Agent port for Datadog trace submission. Ignored if `DD_TRACE_AGENT_URL` is set. If the [Agent configuration][13] sets `receiver_port` or `DD_APM_RECEIVER_PORT` to something other than the default `8126`, then the library configuration `DD_DOGSTATSD_PORT` must match it.
+
+`DD_TRACE_AGENT_URL`
+: **Default**: `null` <br>
+Override the Agent URL used for trace submission. Supports `http://`, `https://`, and `unix://` protocols. Takes precedence over `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT` if set.
 
 `DD_TRACE_SAMPLE_RATE`
 : **Default**: `nil`<br>
@@ -161,7 +165,7 @@ A list of default tags to be added to every span, metric, and profile. Tags can 
 
 `DD_AGENT_HOST`
 : **Default**: `localhost` <br>
-Override the default trace Agent host address for trace submission.
+Override the default trace Agent host address for trace submission. Ignored if `DD_TRACE_AGENT_URL` is set.
 
 `DD_DOGSTATSD_PORT`
 : **Default**: `8125` <br>
