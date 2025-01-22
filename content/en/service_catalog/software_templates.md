@@ -37,11 +37,11 @@ The [Scaffold New Service blueprint][11] shows an example of scaffolding a new l
 
 The [Create S3 Bucket blueprint][10] shows an example of creating the terraform for an S3 bucket from a form in Github.
 
-#### Provision Kubernetes Cluster
+##### Provision Kubernetes Cluster
 
 The [Provision EKS Cluster blueprint][12] shows an example of creating the terraform for a new Kubernetes cluster in Github.
 
-#### Provision RDS Instance
+##### Provision RDS Instance
 
 The [Provision RDS Instance blueprint][13] shows an example of provisioning a new RDS instance via direct integration with AWS.
 
