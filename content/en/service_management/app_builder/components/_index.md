@@ -339,22 +339,28 @@ Default value
 
 ### Fields
 
-Each item represents a field in the form. Fields each have one of the following types: text input, select, text area, or text.
+Each item represents a field in the form. Fields each have one of the following types: `textInput`, `select`, `textArea`, or `text`.
 
 Fields have some or all of the following properties depending on their field type:
 
 Field name
-: The name of the key on the form's `value` property this field will be associated with.
+: The unique identifier for a field. You can use this identifier to reference the field in an expression.<br>
+**Value**: string or expression
 
 Label
-: The label that displays above the field.
+: The label that displays above the field.<br>
+**Value**: string or expression
+
+Content
+: The content that displays in a `text` field.<br>
+**Value**: string or expression
 
 Options
-: The options available in a select field. Options must be an array of objects, with a `const` key for the option value and an optional `title` key for the option label.<br>
-You can populate these values using the GUI (default), or toggle **Raw** to use raw JSON input.
+: The options available in a `select` field. Options must be an array of objects, with a `const` key for the option value and an optional `title` key for the option label.<br>
+You can populate each object using the GUI (default), or toggle **Raw** to use raw JSON input to provide the entire array of objects.<br>**Value**: Each object's `label` and `value` can be a string or expression.
 
 Placeholder text
-: The text that displays when no value is entered.<br>
+: The text that displays in a `textInput` or `textArea` field when no value is entered.<br>
 **Value**: string or expression
 
 Is Disabled
