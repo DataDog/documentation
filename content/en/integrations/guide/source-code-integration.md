@@ -588,7 +588,7 @@ You can see full source code files in [**Dynamic Instrumentation**][102] when cr
 
 **Create New Instrumentation**
 
-1. Navigate to [**APM** > **Dynamic Instrumentation**][101] and ensure setup is complete.
+1. Navigate to [**APM** > **Dynamic Instrumentation**][101].
 2. Select **Create New Instrumentation** and choose a service to instrument.
 3. Search and select a source code filename or method.
 
