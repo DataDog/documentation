@@ -140,6 +140,8 @@ Auto-enrichment helps you identify which services are affected by feature flag c
 
 If you discover that a feature flag change is causing issues, you can remediate it by toggling the flag directly from the Change Tracking side panel.
 
+<div class="alert alert-info">This feature is powered by Workflow Automation and is subject to <a href="https://www.datadoghq.com/pricing/?product=workflow-automation#products">Workflow Automation pricing</a>.</div>
+
 To enable and use this feature:
 
 1. Set up workflow connections following the [Workflow Connections documentation][11].
