@@ -189,7 +189,7 @@ Datadog provides a `moving_rollup` function that enables aggregation of datapoin
 
 {{< img src="/metrics/nested_queries/moving-rollup-diagram.png" alt="example of old vs. new moving_rollup function" style="width:100%;" >}}
 
-The existing version of the `moving-rollup` function only supports the following aggregators:
+The existing version of the `moving_rollup` function only supports the following aggregators:
 - `avg`
 - `sum`
 - `min`
