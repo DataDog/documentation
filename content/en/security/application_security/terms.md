@@ -94,11 +94,11 @@ flagged attackers
 : See [Attacker Explorer][17]
 
 attacker fingerprint
-: identifiers computed from request characteristics to track an attacker across multiple requests
+: Identifiers computed from request characteristics to track an attacker across multiple requests.
 : See [Attacker Fingerprint][18]
 
 attacker cluster
-: A set of attributes identifying an attacker across a distributed attack
+: A set of attributes identifying an attacker across a distributed attack.
 : See [Attacker Clustering][19]
 
 ## Attacks and known vulnerabilities terms
