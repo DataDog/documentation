@@ -7143,15 +7143,15 @@ menu:
       parent: product_analytics
       identifier: pa_journeys
       weight: 2
+    - name: Pathway Diagrams
+      url: product_analytics/journeys/pathways
+      parent: pa_journeys
+      identifier: pa_pathways
+      weight: 201
     - name: Funnel Analysis
       url: product_analytics/journeys/funnel_analysis
       parent: pa_journeys
       identifier: pa_funnel_analysis
-      weight: 201
-    - name: Sankey Diagrams
-      url: product_analytics/journeys/sankey
-      parent: pa_journeys
-      identifier: pa_sankey
       weight: 202
     - name: Heatmaps
       url: product_analytics/heatmaps
@@ -7243,6 +7243,11 @@ menu:
       parent: product_analytics
       identifier: pa_segmentation
       weight: 6
+    - name: Troubleshooting
+      url: product_analytics/troubleshooting/
+      parent: product_analytics
+      identifier: pa_troubleshooting
+      weight: 7
     - name: Account Management
       url: account_management/
       pre: cog-2
