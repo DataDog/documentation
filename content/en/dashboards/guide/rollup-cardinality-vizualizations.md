@@ -18,8 +18,6 @@ Consider a scenario where you track distinct users visiting a website. Each day,
 
 This counterintuitive result is due to cardinality, or how the unique elements in a dataset are counted. Be aware that counting unique elements within a dataset may cause these counterintuitive situations.
 
-### Example: Distinct user counts
-
 ## Rollup functionality and unexpected results
 
 When aggregating data using the rollup function, the results can be counterintuitive. For example, the sum of hourly distinct user counts can exceed the count of distinct users over a full day. This is because users appearing in multiple hourly buckets are counted once per bucket but only once across the entire day.
@@ -30,24 +28,19 @@ Visualizations by default show the sum of rollup values across intervals, which 
 
 ## Rollups with averages and cardinality
 
-Averages involving cardinality can also present challenges. 
+Averages involving cardinality can be complex.
 
-For example, hourly averages for the proportion of distinct users without errors may consistently appear high, even at 99.5%. Yet, weekly averages can reveal a lower percentage, decreasing to 97.5% due to the broader time frame.
+For example, hourly averages may show a high percentage of distinct users without errors—reaching 99.5%. The weekly average, however, can reveal a lower percentage, dropping to 97.5% due to the longer duration.
 
-This discrepancy is due to the weekly calculation aggregating multiple visits for each unique user, which means more users are likely to see at least one error over the longer period.
+This disparity arises from multiple user visits being counted over a week, leading to a higher likelihood of users encountering errors over that period. See the following illustrative example for more context on this disparity.
 
-### Example calculation
+### Error rate variation and user interactions case study
 
-Suppose, over the course of a week, 2,000 users on a site experience a total of 6,000 error events, while the remaining 22,000 users don't experience any errors.  Since a user's multiple errors may occur nearly simultaneously or in different hours, there could be an average of as many as 35 users experiencing errors per hour or as few as 11.
+Consider a scenario where 2,000 users experience 6,000 errors in a week, while 22,000 users face no errors. Daily error rates fluctuate, with hourly figures ranging from 11 to 35 users facing errors. Additionally, on an hourly basis, there are around 1,000 distinct users encountering errors weekly, reflecting an error rate of 0.11% to 0.35%.
 
-The number of distinct users per hour also varies depending on how often users visit the site: for example, a typically user might visit daily, so the 24,000 total distinct weekly users produce an average of 1,000 distinct users per hour.
-The error rate for distinct users is then between 0.11% and 0.35%.
+In contrast, over the week, 2,000 out of 24,000 users encounter errors, accounting for an 8.3% error rate—much higher than the hourly observation.
 
-However, over the course of the week, 2,000 out of the 24,000 users experienced at least one error, for an error rate of 8.3%, significantly higher.
-
-While very few users had an issue in any particular hour, aggregating over the week provides more opportunities for an individual user to see an error, resulting in a significantly higher error rate.
-
-When aggregating errors at a weekly scale, the total count of errors appears higher as more users experience errors over the extended duration, contrasting with the lower average seen hourly.
+This disparity highlights the many ways you might see errors when examining weekly error rates against hourly averages.
 
 ## Further reading
 
