@@ -96,9 +96,10 @@ Use this option to make the Jenkins plugin report directly to Datadog without us
    2. (Optional) Configure your CI Instance name.
 8. (Optional) Configure logs collection:
    1. Enable the `Enable Log Collection` checkbox.
-9. Save your configuration.
+9. (Optional) Enter the name of the host that you use to access Datadog UI (for example, `app.datadoghq.com`) in the `Datadog App hostname` field.
+10. Save your configuration.
 
-{{< img src="ci/jenkins_plugin_agentless_urls_blurred.png" alt="Datadog Plugin configuration for Jenkins" style="width:100%;">}}
+{{< img src="ci/ci-jenkins-plugin-config-agentless-app-hostname.png" alt="Datadog Plugin configuration for Jenkins" style="width:100%;">}}
 
 [1]: /getting_started/site/#access-the-datadog-site
 {{% /tab %}}
@@ -117,9 +118,10 @@ Use this option to make the Jenkins plugin report directly to Datadog without us
    1. Configure the `Log Collection` port as configured in the Datadog Agent.
    2. Click the `Test logs connection` button to verify that your configuration is valid.
    3. Enable the `Enable Log Collection` checkbox.
-7. Save your configuration.
+7. (Optional) Enter the name of the host that you use to access Datadog UI (for example, `app.datadoghq.com`) in the `Datadog App hostname` field.
+8. Save your configuration.
 
-{{< img src="ci/ci-jenkins-plugin-config-agentful.png" alt="Datadog Plugin configuration for Jenkins" style="width:100%;">}}
+{{< img src="ci/ci-jenkins-plugin-config-agentful-app-hostname.png" alt="Datadog Plugin configuration for Jenkins" style="width:100%;">}}
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -152,6 +154,8 @@ unclassified:
     enableCiVisibility: true
     # (Optional) Configure your CI Instance name
     ciInstanceName: 'jenkins'
+    # (Optional) Configure the name of the host that you use to access Datadog UI
+    datadogAppHostname: 'app.datadoghq.com'
     # (Optional) Enable logs collection
     collectBuildLogs: true
     {{< /code-block >}}
@@ -177,6 +181,8 @@ unclassified:
     enableCiVisibility: true
     # (Optional) Configure your CI Instance name
     ciInstanceName: 'jenkins'
+    # (Optional) Configure the name of the host that you use to access Datadog UI
+    datadogAppHostname: 'app.datadoghq.eu'
     # (Optional) Enable logs collection
     collectBuildLogs: true
     {{< /code-block >}}
@@ -202,6 +208,8 @@ unclassified:
     enableCiVisibility: true
     # (Optional) Configure your CI Instance name
     ciInstanceName: 'jenkins'
+    # (Optional) Configure the name of the host that you use to access Datadog UI
+    datadogAppHostname: 'app.ddog-gov.com'
     # (Optional) Enable logs collection
     collectBuildLogs: true
     {{< /code-block >}}
@@ -225,8 +233,10 @@ unclassified:
             credentialsId: 'my-api-key-credentials-id'
     # Enable CI Visibility flag
     enableCiVisibility: true
-    # (Optional) Configure your CI Instance name
+    # (Optional) Configure the name of the host that you use to access Datadog UI
     ciInstanceName: 'jenkins'
+    # (Optional) Configure your Datadog app hostname
+    datadogAppHostname: 'app.us3.datadoghq.com'
     # (Optional) Enable logs collection
     collectBuildLogs: true
     {{< /code-block >}}
@@ -252,6 +262,8 @@ unclassified:
     enableCiVisibility: true
     # (Optional) Configure your CI Instance name
     ciInstanceName: 'jenkins'
+    # (Optional) Configure the name of the host that you use to access Datadog UI
+    datadogAppHostname: 'app.us5.datadoghq.com'
     # (Optional) Enable logs collection
     collectBuildLogs: true
     {{< /code-block >}}
@@ -277,6 +289,8 @@ unclassified:
     enableCiVisibility: true
     # (Optional) Configure your CI Instance name
     ciInstanceName: 'jenkins'
+    # (Optional) Configure the name of the host that you use to access Datadog UI
+    datadogAppHostname: 'app.ap1.datadoghq.com'
     # (Optional) Enable logs collection
     collectBuildLogs: true
     {{< /code-block >}}
@@ -312,6 +326,8 @@ unclassified:
     enableCiVisibility: true
     # (Optional) Configure your CI Instance name
     ciInstanceName: 'jenkins'
+    # (Optional) Configure the name of the host that you use to access Datadog UI
+    datadogAppHostname: 'app.datadoghq.com'
     # (Optional) Enable logs collection
     collectBuildLogs: true
    {{< /code-block >}}
@@ -350,6 +366,7 @@ def site = new DatadogIntakeSite(DatadogSite.US1) // Pick your Datadog site
 def apiKey = new DatadogTextApiKey(Secret.fromString('<YOUR_API_KEY>')) // or `new DatadogCredentialsApiKey('<YOUR_CREDENTIALS_ID>')`
 datadog.datadogClientConfiguration = new DatadogApiConfiguration(site, apiKey)
 
+datadog.datadogAppHostname = 'app.datadoghq.com' // the name of the host that you use to access Datadog UI
 datadog.enableCiVisibility = true
 datadog.collectBuildLogs = true // (Optional) Enable logs collection
 
@@ -378,6 +395,7 @@ def site = new DatadogIntakeSite(DatadogSite.EU1) // Pick your Datadog site
 def apiKey = new DatadogTextApiKey(Secret.fromString('<YOUR_API_KEY>')) // or `new DatadogCredentialsApiKey('<YOUR_CREDENTIALS_ID>')`
 datadog.datadogClientConfiguration = new DatadogApiConfiguration(site, apiKey)
 
+datadog.datadogAppHostname = 'app.datadoghq.eu' // the name of the host that you use to access Datadog UI
 datadog.enableCiVisibility = true
 datadog.collectBuildLogs = true // (Optional) Enable logs collection
 
@@ -406,6 +424,7 @@ def site = new DatadogIntakeSite(DatadogSite.US1_FED) // Pick your Datadog site
 def apiKey = new DatadogTextApiKey(Secret.fromString('<YOUR_API_KEY>')) // or `new DatadogCredentialsApiKey('<YOUR_CREDENTIALS_ID>')`
 datadog.datadogClientConfiguration = new DatadogApiConfiguration(site, apiKey)
 
+datadog.datadogAppHostname = 'app.ddog-gov.com' // the name of the host that you use to access Datadog UI
 datadog.enableCiVisibility = true
 datadog.collectBuildLogs = true // (Optional) Enable logs collection
 
@@ -434,6 +453,7 @@ def site = new DatadogIntakeSite(DatadogSite.US3) // Pick your Datadog site
 def apiKey = new DatadogTextApiKey(Secret.fromString('<YOUR_API_KEY>')) // or `new DatadogCredentialsApiKey('<YOUR_CREDENTIALS_ID>')`
 datadog.datadogClientConfiguration = new DatadogApiConfiguration(site, apiKey)
 
+datadog.datadogAppHostname = 'app.us3.datadoghq.com' // the name of the host that you use to access Datadog UI
 datadog.enableCiVisibility = true
 datadog.collectBuildLogs = true // (Optional) Enable logs collection
 
@@ -462,6 +482,7 @@ def site = new DatadogIntakeSite(DatadogSite.US5) // Pick your Datadog site
 def apiKey = new DatadogTextApiKey(Secret.fromString('<YOUR_API_KEY>')) // or `new DatadogCredentialsApiKey('<YOUR_CREDENTIALS_ID>')`
 datadog.datadogClientConfiguration = new DatadogApiConfiguration(site, apiKey)
 
+datadog.datadogAppHostname = 'app.us5.datadoghq.com' // the name of the host that you use to access Datadog UI
 datadog.enableCiVisibility = true
 datadog.collectBuildLogs = true // (Optional) Enable logs collection
 
@@ -490,6 +511,7 @@ def site = new DatadogIntakeSite(DatadogSite.AP1) // Pick your Datadog site
 def apiKey = new DatadogTextApiKey(Secret.fromString('<YOUR_API_KEY>')) // or `new DatadogCredentialsApiKey('<YOUR_CREDENTIALS_ID>')`
 datadog.datadogClientConfiguration = new DatadogApiConfiguration(site, apiKey)
 
+datadog.datadogAppHostname = 'app.ap1.datadoghq.com' // the name of the host that you use to access Datadog UI
 datadog.enableCiVisibility = true
 datadog.collectBuildLogs = true // (Optional) Enable logs collection
 
@@ -521,6 +543,7 @@ def agentLogCollectionPort = 8126 // (Optional) Configure logs collection port a
 def agentTraceCollectionPort = 8126 // Configure traces collection port
 datadog.datadogClientConfiguration = new DatadogAgentConfiguration(agentHost, agentPort, agentLogCollectionPort, agentTraceCollectionPort)
 
+datadog.datadogAppHostname = 'app.datadoghq.com' // the name of the host that you use to access Datadog UI
 datadog.enableCiVisibility = true
 datadog.collectBuildLogs = true // (Optional) Enable logs collection
 
@@ -559,6 +582,9 @@ datadog.save()
 
     # (Optional) Enable logs collection
     DATADOG_JENKINS_PLUGIN_COLLECT_BUILD_LOGS=true
+
+    # (Optional) Configure the name of the host that you use to access Datadog UI
+    DATADOG_JENKINS_PLUGIN_DATADOG_APP_HOSTNAME=app.datadoghq.com
     {{< /code-block >}}
 
     {{% /site-region %}}
@@ -582,6 +608,9 @@ datadog.save()
 
     # (Optional) Enable logs collection
     DATADOG_JENKINS_PLUGIN_COLLECT_BUILD_LOGS=true
+
+    # (Optional) Configure the name of the host that you use to access Datadog UI
+    DATADOG_JENKINS_PLUGIN_DATADOG_APP_HOSTNAME=app.datadoghq.eu
     {{< /code-block >}}
 
     {{% /site-region %}}
@@ -605,6 +634,9 @@ datadog.save()
 
     # (Optional) Enable logs collection
     DATADOG_JENKINS_PLUGIN_COLLECT_BUILD_LOGS=true
+
+    # (Optional) Configure the name of the host that you use to access Datadog UI
+    DATADOG_JENKINS_PLUGIN_DATADOG_APP_HOSTNAME=app.ddog-gov.com
     {{< /code-block >}}
 
     {{% /site-region %}}
@@ -628,6 +660,9 @@ datadog.save()
 
     # (Optional) Enable logs collection
     DATADOG_JENKINS_PLUGIN_COLLECT_BUILD_LOGS=true
+
+    # (Optional) Configure the name of the host that you use to access Datadog UI
+    DATADOG_JENKINS_PLUGIN_DATADOG_APP_HOSTNAME=app.us3.datadoghq.com
     {{< /code-block >}}
 
     {{% /site-region %}}
@@ -651,6 +686,9 @@ datadog.save()
 
     # (Optional) Enable logs collection
     DATADOG_JENKINS_PLUGIN_COLLECT_BUILD_LOGS=true
+
+    # (Optional) Configure the name of the host that you use to access Datadog UI
+    DATADOG_JENKINS_PLUGIN_DATADOG_APP_HOSTNAME=app.us5.datadoghq.com
     {{< /code-block >}}
 
     {{% /site-region %}}
@@ -674,6 +712,9 @@ datadog.save()
 
     # (Optional) Enable logs collection
     DATADOG_JENKINS_PLUGIN_COLLECT_BUILD_LOGS=true
+
+    # (Optional) Configure the name of the host that you use to access Datadog UI
+    DATADOG_JENKINS_PLUGIN_DATADOG_APP_HOSTNAME=app.ap1.datadoghq.com
     {{< /code-block >}}
     {{% /site-region %}}
 
@@ -704,6 +745,9 @@ datadog.save()
 
     # (Optional) Enable logs collection
     DATADOG_JENKINS_PLUGIN_COLLECT_BUILD_LOGS=true
+
+    # (Optional) Configure the name of the host that you use to access Datadog UI
+    DATADOG_JENKINS_PLUGIN_DATADOG_APP_HOSTNAME=app.datadoghq.com
     ```
 
 2. Restart your Jenkins instance.
@@ -820,6 +864,8 @@ Some features of the Datadog Jenkins plugin need Git information associated with
 
 The minimum required Git info for a build is repository URL, branch, commit SHA, and commit author email.
 This information can be determined by the plugin automatically, propagated from SCM, provided manually with environment variables, or obtained by combining these approaches.
+
+**Note:** If a pipeline checks out multiple repositories, Git info of the repositories that are checked out later in the pipeline has higher priority.
 
 ### Propagate Git information from SCM
 
