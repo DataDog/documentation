@@ -596,7 +596,7 @@ You can see full source code files in [**Dynamic Instrumentation**][102] when cr
 
 1. Navigate to [**APM** > **Dynamic Instrumentation**][101].
 2. Select an existing instrumentation from the list, then click **View Events**.
-3. Select the instrumentation tile to view its location in the source code.
+3. Select the instrumentation card to view its location in the source code.
 
 {{< img src="integrations/guide/source_code_integration/dynamic-instrumentation-create-new.png" alt="Source Code File in Dynamic Instrumentation" style="width:100%;">}}
 
