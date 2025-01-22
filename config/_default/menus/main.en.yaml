@@ -4136,6 +4136,11 @@ menu:
       parent: llm_obs
       identifier: llm_obs_submit_evaluations
       weight: 5
+    - name: RAGAS Integration
+      url: llm_observability/ragas_integration/
+      parent: llm_obs
+      identifier: llm_obs_ragas_integration
+      weight: 5
     - name: Cluster Map
       url: llm_observability/cluster_map/
       parent: llm_obs
