@@ -27,7 +27,7 @@ For existing users who want to add a new AWS account or enable Agentless Scannin
 1. Click **Start Using Cloud Security Management** to continue.
 1. Select the AWS region where you want to create the CloudFormation stack.
 1. Select an API key that is already configured for Remote Configuration. If the API key you select does not have Remote Configuration enabled, Remote Configuration is automatically enabled for that key upon selection.
-1. **Send AWS Logs to Datadog** and **Detect security issues** are automatically selected by default. Leave the selections as is.
+1. **Send AWS Logs to Datadog** and **Detect security issues** are automatically selected by default. Leave the selections as-is.
 1. The **Enable Vulnerability Management (Host, Container and Lambda)** switch is also enabled by default. Leave this selection as-is.
 1. Click **Launch CloudFormation Template**. A new window opens, displaying the AWS CloudFormation screen. Use the provided CloudFormation template to create a stack. The template includes the IAM permissions required to deploy and manage Agentless scanners.
 
