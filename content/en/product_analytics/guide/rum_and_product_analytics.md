@@ -40,7 +40,7 @@ Session Replay remains a part of both RUM and Product Analytics.
 
 ### What is the difference between RUM and Product Analytics?
 - Both Product Analytics and Real User Monitoring rely on the Browser and/or Mobile SDKs.
-- Product Analytics offers 15-month retention on behavioral events (Sessions, Views, and Actions), as well as Resources, Long Tasks, Errors, and Vitals. Real User Monitoring is dedicated to performance monitoring.
+- Product Analytics offers 15-month retention on behavioral events (Sessions, Views, and Actions). Real User Monitoring is dedicated to performance monitoring.
 - Users have the option to purchase both products together, or each individually.
 
 ### Will the funnel widget be removed?
