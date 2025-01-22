@@ -71,7 +71,7 @@ You can analyze conversion by **session count** or **users**, which means you ca
 You can measure conversion by the following attributes:
 
 - **Conversion count** - A count of users who went through the funnel you've defined.
-- **Conversion rate** - A conversion refers to the moment when a user responds to a call to action. This rate is the percentage of the total number of users that visited your site or application who converted.
+- **Conversion rate** - A conversion refers to the moment when a user responds to a call to action. This rate is the percentage of the total number of users that visited your site or application and converted.
 
   **Note**: Only completed RUM sessions contribute to conversion rates.
 
@@ -83,18 +83,18 @@ You can measure these attributes **across all steps** or between **specific step
 
 Use the **filter** selector to filter by various criteria that you define.
 
-From there, you can click a datapoint to **investigate the specific attributes** that may have affected conversion rates, such as page load speed, ease of navigation, or checkout experience.
+Next, click a datapoint to **investigate the specific attributes** that might have affected conversion rates, such as page load speed, ease of navigation, or checkout experience.
 
 ## Changing the visualization
 
 {{< img src="product_analytics/journeys/funnel_analysis/funnel-timeseries.mp4" alt="Click the visualization dropdown to select a different view" video=true >}}
 
-After you've defined the step events and conversion measurement, you can switch to see a different visualization and better understand conversion of users for your app.
+After you've defined the step events and conversion measurement, you can switch to a different visualization to better understand user conversions for your app.
 
 ### Timeseries
 Seeing the conversion as a timeseries can be helpful in understanding conversion trends. Each datapoint across the x-axis represents teh conversion for the identified query.
 
-You can select the time period for which you want to graph the conversion and view it in percentages or in absolute count.
+You can select the time period for graphing the conversion and view conversions in percentages or in absolute count.
 
 {{< img src="product_analytics/journeys/funnel_analysis/funnels-timeseries.png" alt="View conversion data as a timeseries." style="width:80%;" >}}
 
