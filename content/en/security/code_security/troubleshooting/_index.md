@@ -162,7 +162,7 @@ Typically, SCA is enabled and disabled on a service using the UI.
 
 To disable [Software Composition Analysis][14] using the UI:
 
-* Go to [Services][15], select **Software Composition Analysis (SCA)**, click on your service to open the service details, and then, in **Vulnerability Detection**, click **Deactivate**.
+* Go to [Services][15], select **Software Composition Analysis (SCA)**. Under **Coverage**, hover over a service's SCA icon and then click **Deactivate**.
 * To disable Software Composition Analysis on your services in bulk, click the check box in the list header and then under **Bulk Actions** select **Deactivate Software Composition Analysis (SCA) on (number of) services**.
 
 To disable SCA manually:
@@ -182,3 +182,6 @@ To disable IAST, remove the `DD_IAST_ENABLED=true` environment variable from you
 [7]: https://github.com/DataDog/osv-scanner
 [8]: https://github.com/aquasecurity/trivy
 [9]: https://learn.microsoft.com/en-us/nuget/consume-packages/package-references-in-project-files#enabling-the-lock-file
+[12]: https://app.datadoghq.com/security/appsec/vm/library
+[15]: https://app.datadoghq.com/security/code-security/inventory/services
+[16]: https://app.datadoghq.com/services?&lens=Security

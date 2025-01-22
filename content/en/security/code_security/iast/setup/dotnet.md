@@ -146,6 +146,6 @@ If you need additional assistance, contact [Datadog support][5].
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/DataDog/dd-trace-dotnet/releases/latest
-[2]: /security/code_security/iast/setup/compatibility/dotnet/
+[2]: /security/code_security/iast/setup/
 [3]: /agent/versions/upgrade_between_agent_minor_versions/
-[4]: /security/code_security/iast/setup/compatibility/
+[4]: /security/code_security/iast/setup/

@@ -125,7 +125,7 @@ using the CPython API, or on intermediate language systems like Cython, the resu
 
 [1]: https://github.com/DataDog/dd-trace-py/releases
 [2]: /security/code_security/iast/setup/python
-[3]: /security/code_security/iast/setup/compatibility/
+[3]: /security/code_security/iast/setup/
 [4]: https://app.datadoghq.com/security/appsec/vm/code
 [5]: /help
 [6]: /agent/versions/upgrade_between_agent_minor_versions/

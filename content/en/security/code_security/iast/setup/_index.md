@@ -12,7 +12,7 @@ Before setting up Code Security, ensure the following prerequisites are met:
 
 1. **Datadog Agent Installation:** The Datadog Agent is installed and configured for your application's operating system or container, cloud, or virtual environment.
 2. **Datadog APM Configuration:** Datadog APM is configured for your application or service, and web traces (`type:web`) are being received by Datadog.
-3. **Supported Tracing Library:** The Datadog Tracing Library used by your application or service supports Code Security capabilities for the language of your application or service. For more details, refer to the [Library Compatibility][1] page.
+3. **Supported Tracing Library:** The Datadog Tracing Library used by your application or service supports Code Security capabilities for the language of your application or service. For more details, refer to the **Compatibility Requirements** section below.
 
 ## Using Datadog Tracing Libraries
 
@@ -26,7 +26,7 @@ You can detect code-level vulnerabilities and monitor application security in Ja
 Follow these steps to enable Code Security in your service:
 
 1. [Update your Datadog Agent][6] to at least version 7.41.1.
-2. Update your Datadog Tracing Library to at least the minimum version needed to turn on Code Security. For details, see [Library Compatibility][3] page.
+2. Update your Datadog Tracing Library to at least the minimum version needed to turn on Code Security. For details, see the **Compatibility Requirements** below.
 3. Add the `DD_IAST_ENABLED=true` environment variable to your application configuration.
 
    From the command line:
@@ -88,8 +88,8 @@ Update your ECS task definition JSON file, by adding this in the environment sec
 ```
 
 [1]: https://github.com/DataDog/dd-trace-java/releases
-[2]: /security/code_security/iast/setup/compatibility/java/
-[3]: /security/code_security/iast/setup/compatibility/java/
+[2]: /security/code_security/iast/setup/
+[3]: /security/code_security/iast/setup/
 [4]: https://app.datadoghq.com/security/appsec/vm
 [5]: /help
 [6]: /agent/versions/upgrade_between_agent_minor_versions/
@@ -104,7 +104,7 @@ You can detect code-level vulnerabilities and monitor application security in .N
 Follow these steps to enable Code Security in your service:
 
 1. [Update your Datadog Agent][3] to at least version 7.41.1.
-2. Update your Datadog Tracing Library to at least the minimum version needed to turn on Code Security. For details, see [Library Compatibility][4] page.
+2. Update your Datadog Tracing Library to at least the minimum version needed to turn on Code Security. For details, see the **Compatibility Requirements** below.
 3. Add the `DD_IAST_ENABLED=true` environment variable to your application configuration. For example, on Windows self-hosted, run the following PowerShell snippet as part of your application start-up script:
 
    ```sh
@@ -206,9 +206,9 @@ To see Code Security in action, browse your service and find code-level vulnerab
 If you need additional assistance, contact [Datadog support][5].
 
 [1]: https://github.com/DataDog/dd-trace-dotnet/releases/latest
-[2]: /security/code_security/iast/setup/compatibility/dotnet/
+[2]: /security/code_security/iast/setup/
 [3]: /agent/versions/upgrade_between_agent_minor_versions/
-[4]: /security/code_security/iast/setup/compatibility/
+[4]: /security/code_security/iast/setup/
 [5]: /help
 
 {{% /collapse-content %}} 
@@ -220,7 +220,7 @@ You can detect code-level vulnerabilities and monitor application security in No
 Follow these steps to enable Code Security in your service:
 
 1. [Update your Datadog Agent][4] to at least version 7.41.1.
-2. Update your Datadog Tracing Library to at least the minimum version needed to turn on Code Security. For details, see [Library Compatibility][3] page.
+2. Update your Datadog Tracing Library to at least the minimum version needed to turn on Code Security. For details, see the **Compatibility Requirements** below.
 3. Add the `DD_IAST_ENABLED=true` environment variable to your application configuration.
 
    If you initialize the APM library on the command line using the `--require` option to Node.js:
@@ -282,7 +282,7 @@ Update your ECS task definition JSON file, by adding this in the environment sec
 
 [1]: https://github.com/DataDog/dd-trace-js/blob/master/MIGRATING.md
 [2]: /security/code_security/iast/setup/nodejs/
-[3]: /security/code_security/iast/setup/compatibility/
+[3]: /security/code_security/iast/setup/
 [4]: /agent/versions/upgrade_between_agent_minor_versions/
 [5]: https://app.datadoghq.com/security/appsec/vm/code
 [6]: /help
@@ -298,7 +298,7 @@ NOTE: Code-Level Vulnerability detection in Python is in Preview.
 Follow these steps to enable Code Security in your service:
 
 1. [Update your Datadog Agent][6] to at least version 7.41.1.
-2. Update your Datadog Tracing Library to at least the minimum version needed to turn on Code Security. For details, see [Library Compatibility][3] page.
+2. Update your Datadog Tracing Library to at least the minimum version needed to turn on Code Security. For details, see the **Compatibility Requirements** below.
 3. Add the `DD_IAST_ENABLED=true` environment variable to your application configuration.
 
    From the command line:
@@ -375,7 +375,7 @@ using the CPython API, or on intermediate language systems like Cython, the resu
 
 [1]: https://github.com/DataDog/dd-trace-py/releases
 [2]: /security/code_security/iast/setup/python
-[3]: /security/code_security/iast/setup/compatibility/
+[3]: /security/code_security/iast/setup/
 [4]: https://app.datadoghq.com/security/appsec/vm/code
 [5]: /help
 [6]: /agent/versions/upgrade_between_agent_minor_versions/
@@ -391,7 +391,7 @@ using the CPython API, or on intermediate language systems like Cython, the resu
 
 If you need additional assistance, contact [Datadog support][5].
 
-[1]: /security/code_security/iast/setup/compatibility/
+[1]: /security/code_security/iast/setup/
 [4]: https://app.datadoghq.com/security/appsec/vm
 [5]: /help
 

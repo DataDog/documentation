@@ -108,7 +108,7 @@ If you need additional assistance, contact [Datadog support][6].
 
 [1]: https://github.com/DataDog/dd-trace-js/blob/master/MIGRATING.md
 [2]: /security/code_security/iast/setup/nodejs/
-[3]: /security/code_security/iast/setup/compatibility/
+[3]: /security/code_security/iast/setup/
 [4]: /agent/versions/upgrade_between_agent_minor_versions/
 [5]: https://app.datadoghq.com/security/appsec/vm/code
 [6]: /help

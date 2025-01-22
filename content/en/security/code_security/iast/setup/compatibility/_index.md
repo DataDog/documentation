@@ -1,8 +1,6 @@
 ---
 title: Compatibility Requirements
 type: multi-code-lang
-aliases:
-  - /security/code_security/iast/setup/compatibility/
 further_reading:
 - link: "/security/application_security/troubleshooting"
   tag: "Documentation"
@@ -21,10 +19,4 @@ The following ASM capabilities are supported relative to each language's tracing
 Select your application language for details about framework compatibility and feature support.
 
 {{< partial name="security-platform/appsec-languages-code-security.html" >}}
-
-<br>
-
-## Further Reading
-
-{{< partial name="whats-next/whats-next.html" >}}
 

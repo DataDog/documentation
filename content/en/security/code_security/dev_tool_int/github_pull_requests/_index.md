@@ -57,10 +57,9 @@ The permissions you grant to the GitHub App determine which [GitHub integration]
 
 ### Enable Code Security PR comments for your repositories
 
-1. In Datadog, navigate to [**CI Settings** > **Code Security Settings**][4].
-1. Click the toggle switch next to a given repository to enable **GitHub Comments**. In the example below, comments are enabled for the `demo-static-analysis-gates` repository.
-
-{{< img src="ci/static-analysis-github-comments.png" alt="Example of a Code Security comment on a pull request" style="width:100%;" >}}
+1. In Datadog, navigate to [**Security** > **Code Security** > **Settings**][4].
+2. In **Enable scanning for your repositories**, select **Edit** next to a given repository.
+3. Toggle **Enable Static Analyis** to on.
 
 **Note:** If you are using [GitHub Actions][6] to run your scans, trigger the action on `push` in order for comments to appear.
 
@@ -69,24 +68,15 @@ The permissions you grant to the GitHub App determine which [GitHub integration]
 If your GitHub app's **Pull Requests** permission is set to **Read & Write**, one-click remediation is enabled for all Static Analysis findings with an available suggested fix.
 
 Follow these steps to fix a vulnerability and open a pull request:
-1. View a specific result in Code Security.
-2. Click **Fix Violation** in the side panel of the result. 
-3. Select **Open a Pull Request**.
-4. Enter a pull request title and commit message.
-5. Click **Create PR**.
-
-You can also fix a vulnerability by committing directly to the branch the result was found on. 
-
-To commit a suggested fix:
-
-1. View a specific result in Code Security.
-2. Click **Fix Violation** in the side panel of the result.
-3. Click **Commit to current branch**.
-
+1. Go to **Code Security > Repositories**.
+2. Click a repo.
+3. On the repo's page, click the **Code Vulnerabilities** or **Code Quality** tabs.
+4. Click a violation.
+5. If a suggested fix is available for that violation, one-click remediation is available in the side panel.
 
 [1]: /security/code_security/
 [2]: /integrations/github/
 [3]: https://app.datadoghq.com/integrations/github/add
-[4]: https://app.datadoghq.com/ci/settings/static-analysis
+[4]: https://app.datadoghq.com/security/configuration/code-security/setup
 [5]: https://app.datadoghq.com/integrations/github/configuration
 [6]: /security/code_security/static_analysis/github_actions/

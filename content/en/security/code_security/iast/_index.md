@@ -110,7 +110,7 @@ For information on disabling Code Security, see [Disabling Code Security][12].
 [2]: /security/code_security/iast/setup/java/
 [3]: /integrations/jira/
 [4]: /account_management/rbac/permissions/#integrations
-[5]: /security/code_security/iast/setup/compatibility/
+[5]: /security/code_security/iast/setup/
 [6]: https://docs.google.com/forms/d/1wsgbd80eImvJSjXe5y5VCjAW0zzn5p3CoCLsOy0vqsk/
 [7]: /integrations/github/
 [9]: /security/code_security/iast/setup/
