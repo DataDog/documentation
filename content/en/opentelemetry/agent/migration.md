@@ -187,7 +187,7 @@ datadog:
    {{< /code-block >}}
    Set `datadog.site` to your [Datadog site][10]. Otherwise, it defaults to `datadoghq.com`, the US1 site.
    <div class="alert alert-danger">The log level <code>datadog.logLevel</code> parameter value should be set in lower case. Valid log levels are: <code>trace</code>, <code>debug</code>, <code>info</code>, <code>warn</code>, <code>error</code>, <code>critical</code>, <code>off</code>.</div>
-1. Switch the Datadog Agent Docker repository to use development builds:
+1. Switch the Datadog Agent image tag to use builds with embedded OpenTelemetry collector:
    {{< code-block lang="yaml" filename="datadog-values.yaml" collapsible="true" >}}
 agents:
   image:
