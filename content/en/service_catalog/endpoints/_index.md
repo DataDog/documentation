@@ -19,6 +19,7 @@ further_reading:
 aliases:
     - /tracing/api_catalog/get_started
     - /tracing/api_catalog/
+    - /api_catalog/
     - /api_catalog/endpoint_discovery/
     - /service_catalog/endpoints/discover_endpoints
 ---
