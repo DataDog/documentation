@@ -38,6 +38,7 @@ The following permissions included in the policy document use wild cards such as
                 "dynamodb:Describe*",
                 "dynamodb:List*",
                 "ec2:Describe*",
+                "ec2:GetAllowedImagesSettings",
                 "ec2:GetEbsDefaultKmsKeyId",
                 "ec2:GetInstanceMetadataDefaults",
                 "ec2:GetSerialConsoleAccessStatus",
