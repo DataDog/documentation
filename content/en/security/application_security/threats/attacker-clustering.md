@@ -24,7 +24,7 @@ This topic describes how to use **Attacker Clustering** to block more efficientl
 
 Datadog Application Security Management (ASM) analyses traffic of security signals to find attacker patterns and help you mitigate distributed attacks more efficiently. Attacker clustering highlights a set of common attributes that is shared by a significant portion of the traffic and suggests blocking on those.
 
-Blocking on attacker attributes means you keep your application or api protected even as the attacker rotates between IPs.
+Blocking on attacker attributes means you keep your application or API protected even as the attacker rotates between IPs.
 
 ## For which signals are attacker clusters computed?
 
