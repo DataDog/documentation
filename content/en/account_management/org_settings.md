@@ -143,10 +143,9 @@ Users with the `Org Management` permission can set a maximum session duration fo
 The session duration can be configured within the following limits:
 
 - **Minimum duration**: 1 hour 
-- **Maximum duration**: <span>{{< site-region region="gov" >}}12 hours{{< /site-region >}}{{< site-region region="us, eu, us3, us5, ap1" >}}720 hours (30 days){{< /site-region >}}</span>
+- **Maximum duration**:{{% site-region region="gov" %}} 12 hours{{% /site-region %}}{{% site-region region="us, eu, us3, us5, ap1" %}} 720 hours (30 days){{% /site-region %}}
 
 {{< img src="account_management/org_settings/max_session_duration.png" alt="Max Session Duration Setting" style="width:70%;" >}}
-
 
 **Note**: This setting applies only to web sessions. Sessions from the Datadog mobile application are not impacted.
 
