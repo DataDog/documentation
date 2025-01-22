@@ -4,9 +4,8 @@
 1. Select or create the Datadog API Key used to send data from your AWS account to Datadog.
 1. To configure the Datadog Lambda Forwarder, select **Yes** for **Send Logs to Datadog**. This enables AWS CloudTrail logs to be sent to Datadog.
 1. To enable Cloud Security Management, select **Yes** for **Detect security issues**.
-1. These options for Agentless Scanning appear when you select **Yes** for **Detect security issues**.
+1. The following options for Agentless Scanning appear when you select **Yes** for **Detect security issues**.
   - **Enable Vulnerability Management (Host, Container and Lambda)**: Switch the toggle to the on position to scan for risks and vulnerabilities.
-  - **Enable Sensitive Data Scanner for Cloud Storage**: Switch the toggle to the on position to scan for sensitive data in cloud storage.
 1. Click **Launch CloudFormation Template**. This opens the AWS Console and loads the CloudFormation stack with the parameters filled in based on your selections in the Datadog form. 
 
     **Note:** The `DatadogAppKey` parameter enables the CloudFormation stack to make API calls to Datadog, allowing it to add and edit the configuration for this AWS account. The key is automatically generated and tied to your Datadog account. 
