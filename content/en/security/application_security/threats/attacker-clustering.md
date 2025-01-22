@@ -12,7 +12,7 @@ further_reading:
   text: "Threat Intelligence"
 - link: "/security/application_security/threats/event_rules"
   tag: "Documentation"
-  text: "In-app WAF Rules"
+  text: "In-App WAF Rules"
 - link: "/security/application_security/threats/security_signals/"
   tag: "Documentation"
   text: "Security Signals"
