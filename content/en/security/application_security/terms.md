@@ -93,6 +93,14 @@ flagged attackers
 : IPs that send large amounts of attack traffic. We recommend reviewing and blocking Flagged IPs. Thresholds are not user-configurable.
 : See [Attacker Explorer][17]
 
+attacker fingerprint
+: identifiers computed from request characteristics to track an attacker across multiple requests
+: See [Attacker Fingerprint][18]
+
+attacker cluster
+: A set of attributes identifying an attacker across a distributed attack
+: See [Attacker Clustering][19]
+
 ## Attacks and known vulnerabilities terms
 
 Open Web Application Security Project (OWASP)
