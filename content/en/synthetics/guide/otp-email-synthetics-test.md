@@ -1,19 +1,22 @@
 ---
 title: Extract a One-Time Passcode from an Email Body using Synthetic Browser Tests
-description: Learn how to extract OTP an Email Body using Synthetic Browser Tests.
+description: Learn how to extract a OTP from an Email Body using Synthetic Browser Tests.
 further_reading:
-- link: "/synthetics/browser_tests"
+- link: "//synthetics/browser_tests/?tab=requestoptions#overview"
   tag: "Documentation"
-  text: "Learn about Browser tests"
+  text: "Learn about Synthetic Browser tests"
 - link: "/synthetics/api_tests/http_tests#variables"
   tag: "Documentation"
   text: "Learn about Synthetic test variables"
-- link: 'https://www.datadoghq.com/blog/test-creation-best-practices/'
-  tag: 'Blog'
-  text: 'Best practices for creating end-to-end tests'
+- link: "/synthetics/guide/email-validation"
+  tag: "Documentation"
+  text: "Learn about email validation in Browser tests"
 - link: "/synthetics/troubleshooting/?tab=common"
   tag: "Documentation"
   text: "Synthetic Monitoring Troubleshooting"
+- link: 'https://www.datadoghq.com/blog/test-creation-best-practices/'
+  tag: 'Blog'
+  text: 'Best practices for creating end-to-end tests'
 ---
 
 <div class="alert alert-info">Extracting one-time passcodes from an email body is only supported for synthetic browser tests.</div>
@@ -26,61 +29,54 @@ This guide walks you through how to configure the OTP extraction for a synthetic
 
 ## Setup
 
-### Create an email variable
+### Step 1 - Create an email variable
 
-First you will need to create a email variable for the [browser test][3] to pull from. This can be either a unique generated email or a static one you define.
+Create a [email variable][8] for the [browser test][3] to pull from using a [local variable][1]. 
 
-#### Dynamic Email
-
-For the unique dynamic email creation this can be done using a [local variable][1]. 
-
-Under **Add Variable** click **Create a Local Variable**. Then add an **Email Address** variable to generate a unique email address for the synthetic test run.
+1. Under **Add Variable** click **Create a Local Variable**. 
+2. Add an **Email Address** variable to generate a [email address][7] for the synthetic test run.
 
 {{< img src="synthetics/guide/otp-from-email-body/email_variable.png" alt="Add a unqiue email variable" style="width:80%;" >}}
 
-#### Static Email
+### Step 2 - Inject the email address variable
 
-To use a static email address instead first add it as a [global variable][4].
-
-To create the global variable, navigate to the **Global Variables** tab on the [**Synthetic Monitoring & Continuous Testing** > **Settings** page][2] and click **+ New Global Variable**.
-
-Then in your browser test under **Add Variable** click **Create a Global Variable** and then search for the email variable to add it.
-{{< img src="synthetics/guide/otp-from-email-body/add_global_var.png" alt="Add the global email variable to the test" style="width:80%;" >}}
-
-### Inject the email address variable
-
-Once the email variable is created and added to the test add a step to imitate how a user would input the email address within your application. Inject the email adress variable into an input field to imitate this step.
+Next add a step to inject the email adress variable into an input field to imitate how a user would input the email address within your application.
 
 {{< img src="synthetics/guide/otp-from-email-body/email_address_variable.png" alt="Inject the email variable" style="width:60%;" >}}
 
 Now the browser test can access the email body for use in the rest of the sign-up flow.
 
-### Extract the OTP from the email body
+### Step 3 - Extract the OTP from the email body
 
-Next define a test step to extract the relevant OTP information from the email body once it has been sent.
+Define a test step to extract the OTP from the email body once it has been sent and store it in a variable. In this example, the variable is named `OTP_FROM_EMAIL` for later reference within the guide. 
 
-Under **Add a variable** select **from Email body**. In this example, the variable is named `OTP_FROM_EMAIL` for later reference within the guide. 
+1. Under **Add a variable** select **from Email body**.
 
 {{< img src="synthetics/guide/otp-from-email-body/otp_from_email.png" alt="OTP variable as used in the email body step" style="width:50%;" >}}
 
-Here are some examples of regex that can be used to parse the OTP token from the email body:
+2. Under **Parsing Regex** add in the regex pattern that corresponds to the OTP.
+
+Here are sample regex patterns to parse the OTP token from the email body:
 
 | **Type**                           | **Example**                                  | **Regex Rule**                           |
 |:-----------------------------------|:---------------------------------------------|:-----------------------------------------|
-| 4 Digit OTP                        | 1234                                         | `/[0-9]{6,6}/`                           |
+| 4 Digit OTP                        | 1234                                         | `/[0-9]{4,4}/`                           |
 | 6 Digit OTP                        | 123456                                       | `/[0-9]{6,6}/`                           |
-| 5 Character                        | abcde                                        | `/[0-9]{6,6}/`                           |
-| Alphanumerical OTP                 | a1b2cd34                                     | `/[0-9,a-z]{8,8}/`                       |
+| 5 Character                        | abcde                                        | `/[a-z]{5,5}/`                           |
+| Alphanumerical OTP                 | a1b2cd34                                     | `/[a-zA-Z0-9]{8,8}/`                       |
 
-### Use a JavaScript assertion to insert the OTP
-
-Once you have extracted the OTP and stored it in a variable, in our example `OTP_FROM_EMAIL`, you can use a [JavaScript assertion][5] to input the OTP into the appropriate field in your application.
-
-{{< img src="synthetics/guide/otp-from-email-body/js_assertion.png" alt="Javascript assertion" style="width:50%;" >}}
+### Step 4 - Use a JavaScript assertion to insert the OTP
 
 JavaScript lets you trigger an event on a DOM element programmatically, making it possible to mimic user interactions or other events. Depending on how your input element is built, dispatching an event may be required to enable custom behaviors or testing event listeners tied to the element.
 
-For example, the extracted variable can be inserted into a simple text field as follows:
+1. Add a [JavaScript assertion step][5] to input the stored OTP variable, in our example `OTP_FROM_EMAIL`, into the appropriate field in your application. 
+
+{{< img src="synthetics/guide/otp-from-email-body/js_assertion.png" alt="Javascript assertion" style="width:50%;" >}}
+
+2. Under **Custom JavaScript** add in the extraction code corresponding to if the OTP will be inserted into a simple text field or respective input fields. Examples for both are highlighted below:
+
+#### Simple text field
+To insert the OTP into a simple text field use the following:
 {{< code-block lang="java" disable_copy="false" >}}
 function (vars, element) {
   element.setAttribute('value', vars.OTP_FROM_EMAIL);
@@ -89,9 +85,14 @@ function (vars, element) {
 }
 {{< /code-block >}}
 
+Below is a visual example of an OTP setup with a simple text field that the above query can be used for:
+
+{{< img src="synthetics/guide/otp-from-email-body/simple_otp.png" alt="example of an otp with a simple text field" style="width:40%;" caption="Example of an OTP with with a simple text field" >}}
+
 **Note**: For both of the Javascript examples you need to replace the `OTP_FROM_EMAIL` field with the name of the email variable you defined if named differently in your browser test.
 
-A more complex example might be that each digit of the OTP has its own respective input field. The OTP can be inserted as follows:
+#### Respective input fields
+To insert the OTP into seperately defined fields use the following:
 {{< code-block lang="java" disable_copy="false" >}}
 function (vars) {
   const inputList = document.querySelectorAll('input');
@@ -107,9 +108,10 @@ Below is a visual example of an OTP setup with seperately defined fields that th
 
 {{< img src="synthetics/guide/otp-from-email-body/bubble_otp.png" alt="example of an otp with individual numerical fields" style="width:40%;" caption="Example of an OTP with respective input fields" >}}
 
-### Continue testing the rest of your application flow
+## Next steps
 
-Once the OTP is inserted and verified, you can continue recording the appropriate steps to assert that the user has completed the sign-up flow of your application. An example would be adding an [assertion][6] that specific text is present on the page.
+Once the OTP is inserted and verified, you can continue recording the appropriate steps to assert that the user has completed the sign-up flow of your application such as adding an [assertion][6] that specific text is present on the page.
+From here you can continue [recording the rest of your browser test][9] and then look into your [browser test results][10].
 
 ## Further Reading
 
@@ -121,3 +123,7 @@ Once the OTP is inserted and verified, you can continue recording the appropriat
 [4]: /synthetics/settings/?tab=specifyvalue#global-variables
 [5]: /synthetics/browser_tests/actions/?tab=testanelementontheactivepage#javascript
 [6]: synthetics/browser_tests/actions/?tab=testanelementontheactivepage#assertion
+[7]: /synthetics/browser_tests/actions/?tab=testanelementontheactivepage#email
+[8]: /synthetics/guide/email-validation/#create-an-email-variable
+[9]: /synthetics/browser_tests/actions?tab=testanelementontheactivepage
+[10]: /synthetics/browser_tests/test_results
