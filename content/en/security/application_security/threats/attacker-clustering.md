@@ -60,7 +60,7 @@ The algorithm  tracks the changes in the attack traffic by identifying emerging 
 
 Traffic associated with threat intelligence also weights into the clustering mechanism. The more an attribute is correlated with threat intelligence the higher the chance to create an attacker cluster around this attribute.
 
-The attacker clustering attributes selected are then shown as regular expressions that can be used to block with ASM's [in-app WAF][3].
+The attacker clustering attributes selected are then shown as regular expressions that can be used to block with ASM's [In-App WAF][3].
 
 ## Further Reading
 
