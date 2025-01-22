@@ -26,7 +26,7 @@ Datadog Application Security Management (ASM) analyses traffic of security signa
 
 Blocking on attacker attributes means you keep your application or api protected even as the attacker rotates between IPs.
 
-## For which attacks are attacker clusters computed?
+## For which signals are attacker clusters computed?
 
 The attacker clustering is computed for every [ASM security signal][4] being emitted from a detection rule tagged with the following:
 `category:account_takeover` or `category:fraud`
