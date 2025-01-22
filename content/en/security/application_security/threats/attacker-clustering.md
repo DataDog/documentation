@@ -40,12 +40,14 @@ If you create custom detection rules and want the attacker clustering to be exec
 ## Attacker Clustering Attributes
 
 Attacker clustering is computed on the following request attributes of requests:
-* Browser name & version
-* OS name & version
+* Browser name
+* Browser version
+* OS name
+* OS version
 * User agent header
 * [Datadog attacker fingerprinting][2]
 
-When the attacker attributes are identified, we show them on the signal side panel and signal full page.
+When the attacker attributes are identified, we show them on the signal side panel and signal full page. Attacker attributes can be a combination of the attributes listed above.
 
 {{< img src="security/application_security/threats/attacker-attributes.png" alt="Screenshot of an ASM signals with attacker attributes identified"  >}}
 
@@ -57,7 +59,7 @@ The algorithm  tracks the changes in the attack traffic by identifying emerging 
 
 Traffic associated with threat intelligence also weights into the clustering mechanism. The more an attribute is correlated with [Threat Intelligence][1] the higher the chance to create an attacker cluster around this attribute.
 
-The attacker clustering attributes selected are then shown as regular expressions that can be used to block with ASM's [In-App WAF][3].
+The attacker clustering attributes selected are then shown as regular expressions that can be used to block with ASM's [In-App WAF][3] or to filter out traffic in ASM trace explorer for investigation.
 
 ## Further Reading
 

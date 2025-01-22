@@ -13,7 +13,7 @@ This topic describes a feature called **Datadog Attacker Fingerprint** to identi
 
 ## Overview
 
-Datadog Attacker fingerprints are a threat hunting tool. They are automatically computed and added to your traces on attack or login attempts when Application Security Management (ASM) is enabled on your service.
+Datadog Attacker fingerprints are automatically computed and added to your traces on attack or login attempts when Application Security Management (ASM) is enabled on your service.
 
 They are composed of several fragments:
 * Endpoint Identifier
