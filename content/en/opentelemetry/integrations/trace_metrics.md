@@ -60,7 +60,14 @@ For a full working example configuration with the Datadog exporter, see [`trace-
 
 ## Known issues
 
-Datadog Connector does not support [Datadog Agent host tags](https://docs.datadoghq.com/tracing/metrics/metrics_namespace/) on APM Trace Metrics calculated by the Datadog Connector. Second primary tag can be set with a workaround: instructions [here][4] and [here][5]; contact support for more details.
+When using the Datadog Connector, host tags configured in the Datadog Agent are not applied to [APM Trace Metrics][6]. To configure tags for trace filtering:
+
+1. Set the environment tag using the `deployment.environment` resource attribute.
+1. Add secondary tags using the transform processor on your spans.
+
+For more information about how Datadog handles host tags and metadata with OpenTelemetry, see [Infrastructure Host Mapping][4] and [Hostname Mapping][5].
+
+Contact [Datadog Support][7] if you need assistance with specific tag configurations.
 
 ## Further reading
 
@@ -72,3 +79,5 @@ Datadog Connector does not support [Datadog Agent host tags](https://docs.datado
 [3]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/trace-metrics.yaml
 [4]: /opentelemetry/schema_semantics/host_metadata/
 [5]: /opentelemetry/schema_semantics/hostname/?tab=datadogexporter
+[6]: /tracing/metrics/metrics_namespace/
+[7]: /help/
