@@ -36,13 +36,21 @@ Click the green **Device Connection Notification** button in the **Launch a devi
 
 ## Automatically recorded steps
 
-Once you click **Start Recording**, Datadog automatically records any interactions you have with your device and displays them in the step list on the left.
+After you click **Start Recording**, Datadog automatically records any interactions you have with your device and displays them in the step list on the left.
 
 To stop recording, click **Stop Recording**.
 
 ## Manually added steps
 
-In addition to automatically creating steps by interacting directly with your device, you can manually create steps (using [assertions](#assertion) and [special actions](#special-actions)). You can also update steps by clicking into a previously recorded step or [reorder steps](#manage-step-order) by dragging them up and down the step list.
+In addition to automatically creating steps by interacting directly with your device, you can manually create steps (using [assertions](#assertion), the [element inspector](#element-inspector), and [special actions](#special-actions)). You can also update steps by clicking into a previously recorded step or [reorder steps](#manage-step-order) by dragging them up and down the step list.
+
+### Element Inspector
+
+The Element Inspector allows you to visualize the element hierarchy, copy attributes, and target elements to generate interaction steps using XML.
+
+You can use this feature by going to the test recorder, launching a device, and clicking the Element Inspector button. Use the search bar to find specific elements to add to your Mobile App Test, or copy attributes such as the element name or XPATH values directly from the inspector.
+
+{{< img src="mobile_app_testing/element_inspector_3.mp4" alt="Video showing the Element Inspector in Mobile App Tests" style="width:60%" video="true" >}}
 
 ### Assertion
 
@@ -85,7 +93,7 @@ In addition to automatically recording steps based on your device interactions, 
 
 Interacting with elements with a double tap on your mobile application records a step.
 
-{{< img src="mobile_app_testing/test_steps/double_tap_2.mp4" alt="Recording a double tap step in a mobile test" video=true >}}
+{{< img src="mobile_app_testing/test_steps/double_tap_2.mp4" alt="Recording a double tap step in a mobile test" style="width:60%" video=true >}}
 
 #### Extract variable from element
 
