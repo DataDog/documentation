@@ -237,7 +237,7 @@ If you need further assistance from Datadog support, add the following environme
 ### Set up Data Jobs Monitoring with Databricks Networking Restrictions
 With [Databricks Networking Restrictions][12], Datadog may not have access to your Databricks APIs, which is required to collect traces for Databricks job executions along with tags and other metadata.
 
-If you are controlling Databricks API access through IP access lists, allow-listing Datadog's specific {{< region-param key="ip_ranges_url_webhooks" link="true" text="IP addresses" >}} allows your cluster to perform all these interactions with Datadog services. Please see [Databricks documentation][13] for more details on how to manage IP access lists in Databricks.
+If you are controlling Databricks API access with [IP access lists][13], allow-listing Datadog's specific {{< region-param key="ip_ranges_url_webhooks" link="true" text="IP addresses" >}} allows Datadog to connect to the Databricks APIs in your workspace. Please see Databricks's documentation for [configuring IP access lists for workspaces][16] to give Datadog API access.
 
 If you are using [Databricks Private Connectivity][14], please reach out to the Datadog [support team][15] to discuss potential options.
 
@@ -257,3 +257,4 @@ If you are using [Databricks Private Connectivity][14], please reach out to the 
 [13]: https://docs.databricks.com/en/security/network/front-end/ip-access-list.html
 [14]: https://www.databricks.com/trust/security-features/secure-your-data-with-private-networking
 [15]: https://www.datadoghq.com/support/
+[16]: https://docs.databricks.com/en/security/network/front-end/ip-access-list-workspace.html
