@@ -2594,61 +2594,61 @@ menu:
       parent: app_builder
       identifier: app_builder_build
       weight: 1
-    - name: Authentication
-      url: service_management/app_builder/auth/
-      parent: app_builder
-      identifier: app_builder_access
-      weight: 2
-    - name: Connections
-      url: service_management/app_builder/connections/
-      parent: app_builder
-      identifier: app_builder_connections
-      weight: 3
-    - name: HTTP Request
-      url: service_management/app_builder/connections/http_request/
-      parent: app_builder_connections
-      identifier: app_builder_http_request
-      weight: 301
     - name: Queries
       url: service_management/app_builder/queries/
       parent: app_builder
       identifier: app_builder_queries
+      weight: 2
+    - name: Components
+      url: service_management/app_builder/components/
+      parent: app_builder
+      identifier: app_builder_components
+      weight: 3
+    - name: Custom Charts
+      url: service_management/app_builder/components/custom_charts/
+      parent: app_builder_components
+      identifier: app_builder_custom_charts
+      weight: 301
+    - name: Tables
+      url: service_management/app_builder/components/tables/
+      parent: app_builder_components
+      identifier: app_builder_tables
+      weight: 302
+    - name: Events
+      url: service_management/app_builder/events/
+      parent: app_builder
+      identifier: app_builder_events
       weight: 4
     - name: Variables
       url: service_management/app_builder/variables/
       parent: app_builder
       identifier: app_builder_variables
       weight: 5
-    - name: Events
-      url: service_management/app_builder/events/
-      parent: app_builder
-      identifier: app_builder_events
-      weight: 6
-    - name: Components
-      url: service_management/app_builder/components/
-      parent: app_builder
-      identifier: app_builder_components
-      weight: 7
-    - name: Custom Charts
-      url: service_management/app_builder/components/custom_charts/
-      parent: app_builder_components
-      identifier: app_builder_custom_charts
-      weight: 701
-    - name: Tables
-      url: service_management/app_builder/components/tables/
-      parent: app_builder_components
-      identifier: app_builder_tables
-      weight: 702
     - name: JavaScript Expressions
       url: service_management/app_builder/expressions/
       parent: app_builder
       identifier: app_builder_expressions
-      weight: 8
+      weight: 6
     - name: Embedded Apps
       url: service_management/app_builder/embedded_apps/
       parent: app_builder
       identifier: app_builder_embedded_apps
+      weight: 7
+    - name: Authentication
+      url: service_management/app_builder/auth/
+      parent: app_builder
+      identifier: app_builder_access
+      weight: 8
+    - name: Connections
+      url: service_management/app_builder/connections/
+      parent: app_builder
+      identifier: app_builder_connections
       weight: 9
+    - name: HTTP Request
+      url: service_management/app_builder/connections/http_request/
+      parent: app_builder_connections
+      identifier: app_builder_http_request
+      weight: 901
     - name: Datastore
       url: actions/datastore/
       pre: server
