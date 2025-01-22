@@ -1,12 +1,6 @@
 ---
 title: RAGAS Integration
 description: Monitor your RAG applications for hallucinations with LLM Observability's integration with the RAGAS evaluation framework.
-further_reading:
-  - link: `llm_observability/quickstart`
-    text: `Trace an LLM Application`
-  - link: `llm_observability/submit_evaluations`
-    tag: `Documentation`
-    text: `Submit Custom Evaluations`
 ---
 
 
