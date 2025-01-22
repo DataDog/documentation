@@ -35,16 +35,32 @@ The [Scaffold New Service blueprint][11] shows an example of scaffolding a new l
 
 ##### Create S3 Bucket with Terraform
 
-The [Create S3 Bucket with Terraform blueprint][10] shows an example of creating the terraform for an S3 bucket from a form in Github.
+The [Create S3 Bucket blueprint][10] shows an example of creating the terraform for an S3 bucket from a form in Github.
+
+#### Provision Kubernetes Cluster
+
+The [Provision EKS Cluster blueprint][12] shows an example of creating the terraform for a new Kubernetes cluster in Github.
+
+#### Provision RDS Instance
+
+The [Provision RDS Instance blueprint][13] shows an example of provisioning a new RDS instance via direct integration with AWS.
+
 
 #### Start from scratch
 Navigate to the [Workflow Automation][3] page to configure the template in Datadog.
 
-1. [Create a workflow][6] for your template:
+1. Create the form for your template:
+   - Navigate to **Actions** > **App Builder** and select **New App**.
+   - Enter a name and description, and use the drag-and-drop editor to create a form that collects the required parameters for your template.
+   - Select **New Query**, and use the **Trigger workflow** action to call your templating workflow and pass in the relevant parameters.
+   - Create a **Button** that submits the form, triggers your workflow, and passes in the parameters for the template.
+   - Save and publish the app.
+
+2. [Create a workflow][6] for your template:
    - From the [Workflow Automation][3] page, click **New Workflow**. 
    - Enter a name, add relevant tags, and define the input parameters you want to collect from users.
   
-2. Configure the templating workflow:
+3. Configure the templating workflow:
    - Use GitHub, Gitlab, or HTTP [actions][7] to retrieve your template files.
    - Use Cookiecutter to generate the project files from the template.
    - Use the Apply Template [action][7] to manipulate your template repository and pass in your input parameters.
@@ -53,14 +69,7 @@ Navigate to the [Workflow Automation][3] page to configure the template in Datad
 
   {{< img src="tracing/service_catalog/templating-workflow.png" alt="Workflow for building software template automation" style="width:100%;" >}}
 
-3. Create the form for your template:
-   - Navigate to **Service Mgmt** > **App Builder** and select **New App**.
-   - Enter a name and description, and use the drag-and-drop editor to create a form that collects the required parameters for your template.
-   - Select **New Query**, and use the **Trigger workflow** action to call your templating workflow and pass in the relevant parameters.
-   - Create a **Button** that submits the form, triggers your workflow, and passes in the parameters for the template.
-   - Save and publish the app.
-
-4. Run your application and workflow:
+4. Test your application and workflow:
    - Click **View App** to view the app on a standalone page, or **Add to a Dashboard** to place the app in a dashboard.
    - Navigate to **Service Mgmt** > **App Builder**, and select your app. Fill out the template form, and click the submit button.
    - Track the success of the workflow templating process in [Workflow Automation][3].
@@ -105,3 +114,5 @@ Below is a comprehensive list of actions available for Service Catalog in Datado
 [10]: https://app.datadoghq.com/app-builder/apps/edit?activeTab=queries&showActionCatalog=false&template=create-new-s3-bucket&viewMode=edit
 [11]: https://app.datadoghq.com/app-builder/apps/edit?activeTab=queries&showActionCatalog=false&template=scaffolding&viewMode=edit
 [12]: /actions/private_actions/
+[13]: https://app.datadoghq.com/app-builder/apps/edit?activeTab=data&showActionCatalog=false&template=provision-eks-cluster&viewMode=edit&visibleDataItemId=createOrUpdateFile0-action
+[14]: https://app.datadoghq.com/app-builder/apps/edit?activeTab=data&showActionCatalog=false&template=rds_provision_instance&viewMode=edit&visibleDataItemId=createDbInstance0-action
