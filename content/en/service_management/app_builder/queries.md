@@ -17,7 +17,7 @@ Queries populate your app with data from Datadog APIs or supported integrations.
 
 The [Action Catalog][10] within the Datadog App provides actions that can be performed as queries against your infrastructure and integrations using App Builder. You can orchestrate and automate your end-to-end processes by linking together actions that perform tasks in your cloud providers, SaaS tools, and Datadog accounts.
 
-To add a query, click the Data (<i class="icon-api"></i>) icon to open the Data tab, click the plus (**+**), select **Query**, and search for an action to add to your app. After you've added the query action, it appears in the **Actions** List. Select a query to configure it.
+To add a query, click the Data ({&nbsp;}) icon to open the Data tab, click the plus (**+**), select **Query**, and search for an action to add to your app. After you've added the query action, it appears in the **Actions** List. Select a query to configure it.
 
 Queries rely on [Connections][5] for authentication. App Builder shares connections with [Workflow Automation][6].
 
@@ -177,7 +177,7 @@ This app provides a button to trigger a workflow. The workflow sends a poll to a
 
 To connect App Builder to the workflow, perform the following steps:
 
-1. In your app, click the Data (<i class="icon-api"></i>) icon, click the plus (**+**), and select **Query**.
+1. In your app, click the Data ({&nbsp;}) icon, click the plus (**+**), and select **Query**.
 1. Search for "Trigger Workflow" and select the **Trigger Workflow** Datadog Workflow Automation item.
 1. Set **Run Settings** to Manual and name the query `triggerWorkflow0`.
 1. Under **Inputs**, for **App Workflow**, select **My AB Workflow**.
@@ -211,7 +211,7 @@ This app provides buttons to fetch facts about two numbers from an API. It then 
 
 ##### Create queries
 
-1. In a new app, click the Data (<i class="icon-api"></i>) icon to open the Data tab.
+1. In a new app, click the Data ({&nbsp;}) icon to open the Data tab.
 1. Click the plus (**+**), then select **Query**. Search for "Make request" and choose the **HTTP Make request** action.
 1. Use the following values:
     * **Name**: `mathFact1`
