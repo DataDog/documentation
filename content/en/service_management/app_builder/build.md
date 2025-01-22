@@ -76,6 +76,18 @@ UI components can trigger reactions on an [Event][11].
 
 You can use [JavaScript Expressions][13] anywhere in App Builder to create custom interactions between the different parts of your app.
 
+## Tag an app
+
+Tags display in a column on the [app list][14].
+
+To add a tag to an app:
+
+1. Open the App Properties tab in your app.
+1. Under **Tags**, use the drop-down to select an existing tag, or enter a new value and click **Add option: [your text]**.
+1. Save your app.
+
+The tag displays on the line for this app in the app list. You can click the tag in this list to copy it to your clipboard.
+
 ## Favorite an app
 
 To favorite an app and pin it to the top of your list of apps, click the star next to the name of the app in the [app list][14]:
