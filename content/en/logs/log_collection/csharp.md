@@ -479,7 +479,7 @@ Then, initialize the logger directly in your application. Ensure that you [add y
 
 ```csharp
 using (var log = new LoggerConfiguration()
-    .WriteTo.DatadogLogs("<API_KEY>", configuration: new DatadogConfiguration(){ Url = "{{< region-param key="http_endpoint" code="true" >}}" })
+    .WriteTo.DatadogLogs("<API_KEY>", configuration: new DatadogConfiguration(){ Url = "https://{{< region-param key="http_endpoint" code="true" >}}" })
     .CreateLogger())
 {
     // Some code
