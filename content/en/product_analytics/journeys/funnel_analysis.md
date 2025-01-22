@@ -47,13 +47,18 @@ If you have a starting point in mind, but aren't sure what your users did next, 
 
 ### Filtering
 
-When constructing your funnel, you can add [default attributes][2] (core, device, operating system, geo-location, and user) and [session-specific][3] attributes to analyze the data further. Click the three dots button next to an event and click **Add Filters** button to view the full list of available attributes.
+When constructing your funnel, you can filter globally or on a step.
 
-{{< img src="real_user_monitoring/funnel_analysis/funnel-analysis-filtering.png" alt="Use attributes to filter information when constructing your funnel" style="width:80%;" >}}
+- **Global filters** are applied to the entire funnel.
 
+  {{< img src="product_analytics/journeys/funnel_analysis/funnels-global-filters.png" alt="Use attributes to filter information globally when constructing your funnel" style="width:50%;" >}}
+
+- **Filtering on a step** provides insight on how the step changes based on a particular constraint on that step. For example, you may want to see how a specific device, operating system, geolocation, or user impacts conversion between steps.
+
+    {{< img src="product_analytics/journeys/funnel_analysis/funnels-step-filters.png" alt="Use attributes to filter information between steps when constructing your funnel" style="width:50%;" >}}
 ### Combining events
 
-When constructing your funnel, you can combine multiple events within a given step, as end users may have different ways to achieve the same outcome through different flows.
+When constructing your funnel, you can combine multiple events within a given step, as end users may have different ways to achieve the same outcome through different flows. When combining events, any of the events in the step can represent the step. The numerical value you see is the combination of all steps within the combined step.
 
 To combine an event, click the three dots next to an event and select **+ Combine Events**.
 
@@ -61,14 +66,15 @@ To combine an event, click the three dots next to an event and select **+ Combin
 
 You can further analyze the information on the funnel page to understand the conversion rate. Conversion rate is a crucial metric that measures the effectiveness of your site or application.
 
+You can analyze conversion by **session count** or **users**, which means you can understand how many sessions or users ended up completing the funnel.
+
 You can measure conversion by the following attributes:
 
-- **Session count** or **users** - Understand how many sessions or users ended up completing the funnel.
 - **Conversion count** - A count of users who went through the funnel you've defined.
 - **Conversion rate** - A conversion refers to the moment when a user responds to a call to action. This rate is the percentage of the total number of users that visited your site or application who converted.
 
   **Note**: Only completed RUM sessions contribute to conversion rates.
-- **Drop-off rate** - A drop-off who left the page or app without finishing a process. This rate is the percentage of the total number of users who visited your site or application who did not complete the last step event.
+
 - **Time to convert** - The time it took for the user to complete the step events.
 
 You can measure these attributes **across all steps** or between **specific steps**.
@@ -86,7 +92,7 @@ From there, you can click a datapoint to **investigate the specific attributes**
 After you've defined the step events and conversion measurement, you can switch to see a different visualization and better understand conversion of users for your app.
 
 ### Timeseries
-While understanding the overall conversion over a given period of time is helpful, you can use conversion over time to understand how the conversion has evolved over time.
+Seeing the conversion as a timeseries can be helpful in understanding conversion trends. Each datapoint across the x-axis represents teh conversion for the identified query.
 
 You can select the time period for which you want to graph the conversion and view it in percentages or in absolute count.
 
@@ -104,23 +110,9 @@ Visualize the top values from a facet based on your chosen measure.
 
 {{< img src="product_analytics/journeys/funnel_analysis/funnels-top-list.png" alt="View conversion data as a top list." style="width:80%;" >}}
 
-## Analyzing a funnel
-
-After you build a funnel, click on **View Funnel Insights** to open the **Funnel Analysis** panel, which offers correlated data on performance and user behavior trends. This information helps you understand the conversion rate.
-
-For high level trends, you can see the end-to-end conversion rate for your entire workflow and also see individual steps to step conversion to dropoff rates. If you want to understand what it looks like for someone who converted versus someone who dropped off, you can watch a [Session Replay][4] for each case.
-
-{{< img src="real_user_monitoring/funnel_analysis/funnel-analysis-analyzing-funnel.jpg" alt="Use the Funnel Insights panel to review performance and user behavior trends" style="width:90%;" >}}
-
-The **Performance** section allows you to understand if poor performance could have affected conversion. You can view a graph with a correlation between the load time of that page and the conversion rate and also see if any issues (detected by [Error Tracking][5]) occurred on that page.
-
-The **User Behavior** section allows you to compare the average frustration count (from [frustration signals][6]) with the conversion rate, and further analyze the frustration signals detected from individual actions. Next to this section is a chart showing the conversion and drop off rate for specific countries, allowing you to understand if geographic region plays a role in a user converting. 
-
-{{< img src="real_user_monitoring/funnel_analysis/funnel-analysis-user-behavior.jpg" alt="User behavior section within funnel analysis" style="width:90%;" >}}
-
 ## Share a funnel
 
-Funnels can be shared with your teams on [dashboards][7] to analyze conversion alongside other telemetry metrics, or in a [Notebook][8] to be used for reporting.
+Funnels can be shared with your teams on [dashboards][5] to analyze conversion alongside other telemetry metrics, or in a [Notebook][6] to be used for reporting.
 
 You can share the entire visualization or individual widgets.
 
@@ -128,7 +120,7 @@ You can share the entire visualization or individual widgets.
 
   {{< img src="product_analytics/journeys/funnel_analysis/funnels-share-visualization.png" alt="Share the entire visualization by clicking Export" style="width:90%;" >}}
 
-- Share individual widgets:
+- Share individual widgets from a dashboard:
 
   {{< img src="product_analytics/journeys/funnel_analysis/funnels-share.png" alt="Share a widget by clicking the export icon in the upper-right of the widget" style="width:90%;" >}}
 
@@ -140,7 +132,5 @@ You can share the entire visualization or individual widgets.
 [2]: /real_user_monitoring/browser/data_collected/#default-attributes
 [3]: /real_user_monitoring/browser/data_collected/#session-metrics
 [4]: /real_user_monitoring/session_replay
-[5]: /real_user_monitoring/error_tracking/
-[6]: /real_user_monitoring/browser/frustration_signals/
-[7]: /dashboards/
-[8]: /notebooks/
+[5]: /dashboards/
+[6]: /notebooks/
