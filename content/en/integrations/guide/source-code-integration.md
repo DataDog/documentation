@@ -584,7 +584,7 @@ If you're using the GitHub integration, click **Connect to preview** on error fr
 {{% /tab %}}
 {{% tab "Dynamic Instrumentation" %}}
 
-You can see full source code files in **Dynamic Instrumentation** when creating or editing an instrumentation (dynamic log, metric, span, or span tags).
+You can see full source code files in [**Dynamic Instrumentation**][102] when creating or editing an instrumentation (dynamic log, metric, span, or span tags).
 
 **Create New Instrumentation**
 
