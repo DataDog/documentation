@@ -53,7 +53,7 @@ To generate an LLM Observability trace, you can run a Python or Node.js script.
    {{% /tab %}}
    {{< /tabs >}}
 
-2. Create a script, which will make a single OpenAI call.
+2. Create a script, which makes a single OpenAI call.
    
    {{< tabs >}}
    {{% tab "Python" %}}
