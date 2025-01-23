@@ -51,18 +51,21 @@ You can scope the definition to a specific service by adding the [service parame
 
 ### Missing endpoints
 
-The Endpoints list is based on APM tracing, so the first step is to make sure your services are instrumented. Click **Learn More** in the app, then select **Troubleshoot** to verify this.
+The Endpoints list is based on APM tracing. If you are missing endpoints, first confirm that your services are instrumented: 
+1. Click **Learn More** in the app.
+1. Select **Troubleshoot**.
+1. <INSERT STEPS TO VERIFY IF APP IS INSTRUMENTED>
 {{< img src="tracing/api_catalog/api-catalog-discovery-learn-more.png" alt="Learn More button in the app" style="width:30%;text-align: left;" >}}
 
 ### No telemetry data for OpenAPI file
 
-The Endpoints list is based on APM tracing, so info from traffic is displayed only when there are traces for the endpoint. After uploading an OpenAPI file, deployment data (Last Seen, environments, and more) is visible after Datadog ingests a span for the endpoint.
+The Endpoints list is derived from APM tracing, so traffic information is displayed only if traces are available for the endpoint. After uploading an OpenAPI file, deployment data becomes visible after Datadog ingests a span for the endpoint.
 
 ### No data for new monitor
 
-The Endpoints list is based on APM tracing, so info from traffic is displayed only when there are traces for the endpoint. If you do not see data in the monitor graph, one of the options below may apply:
-- The endpoint has not been used yet since it was registered/uploaded through OpenAPI.
-- Traces are sampled on the Agent side. Read [Ingestion Controls][5] for more information.
+The Endpoints list relies on APM tracing, so traffic information is displayed only when traces are available for the endpoint. If no data appears in the monitor graph, one of the following may apply:
+- The endpoint has not been accessed since it was registered and uploaded via OpenAPI.
+- Traces are sampled on the Agent side. For more details, see [Ingestion Controls][5].
 
 
 ## Further reading

@@ -24,7 +24,7 @@ The **Endpoints** list enables you to monitor and maintain the health of your en
 
 ## Monitoring endpoint performance
 
-Create and manage monitors to track endpoint health and performance and respond to performance issues. You can create alerts to identify intermittent performance degradation, outliers such as unusually slow response times or rare errors, and metrics that exceed defined thresholds like elevated error rates.
+Create and manage monitors to track endpoint health and performance and respond to performance issues. You can create alerts to identify intermittent performance degradation or outliers, such as unusually slow response times or rare errors. Alerts can also track metrics, like error rates, that exceed defined thresholds.
 
 Existing monitors are displayed in the **MONITORS** column:
 
@@ -37,11 +37,11 @@ To set up a monitor for an endpoint:
 1. Complete the information on the APM Monitor page.
 1. Click **Create**.
 
-For more information, read [Monitors][5].
+For more information, read [Monitors][1].
 
 ## Managing API test coverage
 
-Use Synthetic API tests to set up automated scheduled testing of your endpoints. These tests alert you to failures so you can diagnose and fix problems before they impact your users.
+Use Synthetic API tests to set up automated testing of your endpoints. These tests alert you to failures so you can diagnose and fix problems before they impact your users.
 
 To create a synthetic API test for an endpoint:
 
@@ -50,14 +50,11 @@ To create a synthetic API test for an endpoint:
 1. Configure the test settings on the New API Test page.
 1. Click **Create Test**.
 
-For more information, read [HTTP Testing][3].
+For more information, read [HTTP Testing][2].
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /service_catalog/customize/create_entries
-[2]: /service_catalog/manage
-[3]: /synthetics/api_tests/http_tests/
-[4]: /security/application_security/threats/
-[5]: /monitors/
+[1]: /monitors/
+[2]: /synthetics/api_tests/http_tests/

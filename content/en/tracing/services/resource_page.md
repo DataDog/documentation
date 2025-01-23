@@ -137,7 +137,7 @@ Consult the list of [traces][7] associated with this resource in the [Trace sear
 
 An endpoint is an HTTP resource exposed by a service at a specific URL path.
 
-In case of a resource that represents an endpoint, a new **Definition** section is added to the resource page.
+If a resource represents an endpoint, a new **Definition** section is added to the resource page.
 
 ## Further Reading
 

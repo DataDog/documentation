@@ -24,26 +24,26 @@ aliases:
     - /service_catalog/endpoints/discover_endpoints
 ---
 
-{{< img src="tracing/service_catalog/endpoints-list.png" alt="**Endpoints** list in the Service Catalog, showing performance-related information for each." style="width:100%;" >}}
+{{< img src="tracing/service_catalog/endpoints-list.png" alt="**Endpoints** list in the Service Catalog, showing performance-related information for each endpoint." style="width:100%;" >}}
 
 ## Overview
 
-The Service Catalog's [**Endpoints** list][12] unifies everything you need to know about your API endpoints in one place. It provides a comprehensive view of performance, reliability, and ownership across all your APIs, whether they're serving internal teams or external users. This helps you and your teams monitor mission-critical, API-driven features effectively and ensures they meet performance expectations.
+The Service Catalog's [**Endpoints** list][12] consolidates everything you need to know about your API endpoints. It provides a comprehensive view of performance, reliability, and ownership across all your APIs, whether they serve internal teams or external users. This helps you and your teams effectively monitor mission-critical, API-driven features and ensure they meet performance expectations.
 
 ## Use cases
 
-The Endpoints list combines data from across from Datadog to provide opinionated workflows. Here is what you can do:
+The **Endpoints** list combines data from across Datadog to provide opinionated workflows. You can do the following:
 
-- **Discover APIs automatically**: Maintain a complete inventory of all your public, private, and partner APIs, organized by endpoint.
+- **Discover APIs automatically**: Maintain a complete inventory of your public, private, and partner APIs, organized by endpoint.
 - **Surface correlated data**: Navigate from endpoints to traces, logs, and metrics from different Datadog sources.
 - **Identify performance issues**: Use metrics such as *Last Seen*, *Requests*, *Latency*, and *Errors* to track API health.
 - **Receive alerts**: Define performance expectations and thresholds that trigger alerts.
-- **Assign ownership information**: Set teams, on-call, and communication channel information to each endpoint so you know who to reach when errors occur.
+- **Assign ownership information**: Set teams, on-call, and communication channel information to each endpoint so you know whom to reach when errors occur.
 - **Ensure comprehensive coverage**: Track the status of API monitors, synthetic tests, and security signals, with direct links to detailed information for investigations.
 
 ## Getting started
 
-Your endpoints automatically populate in the list if you use [Datadog APM][8] to monitor HTTP services.
+Your endpoints automatically populate in the **Endpoints** list if you use [Datadog APM][8] to monitor HTTP services.
 
 ### Exploring endpoints
 
@@ -72,7 +72,7 @@ Read [Assigning Owners][6] for more information.
 
 ### Adding endpoints to the list
 
-Register automatically detected endpoints to groups of APIs to track their usage, set ownership, and set monitoring policies from a centralized location. Alternatively, upload an OpenAPI/Swagger file to benefit from the full value of the Endpoints list.
+Assign automatically detected endpoints to API groups to track usage, define ownership, and configure monitoring policies from a centralized location. Alternatively, upload an OpenAPI or Swagger file to unlock the full capabilities of the Endpoints list.
 
 Read [Adding Entries][9] for more information.
 
@@ -86,11 +86,11 @@ Read [Adding Metadata to APIs][10] for more information.
 
 | Term         | Definition                                                                                                                                                                                                                    |
 |--------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| API          | A set of protocols and tools that allow two applications to communicate.                                                                                                                                                      |
-| API endpoint | The address of a resource (URL) of a server or a service that implements the set of rules defined in the API, often through an HTTP, RESTful API interface. The API endpoint is responsible for making the API call response. |
+| API          | A set of protocols and tools that allows two applications to communicate.                                                                                                                                                      |
+| API endpoint | The address (URL) of a resource of a server or service that implements the rules defined in the API, often through an HTTP or RESTful interface. The API endpoint processes requests and provides the corresponding responses. |
 | Public APIs  | Customer-facing API endpoints that are accessible from the internet.                                                                                                                                                          |
-| Private APIs | Also called *internal APIs*. These are only for internal use in an organization and are used mainly for backend service communication. These are the most common type of API.                                                   |
-| Partner APIs | Also called *third-party APIs*. These are another organization's public endpoints that your organization uses to provide your services (for example, Stripe, Google, and Facebook).                                             |
+| Private APIs | Also called *internal APIs*. These are designed exclusively for internal use within an organization and are used mainly for backend service communication. These are the most common type of API.                                                   |
+| Partner APIs | Also called *third-party APIs*. These are public endpoints provided by another organization (for example, Stripe, Google, or Facebook) that your organization uses to provide its services.                                             |
 
 ## Further reading
 
