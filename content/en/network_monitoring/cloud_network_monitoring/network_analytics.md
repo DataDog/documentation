@@ -171,6 +171,9 @@ The following TCP metrics are available:
 | **TCP Retransmits** | TCP Retransmits represent detected failures that are retransmitted to ensure delivery. Measured in count of retransmits from the client. |
 | **TCP Latency** | Measured as TCP smoothed round-trip time, that is, the time between a TCP frame being sent and acknowledged. |
 | **TCP Jitter** | Measured as TCP smoothed round-trip time variance. |
+| **TCP Timeouts**  | The number of TCP connections that timed out from the perspective of the operating system. This can indicate general connectivity and latency issues.  |
+| **TCP Refusals**  | The number of TCP connections that were refused by the server. Typically this indicates an attempt to connect to an IP/Port that isn't receiving connections, or a firewall/security misconfiguration. |
+| **TCP Resets**  | The number of TCP connections that were reset by the server.  |
 | **Established Connections** | The number of TCP connections in an established state. Measured in connections per second from the client. |
 | **Closed Connections** | The number of TCP connections in a closed state. Measured in connections per second from the client. |
 
