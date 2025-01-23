@@ -35,7 +35,7 @@ Any AWS service that generates logs into a S3 bucket or a CloudWatch Log Group i
 | ---------------------------------- | -------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
 | [API Gateway][3]                   | [Enable Amazon API Gateway logs][4]                                                                            | [Manual][5] and [automatic](#automatically-set-up-triggers) log collection.                                                  |
 | [Cloudfront][6]                    | [Enable Amazon CloudFront logs][7]                                                                             | [Manual][8] and [automatic](#automatically-set-up-triggers) log collection.                                                  |
-| [CloudTrail][9]                    | [Enable AWS CloudTrail logs][9]                                                                                | [Manual][10] log collection. See [AWS Configuration for Cloud SIEM][11] if you are setting up AWS CloudTrail for Cloud SIEM. |
+| [CloudTrail][9]                    | [Enable AWS CloudTrail logs][9]                                                                                | [Manual][10] and [automatic](#automatically-set-up-triggers) log collection. See [AWS Configuration for Cloud SIEM][11] if you are setting up AWS CloudTrail for Cloud SIEM. |
 | [DynamoDB][12]                     | [Enable Amazon DynamoDB logs][13]                                                                              | [Manual][14] log collection.                                                                                                 |
 | [EC2][15]                          | `-`                                                                                                            | Use the [Datadog Agent][15] to send your logs to Datadog.                                                                    |
 | [ECS][16]                          | `-`                                                                                                            | [Use the docker agent to gather your logs][17].                                                                              |
@@ -45,6 +45,7 @@ Any AWS service that generates logs into a S3 bucket or a CloudWatch Log Group i
 | [Route 53][26]                     | [Enable Amazon Route 53 logs][27]                                                                              | [Manual][28] log collection.                                                                                                 |
 | [S3][29]                           | [Enable Amazon S3 logs][30]                                                                                    | [Manual][31] and [automatic](#automatically-set-up-triggers) log collection.                                                 |
 | [SNS][32]                          | SNS does not provide logs, but you can process logs and events that are transiting through to the SNS Service. | [Manual][33] log collection.                                                                                                 |
+| SSM                              | `-`                                                                                                            | [Automatic](#automatically-set-up-triggers) log collection.|
 | [RedShift][34]                     | [Enable Amazon Redshift logs][35]                                                                              | [Manual][36] and [automatic](#automatically-set-up-triggers) log collection.                                                 |
 | [Verified Access][37]              | [Enable Verified Access logs][38]                                                                              | [Manual][39] log collection.                                                                                                 |
 | [VPC][40]                          | [Enable Amazon VPC logs][41]                                                                                   | [Manual][42] log collection.                                                                                                 |
@@ -71,9 +72,12 @@ Datadog can automatically configure triggers on the Datadog Forwarder Lambda fun
 | Application ELB Access Logs | S3             |
 | Classic ELB Access Logs     | S3             |
 | CloudFront Access Logs      | S3             |
+| Cloudtrail Logs             | S3, Cloudwatch |
 | Lambda Logs                 | CloudWatch     |
+| Lambda@Edge Logs            | Cloudwatch     |
 | Redshift Logs               | S3             |
 | S3 Access Logs              | S3             |
+| SSM Command Logs            | Cloudwatch     |
 | Step Functions              | CloudWatch     |
 | Web Application Firewall    | S3, CloudWatch |
 
@@ -85,6 +89,8 @@ Datadog can automatically configure triggers on the Datadog Forwarder Lambda fun
     ```text
     "cloudfront:GetDistributionConfig",
     "cloudfront:ListDistributions",
+    "cloudtrail:GetTrail",
+    "cloudtrail:ListTrails",
     "elasticloadbalancing:DescribeLoadBalancers",
     "elasticloadbalancing:DescribeLoadBalancerAttributes",
     "lambda:InvokeFunction",
@@ -97,6 +103,8 @@ Datadog can automatically configure triggers on the Datadog Forwarder Lambda fun
     "s3:GetBucketNotification",
     "s3:ListAllMyBuckets",
     "s3:PutBucketNotification",
+    "ssm:GetServiceSetting",
+    "ssm:ListCommands",
     "states:ListStateMachines",
     "states:DescribeStateMachine",
     "wafv2:ListLoggingConfigurations",
@@ -109,11 +117,13 @@ Datadog can automatically configure triggers on the Datadog Forwarder Lambda fun
     | ----------------------------------------------------------- | ---------------------------------------------------------------------------- |
     | `cloudfront:GetDistributionConfig`                          | Get the name of the S3 bucket containing CloudFront access logs.             |
     | `cloudfront:ListDistributions`                              | List all CloudFront distributions.                                           |
+    | `cloudtrail:GetTrail`                                       | Get Trail logging information.                                               |
+    | `cloudtrail.ListTrails`                                     | List all Cloudtrail trails.                                                  |
     | `elasticloadbalancing:`<br>`DescribeLoadBalancers`          | List all load balancers.                                                     |
     | `elasticloadbalancing:`<br>`DescribeLoadBalancerAttributes` | Get the name of the S3 bucket containing ELB access logs.                    |
     | `lambda:InvokeFunction`                                     | Invoke a Lambda function.                                                    |
     | `lambda:List*`                                              | List all Lambda functions.                                                   |
-    | `lambda:GetPolicy`                                          | Gets the Lambda policy when triggers are to be removed.                      |
+    | `lambda:GetPolicy`                                          | Get the Lambda policy when triggers are to be removed.                       |
     | `redshift:DescribeClusters`                                 | List all Redshift clusters.                                                  |
     | `redshift:DescribeLoggingStatus`                            | Get the name of the S3 bucket containing Redshift Logs.                      |
     | `s3:GetBucketLogging`                                       | Get the name of the S3 bucket containing S3 access logs.                     |
@@ -121,14 +131,16 @@ Datadog can automatically configure triggers on the Datadog Forwarder Lambda fun
     | `s3:GetBucketNotification`                                  | Get existing Lambda trigger configurations.                                  |
     | `s3:ListAllMyBuckets`                                       | List all S3 buckets.                                                         |
     | `s3:PutBucketNotification`                                  | Add or remove a Lambda trigger based on S3 bucket events.                    |
+    | `ssm:GetServiceSetting`                                     | Get the SSM service setting for customer script log group name.              |
+    | `ssm:ListCommands`                                          | List all SSM commands.                                                       |
     | `states:ListStateMachines`                                  | List all Step Functions.                                                     |
     | `states:DescribeStateMachine`                               | Get logging details about a Step Function.                                   |
-    | `wafv2:ListLoggingConfigurations`                           | Lists all logging configurations of the Web Application Firewall.            |
+    | `wafv2:ListLoggingConfigurations`                           | List all logging configurations of the Web Application Firewall.            |
     | `logs:PutSubscriptionFilter`                                | Add a Lambda trigger based on CloudWatch Log events                          |
     | `logs:DeleteSubscriptionFilter`                             | Remove a Lambda trigger based on CloudWatch Log events                       |
-    | `logs:DescribeSubscriptionFilters`                          | Lists the subscription filters for the specified log group.                  |
+    | `logs:DescribeSubscriptionFilters`                          | List the subscription filters for the specified log group.                   |
 
-3. In the [AWS Integration page][44], select the AWS Account to collect logs from and click on the **Log Collection** tab.  
+3. In the [AWS Integration page][44], select the AWS Account to collect logs from and click on the **Log Collection** tab.
    {{< img src="logs/aws/aws_log_setup_step1.png" alt="The Log Collection tab of the AWS integration page for a specific AWS account with instructions to send AWS Services logs and a textbox to autosubscribe the Forwarder Lambda function by entering the ARN of the Forwarder Lambda function" popup="true" style="width:90%;" >}}
 4. Enter the ARN of the Lambda created in the previous section and click **Add**.
 5. Select the services from which you'd like to collect logs and click **Save**. To stop collecting logs from a particular service, deselect the log source.
@@ -146,7 +158,7 @@ If you are collecting logs from a CloudWatch log group, configure the trigger to
 {{< tabs >}}
 {{% tab "AWS console" %}}
 
-1. In the AWS console, go to **Lambda**. 
+1. In the AWS console, go to **Lambda**.
 2. Click **Functions** and select the Datadog Forwarder.
 3. Click **Add trigger** and select **CloudWatch Logs**.
 4. Select the log group from the dropdown menu.
@@ -161,13 +173,25 @@ If you are collecting logs from a CloudWatch log group, configure the trigger to
 For Terraform users, you can provision and manage your triggers using the [aws_cloudwatch_log_subscription_filter][1] resource. See sample code below.
 
 ```conf
+data "aws_cloudwatch_log_group" "some_log_group" {
+  name = "/some/log/group"
+}
+
+resource "aws_lambda_permission" "lambda_permission" {
+  action        = "lambda:InvokeFunction"
+  function_name = "datadog-forwarder" # this is the default but may be different in your case
+  principal     = "logs.amazonaws.com" # or logs.amazonaws.com.cn for China*
+  source_arn    = data.aws_cloudwatch_log_group.some_log_group.arn
+}
+
 resource "aws_cloudwatch_log_subscription_filter" "datadog_log_subscription_filter" {
   name            = "datadog_log_subscription_filter"
-  log_group_name  = <CLOUDWATCH_LOG_GROUP_NAME> # for example, /aws/lambda/my_lambda_name
+  log_group_name  = <CLOUDWATCH_LOG_GROUP_NAME> # for example, /some/log/group
   destination_arn = <DATADOG_FORWARDER_ARN> # for example,  arn:aws:lambda:us-east-1:123:function:datadog-forwarder
   filter_pattern  = ""
 }
 ```
+_*All use of Datadog Services in (or in connection with environments within) mainland China is subject to the disclaimer published in the [Restricted Service Locations](https://www.datadoghq.com/legal/restricted-service-locations/) section on our website._
 
 [1]: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_log_subscription_filter
 {{% /tab %}}

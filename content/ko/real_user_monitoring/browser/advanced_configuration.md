@@ -81,20 +81,24 @@ RUM Browser SDK는 사용자가 새 페이지에 액세스할 때마다 또는 �
    - View Name: 기본값은 페이지 URL 경로입니다.
    - Service: RUM 애플리케이션을 만들 때 지정된 기본 서비스로 기본 설정됩니다.
    - Version: RUM 애플리케이션을 만들 때 지정된 기본 버전으로 기본 설정됩니다.
+   - 컨텍스트: 버전 5.28.0][20]부터 뷰(View) 및 뷰의 하위 이벤트에 컨텍스트를 추가할 수 있습니다.
 
    자세한 내용은 [브라우저 모니터링 설정][4]을 참조하세요.
 
    <details open>
-     <summary>Latest version</summary>
-   The following example manually tracks the pageviews on the <code>checkout</code> page in a RUM application. Use <code>checkout</code> for the view name and associate the <code>purchase</code> service with version <code>1.2.3</code>.
+     <summary>최신 버전</summary>
+   다음 예는 RUM 애플리케이션의 <code>결제</code> 페이지에서 페이지 조회수를 수동으로 추적하는 방법을 보여줍니다. 뷰(View) 이름에 <code>체크아웃(checkout)을</code> 사용하고 <code>구매</code> 서비스 를 버전 <code>1.2.3과</code> 연결합니다.
 
    {{< tabs >}}
    {{% tab "NPM" %}}
    ```javascript
    datadogRum.startView({
-     name: 'checkout',
-     service: 'purchase',
-     version: '1.2.3'
+        name: 'checkout',
+        service: 'purchase',
+        version: '1.2.3',
+        context: {
+            payment: 'Done'
+        },
    })
    ```
 
@@ -102,29 +106,73 @@ RUM Browser SDK는 사용자가 새 페이지에 액세스할 때마다 또는 �
    {{% tab "CDN async" %}}
    ```javascript
    window.DD_RUM.onReady(function() {
-       window.DD_RUM.startView({
-         name: 'checkout',
-         service: 'purchase',
-         version: '1.2.3'
-       })
+      window.DD_RUM.startView({
+            name: 'checkout',
+            service: 'purchase',
+            version: '1.2.3',
+            context: {
+                payment: 'Done'
+            },
+      })
    })
    ```
    {{% /tab %}}
    {{% tab "CDN sync" %}}
    ```javascript
    window.DD_RUM && window.DD_RUM.startView({
-     name: 'checkout',
-     service: 'purchase',
-     version: '1.2.3'
+        name: 'checkout',
+        service: 'purchase',
+        version: '1.2.3',
+        context: {
+            payment: 'Done'
+        },
    })
    ```
    {{% /tab %}}
    {{< /tabs >}}
-   </details>
+
+</details>
+</details>
+<summary><code>v5.28.03 이전</code>
+다음 예제는 RUM 애플리케이션의 <code>체크아웃 </code>페이지에서 페이지 조회수를 수동으로 추적하는 방법을 보여줍니다. 뷰 이름에 <code>체크아웃</code>을 사용하고 서비스 <code>구매</code>를 버전 <code>1.2.3</code>과 연결합니다.
+
+{{< tabs >}}
+{{% tab "NPM" %}}
+```javascript
+datadogRum.startView({
+  name: 'checkout',
+  service: 'purchase',
+  version: '1.2.3'
+})
+```
+
+{{% /tab %}}
+{{% tab "CDN async" %}}
+```javascript
+window.DD_RUM.onReady(function() {
+  window.DD_RUM.startView({
+    name: 'checkout',
+    service: 'purchase',
+    version: '1.2.3'
+  })
+})
+```
+{{% /tab %}}
+{{% tab "CDN sync" %}}
+```javascript
+window.DD_RUM && window.DD_RUM.startView({
+  name: 'checkout',
+  service: 'purchase',
+  version: '1.2.3'
+})
+```
+{{% /tab %}}
+{{< /tabs >}}
+</details>
 
    <details>
-     <summary>before <code>v4.13.0</code></summary>
-   The following example manually tracks the pageviews on the <code>checkout</code> page in a RUM application. No service or version can be specified.
+     <summary> <code>v4.13.0</code> 이전</summary>
+   다음 예제는 RUM 애플리케이션에서 <code>체크아웃</code> 페이지의 페이지 조회수를 수동으로 추적하는 방법을 보여줍니다. 서비스 또는 버전을 지정할 수 없습니다. 
 
    {{< tabs >}}
    {{% tab "NPM" %}}
@@ -301,6 +349,45 @@ React, Angular, Vue 또는 다른 프론트엔드 프레임워크를 사용하�
    {{% /tab %}}
    {{< /tabs >}}
 
+### 뷰 이름 설정
+
+`setViewName(name: string)`을 사용하여 현재 뷰의 이름을 업데이트합니다. 이렇게 하면 새 뷰를 시작하지 않고도  사용 중에 뷰 이름을 변경할 수 있습니다.
+
+{{< tabs >}}
+{{% tab "NPM" %}}
+```javascript
+import { datadogRum } from '@datadog/browser-rum';
+
+datadogRum.setViewName('<VIEW_NAME>');
+
+// 코드 예시
+datadogRum.setViewName('Checkout');
+```
+{{% /tab %}}
+{{% tab "CDN async" %}}
+```javascript
+window.DD_RUM.onReady(function() {
+    window.DD_RUM.setViewName('<VIEW_NAME>');
+})
+
+// 코드 예시
+window.DD_RUM.onReady(function() {
+    window.DD_RUM.setViewName('Checkout');
+})
+```
+{{% /tab %}}
+{{% tab "CDN sync" %}}
+```javascript
+window.DD_RUM && window.DD_RUM.setViewName('<VIEW_NAME>');
+
+// 코드 예시
+window.DD_RUM && window.DD_RUM.setViewName('Checkout');
+```
+{{% /tab %}}
+{{< /tabs >}}
+
+**참고**: 뷰 이름을 변경하면 메서드가 호출된 시점부터 뷰와 그 하위 이벤트에 영향을 미칩니다.
+
 ## RUM 데이터 강화 및 제어
 
 RUM Browser SDK는 RUM 이벤트를 캡처하고 해당 이벤트의 주요 속성을 입력합니다. `beforeSend` 콜백 기능을 통해 Datadog으로 전송되기 전 RUM Browser SDK에서 수집한 모든 이벤트에 액세스할 수 있습니다.
@@ -322,9 +409,9 @@ function beforeSend(event, context)
 | RUM 이벤트 유형   | 컨텍스트                   |
 |------------------|---------------------------|
 | 보기             | [위치][6]                  |
-| 작업           | [이벤트][7]                     |
-| 리소스 (XHR)   | [XMLHttpRequest][8] 및 [PerformanceResourceTiming][9]            |
-| 리소스 (Fetch) | [요청][10], [응답][11] 및 [PerformanceResourceTiming[9]      |
+| 작업           | [이벤트][7] 및 처리 스택                     |
+| 리소스 (XHR)   | [XMLHttpRequest][8], [PerformanceResourceTiming][9] 및 처리 스택            |
+| 리소스 (Fetch) | [요청][10], [응답][11], [성능 자원 타이밍][9] 및 처리 스택      |
 | 리소스 (기타) | [PerformanceResourceTiming][9] |
 | 오류            | [오류][12]                     |
 | 긴 작업        | [PerformanceLongTaskTiming][13] |
@@ -454,12 +541,14 @@ window.DD_RUM &&
 |   `view.url`            |   문자열  |   활성화된 웹 페이지의 URL.                            |
 |   `view.referrer`       |   문자열  |   현재 요청된 페이지로 연결되는 링크를 따라간 이전 웹 페이지의 URL.  |
 |   `view.name`           |   문자열  |   현재 보기의 이름.                            |
+|   `service`             |   문자열  |   애플리케이션의 서비스 이름입니다.                                                            |
+|   `version`             |   문자열  |   애플리케이션 버전(예: 1.2.3, 6c44da20, 2020.02.13)입니다.                          |
 |   `action.target.name`  |   문자열  |   사용자가 상호 작용한 요소. 자동으로 수집된 액션에만 해당합니다.              |
 |   `error.message`       |   문자열  |   오류를 설명하는 간결하고 사람이 읽을 수 있는 한 줄 메시지.                                 |
 |   `error.stack `        |   문자열  |   스택 트레이스 또는 오류에 대한 보완 정보.                                     |
 |   `error.resource.url`  |   문자열  |   오류를 트리거한 리소스 URL.                                                        |
 |   `resource.url`        |   문자열  |   리소스 URL.                                                                                 |
-|   `context`        |   개체  |   [Global Context API](#global-context)로 추가하거나 수동으로 이벤트를 생성할 때 추가된 속성(예: `addError` 및 `addAction`)입니다. RUM 보기 이벤트 `context`는 읽기 전용입니다.                                                                                 |
+|   `context`        |   개체  |   [글로벌 컨텍스트 API](#global-context), [뷰 컨텍스트 API](#view-context) 또는 수동으로 이벤트 생성 시 추가된 속성(예: `addError` 및 **`addAction`**)입니다.                                                                                 |
 
 RUM Browser SDK는 위에 나열되지 않은 이벤트 속성에 대한 수정 사항은 무시합니다. 이벤트 속성에 대한 자세한 내용은 [RUM Browser SDK GitHub 리포지토리][15]를 참조하세요.
 
@@ -522,14 +611,15 @@ window.DD_RUM &&
 
 ## 사용자 세션
 
-RUM 세션에 사용자 정보를 추가하면 다음과 같이 도움이 될 수 있습니다.
+RUM 세션에 사용자 정보를 추가하면 다음과 같은 장점이 있습니다.
+
 * 특정 사용자의 활동 경로를 추적합니다.
 * 오류의 영향을 가장 많이 받는 사용자를 파악합니다.
 * 가장 중요한 사용자를 위해 성능을 모니터링합니다.
 
 {{< img src="real_user_monitoring/browser/advanced_configuration/user-api.png" alt="RUM UI의 사용자 API" >}}
 
-다음 속성은 선택 사항이지만, Datadog은 이 중 하나 이상을 제공할 것을 권장합니다:
+다음 속성은 선택 사항이나, Datadog에서는 이 중에서 최소 하나의 정보를 제공하는 것을 강력히 권고합니다. 예를 들어, 세션에서 사용자 ID를 설정해서 일부 기본 RUM 대시보드에서 관련 정보를 확인할 수 있는데, 이를 위해 `usr.id`가 쿼리 일부로 사용됩니다.
 
 | 속성  | 유형 | 설명                                                                                              |
 |------------|------|----------------------------------------------------------------------------------------------------|
@@ -793,6 +883,108 @@ acceptCookieBannerButton.addEventListener('click', () => {
 {{% /tab %}}
 {{< /tabs >}}
 
+## 뷰 컨텍스트
+
+[버전 5.28.0][20]부터 뷰 이벤트의 컨텍스트를 수정할 수 있습니다. 컨텍스트는 현재 뷰에만 추가할 수 있으며 `startView`, `setViewContext`, `setViewContextProperty` 함수로 하위 이벤트(예: `action`, `error`, `timing`)를 자동으로 채웁니다.
+
+### 컨텍스트 포함 뷰 시작
+
+선택적으로 [`startView` 옵션](#override-default-rum-view-names)을 사용하여 뷰를 시작하면서 컨텍스트를 정의합니다.
+
+### 뷰 컨텍스트 추가
+
+`setViewContextProperty(key: string, value: any)` API를 사용하여 RUM 뷰 이벤트 및 해당 하위 이벤트의 컨텍스트를 보강하거나 수정합니다.
+
+{{< tabs >}}
+{{% tab "NPM" %}}
+```javascript
+import { datadogRum } from '@datadog/browser-rum';
+
+datadogRum.setViewContextProperty('<CONTEXT_KEY>', '<CONTEXT_VALUE>');
+
+// 코드 예시
+datadogRum.setViewContextProperty('activity', {
+    hasPaid: true,
+    amount: 23.42
+});
+```
+{{% /tab %}}
+{{% tab "CDN async" %}}
+```javascript
+window.DD_RUM.onReady(function() {
+    window.DD_RUM.setViewContextProperty('<CONTEXT_KEY>', '<CONTEXT_VALUE>');
+})
+
+// 코드 예시
+window.DD_RUM.onReady(function() {
+    window.DD_RUM.setViewContextProperty('activity', {
+        hasPaid: true,
+        amount: 23.42
+    });
+})
+```
+{{% /tab %}}
+{{% tab "CDN sync" %}}
+```javascript
+window.DD_RUM && window.DD_RUM.setViewContextProperty('<CONTEXT_KEY>', '<CONTEXT_VALUE>');
+
+// 코드 예시
+window.DD_RUM && window.DD_RUM.setViewContextProperty('activity', {
+    hasPaid: true,
+    amount: 23.42
+});
+```
+{{% /tab %}}
+{{< /tabs >}}
+
+
+### 뷰 컨텍스트 대체
+
+RUM 뷰 이벤트 및 해당 하위 이벤트의 컨텍스트를 `setViewContext(context: Context)` API로 바꿉니다.
+
+{{< tabs >}}
+{{% tab "NPM" %}}
+
+```javascript
+import { datadogRum } from '@datadog/browser-rum';
+datadogRum.setViewContext({ '<CONTEXT_KEY>': '<CONTEXT_VALUE>' });
+
+// 코드 예시
+datadogRum.setViewContext({
+    originalUrl: 'shopist.io/department/chairs',
+});
+```
+
+{{% /tab %}}
+{{% tab "CDN async" %}}
+```javascript
+window.DD_RUM.onReady(function() {
+    window.DD_RUM.setViewContext({ '<CONTEXT_KEY>': '<CONTEXT_VALUE>' });
+})
+
+// 코드 예시
+window.DD_RUM.onReady(function() {
+    window.DD_RUM.setViewContext({
+      originalUrl: 'shopist.io/department/chairs',
+    })
+})
+```
+{{% /tab %}}
+{{% tab "CDN sync" %}}
+
+```javascript
+window.DD_RUM &&
+    window.DD_RUM.setViewContext({ '<CONTEXT_KEY>': '<CONTEXT_VALUE>' });
+
+// 코드 예시
+window.DD_RUM &&
+    window.DD_RUM.setViewContext({
+        originalUrl: 'shopist.io/department/chairs',
+    });
+```
+
+{{% /tab %}}
+{{< /tabs >}}
 ## 글로벌 컨텍스트
 
 ### 글로벌 컨텍스트 속성 추가
@@ -1012,6 +1204,91 @@ const context = window.DD_RUM && window.DD_RUM.getGlobalContext();
 - `localStorage` 데이터는 동일한 출처 (login.site.com ≠ app.site.com)에서만 공유되므로 이 기능은 `trackSessionAcrossSubdomains` 옵션과 호환되지 않습니다.
 - `localStorage`는 출처별로 5 MiB라는 제한이 있으므로 로컬 스토리지에 저장된 애플리케이션별 데이터, Datadog 컨텍스트 및 기타 타사 데이터는 이 한도 내에 있어야 문제를 방지할 수 있습니다.
 
+## 마이크로 프론트엔드
+
+버전 5.22부터 RUM 브라우저 SDK는 마이크로 프론트엔드 아키텍처를 지원합니다. 이 메커니즘은 스택트레이스를 기반으로 합니다. 이를 사용하려면 애플리케이션의 파일 경로와 파일 이름에서 서비스 및 버전 속성을 추출할 수 있어야 합니다.
+
+### 사용 방법
+
+`beforeSend` 속성에서 서비스 및 버전 속성을 재정의할 수 있습니다. 도움말에서 이벤트 출처를 확인하려면 `context.handlingStack` 속성을 사용합니다.
+
+{{< tabs >}}
+{{% tab "NPM" %}}
+```javascript
+import { datadogRum } from '@datadog/browser-rum';
+
+const SERVICE_REGEX = /some-pathname\/(?<service>\w+)\/(?<version>\w+)\//;
+
+datadogRum.init({
+    ...,
+    beforeSend: (event, context) => {
+        const stack = context?.handlingStack || event?.error?.stack;
+        const { service, version } = stack?.match(SERVICE_REGEX)?.groups;
+
+        if (service && version) {
+          event.service = service;
+          event.version = version;
+        }
+
+        return true;
+    },
+});
+```
+{{% /tab %}}
+{{% tab "CDN async" %}}
+```javascript
+const SERVICE_REGEX = /some-pathname\/(?<service>\w+)\/(?<version>\w+)\//;
+
+window.DD_RUM.onReady(function() {
+    window.DD_RUM.init({
+        ...,
+        beforeSend: (event, context) => {
+            const stack = context?.handlingStack || event?.error?.stack;
+            const { service, version } = stack?.match(SERVICE_REGEX)?.groups;
+
+            if (service && version) {
+                event.service = service;
+                event.version = version;
+            }
+
+            return true;
+        },
+    });
+});
+```
+{{% /tab %}}
+{{% tab "CDN sync" %}}
+```javascript
+const SERVICE_REGEX = /some-pathname\/(?<service>\w+)\/(?<version>\w+)\//;
+
+window.DD_RUM && window.DD_RUM.init({
+    ...,
+    beforeSend: (event, context) => {
+        const stack = context?.handlingStack || event?.error?.stack;
+        const { service, version } = stack?.match(SERVICE_REGEX)?.groups;
+
+        if (service && version) {
+          event.service = service;
+          event.version = version;
+        }
+
+        return true;
+    },
+});
+```
+{{% /tab %}}
+{{< /tabs >}}
+
+RUM 탐색기에서 수행한 모든 쿼리에 대해 서비스 속성을 사용하여 이벤트를 필터링할 수 있습니다.
+
+### 한계
+
+일부 이벤트는 출처와 연결되지 않아 관련 처리 스택이 없습니다. 여기에는 다음이 포함됩니다.
+- 작업 이벤트 자동으로 수집됨
+- XHR 및 Fetch 외 리소스 이벤트
+- 뷰 이벤트 (대신 [기본 RUM 뷰 이름을 재정의][21]할 수 있음)
+- CORS 및 CSP 위반
+
 ## 참고 자료
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -1019,7 +1296,7 @@ const context = window.DD_RUM && window.DD_RUM.getGlobalContext();
 [1]: /ko/real_user_monitoring/browser/data_collected/
 [2]: /ko/real_user_monitoring/browser/monitoring_page_performance/
 [3]: https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md#v2170
-[4]: /ko/real_user_monitoring/browser/setup
+[4]: /ko/real_user_monitoring/browser/setup/
 [5]: https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md#v2130
 [6]: https://developer.mozilla.org/en-US/docs/Web/API/Location
 [7]: https://developer.mozilla.org/en-US/docs/Web/API/Event
@@ -1035,3 +1312,5 @@ const context = window.DD_RUM && window.DD_RUM.getGlobalContext();
 [17]: https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md#v4130
 [18]: /ko/data_security/real_user_monitoring/#browser-rum-use-of-cookies
 [19]: https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage
+[20]: https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md#v5280
+[21]: /ko/real_user_monitoring/browser/advanced_configuration#override-default-rum-view-names

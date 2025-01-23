@@ -59,7 +59,7 @@ Use the syntax `*:search_term` to perform a full-text search across all log attr
 | Search syntax | Search type | Description                                                                                  |
 | ------------- | ----------- | -------------------------------------------------------------------------------------------- |
 | `*:hello` | Full-text   | Searches all log attributes for the exact string `hello`.                                    |
-| `*:hello*`| Full-text   | Searches all log attributes for strings that starts with `hello`. For example, `hello_world`.|
+| `*:hello*`| Full-text   | Searches all log attributes for strings with `hello`. For example, `hello_world`.|
 
 ### Multiple terms with exact match example
 

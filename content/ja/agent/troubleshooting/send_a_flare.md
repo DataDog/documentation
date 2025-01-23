@@ -25,7 +25,7 @@ title: Agent フレア
 - Remote Configuration を使用した [Datadog サイトからのフレアの送信](#send-a-flare-from-the-datadog-site)。
 - [手動送信](#manual-submission)。
 
-フレアは Agent のすべての構成ファイルを収集し、1 つのアーカイブファイルに記録します。パスワード、API キー、プロキシ資格情報、SNMP コミュニティ文字列などの機密情報は削除されます。
+フレアは、Agent のすべてのコンフィギュレーションファイルとログをアーカイブファイルに収集し、パスワード、API キー、プロキシ認証情報、SNMP コミュニティ文字列などの機密情報を削除します。また、APM が有効な場合、利用可能であれば[トレーサーデバッグログ][4]も含まれます。
 
 Datadog Agent は完全にオープンソースなので、[コードの動作を検証][1]することができます。フレアは、アップロードの前に確認を求めるため、必要に応じて送信前にフレアを確認できます。
 
@@ -35,7 +35,7 @@ Datadog サイトからフレアを送信するには、Agent の [Fleet Automat
 
 {{% remote-flare %}}
 
-{{< img src="agent/fleet_automation/fleet-automation-flares2.png" alt="The Send Ticket button launches a form to send a flare for an existing or new support ticket" style="width:70%;" >}}
+{{< img src="agent/fleet_automation/fleet-automation-flares2.png" alt="Send Ticket ボタンは、既存または新規のサポートチケットに対してフレアを送信するためのフォームを起動します" style="width:70%;" >}}
 
 ## `flare` コマンドを使用してフレアを送信する
 
@@ -156,3 +156,4 @@ kubectl cp datadog-<pod-name>:tmp/datadog-agent-<date-of-the-flare>.zip flare.zi
 [1]: https://github.com/DataDog/datadog-agent/tree/main/pkg/flare
 [2]: /ja/agent/fleet_automation/
 [3]: /ja/agent/remote_config#enabling-remote-configuration
+[4]: /ja/tracing/troubleshooting/tracer_debug_logs/?code-lang=dotnet#data-collected

@@ -23,7 +23,7 @@ categories:
 - nube
 - aws
 - recopilación de logs
-custom_kind: integration
+custom_kind: integración
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/eks_fargate/README.md
 display_on_public_website: true
@@ -31,7 +31,7 @@ draft: false
 git_integration_title: eks_fargate
 integration_id: eks-fargate
 integration_title: Amazon EKS en AWS Fargate
-integration_version: 6.0.0
+integration_version: 6.1.0
 is_public: true
 manifest_version: 2.0.0
 name: eks_fargate
@@ -77,7 +77,7 @@ tile:
 
 Amazon EKS en AWS Fargate es un servicio gestionado de Kubernetes que automatiza ciertos aspectos del despliegue y mantenimiento de cualquier entorno estándar de Kubernetes. AWS Fargate gestiona los nodos de Kubernetes y los abstrae del usuario.
 
-**Nota**: Network Performance Monitoring (NPM) no es compatible con EKS Fargate.
+**Nota**: Cloud Network Monitoring (CNM) no es compatible con EKS Fargate.
 
 ## Configuración
 
@@ -379,20 +379,30 @@ La siguiente configuración permite que el Cluster Agent se comunique con los si
 
 ###### Configuración
 
-1. Instala el Datadog Agent con el Cluster Agent y el Admission Controller habilitados:
+1. Crea un archivo, `datadog-values.yaml`, que contenga:
 
    ```sh
-   helm install datadog datadog/datadog -n datadog-agent \
-       --set datadog.clusterName=cluster-name \
-       --set agents.enabled=false \
-       --set datadog.apiKeyExistingSecret=datadog-secret \
-       --set clusterAgent.tokenExistingSecret=datadog-secret \
-       --set clusterAgent.admissionController.agentSidecarInjection.enabled=true \
-       --set clusterAgent.admissionController.agentSidecarInjection.provider=fargate
+   datadog:
+     clusterName: <CLUSTER_NAME>
+     apiKeyExistingSecret: datadog-secret
+   agents:
+     enabled: false
+   clusterAgent:
+     tokenExistingSecret: datadog-secret
+     admissionController:
+       agentSidecarInjection:
+         enabled: true
+         provider: fargate
    ```
    **Nota**: Utiliza `agents.enabled=false` para un clúster exclusivo de Fargate. En el caso de un clúster mixto, define `agents.enabled=true` para crear un DaemonSet destinado a la monitorización de cargas de trabajo en instancias de EC2.
 
-2. Una vez que el Cluster Agent alcanza un estado de ejecución y registra los webhooks mutados del Admission Controller, se inyecta automáticamente un sidecar del Agent en cualquier pod creado con la etiqueta `agent.datadoghq.com/sidecar:fargate`. 
+2. Despliega el gráfico:
+
+   ```bash
+   helm install datadog-agent -f datadog-values.yaml datadog/datadog
+   ```
+
+3. Una vez que el Cluster Agent alcanza un estado de ejecución y registra los webhooks mutados del Admission Controller, se inyecta automáticamente un sidecar del Agent en cualquier pod creado con la etiqueta `agent.datadoghq.com/sidecar:fargate`. 
    **El Admission Controller no muta los pods ya creados**.
 
 **Resultado de ejemplo**
@@ -636,8 +646,8 @@ En ambos casos, es necesario modificar el manifiesto del sidecar del Datadog Age
 [3]: https://docs.datadoghq.com/es/infrastructure/livecontainers/#kubernetes-resources-view
 [4]: https://docs.datadoghq.com/es/agent/cluster_agent/clusterchecks/#overview
 [5]: http://docs.datadoghq.com/agent/cluster_agent/setup/
-{{% /tab %}}
-{{< /tabs >}}
+{{% /tab%}}
+{{< /tabs>}}
 
 
 ## Rendimiento del clúster
@@ -768,7 +778,7 @@ spec:
 
 El Datadog Agent v6.19+ admite contenedores activos en la integración de EKS Fargate. Los contenedores activos aparecen en la página [Containers][19] (Contenedores).
 
-### Procesos activos
+### Live Processes
 
 El Datadog Agent v6.19+ admite procesos activos en la integración de EKS Fargate. Los procesos activos aparecen en la página [Processes][21] (Procesos). Para habilitar los procesos activos, [habilita shareProcessNamespace en las especificaciones del pod][22].
 

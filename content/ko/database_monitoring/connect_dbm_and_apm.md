@@ -30,12 +30,10 @@ title: 데이터베이스 모니터링과 트레이스 상호 연결
 
 | DD_DBM_PROPAGATION_MODE | Postgres  |   MySQL     | SQL 서버 |  Oracle   |
 |:------------------------|:---------:|:-----------:|:----------:|:---------:|
-| `full`                  | {{< X >}} | {{< X >}} * |    {{< X >}} ** |           |
+| `full`                  | {{< X >}} | {{< X >}} * | {{< X >}}  | {{< X >}} |
 | `service`               | {{< X >}} | {{< X >}}   | {{< X >}}  | {{< X >}} |
 
 \* Aurora MySQL의 전체 전파 모드에는 버전 3이 필요합니다.
-
-\*\* SQL Server에서는 Java와 .NET 트레이서만 지원합니다.
 
 **지원되는 애플리케이션 트레이서 및 드라이버**
 
@@ -45,7 +43,7 @@ title: 데이터베이스 모니터링과 트레이스 상호 연결
 |                                          | [database/sql][4]      | {{< X >}} | {{< X >}} | `service` 모드만 | `service` 모드만 |
 |                                          | [sqlx][5]              | {{< X >}} | {{< X >}} | `service` 모드만 | `service` 모드만 |
 | **Java** [dd-trace-java][23] >= 1.11.0   |                        |           |           |                     |                     |
-|                                          | [jdbc][22]             | {{< X >}} | {{< X >}} | {{< X >}} ** | `service` 모드만 |
+|                                          | [jdbc][22]             | {{< X >}} | {{< X >}} | {{< X >}} **        | {{< X >}} ***       |
 | **Ruby:** [dd-trace-rb][6] >= 1.8.0      |                        |           |           |                     |                     |
 |                                          | [pg][8]                | {{< X >}} |           |                     |                     |
 |                                          | [mysql2][7]            |           | {{< X >}} |                     |                     |
@@ -61,7 +59,8 @@ title: 데이터베이스 모니터링과 트레이스 상호 연결
 |                                          | [Npgsql][16] *         | {{< X >}} |           |                     |                     |
 |                                          | [MySql.Data][17] *     |           | {{< X >}} |                     |                     |
 |                                          | [MySqlConnector][18] * |           | {{< X >}} |                     |                     |
-|                                          | [ADO.NET][24] *        |           |           | {{< X >}} **       |                     |
+|                                          | [System.Data.SqlClient][24] * |    |           | {{< X >}} **        |                     |
+|                                          | [Microsoft.Data.SqlClient][32] * | |           | {{< X >}} **        |                     |
 | **PHP**  [dd-trace-php][19] >= 0.86.0    |                        |           |           |                     |                     |
 |                                          | [pdo][20]              | {{< X >}} | {{< X >}} |                     |                     |
 |                                          | [MySQLi][21]           |           | {{< X >}} |                     |                     |
@@ -72,13 +71,17 @@ title: 데이터베이스 모니터링과 트레이스 상호 연결
 
 \* [CommandType.StoredProcedure][25] 지원 안 됨
 
-\*\* 풀 모드 SQL Server/Java:
-- 클라이언트가 쿼리를 발행하면 계측에서 `SET context_info` 명령을 실행하며, 데이터베이스를 추가 왕복합니다.
-- 애플리케이션에서 `context_info`를 사용해 애플리케이션을 계측하는 경우, APM 트레이서가 재정의합니다.
-- 요구 사항:
-  - 에이전트 버전 7.55.0 이상
-  - Java 트레이서 버전 1.39.0 이상
-  - .NET 트레이서 버전 3.3 이상
+\*\* 자바/.NET에 대한 전체 모드 SQL Server:
+  - 클라이언트가 쿼리를 발행하면 계측에서 `SET context_info` 명령을 실행하며, 데이터베이스를 추가 왕복합니다.
+  - 애플리케이션에서 `context_info`를 사용해 애플리케이션을 계측하는 경우, APM 트레이서가 재정의합니다.
+  - 요구 사항:
+    - 에이전트 버전 7.55.0 이상
+    - Java 트레이서 버전 1.39.0 이상
+    - .NET 트레이서 버전 3.3 이상
+
+\*\*\* Java용 풀 모드 Oracle:
+  - 이 계측은 `V$SESSION.ACTION`를 재정의합니다.
+  - 사전 요건: Java 트레이서 1.45 이상
 
 ## 설정
 최상의 사용자 경험을 위해 다음 환경 변수가 애플리케이션에 설정되어 있는지 확인하세요.
@@ -93,31 +96,34 @@ DD_VERSION=(application version)
 {{% tab "Go" %}}
 
 앱 종속성을 업데이트하여 [dd-trace-go@v1.44.0][1] 이상을 포함합니다.
-```
-go get gopkg.in/DataDog/dd-trace-go.v1@v1.44.0
+```shell
+go get gopkg.in/DataDog/dd-trace-go.v1@v1.44.0 # 1.x
+# go get github.com/DataDog/dd-trace-go/v2 # 2.x
 ```
 
 코드를 업데이트하여 `contrib/database/sql` 패키지를 내보내세요.
 ```go
 import (
    "database/sql"
-   "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
-   sqltrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/database/sql"
+   "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer" // 1.x
+   sqltrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/database/sql" // 1.x
+   // "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer" // 2.x
+   // sqltrace "github.com/DataDog/dd-trace-go/contrib/database/sql/v2" // 2.x
 )
 ```
 
 다음 메서드 중 하나를 사용해 데이터베이스 모니터링 전파를 활성화합니다.
-1. 환경 변수:
+- 환경 변수:
    `DD_DBM_PROPAGATION_MODE=full`
 
-2. 드라이버 등록 동안 코드 사용하기:
+- 드라이버 등록 동안 코드 사용하기:
    ```go
-   sqltrace.Register("postgres", &pq.Driver{}, sqltrace.WithDBMPropagation(tracer.DBMPropagationModeFull), sqltrace.WithServiceName("my-db-service"))
+   sqltrace.Register("postgres", &pq.Driver{}, sqltrace.WithDBMPropagation(tracer.DBMPropagationModeFull), sqltrace.WithService("my-db-service"))
    ```
 
-3. `sqltrace.Open` 코드 사용하기:
+- `sqltrace.Open` 코드 사용하기:
    ```go
-   sqltrace.Register("postgres", &pq.Driver{}, sqltrace.WithServiceName("my-db-service"))
+   sqltrace.Register("postgres", &pq.Driver{}, sqltrace.WithService("my-db-service"))
 
    db, err := sqltrace.Open("postgres", "postgres://pqgotest:password@localhost/pqgotest?sslmode=disable", sqltrace.WithDBMPropagation(tracer.DBMPropagationModeFull))
    if err != nil {
@@ -129,22 +135,24 @@ import (
 ```go
 import (
     "database/sql"
-    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
-    sqltrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/database/sql"
+    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer" // 1.x
+   sqltrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/database/sql" // 1.x
+   // "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer" // 2.x
+   // sqltrace "github.com/DataDog/dd-trace-go/contrib/database/sql/v2" // 2.x
 )
 
 func main() {
     // 첫 번째 단계는 드라이버 등록 시 DBM 전파 모드를 설정하는 것입니다. 이는 또한
-    // sqltrace에서도 가능하니 참고하세요. 열기를 통해 기능에 대한 보다 세분화된 통제를 확인하세요.
+    // sqltrace에서도 가능하니 참고하세요. 열면 기능을 더 세부적으로 제어할 수 있습니다.
     sqltrace.Register("postgres", &pq.Driver{}, sqltrace.WithDBMPropagation(tracer.DBMPropagationModeFull))
 
-    // 열기 호출을 진행합니다.
+    // 이후에 열기 호출을 진행합니다.
     db, err := sqltrace.Open("postgres", "postgres://pqgotest:password@localhost/pqgotest?sslmode=disable")
     if err != nil {
         log.Fatal(err)
     }
 
-    // 그 뒤 계속하여 평소처럼 데이터베이스 /sql 패키지와 트레이싱을 함께 사용합니다.
+    // 이후 일반 작업할 때와 마찬가지로 추적과 함께 database/sql 패키지를 사용합니다.
     rows, err := db.Query("SELECT name FROM users WHERE age=?", 27)
     if err != nil {
         log.Fatal(err)
@@ -193,7 +201,15 @@ public class Application {
 }
 ```
 
-**참고**: 준비된 문장은 `full` 모드에서 지원되지 않으며, 준비된 문장을 사용하는 모든 JDBC API 호출은 자동으로 `service` 모드로 다운그레이드됩니다. 대부분의 자바(Java) SQL 라이브러리는 기본적으로 준비된 문장을 사용하므로, **대부분의** 자바(Java) 애플리케이션은 `service` 모드만 사용할 수 있습니다.
+**트레이서 버전 1.44 이상**:
+다음 방법 중 **하나**를 사용해 준비한 Postgres 추적 명령문을 활성화합니다.
+- 시스템 속성 `dd.dbm.trace_prepared_statements=true` 설정
+- 환경 변수 `export DD_DBM_TRACE_PREPARED_STATEMENTS=true` 설정
+
+**참고**: 준비한 계측 문을 사용하면 `Application` 속성을 재정의하고 데이터베이스로 왕복 이동하게 됩니다. 이렇게 왕복 이동을 하더라도 지연 시간에 주는 영향은 미미합니다.
+
+**트레이서 버전 1.44 미만**:
+ 준비한 문은 Postgres와 MySQL의 `full` 모드에서 지원되지 않고, 준비한 문을 사용하는 JDBC API 호출 전체가 `service` 모드로 자동 다운그레이드됩니다. Java SQL 라이브러리 대부분에서 기본적으로 준비한 문을 사용하므로, **대부분**의 Java 애플리케이션에서는 `service` 모드만 사용할 수 있습니다.
 
 [1]: /ko/tracing/trace_collection/dd_libraries/java/
 [2]: /ko/tracing/trace_collection/compatibility/java/#data-store-compatibility
@@ -448,7 +464,7 @@ client.query('SELECT $1::text as message', ['Hello world!'], (err, result) => {
 [21]: https://www.php.net/manual/en/book.mysqli.php
 [22]: https://docs.oracle.com/javase/8/docs/technotes/guides/jdbc/
 [23]: https://github.com/DataDog/dd-trace-java
-[24]: https://learn.microsoft.com/en-us/dotnet/framework/data/adonet/ado-net-overview
+[24]: https://learn.microsoft.com/sql/connect/ado-net/microsoft-ado-net-sql-server
 [25]: https://learn.microsoft.com/en-us/dotnet/api/system.data.sqlclient.sqlcommand.commandtype?view=dotnet-plat-ext-7.0#remarks:~:text=[...]%20should%20set
 [26]: https://app.datadoghq.com/services
 [27]: https://pypi.org/project/asyncpg/
@@ -456,3 +472,4 @@ client.query('SELECT $1::text as message', ['Hello world!'], (err, result) => {
 [29]: https://pypi.org/project/mysql-connector-python/
 [30]: https://pypi.org/project/mysqlclient/
 [31]: https://github.com/PyMySQL/PyMySQL
+[32]: https://learn.microsoft.com/sql/connect/ado-net/introduction-microsoft-data-sqlclient-namespace

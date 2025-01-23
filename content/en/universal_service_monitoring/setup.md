@@ -339,7 +339,6 @@ docker run --cgroupns host \
 -v /etc/yum/vars:/host/etc/yum/vars:ro \
 -v /etc/dnf/vars:/host/etc/dnf/vars:ro \
 -v /etc/rhsm:/host/etc/rhsm:ro \
--e DD_SYSTEM_PROBE_SERVICE_MONITORING_ENABLED=true \
 -e HOST_ROOT=/host/root \
 --security-opt apparmor:unconfined \
 --cap-add=SYS_ADMIN \
@@ -733,7 +732,7 @@ If you use load balancers with your services, enable additional cloud integratio
 **For services running on IIS:**
 
 1. Install the [Datadog Agent][1] (version 6.41 or 7.41 and later) with the network kernel device driver component enabled.
-   For Agent version 7.44 or earlier, you must pass `ADDLOCAL="MainApplication,NPM"` to the `msiexec` command during installation, or select **Network Performance Monitoring** when running the Agent installation through the GUI.
+   For Agent version 7.44 or earlier, you must pass `ADDLOCAL="MainApplication,NPM"` to the `msiexec` command during installation, or select **Cloud Network Monitoring** when running the Agent installation through the GUI.
 
 2. Edit `C:\ProgramData\Datadog\system-probe.yaml` to set the enabled flag to `true`:
 
@@ -763,7 +762,7 @@ The following systems or services require additional configuration:
 
 {{< collapse-content title="Non-containerized services on Linux" level="h4" >}}
 <div class="alert alert-info">
-Universal Service Monitoring is available in <strong>beta</strong> to monitor services running bare-metal on Linux virtual machines.
+Universal Service Monitoring is available to monitor services running bare-metal on Linux virtual machines.
 </div>
 
 Requires Agent version 7.42 or greater.

@@ -25,7 +25,7 @@ further_reading:
 
 Shared dashboards allow external viewers or users who prefer not to log into Datadog to access them. You can manage access using different sharing types, each with specific configuration options.
 
-Shared dashboards refresh every 30 seconds and this [refresh rate][1] cannot be customized.
+Shared dashboards refresh approximately every 60 seconds, and this [refresh rate][1] cannot be customized.
 
 ## Share states
 
@@ -88,13 +88,13 @@ By default, public dashboards are accessible for one year before they expire and
 
 ## Embedded shared dashboards
 
-You can add embedded shared dashboards to a website with an iframe. These embedded shared dashboards are only accessible by the configured website domains. To share an embedded dashboard:
+You can add embedded shared dashboards to a website with an iframe. Embedded shared dashboards can only be accessed through the allowlisted website base URLs. To share an embedded dashboard:
 
 1. Click **Share** in the upper-right corner of the dashboard.
 2. Select **Share Dashboard**.
 3. Select the **Embed** option in the **Select a Share Type** step.
 4. Configure the desired time, variable, and color options in the **Configure Dashboard** step.
-5. Add the website domains that you want to allowlist as embeddable domains.
+5. Add the website base URLs that you want to allowlist.
 6. Click **Share Dashboard** to create the share URL.
 
 ## Configuration Options

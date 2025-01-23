@@ -19,6 +19,9 @@ further_reading:
     - link: 'https://www.datadoghq.com/blog/data-streams-monitoring-sqs/'
       tag: 'Blog'
       text: 'Monitor SQS with Data Streams Monitoring'
+    - link: 'https://www.datadoghq.com/blog/confluent-connector-dsm-autodiscovery/'
+      tag: 'Blog'
+      text: 'Autodiscover Confluent Cloud connectors and easily monitor performance in Data Streams Monitoring'
 cascade:
     algolia:
         rank: 70

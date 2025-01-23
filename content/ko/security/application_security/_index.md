@@ -1,4 +1,8 @@
 ---
+algolia:
+  tags:
+  - asm
+  - 애플리케이션 보안
 aliases:
 - /ko/security_platform/application_security
 - /ko/security/application_security/enabling/single_step
@@ -86,6 +90,14 @@ ASM을 사용하여 위협을 탐지하고 보호하도록 환경을 구성하�
 
 [Code Security][9]는 서비스의 코드 수준 취약점을 식별하고 실행 가능한 인사이트와 수정 사항을 제공합니다. IAST(대화형 애플리케이션 보안 테스트) 접근 방식을 사용하여 애플리케이션 코드 내의 취약점을 찾습니다. IAST는 APM(애플리케이션 성능 모니터링)과 같이 코드에 내장된 계측을 사용하며 이를 통해 Datadog은 추가 구성이나 주기적인 스케줄링이 필요한 외부 테스트에 의존하는 대신 합법적인 애플리케이션 트래픽을 사용하여 취약점을 식별할 수 있습니다.
 
+## ASM 비활성화
+
+ASM 또는 ASM 기능 비활성화와 관련한 자세한 정보는 다음을 참고하세요.
+
+- [위협 관리 및 보호 비활성화][10]
+- [소프트웨어 구성 요소 분석 비활성화][11]
+- [코드 보안 비활성화][12]
+
 ## 다음 단계
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -98,3 +110,6 @@ ASM을 사용하여 위협을 탐지하고 보호하도록 환경을 구성하�
 [7]: https://dashcon.io/appsec
 [8]: /ko/security/application_security/software_composition_analysis/
 [9]: /ko/security/application_security/code_security/
+[10]: /ko/security/application_security/troubleshooting/#disabling-threat-management-and-protection
+[11]: /ko/security/application_security/troubleshooting/#disabling-software-composition-analysis
+[12]: /ko/security/application_security/troubleshooting/#disabling-code-security

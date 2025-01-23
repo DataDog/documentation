@@ -18,16 +18,21 @@ further_reading:
 - link: "https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace"
   tag: "External Site"
   text: "Tracer library API documentation"
+- link: "https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/ddtrace"
+  tag: "External Site"
+  text: "Tracer library API documentation for v2"
 - link: https://github.com/DataDog/orchestrion
   tag: "Source Code"
   text: "Orchestrion source code"
-- link: https://datadoghq.dev/orchestrion
-  tag: "External Site"
-  text: "Orchestrion documentation"
 - link: "/tracing/glossary/"
   tag: "Documentation"
   text: "Explore your services, resources and traces"
 ---
+
+<div class="alert alert-info">
+The Go Tracer v2 is in Preview! See <a href="/tracing/trace_collection/custom_instrumentation/go/migration">the migration guide</a> to upgrade.
+</div>
+
 
 ## Compatibility requirements
 
@@ -86,7 +91,8 @@ To install and set up Orchestrion:
    Refer to the output of `orchestrion pin -help` for more information about available customization options.
 1. Commit changes to your version control system (unless you are integrating `orchestrion` directly in your CI/CD pipeline):
    ```sh
-   git commit -m "chore: enable orchestrion" go.mod go.sum orchestrion.tool.go
+   git add go.mod go.sum orchestrion.tool.go
+   git commit -m "chore: enable orchestrion"
    ```
 
    Now you can manage your dependency on `orchestrion` like any other dependency using the `go.mod` file.
@@ -130,6 +136,10 @@ Applications instrumented by `orchestrion` support Unified Service Tagging (UST)
 | `version`   | `DD_VERSION` |
 
 For more information, refer to the [Unified Service Tagging documentation][14].
+
+#### Tracer configuration
+
+Refer to [Library Configuration][16] for configuration instructions.
 
 #### Create custom trace spans
 
@@ -199,19 +209,19 @@ import "database/sql"
 // Caller-side instrumentation normally happens within this function...
 func normal() {
   // The following assignment will NOT be modified to add any caller-side
-  // instrumentation as it is opted out by the dd:ignore directive:
+  // instrumentation as it is opted out by the orchestrion:ignore directive:
   //orchestrion:ignore
   db, err := sql.Open("driver-name", "database=example")
   // ...
 }
 
 // Caller-side instrumentation will NOT happen in the following function
-// as it is annotated with dd:ignore.
+// as it is annotated with orchestrion:ignore.
 //orchestrion:ignore
 func excluded() {
   // The following assignment will NOT be modified to add any caller-side
-  // instrumentation as the surrounding context is excluded by a dd:ignore
-  // directive:
+  // instrumentation as the surrounding context is excluded by an
+  // orchestrion:ignore directive:
   db, err := sql.Open("driver-name", "database=example")
   // ...
 }
@@ -221,7 +231,7 @@ Some of the instrumentation performed by `orchestrion` is done callee-side (or l
 
 #### Use the tracing library
 
-You can use the [tracing library][4] in your Orchestrion-built application. This is useful for instrumenting frameworks not yet supported by Orchestrion. However, be aware that this may result in duplicated trace spans in the future as Orchestrion support expands. Review the [release notes][11] when updating your `orchestrion` dependency to stay informed about new features and adjust your manual instrumentation as necessary.
+You can use the [tracing library][4] ([or the v2 tracing library][5]) in your Orchestrion-built application. This is useful for instrumenting frameworks not yet supported by Orchestrion. However, be aware that this may result in duplicated trace spans in the future as Orchestrion support expands. Review the [release notes][11] when updating your `orchestrion` dependency to stay informed about new features and adjust your manual instrumentation as necessary.
 
 #### Use the continuous profiler
 
@@ -233,6 +243,7 @@ To enable the profiler, set the environment variable `DD_PROFILING_ENABLED=true`
 To troubleshoot builds that `orchestrion` manages, see [Troubleshooting Go Compile-Time Instrumentation][13].
 
 [4]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace
+[5]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/ddtrace
 [6]: https://github.com/DataDog/orchestrion
 [7]: /security/application_security/threats/exploit-prevention
 [8]: https://go.dev/doc/devel/release#policy
@@ -242,6 +253,8 @@ To troubleshoot builds that `orchestrion` manages, see [Troubleshooting Go Compi
 [13]: /tracing/troubleshooting/go_compile_time/
 [14]: /getting_started/tagging/unified_service_tagging/
 [15]: /security/application_security/threats/exploit-prevention/
+[16]: /tracing/trace_collection/library_config/go/#traces
+
 
 {{% /tab %}}
 
@@ -249,7 +262,7 @@ To troubleshoot builds that `orchestrion` manages, see [Troubleshooting Go Compi
 
 ### Add the tracer library to your application
 
-First, import and start the tracer in your code following the [Library Configuration][3] documentation. Refer to the [API documentation][4] for configuration instructions and details about using the API.
+First, import and start the tracer in your code following the [Library Configuration][3] documentation. Refer to the [API documentation][4] (or the [API documentation v2][6]) for configuration instructions and details about using the API.
 
 ### Activate Go integrations to create spans
 
@@ -258,6 +271,7 @@ Activate [Go integrations][1] to generate spans. Datadog has a series of pluggab
 [1]: /tracing/compatibility_requirements/go
 [3]: /tracing/trace_collection/library_config/go/
 [4]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace
+[6]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/ddtrace
 
 {{% /tab %}}
 

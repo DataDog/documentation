@@ -2,14 +2,424 @@
 title: Cloud Cost Recommendations
 description: Learn how to reduce the spending of your organization's cloud resources with Cost Recommendations.
 algolia:
-  tags: ['cloud cost recommendations', 'cloud cost recommendation', 'cost recommendations', 'cost recommendation', 'cloud resources', 'cloud resource']
+  tags:
+    - cloud cost recommendations
+    - cloud cost recommendation
+    - cost recommendations
+    - cost recommendation
+    - cloud resources
+    - cloud resource
 further_reading:
-- link: "/cloud_cost_management/"
-  tag: "Documentation"
-  text: "Learn about Cloud Cost Management"
-- link: "/integrations/guide/aws-integration-and-cloudwatch-faq/"
-  tag: "Documentation"
-  text: "AWS Integration and CloudWatch FAQ"
+  - link: "/cloud_cost_management/"
+    tag: "Documentation"
+    text: "Learn about Cloud Cost Management"
+  - link: "/integrations/guide/aws-integration-and-cloudwatch-faq/"
+    tag: "Documentation"
+    text: "AWS Integration and CloudWatch FAQ"
+
+
+multifiltersearch:
+  # "id" must match the corresponding key in the "data" object
+  headers:
+    - name: Recommendation Category
+      id: category
+      filter_by: true
+    - name: Cloud Provider
+      id: cloud_provider
+      filter_by: true
+    - name: Resource Type
+      id: resource_type
+      filter_by: true
+    - name: Recommendation Type
+      id: recommendation_type
+    - name: Recommendation Description
+      id: recommendation_description
+    - name: Recommendation Prerequisites
+      id: recommendation_prerequisites
+  data:
+    - category: Unused resource
+      cloud_provider: AWS
+      resource_type: EC2
+      recommendation_type: Unused EC2 Instances
+      recommendation_description: EC2 instances with less than 5% CPU utilization, and less than 10% memory utilization.
+      recommendation_prerequisites: "[Datadog Agent](/agent/)"
+    - category: Unused resource
+      cloud_provider: AWS
+      resource_type: EC2
+      recommendation_type: Unused EC2 instance running Redis
+      recommendation_description: EC2 instance running Redis with 0 keyspace hits and is not containerized, a leader, a follower, nor a shard.
+      recommendation_prerequisites: "[Redis Integration](https://docs.datadoghq.com/integrations/redisdb/?tab=host)"
+    - category: Unused resource
+      cloud_provider: AWS
+      resource_type: EC2
+      recommendation_type: Unused EC2 instance running memcached
+      recommendation_description: EC2 instance running memcached with 0 keyspace hits and is not containerized.
+      recommendation_prerequisites: "[Memcache Integration](https://docs.datadoghq.com/integrations/redisdb/?tab=host)"
+    - category: Unused resource
+      cloud_provider: AWS
+      resource_type: EC2
+      recommendation_type: Unused EC2 instance running Postgres
+      recommendation_description: EC2 instance running Postgres with less than 1 concurrent connection and is not containerized nor a replica.
+      recommendation_prerequisites: "[Postgres Integration](https://docs.datadoghq.com/integrations/mcache/?tab=host)"
+    - category: Unused resource
+      cloud_provider: AWS
+      resource_type: EC2
+      recommendation_type: Unused EC2 instance running MySQL
+      recommendation_description: EC2 instance running MySQL with less than 1 concurrent connection and is not containerized nor a replica.
+      recommendation_prerequisites: "[MySQL Integration](https://docs.datadoghq.com/integrations/postgres/?tab=host)"
+    - category: Unused resource
+      cloud_provider: AWS
+      resource_type: EBS
+      recommendation_type: Unattached EBS Volumes
+      recommendation_description: Volumes that have been detached from an EC2 instance.
+      recommendation_prerequisites: ""
+    - category: Unused resource
+      cloud_provider: AWS
+      resource_type: EBS
+      recommendation_type: Unused EBS Volumes
+      recommendation_description: Volumes attached to a non-running EC2 instance.
+      recommendation_prerequisites: ""
+    - category: Unused resource
+      cloud_provider: AWS
+      resource_type: RDS
+      recommendation_type: Unused RDS Instances
+      recommendation_description: RDS instances with 0 database connections and 0 replica lag.
+      recommendation_prerequisites: ""
+    - category: Unused resource
+      cloud_provider: AWS
+      resource_type: S3
+      recommendation_type: Abandoned S3 Multipart Uploads
+      recommendation_description: Incomplete multipart uploads.
+      recommendation_prerequisites: "[Storage Lens](/integrations/amazon_s3_storage_lens/)"
+    - category: Unused resource
+      cloud_provider: AWS
+      resource_type: Redshift
+      recommendation_type: Unused Redshift Cluster
+      recommendation_description: Redshift cluster with 0 database connections.
+      recommendation_prerequisites: ""
+    - category: Unused resource
+      cloud_provider: AWS
+      resource_type: Elasticache Redis
+      recommendation_type: Unused Elasticache Redis Cluster
+      recommendation_description: Elasticache Redis Cluster with 0 cache hits and 0 replication bytes.
+      recommendation_prerequisites: ""
+    - category: Unused resource
+      cloud_provider: AWS
+      resource_type: MQ
+      recommendation_type: Unused MQ Broker
+      recommendation_description: An MQ broker with 0 connections.
+      recommendation_prerequisites: ""
+    - category: Unused resource
+      cloud_provider: AWS
+      resource_type: ECR
+      recommendation_type: Old ECR Images
+      recommendation_description: ECR Image bytes are older than 180 days.
+      recommendation_prerequisites: ""
+    - category: Unused resource
+      cloud_provider: AWS
+      resource_type: OpenSearch
+      recommendation_type: OpenSearch Cluster
+      recommendation_description: An OpenSearch cluster with 0 connections.
+      recommendation_prerequisites: ""
+    - category: Unused resource
+      cloud_provider: AWS
+      resource_type: Classic Elastic Load Balancer
+      recommendation_type: Unused Classic Elastic Load Balancers
+      recommendation_description: Classic Elastic Load Balancer with no active connections that is not attached to an EC2 instance.
+      recommendation_prerequisites: ""
+    - category: Unused resource
+      cloud_provider: AWS
+      resource_type: Network Elastic Load Balancer
+      recommendation_type: Unused Network Elastic Load Balancer
+      recommendation_description: A network load balancer with 0 processed bytes.
+      recommendation_prerequisites: ""
+    - category: Unused resource
+      cloud_provider: AWS
+      resource_type: Application Load Balancer
+      recommendation_type: Unused Application Load Balancer
+      recommendation_description: An application load balancer with no traffic being processed.
+      recommendation_prerequisites: ""
+    - category: Unused resource
+      cloud_provider: AWS
+      resource_type: NAT Gateway
+      recommendation_type: Unused NAT Gateway
+      recommendation_description: A NAT Gateway that has no bytes sent through it.
+      recommendation_prerequisites: ""
+    - category: Unused resource
+      cloud_provider: AWS
+      resource_type: Elastic IP Address
+      recommendation_type: Idle Elastic IP Address
+      recommendation_description: Elastic IP addresses with idle charges in your AWS cost and usage report.
+      recommendation_prerequisites: ""
+    - category: Unused resource
+      cloud_provider: AWS
+      resource_type: DynamoDB
+      recommendation_type: Unused DynamoDB
+      recommendation_description: A DynamoDB table has 0 consumed reads and 0 consumed non-replica writes.
+      recommendation_prerequisites: ""
+    - category: Unused resource
+      cloud_provider: AWS
+      resource_type: DynamoDB
+      recommendation_type: Unused DynamoDB Global Secondary Index
+      recommendation_description: A DynamoDB table's Global Secondary Index (GSI) has 0 consumed reads.
+      recommendation_prerequisites: ""
+    - category: Unused resource
+      cloud_provider: AWS
+      resource_type: Autoscaling groups (ASG)
+      recommendation_type: ASGs with legacy instance types
+      recommendation_description: An autoscaling group that includes legacy instance types.
+      recommendation_prerequisites: "[Datadog Agent](/agent/)"
+    - category: Unused resource
+      cloud_provider: AWS
+      resource_type: DynamoDB
+      recommendation_type: DynamoDB Delete Extra On-Demand Backups
+      recommendation_description: A DynamoDB table has charges for more than 2 on-demand backups.
+      recommendation_prerequisites: ""
+    - category: Unused resource
+      cloud_provider: Azure
+      resource_type: Azure AKS Cluster
+      recommendation_type: Terminate AKS Cluster
+      recommendation_description: An AKS cluster with less than 5% CPU usage
+      recommendation_prerequisites: ""
+    - category: Unused resource
+      cloud_provider: Azure
+      resource_type: Azure Container Registry
+      recommendation_type: Terminate Azure Container Registry
+      recommendation_description: A container registry that has never received successful pulls  
+      recommendation_prerequisites: ""
+    - category: Unused resource
+      cloud_provider: Azure
+      resource_type: Azure Load Balancer
+      recommendation_type: Delete Azure Load Balancer
+      recommendation_description: Azure load balancer with 0 bytes transferred
+      recommendation_prerequisites: ""
+    - category: Unused resource
+      cloud_provider: Azure
+      resource_type: Azure Managed Disk
+      recommendation_type: Delete Unattached Azure Managed Disk
+      recommendation_description: Azure-managed disk is unattached and can be deleted
+      recommendation_prerequisites: ""
+    - category: Unused resource
+      cloud_provider: Azure
+      resource_type: Azure Managed Disk
+      recommendation_type: Delete Unused Azure Managed Disk
+      recommendation_description: Azure-managed disk with no read/write operations, which can be deleted
+      recommendation_prerequisites: ""
+    - category: Unused resource
+      cloud_provider: Azure
+      resource_type: Azure MySQL
+      recommendation_type: Terminate Database for MySQL
+      recommendation_description: Database server with no connections, which can be terminated
+      recommendation_prerequisites: ""
+    - category: Unused resource
+      cloud_provider: Azure
+      resource_type: Azure SQL Server Database
+      recommendation_type: Terminate SQL Server Database
+      recommendation_description: Azure SQL Server Database with no successful connections and very minimal CPU, which can be terminated
+      recommendation_prerequisites: ""
+    - category: Unused resource
+      cloud_provider: Azure
+      resource_type: Azure VM Instance
+      recommendation_type: Terminate VM Instance
+      recommendation_description: VM instance with less than 5% user CPU and over 90% usable memory
+    - category: Previous generation resource
+      cloud_provider: AWS
+      resource_type: EC2
+      recommendation_type: Legacy EC2 Instance
+      recommendation_description: EC2 Instances that are previous generation, and can be upgraded to a newer instance type.
+      recommendation_prerequisites: "[Datadog Agent](/agent/)"
+    - category: Previous generation resource
+      cloud_provider: AWS
+      resource_type: GP2 EBS
+      recommendation_type: GP2 EBS Volumes
+      recommendation_description: EBS volumes that are GP2 and can be upgraded to GP3 for cost reduction and performance improvement.
+      recommendation_prerequisites: ""
+    - category: Previous generation resource
+      cloud_provider: AWS
+      resource_type: I01 EBS
+      recommendation_type: I01 EBS Volumes
+      recommendation_description: EBS volumes that are I01 and can be upgraded to GP3 for cost reduction and performance improvement.
+      recommendation_prerequisites: ""
+    - category: Previous generation resource
+      cloud_provider: AWS
+      resource_type: RDS
+      recommendation_type: Extended Support RDS Instance
+      recommendation_description: An RDS running an engine version that is no longer supported and incurring [extended support charges](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support-charges.html)
+      recommendation_prerequisites: ""
+    - category: Over-provisioned resource
+      cloud_provider: AWS
+      resource_type: EC2
+      recommendation_type: Over-provisioned EC2 instances
+      recommendation_description: Migrate legacy autoscaling group instances to new types.
+      recommendation_prerequisites: "[Datadog Agent](/agent/)"
+    - category: Over-provisioned resource
+      cloud_provider: AWS
+      resource_type: EC2
+      recommendation_type: Over-provisioned EC2 instances running Redis
+      recommendation_description: EC2 instance running Redis with less than 25% user CPU and is not containerized, a leader, a follower, nor a shard.
+      recommendation_prerequisites: "[Redis Integration](https://docs.datadoghq.com/integrations/redisdb/?tab=host)"
+    - category: Over-provisioned resource
+      cloud_provider: AWS
+      resource_type: EC2
+      recommendation_type: Over-provisioned EC2 instance running memcached
+      recommendation_description: EC2 instance running memcached with less than 25% user CPU and is not containerized.
+      recommendation_prerequisites: "[Memcache Integration](https://docs.datadoghq.com/integrations/redisdb/?tab=host)"
+    - category: Over-provisioned resource
+      cloud_provider: AWS
+      resource_type: EC2
+      recommendation_type: Over-provisioned EC2 instance running Postgres
+      recommendation_description: EC2 instance running Postgres with less than 25% user CPU and greater than 25% usable memory and is not containerized nor a replica.
+      recommendation_prerequisites: "[Postgres Integration](https://docs.datadoghq.com/integrations/mcache/?tab=host)"
+    - category: Over-provisioned resource
+      cloud_provider: AWS
+      resource_type: EC2
+      recommendation_type: Over-provisioned EC2 running MySQL
+      recommendation_description: EC2 instance running MySQL with less than 25% user CPU and greater than 25% usable memory and is not containerized nor a replica.
+      recommendation_prerequisites: "[MySQL Integration](https://docs.datadoghq.com/integrations/postgres/?tab=host)"
+    - category: Over-provisioned resource
+      cloud_provider: AWS
+      resource_type: Kubernetes containers
+      recommendation_type: Over-provisioned Kubernetes Containers
+      recommendation_description: Containers with less than 30% max CPU or memory utilization.
+      recommendation_prerequisites: "[Datadog profiling agent](/profiler/enabling/)"
+    - category: Over-provisioned resource
+      cloud_provider: AWS
+      resource_type: EBS
+      recommendation_type: Over-provisioned EBS Volume IOPS
+      recommendation_description: EBS Volumes where the amount of IOPS exceeds what is being used.
+      recommendation_prerequisites: "*[Amazon EC2 integration](/integrations/amazon_ec2/)"
+    - category: Over-provisioned resource
+      cloud_provider: AWS
+      resource_type: RDS IOPS
+      recommendation_type: Over-provisioned RDS IOPS
+      recommendation_description: An RDS instance using less than 80% of the provisioned IOPS for reads and writes.
+      recommendation_prerequisites: ""
+    - category: Over-provisioned resource
+      cloud_provider: AWS
+      resource_type: EBS IOPS
+      recommendation_type: Over-provisioned EBS IOPS
+      recommendation_description: An EBS volume using less than 80% of the provisioned IOPS for reads and writes.
+      recommendation_prerequisites: "*[Amazon EC2 integration](/integrations/amazon_ec2/)"
+    - category: Over-provisioned resource
+      cloud_provider: AWS
+      resource_type: EBS Storage
+      recommendation_type: Over-provisioned EBS Storage
+      recommendation_description: An EBS volume with less than 20% of its storage capacity used.
+      recommendation_prerequisites: "*[Amazon EC2 integration](/integrations/amazon_ec2/)"
+    - category: Over-provisioned resource
+      cloud_provider: AWS
+      resource_type: EBS Throughput
+      recommendation_type: Over-provisioned EBS Throughput
+      recommendation_description: An EBS volume using less than 80% of the provisioned throughput for reads and writes.
+      recommendation_prerequisites: "*[Amazon EC2 integration](/integrations/amazon_ec2/)"
+    - category: Over-provisioned resource
+      cloud_provider: AWS
+      resource_type: DynamoDB
+      recommendation_type: Over-provisioned DynamoDB Capacity
+      recommendation_description: A provisioned DynamoDB table using less than 80% of its read and write capacity more than 80% of the time.
+      recommendation_prerequisites: ""
+    - category: Over-provisioned resource
+      cloud_provider: Azure
+      resource_type: Azure Container App
+      recommendation_type: Downsize Azure Container App
+      recommendation_description: An Azure Container App has higher than necessary minimum replicas
+      recommendation_prerequisites: ""
+    - category: Rate optimization
+      cloud_provider: AWS
+      resource_type: RDS Reserved Instances
+      recommendation_type: Purchase RDS RI
+      recommendation_description: An RDS instance older than 45 days is still charged with on-demand rates.
+      recommendation_prerequisites: ""
+    - category: Rate optimization
+      cloud_provider: AWS
+      resource_type: ElastiCache Reserved Instances
+      recommendation_type: Purchase ElastiCache RI
+      recommendation_description: An ElastiCache node older than 45 days is still charged with on-demand rates.
+      recommendation_prerequisites: ""
+    - category: Rate optimization
+      cloud_provider: AWS
+      resource_type: OpenSearch Reserved Instances
+      recommendation_type: Purchase OpenSearch RI
+      recommendation_description: An OpenSearch instance older than 45 days is still charged with on-demand rates.
+      recommendation_prerequisites: ""
+    - category: Rate optimization
+      cloud_provider: AWS
+      resource_type: Redshift Reserved Instances
+      recommendation_type: Purchase Redshift RI
+      recommendation_description: A Redshift cluster older than 45 days is still charged with on-demand rates.
+      recommendation_prerequisites: ""
+    - category: Rate optimization
+      cloud_provider: AWS
+      resource_type: S3
+      recommendation_type: S3 Tiering
+      recommendation_description: A bucket's costs are almost entirely in per-GB standard storage, but GET requests indicate few objects are accessed.
+      recommendation_prerequisites: ""
+    - category: Rate optimization
+      cloud_provider: AWS
+      resource_type: S3
+      recommendation_type: S3 Non-current Version Expiration Lifecycle Rule
+      recommendation_description: A standard S3 bucket without a non-current version expiration lifecycle and that does not serve a website contains non-current version storage bytes older than 30 days.
+      recommendation_prerequisites: "[Storage Lens](/integrations/amazon_s3_storage_lens/)"
+    - category: Rate optimization
+      cloud_provider: AWS
+      resource_type: DynamoDB
+      recommendation_type: Migrate DynamoDB to On-Demand Capacity Mode
+      recommendation_description: A provisioned DynamoDB table has an hourly read and write capacity consumption below 18% at least once in the last two weeks.
+      recommendation_prerequisites: ""
+    - category: Rate optimization
+      cloud_provider: AWS
+      resource_type: DynamoDB
+      recommendation_type: Migrate DynamoDB to Provisioned Capacity Mod
+      recommendation_description: An on-demand DynamoDB table has an hourly read and write capacity consumption that is always greater than 18%.
+      recommendation_prerequisites: ""
+    - category: Rate optimization
+      cloud_provider: AWS
+      resource_type: DynamoDB
+      recommendation_type: Migrate DynamoDB to Standard Table Class
+      recommendation_description: Migrating to the Standard table class offers potential savings from capacity rates compared to the additional costs from storage rates, or it uses the Standard table class' free tier for storage.
+      recommendation_prerequisites: ""
+    - category: Rate optimization
+      cloud_provider: Azure
+      resource_type: SQL Server Database
+      recommendation_type: Purchase Reservation for SQL Server Database
+      recommendation_description: SQL server database has no reservation coverage and is more than 45 days old
+      recommendation_prerequisites: ""
+    - category: Rate optimization
+      cloud_provider: Azure
+      resource_type: Database for MySQL
+      recommendation_type: Purchase Reservation for Azure MySQL
+      recommendation_description: Database for MySQL has no reservation coverage and is more than 45 days old
+      recommendation_prerequisites: ""
+    - category: Rate optimization
+      cloud_provider: Azure
+      resource_type: Database for PostgreSQL
+      recommendation_type: Purchase Reservation for PostgreSQL
+      recommendation_description: Database for PostgreSQL has no reservation coverage and is more than 45 days old
+      recommendation_prerequisites: ""
+    - category: Rate optimization
+      cloud_provider: Azure
+      resource_type: SQL Server Managed Instance
+      recommendation_type: Purchase Reservation for SQL Server Managed Instance
+      recommendation_description: Purchase reservation for SQL Server Managed Instance with no reservation coverage and is more than 45 days old
+      recommendation_prerequisites: ""
+    - category: Rate optimization
+      cloud_provider: AWS
+      resource_type: DynamoDB
+      recommendation_type: Migrate DynamoDB to Infrequent Access Table Class
+      recommendation_description: Migrating to the Infrequent Access (IA) table class offers more potential savings from storage rates compared to the additional costs from capacity rates.
+      recommendation_prerequisites: ""
+    - category: Architecture
+      cloud_provider: AWS
+      resource_type: NAT Gateway
+      recommendation_type: NAT Gateway within VPC transfer charges
+      recommendation_description: Resources in the same VPC should avoid communicating with each other through a NAT gateway because that incurs unnecessary NAT gateway processing charges.
+      recommendation_prerequisites: "[NPM](/network_monitoring/performance/setup/)"
+    - category: Architecture
+      cloud_provider: AWS
+      resource_type: NAT Gateway
+      recommendation_type: NAT Gateway cross-zone transfer charges
+      recommendation_description: Resources that need a NAT gateway should use one that is in the same availability zone, or they can incur unnecessary cross-zone transfer charges.
+      recommendation_prerequisites: ""
 ---
 
 {{< callout url="#" btn_hidden="true" header="Join the Preview!" >}}
@@ -22,8 +432,8 @@ Cloud Cost Recommendations is in Preview with support for AWS, and is automatica
 
 Recommendations are run on a daily basis and are automatically refreshed in your account as soon as the recommendations are released.
 
-- For **all resources**, [cloud cost metrics][11] are also pulled for that resource
-- For all **AWS resources** besides Kubernetes and EC2, AWS metrics are also pulled from [AWS CloudWatch][11]
+- For **all resources**, [cloud cost metrics][6] are also pulled for that resource
+- For all **AWS resources** besides Kubernetes and EC2, AWS metrics are also pulled from [AWS CloudWatch][6]
 
 {{< img src="cloud_cost/recommendations/cost_recommendations_1.png" alt="Overview tab with potential monthly savings, potential annual savings, and total number of open cases on the Cloud Cost Recommendations page" style="width:100%;" >}}
 
@@ -54,63 +464,11 @@ For each cloud account that you would like to receive recommendations for:
 
 1. Configure [Cloud Cost Management][2] to send billing data to Datadog.
 1. Enable [resource collection][3] in the **Resource Collection** tab on the [AWS integration tile][4].
-1. Install the [Datadog Agent][5] (required for over-provisioned resource recommendations).
+1. Install the '[Datadog Agent][5]' (required for over-provisioned resource recommendations).
 
 ## Recommendation and resource descriptions
 
-| Recommendation Category | Cloud Provider | Resource Type | Recommendation Type | Recommendation Description | Recommendation Prerequisites |
-|-------------------------|----------------|---------------|---------------------|----------------------------|------------------------------|
-| Unused resource | AWS | EC2 | Unused EC2 Instances | EC2 instances with less than 5% CPU utilization, and less than 10% memory utilization. | [Datadog Agent][5] |
-| Unused resource | AWS | EC2 | Unused EC2 instance running Redis | EC2 instance running Redis with 0 keyspace hits and is not containerized, a leader, a follower, nor a shard. | [Redis Integration][12] |
-| Unused resource | AWS | EC2 | Unused EC2 instance running memcached | EC2 instance running memcached with 0 keyspace hits and is not containerized. | [Memcache Integration][12] |
-| Unused resource | AWS | EC2 | Unused EC2 instance running Postgres | EC2 instance running Postgres with less than 1 concurrent connection and is not containerized nor a replica. | [Postgres Integration][13] |
-| Unused resource | AWS | EC2 | Unused EC2 instance running MySQL | EC2 instance running MySQL with less than 1 concurrent connection and is not containerized nor a replica. | [MySQL Integration][14] |
-| Unused resource | AWS | EBS | Unattached EBS Volumes | Volumes that have been detached from an EC2 instance. | |
-| Unused resource | AWS | EBS | Unused EBS Volumes | Volumes attached to a non-running EC2 instance. | |
-| Unused resource | AWS | RDS | Unused RDS Instances | RDS instances with 0 database connections and 0 replica lag. | |
-| Unused resource | AWS | S3 | Abandoned S3 Multipart Uploads | Incomplete multipart uploads. | [Storage Lens][6] |
-| Unused resource | AWS | Redshift | Unused Redshift Cluster | Redshift cluster with 0 database connections.
-| Unused resource | AWS | Elasticache Redis | Unused Elasticache Redis Cluster | Elasticache Redis Cluster with 0 cache hits and 0 replication bytes. | |
-| Unused resource | AWS | MQ | Unused MQ Broker | An MQ broker with 0 connections. | |
-| Unused resource | AWS | ECR | Old ECR Images | ECR Image bytes are older than 180 days. | |
-| Unused resource | AWS | OpenSearch | OpenSearch Cluster | An OpenSearch cluster with 0 connections. | |
-| Unused resource | AWS | Classic Elastic Load Balancer | Unused Classic Elastic Load Balancers | Classic Elastic Load Balancer with no active connections that is not attached to an EC2 instance. | |
-| Unused resource | AWS | Network Elastic Load Balancer | Unused Network Elastic Load Balancer | A network load balancer with 0 processed bytes. | |
-| Unused resource | AWS | Application Load Balancer | Unused Application Load Balancer | An application load balancer with no traffic being processed. | |
-| Unused resource | AWS | NAT Gateway | Unused NAT Gateway | A NAT Gateway that has no bytes sent through it. | |
-| Unused resource | AWS | Elastic IP Address | Idle Elastic IP Address | Elastic IP addresses with idle charges in your AWS cost and usage report. |
-| Unused resource | AWS | DynamoDB | Unused DynamoDB | A DynamoDB table has 0 consumed reads and 0 consumed non-replica writes. |
-| Unused resource | AWS | DynamoDB | Unused DynamoDB Global Secondary Index | A DynamoDB table's Global Secondary Index (GSI) has 0 consumed reads. |
-| Unused resource | AWS | Autoscaling groups (ASG) | ASGs with legacy instance types | An autoscaling group that includes legacy instance types. | [Datadog Agent][5] |
-| Unused resource | AWS | DynamoDB | DynamoDB Delete Extra On-Demand Backups | A DynamoDB table has charges for more than 2 on-demand backups. | |
-| Previous generation resource | AWS | EC2 | Legacy EC2 Instance | EC2 Instances that are previous generation, and can be upgraded to a newer instance type. | [Datadog Agent][5] |
-| Previous generation resource | AWS | GP2 EBS | GP2 EBS Volumes | EBS volumes that are GP2 and can be upgraded to GP3 for cost reduction and performance improvement. | |
-| Previous generation resource | AWS | I01 EBS | I01 EBS Volumes | EBS volumes that are I01 and can be upgraded to GP3 for cost reduction and performance improvement. |
-| Previous generation resource | AWS | RDS | Extended Support RDS Instance | An RDS running an engine version that is no longer supported and incurring [extended support charges][7] |
-| Over-provisioned resource | AWS | EC2 | Over-provisioned EC2 instances | Migrate legacy autoscaling group instances to new types. | [Datadog Agent][5] |
-| Over-provisioned resource | AWS | EC2 | Over-provisioned EC2 instances running Redis | EC2 instance running Redis with less than 25% user CPU and is not containerized, a leader, a follower, nor a shard. | [Redis Integration][12] |
-| Over-provisioned resource | AWS | EC2 | Over-provisioned EC2 instance running memcached | EC2 instance running memcached with less than 25% user CPU and is not containerized. | [Memcache Integration][12] |
-| Over-provisioned resource | AWS | EC2 | Over-provisioned EC2 instance running Postgres | EC2 instance running Postgres with less than 25% user CPU and greater than 25% usable memory and is not containerized nor a replica. | [Postgres Integration][13] |
-| Over-provisioned resource | AWS | EC2 | Over-provisioned EC2 running MySQL | EC2 instance running MySQL with less than 25% user CPU and greater than 25% usable memory and is not containerized nor a replica. | [MySQL Integration][14] |
-| Over-provisioned resource | AWS | Kubernetes containers | Over-provisioned Kubernetes Containers | Containers with less than 30% CPU and memory utilization. | [Datadog profiling agent][8] |
-| Over-provisioned resource | AWS | EBS | Over-provisioned EBS Volume IOPS | EBS Volumes where the amount of IOPS exceeds what is being used. | *[Amazon EC2 integration][9] |
-| Over-provisioned resource | AWS | RDS IOPS | Over-provisioned RDS IOPS | An RDS instance using less than 80% of the provisioned IOPS for reads and writes. |
-| Over-provisioned resource | AWS | EBS IOPS | Over-provisioned EBS IOPS | An EBS volume using less than 80% of the provisioned IOPS for reads and writes. | *[Amazon EC2 integration][9] |
-| Over-provisioned resource | AWS | EBS Storage | Over-provisioned EBS Storage | An EBS volume with less than 20% of its storage capacity used. | *[Amazon EC2 integration][9] |
-| Over-provisioned resource | AWS | EBS Throughput | Over-provisioned EBS Throughput | An EBS volume using less than 80% of the provisioned throughput for reads and writes. | *[Amazon EC2 integration][9] |
-| Over-provisioned resource | AWS | DynamoDB | Over-provisioned DynamoDB Capacity | A provisioned DynamoDB table using less than 80% of its read and write capacity more than 80% of the time. | |
-| Rate optimization | AWS | RDS Reserved Instances | Purchase RDS RI | An RDS instance older than 45 days is still charged with on-demand rates. | |
-| Rate optimization | AWS | ElastiCache Reserved Instances | Purchase ElastiCache RI | An ElastiCache node older than 45 days is still charged with on-demand rates. | |
-| Rate optimization | AWS | OpenSearch Reserved Instances | Purchase OpenSearch RI | An OpenSearch instance older than 45 days is still charged with on-demand rates. | |
-| Rate optimization | AWS | Redshift Reserved Instances | Purchase Redshift RI | A Redshift cluster older than 45 days is still charged with on-demand rates. | |
-| Rate optimization | AWS | S3 | S3 Tiering | A bucket's costs are almost entirely in per-GB standard storage, but GET requests indicate few objects are accessed. | |
-| Rate optimization | AWS | S3 | S3 Non-current Version Expiration Lifecycle Rule | A standard S3 bucket without a non-current version expiration lifecycle and that does not serve a website contains non-current version storage bytes older than 30 days. | [Storage Lens][6] | |
-| Rate optimization | AWS | DynamoDB | Migrate DynamoDB to On-Demand Capacity Mode | A provisioned DynamoDB table has an hourly read and write capacity consumption below 18% at least once in the last two weeks. | |
-| Rate optimization | AWS | DynamoDB | Migrate DynamoDB to Provisioned Capacity Mod | An on-demand DynamoDB table has an hourly read and write capacity consumption that is always greater than 18%. | |
-| Rate optimization | AWS | DynamoDB | Migrate DynamoDB to Standard Table Class | Migrating to the Standard table class offers potential savings from capacity rates compared to the additional costs from storage rates, or it uses the Standard table class' free tier for storage. | |
-| Rate optimization | AWS | DynamoDB | Migrate DynamoDB to Infrequent Access Table Class | Migrating to the Infrequent Access (IA) table class offers more potential savings from storage rates compared to the additional costs from capacity rates. | |
-| Architecture | AWS | NAT Gateway | NAT Gateway within VPC transfer charges | Resources in the same VPC should avoid communicating with each other through a NAT gateway because that incurs unnecessary NAT gateway processing charges. | [NPM][10] |
-| Architecture | AWS | NAT Gateway | NAT Gateway cross-zone transfer charges | Resources that need a NAT gateway should use one that is in the same availability zone, or they can incur unnecessary cross-zone transfer charges. | |
+{{< multifilter-search >}}
 
 ## Further reading
 
@@ -122,12 +480,3 @@ For each cloud account that you would like to receive recommendations for:
 [4]: https://app.datadoghq.com/integrations/aws
 [5]: /agent/
 [6]: /integrations/amazon_s3_storage_lens/
-[7]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support-charges.html
-[8]: /profiler/enabling/
-[9]: /integrations/amazon_ec2/
-[10]: /network_monitoring/performance/setup/
-[11]: /integrations/guide/aws-integration-and-cloudwatch-faq/
-[12]: https://docs.datadoghq.com/integrations/redisdb/?tab=host
-[13]: https://docs.datadoghq.com/integrations/mcache/?tab=host
-[14]: https://docs.datadoghq.com/integrations/postgres/?tab=host
-[15]: https://docs.datadoghq.com/integrations/mysql/?tab=host
