@@ -96,7 +96,7 @@ Below is a visual example of an OTP setup with a simple text field that the abov
 **Note**: For both of the Javascript examples you need to replace the `OTP_FROM_EMAIL` field with the name of the email variable you defined if named differently in your browser test.
 
 #### Respective input fields
-To insert the OTP into seperately defined fields use the following:
+To insert the OTP into separately defined fields, use the following:
 {{< code-block lang="java" disable_copy="false" >}}
 function (vars) {
   const inputList = document.querySelectorAll('input');
