@@ -19,6 +19,12 @@ further_reading:
   text: "Simplify production debugging with Datadog Exception Replay"
 ---
 
+{{% site-region region="gov" %}}
+<div class="alert alert-warning">
+    The Datadog Extension for Visual Studio Code is not supported for the {{< region-param key="dd_site_name" >}} site.
+</div>
+{{% /site-region %}}
+
 ## Overview
 
 The Datadog extension for Visual Studio Code (VS Code) integrates with Datadog to accelerate your development.
