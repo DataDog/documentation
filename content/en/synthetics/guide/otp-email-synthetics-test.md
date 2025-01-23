@@ -42,9 +42,11 @@ Create a [email variable][8] for the [browser test][3] to pull from using a [loc
 
 Next add a step to inject the email adress variable into an input field to imitate how a user would input the email address within your application.
 
-{{< img src="synthetics/guide/otp-from-email-body/email_address_variable.png" alt="Inject the email variable" style="width:60%;" >}}
+{{< img src="synthetics/guide/otp-from-email-body/synthetics-otp-inject-variable.png.png" alt="Inject the email variable" style="width:60%;" >}}
 
 Now the browser test can access the email body for use in the rest of the sign-up flow.
+
+{{< img src="synthetics/guide/otp-from-email-body/inject_email_variable.mp4" alt="Inject the email address variable" video="true" width="100%">}}
 
 ### Step 3 - Extract the OTP from the email body
 
