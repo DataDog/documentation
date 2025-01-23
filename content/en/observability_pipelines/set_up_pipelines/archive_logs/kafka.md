@@ -5,7 +5,7 @@ disable_toc: false
 
 ## Overview
 
-Use the Observability Pipelines Worker to format your logs from KafKa topics into a Datadog-rehydratable format before routing them to Datadog Log Archives.
+Use the Observability Pipelines Worker to format your logs from Kafka topics into a Datadog-rehydratable format before routing them to Datadog Log Archives.
 
 {{% observability_pipelines/use_case_images/archive_logs %}}
 

@@ -1,12 +1,12 @@
 1. Toggle the industry classifications you want to select rules for.
 1. Select the library rules you want to use.
-1. In the **Define rule target and action** select if you want to scan the **Entire Event**, **Specific Attributes**, or **Exclude Attributes** in the dropdown menu.
+1. In the **Define rule target and action** section, select if you want to scan the **Entire Event**, **Specific Attributes**, or **Exclude Attributes** in the dropdown menu.
     - If you are scanning the entire event, you can optionally exclude specific attributes from getting scanned. Use [path notation](#path-notation-example-lib) (`outer_key.inner_key`) to access nested keys. For specified attributes with nested data, all nested data is excluded.
     - If you are scanning specific attributes, specify which attributes you want to scan. Use [path notation](#path-notation-example-lib) (`outer_key.inner_key`) to access nested keys. For specified attributes with nested data, all nested data is scanned.
 1. For **Define actions on match**, select the action you want to take for the matched information. **Note**: Redaction, partial redaction, and hashing are all irreversible actions.
     - **Redact**: Replaces all matching values with the text you specify in the **Replacement text** field.
     - **Partially Redact**: Replaces a specified portion of all matched data. In the **Redact** section, specify the number of characters you want to redact and which part of the matched data to redact.
-    - **Hash**: Replaces all matched data with a unique identifier. The UTF-8 bytes of the match is hashed with the 64-bit fingerprint of FarmHash.
+    - **Hash**: Replaces all matched data with a unique identifier. The UTF-8 bytes of the match are hashed with the 64-bit fingerprint of FarmHash.
 1. Optionally, add tags you want to associate with the matched events.
 1. Click **Add Rules**.
 

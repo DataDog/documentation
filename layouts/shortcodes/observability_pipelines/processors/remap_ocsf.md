@@ -1,4 +1,4 @@
-Use this processor to remap logs to Open Cybersecurity Schema Framework (OCSF) events.  OCSF schema event classes are set for specific log source and type. You can add multiple mappings to one processor. **Note**: Datadog recommends that the OCSF processor be the last processor in your pipeline, so that remapping is done after the logs have been processed by all the other processors.
+Use this processor to remap logs to Open Cybersecurity Schema Framework (OCSF) events.  OCSF schema event classes are set for a specific log source and type. You can add multiple mappings to one processor. **Note**: Datadog recommends that the OCSF processor be the last processor in your pipeline, so that remapping is done after the logs have been processed by all the other processors.
 
 To set up this processor:
 

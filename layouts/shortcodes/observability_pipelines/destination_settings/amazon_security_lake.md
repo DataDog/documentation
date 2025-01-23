@@ -6,7 +6,7 @@
     - `Private Key Path`: The path to the `.key` private key file that belongs to your Server Certificate Path in DER or PEM (PKCS#8) format.
 
 **Notes**:
-- When you add the Amazon Security Lake destination, the OCSF processor is automatically added so that you can convert your logs to Parquet before they are sent to Amazon Security Lake. See the [Remap to OCSF documentation][10081] for setup instructions.
+- When you add the Amazon Security Lake destination, the OCSF processor is automatically added so that you can convert your logs to Parquet before they are sent to Amazon Security Lake. See [Remap to OCSF documentation][10081] for setup instructions.
 - Only logs formatted by the OCSF processor are converted to Parquet.
 
 [10081]: /observability_pipelines/processors/remap_ocsf
