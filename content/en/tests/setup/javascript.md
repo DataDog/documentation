@@ -801,7 +801,7 @@ forEach([
 
 When you use this approach, both the testing framework and Test Optimization can tell your tests apart.
 
-### `DD_TEST_SESSION_NAME`
+### Test session name `DD_TEST_SESSION_NAME`
 
 Use `DD_TEST_SESSION_NAME` to define the test session name for your tests (`test_session.name` tag). Use this to identify a group of tests. Examples of values for this tag would be:
 
@@ -818,6 +818,15 @@ If `DD_TEST_SESSION_NAME` is not specified, the default value used is a combinat
 - Command used to run the tests (such as `yarn test`)
 
 The test session name should be unique within a repository to help you distinguish different groups of tests.
+
+#### When to use `DD_TEST_SESSION_NAME`
+
+If your tests are run with commands that include a dynamic string, such as:
+
+- `yarn test --temp-dir=/var/folders/t1/rs2htfh55mz9px2j4prmpg_c0000gq/T`
+- `pnpm vitest --temp-dir=/var/folders/t1/rs2htfh55mz9px2j4prmpg_c0000gq/T`
+
+The default value for the test session name will be unstable. It is recommended to use `DD_TEST_SESSION_NAME` in this case.
 
 ## Further reading
 
