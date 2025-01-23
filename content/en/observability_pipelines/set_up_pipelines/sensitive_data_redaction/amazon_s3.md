@@ -11,7 +11,7 @@ Use Observability Pipelines to identify, tag, and optionally redact or hash sens
 
 {{% observability_pipelines/use_case_images/sensitive_data_redaction %}}
 
-This document walks you through the following steps:
+This document walks you through the following:
 1. The [prerequisites](#prerequisites) needed to set up Observability Pipelines
 1. [Setting up Observability Pipelines](#set-up-observability-pipelines)
 

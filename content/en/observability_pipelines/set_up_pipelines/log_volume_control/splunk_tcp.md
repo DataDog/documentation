@@ -11,7 +11,7 @@ This document walks you through the following steps to set up the Observability 
 
 {{% observability_pipelines/use_case_images/log_volume_control %}}
 
-This document walks you through the following steps:
+This document walks you through the following:
 1. The [prerequisites](#prerequisites) needed to set up Observability Pipelines
 1. [Setting up Observability Pipelines](#set-up-observability-pipelines)
 1. [Connecting Splunk Forwarder to the Observability Pipelines Worker](#connect-splunk-forwarder-to-the-observability-pipelines-worker)

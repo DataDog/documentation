@@ -9,7 +9,7 @@ Use the Observability Pipelines Worker to process and route your Amazon S3 logs 
 
 {{% observability_pipelines/use_case_images/split_logs %}}
 
-This document walks you through the following steps:
+This document walks you through the following:
 1. The [prerequisites](#prerequisites) needed to set up Observability Pipelines
 1. [Setting up Observability Pipelines](#set-up-observability-pipelines)
 

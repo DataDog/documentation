@@ -12,7 +12,7 @@ Configure Fluentd or Fluent Bit so that the Observability Pipelines Worker forma
 
 {{% observability_pipelines/use_case_images/archive_logs %}}
 
-This document walks you through the following steps:
+This document walks you through the following:
 1. The [prerequisites](#prerequisites) needed to set up Observability Pipelines
 1. [Configuring a Log Archive](#configure-a-log-archive)
 1. [Setting up Observability Pipelines](#set-up-observability-pipelines)

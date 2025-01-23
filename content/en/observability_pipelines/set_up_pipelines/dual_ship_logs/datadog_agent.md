@@ -11,7 +11,7 @@ Configure the Datadog Agent and set up Observability Pipelines so that the Obser
 
 {{% observability_pipelines/use_case_images/dual_ship_logs %}}
 
-This document walks you through the following steps:
+This document walks you through the following:
 1. The [prerequisites](#prerequisites) needed to set up Observability Pipelines
 1. [Setting up Observability Pipelines](#set-up-observability-pipelines)
 1. [Connecting the Datadog Agent to the Observability Pipelines Worker](#connect-the-datadog-agent-to-the-observability-pipelines-worker)

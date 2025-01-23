@@ -9,7 +9,7 @@ Configure your Google Pub/Sub to send logs to the Observability Pipelines Worker
 
 {{% observability_pipelines/use_case_images/log_enrichment %}}
 
-This document walks you through the following steps:
+This document walks you through the following:
 1. The [prerequisites](#prerequisites) needed to set up Observability Pipelines
 1. [Setting up Observability Pipelines](#set-up-observability-pipelines)
 

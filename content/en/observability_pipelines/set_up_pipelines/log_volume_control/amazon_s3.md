@@ -9,7 +9,7 @@ Use the Observability Pipelines Worker to only route useful Amazon S3 logs to th
 
 {{% observability_pipelines/use_case_images/log_volume_control %}}
 
-This document walks you through the following steps:
+This document walks you through the following:
 1. The [prerequisites](#prerequisites) needed to set up Observability Pipelines
 1. [Setting up Observability Pipelines](#set-up-observability-pipelines)
 

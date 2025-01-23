@@ -9,7 +9,7 @@ Send Google Pub/Sub logs to the Observability Pipelines Worker so that you can g
 
 {{% observability_pipelines/use_case_images/generate_metrics %}}
 
-This document walks you through the following steps:
+This document walks you through the following:
 1. The [prerequisites](#prerequisites) needed to set up Observability Pipelines
 1. [Setting up Observability Pipelines](#set-up-observability-pipelines)
 

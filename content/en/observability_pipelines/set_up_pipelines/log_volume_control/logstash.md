@@ -9,7 +9,7 @@ Set up the Observability Pipelines Worker with the Logstash source so that you o
 
 {{% observability_pipelines/use_case_images/log_volume_control %}}
 
-This document walks you through the following steps:
+This document walks you through the following:
 1. The [prerequisites](#prerequisites) needed to set up Observability Pipelines
 1. [Setting up Observability Pipelines](#set-up-observability-pipelines)
 1. [Sending logs to the Observability Pipelines Worker](#send-logs-to-the-observability-pipelines-worker-over-logstash)

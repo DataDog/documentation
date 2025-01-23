@@ -9,7 +9,7 @@ Configure Google Pub/Sub and set up Observability Pipelines so that the Observab
 
 {{% observability_pipelines/use_case_images/dual_ship_logs %}}
 
-This document walks you through the following steps:
+This document walks you through the following:
 1. The [prerequisites](#prerequisites) needed to set up Observability Pipelines
 1. [Setting up Observability Pipelines](#set-up-observability-pipelines)
 

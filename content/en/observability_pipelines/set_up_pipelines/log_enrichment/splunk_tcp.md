@@ -11,7 +11,7 @@ Configure your Splunk Heavy or Universal Forwarders to send logs to the Observab
 
 {{% observability_pipelines/use_case_images/log_enrichment %}}
 
-This document walks you through the following steps:
+This document walks you through the following:
 1. The [prerequisites](#prerequisites) needed to set up Observability Pipelines
 1. [Setting up Observability Pipelines](#set-up-observability-pipelines)
 1. [Connecting Splunk Forwarder to the Observability Pipelines Worker](#connect-splunk-forwarder-to-the-observability-pipelines-worker)

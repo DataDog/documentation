@@ -11,7 +11,7 @@ Configure Sumo Logic Hosted Collector the HTTP Logs source to send logs to the O
 
 {{% observability_pipelines/use_case_images/dual_ship_logs %}}
 
-This document walks you through the following steps:
+This document walks you through the following:
 1. The [prerequisites](#prerequisites) needed to set up Observability Pipelines
 1. [Setting up Observability Pipelines](#set-up-observability-pipelines)
 1. [Sending logs to the Observability Pipelines Worker over Sumo Logic HTTP Source](#send-logs-to-the-observability-pipelines-worker-over-sumo-logic-http-source)

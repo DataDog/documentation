@@ -9,7 +9,7 @@ Configure the Datadog Agent to send logs to the Observability Pipelines Worker s
 
 {{% observability_pipelines/use_case_images/generate_metrics %}}
 
-This document walks you through the following steps:
+This document walks you through the following:
 1. The [prerequisites](#prerequisites) needed to set up Observability Pipelines
 1. [Setting up Observability Pipelines](#set-up-observability-pipelines)
 1. [Connecting the Datadog Agent to the Observability Pipelines Worker](#connect-the-datadog-agent-to-the-observability-pipelines-worker)

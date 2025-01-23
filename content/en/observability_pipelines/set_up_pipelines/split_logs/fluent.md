@@ -11,7 +11,7 @@ Configure Fluentd and Fluent Bit to send logs to the Observability Pipelines Wor
 
 {{% observability_pipelines/use_case_images/split_logs %}}
 
-This document walks you through the following steps:
+This document walks you through the following:
 1. The [prerequisites](#prerequisites) needed to set up Observability Pipelines
 1. [Setting up Observability Pipelines](#set-up-observability-pipelines)
 1. [Sending logs to the Observability Pipelines Worker](#send-logs-to-the-observability-pipelines-worker-over-fluent)
