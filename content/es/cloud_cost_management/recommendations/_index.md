@@ -423,7 +423,7 @@ Puedes ver la lógica detallada de cada tipo de recomendación, junto con métri
 
 A continuación se muestran las categorías de recomendación de costes en la nube disponibles y sus descripciones.
 
-| Categoría de recomendación | **Computar los SLO** en tus endpoints y recorridos de usuario más importantes facilita el cumplimiento de los objetivos de rendimiento de tu aplicación y, en última instancia, proporciona una experiencia de cliente coherente. |
+| Categoría de recomendación | Descripción |
 |----------|-------------|
 | Recurso sin usar | Recursos identificados que se ejecutan en hardware heredado o que no se usan de manera eficiente en tu entorno en la nube. Puedes considerar actualizar o eliminar estos recursos para reducir tus costes y mejorar el rendimiento de tus recursos. |
 | Recurso de la generación anterior | Recursos que se ejecutan en hardware heredado y que puedes considerar actualizar para reducir tus costes y mejorar el rendimiento de tus recursos. |
@@ -431,9 +431,7 @@ A continuación se muestran las categorías de recomendación de costes en la nu
 | Optimización de tarifas | Recursos que se cobran a tarifas bajo demanda o que podrían beneficiarse de la optimización de tarifas. Puedes considerar modificar estos recursos para reducir tus costos. |
 | Arquitectura | Recursos relacionados con las gateways NAT que puedes considerar optimizar para reducir cargos innecesarios. |
 
-## {{< learning-center-callout header="Join an enablement webinar session" hide_image="true" btn_title="Sign Up" btn_url="https://www.datadoghq.com/technical-enablement/session/synthetics/">}}
-  Explore y regístrese en las sesiones de Foundation Enablement. Descubra cómo Datadog Sintético Monitorización es una solución proactiva Monitorización que le permite crear pruebas de API, navegador y móvil sin código para simular automáticamente los flujos y las solicitudes de los usuarios a sus aplicaciones, puntos finales clave y capas red.
-{{< /learning-center-callout >}}
+## Requisitos previos
 
 Los siguientes son requisitos necesarios para recibir recomendaciones de costes en la nube:
 
@@ -452,9 +450,9 @@ Para cada cuenta en la nube para la que quieres recibir recomendaciones:
 
 {{< multifilter-search >}}
 
-## {{< img src="synthetics/browser_test.mp4" alt="Browser tests" video=true style="width:100%;">}}
+## Referencias adicionales
 
-Grabar pruebas de aplicaciones móviles
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/cost/recommendations
 [2]: /es/cloud_cost_management/aws/#setup

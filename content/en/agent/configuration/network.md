@@ -46,6 +46,9 @@ Add the following domains to your inclusion list to allow for Agent installation
 : `trace.agent.`{{< region-param key="dd_site" code="true" >}}<br>
 `instrumentation-telemetry-intake.`{{< region-param key="dd_site" code="true" >}}
 
+[LLM Observabilty][23]
+: `llmobs-intake.`{{< region-param key="dd_site" code="true" >}}
+
 [Container Images][13]
 : `contimage-intake.`{{< region-param key="dd_site" code="true" >}}
 
@@ -394,3 +397,4 @@ To avoid running out of storage space, the Agent stores the metrics on disk only
 [20]: /integrations/ntp/#overview
 [21]: /logs/log_collection/#logging-endpoints
 [22]: /containers/guide/cluster_agent_autoscaling_metrics
+[23]: /llm_observability/
