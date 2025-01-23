@@ -18,7 +18,7 @@ Azure Container Apps is a fully managed serverless platform for deploying and sc
 {{< tabs >}}
 {{% tab "Node.js" %}}
 #### Tracing
-Instrument your main application with the `dd-trace-js` library. See [Tracing Node.js Applications][1] for instructions.
+Instrument your main application with the `dd-trace-js` library. See [Tracing Node.js applications][1] for instructions.
 
 #### Metrics
 Custom metrics are also collected through the tracer. See the [code examples][2].
@@ -165,7 +165,7 @@ Because Azure Container Apps is built on Kubernetes, you cannot share environmen
 3. In the **Add a container** form, provide the following:
    - **Name**: `datadog`
    - **Image source**: Docker Hub or other registries
-   - **Image type**: Public
+   - **Image type**: `Public`
    - **Registry login server**: `docker.io`
    - **Image and tag**: `datadog/serverless-init:latest`
    - Define your container resource allocation based on your usage.
@@ -176,7 +176,7 @@ Because Azure Container Apps is built on Kubernetes, you cannot share environmen
 | Name | Description |
 | ---- | ----------- |
 | `DD_AZURE_SUBSCRIPTION_ID` | **Required**. Your Azure subscription ID. |
-| `DD_AZURE_SUBSCRIPTION_ID` | **Required**. Your Azure resource group. |
+| `DD_AZURE_RESOURCE_GROUP` | **Required**. Your Azure resource group. |
 | `DD_API_KEY` | **Required**. Your [Datadog API key][3]. |
 | `DD_SERVICE` | How you want to tag your service. For example, `sidecar-azure`. |
 | `DD_ENV` | How you want to tag your env. For example, `prod`.|
