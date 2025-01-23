@@ -70,7 +70,7 @@ Select the cloud provider you are using to archive your logs.
 
 ## Set up Observability Pipelines
 
-1. Navigate to [Observability Pipelines][1].
+1. Navigate to [Observability Pipelines][4].
 1. Select the **Archive Logs** template to create a new pipeline.
 1. Select the **Amazon Data Firehose** source.
 
@@ -266,7 +266,7 @@ Follow the instructions for the cloud provider you are using to archive your log
 ### Install the Observability Pipelines Worker
 1. Select your platform in the **Choose your installation platform** dropdown menu.
 1. Enter the Amazon Data Firehose address. The Observability Pipelines Worker listens to this address and port for incoming logs from Amazon Data Firehose.
-1. Provide the environment variables for each of your selected destinations. See [prerequisites](#prerequisites) for more information.
+1. Provide the environment variables for each of your selected destinations. See [Prerequisites](#prerequisites) for more information.
 {{< tabs >}}
 {{% tab "Amazon OpenSearch" %}}
 
