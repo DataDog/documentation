@@ -77,7 +77,7 @@ JavaScript lets you trigger an event on a DOM element programmatically, making i
 
 {{< img src="synthetics/guide/otp-from-email-body/js_assertion.png" alt="Javascript assertion" style="width:50%;" >}}
 
-2. Under **Custom JavaScript** add in the extraction code corresponding to if the OTP will be inserted into a simple text field or respective input fields. Examples for both are highlighted below:
+2. Under **Custom JavaScript** add the extraction code. The code format will vary depending on whether the OTP is inserted into a simple text field or respective input fields. Below are examples that illustrate both scenarios:
 
 #### Simple text field
 To insert the OTP into a simple text field use the following:
