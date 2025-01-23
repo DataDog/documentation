@@ -2028,20 +2028,28 @@ components:
           example: github.com/DataDog/datadog-agent.git
           type: string
         operating_system:
-          $ref: '#/components/schemas/AssetAttributesOperatingSystem'
+          $ref: '#/components/schemas/AssetOperatingSystem'
         risks:
-          $ref: '#/components/schemas/AssetAttributesRisks'
+          $ref: '#/components/schemas/AssetRisks'
         type:
           $ref: '#/components/schemas/AssetType'
         version:
-          $ref: '#/components/schemas/AssetAttributesVersion'
+          $ref: '#/components/schemas/AssetVersion'
       required:
       - name
       - type
       - risks
       - environments
       type: object
-    AssetAttributesOperatingSystem:
+    AssetEntityType:
+      description: The JSON:API type.
+      enum:
+      - assets
+      example: assets
+      type: string
+      x-enum-varnames:
+      - ASSETS
+    AssetOperatingSystem:
       description: Asset operating system.
       properties:
         description:
@@ -2055,7 +2063,7 @@ components:
       required:
       - name
       type: object
-    AssetAttributesRisks:
+    AssetRisks:
       description: Asset risks.
       properties:
         has_access_to_sensitive_data:
@@ -2081,26 +2089,6 @@ components:
       required:
       - in_production
       type: object
-    AssetAttributesVersion:
-      description: Asset version.
-      properties:
-        first:
-          description: Asset first version.
-          example: _latest
-          type: string
-        last:
-          description: Asset last version.
-          example: _latest
-          type: string
-      type: object
-    AssetEntityType:
-      description: The JSON:API type.
-      enum:
-      - assets
-      example: assets
-      type: string
-      x-enum-varnames:
-      - ASSETS
     AssetType:
       description: The asset type
       enum:
@@ -2117,6 +2105,18 @@ components:
       - HOST
       - HOSTIMAGE
       - IMAGE
+    AssetVersion:
+      description: Asset version.
+      properties:
+        first:
+          description: Asset first version.
+          example: _latest
+          type: string
+        last:
+          description: Asset last version.
+          example: _latest
+          type: string
+      type: object
     AuditLogsEvent:
       description: Object description of an Audit Logs event after it is processed
         and stored by Datadog.
@@ -3500,6 +3500,9 @@ components:
       properties:
         env:
           description: The Datadog environment.
+          type: string
+        provider_name:
+          description: The name of the CI provider. By default, this is "custom".
           type: string
         resource:
           $ref: '#/components/schemas/CIAppCreatePipelineEventRequestAttributesResource'
@@ -11967,6 +11970,14 @@ components:
           items:
             $ref: '#/components/schemas/GetInterfacesData'
           type: array
+      type: object
+    GetSBOMResponse:
+      description: The expected response schema when getting an SBOM.
+      properties:
+        data:
+          $ref: '#/components/schemas/SBOM'
+      required:
+      - data
       type: object
     GetTeamMembershipsSort:
       description: Specifies the order of returned team memberships
@@ -22918,6 +22929,143 @@ components:
       type: string
       x-enum-varnames:
       - SAML_ASSERTION_ATTRIBUTES
+    SBOM:
+      description: A single SBOM
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SBOMAttributes'
+        id:
+          description: The unique ID for this SBOM (it is equivalent to the `asset_name`
+            or `asset_name@repo_digest` (Image)
+          example: github.com/datadog/datadog-agent
+          type: string
+        type:
+          $ref: '#/components/schemas/SBOMType'
+      type: object
+    SBOMAttributes:
+      description: The JSON:API attributes of the SBOM.
+      properties:
+        bomFormat:
+          description: Specifies the format of the BOM. This helps to identify the
+            file as CycloneDX since BOM do not have a filename convention nor does
+            JSON schema support namespaces. This value MUST be `CycloneDX`.
+          example: CycloneDX
+          type: string
+        components:
+          description: A list of software and hardware components.
+          items:
+            $ref: '#/components/schemas/SBOMComponent'
+          type: array
+        metadata:
+          $ref: '#/components/schemas/SBOMMetadata'
+        serialNumber:
+          description: Every BOM generated has a unique serial number, even if the
+            contents of the BOM have not changed overt time. The serial number follows
+            [RFC-4122](https://datatracker.ietf.org/doc/html/rfc4122)
+          example: urn:uuid:f7119d2f-1vgh-24b5-91f0-12010db72da7
+          type: string
+        specVersion:
+          $ref: '#/components/schemas/SpecVersion'
+        version:
+          description: It increments when a BOM is modified. The default value is
+            1.
+          example: 1
+          format: int64
+          type: integer
+      required:
+      - bomFormat
+      - specVersion
+      - components
+      - metadata
+      - serialNumber
+      - version
+      type: object
+    SBOMComponent:
+      description: Software or hardware component.
+      properties:
+        bom-ref:
+          description: An optional identifier that can be used to reference the component
+            elsewhere in the BOM.
+          example: pkg:golang/google.golang.org/grpc@1.68.1
+          type: string
+        name:
+          description: The name of the component. This will often be a shortened,
+            single name of the component.
+          example: google.golang.org/grpc
+          type: string
+        purl:
+          description: Specifies the package-url (purl). The purl, if specified, MUST
+            be valid and conform to the [specification](https://github.com/package-url/purl-spec).
+          example: pkg:golang/google.golang.org/grpc@1.68.1
+          type: string
+        type:
+          $ref: '#/components/schemas/SBOMComponentType'
+        version:
+          description: The component version.
+          example: 1.68.1
+          type: string
+      required:
+      - type
+      - name
+      - version
+      type: object
+    SBOMComponentType:
+      description: The SBOM component type
+      enum:
+      - application
+      - container
+      - data
+      - device
+      - device-driver
+      - file
+      - firmware
+      - framework
+      - library
+      - machine-learning-model
+      - operating-system
+      - platform
+      example: application
+      type: string
+      x-enum-varnames:
+      - APPLICATION
+      - CONTAINER
+      - DATA
+      - DEVICE
+      - DEVICE_DRIVER
+      - FILE
+      - FIRMWARE
+      - FRAMEWORK
+      - LIBRARY
+      - MACHINE_LEARNING_MODEL
+      - OPERATING_SYSTEM
+      - PLATFORM
+    SBOMMetadata:
+      description: Provides additional information about a BOM.
+      properties:
+        component:
+          $ref: '#/components/schemas/SBOMMetadataComponent'
+      type: object
+    SBOMMetadataComponent:
+      description: The component that the BOM describes.
+      properties:
+        name:
+          description: The name of the component. This will often be a shortened,
+            single name of the component.
+          example: github.com/datadog/datadog-agent
+          type: string
+        type:
+          description: Specifies the type of the component.
+          example: application
+          type: string
+      type: object
+    SBOMType:
+      description: The JSON:API type.
+      enum:
+      - sboms
+      example: sboms
+      type: string
+      x-enum-varnames:
+      - SBOMS
     SLOReportInterval:
       description: The frequency at which report data is to be generated.
       enum:
@@ -27962,6 +28110,24 @@ components:
             from the other indexes
           type: string
       type: object
+    SpecVersion:
+      description: The version of the CycloneDX specification a BOM conforms to.
+      enum:
+      - '1.0'
+      - '1.1'
+      - '1.2'
+      - '1.3'
+      - '1.4'
+      - '1.5'
+      example: '1.5'
+      type: string
+      x-enum-varnames:
+      - ONE_ZERO
+      - ONE_ONE
+      - ONE_TWO
+      - ONE_THREE
+      - ONE_FOUR
+      - ONE_FIVE
     State:
       description: The state of the rule evaluation.
       enum:
@@ -29551,9 +29717,9 @@ components:
             type: string
           type: array
         cvss:
-          $ref: '#/components/schemas/VulnerabilityAttributesCvss'
+          $ref: '#/components/schemas/VulnerabilityCvss'
         dependency_locations:
-          $ref: '#/components/schemas/VulnerabilityAttributesDependencyLocations'
+          $ref: '#/components/schemas/VulnerabilityDependencyLocations'
         description:
           description: Vulnerability description.
           example: LDAP Injection is a security vulnerability that occurs when untrusted
@@ -29632,7 +29798,7 @@ components:
       - remediations
       - fix_available
       type: object
-    VulnerabilityAttributesCvss:
+    VulnerabilityCvss:
       description: Vulnerability severities.
       properties:
         base:
@@ -29643,7 +29809,7 @@ components:
       - base
       - datadog
       type: object
-    VulnerabilityAttributesDependencyLocations:
+    VulnerabilityDependencyLocations:
       description: Static library vulnerability location.
       properties:
         block:
@@ -42310,9 +42476,9 @@ paths:
 
         Reference Tables            | `viewer`, `editor`
 
-        Workflows                   | `viewer`, `editor`
+        Workflows                   | `viewer`, `runner`, `editor`
 
-        App Builder Apps            | `viewer`, `runner`, `editor`
+        App Builder Apps            | `viewer`, `editor`
 
         Connections                 | `viewer`, `resolver`, `editor`
 
@@ -44744,12 +44910,12 @@ paths:
       summary: List vulnerable assets
       tags:
       - Security Monitoring
-      x-menu-order: 4
+      x-menu-order: 26
       x-undo:
         type: safe
-      x-unstable: '**Note**: Note: This endpoint is a private preview.
+      x-unstable: '**Note**: This endpoint is a private preview.
 
-        If you are interested in accessing this API, please [fill this form](https://forms.gle/kMYC1sDr6WDUBDsx9).'
+        If you are interested in accessing this API, please [fill out this form](https://forms.gle/kMYC1sDr6WDUBDsx9).'
   /api/v2/security/cloud_workload/policy/download:
     get:
       description: 'The download endpoint generates a Cloud Workload Security policy
@@ -44782,6 +44948,75 @@ paths:
         - security_monitoring_cws_agent_rules_read
       x-undo:
         type: safe
+  /api/v2/security/sboms/{asset_type}:
+    get:
+      description: 'Get a single SBOM related to an asset by its type and name.
+
+        '
+      operationId: GetSBOM
+      parameters:
+      - description: The type of the asset for the SBOM request.
+        example: Repository
+        in: path
+        name: asset_type
+        required: true
+        schema:
+          $ref: '#/components/schemas/AssetType'
+      - description: The name of the asset for the SBOM request.
+        example: github.com/datadog/datadog-agent
+        in: query
+        name: filter[asset_name]
+        required: true
+        schema:
+          type: string
+      - description: The container image `repo_digest` for the SBOM request. When
+          the requested asset type is 'Image', this filter is mandatory.
+        example: sha256:0ae7da091191787229d321e3638e39c319a97d6e20f927d465b519d699215bf7
+        in: query
+        name: filter[repo_digest]
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetSBOMResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: 'Bad request: The server cannot process the request due to
+            invalid syntax in the request.'
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: 'Forbidden: Access denied'
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: 'Not found: asset not found'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: Get SBOM
+      tags:
+      - Security Monitoring
+      x-menu-order: 27
+      x-undo:
+        type: safe
+      x-unstable: '**Note**: This endpoint is a private preview.
+
+        If you are interested in accessing this API, please [fill out this form](https://forms.gle/kMYC1sDr6WDUBDsx9).'
   /api/v2/security/vulnerabilities:
     get:
       description: "Get a list of vulnerabilities.\n\n### Pagination\n\nPagination
@@ -45158,12 +45393,12 @@ paths:
       summary: List vulnerabilities
       tags:
       - Security Monitoring
-      x-menu-order: 3
+      x-menu-order: 25
       x-undo:
         type: safe
-      x-unstable: '**Note**: Note: This endpoint is a private preview.
+      x-unstable: '**Note**: This endpoint is a private preview.
 
-        If you are interested in accessing this API, please [fill this form](https://forms.gle/kMYC1sDr6WDUBDsx9).'
+        If you are interested in accessing this API, please [fill out this form](https://forms.gle/kMYC1sDr6WDUBDsx9).'
   /api/v2/security_monitoring/cloud_workload_security/agent_rules:
     get:
       description: Get the list of Agent rules.
