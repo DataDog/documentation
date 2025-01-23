@@ -240,13 +240,13 @@ menu:
     - name: Test Impact Analysis
       identifier: getting_started_test_impact_analysis
       url: getting_started/test_impact_analysis/
-      parent: getting_started
-      weight: 27
+      parent: getting_started_software_delivery
+      weight: 2503
     - name: Code Security
       identifier: getting_started_code_security
       url: getting_started/code_security/
       parent: getting_started
-      weight: 28
+      weight: 26
     - name: Learning Center
       identifier: getting_started_learning_center
       url: getting_started/learning_center/
