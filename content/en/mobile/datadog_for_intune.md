@@ -11,10 +11,10 @@ This guide provides step-by-step instructions to configure and deploy the Datado
 ## Prerequisites
 Before you begin, ensure the following requirements are met:
 
-- Admin permissions in **Intune, Azure, and Datadog**
+- You have admin permissions in **Intune, Azure, and Datadog**
 - Users must download and install the **Datadog for Intune** app from their mobile app store or Microsoft Partner store.
 
-For those looking to create a custom configuration using the mobile app bundle ID, follow the links below:
+For those looking to create a custom configuration using the mobile app bundle ID, see the links below:
 
 | Platform   | Store Link                                                                                            | BundleID                    |
 |------------|-------------------------------------------------------------------------------------------------------|-----------------------------|
@@ -22,17 +22,17 @@ For those looking to create a custom configuration using the mobile app bundle I
 | Android    | [Datadog Intune on Google Play](https://play.google.com/store/apps/details?id=com.datadog.app.intune) | com.datadog.app.intune      |
 
 ## Initial Setup for Datadog for Intune
-To get started, an Intune and Azure admin needs to configure the required settings. These are the **minimum** necessary steps to ensure Datadog for Intune functions correctly. Additional policies, such as Configuration Policies and Conditional Access Policies, can be set up later.
+To get started, an Intune and Azure admin needs to configure the required settings. These are the **minimum** necessary steps to ensure Datadog for Intune functions correctly. Additional policies, such as those for configuration or conditional access, can be set up later.
 
-### Step 1: Add Datadog for Intune to Microsoft Intune Admin Center
+### Step 1: Add Datadog for Intune to Microsoft Intune admin center
 1. Open your [Microsoft Intune admin center][1], navigate to the **Apps** tab, and click **Add** under the appropriate **App type** (iOS/iPadOS or Android):
    - For iOS/iPadOS: Select **"iOS store app"**, then search for "Datadog Intune."
    - For Android: Select **"Android store app"**, then copy the required details from the [Google Play store page][2].
 2. Assign the app to the relevant users and/or groups.
 
-For additional guidance on adding an application to Intune, refer to Microsoft’s [Intune Quickstart Guide][3].
+For additional guidance on adding an application to Intune, read Microsoft’s [Intune Quickstart Guide][3].
 
-### Step 2: Apply an App Protection Policy
+### Step 2: Apply an app protection policy
 To enable users to register and sign in securely, an **App Protection Policy** must be applied. This ensures access to the app is protected by Microsoft Intune security settings.
 
 1. In the [admin center][1], go to the **Apps** tab and select **App Protection Policies**.
@@ -43,7 +43,7 @@ To enable users to register and sign in securely, an **App Protection Policy** m
 
 **Note:** It may take some time for the new App Protection Policy to be applied to all devices. You can verify the setup by following [Microsoft’s guidance][5].
 
-### Step 3: Grant Admin Consent for Your Organization
+### Step 3: Grant admin consent for your organization
 In this step, switch from the Intune admin center to the Azure portal for Microsoft Entra-ID.
 
 Admin consent is required before users can register successfully. Follow these steps:
@@ -55,18 +55,18 @@ Admin consent is required before users can register successfully. Follow these s
 
 For additional support with application management settings, refer to the [Microsoft documentation][8].
 
-**Note:** If your organization has multiple “Datadog” applications configured, the one managing web and mobile app access has the Application ID **f21cb7e8-00ab-4b0e-aa94-b1e2f674606d**.
+**Note:** If your organization has multiple "Datadog" applications configured, the one managing web and mobile app access has the Application ID **f21cb7e8-00ab-4b0e-aa94-b1e2f674606d**.
 
 #### Datadog for Intune Required Permissions
-Permissions should be automatically added when configuring the application:
+Permissions are automatically added when configuring the application:
 
 | Name                                    | Claim Value                              | Permission                                      | Type      |
 |-----------------------------------------|------------------------------------------|-------------------------------------------------|-----------|
 | Microsoft Graph                         | `User.Read`                              | Sign in and read user profile                   | Delegated |
 | Microsoft Mobile Application Management | `DeviceManagementManagedApps.ReadWrite`  | Read and Write the User’s App Management device | Delegated |
 
-## Deploying Datadog Intune to Mobile Devices
-When deploying to Android devices, users need to install both:
+## Deploying Datadog Intune to mobile devices
+When deploying to Android devices, users need to install the following:
 
 - The [Microsoft Company Portal app][9]
 - [Datadog - Intune][10]
@@ -76,14 +76,14 @@ For iOS devices, only [Datadog - Intune][11] is required, but the [Company Porta
 On both platforms, the **Microsoft Authenticator app** can assist with sign-in if installed.
 
 ## Troubleshooting Device Registration
-If users encounter issues while registering their devices for Datadog - Intune, administrators should verify the following configurations:
+If users encounter issues while registering their devices for Datadog Intune, administrators should verify the following configurations:
 
-- Has **admin consent** been granted on Microsoft Entra-ID?
-- Is an **App Protection Policy** assigned to the user?
-  - It may take some time for policy updates to reach devices.
+- The **admin consent** has been granted on Microsoft Entra-ID.
+- An **App Protection Policy** is assigned to the user.
+  - **Note**: It may take some time for policy updates to reach devices.
 - If a dedicated **App Configuration Policy** exists, ensure it contains the correct keys and values.
 
-If registration issues persist, contact us at [support@datadoghq.com](mailto:support@datadoghq.com) with the Intune Diagnostics attached. To collect diagnostics:
+If registration issues persist, contact us at [support@datadoghq.com][14] with the Intune Diagnostics attached. To collect diagnostics:
 
 1. On the login screen, tap **View Intune Diagnostics.**
 2. Select **Get Started** and then **Share Logs.**
@@ -105,3 +105,4 @@ If registration issues persist, contact us at [support@datadoghq.com](mailto:sup
 [11]: https://apps.apple.com/app/datadog-intune/id1673106321
 [12]: https://apps.apple.com/app/intune-company-portal/id719171358
 [13]: https://docs.datadoghq.com/mobile/enterprise_configuration/
+[14]: mailto:support@datadoghq.com
