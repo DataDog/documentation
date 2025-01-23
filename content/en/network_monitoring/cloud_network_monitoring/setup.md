@@ -500,7 +500,8 @@ For additional information around these capabilities, see [Cloud service enhance
 
 ### Failed connections 
 
-**Requires Agent version `7.59` or higher**. If you are running any Datadog Agent versions lower than `7.59`, you may see failures under-reported. CNM recommends using the same Agent version across all hosts.
+**Requires Agent version `7.59` or higher**. </br>
+**Note**: If you are using a Datadog Agent version earlier than `7.59`, you may encounter under-reported failures. CNM advises maintaining the same Agent version across all hosts.
 
 To enable the Agent to start collecting data about failed connections, add the following setting to your `/etc/datadog-agent/system-probe.yaml` file (or `C:\ProgramData\Datadog\system-probe.yaml` for Windows).
 
