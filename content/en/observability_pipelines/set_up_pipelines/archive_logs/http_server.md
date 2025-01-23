@@ -69,7 +69,7 @@ Select the cloud provider you are using to archive your logs.
 
 ## Set up Observability Pipelines
 
-1. Navigate to [Observability Pipelines][1].
+1. Navigate to [Observability Pipelines][4].
 1. Select the **Archive Logs** template to create a new pipeline.
 1. Select the **HTTP Server** source.
 
