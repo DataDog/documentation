@@ -82,7 +82,7 @@ Tags display in a column on the [app list][14].
 
 To add a tag to an app:
 
-1. Open the App Properties tab in your app.
+1. Open the **App Properties** tab in your app.
 1. Under **Tags**, use the drop-down to select an existing tag, or enter a new value and click **Add option: [your text]**.
 1. Save your app.
 
