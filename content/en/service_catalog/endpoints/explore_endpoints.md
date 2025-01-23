@@ -11,11 +11,11 @@ aliases:
     - /api_catalog/explore_apis/
 ---
 
-{{< img src="tracing/service_catalog/endpoints-list.png" alt="**Endpoints** list in the Service Catalog, showing performance-related information for each." style="width:100%;" >}}
+{{< img src="tracing/service_catalog/endpoints-list.png" alt="**Endpoints** list in the Service Catalog, showing performance-related information for each endpoint." style="width:100%;" >}}
 
 ## Overview
 
-The [**Endpoints** list][1] provides visibility into all HTTP endpoints across your Datadog organization's environments. Each endpoint displays its HTTP method (for example `GET`), URL path (for example, `/payment/{shop_id}/purchase`), and associated service name (for example, `Payments`).
+The [**Endpoints** list][1] provides visibility into all HTTP endpoints across your Datadog organization's environments. Each endpoint displays its HTTP method (for example, `GET`), URL path (for example, `/payment/{shop_id}/purchase`), and associated service name (for example, `Payments`).
 
 <div class="alert alert-info">The <strong>Endpoints</strong> list only supports HTTP endpoints.</div>
 
@@ -32,16 +32,16 @@ The **Endpoints** list shows performance data scoped to your selected environmen
 
 ## Viewing endpoint details
 
-Use the endpoints details page to detect underperforming APIs and identify opportunities for optimization.
+Use the endpoint details page to detect underperforming APIs and identify opportunities for optimization.
 
 To access the endpoint details page:
 
 1. Use the filtering, sorting, and searching options in the **Endpoints** list to find endpoints of interest.
 1. Click an endpoint to view its details page.
 
-The endpoint details page shows you metadata, performance, errors, dependencies, and correlated telemetry from other areas of Datadog.
+The endpoint details page shows you metadata, performance metrics, errors, dependencies, and correlated telemetry from other areas of Datadog.
 
-{{< img src="tracing/service_catalog/endpoint-details.png" alt="Click into an endpoint to see Errors graph and dependency graph. Click through to related traces to investigate." >}}
+{{< img src="tracing/service_catalog/endpoint-details.png" alt="Click into an endpoint to open the endpoint details page and see information such as errors and dependencies." >}}
 
 ## Further reading
 

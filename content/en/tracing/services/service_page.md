@@ -118,9 +118,9 @@ On the upper-right corner of each graph click on the arrow in order to export yo
 
 See Requests, Latency, and Error graphs broken down by resource to identify problematic resources. Resources are particular actions for your services (typically individual endpoints or queries). 
 
-Below, there's a list of [resources][11] associated with your service. Note: If the a resource represents an external interface of an HTTP service, the list displays endpoints instead.
+Below, there's a list of [resources][11] associated with your service. Note: If the resource represents an external interface of an HTTP service, the list displays endpoints instead.
 
-Sort the resources for this service by requests, latency, errors, and time, to identify areas of high traffic or potential trouble. These metric columns are configurable, as shown in the following example:
+Sort the service's resources by requests, latency, errors, or time to identify high-traffic areas or potential issues. You can configure these metric columns, as shown in the following example:
 
 {{< img src="tracing/visualization/service/resources_tab_1.jpg" alt="Resources" style="width:100%;">}}
 
