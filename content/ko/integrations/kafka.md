@@ -52,7 +52,7 @@
 "manifest_version": "2.0.0"
 "name": "kafka"
 "public_title": "Kafka Broker"
-"short_description": "생산자 및 소비자, 복제, 최대 지연 등에 대한 메트릭을 수집하세요.
+"short_description": "생산자 및 소비자, 복제, 최대 지연 등에 대한 메트릭을 수집하세요."
 "supported_os":
 - "linux"
 - "windows"
