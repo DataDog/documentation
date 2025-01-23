@@ -31,7 +31,7 @@ This guide walks you through how to configure the OTP extraction for a synthetic
 
 ### Step 1 - Create an email variable
 
-Create a [email variable][8] for the [browser test][3] to pull from using a [local variable][1]. 
+Create an email variable for the [Browser Test][3] by using a local variable."
 
 1. On a new or existing Browser Test, click **Variables** and select Email Address from the dropdown menu.
 2. Click **Add Variable** to generate an [email address][7] for the Synthetic test run.
