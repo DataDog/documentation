@@ -23,7 +23,7 @@ As your infrastructure and applications grow, so does your log volume and the co
 
 Select a log source to get started:
 
-- [Amazon Data Firehose][12]
+<!-- - [Amazon Data Firehose][12] -->
 - [Amazon S3][11]
 - [Datadog Agent][1]
 - [Fluentd or Fluent Bit][2]

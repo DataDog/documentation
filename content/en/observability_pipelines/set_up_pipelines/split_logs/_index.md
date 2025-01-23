@@ -13,7 +13,7 @@ Often, organizations need to send their logs to multiple products for different 
 
 Select your log source to get started:
 
-- [Amazon Data Firehose][12]
+<!-- - [Amazon Data Firehose][12] -->
 - [Amazon S3][11]
 - [Datadog Agent][1]
 - [Fluentd or Fluent Bit][2]
