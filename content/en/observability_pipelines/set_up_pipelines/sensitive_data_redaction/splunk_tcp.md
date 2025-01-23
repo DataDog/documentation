@@ -222,7 +222,7 @@ To set up the destination, follow the instructions for the cloud provider you ar
 ### Install the Observability Pipelines Worker
 1. Select your platform in the **Choose your installation platform** dropdown menu.
 1. Enter the Splunk TCP address. This is the address and port where your applications are sending their logging data. The Observability Pipelines Worker listens to this address for incoming logs.
-1. Provide the environment variables for each of your selected destinations. See [prerequisites](#prerequisites) for more information.
+1. Provide the environment variables for each of your selected destinations. See [Prerequisites](#prerequisites) for more information.
 {{< tabs >}}
 {{% tab "Amazon OpenSearch" %}}
 

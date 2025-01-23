@@ -223,7 +223,7 @@ To set up the destination, follow the instructions for the cloud provider you ar
 1. Select your platform in the **Choose your installation platform** dropdown menu.
 1. Enter the Fluent socket address and port. The Observability Pipelines Worker listens on this address for incoming log messages.
 
-1. Provide the environment variables for each of your selected destinations. See [prerequisites](#prerequisites) for more information.
+1. Provide the environment variables for each of your selected destinations. See [Prerequisites](#prerequisites) for more information.
 {{< tabs >}}
 {{% tab "Amazon OpenSearch" %}}
 

@@ -269,7 +269,7 @@ Follow the instructions for the cloud provider you are using to archive your log
 1. Select your platform in the **Choose your installation platform** dropdown menu.
 1. Enter the full path of the HTTP/S endpoint URL. For example, `https://127.0.0.8/logs`. The Observability Pipelines Worker collects logs events from this endpoint.
 
-1. Provide the environment variables for each of your selected destinations. See [prerequisites](#prerequisites) for more information.
+1. Provide the environment variables for each of your selected destinations. See [Prerequisites](#prerequisites) for more information.
 {{< tabs >}}
 {{% tab "Amazon OpenSearch" %}}
 

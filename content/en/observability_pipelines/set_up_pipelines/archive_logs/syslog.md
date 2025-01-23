@@ -270,7 +270,7 @@ Follow the instructions for the cloud provider you are using to archive your log
 1. Select your platform in the **Choose your installation platform** dropdown menu.
 1. Enter the Syslog address. This is a Syslog-compatible endpoint, exposed by the Worker, that your applications send logs to. The Observability Pipelines Worker listens on this address for incoming logs.
 
-1. Provide the environment variables for each of your selected destinations. See [prerequisites](#prerequisites) for more information.
+1. Provide the environment variables for each of your selected destinations. See [Prerequisites](#prerequisites) for more information.
 {{< tabs >}}
 {{% tab "Amazon OpenSearch" %}}
 

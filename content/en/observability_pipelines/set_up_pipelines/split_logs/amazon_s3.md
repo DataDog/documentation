@@ -215,7 +215,7 @@ Follow the instructions for the cloud provider you are using to archive your log
 ### Install the Observability Pipelines Worker
 1. Select your platform in the **Choose your installation platform** dropdown menu.
 1. In the **AWS S3 SQS URL** field, enter the URL of the SQS queue to which the S3 bucket sends notification events.
-1. Provide the environment variables for each of your selected destinations. See [prerequisites](#prerequisites) for more information.
+1. Provide the environment variables for each of your selected destinations. See [Prerequisites](#prerequisites) for more information.
 {{< tabs >}}
 {{% tab "Amazon OpenSearch" %}}
 

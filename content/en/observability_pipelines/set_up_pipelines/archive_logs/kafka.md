@@ -269,7 +269,7 @@ Follow the instructions for the cloud provider you are using to archive your log
 
     If you enabled SASL, enter the Kafka SASL username and Kafka SASL password.
 
-1. Provide the environment variables for each of your selected destinations. See [prerequisites](#prerequisites) for more information.
+1. Provide the environment variables for each of your selected destinations. See [Prerequisites](#prerequisites) for more information.
 {{< tabs >}}
 {{% tab "Amazon OpenSearch" %}}
 
