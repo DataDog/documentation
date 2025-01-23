@@ -46,6 +46,7 @@ Supported test frameworks:
 | Karate | >= 1.0.0 |
 | Scalatest | >= 3.0.8 |
 | Scala MUnit | >= 0.7.28 |
+| Scala Weaver | >= 0.8.4 |
 
 If your test framework is not supported, you can try instrumenting your tests using [Manual Testing API][1].
 
@@ -56,7 +57,7 @@ Supported build systems:
 | Gradle | >= 2.0 |
 | Maven | >= 3.2.1 |
 
-Other build systems, such as Ant or Bazel, are supported with the following limitations:
+Other build systems, such as Ant, Bazel, or SBT are supported with the following limitations:
 - Automatic coverage configuration and reporting is not supported.
 - When building a multi-module project, every module is reported in a separate trace.
 
@@ -147,12 +148,34 @@ Set the following environment variables to configure the tracer:
 Run your tests as you normally do (for example: `./gradlew clean test`).
 
 {{% /tab %}}
+{{% tab "SBT" %}}
+
+Set the following environment variables to configure the tracer:
+
+`DD_CIVISIBILITY_ENABLED=true` (Required)
+: Enables the Test Optimization product.
+
+`DD_ENV` (Required)
+: Environment where the tests are being run (for example: `local` when running tests on a developer workstation or `ci` when running them on a CI provider).
+
+`DD_SERVICE` (Required)
+: Name of the service or library being tested.
+
+`DD_TRACER_FOLDER` (Required)
+: Path to the folder where the downloaded Java Tracer is located.
+
+`SBT_OPTS=-javaagent:$DD_TRACER_FOLDER/dd-java-agent.jar` (Required)
+: Injects the tracer into the JVMs that execute your tests.
+
+Run your tests as you normally do (for example: `sbt test`).
+
+{{% /tab %}}
 {{% tab "Other" %}}
 
 Set the following environment variables to configure the tracer:
 
 `DD_CIVISIBILITY_ENABLED=true` (Required)
-: Enables Test Optimization.
+: Enables the Test Optimization product.
 
 `DD_ENV` (Required)
 : Environment where the tests are being run (for example: `local` when running tests on a developer workstation or `ci` when running them on a CI provider).

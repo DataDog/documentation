@@ -39,6 +39,20 @@
       "description": "Update an AWS integration returns \"AWS Account object\" response"
     }
   ],
+  "CreateActionConnection": [
+    {
+      "group": "action_connection",
+      "suffix": "",
+      "description": "Create a new Action Connection returns \"Successfully created Action Connection\" response"
+    }
+  ],
+  "UpdateActionConnection": [
+    {
+      "group": "action_connection",
+      "suffix": "",
+      "description": "Update an existing Action Connection returns \"Successfully updated Action Connection\" response"
+    }
+  ],
   "CreateApp": [
     {
       "group": "apps",
@@ -110,6 +124,11 @@
       "group": "ci_visibility_pipelines",
       "suffix": "",
       "description": "Send pipeline event returns \"Request accepted for processing\" response"
+    },
+    {
+      "group": "ci_visibility_pipelines",
+      "suffix": "_819339921",
+      "description": "Send pipeline event with custom provider returns \"Request accepted for processing\" response"
     },
     {
       "group": "ci_visibility_pipelines",
@@ -599,7 +618,7 @@
   "ListLogs": [
     {
       "group": "logs",
-      "suffix": "",
+      "suffix": "_3400928236",
       "description": "Search logs returns \"OK\" response"
     },
     {

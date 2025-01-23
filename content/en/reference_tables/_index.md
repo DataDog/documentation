@@ -1,5 +1,5 @@
 ---
-title: Add Custom Metadata with Reference Tables
+title: Reference Tables
 aliases:
   - /logs/guide/enrichment-tables/
   - /logs/guide/reference-tables/
@@ -17,11 +17,14 @@ further_reading:
 - link: 'https://www.datadoghq.com/blog/add-context-with-reference-tables/'
   tag: 'Blog'
   text: 'Add more context to your logs with Reference Tables'
+- link: 'https://www.datadoghq.com/blog/add-context-with-reference-tables-in-cloud-siem/'
+  tag: 'Blog'
+  text: 'Add more context to Cloud SIEM detections and investigations with Datadog Reference Tables'
 ---
 
 ## Overview
 
-Reference Tables allow you to combine metadata with information already in Datadog. You can define new entities like customer details, service names and information, or IP addresses by uploading a CSV file containing a table of information. The entities are represented by a primary key in a Reference Table and the associated metadata. 
+Reference Tables allow you to combine custom metadata with information already in Datadog. You can define new entities like customer details, service names and information, or IP addresses by uploading a CSV file containing a table of information. The entities are represented by a primary key in a Reference Table and the associated metadata. 
 
 {{< img src="reference_tables/reference-table.png" alt="A reference table with data populated in the columns for org id, org name, parent org, account owner, and csm" style="width:100%;">}}
 
@@ -57,7 +60,7 @@ Reference Tables can automatically pull a CSV file from an Amazon S3 bucket to k
 
 To update Reference Tables from S3, Datadog uses the IAM role in your AWS account that you configured for the [AWS integration][1]. If you have not yet created that role, [follow these steps][2] to do so. To allow that role to update your Reference Tables, add the following permission statement to its IAM policies. Be sure to edit the bucket names to match your environment.
 
-**Note**: If using server-side encryption, you can only upload Reference Tables encrypted with Amazon S3-managed keys (SSE-S3).
+**Note**: If using server-side encryption, you can upload Reference Tables encrypted with Amazon S3-managed keys (SSE-S3) or AWS Key Management Service keys (SSE-KMS).
 
 ```json
 {

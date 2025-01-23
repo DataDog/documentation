@@ -86,11 +86,6 @@ Click a service in Service Catalog to open the side panel with the following det
 - An interactive service map displaying services upstream and downstream from this service.
 - **Defined and Related Dashboards** showing a list of pre-defined and Watchdog recommended dashboards when available. 
 - **Service Scorecards** showing a snapshot of the service's scores and last evaluation timestamp.
-- **Active library configuration** for Java and .NET services with the latest Agent configured with [Remote Configuration][1] enabled, you can adjust the [trace sampling rate][3] (from 0.0 to 1.0), enable [Log Injection][2] to correlate traces and logs data, and specify HTTP header tags to be applied to all traces coming into Datadog from this service. In the Setup Guidance tab, beside **Active Library Configuration**, click **Edit** to change these settings and immediately apply them without restarting the service.
-
-  {{< img src="tracing/service_catalog/service_details_remote_config.png" alt="Configuration options for the service in the Datadog UI" style="width:80%;" >}}
-
-Click **View Related** and select a page from the dropdown menu to navigate into related pages in Datadog, such as the [APM Service Page][6] and service map for this service, or related telemetry data pages, such as for distributed tracing, infrastructure, network performance, Log Management, RUM, and Continuous Profiler.
 
 ## Further reading
 

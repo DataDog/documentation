@@ -74,7 +74,6 @@ tile:
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
-<div class="alert alert-info">Cisco Meraki インテグレーションはプレビュー版です。</div>
 
 ## 概要
 
@@ -149,6 +148,7 @@ NDM メトリクスの収集を構成するには、Meraki の API キーが必�
 ### メトリクス
 
 <div class="alert alert-info">ネットワークデバイスモニタリングの Meraki デバイス (MR、MS、MX) のデータ (ネットワークレベル、デバイスレベル、アップリンクレベル、インターフェイス (スイッチポート) レベルのメトリクスとタグを含む) はベータ版です。
+
 
 スイッチレベルのポートトラフィックおよび使用状況に関するメトリクスは利用できません。</div>
 

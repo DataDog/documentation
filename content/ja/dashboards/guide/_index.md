@@ -23,7 +23,7 @@ title: グラフ作成ガイド
     {{< nextlink href="dashboards/guide/context-links" >}}コンテキストリンク{{< /nextlink >}}
     {{< nextlink href="dashboards/guide/unit-override" >}}単位のオーバーライド{{< /nextlink >}}
     {{< nextlink href="dashboards/guide/how-to-use-terraform-to-restrict-dashboards" >}}Terraform を使ってダッシュボードの編集を制限する{{< /nextlink >}}
-    {{< nextlink href="dashboards/guide/is-read-only-deprecation" >}}ダッシュボード API: is_read_only から移行する期限は 2024 年 11 月 30 日{{< /nextlink >}}
+    {{< nextlink href="dashboards/guide/is-read-only-deprecation" >}}ダッシュボード API: is_read_only から移行する期限は 2024 年 12 月 13 日{{< /nextlink >}}
     {{< nextlink href="dashboards/guide/embeddable-graphs-with-template-variables" >}}テンプレート変数による埋め込み可能なグラフ{{< /nextlink >}}
     {{< nextlink href="dashboards/guide/unable-to-iframe" >}}特定の HTTPS URL を iFrame で表示できないのはなぜですか？{{< /nextlink >}}
     {{< nextlink href="dashboards/guide/powerpacks-best-practices" >}}パワーパックのベストプラクティス{{< /nextlink >}}
@@ -31,7 +31,11 @@ title: グラフ作成ガイド
     {{< nextlink href="/dashboards/guide/slo_graph_query" >}}メトリクスベースの SLO クエリをスコープする{{< /nextlink >}}
     {{< nextlink href="/dashboards/guide/apm-stats-graph" >}}APM 統計グラフを構成する{{< /nextlink >}}
     {{< nextlink href="/dashboards/guide/version_history" >}}バージョン履歴{{< /nextlink >}}
+    {{< nextlink href="/dashboards/guide/graphing_json/" >}}JSON を使ったグラフ化{{< /nextlink >}}
+    {{< nextlink href="/dashboards/guide/using_vega_lite_in_wildcard_widgets/" >}}Datadog でワイルドカードウィジェットと Vega-Lite を使用する{{< /nextlink >}}
     {{< nextlink href="/dashboards/guide/graphing_json/" >}}JSON を使ったグラフ化
+{{< /nextlink >}}
+    {{< nextlink href="/dashboards/guide/tv_mode" >}}ダッシュボードの TV モードを使用する
     {{< /nextlink >}}
 {{< /whatsnext >}}
 

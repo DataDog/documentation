@@ -36,6 +36,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/service-catalog-schema-v3/"
   tag: "Blog"
   text: "Improve developer experience and collaboration with Service Catalog schema version 3.0"
+- link: "https://www.datadoghq.com/blog/memory-leak-workflow/"
+  tag: "Blog"
+  text: "Investigate memory leaks and OOMs with Datadog's guided workflow"
 algolia:
   tags: ['service catalog']
 ---
@@ -51,24 +54,10 @@ Datadog [Service Catalog][1] provides a consolidated view of your services, comb
 
 ### Use cases
 
-#### Service discovery
-- Datadog Service Catalog includes all discovered services from APM, USM, and RUM by default. If you are using any of these products, your catalog is pre-populated with entries.
-- As you instrument more applications across your environments, they are automatically added to the Service Catalog.
-
-#### Dependencies mapping and management 
-- Document and track all of your upstream and downstream dependencies automatically with application telemetries collected by APM, USM, and RUM.
-- Manually declare dependency relationships across components (available through [metadata schema v3.0][8]).
-- Understand and assess performance impacts across teams and services.
-
 #### Governance and optimization
 - Providing engineering leadership with a high-level view of best practices across teams and services through [Service Scorecards][9].
 - Reducing application risks by finding and fixing known security vulnerabilities in the dependencies of your services.
 - Understanding trends and identifying inefficiencies in the costs related to your services.
-
-#### Knowledge sharing 
-- Locate information without navigating through numerous repos, channels, or documentation pages.
-- Save time searching for runbooks or wiki pages when onboarding new team members.
-- Leverage real-time, automatically-generated topology maps to understand system architecture.
 
 #### Evaluate monitoring coverage  
 - Detecting which services aren’t reporting observability data or having that data monitored.
