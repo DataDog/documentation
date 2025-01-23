@@ -19,7 +19,7 @@ further_reading:
   text: 'Best practices for creating end-to-end tests'
 ---
 
-<div class="alert alert-info">Extracting one-time passcodes from an email body is only supported for synthetic browser tests.</div>
+<div class="alert alert-info">Extracting one-time passcodes from an email body is only supported for Synthetic Browser Tests.</div>
 
 ## Overview
 
