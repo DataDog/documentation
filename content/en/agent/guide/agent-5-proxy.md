@@ -313,9 +313,9 @@ backend datadog-metrics
     balance roundrobin
     mode http
     # The following configuration is for HAProxy 1.8 and newer
-    server-template mothership 5 haproxy-app.agent.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify required ca-file <PATH_TO_CERTIFICATES> check resolvers my-dns init-addr none resolve-prefer ipv4
+    server-template mothership 5 metrics.agent.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify required ca-file <PATH_TO_CERTIFICATES> check resolvers my-dns init-addr none resolve-prefer ipv4
     # Uncomment the following configuration for older HAProxy versions
-    # server mothership haproxy-app.agent.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify required ca-file <PATH_TO_CERTIFICATES>
+    # server mothership metrics.agent.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify required ca-file <PATH_TO_CERTIFICATES>
 
 backend datadog-api
     mode http
@@ -596,9 +596,9 @@ backend datadog-metrics
     balance roundrobin
     mode http
     # The following configuration is for HAProxy 1.8 and newer
-    server-template mothership 5 haproxy-app.agent.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify required ca-file <PATH_TO_DATADOG_CERTIFICATES_CRT> check resolvers my-dns init-addr none resolve-prefer ipv4
+    server-template mothership 5 metrics.agent.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify required ca-file <PATH_TO_DATADOG_CERTIFICATES_CRT> check resolvers my-dns init-addr none resolve-prefer ipv4
     # Uncomment the following configuration for older HAProxy versions
-    # server mothership haproxy-app.agent.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify required ca-file <PATH_TO_DATADOG_CERTIFICATES_CRT>
+    # server mothership metrics.agent.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify required ca-file <PATH_TO_DATADOG_CERTIFICATES_CRT>
 
 backend datadog-api
     mode http
@@ -824,7 +824,7 @@ http {
         }
         location / {
             proxy_ssl_verify on;
-            proxy_pass https://haproxy-app.agent.{{< region-param key="dd_site" >}}:443/;
+            proxy_pass https://metrics.agent.{{< region-param key="dd_site" >}}:443/;
         }
     }
 }
@@ -943,7 +943,7 @@ http {
         }
         location / {
             proxy_ssl_verify on;
-            proxy_pass https://haproxy-app.agent.{{< region-param key="dd_site" >}}:443/;
+            proxy_pass https://metrics.agent.{{< region-param key="dd_site" >}}:443/;
         }
     }
 }
