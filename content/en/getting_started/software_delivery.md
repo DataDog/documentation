@@ -10,6 +10,6 @@ disable_toc: true
 
     {{< nextlink href="/getting_started_test_impact_analysis" >}}Getting Started with Test Imact Analysis{{< /nextlink >}}
 
-    {{< nextlink href="/getting_started/code_analysis/" >}}Getting Started with Code Security{{< /nextlink >}}
+    {{< nextlink href="/getting_started/code_analysis/" >}}Getting Started with Code Analysis{{< /nextlink >}}
 
 {{< /whatsnext >}}
