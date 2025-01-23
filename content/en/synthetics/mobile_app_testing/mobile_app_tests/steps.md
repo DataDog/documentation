@@ -42,7 +42,7 @@ To stop recording, click **Stop Recording**.
 
 ## Manually added steps
 
-In addition to automatically creating steps by interacting directly with your device, you can manually create steps (using [assertions](#assertion), the [element inspector](#element-inspector), and [special actions](#special-actions)). You can also update steps by clicking into a previously recorded step or [reorder steps](#manage-step-order) by dragging them up and down the step list.
+In addition to automatically creating steps by interacting directly with your device, you can manually create steps (using the [element inspector](#element-inspector), [assertions](#assertion), and [special actions](#special-actions)). You can also update steps by clicking into a previously recorded step or [reorder steps](#manage-step-order) by dragging them up and down the step list.
 
 ### Element Inspector
 
