@@ -227,7 +227,7 @@ Service Catalog also helps you evaluate the coverage of your observability setup
 
 You can add components that you aren't planning on monitoring immediately, such as cron jobs or libraries, to create a comprehensive view of your system, and to mark team members who are responsible for these components ahead of the next phase of your Datadog rollout.
 
-Use the [API list][33] for resource endpoint-specific categorization, performance, reliability, and ownership of all your API endpoints in one place.
+Refer to the [Endpoints list][33] to categorize, monitor performance and reliability, and manage ownership of your API endpoints.
 
 ### Resource Catalog
 

@@ -3,7 +3,7 @@ title: Monitoring Endpoints
 further_reading:
 - link: "/tracing/api_catalog/get_started/"
   tag: "Documentation"
-  text: "Endpoint List Overview"
+  text: "Endpoints List Overview"
 - link: "/monitors/"
   tag: "Documentation"
   text: "Alerting with Monitors"
@@ -20,7 +20,7 @@ aliases:
 
 ## Overview
 
-The **Endpoints** list enables you to monitor and maintain the health of your endpoints. You can detect underperforming APIs, set up alerts for key performance metrics, track API reliability through alerts and test results, and establish standardized API testing and improve test coverage with Synthetic Monitoring.
+The Endpoints list enables you to monitor and maintain the health of your endpoints. You can detect underperforming APIs, set up alerts for key performance metrics, track API reliability through alerts and test results, and establish standardized API testing and improve test coverage with Synthetic Monitoring.
 
 ## Monitoring endpoint performance
 
@@ -43,7 +43,7 @@ For more information, read [Monitors][1].
 
 Use Synthetic API tests to set up automated testing of your endpoints. These tests alert you to failures so you can diagnose and fix problems before they impact your users.
 
-To create a synthetic API test for an endpoint:
+To create a Synthetic API test for an endpoint:
 
 1. Hover over the cell in the **MONITORS** column.
 1. Click **+ Create Synthetic API Test**.

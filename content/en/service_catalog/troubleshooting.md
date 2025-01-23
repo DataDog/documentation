@@ -44,18 +44,14 @@ The total monitor count displayed on the **Setup Guidance** tab for a single ser
 
 ## Endpoints
 
+### Missing endpoints
+
+The Endpoints list is based on APM tracing, so make sure your [services are instrumented][7].
+
 ### Definition matches too many services
 
 By default, the Endpoints list matches a definition to all instances that fit the defined path.
 You can scope the definition to a specific service by adding the [service parameter][6] to the API definition.
-
-### Missing endpoints
-
-The Endpoints list is based on APM tracing. If you are missing endpoints, first confirm that your services are instrumented: 
-1. Click **Learn More** in the app.
-1. Select **Troubleshoot**.
-1. <INSERT STEPS TO VERIFY IF APP IS INSTRUMENTED>
-{{< img src="tracing/api_catalog/api-catalog-discovery-learn-more.png" alt="Learn More button in the app" style="width:30%;text-align: left;" >}}
 
 ### No telemetry data for OpenAPI file
 
@@ -78,3 +74,4 @@ The Endpoints list relies on APM tracing, so traffic information is displayed on
 [4]: /help/
 [5]: /tracing/trace_pipeline/ingestion_controls/
 [6]: /api_catalog/add_metadata/
+[7]: /tracing/trace_collection/
