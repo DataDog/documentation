@@ -115,7 +115,7 @@ Below is a visual example of an OTP setup with separately defined fields that th
 ## Next steps
 
 Once the OTP is inserted and verified, you can continue adding steps to your browser test to verify that the user has completed the sign-up flow of your application such as adding an [assertion][6] that specific text is present on the page.
-From here you can continue [recording the rest of your browser test][9] and then look into your [browser test results][10].
+From here, you can continue [recording the rest of your browser test][9] and then verify your [browser test results][10].
 
 ## Further Reading
 
