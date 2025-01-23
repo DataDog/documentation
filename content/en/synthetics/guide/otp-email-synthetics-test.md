@@ -93,7 +93,7 @@ Below is a visual example of an OTP setup with a simple text field that the abov
 
 {{< img src="synthetics/guide/otp-from-email-body/simple_otp.png" alt="example of an otp with a simple text field" style="width:40%;" caption="Example of an OTP with with a simple text field" >}}
 
-**Note**: For both of the Javascript examples you need to replace the `OTP_FROM_EMAIL` field with the name of the email variable you defined if named differently in your browser test.
+**Note**: For both of the Javascript examples, you need to replace the `OTP_FROM_EMAIL` field with the name of the email variable you defined if named differently in your browser test.
 
 #### Respective input fields
 To insert the OTP into separately defined fields, use the following:
