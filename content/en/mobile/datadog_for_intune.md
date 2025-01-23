@@ -14,20 +14,20 @@ Before you begin, ensure the following requirements are met:
 - Admin permissions in **Intune, Azure, and Datadog**
 - Users must download and install the **Datadog for Intune** app from their mobile app store or Microsoft Partner store.
 
-For those looking to create a custom configuration using the mobile app bundle ID, refer to the links below:
+For those looking to create a custom configuration using the mobile app bundle ID, follow the links below:
 
-| Platform   | Store Link                                                             |
-|------------|------------------------------------------------------------------------|
-| iOS/iPadOS | [Datadog Intune on the App Store](https://apps.apple.com/app/datadog-intune/id1673106321) |
-| Android    | [Datadog Intune on Google Play](https://play.google.com/store/apps/details?id=com.datadog.app.intune) |
+| Platform   | Store Link                                                                                            | BundleID                    |
+|------------|-------------------------------------------------------------------------------------------------------|-----------------------------|
+| iOS/iPadOS | [Datadog Intune on the App Store](https://apps.apple.com/app/datadog-intune/id1673106321)             | com.datadog.flagship-intune |
+| Android    | [Datadog Intune on Google Play](https://play.google.com/store/apps/details?id=com.datadog.app.intune) | com.datadog.app.intune      |
 
 ## Initial Setup for Datadog for Intune
 To get started, an Intune and Azure admin needs to configure the required settings. These are the **minimum** necessary steps to ensure Datadog for Intune functions correctly. Additional policies, such as Configuration Policies and Conditional Access Policies, can be set up later.
 
 ### Step 1: Add Datadog for Intune to Microsoft Intune Admin Center
 1. Open your [Microsoft Intune admin center][1], navigate to the **Apps** tab, and click **Add** under the appropriate **App type** (iOS/iPadOS or Android):
-   - For iOS/iPadOS: Select **“iOS store app”**, then search for “Datadog Intune.”
-   - For Android: Select **“Android store app”**, then copy the required details from the [Google Play store page][2].
+   - For iOS/iPadOS: Select **"iOS store app"**, then search for "Datadog Intune."
+   - For Android: Select **"Android store app"**, then copy the required details from the [Google Play store page][2].
 2. Assign the app to the relevant users and/or groups.
 
 For additional guidance on adding an application to Intune, refer to Microsoft’s [Intune Quickstart Guide][3].
@@ -60,10 +60,10 @@ For additional support with application management settings, refer to the [Micro
 #### Datadog for Intune Required Permissions
 Permissions should be automatically added when configuring the application:
 
-| Name                                    | Claim Value                              |
-|-----------------------------------------|------------------------------------------|
-| Microsoft Graph                         | `User.Read`                              |
-| Microsoft Mobile Application Management | `DeviceManagementManagedApps.ReadWrite`  |
+| Name                                    | Claim Value                              | Permission                                      | Type      |
+|-----------------------------------------|------------------------------------------|-------------------------------------------------|-----------|
+| Microsoft Graph                         | `User.Read`                              | Sign in and read user profile                   | Delegated |
+| Microsoft Mobile Application Management | `DeviceManagementManagedApps.ReadWrite`  | Read and Write the User’s App Management device | Delegated |
 
 ## Deploying Datadog Intune to Mobile Devices
 When deploying to Android devices, users need to install both:
