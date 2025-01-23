@@ -622,6 +622,36 @@ menu:
       identifier: otel_integrations
       parent: opentelemetry_top_level
       weight: 4
+    - name: Trace Metrics
+      url: opentelemetry/integrations/trace_metrics/
+      identifier: otel_trace_metrics
+      parent: otel_integrations
+      weight: 401
+    - name: Runtime Metrics
+      url: opentelemetry/integrations/runtime_metrics/
+      identifier: otel_runtime_metrics
+      parent: otel_integrations
+      weight: 402
+    - name: Collector Health Metrics
+      url: opentelemetry/integrations/collector_health_metrics/
+      identifier: otel_health_metrics
+      parent: otel_integrations
+      weight: 403
+    - name: Docker Metrics
+      url: opentelemetry/integrations/docker_metrics/
+      identifier: otel_docker_metrics
+      parent: otel_integrations
+      weight: 404
+    - name: Host Metrics
+      url: opentelemetry/integrations/host_metrics/
+      identifier: otel_host_metrics
+      parent: otel_integrations
+      weight: 405
+    - name: Kafka Metrics
+      url: opentelemetry/integrations/kafka_metrics/
+      identifier: otel_kafka_metrics
+      parent: otel_integrations
+      weight: 406
     - name: Schema and Semantics
       url: opentelemetry/schema_semantics/
       identifier: otel_schema
@@ -7113,15 +7143,15 @@ menu:
       parent: product_analytics
       identifier: pa_journeys
       weight: 2
+    - name: Pathway Diagrams
+      url: product_analytics/journeys/pathways
+      parent: pa_journeys
+      identifier: pa_pathways
+      weight: 201
     - name: Funnel Analysis
       url: product_analytics/journeys/funnel_analysis
       parent: pa_journeys
       identifier: pa_funnel_analysis
-      weight: 201
-    - name: Sankey Diagrams
-      url: product_analytics/journeys/sankey
-      parent: pa_journeys
-      identifier: pa_sankey
       weight: 202
     - name: Heatmaps
       url: product_analytics/heatmaps
@@ -7213,6 +7243,11 @@ menu:
       parent: product_analytics
       identifier: pa_segmentation
       weight: 6
+    - name: Troubleshooting
+      url: product_analytics/troubleshooting/
+      parent: product_analytics
+      identifier: pa_troubleshooting
+      weight: 7
     - name: Account Management
       url: account_management/
       pre: cog-2
