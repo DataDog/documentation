@@ -1,6 +1,6 @@
 ---
 title: Extract a One-Time Passcode from an Email Body using Synthetic Browser Tests
-description: Learn how to extract a OTP from an Email Body using Synthetic Browser Tests.
+description: Learn how to extract a OTP from an email body using Synthetic Browser Tests.
 further_reading:
 - link: "//synthetics/browser_tests/?tab=requestoptions#overview"
   tag: "Documentation"
