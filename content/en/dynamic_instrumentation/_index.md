@@ -79,7 +79,8 @@ For more detailed instructions, select your runtime below:
 ### Limitations
 
 - Dynamic Instrumentation is not yet compatible with Azure App Services or serverless environments.
-- Support is limited to applications built with Python, Java, .NET and PHP.
+- Full support is available only for applications built with Python, Java, .NET.
+- Limited previews are ongoing for applications built with Node.js and Ruby.
 
 ## Explore Dynamic Instrumentation
 
