@@ -16152,6 +16152,8 @@ components:
           description: The bucket where the archive will be stored.
           example: bucket-name
           type: string
+        encryption:
+          $ref: '#/components/schemas/LogsArchiveEncryptionS3'
         integration:
           $ref: '#/components/schemas/LogsArchiveIntegrationS3'
         path:
@@ -16173,6 +16175,30 @@ components:
       type: string
       x-enum-varnames:
       - S3
+    LogsArchiveEncryptionS3:
+      description: The S3 encryption settings.
+      properties:
+        key:
+          description: An Amazon Resource Name (ARN) used to identify an AWS KMS key.
+          example: arn:aws:kms:us-east-1:012345678901:key/DatadogIntegrationRoleKms
+          type: string
+        type:
+          $ref: '#/components/schemas/LogsArchiveEncryptionS3Type'
+      required:
+      - type
+      type: object
+    LogsArchiveEncryptionS3Type:
+      description: Type of S3 encryption for a destination.
+      enum:
+      - NO_OVERRIDE
+      - SSE_S3
+      - SSE_KMS
+      example: SSE_S3
+      type: string
+      x-enum-varnames:
+      - NO_OVERRIDE
+      - SSE_S3
+      - SSE_KMS
     LogsArchiveIntegrationAzure:
       description: The Azure archive's integration destination.
       properties:
