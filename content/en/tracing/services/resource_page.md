@@ -139,6 +139,8 @@ An endpoint is an HTTP resource exposed by a service at a specific URL path.
 
 If a resource represents an endpoint, a new **Definition** section is added to the resource page.
 
+{{< img src="tracing/service_catalog/definition-section.png" alt="Resource side panel showing endpoint Definition section." style="width:100%;" >}}
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
