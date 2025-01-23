@@ -4,6 +4,7 @@ description: View rules for multiple languages for Static Analysis.
 aliases:
 - /continuous_integration/static_analysis/rules
 - /static_analysis/rules
+- /code_analysis/static_analysis_rules
 - /security/code_security/static_analysis_rules
 is_beta: false
 type: static-analysis
