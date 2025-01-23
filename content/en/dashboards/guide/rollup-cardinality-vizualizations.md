@@ -14,9 +14,9 @@ By aligning expectations with the nature of rollup results and employing clear q
 
 ## Understanding cardinality in timeseries
 
-Consider a scenario where you track distinct users visiting a website. Each day, you observe 100 unique users, totaling 700 across a week. However, the actual number of distinct users over the entire week might be 400, as many users visit the site on multiple days. This discrepancy arises because each time frame (such as each day) independently counts unique users, which inflates the sum when compared to a single, longer rollup time frame.
+Consider a scenario where you track distinct users visiting a website. Each day for seven days, you observe 100 unique users, so you might assume you had a total of 700 users. However, the actual number of distinct users over the entire week might be 400, as many users visit the site on multiple days. This discrepancy arises because each time frame (such as each day) independently counts unique users, which inflates the sum when compared to a single, longer rollup time frame.
 
-This counterintuitive result is due to cardinality, or how the unique elements in a dataset are counted. Be aware that counting unique elements within a dataset may cause these counterintuitive situations.
+This counterintuitive result is due to cardinality, or how the unique elements in a dataset are counted.
 
 ## Rollup functionality and unexpected results
 
@@ -32,7 +32,7 @@ Averages involving cardinality can be complex.
 
 For example, hourly averages may show a high percentage of distinct users without errors—reaching 99.5%. The weekly average, however, can reveal a lower percentage, dropping to 97.5% due to the longer duration.
 
-This disparity arises from multiple user visits being counted over a week, leading to a higher likelihood of users encountering errors over that period. See the following illustrative example for more context on this disparity.
+This disparity arises from some users visiting your website multiple times over a week, leading to a higher likelihood of encountering errors over that period. See the following illustrative example for more context on this disparity.
 
 ### Error rate variation and user interactions case study
 
