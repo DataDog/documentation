@@ -23,7 +23,7 @@ further_reading:
 
 ## Overview
 
- Synthetic browser tests are to used monitor your applications such as how your customers experience your webpages end-to-end. When testing a sign up or login flow, a one-time-passcode (OTP) can be sent to an email address for authentication which you need to incorpate into your test. This OTP token can be extracted from an email body for testing within an application.
+Synthetic Browser Tests are to used monitor your applications by reproducing how your customers experience your webpages end-to-end. When testing a sign-up or login flow, incorporate a one-time passcode (OTP) sent to an email address for authentication into your test. This OTP token can be extracted from an email body for testing within an application.
 
 This guide walks you through how to configure the OTP extraction for a synthetic browser test.
 
