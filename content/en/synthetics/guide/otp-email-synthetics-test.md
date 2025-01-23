@@ -110,7 +110,7 @@ function (vars) {
 
 Below is a visual example of an OTP setup with separately defined fields that the above query can be used for:
 
-{{< img src="synthetics/guide/otp-from-email-body/bubble_otp.png" alt="example of an otp with individual numerical fields" style="width:40%;" caption="Example of an OTP with respective input fields" >}}
+{{< img src="synthetics/guide/otp-from-email-body/bubble_otp.png" alt="Example of an OTP with individual numerical fields" style="width:40%;" caption="Example of an OTP with respective input fields" >}}
 
 ## Next steps
 
