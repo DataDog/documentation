@@ -2587,7 +2587,20 @@ menu:
           - ListVulnerabilities
         unstable:
           - v2
-        order: 3
+        order: 25
+    - name: Get SBOM
+      url: '#get-sbom'
+      identifier: security-monitoring-get-sbom
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetSBOM
+        unstable:
+          - v2
+        order: 27
     - name: List vulnerable assets
       url: '#list-vulnerable-assets'
       identifier: security-monitoring-list-vulnerable-assets
@@ -2600,7 +2613,7 @@ menu:
           - ListVulnerableAssets
         unstable:
           - v2
-        order: 4
+        order: 26
     - name: Get a finding
       url: '#get-a-finding'
       identifier: security-monitoring-get-a-finding
@@ -3693,8 +3706,7 @@ menu:
           - v2
         operationids:
           - GetBillingDimensionMapping
-        unstable:
-          - v2
+        unstable: []
         order: 1
     - name: Get hourly usage for application security
       url: '#get-hourly-usage-for-application-security'

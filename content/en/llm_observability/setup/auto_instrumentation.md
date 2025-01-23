@@ -192,6 +192,7 @@ Datadog's [LLM Observability Node.js SDK][4] provides integrations that automati
 | Framework                               | Supported Versions | Tracer Version       |
 |-----------------------------------------|--------------------|----------------------|
 | [OpenAI](#openai) (common JS)           | >= 3.0.0           | >= 4.49.0, >= 5.25.0 |
+| [LangChain](#langchain) (common JS)     | >= 0.1.0           | >= 5.32.0            |
 
 In addition to capturing latency and errors, the integrations capture the input parameters, input and output messages, and token usage (when available) of each traced call.
 
@@ -247,6 +248,21 @@ The OpenAI integration instruments the following methods, including streamed cal
   - `openai.chat.completions.create()`
 - [Embeddings][5]:
   - `openai.embeddings.create()`
+
+## LangChain
+
+The LangChain integration provides automatic tracing for the [LangChain Node.js SDK's][9] LLM, chat model, chain, and OpenAI embeddings calls.
+
+- [LLMs][10]: 
+  - `llm.invoke()`
+- [Chat models][11]
+  - `chat_model.invoke()`
+- [Chains][12]
+  - `chain.invoke()`
+  - `chain.batch()`
+- [OpenAI embeddings][13]
+  - `embeddings.embedQuery()`
+  - `embeddings.embedDocuments()`
 
 ### ESM support
 
@@ -341,6 +357,11 @@ module.exports = {
 [6]: /llm_observability/setup/sdk/nodejs/#in-code-setup
 [7]: /llm_observability/setup/sdk/nodejs/#tracing-spans-using-inline-methods
 [8]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/nodejs/#bundling
+[9]: https://js.langchain.com/docs/introduction/
+[10]: https://js.langchain.com/docs/integrations/llms/
+[11]: https://js.langchain.com/docs/concepts/chat_models
+[12]: https://js.langchain.com/docs/how_to/sequence/
+[13]: https://js.langchain.com/docs/integrations/text_embedding/openai/
 {{% /tab %}}
 {{< /tabs >}}
 
