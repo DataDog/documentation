@@ -125,7 +125,7 @@ It would look like:
 
 ### DogStatsD protocol v1.6
 
-Starting with the Agent `>=v7.63.0`, a new Cardinality field is supported.
+Starting with the Agent `>=v7.64.0`, a new Cardinality field is supported.
 The Datadog Agent uses the cardinality value to enrich DogStatsD metrics with additional container tags corresponding to their cardinality.
 
 The cardinality field is prefixed by `card:`, for example:
