@@ -284,6 +284,7 @@ CI Visibility supports Infrastructure metrics for "Instance" executors. For more
 
 {{% tab "Kubernetes" %}}
 CI Visibility supports Infrastructure metrics for the Kubernetes executor. For this, it is necessary to have the Datadog Agent monitoring the Kubernetes Gitlab infrastructure. See [Install the Datadog Agent on Kubernetes][1] to install the Datadog Agent in a Kubernetes cluster.
+<div class="alert alert-warning">Due to limitations in the Datadog Agent, jobs shorter than 15 seconds might not always display infrastructure correlation.</div>
 
 [1]: /containers/kubernetes/installation/?tab=datadogoperator
 {{% /tab %}}
