@@ -48,11 +48,13 @@ In addition to automatically creating steps by interacting directly with your de
 
 The Element Inspector allows you to visualize the element hierarchy, copy attributes, and target elements to generate interaction steps using XML.
 
-You can use this feature by going to the test recorder, launching a device, and clicking the Element Inspector button. You can use this feature by going to the test recorder, launching a device, and clicking the Element Inspector button. Use the search bar to:
-- Find specific elements to add to your Mobile App Test
-- Copy attributes such as the element name or XPATH values directly from the inspector
+You can use this feature by going to the test recorder, launching a device, and clicking the Element Inspector button. Use the Element Inspector to:
 
-{{< img src="mobile_app_testing/element_inspector_3.mp4" alt="Video showing the Element Inspector in Mobile App Tests" style="width:60%" video="true" >}}
+- **Visualize the element tree**: View the complete hierarchy of elements in your application for a clear, structured overview.
+- **Copy attributes**: Copy attributes like element name or XPATH values directly from the inspector.
+- **Target elements**: Generate steps such as _tap_ or _scroll_ by selecting the element within the element tree. 
+
+{{< img src="mobile_app_testing/element_inspector_3.mp4" alt="Video showing the Element Inspector in Mobile App Tests" style="width:60%; height:300px;" video="true" >}}
 
 ### Assertion
 
