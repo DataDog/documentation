@@ -33,7 +33,7 @@ draft: false
 git_integration_title: crio
 integration_id: cri-o
 integration_title: CRI-O
-integration_version: 2.6.1
+integration_version: 4.1.0
 is_public: true
 manifest_version: 2.0.0
 name: crio
@@ -50,6 +50,7 @@ tile:
   - Supported OS::macOS
   - Supported OS::Windows
   - Category::Containers
+  - 제공::통합
   configuration: README.md#Setup
   description: Datadog로 CRI-O 메트릭을 모두 추적하기
   media: []
@@ -71,17 +72,17 @@ tile:
 
 이 통합의 경우 활성화된 메트릭이 `127.0.0.1:9090/metrics`에 노출되어 있을 때 기본적으로 비활성화되어 있는 CRI-O  `--enable-metrics ` 옵션이 필요합니다.
 
-### 설정
+### 구성
 
 1. 에이전트 구성 디렉터리의 루트 수준에 있는 `conf.d/` 폴더에서 `crio.d/conf.yaml` 파일을 편집해 CRI-O 성능 데이터 수집을 시작하세요. 사용할 수 있는 구성 옵션을 모두 보려면 [sample crio.d/conf.yaml][2]을 참고하세요.
 
-2. [Restart the Agent][3].
+2. [에이전트를 재시작][3]하세요.
 
 ### 검증
 
-[에이전트 상태 하위 명령을 실행하고][4] 점검 섹션 아래에서 `crio`를 찾으세요.
+[에이전트 상태 하위 명령을 실행하고][4] Checks 섹션 아래에서 `crio`를 찾으세요.
 
-## 수집한 데이터
+## 수집한 데이터
 
 CRI-O는 런타임 운영 횟수와 대기 시간 메트릭을 수집합니다.
 Datadog-CRI-O 통합은 CRI-O golang 이진수 자체의 메모리 사용량과 CPU를 수집합니다.

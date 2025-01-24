@@ -218,6 +218,13 @@ components:
       required: true
       schema:
         type: string
+    ConnectionId:
+      description: The ID of the action connection
+      in: path
+      name: connection_id
+      required: true
+      schema:
+        type: string
     CustomDestinationId:
       description: The ID of the custom destination.
       in: path
@@ -599,7 +606,8 @@ components:
         type: string
     ResourceID:
       description: 'Identifier, formatted as `type:id`. Supported types: `connection`,
-        `dashboard`, `notebook`, `reference-table`, `security-rule`, `slo`.'
+        `dashboard`, `notebook`, `reference-table`, `security-rule`, `slo`, `workflow`,
+        `app-builder-app`, `connection`, `connection-group`.'
       example: dashboard:abc-def-ghi
       in: path
       name: resource_id
@@ -805,6 +813,17 @@ components:
           schema:
             $ref: '#/components/schemas/APIErrorResponse'
       description: Not Found
+    NotificationRulesList:
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                items:
+                  $ref: '#/components/schemas/NotificationRule'
+                type: array
+            type: object
+      description: The list of notification rules.
     PreconditionFailedResponse:
       content:
         application/json:
@@ -847,6 +866,13 @@ components:
           schema:
             $ref: '#/components/schemas/APIErrorResponse'
       description: Unauthorized
+    UnprocessableEntityResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/JSONAPIErrorResponse'
+      description: The server cannot process the request because it contains invalid
+        data.
   schemas:
     APIErrorResponse:
       description: API error response.
@@ -1236,6 +1262,64 @@ components:
       required:
       - data
       type: object
+    AWSAssumeRole:
+      description: The definition of `AWSAssumeRole` object.
+      properties:
+        account_id:
+          description: AWS account the connection is created for
+          example: '111222333444'
+          pattern: ^\d{12}$
+          type: string
+        external_id:
+          description: External ID used to scope which connection can be used to assume
+            the role
+          example: 33a1011635c44b38a064cf14e82e1d8f
+          readOnly: true
+          type: string
+        principal_id:
+          description: AWS account that will assume the role
+          example: '123456789012'
+          readOnly: true
+          type: string
+        role:
+          description: Role to assume
+          example: my-role
+          type: string
+        type:
+          $ref: '#/components/schemas/AWSAssumeRoleType'
+      required:
+      - type
+      - account_id
+      - role
+      type: object
+    AWSAssumeRoleType:
+      description: The definition of `AWSAssumeRoleType` object.
+      enum:
+      - AWSAssumeRole
+      example: AWSAssumeRole
+      type: string
+      x-enum-varnames:
+      - AWSASSUMEROLE
+    AWSAssumeRoleUpdate:
+      description: The definition of `AWSAssumeRoleUpdate` object.
+      properties:
+        account_id:
+          description: AWS account the connection is created for
+          example: '111222333444'
+          pattern: ^\d{12}$
+          type: string
+        generate_new_external_id:
+          description: The `AWSAssumeRoleUpdate` `generate_new_external_id`.
+          type: boolean
+        role:
+          description: Role to assume
+          example: my-role
+          type: string
+        type:
+          $ref: '#/components/schemas/AWSAssumeRoleType'
+      required:
+      - type
+      type: object
     AWSAuthConfig:
       description: AWS Authentication config.
       oneOf:
@@ -1273,6 +1357,43 @@ components:
           type: string
       required:
       - role_name
+      type: object
+    AWSCredentials:
+      description: The definition of `AWSCredentials` object.
+      oneOf:
+      - $ref: '#/components/schemas/AWSAssumeRole'
+    AWSCredentialsUpdate:
+      description: The definition of `AWSCredentialsUpdate` object.
+      oneOf:
+      - $ref: '#/components/schemas/AWSAssumeRoleUpdate'
+    AWSIntegration:
+      description: The definition of `AWSIntegration` object.
+      properties:
+        credentials:
+          $ref: '#/components/schemas/AWSCredentials'
+        type:
+          $ref: '#/components/schemas/AWSIntegrationType'
+      required:
+      - type
+      - credentials
+      type: object
+    AWSIntegrationType:
+      description: The definition of `AWSIntegrationType` object.
+      enum:
+      - AWS
+      example: AWS
+      type: string
+      x-enum-varnames:
+      - AWS
+    AWSIntegrationUpdate:
+      description: The definition of `AWSIntegrationUpdate` object.
+      properties:
+        credentials:
+          $ref: '#/components/schemas/AWSCredentialsUpdate'
+        type:
+          $ref: '#/components/schemas/AWSIntegrationType'
+      required:
+      - type
       type: object
     AWSLambdaForwarderConfig:
       description: 'Log Autosubscription configuration for Datadog Forwarder Lambda
@@ -1587,6 +1708,73 @@ components:
         xray_services:
           $ref: '#/components/schemas/XRayServicesList'
       type: object
+    ActionConnectionAttributes:
+      description: The definition of `ActionConnectionAttributes` object.
+      properties:
+        integration:
+          $ref: '#/components/schemas/ActionConnectionIntegration'
+        name:
+          description: Name of the connection
+          example: My AWS Connection
+          type: string
+      required:
+      - name
+      - integration
+      type: object
+    ActionConnectionAttributesUpdate:
+      description: The definition of `ActionConnectionAttributesUpdate` object.
+      properties:
+        integration:
+          $ref: '#/components/schemas/ActionConnectionIntegrationUpdate'
+        name:
+          description: Name of the connection
+          example: My AWS Connection
+          type: string
+      type: object
+    ActionConnectionData:
+      description: Data related to the connection.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ActionConnectionAttributes'
+        id:
+          description: The connection identifier
+          readOnly: true
+          type: string
+        type:
+          $ref: '#/components/schemas/ActionConnectionDataType'
+      required:
+      - type
+      - attributes
+      type: object
+    ActionConnectionDataType:
+      description: The definition of `ActionConnectionDataType` object.
+      enum:
+      - action_connection
+      example: action_connection
+      type: string
+      x-enum-varnames:
+      - ACTION_CONNECTION
+    ActionConnectionDataUpdate:
+      description: Data related to the connection update.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ActionConnectionAttributesUpdate'
+        type:
+          $ref: '#/components/schemas/ActionConnectionDataType'
+      required:
+      - type
+      - attributes
+      type: object
+    ActionConnectionIntegration:
+      description: The definition of `ActionConnectionIntegration` object.
+      oneOf:
+      - $ref: '#/components/schemas/AWSIntegration'
+      - $ref: '#/components/schemas/HTTPIntegration'
+    ActionConnectionIntegrationUpdate:
+      description: The definition of `ActionConnectionIntegrationUpdate` object.
+      oneOf:
+      - $ref: '#/components/schemas/AWSIntegrationUpdate'
+      - $ref: '#/components/schemas/HTTPIntegrationUpdate'
     ActiveBillingDimensionsAttributes:
       description: List of active billing dimensions.
       properties:
@@ -1858,20 +2046,28 @@ components:
           example: github.com/DataDog/datadog-agent.git
           type: string
         operating_system:
-          $ref: '#/components/schemas/AssetAttributesOperatingSystem'
+          $ref: '#/components/schemas/AssetOperatingSystem'
         risks:
-          $ref: '#/components/schemas/AssetAttributesRisks'
+          $ref: '#/components/schemas/AssetRisks'
         type:
           $ref: '#/components/schemas/AssetType'
         version:
-          $ref: '#/components/schemas/AssetAttributesVersion'
+          $ref: '#/components/schemas/AssetVersion'
       required:
       - name
       - type
       - risks
       - environments
       type: object
-    AssetAttributesOperatingSystem:
+    AssetEntityType:
+      description: The JSON:API type.
+      enum:
+      - assets
+      example: assets
+      type: string
+      x-enum-varnames:
+      - ASSETS
+    AssetOperatingSystem:
       description: Asset operating system.
       properties:
         description:
@@ -1885,7 +2081,7 @@ components:
       required:
       - name
       type: object
-    AssetAttributesRisks:
+    AssetRisks:
       description: Asset risks.
       properties:
         has_access_to_sensitive_data:
@@ -1911,26 +2107,6 @@ components:
       required:
       - in_production
       type: object
-    AssetAttributesVersion:
-      description: Asset version.
-      properties:
-        first:
-          description: Asset first version.
-          example: _latest
-          type: string
-        last:
-          description: Asset last version.
-          example: _latest
-          type: string
-      type: object
-    AssetEntityType:
-      description: The JSON:API type.
-      enum:
-      - assets
-      example: assets
-      type: string
-      x-enum-varnames:
-      - ASSETS
     AssetType:
       description: The asset type
       enum:
@@ -1947,6 +2123,18 @@ components:
       - HOST
       - HOSTIMAGE
       - IMAGE
+    AssetVersion:
+      description: Asset version.
+      properties:
+        first:
+          description: Asset first version.
+          example: _latest
+          type: string
+        last:
+          description: Asset last version.
+          example: _latest
+          type: string
+      type: object
     AuditLogsEvent:
       description: Object description of an Audit Logs event after it is processed
         and stored by Datadog.
@@ -3330,6 +3518,9 @@ components:
       properties:
         env:
           description: The Datadog environment.
+          type: string
+        provider_name:
+          description: The name of the CI provider. By default, this is "custom".
           type: string
         resource:
           $ref: '#/components/schemas/CIAppCreatePipelineEventRequestAttributesResource'
@@ -6832,6 +7023,56 @@ components:
       type: string
       x-enum-varnames:
       - COST_BY_ORG
+    CreateActionConnectionRequest:
+      description: Request used to create an action connection.
+      properties:
+        data:
+          $ref: '#/components/schemas/ActionConnectionData'
+      required:
+      - data
+      type: object
+    CreateActionConnectionResponse:
+      description: The response for a created connection
+      properties:
+        data:
+          $ref: '#/components/schemas/ActionConnectionData'
+      type: object
+    CreateNotificationRuleParameters:
+      description: Body of the notification rule create request.
+      properties:
+        data:
+          $ref: '#/components/schemas/CreateNotificationRuleParametersData'
+      type: object
+    CreateNotificationRuleParametersData:
+      description: 'Data of the notification rule create request: the rule type, and
+        the rule attributes. All fields are required.'
+      properties:
+        attributes:
+          $ref: '#/components/schemas/CreateNotificationRuleParametersDataAttributes'
+        type:
+          $ref: '#/components/schemas/NotificationRulesType'
+      required:
+      - attributes
+      - type
+      type: object
+    CreateNotificationRuleParametersDataAttributes:
+      description: Attributes of the notification rule create request.
+      properties:
+        enabled:
+          $ref: '#/components/schemas/Enabled'
+        name:
+          $ref: '#/components/schemas/RuleName'
+        selectors:
+          $ref: '#/components/schemas/Selectors'
+        targets:
+          $ref: '#/components/schemas/Targets'
+        time_aggregation:
+          $ref: '#/components/schemas/TimeAggregation'
+      required:
+      - selectors
+      - name
+      - targets
+      type: object
     CreateOpenAPIResponse:
       description: Response for `CreateOpenAPI` operation.
       properties:
@@ -8370,6 +8611,11 @@ components:
             type: number
           type: array
       type: object
+    Date:
+      description: Date as Unix timestamp in milliseconds.
+      example: 1722439510282
+      format: int64
+      type: integer
     DependencyLocation:
       description: Static library vulnerability location.
       properties:
@@ -9260,6 +9506,10 @@ components:
       type: string
       x-enum-varnames:
       - WORK
+    Enabled:
+      description: Field used to enable or disable the rule.
+      example: true
+      type: boolean
     EntityAttributes:
       description: Entity attributes.
       properties:
@@ -11645,6 +11895,12 @@ components:
       type: string
       x-enum-varnames:
       - GCP_SERVICE_ACCOUNT
+    GetActionConnectionResponse:
+      description: The response for found connection
+      properties:
+        data:
+          $ref: '#/components/schemas/ActionConnectionData'
+      type: object
     GetDeviceAttributes:
       description: The device attributes
       properties:
@@ -11778,6 +12034,14 @@ components:
             $ref: '#/components/schemas/GetInterfacesData'
           type: array
       type: object
+    GetSBOMResponse:
+      description: The expected response schema when getting an SBOM.
+      properties:
+        data:
+          $ref: '#/components/schemas/SBOM'
+      required:
+      - data
+      type: object
     GetTeamMembershipsSort:
       description: Specifies the order of returned team memberships
       enum:
@@ -11839,6 +12103,18 @@ components:
         example: env:production
         type: string
       type: array
+    HTTPBody:
+      description: The definition of `HTTPBody` object.
+      properties:
+        content:
+          description: Serialized body content
+          example: '{"some-json": "with-value"}'
+          type: string
+        content_type:
+          description: Content type of the body
+          example: application/json
+          type: string
+      type: object
     HTTPCIAppError:
       description: List of errors.
       properties:
@@ -11863,6 +12139,88 @@ components:
           items:
             $ref: '#/components/schemas/HTTPCIAppError'
           type: array
+      type: object
+    HTTPCredentials:
+      description: The definition of `HTTPCredentials` object.
+      oneOf:
+      - $ref: '#/components/schemas/HTTPTokenAuth'
+    HTTPCredentialsUpdate:
+      description: The definition of `HTTPCredentialsUpdate` object.
+      oneOf:
+      - $ref: '#/components/schemas/HTTPTokenAuthUpdate'
+    HTTPHeader:
+      description: The definition of `HTTPHeader` object.
+      properties:
+        name:
+          description: The `HTTPHeader` `name`.
+          example: MyHttpHeader
+          pattern: ^[A-Za-z][A-Za-z\\d\\-\\_]*$
+          type: string
+        value:
+          description: The `HTTPHeader` `value`.
+          example: Some header value
+          type: string
+      required:
+      - name
+      - value
+      type: object
+    HTTPHeaderUpdate:
+      description: The definition of `HTTPHeaderUpdate` object.
+      properties:
+        deleted:
+          description: Should the header be deleted.
+          type: boolean
+        name:
+          description: The `HTTPHeaderUpdate` `name`.
+          example: MyHttpHeader
+          pattern: ^[A-Za-z][A-Za-z\\d\\-\\_]*$
+          type: string
+        value:
+          description: The `HTTPHeaderUpdate` `value`.
+          example: Updated Header Value
+          type: string
+      required:
+      - name
+      type: object
+    HTTPIntegration:
+      description: The definition of `HTTPIntegration` object.
+      properties:
+        base_url:
+          description: Base HTTP url for the integration
+          example: http://datadoghq.com
+          pattern: url
+          type: string
+        credentials:
+          $ref: '#/components/schemas/HTTPCredentials'
+        type:
+          $ref: '#/components/schemas/HTTPIntegrationType'
+      required:
+      - type
+      - base_url
+      - credentials
+      type: object
+    HTTPIntegrationType:
+      description: The definition of `HTTPIntegrationType` object.
+      enum:
+      - HTTP
+      example: HTTP
+      type: string
+      x-enum-varnames:
+      - HTTP
+    HTTPIntegrationUpdate:
+      description: The definition of `HTTPIntegrationUpdate` object.
+      properties:
+        base_url:
+          description: Base HTTP url for the integration
+          example: http://datadoghq.com
+          pattern: url
+          type: string
+        credentials:
+          $ref: '#/components/schemas/HTTPCredentialsUpdate'
+        type:
+          $ref: '#/components/schemas/HTTPIntegrationType'
+      required:
+      - type
       type: object
     HTTPLog:
       description: Structured log message.
@@ -11939,6 +12297,105 @@ components:
           type: string
       required:
       - message
+      type: object
+    HTTPToken:
+      description: The definition of `HTTPToken` object.
+      properties:
+        name:
+          description: The `HTTPToken` `name`.
+          example: MyToken
+          pattern: ^[A-Za-z][A-Za-z\\d]*$
+          type: string
+        type:
+          $ref: '#/components/schemas/TokenType'
+        value:
+          description: The `HTTPToken` `value`.
+          example: Some Token Value
+          type: string
+      required:
+      - name
+      - value
+      - type
+      type: object
+    HTTPTokenAuth:
+      description: The definition of `HTTPTokenAuth` object.
+      properties:
+        body:
+          $ref: '#/components/schemas/HTTPBody'
+        headers:
+          description: The `HTTPTokenAuth` `headers`.
+          items:
+            $ref: '#/components/schemas/HTTPHeader'
+          type: array
+        tokens:
+          description: The `HTTPTokenAuth` `tokens`.
+          items:
+            $ref: '#/components/schemas/HTTPToken'
+          type: array
+        type:
+          $ref: '#/components/schemas/HTTPTokenAuthType'
+        url_parameters:
+          description: The `HTTPTokenAuth` `url_parameters`.
+          items:
+            $ref: '#/components/schemas/UrlParam'
+          type: array
+      required:
+      - type
+      type: object
+    HTTPTokenAuthType:
+      description: The definition of `HTTPTokenAuthType` object.
+      enum:
+      - HTTPTokenAuth
+      example: HTTPTokenAuth
+      type: string
+      x-enum-varnames:
+      - HTTPTOKENAUTH
+    HTTPTokenAuthUpdate:
+      description: The definition of `HTTPTokenAuthUpdate` object.
+      properties:
+        body:
+          $ref: '#/components/schemas/HTTPBody'
+        headers:
+          description: The `HTTPTokenAuthUpdate` `headers`.
+          items:
+            $ref: '#/components/schemas/HTTPHeaderUpdate'
+          type: array
+        tokens:
+          description: The `HTTPTokenAuthUpdate` `tokens`.
+          items:
+            $ref: '#/components/schemas/HTTPTokenUpdate'
+          type: array
+        type:
+          $ref: '#/components/schemas/HTTPTokenAuthType'
+        url_parameters:
+          description: The `HTTPTokenAuthUpdate` `url_parameters`.
+          items:
+            $ref: '#/components/schemas/UrlParamUpdate'
+          type: array
+      required:
+      - type
+      type: object
+    HTTPTokenUpdate:
+      description: The definition of `HTTPTokenUpdate` object.
+      properties:
+        deleted:
+          description: Should the header be deleted.
+          type: boolean
+        name:
+          description: The `HTTPToken` `name`.
+          example: MyToken
+          pattern: ^[A-Za-z][A-Za-z\\d]*$
+          type: string
+        type:
+          $ref: '#/components/schemas/TokenType'
+        value:
+          description: The `HTTPToken` `value`.
+          example: Some Token Value
+          type: string
+      required:
+      - name
+      - type
+      - value
       type: object
     HistoricalJobDataType:
       description: Type of payload.
@@ -12156,6 +12613,10 @@ components:
       - APP_SEC_HOST_COUNT
       - OBSERVABILITY_PIPELINES_BYTES_PROCESSSED
       - LAMBDA_TRACED_INVOCATIONS_COUNT
+    ID:
+      description: The ID of a notification rule.
+      example: aaa-bbb-ccc
+      type: string
     IPAllowlistAttributes:
       description: Attributes of the IP allowlist.
       properties:
@@ -15758,6 +16219,8 @@ components:
           description: The bucket where the archive will be stored.
           example: bucket-name
           type: string
+        encryption:
+          $ref: '#/components/schemas/LogsArchiveEncryptionS3'
         integration:
           $ref: '#/components/schemas/LogsArchiveIntegrationS3'
         path:
@@ -15779,6 +16242,30 @@ components:
       type: string
       x-enum-varnames:
       - S3
+    LogsArchiveEncryptionS3:
+      description: The S3 encryption settings.
+      properties:
+        key:
+          description: An Amazon Resource Name (ARN) used to identify an AWS KMS key.
+          example: arn:aws:kms:us-east-1:012345678901:key/DatadogIntegrationRoleKms
+          type: string
+        type:
+          $ref: '#/components/schemas/LogsArchiveEncryptionS3Type'
+      required:
+      - type
+      type: object
+    LogsArchiveEncryptionS3Type:
+      description: Type of S3 encryption for a destination.
+      enum:
+      - NO_OVERRIDE
+      - SSE_S3
+      - SSE_KMS
+      example: SSE_S3
+      type: string
+      x-enum-varnames:
+      - NO_OVERRIDE
+      - SSE_S3
+      - SSE_KMS
     LogsArchiveIntegrationAzure:
       description: The Azure archive's integration destination.
       properties:
@@ -18408,6 +18895,84 @@ components:
         meta:
           $ref: '#/components/schemas/MonthlyCostAttributionMeta'
       type: object
+    NotificationRule:
+      description: 'Notification rules allow full control over notifications generated
+        by the various Datadog security products.
+
+        They allow users to define the conditions under which a notification should
+        be generated (based on rule severities,
+
+        rule types, rule tags, and so on), and the targets to notify.
+
+        A notification rule is composed of a rule ID, a rule type, and the rule attributes.
+        All fields are required.
+
+        '
+      properties:
+        attributes:
+          $ref: '#/components/schemas/NotificationRuleAttributes'
+        id:
+          $ref: '#/components/schemas/ID'
+        type:
+          $ref: '#/components/schemas/NotificationRulesType'
+      required:
+      - attributes
+      - id
+      - type
+      type: object
+    NotificationRuleAttributes:
+      description: Attributes of the notification rule.
+      properties:
+        created_at:
+          $ref: '#/components/schemas/Date'
+        created_by:
+          $ref: '#/components/schemas/RuleUser'
+        enabled:
+          $ref: '#/components/schemas/Enabled'
+        modified_at:
+          $ref: '#/components/schemas/Date'
+        modified_by:
+          $ref: '#/components/schemas/RuleUser'
+        name:
+          $ref: '#/components/schemas/RuleName'
+        selectors:
+          $ref: '#/components/schemas/Selectors'
+        targets:
+          $ref: '#/components/schemas/Targets'
+        time_aggregation:
+          $ref: '#/components/schemas/TimeAggregation'
+        version:
+          $ref: '#/components/schemas/Version'
+      required:
+      - created_at
+      - created_by
+      - enabled
+      - modified_at
+      - modified_by
+      - name
+      - selectors
+      - targets
+      - version
+      type: object
+    NotificationRuleQuery:
+      description: The query is composed of one or several key:value pairs, which
+        can be used to filter security issues on tags and attributes.
+      example: (source:production_service OR env:prod)
+      type: string
+    NotificationRuleResponse:
+      description: Response object which includes a notification rule.
+      properties:
+        data:
+          $ref: '#/components/schemas/NotificationRule'
+      type: object
+    NotificationRulesType:
+      description: The rule type associated to notification rules.
+      enum:
+      - notification_rules
+      example: notification_rules
+      type: string
+      x-enum-varnames:
+      - NOTIFICATION_RULES
     NullableRelationshipToUser:
       description: Relationship to user.
       nullable: true
@@ -19284,6 +19849,44 @@ components:
           items:
             $ref: '#/components/schemas/ApplicationKeyResponseIncludedItem'
           type: array
+      type: object
+    PatchNotificationRuleParameters:
+      description: Body of the notification rule patch request.
+      properties:
+        data:
+          $ref: '#/components/schemas/PatchNotificationRuleParametersData'
+      type: object
+    PatchNotificationRuleParametersData:
+      description: 'Data of the notification rule patch request: the rule ID, the
+        rule type, and the rule attributes. All fields are required.'
+      properties:
+        attributes:
+          $ref: '#/components/schemas/PatchNotificationRuleParametersDataAttributes'
+        id:
+          $ref: '#/components/schemas/ID'
+        type:
+          $ref: '#/components/schemas/NotificationRulesType'
+      required:
+      - attributes
+      - id
+      - type
+      type: object
+    PatchNotificationRuleParametersDataAttributes:
+      description: Attributes of the notification rule patch request. It is required
+        to update the version of the rule when patching it.
+      properties:
+        enabled:
+          $ref: '#/components/schemas/Enabled'
+        name:
+          $ref: '#/components/schemas/RuleName'
+        selectors:
+          $ref: '#/components/schemas/Selectors'
+        targets:
+          $ref: '#/components/schemas/Targets'
+        time_aggregation:
+          $ref: '#/components/schemas/TimeAggregation'
+        version:
+          $ref: '#/components/schemas/Version'
       type: object
     Permission:
       description: Permission object.
@@ -22164,12 +22767,34 @@ components:
       description: The unique ID for a scorecard rule.
       example: q8MQxk8TCqrHnWkx
       type: string
+    RuleName:
+      description: Name of the notification rule.
+      example: Rule 1
+      type: string
     RuleOutcomeRelationships:
       description: The JSON:API relationship to a scorecard rule.
       properties:
         rule:
           $ref: '#/components/schemas/RelationshipToOutcome'
       type: object
+    RuleSeverity:
+      description: Severity of a security rule.
+      enum:
+      - critical
+      - high
+      - medium
+      - low
+      - unknown
+      - info
+      example: critical
+      type: string
+      x-enum-varnames:
+      - CRITICAL
+      - HIGH
+      - MEDIUM
+      - LOW
+      - UNKNOWN
+      - INFO
     RuleType:
       default: rule
       description: The JSON:API type for scorecard rules.
@@ -22179,6 +22804,69 @@ components:
       type: string
       x-enum-varnames:
       - RULE
+    RuleTypes:
+      description: Security rule types used to filter signals and vulnerabilities
+        generating notifications.
+      example:
+      - misconfiguration
+      - attack_path
+      items:
+        $ref: '#/components/schemas/RuleTypesItems'
+      type: array
+    RuleTypesItems:
+      description: 'Security rule types which can be used in notification rules.
+
+        Signal-based notification rules can filter signals based on rule types application_security,
+        log_detection,
+
+        workload_security, signal_correlation, cloud_configuration and infrastructure_configuration.
+
+        Vulnerability-based notification rules can filter vulnerabilities based on
+        rule types application_code_vulnerability,
+
+        application_library_vulnerability, attack_path, container_image_vulnerability,
+        identity_risk, misconfiguration, and api_security.'
+      enum:
+      - application_security
+      - log_detection
+      - workload_security
+      - signal_correlation
+      - cloud_configuration
+      - infrastructure_configuration
+      - application_code_vulnerability
+      - application_library_vulnerability
+      - attack_path
+      - container_image_vulnerability
+      - identity_risk
+      - misconfiguration
+      - api_security
+      type: string
+      x-enum-varnames:
+      - APPLICATION_SECURITY
+      - LOG_DETECTION
+      - WORKLOAD_SECURITY
+      - SIGNAL_CORRELATION
+      - CLOUD_CONFIGURATION
+      - INFRASTRUCTURE_CONFIGURATION
+      - APPLICATION_CODE_VULNERABILITY
+      - APPLICATION_LIBRARY_VULNERABILITY
+      - ATTACK_PATH
+      - CONTAINER_IMAGE_VULNERABILITY
+      - IDENTITY_RISK
+      - MISCONFIGURATION
+      - API_SECURITY
+    RuleUser:
+      description: User creating or modifying a rule.
+      properties:
+        handle:
+          description: The user handle.
+          example: john.doe@domain.com
+          type: string
+        name:
+          description: The user name.
+          example: John Doe
+          type: string
+      type: object
     RumMetricCompute:
       description: The compute rule to compute the rum-based metric.
       properties:
@@ -22535,6 +23223,143 @@ components:
       type: string
       x-enum-varnames:
       - SAML_ASSERTION_ATTRIBUTES
+    SBOM:
+      description: A single SBOM
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SBOMAttributes'
+        id:
+          description: The unique ID for this SBOM (it is equivalent to the `asset_name`
+            or `asset_name@repo_digest` (Image)
+          example: github.com/datadog/datadog-agent
+          type: string
+        type:
+          $ref: '#/components/schemas/SBOMType'
+      type: object
+    SBOMAttributes:
+      description: The JSON:API attributes of the SBOM.
+      properties:
+        bomFormat:
+          description: Specifies the format of the BOM. This helps to identify the
+            file as CycloneDX since BOM do not have a filename convention nor does
+            JSON schema support namespaces. This value MUST be `CycloneDX`.
+          example: CycloneDX
+          type: string
+        components:
+          description: A list of software and hardware components.
+          items:
+            $ref: '#/components/schemas/SBOMComponent'
+          type: array
+        metadata:
+          $ref: '#/components/schemas/SBOMMetadata'
+        serialNumber:
+          description: Every BOM generated has a unique serial number, even if the
+            contents of the BOM have not changed overt time. The serial number follows
+            [RFC-4122](https://datatracker.ietf.org/doc/html/rfc4122)
+          example: urn:uuid:f7119d2f-1vgh-24b5-91f0-12010db72da7
+          type: string
+        specVersion:
+          $ref: '#/components/schemas/SpecVersion'
+        version:
+          description: It increments when a BOM is modified. The default value is
+            1.
+          example: 1
+          format: int64
+          type: integer
+      required:
+      - bomFormat
+      - specVersion
+      - components
+      - metadata
+      - serialNumber
+      - version
+      type: object
+    SBOMComponent:
+      description: Software or hardware component.
+      properties:
+        bom-ref:
+          description: An optional identifier that can be used to reference the component
+            elsewhere in the BOM.
+          example: pkg:golang/google.golang.org/grpc@1.68.1
+          type: string
+        name:
+          description: The name of the component. This will often be a shortened,
+            single name of the component.
+          example: google.golang.org/grpc
+          type: string
+        purl:
+          description: Specifies the package-url (purl). The purl, if specified, MUST
+            be valid and conform to the [specification](https://github.com/package-url/purl-spec).
+          example: pkg:golang/google.golang.org/grpc@1.68.1
+          type: string
+        type:
+          $ref: '#/components/schemas/SBOMComponentType'
+        version:
+          description: The component version.
+          example: 1.68.1
+          type: string
+      required:
+      - type
+      - name
+      - version
+      type: object
+    SBOMComponentType:
+      description: The SBOM component type
+      enum:
+      - application
+      - container
+      - data
+      - device
+      - device-driver
+      - file
+      - firmware
+      - framework
+      - library
+      - machine-learning-model
+      - operating-system
+      - platform
+      example: application
+      type: string
+      x-enum-varnames:
+      - APPLICATION
+      - CONTAINER
+      - DATA
+      - DEVICE
+      - DEVICE_DRIVER
+      - FILE
+      - FIRMWARE
+      - FRAMEWORK
+      - LIBRARY
+      - MACHINE_LEARNING_MODEL
+      - OPERATING_SYSTEM
+      - PLATFORM
+    SBOMMetadata:
+      description: Provides additional information about a BOM.
+      properties:
+        component:
+          $ref: '#/components/schemas/SBOMMetadataComponent'
+      type: object
+    SBOMMetadataComponent:
+      description: The component that the BOM describes.
+      properties:
+        name:
+          description: The name of the component. This will often be a shortened,
+            single name of the component.
+          example: github.com/datadog/datadog-agent
+          type: string
+        type:
+          description: Specifies the type of the component.
+          example: application
+          type: string
+      type: object
+    SBOMType:
+      description: The JSON:API type.
+      enum:
+      - sboms
+      example: sboms
+      type: string
+      x-enum-varnames:
+      - SBOMS
     SLOReportInterval:
       description: The frequency at which report data is to be generated.
       enum:
@@ -24922,6 +25747,29 @@ components:
           example: John Doe
           nullable: true
           type: string
+      type: object
+    Selectors:
+      description: 'Selectors are used to filter security issues for which notifications
+        should be generated.
+
+        Users can specify rule severities, rule types, a query to filter security
+        issues on tags and attributes, and the trigger source.
+
+        Only the trigger_source field is required.'
+      properties:
+        query:
+          $ref: '#/components/schemas/NotificationRuleQuery'
+        rule_types:
+          $ref: '#/components/schemas/RuleTypes'
+        severities:
+          description: The security rules severities to consider.
+          items:
+            $ref: '#/components/schemas/RuleSeverity'
+          type: array
+        trigger_source:
+          $ref: '#/components/schemas/TriggerSource'
+      required:
+      - trigger_source
       type: object
     SensitiveDataScannerConfigRequest:
       description: Group reorder request.
@@ -27579,6 +28427,24 @@ components:
             from the other indexes
           type: string
       type: object
+    SpecVersion:
+      description: The version of the CycloneDX specification a BOM conforms to.
+      enum:
+      - '1.0'
+      - '1.1'
+      - '1.2'
+      - '1.3'
+      - '1.4'
+      - '1.5'
+      example: '1.5'
+      type: string
+      x-enum-varnames:
+      - ONE_ZERO
+      - ONE_ONE
+      - ONE_TWO
+      - ONE_THREE
+      - ONE_FOUR
+      - ONE_FIVE
     State:
       description: The state of the rule evaluation.
       enum:
@@ -27597,6 +28463,20 @@ components:
       - team:A
       items:
         description: Tag associated with your event.
+        type: string
+      type: array
+    Targets:
+      description: 'List of recipients to notify when a notification rule is triggered.
+        Many different target types are supported,
+
+        such as email addresses, Slack channels, and PagerDuty services.
+
+        The appropriate integrations need to be properly configured to send notifications
+        to the specified targets.'
+      example:
+      - '@john.doe@email.com'
+      items:
+        description: Recipients to notify.
         type: string
       type: array
     Team:
@@ -28181,6 +29061,22 @@ components:
           description: Offset type.
           type: string
       type: object
+    TimeAggregation:
+      description: 'Time aggregation period (in seconds) is used to aggregate the
+        results of the notification rule evaluation.
+
+        Results are aggregated over a selected time frame using a rolling window,
+        which updates with each new evaluation.
+
+        Notifications are only sent for new issues discovered during the window.
+
+        Time aggregation is only available for vulnerability-based notification rules.
+        When omitted or set to 0, no aggregation
+
+        is done.'
+      example: 86400
+      format: int64
+      type: integer
     TimeseriesFormulaQueryRequest:
       description: A request wrapper around a single timeseries query to be executed.
       properties:
@@ -28360,6 +29256,33 @@ components:
       items:
         $ref: '#/components/schemas/TimeseriesResponseValues'
       type: array
+    TokenName:
+      description: Name for tokens.
+      example: MyTokenName
+      pattern: ^[A-Za-z][A-Za-z\\d]*$
+      type: string
+    TokenType:
+      description: The definition of `TokenType` object.
+      enum:
+      - SECRET
+      example: SECRET
+      type: string
+      x-enum-varnames:
+      - SECRET
+    TriggerSource:
+      description: 'The type of security issues on which the rule applies. Notification
+        rules based on security signals need to use the trigger source "security_signals",
+
+        while notification rules based on security vulnerabilities need to use the
+        trigger source "security_findings".'
+      enum:
+      - security_findings
+      - security_signals
+      example: security_findings
+      type: string
+      x-enum-varnames:
+      - SECURITY_FINDINGS
+      - SECURITY_SIGNALS
     Unit:
       description: Object containing the metric unit family, scale factor, name, and
         short name.
@@ -28387,6 +29310,20 @@ components:
           description: Abbreviation of the unit.
           example: min
           type: string
+      type: object
+    UpdateActionConnectionRequest:
+      description: Request used to update an action connection.
+      properties:
+        data:
+          $ref: '#/components/schemas/ActionConnectionDataUpdate'
+      required:
+      - data
+      type: object
+    UpdateActionConnectionResponse:
+      description: The response for an updated connection.
+      properties:
+        data:
+          $ref: '#/components/schemas/ActionConnectionData'
       type: object
     UpdateOpenAPIResponse:
       description: Response for `UpdateOpenAPI`.
@@ -28467,6 +29404,36 @@ components:
       description: Upsert entity response included item.
       oneOf:
       - $ref: '#/components/schemas/EntityResponseIncludedSchema'
+    UrlParam:
+      description: The definition of `UrlParam` object.
+      properties:
+        name:
+          $ref: '#/components/schemas/TokenName'
+          example: MyUrlParameter
+        value:
+          description: The `UrlParam` `value`.
+          example: Some Url Parameter value
+          type: string
+      required:
+      - name
+      - value
+      type: object
+    UrlParamUpdate:
+      description: The definition of `UrlParamUpdate` object.
+      properties:
+        deleted:
+          description: Should the header be deleted.
+          type: boolean
+        name:
+          $ref: '#/components/schemas/TokenName'
+          example: MyUrlParameter
+        value:
+          description: The `UrlParamUpdate` `value`.
+          example: Some Url Parameter value
+          type: string
+      required:
+      - name
+      type: object
     UsageApplicationSecurityMonitoringResponse:
       description: Application Security Monitoring usage response.
       properties:
@@ -29066,6 +30033,12 @@ components:
       type: string
       x-enum-varnames:
       - USERS
+    Version:
+      description: Version of the notification rule. It is updated when the rule is
+        modified.
+      example: 1
+      format: int64
+      type: integer
     VulnerabilitiesType:
       description: The JSON:API type.
       enum:
@@ -29111,9 +30084,9 @@ components:
             type: string
           type: array
         cvss:
-          $ref: '#/components/schemas/VulnerabilityAttributesCvss'
+          $ref: '#/components/schemas/VulnerabilityCvss'
         dependency_locations:
-          $ref: '#/components/schemas/VulnerabilityAttributesDependencyLocations'
+          $ref: '#/components/schemas/VulnerabilityDependencyLocations'
         description:
           description: Vulnerability description.
           example: LDAP Injection is a security vulnerability that occurs when untrusted
@@ -29192,7 +30165,7 @@ components:
       - remediations
       - fix_available
       type: object
-    VulnerabilityAttributesCvss:
+    VulnerabilityCvss:
       description: Vulnerability severities.
       properties:
         base:
@@ -29203,7 +30176,7 @@ components:
       - base
       - datadog
       type: object
-    VulnerabilityAttributesDependencyLocations:
+    VulnerabilityDependencyLocations:
       description: Static library vulnerability location.
       properties:
         block:
@@ -29657,6 +30630,10 @@ components:
             security_monitoring_filters_write: Create, edit, and delete Security Filters.
             security_monitoring_findings_read: View a list of findings that include
               both misconfigurations and identity risks.
+            security_monitoring_notification_profiles_read: View Rule Security Notification
+              rules.
+            security_monitoring_notification_profiles_write: Create, edit, and delete
+              Security Notification rules.
             security_monitoring_rules_read: Read Detection Rules.
             security_monitoring_rules_write: Create and edit Detection Rules.
             security_monitoring_signals_read: View Security Signals.
@@ -29724,6 +30701,190 @@ info:
   version: '1.0'
 openapi: 3.0.0
 paths:
+  /api/v2/actions/connections:
+    post:
+      description: Create a new Action Connection
+      operationId: CreateActionConnection
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateActionConnectionRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateActionConnectionResponse'
+          description: Successfully created Action Connection
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Forbidden
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Too Many Request
+      summary: Create a new Action Connection
+      tags:
+      - Action Connection
+      x-given:
+        action_connection:
+          parameters:
+          - name: body
+            value: "{\n  \"data\": {\n    \"type\": \"action_connection\",\n    \"attributes\":
+              {\n        \"name\": \"Cassette Connection DELETE\",\n        \"integration\":
+              {\n            \"type\": \"AWS\",\n            \"credentials\": {\n
+              \               \"type\": \"AWSAssumeRole\",\n                \"role\":
+              \"MyRole\",\n                \"account_id\": \"123456789123\"\n            }\n
+              \       }\n    }\n  }\n}"
+          step: there is a valid "action_connection" in the system
+      x-menu-order: 2
+      x-undo:
+        operationId: DeleteActionConnection
+        parameters:
+        - name: connection_id
+          source: data.id
+        type: unsafe
+  /api/v2/actions/connections/{connection_id}:
+    delete:
+      description: Delete an existing Action Connection
+      operationId: DeleteActionConnection
+      parameters:
+      - $ref: '#/components/parameters/ConnectionId'
+      responses:
+        '204':
+          description: The resource was deleted successfully.
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Not Found
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Too Many Request
+      summary: Delete an existing Action Connection
+      tags:
+      - Action Connection
+      x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - connection_write
+      x-undo:
+        type: idempotent
+    get:
+      description: Get an existing Action Connection
+      operationId: GetActionConnection
+      parameters:
+      - $ref: '#/components/parameters/ConnectionId'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetActionConnectionResponse'
+          description: Successfully get Action Connection
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Not Found
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Too Many Request
+      summary: Get an existing Action Connection
+      tags:
+      - Action Connection
+      x-menu-order: 1
+      x-undo:
+        type: safe
+    patch:
+      description: Update an existing Action Connection
+      operationId: UpdateActionConnection
+      parameters:
+      - $ref: '#/components/parameters/ConnectionId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateActionConnectionRequest'
+        description: Update an existing Action Connection request body
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateActionConnectionResponse'
+          description: Successfully updated Action Connection
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Not Found
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Too Many Request
+      summary: Update an existing Action Connection
+      tags:
+      - Action Connection
+      x-menu-order: 3
+      x-undo:
+        type: idempotent
   /api/v2/agentless_scanning/accounts/aws:
     get:
       description: Fetches the scan options configured for AWS accounts.
@@ -41651,6 +42812,14 @@ paths:
 
         - Monitors: `monitor`
 
+        - Workflows: `workflow`
+
+        - App Builder Apps: `app-builder-app`
+
+        - Connections: `connection`
+
+        - Connection Groups: `connection-group`
+
 
         #### Supported relations for resources
 
@@ -41676,7 +42845,15 @@ paths:
 
         Monitors                    | `viewer`, `editor`
 
-        Reference Tables            | `viewer`, `editor`'
+        Reference Tables            | `viewer`, `editor`
+
+        Workflows                   | `viewer`, `runner`, `editor`
+
+        App Builder Apps            | `viewer`, `editor`
+
+        Connections                 | `viewer`, `resolver`, `editor`
+
+        Connection Groups           | `viewer`, `editor`'
       operationId: UpdateRestrictionPolicy
       parameters:
       - $ref: '#/components/parameters/ResourceID'
@@ -44104,12 +45281,12 @@ paths:
       summary: List vulnerable assets
       tags:
       - Security Monitoring
-      x-menu-order: 4
+      x-menu-order: 26
       x-undo:
         type: safe
-      x-unstable: '**Note**: Note: This endpoint is a private preview.
+      x-unstable: '**Note**: This endpoint is a private preview.
 
-        If you are interested in accessing this API, please [fill this form](https://forms.gle/kMYC1sDr6WDUBDsx9).'
+        If you are interested in accessing this API, please [fill out this form](https://forms.gle/kMYC1sDr6WDUBDsx9).'
   /api/v2/security/cloud_workload/policy/download:
     get:
       description: 'The download endpoint generates a Cloud Workload Security policy
@@ -44142,6 +45319,287 @@ paths:
         - security_monitoring_cws_agent_rules_read
       x-undo:
         type: safe
+  /api/v2/security/sboms/{asset_type}:
+    get:
+      description: 'Get a single SBOM related to an asset by its type and name.
+
+        '
+      operationId: GetSBOM
+      parameters:
+      - description: The type of the asset for the SBOM request.
+        example: Repository
+        in: path
+        name: asset_type
+        required: true
+        schema:
+          $ref: '#/components/schemas/AssetType'
+      - description: The name of the asset for the SBOM request.
+        example: github.com/datadog/datadog-agent
+        in: query
+        name: filter[asset_name]
+        required: true
+        schema:
+          type: string
+      - description: The container image `repo_digest` for the SBOM request. When
+          the requested asset type is 'Image', this filter is mandatory.
+        example: sha256:0ae7da091191787229d321e3638e39c319a97d6e20f927d465b519d699215bf7
+        in: query
+        name: filter[repo_digest]
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetSBOMResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: 'Bad request: The server cannot process the request due to
+            invalid syntax in the request.'
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: 'Forbidden: Access denied'
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: 'Not found: asset not found'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: Get SBOM
+      tags:
+      - Security Monitoring
+      x-menu-order: 27
+      x-undo:
+        type: safe
+      x-unstable: '**Note**: This endpoint is a private preview.
+
+        If you are interested in accessing this API, please [fill out this form](https://forms.gle/kMYC1sDr6WDUBDsx9).'
+  /api/v2/security/signals/notification_rules:
+    get:
+      description: Returns the list of notification rules for security signals.
+      operationId: GetSignalNotificationRules
+      responses:
+        '200':
+          $ref: '#/components/responses/NotificationRulesList'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_notification_profiles_read
+      summary: Get the list of signal-based rules
+      tags:
+      - Security Monitoring
+      x-menu-order: 15
+      x-permission:
+        operator: OR
+        permissions:
+        - security_monitoring_notification_profiles_read
+      x-undo:
+        type: safe
+    post:
+      description: Create a new notification rule for security signals and return
+        the created rule.
+      operationId: CreateSignalNotificationRule
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateNotificationRuleParameters'
+        description: 'The body of the create notification rule request is composed
+          of the rule type and the rule attributes:
+
+          the rule name, the selectors, the notification targets, and the rule enabled
+          status.
+
+          '
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotificationRuleResponse'
+          description: Successfully created the notification rule.
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_notification_profiles_write
+      summary: Create a new signal-based rule
+      tags:
+      - Security Monitoring
+      x-codegen-request-body-name: body
+      x-given:
+        valid_signal_notification_rule:
+          parameters:
+          - name: body
+            value: "{\n  \"data\": {\n    \"type\": \"notification_rules\",\n    \"attributes\":
+              {\n      \"name\": \"{{ unique }}\",\n      \"selectors\": {\n        \"rule_types\":
+              [\"signal_correlation\"],\n        \"trigger_source\": \"security_signals\",\n
+              \       \"severities\": [\"critical\"],\n        \"query\": \"env:test\"\n
+              \     },\n      \"targets\": [\"@email@email.com\"],\n      \"enabled\":
+              true\n    }\n  }\n}"
+          step: there is a valid "valid_signal_notification_rule" in the system
+      x-menu-order: 16
+      x-permission:
+        operator: OR
+        permissions:
+        - security_monitoring_notification_profiles_write
+      x-undo:
+        operationId: DeleteSignalNotificationRule
+        parameters:
+        - name: id
+          source: data.id
+        type: unsafe
+  /api/v2/security/signals/notification_rules/{id}:
+    delete:
+      description: Delete a notification rule for security signals.
+      operationId: DeleteSignalNotificationRule
+      parameters:
+      - description: ID of the notification rule.
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Rule successfully deleted.
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_notification_profiles_write
+      summary: Delete a signal-based rule
+      tags:
+      - Security Monitoring
+      x-menu-order: 21
+      x-permission:
+        operator: OR
+        permissions:
+        - security_monitoring_notification_profiles_write
+      x-undo:
+        type: idempotent
+    get:
+      description: Get the details of a notification rule for security signals.
+      operationId: GetSignalNotificationRule
+      parameters:
+      - description: ID of the notification rule.
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotificationRuleResponse'
+          description: Notification rule details.
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_notification_profiles_read
+      summary: Get details of a signal-based rule
+      tags:
+      - Security Monitoring
+      x-menu-order: 18
+      x-permission:
+        operator: OR
+        permissions:
+        - security_monitoring_notification_profiles_read
+      x-undo:
+        type: safe
+    patch:
+      description: Partially update the notification rule. All fields are optional;
+        if a field is not provided, it is not updated.
+      operationId: PatchSignalNotificationRule
+      parameters:
+      - description: ID of the notification rule.
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchNotificationRuleParameters'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotificationRuleResponse'
+          description: Notification rule successfully patched.
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntityResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_notification_profiles_write
+      summary: Patch a signal-based rule
+      tags:
+      - Security Monitoring
+      x-codegen-request-body-name: body
+      x-menu-order: 20
+      x-permission:
+        operator: OR
+        permissions:
+        - security_monitoring_notification_profiles_write
+      x-undo:
+        type: idempotent
   /api/v2/security/vulnerabilities:
     get:
       description: "Get a list of vulnerabilities.\n\n### Pagination\n\nPagination
@@ -44518,12 +45976,224 @@ paths:
       summary: List vulnerabilities
       tags:
       - Security Monitoring
-      x-menu-order: 3
+      x-menu-order: 25
       x-undo:
         type: safe
-      x-unstable: '**Note**: Note: This endpoint is a private preview.
+      x-unstable: '**Note**: This endpoint is a private preview.
 
-        If you are interested in accessing this API, please [fill this form](https://forms.gle/kMYC1sDr6WDUBDsx9).'
+        If you are interested in accessing this API, please [fill out this form](https://forms.gle/kMYC1sDr6WDUBDsx9).'
+  /api/v2/security/vulnerabilities/notification_rules:
+    get:
+      description: Returns the list of notification rules for security vulnerabilities.
+      operationId: GetVulnerabilityNotificationRules
+      responses:
+        '200':
+          $ref: '#/components/responses/NotificationRulesList'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_notification_profiles_read
+      summary: Get the list of vulnerability-based rules
+      tags:
+      - Security Monitoring
+      x-menu-order: 15
+      x-permission:
+        operator: OR
+        permissions:
+        - security_monitoring_notification_profiles_read
+      x-undo:
+        type: safe
+    post:
+      description: Create a new notification rule for security vulnerabilities and
+        return the created rule.
+      operationId: CreateVulnerabilityNotificationRule
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateNotificationRuleParameters'
+        description: 'The body of the create notification rule request is composed
+          of the rule type and the rule attributes:
+
+          the rule name, the selectors, the notification targets, and the rule enabled
+          status.
+
+          '
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotificationRuleResponse'
+          description: Successfully created the notification rule.
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_notification_profiles_write
+      summary: Create a new vulnerability-based rule
+      tags:
+      - Security Monitoring
+      x-codegen-request-body-name: body
+      x-given:
+        valid_vulnerability_notification_rule:
+          parameters:
+          - name: body
+            value: "{\n  \"data\": {\n    \"type\": \"notification_rules\",\n    \"attributes\":
+              {\n      \"name\": \"{{ unique }}\",\n      \"selectors\": {\n        \"rule_types\":
+              [\"misconfiguration\", \"attack_path\"],\n        \"trigger_source\":
+              \"security_findings\",\n        \"severities\": [\"critical\"],\n        \"query\":
+              \"env:test\"\n      },\n      \"time_aggregation\": 86400,\n      \"targets\":
+              [\"@email@email.com\"],\n      \"enabled\": true\n    }\n  }\n}"
+          step: there is a valid "valid_vulnerability_notification_rule" in the system
+      x-menu-order: 16
+      x-permission:
+        operator: OR
+        permissions:
+        - security_monitoring_notification_profiles_write
+      x-undo:
+        operationId: DeleteVulnerabilityNotificationRule
+        parameters:
+        - name: id
+          source: data.id
+        type: unsafe
+  /api/v2/security/vulnerabilities/notification_rules/{id}:
+    delete:
+      description: Delete a notification rule for security vulnerabilities.
+      operationId: DeleteVulnerabilityNotificationRule
+      parameters:
+      - description: ID of the notification rule.
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Rule successfully deleted.
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_notification_profiles_write
+      summary: Delete a vulnerability-based rule
+      tags:
+      - Security Monitoring
+      x-menu-order: 21
+      x-permission:
+        operator: OR
+        permissions:
+        - security_monitoring_notification_profiles_write
+      x-undo:
+        type: idempotent
+    get:
+      description: Get the details of a notification rule for security vulnerabilities.
+      operationId: GetVulnerabilityNotificationRule
+      parameters:
+      - description: ID of the notification rule.
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotificationRuleResponse'
+          description: Notification rule details.
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_notification_profiles_read
+      summary: Get details of a vulnerability-based rule
+      tags:
+      - Security Monitoring
+      x-menu-order: 18
+      x-permission:
+        operator: OR
+        permissions:
+        - security_monitoring_notification_profiles_read
+      x-undo:
+        type: safe
+    patch:
+      description: Partially update the notification rule. All fields are optional;
+        if a field is not provided, it is not updated.
+      operationId: PatchVulnerabilityNotificationRule
+      parameters:
+      - description: ID of the notification rule.
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchNotificationRuleParameters'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotificationRuleResponse'
+          description: Notification rule successfully patched.
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntityResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_notification_profiles_write
+      summary: Patch a vulnerability-based rule
+      tags:
+      - Security Monitoring
+      x-codegen-request-body-name: body
+      x-menu-order: 20
+      x-permission:
+        operator: OR
+        permissions:
+        - security_monitoring_notification_profiles_write
+      x-undo:
+        type: idempotent
   /api/v2/security_monitoring/cloud_workload_security/agent_rules:
     get:
       description: Get the list of Agent rules.
@@ -48956,9 +50626,6 @@ paths:
         - usage_read
       x-undo:
         type: safe
-      x-unstable: '**Note**: This endpoint is in Preview.
-
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/usage/cost_by_org:
     get:
       deprecated: true
@@ -50314,6 +51981,17 @@ tags:
   externalDocs:
     url: https://docs.datadoghq.com/integrations/amazon_web_services/#log-collection
   name: AWS Logs Integration
+- description: "Action connections extend your installed integrations and allow you
+    to take action in your third-party systems\n(e.g. AWS, GitLab, and Statuspage)
+    with Datadog\u2019s Workflow Automation and App Builder products.\n\nDatadog\u2019s
+    Integrations automatically provide authentication for Slack, Microsoft Teams,
+    PagerDuty, Opsgenie,\nJIRA, GitHub, and Statuspage. You do not need additional
+    connections in order to access these tools within\nWorkflow Automation and App
+    Builder.\n\nWe offer granular access control for editing and resolving connections."
+  externalDocs:
+    description: Find out more at
+    url: https://docs.datadoghq.com/service_management/workflows/connections/
+  name: Action Connection
 - description: "Datadog Agentless Scanning provides visibility into risks and vulnerabilities\nwithin
     your hosts, running containers, and serverless functions\u2014all without\nrequiring
     teams to install Agents on every host or where Agents cannot be installed.\nGo

@@ -35,7 +35,7 @@ categories:
 - Kubernetes
 - recopilación de logs
 - la red
-custom_kind: integration
+custom_kind: integración
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/coredns/README.md
 display_on_public_website: true
@@ -43,7 +43,7 @@ draft: false
 git_integration_title: coredns
 integration_id: coredns
 integration_title: CoreDNS
-integration_version: 5.0.0
+integration_version: 5.1.0
 is_public: true
 manifest_version: 2.0.0
 name: coredns
