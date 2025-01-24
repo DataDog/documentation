@@ -9,7 +9,7 @@ Code Security scans your pre-production code, open source libraries, and reposit
 
 - [Static Code Analysis (SAST)][1] for your first-party code
 - [Software Composition Analysis][2] for open source dependencies in your codebase
-- [Runtime Code Analysis][3] for code-level vulnerabilities in your services
+- [Runtime Code Analysis (IAST)][3] for code-level vulnerabilities in your services
 
 ## Static Code Analysis (SAST)
 
