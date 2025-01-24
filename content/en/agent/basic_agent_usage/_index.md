@@ -34,8 +34,6 @@ Use the Datadog Agent Manager GUI to:
 - View all running checks
 - View the Agent log
 - Edit the Agent configuration file (`datadog.yaml`)
-- Add or edit Agent checks
-- Send flares
 
 The Datadog Agent Manager GUI is enabled by default on Windows and macOS, and runs on port `5002`. Use the `datadog-agent launch-gui` command to open the GUI in your default web browser.
 
