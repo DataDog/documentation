@@ -39,7 +39,7 @@ The [Create S3 Bucket blueprint][10] shows an example of how to generate Terrafo
 
 ##### Provision Kubernetes cluster
 
-The [Provision EKS Cluster blueprint][12] shows an example of how to generate Terraform code for a new Kubernetes cluster in GitHub.
+The [Provision EKS Cluster blueprint][12] shows an example of how to generate Terraform code for a Kubernetes cluster in GitHub.
 
 ##### Provision RDS instance
 
