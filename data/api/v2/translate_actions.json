@@ -1503,9 +1503,57 @@
     "description": "Get a single SBOM related to an asset by its type and name.\n",
     "summary": "Get SBOM"
   },
+  "GetSignalNotificationRules": {
+    "description": "Returns the list of notification rules for security signals.",
+    "summary": "Get the list of signal-based rules"
+  },
+  "CreateSignalNotificationRule": {
+    "description": "Create a new notification rule for security signals and return the created rule.",
+    "summary": "Create a new signal-based rule",
+    "request_description": "The body of the create notification rule request is composed of the rule type and the rule attributes:\nthe rule name, the selectors, the notification targets, and the rule enabled status.\n",
+    "request_schema_description": "Body of the notification rule create request."
+  },
+  "DeleteSignalNotificationRule": {
+    "description": "Delete a notification rule for security signals.",
+    "summary": "Delete a signal-based rule"
+  },
+  "GetSignalNotificationRule": {
+    "description": "Get the details of a notification rule for security signals.",
+    "summary": "Get details of a signal-based rule"
+  },
+  "PatchSignalNotificationRule": {
+    "description": "Partially update the notification rule. All fields are optional; if a field is not provided, it is not updated.",
+    "summary": "Patch a signal-based rule",
+    "request_description": "",
+    "request_schema_description": "Body of the notification rule patch request."
+  },
   "ListVulnerabilities": {
     "description": "Get a list of vulnerabilities.\n\n### Pagination\n\nPagination is enabled by default in both `vulnerabilities` and `assets`. The size of the page varies depending on the endpoint and cannot be modified. To automate the request of the next page, you can use the links section in the response.\n\nThis endpoint will return paginated responses. The pages are stored in the links section of the response:\n\n```JSON\n{\n  \"data\": [...],\n  \"meta\": {...},\n  \"links\": {\n    \"self\": \"https://.../api/v2/security/vulnerabilities\",\n    \"first\": \"https://.../api/v2/security/vulnerabilities?page[number]=1&page[token]=abc\",\n    \"last\": \"https://.../api/v2/security/vulnerabilities?page[number]=43&page[token]=abc\",\n    \"next\": \"https://.../api/v2/security/vulnerabilities?page[number]=2&page[token]=abc\"\n  }\n}\n```\n\n\n- `links.previous` is empty if the first page is requested.\n- `links.next` is empty if the last page is requested.\n\n#### Token\n\nVulnerabilities can be created, updated or deleted at any point in time.\n\nUpon the first request, a token is created to ensure consistency across subsequent paginated requests.\n\nA token is valid only for 24 hours.\n\n#### First request\n\nWe consider a request to be the first request when there is no `page[token]` parameter.\n\nThe response of this first request contains the newly created token in the `links` section.\n\nThis token can then be used in the subsequent paginated requests.\n\n#### Subsequent requests\n\nAny request containing valid `page[token]` and `page[number]` parameters will be considered a subsequent request.\n\nIf the `token` is invalid, a `404` response will be returned.\n\nIf the page `number` is invalid, a `400` response will be returned.\n\n### Filtering\n\nThe request can include some filter parameters to filter the data to be retrieved. The format of the filter parameters follows the [JSON:API format](https://jsonapi.org/format/#fetching-filtering): `filter[$prop_name]`, where `prop_name` is the property name in the entity being filtered by.\n\nAll filters can include multiple values, where data will be filtered with an OR clause: `filter[title]=Title1,Title2` will filter all vulnerabilities where title is equal to `Title1` OR `Title2`.\n\nString filters are case sensitive.\n\nBoolean filters accept `true` or `false` as values.\n\nNumber filters must include an operator as a second filter input: `filter[$prop_name][$operator]`. For example, for the vulnerabilities endpoint: `filter[cvss.base.score][lte]=8`.\n\nAvailable operators are: `eq` (==), `lt` (<), `lte` (<=), `gt` (>) and `gte` (>=).\n\n### Metadata\n\nFollowing [JSON:API format](https://jsonapi.org/format/#document-meta), object including non-standard meta-information.\n\nThis endpoint includes the meta member in the response. For more details on each of the properties included in this section, check the endpoints response tables.\n\n```JSON\n{\n  \"data\": [...],\n  \"meta\": {\n    \"total\": 1500,\n    \"count\": 18732,\n    \"token\": \"some_token\"\n  },\n  \"links\": {...}\n}\n```\n",
     "summary": "List vulnerabilities"
+  },
+  "GetVulnerabilityNotificationRules": {
+    "description": "Returns the list of notification rules for security vulnerabilities.",
+    "summary": "Get the list of vulnerability-based rules"
+  },
+  "CreateVulnerabilityNotificationRule": {
+    "description": "Create a new notification rule for security vulnerabilities and return the created rule.",
+    "summary": "Create a new vulnerability-based rule",
+    "request_description": "The body of the create notification rule request is composed of the rule type and the rule attributes:\nthe rule name, the selectors, the notification targets, and the rule enabled status.\n",
+    "request_schema_description": "Body of the notification rule create request."
+  },
+  "DeleteVulnerabilityNotificationRule": {
+    "description": "Delete a notification rule for security vulnerabilities.",
+    "summary": "Delete a vulnerability-based rule"
+  },
+  "GetVulnerabilityNotificationRule": {
+    "description": "Get the details of a notification rule for security vulnerabilities.",
+    "summary": "Get details of a vulnerability-based rule"
+  },
+  "PatchVulnerabilityNotificationRule": {
+    "description": "Partially update the notification rule. All fields are optional; if a field is not provided, it is not updated.",
+    "summary": "Patch a vulnerability-based rule",
+    "request_description": "",
+    "request_schema_description": "Body of the notification rule patch request."
   },
   "ListCloudWorkloadSecurityAgentRules": {
     "description": "Get the list of Agent rules.",

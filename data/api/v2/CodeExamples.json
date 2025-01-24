@@ -972,6 +972,20 @@
       "description": "Create a detection rule with type 'workload_security' returns \"OK\" response"
     }
   ],
+  "CreateSignalNotificationRule": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Create a new signal-based rule returns \"Successfully created the notification rule.\" response"
+    }
+  ],
+  "CreateVulnerabilityNotificationRule": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Create a new vulnerability-based rule returns \"Successfully created the notification rule.\" response"
+    }
+  ],
   "CreateSecurityFilter": [
     {
       "group": "security_monitoring",
@@ -1010,6 +1024,20 @@
       "group": "security_monitoring",
       "suffix": "",
       "description": "Mute or unmute a batch of findings returns \"OK\" response"
+    }
+  ],
+  "PatchSignalNotificationRule": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Patch a signal-based rule returns \"Notification rule successfully patched.\" response"
+    }
+  ],
+  "PatchVulnerabilityNotificationRule": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Patch a vulnerability-based rule returns \"Notification rule successfully patched.\" response"
     }
   ],
   "RunHistoricalJob": [
