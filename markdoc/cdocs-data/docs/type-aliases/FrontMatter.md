@@ -8,7 +8,7 @@
 
 > **Frontmatter**: `object`
 
-Defined in: src/schemas/frontmatter.ts:142
+Defined in: [src/schemas/frontmatter.ts:142](https://github.com/DataDog/corp-node-packages/blob/767b31fa96466b395043a1746f343c475d12807b/packages/cdocs-data/src/schemas/frontmatter.ts#L142)
 
 The front matter of a document required by the integration
 (additional keys are allowed in the front matter YAML,

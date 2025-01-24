@@ -72,10 +72,10 @@ describe('loadCustomizationConfig', () => {
 
   // Invalid data handling
   const invalidDirs = fs.readdirSync(INVALID_CONFIGS_DIR);
-  const errorsByDir: Record<string, Array<any>> = {};
+  const errorsByDir: Record<string, unknown> = {};
 
   invalidDirs.forEach((invalidDir) => {
-    let thrownError: any = null;
+    let thrownError: unknown = null;
 
     try {
       const { customizationConfigByLang } = loadCustomizationConfig({

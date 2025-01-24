@@ -8,7 +8,7 @@
 
 > **pruneManifestForClient**(`manifest`): [`ClientSideFiltersManifest`](../type-aliases/ClientSideFiltersManifest.md)
 
-Defined in: [src/api/compilation/pruneManifestForClient.ts:13](https://github.com/DataDog/documentation/blob/b898db3da077c905d05644b1aca1c0fe199f9494/markdoc/cdocs-data/src/api/compilation/pruneManifestForClient.ts#L13)
+Defined in: [src/api/compilation/pruneManifestForClient.ts:17](https://github.com/DataDog/corp-node-packages/blob/767b31fa96466b395043a1746f343c475d12807b/packages/cdocs-data/src/api/compilation/pruneManifestForClient.ts#L17)
 
 Convert a standard compile-time page filters manifest
 to a lighter version to be used client-side.

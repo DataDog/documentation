@@ -6,7 +6,7 @@
 export class CdocsClientStorage {
   private topLevelKey: string;
   private maxKeyCount: number;
-  private storage: Record<string, { value: any; timestamp: number }>;
+  private storage: Record<string, { value: string; timestamp: number }>;
 
   /**
    * Create a new instance of CdocsClientStorage, resuming

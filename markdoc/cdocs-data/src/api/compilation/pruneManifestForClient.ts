@@ -1,4 +1,8 @@
-import { FiltersManifest, ClientSideFiltersManifest } from '../../schemas/pageFilters';
+import {
+  FiltersManifest,
+  ClientSideFiltersManifest,
+  ClientSideFiltersManifestSchema,
+} from '../../schemas/pageFilters';
 
 /**
  * Convert a standard compile-time page filters manifest
@@ -27,5 +31,6 @@ export function pruneManifestForClient(
     };
   });
 
+  ClientSideFiltersManifestSchema.parse(result);
   return result;
 }

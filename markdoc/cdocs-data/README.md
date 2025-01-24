@@ -21,6 +21,8 @@ A *filter* is a pairing of:
 - A *trait*, which represents a user's characteristics or preferences, such as `programming_language`.
 - An *option group* that contains an ordered list of options for that trait, such as `python` or `go`.
 
+The available traits, options, and option groups are defined in YAML *glossaries* (allowlists containing all valid entries for each group).
+
 A *resolved filter* includes:
 - a trait
 - an option group
@@ -172,3 +174,35 @@ To experiment with the package's functionality:
 1. Create a new branch.
 2. Make modifications to [the simple example script](./test/integration/simpleExample/simpleExample.test.ts)/[configuration data](./test/integration/simpleExample/customization_config/), or the [complex example script](./test/integration/complexExample/complexExample.test.ts)/[configuration data](./test/integration/complexExample/customization_config/).
 3. Run `yarn test` inside the `cdocs-data` directory to see how your changes have impacted any logs, test snapshots, and so on.
+
+## Code conventions
+
+### Type and schemas
+
+#### Naming
+
+Where possible, TypeScript types are derived from Zod schemas. The schema for `SomeType` will be named `SomeTypeSchema`.
+
+When something has been ingested from YAML but is not yet in its final form, use the prefix `Raw`, such as `RawFrontmatter`.
+
+Record types should end in `ById` or a similar indicator of what they are keyed by.
+
+If a piece of data comes from YAML, it generally keeps its snake_case_name. This is because writers may need to reference configuration data in markup, and may find the camelcase conversion confusing.
+
+#### Documentation
+
+Data examples (tagged with `@example`) are often included in inline type documentation, but not inline schema documentation. This is to cut down on repetition without much downside, since examples are most useful on hover, and people are much more likely to hover on a type than a schema.
+
+### Design patterns
+
+#### Functional approach
+
+The code uses pure functions where possible (no side effects like mutating parameters, mutating instance variables, etc.) The code is naturally opaque since it implements abstract operations that could be used on a wide range of data, and using pure functions reduces the potential for confusion and unexpected side effects that are difficult to debug.
+
+#### Function arguments
+
+To improve clarity, functions often take a single object as their argument, with the keys of that object serving as labels for the data. This object is always named `p`. For example, `function parkCar(p: { car: Car, space: ParkingSpace }`.
+
+`p` should not be mutated in the function, and its data should not be destructured (copied) unless the intention is to mutate the copy. Instead, just access the data as `p.someData` throughout the function to keep the source of the data clear and reduce accidental mutations.
+
+When a copy of any data in `p` is made (for example, in order to mutate it), the name of the copy should end in `Dup`.

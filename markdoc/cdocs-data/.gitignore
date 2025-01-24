@@ -2,6 +2,7 @@
 
 package-lock.json
 dist/
+vitest.config.js
 
 .yarn/*
 !.yarn/releases

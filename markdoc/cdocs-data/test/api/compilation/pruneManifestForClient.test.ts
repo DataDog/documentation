@@ -7,7 +7,6 @@ describe('pruneManifestForClient', () => {
   test('correctly prunes the manifest', () => {
     const prunedManifest = pruneManifestForClient(paintColorsManifest);
 
-    console.log('pruned manifest', JSON.stringify(prunedManifest, null, 2));
     expect(prunedManifest).toEqual(clientSidePaintColorsManifest);
   });
 });

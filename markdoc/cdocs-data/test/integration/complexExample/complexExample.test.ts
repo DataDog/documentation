@@ -59,9 +59,11 @@ describe('Complex example', () => {
     filtersManifest: manifest,
   });
 
+  /*
   console.log('\nDefault habitat and animal:');
   console.log(defaultResolvedFilters.habitat.currentValue); // ocean
   console.log(defaultResolvedFilters.animal.currentValue); // octopus
+  */
 
   // Update the user's habitat selection
   // to a non-default option
@@ -79,9 +81,11 @@ describe('Complex example', () => {
   // Notice that the animal automatically updates,
   // since forest octopi do not exist. The forest habitat's
   // default animal should automatically be used instead.
+  /*
   console.log(`\nHabitat and animal after 'forest' is selected:`);
   console.log(forestResolvedFilters.habitat.currentValue); // forest
   console.log(forestResolvedFilters.animal.currentValue); // owl
+  */
 
   // Change the user's selection to an invalid value
   // (for example, carried over in local storage from a previous page
@@ -98,9 +102,11 @@ describe('Complex example', () => {
     filtersManifest: manifest,
   });
 
+  /*
   console.log('\nGracefully resolved habitat and animal:');
   console.log(defaultResolvedFilters.habitat.currentValue); // ocean
   console.log(defaultResolvedFilters.animal.currentValue); // octopus
+  */
 
   // BEGIN TESTS ----------------------------------------------------------
 

@@ -51,8 +51,10 @@ describe('Simple example', () => {
     filtersManifest: manifest,
   });
 
+  /*
   console.log('\nDefault favorite color value:');
   console.log(defaultResolvedFilters.favorite_color.currentValue); // purple
+  */
 
   // Change the user's selection to pink
   const userSelectionsByTraitId = {
@@ -65,8 +67,10 @@ describe('Simple example', () => {
     filtersManifest: manifest,
   });
 
+  /*
   console.log('\nManually updated favorite color value:');
   console.log(defaultResolvedFilters.favorite_color.currentValue); // pink
+  */
 
   // Change the user's selection to an invalid value
   // (for example, carried over in local storage from a previous page
@@ -82,8 +86,10 @@ describe('Simple example', () => {
     filtersManifest: manifest,
   });
 
+  /*
   console.log('\nGracefully resolved favorite color value:');
   console.log(defaultResolvedFilters.favorite_color.currentValue); // purple
+  */
 
   test('loads a customization config that matches the snapshot', async () => {
     const snapshot = JSON.stringify(customizationConfigByLang, null, 2);

@@ -1,7 +1,6 @@
-import { GLOBAL_PLACEHOLDER_REGEX } from '../../schemas/regexes';
+import { GLOBAL_PLACEHOLDER_REGEX, PLACEHOLDER_REGEX } from '../../schemas/regexes';
 import { Frontmatter, FilterConfig } from '../../schemas/frontmatter';
-import { PLACEHOLDER_REGEX } from '../../schemas/regexes';
-import { FiltersManifest } from '../../schemas/pageFilters';
+import { FiltersManifest, FiltersManifestSchema } from '../../schemas/pageFilters';
 import { CdocsError } from '../../schemas/errors';
 import { CustomizationConfig } from '../../schemas/customizationConfig';
 import { v4 as uuidv4 } from 'uuid';
@@ -136,6 +135,7 @@ export function buildFiltersManifest(p: {
     });
   });
 
+  FiltersManifestSchema.parse(manifest);
   return manifest;
 }
 
@@ -321,9 +321,9 @@ export function getDefaultValsByTraitId(p: {
  * // returns ['red_gloss_paint_options', 'red_matte_paint_options', 'blue_gloss_paint_options', 'blue_matte_paint_options']
  */
 export function buildSnakeCaseCombinations(
-  arr: any[],
+  arr: string[][],
   str: string = '',
-  final: any[] = [],
+  final: string[] = [],
 ) {
   if (arr.length > 1) {
     arr[0].forEach((segment: string) =>

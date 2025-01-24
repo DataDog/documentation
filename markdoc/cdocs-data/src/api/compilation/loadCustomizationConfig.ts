@@ -1,4 +1,8 @@
-import { YamlConfigParser } from '../../modules/YamlConfigParser';
+import {
+  loadTraitGlossaries,
+  loadOptionGlossaries,
+  loadOptionGroupGlossaries,
+} from '../../utils/yamlConfigParsing';
 import { CustomizationConfigByLang } from '../../schemas/customizationConfig';
 
 /**
@@ -32,16 +36,11 @@ export function loadCustomizationConfig(p: {
     langs: p.langs,
   };
 
-  // Load the filter glossaries for all languages
-  const filterGlossariesByLang =
-    YamlConfigParser.loadTraitGlossaries(glossaryLoadingConfig);
-
-  // Load the option glossaries for all languages
-  const optionGlossariesByLang =
-    YamlConfigParser.loadOptionGlossaries(glossaryLoadingConfig);
+  const traitGlossariesByLang = loadTraitGlossaries(glossaryLoadingConfig);
+  const optionGlossariesByLang = loadOptionGlossaries(glossaryLoadingConfig);
 
   // Load the option group glossaries for all languages
-  const optionGroupGlossariesByLang = YamlConfigParser.loadOptionGroupGlossaries({
+  const optionGroupGlossariesByLang = loadOptionGroupGlossaries({
     ...glossaryLoadingConfig,
     optionGlossariesByLang,
   });
@@ -50,7 +49,7 @@ export function loadCustomizationConfig(p: {
 
   p.langs.forEach((lang) => {
     customizationConfigByLang[lang] = {
-      traitsById: filterGlossariesByLang[lang],
+      traitsById: traitGlossariesByLang[lang],
       optionsById: optionGlossariesByLang[lang],
       optionGroupsById: optionGroupGlossariesByLang[lang],
     };
