@@ -72,8 +72,10 @@ APM tracer integrations support a *Propagation Mode*, which controls the amount 
 \* [CommandType.StoredProcedure][25] not supported
 
 \*\* Full mode SQL Server for Java/.NET:
+
+<div class="alert alert-warning">If your application uses <code>context_info</code> for instrumentation, the APM tracer will overwrite it.</div>
+
   - The instrumentation executes a `SET context_info` command when the client issues a query, which makes an additional round-trip to the database.
-  - If your applications uses `context_info` to instrument the application, it is overwritten by the APM tracer.
   - Prerequisites:
     - Agent version 7.55.0 or greater
     - Java tracer version 1.39.0 or greater
