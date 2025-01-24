@@ -50,7 +50,6 @@ jobs:
       env: 
         CHANGED_FILES: ${{ steps.changed_lines.outputs.changed_files }}
       run: |
-        echo ${{ steps.changed_lines.outputs.changed_files }}
         vale "${CHANGED_FILES}" \
           --output=local/bin/py/vale/vale_template.tmpl --no-exit > vale_output.log
     
