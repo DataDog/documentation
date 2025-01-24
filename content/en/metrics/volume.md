@@ -52,7 +52,6 @@ Facets can also filter your metrics by:
 - **Percentiles**: Distribution metrics enabled by percentiles/advanced query capabilities
 - **Historical Metrics**: Metrics that have historical metrics ingestion enabled
 - **Query Activity**: Metrics not actively queried in Datadog or by the API in the past 30, 60, or 90 days
-- **Related Assets**: Metrics that aren't being used on any asset (dashboards, monitors, notebooks, SLOs)
 - **Metric Type**: Differentiate between distribution and non-distribution metrics (counts, gauges, rates)
 - **Distribution Metric Origin**: The product from which the metric originated (for example, metrics generated from Logs or APM Spans)
 

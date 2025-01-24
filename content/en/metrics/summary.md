@@ -33,7 +33,6 @@ The search bars provide the most comprehensive set of actions to filter the list
 - **Percentiles**: Distribution metrics enabled by percentiles/advanced query capabilities
 - **Historical Metrics**: Metrics that have historical metrics ingestion enabled 
 - **Query Activity**: Metrics not queried in Datadog or by the API in the past 30, 60, or 90 days
-- **Related Assets**: Metrics that aren't being used on any asset (dashboards, monitors, notebooks, SLOs)
 - **Metric Type**: Differentiate between distribution and non-distribution metrics (counts, gauges, rates)
 - **Metric Origin**: The product from which the metric originated (for example, metrics generated from Logs or APM Spans). To learn more about the different metric origin types, see [Metric origin definitions][12].
 
@@ -146,7 +145,7 @@ For any particular tag key, you can:
 To determine the value of any metric name to your organization, use Metrics Related Assets. Metrics related assets refers to any dashboard, notebook, monitor, or SLO that queries a particular metric. 
 
 1. Scroll to the bottom of the metric's details side panel to the **Related Assets** section.
-2. Click the dropdown button to view the type of related asset you are interested in (dashboards, monitors, notebooks, SLOs). You can additionally leverage the search bar to validate specific assets.
+2. Click the dropdown button to view the type of related asset you are interested in (dashboards, monitors, notebooks, SLOs). You can additionally use the search bar to validate specific assets.
    
 ## Metrics without Limits™
 Metrics without Limits™ provides you control over the size of your custom metrics without requiring any agent or code-level changes. 
@@ -159,7 +158,6 @@ You can configure tags using the bulk metric tag configuration button or the **M
 
 1. Click on your custom distribution metric name in the **Metrics Summary** table to open the metrics details side panel.
 2. Click the **Manage Tags** button to open the tag configuration modal.
-
 3. Select **Include tags...** or **Exclude tags...** to customize the tags you do or don't want to query for. For more information on tag configuration, see the [Metrics without Limits][10] documentation.
 4. Preview the effects of your proposed tag configuration with the cardinality estimator before selecting **Save**.
 
