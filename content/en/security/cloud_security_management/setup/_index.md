@@ -57,15 +57,18 @@ For broader coverage and additional functionalities, deploy the Datadog Agent to
       <th>Feature</th>
       <th>Agentless</th>
       <th>Agentless &#43; Agent-based deployment</th>
+      <th>Agent</th>
     </tr>
   </thead>
   <tr>
     <td><strong><a href="/security/cloud_security_management/identity_risks">CSM Identity Risks</a></strong></td>
     <td>Yes</td>
     <td>Yes</td>
+    <td>No</td>
   </tr>
   <tr>
     <td><strong><a href="/security/cloud_security_management/misconfigurations">CSM Misconfigurations</a></strong></td>
+    <td>Yes</td>
     <td>Yes</td>
     <td>Yes</td>
   </tr>
@@ -73,9 +76,11 @@ For broader coverage and additional functionalities, deploy the Datadog Agent to
     <td style="padding-left: 20px;">Host benchmarks</td>
     <td>No</td>
     <td>Yes</td>
+    <td>Yes</td>
   </tr>
   <tr>
     <td><strong><a href="/security/cloud_security_management/vulnerabilities">CSM Vulnerabilities</a></strong></td>
+    <td>Yes</td>
     <td>Yes</td>
     <td>Yes</td>
   </tr>
@@ -83,25 +88,30 @@ For broader coverage and additional functionalities, deploy the Datadog Agent to
     <td style="padding-left: 20px;">Vulnerability prioritization</td>
     <td>Yes</td>
     <td>Yes, with runtime context</td>
+    <td>Yes, with runtime context</td>
   </tr>
   <tr>
     <td style="padding-left: 20px;">Vulnerability update frequency</td>
     <td>12 hours</td>
+    <td>Real time</td>
     <td>Real time</td>
   </tr>
   <tr>
     <td><strong><a href="/security/threats">CSM Threats</a></strong></td>
     <td>No</td>
     <td>Yes</td>
+    <td>Yes</td>
   </tr>
   <tr>
     <td style="padding-left: 20px;">Threat detection</td>
     <td>No</td>
     <td>Yes</td>
+    <td>Yes</td>
   </tr>
   <tr>
     <td><strong><a href="/security/security_inbox">Security Inbox</a></strong></td>
     <td>Yes</td>
+    <td>Yes, with more accurate insights</td>
     <td>Yes, with more accurate insights</td>
   </tr>
 </table>
