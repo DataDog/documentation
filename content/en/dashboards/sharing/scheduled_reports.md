@@ -80,14 +80,14 @@ A single dashboard can have multiple scheduled reports with different settings, 
 
 From the configuration modal that opens, you can pause an existing report or create a new report. To see and edit the details of an existing report, or delete the report, click **Edit**.
 
-{{< img src="dashboards/scheduled_reports/manage_reports.png" alt="The configuration modal for scheduled reports, with two reports displayed, each showing their titles, tags, recipients, frequency, an option to toggle the report on or off, and a button to edit the report. At the bottom is a button to add a new report and a cancel button" style="width:90%;" >}}
+{{< img src="dashboards/scheduled_reports/manage_reports-2.png" alt="The configuration modal for scheduled reports, with two reports displayed, each showing their titles, tags, recipients, frequency, an option to toggle the report on or off, and a button to edit the report. At the bottom is a button to add a new report and a cancel button" style="width:90%;" >}}
 
 ## Permissions
 
 Users need the **Dashboards Report Write** [permission][2] to create and edit report schedules.
 This permission can be granted by another user with the **User Access Manage** permission.
 
-{{< img src="dashboards/scheduled_reports/permissions.png" alt="A screenshot of an individual user's permissions from within the organization settings page. The dashboards report write permission is highlighted under the dashboards section" style="width:90%;" >}}
+{{< img src="dashboards/scheduled_reports/dashboards_permissions-2.png" alt="A screenshot of an individual user's permissions from within the organization settings page. The dashboards report write permission is highlighted under the dashboards section" style="width:90%;" >}}
 
 Users with the **Org Management** permission can enable or disable the scheduled reports feature for their organization from the **Settings** tab under [Public Sharing][3] in **Organization Settings**.
 
