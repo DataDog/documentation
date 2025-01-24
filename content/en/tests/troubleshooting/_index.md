@@ -155,14 +155,14 @@ The best way to fix this is to make sure that the test parameters are the same b
 
 ## Session history, performance or code coverage tab only show a single execution
 
-This is likely caused by an unstable test session fingerprint. The default value for the test session fingerprint includes the test command, so an unstable test command might cause the test session fingerprint to be unstable. Some examples of unstable test commands:
+This is likely caused by an unstable test session fingerprint. The default value for the test session fingerprint includes the test command, so an unstable test command might cause the test session fingerprint to be unstable. Some examples of unstable test commands include:
 
 - `yarn test --temp-dir=/var/folders/t1/rs2htfh55mz9px2j4prmpg_c0000gq/T`
 - `mvn test --temp-dir=/var/folders/t1/rs2htfh55mz9px2j4prmpg_c0000gq/T`
 - `bundle exec rspec --temp-dir=/var/folders/t1/rs2htfh55mz9px2j4prmpg_c0000gq/T`
 - `dotnet test --results-directory /var/folders/t1/rs2htfh55mz9px2j4prmpg_c0000gq/T`
 
-This can be solved by using the `DD_TEST_SESSION_NAME` environment variable. Use `DD_TEST_SESSION_NAME` to identify a group of tests. Examples of values for this tag would be:
+This can be solved by using the `DD_TEST_SESSION_NAME` environment variable. Use `DD_TEST_SESSION_NAME` to identify a group of tests. Example values for this tag include:
 
 - `unit-tests`
 - `integration-tests`
