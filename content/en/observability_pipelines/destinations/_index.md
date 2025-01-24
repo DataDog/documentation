@@ -39,18 +39,22 @@ Select and set up your destinations when you [set up a pipeline][1]. This is ste
 
 ## Template syntax
 
-Logs are often stored in separate indexes based on log data, such as the service or environment the logs are coming from or another log attribute. In Observability Pipelines, you can use template syntax to route your logs to different indexes based on specific log fields. The following destinations and fields support template syntax:
+Logs are often stored in separate indexes based on log data, such as the service or environment the logs are coming from or another log attribute. In Observability Pipelines, you can use template syntax to route your logs to different indexes based on specific log fields.
 
-| Destination       | Fields that support template syntax |
-| ----------------- | -------------------------------------|
-| Amazon Opensearch | Index                                |
-| Amazon S3         | Prefix                               |
-| Azure Blob        | Prefix                               |
-| Elasticsearch     | Source type                          |
-| Google Chronicle  | Log type                             |
-| Google Cloud      | Prefix                               |
-| Opensearch        | Index                                |
-| Splunk HEC        | Index<br>Source type                 |
+When the Observability Pipelines Worker cannot resolve the field with the template syntax, the Worker defaults to a specified behavior for that destination. For example, if you are using the template `{{application_id}}` for the Amazon S3 destination's **Prefix** field, but there isn't an `application_id` field in the log. The Worker in this case creates a folder called `OP_UNRESOLVED_TEMPLATE_LOGS/` and publishes the logs there.
+
+The following table lists the destinations and fields that support template syntax, and what happens when the Worker cannot resolve the field:
+
+| Destination       | Fields that support template syntax  | Behavior when the field cannot be resolved                                                     |
+| ----------------- | -------------------------------------| -----------------------------------------------------------------------------------------------|
+| Amazon Opensearch | Index                                | The Worker creates an index named `datadog-op` and sends the logs there.                       |
+| Amazon S3         | Prefix                               | The Worker creates a folder named `OP_UNRESOLVED_TEMPLATE_LOGS/` and publishes the logs there. |
+| Azure Blob        | Prefix                               | The Worker creates a folder named `OP_UNRESOLVED_TEMPLATE_LOGS/` and publishes the logs there. |
+| Elasticsearch     | Source type                          | The Worker creates an index named `datadog-op` and sends the logs there.                       |
+| Google Chronicle  | Log type                             | Defaults to `vector_dev` log type.                                                             |
+| Google Cloud      | Prefix                               | The Worker creates a folder named `OP_UNRESOLVED_TEMPLATE_LOGS/` and publishes the logs there. |
+| Opensearch        | Index                                | The Worker creates an index named `datadog-op` and sends the logs there.                       |
+| Splunk HEC        | Index<br>Source type                 | The Worker publishes the logs to the default index configured in Splunk.                       |
 
 #### Example
 
