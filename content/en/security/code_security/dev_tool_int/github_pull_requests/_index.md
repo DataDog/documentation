@@ -12,7 +12,7 @@ Code Security integrates with GitHub pull requests in two ways:
 [Pull request comments to flag violations](#enable-code-security-pr-comments-for-your-repositories)
 {{< img src="ci/static-analysis-pr-comment-example.png" alt="Example of a Code Security comment on a pull request" style="width:90%;" >}}
 
-- [Open a pull request to fix an issue directly from Datadog](#fixing-a-vulnerability-directly-from-datadog): You can create a pull request from the UI to fix a security vulnerability or code quality issue based on Datadog's suggested code fix. This is only available for Static Analysis (SAST).
+- [Open a pull request to fix an issue directly from Datadog](#fixing-a-vulnerability-directly-from-datadog): You can create a pull request from the UI to fix a security vulnerability or code quality issue based on Datadog's suggested code fix. This is only available for Static Code Analysis (SAST).
 {{< img src="ci/sast_one_click_light.png" alt="Example of one-click remediation for Code Security" style="width:90%;" >}}
 
 To enable these features, ensure you have the required GitHub permissions (Read & Write) for your repository.
@@ -48,7 +48,7 @@ The permissions you grant to the GitHub App determine which [GitHub integration]
 #### Update an existing GitHub App
 
 1. In Datadog, navigate to [**Integrations > GitHub Applications**][5], and search for the GitHub App you want to use for Code Security.
-{{< img src="ci/static-analysis-existing-github-app.png" alt="Example of a Static Analysis comment on a pull request" style="width:90%;" >}}
+{{< img src="ci/static-analysis-existing-github-app.png" alt="Example of a Static Code Analysis comment on a pull request" style="width:90%;" >}}
 1. On the **Features** tab, look at the **Code Security: Pull Request Comments** section to determine whether your GitHub App needs additional permissions. If so, click **Update permissions in GitHub** to edit the app settings.
 1. Under **Repository permissions**, set the **Pull Requests** access to **Read and write**.
 {{< img src="ci/static-analysis-pr-read-write-permissions.png" alt="The dropdown for the pull request read and write permission" style="width:90%;" >}}
@@ -65,7 +65,7 @@ The permissions you grant to the GitHub App determine which [GitHub integration]
 
 ### Fixing a vulnerability directly from Datadog 
 
-If your GitHub app's **Pull Requests** permission is set to **Read & Write**, one-click remediation is enabled for all Static Analysis findings with an available suggested fix.
+If your GitHub app's **Pull Requests** permission is set to **Read & Write**, one-click remediation is enabled for all Static Code Analysis findings with an available suggested fix.
 
 Follow these steps to fix a vulnerability and open a pull request:
 1. Go to **Code Security > Repositories**.

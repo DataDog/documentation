@@ -2575,6 +2575,66 @@ menu:
           - ListSecurityFilters
         unstable: []
         order: 18
+    - name: Patch a vulnerability-based rule
+      url: '#patch-a-vulnerability-based-rule'
+      identifier: security-monitoring-patch-a-vulnerability-based-rule
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - PatchVulnerabilityNotificationRule
+        unstable: []
+        order: 20
+    - name: Get details of a vulnerability-based rule
+      url: '#get-details-of-a-vulnerability-based-rule'
+      identifier: security-monitoring-get-details-of-a-vulnerability-based-rule
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetVulnerabilityNotificationRule
+        unstable: []
+        order: 18
+    - name: Delete a vulnerability-based rule
+      url: '#delete-a-vulnerability-based-rule'
+      identifier: security-monitoring-delete-a-vulnerability-based-rule
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteVulnerabilityNotificationRule
+        unstable: []
+        order: 21
+    - name: Create a new vulnerability-based rule
+      url: '#create-a-new-vulnerability-based-rule'
+      identifier: security-monitoring-create-a-new-vulnerability-based-rule
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateVulnerabilityNotificationRule
+        unstable: []
+        order: 16
+    - name: Get the list of vulnerability-based rules
+      url: '#get-the-list-of-vulnerability-based-rules'
+      identifier: security-monitoring-get-the-list-of-vulnerability-based-rules
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetVulnerabilityNotificationRules
+        unstable: []
+        order: 15
     - name: List vulnerabilities
       url: '#list-vulnerabilities'
       identifier: security-monitoring-list-vulnerabilities
@@ -2588,6 +2648,66 @@ menu:
         unstable:
           - v2
         order: 25
+    - name: Patch a signal-based rule
+      url: '#patch-a-signal-based-rule'
+      identifier: security-monitoring-patch-a-signal-based-rule
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - PatchSignalNotificationRule
+        unstable: []
+        order: 20
+    - name: Get details of a signal-based rule
+      url: '#get-details-of-a-signal-based-rule'
+      identifier: security-monitoring-get-details-of-a-signal-based-rule
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetSignalNotificationRule
+        unstable: []
+        order: 18
+    - name: Delete a signal-based rule
+      url: '#delete-a-signal-based-rule'
+      identifier: security-monitoring-delete-a-signal-based-rule
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteSignalNotificationRule
+        unstable: []
+        order: 21
+    - name: Create a new signal-based rule
+      url: '#create-a-new-signal-based-rule'
+      identifier: security-monitoring-create-a-new-signal-based-rule
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateSignalNotificationRule
+        unstable: []
+        order: 16
+    - name: Get the list of signal-based rules
+      url: '#get-the-list-of-signal-based-rules'
+      identifier: security-monitoring-get-the-list-of-signal-based-rules
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetSignalNotificationRules
+        unstable: []
+        order: 15
     - name: Get SBOM
       url: '#get-sbom'
       identifier: security-monitoring-get-sbom
