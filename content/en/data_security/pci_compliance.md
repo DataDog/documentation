@@ -46,7 +46,7 @@ Datadog offers PCI-compliant Log Management and Application Performance Monitori
 
 {{% /site-region %}}
 
-## View PCI-compliance
+## View Your PCI Compliance Status
 
 See the [Configuration Page][2] inside Safety Center. 
 
