@@ -41,7 +41,7 @@ Select and set up your destinations when you [set up a pipeline][1]. This is ste
 
 Logs are often stored in separate indexes based on log data, such as the service or environment the logs are coming from or another log attribute. In Observability Pipelines, you can use template syntax to route your logs to different indexes based on specific log fields.
 
-When the Observability Pipelines Worker cannot resolve the field with the template syntax, the Worker defaults to a specified behavior for that destination. For example, if you are using the template `{{application_id}}` for the Amazon S3 destination's **Prefix** field, but there isn't an `application_id` field in the log. The Worker in this case creates a folder called `OP_UNRESOLVED_TEMPLATE_LOGS/` and publishes the logs there.
+When the Observability Pipelines Worker cannot resolve the field with the template syntax, the Worker defaults to a specified behavior for that destination. For example, if you are using the template `{{application_id}}` for the Amazon S3 destination's **Prefix** field, but there isn't an `application_id` field in the log, the Worker creates a folder called `OP_UNRESOLVED_TEMPLATE_LOGS/` and publishes the logs there.
 
 The following table lists the destinations and fields that support template syntax, and what happens when the Worker cannot resolve the field:
 
