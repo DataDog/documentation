@@ -14,7 +14,7 @@ further_reading:
 - link: "/security/application_security/threats/"
   tag: "Documentation"
   text: "Threat Management"
-- link: "/security/application_security/software_composition_analysis/"
+- link: "/security/code_security/software_composition_analysis/"
   tag: "Documentation"
   text: "Software Composition Analysis"
 - link: "https://www.datadoghq.com/product/security-platform/application-security-monitoring/"
@@ -106,8 +106,8 @@ For information on disabling ASM or its features, see the following:
 [4]: /security/default_rules/?category=cat-application-security
 [6]: https://app.datadoghq.com/security
 [7]: https://dashcon.io/appsec
-[8]: /security/application_security/software_composition_analysis/
-[9]: /security/application_security/code_security/
+[8]: /security/code_security/software_composition_analysis/
+[9]: /security/code_security/iast/
 [10]: /security/application_security/troubleshooting/#disabling-threat-management-and-protection
 [11]: /security/application_security/troubleshooting/#disabling-software-composition-analysis
 [12]: /security/application_security/troubleshooting/#disabling-code-security
