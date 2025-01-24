@@ -24,7 +24,7 @@ Scheduled reports enable Datadog users to share dashboards as high-density PDFs 
 
 {{< img src="dashboards/scheduled_reports/report_pdf.png" alt="Example report PDF attachment" style="width:90%;" >}}
 
-The report PDF can be sent via Slack or email.
+The report PDF can be sent to Slack or email recipients.
 
 {{< img src="dashboards/scheduled_reports/report_slack.png" alt="Example report slack with PDF report linked" style="width:90%;" >}}
 
@@ -93,7 +93,7 @@ Users with the **Org Management** permission can enable or disable the scheduled
 
 {{< img src="dashboards/scheduled_reports/report_management_org_preference.png" alt="The Report Management setting in the Settings tab in Public Sharing within Organization Settings in Datadog with the setting Enabled" style="width:90%;" >}}
 
-Additionally, users with the **Org Management** permission can enable or disable Slack recipients on scheduled reports for their organization from the **Settings** tab under [Public Sharing][3] in **Organization Settings**.
+Additionally, users with the **Org Management** permission can enable or disable Slack recipients for their organization from the **Settings** tab under [Public Sharing][3] in **Organization Settings**.
 
 {{< img src="dashboards/scheduled_reports/report_send_to_slack_org_preference.png" alt="The Send to Slack setting under Report Management setting in the Settings tab in Public Sharing within Organization Settings in Datadog with the setting Enabled" style="width:90%;" >}}
 
