@@ -6,7 +6,7 @@
 
 # Class: CdocsClientStorage
 
-Defined in: src/api/browser/CdocsClientStorage.ts:6
+Defined in: [src/api/browser/CdocsClientStorage.ts:6](https://github.com/DataDog/documentation/blob/b75e75e1267d7b4c729d61650f6bdfccf0733955/markdoc/cdocs-data/src/api/browser/CdocsClientStorage.ts#L6)
 
 A wrapper for local storage that stores trait values,
 ensuring that the number of stored keys does not exceed
@@ -18,7 +18,7 @@ a maximum value.
 
 > **new CdocsClientStorage**(`p`): [`CdocsClientStorage`](CdocsClientStorage.md)
 
-Defined in: src/api/browser/CdocsClientStorage.ts:19
+Defined in: [src/api/browser/CdocsClientStorage.ts:22](https://github.com/DataDog/documentation/blob/b75e75e1267d7b4c729d61650f6bdfccf0733955/markdoc/cdocs-data/src/api/browser/CdocsClientStorage.ts#L22)
 
 Create a new instance of CdocsClientStorage, resuming
 any previous sessions by loading any existing trait values
@@ -32,13 +32,15 @@ from local storage.
 
 `number`
 
-The maximum number of keys that should be stored at once.
+The maximum number of keys that should be stored
+in the user's browser at one time.
 
 ###### topLevelKey
 
 `string`
 
-The key under which all data will be stored in local storage, such as 'cdocs-client-storage'.
+A unique key under which all cdocs data
+will be kept in local storage, such as 'cdocs-client-storage'.
 
 #### Returns
 
@@ -50,7 +52,7 @@ The key under which all data will be stored in local storage, such as 'cdocs-cli
 
 > **clear**(): `void`
 
-Defined in: src/api/browser/CdocsClientStorage.ts:105
+Defined in: [src/api/browser/CdocsClientStorage.ts:100](https://github.com/DataDog/documentation/blob/b75e75e1267d7b4c729d61650f6bdfccf0733955/markdoc/cdocs-data/src/api/browser/CdocsClientStorage.ts#L100)
 
 Erase all stored trait values, but keep the top-level key.
 
@@ -64,9 +66,9 @@ Erase all stored trait values, but keep the top-level key.
 
 > **destroy**(): `void`
 
-Defined in: src/api/browser/CdocsClientStorage.ts:97
+Defined in: [src/api/browser/CdocsClientStorage.ts:108](https://github.com/DataDog/documentation/blob/b75e75e1267d7b4c729d61650f6bdfccf0733955/markdoc/cdocs-data/src/api/browser/CdocsClientStorage.ts#L108)
 
-Erase all stored data, including the top-level key.
+Erase all browser data stored by this class.
 
 #### Returns
 
@@ -78,7 +80,7 @@ Erase all stored data, including the top-level key.
 
 > **getTraitVals**(): `Record`\<`string`, `string`\>
 
-Defined in: src/api/browser/CdocsClientStorage.ts:34
+Defined in: [src/api/browser/CdocsClientStorage.ts:38](https://github.com/DataDog/documentation/blob/b75e75e1267d7b4c729d61650f6bdfccf0733955/markdoc/cdocs-data/src/api/browser/CdocsClientStorage.ts#L38)
 
 Get the value of all traits, keyed by trait ID.
 
@@ -86,19 +88,19 @@ Get the value of all traits, keyed by trait ID.
 
 `Record`\<`string`, `string`\>
 
-A record of trait IDs to their values.
+A record of trait IDs to their values,
+such as { 'os': 'linux' }.
 
 ***
 
-### readFromLocalStorage()
+### loadLocalStorageData()
 
-> **readFromLocalStorage**(): `void`
+> **loadLocalStorageData**(): `void`
 
-Defined in: src/api/browser/CdocsClientStorage.ts:86
+Defined in: [src/api/browser/CdocsClientStorage.ts:89](https://github.com/DataDog/documentation/blob/b75e75e1267d7b4c729d61650f6bdfccf0733955/markdoc/cdocs-data/src/api/browser/CdocsClientStorage.ts#L89)
 
-Write the current storage from local storage.
-
-Should be called once when the instance is created.
+Overwrite the in-memory storage with
+whatever is in local storage.
 
 #### Returns
 
@@ -110,7 +112,7 @@ Should be called once when the instance is created.
 
 > **setTraitVals**(`entries`): `Record`\<`string`, `string`\>
 
-Defined in: src/api/browser/CdocsClientStorage.ts:53
+Defined in: [src/api/browser/CdocsClientStorage.ts:57](https://github.com/DataDog/documentation/blob/b75e75e1267d7b4c729d61650f6bdfccf0733955/markdoc/cdocs-data/src/api/browser/CdocsClientStorage.ts#L57)
 
 Update the value of one or more traits.
 Any trait IDs not provided will be left unchanged.
@@ -136,7 +138,7 @@ regardless of whether they were updated in this batch.
 
 > **writeToLocalStorage**(): `Promise`\<`void`\>
 
-Defined in: src/api/browser/CdocsClientStorage.ts:77
+Defined in: [src/api/browser/CdocsClientStorage.ts:81](https://github.com/DataDog/documentation/blob/b75e75e1267d7b4c729d61650f6bdfccf0733955/markdoc/cdocs-data/src/api/browser/CdocsClientStorage.ts#L81)
 
 Asynchronously write the current storage to local storage,
 so it can be accessed in future sessions.

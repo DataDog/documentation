@@ -33,7 +33,7 @@ export type FilterConfig = z.infer<typeof FilterConfigSchema>;
  * of a document, validated as a whole.
  */
 export const FiltersConfigSchema = z.array(FilterConfigSchema).refine((filtersConfig) => {
-  // Page filter names must be unique within a page
+  // Filter labels must be unique within a page
   const filterLabels = filtersConfig.map((filterConfig) => filterConfig.label);
   const uniqueFilterLabels = new Set(filterLabels);
   if (filterLabels.length !== uniqueFilterLabels.size) {
@@ -41,8 +41,8 @@ export const FiltersConfigSchema = z.array(FilterConfigSchema).refine((filtersCo
     return false;
   }
 
-  // Placeholders must refer to a valid filter name
-  // that is defined earlier in the list than the placeholder
+  // Placeholders must refer to a valid trait name
+  // that referenced earlier in the list
   const definedParamNames = new Set();
   for (const filterConfig of filtersConfig) {
     definedParamNames.add(filterConfig.label);

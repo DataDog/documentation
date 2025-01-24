@@ -8,7 +8,7 @@
 
 > **resolveFilters**(`p`): [`ResolvedFilters`](../type-aliases/ResolvedFilters.md)
 
-Defined in: src/api/shared/resolveFilters.ts:47
+Defined in: [src/api/shared/resolveFilters.ts:47](https://github.com/DataDog/documentation/blob/b75e75e1267d7b4c729d61650f6bdfccf0733955/markdoc/cdocs-data/src/api/shared/resolveFilters.ts#L47)
 
 Resolve the page filters object that is used
 to populate the page customization menu.

@@ -231,6 +231,10 @@ export const ClientSideFilterManifestSchema = z
   })
   .strict();
 
+/**
+ * A lighter version of the FilterManifest schema,
+ * designed to be used client-side.
+ */
 export type ClientSideFilterManifest = z.infer<typeof ClientSideFilterManifestSchema>;
 
 /**
@@ -251,4 +255,8 @@ export const ClientSideFiltersManifestSchema = z
   })
   .strict();
 
+/**
+ * A lighter version of the FiltersManifest schema,
+ * designed to be used client-side.
+ */
 export type ClientSideFiltersManifest = z.infer<typeof ClientSideFiltersManifestSchema>;

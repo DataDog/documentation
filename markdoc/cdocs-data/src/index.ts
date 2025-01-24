@@ -1,4 +1,4 @@
-// Types and schemas
+// Types and schemas ------------------------------------------------
 export {
   CdocsError as CdocsCoreError,
   CdocsErrorSchema as CdocsCoreErrorSchema,
@@ -41,15 +41,15 @@ export {
   CustomizationConfigByLangSchema,
 } from './schemas/customizationConfig';
 
-// Compilation utilities
+// Compilation utilities --------------------------------------------
 export { loadCustomizationConfig } from './api/compilation/loadCustomizationConfig';
 export { buildFiltersManifest } from './api/compilation/buildFiltersManifest';
 export { pruneManifestForClient } from './api/compilation/pruneManifestForClient';
 
-// Shared utilities
+// Shared utilities -------------------------------------------------
 export { resolveFilters } from './api/shared/resolveFilters';
 
-// Browser utilities
+// Browser utilities ------------------------------------------------
 export { getTraitValsFromUrl } from './api/browser/getTraitValsFromUrl';
 export { writeTraitValsToUrl } from './api/browser/writeTraitValsToUrl';
 export { CdocsClientStorage } from './api/browser/CdocsClientStorage';

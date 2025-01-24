@@ -99,9 +99,7 @@ export function buildFiltersManifest(p: {
       getPossibleDefaultsAndSelectedValues({
         traitId: filter.trait_id,
         optionGroupIds: optionGroupIds,
-        // glossary: p.glossary,
         customizationConfig: p.customizationConfig,
-        // filterOptionsConfig: p.filterOptionsConfig,
       });
 
     if (errors.length > 0) {

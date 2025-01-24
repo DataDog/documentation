@@ -6,7 +6,7 @@ import { z } from 'zod';
 import { SNAKE_CASE_REGEX } from '../regexes';
 
 /**
- * A single entry in an option glossary,
+ * A single entry in an option glossary.
  */
 export const OptionGlossaryEntrySchema = z
   .object({
@@ -79,4 +79,8 @@ export const RawOptionGlossarySchema = z
   })
   .strict();
 
+/**
+ * A glossary of all options that can be used on a site,
+ * as it is parsed directly from the YAML file.
+ */
 export type RawOptionGlossary = z.infer<typeof RawOptionGlossarySchema>;

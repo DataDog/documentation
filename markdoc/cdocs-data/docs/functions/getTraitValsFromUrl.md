@@ -8,7 +8,7 @@
 
 > **getTraitValsFromUrl**(`p`): `Record`\<`string`, `string`\>
 
-Defined in: src/api/browser/getTraitValsFromUrl.ts:9
+Defined in: [src/api/browser/getTraitValsFromUrl.ts:9](https://github.com/DataDog/documentation/blob/b75e75e1267d7b4c729d61650f6bdfccf0733955/markdoc/cdocs-data/src/api/browser/getTraitValsFromUrl.ts#L9)
 
 Read the selected trait values from the URL.
 
