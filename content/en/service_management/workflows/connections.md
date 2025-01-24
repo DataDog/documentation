@@ -84,7 +84,7 @@ Alternatively, add a connection from the workflow page:
 
 The example below shows the **New Connection** dialog box for the OpenAI connection. Each connection requires different authentication information. The OpenAI connection requires a valid Connection Name and API Token.
 
-{{< img src="service_management/new-connection.png" alt="The New Connection dialog box for the OpenAI connection" >}}
+{{< img src="service_management/new-connection-2.png" alt="The New Connection dialog box for the OpenAI connection" >}}
 
 ### Edit a connection
 

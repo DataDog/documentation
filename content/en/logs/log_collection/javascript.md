@@ -17,6 +17,9 @@ With the browser logs SDK, you can send logs directly to Datadog from web browse
 - Record real client IP addresses and user agents.
 - Optimized network usage with automatic bulk posts.
 
+**Notes**: 
+- **Independent of the RUM SDK**: The Browser Logs SDK can be used without the RUM SDK.
+
 ## Setup
 
 **Datadog client token**: For security reasons, [API keys][1] cannot be used to configure the browser logs SDK, because they would be exposed client-side in the JavaScript code. To collect logs from web browsers, a [client token][2] must be used. See the [client token documentation][2] for more details.
@@ -357,7 +360,7 @@ The following parameters are available to configure the Datadog browser logs SDK
 | `forwardConsoleLogs`       | `"all"` or an Array of `"log"` `"debug"` `"info"` `"warn"` `"error"`      | No       | `[]`            | Forward logs from `console.*` to Datadog. Use `"all"` to forward everything or an array of console API names to forward only a subset.                                                |
 | `forwardReports`           | `"all"` or an Array of `"intervention"` `"deprecation"` `"csp_violation"` | No       | `[]`            | Forward reports from the [Reporting API][8] to Datadog. Use `"all"` to forward everything or an array of report types to forward only a subset.                                       |
 | `sampleRate`               | Number                                                                    | No       | `100`           | **Deprecated** - see `sessionSampleRate`.                                                                                                                                             |
-| `sessionSampleRate`        | Number                                                                    | No       | `100`           | The percentage of sessions to track: `100` for all, `0` for none. Only tracked sessions send logs.                                                                                    |
+| `sessionSampleRate`        | Number                                                                    | No       | `100`           | The percentage of sessions to track: `100` for all, `0` for none. Only tracked sessions send logs. It applies only to logs collected via the Browser Logs SDK and is independent of RUM data.                                                                                    |
 | `trackingConsent`          | `"granted"` or `"not-granted"`                                            | No       | `"granted"`     | Set the initial user tracking consent state. See [User Tracking Consent][15].                                                                                                         |
 | `silentMultipleInit`       | Boolean                                                                   | No       |                 | Prevent logging errors while having multiple init.                                                                                                                                    |
 | `proxy`                    | String                                                                    | No       |                 | Optional proxy URL (ex: https://www.proxy.com/path), see the full [proxy setup guide][6] for more information.                                                                        |
