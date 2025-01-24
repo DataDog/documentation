@@ -1,5 +1,5 @@
 ---
-title: IAST Setup
+title: Runtime Code Analysis Setup
 disable_toc: false
 aliases:
 - /security/application_security/enabling/single_step/code_security/
