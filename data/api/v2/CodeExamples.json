@@ -972,6 +972,20 @@
       "description": "Create a detection rule with type 'workload_security' returns \"OK\" response"
     }
   ],
+  "CreateInboxRule": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Create a new inbox rule returns \"Successfully created the inbox rule\" response"
+    }
+  ],
+  "CreateMuteRule": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Create a new mute rule returns \"Successfully created the mute rule\" response"
+    }
+  ],
   "CreateSecurityFilter": [
     {
       "group": "security_monitoring",
@@ -1012,6 +1026,20 @@
       "description": "Mute or unmute a batch of findings returns \"OK\" response"
     }
   ],
+  "PatchMuteRule": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Patch a mute rule returns \"Mute rule successfully patched\" response"
+    }
+  ],
+  "PatchInboxRule": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Patch an inbox rule returns \"Inbox rule successfully patched\" response"
+    }
+  ],
   "RunHistoricalJob": [
     {
       "group": "security_monitoring",
@@ -1038,6 +1066,13 @@
       "description": "Update an existing rule returns \"OK\" response"
     }
   ],
+  "UpdateMuteRule": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Update a mute rule returns \"Mute rule successfully updated\" response"
+    }
+  ],
   "UpdateSecurityFilter": [
     {
       "group": "security_monitoring",
@@ -1050,6 +1085,13 @@
       "group": "security_monitoring",
       "suffix": "",
       "description": "Update a suppression rule returns \"OK\" response"
+    }
+  ],
+  "UpdateInboxRule": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Update an inbox rule returns \"Inbox rule successfully updated\" response"
     }
   ],
   "ValidateSecurityMonitoringRule": [

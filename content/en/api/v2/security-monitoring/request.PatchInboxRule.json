@@ -1,0 +1,26 @@
+{
+  "data": {
+    "attributes": {
+      "action": {
+        "reason_description": "We want to focus on these items."
+      },
+      "enabled": true,
+      "name": "Rule 1",
+      "rule": {
+        "issue_type": "vulnerability",
+        "query": "key:val",
+        "rule_ids": [
+          "rule-id-1"
+        ],
+        "rule_types": [
+          "application_code_vulnerability"
+        ],
+        "severities": [
+          "critical"
+        ]
+      }
+    },
+    "id": "123e4567-e89b-12d3-a456-426655440000",
+    "type": "inbox_rules"
+  }
+}
