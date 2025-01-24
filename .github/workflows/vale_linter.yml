@@ -43,8 +43,7 @@ jobs:
       uses: hestonhoffman/changed-lines@v1
       with:
         file_filter: '.md, .html'
-    
-        
+  
     - name: Run vale on changed files
       if: steps.changed_lines.outputs.changed_files
       env: 
@@ -52,11 +51,11 @@ jobs:
       run: |
         vale "${CHANGED_FILES}" \
           --output=local/bin/py/vale/vale_template.tmpl --no-exit > vale_output.log
-    
+
     - name: Parse Vale output
       if: steps.changed_lines.outputs.changed_files
       env:
-        CHANGED_LINES: ${{ steps.changed_lines.outputs.changed_lines }}  
+        CHANGED_LINES: ${{ steps.changed_lines.outputs.changed_lines }}
       run: |
         python local/bin/py/vale/vale_annotations.py \
           --git_data="${CHANGED_LINES}"
