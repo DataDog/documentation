@@ -15,7 +15,7 @@ further_reading:
 
 The [**Quality Gate Rules** page][1] is useful for developers who want to keep an eye on the quality gates for their build pipelines. You can see all of the rules defined by the organization.
 
-{{< img src="quality_gates/rules_list_1.png" alt="Quality Gate rules in Datadog displaying the rule name, evaluation, scope, blocking status, last modified date, and the creator avatar" style="width:100%" >}}
+{{< img src="quality_gates/rules_list_2.png" alt="Quality Gate rules in Datadog displaying the rule name, evaluation, scope, blocking status, last modified date, and the creator avatar" style="width:100%" >}}
 
 Use this page to create a rule, edit an existing rule, or click on a rule to investigate its past executions.
 
@@ -31,11 +31,11 @@ Click into a specific rule execution to see the results for past rule execution,
 
 {{< img src="quality_gates/executions_sidepanel.png" alt="Quality Gate rule displaying the rule execution status over time and rule executions" style="width:100%" >}}
 
-To pivot to related Static Analysis or Software Composition Analysis results in [Datadog Code Analysis][2], click `See related events`.  You can edit the Quality Gate rule according to your execution results by clicking **Manage Rule**.
+To pivot to related Static Analysis or Software Composition Analysis results in [Datadog Code Security][2], click `See related events`.  You can edit the Quality Gate rule according to your execution results by clicking **Manage Rule**.
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/ci/quality-gates
-[2]: /code_analysis/
+[2]: /security/code_security/

@@ -1,7 +1,5 @@
 ---
 title: Domain Allowlist
-private: true
-is_beta: true
 further_reading:
 - link: "https://app.datadoghq.com/organization-settings/domain-allowlist"
   tag: "In the app"
@@ -11,13 +9,13 @@ further_reading:
   text: "Domain Allowlist API"
 ---
 
-{{< callout url="https://www.datadoghq.com/private-beta/domain-allowlist/" >}}
-  Domain Allowlist is available in <strong>private beta</strong> for customers with Enterprise plans. If you're interested in this feature, complete the form to request access.
+{{< callout url="/help/" header="Get Started with Domain Allowlist" >}}
+  Domain Allowlist is available for customers with Enterprise plans. If you're interested in this feature, contact Datadog support to request access.
 {{< /callout >}} 
 
 With [Domain Allowlist][1], you can restrict the email domains that can receive notifications. The notifications in scope include all notifications from:
 - Monitors
-- Custom Reports
+- Scheduled Reports
 
 When Domain Allowlist is enabled, only email domains in your allowlist can receive notifications in scope. If you try to send a notification in scope to an email domain that is not in your allowlist, a warning appears. 
 

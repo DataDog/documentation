@@ -22,6 +22,10 @@ further_reading:
   text: "Empower engineers to take ownership of Google Cloud costs with Datadog"
 ---
 
+{{< callout url="https://www.datadoghq.com/private-beta/cost-anomaly-detection/" btn_hidden="false" header="In Preview">}}
+Cost anomaly detection is in Preview. To request access, complete the form.
+{{< /callout >}}
+
 ## Overview
 Get proactive notifications on cost changes to help mitigate unexpected cloud spend. Cloud Cost Monitors help you identify cost changes quickly so you can investigate the cause. You can configure your alerts to catch unexpected changes.
 
@@ -69,7 +73,7 @@ You can select from the following monitor types.
 
 | Cost Type | Description | Usage Examples |
 | ---  | ----------- | ----------- |
-| Cost Anomalies | Detect anomalies by comparing current costs to historical data, using a defined lookback period. Incomplete days are excluded from analysis to ensure accuracy. | Alert if 3 days from the past 30 days show significant cost anomalies compared to historical data. |
+| Cost Anomalies | Detect anomalies by comparing current costs to historical data, using a defined lookback period. Incomplete days are excluded from analysis to ensure accuracy. Anomaly monitors require at least 4 months of cloud cost data to evaluate since historical data is required to train the algorithm. | Alert if 3 days from the past 30 days show significant cost anomalies compared to historical data. |
 
 {{% /tab %}}
 {{< /tabs >}}

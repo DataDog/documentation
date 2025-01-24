@@ -43,7 +43,7 @@ When you create a new **Dataproc Cluster on Compute Engine** in the [Google Clou
    #!/bin/bash
 
    # Set required parameter DD_SITE
-   DD_SITE={{< region-param key="dd_site" code="true" >}}
+   export DD_SITE={{< region-param key="dd_site" code="true" >}}
 
    # Set required parameter DD_API_KEY with Datadog API key.
    # The commands below assumes the API key is stored in GCP Secret Manager, with the secret name as dd_api_key and the project <PROJECT_NAME>.
@@ -52,18 +52,13 @@ When you create a new **Dataproc Cluster on Compute Engine** in the [Google Clou
    PROJECT_NAME=<PROJECT_NAME>
    gcloud config set project $PROJECT_NAME
    SECRET_NAME=dd_api_key
-   DD_API_KEY=$(gcloud secrets versions access latest --secret $SECRET_NAME)
-
-   # Optional parameters
-   # Uncomment the following line to allow adding init script logs when reporting a failure back to Datadog. A failure is reported when the init script fails to start the Datadog Agent successfully.
-   # export DD_DJM_ADD_LOGS_TO_FAILURE_REPORT=true
+   export DD_API_KEY=$(gcloud secrets versions access latest --secret $SECRET_NAME)
 
    # Download and run the latest init script
-   DD_SITE=$DD_SITE DD_API_KEY=$DD_API_KEY bash -c "$(curl -L https://dd-data-jobs-monitoring-setup.s3.amazonaws.com/scripts/dataproc/dataproc_init_latest.sh)" || true
-
+   curl -L https://install.datadoghq.com/scripts/install-dataproc.sh > djm-install-script; bash djm-install-script || true
    ```
 
-   The script above sets the required parameters, and downloads and runs the latest init script for Data Jobs Monitoring in Dataproc. If you want to pin your script to a specific version, you can replace the file name in the URL with `dataproc_init_<version_tag>.sh`, such as `dataproc_init_1.5.0.sh` to use the specific version you want.
+   The script above sets the required parameters, and downloads and runs the latest init script for Data Jobs Monitoring in Dataproc. If you want to pin your script to a specific version, you can replace the filename in the URL with `install-dataproc-0.9.1.sh` to use version `0.9.1`, for example. The source code used to generate this script can be found on the [Datadog Agent repository][13].
 
 1. On the **Customize cluster** page, locate the **Initialization Actions** section. Enter the path where you saved the script from the previous step.
 
@@ -87,6 +82,10 @@ spark-submit \
 
 In Datadog, view the [Data Jobs Monitoring][8] page to see a list of all your data processing jobs.
 
+## Troubleshooting
+
+{{% djm-install-troubleshooting %}}
+
 ## Advanced Configuration
 
 ### Tag spans at runtime
@@ -108,3 +107,4 @@ In Datadog, view the [Data Jobs Monitoring][8] page to see a list of all your da
 [10]: https://cloud.google.com/dataproc/docs/concepts/versioning/overview
 [11]: https://docs.datadoghq.com/data_jobs/kubernetes/
 [12]: https://cloud.google.com/secret-manager/docs/access-control
+[13]: https://github.com/DataDog/datadog-agent/blob/main/pkg/fleet/installer/setup/djm/dataproc.go

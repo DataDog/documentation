@@ -10,8 +10,8 @@ further_reading:
   text: "Install the Datadog Agent with Embedded OpenTelemetry Collector"
 ---
 
-{{< callout url="https://www.datadoghq.com/private-beta/agent-with-embedded-opentelemetry-collector/" btn_hidden="false" header="Join the Beta!">}}
-  The Datadog Agent with embedded OpenTelemetry Collector is in private beta. To request access, fill out this form.
+{{< callout url="https://www.datadoghq.com/private-beta/agent-with-embedded-opentelemetry-collector/" btn_hidden="false" header="Join the Preview!">}}
+  The Datadog Agent with embedded OpenTelemetry Collector is in Preview. To request access, fill out this form.
 {{< /callout >}}
 
 If you are already using a standalone OpenTelemetry (OTel) Collector for your OTel-instrumented applications, you can migrate to the Datadog Agent with embedded OpenTelemetry Collector. The embedded OTel Collector allows you to leverage Datadog's enhanced capabilities, including optimized configurations, seamless integrations, and additional features tailored for the Datadog ecosystem.
@@ -180,15 +180,19 @@ Use a YAML file to specify the Helm chart parameters for the [Datadog Agent char
 1. Configure the Datadog API and application key secrets:
    {{< code-block lang="yaml" filename="datadog-values.yaml" collapsible="true" >}}
 datadog:
+  site: datadoghq.com
   apiKeyExistingSecret: datadog-secret
   appKeyExistingSecret: datadog-secret
+  logLevel: info
    {{< /code-block >}}
-1. Switch the Datadog Agent Docker repository to use development builds:
+   Set `datadog.site` to your [Datadog site][10]. Otherwise, it defaults to `datadoghq.com`, the US1 site.
+   <div class="alert alert-warning">The log level <code>datadog.logLevel</code> parameter value should be set in lower case. Valid log levels are: <code>trace</code>, <code>debug</code>, <code>info</code>, <code>warn</code>, <code>error</code>, <code>critical</code>, <code>off</code>.</div>
+1. Switch the Datadog Agent image tag to use builds with embedded OpenTelemetry collector:
    {{< code-block lang="yaml" filename="datadog-values.yaml" collapsible="true" >}}
 agents:
   image:
     repository: gcr.io/datadoghq/agent
-    tag: 7.57.0-v1.0-ot-beta-jmx
+    tag: 7.61.0-ot-beta-jmx
     doNotCheckTag: true
 ...
    {{< /code-block >}}
@@ -252,12 +256,14 @@ Your `datadog-values.yaml` file should look something like this:
 agents:
   image:
     repository: gcr.io/datadoghq/agent
-    tag: 7.57.0-v1.0-ot-beta-jmx
+    tag: 7.61.0-ot-beta-jmx
     doNotCheckTag: true
 
 datadog:
+  site: datadoghq.com
   apiKeyExistingSecret: datadog-secret
   appKeyExistingSecret: datadog-secret
+  logLevel: info
 
   otelCollector:
     enabled: true
@@ -393,3 +399,4 @@ After you've confirmed that all data is being collected correctly in Datadog, yo
 [7]: /opentelemetry/agent/install_agent_with_collector#configure-the-datadog-agent
 [8]: https://app.datadoghq.com/organization-settings/api-keys/
 [9]: https://app.datadoghq.com/organization-settings/application-keys
+[10]: /getting_started/site/

@@ -43,12 +43,7 @@ See the [Debug Symbols][15] page to view all uploaded symbols.
 
 ### Limitations
 
-{{< site-region region="us,us3,us5,eu,gov" >}}
-Source maps are limited to **500** MB each.
-{{< /site-region >}}
-{{< site-region region="ap1" >}}
-Source maps are limited to **500** MB each.
-{{< /site-region >}}
+Source maps are limited in size to **500 MB** each.
 
 ## Collect errors
 
@@ -63,8 +58,8 @@ You can monitor unhandled exceptions, unhandled promise rejections, handled exce
 [2]: /error_tracking/frontend/collecting_browser_errors/?tab=npm#collect-errors-manually
 [3]: /error_tracking/frontend/collecting_browser_errors/?tab=npm#error-sources
 [4]: https://app.datadoghq.com/rum/error-tracking
-[5]: https://app.datadoghq.com/error-tracking/settings/setup/client?referrer=intro
-[6]: /real_user_monitoring/browser/setup
+[5]: https://app.datadoghq.com/error-tracking/settings/setup/client
+[6]: /real_user_monitoring/browser/setup/client?tab=errortracking
 [7]: https://www.npmjs.com/package/@datadog/browser-rum
 [8]: /real_user_monitoring/browser/setup/#initialization-parameters
 [9]: /real_user_monitoring/guide/upload-javascript-source-maps

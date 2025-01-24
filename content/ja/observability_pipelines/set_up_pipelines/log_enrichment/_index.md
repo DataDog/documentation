@@ -20,16 +20,22 @@ title: ログエンリッチメント
 
 - [Datadog Agent][1]
 - [Fluentd または Fluent Bit][2]
-- [HTTP クライアント][3]
-- [Splunk HTTP Event Collector (HEC)][4]
-- [Splunk Heavy および Universal Forwarders (TCP)][5]
-- [Sumo Logic ホスト型コレクター][6]
-- [rsyslog または syslog-ng][7]
+- [Google Pub/Sub][3]
+- [HTTP クライアント][4]
+- [HTTP サーバー][5]
+- [Logstash][6]
+- [Splunk HTTP Event Collector (HEC)][7]
+- [Splunk Heavy または Universal Forwarders (TCP)][8]
+- [Sumo Logic ホスト型コレクター][9]
+- [rsyslog または syslog-ng][10]
 
 [1]: /ja/observability_pipelines/log_enrichment/datadog_agent
 [2]: /ja/observability_pipelines/log_enrichment/fluent
-[3]: /ja/observability_pipelines/log_enrichment/http_client
-[4]: /ja/observability_pipelines/log_enrichment/splunk_hec
-[5]: /ja/observability_pipelines/log_enrichment/splunk_tcp
-[6]: /ja/observability_pipelines/log_enrichment/sumo_logic_hosted_collector
-[7]: /ja/observability_pipelines/log_enrichment/syslog
+[3]: /ja/observability_pipelines/set_up_pipelines/log_enrichment/google_pubsub
+[4]: /ja/observability_pipelines/log_enrichment/http_client
+[5]: /ja/observability_pipelines/set_up_pipelines/log_enrichment/http_server
+[6]: /ja/observability_pipelines/set_up_pipelines/log_enrichment/logstash
+[7]: /ja/observability_pipelines/log_enrichment/splunk_hec
+[8]: /ja/observability_pipelines/log_enrichment/splunk_tcp
+[9]: /ja/observability_pipelines/log_enrichment/sumo_logic_hosted_collector
+[10]: /ja/observability_pipelines/log_enrichment/syslog

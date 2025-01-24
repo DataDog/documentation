@@ -141,7 +141,7 @@ Under **Error on Status**, enter a comma-delineated list of any status codes on 
 
 ## Private actions
 
-{{< callout url="https://www.datadoghq.com/private-beta/private-actions/" btn_hidden="false" header="Join the Preview!">}}
+{{< callout url="https://www.datadoghq.com/product-preview/private-actions/" btn_hidden="false" header="Join the Preview!">}}
 Private Actions are in Preview. Use this form to request access today.
 {{< /callout >}}
 
@@ -174,5 +174,5 @@ To configure a private HTTP request:
 [2]: /service_management/workflows/access/
 [3]: https://learn.microsoft.com/en-us/azure/active-directory/develop/scopes-oidc#the-default-scope
 [4]: https://datadoghq.slack.com/
-[5]: /service_management/workflows/private_actions
-[6]: /service_management/workflows/private_actions/private_action_credentials/?tab=httpsaction#credential-files
+[5]: /actions/private_actions
+[6]: /actions/private_actions/private_action_credentials/?tab=httpsaction#credential-files

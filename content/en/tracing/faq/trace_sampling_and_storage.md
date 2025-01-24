@@ -1,6 +1,5 @@
 ---
 title: Trace Sampling and Storage
-is_beta: true
 aliases:
     - /tracing/faq/traces-sampling-and-storage/
     - /tracing/faq/how-long-is-tracing-data-stored/
@@ -199,8 +198,10 @@ package main
 import (
     "log"
     "net/http"
-    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/ext"
-    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/ext" // 1.x
+    // "github.com/DataDog/dd-trace-go/v2/ddtrace/ext // 2.x
+    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer" // 1.x
+    // "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer // 2.x
 )
 
 func handler(w http.ResponseWriter, r *http.Request) {
@@ -224,8 +225,10 @@ import (
     "log"
     "net/http"
 
-    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/ext"
-    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/ext" // 1.x
+    // "github.com/DataDog/dd-trace-go/v2/ddtrace/ext" // 2.x
+    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer" // 1.x
+    // "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer" // 2.x
 )
 
 func handler(w http.ResponseWriter, r *http.Request) {

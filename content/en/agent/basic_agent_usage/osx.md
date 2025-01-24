@@ -93,6 +93,7 @@ To remove the Agent and all Agent configuration files:
     sudo rm -rf /usr/local/bin/datadog-agent
     sudo rm -rf ~/.datadog-agent/** # to remove broken symlinks
     sudo launchctl disable system/com.datadoghq.agent && sudo launchctl bootout system/com.datadoghq.agent
+    sudo launchctl unload /Library/LaunchDaemons/com.datadoghq.agent.plist
     sudo rm /Library/LaunchDaemons/com.datadoghq.agent.plist
     sudo rm -rf /var/log/datadog
     ```

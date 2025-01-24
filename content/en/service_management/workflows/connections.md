@@ -26,10 +26,13 @@ Workflow actions can be authenticated in two ways:
 ## Integration tile credentials
 
 Credentials and account authentication that you set up in the following Datadog integration tiles automatically propagate to the corresponding actions in Workflow Automation:
+- GitHub
 - Jira
+- Microsoft Teams
+- Opsgenie
 - PagerDuty
 - Slack
-- GitHub
+- Statuspage
 
 Configure the integration tiles by following instructions in [Datadog Integrations][6].
 
@@ -68,7 +71,8 @@ To create a connection:
 1. Navigate to the [connections list][3].
 1. Click the **New Connection** button in the upper right. The **New Connection** dialog box appears.
 1. Click on an icon to choose an integration schema.
-1. Fill in the appropriate fields. Click **Create**.
+1. Fill in the appropriate fields. <div class="alert alert-info">If you want to add the connection to a connection group in the future, add one or more [Identifier Tags](#connection-identifier-tags).</div>
+1. Click **Create**.
 
 Alternatively, add a connection from the workflow page:
 1. Navigate to the [Workflow Automation list][9].
@@ -80,7 +84,7 @@ Alternatively, add a connection from the workflow page:
 
 The example below shows the **New Connection** dialog box for the OpenAI connection. Each connection requires different authentication information. The OpenAI connection requires a valid Connection Name and API Token.
 
-{{< img src="service_management/new-connection.png" alt="The New Connection dialog box for the OpenAI connection" >}}
+{{< img src="service_management/new-connection-2.png" alt="The New Connection dialog box for the OpenAI connection" >}}
 
 ### Edit a connection
 
@@ -105,18 +109,84 @@ To learn how to restrict connection use, see [Access and Authentication][4].
 
 To connect to an arbitrary service, use the HTTP connection type. For authentication options and setup instructions, see [HTTP action][10].
 
+## Connection identifier tags
+
+You can add identifier tags to connections. The tagging rules for connections are based on [Datadog tags][13], with the following additional requirements:
+- Identifier tags must follow the format `tag:value`, and additional colons are not allowed. For example, the identifier tags `env:staging:east` and `env` are invalid formats for connection tags.
+- Identifier tags must start with a letter, after which they can contain:
+    - Alphanumerics
+    - Underscores
+    - Minuses
+    - Slashes
+    - Exactly one colon
+- `default` is a reserved value for connection identifier tags. It can't be used as a stand-alone tag key or as a tag value. For example, `default:yes` and `aws:default` are invalid for connection tags.
+
+## Connection groups
+
+You can create groups of connections so that your workflows can authenticate into the correct account or accounts based on the given inputs. Connections can be grouped together only if they share the same integration (for example, you cannot group GCP and AWS connections within the same group). 
+
+You define the members of a connection group using a connection's _Identifier Tags_. For example, you can create a connection group consisting of AWS accounts that have the `account_id` tag.
+
+Each connection in the group must have a set of unique identifier tags so that a workflow can dynamically select the correct connection at runtime. For example:
+- `connectionA {account_id:123456789}` and `connectionB {account_id:987654321}` can be grouped together.
+- `connectionA {account_id:123456789}` and `connectionC {account_id:123456789}` can't be grouped, because the group would contain duplicate tag values.
+
+### Create a connection group
+
+<div class="alert alert-info"><strong>Note</strong>: You can only add connections to a group if you have <a href="/service_management/workflows/access/#restrict-access-on-a-specific-connection">Resolver permission</a> for them.</div>
+
+To create a connection group:
+
+1. Navigate to the [connections list][3].
+1. On the left, click **Groups**.
+1. Click **+ New Group**, then select an integration.
+1. Enter a group name, then enter a set of up to three **Identifier Tags** that the connections you want to include in your group all have.
+1. Under **Confirm Group**, use the checkboxes to select the specific members of your group.
+1. Click **Next, Confirm Access**, then choose your desired access level for the group.
+1. Click **Create**.
+
+### Use a connection group
+
+To use a connection group:
+
+1. In your workflow, select an action that requires a connection.
+1. In the **Connection** field, in the drop-down, select the desired connection group under **Groups**.
+1. Fill in the desired values for the connection group **Identifiers**. For example, if your connection group is defined using the `env` Identifier Tag, and you have two environments, `prod` and `staging`, you could use either of those values (or an expression that evaluates to one of those values).
+1. Fill in any other required step values, then click **Save** to save your workflow.
+
+**Note**: You can only use connections within a group if you have [Resolver permission][12] for those connections. If a workflow tries to use a connection you don't have Resolver permission for, the workflow fails with a `403 Forbidden` error. To fix this issue, you can:
+- Configure your workflow so that it can't point to a connection you don't have Resolver permission for.
+- Remove the connection for which you don't have Resolver permission from the connection group. <div class="alert alert-danger"><strong>Note</strong>: If you are using a connection group for multiple workflows, removing a connection that another workflow relies on causes that workflow to fail.</div>
+
+### Update a connection group
+
+If you have edit access to a connection group, you can update the following attributes:
+- Group name
+- Identifier Tags (these can never be empty, but they can be completely replaced)
+- Connections (a group can be empty)
+
+### Delete a connection group
+
+To delete a connection group:
+
+1. Hover over the group you want to delete and click the **delete (trash can)** icon.
+1. Click **Delete**.
+
+<div class="alert alert-warning"><strong>Note</strong>: Deleting a connection group impacts any workflows that are using that group.</div>
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 <br>Do you have questions or feedback? Join the **#workflows** channel on the [Datadog Community Slack][11].
 
-[1]: /service_management/workflows/actions_catalog/generic_actions/
 [2]: https://app.datadoghq.com/workflow
 [3]: https://app.datadoghq.com/workflow/connections
 [4]: /service_management/workflows/access/#restrict-connection-use
 [6]: /integrations/
-[8]: /service_management/workflows/actions_catalog/generic_actions/
+[8]: /service_management/workflows/actions/
 [9]: https://app.datadoghq.com/workflow
 [10]: /service_management/workflows/actions/http/
 [11]: https://datadoghq.slack.com/
+[12]: /service_management/workflows/access/#restrict-access-on-a-specific-connection
+[13]: /getting_started/tagging/

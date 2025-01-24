@@ -12,8 +12,6 @@ further_reading:
       text: 'Service Catalog'
 ---
 
-<div class="alert alert-info">Manual instrumentation is available for Java, Node.js, and Python. <br /><br />If you're interested in manual instrumentation for additional languages, reach out to support@datadoghq.com.</div>
-
 Data Streams Monitoring (DSM) propagates context through message headers. Use manual instrumentation to set up DSM if you are using:
 - a message queue technology that is not supported by DSM
 - a message queue technology without headers, such as Kinesis, or
@@ -25,7 +23,7 @@ Data Streams Monitoring (DSM) propagates context through message headers. Use ma
 
 2. On services sending or consuming messages, declare the supported types. For example:
 {{< code-block lang="text" >}}
-kinesis, kafka, rabbitmq, sqs, sns
+kinesis, kafka, rabbitmq, sqs, sns, servicebus
 {{< /code-block >}}
 
 3. Call the Data Streams Monitoring checkpoints when messages are produced and when they are consumed, as shown in the example code below:
@@ -33,19 +31,21 @@ kinesis, kafka, rabbitmq, sqs, sns
 {{% tab "Java" %}}
 {{< code-block lang="java" >}}
 import datadog.trace.api.experimental.*;
-​​
-Carrier headersAdapter = new Carrier(headers);
-​
-// Before calling database PUT
-DataStreamsCheckpointer.get().setProduceCheckpoint("<database-type>", "<topic-name>", headersAdapter);
-​
-// After calling database GET
-DataStreamsCheckpointer.get().setConsumeCheckpoint("<database-type>", "<topic-name>", headersAdapter);
 
-// Replace headers with whatever you're using to pass the context
+​Carrier headersAdapter = new Carrier(headers);
+​
+// before calling produce
+DataStreamsCheckpointer.get().setProduceCheckpoint("<datastream-type>", "<queue-or-topic-name>", headersAdapter);
+​
+// after calling consume
+DataStreamsCheckpointer.get().setConsumeCheckpoint("<datastream-type>", "<queue-or-topic-name>", headersAdapter);
+​
+// example: logging a kafka consume checkpoint on the 'customer-checkout' topic would look like
+DataStreamsCheckpointer.get().setConsumeCheckpoint("kafka", "customer-checkout", headersAdapter);
+​
+// replace headers with whatever you're using to pass the context
 private class Carrier implements DataStreamsContextCarrier {
 	private Headers headers;
-	
 	
 	public Carrier(Headers headers) {
 		this.headers = headers;

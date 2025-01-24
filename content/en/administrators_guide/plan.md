@@ -42,11 +42,9 @@ Complete the scoping exercise to understand the types of technologies you're wor
 
 ### Resource tagging 
 
-Datadog is a tool for correlating machine data with the running applications and its physical descriptors. It can cross-reference an individual piece of data against others, regardless of type. For example, compare query data on database hosts with web server host worker thread pool sizes, displaying logs from both hosts in-line.
+Datadog is a tool for correlating machine data with the running applications and its physical descriptors. It can cross-reference an individual piece of data against others, regardless of type. Hostname, cloud regions, operating system version, and IP are just some of the automatically applied resource attributes. Additionally, Datadog allows you to generate custom tags such as `cost-code`, `AppName`, `environment`, and `version`.
 
-Hostname, cloud regions, operating system version, and IP are just some of the automatically applied resource attributes. Additionally, Datadog allows you to generate custom tags such as cost-code, AppName, environment, and version.
-
-Datadog's strength lies in its capability to maintain and manage a unified vocabulary and includes built-in data features. [Unified Service Tagging][1] uses reserved tags that enable telemetry correlation across all features of the Datadog Platform.
+Datadog's strength lies in its capability to maintain and manage a unified vocabulary and includes built-in data features. [Unified Service Tagging][1] uses reserved tags that enable telemetry correlation across all features of the Datadog platform.
 
 Tags are `key:value` pairs or simple values. They add dimension to application performance data and infrastructure metrics. Before you begin monitoring with Datadog, take advantage of the tagging capabilities that your platforms offer, as Datadog automatically imports these tags through its integrations. The following table is a representation of how `key:value` pairs work and whether the tags are added automatically or manually.
 
@@ -211,9 +209,9 @@ Use [Live processes][26] to view all of your running processes in one place. For
 
 Web server operations depend on the network availability of ports, the validity of SSL certificates, and low latencies. Install the [HTTP_Check][25] to monitor local or remote HTTP endpoints, detect bad response codes (such as 404), and use Synthetic API tests to identify soon-to-expire [SSL certificates][71].
 
-### Network Monitoring
+### Cloud Network Monitoring
 
-Web servers are almost always inter-connected with other services through a network fabric that is vulnerable to drops and can result in re-transmits. Use Datadog's [network integration][28] and enable [Network Performance Monitoring][29] to gain visibility into your network traffic between services, containers, availability zones, and other tags on your infrastructure.
+Web servers are almost always inter-connected with other services through a network fabric that is vulnerable to drops and can result in re-transmits. Use Datadog's [network integration][28] and enable [Cloud Network Monitoring][29] to gain visibility into your network traffic between services, containers, availability zones, and other tags on your infrastructure.
 
 ## Platform services
 
@@ -346,7 +344,7 @@ Create a detailed roll-out methodology in the [build][41] phase by focusing on t
 [26]: /infrastructure/process/?tab=linuxwindows
 [27]: /infrastructure/process/?tab=linuxwindows\#installation
 [28]: /integrations/network/
-[29]: /network_monitoring/performance/
+[29]: /network_monitoring/cloud_network_monitoring/
 [30]: /service_catalog/
 [31]: /service_management/events/
 [32]: /error_tracking/
@@ -361,7 +359,7 @@ Create a detailed roll-out methodology in the [build][41] phase by focusing on t
 [41]: /administrators_guide/build
 [42]: https://drive.google.com/file/d/1yUuz6fUFkFagNi0cYkpyDa7b2sQLHKD6/view
 [43]: /integrations/ping/
-[44]: /integrations/google_cloud_platform/?tab=project#resource-change-collection
+[44]: /integrations/google_cloud_platform/?tab=project#resource-changes-collection
 [45]: /containers/guide/container-discovery-management/?tab=datadogoperator
 [46]: /infrastructure/resource_catalog/
 [47]: https://www.datadoghq.com/blog/engineering/introducing-husky/

@@ -9,15 +9,15 @@ further_reading:
 
 After you plan your Datadog installation design and best practices, concentrate on the construction of Datadog itself, understanding what needs to be installed, and the best way to achieve that.
 
-As you scale your IT footprint, it's important to develop standards, methods, and practices for how software is installed and used. Engineering effort is dedicated to developing precise steps for installing and configuring software in a repeatable, standardized manner, while still allowing for a significant level of flexibility. Without these standards, reliability can be impacted. In this section, we describe how Datadog can most efficiently interact with those standards, methods, and practices.
+As your IT footprint grows, you need to establish standards for software installation and usage. To do this, it's important to develop precise, repeatable steps for reliably configuring software while maintaining the flexibility you need. This section explains how Datadog can efficiently integrate with these standards.
 
 ## Iterating on your environment
 
-In the [plan][7] section, you explored a range of topics within a Datadog design specification. In a perfect world, every one of those questions would be fully researched and answered before executing a large rollout. In this regard, enterprise IT engineering is far from a perfect world, and sometimes you need to pause and adapt as you build out your installation.
+In the [plan][7] section, you explored a range of topics within a Datadog design specification. Ideally, every one of those questions would be fully researched and answered before executing a large rollout. However, enterprise IT engineering often requires you to pause and adapt as you build out your installation.
 
 ### Prioritizing features
 
-It is possible to stagger the installation of Datadog, and build up the complexity gradually. Some things must be done early, and others can wait. The following describes a breakdown of how you can apply primary (needs) versus secondary (wants) as you build out Datadog.  
+It is possible to stagger the installation of Datadog, and build up the complexity gradually. Some things must be done early, and others can wait. The following describes a breakdown of how you can apply primary (needs) versus secondary (wants) as you scale your Datadog installation.  
 
 **Primary**:
 1. Unified Service Tags - `service:test` `env:prod` `version:1.x` 
@@ -61,8 +61,7 @@ All the objects you create in Datadog, such as the dashboards, alerts, notebooks
 
 ## Provisioning
 
-At the core of every enterprise IT environment lies a provisioning process, the "means of production" for the various software titles and instances that make up an IT architecture.
-To successfully manage Datadog at scale, integrate it into your enterprise's provisioning process. There are many ways to accomplish this, thanks to the simple installation model of the Datadog Agent.   
+Provisioning is central to any enterprise IT environment. To manage Datadog at scale, integrate it into your provisioning process. The Datadog Agent's simple installation model offers various ways to achieve this.
 
 ### Modular architecture
 
@@ -87,7 +86,7 @@ When it comes to deploying Datadog Agent software, it is advisable to reuse as m
 
 ## Summary
 
-Datadog's Agent design is flat so that it can easily fit into any existing provisioning system. Use your existing capabilities for file/package/service, and incorporate Datadog into them. There are mechanisms within the platform that help, but it is your local conditions that will most greatly dictate what is the best method in any given situation.   
+Datadog's Agent design is flat so that it can easily fit into any existing provisioning system. Use your existing capabilities for file/package/service, and incorporate Datadog into them. While the platform offers helpful mechanisms, your local conditions determine the best method for any given situation.
 
 ## Next steps
 

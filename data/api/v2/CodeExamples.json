@@ -39,6 +39,41 @@
       "description": "Update an AWS integration returns \"AWS Account object\" response"
     }
   ],
+  "CreateActionConnection": [
+    {
+      "group": "action_connection",
+      "suffix": "",
+      "description": "Create a new Action Connection returns \"Successfully created Action Connection\" response"
+    }
+  ],
+  "UpdateActionConnection": [
+    {
+      "group": "action_connection",
+      "suffix": "",
+      "description": "Update an existing Action Connection returns \"Successfully updated Action Connection\" response"
+    }
+  ],
+  "CreateApp": [
+    {
+      "group": "apps",
+      "suffix": "",
+      "description": "Create App returns \"App Created\" response"
+    }
+  ],
+  "DeleteApps": [
+    {
+      "group": "apps",
+      "suffix": "",
+      "description": "Delete Multiple Apps returns \"OK\" response"
+    }
+  ],
+  "UpdateApp": [
+    {
+      "group": "apps",
+      "suffix": "",
+      "description": "Update App returns \"OK\" response"
+    }
+  ],
   "SearchAuditLogs": [
     {
       "group": "audit",
@@ -92,8 +127,13 @@
     },
     {
       "group": "ci_visibility_pipelines",
-      "suffix": "_129899466",
-      "description": "Send pipeline job event returns \"Request accepted for processing\" response"
+      "suffix": "_819339921",
+      "description": "Send pipeline event with custom provider returns \"Request accepted for processing\" response"
+    },
+    {
+      "group": "ci_visibility_pipelines",
+      "suffix": "_2341150096",
+      "description": "Send running pipeline event returns \"Request accepted for processing\" response"
     }
   ],
   "AggregateCIAppTestEvents": [
@@ -298,6 +338,13 @@
       "group": "dashboard_lists",
       "suffix": "",
       "description": "Update items of a dashboard list returns \"OK\" response"
+    }
+  ],
+  "CreateDataDeletionRequest": [
+    {
+      "group": "data_deletion",
+      "suffix": "",
+      "description": "Creates a data deletion request returns \"OK\" response"
     }
   ],
   "PatchDomainAllowlist": [
@@ -571,7 +618,7 @@
   "ListLogs": [
     {
       "group": "logs",
-      "suffix": "",
+      "suffix": "_3400928236",
       "description": "Search logs returns \"OK\" response"
     },
     {

@@ -18,6 +18,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/cloud-cost-management-container-support/"
   tag: "blog"
   text: "Understand your Kubernetes and ECS spend with Datadog Cloud Cost Management"
+- link: "https://www.datadoghq.com/architecture/using-datadog-with-ecs-fargate/"
+  tag: "Architecture Center"
+  text: "Using Datadog with ECS Fargate"
 algolia:
   tags: ['ecs']
 ---
@@ -199,7 +202,7 @@ To collect Live Process information for all your containers and send it to Datad
 }
 {{< /highlight >}}
 
-#### Network Performance Monitoring
+#### Cloud Network Monitoring
 
 <div class="alert alert-warning">
 This feature is only available for Linux.
@@ -263,7 +266,7 @@ If you already have a task definition, update your file to include the following
  ```
 #### Network Path
 
-<div class="alert alert-info">Network Path for Datadog Network Performance Monitoring is in Preview. Reach out to your Datadog representative to sign up.</div>
+<div class="alert alert-info">Network Path for Datadog Cloud Network Monitoring is in Limited Availability. Reach out to your Datadog representative to sign up.</div>
 
 1. To enable [Network Path][31] on your ECS clusters, enable the `system-probe` traceroute module by adding the following environment variable in your `datadog-agent-sysprobe-ecs.json` file:
 
@@ -327,7 +330,7 @@ To send data to the Datadog for Government site, add the `fips-proxy` sidecar co
      (...)
           {
             "name": "fips-proxy",
-            "image": "datadog/fips-proxy:1.1.5",
+            "image": "datadog/fips-proxy:1.1.6",
             "portMappings": [
                 {
                     "containerPort": 9803,

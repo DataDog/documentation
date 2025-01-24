@@ -19,7 +19,7 @@ further_reading:
   text: "Getting started with the Datadog mobile app"
 ---
 
-The Datadog Mobile app enables you to view alerts from Datadog on your mobile device. When receiving an alert via Slack, e-mail, Pagerduty or other pager apps, you'll be able to investigate issues by opening monitor graphs and dashboards on your mobile device.
+The Datadog Mobile app enables you to view alerts from Datadog on your mobile device. When receiving an alert through On-Call, Slack, or email, you can investigate issues by opening monitor graphs and dashboards on your mobile device.
 
 ## Installing
 
@@ -109,7 +109,7 @@ For more information on configuring Incident Notification Rules, see the [Incide
 
 View your [open incidents][12] from your mobile home screen with Datadog widgets.
 
-To dive deeper into issues, tap any open incident displayed in the widget to have it open with more details in the Datadog mobile app. 
+To dive deeper into issues, tap any open incident displayed in the widget to have it open with more details in the Datadog mobile app.
 
 Also, you can customize your Open Incidents widgets by filtering on:
 
@@ -174,7 +174,7 @@ Also, you can customize your Open Incidents widgets by filtering on:
 
 #### Display Open Incidents from multiple organizations
 
-You can display open incidents from multiple organizations on your mobile home screen. 
+You can display open incidents from multiple organizations on your mobile home screen.
 
 {{< tabs >}}
 {{% tab "iOS" %}}
@@ -189,7 +189,7 @@ You can display open incidents from multiple organizations on your mobile home s
 2. From the configuration screen, tap **Organization**.
 3. Select a new organization (you may need to sign in).
 4. Size the widget to fit your preference.
-5. Tap **Save** or **Apply**. 
+5. Tap **Save** or **Apply**.
 
 
 {{% /tab %}}
@@ -263,8 +263,8 @@ You can also specify a dashboard that opens by default when you tap on an SLOs w
 - Long press on the widget to configure.
 - Tap "Edit Widget."
 - Tap "Choose" next to the SLO label to choose an SLO to track.
-- Depending on the SLO chosen, a "Timeframe" label may appear. Tap "Choose" next to the "Timeframe" label to choose the SLO timeframe. 
-- Tap "Choose" next to the "Dashboard to open" label to choose a dashboard that opens when the SLOs widget is tapped. 
+- Depending on the SLO chosen, a "Timeframe" label may appear. Tap "Choose" next to the "Timeframe" label to choose the SLO timeframe.
+- Tap "Choose" next to the "Dashboard to open" label to choose a dashboard that opens when the SLOs widget is tapped.
 - Tap out of the widget to validate your selection and exit the configuration screen.
 
 
@@ -284,7 +284,7 @@ You can also specify a dashboard that opens by default when you tap on an SLOs w
 
 #### Display SLOs from multiple organizations
 
-You can display SLOs from multiple organizations on your mobile home screen. 
+You can display SLOs from multiple organizations on your mobile home screen.
 
 {{< tabs >}}
 {{% tab "iOS" %}}
@@ -299,7 +299,7 @@ All organizations you've logged into are displayed in the configuration screen. 
 - From the configuration screen, tap "Organization".
 - Select a new organization (You might need to sign in).
 - Size the widget to fit your preference.
-- Tap "Save" or "Apply". 
+- Tap "Save" or "Apply".
 
 
 {{% /tab %}}
@@ -382,7 +382,7 @@ View your [monitors][16] from your home screen with Datadog widgets. Tap any cel
 
 #### Display Monitors from multiple organizations
 
-You can display Monitors from multiple organizations within the same widget. 
+You can display Monitors from multiple organizations within the same widget.
 
 {{< tabs >}}
 {{% tab "iOS" %}}
@@ -397,7 +397,7 @@ All organizations you've logged-in are displayed in the configuration screen. If
 - From the configuration screen, tap "Organization".
 - Select a new organization (you might need to sign in).
 - Edit the widget to fit your preference.
-- Tap "Save" or "Apply". 
+- Tap "Save" or "Apply".
 
 
 {{% /tab %}}
@@ -419,6 +419,12 @@ Delete a widget by long pressing, dragging, and dropping the widget on the "Remo
 
 {{% /tab %}}
 {{< /tabs >}}
+
+## Traces
+
+On the Traces page, you can view and search all of the traces that you have access to in your Datadog org. You can narrow the list through saved views or build specific search queries based on your tagging strategy. For more information about search, see [Trace Explorer Query Syntax][23].
+
+For example, to filter on traces with the tag `#env:prod` or the tag `#test`, use the query `"env:prod" OR test`. Click into individual services to expand associated spans, and select spans to view info, errors, and related logs. You can also open traces from services and logs.
 
 ## Quick actions
 
@@ -495,3 +501,4 @@ For help with troubleshooting, [contact Datadog support][20]. You can also send 
 [20]: /help/
 [21]: https://chat.datadoghq.com/
 [22]: https://datadoghq.slack.com/archives/C0114D5EHNG
+[23]: /tracing/trace_explorer/query_syntax/

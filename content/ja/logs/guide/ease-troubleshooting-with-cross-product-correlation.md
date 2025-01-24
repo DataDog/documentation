@@ -24,7 +24,7 @@ title: クロスプロダクト相関で容易にトラブルシューティン�
 このガイドでは、フルスタックデータを相関させる方法を説明します。ユースケースによっては、以下のいくつかのステップは省略することができます。他のステップに依存しているステップは、明示されています。
 
 1. [サーバー側ログとトレースの相関付け](#correlate-server-side-logs-with-traces)
-   * [Correlate application logs](#correlate-application-logs)
+   * [アプリケーションログの相関付け](#correlate-application-logs)
    * [プロキシログの相関付け](#correlate-proxy-logs)
    * [データベースログの相関付け](#correlate-database-logs)
 2. [フロントエンドプロダクトの相関付け](#correlate-frontend-products)
@@ -72,7 +72,7 @@ title: クロスプロダクト相関で容易にトラブルシューティン�
 
 ##### ログのトレース ID の挿入
 
-トレース ID は、`opentelemetry_trace_id` 変数として保存されます。NGINX 構成ファイル (`/etc/nginx/nginx.conf`) の HTTP セクションに以下の構成ブロックを追加して、NGINX のログ形式を更新します。
+トレース ID は、`opentelemetry_trace_id` という変数に保存されます。NGINX コンフィギュレーションファイル (`/etc/nginx/nginx.conf`) の HTTP セクションに以下の構成ブロックを追加して、NGINX のログフォーマットを更新します。
 
 ```conf
 http {
@@ -98,7 +98,7 @@ http {
    _trace_id %{notSpace:dd.trace_id:nullIf("-")}
    ```
 
-3. Add a [trace ID remapper][7] on `dd.trace_id` attribute.
+3. `dd.trace_id` 属性で [トレース ID リマッパー][7]を追加します。
 
 ### データベースログの相関付け
 
@@ -157,7 +157,7 @@ PostgreSQL パイプラインのクローン作成とカスタマイズ:
 
 以下に、遅延しているトレースからのクエリ遅延の実行プランの例を示します。
 
-{{< img src="logs/guide/ease-troubleshooting-with-cross-product-correlation/slow-query-root-cause.png" alt="Slow query logs correlation" style="width:100%;" >}}
+{{< img src="logs/guide/ease-troubleshooting-with-cross-product-correlation/slow-query-root-cause.png" alt="クエリ遅延ログの相関" style="width:100%;" >}}
 
 ## フロントエンドプロダクトの相関付け
 
