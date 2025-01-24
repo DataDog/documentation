@@ -18,15 +18,13 @@ In Project Settings, you can manage access control, configure automatic status t
 
 ## Granular Access Control
 
-{{< img src="service_management/case_management/settings/granular_access_control.png" alt="Update Access Control of the project from the settings" style="width:100%;" >}}
-
 By default, access to projects and cases is unrestricted. [Granular Access Control][1] can be used to manage the permissions of users, teams, roles, or your full organization at the project level. There are four sets of permissions that can be used:
 - **Manager**: Users can create and edit cases, views, settings, and permissions of the project, and can delete the project.
-- **Contributor**: Users can create, comment and edit cases, but not change settings or permissions or the project.
-- **Viewer**: Users can view and watch all cases, views and settings of the project. They can’t create, edit, or comment on cases.
+- **Contributor**: Users can create, comment on, and edit cases. They can't change settings, permissions, or the project.
+- **Viewer**: Users can view and watch all cases, views, and settings of the project. They can’t create, edit, or comment on cases.
 - **No Access**: Users can’t view any cases, views, or settings of the project.
 
-Note that other Datadog products that integrate with Case Management in an automated way such as Monitors are able to create cases within a project regardless of the project’s access settings
+**Note:** Other Datadog products that integrate with Case Management, such as Monitors, are able to automatically create cases within a project regardless of the project’s access settings.
 
 ## Status transitions
 
