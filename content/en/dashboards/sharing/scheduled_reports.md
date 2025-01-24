@@ -60,7 +60,7 @@ Click **Edit Variables** to modify the filters applied when the report is sent. 
 
 #### Email recipients
 
-To add email recipients to your report, by enter their email addresses. The email associated with your Datadog account is automatically added as a recipient. You can remove yourself as a recipient by hovering over your email and clicking the trash icon that appears next to it.
+To add email recipients to your report, enter their email addresses. The email associated with your Datadog account is automatically added as a recipient. You can remove yourself as a recipient by hovering over your email and clicking the trash icon that appears next to it.
 
 **Note:** Enterprise and Pro accounts can send reports to recipients outside of their organizations.
 
