@@ -3706,8 +3706,7 @@ menu:
           - v2
         operationids:
           - GetBillingDimensionMapping
-        unstable:
-          - v2
+        unstable: []
         order: 1
     - name: Get hourly usage for application security
       url: '#get-hourly-usage-for-application-security'
