@@ -25,34 +25,41 @@ further_reading:
 
 Synthetic Browser Tests are to used monitor your applications by reproducing how your customers experience your webpages end-to-end. When testing a sign-up or login flow, incorporate a one-time passcode (OTP) sent to an email address for authentication into your test. This OTP token can be extracted from an email body for testing within an application.
 
-This guide walks you through how to configure the OTP extraction for a synthetic browser test.
+This guide walks you through how to configure the OTP extraction for a synthetic Browser Test.
 
 ## Setup
 
 ### Step 1 - Create an email variable
 
-Create an email variable for the [Browser Test][3] by using a local variable."
+Follow the steps below to create an email variable for the [Browser Test][3]. This generates a unique [Datadog Synthetics email address][7] for the Synthetic Test run.
 
-1. On a new or existing Browser Test, click **Variables** and select Email Address from the dropdown menu.
-2. Click **Add Variable** to generate an [email address][7] for the Synthetic test run.
-3. Name the variable and click **Create** generate an [email address][7] for the synthetic test run.
-2. Add an **Email Address** variable to generate a [email address][7] for the synthetic test run.
+1. On a new or existing Browser Test, under **Variables** click **Add Variable**.
+2. Next, select **Email Address** from the dropdown menu.
+3. Name the variable and click **Create**.
 
-{{< img src="synthetics/guide/otp-from-email-body/email_variable.png" alt="Add a unqiue email variable" style="width:80%;" >}}
+   {{< img src="synthetics/guide/otp-from-email-body/email_variable.png" alt="Add a unqiue email variable" style="width:80%;" >}}
+
+   This adds the email variable to the **Variables** section in the UI:
+
+   {{< img src="synthetics/guide/otp-from-email-body/email_var_example.png" alt="Example email variable in the UI" style="width:50%;" >}}
 
 ### Step 2 - Inject the email address variable
 
-Next add a step to inject the email adress variable into an input field to imitate how a user would input the email address within your application.
+Next, [record steps][11] to insert the email address variable into an input field to imitate how a user would add the email address within your application.
 
-{{< img src="synthetics/guide/otp-from-email-body/synthetics-otp-inject-variable.png" alt="Inject the email variable" style="width:60%;" >}}
+{{< img src="synthetics/guide/otp-from-email-body/email_injection.mp4" alt="Example of recording the email address injection steps" video="true" width="100%">}}
 
-Now the browser test can access the email body for use in the rest of the sign-up flow.
+1. First click **Record** at the top of the test. This will automatially add steps to the test based on the detected interactions and inputs.
+2. Next click the email input field which creates a **Click** step.
+3. Then go up to the email variable created earlier, in this example called `DD_EMAIL_ADDRESS`. On the right click **Inject variable in a text input** and click on the desired text box, which will be highlighted in the UI, which then inserts the email.
 
-{{< img src="synthetics/guide/otp-from-email-body/inject_email_variable.mp4" alt="Inject the email address variable" video="true" width="100%">}}
+   {{< img src="synthetics/guide/otp-from-email-body/synthetics-otp-inject-variable.png" alt="Inject the email variable" style="width:60%;" >}}
+
+Once the email is sent containing the OTP now the Browser Test can access the email body for use in the rest of the sign-up flow.
 
 ### Step 3 - Extract the OTP from the email body
 
-Define a test step to extract the OTP from the email body once it has been sent and store it in a variable. In this example, the variable is named `OTP_FROM_EMAIL` for later reference within the guide. 
+Next define a test step to extract the OTP from the email body once it has been sent and store it in a variable. In this example, the variable is named `OTP_FROM_EMAIL` for later reference within the guide. 
 
 1. Under **Add a variable** select **from Email body**.
 
@@ -69,9 +76,11 @@ Here are sample regex patterns to parse the OTP token from the email body:
 | 5 Character                        | abcde                                        | `/[a-z]{5,5}/`                           |
 | Alphanumerical OTP                 | a1b2cd34                                     | `/[a-zA-Z0-9]{8,8}/`                       |
 
+Now the OTP will be stored in the variable for use in your Browser Test.
+
 ### Step 4 - Use a JavaScript assertion to insert the OTP
 
-JavaScript lets you trigger an event on a DOM element programmatically, making it possible to mimic user interactions or other events. Depending on how your input element is built, dispatching an event may be required to enable custom behaviors or testing event listeners tied to the element.
+JavaScript lets you trigger an event on a DOM element programmatically, making it possible to mimic user interactions or other events. Depending on how your input element is built, dispatching an event may be required to enable custom behaviors or testing event listeners tied to the element. You can use a Javascript assertion to add the saved OTP from the email and insert it into your application.
 
 1. Add a [JavaScript assertion step][5] to input the stored OTP variable, in our example `OTP_FROM_EMAIL`, into the appropriate field in your application. 
 
@@ -114,8 +123,8 @@ Below is a visual example of an OTP setup with separately defined fields that th
 
 ## Next steps
 
-Once the OTP is inserted and verified, you can continue adding steps to your browser test to verify that the user has completed the sign-up flow of your application such as adding an [assertion][6] that specific text is present on the page.
-From here, you can continue [recording the rest of your browser test][9] and then verify your [browser test results][10].
+Once the OTP is inserted and verified, you can continue adding steps to your Browser Test to verify that the user has completed the sign-up flow of your application such as adding an [assertion][6] that specific text is present on the page.
+From here, you can continue [recording the rest of your Browser Test][9] and then verify your [Browser Test results][10].
 
 ## Further Reading
 
@@ -131,3 +140,4 @@ From here, you can continue [recording the rest of your browser test][9] and the
 [8]: /synthetics/guide/email-validation/#create-an-email-variable
 [9]: /synthetics/browser_tests/actions?tab=testanelementontheactivepage
 [10]: /synthetics/browser_tests/test_results
+[11]: /synthetics/browser_tests/actions?tab=testanelementontheactivepage#automatically-recorded-steps
