@@ -25,7 +25,7 @@ further_reading:
 
 Synthetic Browser Tests are to used monitor your applications by reproducing how your customers experience your webpages end-to-end. When testing a sign-up or login flow, incorporate a one-time passcode (OTP) sent to an email address for authentication into your test. This OTP token can be extracted from an email body for testing within an application.
 
-This guide walks you through how to configure the OTP extraction for a synthetic browser test.
+This guide walks you through how to configure the OTP extraction for a Synthetic Browser Test.
 
 ## Setup
 
@@ -76,7 +76,7 @@ Here are sample regex patterns to parse the OTP token from the email body:
 | 5 Character                        | abcde                                        | `/[a-z]{5,5}/`                           |
 | Alphanumerical OTP                 | a1b2cd34                                     | `/[a-zA-Z0-9]{8,8}/`                       |
 
-Now the OTP will be stored in the variable for use in your Browser Test.
+The OTP will be stored in the variable for use in your Browser Test.
 
 ### Step 4 - Use a JavaScript assertion to insert the OTP
 
@@ -86,10 +86,10 @@ JavaScript lets you trigger an event on a DOM element programmatically, making i
 
    {{< img src="synthetics/guide/otp-from-email-body/js_assertion.png" alt="Javascript assertion" style="width:50%;" >}}
 
-2. Under **Custom JavaScript** add the extraction code. The code format will vary depending on whether the OTP is inserted into a simple text field or respective input fields. Below are examples that illustrate both scenarios:
+2. Under **Custom JavaScript** add the extraction code. The code format varies depending on whether the OTP is inserted into a simple text field or respective input fields. Below are examples that illustrate both scenarios:
 
 #### Simple text field
-To insert the OTP into a simple text field use the following:
+To insert the OTP into a simple text field, use the following:
 {{< code-block lang="java" disable_copy="false" >}}
 function (vars, element) {
   element.setAttribute('value', vars.OTP_FROM_EMAIL);
