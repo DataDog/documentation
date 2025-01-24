@@ -24,7 +24,7 @@ Scheduled reports enable Datadog users to share dashboards as high-density PDFs 
 
 {{< img src="dashboards/scheduled_reports/report_pdf.png" alt="Example report PDF attachment" style="width:90%;" >}}
 
-The report PDF can be sent to Slack or email recipients.
+The report PDF can be sent to public Slack channels or email addresses.
 
 {{< img src="dashboards/scheduled_reports/report_slack.png" alt="Example report slack with PDF report linked" style="width:90%;" >}}
 
@@ -60,7 +60,7 @@ Click **Edit Variables** to modify the filters applied when the report is sent. 
 
 #### Email recipients
 
-Add email recipients to your report by entering their email addresses. The email associated with your Datadog account is automatically added as a recipient. You can remove yourself as a recipient by hovering over your email and clicking the trash icon that appears next to it.
+To add email recipients to your report, by enter their email addresses. The email associated with your Datadog account is automatically added as a recipient. You can remove yourself as a recipient by hovering over your email and clicking the trash icon that appears next to it.
 
 **Note:** Enterprise and Pro accounts can send reports to recipients outside of their organizations.
 
@@ -70,7 +70,7 @@ To see the report before saving the schedule, click **Send Test Email**. You can
 
 #### Slack recipients
 
-Add Slack recipients by selecting the Slack workspace and channel from the available dropdowns. You can send a test message to Slack by adding a channel recipient and click **Send Test Message**.
+To add Slack recipients, select the Slack workspace and channel from the available dropdowns. If you do not see any Slack workspaces available, endure you have the Datadog [Slack Integration](https://docs.datadoghq.com/integrations/slack/?tab=datadogforslack) installed. To send a test message to Slack, add a channel recipient and click **Send Test Message**.
 
 **{{< img src="dashboards/scheduled_reports/add_slack_recipients.png" alt="The configuration modal for editing scheduled report email recipients." style="width:90%;" >}}**
 
