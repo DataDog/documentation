@@ -4,6 +4,10 @@
 
 # cdocs-data
 
+## Classes
+
+- [CdocsClientStorage](classes/CdocsClientStorage.md)
+
 ## Type Aliases
 
 - [CdocsCoreError](type-aliases/CdocsCoreError.md)
@@ -37,6 +41,8 @@
 ## Functions
 
 - [buildFiltersManifest](functions/buildFiltersManifest.md)
+- [getTraitValsFromUrl](functions/getTraitValsFromUrl.md)
 - [loadCustomizationConfig](functions/loadCustomizationConfig.md)
 - [pruneManifestForClient](functions/pruneManifestForClient.md)
 - [resolveFilters](functions/resolveFilters.md)
+- [writeTraitValsToUrl](functions/writeTraitValsToUrl.md)

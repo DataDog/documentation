@@ -41,8 +41,15 @@ export {
   CustomizationConfigByLangSchema,
 } from './schemas/customizationConfig';
 
-// Utilities
-export { loadCustomizationConfig } from './utils/compilation/loadCustomizationConfig';
-export { buildFiltersManifest } from './utils/compilation/buildFiltersManifest';
-export { pruneManifestForClient } from './utils/compilation/pruneManifestForClient';
-export { resolveFilters } from './utils/shared/resolveFilters';
+// Compilation utilities
+export { loadCustomizationConfig } from './api/compilation/loadCustomizationConfig';
+export { buildFiltersManifest } from './api/compilation/buildFiltersManifest';
+export { pruneManifestForClient } from './api/compilation/pruneManifestForClient';
+
+// Shared utilities
+export { resolveFilters } from './api/shared/resolveFilters';
+
+// Browser utilities
+export { getTraitValsFromUrl } from './api/browser/getTraitValsFromUrl';
+export { writeTraitValsToUrl } from './api/browser/writeTraitValsToUrl';
+export { CdocsClientStorage } from './api/browser/CdocsClientStorage';

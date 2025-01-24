@@ -1,10 +1,10 @@
 traits:
 - id: color
   label: Color
-  description: "A high-level color that can help the user find the right paint, such as 'red'."
+  internal_notes: "A high-level color that can help the user find the right paint, such as 'red'."
 - id: finish
   label: Finish
-  description: "A sheen such as 'glossy' or 'matte'."
+  internal_notes: "A sheen such as 'glossy' or 'matte'."
 - id: paint
   label: Paint color
-  description: "A specific color of paint, such as 'Fire Engine Red'."
+  internal_notes: "A specific color of paint, such as 'Fire Engine Red'."

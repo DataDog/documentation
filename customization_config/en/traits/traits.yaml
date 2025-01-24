@@ -12,19 +12,19 @@ traits:
   # for the Markdoc test pages
   - id: color
     label: "Color"
-    description: DO NOT USE, testing purposes only.
+    internal_notes: DO NOT USE, testing purposes only.
 
   - id: item
     label: "Item"
-    description: DO NOT USE, testing purposes only.
+    internal_notes: DO NOT USE, testing purposes only.
 
   - id: postgres_version
     label: "Postgres version"
-    description: Any Postgres version regardless of its granularity, such as 15, 9.1.2, or ~10.0.0.
+    internal_notes: Any Postgres version regardless of its granularity, such as 15, 9.1.2, or ~10.0.0.
 
   - id: agent_version
     label: "Agent version"
-    description: Any Agent version regardless of its granularity, such as 7, 6.32.1, or ~7.0.0.
+    internal_notes: Any Agent version regardless of its granularity, such as 7, 6.32.1, or ~7.0.0.
 
   - id: agent_host
     label: "Agent host"
@@ -32,27 +32,27 @@ traits:
   # general examples
   - id: host
     label: "Host"
-    description: Hosting platform, such as AWS or GCP. Can also refer to containers like Kubernetes.
+    internal_notes: Hosting platform, such as AWS or GCP. Can also refer to containers like Kubernetes.
 
   - id: host_type
     label: "Host type"
-    description: The machine or container type within a given host, such as EC2. Use only as a followup to a `host` selection.
+    internal_notes: The machine or container type within a given host, such as EC2. Use only as a followup to a `host` selection.
 
   - id: prog_lang
     label: "Language"
-    description: Programming language, such as Python.
+    internal_notes: Programming language, such as Python.
 
   - id: os
     label: "OS"
-    description: Env operating system, such as Linux or Windows. Can refer to a mobile OS, but `mobile_os` is preferred for lists of mobile-only options.
+    internal_notes: Env operating system, such as Linux or Windows. Can refer to a mobile OS, but `mobile_os` is preferred for lists of mobile-only options.
 
   - id: database
     label: "Database"
 
   - id: mobile_os
     label: "OS"
-    description: Mobile operating system, such as Android.
+    internal_notes: Mobile operating system, such as Android.
     
   - id: pkg_mgr
     label: "Package manager"
-    description: Software package manager, such as npm.
+    internal_notes: Software package manager, such as npm.

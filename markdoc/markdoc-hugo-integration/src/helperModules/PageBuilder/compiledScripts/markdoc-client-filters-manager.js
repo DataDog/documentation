@@ -120,9 +120,9 @@
     }
   });
 
-  // node_modules/cdocs-data/dist/utils/shared/resolveFilters.js
+  // node_modules/cdocs-data/dist/api/shared/resolveFilters.js
   var require_resolveFilters = __commonJS({
-    "node_modules/cdocs-data/dist/utils/shared/resolveFilters.js"(exports) {
+    "node_modules/cdocs-data/dist/api/shared/resolveFilters.js"(exports) {
       "use strict";
       Object.defineProperty(exports, "__esModule", { value: true });
       exports.resolveFilters = resolveFilters;
@@ -169,6 +169,141 @@
         }
         return filterConfigDup;
       }
+    }
+  });
+
+  // node_modules/cdocs-data/dist/api/browser/getTraitValsFromUrl.js
+  var require_getTraitValsFromUrl = __commonJS({
+    "node_modules/cdocs-data/dist/api/browser/getTraitValsFromUrl.js"(exports) {
+      "use strict";
+      Object.defineProperty(exports, "__esModule", { value: true });
+      exports.getTraitValsFromUrl = getTraitValsFromUrl;
+      function getTraitValsFromUrl(p) {
+        const searchParams = p.url.searchParams;
+        const selectedValsByTraitId = {};
+        searchParams.forEach((val, key) => {
+          if (p.traitIds.includes(key)) {
+            selectedValsByTraitId[key] = val;
+          }
+        });
+        return selectedValsByTraitId;
+      }
+    }
+  });
+
+  // node_modules/cdocs-data/dist/api/browser/writeTraitValsToUrl.js
+  var require_writeTraitValsToUrl = __commonJS({
+    "node_modules/cdocs-data/dist/api/browser/writeTraitValsToUrl.js"(exports) {
+      "use strict";
+      Object.defineProperty(exports, "__esModule", { value: true });
+      exports.writeTraitValsToUrl = writeTraitValsToUrl;
+      function writeTraitValsToUrl(p) {
+        const searchParams = p.url.searchParams;
+        const updatedUrlParams = Object.assign({}, p.traitValsById);
+        searchParams.forEach((val, key) => {
+          if (!(key in p.traitValsById)) {
+            updatedUrlParams[key] = val;
+          }
+        });
+        const sortedKeys = Object.keys(updatedUrlParams).sort();
+        const newUrl = new URL(p.url.origin + p.url.pathname);
+        sortedKeys.forEach((key) => {
+          newUrl.searchParams.set(key, updatedUrlParams[key]);
+        });
+        return newUrl;
+      }
+    }
+  });
+
+  // node_modules/cdocs-data/dist/api/browser/CdocsClientStorage.js
+  var require_CdocsClientStorage = __commonJS({
+    "node_modules/cdocs-data/dist/api/browser/CdocsClientStorage.js"(exports) {
+      "use strict";
+      Object.defineProperty(exports, "__esModule", { value: true });
+      exports.CdocsClientStorage = void 0;
+      var CdocsClientStorage = class {
+        /**
+         * Create a new instance of CdocsClientStorage, resuming
+         * any previous sessions by loading any existing trait values
+         * from local storage.
+         *
+         * @param p.topLevelKey The key under which all data will be stored in local storage, such as 'cdocs-client-storage'.
+         * @param p.maxKeyCount The maximum number of keys that should be stored at once.
+         */
+        constructor(p) {
+          this.topLevelKey = p.topLevelKey;
+          this.maxKeyCount = p.maxKeyCount;
+          this.storage = {};
+          this.readFromLocalStorage();
+        }
+        /**
+         * Get the value of all traits, keyed by trait ID.
+         *
+         * @returns A record of trait IDs to their values.
+         */
+        getTraitVals() {
+          const entries = {};
+          for (const key in this.storage) {
+            entries[key] = this.storage[key].value;
+          }
+          return entries;
+        }
+        /**
+         * Update the value of one or more traits.
+         * Any trait IDs not provided will be left unchanged.
+         *
+         * @param entries A record of trait IDs to their updated values.
+         *
+         * @returns A record of all known trait IDs to their values,
+         * regardless of whether they were updated in this batch.
+         */
+        setTraitVals(entries) {
+          for (const key in entries) {
+            this.storage[key] = { value: entries[key], timestamp: Date.now() };
+          }
+          if (Object.keys(this.storage).length > this.maxKeyCount) {
+            const sortedKeys = Object.keys(this.storage).sort((a, b) => this.storage[a].timestamp - this.storage[b].timestamp);
+            while (sortedKeys.length > this.maxKeyCount) {
+              delete this.storage[sortedKeys.shift()];
+            }
+          }
+          this.writeToLocalStorage();
+          return this.getTraitVals();
+        }
+        /**
+         * Asynchronously write the current storage to local storage,
+         * so it can be accessed in future sessions.
+         */
+        async writeToLocalStorage() {
+          localStorage.setItem(this.topLevelKey, JSON.stringify(this.storage));
+        }
+        /**
+         * Write the current storage from local storage.
+         *
+         * Should be called once when the instance is created.
+         */
+        readFromLocalStorage() {
+          const data = localStorage.getItem(this.topLevelKey);
+          if (data) {
+            this.storage = JSON.parse(data);
+          }
+        }
+        /**
+         * Erase all stored data, including the top-level key.
+         */
+        destroy() {
+          this.storage = {};
+          localStorage.removeItem(this.topLevelKey);
+        }
+        /**
+         * Erase all stored trait values, but keep the top-level key.
+         */
+        clear() {
+          this.storage = {};
+          this.writeToLocalStorage();
+        }
+      };
+      exports.CdocsClientStorage = CdocsClientStorage;
     }
   });
 
@@ -12791,6 +12926,9 @@
       exports.ClientFiltersManager = void 0;
       var CustomizationMenu_1 = require_CustomizationMenu();
       var resolveFilters_1 = require_resolveFilters();
+      var getTraitValsFromUrl_1 = require_getTraitValsFromUrl();
+      var writeTraitValsToUrl_1 = require_writeTraitValsToUrl();
+      var CdocsClientStorage_1 = require_CdocsClientStorage();
       var reresolver_1 = require_reresolver();
       var pageConfigMinification_1 = require_pageConfigMinification();
       var PILLS_MENU_ID = "cdoc-filters-pill-menu";
@@ -12798,38 +12936,19 @@
       var MENU_WRAPPER_ID = "cdoc-filters-menu";
       var OFFSCREEN_CLASS = "cdoc-offscreen";
       var ClientFiltersManager = class {
-        fitCustomizationMenuToScreen() {
-          const pillsMenu = document.getElementById(PILLS_MENU_ID);
-          if (!pillsMenu) {
-            return;
-          }
-          const pillsAreHidden = pillsMenu.classList.contains(OFFSCREEN_CLASS);
-          const dropdownMenu = document.getElementById(DROPDOWN_MENU_ID);
-          if (!dropdownMenu) {
-            throw new Error("Dropdown menu not found");
-          }
-          const menuWrapper = document.getElementById(MENU_WRAPPER_ID);
-          if (!menuWrapper) {
-            throw new Error("Menu wrapper not found");
-          }
-          const pillsMenuIsOverflowing = pillsMenu.scrollWidth > menuWrapper.clientWidth;
-          if (!pillsAreHidden && pillsMenuIsOverflowing) {
-            pillsMenu.classList.add(OFFSCREEN_CLASS);
-            dropdownMenu.classList.remove(OFFSCREEN_CLASS);
-          } else if (pillsAreHidden && !pillsMenuIsOverflowing) {
-            pillsMenu.classList.remove(OFFSCREEN_CLASS);
-            dropdownMenu.classList.add(OFFSCREEN_CLASS);
-          }
-        }
         /**
-         * The constructor should not do anything,
-         * since there is always only one instance,
-         * and it is created lazily.
+         * There is always only one instance,
+         * and it is created lazily, so this will only run once,
+         * and is not accessible from outside the class
+         * in order to prevent instantiation.
          */
         constructor() {
           this.selectedValsByTraitId = {};
           this.ifFunctionsByRef = {};
-          this.storedFilters = {};
+          this.browserStorage = new CdocsClientStorage_1.CdocsClientStorage({
+            topLevelKey: "datadog-docs-content-filters",
+            maxKeyCount: 20
+          });
         }
         /**
          * Return the existing instance,
@@ -12838,7 +12957,6 @@
         static get instance() {
           if (!__classPrivateFieldGet(_a, _a, "f", _ClientFiltersManager_instance)) {
             __classPrivateFieldSet(_a, _a, new _a(), "f", _ClientFiltersManager_instance);
-            __classPrivateFieldGet(_a, _a, "f", _ClientFiltersManager_instance).getStoredFilterSelections();
             window.markdocBeforeRevealHooks = window.markdocBeforeRevealHooks || [];
             window.markdocAfterRerenderHooks = window.markdocAfterRerenderHooks || [];
           }
@@ -12872,49 +12990,16 @@
           this.updateEditButton();
           if (contentIsCustomizable) {
             this.syncUrlWithSelectedVals();
-            this.updateStoredFilterSelections();
+            this.browserStorage.setTraitVals(this.selectedValsByTraitId);
           }
-        }
-        /**
-         * Read any existing user filters from their browser.
-         */
-        getStoredFilterSelections() {
-          const storedFilters = JSON.parse(localStorage.getItem("content-filters") || "{}");
-          this.storedFilters = storedFilters;
-        }
-        /**
-         * Update the stored filters in the user's browser.
-         */
-        updateStoredFilterSelections() {
-          const storedFilters = JSON.parse(localStorage.getItem("content-filters") || "{}");
-          const newStoredFilters = Object.assign(Object.assign({}, storedFilters), this.selectedValsByTraitId);
-          this.storedFilters = newStoredFilters;
-          localStorage.setItem("content-filters", JSON.stringify(newStoredFilters));
-        }
-        /**
-         * Read the selected filter values from the URL
-         * and return them in a dictionary.
-         */
-        getSelectedValsFromUrl() {
-          const url = new URL(window.location.href);
-          const searchParams = url.searchParams;
-          const selectedValsByTraitId = {};
-          searchParams.forEach((val, key) => {
-            if (key in Object.keys(this.selectedValsByTraitId)) {
-              selectedValsByTraitId[key] = val;
-            }
-          });
-          return selectedValsByTraitId;
         }
         /**
          * Update the URL with the selected filter values.
          */
         syncUrlWithSelectedVals() {
-          const url = new URL(window.location.href);
-          const searchParams = url.searchParams;
-          const sortedFilterIds = Object.keys(this.selectedValsByTraitId).sort();
-          sortedFilterIds.forEach((filterId) => {
-            searchParams.set(filterId, this.selectedValsByTraitId[filterId]);
+          const url = (0, writeTraitValsToUrl_1.writeTraitValsToUrl)({
+            url: new URL(window.location.href),
+            traitValsById: this.selectedValsByTraitId
           });
           window.history.replaceState({}, "", url.toString());
         }
@@ -12939,7 +13024,7 @@
           this.selectedValsByTraitId[filterId] = optionId;
           this.rerender();
           this.syncUrlWithSelectedVals();
-          this.updateStoredFilterSelections();
+          this.browserStorage.setTraitVals(this.selectedValsByTraitId);
         }
         /**
          * Check whether the element or any of its ancestors
@@ -13096,22 +13181,26 @@
          * default values, etc.) into a single set of selected values.
          */
         applyFilterSelectionOverrides() {
-          const relevantFilterIds = Object.keys(this.selectedValsByTraitId);
-          let filterOverrideFound = false;
-          Object.keys(this.storedFilters).forEach((filterId) => {
-            if (relevantFilterIds.includes(filterId) && this.selectedValsByTraitId[filterId] !== this.storedFilters[filterId]) {
-              this.selectedValsByTraitId[filterId] = this.storedFilters[filterId];
-              filterOverrideFound = true;
+          const relevantTraitIds = Object.keys(this.selectedValsByTraitId);
+          let traitValOverrideFound = false;
+          const storedTraitValsById = this.browserStorage.getTraitVals();
+          Object.keys(storedTraitValsById).forEach((traitId) => {
+            if (relevantTraitIds.includes(traitId) && this.selectedValsByTraitId[traitId] !== storedTraitValsById[traitId]) {
+              this.selectedValsByTraitId[traitId] = storedTraitValsById[traitId];
+              traitValOverrideFound = true;
             }
           });
-          const urlFilters = this.getSelectedValsFromUrl();
-          Object.keys(urlFilters).forEach((filterId) => {
-            if (relevantFilterIds.includes(filterId) && this.selectedValsByTraitId[filterId] !== urlFilters[filterId]) {
-              this.selectedValsByTraitId[filterId] = urlFilters[filterId];
-              filterOverrideFound = true;
+          const urlTraitValsById = (0, getTraitValsFromUrl_1.getTraitValsFromUrl)({
+            url: new URL(window.location.href),
+            traitIds: relevantTraitIds
+          });
+          Object.keys(urlTraitValsById).forEach((traitId) => {
+            if (this.selectedValsByTraitId[traitId] !== urlTraitValsById[traitId]) {
+              this.selectedValsByTraitId[traitId] = urlTraitValsById[traitId];
+              traitValOverrideFound = true;
             }
           });
-          return filterOverrideFound;
+          return traitValOverrideFound;
         }
         /**
          * Override Hugo's default edit button to point to an .mdoc.md file,
@@ -13168,6 +13257,33 @@
           this.filterSelectorEl.innerHTML = newFilterSelectorHtml;
           this.fitCustomizationMenuToScreen();
           this.addFilterSelectorEventListeners();
+        }
+        /**
+         * Decide whether to render pills or dropdowns, depending
+         * on the width of the customization menu.
+         */
+        fitCustomizationMenuToScreen() {
+          const pillsMenu = document.getElementById(PILLS_MENU_ID);
+          if (!pillsMenu) {
+            return;
+          }
+          const pillsAreHidden = pillsMenu.classList.contains(OFFSCREEN_CLASS);
+          const dropdownMenu = document.getElementById(DROPDOWN_MENU_ID);
+          if (!dropdownMenu) {
+            throw new Error("Dropdown menu not found");
+          }
+          const menuWrapper = document.getElementById(MENU_WRAPPER_ID);
+          if (!menuWrapper) {
+            throw new Error("Menu wrapper not found");
+          }
+          const pillsMenuIsOverflowing = pillsMenu.scrollWidth > menuWrapper.clientWidth;
+          if (!pillsAreHidden && pillsMenuIsOverflowing) {
+            pillsMenu.classList.add(OFFSCREEN_CLASS);
+            dropdownMenu.classList.remove(OFFSCREEN_CLASS);
+          } else if (pillsAreHidden && !pillsMenuIsOverflowing) {
+            pillsMenu.classList.remove(OFFSCREEN_CLASS);
+            dropdownMenu.classList.add(OFFSCREEN_CLASS);
+          }
         }
       };
       exports.ClientFiltersManager = ClientFiltersManager;

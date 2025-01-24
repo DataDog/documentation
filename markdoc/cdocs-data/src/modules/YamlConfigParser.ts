@@ -58,6 +58,11 @@ export class YamlConfigParser {
 
     const glossaryDir = `${p.langDir}/traits`;
 
+    // Verify that the dir exists
+    if (!fs.existsSync(glossaryDir)) {
+      return {};
+    }
+
     // Scan for YAML files in the glossaryDir
     const filePaths = this.findInDir(glossaryDir, /\.ya?ml$/);
 
@@ -89,6 +94,11 @@ export class YamlConfigParser {
     let result: OptionGlossary = {};
 
     const glossaryDir = `${p.langDir}/options`;
+
+    // Verify that the dir exists
+    if (!fs.existsSync(glossaryDir)) {
+      return {};
+    }
 
     // Get all the files in the glossaryDir
     const filePaths = this.findInDir(glossaryDir, /\.ya?ml$/);
@@ -224,6 +234,12 @@ export class YamlConfigParser {
     }
 
     const optionGroupGlossaryDir = `${p.langDir}/option_groups`;
+
+    // Verify that the dir exists
+    if (!fs.existsSync(optionGroupGlossaryDir)) {
+      return {};
+    }
+
     const filePaths = this.findInDir(optionGroupGlossaryDir, /\.ya?ml$/);
     const mergedGlossary: OptionGroupGlossary = {};
 

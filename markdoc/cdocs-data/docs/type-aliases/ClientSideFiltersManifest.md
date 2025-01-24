@@ -8,7 +8,7 @@
 
 > **ClientSideFiltersManifest**: `object`
 
-Defined in: [src/schemas/pageFilters.ts:254](https://github.com/DataDog/documentation/blob/f6ec1f95d2d416a2bf4e05ae6718fd51d1cfc306/markdoc/cdocs-data/src/schemas/pageFilters.ts#L254)
+Defined in: [src/schemas/pageFilters.ts:254](https://github.com/DataDog/documentation/blob/3953d7af216b4170a6fe07795dfb4fd8d2a79be3/markdoc/cdocs-data/src/schemas/pageFilters.ts#L254)
 
 A lighter version of the FiltersManifest schema,
 designed to be used client-side.

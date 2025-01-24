@@ -12,7 +12,7 @@ export const OptionGlossaryEntrySchema = z
   .object({
     id: z.string().regex(SNAKE_CASE_REGEX),
     label: z.string(),
-    description: z.string().optional(),
+    internal_notes: z.string().optional(),
   })
   .strict();
 
@@ -23,7 +23,7 @@ export const OptionGlossaryEntrySchema = z
  * {
  *   id: 'linux',
  *   label: 'Linux',
- *   description: 'Optional additional information on what this option represents',
+ *   internal_notes: 'Optional additional information on what this option represents',
  * }
  */
 export type OptionGlossaryEntry = z.infer<typeof OptionGlossaryEntrySchema>;
@@ -42,7 +42,7 @@ export const OptionGlossarySchema = z.record(OptionGlossaryEntrySchema);
  *   linux: {
  *     id: 'linux',
  *     label: 'Linux',
- *     description: 'Optional additional information on what this option represents',
+ *     internal_notes: 'Optional additional information on what this option represents',
  *   },
  *   windows: {
  *     id: 'windows',

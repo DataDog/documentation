@@ -1,10 +1,10 @@
 import { describe, test, expect } from 'vitest';
-import { loadCustomizationConfig } from '../../src';
+import { loadCustomizationConfig } from '../../../src';
 import {
   INVALID_CONFIGS_DIR,
   VALID_CUSTOMIZATION_CONFIG_DIR,
   SNAPSHOTS_DIR,
-} from '../config/constants';
+} from '../../config/constants';
 import fs from 'fs';
 
 describe('loadCustomizationConfig', () => {
@@ -66,7 +66,7 @@ describe('loadCustomizationConfig', () => {
     const stringifiedConfig = JSON.stringify(customizationConfigByLang, null, 2);
 
     await expect(stringifiedConfig).toMatchFileSnapshot(
-      SNAPSHOTS_DIR + '/utils/loadCustomizationConfig/validConfig.snap.json',
+      SNAPSHOTS_DIR + '/api/loadCustomizationConfig/validConfig.snap.json',
     );
   });
 
@@ -95,7 +95,7 @@ describe('loadCustomizationConfig', () => {
   test(`the errors match the snapshot`, async () => {
     const stringifiedErrors = JSON.stringify(errorsByDir, null, 2);
     await expect(stringifiedErrors).toMatchFileSnapshot(
-      `${SNAPSHOTS_DIR}/utils/loadCustomizationConfig/invalidDirectoryErrors.snap.json`,
+      `${SNAPSHOTS_DIR}/api/loadCustomizationConfig/invalidDirectoryErrors.snap.json`,
     );
   });
 });

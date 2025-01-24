@@ -1,5 +1,5 @@
 import { describe, test, expect } from 'vitest';
-import { getDefaultValsByTraitId } from '../../src/utils/compilation/buildFiltersManifest';
+import { getDefaultValsByTraitId } from '../../src/api/compilation/buildFiltersManifest';
 import { paintColorsCustomizationConfig } from '../config/mocks/valid/paintColorsData/customizationConfig';
 import { paintColorsFrontmatter } from '../config/mocks/valid/paintColorsData/frontmatter';
 

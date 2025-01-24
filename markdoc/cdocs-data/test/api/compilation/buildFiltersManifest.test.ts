@@ -1,8 +1,8 @@
 import { describe, test, expect } from 'vitest';
-import { buildFiltersManifest } from '../../src';
-import { paintColorsFrontmatter } from '../config/mocks/valid/paintColorsData/frontmatter';
-import { paintColorsCustomizationConfig } from '../config/mocks/valid/paintColorsData/customizationConfig';
-import { paintColorsManifest } from '../config/mocks/valid/paintColorsData/filtersManifest';
+import { buildFiltersManifest } from '../../../src';
+import { paintColorsFrontmatter } from '../../config/mocks/valid/paintColorsData/frontmatter';
+import { paintColorsCustomizationConfig } from '../../config/mocks/valid/paintColorsData/customizationConfig';
+import { paintColorsManifest } from '../../config/mocks/valid/paintColorsData/filtersManifest';
 import _ from 'lodash';
 
 describe('buildFiltersManifest', () => {

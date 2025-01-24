@@ -6,9 +6,9 @@
 
 # Type Alias: TraitGlossary
 
-> **TraitGlossary**: `Record`\<`string`, \{ `description`: `string`; `id`: `string`; `label`: `string`; \}\>
+> **TraitGlossary**: `Record`\<`string`, \{ `id`: `string`; `internal_notes`: `string`; `label`: `string`; \}\>
 
-Defined in: [src/schemas/glossaries/traitGlossary.ts:52](https://github.com/DataDog/documentation/blob/f6ec1f95d2d416a2bf4e05ae6718fd51d1cfc306/markdoc/cdocs-data/src/schemas/glossaries/traitGlossary.ts#L52)
+Defined in: [src/schemas/glossaries/traitGlossary.ts:52](https://github.com/DataDog/documentation/blob/3953d7af216b4170a6fe07795dfb4fd8d2a79be3/markdoc/cdocs-data/src/schemas/glossaries/traitGlossary.ts#L52)
 
 A glossary of all user traits that can be used in customization.
 
@@ -19,7 +19,7 @@ A glossary of all user traits that can be used in customization.
  *   host: {
  *     id: 'host',
  *     label: 'Host',
- *     description: 'A cloud hosting provider, such as AWS', // optional
+ *     internal_notes: 'A cloud hosting provider, such as AWS', // optional
  *   },
  *   operating_system: {
  *     id: 'os',

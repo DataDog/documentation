@@ -5,18 +5,18 @@ export const paintColorsCustomizationConfig: CustomizationConfig = {
     color: {
       id: 'color',
       label: 'Color',
-      description:
+      internal_notes:
         "A high-level color that can help the user find the right paint, such as 'red'.",
     },
     finish: {
       id: 'finish',
       label: 'Finish',
-      description: "A sheen such as 'glossy' or 'matte'.",
+      internal_notes: "A sheen such as 'glossy' or 'matte'.",
     },
     paint: {
       id: 'paint',
       label: 'Paint Color',
-      description: "A specific color of paint, such as 'Fire Engine Red'.",
+      internal_notes: "A specific color of paint, such as 'Fire Engine Red'.",
     },
   },
   optionsById: {

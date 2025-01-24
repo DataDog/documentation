@@ -10,8 +10,8 @@
       "imports": [],
       "format": "cjs"
     },
-    "node_modules/cdocs-data/dist/utils/shared/resolveFilters.js": {
-      "bytes": 4007,
+    "node_modules/cdocs-data/dist/api/shared/resolveFilters.js": {
+      "bytes": 4379,
       "imports": [
         {
           "path": "node_modules/cdocs-data/dist/schemas/regexes.js",
@@ -19,6 +19,21 @@
           "original": "../../schemas/regexes"
         }
       ],
+      "format": "cjs"
+    },
+    "node_modules/cdocs-data/dist/api/browser/getTraitValsFromUrl.js": {
+      "bytes": 676,
+      "imports": [],
+      "format": "cjs"
+    },
+    "node_modules/cdocs-data/dist/api/browser/writeTraitValsToUrl.js": {
+      "bytes": 1019,
+      "imports": [],
+      "format": "cjs"
+    },
+    "node_modules/cdocs-data/dist/api/browser/CdocsClientStorage.js": {
+      "bytes": 3155,
+      "imports": [],
       "format": "cjs"
     },
     "node_modules/markdoc-static-compiler/dist/index.js": {
@@ -43,7 +58,7 @@
       "format": "cjs"
     },
     "dist/helperModules/ClientFiltersManager.js": {
-      "bytes": 18578,
+      "bytes": 17908,
       "imports": [
         {
           "path": "dist/helperModules/PageBuilder/components/CustomizationMenu.js",
@@ -51,9 +66,24 @@
           "original": "./PageBuilder/components/CustomizationMenu"
         },
         {
-          "path": "node_modules/cdocs-data/dist/utils/shared/resolveFilters.js",
+          "path": "node_modules/cdocs-data/dist/api/shared/resolveFilters.js",
           "kind": "require-call",
-          "original": "cdocs-data/dist/utils/shared/resolveFilters"
+          "original": "cdocs-data/dist/api/shared/resolveFilters"
+        },
+        {
+          "path": "node_modules/cdocs-data/dist/api/browser/getTraitValsFromUrl.js",
+          "kind": "require-call",
+          "original": "cdocs-data/dist/api/browser/getTraitValsFromUrl"
+        },
+        {
+          "path": "node_modules/cdocs-data/dist/api/browser/writeTraitValsToUrl.js",
+          "kind": "require-call",
+          "original": "cdocs-data/dist/api/browser/writeTraitValsToUrl"
+        },
+        {
+          "path": "node_modules/cdocs-data/dist/api/browser/CdocsClientStorage.js",
+          "kind": "require-call",
+          "original": "cdocs-data/dist/api/browser/CdocsClientStorage"
         },
         {
           "path": "dist/helperModules/renderer/reresolver.js",
@@ -92,8 +122,17 @@
         "node_modules/cdocs-data/dist/schemas/regexes.js": {
           "bytesInOutput": 621
         },
-        "node_modules/cdocs-data/dist/utils/shared/resolveFilters.js": {
-          "bytesInOutput": 2429
+        "node_modules/cdocs-data/dist/api/shared/resolveFilters.js": {
+          "bytesInOutput": 2427
+        },
+        "node_modules/cdocs-data/dist/api/browser/getTraitValsFromUrl.js": {
+          "bytesInOutput": 622
+        },
+        "node_modules/cdocs-data/dist/api/browser/writeTraitValsToUrl.js": {
+          "bytesInOutput": 871
+        },
+        "node_modules/cdocs-data/dist/api/browser/CdocsClientStorage.js": {
+          "bytesInOutput": 3291
         },
         "node_modules/markdoc-static-compiler/dist/index.js": {
           "bytesInOutput": 499748
@@ -105,13 +144,13 @@
           "bytesInOutput": 3111
         },
         "dist/helperModules/ClientFiltersManager.js": {
-          "bytesInOutput": 17433
+          "bytesInOutput": 16668
         },
         "dist/markdoc-client-filters-manager.js": {
           "bytesInOutput": 354
         }
       },
-      "bytes": 530343
+      "bytes": 534567
     }
   }
 }

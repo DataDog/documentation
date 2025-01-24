@@ -118,16 +118,27 @@ In the above example, the value for the trait `habitat` will be used to determin
 
 `cdocs-data` automatically validates the existence of all referenced option groups. If `ocean` is a valid value for `habitat`, but the option group `ocean_animal_options` does not exist, `cdocs-data` reports an error.
 
-## cdocs-data utilities
+## cdocs-data API
 
-This package provides four utility functions:
+### Compilation functions
 
-- [`loadCustomizationConfig`](./docs/functions/loadCustomizationConfig.md), which merges all of a site's YAML files into one customization config object
-- [`buildFiltersManifest`](./docs/functions/buildFiltersManifest.md), which combines the frontmatter of a page with the site's customization config to produce a `FiltersManifest`, an object that contains all the necessary data for filtering the page, such as which options should be available for each trait
-- [`pruneManifestForClient`](./docs/functions/pruneManifestForClient.md), which removes manifest keys that are unnecessary for client-side filtering
-- [`resolveFilters`](./docs/functions/resolveFilters.md), which combines the `FiltersManifest` with the user's selections in order to derive the current value and current option group for each filter.
+- [`loadCustomizationConfig()`](./docs/functions/loadCustomizationConfig.md), which merges all of a site's YAML files into one customization config object
+- [`buildFiltersManifest()`](./docs/functions/buildFiltersManifest.md), which combines the frontmatter of a page with the site's customization config to produce a `FiltersManifest`, an object that contains all the necessary data for filtering the page, such as which options should be available for each trait
+- [`pruneManifestForClient()`](./docs/functions/pruneManifestForClient.md), which removes manifest keys that are unnecessary for client-side filtering
 
-The packages also exports [types](./docs/type-aliases/) and [schemas](./docs/variables/) for data, such as the `FiltersManifest`.
+### Shared (compilation + browser) functions
+
+- [`resolveFilters()`](./docs/functions/resolveFilters.md), which combines the `FiltersManifest` with the user's selections in order to derive the current value and current option group for each filter.
+
+### Browser functions and classes
+
+- [`getTraitValsFromUrl()`](./docs/functions/getTraitValsFromUrl.md), which retrieves trait values from any search params present in a URL.
+- [`writeTraitValsToUrl()`](./docs/functions/writeTraitValsToUrl.md), which writes updated trait values to a URL, ordering them consistently for SEO purposes.
+- [`CdocsClientStorage`](./docs/classes/CdocsClientStorage.md), which manages reading/writing trait values to local storage, pruning older values when appropriate.
+
+### Types and schemas
+
+The package exports all relevant [types](./docs/type-aliases/) and [schemas](./docs/variables/) for creating or validating data, such as the `FiltersManifest`.
 
 ## Usage examples
 

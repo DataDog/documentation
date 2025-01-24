@@ -19,8 +19,11 @@
  */
 
 import { buildCustomizationMenuUi } from './PageBuilder/components/CustomizationMenu';
-import { resolveFilters } from 'cdocs-data/dist/utils/shared/resolveFilters';
+import { resolveFilters } from 'cdocs-data/dist/api/shared/resolveFilters';
 import { ClientSideFiltersManifest } from 'cdocs-data/dist/schemas/pageFilters';
+import { getTraitValsFromUrl } from 'cdocs-data/dist/api/browser/getTraitValsFromUrl';
+import { writeTraitValsToUrl } from 'cdocs-data/dist/api/browser/writeTraitValsToUrl';
+import { CdocsClientStorage } from 'cdocs-data/dist/api/browser/CdocsClientStorage';
 import { ClientFunction } from 'markdoc-static-compiler/src/types';
 import { reresolveFunctionNode } from './renderer/reresolver';
 import {
@@ -36,47 +39,24 @@ const OFFSCREEN_CLASS = 'cdoc-offscreen';
 export class ClientFiltersManager {
   static #instance: ClientFiltersManager;
 
+  private browserStorage: CdocsClientStorage;
   private filtersManifest?: ClientSideFiltersManifest;
   private filterSelectorEl?: HTMLElement;
   private selectedValsByTraitId: Record<string, string> = {};
   private ifFunctionsByRef: Record<string, ClientFunction> = {};
-  private storedFilters: Record<string, string> = {};
-
-  fitCustomizationMenuToScreen() {
-    const pillsMenu = document.getElementById(PILLS_MENU_ID);
-    if (!pillsMenu) {
-      return;
-    }
-
-    const pillsAreHidden = pillsMenu.classList.contains(OFFSCREEN_CLASS);
-
-    const dropdownMenu = document.getElementById(DROPDOWN_MENU_ID);
-    if (!dropdownMenu) {
-      throw new Error('Dropdown menu not found');
-    }
-
-    const menuWrapper = document.getElementById(MENU_WRAPPER_ID);
-    if (!menuWrapper) {
-      throw new Error('Menu wrapper not found');
-    }
-
-    const pillsMenuIsOverflowing = pillsMenu.scrollWidth > menuWrapper.clientWidth;
-
-    if (!pillsAreHidden && pillsMenuIsOverflowing) {
-      pillsMenu.classList.add(OFFSCREEN_CLASS);
-      dropdownMenu.classList.remove(OFFSCREEN_CLASS);
-    } else if (pillsAreHidden && !pillsMenuIsOverflowing) {
-      pillsMenu.classList.remove(OFFSCREEN_CLASS);
-      dropdownMenu.classList.add(OFFSCREEN_CLASS);
-    }
-  }
 
   /**
-   * The constructor should not do anything,
-   * since there is always only one instance,
-   * and it is created lazily.
+   * There is always only one instance,
+   * and it is created lazily, so this will only run once,
+   * and is not accessible from outside the class
+   * in order to prevent instantiation.
    */
-  private constructor() {}
+  private constructor() {
+    this.browserStorage = new CdocsClientStorage({
+      topLevelKey: 'datadog-docs-content-filters',
+      maxKeyCount: 20
+    });
+  }
 
   /**
    * Return the existing instance,
@@ -85,7 +65,6 @@ export class ClientFiltersManager {
   public static get instance(): ClientFiltersManager {
     if (!ClientFiltersManager.#instance) {
       ClientFiltersManager.#instance = new ClientFiltersManager();
-      ClientFiltersManager.#instance.getStoredFilterSelections();
       // @ts-ignore
       window.markdocBeforeRevealHooks = window.markdocBeforeRevealHooks || [];
       // @ts-ignore
@@ -133,61 +112,17 @@ export class ClientFiltersManager {
 
     if (contentIsCustomizable) {
       this.syncUrlWithSelectedVals();
-      this.updateStoredFilterSelections();
+      this.browserStorage.setTraitVals(this.selectedValsByTraitId);
     }
-  }
-
-  /**
-   * Read any existing user filters from their browser.
-   */
-  getStoredFilterSelections() {
-    const storedFilters = JSON.parse(localStorage.getItem('content-filters') || '{}');
-    this.storedFilters = storedFilters;
-  }
-
-  /**
-   * Update the stored filters in the user's browser.
-   */
-  updateStoredFilterSelections() {
-    const storedFilters = JSON.parse(localStorage.getItem('content-filters') || '{}');
-    const newStoredFilters = {
-      ...storedFilters,
-      ...this.selectedValsByTraitId
-    };
-    this.storedFilters = newStoredFilters;
-    localStorage.setItem('content-filters', JSON.stringify(newStoredFilters));
-  }
-
-  /**
-   * Read the selected filter values from the URL
-   * and return them in a dictionary.
-   */
-  getSelectedValsFromUrl() {
-    const url = new URL(window.location.href);
-    const searchParams = url.searchParams;
-
-    const selectedValsByTraitId: Record<string, string> = {};
-    searchParams.forEach((val, key) => {
-      if (key in Object.keys(this.selectedValsByTraitId)) {
-        selectedValsByTraitId[key] = val;
-      }
-    });
-
-    return selectedValsByTraitId;
   }
 
   /**
    * Update the URL with the selected filter values.
    */
   syncUrlWithSelectedVals() {
-    const url = new URL(window.location.href);
-    const searchParams = url.searchParams;
-
-    const sortedFilterIds = Object.keys(this.selectedValsByTraitId).sort();
-
-    // Apply selected values
-    sortedFilterIds.forEach((filterId) => {
-      searchParams.set(filterId, this.selectedValsByTraitId[filterId]);
+    const url = writeTraitValsToUrl({
+      url: new URL(window.location.href),
+      traitValsById: this.selectedValsByTraitId
     });
 
     window.history.replaceState({}, '', url.toString());
@@ -215,7 +150,7 @@ export class ClientFiltersManager {
     this.selectedValsByTraitId[filterId] = optionId;
     this.rerender();
     this.syncUrlWithSelectedVals();
-    this.updateStoredFilterSelections();
+    this.browserStorage.setTraitVals(this.selectedValsByTraitId);
   }
 
   /**
@@ -406,33 +341,36 @@ export class ClientFiltersManager {
    * default values, etc.) into a single set of selected values.
    */
   applyFilterSelectionOverrides() {
-    const relevantFilterIds = Object.keys(this.selectedValsByTraitId);
-    let filterOverrideFound = false;
+    const relevantTraitIds = Object.keys(this.selectedValsByTraitId);
+    let traitValOverrideFound = false;
 
-    // Override default values with stored filters
-    Object.keys(this.storedFilters).forEach((filterId) => {
+    const storedTraitValsById = this.browserStorage.getTraitVals();
+
+    // Override default values with stored trait values
+    Object.keys(storedTraitValsById).forEach((traitId) => {
       if (
-        relevantFilterIds.includes(filterId) &&
-        this.selectedValsByTraitId[filterId] !== this.storedFilters[filterId]
+        relevantTraitIds.includes(traitId) &&
+        this.selectedValsByTraitId[traitId] !== storedTraitValsById[traitId]
       ) {
-        this.selectedValsByTraitId[filterId] = this.storedFilters[filterId];
-        filterOverrideFound = true;
+        this.selectedValsByTraitId[traitId] = storedTraitValsById[traitId];
+        traitValOverrideFound = true;
       }
     });
 
     // Override stored filters with URL params
-    const urlFilters = this.getSelectedValsFromUrl();
-    Object.keys(urlFilters).forEach((filterId) => {
-      if (
-        relevantFilterIds.includes(filterId) &&
-        this.selectedValsByTraitId[filterId] !== urlFilters[filterId]
-      ) {
-        this.selectedValsByTraitId[filterId] = urlFilters[filterId];
-        filterOverrideFound = true;
+    const urlTraitValsById = getTraitValsFromUrl({
+      url: new URL(window.location.href),
+      traitIds: relevantTraitIds
+    });
+
+    Object.keys(urlTraitValsById).forEach((traitId) => {
+      if (this.selectedValsByTraitId[traitId] !== urlTraitValsById[traitId]) {
+        this.selectedValsByTraitId[traitId] = urlTraitValsById[traitId];
+        traitValOverrideFound = true;
       }
     });
 
-    return filterOverrideFound;
+    return traitValOverrideFound;
   }
 
   /**
@@ -510,5 +448,38 @@ export class ClientFiltersManager {
     this.filterSelectorEl.innerHTML = newFilterSelectorHtml;
     this.fitCustomizationMenuToScreen();
     this.addFilterSelectorEventListeners();
+  }
+
+  /**
+   * Decide whether to render pills or dropdowns, depending
+   * on the width of the customization menu.
+   */
+  fitCustomizationMenuToScreen() {
+    const pillsMenu = document.getElementById(PILLS_MENU_ID);
+    if (!pillsMenu) {
+      return;
+    }
+
+    const pillsAreHidden = pillsMenu.classList.contains(OFFSCREEN_CLASS);
+
+    const dropdownMenu = document.getElementById(DROPDOWN_MENU_ID);
+    if (!dropdownMenu) {
+      throw new Error('Dropdown menu not found');
+    }
+
+    const menuWrapper = document.getElementById(MENU_WRAPPER_ID);
+    if (!menuWrapper) {
+      throw new Error('Menu wrapper not found');
+    }
+
+    const pillsMenuIsOverflowing = pillsMenu.scrollWidth > menuWrapper.clientWidth;
+
+    if (!pillsAreHidden && pillsMenuIsOverflowing) {
+      pillsMenu.classList.add(OFFSCREEN_CLASS);
+      dropdownMenu.classList.remove(OFFSCREEN_CLASS);
+    } else if (pillsAreHidden && !pillsMenuIsOverflowing) {
+      pillsMenu.classList.remove(OFFSCREEN_CLASS);
+      dropdownMenu.classList.add(OFFSCREEN_CLASS);
+    }
   }
 }

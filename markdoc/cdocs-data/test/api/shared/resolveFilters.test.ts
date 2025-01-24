@@ -1,6 +1,6 @@
 import { describe, test, expect } from 'vitest';
-import { resolveFilters } from '../../src';
-import { paintColorsManifest } from '../config/mocks/valid/paintColorsData/filtersManifest';
+import { resolveFilters } from '../../../src';
+import { paintColorsManifest } from '../../config/mocks/valid/paintColorsData/filtersManifest';
 
 describe('resolveFilters', () => {
   test('correctly resolves default filters', () => {

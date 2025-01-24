@@ -8,7 +8,7 @@
 
 > **buildFiltersManifest**(`p`): [`FiltersManifest`](../type-aliases/FiltersManifest.md)
 
-Defined in: [src/utils/compilation/buildFiltersManifest.ts:26](https://github.com/DataDog/documentation/blob/f6ec1f95d2d416a2bf4e05ae6718fd51d1cfc306/markdoc/cdocs-data/src/utils/compilation/buildFiltersManifest.ts#L26)
+Defined in: src/api/compilation/buildFiltersManifest.ts:26
 
 Combine a page's frontmatter, the global glossary,
 and the global filter config into a single object
@@ -20,7 +20,7 @@ that defines the filters available on the page.
 
 #### customizationConfig
 
-\{ `optionGroupsById`: `Record`\<`string`, `object`[]\>; `optionsById`: `Record`\<`string`, \{ `description`: `string`; `id`: `string`; `label`: `string`; \}\>; `traitsById`: `Record`\<`string`, \{ `description`: `string`; `id`: `string`; `label`: `string`; \}\>; \}
+\{ `optionGroupsById`: `Record`\<`string`, `object`[]\>; `optionsById`: `Record`\<`string`, \{ `id`: `string`; `internal_notes`: `string`; `label`: `string`; \}\>; `traitsById`: `Record`\<`string`, \{ `id`: `string`; `internal_notes`: `string`; `label`: `string`; \}\>; \}
 
 The global customization
 configuration, which includes all traits, options, and
@@ -32,11 +32,11 @@ option groups that are available to the page.
 
 #### customizationConfig.optionsById
 
-`Record`\<`string`, \{ `description`: `string`; `id`: `string`; `label`: `string`; \}\> = `OptionGlossarySchema`
+`Record`\<`string`, \{ `id`: `string`; `internal_notes`: `string`; `label`: `string`; \}\> = `OptionGlossarySchema`
 
 #### customizationConfig.traitsById
 
-`Record`\<`string`, \{ `description`: `string`; `id`: `string`; `label`: `string`; \}\> = `TraitGlossarySchema`
+`Record`\<`string`, \{ `id`: `string`; `internal_notes`: `string`; `label`: `string`; \}\> = `TraitGlossarySchema`
 
 #### frontmatter
 

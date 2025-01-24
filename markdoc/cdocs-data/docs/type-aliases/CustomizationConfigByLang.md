@@ -6,6 +6,6 @@
 
 # Type Alias: CustomizationConfigByLang
 
-> **CustomizationConfigByLang**: `Record`\<`string`, \{ `optionGroupsById`: `Record`\<`string`, `object`[]\>; `optionsById`: `Record`\<`string`, \{ `description`: `string`; `id`: `string`; `label`: `string`; \}\>; `traitsById`: `Record`\<`string`, \{ `description`: `string`; `id`: `string`; `label`: `string`; \}\>; \}\>
+> **CustomizationConfigByLang**: `Record`\<`string`, \{ `optionGroupsById`: `Record`\<`string`, `object`[]\>; `optionsById`: `Record`\<`string`, \{ `id`: `string`; `internal_notes`: `string`; `label`: `string`; \}\>; `traitsById`: `Record`\<`string`, \{ `id`: `string`; `internal_notes`: `string`; `label`: `string`; \}\>; \}\>
 
-Defined in: [src/schemas/customizationConfig.ts:16](https://github.com/DataDog/documentation/blob/f6ec1f95d2d416a2bf4e05ae6718fd51d1cfc306/markdoc/cdocs-data/src/schemas/customizationConfig.ts#L16)
+Defined in: [src/schemas/customizationConfig.ts:16](https://github.com/DataDog/documentation/blob/3953d7af216b4170a6fe07795dfb4fd8d2a79be3/markdoc/cdocs-data/src/schemas/customizationConfig.ts#L16)

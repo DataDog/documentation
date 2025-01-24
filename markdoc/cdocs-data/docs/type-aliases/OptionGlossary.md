@@ -6,9 +6,9 @@
 
 # Type Alias: OptionGlossary
 
-> **OptionGlossary**: `Record`\<`string`, \{ `description`: `string`; `id`: `string`; `label`: `string`; \}\>
+> **OptionGlossary**: `Record`\<`string`, \{ `id`: `string`; `internal_notes`: `string`; `label`: `string`; \}\>
 
-Defined in: [src/schemas/glossaries/optionGlossary.ts:57](https://github.com/DataDog/documentation/blob/f6ec1f95d2d416a2bf4e05ae6718fd51d1cfc306/markdoc/cdocs-data/src/schemas/glossaries/optionGlossary.ts#L57)
+Defined in: [src/schemas/glossaries/optionGlossary.ts:57](https://github.com/DataDog/documentation/blob/3953d7af216b4170a6fe07795dfb4fd8d2a79be3/markdoc/cdocs-data/src/schemas/glossaries/optionGlossary.ts#L57)
 
 A glossary of all the options that can be used on a site,
 regardless of which filters they are associated with.
@@ -20,7 +20,7 @@ regardless of which filters they are associated with.
  *   linux: {
  *     id: 'linux',
  *     label: 'Linux',
- *     description: 'Optional additional information on what this option represents',
+ *     internal_notes: 'Optional additional information on what this option represents',
  *   },
  *   windows: {
  *     id: 'windows',

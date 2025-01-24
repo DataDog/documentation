@@ -12,7 +12,7 @@ export const TraitGlossaryEntrySchema = z
   .object({
     id: z.string().regex(SNAKE_CASE_REGEX),
     label: z.string(),
-    description: z.string().optional(),
+    internal_notes: z.string().optional(),
   })
   .strict();
 
@@ -23,7 +23,7 @@ export const TraitGlossaryEntrySchema = z
  * {
  *   id: 'host',
  *   label: 'Host',
- *   description: 'The host of a service or Datadog Agent',
+ *   internal_notes: 'The host of a service or Datadog Agent',
  * }
  */
 export type TraitGlossaryEntry = z.infer<typeof TraitGlossaryEntrySchema>;
@@ -41,7 +41,7 @@ export const TraitGlossarySchema = z.record(TraitGlossaryEntrySchema);
  *   host: {
  *     id: 'host',
  *     label: 'Host',
- *     description: 'A cloud hosting provider, such as AWS', // optional
+ *     internal_notes: 'A cloud hosting provider, such as AWS', // optional
  *   },
  *   operating_system: {
  *     id: 'os',
