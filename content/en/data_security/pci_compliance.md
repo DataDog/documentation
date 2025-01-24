@@ -46,6 +46,19 @@ Datadog offers PCI-compliant Log Management and Application Performance Monitori
 
 {{% /site-region %}}
 
+## Viewing PCI-compliance
+
+See the [Configuration Page][2] inside Safety Center. 
+
+Example of a fully onboarded customer:
+
+<img width="1757" alt="image" src="https://github.com/user-attachments/assets/cba57395-bc3e-4277-8f51-13958dce9ef9" />
+
+Example of an onboarding customer:
+
+<img width="1757" alt="image" src="https://github.com/user-attachments/assets/f8da8c33-a43e-4ad6-a2a0-285b40df5e5a" />
+
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
