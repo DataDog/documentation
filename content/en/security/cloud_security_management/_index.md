@@ -62,7 +62,7 @@ cascade:
   Learn how Datadog Cloud SIEM and Cloud Security Management elevate your organization's threat detection and investigation for dynamic, cloud-scale environments. 
 {{< /learning-center-callout >}}
 
-Datadog Cloud Security Management (CSM) delivers deep visibility, continuous configuration audits, identity risk assessments, vulnerability detection, and real-time threat detection across your entire cloud infrastructure - all in a unified platform for seamless collaboration and faster remediation.
+Datadog Cloud Security Management (CSM) delivers deep visibility, continuous configuration audits, identity risk assessments, vulnerability detection, and real-time threat detection across your entire cloud infrastructure—all in a unified platform for seamless collaboration and faster remediation.
 
 Security and DevOps teams can act on the shared context of observability and security data to quickly prioritize and remediate issues.
 
