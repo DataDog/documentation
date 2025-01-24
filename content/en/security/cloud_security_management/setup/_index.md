@@ -73,7 +73,7 @@ For broader coverage and additional functionalities, deploy the Datadog Agent to
     <td>{{< X >}}</td>
   </tr>
   <tr>
-    <td style="padding-left: 20px;">Host benchmarks</td>
+    <td style="padding-left: 20px;"><a href="/security/default_rules/?search=host+benchmarks">Host benchmarks</a></td>
     <td></td>
     <td>{{< X >}}</td>
     <td>{{< X >}}</td>
