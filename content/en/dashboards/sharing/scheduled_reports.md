@@ -117,3 +117,4 @@ The following widget types are **not** supported and will be shown as empty in t
 [5]: /dashboards/widgets/image/
 [6]: /dashboards/widgets/hostmap/
 [7]: /dashboards/widgets/run_workflow/
+[8]: /integrations/slack/?tab=datadogforslack
