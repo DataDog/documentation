@@ -24,15 +24,15 @@ aliases:
     - /service_catalog/endpoints/discover_endpoints
 ---
 
-{{< img src="tracing/service_catalog/endpoints-list.png" alt="**Endpoints** list in the Service Catalog, showing performance-related information for each endpoint." style="width:100%;" >}}
+{{< img src="tracing/service_catalog/endpoints-list.png" alt="Endpoints list in the Service Catalog, showing performance-related information for each endpoint." style="width:100%;" >}}
 
 ## Overview
 
-The Service Catalog's [**Endpoints** list][12] consolidates everything you need to know about your API endpoints. It provides a comprehensive view of performance, reliability, and ownership across all your APIs, whether they serve internal teams or external users. This helps you and your teams effectively monitor mission-critical, API-driven features and ensure they meet performance expectations.
+The Service Catalog's [Endpoints list][12] consolidates everything you need to know about your API endpoints. It provides a comprehensive view of performance, reliability, and ownership across all your APIs, whether they serve internal teams or external users. This helps you and your teams effectively monitor mission-critical, API-driven features and ensure they meet performance expectations.
 
 ## Use cases
 
-The **Endpoints** list combines data from across Datadog to provide opinionated workflows. You can do the following:
+The Endpoints list combines data from across Datadog to provide opinionated workflows. You can do the following:
 
 - **Discover APIs automatically**: Maintain a complete inventory of your public, private, and partner APIs, organized by endpoint.
 - **Surface correlated data**: Navigate from endpoints to traces, logs, and metrics from different Datadog sources.
@@ -43,7 +43,7 @@ The **Endpoints** list combines data from across Datadog to provide opinionated 
 
 ## Getting started
 
-Your endpoints automatically populate in the **Endpoints** list if you use [Datadog APM][8] to monitor HTTP services.
+Your endpoints automatically populate in the Endpoints list if you use [Datadog APM][8] to monitor HTTP services.
 
 ### Exploring endpoints
 
