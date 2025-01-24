@@ -30,7 +30,7 @@ For Terraform, see the [Datadog Sensitive Data Scanner group][4] resource.
 
 To set up a scanning group, perform the following steps:
 
-1. Navigate to the [Sensitive Data Scanner][5] configuration page.
+1. Navigate to the [Sensitive Data Scanner][5] settings page.
 1. Click **Add scanning group**. Alternatively, click the **Add** dropdown menu on the top right corner of the page and select **Add Scanning Group**.
 1. Enter a query filter for the data you want to scan. At the top, click **APM Spans** to preview the filtered spans. Click **Logs** to see the filtered logs.
 1. Enter a name and description for the group.
@@ -47,7 +47,7 @@ For Terraform, see the [Datadog Sensitive Data Scanner rule][6] resource.
 
 To add scanning rules, perform the following steps:
 
-1. Navigate to the [Sensitive Data Scanner][5] configuration page.
+1. Navigate to the [Sensitive Data Scanner][5] settings page.
 1. Click the scanning group where you want to add the scanning rules.
 1. Click **Add Scanning Rule**. Alternatively, click the **Add** dropdown menu on the top right corner of the page and select **Add Scanning Rule**.
 1. Select whether you want to add a library rule or create a custom scanning rule.
@@ -65,7 +65,7 @@ The Scanning Rule Library contains predefined rules for detecting common pattern
 
 After adding OOTB scanning rules, you can edit each rule separately and add additional keywords to the keyword dictionary.
 
-1. Navigate to the [Sensitive Data Scanner][5] configuration page.
+1. Navigate to the [Sensitive Data Scanner][5] settings page.
 1. Click the scanning group with the rule you want to edit.
 1. Hover over the rule, and then click the pencil icon.
 1. The recommend keywords are used by default. To add additional keywords, toggle **Use recommended keywords**, then add your keywords to the list. You can also require that these keywords be within a specified number of characters of a match. By default, keywords must be within 30 characters before a matched value.
@@ -131,7 +131,7 @@ The excluded namespaces are:
 
 ### Edit scanning rules
 
-1. Navigate to the [Sensitive Data Scanner][5] configuration page.
+1. Navigate to the [Sensitive Data Scanner][5] settings page.
 1. Hover over the scanning rule you want to edit and click the **Edit** (pencil) icon.
    The **Define match conditions** section shows either the regular expression you wrote for your custom rule or an explanation of the library scanning rule you chose along with examples of matched sensitive information.
 1. To make sure that a rule matches your data, you can provide a sample in the **Add sample data** section. If the rule finds matches in the sample data, a green **Match** label appears next to the input field.
