@@ -48,16 +48,18 @@ Datadog offers PCI-compliant Log Management and Application Performance Monitori
 
 ## View PCI-compliance
 
-See the <a href="https://app.datadoghq.com/organization-settings/safety-center/configuration">Configuration Page</a> inside Safety Center. 
+See the [Configuration Page][2] inside Safety Center. 
 
 Example of a fully onboarded customer:
 
-<img width=75% alt="image" src="https://github.com/user-attachments/assets/cba57395-bc3e-4277-8f51-13958dce9ef9" />
+{{< img src="static/images/pci_compliant.png" alt="View of PCI compliance in the Configuration Page" caption="View of PCI compliance in the Configuration Page" style="width:75%;" >}}
 
 Example of an onboarding customer:
 
-<img width=75% alt="image" src="https://github.com/user-attachments/assets/f8da8c33-a43e-4ad6-a2a0-285b40df5e5a" />
+{{< img src="static/images/pci_onboarding.png" alt="View of PCI onboarding in the Configuration Page" caption="View of PCI onboarding in the Configuration Page" style="width:75%;" >}}
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[2]: https://app.datadoghq.com/organization-settings/safety-center/configuration
