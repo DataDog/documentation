@@ -2587,7 +2587,20 @@ menu:
           - ListVulnerabilities
         unstable:
           - v2
-        order: 3
+        order: 25
+    - name: Get SBOM
+      url: '#get-sbom'
+      identifier: security-monitoring-get-sbom
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetSBOM
+        unstable:
+          - v2
+        order: 27
     - name: List vulnerable assets
       url: '#list-vulnerable-assets'
       identifier: security-monitoring-list-vulnerable-assets
@@ -2600,7 +2613,7 @@ menu:
           - ListVulnerableAssets
         unstable:
           - v2
-        order: 4
+        order: 26
     - name: Get a finding
       url: '#get-a-finding'
       identifier: security-monitoring-get-a-finding
@@ -3693,8 +3706,7 @@ menu:
           - v2
         operationids:
           - GetBillingDimensionMapping
-        unstable:
-          - v2
+        unstable: []
         order: 1
     - name: Get hourly usage for application security
       url: '#get-hourly-usage-for-application-security'
@@ -4540,6 +4552,58 @@ menu:
           - ListApmRetentionFilters
         unstable: []
         order: 1
+    - name: Action Connection
+      url: /api/latest/action-connection/
+      identifier: action-connection
+      generated: true
+    - name: Update an existing Action Connection
+      url: '#update-an-existing-action-connection'
+      identifier: action-connection-update-an-existing-action-connection
+      parent: action-connection
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateActionConnection
+        unstable: []
+        order: 3
+    - name: Get an existing Action Connection
+      url: '#get-an-existing-action-connection'
+      identifier: action-connection-get-an-existing-action-connection
+      parent: action-connection
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetActionConnection
+        unstable: []
+        order: 1
+    - name: Delete an existing Action Connection
+      url: '#delete-an-existing-action-connection'
+      identifier: action-connection-delete-an-existing-action-connection
+      parent: action-connection
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteActionConnection
+        unstable: []
+        order: 4
+    - name: Create a new Action Connection
+      url: '#create-a-new-action-connection'
+      identifier: action-connection-create-a-new-action-connection
+      parent: action-connection
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateActionConnection
+        unstable: []
+        order: 2
     - name: Agentless Scanning
       url: /api/latest/agentless-scanning/
       identifier: agentless-scanning

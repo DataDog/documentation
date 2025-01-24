@@ -46,7 +46,6 @@ Sensitive Data Scanner can scan your data [in the cloud](#in-the-cloud) or [with
 ### In the cloud  {#in-the-cloud}
 
 With Sensitive Data Scanner in the Cloud, you submit your logs to the Datadog backend, so logs leave your premises before they are redacted. To use Sensitive Data Scanner, set up a scanning group to define what data to scan and then set up scanning rules to determine what sensitive information to match within the data. For scanning rules you can:
-
 - Add predefined scanning rules from Datadog's Scanning Rule Library. These rules detect common patterns such as email addresses, credit card numbers, API keys, authorization tokens, network and device information, and more.
 - Create your own rules using regex patterns.
 
