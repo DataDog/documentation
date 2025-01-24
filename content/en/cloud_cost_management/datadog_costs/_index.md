@@ -37,7 +37,7 @@ Daily Datadog costs give you visibility into daily Datadog spending across dashb
 
 You can view daily Datadog costs in [Cloud Cost Management][1], and access additional [Datadog costs capabilities][7] like [Cost Summary][9] and [Cost Chargebacks][10] on the [**Usage & Cost** page][4].
 
-Please note that there is **no additional charge** for Datadog Costs.
+Please note that there is **no additional charge** for Datadog Costs and is available for both CCM and non-CCM customers.
 
 ## Permissions
 
