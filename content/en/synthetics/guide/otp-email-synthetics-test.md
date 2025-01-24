@@ -4,13 +4,13 @@ description: Learn how to extract a OTP from an email body using Synthetic Brows
 further_reading:
 - link: "//synthetics/browser_tests/?tab=requestoptions#overview"
   tag: "Documentation"
-  text: "Learn about Synthetic Browser tests"
+  text: "Learn about Synthetic Browser Tests"
 - link: "/synthetics/api_tests/http_tests#variables"
   tag: "Documentation"
   text: "Learn about Synthetic test variables"
 - link: "/synthetics/guide/email-validation"
   tag: "Documentation"
-  text: "Learn about email validation in Browser tests"
+  text: "Learn about email validation in Browser Tests"
 - link: "/synthetics/troubleshooting/?tab=common"
   tag: "Documentation"
   text: "Synthetic Monitoring Troubleshooting"
@@ -49,17 +49,17 @@ Next, [record steps][11] to insert the email address variable into an input fiel
 
 {{< img src="synthetics/guide/otp-from-email-body/email_injection.mp4" alt="Example of recording the email address injection steps" video="true" width="100%">}}
 
-1. First click **Record** at the top of the test. This will automatially add steps to the test based on the detected interactions and inputs.
-2. Next click the email input field which creates a **Click** step.
-3. Then go up to the email variable created earlier, in this example called `DD_EMAIL_ADDRESS`. On the right click **Inject variable in a text input** and click on the desired text box, which will be highlighted in the UI, which then inserts the email.
+1. First click **Record** at the top of the test. This automatically adds steps to the test based on the detected interactions and inputs.
+2. Click the email input field, which creates a **Click** step.
+3. Find the email variable created earlier, called `DD_EMAIL_ADDRESS` in this example. On the right, click **Inject variable in a text input** and click the desired text box, which is highlighted in the UI. The email gets inserted.
 
    {{< img src="synthetics/guide/otp-from-email-body/synthetics-otp-inject-variable.png" alt="Inject the email variable" style="width:60%;" >}}
 
-Once the email is sent containing the OTP now the Browser Test can access the email body for use in the rest of the sign-up flow.
+After the email containing the OTP is sent, the Browser Test can access the email body for use in the rest of the sign-up flow.
 
 ### Step 3 - Extract the OTP from the email body
 
-Next define a test step to extract the OTP from the email body once it has been sent and store it in a variable. In this example, the variable is named `OTP_FROM_EMAIL` for later reference within the guide. 
+The next step is to define a test step that extracts the OTP from the email body once it has been sent and store it in a variable. In this example, the variable is named `OTP_FROM_EMAIL` for later reference within the guide. 
 
 1. Under **Add a variable** select **from Email body**.
 
@@ -84,7 +84,7 @@ JavaScript lets you trigger an event on a DOM element programmatically, making i
 
 1. Add a [JavaScript assertion step][5] to input the stored OTP variable, in our example `OTP_FROM_EMAIL`, into the appropriate field in your application. 
 
-{{< img src="synthetics/guide/otp-from-email-body/js_assertion.png" alt="Javascript assertion" style="width:50%;" >}}
+   {{< img src="synthetics/guide/otp-from-email-body/js_assertion.png" alt="Javascript assertion" style="width:50%;" >}}
 
 2. Under **Custom JavaScript** add the extraction code. The code format will vary depending on whether the OTP is inserted into a simple text field or respective input fields. Below are examples that illustrate both scenarios:
 
@@ -132,7 +132,7 @@ From here, you can continue [recording the rest of your Browser Test][9] and the
 
 [1]: /synthetics/browser_tests/?tab=requestoptions#create-local-variables
 [2]: https://app.datadoghq.com/synthetics/settings/variables
-[3]: https://app.datadoghq.com/synthetics/create
+[3]: https://app.datadoghq.com/synthetics/browser/create
 [4]: /synthetics/settings/?tab=specifyvalue#global-variables
 [5]: /synthetics/browser_tests/actions/?tab=testanelementontheactivepage#javascript
 [6]: synthetics/browser_tests/actions/?tab=testanelementontheactivepage#assertion
