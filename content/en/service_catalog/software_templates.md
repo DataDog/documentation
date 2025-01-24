@@ -33,17 +33,17 @@ The [Scaffold New Service blueprint][11] shows an example of scaffolding a new l
 1. From the app, customize the form to include the parameters you want to capture from your developers.
 2. Click **Save as New App** to save the app. This will also create a corresponding templating workflow.
 
-##### Create S3 Bucket with Terraform
+##### Create S3 bucket with Terraform
 
-The [Create S3 Bucket blueprint][10] shows an example of creating the terraform for an S3 bucket from a form in Github.
+The [Create S3 Bucket blueprint][10] shows an example of how to generate Terraform code for an S3 bucket using a form in GitHub.
 
-##### Provision Kubernetes Cluster
+##### Provision Kubernetes cluster
 
-The [Provision EKS Cluster blueprint][12] shows an example of creating the terraform for a new Kubernetes cluster in Github.
+The [Provision EKS Cluster blueprint][12] shows an example of how to generate Terraform code for a new Kubernetes cluster in GitHub.
 
-##### Provision RDS Instance
+##### Provision RDS instance
 
-The [Provision RDS Instance blueprint][13] shows an example of provisioning a new RDS instance via direct integration with AWS.
+The [Provision RDS Instance blueprint][13] shows an example of how to provision a new RDS instance through direct integration with AWS.
 
 
 #### Start from scratch
