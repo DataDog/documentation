@@ -32,24 +32,23 @@ further_reading:
 
 ## Overview
 
-[Datadog Cloud Security Management][1] (CSM) delivers real-time threat detection and continuous configuration audits across your entire cloud infrastructure. Powered by observability data, CSM includes [Misconfigurations][2] and [Threats][3].
+[Datadog Cloud Security Management][1] (CSM) delivers deep visibility, continuous configuration audits, identity risk assessments, vulnerability detection, and real-time threat detection across your entire cloud infrastructure - all in a unified platform for seamless collaboration and faster remediation.
 
-This guide walks you through best practices for getting your team up and running with CSM.
+With CSM, Security and DevOps teams can act on the shared context of observability and security data to quickly prioritize and remediate issues. This guide walks you through best practices for getting your team up and running with CSM.
 
 ## Phase 1: Deployment
 
-1. Install the [Datadog Agent (version 7.46 or above)][4].
-2. [Enable CSM for for your cloud resources and infrastructure][5]:
-    - **CSM Threats**: Kubernetes, Docker, and host-based installations.
-    - **CSM Misconfigurations**: AWS, Azure, GCP, Kubernetes, and Docker instructions.
-    - **CSM Identity Risks**: Enable AWS resource collection and Cloudtrail logs forwarding.
-    - **CSM Vulnerabilities**: Container image scanning and host scanning instructions for Kubernetes, ECS EC2 instances, and host-based installations.
-3. Check out the [CSM homepage][13] to get an overview of your organization's risks and threats.
-4. Review [500+ out-of-the-box Threats and Misconfigurations detection rules][14].
-5. Explore [security signals][15] and review [CSM Misconfigurations findings][16].
-6. Review and remediate [identity risks][28] on the [Identity Risks][29] page.
-7. Review container vulnerabilities on the [Container Images][25] page, and a consolidated list of vulnerabilities on the [Infrastructure Vulnerability][30] page.
-8. Set up [notification rules][17] and receive alerts using Slack, Jira, email, and more.
+1. Using [Agentless][34] and/or the [Datadog Agent (version 7.46 or above)][4], [enable CSM for your cloud resources and infrastructure][5]:
+    - **[Threats][3]**: Kubernetes, Docker, and host-based installations.
+    - **[Misconfigurations][2]**: AWS, Azure, GCP, Kubernetes, and Docker instructions.
+    - **[Identity Risks][28]**: Enable AWS resource collection and Cloudtrail logs forwarding.
+    - **[Vulnerabilities][6]**: Container image scanning and host scanning instructions for AWS, Azure, Kubernetes, ECS EC2 instances, and host-based installations.
+1. Check out the [CSM homepage][13] to get an overview of your organization's risks and threats.
+1. Review [500+ out-of-the-box Threats and Misconfigurations detection rules][14].
+1. Explore [security signals][15] and review [CSM Misconfigurations findings][16].
+1. Review and remediate identity risks on the [Identity Risks][29] page.
+1. Review container vulnerabilities on the [Container Images][25] page, and a consolidated list of vulnerabilities on the [Infrastructure Vulnerability][30] page.
+1. Set up [notification rules][17] and receive alerts using Slack, Jira, email, and more.
 
 ## Phase 2: Customization
 
@@ -78,6 +77,7 @@ For information on disabling CSM, see the following:
 [3]: /security/threats/
 [4]: https://app.datadoghq.com/account/settings/agent/latest
 [5]: /security/cloud_security_management/setup
+[6]: /security/cloud_security_management/vulnerabilities/
 [13]: https://app.datadoghq.com/security/csm
 [14]: /security/default_rules/#cat-cloud-security-management
 [15]: /security/cloud_security_management/misconfigurations/signals_explorer/
@@ -97,3 +97,4 @@ For information on disabling CSM, see the following:
 [31]: https://app.datadoghq.com/security/configuration/reports
 [32]: /security/cloud_security_management/troubleshooting/vulnerabilities/#disable-csm-vulnerabilities
 [33]: /security/cloud_security_management/troubleshooting/threats/#disable-csm-threats
+[34]: /security/cloud_security_management/setup/cloud_integrations
