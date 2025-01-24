@@ -1,6 +1,6 @@
 ---
 title: Generic CI Providers
-description: Learn about Datadog Static Analysis to scan code for quality issues and security vulnerabilities before your code reaches production.
+description: Learn about Datadog Static Code Analysis to scan code for quality issues and security vulnerabilities before your code reaches production.
 is_beta: false
 further_reading:
 - link: "https://www.datadoghq.com/blog/monitor-ci-pipelines/"
@@ -70,7 +70,7 @@ curl -L $DATADOG_STATIC_ANALYZER_URL > /tmp/ddog-static-analyzer.zip
 unzip /tmp/ddog-static-analyzer.zip -d /tmp
 mv /tmp/datadog-static-analyzer /usr/local/datadog-static-analyzer
 
-# Run Static Analysis
+# Run Static Code Analysis
 /usr/local/datadog-static-analyzer -i . -o /tmp/report.sarif -f sarif
 
 # Upload results
@@ -83,7 +83,7 @@ datadog-ci sarif upload /tmp/report.sarif
 
 ## Diff-aware scanning
 
-Diff-aware scanning is a feature that enables Datadog Static Analysis to only scan the files modified by a commit in a feature branch. It accelerates scan time significantly by not having the analysis run on every file in the repository for every scan. The first scan performed, as well as default branch scans, always produce an analysis of the full repository (not diff-aware).
+Diff-aware scanning is a feature that enables Datadog Static Code Analysis to only scan the files modified by a commit in a feature branch. It accelerates scan time significantly by not having the analysis run on every file in the repository for every scan. The first scan performed, as well as default branch scans, always produce an analysis of the full repository (not diff-aware).
 
 If you are using GitHub Actions, diff-aware scanning is enabled by default.
 
