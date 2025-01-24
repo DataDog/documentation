@@ -70,16 +70,16 @@ Key features include:
 ## Customize Security Inbox to highlight crucial issues
 
 {{< callout url="https://www.datadoghq.com/product-preview/customize-your-security-inbox/" >}}
-  Vulnerability Pipeline is in Preview. To enroll in the Preview for Add to Security Inbox rules, click <strong>Request Access</strong>.
+  Automation Pipelines is in Preview. To enroll in the Preview for Add to Security Inbox rules, click <strong>Request Access</strong>.
 {{< /callout >}}
 
-Vulnerability Pipeline enables you to configure rules that customize your Security Inbox, allowing you to highlight issues that are critical to your organization. By setting up these automated rules, you can streamline the management of newly discovered vulnerabilities, enhancing triage and remediation efforts at scale. Leveraging both the Vulnerability Pipeline and Add to Security Inbox rules, you can optimize your security operations in the following ways:
+Automation Pipelines enables you to configure rules that customize your Security Inbox, allowing you to highlight issues that are critical to your organization. By setting up these automated rules, you can streamline the management of newly discovered vulnerabilities, enhancing triage and remediation efforts at scale. Leveraging both the Automation Pipelines and Add to Security Inbox rules, you can optimize your security operations in the following ways:
 
 - **Resurface issues not captured by default**: Highlight issues that might be missed by default or custom detection rules, ensuring no critical issue is overlooked.
 - **Strengthen compliance and address key system concerns**: Address concerns affecting regulatory compliance or important business systems, regardless of severity.
 - **Prioritize current risks**: Focus on immediate threats, such as identity risks after an incident or industry-wide vulnerabilities.
 
-For more information, see [Vulnerability Pipeline][11] and [Add to Security Inbox Rules][12].
+For more information, see [Automation Pipelines][11] and [Add to Security Inbox Rules][12].
 
 ## Further Reading
 
@@ -88,12 +88,12 @@ For more information, see [Vulnerability Pipeline][11] and [Add to Security Inbo
 [1]: /security/default_rules/?category=all#all
 [2]: /security/cloud_security_management/misconfigurations/
 [3]: /security/cloud_security_management/identity_risks/
-[4]: /security/application_security/software_composition_analysis
-[5]: /security/application_security/code_security
+[4]: /security/code_security/software_composition_analysis
+[5]: /security/code_security/iast
 [6]: /security/cloud_security_management/guide/public-accessibility-logic/
 [7]: https://www.cisa.gov/
 [8]: https://www.exploit-db.com/
 [9]: https://nvd.nist.gov/
 [10]: /security/cloud_security_management/severity_scoring/#csm-severity-scoring-framework
-[11]: /security/vulnerability_pipeline/
-[12]: /security/vulnerability_pipeline/security_inbox
+[11]: /security/automation_pipelines/
+[12]: /security/automation_pipelines/security_inbox

@@ -57,9 +57,13 @@ nav_sections:
         icon: events
         desc: Track notable changes and alerts in your applications and infrastructure
       - title: Workflow Automation
-        link: workflows
+        link: service_management/workflows/
         icon: workflows
         desc: Automate and orchestrate processes across your tech stack
+      - title: App Builder
+        link: service_management/app_builder/
+        icon: app-builder
+        desc: Create low-code applications to streamline your internal tools
   - nav_section:
     - name: 'Products'
     - navtiles:
