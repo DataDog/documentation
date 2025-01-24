@@ -90,8 +90,8 @@ jobs:
 
 ### Related Datadog tools
 
-[Datadog Static Analysis][5] analyzes your code and provides feedback in your IDE, GitHub PR or within the
-Datadog environment. Datadog Static Analysis can be set up using the [`datadog-static-analyzer-github-action`][13] 
+[Datadog Static Code Analysis][5] analyzes your code and provides feedback in your IDE, GitHub PR or within the
+Datadog environment. Datadog Static Code Analysis can be set up using the [`datadog-static-analyzer-github-action`][13] 
 GitHub action.
 
 ## Generic CI Providers
