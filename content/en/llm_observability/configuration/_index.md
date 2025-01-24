@@ -43,7 +43,7 @@ Connect your OpenAI account to LLM Observability with your OpenAI API key.
 Connect your Azure OpenAI account to LLM Observability with your OpenAI API key.
 
 1. In Datadog, navigate to [**LLM Observability > Settings > Integrations**][2].
-1. Select **Connect** on the OpenAI tile.
+1. Select **Connect** on the Azure OpenAI tile.
 1. Follow the instructions on the tile.
    - Provide your Azure OpenAI API key. Ensure that this key has **write** permission for **model capabilities**.
    - Provide the Resource Name, Deployment ID, and API version.
