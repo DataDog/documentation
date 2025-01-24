@@ -8,7 +8,7 @@
 
 > `const` **FiltersManifestSchema**: `ZodObject`\<[`FiltersManifest`](../type-aliases/FiltersManifest.md)\>
 
-Defined in: [src/schemas/pageFilters.ts:163](https://github.com/DataDog/documentation/blob/b75e75e1267d7b4c729d61650f6bdfccf0733955/markdoc/cdocs-data/src/schemas/pageFilters.ts#L163)
+Defined in: [src/schemas/pageFilters.ts:163](https://github.com/DataDog/documentation/blob/b489644bd43da1649646a525ddb8f5fb2727ffb9/markdoc/cdocs-data/src/schemas/pageFilters.ts#L163)
 
 A object containing all of the potential page filter IDs
 and option groups for a page, created by populating the front matter

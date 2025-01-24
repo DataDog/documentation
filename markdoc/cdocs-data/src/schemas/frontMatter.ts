@@ -5,6 +5,26 @@ import { SNAKE_CASE_REGEX, OPTION_GROUP_ID_REGEX } from './regexes';
  * The configuration of an individual page filter,
  * as defined in the front matter of a document.
  */
+export const RawFilterConfigSchema = z
+  .object({
+    label: z.string().optional(), // The trait label will be used instead if missing
+    trait_id: z.string().regex(SNAKE_CASE_REGEX),
+    option_group_id: z.string().regex(OPTION_GROUP_ID_REGEX),
+    default_value: z.string().regex(SNAKE_CASE_REGEX).optional(),
+  })
+  .strict();
+
+/**
+ * The configuration of an individual page filter,
+ * as defined in the front matter of a document.
+ */
+export type RawFilterConfig = z.infer<typeof RawFilterConfigSchema>;
+
+/**
+ * The configuration of an individual page filter,
+ * as defined in the front matter of a document
+ * and filled in with any defaults.
+ */
 export const FilterConfigSchema = z
   .object({
     label: z.string(),
@@ -16,7 +36,8 @@ export const FilterConfigSchema = z
 
 /**
  * The configuration of an individual page filter,
- * as defined in the front matter of a document.
+ * as defined in the front matter of a document
+ * and filled in with any defaults.
  *
  * @example
  * {
