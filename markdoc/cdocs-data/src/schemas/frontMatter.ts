@@ -21,6 +21,18 @@ export const RawFilterConfigSchema = z
 export type RawFilterConfig = z.infer<typeof RawFilterConfigSchema>;
 
 /**
+ * The list of page filters, as defined in the front matter
+ * of a document.
+ */
+export const RawFiltersConfigSchema = z.array(RawFilterConfigSchema);
+
+/**
+ * The list of page filters, as defined in the front matter
+ * of a document.
+ */
+export type RawFiltersConfig = z.infer<typeof RawFiltersConfigSchema>;
+
+/**
  * The configuration of an individual page filter,
  * as defined in the front matter of a document
  * and filled in with any defaults.
@@ -51,7 +63,8 @@ export type FilterConfig = z.infer<typeof FilterConfigSchema>;
 
 /**
  * The list of page filters, as defined in the front matter
- * of a document, validated as a whole.
+ * of a document, populated with any default values
+ * and validated as a whole.
  */
 export const FiltersConfigSchema = z.array(FilterConfigSchema).refine((filtersConfig) => {
   // Filter labels must be unique within a page
@@ -84,7 +97,8 @@ export const FiltersConfigSchema = z.array(FilterConfigSchema).refine((filtersCo
 
 /**
  * The list of page filters, as defined in the front matter
- * of a document.
+ * of a document, populated with any default values
+ * and validated as a whole.
  */
 export type FiltersConfig = z.infer<typeof FiltersConfigSchema>;
 
@@ -95,7 +109,7 @@ export type FiltersConfig = z.infer<typeof FiltersConfigSchema>;
  */
 export const FrontmatterSchema = z.object({
   title: z.string(),
-  content_filters: FiltersConfigSchema.optional(),
+  content_filters: RawFiltersConfigSchema.optional(),
 });
 
 /**

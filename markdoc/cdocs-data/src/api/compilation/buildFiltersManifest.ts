@@ -40,19 +40,28 @@ export function buildFiltersManifest(p: {
     return manifest;
   }
 
+  // Populate missing frontmatter values with defaults
+  const filterConfigs = p.frontmatter.content_filters.map((rawFilterConfig) => {
+    return {
+      ...rawFilterConfig,
+      label:
+        rawFilterConfig.label ||
+        p.customizationConfig.traitsById[rawFilterConfig.trait_id].label,
+    };
+  });
+
   // Collect default values for each filter, keyed by filter ID,
   // used to resolve placeholders in options sources
   manifest.defaultValsByTraitId = getDefaultValsByTraitId({
     customizationConfig: p.customizationConfig,
-    filterConfigs: p.frontmatter.content_filters,
+    filterConfigs,
   });
 
   // Key the configs by filter ID, for convenient access during processing
-  const filterConfigByTraitId: Record<string, FilterConfig> =
-    p.frontmatter.content_filters.reduce(
-      (obj, filter) => ({ ...obj, [filter.trait_id]: filter }),
-      {},
-    );
+  const filterConfigByTraitId: Record<string, FilterConfig> = filterConfigs.reduce(
+    (obj, filter) => ({ ...obj, [filter.trait_id]: filter }),
+    {},
+  );
 
   // Keep track of the trait IDs that have been processed,
   // to ensure correct definition order in frontmatter
@@ -60,12 +69,12 @@ export function buildFiltersManifest(p: {
 
   // Fill out the manifest for each filter,
   // in the order that the filters appeared in the frontmatter
-  p.frontmatter.content_filters.forEach((filter) => {
+  filterConfigs.forEach((filter) => {
     // Validate the filter ID
     if (!p.customizationConfig.traitsById[filter.trait_id]) {
       manifest.errors.push({
         message: `Unrecognized trait ID: The trait ID '${filter.trait_id}' is not in the glossary.`,
-        searchTerm: filter.trait_id,
+        data: { searchTerm: filter.trait_id },
       });
     }
 
@@ -210,7 +219,6 @@ function buildDynamicOptionGroupIds(p: {
     segmentableOptionGroupId = segmentableOptionGroupId.replace(placeholder, uuid);
   });
 
-  // TODO: Make this its own function
   // A segment is an array of possible values for a single part of the option group ID.
   // The segment for a <COLOR> placeholder might be ['purple', 'green', 'blue'].
   // The segment for a non-placeholder is just its literal value in the option group ID, such as ['paint'].
@@ -232,7 +240,7 @@ function buildDynamicOptionGroupIds(p: {
     if (!referencedFilterConfig || !p.precedingFilterIds.includes(referencedTraitId)) {
       errors.push({
         message: `Invalid placeholder: The placeholder ${placeholderText} in the options source '${filterConfig.option_group_id}' refers to an unrecognized trait ID. The file frontmatter must contain a filter with the trait ID '${referencedTraitId}', and it must be defined before the filter with the trait ID ${filterConfig.trait_id}.`,
-        searchTerm: filterConfig.option_group_id,
+        data: { searchTerm: filterConfig.option_group_id },
       });
       return [segment];
     }
@@ -244,7 +252,7 @@ function buildDynamicOptionGroupIds(p: {
     if (!referencedOptionGroup) {
       errors.push({
         message: `The option group ID '${referencedFilterConfig.option_group_id}' referenced by the placeholder ${segment} in the options source '${filterConfig.option_group_id}' does not exist.`,
-        searchTerm: filterConfig.option_group_id,
+        data: { searchTerm: filterConfig.option_group_id },
       });
       return [segment];
     }

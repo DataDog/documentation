@@ -937,7 +937,6 @@ __metadata:
     "@vitest/coverage-v8": ^2.0.2
     depcheck: ^1.4.7
     js-yaml: ^4.1.0
-    lodash: ^4.17.21
     rimraf: ^5.0.5
     typedoc: ^0.27.6
     typedoc-plugin-markdown: ^4.4.1

@@ -83,9 +83,6 @@ export const RawOptionGroupGlossarySchema = z.record(
 
 export type RawOptionGroupGlossary = z.infer<typeof RawOptionGroupGlossarySchema>;
 
-// TODO: Do the validations run in the raw schema above
-// also need to run below?
-
 /**
  * A glossary of all the option groups that can be used on a site,
  * regardless of which filters they are associated with.

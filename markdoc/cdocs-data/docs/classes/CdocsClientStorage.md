@@ -6,7 +6,7 @@
 
 # Class: CdocsClientStorage
 
-Defined in: [src/api/browser/CdocsClientStorage.ts:6](https://github.com/DataDog/documentation/blob/b489644bd43da1649646a525ddb8f5fb2727ffb9/markdoc/cdocs-data/src/api/browser/CdocsClientStorage.ts#L6)
+Defined in: [src/api/browser/CdocsClientStorage.ts:6](https://github.com/DataDog/documentation/blob/b898db3da077c905d05644b1aca1c0fe199f9494/markdoc/cdocs-data/src/api/browser/CdocsClientStorage.ts#L6)
 
 A wrapper for local storage that stores trait values,
 ensuring that the number of stored keys does not exceed
@@ -18,7 +18,7 @@ a maximum value.
 
 > **new CdocsClientStorage**(`p`): [`CdocsClientStorage`](CdocsClientStorage.md)
 
-Defined in: [src/api/browser/CdocsClientStorage.ts:22](https://github.com/DataDog/documentation/blob/b489644bd43da1649646a525ddb8f5fb2727ffb9/markdoc/cdocs-data/src/api/browser/CdocsClientStorage.ts#L22)
+Defined in: [src/api/browser/CdocsClientStorage.ts:22](https://github.com/DataDog/documentation/blob/b898db3da077c905d05644b1aca1c0fe199f9494/markdoc/cdocs-data/src/api/browser/CdocsClientStorage.ts#L22)
 
 Create a new instance of CdocsClientStorage, resuming
 any previous sessions by loading any existing trait values
@@ -52,7 +52,7 @@ will be kept in local storage, such as 'cdocs-client-storage'.
 
 > **clear**(): `void`
 
-Defined in: [src/api/browser/CdocsClientStorage.ts:100](https://github.com/DataDog/documentation/blob/b489644bd43da1649646a525ddb8f5fb2727ffb9/markdoc/cdocs-data/src/api/browser/CdocsClientStorage.ts#L100)
+Defined in: [src/api/browser/CdocsClientStorage.ts:100](https://github.com/DataDog/documentation/blob/b898db3da077c905d05644b1aca1c0fe199f9494/markdoc/cdocs-data/src/api/browser/CdocsClientStorage.ts#L100)
 
 Erase all stored trait values, but keep the top-level key.
 
@@ -66,7 +66,7 @@ Erase all stored trait values, but keep the top-level key.
 
 > **destroy**(): `void`
 
-Defined in: [src/api/browser/CdocsClientStorage.ts:108](https://github.com/DataDog/documentation/blob/b489644bd43da1649646a525ddb8f5fb2727ffb9/markdoc/cdocs-data/src/api/browser/CdocsClientStorage.ts#L108)
+Defined in: [src/api/browser/CdocsClientStorage.ts:108](https://github.com/DataDog/documentation/blob/b898db3da077c905d05644b1aca1c0fe199f9494/markdoc/cdocs-data/src/api/browser/CdocsClientStorage.ts#L108)
 
 Erase all browser data stored by this class.
 
@@ -80,7 +80,7 @@ Erase all browser data stored by this class.
 
 > **getTraitVals**(): `Record`\<`string`, `string`\>
 
-Defined in: [src/api/browser/CdocsClientStorage.ts:38](https://github.com/DataDog/documentation/blob/b489644bd43da1649646a525ddb8f5fb2727ffb9/markdoc/cdocs-data/src/api/browser/CdocsClientStorage.ts#L38)
+Defined in: [src/api/browser/CdocsClientStorage.ts:38](https://github.com/DataDog/documentation/blob/b898db3da077c905d05644b1aca1c0fe199f9494/markdoc/cdocs-data/src/api/browser/CdocsClientStorage.ts#L38)
 
 Get the value of all traits, keyed by trait ID.
 
@@ -97,7 +97,7 @@ such as { 'os': 'linux' }.
 
 > **loadLocalStorageData**(): `void`
 
-Defined in: [src/api/browser/CdocsClientStorage.ts:89](https://github.com/DataDog/documentation/blob/b489644bd43da1649646a525ddb8f5fb2727ffb9/markdoc/cdocs-data/src/api/browser/CdocsClientStorage.ts#L89)
+Defined in: [src/api/browser/CdocsClientStorage.ts:89](https://github.com/DataDog/documentation/blob/b898db3da077c905d05644b1aca1c0fe199f9494/markdoc/cdocs-data/src/api/browser/CdocsClientStorage.ts#L89)
 
 Overwrite the in-memory storage with
 whatever is in local storage.
@@ -112,7 +112,7 @@ whatever is in local storage.
 
 > **setTraitVals**(`entries`): `Record`\<`string`, `string`\>
 
-Defined in: [src/api/browser/CdocsClientStorage.ts:57](https://github.com/DataDog/documentation/blob/b489644bd43da1649646a525ddb8f5fb2727ffb9/markdoc/cdocs-data/src/api/browser/CdocsClientStorage.ts#L57)
+Defined in: [src/api/browser/CdocsClientStorage.ts:57](https://github.com/DataDog/documentation/blob/b898db3da077c905d05644b1aca1c0fe199f9494/markdoc/cdocs-data/src/api/browser/CdocsClientStorage.ts#L57)
 
 Update the value of one or more traits.
 Any trait IDs not provided will be left unchanged.
@@ -138,7 +138,7 @@ regardless of whether they were updated in this batch.
 
 > **writeToLocalStorage**(): `Promise`\<`void`\>
 
-Defined in: [src/api/browser/CdocsClientStorage.ts:81](https://github.com/DataDog/documentation/blob/b489644bd43da1649646a525ddb8f5fb2727ffb9/markdoc/cdocs-data/src/api/browser/CdocsClientStorage.ts#L81)
+Defined in: [src/api/browser/CdocsClientStorage.ts:81](https://github.com/DataDog/documentation/blob/b898db3da077c905d05644b1aca1c0fe199f9494/markdoc/cdocs-data/src/api/browser/CdocsClientStorage.ts#L81)
 
 Asynchronously write the current storage to local storage,
 so it can be accessed in future sessions.

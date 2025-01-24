@@ -32,7 +32,7 @@
       "format": "cjs"
     },
     "node_modules/cdocs-data/dist/api/browser/CdocsClientStorage.js": {
-      "bytes": 3155,
+      "bytes": 3200,
       "imports": [],
       "format": "cjs"
     },

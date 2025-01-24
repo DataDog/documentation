@@ -32,7 +32,7 @@
       "format": "cjs"
     },
     "node_modules/cdocs-data/dist/api/browser/CdocsClientStorage.js": {
-      "bytes": 3155,
+      "bytes": 3200,
       "imports": [],
       "format": "cjs"
     },
@@ -132,7 +132,7 @@
           "bytesInOutput": 871
         },
         "node_modules/cdocs-data/dist/api/browser/CdocsClientStorage.js": {
-          "bytesInOutput": 3291
+          "bytesInOutput": 3348
         },
         "node_modules/markdoc-static-compiler/dist/index.js": {
           "bytesInOutput": 499748
@@ -150,7 +150,7 @@
           "bytesInOutput": 354
         }
       },
-      "bytes": 534567
+      "bytes": 534624
     }
   }
 }

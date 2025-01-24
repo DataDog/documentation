@@ -227,19 +227,23 @@
          * any previous sessions by loading any existing trait values
          * from local storage.
          *
-         * @param p.topLevelKey The key under which all data will be stored in local storage, such as 'cdocs-client-storage'.
-         * @param p.maxKeyCount The maximum number of keys that should be stored at once.
+         * @param p.topLevelKey A unique key under which all cdocs data
+         * will be kept in local storage, such as 'cdocs-client-storage'.
+         *
+         * @param p.maxKeyCount The maximum number of keys that should be stored
+         * in the user's browser at one time.
          */
         constructor(p) {
           this.topLevelKey = p.topLevelKey;
           this.maxKeyCount = p.maxKeyCount;
           this.storage = {};
-          this.readFromLocalStorage();
+          this.loadLocalStorageData();
         }
         /**
          * Get the value of all traits, keyed by trait ID.
          *
-         * @returns A record of trait IDs to their values.
+         * @returns A record of trait IDs to their values,
+         * such as { 'os': 'linux' }.
          */
         getTraitVals() {
           const entries = {};
@@ -278,22 +282,14 @@
           localStorage.setItem(this.topLevelKey, JSON.stringify(this.storage));
         }
         /**
-         * Write the current storage from local storage.
-         *
-         * Should be called once when the instance is created.
+         * Overwrite the in-memory storage with
+         * whatever is in local storage.
          */
-        readFromLocalStorage() {
+        loadLocalStorageData() {
           const data = localStorage.getItem(this.topLevelKey);
           if (data) {
             this.storage = JSON.parse(data);
           }
-        }
-        /**
-         * Erase all stored data, including the top-level key.
-         */
-        destroy() {
-          this.storage = {};
-          localStorage.removeItem(this.topLevelKey);
         }
         /**
          * Erase all stored trait values, but keep the top-level key.
@@ -301,6 +297,13 @@
         clear() {
           this.storage = {};
           this.writeToLocalStorage();
+        }
+        /**
+         * Erase all browser data stored by this class.
+         */
+        destroy() {
+          this.storage = {};
+          localStorage.removeItem(this.topLevelKey);
         }
       };
       exports.CdocsClientStorage = CdocsClientStorage;

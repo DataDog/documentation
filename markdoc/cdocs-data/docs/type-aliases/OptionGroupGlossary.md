@@ -8,7 +8,7 @@
 
 > **OptionGroupGlossary**: `Record`\<`string`, `object`[]\>
 
-Defined in: [src/schemas/glossaries/optionGroupGlossary.ts:140](https://github.com/DataDog/documentation/blob/b489644bd43da1649646a525ddb8f5fb2727ffb9/markdoc/cdocs-data/src/schemas/glossaries/optionGroupGlossary.ts#L140)
+Defined in: [src/schemas/glossaries/optionGroupGlossary.ts:137](https://github.com/DataDog/documentation/blob/b898db3da077c905d05644b1aca1c0fe199f9494/markdoc/cdocs-data/src/schemas/glossaries/optionGroupGlossary.ts#L137)
 
 A glossary of all the option groups that can be used on a site,
 regardless of which filters they are associated with.

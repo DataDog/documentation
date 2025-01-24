@@ -8,7 +8,7 @@
 
 > `const` **FilterConfigSchema**: `ZodObject`\<[`FilterConfig`](../type-aliases/FilterConfig.md)\>
 
-Defined in: src/schemas/frontmatter.ts:28
+Defined in: src/schemas/frontmatter.ts:40
 
 The configuration of an individual page filter,
 as defined in the front matter of a document

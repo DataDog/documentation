@@ -3,10 +3,9 @@ import { buildFiltersManifest } from '../../../src';
 import { paintColorsFrontmatter } from '../../config/mocks/valid/paintColorsData/frontmatter';
 import { paintColorsCustomizationConfig } from '../../config/mocks/valid/paintColorsData/customizationConfig';
 import { paintColorsManifest } from '../../config/mocks/valid/paintColorsData/filtersManifest';
-import _ from 'lodash';
 
 describe('buildFiltersManifest', () => {
-  test('creates the expected object when given valid data', async () => {
+  test('creates the expected object when given valid data', () => {
     const actualManifest = buildFiltersManifest({
       frontmatter: paintColorsFrontmatter,
       customizationConfig: paintColorsCustomizationConfig,
@@ -14,7 +13,21 @@ describe('buildFiltersManifest', () => {
 
     const expectedManifest = paintColorsManifest;
 
-    expect(_.isEqual(actualManifest, expectedManifest)).toBe(true);
+    expect(actualManifest).toEqual(expectedManifest);
+  });
+
+  test('populates missing labels in frontmatter', () => {
+    const frontmatter = { ...paintColorsFrontmatter };
+    frontmatter.content_filters![0].label = undefined;
+
+    const actualManifest = buildFiltersManifest({
+      frontmatter,
+      customizationConfig: paintColorsCustomizationConfig,
+    });
+
+    const expectedManifest = paintColorsManifest;
+
+    expect(actualManifest).toEqual(expectedManifest);
   });
 
   test('detects an invalid placeholder', () => {
@@ -47,6 +60,9 @@ describe('buildFiltersManifest', () => {
 
     expect(manifest.errors.length).toEqual(1);
     expect(manifest.errors[0].message).toContain('Invalid placeholder:');
+    expect(manifest.errors[0].data!.searchTerm).toEqual(
+      '<FINISH>_<COLOUR>_paint_options',
+    );
   });
 
   test('detects a nonexistent options source', () => {

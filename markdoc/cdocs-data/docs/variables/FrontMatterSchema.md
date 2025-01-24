@@ -8,7 +8,7 @@
 
 > `const` **FrontmatterSchema**: `ZodObject`\<[`Frontmatter`](../type-aliases/Frontmatter.md)\>
 
-Defined in: src/schemas/frontmatter.ts:96
+Defined in: src/schemas/frontmatter.ts:110
 
 The front matter of a document required by the integration
 (additional keys are allowed in the front matter YAML,

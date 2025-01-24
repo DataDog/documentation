@@ -8,7 +8,7 @@
 
 > **FilterConfig**: `object`
 
-Defined in: src/schemas/frontmatter.ts:50
+Defined in: src/schemas/frontmatter.ts:62
 
 The configuration of an individual page filter,
 as defined in the front matter of a document

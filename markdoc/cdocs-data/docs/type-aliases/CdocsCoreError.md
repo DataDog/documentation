@@ -8,7 +8,7 @@
 
 > **CdocsCoreError**: `object`
 
-Defined in: [src/schemas/errors.ts:11](https://github.com/DataDog/documentation/blob/b489644bd43da1649646a525ddb8f5fb2727ffb9/markdoc/cdocs-data/src/schemas/errors.ts#L11)
+Defined in: [src/schemas/errors.ts:8](https://github.com/DataDog/documentation/blob/b898db3da077c905d05644b1aca1c0fe199f9494/markdoc/cdocs-data/src/schemas/errors.ts#L8)
 
 ## Type declaration
 
@@ -16,14 +16,6 @@ Defined in: [src/schemas/errors.ts:11](https://github.com/DataDog/documentation/
 
 > `optional` **data**: `Record`\<`string`, `any`\>
 
-### lines?
-
-> `optional` **lines**: `number`[]
-
 ### message
 
 > **message**: `string`
-
-### searchTerm?
-
-> `optional` **searchTerm**: `string`

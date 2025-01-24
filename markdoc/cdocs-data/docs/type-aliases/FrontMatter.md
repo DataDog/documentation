@@ -8,7 +8,7 @@
 
 > **Frontmatter**: `object`
 
-Defined in: src/schemas/frontmatter.ts:128
+Defined in: src/schemas/frontmatter.ts:142
 
 The front matter of a document required by the integration
 (additional keys are allowed in the front matter YAML,
