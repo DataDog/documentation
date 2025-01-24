@@ -57,52 +57,62 @@ For broader coverage and additional functionalities, deploy the Datadog Agent to
       <th>Feature</th>
       <th>Agentless</th>
       <th>Agentless &#43; Agent-based deployment</th>
+      <th>Agent-based deployment</th>
     </tr>
   </thead>
   <tr>
     <td><strong><a href="/security/cloud_security_management/identity_risks">CSM Identity Risks</a></strong></td>
-    <td>Yes</td>
-    <td>Yes</td>
+    <td>{{< X >}}</td>
+    <td>{{< X >}}</td>
+    <td></td>
   </tr>
   <tr>
     <td><strong><a href="/security/cloud_security_management/misconfigurations">CSM Misconfigurations</a></strong></td>
-    <td>Yes</td>
-    <td>Yes</td>
+    <td>{{< X >}}</td>
+    <td>{{< X >}}</td>
+    <td>{{< X >}}</td>
   </tr>
   <tr>
     <td style="padding-left: 20px;">Host benchmarks</td>
-    <td>No</td>
-    <td>Yes</td>
+    <td></td>
+    <td>{{< X >}}</td>
+    <td>{{< X >}}</td>
   </tr>
   <tr>
     <td><strong><a href="/security/cloud_security_management/vulnerabilities">CSM Vulnerabilities</a></strong></td>
-    <td>Yes</td>
-    <td>Yes</td>
+    <td>{{< X >}}</td>
+    <td>{{< X >}}</td>
+    <td>{{< X >}}</td>
   </tr>
   <tr>
     <td style="padding-left: 20px;">Vulnerability prioritization</td>
-    <td>Yes</td>
-    <td>Yes, with runtime context</td>
+    <td>{{< X >}}</td>
+    <td>{{< X >}}<br />With runtime context</td>
+    <td>{{< X >}}<br />With runtime context</td>
   </tr>
   <tr>
     <td style="padding-left: 20px;">Vulnerability update frequency</td>
     <td>12 hours</td>
     <td>Real time</td>
+    <td>Real time</td>
   </tr>
   <tr>
     <td><strong><a href="/security/threats">CSM Threats</a></strong></td>
-    <td>No</td>
-    <td>Yes</td>
+    <td></td>
+    <td>{{< X >}}</td>
+    <td>{{< X >}}</td>
   </tr>
   <tr>
     <td style="padding-left: 20px;">Threat detection</td>
-    <td>No</td>
-    <td>Yes</td>
+    <td></td>
+    <td>{{< X >}}</td>
+    <td>{{< X >}}</td>
   </tr>
   <tr>
     <td><strong><a href="/security/security_inbox">Security Inbox</a></strong></td>
-    <td>Yes</td>
-    <td>Yes, with more accurate insights</td>
+    <td>{{< X >}}</td>
+    <td>{{< X >}}<br />With more accurate insights</td>
+    <td>{{< X >}}<br />With more accurate insights</td>
   </tr>
 </table>
 
