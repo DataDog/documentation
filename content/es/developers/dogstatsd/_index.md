@@ -80,7 +80,6 @@ Para habilitar un puerto UDP personalizado del servidor DogStatsD en el Agent:
 [1]: /es/agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-main-configuration-file
 [2]: /es/developers/dogstatsd/unix_socket/
 [3]: /es/agent/configuration/agent-commands/
-
 {{% /tab %}}
 {{% tab "Container Agent" %}}
 
@@ -110,7 +109,6 @@ La detección del origen en entornos distintos a Kubernetes se basa en una exten
 
 [1]: /es/developers/dogstatsd/unix_socket/
 [2]: /es/developers/dogstatsd/datagram_shell/?tab=metrics#dogstatsd-protocol-v12
-
 {{% /tab %}}
 {{% tab "Datadog Operator" %}}
 
@@ -246,10 +244,7 @@ Reunir métricas personalizadas con [DogStatsD][1] con helm:
 [2]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
 [3]: https://github.com/containernetworking/cni
 [4]: https://kubernetes.io/docs/setup/independent/troubleshooting-kubeadm/#hostport-services-do-not-work
-Accede a dashboards preconfigurados
-
-{{% /tab %}}
-{{< /tabs >}}
+{{% /tab %}}{{< /tabs >}}
 
 ### Cliente DogStatsD
 
@@ -488,7 +483,7 @@ Para conocer la lista completa de todos los parámetros opcionales disponibles p
 {{< /programming-lang >}}
 {{< programming-lang lang="ruby" >}}
 
-| Parámetro       | {{< img src="synthetics/browser_test.mp4" alt="Browser tests" video=true style="width:100%;">}}            | Valor predeterminado     | **Computar los SLO** en tus endpoints y recorridos de usuario más importantes facilita el cumplimiento de los objetivos de rendimiento de tu aplicación y, en última instancia, proporciona una experiencia de cliente coherente.                                                                                                    |
+| Parámetro       | Tipo            | Valor predeterminado     | Descripción                                                                                                    |
 | --------------- | --------------- | ----------- | -------------------------------------------------------------------------------------------------------------- |
 | `host`          | Cadena          | `localhost` | El host de tu servidor de DogStatsD.                                                                             |
 | `port`          | Entero         | `8125`      | El puerto de tu servidor de DogStatsD.                                                                             |
@@ -506,7 +501,7 @@ Para consultar la lista completa de los parámetros opcionales, consulta el [rep
 
 El cliente Go dispone de múltiples opciones para configurar el comportamiento de tu cliente.
 
-| Parámetro                     | {{< img src="synthetics/browser_test.mp4" alt="Browser tests" video=true style="width:100%;">}}            | **Computar los SLO** en tus endpoints y recorridos de usuario más importantes facilita el cumplimiento de los objetivos de rendimiento de tu aplicación y, en última instancia, proporciona una experiencia de cliente coherente.                                                                  |
+| Parámetro                     | Tipo            | Descripción                                                                  |
 | ----------------------------- | --------------- | ---------------------------------------------------------------------------- |
 | `WithNamespace()`             | Cadena          | Configurar un espacio de nombres para preestablecer a todas las métricas, eventos y checks de servicio.  |
 | `WithTags()`                  | Lista de cadenas | Etiquetas globales aplicadas a cada métrica, evento y check de servicio.               |
@@ -521,7 +516,7 @@ Para conocer todas las opciones disponibles, consulta [GoDoc de Datadog][1].
 A partir de la versión 2.10.0, la forma recomendada de instanciar el cliente es con el NonBlockingStatsDClientBuilder. Puedes
 usar los siguientes métodos de compilación para definir los parámetros del cliente.
 
-| Método de compilación                               | {{< img src="synthetics/browser_test.mp4" alt="Browser tests" video=true style="width:100%;">}}           | Valor predeterminado   | **Computar los SLO** en tus endpoints y recorridos de usuario más importantes facilita el cumplimiento de los objetivos de rendimiento de tu aplicación y, en última instancia, proporciona una experiencia de cliente coherente.                                                                         |
+| Método de compilación                               | Tipo           | Valor predeterminado   | Descripción                                                                         |
 | -------------------------------------------- | -------------- | --------- | ----------------------------------------------------------------------------------- |
 | `prefix(String val)`                         | Cadena         | nulo      | El prefijo que se aplicará a todas las métricas, eventos y checks de servicio.                     |
 | `hostname(String val)`                       | Cadena         | localhost | El nombre de host del servidor StatsD de destino.                                        |
@@ -546,7 +541,7 @@ Para obtener más información, busca el [paquete][1] de Java DogStatsD para la 
 {{< /programming-lang >}}
 {{< programming-lang lang="PHP" >}}
 
-| Parámetro     | {{< img src="synthetics/browser_test.mp4" alt="Browser tests" video=true style="width:100%;">}}            | Valor predeterminado     | **Computar los SLO** en tus endpoints y recorridos de usuario más importantes facilita el cumplimiento de los objetivos de rendimiento de tu aplicación y, en última instancia, proporciona una experiencia de cliente coherente.                                                                                                                                                                                            |
+| Parámetro     | Tipo            | Valor predeterminado     | Descripción                                                                                                                                                                                            |
 | ------------- | --------------- | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `host`        | Cadena          | `localhost` | Host de tu servidor DogStatsD. Si no se define, el Agent busca la variable de entorno `DD_AGENT_HOST` o `DD_DOGSTATSD_URL`.                                                               |
 | `port`        | Entero         | `8125`      | Puerto de tu servidor DogStatsD. Si no se define, el Agent busca la variable de entorno `DD_DOGSTATSD_PORT` o `DD_DOGSTATSD_URL`.                                                          |
@@ -556,7 +551,7 @@ Para obtener más información, busca el [paquete][1] de Java DogStatsD para la 
 {{< /programming-lang >}}
 {{< programming-lang lang=".NET" >}}
 
-| Parámetro          | {{< img src="synthetics/browser_test.mp4" alt="Browser tests" video=true style="width:100%;">}}            | Valor predeterminado     | **Computar los SLO** en tus endpoints y recorridos de usuario más importantes facilita el cumplimiento de los objetivos de rendimiento de tu aplicación y, en última instancia, proporciona una experiencia de cliente coherente.                                                          |
+| Parámetro          | Tipo            | Valor predeterminado     | Descripción                                                          |
 | ------------------ | --------------- | ----------- | -------------------------------------------------------------------- |
 | `StatsdServerName` | Cadena          | `localhost` | El nombre de host del servidor StatsD de destino.                         |
 | `StatsdPort`       | Entero         | `8125`      | El puerto del servidor StatsD de destino.                              |
@@ -578,9 +573,9 @@ DogStatsD y StatsD son en general similares, sin embargo, DogStatsD contiene car
 
 Si estás interesado en aprender más sobre el formato de datagram utilizado por DogStatsD, o quieres desarrollar tu propia biblioteca de Datadog, consulta la sección [datagram y shell usage][9], que también explica cómo enviar métricas y eventos directamente desde la línea de comandos.
 
-## {{< img src="synthetics/browser_test.mp4" alt="Browser tests" video=true style="width:100%;">}}
+## Referencias adicionales
 
-Grabar pruebas de aplicaciones móviles
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/etsy/statsd
 [2]: /es/metrics/custom_metrics/dogstatsd_metrics_submission/

@@ -7,6 +7,9 @@ further_reading:
 - link: "/logs/guide/reduce_data_transfer_fees"
   tag: "Guide"
   text: "How to send logs to Datadog while reducing data transfer fees"
+- link: "https://github.com/Azure-Samples/terraform-azure-datadog-log-forwarder"
+  tag: "External Site"
+  text: "Terraform Azure Datadog Log Forwarder"
 ---
 
 ## Overview
@@ -159,7 +162,7 @@ If you already have a function app configured with an Event Hub connection strin
 2. In the **Instance Details** section, configure the following settings:
    a. Select the **Code** radio button
    b. For **Runtime stack**, select `Node.js` 
-   c. For **Version**, select `18 LTS`.
+   c. For **Version**, select `20 LTS`.
 3. Configure other settings as desired.
 4. Click **Review + create** to validate the resource. If validation is successful, click **Create**.
 

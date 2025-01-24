@@ -49,6 +49,36 @@ In addition to [tracking views automatically][4], you can also track specific di
 {{% /tab %}}
 {{< /tabs >}}
 
+### Notify the SDK that your view finished loading
+
+iOS RUM tracks the time it takes for your view to load. To notify the SDK that your view has finished loading, call the `addViewLoadingTime(override=)` method
+through the `GlobalRumMonitor` instance. Call this method when your view is fully loaded and displayed to the user:
+
+{{< tabs >}}
+{{% tab "Kotlin" %}}
+   ```kotlin
+       @OptIn(ExperimentalRumApi::class)
+       fun onViewLoaded() {
+            GlobalRumMonitor.get().addViewLoadingTime(override = false)
+       }
+   ```
+{{% /tab %}}
+{{% tab "Java" %}}
+   ```java
+       @OptIn(markerClass = ExperimentalRumApi.class)
+       public void onViewLoaded() {
+            GlobalRumMonitor.get().addViewLoadingTime(override);
+       }
+   ```
+{{% /tab %}}
+{{< /tabs >}}
+
+Use the `override` option to replace the previously calculated loading time for the current view.
+
+After the loading time is sent, it is accessible as `@view.loading_time` and is visible in the RUM UI.
+
+**Note**: This API is still experimental and might change in the future.
+
 ### Add your own performance timing
 
 In addition to RUM's default attributes, you can measure where your application is spending its time by using the `addTiming` API. The timing measure is relative to the start of the current RUM view. For example, you can time how long it takes for your hero image to appear:
@@ -96,7 +126,7 @@ Note the action type should be one of the following: "custom", "click", "tap", "
 
 ### Enrich resources
 
-When [tracking resources automatically][6], provide a custom `RumResourceAttributesProvider` instance to add custom attributes to each tracked network request. For example, if you want to track a network request's headers, create an implementation as follows, and pass it in the constructor of the `DatadogInterceptor`.
+When [tracking resources automatically][6], provide a custom `RumResourceAttributesProvider` instance to add custom attributes to each tracked network request. For example, if you want to track a network request's headers, create an implementation as follows, and pass it in the builder of the `DatadogInterceptor`.
 
 {{< tabs >}}
 {{% tab "Kotlin" %}}
@@ -479,16 +509,18 @@ To get timing information in resources (such as third-party providers, network r
 {{< tabs >}}
 {{% tab "Kotlin" %}}
    ```kotlin
+       val tracedHosts = listOf("example.com")
        val okHttpClient = OkHttpClient.Builder()
-        .addInterceptor(DatadogInterceptor())
+        .addInterceptor(DatadogInterceptor.Builder(tracedHosts).build())
         .eventListenerFactory(DatadogEventListener.Factory())
         .build()
    ```
 {{% /tab %}}
 {{% tab "Java" %}}
    ```java
+       List<String> tracedHosts = Arrays.asList("example.com");
        OkHttpClient okHttpClient = new OkHttpClient.Builder()
-        .addInterceptor(new DatadogInterceptor())
+        .addInterceptor(new DatadogInterceptor.Builder(tracedHosts).build())
         .eventListenerFactory(new DatadogEventListener.Factory())
         .build();
    ```

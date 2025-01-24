@@ -23,7 +23,7 @@ author:
   support_email: ayuda@datadoghq.com
 categories:
 - la red
-custom_kind: integration
+custom_kind: integración
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/external_dns/README.md
 display_on_public_website: true
@@ -31,7 +31,7 @@ draft: false
 git_integration_title: dns_externo
 integration_id: dns-externo
 integration_title: DNS externo
-integration_version: 5.0.0
+integration_version: 5.1.0
 is_public: true
 manifest_version: 2.0.0
 name: dns_externo
