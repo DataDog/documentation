@@ -573,11 +573,24 @@ menu:
       pre: open-telemetry
       parent: essentials_heading
       weight: 60000
-    - name: Getting Started
-      url: getting_started/opentelemetry/
-      identifier: getting_started_otel_dd
+    - name: Send Data to Datadog
+      url: opentelemetry/setup
+      identifier: otel-setup
       parent: opentelemetry_top_level
-      weight: 1
+      weight: 1 
+    - name: Using the OpenTelemetry Collector
+      url: /opentelemetry/setup/collector_exporter/
+      identifier: otel-setup-collector-exporter
+      parent: otel-setup
+      weight: 101
+    - name: Install and Configure
+      url: /opentelemetry/setup/collector_exporter/configure
+      parent: otel-setup-collector-exporter
+      weight: 1001
+    - name: Deploy
+      url: /opentelemetry/setup/collector_exporter/deploy
+      parent: otel-setup-collector-exporter
+      weight: 1002
     - name: Terms and Concepts
       url: opentelemetry/otel_terms/
       identifier: otel_terms

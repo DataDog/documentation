@@ -1,5 +1,7 @@
 ---
 title: OTLP Receiver
+aliases:
+- /opentelemetry/collector_exporter/otlp_receiver
 further_reading:
 - link: "/opentelemetry/collector_exporter/"
   tag: "Documentation"

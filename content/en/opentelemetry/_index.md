@@ -27,6 +27,10 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/opentelemetry-runtime-metrics-datadog/"
   tag: "Blog"
   text: "Monitor runtime metrics from OTel-instrumented apps with Datadog APM"
+- link: "https://learn.datadoghq.com/courses/otel-with-datadog"
+  tag: "Learning Center"
+  text: "Introduction to OpenTelemetry with Datadog"
+
 algolia:
   tags: ['opentelemetry', 'open telemetry', 'otel']
 cascade:

@@ -1,5 +1,7 @@
 ---
 title: Batch and Memory Settings
+aliases:
+- /opentelemetry/collector_exporter/collector_batch_memory
 further_reading:
 - link: "/opentelemetry/collector_exporter/"
   tag: "Documentation"

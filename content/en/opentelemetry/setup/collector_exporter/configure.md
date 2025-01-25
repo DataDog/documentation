@@ -1,5 +1,5 @@
 ---
-title: Configuration
+title: Install and Configure the OpenTelemetry Collector
 further_reading:
 - link: "https://opentelemetry.io/docs/collector/management/"
   tag: "External Site"
@@ -9,22 +9,19 @@ further_reading:
   text: "OpenTelemetry Collector Configuration"
 ---
 
-The OpenTelemetry Collector receives, processes, and exports telemetry data from your applications. To send this data to Datadog, you need to configure several components within the Collector:
+## Install and configure the OpenTelemetry Collector
 
-- [Datadog Exporter][1]: Forwards trace, metric, and logs data from OpenTelemetry SDKs on to Datadog (without the Datadog Agent).
-- [Datadog Connector][29]: Calculates Trace Metrics from collected span data.
-
-## Setting up the OpenTelemetry Collector
-
-To run the OpenTelemetry Collector with the Datadog Exporter and Datadog Connector:
-
-### Step 1 - Download the OpenTelemetry Collector
+### Step 1: Download the OpenTelemetry Collector
 
 Download the latest release of the OpenTelemetry Collector Contrib distribution, from [the project's repository][3].
 
-### Step 2 - Configure the Datadog Exporter and Connector
+### Step 2: Configure the Datadog Exporter and Connector
 
-To use the Datadog Exporter, add it to your [OpenTelemetry Collector configuration][4]. Create a configuration file and name it `collector.yaml`. Use the example file which provides a basic configuration that is ready to use after you set your Datadog API key as the `DD_API_KEY` environment variable:
+To use the Datadog Exporter and Datadog Connector, configure them in your [OpenTelemetry Collector configuration][4]:
+
+1. Create a configuration file named `collector.yaml`.
+1. Use the following basic example file to get started.
+1. Set your Datadog API key as the `DD_API_KEY` environment variable.
 
 {{% otel-endpoint-note %}}
 
@@ -103,16 +100,21 @@ service:
       exporters: [datadog/exporter]
 ```
 
-The above configuration enables the receiving of OTLP data from OpenTelemetry instrumentation libraries over HTTP and gRPC, and sets up a [batch processor][5], which is mandatory for any non-development environment. Note that you may get `413 - Request Entity Too Large` errors if you batch too much telemetry data in the batch processor.
+This basic configuration enables the receiving of OTLP data from OpenTelemetry instrumentation libraries over HTTP and gRPC, and sets up a [batch processor][5].
 
-The exact configuration of the batch processor depends on your specific workload as well as the signal types. Datadog intake has different payload size limits for the 3 signal types:
+For a complete list of configuration options for the Datadog Exporter, see the [fully documented example configuration file][8]. Additional options like `api::site` and `host_metadata` settings may be relevant depending on your deployment.
+
+#### Batch processor configuration
+
+The batch processor is required for any non-development environments. The exact configuration depends on your specific workload and signal types.
+
+Configure the batch processor based on Datadog's intake limits:
+
 - Trace intake: 3.2MB
 - Log intake: [5MB uncompressed][6]
 - Metrics V2 intake: [500KB or 5MB after decompression][7]
 
-#### Advanced configuration
-
-[This fully documented example configuration file][8] illustrates all possible configuration options for the Datadog Exporter. There may be other options relevant to your deployment, such as `api::site` or the ones on the `host_metadata` section.
+You may get `413 - Request Entity Too Large` errors if you batch too much telemetry data in the batch processor.
 
 ### Step 3 - Configure your application
 
@@ -248,16 +250,12 @@ You can find working examples of out-of-the-box configuration for Datadog Export
     {{< nextlink href="/opentelemetry/collector_exporter/collector_batch_memory/" >}}Batch and Memory Settings{{< /nextlink >}}
 {{< /whatsnext >}}
 
-## Further reading
-
-{{< partial name="whats-next/whats-next.html" >}}
-
 [1]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/exporter/datadogexporter
 [3]: https://github.com/open-telemetry/opentelemetry-collector-releases/releases/latest
 [4]: https://opentelemetry.io/docs/collector/configuration/
 [5]: https://github.com/open-telemetry/opentelemetry-collector/blob/main/processor/batchprocessor/README.md
-[6]: https://docs.datadoghq.com/api/latest/logs/
-[7]: https://docs.datadoghq.com/api/latest/metrics/#submit-metrics
+[6]: /api/latest/logs/
+[7]: /api/latest/metrics/#submit-metrics
 [8]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/collector.yaml
 [9]: https://pkg.go.dev/go.opentelemetry.io/otel/sdk/resource#WithContainer
 [10]: /getting_started/tagging/unified_service_tagging/
@@ -269,9 +267,10 @@ You can find working examples of out-of-the-box configuration for Datadog Export
 [16]: https://opentelemetry.io/docs/collector/deployment/#agent
 [17]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/k8s-chart/daemonset.yaml
 [25]: https://opentelemetry.io/docs/specs/semconv/resource/#service
-[26]: https://docs.datadoghq.com/logs/log_configuration/pipelines/?tab=service#service-attribute
-[27]: https://docs.datadoghq.com/logs/log_configuration/processors/?tab=ui#service-remapper
+[26]: /logs/log_configuration/pipelines/?tab=service#service-attribute
+[27]: /logs/log_configuration/processors/?tab=ui#service-remapper
 [28]: /opentelemetry/schema_semantics/hostname/
 [29]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/connector/datadogconnector
 [30]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/ootb-ec2.yaml
 [31]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/
+[32]: /opentelemetry/compatibility/

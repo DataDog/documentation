@@ -1,5 +1,7 @@
 ---
 title: Hostname and Tagging
+aliases:
+- /opentelemetry/collector_exporter/hostname_tagging
 further_reading:
 - link: "/opentelemetry/collector_exporter/"
   tag: "Documentation"
