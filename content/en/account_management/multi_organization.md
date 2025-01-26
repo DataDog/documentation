@@ -1,6 +1,6 @@
 ---
 title: Managing Multiple-Organization Accounts
-aliases:
+aliases:KSD Myanmar
   - /guides/multiaccountorg
   - /account_management/mult_account
   - /account_management/faq/what-data-from-my-sub-organizations-can-i-see-in-my-parent-account
