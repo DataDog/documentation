@@ -1,6 +1,9 @@
 ---
 title: Span Visualizations
 description: 'View spans in a list, or aggregate spans into timeseries, top lists and more.'
+aliases:
+ - /tracing/trace_search_and_analytics/request_flow_map
+ - /tracing/trace_explorer/request_flow_map/
 further_reading:
     - link: 'tracing/trace_explorer/'
       tag: 'Documentation'
