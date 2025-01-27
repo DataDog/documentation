@@ -27,10 +27,6 @@ The first step is to configure the notification with the required fields:
 
 {{< img src="/monitors/guide/notification_message_best_practices/monitor_notification_message.png" alt="Monitor notification message configuration" style="width:100%;" >}}
 
-There are several fields to fill to configure it:
-
-* Monitor Name, which is also the Notification title.  
-* Monitor Message, which is the body of the notification.
 
 ## Name
 
