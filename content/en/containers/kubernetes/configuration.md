@@ -881,7 +881,7 @@ Starting with Agent v6.4.0 (and v6.5.0 for the Trace Agent), you can override th
 
 Some capabilities require that you set a Kubernetes cluster name. A valid cluster name must be unique and dot-separated, with the following restrictions:
 
-- Can only contain lowercase letters, numbers, and hyphens
+- Can contain only lowercase letters, numbers, and hyphens
 - Must start with a letter
 - Overall length is less than or equal to 80 characters
 
