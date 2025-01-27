@@ -92,7 +92,7 @@ The following table shows the error spans count by `Env`, `Service`, and `Error 
 
 {{< img src="tracing/trace_explorer/visualize/table_view.png" alt="Table view" style="width:100%;">}}
 
-## Flow Map
+## Request Flow Map
 
 [Request flow maps][6] combine APM's [service map][7] and [live exploring][8] features to illustrate request paths through your stack. Scope your LIVE (past 15 minutes) traces to any combination of tags and generate a dynamic map that represents the flow of requests between every service.
 
