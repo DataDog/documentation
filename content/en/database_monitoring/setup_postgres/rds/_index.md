@@ -17,7 +17,7 @@ The Agent collects telemetry directly from the database by logging in as a read-
 1. [Install and configure the Agent](#install-and-configure-the-agent)
 1. [Install the RDS integration](#install-the-rds-integration)
 
-<div class="alert alert-info">RDS Quick Install is now generally available. Follow <a href="/database_monitoring/setup_postgres/rds/quick_install">these instructions</a> to easily add Database Monitoring to RDS Postgres instances.</div>
+<div class="alert alert-info"><a href="/database_monitoring/setup_postgres/rds/quick_install">RDS Quick Install</a> is the recommended method for monitoring individual RDS Postgres instances.</div>
 <p></p>
 
 ## Before you begin
