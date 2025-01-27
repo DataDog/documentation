@@ -83,9 +83,9 @@ Audit Event Forwarding allows you to send audit events from Datadog to custom de
 
 <div class="alert alert-info">Log forwarding to Microsoft Sentinel is in Preview. To access this feature, <a href="https://www.datadoghq.com/product-preview/log-forwarding-to-microsoft-sentinel/">register here.</a></div>
 
-7. Enter a name for the destination.
-8. Authentication for the Microsoft Sentinel Forwarder requires configuring an App Registration through the Datadog Azure Integration.
-9. In the **Configure Destination** section, enter the following details:
+6. Enter a name for the destination.
+7. Authentication for the Microsoft Sentinel Forwarder requires configuring an App Registration through the Datadog Azure Integration.
+8. In the **Configure Destination** section, enter the following details:
   | Setting                   | Description                                                                                                          | Example                                                   |
 |---------------------------|----------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------|
 | **Logs Ingestion Endpoint** | Enter the endpoint on the Data Collection Endpoint (DCE) where logs are sent. This is labeled "Logs Ingestion" on the DCE Overview page. | `https://my-dce-5kyl.eastus-1.ingest.monitor.azure.com`   |
