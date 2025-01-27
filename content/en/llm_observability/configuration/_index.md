@@ -46,7 +46,7 @@ Connect your Azure OpenAI account to LLM Observability with your OpenAI API key.
 1. Select **Connect** on the Azure OpenAI tile.
 1. Follow the instructions on the tile.
    - Provide your Azure OpenAI API key. Ensure that this key has **write** permission for **model capabilities**.
-   - Provide the Resource Name, Deployment ID, and API version.
+   - Provide the Resource Name, Deployment ID, and API version to complete integration.
 
 {{< img src="llm_observability/configuration/azure-openai-tile-2.png" alt="The Azure OpenAI configuration tile in LLM Observability. Lists instructions for configuring Azure OpenAI and providing your API Key, Resource Name, Deployment ID, and API Version." style="width:100%;" >}}
 {{% /tab %}}
