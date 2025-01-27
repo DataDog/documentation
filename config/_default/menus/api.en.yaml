@@ -1959,9 +1959,9 @@ menu:
           - CreateMonitor
         unstable: []
         order: 1
-    - name: Get all monitor details
-      url: '#get-all-monitor-details'
-      identifier: monitors-get-all-monitor-details
+    - name: Get all monitors
+      url: '#get-all-monitors'
+      identifier: monitors-get-all-monitors
       parent: monitors
       generated: true
       params:
@@ -2575,6 +2575,66 @@ menu:
           - ListSecurityFilters
         unstable: []
         order: 18
+    - name: Patch a vulnerability-based rule
+      url: '#patch-a-vulnerability-based-rule'
+      identifier: security-monitoring-patch-a-vulnerability-based-rule
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - PatchVulnerabilityNotificationRule
+        unstable: []
+        order: 20
+    - name: Get details of a vulnerability-based rule
+      url: '#get-details-of-a-vulnerability-based-rule'
+      identifier: security-monitoring-get-details-of-a-vulnerability-based-rule
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetVulnerabilityNotificationRule
+        unstable: []
+        order: 18
+    - name: Delete a vulnerability-based rule
+      url: '#delete-a-vulnerability-based-rule'
+      identifier: security-monitoring-delete-a-vulnerability-based-rule
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteVulnerabilityNotificationRule
+        unstable: []
+        order: 21
+    - name: Create a new vulnerability-based rule
+      url: '#create-a-new-vulnerability-based-rule'
+      identifier: security-monitoring-create-a-new-vulnerability-based-rule
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateVulnerabilityNotificationRule
+        unstable: []
+        order: 16
+    - name: Get the list of vulnerability-based rules
+      url: '#get-the-list-of-vulnerability-based-rules'
+      identifier: security-monitoring-get-the-list-of-vulnerability-based-rules
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetVulnerabilityNotificationRules
+        unstable: []
+        order: 15
     - name: List vulnerabilities
       url: '#list-vulnerabilities'
       identifier: security-monitoring-list-vulnerabilities
@@ -2587,7 +2647,80 @@ menu:
           - ListVulnerabilities
         unstable:
           - v2
-        order: 3
+        order: 25
+    - name: Patch a signal-based rule
+      url: '#patch-a-signal-based-rule'
+      identifier: security-monitoring-patch-a-signal-based-rule
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - PatchSignalNotificationRule
+        unstable: []
+        order: 20
+    - name: Get details of a signal-based rule
+      url: '#get-details-of-a-signal-based-rule'
+      identifier: security-monitoring-get-details-of-a-signal-based-rule
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetSignalNotificationRule
+        unstable: []
+        order: 18
+    - name: Delete a signal-based rule
+      url: '#delete-a-signal-based-rule'
+      identifier: security-monitoring-delete-a-signal-based-rule
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteSignalNotificationRule
+        unstable: []
+        order: 21
+    - name: Create a new signal-based rule
+      url: '#create-a-new-signal-based-rule'
+      identifier: security-monitoring-create-a-new-signal-based-rule
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateSignalNotificationRule
+        unstable: []
+        order: 16
+    - name: Get the list of signal-based rules
+      url: '#get-the-list-of-signal-based-rules'
+      identifier: security-monitoring-get-the-list-of-signal-based-rules
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetSignalNotificationRules
+        unstable: []
+        order: 15
+    - name: Get SBOM
+      url: '#get-sbom'
+      identifier: security-monitoring-get-sbom
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetSBOM
+        unstable:
+          - v2
+        order: 27
     - name: List vulnerable assets
       url: '#list-vulnerable-assets'
       identifier: security-monitoring-list-vulnerable-assets
@@ -2600,7 +2733,7 @@ menu:
           - ListVulnerableAssets
         unstable:
           - v2
-        order: 4
+        order: 26
     - name: Get a finding
       url: '#get-a-finding'
       identifier: security-monitoring-get-a-finding
@@ -3693,8 +3826,7 @@ menu:
           - v2
         operationids:
           - GetBillingDimensionMapping
-        unstable:
-          - v2
+        unstable: []
         order: 1
     - name: Get hourly usage for application security
       url: '#get-hourly-usage-for-application-security'
@@ -4540,6 +4672,58 @@ menu:
           - ListApmRetentionFilters
         unstable: []
         order: 1
+    - name: Action Connection
+      url: /api/latest/action-connection/
+      identifier: action-connection
+      generated: true
+    - name: Update an existing Action Connection
+      url: '#update-an-existing-action-connection'
+      identifier: action-connection-update-an-existing-action-connection
+      parent: action-connection
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateActionConnection
+        unstable: []
+        order: 3
+    - name: Get an existing Action Connection
+      url: '#get-an-existing-action-connection'
+      identifier: action-connection-get-an-existing-action-connection
+      parent: action-connection
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetActionConnection
+        unstable: []
+        order: 1
+    - name: Delete an existing Action Connection
+      url: '#delete-an-existing-action-connection'
+      identifier: action-connection-delete-an-existing-action-connection
+      parent: action-connection
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteActionConnection
+        unstable: []
+        order: 4
+    - name: Create a new Action Connection
+      url: '#create-a-new-action-connection'
+      identifier: action-connection-create-a-new-action-connection
+      parent: action-connection
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateActionConnection
+        unstable: []
+        order: 2
     - name: Agentless Scanning
       url: /api/latest/agentless-scanning/
       identifier: agentless-scanning
@@ -4555,6 +4739,114 @@ menu:
         operationids:
           - ListAwsScanOptions
         unstable: []
+        order: 3
+    - name: App Builder
+      url: /api/latest/app-builder/
+      identifier: app-builder
+      generated: true
+    - name: Publish App
+      url: '#publish-app'
+      identifier: app-builder-publish-app
+      parent: app-builder
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - PublishApp
+        unstable:
+          - v2
+        order: 7
+    - name: Unpublish App
+      url: '#unpublish-app'
+      identifier: app-builder-unpublish-app
+      parent: app-builder
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UnpublishApp
+        unstable:
+          - v2
+        order: 8
+    - name: Update App
+      url: '#update-app'
+      identifier: app-builder-update-app
+      parent: app-builder
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateApp
+        unstable:
+          - v2
+        order: 5
+    - name: Get App
+      url: '#get-app'
+      identifier: app-builder-get-app
+      parent: app-builder
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetApp
+        unstable:
+          - v2
+        order: 4
+    - name: Delete App
+      url: '#delete-app'
+      identifier: app-builder-delete-app
+      parent: app-builder
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteApp
+        unstable:
+          - v2
+        order: 6
+    - name: Create App
+      url: '#create-app'
+      identifier: app-builder-create-app
+      parent: app-builder
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateApp
+        unstable:
+          - v2
+        order: 2
+    - name: List Apps
+      url: '#list-apps'
+      identifier: app-builder-list-apps
+      parent: app-builder
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListApps
+        unstable:
+          - v2
+        order: 1
+    - name: Delete Multiple Apps
+      url: '#delete-multiple-apps'
+      identifier: app-builder-delete-multiple-apps
+      parent: app-builder
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteApps
+        unstable:
+          - v2
         order: 3
     - name: Audit
       url: /api/latest/audit/

@@ -191,13 +191,13 @@ There are no required integrations for PHP.
 
 The following Go frameworks should be instrumented using the out-of-the-box APM integrations:
 
-- [gRPC][2]
-- [net/http][3]
-- [Gorilla Mux][4]
-- [Echo][5]
-- [Chi][6]
+- [gRPC][2] ([v2][8])
+- [net/http][3] ([v2][9])
+- [Gorilla Mux][4] ([v2][10])
+- [Echo][5] ([v2][11])
+- [Chi][6] ([v2][12])
 
-If your framework is not supported, [create a new issue][7] in the Go repository.
+Please be sure to reference the docs appropriate for your version (v1.x or v2.x) of the Go Tracer. If your framework is not supported, [create a new issue][7] in the Go repository.
 
 [2]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/google.golang.org/grpc#example-package-Server
 [3]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http#example-package
@@ -205,6 +205,12 @@ If your framework is not supported, [create a new issue][7] in the Go repository
 [5]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/labstack/echo.v4#example-package
 [6]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/go-chi/chi.v5#example-package
 [7]: https://github.com/DataDog/dd-trace-go/issues/new?title=Missing%20appsec%20framework%20support
+[8]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/contrib/google.golang.org/grpc/v2
+[9]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/contrib/net/http/v2
+[10]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/contrib/gorilla/mux/v2
+[11]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/contrib/labstack/echo.v4/v2
+[12]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/contrib/go-chi/chi.v5/v2
+
 {{< /programming-lang >}}
 {{< programming-lang lang="Node.js" >}}
 
@@ -625,8 +631,8 @@ If you continue to have issues with ASM, contact [Datadog support][1] with the f
 [9]: /tracing/glossary/#spans
 [10]: /tracing/troubleshooting/#tracer-debug-logs
 [12]: https://app.datadoghq.com/security/appsec/vm
-[13]: /security/application_security/code_security/
-[14]: /security/application_security/software_composition_analysis
+[13]: /security/code_security/iast/
+[14]: /security/code_security/software_composition_analysis
 [15]: https://app.datadoghq.com/security/configuration/asm/services-config
 [16]: https://app.datadoghq.com/organization-settings/remote-config
 [17]: https://ddtrace.readthedocs.io/en/stable/integrations.html#flask

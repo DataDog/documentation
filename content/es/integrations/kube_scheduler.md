@@ -28,7 +28,7 @@ categories:
 - Kubernetes
 - recopilación de logs
 - orquestación
-custom_kind: integration
+custom_kind: integración
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/kube_scheduler/README.md
 display_on_public_website: true
@@ -36,7 +36,7 @@ draft: false
 git_integration_title: kube_scheduler
 integration_id: kube-scheduler
 integration_title: Programador Kubernetes
-integration_version: 4.10.1
+integration_version: 6.1.0
 is_public: true
 manifest_version: 2.0.0
 name: kube_scheduler

@@ -37,7 +37,7 @@ If you've already [set up Cloud Security Management][4] and want to add a new cl
 {{% tab "Existing AWS account" %}}
 
 1. On the [Cloud Security Management Setup][1] page, click **Cloud Integrations > AWS**.
-1. Click the **Edit scanning** button {{< img src="security/csm/setup/edit-button.png" inline="true" style="width:24px;">}} for the AWS account where you want to deploy the Agentless scanner.
+1. Click the **Edit scanning** button ({{< img src="security/csm/setup/edit-button.png" inline="true" style="width:24px;">}}) for the AWS account where you want to deploy the Agentless scanner.
 1. **Enable Resource Scanning** should already be toggled on. If it isn't, toggle **Enable Resource Scanning** to the on position.
 1. In the **How would you like to set up Agentless Scanning?** section, select **Terraform**.
 1. Follow the instructions for installing the [Datadog Agentless Scanner module][2].
@@ -72,7 +72,7 @@ If you've already [set up Cloud Security Management][4] and want to add a new cl
 ## Disable Agentless Scanning
 
 1. On the [Cloud Security Management Setup][4] page, click **Cloud Integrations**, and then expand the **AWS** or **Azure** section.
-1. To disable Agentless Scanning for an account, click the **Edit** button {{< img src="security/csm/setup/edit-button.png" inline="true" style="width:24px;">}} and toggle **Vulnerability Scanning** to the off position.
+1. To disable Agentless Scanning for an account, click the **Edit** button ({{< img src="security/csm/setup/edit-button.png" inline="true" style="width:24px;">}}) and toggle **Vulnerability Scanning** to the off position.
 1. Click **Done**.
 
 ## Uninstall with Terraform

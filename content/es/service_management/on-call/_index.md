@@ -13,10 +13,6 @@ title: On-Call
 <div class="alert alert-warning">El servicio On-Call no es compatible con el <a href="/getting_started/site">sitio de Datadog </a> seleccionado ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
-{{< callout url="https://www.datadoghq.com/private-beta/on-call/" >}}
-  On-Call está en fase beta privada. Rellena el formulario para solicitar acceso.
-{{< /callout >}} 
-
 Datadog On-Call integra la monitorización, la localización de personas y la respuesta a incidencias en una sola plataforma.
 
 {{< img src="service_management/oncall/oncall_overview.png" alt="Información general sobre cómo las páginas se enrutan. Desde un monitor, incidencia, señal de seguridad o llamada a la API, la página se envía a un equipo (por ejemplo, 'payments-team'), a continuación, a las reglas de procesamiento (por ejemplo, según prioridad), a continuación, a las políticas de escalada. A continuación, se puede enviar a un cronograma o directamente a un usuario." style="width:100%;" >}}
@@ -55,7 +51,7 @@ Para empezar con On-Call [incorpora un equipo de On-Call][1] y asegúrate de que
   {{< nextlink href="/service_management/on-call/profile_settings">}}<u>Ajustes del perfil</u>: configura tu método de contacto y preferencias de notificación para asegurar que recibas las Páginas de forma puntal y eficaz.{{< /nextlink >}}
 {{< /whatsnext >}}
 
-## Referencias adicionales
+## Para leer más
 
 {{< partial name="whats-next/whats-next.html" >}}
 
