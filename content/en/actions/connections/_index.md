@@ -212,7 +212,7 @@ To delete a connection group:
 [6]: /integrations/
 [8]: /service_management/workflows/actions/
 [9]: https://app.datadoghq.com/workflow
-[10]: /actions/http/
+[10]: /actions/connections/http/
 [11]: https://datadoghq.slack.com/
 [12]: /service_management/workflows/access/#restrict-access-on-a-specific-connection
 [13]: /getting_started/tagging/
