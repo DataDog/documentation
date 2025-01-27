@@ -47,13 +47,13 @@ If you experience issues with Mobile App Testing on restricted networks, use the
 
 ### Unable to launch recorder
 
-To launch the Mobile Application Testing (MAT) Recorder, Datadog needs to establish UDP/TCP TURN connections to enable WebRTC connections. If the user is behind a restrictive network (such as a strict firewall or VPN), these connections may fail, leading to the following error:
+To launch the Mobile Application Testing (MAT) Recorder, Datadog needs to establish UDP/TCP TURN connections to enable WebRTC connections. If the user is behind a restrictive network (such as a strict firewall or VPN), these connections may fail, leading to a "Device unexpectedly disconnected" error:
 
 {{< img src="/mobile_app_testing/restricted_networks/device_disconnected_error.png" alt="Screenshot of launching a mobile device, displaying the disconnected error." style="width:100%;" >}}
 
-To check for successful UDP/TCP TURN connections, run a network test using a [Twilio Network Test][2]. The result of the test confirms whether connectivity to TURN servers is successful or not. The following is an example of a successful connection:
+To check for successful UDP/TCP TURN connections, run a network test using a [Twilio Network Test][2]. The result of the test confirms whether connectivity to TURN servers is successful or not. If the connection is successful, you will see a message like "Successfully established a UDP connection to Twilio":
 
-{{< img src="/mobile_app_testing/restricted_networks/twilio_test.png" alt="Screenshot of a successful test using a twilio network test." style="width:100%;" >}}
+{{< img src="/mobile_app_testing/restricted_networks/twilio_test.png" alt="Screenshot of a successful test using a Twilio Network Test." style="width:100%;" >}}
 
 If the test fails, Twilio generates a log output indicating errors due to an inability to establish a connection. For example:
 
