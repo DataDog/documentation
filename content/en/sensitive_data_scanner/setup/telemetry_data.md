@@ -12,7 +12,15 @@ further_reading:
 
 ## Overview
 
-TKTK
+To use Sensitive Data Scanner for telemetry data, set up a scanning group to define what data to scan and then add scanning rules to determine what sensitive information to match within the data.
+
+This document goes through the following:
+
+- The [permissions](#prerequisites) required to view and set up Sensitive Data Scanner.
+- [Adding a scanning group](#add-a-scanning-group).
+- [Adding scanning rules](#add-scanning-rules).
+- [How to control access to logs wth sensitive data](#control-access-to-logs-with-sensitive-data).
+- [How to redact sensitive data in tags](#redact-sensitive-data-in-tags).
 
 ## Setup
 
@@ -141,11 +149,11 @@ The excluded namespaces are:
 1. For **Set priority level**, choose a value based on your business needs.
 1. Click **Update**.
 
-### Control access to logs with sensitive data
+## Control access to logs with sensitive data
 
 To control who can access logs containing sensitive data, use tags added by the Sensitive Data Scanner to build queries with role-based access control (RBAC). You can restrict access to specific individuals or teams until the data ages out after the retention period. See [How to Set Up RBAC for Logs][9] for more information.
 
-### Redact sensitive data in tags
+## Redact sensitive data in tags
 
 To redact sensitive data contained in tags, you must [remap][10] the tag to an attribute and then redact the attribute. Uncheck `Preserve source attribute` in the remapper processor so that the tag is not preserved during the remapping.
 
