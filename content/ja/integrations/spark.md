@@ -38,7 +38,7 @@ draft: false
 git_integration_title: spark
 integration_id: spark
 integration_title: Spark
-integration_version: 6.1.0
+integration_version: 6.2.0
 is_public: true
 manifest_version: 2.0.0
 name: spark

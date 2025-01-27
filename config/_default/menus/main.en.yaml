@@ -9,7 +9,7 @@ menu:
     - name: Service Management
       identifier: service_management_heading
       weight: 3000000
-    - name: Actions
+    - name: Actions & Remediations
       identifier: actions_heading
       weight: 4000000
     - name: Infrastructure
@@ -162,12 +162,7 @@ menu:
       url: getting_started/session_replay/
       parent: getting_started
       weight: 16
-    - name: Continuous Testing
-      identifier: getting_started_continuous_testing
-      url: getting_started/continuous_testing/
-      parent: getting_started
-      weight: 17
-    - name: Synthetic Monitoring
+    - name: Synthetic Monitoring and Testing
       identifier: getting_started_synthetics
       url: getting_started/synthetics/
       parent: getting_started
@@ -182,11 +177,21 @@ menu:
       url: getting_started/synthetics/browser_test
       parent: getting_started_synthetics
       weight: 1802
+    - name: Mobile App Tests
+      identifier: getting_started_mobile_app
+      url: getting_started/synthetics/mobile_app_testing
+      parent: getting_started_synthetics
+      weight: 1803
+    - name: Continuous Testing
+      identifier: getting_started_continuous_testing
+      url: getting_started/continuous_testing/
+      parent: getting_started_synthetics
+      weight: 1804
     - name: Private Locations
       identifier: getting_started_private_location
       url: getting_started/synthetics/private_location
       parent: getting_started_synthetics
-      weight: 1803
+      weight: 1805
     - name: Incident Management
       identifier: getting_started_incident_management
       url: getting_started/incident_management/
@@ -212,36 +217,36 @@ menu:
       url: getting_started/application_security
       parent: getting_started
       weight: 23
-    - name: Software Composition Analysis
-      identifier: getting_started_software_composition_analysis
-      url: getting_started/application_security/software_composition_analysis
-      parent: getting_started_application_security
-      weight: 2301
     - name: Workflow Automation
       identifier: getting_started_workflow_automation
       url: getting_started/workflow_automation/
       parent: getting_started
       weight: 24
+    - name: Software Delivery
+      identifier: getting_started_software_delivery
+      url: getting_started/software_delivery/
+      parent: getting_started
+      weight: 25
     - name: CI Visibility
       identifier: getting_started_ci_visibility
       url: getting_started/ci_visibility/
-      parent: getting_started
-      weight: 25
-    - name: Test Visibility
-      identifier: getting_started_test_visibility
-      url: getting_started/test_visibility/
-      parent: getting_started
-      weight: 26
+      parent: getting_started_software_delivery
+      weight: 2501
+    - name: Test Optimization
+      identifier: getting_started_test_optimization
+      url: getting_started/test_optimization/
+      parent: getting_started_software_delivery
+      weight: 2502
     - name: Test Impact Analysis
       identifier: getting_started_test_impact_analysis
       url: getting_started/test_impact_analysis/
+      parent: getting_started_software_delivery
+      weight: 2503
+    - name: Code Security
+      identifier: getting_started_code_security
+      url: getting_started/code_security/
       parent: getting_started
-      weight: 27
-    - name: Code Analysis
-      identifier: getting_started_code_analysis
-      url: getting_started/code_analysis/
-      parent: getting_started
-      weight: 28
+      weight: 26
     - name: Learning Center
       identifier: getting_started_learning_center
       url: getting_started/learning_center/
@@ -622,6 +627,36 @@ menu:
       identifier: otel_integrations
       parent: opentelemetry_top_level
       weight: 4
+    - name: Trace Metrics
+      url: opentelemetry/integrations/trace_metrics/
+      identifier: otel_trace_metrics
+      parent: otel_integrations
+      weight: 401
+    - name: Runtime Metrics
+      url: opentelemetry/integrations/runtime_metrics/
+      identifier: otel_runtime_metrics
+      parent: otel_integrations
+      weight: 402
+    - name: Collector Health Metrics
+      url: opentelemetry/integrations/collector_health_metrics/
+      identifier: otel_health_metrics
+      parent: otel_integrations
+      weight: 403
+    - name: Docker Metrics
+      url: opentelemetry/integrations/docker_metrics/
+      identifier: otel_docker_metrics
+      parent: otel_integrations
+      weight: 404
+    - name: Host Metrics
+      url: opentelemetry/integrations/host_metrics/
+      identifier: otel_host_metrics
+      parent: otel_integrations
+      weight: 405
+    - name: Kafka Metrics
+      url: opentelemetry/integrations/kafka_metrics/
+      identifier: otel_kafka_metrics
+      parent: otel_integrations
+      weight: 406
     - name: Schema and Semantics
       url: opentelemetry/schema_semantics/
       identifier: otel_schema
@@ -1178,6 +1213,10 @@ menu:
       identifier: watchdog_faulty_deployment_detection
       parent: watchdog_top_level
       weight: 5
+    - name: Faulty Cloud & SaaS API Detection
+      url: watchdog/faulty_cloud_saas_api_detection
+      parent: watchdog_top_level
+      weight: 6
     - name: Bits AI
       url: bits_ai/
       pre: bits-ai
@@ -1900,6 +1939,31 @@ menu:
       parent: service_catalog
       identifier: service_catalog_use_cases
       weight: 3
+    - name: API Management
+      url: service_catalog/use_cases/api_management
+      parent: service_catalog_use_cases
+      identifier: service_catalog_use_cases_api_management
+      weight: 301
+    - name: Cloud Cost Management
+      url: service_catalog/use_cases/cloud_cost_management
+      parent: service_catalog_use_cases
+      identifier: service_catalog_use_cases_cloud_cost_management
+      weight: 302
+    - name: Application Security Management
+      url: service_catalog/use_cases/appsec_management
+      parent: service_catalog_use_cases
+      identifier: service_catalog_use_cases_appsec_management
+      weight: 303
+    - name: Developer Onboarding
+      url: service_catalog/use_cases/dev_onboarding
+      parent: service_catalog_use_cases
+      identifier: service_catalog_use_cases_dev_onboarding
+      weight: 304
+    - name: Dependency Management
+      url: service_catalog/use_cases/dependency_management
+      parent: service_catalog_use_cases
+      identifier: service_catalog_use_cases_dependency_management
+      weight: 305     
     - name: Manage a Component
       url: service_catalog/manage
       parent: service_catalog
@@ -2281,6 +2345,11 @@ menu:
       parent: oncall
       identifier: oncall_profile_settings
       weight: 6
+    - name: Guides
+      url: service_management/on-call/guides/
+      parent: oncall
+      identifier: oncall_guides
+      weight: 7
     - name: Event Management
       url: service_management/events/
       pre: events
@@ -2494,56 +2563,31 @@ menu:
       parent: workflows_actions
       identifier: workflows_http
       weight: 504
-    - name: Private Actions
-      url: service_management/workflows/private_actions/
-      parent: workflows
-      identifier: workflows_private_actions
-      weight: 6
-    - name: Use Private Actions
-      url: service_management/workflows/private_actions/use_private_actions/
-      parent: workflows_private_actions
-      identifier: workflows_use_private_actions
-      weight: 601
-    - name: Private Action Credentials
-      url: service_management/workflows/private_actions/private_action_credentials/
-      parent: workflows_private_actions
-      identifier: workflows_private_actions_creds
-      weight: 602
     - name: Save and Reuse Actions
       url: service_management/workflows/saved_actions/
       parent: workflows
       identifier: workflows_saved_actions
-      weight: 7
+      weight: 6
     - name: Connections
       url: service_management/workflows/connections/
       parent: workflows
       identifier: workflows_connections
-      weight: 8
-    - name: Datastore
-      url: service_management/workflows/datastore/
-      parent: workflows
-      identifier: workflows_datastore
-      weight: 9
+      weight: 7
     - name: Test and Debug
       url: service_management/workflows/test_and_debug/
       parent: workflows
       identifier: workflows_test_and_debug
-      weight: 10
+      weight: 8
     - name: Track Workflows
       url: service_management/workflows/track
       parent: workflows
       identifier: workflows_track
-      weight: 11
+      weight: 9
     - name: Limits
       url: service_management/workflows/limits/
       parent: workflows
       identifier: workflows_limits
-      weight: 12
-    - name: Actions Catalog
-      url: service_management/workflows/actions_catalog/
-      parent: workflows
-      identifier: workflows_actions_catalog
-      weight: 13
+      weight: 10
     - name: App Builder
       url: service_management/app_builder/
       pre: app-builder
@@ -2585,51 +2629,58 @@ menu:
       parent: app_builder
       identifier: app_builder_events
       weight: 6
-    - name: Private Actions
-      url: service_management/app_builder/private_actions/
-      parent: app_builder
-      identifier: app_builder_private_actions
-      weight: 7
-    - name: Use Private Actions
-      url: service_management/app_builder/private_actions/use_private_actions/
-      parent: app_builder_private_actions
-      identifier: app_builder_use_private_actions
-      weight: 701
-    - name: Private Action Credentials
-      url: service_management/app_builder/private_actions/private_action_credentials/
-      parent: app_builder_private_actions
-      identifier: app_builder_private_actions_creds
-      weight: 702
     - name: Components
       url: service_management/app_builder/components/
       parent: app_builder
       identifier: app_builder_components
-      weight: 8
+      weight: 7
     - name: Custom Charts
       url: service_management/app_builder/components/custom_charts/
       parent: app_builder_components
       identifier: app_builder_custom_charts
-      weight: 801
+      weight: 701
     - name: Tables
       url: service_management/app_builder/components/tables/
       parent: app_builder_components
       identifier: app_builder_tables
-      weight: 802
-    - name: Datastore
-      url: service_management/app_builder/datastore/
-      parent: app_builder
-      identifier: app_builder_datastore
-      weight: 9
+      weight: 702
     - name: JavaScript Expressions
       url: service_management/app_builder/expressions/
       parent: app_builder
       identifier: app_builder_expressions
-      weight: 10
+      weight: 8
     - name: Embedded Apps
       url: service_management/app_builder/embedded_apps/
       parent: app_builder
       identifier: app_builder_embedded_apps
-      weight: 11
+      weight: 9
+    - name: Datastore
+      url: actions/datastore/
+      pre: server
+      parent: actions_heading
+      identifier: datastore
+      weight: 30000
+    - name: Action Catalog
+      url: actions/actions_catalog/
+      pre: books
+      parent: actions_heading
+      identifier: action_catalog
+      weight: 40000
+    - name: Private Actions
+      url: actions/private_actions/
+      parent: action_catalog
+      identifier: private_actions
+      weight: 1
+    - name: Use Private Actions
+      url: actions/private_actions/use_private_actions/
+      parent: private_actions
+      identifier: use_private_actions
+      weight: 101
+    - name: Private Action Credentials
+      url: actions/private_actions/private_action_credentials/
+      parent: private_actions
+      identifier: private_actions_creds
+      weight: 102
     - name: Universal Service Monitoring
       url: universal_service_monitoring/
       pre: usm
@@ -3069,7 +3120,7 @@ menu:
       parent: ndm_setup
       identifier: ndm_snmptraps
       weight: 30004
-    - name: SD-WAN 
+    - name: SD-WAN
       url: network_monitoring/devices/sd-wan
       parent: ndm_setup
       identifier: ndm_sd-wan
@@ -4493,82 +4544,6 @@ menu:
       parent: tests
       identifier: tests_troubleshooting
       weight: 15
-    - name: Code Analysis
-      url: code_analysis/
-      pre: ci
-      parent: software_delivery_heading
-      identifier: code_analysis
-      weight: 40000
-    - name: Static Analysis (SAST)
-      url: code_analysis/static_analysis
-      parent: code_analysis
-      identifier: code_analysis_static_analysis
-      weight: 1
-    - name: Setup
-      url: code_analysis/static_analysis/setup
-      parent: code_analysis_static_analysis
-      identifier: code_analysis_static_analysis_setup
-      weight: 101
-    - name: CircleCI Orbs
-      url: code_analysis/static_analysis/circleci_orbs
-      parent: code_analysis_static_analysis
-      identifier: code_analysis_static_analysis_circleci_orbs
-      weight: 102
-    - name: GitHub Actions
-      url: code_analysis/static_analysis/github_actions
-      parent: code_analysis_static_analysis
-      identifier: code_analysis_static_analysis_github_actions
-      weight: 103
-    - name: Generic CI Providers
-      url: code_analysis/static_analysis/generic_ci_providers
-      parent: code_analysis_static_analysis
-      identifier: code_analysis_static_analysis_other_providers
-      weight: 104
-    - name: Software Composition Analysis (SCA)
-      url: code_analysis/software_composition_analysis
-      parent: code_analysis
-      identifier: code_analysis_software_composition_analysis
-      weight: 2
-    - name: Setup
-      url: code_analysis/software_composition_analysis/setup
-      parent: code_analysis_software_composition_analysis
-      identifier: code_analysis_software_composition_analysis_setup
-      weight: 201
-    - name: GitHub Actions
-      url: code_analysis/software_composition_analysis/github_actions
-      parent: code_analysis_software_composition_analysis
-      identifier: code_analysis_software_composition_analysis_github_actions
-      weight: 202
-    - name: Generic CI Providers
-      url: code_analysis/software_composition_analysis/generic_ci_providers
-      parent: code_analysis_software_composition_analysis
-      identifier: code_analysis_software_composition_analysis_other_providers
-      weight: 203
-    - name: Static Analysis (SAST) Rules
-      url: code_analysis/static_analysis_rules
-      parent: code_analysis
-      identifier: code_analysis_static_analysis_rules
-      weight: 3
-    - name: GitHub Pull Requests
-      url: code_analysis/github_pull_requests
-      parent: code_analysis
-      identifier: code_analysis_github_prs
-      weight: 4
-    - name: IDE Plugins
-      url: code_analysis/ide_plugins
-      parent: code_analysis
-      identifier: code_analysis_ide_plugins
-      weight: 5
-    - name: Git Hooks
-      url: code_analysis/git_hooks
-      parent: code_analysis
-      identifier: code_analysis_git_hooks
-      weight: 6
-    - name: Troubleshooting
-      url: code_analysis/troubleshooting
-      parent: code_analysis
-      identifier: code_analysis_troubleshooting
-      weight: 7
     - name: Quality Gates
       url: quality_gates/
       pre: ci
@@ -5599,6 +5574,11 @@ menu:
       parent: log_management
       identifier: log_troubleshooting
       weight: 10
+    - name: Live Tail
+      url: logs/troubleshooting/live_tail
+      parent: log_troubleshooting
+      identifier: log_troubleshooting_live_tail
+      weight: 1001
     - name: Security Overview
       url: security/
       pre: security-platform
@@ -5787,21 +5767,26 @@ menu:
       parent: csm_setup
       identifier: csm_setup_cloudtrail
       weight: 103
-    - name: Set Up Iac Remediation
+    - name: Set Up IaC Scanning
+      url: security/cloud_security_management/setup/iac_scanning
+      parent: csm_setup
+      identifier: csm_setup_iac_scanning
+      weight: 104
+    - name: Set Up IaC Remediation
       url: security/cloud_security_management/setup/iac_remediation
       parent: csm_setup
       identifier: csm_setup_iac_remediation
-      weight: 104
+      weight: 105
     - name: Set Up without Infrastructure Monitoring
       url: security/cloud_security_management/setup/without_infrastructure_monitoring
       parent: csm_setup
       identifier: csm_setup_without_infrastructure_monitoring
-      weight: 105
+      weight: 106
     - name: Deploy via Cloud Integrations
       url: security/cloud_security_management/setup/cloud_integrations
       parent: csm_setup
       identifier: csm_setup_cloud_integrations
-      weight: 106
+      weight: 107
     - name: Threats
       url: security/threats/
       parent: csm
@@ -5988,36 +5973,6 @@ menu:
       parent: application_security
       identifier: appsec_howitworks
       weight: 3
-    - name: Software Composition Analysis
-      url: security/application_security/software_composition_analysis/
-      parent: application_security
-      identifier: application_security_software_composition_analysis
-      weight: 5
-    - name: Setup
-      url: security/application_security/software_composition_analysis/setup/
-      parent: application_security_software_composition_analysis
-      identifier: application_security_software_composition_analysis_setup
-      weight: 1
-    - name: Library Compatibility
-      url: security/application_security/software_composition_analysis/setup/compatibility/
-      parent: application_security_software_composition_analysis_setup
-      identifier: appsec_compat_sca
-      weight: 2
-    - name: Code Security
-      url: security/application_security/code_security/
-      parent: application_security
-      identifier: application_security_code_security
-      weight: 6
-    - name: Setup
-      url: security/application_security/code_security/setup/
-      parent: application_security_code_security
-      identifier: application_security_code_security_setup
-      weight: 1
-    - name: Library Compatibility
-      url: security/application_security/code_security/setup/compatibility/
-      parent: application_security_code_security_setup
-      identifier: appsec_compat_code_security
-      weight: 2
     - name: Threat Management
       url: security/application_security/threats/
       parent: application_security
@@ -6098,6 +6053,16 @@ menu:
       parent: appsec_threats
       identifier: threats_user_info
       weight: 722
+    - name: Attacker Fingerprint
+      url: security/application_security/threats/attacker_fingerprint/
+      parent: appsec_threats
+      identifier: threats_attacker_fingerprint
+      weight: 723
+    - name: Attacker Clustering
+      url: security/application_security/threats/attacker_clustering/
+      parent: appsec_threats
+      identifier: threats_attacker_clustering
+      weight: 724
     - name: Application Security for Serverless
       url: security/application_security/serverless/
       parent: application_security
@@ -6123,6 +6088,102 @@ menu:
       parent: application_security
       identifier: appsec_troubleshooting
       weight: 11
+    - name: Code Security
+      identifier: code_security
+      url: /security/code_security/
+      parent: security_platform_heading
+      pre: security-code-security
+      weight: 50000
+    - name: Static Code Analysis (SAST)
+      identifier: sec_static_analysis
+      url: /security/code_security/static_analysis/
+      parent: code_security
+      weight: 1
+    - name: Setup
+      identifier: sec_static_analysis_setup
+      url: /security/code_security/static_analysis/setup/
+      parent: sec_static_analysis
+      weight: 1
+    - name: GitHub Actions
+      identifier: sec_static_analysis_github_actions
+      url: /security/code_security/static_analysis/github_actions/
+      parent: sec_static_analysis
+      weight: 2
+    - name: CircleCI Orbs
+      identifier: sec_static_analysis_circleci_orbs
+      url: /security/code_security/static_analysis/circleci_orbs/
+      parent: sec_static_analysis
+      weight: 3
+    - name: Generic CI Providers
+      identifier: sec_static_analysis_generic_ci_providers
+      url: /security/code_security/static_analysis/generic_ci_providers/
+      parent: sec_static_analysis
+      weight: 4
+    - name: Static Code Analysis (SAST) rules
+      identifier: sec_static_analysis_rules
+      url: /security/code_security/static_analysis/static_analysis_rules/
+      parent: sec_static_analysis
+      weight: 5
+    - name: Software Composition Analysis
+      identifier: software_composition_analysis
+      url: /security/code_security/software_composition_analysis/
+      parent: code_security
+      weight: 2
+    - name: Static Setup
+      identifier: sca_setup_static
+      url: /security/code_security/software_composition_analysis/setup_static/
+      parent: software_composition_analysis
+      weight: 1
+    - name: Runtime Setup
+      identifier: sca_setup_runtime
+      url: /security/code_security/software_composition_analysis/setup_runtime/
+      parent: software_composition_analysis
+      weight: 2
+    - name: Library Compatibility
+      identifier: sca_setup_runtime_compatibility
+      url: /security/code_security/software_composition_analysis/setup_runtime/compatibility/
+      parent: sca_setup_runtime
+      weight: 1
+    - name: IAST
+      identifier: sec_iast
+      url: /security/code_security/iast/
+      parent: code_security
+      weight: 3
+    - name: Setup
+      identifier: sec_iast_setup
+      url: /security/code_security/iast/setup/
+      parent: sec_iast
+      weight: 1
+    - name: Dev tool integrations
+      identifier: dev_tool_int
+      url: /security/code_security/dev_tool_int/
+      parent: code_security
+      weight: 4
+    - name: GitHub Pull Requests
+      identifier: dev_tool_int_github_pull_requests
+      url: /security/code_security/dev_tool_int/github_pull_requests/
+      parent: dev_tool_int
+      weight: 1
+    - name: IDE Plugins
+      identifier: dev_tool_int_ide_plugins
+      url: /security/code_security/dev_tool_int/ide_plugins/
+      parent: dev_tool_int
+      weight: 2
+    - name: Git Hooks
+      identifier: dev_tool_int_git_hooks
+      url: /security/code_security/dev_tool_int/git_hooks/
+      parent: dev_tool_int
+      weight: 3
+    - name: Troubleshooting
+      identifier: sec_code_sec_tshoot
+      url: /security/code_security/troubleshooting/
+      parent: code_security
+      weight: 5
+    - name: Guides
+      identifier: code_security_guides
+      url: /security/code_security/guides/
+      parent: code_security
+      weight: 6      
     - name: Synthetic Testing and Monitoring
       url: synthetics/
       pre: synthetics
@@ -6851,16 +6912,11 @@ menu:
       parent: rum_mobile_unity
       identifier: rum_mobile_unity_mobile_vitals
       weight: 105
-    - name: Web View Tracking
-      url: real_user_monitoring/mobile_and_tv_monitoring/unity/web_view_tracking
-      parent: rum_mobile_unity
-      identifier: rum_mobile_unity_web_view_tracking
-      weight: 106
     - name: Troubleshooting
       url: real_user_monitoring/mobile_and_tv_monitoring/unity/troubleshooting
       parent: rum_mobile_unity
       identifier: rum_mobile_unity_troubleshooting
-      weight: 107
+      weight: 106
     - name: Platform
       identifier: real_user_monitoring_platform
       url: real_user_monitoring/platform
@@ -7092,15 +7148,15 @@ menu:
       parent: product_analytics
       identifier: pa_journeys
       weight: 2
+    - name: Pathway Diagrams
+      url: product_analytics/journeys/pathways
+      parent: pa_journeys
+      identifier: pa_pathways
+      weight: 201
     - name: Funnel Analysis
       url: product_analytics/journeys/funnel_analysis
       parent: pa_journeys
       identifier: pa_funnel_analysis
-      weight: 201
-    - name: Sankey Diagrams
-      url: product_analytics/journeys/sankey
-      parent: pa_journeys
-      identifier: pa_sankey
       weight: 202
     - name: Heatmaps
       url: product_analytics/heatmaps
@@ -7192,6 +7248,11 @@ menu:
       parent: product_analytics
       identifier: pa_segmentation
       weight: 6
+    - name: Troubleshooting
+      url: product_analytics/troubleshooting/
+      parent: product_analytics
+      identifier: pa_troubleshooting
+      weight: 7
     - name: Account Management
       url: account_management/
       pre: cog-2

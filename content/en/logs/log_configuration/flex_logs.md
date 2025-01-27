@@ -42,7 +42,7 @@ Datadog Log Management provides the following solutions:
 - Flex Logs for logs that need to be retained long-term, but sometimes need to be queried urgently, such as security, transaction, and network logs.
 - Archiving for logs that are infrequently queried and need to be stored long-term, such as audit and configuration logs.
 
-Use the spectrum of log types shown in the image below to determine when to use the Flex Logs tier. Any high volume, infrequent access, or long term retention log sources are good candidates. You can also retain logs in Standard Indexing first and then extend them using Flex Logs; this is a perfect solution for application logs that you need to retain for longer. See [Potential sources for sending directly to the Flex Logs tier](#potential-sources-for-sending-directly-to-the-flex-logs) for more information.
+Use the spectrum of log types shown in the image below to determine when to use the Flex Logs tier. Any high volume, infrequent access, or long term retention log sources are good candidates. You can also retain logs in Standard Indexing first and then extend them using Flex Logs; this is a perfect solution for application logs that you need to retain for longer. See [Potential sources for sending directly to the Flex Logs tier](#potential-sources-for-sending-directly-to-flex-logs) for more information.
 
 {{< img src="logs/log_configuration/flex_logging/logs-spectrum.png" alt="Logs indexing and access frequency spectrum graph" style="width:100%;" >}}
 
