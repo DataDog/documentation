@@ -20,8 +20,9 @@ Click **Manage mappings**. This opens a side panel:
 
 These are the mappings available:
 
-| Log Source          | Log Type                                      | OCSF Category            |
-|---------------------|-----------------------------------------------|--------------------------|
-| AWS CloudTrail      | Type: Management<br>EventName: ChangePassword | Account Change (3001)    |
-| Okta                | User session start                            | Authentication (3002)    |
-| Palo Alto Networks  | Traffic                                       | Network Activity (4001)  |
+| Log Source             | Log Type                                      | OCSF Category                 |
+|------------------------|-----------------------------------------------|-------------------------------|
+| AWS CloudTrail         | Type: Management<br>EventName: ChangePassword | Account Change (3001)         |
+| Okta                   | User session start                            | Authentication (3002)         |
+| Palo Alto Networks     | Traffic                                       | Network Activity (4001)       |
+| Google Workspace Admin | addPrivilege                                  | User Account Management (3005)|
