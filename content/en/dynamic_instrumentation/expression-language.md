@@ -55,9 +55,9 @@ The following examples use a variable named `myCollection` defined as `[1,2,3]`:
 
 | Operation | Description | Example |
 |-----------|-------------|---------|
-| `any(value_src, {predicate})` | Checks if there is at least one element in the collection that satisfies the given predicate. The current element is accessed with the `@it` reference. | `any(myCollection, @it > 2)` -> `True` |
-| `all(value_src, {predicate})` | Checks whether every element in a collection satisfies the specified predicate. The current element is accessed with the `@it` reference. | `all(myCollection, @it < 4)` -> `True` |
-| `filter(value_src, {predicate})` | Filters the elements of the collection using the predicate. The current element is accessed with the `@it` reference. | `filter(myCollection, @it > 1)` -> `[2,3]` |
+| `any(value_src, {predicate})` | Checks if there is at least one element in the collection that satisfies the given predicate. The current element is accessed with the `@it` reference. | `any(myCollection, {@it > 2})` -> `True` |
+| `all(value_src, {predicate})` | Checks whether every element in a collection satisfies the specified predicate. The current element is accessed with the `@it` reference. | `all(myCollection, {@it < 4})` -> `True` |
+| `filter(value_src, {predicate})` | Filters the elements of the collection using the predicate. The current element is accessed with the `@it` reference. | `filter(myCollection, {@it > 1})` -> `[2,3]` |
 | `len(value_src)` | Gets the collection size. | `len(myCollection)` -> `3` |
 | `[ n ]` | For collections, returns the nth item in the collection. For maps and dictionaries, returns the value that corresponds to the key `n`. If the item does not exist, the expression yields an error. | `myCollection[1]` -> `2` |
 
