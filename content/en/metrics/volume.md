@@ -36,7 +36,7 @@ Datadog provides you real-time _estimated_ usage metrics OOTB so you can underst
 - Your account's indexed custom metrics volume in real-time (and how much of that indexed volume hasn't been optimized with [Metrics without Limits™][3] yet) 
 - Your account's ingested custom metrics (emitted from metrics that have been configured with [Metrics without Limits™][3]) in real-time
 
-{{< img src="metrics/volume/volume_graphs.png" alt="Estimated real-time indexed and ingested Custom Metrics volume. Upon clicking export, you can easily create a monitor or export the graph to a notebook to share." style="width:100%;" >}}
+{{< img src="metrics/volume/volume_graph.png" alt="Estimated real-time indexed and ingested Custom Metrics volume. Upon clicking export, you can easily create a monitor or export the graph to a notebook to share." style="width:100%;" >}}
   
 
 ## Search, filter, and sort
