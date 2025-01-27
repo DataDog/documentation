@@ -41,6 +41,35 @@ The following is the list of IP ranges associated with the real devices used for
 `185.94.24.0/22`</br>
 `34.96.70.78`</br>
 
+## Troubleshooting
+
+If you experience issues with Mobile App Testing on restricted networks, use the following troubleshooting guidelines. If you need further assistance, contact [Datadog support][1].
+
+### Unable to launch recorder
+
+To launch the Mobile Application Testing (MAT) Recorder, Datadog needs to establish UDP/TCP TURN connections to enable WebRTC connections. If the user is behind a restrictive network (such as a strict firewall or VPN), these connections may fail, leading to the following error:
+
+{{< img src="/mobile_app_testing/restricted_networks/device_disconnected_error.png" alt="Screenshot of launching a mobile device, displaying the disconnected error." style="width:100%;" >}}
+
+To check for successful UDP/TCP TURN connections, run a network test using a [Twilio Network Test][2]. The result of the test confirms whether connectivity to TURN servers is successful or not. The following is an example of a successful connection:
+
+{{< img src="/mobile_app_testing/restricted_networks/twilio_test.png" alt="Screenshot of a successful test using a twilio network test." style="width:100%;" >}}
+
+If the test fails, Twilio generates a log output indicating errors due to an inability to establish a connection. For example:
+
+```
+[3:09:13 PM] Test "TURN UDP Connectivity" started...
+[3:09:20 PM] Error: Error: Could not establish a UDP connection to Twilio within 5 seconds
+[3:09:20 PM] Test "TURN TCP Connectivity" started...
+[3:09:25 PM] Error: Error: Could not establish a TCP connection to Twilio within 5 seconds
+[3:09:25 PM] Test "TURN TLS Connectivity" started...
+[3:09:30 PM] Error: Error: Could not establish a TLS connection to Twilio within 5 seconds
+[3:09:30 PM] Test "Bandwidth" started...
+[3:09:35 PM] Error: Error: Could not establish a connection to Twilio within 5 seconds
+```
+
+[1]: /help
+[2]: https://networktest.twilio.com/
 
 ## Further reading
 
