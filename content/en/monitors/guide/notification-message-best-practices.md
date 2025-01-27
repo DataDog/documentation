@@ -10,7 +10,7 @@ further_reading:
 
 Monitors are essential for keeping businesses and systems running smoothly. When a monitor alerts, it signals that attention is needed. However, detecting an issue is only the tip of the iceberg, the notification is what greatly impacts the resolution time.
 
-Notification messages are the bridge between your monitoring system and the people who can fix the problem. If the message is unclear or poorly written, it can cause confusion, slow down response times, or even result in unresolved issues. On the other hand, a clear and actionable message helps your team quickly understand what's wrong and what to do next.
+Notification messages bridge the gap between your monitoring system and problem solvers. Unclear or poorly written messages can cause confusion, slow down response times, or unresolved issues. Whereas a clear and actionable message helps your team quickly understand what's wrong and what to do next.
 
 This guide will show you how to write better notification messages. You'll learn the key principles of effective communication, common mistakes to avoid, and tips for crafting messages that get results. Whether you're a product manager, developer, or operations professional, this guide will help you create notifications that keep your systems reliable and your team efficient.
 
