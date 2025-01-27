@@ -22852,6 +22852,7 @@ components:
     Version:
       description: Version of the updated signal. If server side version is higher,
         update will be rejected.
+      example: 0
       format: int64
       type: integer
     WebhooksIntegration:
