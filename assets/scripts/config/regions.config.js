@@ -109,6 +109,15 @@ export default {
       ap1: 'http-intake.logs.ap1.datadoghq.com',
       gov: 'http-intake.logs.ddog-gov.com'
     },
+
+    http_endpoint_full: {
+      us: 'https://http-intake.logs.datadoghq.com',
+      us3: 'https://http-intake.logs.us3.datadoghq.com',
+      us5: 'https://http-intake.logs.us5.datadoghq.com',
+      eu: 'https://http-intake.logs.datadoghq.eu',
+      ap1: 'https://http-intake.logs.ap1.datadoghq.com',
+      gov: 'https://http-intake.logs.ddog-gov.com'
+    },
     http_port: {
       us: '443',
       us3: '443',
