@@ -12,6 +12,7 @@ further_reading:
 
 Using [Terraform][1], you can create the Datadog IAM role, policy document, and the Datadog-AWS integration with a single `terraform apply` command.
 
+
 1. Configure the [Datadog Terraform provider][2] to interact with the Datadog API through a Terraform configuration.
 
 {{< site-region region="us,us3,us5,eu" >}}
