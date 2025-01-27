@@ -1,31 +1,35 @@
 ---
 title: Connections
-description: Workflow connections
+description: Connections for actions
 further_reading:
 - link: "/getting_started/workflow_automation/"
   tag: "Documentation"
   text: "Getting Started with Workflow Automation"
-algolia:
-  tags: ['workflow', 'workflows', 'workflow automation']
+- link: "/service_management/app_builder/"
+  tag: "Documentation"
+  text: "App Builder documentation"
 aliases:
 - /workflows/connections
 - /workflows/setup
+- /service_management/workflows/connections
+- /service_management/app_builder/connections
 disable_toc: false
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">Workflow Automation is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-warning">Workflow Automation and App Builder are not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
-Because workflow actions connect with external software systems, you may need to authenticate your Datadog account to the corresponding integration. A workflow can run successfully only if every workflow action that requires authentication can verify the identity of your Datadog account. When granting permissions to Datadog, ensure that you're following security best practice and only granting the permissions necessary for a workflow to run.
+Because actions connect with external software systems, you may need to authenticate your Datadog account to the corresponding integration. An app or workflow can run successfully only if every action that requires authentication can verify the identity of your Datadog account. When granting permissions to Datadog, ensure that you're following security best practice and only granting the permissions necessary for an app or workflow to run.
 
-Workflow actions can be authenticated in two ways:
+Actions can be authenticated in two ways:
 - Credentials and permissions configured in the integration tile
 - Connection credentials
 
 ## Integration tile credentials
 
-Credentials and account authentication that you set up in the following Datadog integration tiles automatically propagate to the corresponding actions in Workflow Automation:
+Credentials and account authentication that you set up in the following Datadog integration tiles automatically propagate to the corresponding actions in workflows or apps:
+
 - GitHub
 - Jira
 - Microsoft Teams
@@ -40,7 +44,7 @@ If the integration you need to set up is not listed above, set up connection cre
 
 ## Connection credentials
 
-Workflow connections extend your installed integrations to give you control over workflow step authentication. Use connection credentials to authenticate a [generic action][8] or any action for which the integration tile does not offer authentication. For a list of integrations that use the integration tile for authentication, see the [Integration tile credentials](#integration-tile-credentials) section. Connection credentials are only available for use within the Workflow Automation and App Builder products.
+Connections extend your installed integrations to give you control over workflow step authentication. Use connection credentials to authenticate a [generic action][8] or any action for which the integration tile does not offer authentication. For a list of integrations that use the integration tile for authentication, see the [Integration tile credentials](#integration-tile-credentials) section. Connection credentials are only available for use within the Workflow Automation and App Builder products.
 
 Connections support the following example use cases:
 - The integration you need is not available as a built-in connection.
@@ -52,13 +56,13 @@ Connections support the following example use cases:
 
 Before you create a connection, think about the permissions needed to fulfill the required task and grant the connection only the necessary permissions to fulfill that task. In addition, the connection should be restricted to only the people who need to use it.
 
-Where possible, use granular connections for different workflows. For example, if you have a workflow that writes to an Amazon S3 bucket, and a workflow that terminates Amazon EC2 instances, do not use the same connection for both workflows. Instead, create two respective connections, each corresponding to an IAM role with limited scope.
+Where possible, use granular connections for different workflows or apps. For example, if you have a workflow that writes to an Amazon S3 bucket, and an app that terminates Amazon EC2 instances, do not use the same connection for both. Instead, create two respective connections, each corresponding to an IAM role with limited scope.
 
 ## Work with connections
 
 ### View connections
 
-1. From the [Workflow Automation page][2], click **Connections** in the upper right. The [connections list][3] opens.
+1. From the [Workflow Automation page][2] or the [App Builder page][14], click the **Connections** tab. The connections list opens.
 1. Click on a single line to view connection details.
 
 ### Create a connection
@@ -68,19 +72,39 @@ Establishing a connection requires the following information:
 - How to authenticate (for example, API key, username/password, oauth)
 
 To create a connection:
-1. Navigate to the [connections list][3].
+1. From the [Workflow Automation page][2] or the [App Builder page][14], click the **Connections** tab. The connections list opens.
 1. Click the **New Connection** button in the upper right. The **New Connection** dialog box appears.
 1. Click on an icon to choose an integration schema.
 1. Fill in the appropriate fields. <div class="alert alert-info">If you want to add the connection to a connection group in the future, add one or more [Identifier Tags](#connection-identifier-tags).</div>
 1. Click **Create**.
 
-Alternatively, add a connection from the workflow page:
-1. Navigate to the [Workflow Automation list][9].
+Alternatively, add a connection from a workflow or app page:
+
+
+{{< tabs >}}
+{{% tab "Workflow Automation" %}}
+1. Navigate to the [Workflow Automation list][1].
 1. Select the workflow containing the action to which you need to add a credential. The workflow builder appears.
 1. In the workflow visualization, click the action to which you need to add a credential. The right side panel populates with the action details.
 1. Under the **Configure** tab, look for the **Connection** dropdown and click the **+** icon.
 1. In the **New Connection** dialog box, name the connection and enter the required authentication details.
 1. Click **Save**.
+
+[1]: https://app.datadoghq.com/workflow
+{{% /tab %}}
+
+{{% tab "App Builder" %}}
+1. Navigate to the [App Builder app list][1].
+1. Select the app containing the action you need to add a credential to. The app canvas appears.
+1. Click **Edit** in the upper right.
+1. Under **Data** on the left-hand side, click the action to which you need to add a credential. The left side panel populates with the action details.
+1. Look for the **Connection** dropdown and click the **+** icon.
+1. In the **New Connection** dialog box, name the connection and enter the required authentication details.
+1. Click **Save**.
+
+[1]: https://app.datadoghq.com/app-builder
+{{% /tab %}}
+{{< /tabs >}}
 
 The example below shows the **New Connection** dialog box for the OpenAI connection. Each connection requires different authentication information. The OpenAI connection requires a valid Connection Name and API Token.
 
@@ -88,7 +112,7 @@ The example below shows the **New Connection** dialog box for the OpenAI connect
 
 ### Edit a connection
 
-1. Navigate to the [connections list][3].
+1. From the [Workflow Automation page][2] or the [App Builder page][14], click the **Connections** tab. The connections list opens.
 1. Hover over the connection you would like to edit. **Edit**, **Permissions**, and **Delete** icons appear on the right.
 1. Click the pencil (**Edit**) icon. A dialog box appears.
 1. Update the fields you would like to change.
@@ -103,11 +127,11 @@ The example below shows the **New Connection** dialog box for the OpenAI connect
 
 ### Restrict connection use
 
-To learn how to restrict connection use, see [Access and Authentication][4].
+To learn how to restrict connection use, see Access and Authentication for [Workflow Automation][4] or [App Builder][15].
 
 ## HTTP connection
 
-To connect to an arbitrary service, use the HTTP connection type. For authentication options and setup instructions, see [HTTP action][10].
+To connect to an arbitrary service, use the HTTP connection type. For authentication options and setup instructions, see the [HTTP action][10].
 
 ## Connection identifier tags
 
@@ -122,6 +146,8 @@ You can add identifier tags to connections. The tagging rules for connections ar
 - `default` is a reserved value for connection identifier tags. It can't be used as a stand-alone tag key or as a tag value. For example, `default:yes` and `aws:default` are invalid for connection tags.
 
 ## Connection groups
+
+<div class="alert alert-warning"><strong>Note</strong>: Connection groups are available in Workflow Automation. They are not available in App Builder.</div>
 
 You can create groups of connections so that your workflows can authenticate into the correct account or accounts based on the given inputs. Connections can be grouped together only if they share the same integration (for example, you cannot group GCP and AWS connections within the same group). 
 
@@ -178,7 +204,7 @@ To delete a connection group:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-<br>Do you have questions or feedback? Join the **#workflows** channel on the [Datadog Community Slack][11].
+<br>Do you have questions or feedback? Join the **#workflows** or **#app-builder** channel on the [Datadog Community Slack][11].
 
 [2]: https://app.datadoghq.com/workflow
 [3]: https://app.datadoghq.com/workflow/connections
@@ -186,7 +212,9 @@ To delete a connection group:
 [6]: /integrations/
 [8]: /service_management/workflows/actions/
 [9]: https://app.datadoghq.com/workflow
-[10]: /service_management/workflows/actions/http/
+[10]: /actions/http/
 [11]: https://datadoghq.slack.com/
 [12]: /service_management/workflows/access/#restrict-access-on-a-specific-connection
 [13]: /getting_started/tagging/
+[14]: https://app.datadoghq.com/app-builder/
+[15]: /service_management/app_builder/auth/
