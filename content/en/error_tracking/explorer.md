@@ -72,4 +72,4 @@ Each event generated is tagged with the version, the service, and the environmen
 
 [1]: /events
 [2]: /monitors/types/event/
-[3]: /error_tracking/suspected_cause
+[3]: /error_tracking/suspected_causes
