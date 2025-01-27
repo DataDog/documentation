@@ -108,9 +108,13 @@ To view a metric's related assets:
 2. Scroll down to the section of the side panel titled **Related Assets**.
 3. Click the dropdown button to view the type of related asset you are interested in (dashboards, monitors, notebooks, SLOs). You can use the search bar to validate specific assets.
 
-## Identify culprit tags driving up your metric's volume
-(PREVIEW BANNER HERE) 
-{{< img src="metrics/volume/tagsexplorer.png" alt="Custom Metrics Tags Cardinality Explorer for a spiking metric name" style="width:80%;">}}
+## Identify tags driving up your metric's volume
+
+{{< callout url="#" btn_hidden="true" >}}
+  Custom Metrics Tags Cardinality Explorer is in Preview!
+{{< /callout >}} 
+
+{{< img src="metrics/tagsexplorer.png" alt="Custom Metrics Tags Cardinality Explorer for a spiking metric name" style="width:80%;">}}
 
  To determine why a particular metric name is emitting a very large number of custom metrics or is spiking, use the Custom Metrics Tags Cardinality Explorer to quickly pinpoint which tag key(s) are driving this spike. These are the tags you can immediately exclude using Metrics without Limits™ to quickly achieve cost savings.
 
