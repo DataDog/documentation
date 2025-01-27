@@ -17,7 +17,7 @@ Configure mute rules to streamline security alerts by automatically filtering ou
 ## Create a mute rule
 
 1. On the [Automation Pipelines][2] page, click **Add a New Rule** and select **Mute**.
-1. Enter a descriptive name for the rule, for example, Cloud Infrastructure Anomaly Warnings.
+1. Enter a descriptive name for the rule, for example, **Cloud Infrastructure Anomaly Warnings**.
 1. Use the following boxes to configure the rule criteria:
     - **Any of these types**: The types of findings that the rule should check for. Available types include **Misconfiguration**, **Attack Path**, **Identity Risk**, and **API Security Finding**.
     - **Any of these tags or attributes**: The resource tags or attributes that must match for the rule to apply.
