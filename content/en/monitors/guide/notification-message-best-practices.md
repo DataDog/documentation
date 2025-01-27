@@ -8,8 +8,7 @@ further_reading:
 
 # Overview
 
-Monitoring systems are essential for keeping businesses and systems running smoothly. When a monitor is alerting, it means something needs attention.   
-But detecting an issue only represents the tip of the iceberg; what you receive as notification is what will impact the resolution time the most.
+Monitors are essential for keeping businesses and systems running smoothly. When a monitor alerts, it signals that attention is needed. However, detecting an issue is only the tip of the iceberg, the notification is what greatly impacts the resolution time.
 
 Notification messages are the bridge between your monitoring system and the people who can fix the problem. If the message is unclear or poorly written, it can cause confusion, slow down response times, or even result in unresolved issues. On the other hand, a clear and actionable message helps your team quickly understand what's wrong and what to do next.
 
