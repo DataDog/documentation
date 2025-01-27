@@ -280,7 +280,7 @@ multifiltersearch:
       cloud_provider: AWS
       resource_type: Kubernetes containers
       recommendation_type: Over-provisioned Kubernetes Containers
-      recommendation_description: Containers with less than 30% CPU and memory utilization.
+      recommendation_description: Containers with less than 30% max CPU or memory utilization.
       recommendation_prerequisites: "[Datadog profiling agent](/profiler/enabling/)"
     - category: Over-provisioned resource
       cloud_provider: AWS

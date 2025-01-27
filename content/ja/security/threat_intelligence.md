@@ -22,7 +22,7 @@ title: Threat Intelligence
 {{< product-availability >}}
 
 ## Overview
-Threat Intelligence is reputation information that helps responders make informed decisions on attacks and compromises. 
+Threat Intelligence is reputation information that helps responders make informed decisions on attacks and compromises.
 
 Datadog curates commercial, open-source, and in-house threat intelligence indicators of compromise into categories and intents. Threat intelligence is updated at least once per day, per source. This data is used to enrich your logs and traces with relevant reputation information.
 
@@ -52,7 +52,7 @@ With threat intelligence, reputation is key, but it must be weighed alongside ot
 
 Threat intelligence used in [Detection Rules][1] should reference the Datadog keys such as category (`@threat_intel.results.category`) and intent (`@threat_intel.results.intention`). Other keys should not be used.
 
-## Transparency in Threat Intelligence 
+## Transparency in Threat Intelligence
 
 Datadog ensures transparency by providing external links to external threat intelligence sources associated with a detection. Threat intelligence curated by Datadog is ingested into the Datadog platform for enrichment and detection. Datadog does not send customer data to threat intelligence sources.
 
@@ -60,13 +60,14 @@ The detections and enrichments are accessible in the UI and event JSON.
 
 ## Threat Intelligence Facets
 
-Sources, categories, and intents are available as facets and filters on relevant product explorers. 
+Sources, categories, and intents are available as facets and filters on relevant product explorers.
 
 ### Threat Intelligence Sources
 
-| Source | Category | Source Use Cases | Primary Products | 
+| Source | Category | Source Use Cases | Primary Products |
 |--------|------------|-----------|------------------|
 | Datadog Threat Research| scanners, exploits | Honeypots focused on software specific threats | ASM and CWS |
+| [Datadog ASM](https://docs.datadoghq.com/security/application_security/) | scanner | List of IPs that have been observed attacking multiple ASM customers | ASM |
 | [Spur](https://spur.us/) | residential_proxy | Proxies associated credential stuffing and fraud | ASM and Cloud SIEM |
 | [Spur](https://spur.us/) | malware_proxy | Proxies associated with malware command and control | Cloud SIEM |
 | [Abuse.ch](https://abuse.ch/) Malware Bazaar| malware | Malware on hosts | CWS |
@@ -88,19 +89,19 @@ Sources, categories, and intents are available as facets and filters on relevant
 | Intent | Use Case |
 |--------|----------|
 | benign | Corporate VPNs and informational enrichments |
-| suspicious | Low reputation | 
-| malicious | Malicious reputation | 
+| suspicious | Low reputation |
+| malicious | Malicious reputation |
 
 
 ## Entity Types
-| Entity Type | Example | Use Cases | 
+| Entity Type | Example | Use Cases |
 |-------------|---------|-----------------------------|
-| IP addresses | 128.66.0.1 | Identify IP addresses associated with attacks, command and control, and scanning activity | 
+| IP addresses | 128.66.0.1 | Identify IP addresses associated with attacks, command and control, and scanning activity |
 | domains | example.com, subdomain.example.com | Domains associated with malicious use. Often used with malware as a command and control |
 | application packages versions | (example_package, 1.0.0) | Identify malicious packages downloaded from PyPi |
 | file hashes [SHA1, SHA256] | 5f7afeeee13aaee6874a59a510b75767156f75d14db0cd4e1725ee619730ccc8 | Identify a distinct file associated with malware or compromise |</br>
 
-**Note**: Threat intelligence sources and categories are not configurable at this time. 
+**Note**: Threat intelligence sources and categories are not configurable at this time.
 
 ## Further Reading
 

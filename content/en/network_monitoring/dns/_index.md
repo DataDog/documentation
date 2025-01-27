@@ -17,6 +17,9 @@ further_reading:
     - link: 'https://www.datadoghq.com/blog/dns-resolution-datadog/'
       tag: 'Blog'
       text: 'Use DNS resolution to monitor cloud and external endpoints'
+    - link: "https://www.datadoghq.com/blog/monitor-dns-logs-for-network-and-security-datadog/"
+      tag: "Blog"
+      text: "Monitor DNS logs for network and security analysis"
 ---
 
 {{< img src="network_performance_monitoring/dns_monitoring/dns_overview.png" alt="The DNS monitoring page in Datadog" >}}
