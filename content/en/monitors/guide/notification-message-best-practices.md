@@ -3,23 +3,23 @@ title: Notification Message Best Practices
 further_reading:
 - link: "/monitors/notify/"
   tag: "Documentation"
-  text: "Learn more about Monitor Nofications"
+  text: "Learn more about Monitor Notifications"
 ---
 
-# Overview
+## Overview
 
 Monitors are essential for keeping businesses and systems running smoothly. When a monitor alerts, it signals that attention is needed. However, detecting an issue is only the tip of the iceberg, the notification is what greatly impacts the resolution time.
 
 Notification messages bridge the gap between your monitoring system and problem solvers. Unclear or poorly written messages can cause confusion, slow down response times, or unresolved issues. Whereas a clear and actionable message helps your team quickly understand what's wrong and what to do next.
 
 Use this guide to improve your notification messages and learn about:
--  Key principles of effective communication 
+- Key principles of effective communication 
 - Common mistakes to avoid
 - Tips for crafting messages that get results
 
 From product managers to developers, this resource ensures notifications enhance system reliability and team efficiency.
 
-# Notification Configuration
+## Notification Configuration
 
 The first step is to configure the notification with the required fields:
 * [**Monitor Name**](#name), which is also the Notification title.  
@@ -28,7 +28,7 @@ The first step is to configure the notification with the required fields:
 {{< img src="/monitors/guide/notification_message_best_practices/monitor_notification_message.png" alt="Monitor notification message configuration" style="width:100%;" >}}
 
 
-## Name
+### Name
 
 The monitor title should give a clear description of the signal, including:
 
@@ -45,7 +45,7 @@ Example of a bad title:
 
 Although both the examples above are referring to a memory consumption monitor, the first one gives a complete representation of the ongoing issue with some necessary context to narrow down the investigation.
 
-## Message
+### Message
 
 The notification body is one of the first things on-call responders will start to read to know how to act on the alert they just received. Be concise, write accurate information that is as legible as possible.
 
@@ -62,7 +62,7 @@ Lastly, make sure your notification is routed to the right person/right recipien
 
 In the following sections you will learn how to use advanced features to further enhance your monitor messages. 
 
-### Variables
+#### Variables
 
 Using variables is a great way to tweak your notifications to receive just the right information that you need.   
 You have 2 types of variables:
@@ -78,7 +78,7 @@ Let's say you are monitoring the CPU usage of your containers, grouped by host.
 
 A great variable to use would be **{{host.name}}** to know the exact host that  triggered the alert.
 
-### Conditional variables
+#### Conditional variables
 
 These variables allow you to tailor the notification message based on your needs and use case by building some branch logic.
 
@@ -108,7 +108,7 @@ Example:
 
 For more information on how to use conditional variables, see the [documentation](https://docs.datadoghq.com/monitors/notify/variables/?tab=is_alert#conditional-variables). 
 
-### Template variables
+#### Template variables
 
 Add monitor template variables to access the metadata that caused your monitor to alert, such as {{value}}, but also information related to the context of the alert.
 
@@ -135,7 +135,7 @@ Example of links:
 [https://app.datadoghq.com/dash/integration/system_overview?tpl_var_scope=host:{{host.name](https://app.datadoghq.com/dash/integration/system_overview?tpl_var_scope=host:{{host.name)}}
 ```
 
-# Example of a notification message following best practices
+## Example of a notification message following best practices
 
 **\#\# What's happening?**  
 The CPU usage on {{host.name}} has exceeded the defined threshold.
