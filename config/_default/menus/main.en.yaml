@@ -6144,7 +6144,7 @@ menu:
       url: /security/code_security/software_composition_analysis/setup_runtime/compatibility/
       parent: sca_setup_runtime
       weight: 1
-    - name: IAST
+    - name: Runtime Code Analysis (IAST)
       identifier: sec_iast
       url: /security/code_security/iast/
       parent: code_security
