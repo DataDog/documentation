@@ -110,12 +110,14 @@ For more information on how to use conditional variables, see the [documentation
 
 ### Template variables
 
-On the other hand, if you want to get the metadata that caused your monitor to alert, you can use template variables such as {{value}}, but also information related to the context of the alert.
+Add monitor template variables to access the metadata that caused your monitor to alert, such as {{value}}, but also information related to the context of the alert.
 
-Example:  
-`The CPU for {{host.name}} (IP:{{host.ip}}) reached a critical value of {{value}}.`
+For example, if you want to see the hostname, IP and value of the monitor query:
+```
+The CPU for {{host.name}} (IP:{{host.ip}}) reached a critical value of {{value}}.
+```
 
-For more information on all the available template variables, see the [documentation](https://docs.datadoghq.com/monitors/notify/variables/?tab=is_alert#triggered-variables).
+For the list of available template variables, see the [documentation][3].
 
 Another way to use template variables is by creating dynamic links and handles, that will automatically route your notifications to the right handle or with the right links.  
 Example of handles:  
