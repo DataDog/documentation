@@ -586,7 +586,7 @@ If you're using the GitHub integration, click **Connect to preview** on error fr
 
 You can see full source code files in [**Dynamic Instrumentation**][102] when creating or editing an instrumentation (dynamic log, metric, span, or span tags).
 
-**Create New Instrumentation**
+#### Create new instrumentation
 
 1. Navigate to [**APM** > **Dynamic Instrumentation**][101].
 2. Select **Create New Instrumentation** and choose a service to instrument.
