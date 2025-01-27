@@ -84,7 +84,7 @@ See [Advanced Configurations][13] for bootstrapping options and for details on s
 
 {{< img src="observability_pipelines/templates_20241003.png" alt="The Observability Pipelines UI showing the six templates" style="width:100%;" >}}
 
-The [templates](#out-of-the-box-templates) are built for the following use cases:
+The templates are built for the following use cases:
 
 #### Log Volume Control
 
