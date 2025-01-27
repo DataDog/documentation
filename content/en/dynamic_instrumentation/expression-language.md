@@ -36,6 +36,7 @@ The following sections summarize the variables and operations that the Dynamic I
 | `@it`       | Provides access to the current value in collection iterating operations    |
 | `@exception`| Provides access to the current uncaught exception                          |
 
+**Note**: When you **instrument a specific line number**, only `@it` is available as a contextual variable. To access the full set of contextual variables (`@return`, `@duration`, `@it`, and `@exception`), **instrument the entire method** rather than a single line.
 
 ## String operations
 
