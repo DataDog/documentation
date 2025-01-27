@@ -12,7 +12,12 @@ Monitors are essential for keeping businesses and systems running smoothly. When
 
 Notification messages bridge the gap between your monitoring system and problem solvers. Unclear or poorly written messages can cause confusion, slow down response times, or unresolved issues. Whereas a clear and actionable message helps your team quickly understand what's wrong and what to do next.
 
-This guide will show you how to write better notification messages. You'll learn the key principles of effective communication, common mistakes to avoid, and tips for crafting messages that get results. Whether you're a product manager, developer, or operations professional, this guide will help you create notifications that keep your systems reliable and your team efficient.
+Use this guide to improve your notification messages and learn about:
+-  Key principles of effective communication 
+- Common mistakes to avoid
+- Tips for crafting messages that get results
+
+From product managers to developers, this resource ensures notifications enhance system reliability and team efficiency.
 
 # Notification Configuration
 
