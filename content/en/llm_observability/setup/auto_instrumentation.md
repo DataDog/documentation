@@ -23,7 +23,7 @@ Datadog's [LLM Observability Python SDK][16] provides integrations that automati
 
 | Framework                                  | Supported Versions | Tracer Version    |
 |--------------------------------------------|--------------------|-------------------|
-| [OpenAI](#openai), [Azure OpenAI](#openai) | >= 0.26.5          | >= 2.9.0          |
+| [OpenAI](#openai), [Azure OpenAI](#openai) | >= 1.0.0           | >= 2.9.0          |
 | [Langchain](#langchain)                    | >= 0.0.192         | >= 2.9.0          |
 | [Amazon Bedrock](#amazon-bedrock)          | >= 1.31.57         | >= 2.9.0          |
 | [Anthropic](#anthropic)                    | >= 0.28.0          | >= 2.10.0         |
