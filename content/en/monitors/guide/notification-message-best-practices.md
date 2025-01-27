@@ -131,7 +131,9 @@ Results in the following when the group service:ad-server triggers:
 ```
 
 Example of links:  
-[`https://app.datadoghq.com/dash/integration/system_overview?tpl_var_scope=host:{{host.name`](https://app.datadoghq.com/dash/integration/system_overview?tpl_var_scope=host:{{host.name)`}}`
+```
+[https://app.datadoghq.com/dash/integration/system_overview?tpl_var_scope=host:{{host.name](https://app.datadoghq.com/dash/integration/system_overview?tpl_var_scope=host:{{host.name)}}
+```
 
 # Example
 
