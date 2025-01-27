@@ -21,7 +21,10 @@ From product managers to developers, this resource ensures notifications enhance
 
 # Notification Configuration
 
-When configuring your monitors, one required step is to configure the notification.  
+The first step is to configure the notification with the required fields:
+* [**Monitor Name**](#name), which is also the Notification title.  
+* [**Monitor Message**](#message), which is the body of the notification.
+
 {{< img src="/monitors/guide/notification_message_best_practices/monitor_notification_message.png" alt="Monitor notification message configuration" style="width:100%;" >}}
 
 There are several fields to fill to configure it:
