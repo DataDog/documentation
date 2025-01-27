@@ -26,6 +26,14 @@ Configure due date rules to ensure vulnerabilities are addressed within your spe
 
 When Datadog identifies a vulnerability, it evaluates the vulnerability against your sequence of due date rules. Starting with the first rule, if there's a match, Datadog sets a due date on the vulnerability for the specified duration and stops evaluating further. If no match occurs, Datadog moves to the next rule. This process continues until a match is found or all rules are checked without a match.
 
+## Removing due dates
+
+When managing vulnerabilities, due dates can be removed under various conditions, such as:
+
+- The detection rule that triggered the vulnerability passes successfully.
+- The vulnerability is muted, either manually or automatically through a mute rule.
+- The due date rule associated with the vulnerability is disabled or deleted.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
