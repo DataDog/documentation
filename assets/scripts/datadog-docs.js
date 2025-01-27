@@ -344,6 +344,11 @@ function navClickEventHandler(event) {
     }
 }
 
+/**
+ * Determines if the link should be loaded via AJAX
+ * @param {object} element 
+ * @returns boolean
+ */
 function loadViaAjax(element) {
     let hasClassLoad = false;
     let parentHasClassOpen = false;
