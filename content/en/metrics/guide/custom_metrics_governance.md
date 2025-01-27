@@ -19,7 +19,7 @@ further_reading:
 
 Cloud-based applications can generate massive amounts of data and large observability costs, ultimately placing pressure on organizations to reduce this budget line item. To reduce observability costs, many teams resort to collecting fewer metrics; however, for centralized SRE and observability teams, effective custom metrics governance should increase monitoring efficiency rather than cut visibility entirely.
 
-This guide provides best practices for managing your custom metrics volumes through the three key components of effective metrics governance: **Visibility and Attribution**, **Actionable Custom Metrics Governance**, and **Monitoring and Prevention**. Learn how to use available Datadog tools to maintain cost-effective observability for these key components. You'll learn how to:
+This guide provides best practices for managing your custom metrics volumes through the three key components of effective metrics governance: **Visibility and Attribution**, **Actionable Custom Metrics Governance**, and **Monitoring and Prevention**. Learn how to use available Datadog tools to maintain cost-effective observability for these key components:
 - [Find and understand your metrics usage and costs](#visibility-and-attribution)
 - [Identify your largest cost drivers](#account-level-visibility)
 - [Attribute your largest cost drivers to the teams or services responsible for them](#team-level-visibility-and-attribution)
@@ -74,7 +74,7 @@ To identify which team or service is responsible for your top custom metric name
 
 1. From the [Plan & Usage page][2], scroll down to the *Usage Summary* section.
 1. Click the **Custom Metrics** tab to view your organization's billable usage, usage trends, and top custom metrics.
-1. Under the table for *Top Custom Metrics for <MONTH YEAR>*, click  the icon to **See in Metrics Summary** for the top custom metric. This takes you to the *Metrics Summary* page with the opened metric details side panel. 
+1. Under the table for *Top Custom Metrics for <MONTH YEAR>*, click the icon to **See in Metrics Summary** for the top custom metric. This takes you to the *Metrics Summary* page with the opened metric details side panel. 
 1. In the side panel, scroll down to the *Tags* section to view associated tags such as teams and service.
 
 
@@ -90,7 +90,7 @@ All users in your organization can see OOTB realtime estimated custom metrics us
 
 With Metrics Volume Management, you can identify your organization's largest metrics as well as the metric names spiking in volume (likely culprits of any unexpected overage).
 
-{{< img src="metrics/guide/volume_management_page.png" alt="Metrics Volume Management page" style="width:90%;" >}}
+{{< img src="metrics/guide/custom_metrics_governance/volume_management_page_2025-01-27.png" alt="Metrics Volume Management page" style="width:90%;" >}}
 
 For more information, see the [Metrics Volume Management][8] documentation.
 
@@ -98,7 +98,7 @@ For more information, see the [Metrics Volume Management][8] documentation.
 
 Effective custom metrics governance should increase monitoring efficiency. After you understand what your usage is and attribute usage to its source, take action to reduce your metrics. 
 
-In this section, you'll learn about the actions you can take to maximize the ROI and value you get from your observability spend without sacrificing the visibility your team actively relies on.
+In this section, learn about the actions you can take to maximize the ROI and value you get from your observability spend without sacrificing the visibility your team actively relies on.
 
 ### Metrics without Limits™
 
@@ -110,7 +110,7 @@ Reduce your indexed custom metrics volumes on any metric name by setting a tag c
 
 With Metrics without Limits™, Datadog automatically provides the following:
 - Up to date recommended tag configurations (based on our intelligent query insights) to help you maximize the ROI and value you get from your observability spend.
-- Intelligent query insights that continuously compute and analyze all users' interactions (both in-app and through the API) on any metrics submitted to us so that your recommended tag configurations are always relevant.
+- Intelligent query insights that continuously compute and analyze all users' interactions (both in-app and through the API) on any metrics submitted to Datadog so that your recommended tag configurations are always relevant.
 - Ability to roll back changes at any time to get full visibility into all your originally submitted data.
 
 As part of Datadog's metrics governance best practices, start by using Metrics without Limits on your [Top Custom Metrics](#identify-metrics-that-have-the-biggest-impact-on-monthly-bill).
@@ -142,7 +142,7 @@ Identify your organization's entire list of unqueried metrics over the past 30 d
 
 After you identify the metrics that your developers don't need, you can safely reduce the custom metrics volumes and reduce the costs of these unused metrics with Metrics without Limits™. 
 
-{{< img src="metrics/guide/custom_metrics_governance/manage_tags_fm_metrics_summary.png" alt="The Configure Metrics drop menu with the Manage tags selection highlighted" style="width:90%;" >}}
+{{< img src="metrics/guide/custom_metrics_governance/manage_tags_fm_metrics_summary_2025-01-27.png" alt="The Configure Metrics drop menu with the Manage tags selection highlighted" style="width:90%;" >}}
 
 5. At the top of the the [Metrics Summary page][6], click the **Configure Metrics** dropdown menu.
 6. Select **Manage tags** to open the [Metrics without Limits™ Tag configuration modal][13] to configure multiple metrics in bulk.
@@ -157,7 +157,7 @@ Even though a metric is not queried for the past 30 days, your teams might still
 
 Datadog's Metrics without Limits™ is a suite of features that also provide you with OOTB insights to assess the value of your actively queried metrics with [Metrics Related Assets][15]. A metrics related asset refers to any Datadog asset, such as a dashboard, notebook, monitor, or SLO that queries a particular metric. Use related asset popularity and quantity to evaluate metric utility within your organization, enabling data-driven decisions. Gain a better understanding of how your team can use existing metrics to get more value from your observability spend. 
 
-{{< img src="metrics/volume/related_assets.png" alt="Metric detail side panel showing the Related Assets section. The example metric is applied to one dashboard" style="width:100%;" >}}
+{{< img src="metrics/volume/related_assets_2025-01-27.png" alt="Metric detail side panel showing the Related Assets section. The example metric is applied to three dashboards" style="width:100%;" >}}
 
 To view a metric's related assets:
 1. Click on the metric name to open its details side panel.
