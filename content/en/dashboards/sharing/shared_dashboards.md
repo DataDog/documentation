@@ -88,7 +88,11 @@ By default, public dashboards are accessible for one year before they expire and
 
 ## Embedded shared dashboards
 
-You can embed shared dashboards into a website using an iframe. Access to these embedded dashboards is restricted to allowlisted request referrers. The HTTP request's referrer header is checked against the allowlisted entries for validation. To share an embedded dashboard:
+You can embed shared dashboards into a website using an iframe. Access to these embedded dashboards is restricted to allowlisted request referrers.
+
+The HTTP request's referrer header is checked against the allowlisted entries for validation. In most cases, typing `window.location.origin` into your browser console should give you the expected referrer. However, if you have any special manipulation on browser headers (ex: browser privacy settings) you should check the actual network request. 
+
+To share an embedded dashboard:
 
 1. Click **Share** in the upper-right corner of the dashboard.
 2. Select **Share Dashboard**.
