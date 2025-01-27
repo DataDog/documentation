@@ -121,10 +121,14 @@ For the list of available template variables, see the [documentation][3].
 
 You can also use template variables to create dynamic links and handles that automatically route your notifications.  
 Example of handles:  
-`@slack-{{service.name}} There is an ongoing issue with {{service.name}}.`
+```
+@slack-{{service.name}} There is an ongoing issue with {{service.name}}.
+```
 
-Will result in the following when the group service:ad-server triggers:  
-`@slack-ad-server There is an ongoing issue with ad-server.`
+Results in the following when the group service:ad-server triggers:  
+```
+@slack-ad-server There is an ongoing issue with ad-server.
+```
 
 Example of links:  
 [`https://app.datadoghq.com/dash/integration/system_overview?tpl_var_scope=host:{{host.name`](https://app.datadoghq.com/dash/integration/system_overview?tpl_var_scope=host:{{host.name)`}}`
