@@ -262,4 +262,3 @@ If you are using [Databricks Private Connectivity][14], reach out to the Datadog
 [14]: https://www.databricks.com/trust/security-features/secure-your-data-with-private-networking
 [15]: https://www.datadoghq.com/support/
 [16]: https://docs.databricks.com/en/security/network/front-end/ip-access-list-workspace.html
-[17]: https://ip-ranges.datadoghq.com/api.json
