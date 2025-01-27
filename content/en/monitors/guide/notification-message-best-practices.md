@@ -135,7 +135,7 @@ Example of links:
 [https://app.datadoghq.com/dash/integration/system_overview?tpl_var_scope=host:{{host.name](https://app.datadoghq.com/dash/integration/system_overview?tpl_var_scope=host:{{host.name)}}
 ```
 
-# Example
+# Example of a notification message following best practices
 
 **\#\# What's happening?**  
 The CPU usage on {{host.name}} has exceeded the defined threshold.
