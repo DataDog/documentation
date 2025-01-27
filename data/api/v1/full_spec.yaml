@@ -6033,6 +6033,9 @@ components:
 
         Make sure to use an application key created by an admin.'
       properties:
+        description:
+          description: A description of the pipeline.
+          type: string
         filter:
           $ref: '#/components/schemas/LogsFilter'
         id:
@@ -6054,6 +6057,12 @@ components:
           description: Ordered list of processors in this pipeline.
           items:
             $ref: '#/components/schemas/LogsProcessor'
+          type: array
+        tags:
+          description: A list of tags associated with the pipeline.
+          items:
+            description: A single tag using the format `key:value`.
+            type: string
           type: array
         type:
           description: Type of pipeline.
@@ -6891,6 +6900,62 @@ components:
       - FIREFOX_LAPTOP_LARGE
       - FIREFOX_TABLET
       - FIREFOX_MOBILE_SMALL
+    MonitorFormulaAndFunctionCostAggregator:
+      description: Aggregation methods for metric queries.
+      enum:
+      - avg
+      - sum
+      - max
+      - min
+      - last
+      - area
+      - l2norm
+      - percentile
+      - stddev
+      example: avg
+      type: string
+      x-enum-varnames:
+      - AVG
+      - SUM
+      - MAX
+      - MIN
+      - LAST
+      - AREA
+      - L2NORM
+      - PERCENTILE
+      - STDDEV
+    MonitorFormulaAndFunctionCostDataSource:
+      description: Data source for cost queries.
+      enum:
+      - metrics
+      - cloud_cost
+      - datadog_usage
+      example: cloud_cost
+      type: string
+      x-enum-varnames:
+      - METRICS
+      - CLOUD_COST
+      - DATADOG_USAGE
+    MonitorFormulaAndFunctionCostQueryDefinition:
+      description: A formula and functions cost query.
+      properties:
+        aggregator:
+          $ref: '#/components/schemas/MonitorFormulaAndFunctionCostAggregator'
+        data_source:
+          $ref: '#/components/schemas/MonitorFormulaAndFunctionCostDataSource'
+        name:
+          description: Name of the query for use in formulas.
+          example: query1
+          type: string
+        query:
+          description: The monitor query.
+          example: sum:all.cost{*}.rollup(sum, 86400)
+          type: string
+      required:
+      - name
+      - data_source
+      - query
+      type: object
     MonitorFormulaAndFunctionEventAggregation:
       description: Aggregation methods for event platform queries.
       enum:
@@ -7041,6 +7106,7 @@ components:
       description: A formula and function query.
       oneOf:
       - $ref: '#/components/schemas/MonitorFormulaAndFunctionEventQueryDefinition'
+      - $ref: '#/components/schemas/MonitorFormulaAndFunctionCostQueryDefinition'
     MonitorGroupSearchResponse:
       description: The response of a monitor group search.
       example:
@@ -7939,9 +8005,10 @@ components:
             be pulled from the [Roles API](https://docs.datadoghq.com/api/latest/roles/#list-roles)
             and are located in the `data.id` field. Editing a monitor includes any
             updates to the monitor configuration, monitor deletion, and muting of
-            the monitor for any amount of time. `restricted_roles` is the successor
-            of `locked`. For more information about `locked` and `restricted_roles`,
-            see the [monitor options docs](https://docs.datadoghq.com/monitors/guide/monitor_api_options/#permissions-options).
+            the monitor for any amount of time. You can use the [Restriction Policies
+            API](https://docs.datadoghq.com/api/latest/restriction-policies/) to manage
+            write authorization for individual monitors by teams and users, in addition
+            to roles.
           items:
             description: A role UUID.
             type: string
@@ -23917,6 +23984,10 @@ components:
             security_monitoring_filters_write: Create, edit, and delete Security Filters.
             security_monitoring_findings_read: View a list of findings that include
               both misconfigurations and identity risks.
+            security_monitoring_notification_profiles_read: View Rule Security Notification
+              rules.
+            security_monitoring_notification_profiles_write: Create, edit, and delete
+              Security Notification rules.
             security_monitoring_rules_read: Read Detection Rules.
             security_monitoring_rules_write: Create and edit Detection Rules.
             security_monitoring_signals_read: View Security Signals.
