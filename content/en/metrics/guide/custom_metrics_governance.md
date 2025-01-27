@@ -58,6 +58,11 @@ Additionally, review [Usage Attribution][3] information for a total breakdown of
 
 **Note**: Usage Attribution is an advanced feature included in the Enterprise plan. For all other plans, contact your account representative or Customer Success to request this feature.
 
+#### Metric-level visibility
+(Preview banner here)
+{{< img src="metrics/guide/custom_metrics_governance/tagsexplorer.png" alt="Custom Metrics Tags Cardinality Explorer for a spiking metric name" style="width:80%;">}}
+
+Once you've identified which metric names are driving up your account's monthly usage and costs, you can navigate to the metric's details sidepanel to view the Custom Metrics Tags Cardinality Explorer to understand which tag keys are driving a particular metric's cardinality to spike. This feature highlights any spammy or unbounded tag keys that have large increases in the number of unique tag values as these are the likely culprit tags that should be excluded using Metrics without Limits to achieve immediate cost savings.
 
 ### Team-level visibility and attribution
 
@@ -162,7 +167,8 @@ Datadog's Metrics without Limits™ is a suite of features that also provide you
 To view a metric's related assets:
 1. Click on the metric name to open its details side panel.
 1. Scroll down to the section of the side panel titled **Related Assets**.
-1. Click the dropdown button to view the type of related asset you are interested in (dashboards, monitors, notebooks, SLOs). You can use the search bar to validate specific assets. 
+1. Click the dropdown button to view the type of related asset you are interested in (dashboards, monitors, notebooks, SLOs). You can use the search bar to validate specific assets.
+   
 
 ## Monitoring and prevention
 In this section, you’ll learn about how to: 
