@@ -33,10 +33,9 @@ The following sections summarize the variables and operations that the Dynamic I
 |-------------|----------------------------------------------------------------------------|
 | `@return`   | Provides access to the return value                                        |
 | `@duration` | Provides access to the call execution duration                             |
-| `@it`       | Provides access to the current value in collection iterating operations    |
 | `@exception`| Provides access to the current uncaught exception                          |
 
-**Note**: When you **instrument a specific line number**, only `@it` is available as a contextual variable. To access the full set of contextual variables (`@return`, `@duration`, `@it`, and `@exception`), **instrument the entire method** rather than a single line.
+**Note**: These variables are **only available** when instrumenting an **entire method**, and **not** for individual lines of code.
 
 ## String operations
 
@@ -51,6 +50,8 @@ The following sections summarize the variables and operations that the Dynamic I
 | `matches(value_src, string_literal)` | Checks whether the string matches the regular expression provided as a string literal. | `matches("Hello", "^H.*o$")` -> `True` |
 
 ## Collection operations
+
+When working with collections (lists, maps, etc.), a variable `@it` is available which provides access to the current value in a collection during iteration.
 
 The following examples use a variable named `myCollection` defined as `[1,2,3]`:
 
