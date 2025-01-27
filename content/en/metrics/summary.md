@@ -19,7 +19,7 @@ The [Metrics Summary page][1] displays a list of your metrics reported to Datado
 
 Search your metrics by metric name or tag using the **Metric** or **Tag** search fields:
 
-{{< img src="metrics/summary/tag_advanced_filtering.png" alt="The metrics summary page with NOT team:* entered in the Tag search bar" video=true style="width:75%;">}}
+{{< img src="metrics/summary/tag_advanced_filtering.png" alt="The metrics summary page with NOT team:* entered in the Tag search bar" style="width:75%;">}}
 
 Tag filtering supports Boolean and wildcard syntax so that you can identify: 
 * Metrics that are tagged with a particular tag key, for example, `team`: `team:*`

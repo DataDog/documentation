@@ -16,7 +16,7 @@ further_reading:
 
 ## Overview
 
-{{< img src="metrics/volume/metrics_volume_overview.png" alt="Metrics Volume page set to a timeframe of the past hour (by default) showing the search, filter, facet and column sorting features available" style="width:100%;" >}}
+{{< img src="metrics/volume/metrics_volume_overview_2025-01-27.png" alt="Metrics Volume page set to a timeframe of the past hour (by default) showing the search, filter, facet, and column sorting features available" style="width:100%;" >}}
 
 Cloud-based applications generate massive amounts of data, which can be overwhelming for your organization as it scales. Observability costs become a significant budget item but core observability teams lack visibility into what is truly valuable to each individual engineering team. Individual teams are less incentivized to be proactive in helping manage this growth because they have limited insights into the costs of the metrics and tags they're submitting.
 
@@ -36,7 +36,7 @@ Datadog provides you real-time _estimated_ usage metrics OOTB so you can underst
 - Your account's indexed custom metrics volume in real-time (and how much of that indexed volume hasn't been optimized with [Metrics without Limits™][3] yet) 
 - Your account's ingested custom metrics (emitted from metrics that have been configured with [Metrics without Limits™][3]) in real-time
 
-{{< img src="metrics/volume/volume_graphs.png" alt="Estimated real-time indexed and ingested Custom Metrics volume. Upon clicking export, you can easily create a monitor or export the graph to a notebook to share." style="width:100%;" >}}
+{{< img src="metrics/volume/volume_graphs_2025-01-27.png" alt="Estimated real-time indexed and ingested Custom Metrics volume" style="width:100%;" >}}
 
 ## Search, filter, and sort
 
@@ -63,7 +63,7 @@ The Volume page displays a list of your metrics reported to Datadog sorted by es
 
 ## Compare a metric's cardinality (volume) over time 
 
-{{< img src="metrics/volume/compare_metric_cardinality.png" alt="Metrics Volume filtered down to metric names with “shopist”, sorted by estimated custom metrics. On hover over the change in volume, displays the cardinality graph of the metric over the past day" style="width:100%;" >}}
+{{< img src="metrics/volume/compare_metric_cardinality_2025-01-27.png" alt="Metrics Volume filtered down to metric names with “shopist”, sorted by estimated custom metrics" style="width:100%;" >}}
 
 When identifying the top 500 metric names by change in volume, you can hover over the number to compare a metric name's number of indexed custom metrics (its cardinality) over time. As a reminder, a single metric name can emit multiple indexed custom metrics. To learn more, see [Custom Metrics Billing][6].
 
