@@ -1,23 +1,23 @@
 {
   "CreateActionConnection": {
-    "description": "Create a new Action Connection",
+    "description": "Create a new Action Connection.",
     "summary": "Create a new Action Connection",
     "request_description": "",
-    "request_schema_description": "Request used to create an action connection."
+    "request_schema_description": "Request used to create an Action Connection."
   },
   "DeleteActionConnection": {
-    "description": "Delete an existing Action Connection",
+    "description": "Delete an existing Action Connection.",
     "summary": "Delete an existing Action Connection"
   },
   "GetActionConnection": {
-    "description": "Get an existing Action Connection",
+    "description": "Get an existing Action Connection.",
     "summary": "Get an existing Action Connection"
   },
   "UpdateActionConnection": {
     "description": "Update an existing Action Connection",
     "summary": "Update an existing Action Connection",
-    "request_description": "Update an existing Action Connection request body",
-    "request_schema_description": "Request used to update an action connection."
+    "request_description": "Update an existing Action Connection request body.",
+    "request_schema_description": "Request used to update an Action Connection."
   },
   "ListAwsScanOptions": {
     "description": "Fetches the scan options configured for AWS accounts.",

@@ -39,20 +39,6 @@
       "description": "Update an AWS integration returns \"AWS Account object\" response"
     }
   ],
-  "CreateActionConnection": [
-    {
-      "group": "action_connection",
-      "suffix": "",
-      "description": "Create a new Action Connection returns \"Successfully created Action Connection\" response"
-    }
-  ],
-  "UpdateActionConnection": [
-    {
-      "group": "action_connection",
-      "suffix": "",
-      "description": "Update an existing Action Connection returns \"Successfully updated Action Connection\" response"
-    }
-  ],
   "CreateApp": [
     {
       "group": "app_builder",
