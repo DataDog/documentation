@@ -119,7 +119,7 @@ The CPU for {{host.name}} (IP:{{host.ip}}) reached a critical value of {{value}}
 
 For the list of available template variables, see the [documentation][3].
 
-Another way to use template variables is by creating dynamic links and handles, that will automatically route your notifications to the right handle or with the right links.  
+You can also use template variables to create dynamic links and handles that automatically route your notifications.  
 Example of handles:  
 `@slack-{{service.name}} There is an ongoing issue with {{service.name}}.`
 
