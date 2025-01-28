@@ -36,11 +36,9 @@ Craft the Monitor Name to include key information for the responder to quickly u
 * What resource is affected (such as Datacenter, Kubernetes Cluster, host, or service)
 
 
-Example of a good title:  
-*High memory usage on {{pod\_name.name}}*
-
-Example of a bad title:  
-*Memory usage*
+|  Needs Revision    | Improved Title    | 
+| ---  | ----------- | 
+| *Memory usage* | *High memory usage on {{pod\_name.name}}* |
 
 Although both the examples above are referring to a memory consumption monitor, the first one gives a complete representation of the ongoing issue with some necessary context to narrow down the investigation.
 
