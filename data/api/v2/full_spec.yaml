@@ -35672,9 +35672,6 @@ paths:
         - usage_read
       x-undo:
         type: safe
-      x-unstable: '**Note**: This endpoint is in public beta.
-
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/cost_by_tag/monthly_cost_attribution:
     get:
       description: "Get monthly cost attribution by tag across multi-org and single
@@ -35803,9 +35800,6 @@ paths:
         - usage_read
       x-undo:
         type: safe
-      x-unstable: '**Note**: This endpoint is in public beta.
-
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/csm/onboarding/agents:
     get:
       description: Get the list of all CSM Agents running on your hosts and containers.
@@ -45989,9 +45983,6 @@ paths:
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
       security:
-      - AuthZ:
-        - user_access_invite
-        - user_access_manage
       - bearerAuth: []
       summary: List users
       tags:
@@ -46039,9 +46030,6 @@ paths:
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
       security:
-      - AuthZ:
-        - user_access_invite
-        - user_access_manage
       - bearerAuth: []
       summary: Create user
       tags:
@@ -46079,9 +46067,6 @@ paths:
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
       security:
-      - AuthZ:
-        - user_access_invite
-        - user_access_manage
       - bearerAuth: []
       summary: Delete user
       tags:
@@ -46116,9 +46101,6 @@ paths:
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
       security:
-      - AuthZ:
-        - user_access_invite
-        - user_access_manage
       - bearerAuth: []
       summary: Get user
       tags:
@@ -46176,9 +46158,6 @@ paths:
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
       security:
-      - AuthZ:
-        - user_access_invite
-        - user_access_manage
       - bearerAuth: []
       summary: Patch user
       tags:
@@ -46236,9 +46215,6 @@ paths:
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
       security:
-      - AuthZ:
-        - user_access_invite
-        - user_access_manage
       - bearerAuth: []
       summary: Update user
       tags:
