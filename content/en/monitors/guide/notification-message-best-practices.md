@@ -93,10 +93,11 @@ Example:
 ```
 
 You can receive a notification if the group that triggered the alert contains a specific string.  
-Example:  
-`{{#is_match "datacenter.name" "us"}}`  
-  ``This displays if the region triggering the alert contains `us` (e.g. us1, us3, …). @us.datacenter@company.com``  
-`{{/is_match}}`
+```
+{{#is_match "datacenter.name" "us"}}
+  # The content displays if the region triggering the alert contains `us` (such as us1 or us3)@us.datacenter@company.com``  
+{{/is_match}}
+```
 
 For more information on how to use conditional variables, see the [documentation](https://docs.datadoghq.com/monitors/notify/variables/?tab=is_alert#conditional-variables). 
 
