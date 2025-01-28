@@ -80,7 +80,7 @@ Example:
   `in the role name. @db-team@company.com`  
 `{{/is_exact_match}}`
 
-That is also a way to notify different people/groups depending on the group that triggered the alert.  
+Use conditional variables to notify different people/groups depending on the group that triggered the alert.  
 Example:  
 `{{#is_exact_match "role.name" "db"}}`  
   `` This displays if the host triggering the alert contains `db` ``  
