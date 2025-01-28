@@ -30,7 +30,7 @@ The first step is to configure the notification with the required fields:
 
 ### Name
 
-The monitor title should give a clear description of the signal, including:
+Craft the Monitor Name to include key information for the responder to quickly understand the alert context. The monitor title should give a clear and concise description of the signal, including:
 
 * The failure mode(s) or the diverging metrics  
 * What resource is affected (such as Datacenter, Kubernetes Cluster, host, or service)
