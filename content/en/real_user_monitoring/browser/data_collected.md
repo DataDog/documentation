@@ -116,7 +116,7 @@ Detailed network timing data for the loading of an application's resources are c
 
 | Metric                              | Type           | Description                                                                                                                               |
 |----------------------------------------|----------------|-------------------------------------------------------------------------------------------------------------------------------------------|
-| `duration`                             | number         | Entire time spent loading the resource.                                                                                                   |
+| `resource.duration`            | number         | Entire time spent loading the resource.                                                                                                   |
 | `resource.size`                | number (bytes) | Resource size.                                                                                                                            |
 | `resource.connect.duration`    | number (ns)    | Time spent establishing a connection to the server (connectEnd - connectStart).                                                            |
 | `resource.ssl.duration`        | number (ns)    | Time spent for the TLS handshake. If the last request is not over HTTPS, this metric does not appear (connectEnd - secureConnectionStart). |

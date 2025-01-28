@@ -473,15 +473,10 @@ menu:
       url: agent/fleet_automation
       parent: agent
       weight: 8
-    - name: Upgrade the Agent
-      url: agent/upgrade
-      parent: agent
-      identifier: agent_upgrade
-      weight: 9
     - name: 트러블슈팅
       url: agent/troubleshooting/
       parent: agent
-      weight: 10
+      weight: 9
       identifier: agent_troubleshooting
     - name: 컨테이너 호스트 이름 탐지
       identifier: agent_troubleshooting_hostname_containers

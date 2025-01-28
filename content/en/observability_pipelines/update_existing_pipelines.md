@@ -18,7 +18,7 @@ For existing pipelines in Observability Pipelines, you can update and deploy cha
 
 ### Update source or destination variables
 
-On the the Worker installation page:
+On the Worker installation page:
 1. Select your platform in the **Choose your installation platform** dropdown menu.
 1. If you want to update source environment variables, update the information for your log source.
 {{< tabs >}}

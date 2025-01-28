@@ -159,9 +159,9 @@ Evita utilizar widgets comodín en los siguientes casos:
 - Asignación geográfica avanzada.
 - Representaciones gráficas en 3D.
 
-## {{< img src="synthetics/browser_test.mp4" alt="Browser tests" video=true style="width:100%;">}}
+## Referencias adicionales
 
-Grabar pruebas de aplicaciones móviles
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://vega.github.io/vega-lite/
 [2]: /es/dashboards/

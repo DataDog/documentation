@@ -130,9 +130,9 @@ Optionally, you can also set other init script parameters and Datadog environmen
 
 1. On the cluster configuration page, click the **Advanced options** toggle.
 1. At the bottom of the page, go to the **Init Scripts** tab.
-   
+
    {{< img src="data_jobs/databricks/init_scripts.png" alt="Databricks UI, cluster configuration advanced options,  Init Scripts tab. A 'Destination' drop-down and an 'Init script path' file selector." style="width:80%;" >}}
-   
+
    - Under the **Destination** drop-down, select `Workspace`.
    - Under **Init script path**, enter the path to your init script.
    - Click **Add**.
@@ -188,6 +188,13 @@ In Datadog, view the [Data Jobs Monitoring][6] page to see a list of all your Da
 
 {{% djm-install-troubleshooting %}}
 
+If the Agent is not installed, view the installation logs located in `/tmp/datadog-djm-init.log`.
+
+If you need further assistance from Datadog support, add the following environment variable to the init script. This ensures that logs are sent to Datadog when a failure occurs.
+  ```shell
+  export DD_DJM_ADD_LOGS_TO_FAILURE_REPORT=true
+  ```
+
 ## Advanced Configuration
 
 ### Tag spans at runtime
@@ -230,16 +237,9 @@ In Datadog, view the [Data Jobs Monitoring][6] page to see a list of all your Da
 ### Set up Data Jobs Monitoring with Databricks Networking Restrictions
 With [Databricks Networking Restrictions][12], Datadog may not have access to your Databricks APIs, which is required to collect traces for Databricks job executions along with tags and other metadata.
 
-If you are controlling Databricks API access through IP access lists, allow-listing Datadog's specific {{< region-param key="ip_ranges_url_webhooks" link="true" text="IP addresses" >}} allows your cluster to perform all these interactions with Datadog services. Please see [Databricks documentation][13] for more details on how to manage IP access lists in Databricks.
+If you are controlling Databricks API access with [IP access lists][13], allow-listing Datadog's specific {{< region-param key="ip_ranges_url_webhooks" link="true" text="IP addresses" >}} allows Datadog to connect to the Databricks APIs in your workspace. Please see Databricks's documentation for [configuring IP access lists for workspaces][16] to give Datadog API access.
 
-If you are using [Databricks Private Connectivity][14], the steps to configure the connection depend on your cloud provider.
-{{< whatsnext desc="Refer to the guide for your cloud environment:" >}}
-    {{< nextlink href="agent/guide/private-link" >}}Connect to Datadog over AWS PrivateLink{{< /nextlink >}}
-    {{< nextlink href="agent/guide/azure-private-link" >}}Connect to Datadog over Azure Private Link{{< /nextlink >}}
-    {{< nextlink href="agent/guide/gcp-private-service-connect" >}}Connect to Datadog over GCP Private Service Connect{{< /nextlink >}}
-{{< /whatsnext >}}
-
-For further assistance, contact the Datadog [support team][15].
+If you are using [Databricks Private Connectivity][14], please reach out to the Datadog [support team][15] to discuss potential options.
 
 ## Further Reading
 
@@ -257,3 +257,4 @@ For further assistance, contact the Datadog [support team][15].
 [13]: https://docs.databricks.com/en/security/network/front-end/ip-access-list.html
 [14]: https://www.databricks.com/trust/security-features/secure-your-data-with-private-networking
 [15]: https://www.datadoghq.com/support/
+[16]: https://docs.databricks.com/en/security/network/front-end/ip-access-list-workspace.html
