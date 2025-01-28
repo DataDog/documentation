@@ -52,7 +52,7 @@ Clicking on **Configure Metrics** gives you multiple options that you can use to
 
 * **Enable or disable percentiles**: Manage percentile aggregations across multiple distribution metrics. See the [Distributions page][31] for more information.
 
-{{< img src="metrics/summary/percentile_aggregations_toggle.png" alt="Toggle to manage percentile aggregations" style="width:100%;">}}
+{{< img src="metrics/summary/percentile_aggregations_toggle_2025-01-28.png" alt="Toggle to manage percentile aggregations" style="width:100%;">}}
 
 * **Enable or disable historical metrics ingestion**: Manage the ingestion of historical metric data. See the [Historical Metrics Ingestion page][30] for more information.
 
