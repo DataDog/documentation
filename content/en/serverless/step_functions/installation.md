@@ -102,18 +102,7 @@ Then, to send your Step Functions logs to Datadog:
 
     For more information about the `datadog-ci stepfunctions` command, see the [Datadog CLI documentation][4].
 
-1. Set up tags. Open your AWS console and go to your Step Functions state machine. Open the *Tags* section and add the following key-value pairs:
-   | key | value |
-   | --  | ----- |
-   | `env` | Name of your environment. Required to see traces in Datadog. Defaults to `dev`. |
-   | `service` | Name of your service. Defaults to the state machine's name. |
-   | `dd_version` | `dd_sls_plugin`| 
-
-1. To enable tracing, you have two options:
-   - **Per Step Function**: Add the `DD_TRACE_ENABLED` tag to each Step Function and set the value to `true`.
-   - **At the Forwarder level**: Set the `DdStepFunctionsTraceEnabled` parameter in the Datadog Forwarder to enable tracing for all Step Functions connected to the Forwarder.
-
-   <div class="alert alert-info">If you enable tracing (which automatically includes enhanced metrics), you are billed for both Serverless Workload Monitoring and Serverless APM. See <a href="https://www.datadoghq.com/pricing/?product=serverless-monitoring#products">Pricing</a>.</div>
+**Note**: The `datadog-ci stepfunctions instrument` command automatically enables tracing.
 
 [1]: /serverless/libraries_integrations/cli/
 [2]: /logs/guide/forwarder
@@ -152,18 +141,7 @@ Then, to send your Step Functions logs to Datadog:
 
     For additional settings, see [Datadog Serverless Framework Plugin - Configuration parameters][5].
 
-1. Set up tags. Open your AWS console and go to your Step Functions state machine. Open the *Tags* section and add the following key-value pairs:
-   | key | value |
-   | --  | ----- |
-   | `env` | Name of your environment. Required to see traces in Datadog. Defaults to `dev`. |
-   | `service` | Name of your service. Defaults to the state machine's name. |
-   | `dd_version` | `dd_sls_ci`| 
-
-1. To enable tracing, you have two options:
-   - **Per Step Function**: Add the `DD_TRACE_ENABLED` tag to each Step Function and set the value to `true`.
-   - **At the Forwarder level**: Set the `DdStepFunctionsTraceEnabled` parameter in the Datadog Forwarder to enable tracing for all Step Functions connected to the Forwarder.
-
-   <div class="alert alert-info">If you enable tracing (which automatically includes enhanced metrics), you are billed for both Serverless Workload Monitoring and Serverless APM. See <a href="https://www.datadoghq.com/pricing/?product=serverless-monitoring#products">Pricing</a>.</div>
+    **Note**: The `enableStepFunctionsTracing: true` line automatically enables tracing.
 
 [1]: https://docs.datadoghq.com/serverless/libraries_integrations/plugin/
 [2]: /logs/guide/forwarder
@@ -183,6 +161,8 @@ Then, to send your Step Functions logs to Datadog:
 [2]: /logs/guide/send-aws-services-logs-with-the-datadog-kinesis-firehose-destination
 {{% /tab %}}
 {{< /tabs >}}
+
+<div class="alert alert-info">If tracing is enabled (which automatically includes enhanced metrics), you are billed for both Serverless Workload Monitoring and Serverless APM. See <a href="https://www.datadoghq.com/pricing/?product=serverless-monitoring#products">Pricing</a>.</div>
 
 ## Additional options for instrumentation
 
