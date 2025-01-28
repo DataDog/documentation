@@ -101,6 +101,10 @@ rulesets:
     title: "Enforce Kotlin code style"
     description: |
       Rules to enforce Kotlin code style.
+  kotlin-security:
+    title: "Enforce secure Kotlin coding"
+    description: |
+      Rules focused on finding security issues in your Kotlin code.
   php-best-practices:
     title: "Follow best practices for writing PHP code"
     description: |
