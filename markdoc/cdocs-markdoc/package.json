@@ -1,7 +1,7 @@
 {
-    "name": "markdoc-static-compiler",
+    "name": "cdocs-markdoc",
     "version": "0.1.0",
-    "description": "A customized fork of Markdoc that provides static rendering of dynamic pages",
+    "description": "A fork of Markdoc that integrates with CDocs",
     "main": "dist/index.js",
     "module": "dist/index.mjs",
     "types": "dist/index.d.ts",

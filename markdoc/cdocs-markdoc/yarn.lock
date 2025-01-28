@@ -912,6 +912,36 @@ __metadata:
   languageName: node
   linkType: hard
 
+"cdocs-markdoc@workspace:.":
+  version: 0.0.0-use.local
+  resolution: "cdocs-markdoc@workspace:."
+  dependencies:
+    "@types/markdown-it": 12.2.3
+    "@types/node": ^18.0.0
+    "@types/uuid": ^9.0.8
+    "@typescript-eslint/eslint-plugin": ^5.12.0
+    "@typescript-eslint/parser": ^5.12.0
+    deep-assert: 0.3.0
+    diff: ^4.0.2
+    esbuild: 0.13.3
+    eslint: ^8.9.0
+    markdown-it: 12.3.2
+    markdown-it-deflist: ^3.0.0
+    patch-package: ^6.4.7
+    pegjs: 0.11.0-master.b7b87ea
+    prettier: ^2.8.8
+    ts-eager: 2.0.2
+    typedoc: ^0.22.13
+    typescript: ^4.5.4
+    vitest: ^1.6.0
+    yaml-js: ^0.2.3
+    zod: ^3.22.4
+  dependenciesMeta:
+    "@types/markdown-it":
+      optional: true
+  languageName: unknown
+  linkType: soft
+
 "chai@npm:^4.3.10":
   version: 4.5.0
   resolution: "chai@npm:4.5.0"
@@ -2204,36 +2234,6 @@ __metadata:
   checksum: 6fb2fee6da3d98f1953b03d315826b5c5a4ea1f908481afc113782d8027e19f080c85ae998454de4e5f27a681d3ec58d57278f0868d4e0b736f51d396b661691
   languageName: node
   linkType: hard
-
-"markdoc-static-compiler@workspace:.":
-  version: 0.0.0-use.local
-  resolution: "markdoc-static-compiler@workspace:."
-  dependencies:
-    "@types/markdown-it": 12.2.3
-    "@types/node": ^18.0.0
-    "@types/uuid": ^9.0.8
-    "@typescript-eslint/eslint-plugin": ^5.12.0
-    "@typescript-eslint/parser": ^5.12.0
-    deep-assert: 0.3.0
-    diff: ^4.0.2
-    esbuild: 0.13.3
-    eslint: ^8.9.0
-    markdown-it: 12.3.2
-    markdown-it-deflist: ^3.0.0
-    patch-package: ^6.4.7
-    pegjs: 0.11.0-master.b7b87ea
-    prettier: ^2.8.8
-    ts-eager: 2.0.2
-    typedoc: ^0.22.13
-    typescript: ^4.5.4
-    vitest: ^1.6.0
-    yaml-js: ^0.2.3
-    zod: ^3.22.4
-  dependenciesMeta:
-    "@types/markdown-it":
-      optional: true
-  languageName: unknown
-  linkType: soft
 
 "markdown-it-deflist@npm:^3.0.0":
   version: 3.0.0

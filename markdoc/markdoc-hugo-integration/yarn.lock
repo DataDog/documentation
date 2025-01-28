@@ -2581,7 +2581,7 @@ __metadata:
     interweave: ^13.1.0
     js-yaml: ^4.1.0
     lit: ^3.1.4
-    markdoc-static-compiler: "file:../markdoc-static-compiler"
+    markdoc-static-compiler: "file:../cdocs-markdoc"
     markdown-it: 12.3.2
     markdown-it-deflist: ^3.0.0
     md5: ^2.3.0
@@ -2599,9 +2599,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"markdoc-static-compiler@file:../markdoc-static-compiler::locator=markdoc-hugo-integration%40workspace%3A.":
+"markdoc-static-compiler@file:../cdocs-markdoc::locator=markdoc-hugo-integration%40workspace%3A.":
   version: 0.1.0
-  resolution: "markdoc-static-compiler@file:../markdoc-static-compiler#../markdoc-static-compiler::hash=d85440&locator=markdoc-hugo-integration%40workspace%3A."
+  resolution: "markdoc-static-compiler@file:../cdocs-markdoc#../cdocs-markdoc::hash=f04ee4&locator=markdoc-hugo-integration%40workspace%3A."
   dependencies:
     "@types/markdown-it": 12.2.3
     markdown-it-deflist: ^3.0.0
@@ -2609,7 +2609,7 @@ __metadata:
   dependenciesMeta:
     "@types/markdown-it":
       optional: true
-  checksum: cccb5746434737edecd106f81767067de849a9a02cc40fa547efcf9bff5ff00b0995943c0a703f98ebdfede3c02aca08712675f91418e17f0c1e210f528f6651
+  checksum: cd5104af47338a383983e5ff622ee4a4d38a0678f8ab96f353b31af811a29d08385bf1a26e8848145c895d91bf8670ffecb8174e9bd78e4d48906d034b741e7d
   languageName: node
   linkType: hard
 

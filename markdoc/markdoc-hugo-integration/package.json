@@ -24,7 +24,7 @@
         "interweave": "^13.1.0",
         "js-yaml": "^4.1.0",
         "lit": "^3.1.4",
-        "markdoc-static-compiler": "file:../markdoc-static-compiler",
+        "markdoc-static-compiler": "file:../cdocs-markdoc",
         "markdown-it": "12.3.2",
         "markdown-it-deflist": "^3.0.0",
         "md5": "^2.3.0",
