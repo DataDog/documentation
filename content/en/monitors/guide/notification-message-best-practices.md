@@ -63,8 +63,7 @@ In the following sections you will learn how to use advanced features to further
 Monitor message variables are dynamic placeholders that allow you to customize notification messages with real-time contextual information. Use variables to enhance message clarity, and provide detailed context.
 There are two types of variables:
 
-* Conditional variables that use "*if-else"* logic to tweak the context of the message depending on some conditions, such as the state of the monitor.  
-* Template variables to enrich your monitor notifications with contextual information.
+| Variable Type | Description | |---------------------|-----------------------------------------------------------------------------------------------------| | [Conditional](#conditional-variables) | Uses "if-else" logic to adjust the message context based on conditions like monitor state. | | [Template](#template-variables) | Enriches monitor notifications with contextual information. |
 
 Variables are especially important in a **Multi-Alert** monitor. When it triggers, you want to know which group triggered the monitor, and that's where variables are handy.
 
