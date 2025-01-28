@@ -36,7 +36,7 @@ Datadog provides you real-time _estimated_ usage metrics OOTB so you can underst
 - Your account's indexed custom metrics volume in real-time (and how much of that indexed volume hasn't been optimized with [Metrics without Limits™][3] yet) 
 - Your account's ingested custom metrics (emitted from metrics that have been configured with [Metrics without Limits™][3]) in real-time
 
-{{< img src="metrics/volume/volume_graphs.png" alt="Estimated real-time indexed and ingested Custom Metrics volume. Upon clicking export, you can easily create a monitor or export the graph to a notebook to share." style="width:100%;" >}}
+{{< img src="metrics/volume/volume_graph.png" alt="Estimated real-time indexed and ingested Custom Metrics volume. Upon clicking export, you can easily create a monitor or export the graph to a notebook to share." style="width:100%;" >}}
   
 
 ## Search, filter, and sort
@@ -107,6 +107,16 @@ To view a metric's related assets:
 1. Click on the metric name to open its details side panel.
 2. Scroll down to the section of the side panel titled **Related Assets**.
 3. Click the dropdown button to view the type of related asset you are interested in (dashboards, monitors, notebooks, SLOs). You can use the search bar to validate specific assets.
+
+## Identify tags driving up your metric's volume
+
+{{< callout url="https://forms.gle/H3dG9tTdR6bqzHAX9" >}}
+Custom Metrics Tags Cardinality Explorer is in Preview. Use this form to request access today.
+{{< /callout >}} 
+
+{{< img src="metrics/tagsexplorer.png" alt="Custom Metrics Tags Cardinality Explorer for a spiking metric name" style="width:80%;">}}
+
+To determine why a particular metric name is emitting a large number of custom metrics, or spiking, use the Custom Metrics Tags Cardinality Explorer. This helps you pinpoint the tag keys driving the spike, which you can immediately exclude using Metrics without Limits™ for cost savings.
 
 ## Further reading
 
