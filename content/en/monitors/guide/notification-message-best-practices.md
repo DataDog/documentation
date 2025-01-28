@@ -92,7 +92,7 @@ Example:
 {{/is_exact_match}}
 ```
 
-You can receive a notification as well if the group that triggered the alert contains a specific string.  
+You can receive a notification if the group that triggered the alert contains a specific string.  
 Example:  
 `{{#is_match "datacenter.name" "us"}}`  
   ``This displays if the region triggering the alert contains `us` (e.g. us1, us3, …). @us.datacenter@company.com``  
