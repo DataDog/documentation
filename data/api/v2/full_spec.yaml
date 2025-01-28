@@ -31581,12 +31581,18 @@ components:
             continuous_profiler_pgo_read: Read and query Continuous Profiler data
               for Profile-Guided Optimization (PGO).
             create_webhooks: Create webhooks integrations.
+            dashboards_embed_share: Create, modify, and delete shared dashboards with
+              share type 'embed'.
+            dashboards_invite_share: Create, modify, and delete shared dashboards
+              with share type 'invite'.
             dashboards_public_share: Generate public and authenticated links to share
               dashboards or embeddable graphs externally.
             dashboards_read: View dashboards.
             dashboards_write: Create and change dashboards.
             data_scanner_read: View Data Scanner configurations.
             data_scanner_write: Edit Data Scanner configurations.
+            embeddable_graphs_share: Generate public links to share embeddable graphs
+              externally.
             events_read: Read Events data.
             hosts_read: List hosts and their attributes.
             incident_notification_settings_write: Configure Incidents Notification
@@ -31605,6 +31611,7 @@ components:
               configuring allowed login methods, creating child orgs, subscribing
               & unsubscribing from apps in the marketplace, and enabling & disabling
               Remote Configuration for the entire organization.
+            security_comments_read: Read comments of vulnerabilities.
             security_monitoring_filters_read: Read Security Filters.
             security_monitoring_filters_write: Create, edit, and delete Security Filters.
             security_monitoring_findings_read: View a list of findings that include
@@ -31640,7 +31647,7 @@ components:
               Access Manage permission.
             teams_read: Read Teams data. A User with this permission can view Team
               names, metadata, and which Users are on each Team.
-            test_visibility_read: View Test Visibility.
+            test_optimization_read: View Test Optimization.
             timeseries_query: Query Timeseries data.
             usage_read: View your organization's usage and usage attribution.
             user_access_invite: Invite other users to your organization.
