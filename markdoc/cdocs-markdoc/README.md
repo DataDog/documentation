@@ -2,7 +2,7 @@
 
 This package is a fork of the [`markdoc` package][1] modified to support statically generated customizable documentation that does not require React, SSR, or access to the full Markdoc AST to function.
 
-`cdocs-markdoc` is not a `markdoc` replacement or alternative. It has fewer features than `markdoc`, and is intended to be used with other `cdocs` packages, such as `cdocs-data` and `cdocs-hugo-integration`, to add customization features to existing Hugo documentation or other static documentation. For any modern use case, `markdoc` is a much better choice.
+`cdocs-markdoc` has fewer features than `markdoc`, and is not a `markdoc` replacement. It is intended to be used with other `cdocs` packages, such as `cdocs-data` and `cdocs-hugo-integration`, to add customization features to existing Hugo documentation or other static documentation. For any modern use case, `markdoc` is a much better choice.
 
 ## Key differences between `cdocs-markdoc` and `markdoc`
 
@@ -14,11 +14,11 @@ Any markup processed by `cdocs-markdoc` should not interpolate variables like th
 The value of `color` is {% color %}. 
 ```
 
-This is an intentional choice to support translation safety.
+This is an intentional omission to support translation safety.
 
 ### The `else` tag is not supported (yet)
 
-This will be added in an upcoming release.
+This is planned for the next release.
 
 ### No renderers are included
 

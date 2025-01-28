@@ -1,4 +1,4 @@
-import MarkdocStaticCompiler, { Node } from 'cdocs-markdoc';
+import CdocsMarkdoc, { Node } from 'cdocs-markdoc';
 import fs from 'fs';
 import path from 'path';
 import yaml from 'js-yaml';
@@ -16,7 +16,7 @@ export class MdocFileParser {
    */
   static parseMdocFile(p: { file: string; partialsDir: string }): Readonly<ParsedFile> {
     const markdocStr = fs.readFileSync(p.file, 'utf8');
-    const ast = MarkdocStaticCompiler.parse(markdocStr);
+    const ast = CdocsMarkdoc.parse(markdocStr);
 
     // Validate the frontmatter
     const frontmatter = yaml.load(ast.attributes.frontmatter) as Frontmatter;
@@ -51,7 +51,7 @@ export class MdocFileParser {
     partialPaths.forEach((partialPath) => {
       const partialFile = path.join(partialsDir, partialPath);
       const partialMarkupStr = fs.readFileSync(partialFile, 'utf8');
-      const partialAst = MarkdocStaticCompiler.parse(partialMarkupStr);
+      const partialAst = CdocsMarkdoc.parse(partialMarkupStr);
       partialAstsByFilename[partialPath] = partialAst;
       partialAstsByFilename = {
         ...partialAstsByFilename,

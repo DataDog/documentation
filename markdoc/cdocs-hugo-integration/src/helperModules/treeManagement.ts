@@ -9,7 +9,7 @@
  */
 
 import { CompilationError, ParsedFile } from '../schemas/compilationResults';
-import MarkdocStaticCompiler, {
+import CdocsMarkdoc, {
   RenderableTreeNodes,
   RenderableTreeNode,
   ClientFunctionSchema,
@@ -72,7 +72,7 @@ export function buildRenderableTree(p: {
 }): { renderableTree: RenderableTreeNode; errors: CompilationError[] } {
   const errors: CompilationError[] = [];
 
-  const renderableTree = MarkdocStaticCompiler.transform(p.parsedFile.ast, {
+  const renderableTree = CdocsMarkdoc.transform(p.parsedFile.ast, {
     variables: {
       ...p.filtersManifest.defaultValsByTraitId,
       ...JSON.parse(JSON.stringify(p.variables))
