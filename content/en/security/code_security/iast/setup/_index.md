@@ -12,7 +12,7 @@ Before setting up Runtime Code Analysis (IAST), ensure the following prerequisit
 
 1. **Datadog Agent Installation:** The Datadog Agent is installed and configured for your application's operating system or container, cloud, or virtual environment.
 2. **Datadog APM Configuration:** Datadog APM is configured for your application or service, and web traces (`type:web`) are being received by Datadog.
-3. **Supported Tracing Library:** The Datadog Tracing Library used by your application or service supports Runtime Code Analysis (IAST) capabilities for the language of your application or service. For more details, refer to the **Compatibility Requirements** section below.
+3. **Supported Tracing Library:** The Datadog Tracing Library used by your application or service supports Runtime Code Analysis (IAST) capabilities for the language of your application or service. For more details, see the **Compatibility Requirements** section below.
 
 ## Using Datadog Tracing Libraries
 
@@ -457,7 +457,7 @@ Datadog does not officially support any early-access versions of Java.
 
 ##### Application Security Capability Notes
 - **Software Composition Analysis** is supported on all frameworks
-- If **Runtime Code Analysis (IAST)** does not support your framework, it will still detect Weak Cipher, Weak Hashing, Weak Randomness, Insecure Cookie, Cookie without HttpOnly Flag, and Cookie without SameSite Flag vulnerabilities.
+- If **Runtime Code Analysis (IAST)** does not support your framework, it continues to detect Weak Cipher, Weak Hashing, Weak Randomness, Insecure Cookie, Cookie without HttpOnly Flag, and Cookie without SameSite Flag vulnerabilities.
 
 
 
@@ -488,7 +488,7 @@ Datadog does not officially support any early-access versions of Java.
 
 ##### Application Security Capability Notes
 - **Software Composition Analysis** is supported on all frameworks
-- If **Runtime Code Analysis (IAST)** does not support your framework, it will still detect Weak Cipher, Weak Hashing, Insecure Cookie, Cookie without HttpOnly Flag, Cookie without SameSite Flag, HSTS Header Missing, and X-Content-Type-Options Header Missing vulnerabilities.
+- If **Runtime Code Analysis (IAST)** does not support your framework, it continues to detect Weak Cipher, Weak Hashing, Insecure Cookie, Cookie without HttpOnly Flag, Cookie without SameSite Flag, HSTS Header Missing, and X-Content-Type-Options Header Missing vulnerabilities.
 
 
 | Framework                | Versions    | Threat Detection supported? | Threat Protection supported? | Runtime Code Analysis (IAST)? |
@@ -517,7 +517,7 @@ Datadog does not officially support any early-access versions of Java.
 ##### Application Security Capability Notes
 - **Software Composition Analysis** is supported on all frameworks
 - **Threat Protection** also works at the HTTP request (input) layer, and so works for all databases by default, even those not listed in the table below.
-- If your framework is not supported below, **Runtime Code Analysis (IAST)** won’t detect SQL Injection vulnerabilities, but will still detect the rest of vulnerability types listed [here][3].
+- If your framework is not supported below, **Runtime Code Analysis (IAST)** won't detect SQL Injection vulnerabilities, but it continues to detect the remaining vulnerability types listed [here][3].
 
 | Database                | Versions | Threat Detection supported? |  Runtime Code Analysis (IAST)? |
 | ----------------------- | -------- |  ------------------------| ---------------------------------------------------------------- |
@@ -622,7 +622,7 @@ These are supported on the following architectures:
 ##### Application Security capability notes
 
 - **Software Composition Analysis** is supported on all frameworks.
-- If your framework is not listed below, **Runtime Code Analysis (IAST)** will still detect Insecure Cookie vulnerabilities.
+- If your framework is not listed below, **Runtime Code Analysis (IAST)** continues to detect Insecure Cookie vulnerabilities.
 
 
 | Framework                  | Threat Detection supported? | Threat Protection supported? | Runtime Code Analysis (IAST)? |
@@ -741,7 +741,7 @@ The following operating systems are officially supported by `dd-trace`. Any oper
 
 ##### Application Security Capability Notes
 - **Software Composition Analysis** is supported on all frameworks
-- If your framework is not listed below, **Runtime Code Analysis (IAST)** will still detect Weak Cipher, Weak Hashing, Weak Randomness, Insecure Cookie, Cookie without HttpOnly Flag, Cookie without SameSite Flag, HSTS Header Missing, and X-Content-Type-Options Header Missing vulnerabilities.
+- If your framework is not listed below, **Runtime Code Analysis (IAST)** it continues to detect Weak Cipher, Weak Hashing, Weak Randomness, Insecure Cookie, Cookie without HttpOnly Flag, Cookie without SameSite Flag, HSTS Header Missing, and X-Content-Type-Options Header Missing vulnerabilities.
 
 
 | Framework | Versions | Threat Detection supported? | Threat Protection supported? | Runtime Code Analysis (IAST)? |
