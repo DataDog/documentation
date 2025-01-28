@@ -141,13 +141,10 @@ For information about the different methods for setting environment variables, s
 
 #### Services not in IIS
 
-<div class="alert alert-info">Starting v2.14.0, you don't need to set <code>COR_PROFILER</code> if you installed the tracer using the MSI.</div>
-
 1. Set the following required environment variables for automatic instrumentation to attach to your application:
 
    ```
    COR_ENABLE_PROFILING=1
-   COR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
    ```
 2. For standalone applications and Windows services, manually restart the application.
 
@@ -219,8 +216,6 @@ To attach automatic instrumentation to your service, set the required environmen
 
 ### Windows
 
-<div class="alert alert-info">Starting v2.14.0, you don't need to set <code>COR_PROFILER</code> if you installed the tracer using the MSI.</div>
-
 #### Windows services
 
 {{< tabs >}}
@@ -231,7 +226,6 @@ In the Registry Editor, create a multi-string value called `Environment` in the 
 
 ```text
 COR_ENABLE_PROFILING=1
-COR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
 ```
 
 {{< img src="tracing/setup/dotnet/RegistryEditorFramework.png" alt="Using the Registry Editor to create environment variables for a Windows service" >}}
@@ -241,8 +235,7 @@ COR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
 {{% tab "PowerShell" %}}
 
 ```powershell
-[string[]] $v = @("COR_ENABLE_PROFILING=1", "COR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}")
-Set-ItemProperty HKLM:SYSTEM\CurrentControlSet\Services\<SERVICE NAME> -Name Environment -Value $v
+Set-ItemProperty HKLM:SYSTEM\CurrentControlSet\Services\<SERVICE NAME> -Name Environment -Value 'COR_ENABLE_PROFILING=1'
 ```
 {{% /tab %}}
 
@@ -271,12 +264,10 @@ After installing the MSI, no additional configuration is needed to automatically
 To automatically instrument a console application, set the environment variables from a batch file before starting your application:
 
 ```bat
-rem Set environment variables
+rem Set required environment variables
 SET COR_ENABLE_PROFILING=1
-rem Unless v2.14.0+ and you installed the tracer with the MSI
-SET COR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
 
-rem Set additional Datadog environment variables
+rem Optionally, set additional Datadog environment variables, for example:
 SET DD_LOGS_INJECTION=true
 SET DD_RUNTIME_METRICS_ENABLED=true
 
