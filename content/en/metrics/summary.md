@@ -150,8 +150,8 @@ To determine the value of any metric name to your organization, use Metrics Rela
 
 ## Custom Metrics Tags Cardinality Explorer 
 
-{{< callout url="#" btn_hidden="true" >}}
-  Custom Metrics Tags Cardinality Explorer is in Preview!
+{{< callout url="https://forms.gle/H3dG9tTdR6bqzHAX9" >}}
+Custom Metrics Tags Cardinality Explorer is in Preview. Use this form to request access today.
 {{< /callout >}} 
 
 {{< img src="metrics/tagsexplorer.png" alt="Custom Metrics Tags Cardinality Explorer for a spiking metric name" style="width:80%;">}}

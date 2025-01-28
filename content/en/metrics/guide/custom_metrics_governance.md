@@ -60,13 +60,13 @@ Additionally, review [Usage Attribution][3] information for a total breakdown of
 
 #### Metric-level visibility
 
-{{< callout url="#" btn_hidden="true" >}}
-  Custom Metrics Tags Cardinality Explorer is in Preview!
+{{< callout url="https://forms.gle/H3dG9tTdR6bqzHAX9" >}}
+Custom Metrics Tags Cardinality Explorer is in Preview. Use this form to request access today.
 {{< /callout >}} 
 
 {{< img src="metrics/tagsexplorer.png" alt="Custom Metrics Tags Cardinality Explorer for a spiking metric name" style="width:80%;">}}
 
-Once you've identified which metric names are driving up your account's monthly usage and costs, you can navigate to the metric's details side panel to view the Custom Metrics Tags Cardinality Explorer. This shows you which tag keys are driving a particular metric's cardinality to spike. Any spammy or unbounded tag keys with large increases in the number of unique tag values are the likely culprit tags. Exclude them using Metrics without Limits™ to achieve immediate cost savings.
+Once you've identified which metric names are driving up your account's monthly usage and costs, you can navigate to the metric's details side panel to view the Custom Metrics Tags Cardinality Explorer. This shows you which tag keys are driving a particular metric's cardinality to spike. Any spammy or unbounded tag keys with large increases in the number of unique tag values are the likely cause. Exclude them using Metrics without Limits™ to achieve immediate cost savings.
 
 ### Team-level visibility and attribution
 
@@ -85,7 +85,6 @@ To identify which team or service is responsible for your top custom metric name
 1. Click the **Custom Metrics** tab to view your organization's billable usage, usage trends, and top custom metrics.
 1. Under the table for *Top Custom Metrics for <MONTH YEAR>*, click  the icon to **See in Metrics Summary** for the top custom metric. This takes you to the *Metrics Summary* page with the opened metric details side panel. 
 1. In the side panel, scroll down to the *Tags* section to view associated tags such as teams and service.
-
 
 #### View your team's custom metrics
 
@@ -127,7 +126,6 @@ As part of Datadog's metrics governance best practices, start by using Metrics w
 For more details, see the [Metrics without Limits™][4] documentation.
 
 ### Prevent unintentional configurations that reduce observability with RBAC
-
 
 Metrics without Limits™ allows users to reduce costs on metrics by indexing less data. When used incorrectly, the configuration could lead to unintentional spikes in usage or loss of visibility from tags that are no longer indexed. To prevent unexpected changes, use [RBAC permissions][9]. You can edit an existing user role to include the `metrics_tags_write` permission, or create a custom role. This gives your organization better control over which members can impact metrics [cardinality][10] and who can change Metrics without Limits™ tag configurations.
 
@@ -175,10 +173,10 @@ To view a metric's related assets:
    
 
 ## Monitoring and prevention
-In this section, you’ll learn about how to: 
+In this section, learn about how to: 
 - Alert on overages and sudden spikes in your overall account's custom metrics usage
 - Forecast future metrics growth and alert on any unexpected overall deviation
-- Alert when a particular metric’s cardinality exceeds a user-defined threshold or anomalously spikes
+- Alert when a particular metric's cardinality exceeds a user-defined threshold or anomalously spikes
 After you have an understanding of your account's metric usage and the teams responsible for those costs, build monitors to alert you when your custom metrics usage exceeds a certain threshold. Get alerts on spikes in custom metric usage, so you can prevent unintentional bill spikes.
 
 Datadog offers OOTB metrics that measures [estimated custom metrics usage][15]. You can use these metrics in your dashboard visualizations and monitor alerts. 
