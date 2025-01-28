@@ -33,6 +33,7 @@ When managing vulnerabilities, due dates can be removed under various conditions
 - The detection rule that triggered the vulnerability passes successfully.
 - The vulnerability is muted, either manually or automatically through a mute rule.
 - The due date rule associated with the vulnerability is disabled or deleted.
+- The associated due date rule is modified so that its criteria no longer match the vulnerability.
 
 ## Further reading
 
