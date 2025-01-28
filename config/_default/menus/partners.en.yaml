@@ -11,7 +11,7 @@ menu:
       weight: 10
     - name: Data Intake
       url: /partners/getting_started/data-intake/
-      identifier: /data-intake
+      identifier: data-intake
       parent: getting-started
       weight: 20
     - name: Delivering Value
