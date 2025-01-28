@@ -45989,9 +45989,6 @@ paths:
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
       security:
-      - AuthZ:
-        - user_access_invite
-        - user_access_manage
       - bearerAuth: []
       summary: List users
       tags:
@@ -46039,9 +46036,6 @@ paths:
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
       security:
-      - AuthZ:
-        - user_access_invite
-        - user_access_manage
       - bearerAuth: []
       summary: Create user
       tags:
@@ -46079,9 +46073,6 @@ paths:
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
       security:
-      - AuthZ:
-        - user_access_invite
-        - user_access_manage
       - bearerAuth: []
       summary: Delete user
       tags:
@@ -46116,9 +46107,6 @@ paths:
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
       security:
-      - AuthZ:
-        - user_access_invite
-        - user_access_manage
       - bearerAuth: []
       summary: Get user
       tags:
@@ -46176,9 +46164,6 @@ paths:
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
       security:
-      - AuthZ:
-        - user_access_invite
-        - user_access_manage
       - bearerAuth: []
       summary: Patch user
       tags:
@@ -46236,9 +46221,6 @@ paths:
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
       security:
-      - AuthZ:
-        - user_access_invite
-        - user_access_manage
       - bearerAuth: []
       summary: Update user
       tags:
