@@ -74,7 +74,6 @@ The following products and features are supported with Remote Configuration:
 - **Configuration at runtime** (Beta): Change a service's trace sampling rate, Log Injection enablement, and HTTP header tags from within the Service Catalog UI, without having to restart the service. Read [Configuration at Runtime][22] for more information.
 - **Remotely set Agent sampling rate** (Public Beta): Remotely configure the Datadog Agent to change its trace sampling rates and set rules to scale your organization's trace ingestion according to your needs, without needing to restart your Datadog Agent.
 
-
 ### Dynamic Instrumentation
 
 - Send critical metrics, traces, and logs from your live applications with no code changes.
