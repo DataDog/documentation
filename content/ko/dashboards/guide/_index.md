@@ -33,9 +33,8 @@ title: 그래프 작성 가이드
     {{< nextlink href="/dashboards/guide/version_history" >}}버전 내역{{< /nextlink >}}
     {{< nextlink href="/dashboards/guide/graphing_json/" >}}JSON으로 그래프 만들기{{< /nextlink >}} 
     {{< nextlink href="/dashboards/guide/using_vega_lite_in_wildcard_widgets/" >}}Datadog에서 와일드카드 위젯과 함께 Vega-Lite 사용하기{{< /nextlink >}}
-    {{< nextlink href="/dashboards/guide/graphing_json/" >}}JSON으로 그래프 만들기
-{{< /nextlink >}}
-{{< nextlink href="/dashboards/guide/tv_mode" >}}대시보드용 TV 모드 사용하기{{< /nextlink >}}
+    {{< nextlink href="/dashboards/guide/graphing_json/" >}}JSON으로 그래프 만들기{{< /nextlink >}}
+    {{< nextlink href="/dashboards/guide/tv_mode" >}}대시보드용 TV 모드 사용하기{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="함수:" >}}
