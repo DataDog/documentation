@@ -46,13 +46,12 @@ While both the examples refer to a memory consumption monitor, the improved titl
 
 On-call responders rely on the notification body to understand and act on alerts. Write concise, accurate, and legible messages for clarity.
 
-An actionable and effective **message** should precisely mention what is failing and list the major root causes. Without that information responders will need to gather the context needed to investigate the issue by themselves, delaying Mean Time To Repair (MTTR).
 
-You can also guide responders towards resolution by **adding a solution runbook** directly in the monitor message to avoid unnecessary extra steps.
+- Precisely mention what is failing and list major root causes
+- Add a solution runbook for quick resolution guidance
+- Include links to relevant pages for clear next steps
+- Ensure notifications are sent to the appropriate recipients, either as direct email notifications or through [integration handles][1] (such as Slack).
 
-In all of the above, you should **include links** to relevant pages scoped down to the alerting context to give responders clear next steps.
-
-Lastly, make sure your notification is routed to the right person/right recipients. There are several ways to receive a notification with Datadog:
 
 * You can use your email address in the notification message to receive the notification directly in your inbox.  
 * You can use [integrations](https://docs.datadoghq.com/monitors/notify/#integrations) handles to send your notifications to your desired integration (e.g. Slack)
