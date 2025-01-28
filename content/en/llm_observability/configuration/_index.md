@@ -30,7 +30,7 @@ Topics
 
 Connect your OpenAI account to LLM Observability with your OpenAI API key.
 
-1. In Datadog, navigate to [**LLM Observability > Settings > Integrations**][2].
+1. In Datadog, navigate to [**LLM Observability > Settings > Integrations**][1].
 1. Select **Connect** on the OpenAI tile.
 1. Follow the instructions on the tile.
    - Provide your OpenAI API key. Ensure that this key has **write** permission for **model capabilities**.
@@ -38,13 +38,13 @@ Connect your OpenAI account to LLM Observability with your OpenAI API key.
 
 {{< img src="llm_observability/configuration/openai-tile.png" alt="The OpenAI configuration tile in LLM Observability. Lists instructions for configuring OpenAI and providing your OpenAI API key." style="width:100%;" >}}
 
-[2]: https://app.datadoghq.com/llm/settings/integrations
+[1]: https://app.datadoghq.com/llm/settings/integrations
 {{% /tab %}}
 
 {{% tab "Azure OpenAI" %}}
 Connect your Azure OpenAI account to LLM Observability with your OpenAI API key.
 
-1. In Datadog, navigate to [**LLM Observability > Settings > Integrations**][2].
+1. In Datadog, navigate to [**LLM Observability > Settings > Integrations**][1].
 1. Select **Connect** on the Azure OpenAI tile.
 1. Follow the instructions on the tile.
    - Provide your Azure OpenAI API key. Ensure that this key has **write** permission for **model capabilities**.
@@ -52,12 +52,12 @@ Connect your Azure OpenAI account to LLM Observability with your OpenAI API key.
 
 {{< img src="llm_observability/configuration/azure-openai-tile.png" alt="The Azure OpenAI configuration tile in LLM Observability. Lists instructions for configuring Azure OpenAI and providing your API Key, Resource Name, Deployment ID, and API Version." style="width:100%;" >}}
 
-[2]: https://app.datadoghq.com/llm/settings/integrations
+[1]: https://app.datadoghq.com/llm/settings/integrations
 {{% /tab %}}
 {{< /tabs >}}
 ## Select and enable evaluations
 
-1. Navigate to [**LLM Observability > Settings > Evaluations**][3].
+1. Navigate to [**LLM Observability > Settings > Evaluations**][2].
 1. Click on the evaluation you want to enable.
 1. Select **OpenAI** or **Azure OpenAI** as your LLM provider.
 1. Select the account you want to run the evaluation on.
@@ -80,9 +80,9 @@ Each of these metrics has `ml_app`, `model_server`, `model_provider`, `model_nam
 
 ## Provide topics for topic relevancy
 
-Providing topics allows you to use the [topic relevancy][4] evaluation.
+Providing topics allows you to use the [topic relevancy][3] evaluation.
 
-1. Go to [**LLM Observability > Applications**][5].
+1. Go to [**LLM Observability > Applications**][4].
 1. Select the application you want to add topics for.
 1. At the bottom of the left sidebar, select **Configuration**.
 1. Add topics in the pop-up modal.
@@ -95,7 +95,6 @@ Topics can contain multiple words and should be as specific and descriptive as p
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /llm_observability/terms/
-[2]: https://app.datadoghq.com/llm/settings/integrations
-[3]: https://app.datadoghq.com/llm/settings/evaluations
-[4]: /llm_observability/terms/#topic-relevancy
-[5]: https://app.datadoghq.com/llm/applications
+[2]: https://app.datadoghq.com/llm/settings/evaluations
+[3]: /llm_observability/terms/#topic-relevancy
+[4]: https://app.datadoghq.com/llm/applications
