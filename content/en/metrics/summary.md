@@ -155,7 +155,7 @@ To determine the value of any metric name to your organization, use Metrics Rela
 {{< /callout >}} 
 
 {{< img src="metrics/tagsexplorer.png" alt="Custom Metrics Tags Cardinality Explorer for a spiking metric name" style="width:80%;">}}
-To determine why a particular metric name is emitting a very large number of custom metrics or is spiking , use the Custom Metrics Tags Cardinality Explorer to quickly pinpoint which tag key(s) are driving this spike. These are the tags you can immediately exclude using Metrics without Limits™ to quickly achieve cost savings.
+To determine why a particular metric name is emitting a large number of custom metrics, or spiking, use the Custom Metrics Tags Cardinality Explorer. This helps you pinpoint the tag keys driving the spike, which you can immediately exclude using Metrics without Limits™ for cost savings.
 
 ## Metrics without Limits™
 Metrics without Limits™ provides you control over the size of your custom metrics without requiring any agent or code-level changes. 
