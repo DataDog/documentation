@@ -40,7 +40,7 @@ Craft the Monitor Name to include key information for the responder to quickly u
 | ---  | ----------- | 
 | *Memory usage* | *High memory usage on {{pod\_name.name}}* |
 
-Although both the examples above are referring to a memory consumption monitor, the first one gives a complete representation of the ongoing issue with some necessary context to narrow down the investigation.
+While both the examples refer to a memory consumption monitor, the improved title gives a thorough representation with essential context for focused investigation.
 
 ### Message
 
