@@ -35,7 +35,6 @@ The monitor title should give a clear description of the signal, including:
 * The failure mode(s) or the diverging metrics  
 * What resource is affected (such as Datacenter, Kubernetes Cluster, host, or service)
 
-Given the above, when crafting the Monitor Name, that will also represent the Notification Subject, try to include the information needed to the responder to grasp the context of the alert at glance. 
 
 Example of a good title:  
 *High memory usage on {{pod\_name.name}}*
