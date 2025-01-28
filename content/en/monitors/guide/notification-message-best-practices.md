@@ -61,7 +61,7 @@ In the following sections you will learn how to use advanced features to further
 #### Variables
 
 Monitor message variables are dynamic placeholders that allow you to customize notification messages with real-time contextual information. Use variables to enhance message clarity, and provide detailed context.
-You have 2 types of variables:
+There are two types of variables:
 
 * Conditional variables that use "*if-else"* logic to tweak the context of the message depending on some conditions, such as the state of the monitor.  
 * Template variables to enrich your monitor notifications with contextual information.
