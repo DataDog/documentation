@@ -70,8 +70,6 @@ For more information, see the [Monitor status events][3] documentation.
 The following monitor types are not supported by the provisional status page:
 
 - Anomaly
-- Cloud Cost
-- Composite
 - Database Monitoring
 - Forecast
 - Live Process
