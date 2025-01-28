@@ -53,7 +53,7 @@ The program accepts the following parameters:
 
  - `--confirmation`: Ask the user for confirmation to override the Git hook check
  - `--default-branch`: Specify the name of the default branch.
- - `--static-analysis`: Enable static analysis.
+ - `--static-analysis`: Enable Static Code Analysis.
  - `--secrets`: Enable secrets detection (private beta).
  - `--output <file>`: Export the findings found in the commit into a SARIF file.
 

@@ -1,5 +1,5 @@
 ---
-title: IAST
+title: Runtime Code Analysis (IAST)
 disable_toc: false
 aliases:
 - /security/application_security/code_security/
