@@ -65,13 +65,9 @@ There are two types of variables:
 
 | Variable Type | Description | |---------------------|-----------------------------------------------------------------------------------------------------| | [Conditional](#conditional-variables) | Uses "if-else" logic to adjust the message context based on conditions like monitor state. | | [Template](#template-variables) | Enriches monitor notifications with contextual information. |
 
-Variables are especially important in a **Multi-Alert** monitor. When it triggers, you want to know which group triggered the monitor, and that's where variables are handy.
+Variables are especially important in a **Multi-Alert** monitor. When triggered, you need to know which group is responsible. For example, monitoring CPU usage by container, grouped by host. A valuable variable is {{host.name}} indicating the host that triggered the alert.
 
-Example:  
-Let's say you are monitoring the CPU usage of your containers, grouped by host.  
 {{< img src="/monitors/guide/notification_message_best_practices/query_parameters.png" alt="Example monitor query of container.cpu.usage metric averaged by host" style="width:100%;" >}}
-
-A great variable to use would be **{{host.name}}** to know the exact host that  triggered the alert.
 
 #### Conditional variables
 
