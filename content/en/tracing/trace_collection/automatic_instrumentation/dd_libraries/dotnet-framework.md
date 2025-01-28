@@ -139,7 +139,11 @@ For information about the different methods for setting environment variables, s
    </div>
 
 
-#### Services not in IIS
+#### Services outside IIS
+
+<div class="alert alert-warning">
+  <strong>Note:</strong> The .NET runtime tries to load the .NET library into <em>any</em> .NET process that is started with these environment variables set. You should limit instrumentation to only the applications that need to be instrumented. <strong>Don't set these environment variables globally as this causes <em>all</em> .NET processes on the host to be instrumented.</strong>
+</div>
 
 1. Set the following required environment variables for automatic instrumentation to attach to your application:
 
@@ -155,10 +159,9 @@ For information about the different methods for setting environment variables, s
 Follow the instructions in the package readme, also available in [`dd-trace-dotnet` repository][1].
 Docker examples are also available in the [repository][2].
 
-
-
 [1]: https://github.com/DataDog/dd-trace-dotnet/blob/master/docs/Datadog.Trace.Bundle/README.md
 [2]: https://github.com/DataDog/dd-trace-dotnet/tree/master/tracer/samples/NugetDeployment
+
 {{% /tab %}}
 
 {{< /tabs >}}
@@ -196,6 +199,7 @@ To use custom instrumentation in your .NET application:
 3. In your application code, access the global tracer through the `Datadog.Trace.Tracer.Instance` property to create new spans.
 
 [1]: https://www.nuget.org/packages/Datadog.Trace
+
 {{% /tab %}}
 
 {{% tab "NuGet" %}}
@@ -214,7 +218,9 @@ For more information on adding spans and tags for custom instrumentation, see th
 
 To attach automatic instrumentation to your service, set the required environment variables before starting the application. See [Enable the tracer for your service](#enable-the-tracer-for-your-service) section to identify which environment variables to set based on your .NET Tracer installation method and follow the examples below to correctly set the environment variables based on the environment of your instrumented service.
 
-### Windows
+<div class="alert alert-warning">
+  <strong>Note:</strong> The .NET runtime tries to load the .NET library into <em>any</em> .NET process that is started with these environment variables set. You should limit instrumentation to only the applications that need to be instrumented. <strong>Don't set these environment variables globally as this causes <em>all</em> .NET processes on the host to be instrumented.</strong>
+</div>
 
 #### Windows services
 
