@@ -53,8 +53,6 @@ On-call responders rely on the notification body to understand and act on alerts
 - Ensure notifications are sent to the appropriate recipients, either as direct email notifications or through [integration handles][1] (such as Slack).
 
 
-* You can use your email address in the notification message to receive the notification directly in your inbox.  
-* You can use [integrations](https://docs.datadoghq.com/monitors/notify/#integrations) handles to send your notifications to your desired integration (e.g. Slack)
 
 In the following sections you will learn how to use advanced features to further enhance your monitor messages. 
 
