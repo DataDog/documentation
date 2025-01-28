@@ -48,7 +48,7 @@
     <!-- check if on /partners/ top level section page, don't generate sub anchors if true -->
     {{ if and (.HasChildren) (ne $currentPage.CurrentSection.RelPermalink "/partners/" ) }}
         <li class="{{ if or ($currentPage.IsMenuCurrent $partnersMenu .) ($currentPage.HasMenuCurrent $partnersMenu .) (eq $currentEnURL .URL) }}active{{ end }}">
-            <a href="{{ (strings.TrimLeft "/" .URL) | absLangURL }}">
+            <a href="{{ (strings.TrimLeft "/" .URL) | absLangURL }}" data-path='{{trim .URL "/"}}'>
                 <span>{{ .Name }}</span>
             </a>
             <ul class="nav">
@@ -64,7 +64,7 @@
                         {{ end }}
 
                         {{$engName := $dot.Scratch.Get "name"}}
-                        <a class="col nav-link d-inline-block" href='{{ if hasPrefix .URL "#" }}#{{ default (.Name | anchorize) ($engName | anchorize) }}{{ else }}{{ (strings.TrimLeft "/" .URL) | absLangURL }}{{ end }}' data-bs-target="#{{.Identifier}}">
+                        <a class="col nav-link d-inline-block" href='{{ if hasPrefix .URL "#" }}#{{ default (.Name | anchorize) ($engName | anchorize) }}{{ else }}{{ (strings.TrimLeft "/" .URL) | absLangURL }}{{ end }}' data-path='{{trim .URL "/"}}'>
                           <span class="d-inline-block">{{ .Name }}</span>
                         </a>
                     </li>
