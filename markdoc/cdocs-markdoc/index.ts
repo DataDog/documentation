@@ -3,7 +3,6 @@ import format from './src/formatter';
 import functions from './src/functions';
 import parser from './src/parser';
 import * as nodes from './src/schema';
-import renderers from './src/renderers';
 import tags from './src/tags';
 import { truthy } from './src/tags/conditional';
 import Tokenizer from './src/tokenizer';
@@ -90,7 +89,6 @@ export {
   functions,
   globalAttributes,
   transforms,
-  renderers,
   Ast,
   Tag,
   Tokenizer,
@@ -106,7 +104,6 @@ export default class MarkdocStaticCompiler {
   static tags = tags;
   static functions = functions;
   static globalAttributes = globalAttributes;
-  static renderers = renderers;
   static transforms = transforms;
   static Ast = Ast;
   static Tokenizer = Tokenizer;
