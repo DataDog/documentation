@@ -7,10 +7,10 @@ describe('rendering stages', () => {
   const inputPath = __dirname + '/input.mdoc';
   const inputString = fs.readFileSync(inputPath, 'utf-8');
 
-  // stage 1: build the AST
+  // Build the AST
   const ast = CdocsMarkdoc.parse(inputString);
 
-  // stage 2: build the renderable tree
+  // Build the renderable tree
   const renderableTree = CdocsMarkdoc.transform(ast, {
     variables: {
       test_string: 'Datadog',
@@ -42,12 +42,12 @@ describe('rendering stages', () => {
 
     function traverseAndLog(node: any, level: number = 0) {
       if (typeof node === 'string') {
-        // Any text starting with "YES: " should within content that is marked as displayed
-        if (node.startsWith('YES: ')) {
+        // Any text starting with "SHOWN" should within content that is marked as displayed
+        if (node.startsWith('SHOWN')) {
           expect(displayStatus.displayAttributeVal).toBe(true);
           expect(displayStatus.setAtLevel).toBeLessThan(level);
-          // Any text starting with "NO: " should be within content that is marked as hidden
-        } else if (node.startsWith('NO: ')) {
+          // Any text starting with "HIDDEN" should be within content that is marked as hidden
+        } else if (node.startsWith('HIDDEN')) {
           expect(displayStatus.setAtLevel).toBeLessThan(level);
         }
         // Recursively traverse the tree to find the next display attribute,

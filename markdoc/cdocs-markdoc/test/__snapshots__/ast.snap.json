@@ -202,10 +202,13 @@
       "errors": [],
       "lines": [
         14,
-        15
+        17
       ],
       "inline": false,
-      "attributes": {},
+      "attributes": {
+        "ordered": false,
+        "marker": "-"
+      },
       "children": [
         {
           "$$mdtype": "Node",
@@ -224,12 +227,35 @@
                 14,
                 15
               ],
-              "inline": true,
-              "attributes": {
-                "content": "Anything starting with \"YES: \" should display. Anything starting with \"NO: \" should not display."
-              },
-              "children": [],
-              "type": "text",
+              "inline": false,
+              "attributes": {},
+              "children": [
+                {
+                  "$$mdtype": "Node",
+                  "errors": [],
+                  "lines": [
+                    14,
+                    15
+                  ],
+                  "inline": true,
+                  "attributes": {
+                    "content": "Anything that says \"SHOWN\" should be marked as shown in the renderable tree."
+                  },
+                  "children": [],
+                  "type": "text",
+                  "annotations": [],
+                  "slots": {},
+                  "location": {
+                    "start": {
+                      "line": 14
+                    },
+                    "end": {
+                      "line": 15
+                    }
+                  }
+                }
+              ],
+              "type": "inline",
               "annotations": [],
               "slots": {},
               "location": {
@@ -242,7 +268,7 @@
               }
             }
           ],
-          "type": "inline",
+          "type": "item",
           "annotations": [],
           "slots": {},
           "location": {
@@ -253,9 +279,79 @@
               "line": 15
             }
           }
+        },
+        {
+          "$$mdtype": "Node",
+          "errors": [],
+          "lines": [
+            15,
+            17
+          ],
+          "inline": false,
+          "attributes": {},
+          "children": [
+            {
+              "$$mdtype": "Node",
+              "errors": [],
+              "lines": [
+                15,
+                16
+              ],
+              "inline": false,
+              "attributes": {},
+              "children": [
+                {
+                  "$$mdtype": "Node",
+                  "errors": [],
+                  "lines": [
+                    15,
+                    16
+                  ],
+                  "inline": true,
+                  "attributes": {
+                    "content": "Anything that says \"HIDDEN\" should not display."
+                  },
+                  "children": [],
+                  "type": "text",
+                  "annotations": [],
+                  "slots": {},
+                  "location": {
+                    "start": {
+                      "line": 15
+                    },
+                    "end": {
+                      "line": 16
+                    }
+                  }
+                }
+              ],
+              "type": "inline",
+              "annotations": [],
+              "slots": {},
+              "location": {
+                "start": {
+                  "line": 15
+                },
+                "end": {
+                  "line": 16
+                }
+              }
+            }
+          ],
+          "type": "item",
+          "annotations": [],
+          "slots": {},
+          "location": {
+            "start": {
+              "line": 15
+            },
+            "end": {
+              "line": 17
+            }
+          }
         }
       ],
-      "type": "paragraph",
+      "type": "list",
       "annotations": [],
       "slots": {},
       "location": {
@@ -263,7 +359,7 @@
           "line": 14
         },
         "end": {
-          "line": 15
+          "line": 17
         }
       }
     },
@@ -271,8 +367,8 @@
       "$$mdtype": "Node",
       "errors": [],
       "lines": [
-        16,
-        17
+        17,
+        18
       ],
       "inline": false,
       "attributes": {
@@ -283,8 +379,8 @@
           "$$mdtype": "Node",
           "errors": [],
           "lines": [
-            16,
-            17
+            17,
+            18
           ],
           "inline": false,
           "attributes": {},
@@ -293,8 +389,8 @@
               "$$mdtype": "Node",
               "errors": [],
               "lines": [
-                16,
-                17
+                17,
+                18
               ],
               "inline": true,
               "attributes": {
@@ -306,10 +402,10 @@
               "slots": {},
               "location": {
                 "start": {
-                  "line": 16
+                  "line": 17
                 },
                 "end": {
-                  "line": 17
+                  "line": 18
                 }
               }
             }
@@ -319,10 +415,10 @@
           "slots": {},
           "location": {
             "start": {
-              "line": 16
+              "line": 17
             },
             "end": {
-              "line": 17
+              "line": 18
             }
           }
         }
@@ -332,10 +428,10 @@
       "slots": {},
       "location": {
         "start": {
-          "line": 16
+          "line": 17
         },
         "end": {
-          "line": 17
+          "line": 18
         }
       }
     },
@@ -343,8 +439,8 @@
       "$$mdtype": "Node",
       "errors": [],
       "lines": [
-        18,
-        22
+        19,
+        23
       ],
       "inline": false,
       "attributes": {
@@ -352,129 +448,6 @@
         "marker": "-"
       },
       "children": [
-        {
-          "$$mdtype": "Node",
-          "errors": [],
-          "lines": [
-            18,
-            19
-          ],
-          "inline": false,
-          "attributes": {},
-          "children": [
-            {
-              "$$mdtype": "Node",
-              "errors": [],
-              "lines": [
-                18,
-                19
-              ],
-              "inline": false,
-              "attributes": {},
-              "children": [
-                {
-                  "$$mdtype": "Node",
-                  "errors": [],
-                  "lines": [
-                    18,
-                    19
-                  ],
-                  "inline": true,
-                  "attributes": {
-                    "content": "test_string"
-                  },
-                  "children": [],
-                  "type": "code",
-                  "annotations": [],
-                  "slots": {},
-                  "location": {
-                    "start": {
-                      "line": 18
-                    },
-                    "end": {
-                      "line": 19
-                    }
-                  }
-                },
-                {
-                  "$$mdtype": "Node",
-                  "errors": [],
-                  "lines": [
-                    18,
-                    19
-                  ],
-                  "inline": true,
-                  "attributes": {
-                    "content": ": "
-                  },
-                  "children": [],
-                  "type": "text",
-                  "annotations": [],
-                  "slots": {},
-                  "location": {
-                    "start": {
-                      "line": 18
-                    },
-                    "end": {
-                      "line": 19
-                    }
-                  }
-                },
-                {
-                  "$$mdtype": "Node",
-                  "errors": [],
-                  "lines": [
-                    18,
-                    19
-                  ],
-                  "inline": true,
-                  "attributes": {
-                    "content": {
-                      "$$mdtype": "Variable",
-                      "path": [
-                        "test_string"
-                      ]
-                    }
-                  },
-                  "children": [],
-                  "type": "text",
-                  "annotations": [],
-                  "slots": {},
-                  "location": {
-                    "start": {
-                      "line": 18
-                    },
-                    "end": {
-                      "line": 19
-                    }
-                  }
-                }
-              ],
-              "type": "inline",
-              "annotations": [],
-              "slots": {},
-              "location": {
-                "start": {
-                  "line": 18
-                },
-                "end": {
-                  "line": 19
-                }
-              }
-            }
-          ],
-          "type": "item",
-          "annotations": [],
-          "slots": {},
-          "location": {
-            "start": {
-              "line": 18
-            },
-            "end": {
-              "line": 19
-            }
-          }
-        },
         {
           "$$mdtype": "Node",
           "errors": [],
@@ -504,7 +477,7 @@
                   ],
                   "inline": true,
                   "attributes": {
-                    "content": "always_true"
+                    "content": "test_string"
                   },
                   "children": [],
                   "type": "code",
@@ -555,7 +528,7 @@
                     "content": {
                       "$$mdtype": "Variable",
                       "path": [
-                        "always_true"
+                        "test_string"
                       ]
                     }
                   },
@@ -603,7 +576,7 @@
           "errors": [],
           "lines": [
             20,
-            22
+            21
           ],
           "inline": false,
           "attributes": {},
@@ -627,7 +600,7 @@
                   ],
                   "inline": true,
                   "attributes": {
-                    "content": "always_false"
+                    "content": "always_true"
                   },
                   "children": [],
                   "type": "code",
@@ -678,7 +651,7 @@
                     "content": {
                       "$$mdtype": "Variable",
                       "path": [
-                        "always_false"
+                        "always_true"
                       ]
                     }
                   },
@@ -717,7 +690,130 @@
               "line": 20
             },
             "end": {
-              "line": 22
+              "line": 21
+            }
+          }
+        },
+        {
+          "$$mdtype": "Node",
+          "errors": [],
+          "lines": [
+            21,
+            23
+          ],
+          "inline": false,
+          "attributes": {},
+          "children": [
+            {
+              "$$mdtype": "Node",
+              "errors": [],
+              "lines": [
+                21,
+                22
+              ],
+              "inline": false,
+              "attributes": {},
+              "children": [
+                {
+                  "$$mdtype": "Node",
+                  "errors": [],
+                  "lines": [
+                    21,
+                    22
+                  ],
+                  "inline": true,
+                  "attributes": {
+                    "content": "always_false"
+                  },
+                  "children": [],
+                  "type": "code",
+                  "annotations": [],
+                  "slots": {},
+                  "location": {
+                    "start": {
+                      "line": 21
+                    },
+                    "end": {
+                      "line": 22
+                    }
+                  }
+                },
+                {
+                  "$$mdtype": "Node",
+                  "errors": [],
+                  "lines": [
+                    21,
+                    22
+                  ],
+                  "inline": true,
+                  "attributes": {
+                    "content": ": "
+                  },
+                  "children": [],
+                  "type": "text",
+                  "annotations": [],
+                  "slots": {},
+                  "location": {
+                    "start": {
+                      "line": 21
+                    },
+                    "end": {
+                      "line": 22
+                    }
+                  }
+                },
+                {
+                  "$$mdtype": "Node",
+                  "errors": [],
+                  "lines": [
+                    21,
+                    22
+                  ],
+                  "inline": true,
+                  "attributes": {
+                    "content": {
+                      "$$mdtype": "Variable",
+                      "path": [
+                        "always_false"
+                      ]
+                    }
+                  },
+                  "children": [],
+                  "type": "text",
+                  "annotations": [],
+                  "slots": {},
+                  "location": {
+                    "start": {
+                      "line": 21
+                    },
+                    "end": {
+                      "line": 22
+                    }
+                  }
+                }
+              ],
+              "type": "inline",
+              "annotations": [],
+              "slots": {},
+              "location": {
+                "start": {
+                  "line": 21
+                },
+                "end": {
+                  "line": 22
+                }
+              }
+            }
+          ],
+          "type": "item",
+          "annotations": [],
+          "slots": {},
+          "location": {
+            "start": {
+              "line": 21
+            },
+            "end": {
+              "line": 23
             }
           }
         }
@@ -727,10 +823,10 @@
       "slots": {},
       "location": {
         "start": {
-          "line": 18
+          "line": 19
         },
         "end": {
-          "line": 22
+          "line": 23
         }
       }
     },
@@ -738,8 +834,8 @@
       "$$mdtype": "Node",
       "errors": [],
       "lines": [
-        22,
-        23
+        23,
+        24
       ],
       "inline": false,
       "attributes": {
@@ -750,8 +846,8 @@
           "$$mdtype": "Node",
           "errors": [],
           "lines": [
-            22,
-            23
+            23,
+            24
           ],
           "inline": false,
           "attributes": {},
@@ -760,8 +856,8 @@
               "$$mdtype": "Node",
               "errors": [],
               "lines": [
-                22,
-                23
+                23,
+                24
               ],
               "inline": true,
               "attributes": {
@@ -773,10 +869,10 @@
               "slots": {},
               "location": {
                 "start": {
-                  "line": 22
+                  "line": 23
                 },
                 "end": {
-                  "line": 23
+                  "line": 24
                 }
               }
             }
@@ -786,10 +882,10 @@
           "slots": {},
           "location": {
             "start": {
-              "line": 22
+              "line": 23
             },
             "end": {
-              "line": 23
+              "line": 24
             }
           }
         }
@@ -799,10 +895,10 @@
       "slots": {},
       "location": {
         "start": {
-          "line": 22
+          "line": 23
         },
         "end": {
-          "line": 23
+          "line": 24
         }
       }
     },
@@ -810,8 +906,8 @@
       "$$mdtype": "Node",
       "errors": [],
       "lines": [
-        24,
-        25
+        25,
+        26
       ],
       "inline": false,
       "attributes": {
@@ -822,8 +918,8 @@
           "$$mdtype": "Node",
           "errors": [],
           "lines": [
-            24,
-            25
+            25,
+            26
           ],
           "inline": false,
           "attributes": {},
@@ -832,8 +928,8 @@
               "$$mdtype": "Node",
               "errors": [],
               "lines": [
-                24,
-                25
+                25,
+                26
               ],
               "inline": true,
               "attributes": {
@@ -845,10 +941,10 @@
               "slots": {},
               "location": {
                 "start": {
-                  "line": 24
+                  "line": 25
                 },
                 "end": {
-                  "line": 25
+                  "line": 26
                 }
               }
             },
@@ -856,8 +952,8 @@
               "$$mdtype": "Node",
               "errors": [],
               "lines": [
-                24,
-                25
+                25,
+                26
               ],
               "inline": true,
               "attributes": {
@@ -869,10 +965,10 @@
               "slots": {},
               "location": {
                 "start": {
-                  "line": 24
+                  "line": 25
                 },
                 "end": {
-                  "line": 25
+                  "line": 26
                 }
               }
             }
@@ -882,10 +978,10 @@
           "slots": {},
           "location": {
             "start": {
-              "line": 24
+              "line": 25
             },
             "end": {
-              "line": 25
+              "line": 26
             }
           }
         }
@@ -895,10 +991,10 @@
       "slots": {},
       "location": {
         "start": {
-          "line": 24
+          "line": 25
         },
         "end": {
-          "line": 25
+          "line": 26
         }
       }
     },
@@ -906,10 +1002,10 @@
       "$$mdtype": "Node",
       "errors": [],
       "lines": [
-        26,
         27,
         28,
-        29
+        29,
+        30
       ],
       "inline": false,
       "attributes": {
@@ -932,8 +1028,8 @@
           "$$mdtype": "Node",
           "errors": [],
           "lines": [
-            27,
-            28
+            28,
+            29
           ],
           "inline": false,
           "attributes": {},
@@ -942,8 +1038,8 @@
               "$$mdtype": "Node",
               "errors": [],
               "lines": [
-                27,
-                28
+                28,
+                29
               ],
               "inline": false,
               "attributes": {},
@@ -952,12 +1048,12 @@
                   "$$mdtype": "Node",
                   "errors": [],
                   "lines": [
-                    27,
-                    28
+                    28,
+                    29
                   ],
                   "inline": true,
                   "attributes": {
-                    "content": "YES: Display if "
+                    "content": "SHOWN"
                   },
                   "children": [],
                   "type": "text",
@@ -965,58 +1061,10 @@
                   "slots": {},
                   "location": {
                     "start": {
-                      "line": 27
+                      "line": 28
                     },
                     "end": {
-                      "line": 28
-                    }
-                  }
-                },
-                {
-                  "$$mdtype": "Node",
-                  "errors": [],
-                  "lines": [
-                    27,
-                    28
-                  ],
-                  "inline": true,
-                  "attributes": {
-                    "content": "equals($always_true, true)"
-                  },
-                  "children": [],
-                  "type": "code",
-                  "annotations": [],
-                  "slots": {},
-                  "location": {
-                    "start": {
-                      "line": 27
-                    },
-                    "end": {
-                      "line": 28
-                    }
-                  }
-                },
-                {
-                  "$$mdtype": "Node",
-                  "errors": [],
-                  "lines": [
-                    27,
-                    28
-                  ],
-                  "inline": true,
-                  "attributes": {
-                    "content": "."
-                  },
-                  "children": [],
-                  "type": "text",
-                  "annotations": [],
-                  "slots": {},
-                  "location": {
-                    "start": {
-                      "line": 27
-                    },
-                    "end": {
-                      "line": 28
+                      "line": 29
                     }
                   }
                 }
@@ -1026,10 +1074,10 @@
               "slots": {},
               "location": {
                 "start": {
-                  "line": 27
+                  "line": 28
                 },
                 "end": {
-                  "line": 28
+                  "line": 29
                 }
               }
             }
@@ -1039,10 +1087,10 @@
           "slots": {},
           "location": {
             "start": {
-              "line": 27
+              "line": 28
             },
             "end": {
-              "line": 28
+              "line": 29
             }
           }
         }
@@ -1071,10 +1119,10 @@
       "slots": {},
       "location": {
         "start": {
-          "line": 26
+          "line": 27
         },
         "end": {
-          "line": 27
+          "line": 28
         }
       }
     },
@@ -1082,10 +1130,10 @@
       "$$mdtype": "Node",
       "errors": [],
       "lines": [
-        30,
         31,
         32,
-        33
+        33,
+        34
       ],
       "inline": false,
       "attributes": {
@@ -1108,8 +1156,8 @@
           "$$mdtype": "Node",
           "errors": [],
           "lines": [
-            31,
-            32
+            32,
+            33
           ],
           "inline": false,
           "attributes": {},
@@ -1118,8 +1166,8 @@
               "$$mdtype": "Node",
               "errors": [],
               "lines": [
-                31,
-                32
+                32,
+                33
               ],
               "inline": false,
               "attributes": {},
@@ -1128,12 +1176,12 @@
                   "$$mdtype": "Node",
                   "errors": [],
                   "lines": [
-                    31,
-                    32
+                    32,
+                    33
                   ],
                   "inline": true,
                   "attributes": {
-                    "content": "YES: Display if "
+                    "content": "SHOWN"
                   },
                   "children": [],
                   "type": "text",
@@ -1141,58 +1189,10 @@
                   "slots": {},
                   "location": {
                     "start": {
-                      "line": 31
+                      "line": 32
                     },
                     "end": {
-                      "line": 32
-                    }
-                  }
-                },
-                {
-                  "$$mdtype": "Node",
-                  "errors": [],
-                  "lines": [
-                    31,
-                    32
-                  ],
-                  "inline": true,
-                  "attributes": {
-                    "content": "equals($test_string, \"Datadog\")"
-                  },
-                  "children": [],
-                  "type": "code",
-                  "annotations": [],
-                  "slots": {},
-                  "location": {
-                    "start": {
-                      "line": 31
-                    },
-                    "end": {
-                      "line": 32
-                    }
-                  }
-                },
-                {
-                  "$$mdtype": "Node",
-                  "errors": [],
-                  "lines": [
-                    31,
-                    32
-                  ],
-                  "inline": true,
-                  "attributes": {
-                    "content": "."
-                  },
-                  "children": [],
-                  "type": "text",
-                  "annotations": [],
-                  "slots": {},
-                  "location": {
-                    "start": {
-                      "line": 31
-                    },
-                    "end": {
-                      "line": 32
+                      "line": 33
                     }
                   }
                 }
@@ -1202,10 +1202,10 @@
               "slots": {},
               "location": {
                 "start": {
-                  "line": 31
+                  "line": 32
                 },
                 "end": {
-                  "line": 32
+                  "line": 33
                 }
               }
             }
@@ -1215,10 +1215,10 @@
           "slots": {},
           "location": {
             "start": {
-              "line": 31
+              "line": 32
             },
             "end": {
-              "line": 32
+              "line": 33
             }
           }
         }
@@ -1247,10 +1247,10 @@
       "slots": {},
       "location": {
         "start": {
-          "line": 30
+          "line": 31
         },
         "end": {
-          "line": 31
+          "line": 32
         }
       }
     },
@@ -1258,10 +1258,10 @@
       "$$mdtype": "Node",
       "errors": [],
       "lines": [
-        34,
         35,
         36,
-        37
+        37,
+        38
       ],
       "inline": false,
       "attributes": {
@@ -1284,8 +1284,8 @@
           "$$mdtype": "Node",
           "errors": [],
           "lines": [
-            35,
-            36
+            36,
+            37
           ],
           "inline": false,
           "attributes": {},
@@ -1294,8 +1294,8 @@
               "$$mdtype": "Node",
               "errors": [],
               "lines": [
-                35,
-                36
+                36,
+                37
               ],
               "inline": false,
               "attributes": {},
@@ -1304,12 +1304,12 @@
                   "$$mdtype": "Node",
                   "errors": [],
                   "lines": [
-                    35,
-                    36
+                    36,
+                    37
                   ],
                   "inline": true,
                   "attributes": {
-                    "content": "NO: Display if "
+                    "content": "HIDDEN"
                   },
                   "children": [],
                   "type": "text",
@@ -1317,58 +1317,10 @@
                   "slots": {},
                   "location": {
                     "start": {
-                      "line": 35
+                      "line": 36
                     },
                     "end": {
-                      "line": 36
-                    }
-                  }
-                },
-                {
-                  "$$mdtype": "Node",
-                  "errors": [],
-                  "lines": [
-                    35,
-                    36
-                  ],
-                  "inline": true,
-                  "attributes": {
-                    "content": "equals($always_false, true)"
-                  },
-                  "children": [],
-                  "type": "code",
-                  "annotations": [],
-                  "slots": {},
-                  "location": {
-                    "start": {
-                      "line": 35
-                    },
-                    "end": {
-                      "line": 36
-                    }
-                  }
-                },
-                {
-                  "$$mdtype": "Node",
-                  "errors": [],
-                  "lines": [
-                    35,
-                    36
-                  ],
-                  "inline": true,
-                  "attributes": {
-                    "content": "."
-                  },
-                  "children": [],
-                  "type": "text",
-                  "annotations": [],
-                  "slots": {},
-                  "location": {
-                    "start": {
-                      "line": 35
-                    },
-                    "end": {
-                      "line": 36
+                      "line": 37
                     }
                   }
                 }
@@ -1378,10 +1330,10 @@
               "slots": {},
               "location": {
                 "start": {
-                  "line": 35
+                  "line": 36
                 },
                 "end": {
-                  "line": 36
+                  "line": 37
                 }
               }
             }
@@ -1391,10 +1343,10 @@
           "slots": {},
           "location": {
             "start": {
-              "line": 35
+              "line": 36
             },
             "end": {
-              "line": 36
+              "line": 37
             }
           }
         }
@@ -1423,10 +1375,10 @@
       "slots": {},
       "location": {
         "start": {
-          "line": 34
+          "line": 35
         },
         "end": {
-          "line": 35
+          "line": 36
         }
       }
     },
@@ -1434,10 +1386,10 @@
       "$$mdtype": "Node",
       "errors": [],
       "lines": [
-        38,
         39,
         40,
-        41
+        41,
+        42
       ],
       "inline": false,
       "attributes": {
@@ -1460,8 +1412,8 @@
           "$$mdtype": "Node",
           "errors": [],
           "lines": [
-            39,
-            40
+            40,
+            41
           ],
           "inline": false,
           "attributes": {},
@@ -1470,8 +1422,8 @@
               "$$mdtype": "Node",
               "errors": [],
               "lines": [
-                39,
-                40
+                40,
+                41
               ],
               "inline": false,
               "attributes": {},
@@ -1480,12 +1432,12 @@
                   "$$mdtype": "Node",
                   "errors": [],
                   "lines": [
-                    39,
-                    40
+                    40,
+                    41
                   ],
                   "inline": true,
                   "attributes": {
-                    "content": "NO: Display if "
+                    "content": "HIDDEN"
                   },
                   "children": [],
                   "type": "text",
@@ -1493,58 +1445,10 @@
                   "slots": {},
                   "location": {
                     "start": {
-                      "line": 39
+                      "line": 40
                     },
                     "end": {
-                      "line": 40
-                    }
-                  }
-                },
-                {
-                  "$$mdtype": "Node",
-                  "errors": [],
-                  "lines": [
-                    39,
-                    40
-                  ],
-                  "inline": true,
-                  "attributes": {
-                    "content": "equals($test_string, \"Hello\")"
-                  },
-                  "children": [],
-                  "type": "code",
-                  "annotations": [],
-                  "slots": {},
-                  "location": {
-                    "start": {
-                      "line": 39
-                    },
-                    "end": {
-                      "line": 40
-                    }
-                  }
-                },
-                {
-                  "$$mdtype": "Node",
-                  "errors": [],
-                  "lines": [
-                    39,
-                    40
-                  ],
-                  "inline": true,
-                  "attributes": {
-                    "content": "."
-                  },
-                  "children": [],
-                  "type": "text",
-                  "annotations": [],
-                  "slots": {},
-                  "location": {
-                    "start": {
-                      "line": 39
-                    },
-                    "end": {
-                      "line": 40
+                      "line": 41
                     }
                   }
                 }
@@ -1554,10 +1458,10 @@
               "slots": {},
               "location": {
                 "start": {
-                  "line": 39
+                  "line": 40
                 },
                 "end": {
-                  "line": 40
+                  "line": 41
                 }
               }
             }
@@ -1567,10 +1471,10 @@
           "slots": {},
           "location": {
             "start": {
-              "line": 39
+              "line": 40
             },
             "end": {
-              "line": 40
+              "line": 41
             }
           }
         }
@@ -1599,10 +1503,10 @@
       "slots": {},
       "location": {
         "start": {
-          "line": 38
+          "line": 39
         },
         "end": {
-          "line": 39
+          "line": 40
         }
       }
     },
@@ -1610,8 +1514,8 @@
       "$$mdtype": "Node",
       "errors": [],
       "lines": [
-        42,
-        43
+        43,
+        44
       ],
       "inline": false,
       "attributes": {
@@ -1622,8 +1526,8 @@
           "$$mdtype": "Node",
           "errors": [],
           "lines": [
-            42,
-            43
+            43,
+            44
           ],
           "inline": false,
           "attributes": {},
@@ -1632,8 +1536,8 @@
               "$$mdtype": "Node",
               "errors": [],
               "lines": [
-                42,
-                43
+                43,
+                44
               ],
               "inline": true,
               "attributes": {
@@ -1645,10 +1549,10 @@
               "slots": {},
               "location": {
                 "start": {
-                  "line": 42
+                  "line": 43
                 },
                 "end": {
-                  "line": 43
+                  "line": 44
                 }
               }
             },
@@ -1656,8 +1560,8 @@
               "$$mdtype": "Node",
               "errors": [],
               "lines": [
-                42,
-                43
+                43,
+                44
               ],
               "inline": true,
               "attributes": {
@@ -1669,10 +1573,10 @@
               "slots": {},
               "location": {
                 "start": {
-                  "line": 42
+                  "line": 43
                 },
                 "end": {
-                  "line": 43
+                  "line": 44
                 }
               }
             }
@@ -1682,10 +1586,10 @@
           "slots": {},
           "location": {
             "start": {
-              "line": 42
+              "line": 43
             },
             "end": {
-              "line": 43
+              "line": 44
             }
           }
         }
@@ -1695,10 +1599,10 @@
       "slots": {},
       "location": {
         "start": {
-          "line": 42
+          "line": 43
         },
         "end": {
-          "line": 43
+          "line": 44
         }
       }
     },
@@ -1706,10 +1610,10 @@
       "$$mdtype": "Node",
       "errors": [],
       "lines": [
-        44,
         45,
         46,
-        47
+        47,
+        48
       ],
       "inline": false,
       "attributes": {
@@ -1732,8 +1636,8 @@
           "$$mdtype": "Node",
           "errors": [],
           "lines": [
-            45,
-            46
+            46,
+            47
           ],
           "inline": false,
           "attributes": {},
@@ -1742,8 +1646,8 @@
               "$$mdtype": "Node",
               "errors": [],
               "lines": [
-                45,
-                46
+                46,
+                47
               ],
               "inline": false,
               "attributes": {},
@@ -1752,12 +1656,12 @@
                   "$$mdtype": "Node",
                   "errors": [],
                   "lines": [
-                    45,
-                    46
+                    46,
+                    47
                   ],
                   "inline": true,
                   "attributes": {
-                    "content": "YES: Display if "
+                    "content": "SHOWN"
                   },
                   "children": [],
                   "type": "text",
@@ -1765,58 +1669,10 @@
                   "slots": {},
                   "location": {
                     "start": {
-                      "line": 45
+                      "line": 46
                     },
                     "end": {
-                      "line": 46
-                    }
-                  }
-                },
-                {
-                  "$$mdtype": "Node",
-                  "errors": [],
-                  "lines": [
-                    45,
-                    46
-                  ],
-                  "inline": true,
-                  "attributes": {
-                    "content": "default($notDefined, true)"
-                  },
-                  "children": [],
-                  "type": "code",
-                  "annotations": [],
-                  "slots": {},
-                  "location": {
-                    "start": {
-                      "line": 45
-                    },
-                    "end": {
-                      "line": 46
-                    }
-                  }
-                },
-                {
-                  "$$mdtype": "Node",
-                  "errors": [],
-                  "lines": [
-                    45,
-                    46
-                  ],
-                  "inline": true,
-                  "attributes": {
-                    "content": "."
-                  },
-                  "children": [],
-                  "type": "text",
-                  "annotations": [],
-                  "slots": {},
-                  "location": {
-                    "start": {
-                      "line": 45
-                    },
-                    "end": {
-                      "line": 46
+                      "line": 47
                     }
                   }
                 }
@@ -1826,10 +1682,10 @@
               "slots": {},
               "location": {
                 "start": {
-                  "line": 45
+                  "line": 46
                 },
                 "end": {
-                  "line": 46
+                  "line": 47
                 }
               }
             }
@@ -1839,10 +1695,10 @@
           "slots": {},
           "location": {
             "start": {
-              "line": 45
+              "line": 46
             },
             "end": {
-              "line": 46
+              "line": 47
             }
           }
         }
@@ -1871,10 +1727,10 @@
       "slots": {},
       "location": {
         "start": {
-          "line": 44
+          "line": 45
         },
         "end": {
-          "line": 45
+          "line": 46
         }
       }
     },
@@ -1882,10 +1738,10 @@
       "$$mdtype": "Node",
       "errors": [],
       "lines": [
-        48,
         49,
         50,
-        51
+        51,
+        52
       ],
       "inline": false,
       "attributes": {
@@ -1908,8 +1764,8 @@
           "$$mdtype": "Node",
           "errors": [],
           "lines": [
-            49,
-            50
+            50,
+            51
           ],
           "inline": false,
           "attributes": {},
@@ -1918,8 +1774,8 @@
               "$$mdtype": "Node",
               "errors": [],
               "lines": [
-                49,
-                50
+                50,
+                51
               ],
               "inline": false,
               "attributes": {},
@@ -1928,12 +1784,12 @@
                   "$$mdtype": "Node",
                   "errors": [],
                   "lines": [
-                    49,
-                    50
+                    50,
+                    51
                   ],
                   "inline": true,
                   "attributes": {
-                    "content": "YES: Display if "
+                    "content": "SHOWN"
                   },
                   "children": [],
                   "type": "text",
@@ -1941,58 +1797,10 @@
                   "slots": {},
                   "location": {
                     "start": {
-                      "line": 49
+                      "line": 50
                     },
                     "end": {
-                      "line": 50
-                    }
-                  }
-                },
-                {
-                  "$$mdtype": "Node",
-                  "errors": [],
-                  "lines": [
-                    49,
-                    50
-                  ],
-                  "inline": true,
-                  "attributes": {
-                    "content": "default($always_true, false)"
-                  },
-                  "children": [],
-                  "type": "code",
-                  "annotations": [],
-                  "slots": {},
-                  "location": {
-                    "start": {
-                      "line": 49
-                    },
-                    "end": {
-                      "line": 50
-                    }
-                  }
-                },
-                {
-                  "$$mdtype": "Node",
-                  "errors": [],
-                  "lines": [
-                    49,
-                    50
-                  ],
-                  "inline": true,
-                  "attributes": {
-                    "content": "."
-                  },
-                  "children": [],
-                  "type": "text",
-                  "annotations": [],
-                  "slots": {},
-                  "location": {
-                    "start": {
-                      "line": 49
-                    },
-                    "end": {
-                      "line": 50
+                      "line": 51
                     }
                   }
                 }
@@ -2002,10 +1810,10 @@
               "slots": {},
               "location": {
                 "start": {
-                  "line": 49
+                  "line": 50
                 },
                 "end": {
-                  "line": 50
+                  "line": 51
                 }
               }
             }
@@ -2015,10 +1823,10 @@
           "slots": {},
           "location": {
             "start": {
-              "line": 49
+              "line": 50
             },
             "end": {
-              "line": 50
+              "line": 51
             }
           }
         }
@@ -2047,10 +1855,10 @@
       "slots": {},
       "location": {
         "start": {
-          "line": 48
+          "line": 49
         },
         "end": {
-          "line": 49
+          "line": 50
         }
       }
     },
@@ -2058,10 +1866,10 @@
       "$$mdtype": "Node",
       "errors": [],
       "lines": [
-        52,
         53,
         54,
-        55
+        55,
+        56
       ],
       "inline": false,
       "attributes": {
@@ -2084,8 +1892,8 @@
           "$$mdtype": "Node",
           "errors": [],
           "lines": [
-            53,
-            54
+            54,
+            55
           ],
           "inline": false,
           "attributes": {},
@@ -2094,8 +1902,8 @@
               "$$mdtype": "Node",
               "errors": [],
               "lines": [
-                53,
-                54
+                54,
+                55
               ],
               "inline": false,
               "attributes": {},
@@ -2104,12 +1912,12 @@
                   "$$mdtype": "Node",
                   "errors": [],
                   "lines": [
-                    53,
-                    54
+                    54,
+                    55
                   ],
                   "inline": true,
                   "attributes": {
-                    "content": "NO: Display if "
+                    "content": "HIDDEN"
                   },
                   "children": [],
                   "type": "text",
@@ -2117,58 +1925,10 @@
                   "slots": {},
                   "location": {
                     "start": {
-                      "line": 53
+                      "line": 54
                     },
                     "end": {
-                      "line": 54
-                    }
-                  }
-                },
-                {
-                  "$$mdtype": "Node",
-                  "errors": [],
-                  "lines": [
-                    53,
-                    54
-                  ],
-                  "inline": true,
-                  "attributes": {
-                    "content": "default($notDefined, false)"
-                  },
-                  "children": [],
-                  "type": "code",
-                  "annotations": [],
-                  "slots": {},
-                  "location": {
-                    "start": {
-                      "line": 53
-                    },
-                    "end": {
-                      "line": 54
-                    }
-                  }
-                },
-                {
-                  "$$mdtype": "Node",
-                  "errors": [],
-                  "lines": [
-                    53,
-                    54
-                  ],
-                  "inline": true,
-                  "attributes": {
-                    "content": "."
-                  },
-                  "children": [],
-                  "type": "text",
-                  "annotations": [],
-                  "slots": {},
-                  "location": {
-                    "start": {
-                      "line": 53
-                    },
-                    "end": {
-                      "line": 54
+                      "line": 55
                     }
                   }
                 }
@@ -2178,10 +1938,10 @@
               "slots": {},
               "location": {
                 "start": {
-                  "line": 53
+                  "line": 54
                 },
                 "end": {
-                  "line": 54
+                  "line": 55
                 }
               }
             }
@@ -2191,10 +1951,10 @@
           "slots": {},
           "location": {
             "start": {
-              "line": 53
+              "line": 54
             },
             "end": {
-              "line": 54
+              "line": 55
             }
           }
         }
@@ -2223,10 +1983,10 @@
       "slots": {},
       "location": {
         "start": {
-          "line": 52
+          "line": 53
         },
         "end": {
-          "line": 53
+          "line": 54
         }
       }
     },
@@ -2234,8 +1994,8 @@
       "$$mdtype": "Node",
       "errors": [],
       "lines": [
-        56,
-        57
+        57,
+        58
       ],
       "inline": false,
       "attributes": {
@@ -2246,8 +2006,8 @@
           "$$mdtype": "Node",
           "errors": [],
           "lines": [
-            56,
-            57
+            57,
+            58
           ],
           "inline": false,
           "attributes": {},
@@ -2256,8 +2016,8 @@
               "$$mdtype": "Node",
               "errors": [],
               "lines": [
-                56,
-                57
+                57,
+                58
               ],
               "inline": true,
               "attributes": {
@@ -2269,10 +2029,10 @@
               "slots": {},
               "location": {
                 "start": {
-                  "line": 56
+                  "line": 57
                 },
                 "end": {
-                  "line": 57
+                  "line": 58
                 }
               }
             },
@@ -2280,8 +2040,8 @@
               "$$mdtype": "Node",
               "errors": [],
               "lines": [
-                56,
-                57
+                57,
+                58
               ],
               "inline": true,
               "attributes": {
@@ -2293,10 +2053,10 @@
               "slots": {},
               "location": {
                 "start": {
-                  "line": 56
+                  "line": 57
                 },
                 "end": {
-                  "line": 57
+                  "line": 58
                 }
               }
             }
@@ -2306,10 +2066,10 @@
           "slots": {},
           "location": {
             "start": {
-              "line": 56
+              "line": 57
             },
             "end": {
-              "line": 57
+              "line": 58
             }
           }
         }
@@ -2319,10 +2079,10 @@
       "slots": {},
       "location": {
         "start": {
-          "line": 56
+          "line": 57
         },
         "end": {
-          "line": 57
+          "line": 58
         }
       }
     },
@@ -2330,10 +2090,10 @@
       "$$mdtype": "Node",
       "errors": [],
       "lines": [
-        58,
         59,
         60,
-        61
+        61,
+        62
       ],
       "inline": false,
       "attributes": {
@@ -2361,8 +2121,8 @@
           "$$mdtype": "Node",
           "errors": [],
           "lines": [
-            59,
-            60
+            60,
+            61
           ],
           "inline": false,
           "attributes": {},
@@ -2371,8 +2131,8 @@
               "$$mdtype": "Node",
               "errors": [],
               "lines": [
-                59,
-                60
+                60,
+                61
               ],
               "inline": false,
               "attributes": {},
@@ -2381,12 +2141,12 @@
                   "$$mdtype": "Node",
                   "errors": [],
                   "lines": [
-                    59,
-                    60
+                    60,
+                    61
                   ],
                   "inline": true,
                   "attributes": {
-                    "content": "YES: Display if "
+                    "content": "SHOWN"
                   },
                   "children": [],
                   "type": "text",
@@ -2394,58 +2154,10 @@
                   "slots": {},
                   "location": {
                     "start": {
-                      "line": 59
+                      "line": 60
                     },
                     "end": {
-                      "line": 60
-                    }
-                  }
-                },
-                {
-                  "$$mdtype": "Node",
-                  "errors": [],
-                  "lines": [
-                    59,
-                    60
-                  ],
-                  "inline": true,
-                  "attributes": {
-                    "content": "or($always_true, $always_false)"
-                  },
-                  "children": [],
-                  "type": "code",
-                  "annotations": [],
-                  "slots": {},
-                  "location": {
-                    "start": {
-                      "line": 59
-                    },
-                    "end": {
-                      "line": 60
-                    }
-                  }
-                },
-                {
-                  "$$mdtype": "Node",
-                  "errors": [],
-                  "lines": [
-                    59,
-                    60
-                  ],
-                  "inline": true,
-                  "attributes": {
-                    "content": "."
-                  },
-                  "children": [],
-                  "type": "text",
-                  "annotations": [],
-                  "slots": {},
-                  "location": {
-                    "start": {
-                      "line": 59
-                    },
-                    "end": {
-                      "line": 60
+                      "line": 61
                     }
                   }
                 }
@@ -2455,10 +2167,10 @@
               "slots": {},
               "location": {
                 "start": {
-                  "line": 59
+                  "line": 60
                 },
                 "end": {
-                  "line": 60
+                  "line": 61
                 }
               }
             }
@@ -2468,10 +2180,10 @@
           "slots": {},
           "location": {
             "start": {
-              "line": 59
+              "line": 60
             },
             "end": {
-              "line": 60
+              "line": 61
             }
           }
         }
@@ -2505,10 +2217,10 @@
       "slots": {},
       "location": {
         "start": {
-          "line": 58
+          "line": 59
         },
         "end": {
-          "line": 59
+          "line": 60
         }
       }
     },
@@ -2516,10 +2228,10 @@
       "$$mdtype": "Node",
       "errors": [],
       "lines": [
-        62,
         63,
         64,
-        65
+        65,
+        66
       ],
       "inline": false,
       "attributes": {
@@ -2561,8 +2273,8 @@
           "$$mdtype": "Node",
           "errors": [],
           "lines": [
-            63,
-            64
+            64,
+            65
           ],
           "inline": false,
           "attributes": {},
@@ -2571,8 +2283,8 @@
               "$$mdtype": "Node",
               "errors": [],
               "lines": [
-                63,
-                64
+                64,
+                65
               ],
               "inline": false,
               "attributes": {},
@@ -2581,12 +2293,12 @@
                   "$$mdtype": "Node",
                   "errors": [],
                   "lines": [
-                    63,
-                    64
+                    64,
+                    65
                   ],
                   "inline": true,
                   "attributes": {
-                    "content": "YES: Display if "
+                    "content": "SHOWN"
                   },
                   "children": [],
                   "type": "text",
@@ -2594,58 +2306,10 @@
                   "slots": {},
                   "location": {
                     "start": {
-                      "line": 63
+                      "line": 64
                     },
                     "end": {
-                      "line": 64
-                    }
-                  }
-                },
-                {
-                  "$$mdtype": "Node",
-                  "errors": [],
-                  "lines": [
-                    63,
-                    64
-                  ],
-                  "inline": true,
-                  "attributes": {
-                    "content": "or(equals($test_string, \"Hello\"), equals($test_string, \"Datadog\"))"
-                  },
-                  "children": [],
-                  "type": "code",
-                  "annotations": [],
-                  "slots": {},
-                  "location": {
-                    "start": {
-                      "line": 63
-                    },
-                    "end": {
-                      "line": 64
-                    }
-                  }
-                },
-                {
-                  "$$mdtype": "Node",
-                  "errors": [],
-                  "lines": [
-                    63,
-                    64
-                  ],
-                  "inline": true,
-                  "attributes": {
-                    "content": "."
-                  },
-                  "children": [],
-                  "type": "text",
-                  "annotations": [],
-                  "slots": {},
-                  "location": {
-                    "start": {
-                      "line": 63
-                    },
-                    "end": {
-                      "line": 64
+                      "line": 65
                     }
                   }
                 }
@@ -2655,10 +2319,10 @@
               "slots": {},
               "location": {
                 "start": {
-                  "line": 63
+                  "line": 64
                 },
                 "end": {
-                  "line": 64
+                  "line": 65
                 }
               }
             }
@@ -2668,10 +2332,10 @@
           "slots": {},
           "location": {
             "start": {
-              "line": 63
+              "line": 64
             },
             "end": {
-              "line": 64
+              "line": 65
             }
           }
         }
@@ -2719,10 +2383,10 @@
       "slots": {},
       "location": {
         "start": {
-          "line": 62
+          "line": 63
         },
         "end": {
-          "line": 63
+          "line": 64
         }
       }
     },
@@ -2730,10 +2394,10 @@
       "$$mdtype": "Node",
       "errors": [],
       "lines": [
-        66,
         67,
         68,
-        69
+        69,
+        70
       ],
       "inline": false,
       "attributes": {
@@ -2761,8 +2425,8 @@
           "$$mdtype": "Node",
           "errors": [],
           "lines": [
-            67,
-            68
+            68,
+            69
           ],
           "inline": false,
           "attributes": {},
@@ -2771,8 +2435,8 @@
               "$$mdtype": "Node",
               "errors": [],
               "lines": [
-                67,
-                68
+                68,
+                69
               ],
               "inline": false,
               "attributes": {},
@@ -2781,12 +2445,12 @@
                   "$$mdtype": "Node",
                   "errors": [],
                   "lines": [
-                    67,
-                    68
+                    68,
+                    69
                   ],
                   "inline": true,
                   "attributes": {
-                    "content": "NO: Display if "
+                    "content": "HIDDEN"
                   },
                   "children": [],
                   "type": "text",
@@ -2794,58 +2458,10 @@
                   "slots": {},
                   "location": {
                     "start": {
-                      "line": 67
+                      "line": 68
                     },
                     "end": {
-                      "line": 68
-                    }
-                  }
-                },
-                {
-                  "$$mdtype": "Node",
-                  "errors": [],
-                  "lines": [
-                    67,
-                    68
-                  ],
-                  "inline": true,
-                  "attributes": {
-                    "content": "or($missingVarOne, $missingVarTwo)"
-                  },
-                  "children": [],
-                  "type": "code",
-                  "annotations": [],
-                  "slots": {},
-                  "location": {
-                    "start": {
-                      "line": 67
-                    },
-                    "end": {
-                      "line": 68
-                    }
-                  }
-                },
-                {
-                  "$$mdtype": "Node",
-                  "errors": [],
-                  "lines": [
-                    67,
-                    68
-                  ],
-                  "inline": true,
-                  "attributes": {
-                    "content": "."
-                  },
-                  "children": [],
-                  "type": "text",
-                  "annotations": [],
-                  "slots": {},
-                  "location": {
-                    "start": {
-                      "line": 67
-                    },
-                    "end": {
-                      "line": 68
+                      "line": 69
                     }
                   }
                 }
@@ -2855,10 +2471,10 @@
               "slots": {},
               "location": {
                 "start": {
-                  "line": 67
+                  "line": 68
                 },
                 "end": {
-                  "line": 68
+                  "line": 69
                 }
               }
             }
@@ -2868,10 +2484,10 @@
           "slots": {},
           "location": {
             "start": {
-              "line": 67
+              "line": 68
             },
             "end": {
-              "line": 68
+              "line": 69
             }
           }
         }
@@ -2905,10 +2521,10 @@
       "slots": {},
       "location": {
         "start": {
-          "line": 66
+          "line": 67
         },
         "end": {
-          "line": 67
+          "line": 68
         }
       }
     },
@@ -2916,8 +2532,8 @@
       "$$mdtype": "Node",
       "errors": [],
       "lines": [
-        70,
-        71
+        71,
+        72
       ],
       "inline": false,
       "attributes": {
@@ -2928,8 +2544,8 @@
           "$$mdtype": "Node",
           "errors": [],
           "lines": [
-            70,
-            71
+            71,
+            72
           ],
           "inline": false,
           "attributes": {},
@@ -2938,8 +2554,8 @@
               "$$mdtype": "Node",
               "errors": [],
               "lines": [
-                70,
-                71
+                71,
+                72
               ],
               "inline": true,
               "attributes": {
@@ -2951,10 +2567,10 @@
               "slots": {},
               "location": {
                 "start": {
-                  "line": 70
+                  "line": 71
                 },
                 "end": {
-                  "line": 71
+                  "line": 72
                 }
               }
             },
@@ -2962,8 +2578,8 @@
               "$$mdtype": "Node",
               "errors": [],
               "lines": [
-                70,
-                71
+                71,
+                72
               ],
               "inline": true,
               "attributes": {
@@ -2975,10 +2591,10 @@
               "slots": {},
               "location": {
                 "start": {
-                  "line": 70
+                  "line": 71
                 },
                 "end": {
-                  "line": 71
+                  "line": 72
                 }
               }
             }
@@ -2988,10 +2604,10 @@
           "slots": {},
           "location": {
             "start": {
-              "line": 70
+              "line": 71
             },
             "end": {
-              "line": 71
+              "line": 72
             }
           }
         }
@@ -3001,10 +2617,10 @@
       "slots": {},
       "location": {
         "start": {
-          "line": 70
+          "line": 71
         },
         "end": {
-          "line": 71
+          "line": 72
         }
       }
     },
@@ -3012,10 +2628,10 @@
       "$$mdtype": "Node",
       "errors": [],
       "lines": [
-        72,
         73,
         74,
-        75
+        75,
+        76
       ],
       "inline": false,
       "attributes": {
@@ -3043,8 +2659,8 @@
           "$$mdtype": "Node",
           "errors": [],
           "lines": [
-            73,
-            74
+            74,
+            75
           ],
           "inline": false,
           "attributes": {},
@@ -3053,8 +2669,8 @@
               "$$mdtype": "Node",
               "errors": [],
               "lines": [
-                73,
-                74
+                74,
+                75
               ],
               "inline": false,
               "attributes": {},
@@ -3063,12 +2679,12 @@
                   "$$mdtype": "Node",
                   "errors": [],
                   "lines": [
-                    73,
-                    74
+                    74,
+                    75
                   ],
                   "inline": true,
                   "attributes": {
-                    "content": "YES: Display if "
+                    "content": "SHOWN"
                   },
                   "children": [],
                   "type": "text",
@@ -3076,58 +2692,10 @@
                   "slots": {},
                   "location": {
                     "start": {
-                      "line": 73
+                      "line": 74
                     },
                     "end": {
-                      "line": 74
-                    }
-                  }
-                },
-                {
-                  "$$mdtype": "Node",
-                  "errors": [],
-                  "lines": [
-                    73,
-                    74
-                  ],
-                  "inline": true,
-                  "attributes": {
-                    "content": "and($always_true, $always_true)"
-                  },
-                  "children": [],
-                  "type": "code",
-                  "annotations": [],
-                  "slots": {},
-                  "location": {
-                    "start": {
-                      "line": 73
-                    },
-                    "end": {
-                      "line": 74
-                    }
-                  }
-                },
-                {
-                  "$$mdtype": "Node",
-                  "errors": [],
-                  "lines": [
-                    73,
-                    74
-                  ],
-                  "inline": true,
-                  "attributes": {
-                    "content": "."
-                  },
-                  "children": [],
-                  "type": "text",
-                  "annotations": [],
-                  "slots": {},
-                  "location": {
-                    "start": {
-                      "line": 73
-                    },
-                    "end": {
-                      "line": 74
+                      "line": 75
                     }
                   }
                 }
@@ -3137,10 +2705,10 @@
               "slots": {},
               "location": {
                 "start": {
-                  "line": 73
+                  "line": 74
                 },
                 "end": {
-                  "line": 74
+                  "line": 75
                 }
               }
             }
@@ -3150,10 +2718,10 @@
           "slots": {},
           "location": {
             "start": {
-              "line": 73
+              "line": 74
             },
             "end": {
-              "line": 74
+              "line": 75
             }
           }
         }
@@ -3187,10 +2755,10 @@
       "slots": {},
       "location": {
         "start": {
-          "line": 72
+          "line": 73
         },
         "end": {
-          "line": 73
+          "line": 74
         }
       }
     },
@@ -3198,10 +2766,10 @@
       "$$mdtype": "Node",
       "errors": [],
       "lines": [
-        76,
         77,
         78,
-        79
+        79,
+        80
       ],
       "inline": false,
       "attributes": {
@@ -3229,8 +2797,8 @@
           "$$mdtype": "Node",
           "errors": [],
           "lines": [
-            77,
-            78
+            78,
+            79
           ],
           "inline": false,
           "attributes": {},
@@ -3239,8 +2807,8 @@
               "$$mdtype": "Node",
               "errors": [],
               "lines": [
-                77,
-                78
+                78,
+                79
               ],
               "inline": false,
               "attributes": {},
@@ -3249,12 +2817,12 @@
                   "$$mdtype": "Node",
                   "errors": [],
                   "lines": [
-                    77,
-                    78
+                    78,
+                    79
                   ],
                   "inline": true,
                   "attributes": {
-                    "content": "NO: Display if "
+                    "content": "HIDDEN"
                   },
                   "children": [],
                   "type": "text",
@@ -3262,58 +2830,10 @@
                   "slots": {},
                   "location": {
                     "start": {
-                      "line": 77
+                      "line": 78
                     },
                     "end": {
-                      "line": 78
-                    }
-                  }
-                },
-                {
-                  "$$mdtype": "Node",
-                  "errors": [],
-                  "lines": [
-                    77,
-                    78
-                  ],
-                  "inline": true,
-                  "attributes": {
-                    "content": "and($always_true, $always_false)"
-                  },
-                  "children": [],
-                  "type": "code",
-                  "annotations": [],
-                  "slots": {},
-                  "location": {
-                    "start": {
-                      "line": 77
-                    },
-                    "end": {
-                      "line": 78
-                    }
-                  }
-                },
-                {
-                  "$$mdtype": "Node",
-                  "errors": [],
-                  "lines": [
-                    77,
-                    78
-                  ],
-                  "inline": true,
-                  "attributes": {
-                    "content": "."
-                  },
-                  "children": [],
-                  "type": "text",
-                  "annotations": [],
-                  "slots": {},
-                  "location": {
-                    "start": {
-                      "line": 77
-                    },
-                    "end": {
-                      "line": 78
+                      "line": 79
                     }
                   }
                 }
@@ -3323,10 +2843,10 @@
               "slots": {},
               "location": {
                 "start": {
-                  "line": 77
+                  "line": 78
                 },
                 "end": {
-                  "line": 78
+                  "line": 79
                 }
               }
             }
@@ -3336,10 +2856,10 @@
           "slots": {},
           "location": {
             "start": {
-              "line": 77
+              "line": 78
             },
             "end": {
-              "line": 78
+              "line": 79
             }
           }
         }
@@ -3373,10 +2893,10 @@
       "slots": {},
       "location": {
         "start": {
-          "line": 76
+          "line": 77
         },
         "end": {
-          "line": 77
+          "line": 78
         }
       }
     },
@@ -3384,10 +2904,10 @@
       "$$mdtype": "Node",
       "errors": [],
       "lines": [
-        80,
         81,
         82,
-        83
+        83,
+        84
       ],
       "inline": false,
       "attributes": {
@@ -3429,8 +2949,8 @@
           "$$mdtype": "Node",
           "errors": [],
           "lines": [
-            81,
-            82
+            82,
+            83
           ],
           "inline": false,
           "attributes": {},
@@ -3439,8 +2959,8 @@
               "$$mdtype": "Node",
               "errors": [],
               "lines": [
-                81,
-                82
+                82,
+                83
               ],
               "inline": false,
               "attributes": {},
@@ -3449,12 +2969,12 @@
                   "$$mdtype": "Node",
                   "errors": [],
                   "lines": [
-                    81,
-                    82
+                    82,
+                    83
                   ],
                   "inline": true,
                   "attributes": {
-                    "content": "NO: Display if "
+                    "content": "HIDDEN"
                   },
                   "children": [],
                   "type": "text",
@@ -3462,58 +2982,10 @@
                   "slots": {},
                   "location": {
                     "start": {
-                      "line": 81
+                      "line": 82
                     },
                     "end": {
-                      "line": 82
-                    }
-                  }
-                },
-                {
-                  "$$mdtype": "Node",
-                  "errors": [],
-                  "lines": [
-                    81,
-                    82
-                  ],
-                  "inline": true,
-                  "attributes": {
-                    "content": "and(equals($test_string, \"Hello\"), equals($test_string, \"Datadog\"))"
-                  },
-                  "children": [],
-                  "type": "code",
-                  "annotations": [],
-                  "slots": {},
-                  "location": {
-                    "start": {
-                      "line": 81
-                    },
-                    "end": {
-                      "line": 82
-                    }
-                  }
-                },
-                {
-                  "$$mdtype": "Node",
-                  "errors": [],
-                  "lines": [
-                    81,
-                    82
-                  ],
-                  "inline": true,
-                  "attributes": {
-                    "content": "."
-                  },
-                  "children": [],
-                  "type": "text",
-                  "annotations": [],
-                  "slots": {},
-                  "location": {
-                    "start": {
-                      "line": 81
-                    },
-                    "end": {
-                      "line": 82
+                      "line": 83
                     }
                   }
                 }
@@ -3523,10 +2995,10 @@
               "slots": {},
               "location": {
                 "start": {
-                  "line": 81
+                  "line": 82
                 },
                 "end": {
-                  "line": 82
+                  "line": 83
                 }
               }
             }
@@ -3536,10 +3008,10 @@
           "slots": {},
           "location": {
             "start": {
-              "line": 81
+              "line": 82
             },
             "end": {
-              "line": 82
+              "line": 83
             }
           }
         }
@@ -3587,10 +3059,10 @@
       "slots": {},
       "location": {
         "start": {
-          "line": 80
+          "line": 81
         },
         "end": {
-          "line": 81
+          "line": 82
         }
       }
     },
@@ -3598,8 +3070,8 @@
       "$$mdtype": "Node",
       "errors": [],
       "lines": [
-        84,
-        85
+        85,
+        86
       ],
       "inline": false,
       "attributes": {
@@ -3610,8 +3082,8 @@
           "$$mdtype": "Node",
           "errors": [],
           "lines": [
-            84,
-            85
+            85,
+            86
           ],
           "inline": false,
           "attributes": {},
@@ -3620,8 +3092,8 @@
               "$$mdtype": "Node",
               "errors": [],
               "lines": [
-                84,
-                85
+                85,
+                86
               ],
               "inline": true,
               "attributes": {
@@ -3633,10 +3105,10 @@
               "slots": {},
               "location": {
                 "start": {
-                  "line": 84
+                  "line": 85
                 },
                 "end": {
-                  "line": 85
+                  "line": 86
                 }
               }
             },
@@ -3644,8 +3116,8 @@
               "$$mdtype": "Node",
               "errors": [],
               "lines": [
-                84,
-                85
+                85,
+                86
               ],
               "inline": true,
               "attributes": {
@@ -3657,10 +3129,10 @@
               "slots": {},
               "location": {
                 "start": {
-                  "line": 84
+                  "line": 85
                 },
                 "end": {
-                  "line": 85
+                  "line": 86
                 }
               }
             }
@@ -3670,10 +3142,10 @@
           "slots": {},
           "location": {
             "start": {
-              "line": 84
+              "line": 85
             },
             "end": {
-              "line": 85
+              "line": 86
             }
           }
         }
@@ -3683,10 +3155,10 @@
       "slots": {},
       "location": {
         "start": {
-          "line": 84
+          "line": 85
         },
         "end": {
-          "line": 85
+          "line": 86
         }
       }
     },
@@ -3694,10 +3166,10 @@
       "$$mdtype": "Node",
       "errors": [],
       "lines": [
-        86,
         87,
         88,
-        89
+        89,
+        90
       ],
       "inline": false,
       "attributes": {
@@ -3719,8 +3191,8 @@
           "$$mdtype": "Node",
           "errors": [],
           "lines": [
-            87,
-            88
+            88,
+            89
           ],
           "inline": false,
           "attributes": {},
@@ -3729,8 +3201,8 @@
               "$$mdtype": "Node",
               "errors": [],
               "lines": [
-                87,
-                88
+                88,
+                89
               ],
               "inline": false,
               "attributes": {},
@@ -3739,12 +3211,12 @@
                   "$$mdtype": "Node",
                   "errors": [],
                   "lines": [
-                    87,
-                    88
+                    88,
+                    89
                   ],
                   "inline": true,
                   "attributes": {
-                    "content": "YES: Display if "
+                    "content": "SHOWN"
                   },
                   "children": [],
                   "type": "text",
@@ -3752,58 +3224,10 @@
                   "slots": {},
                   "location": {
                     "start": {
-                      "line": 87
+                      "line": 88
                     },
                     "end": {
-                      "line": 88
-                    }
-                  }
-                },
-                {
-                  "$$mdtype": "Node",
-                  "errors": [],
-                  "lines": [
-                    87,
-                    88
-                  ],
-                  "inline": true,
-                  "attributes": {
-                    "content": "not($always_false)"
-                  },
-                  "children": [],
-                  "type": "code",
-                  "annotations": [],
-                  "slots": {},
-                  "location": {
-                    "start": {
-                      "line": 87
-                    },
-                    "end": {
-                      "line": 88
-                    }
-                  }
-                },
-                {
-                  "$$mdtype": "Node",
-                  "errors": [],
-                  "lines": [
-                    87,
-                    88
-                  ],
-                  "inline": true,
-                  "attributes": {
-                    "content": "."
-                  },
-                  "children": [],
-                  "type": "text",
-                  "annotations": [],
-                  "slots": {},
-                  "location": {
-                    "start": {
-                      "line": 87
-                    },
-                    "end": {
-                      "line": 88
+                      "line": 89
                     }
                   }
                 }
@@ -3813,10 +3237,10 @@
               "slots": {},
               "location": {
                 "start": {
-                  "line": 87
+                  "line": 88
                 },
                 "end": {
-                  "line": 88
+                  "line": 89
                 }
               }
             }
@@ -3826,10 +3250,10 @@
           "slots": {},
           "location": {
             "start": {
-              "line": 87
+              "line": 88
             },
             "end": {
-              "line": 88
+              "line": 89
             }
           }
         }
@@ -3857,10 +3281,10 @@
       "slots": {},
       "location": {
         "start": {
-          "line": 86
+          "line": 87
         },
         "end": {
-          "line": 87
+          "line": 88
         }
       }
     },
@@ -3868,10 +3292,10 @@
       "$$mdtype": "Node",
       "errors": [],
       "lines": [
-        90,
         91,
         92,
-        93
+        93,
+        94
       ],
       "inline": false,
       "attributes": {
@@ -3900,8 +3324,8 @@
           "$$mdtype": "Node",
           "errors": [],
           "lines": [
-            91,
-            92
+            92,
+            93
           ],
           "inline": false,
           "attributes": {},
@@ -3910,8 +3334,8 @@
               "$$mdtype": "Node",
               "errors": [],
               "lines": [
-                91,
-                92
+                92,
+                93
               ],
               "inline": false,
               "attributes": {},
@@ -3920,12 +3344,12 @@
                   "$$mdtype": "Node",
                   "errors": [],
                   "lines": [
-                    91,
-                    92
+                    92,
+                    93
                   ],
                   "inline": true,
                   "attributes": {
-                    "content": "YES: Display if "
+                    "content": "SHOWN"
                   },
                   "children": [],
                   "type": "text",
@@ -3933,58 +3357,10 @@
                   "slots": {},
                   "location": {
                     "start": {
-                      "line": 91
+                      "line": 92
                     },
                     "end": {
-                      "line": 92
-                    }
-                  }
-                },
-                {
-                  "$$mdtype": "Node",
-                  "errors": [],
-                  "lines": [
-                    91,
-                    92
-                  ],
-                  "inline": true,
-                  "attributes": {
-                    "content": "not(equals($test_string, \"Hello\"))"
-                  },
-                  "children": [],
-                  "type": "code",
-                  "annotations": [],
-                  "slots": {},
-                  "location": {
-                    "start": {
-                      "line": 91
-                    },
-                    "end": {
-                      "line": 92
-                    }
-                  }
-                },
-                {
-                  "$$mdtype": "Node",
-                  "errors": [],
-                  "lines": [
-                    91,
-                    92
-                  ],
-                  "inline": true,
-                  "attributes": {
-                    "content": "."
-                  },
-                  "children": [],
-                  "type": "text",
-                  "annotations": [],
-                  "slots": {},
-                  "location": {
-                    "start": {
-                      "line": 91
-                    },
-                    "end": {
-                      "line": 92
+                      "line": 93
                     }
                   }
                 }
@@ -3994,10 +3370,10 @@
               "slots": {},
               "location": {
                 "start": {
-                  "line": 91
+                  "line": 92
                 },
                 "end": {
-                  "line": 92
+                  "line": 93
                 }
               }
             }
@@ -4007,10 +3383,10 @@
           "slots": {},
           "location": {
             "start": {
-              "line": 91
+              "line": 92
             },
             "end": {
-              "line": 92
+              "line": 93
             }
           }
         }
@@ -4045,10 +3421,10 @@
       "slots": {},
       "location": {
         "start": {
-          "line": 90
+          "line": 91
         },
         "end": {
-          "line": 91
+          "line": 92
         }
       }
     },
@@ -4056,10 +3432,10 @@
       "$$mdtype": "Node",
       "errors": [],
       "lines": [
-        94,
         95,
         96,
-        97
+        97,
+        98
       ],
       "inline": false,
       "attributes": {
@@ -4081,8 +3457,8 @@
           "$$mdtype": "Node",
           "errors": [],
           "lines": [
-            95,
-            96
+            96,
+            97
           ],
           "inline": false,
           "attributes": {},
@@ -4091,8 +3467,8 @@
               "$$mdtype": "Node",
               "errors": [],
               "lines": [
-                95,
-                96
+                96,
+                97
               ],
               "inline": false,
               "attributes": {},
@@ -4101,12 +3477,12 @@
                   "$$mdtype": "Node",
                   "errors": [],
                   "lines": [
-                    95,
-                    96
+                    96,
+                    97
                   ],
                   "inline": true,
                   "attributes": {
-                    "content": "NO: Display if "
+                    "content": "HIDDEN"
                   },
                   "children": [],
                   "type": "text",
@@ -4114,58 +3490,10 @@
                   "slots": {},
                   "location": {
                     "start": {
-                      "line": 95
+                      "line": 96
                     },
                     "end": {
-                      "line": 96
-                    }
-                  }
-                },
-                {
-                  "$$mdtype": "Node",
-                  "errors": [],
-                  "lines": [
-                    95,
-                    96
-                  ],
-                  "inline": true,
-                  "attributes": {
-                    "content": "not($always_true)"
-                  },
-                  "children": [],
-                  "type": "code",
-                  "annotations": [],
-                  "slots": {},
-                  "location": {
-                    "start": {
-                      "line": 95
-                    },
-                    "end": {
-                      "line": 96
-                    }
-                  }
-                },
-                {
-                  "$$mdtype": "Node",
-                  "errors": [],
-                  "lines": [
-                    95,
-                    96
-                  ],
-                  "inline": true,
-                  "attributes": {
-                    "content": "."
-                  },
-                  "children": [],
-                  "type": "text",
-                  "annotations": [],
-                  "slots": {},
-                  "location": {
-                    "start": {
-                      "line": 95
-                    },
-                    "end": {
-                      "line": 96
+                      "line": 97
                     }
                   }
                 }
@@ -4175,10 +3503,10 @@
               "slots": {},
               "location": {
                 "start": {
-                  "line": 95
+                  "line": 96
                 },
                 "end": {
-                  "line": 96
+                  "line": 97
                 }
               }
             }
@@ -4188,10 +3516,10 @@
           "slots": {},
           "location": {
             "start": {
-              "line": 95
+              "line": 96
             },
             "end": {
-              "line": 96
+              "line": 97
             }
           }
         }
@@ -4219,10 +3547,10 @@
       "slots": {},
       "location": {
         "start": {
-          "line": 94
+          "line": 95
         },
         "end": {
-          "line": 95
+          "line": 96
         }
       }
     },
@@ -4230,10 +3558,10 @@
       "$$mdtype": "Node",
       "errors": [],
       "lines": [
-        98,
         99,
         100,
-        101
+        101,
+        102
       ],
       "inline": false,
       "attributes": {
@@ -4262,8 +3590,8 @@
           "$$mdtype": "Node",
           "errors": [],
           "lines": [
-            99,
-            100
+            100,
+            101
           ],
           "inline": false,
           "attributes": {},
@@ -4272,8 +3600,8 @@
               "$$mdtype": "Node",
               "errors": [],
               "lines": [
-                99,
-                100
+                100,
+                101
               ],
               "inline": false,
               "attributes": {},
@@ -4282,12 +3610,12 @@
                   "$$mdtype": "Node",
                   "errors": [],
                   "lines": [
-                    99,
-                    100
+                    100,
+                    101
                   ],
                   "inline": true,
                   "attributes": {
-                    "content": "NO: Display if "
+                    "content": "HIDDEN"
                   },
                   "children": [],
                   "type": "text",
@@ -4295,58 +3623,10 @@
                   "slots": {},
                   "location": {
                     "start": {
-                      "line": 99
+                      "line": 100
                     },
                     "end": {
-                      "line": 100
-                    }
-                  }
-                },
-                {
-                  "$$mdtype": "Node",
-                  "errors": [],
-                  "lines": [
-                    99,
-                    100
-                  ],
-                  "inline": true,
-                  "attributes": {
-                    "content": "not(equals($test_string, \"Datadog\"))"
-                  },
-                  "children": [],
-                  "type": "code",
-                  "annotations": [],
-                  "slots": {},
-                  "location": {
-                    "start": {
-                      "line": 99
-                    },
-                    "end": {
-                      "line": 100
-                    }
-                  }
-                },
-                {
-                  "$$mdtype": "Node",
-                  "errors": [],
-                  "lines": [
-                    99,
-                    100
-                  ],
-                  "inline": true,
-                  "attributes": {
-                    "content": "."
-                  },
-                  "children": [],
-                  "type": "text",
-                  "annotations": [],
-                  "slots": {},
-                  "location": {
-                    "start": {
-                      "line": 99
-                    },
-                    "end": {
-                      "line": 100
+                      "line": 101
                     }
                   }
                 }
@@ -4356,10 +3636,10 @@
               "slots": {},
               "location": {
                 "start": {
-                  "line": 99
+                  "line": 100
                 },
                 "end": {
-                  "line": 100
+                  "line": 101
                 }
               }
             }
@@ -4369,10 +3649,10 @@
           "slots": {},
           "location": {
             "start": {
-              "line": 99
+              "line": 100
             },
             "end": {
-              "line": 100
+              "line": 101
             }
           }
         }
@@ -4407,10 +3687,10 @@
       "slots": {},
       "location": {
         "start": {
-          "line": 98
+          "line": 99
         },
         "end": {
-          "line": 99
+          "line": 100
         }
       }
     },
@@ -4418,8 +3698,8 @@
       "$$mdtype": "Node",
       "errors": [],
       "lines": [
-        102,
-        103
+        103,
+        104
       ],
       "inline": false,
       "attributes": {
@@ -4430,8 +3710,8 @@
           "$$mdtype": "Node",
           "errors": [],
           "lines": [
-            102,
-            103
+            103,
+            104
           ],
           "inline": false,
           "attributes": {},
@@ -4440,8 +3720,8 @@
               "$$mdtype": "Node",
               "errors": [],
               "lines": [
-                102,
-                103
+                103,
+                104
               ],
               "inline": true,
               "attributes": {
@@ -4453,10 +3733,10 @@
               "slots": {},
               "location": {
                 "start": {
-                  "line": 102
+                  "line": 103
                 },
                 "end": {
-                  "line": 103
+                  "line": 104
                 }
               }
             }
@@ -4466,10 +3746,10 @@
           "slots": {},
           "location": {
             "start": {
-              "line": 102
+              "line": 103
             },
             "end": {
-              "line": 103
+              "line": 104
             }
           }
         }
@@ -4479,10 +3759,10 @@
       "slots": {},
       "location": {
         "start": {
-          "line": 102
+          "line": 103
         },
         "end": {
-          "line": 103
+          "line": 104
         }
       }
     },
@@ -4490,10 +3770,10 @@
       "$$mdtype": "Node",
       "errors": [],
       "lines": [
-        104,
         105,
         106,
-        107
+        107,
+        108
       ],
       "inline": false,
       "attributes": {
@@ -4533,8 +3813,8 @@
           "$$mdtype": "Node",
           "errors": [],
           "lines": [
-            105,
-            106
+            106,
+            107
           ],
           "inline": false,
           "attributes": {},
@@ -4543,8 +3823,8 @@
               "$$mdtype": "Node",
               "errors": [],
               "lines": [
-                105,
-                106
+                106,
+                107
               ],
               "inline": false,
               "attributes": {},
@@ -4553,12 +3833,12 @@
                   "$$mdtype": "Node",
                   "errors": [],
                   "lines": [
-                    105,
-                    106
+                    106,
+                    107
                   ],
                   "inline": true,
                   "attributes": {
-                    "content": "YES: Display if "
+                    "content": "SHOWN"
                   },
                   "children": [],
                   "type": "text",
@@ -4566,58 +3846,10 @@
                   "slots": {},
                   "location": {
                     "start": {
-                      "line": 105
+                      "line": 106
                     },
                     "end": {
-                      "line": 106
-                    }
-                  }
-                },
-                {
-                  "$$mdtype": "Node",
-                  "errors": [],
-                  "lines": [
-                    105,
-                    106
-                  ],
-                  "inline": true,
-                  "attributes": {
-                    "content": "or(not($always_false), not($always_true))"
-                  },
-                  "children": [],
-                  "type": "code",
-                  "annotations": [],
-                  "slots": {},
-                  "location": {
-                    "start": {
-                      "line": 105
-                    },
-                    "end": {
-                      "line": 106
-                    }
-                  }
-                },
-                {
-                  "$$mdtype": "Node",
-                  "errors": [],
-                  "lines": [
-                    105,
-                    106
-                  ],
-                  "inline": true,
-                  "attributes": {
-                    "content": "."
-                  },
-                  "children": [],
-                  "type": "text",
-                  "annotations": [],
-                  "slots": {},
-                  "location": {
-                    "start": {
-                      "line": 105
-                    },
-                    "end": {
-                      "line": 106
+                      "line": 107
                     }
                   }
                 }
@@ -4627,10 +3859,10 @@
               "slots": {},
               "location": {
                 "start": {
-                  "line": 105
+                  "line": 106
                 },
                 "end": {
-                  "line": 106
+                  "line": 107
                 }
               }
             }
@@ -4640,10 +3872,10 @@
           "slots": {},
           "location": {
             "start": {
-              "line": 105
+              "line": 106
             },
             "end": {
-              "line": 106
+              "line": 107
             }
           }
         }
@@ -4689,10 +3921,10 @@
       "slots": {},
       "location": {
         "start": {
-          "line": 104
+          "line": 105
         },
         "end": {
-          "line": 105
+          "line": 106
         }
       }
     },
@@ -4700,10 +3932,10 @@
       "$$mdtype": "Node",
       "errors": [],
       "lines": [
-        108,
         109,
         110,
-        111
+        111,
+        112
       ],
       "inline": false,
       "attributes": {
@@ -4745,8 +3977,8 @@
           "$$mdtype": "Node",
           "errors": [],
           "lines": [
-            109,
-            110
+            110,
+            111
           ],
           "inline": false,
           "attributes": {},
@@ -4755,8 +3987,8 @@
               "$$mdtype": "Node",
               "errors": [],
               "lines": [
-                109,
-                110
+                110,
+                111
               ],
               "inline": false,
               "attributes": {},
@@ -4765,12 +3997,12 @@
                   "$$mdtype": "Node",
                   "errors": [],
                   "lines": [
-                    109,
-                    110
+                    110,
+                    111
                   ],
                   "inline": true,
                   "attributes": {
-                    "content": "YES: Display if "
+                    "content": "SHOWN"
                   },
                   "children": [],
                   "type": "text",
@@ -4778,58 +4010,10 @@
                   "slots": {},
                   "location": {
                     "start": {
-                      "line": 109
+                      "line": 110
                     },
                     "end": {
-                      "line": 110
-                    }
-                  }
-                },
-                {
-                  "$$mdtype": "Node",
-                  "errors": [],
-                  "lines": [
-                    109,
-                    110
-                  ],
-                  "inline": true,
-                  "attributes": {
-                    "content": "or(equals($test_string, \"Datadog\"), equals($test_string, \"Hello\"))"
-                  },
-                  "children": [],
-                  "type": "code",
-                  "annotations": [],
-                  "slots": {},
-                  "location": {
-                    "start": {
-                      "line": 109
-                    },
-                    "end": {
-                      "line": 110
-                    }
-                  }
-                },
-                {
-                  "$$mdtype": "Node",
-                  "errors": [],
-                  "lines": [
-                    109,
-                    110
-                  ],
-                  "inline": true,
-                  "attributes": {
-                    "content": "."
-                  },
-                  "children": [],
-                  "type": "text",
-                  "annotations": [],
-                  "slots": {},
-                  "location": {
-                    "start": {
-                      "line": 109
-                    },
-                    "end": {
-                      "line": 110
+                      "line": 111
                     }
                   }
                 }
@@ -4839,10 +4023,10 @@
               "slots": {},
               "location": {
                 "start": {
-                  "line": 109
+                  "line": 110
                 },
                 "end": {
-                  "line": 110
+                  "line": 111
                 }
               }
             }
@@ -4852,10 +4036,10 @@
           "slots": {},
           "location": {
             "start": {
-              "line": 109
+              "line": 110
             },
             "end": {
-              "line": 110
+              "line": 111
             }
           }
         }
@@ -4903,10 +4087,10 @@
       "slots": {},
       "location": {
         "start": {
-          "line": 108
+          "line": 109
         },
         "end": {
-          "line": 109
+          "line": 110
         }
       }
     },
@@ -4914,10 +4098,10 @@
       "$$mdtype": "Node",
       "errors": [],
       "lines": [
-        112,
         113,
         114,
-        115
+        115,
+        116
       ],
       "inline": false,
       "attributes": {
@@ -4993,8 +4177,8 @@
           "$$mdtype": "Node",
           "errors": [],
           "lines": [
-            113,
-            114
+            114,
+            115
           ],
           "inline": false,
           "attributes": {},
@@ -5003,8 +4187,8 @@
               "$$mdtype": "Node",
               "errors": [],
               "lines": [
-                113,
-                114
+                114,
+                115
               ],
               "inline": false,
               "attributes": {},
@@ -5013,12 +4197,12 @@
                   "$$mdtype": "Node",
                   "errors": [],
                   "lines": [
-                    113,
-                    114
+                    114,
+                    115
                   ],
                   "inline": true,
                   "attributes": {
-                    "content": "YES: Display if "
+                    "content": "SHOWN"
                   },
                   "children": [],
                   "type": "text",
@@ -5026,58 +4210,10 @@
                   "slots": {},
                   "location": {
                     "start": {
-                      "line": 113
+                      "line": 114
                     },
                     "end": {
-                      "line": 114
-                    }
-                  }
-                },
-                {
-                  "$$mdtype": "Node",
-                  "errors": [],
-                  "lines": [
-                    113,
-                    114
-                  ],
-                  "inline": true,
-                  "attributes": {
-                    "content": "and(or(not($always_false), not($always_true)), or(not($always_false), not($always_true)))"
-                  },
-                  "children": [],
-                  "type": "code",
-                  "annotations": [],
-                  "slots": {},
-                  "location": {
-                    "start": {
-                      "line": 113
-                    },
-                    "end": {
-                      "line": 114
-                    }
-                  }
-                },
-                {
-                  "$$mdtype": "Node",
-                  "errors": [],
-                  "lines": [
-                    113,
-                    114
-                  ],
-                  "inline": true,
-                  "attributes": {
-                    "content": "."
-                  },
-                  "children": [],
-                  "type": "text",
-                  "annotations": [],
-                  "slots": {},
-                  "location": {
-                    "start": {
-                      "line": 113
-                    },
-                    "end": {
-                      "line": 114
+                      "line": 115
                     }
                   }
                 }
@@ -5087,10 +4223,10 @@
               "slots": {},
               "location": {
                 "start": {
-                  "line": 113
+                  "line": 114
                 },
                 "end": {
-                  "line": 114
+                  "line": 115
                 }
               }
             }
@@ -5100,10 +4236,10 @@
           "slots": {},
           "location": {
             "start": {
-              "line": 113
+              "line": 114
             },
             "end": {
-              "line": 114
+              "line": 115
             }
           }
         }
@@ -5185,10 +4321,10 @@
       "slots": {},
       "location": {
         "start": {
-          "line": 112
+          "line": 113
         },
         "end": {
-          "line": 113
+          "line": 114
         }
       }
     },
@@ -5196,10 +4332,10 @@
       "$$mdtype": "Node",
       "errors": [],
       "lines": [
-        116,
         117,
         118,
-        119
+        119,
+        120
       ],
       "inline": false,
       "attributes": {
@@ -5228,8 +4364,8 @@
           "$$mdtype": "Node",
           "errors": [],
           "lines": [
-            117,
-            118
+            118,
+            119
           ],
           "inline": false,
           "attributes": {},
@@ -5238,8 +4374,8 @@
               "$$mdtype": "Node",
               "errors": [],
               "lines": [
-                117,
-                118
+                118,
+                119
               ],
               "inline": false,
               "attributes": {},
@@ -5248,12 +4384,12 @@
                   "$$mdtype": "Node",
                   "errors": [],
                   "lines": [
-                    117,
-                    118
+                    118,
+                    119
                   ],
                   "inline": true,
                   "attributes": {
-                    "content": "YES: Display if "
+                    "content": "SHOWN"
                   },
                   "children": [],
                   "type": "text",
@@ -5261,58 +4397,10 @@
                   "slots": {},
                   "location": {
                     "start": {
-                      "line": 117
+                      "line": 118
                     },
                     "end": {
-                      "line": 118
-                    }
-                  }
-                },
-                {
-                  "$$mdtype": "Node",
-                  "errors": [],
-                  "lines": [
-                    117,
-                    118
-                  ],
-                  "inline": true,
-                  "attributes": {
-                    "content": "equals(not($always_false), true)"
-                  },
-                  "children": [],
-                  "type": "code",
-                  "annotations": [],
-                  "slots": {},
-                  "location": {
-                    "start": {
-                      "line": 117
-                    },
-                    "end": {
-                      "line": 118
-                    }
-                  }
-                },
-                {
-                  "$$mdtype": "Node",
-                  "errors": [],
-                  "lines": [
-                    117,
-                    118
-                  ],
-                  "inline": true,
-                  "attributes": {
-                    "content": "."
-                  },
-                  "children": [],
-                  "type": "text",
-                  "annotations": [],
-                  "slots": {},
-                  "location": {
-                    "start": {
-                      "line": 117
-                    },
-                    "end": {
-                      "line": 118
+                      "line": 119
                     }
                   }
                 }
@@ -5322,10 +4410,10 @@
               "slots": {},
               "location": {
                 "start": {
-                  "line": 117
+                  "line": 118
                 },
                 "end": {
-                  "line": 118
+                  "line": 119
                 }
               }
             }
@@ -5335,10 +4423,10 @@
           "slots": {},
           "location": {
             "start": {
-              "line": 117
+              "line": 118
             },
             "end": {
-              "line": 118
+              "line": 119
             }
           }
         }
@@ -5373,10 +4461,10 @@
       "slots": {},
       "location": {
         "start": {
-          "line": 116
+          "line": 117
         },
         "end": {
-          "line": 117
+          "line": 118
         }
       }
     },
@@ -5384,10 +4472,10 @@
       "$$mdtype": "Node",
       "errors": [],
       "lines": [
-        120,
         121,
         122,
-        123
+        123,
+        124
       ],
       "inline": false,
       "attributes": {
@@ -5457,8 +4545,8 @@
           "$$mdtype": "Node",
           "errors": [],
           "lines": [
-            121,
-            122
+            122,
+            123
           ],
           "inline": false,
           "attributes": {},
@@ -5467,8 +4555,8 @@
               "$$mdtype": "Node",
               "errors": [],
               "lines": [
-                121,
-                122
+                122,
+                123
               ],
               "inline": false,
               "attributes": {},
@@ -5477,12 +4565,12 @@
                   "$$mdtype": "Node",
                   "errors": [],
                   "lines": [
-                    121,
-                    122
+                    122,
+                    123
                   ],
                   "inline": true,
                   "attributes": {
-                    "content": "NO: Display if "
+                    "content": "HIDDEN"
                   },
                   "children": [],
                   "type": "text",
@@ -5490,58 +4578,10 @@
                   "slots": {},
                   "location": {
                     "start": {
-                      "line": 121
+                      "line": 122
                     },
                     "end": {
-                      "line": 122
-                    }
-                  }
-                },
-                {
-                  "$$mdtype": "Node",
-                  "errors": [],
-                  "lines": [
-                    121,
-                    122
-                  ],
-                  "inline": true,
-                  "attributes": {
-                    "content": "and(and($always_false, not($always_true)), or(not($always_false), not($always_true)))"
-                  },
-                  "children": [],
-                  "type": "code",
-                  "annotations": [],
-                  "slots": {},
-                  "location": {
-                    "start": {
-                      "line": 121
-                    },
-                    "end": {
-                      "line": 122
-                    }
-                  }
-                },
-                {
-                  "$$mdtype": "Node",
-                  "errors": [],
-                  "lines": [
-                    121,
-                    122
-                  ],
-                  "inline": true,
-                  "attributes": {
-                    "content": "."
-                  },
-                  "children": [],
-                  "type": "text",
-                  "annotations": [],
-                  "slots": {},
-                  "location": {
-                    "start": {
-                      "line": 121
-                    },
-                    "end": {
-                      "line": 122
+                      "line": 123
                     }
                   }
                 }
@@ -5551,10 +4591,10 @@
               "slots": {},
               "location": {
                 "start": {
-                  "line": 121
+                  "line": 122
                 },
                 "end": {
-                  "line": 122
+                  "line": 123
                 }
               }
             }
@@ -5564,10 +4604,10 @@
           "slots": {},
           "location": {
             "start": {
-              "line": 121
+              "line": 122
             },
             "end": {
-              "line": 122
+              "line": 123
             }
           }
         }
@@ -5643,10 +4683,10 @@
       "slots": {},
       "location": {
         "start": {
-          "line": 120
+          "line": 121
         },
         "end": {
-          "line": 121
+          "line": 122
         }
       }
     },
@@ -5654,10 +4694,10 @@
       "$$mdtype": "Node",
       "errors": [],
       "lines": [
-        124,
         125,
         126,
-        127
+        127,
+        128
       ],
       "inline": false,
       "attributes": {
@@ -5697,8 +4737,8 @@
           "$$mdtype": "Node",
           "errors": [],
           "lines": [
-            125,
-            126
+            126,
+            127
           ],
           "inline": false,
           "attributes": {},
@@ -5707,8 +4747,8 @@
               "$$mdtype": "Node",
               "errors": [],
               "lines": [
-                125,
-                126
+                126,
+                127
               ],
               "inline": false,
               "attributes": {},
@@ -5717,12 +4757,12 @@
                   "$$mdtype": "Node",
                   "errors": [],
                   "lines": [
-                    125,
-                    126
+                    126,
+                    127
                   ],
                   "inline": true,
                   "attributes": {
-                    "content": "NO: Display if "
+                    "content": "HIDDEN"
                   },
                   "children": [],
                   "type": "text",
@@ -5730,58 +4770,10 @@
                   "slots": {},
                   "location": {
                     "start": {
-                      "line": 125
+                      "line": 126
                     },
                     "end": {
-                      "line": 126
-                    }
-                  }
-                },
-                {
-                  "$$mdtype": "Node",
-                  "errors": [],
-                  "lines": [
-                    125,
-                    126
-                  ],
-                  "inline": true,
-                  "attributes": {
-                    "content": "and(not($always_false), not($always_true))"
-                  },
-                  "children": [],
-                  "type": "code",
-                  "annotations": [],
-                  "slots": {},
-                  "location": {
-                    "start": {
-                      "line": 125
-                    },
-                    "end": {
-                      "line": 126
-                    }
-                  }
-                },
-                {
-                  "$$mdtype": "Node",
-                  "errors": [],
-                  "lines": [
-                    125,
-                    126
-                  ],
-                  "inline": true,
-                  "attributes": {
-                    "content": "."
-                  },
-                  "children": [],
-                  "type": "text",
-                  "annotations": [],
-                  "slots": {},
-                  "location": {
-                    "start": {
-                      "line": 125
-                    },
-                    "end": {
-                      "line": 126
+                      "line": 127
                     }
                   }
                 }
@@ -5791,10 +4783,10 @@
               "slots": {},
               "location": {
                 "start": {
-                  "line": 125
+                  "line": 126
                 },
                 "end": {
-                  "line": 126
+                  "line": 127
                 }
               }
             }
@@ -5804,10 +4796,10 @@
           "slots": {},
           "location": {
             "start": {
-              "line": 125
+              "line": 126
             },
             "end": {
-              "line": 126
+              "line": 127
             }
           }
         }
@@ -5853,10 +4845,10 @@
       "slots": {},
       "location": {
         "start": {
-          "line": 124
+          "line": 125
         },
         "end": {
-          "line": 125
+          "line": 126
         }
       }
     },
@@ -5864,10 +4856,10 @@
       "$$mdtype": "Node",
       "errors": [],
       "lines": [
-        128,
         129,
         130,
-        131
+        131,
+        132
       ],
       "inline": false,
       "attributes": {
@@ -5909,8 +4901,8 @@
           "$$mdtype": "Node",
           "errors": [],
           "lines": [
-            129,
-            130
+            130,
+            131
           ],
           "inline": false,
           "attributes": {},
@@ -5919,8 +4911,8 @@
               "$$mdtype": "Node",
               "errors": [],
               "lines": [
-                129,
-                130
+                130,
+                131
               ],
               "inline": false,
               "attributes": {},
@@ -5929,12 +4921,12 @@
                   "$$mdtype": "Node",
                   "errors": [],
                   "lines": [
-                    129,
-                    130
+                    130,
+                    131
                   ],
                   "inline": true,
                   "attributes": {
-                    "content": "NO: Display if "
+                    "content": "HIDDEN"
                   },
                   "children": [],
                   "type": "text",
@@ -5942,58 +4934,10 @@
                   "slots": {},
                   "location": {
                     "start": {
-                      "line": 129
+                      "line": 130
                     },
                     "end": {
-                      "line": 130
-                    }
-                  }
-                },
-                {
-                  "$$mdtype": "Node",
-                  "errors": [],
-                  "lines": [
-                    129,
-                    130
-                  ],
-                  "inline": true,
-                  "attributes": {
-                    "content": "and(equals($test_string, \"Datadog\"), equals($test_string, \"Hello\"))"
-                  },
-                  "children": [],
-                  "type": "code",
-                  "annotations": [],
-                  "slots": {},
-                  "location": {
-                    "start": {
-                      "line": 129
-                    },
-                    "end": {
-                      "line": 130
-                    }
-                  }
-                },
-                {
-                  "$$mdtype": "Node",
-                  "errors": [],
-                  "lines": [
-                    129,
-                    130
-                  ],
-                  "inline": true,
-                  "attributes": {
-                    "content": "."
-                  },
-                  "children": [],
-                  "type": "text",
-                  "annotations": [],
-                  "slots": {},
-                  "location": {
-                    "start": {
-                      "line": 129
-                    },
-                    "end": {
-                      "line": 130
+                      "line": 131
                     }
                   }
                 }
@@ -6003,10 +4947,10 @@
               "slots": {},
               "location": {
                 "start": {
-                  "line": 129
+                  "line": 130
                 },
                 "end": {
-                  "line": 130
+                  "line": 131
                 }
               }
             }
@@ -6016,10 +4960,10 @@
           "slots": {},
           "location": {
             "start": {
-              "line": 129
+              "line": 130
             },
             "end": {
-              "line": 130
+              "line": 131
             }
           }
         }
@@ -6067,10 +5011,10 @@
       "slots": {},
       "location": {
         "start": {
-          "line": 128
+          "line": 129
         },
         "end": {
-          "line": 129
+          "line": 130
         }
       }
     }

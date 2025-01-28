@@ -31,10 +31,25 @@
     },
     {
       "$$mdtype": "Tag",
-      "name": "p",
+      "name": "ul",
       "attributes": {},
       "children": [
-        "Anything starting with \"YES: \" should display. Anything starting with \"NO: \" should not display."
+        {
+          "$$mdtype": "Tag",
+          "name": "li",
+          "attributes": {},
+          "children": [
+            "Anything that says \"SHOWN\" should be marked as shown in the renderable tree."
+          ]
+        },
+        {
+          "$$mdtype": "Tag",
+          "name": "li",
+          "attributes": {},
+          "children": [
+            "Anything that says \"HIDDEN\" should not display."
+          ]
+        }
       ]
     },
     {
@@ -173,16 +188,7 @@
           "name": "p",
           "attributes": {},
           "children": [
-            "YES: Display if ",
-            {
-              "$$mdtype": "Tag",
-              "name": "code",
-              "attributes": {},
-              "children": [
-                "equals($always_true, true)"
-              ]
-            },
-            "."
+            "SHOWN"
           ]
         }
       ]
@@ -215,16 +221,7 @@
           "name": "p",
           "attributes": {},
           "children": [
-            "YES: Display if ",
-            {
-              "$$mdtype": "Tag",
-              "name": "code",
-              "attributes": {},
-              "children": [
-                "equals($test_string, \"Datadog\")"
-              ]
-            },
-            "."
+            "SHOWN"
           ]
         }
       ]
@@ -257,16 +254,7 @@
           "name": "p",
           "attributes": {},
           "children": [
-            "NO: Display if ",
-            {
-              "$$mdtype": "Tag",
-              "name": "code",
-              "attributes": {},
-              "children": [
-                "equals($always_false, true)"
-              ]
-            },
-            "."
+            "HIDDEN"
           ]
         }
       ]
@@ -299,16 +287,7 @@
           "name": "p",
           "attributes": {},
           "children": [
-            "NO: Display if ",
-            {
-              "$$mdtype": "Tag",
-              "name": "code",
-              "attributes": {},
-              "children": [
-                "equals($test_string, \"Hello\")"
-              ]
-            },
-            "."
+            "HIDDEN"
           ]
         }
       ]
@@ -355,16 +334,7 @@
           "name": "p",
           "attributes": {},
           "children": [
-            "YES: Display if ",
-            {
-              "$$mdtype": "Tag",
-              "name": "code",
-              "attributes": {},
-              "children": [
-                "default($notDefined, true)"
-              ]
-            },
-            "."
+            "SHOWN"
           ]
         }
       ]
@@ -396,16 +366,7 @@
           "name": "p",
           "attributes": {},
           "children": [
-            "YES: Display if ",
-            {
-              "$$mdtype": "Tag",
-              "name": "code",
-              "attributes": {},
-              "children": [
-                "default($always_true, false)"
-              ]
-            },
-            "."
+            "SHOWN"
           ]
         }
       ]
@@ -436,16 +397,7 @@
           "name": "p",
           "attributes": {},
           "children": [
-            "NO: Display if ",
-            {
-              "$$mdtype": "Tag",
-              "name": "code",
-              "attributes": {},
-              "children": [
-                "default($notDefined, false)"
-              ]
-            },
-            "."
+            "HIDDEN"
           ]
         }
       ]
@@ -500,16 +452,7 @@
           "name": "p",
           "attributes": {},
           "children": [
-            "YES: Display if ",
-            {
-              "$$mdtype": "Tag",
-              "name": "code",
-              "attributes": {},
-              "children": [
-                "or($always_true, $always_false)"
-              ]
-            },
-            "."
+            "SHOWN"
           ]
         }
       ]
@@ -566,16 +509,7 @@
           "name": "p",
           "attributes": {},
           "children": [
-            "YES: Display if ",
-            {
-              "$$mdtype": "Tag",
-              "name": "code",
-              "attributes": {},
-              "children": [
-                "or(equals($test_string, \"Hello\"), equals($test_string, \"Datadog\"))"
-              ]
-            },
-            "."
+            "SHOWN"
           ]
         }
       ]
@@ -612,16 +546,7 @@
           "name": "p",
           "attributes": {},
           "children": [
-            "NO: Display if ",
-            {
-              "$$mdtype": "Tag",
-              "name": "code",
-              "attributes": {},
-              "children": [
-                "or($missingVarOne, $missingVarTwo)"
-              ]
-            },
-            "."
+            "HIDDEN"
           ]
         }
       ]
@@ -676,16 +601,7 @@
           "name": "p",
           "attributes": {},
           "children": [
-            "YES: Display if ",
-            {
-              "$$mdtype": "Tag",
-              "name": "code",
-              "attributes": {},
-              "children": [
-                "and($always_true, $always_true)"
-              ]
-            },
-            "."
+            "SHOWN"
           ]
         }
       ]
@@ -724,16 +640,7 @@
           "name": "p",
           "attributes": {},
           "children": [
-            "NO: Display if ",
-            {
-              "$$mdtype": "Tag",
-              "name": "code",
-              "attributes": {},
-              "children": [
-                "and($always_true, $always_false)"
-              ]
-            },
-            "."
+            "HIDDEN"
           ]
         }
       ]
@@ -790,16 +697,7 @@
           "name": "p",
           "attributes": {},
           "children": [
-            "NO: Display if ",
-            {
-              "$$mdtype": "Tag",
-              "name": "code",
-              "attributes": {},
-              "children": [
-                "and(equals($test_string, \"Hello\"), equals($test_string, \"Datadog\"))"
-              ]
-            },
-            "."
+            "HIDDEN"
           ]
         }
       ]
@@ -847,16 +745,7 @@
           "name": "p",
           "attributes": {},
           "children": [
-            "YES: Display if ",
-            {
-              "$$mdtype": "Tag",
-              "name": "code",
-              "attributes": {},
-              "children": [
-                "not($always_false)"
-              ]
-            },
-            "."
+            "SHOWN"
           ]
         }
       ]
@@ -897,16 +786,7 @@
           "name": "p",
           "attributes": {},
           "children": [
-            "YES: Display if ",
-            {
-              "$$mdtype": "Tag",
-              "name": "code",
-              "attributes": {},
-              "children": [
-                "not(equals($test_string, \"Hello\"))"
-              ]
-            },
-            "."
+            "SHOWN"
           ]
         }
       ]
@@ -938,16 +818,7 @@
           "name": "p",
           "attributes": {},
           "children": [
-            "NO: Display if ",
-            {
-              "$$mdtype": "Tag",
-              "name": "code",
-              "attributes": {},
-              "children": [
-                "not($always_true)"
-              ]
-            },
-            "."
+            "HIDDEN"
           ]
         }
       ]
@@ -988,16 +859,7 @@
           "name": "p",
           "attributes": {},
           "children": [
-            "NO: Display if ",
-            {
-              "$$mdtype": "Tag",
-              "name": "code",
-              "attributes": {},
-              "children": [
-                "not(equals($test_string, \"Datadog\"))"
-              ]
-            },
-            "."
+            "HIDDEN"
           ]
         }
       ]
@@ -1060,16 +922,7 @@
           "name": "p",
           "attributes": {},
           "children": [
-            "YES: Display if ",
-            {
-              "$$mdtype": "Tag",
-              "name": "code",
-              "attributes": {},
-              "children": [
-                "or(not($always_false), not($always_true))"
-              ]
-            },
-            "."
+            "SHOWN"
           ]
         }
       ]
@@ -1126,16 +979,7 @@
           "name": "p",
           "attributes": {},
           "children": [
-            "YES: Display if ",
-            {
-              "$$mdtype": "Tag",
-              "name": "code",
-              "attributes": {},
-              "children": [
-                "or(equals($test_string, \"Datadog\"), equals($test_string, \"Hello\"))"
-              ]
-            },
-            "."
+            "SHOWN"
           ]
         }
       ]
@@ -1236,16 +1080,7 @@
           "name": "p",
           "attributes": {},
           "children": [
-            "YES: Display if ",
-            {
-              "$$mdtype": "Tag",
-              "name": "code",
-              "attributes": {},
-              "children": [
-                "and(or(not($always_false), not($always_true)), or(not($always_false), not($always_true)))"
-              ]
-            },
-            "."
+            "SHOWN"
           ]
         }
       ]
@@ -1286,16 +1121,7 @@
           "name": "p",
           "attributes": {},
           "children": [
-            "YES: Display if ",
-            {
-              "$$mdtype": "Tag",
-              "name": "code",
-              "attributes": {},
-              "children": [
-                "equals(not($always_false), true)"
-              ]
-            },
-            "."
+            "SHOWN"
           ]
         }
       ]
@@ -1388,16 +1214,7 @@
           "name": "p",
           "attributes": {},
           "children": [
-            "NO: Display if ",
-            {
-              "$$mdtype": "Tag",
-              "name": "code",
-              "attributes": {},
-              "children": [
-                "and(and($always_false, not($always_true)), or(not($always_false), not($always_true)))"
-              ]
-            },
-            "."
+            "HIDDEN"
           ]
         }
       ]
@@ -1452,16 +1269,7 @@
           "name": "p",
           "attributes": {},
           "children": [
-            "NO: Display if ",
-            {
-              "$$mdtype": "Tag",
-              "name": "code",
-              "attributes": {},
-              "children": [
-                "and(not($always_false), not($always_true))"
-              ]
-            },
-            "."
+            "HIDDEN"
           ]
         }
       ]
@@ -1518,16 +1326,7 @@
           "name": "p",
           "attributes": {},
           "children": [
-            "NO: Display if ",
-            {
-              "$$mdtype": "Tag",
-              "name": "code",
-              "attributes": {},
-              "children": [
-                "and(equals($test_string, \"Datadog\"), equals($test_string, \"Hello\"))"
-              ]
-            },
-            "."
+            "HIDDEN"
           ]
         }
       ]
