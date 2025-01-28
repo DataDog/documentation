@@ -1,5 +1,0 @@
-habitat_options:
-  - id: ocean
-    default: true
-  - id: desert
-  - id: forest

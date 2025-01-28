@@ -1,9 +1,0 @@
-eggshell_blue_paint_options:
-  - id: elegant_royal_e
-    default: true
-  - id: robins_egg_e
-
-eggshell_red_paint_options:
-  - id: rose_e
-    default: true
-  - id: ruby_e

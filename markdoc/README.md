@@ -43,6 +43,11 @@ The runner code (`build.js`) is the few lines of build code that will invoke the
 
 A quickstart guide for playing around with the Customizable Docs project. More detailed (but still drafty) documentation on writing customizable docs can be found in [Jen's scratch repo][1].
 
+### Prerequisites
+
+- The [`corp-node-packages` repo][3] must be cloned into the same directory as the `documentation` repo.
+- The `cdocs-data` package inside of `corp-node-packages` must have been built (by running `yarn build` from the `cdocs-data` folder).
+
 ### Build the required Node packages
 
 You may see a few TypeScript compilation errors when you build the packages since the project is still in development, but you can ignore them. No breaking changes are pushed to this branch.
@@ -88,3 +93,4 @@ Visit `localhost:1313/markdoc_testing` and click around in the left nav.
 
 [1]: https://github.com/DataDog/jen.gilbert/tree/main/customizable-docs-guide
 [2]: https://markdoc.dev/docs/syntax
+[3]: https://github.com/datadog/corp-node-packages

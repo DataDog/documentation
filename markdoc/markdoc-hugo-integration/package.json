@@ -19,7 +19,7 @@
     "dependencies": {
         "@types/markdown-it": "^14.1.2",
         "@vitejs/plugin-react": "^4.3.3",
-        "cdocs-data": "file:../cdocs-data",
+        "cdocs-data": "file:../../../corp-node-packages/packages/cdocs-data",
         "chroma-highlight": "^2.4.2",
         "interweave": "^13.1.0",
         "js-yaml": "^4.1.0",

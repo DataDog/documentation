@@ -1,7 +1,0 @@
-traits:
-- id: color
-  label: Olorcay
-  internal_notes: "A high-level color that can help the user find the right paint, such as 'red'."
-- id: finish
-  label: Inishfay
-  internal_notes: "A sheen such as 'glossy' or 'matte'."

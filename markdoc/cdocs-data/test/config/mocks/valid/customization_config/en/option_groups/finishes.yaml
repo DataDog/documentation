@@ -1,5 +1,0 @@
-finish_options:
-  - id: matte
-  - id: eggshell
-    default: true
-  - id: gloss

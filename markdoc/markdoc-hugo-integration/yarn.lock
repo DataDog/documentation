@@ -1558,9 +1558,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cdocs-data@file:../cdocs-data::locator=markdoc-hugo-integration%40workspace%3A.":
+"cdocs-data@file:../../../corp-node-packages/packages/cdocs-data::locator=markdoc-hugo-integration%40workspace%3A.":
   version: 1.0.0
-  resolution: "cdocs-data@file:../cdocs-data#../cdocs-data::hash=1904ff&locator=markdoc-hugo-integration%40workspace%3A."
+  resolution: "cdocs-data@file:../../../corp-node-packages/packages/cdocs-data#../../../corp-node-packages/packages/cdocs-data::hash=185599&locator=markdoc-hugo-integration%40workspace%3A."
   dependencies:
     js-yaml: ^4.1.0
     jsdom: ^26.0.0
@@ -1570,7 +1570,7 @@ __metadata:
     typedoc-plugin-zod: ^1.3.1
     uuid: ^11.0.5
     zod: ^3.22.4
-  checksum: efa8d01d2d7e802c7ebe4d7cd12624dbf6aa8360eb694760d86f2716b695c652994345c4afc0c947615352f3fd040f1442aaf09b9724ed93de3ef3bf7acffb98
+  checksum: 16a0743dcba1c2f6940964de9ae60942ec52e125fc5f525048ec1fe6180726e4402a69d54c60405d8e79e94015455deb07d960c2ac147823a02ef821eb7a1869
   languageName: node
   linkType: hard
 
@@ -2575,7 +2575,7 @@ __metadata:
     "@types/uuid": ^10.0.0
     "@vitejs/plugin-react": ^4.3.3
     "@vitest/coverage-v8": ^2.0.2
-    cdocs-data: "file:../cdocs-data"
+    cdocs-data: "file:../../../corp-node-packages/packages/cdocs-data"
     chroma-highlight: ^2.4.2
     esbuild: 0.20.2
     interweave: ^13.1.0
