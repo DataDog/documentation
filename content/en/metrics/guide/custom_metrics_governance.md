@@ -77,7 +77,6 @@ To identify which team or service is responsible for your top custom metric name
 1. Under the table for *Top Custom Metrics for <MONTH YEAR>*, click the icon to **See in Metrics Summary** for the top custom metric. This takes you to the *Metrics Summary* page with the opened metric details side panel. 
 1. In the side panel, scroll down to the *Tags* section to view associated tags such as teams and service.
 
-
 #### View your team's custom metrics
 
 All teams should have visibility into which metrics are driving their bill spikes in real-time and feel confident that their cost optimization efforts do not impact another team's visibility.
@@ -131,14 +130,13 @@ tags:audit "Queryable tag configuration"
 
 ### Reduce costs from unqueried metrics
 
-To ensure you're not removing valuable visibility while reducing costs, you need to differentiate between the actively queried metrics that your team relies on from the metrics that aren't queried anywhere within the Datadog platform or through the API. Datadog's intelligent query insights continuously computes and analyzes all users' interactions (in-app or via API) on any metric to help identify less valuable, unused metrics.
+To ensure you're not removing valuable visibility while reducing costs, you need to differentiate between the actively queried metrics that your team relies on from the metrics that aren't queried anywhere within the Datadog platform or through the API. Datadog's intelligent query insights continuously computes and analyzes all users' interactions (in Datadog or through the API) on any metric to help identify less valuable, unused metrics.
 
-Identify your organization's entire list of unqueried metrics over the past 30 days: 
-1. On the [Metrics Summary page][6], find the **Query Activity (past 30, 60, or 90 days)** facet on the left side.
-2. Select **Not Actively Queried**.
-3. Find the **Configuration** facet on the left side, and select **All Tags**. The combination of these two facets provides you a list of unqueried custom metrics that haven't yet been configured that you can receive immediate cost savings from.
-4. Review the resulting table of metrics names. Are there any patterns or are they submitted from a specific service? Find tags associated with these unqueried metrics.
-5. (Optional) To export this list, click **Export as CSV** above the metric table.
+Identify your organization's entire list of unqueried metrics over the past 30, 60, or 90 days: 
+1. On the [Metrics Summary page][6], find the **Query Activity (past 30, 60, or 90 days)** facet on the left side. Select the time frame of interest.
+2. Find the **Configuration** facet on the left side, and select **All Tags**. The combination of these two facets provides you a list of unqueried custom metrics that haven't yet been configured that you can receive immediate cost savings from.
+3. Review the resulting table of metrics names. Are there any patterns or are they submitted from a specific service? Find tags associated with these unqueried metrics.
+4. (Optional) To export this list, click **Export as CSV** above the metric table.
 
 After you identify the metrics that your developers don't need, you can safely reduce the custom metrics volumes and reduce the costs of these unused metrics with Metrics without Limits™. 
 
