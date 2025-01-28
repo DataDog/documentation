@@ -71,7 +71,7 @@ Variables are especially important in a **Multi-Alert** monitor. When triggered,
 
 #### Conditional variables
 
-These variables allow you to tailor the notification message based on your needs and use case by building some branch logic.
+These variables allow you to tailor the notification message by implementing branch logic based on your needs and use case.
 
 For example, if you'd like to get notified only if a certain group triggers, you can use {{\#is\_exact\_match}} variable.  
 Example:  
