@@ -31665,8 +31665,6 @@ components:
       type: apiKey
       x-env-name: DD_APP_KEY
     bearerAuth:
-      in: header
-      name: Authorization
       scheme: bearer
       type: http
       x-env-name: DD_BEARER_TOKEN
@@ -40534,8 +40532,9 @@ paths:
       - Logs Archives
       x-menu-order: 9
       x-permission:
-        operator: OPEN
-        permissions: []
+        operator: OR
+        permissions:
+        - logs_read_config
       x-undo:
         type: safe
     put:
@@ -40890,8 +40889,9 @@ paths:
       x-codegen-request-body-name: body
       x-menu-order: 6
       x-permission:
-        operator: OPEN
-        permissions: []
+        operator: OR
+        permissions:
+        - logs_read_config
       x-undo:
         type: safe
     post:
@@ -40967,6 +40967,7 @@ paths:
         operator: OR
         permissions:
         - logs_read_data
+        - logs_read_config
       x-undo:
         type: safe
     post:
@@ -41078,6 +41079,7 @@ paths:
         operator: OR
         permissions:
         - logs_read_data
+        - logs_read_config
       x-undo:
         type: safe
     patch:
@@ -41141,8 +41143,9 @@ paths:
       - Logs Metrics
       x-menu-order: 1
       x-permission:
-        operator: OPEN
-        permissions: []
+        operator: OR
+        permissions:
+        - logs_read_config
       x-undo:
         type: safe
     post:
@@ -41254,8 +41257,9 @@ paths:
       - Logs Metrics
       x-menu-order: 3
       x-permission:
-        operator: OPEN
-        permissions: []
+        operator: OR
+        permissions:
+        - logs_read_config
       x-undo:
         type: safe
     patch:
@@ -41326,8 +41330,9 @@ paths:
       - Logs Restriction Queries
       x-menu-order: 1
       x-permission:
-        operator: OPEN
-        permissions: []
+        operator: OR
+        permissions:
+        - logs_read_config
       x-undo:
         type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -41413,8 +41418,9 @@ paths:
       - Logs Restriction Queries
       x-menu-order: 10
       x-permission:
-        operator: OPEN
-        permissions: []
+        operator: OR
+        permissions:
+        - logs_read_config
       x-undo:
         type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -41452,8 +41458,9 @@ paths:
       - Logs Restriction Queries
       x-menu-order: 9
       x-permission:
-        operator: OPEN
-        permissions: []
+        operator: OR
+        permissions:
+        - logs_read_config
       x-undo:
         type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -41541,8 +41548,9 @@ paths:
       x-codegen-request-body-name: body
       x-menu-order: 3
       x-permission:
-        operator: OPEN
-        permissions: []
+        operator: OR
+        permissions:
+        - logs_read_config
       x-undo:
         type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -41689,8 +41697,9 @@ paths:
       x-codegen-request-body-name: body
       x-menu-order: 6
       x-permission:
-        operator: OPEN
-        permissions: []
+        operator: OR
+        permissions:
+        - logs_read_config
       x-undo:
         type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -53647,11 +53656,7 @@ tags:
 
     See the [Archives Page](https://app.datadoghq.com/logs/pipelines/archives)
 
-    for a list of the archives currently configured in Datadog.
-
-
-    You need an API and non-scoped application key with Admin rights to interact with
-    these endpoints.'
+    for a list of the archives currently configured in Datadog.'
   externalDocs:
     description: Find out more at
     url: https://docs.datadoghq.com/logs/archives/
@@ -53670,11 +53675,8 @@ tags:
     description: Find out more at
     url: https://docs.datadoghq.com/logs/log_configuration/forwarding_custom_destinations/
   name: Logs Custom Destinations
-- description: 'Manage configuration of [log-based metrics](https://app.datadoghq.com/logs/pipelines/generate-metrics)
+- description: Manage configuration of [log-based metrics](https://app.datadoghq.com/logs/pipelines/generate-metrics)
     for your organization.
-
-    You need an API and non-scoped application key with Admin rights to interact with
-    these endpoints.'
   externalDocs:
     description: Find out more at
     url: https://docs.datadoghq.com/logs/logs_to_metrics/
@@ -53712,10 +53714,6 @@ tags:
     can have multiple tags with the same key (like team) and different values. This
     means the same log event can be visible to roles whose restriction queries are
     scoped to different team values.
-
-
-    You need an API and non-scoped application key with Admin rights to interact with
-    these endpoints.
 
 
     See [How to Set Up RBAC for Logs](https://docs.datadoghq.com/logs/guide/logs-rbac/?tab=api#restrict-access-to-logs)

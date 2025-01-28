@@ -144,7 +144,7 @@ After you identify the metrics that your developers don't need, you can safely r
 
 {{< img src="metrics/guide/custom_metrics_governance/manage_tags_fm_metrics_summary.png" alt="The Configure Metrics drop menu with the Manage tags selection highlighted" style="width:90%;" >}}
 
-5. At the top of the the [Metrics Summary page][6], click the **Configure Metrics** dropdown menu.
+5. At the top of the [Metrics Summary page][6], click the **Configure Metrics** dropdown menu.
 6. Select **Manage tags** to open the [Metrics without Limits™ Tag configuration modal][13] to configure multiple metrics in bulk.
 7. Specify the metric namespace prefix of the metrics you'd like to configure.
 8. Select **Include tags...** and leave the allowlist of tags empty.
