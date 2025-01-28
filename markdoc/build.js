@@ -9,7 +9,7 @@ console.time('Markdoc compilation execution time');
 const fs = require('fs');
 const path = require('path');
 
-const MarkdocHugoIntegration = require('./markdoc-hugo-integration/dist').MarkdocHugoIntegration;
+const CdocsHugoIntegration = require('./cdocs-hugo-integration/dist').CdocsHugoIntegration;
 
 const env = process.env.CI_ENVIRONMENT_NAME || 'development';
 const baseSiteDir = path.resolve(__dirname, '..');
@@ -18,7 +18,7 @@ const ASSETS_PARTIAL_PATH = path.resolve(__dirname, '../layouts/partials/markdoc
 const CONTENT_DIR = path.resolve(__dirname, '../content');
 
 // Initialize the Markdoc integration
-const markdocIntegration = new MarkdocHugoIntegration({
+const markdocIntegration = new CdocsHugoIntegration({
     config: {
         baseSiteDir,
         env

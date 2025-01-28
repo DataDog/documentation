@@ -4,9 +4,9 @@
 
 The Customizable Docs code is divided into three components, listed here from the bottom up.
 
-### markdoc-static-compiler ("the compiler")
+### cdocs-markdoc
 
-The compiler is responsible for converting Markdoc to HTML. This is a fork of the original Markdoc project.
+A package that converts Markdoc to a data structure that the Markdoc-Hugo integration can render to HTML. This is a fork of the original Markdoc project.
 
 #### Tasks
 
@@ -21,19 +21,16 @@ To do its job, the compiler needs:
 - Values for all the variables (content preferences) that the Markdoc string depends on
 - ASTs for all the partials that the Markdoc string is referring to
 
-### markdoc-hugo-integration ("the integration")
+### cdocs-hugo-integration ("the integration")
 
-The Markdoc-Hugo integration uses the compiler to convert .mdoc files to HTML documents that Hugo can process.
+The Hugo integration converts `.mdoc.md` files to HTML, and stores the HTML in `.md` files that Hugo can process.
 
-The integration bridges the gap between Hugo and the compiler by performing the following tasks:
+#### Tasks
 
-- Ingest all configuration from the relevant yaml files, such as the available options for each preference variable
-- Ingest all .mdoc files in the content/en folder of the site
-- For each .mdoc file,
-    - Derive the default values for all variables (content preferences)
-    - Prepare all necessary partials for the compiler
-    - Render the file to HTML
-    - Add the appropriate menus, navs, styles, and so on to the rendered HTML, including the logic for preference changes / content rerenders inside the rendered HTML
+- Collect all customization configuration from YAML.
+- Collect all `.mdoc.md` files.
+- Use `cdocs-markdoc` to convert `.mdoc.md` files to renderable data.
+- Render the data to HTML, and store the HTML in an `.md` file.
 
 ### Runner code ("the build")
 
@@ -52,17 +49,17 @@ A quickstart guide for playing around with the Customizable Docs project. More d
 
 You may see a few TypeScript compilation errors when you build the packages since the project is still in development, but you can ignore them. No breaking changes are pushed to this branch.
 
-#### Compiler package (our Markdoc fork)
+#### cdocs-markdoc
 
-From the `markdoc-static-compiler` directory, run the following in your terminal:
+From the `cdocs-markdoc` directory, run the following in your terminal:
 
 ```shell
 npm run build
 ```
 
-#### Markdoc-Hugo integration package
+#### cdocs-hugo-integration
 
-From the `markdoc-hugo-integration` directory, run the following in your terminal:
+From the `cdocs-hugo-integration` directory, run the following in your terminal:
 
 ```shell
 npm run build
