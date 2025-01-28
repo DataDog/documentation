@@ -133,7 +133,7 @@ tags:audit "Queryable tag configuration"
 To ensure you're not removing valuable visibility while reducing costs, you need to differentiate between the actively queried metrics that your team relies on from the metrics that aren't queried anywhere within the Datadog platform or through the API. Datadog's intelligent query insights continuously computes and analyzes all users' interactions (in Datadog or through the API) on any metric to help identify less valuable, unused metrics.
 
 Identify your organization's entire list of unqueried metrics over the past 30, 60, or 90 days: 
-1. On the [Metrics Summary page][6], find the **Query Activity (past 30, 60, or 90 days)** facet on the left side. Select the time frame of interest.
+1. On the [Metrics Summary page][6], find the **Query Activity** facet on the left side. Select the time frame of interest (30, 60, or 90 days).
 2. Find the **Configuration** facet on the left side, and select **All Tags**. The combination of these two facets provides you a list of unqueried custom metrics that haven't yet been configured that you can receive immediate cost savings from.
 3. Review the resulting table of metrics names. Are there any patterns or are they submitted from a specific service? Find tags associated with these unqueried metrics.
 4. (Optional) To export this list, click **Export as CSV** above the metric table.
