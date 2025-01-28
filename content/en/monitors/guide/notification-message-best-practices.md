@@ -44,7 +44,7 @@ While both the examples refer to a memory consumption monitor, the improved titl
 
 ### Message
 
-The notification body is one of the first things on-call responders will start to read to know how to act on the alert they just received. Be concise, write accurate information that is as legible as possible.
+On-call responders rely on the notification body to understand and act on alerts. Write concise, accurate, and legible messages for clarity.
 
 An actionable and effective **message** should precisely mention what is failing and list the major root causes. Without that information responders will need to gather the context needed to investigate the issue by themselves, delaying Mean Time To Repair (MTTR).
 
