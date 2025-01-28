@@ -99,7 +99,7 @@ You can receive a notification if the group that triggered the alert contains a 
 {{/is_match}}
 ```
 
-For more information on how to use conditional variables, see the [documentation](https://docs.datadoghq.com/monitors/notify/variables/?tab=is_alert#conditional-variables). 
+For more information and examples, see the [Conditional Variables][2] documentation. 
 
 #### Template variables
 
