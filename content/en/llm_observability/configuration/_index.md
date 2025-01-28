@@ -37,6 +37,8 @@ Connect your OpenAI account to LLM Observability with your OpenAI API key.
 1. Enable **Use this API key to evaluate your LLM applications**.
 
 {{< img src="llm_observability/configuration/openai-tile.png" alt="The OpenAI configuration tile in LLM Observability. Lists instructions for configuring OpenAI and providing your OpenAI API key." style="width:100%;" >}}
+
+[2]: https://app.datadoghq.com/llm/settings/integrations
 {{% /tab %}}
 
 {{% tab "Azure OpenAI" %}}
