@@ -42,9 +42,7 @@ Connect your OpenAI account to LLM Observability with your OpenAI API key.
 {{% /tab %}}
 
 {{% tab "Azure OpenAI" %}}
-Connect your Azure OpenAI account to LLM Observability with your OpenAI API key.
-
-Only gpt-4o mini is supported. Using other models will lead to unreliable performance.
+Connect your Azure OpenAI account to LLM Observability with your OpenAI API key. We strongly recommend using the **GPT-4o mini** model for Evaluations
 
 1. In Datadog, navigate to [**LLM Observability > Settings > Integrations**][1].
 1. Select **Connect** on the Azure OpenAI tile.
