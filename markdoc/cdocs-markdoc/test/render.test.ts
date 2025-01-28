@@ -21,13 +21,13 @@ describe('rendering stages', () => {
 
   test('the AST matches the snapshot', () => {
     expect(JSON.stringify(ast, null, 2)).toMatchFileSnapshot(
-      './__snapshots__/renderingStages/ast.snap.json'
+      './__snapshots__/ast.snap.json'
     );
   });
 
   test('the RenderableTree matches the snapshot', () => {
     expect(JSON.stringify(renderableTree, null, 2)).toMatchFileSnapshot(
-      './__snapshots__/renderingStages/renderableTree.snap.json'
+      './__snapshots__/renderableTree.snap.json'
     );
   });
 
