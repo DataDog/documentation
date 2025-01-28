@@ -1,5 +1,7 @@
 ---
 title: Using OpenTelemetry Environment Variables with Datadog SDKs
+aliases:
+  - /opentelemetry/interoperability/environment_variable_support
 further_reading:
     - link: '/tracing/trace_collection/library_config/dotnet-core'
       tag: 'Documentation'

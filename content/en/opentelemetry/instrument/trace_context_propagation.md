@@ -1,5 +1,7 @@
 ---
 title: Trace Context Propagation
+aliases:
+  - /opentelemetry/interoperability/trace_context_propagation
 type: multi-code-lang
 description: 'Extract and inject Datadog, B3, and W3C Trace Context headers to propagate the context of a distributed trace.'
 aliases:

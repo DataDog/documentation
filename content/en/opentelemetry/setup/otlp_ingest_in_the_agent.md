@@ -4,6 +4,7 @@ aliases:
   - /tracing/setup_overview/open_standards/otlp_ingest_in_the_agent/
   - /tracing/trace_collection/open_standards/otlp_ingest_in_the_agent/
   - /opentelemetry/otlp_ingest_in_the_agent/
+  - /opentelemetry/interoperability/otlp_ingest_in_the_agent/
 description: 'Ingest OTLP trace data through the Datadog Agent'
 further_reading:
 - link: "https://www.datadoghq.com/about/latest-news/press-releases/datadog-announces-opentelemetry-protocol-support/"

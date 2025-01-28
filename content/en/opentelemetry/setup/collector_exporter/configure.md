@@ -1,5 +1,5 @@
 ---
-title: Install and Configure the OpenTelemetry Collector
+title: Install and Configure the Collector
 further_reading:
 - link: "https://opentelemetry.io/docs/collector/management/"
   tag: "External Site"
@@ -8,8 +8,6 @@ further_reading:
   tag: "External Site"
   text: "OpenTelemetry Collector Configuration"
 ---
-
-## Install and configure the OpenTelemetry Collector
 
 ### Step 1: Download the OpenTelemetry Collector
 
