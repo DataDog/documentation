@@ -2575,6 +2575,174 @@ menu:
           - ListSecurityFilters
         unstable: []
         order: 18
+    - name: Update a mute rule
+      url: '#update-a-mute-rule'
+      identifier: security-monitoring-update-a-mute-rule
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateMuteRule
+        unstable: []
+        order: 19
+    - name: Patch a mute rule
+      url: '#patch-a-mute-rule'
+      identifier: security-monitoring-patch-a-mute-rule
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - PatchMuteRule
+        unstable: []
+        order: 20
+    - name: Get details of a mute rule
+      url: '#get-details-of-a-mute-rule'
+      identifier: security-monitoring-get-details-of-a-mute-rule
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetMuteRule
+        unstable: []
+        order: 18
+    - name: Delete a mute rule
+      url: '#delete-a-mute-rule'
+      identifier: security-monitoring-delete-a-mute-rule
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteMuteRule
+        unstable: []
+        order: 21
+    - name: Reorder the list of mute rules in the pipeline
+      url: '#reorder-the-list-of-mute-rules-in-the-pipeline'
+      identifier: security-monitoring-reorder-the-list-of-mute-rules-in-the-pipeline
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ReorderMuteRules
+        unstable: []
+        order: 17
+    - name: Create a new mute rule
+      url: '#create-a-new-mute-rule'
+      identifier: security-monitoring-create-a-new-mute-rule
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateMuteRule
+        unstable: []
+        order: 16
+    - name: Get the ordered list of mute rules
+      url: '#get-the-ordered-list-of-mute-rules'
+      identifier: security-monitoring-get-the-ordered-list-of-mute-rules
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetMuteRules
+        unstable: []
+        order: 15
+    - name: Update an inbox rule
+      url: '#update-an-inbox-rule'
+      identifier: security-monitoring-update-an-inbox-rule
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateInboxRule
+        unstable: []
+        order: 12
+    - name: Patch an inbox rule
+      url: '#patch-an-inbox-rule'
+      identifier: security-monitoring-patch-an-inbox-rule
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - PatchInboxRule
+        unstable: []
+        order: 13
+    - name: Get details of an inbox rule
+      url: '#get-details-of-an-inbox-rule'
+      identifier: security-monitoring-get-details-of-an-inbox-rule
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetInboxRule
+        unstable: []
+        order: 11
+    - name: Delete an inbox rule
+      url: '#delete-an-inbox-rule'
+      identifier: security-monitoring-delete-an-inbox-rule
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteInboxRule
+        unstable: []
+        order: 14
+    - name: Reorder the list of inbox rules in the pipeline
+      url: '#reorder-the-list-of-inbox-rules-in-the-pipeline'
+      identifier: security-monitoring-reorder-the-list-of-inbox-rules-in-the-pipeline
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ReorderInboxRules
+        unstable: []
+        order: 10
+    - name: Create a new inbox rule
+      url: '#create-a-new-inbox-rule'
+      identifier: security-monitoring-create-a-new-inbox-rule
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateInboxRule
+        unstable: []
+        order: 9
+    - name: Get the ordered list of inbox rules
+      url: '#get-the-ordered-list-of-inbox-rules'
+      identifier: security-monitoring-get-the-ordered-list-of-inbox-rules
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetInboxRules
+        unstable: []
+        order: 8
     - name: Patch a vulnerability-based rule
       url: '#patch-a-vulnerability-based-rule'
       identifier: security-monitoring-patch-a-vulnerability-based-rule
