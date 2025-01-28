@@ -172,13 +172,13 @@ Telemetry data (such as errors and debug logs) about SDK execution is sent to Da
 : Optional<br/>
 **Type**: Number | false<br/>
 **Default**: `0`<br/>
-The threshold for javascript long tasks reporting in milliseconds. Setting it to `0` or `false` disables javascript long task reporting. Values below `100` are raised to `100`. Values above `5000` are lowered to `5000`.
+The threshold for JavaScript long tasks reporting in milliseconds. Setting it to `0` or `false` disables JavaScript long task reporting. Values below `100` are raised to `100`. Values above `5000` are lowered to `5000`.
 
 `nativeLongTaskThresholdMs`
 : Optional<br/>
 **Type**: Number | false<br/>
 **Default**: `200`<br/>
-The threshold for native long tasks reporting in milliseconds. Setting it to `0` or `false` disables javascript long task reporting. Values below `100` are raised to `100`. Values above `5000` are lowered to `5000`.
+The threshold for native long tasks reporting in milliseconds. Setting it to `0` or `false` disables native long task reporting. Values below `100` are raised to `100`. Values above `5000` are lowered to `5000`.
 
 `vitalsUpdateFrequency`
 : Optional<br/>
