@@ -8,25 +8,25 @@ aliases:
 ---
 
 ## Prerequisites
-Before setting up Code Security, ensure the following prerequisites are met:
+Before setting up Runtime Code Analysis (IAST), ensure the following prerequisites are met:
 
 1. **Datadog Agent Installation:** The Datadog Agent is installed and configured for your application's operating system or container, cloud, or virtual environment.
 2. **Datadog APM Configuration:** Datadog APM is configured for your application or service, and web traces (`type:web`) are being received by Datadog.
-3. **Supported Tracing Library:** The Datadog Tracing Library used by your application or service supports Code Security capabilities for the language of your application or service. For more details, refer to the **Compatibility Requirements** section below.
+3. **Supported Tracing Library:** The Datadog Tracing Library used by your application or service supports Runtime Code Analysis (IAST) capabilities for the language of your application or service. For more details, refer to the **Compatibility Requirements** section below.
 
 ## Using Datadog Tracing Libraries
 
-Select your application language for details on how to enable Code Security for your language and infrastructure types.
+Select your application language for details on how to enable Runtime Code Analysis (IAST) for your language and infrastructure types.
 
 
 {{% collapse-content title="Java" level="h4" %}}
 
 You can detect code-level vulnerabilities and monitor application security in Java applications running in Docker, Kubernetes, Amazon ECS, and AWS Fargate.
 
-Follow these steps to enable Code Security in your service:
+Follow these steps to enable Runtime Code Analysis (IAST) in your service:
 
 1. [Update your Datadog Agent][6] to at least version 7.41.1.
-2. Update your Datadog Tracing Library to at least the minimum version needed to turn on Code Security. For details, see the **Compatibility Requirements** below.
+2. Update your Datadog Tracing Library to at least the minimum version needed to turn on Runtime Code Analysis (IAST). For details, see the **Compatibility Requirements** below.
 3. Add the `DD_IAST_ENABLED=true` environment variable to your application configuration.
 
    From the command line:
@@ -101,10 +101,10 @@ Update your ECS task definition JSON file, by adding this in the environment sec
 
 You can detect code-level vulnerabilities and monitor application security in .NET applications running in Docker, Kubernetes, Amazon ECS, and AWS Fargate.
 
-Follow these steps to enable Code Security in your service:
+Follow these steps to enable Runtime Code Analysis (IAST) in your service:
 
 1. [Update your Datadog Agent][3] to at least version 7.41.1.
-2. Update your Datadog Tracing Library to at least the minimum version needed to turn on Code Security. For details, see the **Compatibility Requirements** below.
+2. Update your Datadog Tracing Library to at least the minimum version needed to turn on Runtime Code Analysis (IAST). For details, see the **Compatibility Requirements** below.
 3. Add the `DD_IAST_ENABLED=true` environment variable to your application configuration. For example, on Windows self-hosted, run the following PowerShell snippet as part of your application start-up script:
 
    ```sh
@@ -199,7 +199,7 @@ Add the following line to your container Dockerfile:
 ENV DD_IAST_ENABLED=true
 ```
 
-To see Code Security in action, browse your service and find code-level vulnerabilities in the [Vulnerability Explorer][4].
+To see Runtime Code Analysis (IAST) in action, browse your service and find code-level vulnerabilities in the [Vulnerability Explorer][4].
 
 {{< img src="/security/application_security/Code-Level-Vulnerability-Details-New.mp4" alt="Video showing Code Vulnerabilities" video="true" >}}
 
@@ -217,10 +217,10 @@ If you need additional assistance, contact [Datadog support][5].
 
 You can detect code-level vulnerabilities and monitor application security in Node.js applications running in Docker, Kubernetes, Amazon ECS, and AWS Fargate.
 
-Follow these steps to enable Code Security in your service:
+Follow these steps to enable Runtime Code Analysis (IAST) in your service:
 
 1. [Update your Datadog Agent][4] to at least version 7.41.1.
-2. Update your Datadog Tracing Library to at least the minimum version needed to turn on Code Security. For details, see the **Compatibility Requirements** below.
+2. Update your Datadog Tracing Library to at least the minimum version needed to turn on Runtime Code Analysis (IAST). For details, see the **Compatibility Requirements** below.
 3. Add the `DD_IAST_ENABLED=true` environment variable to your application configuration.
 
    If you initialize the APM library on the command line using the `--require` option to Node.js:
@@ -295,10 +295,10 @@ You can detect code-level vulnerabilities and monitor application security in Py
 
 NOTE: Code-Level Vulnerability detection in Python is in Preview.
 
-Follow these steps to enable Code Security in your service:
+Follow these steps to enable Runtime Code Analysis (IAST) in your service:
 
 1. [Update your Datadog Agent][6] to at least version 7.41.1.
-2. Update your Datadog Tracing Library to at least the minimum version needed to turn on Code Security. For details, see the **Compatibility Requirements** below.
+2. Update your Datadog Tracing Library to at least the minimum version needed to turn on Runtime Code Analysis (IAST). For details, see the **Compatibility Requirements** below.
 3. Add the `DD_IAST_ENABLED=true` environment variable to your application configuration.
 
    From the command line:
@@ -359,7 +359,7 @@ Update your ECS task definition JSON file, by adding this in the environment sec
 
 #### Third-Party Library Compatibility Note
 
-Code Security modifies Python code at runtime. This could cause conflicts with other third-party Python libraries that perform similar code transformations, particularly with the following, though not limited to them:
+Runtime Code Analysis (IAST) modifies Python code at runtime. This could cause conflicts with other third-party Python libraries that perform similar code transformations, particularly with the following, though not limited to them:
 
 - Numba
 - JAX
@@ -369,7 +369,7 @@ Code Security modifies Python code at runtime. This could cause conflicts with o
 - Codetransformer
 - PyPy
 
-Additionally, Code Security does not correctly propagate taint ranges over native (compiled) code. Therefore, if your codebase heavily relies on modules written in C or C++,
+Additionally, Runtime Code Analysis (IAST) does not correctly propagate taint ranges over native (compiled) code. Therefore, if your codebase heavily relies on modules written in C or C++,
 using the CPython API, or on intermediate language systems like Cython, the results might be less accurate than expected.
 
 
@@ -385,7 +385,7 @@ using the CPython API, or on intermediate language systems like Cython, the resu
 ### Finishing setup
 
 1. Restart your service.
-2. To see Code Security in action, browse your service and find code-level vulnerabilities in the [Vulnerability Explorer][4].
+2. To see Runtime Code Analysis (IAST) in action, browse your service and find code-level vulnerabilities in the [Vulnerability Explorer][4].
 
 {{< img src="/security/application_security/Code-Level-Vulnerability-Details-New.mp4" alt="Video showing Code Vulnerabilities" video="true" >}}
 
@@ -401,7 +401,7 @@ The following ASM capabilities are supported relative to each language's tracing
 
 | Application Security capability               | Java    | .NET     | Node.js        | Python        | Go              | Ruby          | PHP           |
 |-----------------------------------------------|---------|----------|----------------|---------------|-----------------|---------------|---------------|
-| Code Security                                 | 1.15.0  | 2.42.0   | 4.18.0         | Preview          | not supported   | not supported | not supported |
+| Runtime Code Analysis (IAST)                  | 1.15.0  | 2.42.0   | 4.18.0         | Preview       | not supported   | not supported | not supported |
 
 Select your application language for details about framework compatibility and feature support.
 
@@ -418,7 +418,7 @@ The following application security capabilities are supported in the Java librar
 | Threat Protection| 1.9.0 |
 | Customize response to blocked requests | 1.11.0 |
 | Software Composition Analysis (SCA) | 1.1.4 |
-| Code Security  | 1.15.0|
+| Runtime Code Analysis (IAST)  | 1.15.0|
 | Automatic user activity event tracking | 1.20.0 |
 
 The minimum tracer version to get all supported application security capabilities for Java is 1.31.0.
@@ -457,11 +457,11 @@ Datadog does not officially support any early-access versions of Java.
 
 ##### Application Security Capability Notes
 - **Software Composition Analysis** is supported on all frameworks
-- If **Code Security** does not support your framework, it will still detect Weak Cipher, Weak Hashing, Insecure Cookie, Cookie without HttpOnly Flag, and Cookie without SameSite Flag vulnerabilities.
+- If **Runtime Code Analysis (IAST)** does not support your framework, it will still detect Weak Cipher, Weak Hashing, Weak Randomness, Insecure Cookie, Cookie without HttpOnly Flag, and Cookie without SameSite Flag vulnerabilities.
 
 
 
-| Framework                  | Versions   | Threat Detection supported? | Threat Protection supported? |Code Security? |
+| Framework                  | Versions   | Threat Detection supported? | Threat Protection supported? | Runtime Code Analysis (IAST)? |
 | ----------------------- | ---------- | --------------- | ---------------------------------------------- | ---------------------------------------------- |
 | Grizzly                 | 2.0+       |  <i class="icon-check-bold"></i> |  <i class="icon-check-bold"></i> |  <i class="icon-check-bold"></i> |
 | Glassfish               |            |  <i class="icon-check-bold"></i> |  <i class="icon-check-bold"></i> |  <i class="icon-check-bold"></i> |
@@ -488,10 +488,10 @@ Datadog does not officially support any early-access versions of Java.
 
 ##### Application Security Capability Notes
 - **Software Composition Analysis** is supported on all frameworks
-- If **Code Security** does not support your framework, it will still detect Weak Cipher, Weak Hashing, Insecure Cookie, Cookie without HttpOnly Flag, and Cookie without SameSite Flag vulnerabilities.
+- If **Runtime Code Analysis (IAST)** does not support your framework, it will still detect Weak Cipher, Weak Hashing, Insecure Cookie, Cookie without HttpOnly Flag, Cookie without SameSite Flag, HSTS Header Missing, and X-Content-Type-Options Header Missing vulnerabilities.
 
 
-| Framework                | Versions    | Threat Detection supported? | Threat Protection supported? | Code Security? |
+| Framework                | Versions    | Threat Detection supported? | Threat Protection supported? | Runtime Code Analysis (IAST)? |
 | ------------------------ | ----------- | --------------- | ---------------------------------------------- | ---------------------------------------------- |
 | Apache HTTP Client       | 4.0+        |  <i class="icon-check-bold"></i> |  |  |
 | gRPC                     | 1.5+        |  <i class="icon-check-bold"></i> |  |  |
@@ -517,9 +517,9 @@ Datadog does not officially support any early-access versions of Java.
 ##### Application Security Capability Notes
 - **Software Composition Analysis** is supported on all frameworks
 - **Threat Protection** also works at the HTTP request (input) layer, and so works for all databases by default, even those not listed in the table below.
-- If your framework is not supported below, **Code Security** won’t detect SQL Injection vulnerabilities, but will still detect the rest of vulnerability types listed [here][3].
+- If your framework is not supported below, **Runtime Code Analysis (IAST)** won’t detect SQL Injection vulnerabilities, but will still detect the rest of vulnerability types listed [here][3].
 
-| Database                | Versions | Threat Detection supported? |  Code Security? |
+| Database                | Versions | Threat Detection supported? |  Runtime Code Analysis (IAST)? |
 | ----------------------- | -------- |  ------------------------| ---------------------------------------------------------------- |
 | Aerospike               | 4.0+     |  <i class="icon-check-bold"></i> |   |
 | Couchbase               | 2.0+     |  <i class="icon-check-bold"></i> |   |
@@ -572,7 +572,7 @@ The following application security capabilities are supported in the .NET librar
 | Threat Protection  | 2.26.0|
 | Customize response to blocked requests | 2.27.0 |
 | Software Composition Analysis (SCA) |  2.16.0  |
-| Code Security  | 2.42.0  |
+| Runtime Code Analysis (IAST)  | 2.42.0  |
 | Automatic user activity event tracking | 2.32.0 |
 | API Security | 2.42.0 |
 
@@ -622,10 +622,10 @@ These are supported on the following architectures:
 ##### Application Security capability notes
 
 - **Software Composition Analysis** is supported on all frameworks.
-- If your framework is not listed below, **Code Security** will still detect Insecure Cookie vulnerabilities.
+- If your framework is not listed below, **Runtime Code Analysis (IAST)** will still detect Insecure Cookie vulnerabilities.
 
 
-| Framework                  | Threat Detection supported? | Threat Protection supported? | Code Security? |
+| Framework                  | Threat Detection supported? | Threat Protection supported? | Runtime Code Analysis (IAST)? |
 | ----------------------- | --------------- | ---------------------------------------------- | ---------------------------------------------- |
 | ASP.NET MVC | <i class="icon-check-bold"></i>  |<i class="icon-check-bold"></i>  | <i class="icon-check-bold"></i> |
 | ASP.NET Web API 2 | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i>  |
@@ -643,7 +643,7 @@ These are supported on the following architectures:
 ##### Application Security Capability Notes
 - **Threat Protection** also works at the HTTP request (input) layer, and so works for all databases by default, even those not listed in the table below.
 
-| Framework         | Threat Detection supported?    | Threat Protection supported? | Code Security? |
+| Framework         | Threat Detection supported?    | Threat Protection supported? | Runtime Code Analysis (IAST)? |
 |-------------------|-----------------|---------------------|---|
 | OracleDB         | <i class="icon-check-bold"></i> |   <i class="icon-check-bold"></i>    |<i class="icon-check-bold"></i>    |
 | ADO.NET         | <i class="icon-check-bold"></i> |   <i class="icon-check-bold"></i>    |<i class="icon-check-bold"></i>    |
@@ -682,7 +682,7 @@ The following application security capabilities are supported in the Node.js lib
 | Threat Protection                      | 4.0.0                                              |
 | Customize response to blocked requests | 4.1.0                                              |
 | Software Composition Analysis (SCA)    | 4.0.0                                              |
-| Code Security                          | 4.18.0 for Node.js 16+, or 5.0.0 for Node.js 18+   |
+| Runtime Code Analysis (IAST)           | 4.18.0 for Node.js 16+, or 5.0.0 for Node.js 18+   |
 | Automatic user activity event tracking | 4.4.0 for Node.js 16+                              |
 | API Security                           | 4.30.0 for Node.js 16+, or 5.6.0 for Node.js 18+   |
 
@@ -741,10 +741,10 @@ The following operating systems are officially supported by `dd-trace`. Any oper
 
 ##### Application Security Capability Notes
 - **Software Composition Analysis** is supported on all frameworks
-- If your framework is not listed below, **Code Security** will still detect Weak Cipher, Weak Hashing, Insecure Cookie, Cookie without HttpOnly Flag, and Cookie without SameSite Flag vulnerabilities.
+- If your framework is not listed below, **Runtime Code Analysis (IAST)** will still detect Weak Cipher, Weak Hashing, Weak Randomness, Insecure Cookie, Cookie without HttpOnly Flag, Cookie without SameSite Flag, HSTS Header Missing, and X-Content-Type-Options Header Missing vulnerabilities.
 
 
-| Framework | Versions | Threat Detection supported? | Threat Protection supported? | Code Security? |
+| Framework | Versions | Threat Detection supported? | Threat Protection supported? | Runtime Code Analysis (IAST)? |
 |-----------|----------|-----------------------------|------------------------------|----------------------------------------------------|
 | express   | >=4      | <i class="icon-check-bold"></i>                   | <i class="icon-check-bold"></i>                    | <i class="icon-check-bold"></i>                                          |
 | nextjs    | >=11.1   | <i class="icon-check-bold"></i>                   |                              |                                                    |
@@ -766,7 +766,7 @@ Networking tracing provides:
 
 
 
-| Framework | Threat Detection supported? | Threat Protection supported? | Code Security? |
+| Framework | Threat Detection supported? | Threat Protection supported? | Runtime Code Analysis (IAST)? |
 |-----------|-----------------------------|------------------------------|----------------------------------------------------|
 | http      | <i class="icon-check-bold"></i>                   | <i class="icon-check-bold"></i>                    | <i class="icon-check-bold"></i>                                          |
 | https     | <i class="icon-check-bold"></i>                   | <i class="icon-check-bold"></i>                    | <i class="icon-check-bold"></i>                                          |
@@ -788,7 +788,7 @@ Datastore tracing provides:
 - **Threat Protection** also works at the HTTP request (input) layer, and so works for all databases by default, even those not listed in the table below.
 
 
-| Framework                | Versions  | Threat Detection supported? | Threat Protection supported? | Code Security? |
+| Framework                | Versions  | Threat Detection supported? | Threat Protection supported? | Runtime Code Analysis (IAST)? |
 |--------------------------|-----------|-----------------------------|------------------------------|----------------------------------------------------|
 | [@apollo/server][43]     | `>=4`     | <i class="icon-check-bold"></i>                   | <i class="icon-check-bold"></i>                    |                                                    |
 | [apollo-server-core][44] | `>=3`     | <i class="icon-check-bold"></i>                   | <i class="icon-check-bold"></i>                    |                                                    |
@@ -859,7 +859,7 @@ The following application security capabilities are supported in the Python libr
 | Threat Protection | 1.10.0  |
 | Customize response to blocked requests | 1.19.0 |
 | Software Composition Analysis (SCA) | 1.5.0  |
-| Code Security         | Preview (2.9.3)  |
+| Runtime Code Analysis (IAST)         | Preview (2.9.3)  |
 | Automatic user activity event tracking | 1.17.0 |
 | API Security | 2.6.0 |
 
