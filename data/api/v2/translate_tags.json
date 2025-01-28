@@ -15,9 +15,9 @@
     "name": "AWS Logs Integration",
     "description": "Configure your Datadog-AWS-Logs integration directly through Datadog API.\nFor more information, see the [AWS integration page](https://docs.datadoghq.com/integrations/amazon_web_services/#log-collection)."
   },
-  "action-connection": {
-    "name": "Action Connection",
-    "description": "Action connections extend your installed integrations and allow you to take action in your third-party systems\n(e.g. AWS, GitLab, and Statuspage) with Datadog’s Workflow Automation and App Builder products.\n\nDatadog’s Integrations automatically provide authentication for Slack, Microsoft Teams, PagerDuty, Opsgenie,\nJIRA, GitHub, and Statuspage. You do not need additional connections in order to access these tools within\nWorkflow Automation and App Builder.\n\nWe offer granular access control for editing and resolving connections."
+  "action-connections": {
+    "name": "Action Connections",
+    "description": "Action Connections extend your installed integrations and allow you to take action in your third-party systems\n(such as AWS, GitLab, and OpenAI) with Datadog’s [Workflow Automation](https://docs.datadoghq.com/service_management/workflows/)\nand [App Builder](https://docs.datadoghq.com/service_management/app_builder/) products.\n\nDatadog’s Integrations automatically provide authentication for Slack, Microsoft Teams, PagerDuty, Opsgenie,\nJira, GitHub, and Statuspage. You do not need additional connections in order to access these tools within\nWorkflow Automation and App Builder.\n\nWe offer granular access control for editing and resolving connections.\n\n**Note:** The Action Connection API supports AWS and HTTP integrations."
   },
   "agentless-scanning": {
     "name": "Agentless Scanning",
