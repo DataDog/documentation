@@ -170,3 +170,7 @@ There can be several reasons as to why the CPU usage exceeded the threshold:
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /monitors/notify/#integrations
+[2]: /monitors/notify/variables/?tab=is_alert#conditional-variables
+[3]: /monitors/notify/variables/?tab=is_alert#template-variables
