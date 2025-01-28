@@ -1593,6 +1593,78 @@
     "request_description": "",
     "request_schema_description": "Body of the notification rule patch request."
   },
+  "GetInboxRules": {
+    "description": "Returns the ordered list of inbox rules in the pipeline (first match applies)",
+    "summary": "Get the ordered list of inbox rules"
+  },
+  "CreateInboxRule": {
+    "description": "Create a new inbox rule and return the created rule.",
+    "summary": "Create a new inbox rule",
+    "request_description": "Mandatory fields are the rule type and the required attributes: rule name, rule details, and action.\nThe rule details are composed of issue types and security rule types on which the rule applies. Optional security rule IDs, severities, and a tag or attribute query can be provided.\nThe action is composed of the optional reason description.\n",
+    "request_schema_description": "Body of the inbox rule create request"
+  },
+  "ReorderInboxRules": {
+    "description": "Reorder the list of inbox rules in the pipeline and return the reordered list of rules.\nTo reorder fields, you must provide the full list of pipeline rules in the new order.",
+    "summary": "Reorder the list of inbox rules in the pipeline",
+    "request_description": "The list of rules to reorder. The order of the rules in the list becomes the new order in the pipeline.\n",
+    "request_schema_description": "Body of the inbox rule reorder request: the full list of inbox rules, which must be provided in the new order."
+  },
+  "DeleteInboxRule": {
+    "description": "Delete an inbox rule",
+    "summary": "Delete an inbox rule"
+  },
+  "GetInboxRule": {
+    "description": "Get the details of an inbox rule.",
+    "summary": "Get details of an inbox rule"
+  },
+  "PatchInboxRule": {
+    "description": "Partially update the inbox rule. All fields are optional; if a field is not provided, it is not updated.",
+    "summary": "Patch an inbox rule",
+    "request_description": "",
+    "request_schema_description": "Body of the inbox rule patch request"
+  },
+  "UpdateInboxRule": {
+    "description": "Update the whole inbox rule. If an optional field is not provided, it is set to its default value.",
+    "summary": "Update an inbox rule",
+    "request_description": "",
+    "request_schema_description": "Body of the inbox rule update request"
+  },
+  "GetMuteRules": {
+    "description": "Returns the ordered list of mute rules in the pipeline (first match applies)",
+    "summary": "Get the ordered list of mute rules"
+  },
+  "CreateMuteRule": {
+    "description": "Create a new mute rule and return the created rule.",
+    "summary": "Create a new mute rule",
+    "request_description": "Mandatory fields are the rule type and the required attributes: rule name, rule details, and action.\nThe rule details are composed of issue types and security rule types on which the rule applies. Optional security rule IDs, severities, and a tag or attribute query can be provided.\nThe action is composed of the reason for muting and the rule expiration date, and optionally a description of the rule.\n",
+    "request_schema_description": "Body of the mute rule create request"
+  },
+  "ReorderMuteRules": {
+    "description": "Reorder the list of mute rules in the pipeline and return the reordered list of rules.\nTo reorder fields, you must provide the full list of pipeline rules in the new order.",
+    "summary": "Reorder the list of mute rules in the pipeline",
+    "request_description": "The list of rules to reorder. The order of the rules in the list becomes the new order in the pipeline.\n",
+    "request_schema_description": "Body of the mute rule reorder request: the full list of mute rules, which must be provided in the new order."
+  },
+  "DeleteMuteRule": {
+    "description": "Delete a mute rule",
+    "summary": "Delete a mute rule"
+  },
+  "GetMuteRule": {
+    "description": "Get the details of a mute rule.",
+    "summary": "Get details of a mute rule"
+  },
+  "PatchMuteRule": {
+    "description": "Partially update the mute rule. All fields are optional; if a field is not provided, it is not updated.",
+    "summary": "Patch a mute rule",
+    "request_description": "",
+    "request_schema_description": "Body of the mute rule patch request"
+  },
+  "UpdateMuteRule": {
+    "description": "Update the whole mute rule. If an optional field is not provided, it is set to its default value.",
+    "summary": "Update a mute rule",
+    "request_description": "",
+    "request_schema_description": "Body of the mute rule update request"
+  },
   "ListCloudWorkloadSecurityAgentRules": {
     "description": "Get the list of Agent rules.",
     "summary": "Get all Cloud Workload Security Agent rules"
