@@ -163,17 +163,17 @@ To start sending just your iOS application's traces to Datadog, see [iOS Trace C
 
 3.  _(Optional)_ Configure the `traceSampler` parameter to keep a defined percentage of the backend traces. If not set, 20% of the traces coming from application requests are sent to Datadog. To keep 100% of backend traces:
 
-```kotlin
-    val tracedHosts = listOf("example.com")
+    ```kotlin
+        val tracedHosts = listOf("example.com")
 
-    val okHttpClient = OkHttpClient.Builder()
-       .addInterceptor(
-           DatadogInterceptor.Builder(tracedHosts)
-               .setTraceSampler(RateBasedSampler(100f))
-               .build()
-       )
-       .build()
-```
+        val okHttpClient = OkHttpClient.Builder()
+        .addInterceptor(
+            DatadogInterceptor.Builder(tracedHosts)
+                .setTraceSampler(RateBasedSampler(100f))
+                .build()
+        )
+        .build()
+    ```
 
 **Note**:
 * `traceSampler` **does not** impact RUM sessions sampling. Only backend traces are sampled out.
@@ -316,6 +316,50 @@ To start sending just your iOS application's traces to Datadog, see [iOS Trace C
 
 
 {{% /tab %}}
+{{% tab "Kotlin Multiplatform RUM" %}}
+
+1. Set up [RUM Kotlin Multiplatform Monitoring][1].
+2. Set up [Ktor instrumentation][2].
+
+2. Set the `tracedHosts` initialization parameter in the Datadog Ktor Plugin configuration to define the list of internal, first-party origins called by your Kotlin Multiplatform application:
+    ```kotlin
+    val ktorClient = HttpClient {
+        install(
+            datadogKtorPlugin(
+                tracedHosts = mapOf(
+                    "example.com" to setOf(TracingHeaderType.DATADOG),
+                    "example.eu" to setOf(TracingHeaderType.DATADOG)
+                ),
+                traceSamplingRate = 100f
+            )
+        )
+    }
+    ```
+
+    By default, all subdomains of listed hosts are traced. For instance, if you add `example.com`, you also enable tracing for `api.example.com` and `foo.example.com`.
+
+3. _(Optional)_ Set the `traceSamplingRate` initialization parameter to keep a defined percentage of the backend traces. If not set, 20% of the traces coming from application requests are sent to Datadog.
+
+     To keep 100% of backend traces:
+    ```kotlin
+    val ktorClient = HttpClient {
+        install(
+            datadogKtorPlugin(
+                tracedHosts = mapOf(
+                    "example.com" to setOf(TracingHeaderType.DATADOG),
+                    "example.eu" to setOf(TracingHeaderType.DATADOG)
+                ),
+                traceSamplingRate = 20f
+            )
+        )
+    }
+    ```
+
+    **Note**: `traceSamplingRate` **does not** impact RUM sessions sampling. Only backend traces are sampled out.
+
+[1]: /real_user_monitoring/mobile_and_tv_monitoring/kotlin_multiplatform/setup
+[2]: /real_user_monitoring/mobile_and_tv_monitoring/kotlin_multiplatform/setup?tab=rum#initialize-the-rum-ktor-plugin-to-track-network-events-made-with-ktor
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Verifying setup
@@ -377,6 +421,18 @@ To verify you've configured the APM integration with RUM, follow the steps below
 [1]: https://docs.flutter.dev/tools/devtools/overview
 [2]: https://docs.flutter.dev/tools/devtools/network
 [3]: https://docs.datadoghq.com/real_user_monitoring/platform/connect_rum_and_traces/?tab=reactnativerum#how-are-rum-resources-linked-to-traces
+
+{{% /tab %}}
+{{% tab "Kotlin Multiplatform" %}}
+
+1. Run your application from Xcode (iOS) or Android Studio (Android).
+2. Visit a screen in your application.
+3. Open Xcode's [Network Connections and HTTP Traffic instrument][1] or Android Studio's [Network Inspector][2].
+4. Check the request headers for a RUM resource and verify that the [required headers are set by the SDK][3].
+
+[1]: https://developer.apple.com/documentation/foundation/url_loading_system/analyzing_http_traffic_with_instruments
+[2]: https://developer.android.com/studio/debug/network-profiler#network-inspector-overview
+[3]: https://docs.datadoghq.com/real_user_monitoring/platform/connect_rum_and_traces/?tab=kotlinmultiplatformrum#how-are-rum-resources-linked-to-traces
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -527,6 +583,32 @@ The default injection style is `tracecontext`, `Datadog`.
       - `TracingHeaderType.tracecontext`: [W3C Trace Context](https://www.w3.org/TR/trace-context/) (`traceparent`)
       - `TracingHeaderType.b3`: [B3 single header](https://github.com/openzipkin/b3-propagation#single-header) (`b3`)
       - `TracingHeaderType.b3multi`: [B3 multiple headers](https://github.com/openzipkin/b3-propagation#multiple-headers) (`X-B3-*`)
+
+{{% /tab %}}
+
+{{% tab "Kotlin Multiplatform RUM" %}}
+1. Set up RUM to [connect with APM](#setup-rum).
+
+2. Configure the RUM SDK with the list of internal, first-party origins and the tracing header type to use as follows:
+    ```kotlin
+    val ktorClient = HttpClient {
+        install(
+            datadogKtorPlugin(
+                tracedHosts = mapOf(
+                    "example.com" to setOf(TracingHeaderType.DATADOG),
+                    "example.eu" to setOf(TracingHeaderType.DATADOG)
+                ),
+                traceSamplingRate = 100f
+            )
+        )
+    }
+    ```
+
+    `TracingHeaderType` is an enum representing the following tracing header types:
+      - `TracingHeaderType.DATADOG`: Datadog's propagator (`x-datadog-*`)
+      - `TracingHeaderType.TRACECONTEXT`: [W3C Trace Context](https://www.w3.org/TR/trace-context/) (`traceparent`)
+      - `TracingHeaderType.B3`: [B3 single header](https://github.com/openzipkin/b3-propagation#single-header) (`b3`)
+      - `TracingHeaderType.B3MULTI`: [B3 multiple headers](https://github.com/openzipkin/b3-propagation#multiple-headers) (`X-B3-*`)
 
 {{% /tab %}}
 
