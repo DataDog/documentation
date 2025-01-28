@@ -63,8 +63,6 @@ Then, to send your Step Functions logs to Datadog:
      - When creating the CloudFormation stack for the forwarder, set the `DdStepFunctionsTraceEnabled` parameter to `true`.
      - After the forwarder is created, set the environment variable `DD_STEP_FUNCTIONS_TRACE_ENABLED` to `true`.
 
-   <div class="alert alert-info">If you enable tracing (which automatically includes enhanced metrics), you are billed for both Serverless Workload Monitoring and Serverless APM. See <a href="https://www.datadoghq.com/pricing/?product=serverless-monitoring#products">Pricing</a>.</div>
-
 [6]: /logs/guide/forwarder
 [11]: /serverless/step_functions/merge-step-functions-lambda
 [16]: /logs/guide/send-aws-services-logs-with-the-datadog-kinesis-firehose-destination
@@ -151,20 +149,45 @@ Then, to send your Step Functions logs to Datadog:
 [4]: https://app.datadoghq.com/organization-settings/api-keys
 [5]: https://github.com/datadog/serverless-plugin-datadog?tab=readme-ov-file#configuration-parameters
 {{% /tab %}}
-{{% tab "CDK" %}}
-1. Ensure you have deployed the [Datadog Lambda Forwarder][1], and that you are using v3.130.0+. You might need to [update your Forwarder][1]. As an alternative, you may also use [Amazon Data Firehose][2], which can subscribe to Amazon CloudWatch log groups across multiple AWS regions. Your Step Functions log group name should use this format: 
-   ```
-   /aws/vendedlogs/states/<CDK_PATH>-Logs
-   ```
+{{% tab "AWS CDK" %}}
+1. Ensure you have deployed the [Datadog Lambda Forwarder][2], and that you are using v3.130.0+. You might need to [update your Forwarder][2].
 
-   **Optionally**, you can add your environment to this log group name: `/aws/vendedlogs/states/<CDK_PATH>-Logs-<ENV>`
+1. Install [Datadog's CDK Construct Library][3], which automatically sets up logging and subscribes the Forwarder to the log group.
+
+**Example**
+
+```python
+from aws_cdk import (
+    aws_stepfunctions as sfn,
+    aws_stepfunctions_tasks as tasks,
+)
+from datadog_cdk_constructs_v2 import DatadogStepFunctions, DatadogLambda
+
+state_machine = sfn.StateMachine(...)
+datadog_sfn = DatadogStepFunctions(
+    self,
+    "DatadogSfn",
+    env="<ENV>", # e.g. "dev"
+    service="<SERVICE>", # e.g. "my-cdk-service"
+    version="<VERSION>", # e.g. "1.0.0"
+    forwarderArn="<FORWARDER_ARN>", # e.g. "arn:test:forwarder:sa-east-1:12345678:1"
+    tags=<TAGS>, # optional, e.g. "custom-tag-1:tag-value-1,custom-tag-2:tag-value-2"
+)
+datadog_sfn.add_state_machines([child_state_machine, parent_state_machine])
+```
+
+For example stacks and additional code examples in TypeScript and Go, see [CDK Examples for Instrumenting AWS Step Functions][4].
+
+**Note**: The Datadog Step Functions CDK construct automatically enables tracing.
 
 [1]: /logs/guide/forwarder
 [2]: /logs/guide/send-aws-services-logs-with-the-datadog-kinesis-firehose-destination
+[3]: https://github.com/DataDog/datadog-cdk-constructs
+[4]: /serverless/guide/step_functions_cdk
 {{% /tab %}}
 {{< /tabs >}}
 
-<div class="alert alert-info">If tracing is enabled (which automatically includes enhanced metrics), you are billed for both Serverless Workload Monitoring and Serverless APM. See <a href="https://www.datadoghq.com/pricing/?product=serverless-monitoring#products">Pricing</a>.</div>
+<div class="alert alert-info">Enhanced metrics are automatically enabled if you enable tracing. Therefore, if tracing is enabled, you are billed for both Serverless Workload Monitoring and Serverless APM. See <a href="https://www.datadoghq.com/pricing/?product=serverless-monitoring#products">Pricing</a>.</div>
 
 ## Additional options for instrumentation
 

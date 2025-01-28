@@ -135,6 +135,63 @@ Node.js (layer v112+) or Python (layer v95+) runtimes.
 [5]: https://github.com/DataDog/datadog-ci/blob/master/src/commands/stepfunctions/README.md
 
 {{% /tab %}}
+{{% tab "AWS CDK" %}}
+
+Modify your Lambda task payload or Step Function task input.
+
+**Example**:
+
+{{< code-block lang="python" disable_copy="false" >}}
+from aws_cdk import (
+    aws_lambda,
+    aws_stepfunctions as sfn,
+    aws_stepfunctions_tasks as tasks,
+)
+from datadog_cdk_constructs_v2 import DatadogStepFunctions, DatadogLambda
+
+lambda_function = aws_lambda.Function(...)
+lambda_task = tasks.LambdaInvoke(
+    self,
+    "MyLambdaTask",
+    lambda_function=lambda_function,
+    payload=sfn.TaskInput.from_object(
+        DatadogStepFunctions.build_lambda_payload_to_merge_traces(
+            {"custom-key": "custom-value"}
+        )
+    ),
+)
+
+child_state_machine = sfn.StateMachine(...)
+invoke_child_state_machine_task = tasks.StepFunctionsStartExecution(
+    self,
+    "InvokeChildStateMachineTask",
+    state_machine=child_state_machine,
+    input=sfn.TaskInput.from_object(
+        DatadogStepFunctions.build_step_function_task_input_to_merge_traces(
+            {"custom-key": "custom-value"}
+        )
+    ),
+)
+
+state_machine = sfn.StateMachine(
+    self,
+    "CdkPythonTestStateMachine",
+    definition_body=sfn.DefinitionBody.from_chainable(
+        lambda_task.next(invoke_child_state_machine_task)
+    ),
+)
+
+datadog_lambda = DatadogLambda(...)
+datadog_lambda.add_lambda_functions([lambda_function])
+
+datadog_sfn = DatadogStepFunctions(...)
+datadog_sfn.add_state_machines([child_state_machine, state_machine])
+{{< /code-block >}}
+
+For additional code examples in TypeScript and Go, see [CDK Examples for Instrumenting AWS Step Functions][1].
+
+[1]: /serverless/guide/step_functions_cdk
+{{% /tab %}}
 {{% tab "Custom" %}}
 
 On the Lambda Task, set the `Parameters` key as follows: 
