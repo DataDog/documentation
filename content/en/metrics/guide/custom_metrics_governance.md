@@ -66,7 +66,7 @@ Additionally, review [Usage Attribution][3] information for a total breakdown of
 
 {{< img src="metrics/tagsexplorer.png" alt="Custom Metrics Tags Cardinality Explorer for a spiking metric name" style="width:80%;">}}
 
-Once you've identified which metric names are driving up your account's monthly usage and costs, you can navigate to the metric's details sidepanel to view the Custom Metrics Tags Cardinality Explorer to understand which tag keys are driving a particular metric's cardinality to spike. This feature highlights any spammy or unbounded tag keys that have large increases in the number of unique tag values as these are the likely culprit tags that should be excluded using Metrics without Limits to achieve immediate cost savings.
+Once you've identified which metric names are driving up your account's monthly usage and costs, you can navigate to the metric's details side panel to view the Custom Metrics Tags Cardinality Explorer. This shows you which tag keys are driving a particular metric's cardinality to spike. Any spammy or unbounded tag keys with large increases in the number of unique tag values are the likely culprit tags. Exclude them using Metrics without Limits™ to achieve immediate cost savings.
 
 ### Team-level visibility and attribution
 
