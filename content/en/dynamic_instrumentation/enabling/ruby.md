@@ -63,6 +63,7 @@ The following limitations apply to the limited preview:
 - Dynamic Log conditions
 - Local variable capture for Dynamic Logs attached to a method
 - Expression evaluation in Dynamic Log templates
+- Instrumenting third-party libraries
 
 ## Further reading
 
