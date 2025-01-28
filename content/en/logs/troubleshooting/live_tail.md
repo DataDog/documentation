@@ -1,5 +1,5 @@
 ---
-title: Live Tail
+title: Live Tail Troubleshooting
 description: 'Troubleshoot Logs Live Tail errors or issues'
 ---
 

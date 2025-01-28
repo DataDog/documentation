@@ -37,7 +37,7 @@ Daily Datadog costs give you visibility into daily Datadog spending across dashb
 
 You can view daily Datadog costs in [Cloud Cost Management][1], and access additional [Datadog costs capabilities][7] like [Cost Summary][9] and [Cost Chargebacks][10] on the [**Usage & Cost** page][4].
 
-Please note that there is **no additional charge** for Datadog Costs.
+There is **no additional charge** for Datadog Costs, and it is available for both CCM and non-CCM customers.
 
 ## Permissions
 
@@ -76,8 +76,7 @@ You can use out-of-the-box tags to break down and allocate your Datadog cost dat
 [4]: https://app.datadoghq.com/billing/usage
 [5]: /account_management/plan_and_usage/cost_details/#cost-summary-sub-organization
 [6]: /account_management/rbac/
-[7]: /account_management/rbac/permissions
-[8]: /account_management/plan_and_usage/cost_details/
-[9]: /account_management/billing/usage_attribution/
-[10]: /account_management/plan_and_usage/cost_details/#cost-summary
-[11]: /account_management/plan_and_usage/cost_details/#cost-chargebacks
+[7]: /account_management/plan_and_usage/cost_details/
+[8]: /account_management/billing/usage_attribution/
+[9]: /account_management/plan_and_usage/cost_details/#cost-summary
+[10]: /account_management/plan_and_usage/cost_details/#cost-chargebacks

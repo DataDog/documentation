@@ -6033,6 +6033,9 @@ components:
 
         Make sure to use an application key created by an admin.'
       properties:
+        description:
+          description: A description of the pipeline.
+          type: string
         filter:
           $ref: '#/components/schemas/LogsFilter'
         id:
@@ -6054,6 +6057,12 @@ components:
           description: Ordered list of processors in this pipeline.
           items:
             $ref: '#/components/schemas/LogsProcessor'
+          type: array
+        tags:
+          description: A list of tags associated with the pipeline.
+          items:
+            description: A single tag using the format `key:value`.
+            type: string
           type: array
         type:
           description: Type of pipeline.
@@ -6891,6 +6900,62 @@ components:
       - FIREFOX_LAPTOP_LARGE
       - FIREFOX_TABLET
       - FIREFOX_MOBILE_SMALL
+    MonitorFormulaAndFunctionCostAggregator:
+      description: Aggregation methods for metric queries.
+      enum:
+      - avg
+      - sum
+      - max
+      - min
+      - last
+      - area
+      - l2norm
+      - percentile
+      - stddev
+      example: avg
+      type: string
+      x-enum-varnames:
+      - AVG
+      - SUM
+      - MAX
+      - MIN
+      - LAST
+      - AREA
+      - L2NORM
+      - PERCENTILE
+      - STDDEV
+    MonitorFormulaAndFunctionCostDataSource:
+      description: Data source for cost queries.
+      enum:
+      - metrics
+      - cloud_cost
+      - datadog_usage
+      example: cloud_cost
+      type: string
+      x-enum-varnames:
+      - METRICS
+      - CLOUD_COST
+      - DATADOG_USAGE
+    MonitorFormulaAndFunctionCostQueryDefinition:
+      description: A formula and functions cost query.
+      properties:
+        aggregator:
+          $ref: '#/components/schemas/MonitorFormulaAndFunctionCostAggregator'
+        data_source:
+          $ref: '#/components/schemas/MonitorFormulaAndFunctionCostDataSource'
+        name:
+          description: Name of the query for use in formulas.
+          example: query1
+          type: string
+        query:
+          description: The monitor query.
+          example: sum:all.cost{*}.rollup(sum, 86400)
+          type: string
+      required:
+      - name
+      - data_source
+      - query
+      type: object
     MonitorFormulaAndFunctionEventAggregation:
       description: Aggregation methods for event platform queries.
       enum:
@@ -7041,6 +7106,7 @@ components:
       description: A formula and function query.
       oneOf:
       - $ref: '#/components/schemas/MonitorFormulaAndFunctionEventQueryDefinition'
+      - $ref: '#/components/schemas/MonitorFormulaAndFunctionCostQueryDefinition'
     MonitorGroupSearchResponse:
       description: The response of a monitor group search.
       example:
@@ -7939,9 +8005,10 @@ components:
             be pulled from the [Roles API](https://docs.datadoghq.com/api/latest/roles/#list-roles)
             and are located in the `data.id` field. Editing a monitor includes any
             updates to the monitor configuration, monitor deletion, and muting of
-            the monitor for any amount of time. `restricted_roles` is the successor
-            of `locked`. For more information about `locked` and `restricted_roles`,
-            see the [monitor options docs](https://docs.datadoghq.com/monitors/guide/monitor_api_options/#permissions-options).
+            the monitor for any amount of time. You can use the [Restriction Policies
+            API](https://docs.datadoghq.com/api/latest/restriction-policies/) to manage
+            write authorization for individual monitors by teams and users, in addition
+            to roles.
           items:
             description: A role UUID.
             type: string
@@ -23882,12 +23949,18 @@ components:
             continuous_profiler_pgo_read: Read and query Continuous Profiler data
               for Profile-Guided Optimization (PGO).
             create_webhooks: Create webhooks integrations.
+            dashboards_embed_share: Create, modify, and delete shared dashboards with
+              share type 'embed'.
+            dashboards_invite_share: Create, modify, and delete shared dashboards
+              with share type 'invite'.
             dashboards_public_share: Generate public and authenticated links to share
               dashboards or embeddable graphs externally.
             dashboards_read: View dashboards.
             dashboards_write: Create and change dashboards.
             data_scanner_read: View Data Scanner configurations.
             data_scanner_write: Edit Data Scanner configurations.
+            embeddable_graphs_share: Generate public links to share embeddable graphs
+              externally.
             events_read: Read Events data.
             hosts_read: List hosts and their attributes.
             incident_notification_settings_write: Configure Incidents Notification
@@ -23906,10 +23979,15 @@ components:
               configuring allowed login methods, creating child orgs, subscribing
               & unsubscribing from apps in the marketplace, and enabling & disabling
               Remote Configuration for the entire organization.
+            security_comments_read: Read comments of vulnerabilities.
             security_monitoring_filters_read: Read Security Filters.
             security_monitoring_filters_write: Create, edit, and delete Security Filters.
             security_monitoring_findings_read: View a list of findings that include
               both misconfigurations and identity risks.
+            security_monitoring_notification_profiles_read: View Rule Security Notification
+              rules.
+            security_monitoring_notification_profiles_write: Create, edit, and delete
+              Security Notification rules.
             security_monitoring_rules_read: Read Detection Rules.
             security_monitoring_rules_write: Create and edit Detection Rules.
             security_monitoring_signals_read: View Security Signals.
@@ -23937,7 +24015,7 @@ components:
               Access Manage permission.
             teams_read: Read Teams data. A User with this permission can view Team
               names, metadata, and which Users are on each Team.
-            test_visibility_read: View Test Visibility.
+            test_optimization_read: View Test Optimization.
             timeseries_query: Query Timeseries data.
             usage_read: View your organization's usage and usage attribution.
             user_access_invite: Invite other users to your organization.
@@ -23976,8 +24054,6 @@ components:
       x-auth-id-alias: appKeyAuth
       x-env-name: DD_APP_KEY
     bearerAuth:
-      in: header
-      name: Authorization
       scheme: bearer
       type: http
       x-env-name: DD_BEARER_TOKEN
@@ -29343,8 +29419,9 @@ paths:
       - Logs Indexes
       x-menu-order: 5
       x-permission:
-        operator: OPEN
-        permissions: []
+        operator: OR
+        permissions:
+        - logs_read_config
       x-undo:
         type: safe
     put:
@@ -29422,8 +29499,9 @@ paths:
       - Logs Indexes
       x-menu-order: 1
       x-permission:
-        operator: OPEN
-        permissions: []
+        operator: OR
+        permissions:
+        - logs_read_config
       x-undo:
         type: safe
     post:
@@ -29508,6 +29586,10 @@ paths:
       tags:
       - Logs Indexes
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - logs_read_config
       x-undo:
         type: safe
     put:
@@ -29588,8 +29670,9 @@ paths:
       - Logs Pipelines
       x-menu-order: 1
       x-permission:
-        operator: OPEN
-        permissions: []
+        operator: OR
+        permissions:
+        - logs_read_config
       x-undo:
         type: safe
     put:
@@ -29676,8 +29759,9 @@ paths:
       - Logs Pipelines
       x-menu-order: 3
       x-permission:
-        operator: OPEN
-        permissions: []
+        operator: OR
+        permissions:
+        - logs_read_config
       x-undo:
         type: safe
     post:
@@ -29804,8 +29888,9 @@ paths:
       - Logs Pipelines
       x-menu-order: 5
       x-permission:
-        operator: OPEN
-        permissions: []
+        operator: OR
+        permissions:
+        - logs_read_config
       x-undo:
         type: safe
     put:
@@ -38597,10 +38682,7 @@ tags:
 - description: Search your logs and send them to your Datadog platform over HTTP.
     See the [Log Management page](https://docs.datadoghq.com/logs/) for more information.
   name: Logs
-- description: 'Manage configuration of [log indexes](https://docs.datadoghq.com/logs/indexes/).
-
-    You need an API and non-scoped application key with Admin rights to interact with
-    these endpoints.'
+- description: Manage configuration of [log indexes](https://docs.datadoghq.com/logs/indexes/).
   externalDocs:
     description: Find out more at
     url: https://docs.datadoghq.com/logs/indexes/
@@ -38610,14 +38692,12 @@ tags:
     page](https://app.datadoghq.com/logs/pipelines)\n  for a list of the pipelines
     and processors currently configured in web UI.\n\n- Additional API-related information
     about processors can be found in the\n  [processors documentation](https://docs.datadoghq.com/logs/log_configuration/processors/?tab=api#lookup-processor).\n\n-
-    For more information about Pipelines, see the\n  [pipeline documentation](https://docs.datadoghq.com/logs/log_configuration/pipelines).\n\n**Notes:**\n\nThese
-    endpoints are only available for admin users.\nMake sure to use an application
-    key created by an admin with no applied scopes.\n\n**Grok parsing rules may effect
-    JSON output and require\nreturned data to be configured before using in a request.**\nFor
-    example, if you are using the data returned from a\nrequest for another request
-    body, and have a parsing rule\nthat uses a regex pattern like `\\s` for spaces,
-    you will\nneed to configure all escaped spaces as `%{space}` to use\nin the body
-    data."
+    For more information about Pipelines, see the\n  [pipeline documentation](https://docs.datadoghq.com/logs/log_configuration/pipelines).\n\n**Notes:**\n\n**Grok
+    parsing rules may effect JSON output and require\nreturned data to be configured
+    before using in a request.**\nFor example, if you are using the data returned
+    from a\nrequest for another request body, and have a parsing rule\nthat uses a
+    regex pattern like `\\s` for spaces, you will\nneed to configure all escaped spaces
+    as `%{space}` to use\nin the body data."
   externalDocs:
     description: Find out more at
     url: https://docs.datadoghq.com/logs/log_configuration
