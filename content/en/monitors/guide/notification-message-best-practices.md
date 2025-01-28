@@ -86,10 +86,11 @@ Example:
   `` This displays if the host triggering the alert contains `db` ``  
   `in the role name. @db-team@company.com`  
 `{{/is_exact_match}}`  
-`{{#is_exact_match "role.name" "network"}}`  
-  `` This displays if the host triggering the alert contains `network` ``  
-  `in the role name. @network-team@company.com`  
-`{{/is_exact_match}}`
+```
+{{#is_exact_match "role.name" "network"}}
+ # The content displays if the host triggering the alert contains `network` in the role name. @network-team@company.com
+{{/is_exact_match}}
+```
 
 You can receive a notification as well if the group that triggered the alert contains a specific string.  
 Example:  
