@@ -23,7 +23,7 @@ Data Streams Monitoring (DSM) propagates context through message headers. Use ma
 
 2. On services sending or consuming messages, declare the supported types. For example:
 {{< code-block lang="text" >}}
-kinesis, kafka, rabbitmq, sqs, sns
+kinesis, kafka, rabbitmq, sqs, sns, servicebus
 {{< /code-block >}}
 
 3. Call the Data Streams Monitoring checkpoints when messages are produced and when they are consumed, as shown in the example code below:

@@ -63,4 +63,4 @@ Usage information is also available through the [`GetHourlyUsageAttribution`][4]
 [2]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#global-context
 [3]: https://app.datadoghq.com/billing/usage-attribution
 [4]: /api/latest/usage-metering/#get-hourly-usage-attribution-v1
-[5]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/android/?tab=kotlin#track-attributes
+[5]: /real_user_monitoring/mobile_and_tv_monitoring/android/advanced_configuration/?tab=kotlin#track-attributes

@@ -31,9 +31,9 @@ Connect your OpenAI account to LLM Observability with your OpenAI API key.
 1. Select **Connect** on the OpenAI tile.
 1. Follow the instructions on the tile. 
    - Provide your OpenAI API key. Ensure that this key has **write** permission for **model capabilities**.
-1. Enable **Invoke Model from this API key**.
+1. Enable **Use this API key to evaluate your LLM applications**.
 
-{{< img src="llm_observability/configuration/openai-tile.png" alt="The OpenAI configuration tile in LLM Observability. Lists instructions for configuring OpenAI and providing your OpenAI API key." style="width:100%;" >}}
+{{< img src="llm_observability/configuration/openai-tile-2.png" alt="The OpenAI configuration tile in LLM Observability. Lists instructions for configuring OpenAI and providing your OpenAI API key." style="width:100%;" >}}
 
 ## Select and enable evaluations
 
@@ -46,6 +46,17 @@ Connect your OpenAI account to LLM Observability with your OpenAI API key.
 After you click **Save**, LLM Observability invokes a `GPT-4o mini` model using the OpenAI API key you provided.
 
 For more information about evaluations, see [Terms and Concepts][1].
+
+### Estimated Token Usage
+
+LLM Observability provides metrics to help you monitor and manage the token usage associated with evaluations that power LLM Observability. The following metrics allow you to track the LLM resources consumed to power evaluations:
+
+
+- `ml_obs.estimated_usage.llm.input.tokens`
+- `ml_obs.estimated_usage.llm.output.tokens`
+- `ml_obs.estimated_usage.llm.total.tokens`
+
+Each of these metrics has `ml_app`, `model_server`, `model_provider`, `model_name`, and `evaluation_name` tags, allowing you to pinpoint specific applications, models, and evaluations contributing to your usage.
 
 ## Provide topics for topic relevancy
 

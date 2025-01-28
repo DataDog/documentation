@@ -3,9 +3,9 @@ title: Troubleshooting Cloud Security Management Vulnerabilities
 aliases:
   - /security/vulnerabilities/troubleshooting/
 further_reading:
-- link: "/security/cloud_security_management/setup/csm_pro/?tab=aws#configure-the-agent-for-containers"
+- link: "/infrastructure/containers/container_images/#enable-sbom-collection"
   tag: "Documentation"
-  text: "Setting up container image vulnerabilities"
+  text: "Enable SBOM collection in CSM Vulnerabilities"
 - link: "/security/cloud_security_management/setup/csm_enterprise/?tab=aws#hosts"
   tag: "Documentation"
   text: "Setting up host vulnerabilities"
@@ -49,6 +49,42 @@ The workaround for this issue is to set the configuration option:
 - For Helm: set `datadog.sbom.containerImage.uncompressedLayersSupport: true` in your `values.yaml` file.
 - For Datadog Operator: set `features.sbom.containerImage.uncompressedLayersSupport` to `true` in your DatadogAgent CRD.
 
+### GKE image streaming
+
+Datadog doesn't support image streaming with Google Kubernetes Engine (GKE). If you have that option enabled in GKE, your Agent can't generate container SBOMs.
+
+The resulting error appears as:
+
+```sh
+unable to mount containerd image, err: unable to scan image named: {image-name}, image is not unpacked
+```
+
+The workaround for this issue is to disable image streaming in GKE. For more information, see the [Disable Image streaming][5] section of the GKE docs.
+
+## Disable CSM Vulnerabilities
+
+In the `datadog-values.yaml` file for the Agent, set the following configuration settings to `false`:
+
+```
+# datadog-values.yaml file
+datadog:
+  sbom:
+    containerImage:
+      enabled: false
+
+      # Uncomment the following line if you are using Google Kubernetes Engine (GKE) or Amazon Elastic Kubernetes (EKS)
+      # uncompressedLayersSupport: true
+
+    # Enables Host Vulnerability Management
+    host:
+      enabled: false
+
+    # Enables Container Vulnerability Management
+    # Image collection is enabled by default with Datadog Helm version `>= 3.46.0`
+      containerImageCollection:
+        enabled: false
+```
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -57,3 +93,4 @@ The workaround for this issue is to set the configuration option:
 [2]: /security/cloud_security_management/setup/csm_enterprise?tab=aws#configure-the-agent-for-vulnerabilities
 [3]: https://app.datadoghq.com/security/configuration/csm/setup
 [4]: https://app.datadoghq.com/metric/summary
+[5]: https://cloud.google.com/kubernetes-engine/docs/how-to/image-streaming#disable

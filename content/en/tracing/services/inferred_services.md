@@ -19,11 +19,12 @@ Explore inferred services in the [Service Catalog][1] by filtering entries by en
 ## Set up inferred services
 
 To see inferred services, you must enable some configurations. 
+Starting from version [7.60.0][1] of the Datadog Agent, these configurations are enabled by default. 
 
 {{< tabs >}}
 {{% tab "Agent v7.55.1+" %}}
 
-For Datadog Agent versions [7.55.1][1] or later, add the following to your `datadog.yaml` configuration file:
+For Datadog Agent versions [7.55.1][2] or later, add the following to your `datadog.yaml` configuration file:
 
 {{< code-block lang="yaml" filename="datadog.yaml" collapsible="true" >}}
 
@@ -42,10 +43,11 @@ DD_APM_PEER_TAGS_AGGREGATION=true
 
 {{< /code-block >}}
 
-If you are using Helm, include these environment variables in your `values.yaml` [file][2].
+If you are using Helm, include these environment variables in your `values.yaml` [file][3].
 
-[1]: https://github.com/DataDog/datadog-agent/releases/tag/7.55.1
-[2]: https://github.com/DataDog/helm-charts/blob/main/charts/datadog/values.yaml
+[1]: https://github.com/DataDog/datadog-agent/releases/tag/7.60.0
+[2]: https://github.com/DataDog/datadog-agent/releases/tag/7.55.1
+[3]: https://github.com/DataDog/helm-charts/blob/main/charts/datadog/values.yaml
 {{% /tab %}}
 {{% tab "Agent v7.50.3 - v7.54.1" %}}
 
@@ -155,7 +157,7 @@ If the highest priority tag, such as `peer.db.name`, is not captured as part of 
 
 With inferred services, service dependencies are automatically detected from existing span attributes. As a result, changing service names (using the `service` tag) is not required to identify these dependencies. 
 
-Enable `DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED` to ensures no Datadog integration sets service names that are different from the default global service name. This also improves how service-to-service connections and inferred services are represented in Datadog visualizations, across all supported tracing library languages and integrations.
+Enable `DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED` to ensure no Datadog integration sets service names that are different from the default global service name. This also improves how service-to-service connections and inferred services are represented in Datadog visualizations, across all supported tracing library languages and integrations.
 
 <div class="alert alert-warning">Enabling this option may impact existing APM metrics, custom span metrics, trace analytics, retention filters, sensitive data scans, monitors, dashboards, or notebooks that reference the old service names. Update these assets to use the global default service tag (<code>service:&lt;DD_SERVICE&gt;</code>).</div>
 

@@ -62,9 +62,14 @@ Each event generated is tagged with the version, the service, and the environmen
 
 {{< img src="/error_tracking/create-monitor.mp4" alt="Export your search query to an Error Tracking monitor" video=true >}}
 
+## Suspected Cause
+
+[Suspected Cause][3] enables quicker filtering and prioritization of errors, empowering teams to address potential root causes more effectively.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /events
 [2]: /monitors/types/event/
+[3]: /error_tracking/suspected_causes

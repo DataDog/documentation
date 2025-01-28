@@ -15,6 +15,9 @@ further_reading:
 - link: "https://www.datadoghq.com/architecture/instrument-your-app-using-the-datadog-operator-and-admission-controller/"
   tag: "Architecture Center"
   text: "Instrument your app using the Datadog Operator and Admission Controller"
+- link: "/containers/guide/cluster_agent_disable_admission_controller"
+  tag: "Documentation"
+  text: "Disable the Datadog Admission Controller with the Cluster Agent"
 ---
 
 ## Overview
