@@ -32,32 +32,42 @@ describe('rendering stages', () => {
   });
 
   test('the RenderableTree correctly hides and displays content', () => {
-    let lastDisplayValue: boolean | null = null;
+    const displayStatus: {
+      displayAttributeVal: null | true | false;
+      setAtLevel: number;
+    } = {
+      displayAttributeVal: null,
+      setAtLevel: 0
+    };
 
-    function traverseAndLog(node: any) {
-      // Any text starting with "NO: " should be marked as hidden
-      // Any text starting with "YES: " should be marked as displayed
+    function traverseAndLog(node: any, level: number = 0) {
       if (typeof node === 'string') {
+        // Any text starting with "YES: " should within content that is marked as displayed
         if (node.startsWith('YES: ')) {
-          expect(lastDisplayValue).toBe(true);
+          expect(displayStatus.displayAttributeVal).toBe(true);
+          expect(displayStatus.setAtLevel).toBeLessThan(level);
+          // Any text starting with "NO: " should be within content that is marked as hidden
         } else if (node.startsWith('NO: ')) {
-          expect(lastDisplayValue).toBe(false);
+          expect(displayStatus.setAtLevel).toBeLessThan(level);
         }
-        // Recursively traverse the tree to find the next display attribute
+        // Recursively traverse the tree to find the next display attribute,
+        // and update the display status accordingly
       } else if (Array.isArray(node)) {
-        node.forEach((child) => traverseAndLog(child));
+        node.forEach((child) => traverseAndLog(child, level + 1));
       } else if (typeof node === 'object' && node !== null) {
         if (node.attributes && 'display' in node.attributes) {
           if (node.attributes.display === 'true') {
-            lastDisplayValue = true;
+            displayStatus.displayAttributeVal = true;
+            displayStatus.setAtLevel = level;
           } else if (node.attributes.display === 'false') {
-            lastDisplayValue = false;
+            displayStatus.displayAttributeVal = false;
+            displayStatus.setAtLevel = level;
           } else {
             throw new Error(`Invalid display value: ${node.attributes.display}`);
           }
         }
         if (node.children) {
-          traverseAndLog(node.children);
+          traverseAndLog(node.children, level + 1);
         }
       }
     }

@@ -16,7 +16,17 @@
       "name": "p",
       "attributes": {},
       "children": [
-        "Anything with a YES in front of it should display normally, with no visible background color."
+        "Assume this file is converted to a renderable tree with the following variables:"
+      ]
+    },
+    {
+      "$$mdtype": "Tag",
+      "name": "pre",
+      "attributes": {
+        "data-language": "javascript"
+      },
+      "children": [
+        "const renderableTree = CdocsMarkdoc.transform(ast, {\n  variables: {\n    test_string: 'Datadog',\n    always_false: false,\n    always_true: true\n  }\n});\n"
       ]
     },
     {
@@ -24,24 +34,7 @@
       "name": "p",
       "attributes": {},
       "children": [
-        "Anything with a NO in front of it should have a dark background (to indicate that it has been given the ",
-        {
-          "$$mdtype": "Tag",
-          "name": "code",
-          "attributes": {},
-          "children": [
-            "markdoc__hidden"
-          ]
-        },
-        " class, and would be hidden in a real document)."
-      ]
-    },
-    {
-      "$$mdtype": "Tag",
-      "name": "p",
-      "attributes": {},
-      "children": [
-        "For easier checking, each section has its YESes at the top, and NOs at the bottom."
+        "Anything starting with \"YES: \" should display. Anything starting with \"NO: \" should not display."
       ]
     },
     {

@@ -106,7 +106,7 @@
               ],
               "inline": true,
               "attributes": {
-                "content": "Anything with a YES in front of it should display normally, with no visible background color."
+                "content": "Assume this file is converted to a renderable tree with the following variables:"
               },
               "children": [],
               "type": "text",
@@ -152,95 +152,27 @@
       "errors": [],
       "lines": [
         4,
-        5
+        13
       ],
       "inline": false,
-      "attributes": {},
+      "attributes": {
+        "content": "const renderableTree = CdocsMarkdoc.transform(ast, {\n  variables: {\n    test_string: 'Datadog',\n    always_false: false,\n    always_true: true\n  }\n});\n",
+        "language": "javascript"
+      },
       "children": [
         {
           "$$mdtype": "Node",
           "errors": [],
           "lines": [
             4,
-            5
+            13
           ],
           "inline": false,
-          "attributes": {},
-          "children": [
-            {
-              "$$mdtype": "Node",
-              "errors": [],
-              "lines": [
-                4,
-                5
-              ],
-              "inline": true,
-              "attributes": {
-                "content": "Anything with a NO in front of it should have a dark background (to indicate that it has been given the "
-              },
-              "children": [],
-              "type": "text",
-              "annotations": [],
-              "slots": {},
-              "location": {
-                "start": {
-                  "line": 4
-                },
-                "end": {
-                  "line": 5
-                }
-              }
-            },
-            {
-              "$$mdtype": "Node",
-              "errors": [],
-              "lines": [
-                4,
-                5
-              ],
-              "inline": true,
-              "attributes": {
-                "content": "markdoc__hidden"
-              },
-              "children": [],
-              "type": "code",
-              "annotations": [],
-              "slots": {},
-              "location": {
-                "start": {
-                  "line": 4
-                },
-                "end": {
-                  "line": 5
-                }
-              }
-            },
-            {
-              "$$mdtype": "Node",
-              "errors": [],
-              "lines": [
-                4,
-                5
-              ],
-              "inline": true,
-              "attributes": {
-                "content": " class, and would be hidden in a real document)."
-              },
-              "children": [],
-              "type": "text",
-              "annotations": [],
-              "slots": {},
-              "location": {
-                "start": {
-                  "line": 4
-                },
-                "end": {
-                  "line": 5
-                }
-              }
-            }
-          ],
-          "type": "inline",
+          "attributes": {
+            "content": "const renderableTree = CdocsMarkdoc.transform(ast, {\n  variables: {\n    test_string: 'Datadog',\n    always_false: false,\n    always_true: true\n  }\n});\n"
+          },
+          "children": [],
+          "type": "text",
           "annotations": [],
           "slots": {},
           "location": {
@@ -248,12 +180,12 @@
               "line": 4
             },
             "end": {
-              "line": 5
+              "line": 13
             }
           }
         }
       ],
-      "type": "paragraph",
+      "type": "fence",
       "annotations": [],
       "slots": {},
       "location": {
@@ -261,544 +193,7 @@
           "line": 4
         },
         "end": {
-          "line": 5
-        }
-      }
-    },
-    {
-      "$$mdtype": "Node",
-      "errors": [],
-      "lines": [
-        6,
-        7
-      ],
-      "inline": false,
-      "attributes": {},
-      "children": [
-        {
-          "$$mdtype": "Node",
-          "errors": [],
-          "lines": [
-            6,
-            7
-          ],
-          "inline": false,
-          "attributes": {},
-          "children": [
-            {
-              "$$mdtype": "Node",
-              "errors": [],
-              "lines": [
-                6,
-                7
-              ],
-              "inline": true,
-              "attributes": {
-                "content": "For easier checking, each section has its YESes at the top, and NOs at the bottom."
-              },
-              "children": [],
-              "type": "text",
-              "annotations": [],
-              "slots": {},
-              "location": {
-                "start": {
-                  "line": 6
-                },
-                "end": {
-                  "line": 7
-                }
-              }
-            }
-          ],
-          "type": "inline",
-          "annotations": [],
-          "slots": {},
-          "location": {
-            "start": {
-              "line": 6
-            },
-            "end": {
-              "line": 7
-            }
-          }
-        }
-      ],
-      "type": "paragraph",
-      "annotations": [],
-      "slots": {},
-      "location": {
-        "start": {
-          "line": 6
-        },
-        "end": {
-          "line": 7
-        }
-      }
-    },
-    {
-      "$$mdtype": "Node",
-      "errors": [],
-      "lines": [
-        8,
-        9
-      ],
-      "inline": false,
-      "attributes": {
-        "level": 2
-      },
-      "children": [
-        {
-          "$$mdtype": "Node",
-          "errors": [],
-          "lines": [
-            8,
-            9
-          ],
-          "inline": false,
-          "attributes": {},
-          "children": [
-            {
-              "$$mdtype": "Node",
-              "errors": [],
-              "lines": [
-                8,
-                9
-              ],
-              "inline": true,
-              "attributes": {
-                "content": "Variable values"
-              },
-              "children": [],
-              "type": "text",
-              "annotations": [],
-              "slots": {},
-              "location": {
-                "start": {
-                  "line": 8
-                },
-                "end": {
-                  "line": 9
-                }
-              }
-            }
-          ],
-          "type": "inline",
-          "annotations": [],
-          "slots": {},
-          "location": {
-            "start": {
-              "line": 8
-            },
-            "end": {
-              "line": 9
-            }
-          }
-        }
-      ],
-      "type": "heading",
-      "annotations": [],
-      "slots": {},
-      "location": {
-        "start": {
-          "line": 8
-        },
-        "end": {
-          "line": 9
-        }
-      }
-    },
-    {
-      "$$mdtype": "Node",
-      "errors": [],
-      "lines": [
-        10,
-        14
-      ],
-      "inline": false,
-      "attributes": {
-        "ordered": false,
-        "marker": "-"
-      },
-      "children": [
-        {
-          "$$mdtype": "Node",
-          "errors": [],
-          "lines": [
-            10,
-            11
-          ],
-          "inline": false,
-          "attributes": {},
-          "children": [
-            {
-              "$$mdtype": "Node",
-              "errors": [],
-              "lines": [
-                10,
-                11
-              ],
-              "inline": false,
-              "attributes": {},
-              "children": [
-                {
-                  "$$mdtype": "Node",
-                  "errors": [],
-                  "lines": [
-                    10,
-                    11
-                  ],
-                  "inline": true,
-                  "attributes": {
-                    "content": "test_string"
-                  },
-                  "children": [],
-                  "type": "code",
-                  "annotations": [],
-                  "slots": {},
-                  "location": {
-                    "start": {
-                      "line": 10
-                    },
-                    "end": {
-                      "line": 11
-                    }
-                  }
-                },
-                {
-                  "$$mdtype": "Node",
-                  "errors": [],
-                  "lines": [
-                    10,
-                    11
-                  ],
-                  "inline": true,
-                  "attributes": {
-                    "content": ": "
-                  },
-                  "children": [],
-                  "type": "text",
-                  "annotations": [],
-                  "slots": {},
-                  "location": {
-                    "start": {
-                      "line": 10
-                    },
-                    "end": {
-                      "line": 11
-                    }
-                  }
-                },
-                {
-                  "$$mdtype": "Node",
-                  "errors": [],
-                  "lines": [
-                    10,
-                    11
-                  ],
-                  "inline": true,
-                  "attributes": {
-                    "content": {
-                      "$$mdtype": "Variable",
-                      "path": [
-                        "test_string"
-                      ]
-                    }
-                  },
-                  "children": [],
-                  "type": "text",
-                  "annotations": [],
-                  "slots": {},
-                  "location": {
-                    "start": {
-                      "line": 10
-                    },
-                    "end": {
-                      "line": 11
-                    }
-                  }
-                }
-              ],
-              "type": "inline",
-              "annotations": [],
-              "slots": {},
-              "location": {
-                "start": {
-                  "line": 10
-                },
-                "end": {
-                  "line": 11
-                }
-              }
-            }
-          ],
-          "type": "item",
-          "annotations": [],
-          "slots": {},
-          "location": {
-            "start": {
-              "line": 10
-            },
-            "end": {
-              "line": 11
-            }
-          }
-        },
-        {
-          "$$mdtype": "Node",
-          "errors": [],
-          "lines": [
-            11,
-            12
-          ],
-          "inline": false,
-          "attributes": {},
-          "children": [
-            {
-              "$$mdtype": "Node",
-              "errors": [],
-              "lines": [
-                11,
-                12
-              ],
-              "inline": false,
-              "attributes": {},
-              "children": [
-                {
-                  "$$mdtype": "Node",
-                  "errors": [],
-                  "lines": [
-                    11,
-                    12
-                  ],
-                  "inline": true,
-                  "attributes": {
-                    "content": "always_true"
-                  },
-                  "children": [],
-                  "type": "code",
-                  "annotations": [],
-                  "slots": {},
-                  "location": {
-                    "start": {
-                      "line": 11
-                    },
-                    "end": {
-                      "line": 12
-                    }
-                  }
-                },
-                {
-                  "$$mdtype": "Node",
-                  "errors": [],
-                  "lines": [
-                    11,
-                    12
-                  ],
-                  "inline": true,
-                  "attributes": {
-                    "content": ": "
-                  },
-                  "children": [],
-                  "type": "text",
-                  "annotations": [],
-                  "slots": {},
-                  "location": {
-                    "start": {
-                      "line": 11
-                    },
-                    "end": {
-                      "line": 12
-                    }
-                  }
-                },
-                {
-                  "$$mdtype": "Node",
-                  "errors": [],
-                  "lines": [
-                    11,
-                    12
-                  ],
-                  "inline": true,
-                  "attributes": {
-                    "content": {
-                      "$$mdtype": "Variable",
-                      "path": [
-                        "always_true"
-                      ]
-                    }
-                  },
-                  "children": [],
-                  "type": "text",
-                  "annotations": [],
-                  "slots": {},
-                  "location": {
-                    "start": {
-                      "line": 11
-                    },
-                    "end": {
-                      "line": 12
-                    }
-                  }
-                }
-              ],
-              "type": "inline",
-              "annotations": [],
-              "slots": {},
-              "location": {
-                "start": {
-                  "line": 11
-                },
-                "end": {
-                  "line": 12
-                }
-              }
-            }
-          ],
-          "type": "item",
-          "annotations": [],
-          "slots": {},
-          "location": {
-            "start": {
-              "line": 11
-            },
-            "end": {
-              "line": 12
-            }
-          }
-        },
-        {
-          "$$mdtype": "Node",
-          "errors": [],
-          "lines": [
-            12,
-            14
-          ],
-          "inline": false,
-          "attributes": {},
-          "children": [
-            {
-              "$$mdtype": "Node",
-              "errors": [],
-              "lines": [
-                12,
-                13
-              ],
-              "inline": false,
-              "attributes": {},
-              "children": [
-                {
-                  "$$mdtype": "Node",
-                  "errors": [],
-                  "lines": [
-                    12,
-                    13
-                  ],
-                  "inline": true,
-                  "attributes": {
-                    "content": "always_false"
-                  },
-                  "children": [],
-                  "type": "code",
-                  "annotations": [],
-                  "slots": {},
-                  "location": {
-                    "start": {
-                      "line": 12
-                    },
-                    "end": {
-                      "line": 13
-                    }
-                  }
-                },
-                {
-                  "$$mdtype": "Node",
-                  "errors": [],
-                  "lines": [
-                    12,
-                    13
-                  ],
-                  "inline": true,
-                  "attributes": {
-                    "content": ": "
-                  },
-                  "children": [],
-                  "type": "text",
-                  "annotations": [],
-                  "slots": {},
-                  "location": {
-                    "start": {
-                      "line": 12
-                    },
-                    "end": {
-                      "line": 13
-                    }
-                  }
-                },
-                {
-                  "$$mdtype": "Node",
-                  "errors": [],
-                  "lines": [
-                    12,
-                    13
-                  ],
-                  "inline": true,
-                  "attributes": {
-                    "content": {
-                      "$$mdtype": "Variable",
-                      "path": [
-                        "always_false"
-                      ]
-                    }
-                  },
-                  "children": [],
-                  "type": "text",
-                  "annotations": [],
-                  "slots": {},
-                  "location": {
-                    "start": {
-                      "line": 12
-                    },
-                    "end": {
-                      "line": 13
-                    }
-                  }
-                }
-              ],
-              "type": "inline",
-              "annotations": [],
-              "slots": {},
-              "location": {
-                "start": {
-                  "line": 12
-                },
-                "end": {
-                  "line": 13
-                }
-              }
-            }
-          ],
-          "type": "item",
-          "annotations": [],
-          "slots": {},
-          "location": {
-            "start": {
-              "line": 12
-            },
-            "end": {
-              "line": 14
-            }
-          }
-        }
-      ],
-      "type": "list",
-      "annotations": [],
-      "slots": {},
-      "location": {
-        "start": {
-          "line": 10
-        },
-        "end": {
-          "line": 14
+          "line": 13
         }
       }
     },
@@ -810,9 +205,7 @@
         15
       ],
       "inline": false,
-      "attributes": {
-        "level": 2
-      },
+      "attributes": {},
       "children": [
         {
           "$$mdtype": "Node",
@@ -833,7 +226,7 @@
               ],
               "inline": true,
               "attributes": {
-                "content": "Dynamic variables test"
+                "content": "Anything starting with \"YES: \" should display. Anything starting with \"NO: \" should not display."
               },
               "children": [],
               "type": "text",
@@ -862,7 +255,7 @@
           }
         }
       ],
-      "type": "heading",
+      "type": "paragraph",
       "annotations": [],
       "slots": {},
       "location": {
@@ -905,31 +298,7 @@
               ],
               "inline": true,
               "attributes": {
-                "content": "equals"
-              },
-              "children": [],
-              "type": "code",
-              "annotations": [],
-              "slots": {},
-              "location": {
-                "start": {
-                  "line": 16
-                },
-                "end": {
-                  "line": 17
-                }
-              }
-            },
-            {
-              "$$mdtype": "Node",
-              "errors": [],
-              "lines": [
-                16,
-                17
-              ],
-              "inline": true,
-              "attributes": {
-                "content": " test"
+                "content": "Variable values"
               },
               "children": [],
               "type": "text",
@@ -975,27 +344,137 @@
       "errors": [],
       "lines": [
         18,
-        19,
-        20,
-        21
+        22
       ],
       "inline": false,
       "attributes": {
-        "primary": {
-          "$$mdtype": "Function",
-          "name": "equals",
-          "parameters": {
-            "0": {
-              "$$mdtype": "Variable",
-              "path": [
-                "always_true"
-              ]
-            },
-            "1": true
-          }
-        }
+        "ordered": false,
+        "marker": "-"
       },
       "children": [
+        {
+          "$$mdtype": "Node",
+          "errors": [],
+          "lines": [
+            18,
+            19
+          ],
+          "inline": false,
+          "attributes": {},
+          "children": [
+            {
+              "$$mdtype": "Node",
+              "errors": [],
+              "lines": [
+                18,
+                19
+              ],
+              "inline": false,
+              "attributes": {},
+              "children": [
+                {
+                  "$$mdtype": "Node",
+                  "errors": [],
+                  "lines": [
+                    18,
+                    19
+                  ],
+                  "inline": true,
+                  "attributes": {
+                    "content": "test_string"
+                  },
+                  "children": [],
+                  "type": "code",
+                  "annotations": [],
+                  "slots": {},
+                  "location": {
+                    "start": {
+                      "line": 18
+                    },
+                    "end": {
+                      "line": 19
+                    }
+                  }
+                },
+                {
+                  "$$mdtype": "Node",
+                  "errors": [],
+                  "lines": [
+                    18,
+                    19
+                  ],
+                  "inline": true,
+                  "attributes": {
+                    "content": ": "
+                  },
+                  "children": [],
+                  "type": "text",
+                  "annotations": [],
+                  "slots": {},
+                  "location": {
+                    "start": {
+                      "line": 18
+                    },
+                    "end": {
+                      "line": 19
+                    }
+                  }
+                },
+                {
+                  "$$mdtype": "Node",
+                  "errors": [],
+                  "lines": [
+                    18,
+                    19
+                  ],
+                  "inline": true,
+                  "attributes": {
+                    "content": {
+                      "$$mdtype": "Variable",
+                      "path": [
+                        "test_string"
+                      ]
+                    }
+                  },
+                  "children": [],
+                  "type": "text",
+                  "annotations": [],
+                  "slots": {},
+                  "location": {
+                    "start": {
+                      "line": 18
+                    },
+                    "end": {
+                      "line": 19
+                    }
+                  }
+                }
+              ],
+              "type": "inline",
+              "annotations": [],
+              "slots": {},
+              "location": {
+                "start": {
+                  "line": 18
+                },
+                "end": {
+                  "line": 19
+                }
+              }
+            }
+          ],
+          "type": "item",
+          "annotations": [],
+          "slots": {},
+          "location": {
+            "start": {
+              "line": 18
+            },
+            "end": {
+              "line": 19
+            }
+          }
+        },
         {
           "$$mdtype": "Node",
           "errors": [],
@@ -1025,31 +504,7 @@
                   ],
                   "inline": true,
                   "attributes": {
-                    "content": "YES: Display if "
-                  },
-                  "children": [],
-                  "type": "text",
-                  "annotations": [],
-                  "slots": {},
-                  "location": {
-                    "start": {
-                      "line": 19
-                    },
-                    "end": {
-                      "line": 20
-                    }
-                  }
-                },
-                {
-                  "$$mdtype": "Node",
-                  "errors": [],
-                  "lines": [
-                    19,
-                    20
-                  ],
-                  "inline": true,
-                  "attributes": {
-                    "content": "equals($always_true, true)"
+                    "content": "always_true"
                   },
                   "children": [],
                   "type": "code",
@@ -1073,7 +528,36 @@
                   ],
                   "inline": true,
                   "attributes": {
-                    "content": "."
+                    "content": ": "
+                  },
+                  "children": [],
+                  "type": "text",
+                  "annotations": [],
+                  "slots": {},
+                  "location": {
+                    "start": {
+                      "line": 19
+                    },
+                    "end": {
+                      "line": 20
+                    }
+                  }
+                },
+                {
+                  "$$mdtype": "Node",
+                  "errors": [],
+                  "lines": [
+                    19,
+                    20
+                  ],
+                  "inline": true,
+                  "attributes": {
+                    "content": {
+                      "$$mdtype": "Variable",
+                      "path": [
+                        "always_true"
+                      ]
+                    }
                   },
                   "children": [],
                   "type": "text",
@@ -1102,7 +586,7 @@
               }
             }
           ],
-          "type": "paragraph",
+          "type": "item",
           "annotations": [],
           "slots": {},
           "location": {
@@ -1113,71 +597,13 @@
               "line": 20
             }
           }
-        }
-      ],
-      "type": "tag",
-      "tag": "if",
-      "annotations": [
-        {
-          "type": "attribute",
-          "name": "primary",
-          "value": {
-            "$$mdtype": "Function",
-            "name": "equals",
-            "parameters": {
-              "0": {
-                "$$mdtype": "Variable",
-                "path": [
-                  "always_true"
-                ]
-              },
-              "1": true
-            }
-          }
-        }
-      ],
-      "slots": {},
-      "location": {
-        "start": {
-          "line": 18
         },
-        "end": {
-          "line": 19
-        }
-      }
-    },
-    {
-      "$$mdtype": "Node",
-      "errors": [],
-      "lines": [
-        22,
-        23,
-        24,
-        25
-      ],
-      "inline": false,
-      "attributes": {
-        "primary": {
-          "$$mdtype": "Function",
-          "name": "equals",
-          "parameters": {
-            "0": {
-              "$$mdtype": "Variable",
-              "path": [
-                "test_string"
-              ]
-            },
-            "1": "Datadog"
-          }
-        }
-      },
-      "children": [
         {
           "$$mdtype": "Node",
           "errors": [],
           "lines": [
-            23,
-            24
+            20,
+            22
           ],
           "inline": false,
           "attributes": {},
@@ -1186,8 +612,8 @@
               "$$mdtype": "Node",
               "errors": [],
               "lines": [
-                23,
-                24
+                20,
+                21
               ],
               "inline": false,
               "attributes": {},
@@ -1196,36 +622,12 @@
                   "$$mdtype": "Node",
                   "errors": [],
                   "lines": [
-                    23,
-                    24
+                    20,
+                    21
                   ],
                   "inline": true,
                   "attributes": {
-                    "content": "YES: Display if "
-                  },
-                  "children": [],
-                  "type": "text",
-                  "annotations": [],
-                  "slots": {},
-                  "location": {
-                    "start": {
-                      "line": 23
-                    },
-                    "end": {
-                      "line": 24
-                    }
-                  }
-                },
-                {
-                  "$$mdtype": "Node",
-                  "errors": [],
-                  "lines": [
-                    23,
-                    24
-                  ],
-                  "inline": true,
-                  "attributes": {
-                    "content": "equals($test_string, \"Datadog\")"
+                    "content": "always_false"
                   },
                   "children": [],
                   "type": "code",
@@ -1233,10 +635,10 @@
                   "slots": {},
                   "location": {
                     "start": {
-                      "line": 23
+                      "line": 20
                     },
                     "end": {
-                      "line": 24
+                      "line": 21
                     }
                   }
                 },
@@ -1244,12 +646,12 @@
                   "$$mdtype": "Node",
                   "errors": [],
                   "lines": [
-                    23,
-                    24
+                    20,
+                    21
                   ],
                   "inline": true,
                   "attributes": {
-                    "content": "."
+                    "content": ": "
                   },
                   "children": [],
                   "type": "text",
@@ -1257,10 +659,39 @@
                   "slots": {},
                   "location": {
                     "start": {
-                      "line": 23
+                      "line": 20
                     },
                     "end": {
-                      "line": 24
+                      "line": 21
+                    }
+                  }
+                },
+                {
+                  "$$mdtype": "Node",
+                  "errors": [],
+                  "lines": [
+                    20,
+                    21
+                  ],
+                  "inline": true,
+                  "attributes": {
+                    "content": {
+                      "$$mdtype": "Variable",
+                      "path": [
+                        "always_false"
+                      ]
+                    }
+                  },
+                  "children": [],
+                  "type": "text",
+                  "annotations": [],
+                  "slots": {},
+                  "location": {
+                    "start": {
+                      "line": 20
+                    },
+                    "end": {
+                      "line": 21
                     }
                   }
                 }
@@ -1270,48 +701,101 @@
               "slots": {},
               "location": {
                 "start": {
-                  "line": 23
+                  "line": 20
                 },
                 "end": {
-                  "line": 24
+                  "line": 21
                 }
               }
             }
           ],
-          "type": "paragraph",
+          "type": "item",
           "annotations": [],
           "slots": {},
           "location": {
             "start": {
-              "line": 23
+              "line": 20
             },
             "end": {
-              "line": 24
+              "line": 22
             }
           }
         }
       ],
-      "type": "tag",
-      "tag": "if",
-      "annotations": [
+      "type": "list",
+      "annotations": [],
+      "slots": {},
+      "location": {
+        "start": {
+          "line": 18
+        },
+        "end": {
+          "line": 22
+        }
+      }
+    },
+    {
+      "$$mdtype": "Node",
+      "errors": [],
+      "lines": [
+        22,
+        23
+      ],
+      "inline": false,
+      "attributes": {
+        "level": 2
+      },
+      "children": [
         {
-          "type": "attribute",
-          "name": "primary",
-          "value": {
-            "$$mdtype": "Function",
-            "name": "equals",
-            "parameters": {
-              "0": {
-                "$$mdtype": "Variable",
-                "path": [
-                  "test_string"
-                ]
+          "$$mdtype": "Node",
+          "errors": [],
+          "lines": [
+            22,
+            23
+          ],
+          "inline": false,
+          "attributes": {},
+          "children": [
+            {
+              "$$mdtype": "Node",
+              "errors": [],
+              "lines": [
+                22,
+                23
+              ],
+              "inline": true,
+              "attributes": {
+                "content": "Dynamic variables test"
               },
-              "1": "Datadog"
+              "children": [],
+              "type": "text",
+              "annotations": [],
+              "slots": {},
+              "location": {
+                "start": {
+                  "line": 22
+                },
+                "end": {
+                  "line": 23
+                }
+              }
+            }
+          ],
+          "type": "inline",
+          "annotations": [],
+          "slots": {},
+          "location": {
+            "start": {
+              "line": 22
+            },
+            "end": {
+              "line": 23
             }
           }
         }
       ],
+      "type": "heading",
+      "annotations": [],
       "slots": {},
       "location": {
         "start": {
@@ -1319,6 +803,102 @@
         },
         "end": {
           "line": 23
+        }
+      }
+    },
+    {
+      "$$mdtype": "Node",
+      "errors": [],
+      "lines": [
+        24,
+        25
+      ],
+      "inline": false,
+      "attributes": {
+        "level": 2
+      },
+      "children": [
+        {
+          "$$mdtype": "Node",
+          "errors": [],
+          "lines": [
+            24,
+            25
+          ],
+          "inline": false,
+          "attributes": {},
+          "children": [
+            {
+              "$$mdtype": "Node",
+              "errors": [],
+              "lines": [
+                24,
+                25
+              ],
+              "inline": true,
+              "attributes": {
+                "content": "equals"
+              },
+              "children": [],
+              "type": "code",
+              "annotations": [],
+              "slots": {},
+              "location": {
+                "start": {
+                  "line": 24
+                },
+                "end": {
+                  "line": 25
+                }
+              }
+            },
+            {
+              "$$mdtype": "Node",
+              "errors": [],
+              "lines": [
+                24,
+                25
+              ],
+              "inline": true,
+              "attributes": {
+                "content": " test"
+              },
+              "children": [],
+              "type": "text",
+              "annotations": [],
+              "slots": {},
+              "location": {
+                "start": {
+                  "line": 24
+                },
+                "end": {
+                  "line": 25
+                }
+              }
+            }
+          ],
+          "type": "inline",
+          "annotations": [],
+          "slots": {},
+          "location": {
+            "start": {
+              "line": 24
+            },
+            "end": {
+              "line": 25
+            }
+          }
+        }
+      ],
+      "type": "heading",
+      "annotations": [],
+      "slots": {},
+      "location": {
+        "start": {
+          "line": 24
+        },
+        "end": {
+          "line": 25
         }
       }
     },
@@ -1340,7 +920,7 @@
             "0": {
               "$$mdtype": "Variable",
               "path": [
-                "always_false"
+                "always_true"
               ]
             },
             "1": true
@@ -1377,7 +957,7 @@
                   ],
                   "inline": true,
                   "attributes": {
-                    "content": "NO: Display if "
+                    "content": "YES: Display if "
                   },
                   "children": [],
                   "type": "text",
@@ -1401,7 +981,7 @@
                   ],
                   "inline": true,
                   "attributes": {
-                    "content": "equals($always_false, true)"
+                    "content": "equals($always_true, true)"
                   },
                   "children": [],
                   "type": "code",
@@ -1480,7 +1060,7 @@
               "0": {
                 "$$mdtype": "Variable",
                 "path": [
-                  "always_false"
+                  "always_true"
                 ]
               },
               "1": true
@@ -1519,7 +1099,7 @@
                 "test_string"
               ]
             },
-            "1": "Hello"
+            "1": "Datadog"
           }
         }
       },
@@ -1553,7 +1133,7 @@
                   ],
                   "inline": true,
                   "attributes": {
-                    "content": "NO: Display if "
+                    "content": "YES: Display if "
                   },
                   "children": [],
                   "type": "text",
@@ -1577,7 +1157,7 @@
                   ],
                   "inline": true,
                   "attributes": {
-                    "content": "equals($test_string, \"Hello\")"
+                    "content": "equals($test_string, \"Datadog\")"
                   },
                   "children": [],
                   "type": "code",
@@ -1659,7 +1239,7 @@
                   "test_string"
                 ]
               },
-              "1": "Hello"
+              "1": "Datadog"
             }
           }
         }
@@ -1679,19 +1259,33 @@
       "errors": [],
       "lines": [
         34,
-        35
+        35,
+        36,
+        37
       ],
       "inline": false,
       "attributes": {
-        "level": 2
+        "primary": {
+          "$$mdtype": "Function",
+          "name": "equals",
+          "parameters": {
+            "0": {
+              "$$mdtype": "Variable",
+              "path": [
+                "always_false"
+              ]
+            },
+            "1": true
+          }
+        }
       },
       "children": [
         {
           "$$mdtype": "Node",
           "errors": [],
           "lines": [
-            34,
-            35
+            35,
+            36
           ],
           "inline": false,
           "attributes": {},
@@ -1700,66 +1294,132 @@
               "$$mdtype": "Node",
               "errors": [],
               "lines": [
-                34,
-                35
+                35,
+                36
               ],
-              "inline": true,
-              "attributes": {
-                "content": "default"
-              },
-              "children": [],
-              "type": "code",
-              "annotations": [],
-              "slots": {},
-              "location": {
-                "start": {
-                  "line": 34
+              "inline": false,
+              "attributes": {},
+              "children": [
+                {
+                  "$$mdtype": "Node",
+                  "errors": [],
+                  "lines": [
+                    35,
+                    36
+                  ],
+                  "inline": true,
+                  "attributes": {
+                    "content": "NO: Display if "
+                  },
+                  "children": [],
+                  "type": "text",
+                  "annotations": [],
+                  "slots": {},
+                  "location": {
+                    "start": {
+                      "line": 35
+                    },
+                    "end": {
+                      "line": 36
+                    }
+                  }
                 },
-                "end": {
-                  "line": 35
+                {
+                  "$$mdtype": "Node",
+                  "errors": [],
+                  "lines": [
+                    35,
+                    36
+                  ],
+                  "inline": true,
+                  "attributes": {
+                    "content": "equals($always_false, true)"
+                  },
+                  "children": [],
+                  "type": "code",
+                  "annotations": [],
+                  "slots": {},
+                  "location": {
+                    "start": {
+                      "line": 35
+                    },
+                    "end": {
+                      "line": 36
+                    }
+                  }
+                },
+                {
+                  "$$mdtype": "Node",
+                  "errors": [],
+                  "lines": [
+                    35,
+                    36
+                  ],
+                  "inline": true,
+                  "attributes": {
+                    "content": "."
+                  },
+                  "children": [],
+                  "type": "text",
+                  "annotations": [],
+                  "slots": {},
+                  "location": {
+                    "start": {
+                      "line": 35
+                    },
+                    "end": {
+                      "line": 36
+                    }
+                  }
                 }
-              }
-            },
-            {
-              "$$mdtype": "Node",
-              "errors": [],
-              "lines": [
-                34,
-                35
               ],
-              "inline": true,
-              "attributes": {
-                "content": " test"
-              },
-              "children": [],
-              "type": "text",
+              "type": "inline",
               "annotations": [],
               "slots": {},
               "location": {
                 "start": {
-                  "line": 34
+                  "line": 35
                 },
                 "end": {
-                  "line": 35
+                  "line": 36
                 }
               }
             }
           ],
-          "type": "inline",
+          "type": "paragraph",
           "annotations": [],
           "slots": {},
           "location": {
             "start": {
-              "line": 34
+              "line": 35
             },
             "end": {
-              "line": 35
+              "line": 36
             }
           }
         }
       ],
-      "type": "heading",
-      "annotations": [],
+      "type": "tag",
+      "tag": "if",
+      "annotations": [
+        {
+          "type": "attribute",
+          "name": "primary",
+          "value": {
+            "$$mdtype": "Function",
+            "name": "equals",
+            "parameters": {
+              "0": {
+                "$$mdtype": "Variable",
+                "path": [
+                  "always_false"
+                ]
+              },
+              "1": true
+            }
+          }
+        }
+      ],
       "slots": {},
       "location": {
         "start": {
@@ -1774,24 +1434,24 @@
       "$$mdtype": "Node",
       "errors": [],
       "lines": [
-        36,
-        37,
         38,
-        39
+        39,
+        40,
+        41
       ],
       "inline": false,
       "attributes": {
         "primary": {
           "$$mdtype": "Function",
-          "name": "default",
+          "name": "equals",
           "parameters": {
             "0": {
               "$$mdtype": "Variable",
               "path": [
-                "notDefined"
+                "test_string"
               ]
             },
-            "1": true
+            "1": "Hello"
           }
         }
       },
@@ -1800,8 +1460,8 @@
           "$$mdtype": "Node",
           "errors": [],
           "lines": [
-            37,
-            38
+            39,
+            40
           ],
           "inline": false,
           "attributes": {},
@@ -1810,8 +1470,8 @@
               "$$mdtype": "Node",
               "errors": [],
               "lines": [
-                37,
-                38
+                39,
+                40
               ],
               "inline": false,
               "attributes": {},
@@ -1820,12 +1480,12 @@
                   "$$mdtype": "Node",
                   "errors": [],
                   "lines": [
-                    37,
-                    38
+                    39,
+                    40
                   ],
                   "inline": true,
                   "attributes": {
-                    "content": "YES: Display if "
+                    "content": "NO: Display if "
                   },
                   "children": [],
                   "type": "text",
@@ -1833,10 +1493,10 @@
                   "slots": {},
                   "location": {
                     "start": {
-                      "line": 37
+                      "line": 39
                     },
                     "end": {
-                      "line": 38
+                      "line": 40
                     }
                   }
                 },
@@ -1844,12 +1504,12 @@
                   "$$mdtype": "Node",
                   "errors": [],
                   "lines": [
-                    37,
-                    38
+                    39,
+                    40
                   ],
                   "inline": true,
                   "attributes": {
-                    "content": "default($notDefined, true)"
+                    "content": "equals($test_string, \"Hello\")"
                   },
                   "children": [],
                   "type": "code",
@@ -1857,10 +1517,10 @@
                   "slots": {},
                   "location": {
                     "start": {
-                      "line": 37
+                      "line": 39
                     },
                     "end": {
-                      "line": 38
+                      "line": 40
                     }
                   }
                 },
@@ -1868,8 +1528,8 @@
                   "$$mdtype": "Node",
                   "errors": [],
                   "lines": [
-                    37,
-                    38
+                    39,
+                    40
                   ],
                   "inline": true,
                   "attributes": {
@@ -1881,10 +1541,10 @@
                   "slots": {},
                   "location": {
                     "start": {
-                      "line": 37
+                      "line": 39
                     },
                     "end": {
-                      "line": 38
+                      "line": 40
                     }
                   }
                 }
@@ -1894,10 +1554,10 @@
               "slots": {},
               "location": {
                 "start": {
-                  "line": 37
+                  "line": 39
                 },
                 "end": {
-                  "line": 38
+                  "line": 40
                 }
               }
             }
@@ -1907,10 +1567,10 @@
           "slots": {},
           "location": {
             "start": {
-              "line": 37
+              "line": 39
             },
             "end": {
-              "line": 38
+              "line": 40
             }
           }
         }
@@ -1923,15 +1583,15 @@
           "name": "primary",
           "value": {
             "$$mdtype": "Function",
-            "name": "default",
+            "name": "equals",
             "parameters": {
               "0": {
                 "$$mdtype": "Variable",
                 "path": [
-                  "notDefined"
+                  "test_string"
                 ]
               },
-              "1": true
+              "1": "Hello"
             }
           }
         }
@@ -1939,10 +1599,10 @@
       "slots": {},
       "location": {
         "start": {
-          "line": 36
+          "line": 38
         },
         "end": {
-          "line": 37
+          "line": 39
         }
       }
     },
@@ -1950,34 +1610,20 @@
       "$$mdtype": "Node",
       "errors": [],
       "lines": [
-        40,
-        41,
         42,
         43
       ],
       "inline": false,
       "attributes": {
-        "primary": {
-          "$$mdtype": "Function",
-          "name": "default",
-          "parameters": {
-            "0": {
-              "$$mdtype": "Variable",
-              "path": [
-                "always_true"
-              ]
-            },
-            "1": false
-          }
-        }
+        "level": 2
       },
       "children": [
         {
           "$$mdtype": "Node",
           "errors": [],
           "lines": [
-            41,
-            42
+            42,
+            43
           ],
           "inline": false,
           "attributes": {},
@@ -1986,139 +1632,73 @@
               "$$mdtype": "Node",
               "errors": [],
               "lines": [
-                41,
-                42
+                42,
+                43
               ],
-              "inline": false,
-              "attributes": {},
-              "children": [
-                {
-                  "$$mdtype": "Node",
-                  "errors": [],
-                  "lines": [
-                    41,
-                    42
-                  ],
-                  "inline": true,
-                  "attributes": {
-                    "content": "YES: Display if "
-                  },
-                  "children": [],
-                  "type": "text",
-                  "annotations": [],
-                  "slots": {},
-                  "location": {
-                    "start": {
-                      "line": 41
-                    },
-                    "end": {
-                      "line": 42
-                    }
-                  }
-                },
-                {
-                  "$$mdtype": "Node",
-                  "errors": [],
-                  "lines": [
-                    41,
-                    42
-                  ],
-                  "inline": true,
-                  "attributes": {
-                    "content": "default($always_true, false)"
-                  },
-                  "children": [],
-                  "type": "code",
-                  "annotations": [],
-                  "slots": {},
-                  "location": {
-                    "start": {
-                      "line": 41
-                    },
-                    "end": {
-                      "line": 42
-                    }
-                  }
-                },
-                {
-                  "$$mdtype": "Node",
-                  "errors": [],
-                  "lines": [
-                    41,
-                    42
-                  ],
-                  "inline": true,
-                  "attributes": {
-                    "content": "."
-                  },
-                  "children": [],
-                  "type": "text",
-                  "annotations": [],
-                  "slots": {},
-                  "location": {
-                    "start": {
-                      "line": 41
-                    },
-                    "end": {
-                      "line": 42
-                    }
-                  }
-                }
-              ],
-              "type": "inline",
+              "inline": true,
+              "attributes": {
+                "content": "default"
+              },
+              "children": [],
+              "type": "code",
               "annotations": [],
               "slots": {},
               "location": {
                 "start": {
-                  "line": 41
+                  "line": 42
                 },
                 "end": {
+                  "line": 43
+                }
+              }
+            },
+            {
+              "$$mdtype": "Node",
+              "errors": [],
+              "lines": [
+                42,
+                43
+              ],
+              "inline": true,
+              "attributes": {
+                "content": " test"
+              },
+              "children": [],
+              "type": "text",
+              "annotations": [],
+              "slots": {},
+              "location": {
+                "start": {
                   "line": 42
+                },
+                "end": {
+                  "line": 43
                 }
               }
             }
           ],
-          "type": "paragraph",
+          "type": "inline",
           "annotations": [],
           "slots": {},
           "location": {
             "start": {
-              "line": 41
+              "line": 42
             },
             "end": {
-              "line": 42
+              "line": 43
             }
           }
         }
       ],
-      "type": "tag",
-      "tag": "if",
-      "annotations": [
-        {
-          "type": "attribute",
-          "name": "primary",
-          "value": {
-            "$$mdtype": "Function",
-            "name": "default",
-            "parameters": {
-              "0": {
-                "$$mdtype": "Variable",
-                "path": [
-                  "always_true"
-                ]
-              },
-              "1": false
-            }
-          }
-        }
-      ],
+      "type": "heading",
+      "annotations": [],
       "slots": {},
       "location": {
         "start": {
-          "line": 40
+          "line": 42
         },
         "end": {
-          "line": 41
+          "line": 43
         }
       }
     },
@@ -2143,7 +1723,7 @@
                 "notDefined"
               ]
             },
-            "1": false
+            "1": true
           }
         }
       },
@@ -2177,7 +1757,7 @@
                   ],
                   "inline": true,
                   "attributes": {
-                    "content": "NO: Display if "
+                    "content": "YES: Display if "
                   },
                   "children": [],
                   "type": "text",
@@ -2201,7 +1781,7 @@
                   ],
                   "inline": true,
                   "attributes": {
-                    "content": "default($notDefined, false)"
+                    "content": "default($notDefined, true)"
                   },
                   "children": [],
                   "type": "code",
@@ -2283,7 +1863,7 @@
                   "notDefined"
                 ]
               },
-              "1": false
+              "1": true
             }
           }
         }
@@ -2303,19 +1883,33 @@
       "errors": [],
       "lines": [
         48,
-        49
+        49,
+        50,
+        51
       ],
       "inline": false,
       "attributes": {
-        "level": 2
+        "primary": {
+          "$$mdtype": "Function",
+          "name": "default",
+          "parameters": {
+            "0": {
+              "$$mdtype": "Variable",
+              "path": [
+                "always_true"
+              ]
+            },
+            "1": false
+          }
+        }
       },
       "children": [
         {
           "$$mdtype": "Node",
           "errors": [],
           "lines": [
-            48,
-            49
+            49,
+            50
           ],
           "inline": false,
           "attributes": {},
@@ -2324,66 +1918,132 @@
               "$$mdtype": "Node",
               "errors": [],
               "lines": [
-                48,
-                49
+                49,
+                50
               ],
-              "inline": true,
-              "attributes": {
-                "content": "or"
-              },
-              "children": [],
-              "type": "code",
-              "annotations": [],
-              "slots": {},
-              "location": {
-                "start": {
-                  "line": 48
+              "inline": false,
+              "attributes": {},
+              "children": [
+                {
+                  "$$mdtype": "Node",
+                  "errors": [],
+                  "lines": [
+                    49,
+                    50
+                  ],
+                  "inline": true,
+                  "attributes": {
+                    "content": "YES: Display if "
+                  },
+                  "children": [],
+                  "type": "text",
+                  "annotations": [],
+                  "slots": {},
+                  "location": {
+                    "start": {
+                      "line": 49
+                    },
+                    "end": {
+                      "line": 50
+                    }
+                  }
                 },
-                "end": {
-                  "line": 49
+                {
+                  "$$mdtype": "Node",
+                  "errors": [],
+                  "lines": [
+                    49,
+                    50
+                  ],
+                  "inline": true,
+                  "attributes": {
+                    "content": "default($always_true, false)"
+                  },
+                  "children": [],
+                  "type": "code",
+                  "annotations": [],
+                  "slots": {},
+                  "location": {
+                    "start": {
+                      "line": 49
+                    },
+                    "end": {
+                      "line": 50
+                    }
+                  }
+                },
+                {
+                  "$$mdtype": "Node",
+                  "errors": [],
+                  "lines": [
+                    49,
+                    50
+                  ],
+                  "inline": true,
+                  "attributes": {
+                    "content": "."
+                  },
+                  "children": [],
+                  "type": "text",
+                  "annotations": [],
+                  "slots": {},
+                  "location": {
+                    "start": {
+                      "line": 49
+                    },
+                    "end": {
+                      "line": 50
+                    }
+                  }
                 }
-              }
-            },
-            {
-              "$$mdtype": "Node",
-              "errors": [],
-              "lines": [
-                48,
-                49
               ],
-              "inline": true,
-              "attributes": {
-                "content": " test"
-              },
-              "children": [],
-              "type": "text",
+              "type": "inline",
               "annotations": [],
               "slots": {},
               "location": {
                 "start": {
-                  "line": 48
+                  "line": 49
                 },
                 "end": {
-                  "line": 49
+                  "line": 50
                 }
               }
             }
           ],
-          "type": "inline",
+          "type": "paragraph",
           "annotations": [],
           "slots": {},
           "location": {
             "start": {
-              "line": 48
+              "line": 49
             },
             "end": {
-              "line": 49
+              "line": 50
             }
           }
         }
       ],
-      "type": "heading",
-      "annotations": [],
+      "type": "tag",
+      "tag": "if",
+      "annotations": [
+        {
+          "type": "attribute",
+          "name": "primary",
+          "value": {
+            "$$mdtype": "Function",
+            "name": "default",
+            "parameters": {
+              "0": {
+                "$$mdtype": "Variable",
+                "path": [
+                  "always_true"
+                ]
+              },
+              "1": false
+            }
+          }
+        }
+      ],
       "slots": {},
       "location": {
         "start": {
@@ -2398,29 +2058,24 @@
       "$$mdtype": "Node",
       "errors": [],
       "lines": [
-        50,
-        51,
         52,
-        53
+        53,
+        54,
+        55
       ],
       "inline": false,
       "attributes": {
         "primary": {
           "$$mdtype": "Function",
-          "name": "or",
+          "name": "default",
           "parameters": {
             "0": {
               "$$mdtype": "Variable",
               "path": [
-                "always_true"
+                "notDefined"
               ]
             },
-            "1": {
-              "$$mdtype": "Variable",
-              "path": [
-                "always_false"
-              ]
-            }
+            "1": false
           }
         }
       },
@@ -2429,8 +2084,8 @@
           "$$mdtype": "Node",
           "errors": [],
           "lines": [
-            51,
-            52
+            53,
+            54
           ],
           "inline": false,
           "attributes": {},
@@ -2439,8 +2094,8 @@
               "$$mdtype": "Node",
               "errors": [],
               "lines": [
-                51,
-                52
+                53,
+                54
               ],
               "inline": false,
               "attributes": {},
@@ -2449,12 +2104,12 @@
                   "$$mdtype": "Node",
                   "errors": [],
                   "lines": [
-                    51,
-                    52
+                    53,
+                    54
                   ],
                   "inline": true,
                   "attributes": {
-                    "content": "YES: Display if "
+                    "content": "NO: Display if "
                   },
                   "children": [],
                   "type": "text",
@@ -2462,10 +2117,10 @@
                   "slots": {},
                   "location": {
                     "start": {
-                      "line": 51
+                      "line": 53
                     },
                     "end": {
-                      "line": 52
+                      "line": 54
                     }
                   }
                 },
@@ -2473,12 +2128,12 @@
                   "$$mdtype": "Node",
                   "errors": [],
                   "lines": [
-                    51,
-                    52
+                    53,
+                    54
                   ],
                   "inline": true,
                   "attributes": {
-                    "content": "or($always_true, $always_false)"
+                    "content": "default($notDefined, false)"
                   },
                   "children": [],
                   "type": "code",
@@ -2486,10 +2141,10 @@
                   "slots": {},
                   "location": {
                     "start": {
-                      "line": 51
+                      "line": 53
                     },
                     "end": {
-                      "line": 52
+                      "line": 54
                     }
                   }
                 },
@@ -2497,8 +2152,8 @@
                   "$$mdtype": "Node",
                   "errors": [],
                   "lines": [
-                    51,
-                    52
+                    53,
+                    54
                   ],
                   "inline": true,
                   "attributes": {
@@ -2510,10 +2165,10 @@
                   "slots": {},
                   "location": {
                     "start": {
-                      "line": 51
+                      "line": 53
                     },
                     "end": {
-                      "line": 52
+                      "line": 54
                     }
                   }
                 }
@@ -2523,10 +2178,10 @@
               "slots": {},
               "location": {
                 "start": {
-                  "line": 51
+                  "line": 53
                 },
                 "end": {
-                  "line": 52
+                  "line": 54
                 }
               }
             }
@@ -2536,10 +2191,10 @@
           "slots": {},
           "location": {
             "start": {
-              "line": 51
+              "line": 53
             },
             "end": {
-              "line": 52
+              "line": 54
             }
           }
         }
@@ -2552,20 +2207,15 @@
           "name": "primary",
           "value": {
             "$$mdtype": "Function",
-            "name": "or",
+            "name": "default",
             "parameters": {
               "0": {
                 "$$mdtype": "Variable",
                 "path": [
-                  "always_true"
+                  "notDefined"
                 ]
               },
-              "1": {
-                "$$mdtype": "Variable",
-                "path": [
-                  "always_false"
-                ]
-              }
+              "1": false
             }
           }
         }
@@ -2573,10 +2223,10 @@
       "slots": {},
       "location": {
         "start": {
-          "line": 50
+          "line": 52
         },
         "end": {
-          "line": 51
+          "line": 53
         }
       }
     },
@@ -2584,53 +2234,20 @@
       "$$mdtype": "Node",
       "errors": [],
       "lines": [
-        54,
-        55,
         56,
         57
       ],
       "inline": false,
       "attributes": {
-        "primary": {
-          "$$mdtype": "Function",
-          "name": "or",
-          "parameters": {
-            "0": {
-              "$$mdtype": "Function",
-              "name": "equals",
-              "parameters": {
-                "0": {
-                  "$$mdtype": "Variable",
-                  "path": [
-                    "test_string"
-                  ]
-                },
-                "1": "Hello"
-              }
-            },
-            "1": {
-              "$$mdtype": "Function",
-              "name": "equals",
-              "parameters": {
-                "0": {
-                  "$$mdtype": "Variable",
-                  "path": [
-                    "test_string"
-                  ]
-                },
-                "1": "Datadog"
-              }
-            }
-          }
-        }
+        "level": 2
       },
       "children": [
         {
           "$$mdtype": "Node",
           "errors": [],
           "lines": [
-            55,
-            56
+            56,
+            57
           ],
           "inline": false,
           "attributes": {},
@@ -2639,158 +2256,73 @@
               "$$mdtype": "Node",
               "errors": [],
               "lines": [
-                55,
-                56
+                56,
+                57
               ],
-              "inline": false,
-              "attributes": {},
-              "children": [
-                {
-                  "$$mdtype": "Node",
-                  "errors": [],
-                  "lines": [
-                    55,
-                    56
-                  ],
-                  "inline": true,
-                  "attributes": {
-                    "content": "YES: Display if "
-                  },
-                  "children": [],
-                  "type": "text",
-                  "annotations": [],
-                  "slots": {},
-                  "location": {
-                    "start": {
-                      "line": 55
-                    },
-                    "end": {
-                      "line": 56
-                    }
-                  }
-                },
-                {
-                  "$$mdtype": "Node",
-                  "errors": [],
-                  "lines": [
-                    55,
-                    56
-                  ],
-                  "inline": true,
-                  "attributes": {
-                    "content": "or(equals($test_string, \"Hello\"), equals($test_string, \"Datadog\"))"
-                  },
-                  "children": [],
-                  "type": "code",
-                  "annotations": [],
-                  "slots": {},
-                  "location": {
-                    "start": {
-                      "line": 55
-                    },
-                    "end": {
-                      "line": 56
-                    }
-                  }
-                },
-                {
-                  "$$mdtype": "Node",
-                  "errors": [],
-                  "lines": [
-                    55,
-                    56
-                  ],
-                  "inline": true,
-                  "attributes": {
-                    "content": "."
-                  },
-                  "children": [],
-                  "type": "text",
-                  "annotations": [],
-                  "slots": {},
-                  "location": {
-                    "start": {
-                      "line": 55
-                    },
-                    "end": {
-                      "line": 56
-                    }
-                  }
-                }
-              ],
-              "type": "inline",
+              "inline": true,
+              "attributes": {
+                "content": "or"
+              },
+              "children": [],
+              "type": "code",
               "annotations": [],
               "slots": {},
               "location": {
                 "start": {
-                  "line": 55
+                  "line": 56
                 },
                 "end": {
+                  "line": 57
+                }
+              }
+            },
+            {
+              "$$mdtype": "Node",
+              "errors": [],
+              "lines": [
+                56,
+                57
+              ],
+              "inline": true,
+              "attributes": {
+                "content": " test"
+              },
+              "children": [],
+              "type": "text",
+              "annotations": [],
+              "slots": {},
+              "location": {
+                "start": {
                   "line": 56
+                },
+                "end": {
+                  "line": 57
                 }
               }
             }
           ],
-          "type": "paragraph",
+          "type": "inline",
           "annotations": [],
           "slots": {},
           "location": {
             "start": {
-              "line": 55
+              "line": 56
             },
             "end": {
-              "line": 56
+              "line": 57
             }
           }
         }
       ],
-      "type": "tag",
-      "tag": "if",
-      "annotations": [
-        {
-          "type": "attribute",
-          "name": "primary",
-          "value": {
-            "$$mdtype": "Function",
-            "name": "or",
-            "parameters": {
-              "0": {
-                "$$mdtype": "Function",
-                "name": "equals",
-                "parameters": {
-                  "0": {
-                    "$$mdtype": "Variable",
-                    "path": [
-                      "test_string"
-                    ]
-                  },
-                  "1": "Hello"
-                }
-              },
-              "1": {
-                "$$mdtype": "Function",
-                "name": "equals",
-                "parameters": {
-                  "0": {
-                    "$$mdtype": "Variable",
-                    "path": [
-                      "test_string"
-                    ]
-                  },
-                  "1": "Datadog"
-                }
-              }
-            }
-          }
-        }
-      ],
+      "type": "heading",
+      "annotations": [],
       "slots": {},
       "location": {
         "start": {
-          "line": 54
+          "line": 56
         },
         "end": {
-          "line": 55
+          "line": 57
         }
       }
     },
@@ -2812,13 +2344,13 @@
             "0": {
               "$$mdtype": "Variable",
               "path": [
-                "missingVarOne"
+                "always_true"
               ]
             },
             "1": {
               "$$mdtype": "Variable",
               "path": [
-                "missingVarTwo"
+                "always_false"
               ]
             }
           }
@@ -2854,7 +2386,7 @@
                   ],
                   "inline": true,
                   "attributes": {
-                    "content": "NO: Display if "
+                    "content": "YES: Display if "
                   },
                   "children": [],
                   "type": "text",
@@ -2878,7 +2410,7 @@
                   ],
                   "inline": true,
                   "attributes": {
-                    "content": "or($missingVarOne, $missingVarTwo)"
+                    "content": "or($always_true, $always_false)"
                   },
                   "children": [],
                   "type": "code",
@@ -2957,13 +2489,13 @@
               "0": {
                 "$$mdtype": "Variable",
                 "path": [
-                  "missingVarOne"
+                  "always_true"
                 ]
               },
               "1": {
                 "$$mdtype": "Variable",
                 "path": [
-                  "missingVarTwo"
+                  "always_false"
                 ]
               }
             }
@@ -2985,483 +2517,15 @@
       "errors": [],
       "lines": [
         62,
-        63
-      ],
-      "inline": false,
-      "attributes": {
-        "level": 2
-      },
-      "children": [
-        {
-          "$$mdtype": "Node",
-          "errors": [],
-          "lines": [
-            62,
-            63
-          ],
-          "inline": false,
-          "attributes": {},
-          "children": [
-            {
-              "$$mdtype": "Node",
-              "errors": [],
-              "lines": [
-                62,
-                63
-              ],
-              "inline": true,
-              "attributes": {
-                "content": "and"
-              },
-              "children": [],
-              "type": "code",
-              "annotations": [],
-              "slots": {},
-              "location": {
-                "start": {
-                  "line": 62
-                },
-                "end": {
-                  "line": 63
-                }
-              }
-            },
-            {
-              "$$mdtype": "Node",
-              "errors": [],
-              "lines": [
-                62,
-                63
-              ],
-              "inline": true,
-              "attributes": {
-                "content": " test"
-              },
-              "children": [],
-              "type": "text",
-              "annotations": [],
-              "slots": {},
-              "location": {
-                "start": {
-                  "line": 62
-                },
-                "end": {
-                  "line": 63
-                }
-              }
-            }
-          ],
-          "type": "inline",
-          "annotations": [],
-          "slots": {},
-          "location": {
-            "start": {
-              "line": 62
-            },
-            "end": {
-              "line": 63
-            }
-          }
-        }
-      ],
-      "type": "heading",
-      "annotations": [],
-      "slots": {},
-      "location": {
-        "start": {
-          "line": 62
-        },
-        "end": {
-          "line": 63
-        }
-      }
-    },
-    {
-      "$$mdtype": "Node",
-      "errors": [],
-      "lines": [
+        63,
         64,
-        65,
-        66,
-        67
+        65
       ],
       "inline": false,
       "attributes": {
         "primary": {
           "$$mdtype": "Function",
-          "name": "and",
-          "parameters": {
-            "0": {
-              "$$mdtype": "Variable",
-              "path": [
-                "always_true"
-              ]
-            },
-            "1": {
-              "$$mdtype": "Variable",
-              "path": [
-                "always_true"
-              ]
-            }
-          }
-        }
-      },
-      "children": [
-        {
-          "$$mdtype": "Node",
-          "errors": [],
-          "lines": [
-            65,
-            66
-          ],
-          "inline": false,
-          "attributes": {},
-          "children": [
-            {
-              "$$mdtype": "Node",
-              "errors": [],
-              "lines": [
-                65,
-                66
-              ],
-              "inline": false,
-              "attributes": {},
-              "children": [
-                {
-                  "$$mdtype": "Node",
-                  "errors": [],
-                  "lines": [
-                    65,
-                    66
-                  ],
-                  "inline": true,
-                  "attributes": {
-                    "content": "YES: Display if "
-                  },
-                  "children": [],
-                  "type": "text",
-                  "annotations": [],
-                  "slots": {},
-                  "location": {
-                    "start": {
-                      "line": 65
-                    },
-                    "end": {
-                      "line": 66
-                    }
-                  }
-                },
-                {
-                  "$$mdtype": "Node",
-                  "errors": [],
-                  "lines": [
-                    65,
-                    66
-                  ],
-                  "inline": true,
-                  "attributes": {
-                    "content": "and($always_true, $always_true)"
-                  },
-                  "children": [],
-                  "type": "code",
-                  "annotations": [],
-                  "slots": {},
-                  "location": {
-                    "start": {
-                      "line": 65
-                    },
-                    "end": {
-                      "line": 66
-                    }
-                  }
-                },
-                {
-                  "$$mdtype": "Node",
-                  "errors": [],
-                  "lines": [
-                    65,
-                    66
-                  ],
-                  "inline": true,
-                  "attributes": {
-                    "content": "."
-                  },
-                  "children": [],
-                  "type": "text",
-                  "annotations": [],
-                  "slots": {},
-                  "location": {
-                    "start": {
-                      "line": 65
-                    },
-                    "end": {
-                      "line": 66
-                    }
-                  }
-                }
-              ],
-              "type": "inline",
-              "annotations": [],
-              "slots": {},
-              "location": {
-                "start": {
-                  "line": 65
-                },
-                "end": {
-                  "line": 66
-                }
-              }
-            }
-          ],
-          "type": "paragraph",
-          "annotations": [],
-          "slots": {},
-          "location": {
-            "start": {
-              "line": 65
-            },
-            "end": {
-              "line": 66
-            }
-          }
-        }
-      ],
-      "type": "tag",
-      "tag": "if",
-      "annotations": [
-        {
-          "type": "attribute",
-          "name": "primary",
-          "value": {
-            "$$mdtype": "Function",
-            "name": "and",
-            "parameters": {
-              "0": {
-                "$$mdtype": "Variable",
-                "path": [
-                  "always_true"
-                ]
-              },
-              "1": {
-                "$$mdtype": "Variable",
-                "path": [
-                  "always_true"
-                ]
-              }
-            }
-          }
-        }
-      ],
-      "slots": {},
-      "location": {
-        "start": {
-          "line": 64
-        },
-        "end": {
-          "line": 65
-        }
-      }
-    },
-    {
-      "$$mdtype": "Node",
-      "errors": [],
-      "lines": [
-        68,
-        69,
-        70,
-        71
-      ],
-      "inline": false,
-      "attributes": {
-        "primary": {
-          "$$mdtype": "Function",
-          "name": "and",
-          "parameters": {
-            "0": {
-              "$$mdtype": "Variable",
-              "path": [
-                "always_true"
-              ]
-            },
-            "1": {
-              "$$mdtype": "Variable",
-              "path": [
-                "always_false"
-              ]
-            }
-          }
-        }
-      },
-      "children": [
-        {
-          "$$mdtype": "Node",
-          "errors": [],
-          "lines": [
-            69,
-            70
-          ],
-          "inline": false,
-          "attributes": {},
-          "children": [
-            {
-              "$$mdtype": "Node",
-              "errors": [],
-              "lines": [
-                69,
-                70
-              ],
-              "inline": false,
-              "attributes": {},
-              "children": [
-                {
-                  "$$mdtype": "Node",
-                  "errors": [],
-                  "lines": [
-                    69,
-                    70
-                  ],
-                  "inline": true,
-                  "attributes": {
-                    "content": "NO: Display if "
-                  },
-                  "children": [],
-                  "type": "text",
-                  "annotations": [],
-                  "slots": {},
-                  "location": {
-                    "start": {
-                      "line": 69
-                    },
-                    "end": {
-                      "line": 70
-                    }
-                  }
-                },
-                {
-                  "$$mdtype": "Node",
-                  "errors": [],
-                  "lines": [
-                    69,
-                    70
-                  ],
-                  "inline": true,
-                  "attributes": {
-                    "content": "and($always_true, $always_false)"
-                  },
-                  "children": [],
-                  "type": "code",
-                  "annotations": [],
-                  "slots": {},
-                  "location": {
-                    "start": {
-                      "line": 69
-                    },
-                    "end": {
-                      "line": 70
-                    }
-                  }
-                },
-                {
-                  "$$mdtype": "Node",
-                  "errors": [],
-                  "lines": [
-                    69,
-                    70
-                  ],
-                  "inline": true,
-                  "attributes": {
-                    "content": "."
-                  },
-                  "children": [],
-                  "type": "text",
-                  "annotations": [],
-                  "slots": {},
-                  "location": {
-                    "start": {
-                      "line": 69
-                    },
-                    "end": {
-                      "line": 70
-                    }
-                  }
-                }
-              ],
-              "type": "inline",
-              "annotations": [],
-              "slots": {},
-              "location": {
-                "start": {
-                  "line": 69
-                },
-                "end": {
-                  "line": 70
-                }
-              }
-            }
-          ],
-          "type": "paragraph",
-          "annotations": [],
-          "slots": {},
-          "location": {
-            "start": {
-              "line": 69
-            },
-            "end": {
-              "line": 70
-            }
-          }
-        }
-      ],
-      "type": "tag",
-      "tag": "if",
-      "annotations": [
-        {
-          "type": "attribute",
-          "name": "primary",
-          "value": {
-            "$$mdtype": "Function",
-            "name": "and",
-            "parameters": {
-              "0": {
-                "$$mdtype": "Variable",
-                "path": [
-                  "always_true"
-                ]
-              },
-              "1": {
-                "$$mdtype": "Variable",
-                "path": [
-                  "always_false"
-                ]
-              }
-            }
-          }
-        }
-      ],
-      "slots": {},
-      "location": {
-        "start": {
-          "line": 68
-        },
-        "end": {
-          "line": 69
-        }
-      }
-    },
-    {
-      "$$mdtype": "Node",
-      "errors": [],
-      "lines": [
-        72,
-        73,
-        74,
-        75
-      ],
-      "inline": false,
-      "attributes": {
-        "primary": {
-          "$$mdtype": "Function",
-          "name": "and",
+          "name": "or",
           "parameters": {
             "0": {
               "$$mdtype": "Function",
@@ -3497,6 +2561,488 @@
           "$$mdtype": "Node",
           "errors": [],
           "lines": [
+            63,
+            64
+          ],
+          "inline": false,
+          "attributes": {},
+          "children": [
+            {
+              "$$mdtype": "Node",
+              "errors": [],
+              "lines": [
+                63,
+                64
+              ],
+              "inline": false,
+              "attributes": {},
+              "children": [
+                {
+                  "$$mdtype": "Node",
+                  "errors": [],
+                  "lines": [
+                    63,
+                    64
+                  ],
+                  "inline": true,
+                  "attributes": {
+                    "content": "YES: Display if "
+                  },
+                  "children": [],
+                  "type": "text",
+                  "annotations": [],
+                  "slots": {},
+                  "location": {
+                    "start": {
+                      "line": 63
+                    },
+                    "end": {
+                      "line": 64
+                    }
+                  }
+                },
+                {
+                  "$$mdtype": "Node",
+                  "errors": [],
+                  "lines": [
+                    63,
+                    64
+                  ],
+                  "inline": true,
+                  "attributes": {
+                    "content": "or(equals($test_string, \"Hello\"), equals($test_string, \"Datadog\"))"
+                  },
+                  "children": [],
+                  "type": "code",
+                  "annotations": [],
+                  "slots": {},
+                  "location": {
+                    "start": {
+                      "line": 63
+                    },
+                    "end": {
+                      "line": 64
+                    }
+                  }
+                },
+                {
+                  "$$mdtype": "Node",
+                  "errors": [],
+                  "lines": [
+                    63,
+                    64
+                  ],
+                  "inline": true,
+                  "attributes": {
+                    "content": "."
+                  },
+                  "children": [],
+                  "type": "text",
+                  "annotations": [],
+                  "slots": {},
+                  "location": {
+                    "start": {
+                      "line": 63
+                    },
+                    "end": {
+                      "line": 64
+                    }
+                  }
+                }
+              ],
+              "type": "inline",
+              "annotations": [],
+              "slots": {},
+              "location": {
+                "start": {
+                  "line": 63
+                },
+                "end": {
+                  "line": 64
+                }
+              }
+            }
+          ],
+          "type": "paragraph",
+          "annotations": [],
+          "slots": {},
+          "location": {
+            "start": {
+              "line": 63
+            },
+            "end": {
+              "line": 64
+            }
+          }
+        }
+      ],
+      "type": "tag",
+      "tag": "if",
+      "annotations": [
+        {
+          "type": "attribute",
+          "name": "primary",
+          "value": {
+            "$$mdtype": "Function",
+            "name": "or",
+            "parameters": {
+              "0": {
+                "$$mdtype": "Function",
+                "name": "equals",
+                "parameters": {
+                  "0": {
+                    "$$mdtype": "Variable",
+                    "path": [
+                      "test_string"
+                    ]
+                  },
+                  "1": "Hello"
+                }
+              },
+              "1": {
+                "$$mdtype": "Function",
+                "name": "equals",
+                "parameters": {
+                  "0": {
+                    "$$mdtype": "Variable",
+                    "path": [
+                      "test_string"
+                    ]
+                  },
+                  "1": "Datadog"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "slots": {},
+      "location": {
+        "start": {
+          "line": 62
+        },
+        "end": {
+          "line": 63
+        }
+      }
+    },
+    {
+      "$$mdtype": "Node",
+      "errors": [],
+      "lines": [
+        66,
+        67,
+        68,
+        69
+      ],
+      "inline": false,
+      "attributes": {
+        "primary": {
+          "$$mdtype": "Function",
+          "name": "or",
+          "parameters": {
+            "0": {
+              "$$mdtype": "Variable",
+              "path": [
+                "missingVarOne"
+              ]
+            },
+            "1": {
+              "$$mdtype": "Variable",
+              "path": [
+                "missingVarTwo"
+              ]
+            }
+          }
+        }
+      },
+      "children": [
+        {
+          "$$mdtype": "Node",
+          "errors": [],
+          "lines": [
+            67,
+            68
+          ],
+          "inline": false,
+          "attributes": {},
+          "children": [
+            {
+              "$$mdtype": "Node",
+              "errors": [],
+              "lines": [
+                67,
+                68
+              ],
+              "inline": false,
+              "attributes": {},
+              "children": [
+                {
+                  "$$mdtype": "Node",
+                  "errors": [],
+                  "lines": [
+                    67,
+                    68
+                  ],
+                  "inline": true,
+                  "attributes": {
+                    "content": "NO: Display if "
+                  },
+                  "children": [],
+                  "type": "text",
+                  "annotations": [],
+                  "slots": {},
+                  "location": {
+                    "start": {
+                      "line": 67
+                    },
+                    "end": {
+                      "line": 68
+                    }
+                  }
+                },
+                {
+                  "$$mdtype": "Node",
+                  "errors": [],
+                  "lines": [
+                    67,
+                    68
+                  ],
+                  "inline": true,
+                  "attributes": {
+                    "content": "or($missingVarOne, $missingVarTwo)"
+                  },
+                  "children": [],
+                  "type": "code",
+                  "annotations": [],
+                  "slots": {},
+                  "location": {
+                    "start": {
+                      "line": 67
+                    },
+                    "end": {
+                      "line": 68
+                    }
+                  }
+                },
+                {
+                  "$$mdtype": "Node",
+                  "errors": [],
+                  "lines": [
+                    67,
+                    68
+                  ],
+                  "inline": true,
+                  "attributes": {
+                    "content": "."
+                  },
+                  "children": [],
+                  "type": "text",
+                  "annotations": [],
+                  "slots": {},
+                  "location": {
+                    "start": {
+                      "line": 67
+                    },
+                    "end": {
+                      "line": 68
+                    }
+                  }
+                }
+              ],
+              "type": "inline",
+              "annotations": [],
+              "slots": {},
+              "location": {
+                "start": {
+                  "line": 67
+                },
+                "end": {
+                  "line": 68
+                }
+              }
+            }
+          ],
+          "type": "paragraph",
+          "annotations": [],
+          "slots": {},
+          "location": {
+            "start": {
+              "line": 67
+            },
+            "end": {
+              "line": 68
+            }
+          }
+        }
+      ],
+      "type": "tag",
+      "tag": "if",
+      "annotations": [
+        {
+          "type": "attribute",
+          "name": "primary",
+          "value": {
+            "$$mdtype": "Function",
+            "name": "or",
+            "parameters": {
+              "0": {
+                "$$mdtype": "Variable",
+                "path": [
+                  "missingVarOne"
+                ]
+              },
+              "1": {
+                "$$mdtype": "Variable",
+                "path": [
+                  "missingVarTwo"
+                ]
+              }
+            }
+          }
+        }
+      ],
+      "slots": {},
+      "location": {
+        "start": {
+          "line": 66
+        },
+        "end": {
+          "line": 67
+        }
+      }
+    },
+    {
+      "$$mdtype": "Node",
+      "errors": [],
+      "lines": [
+        70,
+        71
+      ],
+      "inline": false,
+      "attributes": {
+        "level": 2
+      },
+      "children": [
+        {
+          "$$mdtype": "Node",
+          "errors": [],
+          "lines": [
+            70,
+            71
+          ],
+          "inline": false,
+          "attributes": {},
+          "children": [
+            {
+              "$$mdtype": "Node",
+              "errors": [],
+              "lines": [
+                70,
+                71
+              ],
+              "inline": true,
+              "attributes": {
+                "content": "and"
+              },
+              "children": [],
+              "type": "code",
+              "annotations": [],
+              "slots": {},
+              "location": {
+                "start": {
+                  "line": 70
+                },
+                "end": {
+                  "line": 71
+                }
+              }
+            },
+            {
+              "$$mdtype": "Node",
+              "errors": [],
+              "lines": [
+                70,
+                71
+              ],
+              "inline": true,
+              "attributes": {
+                "content": " test"
+              },
+              "children": [],
+              "type": "text",
+              "annotations": [],
+              "slots": {},
+              "location": {
+                "start": {
+                  "line": 70
+                },
+                "end": {
+                  "line": 71
+                }
+              }
+            }
+          ],
+          "type": "inline",
+          "annotations": [],
+          "slots": {},
+          "location": {
+            "start": {
+              "line": 70
+            },
+            "end": {
+              "line": 71
+            }
+          }
+        }
+      ],
+      "type": "heading",
+      "annotations": [],
+      "slots": {},
+      "location": {
+        "start": {
+          "line": 70
+        },
+        "end": {
+          "line": 71
+        }
+      }
+    },
+    {
+      "$$mdtype": "Node",
+      "errors": [],
+      "lines": [
+        72,
+        73,
+        74,
+        75
+      ],
+      "inline": false,
+      "attributes": {
+        "primary": {
+          "$$mdtype": "Function",
+          "name": "and",
+          "parameters": {
+            "0": {
+              "$$mdtype": "Variable",
+              "path": [
+                "always_true"
+              ]
+            },
+            "1": {
+              "$$mdtype": "Variable",
+              "path": [
+                "always_true"
+              ]
+            }
+          }
+        }
+      },
+      "children": [
+        {
+          "$$mdtype": "Node",
+          "errors": [],
+          "lines": [
             73,
             74
           ],
@@ -3522,7 +3068,7 @@
                   ],
                   "inline": true,
                   "attributes": {
-                    "content": "NO: Display if "
+                    "content": "YES: Display if "
                   },
                   "children": [],
                   "type": "text",
@@ -3546,7 +3092,7 @@
                   ],
                   "inline": true,
                   "attributes": {
-                    "content": "and(equals($test_string, \"Hello\"), equals($test_string, \"Datadog\"))"
+                    "content": "and($always_true, $always_true)"
                   },
                   "children": [],
                   "type": "code",
@@ -3623,6 +3169,392 @@
             "name": "and",
             "parameters": {
               "0": {
+                "$$mdtype": "Variable",
+                "path": [
+                  "always_true"
+                ]
+              },
+              "1": {
+                "$$mdtype": "Variable",
+                "path": [
+                  "always_true"
+                ]
+              }
+            }
+          }
+        }
+      ],
+      "slots": {},
+      "location": {
+        "start": {
+          "line": 72
+        },
+        "end": {
+          "line": 73
+        }
+      }
+    },
+    {
+      "$$mdtype": "Node",
+      "errors": [],
+      "lines": [
+        76,
+        77,
+        78,
+        79
+      ],
+      "inline": false,
+      "attributes": {
+        "primary": {
+          "$$mdtype": "Function",
+          "name": "and",
+          "parameters": {
+            "0": {
+              "$$mdtype": "Variable",
+              "path": [
+                "always_true"
+              ]
+            },
+            "1": {
+              "$$mdtype": "Variable",
+              "path": [
+                "always_false"
+              ]
+            }
+          }
+        }
+      },
+      "children": [
+        {
+          "$$mdtype": "Node",
+          "errors": [],
+          "lines": [
+            77,
+            78
+          ],
+          "inline": false,
+          "attributes": {},
+          "children": [
+            {
+              "$$mdtype": "Node",
+              "errors": [],
+              "lines": [
+                77,
+                78
+              ],
+              "inline": false,
+              "attributes": {},
+              "children": [
+                {
+                  "$$mdtype": "Node",
+                  "errors": [],
+                  "lines": [
+                    77,
+                    78
+                  ],
+                  "inline": true,
+                  "attributes": {
+                    "content": "NO: Display if "
+                  },
+                  "children": [],
+                  "type": "text",
+                  "annotations": [],
+                  "slots": {},
+                  "location": {
+                    "start": {
+                      "line": 77
+                    },
+                    "end": {
+                      "line": 78
+                    }
+                  }
+                },
+                {
+                  "$$mdtype": "Node",
+                  "errors": [],
+                  "lines": [
+                    77,
+                    78
+                  ],
+                  "inline": true,
+                  "attributes": {
+                    "content": "and($always_true, $always_false)"
+                  },
+                  "children": [],
+                  "type": "code",
+                  "annotations": [],
+                  "slots": {},
+                  "location": {
+                    "start": {
+                      "line": 77
+                    },
+                    "end": {
+                      "line": 78
+                    }
+                  }
+                },
+                {
+                  "$$mdtype": "Node",
+                  "errors": [],
+                  "lines": [
+                    77,
+                    78
+                  ],
+                  "inline": true,
+                  "attributes": {
+                    "content": "."
+                  },
+                  "children": [],
+                  "type": "text",
+                  "annotations": [],
+                  "slots": {},
+                  "location": {
+                    "start": {
+                      "line": 77
+                    },
+                    "end": {
+                      "line": 78
+                    }
+                  }
+                }
+              ],
+              "type": "inline",
+              "annotations": [],
+              "slots": {},
+              "location": {
+                "start": {
+                  "line": 77
+                },
+                "end": {
+                  "line": 78
+                }
+              }
+            }
+          ],
+          "type": "paragraph",
+          "annotations": [],
+          "slots": {},
+          "location": {
+            "start": {
+              "line": 77
+            },
+            "end": {
+              "line": 78
+            }
+          }
+        }
+      ],
+      "type": "tag",
+      "tag": "if",
+      "annotations": [
+        {
+          "type": "attribute",
+          "name": "primary",
+          "value": {
+            "$$mdtype": "Function",
+            "name": "and",
+            "parameters": {
+              "0": {
+                "$$mdtype": "Variable",
+                "path": [
+                  "always_true"
+                ]
+              },
+              "1": {
+                "$$mdtype": "Variable",
+                "path": [
+                  "always_false"
+                ]
+              }
+            }
+          }
+        }
+      ],
+      "slots": {},
+      "location": {
+        "start": {
+          "line": 76
+        },
+        "end": {
+          "line": 77
+        }
+      }
+    },
+    {
+      "$$mdtype": "Node",
+      "errors": [],
+      "lines": [
+        80,
+        81,
+        82,
+        83
+      ],
+      "inline": false,
+      "attributes": {
+        "primary": {
+          "$$mdtype": "Function",
+          "name": "and",
+          "parameters": {
+            "0": {
+              "$$mdtype": "Function",
+              "name": "equals",
+              "parameters": {
+                "0": {
+                  "$$mdtype": "Variable",
+                  "path": [
+                    "test_string"
+                  ]
+                },
+                "1": "Hello"
+              }
+            },
+            "1": {
+              "$$mdtype": "Function",
+              "name": "equals",
+              "parameters": {
+                "0": {
+                  "$$mdtype": "Variable",
+                  "path": [
+                    "test_string"
+                  ]
+                },
+                "1": "Datadog"
+              }
+            }
+          }
+        }
+      },
+      "children": [
+        {
+          "$$mdtype": "Node",
+          "errors": [],
+          "lines": [
+            81,
+            82
+          ],
+          "inline": false,
+          "attributes": {},
+          "children": [
+            {
+              "$$mdtype": "Node",
+              "errors": [],
+              "lines": [
+                81,
+                82
+              ],
+              "inline": false,
+              "attributes": {},
+              "children": [
+                {
+                  "$$mdtype": "Node",
+                  "errors": [],
+                  "lines": [
+                    81,
+                    82
+                  ],
+                  "inline": true,
+                  "attributes": {
+                    "content": "NO: Display if "
+                  },
+                  "children": [],
+                  "type": "text",
+                  "annotations": [],
+                  "slots": {},
+                  "location": {
+                    "start": {
+                      "line": 81
+                    },
+                    "end": {
+                      "line": 82
+                    }
+                  }
+                },
+                {
+                  "$$mdtype": "Node",
+                  "errors": [],
+                  "lines": [
+                    81,
+                    82
+                  ],
+                  "inline": true,
+                  "attributes": {
+                    "content": "and(equals($test_string, \"Hello\"), equals($test_string, \"Datadog\"))"
+                  },
+                  "children": [],
+                  "type": "code",
+                  "annotations": [],
+                  "slots": {},
+                  "location": {
+                    "start": {
+                      "line": 81
+                    },
+                    "end": {
+                      "line": 82
+                    }
+                  }
+                },
+                {
+                  "$$mdtype": "Node",
+                  "errors": [],
+                  "lines": [
+                    81,
+                    82
+                  ],
+                  "inline": true,
+                  "attributes": {
+                    "content": "."
+                  },
+                  "children": [],
+                  "type": "text",
+                  "annotations": [],
+                  "slots": {},
+                  "location": {
+                    "start": {
+                      "line": 81
+                    },
+                    "end": {
+                      "line": 82
+                    }
+                  }
+                }
+              ],
+              "type": "inline",
+              "annotations": [],
+              "slots": {},
+              "location": {
+                "start": {
+                  "line": 81
+                },
+                "end": {
+                  "line": 82
+                }
+              }
+            }
+          ],
+          "type": "paragraph",
+          "annotations": [],
+          "slots": {},
+          "location": {
+            "start": {
+              "line": 81
+            },
+            "end": {
+              "line": 82
+            }
+          }
+        }
+      ],
+      "type": "tag",
+      "tag": "if",
+      "annotations": [
+        {
+          "type": "attribute",
+          "name": "primary",
+          "value": {
+            "$$mdtype": "Function",
+            "name": "and",
+            "parameters": {
+              "0": {
                 "$$mdtype": "Function",
                 "name": "equals",
                 "parameters": {
@@ -3655,10 +3587,10 @@
       "slots": {},
       "location": {
         "start": {
-          "line": 72
+          "line": 80
         },
         "end": {
-          "line": 73
+          "line": 81
         }
       }
     },
@@ -3666,8 +3598,8 @@
       "$$mdtype": "Node",
       "errors": [],
       "lines": [
-        76,
-        77
+        84,
+        85
       ],
       "inline": false,
       "attributes": {
@@ -3678,8 +3610,8 @@
           "$$mdtype": "Node",
           "errors": [],
           "lines": [
-            76,
-            77
+            84,
+            85
           ],
           "inline": false,
           "attributes": {},
@@ -3688,8 +3620,8 @@
               "$$mdtype": "Node",
               "errors": [],
               "lines": [
-                76,
-                77
+                84,
+                85
               ],
               "inline": true,
               "attributes": {
@@ -3701,10 +3633,10 @@
               "slots": {},
               "location": {
                 "start": {
-                  "line": 76
+                  "line": 84
                 },
                 "end": {
-                  "line": 77
+                  "line": 85
                 }
               }
             },
@@ -3712,8 +3644,8 @@
               "$$mdtype": "Node",
               "errors": [],
               "lines": [
-                76,
-                77
+                84,
+                85
               ],
               "inline": true,
               "attributes": {
@@ -3725,10 +3657,10 @@
               "slots": {},
               "location": {
                 "start": {
-                  "line": 76
+                  "line": 84
                 },
                 "end": {
-                  "line": 77
+                  "line": 85
                 }
               }
             }
@@ -3738,10 +3670,10 @@
           "slots": {},
           "location": {
             "start": {
-              "line": 76
+              "line": 84
             },
             "end": {
-              "line": 77
+              "line": 85
             }
           }
         }
@@ -3751,372 +3683,10 @@
       "slots": {},
       "location": {
         "start": {
-          "line": 76
+          "line": 84
         },
         "end": {
-          "line": 77
-        }
-      }
-    },
-    {
-      "$$mdtype": "Node",
-      "errors": [],
-      "lines": [
-        78,
-        79,
-        80,
-        81
-      ],
-      "inline": false,
-      "attributes": {
-        "primary": {
-          "$$mdtype": "Function",
-          "name": "not",
-          "parameters": {
-            "0": {
-              "$$mdtype": "Variable",
-              "path": [
-                "always_false"
-              ]
-            }
-          }
-        }
-      },
-      "children": [
-        {
-          "$$mdtype": "Node",
-          "errors": [],
-          "lines": [
-            79,
-            80
-          ],
-          "inline": false,
-          "attributes": {},
-          "children": [
-            {
-              "$$mdtype": "Node",
-              "errors": [],
-              "lines": [
-                79,
-                80
-              ],
-              "inline": false,
-              "attributes": {},
-              "children": [
-                {
-                  "$$mdtype": "Node",
-                  "errors": [],
-                  "lines": [
-                    79,
-                    80
-                  ],
-                  "inline": true,
-                  "attributes": {
-                    "content": "YES: Display if "
-                  },
-                  "children": [],
-                  "type": "text",
-                  "annotations": [],
-                  "slots": {},
-                  "location": {
-                    "start": {
-                      "line": 79
-                    },
-                    "end": {
-                      "line": 80
-                    }
-                  }
-                },
-                {
-                  "$$mdtype": "Node",
-                  "errors": [],
-                  "lines": [
-                    79,
-                    80
-                  ],
-                  "inline": true,
-                  "attributes": {
-                    "content": "not($always_false)"
-                  },
-                  "children": [],
-                  "type": "code",
-                  "annotations": [],
-                  "slots": {},
-                  "location": {
-                    "start": {
-                      "line": 79
-                    },
-                    "end": {
-                      "line": 80
-                    }
-                  }
-                },
-                {
-                  "$$mdtype": "Node",
-                  "errors": [],
-                  "lines": [
-                    79,
-                    80
-                  ],
-                  "inline": true,
-                  "attributes": {
-                    "content": "."
-                  },
-                  "children": [],
-                  "type": "text",
-                  "annotations": [],
-                  "slots": {},
-                  "location": {
-                    "start": {
-                      "line": 79
-                    },
-                    "end": {
-                      "line": 80
-                    }
-                  }
-                }
-              ],
-              "type": "inline",
-              "annotations": [],
-              "slots": {},
-              "location": {
-                "start": {
-                  "line": 79
-                },
-                "end": {
-                  "line": 80
-                }
-              }
-            }
-          ],
-          "type": "paragraph",
-          "annotations": [],
-          "slots": {},
-          "location": {
-            "start": {
-              "line": 79
-            },
-            "end": {
-              "line": 80
-            }
-          }
-        }
-      ],
-      "type": "tag",
-      "tag": "if",
-      "annotations": [
-        {
-          "type": "attribute",
-          "name": "primary",
-          "value": {
-            "$$mdtype": "Function",
-            "name": "not",
-            "parameters": {
-              "0": {
-                "$$mdtype": "Variable",
-                "path": [
-                  "always_false"
-                ]
-              }
-            }
-          }
-        }
-      ],
-      "slots": {},
-      "location": {
-        "start": {
-          "line": 78
-        },
-        "end": {
-          "line": 79
-        }
-      }
-    },
-    {
-      "$$mdtype": "Node",
-      "errors": [],
-      "lines": [
-        82,
-        83,
-        84,
-        85
-      ],
-      "inline": false,
-      "attributes": {
-        "primary": {
-          "$$mdtype": "Function",
-          "name": "not",
-          "parameters": {
-            "0": {
-              "$$mdtype": "Function",
-              "name": "equals",
-              "parameters": {
-                "0": {
-                  "$$mdtype": "Variable",
-                  "path": [
-                    "test_string"
-                  ]
-                },
-                "1": "Hello"
-              }
-            }
-          }
-        }
-      },
-      "children": [
-        {
-          "$$mdtype": "Node",
-          "errors": [],
-          "lines": [
-            83,
-            84
-          ],
-          "inline": false,
-          "attributes": {},
-          "children": [
-            {
-              "$$mdtype": "Node",
-              "errors": [],
-              "lines": [
-                83,
-                84
-              ],
-              "inline": false,
-              "attributes": {},
-              "children": [
-                {
-                  "$$mdtype": "Node",
-                  "errors": [],
-                  "lines": [
-                    83,
-                    84
-                  ],
-                  "inline": true,
-                  "attributes": {
-                    "content": "YES: Display if "
-                  },
-                  "children": [],
-                  "type": "text",
-                  "annotations": [],
-                  "slots": {},
-                  "location": {
-                    "start": {
-                      "line": 83
-                    },
-                    "end": {
-                      "line": 84
-                    }
-                  }
-                },
-                {
-                  "$$mdtype": "Node",
-                  "errors": [],
-                  "lines": [
-                    83,
-                    84
-                  ],
-                  "inline": true,
-                  "attributes": {
-                    "content": "not(equals($test_string, \"Hello\"))"
-                  },
-                  "children": [],
-                  "type": "code",
-                  "annotations": [],
-                  "slots": {},
-                  "location": {
-                    "start": {
-                      "line": 83
-                    },
-                    "end": {
-                      "line": 84
-                    }
-                  }
-                },
-                {
-                  "$$mdtype": "Node",
-                  "errors": [],
-                  "lines": [
-                    83,
-                    84
-                  ],
-                  "inline": true,
-                  "attributes": {
-                    "content": "."
-                  },
-                  "children": [],
-                  "type": "text",
-                  "annotations": [],
-                  "slots": {},
-                  "location": {
-                    "start": {
-                      "line": 83
-                    },
-                    "end": {
-                      "line": 84
-                    }
-                  }
-                }
-              ],
-              "type": "inline",
-              "annotations": [],
-              "slots": {},
-              "location": {
-                "start": {
-                  "line": 83
-                },
-                "end": {
-                  "line": 84
-                }
-              }
-            }
-          ],
-          "type": "paragraph",
-          "annotations": [],
-          "slots": {},
-          "location": {
-            "start": {
-              "line": 83
-            },
-            "end": {
-              "line": 84
-            }
-          }
-        }
-      ],
-      "type": "tag",
-      "tag": "if",
-      "annotations": [
-        {
-          "type": "attribute",
-          "name": "primary",
-          "value": {
-            "$$mdtype": "Function",
-            "name": "not",
-            "parameters": {
-              "0": {
-                "$$mdtype": "Function",
-                "name": "equals",
-                "parameters": {
-                  "0": {
-                    "$$mdtype": "Variable",
-                    "path": [
-                      "test_string"
-                    ]
-                  },
-                  "1": "Hello"
-                }
-              }
-            }
-          }
-        }
-      ],
-      "slots": {},
-      "location": {
-        "start": {
-          "line": 82
-        },
-        "end": {
-          "line": 83
+          "line": 85
         }
       }
     },
@@ -4138,7 +3708,7 @@
             "0": {
               "$$mdtype": "Variable",
               "path": [
-                "always_true"
+                "always_false"
               ]
             }
           }
@@ -4174,7 +3744,7 @@
                   ],
                   "inline": true,
                   "attributes": {
-                    "content": "NO: Display if "
+                    "content": "YES: Display if "
                   },
                   "children": [],
                   "type": "text",
@@ -4198,7 +3768,7 @@
                   ],
                   "inline": true,
                   "attributes": {
-                    "content": "not($always_true)"
+                    "content": "not($always_false)"
                   },
                   "children": [],
                   "type": "code",
@@ -4277,7 +3847,7 @@
               "0": {
                 "$$mdtype": "Variable",
                 "path": [
-                  "always_true"
+                  "always_false"
                 ]
               }
             }
@@ -4319,7 +3889,7 @@
                     "test_string"
                   ]
                 },
-                "1": "Datadog"
+                "1": "Hello"
               }
             }
           }
@@ -4355,7 +3925,7 @@
                   ],
                   "inline": true,
                   "attributes": {
-                    "content": "NO: Display if "
+                    "content": "YES: Display if "
                   },
                   "children": [],
                   "type": "text",
@@ -4379,7 +3949,7 @@
                   ],
                   "inline": true,
                   "attributes": {
-                    "content": "not(equals($test_string, \"Datadog\"))"
+                    "content": "not(equals($test_string, \"Hello\"))"
                   },
                   "children": [],
                   "type": "code",
@@ -4465,7 +4035,7 @@
                       "test_string"
                     ]
                   },
-                  "1": "Datadog"
+                  "1": "Hello"
                 }
               }
             }
@@ -4487,19 +4057,32 @@
       "errors": [],
       "lines": [
         94,
-        95
+        95,
+        96,
+        97
       ],
       "inline": false,
       "attributes": {
-        "level": 2
+        "primary": {
+          "$$mdtype": "Function",
+          "name": "not",
+          "parameters": {
+            "0": {
+              "$$mdtype": "Variable",
+              "path": [
+                "always_true"
+              ]
+            }
+          }
+        }
       },
       "children": [
         {
           "$$mdtype": "Node",
           "errors": [],
           "lines": [
-            94,
-            95
+            95,
+            96
           ],
           "inline": false,
           "attributes": {},
@@ -4508,42 +4091,131 @@
               "$$mdtype": "Node",
               "errors": [],
               "lines": [
-                94,
-                95
+                95,
+                96
               ],
-              "inline": true,
-              "attributes": {
-                "content": "Nested functions"
-              },
-              "children": [],
-              "type": "text",
+              "inline": false,
+              "attributes": {},
+              "children": [
+                {
+                  "$$mdtype": "Node",
+                  "errors": [],
+                  "lines": [
+                    95,
+                    96
+                  ],
+                  "inline": true,
+                  "attributes": {
+                    "content": "NO: Display if "
+                  },
+                  "children": [],
+                  "type": "text",
+                  "annotations": [],
+                  "slots": {},
+                  "location": {
+                    "start": {
+                      "line": 95
+                    },
+                    "end": {
+                      "line": 96
+                    }
+                  }
+                },
+                {
+                  "$$mdtype": "Node",
+                  "errors": [],
+                  "lines": [
+                    95,
+                    96
+                  ],
+                  "inline": true,
+                  "attributes": {
+                    "content": "not($always_true)"
+                  },
+                  "children": [],
+                  "type": "code",
+                  "annotations": [],
+                  "slots": {},
+                  "location": {
+                    "start": {
+                      "line": 95
+                    },
+                    "end": {
+                      "line": 96
+                    }
+                  }
+                },
+                {
+                  "$$mdtype": "Node",
+                  "errors": [],
+                  "lines": [
+                    95,
+                    96
+                  ],
+                  "inline": true,
+                  "attributes": {
+                    "content": "."
+                  },
+                  "children": [],
+                  "type": "text",
+                  "annotations": [],
+                  "slots": {},
+                  "location": {
+                    "start": {
+                      "line": 95
+                    },
+                    "end": {
+                      "line": 96
+                    }
+                  }
+                }
+              ],
+              "type": "inline",
               "annotations": [],
               "slots": {},
               "location": {
                 "start": {
-                  "line": 94
+                  "line": 95
                 },
                 "end": {
-                  "line": 95
+                  "line": 96
                 }
               }
             }
           ],
-          "type": "inline",
+          "type": "paragraph",
           "annotations": [],
           "slots": {},
           "location": {
             "start": {
-              "line": 94
+              "line": 95
             },
             "end": {
-              "line": 95
+              "line": 96
             }
           }
         }
       ],
-      "type": "heading",
-      "annotations": [],
+      "type": "tag",
+      "tag": "if",
+      "annotations": [
+        {
+          "type": "attribute",
+          "name": "primary",
+          "value": {
+            "$$mdtype": "Function",
+            "name": "not",
+            "parameters": {
+              "0": {
+                "$$mdtype": "Variable",
+                "path": [
+                  "always_true"
+                ]
+              }
+            }
+          }
+        }
+      ],
       "slots": {},
       "location": {
         "start": {
@@ -4558,10 +4230,270 @@
       "$$mdtype": "Node",
       "errors": [],
       "lines": [
-        96,
-        97,
         98,
-        99
+        99,
+        100,
+        101
+      ],
+      "inline": false,
+      "attributes": {
+        "primary": {
+          "$$mdtype": "Function",
+          "name": "not",
+          "parameters": {
+            "0": {
+              "$$mdtype": "Function",
+              "name": "equals",
+              "parameters": {
+                "0": {
+                  "$$mdtype": "Variable",
+                  "path": [
+                    "test_string"
+                  ]
+                },
+                "1": "Datadog"
+              }
+            }
+          }
+        }
+      },
+      "children": [
+        {
+          "$$mdtype": "Node",
+          "errors": [],
+          "lines": [
+            99,
+            100
+          ],
+          "inline": false,
+          "attributes": {},
+          "children": [
+            {
+              "$$mdtype": "Node",
+              "errors": [],
+              "lines": [
+                99,
+                100
+              ],
+              "inline": false,
+              "attributes": {},
+              "children": [
+                {
+                  "$$mdtype": "Node",
+                  "errors": [],
+                  "lines": [
+                    99,
+                    100
+                  ],
+                  "inline": true,
+                  "attributes": {
+                    "content": "NO: Display if "
+                  },
+                  "children": [],
+                  "type": "text",
+                  "annotations": [],
+                  "slots": {},
+                  "location": {
+                    "start": {
+                      "line": 99
+                    },
+                    "end": {
+                      "line": 100
+                    }
+                  }
+                },
+                {
+                  "$$mdtype": "Node",
+                  "errors": [],
+                  "lines": [
+                    99,
+                    100
+                  ],
+                  "inline": true,
+                  "attributes": {
+                    "content": "not(equals($test_string, \"Datadog\"))"
+                  },
+                  "children": [],
+                  "type": "code",
+                  "annotations": [],
+                  "slots": {},
+                  "location": {
+                    "start": {
+                      "line": 99
+                    },
+                    "end": {
+                      "line": 100
+                    }
+                  }
+                },
+                {
+                  "$$mdtype": "Node",
+                  "errors": [],
+                  "lines": [
+                    99,
+                    100
+                  ],
+                  "inline": true,
+                  "attributes": {
+                    "content": "."
+                  },
+                  "children": [],
+                  "type": "text",
+                  "annotations": [],
+                  "slots": {},
+                  "location": {
+                    "start": {
+                      "line": 99
+                    },
+                    "end": {
+                      "line": 100
+                    }
+                  }
+                }
+              ],
+              "type": "inline",
+              "annotations": [],
+              "slots": {},
+              "location": {
+                "start": {
+                  "line": 99
+                },
+                "end": {
+                  "line": 100
+                }
+              }
+            }
+          ],
+          "type": "paragraph",
+          "annotations": [],
+          "slots": {},
+          "location": {
+            "start": {
+              "line": 99
+            },
+            "end": {
+              "line": 100
+            }
+          }
+        }
+      ],
+      "type": "tag",
+      "tag": "if",
+      "annotations": [
+        {
+          "type": "attribute",
+          "name": "primary",
+          "value": {
+            "$$mdtype": "Function",
+            "name": "not",
+            "parameters": {
+              "0": {
+                "$$mdtype": "Function",
+                "name": "equals",
+                "parameters": {
+                  "0": {
+                    "$$mdtype": "Variable",
+                    "path": [
+                      "test_string"
+                    ]
+                  },
+                  "1": "Datadog"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "slots": {},
+      "location": {
+        "start": {
+          "line": 98
+        },
+        "end": {
+          "line": 99
+        }
+      }
+    },
+    {
+      "$$mdtype": "Node",
+      "errors": [],
+      "lines": [
+        102,
+        103
+      ],
+      "inline": false,
+      "attributes": {
+        "level": 2
+      },
+      "children": [
+        {
+          "$$mdtype": "Node",
+          "errors": [],
+          "lines": [
+            102,
+            103
+          ],
+          "inline": false,
+          "attributes": {},
+          "children": [
+            {
+              "$$mdtype": "Node",
+              "errors": [],
+              "lines": [
+                102,
+                103
+              ],
+              "inline": true,
+              "attributes": {
+                "content": "Nested functions"
+              },
+              "children": [],
+              "type": "text",
+              "annotations": [],
+              "slots": {},
+              "location": {
+                "start": {
+                  "line": 102
+                },
+                "end": {
+                  "line": 103
+                }
+              }
+            }
+          ],
+          "type": "inline",
+          "annotations": [],
+          "slots": {},
+          "location": {
+            "start": {
+              "line": 102
+            },
+            "end": {
+              "line": 103
+            }
+          }
+        }
+      ],
+      "type": "heading",
+      "annotations": [],
+      "slots": {},
+      "location": {
+        "start": {
+          "line": 102
+        },
+        "end": {
+          "line": 103
+        }
+      }
+    },
+    {
+      "$$mdtype": "Node",
+      "errors": [],
+      "lines": [
+        104,
+        105,
+        106,
+        107
       ],
       "inline": false,
       "attributes": {
@@ -4590,466 +4522,6 @@
                   "path": [
                     "always_true"
                   ]
-                }
-              }
-            }
-          }
-        }
-      },
-      "children": [
-        {
-          "$$mdtype": "Node",
-          "errors": [],
-          "lines": [
-            97,
-            98
-          ],
-          "inline": false,
-          "attributes": {},
-          "children": [
-            {
-              "$$mdtype": "Node",
-              "errors": [],
-              "lines": [
-                97,
-                98
-              ],
-              "inline": false,
-              "attributes": {},
-              "children": [
-                {
-                  "$$mdtype": "Node",
-                  "errors": [],
-                  "lines": [
-                    97,
-                    98
-                  ],
-                  "inline": true,
-                  "attributes": {
-                    "content": "YES: Display if "
-                  },
-                  "children": [],
-                  "type": "text",
-                  "annotations": [],
-                  "slots": {},
-                  "location": {
-                    "start": {
-                      "line": 97
-                    },
-                    "end": {
-                      "line": 98
-                    }
-                  }
-                },
-                {
-                  "$$mdtype": "Node",
-                  "errors": [],
-                  "lines": [
-                    97,
-                    98
-                  ],
-                  "inline": true,
-                  "attributes": {
-                    "content": "or(not($always_false), not($always_true))"
-                  },
-                  "children": [],
-                  "type": "code",
-                  "annotations": [],
-                  "slots": {},
-                  "location": {
-                    "start": {
-                      "line": 97
-                    },
-                    "end": {
-                      "line": 98
-                    }
-                  }
-                },
-                {
-                  "$$mdtype": "Node",
-                  "errors": [],
-                  "lines": [
-                    97,
-                    98
-                  ],
-                  "inline": true,
-                  "attributes": {
-                    "content": "."
-                  },
-                  "children": [],
-                  "type": "text",
-                  "annotations": [],
-                  "slots": {},
-                  "location": {
-                    "start": {
-                      "line": 97
-                    },
-                    "end": {
-                      "line": 98
-                    }
-                  }
-                }
-              ],
-              "type": "inline",
-              "annotations": [],
-              "slots": {},
-              "location": {
-                "start": {
-                  "line": 97
-                },
-                "end": {
-                  "line": 98
-                }
-              }
-            }
-          ],
-          "type": "paragraph",
-          "annotations": [],
-          "slots": {},
-          "location": {
-            "start": {
-              "line": 97
-            },
-            "end": {
-              "line": 98
-            }
-          }
-        }
-      ],
-      "type": "tag",
-      "tag": "if",
-      "annotations": [
-        {
-          "type": "attribute",
-          "name": "primary",
-          "value": {
-            "$$mdtype": "Function",
-            "name": "or",
-            "parameters": {
-              "0": {
-                "$$mdtype": "Function",
-                "name": "not",
-                "parameters": {
-                  "0": {
-                    "$$mdtype": "Variable",
-                    "path": [
-                      "always_false"
-                    ]
-                  }
-                }
-              },
-              "1": {
-                "$$mdtype": "Function",
-                "name": "not",
-                "parameters": {
-                  "0": {
-                    "$$mdtype": "Variable",
-                    "path": [
-                      "always_true"
-                    ]
-                  }
-                }
-              }
-            }
-          }
-        }
-      ],
-      "slots": {},
-      "location": {
-        "start": {
-          "line": 96
-        },
-        "end": {
-          "line": 97
-        }
-      }
-    },
-    {
-      "$$mdtype": "Node",
-      "errors": [],
-      "lines": [
-        100,
-        101,
-        102,
-        103
-      ],
-      "inline": false,
-      "attributes": {
-        "primary": {
-          "$$mdtype": "Function",
-          "name": "or",
-          "parameters": {
-            "0": {
-              "$$mdtype": "Function",
-              "name": "equals",
-              "parameters": {
-                "0": {
-                  "$$mdtype": "Variable",
-                  "path": [
-                    "test_string"
-                  ]
-                },
-                "1": "Datadog"
-              }
-            },
-            "1": {
-              "$$mdtype": "Function",
-              "name": "equals",
-              "parameters": {
-                "0": {
-                  "$$mdtype": "Variable",
-                  "path": [
-                    "test_string"
-                  ]
-                },
-                "1": "Hello"
-              }
-            }
-          }
-        }
-      },
-      "children": [
-        {
-          "$$mdtype": "Node",
-          "errors": [],
-          "lines": [
-            101,
-            102
-          ],
-          "inline": false,
-          "attributes": {},
-          "children": [
-            {
-              "$$mdtype": "Node",
-              "errors": [],
-              "lines": [
-                101,
-                102
-              ],
-              "inline": false,
-              "attributes": {},
-              "children": [
-                {
-                  "$$mdtype": "Node",
-                  "errors": [],
-                  "lines": [
-                    101,
-                    102
-                  ],
-                  "inline": true,
-                  "attributes": {
-                    "content": "YES: Display if "
-                  },
-                  "children": [],
-                  "type": "text",
-                  "annotations": [],
-                  "slots": {},
-                  "location": {
-                    "start": {
-                      "line": 101
-                    },
-                    "end": {
-                      "line": 102
-                    }
-                  }
-                },
-                {
-                  "$$mdtype": "Node",
-                  "errors": [],
-                  "lines": [
-                    101,
-                    102
-                  ],
-                  "inline": true,
-                  "attributes": {
-                    "content": "or(equals($test_string, \"Datadog\"), equals($test_string, \"Hello\"))"
-                  },
-                  "children": [],
-                  "type": "code",
-                  "annotations": [],
-                  "slots": {},
-                  "location": {
-                    "start": {
-                      "line": 101
-                    },
-                    "end": {
-                      "line": 102
-                    }
-                  }
-                },
-                {
-                  "$$mdtype": "Node",
-                  "errors": [],
-                  "lines": [
-                    101,
-                    102
-                  ],
-                  "inline": true,
-                  "attributes": {
-                    "content": "."
-                  },
-                  "children": [],
-                  "type": "text",
-                  "annotations": [],
-                  "slots": {},
-                  "location": {
-                    "start": {
-                      "line": 101
-                    },
-                    "end": {
-                      "line": 102
-                    }
-                  }
-                }
-              ],
-              "type": "inline",
-              "annotations": [],
-              "slots": {},
-              "location": {
-                "start": {
-                  "line": 101
-                },
-                "end": {
-                  "line": 102
-                }
-              }
-            }
-          ],
-          "type": "paragraph",
-          "annotations": [],
-          "slots": {},
-          "location": {
-            "start": {
-              "line": 101
-            },
-            "end": {
-              "line": 102
-            }
-          }
-        }
-      ],
-      "type": "tag",
-      "tag": "if",
-      "annotations": [
-        {
-          "type": "attribute",
-          "name": "primary",
-          "value": {
-            "$$mdtype": "Function",
-            "name": "or",
-            "parameters": {
-              "0": {
-                "$$mdtype": "Function",
-                "name": "equals",
-                "parameters": {
-                  "0": {
-                    "$$mdtype": "Variable",
-                    "path": [
-                      "test_string"
-                    ]
-                  },
-                  "1": "Datadog"
-                }
-              },
-              "1": {
-                "$$mdtype": "Function",
-                "name": "equals",
-                "parameters": {
-                  "0": {
-                    "$$mdtype": "Variable",
-                    "path": [
-                      "test_string"
-                    ]
-                  },
-                  "1": "Hello"
-                }
-              }
-            }
-          }
-        }
-      ],
-      "slots": {},
-      "location": {
-        "start": {
-          "line": 100
-        },
-        "end": {
-          "line": 101
-        }
-      }
-    },
-    {
-      "$$mdtype": "Node",
-      "errors": [],
-      "lines": [
-        104,
-        105,
-        106,
-        107
-      ],
-      "inline": false,
-      "attributes": {
-        "primary": {
-          "$$mdtype": "Function",
-          "name": "and",
-          "parameters": {
-            "0": {
-              "$$mdtype": "Function",
-              "name": "or",
-              "parameters": {
-                "0": {
-                  "$$mdtype": "Function",
-                  "name": "not",
-                  "parameters": {
-                    "0": {
-                      "$$mdtype": "Variable",
-                      "path": [
-                        "always_false"
-                      ]
-                    }
-                  }
-                },
-                "1": {
-                  "$$mdtype": "Function",
-                  "name": "not",
-                  "parameters": {
-                    "0": {
-                      "$$mdtype": "Variable",
-                      "path": [
-                        "always_true"
-                      ]
-                    }
-                  }
-                }
-              }
-            },
-            "1": {
-              "$$mdtype": "Function",
-              "name": "or",
-              "parameters": {
-                "0": {
-                  "$$mdtype": "Function",
-                  "name": "not",
-                  "parameters": {
-                    "0": {
-                      "$$mdtype": "Variable",
-                      "path": [
-                        "always_false"
-                      ]
-                    }
-                  }
-                },
-                "1": {
-                  "$$mdtype": "Function",
-                  "name": "not",
-                  "parameters": {
-                    "0": {
-                      "$$mdtype": "Variable",
-                      "path": [
-                        "always_true"
-                      ]
-                    }
-                  }
                 }
               }
             }
@@ -5110,7 +4582,7 @@
                   ],
                   "inline": true,
                   "attributes": {
-                    "content": "and(or(not($always_false), not($always_true)), or(not($always_false), not($always_true)))"
+                    "content": "or(not($always_false), not($always_true))"
                   },
                   "children": [],
                   "type": "code",
@@ -5184,65 +4656,29 @@
           "name": "primary",
           "value": {
             "$$mdtype": "Function",
-            "name": "and",
+            "name": "or",
             "parameters": {
               "0": {
                 "$$mdtype": "Function",
-                "name": "or",
+                "name": "not",
                 "parameters": {
                   "0": {
-                    "$$mdtype": "Function",
-                    "name": "not",
-                    "parameters": {
-                      "0": {
-                        "$$mdtype": "Variable",
-                        "path": [
-                          "always_false"
-                        ]
-                      }
-                    }
-                  },
-                  "1": {
-                    "$$mdtype": "Function",
-                    "name": "not",
-                    "parameters": {
-                      "0": {
-                        "$$mdtype": "Variable",
-                        "path": [
-                          "always_true"
-                        ]
-                      }
-                    }
+                    "$$mdtype": "Variable",
+                    "path": [
+                      "always_false"
+                    ]
                   }
                 }
               },
               "1": {
                 "$$mdtype": "Function",
-                "name": "or",
+                "name": "not",
                 "parameters": {
                   "0": {
-                    "$$mdtype": "Function",
-                    "name": "not",
-                    "parameters": {
-                      "0": {
-                        "$$mdtype": "Variable",
-                        "path": [
-                          "always_false"
-                        ]
-                      }
-                    }
-                  },
-                  "1": {
-                    "$$mdtype": "Function",
-                    "name": "not",
-                    "parameters": {
-                      "0": {
-                        "$$mdtype": "Variable",
-                        "path": [
-                          "always_true"
-                        ]
-                      }
-                    }
+                    "$$mdtype": "Variable",
+                    "path": [
+                      "always_true"
+                    ]
                   }
                 }
               }
@@ -5273,21 +4709,34 @@
       "attributes": {
         "primary": {
           "$$mdtype": "Function",
-          "name": "equals",
+          "name": "or",
           "parameters": {
             "0": {
               "$$mdtype": "Function",
-              "name": "not",
+              "name": "equals",
               "parameters": {
                 "0": {
                   "$$mdtype": "Variable",
                   "path": [
-                    "always_false"
+                    "test_string"
                   ]
-                }
+                },
+                "1": "Datadog"
               }
             },
-            "1": true
+            "1": {
+              "$$mdtype": "Function",
+              "name": "equals",
+              "parameters": {
+                "0": {
+                  "$$mdtype": "Variable",
+                  "path": [
+                    "test_string"
+                  ]
+                },
+                "1": "Hello"
+              }
+            }
           }
         }
       },
@@ -5345,7 +4794,7 @@
                   ],
                   "inline": true,
                   "attributes": {
-                    "content": "equals(not($always_false), true)"
+                    "content": "or(equals($test_string, \"Datadog\"), equals($test_string, \"Hello\"))"
                   },
                   "children": [],
                   "type": "code",
@@ -5419,21 +4868,34 @@
           "name": "primary",
           "value": {
             "$$mdtype": "Function",
-            "name": "equals",
+            "name": "or",
             "parameters": {
               "0": {
                 "$$mdtype": "Function",
-                "name": "not",
+                "name": "equals",
                 "parameters": {
                   "0": {
                     "$$mdtype": "Variable",
                     "path": [
-                      "always_false"
+                      "test_string"
                     ]
-                  }
+                  },
+                  "1": "Datadog"
                 }
               },
-              "1": true
+              "1": {
+                "$$mdtype": "Function",
+                "name": "equals",
+                "parameters": {
+                  "0": {
+                    "$$mdtype": "Variable",
+                    "path": [
+                      "test_string"
+                    ]
+                  },
+                  "1": "Hello"
+                }
+              }
             }
           }
         }
@@ -5465,13 +4927,19 @@
           "parameters": {
             "0": {
               "$$mdtype": "Function",
-              "name": "and",
+              "name": "or",
               "parameters": {
                 "0": {
-                  "$$mdtype": "Variable",
-                  "path": [
-                    "always_false"
-                  ]
+                  "$$mdtype": "Function",
+                  "name": "not",
+                  "parameters": {
+                    "0": {
+                      "$$mdtype": "Variable",
+                      "path": [
+                        "always_false"
+                      ]
+                    }
+                  }
                 },
                 "1": {
                   "$$mdtype": "Function",
@@ -5550,7 +5018,7 @@
                   ],
                   "inline": true,
                   "attributes": {
-                    "content": "NO: Display if "
+                    "content": "YES: Display if "
                   },
                   "children": [],
                   "type": "text",
@@ -5574,7 +5042,7 @@
                   ],
                   "inline": true,
                   "attributes": {
-                    "content": "and(and($always_false, not($always_true)), or(not($always_false), not($always_true)))"
+                    "content": "and(or(not($always_false), not($always_true)), or(not($always_false), not($always_true)))"
                   },
                   "children": [],
                   "type": "code",
@@ -5652,13 +5120,19 @@
             "parameters": {
               "0": {
                 "$$mdtype": "Function",
-                "name": "and",
+                "name": "or",
                 "parameters": {
                   "0": {
-                    "$$mdtype": "Variable",
-                    "path": [
-                      "always_false"
-                    ]
+                    "$$mdtype": "Function",
+                    "name": "not",
+                    "parameters": {
+                      "0": {
+                        "$$mdtype": "Variable",
+                        "path": [
+                          "always_false"
+                        ]
+                      }
+                    }
                   },
                   "1": {
                     "$$mdtype": "Function",
@@ -5731,7 +5205,7 @@
       "attributes": {
         "primary": {
           "$$mdtype": "Function",
-          "name": "and",
+          "name": "equals",
           "parameters": {
             "0": {
               "$$mdtype": "Function",
@@ -5745,18 +5219,7 @@
                 }
               }
             },
-            "1": {
-              "$$mdtype": "Function",
-              "name": "not",
-              "parameters": {
-                "0": {
-                  "$$mdtype": "Variable",
-                  "path": [
-                    "always_true"
-                  ]
-                }
-              }
-            }
+            "1": true
           }
         }
       },
@@ -5790,7 +5253,7 @@
                   ],
                   "inline": true,
                   "attributes": {
-                    "content": "NO: Display if "
+                    "content": "YES: Display if "
                   },
                   "children": [],
                   "type": "text",
@@ -5814,7 +5277,7 @@
                   ],
                   "inline": true,
                   "attributes": {
-                    "content": "and(not($always_false), not($always_true))"
+                    "content": "equals(not($always_false), true)"
                   },
                   "children": [],
                   "type": "code",
@@ -5888,7 +5351,7 @@
           "name": "primary",
           "value": {
             "$$mdtype": "Function",
-            "name": "and",
+            "name": "equals",
             "parameters": {
               "0": {
                 "$$mdtype": "Function",
@@ -5902,18 +5365,7 @@
                   }
                 }
               },
-              "1": {
-                "$$mdtype": "Function",
-                "name": "not",
-                "parameters": {
-                  "0": {
-                    "$$mdtype": "Variable",
-                    "path": [
-                      "always_true"
-                    ]
-                  }
-                }
-              }
+              "1": true
             }
           }
         }
@@ -5945,28 +5397,56 @@
           "parameters": {
             "0": {
               "$$mdtype": "Function",
-              "name": "equals",
+              "name": "and",
               "parameters": {
                 "0": {
                   "$$mdtype": "Variable",
                   "path": [
-                    "test_string"
+                    "always_false"
                   ]
                 },
-                "1": "Datadog"
+                "1": {
+                  "$$mdtype": "Function",
+                  "name": "not",
+                  "parameters": {
+                    "0": {
+                      "$$mdtype": "Variable",
+                      "path": [
+                        "always_true"
+                      ]
+                    }
+                  }
+                }
               }
             },
             "1": {
               "$$mdtype": "Function",
-              "name": "equals",
+              "name": "or",
               "parameters": {
                 "0": {
-                  "$$mdtype": "Variable",
-                  "path": [
-                    "test_string"
-                  ]
+                  "$$mdtype": "Function",
+                  "name": "not",
+                  "parameters": {
+                    "0": {
+                      "$$mdtype": "Variable",
+                      "path": [
+                        "always_false"
+                      ]
+                    }
+                  }
                 },
-                "1": "Hello"
+                "1": {
+                  "$$mdtype": "Function",
+                  "name": "not",
+                  "parameters": {
+                    "0": {
+                      "$$mdtype": "Variable",
+                      "path": [
+                        "always_true"
+                      ]
+                    }
+                  }
+                }
               }
             }
           }
@@ -6026,7 +5506,7 @@
                   ],
                   "inline": true,
                   "attributes": {
-                    "content": "and(equals($test_string, \"Datadog\"), equals($test_string, \"Hello\"))"
+                    "content": "and(and($always_false, not($always_true)), or(not($always_false), not($always_true)))"
                   },
                   "children": [],
                   "type": "code",
@@ -6104,6 +5584,458 @@
             "parameters": {
               "0": {
                 "$$mdtype": "Function",
+                "name": "and",
+                "parameters": {
+                  "0": {
+                    "$$mdtype": "Variable",
+                    "path": [
+                      "always_false"
+                    ]
+                  },
+                  "1": {
+                    "$$mdtype": "Function",
+                    "name": "not",
+                    "parameters": {
+                      "0": {
+                        "$$mdtype": "Variable",
+                        "path": [
+                          "always_true"
+                        ]
+                      }
+                    }
+                  }
+                }
+              },
+              "1": {
+                "$$mdtype": "Function",
+                "name": "or",
+                "parameters": {
+                  "0": {
+                    "$$mdtype": "Function",
+                    "name": "not",
+                    "parameters": {
+                      "0": {
+                        "$$mdtype": "Variable",
+                        "path": [
+                          "always_false"
+                        ]
+                      }
+                    }
+                  },
+                  "1": {
+                    "$$mdtype": "Function",
+                    "name": "not",
+                    "parameters": {
+                      "0": {
+                        "$$mdtype": "Variable",
+                        "path": [
+                          "always_true"
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "slots": {},
+      "location": {
+        "start": {
+          "line": 120
+        },
+        "end": {
+          "line": 121
+        }
+      }
+    },
+    {
+      "$$mdtype": "Node",
+      "errors": [],
+      "lines": [
+        124,
+        125,
+        126,
+        127
+      ],
+      "inline": false,
+      "attributes": {
+        "primary": {
+          "$$mdtype": "Function",
+          "name": "and",
+          "parameters": {
+            "0": {
+              "$$mdtype": "Function",
+              "name": "not",
+              "parameters": {
+                "0": {
+                  "$$mdtype": "Variable",
+                  "path": [
+                    "always_false"
+                  ]
+                }
+              }
+            },
+            "1": {
+              "$$mdtype": "Function",
+              "name": "not",
+              "parameters": {
+                "0": {
+                  "$$mdtype": "Variable",
+                  "path": [
+                    "always_true"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      },
+      "children": [
+        {
+          "$$mdtype": "Node",
+          "errors": [],
+          "lines": [
+            125,
+            126
+          ],
+          "inline": false,
+          "attributes": {},
+          "children": [
+            {
+              "$$mdtype": "Node",
+              "errors": [],
+              "lines": [
+                125,
+                126
+              ],
+              "inline": false,
+              "attributes": {},
+              "children": [
+                {
+                  "$$mdtype": "Node",
+                  "errors": [],
+                  "lines": [
+                    125,
+                    126
+                  ],
+                  "inline": true,
+                  "attributes": {
+                    "content": "NO: Display if "
+                  },
+                  "children": [],
+                  "type": "text",
+                  "annotations": [],
+                  "slots": {},
+                  "location": {
+                    "start": {
+                      "line": 125
+                    },
+                    "end": {
+                      "line": 126
+                    }
+                  }
+                },
+                {
+                  "$$mdtype": "Node",
+                  "errors": [],
+                  "lines": [
+                    125,
+                    126
+                  ],
+                  "inline": true,
+                  "attributes": {
+                    "content": "and(not($always_false), not($always_true))"
+                  },
+                  "children": [],
+                  "type": "code",
+                  "annotations": [],
+                  "slots": {},
+                  "location": {
+                    "start": {
+                      "line": 125
+                    },
+                    "end": {
+                      "line": 126
+                    }
+                  }
+                },
+                {
+                  "$$mdtype": "Node",
+                  "errors": [],
+                  "lines": [
+                    125,
+                    126
+                  ],
+                  "inline": true,
+                  "attributes": {
+                    "content": "."
+                  },
+                  "children": [],
+                  "type": "text",
+                  "annotations": [],
+                  "slots": {},
+                  "location": {
+                    "start": {
+                      "line": 125
+                    },
+                    "end": {
+                      "line": 126
+                    }
+                  }
+                }
+              ],
+              "type": "inline",
+              "annotations": [],
+              "slots": {},
+              "location": {
+                "start": {
+                  "line": 125
+                },
+                "end": {
+                  "line": 126
+                }
+              }
+            }
+          ],
+          "type": "paragraph",
+          "annotations": [],
+          "slots": {},
+          "location": {
+            "start": {
+              "line": 125
+            },
+            "end": {
+              "line": 126
+            }
+          }
+        }
+      ],
+      "type": "tag",
+      "tag": "if",
+      "annotations": [
+        {
+          "type": "attribute",
+          "name": "primary",
+          "value": {
+            "$$mdtype": "Function",
+            "name": "and",
+            "parameters": {
+              "0": {
+                "$$mdtype": "Function",
+                "name": "not",
+                "parameters": {
+                  "0": {
+                    "$$mdtype": "Variable",
+                    "path": [
+                      "always_false"
+                    ]
+                  }
+                }
+              },
+              "1": {
+                "$$mdtype": "Function",
+                "name": "not",
+                "parameters": {
+                  "0": {
+                    "$$mdtype": "Variable",
+                    "path": [
+                      "always_true"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "slots": {},
+      "location": {
+        "start": {
+          "line": 124
+        },
+        "end": {
+          "line": 125
+        }
+      }
+    },
+    {
+      "$$mdtype": "Node",
+      "errors": [],
+      "lines": [
+        128,
+        129,
+        130,
+        131
+      ],
+      "inline": false,
+      "attributes": {
+        "primary": {
+          "$$mdtype": "Function",
+          "name": "and",
+          "parameters": {
+            "0": {
+              "$$mdtype": "Function",
+              "name": "equals",
+              "parameters": {
+                "0": {
+                  "$$mdtype": "Variable",
+                  "path": [
+                    "test_string"
+                  ]
+                },
+                "1": "Datadog"
+              }
+            },
+            "1": {
+              "$$mdtype": "Function",
+              "name": "equals",
+              "parameters": {
+                "0": {
+                  "$$mdtype": "Variable",
+                  "path": [
+                    "test_string"
+                  ]
+                },
+                "1": "Hello"
+              }
+            }
+          }
+        }
+      },
+      "children": [
+        {
+          "$$mdtype": "Node",
+          "errors": [],
+          "lines": [
+            129,
+            130
+          ],
+          "inline": false,
+          "attributes": {},
+          "children": [
+            {
+              "$$mdtype": "Node",
+              "errors": [],
+              "lines": [
+                129,
+                130
+              ],
+              "inline": false,
+              "attributes": {},
+              "children": [
+                {
+                  "$$mdtype": "Node",
+                  "errors": [],
+                  "lines": [
+                    129,
+                    130
+                  ],
+                  "inline": true,
+                  "attributes": {
+                    "content": "NO: Display if "
+                  },
+                  "children": [],
+                  "type": "text",
+                  "annotations": [],
+                  "slots": {},
+                  "location": {
+                    "start": {
+                      "line": 129
+                    },
+                    "end": {
+                      "line": 130
+                    }
+                  }
+                },
+                {
+                  "$$mdtype": "Node",
+                  "errors": [],
+                  "lines": [
+                    129,
+                    130
+                  ],
+                  "inline": true,
+                  "attributes": {
+                    "content": "and(equals($test_string, \"Datadog\"), equals($test_string, \"Hello\"))"
+                  },
+                  "children": [],
+                  "type": "code",
+                  "annotations": [],
+                  "slots": {},
+                  "location": {
+                    "start": {
+                      "line": 129
+                    },
+                    "end": {
+                      "line": 130
+                    }
+                  }
+                },
+                {
+                  "$$mdtype": "Node",
+                  "errors": [],
+                  "lines": [
+                    129,
+                    130
+                  ],
+                  "inline": true,
+                  "attributes": {
+                    "content": "."
+                  },
+                  "children": [],
+                  "type": "text",
+                  "annotations": [],
+                  "slots": {},
+                  "location": {
+                    "start": {
+                      "line": 129
+                    },
+                    "end": {
+                      "line": 130
+                    }
+                  }
+                }
+              ],
+              "type": "inline",
+              "annotations": [],
+              "slots": {},
+              "location": {
+                "start": {
+                  "line": 129
+                },
+                "end": {
+                  "line": 130
+                }
+              }
+            }
+          ],
+          "type": "paragraph",
+          "annotations": [],
+          "slots": {},
+          "location": {
+            "start": {
+              "line": 129
+            },
+            "end": {
+              "line": 130
+            }
+          }
+        }
+      ],
+      "type": "tag",
+      "tag": "if",
+      "annotations": [
+        {
+          "type": "attribute",
+          "name": "primary",
+          "value": {
+            "$$mdtype": "Function",
+            "name": "and",
+            "parameters": {
+              "0": {
+                "$$mdtype": "Function",
                 "name": "equals",
                 "parameters": {
                   "0": {
@@ -6135,10 +6067,10 @@
       "slots": {},
       "location": {
         "start": {
-          "line": 120
+          "line": 128
         },
         "end": {
-          "line": 121
+          "line": 129
         }
       }
     }

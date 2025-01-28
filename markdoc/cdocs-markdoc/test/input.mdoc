@@ -1,10 +1,18 @@
 # Test document
 
-Anything with a YES in front of it should display normally, with no visible background color.
+Assume this file is converted to a renderable tree with the following variables:
 
-Anything with a NO in front of it should have a dark background (to indicate that it has been given the `markdoc__hidden` class, and would be hidden in a real document).
+```javascript
+const renderableTree = CdocsMarkdoc.transform(ast, {
+  variables: {
+    test_string: 'Datadog',
+    always_false: false,
+    always_true: true
+  }
+});
+```
 
-For easier checking, each section has its YESes at the top, and NOs at the bottom.
+Anything starting with "YES: " should display. Anything starting with "NO: " should not display.
 
 ## Variable values
 
