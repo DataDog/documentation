@@ -61,14 +61,14 @@ The following profiling features are available in the following minimum versions
 | Wall time profiling       | 2.7.0+                             | All supported runtime versions.                                                          |
 | CPU profiling             | 2.15.0+                            | All supported runtime versions.                                                          |
 | Exceptions profiling      | 2.31.0+                            | All supported runtime versions.                                                          |
-| Allocations profiling     | Preview, 2.18.0+                   | .NET Framework Preview (requires Datadog Agent 7.51+) and .NET 6+                           |
-| Lock Contention profiling | 2.49.0+                            | .NET Framework (requires Datadog Agent 7.51+) and .NET 5+                           |
-| Live heap profiling       | Preview, 2.22.0+                   | .NET 7+                                                                                  |
+| Allocations profiling     | beta, 2.18.0+                      | .NET Framework beta (requires Datadog Agent 7.51+) and .NET 6+                           |
+| Lock Contention profiling | 2.49.0+                            | .NET Framework (requires Datadog Agent 7.51+) and .NET 5+                                |
+| Live heap profiling       | beta, 2.22.0+                      | .NET 7+                                                                                  |
 | [Trace to Profiling integration][12]       | 2.30.0+                            | All supported runtime versions.                                                          |
 | [Endpoint Profiling][13]  | 2.15.0+                            | All supported runtime versions.                                                          |
 | Timeline                  | 2.30.0+                            | All supported runtime versions (except .NET 5+ required for garbage collection details). |
 
-- Allocations and Live Heap profiling are in preview until .NET 10 ships with the required changes for better statistical allocations sampling.
+- Allocations and Live Heap profiling are in beta until .NET 10 ships with the required changes for better statistical allocations sampling.
 - Continuous Profiler is not supported for AWS Lambda.
 
 ## Installation
