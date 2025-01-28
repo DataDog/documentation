@@ -32,7 +32,7 @@ The first step is to configure the notification with the required fields:
 
 The monitor title should give a clear description of the signal, including:
 
-* What's the failure mode (if there's only one) or the diverging metrics  
+* The failure mode(s) or the diverging metrics  
 * What resource (E.g. Datacenter, Kubernetes Cluster, host, service, … ) is affected
 
 Given the above, when crafting the Monitor Name, that will also represent the Notification Subject, try to include the information needed to the responder to grasp the context of the alert at glance. 
