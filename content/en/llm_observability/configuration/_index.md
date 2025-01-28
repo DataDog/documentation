@@ -49,6 +49,8 @@ Connect your Azure OpenAI account to LLM Observability with your OpenAI API key.
    - Provide the Resource Name, Deployment ID, and API version to complete integration.
 
 {{< img src="llm_observability/configuration/azure-openai-tile.png" alt="The Azure OpenAI configuration tile in LLM Observability. Lists instructions for configuring Azure OpenAI and providing your API Key, Resource Name, Deployment ID, and API Version." style="width:100%;" >}}
+
+[2]: https://app.datadoghq.com/llm/settings/integrations
 {{% /tab %}}
 {{< /tabs >}}
 ## Select and enable evaluations
