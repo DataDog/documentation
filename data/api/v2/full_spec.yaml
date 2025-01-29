@@ -45658,9 +45658,6 @@ paths:
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
       security:
-      - AuthZ:
-        - user_access_invite
-        - user_access_manage
       - bearerAuth: []
       summary: List groups
       tags:
@@ -45712,9 +45709,6 @@ paths:
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
       security:
-      - AuthZ:
-        - user_access_invite
-        - user_access_manage
       - bearerAuth: []
       summary: Create group
       tags:
@@ -45752,9 +45746,6 @@ paths:
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
       security:
-      - AuthZ:
-        - user_access_invite
-        - user_access_manage
       - bearerAuth: []
       summary: Delete group
       tags:
@@ -45791,9 +45782,6 @@ paths:
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
       security:
-      - AuthZ:
-        - user_access_invite
-        - user_access_manage
       - bearerAuth: []
       summary: Get group
       tags:
@@ -45857,9 +45845,6 @@ paths:
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
       security:
-      - AuthZ:
-        - user_access_invite
-        - user_access_manage
       - bearerAuth: []
       summary: Patch group
       tags:
@@ -45921,9 +45906,6 @@ paths:
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
       security:
-      - AuthZ:
-        - user_access_invite
-        - user_access_manage
       - bearerAuth: []
       summary: Update group
       tags:
