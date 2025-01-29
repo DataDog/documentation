@@ -83,9 +83,6 @@ function parseTag(content: string, line: number, contentStart: number) {
 
 export function parseTags(content: string, firstLine = 0): Token[] {
   let line = firstLine + 1;
-  // TODO, use the correct type here -- Token[] currently causes
-  // a type error, need to investigate why since no changes
-  // should have been made to any of the relevant original code
   const output: any[] = [];
   let start = 0;
 

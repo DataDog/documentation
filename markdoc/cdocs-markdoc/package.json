@@ -1,7 +1,7 @@
 {
     "name": "cdocs-markdoc",
-    "version": "0.1.0",
-    "description": "A fork of Markdoc that integrates with CDocs",
+    "version": "1.0.0",
+    "description": "A fork of Markdoc that integrates with cdocs packages",
     "main": "dist/index.js",
     "module": "dist/index.mjs",
     "types": "dist/index.d.ts",
@@ -11,58 +11,43 @@
         "src",
         "dist"
     ],
-    "sideEffects": false,
     "license": "MIT",
     "scripts": {
-        "test": "npm run build; vitest run",
-        "test:watch": "npm run build; vitest",
+        "test": "yarn build; vitest run",
+        "test:watch": "yarn build; vitest",
         "prebuild": "npx patch-package",
-        "build": "npm run build:common && npm run build:types",
+        "build": "yarn build:common && yarn build:types",
         "build:common": "node build.js",
         "build:types": "tsc --emitDeclarationOnly --outDir dist",
         "lint": "eslint .",
         "grammar": "pegjs -o src/grammar/tag.js src/grammar/tag.pegjs",
         "postgrammar": "prettier --write src/grammar/tag.js",
-        "prettier": "prettier --write index.ts src",
-        "prettier:check": "prettier --check index.ts src",
+        "prettier": "prettier --write index.ts src spec",
+        "prettier:check": "prettier --check index.ts src spec",
         "type:check": "tsc --noEmit",
         "typedoc": "typedoc index.ts --includeVersion --readme none --excludePrivate --excludeExternals --excludeInternal --sort source-order --out types"
     },
     "engines": {
-        "node": ">=14.7.0"
+        "node": "20.11.0"
     },
     "optionalDependencies": {
+        "@types/linkify-it": "^3.0.1",
         "@types/markdown-it": "12.2.3"
     },
     "devDependencies": {
-        "@types/node": "^18.0.0",
-        "@types/uuid": "^9.0.8",
+        "@types/node": "20.11.0",
         "@typescript-eslint/eslint-plugin": "^5.12.0",
         "@typescript-eslint/parser": "^5.12.0",
-        "deep-assert": "0.3.0",
-        "diff": "^4.0.2",
         "esbuild": "0.13.3",
         "eslint": "^8.9.0",
         "markdown-it": "12.3.2",
+        "markdown-it-deflist": "^3.0.0",
         "patch-package": "^6.4.7",
         "pegjs": "0.11.0-master.b7b87ea",
-        "prettier": "^2.8.8",
-        "ts-eager": "2.0.2",
+        "prettier": "^2.5.1",
         "typedoc": "^0.22.13",
         "typescript": "^4.5.4",
         "vitest": "^1.6.0",
-        "yaml-js": "^0.2.3"
-    },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/markdoc/markdoc.git"
-    },
-    "bugs": {
-        "url": "https://github.com/markdoc/markdoc/issues"
-    },
-    "homepage": "https://markdoc.dev",
-    "dependencies": {
-        "markdown-it-deflist": "^3.0.0",
         "zod": "^3.22.4"
     }
 }
