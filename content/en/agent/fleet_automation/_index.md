@@ -42,7 +42,7 @@ If you're using an older Agent, you might still be able to enable the following 
 
 Datadog recommends upgrading your Agents regularly to make sure you have access to the latest features.
 
-## Using Fleet Automation
+## Observing your fleet
 
 Use the [**Fleet Automation**][1] page to gain insight into unmonitored hosts, Agents that need to be updated, or Agents that have integration issues. For each Agent, you can see:
 - The Agent version
