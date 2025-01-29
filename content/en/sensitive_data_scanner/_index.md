@@ -64,7 +64,7 @@ See [Set Up Pipelines][7] for more information.
   Scanning support for Amazon S3 buckets and RDS instances is in Limited Availability. To enroll, click <strong>Request Access</strong>.
 {{< /callout >}}
 
-{{< img src="sensitive_data_scanner/cloud_storage_issues.png" alt="Your image description" style="width:100%;" >}}
+{{< img src="sensitive_data_scanner/cloud_storage_issues.png" alt="The Summary page's datastore section with three Amazon S3 issues" style="width:100%;" >}}
 
 If you have [Sensitive Data Scanner][8] enabled, you can now catalog and classify sensitive data in your Amazon S3 buckets and RDS instances. **Note**: Sensitive Data Scanner does not redact sensitive data in your cloud storage resources.
 
