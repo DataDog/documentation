@@ -1,7 +1,8 @@
 ---
 title: OpenTelemetry Semantic Conventions and Datadog Conventions
 aliases:
-- /opentelemetry/guide/semantic_mapping/
+  - /opentelemetry/guide/semantic_mapping/
+  - /opentelemetry/schema_semantics/semantic_mapping/
 further_reading:
 - link: "/opentelemetry/guide/metrics_mapping"
   tag: "Documentation"

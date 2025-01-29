@@ -1,7 +1,8 @@
 ---
 title: OpenTelemetry Metrics Mapping
 aliases:
-- /opentelemetry/guide/metrics_mapping/
+  - /opentelemetry/guide/metrics_mapping/
+  - /opentelemetry/schema_semantics/metrics_mapping/
 further_reading:
 - link: "/metrics/open_telemetry/otlp_metric_types"
   tag: "Documentation"

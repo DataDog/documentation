@@ -1,5 +1,5 @@
 ---
-title: OpenTelemetry Configuration
+title: Explore Data in Datadog
 further_reading:
 - link: "https://www.datadoghq.com/blog/opentelemetry-instrumentation/"
   tag: "Blog"
@@ -8,4 +8,4 @@ further_reading:
 
 ## Overview
 
-TODO: Landing page for config docs
+TODO: Landing page for call exploration docs

@@ -42,17 +42,18 @@ cascade:
 
 [OpenTelemetry][1] is an open source observability framework that provides IT teams with standardized protocols and tools for collecting and routing telemetry data. Created as an incubator project by the [Cloud Native Computing Foundation][2] (CNCF), OpenTelemetry provides a consistent format for instrumenting, generating, gathering, and exporting application telemetry data—namely metrics, logs, and traces—to monitoring platforms for analysis and insight.
 
-If your applications and services are instrumented with OpenTelemetry libraries, you can choose how to get traces, metrics, and logs data to the Datadog backend:
-
-1. [Send data to the OpenTelemetry collector, and use the Datadog exporter to forward it to Datadog][3], or
-
-2. [Ingest data with the Datadog Agent, which collects it for Datadog][4].
-
 {{< img src="tracing/setup/open_standards/otel-flow.png" alt="Map options for generating telemetry data and sending it to observability products.">}}
 
-<div class="alert alert-info"><strong>Custom Instrumentation with the OpenTelemetry API</strong></br>You can configure OpenTelemetry instrumented applications to use the Datadog APM SDK to process spans and traces. For more information, read <a href="/tracing/trace_collection/otel_instrumentation/">Custom Instrumentation with the OpenTelemetry API</a>.</div>
+If your applications and services are instrumented with OpenTelemetry libraries, you can choose how to get traces, metrics, and logs data to the Datadog backend:
 
-Datadog supports the [W3C Trace Context standard][6], ensuring complete traces are captured even when a request travels between services that have been instrumented with different tools. Services need only be instrumented with any system, such as an OpenTelemetry library or Datadog tracing library, that follows the W3C Trace Context standard. Read [Propagating Trace Context][5] for more information.
+{{< whatsnext desc=" " >}}
+    {{< nextlink href="/opentelemetry/setup/collector_exporter/" >}}Using the OpenTelemetry Collector{{< /nextlink >}}
+    {{< nextlink href="/opentelemetry/setup/otlp_ingest_in_the_agent" >}}Using OTLP Ingest in the Datadog Agent{{< /nextlink >}}
+    {{< nextlink href="/opentelemetry/setup/intake_endpoint" >}}Using the OTLP Intake Endpoint{{< /nextlink >}}
+{{< /whatsnext >}}
+
+<div class="alert alert-info"><strong>Not sure which setup is right for you?</strong></br> See the <a href="/opentelemetry/compatibility/">Feature Compatibility</a> table to understand which features are supported.</div>
+
 
 ## Further reading
 

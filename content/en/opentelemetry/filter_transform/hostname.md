@@ -1,5 +1,7 @@
 ---
 title: Mapping OpenTelemetry Semantic Conventions to Hostnames
+aliases:
+  - /opentelemetry/schema_semantics/hostname/
 further_reading:
 - link: "/opentelemetry/"
   tag: "Documentation"

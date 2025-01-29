@@ -626,7 +626,7 @@ menu:
       identifier: otel_propagation
       parent: otel-instrumentation
       weight: 204
-    - name: Configure
+    - name: Configure OpenTelemetry
       url: opentelemetry/config/
       identifier: otel_config
       parent: opentelemetry_top_level
@@ -652,56 +652,61 @@ menu:
       parent: otel_config
       weight: 304
     - name: Filter and Transform Data
-      url: opentelemetry/schema_semantics/
+      url: opentelemetry/filter_transform/
       identifier: otel_schema
       parent: opentelemetry_top_level
       weight: 4
     - name: Resource Attribute Mapping
-      url: opentelemetry/schema_semantics/semantic_mapping/
+      url: opentelemetry/filter_transform/semantic_mapping/
       identifier: otel_semantic_mapping
       parent: otel_schema
       weight: 401
     - name: Metrics Mapping
-      url: opentelemetry/schema_semantics/metrics_mapping/
+      url: opentelemetry/filter_transform/metrics_mapping/
       identifier: otel_metrics_mapping
       parent: otel_schema
       weight: 402
     - name: Infrastructure Host Mapping
-      url: opentelemetry/schema_semantics/host_metadata/
+      url: opentelemetry/filter_transform/host_metadata/
       identifier: otel_host_metadata
       parent: otel_schema
       weight: 403
     - name: Hostname Mapping
-      url: opentelemetry/schema_semantics/hostname/
+      url: opentelemetry/filter_transform/hostname/
       identifier: otel_hostname
       parent: otel_schema
       weight: 404
     - name: Service-entry Spans Mapping
-      url: opentelemetry/schema_semantics/service_entry_spans/
+      url: opentelemetry/filter_transform/service_entry_spans/
       identifier: otel_service_entry_spans
       parent: otel_schema
       weight: 405
     - name: Ingestion Sampling
-      url: opentelemetry/ingestion_sampling_with_opentelemetry
+      url: opentelemetry/ingestion_sampling
       identifier: otel_ingestion_sampling
       parent: otel_schema
       weight: 406
     - name: Explore Data in Datadog
-      url: opentelemetry/interoperability/
-      identifier: otel_interoperability
+      url: opentelemetry/explore/
+      identifier: otel_explore
       parent: opentelemetry_top_level
       weight: 5
-    - name: Correlate RUM and Traces
-      url: /opentelemetry/interoperability/connect_rum_and_traces
-      identifier: otel_rum
-      parent: otel_interoperability
-      weight: 501
     - name: Correlate Logs and Traces
       url: /tracing/other_telemetry/connect_logs_and_traces/opentelemetry/
       identifier: otel_logs
-      parent: otel_interoperability
+      parent: otel_explore
       weight: 501
-    - name: Integrations
+    - name: Correlate RUM and Traces
+      url: /opentelemetry/interoperability/connect_rum_and_traces
+      identifier: otel_rum
+      parent: otel_explore
+      weight: 502
+    - name: Visualize Histograms as Heatmaps
+      url: /opentelemetry/explore/otlp_histogram_heatmaps
+      identifier: otel_histogram_heatmaps
+      parent: otel_explore
+      weight: 503
+    - name: Extend Data Collection
       url: opentelemetry/integrations/
       identifier: otel_integrations
       parent: opentelemetry_top_level
@@ -751,11 +756,6 @@ menu:
       identifier: otel_guides
       parent: opentelemetry_top_level
       weight: 9
-    - name: Visualizing OTLP Histograms as Heatmaps
-      url: opentelemetry/guide/otlp_histogram_heatmaps/
-      identifier: otel_guides_heatmaps
-      parent: otel_guides
-      weight: 901
     - name: Migrate to OpenTelemetry Collector version 0.95.0+
       url: opentelemetry/guide/migration/
       identifier: otel_guides_migration
