@@ -8,13 +8,13 @@ description: Monitor your RAG applications for hallucinations with LLM Observabi
 
 ## Overview
 
-{{< alert type="warning" >}}
+<div class="alert alert-warning">
 The RAGAS integration is only tested for ragas==0.1.*
-{{< /alert >}}
+</div>
 
-{{< alert type="warning" >}}
+<div class="alert alert-warning">
 Sampling is recommended for the RAGAS integration. The RAGAS integration runs llm-as-a-judge evaluations powered by your own LLM provider's account. Evaluations are automatically traced and sent to Datadog. These traces contain LLM spans, which may affect your LLM Observability billing.
-{{< /alert >}}
+</div>
 
 Monitor the performance of your RAG applications in production with LLM Observability's integration with the [RAGAS][1] evaluation framework.
 
