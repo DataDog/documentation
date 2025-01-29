@@ -82,7 +82,7 @@ Agent upgrades from Fleet Management take precedent over configuration managemen
 
 You can use use Remote Agent Management along with a proxy or mirrored repositories.
 
-For instructions on configuring your Agent to use a proxy, see [Agent Proxy Configuration][6]. Ensure the Agent is restarted afterwards to apply proxy settings.
+For instructions on configuring your Agent to use a proxy, see [Agent Proxy Configuration][6]. After you've configured the proxy, restart the Agent to apply the settings.
 
 For instructions on using mirrored or air-gapped repositories, see:
 - [Synchronize Datadog's images with a private container registry][7]
