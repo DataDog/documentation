@@ -168,7 +168,7 @@ function hasParentLi(el) {
 
 function getPathElement(event = null) {
     let path = window.location.pathname;
-    const activeMenus = document.querySelectorAll('.side .sidenav-nav-main .active, header .sidenav-nav-main .active, .side .sidenav-partners .active');
+    const activeMenus = document.querySelectorAll('.side .sidenav-nav-main .active, header .sidenav-nav-main .active');
 
     // remove active class from all sidenav links to close all open menus
     for (let i = 0; i < activeMenus.length; i++) {
@@ -287,7 +287,7 @@ function updateSidebar(event) {
     }
 }
 
-const sideNav = document.querySelector('.side .sidenav-nav-main, .side .sidenav-partners');
+const sideNav = document.querySelector('.side .sidenav-nav-main');
 const mobileNav = document.querySelector('header .sidenav-nav-main');
 
 if (sideNav) {
