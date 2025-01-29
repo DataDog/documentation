@@ -8,21 +8,8 @@ further_reading:
   tag: "Documentation"
   text: "Learn about Watchdog Faulty Service Deployment Detections"
 ---
-{{< site-region region="us3" >}}
-This feature is not available yet in the US3 datacenter.
-Please feel a ticket to be notified when it is.
-{{< /site-region >}}
-{{< site-region region="us5" >}}
-This feature is not available yet in the US5 datacenter.
-Please feel a ticket to be notified when it is.
-{{< /site-region >}}
-{{< site-region region="eu" >}}
-This feature is not available yet in the EU1 datacenter.
-Please feel a ticket to be notified when it is.
-{{< /site-region >}}
-{{< site-region region="ap1" >}}
-This feature is not available yet in the AP1 datacenter.
-Please feel a ticket to be notified when it is.
+{{< site-region region="us3,us5,eu,ap1,gov" >}}
+<div class="alert alert-warning">Watchdog Faulty Service Deployment Detections are not available for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 ## Overview
