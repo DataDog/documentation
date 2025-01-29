@@ -321,7 +321,7 @@ To start sending just your iOS application's traces to Datadog, see [iOS Trace C
 1. Set up [RUM Kotlin Multiplatform Monitoring][1].
 2. Set up [Ktor instrumentation][2].
 
-2. Set the `tracedHosts` initialization parameter in the Datadog Ktor Plugin configuration to define the list of internal, first-party origins called by your Kotlin Multiplatform application:
+3. Set the `tracedHosts` initialization parameter in the Datadog Ktor Plugin configuration to define the list of internal, first-party origins called by your Kotlin Multiplatform application:
     ```kotlin
     val ktorClient = HttpClient {
         install(
@@ -338,7 +338,7 @@ To start sending just your iOS application's traces to Datadog, see [iOS Trace C
 
     By default, all subdomains of listed hosts are traced. For instance, if you add `example.com`, you also enable tracing for `api.example.com` and `foo.example.com`.
 
-3. _(Optional)_ Set the `traceSamplingRate` initialization parameter to keep a defined percentage of the backend traces. If not set, 20% of the traces coming from application requests are sent to Datadog.
+4. _(Optional)_ Set the `traceSamplingRate` initialization parameter to keep a defined percentage of the backend traces. If not set, 20% of the traces coming from application requests are sent to Datadog.
 
      To keep 100% of backend traces:
     ```kotlin
@@ -349,7 +349,7 @@ To start sending just your iOS application's traces to Datadog, see [iOS Trace C
                     "example.com" to setOf(TracingHeaderType.DATADOG),
                     "example.eu" to setOf(TracingHeaderType.DATADOG)
                 ),
-                traceSamplingRate = 20f
+                traceSamplingRate = 100f
             )
         )
     }
@@ -432,7 +432,7 @@ To verify you've configured the APM integration with RUM, follow the steps below
 
 [1]: https://developer.apple.com/documentation/foundation/url_loading_system/analyzing_http_traffic_with_instruments
 [2]: https://developer.android.com/studio/debug/network-profiler#network-inspector-overview
-[3]: https://docs.datadoghq.com/real_user_monitoring/platform/connect_rum_and_traces/?tab=kotlinmultiplatformrum#how-are-rum-resources-linked-to-traces
+[3]: /real_user_monitoring/platform/connect_rum_and_traces/?tab=kotlinmultiplatformrum#how-are-rum-resources-linked-to-traces
 
 {{% /tab %}}
 {{< /tabs >}}
