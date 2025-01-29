@@ -270,6 +270,8 @@ A `Multi Alert` monitor triggers individual notifications for each entity in a m
 
 For example, when setting up a monitor to notify you if the P99 latency, aggregated by service, exceeds a certain threshold, you would receive a **separate** alert for each individual service whose P99 latency exceeded the alert threshold. This can be useful for identifying and addressing specific instances of system or application issues. It allows you to track problems on a more granular level.
 
+#### Notification grouping
+
 When monitoring a large group of entities, multi alerts can lead to noisy monitors. To mitigate this, customize which dimensions trigger alerts. This reduces the noise and allows you to focus on the alerts that matter most. For instance, you are monitoring the average CPU usage of all your hosts. If you group your query by `service` and `host` but only want alerts to be sent once for each `service` attribute meeting the threshold, remove the `host` attribute from your multi alert options and reduce the number of notifications that are sent.
 
 {{< img src="/monitors/create/multi-alert-aggregated.png" alt="Diagram of how notifications are sent when set to specific dimensions in multi alerts" style="width:90%;">}}
