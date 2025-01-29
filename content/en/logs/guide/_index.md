@@ -30,6 +30,7 @@ cascade:
     {{< nextlink href="/logs/guide/sending-events-and-logs-to-datadog-with-amazon-eventbridge-api-destinations/" >}}Sending Events and Logs to Datadog with Amazon EventBridge API Destinations{{< /nextlink >}}
     {{< nextlink href="/logs/guide/aws-eks-fargate-logs-with-kinesis-data-firehose" >}}Send Amazon EKS Fargate Logs with Amazon Data Firehose{{< /nextlink >}}
     {{< nextlink href="/logs/guide/apigee" >}}Collect Apigee Logs{{< /nextlink >}}
+    {{< nextlink href="/logs/guide/azure-automated-log-forwarding/" >}}Azure Automated Log Forwarding Setup{{< /nextlink >}}
     {{< nextlink href="/logs/guide/azure-logging-guide/" >}}Send Azure Logs to Datadog{{< /nextlink >}}
     {{< nextlink href="/logs/guide/azure-native-logging-guide/" >}}Send Azure Logs with the Datadog Resource{{< /nextlink >}}
     {{< nextlink href="/logs/guide/fluentbit" >}}Send Fluent Bit Logs{{< /nextlink >}}
