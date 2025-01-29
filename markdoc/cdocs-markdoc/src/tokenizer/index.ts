@@ -1,9 +1,14 @@
+/**
+ * CDOCS-MODIFICATIONS
+ *
+ * Support has been added for definition lists.
+ */
+
 import MarkdownIt from 'markdown-it/lib';
 import annotations from './plugins/annotations';
 import frontmatter from './plugins/frontmatter';
 import comments from './plugins/comments';
 import type Token from 'markdown-it/lib/token';
-// @ts-ignore
 import definitionList from 'markdown-it-deflist';
 
 export default class Tokenizer {

@@ -1,16 +1,23 @@
+/**
+ * CDOCS-MODIFICATIONS
+ *
+ * The original Markdoc removes any conditional data, replacing it
+ * with its rendered value. The version below keeps conditional data,
+ * allowing the client to re-resolve the value when the variables change.
+ *
+ * Any conditional content is wrapped in an enclosing span or div
+ * with the added buildEnclosingTag() function. Each enclosing tag
+ * in the renderable tree has a display attribute that is set to 'true'
+ * or 'false' based on the initial resolved value of the condition.
+ *
+ * In rendered HTML, the visibility of this enclosing tag can be toggled
+ * as the user's customizations selections change.
+ */
+
 import { isPromise } from '../utils';
 import { type Tag } from '../types';
 
-import {
-  MaybePromise,
-  Node,
-  RenderableTreeNode,
-  RenderableTreeNodes,
-  Schema,
-  Value
-} from '../types';
-
-type Condition = { condition: Value; children: Node[] };
+import { MaybePromise, RenderableTreeNode, RenderableTreeNodes, Schema } from '../types';
 
 export function truthy(param: any) {
   if (typeof param === 'object' && 'value' in param) {
@@ -19,56 +26,12 @@ export function truthy(param: any) {
   return param !== false && param !== undefined && param !== null;
 }
 
-/* OLD
-export function truthy(value: any) {
-  return value !== false && value !== undefined && value !== null;
-}
-*/
-
-function renderConditions(node: Node) {
-  const conditions: Condition[] = [{ condition: node.attributes.primary, children: [] }];
-  for (const child of node.children) {
-    if (child.type === 'tag' && child.tag === 'else')
-      conditions.push({
-        condition: 'primary' in child.attributes ? child.attributes.primary : true,
-        children: []
-      });
-    else conditions[conditions.length - 1].children.push(child);
-  }
-
-  return conditions;
-}
-
-/* OLD
-export const tagIf: Schema = {
-  attributes: {
-    primary: { type: Object, render: false },
-  },
-
-  transform(node, config) {
-    const conditions = renderConditions(node);
-    for (const { condition, children } of conditions)
-      if (truthy(condition)) {
-        const nodes = children.flatMap<MaybePromise<RenderableTreeNodes>>(
-          (child) => child.transform(config)
-        );
-        if (nodes.some(isPromise)) {
-          return Promise.all(nodes).then((nodes) => nodes.flat());
-        }
-        return nodes as RenderableTreeNode[];
-      }
-    return [];
-  },
-};
-*/
-
 export const tagIf: Schema = {
   attributes: {
     primary: { type: Object, render: true }
   },
 
   transform(node, config) {
-    // after building the children, wrap them in a show tag
     const buildEnclosingTag = (children: RenderableTreeNode[]) => {
       const enclosingTag: Tag = {
         $$mdtype: 'Tag',
@@ -76,7 +39,6 @@ export const tagIf: Schema = {
         if: node.attributes.primary,
         attributes: {
           display: truthy(node.attributes.primary) ? 'true' : 'false'
-          // uuid: createUuid(),
         },
         children
       };
@@ -103,3 +65,67 @@ export const tagElse: Schema = {
     primary: { type: Object, render: false }
   }
 };
+
+/* ORIGINAL FILE --------------------------------------------------
+import { isPromise } from '../utils';
+
+import {
+  MaybePromise,
+  Node,
+  RenderableTreeNode,
+  RenderableTreeNodes,
+  Schema,
+  Value,
+} from '../types';
+
+type Condition = { condition: Value; children: Node[] };
+
+export function truthy(value: any) {
+  return value !== false && value !== undefined && value !== null;
+}
+
+function renderConditions(node: Node) {
+  const conditions: Condition[] = [
+    { condition: node.attributes.primary, children: [] },
+  ];
+  for (const child of node.children) {
+    if (child.type === 'tag' && child.tag === 'else')
+      conditions.push({
+        condition:
+          'primary' in child.attributes ? child.attributes.primary : true,
+        children: [],
+      });
+    else conditions[conditions.length - 1].children.push(child);
+  }
+
+  return conditions;
+}
+
+export const tagIf: Schema = {
+  attributes: {
+    primary: { type: Object, render: false },
+  },
+
+  transform(node, config) {
+    const conditions = renderConditions(node);
+    for (const { condition, children } of conditions)
+      if (truthy(condition)) {
+        const nodes = children.flatMap<MaybePromise<RenderableTreeNodes>>(
+          (child) => child.transform(config)
+        );
+        if (nodes.some(isPromise)) {
+          return Promise.all(nodes).then((nodes) => nodes.flat());
+        }
+        return nodes as RenderableTreeNode[];
+      }
+    return [];
+  },
+};
+
+export const tagElse: Schema = {
+  selfClosing: true,
+  attributes: {
+    primary: { type: Object, render: false },
+  },
+};
+-------------------------------------------------------------------*/

@@ -1,3 +1,11 @@
+/**
+ * CDOCS-MODIFICATIONS
+ *
+ * isTag, isClientVariable, and isClientFunction have been added
+ * at the bottom of this file. These functions can be used to easily
+ * type-check nodes when rendering a renderable tree.
+ */
+
 import { parse, SyntaxError } from './grammar/tag';
 import Variable from './ast/variable';
 import Function from './ast/function';
@@ -72,7 +80,10 @@ function parseTag(content: string, line: number, contentStart: number) {
 
 export function parseTags(content: string, firstLine = 0): Token[] {
   let line = firstLine + 1;
-  const output = [];
+  // TODO, use the correct type here -- Token[] currently causes
+  // a type error, need to investigate why since no changes
+  // should have been made to any of the relevant original code
+  const output: any[] = [];
   let start = 0;
 
   for (let pos = 0; pos < content.length; pos++) {
@@ -132,7 +143,6 @@ export function parseTags(content: string, firstLine = 0): Token[] {
     content: content.slice(start)
   });
 
-  // @ts-ignore
   return output;
 }
 

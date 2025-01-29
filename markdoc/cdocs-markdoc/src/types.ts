@@ -1,3 +1,21 @@
+/**
+ * CDOCS-MODIFICATIONS
+ *
+ * The ClientFunction and ClientVariable type have been
+ * added, with each representing a function or variable
+ * that has been resolved with an initial value
+ * but can be re-resolved in the browser when the variables change.
+ *
+ * Tags were classes in the original Markdoc, but they're objects
+ * in cdocs-markdoc. The Tag type added here includes an optional
+ * if property that can be a ClientFunction or ClientVariable.
+ *
+ * When the renderable tree is created, tags with an 'if'
+ * property are wrapped in an enclosing span or div with a display
+ * attribute that is set to 'true' or 'false' based on the
+ * initial resolved value of the condition.
+ */
+
 import type Func from './ast/function';
 import type Node from './ast/node';
 import type Var from './ast/variable';

@@ -1,10 +1,21 @@
+/**
+ * CDOCS-MODIFICATIONS
+ *
+ * The functions in this file have been modified to return
+ * a ClientFunction instead of a resolved value. The returned
+ * ClientFunction does contain the initial resolved value,
+ * but it also contains all of the data needed to later re-resolve
+ * the value in the browser when the variables change,
+ * without needing to re-transform an AST.
+ */
+
 import type { ConfigFunction, ClientFunction } from '../types';
 import { truthy } from '../tags/conditional';
 
 /**
  * Give each client function a unique ref
- * that can be used in HTML elements
- * to reference the function
+ * that can be used in rendered HTML elements
+ * to reference the function when desired
  */
 class RefGenerator {
   static ref = 0;
@@ -86,16 +97,6 @@ const equals: ConfigFunction = {
   }
 };
 
-const debug: ConfigFunction = {
-  transform(parameters) {
-    if (typeof parameters[0] === 'object') {
-      return JSON.stringify(parameters[0].value, null, 2);
-    } else {
-      return JSON.stringify(parameters[0], null, 2);
-    }
-  }
-};
-
 const defaultFn: ConfigFunction = {
   transform(parameters) {
     let value: any;
@@ -116,4 +117,64 @@ const defaultFn: ConfigFunction = {
   }
 };
 
+const debug: ConfigFunction = {
+  transform(parameters) {
+    if (typeof parameters[0] === 'object') {
+      return JSON.stringify(parameters[0].value, null, 2);
+    } else {
+      return JSON.stringify(parameters[0], null, 2);
+    }
+  }
+};
+
 export default { and, or, not, equals, default: defaultFn, debug };
+
+/* ORIGINAL FILE --------------------------------------------------
+
+import type { ConfigFunction } from '../types';
+import { truthy } from '../tags/conditional';
+
+const and: ConfigFunction = {
+  transform(parameters) {
+    return Object.values(parameters).every((x) => truthy(x));
+  },
+};
+
+const or: ConfigFunction = {
+  transform(parameters) {
+    return Object.values(parameters).find((x) => truthy(x)) !== undefined;
+  },
+};
+
+const not: ConfigFunction = {
+  parameters: {
+    0: { required: true },
+  },
+
+  transform(parameters) {
+    return !truthy(parameters[0]);
+  },
+};
+
+const equals: ConfigFunction = {
+  transform(parameters) {
+    const values = Object.values(parameters);
+    return values.every((v) => v === values[0]);
+  },
+};
+
+const debug: ConfigFunction = {
+  transform(parameters) {
+    return JSON.stringify(parameters[0], null, 2);
+  },
+};
+
+const defaultFn: ConfigFunction = {
+  transform(parameters) {
+    return parameters[0] === undefined ? parameters[1] : parameters[0];
+  },
+};
+
+export default { and, or, not, equals, default: defaultFn, debug };
+
+-------------------------------------------------------------------*/
