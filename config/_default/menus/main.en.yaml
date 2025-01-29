@@ -481,6 +481,11 @@ menu:
       url: agent/fleet_automation
       parent: agent
       weight: 8
+    - name: Remote Agent Management
+      identifier: remote_agent_management
+      url: agent/fleet_automation/remote_management
+      parent: agent_fleet_automation
+      weight: 801
     - name: Troubleshooting
       url: agent/troubleshooting/
       parent: agent

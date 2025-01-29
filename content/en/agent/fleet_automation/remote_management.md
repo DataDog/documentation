@@ -16,21 +16,23 @@ Remote Agent Management is in Preview. Use this form to request access.
 
 ## Overview
 
-Remote Agent Management simplifies the process of upgrading your Agent fleet without needing to coordinate with multiple deployment or configuration management tools. Remote Agent Management gives you access to:
-* Centralized Management: Upgrade Agents across all environments with a single tool, ensuring consistency with the latest features and security patches.
-* Visibility & Monitoring: Track the status of upgrades in real-time, allowing quick verification of deployment success.
-* Operational Efficiency: Streamline the upgrade process by eliminating cross-team coordination and unifying deployment across different platforms.
+Remote Agent Management simplifies the process of upgrading your Agent fleet by reducing the need to coordinate with multiple deployment or configuration management tools. Remote Agent Management gives you access to:
+* **Centralized Management** - Upgrade Agents across all environments with a single tool, ensuring consistency with the latest features and security patches.
+* **Visibility and Monitoring** - Track the status of upgrades in real-time, allowing quick verification of deployment success.
+* **Operational Efficiency** - Streamline the upgrade process by eliminating cross-team coordination and unifying deployment across different platforms.
 
 ## Setup
 
 To enable Remote Agent Management, you must first upgrade the Agent manually with the **Remote Agent Management** option enabled.
 
+<div class="alert alert-warning">You must run an upgrade with the <code>remote_updates:true</code> option to use remote updates. Updating the <code>remote_updates</code> setting without performing a manual upgrade does not grant access to Remote Agent Management.
+</div>
+
+To enable Remote Agent Management:
 1. If you haven't enabled Remote Configuration on the Agent, follow the [configuration instructions][1] to enable it.
 1. Go to the [Datadog Agent install page][3] for your platform or configuration management tool.
 1. Enable **Remote Agent Management** and use the generated Agent installation command to upgrade your Agent. If you're using a configuration tool, ensure that `remote_updates:true` is set for future configuration updates.
-
-   <div class="alert alert-warning">You must run an upgrade with the <code>remote_updates:true</code> option to use remote updates. Updating the <code>remote_updates</code> setting without performing a manual upgrade does not grant access to Remote Agent Management.
-   </div>
+   {{< img src="/agent/fleet_automation/remote-agent-management-toggle.png" alt="Enable the Remote Agent Management toggle." style="width:100%;" >}}
 
 ## Remotely upgrade your Agents
 ### Supported platforms
@@ -50,11 +52,14 @@ To enable Remote Agent Management, you must first upgrade the Agent manually wit
 <div class="alert alert-warning">Remote agent updates are in preview. Test the feature only on hosts that are not critical to production workloads. Try upgrading Agents one at a time before testing bulk upgrades.</div>
 
 To upgrade your Agents:
-1. Make sure you've followed the [setup instructions](#setup).
-2. From the [**Fleet Automation** page][4], choose the Agents you want to upgrade. You can target a group of Agents by host information and tags.
-3. Click **Upgrade**.
-
-You can use the same process to downgrade versions from the latest Agent version to a previous version of the Agent.
+1. Make sure you've completed the [setup instructions](#setup).
+1. From the [**Upgrade Agents** tab][4], click **Start Agents Upgrade**.
+   
+   {{< img src="/agent/fleet_automation/upgrade-screen.png" alt="Select the Agents you want to upgrade." style="width:100%;" >}}
+1. Select the Agents you want to upgrade. You can target a group of Agents by filtering on host information or tags.
+   
+   {{< img src="/agent/fleet_automation/start-agent-upgrade.png" alt="Select the Agents you want to upgrade." style="width:100%;" >}}
+1. Click **Upgrade Agents** to start the upgrade.
 
 You can track the upgrade process in real-time from the [Fleet Automation deployments][5] dashboard to ensure that your Agents are upgraded successfully.
 
@@ -90,7 +95,7 @@ For instructions on using mirrored or air-gapped repositories, see:
 [1]: /agent/remote_config/#enabling-remote-configuration
 [2]: /account_management/rbac/permissions#fleet-automation
 [3]: https://app.datadoghq.com/account/settings/agent/latest
-[4]: https://app.datadoghq.com/fleet
+[4]: https://app.datadoghq.com/fleet/agent-upgrades
 [5]: https://app.datadoghq.com/fleet/deployments
 [6]: /agent/configuration/proxy/
 [7]: /containers/guide/sync_container_images/
