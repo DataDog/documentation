@@ -55,12 +55,12 @@ This tutorial uses the `all-docker-compose.yaml` file, which builds containers f
 
 1. Build the application containers by running:
    {{< code-block lang="shell" >}}
-   docker-compose -f all-docker-compose.yaml build{{< /code-block >}}
+   docker-compose -f docker/all-docker-compose.yaml build{{< /code-block >}}
 
 1. Start the containers:
 
    {{< code-block lang="shell" >}}
-   docker-compose -f all-docker-compose.yaml up -d{{< /code-block >}}
+   docker-compose -f docker/all-docker-compose.yaml up -d{{< /code-block >}}
 
 1. Verify that the containers are running with the `docker ps` command. You should see something like this:
    {{< code-block lang="shell" disable_copy="true" >}}
@@ -103,7 +103,7 @@ To enable tracing support, uncomment the following imports in `apm-tutorial-gola
     chitrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/go-chi/chi" // 1.x
     httptrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http" // 1.x
     "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer" // 1.x
-     
+
     // If you are using v2, the lines look like this:
     // sqltrace "github.com/DataDog/dd-trace-go/contrib/database/sql/v2" // 2.x
     // chitrace "github.com/DataDog/dd-trace-go/contrib/go-chi/chi/v2" // 2.x
@@ -262,7 +262,7 @@ import (
   sqltrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/database/sql" // 1.x
   chitrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/go-chi/chi" // 1.x
   httptrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http" // 1.x
-  
+
   // If you are using v2, the lines look like this:
   // sqltrace "github.com/DataDog/dd-trace-go/contrib/database/sql/v2" // 2.x
   // chitrace "github.com/DataDog/dd-trace-go/contrib/go-chi/chi/v2" // 2.x
