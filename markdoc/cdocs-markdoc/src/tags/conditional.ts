@@ -67,6 +67,7 @@ export const tagElse: Schema = {
 };
 
 /* ORIGINAL FILE --------------------------------------------------
+
 import { isPromise } from '../utils';
 
 import {
@@ -128,4 +129,5 @@ export const tagElse: Schema = {
     primary: { type: Object, render: false },
   },
 };
+
 -------------------------------------------------------------------*/
