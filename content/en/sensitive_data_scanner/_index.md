@@ -55,9 +55,9 @@ There are two locations where you can redact your sensitive data:
 
 **In the cloud:**
 
-With **Sensitive Data Scanner in the Cloud**, you submit your logs to the Datadog backend, so logs leave your premises before they are redacted. To use Sensitive Data Scanner, set up a scanning group to define what data to scan and then set up scanning rules to determine what sensitive information to match within the data. For scanning rules you can:
-- Add predefined scanning rules from Datadog's Scanning Rule Library. These rules detect common patterns such as email addresses, credit card numbers, API keys, authorization tokens, network and device information, and more.
-- Create your own rules using regex patterns.
+With **Sensitive Data Scanner in the Cloud**, you submit your application logs, APM events, and RUM events to the Datadog backend, so the events leave your premises before they are redacted. To use Sensitive Data Scanner, set up a scanning group to define what data to scan and then set up scanning rules to determine what sensitive information to match within the data. For scanning rules you can:
+- Add predefined [scanning rules][19] from Datadog's Scanning Rule Library. These rules detect common patterns such as email addresses, credit card numbers, API keys, authorization tokens, network and device information, and more.
+- [Create your own rules using regex patterns][22].
 
 **In your environment:**
 
@@ -267,3 +267,4 @@ To turn off Sensitive Data Scanner entirely, set the toggle to **off** for each 
 [19]: /sensitive_data_scanner/library_rules/
 [20]: /security/cloud_security_management
 [21]: https://app.datadoghq.com/dash/integration/sensitive_data_scanner
+[22]: /sensitive_data_scanner/regular_expression_syntax
