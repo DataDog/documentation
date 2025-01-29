@@ -72,7 +72,6 @@ The following monitor types are not supported by the provisional status page:
 - Anomaly
 - Database Monitoring
 - Forecast
-- Live Process
 - Outlier
 - Synthetics
 - SLO Alerts
