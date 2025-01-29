@@ -1,7 +1,6 @@
 ---
 title: Azure Automated Log Forwarding Setup
 private: true
-is_beta: true
 further_reading:
 - link: "https://www.datadoghq.com/blog/monitoring-azure-platform-logs/"
   tag: "Blog"
