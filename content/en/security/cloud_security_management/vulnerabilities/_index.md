@@ -26,7 +26,7 @@ further_reading:
 
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">Cloud Security Management Vulnerabilities is in Preview for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).
-Request access by <a href="https://www.datadoghq.com/product-preview/csm-vulnerability-management-in-govcloud">filling this form</a>.
+Request access by <a href="https://www.datadoghq.com/product-preview/csm-vulnerability-management-govcloud/">filling this form</a>.
 </div>
 {{< /site-region >}}
 
