@@ -273,7 +273,7 @@ To automatically instrument a console application, set the environment variables
 rem Set required environment variables
 SET COR_ENABLE_PROFILING=1
 
-rem Optionally, set additional Datadog environment variables, for example:
+rem (Optionally) Set additional Datadog environment variables, for example:
 SET DD_LOGS_INJECTION=true
 SET DD_RUNTIME_METRICS_ENABLED=true
 
