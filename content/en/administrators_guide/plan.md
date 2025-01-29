@@ -303,7 +303,7 @@ Not every tool suits every job. Evaluate Datadog's product use cases and match t
 
 ## Summary
 
-It is important to develop and plan a realistic course for installing Datadog. In this section, you learned about the planning and best practices phase, setting your Datadog footprint up for success. You identified and assembled your knowledge base and team members, developed your installation models, planned optimizations, and compiled a list of best practices for core products. These foundations prepare you for the the next phases of Datadog installation: build and run.  
+It is important to develop and plan a realistic course for installing Datadog. In this section, you learned about the planning and best practices phase, setting your Datadog footprint up for success. You identified and assembled your knowledge base and team members, developed your installation models, planned optimizations, and compiled a list of best practices for core products. These foundations prepare you for the next phases of Datadog installation: build and run.  
 
 ## Next Steps
 
