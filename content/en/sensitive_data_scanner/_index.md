@@ -45,18 +45,18 @@ Sensitive Data Scanner can scan your data [in the cloud](#in-the-cloud) or [with
 
 ### In the cloud  {#in-the-cloud}
 
-With Sensitive Data Scanner in the Cloud, you submit your logs to the Datadog backend, so logs leave your premises before they are redacted. To use Sensitive Data Scanner, set up a scanning group to define what data to scan and then set up scanning rules to determine what sensitive information to match within the data. For scanning rules you can:
-- Add predefined scanning rules from Datadog's Scanning Rule Library. These rules detect common patterns such as email addresses, credit card numbers, API keys, authorization tokens, network and device information, and more.
-- Create your own rules using regex patterns.
+With Sensitive Data Scanner in the Cloud, you submit your application logs, APM events, and RUM events to the Datadog backend, so the events leave your premises before they are redacted. To use Sensitive Data Scanner, set up a scanning group to define what data to scan and then set up scanning rules to determine what sensitive information to match within the data. For scanning rules you can:
+- Add predefined scanning rules from Datadog's [Scanning Rule Library][2]. These rules detect common patterns such as email addresses, credit card numbers, API keys, authorization tokens, network and device information, and more.
+- [Create your own rules using regex patterns][3].
 
-See [Set Up Sensitive Data Scanner in the Cloud][2] for setup details.
+See [Set Up Sensitive Data Scanner in the Cloud][4] for setup details.
 
 
 ### In your environment {#in-your-environment}
 
-Use [Observability Pipelines][3] to collect and process your data within your environment, and then route the data to their downstream integrations. When you set up a pipeline in Observability Pipelines, add the [Sensitive Data Scanner processor][5] to redact sensitive data in your logs before they leave your premises. You can add predefined scanning rules from the Rule Library, such as email address, credit card numbers, API keys, authorization tokens, IP addresses, and more. You can also create your own rules using regex patterns.
+Use [Observability Pipelines][5] to collect and process your data within your environment, and then route the data to their downstream integrations. When you set up a pipeline in Observability Pipelines, add the [Sensitive Data Scanner processor][6] to redact sensitive data in your logs before they leave your premises. You can add predefined scanning rules from the Rule Library, such as email address, credit card numbers, API keys, authorization tokens, IP addresses, and more. You can also create your own rules using regex patterns.
 
-See [Set Up Pipelines][4] for more information.
+See [Set Up Pipelines][7] for more information.
 
 ## Scan cloud storage
 
@@ -66,21 +66,21 @@ See [Set Up Pipelines][4] for more information.
 
 {{< img src="sensitive_data_scanner/cloud_storage_issues.png" alt="Your image description" style="width:100%;" >}}
 
-If you have [Sensitive Data Scanner][6] enabled, you can now catalog and classify sensitive data in your Amazon S3 buckets and RDS instances. **Note**: Sensitive Data Scanner does not redact sensitive data in your cloud storage resources.
+If you have [Sensitive Data Scanner][8] enabled, you can now catalog and classify sensitive data in your Amazon S3 buckets and RDS instances. **Note**: Sensitive Data Scanner does not redact sensitive data in your cloud storage resources.
 
-Sensitive Data Scanner scans for sensitive data by deploying [Agentless scanners][7] in your cloud environments. These scanning instances retrieve a list of all S3 buckets and RDS instances through [Remote Configuration][8], and have set instructions to scan text files—such as CSVs and JSONs—and tables in every datastore over time.
+Sensitive Data Scanner scans for sensitive data by deploying [Agentless scanners][9] in your cloud environments. These scanning instances retrieve a list of all S3 buckets and RDS instances through [Remote Configuration][10], and have set instructions to scan text files—such as CSVs and JSONs—and tables in every datastore over time.
 
-Sensitive Data Scanner leverages its [entire rules library][9] to find matches. When a match is found, the location of the match is sent to Datadog by the scanning instance. **Note**: Data stores and their files are only read in your environment—no sensitive data is sent back to Datadog.
+Sensitive Data Scanner leverages its [entire rules library][11] to find matches. When a match is found, the location of the match is sent to Datadog by the scanning instance. **Note**: Data stores and their files are only read in your environment—no sensitive data is sent back to Datadog.
 
-Along with displaying sensitive data matches, Sensitive Data Scanner surfaces any security issues detected by [Cloud Security Management][10] affecting the sensitive data stores. You can click any issue to continue triage and remediation within Cloud Security Management.
+Along with displaying sensitive data matches, Sensitive Data Scanner surfaces any security issues detected by [Cloud Security Management][12] affecting the sensitive data stores. You can click any issue to continue triage and remediation within Cloud Security Management.
 
-See [Set up Sensitive Data Scanner for Cloud Storage][2] for setup details.
+See [Set up Sensitive Data Scanner for Cloud Storage][4] for setup details.
 
 ## Investigate sensitive data issues
 
 {{< img src="sensitive_data_scanner/sds_summary_20241114.png" alt="The summary page showing an overview of sensitive issues broken down by priority" style="width:100%;" >}}
 
-Use the [Summary page][11] to see details of sensitive data issues identified by your scanning rules. These details include:
+Use the [Summary page][13] to see details of sensitive data issues identified by your scanning rules. These details include:
 
 - The specific scanning rule that detected the matches, so that you can determine which rules to modify as needed.
 - The scanning group in which the issue has occurred, so that you can determine the blast radius of any leaks.
@@ -88,28 +88,30 @@ Use the [Summary page][11] to see details of sensitive data issues identified by
 - A graph of the events associated with the issue to help you pinpoint when an issue started and see how it has progressed.
 - Related cases created for the issue.
 
-See [Investigate Sensitive Data Issues][12] for more information on how to use the Summary page to triage your sensitive data issues.
+See [Investigate Sensitive Data Issues][14] for more information on how to use the Summary page to triage your sensitive data issues.
 
 ## Review sensitive data trends
 
 {{<img src="sensitive_data_scanner/sdslight.png" alt="Sensitive Data Scanner Overview dashboard" style="width:80%;">}}
 
-When Sensitive Data Scanner is enabled, an [out-of-the-box dashboard][13] summarizing sensitive data issues is automatically installed in your account. To access this dashboard, navigate to **Dashboards** > **Dashboards List** and search for "Sensitive Data Scanner Overview".
+When Sensitive Data Scanner is enabled, an [out-of-the-box dashboard][15] summarizing sensitive data issues is automatically installed in your account. To access this dashboard, navigate to **Dashboards** > **Dashboards List** and search for "Sensitive Data Scanner Overview".
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /data_security/pci_compliance/
-[2]: /sensitive_data_scanner/setup/
-[3]: /observability_pipelines/
-[4]: /observability_pipelines/set_up_pipelines/
-[5]: /observability_pipelines/processors/#sensitive-data-scanner
-[6]: /sensitive_data_scanner/?tab=inthecloud
-[7]: /security/cloud_security_management/setup/agentless_scanning
-[8]: /agent/remote_config
-[9]: /sensitive_data_scanner/library_rules/
-[10]: /security/cloud_security_management
-[11]: https://app.datadoghq.com/organization-settings/sensitive-data-scanner
-[12]: /sensitive_data_scanner/guide/investigate_sensitive_data_issues/
-[13]: https://app.datadoghq.com/dash/integration/sensitive_data_scanner
+[2]: /sensitive_data_scanner/scanning_rules/library_rules/
+[3]: /sensitive_data_scanner/scanning_rules/custom_rules/
+[4]: /sensitive_data_scanner/setup/
+[5]: /observability_pipelines/
+[6]: /observability_pipelines/processors/#sensitive-data-scanner
+[7]: /observability_pipelines/set_up_pipelines/
+[8]: /sensitive_data_scanner/?tab=inthecloud
+[9]: /security/cloud_security_management/setup/agentless_scanning
+[10]: /agent/remote_config
+[11]: /sensitive_data_scanner/library_rules/
+[12]: /security/cloud_security_management
+[13]: https://app.datadoghq.com/organization-settings/sensitive-data-scanner
+[14]: /sensitive_data_scanner/guide/investigate_sensitive_data_issues/
+[15]: https://app.datadoghq.com/dash/integration/sensitive_data_scanner
