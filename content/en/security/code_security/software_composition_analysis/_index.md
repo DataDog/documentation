@@ -14,13 +14,9 @@ Using Software Composition Analysis provides organizations with the following be
 - Risk-based prioritization and remediation based on runtime detection of vulnerabilities
 - Identification of malicious packages, end-of-life libraries, and library riskiness based on OpenSSF standards
 
-### Static vulnerability detection in repositories
+### Vulnerability detection in repositories
 SCA supports scanning for libraries in the following languages and technologies:
 
-{{< partial name="code_security/sca-getting-started.html" >}}
-
-
-### Runtime vulnerability detection in services
 {{< partial name="code_security/sca-getting-started.html" >}}
 
 SCA can also detect vulnerable libraries running in your services based on your Datadog telemetry.
@@ -30,8 +26,6 @@ Runtime detection allows for risk-based prioritization of library vulnerabilitie
 ## Search and filter results
 
 ### Library Catalog
-
-{{< partial name="code_security/sca-getting-started.html" >}}
 
 The Datadog SCA [Library Catalog][8] helps you understand the list of libraries and its versions that compose your application.
 
@@ -105,21 +99,6 @@ For set up instructions, see [Runtime Setup][2].
 The Datadog SCA [Library Inventory][8] helps you understand the list of libraries and its versions that compose your application.
 
 With Datadog SCA spanning your software development lifecycle from code to production, it detects libraries throughout the lifecycle of an application and alerts you to vulnerabilities, risks, licenses, and more.
-
-
-### Datadog severity score
-
-Each vulnerability has a defined base severity score. To assist in prioritizing remediation, Datadog modifies the base CVSS score into the Datadog Severity Score by considering evidence of suspicious requests or attacks, the business sensitivity or internet exposure of the environment, and the risk of a successful exploit.
-
-Four score modifiers may apply to a base score. Two are provided by runtime context:
- - Vulnerability is in production
- - Service affected by vulnerability is under attack
-
-Two are provided by CVE context:
- - Whether an exploit is available
- - The exploitation probability
-
-Datadog shows how the base CVSS score is adjusted to the Datadog Severity Score based on the factors above.
 
 <!-- ### Remediation
 
