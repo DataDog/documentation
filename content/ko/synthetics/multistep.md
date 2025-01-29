@@ -55,7 +55,7 @@ title: 다단계 API 테스트
 
 API 요청 단계를 만들려면 **첫 번째 단계 생성**을 클릭합니다.
 
-{{< img src="synthetics/api_tests/ms_create_request.png" alt=Multistep API 테스트 요청 생성" style="width:90%;" >}}
+{{< img src="synthetics/api_tests/ms_create_request.png" alt="Multistep API 테스트 요청 생성" style="width:90%;" >}}
 
 기본적으로 테스트 단계는 최대 10개까지 생성할 수 있습니다. 이 제한을 늘리려면 <a href="https://docs.datadoghq.com/help/">Datadog 지원팀</a>에 문의하세요.
 
