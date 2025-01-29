@@ -1,7 +1,10 @@
 /**
  * CDOCS-MODIFICATIONS
  *
- * isTag, isClientVariable, and isClientFunction have been added
+ * buildTag() has been added since Tag is now an interface
+ * instead of a class.
+ *
+ * isTag(), isClientVariable(), and isClientFunction() have been added
  * at the bottom of this file. These functions can be used to easily
  * type-check nodes when rendering a renderable tree.
  */
