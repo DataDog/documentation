@@ -57,7 +57,7 @@ fun onUserInteraction() {
 
 ### Enrich resources
 
-When [tracking resources automatically][6], provide a custom `RumResourceAttributesProvider` instance to add custom attributes to each tracked network request/response. For example, if you want to track a network request's headers, create an implementation as following, and pass it in `datadogKtorPlugin` initialization call.
+When [tracking resources automatically][6], provide a custom `RumResourceAttributesProvider` instance to add custom attributes to each tracked network request/response. For example, if you want to track a network request's headers, create an implementation like the following, and pass it in the `datadogKtorPlugin` initialization call.
 
 ```kotlin
 class CustomRumResourceAttributesProvider : RumResourceAttributesProvider {
