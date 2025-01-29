@@ -26547,7 +26547,7 @@ paths:
       x-permission:
         operator: OR
         permissions:
-        - dashboards_public_share
+        - embeddable_graphs_share
       x-undo:
         operationId: TODO
         parameters: []
@@ -26632,7 +26632,7 @@ paths:
       x-permission:
         operator: OR
         permissions:
-        - dashboards_public_share
+        - embeddable_graphs_share
       x-undo:
         type: safe
   /api/v1/graph/embed/{embed_id}/revoke:
@@ -26674,7 +26674,7 @@ paths:
       x-permission:
         operator: OR
         permissions:
-        - dashboards_public_share
+        - embeddable_graphs_share
       x-undo:
         type: safe
   /api/v1/graph/snapshot:
