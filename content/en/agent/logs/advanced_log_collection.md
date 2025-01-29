@@ -479,7 +479,7 @@ logs_config:
 {{% /tab %}}
 {{% tab "Docker" %}}
 
-Use the environment variable `DD_LOGS_CONFIG_AUTO_MULTI_LINE_DETECTION` in Datadog Agent container to configure global automatic multi-line aggregation rule, for example:
+Use the environment variable `DD_LOGS_CONFIG_AUTO_MULTI_LINE_DETECTION` in the Datadog Agent container to configure a global automatic multi-line aggregation rule. For example:
 
 ```shell
 DD_LOGS_CONFIG_AUTO_MULTI_LINE_DETECTION=true
@@ -515,12 +515,12 @@ datadog:
 {{< /tabs >}}
 
 ### Enable multi-line aggregation per integration
-Alternatively, this can be enabled or disabled (overriding the global config) per log integration setup.
+Alternatively, you can enable or disable multi-line aggregation for an individual integration's log collection. Changing the multi-line aggregation for an integration overrides the global configuration.
 
 {{< tabs >}}
 {{% tab "Configuration file" %}}
 
-In a Host environment, enable `auto_multi_line_detection` with [Custom log collection][1] method. For example:
+In a host environment, enable `auto_multi_line_detection` with the [Custom log collection][1] method. For example:
 
 [1]: https://docs.datadoghq.com/agent/logs/?tab=tailfiles#custom-log-collection
 
@@ -579,13 +579,13 @@ spec:
 {{% /tab %}}
 {{< /tabs >}}
 
-### Customizing multi-line aggregation configuration
+### Customize multi-line aggregation configuration
 Automatic multi-line detection uses a list of [common regular expressions][1] to attempt to match logs. If the built-in list is not sufficient, you can also add custom patterns and thresholds for detection.
 
 [1]:https://github.com/DataDog/datadog-agent/blob/a27c16c05da0cf7b09d5a5075ca568fdae1b4ee0/pkg/logs/internal/decoder/auto_multiline_handler.go#L187
 {{< tabs >}}
 {{% tab "Configuration file" %}}
-In a configuration file, add the `auto_multi_line_extra_patterns` to your `datadog.yaml` like so:
+In a configuration file, add the `auto_multi_line_extra_patterns` to your `datadog.yaml`:
 ```yaml
 logs_config:
   auto_multi_line_detection: true
@@ -594,7 +594,9 @@ logs_config:
    - '[A-Za-z_]+ \d+, \d+ \d+:\d+:\d+ (AM|PM)'
 ```
 
-If no pattern meets the line match threshold, add the `auto_multi_line_default_match_threshold` parameter with a lower value. This configures a threshold value that determines how frequently logs have to match in order for the auto multi-line aggregation to work. To find the current threshold value run the [agent `status` command][1].
+The `auto_multi_line_default_match_threshold` parameter determines how closely logs have to match the patterns in order for the auto multi-line aggregation to work.
+
+If your multi-line logs aren't getting aggregated as you like, you can change the sensitivity of the matching by setting the `auto_multi_line_default_match_threshold` parameter. Add the `auto_multi_line_default_match_threshold` parameter to your configuration file with a value lower (to increase matches) or higher (to decrease matches) than the current threshold value. To find the current threshold value, run the [Agent `status` command][1].
 
 ```yaml
 logs_config:
@@ -608,7 +610,7 @@ logs_config:
 [1]: https://docs.datadoghq.com/agent/configuration/agent-commands/#agent-information
 {{% /tab %}}
 {{% tab "Docker" %}}
-In a containerized Agent, add the environment variable `DD_LOGS_CONFIG_AUTO_MULTI_LINE_EXTRA_PATTERNS` like so:
+In a containerized Agent, add the environment variable `DD_LOGS_CONFIG_AUTO_MULTI_LINE_EXTRA_PATTERNS`:
 
 ```yaml
     environment:
@@ -616,22 +618,22 @@ In a containerized Agent, add the environment variable `DD_LOGS_CONFIG_AUTO_MULT
       - DD_LOGS_CONFIG_AUTO_MULTI_LINE_EXTRA_PATTERNS=\d{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01]) [A-Za-z_]+\s\d+,\s\d+\s\d+:\d+:\d+\s(AM|PM)
 ```
 
-If no pattern meets the line match threshold, add the `DD_LOGS_CONFIG_AUTO_MULTI_LINE_DEFAULT_MATCH_THRESHOLD` environment variable with a lower value. This configures a threshold value that determines how frequently logs have to match in order for the auto multi-line aggregation to work. To find the current threshold value run the [agent `status` command][1].
+The `auto_multi_line_default_match_threshold` parameter determines how closely logs have to match the patterns in order for the auto multi-line aggregation to work.
+	
+If your multi-line logs aren't getting aggregated as you like, you can change the sensitivity of the matching by setting the `auto_multi_line_default_match_threshold` parameter. Add the `auto_multi_line_default_match_threshold` parameter to your configuration file with a value lower (to increase matches) or higher (to decrease matches) than the current threshold value. To find the current threshold value, run the [Agent `status` command][1].
 
+The Datadog Agent interprets spaces in the `DD_LOGS_CONFIG_AUTO_MULTI_LINE_EXTRA_PATTERNS` environment variable as separators between multiple patterns. In the following example, the two regex patterns are divided by a space, and `\s` in the second regex pattern matches spaces.
 ```yaml
     environment:
       - DD_LOGS_CONFIG_AUTO_MULTI_LINE_DETECTION=true
       - DD_LOGS_CONFIG_AUTO_MULTI_LINE_EXTRA_PATTERNS=\d{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01]) [A-Za-z_]+\s\d+,\s\d+\s\d+:\d+:\d+\s(AM|PM)
       - DD_LOGS_CONFIG_AUTO_MULTI_LINE_DEFAULT_MATCH_THRESHOLD=0.1
-```
-
-**Note**: The Datadog Agent interpret spaces in the `DD_LOGS_CONFIG_AUTO_MULTI_LINE_EXTRA_PATTERNS` environment variable as separators between multiple patterns. You can see the two regex patterns are divided by a space and `\s` is used in the second regex pattern to match for spaces.
 
 [1]: https://docs.datadoghq.com/agent/configuration/agent-commands/#agent-information
 
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
-In Kubernetes, add the environment variable `DD_LOGS_CONFIG_AUTO_MULTI_LINE_EXTRA_PATTERNS` like so:
+In Kubernetes, add the environment variable `DD_LOGS_CONFIG_AUTO_MULTI_LINE_EXTRA_PATTERNS`:
 
 #### Operator
 
@@ -646,15 +648,16 @@ spec:
 
 #### Helm
 
+The Datadog Agent interprets spaces in the `DD_LOGS_CONFIG_AUTO_MULTI_LINE_EXTRA_PATTERNS` environment variable as separators between multiple patterns. In the following example, the two regex patterns are divided by a space, and `\s` in the second regex pattern matches spaces.
 ```yaml
 datadog:
   env: 
     - name: DD_LOGS_CONFIG_AUTO_MULTI_LINE_EXTRA_PATTERNS
       value: \d{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01]) [A-Za-z_]+\s\d+,\s\d+\s\d+:\d+:\d+\s(AM|PM)
-```
-**Note**: The Datadog Agent interpret spaces in the `DD_LOGS_CONFIG_AUTO_MULTI_LINE_EXTRA_PATTERNS` environment variable as separators between multiple patterns. You can see the two regex patterns are divided by a space and `\s` is used in the second regex pattern to match for spaces.
 
-If no pattern meets the line match threshold, add the `DD_LOGS_CONFIG_AUTO_MULTI_LINE_DEFAULT_MATCH_THRESHOLD` environment variable with a lower value. This configures a threshold value that determines how frequently logs have to match in order for the auto multi-line aggregation to work. To find the current threshold value run the [agent `status` command][1].
+The `auto_multi_line_default_match_threshold` parameter determines how closely logs have to match the patterns in order for the auto multi-line aggregation to work.
+	
+If your multi-line logs aren't getting aggregated as you like, you can change the sensitivity of the matching by setting the `auto_multi_line_default_match_threshold` parameter. Add the `auto_multi_line_default_match_threshold` parameter to your configuration file with a value lower (to increase matches) or higher (to decrease matches) than the current threshold value. To find the current threshold value, run the [Agent `status` command][1].
 
 [1]: https://docs.datadoghq.com/agent/configuration/agent-commands/#agent-information
 
@@ -686,7 +689,9 @@ datadog:
 {{% /tab %}}
 {{< /tabs >}}
 
-With this feature enabled, when a new log file is opened the Agent first tries to detect a pattern. This detection process takes at most 30 seconds or the first 500 logs (whichever comes first). During this process the logs are sent as single lines. After the detection threshold is met all future logs for that source are aggregated with the best matching pattern, or as single lines if no pattern is found.
+With multi-line aggregation enabled, the Agent first tries to detect a pattern in each new log file. This detection process takes at most 30 seconds or the first 500 logs, whichever comes first. During the initial detection process, the logs are sent as single lines.
+
+After the detection threshold is met, all future logs for that source are aggregated with the best matching pattern, or as single lines if no pattern is found.
 
 **Note**: If you can control the naming pattern of the rotated log, ensure that the rotated file replaces the previously active file with the same name. The Agent reuses a previously detected pattern on the newly rotated file to avoid re-running detection.
 
