@@ -162,12 +162,7 @@ menu:
       url: getting_started/session_replay/
       parent: getting_started
       weight: 16
-    - name: Continuous Testing
-      identifier: getting_started_continuous_testing
-      url: getting_started/continuous_testing/
-      parent: getting_started
-      weight: 17
-    - name: Synthetic Monitoring
+    - name: Synthetic Monitoring and Testing
       identifier: getting_started_synthetics
       url: getting_started/synthetics/
       parent: getting_started
@@ -182,11 +177,21 @@ menu:
       url: getting_started/synthetics/browser_test
       parent: getting_started_synthetics
       weight: 1802
+    - name: Mobile App Tests
+      identifier: getting_started_mobile_app
+      url: getting_started/synthetics/mobile_app_testing
+      parent: getting_started_synthetics
+      weight: 1803
+    - name: Continuous Testing
+      identifier: getting_started_continuous_testing
+      url: getting_started/continuous_testing/
+      parent: getting_started_synthetics
+      weight: 1804
     - name: Private Locations
       identifier: getting_started_private_location
       url: getting_started/synthetics/private_location
       parent: getting_started_synthetics
-      weight: 1803
+      weight: 1805
     - name: Incident Management
       identifier: getting_started_incident_management
       url: getting_started/incident_management/
@@ -217,26 +222,31 @@ menu:
       url: getting_started/workflow_automation/
       parent: getting_started
       weight: 24
+    - name: Software Delivery
+      identifier: getting_started_software_delivery
+      url: getting_started/software_delivery/
+      parent: getting_started
+      weight: 25
     - name: CI Visibility
       identifier: getting_started_ci_visibility
       url: getting_started/ci_visibility/
-      parent: getting_started
-      weight: 25
-    - name: Test Visibility
-      identifier: getting_started_test_visibility
-      url: getting_started/test_visibility/
-      parent: getting_started
-      weight: 26
+      parent: getting_started_software_delivery
+      weight: 2501
+    - name: Test Optimization
+      identifier: getting_started_test_optimization
+      url: getting_started/test_optimization/
+      parent: getting_started_software_delivery
+      weight: 2502
     - name: Test Impact Analysis
       identifier: getting_started_test_impact_analysis
       url: getting_started/test_impact_analysis/
-      parent: getting_started
-      weight: 27
+      parent: getting_started_software_delivery
+      weight: 2503
     - name: Code Security
       identifier: getting_started_code_security
       url: getting_started/code_security/
       parent: getting_started
-      weight: 28
+      weight: 26
     - name: Learning Center
       identifier: getting_started_learning_center
       url: getting_started/learning_center/
@@ -2086,36 +2096,41 @@ menu:
       parent: error_tracking
       identifier: error_tracking_states
       weight: 2
+    - name: Suspected Causes
+      url: error_tracking/suspected_causes
+      parent: error_tracking
+      identifier: error_tracking_suspected_causes
+      weight: 3
     - name: Regression Detection
       url: error_tracking/regression_detection
       parent: error_tracking
       identifier: error_tracking_regression_detection
-      weight: 3
+      weight: 4
     - name: Default Grouping
       url: error_tracking/default_grouping
       parent: error_tracking
       identifier: error_tracking_default_grouping
-      weight: 4
+      weight: 5
     - name: Monitors
       url: error_tracking/monitors
       parent: error_tracking
       identifier: error_tracking_monitors
-      weight: 5
+      weight: 6
     - name: Custom Grouping
       url: error_tracking/custom_grouping
       parent: error_tracking
       identifier: error_tracking_custom_grouping
-      weight: 6
+      weight: 7
     - name: Identify Suspect Commits
       url: error_tracking/suspect_commits
       parent: error_tracking
       identifier: error_tracking_suspect_commits
-      weight: 7
+      weight: 8
     - name: Track Browser and Mobile Errors
       url: error_tracking/frontend
       parent: error_tracking
       identifier: error_tracking_frontend
-      weight: 8
+      weight: 9
     - name: Browser Error Tracking
       url: error_tracking/frontend/browser
       parent: error_tracking_frontend
@@ -2145,7 +2160,7 @@ menu:
       url: error_tracking/backend
       parent: error_tracking
       identifier: error_tracking_backend
-      weight: 9
+      weight: 10
     - name: Exception Replay
       url: error_tracking/backend/exception_replay
       parent: error_tracking_backend
@@ -2155,12 +2170,12 @@ menu:
       url: error_tracking/apm
       parent: error_tracking_backend
       identifier: error_tracking_apm
-      weight: 102
+      weight: 103
     - name: Logs
       url: error_tracking/backend/logs
       parent: error_tracking_backend
       identifier: error_tracking_be_logs
-      weight: 103
+      weight: 104
     - name: Manage Data Collection
       url: error_tracking/manage_data_collection
       parent: error_tracking
@@ -2548,21 +2563,11 @@ menu:
       parent: workflows_actions
       identifier: workflows_data_transformation
       weight: 503
-    - name: HTTP Requests
-      url: service_management/workflows/actions/http/
-      parent: workflows_actions
-      identifier: workflows_http
-      weight: 504
     - name: Save and Reuse Actions
       url: service_management/workflows/saved_actions/
       parent: workflows
       identifier: workflows_saved_actions
       weight: 6
-    - name: Connections
-      url: service_management/workflows/connections/
-      parent: workflows
-      identifier: workflows_connections
-      weight: 7
     - name: Test and Debug
       url: service_management/workflows/test_and_debug/
       parent: workflows
@@ -2594,16 +2599,6 @@ menu:
       parent: app_builder
       identifier: app_builder_access
       weight: 2
-    - name: Connections
-      url: service_management/app_builder/connections/
-      parent: app_builder
-      identifier: app_builder_connections
-      weight: 3
-    - name: HTTP Request
-      url: service_management/app_builder/connections/http_request/
-      parent: app_builder_connections
-      identifier: app_builder_http_request
-      weight: 301
     - name: Queries
       url: service_management/app_builder/queries/
       parent: app_builder
@@ -2656,21 +2651,31 @@ menu:
       parent: actions_heading
       identifier: action_catalog
       weight: 40000
+    - name: Connections
+      url: actions/connections/
+      parent: action_catalog
+      identifier: actions_connections
+      weight: 1
+    - name: HTTP Request
+      url: actions/connections/http/
+      parent: actions_connections
+      identifier: actions_http
+      weight: 101
     - name: Private Actions
       url: actions/private_actions/
       parent: action_catalog
       identifier: private_actions
-      weight: 1
+      weight: 2
     - name: Use Private Actions
       url: actions/private_actions/use_private_actions/
       parent: private_actions
       identifier: use_private_actions
-      weight: 101
+      weight: 201
     - name: Private Action Credentials
       url: actions/private_actions/private_action_credentials/
       parent: private_actions
       identifier: private_actions_creds
-      weight: 102
+      weight: 202
     - name: Universal Service Monitoring
       url: universal_service_monitoring/
       pre: usm
@@ -3110,7 +3115,7 @@ menu:
       parent: ndm_setup
       identifier: ndm_snmptraps
       weight: 30004
-    - name: SD-WAN 
+    - name: SD-WAN
       url: network_monitoring/devices/sd-wan
       parent: ndm_setup
       identifier: ndm_sd-wan
@@ -6043,6 +6048,16 @@ menu:
       parent: appsec_threats
       identifier: threats_user_info
       weight: 722
+    - name: Attacker Fingerprint
+      url: security/application_security/threats/attacker_fingerprint/
+      parent: appsec_threats
+      identifier: threats_attacker_fingerprint
+      weight: 723
+    - name: Attacker Clustering
+      url: security/application_security/threats/attacker_clustering/
+      parent: appsec_threats
+      identifier: threats_attacker_clustering
+      weight: 724
     - name: Application Security for Serverless
       url: security/application_security/serverless/
       parent: application_security
@@ -6124,7 +6139,7 @@ menu:
       url: /security/code_security/software_composition_analysis/setup_runtime/compatibility/
       parent: sca_setup_runtime
       weight: 1
-    - name: IAST
+    - name: Runtime Code Analysis (IAST)
       identifier: sec_iast
       url: /security/code_security/iast/
       parent: code_security
