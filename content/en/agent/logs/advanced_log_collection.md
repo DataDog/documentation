@@ -585,7 +585,7 @@ Automatic multi-line detection uses a list of [common regular expressions][1] to
 [1]:https://github.com/DataDog/datadog-agent/blob/a27c16c05da0cf7b09d5a5075ca568fdae1b4ee0/pkg/logs/internal/decoder/auto_multiline_handler.go#L187
 {{< tabs >}}
 {{% tab "Configuration file" %}}
-In a configuration file, add the `auto_multi_line_extra_patterns` to your `datadog.yaml` like so
+In a configuration file, add the `auto_multi_line_extra_patterns` to your `datadog.yaml` like so:
 ```yaml
 logs_config:
   auto_multi_line_detection: true
@@ -608,7 +608,7 @@ logs_config:
 [1]: https://docs.datadoghq.com/agent/configuration/agent-commands/#agent-information
 {{% /tab %}}
 {{% tab "Docker" %}}
-In a containerized Agent, add the environment variable `DD_LOGS_CONFIG_AUTO_MULTI_LINE_EXTRA_PATTERNS` like so
+In a containerized Agent, add the environment variable `DD_LOGS_CONFIG_AUTO_MULTI_LINE_EXTRA_PATTERNS` like so:
 
 ```yaml
     environment:
@@ -631,7 +631,27 @@ If no pattern meets the line match threshold, add the `DD_LOGS_CONFIG_AUTO_MULTI
 
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
-In Kubernetes, add the environment variable `DD_LOGS_CONFIG_AUTO_MULTI_LINE_EXTRA_PATTERNS` like so
+In Kubernetes, add the environment variable `DD_LOGS_CONFIG_AUTO_MULTI_LINE_EXTRA_PATTERNS` like so:
+
+#### Operator
+
+```yaml
+spec:
+  override:
+    nodeAgent:
+      env:
+        - name: DD_LOGS_CONFIG_AUTO_MULTI_LINE_EXTRA_PATTERNS
+          value: \d{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01]) [A-Za-z_]+\s\d+,\s\d+\s\d+:\d+:\d+\s(AM|PM)
+```
+
+#### Helm
+
+```yaml
+datadog:
+  env: 
+    - name: DD_LOGS_CONFIG_AUTO_MULTI_LINE_EXTRA_PATTERNS
+      value: \d{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01]) [A-Za-z_]+\s\d+,\s\d+\s\d+:\d+:\d+\s(AM|PM)
+```
 If no pattern meets the line match threshold, add the `DD_LOGS_CONFIG_AUTO_MULTI_LINE_DEFAULT_MATCH_THRESHOLD` environment variable with a lower value. This configures a threshold value that determines how frequently logs have to match in order for the auto multi-line aggregation to work. To find the current threshold value run the [agent `status` command][1].
 
 [1]: https://docs.datadoghq.com/agent/configuration/agent-commands/#agent-information
@@ -661,6 +681,7 @@ datadog:
 ```
 
 **Note**: The Datadog Agent interpret spaces in the `DD_LOGS_CONFIG_AUTO_MULTI_LINE_EXTRA_PATTERNS` environment variable as separators between multiple patterns. You can see the two regex patterns are divided by a space and `\s` is used in the second regex pattern to match for spaces.
+
 {{% /tab %}}
 {{< /tabs >}}
 
