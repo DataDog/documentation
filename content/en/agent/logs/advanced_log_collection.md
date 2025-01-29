@@ -462,7 +462,7 @@ More examples:
 | 2020-10-27 05:10:49.657  | `\d{4}-\d{2}-\d{2}\s\d{2}:\d{2}:\d{2}\.\d{3}`     |
 | {"date": "2018-01-02"    | `\{"date": "\d{4}-\d{2}-\d{2}`                    |
 
-### Global Automatic multi-line aggregation
+### Global automatic multi-line aggregation
 With Agent 7.37+, `auto_multi_line_detection` can be enabled, which allows the Agent to detect [common multi-line patterns][3] automatically for **all** log integrations it sets up. 
 
 
@@ -652,6 +652,8 @@ datadog:
     - name: DD_LOGS_CONFIG_AUTO_MULTI_LINE_EXTRA_PATTERNS
       value: \d{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01]) [A-Za-z_]+\s\d+,\s\d+\s\d+:\d+:\d+\s(AM|PM)
 ```
+**Note**: The Datadog Agent interpret spaces in the `DD_LOGS_CONFIG_AUTO_MULTI_LINE_EXTRA_PATTERNS` environment variable as separators between multiple patterns. You can see the two regex patterns are divided by a space and `\s` is used in the second regex pattern to match for spaces.
+
 If no pattern meets the line match threshold, add the `DD_LOGS_CONFIG_AUTO_MULTI_LINE_DEFAULT_MATCH_THRESHOLD` environment variable with a lower value. This configures a threshold value that determines how frequently logs have to match in order for the auto multi-line aggregation to work. To find the current threshold value run the [agent `status` command][1].
 
 [1]: https://docs.datadoghq.com/agent/configuration/agent-commands/#agent-information
@@ -680,7 +682,6 @@ datadog:
       value: "0.1"
 ```
 
-**Note**: The Datadog Agent interpret spaces in the `DD_LOGS_CONFIG_AUTO_MULTI_LINE_EXTRA_PATTERNS` environment variable as separators between multiple patterns. You can see the two regex patterns are divided by a space and `\s` is used in the second regex pattern to match for spaces.
 
 {{% /tab %}}
 {{< /tabs >}}
