@@ -146,7 +146,7 @@ Identify your organization's entire list of unqueried metrics over the past 30, 
 3. Review the resulting table of metrics names. Are there any patterns or are they submitted from a specific service? Find tags associated with these unqueried metrics.
 4. (Optional) To export this list, click **Export as CSV** above the metric table.
 
-After you identify the metrics that your developers don't need, you can safely reduce the custom metrics volumes and reduce the costs of these unused metrics with Metrics without Limits™. 
+   After you identify the metrics that your developers don't need, you can safely reduce the custom metrics volumes and reduce the costs of these unused metrics with Metrics without Limits™. 
 
 {{< img src="metrics/guide/custom_metrics_governance/manage_tags_fm_metrics_summary_2025-01-27.png" alt="The Configure Metrics drop menu with the Manage tags selection highlighted" style="width:90%;" >}}
 
