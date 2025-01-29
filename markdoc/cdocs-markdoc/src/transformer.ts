@@ -1,3 +1,10 @@
+/**
+ * CDOCS-MODIFICATIONS
+ *
+ * buildTag() is now used instead of new Tag() to create a new tag,
+ * since Tag is now an interface instead of a class.
+ */
+
 import { Class } from './schema-types/class';
 import { Id } from './schema-types/id';
 import { isPromise } from './utils';
@@ -8,7 +15,7 @@ import type {
   NodeType,
   RenderableTreeNodes,
   Schema,
-  Transformer,
+  Transformer
 } from './types';
 import { buildTag } from './utils';
 
@@ -16,7 +23,7 @@ type AttributesSchema = Schema['attributes'];
 
 export const globalAttributes: AttributesSchema = {
   class: { type: Class, render: true },
-  id: { type: Id, render: true },
+  id: { type: Id, render: true }
 };
 
 export default {
@@ -59,8 +66,8 @@ export default {
   },
 
   children(node: Node, config: Config = {}) {
-    const children = node.children.flatMap<MaybePromise<RenderableTreeNodes>>(
-      (child) => this.node(child, config)
+    const children = node.children.flatMap<MaybePromise<RenderableTreeNodes>>((child) =>
+      this.node(child, config)
     );
     if (children.some(isPromise)) {
       return Promise.all(children);
@@ -85,5 +92,5 @@ export default {
     }
 
     return buildTag(schema.render, attributes, children);
-  },
+  }
 } as Transformer;
