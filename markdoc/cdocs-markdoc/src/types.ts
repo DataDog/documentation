@@ -6,8 +6,9 @@
  * that has been resolved with an initial value
  * but can be re-resolved in the browser when the variables change.
  *
- * Tags were classes in the original Markdoc, but they're objects
- * in cdocs-markdoc. The Tag type added here includes an optional
+ * Tags were classes in the original Markdoc, but they're plain objects
+ * in cdocs-markdoc to make them a little easier to work with in
+ * any consumer code. The Tag type added here includes an optional
  * if property that can be a ClientFunction or ClientVariable.
  *
  * When the renderable tree is created, tags with an 'if'
