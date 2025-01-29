@@ -257,8 +257,7 @@ datadogRum.init({
    // site: '<SITE>',
    // version: '1.0.0',
    trackUserInteractions: true,
-   trackResources: true,
-   defaultPrivacyLevel: {default to the selection in form}
+   trackResources: true
 });
 
 ```
