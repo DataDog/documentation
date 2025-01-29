@@ -50493,6 +50493,10 @@ paths:
               }}\n    }\n  }\n}"
           step: there is a valid "report" in the system
       x-menu-order: 101
+      x-permission:
+        operator: OR
+        permissions:
+        - slos_read
       x-undo:
         type: safe
       x-unstable: '**Note**: This feature is in private beta. To request access, use
