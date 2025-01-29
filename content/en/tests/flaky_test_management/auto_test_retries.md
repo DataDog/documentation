@@ -33,7 +33,7 @@ Ensure [Test Optimization][1] is configured for your test runs.
 
 `dd-trace-java >= 1.34.0`
 
-The test framework compatibility is the same as [Test Optimization Compatibility][3], with the exception of `Weaver`.
+The test framework compatibility is the same as [Test Optimization Compatibility][3], with the exception of `Scala Weaver`.
 
 ### Configuration
 After you have set up Test Optimization, you can configure Auto Test Retries from the [Test Service Settings page][1].

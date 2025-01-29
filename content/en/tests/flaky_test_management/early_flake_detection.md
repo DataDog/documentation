@@ -79,7 +79,7 @@ The test framework compatibility is the same as [Test Optimization Compatibility
 
 `dd-trace-java>=1.34.0`
 
-The test framework compatibility is the same as [Test Optimization Compatibility][2], with the exception of `Weaver`.
+The test framework compatibility is the same as [Test Optimization Compatibility][2], with the exception of `Scala Weaver`.
 
 [2]: /tests/setup/java/?tab=ciproviderwithautoinstrumentationsupport#compatibility
 {{% /tab %}}
