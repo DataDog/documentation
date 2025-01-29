@@ -11,7 +11,7 @@ further_reading:
 ---
 
 Datadog supports custom instrumentation for Rust applications when you use the [OpenTelemetry SDK][1].
-You can read more about setting this up on our blog under [How to monitor your Rust applications with OpenTelemetry][2]
+For more information on setting this up, see [How to Monitor Your Rust Applications with OpenTelemetry][2] on the blog.
 
 ## Further Reading
 
