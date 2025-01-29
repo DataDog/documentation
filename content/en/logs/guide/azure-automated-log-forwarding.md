@@ -13,20 +13,20 @@ further_reading:
 
 Use this guide to automate your Azure log forwarding setup with an Azure Resource Manager (ARM) template. 
 
-The ARM template deploys resources from a series of Azure services (storage accounts and function apps) into your subscriptions that collect and forward logs to Datadog. These services automatically scale up or down to match log volume. Scaling is manged by a control plane, which is a set of function apps deployed to a subscription of your choice. Storage accounts and function apps are deployed in each of the subscriptions forwarding logs to Datadog.
+The ARM template deploys resources from a series of Azure services (storage accounts and function apps) into your subscriptions that collect and forward logs to Datadog. These services automatically scale up or down to match log volume. Scaling is manged by a control plane, which is a set of function apps deployed to a subscription and region of your choice. Storage accounts and function apps are deployed in each of the subscriptions forwarding logs to Datadog.
 
 **All sites**: All [Datadog sites][4] can use the steps on this page to complete setup of automated log forwarding.
 
 ## Setup
 
-Begin by opening the [Automated Log Forwarding ARM template][1].
+Begin by opening the [Automated Log Forwarding ARM template][1]. The sections below provide instructions for completing each page of the template.
 
 ### Basics
 
 1. Select the management group. This is needed for the ARM template to grant permissions to the subscriptions you select for automated log forwarding.
 2. Select the region. This is where the control plane is deployed.
 3. Select the subscriptions to forward logs.
-4. Select the subscription to deploy the control plane.
+4. Select the subscription to deploy the control plane to.
 5. Enter a name for the resource group to be used by the control plane.
 
 **Note**: It is recommended to choose a new, unused resource group name to simplify management of control plane services.
