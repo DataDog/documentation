@@ -48,7 +48,7 @@ This behavior can be fine-tuned with the following environment variables:
 
 [1]: https://app.datadoghq.com/ci/settings/test-optimization
 [2]: /tests/flaky_test_management/
-[3]: /tests/setup/java/?tab=ciproviderwithautoinstrumentationsupport#compatibility
+[3]: /tests/setup/java/#compatibility
 {{% /tab %}}
 
 {{% tab "Javascript" %}}

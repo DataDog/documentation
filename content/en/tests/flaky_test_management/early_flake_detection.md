@@ -81,7 +81,7 @@ The test framework compatibility is the same as [Test Optimization Compatibility
 
 The test framework compatibility is the same as [Test Optimization Compatibility][2], with the exception of `Scala Weaver`.
 
-[2]: /tests/setup/java/?tab=ciproviderwithautoinstrumentationsupport#compatibility
+[2]: /tests/setup/java/#compatibility
 {{% /tab %}}
 
 {{% tab ".NET" %}}
