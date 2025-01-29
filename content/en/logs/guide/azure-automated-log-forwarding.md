@@ -23,17 +23,17 @@ Begin by opening the [Automated Log Forwarding ARM template][1]. The sections be
 
 ### Basics
 
-1. Select the management group. This is needed for the ARM template to grant permissions to the subscriptions you select for automated log forwarding.
-2. Select the region. This is where the control plane is deployed.
-3. Select the subscriptions to forward logs.
-4. Select the subscription to deploy the control plane to.
-5. Enter a name for the resource group to be used by the control plane.
 
-**Note**: It is recommended to choose a new, unused resource group name to simplify management of control plane services.
+1. Under **Project details**, select the management group. This is needed for the ARM template to grant permissions to the subscriptions you select for automated log forwarding.
+2. Under **Instance details**, select values for:
+   - **Region**. This is where the control plane is deployed.
+   - **Subscriptions to Forward Logs**. These are the subscriptions to be configured for log forwarding.
+   - **Control Plane Subscription**. This is the subscription that the control plane is deployed to.
+   - **Resource Group Name**. This is the resource group to be used by the control plane. It is recommended to choose a new, unused resource group name to simplify management of control plane services.
 
 {{< img src="logs/guide/azure-automated-log-forwarding/deployment_basics.png" alt="The Basics page of the ARM template for Azure automated log forwarding" popup="true" style="width:100%">}}
 
-6. Click **Next**.
+3. Click **Next**.
 
 ### Datadog Configuration
 
