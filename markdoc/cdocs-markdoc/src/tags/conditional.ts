@@ -17,7 +17,13 @@
 import { isPromise } from '../utils';
 import { type Tag } from '../types';
 
-import { MaybePromise, RenderableTreeNode, RenderableTreeNodes, Schema } from '../types';
+import {
+  Node,
+  MaybePromise,
+  RenderableTreeNode,
+  RenderableTreeNodes,
+  Schema
+} from '../types';
 
 export function truthy(param: any) {
   if (typeof param === 'object' && 'value' in param) {
@@ -26,12 +32,71 @@ export function truthy(param: any) {
   return param !== false && param !== undefined && param !== null;
 }
 
+function buildIfTags(node: Node) {
+  console.log('building if tags for node', JSON.stringify(node, null, 2));
+  // tags will be added here as they're processed
+  const tags: Tag[] = [];
+
+  // if tag will be built here and added to tags
+
+  // anticonditions will be added here
+  const ifCondition = node.attributes.primary;
+  const antiConditions: any = [];
+
+  console.log('top level ifCondition', JSON.stringify(ifCondition, null, 2));
+
+  for (const child of node.children) {
+    if (child.type === 'tag' && child.tag === 'else') {
+      console.log('\nprocessing child else tag');
+      console.log('child condition', JSON.stringify(child.attributes.primary, null, 2));
+    } else {
+      // console.log('\nprocessing non-else child');
+      // console.log('child', JSON.stringify(child, null, 2));
+    }
+  }
+
+  /*
+  const buildEnclosingTag = (children: RenderableTreeNode[]) => {
+    const enclosingTag: Tag = {
+      $$mdtype: 'Tag',
+      name: node.attributes.inline ? 'span' : 'div',
+      if: node.attributes.primary,
+      attributes: {
+        display: truthy(node.attributes.primary) ? 'true' : 'false'
+      },
+      children
+    };
+
+    return enclosingTag;
+  };
+  */
+
+  /*
+  const conditions: Condition[] = [
+    { condition: node.attributes.primary, children: [] },
+  ];
+  for (const child of node.children) {
+    if (child.type === 'tag' && child.tag === 'else')
+      conditions.push({
+        condition:
+          'primary' in child.attributes ? child.attributes.primary : true,
+        children: [],
+      });
+    else conditions[conditions.length - 1].children.push(child);
+  }
+
+  return conditions;
+  */
+}
+
 export const tagIf: Schema = {
   attributes: {
     primary: { type: Object, render: true }
   },
 
   transform(node, config) {
+    buildIfTags(node);
+
     const buildEnclosingTag = (children: RenderableTreeNode[]) => {
       const enclosingTag: Tag = {
         $$mdtype: 'Tag',

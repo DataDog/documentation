@@ -1,0 +1,56 @@
+{
+  "$$mdtype": "Tag",
+  "name": "article",
+  "attributes": {},
+  "children": [
+    {
+      "$$mdtype": "Tag",
+      "name": "div",
+      "if": {
+        "$$mdtype": "Function",
+        "name": "equals",
+        "value": true,
+        "parameters": {
+          "0": {
+            "$$mdtype": "Variable",
+            "path": [
+              "test_string"
+            ],
+            "value": "Datadog"
+          },
+          "1": "Datadog"
+        },
+        "ref": "1"
+      },
+      "attributes": {
+        "display": "true"
+      },
+      "children": [
+        {
+          "$$mdtype": "Tag",
+          "name": "p",
+          "attributes": {},
+          "children": [
+            "The test string is Datadog."
+          ]
+        },
+        {
+          "$$mdtype": "Tag",
+          "name": "p",
+          "attributes": {},
+          "children": [
+            "The test string is Bits."
+          ]
+        },
+        {
+          "$$mdtype": "Tag",
+          "name": "p",
+          "attributes": {},
+          "children": [
+            "The test string is not Datadog or Bits."
+          ]
+        }
+      ]
+    }
+  ]
+}

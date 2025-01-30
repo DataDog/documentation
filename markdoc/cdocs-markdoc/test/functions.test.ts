@@ -2,7 +2,7 @@ import CdocsMarkdoc from '../dist';
 import fs from 'fs';
 import { describe, test, expect } from 'vitest';
 
-describe('rendering stages', () => {
+describe('Function unit tests and nested functions', () => {
   // retrieve test input file
   const inputPath = __dirname + '/input.mdoc';
   const inputString = fs.readFileSync(inputPath, 'utf-8');
@@ -21,13 +21,13 @@ describe('rendering stages', () => {
 
   test('the AST matches the snapshot', () => {
     expect(JSON.stringify(ast, null, 2)).toMatchFileSnapshot(
-      './__snapshots__/ast.snap.json'
+      './__snapshots__/integration/ast.snap.json'
     );
   });
 
   test('the RenderableTree matches the snapshot', () => {
     expect(JSON.stringify(renderableTree, null, 2)).toMatchFileSnapshot(
-      './__snapshots__/renderableTree.snap.json'
+      './__snapshots__/integration/renderableTree.snap.json'
     );
   });
 
