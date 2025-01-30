@@ -2,7 +2,7 @@
 title: Service Overrides
 disable_toc: false
 further_reading:
-- link: "/tracing/services/inferred_services
+- link: "/tracing/services/inferred_services"
   tag: "Documentation"
   text: "Inferred services"
 ---
