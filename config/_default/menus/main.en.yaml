@@ -3546,11 +3546,6 @@ menu:
       url: tracing/trace_explorer/trace_queries/
       parent: trace_explorer
       weight: 606
-    - name: Request Flow Map
-      identifier: tracing_trace_explorer_request_flow_map
-      url: tracing/trace_explorer/request_flow_map/
-      parent: trace_explorer
-      weight: 607
     - name: Service Observability
       url: tracing/services/
       parent: tracing
