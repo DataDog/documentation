@@ -12,10 +12,6 @@ aliases:
   - /primary_colors_alias/
 ---
 
-{% alert level="warning" %}
-Warning: This is just a test page. It's not real.
-{% /alert %}
-
 This test page explores everyday items that are blue, yellow, or red -- which also happen to be the primary colors of the color wheel. If this seems contrived and odd, that's only because test pages are often both of those things.
 
 <!-- blue -->
