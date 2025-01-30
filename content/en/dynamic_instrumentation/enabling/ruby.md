@@ -12,7 +12,7 @@ further_reading:
       text: 'Getting Started with Datadog Agent'
 ---
 
-{{< beta-callout-private url="https://forms.gle/TODO" >}}
+{{< beta-callout-private url="https://www.datadoghq.com/product-preview/dynamic-instrumentation-for-ruby/" >}}
     Dynamic Instrumentation for Ruby is in limited preview, and is not available to all customers.
     Request access to join the waiting list.
     Note that <a href="#limitations">some limitations</a> apply to the preview.
