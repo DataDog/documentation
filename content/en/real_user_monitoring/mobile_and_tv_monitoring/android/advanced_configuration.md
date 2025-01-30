@@ -126,7 +126,7 @@ Note the action type should be one of the following: "custom", "click", "tap", "
 
 ### Enrich resources
 
-When [tracking resources automatically][6], provide a custom `RumResourceAttributesProvider` instance to add custom attributes to each tracked network request. For example, if you want to track a network request's headers, create an implementation as follows, and pass it in the constructor of the `DatadogInterceptor`.
+When [tracking resources automatically][6], provide a custom `RumResourceAttributesProvider` instance to add custom attributes to each tracked network request. For example, if you want to track a network request's headers, create an implementation as follows, and pass it in the builder of the `DatadogInterceptor`.
 
 {{< tabs >}}
 {{% tab "Kotlin" %}}
@@ -509,16 +509,18 @@ To get timing information in resources (such as third-party providers, network r
 {{< tabs >}}
 {{% tab "Kotlin" %}}
    ```kotlin
+       val tracedHosts = listOf("example.com")
        val okHttpClient = OkHttpClient.Builder()
-        .addInterceptor(DatadogInterceptor())
+        .addInterceptor(DatadogInterceptor.Builder(tracedHosts).build())
         .eventListenerFactory(DatadogEventListener.Factory())
         .build()
    ```
 {{% /tab %}}
 {{% tab "Java" %}}
    ```java
+       List<String> tracedHosts = Arrays.asList("example.com");
        OkHttpClient okHttpClient = new OkHttpClient.Builder()
-        .addInterceptor(new DatadogInterceptor())
+        .addInterceptor(new DatadogInterceptor.Builder(tracedHosts).build())
         .eventListenerFactory(new DatadogEventListener.Factory())
         .build();
    ```

@@ -49,7 +49,7 @@ setTabIndex
 
 setValue
 : Sets the value of an element to the value that you provide to the function.<br>
-**Examples**: See the [Components][1] documentation page sections for the **number input**, **radio button**, **search**, **select**, **text area**, and **text input** components.
+**Examples**: See the [Components][1] documentation page sections for the **form**, **number input**, **radio button**, **search**, **select**, **text area**, and **text input** components.
 
 To see what state functions are available for a given component, see [Components][1].
 

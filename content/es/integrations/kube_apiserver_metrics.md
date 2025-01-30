@@ -34,7 +34,7 @@ draft: false
 git_integration_title: kube_apiserver_metrics
 integration_id: kube-apiserver-metrics
 integration_title: Métricas del servidor de API Kubernetes
-integration_version: 6.0.0
+integration_version: 6.1.0
 is_public: true
 manifest_version: 2.0.0
 name: kube_apiserver_metrics
