@@ -4,6 +4,8 @@ aliases:
   - /tracing/service_catalog/guides/incident_response
   - /service_catalog/guides/incident_response
   - /service_catalog/use_cases/incident_response
+  - /tracing/service_catalog/guides/upstream-downstream-dependencies
+  - /service_catalog/guides/upstream-downstream-dependencies
 further_reading:
   - link: "/tracing/service_catalog/"
     tag: "Documentation"
