@@ -21,7 +21,7 @@ With Service Catalog, you can:
 
 Through the Setup Guidance tab of each of your services, you can evaluate the coverage of your observability setup to ensure that all services have the expected configurations. 
 
-{{< img src="tracing/service_catalog/production-readiness-setup-guidance.png" alt="Your image description" style="width:100%;" >}}
+{{< img src="tracing/service_catalog/production-readiness-setup-guidance.png" alt="The Setup Guidance tab for a service, which shows the configuration completeness of that service and recommended setup steps " style="width:100%;" >}}
 
 You can also find which Datadog features you are actively using for a given service, to help you find and close gaps in your monitoring completeness.
 
@@ -31,13 +31,13 @@ This table does not necessarily reflect billing for individual products, but rat
 
 Scorecards help you effectively communicate and take informed actions to improve your service’s health and performance by providing you with a high-level view of best practices across teams and services. All services with defined metadata in the Service Catalog are automatically evaluated against a set of pass-fail criteria across Production Readiness, Observability Best Practices, and Ownership & Documentation. 
 
-{{< img src="tracing/service_catalog/production-readiness-governance-and-obs.png" alt="Your image description" style="width:100%;" >}}
+{{< img src="tracing/service_catalog/production-readiness-governance-and-obs.png" alt="Default scorecards for Production Readiness, Observability Best Practices, and Ownership and Documentation, with percent scores for each" style="width:100%;" >}}
 
 Through the Security tab, Service Catalog also supports you in reducing application risks by finding and fixing known security vulnerabilities in the dependencies of your services. This view also reveals which services are targeted by the most attackers and have the most severe threats. 
 
 To access additional details about these vulnerabilities and signals, click on the service row to open a detailed side panel or open the service page to its security tab. 
 
-{{< img src="tracing/service_catalog/production-readiness-security.png" alt="Your image description" style="width:100%;" >}}
+{{< img src="tracing/service_catalog/production-readiness-security.png" alt="The security tab for a service, showing details about vulnerability risk and attack exposure" style="width:100%;" >}}
 
 The Costs tab, powered by Cloud Cost Management, provides several ways to identify potential inefficiencies, saving opportunities, and change over time. With cost data alongside metrics available in Service Catalog, you can improve visibility into how engineering changes affect overall cloud spend. 
 

@@ -22,17 +22,17 @@ By default, your service is associated with CI pipeline(s) through a repository 
 
 To add or remove a pipeline associated with your service, click Edit Metadata in your service page, and go to Software Delivery. Please note that this is only available for Service Catalog schema v2.2.
 
-{{< img src="tracing/service_catalog/pipeline-visibility-software-delivery.png" alt="Your image description" style="width:100%;" >}}
+{{< img src="tracing/service_catalog/pipeline-visibility-software-delivery.png" alt="The Delivery tab for monitoring pre-production status in Service Catalog" style="width:100%;" >}}
 
 There are two ways to add or remove an associated pipeline:
 
 1. Search for and select the pipelines you want to associate.
 
-{{< img src="tracing/service_catalog/pipeline-visibility-update-metadata.png" alt="Your image description" style="width:100%;" >}}
+{{< img src="tracing/service_catalog/pipeline-visibility-update-metadata.png" alt="The configuration page for updating service metadata, featuring the Software Delivery field for adding and removing related pipelines" style="width:100%;" >}}
 
 2. Add the pipeline fingerprint directly to the service metadata. You can locate a pipeline’s fingerprint by clicking on a pipeline in the Pipelines page, then click the gear icon:
 
-{{< img src="tracing/service_catalog/pipeline-visibility-pipeline-fingerprint.png" alt="Your image description" style="width:100%;" >}}
+{{< img src="tracing/service_catalog/pipeline-visibility-pipeline-fingerprint.png" alt="An example of a pipeline fingerprint" style="width:100%;" >}}
 
 To access additional details describing your CI status and static analysis violations, click on a service and see the status of each pipeline and rule violation.
 
