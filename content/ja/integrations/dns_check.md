@@ -21,7 +21,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - network
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/dns_check/README.md
 display_on_public_website: true
@@ -29,7 +29,7 @@ draft: false
 git_integration_title: dns_check
 integration_id: dns
 integration_title: DNS Check
-integration_version: 3.3.0
+integration_version: 5.0.1
 is_public: true
 manifest_version: 2.0.0
 name: dns_check

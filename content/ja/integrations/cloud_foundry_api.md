@@ -22,7 +22,7 @@ author:
 categories:
 - cloud
 - orchestration
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/cloud_foundry_api/README.md
 display_on_public_website: true
@@ -30,7 +30,7 @@ draft: false
 git_integration_title: cloud_foundry_api
 integration_id: cloud-foundry-api
 integration_title: Cloud Foundry API
-integration_version: 3.3.1
+integration_version: 5.1.0
 is_public: true
 manifest_version: 2.0.0
 name: cloud_foundry_api

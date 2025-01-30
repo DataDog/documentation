@@ -19,7 +19,7 @@ further_reading:
   text: Anuncio de compatibilidad con Amazon ECS Anywhere
 - link: https://www.datadoghq.com/blog/cloud-cost-management-container-support/
   tag: blog
-  text: Comprender sus gastos de Kubernetes y ECS con Datadog Cloud Cost Management
+  text: Comprender tus gastos de Kubernetes y ECS con Datadog Cloud Cost Management
 title: Amazon ECS
 ---
 
@@ -27,49 +27,52 @@ title: Amazon ECS
 
 Amazon ECS es un servicio escalable de orquestación de contenedores de alto rendimiento compatible con contenedores de Docker. Con el Datadog Agent, puedes monitorizar contenedores y tareas de ECS en cada instancia EC2 de tu clúster.
 
-En esta página se explica la configuración de Amazon ECS con el Agent de contenedores de Datadog. Para otras configuraciones, consulta:
+<div class="alert alert-info">
+Si deseas monitorizar <strong>ECS en Fargate</strong>, consulta <a href="/integrations/ecs_fargate/">Amazon ECS en AWS Fargate</a>.
+</div>
 
-- [Configuración de la versión 5 del Agent de contenedores de Datadog para Amazon ECS][1]
-- [Configuración del Agent de host de Datadog con Autodiscovery][2]
+## Ajustes
 
-**Nota**: Si quieres configurar **ECS en Fargate**, consulta las instrucciones de [Amazon ECS en AWS Fargate][3]. El contenedor del Datadog Agent implementado en instancias EC2 no puede monitorizar tareas de Fargate. Además, AWS Batch no es compatible.
+Para monitorizar tus contenedores y tareas de ECS, despliega el Datadog Agent como un contenedor **una vez en cada instancia de EC2** en tu clúster de ECS. Para ello, crea una definición de tarea para el contenedor de Datadog Agent y despliégala como servicio daemon. Cada contenedor de Datadog Agent luego monitoriza los otros contenedores en su respectiva instancia de EC2.
 
-## Configuración
+Las siguientes instrucciones asumen que has configurado un clúster de EC2. Consulta la [documentación de Amazon ECS para crear un clúster][4].
 
-En ECS, el Datadog Agent debe implementarse como contenedor una vez en cada instancia de EC2 de tu clúster de ECS. Para ello, hay que crear una definición de tarea para el contenedor del Datadog Agent e implementarlo como un servicio daemon. A continuación, cada contenedor del Datadog Agent monitoriza los otros contenedores en sus respectivas instancias EC2.
-
-Si no tienes un clúster de EC2 Container Service en funcionamiento, consulta la [sección Empezado de la documentación de ECS][4] para establecer y configurar un clúster. Una vez configurado, sigue las instrucciones que encontrarás a continuación.
-
-1. [Crear y añadir una definición de tarea de ECS](#create-an-ecs-task)
-2. [Programar el Datadog Agent como un servicio daemon](#run-the-agent-as-a-daemon-service)
-3. **Opcional** [Configurar las funciones adicionales del Datadog Agent](#setup-additional-agent-features)
+1. [Crear y añadir una definición de tarea de ECS][27]
+2. [Programar el Datadog Agent como servicio daemon][28]
+3. (Opcional) [Configurar funciones adicionales de Datadog Agent][29]
 
 **Nota:** Es posible utilizar [Autodiscovery][5] de Datadog junto con ECS y Docker para detectar y monitorizar automáticamente las tareas que se ejecutan en tu entorno.
 
-### Crear una tarea de ECS
+### Crear una definición de tarea de ECS
 
-La definición de tarea inicia el contenedor del Datadog Agent con las configuraciones necesarias. Cuando necesites modificar la configuración del Agent, actualiza esta definición de tarea y vuelve a implementar el servicio daemon como resulte necesario. Puedes configurar la definición de tarea utilizando las [herramientas de interfaz de línea de comandos de AWS][9] o la consola web de Amazon.
+Esta [definición de tarea de ECS][30] lanza el contenedor de Datadog Agent con las configuraciones necesarias. Cuando necesites modificar la configuración del Agent, actualiza esta definición de tarea y vuelve a desplegar el servicio daemon. Puedes configurar esta definición de tarea utilizando la consola de administración de AWS, o con la [AWS CLI][9].
 
 El siguiente ejemplo es una configuración mínima para la monitorización de inraestructuras básicas, aunque también tienes más ejemplos de definiciones de tareas con varias funciones activadas en la sección [Configurar las funciones adicionales del Agent](#setup-additional-agent-features) por si quieres usarlas en su lugar.
 
-#### Gestionar el archivo de definición de tarea
+#### Crear y gestionar el archivo de definición de tareas
 
-1. Para contenedores Linux, descarga [datadog-agent-ecs.json][20]
-    1. Si vas a usar una AMI de Amazon Linux 1, utiliza [datadog-agent-ecs1.json][21]
-    2. Si usas Windows, utiliza [datadog-agent-ecs-win.json][22]
+1. Para contenedores de Linux, descarga [datadog-agent-ecs.json][20].
+    - Si utilizas Amazon Linux 1 (AL1, antes AMI de Amazon Linux), utiliza [datadog-agent-ecs1.json][21].
+    - Si utilizas Windows, utiliza [datadog-agent-ecs-win.json][22]
 
-2. Editar tu archivo de definición de tarea de base
-    1. Configura `<YOUR_DATADOG_API_KEY>` con la [clave de API de Datadog][14] para tu cuenta.
-    2. Configura la variable de entorno `DD_SITE` en {{< region-param key="dd_site" code="true" >}}
+   <div class="alert alert-info">
+   These files provide minimal configuration for core infrastructure monitoring. For more sample task definition files with various features enabled, see the <a href="#set-up-additional-agent-features">Set up additional Agent features</a> section on this page.
+   </div>
+2. Editar el archivo de definición de la tarea base
+    - Establece la variable de entorno `DD_API_KEY` sustituyendo `<YOUR_DATADOG_API_KEY>` por la [clave de API de Datadog][14] de tu cuenta. Alternativamente, también puedes [suministrar el ARN de un secreto almacenado en AWS Secrets Manager][16].
+    - Establece la variable de entorno `DD_SITE` en tu [sitio de Datadog][13]. Tu sitio es: {{< region-param key="dd_site" code="true" >}}
 
-        **Nota**: Si la variable de entorno `DD_SITE` no está configurada explícitamente, se establece de forma predeterminada en el sitio `US` de `datadoghq.com`. Si usas alguno de los otros sitios (`EU`, `US3` o `US1-FED`) y no la configuras, se genera un mensaje de clave de API no válida. Utiliza el [selector de sitio de documentación][13] para ver la documentación correspondiente al sitio que estés usando.
+      <div class="alert alert-info">
+      If <code>DD_SITE</code> is not set, it defaults to the <code>US1</code> site, <code>datadoghq.com</code>.
+      </div>
+    - Opcionalmente, añade una variable de entorno `DD_TAGS` para especificar cualquier etiqueta adicional.
 
-3. Opcionalmente: Añade lo siguiente a tu definición de tarea de ECS para implementar un [clúster de ECS Anywhere][15].
+3. (Opcional) Para desplegar en un [clúster Anywhere de ECS][15], añade la siguiente línea a la definición de tu tarea de ECS:
     ```json
     "requiresCompatibilities": ["EXTERNAL"]
     ```
 
-4. Opcionalmente: Añade una comprobación de estado del Agent a tu definición de tarea de ECS
+4. (Opcional) Para añadir un check de estado del Agent, añade la siguiente línea a la definición de tu tarea de ECS:
     ```json
     "healthCheck": {
       "retries": 3,
@@ -80,27 +83,23 @@ El siguiente ejemplo es una configuración mínima para la monitorización de in
     }
     ```
 
-Para todos estos ejemplos, la variable de entorno `DD_API_KEY` puede también rellenarse haciendo referencia al [ARN de un secreto "Plaintext" (sin formato) almacenado en AWS Secret Manager][16]. Es posible añadir cualquier otra etiqueta adicional utilizando la variable de entorno `DD_TAGS`.
 
-#### Registrar la definición de tarea
+#### Registrar la definición de la tarea
 
 {{< tabs >}}
 {{% tab "AWS CLI" %}}
-Una vez creado tu archivo de definición de tarea, puedes ejecutar el siguiente comando para registrarlo en AWS.
+Una vez creado el archivo de definición de tareas, ejecuta el siguiente comando para registrar el archivo en AWS.
 
 ```bash
 aws ecs register-task-definition --cli-input-json file://<path to datadog-agent-ecs.json>
 ```
 {{% /tab %}}
-{{% tab "Web UI" %}}
-Una vez creado tu archivo de definición de tarea, puedes iniciar sesión en tu consola de AWS para registrarlo.
+{{% tab "Interfaz de usuario web" %}}
+Una vez que tengas tu archivo de definición de tareas, utiliza la consola de AWS para registrar el archivo.
 1. Inicia sesión en tu consola de AWS y ve a la sección Elastic Container Service.
-2. Haz clic en **Task Definitions** (Definiciones de tarea) en la parte izquierda y haz clic en el botón **Create new Task Definition** (Crear nueva definición de tarea).
-3. Selecciona "EC2" como tipo de inicio. También puedes seleccionar "External" (Externo) si planeas implementar la tarea del Agent en un clúster de ECS Anywhere
-4. Una vez en la página "Configure task and container definitions" (Configurar definiciones de tarea y contenedor), ve hasta la parte inferior y selecciona **Configure via JSON** (Configurar a través de JSON).
-5. Haz clic en **Save** (Guardar) en la pestaña JSON
-6. Puedes hacer más cambios desde esta página o repitiendo este proceso **Configure via JSON** (Configurar a través de JSON)
-7. Haz clic en **Create** (Crear) abajo para registrar esta definición de tarea
+2. Selecciona *Task Definitions** (Definiciones de tarea) en el panel de navegación. En el menú **Create new task definition** (Crear nueva definición de tarea), selecciona **Create new task definition with JSON** (Crear nueva definición de tarea con JSON).
+3. En el cuadro del editor JSON, pega el contenido de tu archivo de definición de tareas.
+4. Selecciona **Create** (Crear).
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -108,62 +107,110 @@ Una vez creado tu archivo de definición de tarea, puedes iniciar sesión en tu 
 
 ### Ejecutar el Agent como sevicio daemon
 
-Lo ideal es tener un contenedor del Datadog Agent ejecutándose en cada instancia EC2. La forma más fácil de hacerlo es ejecutar la definición de tarea del Datadog Agent como un [servicio daemon][10].
+Para tener un contenedor de Datadog Agent ejecutándose en cada instancia de EC2, ejecuta la definición de tarea del Datadog Agent como [servicio daemon][10].
 
 #### Programar un servicio daemon en AWS utilizando la tarea de ECS de Datadog
 
-1. Inicia sesión en la consola de AWS y ve a la sección ECS Clusters (Clústeres de ECS). Haz clic en el clúster en el que ejecutas el Agent.
-2. Crea un nuevo servicio haciendo clic en el botón *Create** (Crear) en Services (Servicios).
-3. Para el tipo de inicio, selecciona EC2 y luego la definición de tarea creada anteriormente.
-4. Para el tipo de servicio, selecciona `DAEMON` e introduce un nombre de servicio. Haz clic en **Next** (Siguiente).
-5. Como el servicio se ejecuta una vez en cada instancia, no necesitas un equilibrador de carga. Selecciona None (Ninguno). Haz clic en **Next** (Siguiente).
-6. Los servicios de daemon no necesitan escalación automática, así que haz clic en **Next Step**, (Paso siguiente) y, a continuación, en **Create Service** (Crear servicio).
+1. Inicia sesión en la consola de AWS y navega hasta la sección de ECS. En la página **Clusters** (Clústeres), elige el clúster en el que ejecutas el Agent.
+2. En la pestaña **Services** (Servicios) del clúster, selecciona **Create** (Crear).
+3. En **Deployment configuration** (Configuración de despliegue), para **Service type** (Tipo de servicio), selecciona **Daemon**.
+3. No es necesario configurar el balanceo de carga o el escalado automático.
+4. Haz clic en **Next Step** (Paso siguiente) y, a continuación, en **Create Service** (Crear servicio).
 
-### Configurar funciones adicionales del Agent
+### Configurar funciones adicionales del Agent 
 
-La definición de tarea inicial arriba indicada es una definición de tarea bastante mínima e implementa un contenedor del Agent con una configuración de base para recopilar métricas básicas sobre los contenedores de tu clúster de ECS. Este Agent también puede ejecutar integraciones de Agent basadas en [etiquetas de Autodiscovery de Docker][12] detectadas en tus contenedores correspondientes.
+Los archivos de definición de tareas proporcionados en la sección anterior son mínimos. Estos archivos despliegan un contenedor del Agent con una configuración base para recopilar las métricas centrales sobre los contenedores en tu clúster de ECS. El Agent también puede ejecutar integraciones del Agent [según las etiquetas de Docker][12] descubiertas en tus contenedores.
 
-Si utilizas:
-- APM: Consulta la [documentación de configuración de APM][6] y el [datadog-agent-ecs-apm.json][23] de ejemplo
-- Log Management: Consulta la [documentación de recopilación de logs][7] y el [datadog-agent-ecs-logs.json][24] de ejemplo
+Para funciones adicionales:
+
+#### APM
+Consulta la [documentación de configuración de APM][6] y el ejemplo [datadog-agent-ecs-apm.json][23].
+
+#### Log Management
+Consulta la [documentación de la recopilación de log][7] y el ejemplo [datadog-agent-ecs-logs.json][24]
 
 #### DogStatsD
 
-Si utilizas [DogStatsD][8], añade una asignación de puertos de host para 8125/udp a la definición del contenedor del Datadog Agent:
-```json
-"portMappings": [
+Si estás utilizando [DogStatsD][8], edita tu definición del contenedor de Datadog Agent para añadir la asignación de puerto de host para 8125/udp y establecer la variable de entorno `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` en `true`..:
+
+{{< highlight json "hl_lines=6-12 23-24" >}}
+{
+ "containerDefinitions": [
   {
-    "hostPort": 8125,
-    "protocol": "udp",
-    "containerPort": 8125
+   "name": "datadog-agent",
+   (...)
+   "portMappings": [
+     {
+      "hostPort": 8125,
+      "protocol": "udp",
+      "containerPort": 8125
+     }
+   ],
+   "environment" : [
+     {
+       "name": "DD_API_KEY",
+       "value": "<YOUR_DATADOG_API_KEY>"
+     },
+     {
+       "name": "DD_SITE",
+       "value": "datadoghq.com"
+     },
+     {
+       "name": "DD_DOGSTATSD_NON_LOCAL_TRAFFIC",
+       "value": "true"
+     }
+   ]
   }
-]
-```
+ ],
+ (...)
+}
+{{< /highlight >}}
 
-Además de esta asignación de puertos, configura la variable de entorno `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` en `true` (verdadero).
-
-Esta configuración permite dirigir el tráfico de DogStatsD desde los contenedores de aplicaciones, a través del host y del puerto de host, hasta el contenedor del Datadog Agent. Sin embargo, el contendor de aplicaciones debe utilizar la dirección IP privada del host para este tráfico. Para ello, configura la variable de entorno `DD_AGENT_HOST` en la dirección IP privada de la instancia EC2, que puede obtenerse desde Instance Metadata Service (IMDS). Otra posibilidad es configurarlo en el código durante la inicialización. La implementación para DogStatsD es la misma que para APM, consulta [Configurar el endpoint del Agent de rastreo][17] para ver ejemplos de configuración del endpoint del Agent.
+Esta configuración permite enrutar el tráfico de DogStatsD desde los contenedores de la aplicación, a través del host y los puertos de host, hasta el contenedor de Datadog Agent. Sin embargo, el contenedor de aplicación debe utilizar la dirección IP privada del host para este tráfico. Pueded habilitar esto configurando la variable de entorno `DD_AGENT_HOST` a la dirección IP privada de la instancia de EC2, que puedes recuperar desde Instance Metadata Service (IMDS). Alternativamente, puedes establecer esto en el código durante la inicialización. La implementación para DogStatsD es la misma que para APM. Consulta [Configurar el endpoint del Trace Agent][17] para ejemplos de configuración del endpoint del Agent.
 
 Asegúrate de que la configuración de grupo de seguridad de tus instancias EC2 no exponga públicamente los puertos para APM y DogStatsD.
 
 #### Recopilación de procesos
 
-El contenedor del Datadog Agent recopila automáticamente datos de Live Container. Para recopilar información de Live Process para todos tus demás contenedores y enviarla a Datadog, actualiza tus definiciones de tarea con la variable de entorno:
+Para recopilar la información de Live Process de todos tus contenedores y enviarla a Datadog, actualiza tu definición de tarea con la variable de entorno `DD_PROCESS_AGENT_ENABLED`:
 
-```json
+{{< highlight json "hl_lines=16-17" >}}
 {
-  "name": "DD_PROCESS_AGENT_ENABLED",
-  "value": "true"
+ "containerDefinitions": [
+  {
+   "name": "datadog-agent",
+   (...)
+   "environment" : [
+     {
+       "name": "DD_API_KEY",
+       "value": "<YOUR_DATADOG_API_KEY>"
+     },
+     {
+       "name": "DD_SITE",
+       "value": "datadoghq.com"
+     },
+     {
+       "name": "DD_PROCESS_AGENT_ENABLED",
+       "value": "true"
+     }
+   ]
+  }
+ ],
+ (...)
 }
-```
+{{< /highlight >}}
 
-#### Recopilación de Network Performance Monitoring
+#### Network Performance Monitoring
 
-**Esta función solo está disponible para Linux**
+<div class="alert alert-warning">
+Esta función sólo está disponible para Linux.
+</div>
 
-1. Sigue las [instrucciones indicadas anteriormente](#create-an-ecs-task) para instalar el Datadog Agent.
-   - Si es la primera vez que realizas la instalación, puedes usar el archivo [datadog-agent-sysprobe-ecs.json][25] ([datadog-agent-sysprobe-ecs1.json][26] si utilizas una AMI de Amazon Linux original), para su uso con las [instrucciones indicadas anteriormente](#managing-the-task-definition-file). **Nota**: la configuración de NPM inicial requiere la interfaz de línea de comandos, ya que no se pueden añadir `linuxParameters` (parámetros de Linux) en la interfaz de usuario de AWS.
-2. Si ya tienes una definición de tarea, actualiza tu archivo [datadog-agent-ecs.json][20] ([datadog-agent-ecs1.json][21] si utilizas una AMI de Amazon Linux original) con la siguiente configuración:
+Consulta el archivo de ejemplo [datadog-agent-sysprobe-ecs.json][25].
+
+Si utilizas Amazon Linux 1 (AL1, antes AMI de Amazon Linux), consulta [datadog-agent-sysprobe-ecs1.json][26].
+
+Si ya dispones de una definición de tarea, actualiza tu archivo para incluir la siguiente configuración:
 
  ```json
  {
@@ -215,21 +262,65 @@ El contenedor del Datadog Agent recopila automáticamente datos de Live Containe
    "family": "datadog-agent-task"
  }
  ```
+#### Ruta de red
 
+<div class="alert alert-info">La ruta de red para Datadog Network Performance Monitoring está en fase previa. Ponte en contacto con tu representante de Datadog para inscribirte.</div>
+
+1. Para habilitar la [ruta de red][31] en tus clústeres de ECS, habilita el módulo `system-probe` traceroute añadiendo la siguiente variable de entorno en tu archivo `datadog-agent-sysprobe-ecs.json`:
+
+   ```json
+      "environment": [
+        (...)
+        {
+          "name": "DD_TRACEROUTE_ENABLED",
+          "value": "true"
+        }
+      ],
+   ```
+
+2. Para monitorizar rutas individuales, sigue las instrucciones aquí para [configurar características adicionales del Agent](#set-up-additional-agent-features):
+
+   Estos archivos despliegan un contenedor del Agent con una configuración base para recopilar métricas clave sobre los contenedores en tu clúster de ECS. El Agent también puede ejecutar integraciones del Agent según las etiquetas (labels) de Docker detectadas en tus contenedores.
+
+3. Para monitorizar las rutas de tráfico de red y permitir que el Agent detecte automáticamente y monitorice rutas de red según el tráfico de red real, sin necesidad de especificar los endpoints manualmente, añade las siguientes variables adicionales de entorno a tu `datadog-agent-sysprobe-ecs.json`:
+
+   ```json
+      "environment": [
+        (...)
+        {
+          "name": "DD_NETWORK_PATH_CONNECTIONS_MONITORING_ENABLED",
+          "value": "true"
+        }
+      ],
+   ```
+
+4. Opcionalmente, para configurar el número de trabajadores (por defecto es 4) ajusta la siguiente variable de entorno en tu archivo `datadog-agent-sysprobe-ecs.json`:
+
+   ```json
+      "environment": [
+        (...)
+        {
+          "name": "DD_NETWORK_PATH_COLLECTOR_WORKERS",
+          "value": "10"
+        }
+      ],
+   ```
 ## Modo AWSVPC
 
 A partir de la versión 6.10 del Agent, el modo `awsvpc` es compatible para contenedores aplicativos, siempre y cuando los grupos de seguridad estén configurados para permitir que el grupo de seguridad de la instancia de host llegue los contenedores aplicativos en los puertos correspondientes.
 
-Aunque es posible ejecutar el Agent en el modo `awsvpc`, no es la configuración recomendada, porque puede ser difícil obtener la IP de ENI para llegar al Agent para métricas de Dogstatsd y trazas de APM.
-
-En su lugar, ejecuta el Agent en el modo bridge con asignación de puertos para que resulte más sencillo obtener la [IP de host a través del servidor de metadatos][6].
+Puedes ejecutar el Agent en modo `awsvpc`, pero Datadog no lo recomienda porque puede ser difícil recuperar la IP ENI para llegar al Agent para obtener las métricas de DogStatsD y trazas de APM. En su lugar, ejecuta el Agent en modo puente con una asignación de puertos para permitir una recuperación más fácil de la [IP de host a través del servidor de metadatos][6].
 
 {{% site-region region="gov" %}}
-#### Proxy de FIPS para entornos de GOVCLOUD
+#### Proxy FIPS para Datadog para entornos de Gobierno
 
-Para enviar datos al centro de datos GOVCLOUD de Datadog, añade el contenedor lateral `fips-proxy` y abre los puertos del contenedor para garantizar una comunicación adecuada para [funciones compatibles](https://docs.datadoghq.com/agent/configuration/agent-fips-proxy/?tab=helmonamazoneks#supported-platforms-and-limitations).
+<div class="alert alert-warning">
+Esta función sólo está disponible para Linux.
+</div>
 
-**Nota**: Esta función solo está disponible para Linux.
+Para enviar datos a sitio de Datadog para el Gobierno, añade el contenedor auxiliar `fips-proxy` y abre los puertos de contenedor para garantizar una comunicación adecuada para [funciones compatibles][1].
+
+**Nota**: También debes asegurarte de que el contenedor auxiliar esté configurado con la configuración aplicable de red y permisos de IAM.
 
 ```json
  {
@@ -237,7 +328,7 @@ Para enviar datos al centro de datos GOVCLOUD de Datadog, añade el contenedor l
      (...)
           {
             "name": "fips-proxy",
-            "image": "datadog/fips-proxy:1.1.4",
+            "image": "datadog/fips-proxy:1.1.5",
             "portMappings": [
                 {
                     "containerPort": 9803,
@@ -350,20 +441,18 @@ También debes actualizar las variables entorno del contenedor del Datadog Agent
    "family": "datadog-agent-task"
 }
 ```
+[1]: https://docs.datadoghq.com/es/agent/configuration/agent-fips-proxy/?tab=helmonamazoneks#supported-platforms-and-limitations
 {{% /site-region %}}
 
 ## Solucionar problemas
 
-¿Necesitas ayuda? Contacta con el [equipo de asistencia de Datadog][11].
+¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][11].
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/es/integrations/faq/agent-5-amazon-ecs/
-[2]: https://docs.datadoghq.com/es/agent/docker/integrations/?tab=docker
-[3]: https://docs.datadoghq.com/es/integrations/ecs_fargate/
-[4]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ECS_GetStarted_EC2.html
+[4]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/create-ec2-cluster-console-v2.html
 [5]: https://docs.datadoghq.com/es/agent/autodiscovery/
 [6]: /es/containers/amazon_ecs/apm/
 [7]: /es/containers/amazon_ecs/logs/
@@ -384,3 +473,8 @@ También debes actualizar las variables entorno del contenedor del Datadog Agent
 [24]: /resources/json/datadog-agent-ecs-logs.json
 [25]: /resources/json/datadog-agent-sysprobe-ecs.json
 [26]: /resources/json/datadog-agent-sysprobe-ecs1.json
+[27]: #create-an-ecs-task-definition
+[28]: #run-the-agent-as-a-daemon-service
+[29]: #set-up-additional-agent-features
+[30]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definitions.html
+[31]: /es/network_monitoring/network_path

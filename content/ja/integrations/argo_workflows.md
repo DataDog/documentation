@@ -22,7 +22,7 @@ assets:
     source_type_id: 8511369
     source_type_name: Argo Workflows
   monitors:
-    errors: assets/monitors/errors.json
+    New errors detected in Argo Workflows: assets/monitors/errors.json
   saved_views:
     errors: assets/saved_views/errors.json
     overview: assets/saved_views/overview.json
@@ -34,7 +34,7 @@ author:
 categories:
 - 開発ツール
 - ログの収集
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/argo_workflows/README.md
 display_on_public_website: true
@@ -42,7 +42,7 @@ draft: false
 git_integration_title: argo_workflows
 integration_id: argo-workflows
 integration_title: Argo Workflows
-integration_version: 1.0.2
+integration_version: 2.2.0
 is_public: true
 manifest_version: 2.0.0
 name: argo_workflows

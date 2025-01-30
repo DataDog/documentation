@@ -33,7 +33,7 @@ categories:
 - ネットワーク
 - security
 - ログの収集
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/cilium/README.md
 display_on_public_website: true
@@ -41,7 +41,7 @@ draft: false
 git_integration_title: cilium
 integration_id: cilium
 integration_title: Cilium
-integration_version: 3.5.1
+integration_version: 5.0.0
 is_public: true
 manifest_version: 2.0.0
 name: cilium
@@ -131,7 +131,7 @@ Cilium チェックは [Datadog Agent][3] パッケージに含まれていま�
    - `cilium-agent` メトリクスを収集するには、`agent_endpoint` オプションを有効にします。
    - `cilium-operator` メトリクスを収集するには、`operator_endpoint` オプションを有効にします。
 
-    ```yaml
+    ```yaml  
         instances:
 
             ## @param use_openmetrics - boolean - optional - default: false

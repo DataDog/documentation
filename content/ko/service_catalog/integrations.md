@@ -76,12 +76,6 @@ OpsGenie 메타데이터를 서비스에 추가하여 서비스 카탈로그에 
 
 {{< img src="tracing/service_catalog/oncall_information.png" alt="서비스 카탈로그의 OpsGenie에서 정보를 표시하는 대기 중 정보 상자" style="width:85%;" >}}
 
-## IDE 플러그인
-
-Datadog는 서비스 정의에 대한 [JSON 스키마][6]를 제공하므로 [지원 IDE][7]에서 서비스 정의를 편집할 때 자동 완성 및 유효성 검사 등의 기능이 제공됩니다.
-
-[Datadog 서비스 정의][8]에 대한 [JSON 스키마]는 오픈 소스 [스키마 스토어][7]에 등록되어 있습니다.
-
 ## 참고 자료
 
 {{< partial name="whats-next/whats-next.html" >}}

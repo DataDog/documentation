@@ -18,6 +18,7 @@
             "target": 200
           }
         ],
+        "exitIfSucceed": true,
         "extractedValues": [
           {
             "field": "server",
@@ -67,7 +68,7 @@
         ],
         "request": {
           "host": "grpcbin.test.k6.io",
-          "port": "9000",
+          "port": 9000,
           "service": "grpcbin.GRPCBin",
           "method": "Index",
           "message": "{}",

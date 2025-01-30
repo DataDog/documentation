@@ -19,7 +19,7 @@ assets:
     source_type_id: 10087
     source_type_name: Scylla
   monitors:
-    '[Scylla] Server is shutting down': assets/monitors/instance_down.json
+    Node State is abnormal: assets/monitors/instance_down.json
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
@@ -29,7 +29,7 @@ categories:
 - キャッシュ
 - data stores
 - ログの収集
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/scylla/README.md
 display_on_public_website: true
@@ -37,7 +37,7 @@ draft: false
 git_integration_title: Scylla
 integration_id: Scylla
 integration_title: Scylla
-integration_version: 2.7.2
+integration_version: 4.1.0
 is_public: true
 manifest_version: 2.0.0
 name: Scylla

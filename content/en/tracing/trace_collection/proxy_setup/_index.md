@@ -317,16 +317,10 @@ get_latest_release() {
 
 get_architecture() {
   case "$(uname -m)" in
-    aarch64)
+    aarch64|arm64)
       echo "arm64"
       ;;
-    arm64)
-      echo "arm64"
-      ;;
-    x86_64)
-      echo "amd64"
-      ;;
-    amd64)
+    x86_64|amd64)
       echo "amd64"
       ;;
     *)
@@ -349,7 +343,7 @@ TARBALL="ngx_http_datadog_module-${ARCH}-${NGINX_VERSION}.so.tgz"
 curl -Lo ${TARBALL} "https://github.com/DataDog/nginx-datadog/releases/download/${RELEASE_TAG}/${TARBALL}"
 ```
 
-Extract the `ngx_http_datadog_module.so` file from the downloaded tarball using `tar` and place it in the NGINX modules directory, typically locaated at `/usr/lib/nginx/modules`.
+Extract the `ngx_http_datadog_module.so` file from the downloaded tarball using `tar` and place it in the NGINX modules directory, typically located at `/usr/lib/nginx/modules`.
 
 ### NGINX configuration with Datadog module
 In the topmost section of the NGINX configuration, load the Datadog module.
@@ -378,16 +372,77 @@ http {
 
 ## Ingress-NGINX Controller for Kubernetes
 
-### Controller v1.10.0+
+Datadog offers support for monitoring the Ingress-NGINX controller in Kubernetes.
+Choose from the following instrumentation methods based on your controller version and requirements:
 
-<div class="alert alert-warning">
-  <strong>Important Note:</strong> With the release of <b>v1.10.0</b>, the Ingress controller's OpenTracing and Datadog integration have been deprecated. As an alternative, the OpenTelemetry integration is recommended.<br><br>
-  For older versions, see the <a href="#controller-v190-and-older">OpenTracing-based instructions</a>.
-</div>
+- [v1.10.0+ using Datadog's features](#controller-v1100-using-datadogs-features).
+- [v1.10.0+ using OpenTelemetry](#controller-v1100-using-opentelemetry).
+- [v1.9.0 and older](#controller-v190-and-older).
 
-**1. Prepare the Datadog Agent:** Ensure that your Datadog Agent has [gRPC OTLP Ingestion enabled][5] to act as an OpenTelemetry Collector.
+### Controller v1.10.0+ using Datadog's features
 
-**2. Configure the Ingress controller:** To begin, verify that your Ingress controller's pod spec has the `HOST_IP` environment variable set. If not, add the following entry to the `env` block within the pod's specification:
+This instrumentation method uses [nginx-datadog][6] and leverages Kubernetes [init-container][7] mechanism
+to install the module within the Ingress-NGINX Controller instance.
+
+To instrument Ingress-NGINX **v1.10.0+** using Datadog's module, follow these steps:
+1. **Verify your Ingress-NGINX version**<br>
+Check your Ingress-NGINX Controller version and ensure you have the matching Datadog init-container available. The init-container version ([datadog/ingress-nginx-injection][8]) must exactly match your controller version to prevent startup issues.
+For example, if you're running Ingress-NGINX v1.11.3, you need [datadog/ingress-nginx-injection:v1.11.3][9].
+
+2. **Modify your controller's pod specification:**<br>
+Update the controller pod specification to include the init-container and configure the Datadog Agent host environment variable:
+
+    ```yaml
+    spec:
+      template:
+        spec:
+          initContainers:
+            - name: init-datadog
+              image: datadog/ingress-nginx-injection:<MY_INGRESS_NGINX_VERSION>
+              command: ['/datadog/init_module.sh', '/opt/datadog-modules']
+              volumeMounts:
+                - name: nginx-module
+                  mountPath: /opt/datadog-modules
+          containers:
+            - name: controller
+              image: registry.k8s.io/ingress-nginx/controller:<MY_INGRESS_NGINX_VERSION>
+              env:
+                - ...
+                - name: DD_AGENT_HOST
+                  valueFrom:
+                    fieldRef:
+                      fieldPath: status.hostIP
+    ```
+    **Note**: For an alternative way to access the Datadog Agent, see the [Kubernetes installation guide][8].
+
+3. **Configure Ingress-NGINX** <br>
+Create or modify the `ConfigMap` to load the Datadog module:
+
+    ```yaml
+    kind: ConfigMap
+    apiVersion: v1
+    ...
+    data:
+      enable-opentelemetry: "false"
+      error-log-level: notice
+      main-snippet: |
+        load_module /opt/datadog-modules/ngx_http_datadog_module.so;
+    ```
+
+4. **Apply the ConfigMap** <br>
+Apply the updated `ConfigMap` to ensure the Datadog module is correctly loaded.
+
+This configuration ensures that the Datadog module is loaded and ready to trace incoming requests.
+
+
+### Controller v1.10.0+ using OpenTelemetry
+
+**1. Prepare the Datadog Agent** <br>
+Ensure that your Datadog Agent has [gRPC OTLP Ingestion enabled][5] to act as an OpenTelemetry Collector.
+
+**2. Configure the Ingress controller** <br>
+To begin, verify that your Ingress controller's pod spec has the `HOST_IP` environment variable set. If not, add the following entry to the `env` block within the pod's specification:
+
 ```yaml
 - name: HOST_IP
   valueFrom:
@@ -461,6 +516,10 @@ The above overrides the default `nginx-ingress-controller.ingress-nginx` service
 [3]: https://hub.docker.com/layers/library/amazonlinux/2.0.20230119.1/images/sha256-db0bf55c548efbbb167c60ced2eb0ca60769de293667d18b92c0c089b8038279?context=explore
 [4]: https://github.com/DataDog/nginx-datadog/blob/master/doc/API.md
 [5]: /opentelemetry/otlp_ingest_in_the_agent/
+[6]: https://github.com/DataDog/nginx-datadog/
+[7]: https://kubernetes.io/docs/concepts/workloads/pods/init-containers/
+[8]: https://hub.docker.com/r/datadog/ingress-nginx-injection
+[9]: https://hub.docker.com/layers/datadog/ingress-nginx-injection/v1.11.3/images/sha256-19ea2874d8a4ebbe4de0bf08faeb84c755cd71f1e8740ce2d145c5cf954a33a1
 {{% /tab %}}
 
 {{% tab "Istio" %}}
@@ -469,7 +528,7 @@ Datadog monitors every aspect of your Istio environment, so you can:
 - View individual distributed traces for applications transacting over the mesh with APM (see below).
 - Assess the health of Envoy and the Istio control plane with [logs][1].
 - Break down the performance of your service mesh with request, bandwidth, and resource consumption [metrics][1].
-- Map network communication between containers, pods, and services over the mesh with [Network Performance Monitoring][2].
+- Map network communication between containers, pods, and services over the mesh with [Cloud Network Monitoring][2].
 
 To learn more about monitoring your Istio environment with Datadog, [see the Istio blog][3].
 
@@ -526,12 +585,6 @@ environment variable. If `DD_TRACE_SAMPLING_RULES` is not specified, then 100%
 of Istio traces are sent to Datadog.
 
 **Note**: These environment variables apply only to the subset of traces indicated by the `values.pilot.traceSampling` setting, hence the required `--set values.pilot.traceSampling=100.0` during Istio configuration.
-
-To use the [Datadog Agent calculated sampling rates][9] (10 traces per second per Agent) and ignore the default sampling rule set to 100%, set the parameter `DD_TRACE_SAMPLING_RULES` to an empty array:
-
-```bash
-DD_TRACE_SAMPLING_RULES='[]'
-```
 
 Explicitly specifying an empty array of rules is different from not specifying rules.
 
@@ -668,7 +721,7 @@ Datadog provides an HTTPd [module][1] to enhance [Apache HTTP Server][2] and [IH
 
 ### Compatibility
 
-Since IHS HTTP Server is essentially a wrapper of the Appache HTTP Server, the module can also be used with IHS without any modifications.
+Since IHS HTTP Server is essentially a wrapper of the Apache HTTP Server, the module can also be used with IHS without any modifications.
 
 ### Installation
 

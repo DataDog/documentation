@@ -12,9 +12,6 @@ further_reading:
 - link: "https://dtdg.co/fe"
   tag: "Foundation Enablement"
   text: "Join an interactive session to elevate your security and threat detection"
-- link: "/getting_started/application_security/software_composition_analysis"
-  tag: "Guide"
-  text: "Getting Started with Software Composition Analysis"
 - link: "https://securitylabs.datadoghq.com/"
   tag: "Security Labs"
   text: "Security research, reports, tips, and videos from Datadog"
@@ -88,6 +85,14 @@ Once enabled, ASM immediately identifies application vulnerabilities and detects
 
 3. Go to [Security Signals Explorer][6] to see the signal that is generated after a few seconds.
 
+## Disable ASM
+
+For information on disabling ASM or its features, see the following:
+
+- [Disabling threat management and protection][24]
+- [Disabling Software Composition Analysis][25]
+- [Disabling Code Security][26]
+
 ## Reports and notifications
 
 1. Set up [notification rules][23] to receive alerts using Slack, Jira, email, and more.
@@ -122,5 +127,7 @@ Interested in best practices to go further? View the [in-product Quickstart Guid
 [21]: /agent/remote_config?tab=configurationyamlfile#setup
 [22]: https://app.datadoghq.com/security/configuration/reports
 [23]: https://app.datadoghq.com/security/configuration/notification-rules
-
+[24]: /security/application_security/troubleshooting/#disabling-threat-management-and-protection
+[25]: /security/application_security/troubleshooting/#disabling-software-composition-analysis
+[26]: /security/application_security/troubleshooting/#disabling-code-security
 

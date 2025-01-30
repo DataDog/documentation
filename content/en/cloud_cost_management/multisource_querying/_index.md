@@ -3,6 +3,9 @@ title: Multisource Querying
 is_beta: true
 description: Learn how to use Multisource Querying to query costs across multiple providers in Cloud Cost Management.
 further_reading:
+- link: "https://www.datadoghq.com/blog/focus-cost-data/"
+  tag: "Blog"
+  text: "Monitor your multi-cloud costs with Cloud Cost Management and FOCUS"
 - link: "/cloud_cost_management/"
   tag: "Documentation"
   text: "Learn about Cloud Cost Management"
@@ -11,8 +14,8 @@ further_reading:
   text: "Learn about Container Cost Allocation"
 ---
 
-{{< callout url="https://www.datadoghq.com/private-beta/multisource-querying/" btn_hidden="false" header="Join the Beta!">}}
-Multisource Querying is in private beta. To request access, complete the form.
+{{< callout url="https://www.datadoghq.com/product-preview/multisource-querying/" btn_hidden="false" header="Join the Preview!">}}
+Multisource Querying is in Preview. If you're interested in this feature, complete the form to request access.
 {{< /callout >}}
 
 ## Overview
@@ -23,10 +26,7 @@ Use Multisource Querying to build cost views, understand the total cost of servi
 
 ## Setup
 
-To use Multisource Querying, ensure you meet the following requirements:
-
-1. You have configured [Cloud Cost Management][10] and are actively ingesting costs in Datadog.
-1. Your cost data is in a single currency. Multiple currencies are not supported.
+To use Multisource Querying, ensure you have configured [Cloud Cost Management][10] and are actively ingesting costs in Datadog. Multiple currencies are supported, with your costs automatically being converted to and displayed in USD.
 
 ## Query your cost data
 
@@ -34,9 +34,9 @@ You can select multiple providers in the **Provider** field on the [**Analytics*
 
 {{< img src="cloud_cost/multisource_querying/provider.png" alt="The Provider field below the search query on the Cloud Cost Analytics page" style="width:40%;" >}}
 
-Dropdown filters like **Provider** maintain flexibility and streamline the process of creating a search query so you can refine your cost data. To add a filter, click **+ Filter**.
+Dropdown filters like **Provider** and **Team** maintain flexibility and streamline the process of creating a search query so you can refine your cost data. To add a filter, click **+ Filter**. 
 
-{{< img src="cloud_cost/multisource_querying/filters.png" alt="The Service and Team filters highlighted below the search query on the Cloud Cost Analytics page" style="width:100%;" >}}
+{{< img src="cloud_cost/multisource_querying/filters_2.png" alt="A search query that uses the Team filter and groups reports by service on the Cloud Cost Analytics page" style="width:100%;" >}}
 
 Click **Refine Results** to access the following options and filter your cost data.
 
@@ -55,7 +55,7 @@ Dollar Change
 Percent Change
 : Only display cost changes within a specified percentage change range.
 
-{{< img src="cloud_cost/multisource_querying/refine_results.png" alt="Additional options to refine your cost data on the Cloud Cost Analytics page" style="width:100%;" >}}
+{{< img src="cloud_cost/multisource_querying/refine_results_1.png" alt="Additional options to refine your cost data on the Cloud Cost Analytics page" style="width:100%;" >}}
 
 ## Visualize your cost data
 
@@ -99,6 +99,7 @@ The following FOCUS tags are available in Cloud Cost Management:
 | `servicename` | An offering that can be purchased from a provider (for example, cloud virtual machine, SaaS database, professional services from a systems integrator). |
 | `billingaccountid` | The identifier assigned to a billing account by the provider. |
 | `billingaccountname` | The display name assigned to a billing account. |
+| `billingcurrency` | The currency in which a cloud bill was paid. |
 | `subaccountid` | An ID assigned to a grouping of resources or services, often used to manage access or cost. |
 | `subaccountname` | A name assigned to a grouping of resources or services, often used to manage access or cost. |
 | `regionname` | The name of an isolated geographic area where a resource is provisioned or a service is provided. |
@@ -108,6 +109,9 @@ The following FOCUS tags are available in Cloud Cost Management:
 The `all.cost` metric has [Container costs allocated][13] for AWS, Azure, and Google Cloud costs, so you can query by the [relevant container tags][14].
 
 <div class="alert alert-warning">If your organization tags with any of these FOCUS tags, Datadog recommends updating your tag key on the underlying infrastructure so that tag values do not overlap with FOCUS tag values in Cloud Cost Management.</div>
+
+## Currency conversion
+Cloud Cost Management retrieves the billing currency from each cloud provider's bill. When processing costs from multiple providers in different currencies, cost charges are converted to USD. This conversion is performed using the average monthly exchange rate, which is updated daily. This ensures that Cloud Cost Management can consistently and accurately represent all cost data, regardless of its original currency. To view your cost in the original billing currency, filter to a single provider.
 
 ## Further reading
 

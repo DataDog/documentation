@@ -8,7 +8,7 @@ aliases:
 further_reading:
 - link: "/tests"
   tag: "Documentation"
-  text: "Learn about Test Visibility"
+  text: "Learn about Test Optimization"
 - link: "/monitors/types/ci"
   tag: "Documentation"
   text: "Learn about CI Monitors"
@@ -18,7 +18,7 @@ further_reading:
 
 Code coverage is a measure of the total code coverage percentage that a module or session exercises.
 
-Ensure that [Test Visibility][1] is already set up for your language.
+Ensure that [Test Optimization][1] is already set up for your language.
 
 ## Report code coverage
 
@@ -27,23 +27,28 @@ Ensure that [Test Visibility][1] is already set up for your language.
 
 ### Compatibility
 
-* `dd-trace>=3.20.0`.
+* `dd-trace>=4.45.0` and `dd-trace>=5.21.0`.
 * `jest>=24.8.0`, only when run with `jest-circus`.
-* `mocha>=5.2.0`, only if `all` option in `nyc` is not explicitly set to `true`.
-* `cucumber-js>=7.0.0`, only if `all` option in `nyc` is not explicitly set to `true`.
-* Only [`Istanbul`][1] code coverage is supported.
+* `mocha>=5.2.0`.
+* `cucumber-js>=7.0.0`.
+* `vitest>=2.0.0`.
 
+<div class="alert alert-warning">
+  <strong>Note</strong>: The DataDog Tracer does not generate code coverage. If your tests are run with code coverage enabled, <code>dd-trace</code> reports it under the <code>test.code_coverage.lines_pct</code> tag for your test sessions automatically.
+</div>
 
-When tests are instrumented with [Istanbul][1], the Datadog Tracer reports code coverage under the `test.code_coverage.lines_pct` tag for your test sessions automatically. To instrument tests with Istanbul, you can use [`nyc`][2].
+#### Mocha/Cucumber-js
 
-To report total code coverage from your test sessions, follow these steps:
+Only [`Istanbul`][1] code coverage is supported for `mocha` and `cucumber-js`.
+
+To report total code coverage from your `mocha` and `cucumber-js` test sessions, install [`nyc`][2] and wrap your test commands:
 
 1. Install `nyc`:
 ```
 npm install --save-dev nyc
 ```
 
-2. Wrap your test command with `nyc`:
+2. Wrap your test commands with `nyc`:
 ```json
 {
   "scripts": {
@@ -53,9 +58,8 @@ npm install --save-dev nyc
 }
 ```
 
-<div class="alert alert-warning">
-  <strong>Note</strong>: Jest includes Istanbul by default, so you don't need to install <code>nyc</code>. Simply pass <code>--coverage</code>.
-</div>
+#### Jest
+Jest includes Istanbul by default, so you don't need to install `nyc`. Simply pass `--coverage`:
 
 ```json
 {
@@ -65,18 +69,29 @@ npm install --save-dev nyc
 }
 ```
 
-3. Run your test with the new `coverage` command:
+The only supported [`coverageProvider`][3] is `babel`, which is the default.
+
+#### Vitest
+Vitest requires extra dependencies for running with code coverage. See [vitest docs][4] for more information. After the dependencies are installed, pass `--coverage` to your test command:
+
+```json
+{
+  "scripts": {
+    "coverage": "vitest run --coverage"
+  }
+}
+```
+
+After modifying your test commands, run your tests with the new `coverage` command:
 ```
 NODE_OPTIONS="-r dd-trace/ci/init" DD_ENV=ci DD_SERVICE=my-javascript-service npm run coverage
 ```
 
-### Known limitations
-
-If the `all` option is set to `true` when running `nyc` (see [nyc docs][3]), the total code coverage reported in the test session does not coincide with the value reported by `nyc`. This is because it does not include uncovered files (the ones that are not touched by your tests).
 
 [1]: https://istanbul.js.org/
 [2]: https://github.com/istanbuljs/nyc
-[3]: https://github.com/istanbuljs/nyc?tab=readme-ov-file#common-configuration-options
+[3]: https://jestjs.io/docs/configuration#coverageprovider-string
+[4]: https://vitest.dev/guide/coverage.html
 {{% /tab %}}
 
 {{% tab ".NET" %}}
@@ -260,6 +275,55 @@ DD_ENV=ci DD_SERVICE=my-python-service pytest --cov
 [1]: https://github.com/nedbat/coveragepy
 [2]: https://github.com/pytest-dev/pytest-cov
 {{% /tab %}}
+{{% tab "Ruby" %}}
+
+### Compatibility
+
+* `datadog-ci-rb>=1.7.0`
+* `simplecov>=0.18.0`.
+
+<div class="alert alert-warning">
+  <strong>Note</strong>: The DataDog library does not generate total code coverage. If your tests are run with code coverage enabled, <code>datadog-ci-rb</code> reports it under the <code>test.code_coverage.lines_pct</code> tag for your test sessions automatically.
+</div>
+
+If your project has [simplecov][1] configured, the datadog-ci-rb library instruments it and reports the coverage data to Datadog automatically under the `test.code_coverage.lines_pct` tag for your test sessions.
+
+This feature is enabled by default. Use `DD_CIVISIBILITY_SIMPLECOV_INSTRUMENTATION_ENABLED` environment variable to disable this feature (for example: `DD_CIVISIBILITY_SIMPLECOV_INSTRUMENTATION_ENABLED=0`).
+
+[1]: https://github.com/simplecov-ruby/simplecov
+{{% /tab %}}
+
+{{% tab "Go" %}}
+
+<div class="alert alert-info">Test optimization for Go is in Preview.</div>
+
+### Compatibility
+
+* `go test -cover`
+
+<div class="alert alert-warning">
+  <strong>Note</strong>: The DataDog library does not generate total code coverage. If your tests are run with code coverage enabled, <code>dd-trace-go</code> reports it under the <code>test.code_coverage.lines_pct</code> tag for your test sessions automatically.
+</div>
+
+If your tests are executed with the `-cover` flag, the Datadog library instruments it and automatically reports the coverage data to Datadog under the `test.code_coverage.lines_pct` tag for your test sessions.
+
+{{% /tab %}}
+
+{{% tab "Swift" %}}
+
+### Compatibility
+* `dd-sdk-swift-testing>=2.5.3`.
+* `Xcode>=14.3`.
+
+When code coverage is enabled, the Datadog Tracer reports it under the `test.code_coverage.lines_pct` tag for your test sessions.
+
+To enable code coverage for Xcode projects you can follow this guide from Apple: [Enable code coverage in your test plan][1].
+
+For SPM tests, add the `--enable-code-coverage` parameter to your `swift test` invocation.
+
+[1]: https://developer.apple.com/documentation/xcode/determining-how-much-code-your-tests-cover#Enable-code-coverage-in-your-test-plan
+{{% /tab %}}
+
 {{% tab "JUnit Report Uploads" %}}
 
 ### Compatibility
@@ -315,9 +379,9 @@ You can also see the code coverage's evolution on the [Branch Overview page][6] 
 
 The pull request's [test summary comment][7] shows the code coverage change of a GitHub pull request compared to the default branch.
 
-## Intelligent Test Runner and total code coverage
+## Test Impact Analysis and total code coverage
 
-[Intelligent Test Runner][8] will **not** automatically provide total code coverage measurements, even though it requires _per test_ code coverage to function.
+[Test Impact Analysis][8] does **not** automatically provide total code coverage measurements, even though it requires _per test_ code coverage to function.
 
 ## Further reading
 
@@ -331,4 +395,4 @@ The pull request's [test summary comment][7] shows the code coverage change of a
 [5]: /monitors/types/ci/#maintain-code-coverage-percentage
 [6]: /continuous_integration/tests/developer_workflows#branch-overview
 [7]: /tests/developer_workflows/#test-summaries-in-github-pull-requests
-[8]: /continuous_integration/intelligent_test_runner/
+[8]: /tests/test_impact_analysis

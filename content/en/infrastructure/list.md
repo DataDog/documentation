@@ -17,7 +17,7 @@ further_reading:
 
 ## Overview
 
-The Infrastructure list shows all of your hosts monitored by Datadog with activity during the last two hours (default) and up to one week. Search your hosts or group them by tags. In Datadog, navigate to [**Infrastructure > Hosts**][10] to view the Infrastructure list.
+The Infrastructure list shows all of your hosts monitored by Datadog with activity during the last two hours (default) and up to one week. Search your hosts or group them by tags. In Datadog, navigate to [**Infrastructure > Hosts**][10] to view the Infrastructure list. This list should not be used to estimate your infrastructure host billing. See the [billing][11] page to learn about billing. 
 
 ## Hosts
 
@@ -85,21 +85,15 @@ Datadog creates aliases for host names when there are multiple uniquely identifi
 
 #### Agent configuration
 
-{{< callout url="#" btn_hidden="true" >}}
-  The Agent configuration view is in public beta and is available in Agent versions >= 7.39/6.39.
-
-  Starting with Agent version >= 7.47/6.47, this feature is enabled by default.
-{{< /callout >}}
-
 The Agent can send its own configuration to Datadog to be displayed in the `Agent Configuration` section of the host detail panel.
 
 The Agent configuration is scrubbed of any sensitive information and only contains configuration you've set using the configuration file or environment variables. The configuration changes are updated every 10 minutes.
 
-This feature is enabled by default in Agent version >= 7.47.0/6.47.0.
+The Agent configuration view is enabled by default in Agent version >= 7.47.0/6.47.0. In Agent versions >= 7.39/6.39, you can enable it manually:
 
-To modify this behavior, set the value of `inventories_configuration_enabled` in your [Agent configuration file][6] to `true` to send the configuration, or `false` to disable it.
-
-Alternatively, use the `DD_INVENTORIES_CONFIGURATION_ENABLED` environment variable to enable or disable this feature.
+To enable or disable the configuration view:
+- Set the value of `inventories_configuration_enabled` in your [Agent configuration file][6] to `true` to enable the configuration view, or `false` to disable it.
+- Alternatively, use the `DD_INVENTORIES_CONFIGURATION_ENABLED` environment variable to enable or disable the configuration view.
 
 {{< img src="infrastructure/index/infra-list-config3.png" alt="The Agent configuration view" style="width:100%;">}}
 
@@ -158,3 +152,4 @@ for host in infra['rows']:
 [8]: /developers/guide/query-the-infrastructure-list-via-the-api/
 [9]: https://github.com/DataDog/Miscellany/tree/master/get_hostname_agentversion
 [10]: https://app.datadoghq.com/infrastructure
+[11]: https://docs.datadoghq.com/account_management/billing/

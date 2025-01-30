@@ -7,19 +7,19 @@ title: Cloud Security Management ガイド
 ---
 
 
-{{< whatsnext desc="Cloud Security Management (CSM) Guides" >}}
-    {{< nextlink href="/getting_started/cloud_security_management" >}}First Steps for Cloud Security Management{{< /nextlink >}}
-    {{< nextlink href="/security/cloud_security_management/guide/agent_variables" >}}Cloud Security Management Agent Variables{{< /nextlink >}}
+{{< whatsnext desc="Cloud Security Management (CSM) ガイド" >}}
+{{< nextlink href="/getting_started/cloud_security_management" >}}Cloud Security Management のファーストステップ{{< /nextlink >}}
+{{< nextlink href="/security/cloud_security_management/guide/agent_variables" >}}Cloud Security Management エージェント変数{{< /nextlink >}}
 {{< /whatsnext >}}
 
-{{< whatsnext desc="CSM Threats Guides" >}}
-    {{< nextlink href="/security/cloud_security_management/guide/active-protection" >}}Proactively block crypto mining threats with Active Protection{{< /nextlink >}}
-    {{< nextlink href="/security/cloud_security_management/guide/tuning-rules" >}}Best Practices for Fine-Tuning CSM Threats Security Signals{{< /nextlink >}}
-    {{< nextlink href="/security/cloud_security_management/guide/custom-rules-guidelines" >}}Guidelines for Writing Custom Rules{{< /nextlink >}}
+{{< whatsnext desc="CSM Threats ガイド" >}}
+{{< nextlink href="/security/cloud_security_management/guide/active-protection" >}}Active Protection で暗号通貨マイニングの脅威を積極的にブロックする{{< /nextlink >}}
+{{< nextlink href="/security/cloud_security_management/guide/tuning-rules" >}}CSM Threats セキュリティシグナルの微調整のベストプラクティス{{< /nextlink >}}
+{{< nextlink href="/security/cloud_security_management/guide/custom-rules-guidelines" >}}カスタムルール作成のガイドライン{{< /nextlink >}}
 {{< /whatsnext >}}
 
-{{< whatsnext desc="CSM Misconfigurations Guides" >}}
-    {{< nextlink href="/security/cloud_security_management/guide/writing_rego_rules" >}}Writing Custom CSM Misconfigurations Rules with Rego{{< /nextlink >}}
-    {{< nextlink href="/security/cloud_security_management/guide/public-accessibility-logic" >}}How Datadog Determines if Resources are Publicly Accessible{{< /nextlink >}}
-    {{< nextlink href="/security/cloud_security_management/guide/resource_evaluation_filters" >}}Use Filters to Exclude Resources from Evaluation{{< /nextlink >}}
+{{< whatsnext desc="CSM Misconfigurations ガイド" >}}
+{{< nextlink href="/security/cloud_security_management/guide/writing_rego_rules" >}}Rego を使用してカスタム CSM Misconfigurations ルールを作成する{{< /nextlink >}}
+{{< nextlink href="/security/cloud_security_management/guide/public-accessibility-logic" >}}Datadog がリソースが公開されているかどうかを判断する方法{{< /nextlink >}}
+{{< nextlink href="/security/cloud_security_management/guide/resource_evaluation_filters" >}}フィルターを使用して評価からリソースを除外する{{< /nextlink >}}
 {{< /whatsnext >}}

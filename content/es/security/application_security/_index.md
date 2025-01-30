@@ -1,9 +1,14 @@
 ---
+algolia:
+  tags:
+  - asm
+  - seguridad de las aplicaciones
 aliases:
 - /es/security_platform/application_security
 - /es/security/application_security/enabling/single_step
 - /es/security/application_security/enabling/compatibility
 - /es/security/application_security/enabling
+- /es/security/application_security/getting_started
 description: Monitoriza amenazas dirigidas al sistema de producción basándote en el
   contexto de ejecución proporcionado por las trazas (traces) distribuidas.
 further_reading:

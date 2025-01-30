@@ -65,10 +65,6 @@ The `stopSession()` method differs depending on your mobile SDK framework.
 This feature requires RUM iOS SDK version >= 1.18.0. See installation instructions [here][1]. 
 
 ```swift
-// SDK v1
-Global.rum.stopSession()
-
-// SDK v2
 RUMMonitor.shared().stopSession()
 ```
 
@@ -94,7 +90,7 @@ This feature requires RUM Flutter SDK version >= 1.4.0. See installation instruc
 DatadogSdk.instance.rum?.stopSession();
 ```
 
-[1]: https://docs.datadoghq.com/real_user_monitoring/mobile_and_tv_monitoring/setup/flutter/
+[1]: https://docs.datadoghq.com/real_user_monitoring/mobile_and_tv_monitoring/flutter/setup/
 
 {{% /tab %}}
 {{% tab "React Native" %}}
@@ -116,7 +112,7 @@ DdRum.stopSession()
 
 [1]: /real_user_monitoring/browser/advanced_configuration/?tab=cdnsync#clear-user-session-property
 [2]: /real_user_monitoring/ios/advanced_configuration/?tab=swift
-[3]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/android/?tab=kotlin#track-user-sessions
-[4]: /real_user_monitoring/mobile_and_tv_monitoring/setup/flutter/advanced_configuration/#track-user-sessions
+[3]: /real_user_monitoring/mobile_and_tv_monitoring/android/advanced_configuration/?tab=kotlin#track-user-sessions
+[4]: /real_user_monitoring/mobile_and_tv_monitoring/flutter/advanced_configuration/#track-user-sessions
 [5]: /real_user_monitoring/reactnative/#user-information
 [6]: /real_user_monitoring/browser/

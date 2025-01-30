@@ -43,11 +43,11 @@ https://app.datadoghq.com/logs?from_ts={{eval "last_triggered_at_epoch-15*60*100
 
 ### Routing notifications to different teams based on time of day
 
-You can combine a modulo `%` evaluation of the `last_triggered_at_epoch` variable with `{{#is_match}}{{/is_match}}` to customize the routing of notifications based on time of day (UTC):
+You can combine a modulo `%` evaluation of the `last_triggered_at_epoch` variable with `{{#is_exact_match}}{{/is_exact_match}}` to customize the routing of notifications based on time of day (UTC):
 ```
-{{#is_match (eval "int(last_triggered_at_epoch / 3600000 % 24)") "14" "15" "16"}}  
-Handle that should receive notification if time is between 2PM and 5PM UTC
-{{/is_match}}
+{{#is_exact_match (eval "int(last_triggered_at_epoch / 3600000 % 24)") "8" "9" "10" "11" "12" "13"}}  
+Handle that should receive notification if time is between 8AM and 2PM UTC
+{{/is_exact_match}}
 ```
 
 **Note:** If you need to evaluate your monitor on a schedule, see [Custom Schedules][2] instead.

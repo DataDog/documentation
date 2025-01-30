@@ -27,9 +27,9 @@ IoT Agent에는 다음과 같은 시스템 점검이 포함됩니다. IoT 기기
 
 IoT Agent에는 표준 Agent와 함께 사전 패키징된 Python 인터프리터 및 기타 통합 기능이 포함되어 있지 않습니다. 또한 APM, 실시간 프로세스 모니터링 또는 네트워크 성능 모니터링에 대한 추적도 지원하지 않습니다.
 
-## 구성
+## 설정
 
-### 요건
+### 요구 사항
 
 IoT Agent는 x64, arm64(ARMv8), ARMv7 아키텍처에서 실행 중인 Linux 기기에 DEB 및 RPM 패키지로 사용할 수 있습니다.
 
@@ -98,7 +98,7 @@ DD_API_KEY=<YOUR_DD_API_KEY> DD_SITE="{{< region-param key="dd_site" >}}" DD_AGE
 
 6. Datadog 사이트를 {{< region-param key="dd_site" code="true" >}}로 설정합니다. 기본 설정은 `datadoghq.com`입니다.
     ```shell
-    sudo sh -c "sed 's/# site:.*/site: <YOUR_DD_SITE>/' /etc/datadog-agent/datadog.yaml > /etc/datadog-agent/datadog.yaml.new && mv /etc/datadog-agent/datadog.yaml.new /etc/datadog-agent/datadog.yaml
+    sudo sh -c "sed 's/# site:.*/site: <YOUR_DD_SITE>/' /etc/datadog-agent/datadog.yaml > /etc/datadog-agent/datadog.yaml.new && mv /etc/datadog-agent/datadog.yaml.new /etc/datadog-agent/datadog.yaml"
     ```
 
 7. IoT Agent 시작하기:
@@ -144,9 +144,9 @@ RPM 기반의 운영 체제에서 IoT Agent를 수동 설치하려면 다음 명
     DD_API_KEY=<YOUR_DD_API_KEY> ; sudo sh -c "sed 's/api_key:.*/api_key:$DD_API_KEY/' /etc/datadog-agent/datadog.yaml.example > /etc/datadog-agent/datadog.yaml"
     ```
 
-4. Datadog 사이트를 {{< region-param key="dd_site" code="true" >}}로 설정합니다. 기본은 `datadoghq.com`입니다.
+4. Datadog 사이트를 {{< region-param key="dd_site" code="true" >}}로 설정합니다. 기본 설정은 `datadoghq.com`입니다.
     ```shell
-    sudo sh -c "sed 's/# site:.*/site: <YOUR_DD_SITE>/' /etc/datadog-agent/datadog.yaml > /etc/datadog-agent/datadog.yaml.new && mv /etc/datadog-agent/datadog.yaml.new /etc/datadog-agent/datadog.yaml
+    sudo sh -c "sed 's/# site:.*/site: <YOUR_DD_SITE>/' /etc/datadog-agent/datadog.yaml > /etc/datadog-agent/datadog.yaml.new && mv /etc/datadog-agent/datadog.yaml.new /etc/datadog-agent/datadog.yaml"
     ```
 
 5. IoT Agent 시작하기:

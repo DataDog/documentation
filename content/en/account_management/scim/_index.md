@@ -26,13 +26,13 @@ The System for Cross-domain Identity Management, or SCIM, is an open standard th
 - Keep user attributes synchronized between the identity provider and Datadog
 - Single sign-on to Datadog (recommended)
 
-Datadog supports using SCIM with the Azure Active Directory (Azure AD) and Okta identity providers. To configure SCIM, see the documentation for your IdP:
-- [Azure AD][2]
+Datadog supports using SCIM with the Microsoft Entra ID and Okta identity providers. To configure SCIM, see the documentation for your IdP:
+- [Microsoft Entra ID][2]
 - [Okta][3]
 
 ### Prerequisites
 
-SCIM in Datadog is an advanced feature included in the Enterprise plan.
+SCIM in Datadog is an advanced feature included in the Infrastructure Pro and Infrastructure Enterprise plans.
 
 This documentation assumes your organization manages user identities using an identity provider.
 
@@ -50,7 +50,7 @@ To avoid losing access to your data, Datadog strongly recommends that you create
 
 ## Email verification
 
-Creating a new user with SCIM triggers an email to the user. For first time access, you are required to log in through the the invite link shared by email. The link is active for 2 days. If it expires, go to the [user settings page][7] and select a user to resend an invite link.
+Creating a new user with SCIM triggers an email to the user. For first time access, you are required to log in through the invite link shared by email. The link is active for 2 days. If it expires, go to the [user settings page][7] and select a user to resend an invite link.
 
 ## Further Reading
 

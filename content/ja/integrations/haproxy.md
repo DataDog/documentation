@@ -28,17 +28,17 @@ assets:
     source_type_id: 38
     source_type_name: HAProxy
   monitors:
-    '[HAProxy] Anomalous frontend request rate for host {{host.name}}': assets/monitors/request_rate.json
-    '[HAProxy] Anomalous number of frontend 4xx HTTP responses for host: {{host.name}}': assets/monitors/frontend_5xx.json
-    '[HAProxy] Anomalous number of frontend 5xx HTTP responses for host: {{host.name}}': assets/monitors/frontend_4xx.json
-    '[HAProxy] Backend queue time went above 500ms for host: {{host.name}}': assets/monitors/backend_queue_time.json
-    '[HAProxy] Backend response time is above 500ms for host: {{host.name}}': assets/monitors/backend_rtime.json
-    '[HAProxy] High amount of backend session usage for host: {{host.name}}': assets/monitors/backend_sessions.json
-    '[HAProxy] High amount of frontend session usage for host: {{host.name}}': assets/monitors/frontend_sessions.json
-    '[HAProxy] High number of backend denied responses for host: {{host.name}}': assets/monitors/backend_dreq.json
-    '[HAProxy] High number of frontend denied requests for host: {{host.name}}': assets/monitors/frontend_dreq.json
-    '[HAProxy] Number of backend connection failures for host: {{host.name}} is above normal.': assets/monitors/backend_econ.json
-    '[HAProxy] Number of client-side request error for {{host.name}} is above normal.': assets/monitors/frontend_ereq.json
+    Backend queue time is high: assets/monitors/backend_queue_time.json
+    Backend sessions usage is high: assets/monitors/backend_sessions.json
+    Frontend request rate is anomalous: assets/monitors/request_rate.json
+    Frontend sessions usage is high: assets/monitors/frontend_sessions.json
+    Number of backend connection failures is high: assets/monitors/backend_econ.json
+    Number of client-side request error is high: assets/monitors/frontend_ereq.json
+    Number of denied response is high: assets/monitors/backend_dreq.json
+    Number of frontend 4xx HTTP responses is high: assets/monitors/frontend_4xx.json
+    Number of frontend 5xx HTTP responses is high: assets/monitors/frontend_5xx.json
+    Number of frontend denied requests is high: assets/monitors/frontend_dreq.json
+    Response time is high: assets/monitors/backend_rtime.json
   saved_views:
     4xx_errors: assets/saved_views/4xx_errors.json
     5xx_errors: assets/saved_views/5xx_errors.json
@@ -53,7 +53,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - log collection
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/haproxy/README.md
 display_on_public_website: true
@@ -61,7 +61,7 @@ draft: false
 git_integration_title: haproxy
 integration_id: haproxy
 integration_title: HAProxy
-integration_version: 5.2.2
+integration_version: 7.1.0
 is_public: true
 manifest_version: 2.0.0
 name: haproxy
@@ -150,14 +150,14 @@ HAProxy チェックは [Datadog Agent][5] パッケージに含まれていま�
 
 1. HAProxy メトリクスの収集を開始するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `haproxy.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル haproxy.d/conf.yaml][1] を参照してください。
 
-   ```yaml
+   ```yaml  
    instances:
 
      ## @param use_openmetrics - boolean - optional - default: false
      ## Enable to preview the new version of the check which supports HAProxy version 2 or later
      ## or environments using the HAProxy exporter.
      ##
-     ## OpenMetrics-related options take effect only when this is set to `true`.
+     ## OpenMetrics-related options take effect only when this is set to `true`. 
      ##
      ## Uses the latest OpenMetrics V2 implementation for more features and better performance.
      ## Note: To see the configuration options for the OpenMetrics V1 implementation (Agent v7.33 or earlier),
@@ -506,7 +506,7 @@ HAProxy チェックには、イベントは含まれません。
 
 ## トラブルシューティング
 ### エラー: ポート 514 はすでに使用中
-syslog があるシステムで、Agent がポート 514 で HAProxy ログをリッスンしている場合、Agent ログに以下のエラーが表示されることがあります:
+syslog があるシステムで、Agent がポート 514 で HAProxy ログをリッスンしている場合、Agent ログに以下のエラーが表示されることがあります: 
 `Can't start UDP forwarder on port 514: listen udp :514: bind: address already in use`
 
 これは、デフォルトで syslog がポート 514 でリッスンしているために起こっています。このエラーを解決するには、syslog を無効にするか、ポート 514 と Agent がログをリッスンしている別のポートにログを転送するように HAProxy を構成することができます。Agent がリッスンするポートは、[こちら][11]で haproxy.d/conf.yaml ファイル定義することができます。

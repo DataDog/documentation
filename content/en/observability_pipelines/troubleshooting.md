@@ -48,20 +48,8 @@ If you are using a containerized environment, use the `docker exec` or `kubectl 
 Observability Pipelines destinations batch events before sending them to the downstream integration. For example, the Amazon S3, Google Cloud Storage, and Azure Storage destinations have a batch timeout of 900 seconds. If the other batch parameters (maximum events and maximum bytes) have not been met within the 900-second timeout, the batch is flushed at 900 seconds. This means the destination component can take up to 15 minutes to send out a batch of events to the downstream integration.
 
 These are the batch parameters for each destination:
-| Destination                                | Maximum Events | Maximum Bytes   | Timeout (seconds)   |
-|--------------------------------------------|----------------|-----------------|---------------------|
-| Amazon OpenSearch                          | None           | 10,000,000      | 1                   |
-| Amazon S3 (Datadog Log Archives)           | None           | 100,000,000     | 900                 |
-| Azure Storage (Datadog Log Archives)       | None           | 100,000,000     | 900                 |
-| Datadog Logs                               | 1,000          | 4,250,000       | 5                   |
-| Elasticsearch                              | None           | 10,000,000      | 1                   |
-| Google Chronicle                           | None           | 1,000,000       | 15                  |
-| Google Cloud Storage (Datadog Log Archives)| None           | 100,000,000     | 900                 |
-| OpenSearch                                 | None           | 10,000,000      | 1                   |
-| Splunk HTTP Event Collector (HEC)          | None           | 1,000,000       | 1                   |
-| Sumo Logic Hosted Collecter                | None           | 10,000,000      | 1                   |
 
-**Note**: The rsyslog and syslog-ng destinations do not batch events.
+{{% observability_pipelines/destination_batching %}}
 
 See [event batching][6] for more information.
 

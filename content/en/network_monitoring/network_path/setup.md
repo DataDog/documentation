@@ -1,6 +1,6 @@
 ---
 title: Setup
-description: Setting up Network Path 
+description: Setting up Network Path
 is_beta: true
 further_reading:
 - link: "/network_monitoring/network_path/list_view"
@@ -12,11 +12,10 @@ further_reading:
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">Network Path for Datadog Network Performance Monitoring is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-warning">Network Path for Datadog Cloud Network Monitoring is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
-<div class="alert alert-info">Network Path for Datadog Network Performance Monitoring is in private beta. Reach out to your Datadog representative to sign up, and then use the following instructions to configure the Datadog Agent to gather network path data.</div>
-
+<div class="alert alert-info">Network Path for Datadog Cloud Network Monitoring is in Limited Availability. Reach out to your Datadog representative to sign up, and then use the following instructions to configure the Datadog Agent to gather network path data.</div>
 
 ## Overview
 
@@ -24,54 +23,18 @@ Setting up Network Path involves configuring your Linux environment to monitor a
 
 ## Prerequisites
 
-- Agent version `7.55` or higher is required.
-- [NPM][1] must be enabled.
+[CNM][1] must be enabled.
 
 **Note**: If your network configuration restricts outbound traffic, follow the setup instructions on the [Agent proxy configuration][2] documentation.
 
 ## Setup
 
-### Network traffic paths
-
-Configure network traffic paths to allow the Agent to automatically discover and monitor network paths based on actual network traffic, without requiring you to specify endpoints manually.
-
-1. Enable the `system-probe` traceroute module in `/etc/datadog-agent/system-probe.yaml` by adding the following:
-
-   ```
-   traceroute:
-     enabled: true
-   ```
-
-2. Enable `network_path` to monitor NPM connections by creating or editing the `/etc/datadog-agent/datadog.yaml` file: 
-
-    ```yaml
-    network_path:
-      connections_monitoring:
-        enabled: true
-      collector:
-        workers: 10 # default 4
-    ```
- 
-    For full configuration details, reference the [example config][3], or use the following:
-
-    ```yaml
-    network_path:
-      connections_monitoring:
-        ## @param enabled - bool - required - default:false
-        ## Enable network path collection
-        #
-        enabled: true
-      collector:
-        ## @param workers - int - optional - default:4
-        ## Number of workers that can collect paths in parallel
-        ## Recommendation: leave at default
-        #
-        workers: 10
-    ```
-
-3. Restart the Agent after making these configuration changes to start seeing network paths.
-
 ### Monitor individual paths
+
+{{< tabs >}}
+{{% tab "Linux" %}}
+
+Agent `v7.59+` is required.
 
 Manually configure individual paths by specifying the exact endpoint you want to test. This allows you to target specific network routes for monitoring.
 
@@ -82,13 +45,15 @@ Manually configure individual paths by specifying the exact endpoint you want to
      enabled: true
    ```
 
-2. Enable `network_path` to monitor new destinations from this Agent by creating or editing the `/etc/datadog-agent/conf.d/network_path.d/conf.yaml` file: 
+2. Enable `network_path` to monitor new destinations from this Agent by creating or editing the `/etc/datadog-agent/conf.d/network_path.d/conf.yaml` file:
 
    ```yaml
    init_config:
      min_collection_interval: 60 # in seconds, default 60 seconds
    instances:
-     # configure the endpoints you want to monitor, one check instance per endpoint 
+     # configure the endpoints you want to monitor, one check instance per endpoint
+     # warning: Do not set the port when using UDP. Setting the port when using UDP can cause traceroute calls to fail and falsely report an unreachable destination.
+
      - hostname: api.datadoghq.eu # endpoint hostname or IP
        protocol: TCP
        port: 443
@@ -97,15 +62,16 @@ Manually configure individual paths by specifying the exact endpoint you want to
          - "tag_key2:tag_value2"
      ## optional configs:
      # max_ttl: 30 # max traderoute TTL, default is 30
-     # timeout: 10 # timeout in seconds of traceroute calls, default is 10s
+     # timeout: 1000 # timeout in milliseconds per hop, default is 1s
+
+     # more endpoints
      - hostname: 1.1.1.1 # endpoint hostname or IP
        protocol: UDP
-       port: 53
        tags:
          - "tag_key:tag_value"
          - "tag_key2:tag_value2"
     ```
- 
+
    For full configuration details, reference the [example config][4], or use the following:
 
    ```yaml
@@ -120,25 +86,26 @@ Manually configure individual paths by specifying the exact endpoint you want to
      ## Traceroute will be run against this endpoint with a sequence of different TTL.
      #
      - hostname: <HOSTNAME_OR_IP>
-  
-     ## @param port - uint16 - optional - default:<RANDOM PORT>
+
+     ## @param port - integer - optional - default:<RANDOM PORT>
      ## The port of the destination endpoint.
+     ## For UDP, we do not recommend setting the port since it can make probes less reliable.
      ## By default, the port is random.
      #
      # port: <PORT>
 
-     ## @param max_ttl - uint8 - optional - default:30
+     ## @param max_ttl - integer - optional - default:30
      ## The maximum traceroute TTL used during path collection.
      #
      # max_ttl: 30
-  
-     ## @param timeout - uint32 - optional - default:3000
-     ## The timeout of traceroute network calls.
-     ## The timeout is in millisecond.
+
+     ## @param timeout - integer - optional - default:1000
+     ## Specifies how much time in milliseconds the traceroute should
+     ## wait for a response from each hop before timing out.
      #
-     # timeout: 3000
-  
-     ## @param min_collection_interval - int - optional - default:60
+     # timeout: 1000
+
+     ## @param min_collection_interval - integer - optional - default:60
      ## Interval between each traceroute runs for each destination.
      # min_collection_interval: <interval_in_seconds>
      ## @param source_service - string - optional
@@ -163,13 +130,94 @@ Manually configure individual paths by specifying the exact endpoint you want to
 
 3. Restart the Agent after making these configuration changes to start seeing network paths.
 
-**Note**: Network path is only supported for Linux environments. 
+[4]: https://github.com/DataDog/datadog-agent/blob/main/cmd/agent/dist/conf.d/network_path.d/conf.yaml.example
+
+{{% /tab %}}
+{{% tab "Windows" %}}
+
+Agent `v7.61+` is required.
+
+**Note**: Windows only supports TCP traceroutes.
+
+In Windows environments, the Agent uses UDP by default to monitor individual paths. If the protocol is not specified in the configuration, the Agent attempts a UDP traceroute, and any errors are logged. To work around this, ensure the protocol is set to TCP. For example:
+
+```yaml
+init_config:
+  min_collection_interval: 60 # in seconds, default 60 seconds
+instances:
+  - hostname: api.datadoghq.eu # endpoint hostname or IP
+    protocol: TCP
+    port: 443 # optional port number, default is 80
+```
+{{% /tab %}}
+{{< /tabs >}}
+
+### Network traffic paths (experimental)
+
+{{< tabs >}}
+{{% tab "Linux" %}}
+
+Agent `v7.59+` is required.
+
+**Note**: Network traffic paths is experimental and is not yet stable. Do not deploy network traffic paths widely in a production environment.
+
+Configure network traffic paths to allow the Agent to automatically discover and monitor network paths based on actual network traffic, without requiring you to specify endpoints manually.
+
+<div class="alert alert-warning"> Enabling Network Path to automatically detect paths can generate a significant number of logs, particularly when monitoring network paths across a large number of hosts. </div>
+
+1. Enable the `system-probe` traceroute module in `/etc/datadog-agent/system-probe.yaml` by adding the following:
+
+   ```
+   traceroute:
+     enabled: true
+   ```
+
+2. Enable `network_path` to monitor CNM connections by creating or editing the `/etc/datadog-agent/datadog.yaml` file:
+
+    ```yaml
+    network_path:
+      connections_monitoring:
+        enabled: true
+      # collector:
+        # workers: <NUMBER OF WORKERS> # default 4
+    ```
+
+    For full configuration details, reference the [example config][3], or use the following:
+
+    ```yaml
+    network_path:
+      connections_monitoring:
+        ## @param enabled - bool - required - default:false
+        ## Enable network path collection
+        #
+        enabled: true
+      collector:
+        ## @param workers - int - optional - default:4
+        ## Number of workers that can collect paths in parallel
+        ## Recommendation: leave at default
+        #
+        # workers: <NUMBER OF WORKERS> # default 4
+    ```
+
+3. Restart the Agent after making these configuration changes to start seeing network paths.
+
+[3]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/config_template.yaml#L1697
+
+{{% /tab %}}
+{{% tab "Windows" %}}
+
+Agent `v7.61+` is required.
+
+For network traffic paths on Windows environments, only detected TCP connections are shown.
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /network_monitoring/performance/setup/
+[1]: /network_monitoring/cloud_network_monitoring/setup/
 [2]: https://docs.datadoghq.com/agent/configuration/proxy/?tab=linux
-[3]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/config_template.yaml#L1645
-[4]: https://github.com/DataDog/datadog-agent/blob/main/cmd/agent/dist/conf.d/network_path.d/conf.yaml.example
+
+

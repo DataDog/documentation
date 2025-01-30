@@ -5,7 +5,7 @@ aliases:
 ---
 
 {{< callout url="https://datadoghq.com/private-beta/ddsql-editor">}}
-DDSQL is in private beta.
+DDSQL is in Preview.
 {{< /callout >}}
 
 *Value expressions* are the general expression language used to produce values for conditions, `SELECT` expressions, filters, and clauses like `WHERE`, `ORDER BY`, and `GROUP BY`. The expression syntax of DDSQL is a superset of SQL expression syntax.
@@ -39,20 +39,27 @@ DDSQL implements the following comparison operators:
 
 For tag references and tag groups, the equality operator (`=`) is treated as a "contains" comparison. See the [Querying Tags in DDSQL][1] for more details.
 
-Additionally, DDSQL supports the following SQL keywords, which function as standard boolean operators:
+## SQL comparison keywords
 
-- `NOT`
-- `AND`
-- `OR`
+DDSQL supports the following SQL keywords, which function as standard Boolean operators:
+
+| Operator | Description            | Example | Result |
+|----------|------------------------|---------|--------|
+| `NOT`    | Filter records based on more than one condition. | `SELECT * FROM host WHERE NOT env = 'prod';`   | Return all hosts that are not in the prod environment.  |
+| `AND`    | Filter records based on more than one condition. | `SELECT * FROM host WHERE env = 'prod' AND cloud_provider = 'aws';`   | Return all hosts that are in the prod environment and the AWS cloud provider.  |
+| `OR`     | Filter records based on more than one condition. | `SELECT * FROM host WHERE env = 'prod' AND cloud_provider = 'aws';`   | Return all hosts that are either in the prod environment or the aws cloud provider.  |
 
 DDSQL also supports the following comparator keywords as they are defined in the SQL standard:
 
-- `IS NULL`
-- `IS NOT NULL`
-- `LIKE`
-- `NOT LIKE`
-- `IN`
-- `NOT IN`
+| Operator     | Description            | Example | Result |
+|--------------|------------------------|---------|--------|
+| `IS NULL`    | Select rows if the specified field is null. | `SELECT * FROM host WHERE cloud_provider IS NULL;`   | Return all rows that contain no data in the `cloud_provider` column.  |
+| `IS NOT NULL`| Select rows if the specified field is not null. Exclude rows with missing data. | `SELECT * FROM host WHERE cloud_provider IS NOT NULL;` | Return all rows that contain data in the `cloud_provider` column.   |
+| `LIKE`       | Search for a specific pattern in a string value. You can use the following wildcard characters to define the patterns: <br>**Percent sign (%)**: Represents zero, one, or multiple characters. <br>**Underscore (_)**: Represents a single character. | `SELECT * FROM aws_eks_cluster WHERE LOWER(logging) LIKE '%"enabled":true%';` | Return all rows from the `aws_eks_cluster` table where the `logging` column is `"enabled":true`.  |
+| `NOT LIKE`   | Exclude rows from a search, where the row has a specific pattern in a string value. You can use the wildcards `%` and `_` for pattern matching. | `SELECT * FROM aws_eks_cluster WHERE LOWER(logging) NOT LIKE '%"enabled":true%';` | Return all rows from the `aws_eks_cluster` table where the `logging` does **not** have `"enabled":true%'`. |
+| `IN`         | Find multiple values in a `WHERE` clause. The `IN` operator is shorthand for multiple `OR` conditions. | `SELECT * FROM host WHERE cloud_provider IN ('aws', 'gcp');`  | Return all rows from `host` table where the `cloud_provider` value is either 'aws' or 'gcp'.|
+| `NOT IN`     | Replace a set of arguments with the `<>` or `!=` operator that is combined with the `AND` operator| `SELECT * FROM host WHERE cloud_provider NOT IN ('aws', 'gcp');`  | Return all rows where `cloud_provider` is not `aws` or `gcp`. |
+
 
 DDSQL supports the `BETWEEN` keyword such that `a BETWEEN x AND y` is equivalent to `a >= x AND a <= y`. See [the Postgres documentation for `BETWEEN`][2] for details.
 

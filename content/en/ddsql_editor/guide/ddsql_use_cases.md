@@ -3,9 +3,9 @@ title: DDSQL Common Queries and Use Cases
 aliases:
 - /dashboards/guide/ddsql_use_cases
 further_reading:
-- link: "ddsql_editor/reference"
+- link: "ddsql_editor/"
   tag: "Documentation"
-  text: "Query References"
+  text: "Learn more about the DDSLQ Editor"
 ---
 
 ## General queries

@@ -45,7 +45,7 @@ Some commonly-used integrations come with default configuration for Autodiscover
 Otherwise:
 
 1. Choose a configuration method (Docker labels, a local file, or a key-value store) that suits your use case.
-2. Reference the template format for your chosen method. Each format contains placeholders, such as `<CONTAINER_IDENTIFIER>`.
+2. Reference the template format for your chosen method. Each format contains placeholders, such as `<CONTAINER_IMAGE>`.
 3. [Supply values](#placeholder-values) for these placeholders.
 
 {{< tabs >}}
@@ -146,7 +146,7 @@ You can store Autodiscovery templates as local files inside the mounted `/conf.d
 1. Create a `conf.d/<INTEGRATION_NAME>.d/conf.yaml` file on your host:
    ```yaml
    ad_identifiers:
-     - <CONTAINER_IDENTIFIER>
+     - <CONTAINER_IMAGE>
 
    init_config:
      <INIT_CONFIG>
@@ -206,7 +206,7 @@ With the key-value store enabled as a template source, the Agent looks for templ
 ```yaml
 /datadog/
   check_configs/
-    <CONTAINER_IDENTIFIER>/
+    <CONTAINER_IMAGE>/
       - check_names: ["<INTEGRATION_NAME>"]
       - init_configs: ["<INIT_CONFIG>"]
       - instances: ["<INSTANCES_CONFIG>"]
@@ -229,10 +229,10 @@ Supply placeholder values as follows:
 `<INTEGRATION_NAME>`
 : The name of your Datadog integration, such as `etcd` or `redisdb`.
 
-`<CONTAINER_IDENTIFIER>`
-: An identifier to match against the names (`spec.containers[0].name`, **not** `spec.containers[0].image`) of the containers that correspond to your integration. The `ad_identifiers` parameter takes a list, so you can supply multiple container identifiers.<br/><br/>
-For example: if you supply `redis` as a container identifier, your Autodiscovery template is applied to all containers with names that match `redis`. If you have one container running `foo/redis:latest` and `bar/redis:v2`, your Autodiscovery template is applied to both containers.<br/><br/>
-You can also use custom identifiers. See [Custom Autodiscovery Identifiers][21].
+`<CONTAINER_IMAGE>`
+: An identifier to match against the container image. <br/><br/>
+For example: if you supply `redis` as a container identifier, your Autodiscovery template is applied to all containers with image names that match `redis`. If you have one container running `foo/redis:latest` and `bar/redis:v2`, your Autodiscovery template is applied to both containers.<br/><br/>
+The `ad_identifiers` parameter takes a list, so you can supply multiple container identifiers. You can also use custom identifiers. See [Custom Autodiscovery Identifiers][7].
 
 `<INIT_CONFIG>`
 : The configuration parameters listed under `init_config` in your integration's `<INTEGRATION_NAME>.d/conf.yaml.example` file. The `init_config` section is usually empty.

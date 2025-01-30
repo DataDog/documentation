@@ -213,7 +213,7 @@ Para obtener instrucciones detalladas sobre la sección **Configure notification
 
 ## Referencias adicionales
 
-{{< nombre parcial="whats-next/whats-next.html" >}}
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/monitors/create
 [2]: /es/dashboards/querying/#advanced-graphing

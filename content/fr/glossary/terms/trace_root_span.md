@@ -1,6 +1,9 @@
 ---
 core_product:
 - apm
+short_definition: Une span est dite « racine de trace » lorsqu'elle représente la
+  première span d'une trace. La span racine constitue le point d'entrée de la requête
+  tracée. Sa création marque le début de la trace.
 title: span racine de trace
 ---
 Une [span][1] est dite « racine de trace » lorsqu'elle représente la première span d'une trace. La span racine constitue le point d'entrée de la requête tracée. Sa création marque le début de la trace.

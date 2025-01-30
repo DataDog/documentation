@@ -342,7 +342,7 @@ The [Datadog CDK Construct][1] automatically installs Datadog on your functions 
 
 ## Google Cloud Run
 
-<div class="alert alert-info">ASM support for Google Cloud Run is in beta.</a></div>
+<div class="alert alert-info">ASM support for Google Cloud Run is in Preview.</a></div>
 
 ### How `serverless-init` works
 
@@ -353,12 +353,12 @@ To get full instrumentation, ensure you are calling `datadog-init` as the first 
 ### Get started
 
 {{< tabs >}}
-{{% tab "NodeJS" %}}
+{{% tab "Node.js" %}}
 Add the following instructions and arguments to your Dockerfile.
 
 ```dockerfile
 COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
-COPY --from=datadog/dd-lib-js-init /operator-build/node_modules /dd_tracer/node/
+RUN npm install --prefix /dd_tracer/node dd-trace --save
 ENV DD_SERVICE=datadog-demo-run-nodejs
 ENV DD_ENV=datadog-demo
 ENV DD_VERSION=1
@@ -378,7 +378,7 @@ CMD ["/nodejs/bin/node", "/path/to/your/app.js"]
 2. Copy the Datadog Node.JS tracer into your Docker image.
 
    ```dockerfile
-   COPY --from=datadog/dd-lib-js-init /operator-build/node_modules /dd_tracer/node/
+   RUN npm install --prefix /dd_tracer/node dd-trace --save
    ```
 
    If you install the Datadog tracer library directly in your application, as outlined in the [manual tracer instrumentation instructions][1], omit this step.
@@ -408,7 +408,7 @@ If you already have an entrypoint defined inside your Dockerfile, you can instea
 
 {{< highlight dockerfile "hl_lines=7" >}}
 COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
-COPY --from=datadog/dd-lib-js-init /operator-build/node_modules /dd_tracer/node/
+RUN npm install --prefix /dd_tracer/node dd-trace --save
 ENV DD_SERVICE=datadog-demo-run-nodejs
 ENV DD_ENV=datadog-demo
 ENV DD_VERSION=1
@@ -420,7 +420,7 @@ If you require your entrypoint to be instrumented as well, you can swap your ent
 
 {{< highlight dockerfile "hl_lines=7-8" >}}
 COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
-COPY --from=datadog/dd-lib-js-init /operator-build/node_modules /dd_tracer/node/
+RUN npm install --prefix /dd_tracer/node dd-trace --save
 ENV DD_SERVICE=datadog-demo-run-nodejs
 ENV DD_ENV=datadog-demo
 ENV DD_VERSION=1
@@ -661,7 +661,11 @@ Add the following instructions and arguments to your Dockerfile.
 
 ```dockerfile
 COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
-COPY --from=datadog/dd-lib-dotnet-init /datadog-init/monitoring-home/ /dd_tracer/dotnet/
+# For arm64 use datadog-dotnet-apm-2.57.0.arm64.tar.gz
+# For alpine use datadog-dotnet-apm-2.57.0-musl.tar.gz
+ARG TRACER_VERSION
+ADD https://github.com/DataDog/dd-trace-dotnet/releases/download/v${TRACER_VERSION}/datadog-dotnet-apm-${TRACER_VERSION}.tar.gz /tmp/datadog-dotnet-apm.tar.gz
+RUN mkdir -p /dd_tracer/dotnet/ && tar -xzvf /tmp/datadog-dotnet-apm.tar.gz -C /dd_tracer/dotnet/ && rm /tmp/datadog-dotnet-apm.tar.gz
 ENV DD_SERVICE=datadog-demo-run-dotnet
 ENV DD_ENV=datadog-demo
 ENV DD_VERSION=1
@@ -679,7 +683,12 @@ CMD ["dotnet", "helloworld.dll"]
 
 2. Copy the Datadog .NET tracer into your Docker image.
    ```dockerfile
-   COPY --from=datadog/dd-lib-dotnet-init /datadog-init/monitoring-home/ /dd_tracer/dotnet/
+   # For arm64 use datadog-dotnet-apm-2.57.0.arm64.tar.gz
+   # For alpine use datadog-dotnet-apm-2.57.0-musl.tar.gz
+   ARG TRACER_VERSION
+   ADD https://github.com/DataDog/dd-trace-dotnet/releases/download/v${TRACER_VERSION}/datadog-dotnet-apm-${TRACER_VERSION}.tar.gz /tmp/datadog-dotnet-apm.tar.gz
+
+   RUN mkdir -p /dd_tracer/dotnet/ && tar -xzvf /tmp/datadog-dotnet-apm.tar.gz -C /dd_tracer/dotnet/ && rm /tmp/datadog-dotnet-apm.tar.gz
    ```
    If you install the Datadog tracer library directly in your application, as outlined in the [manual tracer instrumentation instructions][1], omit this step.
 
@@ -706,7 +715,11 @@ If you already have an entrypoint defined inside your Dockerfile, you can instea
 
 {{< highlight dockerfile "hl_lines=7" >}}
 COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
-COPY --from=datadog/dd-lib-dotnet-init /datadog-init/monitoring-home/ /dd_tracer/dotnet/
+# For arm64 use datadog-dotnet-apm-2.57.0.arm64.tar.gz
+# For alpine use datadog-dotnet-apm-2.57.0-musl.tar.gz
+ARG TRACER_VERSION
+ADD https://github.com/DataDog/dd-trace-dotnet/releases/download/v${TRACER_VERSION}/datadog-dotnet-apm-${TRACER_VERSION}.tar.gz /tmp/datadog-dotnet-apm.tar.gz
+RUN mkdir -p /dd_tracer/dotnet/ && tar -xzvf /tmp/datadog-dotnet-apm.tar.gz -C /dd_tracer/dotnet/ && rm /tmp/datadog-dotnet-apm.tar.gz
 ENV DD_SERVICE=datadog-demo-run-dotnet
 ENV DD_ENV=datadog-demo
 ENV DD_VERSION=1
@@ -718,7 +731,11 @@ If you require your entrypoint to be instrumented as well, you can swap your ent
 
 {{< highlight dockerfile "hl_lines=7-8" >}}
 COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
-COPY --from=datadog/dd-lib-dotnet-init /datadog-init/monitoring-home/ /dd_tracer/dotnet/
+# For arm64 use datadog-dotnet-apm-2.57.0.arm64.tar.gz
+# For alpine use datadog-dotnet-apm-2.57.0-musl.tar.gz
+ARG TRACER_VERSION
+ADD https://github.com/DataDog/dd-trace-dotnet/releases/download/v${TRACER_VERSION}/datadog-dotnet-apm-${TRACER_VERSION}.tar.gz /tmp/datadog-dotnet-apm.tar.gz
+RUN mkdir -p /dd_tracer/dotnet/ && tar -xzvf /tmp/datadog-dotnet-apm.tar.gz -C /dd_tracer/dotnet/ && rm /tmp/datadog-dotnet-apm.tar.gz
 ENV DD_SERVICE=datadog-demo-run-dotnet
 ENV DD_ENV=datadog-demo
 ENV DD_VERSION=1

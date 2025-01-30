@@ -7,9 +7,6 @@ further_reading:
 - link: "/tracing/service_catalog/service_definition_api/"
   tag: "Documentation"
   text: "Registering Services with the Service Definition API"
-- link: "/tracing/service_catalog/guides/understanding-service-configuration"
-  tag: "Guide"
-  text: "Understanding Your Service Configuration"
 - link: "/tracing/service_catalog/guides/upstream-downstream-dependencies"
   tag: "Guide"
   text: "See Upstream and Downstream Dependencies During an Active Incident"
@@ -136,5 +133,4 @@ To access additional details describing your CI status and static analysis viola
 [11]: /cloud_cost_management/tag_pipelines
 [12]: https://app.datadoghq.com/ci/pipelines
 [13]: https://app.datadoghq.com/ci/static-analysis
-[15]: /service_management/workflows/actions_catalog/
 [16]: /dora_metrics/setup

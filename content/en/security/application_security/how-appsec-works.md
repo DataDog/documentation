@@ -34,7 +34,7 @@ Datadog Application Security [Threat Management][1] uses the information APM is 
 
 Services exposed to application attacks are highlighted directly in the security views embedded in APM ([Service Catalog][2], [Service Page][3], [Traces][4]).
 
-Datadog Threat Monitoring and Detection identifies bad actors by collecting client IP addresses and manually-added user tags on all requests.
+Datadog Threat Monitoring and Detection identifies bad actors by collecting client IP addresses, login account info (for example, user account/ID), and manually-added user tags on all requests.
 
 <div class="alert alert-info"><strong>1-Click Enablement</strong><br>
 If your service is running with <a href="/agent/remote_config/#enabling-remote-configuration">an Agent with Remote Configuration enabled and a tracing library version that supports it</a>, you can <a href="https://app.datadoghq.com/security/configuration/asm/setup">enable Application Security</a> from the Datadog UI without additional configuration of the Agent or tracing libraries.</div>
@@ -133,7 +133,7 @@ For more information, read [Code Security][28] and [Software Composition Analysi
 
 ## API security
 
-<div class="alert alert-info">API security is in private beta.</div>
+<div class="alert alert-info">API security is in Preview.</div>
 
 Datadog Application Security provides visibility into threats targeting your APIs. Use the [API Catalog][27] to monitor API health and performance metrics, where you can view attacks targeting your APIs. This view includes the attacker's IP and authentication information, as well as request headers showing details about how the attack was formed. Using both Application Security and API management, you can maintain a comprehensive view of your API attack surface, and respond to mitigate threats.
 
@@ -149,7 +149,7 @@ Datadog Application Security identifies Log4j Log4Shell attack payloads and prov
 [2]: /tracing/service_catalog/#security-view
 [3]: /tracing/services/service_page/#security
 [4]: /tracing/trace_explorer/trace_view/?tab=security#more-information
-[5]: /security/application_security/software_composition_analysis/
+[5]: /security/code_security/software_composition_analysis/
 [6]: /tracing/trace_collection/
 [8]: /security/application_security/serverless/
 [9]: /tracing/trace_pipeline/trace_retention/
@@ -164,4 +164,4 @@ Datadog Application Security identifies Log4j Log4Shell attack payloads and prov
 [25]: /security/application_security/threats/add-user-info#adding-business-logic-information-login-success-login-failure-any-business-logic-to-traces
 [26]: /agent/remote_config/#enabling-remote-configuration
 [27]: /tracing/api_catalog/
-[28]: /security/application_security/code_security/
+[28]: /security/code_security/iast/

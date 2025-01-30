@@ -1,8 +1,8 @@
 ---
 aliases:
-- /guides/basic_agent_usage/
-- /agent/faq/where-is-the-configuration-file-for-the-agent/
-- /agent/faq/log-location
+- /ko/guides/basic_agent_usage/
+- /ko/agent/faq/where-is-the-configuration-file-for-the-agent/
+- /ko/agent/faq/log-location
 further_reading:
 - link: /agent/faq/how-datadog-agent-determines-the-hostname/
   tag: FAQ
@@ -37,7 +37,7 @@ Datadog 에이전트 관리자 GUI를 사용하거나 명령줄로 에이전트 
 - 에이전트 점검 추가 또는 수정하기
 - 플레어 전송
 
-Datadog 에이전트 관리자 GUI는 Windows 및 macOS에서 기본값으로 활성화되며 포트 `5052`에서 실행됩니다. 기본 웹 브라우저에서 `datadog-agent launch-gui` 명령으로 GUI를 열 수 있습니다.
+Datadog 에이전트 관리자 GUI는 Windows 및 macOS에서 기본값으로 활성화되며 포트 `5002`에서 실행됩니다. 기본 웹 브라우저에서 `datadog-agent launch-gui` 명령으로 GUI를 열 수 있습니다.
 
 `datadog.yaml` 설정 파일에서 GUI 기본 포트를 변경할 수 있습니다. GUI를 비활성화하려면 포트 값을 `-1`로 설정합니다. Linux에서는 GUI가 기본값으로 비활성화되어 있습니다.
 

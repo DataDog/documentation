@@ -1,7 +1,5 @@
 ---
 title: Domain Allowlist
-private: true
-is_beta: true
 further_reading:
 - link: "https://app.datadoghq.com/organization-settings/domain-allowlist"
   tag: "In the app"
@@ -11,13 +9,15 @@ further_reading:
   text: "Domain Allowlist API"
 ---
 
-{{< callout url="https://www.datadoghq.com/private-beta/domain-allowlist/" >}}
-  Domain Allowlist is available in <strong>private beta</strong> for customers with Enterprise plans. If you're interested in this feature, complete the form to request access.
+{{< callout url="/help/" header="Get Started with Domain Allowlist" >}}
+  Domain Allowlist is available for customers with Enterprise plans. If you're interested in this feature, contact Datadog support to request access.
 {{< /callout >}} 
 
-With [Domain Allowlist][1], you can restrict the email domains that can receive notifications.
+With [Domain Allowlist][1], you can restrict the email domains that can receive notifications. The notifications in scope include all notifications from:
+- Monitors
+- Scheduled Reports
 
-When Domain Allowlist is enabled, only email domains in your allowlist can receive monitor notifications. If you try to send a monitor notification to an email domain that is not in your allowlist, a warning appears. 
+When Domain Allowlist is enabled, only email domains in your allowlist can receive notifications in scope. If you try to send a notification in scope to an email domain that is not in your allowlist, a warning appears. 
 
 {{< img src="account_management/org_settings/domain_allowlist/verification.png" alt="Screenshot of monitor settings in the UI, the 'Notify your team' dialog. The notification mentions a Gmail address, but gmail.com is not in the allowlist. A warning appears, reading 'In message: The email domain @gmail.com is not part of the allowed domain list and will not receive this notification.'" >}}
 
@@ -29,7 +29,7 @@ Access your [**Domain Allowlist**][1] under **Organization Settings**. To read o
 
 {{< img src="account_management/org_settings/domain_allowlist/enabled.png" alt="Screenshot showing the Domain Allowlist UI, with the allowlist containing one email domain." >}}
 
-The **Domains Currently In Use** section displays the email domains of all emails mentioned in your monitor notifications. You can configure monitors to send notifications to email domains that are not in your allowlist, but if Domain Allowlist is enabled, email domains that are not in your allowlist do not receive these notifications.
+The **Domains Currently In Use** section displays the email domains of all emails mentioned in your **monitor** notifications, not including domains in use for other types of notifications. You can still configure sending notifications in scope to email domains that are not in your allowlist, but if Domain Allowlist is enabled, email domains that are not in your allowlist do not receive notifications for the products in scope.
 
 
 ### Enable or disable Domain Allowlist

@@ -15,10 +15,6 @@ further_reading:
       text: 'Join an interactive session to level up your Database Monitoring'
 ---
 
-{{% site-region region="gov" %}}
-<div class="alert alert-warning">Database Monitoring is not available for your selected Datadog site ({{< region-param key="dd_site_name" >}}).</div>
-{{% /site-region %}}
-
 ## Overview
 
 Datadog Database Monitoring helps you to better understand the health and performance of your databases and to determine the root cause of any problems.

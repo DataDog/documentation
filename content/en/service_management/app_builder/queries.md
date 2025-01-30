@@ -17,7 +17,7 @@ Queries populate your app with data from Datadog APIs or supported integrations.
 
 The [Action Catalog][10] within the Datadog App provides actions that can be performed as queries against your infrastructure and integrations using App Builder. You can orchestrate and automate your end-to-end processes by linking together actions that perform tasks in your cloud providers, SaaS tools, and Datadog accounts.
 
-To add a query, click the plus (**+**) icon in the **Queries** section and search for an action to add to your app. After you've added the query action, it appears in the query list above the query editor. Click and drag queries to reorder them. Select a query to configure it.
+To add a query, click the Data (**{&nbsp;}**) icon to open the Data tab, click the plus (**+**), select **Query**, and search for an action to add to your app. After you've added the query action, it appears in the **Actions** List. Select a query to configure it.
 
 Queries rely on [Connections][5] for authentication. App Builder shares connections with [Workflow Automation][6].
 
@@ -61,6 +61,8 @@ return arr
 ### Post-query hooks
 
 Similar to UI component events, you can configure a reaction to trigger after a query executes. A **post-query hook** can set a UI component state, open or close a modal, trigger another query, or even run custom JavaScript. For example, the [ECS Task Manager][7] blueprint's `scaleService` query uses a post-query hook to rerun the `describeService` query after it executes.
+
+You can use [state functions][12] in post-query hooks.
 
 ### Error notifications
 
@@ -175,7 +177,7 @@ This app provides a button to trigger a workflow. The workflow sends a poll to a
 
 To connect App Builder to the workflow, perform the following steps:
 
-1. In your app, under **Queries**, click **+ New Query**.
+1. In your app, click the Data (**{&nbsp;}**) icon, click the plus (**+**), and select **Query**.
 1. Search for "Trigger Workflow" and select the **Trigger Workflow** Datadog Workflow Automation item.
 1. Set **Run Settings** to Manual and name the query `triggerWorkflow0`.
 1. Under **Inputs**, for **App Workflow**, select **My AB Workflow**.
@@ -209,7 +211,8 @@ This app provides buttons to fetch facts about two numbers from an API. It then 
 
 ##### Create queries
 
-1. In a new app, click **+ New Query**. Search for "Make request" and choose the **HTTP Make request** action.
+1. In a new app, click the Data (**{&nbsp;}**) icon to open the Data tab.
+1. Click the plus (**+**), then select **Query**. Search for "Make request" and choose the **HTTP Make request** action.
 1. Use the following values:
     * **Name**: `mathFact1`
     * Under **Inputs**, for **URL**: GET `http://numbersapi.com/random/trivia`
@@ -276,3 +279,4 @@ This app provides buttons to fetch facts about two numbers from an API. It then 
 [8]: https://datadoghq.slack.com/
 [10]: https://app.datadoghq.com/app-builder/action-catalog
 [11]: /service_management/app_builder/events
+[12]: /service_management/app_builder/events/#state-functions

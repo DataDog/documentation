@@ -26,7 +26,7 @@ algolia:
 
 ## Overview
 
-{{< img src="real_user_monitoring/error_tracking/rum-et-explorer.png" alt="The details of an issue in the Error Tracking Explorer" style="width:100%;" >}}
+{{< img src="real_user_monitoring/error_tracking/rum-error-tracking-explorer-1.png" alt="The details of an issue in the Error Tracking Explorer" style="width:100%;" >}}
 
 {{% error-tracking-description %}}
 
@@ -44,6 +44,7 @@ Take a tour of key Error Tracking features in the [Error Tracking Explorer][3] d
     {{< nextlink href="real_user_monitoring/error_tracking/reactnative" >}}React Native{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/error_tracking/flutter" >}}Flutter{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/error_tracking/roku" >}}Roku{{< /nextlink >}}
+    {{< nextlink href="real_user_monitoring/error_tracking/kotlin-multiplatform" >}}Kotlin Multiplatform{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Further Reading

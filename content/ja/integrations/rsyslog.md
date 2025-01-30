@@ -3,11 +3,15 @@ aliases:
 - /ja/logs/log_collection/rsyslog
 categories:
 - ログの収集
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/documentation/blob/master/content/en/integrations/rsyslog.md
 description: Rsyslog を構成して、ホスト、コンテナ、サービスからログを収集
 doc_link: /integrations/rsyslog/
+further_reading:
+- link: https://www.datadoghq.com/architecture/using-rsyslog-to-send-logs-to-datadog/
+  tag: アーキテクチャセンター
+  text: Datadog へのログ送信に Rsyslog を利用する方法
 has_logo: true
 integration_id: rsyslog
 integration_title: rsyslog
@@ -26,10 +30,10 @@ Rsyslog を構成して、ホスト、コンテナ、サービスからログを
 
 ## セットアップ
 
-### ログの収集
+### ログ収集
 
-#### Rsyslog バージョン 8 以上
-<div class="alert alert-info"> From <a href="https://www.rsyslog.com/doc/configuration/modules/imfile.html#mode">version 8.1.5</a> Rsyslog recommends <code>inotify</code> mode. Traditionally, <code>imfile</code> used polling mode, which is much more resource-intense (and slower) than <code>inotify</code> mode. </div>
+#### Rsyslog バージョン 8 以上 
+<div class="alert alert-info">Rsyslog は<a href="https://www.rsyslog.com/doc/configuration/modules/imfile.html#mode">バージョン 8.1.5</a> 以降、<code>inotify</code> モードの使用を推奨しています。従来、<code>imfile</code> はポーリングモードを使用していましたが、これは <code>inotify</code> モードよりもはるかにリソース集約的であり、処理速度も遅い方式でした。
 
 {{< tabs >}}
 
@@ -448,5 +452,8 @@ Rsyslog を構成して、ホスト、コンテナ、サービスからログを
 
 ご不明な点は、[Datadog のサポートチーム][1]までお問合せください。
 
+## 参考資料
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/help/

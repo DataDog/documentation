@@ -5,7 +5,7 @@ aliases:
 ---
 
 {{< callout url="https://datadoghq.com/private-beta/ddsql-editor">}}
-DDSQL is in private beta.
+DDSQL is in Preview.
 {{< /callout >}}
 
 ## SELECT
@@ -35,13 +35,13 @@ SELECT [ ALL | DISTINCT ] select_expr, ...
 : Any expression that returns a value. It may be a constant, function call, aggregate, window, or the special expression `*`. This is the part of the query that specifies the output of the SELECT statement, and in relational algebra it is known as the projection.
 
 `message_pattern`
-: A textual pattern for [full-text search][3], where available.
+: A textual pattern for [full-text search][1], where available.
 
 `index_name`
-: An identifier for a [logs index][4].
+: An identifier for a [logs index][2].
 
 `rel_source`
-: A correlation (a table name or alias) or a parenthesized [DQL expression][5].
+: A correlation (a table name or alias) or a parenthesized [DQL expression][3].
 
 `join_type`
 : The type of SQL join, such as `INNER` or `LEFT`. `INNER` joins are fully supported. `OUTER` and `CROSS` joins may require a `WHERE` condition. `LEFT` and `RIGHT` joins are also supported if the condition is an *equijoin* expression: an equality comparison such as `<EXPRESSION_1> = <EXPRESSION_2>` where the expressions reference columns from different tables, and the output types of both expressions are the same. A `USING` expression `JOIN`ing on only one column also works.
@@ -50,7 +50,7 @@ SELECT [ ALL | DISTINCT ] select_expr, ...
 : An expression that is evaluated and interpreted implicitly as having a boolean result.
 
 `expression`
-: A value expression. See [Expressions and Operators][6] for details and examples.
+: A value expression. See [Expressions and Operators][4] for details and examples.
 
 ### Evaluation
 
@@ -88,7 +88,7 @@ SELECT ex1, ex2, ex3 FROM table ORDER BY 3, 2, 1;
 
 ## UNION
 
-`UNION` combines the results of two or more [DQL expressions][5] into a single output table.
+`UNION` combines the results of two or more [DQL expressions][3] into a single output table.
 
 ### Syntax
 
@@ -119,7 +119,7 @@ All subqueries in a `UNION` must have the same output schema. A query containing
 
 `WITH` provides a way to write auxiliary statements for use in a larger query.
 
-`WITH` statements, which are also often referred to as Common Table Expressions or CTEs, can be thought of as defining temporary tables that exist for one query. Each auxiliary statement in a `WITH` clause can be any [DQL expression][5], and the `WITH` clause itself is attached to a primary statement that can also be any non-`WITH` DQL expression. Subsequent auxiliary statements may reference correlations aliased in previous auxiliary statements.
+`WITH` statements, which are also often referred to as Common Table Expressions or CTEs, can be thought of as defining temporary tables that exist for one query. Each auxiliary statement in a `WITH` clause can be any [DQL expression][3], and the `WITH` clause itself is attached to a primary statement that can also be any non-`WITH` DQL expression. Subsequent auxiliary statements may reference correlations aliased in previous auxiliary statements.
 
 ### Syntax
 
@@ -188,9 +188,7 @@ To modify a runtime parameter, use the `SET` statement.
 SET variableName = expression
 {{< /code-block >}}
 
-[1]: /dashboards/functions/interpolation/#fill
-[2]: /ddsql_editor/reference/aggr_functions
-[3]: /logs/explorer/search_syntax/#full-text-search
-[4]: /logs/log_configuration/indexes/
-[5]: /ddsql_editor/reference#supported-sql-syntax
-[6]: /ddsql_editor/reference/expressions_and_operators
+[1]: /logs/explorer/search_syntax/#full-text-search
+[2]: /logs/log_configuration/indexes/
+[3]: /ddsql_editor/#use-sql-syntax-ddsql
+[4]: /ddsql_editor/reference/expressions_and_operators

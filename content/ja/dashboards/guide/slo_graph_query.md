@@ -11,7 +11,7 @@ title: メトリクスベースの SLO クエリをスコープする
 
 ## 概要
 
-The [SLO widget][1] supports advanced metric query filtering, including the use of template variables to dynamically scope results displayed. 
+[SLO ウィジェット][1]は、テンプレート変数を使用して表示される結果を動的に範囲指定するなど、高度なメトリクスクエリフィルタリングをサポートしています。
 
 ## SLO クエリの説明
 
@@ -25,17 +25,17 @@ The [SLO widget][1] supports advanced metric query filtering, including the use 
 ##### 総イベント (分母)
 `sum:trace.rack.request.hits{service:web-store} by {resource_name}.as_count()`
 
-{{< img src="service_management/service_level_objectives/slo_graph_query/trace_metrics_slo.png" alt="SLO configuration showing example trace metrics" style="width:100%;" >}}
+{{< img src="service_management/service_level_objectives/slo_graph_query/trace_metrics_slo.png" alt="トレースメトリクスの例を示す SLO 構成" style="width:100%;" >}}
 
-### SLO widget
+### SLO ウィジェット
 
-Select the SLO in the [SLO widget editor][1]. You can apply additional filters in the widget configuration to further scope the results displayed. This does not modify the original definition of the SLO. In the example, we add the `$env` and `$availability-zone` tags to the **filter by** field of the widget. 
+[SLO ウィジェットエディター][1]で SLO を選択します。ウィジェット構成で追加のフィルターを適用して、表示される結果の範囲をさらに絞り込むことができます。これにより、SLO の元の定義が変更されることはありません。この例では、ウィジェットの **filter by** フィールドに `$env` と `$availability-zone` タグを追加しています。
 
-{{< img src="service_management/service_level_objectives/slo_graph_query/slo_filter_by.png" alt="SLO Summary editor with dynamic tags for $env and $availability-zone" style="width:100%;" >}}
+{{< img src="service_management/service_level_objectives/slo_graph_query/slo_filter_by.png" alt="$env と $availability-zone のダイナミックタグがある SLO サマリーエディター" style="width:100%;" >}}
 
 この構成で、[Dashboard テンプレート変数][3]を `env:prod` と `availability-zone:northcentralus` に変更するとどうなりますか？
 
-The SLO widget filters the SLO metric queries by those additional tags for your visualization purposes:
+SLO ウィジェットは、視覚化を目的に SLO メトリクスクエリをこれらの追加タグでフィルターします。
 
 ##### 良好イベント (分子)
 `sum:trace.rack.request.hits{service:web-store, env:prod, availability-zone:northcentralus} by {resource_name}.as_count()` <br>

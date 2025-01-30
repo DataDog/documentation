@@ -18,7 +18,7 @@ For existing pipelines in Observability Pipelines, you can update and deploy cha
 
 ### Update source or destination variables
 
-On the the Worker installation page:
+On the Worker installation page:
 1. Select your platform in the **Choose your installation platform** dropdown menu.
 1. If you want to update source environment variables, update the information for your log source.
 {{< tabs >}}
@@ -32,9 +32,24 @@ On the the Worker installation page:
 {{% observability_pipelines/configure_existing_pipelines/source_env_vars/fluent %}}
 
 {{% /tab %}}
+{{% tab "Google Pub/Sub" %}}
+
+{{% observability_pipelines/configure_existing_pipelines/source_env_vars/google_pubsub %}}
+
+{{% /tab %}}
 {{% tab "HTTP Client" %}}
 
 {{% observability_pipelines/configure_existing_pipelines/source_env_vars/http_client %}}
+
+{{% /tab %}}
+{{% tab "HTTP Server" %}}
+
+{{% observability_pipelines/configure_existing_pipelines/source_env_vars/http_server %}}
+
+{{% /tab %}}
+{{% tab "Logstash" %}}
+
+{{% observability_pipelines/configure_existing_pipelines/source_env_vars/logstash %}}
 
 {{% /tab %}}
 {{% tab "Splunk HEC" %}}
@@ -110,6 +125,11 @@ On the the Worker installation page:
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/amazon_opensearch %}}
 
 {{% /tab %}}
+{{% tab "New Relic" %}}
+
+{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/new_relic %}}
+
+{{% /tab %}}
 {{< /tabs >}}
 1. Follow the instructions for your environment to update the worker:
 {{< tabs >}}
@@ -118,19 +138,9 @@ On the the Worker installation page:
 {{% observability_pipelines/configure_existing_pipelines/install_worker/docker %}}
 
 {{% /tab %}}
-{{% tab "Amazon EKS" %}}
+{{% tab "Kubernetes" %}}
 
-{{% observability_pipelines/configure_existing_pipelines/install_worker/amazon_eks %}}
-
-{{% /tab %}}
-{{% tab "Azure AKS" %}}
-
-{{% observability_pipelines/configure_existing_pipelines/install_worker/azure_aks %}}
-
-{{% /tab %}}
-{{% tab "Google GKE" %}}
-
-{{% observability_pipelines/configure_existing_pipelines/install_worker/google_gke %}}
+{{% observability_pipelines/configure_existing_pipelines/install_worker/kubernetes %}}
 
 {{% /tab %}}
 {{% tab "Linux (APT)" %}}

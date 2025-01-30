@@ -64,11 +64,6 @@ Enable debug logging in the tracer.
 **Default**: `true`<br>
 Whether to enable tracing.
 
-`DD_TRACE_DEBUG`
-: **Configuration**: N/A<br>
-**Default**: `false`<br>
-Enable debug logging in the tracer.
-
 `DD_TRACE_RATE_LIMIT`
 : **Configuration**: `rateLimit`<br>
 **Default**: `100` when `DD_TRACE_SAMPLE_RATE` is set. Otherwise, delegates rate limiting to the Datadog Agent.
@@ -85,7 +80,8 @@ Accepts a comma-delimited list of case-insensitive HTTP headers optionally mappe
 `DD_TRACE_SAMPLE_RATE`
 : **Configuration**: `sampleRate`<br>
 **Default**: Defers the decision to the Agent.<br>
-Controls the ingestion sample rate (between 0.0 and 1.0) between the Agent and the backend.
+Controls the ingestion sample rate (between 0.0 and 1.0) between the Agent and the backend.<br>
+**Note**: `DD_TRACE_SAMPLE_RATE` is deprecated in favor of `DD_TRACE_SAMPLING_RULES`.<br>
 
 `DD_TRACE_SAMPLING_RULES`
 : **Configuration**: `samplingRules`<br>
@@ -166,6 +162,24 @@ Automatically Instrument External Libraries
 : **Configuration**: `plugins`<br>
 **Default**: `true`<br>
 Whether to enable automatic instrumentation of external libraries using the built-in plugins.
+
+`DD_TRACE_CLOUD_REQUEST_PAYLOAD_TAGGING`
+: **Configuration**: `cloudPayloadTagging.request`<br>
+**Default**: N/A (disabled)<br>
+**Example**: `DD_TRACE_CLOUD_REQUEST_PAYLOAD_TAGGING=$.Metadata.UserId`<br>
+A comma-separated string of JSONPath entries to redact from AWS SDK requests. Setting this enables [AWS payload tagging][6] for requests.
+
+`DD_TRACE_CLOUD_RESPONSE_PAYLOAD_TAGGING`
+: **Configuration**: `cloudPayloadTagging.response`<br>
+**Default**: N/A (disabled)<br>
+**Example**: `DD_TRACE_CLOUD_RESPONSE_PAYLOAD_TAGGING=$.Metadata.UserId`<br>
+A comma-separated string of JSONPath entries to redact from AWS SDK responses. Setting this enables [AWS payload tagging][6] for responses.
+
+`DD_TRACE_CLOUD_PAYLOAD_TAGGING_MAX_DEPTH`
+: **Configuration**: `cloudPayloadTagging.maxDepth`<br>
+**Default**: 10<br>
+**Example**: `DD_TRACE_CLOUD_PAYLOAD_TAGGING_MAX_DEPTH=10`<br>
+An integer representing the maximum depth of an AWS SDK request/reponse payload to use for [AWS payload tagging][6].
 
 ### Agent
 
@@ -296,6 +310,7 @@ For more examples of how to work with the library see [API documentation][2].
 [3]: /tracing/trace_pipeline/ingestion_mechanisms/
 [4]: /help/
 [5]: /tracing/trace_collection/trace_context_propagation/
+[6]: /tracing/guide/aws_payload_tagging/?code-lang=nodejs
 [13]: /agent/configuration/network/#configure-ports
 [14]: /opentelemetry/interoperability/environment_variable_support
 [15]: /tracing/trace_collection/custom_instrumentation/nodejs/otel/

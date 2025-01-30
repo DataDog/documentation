@@ -7,8 +7,8 @@ further_reading:
   text: "Use Custom OpenTelemetry Components with Datadog Agent"
 ---
 
-{{< callout url="https://www.datadoghq.com/private-beta/agent-with-embedded-opentelemetry-collector/" btn_hidden="false" header="Join the Beta!">}}
-  The Datadog Agent with embedded OpenTelemetry Collector is in private beta. To request access, fill out this form.
+{{< callout url="https://www.datadoghq.com/private-beta/agent-with-embedded-opentelemetry-collector/" btn_hidden="false" header="Join the Preview!">}}
+  The Datadog Agent with embedded OpenTelemetry Collector is in Preview. To request access, fill out this form.
 {{< /callout >}}
 
 ## Overview
@@ -71,18 +71,22 @@ datadog:
   site: datadoghq.com
   apiKeyExistingSecret: datadog-secret
   appKeyExistingSecret: datadog-secret
+  logLevel: info
    {{< /code-block >}}
    Set `datadog.site` to your [Datadog site][52]. Otherwise, it defaults to `datadoghq.com`, the US1 site.
-1. Switch the Datadog Agent Docker repository to use development builds:
+   <div class="alert alert-warning">The log level <code>datadog.logLevel</code> parameter value should be set in lower case. Valid log levels are: <code>trace</code>, <code>debug</code>, <code>info</code>, <code>warn</code>, <code>error</code>, <code>critical</code>, <code>off</code>.</div>
+1. Switch the Datadog Agent image tag to use builds with embedded OpenTelemetry Collector:
    {{< code-block lang="yaml" filename="datadog-values.yaml" collapsible="true" >}}
 agents:
   image:
-    repository: datadog/agent-dev
-    tag: nightly-ot-beta-main-jmx
+    repository: gcr.io/datadoghq/agent
+    tag: 7.61.0-ot-beta-jmx
     doNotCheckTag: true
 ...
    {{< /code-block >}}
-   <div class="alert alert-info">This guide uses a Java application example. The <code>-jmx</code> suffix in the image tag enables JMX utilities. For non-Java applications, use <code>nightly-ot-beta-main</code> instead.<br> For more details, see <a href="/containers/guide/autodiscovery-with-jmx/?tab=helm">Autodiscovery and JMX integration guide</a>.</div>
+   <div class="alert alert-info">This guide uses a Java application example. The <code>-jmx</code> suffix in the image tag enables JMX utilities. For non-Java applications, use <code>7.61.0-ot-beta</code> instead.<br> For more details, see <a href="/containers/guide/autodiscovery-with-jmx/?tab=helm">Autodiscovery and JMX integration guide</a>.</div>
+
+   By default, the Agent image is pulled from Google Artifact Registry (`gcr.io/datadoghq`). If Artifact Registry is not accessible in your deployment region, [use another registry][53].
 1. Enable the OpenTelemetry Collector and configure the essential ports:
    {{< code-block lang="yaml" filename="datadog-values.yaml" collapsible="true" >}}
 datadog:
@@ -141,14 +145,15 @@ Your `datadog-values.yaml` file should look something like this:
 {{< code-block lang="yaml" filename="datadog-values.yaml" collapsible="false" >}}
 agents:
   image:
-    repository: datadog/agent-dev
-    tag: nightly-ot-beta-main-jmx
+    repository: gcr.io/datadoghq/agent
+    tag: 7.61.0-ot-beta-jmx
     doNotCheckTag: true
 
 datadog:
   site: datadoghq.com
   apiKeyExistingSecret: datadog-secret
   appKeyExistingSecret: datadog-secret
+  logLevel: info
 
   otelCollector:
     enabled: true
@@ -261,10 +266,10 @@ exporters:
   datadog:
     api:
       key: ${env:DD_API_KEY}
-      site: datadoghq.com
+      site: ${env:DD_SITE}
 {{< /code-block >}}
 
-Set `datadog.site` to your [Datadog site][52]. Otherwise, it defaults to `datadoghq.com`, the US1 site.
+**Note**: If `key` is not specified or set to a secret, or if `site` is not specified, the system uses values from the core Agent configuration. By default, the core Agent sets site to `datadoghq.com` (US1).
 
 ##### Prometheus receiver
 
@@ -597,3 +602,4 @@ By default, the Datadog Agent with embedded Collector ships with the following C
 [50]: https://docs.docker.com/engine/install/
 [51]: https://github.com/DataDog/datadog-agent/blob/main/comp/otelcol/collector-contrib/impl/manifest.yaml#L7
 [52]: /getting_started/site/
+[53]: /containers/guide/changing_container_registry/

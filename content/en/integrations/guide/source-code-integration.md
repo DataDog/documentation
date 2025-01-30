@@ -17,10 +17,10 @@ further_reading:
   text: "Learn about Serverless Monitoring"
 - link: "/tests/developer_workflows/"
   tag: "Documentation"
-  text: "Learn about Test Visibility"
-- link: "/code_analysis/"
+  text: "Learn about Test Optimization"
+- link: "/security/code_security/"
   tag: "Documentation"
-  text: "Learn about Code Analysis"
+  text: "Learn about Code Security"
 - link: "/security/application_security/"
   tag: "Documentation"
   text: "Learn about Application Security Monitoring"
@@ -171,6 +171,9 @@ If you are using a host, you have two options.
 
 <div class="alert alert-info">The .NET client library version 2.24.1 or later is required.</div>
 
+As a first step, ensure that your `.pdb` files are deployed alongside your .NET assemblies (`.dll` or `.exe`) in the same folder.
+Then, follow the rest of the instructions based on your specific deployment model:
+
 #### Containers
 
 If you are using Docker containers, you have three options: using Docker, using Microsoft SourceLink, or configuring your application with `DD_GIT_*` environment variables.
@@ -216,9 +219,16 @@ If you are using a host, you have two options: using Microsoft SourceLink or con
 {{% sci-dd-git-env-variables %}}
 
 {{% /tab %}}
-{{% tab "NodeJS" %}}
+{{% tab "Node.js" %}}
 
-<div class="alert alert-info">The NodeJS client library version 3.21.0 or later is required.</div>
+<div class="alert alert-info">
+  The Node.js client library version 3.21.0 or later is required.
+  </br>
+  </br>
+  Displaying code links and snippets for TypeScript applications requires your Node application to be run with: 
+  </br>
+  <a href="https://nodejs.org/dist/v12.22.12/docs/api/cli.html#cli_enable_source_maps"><code>--enable-source-maps</code></a>.
+</div>
 
 #### Containers
 
@@ -290,6 +300,8 @@ If you are using a host, configure your application with the `DD_TAGS` environme
 
 <div class="alert alert-info">The Java client library version 1.12.0 or later is required.</div>
 
+#### Containers
+
 If you are using Docker containers, you have two options: using Docker or configuring your application with  `DD_GIT_*` environment variables.
 
 ##### Option 1: Docker
@@ -322,6 +334,8 @@ If you are using a host, configure your application with `DD_GIT_*` environment 
 {{% tab "PHP" %}}
 
 <div class="alert alert-info">The PHP client library version 1.2.0 or later is required.</div>
+
+#### Containers
 
 If you are using Docker containers, you have two options: using Docker or configuring your application with  `DD_GIT_*` environment variables.
 
@@ -404,7 +418,7 @@ Setting up the GitHub integration also allows you to see inline code snippets in
 Repositories from self-managed GitLab instances are not supported out-of-the-box by the source code integration. To enable this feature, <a href="/help">contact Support</a>.
 </div>
 
-To link telemetry with your source code, upload your repository metadata with the [`datadog-ci git-metadata upload`][2] command.
+To link telemetry with your source code, upload your repository metadata with the [`datadog-ci git-metadata upload`][2] command. `datadog-ci v2.10.0` or later is required.
 
 When you run `datadog-ci git-metadata upload` within a Git repository, Datadog receives the repository URL, the commit SHA of the current branch, and a list of tracked file paths.
 
@@ -421,7 +435,10 @@ You can expect to see the following output:
 ```
 Reporting commit 007f7f466e035b052415134600ea899693e7bb34 from repository git@my-git-server.com:my-org/my-repository.git.
 180 tracked file paths will be reported.
-✅  Handled in 0.077 seconds.
+Successfully uploaded tracked files in 1.358 seconds.
+Syncing GitDB...
+Successfully synced git DB in 3.579 seconds.
+✅ Uploaded in 5.207 seconds.
 ```
 
 [1]: https://gitlab.com
@@ -439,7 +456,7 @@ Reporting commit 007f7f466e035b052415134600ea899693e7bb34 from repository git@my
 Repositories on self-hosted instances or private URLs are not supported out-of-the-box by the source code integration. To enable this feature, <a href="/help">contact Support</a>.
 </div>
 
-To link telemetry with your source code, upload your repository metadata with the [`datadog-ci git-metadata upload`][1] command.
+To link telemetry with your source code, upload your repository metadata with the [`datadog-ci git-metadata upload`][1] command. `datadog-ci v2.10.0` or later is required.
 
 When you run `datadog-ci git-metadata upload` within a Git repository, Datadog receives the repository URL, the commit SHA of the current branch, and a list of tracked file paths.
 
@@ -454,7 +471,10 @@ You can expect to see the following output:
 ```
 Reporting commit 007f7f466e035b052415134600ea899693e7bb34 from repository git@my-git-server.com:my-org/my-repository.git.
 180 tracked file paths will be reported.
-✅  Handled in 0.077 seconds.
+Successfully uploaded tracked files in 1.358 seconds.
+Syncing GitDB...
+Successfully synced git DB in 3.579 seconds.
+✅ Uploaded in 5.207 seconds.
 ```
 
 [1]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/git-metadata
@@ -517,11 +537,11 @@ If you're using the GitHub integration, click **Connect to preview** on error fr
 [101]: https://app.datadoghq.com/functions?cloud=aws&entity_view=lambda_functions
 
 {{% /tab %}}
-{{% tab "Test Visibility" %}}
+{{% tab "Test Optimization" %}}
 
-You can see links from failed test runs to their source repository in **Test Visibility**.
+You can see links from failed test runs to their source repository in **Test Optimization**.
 
-1. Navigate to [**Software Delivery** > **Test Visibility** > **Test Runs**][101] and select a failed test run.
+1. Navigate to [**Software Delivery** > **Test Optimization** > **Test Runs**][101] and select a failed test run.
 2. Click the **View on GitHub** button to open the test in its source code repository.
 
 {{< img src="integrations/guide/source_code_integration/test_run_blurred.png" alt="Link to GitHub from the CI Visibility Explorer" style="width:100%;">}}
@@ -532,19 +552,19 @@ For more information, see [Enhancing Developer Workflows with Datadog][102].
 [102]: /tests/developer_workflows/#open-tests-in-github-and-your-ide
 
 {{% /tab %}}
-{{% tab "Code Analysis" %}}
+{{% tab "Code Security" %}}
 
-You can see links from failed Static Analysis and Software Composition Analysis scans to their source repository in **Code Analysis**.
+You can see links from failed Static Analysis and Software Composition Analysis scans to their source repository in **Code Security**.
 
-1. Navigate to [**Software Delivery** > **Code Analysis**][101] and select a repository.
+1. Navigate to [**Software Delivery** > **Code Security**][101] and select a repository.
 2. In the **Code Vulnerabilities** or **Code Quality** view, click on a code vulnerability or violation. In the **Details** section, click the **View Code** button to open the flagged code in its source code repository.
 
-{{< img src="integrations/guide/source_code_integration/code-analysis-scan.png" alt="Link to GitHub from the Code Analysis Code Vulnerabilities view" style="width:100%;">}}
+{{< img src="integrations/guide/source_code_integration/code-analysis-scan.png" alt="Link to GitHub from the Code Security Code Vulnerabilities view" style="width:100%;">}}
 
-For more information, see the [Code Analysis documentation][102].
+For more information, see the [Code Security documentation][102].
 
 [101]: https://app.datadoghq.com/ci/code-analysis
-[102]: /code_analysis/
+[102]: /security/code_security/
 
 {{% /tab %}}
 {{% tab "Application Security Monitoring" %}}

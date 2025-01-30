@@ -18,7 +18,7 @@ API keys are unique to your organization. An [API key][1] is required by the Dat
 
 ### Scopes 
 
-To better protect and secure your applications, you can specify [authorization scopes][3] for your application keys to define more granular permissions and minimize the access that applications have to your Datadog data. This gives you fine-grained access control over your applications and minimizes security vulnerabilities by limiting extraneous access. For example, an application that only reads dashboards does not need admin rights to manage users or delete any of your organization's data.
+To better protect and secure your applications, you can specify authorization scopes for your application keys to define more granular permissions and minimize the access that applications have to your Datadog data. This gives you fine-grained access control over your applications and minimizes security vulnerabilities by limiting extraneous access. For example, an application that only reads dashboards does not need admin rights to manage users or delete any of your organization's data.
 
 The recommended best practice for scoping application keys is to grant your keys the minimal privileges and least permissions necessary for an application to function as intended. Scoped application keys are granted only the scopes specified by the user, and no other additional permissions. While you can modify the authorization scopes of your application keys anytime, consider how those changes may impact the existing functionality or access of your application. 
 
@@ -56,6 +56,7 @@ To add a Datadog API key or client token:
 
 - Your org must have at least one API key and at most 50 API keys.
 - Key names must be unique across your organization.
+- Newly created API keys typically take a few seconds to become valid.
 
 ## Remove API keys or client tokens
 
@@ -70,6 +71,7 @@ To add a Datadog application key, navigate to [**Organization Settings** > **App
 **Notes:**
 
 - Application key names cannot be blank.
+- Newly created Application keys typically take a few seconds to become valid.
 
 ## Remove application keys
 
@@ -77,7 +79,7 @@ To remove a Datadog application key, navigate to [**Organization Settings** > **
 
 ## Scope application keys 
 
-To specify [authorization scopes][3] for application keys, [make a request to the Datadog API][5] or the UI to create or edit an application key. Scopes can be specified for application keys owned by [the current user][14] or a [service account][15]. If this field is unspecified, application keys by default have all the same scopes and permissions as the user who created them.
+To specify authorization scopes for application keys, [make a request to the Datadog API][5] or the UI to create or edit an application key. Scopes can be specified for application keys owned by [the current user][14] or a [service account][15]. If this field is unspecified, application keys by default have all the same scopes and permissions as the user who created them.
 
 **Notes:**
 
@@ -126,7 +128,6 @@ Need help? Contact [Datadog support][16].
 
 [1]: https://app.datadoghq.com/organization-settings/api-keys
 [2]: https://app.datadoghq.com/access/application-keys
-[3]: /api/latest/scopes/
 [4]: /account_management/rbac/permissions
 [5]: /api/latest/key-management/
 [6]: /logs/log_collection/javascript/

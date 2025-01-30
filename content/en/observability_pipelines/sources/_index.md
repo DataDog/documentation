@@ -31,11 +31,14 @@ Sources have different prerequisites and settings. Some sources also need to be 
 {{< whatsnext desc="Select a source for more information:" >}}
     {{< nextlink href="observability_pipelines/sources/datadog_agent/" >}}Datadog Agent{{< /nextlink >}}
     {{< nextlink href="observability_pipelines/sources/fluent/" >}}Fluentd and Fluent Bit{{< /nextlink >}}
+    {{< nextlink href="observability_pipelines/sources/google_pubsub/" >}}Google Pub/Sub{{< /nextlink >}}
     {{< nextlink href="observability_pipelines/sources/http_client/" >}}HTTP/S Client{{< /nextlink >}}
+    {{< nextlink href="observability_pipelines/sources/http_server/" >}}HTTP/S Server{{< /nextlink >}}
+    {{< nextlink href="observability_pipelines/sources/logstash/" >}}Logstash (includes Filebeat){{< /nextlink >}}
     {{< nextlink href="observability_pipelines/sources/splunk_hec/" >}}Splunk HTTP Event Collector (HEC){{< /nextlink >}}
-    {{< nextlink href="observability_pipelines/sources/splunk_tcp/" >}}Splunk Heavy and Universal Forwarders (TCP){{< /nextlink >}}
+    {{< nextlink href="observability_pipelines/sources/splunk_tcp/" >}}Splunk Heavy or Universal Forwarders (TCP){{< /nextlink >}}
     {{< nextlink href="observability_pipelines/sources/sumo_logic/" >}}Sumo Logic{{< /nextlink >}}
-    {{< nextlink href="observability_pipelines/sources/syslog/" >}}rsyslog or syslog-ng{{< /nextlink >}}
+    {{< nextlink href="observability_pipelines/sources/syslog/" >}}rsyslog or syslog-ng (includes Fortinet and Palo Alto Networks){{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Standard metadata fields

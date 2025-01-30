@@ -6,7 +6,7 @@ categories:
 - security
 - aws
 - log collection
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies: []
 description: 許可およびブロックされたリクエストを追跡。
 doc_link: https://docs.datadoghq.com/integrations/amazon_waf/
@@ -60,23 +60,24 @@ Web Application Firewall 監査ログを有効にして、Web ACL で分析さ�
 #### WAF
 1. `aws-waf-logs-` から始まる名前で `Amazon Data Firehose` を作成します。
 2. `Amazon Data Firehose` の送信先で `Amazon S3` を選択し、`waf` をプレフィックスとして必ず追加してください。
-3. Select the desired web ACL and configure it to send logs to the newly created Firehose ([detailed steps][4]).
+3. 希望する Web ACL を選択し、それを構成して、新しく作成した Firehose にログを送信するようにします ([詳細な手順はこちら][4])。
 
 #### WAFV2
-1. Create an `S3 bucket` with a name starting with `aws-waf-logs-`.
-2. Configure the logging destination for the Amazon S3 bucket ([detailed steps][5]).
+1. `aws-waf-logs-` から始まる名前で `S3 bucket` を作成します。
+2. Amazon S3 バケットのログの宛先を構成します ([詳細手順][5])。
 
-The WAF/WAFV2 logs are collected and sent to the specified S3 bucket.
+WAF/WAFV2 ログが収集され、指定された S3 バケットに送信されます。
 
 #### ログを Datadog に送信する方法
 
-1. If you haven't already, set up the [Datadog Forwarder Lambda function][6].
+1. [Datadog Forwarder Lambda 関数][6]をまだセットアップしていない場合は、セットアップします。
 2. Lambda 関数がインストールされたら、AWS コンソールで WAF ログを含む S3 バケットに手動でトリガーを追加します。Lambda で、トリガーリストから S3 をクリックします。
-   {{< img src="integrations/amazon_s3/s3_trigger_configuration.png" alt="S3 トリガーコンフィギュレーション" popup="true" style="width:70%;">}}
-   WAF ログを含む S3 バケットを選択してトリガーを構成し、イベントタイプを `Object Created (All)` に変更して、Add ボタンをクリックします。
-   {{< img src="integrations/amazon_s3/s3_lambda_trigger_configuration.png" alt="S3 Lambda トリガーコンフィギュレーション" popup="true" style="width:70%;">}}
+3. トリガーを構成するには、WAF ログを含む S3 バケットを選択して、イベントタイプを `Object Created (All)` に変更します。
+4. **Add** をクリックします。
 
-**注**: Datadog Lambda Forwarder は、WAF ログのネストされたオブジェクトの配列を、使いやすいように自動的に `key:value` 形式に変換します。
+**注**: 
+- Datadog Lambda Forwarder は、WAF ログのネストされたオブジェクトの配列を、使いやすいように自動的に `key:value` 形式に変換します。
+- "Configurations on the same bucket cannot share a common event type" (同じバケットの構成で共通のイベントタイプを共有することはできない) というエラーメッセージが表示された場合は、該当バケットに他の Lambda Forwarder にリンクされた別のイベント通知が存在しないことを確認してください。S3 バケットは、`All object create events` の複数のインスタンスを持つことができません。
 
 ## データ収集
 

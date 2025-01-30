@@ -3,6 +3,7 @@ title: AWS Fargate Configuration Guide for Datadog Security
 disable_toc: false
 aliases:
   - /security/cloud_security_management/setup/fargate
+  - /security/cloud_security_management/setup/serverless
 further_reading:
 - link: "https://www.datadoghq.com/blog/threat-detection-fargate/"
   tag: "Blog"
@@ -334,7 +335,7 @@ spec:
 
 ### Verify that the Agent is sending events to CSM
 
-When you enable CSM on AWS Fargate ECS or EKS, the Agent sends a log to Datadog to confirm that the default ruleset has been successfully deployed. To view the log, navigate to the [Logs][9] page in Datadog and search for `@agent.rule_id:ruleset_loaded`.
+When you enable CSM on AWS Fargate ECS or EKS, the Agent sends an agent event to Datadog to confirm that the default ruleset has been successfully deployed. To view the agent event, navigate to the [Agent Events][9] page in Datadog and search for `@agent.rule_id:ruleset_loaded`.
 
 <div class="alert alert-info">You can also verify the Agent is sending events to CSM by manually triggering an AWS Fargate security signal.</div>
 
@@ -417,7 +418,7 @@ For step-by-step instructions, see [AWS Configuration Guide for Cloud SIEM][17].
 [6]: /integrations/eks_fargate/?tab=manual#aws-eks-fargate-rbac
 [7]: /resources/json/datadog-agent-cws-ecs-fargate.json
 [8]: /integrations/faq/integration-setup-ecs-fargate/?tab=rediswebui
-[9]: https://app.datadoghq.com/logs
+[9]: https://app.datadoghq.com/security/agent-events
 [10]: /security/application_security/threats/setup/threat_detection/java/?tab=awsfargate
 [11]: /security/application_security/threats/setup/threat_detection/java/?tab=amazonecs
 [12]: /security/application_security/threats/setup/threat_detection/dotnet?tab=awsfargate
@@ -426,9 +427,9 @@ For step-by-step instructions, see [AWS Configuration Guide for Cloud SIEM][17].
 [15]: /security/application_security/threats/setup/threat_detection/python?tab=awsfargate
 [16]: /security/application_security/
 [17]: /security/cloud_siem/guide/aws-config-guide-for-cloud-siem/
-[18]: /security/application_security/code_security/setup/java/
-[19]: /security/application_security/code_security/setup/dotnet/
-[20]: /security/application_security/code_security/setup/nodejs/
+[18]: /security/code_security/iast/setup/java/
+[19]: /security/code_security/iast/setup/dotnet/
+[20]: /security/code_security/iast/setup/nodejs/
 [21]: https://app.datadoghq.com/security/configuration/siem/setup
-[22]: /security/application_security/software_composition_analysis/
-[23]: /security/application_security/software_composition_analysis/setup/
+[22]: /security/code_security/software_composition_analysis/
+[23]: /security/code_security/software_composition_analysis/

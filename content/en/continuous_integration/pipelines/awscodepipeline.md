@@ -72,7 +72,7 @@ For more information about monitoring pipeline events, see the [official AWS gui
 3. Leave the event bus as **default**, and under **Rule Type**, select **Rule with an event pattern**. Click **Next**.
 4. Under **Event Source**, select **AWS events or EventBridge partner events**.
 5. Under **Creation Method**, select **Custom pattern (JSON editor)**. Then, under **Event Pattern**, input the following:
-   
+
    ```json
    {
      "source": ["aws.codepipeline"],
@@ -112,7 +112,7 @@ The event pattern sets up the integration only for the `first-pipeline` and `sec
 
 ### Correlate pipelines with tests
 
-If you are using [Test Visibility][8] and your pipeline contains one or more [AWS CodeBuild][9] actions to execute tests, you can correlate your tests with the related pipeline inside Datadog Pipeline Visibility. For instructions, refer to [Add the pipeline execution ID](#add-the-pipeline-execution-id-as-an-environment-variable).
+If you are using [Test Optimization][8] and your pipeline contains one or more [AWS CodeBuild][9] actions to execute tests, you can correlate your tests with the related pipeline inside Datadog Pipeline Visibility. For instructions, refer to [Add the pipeline execution ID](#add-the-pipeline-execution-id-as-an-environment-variable).
 
 ### Collect job logs
 
@@ -121,8 +121,6 @@ The AWS CodePipeline integration supports correlating **CodeBuild** actions with
 <div class="alert alert-warning"><strong>Note</strong>: Log correlation for CodeBuild actions requires the CodeBuild project to have the default CloudWatch log group and log stream names.</div>
 
 Logs are billed separately from CI Visibility. Log retention, exclusion, and indexes are configured in Logs Settings. Logs for AWS CodeBuild can be identified by the `source:codebuild` and `sourcecategory:aws` tags.
-
-<div class="alert alert-info"><strong>Note</strong>: Job log collection is not available for <a href="https://docs.datadoghq.com/data_security/pci_compliance/?tab=logmanagement">PCI-compliant organizations.</a></div>
 
 ### Add the pipeline execution ID as an environment variable
 

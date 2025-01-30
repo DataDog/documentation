@@ -18,7 +18,7 @@ assets:
     source_type_id: 10257
     source_type_name: Helm
   monitors:
-    '[helm] Monitor Helm failed releases': assets/monitors/monitor_failed_releases.json
+    Release is failed: assets/monitors/monitor_failed_releases.json
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
@@ -27,7 +27,7 @@ author:
 categories:
 - 構成 & デプロイ
 - コンテナ
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/helm/README.md
 display_on_public_website: true
@@ -110,7 +110,7 @@ spec:
 ```
 
 {{% /tab %}}
-{{% tab "Operator (< v1.5.0)" %}}
+{{% tab "Operator (v1.5.0 未満)" %}}
 
 これはクラスターのチェックです。このチェックを有効にするには、`DatadogAgent` のデプロイメント構成でコンフィギュレーションファイル `helm.yaml` を Cluster Agent に渡します。
 

@@ -10,7 +10,7 @@ further_reading:
 ---
 
 <div class="alert alert-warning">
-<code>ddprof</code> is in beta. Datadog recommends evaluating the profiler in a non-sensitive environment before deploying in production.
+<code>ddprof</code> is in Preview. Datadog recommends evaluating the profiler in a non-sensitive environment before deploying in production.
 </div>
 
 ## Missing profiles in the profile search page

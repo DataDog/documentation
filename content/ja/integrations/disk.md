@@ -31,7 +31,7 @@ git_integration_title: disk
 guid: 94588b23-111e-4ed2-a2af-fd6e4caeea04
 integration_id: システム
 integration_title: Disk
-integration_version: 5.3.0
+integration_version: 5.4.0
 is_public: true
 maintainer: help@datadoghq.com
 manifest_version: 2.0.0

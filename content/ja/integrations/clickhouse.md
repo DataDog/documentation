@@ -27,7 +27,7 @@ categories:
 - キャッシュ
 - data stores
 - ログの収集
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/clickhouse/README.md
 display_on_public_website: true
@@ -35,7 +35,7 @@ draft: false
 git_integration_title: clickhouse
 integration_id: clickhouse
 integration_title: ClickHouse
-integration_version: 3.6.0
+integration_version: 5.1.0
 is_public: true
 manifest_version: 2.0.0
 name: clickhouse

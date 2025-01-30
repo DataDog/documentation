@@ -73,7 +73,7 @@ For details about how to how to toggle and configure plugins, check out the [API
 | Module                  | Versions | Support Type    | Notes                                      |
 | ----------------------- | -------- | --------------- | ------------------------------------------ |
 | [connect][6]           | `>=2`    | Fully supported |                                             |
-| [express][7]           | `>=4`    | Fully supported | Supports Sails, Loopback, and [more][8]     |
+| [express][7]           | `4.x`    | Fully supported | Supports Sails, Loopback, and [more][8]     |
 | [fastify][9]           | `>=1`    | Fully supported |                                             |
 | [graphql][10]           | `>=0.10` | Fully supported | Supports Apollo Server and express-graphql |
 | [graphql-yoga][65]      | `>=3.6.0`| Fully supported | Supports graphql-yoga v3 executor          |
@@ -82,7 +82,7 @@ For details about how to how to toggle and configure plugins, check out the [API
 | [koa][13]               | `>=2`    | Fully supported |                                            |
 | [microgateway-core][14] | `>=2.1`  | Fully supported | Core library for Apigee Edge. Support for the [edgemicro][15] CLI requires static patching using [@datadog/cli][16]. |
 | [moleculer][17]         | `>=0.14` | Fully supported |                                            |
-| [next][18]              | `>=9.5`  | Fully supported | See note on [Complex framework usage](#complex-framework-usage).<br /><br />The tracer supports the following Next.js features: <ul><li>Standalone (`output: 'standalone'`)</li><li>App Router</li><li>Middleware: Not traced, use tracer versions `4.18.0` and `3.39.0` or higher for best experience.</li></ul> |
+| [next][18]              | `>=9.5`  | Fully supported | See note on [Complex framework usage](#complex-framework-usage).<br /><br />The tracer supports the following Next.js features: <ul><li>Standalone (`output: 'standalone'`)</li><li>App Router</li><li>Middleware: Not traced, use tracer versions `4.18.0` and `3.39.0` or higher for best experience.</li></ul><br /><br /><strong>Note</strong>: Next.js is under heavy active development, and it is not uncommon for patch releases to break compatibility with dd-trace. Test automations alert Datadog to these issues, but it can often take a few days to fix compatibility with the latest Next.js release. |
 | [paperplane][19]        | `>=2.3`  | Fully supported | Not supported in [serverless-mode][20]     |
 | [restify][21]           | `>=3`    | Fully supported |                                            |
 
@@ -107,8 +107,8 @@ Or, modify the `package.json` file if you typically start an application with np
     "start": "next start",
 
     // suggested command
-    "start": "node --require dd-trace/initialize ./node_modules/next start",
-    "start": "NODE_OPTIONS='--require dd-trace/initialize' ./node_modules/next start",
+    "start": "node --require dd-trace/init ./node_modules/.bin/next start",
+    "start": "NODE_OPTIONS='--require dd-trace/init' ./node_modules/.bin/next start",
 ```
 
 **Note**: The previous examples use Next.js, but the same approach applies to other frameworks with custom entry points, such as Nest.js. Adapt the commands to fit your specific framework and setup. Either command should work, but using `NODE_OPTIONS`  also applies to any child Node.js processes.
@@ -160,7 +160,8 @@ Or, modify the `package.json` file if you typically start an application with np
 | Module             | Versions   | Support Type    | Notes                                                  |
 | ------------------ | ---------- | --------------- | ------------------------------------------------------ |
 | [aws-sdk][49]      | `>=2.1.35` | Fully supported | CloudWatch, DynamoDB, Kinesis, Redshift, S3, SNS, SQS, and generic requests. |
-| [openai][64]       | `3.x`      | Fully supported |                                                        |
+| [openai][64]       | `>=3.0.0`  | Fully supported |                                                        |
+| [langchain][66]      | `>=0.1.0`  | Partially supported | The following workflow invocations are supported: <br /><br /><ul><li>`chain.invoke` and `chain.batch`</li><li>`chat_model.invoke`</li><li>`llm.invoke`</li><li>`openaiEmbeddings.embedQuery` and `openaiEmbeddings.embedDocuments`</li></ul> |
 
 ### Promise library compatibility
 
@@ -257,3 +258,4 @@ For additional information or to discuss [leave a comment on this github issue][
 [63]: https://github.com/mariadb-corporation/mariadb-connector-nodejs
 [64]: https://github.com/openai/openai-node
 [65]: https://github.com/dotansimha/graphql-yoga
+[66]: https://js.langchain.com/

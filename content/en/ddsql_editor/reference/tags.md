@@ -5,7 +5,7 @@ aliases:
 ---
 
 {{< callout url="https://datadoghq.com/private-beta/ddsql-editor">}}
-DDSQL is in private beta.
+DDSQL is in Preview.
 {{< /callout >}}
 
 Tags are a widespread mechanism to encode metadata about a particular record across several products at Datadog. Tags are key-value pairs for which a key may contain multiple values.
@@ -23,31 +23,29 @@ As a consequence of this behavior, the `IN` operator with tags works as "overlap
 To perform a strict comparison, cast the tag reference to a string, or compare it against a group literal in an outer query. For example, a query like
 
 {{< code-block lang="sql" >}}
-AGGR avg('system.load.1') WHERE team='logs' GROUP BY team
+SELECT * FROM host WHERE team='logs' GROUP BY team;
 {{< /code-block >}}
 
 May return the following result:
 
-| Timeseries | Team             |
-|------------|------------------|
-| [...]      | logs             |
-| [...]      | logs,team2       |
-| [...]      | logs,team3,team4 |
-| [...]      | logs,team2,team4 |
+| team             |
+|------------------|
+| logs             |
+| logs,team2       |
+| logs,team3,team4 |
+| logs,team2,team4 |
 
 To instead match only on `logs`, use this query:
 
 {{< code-block lang="sql" >}}
-SELECT *
-FROM (AGGR avg('system.load.1') WHERE team='logs' GROUP BY team)
-WHERE team={'logs'}
+SELECT * FROM host WHERE team={'logs'} GROUP BY team;
 {{< /code-block >}}
 
 This stricter comparison returns only one result:
 
-| Timeseries | Team             |
-|------------|------------------|
-| [...]      | logs             |
+| team             |
+|------------------|
+| logs             |
 
 ## Implicit tag references
 

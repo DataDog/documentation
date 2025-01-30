@@ -778,7 +778,7 @@ The following structures have been renamed:
 | `1.x` | `2.x` |
 |-------|-------|
 | `DdSdkConfiguration` | `DatadogConfiguration` |
-| `LoggingConfiguartion` | `DatadogLoggingConfiguration` |
+| `LoggingConfiguration` | `DatadogLoggingConfiguration` |
 | `RumConfiguration` | `DatadogRumConfiguration` |
 | `DdSdkExistingConfiguration` | `DatadogAttachConfiguration` |
 

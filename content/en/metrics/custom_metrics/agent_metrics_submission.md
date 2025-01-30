@@ -42,7 +42,7 @@ self.monotonic_count(name, value, tags=None, hostname=None, device_name=None)
 
 This function submits the number of events that occurred during the check interval. It can be called multiple times during a check's execution, each sample being added to the value that is sent.
 
-**Note**: Metrics submitted with this function are stored with a `COUNT` metric type in Datadog. Each value in the stored timeseries is a delta of the metric's value between samples (not time-normalized).
+**Note**: Metrics submitted with this function are stored with a `COUNT` metric type in Datadog.
 
 Function template:
 

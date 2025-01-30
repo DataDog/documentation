@@ -7,12 +7,15 @@ further_reading:
 - link: /database_monitoring/troubleshooting/?tab=sqlserver
   tag: ドキュメント
   text: よくある問題のトラブルシューティング
+- link: /database_monitoring/guide/sql_deadlock/
+  tag: ドキュメント
+  text: デッドロックモニタリングの構成
 title: Azure SQL Server のデータベースモニタリングの設定
 ---
 
-データベースモニタリングは、クエリメトリクス、クエリサンプル、実行計画、データベースの状態、フェイルオーバー、イベントを公開することで、Microsoft SQL Server データベースを詳細に可視化します。
+Database Monitoring は、クエリメトリクス、クエリサンプル、実行計画、データベースの状態、フェイルオーバー、イベントを公開することで、Microsoft SQL Server データベースを詳細に可視化します。
 
-データベースでデータベースモニタリングを有効にするには、以下の手順を実行します。
+データベースで Database Monitoring を有効にするには、以下の手順を実行します。
 
 1. [Agent にデータベースへのアクセスを付与する](#grant-the-agent-access)
 2. [Agent のインストールと構成](#install-and-configure-the-agent)
@@ -39,10 +42,12 @@ CREATE LOGIN datadog WITH PASSWORD = '<PASSWORD>';
 CREATE USER datadog FOR LOGIN datadog;
 ALTER SERVER ROLE ##MS_ServerStateReader## ADD MEMBER datadog;
 ALTER SERVER ROLE ##MS_DefinitionReader## ADD MEMBER datadog;
--- Log Shipping Monitoring (Agent v7.50 以降で利用可能) を使用するには、次の 3 行のコメントを外します。
--- USE msdb;
--- CREATE USER datadog FOR LOGIN datadog;
--- GRANT SELECT to datadog;
+-- Log Shipping Monitoring (Agent v7.50+ で利用可能) または
+-- SQL Server Agent Monitoring (Agent v7.57+ で利用可能) のいずれも使用しない場合は、
+-- 次の 3 行をコメントアウトしてください。
+USE msdb;
+CREATE USER datadog FOR LOGIN datadog;
+GRANT SELECT to datadog;
 ```
 
 このサーバー上の追加の Azure SQL Database それぞれへのアクセスを Agent に付与します。
@@ -88,7 +93,7 @@ Datadog Agent のインストールと構成の詳細については、[Agent �
 
 {{% tab "Azure SQL Managed Instance" %}}
 
-サーバーに接続するための読み取り専用ログインを作成し、必要な権限を付与します。
+サーバーに接続するために読み取り専用ログインを作成し、必要な権限を付与します。
 
 #### SQL Server バージョン 2014+ の場合
 
@@ -98,15 +103,16 @@ CREATE USER datadog FOR LOGIN datadog;
 GRANT CONNECT ANY DATABASE to datadog;
 GRANT VIEW SERVER STATE to datadog;
 GRANT VIEW ANY DEFINITION to datadog;
--- Log Shipping Monitoring (Agent v7.50 以降で利用可能) を使用するには、次の 3 行のコメントを外します。
--- USE msdb;
--- CREATE USER datadog FOR LOGIN datadog;
--- GRANT SELECT to datadog;
+-- If not using either of Log Shipping Monitoring (available in Agent v7.50+) or
+-- SQL Server Agent Monitoring (available in Agent v7.57+), comment out the next three lines:
+USE msdb;
+CREATE USER datadog FOR LOGIN datadog;
+GRANT SELECT to datadog;
 ```
 
 **注:** Azure マネージドアイデンティティ認証もサポートされています。Azure SQL DB インスタンスの構成方法については、[ガイド][1]を参照してください。
 
-[3]: /ja/database_monitoring/guide/managed_authentication
+[1]: /ja/database_monitoring/guide/managed_authentication
 {{% /tab %}}
 
 {{% tab "Windows Azure VM の SQL Server" %}}
@@ -119,7 +125,7 @@ GRANT VIEW ANY DEFINITION to datadog;
 
 {{< /tabs >}}
 
-### Securely store your password
+### パスワードを安全に保管
 {{% dbm-secret %}}
 
 ## Agent のインストールと構成
@@ -142,10 +148,10 @@ instances:
     password: 'ENC[datadog_user_database_password]'
     connector: adodbapi
     adoprovider: MSOLEDBSQL
-    tags:  # Optional
+    tags:  # オプション
       - 'service:<CUSTOM_SERVICE>'
       - 'env:<CUSTOM_ENV>'
-    # After adding your project and instance, configure the Datadog Azure integration to pull additional cloud data such as CPU, Memory, etc.
+    # プロジェクトとインスタンスを追加した後、Datadog Azure インテグレーションを構成して、CPU やメモリなどの追加のクラウドデータを取得します。
     azure:
       deployment_type: '<DEPLOYMENT_TYPE>'
       fully_qualified_domain_name: '<AZURE_INSTANCE_ENDPOINT>'
@@ -178,7 +184,7 @@ connector: odbc
 driver: '{ODBC Driver 18 for SQL Server}'
 ```
 
-Once all Agent configuration is complete, [restart the Datadog Agent][9].
+すべての Agent の構成が完了したら、[Datadog Agent を再起動][9]します。
 
 ### UpdateAzureIntegration
 
@@ -215,10 +221,10 @@ instances:
     password: 'ENC[datadog_user_database_password]'
     connector: odbc
     driver: '<Driver from the `odbcinst.ini` file>'
-    tags:  # Optional
+    tags:  # オプション
       - 'service:<CUSTOM_SERVICE>'
       - 'env:<CUSTOM_ENV>'
-    # After adding your project and instance, configure the Datadog Azure integration to pull additional cloud data such as CPU, Memory, etc.
+    # プロジェクトとインスタンスを追加した後、Datadog Azure インテグレーションを構成して、CPU やメモリなどの追加のクラウドデータを取得します。
     azure:
       deployment_type: '<DEPLOYMENT_TYPE>'
       fully_qualified_domain_name: '<AZURE_ENDPOINT_ADDRESS>'
@@ -317,7 +323,7 @@ Kubernetes クラスターでクラスターチェックがまだ有効になっ
             username: datadog
             password: 'ENC[datadog_user_database_password]'
             connector: 'odbc'
-            driver: 'ODBC Driver 18 for SQL Server'
+            driver: '{ODBC Driver 18 for SQL Server}'
             include_ao_metrics: true  # Optional: For AlwaysOn users
             tags:  # Optional
               - 'service:<CUSTOM_SERVICE>'
@@ -339,16 +345,12 @@ Kubernetes クラスターでクラスターチェックがまだ有効になっ
 Windows の場合は、<code>helm install</code> コマンドに <code>--set targetSystem=windows</code> を追加します。
 </div>
 
-[1]: https://app.datadoghq.com/organization-settings/api-keys
-[2]: /ja/getting_started/site
-[3]: /ja/containers/kubernetes/installation/?tab=helm#installation
-
 ### マウントされたファイルで構成する
 
 マウントされたコンフィギュレーションファイルを使ってクラスターチェックを構成するには、コンフィギュレーションファイルを Cluster Agent コンテナのパス `/conf.d/sqlserver.yaml` にマウントします。
 
 ```yaml
-cluster_check: true  # Make sure to include this flag
+cluster_check: true  # このフラグを必ず入れてください
 init_config:
 instances:
   - dbm: true
@@ -356,11 +358,11 @@ instances:
     username: datadog
     password: 'ENC[datadog_user_database_password]'
     connector: "odbc"
-    driver: "ODBC Driver 18 for SQL Server"
-    tags:  # Optional
+    driver: '{ODBC Driver 18 for SQL Server}'
+    tags:  # オプション
       - 'service:<CUSTOM_SERVICE>'
       - 'env:<CUSTOM_ENV>'
-    # After adding your project and instance, configure the Datadog Azure integration to pull additional cloud data such as CPU, Memory, etc.
+    # プロジェクトとインスタンスを追加した後、Datadog Azure インテグレーションを構成して、CPU やメモリなどの追加のクラウドデータを取得します。
     azure:
       deployment_type: '<DEPLOYMENT_TYPE>'
       fully_qualified_domain_name: '<AZURE_ENDPOINT_ADDRESS>'
@@ -388,7 +390,7 @@ metadata:
           "password": "ENC[datadog_user_database_password]",
           "connector": "odbc",
           "driver": "ODBC Driver 18 for SQL Server",
-          "tags": ["service:<CUSTOM_SERVICE>", "env:<CUSTOM_ENV>"],  # Optional
+          "tags": ["service:<CUSTOM_SERVICE>", "env:<CUSTOM_ENV>"],  # オプション
           "azure": {
             "deployment_type": "<DEPLOYMENT_TYPE>",
             "fully_qualified_domain_name": "<AZURE_ENDPOINT_ADDRESS>"
@@ -412,7 +414,7 @@ Cluster Agent は自動的にこのコンフィギュレーションを登録し
 
 [1]: /ja/agent/cluster_agent
 [2]: /ja/agent/cluster_agent/clusterchecks/
-[3]: https://helm.sh
+[3]: /ja/containers/kubernetes/installation/?tab=helm#installation
 [4]: https://github.com/DataDog/integrations-core/blob/master/sqlserver/assets/configuration/spec.yaml#L353-L383
 [5]: /ja/agent/configuration/secrets-management
 {{% /tab %}}

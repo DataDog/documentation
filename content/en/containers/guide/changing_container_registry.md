@@ -4,13 +4,13 @@ aliases:
  - /agent/guide/changing_container_registry
 ---
 
-Datadog publishes container images in Google's gcr.io, AWS' ECR, and on Docker Hub:
+Datadog publishes container images in Google's gcr.io, Azure ACR, AWS' ECR, and on Docker Hub:
 
 {{% container-images-table %}}
 
-Pulling from the GCR or ECR registry works the same (except for Notary) as pulling from Docker Hub. You can use the same command (with different parameters) and get the same image.
+Pulling from the ACR, GCR or ECR registry works the same (except for Notary) as pulling from Docker Hub. You can use the same command (with different parameters) and get the same image.
 
-**Note**: ECR and GCR do not support Notary. If you are verifying the signature of images pulled from Docker, this feature does not work on GCR or ECR.
+**Note**: ACR, ECR and GCR do not support Notary. If you are verifying the signature of images pulled from Docker, this feature does not work on GCR or ECR.
 
 To update your registry, you need to update your registry values based on the type of container environment you are deploying on.
 
@@ -116,15 +116,15 @@ spec:
 For more information about the Datadog Operator, see [Deploying an Agent with the Operator][5].
 
 
-### Using the public.ecr.aws/datadog registry with Helm
+### Using another container registry with Helm
 
-You could also switch from the default `gcr.io/datadoghq` registry to the `public.ecr.aws/datadog` registry when installing the Operator with the Helm chart. To switch to the `public.ecr.aws/datadog` registry:
+You could also switch from the default `gcr.io/datadoghq` registry to another registry, such as `datadoghq.azurecr.io` when installing the Operator with the Helm chart:
 
 Update [`values.yaml`][6] with the new image:
 
 ```yaml
 image:
-  repository: public.ecr.aws/datadog
+  repository: datadoghq.azurecr.io
 ```
 
 ## ECS

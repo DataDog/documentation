@@ -23,7 +23,8 @@ author:
   support_email: help@datadoghq.com
 categories:
 - languages
-custom_kind: integration
+- windows
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/dotnetclr/README.md
 display_on_public_website: true
@@ -44,6 +45,7 @@ tile:
   classifier_tags:
   - Supported OS::Windows
   - Category::言語
+  - Category::Windows
   - Offering::Integration
   configuration: README.md#Setup
   description: Dotnetclr の状態を視覚化および監視
@@ -96,7 +98,7 @@ tile:
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][8]までお問い合わせください。
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory

@@ -10,7 +10,7 @@ further_reading:
 - link: /monitors/downtimes/
   tag: ドキュメント
   text: モニターをミュートするダウンタイムのスケジュール
-- link: /monitors/manage/status/
+- link: /monitors/status/
   tag: ドキュメント
   text: モニターステータスを確認
 - link: https://www.datadoghq.com/blog/monitor-fargate-processes/
@@ -18,6 +18,10 @@ further_reading:
   text: AWS Fargate 上で実行されるプロセスを Datadog で監視する
 title: ライブプロセスモニター
 ---
+
+<div class="alert alert-warning">
+Live Processes および Live Process Monitoring は Enterprise プランに含まれています。他のプランをご利用の場合、この機能をリクエストするにはアカウント担当者または <a href="mailto:success@datadoghq.com">success@datadoghq.com</a> へご連絡ください。
+</div>
 
 ## 概要
 
@@ -94,7 +98,7 @@ title: ライブプロセスモニター
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/infrastructure/process/
-[2]: https://app.datadoghq.com/monitors#create/live_process
+[2]: https://app.datadoghq.com/monitors/create/live_process
 [3]: /ja/infrastructure/process/#search-syntax
 [4]: https://app.datadoghq.com/process
 [5]: /ja/monitors/configuration/#advanced-alert-conditions

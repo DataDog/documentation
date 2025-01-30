@@ -5,14 +5,14 @@ aliases:
 ---
 
 {{< callout url="https://datadoghq.com/private-beta/ddsql-editor">}}
-DDSQL is in private beta.
+DDSQL is in Preview.
 {{< /callout >}}
 
 ## Overview
 
-You can write a query in [DDSQL Editor][1] in natural language or in SQL. See the [DDSQL reference documentation][2] for supported SQL expressions and usage details. Example queries are also provided throughout the UI.
+You can write a query in [DDSQL Editor][1] in natural language or in SQL. See the [DDSQL reference][2] for supported SQL expressions and usage details. Example queries are also provided throughout the UI.
 
-{{< img src="dashboards/ddsql/query-ui-overview.png" alt="A list of available tables" style="width:100%;" >}}
+{{< img src="ddsql_editor/query-ui-overview.png" alt="A list of available tables" style="width:100%;" >}}
 
 - To run a natural language query, type your question into the search bar, or click on one of the provided examples below the search bar.
 - To run a SQL query, type a valid DDSQL expression into the top section of the page, or run one of the examples listed under **Queries to get you started**.
@@ -41,9 +41,9 @@ ORDER BY count DESC;
 If you aren't sure which fields contain the data you want, you can use the schema explorer to examine the available tables, their columns, and their relationships to other tables:
 
 1. Click the database icon in the left sidebar to open the schema explorer.
-    {{< img src="dashboards/ddsql/schema-explorer-example.png" alt="The schema explorer's list of available tables" style="width:100%;" >}}
+    {{< img src="ddsql_editor/schema-explorer-example.png" alt="The schema explorer's list of available tables" style="width:100%;" >}}
 1. The current query is for the `host` table, so click **All Tables > Hosts > host** to view the available fields. Decide which field to add to the query. This example uses `availability_zone`.
-    {{< img src="dashboards/ddsql/schema-explorer-table-example.png" alt="The the host table displayed in the schema explorer" style="width:50%;" >}}
+    {{< img src="ddsql_editor/schema-explorer-table-example.png" alt="The host table displayed in the schema explorer" style="width:50%;" >}}
 1. Edit the query SQL to add the `availability_zone` to the result:
 
 {{< code-block lang="sql" >}}
@@ -87,5 +87,5 @@ To generate a share link for the query:
 If you forget to save a useful query before navigating away from it, you can still access it in the **Recent Queries** pane. Click the clock icon in the left sidebar to view a list of recent queries.
 
 [1]: https://app.datadoghq.com/ddsql/editor
-[2]: /ddsql_editor/reference
+[2]: /ddsql_editor/#use-sql-syntax-ddsql
 [3]: /ddsql_editor/reference/tags

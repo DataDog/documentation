@@ -1,4 +1,12 @@
 ---
+algolia:
+  tags:
+  - grok
+  - grok parser
+  - logs parsing
+  - Extracting Attributes
+  - Remapping attributes
+  - parsing
 aliases:
 - /ko/logs/faq/how-to-send-logs-to-datadog-via-external-log-shippers
 - /ko/logs/languages
@@ -40,7 +48,7 @@ title: 로그 수집 및 통합
 ## 설정
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{% tab "호스트" %}}
 
 1. [Datadog Agent][1]를 설치합니다.
 2. 로그 수집을 활성화하려면 Agent의 기본 구성 파일(`datadog.yaml`)에서 `logs_enabled: false`를 `logs_enabled: true`로 변경합니다. 자세한 내용과 예시는 [Host Agent Log 로그 수집 문서][5]를 참조하세요.
@@ -105,12 +113,23 @@ Datadog 통합과 로그 수집은 서로 연결되어 있습니다. 통합의 �
 1. [Integrations 페이지][6]에서 통합을 선택하고 설정 지침을 따릅니다.
 2. 통합의 로그 수집 지침을 따릅니다. 이 섹션에서는 해당 통합 `conf.yaml` 파일에서 로그 섹션의 주석 처리를 제거하고 환경에 맞게 구성하는 방법을 다룹니다.
 
+## 데이터 전송 수수료 절감
+
+Datadog의 [Cloud Network Monitoring][7]을 사용하여 조직에서 처리량이 가장 많은 애플리케이션을 파악하세요. 지원되는 프라이빗 연결을 통해 Datadog에 연결하고 프라이빗 네트워크를 통해 데이터를 전송함으로써 공용 인터넷을 사용하지 않고 데이터 전송 수수료를 절감할 수 있습니다. 프라이빗 링크로 전환한 후에는 Datadog의 [Cloud Cost Management][8] 도구를 사용하여 클라우드 비용의 감소와 영향을 모니터링하세요.
+
+자세한 내용은 [데이터 전송 비용을 절감하면서 Datadog에 로그를 보내는 방법][9]을 참조하세요.
+
 [1]: /ko/logs/log_configuration/processors
 [2]: /ko/logs/log_configuration/parsing
 [3]: /ko/logs/explorer/facets/
 [4]: /ko/agent/kubernetes/log/#autodiscovery
 [5]: /ko/agent/docker/log/#log-integrations
 [6]: /ko/integrations/#cat-log-collection
+[7]: /ko/network_monitoring/cloud_network_monitoring/
+[8]: /ko/cloud_cost_management/
+[9]: /ko/logs/guide/reduce_data_transfer_fees/
+
+
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -253,6 +272,7 @@ openssl s_client -connect intake.logs.datadoghq.com:10516
 
 ```text
 <DATADOG_API_KEY> {"message":"json formatted log", "ddtags":"env:my-env,user:my-user", "ddsource":"my-integration", "hostname":"my-hostname", "service":"my-service"}
+```
 
 [1]: /ko/account_management/api-app-keys/#api-keys
 
@@ -315,6 +335,8 @@ openssl s_client -connect tcp-intake.logs.datadoghq.eu:443
 * 로그 이벤트는 과거 최대 18시간의 [타임스탬프][14]와 함께 제출될 수 있습니다.
 
 이러한 제한을 준수하지 않는 로그 이벤트는 시스템에 의해 변환되거나 잘릴 수 있으며, 제공된 시간 범위를 벗어나는 경우 색인이 생성되지 않을 수 있습니다. 그러나 Datadog은 가능한 한 많은 사용자 데이터를 보존하려고 노력합니다.
+
+인덱싱된 로그에만 적용되는 필드에는 추가 잘림이 있습니다. 값은 메시지 필드의 경우 75KiB, 메시지가 아닌 필드의 경우 25KiB로 잘립니다. Datadog은 여전히 ​​전체 텍스트를 저장하며  Logs Explorer의 일반 목록 쿼리에 계속 표시됩니다. 그러나 잘린 필드별로 로그를 그룹화하거나 해당 특정 필드를 표시하는 유사한 작업을 수행하는 등 그룹화된 쿼리를 수행할 때는 잘린 버전이 표시됩니다.
 
 ### 속성 및 태그
 
