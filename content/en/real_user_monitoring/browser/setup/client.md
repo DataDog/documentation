@@ -1325,8 +1325,7 @@ Early RUM API calls must be wrapped in the `window.DD_RUM.onReady()` callback. T
       // site: '<SITE>',
       service: '<APP_ID>',
       env: '<ENV_NAME>',
-      // version: '1.0.0',
-      defaultPrivacyLevel: {default to the selection in form}
+      // version: '1.0.0'
     });
   })
 </script>
@@ -2238,8 +2237,7 @@ The `window.DD_RUM` check is used to prevent issues if a loading failure occurs 
       // site: '<SITE>',
       service: '<APP_ID>',
       env: '<ENV_NAME>',
-      // version: '1.0.0',
-      defaultPrivacyLevel: {default to the selection in form}
+      // version: '1.0.0'
     });
 </script>
 
