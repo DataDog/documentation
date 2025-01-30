@@ -23,7 +23,7 @@ Datadog Fleet Automation allows you to centrally govern and remotely manage Data
 
 {{< img src="agent/fleet_automation/fleet-automation1.png" alt="The fleet automation page" style="width:100%;" >}}
 
-## Use Cases
+## Use cases
 
 With the Fleet Automation platform, you can:
 - View Agent and Agent integration configurations to help confirm deployment changes and ensure configuration consistency.
@@ -31,7 +31,7 @@ With the Fleet Automation platform, you can:
 - Ensure your fleet of Agents is using the latest feature enhancements by identifying outdated Agent versions.
 - Help rotate API keys and ensure old keys can be disabled with no impact by identifying which Agents, and how many Agents, are using a particular key.
 
-## Configuring Fleet Automation
+## Configure Fleet Automation
 
 Fleet Automation incorporates several Datadog features, which are all enabled automatically in Agent version 7.49/6.49 or later. To ensure you have access to all of the features, upgrade your Agents to version 7.49/6.49 or later.
 
@@ -42,7 +42,7 @@ If you're using an older Agent, you might still be able to enable the following 
 
 Datadog recommends upgrading your Agents regularly to make sure you have access to the latest features.
 
-## Observing your fleet
+## Observe your fleet
 
 Use the [**Fleet Automation**][1] page to gain insight into unmonitored hosts, Agents that need to be updated, or Agents that have integration issues. For each Agent, you can see:
 - The Agent version
@@ -63,7 +63,7 @@ Remote Agent Management simplifies the process of upgrading your Agent fleet by 
 
 ## Send a remote flare
 
-After you've enabled Remote Configuration on an Agent, you can send a flare without leaving Datadog. For instructions on sending a flare, see [Send a flare from the Datadog site][7].
+After you enable Remote Configuration on an Agent, you can send a flare from Datadog. For instructions on sending a flare, see [Send a flare from the Datadog site][7].
 
 
 ## Control access to Fleet Automation

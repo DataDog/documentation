@@ -11,7 +11,7 @@ further_reading:
 ---
 
 {{< callout url="https://www.datadoghq.com/product-preview/agent-upgrades/" btn_hidden="false" header="Try the Preview!">}}
-Upgrading Agents with Remote Management is in preview. Use this form to request access.
+Upgrading Agents with Remote Management is in Preview. Use this form to request access.
 {{< /callout >}}
 
 ## Overview
@@ -38,10 +38,10 @@ To enable Remote Agent Management:
 ## Remotely upgrade your Agents
 ### Supported platforms
 
-- Linux VMs installed via the install script or Ansible Datadog Role.
-- Windows VMs using the default installation method (gMSA or default `ddagentuser` account).
+- Linux VMs installed using the install script or Ansible Datadog Role
+- Windows VMs using the default installation method (gMSA or default `ddagentuser` account)
 
-<div class="alert alert-info">Upgrading Agents in containerized environments is not supported.</div>
+<div class="alert alert-info">Remotely upgrading Agents in containerized environments is not supported.</div>
 
 ### Prerequisites
 
@@ -50,10 +50,10 @@ To enable Remote Agent Management:
 
 ### Upgrade your Agents
 
-<div class="alert alert-warning">Remote Agent updates are in preview. Test the feature only on hosts that are not critical to production workloads. Try upgrading Agents one at a time before testing bulk upgrades.</div>
+<div class="alert alert-warning">Remote Agent updates are in Preview. Test the feature only on hosts that are not critical to production workloads. Try upgrading Agents one at a time before testing bulk upgrades.</div>
 
 To upgrade your Agents:
-1. Make sure you've completed the [setup instructions](#setup).
+1. [Enable Remote Agent Management](#setup).
 1. From the [**Upgrade Agents** tab][4], click **Start Agents Upgrade**.
    
    {{< img src="/agent/fleet_automation/upgrade-screen.png" alt="Select the Agents you want to upgrade." style="width:100%;" >}}
@@ -62,11 +62,11 @@ To upgrade your Agents:
    {{< img src="/agent/fleet_automation/start-agent-upgrade.png" alt="Select the Agents you want to upgrade." style="width:100%;" >}}
 1. Click **Upgrade Agents** to start the upgrade.
 
-You can track the upgrade process in real-time from the [Fleet Automation deployments][5] dashboard to ensure that your Agents are upgraded successfully.
+You can track the upgrade process in real time from the [Fleet Automation deployments][5] dashboard to ensure that your Agents are upgraded successfully.
 
 ### Upgrade process
 
-Similar to a manual upgrade, expect a brief downtime of 5-30 seconds while the Agent restarts. The full upgrade process takes approximately 5 minutes. Around 2 minutes of this time is used for the upgrade process. The rest of the time is spent monitoring the upgrade to ensure stability or determining if a rollback is necessary. If the upgrade fails and a rollback is necessary, the Agent automatically reverts to the previously running Agent version.
+Similar to a manual upgrade, expect a downtime of 5-30 seconds while the Agent restarts. The full upgrade process takes approximately 5 minutes. Around 2 minutes of this time is used for the upgrade process. The rest of the time is spent monitoring the upgrade to ensure stability and determining if a rollback is necessary. If the upgrade fails and a rollback is necessary, the Agent automatically reverts to the previously running Agent version.
 
 The upgrade process primarily adds files to the following directories:
 * `/opt/datadog-packages`
@@ -77,11 +77,11 @@ The Agent ensures that the appropriate permissions are set for these files. No c
 
 ### Upgrade precedence
 
-For the most consistent upgrade experience, Datadog recommends managing upgrades from one source at a time. Either use Fleet Automation or a configuration management tool. If you run a configuration management tool on an Agent that has already been upgraded using Fleet Automation, the upgrade either reverts the Agent to the [`DD_AGENT_MINOR_VERSION`][9] you've specified in your configuration, or upgrades the Agent to the latest available version if no `DD_AGENT_MINOR_VERSION` is set.
+For the most consistent upgrade experience, Datadog recommends managing upgrades from one source at a time. Use either Fleet Automation or a configuration management tool. If you run a configuration management tool on an Agent that has already been upgraded using Fleet Automation, the upgrade reverts the Agent to the [`DD_AGENT_MINOR_VERSION`][9]  specified in your configuration. If no `DD_AGENT_MINOR_VERSION` is set, the Agent is upgraded to the latest available version .
 
 ### Mirrors and proxies
 
-You can use use Remote Agent Management along with a proxy or mirrored repositories.
+You can use Remote Agent Management along with a proxy or mirrored repositories.
 
 For instructions on configuring your Agent to use a proxy, see [Agent Proxy Configuration][6]. After you've configured the proxy, restart the Agent to apply the settings.
 
