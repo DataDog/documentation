@@ -22852,6 +22852,7 @@ components:
     Version:
       description: Version of the updated signal. If server side version is higher,
         update will be rejected.
+      example: 0
       format: int64
       type: integer
     WebhooksIntegration:
@@ -24054,8 +24055,6 @@ components:
       x-auth-id-alias: appKeyAuth
       x-env-name: DD_APP_KEY
     bearerAuth:
-      in: header
-      name: Authorization
       scheme: bearer
       type: http
       x-env-name: DD_BEARER_TOKEN
@@ -26548,7 +26547,7 @@ paths:
       x-permission:
         operator: OR
         permissions:
-        - dashboards_public_share
+        - embeddable_graphs_share
       x-undo:
         operationId: TODO
         parameters: []
@@ -26633,7 +26632,7 @@ paths:
       x-permission:
         operator: OR
         permissions:
-        - dashboards_public_share
+        - embeddable_graphs_share
       x-undo:
         type: safe
   /api/v1/graph/embed/{embed_id}/revoke:
@@ -26675,7 +26674,7 @@ paths:
       x-permission:
         operator: OR
         permissions:
-        - dashboards_public_share
+        - embeddable_graphs_share
       x-undo:
         type: safe
   /api/v1/graph/snapshot:
