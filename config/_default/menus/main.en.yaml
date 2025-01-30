@@ -5365,7 +5365,7 @@ menu:
       weight: 106
     - name: Kotlin Multiplatform
       identifier: log_kotlin_multiplatform
-      url: logs/log_collection/kotlin-multiplatform/
+      url: logs/log_collection/kotlin_multiplatform/
       parent: log_collection
       weight: 107
     - name: C#
