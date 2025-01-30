@@ -5792,7 +5792,7 @@ menu:
       parent: cloud_workload_security
       identifier: cws_workload_security_rules
       weight: 201
-    - name: Create Custom Rules
+    - name: Create Policies and Custom Rules
       url: security/threats/workload_security_rules/custom_rules
       parent: cws_workload_security_rules
       identifier: cws_custom_rules
