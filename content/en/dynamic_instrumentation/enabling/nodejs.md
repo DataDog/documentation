@@ -1,7 +1,5 @@
 ---
 title: Enable Dynamic Instrumentation for Node.js
-aliases:
-    - /tracing/dynamic_instrumentation/enabling/nodejs/
 private: false
 code_lang: nodejs
 type: multi-code-lang
