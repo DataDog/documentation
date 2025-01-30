@@ -2,9 +2,9 @@
 title: Service Overrides
 disable_toc: false
 further_reading:
-- link: "/tracing/guide/inferred-service-opt-in"
+- link: "/tracing/services/inferred_services
   tag: "Documentation"
-  text: "Opting-in to the new service representation"
+  text: "Inferred services"
 ---
 
 ## Overview
@@ -140,9 +140,9 @@ The default `DD_SERVICE` name.
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/guide/inferred-service-opt-in
+[1]: /tracing/services/inferred_services
 [2]: /tracing/trace_pipeline/generate_metrics
 [3]: /monitors/types/apm/?tab=traceanalytics
 [4]: /tracing/trace_pipeline/trace_retention/#retention-filters
 [5]: /tracing/metrics/metrics_namespace/
-[6]: https://docs.datadoghq.com/tracing/guide/inferred-service-opt-in/#list-of-newly-introduced-peer-tags
+[6]: /tracing/services/inferred_services/#peer-tags
