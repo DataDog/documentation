@@ -15,7 +15,7 @@
  */
 
 import { isPromise } from '../utils';
-import { type Tag } from '../types';
+import { ClientFunction, ClientVariable, type Tag } from '../types';
 
 import {
   Node,
@@ -32,6 +32,22 @@ export function truthy(param: any) {
   return param !== false && param !== undefined && param !== null;
 }
 
+/**
+ * Wrap a given condition in a "not" function
+ * that flips the outcome of the condition.
+ */
+function negateCondition(condition: ClientFunction | ClientVariable): ClientFunction {
+  return {
+    $$mdtype: 'Function',
+    name: 'not',
+    parameters: {
+      '0': condition
+    },
+    value: !truthy(condition),
+    ref: ''
+  };
+}
+
 function buildIfTags(node: Node) {
   console.log('building if tags for node', JSON.stringify(node, null, 2));
   // tags will be added here as they're processed
@@ -41,7 +57,7 @@ function buildIfTags(node: Node) {
 
   // anticonditions will be added here
   const ifCondition = node.attributes.primary;
-  const antiConditions: any = [];
+  const antiCondition: ClientFunction = negateCondition(ifCondition);
 
   console.log('top level ifCondition', JSON.stringify(ifCondition, null, 2));
 
