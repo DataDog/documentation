@@ -29,12 +29,70 @@ Select and set up your destinations when you [set up a pipeline][1]. This is ste
     {{< nextlink href="observability_pipelines/destinations/google_chronicle" >}}Google Chronicle{{< /nextlink >}}
     {{< nextlink href="observability_pipelines/destinations/google_cloud_storage" >}}Google Cloud Storage{{< /nextlink >}}
     {{< nextlink href="observability_pipelines/destinations/new_relic" >}}New Relic{{< /nextlink >}}
+    {{< nextlink href="observability_pipelines/destinations/microsoft_sentinel" >}}Microsoft Sentinel{{< /nextlink >}}
     {{< nextlink href="observability_pipelines/destinations/opensearch" >}}OpenSearch{{< /nextlink >}}
     {{< nextlink href="observability_pipelines/destinations/syslog" >}}rsyslog or syslog-ng{{< /nextlink >}}
+    {{< nextlink href="observability_pipelines/destinations/sentinelone" >}} SentinelOne {{< /nextlink >}}
     {{< nextlink href="observability_pipelines/destinations/splunk_hec" >}}Splunk HTTP Event Collector (HEC){{< /nextlink >}}
     {{< nextlink href="observability_pipelines/destinations/sumo_logic_hosted_collector" >}}Sumo Logic Hosted Collector{{< /nextlink >}}
 {{< /whatsnext >}}
 
+## Template syntax
+
+Logs are often stored in separate indexes based on log data, such as the service or environment the logs are coming from or another log attribute. In Observability Pipelines, you can use template syntax to route your logs to different indexes based on specific log fields.
+
+When the Observability Pipelines Worker cannot resolve the field with the template syntax, the Worker defaults to a specified behavior for that destination. For example, if you are using the template `{{application_id}}` for the Amazon S3 destination's **Prefix** field, but there isn't an `application_id` field in the log, the Worker creates a folder called `OP_UNRESOLVED_TEMPLATE_LOGS/` and publishes the logs there.
+
+The following table lists the destinations and fields that support template syntax, and what happens when the Worker cannot resolve the field:
+
+| Destination       | Fields that support template syntax  | Behavior when the field cannot be resolved                                                     |
+| ----------------- | -------------------------------------| -----------------------------------------------------------------------------------------------|
+| Amazon Opensearch | Index                                | The Worker creates an index named `datadog-op` and sends the logs there.                       |
+| Amazon S3         | Prefix                               | The Worker creates a folder named `OP_UNRESOLVED_TEMPLATE_LOGS/` and sends the logs there. |
+| Azure Blob        | Prefix                               | The Worker creates a folder named `OP_UNRESOLVED_TEMPLATE_LOGS/` and sends the logs there. |
+| Elasticsearch     | Source type                          | The Worker creates an index named `datadog-op` and sends the logs there.                       |
+| Google Chronicle  | Log type                             | Defaults to `vector_dev` log type.                                                             |
+| Google Cloud      | Prefix                               | The Worker creates a folder named `OP_UNRESOLVED_TEMPLATE_LOGS/` and sends the logs there. |
+| Opensearch        | Index                                | The Worker creates an index named `datadog-op` and sends the logs there.                       |
+| Splunk HEC        | Index<br>Source type                 | The Worker sends the logs to the default index configured in Splunk.                       |
+
+#### Example
+
+If you want to route logs based on the log's application ID field (for example, `application_id`) to the Amazon S3 destination, use the event fields syntax in the **Prefix to apply to all object keys** field.
+
+{{< img src="observability_pipelines/amazon_s3_prefix.png" alt="The Amazon S3 destination showing the prefix field using the event fields syntax /application_id={{ application_id }}/" style="width:40%;" >}}
+
+### Syntax
+
+#### Event fields
+
+Use `{{ <field_name> }}` to access individual log event fields. For example:
+
+```
+{{ application_id }}
+```
+
+#### Strftime specifiers
+
+Use [strftime specifiers][3] for the date and time. For example:
+
+```
+year=%Y/month=%m/day=%d
+```
+
+#### Escape characters
+
+Prefix a character with `\` to escape the character. This example escapes the event field syntax:
+
+```
+\{{ field_name }}
+```
+
+This example escapes the strftime specifiers:
+
+```
+year=\%Y/month=\%m/day=\%d/
+```
 
 ## Event batching
 
@@ -58,3 +116,4 @@ If the destination receives 3 events within 2 seconds, it flushes a batch with 2
 
 [1]: /observability_pipelines/set_up_pipelines/
 [2]: https://app.datadoghq.com/observability-pipelines
+[3]: https://docs.rs/chrono/0.4.19/chrono/format/strftime/index.html#specifiers
