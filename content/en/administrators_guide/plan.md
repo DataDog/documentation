@@ -366,7 +366,7 @@ Create a detailed roll-out methodology in the [build][41] phase by focusing on t
 [48]: https://www.datadoghq.com/blog/engineering/husky-deep-dive/
 [49]: /real_user_monitoring/platform/connect_rum_and_traces/?tab=browserrum
 [50]: /integrations/tcp_check/?tab=host#data-collected
-[51]: /tracing/guide/inferred-service-opt-in/?tab=java
+[51]: /tracing/services/inferred_services
 [52]: /integrations/amazon_web_services/
 [53]: /integrations/google_cloud_platform/
 [54]: /integrations/azure/
