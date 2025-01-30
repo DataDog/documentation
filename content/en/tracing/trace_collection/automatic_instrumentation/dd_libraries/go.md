@@ -243,7 +243,6 @@ To enable the profiler, set the environment variable `DD_PROFILING_ENABLED=true`
 To troubleshoot builds that `orchestrion` manages, see [Troubleshooting Go Compile-Time Instrumentation][13].
 
 [4]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace
-[5]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/ddtrace
 [6]: https://github.com/DataDog/orchestrion
 [7]: /security/application_security/threats/exploit-prevention
 [8]: https://go.dev/doc/devel/release#policy
