@@ -23,17 +23,16 @@ Remote Agent Management simplifies the process of upgrading your Agent fleet by 
 
 ## Setup
 
-To enable Remote Agent Management, you must first upgrade the Agent manually with the **Remote Agent Management** option enabled.
-
 To enable Remote Agent Management:
 1. If you haven't enabled Remote Configuration on the Agent, follow the [configuration instructions][1] to enable it.
 1. Go to the [Datadog Agent install page][3] for your platform or configuration management tool.
-1. Enable **Remote Agent Management** and use the generated Agent installation command to upgrade your Agent.
+1. Enable **Remote Agent Management**. Enabling Remote Agent Management adds the `DD_REMOTE_UPDATES` environment variable to the generated Agent installation command.
 
    {{< img src="/agent/fleet_automation/remote-agent-management-toggle.png" alt="Enable the Remote Agent Management toggle." style="width:100%;" >}}
 
-<div class="alert alert-warning">Updating the <code>remote_updates</code> configuration without upgrading the Agent does not grant access to Remote Agent Management. You must upgrade the Agent with the <code>remote_updates:true</code> configuration to use remote updates.
-</div>
+1. Use the generated Agent installation command to upgrade your Agent.
+
+   **Note**: You must run the generated installation command with `DD_REMOTE_UPDATES` set to `true` to gain access to Remote Agent Management. Enabling Remote Agent Management without running the install command does not grant access to the feature.
 
 ## Remotely upgrade your Agents
 ### Supported platforms
@@ -50,19 +49,19 @@ To enable Remote Agent Management:
 
 ### Upgrade your Agents
 
-<div class="alert alert-warning">Remote Agent updates are in Preview. Test the feature only on hosts that are not critical to production workloads. Try upgrading Agents one at a time before testing bulk upgrades.</div>
+<div class="alert alert-warning">Remote Agent upgrades are in Preview. Test the feature only on hosts that are not critical to production workloads. Try upgrading Agents one at a time before testing bulk upgrades.</div>
 
 To upgrade your Agents:
 1. [Enable Remote Agent Management](#setup).
 1. From the [**Upgrade Agents** tab][4], click **Start Agents Upgrade**.
-   
+
    {{< img src="/agent/fleet_automation/upgrade-screen.png" alt="Select the Agents you want to upgrade." style="width:100%;" >}}
 1. Select the Agents you want to upgrade. You can target a group of Agents by filtering on host information or tags.
-   
+
    {{< img src="/agent/fleet_automation/start-agent-upgrade.png" alt="Select the Agents you want to upgrade." style="width:100%;" >}}
 1. Click **Upgrade Agents** to start the upgrade.
-
-You can track the upgrade process in real time from the [Fleet Automation deployments][5] dashboard to ensure that your Agents are upgraded successfully.
+1. Use the [Deployments][10] dashboard to track the upgrade process. Clicking on an Agent in the deployments table gives you more information about the upgrade, including the duration time, progress, and the user who started the upgrade.
+   {{< img src="/agent/fleet_automation/deployments.png" alt="Select the Agents you want to upgrade." style="width:80%;" >}}
 
 ### Upgrade process
 
@@ -89,6 +88,10 @@ For instructions on using mirrored or air-gapped repositories, see:
 - [Synchronize Datadog's images with a private container registry][7]
 - [Installing the Agent on a server with limited internet connectivity][8]
 
+### Downgrading Agents
+
+If you need to downgrade an Agent, follow the steps in [Upgrade your Agents](#downgrading-agents) and specify the version you wish to downgrade to. Datadog recommends using the latest version of the Agent and upgrading your Agents regularly to make sure you have access to the latest features.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -102,3 +105,4 @@ For instructions on using mirrored or air-gapped repositories, see:
 [7]: /containers/guide/sync_container_images/
 [8]: https://docs.datadoghq.com/agent/guide/installing-the-agent-on-a-server-with-limited-internet-connectivity/
 [9]: https://github.com/DataDog/agent-linux-install-script?tab=readme-ov-file#install-script-configuration-options
+[10]: https://app.datadoghq.com/fleet/deployments
