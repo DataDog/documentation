@@ -2146,16 +2146,21 @@ menu:
       parent: error_tracking_frontend
       identifier: error_tracking_mobile
       weight: 102
+    - name: Replay Errors
+      url: error_tracking/replay_errors
+      parent: error_tracking_frontend
+      identifier: error_tracking_replays
+      weight: 103
     - name: Real User Monitoring
       url: error_tracking/rum
       parent: error_tracking_frontend
       identifier: error_tracking_rum
-      weight: 103
+      weight: 104
     - name: Logs
       url: error_tracking/frontend/logs
       parent: error_tracking_frontend
       identifier: error_tracking__fe_logs
-      weight: 104
+      weight: 105
     - name: Track Backend Errors
       url: error_tracking/backend
       parent: error_tracking
