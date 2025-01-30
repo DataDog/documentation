@@ -1,6 +1,7 @@
 ---
 title: Streamline the Development Lifecycle with CI Visibility
 aliases:
+  - /service_catalog/use_cases/pipeline_visibility
   - /service_catalog/use_cases/streamlining-development-lifecycle-with-ci-visibility/
   - /tracing/service_catalog/guides/streamlining-development-lifecycle-with-ci-visibility
   - /service_catalog/guides/streamlining-development-lifecycle-with-ci-visibility

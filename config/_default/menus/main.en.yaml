@@ -1975,7 +1975,7 @@ menu:
       identifier: service_catalog_use_cases_incident_response
       weight: 307    
     - name: Pipeline Visibility
-      url: service_catalog/use_cases/streamlining-development-lifecycle-with-ci-visibility
+      url: service_catalog/use_cases/pipeline_visibility
       parent: service_catalog_use_cases
       identifier: service_catalog_use_cases_pipeline_visibility
       weight: 308  
