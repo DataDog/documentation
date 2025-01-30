@@ -99,12 +99,12 @@ OTLP logs ingestion on the Datadog Agent is disabled by default so that you don'
    - Set `DD_OTLP_CONFIG_LOGS_ENABLED` to true.
 
 <div class="alert alert-warning">
-<strong>Note</strong>: Starting in Agent v7.61.0, the OTLP ingestion pipelines are impacted by a bug from the upstream dependencies. The bug appears as the OTLP ingestion pipelines fail to start in Docker environments with an error message like <code>Error running the OTLP ingest pipeline: failed to register process metrics: process does not exist</code>. While we are actively investigating this bug, there are a few workarounds to mitigate it:
-1. Set the environment variable <code>HOST_PROC</code> to <code>/proc</code> in your Agent Docker container.
-2. Remove <code>/proc/:/host/proc/:ro</code> from <code>volumes</code> in your Agent Docker container.
-3. Set <code>pid</code> to <code>host</code> in your Agent Docker container. 
-These workarounds can be done in either the <code>docker</code> command or in the Docker compose file.
-</div>
+<strong>Known Issue</strong>: Agent versions 7.61.0 through 7.63.0 have an issue where OTLP ingestion pipelines may fail to start in Docker environments, showing the error: <code>Error running the OTLP ingest pipeline: failed to register process metrics: process does not exist</code>.<br>
+If you are using an affected version, you can use one of these workarounds:<br>
+1. Set the environment variable <code>HOST_PROC</code> to <code>/proc</code> in your Agent Docker container.<br>
+2. Remove <code>/proc/:/host/proc/:ro</code> from <code>volumes</code> in your Agent Docker container.<br>
+3. Set <code>pid</code> to <code>host</code> in your Agent Docker container.<br>
+These configurations can be applied through either the <code>docker</code> command or Docker compose file.</div>
 
 [1]: /agent/docker/
 {{% /tab %}}
