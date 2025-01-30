@@ -17,7 +17,7 @@ further_reading:
 
 Set up Sensitive Data Scanner to scan your:
 
-- Telemetry data, so you can identify sensitive data in your logs, APM spans, and RUM events. See [Set Up for telemetry data][1] for instructions.
+- Telemetry data, so you can identify sensitive data in your logs, APM spans, RUM events, and events from Event Management. See [Set Up for telemetry data][1] for instructions.
 - Cloud storage data, so you can identify sensitive data in your Amazon S3 buckets and RDS instances. See [Set Up for Cloud Storage][2] for instructions.
 
 ## Further reading

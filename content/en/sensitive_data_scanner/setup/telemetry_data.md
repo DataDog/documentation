@@ -12,19 +12,21 @@ further_reading:
 
 ## Overview
 
-To use Sensitive Data Scanner for telemetry data, set up a scanning group to define what data to scan and then add scanning rules to determine what sensitive information to match within the data.
+Sensitive Data Scanner in the Cloud scans telemetry data, such as your application logs, APM events, RUM events, and events from Event Management. You submit those logs and events to the Datadog backend, so the data leaves your environment before it gets redacted. If you don't want data to leave your environment before it gets redacted, use [Observability Pipelines][12] and its [Sensitive Data Scanner processor][13]. See [Set Up Pipelines][14] for information on how to set up a pipeline and its components.
+
+To use Sensitive Data Scanner in the Cloud, set up a scanning group to define what data to scan and then add scanning rules to determine what sensitive information to match within the data.
 
 This document goes through the following:
 
-- The [permissions](#prerequisites) required to view and set up Sensitive Data Scanner.
-- [Adding a scanning group](#add-a-scanning-group).
-- [Adding scanning rules](#add-scanning-rules).
-- [How to control access to logs wth sensitive data](#control-access-to-logs-with-sensitive-data).
-- [How to redact sensitive data in tags](#redact-sensitive-data-in-tags).
+- The [permissions](#permissions) required to view and set up Sensitive Data Scanner.
+- [Adding a scanning group](#add-a-scanning-group)
+- [Adding scanning rules](#add-scanning-rules)
+- [How to control access to logs wth sensitive data](#control-access-to-logs-with-sensitive-data)
+- [How to redact sensitive data in tags](#redact-sensitive-data-in-tags)
 
 ## Setup
 
-### Prerequisites
+### Permissions
 
 By default, users with the Datadog Admin role have access to view and set up scanning rules. To allow other users access, grant the `data_scanner_read` or `data_scanner_write` permissions under [Compliance][1] to a custom role. See [Access Control][2] for details on how to set up roles and permissions.
 
@@ -199,3 +201,6 @@ To turn off Sensitive Data Scanner entirely, set the toggle to **off** for each 
 [9]: /logs/guide/logs-rbac/
 [10]: /logs/log_configuration/processors/?tab=ui#remapper
 [11]: https://app.datadoghq.com/logs/pipelines
+[12]: /observability_pipelines/
+[13]: /observability_pipelines/processors/sensitive_data_scanner/
+[14]: /observability_pipelines/set_up_pipelines/
