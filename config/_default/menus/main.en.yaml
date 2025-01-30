@@ -2147,7 +2147,7 @@ menu:
       identifier: error_tracking_mobile
       weight: 102
     - name: Replay Errors
-      url: error_tracking/replay_errors
+      url: error_tracking/frontend/replay_errors
       parent: error_tracking_frontend
       identifier: error_tracking_replays
       weight: 103
