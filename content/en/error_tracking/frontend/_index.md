@@ -38,7 +38,7 @@ Error Tracking simplifies debugging by grouping thousands of similar errors into
     {{< nextlink href="error_tracking/frontend/mobile/expo" >}}Expo{{< /nextlink >}}
     {{< nextlink href="error_tracking/frontend/mobile/reactnative" >}}React Native{{< /nextlink >}}
     {{< nextlink href="error_tracking/frontend/mobile/flutter" >}}Flutter{{< /nextlink >}}
-    {{< nextlink href="error_tracking/frontend/mobile/kotlin-multiplatform" >}}Kotlin Multiplatform{{< /nextlink >}}
+    {{< nextlink href="error_tracking/frontend/mobile/kotlin_multiplatform" >}}Kotlin Multiplatform{{< /nextlink >}}
     {{< nextlink href="error_tracking/frontend/logs" >}}Logs{{< /nextlink >}}
 {{< /whatsnext >}}
 

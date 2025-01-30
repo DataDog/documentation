@@ -2,7 +2,9 @@
 title: Kotlin Multiplatform Libraries for RUM
 aliases:
 - /real_user_monitoring/kotlin-multiplatform/integrated_libraries/
+- /real_user_monitoring/kotlin_multiplatform/integrated_libraries/
 - /real_user_monitoring/mobile_and_tv_monitoring/kotlin-multiplatform/integrated_libraries/
+- /real_user_monitoring/mobile_and_tv_monitoring/kotlin_multiplatform/integrated_libraries/
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-kotlin-multiplatform
   tag: "Source Code"
@@ -49,4 +51,4 @@ val ktorClient = HttpClient {
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/mobile_and_tv_monitoring/kotlin-multiplatform/
+[1]: /real_user_monitoring/mobile_and_tv_monitoring/kotlin_multiplatform/
