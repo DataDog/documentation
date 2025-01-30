@@ -1,126 +1,140 @@
 ---
-title: Getting Started with Feature Flag Data in RUM
-
+title: Setup Feature Flag Tracking
 beta: true
 description: Learn how to set up RUM to capture feature flag data and analyze the performance in Datadog
 aliases:
 - /real_user_monitoring/guide/getting-started-feature-flags/
+- /real_user_monitoring/guide/setup-feature-flag-data-collection/
+disable_toc: false
 further_reading:
-- link: '/real_user_monitoring/feature_flag_tracking'
-  tag: 'Documentation'
-  text: 'Analyze your feature flag data with Feature Flag Tracking'
-- link: '/real_user_monitoring/explorer'
-  tag: 'Documentation'
-  text: 'Visualize your RUM data in the RUM Explorer'
+- link: "/real_user_monitoring/guide/setup-feature-flag-data-collection/"
+  tag: "Documentation"
+  text: "Set up Feature Flag data collection"
+- link: "/real_user_monitoring/explorer/"
+  tag: "Documentation"
+  text: "Learn about the RUM Explorer"
+- link: "https://www.datadoghq.com/blog/feature-flag-tracking/"
+  tag: "Blog"
+  text: "Ensure release safety with feature flag tracking in Datadog RUM"
 ---
 
-## Overview
-Feature flag data gives you greater visibility into your user experience and performance monitoring by allowing you to determine which users are being shown a specific feature and if any change you introduce is impacting your user experience or negatively affecting performance.
+Feature flag data provides greater visibility into user experience and performance monitoring. It allows you to determine which users are being shown a specific feature and assess if any changes introduced are impacting user experience or negatively affecting performance.
 
 By enriching your RUM data with feature flag data, you can be confident that your feature successfully launches without unintentionally causing a bug or performance regression. With this additional layer of insight, you can correlate feature releases with performance, pinpoint issues to specific releases, and troubleshoot faster.
 
-## Setup
+## Set up RUM monitoring
+
+Feature flag tracking is available in the RUM Browser, iOS, Android, Flutter, and React Native SDK.
 
 {{< tabs >}}
 {{% tab "Browser" %}}
 
-Feature flag tracking is available in the RUM Browser SDK. To start, set up [RUM browser monitoring][1]. You need the Browser RUM SDK version >= 4.25.0.
+To enable feature flag data collection for the Browser SDK:
 
-<details>
-  <summary>Before <code>v5.17.0</code></summary>
+1. Set up [RUM browser monitoring][1]. You need the Browser RUM SDK version >= 4.25.0.
 
-If you are using a version previous to 5.17.0, initialize the RUM SDK and configure the `enableExperimentalFeatures` initialization parameter with `["feature_flags"]` to start collecting feature flag data.
+2. Initialize the RUM SDK and configure the `enableExperimentalFeatures` initialization parameter with ` ["feature_flags"]`.
 
-{{% collapse-content title="NPM" level="h4" %}}
-```javascript
-  import { datadogRum } from '@datadog/browser-rum';
+   <details open>
+     <summary>npm</summary>
 
-  // Initialize Datadog Browser SDK
-  datadogRum.init({
-    ...
-    enableExperimentalFeatures: ["feature_flags"],
-    ...
-});
-```
-{{% /collapse-content %}} 
+   ```javascript
+     import { datadogRum } from '@datadog/browser-rum';
 
-{{% collapse-content title="CDN async" level="h4" %}}
-```javascript
-window.DD_RUM.onReady(function() {
-    window.DD_RUM.init({
-      ...
-      enableExperimentalFeatures: ["feature_flags"],
-      ...
-    })
-})
-```
-{{% /collapse-content %}} 
+     // Initialize Datadog Browser SDK
+     datadogRum.init({
+       ...
+       ...
+   });
+   ```
 
-{{% collapse-content title="CDN sync" level="h4" %}}
-```javascript
-window.DD_RUM &&
-    window.DD_RUM.init({
-      ...
-      enableExperimentalFeatures: ["feature_flags"],
-      ...
-    })
-```
-{{% /collapse-content %}}
+   </details>
 
-</details>
-<br/>
+   <details>
+     <summary>CDN async</summary>
 
-[1]: /real_user_monitoring/browser/setup/
-{{% /tab %}}
-{{% tab "Android" %}}
+   ```javascript
+   window.DD_RUM.onReady(function() {
+       window.DD_RUM.init({
+         ...
+         enableExperimentalFeatures: ["feature_flags"],
+         ...
+       })
+   })
+   ```
+   </details>
 
-Feature flag tracking is available in the RUM Android SDK. To start, set up [RUM Android monitoring][1]. You need the Android RUM SDK version >= 1.18.0.
+   <details>
+     <summary>CDN sync</summary>
 
-[1]: /real_user_monitoring/mobile_and_tv_monitoring/android/setup/
-{{% /tab %}}
-{{% tab "Flutter" %}}
+   ```javascript
+   window.DD_RUM &&
+       window.DD_RUM.init({
+         ...
+         enableExperimentalFeatures: ["feature_flags"],
+         ...
+       })
+   ```
+   </details>
+   <br/>
 
-Feature flag tracking is available for your Flutter applications. To start, set up [RUM Flutter monitoring][1]. You need the Flutter Plugin version >= 1.3.2.
-
-[1]: /real_user_monitoring/mobile_and_tv_monitoring/flutter/setup/
+[1]: /real_user_monitoring/browser#setup
 {{% /tab %}}
 {{% tab "iOS" %}}
 
-Feature flag tracking is available in the RUM iOS SDK. To start, set up [RUM iOS monitoring][1]. You need the iOS RUM SDK version >= 1.16.0.
+To enable feature flag data collection for your iOS application:
 
-[1]: /real_user_monitoring/mobile_and_tv_monitoring/ios/setup
+1. Set up [RUM iOS monitoring][1]. You need the iOS RUM SDK version >= 1.16.0.
+
+[1]: https://docs.datadoghq.com/real_user_monitoring/ios/?tab=swift
 {{% /tab %}}
-{{% tab "Kotlin Multiplatform" %}}
+{{% tab "Android" %}}
 
-Feature flag tracking is available for your Kotlin Multiplatform applications. To start, set up [RUM Kotlin Multiplatform monitoring][1].
+To enable feature flag data collection for your Android application:
 
-[1]: /real_user_monitoring/mobile_and_tv_monitoring/kotlin_multiplatform
+1. Set up [RUM Android monitoring][1]. You need the Android RUM SDK version >= 1.18.0.
+
+[1]: https://docs.datadoghq.com/real_user_monitoring/android/?tab=kotlin
+{{% /tab %}}
+{{% tab "Flutter" %}}
+
+To enable feature flag data collection for your Flutter application:
+
+1. Set up [RUM Flutter monitoring][1]. You need the Flutter Plugin version >= 1.3.2.
+
+[1]: https://docs.datadoghq.com/real_user_monitoring/mobile_and_tv_monitoring/setup/flutter/
 {{% /tab %}}
 {{% tab "React Native" %}}
 
-Feature flag tracking is available for your React Native applications. To start, set up [RUM React Native monitoring][1]. You need the React Native RUM SDK version >= 1.7.0.
+To enable feature flag data collection for your React Native application:
 
-[1]: /real_user_monitoring/mobile_and_tv_monitoring/react_native/setup
-{{% /tab %}}
-{{% tab "Unity" %}}
+1. Set up [RUM React Native monitoring][1]. You need the React Native RUM SDK version >= 1.7.0.
 
-Feature flag tracking is available for your Unity applications. To start, set up [RUM Unity monitoring][1].
-
-[1]: /real_user_monitoring/mobile_and_tv_monitoring/unity/setup
+[1]: https://docs.datadoghq.com/real_user_monitoring/reactnative/
 {{% /tab %}}
 {{< /tabs >}}
 
-## Integrations
+## Set up a feature flag integration
 
-You can start collecting feature flag data with [custom feature flag management solutions](#custom-feature-flag-management), or by using one of Datadog's integration partners.
+You can start collecting feature flag data with [custom feature flag management solutions](#custom-feature-flag-management), or by using one of Datadog's integration partners listed below.
 
-Datadog supports integrations with:
+<div class="alert alert-warning">
+
+**Note**: The following special characters are not supported for Feature Flag Tracking: `.`, `:`, `+`, `-`, `=`, `&&`, `||`, `>`, `<`, `!`, `(`, `)`, `{`, `}`, `[`, `]`, `^`, `"`, `“`, `”`, `~`, `*`, `?`, `\`. Datadog recommends avoiding these characters when possible in your feature flag names. If you are required to use one of these characters, replace the character before sending the data to Datadog. For example:
+
+  ```javascript
+  datadogRum.addFeatureFlagEvaluation(key.replace(':', '_'), value);
+  ```
+
+</div>
+
 {{< partial name="rum/rum-feature-flag-tracking.html" >}}
-
 
 </br>
 
 ### Amplitude integration
+
+Before you initialize this feature flag integration, make sure you've [set up RUM monitoring](#set-up-rum-monitoring).
 
 {{< tabs >}}
 {{% tab "Browser" %}}
@@ -206,6 +220,8 @@ Amplitude does not support this integration. Create a ticket with Amplitude to r
 {{< /tabs >}}
 
 ### ConfigCat integration
+
+Before you initialize this feature flag integration, make sure you've [set up RUM monitoring](#set-up-rum-monitoring).
 
 {{< tabs >}}
 {{% tab "Browser" %}}
@@ -321,6 +337,8 @@ For more information about initializing the ConfigCat React SDK, see ConfigCat's
 
 ### Custom feature flag management
 
+Before you initialize a custom feature flag integration, make sure you've [set up RUM monitoring](#set-up-rum-monitoring).
+
 {{< tabs >}}
 {{% tab "Browser" %}}
 
@@ -370,6 +388,8 @@ Each time a feature flag is evaluated, add the following function to send the fe
 
 ### DevCycle integration
 
+Before you initialize this feature flag integration, make sure you've [set up RUM monitoring](#set-up-rum-monitoring).
+
 {{< tabs >}}
 {{% tab "Browser" %}}
 
@@ -405,31 +425,37 @@ dvcClient.subscribe(
 {{% /tab %}}
 {{% tab "iOS" %}}
 
-DevCycle does not support this integration. Create a ticket with DevCycle to request this feature.
+DevCycle does not support this integration. Create a ticket with [DevCycle][1] to request this feature.
 
+[1]: https://devcycle.com/contact/request-support
 
 {{% /tab %}}
 {{% tab "Android" %}}
 
-DevCycle does not support this integration. Create a ticket with DevCycle to request this feature.
+DevCycle does not support this integration. Create a ticket with [DevCycle][1] to request this feature.
 
+[1]: https://devcycle.com/contact/request-support
 
 {{% /tab %}}
 {{% tab "Flutter" %}}
 
-DevCycle does not support this integration. Create a ticket with DevCycle to request this feature.
+DevCycle does not support this integration. Create a ticket with [DevCycle][1] to request this feature.
 
+[1]: https://devcycle.com/contact/request-support
 
 {{% /tab %}}
 {{% tab "React Native" %}}
 
-DevCycle does not support this integration. Create a ticket with DevCycle to request this feature.
+DevCycle does not support this integration. Create a ticket with [DevCycle][1] to request this feature.
 
+[1]: https://devcycle.com/contact/request-support
 
 {{% /tab %}}
 {{< /tabs >}}
 
 ### Eppo integration
+
+Before you initialize this feature flag integration, make sure you've [set up RUM monitoring](#set-up-rum-monitoring).
 
 {{< tabs >}}
 {{% tab "Browser" %}}
@@ -528,6 +554,8 @@ await eppoInit({
 
 ### Flagsmith Integration
 
+Before you initialize this feature flag integration, make sure you've [set up RUM monitoring](#set-up-rum-monitoring).
+
 {{< tabs >}}
 {{% tab "Browser" %}}
 
@@ -572,63 +600,9 @@ Flagsmith does not currently support this integration. Create a ticket with Flag
 {{% /tab %}}
 {{< /tabs >}}
 
-
-### Kameleoon integration
-
-{{< tabs >}}
-{{% tab "Browser" %}}
-
-After creating and initializing the Kameleoon SDK, subscribe to the `Evaluation` event using the `onEvent` handler.
-
-For more information about the SDK, see [Kameleoon JavaScript SDK documentation][1].
-
-```javascript
-client.onEvent(EventType.Evaluation, ({ featureKey, variation }) => {
-  datadogRum.addFeatureFlagEvaluation(featureKey, variation.key);
-});
-```
-
-
-[1]: https://developers.kameleoon.com/feature-management-and-experimentation/web-sdks/js-sdk
-{{% /tab %}}
-{{% tab "iOS" %}}
-
-Kameleoon does not support this integration. Contact product@kameleoon.com to request this feature.
-
-{{% /tab %}}
-{{% tab "Android" %}}
-
-Kameleoon does not support this integration. Contact product@kameleoon.com to request this feature.
-
-
-{{% /tab %}}
-{{% tab "Flutter" %}}
-
-Kameleoon does not support this integration. Contact product@kameleoon.com to request this feature.
-
-
-{{% /tab %}}
-{{% tab "React Native" %}}
-
-After creating and initializing the Kameleoon SDK, subscribe to the `Evaluation` event using the `onEvent` handler.
-
-Learn more about SDK initialization in the [Kameleoon React Native SDK documentation][1].
-
-```javascript
-const { onEvent } = useInitialize();
-
-onEvent(EventType.Evaluation, ({ featureKey, variation }) => {
-  datadogRum.addFeatureFlagEvaluation(featureKey, variation.key);
-});
-```
-
-
-[1]: https://developers.kameleoon.com/feature-management-and-experimentation/web-sdks/react-js-sdk
-{{% /tab %}}
-{{< /tabs >}}
-
-
 ### LaunchDarkly integration
+
+Before you initialize this feature flag integration, make sure you've [set up RUM monitoring](#set-up-rum-monitoring).
 
 {{< tabs >}}
 {{% tab "Browser" %}}
@@ -682,6 +656,8 @@ LaunchDarkly does not currently support this integration. Create a ticket with L
 
 
 ### Split Integration
+
+Before you initialize this feature flag integration, make sure you've [set up RUM monitoring](#set-up-rum-monitoring).
 
 {{< tabs >}}
 {{% tab "Browser" %}}
@@ -815,6 +791,8 @@ const client = factory.client();
 
 ### Statsig Integration
 
+Before you initialize this feature flag integration, make sure you've [set up RUM monitoring](#set-up-rum-monitoring).
+
 {{< tabs >}}
 {{% tab "Browser" %}}
 
@@ -859,54 +837,12 @@ Statsig does not currently support this integration. Contact support@statsig.com
 {{% /tab %}}
 {{< /tabs >}}
 
-## Analyze your Feature Flag performance in RUM
+### Next steps
 
-Feature flags appear in the context of your RUM Sessions, Views, and Errors as a list.
+[View and analyze][1] your feature flags.
 
-{{< img src="real_user_monitoring/guide/setup-feature-flag-data-collection/feature-flag-list-rum-event.png" alt="Feature Flag list of attributes in RUM Explorer" style="width:75%;">}}
+## Further reading
 
-### Search feature flags using the RUM Explorer
-Search through all the data collected by RUM in the [RUM Explorer][2] to surface trends on feature flags, analyze patterns with greater context, or export them into [dashboards][3] and [monitors][4]. You can search your Sessions, Views, or Errors in the RUM Explorer, with the `@feature_flags.{flag_name}` attribute.
-
-#### Sessions
-Filtering your **Sessions** with the `@feature_flags.{flag_name}` attribute, you can find all sessions in the given time frame where your feature flag was evaluated.
-
-{{< img src="real_user_monitoring/guide/setup-feature-flag-data-collection/rum-explorer-session-feature-flag-search.png" alt="Search Sessions for Feature Flags in the RUM Explorer" style="width:75%;">}}
-
-#### Views
-Filtering your **Views** with the `@feature_flags.{flag_name}` attribute, you can find the specific views in the given time frame where your feature flag was evaluated.
-
-{{< img src="real_user_monitoring/guide/setup-feature-flag-data-collection/rum-explorer-view-feature-flag-search.png" alt="Search Views for Feature Flags in the RUM Explorer" style="width:75%;">}}
-
-#### Errors
-Filtering your **Errors** with the `@feature_flags.{flag_name}` attribute, you can find all the errors in the given time frame that occurred on the View where your feature flag was evaluated
-
-{{< img src="real_user_monitoring/guide/setup-feature-flag-data-collection/rum-explorer-error-feature-flag-search.png" alt="Search Errors for Feature Flags in the RUM Explorer" style="width:75%;">}}
-
-## Troubleshooting
-
-### My feature flag data doesn't reflect what I expect to see
-Feature flags show up in the context of events where they are evaluated, meaning they should show up on the views that the feature flag code logic is run on.
-
-Depending on how you've structured your code and set up your feature flags, you may see unexpected feature flags appear in the context of some events.
-
-For example, to see what **Views** your feature flag is being evaluated on, you can use the RUM Explorer to make a similar query:
-
-{{< img src="real_user_monitoring/guide/setup-feature-flag-data-collection/feature_flag_view_query.png" alt="Search Views for Feature Flags in the RUM Explorer" style="width:75%;">}}
-
-Here are a few examples of reasons why your feature flag is being evaluated on unrelated Views that can help with your investigations:
-
-- A common react component that appears on multiple pages which evaluates feature flags whenever they run.
-- A routing issue where components with a feature flag evaluation are rendered before/after URL changes.
-
-When performing your investigations, you can also scope your data for `View Name`'s that are relevant to your feature flag.
-
-
-## Further Reading
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/browser/setup/
-[2]: https://app.datadoghq.com/rum/explorer
-[3]: /dashboards/
-[4]: /monitors/#create-monitors
-[5]: /real_user_monitoring/feature_flag_tracking
+[1]: /real_user_monitoring/feature_flag_tracking/using_feature_flags
