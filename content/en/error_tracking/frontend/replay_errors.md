@@ -1,0 +1,84 @@
+---
+title: Error Tracking Replay Snippets
+is_beta: true
+private: false
+description: Learn about how to collect replay snippets to ensure that you are seeing the issues that matter to you.
+further_reading:
+- link: '/error_tracking/suspect_commits'
+  tag: 'Documentation'
+  text: 'Learn about how Error Tracking can identify suspect commits'
+- link: '/error_tracking'
+  tag: 'Documentation'
+  text: 'Learn about Error Tracking'
+---
+
+{{< beta-callout url="https://www.datadoghq.com/product-preview/error-tracking-replay-snippets/" btn_hidden="false"  >}}
+Error Tracking Replay snippets is currently in Preview.
+{{< /beta-callout >}}
+
+## Overview
+
+As a frontend engineer, an essential—and often time-consuming—part of the debugging process is reproducing bugs. But it can be difficult to do so without a clear understanding of the actions a user took before your application threw an error.
+
+Error Tracking Replay Snippets allows you to view a pixel-perfect recreation of a user’s journey 15 seconds before and after an error occurred so you can reproduce bugs, save time and eliminate any guesswork.
+
+
+## Setup
+
+1. If you have not set up Datadog Frontend Error Tracking, follow the [in-app setup instructions][1] or see the setup documentation for [browser][2] and [mobile][3].
+2. Configure your application’s replay sample rate, when initializing the SDK. 
+
+{{< tabs >}}
+{{% tab "Browser" %}}
+
+Set the `sessionReplaySampleRate` between 1 and 100. 
+
+```javascript
+import { datadogRum } from '@datadog/browser-rum';
+
+datadogRum.init({
+   applicationId: '<APP_ID>',
+   clientToken: '<CLIENT_TOKEN>',
+   service: '<SERVICE>',
+   env: '<ENV_NAME>',
+   sessionReplaySampleRate: 20,
+   trackResources: true,
+   trackUserInteractions: true,
+});
+```
+
+{{% /tab %}}
+{{% tab "iOS" %}}
+[Learn how to setup and configure your mobile application's error replay][4]
+
+[4]: /real_user_monitoring/session_replay/mobile/setup_and_configuration/?tab=ios
+{{% /tab %}}
+{{% tab "Android" %}}
+[Learn how to setup and configure your mobile application's error replay.][5]
+
+[5]: /real_user_monitoring/session_replay/mobile/setup_and_configuration/?tab=android
+{{% /tab %}}
+{{% tab "Kotlin Multiplatform" %}}
+[Learn how to setup and configure your mobile application's error replay.][6]
+
+[6]: /real_user_monitoring/session_replay/mobile/setup_and_configuration/?tab=kotlinmultiplatform
+{{% /tab %}}
+{{% tab "React Native" %}}
+[Learn how to setup and configure your mobile application's error replay.][7]
+
+[7]: /real_user_monitoring/session_replay/mobile/setup_and_configuration/?tab=reactnative
+{{% /tab %}}
+{{</tabs>}}
+
+## Replay errors
+After viewing key information about the error, such as the error message, and stacktrace you can immediately pivot directly from the issue summary to a live reproduction of the most recent session that experienced the error.
+
+{{< img src="error_tracking/error-replay.png" alt="Error Tracking Replay Snippet" style="width:90%" >}}
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://app.datadoghq.com/error-tracking/settings/setup/client
+[2]: /error_tracking/frontend/browser#setup
+[3]: /error_tracking/frontend/mobile
