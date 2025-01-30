@@ -21,7 +21,7 @@ aliases:
     {{< nextlink href="/tracing/service_catalog/use_cases/appsec_management" >}}Manage AppSec Posture Across Development Teams{{< /nextlink >}}
     {{< nextlink href="/tracing/service_catalog/use_cases/dev_onboarding" >}}Accelerate Developer Onboarding{{< /nextlink >}}
     {{< nextlink href="/tracing/service_catalog/use_cases/dependency_management" >}}Manage and Map Dependencies{{< /nextlink >}}
-    {{< nextlink href="/tracing/service_catalog/use_cases/incident_response" >}}Streamline Incident Response{{< /nextlink >}}
+    {{< nextlink href="/tracing/service_catalog/use_cases/incident_response" >}}Improve Incident Response{{< /nextlink >}}
     {{< nextlink href="/tracing/service_catalog/use_cases/pipeline_visibility" >}}Streamline the Development Lifecycle with CI Visibility{{< /nextlink >}}
     {{< nextlink href="/tracing/service_catalog/use_cases/production_readiness" >}}Evaluate Production Readiness{{< /nextlink >}}
 {{< /whatsnext >}}

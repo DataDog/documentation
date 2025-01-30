@@ -1,5 +1,5 @@
 ---
-title: Streamline Incident Response
+title: Improve Incident Response
 aliases:
   - /tracing/service_catalog/guides/incident_response
   - /service_catalog/guides/incident_response
