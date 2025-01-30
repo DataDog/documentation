@@ -103,7 +103,7 @@ resource "datadog_integration_aws_account" "datadog_integration" {
    * `AWS_PERMISSIONS_LIST`: The IAM policies needed by Datadog AWS integrations. The current list is available in the [Datadog AWS integration][1] documentation.
    * `AWS_ACCOUNT_ID`: Your AWS account ID.
 
-   See the [Terraform Registry][2] for further example usage and the full list of optional parameters, as well as additional Datadog resources.
+See the [Terraform Registry][2] for further example usage and the full list of optional parameters, as well as additional Datadog resources.
 
 ```hcl
 data "aws_iam_policy_document" "datadog_aws_integration_assume_role" {
