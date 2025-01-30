@@ -71,7 +71,7 @@ Follow [these steps][7] to setup and configure your mobile application's error r
 {{</tabs>}}
 
 ## Replay errors
-After reviewing key information about the error, such as the error message and stack trace, you can immediately pivot directly from the issue summary to a live reproduction of the most recent session that experienced the error. 
+After reviewing key information about the error, such as the error message and stack trace, you can immediately pivot directly from the issue summary to a live reproduction of the most recent session that experienced the error. Scroll down below the stack trace and click on the preview of the replay to see a users actions before the error occured. 
 
 {{< img src="error_tracking/error-replay.png" alt="Error Tracking Replay Snippet" style="width:90%" >}}
 
