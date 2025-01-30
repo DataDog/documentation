@@ -607,7 +607,7 @@ menu:
       parent: otel-setup-intake-endpoint
       weight: 1001
     - name: Instrument Your Applications
-      url: /
+      url: /opentelemetry/instrument/
       identifier: otel-instrumentation
       parent: opentelemetry_top_level
       weight: 2

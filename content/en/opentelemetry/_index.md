@@ -40,20 +40,42 @@ cascade:
 
 ## Overview
 
-[OpenTelemetry][1] is an open source observability framework that provides IT teams with standardized protocols and tools for collecting and routing telemetry data. Created as an incubator project by the [Cloud Native Computing Foundation][2] (CNCF), OpenTelemetry provides a consistent format for instrumenting, generating, gathering, and exporting application telemetry data—namely metrics, logs, and traces—to monitoring platforms for analysis and insight.
+[OpenTelemetry][1] (OTel) is an open source observability framework that provides IT teams with standardized protocols and tools for collecting and routing telemetry data. Created as an incubator project by the [Cloud Native Computing Foundation][2] (CNCF), OpenTelemetry provides a consistent format for instrumenting, generating, gathering, and exporting application telemetry data—namely metrics, logs, and traces—to monitoring platforms for analysis and insight.
 
-{{< img src="tracing/setup/open_standards/otel-flow.png" alt="Map options for generating telemetry data and sending it to observability products.">}}
+## Send OpenTelemetry data to Datadog
 
-If your applications and services are instrumented with OpenTelemetry libraries, you can choose how to get traces, metrics, and logs data to the Datadog backend:
+If your applications and services are instrumented with OpenTelemetry libraries, you can choose how to get traces, metrics, and logs data to the Datadog backend.
+
+<div class="alert alert-info"><strong>Not sure which setup is right for you?</strong></br> See the <a href="/opentelemetry/compatibility/">Feature Compatibility</a> table to understand which Datadog features are supported.</div>
+
+### Use the OpenTelemetry Collector
+
+**Best for**: New or existing OTel users that want a completely vendor-neutral setup.
+
+The OpenTelemetry Collector with Datadog Exporter provides:
+- Complete vendor neutrality for sending OpenTelemetry data to Datadog
+- Flexible deployment options
+- No need to install the Datadog Agent or tracing libraries
 
 {{< whatsnext desc=" " >}}
-    {{< nextlink href="/opentelemetry/setup/collector_exporter/" >}}Using the OpenTelemetry Collector{{< /nextlink >}}
-    {{< nextlink href="/opentelemetry/setup/otlp_ingest_in_the_agent" >}}Using OTLP Ingest in the Datadog Agent{{< /nextlink >}}
-    {{< nextlink href="/opentelemetry/setup/intake_endpoint" >}}Using the OTLP Intake Endpoint{{< /nextlink >}}
+    {{< nextlink href="/opentelemetry/setup/collector_exporter/" >}}Learn more about using the OTel Collector{{< /nextlink >}}
+{{< /whatsnext >}}
+    
+### Use OTLP ingest in the Datadog Agent
+
+**Best for**: Environments already using the Datadog Agent or requiring Agent-based features.
+
+OTLP Ingest in the Datadog Agent provides:
+- Native integration with Datadog Agent features
+- Streamlined deployment with existing Agent infrastructure
+
+{{< whatsnext desc=" " >}}
+    {{< nextlink href="/opentelemetry/setup/otlp_ingest_in_the_agent" >}}Learn more about using OTLP ingest in the Agent{{< /nextlink >}}
 {{< /whatsnext >}}
 
-<div class="alert alert-info"><strong>Not sure which setup is right for you?</strong></br> See the <a href="/opentelemetry/compatibility/">Feature Compatibility</a> table to understand which features are supported.</div>
-
+{{< learning-center-callout header="Try \"Introduction to OTel with Datadog\" in the Learning Center" btn_title="Enroll Now" btn_url="https://learn.datadoghq.com/courses/understanding-opentelemetry" hide_image="true" >}}
+  Learn the fundamentals of OpenTelemetry, including its capabilities and benefits, key components, and how OTel and Datadog work together.
+{{< /learning-center-callout >}}
 
 ## Further reading
 
@@ -65,7 +87,3 @@ If your applications and services are instrumented with OpenTelemetry libraries,
 [4]: /opentelemetry/otlp_ingest_in_the_agent/
 [5]: /tracing/trace_collection/trace_context_propagation/
 [6]: https://www.w3.org/TR/trace-context/
-
-{{< learning-center-callout header="Try Understanding OpenTelemetry in the Learning Center" btn_title="Enroll Now" btn_url="https://learn.datadoghq.com/courses/understanding-opentelemetry">}}
-  Discover the fundamentals of OpenTelemetry, an open source standard for telemetry data collection. This course provides an overview of OpenTelemetry's capabilities and benefits, preparing you for integrating observability into your applications.
-{{< /learning-center-callout >}}
