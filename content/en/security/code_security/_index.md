@@ -19,7 +19,7 @@ Code Security helps teams implement DevSecOps throughout the organization:
 ## Static Code Analysis (SAST)
 Static Code Analysis (SAST) analyzes pre-production code to identify security and quality issues. You can embed best security and development practices throughout the software development lifecycle with:
 - IDE integration to flag violations in real time with deterministic suggested fixes
-- In-line GitHub pull request comments with deterministic suggested fixes
+- In-line GitHub pull request comments with deterministic suggested fixes and incremental/diff-aware scanning
 - Ability to open a pull request to fix a violation directly from Datadog 
 
 Scans can run via your CI/CD pipelines or directly in Datadog with hosted scanning (GitHub-only).
