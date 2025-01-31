@@ -17,7 +17,6 @@
 import { isPromise } from '../utils';
 import { ClientFunction, ClientVariable, type Tag } from '../types';
 import { FunctionRefGenerator } from '../functions';
-import { Config } from '../types';
 
 import {
   Node,
@@ -27,7 +26,23 @@ import {
   Schema
 } from '../types';
 
-type Condition = { condition: ClientFunction | ClientVariable; children: Node[] };
+type Condition = {
+  condition: ClientFunction | ClientVariable;
+  inline: boolean;
+  children: Node[];
+};
+
+type TransformedCondition = {
+  condition: ClientFunction | ClientVariable;
+  children: MaybePromise<RenderableTreeNodes>[];
+  inline: boolean;
+};
+
+type ResolvedCondition = {
+  condition: ClientFunction | ClientVariable;
+  children: RenderableTreeNode[];
+  inline: boolean;
+};
 
 export function truthy(param: any) {
   if (typeof param === 'object' && 'value' in param) {
@@ -36,9 +51,6 @@ export function truthy(param: any) {
   return param !== false && param !== undefined && param !== null;
 }
 
-/**
- * Join two conditions with an "and" function.
- */
 function joinConditions(
   condition1: ClientFunction | ClientVariable,
   condition2: ClientFunction | ClientVariable
@@ -57,10 +69,6 @@ function joinConditions(
   return joinedConditions;
 }
 
-/**
- * Wrap a given condition in a "not" function
- * that flips the outcome of the condition.
- */
 function negateCondition(condition: ClientFunction | ClientVariable): ClientFunction {
   return {
     $$mdtype: 'Function',
@@ -73,18 +81,16 @@ function negateCondition(condition: ClientFunction | ClientVariable): ClientFunc
   };
 }
 
-/**
- * For a given if tag and any of its nested else tags,
- * create a series of conditions that represent each
- * tag, its condition, and its children.
- */
 function renderConditions(node: Node): Condition[] {
   const conditions: Condition[] = [];
 
   let currentCondition: Condition = {
     condition: node.attributes.primary,
+    inline: node.attributes.inline,
     children: []
   };
+
+  conditions.push(currentCondition);
 
   for (const child of node.children) {
     if (child.type === 'tag' && child.tag === 'else') {
@@ -101,23 +107,82 @@ function renderConditions(node: Node): Condition[] {
 
         currentCondition = {
           condition: elseTagCondition,
+          inline: node.attributes.inline,
           children: []
         };
       } else {
         currentCondition = {
           condition: negateCondition(precedingCondition),
+          inline: node.attributes.inline,
           children: []
         };
       }
+      conditions.push(currentCondition);
     } else {
       currentCondition.children.push(child);
     }
   }
 
-  console.log('rendered conditions:', JSON.stringify(conditions, null, 2));
   return conditions;
 }
 
+export const tagIf: Schema = {
+  attributes: {
+    primary: { type: Object, render: false }
+  },
+
+  transform(node, config) {
+    const buildEnclosingTag = (resolvedCondition: ResolvedCondition) => {
+      const enclosingTag: Tag = {
+        $$mdtype: 'Tag',
+        name: resolvedCondition.inline ? 'span' : 'div',
+        if: resolvedCondition.condition,
+        attributes: {
+          display: truthy(resolvedCondition.condition) ? 'true' : 'false'
+        },
+        children: resolvedCondition.children
+      };
+
+      return enclosingTag;
+    };
+
+    const conditions = renderConditions(node);
+    const transformedConditions: {
+      condition: ClientFunction | ClientVariable;
+      children: MaybePromise<RenderableTreeNodes>[];
+      inline: boolean;
+    }[] = [];
+
+    for (const { condition, inline, children } of conditions) {
+      const nodes = children.flatMap<MaybePromise<RenderableTreeNodes>>((child) =>
+        child.transform(config)
+      );
+      transformedConditions.push({ condition, children: nodes, inline });
+    }
+
+    const allNodes = transformedConditions.flatMap<MaybePromise<RenderableTreeNodes>>(
+      (condition) => {
+        return condition.children;
+      }
+    );
+
+    if (allNodes.some(isPromise)) {
+      return Promise.all(allNodes).then(() => {
+        return transformedConditions.map((condition) => {
+          condition.children = condition.children.flat();
+          return buildEnclosingTag(condition as ResolvedCondition);
+        });
+      });
+    } else {
+      return transformedConditions.map((condition) => {
+        condition.children = condition.children.flat();
+        return buildEnclosingTag(condition as ResolvedCondition);
+      });
+    }
+  }
+};
+
+/*
 export const tagIf: Schema = {
   attributes: {
     primary: { type: Object, render: true }
@@ -153,6 +218,7 @@ export const tagIf: Schema = {
     }
   }
 };
+*/
 
 export const tagElse: Schema = {
   selfClosing: true,
