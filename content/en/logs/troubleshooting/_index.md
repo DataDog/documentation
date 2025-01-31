@@ -6,7 +6,7 @@ If you experience unexpected behavior with Datadog Logs, there are a few common 
 
 ## Missing logs - data access restrictions
 
-You cannot see any logs neither in the [Log Explorer][2] or [Live Tail][3]. This may be happening because your role is part of a restriction query.
+You cannot see any logs in the [Log Explorer][2] or [Live Tail][3]. This may be happening because your role is part of a restriction query.
 
 See [Check Restrictions Queries][4] for more information on configuring Logs RBAC data access controls.
 
