@@ -50,7 +50,7 @@ You can create custom rules using these methods:
 - **Advanced:**  Create custom Agent and detection rules individually by defining their threat detection expressions. 
   - For steps on this method, see [Create a custom agent rule][2] and create a custom detection rule.
 
-## Detection rule policies
+## Create the custom Agent and detection rules together
 
 CSM custom Agent rules are grouped into policies. Policies group Agent rules to help you apply multiple rules more efficiently.
 
@@ -120,7 +120,7 @@ To use the Assisted rule creator:
    - To detect nonstandard and suspicious changes to files, select **File integrity monitoring (FIM)**.
    - To track and analyze system software processes for malicious behavior or policy violations, select **Process activity monitoring**.
    - Enter the file/process names or paths to monitor. 
-5. Specify more conditions. Enter any arguments to add to the threat rule expression. For example, the argument `foo` is added as `process.argv in ["foo"]`.
+5. Specify more conditions. Enter any arguments to add to the [threat rule expression][16]. For example, the argument `foo` is added as `process.argv in ["foo"]`.
 6. Set severity and notification lists. 
    - Select the severity for the signal generated when this threat is detected. 
    - Select notification lists to notify when a signal is generated.
@@ -131,7 +131,7 @@ To use the Assisted rule creator:
 
 ## Create a custom Agent rule
 
-You can create a custom Agent rule and deploy it as a new Agent policy. Later, when defining a custom [detection rule][3], you reference the custom Agent rule and add expression parameters.
+You can create a custom Agent rule and deploy it as part of a new Agent policy. Later, when defining a custom [detection rule][3], you reference the custom Agent rule and add expression parameters.
 
 1. Go to [Security > Cloud Security Managment > Agent Configuration][3].
 2. Create or open a policy.
@@ -144,7 +144,7 @@ After you create a custom Agent rule, the change is saved along with other pendi
 
 ### Remote Configuration
 
-To perform Remote Configuration, you use the Datadog UI to apply policies to infrastructure. When you enable a policy, it is applied to the infrastructure identified by the policy's tags.
+To perform remote configuration, you use the Datadog UI to apply policies to infrastructure. When you enable a policy, it is applied to the infrastructure identified by the policy's tags.
 
 1. On the **Agent Configuration** page, hover over a policy and click **Apply Tags & Deploy Policy**. You can also open a policy and click **Apply Tags & Deploy Policy**.
 2. Add tags to identify the target infrastructure.
@@ -270,3 +270,4 @@ You can also disable a rule by setting the **Then...** section of a rule to **Do
 [13]: #disable-default-agent-rules
 [14]: #create-the-custom-agent-and-detection-rules-together
 [15]: https://app.datadoghq.com/cost/settings/tags
+[16]: /security/threats/agent_expressions/
