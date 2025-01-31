@@ -51,7 +51,7 @@ Any AWS service that generates logs into a S3 bucket or a CloudWatch Log Group i
 | [VPC][40]                          | [Enable Amazon VPC logs][41]                                                                                   | [Manual][42] log collection.                                                                                                 |
 | [Step Functions][52]               | [Enable Amazon Step Functions logs][53]                                                                        | [Manual][54] log collection.                                                                                                 |
 | [Web Application Firewall][49]     | [Enable Amazon WAF logs][50]                                                                                   | [Manual][51] and [automatic](#automatically-set-up-triggers) log collection.                                                                                               |
-| [MWAA][55]                         | [Enable Amazon MWAA logs][56]                                                                                  | [Manual][56] log collection.                                                                                                 |
+| [MWAA][55]                         | [Enable Amazon MWAA logs][56]                                                                                  | [Manual][56] and [automatic](#automatically-set-up-triggers) log collection.                                                                                                 |
 
 
 ## Set up triggers
@@ -67,6 +67,7 @@ Datadog can automatically configure triggers on the Datadog Forwarder Lambda fun
 
 | Source                      | Location       |
 | --------------------------- | -------------- |
+| Apache Airflow (MWAA)       | Cloudwatch     |
 | API Gateway Access Logs     | CloudWatch     |
 | API Gateway Execution Logs  | CloudWatch     |
 | Application ELB Access Logs | S3             |
@@ -87,6 +88,8 @@ Datadog can automatically configure triggers on the Datadog Forwarder Lambda fun
 2. Ensure the policy of the IAM role used for [Datadog-AWS integration][43] has the following permissions. Information on how these permissions are used can be found in the descriptions below:
 
     ```text
+    "airflow:ListEnvironments",
+    "airflow:GetEnvironment",
     "cloudfront:GetDistributionConfig",
     "cloudfront:ListDistributions",
     "cloudtrail:GetTrail",
@@ -115,6 +118,8 @@ Datadog can automatically configure triggers on the Datadog Forwarder Lambda fun
 
     | AWS Permission                                              | Description                                                                  |
     | ----------------------------------------------------------- | ---------------------------------------------------------------------------- |
+    | `airflow:ListEnvironments`                                  | List all MWAA environment names                                              |
+    | `airflow:GetEnvironment`                                    | Get information about a MWAA environment                                     |
     | `cloudfront:GetDistributionConfig`                          | Get the name of the S3 bucket containing CloudFront access logs.             |
     | `cloudfront:ListDistributions`                              | List all CloudFront distributions.                                           |
     | `cloudtrail:GetTrail`                                       | Get Trail logging information.                                               |
@@ -135,7 +140,7 @@ Datadog can automatically configure triggers on the Datadog Forwarder Lambda fun
     | `ssm:ListCommands`                                          | List all SSM commands.                                                       |
     | `states:ListStateMachines`                                  | List all Step Functions.                                                     |
     | `states:DescribeStateMachine`                               | Get logging details about a Step Function.                                   |
-    | `wafv2:ListLoggingConfigurations`                           | List all logging configurations of the Web Application Firewall.            |
+    | `wafv2:ListLoggingConfigurations`                           | List all logging configurations of the Web Application Firewall.             |
     | `logs:PutSubscriptionFilter`                                | Add a Lambda trigger based on CloudWatch Log events                          |
     | `logs:DeleteSubscriptionFilter`                             | Remove a Lambda trigger based on CloudWatch Log events                       |
     | `logs:DescribeSubscriptionFilters`                          | List the subscription filters for the specified log group.                   |
