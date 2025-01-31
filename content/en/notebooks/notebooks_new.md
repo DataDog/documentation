@@ -93,7 +93,6 @@ The following graph types are expected to be available in Notebooks soon:
 - Topology Map
 - Service Summary
 
-
 In a Notebook graph cell, hover over the widget to display options for editing and configuring the graph. 
 
 To edit the query or configure the graph's display, click the pencil icon or Command+click to open the full graph editor. You can adjust the local timeframe or link the graph to the global notebook time by clicking the clock icon.

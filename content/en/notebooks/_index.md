@@ -1,7 +1,7 @@
 ---
 title: Notebooks
 type: multi-code-lang
-external_redirect: /notebooks/notebooks_legacy
+external_redirect: /notebooks/notebooks_new
 ---
 
 {{< whatsnext desc="Notebook versions" >}}
