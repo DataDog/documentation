@@ -153,6 +153,24 @@ It is likely that the [test case configuration][13] is unstable because one or m
 
 The best way to fix this is to make sure that the test parameters are the same between test runs.
 
+## Session history, performance or code coverage tab only show a single execution
+
+This is likely caused by an unstable test session fingerprint. The default value for the test session fingerprint includes the test command, so an unstable test command might cause the test session fingerprint to be unstable. Some examples of unstable test commands include:
+
+- `yarn test --temp-dir=/var/folders/t1/rs2htfh55mz9px2j4prmpg_c0000gq/T`
+- `mvn test --temp-dir=/var/folders/t1/rs2htfh55mz9px2j4prmpg_c0000gq/T`
+- `bundle exec rspec --temp-dir=/var/folders/t1/rs2htfh55mz9px2j4prmpg_c0000gq/T`
+- `dotnet test --results-directory /var/folders/t1/rs2htfh55mz9px2j4prmpg_c0000gq/T`
+
+This can be solved by using the `DD_TEST_SESSION_NAME` environment variable. Use `DD_TEST_SESSION_NAME` to identify a group of tests. Example values for this tag include:
+
+- `unit-tests`
+- `integration-tests`
+- `smoke-tests`
+- `flaky-tests`
+- `ui-tests`
+- `backend-tests`
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
