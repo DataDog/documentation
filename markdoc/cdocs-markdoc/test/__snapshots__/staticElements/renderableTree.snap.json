@@ -1,0 +1,165 @@
+{
+  "$$mdtype": "Tag",
+  "name": "article",
+  "attributes": {},
+  "children": [
+    {
+      "$$mdtype": "Tag",
+      "name": "h1",
+      "attributes": {},
+      "children": [
+        "Static Elements Test"
+      ]
+    },
+    {
+      "$$mdtype": "Tag",
+      "name": "p",
+      "attributes": {},
+      "children": [
+        "This test contains non-conditional Markdown elements that can be rendered by the Markdown processor."
+      ]
+    },
+    {
+      "$$mdtype": "Tag",
+      "name": "h2",
+      "attributes": {},
+      "children": [
+        "Lists"
+      ]
+    },
+    {
+      "$$mdtype": "Tag",
+      "name": "p",
+      "attributes": {},
+      "children": [
+        "Here's a list:"
+      ]
+    },
+    {
+      "$$mdtype": "Tag",
+      "name": "ul",
+      "attributes": {},
+      "children": [
+        {
+          "$$mdtype": "Tag",
+          "name": "li",
+          "attributes": {},
+          "children": [
+            "One"
+          ]
+        },
+        {
+          "$$mdtype": "Tag",
+          "name": "li",
+          "attributes": {},
+          "children": [
+            "Two"
+          ]
+        },
+        {
+          "$$mdtype": "Tag",
+          "name": "li",
+          "attributes": {},
+          "children": [
+            "Three"
+          ]
+        }
+      ]
+    },
+    {
+      "$$mdtype": "Tag",
+      "name": "h2",
+      "attributes": {},
+      "children": [
+        "Links"
+      ]
+    },
+    {
+      "$$mdtype": "Tag",
+      "name": "p",
+      "attributes": {},
+      "children": [
+        "Here's a link to ",
+        {
+          "$$mdtype": "Tag",
+          "name": "a",
+          "attributes": {
+            "href": "https://www.datadoghq.com"
+          },
+          "children": [
+            "Datadog"
+          ]
+        },
+        "."
+      ]
+    },
+    {
+      "$$mdtype": "Tag",
+      "name": "h2",
+      "attributes": {},
+      "children": [
+        "Text formatting"
+      ]
+    },
+    {
+      "$$mdtype": "Tag",
+      "name": "p",
+      "attributes": {},
+      "children": [
+        "How about some ",
+        {
+          "$$mdtype": "Tag",
+          "name": "strong",
+          "attributes": {},
+          "children": [
+            "bold"
+          ]
+        },
+        " text? Or maybe some ",
+        {
+          "$$mdtype": "Tag",
+          "name": "em",
+          "attributes": {},
+          "children": [
+            "italic"
+          ]
+        },
+        " text?"
+      ]
+    },
+    {
+      "$$mdtype": "Tag",
+      "name": "h2",
+      "attributes": {},
+      "children": [
+        "Code blocks"
+      ]
+    },
+    {
+      "$$mdtype": "Tag",
+      "name": "pre",
+      "attributes": {
+        "data-language": "python"
+      },
+      "children": [
+        "def hello():\n    print(\"Hello, world!\")\n"
+      ]
+    },
+    {
+      "$$mdtype": "Tag",
+      "name": "h2",
+      "attributes": {},
+      "children": [
+        "Description lists"
+      ]
+    },
+    {
+      "$$mdtype": "Tag",
+      "name": "p",
+      "attributes": {},
+      "children": [
+        "Here's a description list:"
+      ]
+    }
+  ]
+}

@@ -1,16 +1,15 @@
-import CdocsMarkdoc from '../dist';
+import CdocsMarkdoc from '../../dist';
 import fs from 'fs';
 import { describe, test, expect } from 'vitest';
 
-describe('Function unit tests and nested functions', () => {
-  // retrieve test input file
+describe('Functions and conditional tags', () => {
   const inputPath = __dirname + '/input.mdoc';
   const inputString = fs.readFileSync(inputPath, 'utf-8');
 
-  // Build the AST
+  // Parse the markup to a syntax tree
   const ast = CdocsMarkdoc.parse(inputString);
 
-  // Build the renderable tree
+  // Apply variable values to the content
   const renderableTree = CdocsMarkdoc.transform(ast, {
     variables: {
       test_string: 'Datadog',
@@ -21,13 +20,13 @@ describe('Function unit tests and nested functions', () => {
 
   test('the AST matches the snapshot', () => {
     expect(JSON.stringify(ast, null, 2)).toMatchFileSnapshot(
-      './__snapshots__/integration/ast.snap.json'
+      '../__snapshots__/functionsAndConditions/ast.snap.json'
     );
   });
 
   test('the RenderableTree matches the snapshot', () => {
     expect(JSON.stringify(renderableTree, null, 2)).toMatchFileSnapshot(
-      './__snapshots__/integration/renderableTree.snap.json'
+      '../__snapshots__/functionsAndConditions/renderableTree.snap.json'
     );
   });
 

@@ -154,7 +154,7 @@
           "name": "code",
           "attributes": {},
           "children": [
-            "equals"
+            "else"
           ]
         },
         " test"
@@ -198,6 +198,267 @@
       "name": "div",
       "if": {
         "$$mdtype": "Function",
+        "name": "not",
+        "parameters": {
+          "0": {
+            "$$mdtype": "Function",
+            "name": "equals",
+            "value": true,
+            "parameters": {
+              "0": {
+                "$$mdtype": "Variable",
+                "path": [
+                  "always_true"
+                ],
+                "value": true
+              },
+              "1": true
+            },
+            "ref": "0"
+          }
+        },
+        "value": false,
+        "ref": "50"
+      },
+      "attributes": {
+        "display": "false"
+      },
+      "children": [
+        {
+          "$$mdtype": "Tag",
+          "name": "p",
+          "attributes": {},
+          "children": [
+            "HIDDEN"
+          ]
+        }
+      ]
+    },
+    {
+      "$$mdtype": "Tag",
+      "name": "div",
+      "if": {
+        "$$mdtype": "Function",
+        "name": "equals",
+        "value": false,
+        "parameters": {
+          "0": {
+            "$$mdtype": "Variable",
+            "path": [
+              "test_string"
+            ],
+            "value": "Datadog"
+          },
+          "1": "This will fail"
+        },
+        "ref": "2"
+      },
+      "attributes": {
+        "display": "false"
+      },
+      "children": [
+        {
+          "$$mdtype": "Tag",
+          "name": "p",
+          "attributes": {},
+          "children": [
+            "HIDDEN"
+          ]
+        }
+      ]
+    },
+    {
+      "$$mdtype": "Tag",
+      "name": "div",
+      "if": {
+        "$$mdtype": "Function",
+        "name": "and",
+        "parameters": {
+          "0": {
+            "$$mdtype": "Function",
+            "name": "not",
+            "parameters": {
+              "0": {
+                "$$mdtype": "Function",
+                "name": "equals",
+                "value": false,
+                "parameters": {
+                  "0": {
+                    "$$mdtype": "Variable",
+                    "path": [
+                      "test_string"
+                    ],
+                    "value": "Datadog"
+                  },
+                  "1": "This will fail"
+                },
+                "ref": "2"
+              }
+            },
+            "value": true,
+            "ref": "51"
+          },
+          "1": {
+            "$$mdtype": "Function",
+            "name": "equals",
+            "value": true,
+            "parameters": {
+              "0": {
+                "$$mdtype": "Variable",
+                "path": [
+                  "test_string"
+                ],
+                "value": "Datadog"
+              },
+              "1": "Datadog"
+            },
+            "ref": "1"
+          }
+        },
+        "value": true,
+        "ref": "52"
+      },
+      "attributes": {
+        "display": "true"
+      },
+      "children": [
+        {
+          "$$mdtype": "Tag",
+          "name": "p",
+          "attributes": {},
+          "children": [
+            "SHOWN"
+          ]
+        }
+      ]
+    },
+    {
+      "$$mdtype": "Tag",
+      "name": "div",
+      "if": {
+        "$$mdtype": "Function",
+        "name": "not",
+        "parameters": {
+          "0": {
+            "$$mdtype": "Function",
+            "name": "and",
+            "parameters": {
+              "0": {
+                "$$mdtype": "Function",
+                "name": "not",
+                "parameters": {
+                  "0": {
+                    "$$mdtype": "Function",
+                    "name": "equals",
+                    "value": false,
+                    "parameters": {
+                      "0": {
+                        "$$mdtype": "Variable",
+                        "path": [
+                          "test_string"
+                        ],
+                        "value": "Datadog"
+                      },
+                      "1": "This will fail"
+                    },
+                    "ref": "2"
+                  }
+                },
+                "value": true,
+                "ref": "51"
+              },
+              "1": {
+                "$$mdtype": "Function",
+                "name": "equals",
+                "value": true,
+                "parameters": {
+                  "0": {
+                    "$$mdtype": "Variable",
+                    "path": [
+                      "test_string"
+                    ],
+                    "value": "Datadog"
+                  },
+                  "1": "Datadog"
+                },
+                "ref": "1"
+              }
+            },
+            "value": true,
+            "ref": "52"
+          }
+        },
+        "value": false,
+        "ref": "53"
+      },
+      "attributes": {
+        "display": "false"
+      },
+      "children": [
+        {
+          "$$mdtype": "Tag",
+          "name": "p",
+          "attributes": {},
+          "children": [
+            "HIDDEN"
+          ]
+        }
+      ]
+    },
+    {
+      "$$mdtype": "Tag",
+      "name": "h2",
+      "attributes": {},
+      "children": [
+        {
+          "$$mdtype": "Tag",
+          "name": "code",
+          "attributes": {},
+          "children": [
+            "equals"
+          ]
+        },
+        " test"
+      ]
+    },
+    {
+      "$$mdtype": "Tag",
+      "name": "div",
+      "if": {
+        "$$mdtype": "Function",
+        "name": "equals",
+        "value": true,
+        "parameters": {
+          "0": {
+            "$$mdtype": "Variable",
+            "path": [
+              "always_true"
+            ],
+            "value": true
+          },
+          "1": true
+        },
+        "ref": "3"
+      },
+      "attributes": {
+        "display": "true"
+      },
+      "children": [
+        {
+          "$$mdtype": "Tag",
+          "name": "p",
+          "attributes": {},
+          "children": [
+            "SHOWN"
+          ]
+        }
+      ]
+    },
+    {
+      "$$mdtype": "Tag",
+      "name": "div",
+      "if": {
+        "$$mdtype": "Function",
         "name": "equals",
         "value": true,
         "parameters": {
@@ -210,7 +471,7 @@
           },
           "1": "Datadog"
         },
-        "ref": "1"
+        "ref": "4"
       },
       "attributes": {
         "display": "true"
@@ -243,7 +504,7 @@
           },
           "1": true
         },
-        "ref": "2"
+        "ref": "5"
       },
       "attributes": {
         "display": "false"
@@ -276,7 +537,7 @@
           },
           "1": "Hello"
         },
-        "ref": "3"
+        "ref": "6"
       },
       "attributes": {
         "display": "false"
@@ -441,7 +702,7 @@
             "value": false
           }
         },
-        "ref": "4"
+        "ref": "7"
       },
       "attributes": {
         "display": "true"
@@ -479,7 +740,7 @@
               },
               "1": "Hello"
             },
-            "ref": "5"
+            "ref": "8"
           },
           "1": {
             "$$mdtype": "Function",
@@ -495,10 +756,10 @@
               },
               "1": "Datadog"
             },
-            "ref": "6"
+            "ref": "9"
           }
         },
-        "ref": "7"
+        "ref": "10"
       },
       "attributes": {
         "display": "true"
@@ -535,7 +796,7 @@
             ]
           }
         },
-        "ref": "8"
+        "ref": "11"
       },
       "attributes": {
         "display": "false"
@@ -590,7 +851,7 @@
             "value": true
           }
         },
-        "ref": "9"
+        "ref": "12"
       },
       "attributes": {
         "display": "true"
@@ -629,7 +890,7 @@
             "value": false
           }
         },
-        "ref": "10"
+        "ref": "13"
       },
       "attributes": {
         "display": "false"
@@ -667,7 +928,7 @@
               },
               "1": "Hello"
             },
-            "ref": "11"
+            "ref": "14"
           },
           "1": {
             "$$mdtype": "Function",
@@ -683,10 +944,10 @@
               },
               "1": "Datadog"
             },
-            "ref": "12"
+            "ref": "15"
           }
         },
-        "ref": "13"
+        "ref": "16"
       },
       "attributes": {
         "display": "false"
@@ -734,7 +995,7 @@
             "value": false
           }
         },
-        "ref": "14"
+        "ref": "17"
       },
       "attributes": {
         "display": "true"
@@ -772,10 +1033,10 @@
               },
               "1": "Hello"
             },
-            "ref": "15"
+            "ref": "18"
           }
         },
-        "ref": "16"
+        "ref": "19"
       },
       "attributes": {
         "display": "true"
@@ -807,7 +1068,7 @@
             "value": true
           }
         },
-        "ref": "17"
+        "ref": "20"
       },
       "attributes": {
         "display": "false"
@@ -845,10 +1106,10 @@
               },
               "1": "Datadog"
             },
-            "ref": "18"
+            "ref": "21"
           }
         },
-        "ref": "19"
+        "ref": "22"
       },
       "attributes": {
         "display": "false"
@@ -893,7 +1154,7 @@
                 "value": false
               }
             },
-            "ref": "20"
+            "ref": "23"
           },
           "1": {
             "$$mdtype": "Function",
@@ -908,10 +1169,10 @@
                 "value": true
               }
             },
-            "ref": "21"
+            "ref": "24"
           }
         },
-        "ref": "22"
+        "ref": "25"
       },
       "attributes": {
         "display": "true"
@@ -949,7 +1210,7 @@
               },
               "1": "Datadog"
             },
-            "ref": "23"
+            "ref": "26"
           },
           "1": {
             "$$mdtype": "Function",
@@ -965,10 +1226,10 @@
               },
               "1": "Hello"
             },
-            "ref": "24"
+            "ref": "27"
           }
         },
-        "ref": "25"
+        "ref": "28"
       },
       "attributes": {
         "display": "true"
@@ -1010,44 +1271,6 @@
                     "value": false
                   }
                 },
-                "ref": "26"
-              },
-              "1": {
-                "$$mdtype": "Function",
-                "name": "not",
-                "value": false,
-                "parameters": {
-                  "0": {
-                    "$$mdtype": "Variable",
-                    "path": [
-                      "always_true"
-                    ],
-                    "value": true
-                  }
-                },
-                "ref": "27"
-              }
-            },
-            "ref": "28"
-          },
-          "1": {
-            "$$mdtype": "Function",
-            "name": "or",
-            "value": true,
-            "parameters": {
-              "0": {
-                "$$mdtype": "Function",
-                "name": "not",
-                "value": true,
-                "parameters": {
-                  "0": {
-                    "$$mdtype": "Variable",
-                    "path": [
-                      "always_false"
-                    ],
-                    "value": false
-                  }
-                },
                 "ref": "29"
               },
               "1": {
@@ -1067,9 +1290,47 @@
               }
             },
             "ref": "31"
+          },
+          "1": {
+            "$$mdtype": "Function",
+            "name": "or",
+            "value": true,
+            "parameters": {
+              "0": {
+                "$$mdtype": "Function",
+                "name": "not",
+                "value": true,
+                "parameters": {
+                  "0": {
+                    "$$mdtype": "Variable",
+                    "path": [
+                      "always_false"
+                    ],
+                    "value": false
+                  }
+                },
+                "ref": "32"
+              },
+              "1": {
+                "$$mdtype": "Function",
+                "name": "not",
+                "value": false,
+                "parameters": {
+                  "0": {
+                    "$$mdtype": "Variable",
+                    "path": [
+                      "always_true"
+                    ],
+                    "value": true
+                  }
+                },
+                "ref": "33"
+              }
+            },
+            "ref": "34"
           }
         },
-        "ref": "32"
+        "ref": "35"
       },
       "attributes": {
         "display": "true"
@@ -1106,11 +1367,11 @@
                 "value": false
               }
             },
-            "ref": "33"
+            "ref": "36"
           },
           "1": true
         },
-        "ref": "34"
+        "ref": "37"
       },
       "attributes": {
         "display": "true"
@@ -1159,10 +1420,10 @@
                     "value": true
                   }
                 },
-                "ref": "35"
+                "ref": "38"
               }
             },
-            "ref": "36"
+            "ref": "39"
           },
           "1": {
             "$$mdtype": "Function",
@@ -1182,7 +1443,7 @@
                     "value": false
                   }
                 },
-                "ref": "37"
+                "ref": "40"
               },
               "1": {
                 "$$mdtype": "Function",
@@ -1197,13 +1458,13 @@
                     "value": true
                   }
                 },
-                "ref": "38"
+                "ref": "41"
               }
             },
-            "ref": "39"
+            "ref": "42"
           }
         },
-        "ref": "40"
+        "ref": "43"
       },
       "attributes": {
         "display": "false"
@@ -1240,7 +1501,7 @@
                 "value": false
               }
             },
-            "ref": "41"
+            "ref": "44"
           },
           "1": {
             "$$mdtype": "Function",
@@ -1255,10 +1516,10 @@
                 "value": true
               }
             },
-            "ref": "42"
+            "ref": "45"
           }
         },
-        "ref": "43"
+        "ref": "46"
       },
       "attributes": {
         "display": "false"
@@ -1296,7 +1557,7 @@
               },
               "1": "Datadog"
             },
-            "ref": "44"
+            "ref": "47"
           },
           "1": {
             "$$mdtype": "Function",
@@ -1312,10 +1573,10 @@
               },
               "1": "Hello"
             },
-            "ref": "45"
+            "ref": "48"
           }
         },
-        "ref": "46"
+        "ref": "49"
       },
       "attributes": {
         "display": "false"

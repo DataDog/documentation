@@ -23,6 +23,22 @@ const renderableTree = CdocsMarkdoc.transform(ast, {
 
 ## Dynamic variables test
 
+## `else` test
+
+{% if equals($always_true, true) %}
+SHOWN
+{% else /%}
+HIDDEN
+{% /if %}
+
+{% if equals($test_string, "This will fail") %}
+HIDDEN
+{% else equals($test_string, "Datadog") /%}
+SHOWN
+{% else /%}
+HIDDEN
+{% /if %}
+
 ## `equals` test
 
 {% if equals($always_true, true) %}
