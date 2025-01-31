@@ -47,7 +47,7 @@ To ensure your service deployments tracked by APM contribute to DORA Metrics, th
 For more information about ensuring service deployments that are tracked by APM contribute to change lead time, see [Deployment Data Sources][18].
 
 [15]: /tracing/services/deployment_tracking
-[16]: /service_catalog/adding_metadata 
+[16]: /service_catalog/adding_metadata
 [17]: /getting_started/tagging/unified_service_tagging/?tab=kubernetes
 [18]: /dora_metrics/setup/deployments/?tab=apmdeploymenttracking#selecting-a-deployment-data-source
 
@@ -248,10 +248,13 @@ extensions:
 
 DORA Metrics for the service `shopist` only consider the Git commits that include changes within `src/apps/shopist/**` or `src/libs/utils/**`.
 
+If the two metadata entries are defined for a service, only `extensions[datadoghq.com/dora-metrics]` is considered to filter the commits.
+
 ### Limitations
 
 - Change lead time stage breakdown metrics are only available for GitHub.
 - Change lead time is not available for the first deployment of a service that includes Git information.
+- The Change Lead Time calculation includes a maximum of 5000 commits per deployment.
 - For rebased branches, *change lead time* calculations consider the new commits created during the rebase, not the original commits.
 - When using "Squash" to merge pull requests:
   - For GitHub: Metrics are emitted for the original commits.

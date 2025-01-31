@@ -1,6 +1,7 @@
 ---
 title: Agent 5 ports
 disable_toc: false
+private: true
 ---
 
 This page covers the ports used by Agent 5. For information on the latest version of the Agent, see [Network Traffic][1].

@@ -98,7 +98,7 @@ Integrations in Preview are disabled by default but can be enabled individually:
 | Jax-RS Annotations      | JSR311-API | Fully Supported                                        | `jax-rs`, `jaxrs`, `jax-rs-annotations`, `jax-rs-filter` |
 | Jetty                   | 7.0-12.x   | Fully Supported                                        | `jetty`                                                  |
 | Micronaut HTTP Server   | 2.x        | Fully Supported                                        | `micronaut`                                              |
-| Mulesoft                | 4          | Fully Supported                                        | `mule`                                                   |
+| Mulesoft                | 4.5.0+     | Fully Supported                                        | `mule`                                                   |
 | Netty HTTP Server       | 3.8+       | Fully Supported                                        | `netty`, `netty-3.8`, `netty-4.0`, `netty-4.1`           |
 | Play                    | 2.3-2.8    | Fully Supported                                        | `play`, `play-action`                                    |
 | Ratpack                 | 1.5+       | Fully Supported                                        | `ratpack`                                                |
@@ -118,22 +118,22 @@ Also, frameworks like Spring Boot (version 3) inherently work because they usual
 
 The following instrumentations are disabled by default and can be enabled with the following settings:
 
-| Instrumentation              | To Enable 									                                                                                                                                 |
-|------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------|
-| Grizzly                      | `-Ddd.integration.grizzly-client.enabled=true`                                                                                                      |
-| Grizzly-HTTP                 | `-Ddd.integration.grizzly-filterchain.enabled=true`                                                                                                 |
-| Hazelcast (client side only) | `-Ddd.integration.hazelcast.enabled=true` </br> `-Ddd.integration.hazelcast_legacy.enabled=true`                                                    |
-| Ignite                       | `-Ddd.integration.ignite.enabled=true`                                                                                                              |
-| JAX-WS                       | `-Ddd.integration.jax-ws.enabled=true`                                                                                                              |
-| JDBC Datasource              | `-Ddd.integration.jdbc-datasource.enabled=true`                                                                                                     |
-| Kotlin Coroutines            | `-Ddd.integration.kotlin_coroutine.experimental.enabled=true`                                                                                       |
-| Mulesoft                     | `-Ddd.integration.mule.enabled=true` <br/> `-Ddd.integration.grizzly-client.enabled=true` <br/> `-Ddd.integration.grizzly-filterchain.enabled=true` |
-| Netty Promise                | `-Ddd.integration.netty-promise.enabled=true`                                                                                                       |
-| Ning                         | `-Ddd.integration.ning.enabled=true`                                                                                                                |
-| Spark Java                   | `-Ddd.integration.sparkjava.enabled=true`                                                                                                           |
-| TIBCO BusinessWorks          | `-Ddd.integration.tibco.enabled=true`                                                                                                               |
-| URL Connection               | `-Ddd.integration.urlconnection.enabled=true` </br> `-Ddd.integration.httpurlconnection.enabled=true`                                               |
-| ZIO                          | `-Ddd.integration.zio.experimental.enabled=true`                                                                                                    |
+| Instrumentation              | To Enable 									                                                                              |
+|------------------------------|----------------------------------------------------------------------------------------------------------|
+| Grizzly                      | `-Ddd.integration.grizzly-client.enabled=true`                                                           |
+| Grizzly-HTTP                 | `-Ddd.integration.grizzly-filterchain.enabled=true`                                                      |
+| Hazelcast (client side only) | `-Ddd.integration.hazelcast.enabled=true` </br> `-Ddd.integration.hazelcast_legacy.enabled=true`         |
+| Ignite                       | `-Ddd.integration.ignite.enabled=true`                                                                   |
+| JAX-WS                       | `-Ddd.integration.jax-ws.enabled=true`                                                                   |
+| JDBC Datasource              | `-Ddd.integration.jdbc-datasource.enabled=true`                                                          |
+| Kotlin Coroutines            | `-Ddd.integration.kotlin_coroutine.experimental.enabled=true`                                            |
+| Mulesoft                     | `-Ddd.integration.mule.enabled=true`                                                                     |
+| Netty Promise                | `-Ddd.integration.netty-promise.enabled=true`                                                            |
+| Ning                         | `-Ddd.integration.ning.enabled=true`                                                                     |
+| Spark Java                   | `-Ddd.integration.sparkjava.enabled=true`                                                                |
+| TIBCO BusinessWorks          | `-Ddd.integration.tibco.enabled=true`                                                                    |
+| URL Connection               | `-Ddd.integration.urlconnection.enabled=true` </br> `-Ddd.integration.httpurlconnection.enabled=true`    |
+| ZIO                          | `-Ddd.integration.zio.experimental.enabled=true`                                                         |
 
 
 **Note**: JAX-WS integration instruments endpoints annotated with @WebService (JAX-WS 1.x) and @WebServiceProvider (JAX-WS 2.x).
@@ -414,6 +414,19 @@ paketo-buildpacks_datadog/helper/exec.d/toggle': exit status 1
 
 The solution to this issue is to upgrade to version 4.6.0 or later.
 
+##### Problem activating Datadog tracer
+
+You might encounter initialization errors if your tracer configuration relies on Unix Domain Sockets (UDS), which are not supported in native images:
+
+```text
+dd.trace 2024-12-30 08:34:43:306 +0000] [main] WARN datadog.trace.agent.tooling.nativeimage.TracerActivation - Problem activating datadog tracer
+java.lang.NoClassDefFoundError: Could not initialize class jnr.unixsocket.UnixSocketChannel
+```
+
+The solution is to configure the Java tracer to use host-based communication (`hostip` or `service` mode), rather than socket-based communication (`socket` mode).
+
+For more information, see [Configure APM and DogstatsD communication mode][11]. For setups that don't rely on the Admission Controller, see documentation for [DD_TRACE_AGENT_URL][12].
+
 {{% /collapse-content %}}
 
 ## Further Reading
@@ -428,3 +441,5 @@ The solution to this issue is to upgrade to version 4.6.0 or later.
 [7]: https://www.graalvm.org/downloads/
 [9]: /tracing/trace_explorer/
 [10]: /opentelemetry/interoperability/instrumentation_libraries/?tab=java
+[11]: /containers/cluster_agent/admission_controller/?tab=datadogoperator#configure-apm-and-dogstatsd-communication-mode
+[12]: /tracing/trace_collection/library_config/#agent

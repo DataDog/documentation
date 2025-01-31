@@ -70,31 +70,43 @@ window.DD_RUM &&
 </details>
 <br/>
 
-[1]: /real_user_monitoring/browser#setup
-{{% /tab %}}
-{{% tab "iOS" %}}
-
-Feature flag tracking is available in the RUM iOS SDK. To start, set up [RUM iOS monitoring][1]. You need the iOS RUM SDK version >= 1.16.0.
-
-[1]: https://docs.datadoghq.com/real_user_monitoring/ios/?tab=swift
+[1]: /real_user_monitoring/browser/setup/
 {{% /tab %}}
 {{% tab "Android" %}}
 
 Feature flag tracking is available in the RUM Android SDK. To start, set up [RUM Android monitoring][1]. You need the Android RUM SDK version >= 1.18.0.
 
-[1]: https://docs.datadoghq.com/real_user_monitoring/android/?tab=kotlin
+[1]: /real_user_monitoring/mobile_and_tv_monitoring/android/setup/
 {{% /tab %}}
 {{% tab "Flutter" %}}
 
 Feature flag tracking is available for your Flutter applications. To start, set up [RUM Flutter monitoring][1]. You need the Flutter Plugin version >= 1.3.2.
 
-[1]: https://docs.datadoghq.com/real_user_monitoring/mobile_and_tv_monitoring/setup/flutter/
+[1]: /real_user_monitoring/mobile_and_tv_monitoring/flutter/setup/
+{{% /tab %}}
+{{% tab "iOS" %}}
+
+Feature flag tracking is available in the RUM iOS SDK. To start, set up [RUM iOS monitoring][1]. You need the iOS RUM SDK version >= 1.16.0.
+
+[1]: /real_user_monitoring/mobile_and_tv_monitoring/ios/setup
+{{% /tab %}}
+{{% tab "Kotlin Multiplatform" %}}
+
+Feature flag tracking is available for your Kotlin Multiplatform applications. To start, set up [RUM Kotlin Multiplatform monitoring][1].
+
+[1]: /real_user_monitoring/mobile_and_tv_monitoring/kotlin_multiplatform
 {{% /tab %}}
 {{% tab "React Native" %}}
 
 Feature flag tracking is available for your React Native applications. To start, set up [RUM React Native monitoring][1]. You need the React Native RUM SDK version >= 1.7.0.
 
-[1]: https://docs.datadoghq.com/real_user_monitoring/reactnative/
+[1]: /real_user_monitoring/mobile_and_tv_monitoring/react_native/setup
+{{% /tab %}}
+{{% tab "Unity" %}}
+
+Feature flag tracking is available for your Unity applications. To start, set up [RUM Unity monitoring][1].
+
+[1]: /real_user_monitoring/mobile_and_tv_monitoring/unity/setup
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -873,7 +885,7 @@ Filtering your **Errors** with the `@feature_flags.{flag_name}` attribute, you c
 
 ## Troubleshooting
 
-### Feature flag data is not reflecting the expected information
+### My feature flag data doesn't reflect what I expect to see
 Feature flags show up in the context of events where they are evaluated, meaning they should show up on the views that the feature flag code logic is run on.
 
 Depending on how you've structured your code and set up your feature flags, you may see unexpected feature flags appear in the context of some events.
@@ -888,14 +900,6 @@ Here are a few examples of reasons why your feature flag is being evaluated on u
 - A routing issue where components with a feature flag evaluation are rendered before/after URL changes.
 
 When performing your investigations, you can also scope your data for `View Name`'s that are relevant to your feature flag.
-
-### Feature flag naming
-
-The following special characters are not supported for [Feature Flag Tracking][5]: `.`, `:`, `+`, `-`, `=`, `&&`, `||`, `>`, `<`, `!`, `(`, `)`, `{`, `}`, `[`, `]`, `^`, `"`, `“`, `”`, `~`, `*`, `?`, `\`. Datadog recommends avoiding these characters when possible in your feature flag names. If you are required to use one of these characters, replace the character before sending the data to Datadog. For example:
-
-```javascript
-datadogRum.addFeatureFlagEvaluation(key.replace(':', '_'), value);
-```
 
 
 ## Further Reading

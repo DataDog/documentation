@@ -129,8 +129,8 @@ Counts the [Code Security][8] vulnerabilities on the endpoint , in addition to t
 
 [1]: /agent/remote_config/?tab=configurationyamlfile#enabling-remote-configuration
 [2]: /security/application_security/threats/
-[3]: /security/application_security/software_composition_analysis/
+[3]: /security/code_security/software_composition_analysis/
 [4]: /agent/remote_config/
 [6]: /security/application_security/threats/library_configuration/#configuring-a-client-ip-header
 [7]: https://app.datadoghq.com/security/appsec/inventory/apis
-[8]: /security/application_security/code_security/
+[8]: /security/code_security/iast/

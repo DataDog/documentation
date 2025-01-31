@@ -34,12 +34,12 @@ To set up the rename field processor:
 {
     "outer_key": {
         "inner_key": "inner_value",
-            "a": {
-                    "double_inner_key": "double_inner_value",
-                    "b": "b value"
-                },
-            "c": "c value"
+        "a": {
+            "double_inner_key": "double_inner_value",
+            "b": "b value"
         },
-        "d": "d value"
-    }
+        "c": "c value"
+    },
+    "d": "d value"
+}
 ```

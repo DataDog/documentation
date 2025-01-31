@@ -1,5 +1,7 @@
 ---
 title: Inferred services
+aliases:
+  - /tracing/guide/inferred-service-opt-in
 further_reading:
 - link: "/tracing/services/service_page/"
   tag: "Documentation"
@@ -19,11 +21,12 @@ Explore inferred services in the [Service Catalog][1] by filtering entries by en
 ## Set up inferred services
 
 To see inferred services, you must enable some configurations. 
+Starting from version [7.60.0][1] of the Datadog Agent, these configurations are enabled by default. 
 
 {{< tabs >}}
 {{% tab "Agent v7.55.1+" %}}
 
-For Datadog Agent versions [7.55.1][1] or later, add the following to your `datadog.yaml` configuration file:
+For Datadog Agent versions [7.55.1][2] or later, add the following to your `datadog.yaml` configuration file:
 
 {{< code-block lang="yaml" filename="datadog.yaml" collapsible="true" >}}
 
@@ -42,10 +45,11 @@ DD_APM_PEER_TAGS_AGGREGATION=true
 
 {{< /code-block >}}
 
-If you are using Helm, include these environment variables in your `values.yaml` [file][2].
+If you are using Helm, include these environment variables in your `values.yaml` [file][3].
 
-[1]: https://github.com/DataDog/datadog-agent/releases/tag/7.55.1
-[2]: https://github.com/DataDog/helm-charts/blob/main/charts/datadog/values.yaml
+[1]: https://github.com/DataDog/datadog-agent/releases/tag/7.60.0
+[2]: https://github.com/DataDog/datadog-agent/releases/tag/7.55.1
+[3]: https://github.com/DataDog/helm-charts/blob/main/charts/datadog/values.yaml
 {{% /tab %}}
 {{% tab "Agent v7.50.3 - v7.54.1" %}}
 
@@ -137,11 +141,25 @@ Peer Tag | Source Attributes
 
 **Note**: Peer attribute values that match IP address formats (for example, 127.0.0.1) are modified and redacted with `blocked-ip-address` to prevent unnecessary noise and tagging metrics with high-cardinality dimensions. As a result, you may encounter some `blocked-ip-address` services appearing as downstream dependencies of your instrumented services.
 
+#### Precedence of peer tags
+
+To assign the name to inferred entities, Datadog uses a specific order of precedence between peer tags, when entities are defined by a combination of multiple tags. 
+
+Entity type | Order of precedence
+-----------|----------------
+Database | `peer.db.name` > `peer.aws.s3.bucket` (For AWS S3) / `peer.aws.dynamodb.table` (For AWS DynamoDB) / `peer.cassandra.contact.points` (For Cassandra) / `peer.couchbase.seed.nodes` (For Couchbase) > `peer.hostname` > `peer.db.system`
+Queue | `peer.messaging.destination` > `peer.kafka.bootstrap.servers` (for Kafka) / `peer.aws.sqs.queue` (for AWS SQS) / `peer.aws.kinesis.stream` (For AWS Kinesis) > `peer.messaging.system`
+Inferred service | `peer.service` > `peer.rpc.service` > `peer.hostname`
+
+If the highest priority tag, such as `peer.db.name`, is not captured as part of the instrumentation, Datadog uses the second highest priority tag, like `peer.hostname`, and continue in that order.
+
+**Note**: Datadog never sets the `peer.service` for inferred databases and queues. `peer.service` is the highest priority peer attribute. If set, it take precedence over all other attributes.
+
 ## Migrate to global default service naming
 
 With inferred services, service dependencies are automatically detected from existing span attributes. As a result, changing service names (using the `service` tag) is not required to identify these dependencies. 
 
-Enable `DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED` to ensures no Datadog integration sets service names that are different from the default global service name. This also improves how service-to-service connections and inferred services are represented in Datadog visualizations, across all supported tracing library languages and integrations.
+Enable `DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED` to ensure no Datadog integration sets service names that are different from the default global service name. This also improves how service-to-service connections and inferred services are represented in Datadog visualizations, across all supported tracing library languages and integrations.
 
 <div class="alert alert-warning">Enabling this option may impact existing APM metrics, custom span metrics, trace analytics, retention filters, sensitive data scans, monitors, dashboards, or notebooks that reference the old service names. Update these assets to use the global default service tag (<code>service:&lt;DD_SERVICE&gt;</code>).</div>
 

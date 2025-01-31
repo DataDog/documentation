@@ -13,7 +13,7 @@ After you have installed the Datadog Agent in your Kubernetes environment, you m
 ### Enable Datadog to collect:
 - [Traces (APM)](#enable-apm-and-tracing)
 - [Kubernetes events](#enable-kubernetes-event-collection)
-- [NPM](#enable-npm-collection)
+- [CNM](#enable-cnm-collection)
 - [Logs](#enable-log-collection)
 - [Processes](#enable-process-collection)
 
@@ -33,6 +33,7 @@ After you have installed the Datadog Agent in your Kubernetes environment, you m
 - [Kubernetes API server timeout](#kubernetes-api-server-timeout)
 - [Proxy settings](#proxy-settings)
 - [Autodiscovery](#autodiscovery)
+- [Set cluster name](#set-cluster-name)
 - [Miscellaneous](#miscellaneous)
 
 ## Enable APM and tracing
@@ -134,7 +135,7 @@ agents:
 
 For DaemonSet configuration, see [DaemonSet Cluster Agent event collection][14].
 
-## Enable NPM collection
+## Enable CNM collection
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
@@ -183,7 +184,7 @@ helm upgrade -f datadog-values.yaml <RELEASE_NAME> datadog/datadog
 {{% /tab %}}
 {{< /tabs >}}
 
-For more information, see [Network Performance Monitoring][18].
+For more information, see [Cloud Network Monitoring][18].
 
 ## Enable log collection
 
@@ -453,6 +454,23 @@ spec:
     liveContainerCollection:
       enabled: true
 ```
+In some setups, the Process Agent and Cluster Agent cannot automatically detect a Kubernetes cluster name. If this happens, the feature does not start, and the following warning displays in the Cluster Agent log: `Orchestrator explorer enabled but no cluster name set: disabling`. In this case, you must set `spec.global.clusterName` to your cluster name in `datadog-agent.yaml`:
+
+```yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  global:
+    clusterName: <YOUR_CLUSTER_NAME>
+    credentials:
+      apiKey: <DATADOG_API_KEY>
+      appKey: <DATADOG_APP_KEY>
+  features:
+    orchestratorExplorer:
+      enabled: true
+```
 
 {{% /tab %}}
 {{% tab "Helm" %}}
@@ -468,7 +486,7 @@ datadog:
     enabled: true
 ```
 
-In some setups, the Process Agent and Cluster Agent cannot automatically detect a Kubernetes cluster name. If this happens, the feature does not start, and the following warning displays in the Cluster Agent log: `Orchestrator explorer enabled but no cluster name set: disabling.` In this case, you must set `datadog.clusterName` to your cluster name in `values.yaml`.
+In some setups, the Process Agent and Cluster Agent cannot automatically detect a Kubernetes cluster name. If this happens, the feature does not start, and the following warning displays in the Cluster Agent log: `Orchestrator explorer enabled but no cluster name set: disabling.` In this case, you must set `datadog.clusterName` to your cluster name in `datadog-values.yaml`.
 
 ```yaml
 datadog:
@@ -483,6 +501,8 @@ datadog:
 [2]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
 {{% /tab %}}
 {{< /tabs >}}
+
+For restrictions on valid cluster names, see [Set cluster name](#set-cluster-name).
 
 See the [Containers view][15] documentation for additional information.
 
@@ -512,6 +532,25 @@ spec:
       enabled: true
 ```
 
+In some setups, the Process Agent and Cluster Agent cannot automatically detect a Kubernetes cluster name. If this happens, the feature does not start, and the following warning displays in the Cluster Agent log: `Orchestrator explorer enabled but no cluster name set: disabling`. In this case, you must set `spec.global.clusterName` to your cluster name in `datadog-agent.yaml`:
+
+```yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  global:
+    clusterName: <YOUR_CLUSTER_NAME>
+    credentials:
+      apiKey: <DATADOG_API_KEY>
+      appKey: <DATADOG_APP_KEY>
+  features:
+    orchestratorExplorer:
+      enabled: true
+```
+
+
 {{% /tab %}}
 {{% tab "Helm" %}}
 
@@ -528,8 +567,23 @@ datadog:
     enabled: true
 ```
 
+In some setups, the Process Agent and Cluster Agent cannot automatically detect a Kubernetes cluster name. If this happens, the feature does not start, and the following warning displays in the Cluster Agent log: `Orchestrator explorer enabled but no cluster name set: disabling.` In this case, you must set `datadog.clusterName` to your cluster name in `values.yaml`.
+
+```yaml
+datadog:
+  #(...)
+  clusterName: <YOUR_CLUSTER_NAME>
+  #(...)
+  processAgent:
+    enabled: true
+  orchestratorExplorer:
+    enabled: true
+```
+
 {{% /tab %}}
 {{< /tabs >}}
+
+For restrictions on valid cluster names, see [Set cluster name](#set-cluster-name).
 
 See the [Orchestrator Explorer documentation][21] for additional information.
 
@@ -823,6 +877,40 @@ Starting with Agent v6.4.0 (and v6.5.0 for the Trace Agent), you can override th
 | `DD_PROXY_NO_PROXY`      | A space-separated list of URLs for which no proxy should be used.      |
 | `DD_SKIP_SSL_VALIDATION` | An option to test if the Agent is having issues connecting to Datadog. |
 
+## Set cluster name
+
+Some capabilities require that you set a Kubernetes cluster name. A valid cluster name must be unique and dot-separated, with the following restrictions:
+
+- Can contain only lowercase letters, numbers, and hyphens
+- Must start with a letter
+- Overall length is less than or equal to 80 characters
+
+{{< tabs >}}
+{{% tab "Datadog Operator" %}}
+Set `spec.global.clusterName` to your cluster name in `datadog-agent.yaml`:
+
+```yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  global:
+    clusterName: <YOUR_CLUSTER_NAME>
+```
+{{% /tab %}}
+
+{{% tab "Helm" %}}
+Set `datadog.clusterName` to your cluster name in `datadog-values.yaml`.
+
+```yaml
+datadog:
+  #(...)
+  clusterName: <YOUR_CLUSTER_NAME>
+```
+{{% /tab %}}
+{{< /tabs >}}
+
 ## Autodiscovery
 
 | Env Variable                 | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
@@ -852,7 +940,7 @@ Starting with Agent v6.4.0 (and v6.5.0 for the Trace Agent), you can override th
 [15]: /infrastructure/containers/
 [16]: /containers/kubernetes/apm
 [17]: /containers/kubernetes/log
-[18]: /network_monitoring/performance/
+[18]: /network_monitoring/cloud_network_monitoring/
 [19]: /developers/dogstatsd
 [20]: https://app.datadoghq.com/orchestration/overview
 [21]: /infrastructure/containers/orchestrator_explorer

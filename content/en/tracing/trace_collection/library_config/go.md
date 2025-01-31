@@ -10,6 +10,9 @@ further_reading:
 - link: "https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace"
   tag: "External Site"
   text: "Package page"
+- link: "https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/ddtrace"
+  tag: "External Site"
+  text: "v2 Package page"
 - link: "/tracing/glossary/"
   tag: "Documentation"
   text: "Explore your services, resources and traces"
@@ -33,7 +36,8 @@ You may also elect to provide `env`, `service`, and `version` through the tracer
 package main
 
 import (
-    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer" // 1.x
+    // "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer" // 2.x
 )
 
 func main() {
@@ -46,11 +50,20 @@ func main() {
     // When the tracer is stopped, it will flush everything it has to the Datadog Agent before quitting.
     // Make sure this line stays in your main function.
     defer tracer.Stop()
+
+    // If you expect your application to be shut down by SIGTERM (for example, a container in Kubernetes),
+    // you might want to listen for that signal and explicitly stop the tracer to ensure no data is lost
+    sigChan := make(chan os.Signal, 1)
+    signal.Notify(sigChan, syscall.SIGTERM)
+    go func() {
+        <-sigChan
+        tracer.Stop()
+    }()
 }
 ```
 
 The Go tracer supports additional environment variables and functions for configuration.
-See all available options in the [configuration documentation][3].
+See all available options in the [configuration documentation][3] (or [configuration documentation v2][20]).
 
 ### Unified service tagging
 
@@ -71,7 +84,11 @@ Enable web framework and library instrumentation. When false, the application co
 
 `DD_TRACE_AGENT_PORT`
 : **Default**: `8126` <br>
-Overrides the default trace Agent port for Datadog trace submission. If the [Agent configuration][13] sets `receiver_port` or `DD_APM_RECEIVER_PORT` to something other than the default `8126`, then the library configuration `DD_DOGSTATSD_PORT` must match it.
+Overrides the default trace Agent port for Datadog trace submission. Ignored if `DD_TRACE_AGENT_URL` is set. If the [Agent configuration][13] sets `receiver_port` or `DD_APM_RECEIVER_PORT` to something other than the default `8126`, then the library configuration `DD_DOGSTATSD_PORT` must match it.
+
+`DD_TRACE_AGENT_URL`
+: **Default**: `null` <br>
+Override the Agent URL used for trace submission. Supports `http://`, `https://`, and `unix://` protocols. Takes precedence over `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT` if set.
 
 `DD_TRACE_SAMPLE_RATE`
 : **Default**: `nil`<br>
@@ -141,14 +158,14 @@ A JSON array of objects. Each object must have a `"sample_rate"`. The `"name"`,`
   - Set the sample rate to 100% for services that have a `priority` tag with the value `high`: `'[{"tags": {"priority":"high"}, "sample_rate": 1}]'`.
   
 `DD_TAGS`
-: **Default**: [] <br>
-A list of default tags to be added to every span and profile. Tags can be separated by commas or spaces, for example: `layer:api,team:intake,key:value` or `layer:api team:intake key:value`.
+: **Default**: none <br>
+A list of default tags to be added to every span, metric, and profile. Tags can be separated by commas or spaces, for example: `layer:api,team:intake,key:value` or `layer:api team:intake key:value`. Key-value pairs must be of string-convertible types.
 
 ### Agent  
 
 `DD_AGENT_HOST`
 : **Default**: `localhost` <br>
-Override the default trace Agent host address for trace submission.
+Override the default trace Agent host address for trace submission. Ignored if `DD_TRACE_AGENT_URL` is set.
 
 `DD_DOGSTATSD_PORT`
 : **Default**: `8125` <br>
@@ -195,3 +212,4 @@ The [APM environment name][7] may be configured [in the Agent][8] or using the [
 [17]: https://docs.datadoghq.com/tracing/metrics/runtime_metrics/go
 [18]: https://docs.datadoghq.com/tracing/trace_collection/trace_context_propagation/
 [19]: /opentelemetry/interoperability/environment_variable_support
+[20]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/ddtrace/tracer#StartOption

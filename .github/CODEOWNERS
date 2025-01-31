@@ -69,7 +69,7 @@ layouts/shortcodes/**/*.md                                    @DataDog/documenta
 
 # Serverless
 
-/content/en/serverless/                                 @DataDog/serverless-product @DataDog/documentation
+/content/en/serverless/                                 @DataDog/serverless @DataDog/documentation
 /layouts/shortcodes/latest-lambda-layer-version.html    @DataDog/documentation
 
 # Database Management
@@ -106,7 +106,7 @@ content/en/logs/log_collection/android.md                        @Datadog/rum-mo
 content/en/logs/log_collection/flutter.md                        @Datadog/rum-mobile @DataDog/documentation
 content/en/logs/log_collection/unity.md                          @Datadog/rum-mobile @DataDog/documentation
 content/en/logs/log_collection/ios.md                            @Datadog/rum-mobile @DataDog/documentation
-content/en/logs/log_collection/kotlin-multiplatform.md           @Datadog/rum-mobile @DataDog/documentation
+content/en/logs/log_collection/kotlin_multiplatform.md           @Datadog/rum-mobile @DataDog/documentation
 
 # Traces
 content/en/tracing/trace_collection/dd_libraries/android.md     @Datadog/rum-mobile @DataDog/documentation
@@ -114,13 +114,13 @@ content/en/tracing/trace_collection/dd_libraries/ios.md         @Datadog/rum-mob
 content/en/tracing/**/*dotnet*                                  @DataDog/tracing-dotnet @DataDog/documentation
 
 # Mobile SDK
-content/en/real_user_monitoring/mobile_and_tv_monitoring/setup/android/                        @Datadog/rum-mobile @DataDog/documentation
-content/en/real_user_monitoring/mobile_and_tv_monitoring/setup/flutter/                        @Datadog/rum-mobile @DataDog/documentation
-content/en/real_user_monitoring/mobile_and_tv_monitoring/setup/ios/                            @Datadog/rum-mobile @DataDog/documentation
-content/en/real_user_monitoring/mobile_and_tv_monitoring/setup/reactnative/                    @Datadog/rum-mobile @DataDog/documentation
-content/en/real_user_monitoring/mobile_and_tv_monitoring/setup/roku/                           @Datadog/rum-mobile @DataDog/documentation
-content/en/real_user_monitoring/mobile_and_tv_monitoring/setup/unity/                          @Datadog/rum-mobile @DataDog/documentation
-content/en/real_user_monitoring/mobile_and_tv_monitoring/setup/kotlin-multiplatform/           @Datadog/rum-mobile @DataDog/documentation
+content/en/real_user_monitoring/mobile_and_tv_monitoring/android/setup/                        @Datadog/rum-mobile @DataDog/documentation
+content/en/real_user_monitoring/mobile_and_tv_monitoring/flutter/setup/                       @Datadog/rum-mobile @DataDog/documentation
+content/en/real_user_monitoring/mobile_and_tv_monitoring/ios/setup/                           @Datadog/rum-mobile @DataDog/documentation
+content/en/real_user_monitoring/mobile_and_tv_monitoring/react_native/setup/                    @Datadog/rum-mobile @DataDog/documentation
+content/en/real_user_monitoring/mobile_and_tv_monitoring/roku/setup/                           @Datadog/rum-mobile @DataDog/documentation
+content/en/real_user_monitoring/mobile_and_tv_monitoring/unity/setup/                          @Datadog/rum-mobile @DataDog/documentation
+content/en/real_user_monitoring/mobile_and_tv_monitoring/kotlin_multiplatform/setup/           @Datadog/rum-mobile @DataDog/documentation
 content/en/real_user_monitoring/mobile_and_tv_monitoring/session_replay/mobile                 @Datadog/rum-mobile @DataDog/documentation
 content/en/real_user_monitoring/error_tracking/android.md                @Datadog/rum-mobile @DataDog/documentation
 content/en/real_user_monitoring/error_tracking/expo.md                   @Datadog/rum-mobile @DataDog/documentation
@@ -128,7 +128,7 @@ content/en/real_user_monitoring/error_tracking/flutter.md                @Datado
 content/en/real_user_monitoring/error_tracking/mobile/unity.md           @Datadog/rum-mobile @DataDog/documentation
 content/en/real_user_monitoring/error_tracking/ios.md                    @Datadog/rum-mobile @DataDog/documentation
 content/en/real_user_monitoring/error_tracking/reactnative.md            @Datadog/rum-mobile @DataDog/documentation
-content/en/real_user_monitoring/error_tracking/kotlin-multiplatform.md   @Datadog/rum-mobile @DataDog/documentation
+content/en/real_user_monitoring/error_tracking/kotlin_multiplatform.md   @Datadog/rum-mobile @DataDog/documentation
 
 # Browser SDK
 content/en/real_user_monitoring/browser/                        @Datadog/rum-browser @DataDog/documentation
@@ -140,6 +140,7 @@ content/en/real_user_monitoring/error_tracking/browser.md       @Datadog/rum-bro
 
 # Threat Intel
 content/en/security/threat_intelligence.md  @DataDog/documentation @datamarmot @DataDog/asm-monitor-backend
+content/en/security/application_security/threats/threat_intelligence.md  @DataDog/documentation @datamarmot @DataDog/asm-monitor-backend
 
 # Observability Pipelines
 static/resources/yaml/observability_pipelines/                  @DataDog/observability-pipelines-worker-admin  @DataDog/documentation
@@ -162,3 +163,6 @@ content/en/quality_gates/                         @Datadog/ci-app-backend @Datad
 
 # DDSQL Editor References
 content/en/ddsql_editor/reference/*.md              @Datadog/xpq @Datadog/documentation
+
+# Data Streams Monitoring
+content/en/data_streams/*.md                      @Datadog/data-streams-monitoring @Datadog/documentation

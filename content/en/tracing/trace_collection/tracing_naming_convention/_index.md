@@ -63,7 +63,7 @@ Span attributes are the content of the span, collected with automatic or manual 
 - `http.status_code`
 - `error.message`
 
-To query span attributes, use the the `@` character followed by the attribute name in the search box. For example, `@http.url`.
+To query span attributes, use the `@` character followed by the attribute name in the search box. For example, `@http.url`.
 
 To find span attributes in Datadog, go to the **Info** tab in the Trace side panel:
 

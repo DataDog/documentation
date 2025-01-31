@@ -56,7 +56,7 @@ Security Inbox ranks issues by considering the severity of a finding first, foll
 
 **Note**: The type of finding, detected risk, or impacted resource does not influence prioritization.
 
-## Using the security context map to identify and mitigate vulnerabilities
+## Use the security context map to identify and mitigate vulnerabilities
 
 The security context map for [Attack Paths](#types-of-findings-in-security-inbox) provides a comprehensive view to help identify and address potential breach points. It effectively maps interconnected misconfigurations, permission gaps, and vulnerabilities that attackers might exploit.
 
@@ -67,6 +67,20 @@ Key features include:
 
 {{< img src="security/security_context_map.png" alt="The security context map showing a publicly accessible AWS EC2 instance with a critical misconfiguration" width="100%">}}
 
+## Customize Security Inbox to highlight crucial issues
+
+{{< callout url="https://www.datadoghq.com/product-preview/customize-your-security-inbox/" >}}
+  Automation Pipelines is in Preview. To enroll in the Preview for Add to Security Inbox rules, click <strong>Request Access</strong>.
+{{< /callout >}}
+
+Automation Pipelines enables you to configure rules that customize your Security Inbox, allowing you to highlight issues that are critical to your organization. By setting up these automated rules, you can streamline the management of newly discovered vulnerabilities, enhancing triage and remediation efforts at scale. Leveraging both the Automation Pipelines and Add to Security Inbox rules, you can optimize your security operations in the following ways:
+
+- **Resurface issues not captured by default**: Highlight issues that might be missed by default or custom detection rules, ensuring no critical issue is overlooked.
+- **Strengthen compliance and address key system concerns**: Address concerns affecting regulatory compliance or important business systems, regardless of severity.
+- **Prioritize current risks**: Focus on immediate threats, such as identity risks after an incident or industry-wide vulnerabilities.
+
+For more information, see [Automation Pipelines][11] and [Add to Security Inbox Rules][12].
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -74,10 +88,12 @@ Key features include:
 [1]: /security/default_rules/?category=all#all
 [2]: /security/cloud_security_management/misconfigurations/
 [3]: /security/cloud_security_management/identity_risks/
-[4]: /security/application_security/software_composition_analysis
-[5]: /security/application_security/code_security
+[4]: /security/code_security/software_composition_analysis
+[5]: /security/code_security/iast
 [6]: /security/cloud_security_management/guide/public-accessibility-logic/
 [7]: https://www.cisa.gov/
 [8]: https://www.exploit-db.com/
 [9]: https://nvd.nist.gov/
 [10]: /security/cloud_security_management/severity_scoring/#csm-severity-scoring-framework
+[11]: /security/automation_pipelines/
+[12]: /security/automation_pipelines/security_inbox
