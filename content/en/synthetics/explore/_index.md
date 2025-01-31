@@ -67,6 +67,9 @@ The default facets include the following:
 | `Notification` | The handle used by the Synthetic test for notifications.                      |
 | `Env`          | The environment the Synthetic test is running on.                             |
 | `CI/CD Execution Rule` | The status of the test run: `Blocking`, `Non-blocking`, or `Skipped`. |
+| `Endpoint`     | The url or domain the test is targetting                                      |
+
+<div class="alert alert-info"> You might see values fof the facets coming from tests you can't access </div>
 
 The **Tags** panel below **Synthetic Filters** lists several default tags you can use to identify your tests. 
 
