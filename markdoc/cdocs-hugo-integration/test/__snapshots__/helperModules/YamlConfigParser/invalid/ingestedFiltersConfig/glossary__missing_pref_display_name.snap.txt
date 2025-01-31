@@ -1,0 +1,9 @@
+[
+  {
+    "code": "custom",
+    "message": "Invalid input",
+    "path": [
+      "color_options"
+    ]
+  }
+]

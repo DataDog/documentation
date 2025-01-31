@@ -41,7 +41,7 @@ menu:
       url: getting_started/
       pre: hex-ringed
       parent: essentials_heading
-      weight: 10000
+      weight: 20000
     - name: Datadog
       identifier: getting_started_datadog
       url: getting_started/application/

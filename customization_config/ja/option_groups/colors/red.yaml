@@ -1,0 +1,10 @@
+red_item_options:
+  - label: Ruby (ja)
+    id: ruby
+    default: true
+  - label: Apple (ja)
+    id: apple
+  - label: Firetruck (ja)
+    id: firetruck
+  - label: Stop sign (ja)
+    id: stop_sign
