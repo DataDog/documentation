@@ -116,6 +116,7 @@ spec:
     admissionController:
       enabled: true
   global:
+    site: <DATADOG_SITE>
     credentials:
       apiKey: <DATADOG_API_KEY>
       appKey: <DATADOG_APP_KEY>
@@ -130,6 +131,9 @@ spec:
               value: "true"
 ```
 
+Replace `<DATADOG_SITE>` with your [Datadog site][1]. Your site is {{< region-param key="dd_site" code="true" >}}. (Ensure that the correct SITE for your account is selected on the right of this page).
+
+[1]: /getting_started/site
 {{% /tab %}}
 {{% tab "Helm" %}}
 
@@ -243,7 +247,7 @@ GKE Autopilot requires some configuration, shown below.
 
 Datadog recommends that you specify resource limits for the Agent container. Autopilot sets a relatively low default limit (50m CPU, 100Mi memory) that may lead the Agent container to quickly OOMKill depending on your environment. If applicable, also specify resource limits for the Trace Agent and Process Agent containers. Additionally, you may wish to create a priority class for the Agent to ensure it is scheduled.
 
-**Note**: Network Performance Monitoring is not supported for GKE Autopilot.
+**Note**: Cloud Network Monitoring is not supported for GKE Autopilot.
 
 {{< tabs >}}
 {{% tab "Helm" %}}
@@ -329,6 +333,7 @@ agents:
 ```
 {{% /tab %}}
 {{< /tabs >}}
+
 
 ## Red Hat OpenShift {#Openshift}
 

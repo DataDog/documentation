@@ -30,9 +30,9 @@ further_reading:
 - link: '/integrations/'
   tag: 'Documentation'
   text: "Datadog's full list of integrations"
-- link: '/tracing/guide/inferred-service-opt-in/'
+- link: '/tracing/services/inferred_services'
   tag: 'Documentation'
-  text: 'Inferred Service dependencies (beta)'
+  text: 'Inferred Service dependencies'
 ---
 
 If you experience unexpected behavior while using Datadog APM, read the information on this page to help resolve the issue. Datadog recommends regularly updating to the latest version of the Datadog tracing libraries you use, as each release contains improvements and fixes. If you continue to experience issues, reach out to [Datadog support][1].
@@ -96,7 +96,7 @@ For example, you might have a single service such as `service:test` showing mult
 - `service:test-mongodb`
 - `service:test-postgresdb`
 
-You can use [Inferred Service dependencies (beta)][30]. Inferred external APIs use the default naming scheme `net.peer.name`. For example: `api.stripe.com`, `api.twilio.com`, and `us6.api.mailchimp.com`. Inferred databases use the default naming `scheme db.instance`.
+You can use [Inferred Service dependencies (Preview)][30]. Inferred external APIs use the default naming scheme `net.peer.name`. For example: `api.stripe.com`, `api.twilio.com`, and `us6.api.mailchimp.com`. Inferred databases use the default naming `scheme db.instance`.
 
 Or, you can merge the service names using an environment variable such as `DD_SERVICE_MAPPING` or `DD_TRACE_SERVICE_MAPPING`, depending on the language. 
 
@@ -372,7 +372,7 @@ When you open a [support ticket][1], the Datadog support team may ask for the fo
 [27]: /tracing/trace_collection/library_config/
 [28]: https://app.datadoghq.com/dash/integration/apm_estimated_usage
 [29]: /tracing/troubleshooting/#data-volume-guidelines
-[30]: /tracing/guide/inferred-service-opt-in/?tab=java
+[30]: /tracing/services/inferred_services
 [31]: /tracing/trace_pipeline/metrics/#apm-traces-estimated-usage-dashboard
 [32]: https://app.datadoghq.com/services
 

@@ -209,9 +209,9 @@ Use [Live processes][26] to view all of your running processes in one place. For
 
 Web server operations depend on the network availability of ports, the validity of SSL certificates, and low latencies. Install the [HTTP_Check][25] to monitor local or remote HTTP endpoints, detect bad response codes (such as 404), and use Synthetic API tests to identify soon-to-expire [SSL certificates][71].
 
-### Network Monitoring
+### Cloud Network Monitoring
 
-Web servers are almost always inter-connected with other services through a network fabric that is vulnerable to drops and can result in re-transmits. Use Datadog's [network integration][28] and enable [Network Performance Monitoring][29] to gain visibility into your network traffic between services, containers, availability zones, and other tags on your infrastructure.
+Web servers are almost always inter-connected with other services through a network fabric that is vulnerable to drops and can result in re-transmits. Use Datadog's [network integration][28] and enable [Cloud Network Monitoring][29] to gain visibility into your network traffic between services, containers, availability zones, and other tags on your infrastructure.
 
 ## Platform services
 
@@ -303,7 +303,7 @@ Not every tool suits every job. Evaluate Datadog's product use cases and match t
 
 ## Summary
 
-It is important to develop and plan a realistic course for installing Datadog. In this section, you learned about the planning and best practices phase, setting your Datadog footprint up for success. You identified and assembled your knowledge base and team members, developed your installation models, planned optimizations, and compiled a list of best practices for core products. These foundations prepare you for the the next phases of Datadog installation: build and run.  
+It is important to develop and plan a realistic course for installing Datadog. In this section, you learned about the planning and best practices phase, setting your Datadog footprint up for success. You identified and assembled your knowledge base and team members, developed your installation models, planned optimizations, and compiled a list of best practices for core products. These foundations prepare you for the next phases of Datadog installation: build and run.  
 
 ## Next Steps
 
@@ -344,7 +344,7 @@ Create a detailed roll-out methodology in the [build][41] phase by focusing on t
 [26]: /infrastructure/process/?tab=linuxwindows
 [27]: /infrastructure/process/?tab=linuxwindows\#installation
 [28]: /integrations/network/
-[29]: /network_monitoring/performance/
+[29]: /network_monitoring/cloud_network_monitoring/
 [30]: /service_catalog/
 [31]: /service_management/events/
 [32]: /error_tracking/
@@ -359,14 +359,14 @@ Create a detailed roll-out methodology in the [build][41] phase by focusing on t
 [41]: /administrators_guide/build
 [42]: https://drive.google.com/file/d/1yUuz6fUFkFagNi0cYkpyDa7b2sQLHKD6/view
 [43]: /integrations/ping/
-[44]: /integrations/google_cloud_platform/?tab=project#resource-change-collection
+[44]: /integrations/google_cloud_platform/?tab=project#resource-changes-collection
 [45]: /containers/guide/container-discovery-management/?tab=datadogoperator
 [46]: /infrastructure/resource_catalog/
 [47]: https://www.datadoghq.com/blog/engineering/introducing-husky/
 [48]: https://www.datadoghq.com/blog/engineering/husky-deep-dive/
 [49]: /real_user_monitoring/platform/connect_rum_and_traces/?tab=browserrum
 [50]: /integrations/tcp_check/?tab=host#data-collected
-[51]: /tracing/guide/inferred-service-opt-in/?tab=java
+[51]: /tracing/services/inferred_services
 [52]: /integrations/amazon_web_services/
 [53]: /integrations/google_cloud_platform/
 [54]: /integrations/azure/

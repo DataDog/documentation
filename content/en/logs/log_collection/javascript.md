@@ -17,13 +17,16 @@ With the browser logs SDK, you can send logs directly to Datadog from web browse
 - Record real client IP addresses and user agents.
 - Optimized network usage with automatic bulk posts.
 
+**Notes**: 
+- **Independent of the RUM SDK**: The Browser Logs SDK can be used without the RUM SDK.
+
 ## Setup
 
 **Datadog client token**: For security reasons, [API keys][1] cannot be used to configure the browser logs SDK, because they would be exposed client-side in the JavaScript code. To collect logs from web browsers, a [client token][2] must be used. See the [client token documentation][2] for more details.
 
 **Datadog browser logs SDK**: Configure the SDK through [NPM](#npm) or use the [CDN async](#cdn-async) or [CDN sync](#cdn-sync) code snippets in the head tag.
 
-**Supported browsers**: The browser logs SDK supports all modern desktop and mobile browsers including IE11. See the [browser support][4] table.
+**Supported browsers**: The browser logs SDK supports all modern desktop and mobile browsers. See the [Browser Support][4] table.
 
 ### Choose the right installation method
 
@@ -62,7 +65,7 @@ Load and configure the SDK in the head section of your pages. For **{{<region-pa
         h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
         d=o.createElement(u);d.async=1;d.src=n
         n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
-      })(window,document,'script','https://www.datadoghq-browser-agent.com/us1/v5/datadog-logs.js','DD_LOGS')
+      })(window,document,'script','https://www.datadoghq-browser-agent.com/us1/v6/datadog-logs.js','DD_LOGS')
       window.DD_LOGS.onReady(function() {
           window.DD_LOGS.init({
             clientToken: '<DATADOG_CLIENT_TOKEN>',
@@ -86,7 +89,7 @@ Load and configure the SDK in the head section of your pages. For **{{<region-pa
         h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
         d=o.createElement(u);d.async=1;d.src=n
         n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
-      })(window,document,'script','https://www.datadoghq-browser-agent.com/ap1/v5/datadog-logs.js','DD_LOGS')
+      })(window,document,'script','https://www.datadoghq-browser-agent.com/ap1/v6/datadog-logs.js','DD_LOGS')
       DD_LOGS.onReady(function() {
           DD_LOGS.init({
             clientToken: '<DATADOG_CLIENT_TOKEN>',
@@ -110,7 +113,7 @@ Load and configure the SDK in the head section of your pages. For **{{<region-pa
         h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
         d=o.createElement(u);d.async=1;d.src=n
         n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
-      })(window,document,'script','https://www.datadoghq-browser-agent.com/eu1/v5/datadog-logs.js','DD_LOGS')
+      })(window,document,'script','https://www.datadoghq-browser-agent.com/eu1/v6/datadog-logs.js','DD_LOGS')
       window.DD_LOGS.onReady(function() {
           window.DD_LOGS.init({
             clientToken: '<DATADOG_CLIENT_TOKEN>',
@@ -134,7 +137,7 @@ Load and configure the SDK in the head section of your pages. For **{{<region-pa
         h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
         d=o.createElement(u);d.async=1;d.src=n
         n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
-      })(window,document,'script','https://www.datadoghq-browser-agent.com/us3/v5/datadog-logs.js','DD_LOGS')
+      })(window,document,'script','https://www.datadoghq-browser-agent.com/us3/v6/datadog-logs.js','DD_LOGS')
       window.DD_LOGS.onReady(function() {
           window.DD_LOGS.init({
             clientToken: '<DATADOG_CLIENT_TOKEN>',
@@ -158,7 +161,7 @@ Load and configure the SDK in the head section of your pages. For **{{<region-pa
         h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
         d=o.createElement(u);d.async=1;d.src=n
         n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
-      })(window,document,'script','https://www.datadoghq-browser-agent.com/us5/v5/datadog-logs.js','DD_LOGS')
+      })(window,document,'script','https://www.datadoghq-browser-agent.com/us5/v6/datadog-logs.js','DD_LOGS')
       window.DD_LOGS.onReady(function() {
           window.DD_LOGS.init({
             clientToken: '<DATADOG_CLIENT_TOKEN>',
@@ -182,7 +185,7 @@ Load and configure the SDK in the head section of your pages. For **{{<region-pa
         h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
         d=o.createElement(u);d.async=1;d.src=n
         n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
-      })(window,document,'script','https://www.datadoghq-browser-agent.com/datadog-logs-v5.js','DD_LOGS')
+      })(window,document,'script','https://www.datadoghq-browser-agent.com/datadog-logs-v6.js','DD_LOGS')
       window.DD_LOGS.onReady(function() {
           window.DD_LOGS.init({
             clientToken: '<DATADOG_CLIENT_TOKEN>',
@@ -209,7 +212,7 @@ To receive all logs and errors, load and configure the SDK at the beginning of t
 <html>
   <head>
     <title>Example to send logs to Datadog</title>
-    <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/us1/v5/datadog-logs.js"></script>
+    <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/us1/v6/datadog-logs.js"></script>
     <script>
       window.DD_LOGS &&
         window.DD_LOGS.init({
@@ -228,7 +231,7 @@ To receive all logs and errors, load and configure the SDK at the beginning of t
 <html>
   <head>
     <title>Example to send logs to Datadog</title>
-    <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/ap1/v5/datadog-logs.js"></script>
+    <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/ap1/v6/datadog-logs.js"></script>
     <script>
       window.DD_LOGS &&
         DD_LOGS.init({
@@ -247,7 +250,7 @@ To receive all logs and errors, load and configure the SDK at the beginning of t
 <html>
   <head>
     <title>Example to send logs to Datadog</title>
-    <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/eu1/v5/datadog-logs.js"></script>
+    <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/eu1/v6/datadog-logs.js"></script>
     <script>
       window.DD_LOGS &&
         window.DD_LOGS.init({
@@ -266,7 +269,7 @@ To receive all logs and errors, load and configure the SDK at the beginning of t
 <html>
   <head>
     <title>Example to send logs to Datadog</title>
-    <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/us3/v5/datadog-logs.js"></script>
+    <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/us3/v6/datadog-logs.js"></script>
     <script>
       window.DD_LOGS &&
         window.DD_LOGS.init({
@@ -285,7 +288,7 @@ To receive all logs and errors, load and configure the SDK at the beginning of t
 <html>
   <head>
     <title>Example to send logs to Datadog</title>
-    <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/us5/v5/datadog-logs.js"></script>
+    <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/us5/v6/datadog-logs.js"></script>
     <script>
       window.DD_LOGS &&
         window.DD_LOGS.init({
@@ -304,7 +307,7 @@ To receive all logs and errors, load and configure the SDK at the beginning of t
 <html>
   <head>
     <title>Example to send logs to Datadog</title>
-    <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/datadog-logs-v5.js"></script>
+    <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/datadog-logs-v6.js"></script>
     <script>
       window.DD_LOGS &&
         window.DD_LOGS.init({
@@ -357,7 +360,7 @@ The following parameters are available to configure the Datadog browser logs SDK
 | `forwardConsoleLogs`       | `"all"` or an Array of `"log"` `"debug"` `"info"` `"warn"` `"error"`      | No       | `[]`            | Forward logs from `console.*` to Datadog. Use `"all"` to forward everything or an array of console API names to forward only a subset.                                                |
 | `forwardReports`           | `"all"` or an Array of `"intervention"` `"deprecation"` `"csp_violation"` | No       | `[]`            | Forward reports from the [Reporting API][8] to Datadog. Use `"all"` to forward everything or an array of report types to forward only a subset.                                       |
 | `sampleRate`               | Number                                                                    | No       | `100`           | **Deprecated** - see `sessionSampleRate`.                                                                                                                                             |
-| `sessionSampleRate`        | Number                                                                    | No       | `100`           | The percentage of sessions to track: `100` for all, `0` for none. Only tracked sessions send logs.                                                                                    |
+| `sessionSampleRate`        | Number                                                                    | No       | `100`           | The percentage of sessions to track: `100` for all, `0` for none. Only tracked sessions send logs. It applies only to logs collected via the Browser Logs SDK and is independent of RUM data.                                                                                    |
 | `trackingConsent`          | `"granted"` or `"not-granted"`                                            | No       | `"granted"`     | Set the initial user tracking consent state. See [User Tracking Consent][15].                                                                                                         |
 | `silentMultipleInit`       | Boolean                                                                   | No       |                 | Prevent logging errors while having multiple init.                                                                                                                                    |
 | `proxy`                    | String                                                                    | No       |                 | Optional proxy URL (ex: https://www.proxy.com/path), see the full [proxy setup guide][6] for more information.                                                                        |
@@ -369,12 +372,15 @@ The following parameters are available to configure the Datadog browser logs SDK
 
 Options that must have a matching configuration when using the `RUM` SDK:
 
-| Parameter                              | Type    | Required | Default | Description                                                                                                                                                              |
-|----------------------------------------| ------- | -------- | ------- |--------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `trackSessionAcrossSubdomains`         | Boolean | No       | `false` | Preserve the session across subdomains for the same site.                                                                                                                |
-| `useSecureSessionCookie`               | Boolean | No       | `false` | Use a secure session cookie. This disables logs sent on insecure (non-HTTPS) connections.                                                                                |
-| `usePartitionedCrossSiteSessionCookie` | Boolean | No       | `false` | Use a partitioned secure cross-site session cookie. This allows the logs SDK to run when the site is loaded from another one (iframe). Implies `useSecureSessionCookie`. |
-| `useCrossSiteSessionCookie`            | Boolean | No       | `false` | **Deprecated**, see `usePartitionedCrossSiteSessionCookie`.                                                                                                              |
+
+| Parameter                              | Type                            | Required | Default    | Description                                                                                                                                                                                                                                                              |
+| -------------------------------------- | ------------------------------- | -------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `sessionPersistence`                   | `"cookie"` or `"local-storage"` | No       | `"cookie"` | Which storage strategy to use for persisting sessions. Can be either `cookie` or `local-storage`.                                                                                                                                                                        |
+| `trackAnonymousUser`                   | Boolean                         | No       | `true`     | Enables collection of anonymous user id across sessions.                                                                                                                                                                        |
+| `trackSessionAcrossSubdomains`         | Boolean                         | No       | `false`    | Preserve the session across subdomains for the same site.                                                                                                                                                                                                                |
+| `useSecureSessionCookie`               | Boolean                         | No       | `false`    | Use a secure session cookie. This disables logs sent on insecure (non-HTTPS) connections.                                                                                                                                                                                |
+| `usePartitionedCrossSiteSessionCookie` | Boolean                         | No       | `false`    | Use a partitioned secure cross-site session cookie. This allows the logs SDK to run when the site is loaded from another one (iframe). Implies `useSecureSessionCookie`.                                                                                                 |
+| `usePciIntake`                         | Boolean                         | No       | `false`    | To forward logs to the [PCI-compliant intake][16], set to `true`. The PCI-compliant intake is only available for Datadog organizations in the US1 site. If `usePciIntake` is set to `true` and the site is not US1 (datadoghq.com), logs are sent to the default intake. |
 
 ## Usage
 
@@ -1261,3 +1267,4 @@ window.DD_LOGS && window.DD_LOGS.getInternalContext() // { session_id: "xxxx-xxx
 [13]: https://developer.mozilla.org/en-US/docs/Web/API/Event/isTrusted
 [14]: /integrations/content_security_policy_logs/#use-csp-with-real-user-monitoring-and-session-replay
 [15]: #user-tracking-consent
+[16]: https://docs.datadoghq.com/data_security/logs/#pci-dss-compliance-for-log-management

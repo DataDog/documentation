@@ -191,7 +191,7 @@ Each of the following configuration options can be added as a property to the co
 | `PROXY_USER`                                | String  | (If using a proxy) sets your proxy user. [Learn more about using a proxy with the Datadog Agent][4].                                                                                                                                 |
 | `PROXY_PASSWORD`                            | String  | (If using a proxy) sets your proxy password. For the process/container Agent, this variable is required for passing in an authentication password and cannot be renamed. [Learn more about using a proxy with the Datadog Agent][4]. |
 | `EC2_USE_WINDOWS_PREFIX_DETECTION`          | Boolean | Use the EC2 instance id for Windows hosts on EC2. _(v7.28.0+)_                                                                                                                                                                      |
-| [DEPRECATED] `ADDLOCAL` | String | Enable additional Agent component. Setting to `"MainApplication,NPM"` causes the driver component for [Network Performance Monitoring][5] to be installed. _(version 7.44.0 and previous)_ |
+| [DEPRECATED] `ADDLOCAL` | String | Enable additional Agent component. Setting to `"MainApplication,NPM"` causes the driver component for [Cloud Network Monitoring][5] to be installed. _(version 7.44.0 and previous)_ |
 
 **Note:**
 Agent 7 only supports Python 3. Before upgrading, confirm that your custom checks are compatible with Python 3. See the [Python 3 Custom Check Migration][13] guide for more information. If you're not using custom checks or have already confirmed their compatibility, upgrade normally.
@@ -214,7 +214,7 @@ The execution of the Agent is controlled by the Windows Service Control Manager.
 	- Agent versions <= 6.11: `"C:\Program Files\Datadog\Datadog Agent\embedded\agent.exe"`
 	- Agent versions >= 6.12: `"C:\Program Files\Datadog\Datadog Agent\bin\agent.exe"`
 * The configuration GUI is a browser-based configuration application (for Windows 64-bit only).
-* Commands can be run from the an **elevated(run as Admin)** command line (PowerShell or Command Prompt) using the syntax `<PATH_TO_AGENT.EXE> <COMMAND>`.
+* Commands can be run from the **elevated(run as Admin)** command line (PowerShell or Command Prompt) using the syntax `<PATH_TO_AGENT.EXE> <COMMAND>`.
 * Command-line options are below:
 
 | Command         | Description                                                                      |
@@ -392,7 +392,7 @@ After configuration is complete, [restart the Agent][11].
 [2]: /agent/supported_platforms/?tab=windows
 [3]: /agent/faq/windows-agent-ddagent-user/
 [4]: /agent/configuration/proxy/
-[5]: /network_monitoring/performance
+[5]: /network_monitoring/cloud_network_monitoring
 [6]: /agent/guide/datadog-agent-manager-windows/
 [7]: /integrations/wmi_check/
 [8]: https://app.datadoghq.com/monitors/create/integration

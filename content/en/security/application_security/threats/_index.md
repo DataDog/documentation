@@ -7,7 +7,7 @@ further_reading:
 - link: "/security/application_security/threats/library_configuration/"
   tag: "Documentation"
   text: "Configuring your ASM setup"
-- link: "/security/application_security/software_composition_analysis/"
+- link: "/security/code_security/software_composition_analysis/"
   tag: "Documentation"
   text: "Software Composition Analysis"
 - link: "/security/application_security/how-appsec-works/"
@@ -19,7 +19,27 @@ further_reading:
 <div class="alert alert-warning">Application Security Management is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
-ASM Threat Management uses trace telemetry from your APM-instrumented applications to identify threats and attacks on your running services by comparing the observed behavior against known attack patterns, or by identifying business logic abuse.
+Datadog's Application Security Management (ASM) Threat Management protects web applications and APIs from a wide range of security threats, including: 
+
+- Exploit attempts
+- Application abuse and fraud
+- API abuse 
+
+Integrated into the Datadog platform, ASM Threat Management leverages Datadog’s extensive observability data (logs and traces) to provide full-stack visibility and security in a unified platform. 
+
+ASM Threat Management enables teams to identify and remediate threats quickly. Its key differentiator is bridging the gap between security and DevOps, promoting collaboration between development, security, and operations teams.
+
+## Use cases
+
+Discover the ways Datadog ASM Threat Management helps common use cases:
+
+| You want to...    | How Datadog ASM can help |
+| ----------- | ----------- |
+| **Web Application Protection:** Prevent vulnerability exploits such as SQL Injection, Server-side Request Forgery, and Local File Inclusion. | Enable [Exploit Prevention][9] on your services. ASM Threat Management blocks exploits in real-time and generates signals for further investigation.|
+| **Application and API abuse:** Protect applications against application and API abuse such as credential stuffing and Account Takeover attacks.| Leverage [OOTB detection rules][10] for notifications such as unusual account creations or password resets from an IP, or distributed credential stuffing campaigns. Review the benefits of [OOTB Account TakeOver Protection][11].|
+| **API Security:** Learn about your organization’s APIs, understand the posture and actions needed to reduce risk using a prioritized list of API endpoints.| ASM Threat Management:</br> - Inventories all your API endpoints.</br> - Gives you visibility into your API traffic, including API abuse.</br> - Highlights risk across your API endpoints. For example, vulnerable or unauthenticated endpoints processing sensitive data.|
+
+## Security signals
 
 Security signals raised by Threat Monitoring are summarized and surfaced in views you already commonly visit to monitor service health and performance. The [Service Catalog][1] and individual Service Pages in APM provide insights into application threat signals, allowing you to investigate vulnerabilities, block attackers, and review attack exposures.
 
@@ -45,6 +65,10 @@ You can [create In-App WAF rules][5] that define what suspicious behavior looks 
 
 {{% asm-protect %}}
 
+## Disable threat management and protection
+
+For information on disabling threat management and protection, see [Disabling threat management and protection][12].
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -56,3 +80,7 @@ You can [create In-App WAF rules][5] that define what suspicious behavior looks 
 [6]: /security/application_security/threats/custom_rules/
 [7]: https://app.datadoghq.com/security/appsec?
 [8]: /security/application_security/threats/security_signals/
+[9]: /security/application_security/threats/exploit-prevention/
+[10]: /security/default_rules/?category=cat-application-security
+[11]: /security/account_takeover_protection/
+[12]: /security/application_security/troubleshooting/#disabling-threat-management-and-protection

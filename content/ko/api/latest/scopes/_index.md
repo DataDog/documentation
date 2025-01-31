@@ -9,11 +9,8 @@ type: 설명서
 
 애플리케이션 범위를 지정하는 모범 사례는 최소한의 권한만 유지하는 것입니다. 또한 의도된 기능만 수행하도록 애플리케이션에 필요한 가장 제한적인 범위를 설정하는 것입니다. 이를 통해 사용자는 애플리케이션에 대해 세분화된 액세스 권한을 활용하고 애플리케이션이 데이터를 활용하는 방법에 대한 투명성을 확보할 수 있습니다. 예를 들어, 대시보드 데이터만 읽는 타사 애플리케이션은 조직 내 사용자를 삭제하고 관리할 수 있는 권한이 필요하지 않습니다.
 
-Datadog를 사용해 두 가지 방법으로 범위를 사용할 수 있습니다.
-- [Datadog 앱][1]용 OAuth2 클라이언트의 범위 지정 
-- [애플리케이션 키][2] 범위 지정 
+[Datadog 앱][1]에 대해 OAuth2 클라이언트 범위를 함께 사용할 수 있습니다.
 
 {{< api-scopes >}}
 
 [1]: https://docs.datadoghq.com/ko/developers/datadog_apps/#oauth-api-access
-[2]: https://docs.datadoghq.com/ko/account_management/api-app-keys/

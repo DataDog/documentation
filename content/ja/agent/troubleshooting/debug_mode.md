@@ -40,6 +40,8 @@ agent config set log_level debug
 
 エージェントコンテナでのようにランタイムにトレースエージェントコンテナのログレベルを変更することは **できません**。`DD_LOG_LEVEL` 変数を `debug` に設定した後に、専用のトレースエージェントコンテナへの再デプロイメントが依然として必要です。
 
+[**Helm**][4] を使用している場合は、`datadog-values.yaml` ファイル内の `logLevel: INFO` を `logLevel: DEBUG` に置き換えてから、再デプロイしてください。
+
 ## Agent のログレベル
 
 `log_level` または `DD_LOG_LEVEL` には、以下の Agent ログレベルを使用可能です。
@@ -63,3 +65,4 @@ agent config set log_level debug
 [1]: /ja/agent/configuration/agent-configuration-files/#agent-main-configuration-file
 [2]: /ja/agent/configuration/agent-commands/#restart-the-agent
 [3]: /ja/agent/configuration/agent-log-files/
+[4]: https://github.com/DataDog/helm-charts/blob/637472f105f42e8b444981ea2a38e955161c8e3a/charts/datadog/values.yaml#L125

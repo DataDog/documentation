@@ -32,7 +32,7 @@ author:
 categories:
 - log collection
 - metrics
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/fluentd/README.md
 display_on_public_website: true
@@ -40,7 +40,7 @@ draft: false
 git_integration_title: fluentd
 integration_id: fluentd
 integration_title: FluentD
-integration_version: 3.2.1
+integration_version: 5.1.0
 is_public: true
 manifest_version: 2.0.0
 name: fluentd

@@ -8,7 +8,7 @@ assets:
     auto_install: false
     metrics:
       check:
-      - meraki.port.usageInKb.recv
+      - meraki.devStatus
       - snmp.devStatus
       metadata_path: metadata.csv
       prefix: meraki.
@@ -17,9 +17,9 @@ assets:
     source_type_id: 602
     source_type_name: Meraki
   monitors:
-    '[Meraki] A Meraki Device Uplink is Failing': assets/monitors/uplink_device_is_failing.json
-    '[Meraki] A Meraki Device is in an Alerting State': assets/monitors/device_is_in_alert_state.json
-    '[Meraki] Abnormally High Latency on a Meraki Uplink': assets/monitors/high_latency_on_uplink.json
+    A Meraki Device Uplink is Failing: assets/monitors/uplink_device_is_failing.json
+    A Meraki Device is in an Alerting State: assets/monitors/device_is_in_alert_state.json
+    Abnormally High Latency on a Meraki Uplink: assets/monitors/high_latency_on_uplink.json
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
@@ -30,7 +30,7 @@ categories:
 - ログの収集
 - security
 - snmp
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -74,7 +74,6 @@ tile:
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
-<div class="alert alert-info">Cisco Meraki インテグレーションは公開ベータ版です。</div>
 
 ## 概要
 
@@ -148,7 +147,10 @@ NDM メトリクスの収集を構成するには、Meraki の API キーが必�
 
 ### メトリクス
 
-<div class="alert alert-info">ネットワークデバイスモニタリングの Meraki デバイス (MR、MS、MX) のデータ (ネットワークレベル、デバイスレベル、アップリンクレベル、インターフェイス (スイッチポート) レベルのメトリクスとタグを含む) はベータ版です。</div>
+<div class="alert alert-info">ネットワークデバイスモニタリングの Meraki デバイス (MR、MS、MX) のデータ (ネットワークレベル、デバイスレベル、アップリンクレベル、インターフェイス (スイッチポート) レベルのメトリクスとタグを含む) はベータ版です。
+
+
+スイッチレベルのポートトラフィックおよび使用状況に関するメトリクスは利用できません。</div>
 
 Meraki プロファイルで [SNMP インテグレーション][6]を構成し、Meraki デバイスからメトリクス (以下の表ではプレフィックス `snmp.`) を収集します。あるいは、[カスタムプロファイル][10]を作成して追加のメトリクスを収集します。プレフィックスが `meraki.` のメトリクスは、前述の手順を使用して有効にした Datadog Meraki インテグレーション経由で収集されます。
 

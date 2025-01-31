@@ -19,7 +19,11 @@ aliases:
 
 <div class="alert alert-warning">If your Lambda functions are deployed in a VPC without access to the public internet, you can send data either <a href="/agent/guide/private-link/">using AWS PrivateLink</a> for the <code>datadoghq.com</code> <a href="/getting_started/site/">Datadog site</a>, or <a href="/agent/configuration/proxy/">using a proxy</a> for all other sites.</div>
 
+<div class="alert alert-info">Version 67+ of the Datadog Lambda Extension uses an optimized version of the extension. <a href="#minimize-cold-start-duration">Read more</a>.</div>
+
 ## Installation
+
+<div class="alert alert-info">A sample application is <a href="https://github.com/DataDog/serverless-sample-app/tree/main/src/go">available on GitHub</a> with instructions on how to deploy with multiple runtimes and infrastructure as code tools.</div>
 
 {{< tabs >}}
 {{% tab "Serverless Framework" %}}
@@ -121,11 +125,13 @@ import (
 	"net/http"
 	"time"
 
-	ddlambda "github.com/DataDog/datadog-lambda-go"
-	"github.com/aws/aws-lambda-go/events"
-	"github.com/aws/aws-lambda-go/lambda"
-	httptrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http"
-	"gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+  ddlambda "github.com/DataDog/datadog-lambda-go"
+  "github.com/aws/aws-lambda-go/events"
+  "github.com/aws/aws-lambda-go/lambda"
+  httptrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http" // 1.x
+  "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer" // 1.x
+  // httptrace "github.com/DataDog/dd-trace-go/contrib/net/http/v2" // 2.x
+  // "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer" // 2.x
 )
 
 func main() {
@@ -157,6 +163,17 @@ func myHandler(ctx context.Context, _ events.APIGatewayProxyRequest) (string, er
 }
 ```
 
+## Minimize cold start duration
+Version 67+ of [the Datadog Extension][5] is optimized to significantly reduce cold start duration.
+
+To use the optimized extension, disable Application Security Management (ASM), Continuous Profiler for Lambda, and OpenTelemetry based tracing. Set the following environment variables to `false`:
+
+- `DD_TRACE_OTEL_ENABLED`
+- `DD_PROFILING_ENABLED`
+- `DD_SERVERLESS_APPSEC_ENABLED`
+
+Enabling any of these features cause the extension to default back to the fully compatible older version of the extension. You can also force your extension to use the older version by setting `DD_EXTENSION_VERSION` to `compatibility`. Datadog encourages you to report any feedback or bugs by adding an [issue on GitHub][6] and tagging your issue with `version/next`.
+
 ## What's next?
 
 - Congratulations! You can now view metrics, logs, and traces on the [Serverless Homepage][1].
@@ -177,4 +194,6 @@ func myHandler(ctx context.Context, _ events.APIGatewayProxyRequest) (string, er
 [2]: /serverless/guide/troubleshoot_serverless_monitoring/
 [3]: /serverless/configuration/
 [4]: /security/application_security/serverless/
+[5]: https://github.com/DataDog/datadog-lambda-extension
+[6]: https://github.com/DataDog/datadog-lambda-extension/issues
 

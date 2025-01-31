@@ -24,9 +24,9 @@ further_reading:
   text: "Quickly and comprehensively analyze the cloud and SaaS costs behind your services"
 ---
 
-{{< beta-callout url="#" btn_hidden="true" >}}
-SaaS Cost Integrations are in public beta.
-{{< /beta-callout >}}
+{{< callout btn_hidden="true" header="Join the Preview!">}}
+SaaS Cost Integrations are in Preview.
+{{< /callout >}}
 
 ## Overview
 

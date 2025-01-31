@@ -5,7 +5,6 @@ further_reading:
 - link: /agent/
   tag: 설명서
   text: Datadog 에이전트 시작하기
-is_beta: false
 private: false
 title: 동적 계측 활성화
 type: multi-code-lang

@@ -34,7 +34,7 @@ If you are using APM and would like to remove the automatically named *services*
 ## Enrich auto-detected services with metadata 
 To specify on-call, source code, or documentation for your services, you can add metadata to any existing services using the UI, APIs, or [other automation][10]. 2.2 is the recommended version. To try experimental features like enhanced relationship mapping and precise code location, opt in to the beta program for [schema 3.0][3] by [submitting a request][4].
 
-{{< callout url="https://forms.gle/L5zXVkKr5bAzbdMD9" d_target="#signupModal" btn_hidden="false" header="Opt in to the private beta for metadata schema v3.0!" >}}
+{{< callout url="https://forms.gle/L5zXVkKr5bAzbdMD9" d_target="#signupModal" btn_hidden="false" header="Opt in to the Preview for metadata schema v3.0!" >}}
 {{< /callout >}}
 
 ### Service Definition Schema (v2.2) (Recommended)
@@ -141,8 +141,8 @@ With [Service Catalog metadata schema 2.2][5], you can specify the type and lang
 [3]: /service_catalog/service_definitions/v3-0/
 [4]: https://forms.gle/zbLfnJYhD5Ab4Wr18
 [5]: https://github.com/DataDog/schema/tree/main/service-catalog/v2.2
-[6]: /service_management/workflows/actions_catalog/
-[7]: /tracing/guide/inferred-service-opt-in/?tab=java#global-default-service-naming-migration
+[6]: /actions/actions_catalog/
+[7]: /tracing/services/inferred_services
 [8]: /tracing/guide/service_overrides/#remove-service-overrides
 [9]: /tracing/guide/service_overrides/
 [10]: /service_catalog/service_definitions/#add-metadata-with-automation

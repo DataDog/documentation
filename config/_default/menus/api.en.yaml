@@ -850,6 +850,7 @@ menu:
       params:
         versions:
           - v1
+          - v2
         operationids:
           - CreateEvent
         unstable: []
@@ -1256,9 +1257,21 @@ menu:
       url: /api/latest/logs/
       identifier: logs
       generated: true
-    - name: Get a list of logs
-      url: '#get-a-list-of-logs'
-      identifier: logs-get-a-list-of-logs
+    - name: Search logs (POST)
+      url: '#search-logs-post'
+      identifier: logs-search-logs-post
+      parent: logs
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListLogs
+        unstable: []
+        order: 3
+    - name: Search logs (GET)
+      url: '#search-logs-get'
+      identifier: logs-search-logs-get
       parent: logs
       generated: true
       params:
@@ -1301,7 +1314,6 @@ menu:
       params:
         versions:
           - v1
-          - v2
         operationids:
           - ListLogs
         unstable: []
@@ -1947,9 +1959,9 @@ menu:
           - CreateMonitor
         unstable: []
         order: 1
-    - name: Get all monitor details
-      url: '#get-all-monitor-details'
-      identifier: monitors-get-all-monitor-details
+    - name: Get all monitors
+      url: '#get-all-monitors'
+      identifier: monitors-get-all-monitors
       parent: monitors
       generated: true
       params:
@@ -2563,6 +2575,165 @@ menu:
           - ListSecurityFilters
         unstable: []
         order: 18
+    - name: Patch a vulnerability-based rule
+      url: '#patch-a-vulnerability-based-rule'
+      identifier: security-monitoring-patch-a-vulnerability-based-rule
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - PatchVulnerabilityNotificationRule
+        unstable: []
+        order: 20
+    - name: Get details of a vulnerability-based rule
+      url: '#get-details-of-a-vulnerability-based-rule'
+      identifier: security-monitoring-get-details-of-a-vulnerability-based-rule
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetVulnerabilityNotificationRule
+        unstable: []
+        order: 18
+    - name: Delete a vulnerability-based rule
+      url: '#delete-a-vulnerability-based-rule'
+      identifier: security-monitoring-delete-a-vulnerability-based-rule
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteVulnerabilityNotificationRule
+        unstable: []
+        order: 21
+    - name: Create a new vulnerability-based rule
+      url: '#create-a-new-vulnerability-based-rule'
+      identifier: security-monitoring-create-a-new-vulnerability-based-rule
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateVulnerabilityNotificationRule
+        unstable: []
+        order: 16
+    - name: Get the list of vulnerability-based rules
+      url: '#get-the-list-of-vulnerability-based-rules'
+      identifier: security-monitoring-get-the-list-of-vulnerability-based-rules
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetVulnerabilityNotificationRules
+        unstable: []
+        order: 15
+    - name: List vulnerabilities
+      url: '#list-vulnerabilities'
+      identifier: security-monitoring-list-vulnerabilities
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListVulnerabilities
+        unstable:
+          - v2
+        order: 25
+    - name: Patch a signal-based rule
+      url: '#patch-a-signal-based-rule'
+      identifier: security-monitoring-patch-a-signal-based-rule
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - PatchSignalNotificationRule
+        unstable: []
+        order: 20
+    - name: Get details of a signal-based rule
+      url: '#get-details-of-a-signal-based-rule'
+      identifier: security-monitoring-get-details-of-a-signal-based-rule
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetSignalNotificationRule
+        unstable: []
+        order: 18
+    - name: Delete a signal-based rule
+      url: '#delete-a-signal-based-rule'
+      identifier: security-monitoring-delete-a-signal-based-rule
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteSignalNotificationRule
+        unstable: []
+        order: 21
+    - name: Create a new signal-based rule
+      url: '#create-a-new-signal-based-rule'
+      identifier: security-monitoring-create-a-new-signal-based-rule
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateSignalNotificationRule
+        unstable: []
+        order: 16
+    - name: Get the list of signal-based rules
+      url: '#get-the-list-of-signal-based-rules'
+      identifier: security-monitoring-get-the-list-of-signal-based-rules
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetSignalNotificationRules
+        unstable: []
+        order: 15
+    - name: Get SBOM
+      url: '#get-sbom'
+      identifier: security-monitoring-get-sbom
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetSBOM
+        unstable:
+          - v2
+        order: 27
+    - name: List vulnerable assets
+      url: '#list-vulnerable-assets'
+      identifier: security-monitoring-list-vulnerable-assets
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListVulnerableAssets
+        unstable:
+          - v2
+        order: 26
     - name: Get a finding
       url: '#get-a-finding'
       identifier: security-monitoring-get-a-finding
@@ -3655,8 +3826,7 @@ menu:
           - v2
         operationids:
           - GetBillingDimensionMapping
-        unstable:
-          - v2
+        unstable: []
         order: 1
     - name: Get hourly usage for application security
       url: '#get-hourly-usage-for-application-security'
@@ -3680,8 +3850,7 @@ menu:
           - v2
         operationids:
           - GetMonthlyCostAttribution
-        unstable:
-          - v2
+        unstable: []
         order: 5
     - name: Get active billing dimensions for cost attribution
       url: '#get-active-billing-dimensions-for-cost-attribution'
@@ -3693,8 +3862,7 @@ menu:
           - v2
         operationids:
           - GetActiveBillingDimensions
-        unstable:
-          - v2
+        unstable: []
         order: 5
     - name: Get all custom metrics by hourly average
       url: '#get-all-custom-metrics-by-hourly-average'
@@ -4502,6 +4670,182 @@ menu:
           - ListApmRetentionFilters
         unstable: []
         order: 1
+    - name: Action Connection
+      url: /api/latest/action-connection/
+      identifier: action-connection
+      generated: true
+    - name: Update an existing Action Connection
+      url: '#update-an-existing-action-connection'
+      identifier: action-connection-update-an-existing-action-connection
+      parent: action-connection
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateActionConnection
+        unstable: []
+        order: 3
+    - name: Get an existing Action Connection
+      url: '#get-an-existing-action-connection'
+      identifier: action-connection-get-an-existing-action-connection
+      parent: action-connection
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetActionConnection
+        unstable: []
+        order: 1
+    - name: Delete an existing Action Connection
+      url: '#delete-an-existing-action-connection'
+      identifier: action-connection-delete-an-existing-action-connection
+      parent: action-connection
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteActionConnection
+        unstable: []
+        order: 4
+    - name: Create a new Action Connection
+      url: '#create-a-new-action-connection'
+      identifier: action-connection-create-a-new-action-connection
+      parent: action-connection
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateActionConnection
+        unstable: []
+        order: 2
+    - name: Agentless Scanning
+      url: /api/latest/agentless-scanning/
+      identifier: agentless-scanning
+      generated: true
+    - name: Get AWS Scan Options
+      url: '#get-aws-scan-options'
+      identifier: agentless-scanning-get-aws-scan-options
+      parent: agentless-scanning
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListAwsScanOptions
+        unstable: []
+        order: 3
+    - name: App Builder
+      url: /api/latest/app-builder/
+      identifier: app-builder
+      generated: true
+    - name: Publish App
+      url: '#publish-app'
+      identifier: app-builder-publish-app
+      parent: app-builder
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - PublishApp
+        unstable:
+          - v2
+        order: 7
+    - name: Unpublish App
+      url: '#unpublish-app'
+      identifier: app-builder-unpublish-app
+      parent: app-builder
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UnpublishApp
+        unstable:
+          - v2
+        order: 8
+    - name: Update App
+      url: '#update-app'
+      identifier: app-builder-update-app
+      parent: app-builder
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateApp
+        unstable:
+          - v2
+        order: 5
+    - name: Get App
+      url: '#get-app'
+      identifier: app-builder-get-app
+      parent: app-builder
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetApp
+        unstable:
+          - v2
+        order: 4
+    - name: Delete App
+      url: '#delete-app'
+      identifier: app-builder-delete-app
+      parent: app-builder
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteApp
+        unstable:
+          - v2
+        order: 6
+    - name: Create App
+      url: '#create-app'
+      identifier: app-builder-create-app
+      parent: app-builder
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateApp
+        unstable:
+          - v2
+        order: 2
+    - name: List Apps
+      url: '#list-apps'
+      identifier: app-builder-list-apps
+      parent: app-builder
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListApps
+        unstable:
+          - v2
+        order: 1
+    - name: Delete Multiple Apps
+      url: '#delete-multiple-apps'
+      identifier: app-builder-delete-multiple-apps
+      parent: app-builder
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteApps
+        unstable:
+          - v2
+        order: 3
     - name: Audit
       url: /api/latest/audit/
       identifier: audit
@@ -4686,6 +5030,74 @@ menu:
           - AggregateCIAppTestEvents
         unstable: []
         order: 3
+    - name: CSM Agents
+      url: /api/latest/csm-agents/
+      identifier: csm-agents
+      generated: true
+    - name: Get all CSM Serverless Agents
+      url: '#get-all-csm-serverless-agents'
+      identifier: csm-agents-get-all-csm-serverless-agents
+      parent: csm-agents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListAllCSMServerlessAgents
+        unstable: []
+        order: 3
+    - name: Get all CSM Agents
+      url: '#get-all-csm-agents'
+      identifier: csm-agents-get-all-csm-agents
+      parent: csm-agents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListAllCSMAgents
+        unstable: []
+        order: 3
+    - name: CSM Coverage Analysis
+      url: /api/latest/csm-coverage-analysis/
+      identifier: csm-coverage-analysis
+      generated: true
+    - name: Get the CSM Serverless Coverage Analysis
+      url: '#get-the-csm-serverless-coverage-analysis'
+      identifier: csm-coverage-analysis-get-the-csm-serverless-coverage-analysis
+      parent: csm-coverage-analysis
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetCSMServerlessCoverageAnalysis
+        unstable: []
+        order: 1
+    - name: Get the CSM Hosts and Containers Coverage Analysis
+      url: '#get-the-csm-hosts-and-containers-coverage-analysis'
+      identifier: csm-coverage-analysis-get-the-csm-hosts-and-containers-coverage-analysis
+      parent: csm-coverage-analysis
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetCSMHostsAndContainersCoverageAnalysis
+        unstable: []
+        order: 1
+    - name: Get the CSM Cloud Accounts Coverage Analysis
+      url: '#get-the-csm-cloud-accounts-coverage-analysis'
+      identifier: csm-coverage-analysis-get-the-csm-cloud-accounts-coverage-analysis
+      parent: csm-coverage-analysis
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetCSMCloudAccountsCoverageAnalysis
+        unstable: []
+        order: 1
     - name: CSM Threats
       url: /api/latest/csm-threats/
       identifier: csm-threats
@@ -4998,18 +5410,6 @@ menu:
       url: /api/latest/cloud-cost-management/
       identifier: cloud-cost-management
       generated: true
-    - name: Cloud Cost Enabled
-      url: '#cloud-cost-enabled'
-      identifier: cloud-cost-management-cloud-cost-enabled
-      parent: cloud-cost-management
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - GetCloudCostActivity
-        unstable: []
-        order: 10
     - name: Get Custom Costs file
       url: '#get-custom-costs-file'
       identifier: cloud-cost-management-get-custom-costs-file
@@ -7123,6 +7523,154 @@ menu:
           - ListRumMetrics
         unstable: []
         order: 1
+    - name: SCIM
+      url: /api/latest/scim/
+      identifier: scim
+      generated: true
+    - name: Update user
+      url: '#update-user'
+      identifier: scim-update-user
+      parent: scim
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateSCIMUser
+        unstable: []
+        order: 4
+    - name: Patch user
+      url: '#patch-user'
+      identifier: scim-patch-user
+      parent: scim
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - PatchSCIMUser
+        unstable: []
+        order: 5
+    - name: Get user
+      url: '#get-user'
+      identifier: scim-get-user
+      parent: scim
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetSCIMUser
+        unstable: []
+        order: 3
+    - name: Delete user
+      url: '#delete-user'
+      identifier: scim-delete-user
+      parent: scim
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteSCIMUser
+        unstable: []
+        order: 6
+    - name: Create user
+      url: '#create-user'
+      identifier: scim-create-user
+      parent: scim
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateSCIMUser
+        unstable: []
+        order: 2
+    - name: List users
+      url: '#list-users'
+      identifier: scim-list-users
+      parent: scim
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListSCIMUsers
+        unstable: []
+        order: 1
+    - name: Update group
+      url: '#update-group'
+      identifier: scim-update-group
+      parent: scim
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateSCIMGroup
+        unstable: []
+        order: 10
+    - name: Patch group
+      url: '#patch-group'
+      identifier: scim-patch-group
+      parent: scim
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - PatchSCIMGroup
+        unstable: []
+        order: 11
+    - name: Get group
+      url: '#get-group'
+      identifier: scim-get-group
+      parent: scim
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetSCIMGroup
+        unstable: []
+        order: 9
+    - name: Delete group
+      url: '#delete-group'
+      identifier: scim-delete-group
+      parent: scim
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteSCIMGroup
+        unstable: []
+        order: 12
+    - name: Create group
+      url: '#create-group'
+      identifier: scim-create-group
+      parent: scim
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateSCIMGroup
+        unstable: []
+        order: 8
+    - name: List groups
+      url: '#list-groups'
+      identifier: scim-list-groups
+      parent: scim
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListSCIMGroups
+        unstable: []
+        order: 7
     - name: Sensitive Data Scanner
       url: /api/latest/sensitive-data-scanner/
       identifier: sensitive-data-scanner

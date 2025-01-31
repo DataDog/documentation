@@ -46,7 +46,7 @@ To create a login test and use it as a subtest in the rest of your test suite:
 
   {{< img src="synthetics/guide/reusing-browser-test-journeys/dashboard_subtest_2.mp4" alt="Including subtest in parent test" video="true" width="80%">}}
 
-  When you set up this subtest step, all the steps of the first step are played at the beginning of the parent test. Also, the variables in the subtest are imported into the parent test of your second test. By default, the subtest is played in the main tab. This means your subtest steps are played in the same tab as previous and following steps. The subtest starts running using the URL that was set in the parent test (in this example, the pre-login URL), and after all the subtest steps have been executed, the browser test executes the parent's first non-subtest step from the page the subtest was last on. No parent step was created for now.
+  When you set up this subtest step, all the steps of the login test are played at the beginning of the parent test. Also, the variables in the subtest are imported into the parent test of your second test. By default, the subtest is played in the main tab. This means your subtest steps are played in the same tab as previous and following steps. The subtest starts running using the URL that was set in the parent test (in this example, the pre-login URL), and after all the subtest steps have been executed, the browser test executes the parent's first non-subtest step from the page the subtest was last on. No parent step was created for now.
 
 **Note:** You can choose the tab in which the subtest should execute using [**Subtest Advanced Options**][1].
 

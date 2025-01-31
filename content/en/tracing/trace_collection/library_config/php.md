@@ -162,12 +162,12 @@ The Agent URL; takes precedence over `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT`. 
 
 `DD_TRACE_AUTO_FLUSH_ENABLED`
 : **INI**: `datadog.trace.auto_flush_enabled`<br>
-**Default**: `0`<br>
+**Default**: `0` (`1` in CLI environment)<br>
 Automatically flush the tracer when all the spans are closed; set to `1` in conjunction with `DD_TRACE_GENERATE_ROOT_SPAN=0` to trace [long-running processes][14].
 
 `DD_TRACE_CLI_ENABLED`
 : **INI**: `datadog.trace.cli_enabled`<br>
-**Default**: `0`<br>
+**Default**: `1`<br>
 Enable tracing of PHP scripts from the CLI. See [Tracing CLI scripts][15].
 
 `DD_TRACE_DEBUG`
@@ -531,7 +531,7 @@ Enables WordPress action hook callbacks instrumentation. This feature is only av
 **Default**: `DD_SERVICE`<br>
 The service name reported by default for OpenAI requests.
 
-`DD_OPENAI_LOGS_ENABLED` (beta)
+`DD_OPENAI_LOGS_ENABLED`
 : **INI**: `datadog.openai.logs_enabled`<br>
 **Default**: `false`<br>
 Enable collection of prompts and completions as logs. You can adjust the rate of prompts and completions collected using the sample rate configuration described below.
@@ -542,7 +542,7 @@ Enable collection of prompts and completions as logs. You can adjust the rate of
 Enable collection of OpenAI metrics.<br>
 If the Datadog Agent is configured to use a non-default StatsD hostname or port, use `DD_DOGSTATSD_URL` to configure the OpenAI metrics collection.
 
-`DD_OPENAI_SPAN_CHAR_LIMIT` (beta)
+`DD_OPENAI_SPAN_CHAR_LIMIT`
 : **INI**: `datadog.openai.span_char_limit`<br>
 **Default**: `128`<br>
 Configure the maximum number of characters for the following data within span tags:
@@ -553,12 +553,12 @@ Configure the maximum number of characters for the following data within span ta
 
 Text exceeding the maximum number of characters is truncated to the character limit and has `...` appended to the end.
 
-`DD_OPENAI_SPAN_PROMPT_COMPLETION_SAMPLE_RATE` (beta)
+`DD_OPENAI_SPAN_PROMPT_COMPLETION_SAMPLE_RATE`
 : **INI**: `datadog.openai.span_prompt_completion_sample_rate`<br>
 **Default**: `1.0`<br>
 Configure the sample rate for the collection of prompts and completions as span tags.
 
-`DD_OPENAI_LOG_PROMPT_COMPLETION_SAMPLE_RATE` (beta)
+`DD_OPENAI_LOG_PROMPT_COMPLETION_SAMPLE_RATE`
 : **INI**: `datadog.openai.log_prompt_completion_sample_rate`<br>
 **Default**: `0.1`<br>
 Configure the sample rate for the collection of prompts and completions as logs.

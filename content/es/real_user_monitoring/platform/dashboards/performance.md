@@ -66,9 +66,9 @@ Para obtener más información sobre los datos mostrados, consulta [Seguridad de
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /es/real_user_monitoring/data_collected/
+[1]: /es/real_user_monitoring/browser/data_collected/
 [2]: /es/real_user_monitoring/ios/data_collected/
 [3]: /es/real_user_monitoring/android/data_collected/
 [4]: /es/real_user_monitoring/reactnative/data_collected/
-[5]: /es/real_user_monitoring/mobile_and_tv_monitoring/data_collected/flutter
+[5]: /es/real_user_monitoring/mobile_and_tv_monitoring/flutter/data_collected/
 [6]: /es/data_security/real_user_monitoring/

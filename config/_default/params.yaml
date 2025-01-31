@@ -120,6 +120,8 @@ code_language_ids:
     rust: "Rust"
     dd-api: "Datadog API"
     otel: "OpenTelemetry API"
+    status_legacy: "Status Page (Legacy)"
+    status_page: "Status Page"
 branch: ""
 
 signupclass: sign-up-trigger
@@ -210,7 +212,7 @@ core_product:
     - name: log management
     - name: metrics
     - name: network device monitoring
-    - name: network performance monitoring
+    - name: cloud network monitoring
     - name: observability pipelines
     - name: security
     - name: serverless monitoring
