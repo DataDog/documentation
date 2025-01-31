@@ -155,11 +155,7 @@ export const tagIf: Schema = {
     };
 
     const conditions = renderConditions(node);
-    const transformedConditions: {
-      condition: ClientFunction | ClientVariable;
-      children: MaybePromise<RenderableTreeNodes>[];
-      inline: boolean;
-    }[] = [];
+    const transformedConditions: TransformedCondition[] = [];
 
     for (const { condition, inline, children } of conditions) {
       const nodes = children.flatMap<MaybePromise<RenderableTreeNodes>>((child) =>
