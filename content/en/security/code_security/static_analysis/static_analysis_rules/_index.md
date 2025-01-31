@@ -1,6 +1,6 @@
 ---
 title: SAST Rules
-description: View rules for multiple languages for Static Analysis.
+description: View rules for multiple languages for Static Code Analysis.
 aliases:
 - /continuous_integration/static_analysis/rules
 - /static_analysis/rules
@@ -101,6 +101,10 @@ rulesets:
     title: "Enforce Kotlin code style"
     description: |
       Rules to enforce Kotlin code style.
+  kotlin-security:
+    title: "Enforce secure Kotlin coding"
+    description: |
+      Rules focused on finding security issues in your Kotlin code.
   php-best-practices:
     title: "Follow best practices for writing PHP code"
     description: |
@@ -261,6 +265,6 @@ further_reading:
 
 ## Overview
 
-Datadog Static Analysis provides out-of-the-box rules to help detect violations in your CI/CD pipelines in code reviews and identify bugs, security, and maintainability issues. For more information, see the [Setup documentation][1].
+Datadog Static Code Analysis provides out-of-the-box rules to help detect violations in your CI/CD pipelines in code reviews and identify bugs, security, and maintainability issues. For more information, see the [Setup documentation][1].
 
 [1]: /security/code_security/static_analysis/setup/
