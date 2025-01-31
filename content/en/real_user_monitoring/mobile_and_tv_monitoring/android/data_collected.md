@@ -170,7 +170,7 @@ RUM action, error, resource, and long task events contain information about the 
 | `view.resource.count`         | number      | Count of all resources collected for this view.                                 |
 | `view.action.count`      | number      | Count of all actions collected for this view.                                        |
 | `view.is_active`      |    boolean   | Indicates whether the view corresponding to this event is considered active.            |
-| `view.loading_time` | number (ns) | Time it took for the view to load, set by `addViewLoadingTime(override:)` call. |
+| `view.loading_time` | number (ns) | Time it took for the view to load, set by the `addViewLoadingTime(override:)` call. |
 | `view.network_settled_time` | number (ns) | Time it took for a view to be fully loaded with all relevant network calls initiated at the start of the view. |
 | `view.interaction_to_next_view_time` | number (ns) | Time between the last user interaction in the previous and start of this (current) view. |
 
@@ -257,7 +257,7 @@ Network errors include information about failing HTTP requests. The following fa
 
 ## Data storage
 
-Before data is uploaded to Datadog, it is stored in cleartext in your application's cache directory. This cache folder is protected by [Android's Application Sandbox][12], meaning that on most devices this data can't be read by other applications. However, if the mobile device is rooted, or someone tempers with the Linux kernel, the stored data might become readable.
+Before data is uploaded to Datadog, it is stored in cleartext in your application's cache directory. This cache folder is protected by [Android's Application Sandbox][12], meaning that on most devices, this data can't be read by other applications. However, if the mobile device is rooted, or someone tempers with the Linux kernel, the stored data might become readable.
 
 ## Data upload
 

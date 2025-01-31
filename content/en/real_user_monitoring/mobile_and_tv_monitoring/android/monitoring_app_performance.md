@@ -10,7 +10,7 @@ further_reading:
 ---
 ## Overview
 
-View timings help you understand the performance of your application from a user's perspective. RUM comes with both out-of-the-box automatic timings (Time-to-Network-Settled and Interaction-to-Next-View), as well as a precise API for notifying that the view has finished loading (as only you, as a developer, can know this with certainty).
+View timings help you understand the performance of your application from a user's perspective. RUM comes with both out-of-the-box automatic timings (`Time-to-Network-Settled` and `Interaction-to-Next-View`), as well as a precise API for notifying that the view has finished loading (as only you, as a developer, can know this with certainty).
 
 ### Time to network settled
 The **Time-to-Network-Settled (TNS)** measures the time it takes for a view to be fully loaded with all relevant network calls initiated at the start of the view. TNS is represented by the `@view.network_settled_time` attribute in RUM view events.

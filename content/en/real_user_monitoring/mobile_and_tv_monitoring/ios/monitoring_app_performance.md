@@ -10,14 +10,14 @@ further_reading:
 ---
 ## Overview
 
-View timings help you understand the performance of your application from a user's perspective. RUM comes with both out-of-the-box automatic timings (Time-to-Network-Settled and Interaction-to-Next-View), as well as a precise API for notifying that the view has finished loading (as only you, as a developer, can know this with certainty).
+View timings help you understand the performance of your application from a user's perspective. RUM comes with both out-of-the-box automatic timings (`Time-to-Network-Settled` and `Interaction-to-Next-View`), as well as a precise API for notifying that the view has finished loading (as only you, as a developer, can know this with certainty).
 
 ### Time to network settled
 
 The **Time-to-Network-Settled (TNS)** measures the time it takes for a view to be fully loaded with all relevant network calls initiated at the start of the view. TNS is represented by the `@view.network_settled_time` attribute in RUM view events.
 
 By default, TNS is calculated as the time elapsed between the start of the view and the completion of all resources that started within 100ms of the view's start. This behavior is controlled by the `TimeBasedTNSResourcePredicate`, which classifies such resources as "initial."
-To customize the default 100 ms threshold for TNS calculation, you can adjust the threshold value in the `TimeBasedTNSResourcePredicate` and set it for the `networkSettledResourcePredicate` configuration option. This allows you to include resources that start within a custom time window after the view starts:
+To customize the default 100ms threshold for TNS calculation, you can adjust the threshold value in the `TimeBasedTNSResourcePredicate` and set it for the `networkSettledResourcePredicate` configuration option. This allows you to include resources that start within a custom time window after the view starts:
 
 ```javascript
 import DatadogRUM
