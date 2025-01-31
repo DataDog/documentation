@@ -22,6 +22,12 @@ Follow these steps to send Azure logs to any Datadog site.
 
 **US3**: Organizations on the Datadog US3 site can simplify Azure log forwarding using the Azure Native integration. This method is recommended and is configured through the [Datadog resource in Azure][5], replacing the Azure Event Hub process. See the [Azure Native Logging Guide][4] for more details.
 
+<div class="alert alert-info">
+Azure will no longer support Node.js 18 after April 30, 2025. To ensure compatibility, first update your forwarder code, then upgrade to the latest Azure LTS version of Node.js (20).
+
+If you deployed via an ARM template, you can update using the template with the same parameters.
+</div>
+
 ## Setup
 
 {{< tabs >}}
