@@ -3850,8 +3850,7 @@ menu:
           - v2
         operationids:
           - GetMonthlyCostAttribution
-        unstable:
-          - v2
+        unstable: []
         order: 5
     - name: Get active billing dimensions for cost attribution
       url: '#get-active-billing-dimensions-for-cost-attribution'
@@ -3863,8 +3862,7 @@ menu:
           - v2
         operationids:
           - GetActiveBillingDimensions
-        unstable:
-          - v2
+        unstable: []
         order: 5
     - name: Get all custom metrics by hourly average
       url: '#get-all-custom-metrics-by-hourly-average'

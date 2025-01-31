@@ -10,6 +10,8 @@ further_reading:
 
 ## Setup
 
+<div class="alert alert-info"><a href="https://docs.databricks.com/en/security/network/front-end/index.html">Databricks Networking Restrictions</a> can block some Datadog functions. Add the following Datadog IP ranges to your allow-list: {{< region-param key="ip_ranges_url_webhooks" link="true" text="webhook IPs" >}}, {{< region-param key="ip_ranges_url_api" link="true" text="API IPs" >}}.</div>
+
 Follow these steps to enable Data Jobs Monitoring for Databricks.
 
 1. [Configure the Datadog-Databricks integration](#configure-the-datadog-databricks-integration) for a Databricks workspace.
@@ -84,7 +86,7 @@ Datadog can install and manage a global init script in the Databricks workspace.
    bash -c "$(curl -L https://dd-data-jobs-monitoring-setup.s3.amazonaws.com/scripts/databricks/databricks_init_latest.sh)" || true
    ```
 
-   The script above sets the required parameters, downloads and runs the latest init script for Data Jobs Monitoring in Databricks. If you want to pin your script to a specific version, you can replace the file name in the URL with `databricks_init_1.5.1.sh` to use the last stable version.
+   The script above sets the required parameters, downloads and runs the latest init script for Data Jobs Monitoring in Databricks. If you want to pin your script to a specific version, you can replace the file name in the URL with `databricks_init_1.7.1.sh` to use the last stable version.
 
 1. To enable the script for all new and restarted clusters, toggle **Enabled**.
    {{< img src="data_jobs/databricks/toggle.png" alt="Databricks UI, admin settings, global init scripts. A script called 'install-datadog-agent' is in a list with an enabled toggle." style="width:100%;" >}}
@@ -237,9 +239,11 @@ If you need further assistance from Datadog support, add the following environme
 ### Set up Data Jobs Monitoring with Databricks Networking Restrictions
 With [Databricks Networking Restrictions][12], Datadog may not have access to your Databricks APIs, which is required to collect traces for Databricks job executions along with tags and other metadata.
 
-If you are controlling Databricks API access with [IP access lists][13], allow-listing Datadog's specific {{< region-param key="ip_ranges_url_webhooks" link="true" text="IP addresses" >}} allows Datadog to connect to the Databricks APIs in your workspace. Please see Databricks's documentation for [configuring IP access lists for workspaces][16] to give Datadog API access.
+If you are controlling Databricks API access with [IP access lists][13], allow-listing Datadog's specific {{< region-param key="ip_ranges_url_webhooks" link="true" text="webhook IP addresses" >}} allows Datadog to connect to the Databricks APIs in your workspace. See Databricks's documentation for [configuring IP access lists for workspaces][16] to give Datadog API access.
 
-If you are using [Databricks Private Connectivity][14], please reach out to the Datadog [support team][15] to discuss potential options.
+To add workspaces using the Datadog UI, you must also allow-list Datadog's {{< region-param key="ip_ranges_url_api" link="true" text="API IP addresses" >}}.
+
+If you are using [Databricks Private Connectivity][14], reach out to the Datadog [support team][15] to discuss potential options.
 
 ## Further Reading
 

@@ -162,7 +162,7 @@ If you already have a function app configured with an Event Hub connection strin
 2. In the **Instance Details** section, configure the following settings:
    a. Select the **Code** radio button
    b. For **Runtime stack**, select `Node.js` 
-   c. For **Version**, select `20 LTS`.
+   c. For **Version**, select `18 LTS`.
 3. Configure other settings as desired.
 4. Click **Review + create** to validate the resource. If validation is successful, click **Create**.
 
