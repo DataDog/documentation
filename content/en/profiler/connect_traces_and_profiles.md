@@ -158,7 +158,7 @@ See [prerequisites](#prerequisites) to learn how to enable this feature for Ruby
 Each lane represents a **thread**. Threads from a common pool are grouped together. You can expand the pool to view details for each thread.
 {{< /programming-lang >}}
 {{< programming-lang lang="dotnet" >}}
-Each lane represents a **thread**. Threads with the same name are grouped together. You can expand a group to view details for each thread. Note that threads that are explicitely created by code are grouped under _Managed Threads_.
+Each lane represents a **thread**. Threads with the same name are grouped together. You can expand a group to view details for each thread. Note that threads that are explicitly created by code are grouped under _Managed Threads_.
 
 Lanes on top are runtime activities that may add extra latency. They can be unrelated to the request itself.
 {{< /programming-lang >}}
