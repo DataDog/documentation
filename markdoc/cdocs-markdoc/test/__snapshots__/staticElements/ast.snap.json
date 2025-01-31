@@ -1061,7 +1061,7 @@
               ],
               "inline": true,
               "attributes": {
-                "content": "Code blocks"
+                "content": "Images"
               },
               "children": [],
               "type": "text",
@@ -1107,7 +1107,220 @@
       "errors": [],
       "lines": [
         26,
-        30
+        27
+      ],
+      "inline": false,
+      "attributes": {},
+      "children": [
+        {
+          "$$mdtype": "Node",
+          "errors": [],
+          "lines": [
+            26,
+            27
+          ],
+          "inline": false,
+          "attributes": {},
+          "children": [
+            {
+              "$$mdtype": "Node",
+              "errors": [],
+              "lines": [
+                26,
+                27
+              ],
+              "inline": true,
+              "attributes": {
+                "content": "Here's an image:"
+              },
+              "children": [],
+              "type": "text",
+              "annotations": [],
+              "slots": {},
+              "location": {
+                "start": {
+                  "line": 26
+                },
+                "end": {
+                  "line": 27
+                }
+              }
+            }
+          ],
+          "type": "inline",
+          "annotations": [],
+          "slots": {},
+          "location": {
+            "start": {
+              "line": 26
+            },
+            "end": {
+              "line": 27
+            }
+          }
+        }
+      ],
+      "type": "paragraph",
+      "annotations": [],
+      "slots": {},
+      "location": {
+        "start": {
+          "line": 26
+        },
+        "end": {
+          "line": 27
+        }
+      }
+    },
+    {
+      "$$mdtype": "Node",
+      "errors": [],
+      "lines": [
+        28,
+        29
+      ],
+      "inline": false,
+      "attributes": {},
+      "children": [
+        {
+          "$$mdtype": "Node",
+          "errors": [],
+          "lines": [
+            28,
+            29
+          ],
+          "inline": false,
+          "attributes": {},
+          "children": [
+            {
+              "$$mdtype": "Node",
+              "errors": [],
+              "lines": [
+                28,
+                29
+              ],
+              "inline": true,
+              "attributes": {
+                "alt": "Datadog logo",
+                "src": "./dd_icon_rgb.png"
+              },
+              "children": [],
+              "type": "image",
+              "annotations": [],
+              "slots": {},
+              "location": {
+                "start": {
+                  "line": 28
+                },
+                "end": {
+                  "line": 29
+                }
+              }
+            }
+          ],
+          "type": "inline",
+          "annotations": [],
+          "slots": {},
+          "location": {
+            "start": {
+              "line": 28
+            },
+            "end": {
+              "line": 29
+            }
+          }
+        }
+      ],
+      "type": "paragraph",
+      "annotations": [],
+      "slots": {},
+      "location": {
+        "start": {
+          "line": 28
+        },
+        "end": {
+          "line": 29
+        }
+      }
+    },
+    {
+      "$$mdtype": "Node",
+      "errors": [],
+      "lines": [
+        30,
+        31
+      ],
+      "inline": false,
+      "attributes": {
+        "level": 2
+      },
+      "children": [
+        {
+          "$$mdtype": "Node",
+          "errors": [],
+          "lines": [
+            30,
+            31
+          ],
+          "inline": false,
+          "attributes": {},
+          "children": [
+            {
+              "$$mdtype": "Node",
+              "errors": [],
+              "lines": [
+                30,
+                31
+              ],
+              "inline": true,
+              "attributes": {
+                "content": "Code blocks"
+              },
+              "children": [],
+              "type": "text",
+              "annotations": [],
+              "slots": {},
+              "location": {
+                "start": {
+                  "line": 30
+                },
+                "end": {
+                  "line": 31
+                }
+              }
+            }
+          ],
+          "type": "inline",
+          "annotations": [],
+          "slots": {},
+          "location": {
+            "start": {
+              "line": 30
+            },
+            "end": {
+              "line": 31
+            }
+          }
+        }
+      ],
+      "type": "heading",
+      "annotations": [],
+      "slots": {},
+      "location": {
+        "start": {
+          "line": 30
+        },
+        "end": {
+          "line": 31
+        }
+      }
+    },
+    {
+      "$$mdtype": "Node",
+      "errors": [],
+      "lines": [
+        32,
+        36
       ],
       "inline": false,
       "attributes": {
@@ -1119,8 +1332,8 @@
           "$$mdtype": "Node",
           "errors": [],
           "lines": [
-            26,
-            30
+            32,
+            36
           ],
           "inline": false,
           "attributes": {
@@ -1132,10 +1345,10 @@
           "slots": {},
           "location": {
             "start": {
-              "line": 26
+              "line": 32
             },
             "end": {
-              "line": 30
+              "line": 36
             }
           }
         }
@@ -1145,10 +1358,10 @@
       "slots": {},
       "location": {
         "start": {
-          "line": 26
+          "line": 32
         },
         "end": {
-          "line": 30
+          "line": 36
         }
       }
     },
@@ -1156,8 +1369,8 @@
       "$$mdtype": "Node",
       "errors": [],
       "lines": [
-        31,
-        32
+        37,
+        38
       ],
       "inline": false,
       "attributes": {
@@ -1168,8 +1381,8 @@
           "$$mdtype": "Node",
           "errors": [],
           "lines": [
-            31,
-            32
+            37,
+            38
           ],
           "inline": false,
           "attributes": {},
@@ -1178,8 +1391,8 @@
               "$$mdtype": "Node",
               "errors": [],
               "lines": [
-                31,
-                32
+                37,
+                38
               ],
               "inline": true,
               "attributes": {
@@ -1191,10 +1404,10 @@
               "slots": {},
               "location": {
                 "start": {
-                  "line": 31
+                  "line": 37
                 },
                 "end": {
-                  "line": 32
+                  "line": 38
                 }
               }
             }
@@ -1204,10 +1417,10 @@
           "slots": {},
           "location": {
             "start": {
-              "line": 31
+              "line": 37
             },
             "end": {
-              "line": 32
+              "line": 38
             }
           }
         }
@@ -1217,10 +1430,10 @@
       "slots": {},
       "location": {
         "start": {
-          "line": 31
+          "line": 37
         },
         "end": {
-          "line": 32
+          "line": 38
         }
       }
     },
@@ -1228,8 +1441,8 @@
       "$$mdtype": "Node",
       "errors": [],
       "lines": [
-        33,
-        34
+        39,
+        40
       ],
       "inline": false,
       "attributes": {},
@@ -1238,8 +1451,8 @@
           "$$mdtype": "Node",
           "errors": [],
           "lines": [
-            33,
-            34
+            39,
+            40
           ],
           "inline": false,
           "attributes": {},
@@ -1248,8 +1461,8 @@
               "$$mdtype": "Node",
               "errors": [],
               "lines": [
-                33,
-                34
+                39,
+                40
               ],
               "inline": true,
               "attributes": {
@@ -1261,10 +1474,10 @@
               "slots": {},
               "location": {
                 "start": {
-                  "line": 33
+                  "line": 39
                 },
                 "end": {
-                  "line": 34
+                  "line": 40
                 }
               }
             }
@@ -1274,10 +1487,10 @@
           "slots": {},
           "location": {
             "start": {
-              "line": 33
+              "line": 39
             },
             "end": {
-              "line": 34
+              "line": 40
             }
           }
         }
@@ -1287,10 +1500,641 @@
       "slots": {},
       "location": {
         "start": {
-          "line": 33
+          "line": 39
         },
         "end": {
-          "line": 34
+          "line": 40
+        }
+      }
+    },
+    {
+      "$$mdtype": "Node",
+      "errors": [],
+      "lines": [
+        41,
+        53
+      ],
+      "inline": false,
+      "attributes": {},
+      "children": [
+        {
+          "$$mdtype": "Node",
+          "errors": [],
+          "lines": [
+            41,
+            41
+          ],
+          "inline": false,
+          "attributes": {},
+          "children": [
+            {
+              "$$mdtype": "Node",
+              "errors": [],
+              "lines": [
+                41,
+                41
+              ],
+              "inline": false,
+              "attributes": {},
+              "children": [
+                {
+                  "$$mdtype": "Node",
+                  "errors": [],
+                  "lines": [
+                    41,
+                    41
+                  ],
+                  "inline": true,
+                  "attributes": {
+                    "content": "Service"
+                  },
+                  "children": [],
+                  "type": "text",
+                  "annotations": [],
+                  "slots": {},
+                  "location": {
+                    "start": {
+                      "line": 41
+                    },
+                    "end": {
+                      "line": 41
+                    }
+                  }
+                }
+              ],
+              "type": "inline",
+              "annotations": [],
+              "slots": {},
+              "location": {
+                "start": {
+                  "line": 41
+                },
+                "end": {
+                  "line": 41
+                }
+              }
+            }
+          ],
+          "type": "dt",
+          "annotations": [],
+          "slots": {},
+          "location": {
+            "start": {
+              "line": 41
+            },
+            "end": {
+              "line": 41
+            }
+          }
+        },
+        {
+          "$$mdtype": "Node",
+          "errors": [],
+          "lines": [
+            42,
+            44
+          ],
+          "inline": false,
+          "attributes": {},
+          "children": [
+            {
+              "$$mdtype": "Node",
+              "errors": [],
+              "lines": [
+                42,
+                43
+              ],
+              "inline": false,
+              "attributes": {},
+              "children": [
+                {
+                  "$$mdtype": "Node",
+                  "errors": [],
+                  "lines": [
+                    42,
+                    43
+                  ],
+                  "inline": true,
+                  "attributes": {
+                    "content": "Services are the building blocks of modern microservice architectures - broadly a service groups together endpoints, queries, or jobs for the purposes of building your application."
+                  },
+                  "children": [],
+                  "type": "text",
+                  "annotations": [],
+                  "slots": {},
+                  "location": {
+                    "start": {
+                      "line": 42
+                    },
+                    "end": {
+                      "line": 43
+                    }
+                  }
+                }
+              ],
+              "type": "inline",
+              "annotations": [],
+              "slots": {},
+              "location": {
+                "start": {
+                  "line": 42
+                },
+                "end": {
+                  "line": 43
+                }
+              }
+            }
+          ],
+          "type": "dd",
+          "annotations": [],
+          "slots": {},
+          "location": {
+            "start": {
+              "line": 42
+            },
+            "end": {
+              "line": 44
+            }
+          }
+        },
+        {
+          "$$mdtype": "Node",
+          "errors": [],
+          "lines": [
+            44,
+            44
+          ],
+          "inline": false,
+          "attributes": {},
+          "children": [
+            {
+              "$$mdtype": "Node",
+              "errors": [],
+              "lines": [
+                44,
+                44
+              ],
+              "inline": false,
+              "attributes": {},
+              "children": [
+                {
+                  "$$mdtype": "Node",
+                  "errors": [],
+                  "lines": [
+                    44,
+                    44
+                  ],
+                  "inline": true,
+                  "attributes": {
+                    "content": "Resource"
+                  },
+                  "children": [],
+                  "type": "text",
+                  "annotations": [],
+                  "slots": {},
+                  "location": {
+                    "start": {
+                      "line": 44
+                    },
+                    "end": {
+                      "line": 44
+                    }
+                  }
+                }
+              ],
+              "type": "inline",
+              "annotations": [],
+              "slots": {},
+              "location": {
+                "start": {
+                  "line": 44
+                },
+                "end": {
+                  "line": 44
+                }
+              }
+            }
+          ],
+          "type": "dt",
+          "annotations": [],
+          "slots": {},
+          "location": {
+            "start": {
+              "line": 44
+            },
+            "end": {
+              "line": 44
+            }
+          }
+        },
+        {
+          "$$mdtype": "Node",
+          "errors": [],
+          "lines": [
+            44,
+            47
+          ],
+          "inline": false,
+          "attributes": {},
+          "children": [
+            {
+              "$$mdtype": "Node",
+              "errors": [],
+              "lines": [
+                45,
+                46
+              ],
+              "inline": false,
+              "attributes": {},
+              "children": [
+                {
+                  "$$mdtype": "Node",
+                  "errors": [],
+                  "lines": [
+                    45,
+                    46
+                  ],
+                  "inline": true,
+                  "attributes": {
+                    "content": "Resources represent a particular domain of a customer application - they are typically an instrumented web endpoint, database query, or background job."
+                  },
+                  "children": [],
+                  "type": "text",
+                  "annotations": [],
+                  "slots": {},
+                  "location": {
+                    "start": {
+                      "line": 45
+                    },
+                    "end": {
+                      "line": 46
+                    }
+                  }
+                }
+              ],
+              "type": "inline",
+              "annotations": [],
+              "slots": {},
+              "location": {
+                "start": {
+                  "line": 45
+                },
+                "end": {
+                  "line": 46
+                }
+              }
+            }
+          ],
+          "type": "dd",
+          "annotations": [],
+          "slots": {},
+          "location": {
+            "start": {
+              "line": 44
+            },
+            "end": {
+              "line": 47
+            }
+          }
+        },
+        {
+          "$$mdtype": "Node",
+          "errors": [],
+          "lines": [
+            47,
+            47
+          ],
+          "inline": false,
+          "attributes": {},
+          "children": [
+            {
+              "$$mdtype": "Node",
+              "errors": [],
+              "lines": [
+                47,
+                47
+              ],
+              "inline": false,
+              "attributes": {},
+              "children": [
+                {
+                  "$$mdtype": "Node",
+                  "errors": [],
+                  "lines": [
+                    47,
+                    47
+                  ],
+                  "inline": true,
+                  "attributes": {
+                    "content": "clusterChecksRunner.affinity.podAffinity.preferredDuringSchedulingIgnoredDuringExecution"
+                  },
+                  "children": [],
+                  "type": "code",
+                  "annotations": [],
+                  "slots": {},
+                  "location": {
+                    "start": {
+                      "line": 47
+                    },
+                    "end": {
+                      "line": 47
+                    }
+                  }
+                }
+              ],
+              "type": "inline",
+              "annotations": [],
+              "slots": {},
+              "location": {
+                "start": {
+                  "line": 47
+                },
+                "end": {
+                  "line": 47
+                }
+              }
+            }
+          ],
+          "type": "dt",
+          "annotations": [],
+          "slots": {},
+          "location": {
+            "start": {
+              "line": 47
+            },
+            "end": {
+              "line": 47
+            }
+          }
+        },
+        {
+          "$$mdtype": "Node",
+          "errors": [],
+          "lines": [
+            47,
+            50
+          ],
+          "inline": false,
+          "attributes": {},
+          "children": [
+            {
+              "$$mdtype": "Node",
+              "errors": [],
+              "lines": [
+                48,
+                49
+              ],
+              "inline": false,
+              "attributes": {},
+              "children": [
+                {
+                  "$$mdtype": "Node",
+                  "errors": [],
+                  "lines": [
+                    48,
+                    49
+                  ],
+                  "inline": true,
+                  "attributes": {
+                    "content": "Required. A list of node selector terms. The terms are ORed."
+                  },
+                  "children": [],
+                  "type": "text",
+                  "annotations": [],
+                  "slots": {},
+                  "location": {
+                    "start": {
+                      "line": 48
+                    },
+                    "end": {
+                      "line": 49
+                    }
+                  }
+                }
+              ],
+              "type": "inline",
+              "annotations": [],
+              "slots": {},
+              "location": {
+                "start": {
+                  "line": 48
+                },
+                "end": {
+                  "line": 49
+                }
+              }
+            }
+          ],
+          "type": "dd",
+          "annotations": [],
+          "slots": {},
+          "location": {
+            "start": {
+              "line": 47
+            },
+            "end": {
+              "line": 50
+            }
+          }
+        },
+        {
+          "$$mdtype": "Node",
+          "errors": [],
+          "lines": [
+            50,
+            50
+          ],
+          "inline": false,
+          "attributes": {},
+          "children": [
+            {
+              "$$mdtype": "Node",
+              "errors": [],
+              "lines": [
+                50,
+                50
+              ],
+              "inline": false,
+              "attributes": {},
+              "children": [
+                {
+                  "$$mdtype": "Node",
+                  "errors": [],
+                  "lines": [
+                    50,
+                    50
+                  ],
+                  "inline": true,
+                  "attributes": {
+                    "content": "site"
+                  },
+                  "children": [],
+                  "type": "code",
+                  "annotations": [],
+                  "slots": {},
+                  "location": {
+                    "start": {
+                      "line": 50
+                    },
+                    "end": {
+                      "line": 50
+                    }
+                  }
+                }
+              ],
+              "type": "inline",
+              "annotations": [],
+              "slots": {},
+              "location": {
+                "start": {
+                  "line": 50
+                },
+                "end": {
+                  "line": 50
+                }
+              }
+            }
+          ],
+          "type": "dt",
+          "annotations": [],
+          "slots": {},
+          "location": {
+            "start": {
+              "line": 50
+            },
+            "end": {
+              "line": 50
+            }
+          }
+        },
+        {
+          "$$mdtype": "Node",
+          "errors": [],
+          "lines": [
+            50,
+            53
+          ],
+          "inline": false,
+          "attributes": {},
+          "children": [
+            {
+              "$$mdtype": "Node",
+              "errors": [],
+              "lines": [
+                51,
+                52
+              ],
+              "inline": false,
+              "attributes": {},
+              "children": [
+                {
+                  "$$mdtype": "Node",
+                  "errors": [],
+                  "lines": [
+                    51,
+                    52
+                  ],
+                  "inline": true,
+                  "attributes": {
+                    "content": "Set the site of the Datadog intake for Agent data. Defaults to "
+                  },
+                  "children": [],
+                  "type": "text",
+                  "annotations": [],
+                  "slots": {},
+                  "location": {
+                    "start": {
+                      "line": 51
+                    },
+                    "end": {
+                      "line": 52
+                    }
+                  }
+                },
+                {
+                  "$$mdtype": "Node",
+                  "errors": [],
+                  "lines": [
+                    51,
+                    52
+                  ],
+                  "inline": true,
+                  "attributes": {
+                    "content": "datadoghq.com"
+                  },
+                  "children": [],
+                  "type": "code",
+                  "annotations": [],
+                  "slots": {},
+                  "location": {
+                    "start": {
+                      "line": 51
+                    },
+                    "end": {
+                      "line": 52
+                    }
+                  }
+                },
+                {
+                  "$$mdtype": "Node",
+                  "errors": [],
+                  "lines": [
+                    51,
+                    52
+                  ],
+                  "inline": true,
+                  "attributes": {
+                    "content": "."
+                  },
+                  "children": [],
+                  "type": "text",
+                  "annotations": [],
+                  "slots": {},
+                  "location": {
+                    "start": {
+                      "line": 51
+                    },
+                    "end": {
+                      "line": 52
+                    }
+                  }
+                }
+              ],
+              "type": "inline",
+              "annotations": [],
+              "slots": {},
+              "location": {
+                "start": {
+                  "line": 51
+                },
+                "end": {
+                  "line": 52
+                }
+              }
+            }
+          ],
+          "type": "dd",
+          "annotations": [],
+          "slots": {},
+          "location": {
+            "start": {
+              "line": 50
+            },
+            "end": {
+              "line": 53
+            }
+          }
+        }
+      ],
+      "type": "dl",
+      "annotations": [],
+      "slots": {},
+      "location": {
+        "start": {
+          "line": 41
+        },
+        "end": {
+          "line": 53
         }
       }
     }
