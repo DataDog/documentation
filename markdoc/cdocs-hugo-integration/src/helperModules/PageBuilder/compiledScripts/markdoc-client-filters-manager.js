@@ -7605,7 +7605,20 @@
         }
         return param !== false && param !== void 0 && param !== null;
       }
-      function joinConditions(condition1, condition2) {
+      function joinConditions(conditions) {
+        if (conditions.length === 0) {
+          throw new Error("Cannot join zero conditions");
+        }
+        if (conditions.length === 1) {
+          return conditions[0];
+        }
+        let joinedConditions = conditions[0];
+        for (let i = 1; i < conditions.length; i++) {
+          joinedConditions = joinTwoConditions(joinedConditions, conditions[i]);
+        }
+        return joinedConditions;
+      }
+      function joinTwoConditions(condition1, condition2) {
         const joinedConditions = {
           $$mdtype: "Function",
           name: "and",
@@ -7629,38 +7642,37 @@
           ref: FunctionRefGenerator.generate()
         };
       }
-      function renderConditions(node2) {
-        const conditions = [];
-        let currentCondition = {
+      function buildConditionalContentEntries(node2) {
+        const contentEntries = [];
+        let currentContentEntry = {
           condition: node2.attributes.primary,
           inline: node2.attributes.inline,
           children: []
         };
-        conditions.push(currentCondition);
+        contentEntries.push(currentContentEntry);
         for (const child of node2.children) {
           if (child.type === "tag" && child.tag === "else") {
-            const precedingCondition = currentCondition.condition;
+            let condition;
             const elseCondition = "primary" in child.attributes ? child.attributes.primary : null;
             if (elseCondition) {
-              const elseTagCondition = joinConditions(negateCondition(precedingCondition), elseCondition);
-              currentCondition = {
-                condition: elseTagCondition,
-                inline: node2.attributes.inline,
-                children: []
-              };
+              condition = joinConditions([
+                ...contentEntries.map((entry) => negateCondition(entry.condition)),
+                elseCondition
+              ]);
             } else {
-              currentCondition = {
-                condition: negateCondition(precedingCondition),
-                inline: node2.attributes.inline,
-                children: []
-              };
+              condition = joinConditions(contentEntries.map((entry) => negateCondition(entry.condition)));
             }
-            conditions.push(currentCondition);
+            currentContentEntry = {
+              condition,
+              inline: node2.attributes.inline,
+              children: []
+            };
+            contentEntries.push(currentContentEntry);
           } else {
-            currentCondition.children.push(child);
+            currentContentEntry.children.push(child);
           }
         }
-        return conditions;
+        return contentEntries;
       }
       var tagIf = {
         attributes: {
@@ -7679,26 +7691,26 @@
             };
             return enclosingTag;
           };
-          const conditions = renderConditions(node2);
-          const transformedConditions = [];
-          for (const { condition, inline: inline4, children } of conditions) {
+          const contentEntries = buildConditionalContentEntries(node2);
+          const transformedEntries = [];
+          for (const { condition, inline: inline4, children } of contentEntries) {
             const nodes = children.flatMap((child) => child.transform(config));
-            transformedConditions.push({ condition, children: nodes, inline: inline4 });
+            transformedEntries.push({ condition, children: nodes, inline: inline4 });
           }
-          const allNodes = transformedConditions.flatMap((condition) => {
+          const allNodes = transformedEntries.flatMap((condition) => {
             return condition.children;
           });
           if (allNodes.some(isPromise)) {
             return Promise.all(allNodes).then(() => {
-              return transformedConditions.map((condition) => {
-                condition.children = condition.children.flat();
-                return buildEnclosingTag(condition);
+              return transformedEntries.map((entry) => {
+                entry.children = entry.children.flat();
+                return buildEnclosingTag(entry);
               });
             });
           } else {
-            return transformedConditions.map((condition) => {
-              condition.children = condition.children.flat();
-              return buildEnclosingTag(condition);
+            return transformedEntries.map((entry) => {
+              entry.children = entry.children.flat();
+              return buildEnclosingTag(entry);
             });
           }
         }

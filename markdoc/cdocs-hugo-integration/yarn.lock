@@ -1621,7 +1621,7 @@ __metadata:
 
 "cdocs-markdoc@file:../cdocs-markdoc::locator=cdocs-hugo-integration%40workspace%3A.":
   version: 1.0.0
-  resolution: "cdocs-markdoc@file:../cdocs-markdoc#../cdocs-markdoc::hash=68a7ec&locator=cdocs-hugo-integration%40workspace%3A."
+  resolution: "cdocs-markdoc@file:../cdocs-markdoc#../cdocs-markdoc::hash=036552&locator=cdocs-hugo-integration%40workspace%3A."
   dependencies:
     "@types/linkify-it": ^3.0.1
     "@types/markdown-it": 12.2.3
@@ -1630,7 +1630,7 @@ __metadata:
       optional: true
     "@types/markdown-it":
       optional: true
-  checksum: c84b5da34e1f267d50ede95021715ca6815afc5b7337e48a0b3b37d7671feb8b00aa046fb91164a1500883f780354f82c55a27ad71748ddf7fc6ff76f3b5fc10
+  checksum: 1e7998c11c4e6d1412df17fb12b9746d4b3180d2865df17425b999c344f7160ef93ff512353f223065f0b42e680d1bcb7bc101c2b05bb21e41622c950019cb33
   languageName: node
   linkType: hard
 
