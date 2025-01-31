@@ -38,19 +38,6 @@ Configure Dynamic Instrumentation using the following environment variables:
 
 See [Dynamic Instrumentation][5] for information about adding instrumentations and browsing and indexing the data.
 
-## Limitations
-
-The following limitations apply to the limited preview:
-
-### Supported features
-
-- [Dynamic Logs][8] attached to a function/method
-
-### Unsupported features
-
-- Dynamic Logs attached to a specific file/line
-- Dynamic Metrics, Spans, and Span Tags
-
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -61,4 +48,3 @@ The following limitations apply to the limited preview:
 [4]: /getting_started/tagging/unified_service_tagging
 [5]: /dynamic_instrumentation/
 [7]: https://app.datadoghq.com/account/settings/agent/latest?platform=overview
-[8]: /dynamic_instrumentation/#creating-log-probes
