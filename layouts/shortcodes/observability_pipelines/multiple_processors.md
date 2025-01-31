@@ -1,0 +1,3 @@
+Click the plus sign (**+**) to the left of the processors to add another set of processors and destinations to the source. See [Add additional destinations](#add-additional-destinations) on adding additional destinations to the processor group.
+
+To delete a processor group, you need to delete all destinations linked to that processor group. When the last destination is deleted, the processor group is removed with it.

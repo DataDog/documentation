@@ -793,6 +793,7 @@ Depending on the event's type, only some specific properties can be modified:
 |                  | `RUMResourceEvent.view.url`          | URL of the view linked to this resource. |
 | RUMViewEvent     | `RUMViewEvent.view.name`             | Name of the view.                        |
 |                  | `RUMViewEvent.view.url`              | URL of the view.                         |
+|                  | `RUMViewEvent.view.referrer`         | URL that linked to the initial view of the page.|
 
 ## Retrieve the RUM session ID
 

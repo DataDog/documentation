@@ -142,7 +142,7 @@ With [Service Catalog metadata schema 2.2][5], you can specify the type and lang
 [4]: https://forms.gle/zbLfnJYhD5Ab4Wr18
 [5]: https://github.com/DataDog/schema/tree/main/service-catalog/v2.2
 [6]: /actions/actions_catalog/
-[7]: /tracing/guide/inferred-service-opt-in/?tab=java#global-default-service-naming-migration
+[7]: /tracing/services/inferred_services
 [8]: /tracing/guide/service_overrides/#remove-service-overrides
 [9]: /tracing/guide/service_overrides/
 [10]: /service_catalog/service_definitions/#add-metadata-with-automation
