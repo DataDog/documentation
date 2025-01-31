@@ -35,7 +35,7 @@ Static Code Analysis supports scanning for security vulnerabilities and poor cod
 Scans can run via your CI/CD pipelines or directly in Datadog with hosted scanning (GitHub-only).
 To get started, go to the [**Code Security** setup page][12] or see the [Setup documentation][9].
 
-## Integrate Static Code Analysis into your development lifecycle
+## Integrate into the development lifecycle
 
 ### Source code management
 {{< whatsnext desc="During code reviews on GitHub, Datadog can automatically flag Static Code Analysis violations in pull requests by adding inline review comments on the relevant line(s) of code. When applicable, Datadog also provides suggested fixes that can be applied directly in the pull request. You can also open a pull request directly from Datadog to fix a vulnerability or quality issue." >}}
@@ -69,7 +69,7 @@ The content of the violation is shown in tabs:
 - **Remediation**: One or more code fixes that can resolve the violation, with options for remediation.
 - **Event**: JSON metadata regarding the violation.
 
-### Using suggested fixes
+## Using suggested fixes
 <!-- {{< img src="code_security/static_analysis/static-analysis-fixes.png" alt="Fixes tab of a static analysis violation" style="width:80%;">}} -->
 
 In Datadog Static Code Analysis, there are two types of suggested fixes:
