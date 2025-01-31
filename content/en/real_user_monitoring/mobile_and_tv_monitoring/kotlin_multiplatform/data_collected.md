@@ -4,7 +4,7 @@ description: Learn about the data collected by Kotlin Multiplatform Monitoring.
 aliases:
 - /real_user_monitoring/kotlin-multiplatform/data_collected/
 - /real_user_monitoring/kotlin_multiplatform/data_collected/
-- /real_user_monitoring/mobile_and_tv_monitoring/kotlin-multiplatform/data_collected/
+- /real_user_monitoring/mobile_and_tv_monitoring/data_collected/kotlin-multiplatform/
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-kotlin-multiplatform
   tag: "Source Code"
