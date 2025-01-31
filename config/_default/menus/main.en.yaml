@@ -481,6 +481,11 @@ menu:
       url: agent/fleet_automation
       parent: agent
       weight: 8
+    - name: Remote Agent Management
+      identifier: remote_agent_management
+      url: agent/fleet_automation/remote_management
+      parent: agent_fleet_automation
+      weight: 801
     - name: Troubleshooting
       url: agent/troubleshooting/
       parent: agent
@@ -2146,16 +2151,21 @@ menu:
       parent: error_tracking_frontend
       identifier: error_tracking_mobile
       weight: 102
+    - name: Replay Errors
+      url: error_tracking/frontend/replay_errors
+      parent: error_tracking_frontend
+      identifier: error_tracking_replays
+      weight: 103
     - name: Real User Monitoring
       url: error_tracking/rum
       parent: error_tracking_frontend
       identifier: error_tracking_rum
-      weight: 103
+      weight: 104
     - name: Logs
       url: error_tracking/frontend/logs
       parent: error_tracking_frontend
       identifier: error_tracking__fe_logs
-      weight: 104
+      weight: 105
     - name: Track Backend Errors
       url: error_tracking/backend
       parent: error_tracking
