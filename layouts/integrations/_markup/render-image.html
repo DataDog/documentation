@@ -10,7 +10,7 @@
 {{- $url := split $img "/" -}}
 {{- $app_listings_bucket := "dd-app-listings" -}}
 
-{{- if strings.Contains .Destination "https://raw.githubusercontent.com" -}}
+{{- if or (strings.Contains .Destination "https://raw.githubusercontent.com") (strings.Contains .Destination "https://s3.amazonaws.com/") -}}
 <img src="{{ (.Destination | safeURL) }}"
   {{- with .PlainText }} alt="{{ . }}"{{ end -}}
   {{- with .Title }} title="{{ . }}"{{ end -}}
