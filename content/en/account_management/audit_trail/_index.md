@@ -1,5 +1,4 @@
 ---
-title: Datadog Audit Trail
 aliases:
     - /account_management/audit_logs/
 further_reading:
@@ -18,6 +17,7 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/audit-trail-best-practices/"
   tag: "Blog"
   text: "Monitor critical Datadog assets and configurations with Audit Trail"
+title: Datadog Audit Trail
 ---
 
 ## Overview
