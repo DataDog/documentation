@@ -59,7 +59,7 @@ You can create and deploy different custom policies containing rules you want to
 For example, you can do the following with policies:
 
 - Deploy multiple rules to a specific subset of an infrastructure using tags.
-- Assign a priority to your policies. Priorities can account for policies with partially overlapping tags.
+- Assign priorities to your policies. Priorities can account for policies with partially overlapping tags.
 
 ### Default policy
 
@@ -137,7 +137,7 @@ You can create a custom Agent rule and deploy it as part of a new Agent policy. 
 2. Create or open a policy.
 3. In **Actions**, select **Manual rule creator**.
 4. Add a name and description for the rule.
-5. In **Expression**, define the Agent expression using Datadog Security Language (SECL) syntax.
+5. In **Expression**, define the Agent expression using [Datadog Security Language (SECL) syntax][16].
 6. Click **Create Agent Rule**. This automatically navigates you back to the policy page.
 
 After you create a custom Agent rule, the change is saved along with other pending rule updates. To apply the change to your environment, deploy the updated custom policy to the Agent.
@@ -202,7 +202,7 @@ To apply the changes, restart the [Datadog Agent][1].
 
 ## Enable and deploy policies
 
-Enabled policies apply their rules to the infrastructure targets identitied by their tags. Enabling a policy is the same as deploying it.
+Enabled policies apply their rules to the infrastructure targets identified by their tags. Enabling a policy is the same as deploying it.
 
 You can use Remote Configuration in the Datadog UI to automatically deploy the custom policy to the hosts designated by the policy tags (all hosts or a defined subset of hosts), or you can manually upload the policy to the Agent on each host.
 
