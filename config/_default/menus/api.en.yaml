@@ -2645,8 +2645,7 @@ menu:
           - v2
         operationids:
           - ListVulnerabilities
-        unstable:
-          - v2
+        unstable: []
         order: 25
     - name: Patch a signal-based rule
       url: '#patch-a-signal-based-rule'
@@ -2718,8 +2717,7 @@ menu:
           - v2
         operationids:
           - GetSBOM
-        unstable:
-          - v2
+        unstable: []
         order: 27
     - name: List vulnerable assets
       url: '#list-vulnerable-assets'
@@ -2731,8 +2729,7 @@ menu:
           - v2
         operationids:
           - ListVulnerableAssets
-        unstable:
-          - v2
+        unstable: []
         order: 26
     - name: Get a finding
       url: '#get-a-finding'
