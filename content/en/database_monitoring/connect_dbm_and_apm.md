@@ -94,7 +94,7 @@ DD_ENV=(application environment)
 DD_VERSION=(application version)
 ```
 
-In the Agent versions `7.63` and greater, set the obfuscation mode to `obfuscate_and_normalize` with the following config parameter in the `apm_config` section of the APM agent configuration file:
+For the best user experience, in the Agent versions `7.63` and greater, set the obfuscation mode to `obfuscate_and_normalize` with the following config parameter in the `apm_config` section of the APM Agent configuration file:
 
 ```
   sql_obfuscation_mode: "obfuscate_and_normalize"
