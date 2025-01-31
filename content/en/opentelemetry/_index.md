@@ -2,6 +2,7 @@
 title: OpenTelemetry in Datadog
 aliases:
 - /tracing/setup_overview/open_standards/
+- /opentelemetry/otel_terms
 further_reading:
 - link: "https://www.datadoghq.com/blog/opentelemetry-instrumentation/"
   tag: "Blog"

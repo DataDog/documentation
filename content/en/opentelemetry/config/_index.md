@@ -15,7 +15,7 @@ Configure your OpenTelemetry setup to optimize data collection and ensure proper
 Optimize data transmission and resource usage with proper batch and memory configurations.
 
 {{< whatsnext desc="Configure batch and memory settings:" >}}
-    {{< nextlink href="/opentelemetry/configure/batch_memory/" >}}Set up Batch Processing{{< /nextlink >}}
+    {{< nextlink href="/opentelemetry/config/batch_memory/" >}}Set up Batch Processing{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ### Environment Variables
@@ -23,7 +23,7 @@ Optimize data transmission and resource usage with proper batch and memory confi
 Configure OpenTelemetry behavior using standardized environment variables supported by Datadog.
 
 {{< whatsnext desc="Configure environment variables:" >}}
-    {{< nextlink href="/opentelemetry/configure/environment_variables/" >}}Set up Environment Variables{{< /nextlink >}}
+    {{< nextlink href="/opentelemetry/config/environment_variables/" >}}Set up Environment Variables{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ### Hostname and Tagging
@@ -31,7 +31,7 @@ Configure OpenTelemetry behavior using standardized environment variables suppor
 Set up proper host identification and tag attribution for your telemetry data.
 
 {{< whatsnext desc="Configure hostnames and tags:" >}}
-    {{< nextlink href="/opentelemetry/configure/hostname_tagging/" >}}Set up Hostname Resolution{{< /nextlink >}}
+    {{< nextlink href="/opentelemetry/config/hostname_tagging/" >}}Set up Hostname Resolution{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ### Log Collection
@@ -39,7 +39,7 @@ Set up proper host identification and tag attribution for your telemetry data.
 Configure log collection and processing for OpenTelemetry data.
 
 {{< whatsnext desc="Configure log collection:" >}}
-    {{< nextlink href="/opentelemetry/configure/log_collection/" >}}Set up Log Collection{{< /nextlink >}}
+    {{< nextlink href="/opentelemetry/config/log_collection/" >}}Set up Log Collection{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Further reading

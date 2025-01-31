@@ -21,20 +21,8 @@ Use the OpenTelemetry API with Datadog's implementation to maintain vendor-neutr
 Use existing OpenTelemetry auto-instrumentation libraries with Datadog's backend.
 
 {{< whatsnext desc="Get started with OpenTelemetry libraries:" >}}
-    {{< nextlink href="/opentelemetry/instrumentation_libraries/" >}}Set up OpenTelemetry Libraries{{< /nextlink >}}
+    {{< nextlink href="/opentelemetry/instrument/instrumentation_libraries/" >}}Set up OpenTelemetry Libraries{{< /nextlink >}}
 {{< /whatsnext >}}
-
-### Language-specific guidelines
-
-{{< programming-lang-wrapper langs="java,python,go,javascript,php,.net,ruby" >}}
-
-{{< programming-lang lang="java" >}}
-Follow the [Java setup guide](/opentelemetry/instrument/java/) to get started.
-{{< /programming-lang >}}
-
-[Additional languages...]
-
-{{< /programming-lang-wrapper >}}
 
 ## Further reading
 
