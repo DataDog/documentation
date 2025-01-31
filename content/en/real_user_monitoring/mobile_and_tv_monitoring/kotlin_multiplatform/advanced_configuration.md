@@ -2,7 +2,9 @@
 title: Kotlin Multiplatform Advanced Configuration
 aliases:
     - /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/kotlin-multiplatform
+    - /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/kotlin_multiplatform
     - /real_user_monitoring/kotlin-multiplatform
+    - /real_user_monitoring/kotlin_multiplatform
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-kotlin-multiplatform
   tag: "Source Code"
@@ -444,12 +446,12 @@ GlobalRumMonitor.get().getCurrentSessionId { sessionId ->
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/rum/application/create
-[2]: /real_user_monitoring/mobile_and_tv_monitoring/kotlin-multiplatform
-[3]: /real_user_monitoring/mobile_and_tv_monitoring/kotlin-multiplatform/data_collected
-[4]: /real_user_monitoring/mobile_and_tv_monitoring/kotlin-multiplatform/advanced_configuration/#automatically-track-views
-[5]: /real_user_monitoring/mobile_and_tv_monitoring/kotlin-multiplatform/advanced_configuration/#initialization-parameters
-[6]: /real_user_monitoring/mobile_and_tv_monitoring/kotlin-multiplatform/#initialize-rum-ktor-plugin-to-track-network-events-made-with-ktor
-[7]: /real_user_monitoring/mobile_and_tv_monitoring/kotlin-multiplatform/data_collected
+[2]: /real_user_monitoring/mobile_and_tv_monitoring/kotlin_multiplatform
+[3]: /real_user_monitoring/mobile_and_tv_monitoring/kotlin_multiplatform/data_collected
+[4]: /real_user_monitoring/mobile_and_tv_monitoring/kotlin_multiplatform/advanced_configuration/#automatically-track-views
+[5]: /real_user_monitoring/mobile_and_tv_monitoring/kotlin_multiplatform/advanced_configuration/#initialization-parameters
+[6]: /real_user_monitoring/mobile_and_tv_monitoring/kotlin_multiplatform/#initialize-rum-ktor-plugin-to-track-network-events-made-with-ktor
+[7]: /real_user_monitoring/mobile_and_tv_monitoring/kotlin_multiplatform/data_collected
 [8]: /real_user_monitoring/explorer/search/#setup-facets-and-measures
-[9]: /real_user_monitoring/mobile_and_tv_monitoring/kotlin-multiplatform/#sending-data-when-device-is-offline
+[9]: /real_user_monitoring/mobile_and_tv_monitoring/kotlin_multiplatform/#sending-data-when-device-is-offline
 [10]: /real_user_monitoring/error_tracking/mobile/ios/#add-app-hang-reporting
