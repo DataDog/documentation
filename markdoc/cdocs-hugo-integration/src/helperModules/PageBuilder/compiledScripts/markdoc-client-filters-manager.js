@@ -6840,7 +6840,6 @@
         nodes: () => schema_exports,
         parse: () => parse3,
         parseTags: () => parseTags,
-        renderers: () => renderers_default,
         resolve: () => resolve2,
         tags: () => tags_default,
         transform: () => transform2,
@@ -7606,31 +7605,102 @@
         }
         return param !== false && param !== void 0 && param !== null;
       }
+      function joinConditions(condition1, condition2) {
+        const joinedConditions = {
+          $$mdtype: "Function",
+          name: "and",
+          parameters: {
+            "0": condition1,
+            "1": condition2
+          },
+          value: truthy(condition1) && truthy(condition2),
+          ref: FunctionRefGenerator.generate()
+        };
+        return joinedConditions;
+      }
+      function negateCondition(condition) {
+        return {
+          $$mdtype: "Function",
+          name: "not",
+          parameters: {
+            "0": condition
+          },
+          value: !truthy(condition),
+          ref: FunctionRefGenerator.generate()
+        };
+      }
+      function renderConditions(node2) {
+        const conditions = [];
+        let currentCondition = {
+          condition: node2.attributes.primary,
+          inline: node2.attributes.inline,
+          children: []
+        };
+        conditions.push(currentCondition);
+        for (const child of node2.children) {
+          if (child.type === "tag" && child.tag === "else") {
+            const precedingCondition = currentCondition.condition;
+            const elseCondition = "primary" in child.attributes ? child.attributes.primary : null;
+            if (elseCondition) {
+              const elseTagCondition = joinConditions(negateCondition(precedingCondition), elseCondition);
+              currentCondition = {
+                condition: elseTagCondition,
+                inline: node2.attributes.inline,
+                children: []
+              };
+            } else {
+              currentCondition = {
+                condition: negateCondition(precedingCondition),
+                inline: node2.attributes.inline,
+                children: []
+              };
+            }
+            conditions.push(currentCondition);
+          } else {
+            currentCondition.children.push(child);
+          }
+        }
+        return conditions;
+      }
       var tagIf = {
         attributes: {
-          primary: { type: Object, render: true }
+          primary: { type: Object, render: false }
         },
         transform(node2, config) {
-          const buildEnclosingTag = (children) => {
+          const buildEnclosingTag = (resolvedCondition) => {
             const enclosingTag = {
               $$mdtype: "Tag",
-              name: node2.attributes.inline ? "span" : "div",
-              if: node2.attributes.primary,
+              name: resolvedCondition.inline ? "span" : "div",
+              if: resolvedCondition.condition,
               attributes: {
-                display: truthy(node2.attributes.primary) ? "true" : "false"
+                display: truthy(resolvedCondition.condition) ? "true" : "false"
               },
-              children
+              children: resolvedCondition.children
             };
             return enclosingTag;
           };
-          const nodes = node2.children.flatMap((child) => child.transform(config));
-          if (nodes.some(isPromise)) {
-            return Promise.all(nodes).then((nodes2) => {
-              const tag = buildEnclosingTag(nodes2.flat());
-              return [tag];
+          const conditions = renderConditions(node2);
+          const transformedConditions = [];
+          for (const { condition, inline: inline4, children } of conditions) {
+            const nodes = children.flatMap((child) => child.transform(config));
+            transformedConditions.push({ condition, children: nodes, inline: inline4 });
+          }
+          const allNodes = transformedConditions.flatMap((condition) => {
+            return condition.children;
+          });
+          if (allNodes.some(isPromise)) {
+            return Promise.all(allNodes).then(() => {
+              return transformedConditions.map((condition) => {
+                condition.children = condition.children.flat();
+                return buildEnclosingTag(condition);
+              });
+            });
+          } else {
+            return transformedConditions.map((condition) => {
+              condition.children = condition.children.flat();
+              return buildEnclosingTag(condition);
             });
           }
-          return [buildEnclosingTag(nodes)];
         }
       };
       var tagElse = {
@@ -7639,13 +7709,13 @@
           primary: { type: Object, render: false }
         }
       };
-      var _RefGenerator = class {
-        static generateRef() {
-          return `${_RefGenerator.ref++}`;
+      var _FunctionRefGenerator = class {
+        static generate() {
+          return `${_FunctionRefGenerator.ref++}`;
         }
       };
-      var RefGenerator = _RefGenerator;
-      RefGenerator.ref = 0;
+      var FunctionRefGenerator = _FunctionRefGenerator;
+      FunctionRefGenerator.ref = 0;
       var and = {
         transform(parameters) {
           const value = Object.values(parameters).every((p) => {
@@ -7660,7 +7730,7 @@
             name: "and",
             value,
             parameters,
-            ref: RefGenerator.generateRef()
+            ref: FunctionRefGenerator.generate()
           };
         }
       };
@@ -7672,7 +7742,7 @@
             name: "or",
             value,
             parameters,
-            ref: RefGenerator.generateRef()
+            ref: FunctionRefGenerator.generate()
           };
         }
       };
@@ -7687,7 +7757,7 @@
             name: "not",
             value,
             parameters,
-            ref: RefGenerator.generateRef()
+            ref: FunctionRefGenerator.generate()
           };
         }
       };
@@ -7706,17 +7776,8 @@
             name: "equals",
             value,
             parameters,
-            ref: RefGenerator.generateRef()
+            ref: FunctionRefGenerator.generate()
           };
-        }
-      };
-      var debug = {
-        transform(parameters) {
-          if (typeof parameters[0] === "object") {
-            return JSON.stringify(parameters[0].value, null, 2);
-          } else {
-            return JSON.stringify(parameters[0], null, 2);
-          }
         }
       };
       var defaultFn = {
@@ -7737,6 +7798,15 @@
             value,
             parameters
           };
+        }
+      };
+      var debug = {
+        transform(parameters) {
+          if (typeof parameters[0] === "object") {
+            return JSON.stringify(parameters[0].value, null, 2);
+          } else {
+            return JSON.stringify(parameters[0], null, 2);
+          }
         }
       };
       var functions_default = { and, or, not, equals, default: defaultFn, debug };
@@ -8217,7 +8287,6 @@
       };
       var error = {};
       var node = {};
-      var renderers_default = {};
       var PartialFile = class {
         validate(file, config) {
           const { partials = {} } = config;
@@ -9021,6 +9090,9 @@
         return json.replace(/"([^"]+)":/g, "$1:");
       };
       var ZodError = class extends Error {
+        get errors() {
+          return this.issues;
+        }
         constructor(issues) {
           super();
           this.issues = [];
@@ -9038,9 +9110,6 @@
           }
           this.name = "ZodError";
           this.issues = issues;
-        }
-        get errors() {
-          return this.issues;
         }
         format(_mapper) {
           const mapper = _mapper || function(issue) {
@@ -9408,34 +9477,6 @@
         return { errorMap: customMap, description };
       }
       var ZodType = class {
-        constructor(def) {
-          this.spa = this.safeParseAsync;
-          this._def = def;
-          this.parse = this.parse.bind(this);
-          this.safeParse = this.safeParse.bind(this);
-          this.parseAsync = this.parseAsync.bind(this);
-          this.safeParseAsync = this.safeParseAsync.bind(this);
-          this.spa = this.spa.bind(this);
-          this.refine = this.refine.bind(this);
-          this.refinement = this.refinement.bind(this);
-          this.superRefine = this.superRefine.bind(this);
-          this.optional = this.optional.bind(this);
-          this.nullable = this.nullable.bind(this);
-          this.nullish = this.nullish.bind(this);
-          this.array = this.array.bind(this);
-          this.promise = this.promise.bind(this);
-          this.or = this.or.bind(this);
-          this.and = this.and.bind(this);
-          this.transform = this.transform.bind(this);
-          this.brand = this.brand.bind(this);
-          this.default = this.default.bind(this);
-          this.catch = this.catch.bind(this);
-          this.describe = this.describe.bind(this);
-          this.pipe = this.pipe.bind(this);
-          this.readonly = this.readonly.bind(this);
-          this.isNullable = this.isNullable.bind(this);
-          this.isOptional = this.isOptional.bind(this);
-        }
         get description() {
           return this._def.description;
         }
@@ -9498,6 +9539,43 @@
           };
           const result = this._parseSync({ data, path: ctx.path, parent: ctx });
           return handleResult(ctx, result);
+        }
+        "~validate"(data) {
+          var _a, _b;
+          const ctx = {
+            common: {
+              issues: [],
+              async: !!this["~standard"].async
+            },
+            path: [],
+            schemaErrorMap: this._def.errorMap,
+            parent: null,
+            data,
+            parsedType: getParsedType(data)
+          };
+          if (!this["~standard"].async) {
+            try {
+              const result = this._parseSync({ data, path: [], parent: ctx });
+              return isValid(result) ? {
+                value: result.value
+              } : {
+                issues: ctx.common.issues
+              };
+            } catch (err) {
+              if ((_b = (_a = err === null || err === void 0 ? void 0 : err.message) === null || _a === void 0 ? void 0 : _a.toLowerCase()) === null || _b === void 0 ? void 0 : _b.includes("encountered")) {
+                this["~standard"].async = true;
+              }
+              ctx.common = {
+                issues: [],
+                async: true
+              };
+            }
+          }
+          return this._parseAsync({ data, path: [], parent: ctx }).then((result) => isValid(result) ? {
+            value: result.value
+          } : {
+            issues: ctx.common.issues
+          });
         }
         async parseAsync(data, params) {
           const result = await this.safeParseAsync(data, params);
@@ -9576,6 +9654,39 @@
         superRefine(refinement) {
           return this._refinement(refinement);
         }
+        constructor(def) {
+          this.spa = this.safeParseAsync;
+          this._def = def;
+          this.parse = this.parse.bind(this);
+          this.safeParse = this.safeParse.bind(this);
+          this.parseAsync = this.parseAsync.bind(this);
+          this.safeParseAsync = this.safeParseAsync.bind(this);
+          this.spa = this.spa.bind(this);
+          this.refine = this.refine.bind(this);
+          this.refinement = this.refinement.bind(this);
+          this.superRefine = this.superRefine.bind(this);
+          this.optional = this.optional.bind(this);
+          this.nullable = this.nullable.bind(this);
+          this.nullish = this.nullish.bind(this);
+          this.array = this.array.bind(this);
+          this.promise = this.promise.bind(this);
+          this.or = this.or.bind(this);
+          this.and = this.and.bind(this);
+          this.transform = this.transform.bind(this);
+          this.brand = this.brand.bind(this);
+          this.default = this.default.bind(this);
+          this.catch = this.catch.bind(this);
+          this.describe = this.describe.bind(this);
+          this.pipe = this.pipe.bind(this);
+          this.readonly = this.readonly.bind(this);
+          this.isNullable = this.isNullable.bind(this);
+          this.isOptional = this.isOptional.bind(this);
+          this["~standard"] = {
+            version: 1,
+            vendor: "zod",
+            validate: (data) => this["~validate"](data)
+          };
+        }
         optional() {
           return ZodOptional.create(this, this._def);
         }
@@ -9586,7 +9697,7 @@
           return this.nullable().optional();
         }
         array() {
-          return ZodArray.create(this, this._def);
+          return ZodArray.create(this);
         }
         promise() {
           return ZodPromise.create(this, this._def);
@@ -9652,16 +9763,20 @@
       };
       var cuidRegex = /^c[^\s-]{8,}$/i;
       var cuid2Regex = /^[0-9a-z]+$/;
-      var ulidRegex = /^[0-9A-HJKMNP-TV-Z]{26}$/;
+      var ulidRegex = /^[0-9A-HJKMNP-TV-Z]{26}$/i;
       var uuidRegex = /^[0-9a-fA-F]{8}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{12}$/i;
       var nanoidRegex = /^[a-z0-9_-]{21}$/i;
+      var jwtRegex = /^[A-Za-z0-9-_]+\.[A-Za-z0-9-_]+\.[A-Za-z0-9-_]*$/;
       var durationRegex = /^[-+]?P(?!$)(?:(?:[-+]?\d+Y)|(?:[-+]?\d+[.,]\d+Y$))?(?:(?:[-+]?\d+M)|(?:[-+]?\d+[.,]\d+M$))?(?:(?:[-+]?\d+W)|(?:[-+]?\d+[.,]\d+W$))?(?:(?:[-+]?\d+D)|(?:[-+]?\d+[.,]\d+D$))?(?:T(?=[\d+-])(?:(?:[-+]?\d+H)|(?:[-+]?\d+[.,]\d+H$))?(?:(?:[-+]?\d+M)|(?:[-+]?\d+[.,]\d+M$))?(?:[-+]?\d+(?:[.,]\d+)?S)?)??$/;
       var emailRegex = /^(?!\.)(?!.*\.\.)([A-Z0-9_'+\-\.]*)[A-Z0-9_+-]@([A-Z0-9][A-Z0-9\-]*\.)+[A-Z]{2,}$/i;
       var _emojiRegex = `^(\\p{Extended_Pictographic}|\\p{Emoji_Component})+$`;
       var emojiRegex;
       var ipv4Regex = /^(?:(?:25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])\.){3}(?:25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])$/;
-      var ipv6Regex = /^(([a-f0-9]{1,4}:){7}|::([a-f0-9]{1,4}:){0,6}|([a-f0-9]{1,4}:){1}:([a-f0-9]{1,4}:){0,5}|([a-f0-9]{1,4}:){2}:([a-f0-9]{1,4}:){0,4}|([a-f0-9]{1,4}:){3}:([a-f0-9]{1,4}:){0,3}|([a-f0-9]{1,4}:){4}:([a-f0-9]{1,4}:){0,2}|([a-f0-9]{1,4}:){5}:([a-f0-9]{1,4}:){0,1})([a-f0-9]{1,4}|(((25[0-5])|(2[0-4][0-9])|(1[0-9]{2})|([0-9]{1,2}))\.){3}((25[0-5])|(2[0-4][0-9])|(1[0-9]{2})|([0-9]{1,2})))$/;
+      var ipv4CidrRegex = /^(?:(?:25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])\.){3}(?:25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])\/(3[0-2]|[12]?[0-9])$/;
+      var ipv6Regex = /^(([0-9a-fA-F]{1,4}:){7,7}[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,7}:|([0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,5}(:[0-9a-fA-F]{1,4}){1,2}|([0-9a-fA-F]{1,4}:){1,4}(:[0-9a-fA-F]{1,4}){1,3}|([0-9a-fA-F]{1,4}:){1,3}(:[0-9a-fA-F]{1,4}){1,4}|([0-9a-fA-F]{1,4}:){1,2}(:[0-9a-fA-F]{1,4}){1,5}|[0-9a-fA-F]{1,4}:((:[0-9a-fA-F]{1,4}){1,6})|:((:[0-9a-fA-F]{1,4}){1,7}|:)|fe80:(:[0-9a-fA-F]{0,4}){0,4}%[0-9a-zA-Z]{1,}|::(ffff(:0{1,4}){0,1}:){0,1}((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])|([0-9a-fA-F]{1,4}:){1,4}:((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9]))$/;
+      var ipv6CidrRegex = /^(([0-9a-fA-F]{1,4}:){7,7}[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,7}:|([0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,5}(:[0-9a-fA-F]{1,4}){1,2}|([0-9a-fA-F]{1,4}:){1,4}(:[0-9a-fA-F]{1,4}){1,3}|([0-9a-fA-F]{1,4}:){1,3}(:[0-9a-fA-F]{1,4}){1,4}|([0-9a-fA-F]{1,4}:){1,2}(:[0-9a-fA-F]{1,4}){1,5}|[0-9a-fA-F]{1,4}:((:[0-9a-fA-F]{1,4}){1,6})|:((:[0-9a-fA-F]{1,4}){1,7}|:)|fe80:(:[0-9a-fA-F]{0,4}){0,4}%[0-9a-zA-Z]{1,}|::(ffff(:0{1,4}){0,1}:){0,1}((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])|([0-9a-fA-F]{1,4}:){1,4}:((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9]))\/(12[0-8]|1[01][0-9]|[1-9]?[0-9])$/;
       var base64Regex = /^([0-9a-zA-Z+/]{4})*(([0-9a-zA-Z+/]{2}==)|([0-9a-zA-Z+/]{3}=))?$/;
+      var base64urlRegex = /^([0-9a-zA-Z-_]{4})*(([0-9a-zA-Z-_]{2}(==)?)|([0-9a-zA-Z-_]{3}(=)?))?$/;
       var dateRegexSource = `((\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-((0[13578]|1[02])-(0[1-9]|[12]\\d|3[01])|(0[469]|11)-(0[1-9]|[12]\\d|30)|(02)-(0[1-9]|1\\d|2[0-8])))`;
       var dateRegex = new RegExp(`^${dateRegexSource}$`);
       function timeRegexSource(args) {
@@ -9690,6 +9805,33 @@
           return true;
         }
         if ((version === "v6" || !version) && ipv6Regex.test(ip)) {
+          return true;
+        }
+        return false;
+      }
+      function isValidJWT(jwt, alg) {
+        if (!jwtRegex.test(jwt))
+          return false;
+        try {
+          const [header] = jwt.split(".");
+          const base64 = header.replace(/-/g, "+").replace(/_/g, "/").padEnd(header.length + (4 - header.length % 4) % 4, "=");
+          const decoded = JSON.parse(atob(base64));
+          if (typeof decoded !== "object" || decoded === null)
+            return false;
+          if (!decoded.typ || !decoded.alg)
+            return false;
+          if (alg && decoded.alg !== alg)
+            return false;
+          return true;
+        } catch (_a) {
+          return false;
+        }
+      }
+      function isValidCidr(ip, version) {
+        if ((version === "v4" || !version) && ipv4CidrRegex.test(ip)) {
+          return true;
+        }
+        if ((version === "v6" || !version) && ipv6CidrRegex.test(ip)) {
           return true;
         }
         return false;
@@ -9950,11 +10092,41 @@
                 });
                 status.dirty();
               }
+            } else if (check.kind === "jwt") {
+              if (!isValidJWT(input.data, check.alg)) {
+                ctx = this._getOrReturnCtx(input, ctx);
+                addIssueToContext(ctx, {
+                  validation: "jwt",
+                  code: ZodIssueCode.invalid_string,
+                  message: check.message
+                });
+                status.dirty();
+              }
+            } else if (check.kind === "cidr") {
+              if (!isValidCidr(input.data, check.version)) {
+                ctx = this._getOrReturnCtx(input, ctx);
+                addIssueToContext(ctx, {
+                  validation: "cidr",
+                  code: ZodIssueCode.invalid_string,
+                  message: check.message
+                });
+                status.dirty();
+              }
             } else if (check.kind === "base64") {
               if (!base64Regex.test(input.data)) {
                 ctx = this._getOrReturnCtx(input, ctx);
                 addIssueToContext(ctx, {
                   validation: "base64",
+                  code: ZodIssueCode.invalid_string,
+                  message: check.message
+                });
+                status.dirty();
+              }
+            } else if (check.kind === "base64url") {
+              if (!base64urlRegex.test(input.data)) {
+                ctx = this._getOrReturnCtx(input, ctx);
+                addIssueToContext(ctx, {
+                  validation: "base64url",
                   code: ZodIssueCode.invalid_string,
                   message: check.message
                 });
@@ -10006,8 +10178,20 @@
         base64(message) {
           return this._addCheck({ kind: "base64", ...errorUtil.errToObj(message) });
         }
+        base64url(message) {
+          return this._addCheck({
+            kind: "base64url",
+            ...errorUtil.errToObj(message)
+          });
+        }
+        jwt(options) {
+          return this._addCheck({ kind: "jwt", ...errorUtil.errToObj(options) });
+        }
         ip(options) {
           return this._addCheck({ kind: "ip", ...errorUtil.errToObj(options) });
+        }
+        cidr(options) {
+          return this._addCheck({ kind: "cidr", ...errorUtil.errToObj(options) });
         }
         datetime(options) {
           var _a, _b;
@@ -10158,8 +10342,14 @@
         get isIP() {
           return !!this._def.checks.find((ch) => ch.kind === "ip");
         }
+        get isCIDR() {
+          return !!this._def.checks.find((ch) => ch.kind === "cidr");
+        }
         get isBase64() {
           return !!this._def.checks.find((ch) => ch.kind === "base64");
+        }
+        get isBase64url() {
+          return !!this._def.checks.find((ch) => ch.kind === "base64url");
         }
         get minLength() {
           let min = null;
@@ -10438,17 +10628,15 @@
         }
         _parse(input) {
           if (this._def.coerce) {
-            input.data = BigInt(input.data);
+            try {
+              input.data = BigInt(input.data);
+            } catch (_a) {
+              return this._getInvalidInput(input);
+            }
           }
           const parsedType = this._getType(input);
           if (parsedType !== ZodParsedType.bigint) {
-            const ctx2 = this._getOrReturnCtx(input);
-            addIssueToContext(ctx2, {
-              code: ZodIssueCode.invalid_type,
-              expected: ZodParsedType.bigint,
-              received: ctx2.parsedType
-            });
-            return INVALID;
+            return this._getInvalidInput(input);
           }
           let ctx = void 0;
           const status = new ParseStatus();
@@ -10494,6 +10682,15 @@
             }
           }
           return { status: status.value, value: input.data };
+        }
+        _getInvalidInput(input) {
+          const ctx = this._getOrReturnCtx(input);
+          addIssueToContext(ctx, {
+            code: ZodIssueCode.invalid_type,
+            expected: ZodParsedType.bigint,
+            received: ctx.parsedType
+          });
+          return INVALID;
         }
         gte(value, message) {
           return this.setLimit("min", value, true, errorUtil.toString(message));
@@ -12755,7 +12952,6 @@
       MarkdocStaticCompiler.tags = tags_default;
       MarkdocStaticCompiler.functions = functions_default;
       MarkdocStaticCompiler.globalAttributes = globalAttributes;
-      MarkdocStaticCompiler.renderers = renderers_default;
       MarkdocStaticCompiler.transforms = transforms_default;
       MarkdocStaticCompiler.Ast = ast_default;
       MarkdocStaticCompiler.Tokenizer = Tokenizer;

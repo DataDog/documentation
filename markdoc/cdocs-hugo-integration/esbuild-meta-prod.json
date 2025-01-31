@@ -37,7 +37,7 @@
       "format": "cjs"
     },
     "node_modules/cdocs-markdoc/dist/index.js": {
-      "bytes": 428902,
+      "bytes": 436005,
       "imports": [],
       "format": "cjs"
     },
@@ -135,7 +135,7 @@
           "bytesInOutput": 1020
         },
         "node_modules/cdocs-markdoc/dist/index.js": {
-          "bytesInOutput": 207588
+          "bytesInOutput": 211420
         },
         "dist/helperModules/renderer/reresolver.js": {
           "bytesInOutput": 790
@@ -150,7 +150,7 @@
           "bytesInOutput": 140
         }
       },
-      "bytes": 222266
+      "bytes": 226098
     }
   }
 }

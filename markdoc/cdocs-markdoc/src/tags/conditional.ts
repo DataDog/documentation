@@ -12,6 +12,14 @@
  *
  * In rendered HTML, the visibility of this enclosing tag can be toggled
  * as the user's customizations selections change.
+ *
+ * The most complex updates are around supporting `else` tags that are nested
+ * inside an `if` tag, with each `else` tag possibly containing its own condition
+ * (functioning as an `else if` in practice). The cdocs solution follows
+ * the same processing pattern as the original Markdoc, but because all content
+ * must be retained whether it should be displayed or not, the logic is more complex.
+ * The original Markdoc simply returns early as soon as it finds a truthy condition
+ * in the set of if/else tags.
  */
 
 import { isPromise } from '../utils';

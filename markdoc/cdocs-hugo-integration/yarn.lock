@@ -1157,6 +1157,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/linkify-it@npm:^3.0.1":
+  version: 3.0.5
+  resolution: "@types/linkify-it@npm:3.0.5"
+  checksum: fac28f41a6e576282300a459d70ea0d33aab70dbb77c3d09582bb0335bb00d862b6de69585792a4d590aae4173fbab0bf28861e2d90ca7b2b1439b52688e9ff6
+  languageName: node
+  linkType: hard
+
 "@types/lodash@npm:^4.17.7":
   version: 4.17.13
   resolution: "@types/lodash@npm:4.17.13"
@@ -1613,16 +1620,17 @@ __metadata:
   linkType: soft
 
 "cdocs-markdoc@file:../cdocs-markdoc::locator=cdocs-hugo-integration%40workspace%3A.":
-  version: 0.1.0
-  resolution: "cdocs-markdoc@file:../cdocs-markdoc#../cdocs-markdoc::hash=22b8f8&locator=cdocs-hugo-integration%40workspace%3A."
+  version: 1.0.0
+  resolution: "cdocs-markdoc@file:../cdocs-markdoc#../cdocs-markdoc::hash=68a7ec&locator=cdocs-hugo-integration%40workspace%3A."
   dependencies:
+    "@types/linkify-it": ^3.0.1
     "@types/markdown-it": 12.2.3
-    markdown-it-deflist: ^3.0.0
-    zod: ^3.22.4
   dependenciesMeta:
+    "@types/linkify-it":
+      optional: true
     "@types/markdown-it":
       optional: true
-  checksum: 53bf662cdaa79ddd6b4c84128e675bac31e736bae7d3437e9f2db7509f55de4c6440cace035f9be6c93af53923b08c8efb28b42d47f02af86c79ce8a0fd0a379
+  checksum: c84b5da34e1f267d50ede95021715ca6815afc5b7337e48a0b3b37d7671feb8b00aa046fb91164a1500883f780354f82c55a27ad71748ddf7fc6ff76f3b5fc10
   languageName: node
   linkType: hard
 
