@@ -17,11 +17,11 @@ import { truthy } from '../tags/conditional';
  * that can be used in rendered HTML elements
  * to reference the function when desired
  */
-class RefGenerator {
+export class FunctionRefGenerator {
   static ref = 0;
 
-  static generateRef() {
-    return `${RefGenerator.ref++}`;
+  static generate() {
+    return `${FunctionRefGenerator.ref++}`;
   }
 }
 
@@ -40,7 +40,7 @@ const and: ConfigFunction = {
       name: 'and',
       value,
       parameters,
-      ref: RefGenerator.generateRef()
+      ref: FunctionRefGenerator.generate()
     };
   }
 };
@@ -54,7 +54,7 @@ const or: ConfigFunction = {
       name: 'or',
       value,
       parameters,
-      ref: RefGenerator.generateRef()
+      ref: FunctionRefGenerator.generate()
     };
   }
 };
@@ -71,7 +71,7 @@ const not: ConfigFunction = {
       name: 'not',
       value,
       parameters,
-      ref: RefGenerator.generateRef()
+      ref: FunctionRefGenerator.generate()
     };
   }
 };
@@ -92,7 +92,7 @@ const equals: ConfigFunction = {
       name: 'equals',
       value,
       parameters,
-      ref: RefGenerator.generateRef()
+      ref: FunctionRefGenerator.generate()
     };
   }
 };

@@ -16,6 +16,7 @@
 
 import { isPromise } from '../utils';
 import { ClientFunction, ClientVariable, type Tag } from '../types';
+import { FunctionRefGenerator } from '../functions';
 
 import {
   Node,
@@ -33,6 +34,27 @@ export function truthy(param: any) {
 }
 
 /**
+ * Join two conditions with an "and" function.
+ */
+function joinConditions(
+  condition1: ClientFunction | ClientVariable,
+  condition2: ClientFunction | ClientVariable
+): ClientFunction {
+  const joinedConditions: ClientFunction = {
+    $$mdtype: 'Function',
+    name: 'and',
+    parameters: {
+      '0': condition1,
+      '1': condition2
+    },
+    value: truthy(condition1) && truthy(condition2),
+    ref: FunctionRefGenerator.generate()
+  };
+
+  return joinedConditions;
+}
+
+/**
  * Wrap a given condition in a "not" function
  * that flips the outcome of the condition.
  */
@@ -44,7 +66,7 @@ function negateCondition(condition: ClientFunction | ClientVariable): ClientFunc
       '0': condition
     },
     value: !truthy(condition),
-    ref: ''
+    ref: FunctionRefGenerator.generate()
   };
 }
 
@@ -53,18 +75,30 @@ function buildIfTags(node: Node) {
   // tags will be added here as they're processed
   const tags: Tag[] = [];
 
-  // if tag will be built here and added to tags
+  // if tag will be built here and added to tags array
 
   // anticonditions will be added here
   const ifCondition = node.attributes.primary;
-  const antiCondition: ClientFunction = negateCondition(ifCondition);
+  let antiCondition: ClientFunction = negateCondition(ifCondition);
 
   console.log('top level ifCondition', JSON.stringify(ifCondition, null, 2));
 
   for (const child of node.children) {
     if (child.type === 'tag' && child.tag === 'else') {
-      console.log('\nprocessing child else tag');
-      console.log('child condition', JSON.stringify(child.attributes.primary, null, 2));
+      const elseCondition =
+        'primary' in child.attributes ? child.attributes.primary : null;
+      if (elseCondition) {
+        // build new if tag and add it to the tags array
+        const elseTagCondition = joinConditions(antiCondition, elseCondition);
+
+        // update the anti condition in case another else tag is encountered
+        const newAntiCondition = negateCondition(elseCondition);
+        antiCondition = joinConditions(antiCondition, newAntiCondition);
+      } else {
+        // build new if tag with the existing antiCondition
+      }
+      // If the tag is not an else tag, add it as a child of the if tag
+      // that is currently being built
     } else {
       // console.log('\nprocessing non-else child');
       // console.log('child', JSON.stringify(child, null, 2));
