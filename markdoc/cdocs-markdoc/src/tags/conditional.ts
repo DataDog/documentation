@@ -186,44 +186,6 @@ export const tagIf: Schema = {
   }
 };
 
-/*
-export const tagIf: Schema = {
-  attributes: {
-    primary: { type: Object, render: true }
-  },
-
-  transform(node, config) {
-    const conditions = renderConditions(node);
-
-    const buildEnclosingTag = (children: RenderableTreeNode[]) => {
-      const enclosingTag: Tag = {
-        $$mdtype: 'Tag',
-        name: node.attributes.inline ? 'span' : 'div',
-        if: node.attributes.primary,
-        attributes: {
-          display: truthy(node.attributes.primary) ? 'true' : 'false'
-        },
-        children
-      };
-
-      return enclosingTag;
-    };
-
-    const nodes = node.children.flatMap<MaybePromise<RenderableTreeNodes>>((child) =>
-      child.transform(config)
-    );
-    if (nodes.some(isPromise)) {
-      return Promise.all(nodes).then((nodes) => {
-        const tag = buildEnclosingTag(nodes.flat());
-        return [tag];
-      });
-    } else {
-      return [buildEnclosingTag(nodes as RenderableTreeNode[])];
-    }
-  }
-};
-*/
-
 export const tagElse: Schema = {
   selfClosing: true,
   attributes: {
