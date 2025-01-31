@@ -1,7 +1,9 @@
 ---
 title: Billing and usage reporting
 description: "Monitoring individual client and aggregate usage of the Datadog platform in multi-organization account setups."
-private: true
+type: partners
+aliases:
+  - /partners/billing-and-usage-reporting/
 ---
 
 Read on for information on how to monitor both individual client and aggregate usage of the Datadog platform in your multiple-organization account.
