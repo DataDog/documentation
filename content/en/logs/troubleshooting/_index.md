@@ -35,7 +35,7 @@ If you are unable to convert the timestamp of JSON logs to a [recognized date fo
 
 {{< img src="logs/troubleshooting/preprocessing_json_timestamp.png" alt="The preprocessing for JSON logs configuration box with the date attributes, which includes timestamp by default" style="width:90%" >}}
 
-2. Set up the [arithmetic processor][7] so that the formula multiples your timestamp by 1000 to convert it to milliseconds. The formula's result is a new attribute.
+2. Set up the [arithmetic processor][7] so that the formula multiplies your timestamp by 1000 to convert it to milliseconds. The formula's result is a new attribute.
 
 3. Set up the [log date remapper][8] to use the new attribute as the official timestamp.
 
