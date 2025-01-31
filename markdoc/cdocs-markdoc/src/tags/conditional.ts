@@ -33,20 +33,21 @@ import {
   RenderableTreeNodes,
   Schema
 } from '../types';
+import { join } from 'path';
 
-type Condition = {
+type ConditionalContent = {
   condition: ClientFunction | ClientVariable;
   inline: boolean;
   children: Node[];
 };
 
-type TransformedCondition = {
+type TransformedConditionalContent = {
   condition: ClientFunction | ClientVariable;
   children: MaybePromise<RenderableTreeNodes>[];
   inline: boolean;
 };
 
-type ResolvedCondition = {
+type ResolvedConditionalContent = {
   condition: ClientFunction | ClientVariable;
   children: RenderableTreeNode[];
   inline: boolean;
@@ -60,6 +61,26 @@ export function truthy(param: any) {
 }
 
 function joinConditions(
+  conditions: (ClientFunction | ClientVariable)[]
+): ClientFunction | ClientVariable {
+  if (conditions.length === 0) {
+    throw new Error('Cannot join zero conditions');
+  }
+
+  if (conditions.length === 1) {
+    return conditions[0];
+  }
+
+  let joinedConditions: ClientFunction | ClientVariable = conditions[0];
+
+  for (let i = 1; i < conditions.length; i++) {
+    joinedConditions = joinTwoConditions(joinedConditions, conditions[i]);
+  }
+
+  return joinedConditions as ClientFunction;
+}
+
+function joinTwoConditions(
   condition1: ClientFunction | ClientVariable,
   condition2: ClientFunction | ClientVariable
 ): ClientFunction {
@@ -89,49 +110,48 @@ function negateCondition(condition: ClientFunction | ClientVariable): ClientFunc
   };
 }
 
-function renderConditions(node: Node): Condition[] {
-  const conditions: Condition[] = [];
+function buildConditionalContentEntries(node: Node): ConditionalContent[] {
+  const contentEntries: ConditionalContent[] = [];
 
-  let currentCondition: Condition = {
+  let currentContentEntry: ConditionalContent = {
     condition: node.attributes.primary,
     inline: node.attributes.inline,
     children: []
   };
 
-  conditions.push(currentCondition);
+  contentEntries.push(currentContentEntry);
 
   for (const child of node.children) {
     if (child.type === 'tag' && child.tag === 'else') {
-      const precedingCondition = currentCondition.condition;
+      let condition: ClientFunction | ClientVariable;
 
       const elseCondition =
         'primary' in child.attributes ? child.attributes.primary : null;
 
       if (elseCondition) {
-        const elseTagCondition = joinConditions(
-          negateCondition(precedingCondition),
+        condition = joinConditions([
+          ...contentEntries.map((entry) => negateCondition(entry.condition)),
           elseCondition
-        );
-
-        currentCondition = {
-          condition: elseTagCondition,
-          inline: node.attributes.inline,
-          children: []
-        };
+        ]);
       } else {
-        currentCondition = {
-          condition: negateCondition(precedingCondition),
-          inline: node.attributes.inline,
-          children: []
-        };
+        condition = joinConditions(
+          contentEntries.map((entry) => negateCondition(entry.condition))
+        );
       }
-      conditions.push(currentCondition);
+
+      currentContentEntry = {
+        condition,
+        inline: node.attributes.inline,
+        children: []
+      };
+
+      contentEntries.push(currentContentEntry);
     } else {
-      currentCondition.children.push(child);
+      currentContentEntry.children.push(child);
     }
   }
 
-  return conditions;
+  return contentEntries;
 }
 
 export const tagIf: Schema = {
@@ -140,7 +160,7 @@ export const tagIf: Schema = {
   },
 
   transform(node, config) {
-    const buildEnclosingTag = (resolvedCondition: ResolvedCondition) => {
+    const buildEnclosingTag = (resolvedCondition: ResolvedConditionalContent) => {
       const enclosingTag: Tag = {
         $$mdtype: 'Tag',
         name: resolvedCondition.inline ? 'span' : 'div',
@@ -154,17 +174,17 @@ export const tagIf: Schema = {
       return enclosingTag;
     };
 
-    const conditions = renderConditions(node);
-    const transformedConditions: TransformedCondition[] = [];
+    const contentEntries = buildConditionalContentEntries(node);
+    const transformedEntries: TransformedConditionalContent[] = [];
 
-    for (const { condition, inline, children } of conditions) {
+    for (const { condition, inline, children } of contentEntries) {
       const nodes = children.flatMap<MaybePromise<RenderableTreeNodes>>((child) =>
         child.transform(config)
       );
-      transformedConditions.push({ condition, children: nodes, inline });
+      transformedEntries.push({ condition, children: nodes, inline });
     }
 
-    const allNodes = transformedConditions.flatMap<MaybePromise<RenderableTreeNodes>>(
+    const allNodes = transformedEntries.flatMap<MaybePromise<RenderableTreeNodes>>(
       (condition) => {
         return condition.children;
       }
@@ -172,15 +192,15 @@ export const tagIf: Schema = {
 
     if (allNodes.some(isPromise)) {
       return Promise.all(allNodes).then(() => {
-        return transformedConditions.map((condition) => {
-          condition.children = condition.children.flat();
-          return buildEnclosingTag(condition as ResolvedCondition);
+        return transformedEntries.map((entry) => {
+          entry.children = entry.children.flat();
+          return buildEnclosingTag(entry as ResolvedConditionalContent);
         });
       });
     } else {
-      return transformedConditions.map((condition) => {
-        condition.children = condition.children.flat();
-        return buildEnclosingTag(condition as ResolvedCondition);
+      return transformedEntries.map((entry) => {
+        entry.children = entry.children.flat();
+        return buildEnclosingTag(entry as ResolvedConditionalContent);
       });
     }
   }

@@ -337,40 +337,16 @@
       "name": "div",
       "if": {
         "$$mdtype": "Function",
-        "name": "not",
+        "name": "and",
         "parameters": {
           "0": {
             "$$mdtype": "Function",
-            "name": "and",
+            "name": "not",
             "parameters": {
               "0": {
                 "$$mdtype": "Function",
-                "name": "not",
-                "parameters": {
-                  "0": {
-                    "$$mdtype": "Function",
-                    "name": "equals",
-                    "value": false,
-                    "parameters": {
-                      "0": {
-                        "$$mdtype": "Variable",
-                        "path": [
-                          "test_string"
-                        ],
-                        "value": "Datadog"
-                      },
-                      "1": "This will fail"
-                    },
-                    "ref": "2"
-                  }
-                },
-                "value": true,
-                "ref": "51"
-              },
-              "1": {
-                "$$mdtype": "Function",
                 "name": "equals",
-                "value": true,
+                "value": false,
                 "parameters": {
                   "0": {
                     "$$mdtype": "Variable",
@@ -379,17 +355,73 @@
                     ],
                     "value": "Datadog"
                   },
-                  "1": "Datadog"
+                  "1": "This will fail"
                 },
-                "ref": "1"
+                "ref": "2"
               }
             },
             "value": true,
-            "ref": "52"
+            "ref": "53"
+          },
+          "1": {
+            "$$mdtype": "Function",
+            "name": "not",
+            "parameters": {
+              "0": {
+                "$$mdtype": "Function",
+                "name": "and",
+                "parameters": {
+                  "0": {
+                    "$$mdtype": "Function",
+                    "name": "not",
+                    "parameters": {
+                      "0": {
+                        "$$mdtype": "Function",
+                        "name": "equals",
+                        "value": false,
+                        "parameters": {
+                          "0": {
+                            "$$mdtype": "Variable",
+                            "path": [
+                              "test_string"
+                            ],
+                            "value": "Datadog"
+                          },
+                          "1": "This will fail"
+                        },
+                        "ref": "2"
+                      }
+                    },
+                    "value": true,
+                    "ref": "51"
+                  },
+                  "1": {
+                    "$$mdtype": "Function",
+                    "name": "equals",
+                    "value": true,
+                    "parameters": {
+                      "0": {
+                        "$$mdtype": "Variable",
+                        "path": [
+                          "test_string"
+                        ],
+                        "value": "Datadog"
+                      },
+                      "1": "Datadog"
+                    },
+                    "ref": "1"
+                  }
+                },
+                "value": true,
+                "ref": "52"
+              }
+            },
+            "value": false,
+            "ref": "54"
           }
         },
         "value": false,
-        "ref": "53"
+        "ref": "55"
       },
       "attributes": {
         "display": "false"
