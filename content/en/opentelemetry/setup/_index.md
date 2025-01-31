@@ -9,8 +9,12 @@ further_reading:
 
 ## Overview
 
+There are multiple ways to send OpenTelemetry data to Datadog. Choose the method that best fits your infrastructure and requirements:
 
-Cover why you would choose one path over the other here. Link to compatibility table.
+### Use the OpenTelemetry Collector
+
+### Use OTLP Ingest in the Datadog Agent 
+
 
 ### Use the OTLP intake endpoint 
 

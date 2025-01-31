@@ -2,6 +2,7 @@
 title: Interoperability of OpenTelemetry API and Datadog instrumented traces
 aliases:
   - /opentelemetry/guide/otel_api_tracing_interoperability/
+  - /opentelemetry/interoperability/otel_api_tracing_interoperability/
 further_reading:
 - link: "/tracing/trace_collection/otel_instrumentation/"
   tag: "Documentation"

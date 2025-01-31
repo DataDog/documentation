@@ -3,7 +3,7 @@ title: Deploy the OpenTelemetry Collector
 aliases:
 - /opentelemetry/collector_exporter/deployment
 further_reading:
-- link: "/opentelemetry/collector_exporter/configuration/"
+- link: "/opentelemetry/setup/collector_exporter/"
   tag: "Documentation"
   text: "Configuring the OpenTelemetry Collector"
 - link: "https://opentelemetry.io/docs/collector/deployment/"
