@@ -9,6 +9,9 @@ further_reading:
   - link: "/security/automation_pipelines/security_inbox"
     tag: "Documentation"
     text: "Add to Security Inbox Rules"
+  - link: "/security/automation_pipelines/set_due_date"
+    tag: "Documentation"
+    text: "Set Due Date Rules"
 ---
 
 {{< callout btn_hidden="true">}}
@@ -56,6 +59,14 @@ Customize the Security Inbox by defining specific conditions that determine whic
 - **Resurface issues not captured by default**: Highlight issues that might be missed by out-of-the-box or custom detection rules, ensuring no critical issue is overlooked.
 - **Strengthen compliance and address key system concerns**: Address concerns affecting regulatory compliance or important business systems, regardless of severity.
 - **Prioritize current risks**: Focus on immediate threats, such as identity risks after an incident, or industry-wide vulnerabilities.
+
+### Set due dates for vulnerabilities to align with your security SLOs
+
+Assign deadlines for vulnerability remediation to ensure compliance and improve team accountability. This allows you to:
+
+- **Align with compliance frameworks**: Automatically set due dates that conform to industry regulations like FedRAMP or PCI.
+- **Enhance accountability**: Utilize security SLOs to hold teams responsible for timely vulnerability remediation, reducing the administrative burden of follow-ups and status checks.
+- **Facilitate proactive risk management**: Encourage prompt action on vulnerabilities to mitigate the risk of exploitation, leveraging SLOs as a strategic tool to prioritize and expedite security tasks.
 
 ## Further reading
 
