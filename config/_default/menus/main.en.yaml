@@ -6677,10 +6677,10 @@ menu:
       parent: rum_mobile_android
       identifier: rum_mobile_android_crash
       weight: 102
-    - name: Mobile App Performance
-      url: real_user_monitoring/mobile_and_tv_monitoring/android/mobile_app_performance
+    - name: Monitoring App Performance
+      url: real_user_monitoring/mobile_and_tv_monitoring/android/monitoring_app_performance
       parent: rum_mobile_android
-      identifier: rum_mobile_android_mobile_app_performance
+      identifier: rum_mobile_android_monitoring_app_performance
       weight: 103
     - name: Advanced Configuration
       url: real_user_monitoring/mobile_and_tv_monitoring/android/advanced_configuration
@@ -6728,9 +6728,9 @@ menu:
       identifier: rum_mobile_ios_crash
       weight: 102
     - name: Mobile App Performance
-      url: real_user_monitoring/mobile_and_tv_monitoring/ios/mobile_app_performance
+      url: real_user_monitoring/mobile_and_tv_monitoring/ios/monitoring_app_performance
       parent: rum_mobile_ios
-      identifier: rum_mobile_ios_obile_app_performance
+      identifier: rum_mobile_ios_monitoring_app_performance
       weight: 103
     - name: Advanced Configuration
       url: real_user_monitoring/mobile_and_tv_monitoring/ios/advanced_configuration
