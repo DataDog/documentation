@@ -17,6 +17,7 @@
 import { isPromise } from '../utils';
 import { ClientFunction, ClientVariable, type Tag } from '../types';
 import { FunctionRefGenerator } from '../functions';
+import { Config } from '../types';
 
 import {
   Node,
@@ -25,6 +26,8 @@ import {
   RenderableTreeNodes,
   Schema
 } from '../types';
+
+type Condition = { condition: ClientFunction | ClientVariable; children: Node[] };
 
 export function truthy(param: any) {
   if (typeof param === 'object' && 'value' in param) {
@@ -70,73 +73,49 @@ function negateCondition(condition: ClientFunction | ClientVariable): ClientFunc
   };
 }
 
-function buildIfTags(node: Node) {
-  console.log('building if tags for node', JSON.stringify(node, null, 2));
-  // tags will be added here as they're processed
-  const tags: Tag[] = [];
+/**
+ * For a given if tag and any of its nested else tags,
+ * create a series of conditions that represent each
+ * tag, its condition, and its children.
+ */
+function renderConditions(node: Node): Condition[] {
+  const conditions: Condition[] = [];
 
-  // if tag will be built here and added to tags array
-
-  // anticonditions will be added here
-  const ifCondition = node.attributes.primary;
-  let antiCondition: ClientFunction = negateCondition(ifCondition);
-
-  console.log('top level ifCondition', JSON.stringify(ifCondition, null, 2));
+  let currentCondition: Condition = {
+    condition: node.attributes.primary,
+    children: []
+  };
 
   for (const child of node.children) {
     if (child.type === 'tag' && child.tag === 'else') {
+      const precedingCondition = currentCondition.condition;
+
       const elseCondition =
         'primary' in child.attributes ? child.attributes.primary : null;
-      if (elseCondition) {
-        // build new if tag and add it to the tags array
-        const elseTagCondition = joinConditions(antiCondition, elseCondition);
 
-        // update the anti condition in case another else tag is encountered
-        const newAntiCondition = negateCondition(elseCondition);
-        antiCondition = joinConditions(antiCondition, newAntiCondition);
+      if (elseCondition) {
+        const elseTagCondition = joinConditions(
+          negateCondition(precedingCondition),
+          elseCondition
+        );
+
+        currentCondition = {
+          condition: elseTagCondition,
+          children: []
+        };
       } else {
-        // build new if tag with the existing antiCondition
+        currentCondition = {
+          condition: negateCondition(precedingCondition),
+          children: []
+        };
       }
-      // If the tag is not an else tag, add it as a child of the if tag
-      // that is currently being built
     } else {
-      // console.log('\nprocessing non-else child');
-      // console.log('child', JSON.stringify(child, null, 2));
+      currentCondition.children.push(child);
     }
   }
 
-  /*
-  const buildEnclosingTag = (children: RenderableTreeNode[]) => {
-    const enclosingTag: Tag = {
-      $$mdtype: 'Tag',
-      name: node.attributes.inline ? 'span' : 'div',
-      if: node.attributes.primary,
-      attributes: {
-        display: truthy(node.attributes.primary) ? 'true' : 'false'
-      },
-      children
-    };
-
-    return enclosingTag;
-  };
-  */
-
-  /*
-  const conditions: Condition[] = [
-    { condition: node.attributes.primary, children: [] },
-  ];
-  for (const child of node.children) {
-    if (child.type === 'tag' && child.tag === 'else')
-      conditions.push({
-        condition:
-          'primary' in child.attributes ? child.attributes.primary : true,
-        children: [],
-      });
-    else conditions[conditions.length - 1].children.push(child);
-  }
-
+  console.log('rendered conditions:', JSON.stringify(conditions, null, 2));
   return conditions;
-  */
 }
 
 export const tagIf: Schema = {
@@ -145,7 +124,7 @@ export const tagIf: Schema = {
   },
 
   transform(node, config) {
-    buildIfTags(node);
+    const conditions = renderConditions(node);
 
     const buildEnclosingTag = (children: RenderableTreeNode[]) => {
       const enclosingTag: Tag = {
@@ -169,8 +148,9 @@ export const tagIf: Schema = {
         const tag = buildEnclosingTag(nodes.flat());
         return [tag];
       });
+    } else {
+      return [buildEnclosingTag(nodes as RenderableTreeNode[])];
     }
-    return [buildEnclosingTag(nodes as RenderableTreeNode[])];
   }
 };
 
