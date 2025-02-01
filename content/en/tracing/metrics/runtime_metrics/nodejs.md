@@ -18,10 +18,6 @@ further_reading:
       text: 'Explore your services, resources, and traces'
 ---
 
-<div class="alert alert-warning">
-This feature is in public beta.
-</div>
-
 ## Automatic configuration
 
 Runtime metrics collection can be enabled with one configuration parameter in the tracing client either through the tracer option: `tracer.init({ runtimeMetrics: true })` or through the environment variable: `DD_RUNTIME_METRICS_ENABLED=true`
