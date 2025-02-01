@@ -35,6 +35,13 @@ Here are some important [role and permissions][11] to use for custom rules RBAC:
 
 Rules are managed and applied using policies. To view policies, go to [Security > Cloud Security Managment > Agent Configuration][3].
 
+You can create and deploy different custom policies containing rules you want to apply to different sets of hosts in your infrastructure.
+
+For example, you can do the following with policies:
+
+- [Assign priorities][17] to your policies. Priorities can account for policies with partially overlapping tags.
+- Deploy multiple rules to a specific subset of an infrastructure using [tags][18].
+
 ### Default policy
 
 The default policy and its rules cannot be modified. You can use the policy priority setting to override the default policy with custom policies.
@@ -97,14 +104,6 @@ You can create custom rules using these methods:
 ## Create the custom Agent and detection rules together
 
 CSM custom Agent rules are grouped into policies. Policies group Agent rules to help you apply multiple rules more efficiently.
-
-You can create and deploy different custom policies containing rules you want to apply to different sets of hosts in your infrastructure.
-
-For example, you can do the following with policies:
-
-- Deploy multiple rules to a specific subset of an infrastructure using tags.
-- Assign priorities to your policies. Priorities can account for policies with partially overlapping tags.
-
 
 
 ## Create the custom Agent and detection rules together
@@ -275,3 +274,5 @@ You can also disable a rule by setting the **Then...** section of a rule to **Do
 [14]: #create-the-custom-agent-and-detection-rules-together
 [15]: https://app.datadoghq.com/cost/settings/tags
 [16]: /security/threats/agent_expressions/
+[17]: #prioritize-policies
+[18]: #apply-tags
