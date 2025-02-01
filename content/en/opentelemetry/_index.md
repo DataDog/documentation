@@ -2,6 +2,7 @@
 title: OpenTelemetry in Datadog
 aliases:
 - /tracing/setup_overview/open_standards/
+- /opentelemetry/otel_terms
 further_reading:
 - link: "https://www.datadoghq.com/blog/opentelemetry-instrumentation/"
   tag: "Blog"
@@ -27,6 +28,10 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/opentelemetry-runtime-metrics-datadog/"
   tag: "Blog"
   text: "Monitor runtime metrics from OTel-instrumented apps with Datadog APM"
+- link: "https://learn.datadoghq.com/courses/otel-with-datadog"
+  tag: "Learning Center"
+  text: "Introduction to OpenTelemetry with Datadog"
+
 algolia:
   tags: ['opentelemetry', 'open telemetry', 'otel']
 cascade:
@@ -36,19 +41,44 @@ cascade:
 
 ## Overview
 
-[OpenTelemetry][1] is an open source observability framework that provides IT teams with standardized protocols and tools for collecting and routing telemetry data. Created as an incubator project by the [Cloud Native Computing Foundation][2] (CNCF), OpenTelemetry provides a consistent format for instrumenting, generating, gathering, and exporting application telemetry data—namely metrics, logs, and traces—to monitoring platforms for analysis and insight.
+[OpenTelemetry][1] (OTel) is an open source observability framework that provides IT teams with standardized protocols and tools for collecting and routing telemetry data. Created as an incubator project by the [Cloud Native Computing Foundation][2] (CNCF), OpenTelemetry provides a consistent format for instrumenting, generating, gathering, and exporting application telemetry data—namely metrics, logs, and traces—to monitoring platforms for analysis and insight.
 
-If your applications and services are instrumented with OpenTelemetry libraries, you can choose how to get traces, metrics, and logs data to the Datadog backend:
+{{< img src="tracing/setup/open_standards/otel-flow.png" alt="Map options for generating telemetry data and sending it to observability products." width="90%">}}
 
-1. [Send data to the OpenTelemetry collector, and use the Datadog exporter to forward it to Datadog][3], or
+## Send OpenTelemetry data to Datadog
 
-2. [Ingest data with the Datadog Agent, which collects it for Datadog][4].
+If your applications and services are instrumented with OpenTelemetry libraries, you can choose how to get traces, metrics, and logs data to the Datadog backend.
 
-{{< img src="tracing/setup/open_standards/otel-flow.png" alt="Map options for generating telemetry data and sending it to observability products.">}}
+<div class="alert alert-info"><strong>Not sure which setup is right for you?</strong></br> See the <a href="/opentelemetry/compatibility/">Feature Compatibility</a> table to understand which Datadog features are supported.</div>
 
-<div class="alert alert-info"><strong>Custom Instrumentation with the OpenTelemetry API</strong></br>You can configure OpenTelemetry instrumented applications to use the Datadog APM SDK to process spans and traces. For more information, read <a href="/tracing/trace_collection/otel_instrumentation/">Custom Instrumentation with the OpenTelemetry API</a>.</div>
+### Use the OpenTelemetry Collector
 
-Datadog supports the [W3C Trace Context standard][6], ensuring complete traces are captured even when a request travels between services that have been instrumented with different tools. Services need only be instrumented with any system, such as an OpenTelemetry library or Datadog tracing library, that follows the W3C Trace Context standard. Read [Propagating Trace Context][5] for more information.
+**Best for**: New or existing OTel users that want a completely vendor-neutral setup.
+
+The OpenTelemetry Collector with Datadog Exporter provides:
+- Complete vendor neutrality for sending OpenTelemetry data to Datadog
+- Flexible deployment options
+- No need to install the Datadog Agent or tracing libraries
+
+{{< whatsnext desc=" " >}}
+    {{< nextlink href="/opentelemetry/setup/collector_exporter/" >}}Learn more about using the OTel Collector{{< /nextlink >}}
+{{< /whatsnext >}}
+    
+### Use OTLP ingest in the Datadog Agent
+
+**Best for**: Environments already using the Datadog Agent or requiring Agent-based features.
+
+OTLP Ingest in the Datadog Agent provides:
+- Native integration with Datadog Agent features
+- Streamlined deployment with existing Agent infrastructure
+
+{{< whatsnext desc=" " >}}
+    {{< nextlink href="/opentelemetry/setup/otlp_ingest_in_the_agent" >}}Learn more about using OTLP ingest in the Agent{{< /nextlink >}}
+{{< /whatsnext >}}
+
+### See additional setup options
+
+For a complete list of ways to send OpenTelemetry data to Datadog, including using the OTLP intake endpoint and the OpenTelemetry API with Datadog's tracing library, see the [Send Data to Datadog][7] documentation.
 
 ## Further reading
 
@@ -58,9 +88,4 @@ Datadog supports the [W3C Trace Context standard][6], ensuring complete traces a
 [2]: https://www.cncf.io/
 [3]: /opentelemetry/collector_exporter/
 [4]: /opentelemetry/otlp_ingest_in_the_agent/
-[5]: /tracing/trace_collection/trace_context_propagation/
-[6]: https://www.w3.org/TR/trace-context/
-
-{{< learning-center-callout header="Try Understanding OpenTelemetry in the Learning Center" btn_title="Enroll Now" btn_url="https://learn.datadoghq.com/courses/understanding-opentelemetry">}}
-  Discover the fundamentals of OpenTelemetry, an open source standard for telemetry data collection. This course provides an overview of OpenTelemetry's capabilities and benefits, preparing you for integrating observability into your applications.
-{{< /learning-center-callout >}}
+[7]: /opentelemetry/setup
