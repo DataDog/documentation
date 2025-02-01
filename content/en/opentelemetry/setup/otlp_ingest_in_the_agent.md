@@ -23,11 +23,15 @@ OTLP Ingest in the Agent is a way to send telemetry data directly from applicati
 
 OTLP Ingest in the Agent allows you to use observability features in the Datadog Agent. Data from applications instrumented with OpenTelemetry SDK cannot be used in some Datadog proprietary products, such as Application Security Management, Continuous Profiler, and Ingestion Rules. [OpenTelemetry Runtime Metrics are supported for some languages][10].
 
+{{< img src="metrics/otel/otlp_ingestion_update.png" alt="OTel SDKs/Libraries, Datadog Trace Library, Datadog Integrations -> Datadog Agent -> Datadog" style="width:100%;">}}
+
+<div class="alert alert-info">To see which Datadog features are supported with this setup, see the <a href="/opentelemetry/compatibility/">feature compatibility table</a> under <b>OTel to Datadog Agent (OTLP)</b>.</div>
+
+## Initial setup
+
 To get started, you first [instrument your application][3] with OpenTelemetry SDKs. Then, export the telemetry data in OTLP format to the Datadog Agent. Configuring this varies depending on the kind of infrastructure your service is deployed on, as described on the page below. Although the aim is to be compatible with the latest OTLP version, the OTLP Ingest in the Agent is not compatible with all OTLP versions. The versions of OTLP that are compatible with the Datadog Agent are those that are also supported by the OTLP receiver in the OpenTelemetry Collector. To verify the exact versions supported, check the `go.opentelemetry.io/collector` version in the Agent `go.mod` file.
 
 Read the OpenTelemetry instrumentation documentation to understand how to point your instrumentation to the Agent. The `receiver` section described below follows the [OpenTelemetry Collector OTLP receiver configuration schema][5].
-
-{{< img src="metrics/otel/otlp_ingestion_update.png" alt="OTel SDKs/Libraries, Datadog Trace Library, Datadog Integrations -> Datadog Agent -> Datadog" style="width:100%;">}}
 
 <div class="alert alert-warning"><strong>Note</strong>: The supported setup is an ingesting Agent deployed on every OpenTelemetry-data generating host. You cannot send OpenTelemetry telemetry from collectors or instrumented apps running one host to an Agent on a different host. But, provided the Agent is local to the collector or SDK instrumented app, you can set up multiple pipelines.</div>
 

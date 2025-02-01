@@ -43,6 +43,8 @@ cascade:
 
 [OpenTelemetry][1] (OTel) is an open source observability framework that provides IT teams with standardized protocols and tools for collecting and routing telemetry data. Created as an incubator project by the [Cloud Native Computing Foundation][2] (CNCF), OpenTelemetry provides a consistent format for instrumenting, generating, gathering, and exporting application telemetry data—namely metrics, logs, and traces—to monitoring platforms for analysis and insight.
 
+{{< img src="tracing/setup/open_standards/otel-flow.png" alt="Map options for generating telemetry data and sending it to observability products." width="90%">}}
+
 ## Send OpenTelemetry data to Datadog
 
 If your applications and services are instrumented with OpenTelemetry libraries, you can choose how to get traces, metrics, and logs data to the Datadog backend.
@@ -74,9 +76,9 @@ OTLP Ingest in the Datadog Agent provides:
     {{< nextlink href="/opentelemetry/setup/otlp_ingest_in_the_agent" >}}Learn more about using OTLP ingest in the Agent{{< /nextlink >}}
 {{< /whatsnext >}}
 
-{{< learning-center-callout header="Try \"Introduction to OTel with Datadog\" in the Learning Center" btn_title="Enroll Now" btn_url="https://learn.datadoghq.com/courses/understanding-opentelemetry" hide_image="true" >}}
-  Learn the fundamentals of OpenTelemetry, including its capabilities and benefits, key components, and how OTel and Datadog work together.
-{{< /learning-center-callout >}}
+### See additional setup options
+
+For a complete list of ways to send OpenTelemetry data to Datadog, including using the OTLP intake endpoint and the OpenTelemetry API with Datadog's tracing library, see the [Send Data to Datadog][7] documentation.
 
 ## Further reading
 
@@ -86,5 +88,4 @@ OTLP Ingest in the Datadog Agent provides:
 [2]: https://www.cncf.io/
 [3]: /opentelemetry/collector_exporter/
 [4]: /opentelemetry/otlp_ingest_in_the_agent/
-[5]: /tracing/trace_collection/trace_context_propagation/
-[6]: https://www.w3.org/TR/trace-context/
+[7]: /opentelemetry/setup

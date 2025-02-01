@@ -1,7 +1,5 @@
 ---
 title: Filter and Transform Data
-aliases:
-  - /opentelemetry/filter_transform/
 further_reading:
 - link: "/opentelemetry/explore/"
   tag: "Documentation"

@@ -10,36 +10,12 @@ further_reading:
 
 Configure your OpenTelemetry setup to optimize data collection and ensure proper integration with Datadog. Choose the configuration area you need to adjust:
 
-### Batch and Memory Settings
-
-Optimize data transmission and resource usage with proper batch and memory configurations.
-
-{{< whatsnext desc="Configure batch and memory settings:" >}}
-    {{< nextlink href="/opentelemetry/config/batch_memory/" >}}Set up Batch Processing{{< /nextlink >}}
-{{< /whatsnext >}}
-
-### Environment Variables
-
-Configure OpenTelemetry behavior using standardized environment variables supported by Datadog.
-
-{{< whatsnext desc="Configure environment variables:" >}}
-    {{< nextlink href="/opentelemetry/config/environment_variables/" >}}Set up Environment Variables{{< /nextlink >}}
-{{< /whatsnext >}}
-
-### Hostname and Tagging
-
-Set up proper host identification and tag attribution for your telemetry data.
-
-{{< whatsnext desc="Configure hostnames and tags:" >}}
-    {{< nextlink href="/opentelemetry/config/hostname_tagging/" >}}Set up Hostname Resolution{{< /nextlink >}}
-{{< /whatsnext >}}
-
-### Log Collection
-
-Configure log collection and processing for OpenTelemetry data.
-
-{{< whatsnext desc="Configure log collection:" >}}
-    {{< nextlink href="/opentelemetry/config/log_collection/" >}}Set up Log Collection{{< /nextlink >}}
+{{< whatsnext desc=" " >}}
+  {{< nextlink href="/opentelemetry/config/collector_batch_memory/" >}}Edit batch and memory configuration{{< /nextlink >}}
+  {{< nextlink href="/opentelemetry/config/environment_variable_support/" >}}Configure OpenTelemetry behavior using environment variables supported by Datadog{{< /nextlink >}}
+  {{< nextlink href="/opentelemetry/config/hostname_tagging/" >}}Set up host identification and tag attribution for your telemetry{{< /nextlink >}}
+  {{< nextlink href="/opentelemetry/config/log_collection/" >}}Configure log collection and processing for OpenTelemetry data{{< /nextlink >}}
+  {{< nextlink href="/opentelemetry/config/otlp_receiver/" >}}Configure the OTLP receiver in your Collector to collect metrics, logs, and traces{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Further reading

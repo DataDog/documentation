@@ -8,22 +8,26 @@ further_reading:
 
 ## Overview
 
-Visualize and analyze your OpenTelemetry data using Datadog's powerful observability features:
+Visualize and analyze your OpenTelemetry data using Datadog's observability features:
 
-### Connect Your Data
+### Correlate your data
 
 Link your telemetry data for full-stack observability:
 
-{{< whatsnext desc="Set up data correlation:" >}}
-    {{< nextlink href="/tracing/other_telemetry/connect_logs_and_traces/" >}}Connect Logs and Traces{{< /nextlink >}}
-    {{< nextlink href="/real_user_monitoring/connect_rum_and_traces/" >}}Connect RUM and Traces{{< /nextlink >}}
+/real_user_monitoring/connect_rum_and_traces/
+
+content/en/tracing/other_telemetry/connect_logs_and_traces/opentelemetry.md
+
+{{< whatsnext desc=" " >}}
+    {{< nextlink href="" >}}Connect Logs and Traces{{< /nextlink >}}
+    {{< nextlink href="/opentelemetry/explore/connect_rum_and_traces/" >}}Connect RUM and Traces{{< /nextlink >}}
 {{< /whatsnext >}}
 
-### Visualize Data
+### Visualize your data
 
-Create powerful visualizations of your OpenTelemetry data:
+Visualize your OpenTelemetry data:
 
-{{< whatsnext desc="Learn about visualization:" >}}
+{{< whatsnext desc=" " >}}
     {{< nextlink href="/opentelemetry/guide/otlp_histogram_heatmaps/" >}}Histogram Heatmaps{{< /nextlink >}}
 {{< /whatsnext >}}
 

@@ -583,15 +583,11 @@ menu:
       identifier: otel-setup-collector-exporter
       parent: otel-setup
       weight: 101
-    - name: Install and Configure
-      url: /opentelemetry/setup/collector_exporter/configure
-      parent: otel-setup-collector-exporter
-      weight: 1001
     - name: Deploy
       url: /opentelemetry/setup/collector_exporter/deploy
       identifier: otel-setup-collector-exporter-deploy
       parent: otel-setup-collector-exporter
-      weight: 1002
+      weight: 1001
     - name: Using OTLP Ingest in the Agent
       url : /opentelemetry/setup/otlp_ingest_in_the_agent
       identifier: otel-setup-otlp-ingest
@@ -651,6 +647,11 @@ menu:
       identifier: otel_log_collection
       parent: otel_config
       weight: 304
+    - name: OTLP Receiver
+      url: opentelemetry/config/otlp_receiver/
+      identifier: otel_otlp_receiver
+      parent: otel_config
+      weight: 305
     - name: Filter and Transform Data
       url: opentelemetry/filter_transform/
       identifier: otel_schema
@@ -692,12 +693,12 @@ menu:
       parent: opentelemetry_top_level
       weight: 5
     - name: Correlate Logs and Traces
-      url: /tracing/other_telemetry/connect_logs_and_traces/opentelemetry/
+      url: /opentelemetry/explore/correlate_logs_and_traces/
       identifier: otel_logs
       parent: otel_explore
       weight: 501
     - name: Correlate RUM and Traces
-      url: /opentelemetry/interoperability/connect_rum_and_traces
+      url: /opentelemetry/explore/connect_rum_and_traces/
       identifier: otel_rum
       parent: otel_explore
       weight: 502
