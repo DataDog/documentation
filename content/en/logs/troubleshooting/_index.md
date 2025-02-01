@@ -4,13 +4,19 @@ title: Logs Troubleshooting
 
 If you experience unexpected behavior with Datadog Logs, there are a few common issues you can investigate and this guide may help resolve issues quickly. If you continue to have trouble, reach out to [Datadog support][1] for further assistance.
 
+## Missing logs - data access restrictions
+
+You cannot see any logs in the [Log Explorer][2] or [Live Tail][3]. This may be happening because your role is part of a restriction query.
+
+See [Check Restrictions Queries][4] for more information on configuring Logs RBAC data access controls.
+
 ## Missing logs - logs daily quota reached
 
 You have not made any changes to your log configuration, but the [Log Explorer][2] shows that logs are missing for today. This may be happening because you have reached your daily quota.
 
 {{< img src="logs/troubleshooting/daily_quota_reached.png" alt="A bar graph showing missing logs and a message saying daily quota reached" style="width:90%" >}}
 
-See [Set daily quota][3] for more information on setting up, updating or removing the quota.
+See [Set daily quota][5] for more information on setting up, updating or removing the quota.
 
 ## Missing logs - timestamp outside of the ingestion window
 
@@ -19,9 +25,9 @@ Fix the issue at the source by checking which `service` and `source` are impacte
 
 ## Unable to parse timestamp key from JSON logs
 
-If you are unable to convert the timestamp of JSON logs to a [recognized date format][4] before they are ingested into Datadog, follow these steps to convert and map the timestamps using Datadog's [arithmetic processor][5] and [log date remapper][6]:
+If you are unable to convert the timestamp of JSON logs to a [recognized date format][6] before they are ingested into Datadog, follow these steps to convert and map the timestamps using Datadog's [arithmetic processor][5] and [log date remapper][6]:
 
-1. Navigate to the [Pipelines][7] page.
+1. Navigate to the [Pipelines][9] page.
 
 2. In **Pipelines**, hover over **Preprocessing for JSON logs**, and click the pencil icon.
 
@@ -29,9 +35,9 @@ If you are unable to convert the timestamp of JSON logs to a [recognized date fo
 
 {{< img src="logs/troubleshooting/preprocessing_json_timestamp.png" alt="The preprocessing for JSON logs configuration box with the date attributes, which includes timestamp by default" style="width:90%" >}}
 
-2. Set up the [arithmetic processor][5] so that the formula multiples your timestamp by 1000 to convert it to milliseconds. The formula's result is a new attribute.
+2. Set up the [arithmetic processor][7] so that the formula multiplies your timestamp by 1000 to convert it to milliseconds. The formula's result is a new attribute.
 
-3. Set up the [log date remapper][6] to use the new attribute as the official timestamp.
+3. Set up the [log date remapper][8] to use the new attribute as the official timestamp.
 
 Go to [Log Explorer][2] to see new JSON logs with their mapped timestamp.
 
@@ -45,8 +51,10 @@ There is an additional truncation in fields that applies only to indexed logs: t
 
 [1]: /help/
 [2]: https://app.datadoghq.com/logs
-[3]: /logs/log_configuration/indexes/#set-daily-quota
-[4]: /logs/log_configuration/pipelines/?tab=date#date-attribute
-[5]: /logs/log_configuration/processors/?tab=ui#arithmetic-processor
-[6]: /logs/log_configuration/processors/?tab=ui#log-date-remapper
-[7]: https://app.datadoghq.com/logs/pipelines
+[3]: https://app.datadoghq.com/logs/livetail
+[4]: /logs/guide/logs-rbac-permissions/?tab=ui#check-restriction-queries
+[5]: /logs/log_configuration/indexes/#set-daily-quota
+[6]: /logs/log_configuration/pipelines/?tab=date#date-attribute
+[7]: /logs/log_configuration/processors/?tab=ui#arithmetic-processor
+[8]: /logs/log_configuration/processors/?tab=ui#log-date-remapper
+[9]: https://app.datadoghq.com/logs/pipelines
