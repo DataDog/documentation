@@ -2,7 +2,7 @@
 title: Error Tracking Issue Ownership
 is_beta: true
 private: false
-description: Learn about how to set issue owners to ensure that you are seeing the issues that matter to you.
+description: Learn how to set issue owners to ensure that you are seeing the issues that matter to you.
 further_reading:
 - link: '/error_tracking/suspect_commits'
   tag: 'Documentation'
@@ -18,7 +18,7 @@ Issue Ownership for Error Tracking is currently in Preview.
 
 ## Overview
 
-Defining issue ownership allows you to discard irrelevant information to help  prioritize and focus on what matters. Error Tracking leverages the GitHub CODEOWNERS file to link issues to the relevant person or team for focused investigations.
+Defining issue ownership allows you to disregard irrelevant information to help prioritize and focus on what matters. Error Tracking leverages the GitHub CODEOWNERS file to link issues to the relevant person or team for focused investigations.
 
 We can automatically filter the list of issues, alert the owning teams, and assign issues automatically to the suspect commit author. Datadog defines ownership based on Datadog teams with code owners, service owners, and view owners. Assignees are assigned based on the suspect commit or through manual assigns. 
 
