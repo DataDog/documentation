@@ -147,10 +147,8 @@ DD_AGENT_TELEMETRY_ENABLED=false
 | pymem.alloc                                 | Total number of bytes allocated by the Python interpreter since the start of the Agent            |
 | api_server.request_duration_seconds         | CLI commands execution performance (if executed)                                                  |
 | logs.decoded                                | Total number of decoded logs                                                                      |
-| logs.processed                              | Total number of processed logs                                                                    |
 | logs.sender_latency                         | HTTP sender latency in milliseconds                                                               |
 | logs.bytes_missed                           | Total number of bytes lost before they could be consumed by the Agent, such as after log rotation |
-| logs.sent                                   | Total number of sent logs                                                                         |
 | logs.dropped                                | Total number of logs dropped                                                                      |
 | logs.bytes_sent                             | Total number of bytes send before encoding, if any                                                |
 | logs.encoded_bytes_sent                     | Total number of sent bytes after encoding, if any                                                 |
