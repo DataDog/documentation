@@ -1,5 +1,5 @@
 ---
-title: Enable Dynamic Instrumentation for Ruby
+title: Enable Dynamic Instrumentation for Ruby (Preview)
 aliases:
     - /tracing/dynamic_instrumentation/enabling/ruby/
 private: true
