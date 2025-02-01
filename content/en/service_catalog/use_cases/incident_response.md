@@ -12,19 +12,20 @@ further_reading:
     text: "Datadog Service Catalog"
 ---
 
-Service Catalog allows you to streamline collaboration during incidents by: 
 
-- Improving the on-call experience for everyone by establishing correct ownership information and communication channels, alongside streamlined access to monitoring and troubleshooting details.
-- Embedding links to solutions and troubleshooting tools such as runbooks and documentation directly in the observability tooling engineers are already using.
-- Speeding incident recovery by increasing confidence and simplifying locating owners of upstream and downstream services and dependencies.
+Service Catalog enhances incident response by:
 
-Service Catalog also integrates with incident management tools like Datadog Incident Management and PagerDuty, and you can see information about related ongoing incidents on the service details Reliability tab.
+- Improving the on-call experience by verifying and consolidating ownership details, communication channels, and monitoring and troubleshooting resources.
+- Embedding solutions and tools--like runbooks and documentation--directly into existing observability workflows.
+- Accelerating incident recovery by simplifying the process of identifying owners of upstream and downstream dependencies.
+
+Service Catalog also integrates with Datadog Incident Management and PagerDuty, allowing you to view related incidents in the Reliability tab on the service details page.
 
 {{< img src="tracing/service_catalog/incident-mgmt-reliability.png" alt="The Reliability tab for a service, showing incident and error metrics for the service overall and by version" style="width:100%;" >}}
 
-Datadog Incidents are automatically connected to Service Catalog. Apply appropriate SERVICE tags to an incident to ensure that a service’s incident data are accurate. PagerDuty incident integration requires that you have set up the PagerDuty integration.
+Datadog Incidents automatically link to Service Catalog. Apply appropriate `SERVICE` tags to an incident to ensure that a service’s incident data are accurate. The PagerDuty integration must be manually set up to integrate with incident information in Service Catalog. 
 
-To see incident statuses of your service’s upstream and downstream dependencies, click the service in the Service Catalog, and in the service details page, go to the Dependencies tab.
+To view incident statuses for upstream and downstream dependencies, click a service in Service Catalog to open the Service Details page, and then click on the Dependencies tab. 
 
 {{< img src="tracing/service_catalog/incident-mgmt-incident-status.png" alt="The Dependencies tab for a service, showing upstream and downstream dependencies and highlighting those impacted by an incident" style="width:100%;" >}}
 
