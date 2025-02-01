@@ -1,5 +1,7 @@
 ---
-title: Processing Rules
+title: Routing Rules
+aliases:
+    - /on-call/processing_rules/
 further_reading:
 - link: '/service_management/on-call/'
   tag: 'Documentation'
