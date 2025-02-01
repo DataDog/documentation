@@ -30,10 +30,10 @@ We can automatically filter the list of issues, alert the owning teams, and assi
 
 {{< img src="error_tracking/issue-owner-github-setup.png" alt="Error Tracking Issue Ownership GitHub Setup" style="width:90%" >}}
 
-3. Link your Datadog Team to your Datadog Team
-Navigate to **Organization Settings** > **Teams** > Select your team > **Settings** > **GitHub Connection** and search for the GitHub team(s) you'd like to connect with your Datadog Team. 
+3. Link your Datadog Team to GitHub team.
+  Navigate to **Organization Settings** > **Teams** > Select your team > **Settings** > **GitHub Connection** and search for the GitHub team(s) you'd like to connect with your Datadog Team. 
 
-{{< img src="/error_tracking/github_connection_setup.mp4" alt="Link your GitHub team to Datadog team" video=true >}}
+  {{< img src="/error_tracking/github_connection_setup.mp4" alt="Link your GitHub team to Datadog team" video=true >}}
 
 
 
