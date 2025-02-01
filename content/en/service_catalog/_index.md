@@ -126,8 +126,9 @@ Every entry showing up in the Service Catalog is categorized as a component type
 *  Queues
 *  RUM Apps
 *  External providers
+*  Endpoints
 
-{{< img src="tracing/service_catalog/component_selector.png" alt="Service Catalog component selector" style="width:30%;" >}}
+{{< img src="tracing/service_catalog/select-component.png" alt="Service Catalog component selector" style="width:30%;" >}}
 
 Datadog populates Service Catalog entries and determines their associated component type based on collected span attributes for APM ([peer tags][10]), but also based other collected telemetry types (USM, DSM, RUM, etc...).
 

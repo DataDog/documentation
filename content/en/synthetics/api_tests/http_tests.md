@@ -182,8 +182,8 @@ HTTP tests can run:
 
 ## One-click
 
-API test creation suggests endpoints from the [API Catalog][17] and existing API tests to prefill your test form with relevant options.
-Use existing Datadog data sources such as APM traces, API Catalog endpoints discovery, and existing similar Synthetic tests created by users.
+API test creation suggests endpoints from the [Service Catalog][17] and existing API tests to prefill your test form with relevant options.
+Use existing Datadog data sources such as APM traces, Service Catalog endpoints discovery, and existing similar Synthetic tests created by users.
 
 Start typing in the API test **URL** input to get endpoint suggestions or similar tests in Synthetic Monitoring:
 
