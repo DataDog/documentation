@@ -628,7 +628,7 @@ When the Datadog SDK is configured with the None format for extraction or inject
 
 ### Baggage
 
-_Currently available in Python and Node.js. For other languages, please reach out to [Support][11]_ 
+_Currently available in Python, Node.js, and .NET. For other languages, please reach out to [Support][11]_ 
 
 By default, Baggage is automatically propagated through a distributed request using OpenTelemetry's [W3C-compatible headers][10]. To disable baggage, set [DD_TRACE_PROPAGATION_STYLE][12] to `datadog,tracecontext`.
 

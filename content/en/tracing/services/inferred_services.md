@@ -1,5 +1,7 @@
 ---
 title: Inferred services
+aliases:
+  - /tracing/guide/inferred-service-opt-in
 further_reading:
 - link: "/tracing/services/service_page/"
   tag: "Documentation"

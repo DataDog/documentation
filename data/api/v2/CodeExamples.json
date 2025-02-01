@@ -55,21 +55,21 @@
   ],
   "CreateApp": [
     {
-      "group": "apps",
+      "group": "app_builder",
       "suffix": "",
-      "description": "Create App returns \"App Created\" response"
+      "description": "Create App returns \"Created\" response"
     }
   ],
   "DeleteApps": [
     {
-      "group": "apps",
+      "group": "app_builder",
       "suffix": "",
       "description": "Delete Multiple Apps returns \"OK\" response"
     }
   ],
   "UpdateApp": [
     {
-      "group": "apps",
+      "group": "app_builder",
       "suffix": "",
       "description": "Update App returns \"OK\" response"
     }

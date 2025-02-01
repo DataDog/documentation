@@ -158,12 +158,10 @@ Ensure the `DD_INSTRUMENTATION_TELEMETRY_ENABLED` environment variable (`DD_TRAC
 
 SCA can be enabled using two methods: the UI or manually using an environment variable. When you disable SCA, you must use the *same method* you used to enable SCA. For example, if you enabled SCA manually, you cannot disable it using the UI. You must disable it manually. 
 
-Typically, SCA is enabled and disabled on a service using the UI.
-
-To disable [Software Composition Analysis][14] using the UI:
+Typically, SCA is enabled and disabled on a service using the UI. To disable SCA via the UI:
 
 * Go to [Services][15], select **Software Composition Analysis (SCA)**. Under **Coverage**, hover over a service's SCA icon and then click **Deactivate**.
-* To disable Software Composition Analysis on your services in bulk, click the check box in the list header and then under **Bulk Actions** select **Deactivate Software Composition Analysis (SCA) on (number of) services**.
+* To disable Software Composition Analysis on your services in bulk, click the check box in the list header and then under **Bulk Actions** select **Deactivate Software Composition Analysis (SCA) on x services**.
 
 To disable SCA manually:
 
