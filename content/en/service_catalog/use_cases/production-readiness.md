@@ -10,38 +10,38 @@ further_reading:
     text: "Datadog Service Catalog"
 ---
 
-Service Catalog allows you to ensure your services are production ready by identifying gaps in monitoring coverage and additional governance capabilities. 
+With Service Catalog, you can ensure your services are production-ready by evaluating monitoring coverage, enforcing governance best practices, and identifying security and cost optimization opportunities.
 
 ## Evaluate monitoring coverage
 
 With Service Catalog, you can: 
-- Detect which services aren’t reporting observability data or having that data monitored.
-- Spot issues like missing SLOs, monitors, or services without ownership.
-- Facilitate tagging best practices and check for recommended setup configurations to optimize cross-telemetry insights.
+- Identify services that lack monitoring or observability data.
+- Detect gaps such as missing SLOs, monitors, or unowned services.
+- Enforce tagging best practices and verify configurations for enabling cross-telemetry insights.
 
-Through the Setup Guidance tab of each of your services, you can evaluate the coverage of your observability setup to ensure that all services have the expected configurations. 
+Use the Setup Guidance tab for a given service to evaluate observability coverage and confirm that all recommended configurations are implemented properly.
 
 {{< img src="tracing/service_catalog/production-readiness-setup-guidance.png" alt="The Setup Guidance tab for a service, which shows the configuration completeness of that service and recommended setup steps " style="width:100%;" >}}
 
-You can also find which Datadog features you are actively using for a given service, to help you find and close gaps in your monitoring completeness.
+The Setup Guidance tab also shows which Datadog features are actively used for a given service so you can uncover and address gaps in monitoring coverage.
 
-This table does not necessarily reflect billing for individual products, but rather activity for the service you are presently examining. For example, if the service does not emit infrastructure metrics for a long time, Infrastructure Monitoring might have Not Detected specified, even if you have hosts or containers running infrastructure monitoring. 
+**Note**: This table reflects service activity, not product billing. For example, if a service has not emitted infrastructure metrics for an extended period, Infrastructure Monitoring may display 'Not Detected', even if hosts or containers are running it.
 
 ## Governance and observation
 
-Scorecards help you effectively communicate and take informed actions to improve your service’s health and performance by providing you with a high-level view of best practices across teams and services. All services with defined metadata in the Service Catalog are automatically evaluated against a set of pass-fail criteria across Production Readiness, Observability Best Practices, and Ownership & Documentation. 
+Scorecards provide a high-level view of best practices across teams and services, helping you communicate effectively and take informed action to improve service health and performance. Services with defined metadata in Service Catalog are automatically evaluated against pass-fail criteria for Production Readiness, Observability Best Practices, and Ownership & Documentation.
 
 {{< img src="tracing/service_catalog/production-readiness-governance-and-obs.png" alt="Default scorecards for Production Readiness, Observability Best Practices, and Ownership and Documentation, with percent scores for each" style="width:100%;" >}}
 
-Through the Security tab, Service Catalog also supports you in reducing application risks by finding and fixing known security vulnerabilities in the dependencies of your services. This view also reveals which services are targeted by the most attackers and have the most severe threats. 
+Use the Security tab in Service Catalog to identify and remediate vulnerabilities in service dependencies. This view also reveals which services are most targeted by attacks and exposed to severe threats.
 
-To access additional details about these vulnerabilities and signals, click on the service row to open a detailed side panel or open the service page to its security tab. 
+To access additional details about these vulnerabilities and signals, click on the service row to open a detailed side panel, or open the Service Page to its Security tab. 
 
 {{< img src="tracing/service_catalog/production-readiness-security.png" alt="The security tab for a service, showing details about vulnerability risk and attack exposure" style="width:100%;" >}}
 
-The Costs tab, powered by Cloud Cost Management, provides several ways to identify potential inefficiencies, saving opportunities, and change over time. With cost data alongside metrics available in Service Catalog, you can improve visibility into how engineering changes affect overall cloud spend. 
+In the Costs tab, powered by Cloud Cost Management, you can identify inefficiencies, cost-saving opportunities, and trends over time. With cost data and service metrics in one place, you can understand how engineering changes impact overall cloud spend.
 
-For more information on a service’s cost changes, click on the service row to open a detailed side panel or view this information on the Cloud Costs page by clicking “View in Analytics.”
+For more information on a service’s cost changes, click on the service row to open a detailed side panel, or go to the Cloud Costs page by clicking “View in Analytics.”
 
 {{< img src="tracing/service_catalog/production-readiness-cost-changes.png" alt="Your image description" style="width:100%;" >}}
 
