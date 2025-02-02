@@ -36,18 +36,25 @@ You can set exceptions in two ways:
 ### Environment variables
 In **Agent v7.20+**, use the following environment variables to exclude containers by image name, container name, or Kubernetes namespace. Logs and metrics are not collected from excluded containers.
 
-| Environment variable | Description |
-| ------------ | ----------- |
-| `DD_CONTAINER_EXCLUDE` | Blocklist of containers to exclude. |
+| Environment variable           | Description                                         |
+| ------------------------------ | --------------------------------------------------- |
+| `DD_CONTAINER_EXCLUDE`         | Blocklist of containers to exclude.                 |
 | `DD_CONTAINER_EXCLUDE_METRICS` | Blocklist of containers whose metrics are excluded. |
-| `DD_CONTAINER_EXCLUDE_LOGS` | Blocklist of containers whose logs are excluded. |
-| `DD_CONTAINER_INCLUDE` | Allowlist of containers to include. |
+| `DD_CONTAINER_EXCLUDE_LOGS`    | Blocklist of containers whose logs are excluded.    |
+| `DD_CONTAINER_INCLUDE`         | Allowlist of containers to include.                 |
 | `DD_CONTAINER_INCLUDE_METRICS` | Allowlist of containers whose metrics are included. |
-| `DD_CONTAINER_INCLUDE_LOGS` | Allowlist of containers whose logs are included. |
+| `DD_CONTAINER_INCLUDE_LOGS`    | Allowlist of containers whose logs are included.    |
 
 In **Agent <=v7.19**, use the environment variables `DD_AC_INCLUDE` and `DD_AC_EXCLUDE` to include or exclude a container by image or name. These environment variables are deprecated in later Agent versions.
 
 Each inclusion or exclusion is defined as a list of space-separated regex strings. You can include or exclude containers based on their name (`name`), image name (`image`), or Kubernetes namespace (`kube_namespace`).
+
+
+<div class="alert alert-info">
+
+Image name filters (`image`) are matched across full image name including the registry and the image tag or digest (for example, `dockerhub.io/nginx:1.13.1`).
+
+</div>
 
 #### Examples
 To exclude the container with the name `dd-agent`:
@@ -56,10 +63,28 @@ To exclude the container with the name `dd-agent`:
 DD_CONTAINER_EXCLUDE = "name:^dd-agent$"
 ```
 
-To exclude two containers with the image names `dockercloud/network-daemon` and `dockercloud/logrotate`:
+To exclude containers using the `dockercloud/network-daemon` image, including all tags and digests:
 
 ```
-DD_CONTAINER_EXCLUDE = "image:^dockercloud/network-daemon$ image:^dockercloud/logrotate$"
+DD_CONTAINER_EXCLUDE = "image:^dockercloud/network-daemon(@sha256)?:.*
+```
+
+To exclude containers using the image `dockercloud/network-daemon:1.13.0`:
+
+```
+DD_CONTAINER_EXCLUDE = "image:^dockercloud/network-daemon:1.13.0$"
+```
+
+To exclude any container whose image contains the word `agent`:
+
+```
+DD_CONTAINER_EXCLUDE = "image:agent"
+```
+
+To exclude any container using the image `foo` regardless of the registry:
+
+```
+DD_CONTAINER_EXCLUDE = "image:^.*/foo(@sha256)?:.*"
 ```
 
 To exclude every container:
@@ -76,22 +101,22 @@ Inclusion takes precedence over exclusion. For example, to only monitor `ubuntu`
 
 ```
 DD_CONTAINER_EXCLUDE = "image:.*"
-DD_CONTAINER_INCLUDE = "image:ubuntu image:debian"
+DD_CONTAINER_INCLUDE = "image:^docker.io/library/ubuntu(@sha256)?:.* image:^docker.io/library/debian(@sha256)?:.*"
 ```
 
 You cannot mix cross-category inclusion/exclusion rules. For instance, if you want to include a container with the image name `foo` and exclude only metrics from a container with the image name `bar`, the following is **not sufficient**:
 
 ```
-DD_CONTAINER_EXCLUDE_METRICS = "image:^bar$"
-DD_CONTAINER_INCLUDE = "image:^foo$"
+DD_CONTAINER_EXCLUDE_METRICS = "image:^docker.io/library/bar(@sha256)?:.*"
+DD_CONTAINER_INCLUDE = "image:^^docker.io/library/foo(@sha256)?:.*"
 ```
 
 Instead, use:
 
 ```
-DD_CONTAINER_EXCLUDE_METRICS = "image:^bar$"
-DD_CONTAINER_INCLUDE_METRICS = "image:^foo$"
-DD_CONTAINER_INCLUDE_LOGS = "image:^foo$"
+DD_CONTAINER_EXCLUDE_METRICS = "image:^docker.io/library/bar(@sha256)?:.*"
+DD_CONTAINER_INCLUDE_METRICS = "image:^docker.io/library/foo(@sha256)?:.*"
+DD_CONTAINER_INCLUDE_LOGS = "image:^docker.io/library/foo(@sha256)?:.*"
 ```
 
 There is no interaction between the global lists and the selective (logs and metrics) lists. In other words, you cannot exclude a container globally (`DD_CONTAINER_EXCLUDE`) and then include it with `DD_CONTAINER_INCLUDE_LOGS` and `DD_CONTAINER_INCLUDE_METRICS`.
@@ -211,13 +236,13 @@ Set `DD_EXCLUDE_PAUSE_CONTAINER` to `false`.
 
 In **Agent v7.45+** you can set annotations on your Kubernetes pods to control Autodiscovery. Set the following annotations with the value `"true"` to add exclusion rules.
 
-| Annotation | Description |
-| ------------ | ----------- |
-| `ad.datadoghq.com/exclude` | Excludes the entire pod |
-| `ad.datadoghq.com/logs_exclude` | Excludes log collection from the entire pod |
-| `ad.datadoghq.com/metrics_exclude` | Excludes metric collection from the entire pod |
-| `ad.datadoghq.com/<CONTAINER_NAME>.exclude` | Excludes the container with `<CONTAINER_NAME>` in the pod |
-| `ad.datadoghq.com/<CONTAINER_NAME>.logs_exclude` | Excludes log collection from the container with `<CONTAINER_NAME>` in the pod |
+| Annotation                                          | Description                                                                      |
+| --------------------------------------------------- | -------------------------------------------------------------------------------- |
+| `ad.datadoghq.com/exclude`                          | Excludes the entire pod                                                          |
+| `ad.datadoghq.com/logs_exclude`                     | Excludes log collection from the entire pod                                      |
+| `ad.datadoghq.com/metrics_exclude`                  | Excludes metric collection from the entire pod                                   |
+| `ad.datadoghq.com/<CONTAINER_NAME>.exclude`         | Excludes the container with `<CONTAINER_NAME>` in the pod                        |
+| `ad.datadoghq.com/<CONTAINER_NAME>.logs_exclude`    | Excludes log collection from the container with `<CONTAINER_NAME>` in the pod    |
 | `ad.datadoghq.com/<CONTAINER_NAME>.metrics_exclude` | Excludes metric collection from the container with `<CONTAINER_NAME>` in the pod |
 
 #### Exclude the entire pod:
