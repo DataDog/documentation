@@ -82,9 +82,9 @@ Alternatively, click a service to open a detailed side panel and view the **Path
 
 Slowdowns caused by high consumer lag or stale messages can lead to cascading failures and increase downtime. With out-of-the-box alerts, you can pinpoint where bottlenecks occur in your pipelines and respond to them right away. For supplementary metrics, Datadog provides additional integrations for message queue technologies like [Kafka][4] and [SQS][5].
 
-Through Data Stream Monitoring's out-of-the-box recommended monitors, you can setup monitors on metrics like consumer lag, throughput, and latency in one click. 
+Through Data Stream Monitoring's out-of-the-box monitor templates, you can setup monitors on metrics like consumer lag, throughput, and latency in one click. 
 
-{{< img src="data_streams/add_monitors_and_synthetic_tests.png" alt="Datadog Data Streams Monitoring Recommended Monitors" style="width:100%;" caption="Click 'Add Monitors and Synthetic Tests' to view Recommended Monitors" >}}
+{{< img src="data_streams/add_monitors_and_synthetic_tests.png" alt="Datadog Data Streams Monitoring Monitor Templates" style="width:100%;" caption="Click 'Add Monitors and Synthetic Tests' to view monitor templates" >}}
 
 ### Attribute incoming messages to any queue, service, or cluster
 
