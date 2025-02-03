@@ -136,7 +136,7 @@ There are a series of steps that must run successfully for vulnerability informa
 
 ### Confirming runtime detection is enabled
 
-If you have enabled runtime vulnerability detection, you can use the metric `datadog.apm.appsec_host` to check if SCA is running.
+If you have enabled runtime vulnerability detection on your services, you can use the metric `datadog.apm.appsec_host` to check if SCA is running.
 
 1. Go to **Metrics > Summary** in Datadog.
 2. Search for the metric `datadog.apm.appsec_host`. If the metric doesn't exist, then there are no services running ASM. If the metric exists, the services are reported with the metric tags `host` and `service`.
@@ -144,7 +144,7 @@ If you have enabled runtime vulnerability detection, you can use the metric `dat
 
 If you are not seeing `datadog.apm.appsec_host`, check the [in-app instructions][3] to confirm that all steps for the initial setup are complete.
 
-ASM data is sent with APM traces. See [APM troubleshooting][4] to [confirm APM setup][5] and check for [connection errors][6].
+Runtime application security data is sent with APM traces. See [APM troubleshooting][4] to [confirm APM setup][5] and check for [connection errors][6].
 
 ### Confirm tracer versions are updated
 
@@ -154,12 +154,23 @@ See the Application Security product set up documentation to validate you you ar
 
 Ensure the `DD_INSTRUMENTATION_TELEMETRY_ENABLED` environment variable (`DD_TRACE_TELEMETRY_ENABLED` for Node.js) is set to `true`, or the corresponding system property for your language is enabled. For example in Java: `-Ddd.instrumentation.telemetry.enabled=true`.
 
-## Disabling static repository scanning
+## Runtime Code Analysis (IAST)
+
+### Confirm IAST is enabled
+
+Ensure the `DD_IAST_ENABLED` environment variable is set to `true` or the corresponding system property for your language is enabled.
+
+### Issues with Python and Flask instrumentation
+If you're running a Flask application, ensure that you are calling the `ddtrace_iast_flask_patch()` function at the top level of the module and before calling `app.run()`. See the [Flask integration documentation][17] for more information.
+
+
+## Disabling Code Security capabilities
+### Disabling static repository scanning
 To disable scanning Static Code Analysis (SAST) or static Software Composition Analysis:
 - If you are scanning GitHub repositories via Datadog-hosted scanning, navigate to [Code Security > Setup][17], click **Enable scanning for your repositories**, and disable the toggles previously enabled for scanning either all connected repositories or each repository.
 - If you are scanning source code repositories via your CI pipelines, remove the relevant job(s) from your CI pipelines. 
 
-## Disabling Software Composition Analysis (SCA) on your services
+### Disabling Software Composition Analysis (SCA) on your services
 
 SCA can be enabled on your running services using two methods: the UI or manually using the `DD_APPSEC_SCA_ENABLED` environment variable. When you disable SCA, you must use the *same method* you used to enable SCA. (If you enabled SCA manually, you cannot disable it using the UI. You must disable it manually.)
 
@@ -172,7 +183,7 @@ To disable SCA manually:
 
 * Remove the `DD_APPSEC_SCA_ENABLED=true` environment variable from your application configuration, and restart your service. This does not apply to PHP applications.
 
-## Disabling Runtime Code Analysis (IAST)
+### Disabling Runtime Code Analysis (IAST)
 
 To disable IAST, remove the `DD_IAST_ENABLED=true` environment variable from your application configuration or set it to `false` as `DD_IAST_ENABLED=false`, and restart your service.
 
