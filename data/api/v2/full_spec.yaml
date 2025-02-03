@@ -10397,6 +10397,100 @@ components:
       - $ref: '#/components/schemas/EntityV3Datastore'
       - $ref: '#/components/schemas/EntityV3Queue'
       - $ref: '#/components/schemas/EntityV3System'
+      - $ref: '#/components/schemas/EntityV3API'
+    EntityV3API:
+      additionalProperties: false
+      description: Schema for API entities.
+      properties:
+        apiVersion:
+          $ref: '#/components/schemas/EntityV3APIVersion'
+        datadog:
+          $ref: '#/components/schemas/EntityV3APIDatadog'
+        extensions:
+          additionalProperties: {}
+          description: Custom extensions. This is the free-formed field to send client-side
+            metadata. No Datadog features are affected by this field.
+          type: object
+          x-ignore-duplicate-object: true
+        integrations:
+          $ref: '#/components/schemas/EntityV3Integrations'
+        kind:
+          $ref: '#/components/schemas/EntityV3APIKind'
+        metadata:
+          $ref: '#/components/schemas/EntityV3Metadata'
+        spec:
+          $ref: '#/components/schemas/EntityV3APISpec'
+      required:
+      - apiVersion
+      - kind
+      - metadata
+      type: object
+    EntityV3APIDatadog:
+      additionalProperties: false
+      description: Datadog product integrations for the API entity.
+      properties:
+        codeLocations:
+          $ref: '#/components/schemas/EntityV3DatadogCodeLocations'
+        events:
+          $ref: '#/components/schemas/EntityV3DatadogEvents'
+        logs:
+          $ref: '#/components/schemas/EntityV3DatadogLogs'
+        performanceData:
+          $ref: '#/components/schemas/EntityV3DatadogPerformance'
+        pipelines:
+          $ref: '#/components/schemas/EntityV3DatadogPipelines'
+      type: object
+    EntityV3APIKind:
+      description: The definition of Entity V3 API Kind object.
+      enum:
+      - api
+      example: api
+      type: string
+      x-enum-varnames:
+      - API
+    EntityV3APISpec:
+      additionalProperties: false
+      description: The definition of Entity V3 API Spec object.
+      properties:
+        implementedBy:
+          description: Services which implemented the API.
+          items:
+            type: string
+          type: array
+        interface:
+          $ref: '#/components/schemas/EntityV3APISpecInterface'
+        lifecycle:
+          description: The lifecycle state of the component.
+          minLength: 1
+          type: string
+        tier:
+          description: The importance of the component.
+          minLength: 1
+          type: string
+        type:
+          description: The type of API.
+          type: string
+      type: object
+    EntityV3APISpecInterface:
+      additionalProperties: false
+      description: The API definition.
+      oneOf:
+      - $ref: '#/components/schemas/EntityV3APISpecInterfaceFileRef'
+      - $ref: '#/components/schemas/EntityV3APISpecInterfaceDefinition'
+    EntityV3APISpecInterfaceDefinition:
+      additionalProperties: false
+      description: The definition of `EntityV3APISpecInterfaceDefinition` object.
+      properties:
+        definition:
+          description: The API definition.
+          type: object
+    EntityV3APISpecInterfaceFileRef:
+      additionalProperties: false
+      description: The definition of `EntityV3APISpecInterfaceFileRef` object.
+      properties:
+        fileRef:
+          description: The reference to the API definition file.
+          type: string
     EntityV3APIVersion:
       description: The schema version of entity type. The field is known as schema-version
         in the previous version.
