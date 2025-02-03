@@ -4,7 +4,7 @@ disable_toc: false
 further_reading:
     - link: "/sensitive_data_scanner/setup/telemetry_data"
       tag: "Documentation"
-      text: "Set up Sensitive Data Scanner for telemetry data"
+      text: "Set up Sensitive Data Scanner for Telemetry Data"
     - link: "/sensitive_data_scanner/setup/cloud_storage"
       tag: "Documentation"
       text: "Set up Sensitive Data Scanner for Cloud Storage"
