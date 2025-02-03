@@ -544,6 +544,20 @@ components:
       required: true
       schema:
         type: string
+    MicrosoftTeamsWorkflowsWebhookHandleIDPathParameter:
+      description: Your Workflows webhook handle id.
+      in: path
+      name: handle_id
+      required: true
+      schema:
+        type: string
+    MicrosoftTeamsWorkflowsWebhookHandleNameQueryParameter:
+      description: Your Workflows webhook handle name.
+      in: query
+      name: name
+      required: false
+      schema:
+        type: string
     OpsgenieServiceIDPathParameter:
       description: The UUID of the service.
       in: path
@@ -19160,6 +19174,14 @@ components:
       required:
       - data
       type: object
+    MicrosoftTeamsCreateWorkflowsWebhookHandleRequest:
+      description: Create Workflows webhook handle request.
+      properties:
+        data:
+          $ref: '#/components/schemas/MicrosoftTeamsWorkflowsWebhookHandleRequestData'
+      required:
+      - data
+      type: object
     MicrosoftTeamsGetChannelByNameResponse:
       description: Response with channel, team, and tenant ID information.
       properties:
@@ -19388,6 +19410,127 @@ components:
       type: object
       x-merge-override:
         required: false
+    MicrosoftTeamsUpdateWorkflowsWebhookHandleRequest:
+      description: Update Workflows webhook handle request.
+      properties:
+        data:
+          $ref: '#/components/schemas/MicrosoftTeamsUpdateWorkflowsWebhookHandleRequestData'
+      required:
+      - data
+      type: object
+    MicrosoftTeamsUpdateWorkflowsWebhookHandleRequestData:
+      description: Workflows Webhook handle data from a response.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/MicrosoftTeamsWorkflowsWebhookHandleAttributes'
+        type:
+          $ref: '#/components/schemas/MicrosoftTeamsWorkflowsWebhookHandleType'
+      required:
+      - type
+      - attributes
+      type: object
+    MicrosoftTeamsWorkflowsWebhookHandleAttributes:
+      description: Workflows Webhook handle attributes.
+      properties:
+        name:
+          description: Workflows Webhook handle name.
+          example: fake-handle-name
+          maxLength: 255
+          type: string
+        url:
+          description: Workflows Webhook URL.
+          example: https://fake.url.com
+          maxLength: 255
+          type: string
+      type: object
+    MicrosoftTeamsWorkflowsWebhookHandleRequestAttributes:
+      description: Workflows Webhook handle attributes.
+      properties:
+        name:
+          description: Workflows Webhook handle name.
+          example: fake-handle-name
+          maxLength: 255
+          type: string
+        url:
+          description: Workflows Webhook URL.
+          example: https://fake.url.com
+          maxLength: 255
+          type: string
+      required:
+      - name
+      - url
+      type: object
+    MicrosoftTeamsWorkflowsWebhookHandleRequestData:
+      description: Workflows Webhook handle data from a response.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/MicrosoftTeamsWorkflowsWebhookHandleRequestAttributes'
+        type:
+          $ref: '#/components/schemas/MicrosoftTeamsWorkflowsWebhookHandleType'
+      required:
+      - type
+      - attributes
+      type: object
+    MicrosoftTeamsWorkflowsWebhookHandleResponse:
+      description: Response of a Workflows webhook handle.
+      properties:
+        data:
+          $ref: '#/components/schemas/MicrosoftTeamsWorkflowsWebhookHandleResponseData'
+      required:
+      - data
+      type: object
+    MicrosoftTeamsWorkflowsWebhookHandleResponseData:
+      description: Workflows Webhook handle data from a response.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/MicrosoftTeamsWorkflowsWebhookResponseAttributes'
+        id:
+          description: The ID of the Workflows webhook handle.
+          example: 596da4af-0563-4097-90ff-07230c3f9db3
+          maxLength: 100
+          minLength: 1
+          type: string
+        type:
+          $ref: '#/components/schemas/MicrosoftTeamsWorkflowsWebhookHandleType'
+      type: object
+    MicrosoftTeamsWorkflowsWebhookHandleType:
+      default: workflows-webhook-handle
+      description: Specifies the Workflows webhook handle resource type.
+      enum:
+      - workflows-webhook-handle
+      example: workflows-webhook-handle
+      type: string
+      x-enum-varnames:
+      - WORKFLOWS_WEBHOOK_HANDLE
+    MicrosoftTeamsWorkflowsWebhookHandlesResponse:
+      description: Response with a list of Workflows webhook handles.
+      properties:
+        data:
+          description: An array of Workflows webhook handles.
+          example:
+          - attributes:
+              name: general-handle
+            id: 596da4af-0563-4097-90ff-07230c3f9db3
+            type: workflows-webhook-handle
+          - attributes:
+              name: general-handle-2
+            id: 596da4af-0563-4097-90ff-07230c3f9db4
+            type: workflows-webhook-handle
+          items:
+            $ref: '#/components/schemas/MicrosoftTeamsWorkflowsWebhookHandleResponseData'
+          type: array
+      required:
+      - data
+      type: object
+    MicrosoftTeamsWorkflowsWebhookResponseAttributes:
+      description: Workflows Webhook handle attributes.
+      properties:
+        name:
+          description: Workflows Webhook handle name.
+          example: fake-handle-name
+          maxLength: 255
+          type: string
+      type: object
     MonitorConfigPolicyAttributeCreateRequest:
       description: Policy and policy type for a monitor configuration policy.
       properties:
@@ -38978,6 +39121,177 @@ paths:
       delete: true
       get: true
       patch: true
+  /api/v2/integration/ms-teams/configuration/workflows-webhook-handles:
+    get:
+      description: Get a list of all Workflows webhook handles from the Datadog Microsoft
+        Teams integration.
+      operationId: ListWorkflowsWebhookHandles
+      parameters:
+      - $ref: '#/components/parameters/MicrosoftTeamsWorkflowsWebhookHandleNameQueryParameter'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MicrosoftTeamsWorkflowsWebhookHandlesResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '412':
+          $ref: '#/components/responses/PreconditionFailedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get all Workflows webhook handles
+      tags:
+      - Microsoft Teams Integration
+      x-menu-order: 1
+      x-undo:
+        type: safe
+    post:
+      description: Create a Workflows webhook handle in the Datadog Microsoft Teams
+        integration.
+      operationId: CreateWorkflowsWebhookHandle
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MicrosoftTeamsCreateWorkflowsWebhookHandleRequest'
+        description: Workflows Webhook handle payload.
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MicrosoftTeamsWorkflowsWebhookHandleResponse'
+          description: CREATED
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '409':
+          $ref: '#/components/responses/ConflictResponse'
+        '412':
+          $ref: '#/components/responses/PreconditionFailedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Create Workflows webhook handle
+      tags:
+      - Microsoft Teams Integration
+      x-codegen-request-body-name: body
+      x-given:
+        workflows_webhook_handle:
+          parameters:
+          - name: body
+            value: "{\n  \"data\": {\n    \"attributes\": {\n      \"name\": \"{{
+              unique }}\",\n      \"url\": \"https://prod-100.westus.logic.azure.com:443/workflows/abcd1234\"\n
+              \    },\n     \"type\": \"workflows-webhook-handle\"\n  }\n}"
+          step: there is a valid "workflows_webhook_handle" in the system
+      x-menu-order: 1
+      x-undo:
+        operationId: DeleteWorkflowsWebhookHandle
+        parameters:
+        - name: handle_id
+          source: data.id
+        type: unsafe
+  /api/v2/integration/ms-teams/configuration/workflows-webhook-handles/{handle_id}:
+    delete:
+      description: Delete a Workflows webhook handle from the Datadog Microsoft Teams
+        integration.
+      operationId: DeleteWorkflowsWebhookHandle
+      parameters:
+      - $ref: '#/components/parameters/MicrosoftTeamsWorkflowsWebhookHandleIDPathParameter'
+      responses:
+        '204':
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '412':
+          $ref: '#/components/responses/PreconditionFailedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Delete Workflows webhook handle
+      tags:
+      - Microsoft Teams Integration
+      x-menu-order: 1
+      x-undo:
+        type: idempotent
+    get:
+      description: Get the name of a Workflows webhook handle from the Datadog Microsoft
+        Teams integration.
+      operationId: GetWorkflowsWebhookHandle
+      parameters:
+      - $ref: '#/components/parameters/MicrosoftTeamsWorkflowsWebhookHandleIDPathParameter'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MicrosoftTeamsWorkflowsWebhookHandleResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '412':
+          $ref: '#/components/responses/PreconditionFailedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get Workflows webhook handle information
+      tags:
+      - Microsoft Teams Integration
+      x-menu-order: 1
+      x-undo:
+        type: safe
+    patch:
+      description: Update a Workflows webhook handle from the Datadog Microsoft Teams
+        integration.
+      operationId: UpdateWorkflowsWebhookHandle
+      parameters:
+      - $ref: '#/components/parameters/MicrosoftTeamsWorkflowsWebhookHandleIDPathParameter'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MicrosoftTeamsUpdateWorkflowsWebhookHandleRequest'
+        description: Workflows Webhook handle payload.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MicrosoftTeamsWorkflowsWebhookHandleResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '409':
+          $ref: '#/components/responses/ConflictResponse'
+        '412':
+          $ref: '#/components/responses/PreconditionFailedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Update Workflows webhook handle
+      tags:
+      - Microsoft Teams Integration
+      x-codegen-request-body-name: body
+      x-menu-order: 1
+      x-undo:
+        type: idempotent
   /api/v2/integration/opsgenie/services:
     get:
       description: Get a list of all services from the Datadog Opsgenie integration.
