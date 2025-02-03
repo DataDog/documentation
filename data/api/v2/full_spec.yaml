@@ -7393,8 +7393,8 @@ components:
                   type: gridCell
               type: grid
             description: This is a simple example app
-            embeddedQueries: []
             name: Example App
+            queries: []
             rootInstanceName: grid0
           type: appDefinitions
       properties:
@@ -7422,15 +7422,15 @@ components:
         description:
           description: A human-readable description for the app.
           type: string
-        embeddedQueries:
+        name:
+          description: The name of the app.
+          type: string
+        queries:
           description: An array of queries, such as external actions and state variables,
             that the app uses.
           items:
             $ref: '#/components/schemas/Query'
           type: array
-        name:
-          description: The name of the app.
-          type: string
         rootInstanceName:
           description: The name of the root component of the app. This must be a `grid`
             component that contains all other components.
@@ -12648,18 +12648,18 @@ components:
         description:
           description: A human-readable description for the app.
           type: string
-        embeddedQueries:
-          description: An array of queries, such as external actions and state variables,
-            that the app uses.
-          items:
-            $ref: '#/components/schemas/Query'
-          type: array
         favorite:
           description: Whether the app is marked as a favorite by the current user.
           type: boolean
         name:
           description: The name of the app.
           type: string
+        queries:
+          description: An array of queries, such as external actions and state variables,
+            that the app uses.
+          items:
+            $ref: '#/components/schemas/Query'
+          type: array
         rootInstanceName:
           description: The name of the root component of the app. This must be a `grid`
             component that contains all other components.
@@ -30406,8 +30406,8 @@ components:
                   type: gridCell
               type: grid
             description: This is a simple example app
-            embeddedQueries: []
             name: Example App
+            queries: []
             rootInstanceName: grid0
           id: 9e20cbaf-68da-45a6-9ccf-54193ac29fa5
           type: appDefinitions
@@ -30446,16 +30446,16 @@ components:
         description:
           description: The new human-readable description for the app.
           type: string
-        embeddedQueries:
+        name:
+          description: The new name of the app.
+          type: string
+        queries:
           description: The new array of queries, such as external actions and state
             variables, that the app uses. If this field is set, all existing queries
             are replaced with the new queries under this field.
           items:
             $ref: '#/components/schemas/Query'
           type: array
-        name:
-          description: The new name of the app.
-          type: string
         rootInstanceName:
           description: The new name of the root component of the app. This must be
             a `grid` component that contains all other components.
@@ -30516,18 +30516,18 @@ components:
         description:
           description: The human-readable description for the app.
           type: string
-        embeddedQueries:
-          description: An array of queries, such as external actions and state variables,
-            that the app uses.
-          items:
-            $ref: '#/components/schemas/Query'
-          type: array
         favorite:
           description: Whether the app is marked as a favorite by the current user.
           type: boolean
         name:
           description: The name of the app.
           type: string
+        queries:
+          description: An array of queries, such as external actions and state variables,
+            that the app uses.
+          items:
+            $ref: '#/components/schemas/Query'
+          type: array
         rootInstanceName:
           description: The name of the root component of the app. This must be a `grid`
             component that contains all other components.
@@ -33268,8 +33268,8 @@ paths:
               "kB", "value": "42"}, "type": "calloutValue"}], "isVisible": "true",
               "layout": {"default": {"height": 8, "width": 2, "x": 0, "y": 0}}}, "type":
               "gridCell"}]}, "type": "grid"}], "description": "This is a simple example
-              app", "embeddedQueries": [], "name": "Example App", "rootInstanceName":
-              "grid0"}, "type": "appDefinitions"}}'
+              app", "queries": [], "name": "Example App", "rootInstanceName": "grid0"},
+              "type": "appDefinitions"}}'
           step: there is a valid "app" in the system
       x-menu-order: 2
       x-permission:
