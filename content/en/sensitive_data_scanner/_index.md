@@ -81,7 +81,7 @@ See [Set up Sensitive Data Scanner for Cloud Storage][12] for setup details.
 
 ## Investigate sensitive data issues
 
-{{< img src="sensitive_data_scanner/sds_summary_20241114.png" alt="The summary page showing an overview of sensitive issues broken down by priority" style="width:100%;" >}}
+{{< img src="sensitive_data_scanner/sds_summary_20250203.png" alt="The summary page showing an overview of sensitive issues broken down by priority" style="width:100%;" >}}
 
 Use the [Summary page][13] to see details of sensitive data issues identified by your scanning rules. These details include:
 
