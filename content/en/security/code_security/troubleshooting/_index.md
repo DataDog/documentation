@@ -174,7 +174,7 @@ To disable scanning Static Code Analysis (SAST) or static Software Composition A
 
 SCA can be enabled on your running services using two methods: the UI or manually using the `DD_APPSEC_SCA_ENABLED` environment variable. When you disable SCA, you must use the *same method* you used to enable SCA. (If you enabled SCA manually, you cannot disable it using the UI. You must disable it manually.)
 
-To disable SCA via the UI:
+To disable SCA through the UI:
 
 * Go to [Services][15], select **Software Composition Analysis (SCA)**. Under **Coverage**, hover over a service's SCA icon and then click **Deactivate**.
 * To disable Software Composition Analysis on your services in bulk, click the check box in the list header and then under **Bulk Actions** select **Deactivate Software Composition Analysis (SCA) on x services**.
