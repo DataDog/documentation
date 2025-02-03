@@ -47151,9 +47151,6 @@ paths:
       x-menu-order: 26
       x-undo:
         type: safe
-      x-unstable: '**Note**: This endpoint is a private preview.
-
-        If you are interested in accessing this API, please [fill out this form](https://forms.gle/kMYC1sDr6WDUBDsx9).'
   /api/v2/security/cloud_workload/policy/download:
     get:
       description: 'The download endpoint generates a Cloud Workload Security policy
@@ -47252,9 +47249,6 @@ paths:
       x-menu-order: 27
       x-undo:
         type: safe
-      x-unstable: '**Note**: This endpoint is a private preview.
-
-        If you are interested in accessing this API, please [fill out this form](https://forms.gle/kMYC1sDr6WDUBDsx9).'
   /api/v2/security/signals/notification_rules:
     get:
       description: Returns the list of notification rules for security signals.
@@ -47846,9 +47840,6 @@ paths:
       x-menu-order: 25
       x-undo:
         type: safe
-      x-unstable: '**Note**: This endpoint is a private preview.
-
-        If you are interested in accessing this API, please [fill out this form](https://forms.gle/kMYC1sDr6WDUBDsx9).'
   /api/v2/security/vulnerabilities/notification_rules:
     get:
       description: Returns the list of notification rules for security vulnerabilities.
