@@ -43,8 +43,8 @@ These security insights are detected from data reported by APM. The insights hel
 ## Enable ASM
 
 ### Enable ASM with in-app instructions
-- To enable Threat Management in-app, navigate to [Application Security > Setup][29].
-- To enable Code Security in-app, navigate to [Code Security > Setup][29].
+- To enable Threat Management in-app, navigate to [**Application Security > Setup**][29].
+- To enable Code Security in-app, navigate to [**Code Security > Setup**][29].
 
 
 <!-- On the [ASM landing page,][18] follow the instructions to get started. This includes:
