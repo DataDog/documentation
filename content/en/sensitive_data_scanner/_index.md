@@ -48,7 +48,7 @@ Sensitive Data Scanner can scan your data [in the cloud](#in-the-cloud) or [with
 
 ### In the cloud  {#in-the-cloud}
 
-With Sensitive Data Scanner in the Cloud, you submit your application logs, APM events, RUM events, and events from Event Management to the Datadog backend, so they leave your premises before they are redacted. However, the logs and events are scanned and redacted in the Datadog backend, so sensitive data is redacted before events are indexed in Datadog.
+With Sensitive Data Scanner in the Cloud, you submit your application logs, APM events, RUM events, and events from Event Management to the Datadog backend, so they leave your premises before they are redacted. However, the logs and events are scanned and redacted in the Datadog backend during processing, so sensitive data is redacted before events are indexed in Datadog.
 
 The data that can be scanned and redacted are:
 
