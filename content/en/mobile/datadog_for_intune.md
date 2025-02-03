@@ -30,18 +30,18 @@ To get started, an Intune and Azure admin needs to configure the required settin
    - For Android: Select **"Android store app"**, then copy the required details from the [Google Play store page][2].
 2. Assign the app to the relevant users and/or groups.
 
-For additional guidance on adding an application to Intune, read Microsoft’s [Intune Quickstart Guide][3].
+For additional guidance on adding an application to Intune, read Microsoft's [Intune Quickstart Guide][3].
 
 ### Step 2: Apply an app protection policy
 To enable users to register and sign in securely, an **App Protection Policy** must be applied. This ensures access to the app is protected by Microsoft Intune security settings.
 
 1. In the [admin center][1], go to the **Apps** tab and select **App Protection Policies**.
-2. Create a new policy for the appropriate platform (iOS and Android require separate policies).
+2. Create a policy for the appropriate platform (iOS and Android require separate policies).
 3. Add **Datadog Intune** to the policy.
 4. Configure your **security settings** and assign the policy to targeted users or groups.
 5. Click **Save**.
 
-**Note:** It may take some time for the new App Protection Policy to be applied to all devices. You can verify the setup by following [Microsoft’s guidance][5].
+**Note:** It may take some time for the new App Protection Policy to be applied to all devices. You can verify the setup by following [Microsoft's guidance][5].
 
 ### Step 3: Grant admin consent for your organization
 In this step, switch from the Intune admin center to the Azure portal for Microsoft Entra-ID.
@@ -50,20 +50,20 @@ Admin consent is required before users can register successfully. Follow these s
 
 1. Open [Microsoft Entra-ID][7] (formerly Azure Active Directory) and go to **Enterprise Applications**.
 2. Search for **“Datadog”**:
-   - If it isn’t listed, click **Add**, then search for “Datadog” in the Microsoft Entra Gallery.
+   - If it isn't listed, click **Add**, then search for "Datadog" in the Microsoft Entra Gallery.
 3. Select **Permissions**, then click **Grant admin consent for <your organization name>**.
 
-For additional support with application management settings, refer to the [Microsoft documentation][8].
+For additional support with application management settings, see the [Microsoft documentation][8].
 
 **Note:** If your organization has multiple "Datadog" applications configured, the one managing web and mobile app access has the Application ID **f21cb7e8-00ab-4b0e-aa94-b1e2f674606d**.
 
-#### Datadog for Intune Required Permissions
+#### Datadog for Intune required permissions
 Permissions are automatically added when configuring the application:
 
 | Name                                    | Claim Value                              | Permission                                      | Type      |
 |-----------------------------------------|------------------------------------------|-------------------------------------------------|-----------|
 | Microsoft Graph                         | `User.Read`                              | Sign in and read user profile                   | Delegated |
-| Microsoft Mobile Application Management | `DeviceManagementManagedApps.ReadWrite`  | Read and Write the User’s App Management device | Delegated |
+| Microsoft Mobile Application Management | `DeviceManagementManagedApps.ReadWrite`  | Read and Write the User's App Management device | Delegated |
 
 ## Deploying Datadog Intune to mobile devices
 When deploying to Android devices, users need to install the following:
@@ -75,7 +75,9 @@ For iOS devices, only [Datadog - Intune][11] is required, but the [Company Porta
 
 On both platforms, the **Microsoft Authenticator app** can assist with sign-in if installed.
 
-## Troubleshooting Device Registration
+## Troubleshooting
+
+### Device registration
 If users encounter issues while registering their devices for Datadog Intune, administrators should verify the following configurations:
 
 - The **admin consent** has been granted on Microsoft Entra-ID.
