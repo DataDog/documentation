@@ -68,10 +68,10 @@ If your GitHub app's **Pull Requests** permission is set to **Read & Write**, on
 
 Follow these steps to fix a vulnerability and open a pull request:
 1. Go to **Code Security > Repositories**.
-2. Click a repo.
-3. On the repo's page, click the **Code Vulnerabilities** or **Code Quality** tabs.
-4. Click a violation.
-5. If a suggested fix is available for that violation, one-click remediation is available in the side panel.
+2. Click a repository.
+3. On the repository's page, click the **Code Vulnerabilities** or **Code Quality** tabs.
+4. Click on a violation.
+5. If a suggested fix is available for that violation, one-click remediation is available in the side panel under the **Remediation** tab.
 
 [1]: /security/code_security/
 [2]: /integrations/github/

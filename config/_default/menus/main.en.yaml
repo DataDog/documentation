@@ -6219,7 +6219,7 @@ menu:
       url: /security/code_security/static_analysis/static_analysis_rules/
       parent: sec_static_analysis
       weight: 5
-    - name: Software Composition Analysis
+    - name: Software Composition Analysis (SCA)
       identifier: software_composition_analysis
       url: /security/code_security/software_composition_analysis/
       parent: code_security
@@ -6249,7 +6249,7 @@ menu:
       url: /security/code_security/iast/setup/
       parent: sec_iast
       weight: 1
-    - name: Dev tool integrations
+    - name: Developer Tool Integrations
       identifier: dev_tool_int
       url: /security/code_security/dev_tool_int/
       parent: code_security

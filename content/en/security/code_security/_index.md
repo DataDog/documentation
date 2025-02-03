@@ -12,7 +12,7 @@ Code Security scans your first-party code and open source libraries used in your
 - [Runtime Code Analysis (IAST)][3] for code-level vulnerabilities in your services
 
 Code Security helps teams implement DevSecOps throughout the organization:
-- **Developers:** early vulnerablity detection, code quality improvements, faster development as developers spend less time debugging and patching.
+- **Developers:** early vulnerability detection, code quality improvements, faster development as developers spend less time debugging and patching.
 - **Security Administrators:** enhanced security posture, improved patch management in response to early vulnerability alerts, and compliance monitoring.
 - **Site Reliability Engineers (SREs):** automated security checks throughout CI/CD workflow, security compliance, and system resilience. SAST reduces manual overhead for SREs and ensures that each release is thoroughly tested for vulnerabilities.
 

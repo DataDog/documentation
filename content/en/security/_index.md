@@ -79,7 +79,7 @@ cascade:
 
 ## Overview
 
-Bring speed and scale to your production security operations. Datadog Security delivers real-time threat detection, and continuous configuration audits across applications, hosts, containers, and cloud infrastructure. Coupled with the greater Datadog observability platform, Datadog Security brings unprecedented integration between security and operations aligned to your organizations shared goals.
+Bring speed and scale to your production security operations. Datadog Security delivers real-time threat detection, and continuous configuration audits across applications, hosts, containers, and cloud infrastructure. Coupled with the greater Datadog observability platform, Datadog Security brings unprecedented integration between security and operations aligned to your organization's shared goals.
 
 Datadog Security includes [Application Security](#application-security-management), [Cloud SIEM](#cloud-siem), and [Cloud Security Management](#cloud-security-management). To learn more, check out the [30-second Product Guided Tour][14].
 
@@ -87,15 +87,12 @@ Datadog Security includes [Application Security](#application-security-managemen
 
 Datadog [Application Security][1] provides observability into application-level attacks that aim to exploit code-level vulnerabilities, such as Server-Side-Request-Forgery (SSRF), SQL injection, Log4Shell, and Reflected Cross-Site-Scripting (XSS). ASM leverages [Datadog APM][2], the [Datadog Agent][3], and in-app detection rules to detect threats in your application environment. Check out the product [Guided Tour](https://www.datadoghq.com/guided-tour/security/application-security-management/) to see more.
 
+In addition to threat detection, Datadog provides end-to-end code and library vulnerability detection from development to production with [Code Security][20], which includes the following capabilities:
+- [Static Code Analysis (SAST)][21] for identifying security and quality issues in your first-party code
+- [Software Composition Analysis (SCA)][22] for identifying open source dependencies in both your repositories and your services
+- [Runtime Code Analysis (IAST)][23] for code-level vulnerabilities in your services
+
 {{< img src="/security/application_security/app-sec-landing-page.png" alt="A security signal panel in Datadog, which displays attack flows and flame graphs" width="75%">}}
-
-### Disable ASM
-
-For information on disabling ASM or its features, see the following:
-
-- [Disabling threat management and protection][17]
-- [Disabling Software Composition Analysis][18]
-- [Disabling Code Security][19]
 
 ## Cloud SIEM
 
@@ -134,3 +131,7 @@ To get started with Datadog Security, navigate to the [**Security** > **Setup**]
 [17]: /security/application_security/troubleshooting/#disabling-threat-management-and-protection
 [18]: /security/application_security/troubleshooting/#disabling-software-composition-analysis
 [19]: /security/application_security/troubleshooting/#disabling-code-security
+[20]: /security/code_security/
+[21]: /security/code_security/static_analysis/
+[22]: /security/code_security/software_composition_analysis/
+[23]: /security/code_security/iast/
