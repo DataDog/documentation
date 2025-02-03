@@ -12,7 +12,7 @@ further_reading:
 
 With Service Catalog, you can ensure your services are production-ready by evaluating monitoring coverage, enforcing governance best practices, and identifying security and cost optimization opportunities.
 
-## Evaluate monitoring coverage
+### Evaluate monitoring coverage
 
 With Service Catalog, you can: 
 - Identify services that lack monitoring or observability data.
@@ -27,7 +27,7 @@ The Setup Guidance tab also shows which Datadog features are actively used for a
 
 **Note**: This table reflects service activity, not product billing. For example, if a service has not emitted infrastructure metrics for an extended period, Infrastructure Monitoring may display 'Not Detected', even if hosts or containers are running it.
 
-## Governance and observation
+### Governance and observation
 
 Scorecards provide a high-level view of best practices across teams and services, helping you communicate effectively and take informed action to improve service health and performance. Services with defined metadata in Service Catalog are automatically evaluated against pass-fail criteria for Production Readiness, Observability Best Practices, and Ownership & Documentation.
 

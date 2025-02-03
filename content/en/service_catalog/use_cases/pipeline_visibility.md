@@ -29,13 +29,13 @@ To add or remove a pipeline associated with your service:
 
 1. Then, you can either:
 
-  1. Search for and select the pipelines you want to associate.
+   1. Search for and select the pipelines you want to associate.
 
-  {{< img src="tracing/service_catalog/pipeline-visibility-update-metadata.png" alt="The configuration page for updating service metadata, featuring the Software Delivery field for adding and removing related pipelines" style="width:100%;" >}}
+   {{< img src="tracing/service_catalog/pipeline-visibility-update-metadata.png" alt="The configuration page for updating service metadata, featuring the Software Delivery field for adding and removing related pipelines" style="width:100%;" >}}
 
-  1. Manually add a pipeline fingerprint to the service metadata. To find a pipeline’s fingerprint, go to the Pipelines page, click on the pipeline, and select the gear icon.
+   1. Manually add a pipeline fingerprint to the service metadata. To find a pipeline’s fingerprint, go to the Pipelines page, click on the pipeline, and select the gear icon.
 
-  {{< img src="tracing/service_catalog/pipeline-visibility-pipeline-fingerprint.png" alt="An example of a pipeline fingerprint" style="width:100%;" >}}
+   {{< img src="tracing/service_catalog/pipeline-visibility-pipeline-fingerprint.png" alt="An example of a pipeline fingerprint" style="width:100%;" >}}
 
 For more details on CI status and static analysis violations, click on a service to review the status of each pipeline and rule violation.
 
