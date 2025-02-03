@@ -18,7 +18,7 @@ It offers a suite of tools to help you secure your code throughout the software 
 
 ### Open source libraries
 
-Datadog Software Composition Analysis detects library vulnerabilities and catalogs dependencies within your codebase as well as running on your services.
+Datadog Software Composition Analysis detects library vulnerabilities and catalogs dependencies within your codebase and running services.
 
 See [Software Composition Analysis][1] to set up static and/or runtime library vulnerability detection.
 
