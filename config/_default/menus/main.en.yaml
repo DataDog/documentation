@@ -5957,15 +5957,15 @@ menu:
       parent: cspm_findings_explorer
       identifier: cspm_export_misconfigurations
       weight: 101
-    - name: Signals Explorer
-      url: /security/cloud_security_management/misconfigurations/signals_explorer/
-      parent: cspm
-      identifier: signals
-      weight: 306
     - name: Kubernetes Security Posture Management
       url: security/cloud_security_management/misconfigurations/kspm
       parent: cspm
       identifier: cspm_kspm
+      weight: 306
+    - name: Signals Explorer
+      url: /security/cloud_security_management/misconfigurations/signals_explorer/
+      parent: cspm
+      identifier: signals
       weight: 307
     - name: Identity Risks
       url: security/cloud_security_management/identity_risks/
