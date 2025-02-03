@@ -96,7 +96,6 @@ set_consume_checkpoint(
 
 {{< /code-block >}}
 {{% /tab %}}
-{{% /tab %}}
 {{% tab ".Net" %}}
 <div class="alert alert-warning">
   <strong>Note:</strong> DSM instrumentation does not work in Async operations
