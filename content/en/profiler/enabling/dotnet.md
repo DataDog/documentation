@@ -70,9 +70,13 @@ The following profiling features are available in the following minimum versions
 
 Continuous Profiler is not supported for AWS Lambda.
 
+<div class="alert alert-warning">
+  <strong>Note:</strong> Unlike APM, Continuous Profiler is not activated by default when the APM package gets installed. This is why you need to explicitly [enable it](#enabling-the-profiler) for the applications you want to profile.
+</div>
+
 ## Installation
 
-Ensure Datadog Agent v6+ is installed and running. Datadog recommends using [Datadog Agent v7+][1]. The profiler ships together with the tracing library (beginning with v2.8.0), so if you are already using [APM to collect traces][5] for your application, you can skip installing the library and go directly to [Enabling the profiler](#enabling-the-profiler).
+Ensure Datadog Agent v6+ is installed and running. Datadog recommends using [Datadog Agent v7+][1]. The profiler ships together with the tracing library (beginning with v2.8.0), so if you are already using [APM to collect traces][5] for your application, you can skip installing the library and go directly to [Enabling the Profiler](#enabling-the-profiler).
 
 Otherwise, install the profiler using the following steps, depending on your operating system.
 
@@ -81,9 +85,21 @@ Otherwise, install the profiler using the following steps, depending on your ope
 </div>
 
 
-You can install the Datadog .NET Profiler machine-wide so that all services on the machine can be instrumented, or you can install it on a per-application basis to allow developers to manage the instrumentation through the application's dependencies. To see machine-wide installation instructions, click the **Windows** or **Linux** tab. To see per-application installation instructions, click the **NuGet** tab.
+You can install the Datadog .NET Profiler machine-wide so that any services on the machine can be instrumented, or you can install it on a per-application basis to allow developers to manage the instrumentation through the application's dependencies. To see machine-wide installation instructions, click the **Windows** or **Linux** tab. To see per-application installation instructions, click the **NuGet** tab.
 
 {{< tabs >}}
+
+{{% tab "Linux with Single Step APM Instrumentation" %}}
+1. With [Single Step APM Instrumentation][1], there is nothing else to install. Go to [Enabling the Profiler](#enabling-the-profiler) to see how to activate the profiler for an application.
+
+<div class="alert alert-warning">
+  <strong>Note:</strong> If APM was already manually installed, it is required to uninstall it by removing the following environment variables: `CORECLR_ENABLE_PROFILING`, `CORECLR_PROFILER`, `CORECLR_PROFILER_PATH`, and the value that points to `Datadog.Linux.ApiWrapper.x64.so` in `LD_PRELOAD`.
+  If these environment variables are still set, the corresponding old installed version vill be silently used instead of the one installed with Single Step Instrumentation.
+</div>
+
+
+[1]: https://docs.datadoghq.com/tracing/trace_collection/automatic_instrumentation/single-step-apm
+{{% /tab %}}
 
 {{% tab "Linux" %}}
 To install the .NET Profiler machine-wide:
@@ -151,11 +167,36 @@ To install the .NET Profiler per-webapp:
 
 ## Enabling the Profiler
 
-<div class="alert alert-info">
+<div class="alert alert-warning">
   <strong>Note</strong>: Datadog does not recommend enabling the profiler at machine-level or for all IIS applications. If you do have enabled it machine-wide, read the <a href="/profiler/profiler_troubleshooting/?code-lang=dotnet#avoid-enabling-the-profiler-machine-wide">Troubleshooting documentation</a> for information about reducing the overhead that is associated with enabling the profiler for all system applications.
 </div>
 
 {{< tabs >}}
+
+{{% tab "Linux with Single Step APM Instrumentation" %}}
+
+2. With [Single Step APM Instrumentation][1], only `DD_PROFILING_ENABLED` must be set to activate the profiler for an application.
+   ```
+   DD_PROFILING_ENABLED=1
+   DD_ENV=production
+   DD_VERSION=1.2.3
+   ```
+
+Here are the supported values for `DD_PROFILING__ENABLED`environment variable:
+
+| Value                         | Description                                                                                                           |
+| ----------------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| `1` or `true`                 | Activate the profiler.                                                                                                |
+| `Auto`                        | Activate the profiler if and only if (1) a trace has been created and (2) the application lasts more than 30 seconds. |
+| `0` or `false`                | Disable the profiler.                                                                                                 |
+
+<div class="alert alert-info">
+  <strong>Note</strong>: The `Auto` value is aimed to avoid short lived processes without any trace. This is in preview and this setting will soon be integrated into the Single Step Instrumentation workflow.
+</div>
+
+[1]: https://docs.datadoghq.com/tracing/trace_collection/automatic_instrumentation/single-step-apm
+{{% /tab %}}
+
 {{% tab "Linux" %}}
 3. Set the following required environment variables for automatic instrumentation to attach to your application:
 
