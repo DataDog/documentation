@@ -20,7 +20,7 @@ cascade:
         rank: 70
 code_lang: notebooks_legacy
 type: multi-code-lang
-weight: 1
+weight: 2
 ---
 
 ## Overview

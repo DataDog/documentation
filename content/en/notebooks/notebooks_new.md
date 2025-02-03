@@ -17,7 +17,7 @@ further_reading:
   text: "Transform and enrich your logs with Datadog Observability Pipelines"
 code_lang: notebooks_new
 type: multi-code-lang
-weight: 2
+weight: 1
 ---
 
 {{< callout url="https://www.datadoghq.com/product-preview/notebooks-2.0/" btn_hidden="false" header="In Preview">}}
