@@ -12,7 +12,16 @@ further_reading:
 
 ## Overview
 
-Sensitive Data Scanner in the Cloud scans telemetry data, such as your application logs, APM events, RUM events, and events from Event Management. You submit those logs and events to the Datadog backend, so the data leaves your environment before it gets redacted. If you don't want data to leave your environment before it gets redacted, use [Observability Pipelines][12] and the [Sensitive Data Scanner processor][13] to scan and redact sensitive data. See [Set Up Pipelines][14] for information on how to set up a pipeline and its components.
+Sensitive Data Scanner in the Cloud scans telemetry data, such as your application logs, APM events, RUM events, and events from Event Management. The data that can be scanned and redacted are:
+
+- Logs: All structured and unstructured log content, including log message and attribute values
+- APM: Span attribute values only
+- RUM: Event attribute values only
+- Events: Event attribute values only
+
+You submit logs and events to the Datadog backend, so the data leaves your environment before it gets redacted. However, the logs and events are scanned and redacted in the Datadog backend, so sensitive data is redacted before events are indexed in Datadog.
+
+If you don't want data to leave your environment before it gets redacted, use [Observability Pipelines][12] and the [Sensitive Data Scanner processor][13] to scan and redact sensitive data. See [Set Up Pipelines][14] for information on how to set up a pipeline and its components.
 
 To use Sensitive Data Scanner in the Cloud, set up a scanning group to define what data to scan and then add scanning rules to determine what sensitive information to match within the data.
 

@@ -48,7 +48,16 @@ Sensitive Data Scanner can scan your data [in the cloud](#in-the-cloud) or [with
 
 ### In the cloud  {#in-the-cloud}
 
-With Sensitive Data Scanner in the Cloud, you submit your application logs, APM events, RUM events, and events from Event Management to the Datadog backend, so they leave your premises before they are redacted. To use Sensitive Data Scanner, set up a scanning group to define what data to scan and then set up scanning rules to determine what sensitive information to match within the data. For scanning rules you can:
+With Sensitive Data Scanner in the Cloud, you submit your application logs, APM events, RUM events, and events from Event Management to the Datadog backend, so they leave your premises before they are redacted. However, the logs and events are scanned and redacted in the Datadog backend, so sensitive data is redacted before events are indexed in Datadog.
+
+The data that can be scanned and redacted are:
+
+- Logs: All structured and unstructured log content, including log message and attribute values
+- APM: Span attribute values only
+- RUM: Event attribute values only
+- Events: Event attribute values only
+
+To use Sensitive Data Scanner, set up a scanning group to define what data to scan and then set up scanning rules to determine what sensitive information to match within the data. For scanning rules you can:
 - Add predefined scanning rules from Datadog's [Scanning Rule Library][2]. These rules detect common patterns such as email addresses, credit card numbers, API keys, authorization tokens, network and device information, and more.
 - [Create your own rules using regex patterns][3].
 
