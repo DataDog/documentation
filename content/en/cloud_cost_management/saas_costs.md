@@ -227,7 +227,7 @@ Your Twilio cost data for the past 15 months can be accessed in Cloud Cost Manag
 
 ## Data Collected
 
-You can view cost data on the [**Cloud Costs Analytics** page][3], the [Cloud Costs Tag Explorer][4], and in [dashboards][5], [notebooks][6], or [monitors][7]. You can also combine these cost metrics with other cloud cost metrics or observability metrics.
+You can view cost data on the [**Cloud Costs Explorer** page][3], the [Cloud Costs Tag Explorer][4], and in [dashboards][5], [notebooks][6], or [monitors][7]. You can also combine these cost metrics with other cloud cost metrics or observability metrics.
 
 The following table contains a non-exhaustive list of out-of-the-box tags associated with each SaaS Cost integration.
 
@@ -372,7 +372,7 @@ The following table contains a non-exhaustive list of out-of-the-box tags associ
 
 [1]: /cloud_cost_management/custom
 [2]: /cloud_cost_management
-[3]: https://app.datadoghq.com/cost/analytics
+[3]: https://app.datadoghq.com/cost/explorer
 [4]: https://app.datadoghq.com/cost/tags?cloud=custom
 [5]: /dashboards
 [6]: /notebooks
