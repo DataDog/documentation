@@ -741,6 +741,30 @@
     "request_description": "Tenant-based handle payload.",
     "request_schema_description": "Update tenant-based handle request."
   },
+  "ListWorkflowsWebhookHandles": {
+    "description": "Get a list of all Workflows webhook handles from the Datadog Microsoft Teams integration.",
+    "summary": "Get all Workflows webhook handles"
+  },
+  "CreateWorkflowsWebhookHandle": {
+    "description": "Create a Workflows webhook handle in the Datadog Microsoft Teams integration.",
+    "summary": "Create Workflows webhook handle",
+    "request_description": "Workflows Webhook handle payload.",
+    "request_schema_description": "Create Workflows webhook handle request."
+  },
+  "DeleteWorkflowsWebhookHandle": {
+    "description": "Delete a Workflows webhook handle from the Datadog Microsoft Teams integration.",
+    "summary": "Delete Workflows webhook handle"
+  },
+  "GetWorkflowsWebhookHandle": {
+    "description": "Get the name of a Workflows webhook handle from the Datadog Microsoft Teams integration.",
+    "summary": "Get Workflows webhook handle information"
+  },
+  "UpdateWorkflowsWebhookHandle": {
+    "description": "Update a Workflows webhook handle from the Datadog Microsoft Teams integration.",
+    "summary": "Update Workflows webhook handle",
+    "request_description": "Workflows Webhook handle payload.",
+    "request_schema_description": "Update Workflows webhook handle request."
+  },
   "ListOpsgenieServices": {
     "description": "Get a list of all services from the Datadog Opsgenie integration.",
     "summary": "Get all service objects"
