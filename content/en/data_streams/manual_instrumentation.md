@@ -124,8 +124,7 @@ using (var scope = Tracer.Instance.StartActive("produce"))
 // Specific to how the header is modeled
 static void SetHeader(Headers headers, string key, string value)
 {
-    byte[] valueBytes = Encoding.UTF8.GetBytes(value);
-    headers.Add(new Header(key, valueBytes));
+    headers.Add(new Header(key, value));
 }
 {{< /code-block >}}
 
@@ -156,16 +155,7 @@ using (var scope = Tracer.Instance.StartActive("consume",
 // Specific to how the header is modeled
 static IEnumerable<string?> GetHeader(Headers headers, string key)
 {
-    foreach (var header in headers)
-    {
-        string headerKey = header.Key;
-
-        if (headerKey == key)
-        {
-            yield return Encoding.UTF8.GetString(header.GetValueBytes());
-        }
-    }
-    yield return null;
+    yield return header.GetByKey(key);
 }
 {{< /code-block >}}
 {{% /tab %}}
