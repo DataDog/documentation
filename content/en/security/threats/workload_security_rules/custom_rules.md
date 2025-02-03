@@ -33,7 +33,7 @@ Here are some important [role and permissions][11] to use for custom rules RBAC:
 
 ## Policies
 
-Rules are managed and applied using policies. To view policies, go to [Security > Cloud Security Managment > Agent Configuration][3].
+Rules are managed and applied using policies. To view policies, go to [Security > Cloud Security Management > Agent Configuration][3].
 
 You can create and deploy different custom policies containing rules you want to apply to different sets of hosts in your infrastructure.
 
@@ -48,7 +48,7 @@ The default policy and its rules cannot be modified. You can use the policy prio
 
 ### Create a policy
 
-1. Go to [Security > Cloud Security Managment > Agent Configuration][3].
+1. Go to [Security > Cloud Security Management > Agent Configuration][3].
 2. Click **New Policy**. You can also open an existing policy, click **Actions**, and clone it.
 3. Enter a name for the policy and click **Create**.
    The new policy is created and placed as the top priority, but it is not enabled or deployed.
@@ -60,7 +60,7 @@ The default policy and its rules cannot be modified. You can use the policy prio
 
 ### Prioritize policies
 
-1. Go to [Security > Cloud Security Managment > Agent Configuration][3].
+1. Go to [Security > Cloud Security Management > Agent Configuration][3].
 2. Click **Determine Priority**.
 3. Drag the policies to set their priority.
 4. Click **Confirm Reordering**.
@@ -75,7 +75,7 @@ When a policy is overridden, the **Overridden** status is displayed. Hover over 
 
 Tags identify two things: the Agents using the policy and the infrastructure where those Agents apply the policy. For example, if a policy has the tag `cluster_name:mycluster` the Agents in that cluster use the policy on the hosts in that cluster.
 
-1. Go to [Security > Cloud Security Managment > Agent Configuration][3].
+1. Go to [Security > Cloud Security Management > Agent Configuration][3].
 2. Hover over a policy, or open a policy, and click **Apply Tags & Deploy Policy**.
 3.  Enter tags and click **Apply**. If the policy is enabled, the policy is applied to the tag targets.
 
@@ -116,7 +116,7 @@ As you define the rules using this tool, the threat expressions generated for th
 
 To use the Assisted rule creator:
 
-1. Go to [Security > Cloud Security Managment > Agent Configuration][3].
+1. Go to [Security > Cloud Security Management > Agent Configuration][3].
 2. Create or open a policy.
 3. In **Actions**, select **Assisted rule creator**.
 4. Define the detection. To monitor your resource effectively, you have the following detection type options:
@@ -136,7 +136,7 @@ To use the Assisted rule creator:
 
 You can create a custom Agent rule and deploy it as part of a new Agent policy. Later, when defining a custom [detection rule][3], you reference the custom Agent rule and add expression parameters.
 
-1. Go to [Security > Cloud Security Managment > Agent Configuration][3].
+1. Go to [Security > Cloud Security Management > Agent Configuration][3].
 2. Create or open a policy.
 3. In **Actions**, select **Manual rule creator**.
 4. Add a name and description for the rule.
