@@ -27,7 +27,6 @@ The first step is to configure the notification with the required fields:
 
 {{< img src="/monitors/guide/notification_message_best_practices/monitor_notification_message.png" alt="Monitor notification message configuration" style="width:100%;" >}}
 
-
 ### Name
 
 Craft the Monitor Name to include key information for the responder to quickly understand the alert context. The monitor title should give a clear and concise description of the signal, including:
@@ -36,9 +35,9 @@ Craft the Monitor Name to include key information for the responder to quickly u
 * What resource is affected (such as Datacenter, Kubernetes Cluster, host, or service)
 
 
-|  Needs Revision    | Improved Title    | 
-| ---  | ----------- | 
-| *Memory usage* | *High memory usage on {{pod\_name.name}}* |
+| Needs Revision | Improved Title                          | 
+| -------------- | --------------------------------------- | 
+| Memory usage   | High memory usage on {{pod\_name.name}} |
 
 While both the examples refer to a memory consumption monitor, the improved title gives a thorough representation with essential context for focused investigation.
 
@@ -46,22 +45,21 @@ While both the examples refer to a memory consumption monitor, the improved titl
 
 On-call responders rely on the notification body to understand and act on alerts. Write concise, accurate, and legible messages for clarity.
 
-
 - Precisely mention what is failing and list major root causes
 - Add a solution runbook for quick resolution guidance
 - Include links to relevant pages for clear next steps
 - Ensure notifications are sent to the appropriate recipients, either as direct email notifications or through [integration handles][1] (such as Slack).
 
-
-
-In the following sections you will learn how to use advanced features to further enhance your monitor messages. 
+Read the following sections to explore advanced features that can further enhance your monitor messages.
 
 #### Variables
 
-Monitor message variables are dynamic placeholders that allow you to customize notification messages with real-time contextual information. Use variables to enhance message clarity, and provide detailed context.
-There are two types of variables:
+Monitor message variables are dynamic placeholders that allow you to customize notification messages with real-time contextual information. Use variables to enhance message clarity, and provide detailed context. There are two types of variables:
 
-| Variable Type | Description | |---------------------|-----------------------------------------------------------------------------------------------------| | [Conditional](#conditional-variables) | Uses "if-else" logic to adjust the message context based on conditions like monitor state. | | [Template](#template-variables) | Enriches monitor notifications with contextual information. |
+| Variable Type | Description | 
+|---------------------|-----------------------------------------------------------------------------------------------------| 
+| [Conditional](#conditional-variables) | Uses "if-else" logic to adjust the message context based on conditions like monitor state. | 
+| [Template](#template-variables) | Enriches monitor notifications with contextual information. |
 
 Variables are especially important in a **Multi-Alert** monitor. When triggered, you need to know which group is responsible. For example, monitoring CPU usage by container, grouped by host. A valuable variable is {{host.name}} indicating the host that triggered the alert.
 
@@ -69,33 +67,23 @@ Variables are especially important in a **Multi-Alert** monitor. When triggered,
 
 #### Conditional variables
 
-These variables allow you to tailor the notification message by implementing branch logic based on your needs and use case.
+These variables allow you to tailor the notification message by implementing branch logic based on your needs and use case. Use conditional variables to notify different people/groups depending on the group that triggered the alert.
 
-For example, if you'd like to get notified only if a certain group triggers, you can use {{\#is\_exact\_match}} variable.  
-Example:  
-`{{#is_exact_match "role.name" "db"}}`  
-  `` This displays if the host triggering the alert contains `db` ``  
-  `in the role name. @db-team@company.com`  
-`{{/is_exact_match}}`
-
-Use conditional variables to notify different people/groups depending on the group that triggered the alert.  
-Example:  
-`{{#is_exact_match "role.name" "db"}}`  
-  `` This displays if the host triggering the alert contains `db` ``  
-  `in the role name. @db-team@company.com`  
-`{{/is_exact_match}}`  
-```
+{{< code-block lang="text" >}}
 {{#is_exact_match "role.name" "network"}}
- # The content displays if the host triggering the alert contains `network` in the role name. @network-team@company.com
+  # The content displays if the host triggering the alert contains `network` in the role name, and only notifes @network-team@company.com.
+  @network-team@company.com
 {{/is_exact_match}}
-```
+{{< /code-block >}}
 
 You can receive a notification if the group that triggered the alert contains a specific string.  
-```
+
+{{< code-block lang="text" >}}
 {{#is_match "datacenter.name" "us"}}
-  # The content displays if the region triggering the alert contains `us` (such as us1 or us3)@us.datacenter@company.com``  
+  # The content displays if the region triggering the alert contains `us` (such as us1 or us3)
+  @us.datacenter@company.com 
 {{/is_match}}
-```
+{{< /code-block >}}
 
 For more information and examples, see the [Conditional Variables][2] documentation. 
 
@@ -120,7 +108,6 @@ Results in the following when the group service:ad-server triggers:
 ```
 @slack-ad-server There is an ongoing issue with ad-server.
 ```
-
 Example of links:  
 ```
 [https://app.datadoghq.com/dash/integration/system_overview?tpl_var_scope=host:{{host.name](https://app.datadoghq.com/dash/integration/system_overview?tpl_var_scope=host:{{host.name)}}
