@@ -99,7 +99,7 @@ set_consume_checkpoint(
 {{% /tab %}}
 {{% tab ".Net" %}}
 <div class="alert alert-warning">
-  <strong>Note:</strong> DSM instrumentation will not work in Async operations
+  <strong>Note:</strong> DSM instrumentation does not work in Async operations
 </div>
 
 In your producer
