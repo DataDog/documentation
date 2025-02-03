@@ -108,7 +108,7 @@ using Datadog.Trace;
 using (var scope = Tracer.Instance.StartActive("produce"))
 {
     var headers = new Headers();
-    var msg = new Message<Null, string> { Value = "any kind of value", Headers = headers};
+    var msg = new Message { Value = "any kind of value", Headers = headers};
 
     new SpanContextInjector().InjectIncludingDsm(
         msg.Headers,
