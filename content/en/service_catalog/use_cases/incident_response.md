@@ -1,9 +1,9 @@
 ---
 title: Improve Incident Response
 aliases:
+  - /service_catalog/use_cases/incident_response
   - /tracing/service_catalog/guides/incident_response
   - /service_catalog/guides/incident_response
-  - /service_catalog/use_cases/incident_response
   - /tracing/service_catalog/guides/upstream-downstream-dependencies
   - /service_catalog/guides/upstream-downstream-dependencies
   - /tracing/service_catalog/use_cases/incident_response

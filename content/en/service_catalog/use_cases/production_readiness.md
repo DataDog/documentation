@@ -1,10 +1,10 @@
 ---
 title: Evaluate Production Readiness
 aliases:
+  - /service_catalog/use_cases/production_readiness
   - /tracing/service_catalog/guides/production_readiness
   - /tracing/service_catalog/use_cases/production_readiness
   - /service_catalog/guides/production_readiness
-  - /service_catalog/use_cases/production_readiness
 further_reading:
   - link: "/infrastructure/"
     tag: "Documentation"
