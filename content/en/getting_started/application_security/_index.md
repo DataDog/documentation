@@ -137,5 +137,5 @@ Interested in best practices to go further? View the [in-product Quickstart Guid
 [27]: /security/code_security/troubleshooting/
 [28]: /security/code_security
 [29]: https://app.datadoghq.com/security/configuration/asm/setup
-[30]:https://app.datadoghq.com/security/configuration/code-security/setup
+[30]: https://app.datadoghq.com/security/configuration/code-security/setup
 
