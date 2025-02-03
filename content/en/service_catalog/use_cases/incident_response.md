@@ -8,9 +8,12 @@ aliases:
   - /service_catalog/guides/upstream-downstream-dependencies
   - /tracing/service_catalog/use_cases/incident_response
 further_reading:
-  - link: "/tracing/service_catalog/"
+  - link: "/service_management/incident_management/"
     tag: "Documentation"
-    text: "Datadog Service Catalog"
+    text: "Learn about Datadog Incident Management"
+  - link: "/integrations/pagerduty/"
+    tag: "Documentation"
+    text: "Learn about the PagerDuty integration"
 ---
 
 
@@ -20,7 +23,7 @@ Service Catalog enhances incident response by:
 - Embedding solutions and tools--like runbooks and documentation--directly into existing observability workflows.
 - Accelerating incident recovery by simplifying the process of identifying owners of upstream and downstream dependencies.
 
-Service Catalog also integrates with Datadog Incident Management and PagerDuty, allowing you to view related incidents in the Reliability tab on the service details page.
+Service Catalog also integrates with [Datadog Incident Management][1] and [PagerDuty][2], allowing you to view related incidents in the Reliability tab on the service details page.
 
 {{< img src="tracing/service_catalog/incident-mgmt-reliability.png" alt="The Reliability tab for a service, showing incident and error metrics for the service overall and by version" style="width:100%;" >}}
 
@@ -35,3 +38,6 @@ To view incident statuses for upstream and downstream dependencies, click a serv
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /service_management/incident_management/
+[2]: /integrations/pagerduty/

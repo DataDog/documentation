@@ -6,9 +6,15 @@ aliases:
   - /service_catalog/guides/production_readiness
   - /service_catalog/use_cases/production_readiness
 further_reading:
-  - link: "/tracing/service_catalog/"
+  - link: "/infrastructure/"
     tag: "Documentation"
-    text: "Datadog Service Catalog"
+    text: "Learn about Datadog Infrastructure Monitoring"
+  - link: "/service_catalog/scorecards/"
+    tag: "Documentation"
+    text: "Learn about Service Catalog Scorecards"
+  - link: "/cloud_cost_management/"
+    tag: "Documentation"
+    text: "Learn about Datadog Cloud Cost Management"
 ---
 
 With Service Catalog, you can ensure your services are production-ready by evaluating monitoring coverage, enforcing governance best practices, and identifying security and cost optimization opportunities.
@@ -30,7 +36,7 @@ The Setup Guidance tab also shows which Datadog features are actively used for a
 
 ## Governance and observation
 
-Scorecards provide a high-level view of best practices across teams and services, helping you communicate effectively and take informed action to improve service health and performance. Services with defined metadata in Service Catalog are automatically evaluated against pass-fail criteria for Production Readiness, Observability Best Practices, and Ownership & Documentation.
+[Scorecards][1] provide a high-level view of best practices across teams and services, helping you communicate effectively and take informed action to improve service health and performance. Services with defined metadata in Service Catalog are automatically evaluated against pass-fail criteria for Production Readiness, Observability Best Practices, and Ownership & Documentation.
 
 {{< img src="tracing/service_catalog/production-readiness-governance-and-obs.png" alt="Default scorecards for Production Readiness, Observability Best Practices, and Ownership and Documentation, with percent scores for each" style="width:100%;" >}}
 
@@ -40,7 +46,7 @@ To access additional details about these vulnerabilities and signals, click on t
 
 {{< img src="tracing/service_catalog/production-readiness-security.png" alt="The security tab for a service, showing details about vulnerability risk and attack exposure" style="width:100%;" >}}
 
-In the Costs tab, powered by Cloud Cost Management, you can identify inefficiencies, cost-saving opportunities, and trends over time. With cost data and service metrics in one place, you can understand how engineering changes impact overall cloud spend.
+In the Costs tab, powered by [Cloud Cost Management][2], you can identify inefficiencies, cost-saving opportunities, and trends over time. With cost data and service metrics in one place, you can understand how engineering changes impact overall cloud spend.
 
 For more information on a service’s cost changes, click on the service row to open a detailed side panel, or go to the Cloud Costs page by clicking “View in Analytics.”
 
@@ -50,3 +56,6 @@ For more information on a service’s cost changes, click on the service row to 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /service_catalog/scorecards/
+[2]: /cloud_cost_management/
