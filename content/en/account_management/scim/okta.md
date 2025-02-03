@@ -2,6 +2,10 @@
 title: Configure SCIM with Okta
 algolia:
   tags: ["scim", "identity provider", "IdP", "Okta"]
+further_reading:
+    - link: '/account_management/scim/'
+      tag: 'Documentation'
+      text: 'User Provisioning with SCIM'
 ---
 
 See the following instructions to synchronize your Datadog users with Okta using SCIM.
@@ -33,7 +37,7 @@ When using SAML and SCIM together, Datadog strongly recommends disabling SAML ju
 1. In the application management screen, select **Provisioning** in the left panel
 2. Click **Configuration API integration**.
 3. Select **Enable API integration**.
-3. Complete the **Credentials** section as follows:
+4. Complete the **Credentials** section as follows:
     - **Base URL**: `https://{{< region-param key="dd_full_site" >}}/api/v2/scim` **Note:** Use the appropriate subdomain for your site. To find your URL, see [Datadog sites][3].
     - **API Token**: Use a valid Datadog application key. You can create an application key on [your organization settings page][4]. To maintain continuous access to your data, use a [service account][5] application key.
 
@@ -47,12 +51,36 @@ When using SAML and SCIM together, Datadog strongly recommends disabling SAML ju
     - **Deactivate Users**
 8. Under **Datadog Attribute Mappings**, find the mapping of Okta attributes to Datadog attributes already pre-configured. You can re-map them if needed, but map the Okta values to the same set of Datadog values.
 
-### Group attributes
+### Group mapping
 
-Group mapping is not supported.
+{{< callout url="/help/" header="false" >}}
+The managed team feature is turned off by default. Request access by contacting support.
+{{< /callout >}}
+
+With managed teams, you control the Datadog Team name, handle, and membership through the identity provider. The setup process differs depending on whether the team already exists in Datadog.
+
+**Note:** Users must exist in Datadog before you can add them to a team. Therefore, you must assign users to the Datadog app in Okta to ensure that they are created in Datadog through SCIM. Assign the Datadog application to your Okta group to ensure that all team members are created in Datadog automatically.
+
+#### Create a new team
+
+1. In your Datadog application in Okta, navigate to the **Push Groups** tab.
+{{< img src="/account_management/scim/okta/pushed-groups.png" alt="Okta pushed groups configuration interface">}}
+1. Click the **Push Groups** button. The pushed groups interface opens.
+1. Select the Okta group you want to push to Datadog.
+1. Select **Create group** in the **Match result & push action** column.
+1. Click **Save**.
+
+To verify that the operation completed successfully, navigate to the [Teams list][6]. Search for a Datadog team matching the Okta group you configured. Verify that the team exists in Datadog and is managed externally.
+
+{{< img src="/account_management/scim/okta/managed-externally.png" alt="Datadog team list showing a team called Cool group that is managed externally.">}}
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /account_management/scim/
 [2]: /account_management/scim/#using-a-service-account-with-scim
 [3]: /getting_started/site
 [4]: https://app.datadoghq.com/organization-settings/application-keys
 [5]: /account_management/org_settings/service_accounts
+[6]: https://app.datadoghq.com/teams
