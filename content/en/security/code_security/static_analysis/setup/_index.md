@@ -267,7 +267,7 @@ it associates `myservice` to all files in the repository.
 
 If no repository match is found, Datadog attempts to find a match in the
 `path` of the file. If there is a service named `myservice`, and the path is `/path/to/myservice/foo.py`, the file is associated with `myservice` because the service name is part of the path. If two services are present
-in the path, the service name the closest to the filename is selected.
+in the path, the service name closest to the filename is selected.
 
 
 ### Link results to teams
@@ -300,7 +300,7 @@ datadog-static-analyzer -i /path/to/directory -g -o sarif.json -f sarif –-diff
 ## Upload third-party static analysis results to Datadog
 
 <div class="alert alert-info">
-  SARIF importing has been tested for Snyk, CodeQL, Semgrep, Checkov, Gitleaks, and Sysdig. Please reach out to <a href="/help">Datadog Support</a> if you experience any issues with other SARIF-compliant tools.
+  SARIF importing has been tested for Snyk, CodeQL, Semgrep, Checkov, Gitleaks, and Sysdig. Reach out to <a href="/help">Datadog Support</a> if you experience any issues with other SARIF-compliant tools.
 </div>
 
 You can send results from third-party static analysis tools to Datadog, provided they are in the interoperable [Static Analysis Results Interchange Format (SARIF) Format][2]. Node.js version 14 or later is required.

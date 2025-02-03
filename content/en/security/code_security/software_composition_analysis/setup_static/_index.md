@@ -190,7 +190,7 @@ it associates `myservice` to all files in the repository.
 
 If no repository match is found, Datadog attempts to find a match in the
 `path` of the file. If there is a service named `myservice`, and the path is `/path/to/myservice/foo.py`, the file is associated with `myservice` because the service name is part of the path. If two services are present
-in the path, the service name the closest to the filename is selected.
+in the path, the service name closest to the filename is selected.
 
 
 ### Link results to teams

@@ -75,7 +75,7 @@ To customize which Static Code Analysis rules are configured in your repositorie
 ## Link results to Datadog services and teams
 
 
-## Apply suggested fixes
+### Apply suggested fixes
 <!-- {{< img src="code_security/static_analysis/static-analysis-fixes.png" alt="Fixes tab of a static analysis violation" style="width:80%;">}} -->
 
 In Datadog Static Code Analysis, there are two types of suggested fixes:

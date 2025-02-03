@@ -31,7 +31,7 @@ Datadog SCA helps automate risk reduction processes, enhancing productivity in t
 
 The Libraries inventory displays the libraries and versions used across your services and repositories. 
 
-The inventory surfaces all library details using several public data sources (GuardDog, NIST, osv.dev, OpenSSF scores, etc.) and private data sources (including Datadog’s Security Research group). 
+The inventory surfaces all library details using several public data sources (such as GuardDog, NIST, osv.dev, and OpenSSF scores) and private data sources (including Datadog’s Security Research group). 
 
 To use the Libraries inventory, see [Libraries][1] or select **Security > Code Security**, and then select **Libraries**.
 
