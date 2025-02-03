@@ -7,24 +7,27 @@ aliases:
   - /service_catalog/guides/streamlining-development-lifecycle-with-ci-visibility
   - /tracing/service_catalog/use_cases/pipeline_visibility
 further_reading:
-  - link: "/tracing/service_catalog/"
+  - link: "/security/code_security/static_analysis/"
     tag: "Documentation"
-    text: "Datadog Service Catalog"
+    text: "Learn about Datadog Static Analysis"
+  - link: "/dora_metrics/"
+    tag: "Documentation"
+    text: "Learn about DORA Metrics"
 ---
 
 
 The Software Delivery tab in Service Catalog helps you assess and optimize your service’s pre-production status by providing insights into CI pipelines and static analysis violations. You can:
 
 - Monitor the performance of CI pipelines related to your services.
-- Identify security and code quality issues from Static Analysis.
+- Identify security and code quality issues from [Static Analysis][1].
 - Troubleshoot pre-production slowdowns and failures.
-- Track Change Lead Time by integrating with DORA Metrics.
+- Track Change Lead Time by integrating with [DORA Metrics][2].
 
 By default, your service is linked to CI pipelines through its repository URL. To modify associated pipelines, update the `ci-pipeline-fingerprints` field in your service metadata.
 
 To add or remove a pipeline associated with your service:
 
-1. Click Edit Metadata in your service page, and go to Software Delivery. **Note**: This is only available for Service Catalog schema v2.2.
+1. Click Edit Metadata in your service page, and go to Software Delivery. **Note**: This is only available for [Service Catalog schema v2.2][3].
 
    {{< img src="tracing/service_catalog/pipeline-visibility-software-delivery.png" alt="The Delivery tab for monitoring pre-production status in Service Catalog" style="width:100%;" >}}
 
@@ -43,3 +46,7 @@ For more details on CI status and static analysis violations, click on a service
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /security/code_security/static_analysis/
+[2]: /dora_metrics/
+[3]: /service_catalog/service_definitions/v2-2/

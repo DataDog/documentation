@@ -23,7 +23,7 @@ Service Catalog enhances incident response by:
 - Embedding solutions and tools--like runbooks and documentation--directly into existing observability workflows.
 - Accelerating incident recovery by simplifying the process of identifying owners of upstream and downstream dependencies.
 
-Service Catalog also integrates with [Datadog Incident Management][1] and [PagerDuty][2], allowing you to view related incidents in the Reliability tab on the service details page.
+Service Catalog also integrates with [Datadog Incident Management][1] and [PagerDuty][2], allowing you to view related incidents in the Reliability tab on the Service Details page.
 
 {{< img src="tracing/service_catalog/incident-mgmt-reliability.png" alt="The Reliability tab for a service, showing incident and error metrics for the service overall and by version" style="width:100%;" >}}
 

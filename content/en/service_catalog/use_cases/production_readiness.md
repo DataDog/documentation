@@ -23,14 +23,12 @@ With Service Catalog, you can ensure your services are production-ready by evalu
 
 With Service Catalog, you can: 
 - Identify services that lack monitoring or observability data.
-- Detect gaps such as missing SLOs, monitors, or unowned services.
+- Detect gaps such as missing SLOs or monitors, or unowned services.
 - Enforce tagging best practices and verify configurations for enabling cross-telemetry insights.
 
-Use the Setup Guidance tab for a given service to evaluate observability coverage and confirm that all recommended configurations are implemented properly.
+Open the Setup Guidance tab for a given service to evaluate observability coverage. You can check whether you've completed the necessary setup for this service to fully leverage Datadog features like Monitors, SLOs, and Error Tracking. You can also check if your service is properly configured to collect key telemetry data, like tracing and logs.
 
 {{< img src="tracing/service_catalog/production-readiness-setup-guidance.png" alt="The Setup Guidance tab for a service, which shows the configuration completeness of that service and recommended setup steps " style="width:100%;" >}}
-
-The Setup Guidance tab also shows which Datadog features are actively used for a given service so you can uncover and address gaps in monitoring coverage.
 
 **Note**: This table reflects service activity, not product billing. For example, if a service has not emitted infrastructure metrics for an extended period, Infrastructure Monitoring may display 'Not Detected', even if hosts or containers are running it.
 
