@@ -221,6 +221,82 @@ my_foo = 1
 myBar = 2
 ```
 
+## Link results to Datadog services and teams
+### Link results to services
+Datadog associates static code and library scan results with relevant services by using the following mechanisms:
+
+1. [Identifying the code location associated with a service using the Service Catalog.](#identifying-the-code-location-in-the-service-catalog)
+2. [Detecting usage patterns of files within additional Datadog products.](#detecting-file-usage-patterns)
+3. [Searching for the service name in the file path or repository.](#detecting-service-name-in-paths-and-repository-names)
+
+If one method succeeds, no further mapping attempts are made. Each mapping method is detailed below.
+
+#### Identifying the code location in the Service Catalog
+
+The [schema version `v3`][14] and later of the Service Catalog allows you to add the mapping of your code location for your service. The `codeLocations` section specifies the location of the repository containing the code and its associated paths.
+
+The `paths` attribute is a list of globs that should match paths in the repository.
+
+{{< code-block lang="yaml" filename="entity.datadog.yaml" collapsible="true" >}}
+apiVersion: v3
+kind: service
+metadata:
+  name: my-service
+datadog:
+  codeLocations:
+    - repositoryURL: https://github.com/myorganization/myrepo.git
+      paths:
+        - path/to/service/code/**
+{{< /code-block >}}
+
+
+#### Detecting file usage patterns
+
+Datadog detects file usage in additional products such as Error Tracking and associate
+files with the runtime service. For example, if a service called `foo` has
+a log entry or a stack trace containing a file with a path `/modules/foo/bar.py`,
+it associates files `/modules/foo/bar.py` to service `foo`.
+
+#### Detecting service name in paths and repository names
+
+Datadog detects service names in paths and repository names, and associates the file with the service if a match is found.
+
+For a repository match, if there is a service called `myservice` and
+the repository URL is `https://github.com/myorganization/myservice.git`, then,
+it associates `myservice` to all files in the repository.
+
+If no repository match is found, Datadog attempts to find a match in the
+`path` of the file. If there is a service named `myservice`, and the path is `/path/to/myservice/foo.py`, the file is associated with `myservice` because the service name is part of the path. If two services are present
+in the path, the service name the closest to the filename is selected.
+
+
+### Link results to teams
+
+Datadog automatically associates the team attached to a service when a violation or vulnerability is detected. For example, if the file `domains/ecommerce/apps/myservice/foo.py`
+is associated with `myservice`, then the team `myservice` will be associated to any violation
+detected in this file.
+
+If no services or teams are found, Datadog uses the `CODEOWNERS` file in your repository. The `CODEOWNERS` file determines which team owns a file in your Git provider. 
+
+**Note**: You must accurately map your Git provider teams to your [Datadog teams][10] for this feature to function properly.
+
+## Diff-aware scanning
+
+Diff-aware scanning enables Datadog's static analyzer to only scan the files modified by a commit in a feature branch. It accelerates scan time significantly by not having the analysis run on every file in the repository for every scan. To enable diff-aware scanning in your CI pipeline, follow these steps:
+
+1. Make sure your `DD_APP_KEY`, `DD_SITE` and `DD_API_KEY` variables are set in your CI pipeline.
+2. Add a call to `datadog-ci git-metadata upload` before invoking the static analyzer. This command ensures that Git metadata is available to the Datadog backend. Git metadata is required to calculate the number of files to analyze.
+3. Ensure that the datadog-static-analyzer is invoked with the flag `--diff-aware`.
+
+Example of commands sequence (these commands must be invoked in your Git repository):
+```bash
+datadog-ci git-metadata upload
+
+datadog-static-analyzer -i /path/to/directory -g -o sarif.json -f sarif –-diff-aware <...other-options...>
+```
+
+**Note:** When a diff-aware scan cannot be completed, the entire directory is scanned.
+
 ## Upload third-party static analysis results to Datadog
 
 <div class="alert alert-info">
@@ -246,23 +322,6 @@ To upload a SARIF report:
    datadog-ci sarif upload $OUTPUT_LOCATION
    ```
 
-## Diff-aware scanning
-
-Diff-aware scanning enables Datadog's static analyzer to only scan the files modified by a commit in a feature branch. It accelerates scan time significantly by not having the analysis run on every file in the repository for every scan. To enable diff-aware scanning in your CI pipeline, follow these steps:
-
-1. Make sure your `DD_APP_KEY`, `DD_SITE` and `DD_API_KEY` variables are set in your CI pipeline.
-2. Add a call to `datadog-ci git-metadata upload` before invoking the static analyzer. This command ensures that Git metadata is available to the Datadog backend. Git metadata is required to calculate the number of files to analyze.
-3. Ensure that the datadog-static-analyzer is invoked with the flag `--diff-aware`.
-
-Example of commands sequence (these commands must be invoked in your Git repository):
-```bash
-datadog-ci git-metadata upload
-
-datadog-static-analyzer -i /path/to/directory -g -o sarif.json -f sarif –-diff-aware <...other-options...>
-```
-
-**Note:** When a diff-aware scan cannot be completed, the entire directory is scanned.
-
 <!-- ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}} -->
@@ -279,3 +338,4 @@ datadog-static-analyzer -i /path/to/directory -g -o sarif.json -f sarif –-diff
 [11]: /security/code_security/dev_tool_int/github_pull_requests
 [12]: /security/code_security/dev_tool_int/github_pull_requests#fixing-a-vulnerability-directly-from-datadog
 [13]: https://docs.github.com/en/actions/security-for-github-actions/security-guides
+[14]: https://docs.datadoghq.com/service_catalog/service_definitions/v3-0/

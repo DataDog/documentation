@@ -159,7 +159,7 @@ To disable scanning Static Code Analysis (SAST) or static Software Composition A
 - If you are scanning GitHub repositories via Datadog-hosted scanning, navigate to [Code Security > Setup][17], click **Enable scanning for your repositories**, and disable the toggles previously enabled for scanning either all connected repositories or each repository.
 - If you are scanning source code repositories via your CI pipelines, remove the relevant job(s) from your CI pipelines. 
 
-## Disabling Software Composition Analysis (Runtime)
+## Disabling Software Composition Analysis (SCA) on your services
 
 SCA can be enabled on your running services using two methods: the UI or manually using the `DD_APPSEC_SCA_ENABLED` environment variable. When you disable SCA, you must use the *same method* you used to enable SCA. (If you enabled SCA manually, you cannot disable it using the UI. You must disable it manually.)
 
@@ -172,7 +172,7 @@ To disable SCA manually:
 
 * Remove the `DD_APPSEC_SCA_ENABLED=true` environment variable from your application configuration, and restart your service. This does not apply to PHP applications.
 
-## Disabling IAST
+## Disabling Runtime Code Analysis (IAST)
 
 To disable IAST, remove the `DD_IAST_ENABLED=true` environment variable from your application configuration or set it to `false` as `DD_IAST_ENABLED=false`, and restart your service.
 

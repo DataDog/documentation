@@ -144,6 +144,65 @@ When installing a GitHub App, the following permissions are required to enable c
 If you are using another source code management provider, configure SCA to run in your CI pipelines using the `datadog-ci` CLI tool and [upload the results][8] to Datadog.
 You **must** run an analysis of your repository on the default branch before results can begin appearing on the **Code Security** page.
 
+## Link results to Datadog services and teams
+### Link results to services
+Datadog associates static code and library scan results with relevant services by using the following mechanisms:
+
+1. [Identifying the code location associated with a service using the Service Catalog.](#identifying-the-code-location-in-the-service-catalog)
+2. [Detecting usage patterns of files within additional Datadog products.](#detecting-file-usage-patterns)
+3. [Searching for the service name in the file path or repository.](#detecting-service-name-in-paths-and-repository-names)
+
+If one method succeeds, no further mapping attempts are made. Each mapping method is detailed below.
+
+#### Identifying the code location in the Service Catalog
+
+The [schema version `v3`][15] and later of the Service Catalog allows you to add the mapping of your code location for your service. The `codeLocations` section specifies the location of the repository containing the code and its associated paths.
+
+The `paths` attribute is a list of globs that should match paths in the repository.
+
+{{< code-block lang="yaml" filename="entity.datadog.yaml" collapsible="true" >}}
+apiVersion: v3
+kind: service
+metadata:
+  name: my-service
+datadog:
+  codeLocations:
+    - repositoryURL: https://github.com/myorganization/myrepo.git
+      paths:
+        - path/to/service/code/**
+{{< /code-block >}}
+
+
+#### Detecting file usage patterns
+
+Datadog detects file usage in additional products such as Error Tracking and associate
+files with the runtime service. For example, if a service called `foo` has
+a log entry or a stack trace containing a file with a path `/modules/foo/bar.py`,
+it associates files `/modules/foo/bar.py` to service `foo`.
+
+#### Detecting service name in paths and repository names
+
+Datadog detects service names in paths and repository names, and associates the file with the service if a match is found.
+
+For a repository match, if there is a service called `myservice` and
+the repository URL is `https://github.com/myorganization/myservice.git`, then,
+it associates `myservice` to all files in the repository.
+
+If no repository match is found, Datadog attempts to find a match in the
+`path` of the file. If there is a service named `myservice`, and the path is `/path/to/myservice/foo.py`, the file is associated with `myservice` because the service name is part of the path. If two services are present
+in the path, the service name the closest to the filename is selected.
+
+
+### Link results to teams
+
+Datadog automatically associates the team attached to a service when a violation or vulnerability is detected. For example, if the file `domains/ecommerce/apps/myservice/foo.py`
+is associated with `myservice`, then the team `myservice` will be associated to any violation
+detected in this file.
+
+If no services or teams are found, Datadog uses the `CODEOWNERS` file in your repository. The `CODEOWNERS` file determines which team owns a file in your Git provider. 
+
+**Note**: You must accurately map your Git provider teams to your [Datadog teams][16] for this feature to function properly.
+
 [1]: /security/code_security/software_composition_analysis/
 [2]: https://app.datadoghq.com/security/configuration/code-security/setup
 [3]: /security/code_security/software_composition_analysis/setup_static
@@ -158,3 +217,5 @@ You **must** run an analysis of your repository on the default branch before res
 [12]: /getting_started/site/
 [13]: https://github.com/DataDog/datadog-static-analyzer-github-action
 [14]: https://github.com/DataDog/datadog-ci?tab=readme-ov-file#sbom
+[15]: https://docs.datadoghq.com/service_catalog/service_definitions/v3-0/
+[16]: https://docs.datadoghq.com/account_management/teams/

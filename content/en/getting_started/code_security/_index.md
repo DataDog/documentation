@@ -134,8 +134,8 @@ Code Security helps you set up workflows to track and manage remediation of find
 - Set up [notification rules][9] to notify your team(s) of new findings via Slack, Jira, email, and more
 - Track vulnerabilities by service and team in the **Code Security Summary** page.
 
-## Link Datadog services to scan results
-
+## Link results to Datadog services and teams
+### Link results to services
 Datadog associates code and library scan results with relevant services by using the following mechanisms:
 
 1. [Identifying the code location associated with a service using the Service Catalog.](#identifying-the-code-location-in-the-service-catalog)
@@ -146,10 +146,9 @@ If one method succeeds, no further mapping attempts are made. Each mapping metho
 
 #### Identifying the code location in the Service Catalog
 
-The schema version `v3` and later of the Service Catalog allows you to add the mapping of your code location for your service. The `codeLocations` section specifies the location of the repository containing the code and its associated paths.
+The [schema version `v3`][12] and later of the Service Catalog allows you to add the mapping of your code location for your service. The `codeLocations` section specifies the location of the repository containing the code and its associated paths.
 
-The `paths` attribute is a list of [globs][14]
-that should match paths in the repository.
+The `paths` attribute is a list of globs that should match paths in the repository.
 
 {{< code-block lang="yaml" filename="entity.datadog.yaml" collapsible="true" >}}
 apiVersion: v3
@@ -184,14 +183,13 @@ If no repository match is found, Datadog attempts to find a match in the
 in the path, the service name the closest to the filename is selected.
 
 
-### Linking teams to code violations and libraries
+### Link results to teams
 
-Datadog automatically associates the team attached to a service when a code violation or library issue is detected. For example, if the file `domains/ecommerce/apps/myservice/foo.py`
+Datadog automatically associates the team attached to a service when a violation or vulnerability is detected. For example, if the file `domains/ecommerce/apps/myservice/foo.py`
 is associated with `myservice`, then the team `myservice` will be associated to any violation
 detected in this file.
 
-If no services or teams are found, Datadog uses the `CODEOWNERS` [file][15]
-in your repository. The `CODEOWNERS` file determines which team owns a file in your Git provider. 
+If no services or teams are found, Datadog uses the `CODEOWNERS` file in your repository. The `CODEOWNERS` file determines which team owns a file in your Git provider. 
 
 **Note**: You must accurately map your Git provider teams to your [Datadog teams][10] for this feature to function properly.
 
@@ -206,3 +204,4 @@ in your repository. The `CODEOWNERS` file determines which team owns a file in y
 [9]: https://app.datadoghq.com/security/configuration/notification-rules
 [10]: /account_management/teams/
 [11]: /security/code_security/static_analysis/setup/#customize-your-configuration
+[12]: https://docs.datadoghq.com/service_catalog/service_definitions/v3-0/
