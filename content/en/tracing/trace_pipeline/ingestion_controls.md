@@ -198,7 +198,7 @@ If sampling rules are set in multiple locations, the following precedence rules 
 1. [Locally configured sampling rules][8] (`DD_TRACE_SAMPLING_RULES`)
 1. [Remotely configured global sampling rate][8]
 1. [Locally configured global sampling rate][8] (`DD_TRACE_SAMPLE_RATE`)
-1. [rates from the trace agent controlled indirectly with Agent settings](#managing-datadog-agent-ingestion-configuration) remotely or locally (`DD_APM_MAX_TPS`)
+1. [Rates from the trace agent controlled indirectly with Agent settings](#managing-datadog-agent-ingestion-configuration) remotely or locally (`DD_APM_MAX_TPS`)
 
 To phrase it another way, Datadog uses the following precedence rules:
 - Tracer settings > Agent settings
