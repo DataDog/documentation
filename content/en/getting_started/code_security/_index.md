@@ -10,8 +10,8 @@ Datadog Code Security helps you secure and maintain your applications’ first-p
 
 It offers a suite of tools to help you secure your code throughout the software development lifecycle:
 
-- **Software Composition Analysis (SCA)** detects vulnerable open source libraries present in your repositories and affecting your services at runtime, helping you secure and maintain your software supply chain.
 - **Static Code Analysis (SAST)** uses a Static Application Security Testing method to scan your repositories for security and quality issues in first-party code, providing suggested fixes to prevent these issues from reaching production.
+- **Software Composition Analysis (SCA)** detects vulnerable open source libraries present in your repositories and affecting your services at runtime, helping you secure and maintain your software supply chain.
 - **Runtime Code Analysis (IAST)** uses an Interactive Application Security Testing method to detect vulnerabilities affecting your services at runtime.
 
 ## Set up Code Security

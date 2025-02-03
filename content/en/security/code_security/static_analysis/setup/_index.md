@@ -1,5 +1,5 @@
 ---
-title: Set up Static Code Analysis
+title: Set up Static Code Analysis (SAST)
 description: Learn about Datadog Static Code Analysis to scan code for quality issues and security vulnerabilities before your code reaches production.
 aliases:
 - /continuous_integration/static_analysis
@@ -16,7 +16,7 @@ algolia:
 {{% /site-region %}}
 
 ## Overview
-To set up Datadog Static Code Analysis in-app, navigate to [**Security** > **Code Security**][1].
+To set up Datadog SCA in-app, navigate to [**Security** > **Code Security**][1].
 
 ## Select where to run Static Code Analysis scans
 

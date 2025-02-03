@@ -154,18 +154,23 @@ See the Application Security product set up documentation to validate you you ar
 
 Ensure the `DD_INSTRUMENTATION_TELEMETRY_ENABLED` environment variable (`DD_TRACE_TELEMETRY_ENABLED` for Node.js) is set to `true`, or the corresponding system property for your language is enabled. For example in Java: `-Ddd.instrumentation.telemetry.enabled=true`.
 
-## Disabling Software Composition Analysis
+## Disabling static repository scanning
+To disable scanning Static Code Analysis (SAST) or static Software Composition Analysis:
+- If you are scanning GitHub repositories via Datadog-hosted scanning, navigate to [Code Security > Setup][17], click **Enable scanning for your repositories**, and disable the toggles previously enabled for scanning either all connected repositories or each repository.
+- If you are scanning source code repositories via your CI pipelines, remove the relevant job(s) from your CI pipelines. 
 
-SCA can be enabled using two methods: the UI or manually using an environment variable. When you disable SCA, you must use the *same method* you used to enable SCA. For example, if you enabled SCA manually, you cannot disable it using the UI. You must disable it manually. 
+## Disabling Software Composition Analysis (Runtime)
 
-Typically, SCA is enabled and disabled on a service using the UI. To disable SCA via the UI:
+SCA can be enabled on your running services using two methods: the UI or manually using the `DD_APPSEC_SCA_ENABLED` environment variable. When you disable SCA, you must use the *same method* you used to enable SCA. (If you enabled SCA manually, you cannot disable it using the UI. You must disable it manually.)
+
+To disable SCA via the UI:
 
 * Go to [Services][15], select **Software Composition Analysis (SCA)**. Under **Coverage**, hover over a service's SCA icon and then click **Deactivate**.
 * To disable Software Composition Analysis on your services in bulk, click the check box in the list header and then under **Bulk Actions** select **Deactivate Software Composition Analysis (SCA) on x services**.
 
 To disable SCA manually:
 
-* To disable Software Composition Analysis using the `DD_APPSEC_SCA_ENABLED` environment variable, remove the `DD_APPSEC_SCA_ENABLED=true` environment variable from your application configuration, and restart your service. This does not apply to PHP apps.
+* Remove the `DD_APPSEC_SCA_ENABLED=true` environment variable from your application configuration, and restart your service. This does not apply to PHP applications.
 
 ## Disabling IAST
 
@@ -183,3 +188,4 @@ To disable IAST, remove the `DD_IAST_ENABLED=true` environment variable from you
 [12]: https://app.datadoghq.com/security/appsec/vm/library
 [15]: https://app.datadoghq.com/security/code-security/inventory/services
 [16]: https://app.datadoghq.com/services?&lens=Security
+[17]: https://app.datadoghq.com/security/configuration/code-security/setup
