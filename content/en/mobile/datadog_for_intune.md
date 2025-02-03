@@ -49,7 +49,7 @@ In this step, switch from the Intune admin center to the Azure portal for Micros
 Admin consent is required before users can register successfully. Follow these steps:
 
 1. Open [Microsoft Entra-ID][7] (formerly Azure Active Directory) and go to **Enterprise Applications**.
-2. Search for **“Datadog”**:
+2. Search for **"Datadog"**:
    - If it isn't listed, click **Add**, then search for "Datadog" in the Microsoft Entra Gallery.
 3. Select **Permissions**, then click **Grant admin consent for <your organization name>**.
 
