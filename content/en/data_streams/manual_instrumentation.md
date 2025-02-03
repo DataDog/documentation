@@ -97,7 +97,7 @@ set_consume_checkpoint(
 {{< /code-block >}}
 {{% /tab %}}
 {{% tab ".Net" %}}
-The following example will propogate the trace context. See (Trace Context Propagation)[https://docs.datadoghq.com/tracing/trace_collection/trace_context_propagation/?tab=net#additional-use-cases] on how this is done in general.
+The following example propogates the trace context. See [Trace Context Propagation](https://docs.datadoghq.com/tracing/trace_collection/trace_context_propagation/?tab=net#additional-use-cases) on how this is done in general.
 
 <div class="alert alert-warning">
   <strong>Note:</strong> In async operations, this may not work as expected because the context derived from the incoming message can be lost when producing a new message in different threads.
