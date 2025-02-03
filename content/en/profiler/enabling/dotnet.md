@@ -71,7 +71,7 @@ The following profiling features are available in the following minimum versions
 Continuous Profiler is not supported for AWS Lambda.
 
 <div class="alert alert-warning">
-  <strong>Note:</strong> Unlike APM, Continuous Profiler is not activated by default when the APM package gets installed. This is why you need to explicitly [enable it](#enabling-the-profiler) for the applications you want to profile.
+  <strong>Note:</strong> Unlike APM, Continuous Profiler is not activated by default when the APM package gets installed. This is why you need to explicitly enable it for the applications you want to profile.
 </div>
 
 ## Installation
@@ -93,7 +93,7 @@ You can install the Datadog .NET Profiler machine-wide so that any services on t
 1. With [Single Step APM Instrumentation][1], there is nothing else to install. Go to [Enabling the Profiler](#enabling-the-profiler) to see how to activate the profiler for an application.
 
 <div class="alert alert-warning">
-  <strong>Note:</strong> If APM was already manually installed, it is required to uninstall it by removing the following environment variables: `CORECLR_ENABLE_PROFILING`, `CORECLR_PROFILER`, `CORECLR_PROFILER_PATH`, and the value that points to `Datadog.Linux.ApiWrapper.x64.so` in `LD_PRELOAD`.
+  <strong>Note:</strong> If APM was already manually installed, it is required to uninstall it by removing the following environment variables: CORECLR_ENABLE_PROFILING, CORECLR_PROFILER, CORECLR_PROFILER_PATH, and the value that points to Datadog.Linux.ApiWrapper.x64.so in LD_PRELOAD.
   If these environment variables are still set, the corresponding old installed version vill be silently used instead of the one installed with Single Step Instrumentation.
 </div>
 
@@ -178,11 +178,13 @@ To install the .NET Profiler per-webapp:
 2. With [Single Step APM Instrumentation][1], only `DD_PROFILING_ENABLED` must be set to activate the profiler for an application.
    ```
    DD_PROFILING_ENABLED=1
+
+   # other optional environment variables
    DD_ENV=production
    DD_VERSION=1.2.3
    ```
 
-Here are the supported values for `DD_PROFILING__ENABLED`environment variable:
+Here are the supported values for `DD_PROFILING_ENABLED`environment variable:
 
 | Value                         | Description                                                                                                           |
 | ----------------------------- | --------------------------------------------------------------------------------------------------------------------- |
@@ -191,7 +193,7 @@ Here are the supported values for `DD_PROFILING__ENABLED`environment variable:
 | `0` or `false`                | Disable the profiler.                                                                                                 |
 
 <div class="alert alert-info">
-  <strong>Note</strong>: The `Auto` value is aimed to avoid short lived processes without any trace. This is in preview and this setting will soon be integrated into the Single Step Instrumentation workflow.
+  <strong>Note</strong>: The Auto value is aimed to avoid short lived processes without any trace. This is in preview and this setting will soon be integrated into the Single Step Instrumentation workflow.
 </div>
 
 [1]: https://docs.datadoghq.com/tracing/trace_collection/automatic_instrumentation/single-step-apm
@@ -207,6 +209,8 @@ Here are the supported values for `DD_PROFILING__ENABLED`environment variable:
    DD_DOTNET_TRACER_HOME=/opt/datadog
    LD_PRELOAD=/opt/datadog/continuousprofiler/Datadog.Linux.ApiWrapper.x64.so
    DD_PROFILING_ENABLED=1
+
+   # other optional environment variables
    DD_ENV=production
    DD_VERSION=1.2.3
    ```
@@ -234,6 +238,8 @@ Here are the supported values for `DD_PROFILING__ENABLED`environment variable:
    CORECLR_ENABLE_PROFILING=1
    CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
    DD_PROFILING_ENABLED=1
+
+   # other optional environment variables
    DD_ENV=production
    DD_VERSION=1.2.3
    ```
@@ -245,6 +251,8 @@ Here are the supported values for `DD_PROFILING__ENABLED`environment variable:
    COR_ENABLE_PROFILING=1
    COR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
    DD_PROFILING_ENABLED=1
+
+   # other optional environment variables
    DD_ENV=production
    DD_VERSION=1.2.3
    ```
@@ -283,6 +291,8 @@ Here are the supported values for `DD_PROFILING__ENABLED`environment variable:
    CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
    DD_PROFILING_ENABLED=1
    DD_SERVICE=MyService
+
+   # other optional environment variables
    DD_ENV=production
    DD_VERSION=1.2.3
    ```
@@ -294,6 +304,8 @@ Here are the supported values for `DD_PROFILING__ENABLED`environment variable:
    COR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
    DD_PROFILING_ENABLED=1
    DD_SERVICE=MyService
+
+   # other optional environment variables
    DD_ENV=production
    DD_VERSION=1.2.3
    ```
@@ -344,6 +356,8 @@ Here are the supported values for `DD_PROFILING__ENABLED`environment variable:
    SET CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
    SET DD_PROFILING_ENABLED=1
    SET DD_SERVICE=MyService
+
+   REM other optional environment variables
    SET DD_ENV=production
    SET DD_VERSION=1.2.3
 
@@ -356,6 +370,8 @@ Here are the supported values for `DD_PROFILING__ENABLED`environment variable:
    SET COR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
    SET DD_PROFILING_ENABLED=1
    SET DD_SERVICE=MyService
+
+   REM other optional environment variables
    SET DD_ENV=production
    SET DD_VERSION=1.2.3
 
@@ -378,6 +394,8 @@ Here are the supported values for `DD_PROFILING__ENABLED`environment variable:
    DD_PROFILING_ENABLED=1
    LD_PRELOAD=<System-dependent path>
    DD_SERVICE=MyService
+
+   # other optional environment variables
    DD_ENV=production
    DD_VERSION=1.2.3
    DD_DOTNET_TRACER_HOME=<APP_DIRECTORY>/datadog
