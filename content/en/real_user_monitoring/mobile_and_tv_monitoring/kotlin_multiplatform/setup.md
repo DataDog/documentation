@@ -5,8 +5,11 @@ private: true
 description: Collect RUM and Error Tracking data from your Kotlin Multiplatform projects.
 aliases:
     - /real_user_monitoring/kotlin-multiplatform/
+    - /real_user_monitoring/kotlin_multiplatform/
     - /real_user_monitoring/kotlin-multiplatform/setup
+    - /real_user_monitoring/kotlin_multiplatform/setup
     - /real_user_monitoring/mobile_and_tv_monitoring/setup/kotlin-multiplatform
+    - /real_user_monitoring/mobile_and_tv_monitoring/setup/kotlin_multiplatform
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-kotlin-multiplatform
   tag: "Source Code"
@@ -115,7 +118,7 @@ If you are integrating Kotlin Multiplatform library as a framework with an `embe
 3. To disable automatic user data collection for either client IP or geolocation data, uncheck the boxes for those settings. For more information, see [RUM Kotlin Multiplatform Data Collected][2].
 
 [1]: https://app.datadoghq.com/rum/application/create
-[2]: /real_user_monitoring/kotlin-multiplatform/data_collected/
+[2]: /real_user_monitoring/kotlin_multiplatform/data_collected/
 
 {{% /tab %}}
 {{% tab "Error Tracking" %}}
@@ -125,7 +128,7 @@ If you are integrating Kotlin Multiplatform library as a framework with an `embe
 3. To disable automatic user data collection for either client IP or geolocation data, uncheck the boxes for those settings. For more information, see [RUM Kotlin Multiplatform Data Collected][2].
 
 [1]: https://app.datadoghq.com/error-tracking/settings/setup/client
-[2]: /real_user_monitoring/kotlin-multiplatform/data_collected/
+[2]: /real_user_monitoring/kotlin_multiplatform/data_collected/
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -370,7 +373,7 @@ val ktorClient = HttpClient {
                 "example.com" to setOf(TracingHeaderType.DATADOG),
                 "example.eu" to setOf(TracingHeaderType.DATADOG)
             ),
-            traceSamplingRate = 100f
+            traceSampleRate = 100f
         )
     )
 }
@@ -400,10 +403,10 @@ This means that even if users open your application while offline, no data is lo
 [4]: /account_management/api-app-keys/#api-keys
 [5]: /account_management/api-app-keys/#client-tokens
 [6]: /getting_started/tagging/using_tags/
-[7]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/kotlin-multiplatform/#initialization-parameters
+[7]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/kotlin_multiplatform/#initialization-parameters
 [8]: https://app.datadoghq.com/rum/application/create
-[9]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/kotlin-multiplatform/#automatically-track-views
+[9]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/kotlin_multiplatform/#automatically-track-views
 [10]: https://github.com/DataDog/dd-sdk-kotlin-multiplatform/tree/develop/integrations/ktor
-[11]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/kotlin-multiplatform/#custom-views
-[12]: /real_user_monitoring/error_tracking/kotlin-multiplatform/
+[11]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/kotlin_multiplatform/#custom-views
+[12]: /real_user_monitoring/error_tracking/kotlin_multiplatform/
 [13]: /real_user_monitoring/explorer/

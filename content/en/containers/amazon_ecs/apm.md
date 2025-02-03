@@ -31,7 +31,7 @@ Once enabled, the Datadog Agent container collects the traces emitted from the o
           "name": "datadog-agent",
           "image": "public.ecr.aws/datadog/agent:latest",
           "cpu": 100,
-          "memory": 256,
+          "memory": 512,
           "essential": true,
           "portMappings": [
             {
