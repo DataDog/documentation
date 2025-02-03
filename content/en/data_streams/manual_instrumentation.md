@@ -98,7 +98,7 @@ set_consume_checkpoint(
 {{% /tab %}}
 {{% tab ".Net" %}}
 <div class="alert alert-warning">
-  <strong>Note:</strong> DSM instrumentation does not work in Async operations
+  <strong>Note:</strong> In async operations, this may not work as expected because the context derived from the incoming message can be lost when producing a new message in different threads.
 </div>
 
 In your producer
