@@ -1,0 +1,230 @@
+altCTALocation: true
+bundleSeparated: true
+centeredBundle: true
+description: 保存期間を柔軟に設定でき、状況に応じたログデータの分析と調査が可能
+faq_categories:
+- faq:
+  - a: '保存期間とは、ログの検索と分析が可能な日数です。この期間を過ぎると、ログはインデックスから削除されます。
+
+
+      ただし、インデックスから削除されても、ログが完全になくなるわけではありません。長期間保存のオプションについては、[ログアーカイブに関するページ](https://docs.datadoghq.com/logs/s3/)を参照してください。 '
+    q: 保存期間はどのように定義されますか。
+  - a: 'ログイベントの形態やサイズはさまざまです。当社がイベントベースで料金を設定しているのはこのためです。ログが豊富なほど、価値ある情報を提供できます。
+
+
+      Datadog のトライアル期間中にログイベント数を見積もる最もよい方法は、直近 24 時間のイベント数をクエリし、それに 30 を掛けて月のイベント数とします。現在使用しているログ管理ソリューションがある場合は、それで見積もることもできます。
+
+      '
+    q: 1 日あたりの消費 GB 数は把握しています。これが何百万ログイベントにあたるか、換算方法を教えてください。
+  - a: コンピュートとは、Flex Logs のクエリを実行するためのクエリ能力のことです。適切なコンピュートサイズは、Flex Tier に保存されるデータ量、クエリのタイムウィンドウと複雑さ、そして同時実行性によって決まります。コンピュートサイズの選択方法については、[ドキュメント](https://docs.datadoghq.com/logs/log_configuration/flex_logs/#compute-sizes)をご覧ください。
+    q: Flex Logs の計算サイズは何を意味しますか。適切なのはどれですか。
+  name: 定義
+- faq:
+  - a: インフラストラクチャー、APM、ログデータのすべてを揃えていただくことを強くお勧めしますが、Datadog のログ管理のみを利用することも可能です。ログの収集のみを設定する方法については、[こちら](https://docs.datadoghq.com/logs/guide/how-to-set-up-only-logs/)を参照してください。
+    q: Datadog インフラストラクチャーまたは APM を使用せずに、ログ管理を利用することはできますか。
+  - a: オンデマンドのお客様の場合、デフォルトの保持期間は 15 日です。すでに Datadog アカウントを作成していて、別の保持期間を使用したい場合は、[support@datadoghq.com](mailto:support@datadoghq.com)
+      に別の保持期間をリクエストできます。
+    q: オンデマンドの顧客にはどのような保存期間が可能ですか？
+  - a: Standard Tier のみ、Flex Tier のみ、または Standard Tier と Flex Tier の組み合わせという形で、お好みの保存方法をインデックスに設定することができます。
+    q: Standard Indexing と Flex Logs のどちらか一方だけを選択する必要がありますか。
+  - a: Flex Logs はモニターや Watchdog Insights をサポートしていません。Standard Indexing はすべてをサポートします。
+    q: Standard Indexing と Flex Logs の違いは何ですか？
+  - a: '1 か月のログ量が保証されるため、1 日のログ量が多くても送信量が制限を受けることはありません。可視性を失うことなく、いつでも 1 日に必要なだけログを送信できます。他の日の平均ログ量が少なければ、請求額は変わりません。
+
+
+      1 か月に大量のログを送信したでも、心配はいりません。可視性は完全に維持されます。契約量を超えた分についてのみ、追加サービス料 (年額の50%) をお支払いください。
+
+      '
+    q: 予想外に大量のログを送信した場合はどうなりますか。
+  - a: これは現在サポートされていません。
+    q: ある Datadog アカウントから別のアカウントにログを転送できますか。
+  name: 現在のサポート対象
+- faq:
+  - a: ログ管理サービスの設計時から、量の変動が大きいログの管理が問題になることは想定していました。この問題に対処するため、革新的なソリューションをいくつか提供しています。詳細については、[こちら](https://docs.datadoghq.com/logs/dynamic_volume_control/)でご確認いただけます。
+    q: ログ量の変動が大きい場合、可視性を失うことなく、費用効率の高い方法でログ量を管理するにはどうすればよいですか。
+  - a: ログイベントは、リアルタイムのトラブルシューティングに必要な場合は Standard Indexing に、アドホックな履歴分析や長期的なトラブルシューティングにはFlex
+      Logsに保存できます。詳しくは[ドキュメント](https://docs.datadoghq.com/logs/log_configuration/flex_logs/)をご覧ください。
+    q: Standard Indexing と Flex Logs のどちらにログを保存すべきですか。
+  name: ベストプラクティス
+- faq:
+  - a: Flex Logs は、保存された 100 万イベントごとに時間単位で課金されます。保存された 100 万イベントごとに、最低 30 日間、または最低
+      0.05 ドルが課金されます。たとえば、100 万件のログを 60 日間保存する場合、保存された 30 日ごとに課金されます。
+    q: Flex Logs はどのように請求されますか。
+  - a: いいえ。S3 アーカイブ、GCP ストレージ、Azure ストレージへの転送は、取り込み対象の 1 GB あたり 0.10 ドルで含まれています。ただし、外部の
+      SIEM や BI ベンダーなど、その他の転送先への転送は、転送先 1 件につき 1 GB あたり 0.25 ドルから課金されます。
+    q: S3 アーカイブ、GCP ストレージ、Azure ストレージへの転送は課金対象ですか。
+  - a: ログの[リハイドレート](https://docs.datadoghq.com/logs/archives/rehydrating/)を行うと、Datadog
+      は、要求された期間のアーカイブ内の圧縮ログをスキャンし、リハイドレート クエリに一致するログ イベントのみをインデックス化します。Datadog は、スキャンされたログ
+      データの圧縮 GB あたり 0.10 ドルを請求します。リハイドレートからインデックス化されたログ イベントについては、リハイドレートのために選択された保存期間の契約インデックス化率に等しいコストがかかります。
+    q: Rehydration はどのように請求されますか。
+  - a: ログベースのメトリクスは、[インフラストラクチャ計画に記載されている](https://www.datadoghq.com/pricing/?product=infrastructure#infrastructure-how-many-custom-metrics-are-included-per-host)カスタムメトリクスの割り当てに対してカウントされます。
+    q: ログベースのメトリクスはどのように請求されますか。
+  - a: 年単位、月単位のプランが用意されています。必要に応じて、請求プランをカスタマイズできます。請求の詳細については、[請求に関するよくあるご質問](https://docs.datadoghq.com/account_management/billing)を参照してください。
+    q: 他の請求オプションはありますか。
+  name: 請求
+- faq:
+  - a: 'Datadog では、[セキュリティ](https://www.datadoghq.com/security/)を最重要事項としています。そのため、TCP/SSL
+      Strict Transport Security およびエージェントレベルのスクラビングの採用、そして SOC 2 への準拠などを実現しています。Agent
+      はオープンソースなので、お客様のセキュリティ要件を満たしているかどうかを確認できます。
+
+      '
+    q: データの安全性はどのように保護されますか。
+  name: セキュリティとコンプライアンス
+features:
+  combined_other_plans:
+  - インフラストラクチャーの自動タグ付け
+  - インフラストラクチャーと APM にシームレスに移動
+  main:
+  - 無制限ソース
+  - ファセット＆全文検索
+  - 850 以上のベンダーによるインテグレーション
+  - カスタム処理とパーサー
+  - ログ解析とダッシュボード
+  - ログ異常検出
+  - PCI および HIPAA に準拠
+  - Datadogのロールベース・アクセス・コントロール (RBAC) との完全な統合
+  - エンタープライズレベルのセキュリティ
+  - 無制限のユーザーアカウント
+  - リアルタイムアラート
+  - Logging without Limits&trade;
+  - ログベースのカスタムメトリクス
+  - AWS S3、Azure Blob Storage、<br/>、Google Cloud Storage へのアーカイブ
+  - AWS S3、Azure Blob Storage、Google Cloud Storage からの Log Rehydration™
+  service_support:
+  - チャットとメールによるテクニカルサポート
+  - コミュニティフォーラムとオンラインドキュメント
+  - <a href="/support-services/plans/">お客様の組織に適したサポートレベルのプラン</a>
+fed_product: true
+name: Log Management
+plan_categories:
+- Standard
+- Flex Starter
+- Flex
+plans:
+- categories:
+  - Standard
+  - Flex Starter
+  custom_column_width: col-md-6
+  custom_fine_print: '*処理用に取り込まれた非圧縮データまたは復元用にスキャンされた圧縮データの GB あたり。'
+  description: すべてのログの取り込み、プロセス、リッチ化、Live Tail、アーカイブ
+  key_points:
+  - 200以上のログソースをすぐにパース可能
+  - ログをリッチ化・タグ付けしてRBAC、コスト管理、使用量割り当てに活用
+  - 長期分析に役立つログベースのメトリクス生成
+  - セルフホステッド アーカイブ (Datadog へのアドホックな復元のオプション付き)
+  - 希望する保存方法のティアオプションへの動的ルーティング
+  name: 取り込み
+  price_helper1: / 取り込みまたはスキャンされた GB、
+  price_helper2: 1 か月* **
+  pricing_data_key: LOG-INGEST
+- categories:
+  - Standard
+  custom_column_width: col-md-6
+  default: 15 日間の保存期間
+  description: 業務の遂行に不可欠なログをリアルタイムで調査、アラート、ダッシュボード化
+  key_points:
+  - 重要な調査に向けたログの優先順位付け
+  - ログモニターによるログアラートを構築
+  - Watchdog Insights でログの異常をプロアクティブに検出
+  - インフラストラクチャー、アプリケーション、運用ログなど、頻繁にアクセスされるログに最適
+  name: Standard Indexing
+  price_custom_select:
+  - pricing_data_key: LOGS-3DAY
+    text: 3 日間の保存期間
+  - pricing_data_key: LOGS-7DAY
+    text: 7 日間の保存期間
+  - pricing_data_key: LOGS-15DAY
+    text: 15 日間の保存期間
+  - pricing_data_key: LOGS-30DAY
+    text: 30 日間の保存期間
+  - price_override_flag: true
+    text: 30日超の保存期間
+  price_helper1: / 100 万ログイベント、
+  price_helper2: 1 か月*
+  pricing_data_key: LOGS-15DAY
+- categories:
+  - Flex
+  custom_column_width: col-md-4
+  custom_fine_print: '*処理用に取り込まれた非圧縮データまたは復元用にスキャンされた圧縮データの GB あたり。'
+  description: すべてのログの取り込み、プロセス、リッチ化、Live Tail、アーカイブ
+  key_points:
+  - 200以上のログソースをすぐにパース可能
+  - ログをリッチ化・タグ付けしてRBAC、コスト管理、使用量割り当てに活用
+  - 長期分析に役立つログベースのメトリクス生成
+  - セルフホステッド アーカイブ (Datadog へのアドホックな復元のオプション付き)
+  - 希望する保存方法のティアオプションへの動的ルーティング
+  name: 取り込み
+  price_helper1: / 取り込みまたはスキャンされた GB、
+  price_helper2: 1 か月* **
+  pricing_data_key: LOG-INGEST
+- categories:
+  - Flex
+  custom_column_width: col-md-4
+  custom_fine_print: '*最低保存期間 1 か月、最長 15 か月'
+  description: 過去の調査やセキュリティ、監査、コンプライアンスに関する使用例
+  key_points:
+  - 復元の必要なく、最長15 か 月の長期かつ柔軟な保存が可能
+  - 大量ログの ROI 向上
+  - メトリクスとトレースを関連付けてより深い分析を実現
+  - アクセス頻度の低いログに最適
+  name: Flex Storage
+  price_helper1: / 保存された 100 万イベント、
+  price_helper2: 1 か月* **
+  pricing_data_key: FLEX-STORED-LOGS
+- categories:
+  - Flex
+  custom: true
+  custom_column_width: col-md-4
+  default: Extra Small
+  default_fine_print: false
+  description: 検索と分析のワークロードに適した複数の事前設定済み計算オプション
+  key_points:
+  - Standard と Flex ティアの両方に保存されたログを簡単に検索可能
+  - Datadog が管理するコンピュートインフラストラクチャー
+  - クエリのユースケースに応じてスケールアップ/ダウンが可能
+  - ビジネスの優先順位と環境 (ステージング、本番環境など) に基づいて、コンピュートの選択をカスタマイズ
+  name: Flex Compute
+  price_custom_select:
+  - price_override_flag: true
+    text: Extra Small
+  - price_override_flag: true
+    text: Small
+  - price_override_flag: true
+    text: Medium
+  - price_override_flag: true
+    text: Large
+  price_helper1: / 1 インスタンス時間、
+  price_helper2: 1 か月*
+- categories:
+  - Flex Starter
+  custom_column_width: col-md-6
+  custom_fine_print: '*最低保存期間 6 か月、12 か月および 15 か月のオプションあり'
+  description: 履歴の調査と長期保存に最適
+  key_points:
+  - 6 か月、12 か月および 15 か月の保存オプション
+  - バンドルされた Starter Compute は、月間 2B 未満のログボリューム (合計 10B の保存) に対応
+  - Standard と Flex ティアの両方に保存されたログを、復元なく簡単に検索可能
+  - アクセス頻度が低く、長期間ログを保持する必要がある場合に最適
+  name: Flex Logs Starter
+  price_helper1: / 保存された 100 万イベント、
+  price_helper2: 1 か月* **
+  pricing_data_key: FLEX-LOGS-STARTER
+- altCTALocation: true
+  custom_column_width: col-md-12
+  custom_fine_print: '*転送先ごとの非圧縮データ GB あたり'
+  default_fine_print: false
+  description: ログ処理、リッチ化、複数の宛先へのルーティングを一元化
+  key_points:
+  - 数回クリックするだけで、ログを任意の宛先にリアルタイムで転送
+  - インデックスを作成することなく、ログの収集、変換、複数の宛先へのルーティングが可能
+  - 低レイテンシー、クラウドスケールのスループット
+  - RBAC 有効
+  name: カスタム宛先へのログ転送
+  price_helper1: / アウトバウンド 1 GB、
+  price_helper2: 宛先 1 件、月額*
+  pricing_data_key: LOG-FW
+pricing_nav_categories:
+- ログ
+volume_discount_cta:
+  volume_pricing: false
+  volume_threshold: (30 億イベント/月以上)
