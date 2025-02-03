@@ -62,8 +62,8 @@ To set up the AWS integration manually, create an IAM policy and IAM role in you
 ### Generate an external ID
 
 1. In the [AWS integration configuration page][1], click **Add AWS Account**, and then select **Manually**.
-{{< site-region region="us,us3,us5,eu,ap1" >}}
 2. Choose which AWS partition your AWS account is scoped to. The partition is either `aws` for commercial regions, `aws-cn` for China*, or `aws-us-gov` for GovCloud. See [Partitions][9] in the AWS documentation for more information.
+{{< site-region region="us,us3,us5,eu,ap1" >}}
 3. Select `Role Delegation` for the access type. Role delegation is only supported for AWS accounts scoped to AWS commercial regions.
 {{< /site-region >}}
 {{< site-region region="gov" >}}
@@ -116,7 +116,6 @@ Ensure to leave `Require MFA` disabled. For more details, see the [How to use an
 
 *\* All use of Datadog Services in (or in connection with environments within) mainland China is subject to the disclaimer published in the [Restricted Service Locations][10] section on our website.*
 
-
 [1]: https://app.datadoghq.com/integrations/amazon-web-services
 [2]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user_externalid.html
 [3]: https://console.aws.amazon.com/iam/home#/policies
@@ -147,6 +146,7 @@ Ensure to leave `Require MFA` disabled. For more details, see the [How to use an
 7. Click **Save**.
 8. Wait up to 10 minutes for data to start being collected, and then view the out-of-the-box <a href="https://app.datadoghq.com/screen/integration/7/aws-overview" target="_blank">AWS Overview Dashboard</a> to see metrics sent by your AWS services and infrastructure.
 
+*\* All use of Datadog Services in (or in connection with environments within) mainland China is subject to the disclaimer published in the [Restricted Service Locations][2] section on our website.*
 
 [1]: https://app.datadoghq.com/integrations/amazon-web-services
 [2]: https://www.datadoghq.com/legal/restricted-service-locations/

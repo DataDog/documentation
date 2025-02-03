@@ -72,8 +72,10 @@ APM tracer integrations support a *Propagation Mode*, which controls the amount 
 \* [CommandType.StoredProcedure][25] not supported
 
 \*\* Full mode SQL Server for Java/.NET:
+
+<div class="alert alert-warning">If your application uses <code>context_info</code> for instrumentation, the APM tracer overwrites it.</div>
+
   - The instrumentation executes a `SET context_info` command when the client issues a query, which makes an additional round-trip to the database.
-  - If your applications uses `context_info` to instrument the application, it is overwritten by the APM tracer.
   - Prerequisites:
     - Agent version 7.55.0 or greater
     - Java tracer version 1.39.0 or greater
@@ -92,35 +94,44 @@ DD_ENV=(application environment)
 DD_VERSION=(application version)
 ```
 
+Datadog recommends setting the obfuscation mode to `obfuscate_and_normalize` for Agent versions `7.63` and higher. Add the following parameter in the `apm_config` section of your APM Agent configuration file:
+
+```
+  sql_obfuscation_mode: "obfuscate_and_normalize"
+```
+
 {{< tabs >}}
 {{% tab "Go" %}}
 
 Update your app dependencies to include [dd-trace-go@v1.44.0][1] or greater:
-```
-go get gopkg.in/DataDog/dd-trace-go.v1@v1.44.0
+```shell
+go get gopkg.in/DataDog/dd-trace-go.v1@v1.44.0 # 1.x
+# go get github.com/DataDog/dd-trace-go/v2 # 2.x
 ```
 
 Update your code to import the `contrib/database/sql` package:
 ```go
 import (
    "database/sql"
-   "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
-   sqltrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/database/sql"
+   "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer" // 1.x
+   sqltrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/database/sql" // 1.x
+   // "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer" // 2.x
+   // sqltrace "github.com/DataDog/dd-trace-go/contrib/database/sql/v2" // 2.x
 )
 ```
 
 Enable the database monitoring propagation feature using one of the following methods:
-1. Env variable:
+- Env variable:
    `DD_DBM_PROPAGATION_MODE=full`
 
-2. Using code during the driver registration:
+- Using code during the driver registration:
    ```go
-   sqltrace.Register("postgres", &pq.Driver{}, sqltrace.WithDBMPropagation(tracer.DBMPropagationModeFull), sqltrace.WithServiceName("my-db-service"))
+   sqltrace.Register("postgres", &pq.Driver{}, sqltrace.WithDBMPropagation(tracer.DBMPropagationModeFull), sqltrace.WithService("my-db-service"))
    ```
 
-3. Using code on `sqltrace.Open`:
+- Using code on `sqltrace.Open`:
    ```go
-   sqltrace.Register("postgres", &pq.Driver{}, sqltrace.WithServiceName("my-db-service"))
+   sqltrace.Register("postgres", &pq.Driver{}, sqltrace.WithService("my-db-service"))
 
    db, err := sqltrace.Open("postgres", "postgres://pqgotest:password@localhost/pqgotest?sslmode=disable", sqltrace.WithDBMPropagation(tracer.DBMPropagationModeFull))
    if err != nil {
@@ -132,8 +143,10 @@ Full example:
 ```go
 import (
 	"database/sql"
-	"gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
-	sqltrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/database/sql"
+	"gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer" // 1.x
+   sqltrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/database/sql" // 1.x
+   // "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer" // 2.x
+   // sqltrace "github.com/DataDog/dd-trace-go/contrib/database/sql/v2" // 2.x
 )
 
 func main() {
@@ -196,14 +209,12 @@ public class Application {
 }
 ```
 
-**Note**:
-
-**Tracer versions 1.44 and greater**:
+**Tracer versions 1.44 and above**:
 Enable the prepared statements tracing for Postgres using **one** of the following methods:
 - Set the system property `dd.dbm.trace_prepared_statements=true`
 - Set the environment variable `export DD_DBM_TRACE_PREPARED_STATEMENTS=true`
 
-The prepared statements instrumentation will overwrite the `Application` property, and will cause an extra roundtrip to the database.
+**Note**: The prepared statements instrumentation overwrites the `Application` property and causes an extra roundtrip to the database. This additional roundtrip has a negligible impact on latency.
 
 **Tracer versions below 1.44**:
 Prepared statements are not supported in `full` mode for Postgres and MySQL, and all JDBC API calls that use prepared statements are automatically downgraded to `service` mode. Since most Java SQL libraries use prepared statements by default, this means that **most** Java applications are only able to use `service` mode.

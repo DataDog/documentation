@@ -116,7 +116,7 @@ Los datos detallados de temporización de red para la carga de los recursos de u
 
 | Métrica                              | Tipo           | Descripción                                                                                                                               |
 |----------------------------------------|----------------|-------------------------------------------------------------------------------------------------------------------------------------------|
-| `duration`                             | número         | Tiempo total empleado en cargar el recurso.                                                                                                   |
+| `resource.duration`            | número         | Tiempo total empleado en cargar el recurso.                                                                                                   |
 | `resource.size`                | número (bytes) | Tamaño del recurso.                                                                                                                            |
 | `resource.connect.duration`    | número (ns)    | Tiempo empleado en establecer una conexión con el servidor (connectEnd - connectStart).                                                            |
 | `resource.ssl.duration`        | número (ns)    | Tiempo empleado por el protocolo TLS. Si la última solicitud no es en HTTPS, esta métrica no aparece (connectEnd - secureConnectionStart). |

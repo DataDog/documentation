@@ -1,33 +1,33 @@
 ---
-"categories":
-- "alerting"
-- "incidents"
-- "issue tracking"
-- "notifications"
-"custom_kind": "integration"
-"dependencies": []
-"description": "Haz que tus alertas de Datadog generen y actualicen automáticamente los tiques."
-"doc_link": "https://docs.datadoghq.com/integrations/servicenow/"
-"draft": false
-"further_reading":
-- "link": "https://www.datadoghq.com/blog/create-servicenow-tickets-from-datadog-alerts/"
-  "tag": "Blog"
-  "text": "Crear tiques de ServiceNow a partir de alertas de Datadog"
-- "link": "https://www.datadoghq.com/blog/servicenow-cmdb-it-management-datadog/"
-  "tag": "Blog"
-  "text": "Gestiona tu infraestructura con ServiceNow CMDB y Datadog"
-"git_integration_title": "servicenow"
-"has_logo": true
-"integration_id": ""
-"integration_title": "ServiceNow"
-"integration_version": ""
-"is_public": true
-"manifest_version": "1.0"
-"name": "servicenow"
-"public_title": "Integración de Datadog y ServiceNow"
-"short_description": "Haz que tus alertas de Datadog generen y actualicen automáticamente los tiques."
-"team": "integraciones web"
-"version": "1.0"
+categories:
+- alerting
+- incidents
+- issue tracking
+- notifications
+custom_kind: integration
+dependencies: []
+description: Haz que tus alertas de Datadog generen y actualicen automáticamente los tiques.
+doc_link: https://docs.datadoghq.com/integrations/servicenow/
+draft: false
+further_reading:
+- link: https://www.datadoghq.com/blog/create-servicenow-tickets-from-datadog-alerts/
+  tag: Blog
+  text: Crear tiques de ServiceNow a partir de alertas de Datadog
+- link: https://www.datadoghq.com/blog/servicenow-cmdb-it-management-datadog/
+  tag: Blog
+  text: Gestiona tu infraestructura con ServiceNow CMDB y Datadog
+git_integration_title: servicenow
+has_logo: true
+integration_id: 
+integration_title: ServiceNow
+integration_version: 
+is_public: true
+manifest_version: 1.0
+name: servicenow
+public_title: Integración de Datadog y ServiceNow
+short_description: Haz que tus alertas de Datadog generen y actualicen automáticamente los tiques.
+team: integraciones web
+version: 1.0
 ---
 
 <!--  EXTRAÍDO DE https://github.com/DataDog/dogweb -->

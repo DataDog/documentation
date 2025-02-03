@@ -28,6 +28,5 @@ To get started with RUM for Unity, create an application and configure the Unity
   {{< nextlink href="/real_user_monitoring/mobile_and_tv_monitoring/unity/advanced_configuration">}}<u>Advanced Configuration</u>:Enrich user sessions, manage events and data, track custom global attributes and widgets, review initialization parameters, modify or drop RUM events, and more.{{< /nextlink >}}
   {{< nextlink href="/real_user_monitoring/mobile_and_tv_monitoring/unity/data_collected">}}<u>Data Collected</u>:Review data that the Unity SDK collects.{{< /nextlink >}}
   {{< nextlink href="/real_user_monitoring/mobile_and_tv_monitoring/unity/mobile_vitals">}}<u>Mobile Vitals</u>: View mobile vitals, which help compute insights about your mobile application.{{< /nextlink >}}
-  {{< nextlink href="/real_user_monitoring/mobile_and_tv_monitoring/unity/web_view_tracking">}}<u>Web View Tracking</u>: Monitor web views and eliminate blind spots in your mobile applications.{{< /nextlink >}}
   {{< nextlink href="/real_user_monitoring/mobile_and_tv_monitoring/unity/troubleshooting">}}<u>Troubleshooting</u>: Common troubleshooting Unity SDK issues.{{< /nextlink >}}
 {{< /whatsnext >}}

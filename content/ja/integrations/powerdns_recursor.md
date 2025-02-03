@@ -40,7 +40,7 @@ draft: false
 git_integration_title: powerdns_recursor
 integration_id: powerdns
 integration_title: Power DNS Recursor
-integration_version: 4.0.0
+integration_version: 4.1.0
 is_public: true
 manifest_version: 2.0.0
 name: powerdns_recursor
