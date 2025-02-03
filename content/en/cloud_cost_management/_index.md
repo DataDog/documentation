@@ -28,6 +28,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/cloud-costs-study-learnings/"
     tag: "Blog"
     text: "Key learnings from the State of Cloud Costs study"
+  - link: "https://www.datadoghq.com/blog/unit-economics-ccm/"
+    tag: "Blog"
+    text: "Monitor unit economics with Datadog Cloud Cost Management"
 cascade:
     algolia:
       subcategory: 'Cloud Cost Management'

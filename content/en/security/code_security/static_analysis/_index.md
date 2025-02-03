@@ -1,6 +1,6 @@
 ---
-title: Static Analysis (SAST)
-description: Learn about Datadog Static Analysis to scan code for quality issues and security vulnerabilities before your code reaches production.
+title: Static Code Analysis (SAST)
+description: Learn about Datadog Static Code Analysis to scan code for quality issues and security vulnerabilities before your code reaches production.
 aliases:
 - /code_analysis/static_analysis
 is_beta: false
@@ -17,11 +17,9 @@ algolia:
 
 ## Overview
 
-Static Code Analysis is Datadog's Static Application Security Testing (SAST) capability. SAST is a clear-box software testing technique that analyzes a program's pre-production code without the need to execute the program, meaning that the program is static because it isn't running. 
+Static Code Analysis is Datadog's Static Application Security Testing (SAST) capability. SAST is a clear-box software testing technique that analyzes a program's pre-production code without the need to execute the program. 
 
-Static Code Analysis helps you identify security vulnerabilities and maintainability issues early in the software development life cycle (SDLC) to ensure only the highest quality, most secure code makes it to production.
-
-Using Static Code Analysis provides organizations with the following benefits:
+Static Code Analysis helps you identify security vulnerabilities and maintainability issues early in the software development life cycle (SDLC) to ensure only the highest quality, most secure code makes it to production. It provides organizations with the following benefits:
 
 * Applications are less vulnerable to security breaches over time, due to new vulnerabilities being caught through SAST scans before code reaches production.
 * Takes the guesswork out of adhering to an organization's code standards, enabling your development team to ship compliant code without significant impacts to developer velocity.
@@ -34,20 +32,13 @@ Static Code Analysis supports scanning for security vulnerabilities and poor cod
 {{< partial name="code_security/languages-getting-started.html" >}}
 
 </br> 
+Scans can run via your CI/CD pipelines or directly in Datadog with hosted scanning (GitHub-only).
+To get started, go to the [**Code Security** setup page][12] or see the [Setup documentation][9].
 
-To get started, you can set up Static Code Analysis on the [**Code Security** page][1] or see the [Setup documentation][9].
-
-## Integrate Static Analysis into your development lifecycle
-
-### CI providers
-{{< whatsnext desc="You can run Static Analysis on any CI platform provider of your choice. See provider-specific documentation to set up Static Code Analysis in your CI pipelines:">}}
-    {{< nextlink href="security/code_security/static_analysis/circleci_orbs" >}}CircleCI Orbs{{< /nextlink >}}
-    {{< nextlink href="security/code_security/static_analysis/github_actions" >}}GitHub Actions{{< /nextlink >}}
-    {{< nextlink href="security/code_security/static_analysis/generic_ci_providers" >}}Other CI Providers{{< /nextlink >}}
-{{< /whatsnext >}}
+## Integrate into the development lifecycle
 
 ### Source code management
-{{< whatsnext desc="During code reviews on GitHub, Datadog can automatically flag Static Analysis violations in pull requests by adding inline review comments on the relevant line(s) of code. When applicable, Datadog also provides suggested fixes that can be applied directly in the pull request. You can also open a pull request directly from Datadog to fix a vulnerability or quality issue." >}}
+{{< whatsnext desc="During code reviews on GitHub, Datadog can automatically flag Static Code Analysis violations in pull requests by adding inline review comments on the relevant line(s) of code. When applicable, Datadog also provides suggested fixes that can be applied directly in the pull request. You can also open a pull request directly from Datadog to fix a vulnerability or quality issue." >}}
     {{< nextlink href="static_analysis/github_pull_requests" >}}GitHub Pull Requests{{< /nextlink >}}
 {{< /whatsnext >}}
 
@@ -59,8 +50,7 @@ To get started, you can set up Static Code Analysis on the [**Code Security** pa
 {{< /whatsnext >}}
 
 ## Search and filter results
-
-After you configure your CI pipelines to run the Datadog static analyzer, violations are summarized per repository on the [**Code Security Repositories** page][1]. Click on a repository to analyze **Code Vulnerabilities** and **Code Quality** results from Static Code Analysis. 
+After setting up Static Code Analysis, a scan is ran upon each commit to a scanned repository. Violations are summarized per repository on the [**Code Security Repositories** page][1]. Click on a repository to analyze **Code Vulnerabilities** and **Code Quality** results from Static Code Analysis. 
 
 * The **Code Vulnerabilities** tab contains the violations found by Datadog's rules in the [Security category][2].
 * The **Code Quality** tab contains the violations found by Datadog's rules in the [Best Practices, Code Style, Error Prone, or Performance categories][3].
@@ -77,20 +67,15 @@ The content of the violation is shown in tabs:
 
 - **Details**: A description of the violation and the lines of code that caused it. To see the offending code snippet, configure the [Datadog GitHub App][4].
 - **Remediation**: One or more code fixes that can resolve the violation, with options for remediation.
-- **Event**: JSON metadata regarding the Static Analysis violation event.
+- **Event**: JSON metadata regarding the violation.
 
-### Using suggested fixes
+## Using suggested fixes
 <!-- {{< img src="code_security/static_analysis/static-analysis-fixes.png" alt="Fixes tab of a static analysis violation" style="width:80%;">}} -->
 
-In Datadog Static Analysis, there are two types of suggested fixes:
+In Datadog Static Code Analysis, there are two types of suggested fixes:
 
-1. **Default Suggested Fix:** For simple violations like linting issues, the rule analyzer automatically provides templated fixes.
-2. **AI Suggested Fix:** For complex violations, fixes are typically not available beforehand. Instead, you can use AI Suggested Fixes, which use OpenAI's GPT-4 to generate a suggested fix. You can choose between "Text" and "Unified Diff" fixes, which outputs plain text instructions or a code change for resolving the violation, respectively.
-
-The two types of fixes are distinguished visually in the UI with different labels.
-
-- Default Suggested Fixes
-- AI Suggested Fixes
+1. **Deterministic Suggested Fix:** For simple violations like linting issues, the rule analyzer automatically provides templated fixes.
+2. **AI-suggested Fix:** For complex violations, fixes are typically not available beforehand. Instead, you can use AI-suggested Fixes, which use OpenAI's GPT-4 to generate a suggested fix. You can choose between "Text" and "Unified Diff" fixes, which outputs plain text instructions or a code change for resolving the violation, respectively. *This feature is opt-in*.
 
 <!-- {{< img src="code_security/static_analysis/static-analysis-default-fix.png" alt="Visual indicator of a default static analysis suggested fix" style="width:60%;">}}
 
@@ -122,14 +107,13 @@ To commit a suggested fix:
 2. Click **Fix Violation** in the side panel of the result.
 3. Click **Commit to current branch**.
 
-### Customizing your configuration
+## Customizing your configuration
+To customize which Static Code Analysis rules are configured in your repositories or across your organization, see the [Setup documentation][8].
 
-To customize which Static Analysis rules are configured in your repositories, see the [Setup documentation][8].
+## Reporting false positives
+If you believe a specific violation is a false positive, you can flag it as a false positive with a reason for flagging, which sends a report directly to Datadog. Submissions are reviewed on a regular basis to improve ruleset quality over time.
 
-### Reporting false positives
-If you believe a specific violation is a false positive, you can flag it as a false positive with a reason for flagging, which sends a report to Datadog. Submissions are reviewed on a regular basis to improve ruleset quality over time.
-
-<!-- {{< img src="code_security/static_analysis/flag-false-positive.png" alt="Button for reporting a Static Analysis violation as a false positive" style="width:60%;">}} -->
+<!-- {{< img src="code_security/static_analysis/flag-false-positive.png" alt="Button for reporting a Static Code Analysis violation as a false positive" style="width:60%;">}} -->
 
 <!-- ## Further Reading
 
@@ -145,3 +129,4 @@ If you believe a specific violation is a false positive, you can flag it as a fa
 [9]: /security/code_security/static_analysis/setup
 [10]: /security/code_security/dev_tool_int/github_pull_requests/
 [11]: /getting_started/code_security/
+[12]: https://app.datadoghq.com/security/configuration/code-security/setup

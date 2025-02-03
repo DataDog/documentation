@@ -57,6 +57,10 @@ Sources from highest to lowest priority:
 
 Configurations issued by higher-priority sources override configurations issued by lower-priority sources.
 
+## Supported environments
+
+Remote Configuration works in environments where the Datadog Agent is deployed. Remote Configuration supports serverless container cloud services such as AWS Fargate. Remote Configuration does not support serverless container managed apps (AWS App Runner, Azure Container Apps, Google Cloud Run) and functions deployed with container packaging (AWS Lambda, Azure Functions, Google Cloud Functions).
+
 ## Supported products and feature capabilities
 The following products and features are supported with Remote Configuration:
 
@@ -279,10 +283,6 @@ datadog:
 
 {{% /tab %}}
 {{< /tabs >}}
-
-## Supported environments
-
-Remote Configuration works in environments where the Datadog Agent is deployed. Remote Configuration supports serverless container cloud services such as AWS Fargate. Remote Configuration does not support serverless container managed apps (AWS App Runner, Azure Container Apps, Google Cloud Run) and functions deployed with container packaging (AWS Lambda, Azure Functions, Google Cloud Functions).
 
 ## Further Reading
 

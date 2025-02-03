@@ -1,6 +1,6 @@
 ---
-title: Static Analysis Setup
-description: Learn about Datadog Static Analysis to scan code for quality issues and security vulnerabilities before your code reaches production.
+title: Set up Static Code Analysis
+description: Learn about Datadog Static Code Analysis to scan code for quality issues and security vulnerabilities before your code reaches production.
 aliases:
 - /continuous_integration/static_analysis
 - /static_analysis
@@ -16,16 +16,20 @@ algolia:
 {{% /site-region %}}
 
 ## Overview
-To set up Datadog Static Analysis, navigate to [**Security** > **Code Security**][1].
+To set up Datadog Static Code Analysis in-app, navigate to [**Security** > **Code Security**][1].
 
-## Select where to run Static Analysis scans
+## Select where to run Static Code Analysis scans
 
 ### Scan with Datadog-hosted scanning
 
-You can run Datadog Static Analysis scans directly on Datadog's infrastructure. To get started, navigate to the [**Code Security** page][1].
+For GitHub repositories, you can run Datadog Static Code Analysis scans directly on Datadog's infrastructure. To get started, navigate to the [**Code Security** page][1].
 
 ### Scan in CI pipelines
-Datadog Static Analysis runs in your CI pipelines using the [`datadog-ci` CLI][8]. Configure your [Datadog API and application keys (requires the `code_analysis_read` scope)][3] and run Static Analysis in the respective CI provider.
+Datadog Static Code Analysis runs in your CI pipelines using the [`datadog-ci` CLI][8].
+
+First, configure your Datadog API and application keys. Add `DD_APP_KEY` and `DD_API_KEY` as secrets. Please ensure your Datadog application key has the `code_analysis_read` scope.
+
+Next, run Static Code Analysis by following instructions for your chosen CI provider below.
 
 {{< whatsnext desc="See instructions based on your CI provider:">}}
     {{< nextlink href="security/code_security/static_analysis/circleci_orbs" >}}CircleCI Orbs{{< /nextlink >}}
@@ -34,7 +38,7 @@ Datadog Static Analysis runs in your CI pipelines using the [`datadog-ci` CLI][8
 {{< /whatsnext >}}
 
 ## Select your source code management provider
-Datadog Static Analysis supports all source code management providers, with native support for GitHub.
+Datadog Static Code Analysis supports all source code management providers, with native support for GitHub.
 ### Set up the GitHub integration
 If GitHub is your source code management provider, you must configure a GitHub App using the [GitHub integration tile][9] and set up the [source code integration][10] to see inline code snippets and enable [pull request comments][11].
 
@@ -44,11 +48,11 @@ When installing a GitHub App, the following permissions are required to enable c
 - `Pull Request: Read & Write`, which allows Datadog to add feedback for violations directly in your pull requests using [pull request comments][11], as well as open pull requests to [fix vulnerabilities][12]
 
 ### Other source code management providers
-If you are using another source code management provider, configure Static Analysis to run in your CI pipelines using the `datadog-ci` CLI tool and [upload the results](#upload-third-party-static-analysis-results-to-datadog) to Datadog.
+If you are using another source code management provider, configure Static Code Analysis to run in your CI pipelines using the `datadog-ci` CLI tool and [upload the results](#upload-third-party-static-analysis-results-to-datadog) to Datadog.
 You **must** run an analysis of your repository on the default branch before results can begin appearing on the **Code Security** page.
 
 ## Customize your configuration
-By default, Datadog Static Analysis scans your repositories with [Datadog's rulesets][6] for your programming language(s). To customize which rulesets you want to apply and where, add a `static-analysis.datadog.yml` file to your repository's **root directory**.
+By default, Datadog Static Code Analysis scans your repositories with [Datadog's rulesets][6] for your programming language(s). To customize which rulesets you want to apply and where, add a `static-analysis.datadog.yml` file to your repository's **root directory**.
 
 You can include the following **global** options in the `static-analysis.datadog.yml` file:
 
@@ -197,7 +201,7 @@ rulesets:
 
 #### Ignore for a specific instance
 
-To ignore a specific instance of a violation, comment `no-dd-sa` above the line of code to ignore. This prevents that line from ever producing a violation. For example, in the following Python code snippet, the line `foo = 1` would be ignored by Static Analysis scans.
+To ignore a specific instance of a violation, comment `no-dd-sa` above the line of code to ignore. This prevents that line from ever producing a violation. For example, in the following Python code snippet, the line `foo = 1` would be ignored by Static Code Analysis scans.
 
 ```python
 #no-dd-sa
@@ -274,3 +278,4 @@ datadog-static-analyzer -i /path/to/directory -g -o sarif.json -f sarif –-diff
 [10]: /integrations/guide/source-code-integration
 [11]: /security/code_security/dev_tool_int/github_pull_requests
 [12]: /security/code_security/dev_tool_int/github_pull_requests#fixing-a-vulnerability-directly-from-datadog
+[13]: https://docs.github.com/en/actions/security-for-github-actions/security-guides

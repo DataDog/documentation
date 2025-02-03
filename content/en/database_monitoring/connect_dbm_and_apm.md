@@ -72,8 +72,10 @@ APM tracer integrations support a *Propagation Mode*, which controls the amount 
 \* [CommandType.StoredProcedure][25] not supported
 
 \*\* Full mode SQL Server for Java/.NET:
+
+<div class="alert alert-warning">If your application uses <code>context_info</code> for instrumentation, the APM tracer overwrites it.</div>
+
   - The instrumentation executes a `SET context_info` command when the client issues a query, which makes an additional round-trip to the database.
-  - If your applications uses `context_info` to instrument the application, it is overwritten by the APM tracer.
   - Prerequisites:
     - Agent version 7.55.0 or greater
     - Java tracer version 1.39.0 or greater
@@ -90,6 +92,12 @@ For the best user experience, ensure the following environment variables are set
 DD_SERVICE=(application name)
 DD_ENV=(application environment)
 DD_VERSION=(application version)
+```
+
+Datadog recommends setting the obfuscation mode to `obfuscate_and_normalize` for Agent versions `7.63` and higher. Add the following parameter in the `apm_config` section of your APM Agent configuration file:
+
+```
+  sql_obfuscation_mode: "obfuscate_and_normalize"
 ```
 
 {{< tabs >}}

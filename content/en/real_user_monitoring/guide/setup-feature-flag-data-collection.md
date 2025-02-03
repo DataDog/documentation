@@ -885,7 +885,7 @@ Filtering your **Errors** with the `@feature_flags.{flag_name}` attribute, you c
 
 ## Troubleshooting
 
-### Feature flag data is not reflecting the expected information
+### My feature flag data doesn't reflect what I expect to see
 Feature flags show up in the context of events where they are evaluated, meaning they should show up on the views that the feature flag code logic is run on.
 
 Depending on how you've structured your code and set up your feature flags, you may see unexpected feature flags appear in the context of some events.
@@ -900,14 +900,6 @@ Here are a few examples of reasons why your feature flag is being evaluated on u
 - A routing issue where components with a feature flag evaluation are rendered before/after URL changes.
 
 When performing your investigations, you can also scope your data for `View Name`'s that are relevant to your feature flag.
-
-### Feature flag naming
-
-The following special characters are not supported for [Feature Flag Tracking][5]: `.`, `:`, `+`, `-`, `=`, `&&`, `||`, `>`, `<`, `!`, `(`, `)`, `{`, `}`, `[`, `]`, `^`, `"`, `“`, `”`, `~`, `*`, `?`, `\`. Datadog recommends avoiding these characters when possible in your feature flag names. If you are required to use one of these characters, replace the character before sending the data to Datadog. For example:
-
-```javascript
-datadogRum.addFeatureFlagEvaluation(key.replace(':', '_'), value);
-```
 
 
 ## Further Reading
