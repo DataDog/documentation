@@ -746,11 +746,25 @@
       "description": "Create api handle returns \"CREATED\" response"
     }
   ],
+  "CreateWorkflowsWebhookHandle": [
+    {
+      "group": "microsoft_teams_integration",
+      "suffix": "_1716851881",
+      "description": "Create workflow webhook handle returns \"CREATED\" response"
+    }
+  ],
   "UpdateTenantBasedHandle": [
     {
       "group": "microsoft_teams_integration",
       "suffix": "_419892746",
       "description": "Update api handle returns \"OK\" response"
+    }
+  ],
+  "UpdateWorkflowsWebhookHandle": [
+    {
+      "group": "microsoft_teams_integration",
+      "suffix": "_163189594",
+      "description": "Update workflow webhook handle returns \"OK\" response"
     }
   ],
   "CreateMonitorConfigPolicy": [
