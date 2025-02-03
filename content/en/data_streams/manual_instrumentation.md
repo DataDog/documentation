@@ -96,6 +96,81 @@ set_consume_checkpoint(
 
 {{< /code-block >}}
 {{% /tab %}}
+{{% /tab %}}
+{{% tab ".Net" %}}
+<div class="alert alert-warning">
+  <strong>Note:</strong> DSM instrumentation will not work in Async operations
+</div>
+
+In your producer
+{{< code-block lang="csharp" >}}
+using Datadog.Trace;
+
+using (var scope = Tracer.Instance.StartActive("produce"))
+{
+    var headers = new Headers();
+    var msg = new Message<Null, string> { Value = "any kind of value", Headers = headers};
+
+    new SpanContextInjector().InjectIncludingDsm(
+        msg.Headers,
+        SetHeader,
+        scope.Span.Context,
+        messageType: "<datastream-type>",
+        target: "<queue-or-topic-name>"
+    );
+
+    // Send your message
+    producer.Produce("your-topic-name", msg);
+}
+
+// Specific to how the header is modeled
+static void SetHeader(Headers headers, string key, string value)
+{
+    byte[] valueBytes = Encoding.UTF8.GetBytes(value);
+    headers.Add(new Header(key, valueBytes));
+}
+{{< /code-block >}}
+
+In your consumer
+{{< code-block lang="csharp" >}}
+using Datadog.Trace;
+
+var msg = consumer.Consume();
+var parentContext = new SpanContextExtractor().ExtractIncludingDsm(
+    msg.Headers,
+    GetHeader,
+    messageType: "<datastream-type>",
+    source: "<queue-or-topic-name>"
+);
+var startTime = DateTimeOffset.UtcNow;
+
+using (var scope = Tracer.Instance.StartActive("consume",
+       new SpanCreationSettings,
+       {
+           Parent = parentContext,
+           StartTime = startTime
+       })
+)
+{
+    // Do something with the message
+}
+
+// Specific to how the header is modeled
+static IEnumerable<string?> GetHeader(Headers headers, string key)
+{
+    foreach (var header in headers)
+    {
+        string headerKey = header.Key;
+
+        if (headerKey == key)
+        {
+            yield return Encoding.UTF8.GetString(header.GetValueBytes());
+        }
+    }
+    yield return null;
+}
+{{< /code-block >}}
+{{% /tab %}}
 {{< /tabs >}}
 ## Further Reading
 
