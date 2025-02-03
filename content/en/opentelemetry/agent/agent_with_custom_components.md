@@ -37,7 +37,7 @@ Download the Dockerfile template:
    ```
 2. Download the Dockerfile
    ```shell
-   curl -o Dockerfile https://raw.githubusercontent.com/DataDog/datadog-agent/main/Dockerfiles/agent-ot/Dockerfile.agent-otel
+   curl -o Dockerfile https://raw.githubusercontent.com/DataDog/datadog-agent/7.61.x/Dockerfiles/agent-ot/Dockerfile.agent-otel
    ```
 
 The Dockerfile:
@@ -63,7 +63,7 @@ dist:
   module: github.com/DataDog/comp/otelcol/collector-contrib
   name: otelcol-contrib
   description: Datadog OpenTelemetry Collector
-  version: 0.104.0
+  version: 0.114.0
   output_path: ./comp/otelcol/collector-contrib/impl
   otelcol_version: 0.114.0
 
@@ -80,8 +80,8 @@ processors:
   - gomod: github.com/open-telemetry/opentelemetry-collector-contrib/processor/metricstransformprocessor v0.114.0
 
 receivers:
-  - gomod: go.opentelemetry.io/collector/receiver/nopreceiver v0.104.0
-  - gomod: go.opentelemetry.io/collector/receiver/otlpreceiver v0.104.0
+  - gomod: go.opentelemetry.io/collector/receiver/nopreceiver v0.114.0
+  - gomod: go.opentelemetry.io/collector/receiver/otlpreceiver v0.114.0
   - gomod: github.com/open-telemetry/opentelemetry-collector-contrib/receiver/filelogreceiver v0.114.0
   - gomod: github.com/open-telemetry/opentelemetry-collector-contrib/receiver/fluentforwardreceiver v0.114.0
   - gomod: github.com/open-telemetry/opentelemetry-collector-contrib/receiver/hostmetricsreceiver v0.114.0
@@ -212,7 +212,7 @@ This section discusses some common issues you might encounter while building and
 #0 88.24 # github.com/opencontainers/runc/libcontainer/cgroups/ebpf
 #0 88.24 /go/pkg/mod/github.com/opencontainers/runc@v1.1.12/libcontainer/cgroups/ebpf/ebpf_linux.go:190:3: unknown field Replace in struct literal of type link.RawAttachProgramOptions
 #0 89.14 # github.com/open-telemetry/opentelemetry-collector-contrib/receiver/awscontainerinsightreceiver/internal/k8sapiserver
-#0 89.14 /go/pkg/mod/github.com/open-telemetry/opentelemetry-collector-contrib/receiver/awscontainerinsightreceiver@v0.104.0/internal/k8sapiserver/k8sapiserver.go:47:68: undefined: record.EventRecorderLogger
+#0 89.14 /go/pkg/mod/github.com/open-telemetry/opentelemetry-collector-contrib/receiver/awscontainerinsightreceiver@v0.114.0/internal/k8sapiserver/k8sapiserver.go:47:68: undefined: record.EventRecorderLogger
 ------
 ```
 
