@@ -72,7 +72,7 @@ If you've configured the profiler and don't see profiles in the profile search p
 
    Note that the following message could appear, but it does not impact Datadog profiling: `Profiler signal handler has been replaced. Restoring it.` This indicates only that the Datadog signal handler is reinstalled when it was overwritten.
 
-5. Check that the following environment variables `CORECLR_ENABLE_PROFILING`, `CORECLR_PROFILER`, `CORECLR_PROFILER_PATH` are not set, and that the value pointing to `Datadog.Linux.ApiWrapper.x64.so` in `LD_PRELOAD` is not set. If this is the case, remove them or an old manually installed version of the profiler will still be used.
+5. Check that the following environment variables `CORECLR_ENABLE_PROFILING`, `CORECLR_PROFILER`, `CORECLR_PROFILER_PATH` are not set, and that the value pointing to `Datadog.Linux.ApiWrapper.x64.so` in `LD_PRELOAD` is not set. If this is the case, remove them from scripts or from the docker file where they are set. Otherwise, an old manually installed version of the profiler will still be used.
 
 6. Check that the value of `DD_PROFILING_ENABLED` is set to `1` or `Auto`. For the latter, the profiler will generate profiles if and only if (1) a trace was created and (2) the application ran for more than 30 seconds.
 If it is set to another value or not set at all, the profiler is disabled.
