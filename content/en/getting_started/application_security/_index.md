@@ -20,8 +20,8 @@ further_reading:
 ## Overview
 
 Datadog Application Security Management (ASM) helps secure your web applications and APIs in production. 
-- With threat detection, Datadog protects in real-time from attacks and attackers that aim to exploit code-level vulnerabilities.
-- With [Code Security][28], Datadog detects code and library vulnerabilities in both your repositories and your running services, providing end-to-end visibility from development to production.
+- With threat detection, Datadog provides real-time protection against attacks and attackers targeting code-level vulnerabilities.
+- With [Code Security][28], Datadog detects code and library vulnerabilities in your repositories and your running services, providing end-to-end visibility from development to production.
 
 This guide walks you through best practices for getting your team up and running with ASM.
 
