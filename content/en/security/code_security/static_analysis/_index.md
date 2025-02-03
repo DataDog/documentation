@@ -69,6 +69,12 @@ The content of the violation is shown in tabs:
 - **Remediation**: One or more code fixes that can resolve the violation, with options for remediation.
 - **Event**: JSON metadata regarding the violation.
 
+## Customize your configuration
+To customize which Static Code Analysis rules are configured in your repositories or across your organization, see the [Setup documentation][8].
+
+## Link results to Datadog services and teams
+
+
 ## Apply suggested fixes
 <!-- {{< img src="code_security/static_analysis/static-analysis-fixes.png" alt="Fixes tab of a static analysis violation" style="width:80%;">}} -->
 
@@ -106,9 +112,6 @@ To commit a suggested fix:
 1. View a specific SAST result in Code Security.
 2. Click **Fix Violation** in the side panel of the result.
 3. Click **Commit to current branch**.
-
-## Customize your configuration
-To customize which Static Code Analysis rules are configured in your repositories or across your organization, see the [Setup documentation][8].
 
 ## Report false positives
 If you believe a specific violation is a false positive, you can flag it as a false positive with a reason for flagging, which sends a report directly to Datadog. Submissions are reviewed on a regular basis to improve ruleset quality over time.
