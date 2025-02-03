@@ -7,7 +7,7 @@ aliases:
 - /code_analysis/software_composition_analysis/github_actions/
 - /code_analysis/software_composition_analysis/setup/
 ---
-
+## Overview
 SCA can scan dependency management files in your repositories to statically detect open source libraries used in your codebase. SCA supports scanning for libraries in the following languages and lockfiles below:
 
 | Package Manager | Lockfile                                 |
@@ -24,43 +24,20 @@ SCA can scan dependency management files in your repositories to statically dete
 | Python (poetry) | `poetry.lock`                            |
 | Ruby (bundler)  | `Gemfile.lock`                           |
 
+To set up Datadog Static Code Analysis in-app, navigate to [**Security** > **Code Security**][1].
 
-## Search and filter results
+## Select where to run static SCA scans
 
-<!-- <div class="alert alert-info">Datadog Software Composition Analysis can find vulnerable libraries across the software development lifecycle (SDLC). Code Security summarizes results found by directly scanning your repositories. To view all vulnerabilities found in repositories and at runtime consolidated together, see <a href="/security/code_security/software_composition_analysis" target="_blank">Application Security</a> for more details.</div> -->
+### Scan with Datadog-hosted scanning
+For GitHub repositories, you can run Datadog SCA scans directly on Datadog's infrastructure. To get started, navigate to the [**Code Security** page][1].
 
-After you configure your CI pipelines to run Datadog SCA, violations are summarized per repository on the [**Code Security Repositories** page][4]. Click on a repository to analyze **Library Vulnerabilities** and **Library Catalog** results from Software Composition Analysis. 
+### Scan in CI pipelines
+First, configure your Datadog API and application keys by adding `DD_APP_KEY` and `DD_API_KEY` as secrets. Please ensure your Datadog application key has the `code_analysis_read` scope.
 
-* The **Library Vulnerabilities** tab contains the vulnerable library versions found by Datadog SCA.
-* The **Library Catalog** tab contains all of the libraries (vulnerable or not) found by Datadog SCA.
-
-See the documentation for your CI provider in **GitHub Actions** and **Generic CI Providers** below.
+Next, run SCA by following instructions for your chosen CI provider below.
 
 ## GitHub Actions
-
-Run a Datadog Software Composition Analysis job in your GitHub Action workflows. This action invokes
-[Datadog osv-scanner][10] on your codebase and uploads the results into Datadog.
-
-### Library Inventory Generation
-
-The GitHub Action generates an inventory of libraries automatically based on the libraries that are declared in your repository.
-
-The GitHub Action works for the following languages and following files:
-
- - JavaScript/TypeScript: `package-lock.json` and `yarn.lock`
- - Python: `requirements.txt` (with version defined) and `poetry.lock`
- - Java: `pom.xml`
- - C#
- - Ruby
- - ... and more languages
-
-### Setup
-
-#### Set up keys
-
-Add `DD_APP_KEY` and `DD_API_KEY` as secrets in your [GitHub Actions Settings][11]. Please ensure your Datadog application key has the `code_analysis_read` scope. For more information, see [API and Application Keys][6].
-
-#### Workflow
+SCA can run as a job in your GitHub Actions workflows. The action provided below invokes [Datadog osv-scanner][10], our recommended SBOM generator, on your codebase and uploads the results into Datadog.
 
 Add the following code snippet in `.github/workflows/datadog-sca.yml`. Make sure to replace
 the `dd_site` attribute with the [Datadog site][12] you are using.
@@ -88,15 +65,25 @@ jobs:
         dd_site: "datadoghq.com"
 ```
 
-### Related Datadog tools
+<!-- ### Library Inventory Generation
 
-[Datadog Static Code Analysis][5] analyzes your code and provides feedback in your IDE, GitHub PR or within the
-Datadog environment. Datadog Static Code Analysis can be set up using the [`datadog-static-analyzer-github-action`][13] 
-GitHub action.
+The GitHub Action generates an inventory of libraries automatically based on the libraries that are declared in your repository.
+
+The GitHub Action works for the following languages and following files:
+
+ - JavaScript/TypeScript: `package-lock.json` and `yarn.lock`
+ - Python: `requirements.txt` (with version defined) and `poetry.lock`
+ - Java: `pom.xml`
+ - C#
+ - Ruby
+ - ... and more languages -->
+
+### Related GitHub Actions
+[Datadog Static Code Analysis (SAST)][5] analyzes your first-party code. Static Code Analysis can be set up using the [`datadog-static-analyzer-github-action`][13] GitHub action.
+
 
 ## Generic CI Providers
-
-If you don't use GitHub Actions, you can run the Datadog CLI directly in your CI pipeline platform.
+If you don't use GitHub Actions, you can run the [datadog-ci][14] CLI directly in your CI pipeline platform and upload your SBOM to Datadog.
 
 Prerequisites:
 
@@ -170,3 +157,4 @@ You **must** run an analysis of your repository on the default branch before res
 [11]: https://docs.github.com/en/actions/security-for-github-actions/security-guides
 [12]: /getting_started/site/
 [13]: https://github.com/DataDog/datadog-static-analyzer-github-action
+[14]: https://github.com/DataDog/datadog-ci?tab=readme-ov-file#sbom

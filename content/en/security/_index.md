@@ -66,6 +66,12 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/secrets-management/"
     tag: "Blog"
     text: "Identify the secrets that make your cloud environment more vulnerable to an attack"
+  - link: "https://www.datadoghq.com/blog/cloud-security-roundup-infrastructure-identity/"
+    tag: "Blog"
+    text: "Cloud security research and guide roundup: Infrastructure and access"
+  - link: "https://www.datadoghq.com/blog/cloud-security-roundup-devsecops-threat-detection-ai/"
+    tag: "Blog"
+    text: "Cloud security research and guide roundup: DevSecOps, threat detection, and AI"
 cascade:
     algolia:
         rank: 70

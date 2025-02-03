@@ -15,7 +15,7 @@ further_reading:
 
 ## Overview
 
-You can configure your LLM applications on the Configuration page with settings that can optimize your application's performance and security.
+You can configure your LLM applications on the Settings page to optimize your application's performance and security.
 
 Evaluations
 : Enables Datadog to assess your LLM application on dimensions like Quality, Security, and Safety. By enabling evaluations, you can assess the effectiveness of your application's responses and maintain high standards for both performance and user safety. For more information about evaluations, see [Terms and Concepts][1].

@@ -4,10 +4,7 @@ disable_toc: false
 aliases:
 - /security/application_security/enabling/tracing_libraries/sca/
 ---
-
-
 SCA can detect vulnerabilities that affect open source libraries running in your services based on Datadog's application telemetry. 
-scan dependency management files in your repositories to statically detect open source libraries used in your codebase. 
 
 Before setting up runtime deteciton, ensure the following prerequisites are met:
 
