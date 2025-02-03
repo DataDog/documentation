@@ -6815,6 +6815,66 @@ menu:
       url: /api/latest/microsoft-teams-integration/
       identifier: microsoft-teams-integration
       generated: true
+    - name: Update Workflows webhook handle
+      url: '#update-workflows-webhook-handle'
+      identifier: microsoft-teams-integration-update-workflows-webhook-handle
+      parent: microsoft-teams-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateWorkflowsWebhookHandle
+        unstable: []
+        order: 1
+    - name: Get Workflows webhook handle information
+      url: '#get-workflows-webhook-handle-information'
+      identifier: microsoft-teams-integration-get-workflows-webhook-handle-information
+      parent: microsoft-teams-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetWorkflowsWebhookHandle
+        unstable: []
+        order: 1
+    - name: Delete Workflows webhook handle
+      url: '#delete-workflows-webhook-handle'
+      identifier: microsoft-teams-integration-delete-workflows-webhook-handle
+      parent: microsoft-teams-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteWorkflowsWebhookHandle
+        unstable: []
+        order: 1
+    - name: Create Workflows webhook handle
+      url: '#create-workflows-webhook-handle'
+      identifier: microsoft-teams-integration-create-workflows-webhook-handle
+      parent: microsoft-teams-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateWorkflowsWebhookHandle
+        unstable: []
+        order: 1
+    - name: Get all Workflows webhook handles
+      url: '#get-all-workflows-webhook-handles'
+      identifier: microsoft-teams-integration-get-all-workflows-webhook-handles
+      parent: microsoft-teams-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListWorkflowsWebhookHandles
+        unstable: []
+        order: 1
     - name: Update tenant-based handle
       url: '#update-tenant-based-handle'
       identifier: microsoft-teams-integration-update-tenant-based-handle
