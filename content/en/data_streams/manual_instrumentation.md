@@ -132,6 +132,7 @@ In your consumer
 {{< code-block lang="csharp" >}}
 using Datadog.Trace;
 
+var startTime = DateTimeOffset.UtcNow;
 var msg = consumer.Consume();
 var parentContext = new SpanContextExtractor().ExtractIncludingDsm(
     msg.Headers,
@@ -139,7 +140,6 @@ var parentContext = new SpanContextExtractor().ExtractIncludingDsm(
     messageType: "<datastream-type>",
     source: "<queue-or-topic-name>"
 );
-var startTime = DateTimeOffset.UtcNow;
 
 using (var scope = Tracer.Instance.StartActive("consume",
        new SpanCreationSettings,
