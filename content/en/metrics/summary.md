@@ -34,7 +34,7 @@ The search bars provide the most comprehensive set of actions to filter the list
 - **Percentiles**: Distribution metrics enabled by percentiles/advanced query capabilities
 - **Historical Metrics**: Metrics that have historical metrics ingestion enabled 
 - **Query Activity**: Metrics not queried in the app or by the API in the past 30 days
-- **Related Assets** (Beta): Metrics that are used on your assets (dashboards, monitors, notebooks, SLOs)
+- **Related Assets** (Beta): Metrics that are used on assets (dashboards, monitors, notebooks, SLOs)
 - **Metric Type**: Differentiate between distribution and non-distribution metrics (counts, gauges, rates)
 - **Metric Origin**: The product from which the metric originated (for example, metrics generated from Logs or APM Spans). To learn more about the different metric origin types, see [Metric origin definitions][12].
 
