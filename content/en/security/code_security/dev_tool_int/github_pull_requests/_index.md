@@ -9,9 +9,8 @@ aliases:
 ## Overview
 
 Code Security integrates with GitHub pull requests in two ways:
-[Pull request comments to flag violations](#enable-code-security-pr-comments-for-your-repositories)
+- [Pull request comments to flag violations](#enable-code-security-pr-comments-for-your-repositories)
 {{< img src="ci/static-analysis-pr-comment-example.png" alt="Example of a Code Security comment on a pull request" style="width:90%;" >}}
-
 - [Open a pull request to fix an issue directly from Datadog](#fixing-a-vulnerability-directly-from-datadog): You can create a pull request from the UI to fix a security vulnerability or code quality issue based on Datadog's suggested code fix. This is only available for Static Code Analysis (SAST).
 {{< img src="ci/sast_one_click_light.png" alt="Example of one-click remediation for Code Security" style="width:90%;" >}}
 
@@ -21,7 +20,7 @@ To enable these features, ensure you have the required GitHub permissions (Read 
 
 ### Enable Datadog Code Security
 
-To use Datadog Code Security, add the appropriate configuration files to your repository, as described in the [setup instructions][1].
+To enable Code Security in-app, navigate to the [**Code Security** page][4].
 
 ### Configure a GitHub App
 

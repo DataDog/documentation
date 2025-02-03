@@ -10,11 +10,11 @@ further_reading:
   text: "How Application Security Management Works in Datadog"
 ---
 
-The following ASM capabilities are supported relative to each language's tracing library:
+The following capabilities are supported relative to each language's tracing library:
 
-| Application Security capability               | Java    | .NET     | Node.js        | Python        | Go              | Ruby          | PHP           |
+| Capability               | Java    | .NET     | Node.js        | Python        | Go              | Ruby          | PHP           |
 |-----------------------------------------------|---------|----------|----------------|---------------|-----------------|---------------|---------------|
-| Code Security                                 | 1.15.0  | 2.42.0   | 4.18.0         | Preview          | not supported   | not supported | not supported |
+| Runtime Code Analysis (IAST)                                 | 1.15.0  | 2.42.0   | 4.18.0         | Preview          | not supported   | not supported | not supported |
 
 Select your application language for details about framework compatibility and feature support.
 
