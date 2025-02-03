@@ -25,9 +25,9 @@ Service Catalog enhances incident response by:
 
 Service Catalog also integrates with [Datadog Incident Management][1] and [PagerDuty][2], allowing you to view related incidents in the Reliability tab on the Service Details page.
 
-{{< img src="tracing/service_catalog/incident-mgmt-reliability.png" alt="The Reliability tab for a service, showing incident and error metrics for the service overall and by version" style="width:100%;" >}}
+**Note**: Datadog Incidents automatically link to Service Catalog; apply appropriate `SERVICE` tags to an incident to ensure that a service’s incident data are accurate. The PagerDuty integration must be manually set up to integrate with incident information in Service Catalog. 
 
-Datadog Incidents automatically link to Service Catalog. Apply appropriate `SERVICE` tags to an incident to ensure that a service’s incident data are accurate. The PagerDuty integration must be manually set up to integrate with incident information in Service Catalog. 
+{{< img src="tracing/service_catalog/incident-mgmt-reliability.png" alt="The Reliability tab for a service, showing incident and error metrics for the service overall and by version" style="width:100%;" >}}
 
 To view incident statuses for upstream and downstream dependencies, click a service in Service Catalog to open the Service Details page, and then click on the Dependencies tab. 
 
