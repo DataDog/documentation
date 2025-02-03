@@ -119,8 +119,7 @@ using (var scope = Tracer.Instance.StartActive("produce"))
         target: "<queue-or-topic-name>"
     );
 
-    // Send your message
-    producer.Produce("your-topic-name", msg);
+    // Produce the message
 }
 
 // Specific to how the header is modeled
