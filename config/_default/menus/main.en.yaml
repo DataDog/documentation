@@ -960,7 +960,7 @@ menu:
       identifier: mobile_enterprise_configuration
       parent: mobile
       weight: 1
-    - name: Intune
+    - name: Datadog for Intune
       url: mobile/datadog_for_intune
       identifier: mobile_intune
       parent: mobile
