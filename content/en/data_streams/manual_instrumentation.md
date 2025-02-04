@@ -161,7 +161,7 @@ static IEnumerable<string?> GetHeader(Headers headers, string key)
 {
     yield return header.GetByKey(key);
 }
-{{< /code-block >}}
+{{< /code-block >}}[1]: https://docs.datadoghq.com/tracing/trace_collection/trace_context_propagation/?tab=net#additional-use-cases
 {{% /tab %}}
 {{< /tabs >}}
 ## Further Reading
