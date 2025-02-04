@@ -41,7 +41,7 @@ Make sure all files are lowercase. Macs are case-insensitive when creating links
 
 ## Releasing
 
-Within 10 minutes of merging to master, it deploys automatically.
+Within 10 minutes of merging to master, it deploys automatically, a process which usually takes around 35 minutes.
 
 ## How to add a new integration
 
