@@ -349,7 +349,7 @@ annotations:
 {{< /tabs >}}
 
 **Notes:**
-- Amazon exposes `kube_controller_manager` and `kube_scheduler` metrics under the [`v1.metrics.eks.amazonaws.com`][11] API Group. 
+- Amazon exposes `kube_controller_manager` and `kube_scheduler` metrics under the [`metrics.eks.amazonaws.com`][11] API Group. 
 
 
 ## Kubernetes on OpenShift 4 {#OpenShift4}
