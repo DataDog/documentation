@@ -317,7 +317,7 @@ scheduler:
 
 ## Kubernetes on Amazon EKS {#EKS}
 
-Amazon Elastic Kubernetes Service (EKS) now supports monitoring all control plane components using cluster checks. If you use Helm to install Datadog, these metrics are available immediately by adding the following annotations to the `default/kubernetes` service. Support is coming for the Datadog Operator, but right now Operator installations are limited to API Server [metrics][5].
+Amazon Elastic Kubernetes Service (EKS) now supports monitoring all control plane components using cluster checks. If you use Helm to install Datadog, these metrics are available immediately by adding the following annotations to the `default/kubernetes` service. Support is coming for the Datadog Operator, but Operator installations are currently limited to API Server [metrics][5].
 
 ### Prerequisites
 - An EKS Cluster running on Kubernetes version >= 1.28
