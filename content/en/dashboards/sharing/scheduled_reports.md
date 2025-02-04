@@ -13,11 +13,6 @@ further_reading:
       text: 'Use associated template variables to refine your dashboards'
 ---
 
-{{< site-region region="gov" >}}
-
-<div class="alert alert-warning">Scheduled Reports are not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
 ## Overview
 
 Scheduled reports enable Datadog users to share dashboards as high-density PDFs on a recurring basis.
