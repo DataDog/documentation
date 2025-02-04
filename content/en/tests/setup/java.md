@@ -111,10 +111,10 @@ Set the following environment variables to configure the tracer:
 `DD_CIVISIBILITY_ENABLED=true` (Required)
 : Enables the Test Optimization product.
 
-`DD_ENV` (Required)
+`DD_ENV`
 : Environment where the tests are being run (for example: `local` when running tests on a developer workstation or `ci` when running them on a CI provider).
 
-`DD_SERVICE` (Required)
+`DD_SERVICE`
 : Name of the service or library being tested.
 
 `DD_TRACER_FOLDER` (Required)
@@ -136,10 +136,10 @@ Set the following environment variables to configure the tracer:
 `DD_CIVISIBILITY_ENABLED=true` (Required)
 : Enables the Test Optimization product.
 
-`DD_ENV` (Required)
+`DD_ENV`
 : Environment where the tests are being run (for example: `local` when running tests on a developer workstation or `ci` when running them on a CI provider).
 
-`DD_SERVICE` (Required)
+`DD_SERVICE`
 : Name of the service or library being tested.
 
 `DD_TRACER_FOLDER` (Required)
@@ -161,10 +161,10 @@ Set the following environment variables to configure the tracer:
 `DD_TEST_SESSION_NAME`
 : Use this to identify a group of tests (for example: `unit-tests` or `integration-tests`).
 
-`DD_ENV` (Required)
+`DD_ENV`
 : Environment where the tests are being run (for example: `local` when running tests on a developer workstation or `ci` when running them on a CI provider).
 
-`DD_SERVICE` (Required)
+`DD_SERVICE`
 : Name of the service or library being tested.
 
 `DD_TRACER_FOLDER` (Required)
@@ -186,10 +186,10 @@ Set the following environment variables to configure the tracer:
 `DD_TEST_SESSION_NAME`
 : Use this to identify a group of tests (for example: `unit-tests` or `integration-tests`).
 
-`DD_ENV` (Required)
+`DD_ENV`
 : Environment where the tests are being run (for example: `local` when running tests on a developer workstation or `ci` when running them on a CI provider).
 
-`DD_SERVICE` (Required)
+`DD_SERVICE`
 : Name of the service or library being tested.
 
 `DD_TRACER_FOLDER` (Required)
@@ -447,7 +447,7 @@ Use `DD_TEST_SESSION_NAME` to define the test session name for your tests (`test
 If `DD_TEST_SESSION_NAME` is not specified, the default value used is a combination of:
 
 - CI job name
-- Command used to run the tests (such as `yarn test`)
+- Command used to run the tests (such as `mvn test`)
 
 The test session name should be unique within a repository to help you distinguish different groups of tests.
 
@@ -455,8 +455,7 @@ The test session name should be unique within a repository to help you distingui
 
 If your tests are run with commands that include a dynamic string, such as:
 
-- `yarn test --temp-dir=/var/folders/t1/rs2htfh55mz9px2j4prmpg_c0000gq/T`
-- `pnpm vitest --temp-dir=/var/folders/t1/rs2htfh55mz9px2j4prmpg_c0000gq/T`
+- `mvn test --temp-dir=/var/folders/t1/rs2htfh55mz9px2j4prmpg_c0000gq/T`
 
 The default value for the test session name will be unstable. It is recommended to use `DD_TEST_SESSION_NAME` in this case.
 
