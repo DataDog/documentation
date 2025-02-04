@@ -149,10 +149,8 @@ For additional configuration see [Configuration Settings][1].
 To enable instrumentation of `unittest` tests, run your tests by appending `ddtrace-run` to the beginning of your `unittest` command.
 
 {{< code-block lang="shell" >}}
-DD_TEST_SESSION_NAME=python-integration-tests ddtrace-run python -m unittest
+ddtrace-run python -m unittest
 {{< /code-block >}}
-
-Optionally specify the name of the service or library under test in the `DD_SERVICE` environment variable.
 
 Alternatively, if you wish to enable `unittest` instrumentation manually, use `patch()` to enable the integration:
 
