@@ -117,8 +117,8 @@ using (var scope = Tracer.Instance.StartActive("produce"))
         msg.Headers,
         SetHeader,
         scope.Span.Context,
-        messageType: "<datastream-type>",
-        target: "<queue-or-topic-name>"
+        messageType: "<DATASTREAM-TYPE>",
+        target: "<QUEUE-OR-TOPIC-NAME>"
     );
 
     // Produce the message
