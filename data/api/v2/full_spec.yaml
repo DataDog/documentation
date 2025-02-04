@@ -38173,6 +38173,7 @@ paths:
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/incidents/{incident_id}/relationships/todos:
     get:
+      deprecated: true
       description: Get all todos for an incident.
       operationId: ListIncidentTodos
       parameters:
@@ -38213,6 +38214,7 @@ paths:
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
     post:
+      deprecated: true
       description: Create an incident todo.
       operationId: CreateIncidentTodo
       parameters:
@@ -38282,6 +38284,7 @@ paths:
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/incidents/{incident_id}/relationships/todos/{todo_id}:
     delete:
+      deprecated: true
       description: Delete an incident todo.
       operationId: DeleteIncidentTodo
       parameters:
@@ -38319,6 +38322,7 @@ paths:
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
     get:
+      deprecated: true
       description: Get incident todo details.
       operationId: GetIncidentTodo
       parameters:
@@ -38360,6 +38364,7 @@ paths:
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
     patch:
+      deprecated: true
       description: Update an incident todo.
       operationId: UpdateIncidentTodo
       parameters:
