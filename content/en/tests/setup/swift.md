@@ -642,7 +642,7 @@ Use `DD_TEST_SESSION_NAME` to define the test session name for your tests (`test
 If `DD_TEST_SESSION_NAME` is not specified, the default value used is a combination of:
 
 - CI job name
-- Command used to run the tests (such as `yarn test`)
+- Command used to run the tests (such as `swift test`)
 
 The test session name should be unique within a repository to help you distinguish different groups of tests.
 
@@ -650,8 +650,7 @@ The test session name should be unique within a repository to help you distingui
 
 If your tests are run with commands that include a dynamic string, such as:
 
-- `yarn test --temp-dir=/var/folders/t1/rs2htfh55mz9px2j4prmpg_c0000gq/T`
-- `pnpm vitest --temp-dir=/var/folders/t1/rs2htfh55mz9px2j4prmpg_c0000gq/T`
+- `swift test --temp-dir=/var/folders/t1/rs2htfh55mz9px2j4prmpg_c0000gq/T`
 
 The default value for the test session name will be unstable. It is recommended to use `DD_TEST_SESSION_NAME` in this case.
 

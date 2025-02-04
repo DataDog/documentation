@@ -73,27 +73,19 @@ For more information, see the [Python tracer installation documentation][1].
 {{< tabs >}}
 {{% tab "pytest" %}}
 
-To enable instrumentation of `pytest` tests, add the `--ddtrace` option when running `pytest`. Specify the test session name with the `DD_TEST_SESSION_NAME` environment variable, which identifies the group of tests about to run. Examples of this value would be `unit-tests`, `integration-tests` or `smoke-tests`.
+To enable instrumentation of `pytest` tests, add the `--ddtrace` option when running `pytest`.
 
 {{< code-block lang="shell" >}}
-DD_TEST_SESSION_NAME=unit-tests pytest --ddtrace
+pytest --ddtrace
 {{< /code-block >}}
 
 If you also want to enable the rest of the APM integrations to get more information in your flamegraph, add the `--ddtrace-patch-all` option:
 
 {{< code-block lang="shell" >}}
-DD_TEST_SESSION_NAME=unit-tests pytest --ddtrace --ddtrace-patch-all
+pytest --ddtrace --ddtrace-patch-all
 {{< /code-block >}}
 
-Additionally you may pass these environment variables:
-
-`DD_SERVICE`
-: Name of the service or library under test.<br/>
-**Example**: `my-ui`
-
-`DD_ENV`
-: Name of the environment where tests are being run.<br/>
-**Examples**: `local`, `ci`
+For additional configuration see [Configuration Settings][3].
 
 ### Adding custom tags to tests
 
@@ -130,6 +122,7 @@ Read more about custom measures in the [Add Custom Measures Guide][2].
 
 [1]: /tracing/trace_collection/custom_instrumentation/python?tab=locally#adding-tags
 [2]: /tests/guides/add_custom_measures/?tab=python
+[3]: #configuration-settings
 {{% /tab %}}
 
 {{% tab "pytest-benchmark" %}}
@@ -146,6 +139,9 @@ def test_square_value(benchmark):
     assert result == 25
 ```
 
+For additional configuration see [Configuration Settings][1].
+
+[1]: #configuration-settings
 {{% /tab %}}
 
 {{% tab "unittest" %}}
@@ -170,6 +166,9 @@ def test_will_pass(self):
 assert True
 {{< /code-block >}}
 
+For additional configuration see [Configuration Settings][1].
+
+[1]: #configuration-settings
 {{% /tab %}}
 
 {{% tab "Manual instrumentation (beta)" %}}
@@ -375,8 +374,10 @@ if __name__ == "__main__":
     api.TestSession.finish()
 ```
 
-[1]: https://github.com/DataDog/dd-trace-py
+For additional configuration see [Configuration Settings][2].
 
+[1]: https://github.com/DataDog/dd-trace-py
+[2]: #configuration-settings
 {{% /tab %}}
 
 {{< /tabs >}}
