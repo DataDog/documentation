@@ -615,3 +615,4 @@ GlobalRumMonitor.get().getCurrentSessionId { sessionId ->
 [12]: https://square.github.io/okhttp/features/events/
 [13]: /real_user_monitoring/mobile_and_tv_monitoring/android/monitoring_app_performance/#interaction-to-next-view
 [13]: /real_user_monitoring/mobile_and_tv_monitoring/android/monitoring_app_performance/#interaction-to-next-view
+[13]: /real_user_monitoring/mobile_and_tv_monitoring/android/monitoring_app_performance/#interaction-to-next-view
