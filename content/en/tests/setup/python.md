@@ -73,7 +73,7 @@ For more information, see the [Python tracer installation documentation][1].
 {{< tabs >}}
 {{% tab "pytest" %}}
 
-To enable instrumentation of `pytest` tests, add the `--ddtrace` option when running `pytest`. Specify the test session name with the `DD_TEST_SESSION_NAME` environment variable, which identifies the group of tests about to run. Examples of this values are `unit-tests`, `integration-tests` or `smoke-tests`.
+To enable instrumentation of `pytest` tests, add the `--ddtrace` option when running `pytest`. Specify the test session name with the `DD_TEST_SESSION_NAME` environment variable, which identifies the group of tests about to run. Examples of this value would be `unit-tests`, `integration-tests` or `smoke-tests`.
 
 {{< code-block lang="shell" >}}
 DD_TEST_SESSION_NAME=unit-tests pytest --ddtrace
@@ -433,7 +433,7 @@ Use `DD_TEST_SESSION_NAME` to define the test session name for your tests (`test
 If `DD_TEST_SESSION_NAME` is not specified, the default value used is a combination of:
 
 - CI job name
-- Command used to run the tests (such as `yarn test`)
+- Command used to run the tests (such as `pytest --ddtrace`)
 
 The test session name should be unique within a repository to help you distinguish different groups of tests.
 
