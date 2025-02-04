@@ -93,7 +93,7 @@ You can install the Datadog .NET Profiler machine-wide so that any services on t
 1. With [Single Step APM Instrumentation][1], there is nothing else to install. Go to [Enabling the Profiler](#enabling-the-profiler) to see how to activate the profiler for an application.
 
 <div class="alert alert-warning">
-  <strong>Note:</strong> If APM was already manually installed, it is required to uninstall it by removing the following environment variables: CORECLR_ENABLE_PROFILING, CORECLR_PROFILER, CORECLR_PROFILER_PATH, and the value that points to Datadog.Linux.ApiWrapper.x64.so in LD_PRELOAD. If they are in your dockerfile, remove them.
+  <strong>Note:</strong> If APM was already manually installed, you must uninstall it by removing the following environment variables: <code>CORECLR_ENABLE_PROFILING</code>, <code>CORECLR_PROFILER</code>, <code>CORECLR_PROFILER_PATH</code>, and the value that points to <code>Datadog.Linux.ApiWrapper.x64.so</code> in <code>LD_PRELOAD</code>. For example, if you are setting these environment variables in your dockerfile for a service, you should remove them to avoid conflicts with Single Step Instrumentation.
   If these environment variables are still set, the corresponding old installed version vill be silently used instead of the one installed with Single Step Instrumentation.
 </div>
 
@@ -184,17 +184,17 @@ To install the .NET Profiler per-webapp:
    DD_VERSION=1.2.3
    ```
 
-Here are the supported values for `DD_PROFILING_ENABLED`environment variable:
+   Here are the supported values for `DD_PROFILING_ENABLED`environment variable:
 
-| Value                         | Description                                                                                                           |
-| ----------------------------- | --------------------------------------------------------------------------------------------------------------------- |
-| `1` or `true`                 | Activate the profiler.                                                                                                |
-| `Auto`                        | Activate the profiler if and only if (1) a trace has been created and (2) the application lasts more than 30 seconds. |
-| `0` or `false`                | Disable the profiler.                                                                                                 |
+   | Value                         | Description                                                                                                           |
+   | ----------------------------- | --------------------------------------------------------------------------------------------------------------------- |
+   | `1` or `true`                 | Activate the profiler.                                                                                                |
+   | `Auto`                        | Activate the profiler if and only if (1) a trace has been created and (2) the application lasts more than 30 seconds. |
+   | `0` or `false`                | Disable the profiler.                                                                                                 |
 
-<div class="alert alert-info">
-  <strong>Note</strong>: The Auto value is aimed to avoid short lived processes without any trace. This is in preview and this setting will soon be integrated into the Single Step Instrumentation workflow.
-</div>
+   <div class="alert alert-info">
+     <strong>Note</strong>: The Auto value is aimed to avoid short lived processes without any trace. This is in preview and this setting will soon be integrated into the Single Step Instrumentation workflow.
+   </div>
 
 [1]: https://docs.datadoghq.com/tracing/trace_collection/automatic_instrumentation/single-step-apm
 {{% /tab %}}
