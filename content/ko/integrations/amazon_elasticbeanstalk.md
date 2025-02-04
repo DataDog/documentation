@@ -9,6 +9,7 @@ categories:
 - log collection
 - network
 - provisioning
+custom_kind: 통합
 dependencies: []
 description: 핵심 AWS Elastic Beanstalk 메트릭을 추적하세요.
 doc_link: https://docs.datadoghq.com/integrations/amazon_elasticbeanstalk/
@@ -23,7 +24,6 @@ integration_id: ''
 integration_title: AWS Elastic Beanstalk
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: '1.0'
 name: amazon_elasticbeanstalk
 public_title: Datadog-AWS Elastic Beanstalk 통합
@@ -56,7 +56,7 @@ AWS에서 검색된 각 메트릭에는 호스트 이름, 보안 그룹 등을 �
 
 AWS Elastic Beanstalk 통합은 이벤트를 포함하지 않습니다.
 
-### 서비스 검사
+### 서비스 점검
 
 AWS Elastic Beanstalk 통합은 서비스 점검을 포함하지 않습니다.
 
@@ -109,15 +109,19 @@ process_config:
 컨테이너 설정이 없는 경우 [설정 파일을 통한 Advanced Environment Customization][1]을 사용하여 Elastic Beanstalk에서 Datadog 에이전트를 설치합니다. (.ebextensions):
 
 1. [애플리케이션 소스 번들][2]의 루트에 `.ebextensions`란 이름의 폴더를 생성합니다.
-2. [99datadog-windows.config][3]를 다운로드한 다음 `.ebextensions` 폴더로 이동시킵니다.
+2. [99datadog-windows.config][3]를 다운로드한 다음 `.ebextensions` 폴더로 이동시킵니다. 샘플 구성을 검토하고 필요할 경우 수정합니다.
 3. `99datadog-windows.config`에서 `APIKEY` 값을 [Datadog API 키][4]로 대체합니다.
-4. (선택 항목) `99datadog-windows.config` 파일이 .NET APM 트레이싱 라이브러리에 추가되어 트레이스를 생성합니다. 환경에서 APM을 활성화하지 않으려면, `packages` 섹션, `02_setup-APM1` 섹션, `03_setup-APM2` 섹션을 제거합니다.
-5. (선택 항목) 환경 변수를 추가하려면 `99datadog-windows.config`의 `00_setup-env1` 섹션에서 설정합니다. 환경 변수를 설정하지 않으려면 이 섹션을 제거할 수 있습니다.
-6. [Elastic Beanstalk Console][5], [EB CLI][6] 또는 [AWS CLI][7]를 사용해 애플리케이션을 배포합니다.
+4. (선택 항목) 환경 변수를 추가하려면 `99datadog-windows.config`의 `00_setup-env1` 섹션에서 설정합니다. 환경 변수를 설정하지 않으려면 이 섹션을 제거할 수 있습니다.
+5. (선택 사항) 내 환경에서 APM을 활성화하고 싶지 않을 경우, `packages.msi.DotnetAPM` 섹션, `02_setup-APM1` 섹션, `03_setup-APM2` 섹션을 제거합니다. 
+7. **Trace Collection with .NET APM**의 경우:
+    1. [dd-trace-dotnet 릴리즈 노트][5]에서 `packages.msi.DotnetAPM` 링크를 원하는 버전의 MSI 파일(Windows 설치 관리자)로 대체합니다.
+    2. (선택 사항) .NET APM의 환경 변수를 추가하려면 `99datadog-windows.config`의 `00_setup-env1` 섹션에서 설정합니다. 
+8. [Elastic Beanstalk Console][6], [EB CLI][7] 또는 [AWS CLI][8]를 사용해 애플리케이션을 배포합니다.
+
 
 #### 트레이스 수집
 
-애플리케이션이 컨테이너화되지 않았고 Datadog 에이전트가 `99datadog-windows.config`로 설정되지 않은 경우 트레이싱은 추가 설정 없이 활성화됩니다. 트레이싱 계측에 대한 자세한 정보는 [Datadog APM 설정][8]을 참조하세요.
+애플리케이션이 컨테이너화되지 않았고 Datadog 에이전트가 `99datadog-windows.config`로 설정되지 않은 경우 트레이싱은 이전 섹션에서 안내된 단계 외 추가 구성 없이 활성화됩니다. 트레이싱 계측에 대한 자세한 정보는 [Datadog APM 설정][9]을 참조하세요.
 
 
 
@@ -125,10 +129,11 @@ process_config:
 [2]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/applications-sourcebundle.html
 [3]: https://docs.datadoghq.com/ko/config/99datadog-windows.config
 [4]: https://app.datadoghq.com/organization-settings/api-keys
-[5]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-configuration-methods-during.html#configuration-options-during-console-ebextensions
-[6]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-configuration-methods-during.html#configuration-options-during-ebcli
-[7]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-configuration-methods-during.html#configuration-options-during-awscli
-[8]: https://docs.datadoghq.com/ko/tracing/setup/
+[5]: https://github.com/DataDog/dd-trace-dotnet/releases
+[6]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-configuration-methods-during.html#configuration-options-during-console-ebextensions
+[7]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-configuration-methods-during.html#configuration-options-during-ebcli
+[8]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-configuration-methods-during.html#configuration-options-during-awscli
+[9]: https://docs.datadoghq.com/ko/tracing/setup/
 {{% /tab %}}
 
 {{% tab "Single container" %}}
@@ -169,7 +174,7 @@ process_config:
 
 모든 언어에 대해 게이트웨이 IP에 대한 환경 변수를 `DD_AGENT_HOST`로 설정합니다. 대신 프로그래밍 방식으로 다음을 사용해 아래 언어에 대한 호스트 이름을 설정할 수 있습니다.
 
-##### Python
+##### 파이썬(Python)
 
 ```python
 from ddtrace import tracer

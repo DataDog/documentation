@@ -165,7 +165,7 @@ Under `@threat_intel.results` you can always see the full details of what was ma
 [2]: /integrations/guide/reference-tables
 [3]: /security/threat_intelligence/#threat-intelligence-facets
 [4]: https://app.datadoghq.com/reference-tables/create
-[5]: https://app.datadoghq.com/security/configuration/asm/threat-intel
+[5]: https://app.datadoghq.com/security/configuration/threat-intel
 [6]: https://app.datadoghq.com/security/configuration/asm/rules/edit/kdb-irk-nua?product=appsec
 [7]: /security/threat_intelligence#threat-intelligence-categories
 [8]: /security/threat_intelligence#threat-intelligence-intents

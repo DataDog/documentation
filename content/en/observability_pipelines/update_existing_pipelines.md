@@ -18,10 +18,20 @@ For existing pipelines in Observability Pipelines, you can update and deploy cha
 
 ### Update source or destination variables
 
-On the the Worker installation page:
+On the Worker installation page:
 1. Select your platform in the **Choose your installation platform** dropdown menu.
 1. If you want to update source environment variables, update the information for your log source.
 {{< tabs >}}
+<!-- {{% tab "Amazon Data Firehose" %}}
+
+{{% observability_pipelines/configure_existing_pipelines/source_env_vars/amazon_data_firehose %}}
+
+{{% /tab %}} -->
+{{% tab "Amazon S3" %}}
+
+{{% observability_pipelines/configure_existing_pipelines/source_env_vars/amazon_s3 %}}
+
+{{% /tab %}}
 {{% tab "Datadog Agent" %}}
 
 {{% observability_pipelines/configure_existing_pipelines/source_env_vars/datadog_agent %}}
@@ -45,6 +55,11 @@ On the the Worker installation page:
 {{% tab "HTTP Server" %}}
 
 {{% observability_pipelines/configure_existing_pipelines/source_env_vars/http_server %}}
+
+{{% /tab %}}
+{{% tab "Kafka" %}}
+
+{{% observability_pipelines/configure_existing_pipelines/source_env_vars/kafka %}}
 
 {{% /tab %}}
 {{% tab "Logstash" %}}
@@ -75,6 +90,21 @@ On the the Worker installation page:
 {{< /tabs >}}
 1. If you want to update destination environment variables, update the information for your log destination.
 {{< tabs >}}
+{{% tab "Amazon OpenSearch" %}}
+
+{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/amazon_opensearch %}}
+
+{{% /tab %}}
+{{% tab "Chronicle" %}}
+
+{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/chronicle %}}
+
+{{% /tab %}}
+{{% tab "Datadog" %}}
+
+{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/datadog %}}
+
+{{% /tab %}}
 {{% tab "Datadog Archives" %}}
 
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/datadog_archives_amazon_s3 %}}
@@ -83,11 +113,30 @@ On the the Worker installation page:
 
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/datadog_archives_azure_storage %}}
 
+{{% /tab %}}
+{{% tab "Elasticsearch" %}}
+
+{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/elasticsearch %}}
 
 {{% /tab %}}
-{{% tab "Datadog" %}}
+{{% tab "Microsoft Sentinel" %}}
 
-{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/datadog %}}
+{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/microsoft_sentinel %}}
+
+{{% /tab %}}
+{{% tab "New Relic" %}}
+
+{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/new_relic %}}
+
+{{% /tab %}}
+{{% tab "OpenSearch" %}}
+
+{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/opensearch %}}
+
+{{% /tab %}}
+{{% tab "SentinelOne" %}}
+
+{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/sentinelone %}}
 
 {{% /tab %}}
 {{% tab "Splunk HEC" %}}
@@ -105,32 +154,8 @@ On the the Worker installation page:
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/syslog %}}
 
 {{% /tab %}}
-{{% tab "Chronicle" %}}
-
-{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/chronicle %}}
-
-{{% /tab %}}
-{{% tab "Elasticsearch" %}}
-
-{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/elasticsearch %}}
-
-{{% /tab %}}
-{{% tab "OpenSearch" %}}
-
-{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/opensearch %}}
-
-{{% /tab %}}
-{{% tab "Amazon OpenSearch" %}}
-
-{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/amazon_opensearch %}}
-
-{{% /tab %}}
-{{% tab "New Relic" %}}
-
-{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/new_relic %}}
-
-{{% /tab %}}
 {{< /tabs >}}
+
 1. Follow the instructions for your environment to update the worker:
 {{< tabs >}}
 {{% tab "Docker" %}}
