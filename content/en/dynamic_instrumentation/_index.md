@@ -46,7 +46,7 @@ Dynamic Instrumentation requires the following:
 - For Java applications, tracing library [`dd-trace-java`][3] 1.34.0 or higher.
 - For Python applications, tracing library [`dd-trace-py`][4] 2.2.0 or higher.
 - For .NET applications, tracing library [`dd-trace-dotnet`][5] 2.54.0 or higher.
-- (Limited Preview) For Node.js applications, tracing library [`dd-trace-js`][18] 5.32.0 or higher.
+- (Limited Preview) For Node.js applications, tracing library [`dd-trace-js`][18] 5.35.0 or higher.
 - (Limited Preview) For Ruby applications, tracing library [`dd-trace-rb`][19] 2.9.0 or higher.
 - [Unified Service Tagging][6] tags `service`, `env`, and `version` are applied to your deployment.
 - Recommended, [autocomplete and search (in Preview)][17] is enabled.
