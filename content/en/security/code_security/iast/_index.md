@@ -1,5 +1,5 @@
 ---
-title: IAST
+title: Runtime Code Analysis (IAST)
 disable_toc: false
 aliases:
 - /security/application_security/code_security/
@@ -7,15 +7,11 @@ aliases:
 
 ## Overview
 
-Datadog Runtime Code Analysis (IAST) identifies code-level vulnerabilities in your services and provides actionable insights and recommended fixes.
-
-For a list of supported services, see the [Library Compatibility Requirements][5].
-
-Runtime Code Analysis uses an Interactive Application Security Testing (IAST) approach to find vulnerabilities within your application code based on your Datadog application instrumentation.
+Datadog Runtime Code Analysis (IAST) identifies code-level vulnerabilities in your services, using an Interactive Application Security Testing (IAST) approach to find vulnerabilities within your application code based on your Datadog application instrumentation.
 
 IAST enables Datadog to identify vulnerabilities using legitimate application traffic instead of relying on external tests that could require extra configuration or periodic scheduling. It also monitors your code’s interactions with other components of your stack, such as libraries and infrastructure, providing an up-to-date view of your attack surface area.
 
-The Code Security detection rules support the following languages.
+For a list of supported services, see the [Library Compatibility Requirements][5]. IAST detection rules support the following languages:
 
 | Severity | Detection Rule                        | Java  | .NET  | Node.js | Python |
 | -------- | ------------------------------------- | ----- | ----- | ------- |--------|
@@ -75,7 +71,7 @@ The risk score is tailored to the specific runtime context, including factors su
 
 {{< img src="/code_security/vulnerability_prioritization.png" alt="Code Security vulnerability prioritization" style="width:100%;" >}}
 
-## Remediation
+## Remediate a code vulnerability 
 
 Datadog Code Security automatically provides the information teams need to identify where a vulnerability is in an application, from the affected filename down to the exact method and line number.
 
@@ -95,25 +91,24 @@ Recommendations enable you to change the status of a vulnerability, assign it to
 
 **Note:** To create Jira issues for vulnerabilities, you must configure the Jira integration, and have the `manage_integrations` permission. For detailed instructions, see the [Jira integration][3] documentation, as well as the [Role Based Access Control][4] documentation.
 
-## Enabling Code Security
+## Enable Runtime Code Analysis (IAST)
 
-To enable Code Security configure the [Datadog Tracing Library][9]. Detailed instructions for both methods can be found in the [**Security > Code Security > Settings**][10] section.
+To enable IAST, configure the [Datadog Tracing Library][9]. Detailed instructions for both methods can be found in the [**Security > Code Security > Settings**][10] section.
 
 If you need additional help, contact [Datadog support][11].
 
 ## Disable Code Security
-
-For information on disabling Code Security, see [Disabling Code Security][12].
+For information on disabling IAST, see [Disabling Code Security][12].
 
 
 [1]: https://app.datadoghq.com/security/appsec/vm/code
 [2]: /security/code_security/iast/setup/java/
 [3]: /integrations/jira/
 [4]: /account_management/rbac/permissions/#integrations
-[5]: /security/code_security/iast/setup/
+[5]: /security/code_security/iast/setup/#using-datadog-tracing-libraries
 [6]: https://docs.google.com/forms/d/1wsgbd80eImvJSjXe5y5VCjAW0zzn5p3CoCLsOy0vqsk/
 [7]: /integrations/github/
 [9]: /security/code_security/iast/setup/
 [10]: https://app.datadoghq.com/security/configuration/code-security/setup
 [11]: https://www.datadoghq.com/support/
-[12]: /security/application_security/troubleshooting/#disabling-code-security
+[12]: /security/code_security/troubleshooting

@@ -55,21 +55,21 @@
   ],
   "CreateApp": [
     {
-      "group": "apps",
+      "group": "app_builder",
       "suffix": "",
-      "description": "Create App returns \"App Created\" response"
+      "description": "Create App returns \"Created\" response"
     }
   ],
   "DeleteApps": [
     {
-      "group": "apps",
+      "group": "app_builder",
       "suffix": "",
       "description": "Delete Multiple Apps returns \"OK\" response"
     }
   ],
   "UpdateApp": [
     {
-      "group": "apps",
+      "group": "app_builder",
       "suffix": "",
       "description": "Update App returns \"OK\" response"
     }
@@ -746,11 +746,25 @@
       "description": "Create api handle returns \"CREATED\" response"
     }
   ],
+  "CreateWorkflowsWebhookHandle": [
+    {
+      "group": "microsoft_teams_integration",
+      "suffix": "_1716851881",
+      "description": "Create workflow webhook handle returns \"CREATED\" response"
+    }
+  ],
   "UpdateTenantBasedHandle": [
     {
       "group": "microsoft_teams_integration",
       "suffix": "_419892746",
       "description": "Update api handle returns \"OK\" response"
+    }
+  ],
+  "UpdateWorkflowsWebhookHandle": [
+    {
+      "group": "microsoft_teams_integration",
+      "suffix": "_163189594",
+      "description": "Update workflow webhook handle returns \"OK\" response"
     }
   ],
   "CreateMonitorConfigPolicy": [
@@ -972,6 +986,20 @@
       "description": "Create a detection rule with type 'workload_security' returns \"OK\" response"
     }
   ],
+  "CreateSignalNotificationRule": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Create a new signal-based rule returns \"Successfully created the notification rule.\" response"
+    }
+  ],
+  "CreateVulnerabilityNotificationRule": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Create a new vulnerability-based rule returns \"Successfully created the notification rule.\" response"
+    }
+  ],
   "CreateSecurityFilter": [
     {
       "group": "security_monitoring",
@@ -1010,6 +1038,20 @@
       "group": "security_monitoring",
       "suffix": "",
       "description": "Mute or unmute a batch of findings returns \"OK\" response"
+    }
+  ],
+  "PatchSignalNotificationRule": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Patch a signal-based rule returns \"Notification rule successfully patched.\" response"
+    }
+  ],
+  "PatchVulnerabilityNotificationRule": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Patch a vulnerability-based rule returns \"Notification rule successfully patched.\" response"
     }
   ],
   "RunHistoricalJob": [
