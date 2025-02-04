@@ -64,8 +64,8 @@ data/sdk_versions.json                                        @Datadog/documenta
 layouts/shortcodes/**/*.md                                    @DataDog/documentation
 
 # SDK versions
-.github/workflows/bump_versions.yml   @DataDog/api-clients @DataDog/web-frameworks @DataDog/documentation @DataDog/WebOps-Platform
-/data/sdk_versions.json               @DataDog/api-clients @DataDog/web-frameworks @DataDog/documentation
+.github/workflows/bump_versions.yml   @DataDog/web-frameworks @DataDog/documentation @DataDog/WebOps-Platform
+/data/sdk_versions.json               @DataDog/web-frameworks @DataDog/documentation
 
 # Serverless
 
