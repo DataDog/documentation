@@ -38,7 +38,7 @@ Incident Management collects the following analytic measures to form analytic qu
 - Customer Impact Duration
 - Status Active Duration
 - Status Stable Duration
-- Time to Detect (detected - customer impact start time)
+- Time to Detect (detected time - customer impact start time)
 - Time to Repair (customer impact end time - detected time)
 - Time to Resolve (resolved time - created time)
 - Number of Users Impacted
@@ -46,7 +46,7 @@ Incident Management collects the following analytic measures to form analytic qu
 
 In addition to these defaults, you can create new measures by adding custom *Number* property fields in your [Incident Settings][7]. 
 
-*Note:* If you override a timestamp, the override will be used for calculating Time to Detect, Time to Repair, and Time to Resolve.
+**Note:** If you override a timestamp, the override value will be used to calculate Time to Detect, Time to Repair, and Time to Resolve.
 
 ## Visualize incident data in dashboards
 
