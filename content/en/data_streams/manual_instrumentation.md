@@ -130,7 +130,8 @@ static void SetHeader(Headers headers, string key, string value)
 }
 {{< /code-block >}}
 
-In your consumer
+#### Consumer configuration
+
 {{< code-block lang="csharp" >}}
 using Datadog.Trace;
 
