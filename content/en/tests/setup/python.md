@@ -73,17 +73,27 @@ For more information, see the [Python tracer installation documentation][1].
 {{< tabs >}}
 {{% tab "pytest" %}}
 
-To enable instrumentation of `pytest` tests, add the `--ddtrace` option when running `pytest`, specifying the name of the service or library under test in the `DD_SERVICE` environment variable, and the environment where tests are being run (for example, `local` when running tests on a developer workstation, or `ci` when running them on a CI provider) in the `DD_ENV` environment variable:
+To enable instrumentation of `pytest` tests, add the `--ddtrace` option when running `pytest`. Specify the test session name with the `DD_TEST_SESSION_NAME` environment variable, which identifies the group of tests about to run. Examples of this values are `unit-tests`, `integration-tests` or `smoke-tests`.
 
 {{< code-block lang="shell" >}}
-DD_SERVICE=my-python-app DD_ENV=ci pytest --ddtrace
+DD_TEST_SESSION_NAME=unit-tests pytest --ddtrace
 {{< /code-block >}}
 
 If you also want to enable the rest of the APM integrations to get more information in your flamegraph, add the `--ddtrace-patch-all` option:
 
 {{< code-block lang="shell" >}}
-DD_SERVICE=my-python-app DD_ENV=ci pytest --ddtrace --ddtrace-patch-all
+DD_TEST_SESSION_NAME=unit-tests pytest --ddtrace --ddtrace-patch-all
 {{< /code-block >}}
+
+Additionally you may pass these environment variables:
+
+`DD_SERVICE`
+: Name of the service or library under test.<br/>
+**Example**: `my-ui`
+
+`DD_ENV`
+: Name of the environment where tests are being run.<br/>
+**Examples**: `local`, `ci`
 
 ### Adding custom tags to tests
 
@@ -142,12 +152,11 @@ def test_square_value(benchmark):
 
 To enable instrumentation of `unittest` tests, run your tests by appending `ddtrace-run` to the beginning of your `unittest` command.
 
-Make sure to specify the name of the service or library under test in the `DD_SERVICE` environment variable.
-Additionally, you may declare the environment where tests are being run in the `DD_ENV` environment variable:
-
 {{< code-block lang="shell" >}}
-DD_SERVICE=my-python-app DD_ENV=ci ddtrace-run python -m unittest
+DD_TEST_SESSION_NAME=python-integration-tests ddtrace-run python -m unittest
 {{< /code-block >}}
+
+Optionally specify the name of the service or library under test in the `DD_SERVICE` environment variable.
 
 Alternatively, if you wish to enable `unittest` instrumentation manually, use `patch()` to enable the integration:
 
@@ -376,6 +385,12 @@ if __name__ == "__main__":
 
 The following is a list of the most important configuration settings that can be used with the tracer, either in code or using environment variables:
 
+`DD_TEST_SESSION_NAME`
+: Use it to identify a group of tests, such as `integration-tests`, `unit-tests` or `smoke-tests`.<br/>
+**Environment variable**: `DD_TEST_SESSION_NAME`<br/>
+**Default**: (CI job name + test command)<br/>
+**Example**: `unit-tests`, `integration-tests`, `smoke-tests`
+
 `DD_SERVICE`
 : Name of the service or library under test.<br/>
 **Environment variable**: `DD_SERVICE`<br/>
@@ -401,6 +416,34 @@ All other [Datadog Tracer configuration][3] options can also be used.
 ## Collecting Git metadata
 
 {{% ci-git-metadata %}}
+
+## Best practices
+
+### Test session name `DD_TEST_SESSION_NAME`
+
+Use `DD_TEST_SESSION_NAME` to define the test session name for your tests (`test_session.name` tag). Use this to identify a group of tests. Examples of values for this tag would be:
+
+- `unit-tests`
+- `integration-tests`
+- `smoke-tests`
+- `flaky-tests`
+- `ui-tests`
+- `backend-tests`
+
+If `DD_TEST_SESSION_NAME` is not specified, the default value used is a combination of:
+
+- CI job name
+- Command used to run the tests (such as `yarn test`)
+
+The test session name should be unique within a repository to help you distinguish different groups of tests.
+
+#### When to use `DD_TEST_SESSION_NAME`
+
+If your tests are run with commands that include a dynamic string, such as:
+
+- `pytest --temp-dir=/var/folders/t1/rs2htfh55mz9px2j4prmpg_c0000gq/T`
+
+The default value for the test session name will be unstable. It is recommended to use `DD_TEST_SESSION_NAME` in this case.
 
 ## Known limitations
 
