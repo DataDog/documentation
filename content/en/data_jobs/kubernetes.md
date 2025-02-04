@@ -59,6 +59,10 @@ You can install the Datadog Agent using the [Datadog Operator][3] or [Helm][4].
        admissionController:
          enabled: true
          mutateUnlabelled: false
+       # Optionally uncomment the 3 next lines to  enable logs collection
+       # logCollection:
+         # enabled: true
+         # containerCollectAll: true
      global:
        site: <DATADOG_SITE>
        credentials:
@@ -76,6 +80,8 @@ You can install the Datadog Agent using the [Datadog Operator][3] or [Helm][4].
    Replace `<DATADOG_SITE>` with your [Datadog site][5]. Your site is {{< region-param key="dd_site" code="true" >}}. (Ensure the correct SITE is selected on the right).
 
    Replace `<DATADOG_AGENT_VERSION>` with version `7.55.0` or later.
+
+   **Optional**: Uncomment the logCollection section to start collecting application logs. This will collect all logs from all discovered containers by default. See the [Logs Collection documentation][7] for more details on the setup.
 1. Deploy the Datadog Agent with the above configuration file:
    ```shell
    kubectl apply -f /path/to/your/datadog-agent.yaml
@@ -86,6 +92,7 @@ You can install the Datadog Agent using the [Datadog Operator][3] or [Helm][4].
 [4]: https://app.datadoghq.com/organization-settings/api-keys
 [5]: /getting_started/site
 [6]: https://app.datadoghq.com/organization-settings/application-keys
+[7]: /containers/kubernetes/log/?tab=datadogoperator#log-collection
 {{% /tab %}}
 {{% tab "Helm" %}}
 
@@ -104,6 +111,10 @@ You can install the Datadog Agent using the [Datadog Operator][3] or [Helm][4].
      apm:
        portEnabled: true
        port: 8126
+     # Optionally uncomment the 3 next lines to  enable logs collection
+     # logs:
+       # enabled: true
+       # containerCollectAll: true
 
    agents:
      image:
@@ -117,6 +128,8 @@ You can install the Datadog Agent using the [Datadog Operator][3] or [Helm][4].
    Replace `<DATADOG_SITE>` with your [Datadog site][4]. Your site is {{< region-param key="dd_site" code="true" >}}. (Ensure the correct SITE is selected on the right).
 
    Replace `<DATADOG_AGENT_VERSION>` with version `7.55.0` or later.
+
+  **Optional**: Uncomment the logs section to start collecting application logs. This will collect all logs from all discovered containers by default. See the [Logs Collection documentation][5] for more details on the setup.
 1. Run the following command:
    ```shell
    helm install <RELEASE_NAME> \
@@ -133,6 +146,7 @@ You can install the Datadog Agent using the [Datadog Operator][3] or [Helm][4].
 [2]: https://app.datadoghq.com/organization-settings/api-keys
 [3]: https://app.datadoghq.com/organization-settings/application-keys
 [4]: /getting_started/site
+[5]: /containers/kubernetes/log/?tab=helm#log-collection
 {{% /tab %}}
 {{< /tabs >}}
 
