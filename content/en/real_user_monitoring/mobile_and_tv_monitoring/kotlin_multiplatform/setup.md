@@ -73,6 +73,7 @@ Add the following Datadog iOS SDK dependencies, which are needed for the linking
 | 0.0.2                                    | 2.17.0                  |
 | 0.0.3                                    | 2.17.0                  |
 | 0.4.0                                    | 2.20.0                  |
+| 0.5.0                                    | 2.22.1                  |
 
 #### Adding native iOS dependencies using the CocoaPods plugin
 
@@ -349,7 +350,7 @@ To update the tracking consent after the SDK is initialized, call `Datadog.setTr
 
 ### Initialize the RUM Ktor plugin to track network events made with Ktor
 
-1. Add the Gradle dependency to the `dd-sdk-kotlin-multiplatform-ktor` library in the your `build.gradle.kts` file:
+1. In your `build.gradle.kts` file, add the Gradle dependency to `dd-sdk-kotlin-multiplatform-ktor` for Ktor 2.x, or `dd-sdk-kotlin-multiplatform-ktor3` for Ktor 3.x:
 
 ```kotlin
 kotlin {
@@ -357,7 +358,10 @@ kotlin {
     sourceSets {
         // ...
         commonMain.dependencies {
+            // Use this line if you are using Ktor 2.x
             implementation("com.datadoghq:dd-sdk-kotlin-multiplatform-ktor:x.x.x")
+            // Use this line if you are using Ktor 3.x
+            // implementation("com.datadoghq:dd-sdk-kotlin-multiplatform-ktor3:x.x.x")
         }
     }
 }
