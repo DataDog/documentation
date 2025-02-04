@@ -141,8 +141,8 @@ var msg = consumer.Consume();
 var parentContext = new SpanContextExtractor().ExtractIncludingDsm(
     msg.Headers,
     GetHeader,
-    messageType: "<datastream-type>",
-    source: "<queue-or-topic-name>"
+    messageType: "<DATASTREAM-TYPE>",
+    source: "<QUEUE-OR-TOPIC-NAME>"
 );
 
 using (var scope = Tracer.Instance.StartActive("consume",
