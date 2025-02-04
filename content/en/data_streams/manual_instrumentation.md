@@ -103,7 +103,8 @@ The following example propogates the trace context. See [Trace Context Propagati
   <strong>Note:</strong> In async operations, this may not work as expected because the context derived from the incoming message can be lost when producing a new message in different threads.
 </div>
 
-In your producer
+#### Producer configuration
+
 {{< code-block lang="csharp" >}}
 using Datadog.Trace;
 
