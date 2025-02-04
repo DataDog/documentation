@@ -97,7 +97,7 @@ set_consume_checkpoint(
 {{< /code-block >}}
 {{% /tab %}}
 {{% tab ".Net" %}}
-The following example propagates the trace context. See [Trace Context Propagation][1] for more information.
+The following example propagates the trace context. See [Trace Context Propagation][6] for more information.
 
 <div class="alert alert-warning">
   <strong>Note:</strong> In async operations, this may not work as expected because the context derived from the incoming message can be lost when producing a new message in different threads.
@@ -161,7 +161,7 @@ static IEnumerable<string?> GetHeader(Headers headers, string key)
 {
     yield return header.GetByKey(key);
 }
-{{< /code-block >}}[1]: https://docs.datadoghq.com/tracing/trace_collection/trace_context_propagation/?tab=net#additional-use-cases
+{{< /code-block >}}
 {{% /tab %}}
 {{< /tabs >}}
 ## Further Reading
@@ -173,3 +173,4 @@ static IEnumerable<string?> GetHeader(Headers headers, string key)
 [3]: https://pypi.org/project/confluent-kafka/
 [4]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-metadata.html
 [5]: /agent/remote_config/?tab=configurationyamlfile#enabling-remote-configuration
+[6]: https://docs.datadoghq.com/tracing/trace_collection/trace_context_propagation/?tab=net#additional-use-cases
