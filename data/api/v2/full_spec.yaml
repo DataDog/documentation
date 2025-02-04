@@ -1850,7 +1850,7 @@ components:
       - base_severity
       type: object
     ApiID:
-      description: API identifier.
+      description: Test
       example: 90646597-5fdb-4a17-a240-647003f8c028
       format: uuid
       type: string
