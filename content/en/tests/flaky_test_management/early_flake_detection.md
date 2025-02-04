@@ -19,10 +19,6 @@ further_reading:
 <div class="alert alert-warning">Early Flake Detection is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
-{{< callout url="#" btn_hidden="true" header="Join the Preview!" >}}
-Early Flake Detection is in Preview.
-{{< /callout >}}
-
 ## Overview
 
 Early Flake Detection is Datadog's test flakiness solution that enhances code quality by identifying [flaky tests][1] early in the development cycle. For more information about flaky tests, see [Flaky Test Management][2].
