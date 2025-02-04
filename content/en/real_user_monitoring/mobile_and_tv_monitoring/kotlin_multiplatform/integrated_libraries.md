@@ -43,7 +43,7 @@ val ktorClient = HttpClient {
                 "example.com" to setOf(TracingHeaderType.DATADOG),
                 "example.eu" to setOf(TracingHeaderType.DATADOG)
             ),
-            traceSamplingRate = 100f
+            traceSampleRate = 100f
         )
     )
 }
