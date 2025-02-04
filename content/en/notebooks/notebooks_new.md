@@ -106,8 +106,6 @@ Additional graph configuration options are accessible under the three-dot ellips
 
 Notebooks support commonly used rich text features like bold, italics, inline code, and headers. Notebooks also support a variety of list types such as bullet, numbered, or check list. 
 
-| Feature      | Description                                                                                          |
-|--------------|------------------------------------------------------------------------------------------------------|
 | Feature       | Description                                                                                                      |
 |---------------|------------------------------------------------------------------------------------------------------------------|
 | **Bold**      | To bold text, select it and press <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>B</kbd>.                                 |
