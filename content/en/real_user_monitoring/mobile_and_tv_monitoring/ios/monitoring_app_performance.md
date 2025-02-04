@@ -1,9 +1,9 @@
 ---
 title: Android Monitoring App Performance
 further_reading:
-- link: https://github.com/DataDog/dd-sdk-android
+- link: https://github.com/DataDog/dd-sdk-ios
   tag: "Source Code"
-  text: Source code for dd-sdk-android
+  text: Source code for dd-sdk-ios
 - link: /real_user_monitoring
   tag: Documentation
   text: Explore Datadog RUM
