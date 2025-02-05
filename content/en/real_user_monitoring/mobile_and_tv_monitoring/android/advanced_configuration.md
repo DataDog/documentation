@@ -349,7 +349,7 @@ You can use the following methods in `RumConfiguration.Builder` when creating th
 : Sets a custom identifier for initial network resources used for [Time-to-Network-Settled][11] (TNS) view timing calculation.
 
 `setLastInteractionIdentifier`
-: Sets a custom identifier for the last interaction in the previous view used for [Interaction-to-Next-View[14]] (INV) timing calculation.
+: Sets a custom identifier for the last interaction in the previous view used for [Interaction-to-Next-View][13] (INV) timing calculation.
 
 `setLongTaskEventMapper`
 : Sets the EventMapper for the RUM LongTaskEvent. You can use this interface implementation to modify the LongTaskEvent attributes before serialization.
@@ -613,3 +613,6 @@ GlobalRumMonitor.get().getCurrentSessionId { sessionId ->
 [10]: https://github.com/DataDog/dd-sdk-android/tree/master/sample/kotlin/src/main/kotlin/com/datadog/android/sample/widget
 [11]: /real_user_monitoring/mobile_and_tv_monitoring/android/monitoring_app_performance/#time-to-network-settled
 [12]: https://square.github.io/okhttp/features/events/
+[13]: /real_user_monitoring/mobile_and_tv_monitoring/android/monitoring_app_performance/#interaction-to-next-view
+[13]: /real_user_monitoring/mobile_and_tv_monitoring/android/monitoring_app_performance/#interaction-to-next-view
+[13]: /real_user_monitoring/mobile_and_tv_monitoring/android/monitoring_app_performance/#interaction-to-next-view
