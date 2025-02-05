@@ -45,7 +45,7 @@ To enable Remote Agent Management:
 ### Prerequisites
 
 * **User permissions**: Users must have the [Agent Upgrade][2] permission within Fleet Automation. The permission is enabled by default on the Datadog Admin role.
-* **Disk space**: Datadog suggests at least 2GB for the initial Agent install and an additional 2GB for upgrading the Agent from Fleet Automation. Specifically, the upgrade requires 1.3GB in the `/opt/datadog-packages` directory. The extra space ensures that there is enough room to maintain two Agent installs temporarily during the upgrade process in case a rollback is needed.
+* **Disk space**: Datadog suggests at least 2GB for the initial Agent install and an additional 2GB for upgrading the Agent from Fleet Automation. Specifically, the upgrade requires 1.3GB in the `/opt/datadog-packages` directory on Linux and macOS, or `C:\ProgramData\Datadog Installer\packages` on Windows. The extra space ensures that there is enough room to maintain two Agent installs temporarily during the upgrade process in case a rollback is needed.
 
 ### Upgrade your Agents
 
@@ -68,9 +68,15 @@ To upgrade your Agents:
 Similar to a manual upgrade, expect a downtime of 5-30 seconds while the Agent restarts. The full upgrade process takes approximately 5 minutes. Around 2 minutes of this time is used for the upgrade process. The rest of the time is spent monitoring the upgrade to ensure stability and determining if a rollback is necessary. If the upgrade fails and a rollback is necessary, the Agent automatically reverts to the previously running Agent version.
 
 The upgrade process primarily adds files to the following directories:
+
+Linux and macOS:
 * `/opt/datadog-packages`
 * `/etc/datadog-agent`
 * `/etc/systemd/system`
+
+Windows:
+* `C:\ProgramData\Datadog Installer\packages`
+* `C:\Program Files\Datadog\Datadog Agent`
 
 The Agent ensures that the appropriate permissions are set for these files. No configuration files are altered during the installation process.
 
