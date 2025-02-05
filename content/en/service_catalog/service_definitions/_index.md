@@ -28,7 +28,7 @@ Service Catalog uses definition schemas to store and display relevant metadata a
 
 Datadog supports four versions of the definition schema:
 
-- [v3.0 (in Preview)][1]: Latest version with expanded data model, multi-ownership support, manual dependency declaration, and enhanced features for complex infrastructure.
+- [v3.0][1]: Latest version with expanded data model, multi-ownership support, manual dependency declaration, and enhanced features for complex infrastructure.
 - [v2.2][2]: Supports user annotations for custom metadata and CI pipeline associations to link services with their build processes.
 - [v2.1][3]: Supports service groupings for improved organization and introduces additional fields for more comprehensive service descriptions.
 - [v2][4]: Earliest supported version, providing essential fields for basic service metadata and documentation.
@@ -39,7 +39,7 @@ Each version builds upon the previous one, adding new functionality while mainta
 
 The following features are supported in each version:
 
-| Feature                       | v3.0 (in Preview) | v2.2      | v2.1      | v2.0        |
+| Feature                       | v3.0  | v2.2      | v2.1      | v2.0        |
 |-------------------------------|-------------|-----------|-----------|-----------|
 | Basic Metadata                | {{< X >}}   | {{< X >}} | {{< X >}} | {{< X >}} |
 | Service Groupings             | {{< X >}}   | {{< X >}} | {{< X >}} |           |
@@ -66,7 +66,7 @@ For detailed information about each version, including full schemas and example 
 
 #### Store and edit definitions in GitHub
 
-Configure the [GitHub integration][6] to directly link from where you view the service's definition in the Service Catalog to where it's stored and editable in GitHub. Datadog scans for the `service.datadog.yaml` file at the root of each repository with read permissions.
+Configure the [GitHub integration][6] to directly link from where you view the service's definition in the Service Catalog to where it's stored and editable in GitHub. Datadog scans for the `service.datadog.yaml` and `entity.datadog.yaml` files throughout each repository with read permissions.
 
 To install the GitHub integration:
 1. Navigate to the [integration tile][7].

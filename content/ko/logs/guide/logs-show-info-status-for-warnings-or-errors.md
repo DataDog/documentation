@@ -1,4 +1,12 @@
 ---
+algolia:
+  tags:
+  - grok
+  - Grok 파서
+  - 로그 파싱
+  - 속성 추출하기
+  - 속성 다시 매핑하기
+  - 파싱
 aliases:
 - /ko/logs/faq/why-do-my-logs-show-up-with-an-info-status-even-for-warnings-or-errors
 further_reading:
@@ -33,8 +41,8 @@ Datadog에서 원시 로그가 올바른 상태를 나타나지 않을 경우, �
 
 Grok 파서를 사용해 [`word()`][1]로 규칙을 정의하고 실제 로그 상태를 추출합니다.
 
-1. [Logs Pipline][2]으로 이동하고 로그를 처리하는 파이프라인을 클릭하세요.
-2. **Add Processor**를 클릭하세요.
+1. [Logs Pipelines][2]으로 이동하고 로그를 처리하는 파이프라인을 클릭하세요.
+2. **프로세서 추가**를 클릭합니다.
 3. 프로세서 유형에서 **Grok Parser**를 클릭하세요.
 4. [`word()` matcher][1]를 사용해 상태를 추출한 후 커스텀 `log_status` 속성으로 전달합니다.
 
@@ -66,8 +74,8 @@ MyParsingRule %{word:log_status}: %{word:user.name} %{word:action}.*
 
 `log_status` 속성에는 올바른 상태가 포함되어 있습니다. [Log Status remapper][3]를 추가해 기본 로그 상태가 항상 `log_status` 속성으로 재정의되도록 하세요.
 
-1. [Logs Pipline][2]으로 이동하고 로그를 처리하는 파이프라인을 클릭하세요.
-2. **Add Processor**를 클릭하세요.
+1. [Logs Pipelines][2]으로 이동하고 로그를 처리하는 파이프라인을 클릭하세요.
+2. **프로세서 추가**를 클릭합니다.
 3. 프로세서 유형에서 Status remapper를 선택하세요.
 4. 프로세서 이름을 입력하세요.
 5. 상태 속성 설정 섹션에 **log_status**를 추가하세요.
@@ -87,10 +95,10 @@ JSON 로그는 Datadog에서 자동으로 파싱됩니다. 로그 `status` 속�
 
 기본 로그 상태를 `logger_severity` 속성 값으로 재정의하려면 `logger_severity`를 상태 속성에 추가하세요.
 
-1. [Logs Pipline][2]으로 이동하고 로그를 처리하는 파이프라인을 클릭하세요.
+1. [Logs Pipelines][2]으로 이동하고 로그를 처리하는 파이프라인을 클릭하세요.
 2. Preprocessing for JSON Logs 위에 마우스 커서를 올리고 연필 아이콘을 클릭하세요.
 3. 상태 속성 목록에 `logger_severity`를 추가합니다. 목록에 나온 순서대로 상태 리매퍼가 예약된 속성을 모두 찾습니다. 상태가 `logger_severity` 속성에서 표시되도록 하려면 목록 첫 번째로 위치를 이동시키세요.
-4. **Save**를 클릭합니다.
+4. **Save**을 클릭합니다.
 
 {{< img src="logs/guide/new_log_remapped.png" alt="오류 logger_severity 속성 값과 일치하는 오류 상태 로그를 보여주는 로그 패널" style="width:50%;">}}
 

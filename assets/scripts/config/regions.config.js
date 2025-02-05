@@ -312,6 +312,14 @@ export default {
       ap1: 'http://ip-ranges.ap1.datadoghq.com/webhooks.json',
       gov: 'http://ip-ranges.ddog-gov.com/webhooks.json'
     },
+    ip_ranges_url_api: {
+     us: 'http://ip-ranges.datadoghq.com/api.json',
+     us3: 'http://ip-ranges.us3.datadoghq.com/api.json',
+     us5: 'http://ip-ranges.us5.datadoghq.com/api.json',
+     eu: 'http://ip-ranges.datadoghq.eu/api.json',
+     ap1: 'http://ip-ranges.ap1.datadoghq.com/api.json',
+     gov: 'http://ip-ranges.ddog-gov.com/api.json'
+   },
     vercel_setup: {
      us: 'http://app.datadoghq.com/setup/vercel',
      us3: 'http://us3.datadoghq.com/setup/vercel',
