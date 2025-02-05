@@ -14,10 +14,6 @@ further_reading:
   text: "Learn about Container Cost Allocation"
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/multisource-querying/" btn_hidden="false" header="Join the Preview!">}}
-Multisource Querying is in Preview. If you're interested in this feature, complete the form to request access.
-{{< /callout >}}
-
 ## Overview
 
 After you start ingesting your [AWS][1], [Azure][2], [Google Cloud][3], [SaaS][4], or [Datadog costs][5] in [Cloud Cost Management][6], you can flexibly query costs across providers. Multisource Querying enables you to query costs across multiple providers using consistent and standardized tags instead of building multiple queries for each provider.
