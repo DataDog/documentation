@@ -99,7 +99,7 @@ You can install the Datadog .NET Profiler machine-wide so that any services on t
   - <code>CORECLR_PROFILER_PATH</code><br />
   - The value that points to <code>Datadog.Linux.ApiWrapper.x64.so</code> in <code>LD_PRELOAD</code><br /><br /> 
   For example, if you are setting these environment variables in your dockerfile for a service, you should remove them to avoid conflicts with Single Step Instrumentation.
-  If these environment variables are still set, the corresponding old installed version vill be silently used instead of the one installed with Single Step Instrumentation.
+  If these environment variables are still set, the corresponding previously installed version is silently used instead of the one installed with Single Step Instrumentation.
 </div>
 
 
