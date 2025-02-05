@@ -150,7 +150,7 @@ Your Snowflake cost data for the past 15 months can be accessed in Cloud Cost Ma
 
 **Snowflake CCM object tags**
 
-Object tags are user-defined strings that you can attach to Snowflake objects for enhanced auditability and cost analysis. For example, if you want to track costs by team, tag your warehouses with the teams that use them.
+Object tags are user-defined strings that you can attach to Snowflake objects for enhanced auditability and cost analysis. For example, to track costs by team, tag your warehouses with the respective teams that use them.
 
 All object tag configuration is done within [Snowflake][105].
 
