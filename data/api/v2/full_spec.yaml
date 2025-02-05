@@ -1992,6 +1992,24 @@ components:
         deployment:
           $ref: '#/components/schemas/DeploymentRelationship'
       type: object
+    AppVersionSelector:
+      description: The version selector parameter used in endpoints such as Get App.
+        Version numbers start at 1 and increment with each update. 0 is a special
+        value that always selects the latest version.
+      oneOf:
+      - $ref: '#/components/schemas/AppVersionSelectorConstants'
+      - format: int64
+        minimum: 0
+        type: integer
+    AppVersionSelectorConstants:
+      description: Constants that always select a particular version of an app.
+      enum:
+      - latest
+      - deployed
+      type: string
+      x-enum-varnames:
+      - LATEST
+      - DEPLOYED
     ApplicationKeyCreateAttributes:
       description: Attributes used to create an application Key.
       properties:
@@ -33358,7 +33376,7 @@ paths:
         name: version
         required: false
         schema:
-          type: string
+          $ref: '#/components/schemas/AppVersionSelector'
       responses:
         '200':
           content:
@@ -33384,6 +33402,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/JSONAPIErrorResponse'
           description: Not Found
+        '410':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Gone
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Get App
