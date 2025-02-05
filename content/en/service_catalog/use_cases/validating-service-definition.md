@@ -44,7 +44,7 @@ Built-in validation mechanisms prevent you from sending incorrect metadata into 
 
 To validate your service definitions ingested by Datadog's Github integration, you can view events when services or updated or when there is an error. You can view validation errors in [Event Management][4] by filtering by `source:service_catalog` and `status:error`. Adjust the timeframe as needed.
 
-{{< img src="tracing/service_catalog/github-error-event.png" alt="Github event showing error message from service definition." video="true" >}}
+{{< img src="tracing/service_catalog/github_error_event.png" alt="Github event showing error message from service definition." >}}
 
 ## Further reading
 
