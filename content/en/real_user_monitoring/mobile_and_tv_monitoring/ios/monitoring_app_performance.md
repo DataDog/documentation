@@ -137,5 +137,5 @@ To maximize the accuracy of TNS and INV, consider adjusting time thresholds in t
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /real_user_monitoring/explorer/search/#setup-facets-and-measures
-[2]: /real_user_monitoring/mobile_and_tv_monitoring/ios/data_collected/views_instrumentation_versus_app_lifecycle
+[2]: /real_user_monitoring/mobile_and_tv_monitoring/ios/data_collected/#views_instrumentation_versus_app_lifecycle
 
