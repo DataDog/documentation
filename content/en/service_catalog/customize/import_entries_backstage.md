@@ -14,12 +14,12 @@ further_reading:
   tag: "Blog"
   text: "Import Backstage YAML files into Datadog"
 aliases:
-    - /service_catalog/import_entries_integrations/
-    - /service_catalog/enrich_default_catalog/import_entries_integrations
-    - /service_catalog/customize/import_entries_integrations/
+    - /software_catalog/import_entries_integrations/
+    - /software_catalog/enrich_default_catalog/import_entries_integrations
+    - /software_catalog/customize/import_entries_integrations/
 ---
 
-{{< img src="/tracing/service_catalog/service-catalog-backstage-import.png" alt="Service panel highlighting backstage metadata, links and definition" style="width:90%;" >}}
+{{< img src="/tracing/software_catalog/service-catalog-backstage-import.png" alt="Service panel highlighting backstage metadata, links and definition" style="width:90%;" >}}
 
 If you already have data or services registered in Backstage, you can import these services into Datadog directly. 
 
@@ -66,7 +66,7 @@ spec:
 [1]: https://backstage.io/docs/features/software-catalog/descriptor-format/
 [3]: https://app.datadoghq.com/services/settings/get-started
 [4]: /getting_started/tagging/unified_service_tagging
-[5]: /tracing/service_catalog/service_definition_api/
+[5]: /tracing/software_catalog/service_definition_api/
 [6]: /integrations/github/
 
 

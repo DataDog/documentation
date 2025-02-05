@@ -1,10 +1,10 @@
 ---
 title: Definitions and Supported Versions
 aliases:
-- /service_catalog/adding_metadata
-- /tracing/service_catalog/service_metadata_structure
-- /tracing/service_catalog/adding_metadata
-- /service_catalog/add_metadata
+- /software_catalog/adding_metadata
+- /tracing/software_catalog/service_metadata_structure
+- /tracing/software_catalog/adding_metadata
+- /software_catalog/add_metadata
 further_reading:
 - link: "https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/service_definition_yaml"
   tag: "External Site"
@@ -74,7 +74,7 @@ To install the GitHub integration:
 
 When the GitHub integration is set up for your definitions, an **Edit in GitHub** button appears in the service's **Definition** tab and links you to GitHub to commit changes.
 
-{{< img src="tracing/service_catalog/svc_cat_contextual_link.png" alt="An Edit in GitHub button appears in the Definition tab of a service in the Software Catalog" style="width:90%;" >}}
+{{< img src="tracing/software_catalog/svc_cat_contextual_link.png" alt="An Edit in GitHub button appears in the Definition tab of a service in the Software Catalog" style="width:90%;" >}}
 
 After you update the YAML files for your repositories, your changes propagate to the Software Catalog. You can register multiple services in one YAML file by creating multiple YAML documents. Separate each document with three dashes (`---`).
 
@@ -166,7 +166,7 @@ extensions:
 
 Datadog provides a [JSON Schema][13] for definitions so that when you are editing a definition in a [supporting IDE][14], features such as autocomplete and validation are provided.
 
-{{< img src="tracing/service_catalog/ide_plugin.png" alt="VSCode recognizing problem to fix" style="width:100%;" >}}
+{{< img src="tracing/software_catalog/ide_plugin.png" alt="VSCode recognizing problem to fix" style="width:100%;" >}}
 
 The [JSON schema for Datadog definitions][15] is registered with the open source [Schema Store][14].
 
@@ -174,17 +174,17 @@ The [JSON schema for Datadog definitions][15] is registered with the open source
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /service_catalog/service_definitions/v3-0
-[2]: /service_catalog/service_definitions/v2-2
-[3]: /service_catalog/service_definitions/v2-1
-[4]: /service_catalog/service_definitions/v2-0
+[1]: /software_catalog/service_definitions/v3-0
+[2]: /software_catalog/service_definitions/v2-2
+[3]: /software_catalog/service_definitions/v2-1
+[4]: /software_catalog/service_definitions/v2-0
 [5]: https://app.datadoghq.com/services
 [6]: /integrations/github/
 [7]: https://app.datadoghq.com/integrations/github
 [8]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/service_definition_yaml
 [9]: https://registry.terraform.io/providers/DataDog/datadog/latest/
 [10]: https://github.com/marketplace/actions/datadog-service-catalog-metadata-provider
-[11]: /tracing/service_catalog/service_definition_api/
+[11]: /tracing/software_catalog/service_definition_api/
 [12]: https://app.datadoghq.com/personal-settings/profile
 [13]: http://json-schema.org/
 [14]: https://www.schemastore.org/json/

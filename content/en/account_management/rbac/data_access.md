@@ -180,4 +180,4 @@ When querying data through Datadog APIs with restrictions enabled, users without
 [6]: https://app.datadoghq.com/organization-settings/
 [7]: https://app.datadoghq.com/organization-settings/data-access-controls/
 [8]: /data_security/
-[9]: /service_catalog/customize/
+[9]: /software_catalog/customize/

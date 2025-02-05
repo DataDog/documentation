@@ -20,7 +20,7 @@ further_reading:
 - link: '/real_user_monitoring/session_replay'
   tag: 'Documentation'
   text: 'Learn about Session Replay'
-- link: '/service_catalog/endpoints/'
+- link: '/software_catalog/endpoints/'
   tag: 'Documentation'
   text: 'Learn about the Endpoints list'
 ---

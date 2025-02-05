@@ -14,8 +14,8 @@ further_reading:
   tag: "Blog"
   text: "Import Backstage YAML files into Datadog"
 aliases:
-    - /service_catalog/manage_entries/
-    - /service_catalog/enrich_default_catalog/
+    - /software_catalog/manage_entries/
+    - /software_catalog/enrich_default_catalog/
 ---
 
 You can customize your engineering team's landing experience in Software Catalog. Developer Home is a new personalized dashboard experience in beta, designed to help developers access prioritized tasks, pull requests, alerts, and insights all in one place.
@@ -128,7 +128,7 @@ Below is a comprehensive list of actions available for Software Catalog in Datad
 ## Change the service color
 The service color is used in trace visualizations. Click the service type icon to change it.
 
-{{< img src="tracing/service_catalog/change_service_color.png" alt="Click the service icon to select a different icon color." style="width:80%;" >}}
+{{< img src="tracing/software_catalog/change_service_color.png" alt="Click the service icon to select a different icon color." style="width:80%;" >}}
 
 ## Update the service type and language
 With [Software Catalog metadata schema 2.2][5], you can specify the type and language for user-defined services or overwrite the auto-detected type and language for instrumented services. Correctly label the service type and language to help other teams further understand what your services do and how to interact with them. 
@@ -140,13 +140,13 @@ With [Software Catalog metadata schema 2.2][5], you can specify the type and lan
 
 [1]: /universal_service_monitoring/
 [2]: /tracing/
-[3]: /service_catalog/service_definitions/v3-0/
+[3]: /software_catalog/service_definitions/v3-0/
 [4]: https://forms.gle/zbLfnJYhD5Ab4Wr18
 [5]: https://github.com/DataDog/schema/tree/main/service-catalog/v2.2
 [6]: /actions/actions_catalog/
 [7]: /tracing/services/inferred_services
 [8]: /tracing/guide/service_overrides/#remove-service-overrides
 [9]: /tracing/guide/service_overrides/
-[10]: /service_catalog/service_definitions/#add-metadata-with-automation
-[11]: /service_catalog/endpoints/discover_endpoints/
+[10]: /software_catalog/service_definitions/#add-metadata-with-automation
+[11]: /software_catalog/endpoints/discover_endpoints/
 [12]: /integrations/github/

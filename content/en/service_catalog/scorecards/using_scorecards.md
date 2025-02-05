@@ -1,9 +1,9 @@
 ---
 title: Using Scorecards
 aliases:
-  - /tracing/service_catalog/scorecards/using_scorecards
+  - /tracing/software_catalog/scorecards/using_scorecards
 further_reading:
-- link: "/tracing/service_catalog/"
+- link: "/tracing/software_catalog/"
   tag: "Documentation"
   text: "Software Catalog"
 - link: /api/latest/service-scorecards/
@@ -36,7 +36,7 @@ Click **View Details** from the Scorecard, or open the service details side pane
 
 You can visualize how teams' scores progress over time as they make changes and remediate known issues through historical timeseries in the Scorecards UI. You can also export these time series to Dashboards and Notebooks where you can filter on different tags such as `team`, `rule`, `scorecard`, `application`, `tier`, and `lifecycle`. 
 
-{{< img src="/tracing/service_catalog/scorecard-historical-metrics.png" alt="Timeseries that shows change in scores over time in Scorecard UI" style="width:90%;" >}}
+{{< img src="/tracing/software_catalog/scorecard-historical-metrics.png" alt="Timeseries that shows change in scores over time in Scorecard UI" style="width:90%;" >}}
 
 ## Generate Scorecard reports
 
@@ -54,7 +54,7 @@ To create a Report:
 
 Using this information, Datadog sends you reports on the highest and lowest scoring rules, services, and teams. 
 
-{{< img src="/tracing/service_catalog/scorecard-reports.png" alt="Scorecard reports creation modal showing how to create report for all services" style="width:90%;" >}}
+{{< img src="/tracing/software_catalog/scorecard-reports.png" alt="Scorecard reports creation modal showing how to create report for all services" style="width:90%;" >}}
 
 
 ### Manage Scorecard reports

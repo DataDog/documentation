@@ -7,7 +7,7 @@ further_reading:
     - link: '/integrations/kafka/'
       tag: 'Documentation'
       text: 'Kafka Integration'
-    - link: '/tracing/service_catalog/'
+    - link: '/tracing/software_catalog/'
       tag: 'Documentation'
       text: 'Software Catalog'
 ---

@@ -28,7 +28,7 @@ Create and manage monitors to track endpoint health and performance and respond 
 
 Existing monitors are displayed in the **MONITORS** column:
 
-{{< img src="tracing/service_catalog/monitors.png" alt="The monitor status menu and Create Monitor button in the Endpoints list" style="width:100%;" >}}
+{{< img src="tracing/software_catalog/monitors.png" alt="The monitor status menu and Create Monitor button in the Endpoints list" style="width:100%;" >}}
 
 
 To set up a monitor for an endpoint:

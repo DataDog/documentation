@@ -1,10 +1,10 @@
 ---
 title: Create a New Entry
 aliases:
-  - /tracing/service_catalog/setup
-  - /service_catalog/setup
-  - /service_catalog/create_entries/
-  - /service_catalog/enrich_default_catalog/create_entries
+  - /tracing/software_catalog/setup
+  - /software_catalog/setup
+  - /software_catalog/create_entries/
+  - /software_catalog/enrich_default_catalog/create_entries
   - /api_catalog/add_entries
 further_reading:
 - link: "https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/service_definition_yaml"
@@ -60,7 +60,7 @@ You can register multiple services in one YAML file by separating each definitio
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/service_catalog/service_definition_api/
+[1]: /tracing/software_catalog/service_definition_api/
 [2]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/service_definition_yaml
 [3]: https://app.datadoghq.com/services/settings/get-started
 [4]: https://github.com/DataDog/schema/blob/main/service-catalog/v2/schema.json

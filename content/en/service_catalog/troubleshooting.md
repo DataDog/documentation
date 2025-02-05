@@ -1,11 +1,11 @@
 ---
 title: Troubleshooting Software Catalog
 aliases:
-  - /tracing/service_catalog/troubleshooting
-  - /service_catalog/guides/troubleshooting
+  - /tracing/software_catalog/troubleshooting
+  - /software_catalog/guides/troubleshooting
   - /api_catalog/troubleshoot/
 further_reading:
-  - link: "/tracing/service_catalog/setup/"
+  - link: "/tracing/software_catalog/setup/"
     tag: "Documentation"
     text: "Setting Up Software Catalog"
 ---
@@ -18,7 +18,7 @@ If you experience unexpected behavior with Datadog Software Catalog, this guide 
 
 If services that you know are instrumented for APM are not appearing in the Software Catalog list, it's likely because they have not been emitting performance data in the past hour for the selected `env` (or any Primary Tag values of your choosing) or [Secondary Primary Tag][1]. To confirm, on the **Performance** tab, hover over the columns where you expect the performance metrics to appear and see information on which environments the services are active. 
 
-{{< img src="tracing/service_catalog/svc_cat_troubleshooting_1.png" alt="Hover message indicating that no performance data has been reported in the past hour" >}}
+{{< img src="tracing/software_catalog/svc_cat_troubleshooting_1.png" alt="Hover message indicating that no performance data has been reported in the past hour" >}}
 
 ### SLOs not listed in Setup Guidance section
 

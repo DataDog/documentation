@@ -1,18 +1,18 @@
 ---
 title: Datadog Software Catalog
 aliases:
-  - /tracing/faq/service_catalog/
+  - /tracing/faq/software_catalog/
   - /tracing/services/services_list/
   - /tracing/visualization/services_list/
-  - /tracing/service_catalog/
+  - /tracing/software_catalog/
 further_reading:
-- link: "/tracing/service_catalog/service_definition_api/"
+- link: "/tracing/software_catalog/service_definition_api/"
   tag: "Documentation"
   text: "Registering Services with the Service Definition API"
 - link: "https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/service_definition_yaml"
   tag: "External Site"
   text: "Create and manage service definitions with Terraform"
-- link: "/tracing/service_catalog/guides/upstream-downstream-dependencies"
+- link: "/tracing/software_catalog/guides/upstream-downstream-dependencies"
   tag: "Guide"
   text: "See Upstream and Downstream Dependencies During an Active Incident"
 - link: "https://www.datadoghq.com/blog/manage-service-catalog-categories-with-service-definition-json-schema/"
@@ -43,7 +43,7 @@ algolia:
   tags: ['service catalog']
 ---
 
-{{< img src="tracing/service_catalog/service_catalog_updated.mp4" video=true alt="Navigating around the Software Catalog" style="width:100%;" >}}
+{{< img src="tracing/software_catalog/software_catalog_updated.mp4" video=true alt="Navigating around the Software Catalog" style="width:100%;" >}}
 
 ## Overview
 
@@ -73,8 +73,8 @@ Datadog [Software Catalog][1] provides a consolidated view of your services, com
 ## Getting started
 
 {{< whatsnext desc="Explore what Software Catalog has to offer:" >}}
-    {{< nextlink href="/service_catalog/navigating/" >}}Navigating the Software Catalog{{< /nextlink >}}
-    {{< nextlink href="/service_catalog/investigating" >}}Investigating a service{{< /nextlink >}}
+    {{< nextlink href="/software_catalog/navigating/" >}}Navigating the Software Catalog{{< /nextlink >}}
+    {{< nextlink href="/software_catalog/investigating" >}}Investigating a service{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Role based access and permissions
@@ -128,7 +128,7 @@ Every entry showing up in the Software Catalog is categorized as a component typ
 *  External providers
 *  Endpoints
 
-{{< img src="tracing/service_catalog/select-component.png" alt="Software Catalog component selector" style="width:30%;" >}}
+{{< img src="tracing/software_catalog/select-component.png" alt="Software Catalog component selector" style="width:30%;" >}}
 
 Datadog populates Software Catalog entries and determines their associated component type based on collected span attributes for APM ([peer tags][10]), but also based other collected telemetry types (USM, DSM, RUM, etc...).
 
@@ -148,8 +148,8 @@ The services and resources statistics, and span summaries on the **Service List*
 [2]: /account_management/rbac/
 [3]: /account_management/rbac/permissions/
 [4]: /developers/guide/data-collection-resolution-retention/
-[5]: /tracing/service_catalog/adding_metadata#service-definition-schema-v22
+[5]: /tracing/software_catalog/adding_metadata#service-definition-schema-v22
 [6]: https://www.datadoghq.com/blog/tagging-best-practices/#assign-owners-to-services-with-tags
 [7]: /tracing/other_telemetry/
-[8]: /service_catalog/add_metadata#metadata-schema-v30-beta
-[9]: /service_catalog/scorecards/
+[8]: /software_catalog/add_metadata#metadata-schema-v30-beta
+[9]: /software_catalog/scorecards/

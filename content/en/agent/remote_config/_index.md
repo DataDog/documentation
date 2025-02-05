@@ -305,7 +305,7 @@ datadog:
 [16]: /agent/remote_config/?tab=configurationyamlfile#setup
 [17]: /agent/configuration/network
 [18]: /agent/configuration/proxy/
-[19]: /tracing/service_catalog/
+[19]: /tracing/software_catalog/
 [20]: /dynamic_instrumentation/?tab=configurationyaml#prerequisites
 [21]: /agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-main-configuration-file
 [22]: /tracing/trace_collection/runtime_config/

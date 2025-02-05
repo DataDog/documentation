@@ -1,10 +1,10 @@
 ---
 title: Manage Application Security Posture Across Development Teams
 aliases:
-  - /tracing/service_catalog/guides/appsec_management
-  - /service_catalog/guides/appsec_management
-  - /service_catalog/use_cases/appsec_management 
-  - /tracing/service_catalog/use_cases/appsec_management  
+  - /tracing/software_catalog/guides/appsec_management
+  - /software_catalog/guides/appsec_management
+  - /software_catalog/use_cases/appsec_management 
+  - /tracing/software_catalog/use_cases/appsec_management  
 further_reading:
   - link: "/security/application_security/"
     tag: "Documentation"
@@ -15,7 +15,7 @@ The Software Catalog enables organizations to seamlessly incorporate security in
 
 Software Catalog surfaces and centralizes security signals, enabling developers to prioritize actions and address vulnerabilities promptly. Meanwhile, managers can oversee risks, drive improvements, and ensure organizational compliance.
 
-{{< img src="tracing/service_catalog/appsec-use-case.png" alt="The Security tab of the Software Catalog, showing vulnerability risk, attack exposure, and coverage for each service." >}}
+{{< img src="tracing/software_catalog/appsec-use-case.png" alt="The Security tab of the Software Catalog, showing vulnerability risk, attack exposure, and coverage for each service." >}}
 
 ## Build secure applications by design
 
@@ -37,7 +37,7 @@ Software Catalog organizes and highlights third-party dependencies, ranging from
 1. Select the **Performance** tab at the top of the panel.
 1. Find the **Libraries** sub-tab, which lists all external libraries used and their versions.
 
-{{< img src="tracing/service_catalog/appsec-use-case-libraries.png" alt="The Security tab of the Software Catalog, showing vulnerability risk, attack exposure, and coverage for each service." >}}
+{{< img src="tracing/software_catalog/appsec-use-case-libraries.png" alt="The Security tab of the Software Catalog, showing vulnerability risk, attack exposure, and coverage for each service." >}}
 
 
 ## Further reading

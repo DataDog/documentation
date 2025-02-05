@@ -1,9 +1,9 @@
 ---
 title: Software Catalog Best Practices
 aliases:
-  - /service_catalog/guides/best-practices
+  - /software_catalog/guides/best-practices
 further_reading:
-  - link: "/tracing/service_catalog/"
+  - link: "/tracing/software_catalog/"
     tag: "Documentation"
     text: "Datadog Software Catalog"
 ---
@@ -28,5 +28,5 @@ For monolithic services, defining multiple services might be helpful. At the min
 
 [1]: /getting_started/tagging/unified_service_tagging/
 [2]: /containers/docker/tag/
-[3]: /service_catalog/adding_metadata#service-definition-schema-v21
+[3]: /software_catalog/adding_metadata#service-definition-schema-v21
 [4]: /getting_started/tagging/unified_service_tagging/?tab=kubernetes#full-configuration

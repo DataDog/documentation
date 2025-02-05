@@ -7,7 +7,7 @@ further_reading:
     - link: '/integrations/amazon_sqs/'
       tag: 'Documentation'
       text: 'Amazon SQS Integration'
-    - link: '/tracing/service_catalog/'
+    - link: '/tracing/software_catalog/'
       tag: 'Documentation'
       text: 'Software Catalog'
     - link: 'https://www.datadoghq.com/blog/data-streams-monitoring/'
@@ -103,7 +103,7 @@ Datadog automatically links the infrastructure powering your services and relate
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /data_streams/go#manual-instrumentation
-[2]: /tracing/service_catalog/
+[2]: /tracing/software_catalog/
 [3]: /getting_started/tagging/unified_service_tagging
 [4]: /integrations/kafka/
 [5]: /integrations/amazon_sqs/

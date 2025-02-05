@@ -14,8 +14,8 @@ further_reading:
   tag: "Blog"
   text: "Manage your infrastructure with ServiceNow CMDB and Datadog"
 aliases:
-    - /service_catalog/import_entries_integrations/
-    - /service_catalog/enrich_default_catalog/import_entries_integrations
+    - /software_catalog/import_entries_integrations/
+    - /software_catalog/enrich_default_catalog/import_entries_integrations
 ---
 
 To populate your Datadog Software Catalog with services from your ServiceNow CMDB, use the Service Ingestion feature in the [Datadog-ServiceNow integration][2].
@@ -29,5 +29,5 @@ To populate your Datadog Software Catalog with services from your ServiceNow CMD
 [2]: /integrations/servicenow/#service-ingestion
 [3]: https://app.datadoghq.com/services/settings/get-started
 [4]: /getting_started/tagging/unified_service_tagging
-[5]: /tracing/service_catalog/service_definition_api/
+[5]: /tracing/software_catalog/service_definition_api/
 [6]: /integrations/github/

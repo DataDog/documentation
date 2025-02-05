@@ -4,7 +4,7 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/monitor-apis-datadog-api-catalog/"
   tag: "Blog"
   text: "Manage API performance, security, and ownership with Datadog API Catalog"
-- link: "/tracing/service_catalog/"
+- link: "/tracing/software_catalog/"
   tag: "Documentation"
   text: "Datadog Software Catalog"
 - link: "/synthetics/api_tests/http_tests/"
@@ -21,10 +21,10 @@ aliases:
     - /tracing/api_catalog/
     - /api_catalog/
     - /api_catalog/endpoint_discovery/
-    - /service_catalog/endpoints/discover_endpoints
+    - /software_catalog/endpoints/discover_endpoints
 ---
 
-{{< img src="tracing/service_catalog/endpoints-list.png" alt="Endpoints list in the Software Catalog, showing performance-related information for each endpoint." style="width:100%;" >}}
+{{< img src="tracing/software_catalog/endpoints-list.png" alt="Endpoints list in the Software Catalog, showing performance-related information for each endpoint." style="width:100%;" >}}
 
 ## Overview
 
@@ -98,10 +98,10 @@ Read [Adding Metadata to APIs][10] for more information.
 
 [1]: https://app.datadoghq.com/apis/catalog
 [3]: /api_catalog/explore_apis/
-[6]: /service_catalog/manage
-[7]: /service_catalog/endpoints/monitor_endpoints/
+[6]: /software_catalog/manage
+[7]: /software_catalog/endpoints/monitor_endpoints/
 [8]: /tracing/trace_collection/
-[9]: /service_catalog/customize/create_entries
-[10]: /service_catalog/service_definitions/#add-metadata-to-endpoints
-[11]: /service_catalog/endpoints/explore_endpoints/
+[9]: /software_catalog/customize/create_entries
+[10]: /software_catalog/service_definitions/#add-metadata-to-endpoints
+[11]: /software_catalog/endpoints/explore_endpoints/
 [12]: https://app.datadoghq.com/services?selectedComponent=endpoint

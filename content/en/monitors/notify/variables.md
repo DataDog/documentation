@@ -700,5 +700,5 @@ https://app.datadoghq.com/services/{{urlencode "service.name"}}
 [7]: /monitors/guide/template-variable-evaluation/
 [8]: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
 [9]: /monitors/types/error_tracking/
-[10]: /service_catalog/service_definitions/
-[11]: https://docs.datadoghq.com/service_catalog/service_definitions/v2-2/#example-yaml
+[10]: /software_catalog/service_definitions/
+[11]: https://docs.datadoghq.com/software_catalog/service_definitions/v2-2/#example-yaml

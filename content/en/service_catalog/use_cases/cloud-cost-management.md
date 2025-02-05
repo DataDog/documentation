@@ -1,14 +1,14 @@
 ---
 title: Manage and Optimize Cloud Costs
 aliases:
-  - /tracing/service_catalog/guides/cloud_cost_management
-  - /service_catalog/guides/cloud_cost_management
-  - /service_catalog/use_cases/cloud_cost_management
+  - /tracing/software_catalog/guides/cloud_cost_management
+  - /software_catalog/guides/cloud_cost_management
+  - /software_catalog/use_cases/cloud_cost_management
 further_reading:
-  - link: "/tracing/service_catalog/"
+  - link: "/tracing/software_catalog/"
     tag: "Documentation"
     text: "Datadog Software Catalog"
-  - link: "/tracing/service_catalog/scorecards/"
+  - link: "/tracing/software_catalog/scorecards/"
     tag: "Documentation"
     text: "Datadog Scorecards"
   - link: "/cloud_cost_management/"
@@ -25,7 +25,7 @@ Datadog’s [Software Catalog][4], [Scorecards][2], and [Workflow Automation][5]
 
 [Datadog's Cloud Cost Management][1] integrates with the Software Catalog to detect and alert on cost anomalies in real time. Teams can quickly investigate spikes by correlating them with service-level changes like traffic fluctuations, deployments, or PR merges. 
 
-{{< img src="tracing/service_catalog/ccm-use-cases-cost-spikes.png" alt="The Costs tab for a service in the Software Catalog, showing cost metrics for different components of the infrastructure." >}}
+{{< img src="tracing/software_catalog/ccm-use-cases-cost-spikes.png" alt="The Costs tab for a service in the Software Catalog, showing cost metrics for different components of the infrastructure." >}}
 
 ## Ensure cost compliance and transparency
 
@@ -35,7 +35,7 @@ For example, you can enable team-level cost tracking by applying the tag "team" 
 
 Datadog offers preconfigured [Workflow blueprints][3] to help you build cost management processes. You can use the blueprints as-is or modify the evaluation logic to fit your use case. 
 
-{{< img src="tracing/service_catalog/ccm-use-cases-finops.png" alt="A Scorecard rule that requires 80% of a service's costs to be tagged by team." >}}
+{{< img src="tracing/software_catalog/ccm-use-cases-finops.png" alt="A Scorecard rule that requires 80% of a service's costs to be tagged by team." >}}
 
 
 ## Further reading
@@ -43,7 +43,7 @@ Datadog offers preconfigured [Workflow blueprints][3] to help you build cost man
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /cloud_cost_management/
-[2]: /service_catalog/scorecards/
+[2]: /software_catalog/scorecards/
 [3]: https://app.datadoghq.com/workflow/blueprints?selected_category=SCORECARDS
-[4]: /service_catalog/
+[4]: /software_catalog/
 [5]: /service_management/workflows/

@@ -11,7 +11,7 @@ further_reading:
 - link: "/dora_metrics/setup/failures"
   tag: "Documentation"
   text: "Learn about setting up failure data in DORA Metrics"
-- link: "/tracing/service_catalog"
+- link: "/tracing/software_catalog"
   tag: "Documentation"
   text: "Learn about the Software Catalog"
 - link: "https://github.com/DataDog/datadog-ci"
@@ -47,7 +47,7 @@ To ensure your service deployments tracked by APM contribute to DORA Metrics, th
 For more information about ensuring service deployments that are tracked by APM contribute to change lead time, see [Deployment Data Sources][18].
 
 [15]: /tracing/services/deployment_tracking
-[16]: /service_catalog/adding_metadata
+[16]: /software_catalog/adding_metadata
 [17]: /getting_started/tagging/unified_service_tagging/?tab=kubernetes
 [18]: /dora_metrics/setup/deployments/?tab=apmdeploymenttracking#selecting-a-deployment-data-source
 
@@ -118,8 +118,8 @@ The `--skip-git` option can be provided to disable sending the repository URL an
 
 [21]: /api/latest/dora-metrics/#send-a-deployment-event-for-dora-metrics
 [22]: https://github.com/DataDog/datadog-ci?tab=readme-ov-file#how-to-install-the-cli
-[23]: /tracing/service_catalog
-[24]: /tracing/service_catalog/adding_metadata
+[23]: /tracing/software_catalog
+[24]: /tracing/software_catalog/adding_metadata
 [25]: https://app.datadoghq.com/ci/dora
 [26]: /api/latest/dora-metrics/#send-a-deployment-event-for-dora-metrics
 [27]: https://app.datadoghq.com/organization-settings/api-keys
@@ -270,8 +270,8 @@ Change failure rate is calculated by dividing `dora.incidents.count` over `dora.
 
 [1]: /api/latest/dora-metrics/#send-a-deployment-event-for-dora-metrics
 [2]: https://github.com/DataDog/datadog-ci?tab=readme-ov-file#how-to-install-the-cli
-[3]: /tracing/service_catalog
-[4]: /tracing/service_catalog/setup
-[5]: /tracing/service_catalog/adding_metadata
+[3]: /tracing/software_catalog
+[4]: /tracing/software_catalog/setup
+[5]: /tracing/software_catalog/adding_metadata
 [6]: https://git-scm.com/docs/git-log
 [7]: /dora_metrics/data_collected

@@ -1,10 +1,10 @@
 ---
 title: Validating Service Definition YAMLs
 aliases:
-  - /tracing/service_catalog/guides/validating-service-definition
-  - /service_catalog/guides/validating-service-definition
+  - /tracing/software_catalog/guides/validating-service-definition
+  - /software_catalog/guides/validating-service-definition
 further_reading:
-  - link: "/tracing/service_catalog/"
+  - link: "/tracing/software_catalog/"
     tag: "Documentation"
     text: "Datadog Software Catalog"
   - link: "/api/latest/service-definition/"
@@ -38,13 +38,13 @@ To validate your service definition file in-app:
 
 Built-in validation mechanisms prevent you from sending incorrect metadata into Software Catalog. 
 
-{{< img src="tracing/service_catalog/service_catalog_definition_yaml.png" alt="Service metadata editor showing sample service definition." >}}
+{{< img src="tracing/software_catalog/software_catalog_definition_yaml.png" alt="Service metadata editor showing sample service definition." >}}
 
 ## Validate with Datadog Event Management and Github Integration
 
-To validate your service definitions ingested by Datadog's Github integration, you can view events when services or updated or when there is an error. You can view validation errors in [Event Management][4] by filtering by `source:service_catalog` and `status:error`. Adjust the timeframe as needed.
+To validate your service definitions ingested by Datadog's Github integration, you can view events when services or updated or when there is an error. You can view validation errors in [Event Management][4] by filtering by `source:software_catalog` and `status:error`. Adjust the timeframe as needed.
 
-{{< img src="tracing/service_catalog/github_error_event.png" alt="Github event showing error message from service definition." >}}
+{{< img src="tracing/software_catalog/github-error-event.png" alt="Github event showing error message from service definition." >}}
 
 ## Further reading
 
@@ -53,4 +53,4 @@ To validate your service definitions ingested by Datadog's Github integration, y
 [1]: https://app.datadoghq.com/services/settings/get-started
 [2]: https://www.schemastore.org/
 [3]: https://www.schemastore.org/json/#editors
-[4]: https://app.datadoghq.com/event/explorer?query=source%3Aservice_catalog%20status%3Aerror&cols=&messageDisplay=expanded-lg&options=&refresh_mode=sliding&sort=DESC&view=all&from_ts=1736452185424&to_ts=1736453085424&live=true
+[4]: https://app.datadoghq.com/event/explorer?query=source%3Asoftware_catalog%20status%3Aerror&cols=&messageDisplay=expanded-lg&options=&refresh_mode=sliding&sort=DESC&view=all&from_ts=1736452185424&to_ts=1736453085424&live=true

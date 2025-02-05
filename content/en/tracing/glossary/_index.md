@@ -8,7 +8,7 @@ further_reading:
 - link: "/tracing/trace_collection/"
   tag: "Documentation"
   text: "Learn how to set up APM tracing with your application"
-- link: "/tracing/service_catalog/"
+- link: "/tracing/software_catalog/"
   tag: "Documentation"
   text: "Discover and catalog the services reporting to Datadog"
 - link: "/tracing/services/service_page/"
@@ -49,7 +49,7 @@ For additional definitions and descriptions of important APM terms such as _span
 
 After [instrumenting your application][3], the [Software Catalog][4] is your main landing page for APM data.
 
-{{< img src="tracing/visualization/service_catalog.png" alt="Software Catalog" >}}
+{{< img src="tracing/visualization/software_catalog.png" alt="Software Catalog" >}}
 
 Services are the building blocks of modern microservice architectures - broadly a service groups together endpoints, queries, or jobs for the purposes of scaling instances. Some examples:
 
@@ -119,7 +119,7 @@ To learn more, read supported [propagation formats][28] for your application's l
 
 [2]: /developers/guide/data-collection-resolution-retention/
 [3]: /tracing/setup/
-[4]: /tracing/service_catalog/
+[4]: /tracing/software_catalog/
 [5]: /tracing/services/services_map/
 [6]: /tracing/services/service_page/
 [7]: /tracing/services/resource_page/

@@ -1,7 +1,7 @@
 ---
 title: Getting Started with Software Catalog
 further_reading:
-    - link: '/service_catalog/'
+    - link: '/software_catalog/'
       tag: 'Documentation'
       text: 'Software Catalog'
     - link: 'https://learn.datadoghq.com/courses/managing-service-catalog'
@@ -10,15 +10,15 @@ further_reading:
     - link: 'https://www.datadoghq.com/blog/service-owner-knowledge-with-datadog-service-catalog/'
       tag: 'Blog'
       text: 'Simplify microservice governance with the Datadog Software Catalog'
-    - link: '/service_catalog/troubleshooting'
+    - link: '/software_catalog/troubleshooting'
       tag: 'Documentation'
       text: 'Troubleshooting'
-    - link: '/service_catalog/scorecards'
+    - link: '/software_catalog/scorecards'
       tag: 'Documentation'
       text: 'Service Scorecards'
 ---
 
-{{< img src="/getting_started/service_catalog/overview_image.jpeg" alt="Software Catalog Reliability view showing several services and their associated MTTR, deployment metrics, issues, incidents, SLOs, and monitor statuses." style="width:90%;" >}}
+{{< img src="/getting_started/software_catalog/overview_image.jpeg" alt="Software Catalog Reliability view showing several services and their associated MTTR, deployment metrics, issues, incidents, SLOs, and monitor statuses." style="width:90%;" >}}
 
 ## Overview
 
@@ -109,7 +109,7 @@ You can also use any existing knowledge sources your organization maintains, suc
 
 Finally, you can also create entries from `service` tags in other Datadog products like Infrastructure Monitoring and Log Management. 
 
-{{< img src="/getting_started/service_catalog/import_entries.jpeg" alt="Import Entries tab in the Software Catalog setup and configuration section" style="width:90%;" >}}
+{{< img src="/getting_started/software_catalog/import_entries.jpeg" alt="Import Entries tab in the Software Catalog setup and configuration section" style="width:90%;" >}}
 
 ## Managing metadata in Software Catalog
 
@@ -162,7 +162,7 @@ To add custom rules to your Scorecards dashboard:
 3. Send an outcome of `pass`, `fail`, or `skip` for each `{rule, service}` tuple that you are evaluating to the [Scorecards API][13] `/scorecard/outcomes/batch` endpoint. 
 4. View an overview of outcomes in the Scorecards dashboard.
 
-{{< img src="/getting_started/service_catalog/create_rule.jpeg" alt="Create Rule modal to add custom rules in Scorecards dashboard" style="width:90%;" >}}
+{{< img src="/getting_started/software_catalog/create_rule.jpeg" alt="Create Rule modal to add custom rules in Scorecards dashboard" style="width:90%;" >}}
 
 ## Further reading
 
@@ -178,6 +178,6 @@ To add custom rules to your Scorecards dashboard:
 [8]: https://www.datadoghq.com/blog/github-actions-service-catalog
 [9]: https://backstage.io/docs/overview/what-is-backstage
 [10]:/api/latest/service-definition
-[11]: /service_catalog/add_metadata
-[12]: /service_catalog/scorecards
+[11]: /software_catalog/add_metadata
+[12]: /software_catalog/scorecards
 [13]: /api/latest/service-scorecards

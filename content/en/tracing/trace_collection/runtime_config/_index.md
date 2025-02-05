@@ -58,6 +58,6 @@ The following options are supported with configuration at runtime. The required 
 
 [1]: /agent/remote_config/
 [2]: /agent/
-[3]: /tracing/service_catalog/
+[3]: /tracing/software_catalog/
 [4]: /account_management/rbac/permissions/
 [5]: /tracing/trace_explorer/trace_view

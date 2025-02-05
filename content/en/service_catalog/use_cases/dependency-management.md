@@ -1,10 +1,10 @@
 ---
 title: Manage and Map Dependencies
 aliases:
-  - /tracing/service_catalog/guides/dependency_management
-  - /service_catalog/use_cases/dependency_management
-  - /service_catalog/guides/dependency_management
-  - /tracing/service_catalog/use_cases/dependency_management
+  - /tracing/software_catalog/guides/dependency_management
+  - /software_catalog/use_cases/dependency_management
+  - /software_catalog/guides/dependency_management
+  - /tracing/software_catalog/use_cases/dependency_management
 further_reading:
   - link: "/tracing/"
     tag: "Documentation"
@@ -25,13 +25,13 @@ Datadog’s Software Catalog offers powerful dependency mapping capabilities to 
 
 - **Telemetry integration:** Software Catalog auto-detects dependency relationships using application telemetry collected by APM, USM, and RUM, providing teams with real-time insights into service relationships and performance impacts.
 
-{{< img src="tracing/service_catalog/dependency-mgmt-use-case-auto-discovery.png" alt="The Dependencies tab in the side panel for a service, showing a flow chart of service dependencies." >}}
+{{< img src="tracing/software_catalog/dependency-mgmt-use-case-auto-discovery.png" alt="The Dependencies tab in the side panel for a service, showing a flow chart of service dependencies." >}}
 
 ## Manual dependency definition in service catalog schema v3.0
 
 In [Software Catalog schema v3.0][2], teams can manually define relationships to supplement auto-detected topologies. This features is particularly helpful for defining dependencies that reflect institutional knowledge and team collaboration, ensuring a more complete view of system relationships.
 
-{{< img src="tracing/service_catalog/dependency-mgmt-use-case-relationship-mapping.png" alt="A hierarchical relationships diagram showing a service's dependencies." >}}
+{{< img src="tracing/software_catalog/dependency-mgmt-use-case-relationship-mapping.png" alt="A hierarchical relationships diagram showing a service's dependencies." >}}
 
 ### Configure a manual dependency 
 
@@ -68,7 +68,7 @@ All dependencies, including manual dependencies, are shown. You can use the "Inc
 - When **Include Detected** is disabled: Only manually defined dependencies are shown.
 - When **Include Detected** is enabled: Manually added dependencies are shown above auto-detected ones to create a clear distinction.
 
-{{< img src="tracing/service_catalog/dependency-mgmt-use-case-include-detected.png" alt="A diagram showing the dependencies of a service, where 'Include Detected' is disabled." >}}
+{{< img src="tracing/software_catalog/dependency-mgmt-use-case-include-detected.png" alt="A diagram showing the dependencies of a service, where 'Include Detected' is disabled." >}}
 
 ### Benefits of manual dependency definitions
 
@@ -82,4 +82,4 @@ All dependencies, including manual dependencies, are shown. You can use the "Inc
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/services
-[2]: /service_catalog/service_definitions/v3-0/
+[2]: /software_catalog/service_definitions/v3-0/

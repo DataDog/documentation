@@ -1,9 +1,9 @@
 ---
 title: Scorecards
 aliases:
-  - /tracing/service_catalog/scorecards
+  - /tracing/software_catalog/scorecards
 further_reading:
-- link: "/tracing/service_catalog/"
+- link: "/tracing/software_catalog/"
   tag: "Documentation"
   text: "Software Catalog"
 - link: /api/latest/service-scorecards/
@@ -27,7 +27,7 @@ further_reading:
 Scorecards are in Preview.
 {{< /callout >}}
 
-{{< img src="/tracing/service_catalog/scorecard-overview.png" alt="Scorecards dashboard highlighting Production Readiness out-of-the-box rules" style="width:90%;" >}}
+{{< img src="/tracing/software_catalog/scorecard-overview.png" alt="Scorecards dashboard highlighting Production Readiness out-of-the-box rules" style="width:90%;" >}}
 
 ## Overview
 
@@ -38,9 +38,9 @@ You can select the rules used to populate the Scorecards, and you can generate r
 ## Get started
 
 {{< whatsnext desc="Set up Scorecards and explore how they can help your team:" >}}
-    {{< nextlink href="/service_catalog/scorecards/scorecard_configuration/" >}}Configure Scorecards{{< /nextlink >}}
-    {{< nextlink href="/service_catalog/scorecards/custom_rules/" >}}Create custom rules{{< /nextlink >}}
-    {{< nextlink href="/service_catalog/scorecards/using_scorecards/" >}}Learn what you can do with Scorecards{{< /nextlink >}}
+    {{< nextlink href="/software_catalog/scorecards/scorecard_configuration/" >}}Configure Scorecards{{< /nextlink >}}
+    {{< nextlink href="/software_catalog/scorecards/custom_rules/" >}}Create custom rules{{< /nextlink >}}
+    {{< nextlink href="/software_catalog/scorecards/using_scorecards/" >}}Learn what you can do with Scorecards{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Further reading
@@ -52,7 +52,7 @@ You can select the rules used to populate the Scorecards, and you can generate r
 [3]: https://app.datadoghq.com/monitors/recommended
 [4]: /tracing/services/deployment_tracking/
 [5]: /tracing/other_telemetry/connect_logs_and_traces/
-[6]: /tracing/service_catalog/
+[6]: /tracing/software_catalog/
 [7]: /getting_started/tagging/unified_service_tagging/
 [8]: https://app.datadoghq.com/services/scorecard
 [9]: /service_management/workflows/

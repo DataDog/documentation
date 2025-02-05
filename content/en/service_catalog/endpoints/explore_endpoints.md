@@ -1,7 +1,7 @@
 ---
 title: Exploring Endpoints
 further_reading:
-- link: "/tracing/service_catalog/"
+- link: "/tracing/software_catalog/"
   tag: "Documentation"
   text: "Datadog Software Catalog"
 aliases:
@@ -11,7 +11,7 @@ aliases:
     - /api_catalog/explore_apis/
 ---
 
-{{< img src="tracing/service_catalog/endpoints-list.png" alt="Endpoints list in the Software Catalog, showing performance-related information for each endpoint." style="width:100%;" >}}
+{{< img src="tracing/software_catalog/endpoints-list.png" alt="Endpoints list in the Software Catalog, showing performance-related information for each endpoint." style="width:100%;" >}}
 
 ## Overview
 
@@ -28,7 +28,7 @@ The Endpoints list shows performance data scoped to your selected environment an
 - **Filtering and searching**: Search by service, path, or any primary tag, or filter using facets like **Service** and **Team**.
 - **Scoping**: Specify the environment, additional primary tags (for example, `cluster_name`), and time frame.
 
-{{< img src="tracing/service_catalog/scope-data.png" alt="Changing scope settings changes the data shown in the Endpoints list" >}}
+{{< img src="tracing/software_catalog/scope-data.png" alt="Changing scope settings changes the data shown in the Endpoints list" >}}
 
 ## Viewing endpoint details
 
@@ -41,11 +41,11 @@ To access the endpoint details page:
 
 The endpoint details page shows you metadata, performance metrics, errors, dependencies, and correlated telemetry from other areas of Datadog.
 
-{{< img src="tracing/service_catalog/endpoint-details.png" alt="Click into an endpoint to open the endpoint details page and see information such as errors and dependencies." >}}
+{{< img src="tracing/software_catalog/endpoint-details.png" alt="Click into an endpoint to open the endpoint details page and see information such as errors and dependencies." >}}
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/apis/catalog
-[2]: /tracing/service_catalog/
+[2]: /tracing/software_catalog/

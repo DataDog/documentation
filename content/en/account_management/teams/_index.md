@@ -157,7 +157,7 @@ To customize your team, see [Team Management][3].
 [6]: /service_management/incident_management/
 [7]: /monitors/configuration/?tab=thresholdalert#add-metadata
 [8]: /infrastructure/resource_catalog/
-[9]: /tracing/service_catalog/adding_metadata/#add-metadata-from-the-datadog-ui
+[9]: /tracing/software_catalog/adding_metadata/#add-metadata-from-the-datadog-ui
 [10]: /service_management/service_level_objectives/#slo-tags
 [11]: https://app.datadoghq.com/dashboard/lists
 [12]: https://app.datadoghq.com/services

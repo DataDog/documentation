@@ -20,7 +20,7 @@ further_reading:
 - link: "/monitors/types/metric"
   tag: "Documentation"
   text: "Learn about Metric Monitors"
-- link: "/service_catalog"
+- link: "/software_catalog"
   tag: "Documentation"
   text: "Learn about the Software Catalog"
 ---

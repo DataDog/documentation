@@ -1,13 +1,13 @@
 ---
 title: Navigate the Software Catalog
 aliases:
-  - /tracing/service_catalog/browsing
-  - /service_catalog/browsing
+  - /tracing/software_catalog/browsing
+  - /software_catalog/browsing
 further_reading:
-- link: "/tracing/service_catalog/service_definition_api/"
+- link: "/tracing/software_catalog/service_definition_api/"
   tag: "Documentation"
   text: "Registering Services with the Service Definition API"
-- link: "/tracing/service_catalog/guides/upstream-downstream-dependencies"
+- link: "/tracing/software_catalog/guides/upstream-downstream-dependencies"
   tag: "Guide"
   text: "See Upstream and Downstream Dependencies During an Active Incident"
 - link: "/dora_metrics/setup"
@@ -51,7 +51,7 @@ The **Reliability** tab contains information about the stability of your service
 
 Click the Settings icon on the right hand corner to hide columns from the list.
 
-{{< img src="tracing/service_catalog/svc-cat-reliability.png" alt="Software Catalog Reliability view showing several services and their associated MTTR, deployment metrics, issues, incidents, SLOs, and monitor statuses." style="width:100%;" >}}
+{{< img src="tracing/software_catalog/svc-cat-reliability.png" alt="Software Catalog Reliability view showing several services and their associated MTTR, deployment metrics, issues, incidents, SLOs, and monitor statuses." style="width:100%;" >}}
 
 ## Performance view
 
@@ -62,7 +62,7 @@ The second dropdown allows you to rescope any APM data you have in the Performan
 
 You can change the default environment in **APM > Setup & Configuration > Settings**.
 
-{{< img src="tracing/service_catalog/svc-cat-perf-view.png" alt="Performance view filtered on env:* and scoped to cluster-name:*" style="width:100%;" >}}
+{{< img src="tracing/software_catalog/svc-cat-perf-view.png" alt="Performance view filtered on env:* and scoped to cluster-name:*" style="width:100%;" >}}
 
 The performance metrics are tied to services' [primary operations][5]. If a service is only detected by APM, the performance view shows the APM [trace metrics][4]. If a service is only detected by USM, the performance view shows the [USM metrics][6]. If a service is detected by USM and APM, the performance view shows the Trace Metrics instead of USM metrics.
 
@@ -99,7 +99,7 @@ The **Costs tab** provides several ways to understand the costs associated with 
 
 For more information on a service's cost changes, click on the service row to open a detailed side panel. To see this information on the Cloud Costs page, click the **View in Analytics** button.
 
-{{< img src="tracing/service_catalog/svc-cat-costs-view.png" alt="Software Catalog Costs view showing several services and their associated cloud cost and monthly change details." style="width:100%;" >}}
+{{< img src="tracing/software_catalog/svc-cat-costs-view.png" alt="Software Catalog Costs view showing several services and their associated cloud cost and monthly change details." style="width:100%;" >}}
 
 This information is only available for Cloud Cost Management customers who have configured the necessary [AWS Integration][10] and [Tag Pipelines][11].
 
@@ -121,7 +121,7 @@ To access additional details describing your CI status and static analysis viola
 
 
 [1]: https://app.datadoghq.com/services
-[2]: /service_catalog/enrich_default_catalog/
+[2]: /software_catalog/enrich_default_catalog/
 [3]: /tracing/guide/setting_primary_tags_to_scope/?tab=helm#add-a-second-primary-tag-in-datadog
 [4]: /tracing/metrics/metrics_namespace/
 [5]: /tracing/guide/configuring-primary-operation/

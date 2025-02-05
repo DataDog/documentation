@@ -67,14 +67,14 @@ Navigate to the [Workflow Automation][3] page to configure the template in Datad
    - Use GitHub, Gitlab, or HTTP [actions][7] to upload the project files to the repository.
    - Save the workflow.
 
-  {{< img src="tracing/service_catalog/templating-workflow.png" alt="Workflow for building software template automation" style="width:100%;" >}}
+  {{< img src="tracing/software_catalog/templating-workflow.png" alt="Workflow for building software template automation" style="width:100%;" >}}
 
 4. Test your application and workflow:
    - Click **View App** to view the app on a standalone page, or **Add to a Dashboard** to place the app in a dashboard.
    - Navigate to **Service Mgmt** > **App Builder**, and select your app. Fill out the template form, and click the submit button.
    - Track the success of the workflow templating process in [Workflow Automation][3].
 
-  {{< img src="tracing/service_catalog/templating-app.png" alt="Application for managing software templates through App Builder" style="width:100%;" >}}
+  {{< img src="tracing/software_catalog/templating-app.png" alt="Application for managing software templates through App Builder" style="width:100%;" >}}
 
 ### Available Software Catalog Actions
 

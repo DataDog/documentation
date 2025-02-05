@@ -103,7 +103,7 @@ After successfully planning, setting up, and maintaining your Datadog installati
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /agent/fleet_automation/
-[2]: /service_catalog/
+[2]: /software_catalog/
 [3]: /agent/configuration/agent-commands#agent-information
 [4]: /agent/troubleshooting/send_a_flare/?tab=agent\#send-a-flare-using-the-flare-command
 [5]: https://app.datadoghq.com/dash/integration/31281/estimated-usage-overview?fromUser=false\&refresh_mode=sliding\&view=spans\&from_ts=1721313591456\&to\_ts=1721317191456\&live=true

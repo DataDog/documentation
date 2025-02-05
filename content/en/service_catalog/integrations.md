@@ -1,9 +1,9 @@
 ---
 title: Use Integrations with Software Catalog
 aliases:
-  - /tracing/service_catalog/integrations
+  - /tracing/software_catalog/integrations
 further_reading:
-- link: "/tracing/service_catalog/service_definition_api/"
+- link: "/tracing/software_catalog/service_definition_api/"
   tag: "Documentation"
   text: "Learn about the Service Definition API"
 - link: "/integrations/opsgenie/"
@@ -37,7 +37,7 @@ You can connect any service in your [PagerDuty Service Directory][1]. You can ma
 
 3. Enter the API Access Key on [Pagerduty Integration Setup][4] to finish configuring it.
 
-  {{< img src="tracing/service_catalog/pagerduty-token.png" alt="Copy and Paste the API Key to Pagerduty Setup." style="width:100%;" >}}
+  {{< img src="tracing/software_catalog/pagerduty-token.png" alt="Copy and Paste the API Key to Pagerduty Setup." style="width:100%;" >}}
 
 4. Update the service definition with the PagerDuty information. For example, pass in the following `integrations` configuration lines within the full [service definition][5]:
 
@@ -58,8 +58,8 @@ You can add OpsGenie metadata to a service so that the Software Catalog displays
 2. Get your OpsGenie API access key as described in their [API Key Management][13] documentation. This API key requires **configuration access** and **read** access rights.
 3. Add an account in the **Accounts** section at the bottom of the [integration tile][14], paste your OpsGenie API access key, and select the region for your OpsGenie account.
 
-   {{< img src="tracing/service_catalog/create_account1.png" alt="The Create New Account workflow in the OpsGenie integration tile" style="width:80%;" >}}
-   {{< img src="tracing/service_catalog/create_account2.png" alt="The Create New Account workflow in the OpsGenie integration tile" style="width:80%;" >}}
+   {{< img src="tracing/software_catalog/create_account1.png" alt="The Create New Account workflow in the OpsGenie integration tile" style="width:80%;" >}}
+   {{< img src="tracing/software_catalog/create_account2.png" alt="The Create New Account workflow in the OpsGenie integration tile" style="width:80%;" >}}
 
 4. Update the service definition with the OpsGenie information to link your OpsGenie service with your Datadog service. For example, pass in the following `integrations` configuration lines within the full [service definition][5]:
 
@@ -74,7 +74,7 @@ You can add OpsGenie metadata to a service so that the Software Catalog displays
 
 Once you've completed these steps, an **On Call** information box appears in the **Ownership** tab of a service in the Software Catalog.
 
-{{< img src="tracing/service_catalog/oncall_information.png" alt="On Call information box displaying information from OpsGenie in the Software Catalog" style="width:85%;" >}}
+{{< img src="tracing/software_catalog/oncall_information.png" alt="On Call information box displaying information from OpsGenie in the Software Catalog" style="width:85%;" >}}
 
 ## Further reading
 
@@ -84,11 +84,11 @@ Once you've completed these steps, an **On Call** information box appears in the
 [2]: /integrations/pagerduty/
 [3]: https://support.pagerduty.com/docs/api-access-keys
 [4]: https://app.datadoghq.com/integrations/pagerduty
-[5]: /tracing/service_catalog/service_definition_api/
+[5]: /tracing/software_catalog/service_definition_api/
 [6]: http://json-schema.org/
 [7]: https://www.schemastore.org/json/
 [8]: https://raw.githubusercontent.com/DataDog/schema/main/service-catalog/version.schema.json
-[9]: /tracing/service_catalog/
+[9]: /tracing/software_catalog/
 [10]: /integrations/
 [11]: https://app.datadoghq.com/services
 [12]: /integrations/opsgenie

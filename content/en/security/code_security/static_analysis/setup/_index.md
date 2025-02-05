@@ -338,4 +338,4 @@ To upload a SARIF report:
 [11]: /security/code_security/dev_tool_int/github_pull_requests
 [12]: /security/code_security/dev_tool_int/github_pull_requests#fixing-a-vulnerability-directly-from-datadog
 [13]: https://docs.github.com/en/actions/security-for-github-actions/security-guides
-[14]: https://docs.datadoghq.com/service_catalog/service_definitions/v3-0/
+[14]: https://docs.datadoghq.com/software_catalog/service_definitions/v3-0/

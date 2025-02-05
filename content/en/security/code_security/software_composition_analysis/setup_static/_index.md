@@ -215,5 +215,5 @@ If no services or teams are found, Datadog uses the `CODEOWNERS` file in your re
 [12]: /getting_started/site/
 [13]: https://github.com/DataDog/datadog-static-analyzer-github-action
 [14]: https://github.com/DataDog/datadog-ci?tab=readme-ov-file#sbom
-[15]: https://docs.datadoghq.com/service_catalog/service_definitions/v3-0/
+[15]: https://docs.datadoghq.com/software_catalog/service_definitions/v3-0/
 [16]: https://docs.datadoghq.com/account_management/teams/

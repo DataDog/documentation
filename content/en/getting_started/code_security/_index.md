@@ -204,4 +204,4 @@ If no services or teams are found, Datadog uses the `CODEOWNERS` file in your re
 [9]: https://app.datadoghq.com/security/configuration/notification-rules
 [10]: /account_management/teams/
 [11]: /security/code_security/static_analysis/setup/#customize-your-configuration
-[12]: https://docs.datadoghq.com/service_catalog/service_definitions/v3-0/
+[12]: https://docs.datadoghq.com/software_catalog/service_definitions/v3-0/

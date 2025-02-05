@@ -1,9 +1,9 @@
 ---
 title: Scorecard Configuration
 aliases:
-  - /tracing/service_catalog/scorecards/scorecard_configuration
+  - /tracing/software_catalog/scorecards/scorecard_configuration
 further_reading:
-- link: "/tracing/service_catalog/"
+- link: "/tracing/software_catalog/"
   tag: "Documentation"
   text: "Software Catalog"
 - link: /api/latest/service-scorecards/
@@ -34,7 +34,7 @@ To select which of the out-of-the-box rules are evaluated for each of the defaul
 2. Enable or disable rules to customize how the scores are calculated. 
 3. Click **View your scores** to start tracking your progress toward the selected rules across your defined services.
 
-{{< img src="/tracing/service_catalog/scorecards-setup.png" alt="Scorecards setup page" style="width:90%;" >}}
+{{< img src="/tracing/software_catalog/scorecards-setup.png" alt="Scorecards setup page" style="width:90%;" >}}
 
 ## How services are evaluated
 

@@ -1,9 +1,9 @@
 ---
 title: Custom rules
 aliases:
-  - /tracing/service_catalog/scorecards/custom_rules
+  - /tracing/software_catalog/scorecards/custom_rules
 further_reading:
-- link: "/tracing/service_catalog/"
+- link: "/tracing/software_catalog/"
   tag: "Documentation"
   text: "Software Catalog"
 - link: /api/latest/service-scorecards/
@@ -45,13 +45,13 @@ To evaluate and add custom rules in the Scorecards UI:
 4. Select the relevant outcome of `pass`, `fail`, or `skip` and add an optional remark describing the reason for the outcome. 
 5. View an overview of outcomes and remarks in the Scorecards dashboard.
 
-{{< img src="/tracing/service_catalog/scorecard-create-and-update-rule-ui.mp4" alt="User creating and evaluating a custom rule in the Scorecards UI" video="true" style="width:90%;" >}}
+{{< img src="/tracing/software_catalog/scorecard-create-and-update-rule-ui.mp4" alt="User creating and evaluating a custom rule in the Scorecards UI" video="true" style="width:90%;" >}}
 
 ## Evaluate custom rules using Workflow Automation
 
 Workflow Automation allows you to automate the evaluation of your custom rules in Datadog using the [**Update scorecard rule outcome** action][3]. To set up a custom rule evaluation, create a Workflow from scratch or use one of the [Scorecards blueprints][4]. 
 
-{{< img src="/tracing/service_catalog/scorecards_workflow_example.png" alt="Workflow evaluating whether a service has a tier defined in Software Catalog" style="width:90%;" >}}
+{{< img src="/tracing/software_catalog/scorecards_workflow_example.png" alt="Workflow evaluating whether a service has a tier defined in Software Catalog" style="width:90%;" >}}
 
 To set up a custom rule evaluation using Workflow Automation: 
 
@@ -71,10 +71,10 @@ To set up a custom rule evaluation using Workflow Automation:
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /service_catalog/scorecards/scorecard_configuration/
+[1]: /software_catalog/scorecards/scorecard_configuration/
 [2]: /api/latest/service-scorecards/
-[3]: https://app.datadoghq.com/workflow/action-catalog#com.datadoghq.dd/com.datadoghq.dd.service_catalog/com.datadoghq.dd.service_catalog.updateScorecardRuleOutcome
+[3]: https://app.datadoghq.com/workflow/action-catalog#com.datadoghq.dd/com.datadoghq.dd.software_catalog/com.datadoghq.dd.software_catalog.updateScorecardRuleOutcome
 [4]: https://app.datadoghq.com/workflow/blueprints?selected_category=SCORECARDS
 [5]: /service_management/workflows/build/
-[6]: https://app.datadoghq.com/workflow/action-catalog#com.datadoghq.dd/com.datadoghq.dd.service_catalog/com.datadoghq.dd.service_catalog.listServiceDefinitions
+[6]: https://app.datadoghq.com/workflow/action-catalog#com.datadoghq.dd/com.datadoghq.dd.software_catalog/com.datadoghq.dd.software_catalog.listServiceDefinitions
 [7]: https://app.datadoghq.com/workflow/action-catalog#//com.datadoghq.core.forLoop

@@ -165,7 +165,7 @@ Enable `DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED` to ensure no Datadog 
 
 For instructions on how to remove service overrides and migrate to inferred services, see the [Service Overrides guide][4].
 
-[1]: /service_catalog/
+[1]: /software_catalog/
 [2]: /tracing/services/service_page
 [3]: /database_monitoring/
 [4]: /tracing/guide/service_overrides

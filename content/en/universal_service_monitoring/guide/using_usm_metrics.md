@@ -82,7 +82,7 @@ To create an SLO from the Software Catalog:
 1. Navigate to the **Reliability** tab of the [Software Catalog][8].
 2. Under the **SLOs** column, hover over a service and click **+ Create Availability SLO** or **+ Create Latency SLO**.
 
-{{< img src="universal_service_monitoring/guide/service_catalog_slo_setup.png" alt="Setting up a Universal Service Monitoring SLO for BITSBOUTIQUE" style="width:100%;" >}}
+{{< img src="universal_service_monitoring/guide/software_catalog_slo_setup.png" alt="Setting up a Universal Service Monitoring SLO for BITSBOUTIQUE" style="width:100%;" >}}
 
 Optionally, to create an SLO manually using USM metrics:
  
@@ -118,7 +118,7 @@ For more information, see the [Dashboards documentation][16].
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /universal_service_monitoring
-[2]: /tracing/service_catalog
+[2]: /tracing/software_catalog
 [3]: /tracing/services/deployment_tracking/
 [4]: /service_management/service_level_objectives
 [5]: /tracing/guide/setting_primary_tags_to_scope/?tab=helm#add-a-second-primary-tag-in-datadog

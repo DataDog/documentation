@@ -141,8 +141,8 @@ For information on disabling Software Composition Analysis, see [Disabling Softw
 [4]: https://app.datadoghq.com/security/configuration/asm/onboarding
 [5]: https://app.datadoghq.com/security/appsec/vm
 [6]: https://app.datadoghq.com/services
-[7]: /tracing/service_catalog/#security-view
-[8]: /tracing/service_catalog/#investigate-a-service
+[7]: /tracing/software_catalog/#security-view
+[8]: /tracing/software_catalog/#investigate-a-service
 [9]: https://app.datadoghq.com/security/configuration/asm/setup
 [10]: /account_management/rbac/permissions/#integrations
 [11]: /integrations/jira/
