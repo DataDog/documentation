@@ -7,6 +7,7 @@ aliases:
   - /tracing/service_catalog/guides/api_management
   - /service_catalog/guides/api_management
   - /service_catalog/use_cases/api_management
+  - /service_catalog/use_cases/api_management
 further_reading:
   - link: "/tracing/software_catalog/"
     tag: "Documentation"

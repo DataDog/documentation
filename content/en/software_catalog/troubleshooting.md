@@ -6,6 +6,7 @@ aliases:
   - /tracing/service_catalog/troubleshooting
   - /service_catalog/guides/troubleshooting
   - /api_catalog/troubleshoot/
+  - /service_catalog/troubleshooting
 further_reading:
   - link: "/tracing/software_catalog/setup/"
     tag: "Documentation"

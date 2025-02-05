@@ -3,6 +3,7 @@ title: Scorecards
 aliases:
   - /tracing/software_catalog/scorecards
   - /tracing/service_catalog/scorecards
+  - /service_catalog/scorecards
 further_reading:
 - link: "/tracing/software_catalog/"
   tag: "Documentation"

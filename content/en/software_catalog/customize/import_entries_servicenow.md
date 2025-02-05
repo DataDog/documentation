@@ -18,6 +18,7 @@ aliases:
     - /software_catalog/enrich_default_catalog/import_entries_integrations
     - /service_catalog/import_entries_integrations/
     - /service_catalog/enrich_default_catalog/import_entries_integrations
+    - /service_catalog/customize/import_entries_servicenow/
 ---
 
 To populate your Datadog Software Catalog with services from your ServiceNow CMDB, use the Service Ingestion feature in the [Datadog-ServiceNow integration][2].

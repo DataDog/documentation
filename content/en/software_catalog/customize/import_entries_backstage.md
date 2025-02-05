@@ -20,6 +20,7 @@ aliases:
     - /service_catalog/import_entries_integrations/
     - /service_catalog/enrich_default_catalog/import_entries_integrations
     - /service_catalog/customize/import_entries_integrations/
+    - /service_catalog/customize/import_entries_backstage/
 ---
 
 {{< img src="/tracing/software_catalog/software-catalog-backstage-import.png" alt="Service panel highlighting backstage metadata, links and definition" style="width:90%;" >}}

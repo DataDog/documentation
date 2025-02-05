@@ -16,6 +16,7 @@ further_reading:
 aliases:
     - /tracing/api_catalog/monitor_apis/
     - /api_catalog/monitor_apis/
+    - /service_catalog/endpoints/monitor_endpoints/
 ---
 
 ## Overview

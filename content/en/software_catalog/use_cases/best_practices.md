@@ -3,6 +3,7 @@ title: Software Catalog Best Practices
 aliases:
   - /software_catalog/guides/best-practices
   - /service_catalog/guides/best-practices
+  - /service_catalog/use_cases/best_practices
 further_reading:
   - link: "/tracing/software_catalog/"
     tag: "Documentation"

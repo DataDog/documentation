@@ -18,6 +18,7 @@ aliases:
     - /software_catalog/enrich_default_catalog/import_entries_dd
     - /service_catalog/import_entries_dd/
     - /service_catalog/enrich_default_catalog/import_entries_dd
+    - /service_catalog/customize/import_entries_dd
 ---
 
 ## Manual Service Discovery through other Datadog telemetries

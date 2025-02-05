@@ -1,5 +1,7 @@
 ---
 title: Software Templates
+aliases:
+  - /service_catalog/software_templates
 further_reading:
 - link: "https://www.datadoghq.com/blog/app-builder-remediation/"
   tag: "Blog"

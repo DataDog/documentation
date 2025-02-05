@@ -5,6 +5,7 @@ aliases:
   - /software_catalog/browsing
   - /tracing/service_catalog/browsing
   - /service_catalog/browsing
+  - /service_catalog/navigating
 further_reading:
 - link: "/tracing/software_catalog/service_definition_api/"
   tag: "Documentation"

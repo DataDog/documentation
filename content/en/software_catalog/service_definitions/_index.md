@@ -9,6 +9,7 @@ aliases:
   - /tracing/service_catalog/service_metadata_structure
   - /tracing/service_catalog/adding_metadata
   - /service_catalog/add_metadata
+  - /service_catalog/service_definitions
 further_reading:
 - link: "https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/service_definition_yaml"
   tag: "External Site"

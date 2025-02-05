@@ -11,6 +11,7 @@ aliases:
   - /service_catalog/guides/understanding-service-configuration/
   - /api_catalog/add_metadata
   - /api_catalog/owners_and_tags
+  - /service_catalog/manage
 further_reading:
 - link: "/tracing/software_catalog/service_definition_api/"
   tag: "Documentation"

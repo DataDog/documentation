@@ -7,6 +7,7 @@ aliases:
   - /tracing/service_catalog/guides/cloud_cost_management
   - /service_catalog/guides/cloud_cost_management
   - /service_catalog/use_cases/cloud_cost_management
+  - /service_catalog/use_cases/cloud_cost_management
 further_reading:
   - link: "/tracing/software_catalog/"
     tag: "Documentation"

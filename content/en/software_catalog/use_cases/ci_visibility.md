@@ -5,6 +5,7 @@ aliases:
   - /software_catalog/guides/streamlining-development-lifecycle-with-ci-visibility
   - /tracing/service_catalog/guides/streamlining-development-lifecycle-with-ci-visibility
   - /service_catalog/guides/streamlining-development-lifecycle-with-ci-visibility
+  - /service_catalog/use_cases/ci_visibility
 further_reading:
   - link: "/tracing/software_catalog/"
     tag: "Documentation"

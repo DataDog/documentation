@@ -5,6 +5,7 @@ aliases:
   - /software_catalog/guides
   - /tracing/service_catalog/guides/
   - /service_catalog/guides
+  - /service_catalog/use_cases
 ---
 
 ## Best practices guides
