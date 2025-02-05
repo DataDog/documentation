@@ -94,7 +94,7 @@ If it is set to another value or not set at all, the profiler is disabled.
 
 2. Check that the profiler has been loaded from the loader log:
 
-   1. Open the `dotnet-native-loader-dotnet-<pid>` log file in the `/var/log/datadog` folder.
+   1. Open the `dotnet-native-loader-dotnet-<PID>` log file in the `/var/log/datadog` folder.
 
    2. Look for `CorProfiler::Initialize: Continuous Profiler initialized successfully.` near the end. If that message is not present, enable debug logs by setting the `DD_TRACE_DEBUG` environment variable for the application.
 
