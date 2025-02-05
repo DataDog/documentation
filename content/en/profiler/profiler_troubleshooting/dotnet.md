@@ -80,7 +80,9 @@ If you've configured the profiler and don't see profiles in the profile search p
    
    If these variables have been set, remove them from your scripts or Dockerfile. Otherwise, a previous manually-installed version of the profiler is used.
 
-6. Check that the value of `DD_PROFILING_ENABLED` is set to `1` or `Auto`. For the latter, the profiler will generate profiles if and only if (1) a trace was created and (2) the application ran for more than 30 seconds.
+6. Check that the value of `DD_PROFILING_ENABLED` is set to `1` or `Auto`. If set to `Auto`, the profiler generates profiles only if both of the following conditions are met:
+   - A trace was created
+   - The application ran for more than 30 seconds
 If it is set to another value or not set at all, the profiler is disabled.
 
 [1]: /profiler/enabling/dotnet/?tab=linux#configuration
