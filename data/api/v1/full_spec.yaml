@@ -22852,6 +22852,7 @@ components:
     Version:
       description: Version of the updated signal. If server side version is higher,
         update will be rejected.
+      example: 0
       format: int64
       type: integer
     WebhooksIntegration:
@@ -26546,7 +26547,7 @@ paths:
       x-permission:
         operator: OR
         permissions:
-        - dashboards_public_share
+        - embeddable_graphs_share
       x-undo:
         operationId: TODO
         parameters: []
@@ -26631,7 +26632,7 @@ paths:
       x-permission:
         operator: OR
         permissions:
-        - dashboards_public_share
+        - embeddable_graphs_share
       x-undo:
         type: safe
   /api/v1/graph/embed/{embed_id}/revoke:
@@ -26673,7 +26674,7 @@ paths:
       x-permission:
         operator: OR
         permissions:
-        - dashboards_public_share
+        - embeddable_graphs_share
       x-undo:
         type: safe
   /api/v1/graph/snapshot:
@@ -30366,19 +30367,22 @@ paths:
         or the facet name you want to use.\n- `time_window` #m (between 1 and 2880),
         #h (between 1 and 48).\n- `operator` `<`, `<=`, `>`, `>=`, `==`, or `!=`.\n-
         `#` an integer or decimal number used to set the threshold.\n\n**Cost Alert
-        Query**\n\nExample: `formula(query).last(time_window).function(parameter)
+        Query**\n\nExample: `formula(query).timeframe_type(time_window).function(parameter)
         operator #`\n\n- `query` The search query - following the [Log search syntax](https://docs.datadoghq.com/logs/search_syntax/).\n-
-        `time_window` - supports daily roll-up e.g. `7d`\n- `function` - [optional,
-        defaults to `threshold` monitor if omitted] supports `change`, `anomaly`,
-        `forecast`\n- `parameter` Specify the parameter of the type\n    - for `change`:\n
-        \       - supports `relative`, `absolute`\n        - [optional] supports `#`,
-        where `#` is an integer or decimal number used to set the threshold\n    -
-        for `anomaly`:\n        - supports `direction=both`, `direction=above`, `direction=below`\n
-        \       - [optional] supports `threshold=#`, where `#` is an integer or decimal
-        number used to set the threshold\n- `operator`\n    - for `threshold` supports
-        `<`, `<=`, `>`, `>=`, `==`, or `!=`\n    - for `change` supports `>`, `<`\n
-        \   - for `anomaly` supports `>=`\n    - for `forecast` supports `>`\n- `#`
-        an integer or decimal number used to set the threshold."
+        `timeframe_type` The timeframe type to evaluate the cost\n        - for `forecast`
+        supports `current`\n        - for `change`, `anomaly`, `threshold` supports
+        `last`\n- `time_window` - supports daily roll-up e.g. `7d`\n- `function` -
+        [optional, defaults to `threshold` monitor if omitted] supports `change`,
+        `anomaly`, `forecast`\n- `parameter` Specify the parameter of the type\n    -
+        for `change`:\n        - supports `relative`, `absolute`\n        - [optional]
+        supports `#`, where `#` is an integer or decimal number used to set the threshold\n
+        \   - for `anomaly`:\n        - supports `direction=both`, `direction=above`,
+        `direction=below`\n        - [optional] supports `threshold=#`, where `#`
+        is an integer or decimal number used to set the threshold\n- `operator`\n
+        \   - for `threshold` supports `<`, `<=`, `>`, `>=`, `==`, or `!=`\n    -
+        for `change` supports `>`, `<`\n    - for `anomaly` supports `>=`\n    - for
+        `forecast` supports `>`\n- `#` an integer or decimal number used to set the
+        threshold."
       operationId: CreateMonitor
       requestBody:
         content:

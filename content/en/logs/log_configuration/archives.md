@@ -273,18 +273,6 @@ If you wish to rehydrate from archives in another access tier, you must first mo
 
 [1]: /logs/archives/rehydrating/
 {{% /tab %}}
-{{% tab "Google Cloud Storage" %}}
-
-[Rehydration][1] only supports the following storage classes:
-
-- Standard
-- Nearline
-- Coldline
-
-If you wish to rehydrate from archives in another storage class, you must first move them to one of the supported classes above.
-
-[1]: /logs/archives/rehydrating/
-{{% /tab %}}
 {{< /tabs >}}
 
 #### Server side encryption (SSE)
