@@ -155,7 +155,7 @@ Object tags are user-defined strings that you can attach to Snowflake objects fo
 All object tag configuration is done within [Snowflake][105].
 
 Notes:
-- **Tag Inheritance**: Snowflake objects follow a hierarchy; the CCM integration accounts for inherited tags when submitting cost data.
+- **Tag Inheritance**: Snowflake objects adhere to a hierarchical structure, and the CCM integration considers inherited tags when submitting cost data.
 
 {{< img src="cloud_cost/saas_costs/snowflake_setup.png" alt="Integrate with Snowflake to collect cost data." style="width:100%" >}}
 
