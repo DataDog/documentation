@@ -148,7 +148,7 @@ Your MongoDB cost data for the past 15 months can be accessed in Cloud Cost Mana
 
 Your Snowflake cost data for the past 15 months can be accessed in Cloud Cost Management after 24 hours. To access the available data collected by each SaaS Cost Integration, see the [Data Collected section](#data-collected).
 
-**Snowflake CCM Object Tags**
+**Snowflake CCM object tags**
 
 Object tags are user-defined strings that you can attach to Snowflake objects for enhanced auditability and cost analysis. For example, if you want to track costs by team, tag your warehouses with the teams that use them.
 
