@@ -47,7 +47,7 @@ Following monitoring best practices such as tracing, logging, and code profiling
 
 To view the configuration completeness for a service, click the service in the [Software Catalog][7], then find the **Setup Guidance** tab:
 
-{{< img src="tracing/software_catalog/service-catalog-setup-guidance.png" alt="Software Catalog with the Setup Guidance tab highlighted." >}}
+{{< img src="tracing/software_catalog/software-catalog-setup-guidance.png" alt="Software Catalog with the Setup Guidance tab highlighted." >}}
 
 Alternatively, on the [*Service* page][8], click **Service Config** on the lower-left side:
 

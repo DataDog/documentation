@@ -1910,7 +1910,7 @@ menu:
       weight: 3
     - name: Software Catalog
       url: software_catalog/
-      pre: service-catalog
+      pre: software-catalog
       parent: platform_heading
       identifier: software_catalog
       weight: 110000

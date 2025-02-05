@@ -19,7 +19,7 @@ aliases:
     - /software_catalog/customize/import_entries_integrations/
 ---
 
-{{< img src="/tracing/software_catalog/service-catalog-backstage-import.png" alt="Service panel highlighting backstage metadata, links and definition" style="width:90%;" >}}
+{{< img src="/tracing/software_catalog/software-catalog-backstage-import.png" alt="Service panel highlighting backstage metadata, links and definition" style="width:90%;" >}}
 
 If you already have data or services registered in Backstage, you can import these services into Datadog directly. 
 

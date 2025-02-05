@@ -225,7 +225,7 @@ myBar = 2
 ### Link results to services
 Datadog associates static code and library scan results with relevant services by using the following mechanisms:
 
-1. [Identifying the code location associated with a service using the Software Catalog.](#identifying-the-code-location-in-the-service-catalog)
+1. [Identifying the code location associated with a service using the Software Catalog.](#identifying-the-code-location-in-the-software-catalog)
 2. [Detecting usage patterns of files within additional Datadog products.](#detecting-file-usage-patterns)
 3. [Searching for the service name in the file path or repository.](#detecting-service-name-in-paths-and-repository-names)
 

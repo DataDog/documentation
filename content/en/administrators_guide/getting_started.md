@@ -39,7 +39,7 @@ Get up to speed with the parts of Datadog that are most important to your use ca
 {{< whatsnext desc=" " >}}
     {{< nextlink href="https://learn.datadoghq.com/courses/datadog-foundation" >}}Datadog Foundation{{< /nextlink >}}
     {{< nextlink href="https://learn.datadoghq.com/courses/tagging-best-practices" >}}Tagging Best Practices{{< /nextlink >}}
-    {{< nextlink href="https://learn.datadoghq.com/courses/managing-service-catalog" >}}Managing the Software Catalog{{< /nextlink >}}
+    {{< nextlink href="https://learn.datadoghq.com/courses/managing-software-catalog" >}}Managing the Software Catalog{{< /nextlink >}}
 {{< /whatsnext >}}
 
 **Administrators**:
