@@ -52,7 +52,7 @@ Use the syntax `*:search_term` to perform a full-text search across all log attr
 | Search syntax | Search type | Description                                               |
 | ------------- | ----------- | --------------------------------------------------------- |
 | `*:hello`     | Full-text   | Searches all log attributes for the exact string `hello`. |
-| `hello`       | Free text   | Searches only the log message for the word `hello`.       |
+| `hello`       | Free text   | Searches only the log message for the exact string `hello`.       |
 
 ### Search term with wildcard example
 
