@@ -133,9 +133,6 @@ javax.net.ssl.trustStorePassword=changeit
 Add this configuration to your JMXFetch configuration file:
 
 
-Add this configuration to your JMXFetch configuration file:
-
-
 ```yaml
 init_config:
   is_jmx: true
