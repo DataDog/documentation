@@ -422,7 +422,7 @@ When set to `true`, the query string parameters are added to Elasticsearch and O
 `trace.cassandra.keyspace.statement.extraction.enabled`
 : **Environment Variable**: `DD_TRACE_CASSANDRA_KEYSPACE_STATEMENT_EXTRACTION_ENABLED` <br>
 **Default**: `false`<br>
-By default, the keyspace is extracted only if configured when creating a session. When set to `true`, the keyspace can also be extracted by looking at metadata in the queries' result.
+By default, the keyspace is extracted only if it is configured during session creation. When set to `true`, the keyspace can also be extracted by examining the metadata in the query results.
 
 **Note**:
 
