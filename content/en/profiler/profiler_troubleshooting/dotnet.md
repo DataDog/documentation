@@ -181,7 +181,7 @@ The default profiler log directory is `%ProgramData%\Datadog .NET Tracer\logs\`.
       [...] GetFunction: DllCanUnloadNow
       ```
 
-3. Check that the value of `DD_PROFILING_ENABLED` is set to `1`; if it is not set or with another value, the profiler is disabled.
+3. Check that the value of `DD_PROFILING_ENABLED` is set to `1`; if it is not set, or set with another value, the profiler is disabled.
 
 4. Check the result of profiles export:
 
