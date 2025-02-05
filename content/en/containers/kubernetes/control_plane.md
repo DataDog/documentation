@@ -317,11 +317,13 @@ scheduler:
 
 ## Kubernetes on Amazon EKS {#EKS}
 
-Amazon Elastic Kubernetes Service (EKS) supports monitoring all control plane components using cluster checks. If you use Helm to install the Datadog agent, these metrics are available immediately by adding the following annotations to the `default/kubernetes` service. Operator installations are limited to API Server [metrics][5], but support for `kube_controller_manager` and `kube_scheduler` metrics is coming next release.
+Amazon Elastic Kubernetes Service (EKS) supports monitoring all control plane components using cluster checks. If you use Helm to install the Datadog agent, these metrics are available immediately by adding the following annotations to the `default/kubernetes` service. Operator installations are limited to API Server [metrics][5], but support for `kube_controller_manager` and `kube_scheduler` metrics is coming in Operator v1.13.0.
 
 ### Prerequisites
 - An EKS Cluster running on Kubernetes version >= 1.28
-- Datadog installation using Helm 
+- Deploy the Agent via one of:
+  - helm chart version >= `3.90.1`
+  - Operator >= `v1.13.0`
 - Enable the Datadog [Cluster Agent][6]
 
 {{< tabs >}}
@@ -350,7 +352,7 @@ annotations:
 
 **Notes:**
 - Amazon exposes `kube_controller_manager` and `kube_scheduler` metrics under the [`metrics.eks.amazonaws.com`][11] API Group. 
-
+- The addition of `"extra_headers":{"accept":"*/*"}` prevents `HTTP 406` errors when querying the EKS metrics API.
 
 ## Kubernetes on OpenShift 4 {#OpenShift4}
 
