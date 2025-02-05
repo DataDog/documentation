@@ -238,8 +238,8 @@ kubectl logs -f springfront-797b78d6db-jqjdl{{< /code-block >}}
    {{< code-block lang="shell" >}}
 curl localhost:8080/upstream{{< /code-block >}}
 
-2. Open the Datadog UI and see the two services reporting under the [Service Catalog][11]:
-   {{< img src="tracing/guide/tutorials/tutorial-admission-controller-service-catalog.png" alt="Springback and springfront services in the Service Catalog." style="width:100%;" >}}
+2. Open the Datadog UI and see the two services reporting under the [Software Catalog][11]:
+   {{< img src="tracing/guide/tutorials/tutorial-admission-controller-service-catalog.png" alt="Springback and springfront services in the Software Catalog." style="width:100%;" >}}
 
 3. Explore Traces and see the associated Service Map:
     {{< img src="tracing/guide/tutorials/tutorial-admission-controller-traces.png" alt="The flame graph that represents the service." style="width:100%;" >}}

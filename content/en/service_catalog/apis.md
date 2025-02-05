@@ -1,5 +1,5 @@
 ---
-title: Service Catalog API Definitions
+title: Software Catalog API Definitions
 aliases:
   - /tracing/faq/service_definition_api/
   - /tracing/service_catalog/service_definition_api
@@ -9,7 +9,7 @@ aliases:
 further_reading:
 - link: "/tracing/service_catalog/"
   tag: "Documentation"
-  text: "Datadog Service Catalog"
+  text: "Datadog Software Catalog"
 - link: "/api/latest/service-definition/"
   tag: "Documentation"
   text: "Service Definition API"

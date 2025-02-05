@@ -1,5 +1,5 @@
 ---
-title: Use Integrations with Service Catalog
+title: Use Integrations with Software Catalog
 aliases:
   - /tracing/service_catalog/integrations
 further_reading:
@@ -15,21 +15,21 @@ further_reading:
 ---
 {{% site-region region="gov" %}}
 <div class="alert alert-warning">
-PagerDuty and OpsGenie integrations for Service Catalog are not supported in the {{< region-param key=dd_datacenter code="true" >}} site.
+PagerDuty and OpsGenie integrations for Software Catalog are not supported in the {{< region-param key=dd_datacenter code="true" >}} site.
 </div>
 {{% /site-region %}}
   
 ## Overview
 
-When you configure a service account for a [Datadog integration][10], you can incorporate metadata from your integrations into service definitions in the [Service Catalog][9]. You can also use autocomplete and validation features when editing a service definition in an [integrated development environment (IDE)](#ide-integrations).
+When you configure a service account for a [Datadog integration][10], you can incorporate metadata from your integrations into service definitions in the [Software Catalog][9]. You can also use autocomplete and validation features when editing a service definition in an [integrated development environment (IDE)](#ide-integrations).
 
 ## PagerDuty integration
 
-You can add PagerDuty metadata to a service so that the Service Catalog displays and links to information such as who is on-call and whether there are active PagerDuty incidents for the service. Because only one on-call can be displayed, Datadog selects the first user by escalation level, then alphabetically by email.
+You can add PagerDuty metadata to a service so that the Software Catalog displays and links to information such as who is on-call and whether there are active PagerDuty incidents for the service. Because only one on-call can be displayed, Datadog selects the first user by escalation level, then alphabetically by email.
 
 ### Setup
 
-You can connect any service in your [PagerDuty Service Directory][1]. You can map one PagerDuty service for each service in the Service Catalog.
+You can connect any service in your [PagerDuty Service Directory][1]. You can map one PagerDuty service for each service in the Software Catalog.
 
 1. If you have not already done so, set up the [Datadog PagerDuty integration][2].
 
@@ -50,7 +50,7 @@ You can connect any service in your [PagerDuty Service Directory][1]. You can ma
 
 ## OpsGenie integration
 
-You can add OpsGenie metadata to a service so that the Service Catalog displays and links to information such as who is on-call for the service.
+You can add OpsGenie metadata to a service so that the Software Catalog displays and links to information such as who is on-call for the service.
 
 ### Setup
 
@@ -72,9 +72,9 @@ You can add OpsGenie metadata to a service so that the Service Catalog displays 
    }
    ```
 
-Once you've completed these steps, an **On Call** information box appears in the **Ownership** tab of a service in the Service Catalog.
+Once you've completed these steps, an **On Call** information box appears in the **Ownership** tab of a service in the Software Catalog.
 
-{{< img src="tracing/service_catalog/oncall_information.png" alt="On Call information box displaying information from OpsGenie in the Service Catalog" style="width:85%;" >}}
+{{< img src="tracing/service_catalog/oncall_information.png" alt="On Call information box displaying information from OpsGenie in the Software Catalog" style="width:85%;" >}}
 
 ## Further reading
 

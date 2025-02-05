@@ -47,9 +47,9 @@ For additional definitions and descriptions of important APM terms such as _span
 
 ## Services
 
-After [instrumenting your application][3], the [Service Catalog][4] is your main landing page for APM data.
+After [instrumenting your application][3], the [Software Catalog][4] is your main landing page for APM data.
 
-{{< img src="tracing/visualization/service_catalog.png" alt="Service Catalog" >}}
+{{< img src="tracing/visualization/service_catalog.png" alt="Software Catalog" >}}
 
 Services are the building blocks of modern microservice architectures - broadly a service groups together endpoints, queries, or jobs for the purposes of scaling instances. Some examples:
 
@@ -61,7 +61,7 @@ The screenshot below is a microservice distributed system for an e-commerce site
 
 {{< img src="tracing/visualization/service_map.png" alt="service map" >}}
 
-All services can be found in the [Service Catalog][4] and visually represented on the [Service Map][5]. Each service has its own [Service page][6] where [trace metrics](#trace-metrics) like throughput, latency, and error rates can be viewed and inspected. Use these metrics to create dashboard widgets, create monitors, and see the performance of every resource such as a web endpoint or database query belonging to the service.
+All services can be found in the [Software Catalog][4] and visually represented on the [Service Map][5]. Each service has its own [Service page][6] where [trace metrics](#trace-metrics) like throughput, latency, and error rates can be viewed and inspected. Use these metrics to create dashboard widgets, create monitors, and see the performance of every resource such as a web endpoint or database query belonging to the service.
 
 {{< img src="tracing/visualization/service_page.mp4" video="true" alt="service page" >}}
 

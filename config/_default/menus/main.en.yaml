@@ -152,7 +152,7 @@ menu:
       url: getting_started/api/
       parent: getting_started
       weight: 14
-    - name: Service Catalog
+    - name: Software Catalog
       identifier: getting_started_service_catalog
       url: getting_started/service_catalog/
       parent: getting_started
@@ -1908,13 +1908,13 @@ menu:
       identifier: bits_ai_natural_language_querying
       parent: bits_ai
       weight: 3
-    - name: Service Catalog
+    - name: Software Catalog
       url: service_catalog/
       pre: service-catalog
       parent: platform_heading
       identifier: service_catalog
       weight: 110000
-    - name: Customize the Service Catalog
+    - name: Customize the Software Catalog
       url: service_catalog/customize
       parent: service_catalog
       identifier: service_catalog_customize
@@ -1939,7 +1939,7 @@ menu:
       parent: service_catalog_customize
       identifier: service_catalog_import_from_servicenow
       weight: 104
-    - name: Navigate the Service Catalog
+    - name: Navigate the Software Catalog
       url: service_catalog/navigating
       parent: service_catalog
       identifier: service_catalog_browse
@@ -3520,7 +3520,7 @@ menu:
       parent: tracing
       identifier: tracing_services
       weight: 7
-    - name: Service Catalog
+    - name: Software Catalog
       url: /service_catalog/
       parent: tracing_services
       identifier: tracing_service_catalog

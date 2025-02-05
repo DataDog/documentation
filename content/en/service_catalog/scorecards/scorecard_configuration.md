@@ -5,7 +5,7 @@ aliases:
 further_reading:
 - link: "/tracing/service_catalog/"
   tag: "Documentation"
-  text: "Service Catalog"
+  text: "Software Catalog"
 - link: /api/latest/service-scorecards/
   tag: "Documentation" 
   text: "Scorecards API" 
@@ -30,7 +30,7 @@ Datadog provides the following out-of-the-box scorecards based on a default set 
 
 To select which of the out-of-the-box rules are evaluated for each of the default scorecards:
 
-1. Open the [Scorecards page][1] in Service Catalog.
+1. Open the [Scorecards page][1] in Software Catalog.
 2. Enable or disable rules to customize how the scores are calculated. 
 3. Click **View your scores** to start tracking your progress toward the selected rules across your defined services.
 
@@ -38,7 +38,7 @@ To select which of the out-of-the-box rules are evaluated for each of the defaul
 
 ## How services are evaluated
 
-After the default scorecards are set up, the Scorecards page in the Service Catalog shows the list of out-of-the-box rules and the percentage of services passing those rules. Click on a rule to see more details about passing and failing services and the teams that own them.
+After the default scorecards are set up, the Scorecards page in the Software Catalog shows the list of out-of-the-box rules and the percentage of services passing those rules. Click on a rule to see more details about passing and failing services and the teams that own them.
 
 ### Production Readiness
 
@@ -80,7 +80,7 @@ Code repos defined
 : Identifying code repositories enables your engineers to perform an initial investigation into an issue without having to contact the service's owning team. This improves collaboration and helps your engineers increase their overall understanding of integration points.
 
 Any docs defined
-: In the Service Catalog Other Links section, specify additional links to resources such as runbooks, dashboards, or other internal documentation. This helps with initial investigations and provides quick access to emergency remediation runbooks for outages and incidents.
+: In the Software Catalog Other Links section, specify additional links to resources such as runbooks, dashboards, or other internal documentation. This helps with initial investigations and provides quick access to emergency remediation runbooks for outages and incidents.
 
 ## How scores are calculated
 

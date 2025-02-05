@@ -6,7 +6,7 @@ aliases:
 further_reading:
   - link: "/tracing/service_catalog/"
     tag: "Documentation"
-    text: "Datadog Service Catalog"
+    text: "Datadog Software Catalog"
   - link: "/api/latest/service-definition/"
     tag: "Documentation"
     text: "Service Definition API"
@@ -15,12 +15,12 @@ further_reading:
     text: "Service Definition Schema"
   - link: "https://www.datadoghq.com/blog/manage-service-catalog-categories-with-service-definition-json-schema/"
     tag: "Blog"
-    text: "Manage Service Catalog entries with the Service Definition JSON Schema"
+    text: "Manage Software Catalog entries with the Service Definition JSON Schema"
 ---
 
 ## Overview 
 
-Service Catalog uses service definition schemas to store and display metadata about your services. These schemas follow the JSON Schema specification, so you can validate your metadata as you edit it. This validation is important, because a mistake in a service definition file could cause you to create a service 
+Software Catalog uses service definition schemas to store and display metadata about your services. These schemas follow the JSON Schema specification, so you can validate your metadata as you edit it. This validation is important, because a mistake in a service definition file could cause you to create a service 
 with invalid data or introduce an error into the metadata of an existing service. 
 
 To prevent this, there are two ways for you to validate your service definition files: 
@@ -29,14 +29,14 @@ To prevent this, there are two ways for you to validate your service definition 
 
 To validate your service definition file in-app: 
 
-1. Navigate to the [Service Catalog Setup & Config page][1].
+1. Navigate to the [Software Catalog Setup & Config page][1].
 2. Click **Create a New Entry**.
 3. Select the **Code** tab.
 4. Paste the schema content.
 
 ## Validate with an IDE extension
 
-Built-in validation mechanisms prevent you from sending incorrect metadata into Service Catalog. 
+Built-in validation mechanisms prevent you from sending incorrect metadata into Software Catalog. 
 
 {{< img src="tracing/service_catalog/service_catalog_definition_yaml.png" alt="Service metadata editor showing sample service definition." >}}
 

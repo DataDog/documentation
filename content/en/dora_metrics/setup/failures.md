@@ -14,7 +14,7 @@ further_reading:
   text: "Learn about setting up deployment data in DORA Metrics"
 - link: "/tracing/service_catalog"
   tag: "Documentation"
-  text: "Learn about the Service Catalog"
+  text: "Learn about the Software Catalog"
 - link: "https://github.com/DataDog/datadog-ci"
   tag: "Source Code"
   text: "Learn about the datadog-ci CLI tool"
@@ -87,7 +87,7 @@ The severity of the incident in the DORA Metrics product is based on the [incide
 
 ### Mapping PagerDuty services to Datadog services
 
-When an incident event is received for a specific [PagerDuty service][101], Datadog attempts to retrieve the related Datadog service and team from any triggering [Datadog monitors][107] and from the [Service Catalog][102].
+When an incident event is received for a specific [PagerDuty service][101], Datadog attempts to retrieve the related Datadog service and team from any triggering [Datadog monitors][107] and from the [Software Catalog][102].
 
 The matching algorithm works in the following steps:
 
@@ -98,15 +98,15 @@ The matching algorithm works in the following steps:
      - `service`: If the monitor has one or more `service` tags, the incident metrics and events are emitted with the provided services.
      - `team`: If the monitor has a single `team` tag, the incident metrics and events are emitted with the team.
      
-2. If the service URL of the incident matches the PagerDuty service URL for any services in the Service Catalog:
+2. If the service URL of the incident matches the PagerDuty service URL for any services in the Software Catalog:
    - If a single Datadog service matches, the incident metrics and events are emitted with the service and team.
    - If multiple Datadog services match, the incident metrics and events are emitted with the team.
 
-   For more information about setting the PagerDuty service URL for a Datadog service, see [Use Integrations with Service Catalog][103].
+   For more information about setting the PagerDuty service URL for a Datadog service, see [Use Integrations with Software Catalog][103].
 
-3. If the PagerDuty service name of the incident matches a service name in the Service Catalog, the incident metrics and events are emitted with the service and team.
-4. If the PagerDuty team name of the incident matches a team name in the Service Catalog, the incident metrics and events are emitted with the team.
-5. If the PagerDuty service name of the incident matches a team name in the Service Catalog, the incident metrics and events are emitted with the team.
+3. If the PagerDuty service name of the incident matches a service name in the Software Catalog, the incident metrics and events are emitted with the service and team.
+4. If the PagerDuty team name of the incident matches a team name in the Software Catalog, the incident metrics and events are emitted with the team.
+5. If the PagerDuty service name of the incident matches a team name in the Software Catalog, the incident metrics and events are emitted with the team.
 6. If there have been no matches up to this point, the incident metrics and events are emitted with the PagerDuty service and PagerDuty team provided in the incident.
 
 [101]: https://support.pagerduty.com/docs/services-and-integrations

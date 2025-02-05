@@ -3,7 +3,7 @@ title: Exploring Endpoints
 further_reading:
 - link: "/tracing/service_catalog/"
   tag: "Documentation"
-  text: "Datadog Service Catalog"
+  text: "Datadog Software Catalog"
 aliases:
     - /tracing/api_catalog/explore_and_catalog_apis/
     - /api_catalog/explore_and_catalog_apis/
@@ -11,7 +11,7 @@ aliases:
     - /api_catalog/explore_apis/
 ---
 
-{{< img src="tracing/service_catalog/endpoints-list.png" alt="Endpoints list in the Service Catalog, showing performance-related information for each endpoint." style="width:100%;" >}}
+{{< img src="tracing/service_catalog/endpoints-list.png" alt="Endpoints list in the Software Catalog, showing performance-related information for each endpoint." style="width:100%;" >}}
 
 ## Overview
 
@@ -24,7 +24,7 @@ The [Endpoints list][1] provides visibility into all HTTP endpoints across your 
 The Endpoints list shows performance data scoped to your selected environment and time frame:
 
 - **Column sorting**: Click column headers to sort by metrics. For example, click **P95** to see endpoints with the top 95th percentile for latency.
-- **Ownership tracking**: View team ownership in the **TEAM** column. This information is inherited from the associated service definition in the [Service Catalog][2]. The service owner owns all of the endpoints connected to the service.
+- **Ownership tracking**: View team ownership in the **TEAM** column. This information is inherited from the associated service definition in the [Software Catalog][2]. The service owner owns all of the endpoints connected to the service.
 - **Filtering and searching**: Search by service, path, or any primary tag, or filter using facets like **Service** and **Team**.
 - **Scoping**: Specify the environment, additional primary tags (for example, `cluster_name`), and time frame.
 

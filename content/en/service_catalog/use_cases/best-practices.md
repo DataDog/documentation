@@ -1,18 +1,18 @@
 ---
-title: Service Catalog Best Practices
+title: Software Catalog Best Practices
 aliases:
   - /service_catalog/guides/best-practices
 further_reading:
   - link: "/tracing/service_catalog/"
     tag: "Documentation"
-    text: "Datadog Service Catalog"
+    text: "Datadog Software Catalog"
 ---
 
-This page covers best practices for working with the Service Catalog.
+This page covers best practices for working with the Software Catalog.
 
 ## Linking infrastructure telemetries
 
-The `service` tag is the primary key for Service Catalog entries. It's also the smallest common unit of analysis for Datadog telemetries with [Universal Service Tagging][1]. Set the `service` tag directly on [Kubernetes pod labels][4]. By setting the `service` tag within the `tags.datadoghq.com/service` label, all pod telemetry, like metrics and logs, receives the service tag in Datadog. This is the recommended Kubernetes service label. 
+The `service` tag is the primary key for Software Catalog entries. It's also the smallest common unit of analysis for Datadog telemetries with [Universal Service Tagging][1]. Set the `service` tag directly on [Kubernetes pod labels][4]. By setting the `service` tag within the `tags.datadoghq.com/service` label, all pod telemetry, like metrics and logs, receives the service tag in Datadog. This is the recommended Kubernetes service label. 
 
 In comparison, setting the label on a Kubernetes service only affects metric tagging, not other telemetry. Applying [additional container labels][2] is essential for correctly tagging logs and traces, so this approach isn't recommended.
 

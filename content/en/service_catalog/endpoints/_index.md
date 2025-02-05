@@ -6,7 +6,7 @@ further_reading:
   text: "Manage API performance, security, and ownership with Datadog API Catalog"
 - link: "/tracing/service_catalog/"
   tag: "Documentation"
-  text: "Datadog Service Catalog"
+  text: "Datadog Software Catalog"
 - link: "/synthetics/api_tests/http_tests/"
   tag: "Documentation"
   text: "Synthetic API Tests"
@@ -24,11 +24,11 @@ aliases:
     - /service_catalog/endpoints/discover_endpoints
 ---
 
-{{< img src="tracing/service_catalog/endpoints-list.png" alt="Endpoints list in the Service Catalog, showing performance-related information for each endpoint." style="width:100%;" >}}
+{{< img src="tracing/service_catalog/endpoints-list.png" alt="Endpoints list in the Software Catalog, showing performance-related information for each endpoint." style="width:100%;" >}}
 
 ## Overview
 
-The Service Catalog's [Endpoints list][12] consolidates everything you need to know about your API endpoints. It provides a comprehensive view of performance, reliability, and ownership across all your APIs, whether they serve internal teams or external users. This helps you and your teams effectively monitor mission-critical, API-driven features and ensure they meet performance expectations.
+The Software Catalog's [Endpoints list][12] consolidates everything you need to know about your API endpoints. It provides a comprehensive view of performance, reliability, and ownership across all your APIs, whether they serve internal teams or external users. This helps you and your teams effectively monitor mission-critical, API-driven features and ensure they meet performance expectations.
 
 ## Use cases
 

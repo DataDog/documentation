@@ -14,13 +14,13 @@ further_reading:
     text: "Datadog Software Templates"
 ---
 
-Datadog's Service Catalog automates key tasks and centralizes essential resources (such as docs, runbooks, [scorecards][1], and [templates][2]) to reduce time-to-first-commit and optimize the overall developer experience.
+Datadog's Software Catalog automates key tasks and centralizes essential resources (such as docs, runbooks, [scorecards][1], and [templates][2]) to reduce time-to-first-commit and optimize the overall developer experience.
 
 {{< img src="tracing/service_catalog/dev-onboarding-use-case-overview.png" alt="A service's home page, showing information like documentation and repository links, service owners, and on-call details." >}}
 
 ## Quick access to documentation and standards
 
-Service Catalog acts as a single source of truth for your engineering environment. Newly onboarded developers can:
+Software Catalog acts as a single source of truth for your engineering environment. Newly onboarded developers can:
 
 - Quickly locate relevant [APIs][3], services, repositories, and dependencies.
 - Access up-to-date documentation, code snippets, and runbooks, enabling them to start making meaningful contributions.

@@ -6,18 +6,18 @@ aliases:
 further_reading:
   - link: "/tracing/service_catalog/"
     tag: "Documentation"
-    text: "Datadog Service Catalog"
+    text: "Datadog Software Catalog"
   - link: "/continuous_integration/search/?tab=pipelines"
     tag: "Documentation"
     text: "Datadog CI Pipeline Visibility"
 ---
 
-In the Delivery view in Service Catalog, you can view CI pipeline and static analysis results associated to your services.
+In the Delivery view in Software Catalog, you can view CI pipeline and static analysis results associated to your services.
 
 By default, your service is associated to [CI pipeline(s)][4] through repository URL. 
 You can edit the pipelines associated with each service by modifying the `ci-pipeline-fingerprints` field in your [service metadata][5].
 
-To add or remove a pipeline associated to your service, click `Edit Metadata` in your service page, and go to Software Delivery. Please note that this is only available for [Service Catalog schema v2.2][7].
+To add or remove a pipeline associated to your service, click `Edit Metadata` in your service page, and go to Software Delivery. Please note that this is only available for [Software Catalog schema v2.2][7].
 
 {{< img src="tracing/service_catalog/service_catalog_delivery_lens.png" alt="The delivery view in the service catalog" >}}
 

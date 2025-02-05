@@ -201,7 +201,7 @@ To enable Single Step Instrumentation with Helm:
 {{% /tab %}}
 {{< /tabs >}}
 
-After you complete these steps, you may want to enable [runtime metrics][2] or view observability data from your application in the [Service Catalog][3].
+After you complete these steps, you may want to enable [runtime metrics][2] or view observability data from your application in the [Software Catalog][3].
 
 ## Advanced options
 

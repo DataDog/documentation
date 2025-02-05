@@ -6,7 +6,7 @@ further_reading:
       text: 'Kafka Integration'
     - link: '/tracing/service_catalog/'
       tag: 'Documentation'
-      text: 'Service Catalog'
+      text: 'Software Catalog'
 ---
 ### Prerequisites
 

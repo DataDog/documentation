@@ -1,5 +1,5 @@
 ---
-title: Datadog Service Catalog
+title: Datadog Software Catalog
 aliases:
   - /tracing/faq/service_catalog/
   - /tracing/services/services_list/
@@ -17,25 +17,25 @@ further_reading:
   text: "See Upstream and Downstream Dependencies During an Active Incident"
 - link: "https://www.datadoghq.com/blog/manage-service-catalog-categories-with-service-definition-json-schema/"
   tag: "Blog"
-  text: "Manage Service Catalog entries with the Service Definition JSON Schema"
+  text: "Manage Software Catalog entries with the Service Definition JSON Schema"
 - link: "https://www.datadoghq.com/blog/apm-security-view/"
   tag: "Blog"
   text: "Gain visibility into risks, vulnerabilities, and attacks with APM Security View"
 - link: "https://www.datadoghq.com/blog/service-catalog-setup/"
   tag: "Blog"
-  text: "Easily add tags and metadata to your services using the simplified Service Catalog setup"
+  text: "Easily add tags and metadata to your services using the simplified Software Catalog setup"
 - link: "https://www.datadoghq.com/blog/github-actions-service-catalog/"
   tag: "Blog"
-  text: "I use GitHub Ac­tions for Data­dog's Service Catalog, and you should, too"
+  text: "I use GitHub Ac­tions for Data­dog's Software Catalog, and you should, too"
 - link: "https://www.datadoghq.com/blog/shift-left-datadog-service-catalog/"
   tag: "Blog"
-  text: "Improve your shift-left observability with the Datadog Service Catalog"
+  text: "Improve your shift-left observability with the Datadog Software Catalog"
 - link: "https://www.datadoghq.com/blog/service-ownership-best-practices-datadog/"
   tag: "Blog"
-  text: "Best practices for end-to-end service ownership with Datadog Service Catalog"
+  text: "Best practices for end-to-end service ownership with Datadog Software Catalog"
 - link: "https://www.datadoghq.com/blog/service-catalog-schema-v3/"
   tag: "Blog"
-  text: "Improve developer experience and collaboration with Service Catalog schema version 3.0"
+  text: "Improve developer experience and collaboration with Software Catalog schema version 3.0"
 - link: "https://www.datadoghq.com/blog/memory-leak-workflow/"
   tag: "Blog"
   text: "Investigate memory leaks and OOMs with Datadog's guided workflow"
@@ -43,11 +43,11 @@ algolia:
   tags: ['service catalog']
 ---
 
-{{< img src="tracing/service_catalog/service_catalog_updated.mp4" video=true alt="Navigating around the Service Catalog" style="width:100%;" >}}
+{{< img src="tracing/service_catalog/service_catalog_updated.mp4" video=true alt="Navigating around the Software Catalog" style="width:100%;" >}}
 
 ## Overview
 
-Datadog [Service Catalog][1] provides a consolidated view of your services, combining ownership metadata, performance insights, security analysis, cost allocation, and much more. It makes it easy for organizations to achieve end-to-end service ownership at scale, get real-time performance insights, detect and address reliability and security risks, and manage application dependencies all in one place. 
+Datadog [Software Catalog][1] provides a consolidated view of your services, combining ownership metadata, performance insights, security analysis, cost allocation, and much more. It makes it easy for organizations to achieve end-to-end service ownership at scale, get real-time performance insights, detect and address reliability and security risks, and manage application dependencies all in one place. 
 
 {{< callout url="https://www.datadoghq.com/product-preview/internal-developer-portal/" d_target="#signupModal" btn_hidden="false" header="Opt in to the preview for our Internal Developer Portal!" >}}
 {{< /callout >}}
@@ -72,8 +72,8 @@ Datadog [Service Catalog][1] provides a consolidated view of your services, comb
 
 ## Getting started
 
-{{< whatsnext desc="Explore what Service Catalog has to offer:" >}}
-    {{< nextlink href="/service_catalog/navigating/" >}}Navigating the Service Catalog{{< /nextlink >}}
+{{< whatsnext desc="Explore what Software Catalog has to offer:" >}}
+    {{< nextlink href="/service_catalog/navigating/" >}}Navigating the Software Catalog{{< /nextlink >}}
     {{< nextlink href="/service_catalog/investigating" >}}Investigating a service{{< /nextlink >}}
 {{< /whatsnext >}}
 
@@ -82,8 +82,8 @@ Datadog [Service Catalog][1] provides a consolidated view of your services, comb
 For general information, see [Role Based Access Control][2] and [Role Permissions][3].
 ### Read permission
 
-The Service Catalog read permission allows a user to read service catalog data, which enables the following features:
-- Service Catalog list
+The Software Catalog read permission allows a user to read service catalog data, which enables the following features:
+- Software Catalog list
 - Discover UI
 - Service Definition endpoint: `/api/v2/services/definition/<service_name>`
 
@@ -91,7 +91,7 @@ The permission is enabled by default in the **Datadog Read Only Role** and **Dat
 
 ### Write permission
 
-The Service Catalog write permission allows a user to modify service catalog data. The write permission is required for the following features:
+The Software Catalog write permission allows a user to modify service catalog data. The write permission is required for the following features:
 - Inserting or Updating a Service Definition with the `POST /api/v2/services/definitions` endpoint
 - Deleting a Service Definition with the `DELETE /api/v2/services/definition/<service_name>` endpoint
 - Completing the onboarding process in the Discover Services UI
@@ -119,7 +119,7 @@ Some integrations alias to types. For example, Postgres, MySQL, and Cassandra ma
 {{< site-region region="ap1,us3,us5,eu,us" >}}
 ## Filtering service catalog entries by component
 
-Every entry showing up in the Service Catalog is categorized as a component type:
+Every entry showing up in the Software Catalog is categorized as a component type:
 
 *  Services
 *  Datastores
@@ -128,9 +128,9 @@ Every entry showing up in the Service Catalog is categorized as a component type
 *  External providers
 *  Endpoints
 
-{{< img src="tracing/service_catalog/select-component.png" alt="Service Catalog component selector" style="width:30%;" >}}
+{{< img src="tracing/service_catalog/select-component.png" alt="Software Catalog component selector" style="width:30%;" >}}
 
-Datadog populates Service Catalog entries and determines their associated component type based on collected span attributes for APM ([peer tags][10]), but also based other collected telemetry types (USM, DSM, RUM, etc...).
+Datadog populates Software Catalog entries and determines their associated component type based on collected span attributes for APM ([peer tags][10]), but also based other collected telemetry types (USM, DSM, RUM, etc...).
 
 **Note**: The component supersedes the `type` filter (derived from the `span.type` span attribute), as it detects more reliably and more granularly the different entity types. For instance, you can filter by datastore technology using the `datastore type` facet.
 

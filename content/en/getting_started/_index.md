@@ -113,7 +113,7 @@ For the fastest introduction to navigating Datadog, try the [Quick Start course]
 {{< whatsnext desc="Product:">}}
 {{< nextlink href="/getting_started/containers" >}}<u>Containers</u>: Learn how to use Agent Autodiscovery and the Datadog operator.{{< /nextlink >}}
 {{< nextlink href="/getting_started/serverless" >}}<u>Serverless for AWS Lambda</u>: Learn how to collect metrics, logs, and traces from your serverless infrastructure.{{< /nextlink >}}
-{{< nextlink href="/getting_started/service_catalog" >}}<u>Service Catalog</u>: Manage service ownership, reliability, and performance at scale in Service Catalog. {{< /nextlink >}}
+{{< nextlink href="/getting_started/service_catalog" >}}<u>Software Catalog</u>: Manage service ownership, reliability, and performance at scale in Software Catalog. {{< /nextlink >}}
 {{< nextlink href="/getting_started/tracing" >}}<u>Tracing</u>: Set up the Agent to trace a small application.{{< /nextlink >}}
 {{< nextlink href="/getting_started/profiler" >}}<u>Profiler</u>: Use Continuous Profiler to find and fix performance problems in your code.{{< /nextlink >}}
 {{< nextlink href="/getting_started/database_monitoring" >}}<u>Database Monitoring</u>: View the health and performance of databases, and quickly troubleshoot any issues that arise.{{< /nextlink >}}

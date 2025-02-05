@@ -13,7 +13,7 @@ further_reading:
   text: "Learn about setting up failure data in DORA Metrics"
 - link: "/tracing/service_catalog"
   tag: "Documentation"
-  text: "Learn about the Service Catalog"
+  text: "Learn about the Software Catalog"
 - link: "https://github.com/DataDog/datadog-ci"
   tag: "Source Code"
   text: "Learn about the datadog-ci CLI tool"
@@ -41,7 +41,7 @@ Deployment events are used to compute [deployment frequency](#calculating-deploy
 
 To ensure your service deployments tracked by APM contribute to DORA Metrics, the following requirements must be met:
 
-- Your service has [metadata][16] defined in the Service Catalog.
+- Your service has [metadata][16] defined in the Software Catalog.
 - Your service has [unified service tagging][17] enabled. Deployments are identified using the `version` tag.
 
 For more information about ensuring service deployments that are tracked by APM contribute to change lead time, see [Deployment Data Sources][18].
@@ -59,7 +59,7 @@ To send your own deployment events, use the [DORA Metrics API][21] or the [`data
 The following attributes are required:
 - `started_at`: The time the deployment started.
 - `finished_at`: The time the deployment finished.
-- `service`: The service that was deployed. If the provided service is registered in the [Service Catalog][23] with metadata set up (see [Adding Metadata][24]), the `team` of the service is automatically retrieved and associated with all metrics.
+- `service`: The service that was deployed. If the provided service is registered in the [Software Catalog][23] with metadata set up (see [Adding Metadata][24]), the `team` of the service is automatically retrieved and associated with all metrics.
 
 The `repository_url` and `commit_sha` attributes are also required for calculating the Change Lead Time metric. Optionally, you can specify a `team` attribute to associate a deployment with a different `team` than is found automatically for the service. You can also specify the `env` attribute to filter your DORA metrics by environment on the [**DORA Metrics** page][25].
 

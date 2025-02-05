@@ -41,7 +41,7 @@ Upon import, the following occurs:
 - `spec.dependsOn` gets mapped to `dependsOn`
 - Other `spec` values get mapped to custom tags
 
-**Note**: The Service Catalog processes the entire YAML file as a whole. If any section of the YAML file does not have `kind:component` or `kind:system`, the entire `catalog-info.yaml file` is rejected. Schema version v3.0 is required to use kind:system and the `dependsOn` field.
+**Note**: The Software Catalog processes the entire YAML file as a whole. If any section of the YAML file does not have `kind:component` or `kind:system`, the entire `catalog-info.yaml file` is rejected. Schema version v3.0 is required to use kind:system and the `dependsOn` field.
 
 ### Example YAML for catalog-info.yaml
 {{< code-block lang="yaml" filename="catalog-info.yaml" collapsible="true" >}}

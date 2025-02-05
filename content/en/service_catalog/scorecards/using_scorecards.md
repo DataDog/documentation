@@ -5,7 +5,7 @@ aliases:
 further_reading:
 - link: "/tracing/service_catalog/"
   tag: "Documentation"
-  text: "Service Catalog"
+  text: "Software Catalog"
 - link: /api/latest/service-scorecards/
   tag: "Documentation" 
   text: "Scorecards API" 
@@ -28,7 +28,7 @@ After configuring your Scorecards, you can view service-level scores, track scor
 
 ## View service-level details and scores
 
-The Scorecard summary is accessible on the [**Explore** page][1] in the Service Catalog under the **Scorecards** column in the **Ownership** tab. You can see how your specific service or subset of services is doing for each scorecard, and the rules within each. 
+The Scorecard summary is accessible on the [**Explore** page][1] in the Software Catalog under the **Scorecards** column in the **Ownership** tab. You can see how your specific service or subset of services is doing for each scorecard, and the rules within each. 
 
 Click **View Details** from the Scorecard, or open the service details side panel to see the **Scorecards** tab, which lists all the Scorecards, the rules, and that service's pass-fail score for each rule.
 

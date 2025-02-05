@@ -1,5 +1,5 @@
 ---
-title: Customize the Service Catalog
+title: Customize the Software Catalog
 further_reading:
 - link: "https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/service_definition_yaml"
   tag: "External Site"
@@ -18,18 +18,18 @@ aliases:
     - /service_catalog/enrich_default_catalog/
 ---
 
-You can customize your engineering team's landing experience in Service Catalog. Developer Home is a new personalized dashboard experience in beta, designed to help developers access prioritized tasks, pull requests, alerts, and insights all in one place.
+You can customize your engineering team's landing experience in Software Catalog. Developer Home is a new personalized dashboard experience in beta, designed to help developers access prioritized tasks, pull requests, alerts, and insights all in one place.
 
 {{< callout url="https://forms.gle/nkAu2z4gc2dGWcGw5" d_target="#signupModal" btn_hidden="false" header="Opt in to the private beta for Developer Homepage experience!" >}}
 {{< /callout >}}
 
 ## Automatic discovery
 
-Datadog Service Catalog is pre-populated with entries detected through [APM][2], eBPF-based autodiscovery with [Universal Service Monitoring][1], and RUM applications.
+Datadog Software Catalog is pre-populated with entries detected through [APM][2], eBPF-based autodiscovery with [Universal Service Monitoring][1], and RUM applications.
 
 With APM, Datadog can automatically discover the dependencies for an instrumented service, such as a database, a queue, or a third-party dependencies, even if that dependency hasn't been instrumented yet. These uninstrumented dependencies are categorized as separate *services*. Datadog changed service names of client spans (span.kind:client) to represent dependencies of your instrumented services. For example, a span representing a client call from a service auth-dotnet to a PostgreSQL database would be tagged with service:auth-dotnet-postgres. 
 
-If you are using APM and would like to remove the automatically named *services* from your Service Catalog and Service Map, you can opt in to new [inferred entities experience][7], which allows you to filter Service Catalog entries by entity type, such as database, queue, or third-party dependencies. You can optionally [remove][8] any [service overrides][9] like service:my-service-http-client from your catalog or map.
+If you are using APM and would like to remove the automatically named *services* from your Software Catalog and Service Map, you can opt in to new [inferred entities experience][7], which allows you to filter Software Catalog entries by entity type, such as database, queue, or third-party dependencies. You can optionally [remove][8] any [service overrides][9] like service:my-service-http-client from your catalog or map.
 
 For information about discovering endpoints, see [Discovering Endpoints from APM][11].
 
@@ -107,19 +107,19 @@ extensions:
     customField2: customValue2
 {{< /code-block >}}
 
-## Find Service Catalog actions
-To explore the complete set of actions specifically related to Service Catalog, navigate to the [Datadog Action Catalog][6]. Filter for the actions you need:
+## Find Software Catalog actions
+To explore the complete set of actions specifically related to Software Catalog, navigate to the [Datadog Action Catalog][6]. Filter for the actions you need:
 
 1. **Access the Action Catalog**: Look for the Action Catalog within your Datadog Workflow Automation environment.
-2. **Search Functionality**: Use the search bar to search for keywords like "Service Catalog" or more specific terms related to desired actions (for example, "get service dependencies").
+2. **Search Functionality**: Use the search bar to search for keywords like "Software Catalog" or more specific terms related to desired actions (for example, "get service dependencies").
 
-### Available Service Catalog Actions
+### Available Software Catalog Actions
 
-Below is a comprehensive list of actions available for Service Catalog in Datadog Workflow Automation. Note that this list may evolve as new actions are added. 
+Below is a comprehensive list of actions available for Software Catalog in Datadog Workflow Automation. Note that this list may evolve as new actions are added. 
 
 - **Retrieve Service Information**
   - "Get service definition" for a single service
-  - "List service definitions" to get all definitions from Datadog Service Catalog
+  - "List service definitions" to get all definitions from Datadog Software Catalog
   - "Get service dependencies" to get a service's immediate upstream and downstream services
 - **Incident Triage**
   - "Get service PagerDuty on call"
@@ -131,7 +131,7 @@ The service color is used in trace visualizations. Click the service type icon t
 {{< img src="tracing/service_catalog/change_service_color.png" alt="Click the service icon to select a different icon color." style="width:80%;" >}}
 
 ## Update the service type and language
-With [Service Catalog metadata schema 2.2][5], you can specify the type and language for user-defined services or overwrite the auto-detected type and language for instrumented services. Correctly label the service type and language to help other teams further understand what your services do and how to interact with them. 
+With [Software Catalog metadata schema 2.2][5], you can specify the type and language for user-defined services or overwrite the auto-detected type and language for instrumented services. Correctly label the service type and language to help other teams further understand what your services do and how to interact with them. 
 
 
 ## Further reading

@@ -5,7 +5,7 @@ aliases:
 further_reading:
 - link: "/tracing/service_catalog/"
   tag: "Documentation"
-  text: "Service Catalog"
+  text: "Software Catalog"
 - link: /api/latest/service-scorecards/
   tag: "Documentation" 
   text: "Scorecards API" 
@@ -51,7 +51,7 @@ To evaluate and add custom rules in the Scorecards UI:
 
 Workflow Automation allows you to automate the evaluation of your custom rules in Datadog using the [**Update scorecard rule outcome** action][3]. To set up a custom rule evaluation, create a Workflow from scratch or use one of the [Scorecards blueprints][4]. 
 
-{{< img src="/tracing/service_catalog/scorecards_workflow_example.png" alt="Workflow evaluating whether a service has a tier defined in Service Catalog" style="width:90%;" >}}
+{{< img src="/tracing/service_catalog/scorecards_workflow_example.png" alt="Workflow evaluating whether a service has a tier defined in Software Catalog" style="width:90%;" >}}
 
 To set up a custom rule evaluation using Workflow Automation: 
 
@@ -59,7 +59,7 @@ To set up a custom rule evaluation using Workflow Automation:
 2. [Create a Workflow][5].
 3. Set a schedule for your Workflow to run on.
 4. Click plus (+) icon to add a step.
-5. Use the [**List service definitions** action][6] to fetch all defined services from Service Catalog.
+5. Use the [**List service definitions** action][6] to fetch all defined services from Software Catalog.
 6. Insert a [For loop][7] to iterate over each service one-by-one.
 7. Select the action needed to fetch your evaluation data.
 8. Transform the returned data using a custom JavaScript function to generate pass/fail outcomes for each service.

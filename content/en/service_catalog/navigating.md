@@ -1,5 +1,5 @@
 ---
-title: Navigate the Service Catalog
+title: Navigate the Software Catalog
 aliases:
   - /tracing/service_catalog/browsing
   - /service_catalog/browsing
@@ -15,21 +15,21 @@ further_reading:
   text: "Get started with DORA metrics"
 - link: "https://www.datadoghq.com/blog/manage-service-catalog-categories-with-service-definition-json-schema/"
   tag: "Blog"
-  text: "Manage Service Catalog entries with the Service Definition JSON Schema"
+  text: "Manage Software Catalog entries with the Service Definition JSON Schema"
 - link: "https://www.datadoghq.com/blog/apm-security-view/"
   tag: "Blog"
   text: "Gain visibility into risks, vulnerabilities, and attacks with APM Security View"
 - link: "https://www.datadoghq.com/blog/service-catalog-setup/"
   tag: "Blog"
-  text: "Easily add tags and metadata to your services using the simplified Service Catalog setup"
+  text: "Easily add tags and metadata to your services using the simplified Software Catalog setup"
 - link: "https://www.datadoghq.com/blog/github-actions-service-catalog/"
   tag: "Blog"
-  text: "I use GitHub Ac­tions for Data­dog's Service Catalog, and you should, too"
+  text: "I use GitHub Ac­tions for Data­dog's Software Catalog, and you should, too"
 algolia:
   tags: ['service catalog']
 ---
 
-On the [Service Catalog page][1], see the list of services in your Datadog organization which are either detected from collected data or manually declared by someone [registering the service][2]. To find a particular service, search by its name. To narrow down to only explicitly declared entries, you can search by the **Service Origin** facet and filter by **user-defined**.
+On the [Software Catalog page][1], see the list of services in your Datadog organization which are either detected from collected data or manually declared by someone [registering the service][2]. To find a particular service, search by its name. To narrow down to only explicitly declared entries, you can search by the **Service Origin** facet and filter by **user-defined**.
 
 ## Ownership view
 
@@ -51,7 +51,7 @@ The **Reliability** tab contains information about the stability of your service
 
 Click the Settings icon on the right hand corner to hide columns from the list.
 
-{{< img src="tracing/service_catalog/svc-cat-reliability.png" alt="Service Catalog Reliability view showing several services and their associated MTTR, deployment metrics, issues, incidents, SLOs, and monitor statuses." style="width:100%;" >}}
+{{< img src="tracing/service_catalog/svc-cat-reliability.png" alt="Software Catalog Reliability view showing several services and their associated MTTR, deployment metrics, issues, incidents, SLOs, and monitor statuses." style="width:100%;" >}}
 
 ## Performance view
 
@@ -92,14 +92,14 @@ To access additional details describing security vulnerabilities and signals, cl
 Click the Settings icon on the right hand corner to hide metric columns from the list.
 
 ## Costs view
-The **Costs tab** provides several ways to understand the costs associated with your services.  Powered by [Cloud Cost Management][9], you can identify potential inefficiencies, saving opportunities, and change over time. Positioning costs data alongside metrics available in Service Catalog can improve visibility into how engineering changes affect overall cloud spend. Sort the table by clicking columns to reveal services that:
+The **Costs tab** provides several ways to understand the costs associated with your services.  Powered by [Cloud Cost Management][9], you can identify potential inefficiencies, saving opportunities, and change over time. Positioning costs data alongside metrics available in Software Catalog can improve visibility into how engineering changes affect overall cloud spend. Sort the table by clicking columns to reveal services that:
 
 - Have the highest amortized AWS costs in the last month
 - Show a significant change in the rate of cloud spending over time
 
 For more information on a service's cost changes, click on the service row to open a detailed side panel. To see this information on the Cloud Costs page, click the **View in Analytics** button.
 
-{{< img src="tracing/service_catalog/svc-cat-costs-view.png" alt="Service Catalog Costs view showing several services and their associated cloud cost and monthly change details." style="width:100%;" >}}
+{{< img src="tracing/service_catalog/svc-cat-costs-view.png" alt="Software Catalog Costs view showing several services and their associated cloud cost and monthly change details." style="width:100%;" >}}
 
 This information is only available for Cloud Cost Management customers who have configured the necessary [AWS Integration][10] and [Tag Pipelines][11].
 
@@ -110,7 +110,7 @@ The **Software Delivery tab** provides several ways to assess and improve the pr
 
 - View performance of the [CI pipelines][12] related to your services.
 - Find security and code quality issues from [Static Analysis][13].
-- Easily pivot from Service Catalog to troubleshoot pre-production slowdowns and failures.
+- Easily pivot from Software Catalog to troubleshoot pre-production slowdowns and failures.
 - See your Change Lead Time by integrating with [DORA Metrics][16].
 
 To access additional details describing your CI status and static analysis violations, click on a service and see the status of each pipeline and rule violation.

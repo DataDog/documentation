@@ -22,7 +22,7 @@ further_reading:
   text: "Learn about Metric Monitors"
 - link: "/service_catalog"
   tag: "Documentation"
-  text: "Learn about the Service Catalog"
+  text: "Learn about the Software Catalog"
 ---
 
 {{< site-region region="gov" >}}

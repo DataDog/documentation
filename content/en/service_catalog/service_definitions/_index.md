@@ -22,7 +22,7 @@ further_reading:
 
 ## Metadata structure and supported versions
 
-Service Catalog uses definition schemas to store and display relevant metadata about your services. The schemas have built-in validation rules to ensure that only valid values are accepted. You can view warnings in the **Definition** tab on the Service Catalog side panel for any selected services. 
+Software Catalog uses definition schemas to store and display relevant metadata about your services. The schemas have built-in validation rules to ensure that only valid values are accepted. You can view warnings in the **Definition** tab on the Software Catalog side panel for any selected services. 
 
 ## Supported versions
 
@@ -51,22 +51,22 @@ The following features are supported in each version:
 
 For detailed information about each version, including full schemas and example YAML files, see the individual version pages in [Supported versions](#supported-versions).
 
-## Add metadata to Service Catalog
+## Add metadata to Software Catalog
 
 ### Add metadata from the Datadog UI
 
-1. On the [Service Catalog][5] page, click **Setup & Config**.
+1. On the [Software Catalog][5] page, click **Setup & Config**.
 2. Click **Create New Entry**.
 3. Specify the service you are adding metadata to.
 4. Enter details for Team, On-call, Contacts, Documentation, Code repo, and Other links.
 5. Switch to **YAML** or **JSON** to see the generated code and cURL command.
-6. If you have the [Service Catalog Write][12] permission, you can submit the metadata by clicking **Save Entry** or by running the provided cURL command.
+6. If you have the [Software Catalog Write][12] permission, you can submit the metadata by clicking **Save Entry** or by running the provided cURL command.
 
 ### Add metadata with automation
 
 #### Store and edit definitions in GitHub
 
-Configure the [GitHub integration][6] to directly link from where you view the service's definition in the Service Catalog to where it's stored and editable in GitHub. Datadog scans for the `service.datadog.yaml` and `entity.datadog.yaml` files throughout each repository with read permissions.
+Configure the [GitHub integration][6] to directly link from where you view the service's definition in the Software Catalog to where it's stored and editable in GitHub. Datadog scans for the `service.datadog.yaml` and `entity.datadog.yaml` files throughout each repository with read permissions.
 
 To install the GitHub integration:
 1. Navigate to the [integration tile][7].
@@ -74,19 +74,19 @@ To install the GitHub integration:
 
 When the GitHub integration is set up for your definitions, an **Edit in GitHub** button appears in the service's **Definition** tab and links you to GitHub to commit changes.
 
-{{< img src="tracing/service_catalog/svc_cat_contextual_link.png" alt="An Edit in GitHub button appears in the Definition tab of a service in the Service Catalog" style="width:90%;" >}}
+{{< img src="tracing/service_catalog/svc_cat_contextual_link.png" alt="An Edit in GitHub button appears in the Definition tab of a service in the Software Catalog" style="width:90%;" >}}
 
-After you update the YAML files for your repositories, your changes propagate to the Service Catalog. You can register multiple services in one YAML file by creating multiple YAML documents. Separate each document with three dashes (`---`).
+After you update the YAML files for your repositories, your changes propagate to the Software Catalog. You can register multiple services in one YAML file by creating multiple YAML documents. Separate each document with three dashes (`---`).
 
 To prevent accidental overwriting, create and modify your definition files with either the GitHub integration or the [Definition API endpoints][11]. Updating the same service using both the GitHub and the API may result in unintended overwriting.  
 
 #### Automate definition updates with Terraform
 
-The Service Catalog provides a definition as a [Terraform resource][8]. Creating and managing services in the Service Catalog through automated pipelines requires [Datadog Provider][9] v3.16.0 or later.
+The Software Catalog provides a definition as a [Terraform resource][8]. Creating and managing services in the Software Catalog through automated pipelines requires [Datadog Provider][9] v3.16.0 or later.
 
 #### Open-source metadata provider
 
-As an alternative to the GitHub integration and Terraform, you can use an open-sourced GitHub Action solution named [Datadog Service Catalog Metadata Provider][10].
+As an alternative to the GitHub integration and Terraform, you can use an open-sourced GitHub Action solution named [Datadog Software Catalog Metadata Provider][10].
 
 ### Add metadata to endpoints
 

@@ -7,7 +7,7 @@ aliases:
 further_reading:
   - link: "/tracing/service_catalog/"
     tag: "Documentation"
-    text: "Datadog Service Catalog"
+    text: "Datadog Software Catalog"
   - link: "/tracing/service_catalog/scorecards/"
     tag: "Documentation"
     text: "Datadog Scorecards"
@@ -19,13 +19,13 @@ further_reading:
     text: "Best practices for monitoring cloud costs with Scorecards"
 ---
 
-Datadog’s [Service Catalog][4], [Scorecards][2], and [Workflow Automation][5] enable organizations to monitor and optimize cloud costs with team-level granularity, ensuring appropriate cost allocation and protocol compliance.
+Datadog’s [Software Catalog][4], [Scorecards][2], and [Workflow Automation][5] enable organizations to monitor and optimize cloud costs with team-level granularity, ensuring appropriate cost allocation and protocol compliance.
 
 ## Proactively monitor cost spikes
 
-[Datadog's Cloud Cost Management][1] integrates with the Service Catalog to detect and alert on cost anomalies in real time. Teams can quickly investigate spikes by correlating them with service-level changes like traffic fluctuations, deployments, or PR merges. 
+[Datadog's Cloud Cost Management][1] integrates with the Software Catalog to detect and alert on cost anomalies in real time. Teams can quickly investigate spikes by correlating them with service-level changes like traffic fluctuations, deployments, or PR merges. 
 
-{{< img src="tracing/service_catalog/ccm-use-cases-cost-spikes.png" alt="The Costs tab for a service in the Service Catalog, showing cost metrics for different components of the infrastructure." >}}
+{{< img src="tracing/service_catalog/ccm-use-cases-cost-spikes.png" alt="The Costs tab for a service in the Software Catalog, showing cost metrics for different components of the infrastructure." >}}
 
 ## Ensure cost compliance and transparency
 

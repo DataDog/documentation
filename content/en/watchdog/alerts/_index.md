@@ -51,7 +51,7 @@ Available facets:
 | Service             | The service to display alerts from. See [Unified Service Tagging][5] for more information about the `service` tag.|
 | End User Impacted   | (Requires RUM). If Watchdog found any end users impacted. See [Impact Analysis][4] for more information. |
 | Root Cause          | (Requires APM). If Watchdog found the root cause of the anomaly or the critical failure. See [Root Cause Analysis][9] for more information. |
-| Team                | The team owning the impacted services. Enriched from the [Service Catalog][7].  |
+| Team                | The team owning the impacted services. Enriched from the [Software Catalog][7].  |
 | Log Anomaly Type    | Only display log anomalies of this type. The supported types are new log patterns and increases in existing log patterns.|
 | Log Source          | Only display alerts containing logs from this source.                           |
 | Log Status          | Only display alerts containing logs of this log status.                         |
@@ -189,14 +189,14 @@ Watchdog Alerts appear in the following places within Datadog:
 
 * The [Watchdog Alert Explorer][1]
 * On any individual [APM Service Page][3]
-* In the [Service Catalog][7]
+* In the [Software Catalog][7]
 * In the [Watchdog Insights panel][8], available on all explorers 
 
 ### Watchdog binoculars on APM pages
 
-When Watchdog detects an irregularity in an APM metric, the pink Watchdog binoculars icon appears next to the impacted service in the [APM Service Catalog][7].
+When Watchdog detects an irregularity in an APM metric, the pink Watchdog binoculars icon appears next to the impacted service in the [APM Software Catalog][7].
 
-{{< img src="watchdog/service_list.png" alt="Screenshot of the Service Catalog, showing 5 services. A pink binoculars icon follows the name of the web-store service." style="width:75%;" >}}
+{{< img src="watchdog/service_list.png" alt="Screenshot of the Software Catalog, showing 5 services. A pink binoculars icon follows the name of the web-store service." style="width:75%;" >}}
 
 You can see greater detail about a metric anomaly by navigating to the top of a [Service Page][3] with the [Watchdog Insights][8] carousel.
 

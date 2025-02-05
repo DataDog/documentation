@@ -9,7 +9,7 @@ further_reading:
       text: 'Kafka Integration'
     - link: '/tracing/service_catalog/'
       tag: 'Documentation'
-      text: 'Service Catalog'
+      text: 'Software Catalog'
 ---
 
 Data Streams Monitoring (DSM) propagates context through message headers. Use manual instrumentation to set up DSM if you are using:

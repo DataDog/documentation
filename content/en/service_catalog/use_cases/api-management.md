@@ -7,12 +7,12 @@ aliases:
 further_reading:
   - link: "/tracing/service_catalog/"
     tag: "Documentation"
-    text: "Datadog Service Catalog"
+    text: "Datadog Software Catalog"
 ---
 
-Service Catalog simplifies API management by providing a centralized platform for API discovery, ownership, and governance. By ensuring APIs are easy to find, use, and maintain, Service Catalog fosters effective collaboration between developers and managers.
+Software Catalog simplifies API management by providing a centralized platform for API discovery, ownership, and governance. By ensuring APIs are easy to find, use, and maintain, Software Catalog fosters effective collaboration between developers and managers.
 
-{{< img src="tracing/service_catalog/api-management-use-case.png" alt="The side panel view of an API in Service Catalog, showing API metadata and an OpenAI preview." >}}
+{{< img src="tracing/service_catalog/api-management-use-case.png" alt="The side panel view of an API in Software Catalog, showing API metadata and an OpenAI preview." >}}
 
 ## API discovery and usability:
 

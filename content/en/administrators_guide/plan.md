@@ -217,13 +217,13 @@ Web servers are almost always inter-connected with other services through a netw
 
 Datadog infrastructure monitoring comes with additional products that you can use to maximize observability of your environments.
 
-### Service Catalog
+### Software Catalog
 
 [Service catalog][30] provides an overview of services, showing which were recently deployed, which haven't been deployed for a while, which services report the most errors, and those with on-going incidents, and much more.
 
-Service Catalog also helps you evaluate the coverage of your observability setup. As you continue your roll out, you can check in on the Setup Guidance tab of each of your services, to ensure that they have the expected configurations:
+Software Catalog also helps you evaluate the coverage of your observability setup. As you continue your roll out, you can check in on the Setup Guidance tab of each of your services, to ensure that they have the expected configurations:
 
-{{< img src="/administrators_guide/service_catalog_2.png" alt="Service Catalog home screen" style="width:90%;">}}
+{{< img src="/administrators_guide/service_catalog_2.png" alt="Software Catalog home screen" style="width:90%;">}}
 
 You can add components that you aren't planning on monitoring immediately, such as cron jobs or libraries, to create a comprehensive view of your system, and to mark team members who are responsible for these components ahead of the next phase of your Datadog rollout.
 

@@ -16,7 +16,7 @@ further_reading:
 
 ## Overview
 
-[Universal Service Monitoring][1] discovers services using popular container tags (such as `app`, `short_image`, and `kube_deployment`) and generates entries in the [Service Catalog][2] for those services. 
+[Universal Service Monitoring][1] discovers services using popular container tags (such as `app`, `short_image`, and `kube_deployment`) and generates entries in the [Software Catalog][2] for those services. 
 
 You can access request, error, and duration metrics in Datadog for both inbound and outbound traffic on all services discovered with Universal Service Monitoring. These service health metrics are useful for creating alerts, [tracking deployments][3], and getting started with [service level objectives (SLOs)][4] so you can get broad visibility into all services running on your infrastructure. 
 
@@ -57,7 +57,7 @@ The same translations apply for the `universal.http.server` operation that captu
 
 ## Usage
 
-Navigate to [**Infrastructure > Universal Service Monitoring**][8], filter by Universal Service Monitoring telemetry type, and click on a service. The **Performance** tab displays service-level graphs on hits, latency, requests, errors, and more. You can also access these metrics when creating a [monitor](#create-a-monitor) or an [SLO](#create-an-slo), or by looking at a [dashboard](#access-a-defined-dashboard) in the [Service Catalog][2].
+Navigate to [**Infrastructure > Universal Service Monitoring**][8], filter by Universal Service Monitoring telemetry type, and click on a service. The **Performance** tab displays service-level graphs on hits, latency, requests, errors, and more. You can also access these metrics when creating a [monitor](#create-a-monitor) or an [SLO](#create-an-slo), or by looking at a [dashboard](#access-a-defined-dashboard) in the [Software Catalog][2].
 
 ### Create a monitor
 
@@ -77,9 +77,9 @@ For more information, see the [APM Monitor documentation][12].
 
 You can create an [**SLO**][13] on a per-service basis to ensure you are meeting objectives set by USM metrics and improving availability over time. Datadog recommends [creating an SLO programmatically][14] to cover a lot of services. 
 
-To create an SLO from the Service Catalog:
+To create an SLO from the Software Catalog:
 
-1. Navigate to the **Reliability** tab of the [Service Catalog][8].
+1. Navigate to the **Reliability** tab of the [Software Catalog][8].
 2. Under the **SLOs** column, hover over a service and click **+ Create Availability SLO** or **+ Create Latency SLO**.
 
 {{< img src="universal_service_monitoring/guide/service_catalog_slo_setup.png" alt="Setting up a Universal Service Monitoring SLO for BITSBOUTIQUE" style="width:100%;" >}}
@@ -107,9 +107,9 @@ For more information, see the [Service Level Objectives documentation][17].
 
 ### Access a defined dashboard
 
-The [Service Catalog][2] identifies dashboards defined in your service definition file and lists them on the **Dashboards** tab. Click **Manage Dashboards** to access and edit the service definition directly in GitHub. 
+The [Software Catalog][2] identifies dashboards defined in your service definition file and lists them on the **Dashboards** tab. Click **Manage Dashboards** to access and edit the service definition directly in GitHub. 
 
-{{< img src="universal_service_monitoring/guide/manage_dashboards.png" alt="Manage Dashboards button in the Dashboards tab of a service in the Service Catalog" style="width:90%;" >}}
+{{< img src="universal_service_monitoring/guide/manage_dashboards.png" alt="Manage Dashboards button in the Dashboards tab of a service in the Software Catalog" style="width:90%;" >}}
 
 For more information, see the [Dashboards documentation][16].
 

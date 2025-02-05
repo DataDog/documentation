@@ -351,7 +351,7 @@ The following table contains all available attributes:
 
 {{% collapse-content title="Query group by service" level="h5" %}}
 
-If your monitor triggers an alert for each `service`, then you can access some attribute of the service, as defined in the [Service Catalog][10].
+If your monitor triggers an alert for each `service`, then you can access some attribute of the service, as defined in the [Software Catalog][10].
 
 Service metadata variables:
 
@@ -681,7 +681,7 @@ If `host.name` matches `<HOST_NAME>`, the template outputs:
 
 If your alert message includes information that needs to be encoded in a URL (for example, for redirections), use the `{{ urlencode "<variable>"}}` syntax.
 
-**Example**: If your monitor message includes a URL to the Service Catalog filtered to a specific service, use the `service` [tag variable](#attribute-and-tag-variables) and add the `{{ urlencode "<variable>"}}` syntax to the URL:
+**Example**: If your monitor message includes a URL to the Software Catalog filtered to a specific service, use the `service` [tag variable](#attribute-and-tag-variables) and add the `{{ urlencode "<variable>"}}` syntax to the URL:
 
 ```
 https://app.datadoghq.com/services/{{urlencode "service.name"}}

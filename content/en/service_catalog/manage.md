@@ -16,38 +16,38 @@ further_reading:
   text: "See Upstream and Downstream Dependencies During an Active Incident"
 - link: "https://www.datadoghq.com/blog/manage-service-catalog-categories-with-service-definition-json-schema/"
   tag: "Blog"
-  text: "Manage Service Catalog entries with the Service Definition JSON Schema"
+  text: "Manage Software Catalog entries with the Service Definition JSON Schema"
 - link: "https://www.datadoghq.com/blog/apm-security-view/"
   tag: "Blog"
   text: "Gain visibility into risks, vulnerabilities, and attacks with APM Security View"
 - link: "https://www.datadoghq.com/blog/service-catalog-setup/"
   tag: "Blog"
-  text: "Easily add tags and metadata to your services using the simplified Service Catalog setup"
+  text: "Easily add tags and metadata to your services using the simplified Software Catalog setup"
 - link: "https://www.datadoghq.com/blog/github-actions-service-catalog/"
   tag: "Blog"
-  text: "I use GitHub Actions for Data­dog's Service Catalog, and you should, too"
+  text: "I use GitHub Actions for Data­dog's Software Catalog, and you should, too"
 - link: "/tracing/service_catalog/"
   tag: "Documentation"
-  text: "Datadog Service Catalog"
+  text: "Datadog Software Catalog"
 algolia:
   tags: ['service catalog']
 ---
-`Service` is the only component type in Service Catalog schema versions v2, v2.1, and v2.2. [v3.0][10] and above supports multiple kinds of components, including `kind:system`, `kind:service`, `kind:queue`, `kind:api`, and `kind:datastore`.
+`Service` is the only component type in Software Catalog schema versions v2, v2.1, and v2.2. [v3.0][10] and above supports multiple kinds of components, including `kind:system`, `kind:service`, `kind:queue`, `kind:api`, and `kind:datastore`.
 
 ## Assigning an owner 
 
-You can assign a `team` to entries in the Service Catalog either in the UI or by creating a [Service Definition][4]. Datadog recommends that you set up [Datadog Teams][5] so that you can specify individual members of the team and take advantage of *Teams* filters across common views like Dashboards and Notebook lists. 
+You can assign a `team` to entries in the Software Catalog either in the UI or by creating a [Service Definition][4]. Datadog recommends that you set up [Datadog Teams][5] so that you can specify individual members of the team and take advantage of *Teams* filters across common views like Dashboards and Notebook lists. 
 
 ## Determining and communicating criticality 
 Not all instances of observability carry the same level of importance. Some are mission-critical, while others are less so. By identifying the service tier, lifecycle, and the application ecosystem they belong to, you can determine if the observability coverage is adequate and quickly assess the severity of issues. 
 
 ## Understanding your service configuration
 
-Following monitoring best practices such as tracing, logging, and code profiling helps you ensure that you have all the data you need during incident triage. Service Catalog provides automatic checks for these recommended setups. It helps you detect any monitoring gaps and helps you connect all available data for a service.
+Following monitoring best practices such as tracing, logging, and code profiling helps you ensure that you have all the data you need during incident triage. Software Catalog provides automatic checks for these recommended setups. It helps you detect any monitoring gaps and helps you connect all available data for a service.
 
-To view the configuration completeness for a service, click the service in the [Service Catalog][7], then find the **Setup Guidance** tab:
+To view the configuration completeness for a service, click the service in the [Software Catalog][7], then find the **Setup Guidance** tab:
 
-{{< img src="tracing/service_catalog/service-catalog-setup-guidance.png" alt="Service Catalog with the Setup Guidance tab highlighted." >}}
+{{< img src="tracing/service_catalog/service-catalog-setup-guidance.png" alt="Software Catalog with the Setup Guidance tab highlighted." >}}
 
 Alternatively, on the [*Service* page][8], click **Service Config** on the lower-left side:
 
@@ -64,11 +64,11 @@ This table does not necessarily reflect billing for individual products, but rat
 ## Investigating infrastructure
 From the **Performance** tab, find the service you are investigating. In the **Infrastructure** column, click the resources related to this service to **View in Service Context Map**.
 
-{{< img src="tracing/service_catalog/access_service_context_map.png" alt="Access the Service Context Map from the Service Catalog Performance tab, highlighting the Infrastructure column" style="width:90%;" >}}
+{{< img src="tracing/service_catalog/access_service_context_map.png" alt="Access the Service Context Map from the Software Catalog Performance tab, highlighting the Infrastructure column" style="width:90%;" >}}
 
 The Service Context Map provides an overview of the relationships and dependencies between services and related infrastructure. Use this view to analyze the source of an issue by looking at upstream and downstream services and infrastructure.
 
-Click a service in Service Catalog to open the side panel with the following details: 
+Click a service in Software Catalog to open the side panel with the following details: 
 
 ### Service details by views
 

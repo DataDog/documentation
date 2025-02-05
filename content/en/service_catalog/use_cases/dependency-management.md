@@ -17,19 +17,19 @@ further_reading:
     text: "Datadog Real User Monitoring"
 ---
 
-Datadog’s Service Catalog offers powerful dependency mapping capabilities to help teams document, track, and assess upstream and downstream relationships. These features support both automatic discovery and manual definition so you can flexibly and accurately define your system architecture.
+Datadog’s Software Catalog offers powerful dependency mapping capabilities to help teams document, track, and assess upstream and downstream relationships. These features support both automatic discovery and manual definition so you can flexibly and accurately define your system architecture.
 
 ## Automatic dependency mapping and entity discovery
 
-- **Automatic discovery:** By default, Service Catalog includes all discovered services from APM, USM, and RUM. When you instrument additional applications across your environments, their dependencies are automatically added to the Catalog.
+- **Automatic discovery:** By default, Software Catalog includes all discovered services from APM, USM, and RUM. When you instrument additional applications across your environments, their dependencies are automatically added to the Catalog.
 
-- **Telemetry integration:** Service Catalog auto-detects dependency relationships using application telemetry collected by APM, USM, and RUM, providing teams with real-time insights into service relationships and performance impacts.
+- **Telemetry integration:** Software Catalog auto-detects dependency relationships using application telemetry collected by APM, USM, and RUM, providing teams with real-time insights into service relationships and performance impacts.
 
 {{< img src="tracing/service_catalog/dependency-mgmt-use-case-auto-discovery.png" alt="The Dependencies tab in the side panel for a service, showing a flow chart of service dependencies." >}}
 
 ## Manual dependency definition in service catalog schema v3.0
 
-In [Service Catalog schema v3.0][2], teams can manually define relationships to supplement auto-detected topologies. This features is particularly helpful for defining dependencies that reflect institutional knowledge and team collaboration, ensuring a more complete view of system relationships.
+In [Software Catalog schema v3.0][2], teams can manually define relationships to supplement auto-detected topologies. This features is particularly helpful for defining dependencies that reflect institutional knowledge and team collaboration, ensuring a more complete view of system relationships.
 
 {{< img src="tracing/service_catalog/dependency-mgmt-use-case-relationship-mapping.png" alt="A hierarchical relationships diagram showing a service's dependencies." >}}
 
@@ -57,7 +57,7 @@ spec:
 
 To view manual dependencies in the Datadog app:
 
-1. Navigate to [Service Catalog][1].
+1. Navigate to [Software Catalog][1].
 1. Select your service to open the side panel.
 1. Find the Performance tab, then select the Dependencies sub-tab.
 
@@ -72,7 +72,7 @@ All dependencies, including manual dependencies, are shown. You can use the "Inc
 
 ### Benefits of manual dependency definitions
 
-- Improved accuracy: By defining dependencies manually, teams can incorporate their specific understanding and insights into the Service Catalog, ensuring it accurately represents architectures of real-world systems that automated tools might miss.
+- Improved accuracy: By defining dependencies manually, teams can incorporate their specific understanding and insights into the Software Catalog, ensuring it accurately represents architectures of real-world systems that automated tools might miss.
 - Enhanced collaboration: Manually defined dependencies support better communication and coordination by making relationships explicit, aiding in incident response efforts and strategic architecture planning.
 - Contextual knowledge: Providing manual definitions helps developers and new team members quickly understand the complexities of system dependencies and architectures, facilitating smoother onboarding and knowledge transfer.
 

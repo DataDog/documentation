@@ -23,7 +23,7 @@ further_reading:
 
 ## Create user-defined entries 
 
-To manage your own components that are not currently emitting performance metrics through APM, USM, or RUM products with Datadog Service Catalog, you can either manually add them by creating Service Definitions through the API, Terraform, GitHub integration, or [import](#import-data-from-other-sources) them from existing sources like ServiceNow or Backstage. These services are by default not associated with any Datadog telemetry, but you can link telemetries from Datadog or external sources manually using entity definition YAML files. 
+To manage your own components that are not currently emitting performance metrics through APM, USM, or RUM products with Datadog Software Catalog, you can either manually add them by creating Service Definitions through the API, Terraform, GitHub integration, or [import](#import-data-from-other-sources) them from existing sources like ServiceNow or Backstage. These services are by default not associated with any Datadog telemetry, but you can link telemetries from Datadog or external sources manually using entity definition YAML files. 
 
 To create a user-defined component, name your component in the `dd-service` (if using schema version v2.2 or prior) or `name` field (if using schema version v3.0 or later) in a `service.datadog.yaml` or `entity.datadog.yaml` file using one of the supported metadata schema versions. Datadog accepts both `service.datadog.yaml` and `entity.datadog.yaml` file names. For example: 
 

@@ -14,7 +14,7 @@ further_reading:
 
 
 ## Automate developer workflows
-Use [App Builder][2] to create dynamic, user-friendly forms to collect inputs from developers. Call Datadog's [Actions][7] from your app to initiate API calls to external services, perform custom logic, or data transformations. Orchestrate end-to-end processes of multiple actions using [Workflow Automation][1]. Integrate them with Datadog's Service Catalog to enable dynamic and self-service workflows.
+Use [App Builder][2] to create dynamic, user-friendly forms to collect inputs from developers. Call Datadog's [Actions][7] from your app to initiate API calls to external services, perform custom logic, or data transformations. Orchestrate end-to-end processes of multiple actions using [Workflow Automation][1]. Integrate them with Datadog's Software Catalog to enable dynamic and self-service workflows.
 
 {{< callout url="https://forms.gle/6Er52qd3BCERhotg7" d_target="#signupModal" btn_hidden="false">}}
   Software Templates are in Preview. Complete the form to request access.
@@ -76,9 +76,9 @@ Navigate to the [Workflow Automation][3] page to configure the template in Datad
 
   {{< img src="tracing/service_catalog/templating-app.png" alt="Application for managing software templates through App Builder" style="width:100%;" >}}
 
-### Available Service Catalog Actions
+### Available Software Catalog Actions
 
-Below is a comprehensive list of actions available for Service Catalog in Datadog Workflow Automation. Note that this list may evolve as new actions are added. 
+Below is a comprehensive list of actions available for Software Catalog in Datadog Workflow Automation. Note that this list may evolve as new actions are added. 
 
 - **Templating**
   - "Apply template" to pass in parameters to a set of files
@@ -90,7 +90,7 @@ Below is a comprehensive list of actions available for Service Catalog in Datado
   - "Create pull request" to open a pull request
 - **Retrieve Service Information**
   - "Get service definition" for a single service
-  - "List service definitions" to get all definitions from Datadog Service Catalog
+  - "List service definitions" to get all definitions from Datadog Software Catalog
   - "Get service dependencies" to get a service's immediate upstream and downstream services
 - **Incident Triage**
   - "Get service PagerDuty on call"
