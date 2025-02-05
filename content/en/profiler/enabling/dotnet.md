@@ -71,7 +71,7 @@ The following profiling features are available in the following minimum versions
 Continuous Profiler is not supported for AWS Lambda.
 
 <div class="alert alert-warning">
-  <strong>Note:</strong> Unlike APM, Continuous Profiler is not activated by default when the APM package gets installed. This is why you need to explicitly enable it for the applications you want to profile.
+  <strong>Note:</strong> Unlike APM, Continuous Profiler is not activated by default when the APM package is installed. You must explicitly enable it for the applications you want to profile.
 </div>
 
 ## Installation
