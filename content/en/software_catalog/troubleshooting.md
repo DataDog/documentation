@@ -3,6 +3,8 @@ title: Troubleshooting Software Catalog
 aliases:
   - /tracing/software_catalog/troubleshooting
   - /software_catalog/guides/troubleshooting
+  - /tracing/service_catalog/troubleshooting
+  - /service_catalog/guides/troubleshooting
   - /api_catalog/troubleshoot/
 further_reading:
   - link: "/tracing/software_catalog/setup/"

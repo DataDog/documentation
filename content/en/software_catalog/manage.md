@@ -5,6 +5,10 @@ aliases:
   - /software_catalog/investigating/
   - /tracing/software_catalog/guides/understanding-service-configuration
   - /software_catalog/guides/understanding-service-configuration/
+  - /tracing/service_catalog/investigating
+  - /service_catalog/investigating/
+  - /tracing/service_catalog/guides/understanding-service-configuration
+  - /service_catalog/guides/understanding-service-configuration/
   - /api_catalog/add_metadata
   - /api_catalog/owners_and_tags
 further_reading:

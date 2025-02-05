@@ -5,6 +5,10 @@ aliases:
   - /software_catalog/use_cases/dependency_management
   - /software_catalog/guides/dependency_management
   - /tracing/software_catalog/use_cases/dependency_management
+  - /tracing/service_catalog/guides/dependency_management
+  - /service_catalog/use_cases/dependency_management
+  - /service_catalog/guides/dependency_management
+  - /tracing/service_catalog/use_cases/dependency_management
 further_reading:
   - link: "/tracing/"
     tag: "Documentation"

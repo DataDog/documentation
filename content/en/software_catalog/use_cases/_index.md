@@ -3,6 +3,8 @@ title: Use Cases
 aliases:
   - /tracing/software_catalog/guides/
   - /software_catalog/guides
+  - /tracing/service_catalog/guides/
+  - /service_catalog/guides
 ---
 
 ## Best practices guides

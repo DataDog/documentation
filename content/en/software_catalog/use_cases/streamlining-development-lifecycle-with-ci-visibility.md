@@ -3,6 +3,8 @@ title: Streamlining the Development Lifecycle with CI Visibility
 aliases:
   - /tracing/software_catalog/guides/streamlining-development-lifecycle-with-ci-visibility
   - /software_catalog/guides/streamlining-development-lifecycle-with-ci-visibility
+  - /tracing/service_catalog/guides/streamlining-development-lifecycle-with-ci-visibility
+  - /service_catalog/guides/streamlining-development-lifecycle-with-ci-visibility
 further_reading:
   - link: "/tracing/software_catalog/"
     tag: "Documentation"

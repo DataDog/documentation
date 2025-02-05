@@ -1,10 +1,14 @@
 ---
 title: Definitions and Supported Versions
 aliases:
-- /software_catalog/adding_metadata
-- /tracing/software_catalog/service_metadata_structure
-- /tracing/software_catalog/adding_metadata
-- /software_catalog/add_metadata
+  - /software_catalog/adding_metadata
+  - /tracing/software_catalog/service_metadata_structure
+  - /tracing/software_catalog/adding_metadata
+  - /software_catalog/add_metadata
+  - /service_catalog/adding_metadata
+  - /tracing/service_catalog/service_metadata_structure
+  - /tracing/service_catalog/adding_metadata
+  - /service_catalog/add_metadata
 further_reading:
 - link: "https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/service_definition_yaml"
   tag: "External Site"

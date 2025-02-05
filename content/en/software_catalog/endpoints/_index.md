@@ -22,6 +22,7 @@ aliases:
     - /api_catalog/
     - /api_catalog/endpoint_discovery/
     - /software_catalog/endpoints/discover_endpoints
+    - /service_catalog/endpoints/discover_endpoints
 ---
 
 {{< img src="tracing/software_catalog/endpoints-list.png" alt="Endpoints list in the Software Catalog, showing performance-related information for each endpoint." style="width:100%;" >}}

@@ -2,6 +2,7 @@
 title: Use Integrations with Software Catalog
 aliases:
   - /tracing/software_catalog/integrations
+  - /tracing/service_catalog/integrations
 further_reading:
 - link: "/tracing/software_catalog/service_definition_api/"
   tag: "Documentation"

@@ -3,6 +3,8 @@ title: Navigate the Software Catalog
 aliases:
   - /tracing/software_catalog/browsing
   - /software_catalog/browsing
+  - /tracing/service_catalog/browsing
+  - /service_catalog/browsing
 further_reading:
 - link: "/tracing/software_catalog/service_definition_api/"
   tag: "Documentation"

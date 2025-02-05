@@ -3,6 +3,8 @@ title: Validating Service Definition YAMLs
 aliases:
   - /tracing/software_catalog/guides/validating-service-definition
   - /software_catalog/guides/validating-service-definition
+  - /tracing/service_catalog/guides/validating-service-definition
+  - /service_catalog/guides/validating-service-definition
 further_reading:
   - link: "/tracing/software_catalog/"
     tag: "Documentation"
