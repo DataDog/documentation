@@ -93,7 +93,12 @@ You can install the Datadog .NET Profiler machine-wide so that any services on t
 1. With [Single Step APM Instrumentation][1], there is nothing else to install. Go to [Enabling the Profiler](#enabling-the-profiler) to see how to activate the profiler for an application.
 
 <div class="alert alert-warning">
-  <strong>Note:</strong> If APM was already manually installed, you must uninstall it by removing the following environment variables: <code>CORECLR_ENABLE_PROFILING</code>, <code>CORECLR_PROFILER</code>, <code>CORECLR_PROFILER_PATH</code>, and the value that points to <code>Datadog.Linux.ApiWrapper.x64.so</code> in <code>LD_PRELOAD</code>. For example, if you are setting these environment variables in your dockerfile for a service, you should remove them to avoid conflicts with Single Step Instrumentation.
+  <strong>Note:</strong> If APM was already manually installed, you must uninstall it by removing the following environment variables:<br /> 
+  - <code>CORECLR_ENABLE_PROFILING</code><br />
+  - <code>CORECLR_PROFILER</code><br />
+  - <code>CORECLR_PROFILER_PATH</code><br />
+  - The value that points to <code>Datadog.Linux.ApiWrapper.x64.so</code> in <code>LD_PRELOAD</code><br /><br /> 
+  For example, if you are setting these environment variables in your dockerfile for a service, you should remove them to avoid conflicts with Single Step Instrumentation.
   If these environment variables are still set, the corresponding old installed version vill be silently used instead of the one installed with Single Step Instrumentation.
 </div>
 
