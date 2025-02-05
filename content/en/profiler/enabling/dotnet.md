@@ -193,7 +193,7 @@ To install the .NET Profiler per-webapp:
    | `0` or `false`                | Disable the profiler.                                                                                                 |
 
    <div class="alert alert-info">
-     <strong>Note</strong>: The Auto value is aimed to avoid short lived processes without any trace. This is in preview and this setting will soon be integrated into the Single Step Instrumentation workflow.
+     <strong>Note</strong>: The Auto value is aimed to avoid short lived processes without any trace. This feature is in Preview.
    </div>
 
 [1]: https://docs.datadoghq.com/tracing/trace_collection/automatic_instrumentation/single-step-apm
