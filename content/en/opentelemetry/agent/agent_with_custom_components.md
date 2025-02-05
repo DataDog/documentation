@@ -37,7 +37,7 @@ Download the Dockerfile template:
    ```
 2. Download the Dockerfile
    ```shell
-   curl -o Dockerfile https://raw.githubusercontent.com/DataDog/datadog-agent/7.61.x/Dockerfiles/agent-ot/Dockerfile.agent-otel
+   curl -o Dockerfile https://raw.githubusercontent.com/DataDog/datadog-agent/refs/tags/7.61.0/Dockerfiles/agent-ot/Dockerfile.agent-otel
    ```
 
 The Dockerfile:
@@ -54,7 +54,7 @@ Create and customize an OpenTelemetry Collector Builder (OCB) manifest file, whi
 
 1. Download the Datadog default manifest:
    ```shell
-   curl -o manifest.yaml https://raw.githubusercontent.com/DataDog/datadog-agent/7.61.x/comp/otelcol/collector-contrib/impl/manifest.yaml
+   curl -o manifest.yaml https://raw.githubusercontent.com/DataDog/datadog-agent/refs/tags/7.61.0/comp/otelcol/collector-contrib/impl/manifest.yaml
    ```
 2. Open the `manifest.yaml` file and add the additional OpenTelemetry components to the corresponding sections (extensions, exporters, processors, receivers, or connectors).
    The highlighted line in this example adds a [metrics transform processor][7]:
@@ -102,7 +102,9 @@ Build your custom Datadog Agent image and push it to a container registry.
 
 1. Build the image with Docker:
    ```shell
-   docker build . -t agent-otel --no-cache
+   docker build . -t agent-otel --no-cache \
+     --build-arg AGENT_VERSION="7.61.0-ot-beta-jmx" \
+     --build-arg AGENT_BRANCH="7.61.x"
    ```
 2. Tag and push the image:
    ```shell
