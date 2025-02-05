@@ -40,7 +40,7 @@ Incident Management collects the following analytic measures to form analytic qu
 - Status Stable Duration
 - Time to Detect (detected time - customer impact start time)
 - Time to Repair (customer impact end time - detected time)
-- Time to Resolve (resolved time - created time)
+- Time to Resolve (resolved time - declared time)
 - Number of Users Impacted
 - Acknowledge
 
