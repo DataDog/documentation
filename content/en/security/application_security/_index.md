@@ -14,7 +14,7 @@ further_reading:
 - link: "/security/application_security/threats/"
   tag: "Documentation"
   text: "Threat Management"
-- link: "/security/application_security/software_composition_analysis/"
+- link: "/security/code_security/software_composition_analysis/"
   tag: "Documentation"
   text: "Software Composition Analysis"
 - link: "https://www.datadoghq.com/product/security-platform/application-security-monitoring/"
@@ -85,11 +85,9 @@ In the [Security Signals Explorer][6], click on any security signal to see what 
 [Software Composition Analysis (SCA)][8] shows you when your services are at risk because they use or have dependencies on open source libraries that have known vulnerabilities. Investigate vulnerability findings and secure your software by following remediation advice or researching the cause of the vulnerability.
 
 ## Detect vulnerabilities in your application's code
-
-[Code Security][9] identifies code-level vulnerabilities in your services and provides actionable insights and recommended fixes. It uses an Interactive Application Security Testing (IAST) approach to find vulnerabilities within your application code. IAST uses instrumentation embedded in your code like application performance monitoring (APM) and it enables Datadog to identify vulnerabilities using legitimate application traffic instead of relying on external tests that could require extra configuration or periodic scheduling.
+Datadog [Code Security][9] scans your first-party code and open source libraries used in your applications in both your repositories and running services, providing end-to-end visibility of application vulnerabilities from development to production.
 
 ## Disable ASM
-
 For information on disabling ASM or its features, see the following:
 
 - [Disabling threat management and protection][10]
@@ -106,8 +104,8 @@ For information on disabling ASM or its features, see the following:
 [4]: /security/default_rules/?category=cat-application-security
 [6]: https://app.datadoghq.com/security
 [7]: https://dashcon.io/appsec
-[8]: /security/application_security/software_composition_analysis/
-[9]: /security/application_security/code_security/
+[8]: /security/code_security/software_composition_analysis/
+[9]: /security/code_security/
 [10]: /security/application_security/troubleshooting/#disabling-threat-management-and-protection
 [11]: /security/application_security/troubleshooting/#disabling-software-composition-analysis
 [12]: /security/application_security/troubleshooting/#disabling-code-security

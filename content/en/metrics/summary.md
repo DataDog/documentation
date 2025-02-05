@@ -19,12 +19,11 @@ The [Metrics Summary page][1] displays a list of your metrics reported to Datado
 
 Search your metrics by metric name or tag using the **Metric** or **Tag** search fields:
 
-{{< img src="metrics/summary/tag_advancedfiltering3.mp4" alt="The metrics summary page with NOT team:* entered in the Tag search bar" video=true style="width:75%;">}}
+{{< img src="metrics/summary/tag_advanced_filtering.png" alt="The metrics summary page with NOT team:* entered in the Tag search bar" style="width:75%;">}}
 
-Tag filtering supports boolean and wildcard syntax so that you can quickly identify: 
+Tag filtering supports Boolean and wildcard syntax so that you can identify: 
 * Metrics that are tagged with a particular tag key, for example, `team`: `team:*`
 * Metrics that are missing a particular tag key, for example, `team`: `NOT team:*`
-
 
 ## Facet panel
 
@@ -33,13 +32,14 @@ The search bars provide the most comprehensive set of actions to filter the list
 - **Configuration**: Metrics with tag configurations
 - **Percentiles**: Distribution metrics enabled by percentiles/advanced query capabilities
 - **Historical Metrics**: Metrics that have historical metrics ingestion enabled 
-- **Query Activity** (Beta): Metrics not queried in the app or by the API in the past 30 days
+- **Query Activity**: Metrics not queried in Datadog or by the API in the past 30, 60, or 90 days
+- **Related Assets** (Preview): Metrics that are used on assets (dashboards, monitors, notebooks, SLOs)
 - **Metric Type**: Differentiate between distribution and non-distribution metrics (counts, gauges, rates)
 - **Metric Origin**: The product from which the metric originated (for example, metrics generated from Logs or APM Spans). To learn more about the different metric origin types, see [Metric origin definitions][12].
 
-**Note**: A metric included on a Dashboard that has not been loaded by a user in the last 30 days would not be considered actively queried.
+**Note**: A metric included on a Dashboard that has not been loaded by a user in the last 30 days is not considered actively queried.
 
-{{< img src="metrics/summary/facets4.png" alt="Metrics Facet Panel" style="width:75%;">}}
+{{< img src="metrics/summary/facet_panel.png" alt="Metrics Facet Panel" style="width:75%;">}}
 
 ## Configuration of multiple metrics 
 
@@ -53,7 +53,7 @@ Clicking on **Configure Metrics** gives you multiple options that you can use to
 
 * **Enable or disable percentiles**: Manage percentile aggregations across multiple distribution metrics. See the [Distributions page][31] for more information.
 
-{{< img src="metrics/summary/percentile_aggregations_toggle.png" alt="Toggle to manage percentile aggregations" style="width:100%;">}}
+{{< img src="metrics/summary/percentile_aggregations_toggle_2025-01-28.png" alt="Toggle to manage percentile aggregations" style="width:100%;">}}
 
 * **Enable or disable historical metrics ingestion**: Manage the ingestion of historical metric data. See the [Historical Metrics Ingestion page][30] for more information.
 
@@ -139,15 +139,23 @@ For any particular tag key, you can:
 
 [Learn more about tagging][5].
 
-## Metrics Related Assets
+### Metrics Related Assets
 
 {{< img src="metrics/summary/related_assets_dashboards.png" alt="Related Assets for a specified metrics name" style="width:80%;">}}
 
 To determine the value of any metric name to your organization, use Metrics Related Assets. Metrics related assets refers to any dashboard, notebook, monitor, or SLO that queries a particular metric. 
 
-1. Scroll to the bottom of the metric's details side panel to the "Related Assets" section.
-2. Click the dropdown button to view the type of related asset you are interested in (dashboards, monitors, notebooks, SLOs). You can additionally leverage the search bar to validate specific assets.
+1. Scroll to the bottom of the metric's details side panel to the **Related Assets** section.
+2. Click the dropdown button to view the type of related asset you are interested in (dashboards, monitors, notebooks, SLOs). You can additionally use the search bar to validate specific assets.
    
+## Custom Metrics Tags Cardinality Explorer 
+
+{{< callout url="https://forms.gle/H3dG9tTdR6bqzHAX9" >}}
+Custom Metrics Tags Cardinality Explorer is in Preview. Use this form to request access today.
+{{< /callout >}} 
+
+{{< img src="metrics/tagsexplorer.png" alt="Custom Metrics Tags Cardinality Explorer for a spiking metric name" style="width:80%;">}}
+To determine why a particular metric name is emitting a large number of custom metrics, or spiking, use the Custom Metrics Tags Cardinality Explorer. This helps you pinpoint the tag keys driving the spike, which you can immediately exclude using Metrics without Limits™ for cost savings.
 
 ## Metrics without Limits™
 Metrics without Limits™ provides you control over the size of your custom metrics without requiring any agent or code-level changes. 
@@ -160,7 +168,6 @@ You can configure tags using the bulk metric tag configuration button or the **M
 
 1. Click on your custom distribution metric name in the **Metrics Summary** table to open the metrics details side panel.
 2. Click the **Manage Tags** button to open the tag configuration modal.
-
 3. Select **Include tags...** or **Exclude tags...** to customize the tags you do or don't want to query for. For more information on tag configuration, see the [Metrics without Limits][10] documentation.
 4. Preview the effects of your proposed tag configuration with the cardinality estimator before selecting **Save**.
 
@@ -189,7 +196,7 @@ This table shows the mapping between the metric origin as seen in the facet and 
 
 | Metric Origin           | Submitted from                                                                |
 | ------------------------| ----------------------------------------------------------------------------- |
-| API Catalog             | Timeseries sent by the Datadog [API Catalog][13] product from the APIM Endpoint.
+| API Catalog             | Timeseries sent by the Datadog [Service Catalog][13] product from the APIM Endpoint.
 | APM                     | Timeseries sent by the Datadog APM product for metrics generated from traces and span metrics.
 | Agent                   | Timeseries sent by the Datadog Agent, collected from [Agent integrations][10], [built-in integrations][9], [DogStatsD][32], or [custom Agent checks][33].
 | CSM                     | Timeseries sent by the Datadog [Cloud Security Monitoring][14] product.
@@ -230,7 +237,7 @@ This table shows the mapping between the metric origin as seen in the facet and 
 [10]: /integrations/agent_metrics/
 [11]: /account_management/billing/usage_metrics/
 [12]: /metrics/summary/#metric-origin-definitions
-[13]: /api_catalog/
+[13]: /service_catalog/endpoints/
 [14]: /security/cloud_security_management/
 [15]: /database_monitoring/
 [16]: /data_streams/

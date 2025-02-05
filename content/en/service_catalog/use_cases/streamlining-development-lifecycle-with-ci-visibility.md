@@ -40,4 +40,4 @@ There are two ways to add or remove an associated pipeline:
 [4]: /continuous_integration/
 [5]: /tracing/service_catalog/service_metadata_structure
 [6]: https://app.datadoghq.com/ci/pipelines
-[7]: /tracing/service_catalog/adding_metadata/#metadata-structure-and-supported-versions
+[7]: /service_catalog/adding_metadata/
