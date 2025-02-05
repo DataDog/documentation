@@ -9,6 +9,8 @@ further_reading:
 
 ## Overview
 
+<div class="alert alert-warning">The ATT&CK Map only covers <a href="https://attack.mitre.org/matrices/enterprise/">MITRE ATT&CK Enterprise.</a></div>
+
 The MITRE ATT&CK Framework is a knowledge base used to develop specific threat models and methodologies. Use the Cloud SIEM ATT&CK Map to explore and visualize the MITRE ATT&CK Framework against Datadog's out-of-the-box rules and your custom detection rules. The ATT&CK Map displays detection rule density as a heat map to provide visibility into attacker techniques. Security teams can use the heat map to assess gaps in coverage that is relevant to their organization or team and prioritize improvements to their detection rule defenses.
 
 ## View detection rules in the ATT&CK Map
