@@ -40,7 +40,7 @@ further_reading:
   tag: "Blog"
   text: "Investigate memory leaks and OOMs with Datadog's guided workflow"
 algolia:
-  tags: ['service catalog']
+  tags: ['Software Catalog']
 ---
 
 {{< img src="tracing/software_catalog/software_catalog_updated.mp4" video=true alt="Navigating around the Software Catalog" style="width:100%;" >}}
@@ -82,7 +82,7 @@ Datadog [Software Catalog][1] provides a consolidated view of your services, com
 For general information, see [Role Based Access Control][2] and [Role Permissions][3].
 ### Read permission
 
-The Software Catalog read permission allows a user to read service catalog data, which enables the following features:
+The Software Catalog read permission allows a user to read Software Catalog data, which enables the following features:
 - Software Catalog list
 - Discover UI
 - Service Definition endpoint: `/api/v2/services/definition/<service_name>`
@@ -91,7 +91,7 @@ The permission is enabled by default in the **Datadog Read Only Role** and **Dat
 
 ### Write permission
 
-The Software Catalog write permission allows a user to modify service catalog data. The write permission is required for the following features:
+The Software Catalog write permission allows a user to modify Software Catalog data. The write permission is required for the following features:
 - Inserting or Updating a Service Definition with the `POST /api/v2/services/definitions` endpoint
 - Deleting a Service Definition with the `DELETE /api/v2/services/definition/<service_name>` endpoint
 - Completing the onboarding process in the Discover Services UI
@@ -117,7 +117,7 @@ The type of the service can be one of:
 Some integrations alias to types. For example, Postgres, MySQL, and Cassandra map to the type "DB". Redis and Memcache integrations map to the type "Cache".
 {{< /site-region >}}
 {{< site-region region="ap1,us3,us5,eu,us" >}}
-## Filtering service catalog entries by component
+## Filtering Software Catalog entries by component
 
 Every entry showing up in the Software Catalog is categorized as a component type:
 

@@ -26,7 +26,7 @@ Software Catalog acts as a single source of truth for your engineering environme
 - Access up-to-date documentation, code snippets, and runbooks, enabling them to start making meaningful contributions.
 - Navigate [organized metadata and organizational inventory][4] to understand the team's structure, communication channels, and best practices.
 
-{{< img src="tracing/software_catalog/dev-onboarding-use-case-workflows.png" alt="The side panel view of an API in the service catalog, showing a flow chart of services that consume the API, an OpenAPI Preview, and API metadata." >}}
+{{< img src="tracing/software_catalog/dev-onboarding-use-case-workflows.png" alt="The side panel view of an API in the Software Catalog, showing a flow chart of services that consume the API, an OpenAPI Preview, and API metadata." >}}
 
 
 ## Automate onboarding workflows

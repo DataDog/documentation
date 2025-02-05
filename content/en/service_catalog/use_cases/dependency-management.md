@@ -27,7 +27,7 @@ Datadog’s Software Catalog offers powerful dependency mapping capabilities to 
 
 {{< img src="tracing/software_catalog/dependency-mgmt-use-case-auto-discovery.png" alt="The Dependencies tab in the side panel for a service, showing a flow chart of service dependencies." >}}
 
-## Manual dependency definition in service catalog schema v3.0
+## Manual dependency definition in Software Catalog schema v3.0
 
 In [Software Catalog schema v3.0][2], teams can manually define relationships to supplement auto-detected topologies. This features is particularly helpful for defining dependencies that reflect institutional knowledge and team collaboration, ensuring a more complete view of system relationships.
 

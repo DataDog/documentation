@@ -30,7 +30,7 @@ further_reading:
   tag: "Documentation"
   text: "Datadog Software Catalog"
 algolia:
-  tags: ['service catalog']
+  tags: ['Software Catalog']
 ---
 `Service` is the only component type in Software Catalog schema versions v2, v2.1, and v2.2. [v3.0][10] and above supports multiple kinds of components, including `kind:system`, `kind:service`, `kind:queue`, `kind:api`, and `kind:datastore`.
 

@@ -27,10 +27,10 @@ Adding an application to Datadog is a common task in the early days of Datadog a
 
 - The Universal Service Tag `version` is important to many visualizations. Developing an automated, reliable, and compliant method to power these higher value visualizations. 
 
-- Establishing a comprehensive [service catalog][2] provides numerous benefits in the future. Software Catalog is central to the Datadog design pattern, and hosts the objects of governance, dependency, and service definition.  
+- Establishing a comprehensive [Software Catalog][2] provides numerous benefits in the future. Software Catalog is central to the Datadog design pattern, and hosts the objects of governance, dependency, and service definition.  
 
 **Recommendations:**   
-Develop automatic version tagging integrated into your application build process. Focus on service catalog, and track readiness with setup guidance.
+Develop automatic version tagging integrated into your application build process. Focus on Software Catalog, and track readiness with setup guidance.
 
 ## Fielding technical issues
 
