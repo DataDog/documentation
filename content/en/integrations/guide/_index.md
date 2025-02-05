@@ -67,6 +67,7 @@ cascade:
     {{< nextlink href="integrations/guide/collecting-composite-type-jmx-attributes" tag=" jmx" >}}Collecting composite-type JMX attributes{{< /nextlink >}}
     {{< nextlink href="integrations/guide/use-bean-regexes-to-filter-your-jmx-metrics-and-supply-additional-tags" tag=" jmx" >}}Use Bean regexes to filter your JMX metrics and supply additional tags{{< /nextlink >}}
     {{< nextlink href="integrations/guide/jmx_integrations/" tag=" jmx" >}}Which integrations use Jmxfetch?{{< /nextlink >}}
+    {{< nextlink href="integrations/guide/jmxfetch-fips/" tag=" jmx" >}}JMXFetch FIPS-140 mode{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Database guides:" >}}
