@@ -38,12 +38,12 @@ To view more information about the technique and the rules monitoring the techni
 
 Custom rules only show up in the map if they are tagged in the rule editor with the correct MITRE tactic and technique. The tactic and technique must also be paired correctly. If the correct format and pairing are not used, the rule does not show up in the map when you use the search bar to filter for that rule.
 
-This is the correct format for tactic and technique tags:
+This the correct format for tags and also an example of a correct pairing of a tactic and technique:
 
 - `tactic: <tactic number>-<tactic name>`
     - For example: `tactic:TA0001-initial-access`
 - `technique: <technique number>-<technique name>`
-    - For example: `technique:T1110-brute-force`
+    - For example: `technique:T1566-phishing`
 
 ## Further reading
 
