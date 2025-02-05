@@ -419,6 +419,11 @@ When set to `true`, the body is added to Elasticsearch and OpenSearch spans.
 **Default**: `true`<br>
 When set to `true`, the query string parameters are added to Elasticsearch and OpenSearch spans.
 
+`trace.cassandra.keyspace.statement.extraction.enabled`
+: **Environment Variable**: `DD_TRACE_CASSANDRA_KEYSPACE_STATEMENT_EXTRACTION_ENABLED` <br>
+**Default**: `false`<br>
+By default, the keyspace is extracted only if configured when creating a session. When set to `true`, the keyspace can also be extracted by looking at metadata in the queries' result.
+
 **Note**:
 
 - If the same key type is set for both, the system property configuration takes priority.
