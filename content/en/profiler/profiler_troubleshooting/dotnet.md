@@ -185,7 +185,7 @@ The default profiler log directory is `%ProgramData%\Datadog .NET Tracer\logs\`.
 
 4. Check the result of profiles export:
 
-   1. If debug logs were not enabled in step 2.2, set the `DD_TRACE_DEBUG` environment variable to `true` for the application and restart it.
+   1. If debug logs were not enabled in step 2.b, set the `DD_TRACE_DEBUG` environment variable to `true` for the application and restart it.
 
    2. Open the `DD-DotNet-Profiler-Native-<Application Name>-<pid>` log file from the default log folder.
 
