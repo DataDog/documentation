@@ -81,7 +81,7 @@ You can install the Datadog Agent using the [Datadog Operator][3] or [Helm][4].
 
    Replace `<DATADOG_AGENT_VERSION>` with version `7.55.0` or later.
 
-   **Optional**: Uncomment the `logCollection` section to start collecting application logs. Once enabled, logs are collected from all discovered containers by default. See the [Kubernetes log collection documentation][7] for more details on the setup process.1. Deploy the Datadog Agent with the above configuration file:
+   **Optional**: Uncomment the `logCollection` section to start collecting application logs which will be correlated to Spark job run traces. Once enabled, logs are collected from all discovered containers by default. See the [Kubernetes log collection documentation][7] for more details on the setup process.1. Deploy the Datadog Agent with the above configuration file:
    ```shell
    kubectl apply -f /path/to/your/datadog-agent.yaml
    ```
@@ -128,7 +128,7 @@ You can install the Datadog Agent using the [Datadog Operator][3] or [Helm][4].
 
    Replace `<DATADOG_AGENT_VERSION>` with version `7.55.0` or later.
 
-   **Optional**: Uncomment the logs section to start collecting application logs. Once enabled, logs are collected from all discovered containers by default. See the [Kubernetes log collection documentation][5] for more details on the setup process.1. Run the following command:
+   **Optional**: Uncomment the logs section to start collecting application logs which will be correlated to Spark job run traces. Once enabled, logs are collected from all discovered containers by default. See the [Kubernetes log collection documentation][5] for more details on the setup process.1. Run the following command:
    ```shell
    helm install <RELEASE_NAME> \
     -f datadog-values.yaml \
