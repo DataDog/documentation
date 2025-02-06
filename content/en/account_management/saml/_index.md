@@ -124,6 +124,10 @@ Some organizations might not want to invite all of their users to Datadog. If yo
 
 Administrators can set the default role for new JIT users. The default role is **Standard**, but you can choose to add new JIT users as **Read-Only**, **Administrators**, or any custom role.
 
+<div class="alert alert-warning">
+  <strong>Important:</strong> If Role Mapping is enabled, this will take precedence over roles set in JIT provisioning. If a user is not configured to send proper Group Attribute statements, this will result in users being left with no roles and unable to access Datadog. Double-check your mapping definitions and inspect your own assertions before enabling Mappings and JIT to prevent any scenarios where your users are unable to login after being provisioned by JIT.
+</div>
+
 {{< img src="account_management/saml/saml_jit_default.png" alt="saml JIT Default" style="width:50%;" >}}
 
 ### IdP initiated login
