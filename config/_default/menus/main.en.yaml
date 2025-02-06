@@ -1973,7 +1973,7 @@ menu:
       url: service_catalog/use_cases/dependency_management
       parent: service_catalog_use_cases
       identifier: service_catalog_use_cases_dependency_management
-      weight: 305     
+      weight: 305
     - name: Manage a Component
       url: service_catalog/manage
       parent: service_catalog
@@ -3396,6 +3396,31 @@ menu:
       parent: tracing_trace_collection
       identifier: tracing_proxies
       weight: 208
+    - name: Tracing Envoy
+      url: tracing/trace_collection/proxy_setup/envoy
+      parent: tracing_proxies
+      identifier: tracing_proxies_envoy
+      weight: 2081
+    - name: Tracing NGINX
+      url: tracing/trace_collection/proxy_setup/nginx
+      parent: tracing_proxies
+      identifier: tracing_proxies_nginx
+      weight: 2082
+    - name: Tracing Istio
+      url: tracing/trace_collection/proxy_setup/istio
+      parent: tracing_proxies
+      identifier: tracing_proxies_istio
+      weight: 2083
+    - name: Tracing Kong
+      url: tracing/trace_collection/proxy_setup/kong
+      parent: tracing_proxies
+      identifier: tracing_proxies_kong
+      weight: 2084
+    - name: Tracing Apache HTTP Server
+      url: tracing/trace_collection/proxy_setup/httpd
+      parent: tracing_proxies
+      identifier: tracing_proxies_httpd
+      weight: 2085
     - name: Span Tag Semantics
       url: tracing/trace_collection/tracing_naming_convention
       parent: tracing_trace_collection
@@ -6247,7 +6272,7 @@ menu:
       identifier: code_security_guides
       url: /security/code_security/guides/
       parent: code_security
-      weight: 6      
+      weight: 6
     - name: Synthetic Testing and Monitoring
       url: synthetics/
       pre: synthetics
