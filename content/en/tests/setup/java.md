@@ -213,8 +213,7 @@ The tracer exposes a set of APIs that can be used to extend its functionality pr
 {{< tabs >}}
 {{% tab "OpenTelemetry API" %}}
 
-To add custom tags include [opentelemetry-api][1] library as a compile-time dependency to your project
-and set the `dd.trace.otel.enabled` system property or the `DD_TRACE_OTEL_ENABLED` environment variable to `true`.
+To add custom tags, include the [opentelemetry-api][1] library as a compile-time dependency and set `dd.trace.otel.enabled` (system property) or `DD_TRACE_OTEL_ENABLED` (environment variable) to `true`.
 
 You can then add custom tags to your tests by using the active span:
 
@@ -237,7 +236,7 @@ For more information about adding tags, see the [Adding Tags][2] section of the 
 {{% /tab %}}
 {{% tab "OpenTracing API" %}}
 
-To add custom tags include [opentracing-util][1] library as a compile-time dependency to your project.
+To add custom tags, include the [opentracing-util][1] library as a compile-time dependency to your project.
 
 You can then add custom tags to your tests by using the active span:
 
