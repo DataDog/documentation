@@ -30,6 +30,9 @@ environment:
 ### SQS パイプラインの監視
 Data Streams Monitoring は[メッセージ属性][2]を 1 つ使用して、SQSキューを通るメッセージ経路を追跡します。Amazon SQS では 1 メッセージあたり最大 10 個のメッセージ属性が許可されているため、データパイプライン経由でストリーミングされるすべてのメッセージは、Data Streams Monitoring 用に 1 つ分を確保できるよう、9 個以下のメッセージ属性に制限する必要があります。
 
+### SNS-to-SQSパイプラインの監視
+Amazon SNS が Amazon SQS と直接やり取りするデータパイプラインを監視するには、[Amazon SNS の生メッセージ配信 (raw message delivery)][9] を有効にする必要があります。
+
 
 [1]: /ja/agent
 [2]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-metadata.html
@@ -39,3 +42,4 @@ Data Streams Monitoring は[メッセージ属性][2]を 1 つ使用して、SQS
 [6]: https://www.nuget.org/packages/AWSSDK.SimpleNotificationService
 [7]: https://www.nuget.org/packages/IBMMQDotnetClient
 [8]: https://www.nuget.org/packages/Azure.Messaging.ServiceBus
+[9]: https://docs.aws.amazon.com/sns/latest/dg/sns-large-payload-raw-message-delivery.html
