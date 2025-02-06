@@ -21,7 +21,7 @@ There are two recommended ways to deploy Agentless scanners in your environment,
 
 To establish estimates on scanner costs, reach out to your [Datadog Customer Success Manager][1].
 
-The scanner cost is under $1 per host per year for accounts following the [recommended configuration](#recommended-configuration).
+The scanner cost is under $1 per scanned host per year for accounts following the [recommended configuration](#recommended-configuration).
 
 {{< tabs >}}
 {{% tab "Cross-account scanning" %}}
@@ -58,7 +58,7 @@ To improve the scanner's efficacy, ensure your setup follows those guidelines:
   - More than 250 hosts
   - Any data store if using [Cloud Storage Scanning](/security/cloud_security_management/agentless_scanning#cloud-storage-scanning)
 
-Datadog will automatically schedule scans to the right region in order to maximize the scanner's efficacy and minimize the cross region costs.
+Datadog automatically schedules scans to the right region to minimize the cross region costs.
 
 **Note**: The actual scanned data remains in your infrastructure, and only the collected list of packages, as well as information related to collected hosts (hostnames/EC2 Instances), are reported back to Datadog.
 
