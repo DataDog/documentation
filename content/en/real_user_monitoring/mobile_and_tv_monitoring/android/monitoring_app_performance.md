@@ -28,14 +28,14 @@ val rumConfig = RumConfiguration.Builder(applicationId)
    .build()
 ```
 
-If you need more control over which resources are considered "initial" in TNS, you provide your own implementation of the `InitialResourceIdentifier` interface. This enables you to define custom classification logic based on resource properties like ID or start time.
+If you need more control over which resources are considered "initial" in TNS, you can provide your own implementation of the `InitialResourceIdentifier` interface. This enables you to define custom classification logic based on resource properties like ID or start time.
 
 ### Interaction to next view
 The **Interaction-to-Next-View (INV)** measures the time between the last user interaction in the previous view and the start of the current view. INV is represented by the `@view.interaction_to_next_view_time `attribute in RUM view events.
 
 By default, INV is calculated from the last **tap**, **click**, or **swipe** action occurring within a **3-second** threshold before the view starts. This behavior is controlled by the `TimeBasedInteractionIdentifier`, which classifies such actions as the "last interaction."
 
-To customize the default 3-second threshold for ITNV calculation, you can adjust the threshold value in the `TimeBasedInteractionIdentifier` and set it using `setLastInteractionIdentifier()` configuration. This allows you to include actions within a custom time window before the next view starts.
+To customize the default 3-second threshold for ITNV calculation, you can adjust the threshold value in the `TimeBasedInteractionIdentifier` and set it using the `setLastInteractionIdentifier()` configuration. This allows you to include actions within a custom time window before the next view starts.
 
 ```javascript
 import com.datadog.android.rum.RumConfiguration
@@ -104,7 +104,7 @@ Once the timing is sent, the timing is accessible as `@view.custom_timings.<timi
 All view timings are measured relative to the view's start. The exact moment a view starts depends on the type of instrumentation used for tracking views. For more details, see [Views instrumentation versus app lifecycle][2].
 
 ## Troubleshooting
-When using the default TimeBasedInitialResourceIdentifier and TimeBasedInteractionIdentifier, TNS and INV timings may be missing in specific cases:
+When using the default `TimeBasedInitialResourceIdentifier` and `TimeBasedInteractionIdentifier`, TNS and INV timings may be missing in specific cases:
 
 - `@view.interaction_to_next_view_time` (INV) is not set for the first view of a session if no tap, click, or swipe actions were tracked in the previous view, or if the interval between the last such action and the start of the current view exceeds 3 seconds.
 - `@view.network_settled_time` (TNS) is unavailable if no resources were tracked during the view, or if none started within the initial 100ms of the view.
