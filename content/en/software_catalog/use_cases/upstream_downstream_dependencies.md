@@ -6,6 +6,7 @@ aliases:
   - /tracing/service_catalog/guides/upstream-downstream-dependencies
   - /service_catalog/guides/upstream-downstream-dependencies
   - /service_catalog/use_cases/upstream_downstream_dependencies
+  - /service_catalog/use_cases/upstream-downstream-dependencies
 further_reading:
 - link: "/tracing/software_catalog/"
   tag: "Documentation"
