@@ -34,7 +34,7 @@ The available functionality has the following important limitations:
 
 ## Prerequisites
 
-The automatic installation method requires that you have the [Datadog Agent][2] installed with APM enabled. Your application has been instrumented with the Datadog tracing library.
+For Auto-Instrumentation, ensure the [Datadog Agent][2] is installed with APM enabled and that your application is instrumented with the Datadog tracing library.
 
 ## Set up your RUM application
 
