@@ -8695,7 +8695,7 @@ components:
           description: Unix timestamp when the deployment finished. It must be in
             nanoseconds, milliseconds, or seconds, and it should not be older than
             1 hour.
-          example: 1693491984000000000
+          example: 1693491984000
           format: int64
           type: integer
         git:
@@ -8710,7 +8710,7 @@ components:
         started_at:
           description: Unix timestamp when the deployment started. It must be in nanoseconds,
             milliseconds, or seconds.
-          example: 1693491974000000000
+          example: 1693491974000
           format: int64
           type: integer
         team:
@@ -8794,7 +8794,7 @@ components:
         finished_at:
           description: Unix timestamp when the incident finished. It must be in nanoseconds,
             milliseconds, or seconds, and it should not be older than 1 hour.
-          example: 1693491984000000000
+          example: 1693491984000
           format: int64
           type: integer
         git:
@@ -8822,7 +8822,7 @@ components:
         started_at:
           description: Unix timestamp when the incident started. It must be in nanoseconds,
             milliseconds, or seconds.
-          example: 1693491974000000000
+          example: 1693491974000
           format: int64
           type: integer
         team:
