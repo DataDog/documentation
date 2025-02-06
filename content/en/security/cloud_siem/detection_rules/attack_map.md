@@ -21,7 +21,7 @@ To view detection rules against the MITRE ATT&CK Framework:
 
 The default view of the map shows all Datadog out-of-the-box and custom rules for active sources, broken down into different attack techniques. Active sources are the sources of logs found and analyzed in the Cloud SIEM index.  **Note**: For the legacy SKU, all ingested logs are analyzed by Cloud SIEM unless [security filters][2] have been set up.
 
-To view the map for all sources, in the **Visualize** dropdown menu, select **All Sources** . This shows all out-of-the-box rules, including those that are not currently used to detect threats from your logs.
+To view the map for all sources, in the **Visualize** dropdown menu, select **All Sources**. This shows all out-of-the-box rules, including those that are not currently used to detect threats from your logs.
 
 Click the different rule density buttons to visualize the map for a specific number of rules. For example, if you click **High \+7**, only tiles that have more than seven rules enabled are shown on the map.
 
@@ -40,12 +40,14 @@ To view more information about the technique and the rules monitoring the techni
 
 Custom rules only show up in the map if they are tagged in the rule editor with the correct MITRE tactic and technique. The tactic and technique must also be paired correctly. If the correct format and pairing are not used, the rule does not show up in the map when you use the search bar to filter for that rule.
 
-This the correct format for tags and also an example of a correct pairing of a tactic and technique:
+This is an example of the format you need to use for tagging custom rules and the correct pairing of tactic and technique tags:
 
 - `tactic: <tactic number>-<tactic name>`
     - For example: `tactic:TA0001-initial-access`
 - `technique: <technique number>-<technique name>`
     - For example: `technique:T1566-phishing`
+
+**Note**: The tactic and technique needs to be based on the version stated on the [ATT&CK Map][3] page.
 
 ## Further reading
 
