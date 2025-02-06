@@ -133,7 +133,7 @@ To learn more about Datadog's vulnerability detection capabilities, visit [Code 
 
 <div class="alert alert-info">API security is in Preview.</div>
 
-Datadog Application Security provides visibility into threats targeting your APIs. Use the [API Catalog][27] to monitor API health and performance metrics, where you can view attacks targeting your APIs. This view includes the attacker's IP and authentication information, as well as request headers showing details about how the attack was formed. Using both Application Security and API management, you can maintain a comprehensive view of your API attack surface, and respond to mitigate threats.
+Datadog Application Security provides visibility into threats targeting your APIs. Use the [Endpoints list][27] in Service Catalog to monitor API health and performance metrics, where you can view attacks targeting your APIs. This view includes the attacker's IP and authentication information, as well as request headers showing details about how the attack was formed. Using both Application Security and API management, you can maintain a comprehensive view of your API attack surface, and respond to mitigate threats.
 
 ## How Datadog Application Security protects against Log4Shell
 
@@ -161,6 +161,6 @@ Datadog Application Security identifies Log4j Log4Shell attack payloads and prov
 [17]: /security/application_security/threats/library_configuration/#data-security-considerations
 [25]: /security/application_security/threats/add-user-info#adding-business-logic-information-login-success-login-failure-any-business-logic-to-traces
 [26]: /agent/remote_config/#enabling-remote-configuration
-[27]: /tracing/api_catalog/
+[27]: /service_catalog/endpoints/
 [28]: /security/code_security/iast/
 [29]: https://docs.datadoghq.com/security/code_security/
