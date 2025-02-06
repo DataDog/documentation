@@ -76,8 +76,8 @@ layouts/shortcodes/**/*.md                                    @DataDog/documenta
 /content/en/database_monitoring/                        @DataDog/database-monitoring @DataDog/documentation
 /layouts/partials/dbm/                                  @DataDog/database-monitoring @DataDog/documentation
 
-# Agent Shared Component
-/content/en/agent/proxy.md                              @DataDog/agent-shared-components @DataDog/documentation
+# Agent Runtimes
+/content/en/agent/proxy.md                              @DataDog/agent-runtimes @DataDog/documentation
 
 # Agent-integration-tools
 content/en/developers/integrations/agent_integration.md                         @DataDog/agent-integrations @DataDog/documentation
