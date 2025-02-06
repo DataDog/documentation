@@ -35,7 +35,7 @@ Cloud Cost monitors are evaluated with a 48 hour delayed evaluation window, beca
 
 ## Monitor creation
 
-To create a Cloud Cost monitor in Datadog, you can set up via [Terraform], from the main navigation, [**Monitors** --> **New Monitor** --> **Cloud Cost**][4], or from the [Cloud Cost Explorer][2]. 
+To create a Cloud Cost monitor in Datadog, you can set up via [Terraform][5], from the main navigation, [**Monitors** --> **New Monitor** --> **Cloud Cost**][4], or from the [Cloud Cost Explorer][2]. 
 
 Optionally, click the **+ Create Monitor** button in the cost report side panel.
 
