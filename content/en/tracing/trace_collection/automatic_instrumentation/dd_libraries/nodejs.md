@@ -230,7 +230,7 @@ npm install @datadog/native-metrics@2.0.0 @datadog/pprof@5.0.0
 cp -R ./node_modules path/to/bundle
 ```
 
-(In case of Next.js the `path/to/bundle` is usually the `.next/standalone` directory of your app.)
+**Note**: In case of Next.js the `path/to/bundle` is usually the `.next/standalone` directory of your app.
 
 At this stage you should be able to deploy your bundle, (which is your application code and most of your dependencies), with the `node_modules/` directory, which contains the native modules and their dependencies.
 
