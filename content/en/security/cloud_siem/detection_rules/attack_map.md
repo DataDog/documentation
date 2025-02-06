@@ -43,9 +43,9 @@ Custom rules only show up in the map if they are tagged in the rule editor with 
 This is an example of the format you need to use for tagging custom rules and the correct pairing of tactic and technique tags:
 
 - `tactic: <tactic number>-<tactic name>`
-    - For example: `tactic:TA0001-initial-access`
+    - For example: `tactic:TA0001-Initial-Access`
 - `technique: <technique number>-<technique name>`
-    - For example: `technique:T1566-phishing`
+    - For example: `technique:T1566-Phishing`
 
 **Note**: The tactic and technique needs to be based on the version stated on the [ATT&CK Map][3] page.
 
