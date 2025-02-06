@@ -13,6 +13,7 @@ Use the different principals to control access patterns in your organization and
 
 | Supported resources with granular access control | Team-based access | Role-based access | User / service account-based access |
 |--------------------------------------------------|-------------------|-------------------|-------------------------------------|
+| [Case Management projects][10]                   | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Dashboards][2]                                  | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Monitors][3]                                    | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Notebooks][4]                                   | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
@@ -21,7 +22,7 @@ Use the different principals to control access patterns in your organization and
 | [Security suppressions][7]                       | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Service Level Objectives][8]                    | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Synthetic tests][9]                             | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
-| [Case Management projects][10]                   | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
+
 
 ### Elevate access to individual resources
 
