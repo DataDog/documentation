@@ -115,7 +115,7 @@
         contents:
 
         - action: integrations
-          branch: main
+          branch: robert.nortepeterson/INA-6787
           globs:
           - "*/metadata.csv"
           - "*/manifest.json"
@@ -290,7 +290,7 @@
             front_matters:
               dependencies: ["https://github.com/DataDog/synthetics-test-automation-bitrise-step-upload-application/blob/main/README.md"]
               title: Continuous Testing and Bitrise
-      
+
       - repo_name: synthetics-test-automation-bitrise-step-run-tests
         contents:
         - action: pull-and-push-file
