@@ -47,14 +47,14 @@ The following table lists the destinations and fields that support template synt
 
 | Destination       | Fields that support template syntax  | Behavior when the field cannot be resolved                                                     |
 | ----------------- | -------------------------------------| -----------------------------------------------------------------------------------------------|
-| Amazon Opensearch | Index                                | The Worker creates an index named `datadog-op` and sends the logs there.                       |
-| Amazon S3         | Prefix                               | The Worker creates a folder named `OP_UNRESOLVED_TEMPLATE_LOGS/` and sends the logs there. |
-| Azure Blob        | Prefix                               | The Worker creates a folder named `OP_UNRESOLVED_TEMPLATE_LOGS/` and sends the logs there. |
-| Elasticsearch     | Source type                          | The Worker creates an index named `datadog-op` and sends the logs there.                       |
-| Google Chronicle  | Log type                             | Defaults to `vector_dev` log type.                                                             |
-| Google Cloud      | Prefix                               | The Worker creates a folder named `OP_UNRESOLVED_TEMPLATE_LOGS/` and sends the logs there. |
-| Opensearch        | Index                                | The Worker creates an index named `datadog-op` and sends the logs there.                       |
-| Splunk HEC        | Index<br>Source type                 | The Worker sends the logs to the default index configured in Splunk.                       |
+| Amazon Opensearch | Index                                | The Worker writes logs to the `datadog-op` index.                       |
+| Amazon S3         | Prefix                               | The Worker creates a folder named `OP_UNRESOLVED_TEMPLATE_LOGS/` and writes the logs there. |
+| Azure Blob        | Prefix                               | The Worker creates a folder named `OP_UNRESOLVED_TEMPLATE_LOGS/` and writes the logs there. |
+| Elasticsearch     | Source type                          | The Worker writes logs to the `datadog-op` index.                        |
+| Google Chronicle  | Log type                             | Defaults to `DATADOG` log type.                                                             |
+| Google Cloud      | Prefix                               | The Worker creates a folder named `OP_UNRESOLVED_TEMPLATE_LOGS/` and writes the logs there. |
+| Opensearch        | Index                                | The Worker writes logs to the `datadog-op` index.                        |
+| Splunk HEC        | Index<br>Source type                 | The Worker sends the logs to the default index configured in Splunk.                    |
 
 #### Example
 

@@ -330,7 +330,7 @@ To start sending just your iOS application's traces to Datadog, see [iOS Trace C
                     "example.com" to setOf(TracingHeaderType.DATADOG),
                     "example.eu" to setOf(TracingHeaderType.DATADOG)
                 ),
-                traceSamplingRate = 100f
+                traceSampleRate = 100f
             )
         )
     }
@@ -338,7 +338,7 @@ To start sending just your iOS application's traces to Datadog, see [iOS Trace C
 
     By default, all subdomains of listed hosts are traced. For instance, if you add `example.com`, you also enable tracing for `api.example.com` and `foo.example.com`.
 
-4. _(Optional)_ Set the `traceSamplingRate` initialization parameter to keep a defined percentage of the backend traces. If not set, 20% of the traces coming from application requests are sent to Datadog.
+4. _(Optional)_ Set the `traceSampleRate` initialization parameter to keep a defined percentage of the backend traces. If not set, 20% of the traces coming from application requests are sent to Datadog.
 
      To keep 100% of backend traces:
     ```kotlin
@@ -349,13 +349,13 @@ To start sending just your iOS application's traces to Datadog, see [iOS Trace C
                     "example.com" to setOf(TracingHeaderType.DATADOG),
                     "example.eu" to setOf(TracingHeaderType.DATADOG)
                 ),
-                traceSamplingRate = 100f
+                traceSampleRate = 100f
             )
         )
     }
     ```
 
-    **Note**: `traceSamplingRate` **does not** impact RUM sessions sampling. Only backend traces are sampled out.
+    **Note**: `traceSampleRate` **does not** impact RUM sessions sampling. Only backend traces are sampled out.
 
 [1]: /real_user_monitoring/mobile_and_tv_monitoring/kotlin_multiplatform/setup
 [2]: /real_user_monitoring/mobile_and_tv_monitoring/kotlin_multiplatform/setup?tab=rum#initialize-the-rum-ktor-plugin-to-track-network-events-made-with-ktor
@@ -598,7 +598,7 @@ The default injection style is `tracecontext`, `Datadog`.
                     "example.com" to setOf(TracingHeaderType.DATADOG),
                     "example.eu" to setOf(TracingHeaderType.DATADOG)
                 ),
-                traceSamplingRate = 100f
+                traceSampleRate = 100f
             )
         )
     }

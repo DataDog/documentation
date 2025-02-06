@@ -215,7 +215,7 @@ Web servers are almost always inter-connected with other services through a netw
 
 ## Platform services
 
-Datadog infrastructure monitoring comes with  additional products that you can use to maximize observability of your environments.
+Datadog infrastructure monitoring comes with additional products that you can use to maximize observability of your environments.
 
 ### Service Catalog
 
@@ -225,7 +225,9 @@ Service Catalog also helps you evaluate the coverage of your observability setup
 
 {{< img src="/administrators_guide/service_catalog_2.png" alt="Service Catalog home screen" style="width:90%;">}}
 
-You can add components that you aren't planning on monitoring immediately, such as cron jobs or libraries, to create a comprehensive view of your system, and to mark team members who are responsible for these components ahead of the next phase of your Datadog rollout.  
+You can add components that you aren't planning on monitoring immediately, such as cron jobs or libraries, to create a comprehensive view of your system, and to mark team members who are responsible for these components ahead of the next phase of your Datadog rollout.
+
+Refer to the [Endpoints list][33] to categorize, monitor performance and reliability, and manage ownership of your API endpoints.
 
 ### Resource Catalog
 
@@ -237,10 +239,6 @@ You can use Resource Catalog in a variety of contexts, including:
 - Planning upgrades of resources that are running deprecated versions.
 - Accessing configuration information and other metadata to speed up incident response.
 - Maintaining your security posture by finding and resolving misconfigurations and vulnerabilities.
-
-### API Catalog 
-
-Use [API Catalog][33] for resource endpoint-specific categorization, performance, reliability, and ownership of all your API endpoints in one place.
 
 ### Event Management 
 
@@ -348,7 +346,7 @@ Create a detailed roll-out methodology in the [build][41] phase by focusing on t
 [30]: /service_catalog/
 [31]: /service_management/events/
 [32]: /error_tracking/
-[33]: /api_catalog/
+[33]: /service_catalog/endpoints/
 [34]: /agent/fleet_automation/
 [35]: /agent/remote_config/
 [36]: /agent/remote_config/?tab=configurationyamlfile\#supported-products-and-feature-capabilities
@@ -366,7 +364,7 @@ Create a detailed roll-out methodology in the [build][41] phase by focusing on t
 [48]: https://www.datadoghq.com/blog/engineering/husky-deep-dive/
 [49]: /real_user_monitoring/platform/connect_rum_and_traces/?tab=browserrum
 [50]: /integrations/tcp_check/?tab=host#data-collected
-[51]: /tracing/guide/inferred-service-opt-in/?tab=java
+[51]: /tracing/services/inferred_services
 [52]: /integrations/amazon_web_services/
 [53]: /integrations/google_cloud_platform/
 [54]: /integrations/azure/

@@ -13,18 +13,13 @@ further_reading:
       text: 'Use associated template variables to refine your dashboards'
 ---
 
-{{< site-region region="gov" >}}
-
-<div class="alert alert-warning">Scheduled Reports are not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
 ## Overview
 
 Scheduled reports enable Datadog users to share dashboards as high-density PDFs on a recurring basis.
 
 {{< img src="dashboards/scheduled_reports/report_pdf.png" alt="Example report PDF attachment" style="width:90%;" >}}
 
-The report PDF can be sent to public Slack channels or email addresses.
+The report PDF can be sent to Slack channels or email addresses.
 
 {{< img src="dashboards/scheduled_reports/report_slack.png" alt="Example report slack with PDF report linked" style="width:90%;" >}}
 
@@ -70,7 +65,7 @@ To see the report before saving the schedule, click **Send Test Email**. You can
 
 #### Slack recipients
 
-To add Slack recipients, select the Slack workspace and channel from the available dropdowns. If you do not see any Slack workspaces available, ensure you have the Datadog [Slack Integration][8] installed. To send a test message to Slack, add a channel recipient and click **Send Test Message**.
+To add Slack recipients, select the Slack workspace and channel from the available dropdowns. If you do not see any Slack workspaces available, ensure you have the Datadog [Slack Integration][8] installed. All public channels within the Slack workspace should be listed automatically. To select a private Slack channel, make sure to invite the Datadog Slack bot to the channel in Slack. To send a test message to Slack, add a channel recipient and click **Send Test Message**.
 
 **{{< img src="dashboards/scheduled_reports/add_slack_recipients.png" alt="The configuration modal for editing scheduled report email recipients." style="width:90%;" >}}**
 

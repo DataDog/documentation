@@ -215,7 +215,7 @@ Utiliza el menú desplegable de selección del [sitio][13] situado a la derecha 
 | AP1  | HTTPS | `http-intake.logs.ap1.datadoghq.com`                                      | 443  | Utilizado por el forwarder personalizado para enviar logs en formato JSON o de texto sin formato a través de HTTPS. Consulta la [documentación de la API HTTP de logs][1]. |
 | AP1  | HTTPS | `lambda-http-intake.logs.ap1.datadoghq.com`                               | 443  | Utilizado por funciones de Lambda para enviar logs sin formato o en formato Syslog o JSON a través de HTTPS.                                         |
 | AP1  | HTTPS | `agent-http-intake.logs.ap1.datadoghq.com`                                | 443  | Utilizado por el Agent para enviar logs en formato JSON a través de HTTPS. Consulta la [documentación Recopilación de logs del Agent de host][2].          |
-| AP1  | HTTPS | `logs.`{{< region-param key="browser_sdk_endpoint_domain" code="true" >}} | 443  | Utilizado por el SDK del navegador para enviar logs en formato JSON a través de HTTPS.                                                          |
+| AP1  | HTTPS | {{< region-param key="browser_sdk_endpoint_domain" code="true" >}}        | 443  | Utilizado por el SDK del navegador para enviar logs en formato JSON a través de HTTPS.                                                          |
 
 [1]: /es/api/latest/logs/#send-logs
 [2]: /es/agent/logs/#send-logs-over-https
