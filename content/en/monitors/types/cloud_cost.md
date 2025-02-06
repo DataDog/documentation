@@ -27,7 +27,7 @@ Cost anomaly detection is in Preview. To request access, complete the form.
 {{< /callout >}}
 
 ## Overview
-Get proactive notifications on cost changes to help mitigate unexpected cloud spend. Cloud Cost Monitors help you identify cost changes quickly so you can investigate the cause. You can configure your alerts to catch unexpected changes.
+Get proactive notifications on cost changes to help mitigate unexpected cloud spend. Cloud Cost Monitors help you identify cost changes quickly so you can investigate the cause. 
 
 In order to configure Cloud Cost monitors, you need to have [Cloud Cost Management][1] set up. After it's set up, you can configure monitors to alert when costs increase or decrease.
 
@@ -35,15 +35,11 @@ Cloud Cost monitors are evaluated with a 48 hour delayed evaluation window, beca
 
 ## Monitor creation
 
-To create a Cloud Cost monitor in Datadog, use the main navigation: [**Monitors** --> **New Monitor** --> **Cloud Cost**][4].
-
-You can also create Cloud Cost monitors from the [Cloud Cost Explorer][2]. Click **More...** next to the Options button and select **Create monitor**.
-
-{{< img src="/monitors/monitor_types/cloud_cost/explorer.png" alt="Option to create a monitor from the Cloud Cost Explorer page" style="width:100%;" >}}
+To create a Cloud Cost monitor in Datadog, you can set up via [Terraform], from the main navigation, [**Monitors** --> **New Monitor** --> **Cloud Cost**][4], or from the [Cloud Cost Explorer][2]. 
 
 Optionally, click the **+ Create Monitor** button in the cost report side panel.
 
-{{< img src="/monitors/monitor_types/cloud_cost/sidepanel.png" alt="The Create Monitor button on a cost report side panel in the Cloud Cost Explorer" style="width:100%;" >}}
+{{< img src="/monitors/monitor_types/cloud_cost/explorer_new.png" alt="The Create Monitor button on a cost report side panel in the Cloud Cost Explorer" style="width:100%;" >}}
 
 ## Select a cost monitor type
 
@@ -139,3 +135,4 @@ For detailed instructions on the **Configure notifications and automations** sec
 [2]: https://app.datadoghq.com/cost/explorer
 [3]: /monitors/notify/
 [4]: https://app.datadoghq.com/monitors/create/cost
+[5]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/monitor
