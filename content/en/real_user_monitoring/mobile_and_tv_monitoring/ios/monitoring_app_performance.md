@@ -80,7 +80,7 @@ func onHeroImageLoaded() {
 {{% /tab %}}
 {{% tab "Objective-C" %}}
 ```objective-c
-- (void)onHeroImageLoad {
+(void)onHeroImageLoad {
     [[DDRUMMonitor shared] addViewLoadingTimeWithOverride:NO | YES];
 }
 ```
@@ -127,7 +127,7 @@ All view timings are measured relative to the view's start. The exact moment a v
 ## Troubleshooting
 When using the default TimeBasedInitialResourceIdentifier and TimeBasedInteractionIdentifier, TNS and INV timings may be missing in specific cases:
 
-- `@view.interaction_to_next_view_time` (INV) is not set for the first view of a session if no tap, click, or swipe actions were tracked in the previous view, or if the interval between the last such action and the start of the current view exceeds 3 seconds.
+- `@view.interaction_to_next_view_time` (INV) is not set for the first view of a session if no **tap**, **click**, or **swipe** actions were tracked in the previous view, or if the interval between the last such action and the start of the current view exceeds 3 seconds.
 - `@view.network_settled_time` (TNS) is unavailable if no resources were tracked during the view, or if none started within the initial 100ms of the view.
 
 To maximize the accuracy of TNS and INV, consider adjusting time thresholds in the default predicates to align with your app's behavior, or implement custom predicates tailored to your needs.
@@ -137,5 +137,5 @@ To maximize the accuracy of TNS and INV, consider adjusting time thresholds in t
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /real_user_monitoring/explorer/search/#setup-facets-and-measures
-[2]: /real_user_monitoring/mobile_and_tv_monitoring/ios/data_collected/#views_instrumentation_versus_app_lifecycle
+[2]: /real_user_monitoring/mobile_and_tv_monitoring/ios/data_collected/#views-instrumentation-versus-app-lifecycle
 
