@@ -62,6 +62,19 @@ LoadError - dlsym(0x7fbbeb6837d0, Init_ffi_c): symbol not found - /Library/Ruby/
 
 Follow the instructions in the [Flutter documentation][2] for working with Flutter on Apple Silicon.
 
+## Undefined symbol (iOS)
+
+If you are using Flutter's `build ios-framework` command, it is possible you will get errors similar to the following:
+
+```
+Undefined symbol: _OBJC_CLASS_$_PLCrashReport
+Undefined symbol: _OBJC_CLASS_$_PLCrashReportBinaryImageInfo
+Undefined symbol: _OBJC_CLASS_$_PLCrashReportStackFrameInfo
+...
+```
+
+This is because the `build ios-framework` command is not properly including PLCrashReporter, which the Datadog Flutter SDK depends on. To solve this issue, we recommend you include the PLCrashReporter dependency manually. The framework and instructions for including it are available on its [GitHub page][8]
+
 ## Set sdkVerbosity
 
 If you're able to run your app, but you are not seeing the data you expect on the Datadog site, try adding the following to your code before calling `DatadogSdk.initialize`:
@@ -113,3 +126,4 @@ A warning appears when deobfuscation fails for a stack trace. If the stack trace
 [5]: https://pub.dev/packages/dio
 [6]: https://app.datadoghq.com/source-code/setup/rum
 [7]: /real_user_monitoring/guide/debug-symbols
+[8]: https://github.com/microsoft/plcrashreporter
