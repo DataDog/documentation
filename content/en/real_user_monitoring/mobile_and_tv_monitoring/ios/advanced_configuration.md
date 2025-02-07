@@ -74,6 +74,38 @@ DDRUMMonitor *rum = [DDRUMMonitor shared];
 
 For more details and available options, filter the [relevant file on GitHub][9] for the `DDRUMMonitor` class.
 
+### Notify the SDK that your view finished loading
+
+iOS RUM tracks the time it takes for your view to load. To notify the SDK that your view has finished loading, call the `addViewLoadingTime(override:)` method
+through the `RUMMonitor` instance. Call this method when your view is fully loaded and displayed to the user:
+
+{{< tabs >}}
+{{% tab "Swift" %}}
+```swift
+@_spi(Experimental)
+import DatadogRUM
+
+func onHeroImageLoaded() {
+    let rum = RUMMonitor.shared()
+    rum.addViewLoadingTime(override: false)
+}
+```
+{{% /tab %}}
+{{% tab "Objective-C" %}}
+```objective-c
+- (void)onHeroImageLoad {
+    [[DDRUMMonitor shared] addViewLoadingTimeWithOverride:NO | YES];
+}
+```
+{{% /tab %}}
+{{< /tabs >}}
+
+Use the `override` option to replace the previously calculated loading time for the current view.
+
+After the loading time is sent, it is accessible as `@view.loading_time` and is visible in the RUM UI.
+
+**Note**: This API is still experimental and might change in the future.
+
 ### Add your own performance timing
 
 In addition to RUM's default attributes, you can measure where your application is spending its time by using the `addTiming(name:)` API. The timing measure is relative to the start of the current RUM view.
@@ -122,7 +154,7 @@ let rum = RUMMonitor.shared()
 @IBAction func didTapDownloadResourceButton(_ sender: UIButton) {
     rum.addAction(
         type: .tap,
-        name: sender.currentTitle ?? "",
+        name: sender.currentTitle ?? ""
     )
 }
 ```
@@ -261,6 +293,26 @@ Datadog.setUserInfo(id: "1234", name: "John Doe", email: "john@doe.com")
 ```
 {{% /tab %}}
 {{< /tabs >}}
+
+## Track background events
+
+<div class="alert alert-info"><p>Tracking background events may lead to additional sessions, which can impact billing. For questions, <a href="https://docs.datadoghq.com/help/">contact Datadog support.</a></p>
+</div>
+
+You can track events such as crashes and network requests when your application is in the background (for example, no active view is available).
+
+To track background events, add the following snippet during initialization in your Datadog configuration:
+
+```swift
+import DatadogRUM
+
+RUM.enable(
+  with: RUM.Configuration(
+    ...
+    trackBackgroundEvents: true
+  )
+)
+```
 
 ## Initialization Parameters
 
@@ -741,6 +793,7 @@ Depending on the event's type, only some specific properties can be modified:
 |                  | `RUMResourceEvent.view.url`          | URL of the view linked to this resource. |
 | RUMViewEvent     | `RUMViewEvent.view.name`             | Name of the view.                        |
 |                  | `RUMViewEvent.view.url`              | URL of the view.                         |
+|                  | `RUMViewEvent.view.referrer`         | URL that linked to the initial view of the page.|
 
 ## Retrieve the RUM session ID
 

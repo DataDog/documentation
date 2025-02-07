@@ -133,5 +133,4 @@ To access additional details describing your CI status and static analysis viola
 [11]: /cloud_cost_management/tag_pipelines
 [12]: https://app.datadoghq.com/ci/pipelines
 [13]: https://app.datadoghq.com/ci/static-analysis
-[15]: /service_management/workflows/actions_catalog/
 [16]: /dora_metrics/setup

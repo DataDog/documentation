@@ -32,13 +32,13 @@ display_on_public_website: true
 draft: false
 git_integration_title: nvml
 integration_id: nvml
-integration_title: Nvidia NVML
+integration_title: NVIDIA NVML
 integration_version: 1.0.9
 is_public: true
 manifest_version: 2.0.0
 name: nvml
-public_title: Nvidia NVML
-short_description: k8s で Nvidia GPU メトリクスをサポート
+public_title: NVIDIA NVML
+short_description: k8s で NVIDIA GPU メトリクスをサポート
 supported_os:
 - linux
 - windows
@@ -54,11 +54,11 @@ tile:
   - Supported OS::macOS
   - Offering::Integration
   configuration: README.md#Setup
-  description: k8s で Nvidia GPU メトリクスをサポート
+  description: k8s で NVIDIA GPU メトリクスをサポート
   media: []
   overview: README.md#Overview
   support: README.md#Support
-  title: Nvidia NVML
+  title: NVIDIA NVML
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->

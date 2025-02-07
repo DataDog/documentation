@@ -1,0 +1,55 @@
+{
+  "data": {
+    "attributes": {
+      "components": [
+        {
+          "events": [],
+          "name": "grid0",
+          "properties": {
+            "children": [
+              {
+                "events": [],
+                "name": "gridCell0",
+                "properties": {
+                  "children": [
+                    {
+                      "events": [],
+                      "name": "calloutValue0",
+                      "properties": {
+                        "isVisible": true,
+                        "isUnpublishd": false,
+                        "isLoading": false,
+                        "label": "CPU Usage",
+                        "size": "sm",
+                        "style": "vivid_yellow",
+                        "unit": "kB",
+                        "value": "42"
+                      },
+                      "type": "calloutValue"
+                    }
+                  ],
+                  "isVisible": "true",
+                  "layout": {
+                    "default": {
+                      "height": 8,
+                      "width": 2,
+                      "x": 0,
+                      "y": 0
+                    }
+                  }
+                },
+                "type": "gridCell"
+              }
+            ]
+          },
+          "type": "grid"
+        }
+      ],
+      "description": "This is a simple example app",
+      "queries": [],
+      "name": "Example App",
+      "rootInstanceName": "grid0"
+    },
+    "type": "appDefinitions"
+  }
+}

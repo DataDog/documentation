@@ -1,0 +1,40 @@
+description: ストリーミングデータパイプラインのパフォーマンスを<br />エンドツーエンドで追跡し改善
+faq:
+- a: Datadog Data Streams Monitoring (DSM) は、Kafka、SQS、RabbitMQ を使用するイベント駆動型アプリケーションのパフォーマンスを追跡して改善することができます。DSM
+    は、すべてのサービスとキュー間の依存関係を自動的にマッピングし、それらの間のレイテンシーを測定し、ストリーミングデータパイプライン全体でコンシューマーラグなどの追加のヘルスメトリクスを提供し、エンドツーエンドの監視を支援します。
+  q: Data Streams Monitoring とはどのようなもので、どのように機能するのでしょうか？
+- a: 請求対象の Data Streams Monitoring ホストは、Datadog Agent がインストールされ、その上で稼働しているプロデューサーおよびコンシューマーサービスが
+    DSM 用にインスツルメンテーションされているホストを指します。その他のセットアップ情報については、[ドキュメント](https://docs.datadoghq.com/data_streams/)をご覧ください。
+  q: 請求対象の DSM ホストには何が含まれますか？
+- a: 請求対象のすべての DSM ホストでは、APM との組み合わせにかかわらず、Pro または Enterprise Infrastructure Monitoring
+    の購入が必要です。年間課金、月次課金、オンデマンド課金プランをご利用いただけます。請求に関する詳しい説明は、[請求に関する FAQ](https://docs.datadoghq.com/account_management/billing/)
+    をご覧ください。
+  q: Data Streams Monitoring を実行するには、どのような請求プランが必要ですか？
+- a: はい、Data Streams Monitoring は [APM Pro およびEnterprise](/pricing/?product=application-performance-monitoring#products)
+    の一部として APM にバンドルされており、APM フリート全体で DSM を有効化します。
+  q: Data Streams Monitoring は、バンドルの一部として購入できますか？
+- a: DSM は現在、Kafka、RabbitMQ、SQSをサポートしています。その他のキューイングテクノロジーについては、カスタムインスツルメンテーションオプションを提供しています。
+  q: どのような技術に対応していますか？
+- a: マップ履歴は 30 日間、すべてのメトリクスは 15 か月間保持されます。
+  q: DSM のデータはいつまで保持されるのですか？
+features:
+  main:
+  - すぐに使えるパイプラインのトポロジーマッピング
+  - コンシューマーラグとパーティションメトリクス
+  - エンドツーエンドのレイテンシとスループットのメトリクス
+  - 推奨モニター
+  - '相関するテレメトリー: トレース、ログ、インフラストラクチャーメトリクス'
+  - スキーマトラッキング
+  - チームオーナーシップの情報
+  - カスタムダッシュボード
+  - ユーザー無制限
+name: データストリームのモニタリング
+plans:
+- key_points:
+  - イベント駆動型アプリケーションのあらゆる場所で速度低下を検出
+  - パイプラインのボトルネックや障害を局所化し、解決
+  - 大量のバックアップ メッセージを修復
+  price_helper1: / ホスト、1 か月*
+  pricing_data_key: DSM
+pricing_nav_categories:
+- Application

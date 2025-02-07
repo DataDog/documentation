@@ -17,7 +17,8 @@ title: データベースモニタリングガイド
 {{< /whatsnext >}}
 
 {{< whatsnext desc="SQL Server ガイド:" >}}
-    {{< nextlink href="database_monitoring/guide/sql_alwayson" >}}SQL Server AlwaysOn アベイラビリティグループの確認{{< /nextlink >}}
+    {{< nextlink href="database_monitoring/guide/sql_alwayson" >}}SQL Server AlwaysOn 可用性グループを探る{{< /nextlink >}}
+    {{< nextlink href="database_monitoring/guide/sql_deadlock" >}}SQL Server でのデッドロック監視の構成{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="PostgreSQL guides:" >}}

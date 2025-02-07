@@ -2,7 +2,9 @@
 title: Kotlin Multiplatform Advanced Configuration
 aliases:
     - /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/kotlin-multiplatform
+    - /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/kotlin_multiplatform
     - /real_user_monitoring/kotlin-multiplatform
+    - /real_user_monitoring/kotlin_multiplatform
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-kotlin-multiplatform
   tag: "Source Code"
@@ -52,6 +54,33 @@ The action type should be one of the following: "custom", "click", "tap", "scrol
 ```kotlin
 fun onUserInteraction() { 
     GlobalRumMonitor.get().addAction(actionType, name, actionAttributes)
+}
+```
+
+### Enrich resources
+
+When [tracking resources automatically][6], provide a custom `RumResourceAttributesProvider` instance to add custom attributes to each tracked network request/response. For example, if you want to track a network request's headers, create an implementation like the following, and pass it in the `datadogKtorPlugin` initialization call.
+
+```kotlin
+class CustomRumResourceAttributesProvider : RumResourceAttributesProvider {
+    override fun onRequest(request: HttpRequestSnapshot) =
+        request.headers.names().associateWith { request.headers[it] }.mapKeys { "header.$it" }
+
+    override fun onResponse(response: HttpResponse) = emptyMap<String, Any?>()
+
+    override fun onError(request: HttpRequestSnapshot, throwable: Throwable) = emptyMap<String, Any?>()
+}
+
+val ktorClient = HttpClient {
+    install(
+        datadogKtorPlugin(
+            tracedHosts = mapOf(
+                "example.com" to setOf(TracingHeaderType.DATADOG),
+                "example.eu" to setOf(TracingHeaderType.DATADOG)
+            ),
+            rumResourceAttributesProvider = CustomRumResourceAttributesProvider()
+        )
+    )
 }
 ```
 
@@ -157,6 +186,18 @@ GlobalRumMonitor.get().addAttribute(key, value)
 // Removes an attribute to all future RUM events
 GlobalRumMonitor.get().removeAttribute(key)
 ```
+
+## Track background events
+
+You can track events such as crashes and network requests when your application is in the background (for example, no active view is available). 
+
+Add the following snippet during RUM configuration:
+
+```kotlin
+.trackBackgroundEvents(true)
+```
+<div class="alert alert-info"><p>Tracking background events may lead to additional sessions, which can impact billing. For questions, <a href="https://docs.datadoghq.com/help/">contact Datadog support.</a></p>
+</div>
 
 ## Initialization parameters
 
@@ -405,12 +446,12 @@ GlobalRumMonitor.get().getCurrentSessionId { sessionId ->
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/rum/application/create
-[2]: /real_user_monitoring/mobile_and_tv_monitoring/kotlin-multiplatform
-[3]: /real_user_monitoring/mobile_and_tv_monitoring/kotlin-multiplatform/data_collected
-[4]: /real_user_monitoring/mobile_and_tv_monitoring/kotlin-multiplatform/advanced_configuration/#automatically-track-views
-[5]: /real_user_monitoring/mobile_and_tv_monitoring/kotlin-multiplatform/advanced_configuration/#initialization-parameters
-[6]: /real_user_monitoring/mobile_and_tv_monitoring/kotlin-multiplatform/#initialize-rum-ktor-plugin-to-track-network-events-made-with-ktor
-[7]: /real_user_monitoring/mobile_and_tv_monitoring/kotlin-multiplatform/data_collected
+[2]: /real_user_monitoring/mobile_and_tv_monitoring/kotlin_multiplatform
+[3]: /real_user_monitoring/mobile_and_tv_monitoring/kotlin_multiplatform/data_collected
+[4]: /real_user_monitoring/mobile_and_tv_monitoring/kotlin_multiplatform/advanced_configuration/#automatically-track-views
+[5]: /real_user_monitoring/mobile_and_tv_monitoring/kotlin_multiplatform/advanced_configuration/#initialization-parameters
+[6]: /real_user_monitoring/mobile_and_tv_monitoring/kotlin_multiplatform/#initialize-rum-ktor-plugin-to-track-network-events-made-with-ktor
+[7]: /real_user_monitoring/mobile_and_tv_monitoring/kotlin_multiplatform/data_collected
 [8]: /real_user_monitoring/explorer/search/#setup-facets-and-measures
-[9]: /real_user_monitoring/mobile_and_tv_monitoring/kotlin-multiplatform/#sending-data-when-device-is-offline
+[9]: /real_user_monitoring/mobile_and_tv_monitoring/kotlin_multiplatform/#sending-data-when-device-is-offline
 [10]: /real_user_monitoring/error_tracking/mobile/ios/#add-app-hang-reporting
