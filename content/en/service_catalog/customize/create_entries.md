@@ -5,6 +5,7 @@ aliases:
   - /service_catalog/setup
   - /service_catalog/create_entries/
   - /service_catalog/enrich_default_catalog/create_entries
+  - /api_catalog/add_entries
 further_reading:
 - link: "https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/service_definition_yaml"
   tag: "External Site"

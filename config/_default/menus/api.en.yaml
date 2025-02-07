@@ -2575,9 +2575,9 @@ menu:
           - ListSecurityFilters
         unstable: []
         order: 18
-    - name: Patch a vulnerability-based rule
-      url: '#patch-a-vulnerability-based-rule'
-      identifier: security-monitoring-patch-a-vulnerability-based-rule
+    - name: Patch a vulnerability-based notification rule
+      url: '#patch-a-vulnerability-based-notification-rule'
+      identifier: security-monitoring-patch-a-vulnerability-based-notification-rule
       parent: security-monitoring
       generated: true
       params:
@@ -2587,9 +2587,9 @@ menu:
           - PatchVulnerabilityNotificationRule
         unstable: []
         order: 20
-    - name: Get details of a vulnerability-based rule
-      url: '#get-details-of-a-vulnerability-based-rule'
-      identifier: security-monitoring-get-details-of-a-vulnerability-based-rule
+    - name: Get details of a vulnerability notification rule
+      url: '#get-details-of-a-vulnerability-notification-rule'
+      identifier: security-monitoring-get-details-of-a-vulnerability-notification-rule
       parent: security-monitoring
       generated: true
       params:
@@ -2599,9 +2599,9 @@ menu:
           - GetVulnerabilityNotificationRule
         unstable: []
         order: 18
-    - name: Delete a vulnerability-based rule
-      url: '#delete-a-vulnerability-based-rule'
-      identifier: security-monitoring-delete-a-vulnerability-based-rule
+    - name: Delete a vulnerability-based notification rule
+      url: '#delete-a-vulnerability-based-notification-rule'
+      identifier: security-monitoring-delete-a-vulnerability-based-notification-rule
       parent: security-monitoring
       generated: true
       params:
@@ -2611,9 +2611,9 @@ menu:
           - DeleteVulnerabilityNotificationRule
         unstable: []
         order: 21
-    - name: Create a new vulnerability-based rule
-      url: '#create-a-new-vulnerability-based-rule'
-      identifier: security-monitoring-create-a-new-vulnerability-based-rule
+    - name: Create a new vulnerability-based notification rule
+      url: '#create-a-new-vulnerability-based-notification-rule'
+      identifier: security-monitoring-create-a-new-vulnerability-based-notification-rule
       parent: security-monitoring
       generated: true
       params:
@@ -2623,9 +2623,9 @@ menu:
           - CreateVulnerabilityNotificationRule
         unstable: []
         order: 16
-    - name: Get the list of vulnerability-based rules
-      url: '#get-the-list-of-vulnerability-based-rules'
-      identifier: security-monitoring-get-the-list-of-vulnerability-based-rules
+    - name: Get the list of vulnerability notification rules
+      url: '#get-the-list-of-vulnerability-notification-rules'
+      identifier: security-monitoring-get-the-list-of-vulnerability-notification-rules
       parent: security-monitoring
       generated: true
       params:
@@ -2647,9 +2647,9 @@ menu:
           - ListVulnerabilities
         unstable: []
         order: 25
-    - name: Patch a signal-based rule
-      url: '#patch-a-signal-based-rule'
-      identifier: security-monitoring-patch-a-signal-based-rule
+    - name: Patch a signal-based notification rule
+      url: '#patch-a-signal-based-notification-rule'
+      identifier: security-monitoring-patch-a-signal-based-notification-rule
       parent: security-monitoring
       generated: true
       params:
@@ -2659,9 +2659,9 @@ menu:
           - PatchSignalNotificationRule
         unstable: []
         order: 20
-    - name: Get details of a signal-based rule
-      url: '#get-details-of-a-signal-based-rule'
-      identifier: security-monitoring-get-details-of-a-signal-based-rule
+    - name: Get details of a signal-based notification rule
+      url: '#get-details-of-a-signal-based-notification-rule'
+      identifier: security-monitoring-get-details-of-a-signal-based-notification-rule
       parent: security-monitoring
       generated: true
       params:
@@ -2671,9 +2671,9 @@ menu:
           - GetSignalNotificationRule
         unstable: []
         order: 18
-    - name: Delete a signal-based rule
-      url: '#delete-a-signal-based-rule'
-      identifier: security-monitoring-delete-a-signal-based-rule
+    - name: Delete a signal-based notification rule
+      url: '#delete-a-signal-based-notification-rule'
+      identifier: security-monitoring-delete-a-signal-based-notification-rule
       parent: security-monitoring
       generated: true
       params:
@@ -2683,9 +2683,9 @@ menu:
           - DeleteSignalNotificationRule
         unstable: []
         order: 21
-    - name: Create a new signal-based rule
-      url: '#create-a-new-signal-based-rule'
-      identifier: security-monitoring-create-a-new-signal-based-rule
+    - name: Create a new signal-based notification rule
+      url: '#create-a-new-signal-based-notification-rule'
+      identifier: security-monitoring-create-a-new-signal-based-notification-rule
       parent: security-monitoring
       generated: true
       params:
@@ -2695,9 +2695,9 @@ menu:
           - CreateSignalNotificationRule
         unstable: []
         order: 16
-    - name: Get the list of signal-based rules
-      url: '#get-the-list-of-signal-based-rules'
-      identifier: security-monitoring-get-the-list-of-signal-based-rules
+    - name: Get the list of signal-based notification rules
+      url: '#get-the-list-of-signal-based-notification-rules'
+      identifier: security-monitoring-get-the-list-of-signal-based-notification-rules
       parent: security-monitoring
       generated: true
       params:
