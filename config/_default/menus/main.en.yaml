@@ -762,6 +762,11 @@ menu:
       identifier: otel_guides
       parent: opentelemetry_top_level
       weight: 9
+    - name: Getting Started with OpenTelemetry at Datadog
+      url: /getting_started/opentelemetry/
+      identifier: otel_guides_migration
+      parent: otel_guides
+      weight: 901
     - name: Migrate to OpenTelemetry Collector version 0.95.0+
       url: opentelemetry/guide/migration/
       identifier: otel_guides_migration
