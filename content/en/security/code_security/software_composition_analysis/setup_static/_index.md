@@ -60,8 +60,6 @@ jobs:
       with:
         dd_api_key: ${{ secrets.DD_API_KEY }}
         dd_app_key: ${{ secrets.DD_APP_KEY }}
-        dd_service: my-app
-        dd_env: ci
         dd_site: "datadoghq.com"
 ```
 

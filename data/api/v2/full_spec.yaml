@@ -205,7 +205,7 @@ components:
       schema:
         type: string
     ConfluentAccountID:
-      description: Confluent Account id.
+      description: Confluent Account ID.
       in: path
       name: account_id
       required: true
