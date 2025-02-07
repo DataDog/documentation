@@ -6,6 +6,9 @@ further_reading:
     - link: '/account_management/scim/'
       tag: 'Documentation'
       text: 'User Provisioning with SCIM'
+    - link: 'account_management/saml/mapping/#map-saml-attributes-to-datadog-roles'
+      tag: 'Documentation'
+      text: 'Group Attribute Mapping'
 ---
 
 See the following instructions to synchronize your Datadog users with Okta using SCIM.
@@ -61,7 +64,7 @@ With [Managed Teams][6], you control the core provisioning of a Datadog Team —
 
 **Note:** Users must exist in Datadog before you can add them to a team. Therefore, you must assign users to the Datadog app in Okta to ensure that they are created in Datadog through SCIM. Assign the Datadog application to your Okta group to ensure that all team members are created in Datadog automatically.
 
-### Create a new team
+### Create a new team in Datadog
 
 1. In your Datadog application in Okta, navigate to the **Push Groups** tab.
 {{< img src="/account_management/scim/okta/pushed-groups.png" alt="Okta pushed groups configuration interface">}}
@@ -70,7 +73,7 @@ With [Managed Teams][6], you control the core provisioning of a Datadog Team —
 1. In the **Match result & push action** column, ensure **Create group** is selected
 1. Click **Save**.
 
-To verify that the operation completed successfully, navigate to the [Teams list][7]. Search for a Datadog team matching the Okta group you configured. Verify that the team exists in Datadog and is managed externally.
+To verify that the operation completed successfully, navigate to the [Teams list][7] in Datadog. Search for a Datadog Team matching the Okta group you configured. Verify that the team exists in Datadog and is managed externally.
 
 {{< img src="/account_management/scim/okta/managed-externally.png" alt="Datadog team list showing a team called Cool group that is managed externally.">}}
 
@@ -83,7 +86,7 @@ You can map an existing Datadog Team to an Okta group. Establishing a link from 
 1. In your Datadog application in Okta, navigate to the **Push Groups** tab.
 1. Click the **Push Groups** button. The pushed groups interface opens.
 1. Select the Okta group you want to synchronize with a Datadog Team.
-1. In the **Match result & push action** column, ensure **Create group** is selected
+1. In the **Match result & push action** column, ensure **Create group** is selected.
 1. Click **Save**.
 
 **Note:** Okta may display a **No match found** message, because it only returns managed groups. You can ignore this message and proceed with creating the group to establish synchronization.
@@ -94,7 +97,7 @@ You have two options for disconnecting an Okta group from a Datadog Team, with d
 
 #### Keep team members in Datadog
 
-This procedure enables you to manage team membership in Datadog instead of Okta. The team members stay unchanged.
+This procedure allows you to manage team membership in Datadog instead of Okta. The team members stay unchanged.
 
 1. In your Datadog application in Okta, navigate to the **Push Groups** tab.
 1. Click the **Push Groups** button. The pushed groups interface opens.
@@ -106,7 +109,7 @@ This procedure enables you to manage team membership in Datadog instead of Okta.
 
 #### Remove team members from Datadog
 
-This procedure enables you to manage team membership in Datadog instead of Okta and removes the team members from the Datadog Team.
+This procedure allows you to manage team membership in Datadog instead of Okta and removes the team members from the Datadog Team.
 
 1. In your Datadog application in Okta, navigate to the **Push Groups** tab.
 1. Click the **Push Groups** button. The pushed groups interface opens.

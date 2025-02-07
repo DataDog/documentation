@@ -75,8 +75,6 @@ Datadog supports Okta and other SCIM-compliant identity providers for managed te
 
 For more information on the capabilities of managed teams and how to set them up, see [SCIM][3].
 
-TODO: make sure that the SCIM link is helpful.
-
 ## SAML attribute mapping
 
 To manage teams and team membership using SAML attributes, see [Map SAML attributes to Teams][2].
