@@ -49,7 +49,7 @@ The following diagram illustrates how Agentless scanning works when deployed wit
 {{< /tabs >}}
 
 ## Recommended configuration
-
+Agentless Scanning incurs additional costs for running scanners in your cloud environments. To manage costs while ensuring reliable scans every 12 hours, Datadog recommends setting up Agentless Scanning with Terraform as the default template, which also prevents cross-region networking.
 To improve the scanner's efficacy, ensure your setup follows those guidelines:
 
 - Scanners are deployed in a single AWS account
