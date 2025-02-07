@@ -161,8 +161,8 @@ The following list shows the default values for key configuration settings:
 **Environment variable**: `DD_TRACE_AGENT_URL`<br/>
 **Default**: `http://localhost:8126`
 
-`test_session.name` (only available as environment variable right now)
-: Use it to identify a group of tests, such as `integration-tests`, `unit-tests` or `smoke-tests`.<br/>
+`test_session.name` (only available as an environment variable)
+: Identifies a group of tests, such as `integration-tests`, `unit-tests` or `smoke-tests`.<br/>
 **Environment variable**: `DD_TEST_SESSION_NAME`<br/>
 **Default**: (CI job name + test command)<br/>
 **Example**: `unit-tests`, `integration-tests`, `smoke-tests`
@@ -367,7 +367,7 @@ await module.CloseAsync();
 
 Always call `module.Close()` or `module.CloseAsync()` at the end so that all the test data is flushed to Datadog.
 
-## Best Practices
+## Best practices
 
 ### Test session name `DD_TEST_SESSION_NAME`
 
@@ -380,12 +380,12 @@ Use `DD_TEST_SESSION_NAME` to define the test session name for your tests (`test
 - `ui-tests`
 - `backend-tests`
 
-If `DD_TEST_SESSION_NAME` is not specified, the default value used is a combination of:
+If `DD_TEST_SESSION_NAME` is not specified, the default value used is a combination of the:
 
 - CI job name
 - Command used to run the tests (such as `yarn test`)
 
-The test session name should be unique within a repository to help you distinguish different groups of tests.
+The test session name needs to be unique within a repository to help you distinguish different groups of tests.
 
 #### When to use `DD_TEST_SESSION_NAME`
 

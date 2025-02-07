@@ -155,7 +155,7 @@ Set all these variables in your test target:
 **Default**: `(empty)`
 
 `DD_TEST_SESSION_NAME`
-: Use it to identify a group of tests, such as `integration-tests`, `unit-tests` or `smoke-tests`.<br/>
+: Identifies a group of tests, such as `integration-tests`, `unit-tests` or `smoke-tests`.<br/>
 **Environment variable**: `DD_TEST_SESSION_NAME`<br/>
 **Default**: (CI job name + test command)<br/>
 **Example**: `unit-tests`, `integration-tests`, `smoke-tests`
@@ -639,12 +639,12 @@ Use `DD_TEST_SESSION_NAME` to define the test session name for your tests (`test
 - `ui-tests`
 - `backend-tests`
 
-If `DD_TEST_SESSION_NAME` is not specified, the default value used is a combination of:
+If `DD_TEST_SESSION_NAME` is not specified, the default value used is a combination of the:
 
 - CI job name
 - Command used to run the tests (such as `swift test`)
 
-The test session name should be unique within a repository to help you distinguish different groups of tests.
+The test session name needs to be unique within a repository to help you distinguish different groups of tests.
 
 #### When to use `DD_TEST_SESSION_NAME`
 

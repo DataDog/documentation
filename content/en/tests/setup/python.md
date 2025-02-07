@@ -139,7 +139,7 @@ def test_square_value(benchmark):
     assert result == 25
 ```
 
-For additional configuration see [Configuration Settings][1].
+For additional configurations, see [Configuration Settings][1].
 
 [1]: #configuration-settings
 {{% /tab %}}
@@ -164,7 +164,7 @@ def test_will_pass(self):
 assert True
 {{< /code-block >}}
 
-For additional configuration see [Configuration Settings][1].
+For additional configurations, see [Configuration Settings][1].
 
 [1]: #configuration-settings
 {{% /tab %}}
@@ -372,7 +372,7 @@ if __name__ == "__main__":
     api.TestSession.finish()
 ```
 
-For additional configuration see [Configuration Settings][2].
+For additional configurations, see [Configuration Settings][2].
 
 [1]: https://github.com/DataDog/dd-trace-py
 [2]: #configuration-settings
@@ -385,7 +385,7 @@ For additional configuration see [Configuration Settings][2].
 The following is a list of the most important configuration settings that can be used with the tracer, either in code or using environment variables:
 
 `DD_TEST_SESSION_NAME`
-: Use it to identify a group of tests, such as `integration-tests`, `unit-tests` or `smoke-tests`.<br/>
+: Identifies a group of tests, such as `integration-tests`, `unit-tests` or `smoke-tests`.<br/>
 **Environment variable**: `DD_TEST_SESSION_NAME`<br/>
 **Default**: (CI job name + test command)<br/>
 **Example**: `unit-tests`, `integration-tests`, `smoke-tests`
@@ -429,12 +429,12 @@ Use `DD_TEST_SESSION_NAME` to define the test session name for your tests (`test
 - `ui-tests`
 - `backend-tests`
 
-If `DD_TEST_SESSION_NAME` is not specified, the default value used is a combination of:
+If `DD_TEST_SESSION_NAME` is not specified, the default value used is a combination of the:
 
 - CI job name
 - Command used to run the tests (such as `pytest --ddtrace`)
 
-The test session name should be unique within a repository to help you distinguish different groups of tests.
+The test session name needs to be unique within a repository to help you distinguish different groups of tests.
 
 #### When to use `DD_TEST_SESSION_NAME`
 

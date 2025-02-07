@@ -124,7 +124,7 @@ Set the following environment variables to configure the tracer:
 : Injects the tracer into the Maven build process.
 
 `DD_TEST_SESSION_NAME`
-: Use this to identify a group of tests (for example: `unit-tests` or `integration-tests`).
+: Identifies a group of tests (for example: `unit-tests` or `integration-tests`).
 
 Run your tests as you normally do (for example: `mvn test` or `mvn verify`).
 
@@ -159,7 +159,7 @@ Set the following environment variables to configure the tracer:
 : Enables the Test Optimization product.
 
 `DD_TEST_SESSION_NAME`
-: Use this to identify a group of tests (for example: `unit-tests` or `integration-tests`).
+: Identifies a group of tests (for example: `unit-tests` or `integration-tests`).
 
 `DD_ENV`
 : Environment where the tests are being run (for example: `local` when running tests on a developer workstation or `ci` when running them on a CI provider).
@@ -184,7 +184,7 @@ Set the following environment variables to configure the tracer:
 : Enables the Test Optimization product.
 
 `DD_TEST_SESSION_NAME`
-: Use this to identify a group of tests (for example: `unit-tests` or `integration-tests`).
+: Identifies a group of tests (for example: `unit-tests` or `integration-tests`).
 
 `DD_ENV`
 : Environment where the tests are being run (for example: `local` when running tests on a developer workstation or `ci` when running them on a CI provider).
@@ -444,12 +444,12 @@ Use `DD_TEST_SESSION_NAME` to define the test session name for your tests (`test
 - `ui-tests`
 - `backend-tests`
 
-If `DD_TEST_SESSION_NAME` is not specified, the default value used is a combination of:
+If `DD_TEST_SESSION_NAME` is not specified, the default value used is a combination of the:
 
 - CI job name
 - Command used to run the tests (such as `mvn test`)
 
-The test session name should be unique within a repository to help you distinguish different groups of tests.
+The test session name needs to be unique within a repository to help you distinguish different groups of tests.
 
 #### When to use `DD_TEST_SESSION_NAME`
 
@@ -457,7 +457,7 @@ If your tests are run with commands that include a dynamic string, such as:
 
 - `mvn test --temp-dir=/var/folders/t1/rs2htfh55mz9px2j4prmpg_c0000gq/T`
 
-The default value for the test session name will be unstable. It is recommended to use `DD_TEST_SESSION_NAME` in this case.
+The default value for the test session name will be unstable. Datadog recommends using `DD_TEST_SESSION_NAME` in this case.
 
 ## Troubleshooting
 
