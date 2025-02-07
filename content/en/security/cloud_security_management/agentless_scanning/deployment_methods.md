@@ -52,10 +52,9 @@ The following diagram illustrates how Agentless scanning works when deployed wit
 Agentless Scanning incurs additional costs for running scanners in your cloud environments. To manage costs while ensuring reliable scans every 12 hours, Datadog recommends setting up Agentless Scanning with Terraform as the default template, which also prevents cross-region networking.
 To improve the scanner's efficacy, ensure your setup follows those guidelines:
 
-- Scanners are deployed in a single AWS account
-- A scanner is deployed in each region that has either:
-  - More than 250 hosts
-  - Any data store if using [Cloud Storage Scanning](/security/cloud_security_management/agentless_scanning#cloud-storage-scanning)
+- Deploy scanners within a single AWS account
+- Deploy a scanner in each region that has more than 250 hosts
+- Deploy a scanner in any region containing a data store if using [Cloud Storage Scanning][2]
 
 Datadog automatically schedules scans to the right region to minimize the cross region costs.
 
