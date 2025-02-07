@@ -25,7 +25,7 @@ The System for Cross-domain Identity Management, or SCIM, is an open standard th
 - Remove users in Datadog when they no longer require access
 - Keep user attributes synchronized between the identity provider and Datadog
 - Single sign-on to Datadog (recommended)
-- Managed teams: Control the Datadog Team name, handle, and membership through an identity provider integration.
+- Managed Teams: Create Datadog Teams from identity provider groups and keep membership of the Datadog Teams synchronized with group membership in the identity provider.
 
 **Note:** To use managed teams, you must use the Okta IdP and request access to the feature from [support][8].
 

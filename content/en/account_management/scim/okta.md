@@ -35,7 +35,7 @@ When using SAML and SCIM together, Datadog strongly recommends disabling SAML ju
 ## Configure automatic user provisioning
 
 1. In the application management screen, select **Provisioning** in the left panel
-2. Click **Configuration API integration**.
+2. Click **Configure API integration**.
 3. Select **Enable API integration**.
 4. Complete the **Credentials** section as follows:
     - **Base URL**: `https://{{< region-param key="dd_full_site" >}}/api/v2/scim` **Note:** Use the appropriate subdomain for your site. To find your URL, see [Datadog sites][3].
@@ -51,13 +51,13 @@ When using SAML and SCIM together, Datadog strongly recommends disabling SAML ju
     - **Deactivate Users**
 8. Under **Datadog Attribute Mappings**, find the mapping of Okta attributes to Datadog attributes already pre-configured. You can re-map them if needed, but map the Okta values to the same set of Datadog values.
 
-### Group mapping
+## Configure automatic team provisioning
 
 {{< callout url="/help/" header="false" >}}
-The managed team feature is turned off by default. Request access by contacting support.
+The Managed Teams feature is turned off by default. Request access by contacting support.
 {{< /callout >}}
 
-With managed teams, you control the Datadog Team name, handle, and membership through the identity provider. The setup process differs depending on whether the team already exists in Datadog.
+With Managed Teams, you control the core provisioning of a Datadog Team — its name, handle, and membership — through the identity provider. The setup process differs depending on whether the team already exists in Datadog.
 
 **Note:** Users must exist in Datadog before you can add them to a team. Therefore, you must assign users to the Datadog app in Okta to ensure that they are created in Datadog through SCIM. Assign the Datadog application to your Okta group to ensure that all team members are created in Datadog automatically.
 

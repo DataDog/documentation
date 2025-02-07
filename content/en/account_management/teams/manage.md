@@ -61,13 +61,13 @@ Users with the `user_access_manage` permission can set default rules on who can 
 ## Manage teams through an identity provider
 
 {{< callout url="/help/" header="false" >}}
-The managed team feature is turned off by default. Request access by contacting support.
+The Managed Teams feature is turned off by default. Request access by contacting support.
 {{< /callout >}}
 
 When you set up a managed team, you configure the following properties of the team externally through an identity provider integration:
  - Team name
  - Team handle
- - Team membership
+ - Team membership (synchronized from the corresponding identity provider group)
 
 To ensure that managed teams stay consistent with their configuration in your identity provider, you must make changes to managed properties in the identity provider, not through the Datadog site or API.
 
