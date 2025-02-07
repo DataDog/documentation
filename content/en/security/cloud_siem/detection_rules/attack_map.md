@@ -38,7 +38,7 @@ To view more information about a technique and the rules monitoring the techniqu
   1. Sort by the creation date, rule type, rule name, source, or highest severity.
   1. Toggle **Show deprecated rules** to see deprecated rules for this technique.
 
-### Adding attacker technique and tactic tags to custom rules
+### Add attacker technique and tactic tags to custom rules
 
 Custom rules only show up in the map if they are tagged in the rule editor with the correct MITRE tactic and technique. The tactic and technique must also be paired correctly. If the correct format and pairing are not used, the rule does not show up in the map when you use the search bar to filter for that rule.
 
