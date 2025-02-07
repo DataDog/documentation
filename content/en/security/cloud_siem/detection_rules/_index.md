@@ -333,6 +333,26 @@ Optionally, add a suppression rule to prevent a signal from getting generated. F
 
 Additionally, in the suppression rule, you can add a log exclusion query to exclude logs from being analyzed. These queries are based on **log attributes**. **Note**: The legacy suppression was based on log exclusion queries, but it is now included in the suppression rule's **Add a suppression query** step.
 
+## Rule Version History
+
+{{< img src="/security/security_monitoring/detection_rules/rule_version_history_20250207.png" alt="The version history for a Github OAuth access token compromise showing" style="width:80%;" >}}
+
+Use Rule Version History to:
+- See past versions of a detection rule and understand the changes over time.
+- See who made the changes for improved collaboration.
+- Compare versions with diffs to analyze the modifications and impact of the changes.
+
+To see the version history of a rule:
+1. Navigate to Detection Rules.
+1. Click on the rule you are interested in.
+1. In the rule editor, click **Version History** to see past changes.
+1. Click a specific version to see what changes were made.
+1. Click **Open Version Comparison** to see what changed between versions.
+1. Select the two versions you want to compare.
+    - Data highlighted in red indicates data that was modified or dropped.
+    - Data highlighted in green indicates data that was added.
+1. Click **Unified** if you want to see the comparison in the same panel.
+
 ## Rule deprecation
 
 Regular audits of all out-of-the-box detection rules are performed to maintain high fidelity signal quality. Deprecated rules are replaced with an improved rule.
