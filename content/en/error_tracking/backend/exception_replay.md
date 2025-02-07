@@ -48,7 +48,7 @@ Exception Replay is only available in APM Error Tracking. Error Tracking for Log
    * `dd-trace-java` version `1.46.0` or higher.
    * `dd-trace-dotnet` version `3.91.0` or higher.
    * `dd-trace-php` version `1.4.0` or higher
-4. Set the `DD_EXCEPTION_REPLAY_ENABLED` environment variable to `true` to run your service with Error Tracking Exception Replay enabled.
+3. Set the `DD_EXCEPTION_REPLAY_ENABLED` environment variable to `true` to run your service with Error Tracking Exception Replay enabled.
 
 ### Redacting sensitive data
 
