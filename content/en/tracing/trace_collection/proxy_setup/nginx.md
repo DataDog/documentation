@@ -33,7 +33,7 @@ The main tarball contains a single file, `ngx_http_datadog_module.so`, which is 
 
 For simplicity, the following script downloads only the module for the latest release:
 
-```shell
+```bash
 get_latest_release() {
   curl --silent "https://api.github.com/repos/$1/releases/latest" | jq --raw-output .tag_name
 }
@@ -111,9 +111,11 @@ To instrument Ingress-NGINX **v1.10.0+** using Datadog's module, follow these st
 
 {{< tabs >}}
 {{% tab "Kubernetes" %}}
+
 **1. Verify your Ingress-NGINX version**<br>
-Check your Ingress-NGINX Controller version and ensure you have the matching Datadog init-container available. The init-container version ([datadog/ingress-nginx-injection][8]) must exactly match your controller version to prevent startup issues.
-For example, if you're running Ingress-NGINX v1.11.3, you need [datadog/ingress-nginx-injection:v1.11.3][9].
+Check your Ingress-NGINX Controller version and ensure you have the matching Datadog init-container available.
+The init-container version ([datadog/ingress-nginx-injection][1]) must exactly match your controller version to prevent startup issues.
+For example, if you're running Ingress-NGINX v1.11.3, you need [datadog/ingress-nginx-injection:v1.11.3][2].
 
 **2. Modify your controller's pod specification**<br>
 Update the controller pod specification to include the init-container and configure the Datadog Agent host environment variable:
@@ -140,7 +142,7 @@ Update the controller pod specification to include the init-container and config
                       fieldPath: status.hostIP
 {{< /highlight >}}
 
-    **Note**: For an alternative way to access the Datadog Agent, see the [Kubernetes installation guide][8].
+**Note**: For an alternative way to access the Datadog Agent, see the [Kubernetes installation guide][8].
 
 **3. Configure Ingress-NGINX** <br>
 Create or modify the `ConfigMap` to load the Datadog module:
@@ -160,12 +162,16 @@ Create or modify the `ConfigMap` to load the Datadog module:
 Apply the updated `ConfigMap` to ensure the Datadog module is correctly loaded.
 
 This configuration ensures that the Datadog module is loaded and ready to trace incoming requests.
+
+[1]: https://hub.docker.com/r/datadog/ingress-nginx-injection
+[2]: https://hub.docker.com/layers/datadog/ingress-nginx-injection/v1.11.3/images/sha256-19ea2874d8a4ebbe4de0bf08faeb84c755cd71f1e8740ce2d145c5cf954a33a1
 {{% /tab %}}
 
 {{% tab "Helm" %}}
 **1. Verify your Ingress-NGINX version**<br>
-Check your Ingress-NGINX Controller version and ensure you have the matching Datadog init-container available. The init-container version ([datadog/ingress-nginx-injection][8]) must exactly match your controller version to prevent startup issues.
-For example, if you're running Ingress-NGINX v1.11.3, you need [datadog/ingress-nginx-injection:v1.11.3][1].
+Check your Ingress-NGINX Controller version and ensure you have the matching Datadog init-container available.
+The init-container version ([datadog/ingress-nginx-injection][1]) must exactly match your controller version to prevent startup issues.
+For example, if you're running Ingress-NGINX v1.11.3, you need [datadog/ingress-nginx-injection:v1.11.3][2].
 
 **2. Overriding Helm chart values**<br>
 To customize the Ingress-NGINX Helm chart and load the required Datadog module, create a YAML file or modify an existing one with the following configuration:
@@ -195,7 +201,8 @@ Install or upgrade the Helm release using the `-f` flag to apply the custom valu
 helm install my-release ingress-nginx/ingress-nginx -f values.yaml
 ```
 
-[1]: https://hub.docker.com/layers/datadog/ingress-nginx-injection/v1.11.3/images/sha256-19ea2874d8a4ebbe4de0bf08faeb84c755cd71f1e8740ce2d145c5cf954a33a1
+[1]: https://hub.docker.com/r/datadog/ingress-nginx-injection
+[2]: https://hub.docker.com/layers/datadog/ingress-nginx-injection/v1.11.3/images/sha256-19ea2874d8a4ebbe4de0bf08faeb84c755cd71f1e8740ce2d145c5cf954a33a1
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -204,8 +211,9 @@ helm install my-release ingress-nginx/ingress-nginx -f values.yaml
 
 {{< tabs >}}
 {{% tab "Kubernetes" %}}
+
 **1. Prepare the Datadog Agent** <br>
-Ensure that your Datadog Agent has [gRPC OTLP Ingestion enabled][5] to act as an OpenTelemetry Collector.
+Ensure that your Datadog Agent has [gRPC OTLP Ingestion enabled][1] to act as an OpenTelemetry Collector.
 
 **2. Configure the Ingress controller** <br>
 To begin, verify that your Ingress controller's pod spec has the `HOST_IP` environment variable set. If not, add the following entry to the `env` block within the pod's specification:
@@ -221,7 +229,7 @@ To begin, verify that your Ingress controller's pod spec has the `HOST_IP` envir
 
 Next, enable OpenTelemetry instrumentation for the controller. Create or edit a ConfigMap with the following details:
 
-```yaml
+{{< highlight yaml "hl_lines=7-11" >}}
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -233,12 +241,15 @@ data:
   # Defaults
   # otel-service-name: "nginx"
   # otel-sampler-ratio: 0.01
-```
+{{< /highlight >}}
+
+[1]: /opentelemetry/otlp_ingest_in_the_agent/
+
 {{% /tab %}}
 
 {{% tab "Helm" %}}
 **1. Prepare the Datadog Agent** <br>
-Ensure that your Datadog Agent has [gRPC OTLP Ingestion enabled][5] to act as an OpenTelemetry Collector.
+Ensure that your Datadog Agent has [gRPC OTLP Ingestion enabled][1] to act as an OpenTelemetry Collector.
 
 **2. Overriding Helm chart values**<br>
 To customize the Ingress-NGINX Helm chart and load the required Datadog module, create a YAML file or modify an existing one with the following configuration:
@@ -266,6 +277,7 @@ Install or upgrade the Helm release using the `-f` flag to apply the custom valu
 helm install my-release ingress-nginx/ingress-nginx -f values.yaml
 ```
 
+[1]: /opentelemetry/otlp_ingest_in_the_agent/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -276,7 +288,7 @@ If `ingress-nginx` was installed via Helm chart, the ConfigMap's name will follo
 
 The Ingress controller manages both the `nginx.conf` and `/etc/nginx/opentracing.json` files. Tracing is enabled for all `location` blocks.
 
-```yaml
+{{< highlight yaml "hl_lines=6-7 9-15" >}}
 kind: ConfigMap
 apiVersion: v1
 metadata:
@@ -293,7 +305,7 @@ data:
   # datadog-collector-port: "8126"
   # datadog-operation-name-override: "nginx.handle"
   # datadog-sample-rate: "1.0"
-```
+{{< /highlight >}}
 
 Additionally, ensure that your controller's pod spec has the `HOST_IP` environment variable set. Add this entry to the `env:` block that contains the environment variables `POD_NAME` and `POD_NAMESPACE`.
 
@@ -320,8 +332,5 @@ The above overrides the default `nginx-ingress-controller.ingress-nginx` service
 [2]: https://hub.docker.com/layers/library/nginx/1.23.2-alpine/images/sha256-0f2ab24c6aba5d96fcf6e7a736333f26dca1acf5fa8def4c276f6efc7d56251f?context=explore
 [3]: https://hub.docker.com/layers/library/amazonlinux/2.0.20230119.1/images/sha256-db0bf55c548efbbb167c60ced2eb0ca60769de293667d18b92c0c089b8038279?context=explore
 [4]: https://github.com/DataDog/nginx-datadog/blob/master/doc/API.md
-[5]: /opentelemetry/otlp_ingest_in_the_agent/
 [6]: https://github.com/DataDog/nginx-datadog/
 [7]: https://kubernetes.io/docs/concepts/workloads/pods/init-containers/
-[8]: https://hub.docker.com/r/datadog/ingress-nginx-injection
-[9]: https://hub.docker.com/layers/datadog/ingress-nginx-injection/v1.11.3/images/sha256-19ea2874d8a4ebbe4de0bf08faeb84c755cd71f1e8740ce2d145c5cf954a33a1
