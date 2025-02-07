@@ -17,7 +17,6 @@ further_reading:
 
 There are two recommended ways to deploy Agentless scanners in your environment, either using cross-account scanning, or same account scanning.
 
-**Note**: When using Agentless Scanning, there are additional costs for running scanners in your cloud environments. To optimize on costs while being able to reliably scan every 12 hours, Datadog recommends setting up Agentless Scanning with Terraform as the default template, as this also avoids cross-region networking.
 
 To establish estimates on scanner costs, reach out to your [Datadog Customer Success Manager][1].
 
