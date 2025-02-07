@@ -343,7 +343,7 @@ Use Rule Version History to:
 - Compare versions with diffs to analyze the modifications and impact of the changes.
 
 To see the version history of a rule:
-1. Navigate to Detection Rules.
+1. Navigate to [Detection Rules][4].
 1. Click on the rule you are interested in.
 1. In the rule editor, click **Version History** to see past changes.
 1. Click a specific version to see what changes were made.
@@ -371,3 +371,4 @@ The rule deprecation process is as follows:
 [1]: https://app.datadoghq.com/security/configuration/siem/rules
 [2]: /security/detection_rules/#clone-a-rule
 [3]: https://app.datadoghq.com/logs/
+[4]: https://app.datadoghq.com/security/rules
