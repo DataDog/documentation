@@ -62,7 +62,7 @@ After you add a table of data to a spreadsheet, analyze and add context to your 
 
 ### Visualizations
 
-Once you have your pivot table, you can click **Show Graphs** and add up to 6 widgets to graph your data. We support **Top List**, **Treemap**, and **Pie Chart** widgets. Options to delete, duplicate, expand, export, and reposition your widgets are available when hovering over the widget title. To edit a widget, click the pencil icon. You can select the type of widget, which pivot calculation it will graph (if there is more than one), which rows and columns of the pivot to graph, and how many groupings will be graphed per row or column.
+After you have your pivot table, you can click **Show Graphs** and add up to six widgets to graph your data. Supported widget types include **Top List**, **Treemap**, and **Pie Chart** widgets. Hover over the widget title to delete, duplicate, expand, export, and reposition widgets. To edit a widget, click the pencil icon. Editing options allow you to select the widget type, choose which pivot calculation to graph (if there is more than one), and specify the rows, columns, and the number of groupings graphed per row or column.
 
 ## Supported data sources
 
