@@ -22,6 +22,10 @@ further_reading:
       text: "Troubleshooting Application Security Management"
 ---
 
+{{< callout url="#" btn_hidden="true" header="ASM Service Extensions is in Preview" >}}
+To try the preview of ASM Service Extensions for GCP, follow the setup instructions below.
+{{< /callout >}}
+
 You can enable application security with GCP Service Extension within GCP Cloud Load Balancing. The Datadog ASM Service Extensions has support for threat detection and blocking.
 
 ## Prerequisites
@@ -44,17 +48,12 @@ You can find a the important steps to create a Service Extension with ASM below:
 
 1. **Create a new VM Compute instance** using the Datadog Service Extension docker image. The image is available on the [Datadog Go tracer GitHub Registry][6].
 
-   **Note**: The ASM Service Extension is done using the [Datadog Go Tracer][7], the image is tagged with the same version as the tracer. The docker image is updated in the same release process as the tracer.
-
-   The docker image expose some configuration specifically for the ASM Service Extension:
+   The docker image expose some configuration:
    | Environment variable                   | Default value   | Description                                                       |
    |----------------------------------------|-----------------|-------------------------------------------------------------------|
    | `DD_SERVICE_EXTENSION_HOST`            | `0.0.0.0`       | gRPC server listening address.                                    |
    | `DD_SERVICE_EXTENSION_PORT`            | `443`           | gRPC server port.                                                 |
    | `DD_SERVICE_EXTENSION_HEALTHCHECK_PORT`| `80`            | HTTP server port for health checks.                               |
-
-
-   As the integration is using the Datadog Go Tracer, it inherits all environment variables from the tracer. You can find more information in [Configuring the Go Tracing Library][8] and [ASM Library Configuration][9].
 
    The Datadog Agent needs to be configured to receive traces from the Service Extension:
    | Environment variable                   | Default value | Description                                                           |
@@ -91,6 +90,14 @@ You can find a the important steps to create a Service Extension with ASM below:
 {{% appsec-getstarted-2-plusrisk %}}
 
 {{< img src="/security/application_security/appsec-getstarted-threat-and-vuln_2.mp4" alt="Video showing Signals explorer and details, and Vulnerabilities explorer and details." video="true" >}}
+
+## More configuration
+
+  <div class="alert alert-warning">
+    <strong>Note:</strong> The ASM Envoy integration is built on top of the Datadog Go Tracer. It follows the same release process as the tracer, and its Docker images are tagged with the corresponding tracer version.
+  </div>
+
+  As the integration is using the [Datadog Go Tracer][7], it inherits all environment variables from the tracer. You can find more information in [Configuring the Go Tracing Library][8] and [ASM Library Configuration][9].
 
 ## Limitations
 
