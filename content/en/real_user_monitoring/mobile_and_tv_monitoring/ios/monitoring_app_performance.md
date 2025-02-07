@@ -125,7 +125,7 @@ To create visualizations in your dashboards, [create a measure][1] first.
 All view timings are measured relative to the view's start. The exact moment a view starts depends on the type of instrumentation used for tracking views. For more details, see [Views instrumentation versus app lifecycle][2].
 
 ## Troubleshooting
-When using the default TimeBasedInitialResourceIdentifier and TimeBasedInteractionIdentifier, TNS and INV timings may be missing in specific cases:
+When using the default `TimeBasedInitialResourceIdentifier` and `TimeBasedInteractionIdentifier`, TNS and INV timings may be missing in specific cases:
 
 - `@view.interaction_to_next_view_time` (INV) is not set for the first view of a session if no **tap**, **click**, or **swipe** actions were tracked in the previous view, or if the interval between the last such action and the start of the current view exceeds 3 seconds.
 - `@view.network_settled_time` (TNS) is unavailable if no resources were tracked during the view, or if none started within the initial 100ms of the view.
