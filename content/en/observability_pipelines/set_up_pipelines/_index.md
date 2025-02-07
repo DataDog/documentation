@@ -25,7 +25,7 @@ In Observability Pipelines, a pipeline is a sequential path with three types of 
 Set up your pipelines and its [sources][1], [processors][2], and [destinations][3] in the Observability Pipelines UI. The general setup steps are:
 
 1. Navigate to [Observability Pipelines][4].
-1. Select a template:
+1. Select a template.
 1. Select and set up your source.
 1. Select and set up your destinations.
 1. Set up your processors.
