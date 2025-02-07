@@ -14,7 +14,7 @@ further_reading:
 If you've configured the profiler and don't see profiles in the profile search page, turn on [debug mode][1] and [open a support ticket][2] with debug files and the following information:
 
 - Operating system type and version (for example, Linux Ubuntu 20.04)
-- Runtime type, version, and vendor (for example, Java OpenJDK 11 AdoptOpenJDK)
+- Runtime type, version, and vendor (for example, Node.js 18.19.01)
 
 ## Profiler fails to load native component
 
