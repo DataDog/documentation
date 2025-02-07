@@ -335,7 +335,7 @@ Additionally, in the suppression rule, you can add a log exclusion query to excl
 
 ## Rule Version History
 
-{{< img src="/security/security_monitoring/detection_rules/rule_version_history_20250207.png" alt="The version history for a Github OAuth access token compromise showing" style="width:80%;" >}}
+{{< img src="/security/security_monitoring/detection_rules/rule_version_history_20250207.png" alt="The version history for a GitHub OAuth access token compromise showing" style="width:80%;" >}}
 
 Use Rule Version History to:
 - See past versions of a detection rule and understand the changes over time.
