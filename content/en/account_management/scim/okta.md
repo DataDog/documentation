@@ -57,22 +57,64 @@ When using SAML and SCIM together, Datadog strongly recommends disabling SAML ju
 The Managed Teams feature is turned off by default. Request access by contacting support.
 {{< /callout >}}
 
-With Managed Teams, you control the core provisioning of a Datadog Team — its name, handle, and membership — through the identity provider. The setup process differs depending on whether the team already exists in Datadog.
+With [Managed Teams][6], you control the core provisioning of a Datadog Team — its name, handle, and membership — through the identity provider. The setup process differs depending on whether the team already exists in Datadog.
 
 **Note:** Users must exist in Datadog before you can add them to a team. Therefore, you must assign users to the Datadog app in Okta to ensure that they are created in Datadog through SCIM. Assign the Datadog application to your Okta group to ensure that all team members are created in Datadog automatically.
 
-#### Create a new team
+### Create a new team
 
 1. In your Datadog application in Okta, navigate to the **Push Groups** tab.
 {{< img src="/account_management/scim/okta/pushed-groups.png" alt="Okta pushed groups configuration interface">}}
 1. Click the **Push Groups** button. The pushed groups interface opens.
 1. Select the Okta group you want to push to Datadog.
-1. Select **Create group** in the **Match result & push action** column.
+1. In the **Match result & push action** column, ensure **Create group** is selected
 1. Click **Save**.
 
-To verify that the operation completed successfully, navigate to the [Teams list][6]. Search for a Datadog team matching the Okta group you configured. Verify that the team exists in Datadog and is managed externally.
+To verify that the operation completed successfully, navigate to the [Teams list][7]. Search for a Datadog team matching the Okta group you configured. Verify that the team exists in Datadog and is managed externally.
 
 {{< img src="/account_management/scim/okta/managed-externally.png" alt="Datadog team list showing a team called Cool group that is managed externally.">}}
+
+### Synchronize an existing Datadog Team with an Okta group
+
+You can map an existing Datadog Team to an Okta group. Establishing a link from the Okta group to the Datadog Team causes the Datadog Team to be managed by Okta going forward.
+
+**Note:** In order to synchronize an existing Datadog Team with an Okta group, the two names must match exactly.
+
+1. In your Datadog application in Okta, navigate to the **Push Groups** tab.
+1. Click the **Push Groups** button. The pushed groups interface opens.
+1. Select the Okta group you want to synchronize with a Datadog Team.
+1. In the **Match result & push action** column, ensure **Create group** is selected
+1. Click **Save**.
+
+**Note:** Okta may display a **No match found** message, because it only returns managed groups. You can ignore this message and proceed with creating the group to establish synchronization.
+
+### Delete the connection between an Okta group and a Datadog Team
+
+You have two options for disconnecting an Okta group from a Datadog Team, with different impacts on the Datadog Team membership.
+
+#### Keep team members in Datadog
+
+This procedure enables you to manage team membership in Datadog instead of Okta. The team members stay unchanged.
+
+1. In your Datadog application in Okta, navigate to the **Push Groups** tab.
+1. Click the **Push Groups** button. The pushed groups interface opens.
+1. Select the Okta group you want to unlink from its Datadog Team.
+1. In the **Match result & push action** column, select **Unlink Pushed Group**. A dialog box appears.
+1. Select **Leave the group in the target app**.
+1. Click **Unlink**.
+1. Click **Save**.
+
+#### Remove team members from Datadog
+
+This procedure enables you to manage team membership in Datadog instead of Okta and removes the team members from the Datadog Team.
+
+1. In your Datadog application in Okta, navigate to the **Push Groups** tab.
+1. Click the **Push Groups** button. The pushed groups interface opens.
+1. Select the Okta group you want to unlink from its Datadog Team.
+1. In the **Match result & push action** column, select **Unlink Pushed Group**. A dialog box appears.
+1. Select **Delete the group in the target app (recommended)**.
+1. Click **Unlink**.
+1. Click **Save**.
 
 ## Further Reading
 
@@ -83,4 +125,5 @@ To verify that the operation completed successfully, navigate to the [Teams list
 [3]: /getting_started/site
 [4]: https://app.datadoghq.com/organization-settings/application-keys
 [5]: /account_management/org_settings/service_accounts
-[6]: https://app.datadoghq.com/teams
+[6]: /account_management/teams/manage/#manage-teams-through-an-identity-provider
+[7]: https://app.datadoghq.com/teams
