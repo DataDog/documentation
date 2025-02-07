@@ -26,7 +26,7 @@ The Datadog plugin for JetBrains IDEs is available for IntelliJ IDEA, GoLand, Ph
 {{< img src="/developers/ide_plugins/idea/overview1.png" alt="The Datadog tool window open in IDEA" style="width:100%;" >}}
 
 The **Code Insights** view keeps you informed about:
-- runtime errors from [Error Tracking][6]
+- Runtime errors from [Error Tracking][6]
 - [Vulnerability][8] reports by Application Security Management
 - [Flaky tests][9] detected by CI Visibility
 
