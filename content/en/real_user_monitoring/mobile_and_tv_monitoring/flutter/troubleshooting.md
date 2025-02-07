@@ -64,7 +64,7 @@ Follow the instructions in the [Flutter documentation][2] for working with Flutt
 
 ## Undefined symbol (iOS)
 
-If you are using Flutter's `build ios-framework` command, it is possible you will get errors similar to the following:
+If you use Flutter's `build ios-framework` command, you may see errors similar to the following:
 
 ```
 Undefined symbol: _OBJC_CLASS_$_PLCrashReport
@@ -73,7 +73,7 @@ Undefined symbol: _OBJC_CLASS_$_PLCrashReportStackFrameInfo
 ...
 ```
 
-This is because the `build ios-framework` command is not properly including PLCrashReporter, which the Datadog Flutter SDK depends on. To solve this issue, we recommend you include the PLCrashReporter dependency manually. The framework and instructions for including it are available on its [GitHub page][8]
+This occurs because the `build ios-framework` command does not properly include PLCrashReporter, which the Datadog Flutter SDK depends on. To resolve this issue, Datadog recommends manually including the PLCrashReporter dependency. The framework and instructions for including it are available on its [GitHub page][8].
 
 ## Set sdkVerbosity
 
