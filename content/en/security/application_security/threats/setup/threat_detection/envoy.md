@@ -70,9 +70,7 @@ For example:
 
   You can find more configuration options available in the [Envoy External Processor documentation][4].
 
-2. **Spin up a new container with the Datadog Envoy docker image.** The image is available on the [Datadog Go tracer GitHub Registry][5].
-
-   **Note**: Envoy integration is done using the [Datadog Go Tracer][6], the image is tagged with the same version as the tracer. The docker image is updated in the same release process as the tracer.
+2. **Spin up a new container with the Datadog Envoy docker image.** The image is available on the [Datadog GitHub Registry][5].
 
    The docker image expose some configuration specifically for the Envoy integration:
    | Environment variable                   | Default value   | Description                                                       |
@@ -80,8 +78,6 @@ For example:
    | `DD_SERVICE_EXTENSION_HOST`            | `0.0.0.0`       | gRPC server listening address.                                    |
    | `DD_SERVICE_EXTENSION_PORT`            | `443`           | gRPC server port.                                                 |
    | `DD_SERVICE_EXTENSION_HEALTHCHECK_PORT`| `80`            | HTTP server port for health checks.                               |
-
-   As the integration is using the Datadog Go Tracer, it inherits all environment variables from the tracer. You can find more information in [Configuring the Go Tracing Library][7] and [ASM Library Configuration][8].
 
    The Datadog Agent needs to be configured to receive traces from the integration:
    | Environment variable                   | Default value | Description                                                           |
@@ -92,6 +88,14 @@ For example:
 {{% appsec-getstarted-2-plusrisk %}}
 
 {{< img src="/security/application_security/appsec-getstarted-threat-and-vuln_2.mp4" alt="Video showing Signals explorer and details, and Vulnerabilities explorer and details." video="true" >}}
+
+## More configuration
+
+  <div class="alert alert-warning">
+    <strong>Note:</strong> The ASM Envoy integration is built on top of the Datadog Go Tracer. It follows the same release process as the tracer, and its Docker images are tagged with the corresponding tracer version.
+  </div>
+
+  As the integration is using the [Datadog Go Tracer][6], it inherits all environment variables from the tracer. You can find more information in [Configuring the Go Tracing Library][7] and [ASM Library Configuration][8].
 
 ## Limitations
 
