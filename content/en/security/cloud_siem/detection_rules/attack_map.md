@@ -49,7 +49,7 @@ This is an example of the format you need to use for tagging custom rules and th
 - `technique: <technique number>-<technique name>`
     - For example: `technique:T1566-Phishing`
 
-**Note**: The tactic and technique needs to be based on the version stated on the [ATT&CK Map][3] page.
+**Note**: The tactic and technique need to be based on the MITRE ATT&CK version stated on the [ATT&CK Map][3] page.
 
 ## Further reading
 
