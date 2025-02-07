@@ -14,9 +14,6 @@ further_reading:
 - link: "/static_analysis/?tab=githubactions"
   tag: "Documentation"
   text: "Learn about Static Analysis."
-- link: "https://www.jetbrains.com/lp/toolbox/"
-  tag: "External Site"
-  text: "Learn about the JetBrains Toolbox."
 - link: "https://www.datadoghq.com/blog/datadog-ide-plugins/"
   tag: "Blog"
   text: "Reduce context switching while troubleshooting with Datadog's IDE plugins"
@@ -29,7 +26,7 @@ The Datadog plugin for JetBrains IDEs is available for IntelliJ IDEA, GoLand, Ph
 {{< img src="/developers/ide_plugins/idea/overview1.png" alt="The Datadog tool window open in IDEA" style="width:100%;" >}}
 
 The **Code Insights** view keeps you informed about:
-- Issues from [Error Tracking][6]
+- runtime errors from [Error Tracking][6]
 - [Vulnerability][8] reports by Application Security Management
 - [Flaky tests][9] detected by CI Visibility
 
@@ -48,7 +45,6 @@ The **Static Analysis** integration analyzes your code (locally) against predefi
 
 - **A Datadog account**: The plugin requires a Datadog account (except when using [Static Analysis][13] features). If you're new to Datadog, go to the [Datadog website][3] to learn more about Datadog's observability tools and sign up for a free trial.
 - **Continuous Profiler**: To display profiling data and insights, the plugin requires the Continuous Profiler to be configured for your Services. For more information, see [Getting Started with the Continuous Profiler][2].
-- **JetBrains Toolbox**: To use the [View in IDE](#view-in-ide) feature, the plugin requires the [JetBrains Toolbox][7] to be installed on the developer's machine.
 
 ## Setup
 
@@ -182,7 +178,7 @@ The **View in IDE** feature provides a link from the Datadog platform directly t
 
 {{< img src="/developers/ide_plugins/idea/view-in-idea.png" alt="A stack trace on the Datadog platform showing the View in IntelliJ button." style="width:100%;" >}}
 
-<div class="alert alert-info">This feature has two prerequisites: (1) Source Code Integration is configured for your service and (2) the JetBrains Toolbox is installed on your development machine.</div>
+<div class="alert alert-info">A prerequisite to make the most of this feature is that Source Code Integration is configured for your service.</div>
 
 ## Static Analysis
 The Datadog plugin runs [Static Analysis][13] rules on your source files as you edit them. The goal is to detect and fix problems such as maintainability issues, bugs, or security vulnerabilities in your code before you commit your changes. 
@@ -227,7 +223,6 @@ If you don't wish to send this data to Datadog, you can opt out at any time in t
 [4]: https://plugins.jetbrains.com/plugin/19495-datadog
 [5]: /logs/explorer/
 [6]: /tracing/error_tracking/
-[7]: https://www.jetbrains.com/lp/toolbox/
 [8]: /security/application_security/vulnerability_management/
 [9]: /continuous_integration/guides/flaky_test_management/
 [11]: mailto:team-ide-integration@datadoghq.com
