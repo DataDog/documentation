@@ -24,6 +24,8 @@ Please review Envoy integration version 1.71.0 [limitations][1].
 
 ## Envoy support
 
+The usage of the Envoy integration is in Preview.
+
 Only the Linux version and both the arm64 and arm64 architectures are supported.
 
 <div class="alert alert-info">If you would like to see support added for any of
