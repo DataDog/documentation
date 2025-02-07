@@ -127,7 +127,7 @@ To see the version history of a rule:
 1. Click a specific version to see what changes were made.
 1. Click **Open Version Comparison** to see what changed between versions.
 1. Select the two versions you want to compare.
-    - Data highlighted in red indicates data that was modified or dropped.
+    - Data highlighted in red indicates data that was modified or removed.
     - Data highlighted in green indicates data that was added.
 1. Click **Unified** if you want to see the comparison in the same panel.
 
