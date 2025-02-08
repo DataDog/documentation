@@ -14,7 +14,9 @@ further_reading:
 
 
 ## Automate developer workflows
-Use [App Builder][2] to create dynamic, user-friendly forms to collect inputs from developers. Call Datadog's [Actions][7] from your app to initiate API calls to external services, perform custom logic, or data transformations. Orchestrate end-to-end processes of multiple actions using [Workflow Automation][1]. Integrate them with Datadog's Service Catalog to enable dynamic and self-service workflows.
+Use [App Builder][2] to create dynamic, user-friendly forms to collect inputs from developers. Call Datadog's [Actions][7] from your app to initiate API calls to external services, perform custom logic, or data transformations. Orchestrate end-to-end processes of multiple actions using [Workflow Automation][1]. Publish to Datadog's Service Catalog to enable dynamic and self-service workflows.
+
+{{< img src="tracing/service_catalog/self-service-ui.png" alt="Publish to Self-Service" style="width:100%;" >}}
 
 {{< callout url="https://forms.gle/6Er52qd3BCERhotg7" d_target="#signupModal" btn_hidden="false">}}
   Software Templates are in Preview. Complete the form to request access.
