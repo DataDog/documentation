@@ -18,7 +18,7 @@ further_reading:
     text: "Service Definition Schema"
   - link: "https://www.datadoghq.com/blog/manage-service-catalog-categories-with-service-definition-json-schema/"
     tag: "Blog"
-    text: "Manage Software Catalog entries with the Service Definition JSON Schema"
+    text: "Manage Service Catalog entries with the Service Definition JSON Schema"
 ---
 
 ## Overview 
