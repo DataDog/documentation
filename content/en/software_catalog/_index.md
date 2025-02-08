@@ -43,7 +43,7 @@ further_reading:
   tag: "Blog"
   text: "Investigate memory leaks and OOMs with Datadog's guided workflow"
 algolia:
-  tags: ['Software Catalog']
+  tags: ['software catalog']
 ---
 
 {{< img src="tracing/software_catalog/software_catalog_updated.mp4" video=true alt="Navigating around the Software Catalog" style="width:100%;" >}}
