@@ -82,10 +82,7 @@ Keep the **Execution configuration** option as `Inactive` so the StackSet perfor
 
     After the stacks are created, go back to the AWS integration config page in Datadog and click **Done**. It may take a few minutes to see metrics and events reporting from your newly integrated AWS accounts.
 
-<div class="alert alert-info"> <b>Note:</b> The AWS management account <b>will not</b> automatically deploy after following these steps.
-This behavior is expected due to AWS's restrictions on Service-managed permissions, as outlined in <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DeploymentTargets.html">Deployment Targets</a>.
-To integrate the AWS management account, follow the steps in <a href="https://docs.datadoghq.com/integrations/guide/amazon_cloudformation/">Datadog-Amazon CloudFormation</a>.
-</div>
+6. (Optional) Integrate the AWS management account through [Datadog-Amazon Cloudformation](Follow the steps in <a href="https://docs.datadoghq.com/integrations/guide/amazon_cloudformation/">Datadog-Amazon CloudFormation). The AWS management account does not automatically deploy after the StackSet setup, due to AWS's restrictions on [Service-managed permissions](https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DeploymentTargets.html).
 
 
 ## Enable integrations for individual AWS services
