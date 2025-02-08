@@ -112,3 +112,5 @@ To uninstall the AWS integration from all AWS accounts and regions in an Organiz
 [6]: https://docs.datadoghq.com/cloud_cost_management/?tab=aws
 [7]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-delete.html
 [8]: https://docs.datadoghq.com/integrations/amazon_web_services/
+[9]: https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DeploymentTargets.html
+[10]: https://docs.datadoghq.com/integrations/guide/amazon_cloudformation/
