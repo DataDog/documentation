@@ -1,5 +1,7 @@
 ---
 title: Getting Started with Software Catalog
+aliases: 
+  - /getting_started/service_catalog
 further_reading:
     - link: '/software_catalog/'
       tag: 'Documentation'
