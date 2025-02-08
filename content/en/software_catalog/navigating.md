@@ -18,7 +18,7 @@ further_reading:
   text: "Get started with DORA metrics"
 - link: "https://www.datadoghq.com/blog/manage-service-catalog-categories-with-service-definition-json-schema/"
   tag: "Blog"
-  text: "Manage Software Catalog entries with the Service Definition JSON Schema"
+  text: "Manage Service Catalog entries with the Service Definition JSON Schema"
 - link: "https://www.datadoghq.com/blog/apm-security-view/"
   tag: "Blog"
   text: "Gain visibility into risks, vulnerabilities, and attacks with APM Security View"
