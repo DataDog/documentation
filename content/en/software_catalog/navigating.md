@@ -24,10 +24,10 @@ further_reading:
   text: "Gain visibility into risks, vulnerabilities, and attacks with APM Security View"
 - link: "https://www.datadoghq.com/blog/service-catalog-setup/"
   tag: "Blog"
-  text: "Easily add tags and metadata to your services using the simplified Software Catalog setup"
+  text: "Easily add tags and metadata to your services using the simplified Service Catalog setup"
 - link: "https://www.datadoghq.com/blog/github-actions-service-catalog/"
   tag: "Blog"
-  text: "I use GitHub Ac­tions for Data­dog's Software Catalog, and you should, too"
+  text: "I use GitHub Ac­tions for Data­dog's Service Catalog, and you should, too"
 algolia:
   tags: ['software catalog']
 ---
