@@ -8,7 +8,7 @@ aliases:
 further_reading:
 - link: "/tracing/trace_collection/"
   tag: "Documentation"
-  text: "Learn how to setup APM tracing with your application"
+  text: "Learn how to set up APM tracing with your application"
 - link: "/tracing/software_catalog/"
   tag: "Documentation"
   text: "Discover and catalog the services reporting to Datadog"
