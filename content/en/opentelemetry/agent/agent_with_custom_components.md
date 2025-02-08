@@ -48,6 +48,8 @@ The Dockerfile:
 - Creates a virtual environment and installs required Python packages.
 - Builds the OpenTelemetry agent and copies the resulting binary to the final image.
 
+<div class="alert alert-info">The <code>main</code> branch has the most up-to-date version of the <a href="https://github.com/DataDog/datadog-agent/blob/main/Dockerfiles/agent-ot/Dockerfile.agent-otel">Dockerfile</a>. However, it is a development branch that is subject to frequent changes and is less stable than the release tags. For production and other stable use cases, use the tagged versions as listed in this guide.</div>
+
 ## Create an OpenTelemetry Collector Builder manifest
 
 Create and customize an OpenTelemetry Collector Builder (OCB) manifest file, which defines the components to be included in your custom Datadog Agent.
