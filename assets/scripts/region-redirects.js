@@ -29,6 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
             })
         })
     }
+    crossRegionSupport()
 });
 
 // returns the Datadog site associated with referrer URL, if applicable.
@@ -200,4 +201,8 @@ function redirectToRegion(region = '') {
     }
 }
 
-export { redirectToRegion, getDDSiteFromReferrer, hideTOCItems };
+function crossRegionSupport() {
+    return "[" + config.cross_region_support.join(", ") + "]"
+}
+
+export { redirectToRegion, getDDSiteFromReferrer, hideTOCItems, crossRegionSupport };
