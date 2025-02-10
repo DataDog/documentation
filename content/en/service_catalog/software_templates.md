@@ -82,7 +82,7 @@ Once you have finished setting up and testing up your App, you can publish it fo
 
 ### Available Service Catalog Actions
 
-Below is a list of actions available for Service Catalog in Datadog App Builder & Workflow Automation. You can see a full list of in the [Action Catalog][7].
+Below is a list of actions available for Service Catalog in Datadog App Builder and Workflow Automation. You can see a full list of in the [Action Catalog][7].
 
 - **Templating**
   - "Apply template" to pass in parameters to a set of files
