@@ -51,7 +51,7 @@ See the [Best Practices Guide for Custom Metrics Governance][11] for more inform
 2. In the **Choose the detection method** section, Datadog recommends using the `Threshold Alert` monitor type. You can also use Change or Anomaly Detection.
 3. In the **Define the metric** section, select `datadog.estimated_usage.metrics.custom.by_metric` as your metric name and choose the `sum by` space aggregator. 
 4. Under **Set alert conditions**, define your quota threshold.
-5. Under **Configure notifications & automations**, update the monitor notification message and include the workflow mention handle from the previous section. A sample notification sample can look like the following:
+5. Under **Configure notifications & automations**, update the monitor notification message and include the workflow mention handle from the previous section. A sample notification message can look like the following:
 ```
     {{#is_alert}}
     @workflow-mwl-workflow-tags_4aab2
