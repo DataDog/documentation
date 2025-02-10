@@ -127,17 +127,56 @@ If you have no configured projects, you are automatically redirected to this pag
 
 After finishing these steps, metrics appear in Datadog after approximately **15 minutes**.
 
-{{% collapse-content title="See the Google Cloud integrations Datadog collects metrics from" level="h5" %}}
-{{% google-cloud-integrations %}}
-{{% /collapse-content %}} 
-
 #### Validation
 
 To view your metrics, use the left menu to navigate to **Metrics** > **Summary** and search for `gcp`:
 
 {{< img src="integrations/google_cloud_platform/gcp_metric_summary.png" alt="The Metric Summary page in Datadog filtered to metrics beginning with GCP" style="width:100%;" >}}
 
-The Google Cloud integration collects all available [Google Cloud metrics][12] from your projects through the Google Cloud Monitoring API.
+### Google Cloud integrations
+
+The Google Cloud integration collects all available [Google Cloud metrics][12] from your projects through the Google Cloud Monitoring API. Integrations are installed automatically when Datadog recognizes data being ingested in from your Google Cloud account. <EXAMPLE?>
+
+{{% collapse-content title="See the Google Cloud integrations Datadog collects metrics from" level="h5" %}}
+{{% google-cloud-integrations %}}
+{{% /collapse-content %}} 
+
+For deep dives into monitoring many of the more popular services, check out the blogs linked below.
+
+{{% collapse-content title="Integration blogs" level="h5" %}}
+[Cloud Armor][20]
+: Google Cloud Armor is a network security service protecting against DDoS and application attacks.
+
+[BigQuery][21]
+: BigQuery is a serverless and multi-cloud data warehouse that can provide you with valuable insights from your business data.
+
+[Cloud Run][22]
+: Cloud Run is a fully-managed platform that lets you run your code directly on scalable infrastructure in Google Cloud.
+
+[Cloud SQL][23]
+: Cloud SQL is a fully-managed relational database service that works with MySQL, PostgreSQL, and SQL Server.
+
+[Compute Engine][24]
+: Compute Engine is a computing and hosting service that provides you with the ability to create and run virtual machines in Google Cloud.
+
+[Dataflow][25]
+: Dataflow is a fully-managed streaming analytics service that uses autoscaling and real-time data processing.
+
+[Eventarc][26]
+: Eventarc is a fully-managed service enabling you to build event-driven architectures.
+
+[Google Kubernetes Engine (GKE)][27]
+: GKE is a fully-managed Kubernetes service.
+
+[Private Service Connect][28]
+: Private Service Connect lets you access managed Google services privately from within your VPC network.
+
+[Security Command Center][29]
+: Security Command Center provides posture management and threat detection for code, identities, and data.
+
+[Vertex AI][30]
+: Vertex AI is a fully-managed generative AI development platform.
+{{% /collapse-content %}}
 
 ### Limit metric collection filters
 
@@ -256,7 +295,6 @@ After setting up CSM, toggle the **Enable Resource Collection** option under the
 [16]: /integrations/google_cloud_platform/?tab=dataflowmethodrecommended#log-collection
 [17]: https://www.datadoghq.com/blog/stream-logs-datadog-dataflow-template/
 [18]: /integrations/google_cloud_platform/#resource-changes-collection
-[19]: /integrations/?q=google#all
 [20]: https://www.datadoghq.com/blog/network-attacks-google-cloud-armor/
 [21]: https://www.datadoghq.com/blog/track-bigquery-costs-performance/
 [22]: https://www.datadoghq.com/blog/collect-traces-logs-from-cloud-run-with-datadog/
