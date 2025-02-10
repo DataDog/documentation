@@ -1,22 +1,24 @@
 ---
-title: RAGAS Integration
+title: Ragas Evaluations
 description: Monitor your RAG applications for hallucinations with LLM Observability's integration with the RAGAS evaluation framework.
 ---
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">LLM Observability is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
+<div class="alert alert-warning">LLM Observability is not available in the selected site ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 ## Overview
 
-<div class="alert alert-warning">
+<!-- <div class="alert alert-warning">
 The RAGAS integration is only tested for ragas==0.1.*
-</div>
+</div> -->
 
 <div class="alert alert-warning">
-Sampling is recommended for the RAGAS integration. The RAGAS integration runs llm-as-a-judge evaluations powered by your own LLM provider's account. Evaluations are automatically traced and sent to Datadog. These traces contain LLM spans, which may affect your LLM Observability billing.
+Datadog recommends that you use sampling for Ragas evaluations.These LLM-as-a-judge evaluations are powered by your LLM provider's account. Evaluations are automatically traced and sent to Datadog. These traces contain LLM spans, which may affect your LLM Observability billing.
 </div>
 
-Monitor the performance of your RAG applications in production with LLM Observability's integration with the [RAGAS][1] evaluation framework.
+Monitor the performance of your retrieval augmented generation (RAG) applications in production with LLM Observability's integration with the [Ragas][1] evaluation framework.
+
+[Ragas][1] is an evaluation framework for retrieval augmented generation (RAG) applications. Datadog's Ragas integration enables you to evaluate your production application with faithfulness, answer relevancy, and context precision scores. You can use these scores to find traces that have high likelihood of inaccurate answers and review them to improve your RAG pipeline.
 
 
 ## Quickstart
@@ -54,7 +56,7 @@ Monitor the performance of your RAG applications in production with LLM Observab
         )
     ```
 
-3. Run the script with RAGAS faithfulness evaluation enabled:
+3. Run the script with Ragas faithfulness evaluation enabled:
     ```bash
     DD_LLMOBS_EVALUATORS=ragas_faithfulness DD_ENV=dev DD_API_KEY=<YOUR-DD-API-KEY> DD_SITE=datadoghq.com python quickstart.py
     ```
@@ -64,62 +66,69 @@ Monitor the performance of your RAG applications in production with LLM Observab
     https://<YOUR-DATADOG-SITE-URL>/llm/traces?query=%40ml_app%3Atest-rag-app
     ```
 
-## About RAGAS
-
-[RAGAS][1] is an evaluation framework for RAG Applications. Datadog currently supports monitoring your production application with faithfulness, answer relevancy, and context precision scores. By enabling these metrics, you can filter for traces that have high likelihood of inaccurate answers and review them to improve your RAG pipeline.
-
-## Available Evaluations
+## Evaluations
 
 ### Faithfulness
 
-Faithfulness is a score that evaluates how consistent an LLM's generation is against the provided ground truth context data.
+The _Faithfulness_ score evaluates how consistent an LLM's generation is against the provided ground truth context data.
 
-The score is generated through three steps:
-1. Creating Statements - asking another LLM to break down an answer into individual statements
-2. Creating Verdicts - For each statement, determine if it is unfaithful to the provided context.
-3. Computing Score - divide the number of contradicting statements over the total number of statements
+This score is generated through three steps:
+1. **Creating statements**: Asking another LLM to break down an answer into individual statements
+2. **Creating verdicts**: For each statement, determining if it is unfaithful to the provided context
+3. **Computing a score**: Dividing the number of contradicting statements over the total number of statements
 
-For more information, see the official [RAGAS Faithfulness documentation][2].
+For more information, see [Ragas' Faithfulness documentation][2].
 
 ### Answer Relevancy
 
-Answer relevancy (aka response relevancy) is a score that focuses on assessing how pertinent the generated answer is to the given prompt. A lower score is assigned to answers that are incomplete or contain redundant information and higher scores indicate better relevancy. This metric is computed using the question, the retrieved contexts and the answer.
+The _Answer Relevancy_ (or _Response Relevancy_) score assesses how pertinent the generated answer is to the given prompt. A lower score is assigned to answers that are incomplete or contain redundant information, and higher scores indicate better relevancy. This metric is computed using the question, the retrieved contexts, and the answer.
 
-The Answer Relevancy is defined as the mean cosine similarity of the original question to a number of artificial questions, which were generated (reverse engineered) based on the response.
+The Answer Relevancy score is defined as the mean cosine similarity of the original question to a number of artificial questions, which were generated (reverse engineered) based on the response.
 
-For more information, see the official [RAGAS Answer Relevancy documentation][3].
-
+For more information, see [Ragas' Answer Relevancy documentation][3].
 
 ### Context Precision 
 
-Context Precision is a metric that verifies if the context was useful in arriving at the given answer. This is computed by dividing the number of relevant contexts by the total number of contexts.
+The _Context Precision_ score assesses if the context was useful in arriving at the given answer. This is computed by dividing the number of relevant contexts by the total number of contexts.
 
-This metric is modified from the original context precision metric in ragas, which computes
-the mean of the precision @ rank k for each chunk in the context (where k is the number of
-retrieved context chunks).
+This score is modified from Ragas' original Context Precision metric, which computes the mean of the precision@k for each chunk in the context, where presicion@k is the ratio of the number of relevant chunks at rank _k_ to the total number of chunks at rank _k_.
 
-For more information, see the official [RAGAS Context Precision documentation][4].
+For more information, see [Ragas' Context Precision documentation][4].
 
 
 ## Setup 
 
-### Pre-requisites
-1. Your application's LLM calls must be auto-instrumented from our supported integrations (OpenAI, Bedrock, Anthropic, Gemini) or manually instrumented.
+Datadog's Ragas evaluations require `ragas` v0.1+.
+
+1. **Install dependencies**. Run the following command:
+
+   {{< code-block lang="bash" >}}
+   pip install ragas==0.1.21 openai ddtrace==2.17.0
+   {{< /code-block >}}
+
+   The Ragas integration automatically runs evaluations in the background of your application. By default, Ragas uses OpenAI's GPT-4 model for evaluations, which requires the `OPENAI_API_KEY` to be set. You can also [customize RAGAS](#customizing-ragas) to use a different LLM.
+
+2. **Instrument RAG contexts**. 
+
+<!-- ### Prerequisites
+- Your application's LLM calls are instrumented.
+  
+   For example:
 
     ```python
     from ddtrace.llmobs import LLMObs
     from ddtrace.llmobs.utils import Prompt
 
-    # your llm call is auto-instrumented...
+    # if your llm call is auto-instrumented:
     oai_client.chat.completions.create(...)
 
-    # your llm call is manually instrumented ...
+    # if your llm call is manually instrumented:
     @llm(model = "llama")
     def generate_answer():
         ...
     ```
 
-2. The ragas python library of version `0.1.x` should be installed in your application's environment.
+- `ragas` v0.1+
 
 {{< tabs >}}
 {{% tab "Installation Command" %}}
@@ -127,9 +136,9 @@ For more information, see the official [RAGAS Context Precision documentation][4
 pip install ragas==0.1.21 openai ddtrace==2.17.0
 ```
 {{% /tab %}}
-{{< /tabs >}}
+{{< /tabs >}} -->
 
-The RAGAS integration automatically runs evaluations in the background of your application. By default, RAGAS uses OpenAI's GPT-4 model for evaluations, which requires the `OPENAI_API_KEY` to be set. You can also [customize RAGAS](#customizing-ragas) to use a different LLM.
+
 
 ### Instrumenting RAG Contexts
 
