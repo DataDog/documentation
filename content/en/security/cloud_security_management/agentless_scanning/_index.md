@@ -114,9 +114,12 @@ Along with displaying sensitive data matches, Sensitive Data Scanner surfaces an
 
 ## Cloud service provider cost
 
-When using Agentless Scanning, there are additional costs for running scanners in your cloud environments. To optimize on costs while being able to reliably scan every 12 hours, Datadog recommends setting up [Agentless Scanning with Terraform][6] as the default template, as this also avoids cross-region networking.
+When using Agentless Scanning, there are additional costs for running scanners and analyzing your cloud environments.
 
-To establish estimates on scanner costs, reach out to your [Datadog Customer Success Manager.][7]
+Cloud provider costs are under $1 per scanned host per year for accounts following the [recommended configuration][13]. Reach out to your [Datadog Customer Success Manager][7] if you have more questions.
+
+For large cloud workloads distributed across multiple regions, Datadog recommends setting up [Agentless Scanning with Terraform][6] to avoid cross-region networking.
+
 
 ## Further reading
 
@@ -134,3 +137,4 @@ To establish estimates on scanner costs, reach out to your [Datadog Customer Suc
 [10]: /agent/remote_config
 [11]: /sensitive_data_scanner/library_rules/
 [12]: /help
+[13]: /security/cloud_security_management/agentless_scanning/deployment_methods#recommended-configuration

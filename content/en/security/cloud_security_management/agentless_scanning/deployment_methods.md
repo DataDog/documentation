@@ -17,10 +17,6 @@ further_reading:
 
 There are two recommended ways to deploy Agentless scanners in your environment, either using cross-account scanning, or same account scanning.
 
-To establish estimates on scanner costs, reach out to your [Datadog Customer Success Manager][1].
-
-The scanner cost is under $1 per scanned host per year for accounts following the [recommended configuration](#recommended-configuration).
-
 {{< tabs >}}
 {{% tab "Cross-account scanning" %}}
 
@@ -48,12 +44,12 @@ The following diagram illustrates how Agentless scanning works when deployed wit
 {{< /tabs >}}
 
 ## Recommended configuration
-Agentless Scanning incurs additional costs for running scanners in your cloud environments. To manage costs while ensuring reliable scans every 12 hours, Datadog recommends setting up Agentless Scanning with Terraform as the default template, which also prevents cross-region networking.
+Agentless Scanning incurs [additional cloud service provider costs][2] for running scanners in your cloud environments. To manage costs while ensuring reliable scans every 12 hours, Datadog recommends setting up Agentless Scanning with Terraform as the default template, which also prevents cross-region networking.
 To improve the scanner's efficacy, ensure your setup follows those guidelines:
 
 - Deploy scanners within a single AWS account
 - Deploy a scanner in each region that has more than 250 hosts
-- Deploy a scanner in any region containing a data store if using [Cloud Storage Scanning][2]
+- Deploy a scanner in any region containing a data store if using [Cloud Storage Scanning][1]
 
 Datadog automatically schedules scans to the right region to minimize the cross region costs.
 
@@ -63,5 +59,5 @@ Datadog automatically schedules scans to the right region to minimize the cross 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: mailto:success@datadoghq.com
-[2]: /security/cloud_security_management/agentless_scanning#cloud-storage-scanning
+[1]: /security/cloud_security_management/agentless_scanning#cloud-storage-scanning
+[1]: /security/cloud_security_management/agentless_scanning#cloud-service-provicer-cost
