@@ -9,9 +9,9 @@ further_reading:
 
 ## Overview
 
-Arbitrary cost allocation allows you to showback or chargeback your costs by attributing selected costs to relevant business dimensions. Once you have set up allocation rules, you can report on which costs were allocated by a rule. 
+Custom cost allocation allows you to showback or chargeback your costs by attributing selected costs to relevant business dimensions. Once you have set up allocation rules, you can report on which costs were allocated by a rule. 
 
-Dynamic cost allocation follows Tag Pipelines, enabling allocations based on user-defined tags. Costs are allocated on a daily basis, and can be applied to Cloud Cost metrics from AWS, GCP, and Azure. 
+Custom cost allocation follows Tag Pipelines, enabling allocations based on user-defined tags. Costs are allocated on a daily basis, and can be applied to Cloud Cost metrics from AWS, GCP, and Azure. 
 
 ## Rule creation
 
