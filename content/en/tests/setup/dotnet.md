@@ -371,7 +371,7 @@ Always call `module.Close()` or `module.CloseAsync()` at the end so that all the
 
 ### Test session name `DD_TEST_SESSION_NAME`
 
-Use `DD_TEST_SESSION_NAME` to define the name of the test session and the related group of tests (for example,`test_session.name`). Examples of values for this tag would be:
+Use `DD_TEST_SESSION_NAME` to define the name of the test session and the related group of tests. Examples of values for this tag would be:
 
 - `unit-tests`
 - `integration-tests`

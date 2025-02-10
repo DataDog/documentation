@@ -457,7 +457,7 @@ Datadog::CI.active_test_session&.finish
 
 ### Test session name `DD_TEST_SESSION_NAME`
 
-Use `DD_TEST_SESSION_NAME` to define the test session name for your tests (`test_session.name` tag). Use this to identify a group of tests. Examples of values for this tag would be:
+Use `DD_TEST_SESSION_NAME` to define the name of the test session and the related group of tests. Examples of values for this tag would be:
 
 - `unit-tests`
 - `integration-tests`
@@ -480,7 +480,7 @@ If your tests are run with commands that include a dynamic string, such as:
 - `yarn test --temp-dir=/var/folders/t1/rs2htfh55mz9px2j4prmpg_c0000gq/T`
 - `pnpm vitest --temp-dir=/var/folders/t1/rs2htfh55mz9px2j4prmpg_c0000gq/T`
 
-The default value for the test session name will be unstable. It is recommended to use `DD_TEST_SESSION_NAME` in this case.
+Then the default value for the test session name constantly changes. Datadog recommends using `DD_TEST_SESSION_NAME` in this case.
 
 ## Further reading
 
