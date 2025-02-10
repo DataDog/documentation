@@ -74,8 +74,12 @@ With the custom percentage strategy, you can define static custom percentages fo
 ## Managing rules
 Rules can be modified and deleted in the Custom Allocation Rules section of the Cloud Cost settings page. All fields except for the rule name can be reconfigured.
 
+Rules are applied in the same order as shown in the list.
+
 ## Visualize your allocations
 Changes to dynamic allocation rules may take up to 24 hours to be applied. Once applied, the new allocations can be seen throughout the Cloud Cost product. Dynamically allocated costs also include an `allocated_by_rule` tag, denoting the rule name that applied the allocation.
+
+{{< img src="cloud_cost/custom_allocation_rules/visualize_your_allocations.png" alt="See your allocations throughout the Datadog product" style="width:90%;" >}}
 
 
 [1]: https://app.datadoghq.com/cost/settings/custom-allocation-rules
