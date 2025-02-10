@@ -35,6 +35,7 @@ To get started with Cloud Security Management (CSM), review the following:
 - [Deploy the Agent for additional coverage](#deploy-the-agent-for-additional-coverage)
 - [Enable additional features](#enable-additional-features)
   - [AWS CloudTrail Logs](#aws-cloudtrail-logs)
+  - [IaC scanning](#iac-scanning)
   - [IaC remediation](#iac-remediation)
   - [Deploy via cloud integrations](#deploy-via-cloud-integrations)
 - [Disable CSM](#disable-csm)
@@ -56,52 +57,62 @@ For broader coverage and additional functionalities, deploy the Datadog Agent to
       <th>Feature</th>
       <th>Agentless</th>
       <th>Agentless &#43; Agent-based deployment</th>
+      <th>Agent-based deployment</th>
     </tr>
   </thead>
   <tr>
     <td><strong><a href="/security/cloud_security_management/identity_risks">CSM Identity Risks</a></strong></td>
-    <td>Yes</td>
-    <td>Yes</td>
+    <td>{{< X >}}</td>
+    <td>{{< X >}}</td>
+    <td></td>
   </tr>
   <tr>
     <td><strong><a href="/security/cloud_security_management/misconfigurations">CSM Misconfigurations</a></strong></td>
-    <td>Yes</td>
-    <td>Yes</td>
+    <td>{{< X >}}</td>
+    <td>{{< X >}}</td>
+    <td>{{< X >}}</td>
   </tr>
   <tr>
-    <td style="padding-left: 20px;">Host benchmarks</td>
-    <td>No</td>
-    <td>Yes</td>
+    <td style="padding-left: 20px;"><a href="/security/default_rules/?search=host+benchmarks">Host benchmarks</a></td>
+    <td></td>
+    <td>{{< X >}}</td>
+    <td>{{< X >}}</td>
   </tr>
   <tr>
     <td><strong><a href="/security/cloud_security_management/vulnerabilities">CSM Vulnerabilities</a></strong></td>
-    <td>Yes</td>
-    <td>Yes</td>
+    <td>{{< X >}}</td>
+    <td>{{< X >}}</td>
+    <td>{{< X >}}</td>
   </tr>
   <tr>
     <td style="padding-left: 20px;">Vulnerability prioritization</td>
-    <td>Yes</td>
-    <td>Yes, with runtime context</td>
+    <td>{{< X >}}</td>
+    <td>{{< X >}}<br />With runtime context</td>
+    <td>{{< X >}}<br />With runtime context</td>
   </tr>
   <tr>
     <td style="padding-left: 20px;">Vulnerability update frequency</td>
     <td>12 hours</td>
     <td>Real time</td>
+    <td>Real time</td>
   </tr>
   <tr>
     <td><strong><a href="/security/threats">CSM Threats</a></strong></td>
-    <td>No</td>
-    <td>Yes</td>
+    <td></td>
+    <td>{{< X >}}</td>
+    <td>{{< X >}}</td>
   </tr>
   <tr>
     <td style="padding-left: 20px;">Threat detection</td>
-    <td>No</td>
-    <td>Yes</td>
+    <td></td>
+    <td>{{< X >}}</td>
+    <td>{{< X >}}</td>
   </tr>
   <tr>
     <td><strong><a href="/security/security_inbox">Security Inbox</a></strong></td>
-    <td>Yes</td>
-    <td>Yes, with more accurate insights</td>
+    <td>{{< X >}}</td>
+    <td>{{< X >}}<br />With more accurate insights</td>
+    <td>{{< X >}}<br />With more accurate insights</td>
   </tr>
 </table>
 
@@ -109,11 +120,15 @@ For broader coverage and additional functionalities, deploy the Datadog Agent to
 
 ### AWS CloudTrail Logs
 
-AWS CloudTrail Logs allows you to get the most out of [CSM Identity Risks][6]. With AWS CloudTrail Logs, you gain additional insights into the actual usage of cloud resources, helping you identify users and roles with significant gaps between provisioned and utilized permissions. For more information, see [Setting up AWS CloudTrail Logs for Cloud Security Management][4].
+Maximize the benefits of [CSM Identity Risks][6] with AWS CloudTrail Logs. Gain deeper insights into cloud resource usage, identifying users and roles with significant gaps between provisioned and utilized permissions. For more information, check out [Setting up AWS CloudTrail Logs for Cloud Security Management][4].
+
+### IaC scanning
+
+Integrate Infrastructure as Code (IaC) scanning with GitHub to detect misconfigurations in Terraform-defined cloud resources. For more information, see [Setting up IaC Scanning for Cloud Security Management][10].
 
 ### IaC remediation
 
-With Infrastructure as Code (IaC) remediation, you can use Terraform to open a pull request in GitHub, applying code changes that fix a misconfiguration or identity risk. For more information, see [Setting up IaC Remediation for Cloud Security Management][5].
+Use IaC remediation with Terraform to create pull requests in GitHub, applying code changes that fix misconfigurations and mitigate identity risks. For more information, see [Setting up IaC Remediation for Cloud Security Management][5].
 
 ### Deploy via cloud integrations
 
@@ -139,3 +154,4 @@ For information on disabling CSM, see the following:
 [7]: /security/cloud_security_management/setup/cloud_accounts
 [8]: /security/cloud_security_management/troubleshooting/vulnerabilities/#disable-csm-vulnerabilities
 [9]: /security/cloud_security_management/troubleshooting/threats/#disable-csm-threats
+[10]: /security/cloud_security_management/setup/iac_scanning

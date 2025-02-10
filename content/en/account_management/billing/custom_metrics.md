@@ -176,7 +176,7 @@ Custom metrics volumes can be impacted by configuring tags and aggregations usin
 **Note: Only configured metrics contribute to your Ingested custom metrics volume.** If a metric is not configured with Metrics without Limits™, you're only charged for its indexed custom metrics volume.
 
 #### When are you charged for ingested vs indexed custom metrics?
-For metrics not configured with Metrics without Limits™, you pay for for indexed custom metrics.
+For metrics not configured with Metrics without Limits™, you pay for indexed custom metrics.
 
 |                                      | Indexed Custom Metrics<br>(based on monthly average number of Custom Metrics per hour)                                        |
 |--------------------------------------|-------------------------------------------------------------------------------------------------------------------------------|
@@ -258,7 +258,7 @@ Custom metrics volumes can be impacted by configuring tags and aggregations usin
 **Note: Only configured metrics contribute to your Ingested custom metrics volume.** If a metric is not configured with Metrics without Limits™, you're only charged for its indexed custom metrics volume.
 
 #### When are you charged for ingested vs indexed custom metrics?
-For metrics not configured with Metrics without Limits™, you pay for for indexed custom metrics.
+For metrics not configured with Metrics without Limits™, you pay for indexed custom metrics.
 
 |                                      | Indexed Custom Metrics<br>(based on monthly average number of Custom Metrics per hour)                                        |
 |--------------------------------------|-------------------------------------------------------------------------------------------------------------------------------|

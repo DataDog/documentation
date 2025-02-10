@@ -85,7 +85,7 @@ This machine's requirements are listed in the table below. PowerShell scripting 
 
 **Note**: For Windows Private Locations to run browser tests, the browsers (for example, Chrome, Edge, or Firefox) must be installed on the Windows computer.
 
-You must install .NET version 4.7.2 or later on your computer before using the MSI installer. 
+You must install .NET version 4.7.2 or later on your computer before using the MSI installer.
 
 {{< site-region region="gov" >}}
 
@@ -183,7 +183,7 @@ Fill out your private location details:
 3. Choose one of your existing **API Keys**. Selecting an API key allows communication between your private location and Datadog. If you don't have an existing API key, click **Generate API key** to create one on the dedicated page. Only `Name` and `API key` fields are mandatory.
 4. Set access for your private location and click **Save Location and Generate Configuration File**. Datadog creates your private location and generates the associated configuration file.
 
-{{< img src="synthetics/private_locations/pl_creation_1.png" alt="Add details to private location" style="width:85%;">}} 
+{{< img src="synthetics/private_locations/pl_creation_1.png" alt="Add details to private location" style="width:85%;">}}
 
 ### Configure your private location
 
@@ -424,6 +424,8 @@ Create a new EC2 task definition that matches the following. Replace each parame
 
 {{% tab "Fargate" %}}
 
+If you want to store the configuration in AWS Secret Manager, check the [Fargate with AWS Secret Manager tab](./?tab=fargatewithawssecretmanager#install-your-private-location).
+
 Create a new Fargate task definition that matches the following. Replace each parameter with the corresponding value found in your previously generated private location configuration file:
 
 ```yaml
@@ -440,6 +442,93 @@ Create a new Fargate task definition that matches the following. Replace each pa
                 "--privateKey='-----BEGIN RSA PRIVATE KEY-----XXXXXXXX-----END RSA PRIVATE KEY-----'",
                 "--publicKey.pem='-----BEGIN PUBLIC KEY-----XXXXXXXX-----END PUBLIC KEY-----'",
                 "--publicKey.fingerprint='...'"
+            ],
+            ...
+            "image": "datadog/synthetics-private-location-worker:latest",
+            ...
+        }
+    ],
+    ...
+    "compatibilities": [
+        "EC2",
+        "FARGATE"
+    ],
+    ...
+}
+```
+
+**Note:** Because the private location firewall option is not supported on AWS Fargate, the `enableDefaultBlockedIpRanges` parameter cannot be set to `true`.
+
+{{% /tab %}}
+
+{{% tab "Fargate with AWS Secret Manager" %}}
+
+Create a secret in AWS secret manager to store all or part of the previously generated private location configuration. Keep in mind that the `publicKey` cannot be kept as it is in the configuration file. For example:
+
+```json
+{
+    "datadogApiKey": "...",
+    "id": "...",
+    "site": "...",
+    "accessKey": "...",
+    "secretAccessKey": "...",
+    "privateKey": "...",
+    "pem": "...",
+    "fingerprint": "..."
+}
+```
+
+Permissions are required to allow the task definition and the AWS Fargate instance to read from the secret manager. See [Specifying sensitive data using Secrets Manager secrets in Amazon ECS][25]for more information.
+
+Create a Fargate task definition that matches the following example, replacing the values in the list of secrets with the ARN of the secret you created in the previous step. For example: `arn:aws:secretsmanager:<region>:<account-id>:secret:<secret_arn>:<secret_key>::`.
+
+If you didn't save all the configuration in the secret manager, you can still pass the value as hardcoded string arguments, you can check the [Fargate tab](./?tab=fargate#install-your-private-location) and do a mix.
+
+```yaml
+{
+    ...
+    "containerDefinitions": [
+        {
+            "entryPoint": [
+                "/bin/bash",
+                "-c"
+            ],
+            "command": [
+                "/home/dog/scripts/entrypoint.sh --locationID=$locationID --publicKey.fingerprint=$fingerprint"
+            ],
+            "secret": [
+              {
+                "name": "DATADOG_ACCESS_KEY",
+                "valueFrom": "..."
+              },
+              {
+                "name": "DATADOG_API_KEY",
+                "valueFrom": "...",
+              },
+              {
+                "name": "fingerprint",
+                "valueFrom": "...",
+              },
+              {
+                "name": "locationID",
+                "valueFrom": "...",
+              },
+              {
+                "name": "DATADOG_PUBLIC_KEY_PEM",
+                "valueFrom": "...",
+              },
+              {
+                "name": "DATADOG_PRIVATE_KEY",
+                "valueFrom": "...",
+              },
+              {
+                "name": "DATADOG_SECRET_ACCESS_KEY",
+                "valueFrom": "...",
+              },
+              {
+                "name": "DATADOG_SITE",
+                "valueFrom": "...",
+              }
             ],
             ...
             "image": "datadog/synthetics-private-location-worker:latest",
@@ -513,18 +602,18 @@ Because Datadog already integrates with Kubernetes and AWS, it is ready-made to 
 {{% /tab %}}
 {{% tab "Windows via GUI" %}}
 
-1. Download the [`datadog-synthetics-worker-{{< synthetics-worker-version "synthetics-windows-pl" >}}.amd64.msi` file][101] and run this file from the machine you want to install the private location on. 
+1. Download the [`datadog-synthetics-worker-{{< synthetics-worker-version "synthetics-windows-pl" >}}.amd64.msi` file][101] and run this file from the machine you want to install the private location on.
 1. Click **Next** on the welcome page, read the EULA, and accept the terms and conditions. Click **Next**.
 1. Modify where the application will be installed, or leave the default settings. Click **Next**.
 1. To configure your Windows private location, you can either:
    - Paste and enter a JSON configuration for your Datadog Synthetics Private Location Worker. This file is generated by Datadog when you [create a private location][102].
    - Browse or type a file path to a file containing a JSON configuration for your Datadog Synthetics Private Location Worker.
    - You can leave it blank and run `C:\\Program Files\Datadog-Synthetics\Synthetics\synthetics-pl-worker.exe --config=<PathToYourConfiguration>` in the Windows command-line prompt after the installation is complete.
-  
+
    {{< img src="synthetics/private_locations/configuration_selector_paste.png" alt="Synthetics Private Location Worker wizard, MSI installer. The option 'Paste in a JSON configuration' is selected. A text field for this JSON configuration is displayed." style="width:80%;" >}}
 
 1. You can apply the following configuration options:
-   
+
    {{< img src="synthetics/private_locations/settings.png" alt="Synthetics Private Location Worker wizard, MSI installer. Firewall and log settings are displayed." style="width:80%;" >}}
 
    Apply firewall rules needed by this program to Windows Firewall
@@ -542,8 +631,8 @@ Because Datadog already integrates with Kubernetes and AWS, it is ready-made to 
    Logging Verbosity
    : Specifies the verbosity of the console and file logging for the Synthetics Private Location Worker.
 
-1. Click **Next** and **Install** to start the installation process. 
-   
+1. Click **Next** and **Install** to start the installation process.
+
 Once the process is complete, click **Finish** on the installation completion page.
 
 <div class="alert alert-warning">If you entered your JSON configuration, the Windows Service starts running using that configuration. If you did not enter your configuration, run <code>C:\\Program Files\Datadog-Synthetics\Synthetics\synthetics-pl-worker.exe --config=< PathToYourConfiguration ></code> from a command prompt or use the <code>start menu</code> shortcut to start the Synthetics Private Location Worker.</div>
@@ -554,17 +643,17 @@ Once the process is complete, click **Finish** on the installation completion pa
 {{% /tab %}}
 {{% tab "Windows via CLI" %}}
 
-1. Download the [`datadog-synthetics-worker-{{< synthetics-worker-version "synthetics-windows-pl" >}}.amd64.msi` file][101] and run this file from the machine you want to install the private location on. 
+1. Download the [`datadog-synthetics-worker-{{< synthetics-worker-version "synthetics-windows-pl" >}}.amd64.msi` file][101] and run this file from the machine you want to install the private location on.
 2. Run one of the following commands inside the directory where you downloaded the installer:
-   
+
    - In a PowerShell Terminal:
 
      ```powershell
      Start-Process msiexec "/i datadog-synthetics-worker-{{< synthetics-worker-version "synthetics-windows-pl" >}}.amd64.msi /quiet /qn WORKERCONFIG_FILEPATH=C:\ProgramData\Datadog-Synthetics\worker-config.json";
      ```
-   
+
    - Or in a Command Terminal:
-  
+
      ```cmd
      msiexec /i datadog-synthetics-worker-{{< synthetics-worker-version "synthetics-windows-pl" >}}.amd64.msi /quiet /qn WORKERCONFIG_FILEPATH=C:\ProgramData\Datadog-Synthetics\worker-config.json
      ```
@@ -822,7 +911,7 @@ To upgrade an existing private location, click the **Gear** icon on the private 
 {{< img src="synthetics/private_locations/pl_edit_config.png" alt="Access the setup workflow for a private location" style="width:90%;" >}}
 
 Then, run the [configuration command based on your environment](#install-your-private-location
-) to get the latest version of the private location image. 
+) to get the latest version of the private location image.
 
 **Note**: If you're using `docker run` to launch your Private Location image and you've previously installed the Private Location image using the `latest` tag, make sure to add `--pull=always` to the `docker run` command to make sure the newest version is pulled rather than relying on the cached version of the image that may exist locally with the same `latest` tag.
 
@@ -874,6 +963,27 @@ Users with the [Datadog Admin and Datadog Standard roles][20] can view private l
 
 If you are using the [custom role feature][21], add your user to a custom role that includes `synthetics_private_location_read` and `synthetics_private_location_write` permissions.
 
+## Restrict access
+
+Use [granular access control][24] to limit who has access to your test based on roles, teams, or individual users:
+
+1. Open the permissions section of the form.
+2. Click **Edit Access**.
+  {{< img src="synthetics/settings/grace_2.png" alt="Set permissions for your test from Private Locations configuration form" style="width:100%;" >}}
+3. Click **Restrict Access**.
+4. Select teams, roles, or users.
+5. Click **Add**.
+6. Select the level of access you want to associate with each of them.
+7. Click **Done**.
+
+<div class="alert alert-info"><strong>Note</strong>: You can view results from a Private Location even without Viewer access to that Private Location.</div>
+
+| Access level | View PL instructions | View PL metrics | Use PL in test | Edit PL configuration  |
+| ------------ | ---------------------| --------------- | -------------- | ---------------------- |
+| No access    |                      |                 |                |                        |
+| Viewer       | {{< X >}}            | {{< X >}}       | {{< X >}}      |                        |
+| Editor       | {{< X >}}            | {{< X >}}       | {{< X >}}      | {{< X >}}              |
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -898,3 +1008,6 @@ If you are using the [custom role feature][21], add your user to a custom role t
 [21]: /account_management/rbac#custom-roles
 [22]: https://app.datadoghq.com/synthetics/settings/private-locations
 [23]: /continuous_testing/cicd_integrations/configuration
+[24]: /account_management/rbac/granular_access
+[25]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/specifying-sensitive-data-tutorial.html
+

@@ -4,7 +4,7 @@ aliases:
 - /app_builder/build
 disable_toc: false
 further_reading:
-- link: "/service_management/workflows/actions_catalog/"
+- link: "/actions/actions_catalog/"
   tag: "Documentation"
   text: "Actions Catalog"
 ---
@@ -21,7 +21,7 @@ You can create an app or edit existing apps from the [App Builder][1] page. The 
 
 On the App Builder page, you can access and filter your apps. Hover over an app for options to edit, delete, view, or clone the app. You can also enable the **My apps** toggle to see only apps that you created:
 
-{{< img src="service_management/app_builder/app_builder_page.png" alt="The App Builder page" style="width:100%;" >}}
+{{< img src="service_management/app_builder/app-builder-my-apps.png" alt="The App Builder page, filtered to show only 'My apps'" style="width:100%;" >}}
 
 ## Create an app
 
@@ -43,7 +43,7 @@ Blueprints are helpful starter apps that cover common use cases. They come loade
 
 1. From [App Builder][1], click **New App**.
 1. To change the app name and description, click the app name.
-1. To add a [UI component](#app-canvas-and-components) to the app canvas, click the component in the top bar or drag it onto the canvas.
+1. To add a [UI component](#app-canvas-and-components) to the app canvas, click the plus ({{< img src="service_management/app_builder/components-icon.png" inline="true" width="30px">}}) to open the **Components** tab, then click the component or drag it onto the canvas.
 1. Use [queries](#queries) to populate or interact with your canvas.
 1. To save the app, click **Save as New App**.
 1. To preview the app, click **Preview**. Click **Edit** from the preview screen to return to the configuration view.
@@ -62,7 +62,7 @@ Basic customization:
 
 ### App canvas and components
 
-The app canvas represents the graphical interface that your users interact with. You can click a component in the top bar to add it to the canvas, or you can drag and drop components to add them or move them around on the canvas. To see all available components, click **All Components**.
+The app canvas represents the graphical interface that your users interact with. You can drag and drop components to move them around on the canvas. To see all available components, click the plus ({{< img src="service_management/app_builder/components-icon.png" inline="true" width="30px">}}) to open the **Components** tab.
 
 Each component features a list of corresponding configuration options that control how users interact with your app. For example, the **Text Input** component allows you to set a default value, placeholder text, and a label. The **Button** component includes a label and an event that triggers when the button is pressed. Components also feature an **Appearance** section that changes the way the components look and act. For example, you can disable a button or control its visibility.
 
@@ -76,6 +76,27 @@ UI components can trigger reactions on an [Event][11].
 
 You can use [JavaScript Expressions][13] anywhere in App Builder to create custom interactions between the different parts of your app.
 
+## Tag an app
+
+Tags display in a column on the [app list][14].
+
+To add a tag to an app:
+
+1. Open the **App Properties** tab in your app.
+1. Under **Tags**, use the drop-down to select an existing tag, or enter a new value and click **Add option: [your text]**.
+1. Save your app.
+
+The tag displays on the line for this app in the app list. You can click the tag in this list to copy it to your clipboard.
+
+## Favorite an app
+
+To favorite an app and pin it to the top of your list of apps, click the star next to the name of the app in the [app list][14]:
+
+{{< img src="service_management/app_builder/app-list-star.png" alt="An app list with four apps, none of which are starred" style="width:40%;" >}}
+
+When you refresh the page, the starred app appears in a section at the top of your list of apps:
+
+{{< img src="service_management/app_builder/app-list-with-favorited-app.png" alt="An app list with four apps, one of which is starred and pinned to the top of the list" style="width:40%;" >}}
 
 ## View app version history
 
@@ -131,3 +152,4 @@ The **Switch to GUI** option in the settings menu takes you back to the GUI edit
 [11]: /service_management/app_builder/events
 [12]: /service_management/app_builder/queries
 [13]: /service_management/app_builder/expressions
+[14]: https://app.datadoghq.com/app-builder/apps/list
