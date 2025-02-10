@@ -3,10 +3,6 @@ title: Tracing Azure Functions
 ---
 
 ## Overview
-Azure Functions
-
-<!-- TODO: some more preamble -->
-
 This page explains how to collect traces, trace metrics, runtime metrics, and custom metrics from your Azure Functions. To collect additional metrics, install the [Datadog Azure integration][6].
 
 ## Setup
@@ -19,7 +15,7 @@ This page explains how to collect traces, trace metrics, runtime metrics, and cu
    npm install dd-trace
    ```
 
-   To use [automatic instrumentation][2], you must use `dd-trace` v5.25+.
+   To use [automatic instrumentation][1], you must use `dd-trace` v5.25+.
 
    Datadog recommends pinning the package versions and regularly upgrading to the latest versions of both `@datadog/serverless-compat` and `dd-trace` to ensure you have access to enhancements and bug fixes.
 
@@ -32,8 +28,13 @@ This page explains how to collect traces, trace metrics, runtime metrics, and cu
    const tracer = require('dd-trace').init()
    ```
 
-[1]: https://github.com/DataDog/dd-trace-js?tab=readme-ov-file#version-release-lines-and-maintenance
-[2]: /tracing/trace_collection/automatic_instrumentation/?tab=singlestepinstrumentation
+3. (Optional) **Enable runtime metrics**. See [Node.js Runtime Metrics][2].
+
+4. (Optional) **Enable custom metrics**. See [Metric Submission: DogStatsD][3].
+
+[1]: /tracing/trace_collection/automatic_instrumentation/?tab=singlestepinstrumentation
+[2]: /tracing/metrics/runtime_metrics/nodejs/?tab=environmentvariables
+[3]: /metrics/custom_metrics/dogstatsd_metrics_submission/?code-lang=nodejs
 {{< /programming-lang >}}
 {{< programming-lang lang="python" >}}
 1. **Install dependencies**. Run the following commands:
@@ -55,7 +56,13 @@ This page explains how to collect traces, trace metrics, runtime metrics, and cu
    start()
    patch_all()
    ```
+
+3. (Optional) **Enable runtime metrics**. See [Node.js Runtime Metrics][2].
+
+4. (Optional) **Enable custom metrics**. See [Metric Submission: DogStatsD][3].
 [1]: /tracing/trace_collection/automatic_instrumentation/?tab=singlestepinstrumentation
+[2]: /tracing/metrics/runtime_metrics/python/
+[3]: /metrics/custom_metrics/dogstatsd_metrics_submission/?code-lang=python
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
@@ -69,7 +76,7 @@ This page explains how to collect traces, trace metrics, runtime metrics, and cu
    - Set `DD_API_KEY` to your [Datadog API key][1].
    - Set `DD_SITE` to {{< region-param key=dd_site code="true" >}}. (Ensure that your correct [Datadog site][2] is selected in the drop-down on the right side of this page.)
 
-5. **Unified Service Tagging**. You can collect metrics from your Azure Functions by installing the [Datadog Azure integration][6]. To correlate these metrics with your traces, first set the `env`, `service`, and `version` tags on your resource in Azure. Then configure the following environment variables. You can add custom tags as `DD_TAGS`.
+5. **Configure Unified Service Tagging**. You can collect metrics from your Azure Functions by installing the [Datadog Azure integration][6]. To correlate these metrics with your traces, first set the `env`, `service`, and `version` tags on your resource in Azure. Then, configure the following environment variables. You can add custom tags as `DD_TAGS`.
 
     ```
     DD_ENV="<ENVIRONMENT>"
@@ -77,15 +84,24 @@ This page explains how to collect traces, trace metrics, runtime metrics, and cu
     DD_VERSION="<VERSION>"
     DD_TAGS="<KEY_1:VALUE_1>,<KEY_2:VALUE_2>"
     ```
-## View traces in Datadog
 
-In Datadog, navigate to the [Trace Explorer][4] page and search for the service name you set in the `DD_SERVICE` environment variable
+## What's next?
 
-<!-- TODO: maybe some more here -->
+- You can view your Azure Functions traces in [Trace Explorer][4]. Search for the service name you set in the `DD_SERVICE` environment variable to see your traces.
+- You can use the [Serverless > Azure Functions][5] page to see your traces enriched with telemetry collected by the [Datadog Azure integration][6].
 
-You can also view traces on the [Serverless > Azure Functions][5] page. This view is enriched with telemetry collected by the [Datadog Azure integration][6].
+### Enable/disable trace metrics
 
-## Enable debug logs
+[Trace metrics][3] are enabled by default. To configure trace metrics, use the following environment variable:
+
+`DD_TRACE_STATS_COMPUTATION_ENABLED`
+: Enables (`true`) or disables (`false`) trace metrics. Defaults to `true`.
+
+  **Values**: `true`, `false`
+
+## Troubleshooting
+
+### Enable debug logs
 
 You can collect [debug logs][7] for troubleshooting. To configure debug logs, use the following environment variables:
 
@@ -99,16 +115,10 @@ You can collect [debug logs][7] for troubleshooting. To configure debug logs, us
 
   **Values**: `trace`, `debug`, `info`, `warn`, `error`, `critical`, `off`
 
-## Enable other features
+### Linux Consumption plans and GitHub Actions
 
-### Trace metrics
+To use a GitHub Action to deploy to a Linux Consumption function, you must configure your workflow to use an Azure Service Principal for RBAC. See [Using Azure Service Principal for RBAC as Deployment Credential][8].
 
-[Trace metrics][3] are enabled by default. To configure trace metrics, use the following environment variable:
-
-`DD_TRACE_STATS_COMPUTATION_ENABLED`
-: Enables (`true`) or disables (`false`) trace metrics. Defaults to `true`.
-
-  **Values**: `true`, `false`
 
 [1]: /account_management/api-app-keys/#add-an-api-key-or-client-token
 [2]: /getting_started/site
@@ -117,3 +127,4 @@ You can collect [debug logs][7] for troubleshooting. To configure debug logs, us
 [5]: https://app.datadoghq.com/functions?cloud=azure&entity_view=function
 [6]: /integrations/azure/
 [7]: /tracing/troubleshooting/tracer_debug_logs/#enable-debug-mode
+[8]: https://github.com/Azure/functions-action?tab=readme-ov-file#using-azure-service-principal-for-rbac-as-deployment-credential
