@@ -26,7 +26,7 @@ There are additional [metrics and attributes that are specific to a given event 
 | View     | 30 days   | A view represents a unique screen (or screen segment) on your mobile application. A view starts and stops when the `onActivityResumed` and `onActivityPaused` callbacks are called through the `ActivityLifecycleCallbacks` interface. Each occurrence is classified as a distinct view. While a user stays on a view, RUM event attributes (Errors, Resources, and Actions) get attached to the view with a unique `view.id`.                     |
 | Resource  | 15 days   | A resource represents network requests to first-party hosts, APIs, and third-party providers in your mobile application. All requests generated during a user session are attached to the view with a unique `resource.id`.                                                                                           |
 | Error     | 30 days   | An error represents an exception or crash emitted by the mobile application attached to the view it is generated in.                                                                                                                                            |
-| Action    | 30 days   | An action represents user activity in your mobile application (such as an application launch, tap, swipe, or back). Each action is attached with a unique `action.id` attached to the view it gets generated in. When an action is being tracked, other actions within the next `100 ms` do not get sent, unless they are [custom actions][10].                                                                                                                                             |
+| Action    | 30 days   | An action represents user activity in your mobile application (such as an application launch, tap, swipe, or back). Each action is attached with a unique `action.id` that is also attached to the view it gets generated in. When an action is being tracked, other actions within the next `100 ms` do not get sent, unless they are [custom actions][1].                                                                                                                                             |
 | Long Task | 15 days | A long task event is generated for any task in the application that blocks the main thread for more than the specified duration threshold. |
 
 The following diagram illustrates the RUM event hierarchy:
@@ -42,9 +42,23 @@ The `ApplicationLaunch` view includes any logs, actions, and resources created b
 - In *Android 7.0* and above, this view/action captures the period before any application code is executed (right before `Application.onCreate`) and when the first RUM event is recorded.
 - In versions before *Android 7.0*, the view/action captures the period between the `RumFeature` class loads and when the first RUM event is recorded.
 
+## Views instrumentation versus app lifecycle
+
+The Android RUM SDK offers various strategies to [automatically track views][2] like Activities, Fragments, or Navigation destinations. You can also track views manually by directly calling the RUM APIs. The precise moment a view starts or stops depends on the chosen tracking strategy or manual instrumentation:
+
+- Activities (`ActivityViewTrackingStrategy`): When you rely on this strategy, the SDK automatically starts a RUM view when the Activity enters the foreground (`onResume`) and stops it when the Activity leaves the foreground (`onPause`).
+- Fragments (`FragmentViewTrackingStrategy`): Each `Fragment` in your application is tracked as a separate RUM view. The SDK starts the view in the Fragment's `onResume` lifecycle method and stops it in `onPause`.
+Mixed (`MixedViewTrackingStrategy`): Activities and Fragments each become distinct RUM views based on their respective lifecycle events (`onResume` and `onPause`).
+- Navigation (`NavigationViewTrackingStrategy`): Each navigation destination is treated as a distinct RUM view, so view boundaries align with navigation events in your graph.
+- Manual View Tracking: When [tracking views manually][3] using `GlobalRumMonitor` APIs, the view starts precisely when you call the `startView(...)` method and stops when you call the `stopView()` method. 
+
+When the application goes into the background (for example, the user presses the home button or switches apps), RUM automatically stops the current view. Consequently, there is no active view while the app remains in the background. Since RUM's data model requires an active view to correlate and capture events, any events generated in the background are skipped by default. To capture these events instead, refer to the [Track Background Events][4] section.
+
+**Note**: If you're tracking views manually, you need to configure whether the view should be stopped when the app leaves the foreground.
+
 ## Default attributes
 
-RUM collects common attributes for all events and attributes specific to each event listed below [automatically][1]. You can also choose to enrich your user session data by tracking [additional events][2] or by [adding custom attributes][3] to default events specific to your application monitoring and business analytics needs.
+RUM collects common attributes for all events and attributes specific to each event listed below [automatically][5]. You can also choose to enrich your user session data by tracking [additional events][6] or by [adding custom attributes][7] to default events specific to your application monitoring and business analytics needs.
 
 ### Common core attributes
 
@@ -52,7 +66,7 @@ RUM collects common attributes for all events and attributes specific to each ev
 |------------------|--------|-----------------------------|
 | `date` | integer  | Start of the event in milliseconds from epoch. |
 | `type`     | string | The type of the event (for example, `view` or `resource`).             |
-| `service` | string | The [unified service name][4] for this application used to correlate user sessions. |
+| `service` | string | The [unified service name][8] for this application used to correlate user sessions. |
 | `application.id` | string | The Datadog application ID. |
 | `application.name` | string | The Datadog application name. |
 
@@ -105,7 +119,7 @@ The below attributes are related to the geo-location of IP addresses.
 | `geo.city`            | string | The name of the city (for example, `San Francisco`, `Paris`, or `New York`).                                                                                   |
 ### Global user attributes
 
-You can enable [tracking user info][5] globally to collect and apply user attributes to all RUM events.
+You can enable [tracking user info][10] globally to collect and apply user attributes to all RUM events.
 
 | Attribute name   | Type   | Description                 |
 |------------------|--------|-----------------------------|
@@ -140,14 +154,13 @@ Metrics are quantifiable values that can be used for measurements related to the
 | `session.initial_view.name` | string | Name of the initial view of the session. |
 | `session.last_view.url` | string | URL of the last view of the session. |
 | `session.last_view.name` | string | Name of the last view of the session. |
-| `session.ip` | string | IP address of the session extracted from the TCP connection of the intake. If you want to stop collecting this attribute, change the setting in your [application details][8]. |
+| `session.ip` | string | IP address of the session extracted from the TCP connection of the intake. If you want to stop collecting this attribute, change the setting in your [application details][11]. |
 | `session.useragent` | string | System user agent info to interpret device info.  |
 | `session.has_replay` | boolean | Indicates if the session has a captured Session Replay recording attached to visually play the user experience. |
 
 ### View metrics
 
 RUM action, error, resource, and long task events contain information about the active RUM view event at the time of collection.
-
 
 | Metric                              | Type        | Description                                                                                          |
 |----------------------------------------|-------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -157,6 +170,9 @@ RUM action, error, resource, and long task events contain information about the 
 | `view.resource.count`         | number      | Count of all resources collected for this view.                                 |
 | `view.action.count`      | number      | Count of all actions collected for this view.                                        |
 | `view.is_active`      |    boolean   | Indicates whether the view corresponding to this event is considered active.            |
+| `view.loading_time` | number (ns) | Time it took for the view to load, set by the `addViewLoadingTime(override:)` call. |
+| `view.network_settled_time` | number (ns) | Time it took for a view to be fully loaded with all relevant network calls initiated at the start of the view. |
+| `view.interaction_to_next_view_time` | number (ns) | Time between the last user interaction in the previous and start of this (current) view. |
 
 ### View attributes      
 
@@ -171,7 +187,7 @@ RUM action, error, resource, and long task events contain information about the 
 
 | Metric                              | Type           | Description                                                                                                                               |
 |----------------------------------------|----------------|-------------------------------------------------------------------------------------------------------------------------------------------|
-| `duration`                             | number (ns)        | Entire time spent loading the resource.                                                                                                   |
+| `resource.duration`            | number (ns)        | Entire time spent loading the resource.                                                                                                   |
 | `resource.size`                | number (bytes) | Resource size.                                                                                                                            |
 | `resource.connect.duration`    | number (ns)    | Time spent establishing a connection to the server (connectEnd - connectStart).                                                            |
 | `resource.ssl.duration`        | number (ns)    | Time spent for the TLS handshake. If the last request is not over HTTPS, this metric does not appear (connectEnd - secureConnectionStart). |
@@ -241,7 +257,7 @@ Network errors include information about failing HTTP requests. The following fa
 
 ## Data storage
 
-Before data is uploaded to Datadog, it is stored in cleartext in your application's cache directory. This cache folder is protected by [Android's Application Sandbox][6], meaning that on most devices this data can't be read by other applications. However, if the mobile device is rooted, or someone tempers with the Linux kernel, the stored data might become readable.
+Before data is uploaded to Datadog, it is stored in cleartext in your application's cache directory. This cache folder is protected by [Android's Application Sandbox][12], meaning that on most devices, this data can't be read by other applications. However, if the mobile device is rooted, or someone tempers with the Linux kernel, the stored data might become readable.
 
 ## Data upload
 
@@ -256,20 +272,23 @@ The RUM Android SDK allows you to get the data you need to Datadog while conside
 
 ## Direct Boot mode support
 
-If your application supports [Direct Boot mode][7], note that data captured before the device 
+If your application supports [Direct Boot mode][13], note that data captured before the device 
 is unlocked won't be captured, since the credential encrypted storage won't be available yet.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/mobile_and_tv_monitoring/android/advanced_configuration/#automatically-track-views
-[2]: /real_user_monitoring/mobile_and_tv_monitoring/android/advanced_configuration/#enrich-user-sessions
-[3]: /real_user_monitoring/mobile_and_tv_monitoring/android/advanced_configuration/#track-custom-global-attributes
-[4]: /getting_started/tagging/unified_service_tagging/
-[5]: /real_user_monitoring/mobile_and_tv_monitoring/android/advanced_configuration/#track-user-sessions
-[6]: https://source.android.com/security/app-sandbox
-[7]: https://developer.android.com/training/articles/direct-boot
-[8]: /data_security/real_user_monitoring/#ip-address
+[1]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/android/#custom-actions
+[2]: /real_user_monitoring/mobile_and_tv_monitoring/android/advanced_configuration/?tab=kotlin#automatically-track-views
+[3]: /real_user_monitoring/mobile_and_tv_monitoring/android/advanced_configuration/?tab=kotlin#custom-views
+[4]: /real_user_monitoring/mobile_and_tv_monitoring/android/setup?tab=rum#track-background-events
+[5]: /real_user_monitoring/mobile_and_tv_monitoring/android/advanced_configuration/#automatically-track-views
+[6]: /real_user_monitoring/mobile_and_tv_monitoring/android/advanced_configuration/#enrich-user-sessions
+[7]: /real_user_monitoring/mobile_and_tv_monitoring/android/advanced_configuration/#track-custom-global-attributes
+[8]: /getting_started/tagging/unified_service_tagging/
 [9]: /data_security/real_user_monitoring/#geolocation
-[10]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/android/#custom-actions
+[10]: /real_user_monitoring/mobile_and_tv_monitoring/android/advanced_configuration/#track-user-sessions
+[11]: /data_security/real_user_monitoring/#ip-address
+[12]: https://source.android.com/security/app-sandbox
+[13]: https://developer.android.com/training/articles/direct-boot

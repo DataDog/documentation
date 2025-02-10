@@ -10,19 +10,16 @@ further_reading:
   text: "Building Dashboards using JSON"
 ---
 
-The image widget allows you to embed an image on your dashboard. An image can be a PNG, JPG, or animated GIF, hosted where it can be accessed by URL.
+The image widget allows you to embed an image on your dashboard. An image can be uploaded to Datadog or hosted where it can be accessed by URL. PNG, JPG, and GIF file formats are supported.
 
 {{< img src="dashboards/widgets/image/image.mp4" alt="Image" video="true" style="width:80%;" >}}
 
 ## Setup
 
-{{< img src="dashboards/widgets/image/image_setup.png" alt="Image setup" style="width:80%;">}}
+{{< img src="dashboards/widgets/image/image_setup2.png" alt="Image setup" style="width:80%;">}}
 
-1. Enter your image URL.
-2. Choose an appearance:
-    * Zoom image to cover whole title
-    * Fit image on tile
-    * Center image on tile
+1. Upload your image or enter your image URL.
+2. Select a preset template or customize the display options.
 
 ## API
 

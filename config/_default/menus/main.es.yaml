@@ -473,16 +473,11 @@ menu:
     parent: agent
     url: agent/fleet_automation
     weight: 8
-  - identifier: agent_upgrade
-    name: Actualizar el Agent
-    parent: agent
-    url: agent/upgrade
-    weight: 9
   - identifier: agent_troubleshooting
     name: Solucionar problemas
     parent: agent
     url: agent/troubleshooting/
-    weight: 10
+    weight: 9
   - identifier: agent_troubleshooting_hostname_containers
     name: Detección de nombres de host en contenedores
     parent: agent_troubleshooting
@@ -5182,7 +5177,7 @@ menu:
   - identifier: log_kotlin_multiplatform
     name: Kotlin Multiplatform
     parent: log_collection
-    url: logs/log_collection/kotlin-multiplatform/
+    url: logs/log_collection/kotlin_multiplatform/
     weight: 107
   - identifier: log_collection_csharp
     name: C#

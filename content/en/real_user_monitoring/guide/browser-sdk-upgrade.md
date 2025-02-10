@@ -14,6 +14,74 @@ further_reading:
 
 Follow this guide to migrate between major versions of the Browser RUM and Browser Logs SDKs. See [the SDK documentation][26] for details on its features and capabilities.
 
+## From v5 to v6
+
+The main improvement v6 offers is the bundle size reduction. By dropping support for IE11 and leveraging lazy loading, the size of the RUM bundle has been reduced by 10% and the Logs bundle by nearly 9%.
+Additionally, we've changed a few default initialization parameters and prepared for future improvements.
+
+Take notice of the below breaking changes as you upgrade your SDK.
+
+### Breaking changes
+
+#### Browser support
+
+Support for IE11 and other older browsers has been discontinued. Browsers must now support at least ES2018.
+To use Datadog on older browsers, you can keep using Browser SDK v5 or earlier.
+
+#### Add tracestate header when using tracecontext propagator
+
+The default `tracecontext` propagator now sends a new `tracestate` header with additional metadata that allows better attribution of your traces. If you are using this propagator, then you need to allow this new header for all traced endpoints, in addition to the existing `traceparent` header:
+
+```
+Access-Control-Allow-Headers: traceparent, tracestate
+```
+
+#### Strongly type `site` option
+
+The `site` option now has a stronger type definition. If you use TypeScript you might have an error if you use a non-standard value. We recommend using [proxy][27] to send RUM data to a nonstandard URL.
+
+#### Tracking Actions, Resources and LongTask are now enabled by default
+
+User interactions, resources, and long tasks are now tracked by default. This change does not impact billing. To opt-out, set `trackUserInteractions`, `trackResources`, and `trackLongTasks`  [initialization parameters][28] to `false`.
+
+#### Collect Long Animation Frames as Long Tasks
+
+On supported Browsers, [Long Animation Frames][35] are now collected instead of Long Tasks. The event type in the RUM Explorer is still `long_task`, but they will contain information about the long animation frame.
+
+#### Increased cookies expiration date
+
+To support anonymous user tracking, the session cookie (`_dd_s`) expiration is extended to 1 year. To opt-out, set `trackAnonymousUser` [initialization parameters][28] to `false`.
+
+#### Removed useCrossSiteSessionCookie initialization parameter
+
+`useCrossSiteSessionCookie` was deprecated and is now unsupported. Use `usePartitionedCrossSiteSessionCookie` [initialization parameters][28] instead.
+
+#### Lazy load Session Replay
+
+Session Replay module is now lazy-loaded using [dynamic imports][30]. This loads the module only for sessions sampled for Session Replay, reducing the bundle size for others.
+
+**If you're using the SDK through NPM**, ensure your bundler supports dynamic imports. Most modern bundlers support this feature out of the box, but some may require configuration changes. Refer to your bundler's documentation for guidance: [Webpack][31], [Esbuild][32], [Rollup][33], [Parcel][34].
+
+**If you're using the SDK through a CDN**, there are no breaking changes. However, note that in addition to the main script being loaded (for example, 
+`datadog-rum.js`), the SDK will dynamically load an additional chunk when needed (for example, 
+`recorder-d7628536637b074ddc3b-datadog-rum.js`).
+
+#### Do not inject trace context for non-sampled traces
+
+The default value for the `traceContextInjection` initialization parameter has been updated to `sampled` to ensure backend services' sampling decisions are applied when traces are not sampled in the Browser SDK. See the [Connect RUM and Traces documentation][29] for more information.
+
+**Note**: If you're using a `traceSampleRate` of 100% (default), this change does not have any impact for you.
+
+
+
+### Future breaking changes
+
+#### Enabling compression for Datadog intake requests
+
+Compression for Datadog intake requests will be enabled by default in a future major version.
+Datadog recommends that you opt-in to compression now using the `compressIntakeRequests` [initialization parameter][28].
+Since compression is performed in a Worker thread, configuring the Content Security Policy is necessary. See [CSP guidelines][18] for more information.
+
 ## From v4 to v5
 
 V5 introduces the following changes and more:
@@ -337,3 +405,12 @@ The RUM Browser SDK no longer lets you specify the source of an error collected 
 [24]: /help/
 [26]: /real_user_monitoring/browser/
 [25]: /real_user_monitoring/platform/connect_rum_and_traces#opentelemetry-support
+[27]: /real_user_monitoring/guide/proxy-rum-data
+[28]: /real_user_monitoring/browser/setup/#initialization-parameters
+[29]: /real_user_monitoring/platform/connect_rum_and_traces/?tab=browserrum#:~:text=configure%20the%20traceContextInjection
+[30]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import
+[31]: https://webpack.js.org/guides/code-splitting/#dynamic-imports
+[32]: https://esbuild.github.io/api/#splitting
+[33]: https://rollupjs.org/tutorial/#code-splitting
+[34]: https://parceljs.org/features/code-splitting
+[35]: https://developer.chrome.com/docs/web-platform/long-animation-frames#long-frames-api

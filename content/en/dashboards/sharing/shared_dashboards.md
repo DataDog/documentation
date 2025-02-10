@@ -88,13 +88,17 @@ By default, public dashboards are accessible for one year before they expire and
 
 ## Embedded shared dashboards
 
-You can add embedded shared dashboards to a website with an iframe. These embedded shared dashboards are only accessible by the configured website domains. To share an embedded dashboard:
+You can embed shared dashboards into a website using an iframe. Access to these embedded dashboards is restricted to allowlisted request referrers.
+
+The HTTP request's referrer header is checked against the allowlisted entries for validation. In most cases, typing `window.location.origin` into your browser console should give you the expected referrer. However, if you have any special manipulation on browser headers (for example, browser privacy settings) you should check the actual network request. 
+
+To share an embedded dashboard:
 
 1. Click **Share** in the upper-right corner of the dashboard.
 2. Select **Share Dashboard**.
 3. Select the **Embed** option in the **Select a Share Type** step.
 4. Configure the desired time, variable, and color options in the **Configure Dashboard** step.
-5. Add the website domains that you want to allowlist as embeddable domains.
+5. Add the referrers that you want to allowlist.
 6. Click **Share Dashboard** to create the share URL.
 
 ## Configuration Options

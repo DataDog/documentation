@@ -37,7 +37,7 @@ Les méthodes natives Fetch et XHR pour navigateur, ainsi que l'[API Performance
 
 | Attribut                              | Type           | Description                                                                                                                               |
 |----------------------------------------|----------------|-------------------------------------------------------------------------------------------------------------------------------------------|
-| `duration`                             | nombre         | Durée totale de chargement de la ressource.                                                                                                   |
+| `resource.duration`            | nombre         | Durée totale de chargement de la ressource.                                                                                                   |
 | `resource.size`                | nombre (octets) | Taille de la ressource.                                                                                                                            |
 | `resource.connect.duration`    | nombre (ns)    | Durée d'établissement d'une connexion au serveur (connectEnd - connectStart).                                                           |
 | `resource.ssl.duration`        | nombre (ns)    | Durée d'établissement de la liaison TLS. Si la dernière requête ne suit pas le protocole HTTPS, cette métrique n'apparaît pas (connectEnd - secureConnectionStart).|

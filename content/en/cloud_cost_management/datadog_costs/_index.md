@@ -33,13 +33,11 @@ Daily Datadog costs in Cloud Cost Management are in Preview. If you're intereste
 
 ## Overview
 
-Daily Datadog costs give you visibility into daily Datadog spending across dashboards, notebooks, [cost monitors][2], and Cloud Cost Analytics, along with your entire organization's cloud provider and [SaaS costs][3].
+Daily Datadog costs give you visibility into daily Datadog spending across dashboards, notebooks, [cost monitors][2], and Cloud Cost Explorer, along with your entire organization's cloud provider and [SaaS costs][3].
 
 You can view daily Datadog costs in [Cloud Cost Management][1], and access additional [Datadog costs capabilities][7] like [Cost Summary][9] and [Cost Chargebacks][10] on the [**Usage & Cost** page][4].
 
-Please note that there is **no additional charge** for Datadog Costs.
-
-<div class="alert alert-info">Costs outside of <a href="https://app.datadoghq.com/billing/usage">Plan and Usage</a> are based on usage only and do not include historical credits and adjustments.</div>
+There is **no additional charge** for Datadog Costs, and it is available for both CCM and non-CCM customers.
 
 ## Permissions
 
@@ -65,7 +63,7 @@ You can use out-of-the-box tags to break down and allocate your Datadog cost dat
 | dimension_name / dimension | `dimension_name` is the name of the individual product being billed (for example, `Indexed Logs (15 Day Retention)`). </br></br> `dimension` is the snake case version of the product name which is optimized for programmatic use and easier search (for example, `logs_indexed_15day`). |
 | product_name / datadog_product | `product_name` is the high-level grouping name for Datadog products (for example, `Logs`). </br></br> `datadog_product` is the snake case version of the product grouping name which is optimized for programmatic use and easier search (for example, `logs`). |
 | `<Usage Attribution tags>` | You can add up to three tag keys, configured in [Usage Attribution][8], with their associated values (for example, `team` or `service`). |
-| cost_type | The type of charge covered by this item (for example, `usage`). |
+| cost_type | The type of charge covered by this item (for example, `usage` or `adjustment`). |
 | pricing_category | The specific type of charge covered by this item (for example, `committed` or `on-demand`). |
 
 ## Further reading
@@ -78,8 +76,7 @@ You can use out-of-the-box tags to break down and allocate your Datadog cost dat
 [4]: https://app.datadoghq.com/billing/usage
 [5]: /account_management/plan_and_usage/cost_details/#cost-summary-sub-organization
 [6]: /account_management/rbac/
-[7]: /account_management/rbac/permissions
-[8]: /account_management/plan_and_usage/cost_details/
-[9]: /account_management/billing/usage_attribution/
-[10]: /account_management/plan_and_usage/cost_details/#cost-summary
-[11]: /account_management/plan_and_usage/cost_details/#cost-chargebacks
+[7]: /account_management/plan_and_usage/cost_details/
+[8]: /account_management/billing/usage_attribution/
+[9]: /account_management/plan_and_usage/cost_details/#cost-summary
+[10]: /account_management/plan_and_usage/cost_details/#cost-chargebacks
