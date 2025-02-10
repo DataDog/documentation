@@ -7,7 +7,7 @@ Azure Functions
 
 <!-- TODO: some more preamble -->
 
-This page explains how to collect traces from your Azure Functions. To collect metrics, install the [Datadog Azure integration][6].
+This page explains how to collect traces, trace metrics, runtime metrics, and custom metrics from your Azure Functions. To collect additional metrics, install the [Datadog Azure integration][6].
 
 ## Setup
 
@@ -71,15 +71,14 @@ This page explains how to collect traces from your Azure Functions. To collect m
    - Set `DD_API_KEY` to your [Datadog API key][1].
    - Set `DD_SITE` to {{< region-param key=dd_site code="true" >}}. (Ensure that your correct [Datadog site][2] is selected in the drop-down on the right side of this page.)
 
-5. **Correlate traces with metrics by setting tags**. You can collect metrics from your Azure Functions by installing the [Datadog Azure integration][6]. To correlate these metrics with your traces, configure the following tags as environment variables. You can add custom tags as `DD_TAGS`.
+5. **Unified Service Tagging**. You can collect metrics from your Azure Functions by installing the [Datadog Azure integration][6]. To correlate these metrics with your traces, first set the `env`, `service`, and `version` tags on your resource in Azure. Then configure the following environment variables. You can add custom tags as `DD_TAGS`.
 
-   ```
-   DD_ENV="<ENVIRONMENT>"
-   DD_SERVICE="<SERVICE_NAME>"
-   DD_VERSION="<VERSION>"
-   DD_TAGS="<KEY_1:VALUE_1>,<KEY_2:VALUE_2>"
-   ```
-
+    ```
+    DD_ENV="<ENVIRONMENT>"
+    DD_SERVICE="<SERVICE_NAME>"
+    DD_VERSION="<VERSION>"
+    DD_TAGS="<KEY_1:VALUE_1>,<KEY_2:VALUE_2>"
+    ```
 ## View traces in Datadog
 
 In Datadog, navigate to the [Trace Explorer][4] page and search for the service name you set in the `DD_SERVICE` environment variable
@@ -98,7 +97,7 @@ You can collect debug logs for troubleshooting. To configure debug logs, use the
   **Values**: `true`, `false` 
 
 `DD_LOG_LEVEL`
-: Sets logging level for the Datadog Serverless Agent. Defaults to `info`.
+: Sets logging level for the Datadog Serverless Compatibility Layer. Defaults to `info`.
 
   **Values**: `trace`, `debug`, `info`, `warn`, `error`, `critical`, `off`
 
