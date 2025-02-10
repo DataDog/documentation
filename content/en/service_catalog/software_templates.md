@@ -51,7 +51,7 @@ The [Provision RDS Instance blueprint][13] shows an example of how to provision 
 #### Start from scratch
 Navigate to the [Workflow Automation][3] page to configure the template in Datadog.
 
-1. Create a form for the developer-facing front-end using App Builder:
+1. Create a form for the developer-facing frontend using App Builder:
    - Navigate to **Actions** > **App Builder** and select **New App**.
    - Enter a name and description, and use the drag-and-drop editor to create a form that collects the required parameters for your template.
    - You can leverage the `Form` component or build a custom UI.
