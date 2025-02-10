@@ -401,7 +401,7 @@ Pour découvrir quelles bibliothèques et quels frameworks sont automatiquement 
 
 ## Choisir les taux d'échantillonnage pour l'ingestion des spans APM
 
-Pour gérer le [taux d'échantillonnage des invocations tracées par APM][17] pour des fonctions sans serveur, définissez la variable d'environnement `DD_TRACE_SAMPLE_RATE` de la fonction sur une valeur comprise entre 0.000 (aucun tracing des invocations de fonction Lambda) et 1.000 (tracing de toutes les invocations de fonction Lambda).
+Pour gérer le [taux d'échantillonnage des invocations tracées par APM][17] pour des fonctions sans serveur, définissez la variable d'environnement `DD_TRACE_SAMPLING_RULES` de la fonction sur une valeur comprise entre 0.000 (aucun tracing des invocations de fonction Lambda) et 1.000 (tracing de toutes les invocations de fonction Lambda).
 
 Les métriques sont calculées en tenant compte de l'intégralité du trafic de l'application. Votre configuration d'échantillonnage ne nuit donc aucunement à leur justesse.
 

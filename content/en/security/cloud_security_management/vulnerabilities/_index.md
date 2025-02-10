@@ -25,7 +25,9 @@ further_reading:
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">Cloud Security Management Vulnerabilities is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-warning">Cloud Security Management Vulnerabilities is in Preview for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).
+Request access by <a href="https://www.datadoghq.com/product-preview/csm-vulnerability-management-govcloud/">filling this form</a>.
+</div>
 {{< /site-region >}}
 
 ## Overview
@@ -131,10 +133,10 @@ The following video provides an overview of how to enable and use CSM Vulnerabil
 [2]: https://app.datadoghq.com/containers/images
 [3]: https://app.datadoghq.com/security/csm
 [4]: https://app.datadoghq.com/security/infra-vulnerability?query=asset_type%3AHost&group=none
-[5]: /security/application_security/software_composition_analysis/
+[5]: /security/code_security/software_composition_analysis/
 [6]: https://www.datadoghq.com/product/infrastructure-monitoring/
 [9]: https://www.cisa.gov/known-exploited-vulnerabilities-catalog
-[10]: /security/application_security/code_security/
+[10]: /security/code_security/iast/
 [11]: /security/cloud_security_management/setup/agentless_scanning/
 [12]: /security/cloud_security_management/setup/agent
 [13]: /security/cloud_security_management/vulnerabilities/hosts_containers_compatibility

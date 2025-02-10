@@ -44,10 +44,6 @@ See how to [archive your logs with Observability Pipelines][4] if you want to ro
 {{< tabs >}}
 {{% tab "AWS S3" %}}
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning"><em>Setting up S3 Archives using Role Delegation is currently in limited availability. Contact <a href="https://docs.datadoghq.com/help/">Datadog Support</a> to request this feature in your Datadog for Government account</em>.</div>
-{{< /site-region >}}
-
 If not already configured, set up the [AWS integration][1] for the AWS account that holds your S3 bucket.
    * In the general case, this involves creating a role that Datadog can use to integrate with AWS S3.
    * Specifically for AWS China accounts, use access keys as an alternative to role delegation.
@@ -270,18 +266,6 @@ Archiving and [Rehydration][1] only supports the following access tiers:
 - Cool access tier
 
 If you wish to rehydrate from archives in another access tier, you must first move them to one of the supported tiers above.
-
-[1]: /logs/archives/rehydrating/
-{{% /tab %}}
-{{% tab "Google Cloud Storage" %}}
-
-[Rehydration][1] only supports the following storage classes:
-
-- Standard
-- Nearline
-- Coldline
-
-If you wish to rehydrate from archives in another storage class, you must first move them to one of the supported classes above.
 
 [1]: /logs/archives/rehydrating/
 {{% /tab %}}

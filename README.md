@@ -41,7 +41,7 @@ Make sure all files are lowercase. Macs are case-insensitive when creating links
 
 ## Releasing
 
-Within 10 minutes of merging to master, it deploys automatically.
+Merging to `master` triggers an automatic deployment. This process typically begins within 10 minutes and usually takes around 35 minutes to complete, though these times may vary. 
 
 ## How to add a new integration
 

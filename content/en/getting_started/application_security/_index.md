@@ -12,9 +12,6 @@ further_reading:
 - link: "https://dtdg.co/fe"
   tag: "Foundation Enablement"
   text: "Join an interactive session to elevate your security and threat detection"
-- link: "/getting_started/application_security/software_composition_analysis"
-  tag: "Guide"
-  text: "Getting Started with Software Composition Analysis"
 - link: "https://securitylabs.datadoghq.com/"
   tag: "Security Labs"
   text: "Security research, reports, tips, and videos from Datadog"
@@ -22,7 +19,9 @@ further_reading:
 
 ## Overview
 
-Datadog Application Security Management (ASM) helps secure your web applications and APIs in production. ASM provides visibility into application-level vulnerabilities in your services, and protects in real-time from attacks and attackers that aim to exploit these vulnerabilities.
+Datadog Application Security Management (ASM) helps secure your web applications and APIs in production. 
+- With threat detection, Datadog provides real-time protection against attacks and attackers targeting code-level vulnerabilities.
+- With [Code Security][28], Datadog detects code and library vulnerabilities in your repositories and your running services, providing end-to-end visibility from development to production.
 
 This guide walks you through best practices for getting your team up and running with ASM.
 
@@ -44,17 +43,20 @@ These security insights are detected from data reported by APM. The insights hel
 ## Enable ASM
 
 ### Enable ASM with in-app instructions
+- To enable Threat Management in-app, navigate to [**Application Security > Setup**][29].
+- To enable Code Security in-app, navigate to [**Code Security > Setup**][29].
 
-On the [ASM landing page,][18] follow the instructions to get started. This includes:
+
+<!-- On the [ASM landing page,][18] follow the instructions to get started. This includes:
 - Guided selection of services that would benefit from ASM.
 - Configuring your Datadog tracing libraries with an environment variable.
 - Restarting your services. </br>
 
 1. Click **Get Started with ASM**.
-2. Select **Get Started** to detect vulnerabilities in open-source libraries (Software Composition Analysis), find and fix code-level vulnerabilities (Code Security), and find and enable threat detection on your services (Threat Management).
+2. Select **Get Started** to detect vulnerabilities in open-source libraries (Software Composition Analysis), find and fix code-level vulnerabilities (Runtime Code Analysis), and find and enable threat detection on your services (Threat Management).
 3. Follow the instructions to get started with ASM.
 
-   {{< img src="getting_started/appsec/asm_sca_setup.png" alt="Software Composition Analysis setup page." style="width:100%;" >}}
+   {{< img src="getting_started/appsec/asm_sca_setup.png" alt="Software Composition Analysis setup page." style="width:100%;" >}} -->
 
 
 ### Enable ASM with Remote Configuration
@@ -90,11 +92,10 @@ Once enabled, ASM immediately identifies application vulnerabilities and detects
 
 ## Disable ASM
 
-For information on disabling ASM or its features, see the following:
+For information on disabling ASM or its related capabilities, see the following:
 
 - [Disabling threat management and protection][24]
-- [Disabling Software Composition Analysis][25]
-- [Disabling Code Security][26]
+- [Disabling Code Security (SAST, SCA, or IAST)][27]
 
 ## Reports and notifications
 
@@ -133,4 +134,8 @@ Interested in best practices to go further? View the [in-product Quickstart Guid
 [24]: /security/application_security/troubleshooting/#disabling-threat-management-and-protection
 [25]: /security/application_security/troubleshooting/#disabling-software-composition-analysis
 [26]: /security/application_security/troubleshooting/#disabling-code-security
+[27]: /security/code_security/troubleshooting/
+[28]: /security/code_security
+[29]: https://app.datadoghq.com/security/configuration/asm/setup
+[30]: https://app.datadoghq.com/security/configuration/code-security/setup
 

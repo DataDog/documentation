@@ -29,7 +29,9 @@ Datadog Service Catalog is pre-populated with entries detected through [APM][2],
 
 With APM, Datadog can automatically discover the dependencies for an instrumented service, such as a database, a queue, or a third-party dependencies, even if that dependency hasn't been instrumented yet. These uninstrumented dependencies are categorized as separate *services*. Datadog changed service names of client spans (span.kind:client) to represent dependencies of your instrumented services. For example, a span representing a client call from a service auth-dotnet to a PostgreSQL database would be tagged with service:auth-dotnet-postgres. 
 
-If you are using APM and would like to remove the automatically named *services* from your Service Catalog and Service Map, you can opt in to new [inferred entities experience][7], which allows you to filter Service Catalog entries by entity type, such as database, queue, or third-party dependencies. You can optionally [remove][8] any [service overrides][9] like service:my-service-http-client from your catalog or map. 
+If you are using APM and would like to remove the automatically named *services* from your Service Catalog and Service Map, you can opt in to new [inferred entities experience][7], which allows you to filter Service Catalog entries by entity type, such as database, queue, or third-party dependencies. You can optionally [remove][8] any [service overrides][9] like service:my-service-http-client from your catalog or map.
+
+For information about discovering endpoints, see [Discovering Endpoints from APM][11].
 
 ## Enrich auto-detected services with metadata 
 To specify on-call, source code, or documentation for your services, you can add metadata to any existing services using the UI, APIs, or [other automation][10]. 2.2 is the recommended version. To try experimental features like enhanced relationship mapping and precise code location, opt in to the beta program for [schema 3.0][3] by [submitting a request][4].
@@ -142,7 +144,9 @@ With [Service Catalog metadata schema 2.2][5], you can specify the type and lang
 [4]: https://forms.gle/zbLfnJYhD5Ab4Wr18
 [5]: https://github.com/DataDog/schema/tree/main/service-catalog/v2.2
 [6]: /actions/actions_catalog/
-[7]: /tracing/guide/inferred-service-opt-in/?tab=java#global-default-service-naming-migration
+[7]: /tracing/services/inferred_services
 [8]: /tracing/guide/service_overrides/#remove-service-overrides
 [9]: /tracing/guide/service_overrides/
 [10]: /service_catalog/service_definitions/#add-metadata-with-automation
+[11]: /service_catalog/endpoints/discover_endpoints/
+[12]: /integrations/github/
