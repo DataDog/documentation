@@ -7042,7 +7042,7 @@ menu:
       identifier: rum_generate_metrics
       weight: 403
     - name: Connect RUM and Traces
-      url: real_user_monitoring/connect_rum_and_traces
+      url: real_user_monitoring/platform/connect_rum_and_traces
       parent: real_user_monitoring_platform
       identifier: rum_connect_rum_and_traces
       weight: 404
