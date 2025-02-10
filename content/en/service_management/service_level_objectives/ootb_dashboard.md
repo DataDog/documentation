@@ -15,7 +15,7 @@ The SLO Performance Summary Dashboard supports aggregated views of SLOs to help 
 - Customize your SLO groupings to be based on service, team, user journey, or any other tag that has been added to your SLOs.
 - Use a summary Score, based on the remaining error budget of the underlying SLOs, to understand SLO performance across different groups and identify areas of improvement.
 
-<div class="alert alert-info">The SLO Performance Summary Dashboard is currently in Preview.</div>
+<div class="alert alert-info">The SLO Performance Summary Dashboard is in Preview.</div>
 
 Access your OOTB SLO Performance Summary Dashbord by filtering for `SLO Performance Summary` in the search query of the [**Dashboard List**][1] or by clicking on the **Analytics** button on the top right corner of the [SLO status page][2].
 
