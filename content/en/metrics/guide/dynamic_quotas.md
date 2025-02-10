@@ -58,15 +58,15 @@ See the [Best Practices Guide for Custom Metrics Governance][11] for more inform
     {{/is_alert}}
 
 ```
-7. Select ***Multi Alert*** to send a notification for each account, team, metric name, or other tag specified in the `sum by` field.
-8. Click ***Create*** to create the metric monitor.
+7. Select **Multi Alert** to send a notification for each account, team, metric name, or other tag specified in the `sum by` field.
+8. Click **Create** to create the metric monitor.
 
 #### Complete the workflow configuration
 
 1. The workflow blueprint contains several Slack (or Microsoft Teams) integration tiles that need to be updated. For each tile, input the channel or specific user(s) responsible for granting permission to Datadog to apply these cost-optimizing metric configurations on your behalf.
 2. On the workflow canvas, click ***Save***.
-3. Click ***Publish***.
-4. Click on ***Run***, select ***Test from Monitor*** and input the metric monitor ID. Now you can start automatically managing your custom metrics costs.
+3. Click **Publish**.
+4. Click on **Run**, select **Test from Monitor**, and input the metric monitor ID. Now you can start automatically managing your custom metrics costs.
 
 ## Further reading
 
