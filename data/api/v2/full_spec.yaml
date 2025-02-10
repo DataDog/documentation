@@ -12014,7 +12014,7 @@ components:
       description: The schema representation of a Fastly service.
       properties:
         id:
-          description: The id of the Fastly service
+          description: The ID of the Fastly service
           example: 6abc7de6893AbcDe9fghIj
           type: string
         tags:
