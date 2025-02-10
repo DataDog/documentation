@@ -42,9 +42,9 @@ The Watchdog Insights carousel sits near the top of the following product pages:
     - [Processes Explorer][7]
     - [Serverless Explorer][8]
     - [Kubernetes Explorer][9]
-- [Real User Monitoring (RUM) Explorer][10]
-- [Synthetic Monitoring & Testing Explorer][15]
-- [Error Tracking issue side panel][13]
+    - [Real User Monitoring (RUM) Explorer][10]
+    - [Synthetic Monitoring & Testing Explorer][15]
+    - [Error Tracking issue side panel][13]
 
 Expand the carousel for an overview. The highest priority insights (based on `Insight type`, `State`, `Status`, `Start time`, `Anomaly type`) appear on the left.
 
