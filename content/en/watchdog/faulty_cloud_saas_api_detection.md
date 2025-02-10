@@ -42,19 +42,19 @@ Watchdog monitors the status of the following external providers' APIs:
 | Confluent | api.confluent.cloud & api.telemetry.confluent.cloud |
 | Envoy | api.envoy.com |
 | Facebook | graph.facebook.com |
-| Github | api.github.com |
+| GitHub | api.github.com |
 | Google | developers.google.com |
 | Hubspot | api.hubspot.com |
 | Intercom | api.intercom.io |
 | Mapbox | api.mapbox.com |
 | Mixpanel | api.mixpanel.com |
 | OpenAI | *.openai.com|
-| Pagerduty | api.pagerduty.com |
+| PagerDuty | api.pagerduty.com |
 | Palo Alto Networks | api.urlcloud.paloaltonetworks.com |
 | Render | api.render.com |
-| Sendgrid | .sendgrid.com |
+| SendGrid | .sendgrid.com |
 | Slack | *.slack.com |
-| Soundcloud | api.soundcloud.com |
+| SoundCloud | api.soundcloud.com |
 | Splunk | *.splunkcloud.com |
 | Square | connect.squareup.com |
 | Stripe | api.stripe.com |
@@ -64,7 +64,7 @@ Watchdog monitors the status of the following external providers' APIs:
 | Zendesk | *.zendesk.com |
 
 The following AWS services are monitored (.*amazonaws.com):
-- Dynamodb
+- DynamoDB
 - ELB
 - ES
 - Events
