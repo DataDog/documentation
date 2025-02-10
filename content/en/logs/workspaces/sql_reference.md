@@ -23,14 +23,14 @@ The following SQL syntax is supported:
 |---------------|----------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------|
 | `SELECT (DISTINCT)`<br>DISTINCT: Optional | Retrieves rows from a database, with `DISTINCT` filtering out duplicate records.       | {{< code-block lang="sql" >}}SELECT DISTINCT customer_id 
 FROM orders {{< /code-block >}} |
-| `JOIN`        | Combines rows from two or more tables based on a related column between them.                | {{< code-block lang="sql" >}}SELECT orders.order_id, customers.customer_name 
+| `JOIN`        | Combines rows from two or more tables based on a related column between them. Supports FULL JOIN, INNER JOIN, LEFT JOIN, RIGHT JOIN.  | {{< code-block lang="sql" >}}SELECT orders.order_id, customers.customer_name 
 FROM orders 
 JOIN customers 
 ON orders.customer_id = customers.customer_id {{< /code-block >}} |
 | `GROUP BY`    | Groups rows that have the same values in specified columns into summary rows.                | {{< code-block lang="sql" >}}SELECT product_id, SUM(quantity) 
 FROM sales 
 GROUP BY product_id {{< /code-block >}} |
-| `WHERE`<br>Includes support for `LIKE` filters on strings for pattern matching.  | Filters records that meet a specified condition.                                             | {{< code-block lang="sql" >}}SELECT * 
+| `WHERE`<br>Includes support for `LIKE`, `IN`, `ON`, `OR` filters.  | Filters records that meet a specified condition.                                             | {{< code-block lang="sql" >}}SELECT * 
 FROM employees 
 WHERE department = 'Sales' AND name LIKE 'J%' {{< /code-block >}} |
 | `CASE`        | Provides conditional logic to return different values based on specified conditions.         | {{< code-block lang="sql" >}}SELECT order_id, 
@@ -46,8 +46,28 @@ FROM orders {{< /code-block >}} |
   AVG(cpu_usage_percent) OVER (PARTITION BY service_name ORDER BY timestamp ROWS BETWEEN 2 PRECEDING AND CURRENT ROW) AS moving_avg_cpu
 FROM
   cpu_usage_data {{< /code-block >}} |
+| `IS NULL` / `IS NOT NULL`   | Checks if a value is null or not null.                                         | {{< code-block lang="sql" >}}SELECT * 
+FROM orders 
+WHERE delivery_date IS NULL {{< /code-block >}}        |
+| `LIMIT`    | Specifies the maximum number of records to return.                                               | {{< code-block lang="sql" >}}SELECT * 
+FROM customers 
+LIMIT 10 {{< /code-block >}}                         |
+| `ORDER BY`  | Sorts the result set of a query by one or more columns. Includes ASC, DESC for sorting order.  | {{< code-block lang="sql" >}}SELECT * 
+FROM sales 
+ORDER BY sale_date DESC {{< /code-block >}}              |
+| `HAVING`    | Filters records that meet a specified condition after grouping.                               | {{< code-block lang="sql" >}}SELECT product_id, SUM(quantity) 
+FROM sales 
+GROUP BY product_id 
+HAVING SUM(quantity) > 10 {{< /code-block >}} |
+| `IN`, `ON`, `OR`  | Used for specified conditions in queries. Available in `WHERE`, `JOIN` clauses.       | {{< code-block lang="sql" >}}SELECT * 
+FROM orders 
+WHERE order_status IN ('Shipped', 'Pending') {{< /code-block >}} |
+| `AS`        | Renames a column or table with an alias.                                                        | {{< code-block lang="sql" >}}SELECT first_name AS name 
+FROM employees {{< /code-block >}}                |
 | Arithmetic Operations | Performs basic calculations using operators like `+`, `-`, `*`, `/`.                 | {{< code-block lang="sql" >}}SELECT price, tax, (price * tax) AS total_cost 
 FROM products {{< /code-block >}} |
+| `INTERVAL value unit`  | interval                      | Represents a time duration specified in a given unit.                     |
+
 
 ## Functions
 
@@ -69,7 +89,31 @@ The following SQL functions are supported. For Window function, see the separate
 | `coalesce(args a)`     | typeof first non-null a OR null | Returns the first non-null value or null if all are null.               |
 | `cast(value AS type)`  | type                          | Converts the given value to the specified data type.                      |
 | `length(string s)`      | integer                       | Returns the number of characters in the string.                           |
-| `INTERVAL value unit`  | interval                      | Represents a time duration specified in a given unit.                     |
+
+| Function                                         | Return Type                           | Description                                                                 |
+|--------------------------------------------------|---------------------------------------|-----------------------------------------------------------------------------|
+| `min(variable v)`                                | typeof v                              | Returns the smallest value in a set of data.                                |
+| `max(variable v)`                                | typeof v                              | Returns the maximum value across all input values.                          |
+| `count(any a)`                                   | numeric                               | Returns the number of input values that are not null.                       |
+| `sum(numeric n)`                                 | numeric                               | Returns the summation across all input values.                              |
+| `avg(numeric n)`                                 | numeric                               | Returns the average value (arithmetic mean) across all input values.        |
+| `ceil(numeric n)`                                | numeric                               | Returns the value rounded up to the nearest integer.                        |
+| `floor(numeric n)`                               | numeric                               | Returns the value rounded down to the nearest integer.                      |
+| `round(numeric n)`                               | numeric                               | Returns the value rounded to the nearest integer.                           |
+| `lower(string s)`                                | string                                | Returns the string as lowercase.                                            |
+| `upper(string s)`                                | string                                | Returns the string as uppercase.                                            |
+| `abs(numeric n)`                                 | numeric                               | Returns the absolute value.                                                 |
+| `coalesce(args a)`                               | typeof first non-null a OR null       | Returns the first non-null value or null if all are null.                   |
+| `cast(value AS type)`                            | type                                  | Converts the given value to the specified data type.                        |
+| `length(string s)`                               | integer                               | Returns the number of characters in the string.                             |
+| `trim(string s)`                                 | string                                | Removes leading and trailing whitespace from the string.                    |
+| `replace(string s, from_string s1, to_string s2)`| string                                | Replaces occurrences of a substring within a string with another substring. |
+| `substring(string s, start_position_int i, length_int l)` | string                        | Extracts a substring from a string, starting at a given position and for a specified length. |
+| `extract(field from timestamp/interval)`         | numeric                               | Extracts a part of a date or time field (e.g., year, month) from a timestamp or interval. |
+| `to_timestamp(numeric n)`                        | timestamp with time zone              | Converts a numeric value to a timestamp with time zone.                     |
+| `to_char(timestamp t / interval i / numeric n, format f)` | string                      | Converts a timestamp, interval, or numeric value to a string using a format.|
+| `date_trunct(field f, source [, time_zone])`     | timestamp [with time zone] / interval | Truncates a timestamp or interval to a specified precision.                 |
+| `regexp_like(string s, pattern p [flags])`       | boolean                               | Evaluates if a string matches a regular expression pattern.                 |
 
 
 {{% collapse-content title="Examples" level="h3" %}}
