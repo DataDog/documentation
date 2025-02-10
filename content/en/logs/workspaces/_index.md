@@ -255,4 +255,4 @@ Finally, a treemap visualization cell is created with the `transaction_record_wi
 [1]: https://app.datadoghq.com/logs/analysis-workspace/list
 [2]: https://app.datadoghq.com/logs
 [3]: /logs/log_configuration/parsing/
-[4]: logs/explorer/calculated_fields/
+[4]: /logs/explorer/calculated_fields/
