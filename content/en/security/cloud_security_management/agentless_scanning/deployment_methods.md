@@ -17,10 +17,7 @@ further_reading:
 
 There are two recommended ways to deploy Agentless scanners in your environment, either using cross-account scanning, or same account scanning.
 
-
-To establish estimates on scanner costs, reach out to your [Datadog Customer Success Manager][1].
-
-The scanner cost is under $1 per scanned host per year for accounts following the [recommended configuration](#recommended-configuration).
+Cloud provider costs are under $1 per scanned host per year for accounts following the [recommended configuration](#recommended-configuration). Reach out to your [Datadog Customer Success Manager][1] if you have more questions.
 
 {{< tabs >}}
 {{% tab "Cross-account scanning" %}}
