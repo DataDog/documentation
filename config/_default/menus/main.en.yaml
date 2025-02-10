@@ -3801,21 +3801,26 @@ menu:
       parent: profiler_troubleshooting
       identifier: profiler_troubleshooting_ruby
       weight: 604
+    - name: Node.js
+      url: profiler/profiler_troubleshooting/nodejs/
+      parent: profiler_troubleshooting
+      identifier: profiler_troubleshooting_nodejs
+      weight: 605
     - name: .NET
       url: profiler/profiler_troubleshooting/dotnet/
       parent: profiler_troubleshooting
       identifier: profiler_troubleshooting_dotnet
-      weight: 605
+      weight: 606
     - name: PHP
       url: profiler/profiler_troubleshooting/php/
       parent: profiler_troubleshooting
       identifier: profiler_troubleshooting_php
-      weight: 606
+      weight: 607
     - name: C/C++/Rust
       url: profiler/profiler_troubleshooting/ddprof/
       parent: profiler_troubleshooting
       identifier: profiler_troubleshooting_linux
-      weight: 607
+      weight: 608
     - name: Guides
       url: profiler/guide/
       parent: profiler
