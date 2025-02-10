@@ -55,7 +55,7 @@ Navigate to the [Workflow Automation][3] page to configure the template in Datad
    - Navigate to **Actions** > **App Builder** and select **New App**.
    - Enter a name and description, and use the drag-and-drop editor to create a form that collects the required parameters for your template.
    - You can leverage the `Form` component or build a custom UI.
-   - Once done with your UI, select **New Query**, and use the **Trigger workflow** action to call your templating workflow and pass in the relevant parameters. You can also explore all of our integrations in the [Actions Catalog][7] or leverage our `HTTP` action to interact with any integrations we don't provide out of the box.
+   - After your UI is done, select **New Query**, and use the **Trigger workflow** action to call your templating workflow and pass in the relevant parameters. You can also explore the available integrations in the [Actions Catalog][7] or leverage the `HTTP` action to interact with any integrations not provided out of the box.
    - Create a **Button** that submits the form, triggers your workflow, and passes in the parameters for the template.
    - Save and publish the app.
 
