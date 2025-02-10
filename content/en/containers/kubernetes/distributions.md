@@ -77,6 +77,8 @@ spec:
 [1]:/containers/kubernetes/installation/?tab=datadogoperator
 [2]: /agent/guide/operator-eks-addon
 
+{{< /tabs >}}
+
 ## Azure Kubernetes Service (AKS) {#AKS}
 
 AKS requires a specific configuration for the `Kubelet` integration due to how AKS has set up the SSL Certificates. Additionally, the optional [Admission Controller][1] feature requires a specific configuration to prevent an error when reconciling the webhook.
