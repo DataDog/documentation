@@ -34,17 +34,17 @@ To validate your service definition file in-app:
 3. Select the **Code** tab.
 4. Paste the schema content.
 
+## Validate with an IDE extension
+
 Built-in validation mechanisms prevent you from sending incorrect metadata into Service Catalog. 
 
 {{< img src="tracing/service_catalog/service_catalog_definition_yaml.png" alt="Service metadata editor showing sample service definition." >}}
 
-## Validate with an IDE extension
+## Validate with Datadog Event Management and Github Integration
 
-The Datadog service definition schema is available in the open source [JSON Schema Store][2], where [many IDEs][3] can automatically retrieve it. 
-With it, your IDE validates the data as you edit the file, provided file name is `service.datadog.yaml`. 
-Validation messages allow you to correct issues before sending data to the Service Catalog.  
+To validate your service definitions ingested by Datadog's Github integration, you can view events when services or updated or when there is an error. You can view validation errors in [Event Management][4] by filtering by `source:service_catalog` and `status:error`. Adjust the timeframe as needed.
 
-{{< img src="tracing/service_catalog/service-definition-data-validation.mp4" alt="IDE showing real-time validation messages for service definition files." video="true" >}}
+{{< img src="tracing/service_catalog/github_error_event.png" alt="Github event showing error message from service definition." >}}
 
 ## Further reading
 
@@ -53,3 +53,4 @@ Validation messages allow you to correct issues before sending data to the Servi
 [1]: https://app.datadoghq.com/services/settings/get-started
 [2]: https://www.schemastore.org/
 [3]: https://www.schemastore.org/json/#editors
+[4]: https://app.datadoghq.com/event/explorer?query=source%3Aservice_catalog%20status%3Aerror&cols=&messageDisplay=expanded-lg&options=&refresh_mode=sliding&sort=DESC&view=all&from_ts=1736452185424&to_ts=1736453085424&live=true

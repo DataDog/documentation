@@ -41,7 +41,7 @@ Heap Live Size (in Preview, 1.39.0+)
 _Requires: Java 11.0.23+, 17.0.11+, 21.0.3+ or 22+_ <br />
 
 Wall Time in Native Code
-: The elapsed time spent in native code. Elapsed time includes time when code is running on CPU, waiting for I/O, and anything else that happens while the method is running. This profile does not include time spent running JVM bytecode, which is typically most of your application code.
+: The elapsed time spent by each method. Elapsed time includes time when code is running on CPU, waiting for I/O, and anything else that happens while the method is running.
 
 Class Load
 : The number of classes loaded by each method.
