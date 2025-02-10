@@ -73,23 +73,6 @@ FROM products {{< /code-block >}} |
 
 The following SQL functions are supported. For Window function, see the separate [Window function](#window-functions) section in this documentation.
 
-| Function               | Return Type                     | Description                                                             |
-|------------------------|---------------------------------|-------------------------------------------------------------------------|
-| `min(variable v)`      | typeof v                      | Returns the smallest value in a set of data.                              |
-| `max(variable v)`      | typeof v                      | Returns the maximum value across all input values.                        |
-| `count(any a)`         | numeric                       | Returns the number of input values that are not null.                     |
-| `sum(numeric n)`       | numeric                       | Returns the summation across all input values.                            |
-| `avg(numeric n)`       | numeric                       | Returns the average value (arithmetic mean) across all input values.      |
-| `ceil(numeric n)`      | numeric                       | Returns the value rounded up to the nearest integer.                      |
-| `floor(numeric n)`     | numeric                       | Returns the value rounded down to the nearest integer.                    |
-| `round(numeric n)`     | numeric                       | Returns the value rounded to the nearest integer.                         |
-| `lower(string s)`      | string                        | Returns the string as lowercase.                                          |
-| `upper(string s)`      | string                        | Returns the string as uppercase.                                          |
-| `abs(numeric n)`       | numeric                       | Returns the absolute value.                                               |
-| `coalesce(args a)`     | typeof first non-null a OR null | Returns the first non-null value or null if all are null.               |
-| `cast(value AS type)`  | type                          | Converts the given value to the specified data type.                      |
-| `length(string s)`      | integer                       | Returns the number of characters in the string.                           |
-
 | Function                                         | Return Type                           | Description                                                                 |
 |--------------------------------------------------|---------------------------------------|-----------------------------------------------------------------------------|
 | `min(variable v)`                                | typeof v                              | Returns the smallest value in a set of data.                                |
@@ -216,6 +199,72 @@ FROM
 SELECT
   TIMESTAMP '2023-10-01 10:00:00' + INTERVAL '30 days' AS future_date
 {{< /code-block >}} 
+
+### `TRIM`
+{{< code-block lang="sql" >}}
+SELECT
+  trim(name) AS trimmed_name
+FROM
+  users
+{{< /code-block >}}
+
+###  `REPLACE`
+{{< code-block lang="sql" >}}
+SELECT
+  replace(description, 'old', 'new') AS updated_description
+FROM
+  products
+{{< /code-block >}}
+
+### `SUBSTRING`
+{{< code-block lang="sql" >}}
+SELECT
+  substring(title, 1, 10) AS short_title
+FROM
+  books
+{{< /code-block >}}
+
+### `EXTRACT`
+{{< code-block lang="sql" >}}
+SELECT
+  extract(year FROM purchase_date) AS purchase_year
+FROM
+  sales
+{{< /code-block >}}
+
+### `TO_TIMESTAMP`
+{{< code-block lang="sql" >}}
+SELECT
+  to_timestamp(epoch_time) AS formatted_time
+FROM
+  event_logs
+{{< /code-block >}}
+
+### `TO_CHAR`
+{{< code-block lang="sql" >}}
+SELECT
+  to_char(order_date, 'MM-DD-YYYY') AS formatted_date
+FROM
+  orders
+{{< /code-block >}}
+
+### `DATE_TRUNC`
+{{< code-block lang="sql" >}}
+SELECT
+  date_trunc('month', event_time) AS month_start
+FROM
+  events
+{{< /code-block >}}
+
+### `REGEXP_LIKE`
+{{< code-block lang="sql" >}}
+SELECT
+  *
+FROM
+  emails
+WHERE
+  regexp_like(email_address, '@example\.com$')
+{{< /code-block >}}
 
 {{% /collapse-content %}} 
 
