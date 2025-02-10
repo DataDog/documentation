@@ -19,9 +19,7 @@ This page explains how to collect traces, trace metrics, runtime metrics, and cu
    npm install dd-trace
    ```
 
-   If your Azure Functions use a version of Node.js earlier than v18, ensure that you use a [compatible version of `dd-trace`][1].
-
-   To use [automatic instrumentation][2], you must use `dd-trace` v4.48+ (v4 release line) or v5.25+ (v5 release line).
+   To use [automatic instrumentation][2], you must use `dd-trace` v5.25+.
 
    Datadog recommends pinning the package versions and regularly upgrading to the latest versions of both `@datadog/serverless-compat` and `dd-trace` to ensure you have access to enhancements and bug fixes.
 
@@ -34,8 +32,8 @@ This page explains how to collect traces, trace metrics, runtime metrics, and cu
    const tracer = require('dd-trace').init()
    ```
 
-   [1]: https://github.com/DataDog/dd-trace-js?tab=readme-ov-file#version-release-lines-and-maintenance
-   [2]: /tracing/trace_collection/automatic_instrumentation/?tab=singlestepinstrumentation
+[1]: https://github.com/DataDog/dd-trace-js?tab=readme-ov-file#version-release-lines-and-maintenance
+[2]: /tracing/trace_collection/automatic_instrumentation/?tab=singlestepinstrumentation
 {{< /programming-lang >}}
 {{< programming-lang lang="python" >}}
 1. **Install dependencies**. Run the following commands:
@@ -44,7 +42,7 @@ This page explains how to collect traces, trace metrics, runtime metrics, and cu
    pip install ddtrace
    ```
 
-   You must use `ddtrace` v2.19+.
+   To use [automatic instrumentation][1], you must use `dd-trace` v2.19+.
 
    Datadog recommends using the latest versions of both `datadog-serverless-compat` and `ddtrace` to ensure you have access to enhancements and bug fixes.
 
@@ -57,7 +55,7 @@ This page explains how to collect traces, trace metrics, runtime metrics, and cu
    start()
    patch_all()
    ```
-
+[1]: /tracing/trace_collection/automatic_instrumentation/?tab=singlestepinstrumentation
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
@@ -89,7 +87,7 @@ You can also view traces on the [Serverless > Azure Functions][5] page. This vie
 
 ## Enable debug logs
 
-You can collect debug logs for troubleshooting. To configure debug logs, use the following environment variables:
+You can collect [debug logs][7] for troubleshooting. To configure debug logs, use the following environment variables:
 
 `DD_TRACE_DEBUG`
 : Enables (`true`) or disables (`false`) debug logging for the Datadog Tracing Library. Defaults to `false`.
@@ -112,13 +110,10 @@ You can collect debug logs for troubleshooting. To configure debug logs, use the
 
   **Values**: `true`, `false`
 
-### Correlate logs and traces
-
-<!-- TODO: to be continued -->
-
 [1]: /account_management/api-app-keys/#add-an-api-key-or-client-token
 [2]: /getting_started/site
 [3]: /tracing/metrics/metrics_namespace/
 [4]: https://app.datadoghq.com/apm/traces
 [5]: https://app.datadoghq.com/functions?cloud=azure&entity_view=function
 [6]: /integrations/azure/
+[7]: /tracing/troubleshooting/tracer_debug_logs/#enable-debug-mode
