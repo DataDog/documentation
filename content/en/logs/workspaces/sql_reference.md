@@ -92,7 +92,7 @@ The following SQL functions are supported. For Window function, see the separate
 | `trim(string s)`                                 | string                                | Removes leading and trailing whitespace from the string.                    |
 | `replace(string s, from_string s1, to_string s2)`| string                                | Replaces occurrences of a substring within a string with another substring. |
 | `substring(string s, start_position_int i, length_int l)` | string                        | Extracts a substring from a string, starting at a given position and for a specified length. |
-| `extract(field from timestamp/interval)`         | numeric                               | Extracts a part of a date or time field (e.g., year, month) from a timestamp or interval. |
+| `extract(field from timestamp/interval)`         | numeric                               | Extracts a part of a date or time field (such as year or month) from a timestamp or interval. |
 | `to_timestamp(numeric n)`                        | timestamp with time zone              | Converts a numeric value to a timestamp with time zone.                     |
 | `to_char(timestamp t / interval i / numeric n, format f)` | string                      | Converts a timestamp, interval, or numeric value to a string using a format.|
 | `date_trunct(field f, source [, time_zone])`     | timestamp [with time zone] / interval | Truncates a timestamp or interval to a specified precision.                 |
