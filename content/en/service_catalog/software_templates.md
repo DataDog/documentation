@@ -26,7 +26,7 @@ Use [App Builder][2] to create dynamic, user-friendly forms to collect inputs fr
 To use software templates in Datadog, create a Git repository with the desired template. You can start from scratch or use our quickstart blueprints to learn from an example.
 
 #### Start from an example
-Navigate to [App Builder Blueprints][9] and select one of the following blueprints. These are examples of how to configure an App &/or Workflow to help you get started. You can make updates to the examples to fit your needs, such as configuring inputs, setting up integrations with source code management and/or cloud providers, and configuring permissions.
+Navigate to [App Builder Blueprints][9] and select one of the following blueprints. These are examples of how to configure an App or Workflow to help you get started. You can make updates to the examples to fit your needs, such as configuring inputs, setting up integrations with source code management or cloud providers, and configuring permissions.
 
 ##### Scaffold New Service
 
