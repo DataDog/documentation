@@ -46,6 +46,7 @@ Supported test frameworks:
 | Karate | >= 1.0.0 |
 | Scalatest | >= 3.0.8 |
 | Scala MUnit | >= 0.7.28 |
+| Scala Weaver | >= 0.8.4 |
 
 If your test framework is not supported, you can try instrumenting your tests using [Manual Testing API][1].
 
@@ -56,7 +57,7 @@ Supported build systems:
 | Gradle | >= 2.0 |
 | Maven | >= 3.2.1 |
 
-Other build systems, such as Ant or Bazel, are supported with the following limitations:
+Other build systems, such as Ant, Bazel, or SBT are supported with the following limitations:
 - Automatic coverage configuration and reporting is not supported.
 - When building a multi-module project, every module is reported in a separate trace.
 
@@ -147,12 +148,34 @@ Set the following environment variables to configure the tracer:
 Run your tests as you normally do (for example: `./gradlew clean test`).
 
 {{% /tab %}}
+{{% tab "SBT" %}}
+
+Set the following environment variables to configure the tracer:
+
+`DD_CIVISIBILITY_ENABLED=true` (Required)
+: Enables the Test Optimization product.
+
+`DD_ENV` (Required)
+: Environment where the tests are being run (for example: `local` when running tests on a developer workstation or `ci` when running them on a CI provider).
+
+`DD_SERVICE` (Required)
+: Name of the service or library being tested.
+
+`DD_TRACER_FOLDER` (Required)
+: Path to the folder where the downloaded Java Tracer is located.
+
+`SBT_OPTS=-javaagent:$DD_TRACER_FOLDER/dd-java-agent.jar` (Required)
+: Injects the tracer into the JVMs that execute your tests.
+
+Run your tests as you normally do (for example: `sbt test`).
+
+{{% /tab %}}
 {{% tab "Other" %}}
 
 Set the following environment variables to configure the tracer:
 
 `DD_CIVISIBILITY_ENABLED=true` (Required)
-: Enables Test Optimization.
+: Enables the Test Optimization product.
 
 `DD_ENV` (Required)
 : Environment where the tests are being run (for example: `local` when running tests on a developer workstation or `ci` when running them on a CI provider).
@@ -187,7 +210,33 @@ The tracer exposes a set of APIs that can be used to extend its functionality pr
 
 ### Adding custom tags to tests
 
-To add custom tags include [opentracing-util][4] library as a compile-time dependency to your project.
+{{< tabs >}}
+{{% tab "OpenTelemetry API" %}}
+
+To add custom tags, include the [opentelemetry-api][1] library as a compile-time dependency and set `dd.trace.otel.enabled` (system property) or `DD_TRACE_OTEL_ENABLED` (environment variable) to `true`.
+
+You can then add custom tags to your tests by using the active span:
+
+```java
+import io.opentelemetry.api.trace.Span;
+
+// ...
+// inside your test
+Span span = Span.current();
+span.setAttribute("test_owner", "my_team");
+// test continues normally
+// ...
+```
+
+For more information about adding tags, see the [Adding Tags][2] section of the Java custom instrumentation documentation.
+
+[1]: https://mvnrepository.com/artifact/io.opentelemetry/opentelemetry-api
+[2]: /tracing/trace_collection/custom_instrumentation/java?tab=locally#adding-tags
+
+{{% /tab %}}
+{{% tab "OpenTracing API" %}}
+
+To add custom tags, include the [opentracing-util][1] library as a compile-time dependency to your project.
 
 You can then add custom tags to your tests by using the active span:
 
@@ -207,11 +256,34 @@ if (span != null) {
 
 To create filters or `group by` fields for these tags, you must first create facets.
 
-For more information about adding tags, see the [Adding Tags][5] section of the Java custom instrumentation documentation.
+For more information about adding tags, see the [Adding Tags][2] section of the Java custom instrumentation documentation.
+
+[1]: https://mvnrepository.com/artifact/io.opentracing/opentracing-util
+[2]: /tracing/trace_collection/custom_instrumentation/java?tab=locally#adding-tags
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ### Adding custom measures to tests
 
 Just like tags, you can add custom measures to your tests by using the current active span:
+
+{{< tabs >}}
+{{% tab "OpenTelemetry API" %}}
+
+```java
+import io.opentelemetry.api.trace.Span;
+
+// ...
+// inside your test
+Span span = Span.current();
+span.setAttribute("test.memory.usage", 1e8);
+// test continues normally
+// ...
+```
+
+{{% /tab %}}
+{{% tab "OpenTracing API" %}}
 
 ```java
 import io.opentracing.Span;
@@ -226,6 +298,9 @@ if (span != null) {
 // test continues normally
 // ...
 ```
+
+{{% /tab %}}
+{{< /tabs >}}
 
 For more information about custom measures, see the [Add Custom Measures guide][6].
 
@@ -460,8 +535,6 @@ To disable all integrations, augment the list of `-javaagent` arguments with `dd
 [1]: #using-manual-testing-api
 [2]: https://app.datadoghq.com/ci/setup/test?language=java
 [3]: /tracing/trace_collection/library_config/java/?tab=containers#configuration
-[4]: https://mvnrepository.com/artifact/io.opentracing/opentracing-util
-[5]: /tracing/trace_collection/custom_instrumentation/java?tab=locally#adding-tags
 [6]: /tests/guides/add_custom_measures/?tab=java
 [7]: https://mvnrepository.com/artifact/com.datadoghq/dd-trace-api
 [8]: /tests/#parameterized-test-configurations

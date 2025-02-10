@@ -580,34 +580,9 @@ If no `DD_APPSEC_ENABLED=true` environment variable is set for your service, do 
   3. Select the check boxes for the services where you want to disable threat detection.
   4. In **Bulk Actions**, select **Deactivate Threat detection on (number of) services**.
 
-## Disabling Software Composition Analysis
-
-SCA can be enabled using two methods: the UI or manually using an environment variable. When you disable SCA, you must use the *same method* you used to enable SCA. For example, if you enabled SCA manually, you cannot disable it using the UI. You must disable it manually. 
-
-Typically, SCA is enabled and disabled on a service using the UI.
-
-To disable [Software Composition Analysis][14] using the UI:
-
-* Go to [Services][15], select **Software Composition Analysis (SCA)**, click on your service to open the service details, and then, in **Vulnerability Detection**, click **Deactivate**.
-* To disable Software Composition Analysis on your services in bulk, click the check box in the list header and then under **Bulk Actions** select **Deactivate Software Composition Analysis (SCA) on (number of) services**.
-
-To disable SCA manually:
-
-* To disable Software Composition Analysis using the `DD_APPSEC_SCA_ENABLED` environment variable, remove the `DD_APPSEC_SCA_ENABLED=true` environment variable from your application configuration, and restart your service. This does not apply to PHP apps.
-
 ## Disabling Code Security
 
 To disable [Code Security][13], remove the `DD_IAST_ENABLED=true` environment variable from your application configuration or set it to `false` as `DD_IAST_ENABLED=false`, and restart your service.
-  
-## All or some code-level vulnerabilities are not detected
-
-### Confirm Code Security is enabled
-
-Ensure the `DD_IAST_ENABLED` environment variable is set to `true` or the corresponding system property for your language is enabled.
-
-### For Python+Flask, call the entrypoint patch function
-
-If you're running a Flask application ensure that you are calling the `ddtrace_iast_flask_patch()` function at the top level of the module and before calling `app.run()`. See the [Flask integration documentation][17] for more information.
   
 ## Need more help?
 
@@ -631,8 +606,8 @@ If you continue to have issues with ASM, contact [Datadog support][1] with the f
 [9]: /tracing/glossary/#spans
 [10]: /tracing/troubleshooting/#tracer-debug-logs
 [12]: https://app.datadoghq.com/security/appsec/vm
-[13]: /security/application_security/code_security/
-[14]: /security/application_security/software_composition_analysis
+[13]: /security/code_security/iast/
+[14]: /security/code_security/software_composition_analysis
 [15]: https://app.datadoghq.com/security/configuration/asm/services-config
 [16]: https://app.datadoghq.com/organization-settings/remote-config
 [17]: https://ddtrace.readthedocs.io/en/stable/integrations.html#flask

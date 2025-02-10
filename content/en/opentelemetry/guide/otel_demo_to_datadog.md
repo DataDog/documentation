@@ -64,7 +64,7 @@ git clone https://github.com/open-telemetry/opentelemetry-demo.git
 
 ### Configuring the OpenTelemetry Collector
 
-To send the demo's telemetry data to Datadog you need to add three components to the the OpenTelemetry Collector configuration:
+To send the demo's telemetry data to Datadog you need to add three components to the OpenTelemetry Collector configuration:
 
 - `Resource Processor` is an `optional` component which is recommended, used to set the `env` tag for Datadog.
 - `Datadog Connector` is responsible for computing Datadog APM Trace Metrics.
@@ -226,7 +226,7 @@ If you have make installed, you can use the following command to start the demo:
 make start
 ```
 
-If you don't have `make` installed, you can use the the `docker compose` command directly:
+If you don't have `make` installed, you can use the `docker compose` command directly:
 
 ```shell
 docker compose up --force-recreate --remove-orphans --detach
