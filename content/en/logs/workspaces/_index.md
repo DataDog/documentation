@@ -33,7 +33,7 @@ On the [Log Workspaces][1] page:
 In the [Log Explorer][2]:
 
 1. Enter a query.
-1. Click **More**, next to *Download as CSV*, and select **Open in Workspace**.
+1. Click **Open in New Workspace**.
 1. The workspace adds the log query to a data source cell. By default, the columns in Log Explorer are added to the data source cell.
 
 ### Add a column to your workspace
@@ -44,6 +44,18 @@ In addition to the default columns, you can add your own columns to your workspa
 1. From your workspace cell, click on a log to open the detail side panel.
 1. Click the attribute you want to add as a column.
 1. From the pop up option, select **Add "@your_column " to "your workspace" dataset**.
+
+### Calculated fields queries 
+
+You can create a workspace with [Calculated Fields][4] queries from the Log Explorer. To transfer a query from the Logs Explorer, enter a query with Calculated Fields and click **Open in New Workspace**. 
+
+You can also use existing dataset to define a computed field using a formula that can be reused in further datasets:
+1. Open a Workspace with a data source.
+1. Add a [Transformation cell](#transformation-cell).
+1. Click **More**.
+1. Select **Calculate**.
+
+{{< img src="/logs/workspace/workspaces_calculated_fields.png" alt="Screenshot of an example Workspaces interface with the 'Calculate' option selected from the 'More' dropdown menu, demonstrating how to add Calculated Fields to a query." style="width:100%;" >}}
 
 ## Analyze, transform, and visualize your logs
 You can add the following cells to:
@@ -243,3 +255,4 @@ Finally, a treemap visualization cell is created with the `transaction_record_wi
 [1]: https://app.datadoghq.com/logs/analysis-workspace/list
 [2]: https://app.datadoghq.com/logs
 [3]: /logs/log_configuration/parsing/
+[4]: logs/explorer/calculated_fields/
