@@ -77,9 +77,9 @@ You can use the facet panels to browse through all of the tags available on your
 
 #### Custom facets
 
-Aggregate and filter your traffic data by any tags in Datadog network page. An include list of tags is provided by default, which you can find in the search bar dropdown menu:
+Aggregate and filter your traffic data by any tags on the network analytics page. A list of included tags is available which is located on the left side of the screen under the **Client** and **Server** tags, or in the **View clients as** and **View servers as** dropdown menus.
 
-{{< img src="network_performance_monitoring/network_analytics/drop_down_npm.png" alt="Dropdown menu" style="width:90%;">}}
+{{< img src="network_performance_monitoring/network_analytics/drop_down_cnm.png" alt="Dropdown menu from network analytics page showing the facet list" style="width:90%;">}}
 
 Include listed tags are `service`, `availability zone`, `env`, `environment`, `pod`, `host`, `ip`, and `port`, among others. If you want to aggregate or filter traffic by a tag that is not already in the menu, add it as a custom Facet:
 
@@ -87,7 +87,7 @@ Include listed tags are `service`, `availability zone`, `env`, `environment`, `p
 2. Enter the relevant tag you want to create a custom facet upon.
 3. Click **Add**.
 
-Once the custom facet is created, use this tag to filter and aggregate traffic in the network page and map. All custom facets can be viewed in the bottom `Custom` section of the facet panels.
+Once the custom facet is created, use this tag to filter and aggregate traffic on the network analytics page and network map. All custom facets can be viewed in the bottom `Custom` section of the facet panels.
 
 ### Wildcard search
 To perform a multi-character wildcard search, use the `*` symbol as follows:
