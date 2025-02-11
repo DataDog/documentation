@@ -35,7 +35,7 @@ Supported Agent versions
 
 1. In the SQL Server database instance, create a Datadog Extended Events (XE) session. You can run the session on any database in the instance.
 
-   **Note**: If the Datadog XE session isn't created in the database, the Agent still attempts to collect deadlock events from a default SQL Server XE view.
+   **Note**: If the Datadog XE session isn't created in the database, the Agent still attempts to collect deadlock events from the default SQL Server system health XE session.
 
 ```sql
   CREATE EVENT SESSION datadog
