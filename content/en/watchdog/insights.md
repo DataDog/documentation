@@ -261,7 +261,7 @@ When reviewing failed test runs, you can see the number of error outliers on the
 
 {{< img src="watchdog/synthetics_watchdog_outlier.png" alt="An overview of a failed browser test run with test step details and the error message which was identified as an error outlier for a failing test step by Watchdog" style="width:100%;" >}}
 
-Click on the outlier from the above step to access the error outlier message on the **Errors & Warnings** tab in the test step side panel.
+To view the error outlier message, click on the outlier. Then, on the test step side panel, click the **Errors & Warnings** tab.
 
 {{< img src="watchdog/outlier_step_error_2.png" alt="An error message which was identified as an error outlier for a failing test step by Watchdog" style="width:100%;" >}}
 
