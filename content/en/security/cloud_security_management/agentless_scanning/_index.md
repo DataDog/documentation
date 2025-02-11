@@ -114,7 +114,7 @@ Along with displaying sensitive data matches, Sensitive Data Scanner surfaces an
 
 ## Cloud service provider cost
 
-When using Agentless Scanning, there are additional costs for running scanners and analyzing your cloud environments.
+When using Agentless Scanning, there are additional cloud provider costs for running scanners and analyzing your cloud environments.
 
 Cloud provider costs are under $1 per scanned host per year for accounts following the [recommended configuration][13]. Reach out to your [Datadog Customer Success Manager][7] if you have more questions.
 
