@@ -86,7 +86,7 @@ To instrument your test suite, prefix your test command with `dd-trace ci run`, 
 By using <a href="https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-test">dotnet test</a>:
 
 {{< code-block lang="shell" >}}
-dd-trace ci run --dd-service=my-dotnet-app --dd-env=ci -- dotnet test
+dd-trace ci run --dd-service=my-dotnet-app -- dotnet test
 {{< /code-block >}}
 
 {{% /tab %}}
@@ -96,7 +96,7 @@ dd-trace ci run --dd-service=my-dotnet-app --dd-env=ci -- dotnet test
 By using <a href="https://docs.microsoft.com/en-us/visualstudio/test/vstest-console-options">VSTest.Console.exe</a>:
 
 {{< code-block lang="shell" >}}
-dd-trace ci run --dd-service=my-dotnet-app --dd-env=ci -- VSTest.Console.exe {test_assembly}.dll
+dd-trace ci run --dd-service=my-dotnet-app -- VSTest.Console.exe {test_assembly}.dll
 {{< /code-block >}}
 
 {{% /tab %}}
@@ -160,6 +160,12 @@ The following list shows the default values for key configuration settings:
 : Datadog Agent URL for trace collection in the form `http://hostname:port`.<br/>
 **Environment variable**: `DD_TRACE_AGENT_URL`<br/>
 **Default**: `http://localhost:8126`
+
+`test_session.name` (only available as an environment variable)
+: Identifies a group of tests, such as `integration-tests`, `unit-tests` or `smoke-tests`.<br/>
+**Environment variable**: `DD_TEST_SESSION_NAME`<br/>
+**Default**: (CI job name + test command)<br/>
+**Example**: `unit-tests`, `integration-tests`, `smoke-tests`
 
 For more information about `service` and `env` reserved tags, see [Unified Service Tagging][6]. All other [Datadog Tracer configuration][7] options can also be used.
 
@@ -360,6 +366,34 @@ await module.CloseAsync();
 {{< /code-block >}}
 
 Always call `module.Close()` or `module.CloseAsync()` at the end so that all the test data is flushed to Datadog.
+
+## Best practices
+
+### Test session name `DD_TEST_SESSION_NAME`
+
+Use `DD_TEST_SESSION_NAME` to define the name of the test session and the related group of tests. Examples of values for this tag would be:
+
+- `unit-tests`
+- `integration-tests`
+- `smoke-tests`
+- `flaky-tests`
+- `ui-tests`
+- `backend-tests`
+
+If `DD_TEST_SESSION_NAME` is not specified, the default value used is a combination of the:
+
+- CI job name
+- Command used to run the tests (such as `yarn test`)
+
+The test session name needs to be unique within a repository to help you distinguish different groups of tests.
+
+#### When to use `DD_TEST_SESSION_NAME`
+
+If your tests are run with commands that include a dynamic string, such as:
+
+- `DD_TEST_SESSION_NAME=integration-tests dotnet test --temp-dir=/var/folders/t1/rs2htfh55mz9px2j4prmpg_c0000gq/T`
+
+Then the default value for the test session name constantly changes. Datadog recommends using `DD_TEST_SESSION_NAME` in this case.
 
 ## Further reading
 

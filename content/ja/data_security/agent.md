@@ -147,10 +147,8 @@ DD_AGENT_TELEMETRY_ENABLED=false
 | pymem.alloc                                 | Agent 起動以来、Python インタープリタによって割り当てられた累計バイト数            |
 | api_server.request_duration_seconds         | CLI コマンド実行性能 (実行された場合)                                                  |
 | logs.decoded                                | デコードされたログの総数                                                                      |
-| logs.processed                              | 処理されたログの総数                                                                    |
 | logs.sender_latency                         | HTTP sender latency in millisecondsHTTP 送信者の遅延時間 (ミリ秒単位)                                                               |
 | logs.bytes_missed                           | Agent が消費される前に失われたバイト数の総計 (ログローテーション後など) |
-| logs.sent                                   | 送信されたログの総数                                                                         |
 | logs.dropped                                | ドロップされたログの総数                                                                      |
 | logs.bytes_sent                             | エンコード前に送信されたバイト数の総計 (該当する場合)                                                |
 | logs.encoded_bytes_sent                     | エンコード後に送信されたバイト数の総計 (該当する場合)                                                 |

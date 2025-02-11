@@ -25,18 +25,20 @@ In Observability Pipelines, a pipeline is a sequential path with three types of 
 Set up your pipelines and its [sources][1], [processors][2], and [destinations][3] in the Observability Pipelines UI. The general setup steps are:
 
 1. Navigate to [Observability Pipelines][4].
-1. Select a template:
+1. Select a template.
+1. Select and set up your source.
+1. Select and set up your destinations.
+1. Set up your processors.
+1. Install the Observability Pipelines Worker.
+1. Enable monitors for your pipeline.
+
+For detailed setup instructions, select a template-specific documentation and then select your source from that page:
     - [Log volume control][4]
     - [Dual ship logs][5]
     - [Split logs][6]
     - [Archive logs to Datadog Archives][7]
     - [Sensitive data redaction][8]
     - [Log Enrichment][9]
-1. Select and set up your source.
-1. Select and set up your destinations.
-1. Set up your processors.
-1. Install the Observability Pipelines Worker.
-1. Enable monitors for your pipeline.
 
 See [Advanced Configurations][10] for bootstrapping options and for details on setting up the Worker with Kubernetes.
 

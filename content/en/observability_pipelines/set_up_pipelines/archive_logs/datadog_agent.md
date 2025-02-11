@@ -11,7 +11,7 @@ Configure your Datadog Agent so that the Observability Pipelines Worker formats 
 
 {{% observability_pipelines/use_case_images/archive_logs %}}
 
-This document walks you through the following steps:
+This document walks you through the following:
 1. The [prerequisites](#prerequisites) needed to set up Observability Pipelines
 1. [Configuring a Log Archive](#configure-a-log-archive)
 1. [Setting up Observability Pipelines](#set-up-observability-pipelines)
@@ -83,9 +83,24 @@ Select the cloud provider you are using to archive your logs.
 
 ### Set up the destinations
 
-Enter the following information based on your selected logs destination.
+Enter the following information based on your selected logs destinations.
 
 {{< tabs >}}
+{{% tab "Amazon OpenSearch" %}}
+
+{{% observability_pipelines/destination_settings/amazon_opensearch %}}
+
+{{% /tab %}}
+{{% tab "Chronicle" %}}
+
+{{% observability_pipelines/destination_settings/chronicle %}}
+
+{{% /tab %}}
+{{% tab "Datadog" %}}
+
+{{% observability_pipelines/destination_settings/datadog %}}
+
+{{% /tab %}}
 {{% tab "Datadog Archives" %}}
 
 {{% observability_pipelines/destination_settings/datadog_archives_note %}}
@@ -109,9 +124,29 @@ Follow the instructions for the cloud provider you are using to archive your log
 {{% /collapse-content %}}
 
 {{% /tab %}}
-{{% tab "Datadog" %}}
+{{% tab "Elasticsearch" %}}
 
-{{% observability_pipelines/destination_settings/datadog %}}
+{{% observability_pipelines/destination_settings/elasticsearch %}}
+
+{{% /tab %}}
+{{% tab "Microsoft Sentinel" %}}
+
+{{% observability_pipelines/destination_settings/microsoft_sentinel %}}
+
+{{% /tab %}}
+{{% tab "New Relic" %}}
+
+{{% observability_pipelines/destination_settings/new_relic %}}
+
+{{% /tab %}}
+{{% tab "OpenSearch" %}}
+
+{{% observability_pipelines/destination_settings/opensearch %}}
+
+{{% /tab %}}
+{{% tab "SentinelOne" %}}
+
+{{% observability_pipelines/destination_settings/sentinelone %}}
 
 {{% /tab %}}
 {{% tab "Splunk HEC" %}}
@@ -129,32 +164,11 @@ Follow the instructions for the cloud provider you are using to archive your log
 {{% observability_pipelines/destination_settings/syslog %}}
 
 {{% /tab %}}
-{{% tab "Chronicle" %}}
-
-{{% observability_pipelines/destination_settings/chronicle %}}
-
-{{% /tab %}}
-{{% tab "Elasticsearch" %}}
-
-{{% observability_pipelines/destination_settings/elasticsearch %}}
-
-{{% /tab %}}
-{{% tab "OpenSearch" %}}
-
-{{% observability_pipelines/destination_settings/opensearch %}}
-
-{{% /tab %}}
-{{% tab "Amazon OpenSearch" %}}
-
-{{% observability_pipelines/destination_settings/amazon_opensearch %}}
-
-{{% /tab %}}
-{{% tab "New Relic" %}}
-
-{{% observability_pipelines/destination_settings/new_relic %}}
-
-{{% /tab %}}
 {{< /tabs >}}
+
+#### Add additional destinations
+
+{{% observability_pipelines/multiple_destinations %}}
 
 ### Set up processors
 
@@ -164,9 +178,19 @@ Follow the instructions for the cloud provider you are using to archive your log
 
 {{% observability_pipelines/processors/add_processors %}}
 {{< tabs >}}
-{{% tab "Filter" %}}
+{{% tab "Add env vars" %}}
 
-{{% observability_pipelines/processors/filter %}}
+{{% observability_pipelines/processors/add_env_vars %}}
+
+{{% /tab %}}
+{{% tab "Add hostname" %}}
+
+{{% observability_pipelines/processors/add_hostname %}}
+
+{{% /tab %}}
+{{% tab "Dedupe" %}}
+
+{{% observability_pipelines/processors/dedupe %}}
 
 {{% /tab %}}
 {{% tab "Edit fields" %}}
@@ -174,14 +198,29 @@ Follow the instructions for the cloud provider you are using to archive your log
 {{% observability_pipelines/processors/remap %}}
 
 {{% /tab %}}
-{{% tab "Sample" %}}
+{{% tab "Enrichment table" %}}
 
-{{% observability_pipelines/processors/sample %}}
+{{% observability_pipelines/processors/enrichment_table %}}
+
+{{% /tab %}}
+{{% tab "Filter" %}}
+
+{{% observability_pipelines/processors/filter %}}
+
+{{% /tab %}}
+{{% tab "Generate metrics" %}}
+
+{{% observability_pipelines/processors/generate_metrics %}}
 
 {{% /tab %}}
 {{% tab "Grok Parser" %}}
 
 {{% observability_pipelines/processors/grok_parser %}}
+
+{{% /tab %}}
+{{% tab "Parse JSON" %}}
+
+{{% observability_pipelines/processors/parse_json %}}
 
 {{% /tab %}}
 {{% tab "Quota" %}}
@@ -194,49 +233,61 @@ Follow the instructions for the cloud provider you are using to archive your log
 {{% observability_pipelines/processors/reduce %}}
 
 {{% /tab %}}
-{{% tab "Dedupe" %}}
+{{% tab "Remap to OCSF" %}}
 
-{{% observability_pipelines/processors/dedupe %}}
+{{% observability_pipelines/processors/remap_ocsf %}}
+
+{{% /tab %}}
+{{% tab "Sample" %}}
+
+{{% observability_pipelines/processors/sample %}}
 
 {{% /tab %}}
 {{% tab "Sensitive Data Scanner" %}}
 
 {{% observability_pipelines/processors/sensitive_data_scanner %}}
 
-{{% /tab %}}
-{{% tab "Add hostname" %}}
+<!-- {{% collapse-content title="Add rules from the library" level="h5" %}}
 
-{{% observability_pipelines/processors/add_hostname %}}
+{{% observability_pipelines/processors/sds_library_rules %}}
 
-{{% /tab %}}
-{{% tab "Parse JSON" %}}
+{{% /collapse-content %}}
+{{% collapse-content title="Add a custom rule" level="h5" %}}
 
-{{% observability_pipelines/processors/parse_json %}}
+{{% observability_pipelines/processors/sds_custom_rules %}}
 
-{{% /tab %}}
-{{% tab "Enrichment table" %}}
-
-{{% observability_pipelines/processors/enrichment_table %}}
-
-{{% /tab %}}
-{{% tab "Generate metrics" %}}
-
-{{% observability_pipelines/processors/generate_metrics %}}
-
-{{% /tab %}}
-{{% tab "Add env vars" %}}
-
-{{% observability_pipelines/processors/add_env_vars %}}
+{{% /collapse-content %}} -->
 
 {{% /tab %}}
 {{< /tabs >}}
+
+#### Add another set of processors and destinations
+
+{{% observability_pipelines/multiple_processors %}}
 
 ### Install the Observability Pipelines Worker
 1. Select your platform in the **Choose your installation platform** dropdown menu.
 1. Enter the Datadog Agent address. The Observability Pipelines Worker listens to this address and port for incoming logs from the Datadog Agent. For example, `0.0.0.0:<port_number>`.
 1. Provide the environment variables for each of your selected destinations.
 {{< tabs >}}
+{{% tab "Amazon OpenSearch" %}}
+
+{{% observability_pipelines/destination_env_vars/amazon_opensearch %}}
+
+{{% /tab %}}
+{{% tab "Chronicle" %}}
+
+{{% observability_pipelines/destination_env_vars/chronicle %}}
+
+{{% /tab %}}
+{{% tab "Datadog" %}}
+
+{{% observability_pipelines/destination_env_vars/datadog %}}
+
+{{% /tab %}}
 {{% tab "Datadog Archives" %}}
+
+For the Datadog Archives destination, follow the instructions for the cloud provider you are using to archive your logs.
 
 {{% collapse-content title="Amazon S3" level="h5" %}}
 
@@ -255,9 +306,29 @@ Follow the instructions for the cloud provider you are using to archive your log
 {{% /collapse-content %}}
 
 {{% /tab %}}
-{{% tab "Datadog" %}}
+{{% tab "Elasticsearch" %}}
 
-{{% observability_pipelines/destination_env_vars/datadog %}}
+{{% observability_pipelines/destination_env_vars/elasticsearch %}}
+
+{{% /tab %}}
+{{% tab "Microsoft Sentinel" %}}
+
+{{% observability_pipelines/destination_env_vars/microsoft_sentinel %}}
+
+{{% /tab %}}
+{{% tab "New Relic" %}}
+
+{{% observability_pipelines/destination_env_vars/new_relic %}}
+
+{{% /tab %}}
+{{% tab "OpenSearch" %}}
+
+{{% observability_pipelines/destination_env_vars/opensearch %}}
+
+{{% /tab %}}
+{{% tab "SentinelOne" %}}
+
+{{% observability_pipelines/destination_env_vars/sentinelone %}}
 
 {{% /tab %}}
 {{% tab "Splunk HEC" %}}
@@ -273,31 +344,6 @@ Follow the instructions for the cloud provider you are using to archive your log
 {{% tab "Syslog" %}}
 
 {{% observability_pipelines/destination_env_vars/syslog %}}
-
-{{% /tab %}}
-{{% tab "Chronicle" %}}
-
-{{% observability_pipelines/destination_env_vars/chronicle %}}
-
-{{% /tab %}}
-{{% tab "Elasticsearch" %}}
-
-{{% observability_pipelines/destination_env_vars/elasticsearch %}}
-
-{{% /tab %}}
-{{% tab "OpenSearch" %}}
-
-{{% observability_pipelines/destination_env_vars/opensearch %}}
-
-{{% /tab %}}
-{{% tab "Amazon OpenSearch" %}}
-
-{{% observability_pipelines/destination_env_vars/amazon_opensearch %}}
-
-{{% /tab %}}
-{{% tab "New Relic" %}}
-
-{{% observability_pipelines/destination_env_vars/new_relic %}}
 
 {{% /tab %}}
 {{< /tabs >}}
