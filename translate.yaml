@@ -20,14 +20,10 @@ ignores:
   - "content/en/api/v1/**/*.md"
   - "content/en/api/v2/**/*.md"
   - "config/_default/menus/menus.en.yaml"
-  - "**/*.fr.md"
-  - "**/*.fr.yaml"
-  - "**/*.fr.json"
-  - "**/fr.json"
-  - "**/*.ja.md"
-  - "**/*.ja.yaml"
-  - "**/*.ja.json"
-  - "**/ja.json"
+  - "**/*.{fr,ja,ko,es}.md"
+  - "**/*.{fr,ja,ko,es}.yaml"
+  - "**/*.{fr,ja,ko,es}.json"
+  - "**/{fr,ja,ko,es}.json"
 
 # These files will be uploaded to Transifex for translation when syncing.
 sources:
