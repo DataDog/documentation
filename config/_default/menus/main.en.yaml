@@ -4145,21 +4145,21 @@ menu:
       parent: llm_obs
       identifier: llm_obs_submit_evaluations
       weight: 5
-    - name: RAGAS Integration
-      url: llm_observability/ragas_integration/
+    - name: Ragas Evaluations
+      url: llm_observability/ragas_evaluations/
       parent: llm_obs
-      identifier: llm_obs_ragas_integration
-      weight: 5
+      identifier: llm_obs_ragas_evaluation
+      weight: 6
     - name: Cluster Map
       url: llm_observability/cluster_map/
       parent: llm_obs
       identifier: llm_obs_cluster_map
-      weight: 6
+      weight: 7
     - name: Guides
       url: llm_observability/guide/
       parent: llm_obs
       identifier: llm_obs_guide
-      weight: 7
+      weight: 8
     - name: CI Visibility
       url: continuous_integration/
       pre: ci

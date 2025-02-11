@@ -1,6 +1,9 @@
 ---
 title: Ragas Evaluations
-description: Monitor your RAG applications for hallucinations with LLM Observability's integration with the RAGAS evaluation framework.
+further_reading:
+    - link: '/llm_observability/submit_evaluations'
+      tag: 'Documentation'
+      text: 'Submit Evaluations'
 ---
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">LLM Observability is not available in the selected site ({{< region-param key="dd_site_name" >}}).</div>
@@ -8,63 +11,13 @@ description: Monitor your RAG applications for hallucinations with LLM Observabi
 
 ## Overview
 
-<!-- <div class="alert alert-warning">
-The RAGAS integration is only tested for ragas==0.1.*
-</div> -->
+[Ragas][1] is an evaluation framework for retrieval augmented generation (RAG) applications. Datadog's Ragas integration enables you to evaluate your production application with faithfulness, answer relevancy, and context precision scores. You can use these scores to find traces that have a high likelihood of inaccurate answers and review them to improve your RAG pipeline.
+
+For a simplified setup guide, see [Ragas Quickstart][7].
 
 <div class="alert alert-warning">
-Datadog recommends that you use sampling for Ragas evaluations.These LLM-as-a-judge evaluations are powered by your LLM provider's account. Evaluations are automatically traced and sent to Datadog. These traces contain LLM spans, which may affect your LLM Observability billing.
+Datadog recommends that you use sampling for Ragas evaluations. These LLM-as-a-judge evaluations are powered by your LLM provider's account. Evaluations are automatically traced and sent to Datadog. These traces contain LLM spans, which may affect your LLM Observability billing. See <a href="#Sampling">Sampling</a>.
 </div>
-
-Monitor the performance of your retrieval augmented generation (RAG) applications in production with LLM Observability's integration with the [Ragas][1] evaluation framework.
-
-[Ragas][1] is an evaluation framework for retrieval augmented generation (RAG) applications. Datadog's Ragas integration enables you to evaluate your production application with faithfulness, answer relevancy, and context precision scores. You can use these scores to find traces that have high likelihood of inaccurate answers and review them to improve your RAG pipeline.
-
-
-## Quickstart
-
-1. Install required dependencies:
-    ```bash
-    pip install ragas==0.1.21 openai ddtrace>=3.0.0
-    ```
-
-2. Create a file named `quickstart.py` with the following code:
-    ```python
-    import os
-    from ddtrace.llmobs import LLMObs
-    from ddtrace.llmobs.utils import Prompt
-    from openai import OpenAI
-
-    LLMObs.enable(
-        ml_app="test-rag-app",
-        agentless_enabled=True,
-    )
-
-    oai_client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
-
-    rag_context = "The First AFL–NFL World Championship Game was an American football game played on January 15, 1967, at the Los Angeles Memorial Coliseum in Los Angeles"
-
-    with LLMObs.annotation_context(
-        prompt=Prompt(variables={"context": rag_context}),
-    ):
-        completion = oai_client.chat.completions.create(
-            model="gpt-3.5-turbo",
-            messages=[
-                {"role": "system", "content": "Answer the user's question given the following context information {}".format(rag_context)},
-                {"role": "user", "content": "When was the first superbowl?"},
-            ],
-        )
-    ```
-
-3. Run the script with Ragas faithfulness evaluation enabled:
-    ```bash
-    DD_LLMOBS_EVALUATORS=ragas_faithfulness DD_ENV=dev DD_API_KEY=<YOUR-DD-API-KEY> DD_SITE=datadoghq.com python quickstart.py
-    ```
-
-4. View your results in the Datadog UI by navigating to your test-rag-app ML application. You should see your traced LLM calls with faithfulness scoring at:
-    ```
-    https://<YOUR-DATADOG-SITE-URL>/llm/traces?query=%40ml_app%3Atest-rag-app
-    ```
 
 ## Evaluations
 
@@ -83,18 +36,19 @@ For more information, see [Ragas' Faithfulness documentation][2].
 
 The _Answer Relevancy_ (or _Response Relevancy_) score assesses how pertinent the generated answer is to the given prompt. A lower score is assigned to answers that are incomplete or contain redundant information, and higher scores indicate better relevancy. This metric is computed using the question, the retrieved contexts, and the answer.
 
-The Answer Relevancy score is defined as the mean cosine similarity of the original question to a number of artificial questions, which were generated (reverse engineered) based on the response.
+The Answer Relevancy score is defined as the mean cosine similarity of the original question to a number of artificial questions, which are generated (reverse engineered) based on the response.
 
 For more information, see [Ragas' Answer Relevancy documentation][3].
 
 ### Context Precision 
 
-The _Context Precision_ score assesses if the context was useful in arriving at the given answer. This is computed by dividing the number of relevant contexts by the total number of contexts.
+The _Context Precision_ score assesses if the context was useful in arriving at the given answer. 
 
-This score is modified from Ragas' original Context Precision metric, which computes the mean of the precision@k for each chunk in the context, where presicion@k is the ratio of the number of relevant chunks at rank _k_ to the total number of chunks at rank _k_.
+This score is modified from Ragas' original Context Precision metric, which computes the mean of the Precision@k for each chunk in the context. Precision@k is the ratio of the number of relevant chunks at rank _k_ to the total number of chunks at rank _k_.
+
+Datadog's Context Precision score is computed by dividing the number of relevant contexts by the total number of contexts.
 
 For more information, see [Ragas' Context Precision documentation][4].
-
 
 ## Setup 
 
@@ -106,108 +60,61 @@ Datadog's Ragas evaluations require `ragas` v0.1+.
    pip install ragas==0.1.21 openai ddtrace==2.17.0
    {{< /code-block >}}
 
-   The Ragas integration automatically runs evaluations in the background of your application. By default, Ragas uses OpenAI's GPT-4 model for evaluations, which requires the `OPENAI_API_KEY` to be set. You can also [customize RAGAS](#customizing-ragas) to use a different LLM.
+   The Ragas integration automatically runs evaluations in the background of your application. By default, Ragas uses OpenAI's GPT-4 model for evaluations, which requires you to set an `OPENAI_API_KEY` in your environment. You can also [customize Ragas](#customizations) to use a different LLM.
 
-2. **Instrument RAG contexts**. 
+2. **Instrument your LLM calls with RAG context information**. Datadog's Ragas integration attempts to extract context information from the prompt variables attached to a span.  
 
-<!-- ### Prerequisites
-- Your application's LLM calls are instrumented.
-  
-   For example:
+   **Examples**:
+   {{< tabs >}}
+   {{% tab "Auto-instrumentation" %}}
+   ```python
+   from ddtrace.llmobs import LLMObs
+   from ddtrace.llmobs.utils import Prompt
 
-    ```python
-    from ddtrace.llmobs import LLMObs
-    from ddtrace.llmobs.utils import Prompt
+   with LLMOBs.annotation_context(
+       prompt=Prompt(
+           variables={"context": "rag context here"},
+           rag_context_variable_keys = ["context"], # defaults to ['context']
+           rag_query_variable_keys = ["question"], # defaults to ['question']
+       ),
+       name="generate_answer",
+   ):
+       oai_client.chat.completions.create(...) 
+   ```
+   {{% /tab %}}
+   {{% tab "Manual instrumentation" %}}
+   ```python
+   from ddtrace.llmobs import LLMObs
+   from ddtrace.llmobs.utils import Prompt
 
-    # if your llm call is auto-instrumented:
-    oai_client.chat.completions.create(...)
+   @llm(model = "llama")
+   def generate_answer():
+       ...
+       LLMObs.annotate(
+           prompt=Prompt(variables={'context': "rag context..."})
+       )
+   ```
+   {{% /tab %}}
+   {{< /tabs >}}
 
-    # if your llm call is manually instrumented:
-    @llm(model = "llama")
-    def generate_answer():
-        ...
-    ```
+3. (Optional, but recommended) **Enable sampling**. Datadog traces Ragas score generation. These traces contain LLM spans, which may affect your LLM Observability billing. See [Sampling](#Sampling).
 
-- `ragas` v0.1+
-
-{{< tabs >}}
-{{% tab "Installation Command" %}}
-```bash
-pip install ragas==0.1.21 openai ddtrace==2.17.0
-```
-{{% /tab %}}
-{{< /tabs >}} -->
-
-
-
-### Instrumenting RAG Contexts
-
-RAGAS scoring requires LLM spans to be instrumented with the RAG context used in the generation.
-
-RAG context should be logged in an LLM span's prompt variables. A prompt consists of a template, template variables, version, and id.
-
-The RAGAS integration will try to extract context information from the prompt variables attached to a span.
-
-You can specify which variables store ground truth context information for the LLM call using the `context_variable_keys` field of a prompt. If not specified, we'll assume the context information is stored in the `context` variable key.
-
-{{< tabs >}}
-{{% tab "Auto-instrumented Example" %}}
-```python
-from ddtrace.llmobs import LLMObs
-from ddtrace.llmobs.utils import Prompt
-
-# if your llm call is auto-instrumented...
-with LLMOBs.annotation_context(
-    prompt=Prompt(
-        variables={"context": "rag context here"},
-        rag_context_variable_keys = ["context"], # defaults to ['context']
-        rag_query_variable_keys = ["question"], # defaults to ['question']
-    ),
-    name="generate_answer",
-):
-    oai_client.chat.completions.create(...) # autoinstrumented llm call
-```
-{{% /tab %}}
-{{% tab "Manually Instrumented Example" %}}
-```python
-# if your llm call is manually instrumented ...
-@llm(model = "llama")
-def generate_answer():
-    ...
-    LLMObs.annotate(
-        prompt=Prompt(variables={'content': "rag context..."})
-    )
-```
-{{% /tab %}}
-{{< /tabs >}}
-
+3. **Run your script and specify enabled Ragas evaluators**. Use the environment variable `DD_LLMOBS_EVALUATIONS` to provide a comma-separated list of Ragas evaluators you wish to enable. These evaluators are `ragas_faithfulness`, `ragas_context_precision`, and `ragas_answer_relevancy`.
+   
+   For example, to run your script with all Ragas evaluators enabled:
+   ```bash
+   DD_LLMOBS_EVALUATORS="ragas_faithfulness,ragas_context_precision,ragas_answer_relevancy" \
+   DD_ENV=dev \
+   DD_API_KEY=<YOUR_DATADOG_API_KEY> \
+   DD_SITE={{< region-param key=dd_site code="true" >}} \
+   python driver.py
+   ```
 
 ### Configuration 
 
-#### Enabling Evaluations
+#### Sampling
 
-Enable RAGAS evaluations through the `DD_LLMOBS_EVALUATORS` environment variable.
-
-This environment variable should be set to a valid comma-separated list of evaluator labels.
-
-| Variable | Description | Default | Valid Evaluator Labels |
-|----------|-------------|---------|--------------|
-| `DD_LLMOBS_EVALUATORS` | Comma-separated list of enabled RAGAS evaluators | `""` | - `ragas_faithfulness`<br>- `ragas_context_precision`<br>- `ragas_answer_relevancy` |
-
-Example of enabling all RAGAS evaluators:
-```bash
-DD_LLMOBS_EVALUATORS="ragas_faithfulness,ragas_context_precision,ragas_answer_relevancy"
-DD_LLMOBS_ENABLED=1 DD_LLMOBS_ML_APP=test-rag-app \
-DD_API_KEY=<YOUR_DATADOG_API_KEY> \
-DD_SITE=datadoghq.com \
-DD_LLMOBS_AGENTLESS_ENABLED=1 ddtrace-run python quickstart.py
-```
-
-#### Sampling Configuration
-
-To only enable RAGAS scoring on certain LLM calls, you can set sampling rules via the `DD_LLMOBS_EVALUATORS_SAMPLING_RULES` environment variable.
-
-The `DD_LLMOBS_EVALUATORS_SAMPLING_RULES` variable controls evaluation sampling using a JSON array of rules. Each rule requires:
+To enable Ragas scoring for a sampled subset of LLM calls, use the `DD_LLMOBS_EVALUATORS_SAMPLING_RULES` environment variable. Pass in a list of arrays, each containing the following fields:
 
 | Field | Description | Required | Type |
 |-------|-------------|----------|------|
@@ -215,9 +122,9 @@ The `DD_LLMOBS_EVALUATORS_SAMPLING_RULES` variable controls evaluation sampling 
 | `evaluator_label` | RAGAS evaluator to apply rule to | No | String |
 | `span_name` | Name of spans to apply rule to | No | String |
 
-Example of sampling configuration:
+In the following example, Ragas Faithfulness scoring is enabled for 50% of all `answer_question` spans. Ragas evaluations are disabled for all other spans (`"sample_rate": 0`).
+
 ```bash
-# Sample faithfulness evaluations at 50% for 'answer_question' spans only
 export DD_LLMOBS_EVALUATORS_SAMPLING_RULES='[
   {
     "sample_rate": 0.5,
@@ -230,10 +137,9 @@ export DD_LLMOBS_EVALUATORS_SAMPLING_RULES='[
 ]'
 ```
 
+#### Customization
 
-## Customizing RAGAS
-
-[Customizations][5] applied to the global ragas instance will also be applied to Datadog's RAGAS evaluators:
+Ragas supports [customizations][5]. For example, the following snippet configures the Faitfulness evaluator to use `gpt-4` and adds custom instructions for the prompt to the evaluating LLM:
 
 ```python
 from langchain_openai import ChatOpenAI
@@ -244,37 +150,46 @@ faithfulness.llm = LangchainLLMWrapper(ChatOpenAI(model="gpt-4"))
 faithfulness.statement_prompt.instruction += "\nMake sure text containing code instructions are grouped with contextual information on how to run that code."
 ```
 
-## Viewing Results
+Any customizations you make to the global Ragas instance are automatically applied to Datadog's Ragas evaluators. No action is required.
 
-### Seeing RAGAS Scores in the UI
+## View Ragas evaluations in Datadog
 
-RAGAS scores are sent to Datadog as an evaluation metric.
+Ragas scores are sent to Datadog as evaluation metrics. When you view a scored trace in LLM Observability, Ragas scores appear under **Custom Evaluations**.
 
-You can view these scores on the traces page:
+{{< img src="llm_observability/ragas/trace-ragas-view.png" alt="A detailed trace view in LLM Observability. Under the Trace tab, a table titled Custom Evaluations. The table contains an evaluation named ragas_answer_relevancy with a score of 0.966." style="width:100%;" >}}
 
-1. Switch to all spans view
-2. Filter for LLM spans 
-3. Add your desire ragas metric as a column to the traces table 
+You can also configure your LLM Traces page to display Ragas scores.
 
-### RAGAS Traces
+1. Go to the [LLM Observability Traces][6] page in Datadog.
+1. Search for `@meta.span.kind:llm` in **All Spans** to view only LLM spans.
+1. Add `-runner.integration:ragas` to the search field. Datadog automatically traces the generation of Ragas scores. Use this exclusion term to filter out these traces.
+1. Select **Custom Evaluations** and enable your desired Ragas evaluations. These scores are then displayed in additional columns on the LLM Observability Traces page.
 
-RAGAS scores are generated using LLM-powered workflows. Datadog automatically traces these operations to generate scores and surfaces them under same ML Application name. To filter these traces out, exclude spans tagged with 
-`runner.integration:ragas`.
+{{< img src="llm_observability/ragas/traces-ragas-columns.png" alt="The Traces view in LLM Observability. The search bar contains '@meta.span.kind:llm -runner.integration:ragas' and the In field is set to All Spans. The Custom Evaluations button is selected, and a modal titled Custom Evaluation Columns is open. In this modal, three list items are toggled on: ragas_faithfulness, ragas_answer_relevancy, ragas_context_precision." style="width:100%;" >}}
+
 
 ## Troubleshooting
 
-### Missing Evaluations
+### Missing evaluations
 
-Your LLM inference could be missing an evaluation because:
+Your LLM inference could be missing an evaluation for the following reasons:
 
-1. The LLM span was not sampled for an evaluation given you have implemented [sampling](#sampling)
-2. An error occurred during the RAGAS evaluation. You can search for traces of 
-the ragas evaluation via the `runner.integration:ragas` tag.
+- The LLM span was not sampled for an evaluation because you have implemented [sampling](#sampling)
+- An error occurred during the Ragas evaluation. Search for `runner.integration:ragas` to see traces for the Ragas evaluation itself.
 
-The `LLMObs.flush()` command is also a useful tool to guarantee all traces & evaluations are flushed to Datadog. Keep in mind that this is a blocking function.
+### Flushing
+
+Use the `LLMObs.flush()` command to guarantee all traces and evaluations are flushed to Datadog. 
+**Note**: This is a blocking function.
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/explodinggradients/ragas
 [2]: https://docs.ragas.io/en/latest/concepts/metrics/available_metrics/faithfulness/
 [3]: https://docs.ragas.io/en/latest/concepts/metrics/available_metrics/answer_relevance/
 [4]: https://docs.ragas.io/en/latest/concepts/metrics/available_metrics/context_precision/
 [5]: https://docs.ragas.io/en/stable/howtos/customizations/
+[6]: https://app.datadoghq.com/llm/traces
+[7]: /llm_observability/guide/ragas_quickstart
