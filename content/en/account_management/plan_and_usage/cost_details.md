@@ -37,7 +37,7 @@ Use the cost summary to:
 
 ### Projected Costs (parent organization)
 
-Projected end-of-month costs are calculated by applying the current month's projected usage data against your contracted rates. Projections are available around the 12th of the month and are updated daily. Projected end-of-month costs may change over time, depending on your usage throughout the month. Because the costs are a prediction, the amount may differ from your finalized monthly cost. 
+Projected end-of-month costs are calculated by applying the prior and current month's projected usage data against your contracted rates. Projected end-of-month costs are updated daily and may change over time, depending on your usage throughout the month. Because the costs are a prediction, the amount may differ from your finalized monthly cost. 
 
 ### Cost Summary (parent organization)
 
@@ -68,6 +68,8 @@ To download the data as a comma separated value file, click **Download as CSV**.
 To query estimated cost data through the API, see [Get estimated cost across your account][3]. To query projected cost data through the API, see [Get projected cost across your account][6].
 
 ### Cost Summary (sub-organization)
+
+<div class="alert alert-warning">This feature is in limited availability. To request access and confirm your organization meets the feature criteria, contact your account representative or <a href="https://docs.datadoghq.com/help/">Customer Support</a>.</div>
 
 As a sub-organization, you can view the costs for your organization only. This restriction allows for more distributed ownership and removes the need to grant broader Admin permissions to the parent organization.
 

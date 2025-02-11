@@ -317,16 +317,10 @@ get_latest_release() {
 
 get_architecture() {
   case "$(uname -m)" in
-    aarch64)
+    aarch64|arm64)
       echo "arm64"
       ;;
-    arm64)
-      echo "arm64"
-      ;;
-    x86_64)
-      echo "amd64"
-      ;;
-    amd64)
+    x86_64|amd64)
       echo "amd64"
       ;;
     *)
@@ -378,16 +372,77 @@ http {
 
 ## Ingress-NGINX Controller for Kubernetes
 
-### Controller v1.10.0+
+Datadog offers support for monitoring the Ingress-NGINX controller in Kubernetes.
+Choose from the following instrumentation methods based on your controller version and requirements:
 
-<div class="alert alert-warning">
-  <strong>Important Note:</strong> With the release of <b>v1.10.0</b>, the Ingress controller's OpenTracing and Datadog integration have been deprecated. As an alternative, the OpenTelemetry integration is recommended.<br><br>
-  For older versions, see the <a href="#controller-v190-and-older">OpenTracing-based instructions</a>.
-</div>
+- [v1.10.0+ using Datadog's features](#controller-v1100-using-datadogs-features).
+- [v1.10.0+ using OpenTelemetry](#controller-v1100-using-opentelemetry).
+- [v1.9.0 and older](#controller-v190-and-older).
 
-**1. Prepare the Datadog Agent:** Ensure that your Datadog Agent has [gRPC OTLP Ingestion enabled][5] to act as an OpenTelemetry Collector.
+### Controller v1.10.0+ using Datadog's features
 
-**2. Configure the Ingress controller:** To begin, verify that your Ingress controller's pod spec has the `HOST_IP` environment variable set. If not, add the following entry to the `env` block within the pod's specification:
+This instrumentation method uses [nginx-datadog][6] and leverages Kubernetes [init-container][7] mechanism
+to install the module within the Ingress-NGINX Controller instance.
+
+To instrument Ingress-NGINX **v1.10.0+** using Datadog's module, follow these steps:
+1. **Verify your Ingress-NGINX version**<br>
+Check your Ingress-NGINX Controller version and ensure you have the matching Datadog init-container available. The init-container version ([datadog/ingress-nginx-injection][8]) must exactly match your controller version to prevent startup issues.
+For example, if you're running Ingress-NGINX v1.11.3, you need [datadog/ingress-nginx-injection:v1.11.3][9].
+
+2. **Modify your controller's pod specification:**<br>
+Update the controller pod specification to include the init-container and configure the Datadog Agent host environment variable:
+
+    ```yaml
+    spec:
+      template:
+        spec:
+          initContainers:
+            - name: init-datadog
+              image: datadog/ingress-nginx-injection:<MY_INGRESS_NGINX_VERSION>
+              command: ['/datadog/init_module.sh', '/opt/datadog-modules']
+              volumeMounts:
+                - name: nginx-module
+                  mountPath: /opt/datadog-modules
+          containers:
+            - name: controller
+              image: registry.k8s.io/ingress-nginx/controller:<MY_INGRESS_NGINX_VERSION>
+              env:
+                - ...
+                - name: DD_AGENT_HOST
+                  valueFrom:
+                    fieldRef:
+                      fieldPath: status.hostIP
+    ```
+    **Note**: For an alternative way to access the Datadog Agent, see the [Kubernetes installation guide][8].
+
+3. **Configure Ingress-NGINX** <br>
+Create or modify the `ConfigMap` to load the Datadog module:
+
+    ```yaml
+    kind: ConfigMap
+    apiVersion: v1
+    ...
+    data:
+      enable-opentelemetry: "false"
+      error-log-level: notice
+      main-snippet: |
+        load_module /opt/datadog-modules/ngx_http_datadog_module.so;
+    ```
+
+4. **Apply the ConfigMap** <br>
+Apply the updated `ConfigMap` to ensure the Datadog module is correctly loaded.
+
+This configuration ensures that the Datadog module is loaded and ready to trace incoming requests.
+
+
+### Controller v1.10.0+ using OpenTelemetry
+
+**1. Prepare the Datadog Agent** <br>
+Ensure that your Datadog Agent has [gRPC OTLP Ingestion enabled][5] to act as an OpenTelemetry Collector.
+
+**2. Configure the Ingress controller** <br>
+To begin, verify that your Ingress controller's pod spec has the `HOST_IP` environment variable set. If not, add the following entry to the `env` block within the pod's specification:
+
 ```yaml
 - name: HOST_IP
   valueFrom:
@@ -461,6 +516,10 @@ The above overrides the default `nginx-ingress-controller.ingress-nginx` service
 [3]: https://hub.docker.com/layers/library/amazonlinux/2.0.20230119.1/images/sha256-db0bf55c548efbbb167c60ced2eb0ca60769de293667d18b92c0c089b8038279?context=explore
 [4]: https://github.com/DataDog/nginx-datadog/blob/master/doc/API.md
 [5]: /opentelemetry/otlp_ingest_in_the_agent/
+[6]: https://github.com/DataDog/nginx-datadog/
+[7]: https://kubernetes.io/docs/concepts/workloads/pods/init-containers/
+[8]: https://hub.docker.com/r/datadog/ingress-nginx-injection
+[9]: https://hub.docker.com/layers/datadog/ingress-nginx-injection/v1.11.3/images/sha256-19ea2874d8a4ebbe4de0bf08faeb84c755cd71f1e8740ce2d145c5cf954a33a1
 {{% /tab %}}
 
 {{% tab "Istio" %}}
@@ -662,7 +721,7 @@ Datadog provides an HTTPd [module][1] to enhance [Apache HTTP Server][2] and [IH
 
 ### Compatibility
 
-Since IHS HTTP Server is essentially a wrapper of the Appache HTTP Server, the module can also be used with IHS without any modifications.
+Since IHS HTTP Server is essentially a wrapper of the Apache HTTP Server, the module can also be used with IHS without any modifications.
 
 ### Installation
 

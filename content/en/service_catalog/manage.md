@@ -5,6 +5,8 @@ aliases:
   - /service_catalog/investigating/
   - /tracing/service_catalog/guides/understanding-service-configuration
   - /service_catalog/guides/understanding-service-configuration/
+  - /api_catalog/add_metadata
+  - /api_catalog/owners_and_tags
 further_reading:
 - link: "/tracing/service_catalog/service_definition_api/"
   tag: "Documentation"
@@ -33,6 +35,7 @@ algolia:
 `Service` is the only component type in Service Catalog schema versions v2, v2.1, and v2.2. [v3.0][10] and above supports multiple kinds of components, including `kind:system`, `kind:service`, `kind:queue`, `kind:api`, and `kind:datastore`.
 
 ## Assigning an owner 
+
 You can assign a `team` to entries in the Service Catalog either in the UI or by creating a [Service Definition][4]. Datadog recommends that you set up [Datadog Teams][5] so that you can specify individual members of the team and take advantage of *Teams* filters across common views like Dashboards and Notebook lists. 
 
 ## Determining and communicating criticality 
@@ -83,11 +86,6 @@ Click a service in Service Catalog to open the side panel with the following det
 - An interactive service map displaying services upstream and downstream from this service.
 - **Defined and Related Dashboards** showing a list of pre-defined and Watchdog recommended dashboards when available. 
 - **Service Scorecards** showing a snapshot of the service's scores and last evaluation timestamp.
-- **Active library configuration** for Java and .NET services with the latest Agent configured with [Remote Configuration][1] enabled, you can adjust the [trace sampling rate][3] (from 0.0 to 1.0), enable [Log Injection][2] to correlate traces and logs data, and specify HTTP header tags to be applied to all traces coming into Datadog from this service. In the Setup Guidance tab, beside **Active Library Configuration**, click **Edit** to change these settings and immediately apply them without restarting the service.
-
-  {{< img src="tracing/service_catalog/service_details_remote_config.png" alt="Configuration options for the service in the Datadog UI" style="width:80%;" >}}
-
-Click **View Related** and select a page from the dropdown menu to navigate into related pages in Datadog, such as the [APM Service Page][6] and service map for this service, or related telemetry data pages, such as for distributed tracing, infrastructure, network performance, Log Management, RUM, and Continuous Profiler.
 
 ## Further reading
 

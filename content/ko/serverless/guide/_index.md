@@ -20,7 +20,7 @@ title: 서버리스 모니터링 지침
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Azure App Service and Container Apps" >}}
-    {{< nextlink href="/serverless/guide/azure_app_service_linux_sidecar" >}}Azure Sidecar을 사용해 Azure App Service에서 Linux 컨테이너 계측하기{{< /nextlink >}}
+    {{< nextlink href="/serverless/guide/azure_app_service_linux_containers_serverless_init" >}}서버리스 init Linux 컨테이너로 Azure 앱 서비스 계측{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Datadog Forwarder를 사용해 설치

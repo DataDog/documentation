@@ -21,6 +21,10 @@ further_reading:
       text: "Reimagining the way you run operations with autonomous investigations"
 ---
 
+{{< site-region region="gov" >}}
+Bits AI is not available for the selected site ({{< region-param key="dd_site_name" >}}).
+{{< /site-region >}}
+
 Bits AI is a platform-wide copilot that helps you identify and remediate issues in your applications and infrastructure. You can query Bits AI in the Datadog web app, the Datadog mobile app, and in Slack.
 
 For detailed setup and usage instructions, see the [Getting Started][1] documentation.

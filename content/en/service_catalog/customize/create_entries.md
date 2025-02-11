@@ -5,6 +5,7 @@ aliases:
   - /service_catalog/setup
   - /service_catalog/create_entries/
   - /service_catalog/enrich_default_catalog/create_entries
+  - /api_catalog/add_entries
 further_reading:
 - link: "https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/service_definition_yaml"
   tag: "External Site"
@@ -22,9 +23,9 @@ further_reading:
 
 ## Create user-defined entries 
 
-To manage your own components that are not currently emitting performance metrics through APM, USM, or RUM products with Datadog Service Catalog, you can either manually add them by creating Service Definitions through the API or GitHub integration or [import](#import-data-from-other-sources) them from existing sources like ServiceNow or Backstage. These services are by default not associated with any Datadog telemetry, but you can link telemetries from Datadog or external sources manually using `service.datadog.yaml` files. 
+To manage your own components that are not currently emitting performance metrics through APM, USM, or RUM products with Datadog Service Catalog, you can either manually add them by creating Service Definitions through the API, Terraform, GitHub integration, or [import](#import-data-from-other-sources) them from existing sources like ServiceNow or Backstage. These services are by default not associated with any Datadog telemetry, but you can link telemetries from Datadog or external sources manually using entity definition YAML files. 
 
-To create a user-defined service, name your service in the `dd-service` field in a `service.datadog.yaml` file at the root of the repository, using one of the supported metadata schema versions. For example: 
+To create a user-defined component, name your component in the `dd-service` (if using schema version v2.2 or prior) or `name` field (if using schema version v3.0 or later) in a `service.datadog.yaml` or `entity.datadog.yaml` file using one of the supported metadata schema versions. Datadog accepts both `service.datadog.yaml` and `entity.datadog.yaml` file names. For example: 
 
 #### Example
 {{< code-block lang="yaml" filename="service.datadog.yaml" collapsible="true" >}}

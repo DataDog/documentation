@@ -25,7 +25,7 @@ By following these principles, you'll create a monitor that delivers meaningful 
 
 The [Manage Monitor][1] page displays the monitor's title, tags, teams, and other fields. For a full list of attributes, see the [Search Monitors][2] documentation. Having a  clear, descriptive title is important because it immediately communicates the monitor's purpose and what it tracks. A well-defined title helps users quickly identify the monitor's focus. A clear title also ensures that all team members, regardless of role and persona, can understand the monitor's function at a glance. 
 
-**Note**: A monitor’s title and the notification subject are the same, so avoid adding too many variables to either.
+**Note**: A monitor's title and the notification subject are the same, so avoid adding too many variables to either.
 
 ## Use multi-alert
 
@@ -50,11 +50,11 @@ To confirm if your monitors are well-configured, use [Monitor Quality][5]. It id
 
 For more information, see the [Monitor Quality][6] documentation.
 
-## Recommended Monitors
+##  Monitor templates
 
 If you are unsure where to start when creating a monitor, use Datadog's pre-built [Recommended Monitors][7]. They provide guidelines on titles, notifications, metrics and thresholds.
 
-For more information, see the [Recommended Monitors][8] documentation.
+For more information, see the [Monitor templates][8] documentation.
 
 ## Further reading
 
@@ -67,4 +67,4 @@ For more information, see the [Recommended Monitors][8] documentation.
 [5]: https://app.datadoghq.com/monitors/quality
 [6]: /monitors/quality/
 [7]: https://app.datadoghq.com/monitors/recommended
-[8]: /monitors/recommended/
+[8]: /monitors/templates/

@@ -4,6 +4,7 @@ on:
     paths:
     - 'content/en/**/*'
     - 'layouts/shortcodes/**/*.md'
+    - '!**/*.json'
 
 permissions:
   contents: read
@@ -32,7 +33,7 @@ jobs:
     - uses: actions/setup-python@v5.1.0
       with:
         python-version: '3.11'
-    - run: pip install vale
+    - run: pip install vale==3.9.1
 
     - name: Edit StylesPath in Vale config file
       run: sed -i 's/\.\.\/datadog-vale\/styles/datadog-vale\/styles/' .vale.ini
@@ -42,15 +43,17 @@ jobs:
       uses: hestonhoffman/changed-lines@v1
       with:
         file_filter: '.md, .html'
-      
+  
     - name: Run vale on changed files
+      if: steps.changed_lines.outputs.changed_files
       env: 
         CHANGED_FILES: ${{ steps.changed_lines.outputs.changed_files }}
       run: |
         vale "${CHANGED_FILES}" \
           --output=local/bin/py/vale/vale_template.tmpl --no-exit > vale_output.log
-    
+
     - name: Parse Vale output
+      if: steps.changed_lines.outputs.changed_files
       env:
         CHANGED_LINES: ${{ steps.changed_lines.outputs.changed_lines }}
       run: |

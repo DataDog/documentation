@@ -62,7 +62,9 @@ Then, to send your Step Functions logs to Datadog:
 
 5. To enable tracing, you have two options:
    - **Per Step Function**: Add the `DD_TRACE_ENABLED` tag to each Step Function and set the value to `true`.
-   - **At the Forwarder level**: Set the `DdStepFunctionsTraceEnabled` parameter in the Datadog Forwarder to enable tracing for all Step Functions connected to the Forwarder.
+   - **At the Forwarder level**: To enable tracing for all Step Functions connected to the Forwarder, you have two options:
+     - When creating the CloudFormation stack for the forwarder, set the `DdStepFunctionsTraceEnabled` parameter to `true`.
+     - After the forwarder is created, set the environment variable `DD_STEP_FUNCTIONS_TRACE_ENABLED` to `true`.
 
    <div class="alert alert-info">If you enable tracing (which automatically includes enhanced metrics), you are billed for both Serverless Workload Monitoring and Serverless APM. See <a href="https://www.datadoghq.com/pricing/?product=serverless-monitoring#products">Pricing</a>.</div>
 
@@ -75,7 +77,7 @@ See [Merge Step Functions traces with Lambda traces][11]. Ensure that you have a
 
 ### Sample traces
 
-To manage the APM traced invocation sampling rate for serverless functions, set the `DD_TRACE_SAMPLE_RATE` environment variable on the function to a value between 0.000 (no tracing of Step Function invocations) and 1.000 (trace all Step Function invocations). 
+To manage the APM traced invocation sampling rate for serverless functions, set the `DD_TRACE_SAMPLE_RATE` environment variable on the function to a value between 0.00 (no tracing of Step Function invocations) and 1.00 (trace all Step Function invocations). 
 
 The dropped traces are not ingested into Datadog. 
 

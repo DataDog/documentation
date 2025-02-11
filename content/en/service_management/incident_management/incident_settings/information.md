@@ -43,6 +43,7 @@ For the Declare Incident Helper Text settings, you can customize the helper text
 | Private&nbsp;Incidents | Enable users in your organization to make incidents private and to delete incidents. Private Incidents gives users the ability to limit access to incidents with sensitive information so that only responders of the incident can see it the details. Any previously created notification rules will not be sent when an incident is private.|
 | Incident&nbsp;Deletion | Incident Deletion gives users the ability to remove the incidents from the UI, including the analytics. By default, incident deletion is disabled. |
 | Portmortem&nbsp;Generation Anytime| Enable users to to generate a postmortem regardless of the incident status. When this setting is disabled, users can only generate postmortems after an incident has been resolved. |
+| Override Status Timestamps | Enable users to override the detection, declaration, and resolution timestamps of an incident. If an override is set, the new timestamp applies in incident search and analytics. |
 
 
 [1]: https://app.datadoghq.com/incidents/settings#Information

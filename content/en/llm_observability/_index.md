@@ -68,8 +68,6 @@ For more information, see the [Auto Instrumentation documentation][8].
 
 ## Ready to start?
 
-<div class="alert alert-warning">By using LLM Observability, you acknowledge that Datadog is authorized to share your company's data with OpenAI LLC for the purpose of providing and improving LLM Observability. OpenAI will not use your data for training or tuning purposes. If you have any questions or want to opt out of features that depend on OpenAI, reach out to your account representative.</div>
-
 See the [Setup documentation][5] for instructions on instrumenting your LLM application or follow the [Trace an LLM Application guide][6] to generate a trace using the [LLM Observability SDK for Python][3].
 
 ## Further Reading

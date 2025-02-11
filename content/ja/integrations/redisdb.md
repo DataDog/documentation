@@ -21,7 +21,7 @@ assets:
     source_type_id: 21
     source_type_name: Redis
   monitors:
-    '[Redis] High memory consumption': assets/monitors/high_mem.json
+    Memory consumption is high: assets/monitors/high_mem.json
   saved_views:
     error_warning_status: assets/saved_views/error_warning_status.json
     pid_overview: assets/saved_views/pid_overview.json
@@ -37,7 +37,7 @@ categories:
 - data stores
 - log collection
 - tracing
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/redisdb/README.md
 display_on_public_website: true
@@ -45,7 +45,7 @@ draft: false
 git_integration_title: redisdb
 integration_id: redis
 integration_title: Redis
-integration_version: 5.7.0
+integration_version: 7.1.0
 is_public: true
 manifest_version: 2.0.0
 name: redisdb
@@ -94,7 +94,7 @@ Redis をデータベース、キャッシュ、メッセージキューとし�
 
 ## セットアップ
 
-### Installation
+### インストール
 
 Redis チェックは [Datadog Agent][1] パッケージに含まれています。Redis サーバーに追加でインストールする必要はありません。
 
@@ -238,7 +238,7 @@ Agent コンテナで必要な環境変数
 
 ##### メトリクスの収集
 
-To collect metrics, set the following parameters and values in an [Autodiscovery template][1]. You can do this with Kubernetes Annotations (shown below) on your Redis pod(s), or with a [local file, ConfigMap, key-value store, Datadog Operator manifest, or Helm chart][2].
+メトリクスを収集するには、[オートディスカバリーテンプレート][1]に以下のパラメーターと値を設定します。これは、Redis ポッドの Kubernetes アノテーション (下記参照) または[ローカルファイル、ConfigMap、キーバリューストア、Datadog Operator マニフェスト、または Helm チャート][2]を使用して行うことができます。
 
 | パラメーター            | 値                                                                      |
 | -------------------- | -------------------------------------------------------------------------- |
@@ -313,7 +313,7 @@ _Agent バージョン 6.0 以降で利用可能_
 
 Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集][5]を参照してください。
 
-Then, set the following parameter in an [Autodiscovery template][1]. You can do this with Kubernetes Annotations (shown below) on your Redis pod(s), or with a [local file, ConfigMap, key-value store, Datadog Operator manifest, or Helm chart][2].
+次に、[オートディスカバリーテンプレート][1]に以下のパラメーターを設定します。これは、Redis ポッドの Kubernetes アノテーション (下記参照) または[ローカルファイル、ConfigMap、キーバリューストア、Datadog Operator マニファスト、または Helm チャート][2]を使用して行うことができます。
 
 | パラメーター            | 値                                                                      |
 | -------------------- | -------------------------------------------------------------------------- |
@@ -352,7 +352,7 @@ Agent コンテナで必要な環境変数
 
 利用可能な環境変数とコンフィギュレーションの完全なリストについては、[Kubernetes アプリケーションのトレース][6]および [Kubernetes Daemon のセットアップ][7]を参照してください。
 
-Then, [instrument your application container that makes requests to Redis][8].
+そして、[Redis へのリクエストを作成するアプリケーションコンテナをインスツルメントします][8]。
 
 [1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/?tab=kubernetes
 [2]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/?tab=kubernetes#configuration
