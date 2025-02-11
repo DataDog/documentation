@@ -19,7 +19,6 @@ further_reading:
 Datadog Application Security provides observability into application-level attacks that aim to exploit code-level vulnerabilities or abuse the business logic of your application, and into any bad actors targeting your systems. It provides:
 
 - **Observability into attacks**: Provides insight into application-level attacks targeting code vulnerabilities or business logic.
-- **Vulnerability detection**: Identifies code and library vulnerabilities in your applications from development to runtime with [Code Security][29]
 - **Trace-based monitoring**: Utilizes the same tracing libraries as Datadog APM to monitor traffic and detect security threats.
 - **Security signals**: Automatically generates security signals when attacks or business logic abuses are detected, focusing on meaningful threats rather than individual attempts.
 - **Notification Options**: Offers notifications through Slack, email, or PagerDuty based on security signal settings.
@@ -36,14 +35,6 @@ Datadog Threat Monitoring and Detection identifies bad actors by collecting clie
 
 <div class="alert alert-info"><strong>1-Click Enablement</strong><br>
 If your service is running with <a href="/agent/remote_config/#enabling-remote-configuration">an Agent with Remote Configuration enabled and a tracing library version that supports it</a>, you can <a href="https://app.datadoghq.com/security/configuration/asm/setup">enable Application Security</a> from the Datadog UI without additional configuration of the Agent or tracing libraries.</div>
-
-### Identify vulnerabilities in open source libraries used by services
-
-Datadog [Software Composition Analysis][5] uses various known vulnerability data sources related to open source software libraries, plus information provided by the Datadog security research team, to match the libraries your application depends on at runtime with their potential vulnerabilities, and to make remediation recommendations.
-
-### Identify code-level vulnerabilities and open source risks in your services and repositories
-
-Datadog [Code Security][9] scans your first-party code and open source libraries used in your applications in both your repositories and running services, providing end-to-end visibility of application vulnerabilities from development to production.
 
 ## Compatibility
 
@@ -123,17 +114,11 @@ Datadog Application Security includes over 100 attack signatures that help prote
 * Cross-Site Scripting (XSS)
 * Server-side Request Forgery (SSRF)
 
-## Built-in vulnerability detection
-
-Datadog Application Security offers built-in detection capabilities that warn you about the vulnerabilities detected in your application code and open source dependencies. Details of that information are shown in the [Vulnerability Explorer][15], identifying the severity, affected services and repositories, and remediation instructions to solve the surfaced risks.
-
-To learn more about Datadog's vulnerability detection capabilities, visit [Code Security][29].
-
 ## API security
 
 <div class="alert alert-info">API security is in Preview.</div>
 
-Datadog Application Security provides visibility into threats targeting your APIs. Use the [API Catalog][27] to monitor API health and performance metrics, where you can view attacks targeting your APIs. This view includes the attacker's IP and authentication information, as well as request headers showing details about how the attack was formed. Using both Application Security and API management, you can maintain a comprehensive view of your API attack surface, and respond to mitigate threats.
+Datadog Application Security provides visibility into threats targeting your APIs. Use the [Endpoints list][27] in Service Catalog to monitor API health and performance metrics, where you can view attacks targeting your APIs. This view includes the attacker's IP and authentication information, as well as request headers showing details about how the attack was formed. Using both Application Security and API management, you can maintain a comprehensive view of your API attack surface, and respond to mitigate threats.
 
 ## How Datadog Application Security protects against Log4Shell
 
@@ -161,6 +146,6 @@ Datadog Application Security identifies Log4j Log4Shell attack payloads and prov
 [17]: /security/application_security/threats/library_configuration/#data-security-considerations
 [25]: /security/application_security/threats/add-user-info#adding-business-logic-information-login-success-login-failure-any-business-logic-to-traces
 [26]: /agent/remote_config/#enabling-remote-configuration
-[27]: /tracing/api_catalog/
+[27]: /service_catalog/endpoints/
 [28]: /security/code_security/iast/
 [29]: https://docs.datadoghq.com/security/code_security/

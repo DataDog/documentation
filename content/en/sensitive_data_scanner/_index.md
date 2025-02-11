@@ -32,6 +32,9 @@ further_reading:
     - link: "https://www.datadoghq.com/blog/sds-dlp-for-financial-service-companies/"
       tag: "Blog"
       text: "How financial services companies discover, classify, and manage sensitive data with Datadog"
+    - link: "https://www.datadoghq.com/blog/sds-for-insurance-companies/"
+      tag: "Blog"
+      text: "How insurance companies discover, classify, and act on sensitive data risks with Datadog"
 ---
 
 ## Overview

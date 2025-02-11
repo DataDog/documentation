@@ -972,6 +972,11 @@
     },
     {
       "group": "security_monitoring",
+      "suffix": "_1965169892",
+      "description": "Create a detection rule with type 'application_security 'returns \"OK\" response"
+    },
+    {
+      "group": "security_monitoring",
       "suffix": "_461183901",
       "description": "Create a detection rule with type 'impossible_travel' returns \"OK\" response"
     },
@@ -990,14 +995,14 @@
     {
       "group": "security_monitoring",
       "suffix": "",
-      "description": "Create a new signal-based rule returns \"Successfully created the notification rule.\" response"
+      "description": "Create a new signal-based notification rule returns \"Successfully created the notification rule.\" response"
     }
   ],
   "CreateVulnerabilityNotificationRule": [
     {
       "group": "security_monitoring",
       "suffix": "",
-      "description": "Create a new vulnerability-based rule returns \"Successfully created the notification rule.\" response"
+      "description": "Create a new vulnerability-based notification rule returns \"Successfully created the notification rule.\" response"
     }
   ],
   "CreateSecurityFilter": [
@@ -1044,14 +1049,14 @@
     {
       "group": "security_monitoring",
       "suffix": "",
-      "description": "Patch a signal-based rule returns \"Notification rule successfully patched.\" response"
+      "description": "Patch a signal-based notification rule returns \"Notification rule successfully patched.\" response"
     }
   ],
   "PatchVulnerabilityNotificationRule": [
     {
       "group": "security_monitoring",
       "suffix": "",
-      "description": "Patch a vulnerability-based rule returns \"Notification rule successfully patched.\" response"
+      "description": "Patch a vulnerability-based notification rule returns \"Notification rule successfully patched.\" response"
     }
   ],
   "RunHistoricalJob": [

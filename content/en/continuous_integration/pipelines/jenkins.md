@@ -539,7 +539,7 @@ def datadog = jenkins.getDescriptorByType(DatadogGlobalConfiguration)
 
 def agentHost = 'localhost' // Configure your Datadog Agent host
 def agentPort = 8125
-def agentLogCollectionPort = 8126 // (Optional) Configure logs collection port as configured in your Datadog Agent
+def agentLogCollectionPort = 10518 // (Optional) Configure logs collection port as configured in your Datadog Agent
 def agentTraceCollectionPort = 8126 // Configure traces collection port
 datadog.datadogClientConfiguration = new DatadogAgentConfiguration(agentHost, agentPort, agentLogCollectionPort, agentTraceCollectionPort)
 

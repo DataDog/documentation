@@ -2774,32 +2774,32 @@ menu:
       parent: infrastructure_heading
       weight: 40000
     - name: ネットワークパフォーマンスモニタリング
-      url: network_monitoring/performance/
+      url: network_monitoring/cloud_network_monitoring/
       parent: nm_parent
       identifier: npm
       weight: 1
     - name: セットアップ
-      url: network_monitoring/performance/setup/
+      url: network_monitoring/cloud_network_monitoring/setup/
       parent: npm
       identifier: npm_setup
       weight: 101
     - name: Overview Page
-      url: network_monitoring/performance/overview_page/
+      url: network_monitoring/cloud_network_monitoring/overview_page/
       parent: npm
       identifier: npm_overview_page
       weight: 102
     - name: Network Analytics
-      url: network_monitoring/performance/network_analytics/
+      url: network_monitoring/cloud_network_monitoring/network_analytics/
       parent: npm
       identifier: npm_analytics
       weight: 103
     - name: ネットワークマップ
-      url: network_monitoring/performance/network_map/
+      url: network_monitoring/cloud_network_monitoring/network_map/
       parent: npm
       identifier: npm_map
       weight: 104
     - name: ガイド
-      url: network_monitoring/performance/guide/
+      url: network_monitoring/cloud_network_monitoring/guide/
       identifier: npm_guides
       parent: npm
       weight: 105
