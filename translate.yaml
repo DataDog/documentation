@@ -20,10 +20,22 @@ ignores:
   - "content/en/api/v1/**/*.md"
   - "content/en/api/v2/**/*.md"
   - "config/_default/menus/menus.en.yaml"
-  - "**/*.{fr,ja,ko,es}.md"
-  - "**/*.{fr,ja,ko,es}.yaml"
-  - "**/*.{fr,ja,ko,es}.json"
-  - "**/{fr,ja,ko,es}.json"
+  - "**/*.fr.md"
+  - "**/*.fr.yaml"
+  - "**/*.fr.json"
+  - "**/fr.json"
+  - "**/*.ja.md"
+  - "**/*.ja.yaml"
+  - "**/*.ja.json"
+  - "**/ja.json"
+  - "**/*.ko.md"
+  - "**/*.ko.yaml"
+  - "**/*.ko.json"
+  - "**/ko.json"
+  - "**/*.es.md"
+  - "**/*.es.yaml"
+  - "**/*.es.json"
+  - "**/es.json"
 
 # These files will be uploaded to Transifex for translation when syncing.
 sources:
@@ -53,4 +65,3 @@ sources:
   dst: "content/{lang}/workflows/actions_catalog/_index.md"
 - src: "content/en/workflows/actions_catalog/generic_actions.md"
   dst: "content/{lang}/workflows/actions_catalog/generic_actions.md"
-
