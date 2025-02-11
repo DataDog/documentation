@@ -972,6 +972,11 @@
     },
     {
       "group": "security_monitoring",
+      "suffix": "_1965169892",
+      "description": "Create a detection rule with type 'application_security 'returns \"OK\" response"
+    },
+    {
+      "group": "security_monitoring",
       "suffix": "_461183901",
       "description": "Create a detection rule with type 'impossible_travel' returns \"OK\" response"
     },
