@@ -583,21 +583,21 @@ menu:
       identifier: otel-setup
       parent: opentelemetry_top_level
       weight: 1 
-    - name: Using the OpenTelemetry Collector
-      url: /opentelemetry/setup/collector_exporter/
-      identifier: otel-setup-collector-exporter
-      parent: otel-setup
-      weight: 101
-    - name: Deploy
-      url: /opentelemetry/setup/collector_exporter/deploy
-      identifier: otel-setup-collector-exporter-deploy
-      parent: otel-setup-collector-exporter
-      weight: 1001
     - name: Using OTLP Ingest in the Agent
       url : /opentelemetry/setup/otlp_ingest_in_the_agent
       identifier: otel-setup-otlp-ingest
       parent: otel-setup
+      weight: 101
+    - name: Using the OpenTelemetry Collector
+      url: /opentelemetry/setup/collector_exporter/
+      identifier: otel-setup-collector-exporter
+      parent: otel-setup
       weight: 102
+    - name: Deploy
+      url: /opentelemetry/setup/collector_exporter/deploy
+      identifier: otel-setup-collector-exporter-deploy
+      parent: otel-setup-collector-exporter
+      weight: 1021
     - name: Using OTLP Intake Endpoint
       url : /opentelemetry/setup/intake_endpoint
       identifier: otel-setup-intake-endpoint
@@ -712,7 +712,7 @@ menu:
       identifier: otel_histogram_heatmaps
       parent: otel_explore
       weight: 503
-    - name: Extend Data Collection
+    - name: Integrations
       url: opentelemetry/integrations/
       identifier: otel_integrations
       parent: opentelemetry_top_level
@@ -762,22 +762,22 @@ menu:
       identifier: otel_guides
       parent: opentelemetry_top_level
       weight: 9
-    - name: Getting Started with OpenTelemetry at Datadog
+    - name: Get Started with OTel at Datadog
       url: /getting_started/opentelemetry/
-      identifier: otel_guides_migration
+      identifier: otel_guides_getting_started
       parent: otel_guides
       weight: 901
-    - name: Migrate to OpenTelemetry Collector version 0.95.0+
+    - name: Migrate to OTel Collector v0.95.0+
       url: opentelemetry/guide/migration/
       identifier: otel_guides_migration
       parent: otel_guides
       weight: 902
-    - name: Producing Delta Temporality Metrics
+    - name: Produce Delta Temporality Metrics
       url: opentelemetry/guide/otlp_delta_temporality/
       identifier: otel_guides_delta_temporality
       parent: otel_guides
       weight: 903
-    - name: Sending Data from OpenTelemetry Demo
+    - name: Send Data from the OTel Demo
       url: /opentelemetry/guide/otel_demo_to_datadog/
       parent: otel_guides
       weight: 904

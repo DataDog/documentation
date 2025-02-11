@@ -45,11 +45,29 @@ cascade:
 
 {{< img src="tracing/setup/open_standards/otel-flow.png" alt="Map options for generating telemetry data and sending it to observability products." width="90%">}}
 
-## Send OpenTelemetry data to Datadog
+There are two key decisions to make when using OpenTelemetry with Datadog:
 
-If your applications and services are instrumented with OpenTelemetry libraries, you can choose how to get traces, metrics, and logs data to the Datadog backend.
+- How to send your data to Datadog
+- How to instrument your applications
+
+The features available to you depend on these choices. For example, using the OpenTelemetry API with the Datadog SDK provides access to more Datadog features than using the OpenTelemetry SDK alone.
 
 <div class="alert alert-info"><strong>Not sure which setup is right for you?</strong></br> See the <a href="/opentelemetry/compatibility/">Feature Compatibility</a> table to understand which Datadog features are supported.</div>
+
+## Send OpenTelemetry data to Datadog
+
+If your applications and services are instrumented with OpenTelemetry libraries, you can choose how to get traces, metrics, and logs data into Datadog.
+
+### Use OTLP ingest in the Datadog Agent
+
+**Best for**: Environments already using the Datadog Agent or requiring Agent-based features.
+
+OTLP Ingest in the Datadog Agent provides:
+- Access to Agent-based features like Live Container Monitoring and Cloud Network Monitoring
+
+{{< whatsnext desc=" " >}}
+    {{< nextlink href="/opentelemetry/setup/otlp_ingest_in_the_agent" >}}Learn more about using OTLP ingest in the Agent{{< /nextlink >}}
+{{< /whatsnext >}}
 
 ### Use the OpenTelemetry Collector
 
@@ -57,28 +75,21 @@ If your applications and services are instrumented with OpenTelemetry libraries,
 
 The OpenTelemetry Collector with Datadog Exporter provides:
 - Complete vendor neutrality for sending OpenTelemetry data to Datadog
-- Flexible deployment options
-- No need to install the Datadog Agent or tracing libraries
+- Flexible configuration options like tail-based sampling and data transformation
 
 {{< whatsnext desc=" " >}}
     {{< nextlink href="/opentelemetry/setup/collector_exporter/" >}}Learn more about using the OTel Collector{{< /nextlink >}}
 {{< /whatsnext >}}
-    
-### Use OTLP ingest in the Datadog Agent
-
-**Best for**: Environments already using the Datadog Agent or requiring Agent-based features.
-
-OTLP Ingest in the Datadog Agent provides:
-- Native integration with Datadog Agent features
-- Streamlined deployment with existing Agent infrastructure
-
-{{< whatsnext desc=" " >}}
-    {{< nextlink href="/opentelemetry/setup/otlp_ingest_in_the_agent" >}}Learn more about using OTLP ingest in the Agent{{< /nextlink >}}
-{{< /whatsnext >}}
 
 ### See additional setup options
 
-For a complete list of ways to send OpenTelemetry data to Datadog, including using the OTLP intake endpoint and the OpenTelemetry API with Datadog's tracing library, see the [Send Data to Datadog][7] documentation.
+For a complete list of ways to send OpenTelemetry data to Datadog, including using the OTLP intake endpoint, see the [Send Data to Datadog][7] documentation.
+
+## Instrument your applications
+
+You can choose to instrument your applications using a pure OpenTelemetry setup, that is using the OTel SDK and API, or you can instrument your applications using the OTel API and Datadog SDK. Depending on what you choose, certain features may or may not be supported.
+
+For more information, see [Instrument Your Applications][8]. 
 
 ## Further reading
 
@@ -89,3 +100,4 @@ For a complete list of ways to send OpenTelemetry data to Datadog, including usi
 [3]: /opentelemetry/collector_exporter/
 [4]: /opentelemetry/otlp_ingest_in_the_agent/
 [7]: /opentelemetry/setup
+[8]: /opentelemetry/instrument/
