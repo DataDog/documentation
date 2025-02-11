@@ -9,12 +9,11 @@ further_reading:
   text: "Variables and parameters"
 ---
 
-
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">Workflow Automation is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
-JavaScript is available in Workflows using inline expressions or through the dedicated JS Function and Expression actions.
+JavaScript is available in Workflows using inline expressions or through the dedicated JS **Function** and **Expression** actions.
 
 ## Inline JavaScript expressions
 
@@ -74,6 +73,16 @@ To add a function action:
 - In a new workflow, click **Add step** and search for `function`. Select the **Function** action to add it to your workflow.
 - In an existing workflow, click **+** and search for `function`. Select the **Function** action to add it to your workflow.
 
+#### Write function steps with AI
+
+You can use Bits AI to help you write the JavaScript for a **Function** step. To use this feature, perform the following steps:
+
+1. Add a **Function** step to your workflow.
+1. Under **General**, in the **Script** field, click **<i class="icon-bits-ai"></i> Write with Bits AI**.
+1. In the **Describe your transformation script** field, enter a description of what you want your script to do. Click the up arrow (**↑**) to submit your description.
+1. Choose an option to **Replace script**, **Insert in script**, or **Copy to clipboard**.
+1. Check the script and change it as necessary to fit your needs.
+
 ### Expression step
 
 In most cases, use an inline expression instead of a dedicated expression step. Expression actions accept a single line of code. For example, `[1, 2, 3].filter(x => x < 3)`. Variable assignments are not available in expressions.
@@ -83,16 +92,6 @@ To add an expression action:
 - In an existing workflow, click **+** and search for `expression`. Select the **Expression** action to add it to your workflow.
 
 In an expression step, execution uses _copies_ of all available variables. Mutating a variable within a step has no effect on the variable's value outside of the step. To assign the result of an expression to a variable, see [Set variables][4].
-
-#### Write functions with AI
-
-You can use Bits AI to help you write the JavaScript for a **Function** step. To use this feature, perform the following steps:
-
-1. Add a **Function** step to your workflow.
-1. Under **General**, in the **Script** field, click **<i class="icon-bits-ai"></i> Write with Bits AI**.
-1. In the **Describe your transformation script** field, enter a description of what you want your script to do. Click the up arrow (**↑**) to submit your description.
-1. Choose an option to **Replace script**, **Insert in script**, or **Copy to clipboard**.
-1. Check the script and change it as necessary to fit your needs.
 
 ## Test expressions and functions
 
