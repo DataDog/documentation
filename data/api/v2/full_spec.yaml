@@ -205,7 +205,7 @@ components:
       schema:
         type: string
     ConfluentAccountID:
-      description: Confluent Account id.
+      description: Confluent Account ID.
       in: path
       name: account_id
       required: true
@@ -12014,7 +12014,7 @@ components:
       description: The schema representation of a Fastly service.
       properties:
         id:
-          description: The id of the Fastly service
+          description: The ID of the Fastly service
           example: 6abc7de6893AbcDe9fghIj
           type: string
         tags:
@@ -23838,8 +23838,7 @@ components:
       x-enum-varnames:
       - RULE
     RuleTypes:
-      description: Security rule types used to filter signals and vulnerabilities
-        generating notifications.
+      description: Security rule types used as filters in security rules.
       example:
       - misconfiguration
       - attack_path
@@ -23847,7 +23846,7 @@ components:
         $ref: '#/components/schemas/RuleTypesItems'
       type: array
     RuleTypesItems:
-      description: 'Security rule types which can be used in notification rules.
+      description: 'Security rule type which can be used in security rules.
 
         Signal-based notification rules can filter signals based on rule types application_security,
         log_detection,
@@ -42374,7 +42373,7 @@ paths:
         required: false
         schema:
           type: boolean
-      - description: '(Beta) Filter custom metrics that have or have not been queried
+      - description: '(Preview) Filter custom metrics that have or have not been queried
           in the specified window[seconds].
 
           If no window is provided or the window is less than 2 hours, a default of
@@ -42395,6 +42394,14 @@ paths:
         required: false
         schema:
           type: string
+      - description: (Preview) Filter metrics that are used in dashboards, monitors,
+          notebooks, SLOs.
+        example: true
+        in: query
+        name: filter[related_assets]
+        required: false
+        schema:
+          type: boolean
       - description: 'The number of seconds of look back (from now) to apply to a
           filter[tag] or filter[queried] query.
 
@@ -47259,7 +47266,7 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - security_monitoring_notification_profiles_read
-      summary: Get the list of signal-based rules
+      summary: Get the list of signal-based notification rules
       tags:
       - Security Monitoring
       x-menu-order: 15
@@ -47304,7 +47311,7 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - security_monitoring_notification_profiles_write
-      summary: Create a new signal-based rule
+      summary: Create a new signal-based notification rule
       tags:
       - Security Monitoring
       x-codegen-request-body-name: body
@@ -47355,7 +47362,7 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - security_monitoring_notification_profiles_write
-      summary: Delete a signal-based rule
+      summary: Delete a signal-based notification rule
       tags:
       - Security Monitoring
       x-menu-order: 21
@@ -47395,7 +47402,7 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - security_monitoring_notification_profiles_read
-      summary: Get details of a signal-based rule
+      summary: Get details of a signal-based notification rule
       tags:
       - Security Monitoring
       x-menu-order: 18
@@ -47444,7 +47451,7 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - security_monitoring_notification_profiles_write
-      summary: Patch a signal-based rule
+      summary: Patch a signal-based notification rule
       tags:
       - Security Monitoring
       x-codegen-request-body-name: body
@@ -47850,7 +47857,7 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - security_monitoring_notification_profiles_read
-      summary: Get the list of vulnerability-based rules
+      summary: Get the list of vulnerability notification rules
       tags:
       - Security Monitoring
       x-menu-order: 15
@@ -47895,7 +47902,7 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - security_monitoring_notification_profiles_write
-      summary: Create a new vulnerability-based rule
+      summary: Create a new vulnerability-based notification rule
       tags:
       - Security Monitoring
       x-codegen-request-body-name: body
@@ -47946,7 +47953,7 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - security_monitoring_notification_profiles_write
-      summary: Delete a vulnerability-based rule
+      summary: Delete a vulnerability-based notification rule
       tags:
       - Security Monitoring
       x-menu-order: 21
@@ -47986,7 +47993,7 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - security_monitoring_notification_profiles_read
-      summary: Get details of a vulnerability-based rule
+      summary: Get details of a vulnerability notification rule
       tags:
       - Security Monitoring
       x-menu-order: 18
@@ -48035,7 +48042,7 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - security_monitoring_notification_profiles_write
-      summary: Patch a vulnerability-based rule
+      summary: Patch a vulnerability-based notification rule
       tags:
       - Security Monitoring
       x-codegen-request-body-name: body

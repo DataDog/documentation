@@ -3801,21 +3801,26 @@ menu:
       parent: profiler_troubleshooting
       identifier: profiler_troubleshooting_ruby
       weight: 604
+    - name: Node.js
+      url: profiler/profiler_troubleshooting/nodejs/
+      parent: profiler_troubleshooting
+      identifier: profiler_troubleshooting_nodejs
+      weight: 605
     - name: .NET
       url: profiler/profiler_troubleshooting/dotnet/
       parent: profiler_troubleshooting
       identifier: profiler_troubleshooting_dotnet
-      weight: 605
+      weight: 606
     - name: PHP
       url: profiler/profiler_troubleshooting/php/
       parent: profiler_troubleshooting
       identifier: profiler_troubleshooting_php
-      weight: 606
+      weight: 607
     - name: C/C++/Rust
       url: profiler/profiler_troubleshooting/ddprof/
       parent: profiler_troubleshooting
       identifier: profiler_troubleshooting_linux
-      weight: 607
+      weight: 608
     - name: Guides
       url: profiler/guide/
       parent: profiler
@@ -5745,6 +5750,11 @@ menu:
       parent: cloud_siem_detection_rules
       identifier: cloud_siem_signal_correlation_rules
       weight: 20500
+    - name: ATT&CK Map
+      url: security/cloud_siem/detection_rules/attack_map
+      parent: cloud_siem_detection_rules
+      identifier: cloud_siem_attack_map
+      weight: 20510
     - name: OOTB Rules
       url: /security/default_rules/#cat-cloud-siem-log-detection
       parent: cloud_siem
@@ -6656,36 +6666,41 @@ menu:
       parent: rum_mobile_android
       identifier: rum_mobile_android_crash
       weight: 102
+    - name: Monitoring App Performance
+      url: real_user_monitoring/mobile_and_tv_monitoring/android/monitoring_app_performance
+      parent: rum_mobile_android
+      identifier: rum_mobile_android_monitoring_app_performance
+      weight: 103
     - name: Advanced Configuration
       url: real_user_monitoring/mobile_and_tv_monitoring/android/advanced_configuration
       parent: rum_mobile_android
       identifier: rum_mobile_android_advanced_config
-      weight: 103
+      weight: 104
     - name: Data Collected
       url: real_user_monitoring/mobile_and_tv_monitoring/android/data_collected
       parent: rum_mobile_android
       identifier: rum_mobile_android_data_collected
-      weight: 104
+      weight: 105
     - name: Mobile Vitals
       url: real_user_monitoring/mobile_and_tv_monitoring/android/mobile_vitals
       parent: rum_mobile_android
       identifier: rum_mobile_android_mobile_vitals
-      weight: 105
+      weight: 106
     - name: Web View Tracking
       url: real_user_monitoring/mobile_and_tv_monitoring/android/web_view_tracking
       parent: rum_mobile_android
       identifier: rum_mobile_android_web_view_tracking
-      weight: 106
+      weight: 107
     - name: Integrated Libraries
       url: real_user_monitoring/mobile_and_tv_monitoring/android/integrated_libraries
       parent: rum_mobile_android
       identifier: rum_mobile_android_integrated_libraries
-      weight: 107
+      weight: 108
     - name: Troubleshooting
       url: real_user_monitoring/mobile_and_tv_monitoring/android/troubleshooting
       parent: rum_mobile_android
       identifier: rum_mobile_android_troubleshooting
-      weight: 108
+      weight: 109
     - name: iOS and tvOS
       url: real_user_monitoring/mobile_and_tv_monitoring/ios
       parent: mobile_and_tv_monitoring
@@ -6701,41 +6716,46 @@ menu:
       parent: rum_mobile_ios
       identifier: rum_mobile_ios_crash
       weight: 102
+    - name: Mobile App Performance
+      url: real_user_monitoring/mobile_and_tv_monitoring/ios/monitoring_app_performance
+      parent: rum_mobile_ios
+      identifier: rum_mobile_ios_monitoring_app_performance
+      weight: 103
     - name: Advanced Configuration
       url: real_user_monitoring/mobile_and_tv_monitoring/ios/advanced_configuration
       parent: rum_mobile_ios
       identifier: rum_mobile_ios_advanced_config
-      weight: 103
+      weight: 104
     - name: Data Collected
       url: real_user_monitoring/mobile_and_tv_monitoring/ios/data_collected
       parent: rum_mobile_ios
       identifier: rum_mobile_ios_data_collected
-      weight: 104
+      weight: 105
     - name: Mobile Vitals
       url: real_user_monitoring/mobile_and_tv_monitoring/ios/mobile_vitals?tab=ios
       parent: rum_mobile_ios
       identifier: rum_mobile_ios_mobile_vitals
-      weight: 105
+      weight: 106
     - name: Web View Tracking
       url: real_user_monitoring/mobile_and_tv_monitoring/ios/web_view_tracking?tab=ios
       parent: rum_mobile_ios
       identifier: rum_mobile_ios_web_view_tracking
-      weight: 106
+      weight: 107
     - name: Integrated Libraries
       url: real_user_monitoring/mobile_and_tv_monitoring/ios/integrated_libraries
       parent: rum_mobile_ios
       identifier: rum_mobile_ios_integrated_libraries
-      weight: 107
+      weight: 108
     - name: Troubleshooting
       url: real_user_monitoring/mobile_and_tv_monitoring/ios/troubleshooting
       parent: rum_mobile_ios
       identifier: rum_mobile_ios_troubleshooting
-      weight: 108
+      weight: 109
     - name: Supported Versions
       url: real_user_monitoring/mobile_and_tv_monitoring/ios/supported_versions
       parent: rum_mobile_ios
       identifier: rum_mobile_ios_supported_versions
-      weight: 109
+      weight: 110
     - name: Flutter
       url: real_user_monitoring/mobile_and_tv_monitoring/flutter
       parent: mobile_and_tv_monitoring
