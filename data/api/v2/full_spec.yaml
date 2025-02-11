@@ -205,7 +205,7 @@ components:
       schema:
         type: string
     ConfluentAccountID:
-      description: Confluent Account id.
+      description: Confluent Account ID.
       in: path
       name: account_id
       required: true
@@ -542,6 +542,20 @@ components:
       in: path
       name: tenant_name
       required: true
+      schema:
+        type: string
+    MicrosoftTeamsWorkflowsWebhookHandleIDPathParameter:
+      description: Your Workflows webhook handle id.
+      in: path
+      name: handle_id
+      required: true
+      schema:
+        type: string
+    MicrosoftTeamsWorkflowsWebhookHandleNameQueryParameter:
+      description: Your Workflows webhook handle name.
+      in: query
+      name: name
+      required: false
       schema:
         type: string
     OpsgenieServiceIDPathParameter:
@@ -7379,8 +7393,8 @@ components:
                   type: gridCell
               type: grid
             description: This is a simple example app
-            embeddedQueries: []
             name: Example App
+            queries: []
             rootInstanceName: grid0
           type: appDefinitions
       properties:
@@ -7408,15 +7422,15 @@ components:
         description:
           description: A human-readable description for the app.
           type: string
-        embeddedQueries:
+        name:
+          description: The name of the app.
+          type: string
+        queries:
           description: An array of queries, such as external actions and state variables,
             that the app uses.
           items:
             $ref: '#/components/schemas/Query'
           type: array
-        name:
-          description: The name of the app.
-          type: string
         rootInstanceName:
           description: The name of the root component of the app. This must be a `grid`
             component that contains all other components.
@@ -10397,6 +10411,100 @@ components:
       - $ref: '#/components/schemas/EntityV3Datastore'
       - $ref: '#/components/schemas/EntityV3Queue'
       - $ref: '#/components/schemas/EntityV3System'
+      - $ref: '#/components/schemas/EntityV3API'
+    EntityV3API:
+      additionalProperties: false
+      description: Schema for API entities.
+      properties:
+        apiVersion:
+          $ref: '#/components/schemas/EntityV3APIVersion'
+        datadog:
+          $ref: '#/components/schemas/EntityV3APIDatadog'
+        extensions:
+          additionalProperties: {}
+          description: Custom extensions. This is the free-formed field to send client-side
+            metadata. No Datadog features are affected by this field.
+          type: object
+          x-ignore-duplicate-object: true
+        integrations:
+          $ref: '#/components/schemas/EntityV3Integrations'
+        kind:
+          $ref: '#/components/schemas/EntityV3APIKind'
+        metadata:
+          $ref: '#/components/schemas/EntityV3Metadata'
+        spec:
+          $ref: '#/components/schemas/EntityV3APISpec'
+      required:
+      - apiVersion
+      - kind
+      - metadata
+      type: object
+    EntityV3APIDatadog:
+      additionalProperties: false
+      description: Datadog product integrations for the API entity.
+      properties:
+        codeLocations:
+          $ref: '#/components/schemas/EntityV3DatadogCodeLocations'
+        events:
+          $ref: '#/components/schemas/EntityV3DatadogEvents'
+        logs:
+          $ref: '#/components/schemas/EntityV3DatadogLogs'
+        performanceData:
+          $ref: '#/components/schemas/EntityV3DatadogPerformance'
+        pipelines:
+          $ref: '#/components/schemas/EntityV3DatadogPipelines'
+      type: object
+    EntityV3APIKind:
+      description: The definition of Entity V3 API Kind object.
+      enum:
+      - api
+      example: api
+      type: string
+      x-enum-varnames:
+      - API
+    EntityV3APISpec:
+      additionalProperties: false
+      description: The definition of Entity V3 API Spec object.
+      properties:
+        implementedBy:
+          description: Services which implemented the API.
+          items:
+            type: string
+          type: array
+        interface:
+          $ref: '#/components/schemas/EntityV3APISpecInterface'
+        lifecycle:
+          description: The lifecycle state of the component.
+          minLength: 1
+          type: string
+        tier:
+          description: The importance of the component.
+          minLength: 1
+          type: string
+        type:
+          description: The type of API.
+          type: string
+      type: object
+    EntityV3APISpecInterface:
+      additionalProperties: false
+      description: The API definition.
+      oneOf:
+      - $ref: '#/components/schemas/EntityV3APISpecInterfaceFileRef'
+      - $ref: '#/components/schemas/EntityV3APISpecInterfaceDefinition'
+    EntityV3APISpecInterfaceDefinition:
+      additionalProperties: false
+      description: The definition of `EntityV3APISpecInterfaceDefinition` object.
+      properties:
+        definition:
+          description: The API definition.
+          type: object
+    EntityV3APISpecInterfaceFileRef:
+      additionalProperties: false
+      description: The definition of `EntityV3APISpecInterfaceFileRef` object.
+      properties:
+        fileRef:
+          description: The reference to the API definition file.
+          type: string
     EntityV3APIVersion:
       description: The schema version of entity type. The field is known as schema-version
         in the previous version.
@@ -10639,7 +10747,8 @@ components:
           minLength: 1
           type: string
         owner:
-          $ref: '#/components/schemas/EntityV3MetadataOwner'
+          description: The owner of the entity, usually a team.
+          type: string
         tags:
           description: A set of custom tags.
           example:
@@ -10708,13 +10817,6 @@ components:
       - type
       - url
       type: object
-    EntityV3MetadataOwner:
-      additionalProperties: false
-      description: The owner of the entity, usually a team.
-      properties:
-        name:
-          description: Team name.
-          type: string
     EntityV3Queue:
       additionalProperties: false
       description: Schema for queue entities.
@@ -11912,7 +12014,7 @@ components:
       description: The schema representation of a Fastly service.
       properties:
         id:
-          description: The id of the Fastly service
+          description: The ID of the Fastly service
           example: 6abc7de6893AbcDe9fghIj
           type: string
         tags:
@@ -12540,18 +12642,18 @@ components:
         description:
           description: A human-readable description for the app.
           type: string
-        embeddedQueries:
-          description: An array of queries, such as external actions and state variables,
-            that the app uses.
-          items:
-            $ref: '#/components/schemas/Query'
-          type: array
         favorite:
           description: Whether the app is marked as a favorite by the current user.
           type: boolean
         name:
           description: The name of the app.
           type: string
+        queries:
+          description: An array of queries, such as external actions and state variables,
+            that the app uses.
+          items:
+            $ref: '#/components/schemas/Query'
+          type: array
         rootInstanceName:
           description: The name of the root component of the app. This must be a `grid`
             component that contains all other components.
@@ -15677,6 +15779,15 @@ components:
           example: 1729843470000
           format: int64
           type: integer
+        groupSignalsBy:
+          description: Additional grouping to perform on top of the existing groups
+            in the query section. Must be a subset of the existing groups.
+          example:
+          - service
+          items:
+            description: Field to group by.
+            type: string
+          type: array
         index:
           description: Index used to load the data.
           example: cloud_siem
@@ -19066,6 +19177,14 @@ components:
       required:
       - data
       type: object
+    MicrosoftTeamsCreateWorkflowsWebhookHandleRequest:
+      description: Create Workflows webhook handle request.
+      properties:
+        data:
+          $ref: '#/components/schemas/MicrosoftTeamsWorkflowsWebhookHandleRequestData'
+      required:
+      - data
+      type: object
     MicrosoftTeamsGetChannelByNameResponse:
       description: Response with channel, team, and tenant ID information.
       properties:
@@ -19294,6 +19413,127 @@ components:
       type: object
       x-merge-override:
         required: false
+    MicrosoftTeamsUpdateWorkflowsWebhookHandleRequest:
+      description: Update Workflows webhook handle request.
+      properties:
+        data:
+          $ref: '#/components/schemas/MicrosoftTeamsUpdateWorkflowsWebhookHandleRequestData'
+      required:
+      - data
+      type: object
+    MicrosoftTeamsUpdateWorkflowsWebhookHandleRequestData:
+      description: Workflows Webhook handle data from a response.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/MicrosoftTeamsWorkflowsWebhookHandleAttributes'
+        type:
+          $ref: '#/components/schemas/MicrosoftTeamsWorkflowsWebhookHandleType'
+      required:
+      - type
+      - attributes
+      type: object
+    MicrosoftTeamsWorkflowsWebhookHandleAttributes:
+      description: Workflows Webhook handle attributes.
+      properties:
+        name:
+          description: Workflows Webhook handle name.
+          example: fake-handle-name
+          maxLength: 255
+          type: string
+        url:
+          description: Workflows Webhook URL.
+          example: https://fake.url.com
+          maxLength: 255
+          type: string
+      type: object
+    MicrosoftTeamsWorkflowsWebhookHandleRequestAttributes:
+      description: Workflows Webhook handle attributes.
+      properties:
+        name:
+          description: Workflows Webhook handle name.
+          example: fake-handle-name
+          maxLength: 255
+          type: string
+        url:
+          description: Workflows Webhook URL.
+          example: https://fake.url.com
+          maxLength: 255
+          type: string
+      required:
+      - name
+      - url
+      type: object
+    MicrosoftTeamsWorkflowsWebhookHandleRequestData:
+      description: Workflows Webhook handle data from a response.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/MicrosoftTeamsWorkflowsWebhookHandleRequestAttributes'
+        type:
+          $ref: '#/components/schemas/MicrosoftTeamsWorkflowsWebhookHandleType'
+      required:
+      - type
+      - attributes
+      type: object
+    MicrosoftTeamsWorkflowsWebhookHandleResponse:
+      description: Response of a Workflows webhook handle.
+      properties:
+        data:
+          $ref: '#/components/schemas/MicrosoftTeamsWorkflowsWebhookHandleResponseData'
+      required:
+      - data
+      type: object
+    MicrosoftTeamsWorkflowsWebhookHandleResponseData:
+      description: Workflows Webhook handle data from a response.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/MicrosoftTeamsWorkflowsWebhookResponseAttributes'
+        id:
+          description: The ID of the Workflows webhook handle.
+          example: 596da4af-0563-4097-90ff-07230c3f9db3
+          maxLength: 100
+          minLength: 1
+          type: string
+        type:
+          $ref: '#/components/schemas/MicrosoftTeamsWorkflowsWebhookHandleType'
+      type: object
+    MicrosoftTeamsWorkflowsWebhookHandleType:
+      default: workflows-webhook-handle
+      description: Specifies the Workflows webhook handle resource type.
+      enum:
+      - workflows-webhook-handle
+      example: workflows-webhook-handle
+      type: string
+      x-enum-varnames:
+      - WORKFLOWS_WEBHOOK_HANDLE
+    MicrosoftTeamsWorkflowsWebhookHandlesResponse:
+      description: Response with a list of Workflows webhook handles.
+      properties:
+        data:
+          description: An array of Workflows webhook handles.
+          example:
+          - attributes:
+              name: general-handle
+            id: 596da4af-0563-4097-90ff-07230c3f9db3
+            type: workflows-webhook-handle
+          - attributes:
+              name: general-handle-2
+            id: 596da4af-0563-4097-90ff-07230c3f9db4
+            type: workflows-webhook-handle
+          items:
+            $ref: '#/components/schemas/MicrosoftTeamsWorkflowsWebhookHandleResponseData'
+          type: array
+      required:
+      - data
+      type: object
+    MicrosoftTeamsWorkflowsWebhookResponseAttributes:
+      description: Workflows Webhook handle attributes.
+      properties:
+        name:
+          description: Workflows Webhook handle name.
+          example: fake-handle-name
+          maxLength: 255
+          type: string
+      type: object
     MonitorConfigPolicyAttributeCreateRequest:
       description: Policy and policy type for a monitor configuration policy.
       properties:
@@ -23607,8 +23847,7 @@ components:
       x-enum-varnames:
       - RULE
     RuleTypes:
-      description: Security rule types used to filter signals and vulnerabilities
-        generating notifications.
+      description: Security rule types used as filters in security rules.
       example:
       - misconfiguration
       - attack_path
@@ -23616,7 +23855,7 @@ components:
         $ref: '#/components/schemas/RuleTypesItems'
       type: array
     RuleTypesItems:
-      description: 'Security rule types which can be used in notification rules.
+      description: 'Security rule type which can be used in security rules.
 
         Signal-based notification rules can filter signals based on rule types application_security,
         log_detection,
@@ -24668,6 +24907,11 @@ components:
     SecurityMonitoringRuleCase:
       description: Case when signal is generated.
       properties:
+        actions:
+          description: Action to perform for each rule case.
+          items:
+            $ref: '#/components/schemas/SecurityMonitoringRuleCaseAction'
+          type: array
         condition:
           description: 'A rule case contains logical operations (`>`,`>=`, `&&`, `||`)
             to determine if a signal should be generated
@@ -24686,9 +24930,42 @@ components:
         status:
           $ref: '#/components/schemas/SecurityMonitoringRuleSeverity'
       type: object
+    SecurityMonitoringRuleCaseAction:
+      description: Action to perform when a signal is triggered. Only available for
+        Application Security rule type.
+      properties:
+        options:
+          $ref: '#/components/schemas/SecurityMonitoringRuleCaseActionOptions'
+        type:
+          $ref: '#/components/schemas/SecurityMonitoringRuleCaseActionType'
+      type: object
+    SecurityMonitoringRuleCaseActionOptions:
+      description: Options for the rule action
+      properties:
+        duration:
+          description: Duration of the action in seconds. 0 indicates no expiration.
+          example: 0
+          format: int64
+          minimum: 0
+          type: integer
+      type: object
+    SecurityMonitoringRuleCaseActionType:
+      description: The action type.
+      enum:
+      - block_ip
+      - block_user
+      type: string
+      x-enum-varnames:
+      - BLOCK_IP
+      - BLOCK_USER
     SecurityMonitoringRuleCaseCreate:
       description: Case when signal is generated.
       properties:
+        actions:
+          description: Action to perform for each rule case.
+          items:
+            $ref: '#/components/schemas/SecurityMonitoringRuleCaseAction'
+          type: array
         condition:
           description: 'A case contains logical operations (`>`,`>=`, `&&`, `||`)
             to determine if a signal should be generated
@@ -25149,6 +25426,15 @@ components:
             and workload security rules.
           items:
             $ref: '#/components/schemas/SecurityMonitoringFilter'
+          type: array
+        groupSignalsBy:
+          description: Additional grouping to perform on top of the existing groups
+            in the query section. Must be a subset of the existing groups.
+          example:
+          - service
+          items:
+            description: Field to group by.
+            type: string
           type: array
         hasExtendedTitle:
           description: Whether the notifications include the triggering group-by values
@@ -25855,6 +26141,15 @@ components:
           items:
             $ref: '#/components/schemas/SecurityMonitoringFilter'
           type: array
+        groupSignalsBy:
+          description: Additional grouping to perform on top of the existing groups
+            in the query section. Must be a subset of the existing groups.
+          example:
+          - service
+          items:
+            description: Field to group by.
+            type: string
+          type: array
         hasExtendedTitle:
           description: Whether the notifications include the triggering group-by values
             in their title.
@@ -25926,6 +26221,15 @@ components:
             and workload security rules.
           items:
             $ref: '#/components/schemas/SecurityMonitoringFilter'
+          type: array
+        groupSignalsBy:
+          description: Additional grouping to perform on top of the existing groups
+            in the query section. Must be a subset of the existing groups.
+          example:
+          - service
+          items:
+            description: Field to group by.
+            type: string
           type: array
         hasExtendedTitle:
           description: Whether the notifications include the triggering group-by values
@@ -26068,6 +26372,15 @@ components:
           items:
             $ref: '#/components/schemas/SecurityMonitoringFilter'
           type: array
+        groupSignalsBy:
+          description: Additional grouping to perform on top of the existing groups
+            in the query section. Must be a subset of the existing groups.
+          example:
+          - service
+          items:
+            description: Field to group by.
+            type: string
+          type: array
         hasExtendedTitle:
           description: Whether the notifications include the triggering group-by values
             in their title.
@@ -26144,6 +26457,15 @@ components:
             and workload security rules.
           items:
             $ref: '#/components/schemas/SecurityMonitoringFilter'
+          type: array
+        groupSignalsBy:
+          description: Additional grouping to perform on top of the existing groups
+            in the query section. Must be a subset of the existing groups.
+          example:
+          - service
+          items:
+            description: Field to group by.
+            type: string
           type: array
         hasExtendedTitle:
           description: Whether the notifications include the triggering group-by values
@@ -30169,8 +30491,8 @@ components:
                   type: gridCell
               type: grid
             description: This is a simple example app
-            embeddedQueries: []
             name: Example App
+            queries: []
             rootInstanceName: grid0
           id: 9e20cbaf-68da-45a6-9ccf-54193ac29fa5
           type: appDefinitions
@@ -30209,16 +30531,16 @@ components:
         description:
           description: The new human-readable description for the app.
           type: string
-        embeddedQueries:
+        name:
+          description: The new name of the app.
+          type: string
+        queries:
           description: The new array of queries, such as external actions and state
             variables, that the app uses. If this field is set, all existing queries
             are replaced with the new queries under this field.
           items:
             $ref: '#/components/schemas/Query'
           type: array
-        name:
-          description: The new name of the app.
-          type: string
         rootInstanceName:
           description: The new name of the root component of the app. This must be
             a `grid` component that contains all other components.
@@ -30279,18 +30601,18 @@ components:
         description:
           description: The human-readable description for the app.
           type: string
-        embeddedQueries:
-          description: An array of queries, such as external actions and state variables,
-            that the app uses.
-          items:
-            $ref: '#/components/schemas/Query'
-          type: array
         favorite:
           description: Whether the app is marked as a favorite by the current user.
           type: boolean
         name:
           description: The name of the app.
           type: string
+        queries:
+          description: An array of queries, such as external actions and state variables,
+            that the app uses.
+          items:
+            $ref: '#/components/schemas/Query'
+          type: array
         rootInstanceName:
           description: The name of the root component of the app. This must be a `grid`
             component that contains all other components.
@@ -33031,8 +33353,8 @@ paths:
               "kB", "value": "42"}, "type": "calloutValue"}], "isVisible": "true",
               "layout": {"default": {"height": 8, "width": 2, "x": 0, "y": 0}}}, "type":
               "gridCell"}]}, "type": "grid"}], "description": "This is a simple example
-              app", "embeddedQueries": [], "name": "Example App", "rootInstanceName":
-              "grid0"}, "type": "appDefinitions"}}'
+              app", "queries": [], "name": "Example App", "rootInstanceName": "grid0"},
+              "type": "appDefinitions"}}'
           step: there is a valid "app" in the system
       x-menu-order: 2
       x-permission:
@@ -38884,6 +39206,177 @@ paths:
       delete: true
       get: true
       patch: true
+  /api/v2/integration/ms-teams/configuration/workflows-webhook-handles:
+    get:
+      description: Get a list of all Workflows webhook handles from the Datadog Microsoft
+        Teams integration.
+      operationId: ListWorkflowsWebhookHandles
+      parameters:
+      - $ref: '#/components/parameters/MicrosoftTeamsWorkflowsWebhookHandleNameQueryParameter'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MicrosoftTeamsWorkflowsWebhookHandlesResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '412':
+          $ref: '#/components/responses/PreconditionFailedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get all Workflows webhook handles
+      tags:
+      - Microsoft Teams Integration
+      x-menu-order: 1
+      x-undo:
+        type: safe
+    post:
+      description: Create a Workflows webhook handle in the Datadog Microsoft Teams
+        integration.
+      operationId: CreateWorkflowsWebhookHandle
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MicrosoftTeamsCreateWorkflowsWebhookHandleRequest'
+        description: Workflows Webhook handle payload.
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MicrosoftTeamsWorkflowsWebhookHandleResponse'
+          description: CREATED
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '409':
+          $ref: '#/components/responses/ConflictResponse'
+        '412':
+          $ref: '#/components/responses/PreconditionFailedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Create Workflows webhook handle
+      tags:
+      - Microsoft Teams Integration
+      x-codegen-request-body-name: body
+      x-given:
+        workflows_webhook_handle:
+          parameters:
+          - name: body
+            value: "{\n  \"data\": {\n    \"attributes\": {\n      \"name\": \"{{
+              unique }}\",\n      \"url\": \"https://prod-100.westus.logic.azure.com:443/workflows/abcd1234\"\n
+              \    },\n     \"type\": \"workflows-webhook-handle\"\n  }\n}"
+          step: there is a valid "workflows_webhook_handle" in the system
+      x-menu-order: 1
+      x-undo:
+        operationId: DeleteWorkflowsWebhookHandle
+        parameters:
+        - name: handle_id
+          source: data.id
+        type: unsafe
+  /api/v2/integration/ms-teams/configuration/workflows-webhook-handles/{handle_id}:
+    delete:
+      description: Delete a Workflows webhook handle from the Datadog Microsoft Teams
+        integration.
+      operationId: DeleteWorkflowsWebhookHandle
+      parameters:
+      - $ref: '#/components/parameters/MicrosoftTeamsWorkflowsWebhookHandleIDPathParameter'
+      responses:
+        '204':
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '412':
+          $ref: '#/components/responses/PreconditionFailedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Delete Workflows webhook handle
+      tags:
+      - Microsoft Teams Integration
+      x-menu-order: 1
+      x-undo:
+        type: idempotent
+    get:
+      description: Get the name of a Workflows webhook handle from the Datadog Microsoft
+        Teams integration.
+      operationId: GetWorkflowsWebhookHandle
+      parameters:
+      - $ref: '#/components/parameters/MicrosoftTeamsWorkflowsWebhookHandleIDPathParameter'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MicrosoftTeamsWorkflowsWebhookHandleResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '412':
+          $ref: '#/components/responses/PreconditionFailedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get Workflows webhook handle information
+      tags:
+      - Microsoft Teams Integration
+      x-menu-order: 1
+      x-undo:
+        type: safe
+    patch:
+      description: Update a Workflows webhook handle from the Datadog Microsoft Teams
+        integration.
+      operationId: UpdateWorkflowsWebhookHandle
+      parameters:
+      - $ref: '#/components/parameters/MicrosoftTeamsWorkflowsWebhookHandleIDPathParameter'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MicrosoftTeamsUpdateWorkflowsWebhookHandleRequest'
+        description: Workflows Webhook handle payload.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MicrosoftTeamsWorkflowsWebhookHandleResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '409':
+          $ref: '#/components/responses/ConflictResponse'
+        '412':
+          $ref: '#/components/responses/PreconditionFailedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Update Workflows webhook handle
+      tags:
+      - Microsoft Teams Integration
+      x-codegen-request-body-name: body
+      x-menu-order: 1
+      x-undo:
+        type: idempotent
   /api/v2/integration/opsgenie/services:
     get:
       description: Get a list of all services from the Datadog Opsgenie integration.
@@ -41972,7 +42465,7 @@ paths:
         required: false
         schema:
           type: boolean
-      - description: '(Beta) Filter custom metrics that have or have not been queried
+      - description: '(Preview) Filter custom metrics that have or have not been queried
           in the specified window[seconds].
 
           If no window is provided or the window is less than 2 hours, a default of
@@ -41993,6 +42486,14 @@ paths:
         required: false
         schema:
           type: string
+      - description: (Preview) Filter metrics that are used in dashboards, monitors,
+          notebooks, SLOs.
+        example: true
+        in: query
+        name: filter[related_assets]
+        required: false
+        schema:
+          type: boolean
       - description: 'The number of seconds of look back (from now) to apply to a
           filter[tag] or filter[queried] query.
 
@@ -46743,9 +47244,6 @@ paths:
       x-menu-order: 26
       x-undo:
         type: safe
-      x-unstable: '**Note**: This endpoint is a private preview.
-
-        If you are interested in accessing this API, please [fill out this form](https://forms.gle/kMYC1sDr6WDUBDsx9).'
   /api/v2/security/cloud_workload/policy/download:
     get:
       description: 'The download endpoint generates a Cloud Workload Security policy
@@ -46844,9 +47342,6 @@ paths:
       x-menu-order: 27
       x-undo:
         type: safe
-      x-unstable: '**Note**: This endpoint is a private preview.
-
-        If you are interested in accessing this API, please [fill out this form](https://forms.gle/kMYC1sDr6WDUBDsx9).'
   /api/v2/security/signals/notification_rules:
     get:
       description: Returns the list of notification rules for security signals.
@@ -46863,7 +47358,7 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - security_monitoring_notification_profiles_read
-      summary: Get the list of signal-based rules
+      summary: Get the list of signal-based notification rules
       tags:
       - Security Monitoring
       x-menu-order: 15
@@ -46908,7 +47403,7 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - security_monitoring_notification_profiles_write
-      summary: Create a new signal-based rule
+      summary: Create a new signal-based notification rule
       tags:
       - Security Monitoring
       x-codegen-request-body-name: body
@@ -46959,7 +47454,7 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - security_monitoring_notification_profiles_write
-      summary: Delete a signal-based rule
+      summary: Delete a signal-based notification rule
       tags:
       - Security Monitoring
       x-menu-order: 21
@@ -46999,7 +47494,7 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - security_monitoring_notification_profiles_read
-      summary: Get details of a signal-based rule
+      summary: Get details of a signal-based notification rule
       tags:
       - Security Monitoring
       x-menu-order: 18
@@ -47048,7 +47543,7 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - security_monitoring_notification_profiles_write
-      summary: Patch a signal-based rule
+      summary: Patch a signal-based notification rule
       tags:
       - Security Monitoring
       x-codegen-request-body-name: body
@@ -47438,9 +47933,6 @@ paths:
       x-menu-order: 25
       x-undo:
         type: safe
-      x-unstable: '**Note**: This endpoint is a private preview.
-
-        If you are interested in accessing this API, please [fill out this form](https://forms.gle/kMYC1sDr6WDUBDsx9).'
   /api/v2/security/vulnerabilities/notification_rules:
     get:
       description: Returns the list of notification rules for security vulnerabilities.
@@ -47457,7 +47949,7 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - security_monitoring_notification_profiles_read
-      summary: Get the list of vulnerability-based rules
+      summary: Get the list of vulnerability notification rules
       tags:
       - Security Monitoring
       x-menu-order: 15
@@ -47502,7 +47994,7 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - security_monitoring_notification_profiles_write
-      summary: Create a new vulnerability-based rule
+      summary: Create a new vulnerability-based notification rule
       tags:
       - Security Monitoring
       x-codegen-request-body-name: body
@@ -47553,7 +48045,7 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - security_monitoring_notification_profiles_write
-      summary: Delete a vulnerability-based rule
+      summary: Delete a vulnerability-based notification rule
       tags:
       - Security Monitoring
       x-menu-order: 21
@@ -47593,7 +48085,7 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - security_monitoring_notification_profiles_read
-      summary: Get details of a vulnerability-based rule
+      summary: Get details of a vulnerability notification rule
       tags:
       - Security Monitoring
       x-menu-order: 18
@@ -47642,7 +48134,7 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - security_monitoring_notification_profiles_write
-      summary: Patch a vulnerability-based rule
+      summary: Patch a vulnerability-based notification rule
       tags:
       - Security Monitoring
       x-codegen-request-body-name: body

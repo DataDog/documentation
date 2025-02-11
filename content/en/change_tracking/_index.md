@@ -28,6 +28,9 @@ further_reading:
 - link: "/data_streams/"
   tag: "Documentation"
   text: "Data Streams Monitoring"
+- link: "https://www.datadoghq.com/blog/change-tracking/"
+  tag: "Blog"
+  text: "Unify visibility into changes to your services and dependencies"
 ---
 
 ## Overview
