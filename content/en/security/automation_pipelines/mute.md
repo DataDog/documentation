@@ -26,7 +26,17 @@ Configure mute rules to streamline security alerts by automatically filtering ou
     - **Reason for muting**: The reason for muting the finding. Available reasons include **Duplicate**, **External solution**, **Pending fix**, **False positive**, **Internal solution**, **No fix available**, **Accepted risk**, and **Other**.
     - **Rule expiration**: The date on which the rule expires. 
     - **Further description for muting reason**: Optional box for additional details.
-1. Click **Save**.
+1. Click **Save**. The rule applies to new findings immediately and starts checking existing findings within the next hour.
+
+## Where due dates appear
+
+When a finding has a due date, you can see it in these locations:
+
+- Explorer facets
+- Findings side panel
+- Notifications
+- Jira ticket descriptions
+- Reporting metrics (as an "overdue" Boolean) to identify teams or repositories with the most overdue vulnerabilities
 
 ## Rule matching order
 

@@ -24,7 +24,7 @@ Notification rules help automatically alert your team about security problems. I
     - **Any of these types**: The types of findings that the rule should check for. Available types include **Application Code Vulnerability**, **Application Library Vulnerability**, **Container Image Vulnerability**, **Misconfiguration**, **Attack Path**, **Identity Risk**, and **API Security Finding**.
     - **Any of these tags or attributes**: The resource tags or attributes that must match for the rule to apply.
 1. Set a due date for each severity level, effective from the discovery of a matching severity vulnerability. Optionally, you can omit a due date if it is not necessary for a severity level. 
-1. Click **Save**.
+1. Click **Save**. The rule applies to new findings immediately and starts checking existing findings within the next hour.
 
 ## Rule matching order
 

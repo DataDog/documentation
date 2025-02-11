@@ -22,6 +22,8 @@ further_reading:
 
 Automation Pipelines allows you to set up automated rules for newly discovered vulnerabilities, thus accelerating triage and remediation efforts at scale.
 
+{{< img src="security/automation_pipelines/vulnerabilities_settings.png" alt="Automation Vulnerabilities Settings page" width="100%">}}
+
 ## Availability
 
 Automation Pipelines is available for:
