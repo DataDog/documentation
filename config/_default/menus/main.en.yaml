@@ -767,20 +767,24 @@ menu:
       identifier: otel_guides_getting_started
       parent: otel_guides
       weight: 901
-    - name: Migrate to OTel Collector v0.95.0+
-      url: opentelemetry/guide/migration/
-      identifier: otel_guides_migration
-      parent: otel_guides
-      weight: 902
     - name: Produce Delta Temporality Metrics
       url: opentelemetry/guide/otlp_delta_temporality/
       identifier: otel_guides_delta_temporality
       parent: otel_guides
-      weight: 903
+      weight: 902
     - name: Send Data from the OTel Demo
       url: /opentelemetry/guide/otel_demo_to_datadog/
       parent: otel_guides
+      weight: 903
+    - name: Migration Guides
+      url: /opentelemetry/guide/migrate/
+      identifier: otel_guides_migration
+      parent: otel_guides
       weight: 904
+    - name: Migrate to OTel Collector v0.95.0+
+      url: /opentelemetry/guide/migrate/collector_0_95_0/
+      parent: otel_guides_migration
+      weight: 9041
     - name: Developers
       url: developers/
       pre: dev-code
