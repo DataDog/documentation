@@ -73,7 +73,7 @@ With [Managed Teams][6], you control the core provisioning of a Datadog Team —
 1. In the **Match result & push action** column, ensure **Create group** is selected
 1. Click **Save**.
 
-To verify that the operation completed successfully, navigate to the [Teams list][7] in Datadog. Search for a Datadog Team matching the Okta group you configured. Verify that the team exists in Datadog and is managed externally.
+To verify that the operation completed successfully, navigate to the [Teams list][7] in Datadog. Search for a Datadog Team matching the Okta group you configured. Verify that the team exists in Datadog and is managed externally. It may take a minute or two before the team appears in Datadog.
 
 {{< img src="/account_management/scim/okta/managed-externally.png" alt="Datadog team list showing a team called Cool group that is managed externally.">}}
 
@@ -89,7 +89,7 @@ You can map an existing Datadog Team to an Okta group. Establishing a link from 
 1. In the **Match result & push action** column, ensure **Create group** is selected.
 1. Click **Save**.
 
-**Note:** Okta may display a **No match found** message, because it only returns managed groups. You can ignore this message and proceed with creating the group to establish synchronization.
+**Note:** When you select **Create group**, Okta displays a **No match found** message. You can ignore this message and proceed with creating the group to establish synchronization.
 
 ### Delete the connection between an Okta group and a Datadog Team
 
@@ -118,6 +118,8 @@ This procedure allows you to manage team membership in Datadog instead of Okta a
 1. Select **Delete the group in the target app (recommended)**.
 1. Click **Unlink**.
 1. Click **Save**.
+
+**Note:** Contrary to the name of the option, selecting **Delete the group in the target app** does _not_ delete the team in Datadog. Instead, it removes all members from the team and removes the link between the group in Okta and the Datadog Team.
 
 ## Further Reading
 
