@@ -14,12 +14,8 @@ Visualize and analyze your OpenTelemetry data using Datadog's observability feat
 
 Link your telemetry data for full-stack observability:
 
-/real_user_monitoring/connect_rum_and_traces/
-
-content/en/tracing/other_telemetry/connect_logs_and_traces/opentelemetry.md
-
 {{< whatsnext desc=" " >}}
-    {{< nextlink href="" >}}Connect Logs and Traces{{< /nextlink >}}
+    {{< nextlink href="/explore/correlate_logs_and_traces/" >}}Connect Logs and Traces{{< /nextlink >}}
     {{< nextlink href="/opentelemetry/explore/connect_rum_and_traces/" >}}Connect RUM and Traces{{< /nextlink >}}
 {{< /whatsnext >}}
 
