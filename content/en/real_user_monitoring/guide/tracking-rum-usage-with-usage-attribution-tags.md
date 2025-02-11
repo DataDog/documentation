@@ -12,7 +12,7 @@ further_reading:
 ---
 
 {{< callout url="#" btn_hidden="true" header="false">}}
-  <a href="/real_user_monitoring/guide/tracking-rum-usage-with-usage-attribution-tags/#enforce-tags-to-be-set-at-the-org-level">Enforced RUM Usage Attribution</a> is in Preview. To request access, contact <a href="https://docs.datadoghq.com/help/"> Datadog Support</a>.
+  <a href="/real_user_monitoring/guide/tracking-rum-usage-with-usage-attribution-tags/#enforce-tags-to-be-set-at-the-org-level">Enforced RUM Usage Attribution</a> at the organization level is in Preview. To request access, contact <a href="https://docs.datadoghq.com/help/"> Datadog Support</a>.
 {{< /callout >}}
 
 ## Overview
@@ -27,6 +27,8 @@ This guide describes how to do the following:
 As an example, this guide walks through how to track RUM usage by department.
 
 ## Set up RUM usage attribution
+
+You can set up RUM usage attribution tags at the SDK level.
 
 ### Check your tags
 
@@ -73,18 +75,19 @@ If your Datadog environment has a parent and child organization and the setting 
 
 1. Ensure you have the RUM Settings Write permission.
 2. Navigate to [**Digital Experience** > **Real User Monitoring** > **Manage Applications** > **Enforce Usage Attribution**][6].
-3. Click the toggle to **Enforce tags for usage attribution on all applications**.
+3. Click the toggle to **Enforce tags for usage attribution on all applications**. With this enabled, apps can only be created or updated if all tags are set.
 
    {{< img src="real_user_monitoring/guide/rum-usage-attribution-tags/enforce-usage-attribution-toggle-1.png" alt="Toggle the Enforce Usage Attribution Tags setting at the application level." style="width:100%;">}}
 
 ### Manage usage attribution tags for your RUM applications
 After your usage attribution tags have been enforced and configured, you can tag your RUM sessions with them. 
 
-To add usage attribution tags to your application:
+To manage usage attribution tags to your application in the UI:
 
 1. Go to the [RUM Application Management][2] page.
 2. Upon creating a new application or updating one, You can see how many of the required tags have been added.
 3. Click **Edit tags** to assign the [configured usage attribution tags][7].
+4. Click **Save Changes**.
 
 {{< img src="real_user_monitoring/guide/rum-usage-attribution-tags/enforce-usage-attribution-tags.png" alt="Prompt to add required usage attribution tags after enforcing the tags." style="width:60%;">}}
 
