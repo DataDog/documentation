@@ -17,7 +17,7 @@ further_reading:
 
 ## Overview
 
-The [Usage Attribution][1] page provides information and functionality related to data usage and usage types. By default, the data usage can be viewed and filtered by broader categories such as product, organization, or tag keys. You can define up to 3 usage attribution tags per organization and manage them directly from the UI for each RUM application.
+The [Usage Attribution][1] page provides information and functionality related to data usage and usage types. By default, the data usage can be viewed and filtered by broader categories such as product, organization, or tag keys. You can define up to three usage attribution tags per organization and manage them directly from the UI for each RUM application.
 
 This guide describes how to do the following:
 
@@ -69,9 +69,9 @@ Usage information is also available through the [`GetHourlyUsageAttribution`][5]
   Enforced RUM Usage Attribution is in Preview. To request access, contact <a href="https://docs.datadoghq.com/help/"> Datadog Support</a>.
 {{< /callout >}}
 
-You can require that a usage attribution tag gets added to a RUM application so that you can understand how its usage contributes to your Datadog bill. When this setting is active, usage attribution tags are required to be set upon creating a new or updating an existing RUM application in Datadog per organization.
+You can require that a usage attribution tag gets added to a RUM application so that you can understand how its usage contributes to your Datadog bill. When this setting is active, usage attribution tags are required to be set when creating a new RUM application or updating an existing RUM application in Datadog per organization.
 
-If your Datadog environment has a parent and child organization and the setting is enforced in both organizations, you are required to set attribution tags for both. For example, if 3 attribution tags are required for the parent org and 2 attribution tags are required for the child org, you are prompted to set a total of 5 tags for each of your applications.
+If your Datadog environment has a parent and child organization and the setting is enforced in both organizations, you are required to set attribution tags for both. For example, if three attribution tags are required for the parent org and two attribution tags are required for the child org, you are prompted to set a total of five tags for each of your applications.
 
 1. Ensure you have the RUM Settings Write permission.
 2. Navigate to [**Digital Experience** > **Real User Monitoring** > **Manage Applications** > **Enforce Usage Attribution**][6].
@@ -85,7 +85,7 @@ After your usage attribution tags have been enforced and configured, you can tag
 To manage usage attribution tags to your application in the UI:
 
 1. Go to the [RUM Application Management][2] page.
-2. Upon creating a new application or updating one, You can see how many of the required tags have been added.
+2. When creating a new application or updating one, you can see how many of the required tags have been added.
 3. Click **Edit tags** to assign the [configured usage attribution tags][7].
 4. Click **Save Changes**.
 
