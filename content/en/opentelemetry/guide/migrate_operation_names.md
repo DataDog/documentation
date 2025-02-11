@@ -10,10 +10,10 @@ further_reading:
 
 When using OpenTelemetry with Datadog, you might see unclear or lengthy operation names in your traces, and some traces might not appear in your service pages. This happens because of missing mappings between OpenTelemetry SDK information and Datadog operation names, which are span attributes that classify [entry points into a service][1].
 
-Datadog now provides new operation name mappings that improve trace visibility in the service page. This feature requires opt-in configuration until April 2025, when it becomes the default.
+Datadog now provides new operation name mappings that improve trace visibility in the service page. This feature requires opt-in configuration now but will become the default in the near future.
 
 <div class="alert alert-warning">
-Datadog strongly encourages starting the migration as soon as possible to ensure a smooth transition before the April 2025 deadline.
+Datadog strongly recommends migrating to the new mappings as soon as possible before they become the default.
 </div>
 
 ## Prerequisites
@@ -117,6 +117,8 @@ Enable the feature using one of these methods:
     ```shell
     export DD_APM_FEATURES="enable_operation_and_resource_name_logic_v2"
     ```
+
+<div class="alert alert-info"><strong>Replace removed configurations</strong><br>If you previously used span name configurations and need to maintain similar functionality, set the <code>operation.name</code> attribute directly in your application code.</div>
 
 {{% /tab %}}
 {{< /tabs >}}
