@@ -13,7 +13,7 @@ further_reading:
   Data Pipeline Lineage is available in Preview. If you're interested in this feature, complete the form to request access.
 {{< /callout >}} 
 
-Datadog’s Data Pipeline Lineage helps you monitor data flow throughout your pipelines end-to-end, including ingestion, processing, and storage. With expanded visibility into your streaming data pipelines, data jobs, and data warehouses in a unified view, you can detect issues with your data, identify related upstream failures, and troubleshoot faster.
+Datadog's Data Pipeline Lineage helps you monitor data flow throughout your pipelines end-to-end, including ingestion, processing, and storage. With expanded visibility into your streaming data pipelines, data jobs, and data warehouses in a unified view, you can detect issues with your data, identify related upstream failures, and troubleshoot faster.
 
 You can visualize lineage of data between components (streaming data, data processing jobs, data warehouses) with upstream and downstream dependencies, monitor throughput, and detect issues such as consumer lag, schema changes, along with the downstream data impacted.
 
