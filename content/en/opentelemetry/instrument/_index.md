@@ -45,3 +45,87 @@ The OpenTelemetry Collector enables you to collect, process, and export telemetr
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /opentelemetry/setup/collector_exporter/
+
+# Instrument Your Applications
+
+## Overview
+
+Datadog supports multiple approaches for instrumenting applications with OpenTelemetry. This guide helps you choose the right instrumentation strategy for your needs.
+
+## Comparison of Methods
+
+| Feature | OTel API + Datadog SDK | Full OpenTelemetry | OTel Instrumentation + DD SDK |
+|---------|----------------------|-------------------|----------------------------|
+| Best For | Balance of vendor neutrality and Datadog features | Complete vendor neutrality | Extending Datadog SDK coverage |
+| Datadog Feature Support | Full | Limited | Full |
+| Implementation Complexity | Medium | Medium | Low |
+| Vendor Independence | Medium | High | Low |
+| Auto-instrumentation | Yes | Yes | Yes |
+| Custom Instrumentation | Yes | Yes | Limited |
+
+## Instrumentation Options
+
+### OpenTelemetry API with Datadog SDK
+
+This approach combines OpenTelemetry's standardized instrumentation with Datadog's full feature set.
+
+**Benefits:**
+- Access to all Datadog features
+- Standardized instrumentation approach
+- Future flexibility to switch vendors
+
+**Ideal for:**
+- Teams wanting vendor neutrality without sacrificing features
+- Organizations standardizing on OpenTelemetry
+- Projects requiring Datadog-specific capabilities
+
+{{< whatsnext desc=" " >}}
+    {{< nextlink href="/tracing/trace_collection/custom_instrumentation/otel_instrumentation/" >}}Implement OTel API with Datadog SDK{{< /nextlink >}}
+{{< /whatsnext >}}
+
+### Full OpenTelemetry
+
+Use OpenTelemetry's complete stack for a vendor-neutral implementation.
+
+**Benefits:**
+- Complete vendor independence
+- Standard OpenTelemetry ecosystem support
+- Simplified vendor transitions
+
+**Considerations:**
+- Limited access to Datadog-specific features
+- Standard OpenTelemetry capabilities only
+
+<div class="alert alert-info">Some Datadog features are not available with full OpenTelemetry implementation. See the <a href="/opentelemetry/compatibility/">Feature Compatibility</a> table for details.</div>
+
+{{< whatsnext desc=" " >}}
+    {{< nextlink href="https://opentelemetry.io/docs/languages/" >}}Implement full OpenTelemetry{{< /nextlink >}}
+{{< /whatsnext >}}
+
+### OpenTelemetry Instrumentation with Datadog SDK
+
+Extend Datadog SDK coverage using OpenTelemetry instrumentation libraries.
+
+**Benefits:**
+- Expands Datadog SDK coverage
+- Simple implementation
+- Access to full Datadog feature set
+
+**Ideal for:**
+- Existing Datadog users needing additional framework support
+- Projects requiring specific library instrumentation
+- Gradual adoption of OpenTelemetry
+
+{{< whatsnext desc=" " >}}
+    {{< nextlink href="/opentelemetry/instrument/instrumentation_libraries/" >}}Use OpenTelemetry instrumentation libraries{{< /nextlink >}}
+{{< /whatsnext >}}
+
+## Next Steps
+
+1. Review the [Feature Compatibility](/opentelemetry/compatibility/) table
+2. Choose your instrumentation approach
+3. Follow the implementation guide for your selected method
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
