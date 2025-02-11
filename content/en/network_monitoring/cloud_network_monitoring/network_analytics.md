@@ -77,7 +77,7 @@ You can use the facet panels to browse through all of the tags available on your
 
 #### Custom facets
 
-Aggregate and filter your traffic data by any tags on the network analytics page. A list of included tags is available which is located on the left side of the screen under the **Client** and **Server** tags, or in the **View clients as** and **View servers as** dropdown menus.
+Aggregate and filter your traffic data by any tags on the network analytics page. A list of included tags is located on the left side of the screen under the **Client** and **Server** tags, and in the **View clients as** and **View servers as** dropdown menus.
 
 {{< img src="network_performance_monitoring/network_analytics/drop_down_cnm.png" alt="Dropdown menu from network analytics page showing the facet list" style="width:90%;">}}
 
