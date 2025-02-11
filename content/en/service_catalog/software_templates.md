@@ -76,7 +76,7 @@ Navigate to the [Workflow Automation][3] page to configure the template in Datad
    - Track the success of the workflow templating process in [Workflow Automation][3].
 
 ### Publishing your App 
-Once you have finished setting up and testing up your App, you can publish it for your team members to use. This will prompt you to define permissions and then allow you to add it to a Dashboard or to the Self-Service portal. 
+When you have finished setting up and testing up your App, you can publish it for your team members to use. The publishing flow prompts you to define permissions and then allows you to add your App to a Dashboard or to the Self-Service portal. 
 
   {{< img src="tracing/service_catalog/self-service-publish.png" alt="Publish to Self-Service" style="width:100%;" >}}
 
