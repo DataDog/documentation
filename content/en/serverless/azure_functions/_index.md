@@ -57,7 +57,7 @@ This page explains how to collect traces, trace metrics, runtime metrics, and cu
    patch_all()
    ```
 
-3. (Optional) **Enable runtime metrics**. See [Node.js Runtime Metrics][2].
+3. (Optional) **Enable runtime metrics**. See [Python Runtime Metrics][2].
 
 4. (Optional) **Enable custom metrics**. See [Metric Submission: DogStatsD][3].
 [1]: /tracing/trace_collection/automatic_instrumentation/?tab=singlestepinstrumentation
