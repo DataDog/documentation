@@ -107,7 +107,11 @@ LLMObs.enable(
 
 ### AWS Lambda setup
 
-Enable LLM Observability by specifying the required environment variables in your [command line setup](#command-line-setup) and following the setup instructions for the [Datadog-Python and Datadog-Extension][14] AWS Lambda layers. In addition:
+Enable LLM Observability by specifying the required environment variables in your [command line setup](#command-line-setup) and following the setup instructions for the [Datadog-Python and Datadog-Extension][14] AWS Lambda layers.
+
+If you are not expecting APM traces from your Lambda function, and only LLM Observability, set `DD_LLMOBS_AGENTLESS_ENABLED` to `true` in your Lambda function's environment variables.
+
+If you are expecting APM traces from your Lambda function:
 
 - Set `DD_TRACE_ENABLED` to `true` in your Lambda function's environment variables.
 - Unset `DD_EXTENSION_VERSION` in your Lambda function's environment variables if you are using `v66` or earlier of the Datadog-Extension layer, otherwise set `DD_EXTENSION_VERSION` to `compatibility` if using `v67` or later.
