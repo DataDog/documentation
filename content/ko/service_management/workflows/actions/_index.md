@@ -28,7 +28,7 @@ Datadog은 특정 도구 또는 통합과 연결되지 않은 워크플로우 �
 
 {{< whatsnext desc="일반 작업에 대해 자세히 알아보기:" >}}
     {{< nextlink href="/service_management/workflows/actions/flow_control" >}}로직 작업을 추가하여 중지 간격, 조건 브랜치, 이터레이션(iteration) 사용 등을 수행합니다.{{< /nextlink >}}
-    {{< nextlink href="/service_management/workflows/actions/data_transformation" >}}자바스크립트(Javascript)를 사용하여 워크플로우 내에서 커스텀 데이터 변환을 수행합니다.{{< /nextlink >}}
+    {{< nextlink href="/service_management/workflows/expressions" >}}자바스크립트(Javascript)를 사용하여 워크플로우 내에서 커스텀 데이터 변환을 수행합니다.{{< /nextlink >}}
     {{< nextlink href="/service_management/workflows/actions/http" >}}HTTP 작업을 사용하여 커스텀 엔드포인트에 요청합니다.{{< /nextlink >}}
     {{< nextlink href="/service_management/workflows/actions/saved_actions" >}}<i>저장한 작업</i>기능으로 작업과 파라미터를 저장 및 재사용합니다.{{< /nextlink >}}
 {{< /whatsnext >}}

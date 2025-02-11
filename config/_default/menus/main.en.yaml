@@ -2527,11 +2527,6 @@ menu:
       parent: workflows_actions
       identifier: workflows_flow_control
       weight: 502
-    - name: Data Transformation
-      url: service_management/workflows/actions/data_transformation/
-      parent: workflows_actions
-      identifier: workflows_data_transformation
-      weight: 503
     - name: Save and Reuse Actions
       url: service_management/workflows/saved_actions/
       parent: workflows
@@ -2542,16 +2537,21 @@ menu:
       parent: workflows
       identifier: workflows_test_and_debug
       weight: 8
+    - name: JavaScript Expressions
+      url: service_management/workflows/expressions/
+      parent: workflows
+      identifier: workflows_expressions
+      weight: 9
     - name: Track Workflows
       url: service_management/workflows/track
       parent: workflows
       identifier: workflows_track
-      weight: 9
+      weight: 10
     - name: Limits
       url: service_management/workflows/limits/
       parent: workflows
       identifier: workflows_limits
-      weight: 10
+      weight: 11
     - name: App Builder
       url: service_management/app_builder/
       pre: app-builder
