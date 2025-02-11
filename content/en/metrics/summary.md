@@ -240,11 +240,11 @@ This table shows the mapping between the metric origin as seen in the facet and 
 [14]: /security/cloud_security_management/
 [15]: /database_monitoring/
 [16]: /data_streams/
-[17]: /opentelemetry/collector_exporter/otel_collector_datadog_exporter/?tab=onahost
+[17]: /opentelemetry/setup/collector_exporter/
 [18]: /opentelemetry/collector_exporter/
 [19]: /network_monitoring/cloud_network_monitoring/
 [20]: /observability_pipelines/
-[21]: /opentelemetry/interoperability/otlp_ingest_in_the_agent/?tab=host
+[21]: /opentelemetry/setup/otlp_ingest_in_the_agent/
 [22]: /integrations/process/
 [23]: /monitors/types/real_user_monitoring/
 [24]: /serverless/

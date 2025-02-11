@@ -5,6 +5,7 @@ aliases:
 - /tracing/trace_collection/open_standards/otel_collector_datadog_exporter/
 - /opentelemetry/otel_collector_datadog_exporter/
 - /opentelemetry/collector_exporter/
+- /opentelemetry/collector_exporter/otel_collector_datadog_exporter
 description: 'Send OpenTelemetry data to the OpenTelemetry Collector and Datadog Exporter'
 further_reading:
 - link: "https://opentelemetry.io/docs/collector/"

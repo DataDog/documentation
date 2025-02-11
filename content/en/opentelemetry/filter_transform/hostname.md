@@ -131,5 +131,5 @@ The following host names are deemed invalid and discarded:
 
 [1]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/resourcedetectionprocessor#resource-detection-processor
 [2]: /opentelemetry/interoperability/otlp_ingest_in_the_agent
-[3]: /opentelemetry/collector_exporter/otel_collector_datadog_exporter
-[4]: /opentelemetry/collector_exporter/hostname_tagging/?tab=host
+[3]: /opentelemetry/setup/collector_exporter/
+[4]: /opentelemetry/config/hostname_tagging/
