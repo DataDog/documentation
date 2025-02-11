@@ -6,7 +6,7 @@ further_reading:
       text: 'Ragas Evaluations'
 ---
 
-This page provides a quickstart guide for using Datadog's integration with the [Ragas][1] framework to evaluate your LLM application. For more information about the Ragas integration, including a detailed setup guide, see [Ragas Evaluations][2].
+Learn how to use Datadog's integration with the [Ragas][1] framework to evaluate your LLM application. For more information about the Ragas integration, including a detailed setup guide, see [Ragas Evaluations][2].
 
 1. Install required dependencies:
     ```bash
