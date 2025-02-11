@@ -746,11 +746,25 @@
       "description": "Create api handle returns \"CREATED\" response"
     }
   ],
+  "CreateWorkflowsWebhookHandle": [
+    {
+      "group": "microsoft_teams_integration",
+      "suffix": "_1716851881",
+      "description": "Create workflow webhook handle returns \"CREATED\" response"
+    }
+  ],
   "UpdateTenantBasedHandle": [
     {
       "group": "microsoft_teams_integration",
       "suffix": "_419892746",
       "description": "Update api handle returns \"OK\" response"
+    }
+  ],
+  "UpdateWorkflowsWebhookHandle": [
+    {
+      "group": "microsoft_teams_integration",
+      "suffix": "_163189594",
+      "description": "Update workflow webhook handle returns \"OK\" response"
     }
   ],
   "CreateMonitorConfigPolicy": [
@@ -976,14 +990,14 @@
     {
       "group": "security_monitoring",
       "suffix": "",
-      "description": "Create a new signal-based rule returns \"Successfully created the notification rule.\" response"
+      "description": "Create a new signal-based notification rule returns \"Successfully created the notification rule.\" response"
     }
   ],
   "CreateVulnerabilityNotificationRule": [
     {
       "group": "security_monitoring",
       "suffix": "",
-      "description": "Create a new vulnerability-based rule returns \"Successfully created the notification rule.\" response"
+      "description": "Create a new vulnerability-based notification rule returns \"Successfully created the notification rule.\" response"
     }
   ],
   "CreateSecurityFilter": [
@@ -1030,14 +1044,14 @@
     {
       "group": "security_monitoring",
       "suffix": "",
-      "description": "Patch a signal-based rule returns \"Notification rule successfully patched.\" response"
+      "description": "Patch a signal-based notification rule returns \"Notification rule successfully patched.\" response"
     }
   ],
   "PatchVulnerabilityNotificationRule": [
     {
       "group": "security_monitoring",
       "suffix": "",
-      "description": "Patch a vulnerability-based rule returns \"Notification rule successfully patched.\" response"
+      "description": "Patch a vulnerability-based notification rule returns \"Notification rule successfully patched.\" response"
     }
   ],
   "RunHistoricalJob": [

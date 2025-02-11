@@ -18,10 +18,6 @@ further_reading:
       text: 'Explore your services, resources, and traces'
 ---
 
-<div class="alert alert-warning">
-This feature is in public beta.
-</div>
-
 ## Automatic configuration
 
 Runtime metrics collection uses the [`dogstatsd-ruby`][1] gem to send metrics via DogStatsD to the Agent. To collect runtime metrics, you must add this gem to your Ruby application, and make sure that [DogStatsD is enabled for the Agent][2].
