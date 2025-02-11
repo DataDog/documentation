@@ -28,7 +28,7 @@ After your applications have been instrumented, you can configure your RUM appli
 The available functionality has the following important limitations:
 
 - If proxying compressed traffic, the Auto-Instrumentation method is not able to inject the JS scriptlet into the HTML traffic.
-- This instrumentation method does not support any [advanced RUM configurations][3]. However, `allowedTracingUrls` and `excludedActivityUrls` are supported for NGINX web servers.
+- This instrumentation method does not support any [advanced RUM configurations][3]. However, `allowedTracingUrls` and `excludedActivityUrls` are supported for NGINX, IIS and httpd web servers.
 - If acting as a proxy and the upstream server has end-to-end encryption (like TLS) enabled, the module cannot inject RUM. Ensure the web server is set up for TLS origination for successful instrumentation.
 - (Windows IIS only) Configuration for Auto-Instrumentation is only available per Windows IIS site.
 
