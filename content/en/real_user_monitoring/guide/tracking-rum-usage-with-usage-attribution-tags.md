@@ -71,7 +71,7 @@ Usage information is also available through the [`GetHourlyUsageAttribution`][5]
 
 Enable usage attribution tags for RUM applications to track their contribution to your Datadog bill. When this setting is active, tags must be set when creating or updating RUM applications in Datadog at the organization level.
 
-If your Datadog environment has a parent and child organization and the setting is enforced in both organizations, you are required to set attribution tags for both. For example, if three attribution tags are required for the parent org and two attribution tags are required for the child org, you are prompted to set a total of five tags for each of your applications.
+In a Datadog environment with parent and child organizations where the setting is enforced in both, you must set attribution tags for each. For instance, if the parent requires three tags and the child two, you will set a total of five tags per application.
 
 1. Ensure you have the RUM Settings Write permission.
 2. Navigate to **Digital Experience** > **Real User Monitoring** > **Manage Applications** > **Enforce Usage Attribution**.
