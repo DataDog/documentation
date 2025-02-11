@@ -111,10 +111,10 @@ Set the following environment variables to configure the tracer:
 `DD_CIVISIBILITY_ENABLED=true` (Required)
 : Enables the Test Optimization product.
 
-`DD_ENV` (Required)
+`DD_ENV`
 : Environment where the tests are being run (for example: `local` when running tests on a developer workstation or `ci` when running them on a CI provider).
 
-`DD_SERVICE` (Required)
+`DD_SERVICE`
 : Name of the service or library being tested.
 
 `DD_TRACER_FOLDER` (Required)
@@ -122,6 +122,9 @@ Set the following environment variables to configure the tracer:
 
 `MAVEN_OPTS=-javaagent:$DD_TRACER_FOLDER/dd-java-agent.jar` (Required)
 : Injects the tracer into the Maven build process.
+
+`DD_TEST_SESSION_NAME`
+: Identifies a group of tests (for example: `unit-tests` or `integration-tests`).
 
 Run your tests as you normally do (for example: `mvn test` or `mvn verify`).
 
@@ -133,10 +136,10 @@ Set the following environment variables to configure the tracer:
 `DD_CIVISIBILITY_ENABLED=true` (Required)
 : Enables the Test Optimization product.
 
-`DD_ENV` (Required)
+`DD_ENV`
 : Environment where the tests are being run (for example: `local` when running tests on a developer workstation or `ci` when running them on a CI provider).
 
-`DD_SERVICE` (Required)
+`DD_SERVICE`
 : Name of the service or library being tested.
 
 `DD_TRACER_FOLDER` (Required)
@@ -155,10 +158,13 @@ Set the following environment variables to configure the tracer:
 `DD_CIVISIBILITY_ENABLED=true` (Required)
 : Enables the Test Optimization product.
 
-`DD_ENV` (Required)
+`DD_TEST_SESSION_NAME`
+: Identifies a group of tests (for example: `unit-tests` or `integration-tests`).
+
+`DD_ENV`
 : Environment where the tests are being run (for example: `local` when running tests on a developer workstation or `ci` when running them on a CI provider).
 
-`DD_SERVICE` (Required)
+`DD_SERVICE`
 : Name of the service or library being tested.
 
 `DD_TRACER_FOLDER` (Required)
@@ -177,10 +183,13 @@ Set the following environment variables to configure the tracer:
 `DD_CIVISIBILITY_ENABLED=true` (Required)
 : Enables the Test Optimization product.
 
-`DD_ENV` (Required)
+`DD_TEST_SESSION_NAME`
+: Identifies a group of tests (for example: `unit-tests` or `integration-tests`).
+
+`DD_ENV`
 : Environment where the tests are being run (for example: `local` when running tests on a developer workstation or `ci` when running them on a CI provider).
 
-`DD_SERVICE` (Required)
+`DD_SERVICE`
 : Name of the service or library being tested.
 
 `DD_TRACER_FOLDER` (Required)
@@ -475,6 +484,32 @@ static Stream<Arguments> randomArguments() {
     );
 }
 ```
+
+### Test session name `DD_TEST_SESSION_NAME`
+
+Use `DD_TEST_SESSION_NAME` to define the name of the test session and the related group of tests. Examples of values for this tag would be:
+
+- `unit-tests`
+- `integration-tests`
+- `smoke-tests`
+- `flaky-tests`
+- `ui-tests`
+- `backend-tests`
+
+If `DD_TEST_SESSION_NAME` is not specified, the default value used is a combination of the:
+
+- CI job name
+- Command used to run the tests (such as `mvn test`)
+
+The test session name needs to be unique within a repository to help you distinguish different groups of tests.
+
+#### When to use `DD_TEST_SESSION_NAME`
+
+If your tests are run with commands that include a dynamic string, such as:
+
+- `mvn test --temp-dir=/var/folders/t1/rs2htfh55mz9px2j4prmpg_c0000gq/T`
+
+Then the default value for the test session name constantly changes. Datadog recommends using `DD_TEST_SESSION_NAME` in this case.
 
 ## Troubleshooting
 
