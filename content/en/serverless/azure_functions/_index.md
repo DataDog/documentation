@@ -1,5 +1,5 @@
 ---
-title: Tracing Azure Functions
+title: Install Serverless Monitoring for Azure Functions
 ---
 
 ## Overview
