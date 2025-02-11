@@ -20,7 +20,7 @@ Using the Datadog Operator requires the following prerequisites:
 
 ## Deploy the Datadog Operator
 
-To facilitate the command execution, we recommend defining an environment variable called `DD_NAMESPACE` in your shell.
+To facilitate the command execution, define an environment variable called `DD_NAMESPACE` in your shell.
 To use the Datadog Operator, deploy it in your Kubernetes cluster. Then create a `DatadogAgent` Kubernetes resource that contains the Datadog deployment configuration:
 
 1. Add the Datadog Helm repo:
