@@ -22,11 +22,11 @@ On the Worker installation page:
 1. Select your platform in the **Choose your installation platform** dropdown menu.
 1. If you want to update source environment variables, update the information for your log source.
 {{< tabs >}}
-<!-- {{% tab "Amazon Data Firehose" %}}
+{{% tab "Amazon Data Firehose" %}}
 
 {{% observability_pipelines/configure_existing_pipelines/source_env_vars/amazon_data_firehose %}}
 
-{{% /tab %}} -->
+{{% /tab %}}
 {{% tab "Amazon S3" %}}
 
 {{% observability_pipelines/configure_existing_pipelines/source_env_vars/amazon_s3 %}}
