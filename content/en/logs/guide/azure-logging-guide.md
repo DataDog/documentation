@@ -12,10 +12,8 @@ further_reading:
   text: "Terraform Azure Datadog Log Forwarder"
 ---
 
-<div class="alert alert-info">
-New Preview Feature: Azure Automated Log Forwarding
-Easily set up log forwarding across your Azure environment in minutes—no manual configuration required. Automate management and scaling of log forwarding services. Sign up for preview access <a href="https://docs.google.com/forms/d/e/1FAIpQLSeZkmqTwBQ43zR9SZoyf_oUDCFDsth00lb4jRKjfn-vKNW4dA/viewform">here</a>.
-</div>
+{{< callout url="https://docs.google.com/forms/d/e/1FAIpQLSeZkmqTwBQ43zR9SZoyf_oUDCFDsth00lb4jRKjfn-vKNW4dA/viewform" header="Automated Log Forwarding for Azure (in Preview)">}}
+Automatically set up log forwarding across your Azure environment—no manual configuration required! This feature automatically manages and scales log forwarding services.{{< /callout >}}
 
 ## Overview
 
