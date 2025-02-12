@@ -70,7 +70,7 @@ With [Managed Teams][6], you control the core provisioning of a Datadog Team —
 {{< img src="/account_management/scim/okta/pushed-groups.png" alt="Okta pushed groups configuration interface">}}
 1. Click the **Push Groups** button. The pushed groups interface opens.
 1. Select the Okta group you want to push to Datadog.
-1. In the **Match result & push action** column, ensure **Create group** is selected
+1. In the **Match result & push action** column, ensure **Create group** is selected.
 1. Click **Save**.
 
 To verify that the operation completed successfully, navigate to the [Teams list][7] in Datadog. Search for a Datadog Team matching the Okta group you configured. Verify that the team exists in Datadog and is managed externally. It may take a minute or two before the team appears in Datadog.
