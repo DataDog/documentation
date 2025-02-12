@@ -44,7 +44,6 @@ Don't see your tech stack here? [Submit a request][2].
    --conf spark.executor.extraJavaOptions="-Ddd.data.jobs.enabled=true -Ddd.data.streams.enabled=true" \
    application.jar
    ```
-   <div class="alert alert-warning">This enables Data Streams Monitoring for <strong>all</strong> Spark jobs.</div>
 
 1. **For Snowflake services, install APM clients**. Install Datadog's [Java][7] or [Python][8] APM client for any services that interact with Snowflake. Set the `DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED` environment variable to `true`.
 
