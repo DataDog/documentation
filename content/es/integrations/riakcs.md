@@ -13,7 +13,7 @@
     "metrics":
       "check": "riakcs.bucket_list_pool.workers"
       "metadata_path": "metadata.csv"
-      "prefix": "riakcs".
+      "prefix": "riakcs"
     "process_signatures":
     - "riak-cs start"
     "service_checks":
@@ -42,7 +42,7 @@
 "manifest_version": "2.0.0"
 "name": "riakcs"
 "public_title": "Riak CS"
-"short_description": "Realiza un seguimiento de la frecuencia y la latencia media de operaciones GET, PUT, DELETE y otras".
+"short_description": "Realiza un seguimiento de la frecuencia y la latencia media de operaciones GET, PUT, DELETE y otras"
 "supported_os":
 - "linux"
 - "macos"
@@ -54,10 +54,9 @@
   - "Supported OS::macOS"
   - "Supported OS::Windows"
   - "Category::Almacenes de datos"
- 
   - "Offering::Integración"
   "configuration": "README.md#Configuración"
-  "description": "Realiza un seguimiento de la frecuencia y la latencia media de operaciones GET, PUT, DELETE y otras".
+  "description": "Realiza un seguimiento de la frecuencia y la latencia media de operaciones GET, PUT, DELETE y otras"
   "media": []
   "overview": "README.md#Información general"
   "resources":
