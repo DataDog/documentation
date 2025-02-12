@@ -49,10 +49,10 @@ To get started, follow the installation instructions to configure services with 
 
 | Runtime | Supported technologies |
 |---|----|
-| Java/Scala | Kafka (self-hosted, Amazon MSK, Confluent Cloud / Platform), RabbitMQ, HTTP, gRPC, Amazon SQS |
-| Python | Kafka (self-hosted, Amazon MSK, Confluent Cloud / Platform), RabbitMQ, Amazon SQS |
-| .NET | Kafka (self-hosted, Amazon MSK, Confluent Cloud / Platform), RabbitMQ, Amazon SQS |
-| Node.js | Kafka (self-hosted, Amazon MSK, Confluent Cloud / Platform), RabbitMQ, Amazon SQS |
+| Java/Scala | Kafka (self-hosted, Amazon MSK, Confluent Cloud / Platform), RabbitMQ, HTTP, gRPC, Amazon SQS, Amazon Kinesis, Amazon SNS, Google Pub/Sub |
+| Python | Kafka (self-hosted, Amazon MSK, Confluent Cloud / Platform), RabbitMQ, Amazon SQS, Amazon Kinesis, Amazon SNS |
+| .NET | Kafka (self-hosted, Amazon MSK, Confluent Cloud / Platform), RabbitMQ, Amazon SQS, Amazon SNS, IBM MQ, Azure Service Bus |
+| Node.js | Kafka (self-hosted, Amazon MSK, Confluent Cloud / Platform), RabbitMQ, Amazon SQS, Amazon Kinesis, Amazon SNS, Google Pub/Sub |
 | Go | All (with [manual instrumentation][1]) |
 
 ## Explore Data Streams Monitoring
