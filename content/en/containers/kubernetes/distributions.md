@@ -77,6 +77,8 @@ spec:
 [1]:/containers/kubernetes/installation/?tab=datadogoperator
 [2]: /agent/guide/operator-eks-addon
 
+{{% /tab %}
+
 {{< /tabs >}}
 
 ## Azure Kubernetes Service (AKS) {#AKS}
