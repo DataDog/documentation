@@ -75,7 +75,7 @@ With [Managed Teams][6], you control the core provisioning of a Datadog Team —
 
 To verify that the operation completed successfully, navigate to the [Teams list][7] in Datadog. Search for a Datadog Team matching the Okta group you configured. Verify that the team exists in Datadog and is managed externally. It may take a minute or two before the team appears in Datadog.
 
-{{< img src="/account_management/scim/okta/managed-externally.png" alt="Datadog team list showing a team called Cool group that is managed externally.">}}
+{{< img src="/account_management/scim/okta/managed-externally.png" alt="Datadog team list showing a team called Identity team that is managed externally.">}}
 
 ### Synchronize an existing Datadog Team with an Okta group
 
