@@ -69,15 +69,19 @@ Usage information is also available through the [`GetHourlyUsageAttribution`][5]
   Enforced RUM Usage Attribution is in Preview. To request access, contact <a href="https://docs.datadoghq.com/help/"> Datadog Support</a>.
 {{< /callout >}}
 
-Enable usage attribution tags for RUM applications to track their contribution to your Datadog bill. When this setting is active, tags must be set when creating or updating RUM applications in Datadog at the organization level.
+Enforce usage attribution tags on RUM applications to track their contribution to your Datadog bill. This setting can be applied without having to instrument or re-instrument your application. When this setting is active, tags must be set when creating or updating RUM applications in Datadog.
 
-In a Datadog environment with parent and child organizations where the setting is enforced in both, you must set attribution tags for each. For instance, if the parent requires three tags and the child two, you will set a total of five tags per application.
+In a Datadog environment with parent and child organizations where the setting is enforced in both, you must set attribution tags for each. For instance, if the parent requires three tags and the child two, the child org inherits the parent org's tag, bringing the total of five tags per application.
+
+**Note**: When attribution tags are set at both the data and application level, Datadog uses the information set at the application level.
 
 1. Ensure you have the RUM Settings Write permission.
 2. Navigate to **Digital Experience** > **Real User Monitoring** > **Manage Applications** > **Enforce Usage Attribution**.
 3. Click the toggle to **Enforce tags for usage attribution on all applications**. With this enabled, apps can only be created or updated if all tags are set.
 
    {{< img src="real_user_monitoring/guide/rum-usage-attribution-tags/enforce-usage-attribution-toggle-1.png" alt="Toggle the Enforce Usage Attribution Tags setting at the application level." style="width:100%;">}}
+
+   Once this setting is enabled, previously created apps will have empty tag values, so you have to manually backfill the values manually.
 
 ### Manage usage attribution tags for your RUM applications
 After your usage attribution tags have been enforced and configured, you can tag your RUM sessions with them. 
