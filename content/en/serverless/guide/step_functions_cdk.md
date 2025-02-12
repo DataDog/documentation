@@ -77,7 +77,7 @@ datadogSfn := ddcdkconstruct.NewDatadogStepFunctions(
   jsii.String("DatadogSfn"),
   &ddcdkconstruct.DatadogStepFunctionsProps{
     Env:            jsii.String("<ENV>"), // e.g. "dev"
-    Service:        jsii.String("<SERVICE>), // e.g. "my-cdk-service"
+    Service:        jsii.String("<SERVICE>"), // e.g. "my-cdk-service"
     Version:        jsii.String("<VERSION>"), // e.g. "1.0.0"
     ForwarderArn:   jsii.String("<FORWARDER_ARN>"), // e.g. "arn:test:forwarder:sa-east-1:12345678:1"
     Tags:           jsii.String("<TAGS>"), // optional, e.g. "custom-tag-1:tag-value-1,custom-tag-2:tag-value-2"

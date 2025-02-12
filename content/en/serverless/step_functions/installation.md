@@ -85,7 +85,7 @@ Then, to send your Step Functions logs to Datadog:
 
    Take note of your Forwarder's ARN.
 
-1. Add the following to your `serverless.yml`:
+1. Run:
 
    ```shell
    datadog-ci stepfunctions instrument \
