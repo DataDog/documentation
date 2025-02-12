@@ -1,0 +1,67 @@
+description: あらゆる規模の機密データをリアルタイムで <br>発見、分類、マスキング
+faq:
+- a: センシティブデータスキャナーは、パターンマッチングルールを使用してセンシティブデータを分類・追跡し、オプションでそのデータが漏洩しないようにスクラブやハッシュ化を行います。詳しくは、
+    <a href="https://docs.datadoghq.com/account_management/org_settings/sensitive_data_detection">ドキュメント</a>をご覧ください。
+  q: Sensitive Data Scannerの仕組みは？
+  weight: 10
+- a: はい。Datadogでは、複数のスキャングループを設定することができ、タグやログの属性を使ってログをフィルタリングすることができます。
+  q: スキャンされるログ、スパン、イベントをフィルタリングすることはできますか？
+  weight: 20
+- a: ライブラリからルールを使用するか、カスタムルールを定義します。その方法については、 <a href="https://docs.datadoghq.com/account_management/org_settings/sensitive_data_detection">ドキュメント</a>をご覧ください。
+  q: スキャンルールを設定するにはどうすればいいですか？
+  weight: 30
+- a: Datadogエージェントは、コンプライアンス上重要なデータがプラットフォームの外に送信されるのを防ぐために、スクラビングなどのソリューションを提供します。詳細は、
+    <a href="https://docs.datadoghq.com/account_management/org_settings/sensitive_data_detection">ドキュメント</a>をご覧ください。
+  q: センシティブなデータの取り扱いにはどのような選択肢がありますか？
+  weight: 40
+- a: Sensitive Data Scannerは、Datadog の <a href="https://docs.datadoghq.com/logs/guide/logs-rbac/?tab=ui">ロールベースのアクセスコントロール（RBAC）</a>
+    と完全に統合されているため、どのロールやユーザーがアクセスできるかを簡単にコントロールすることができます。
+  q: スキャンルールの機密性/アクセスコントロールを確保するにはどうすればいいですか？
+  weight: 50
+- a: はい、Sensitive Data Scanner は、EU、AP、および米国でホスティングされているすべてのアカウントで利用できます。
+  q: これはすべてのリージョンで利用可能ですか？
+  weight: 60
+- a: 年間プラン、月額プランをご用意しております。お客様のニーズに合わせて請求プランをカスタマイズすることができます。請求についての詳しい説明は、<a href="https://docs.datadoghq.com/account_management/billing/">請求に関するよくあるご質問</a>をご覧ください。
+  q: 他の請求オプションはありますか。
+  weight: 70
+- a: 当社は、テクノロジーやサービスを提供する企業やリセラーとのパートナーシップを常に求めています。詳しくは、<a href="https://www.datadoghq.com/partner/">Partner
+    Network のページ をご覧ください。
+  q: パートナー向けの特別サービスはありますか？
+  weight: 80
+- a: Sensitive Data Scanner は、ログ、APM スパン、RUM イベント、AWS クラウドストレージリソース (AWS S3 バケットなど)
+    をスキャンします。
+  q: Sensitive Data Scanner で何をスキャンできますか？
+  weight: 90
+- a: データ保護法を遵守するために、可観測性パイプラインを使用してインフラストラクチャー内の機密情報を編集することができます。詳しくは<a href="https://docs.datadoghq.com/observability_pipelines/processors/sensitive_data_scanner/">ドキュメント</a>をご覧ください。
+  q: Sensitive Data Scanner はオンプレミスでスキャンできますか？
+  weight: 100
+features:
+  combined_other_plans:
+  - 調査中に関連するメトリクス、トレース、ログにシームレスにピボット可能
+  - セキュリティシグナルと詳細な観測可能性データの相関付け
+  main:
+  - リアルタイムでのセンシティブデータの発見と分類
+  - すぐに使える、カスタムルール機能
+  - Datadogのロールベース・アクセス・コントロール (RBAC) との完全な統合
+  - ストリームを利用したデータのパターンマッチング
+  - スキャングループによるデータのスキャンと分類の詳細な制御
+  - Datadog のアラートやダッシュボードと完全に統合されており、コンプライアンスの追跡や調査が可能
+  - 標準タグとカスタムタグを使ったデータを相関
+  - Log Management、APM、RUM、AWS クラウドストレージリソースからのデータをサポート
+  - オンプレミスおよびクラウドでデータを保護
+  service_support:
+  - チャットとメールによるテクニカルサポート
+  - コミュニティフォーラムとオンラインドキュメント
+  - <a href="/support-services/plans/">お客様の組織に適したサポートレベルのプラン</a>
+fed_product: true
+hex_description: あらゆる規模の機密データをリアルタイムで発見、分類、マスキング
+name: Sensitive Data Scanner
+plans:
+- key_points:
+  - すぐに使える検出ルールとカスタマイズ可能な検出ルール
+  - ソースを問わず、取り込まれたすべてのデータからセンシティブなデータを検出
+  price_helper1: /スキャンしたGB
+  price_helper2: 1 か月*
+  pricing_data_key: SDS
+pricing_nav_categories:
+- ログ
