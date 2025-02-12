@@ -4606,6 +4606,11 @@ menu:
       parent: observability_pipelines_set_up_pipelines
       identifier: observability_pipelines_log_volume_control
       weight: 101
+    - name: Amazon Data Firehose
+      url: observability_pipelines/set_up_pipelines/log_volume_control/amazon_data_firehose/
+      parent: observability_pipelines_log_volume_control
+      identifier: observability_pipelines_log_volume_control_amazon_data_firehose
+      weight: 1011
     - name: Amazon S3
       url: observability_pipelines/set_up_pipelines/log_volume_control/amazon_s3/
       parent: observability_pipelines_log_volume_control
@@ -4671,6 +4676,11 @@ menu:
       parent: observability_pipelines_set_up_pipelines
       identifier: observability_pipelines_dual_ship_logs
       weight: 102
+    - name: Amazon Data Firehose
+      url: observability_pipelines/set_up_pipelines/dual_ship_logs/amazon_data_firehose/
+      parent: observability_pipelines_dual_ship_logs
+      identifier: observability_pipelines_dual_ship_logs_amazon_data_firehose
+      weight: 2011
     - name: Amazon S3
       url: observability_pipelines/set_up_pipelines/dual_ship_logs/amazon_s3/
       parent: observability_pipelines_dual_ship_logs
@@ -4736,6 +4746,11 @@ menu:
       parent: observability_pipelines_set_up_pipelines
       identifier: observability_pipelines_archive_logs
       weight: 103
+    - name: Amazon Data Firehose
+      url: observability_pipelines/set_up_pipelines/archive_logs/amazon_data_firehose/
+      parent: observability_pipelines_archive_logs
+      identifier: observability_pipelines_archive_logs_amazon_data_firehose
+      weight: 3011
     - name: Amazon S3
       url: observability_pipelines/set_up_pipelines/archive_logs/amazon_s3/
       parent: observability_pipelines_archive_logs
@@ -4801,6 +4816,11 @@ menu:
       parent: observability_pipelines_set_up_pipelines
       identifier: observability_pipelines_split_logs
       weight: 104
+    - name: Amazon Data Firehose
+      url: observability_pipelines/set_up_pipelines/split_logs/amazon_data_firehose/
+      parent: observability_pipelines_split_logs
+      identifier: observability_pipelines_split_logs_amazon_data_firehose
+      weight: 4011
     - name: Amazon S3
       url: observability_pipelines/set_up_pipelines/split_logs/amazon_s3/
       parent: observability_pipelines_split_logs
@@ -4866,6 +4886,11 @@ menu:
       parent: observability_pipelines_set_up_pipelines
       identifier: observability_pipelines_sensitive_data_redaction
       weight: 105
+    - name: Amazon Data Firehose
+      url: observability_pipelines/set_up_pipelines/sensitive_data_redaction/amazon_data_firehose/
+      parent: observability_pipelines_sensitive_data_redaction
+      identifier: observability_pipelines_sensitive_data_redaction_amazon_data_firehose
+      weight: 5011
     - name: Amazon S3
       url: observability_pipelines/set_up_pipelines/sensitive_data_redaction/amazon_s3/
       parent: observability_pipelines_sensitive_data_redaction
@@ -4931,6 +4956,11 @@ menu:
       parent: observability_pipelines_set_up_pipelines
       identifier: observability_pipelines_log_enrichment
       weight: 106
+    - name: Amazon Data Firehose
+      url: observability_pipelines/set_up_pipelines/log_enrichment/amazon_data_firehose/
+      parent: observability_pipelines_log_enrichment
+      identifier: observability_pipelines_log_enrichment_amazon_data_firehose
+      weight: 6011
     - name: Amazon S3
       url: observability_pipelines/set_up_pipelines/log_enrichment/amazon_s3/
       parent: observability_pipelines_log_enrichment
@@ -4996,6 +5026,11 @@ menu:
       url: /observability_pipelines/set_up_pipelines/generate_metrics/
       parent: observability_pipelines_set_up_pipelines
       weight: 107
+    - name: Amazon Data Firehose
+      url: observability_pipelines/set_up_pipelines/generate_metrics/amazon_data_firehose/
+      parent: observability_pipelines_generate_metrics
+      identifier: observability_pipelines_generate_metrics_amazon_data_firehose
+      weight: 7011
     - name: Amazon S3
       url: observability_pipelines/set_up_pipelines/generate_metrics/amazon_s3/
       parent: observability_pipelines_generate_metrics
