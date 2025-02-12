@@ -9,13 +9,13 @@ further_reading:
 
 ## Overview
 
-Custom cost allocation allows you to showback or chargeback your costs by attributing selected costs to relevant business dimensions. Once you have set up allocation rules, you can report on which costs were allocated by a rule. 
+Custom cost allocation allows you to showback or chargeback your costs by attributing selected costs to relevant business dimensions. After you have set up allocation rules, you can report on which costs were allocated by a rule. 
 
-Custom cost allocation follows Tag Pipelines, enabling allocations based on user-defined tags. Costs are allocated on a daily basis, and can be applied to Cloud Cost metrics from AWS, GCP, and Azure. 
+Custom cost allocation follows Tag Pipelines, enabling allocations based on user-defined tags. Costs are allocated on a daily basis, and can be applied to Cloud Cost metrics from AWS, Google Cloud, and Azure. 
 
 ## Rule creation
 
-Access the Custom Allocation Rules section under [Cloud Cost settings][1] to establish rules. Choose from the following allocation methods:
+Access the [Custom Allocation Rules section][1] under Cloud Cost settings to establish rules. Choose from the following allocation methods:
 
 
 | Allocation Method | Description | Examples |
@@ -64,22 +64,24 @@ With the custom percentage strategy, you can define static custom percentages fo
 ### Specify what costs are included in the allocation
 | Step | Required | Examples |
 | ---- | ---- | ---- |
-| Cost Provider | Yes | AWS, GCP, Azure |
+| Select the cost provider | Yes | AWS, Google Cloud, Azure |
 | Define the costs to split (source) | Yes | `aws_product` is `support` `allocated_spend_type` is untagged |
 | Define the destination | Yes | `team` is `teamA`, `teamB`, `teamC` |
 | Filter by | Only applicable for Proportional and Even strategies, optional | `aws_product` is `ec2` |
 | Partition costs by | Only applicable for Proportional and Even strategies, optional | `environment` is all values |
-| Rule Name | Yes | allocate\_untagged\_support\_costs |
+| Name | Yes | allocate\_untagged\_support\_costs |
 
 ## Managing rules
-Rules can be modified and deleted in the Custom Allocation Rules section of the Cloud Cost settings page. All fields except for the rule name can be reconfigured.
+Rules can be modified and deleted in the [Custom Allocation Rules section][1] of the Cloud Cost settings page. All fields except for the rule name can be reconfigured.
 
 Rules are applied in the same order as shown in the list.
 
 ## Visualize your allocations
-Changes to dynamic allocation rules may take up to 24 hours to be applied. Once applied, the new allocations can be seen throughout the Cloud Cost product. Dynamically allocated costs also include an `allocated_by_rule` tag, denoting the rule name that applied the allocation.
+Changes to dynamic allocation rules may take up to 24 hours to be applied. After being applied, the new allocations can be seen throughout Cloud Cost Management. Dynamically allocated costs also include an `allocated_by_rule` tag, denoting the rule name that applied the allocation.
 
-{{< img src="cloud_cost/custom_allocation_rules/visualize_your_allocations.png" alt="See your allocations throughout the Datadog product" style="width:90%;" >}}
+{{< img src="cloud_cost/custom_allocation_rules/visualize_your_allocations.png" alt="See your allocations throughout Datadog" style="width:90%;" >}}
 
+## Further reading
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/cost/settings/custom-allocation-rules
