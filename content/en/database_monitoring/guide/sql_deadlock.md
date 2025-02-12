@@ -24,7 +24,7 @@ Supported databases
 : SQL Server
 
 Supported deployments
-: All deployment types. (Azure DB with the Agent versions 7.64.0+.)
+: All deployment types. Azure DB is supported for Agent versions 7.64.0 and later.
 
 Supported Agent versions
 : 7.59.0+
