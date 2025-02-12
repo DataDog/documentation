@@ -152,6 +152,7 @@ DD_AGENT_TELEMETRY_ENABLED=false
 | logs.dropped                                | Total number of logs dropped                                                                      |
 | logs.bytes_sent                             | Total number of bytes send before encoding, if any                                                |
 | logs.encoded_bytes_sent                     | Total number of sent bytes after encoding, if any                                                 |
+| logs.auto_multi_line_aggregator_flush       | Number of multiline logs aggregated by the Agent                                                  |
 | dogstatsd.udp_packets                       | DogStatsD UDP packets bytes                                                                       |
 | dogstatsd.uds_packets                       | DogStatsD UDS packets bytes                                                                       |
 | transactions.input_count                    | Incoming transaction count                                                                        |
