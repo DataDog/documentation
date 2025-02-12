@@ -32,20 +32,40 @@ For more information on advanced profile details, review the [Profile Format Ref
 
 ## Prerequisites 
 
-The minimum Agent version required is `7.50` or higher.
+The minimum Agent version required is `7.64` or higher.
 
-## Device profile onboarding
+## Inventory page
 
-### Profile home page
+Navigate to [Infrastructure > Network Devices > Configuration][1] to view the device profile [Inventory][4] page. This is where you can see a snapshot of the device profiles you created using the [Device Profile Setup](#build-device-profiles) below. 
 
-The [profile home][4] page is where you can see a snapshot of the device profiles you created using the [Device Onboarding Experience](#profile-details). 
+{{< img src="/network_device_monitoring/profile_onboarding/device_inventory_page.png" alt="The Network Device profile inventory page" style="width:100%;">}}
 
-{{< img src="/network_device_monitoring/profile_onboarding/profile_home_page_2.png" alt="The Network Device profile home page" style="width:100%;">}}
+This page includes the following features:
 
-### Profile details
+- **Draft status**: Indicates a net new profile that has not yet been applied to the Agent. To apply a profile to the Agent, click into the profile and sync the Agent.
+Once a profile is applied, you cannot bring it back to draft status.
+
+{{< img src="/network_device_monitoring/profile_onboarding/device_status.png" alt="Screenshot of a device profile showing the draft state status" style="width:50%;">}}
+
+- **Filters**: The filters include the following options:
+  - Custom Profiles - User created device profiles.
+  - Created by Datadog - Datadog out-of-the-box profiles that can be viewed and used to build your own custom profile.
+  - Draft Profiles - Devices profiles in that are in draft mode.
+
+{{< img src="/network_device_monitoring/profile_onboarding/device_filters.png" alt="Screenshot of the device profile inventory page showing the filter options" style="width:60%;">}}
+
+- **Create new profile and Download**: The **+ Create New Profile** button opens the profile creation form which allows you to [build a new device profile.](#build-device-profiles) Clicking the download button will generate and download a `.zip` bundle which contains the `yaml` files for the profiles you created. 
+
+{{< img src="/network_device_monitoring/profile_onboarding/create_profile_download.png" alt="Screenshot of the device profile inventory page showing the download and create a new profile buttons" style="width:50%;">}}
+
+- **Kebab menu**: Clicking the kebab menu to the right of a profile allows you to edit, clone, or delete the profile (for custom or draft profiles only). You can also navigate to the **View related devices** on the NDM page, filtered to the device the profile is applied to.
+
+{{< img src="/network_device_monitoring/profile_onboarding/device_kebab_menu.png" alt="Screenshot of the device profile inventory page showing the kebab menu on the right hand side" style="width:50%;">}}
+
+### Build device profiles
 
 1. Build your own NDM profile by navigating to [Infrastructure > Network Devices > Configuration][1]. 
-2. Click on SNMP Profiles > **Create New Profile**.
+2. Click on Device Onboarding > **Create New Profile**.
   {{< img src="/network_device_monitoring/profile_onboarding/create_profile_2.png" alt="The Network Device profile creation page" style="width:100%;">}}
 3. Provide your device profile a name, vendor information(optional) and description (optional).
 4. Select the `SysObjectID`. This is what is used to match network devices to the device profiles that define what is collected and monitored from each device. 
@@ -126,11 +146,20 @@ The advanced options for scalar and tabular metrics are the same:
 
 {{< img src="/network_device_monitoring/profile_onboarding/download_all_profiles_2.png" alt="The Network Device profile main page highlighting the Download All Profiles option" style="width:100%;">}}
 
+## Troubleshooting
+
+- What is a profile?
+- What is a device scan?
+- Why do I see no matching devices? 
+- What happens if I don't have remote configuration enabled on my collectors?
+- Inherited data (metrics, global tags) cannot be overridden from the children 
+
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/devices
+[1]: https://app.datadoghq.com/devices/enrichment
 [2]: /network_monitoring/devices/profiles/
 [3]: https://datadoghq.dev/integrations-core/tutorials/snmp/profile-format/
 [4]: https://app.datadoghq.com/devices/profiles
