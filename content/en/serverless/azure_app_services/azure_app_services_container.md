@@ -77,6 +77,74 @@ To set up logging in your application, see [Node.js Log Collection][3]. To set u
 [3]: /logs/log_collection/java/?tab=winston30
 [4]: /tracing/other_telemetry/connect_logs_and_traces/java
 {{% /tab %}}
+{{% tab ".NET" %}}
+#### Tracing
+Instrument your main application with the `dd-trace-dotnet` library.
+
+1. Add the following lines to the Dockerfile for your main application. This installs and configures the Datadog tracer within your application container.
+   {{< code-block lang="dockerfile" >}}
+   RUN mkdir -p /datadog/tracer
+   RUN mkdir -p /home/LogFiles/dotnet
+
+   ADD https://github.com/DataDog/dd-trace-dotnet/releases/download/v2.51.0/datadog-dotnet-apm-2.49.0.tar.gz /datadog/tracer
+   RUN cd /datadog/tracer && tar -zxf datadog-dotnet-apm-2.49.0.tar.gz
+   {{< /code-block >}}
+
+2. Build the image and push it to your preferred container registry.
+
+**Full example Dockerfile**
+
+{{< highlight dockerfile "hl_lines=22-27" >}}
+# Stage 1: Build the application
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+WORKDIR /app
+
+# Copy the project file and restore dependencies
+COPY *.csproj ./
+RUN dotnet restore
+
+# Copy the remaining source code
+COPY . .
+
+# Build the application
+RUN dotnet publish -c Release -o out
+
+# Stage 2: Create a runtime image
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
+WORKDIR /app
+
+# Copy the build output from stage 1
+COPY --from=build /app/out ./
+
+# Datadog specific
+RUN mkdir -p /datadog/tracer
+RUN mkdir -p /home/LogFiles/dotnet
+
+ADD https://github.com/DataDog/dd-trace-dotnet/releases/download/v2.49.0/datadog-dotnet-apm-2.49.0.tar.gz /datadog/tracer
+RUN cd /datadog/tracer && tar -zxf datadog-dotnet-apm-2.49.0.tar.gz
+
+# Set the entry point for the application
+ENTRYPOINT ["dotnet", "<your dotnet app>.dll"]
+{{< /highlight >}}
+
+For more information, see [Tracing .NET Applications][1].
+
+#### Metrics
+Custom metrics are also collected through the tracer. See the [code examples][2].
+
+#### Logs
+The Datadog sidecar uses file tailing to collect logs. Datadog recommends writing application logs to `/home/LogFiles/` because this directory is persisted across restarts. 
+
+You can also create a subdirectory, such as `/home/LogFiles/myapp`, if you want more control over what is sent to Datadog. However, if you do not tail all log files in `/home/LogFiles`, then Azure App Service application logs related to startups and errors are not collected.
+
+To set up logging in your application, see [C# Log Collection][3]. To set up trace log correlation, see [Correlating .NET Logs and Traces][4].
+
+[1]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/dotnet-core
+[2]: /metrics/custom_metrics/dogstatsd_metrics_submission/?code-lang=dotnet#code-examples
+[3]: /logs/log_collection/csharp
+[4]: /tracing/other_telemetry/connect_logs_and_traces/dotnet
+
+{{% /tab %}}
 {{% tab "Go" %}}
 #### Tracing
 Instrument your main application with the `dd-trace-go` library. See [Tracing Go applications][1] for instructions.
@@ -136,6 +204,22 @@ In your **App settings** in Azure, set the following environment variables:
 - `DD_SERVICE`: How you want to tag your service. For example, `sidecar-azure`
 - `DD_ENV`: How you want to tag your env. For example, `prod`
 - `DD_SERVERLESS_LOG_PATH`: Where you write your logs. For example, `/home/LogFiles/*.log` or `/home/LogFiles/myapp/*.log`
+
+<details open>
+<summary>
+<h4>For .NET applications: Additional required environment variables</h4>
+</summary>
+
+If you are setting up monitoring for a .NET application, configure the following **required** environment variables.
+
+| Variable name | Value |
+| ------------- | ----- |
+| `DD_DOTNET_TRACER_HOME` | `/datadog/tracer` |
+| `DD_TRACE_LOG_DIRECTORY` | `/home/Logfiles/dotnet` |
+| `CORECLR_ENABLE_PROFILING` | `1` |
+| `CORECLR_PROFILER` | `{846F5F1C-F9AE-4B07-969E-05C26BC060D8}` |
+| `CORECLR_PROFILER_PATH` | `/datadog/tracer/Datadog.Trace.ClrProfiler.Native.so` |
+</details>
 
 ## Example application
 The following example contains a single app with tracing, metrics, and logs set up.
