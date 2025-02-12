@@ -14,7 +14,7 @@ further_reading:
 
 <div class="alert alert-info">
 New Preview Feature: Azure Automated Log Forwarding
-Easily set up log forwarding across your Azure environment in minutes—no manual configuration required. Automate management and scaling of log forwarding services. Sign up for preview access [here](https://docs.google.com/forms/d/e/1FAIpQLSeZkmqTwBQ43zR9SZoyf_oUDCFDsth00lb4jRKjfn-vKNW4dA/viewform).
+Easily set up log forwarding across your Azure environment in minutes—no manual configuration required. Automate management and scaling of log forwarding services. Sign up for preview access <a href="https://docs.google.com/forms/d/e/1FAIpQLSeZkmqTwBQ43zR9SZoyf_oUDCFDsth00lb4jRKjfn-vKNW4dA/viewform">here</a>.
 </div>
 
 ## Overview
