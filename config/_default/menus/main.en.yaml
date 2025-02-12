@@ -5699,7 +5699,7 @@ menu:
       parent: automation_pipelines
       identifier: automation_pipelines_inbox
       weight: 10002
-    - name: Set a Due Date
+    - name: Set Due Date Rules
       url: security/automation_pipelines/set_due_date
       parent: automation_pipelines
       identifier: automation_pipelines_due_date
