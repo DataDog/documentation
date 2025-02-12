@@ -4667,14 +4667,14 @@ menu:
           - ListApmRetentionFilters
         unstable: []
         order: 1
-    - name: Action Connection
-      url: /api/latest/action-connection/
-      identifier: action-connection
+    - name: Action Connections
+      url: /api/latest/action-connections/
+      identifier: action-connections
       generated: true
     - name: Update an existing Action Connection
       url: '#update-an-existing-action-connection'
-      identifier: action-connection-update-an-existing-action-connection
-      parent: action-connection
+      identifier: action-connections-update-an-existing-action-connection
+      parent: action-connections
       generated: true
       params:
         versions:
@@ -4685,8 +4685,8 @@ menu:
         order: 3
     - name: Get an existing Action Connection
       url: '#get-an-existing-action-connection'
-      identifier: action-connection-get-an-existing-action-connection
-      parent: action-connection
+      identifier: action-connections-get-an-existing-action-connection
+      parent: action-connections
       generated: true
       params:
         versions:
@@ -4697,8 +4697,8 @@ menu:
         order: 1
     - name: Delete an existing Action Connection
       url: '#delete-an-existing-action-connection'
-      identifier: action-connection-delete-an-existing-action-connection
-      parent: action-connection
+      identifier: action-connections-delete-an-existing-action-connection
+      parent: action-connections
       generated: true
       params:
         versions:
@@ -4709,8 +4709,8 @@ menu:
         order: 4
     - name: Create a new Action Connection
       url: '#create-a-new-action-connection'
-      identifier: action-connection-create-a-new-action-connection
-      parent: action-connection
+      identifier: action-connections-create-a-new-action-connection
+      parent: action-connections
       generated: true
       params:
         versions:
