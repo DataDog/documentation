@@ -1,7 +1,7 @@
 ---
 title: Partner Sales Enablement Guide
 description: "A training roadmap for a new MSP to be ready to lead a Datadog sales engineering process"
-private: true
+type: partners
 ---
 The Datadog Partner Network provides many resources for partners. This is a guide to training for Sales Engineers, Solution Architects, Technical Account Managers and anyone who is involved in the technical aspects of Datadog sales at a partner organization.
 

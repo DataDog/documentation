@@ -1,7 +1,9 @@
 ---
 title: Data intake
 description: "How data can be fed into Datadog and which prerequisites need to be met in your or your clients' environments."
-private: true
+type: partners
+aliases:
+  - /partners/data-intake/
 ---
 
 You've laid the groundwork, and it's time to start getting data into Datadog.
