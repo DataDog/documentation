@@ -8,8 +8,8 @@ To apply a query filter with Reference Tables, click the **Add** button next to 
 2. Select the log field to join on.
 3. Select the **IN** or **NOT IN** operator to filter in or out matching logs.
 4. Select the Reference Table column to join on.
-5. Optionally, select Reference Table columns used to enrich logs.
-6. Optionally, filter logs by directly querying data in Reference Table columns.
+5. (Optional) Select Reference Table columns used to enrich logs.
+6. (Optional) Filter logs by directly querying data in Reference Table columns.
 
 In the following example, a Reference Table containing product information is used to filter and enrich logs:
 
