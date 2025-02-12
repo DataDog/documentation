@@ -18,7 +18,7 @@ further_reading:
 
 ## Overview
 
-By default, **Log Patterns** "cluster" logs with similar values for the `message` field, and group results by `Status` and `Service`. 
+By default, **Log Patterns** cluster logs with similar values for the `message` field, and group results by `Status` and `Service`. 
 
 You can select different log attributes for clustering or grouping results.
 
