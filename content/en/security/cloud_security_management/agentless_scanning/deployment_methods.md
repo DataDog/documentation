@@ -60,4 +60,4 @@ Datadog automatically schedules scans to the right region to minimize the cross 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /security/cloud_security_management/agentless_scanning#cloud-storage-scanning
-[1]: /security/cloud_security_management/agentless_scanning#cloud-service-provicer-cost
+[2]: /security/cloud_security_management/agentless_scanning#cloud-service-provicer-cost
