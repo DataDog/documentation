@@ -18,10 +18,6 @@ title: Node.js ランタイムメトリクス
 type: multi-code-lang
 ---
 
-<div class="alert alert-warning">
-これは公開ベータ版の機能です。
-</div>
-
 ## 自動コンフィギュレーション
 
 ランタイムメトリクスの収集は、トレースクライアントの設定パラメーターで、トレーサーオプション `tracer.init({ runtimeMetrics: true })` または環境変数 `DD_RUNTIME_METRICS_ENABLED=true` を使用して有効にすることができます。

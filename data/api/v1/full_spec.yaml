@@ -1034,7 +1034,7 @@ components:
       example: {}
       properties:
         ok:
-          description: An array of of Monitor IDs that can be safely deleted.
+          description: An array of Monitor IDs that can be safely deleted.
           items:
             description: ID of a monitor that can be safely deleted.
             format: int64
@@ -1057,7 +1057,7 @@ components:
       description: An array of service level objective objects.
       properties:
         ok:
-          description: An array of of SLO IDs that can be safely deleted.
+          description: An array of SLO IDs that can be safely deleted.
           items:
             description: An SLO ID.
             type: string
@@ -10623,7 +10623,7 @@ components:
       description: A list of  SLO correction objects.
       properties:
         data:
-          description: The list of of SLO corrections objects.
+          description: The list of SLO corrections objects.
           items:
             $ref: '#/components/schemas/SLOCorrection'
           type: array
@@ -15225,7 +15225,6 @@ components:
       - element
       - email
       - global
-      - javascript
       - text
       example: text
       type: string
@@ -15233,7 +15232,6 @@ components:
       - ELEMENT
       - EMAIL
       - GLOBAL
-      - JAVASCRIPT
       - TEXT
     SyntheticsCIBatchMetadata:
       description: Metadata for the Synthetic tests run.
@@ -15963,8 +15961,7 @@ components:
       description: User locator to find the element.
       properties:
         failTestOnCannotLocate:
-          description: Whether if the the test should fail if the element cannot be
-            found.
+          description: Whether if the test should fail if the element cannot be found.
           type: boolean
         values:
           description: Values of the user locator.
@@ -21952,9 +21949,8 @@ components:
           format: int64
           type: integer
         cspm_container_hwm_sum:
-          description: Shows the sum of the the high-water marks of Cloud Security
-            Management Pro containers over all hours in the current month for all
-            organizations.
+          description: Shows the sum of the high-water marks of Cloud Security Management
+            Pro containers over all hours in the current month for all organizations.
           format: int64
           type: integer
         cspm_gcp_host_top99p_sum:
@@ -22175,8 +22171,8 @@ components:
           format: int64
           type: integer
         incident_management_monthly_active_users_hwm_sum:
-          description: Shows sum of the the high-water marks of incident management
-            monthly active users in the current month for all organizations.
+          description: Shows sum of the high-water marks of incident management monthly
+            active users in the current month for all organizations.
           format: int64
           type: integer
         indexed_events_count_agg_sum:
@@ -22207,8 +22203,8 @@ components:
           format: int64
           type: integer
         last_updated:
-          description: Shows the the most recent hour in the current month for all
-            organizations for which all usages were calculated.
+          description: Shows the most recent hour in the current month for all organizations
+            for which all usages were calculated.
           format: date-time
           type: string
         live_indexed_events_agg_sum:
@@ -22852,6 +22848,7 @@ components:
     Version:
       description: Version of the updated signal. If server side version is higher,
         update will be rejected.
+      example: 0
       format: int64
       type: integer
     WebhooksIntegration:
@@ -23984,6 +23981,10 @@ components:
             security_monitoring_filters_write: Create, edit, and delete Security Filters.
             security_monitoring_findings_read: View a list of findings that include
               both misconfigurations and identity risks.
+            security_monitoring_notification_profiles_read: View Rule Security Notification
+              rules.
+            security_monitoring_notification_profiles_write: Create, edit, and delete
+              Security Notification rules.
             security_monitoring_rules_read: Read Detection Rules.
             security_monitoring_rules_write: Create and edit Detection Rules.
             security_monitoring_signals_read: View Security Signals.
@@ -24050,8 +24051,6 @@ components:
       x-auth-id-alias: appKeyAuth
       x-env-name: DD_APP_KEY
     bearerAuth:
-      in: header
-      name: Authorization
       scheme: bearer
       type: http
       x-env-name: DD_BEARER_TOKEN
@@ -26544,7 +26543,7 @@ paths:
       x-permission:
         operator: OR
         permissions:
-        - dashboards_public_share
+        - embeddable_graphs_share
       x-undo:
         operationId: TODO
         parameters: []
@@ -26629,7 +26628,7 @@ paths:
       x-permission:
         operator: OR
         permissions:
-        - dashboards_public_share
+        - embeddable_graphs_share
       x-undo:
         type: safe
   /api/v1/graph/embed/{embed_id}/revoke:
@@ -26671,7 +26670,7 @@ paths:
       x-permission:
         operator: OR
         permissions:
-        - dashboards_public_share
+        - embeddable_graphs_share
       x-undo:
         type: safe
   /api/v1/graph/snapshot:
@@ -29417,8 +29416,9 @@ paths:
       - Logs Indexes
       x-menu-order: 5
       x-permission:
-        operator: OPEN
-        permissions: []
+        operator: OR
+        permissions:
+        - logs_read_config
       x-undo:
         type: safe
     put:
@@ -29496,8 +29496,9 @@ paths:
       - Logs Indexes
       x-menu-order: 1
       x-permission:
-        operator: OPEN
-        permissions: []
+        operator: OR
+        permissions:
+        - logs_read_config
       x-undo:
         type: safe
     post:
@@ -29582,6 +29583,10 @@ paths:
       tags:
       - Logs Indexes
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - logs_read_config
       x-undo:
         type: safe
     put:
@@ -29662,8 +29667,9 @@ paths:
       - Logs Pipelines
       x-menu-order: 1
       x-permission:
-        operator: OPEN
-        permissions: []
+        operator: OR
+        permissions:
+        - logs_read_config
       x-undo:
         type: safe
     put:
@@ -29750,8 +29756,9 @@ paths:
       - Logs Pipelines
       x-menu-order: 3
       x-permission:
-        operator: OPEN
-        permissions: []
+        operator: OR
+        permissions:
+        - logs_read_config
       x-undo:
         type: safe
     post:
@@ -29878,8 +29885,9 @@ paths:
       - Logs Pipelines
       x-menu-order: 5
       x-permission:
-        operator: OPEN
-        permissions: []
+        operator: OR
+        permissions:
+        - logs_read_config
       x-undo:
         type: safe
     put:
@@ -30355,19 +30363,22 @@ paths:
         or the facet name you want to use.\n- `time_window` #m (between 1 and 2880),
         #h (between 1 and 48).\n- `operator` `<`, `<=`, `>`, `>=`, `==`, or `!=`.\n-
         `#` an integer or decimal number used to set the threshold.\n\n**Cost Alert
-        Query**\n\nExample: `formula(query).last(time_window).function(parameter)
+        Query**\n\nExample: `formula(query).timeframe_type(time_window).function(parameter)
         operator #`\n\n- `query` The search query - following the [Log search syntax](https://docs.datadoghq.com/logs/search_syntax/).\n-
-        `time_window` - supports daily roll-up e.g. `7d`\n- `function` - [optional,
-        defaults to `threshold` monitor if omitted] supports `change`, `anomaly`,
-        `forecast`\n- `parameter` Specify the parameter of the type\n    - for `change`:\n
-        \       - supports `relative`, `absolute`\n        - [optional] supports `#`,
-        where `#` is an integer or decimal number used to set the threshold\n    -
-        for `anomaly`:\n        - supports `direction=both`, `direction=above`, `direction=below`\n
-        \       - [optional] supports `threshold=#`, where `#` is an integer or decimal
-        number used to set the threshold\n- `operator`\n    - for `threshold` supports
-        `<`, `<=`, `>`, `>=`, `==`, or `!=`\n    - for `change` supports `>`, `<`\n
-        \   - for `anomaly` supports `>=`\n    - for `forecast` supports `>`\n- `#`
-        an integer or decimal number used to set the threshold."
+        `timeframe_type` The timeframe type to evaluate the cost\n        - for `forecast`
+        supports `current`\n        - for `change`, `anomaly`, `threshold` supports
+        `last`\n- `time_window` - supports daily roll-up e.g. `7d`\n- `function` -
+        [optional, defaults to `threshold` monitor if omitted] supports `change`,
+        `anomaly`, `forecast`\n- `parameter` Specify the parameter of the type\n    -
+        for `change`:\n        - supports `relative`, `absolute`\n        - [optional]
+        supports `#`, where `#` is an integer or decimal number used to set the threshold\n
+        \   - for `anomaly`:\n        - supports `direction=both`, `direction=above`,
+        `direction=below`\n        - [optional] supports `threshold=#`, where `#`
+        is an integer or decimal number used to set the threshold\n- `operator`\n
+        \   - for `threshold` supports `<`, `<=`, `>`, `>=`, `==`, or `!=`\n    -
+        for `change` supports `>`, `<`\n    - for `anomaly` supports `>=`\n    - for
+        `forecast` supports `>`\n- `#` an integer or decimal number used to set the
+        threshold."
       operationId: CreateMonitor
       requestBody:
         content:
@@ -38671,10 +38682,7 @@ tags:
 - description: Search your logs and send them to your Datadog platform over HTTP.
     See the [Log Management page](https://docs.datadoghq.com/logs/) for more information.
   name: Logs
-- description: 'Manage configuration of [log indexes](https://docs.datadoghq.com/logs/indexes/).
-
-    You need an API and non-scoped application key with Admin rights to interact with
-    these endpoints.'
+- description: Manage configuration of [log indexes](https://docs.datadoghq.com/logs/indexes/).
   externalDocs:
     description: Find out more at
     url: https://docs.datadoghq.com/logs/indexes/
@@ -38684,14 +38692,12 @@ tags:
     page](https://app.datadoghq.com/logs/pipelines)\n  for a list of the pipelines
     and processors currently configured in web UI.\n\n- Additional API-related information
     about processors can be found in the\n  [processors documentation](https://docs.datadoghq.com/logs/log_configuration/processors/?tab=api#lookup-processor).\n\n-
-    For more information about Pipelines, see the\n  [pipeline documentation](https://docs.datadoghq.com/logs/log_configuration/pipelines).\n\n**Notes:**\n\nThese
-    endpoints are only available for admin users.\nMake sure to use an application
-    key created by an admin with no applied scopes.\n\n**Grok parsing rules may effect
-    JSON output and require\nreturned data to be configured before using in a request.**\nFor
-    example, if you are using the data returned from a\nrequest for another request
-    body, and have a parsing rule\nthat uses a regex pattern like `\\s` for spaces,
-    you will\nneed to configure all escaped spaces as `%{space}` to use\nin the body
-    data."
+    For more information about Pipelines, see the\n  [pipeline documentation](https://docs.datadoghq.com/logs/log_configuration/pipelines).\n\n**Notes:**\n\n**Grok
+    parsing rules may effect JSON output and require\nreturned data to be configured
+    before using in a request.**\nFor example, if you are using the data returned
+    from a\nrequest for another request body, and have a parsing rule\nthat uses a
+    regex pattern like `\\s` for spaces, you will\nneed to configure all escaped spaces
+    as `%{space}` to use\nin the body data."
   externalDocs:
     description: Find out more at
     url: https://docs.datadoghq.com/logs/log_configuration

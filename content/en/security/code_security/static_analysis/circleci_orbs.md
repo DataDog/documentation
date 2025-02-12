@@ -2,17 +2,17 @@
 aliases:
 - /continuous_integration/static_analysis/circleci_orbs
 - /static_analysis/circleci_orbs
-description: Use Datadog and CircleCI to run Static Analysis jobs in a CI pipeline.
-title: Static Analysis and CircleCI Orbs
+description: Use Datadog and CircleCI to run Static Code Analysis jobs in a CI pipeline.
+title: Static Code Analysis and CircleCI Orbs
 ---
 
 ## Overview
 
-Run a Datadog Static Analysis job in your CircleCI workflows.
+Run a Datadog Static Code Analysis job in your CircleCI workflows.
 
 ## Setup
 
-To use Datadog Static Analysis, you need to add a `static-analysis.datadog.yml` file in your repository's root directory to specify which rulesets to use.
+To use Datadog Static Code Analysis, you need to add a `static-analysis.datadog.yml` file in your repository's root directory to specify which rulesets to use.
 
 ```yaml
 rulesets:
@@ -33,7 +33,7 @@ rulesets:
 
 ## Workflow
 
-Create a file in `.circleci` to run a Datadog Static Analysis job.
+Create a file in `.circleci` to run a Datadog Static Code Analysis job.
 
 The following is a sample workflow file.
 
@@ -70,7 +70,7 @@ Set the following environment variables in the [CircleCI Project Settings page][
 
 ## Inputs
 
-To customize your workflow, you can set the following parameters for Static Analysis.
+To customize your workflow, you can set the following parameters for Static Code Analysis.
 
 | Name         | Description                                                                                                                | Required | Default         |
 |--------------|----------------------------------------------------------------------------------------------------------------------------|----------|-----------------|

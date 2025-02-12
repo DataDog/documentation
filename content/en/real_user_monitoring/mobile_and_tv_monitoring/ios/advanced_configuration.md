@@ -72,67 +72,7 @@ DDRUMMonitor *rum = [DDRUMMonitor shared];
 {{% /tab %}}
 {{< /tabs >}}
 
-For more details and available options, filter the [relevant file on GitHub][9] for the `DDRUMMonitor` class.
-
-### Notify the SDK that your view finished loading
-
-iOS RUM tracks the time it takes for your view to load. To notify the SDK that your view has finished loading, call the `addViewLoadingTime(override:)` method
-through the `RUMMonitor` instance. Call this method when your view is fully loaded and displayed to the user:
-
-{{< tabs >}}
-{{% tab "Swift" %}}
-```swift
-@_spi(Experimental)
-import DatadogRUM
-
-func onHeroImageLoaded() {
-    let rum = RUMMonitor.shared()
-    rum.addViewLoadingTime(override: false)
-}
-```
-{{% /tab %}}
-{{% tab "Objective-C" %}}
-```objective-c
-- (void)onHeroImageLoad {
-    [[DDRUMMonitor shared] addViewLoadingTimeWithOverride:NO | YES];
-}
-```
-{{% /tab %}}
-{{< /tabs >}}
-
-Use the `override` option to replace the previously calculated loading time for the current view.
-
-After the loading time is sent, it is accessible as `@view.loading_time` and is visible in the RUM UI.
-
-**Note**: This API is still experimental and might change in the future.
-
-### Add your own performance timing
-
-In addition to RUM's default attributes, you can measure where your application is spending its time by using the `addTiming(name:)` API. The timing measure is relative to the start of the current RUM view.
-
-For example, you can time how long it takes for your hero image to appear:
-
-{{< tabs >}}
-{{% tab "Swift" %}}
-```swift
-func onHeroImageLoaded() {
-    let rum = RUMMonitor.shared()
-    rum.addTiming(name: "hero_image")
-}
-```
-{{% /tab %}}
-{{% tab "Objective-C" %}}
-```objective-c
-- (void)onHeroImageLoad {
-    [[DDRUMMonitor shared] addTimingWithName:@"hero_image"];
-}
-```
-{{% /tab %}}
-{{< /tabs >}}
-
-Once you set the timing, it is accessible as `@view.custom_timings.<timing_name>`. For example, `@view.custom_timings.hero_image`.
-
-To create visualizations in your dashboards, [create a measure][4] first.
+For more details and available options, filter the [relevant file on GitHub][4] for the `DDRUMMonitor` class.
 
 ### Custom Actions
 
@@ -171,7 +111,7 @@ let rum = RUMMonitor.shared()
 
 **Note**: When using `.startAction(type:name:)` and `.stopAction(type:name:)`, the action `type` must be the same. This is necessary for the RUM iOS SDK to match an action start with its completion.
 
-Find more details and available options in the [`DDRUMMonitor` class][9].
+Find more details and available options in the [`DDRUMMonitor` class][4].
 
 ### Custom Resources
 
@@ -221,7 +161,7 @@ rum.stopResource(
 
 **Note**: The `String` used for `resourceKey` in both calls must be unique for the resource you are calling. This is necessary for the RUM iOS SDK to match a resource's start with its completion.
 
-Find more details and available options in the [`DDRUMMonitor` class][9].
+Find more details and available options in the [`DDRUMMonitor` class][4].
 
 ### Custom Errors
 
@@ -241,11 +181,11 @@ rum.addError(message: "error message.")
 {{% /tab %}}
 {{< /tabs >}}
 
-For more details and available options, refer to the code documentation comments in the [`DDRUMMonitor` class][9].
+For more details and available options, refer to the code documentation comments in the [`DDRUMMonitor` class][4].
 
 ## Track custom global attributes
 
-In addition to the [default RUM attributes][7] captured by the RUM iOS SDK automatically, you can choose to add additional contextual information (such as custom attributes) to your RUM events to enrich your observability within Datadog.
+In addition to the [default RUM attributes][6] captured by the RUM iOS SDK automatically, you can choose to add additional contextual information (such as custom attributes) to your RUM events to enrich your observability within Datadog.
 
 Custom attributes allow you to filter and group information about observed user behavior (such as the cart value, merchant tier, or ad campaign) with code-level information (such as backend services, session timeline, error logs, and network health).
 
@@ -340,7 +280,7 @@ You can use the following properties in `Datadog.Configuration` when creating th
 : A proxy configuration attribute which can be used to enable a custom proxy for uploading tracked data to Datadog's intake.
 
 `serverDateProvider`
-: A custom NTP synchronization interface. By default, the Datadog SDK synchronizes with dedicated NTP pools provided by the [NTP Pool Project][13]. Using different pools or setting a no operation `ServerDateProvider` implementation results in a de-synchronization of the SDK instance and the Datadog servers. This can lead to significant time shifts in RUM sessions or distributed traces.
+: A custom NTP synchronization interface. By default, the Datadog SDK synchronizes with dedicated NTP pools provided by the [NTP Pool Project][7]. Using different pools or setting a no operation `ServerDateProvider` implementation results in a de-synchronization of the SDK instance and the Datadog servers. This can lead to significant time shifts in RUM sessions or distributed traces.
 
 `service`
 : The service name associated with data sent to Datadog. The default value is the application bundle identifier.
@@ -359,7 +299,7 @@ You can use the following properties in `RUM.Configuration` when enabling RUM:
 : Sets the data scrubbing callback for actions. This can be used to modify or drop action events before they are sent to Datadog. For more information, see [Modify or drop RUM events](#modify-or-drop-rum-events).
 
 `appHangThreshold`
-: Sets the threshold for reporting when an app hangs. The minimum allowed value for this option is `0.1` seconds. To disable reporting, set this value to `nil`. For more information, see [Add app hang reporting][10].
+: Sets the threshold for reporting when an app hangs. The minimum allowed value for this option is `0.1` seconds. To disable reporting, set this value to `nil`. For more information, see [Add app hang reporting][8].
 
 `applicationID`
 : The RUM application identifier.
@@ -375,6 +315,12 @@ You can use the following properties in `RUM.Configuration` when enabling RUM:
 
 `longTaskThreshold`
 : The threshold for RUM long tasks tracking (in seconds). By default, this is sent to `0.1` seconds.
+
+`networkSettledResourcePredicate`
+: The predicate used to classify "initial" resources for the Time-to-Network-Settled (TNS) view timing calculation.
+
+`nextViewActionPredicate`
+: The predicate used to classify the "last" action for the Interaction-to-Next-View (INV) timing calculation.
 
 `onSessionStart`
 : (Optional) The method that gets called when RUM starts the session.
@@ -594,8 +540,8 @@ let session = URLSession(
 
 This tracks all requests sent with the instrumented `session`. Requests matching the `example.com` domain are marked as "first party" and tracing information is sent to your backend to [connect the RUM resource with its Trace][1].
 
-[1]: https://docs.datadoghq.com/real_user_monitoring/platform/connect_rum_and_traces?tab=browserrum
 
+[1]: https://docs.datadoghq.com/real_user_monitoring/platform/connect_rum_and_traces?tab=browserrum
 {{% /tab %}}
 {{% tab "Objective-C" %}}
 ```objective-c
@@ -793,6 +739,7 @@ Depending on the event's type, only some specific properties can be modified:
 |                  | `RUMResourceEvent.view.url`          | URL of the view linked to this resource. |
 | RUMViewEvent     | `RUMViewEvent.view.name`             | Name of the view.                        |
 |                  | `RUMViewEvent.view.url`              | URL of the view.                         |
+|                  | `RUMViewEvent.view.referrer`         | URL that linked to the initial view of the page.|
 
 ## Retrieve the RUM session ID
 
@@ -839,7 +786,7 @@ You can use the `addUserExtraInfo` API to append extra user properties to previo
 
 ## Data management
 
-The iOS SDK first stores events locally and only uploads events when the [intake specifications][11] conditions are met.
+The iOS SDK first stores events locally and only uploads events when the [intake specifications][9] conditions are met.
 
 ### Clear all data
 
@@ -896,12 +843,9 @@ public init(
 [1]: https://app.datadoghq.com/rum/application/create
 [2]: /real_user_monitoring/mobile_and_tv_monitoring/ios
 [3]: /real_user_monitoring/mobile_and_tv_monitoring/ios/data_collected/
-[4]: /real_user_monitoring/explorer/search/#setup-facets-and-measures
+[4]: https://github.com/DataDog/dd-sdk-ios/blob/56e972a6d3070279adbe01850f51cb8c0c929c52/DatadogObjc/Sources/RUM/RUM%2Bobjc.swift
 [5]: /real_user_monitoring/mobile_and_tv_monitoring/ios/data_collected/?tab=error#error-attributes
-[6]: /real_user_monitoring/platform/connect_rum_and_traces?tab=browserrum
-[7]: /real_user_monitoring/mobile_and_tv_monitoring/ios/data_collected/?tab=session#default-attributes
-[9]: https://github.com/DataDog/dd-sdk-ios/blob/56e972a6d3070279adbe01850f51cb8c0c929c52/DatadogObjc/Sources/RUM/RUM%2Bobjc.swift
-[10]: /real_user_monitoring/error_tracking/mobile/ios/#add-app-hang-reporting
-[11]: /real_user_monitoring/mobile_and_tv_monitoring/ios/setup
-[12]: https://developer.apple.com/documentation/foundation/urlsessionconfiguration/1411499-connectionproxydictionary
-[13]: https://www.ntppool.org/en/
+[6]: /real_user_monitoring/mobile_and_tv_monitoring/ios/data_collected/?tab=session#default-attributes
+[7]: https://www.ntppool.org/en/
+[8]: /real_user_monitoring/error_tracking/mobile/ios/#add-app-hang-reporting
+[9]: /real_user_monitoring/mobile_and_tv_monitoring/ios/setup
