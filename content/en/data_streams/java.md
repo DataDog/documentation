@@ -7,6 +7,9 @@ further_reading:
     - link: '/tracing/service_catalog/'
       tag: 'Documentation'
       text: 'Service Catalog'
+    - link: 'https://www.datadoghq.com/blog/confluent-connector-dsm-autodiscovery/'
+      tag: 'Blog'
+      text: 'Autodiscover Confluent Cloud connectors and easily monitor performance in Data Streams Monitoring'
 ---
 
 ### Prerequisites
@@ -52,7 +55,22 @@ To set up Data Streams Monitoring from the Datadog UI without needing to restart
 {{< img src="data_streams/enable_dsm_service_catalog.png" alt="Enable the Data Streams Monitoring from the Dependencies section of the APM Service Page" >}}
 
 ### Monitoring connectors
-{{% dsm_connectors %}}
+
+#### Confluent Cloud connectors
+{{% dsm_confluent_connectors %}}
+
+#### Self-hosted Kafka connectors
+
+<div class="alert alert-info">This feature is in Preview.</div>
+
+Data Streams Monitoring can collect information from your self-hosted Kafka connectors. In Datadog, these connectors are shown as services connected to Kafka topics. Datadog collects throughput to and from all Kafka topics. Datadog does not collect connector status or sinks and sources from self-hosted Kafka connectors.
+
+##### Setup
+
+Use Datadog's Java tracer, [`dd-trace-java`][6], to collect information from your Kafka Connect workers.
+
+1. [Add the `dd-java-agent.jar` file][7] to your Kafka Connect workers. Ensure that you are using `dd-trace-java` [v1.44+][8].
+1. Modify your Java options to include the Datadog Java tracer on your worker nodes. For example, on Strimzi, modify `STRIMZI_JAVA_OPTS` to add `-javaagent:/path/to/dd-java-agent.jar`.
 
 ### Monitoring SQS pipelines
 Data Streams Monitoring uses one [message attribute][3] to track a message's path through an SQS queue. As Amazon SQS has a maximum limit of 10 message attributes allowed per message, all messages streamed through the data pipelines must have 9 or fewer message attributes set, allowing the remaining attribute for Data Streams Monitoring.
@@ -88,7 +106,7 @@ There are no message attributes in Kinesis to propagate context and track a mess
 ### Manual instrumentation
 Data Streams Monitoring propagates context through message headers. If you are using a message queue technology that is not supported by DSM, a technology without headers (such as Kinesis), or Lambdas, use [manual instrumentation to set up DSM][5].
 
-## Further Reading
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -97,3 +115,6 @@ Data Streams Monitoring propagates context through message headers. If you are u
 [3]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-metadata.html
 [4]: /agent/remote_config/?tab=configurationyamlfile#enabling-remote-configuration
 [5]: /data_streams/manual_instrumentation/?tab=java
+[6]: https://github.com/DataDog/dd-trace-java
+[7]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/java/?tab=wget
+[8]: https://github.com/DataDog/dd-trace-java/releases/tag/v1.44.0

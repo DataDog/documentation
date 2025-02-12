@@ -1,5 +1,9 @@
 ---
 title: Setup Data Streams Monitoring for .NET
+further_reading:
+  - link: 'https://www.datadoghq.com/blog/confluent-connector-dsm-autodiscovery/'
+    tag: 'Blog'
+    text: 'Autodiscover Confluent Cloud connectors and easily monitor performance in Data Streams Monitoring'
 ---
 
 ### Prerequisites
@@ -28,7 +32,9 @@ environment:
 ```
 
 ### Monitoring connectors
-{{% dsm_connectors %}}
+
+#### Confluent Cloud connectors
+{{% dsm_confluent_connectors %}}
 
 ### Monitoring SQS pipelines
 Data Streams Monitoring uses one [message attribute][2] to track a message's path through an SQS queue. As Amazon SQS has a maximum limit of 10 message attributes allowed per message, all messages streamed through the data pipelines must have 9 or fewer message attributes set, allowing the remaining attribute for Data Streams Monitoring.
@@ -36,6 +42,9 @@ Data Streams Monitoring uses one [message attribute][2] to track a message's pat
 ### Monitoring SNS-to-SQS pipelines
 To monitor a data pipeline where Amazon SNS talks directly to Amazon SQS, you must enable [Amazon SNS raw message delivery][9].
 
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /agent
 [2]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-metadata.html
