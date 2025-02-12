@@ -18,10 +18,6 @@ title: Python 런타임 메트릭
 type: multi-code-lang
 ---
 
-<div class="alert alert-warning">
-이 기능은 공용 베타 단계입니다.
-</div>
-
 ## 자동 설정
 
 `ddtrace-run`로 실행할 때 환경 변수 `DD_RUNTIME_METRICS_ENABLED=true`를 이용해 런타임 메트릭 수집을 활성화할 수 있습니다.
@@ -37,13 +33,13 @@ Python 서비스와 연결해 런타임 메트릭을 볼 수 있습니다. Datad
 
 **참고**: 런타임 UI의 경우 `ddtrace` >= [`0.24.0`][2]이 지원됩니다.
 
-기본적으로 애플리케이션 런타임 메트릭은 DogStatsD를 사용하여 `8125`포트를 통해 Datadog 에이전트로 전송됩니다. [에이전트에 DogStatsD가 활성화되어 있는지 확인하세요][3].
+기본적으로 애플리케이션 런타임 메트릭은 DogStatsD를 사용하여 `8125` 포트를 통해 Datadog 에이전트로 전송됩니다. [에이전트에 DogStatsD가 활성화되어 있는지 확인하세요][3].
 에이전트를 컨테이너로 실행하는 경우 `DD_DOGSTATSD_NON_LOCAL_TRAFFIC`이 [true로 설정][4]되어 있는지 확인하고 `8125` 포트가 에이전트에 개방되어 있는지 확인하세요.
 쿠버네티스의 경우 [DogstatsD 포트를 호스트 포트로 바인딩][5]하세요. ECS의 경우 [작업을 정의할 때 적절한 플래그를 설정][6]하세요.
 
 또는 에이전트에서 UDP 전송 대신 UDS(Unix Domain Socket)을 사용해 메트릭을 수집할 수 있습니다. 자세한 내용은 [Unix Domain Socket을 사용한 DogStatsD][7]을 참고하세요.
 
-## 수집된 데이터
+## 수집한 데이터
 
 런타임 메트릭을 활성화하면 기본적으로 다음 메트릭을 수집할 수 있습니다.
 

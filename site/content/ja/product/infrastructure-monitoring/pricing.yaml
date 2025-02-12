@@ -1,0 +1,339 @@
+bundle: true
+collapsible_features: true
+custom_feature_columns: 3
+description: 場所や規模に関係なく、あらゆるスタック/アプリケーションの内部を監視
+faq:
+- a: ホストとは、Datadogで監視する物理的または仮想的なOSインスタンスのことです。サーバー、VM、ノード（Kubernetesの場合）、App Service
+    Planインスタンス（Azure App Servicesの場合）などがあります。
+  q: ホストはどのように定義されますか。
+  weight: 10
+- a: 'Datadog Agent は、ホスト上の任意の数のコンテナと共にコンテナ内で実行されます。そこから、隣接するコンテナやホスト自体からメトリクスを収集することができます。プランによっては、各ホスト・ライセンスに対して
+    5 個または 10 個のコンテナを無料でモニタリングできます。追加のコンテナは、コンテナあたり 1 時間あたり $<span x-text="pricing[region][''CONT-EXCL-AGENT''].on_demand_cost">0.002</span>
+    で請求されます。 さらに、プリペイドコンテナを 1 コンテナあたり月額 $<span x-text="pricing[region][''CONT-EXCL-AGENT''].annual_cost">1</span>
+    で購入することができます。
+
+    '
+  q: コンテナはどのように監視されますか。
+  weight: 20
+- a: Datadog は、インフラストラクチャーだけでなく、独自のアプリケーションやビジネスメトリクスを監視できるように設計されています。組織の重要なメトリクスの一部またはすべてを
+    Datadog に送信して、グラフ作成、アラート、関連付け、異常の検出などを行うことができます。たとえば、広告収入、ショッピングカートが破棄される割合、ゲーム内収入の状態などを監視できます。これらのメトリクスは、特にインフラストラクチャーメトリクスと組み合わせて使用した場合に、多くのお客様から極めて有用であるという評価をいただいています。
+  q: カスタムメトリクスとは何ですか。
+  weight: 22
+- a: Datadog は、Infrastructure Pro で監視するホストごとに 100 のカスタムメトリクスを、Infrastructure Enterprise
+    で監視するホストごとに 200 のカスタムメトリクスを提供します。
+  q: ホストごとにいくつのカスタムメトリクスを<a href="/pricing/allotments/">割り当て</a>できますか？
+  weight: 24
+- a: Datadog では、ホストごとに割り当てられたカスタムメトリクスの量を超えても、100 カスタムメトリクスあたり月額 1 ドルという低料金でご利用いただけます。詳細については、弊社に<a
+    class="js-modal-demo">お問い合わせ</a>いただくか、<a href="mailto:sales@datadoghq.com">営業</a>または<a
+    href="mailto:customer-success@datadoghq.com">カスタマーサクセス</a>担当者にお問い合わせください。</span>
+  q: カスタムメトリクスの追加料金はどのように請求されますか？
+  weight: 30
+- a: カスタムメトリクスは、ホスト単位ではなく、アカウント全体で1時間ごとにカウントされ、毎月の平均値で算出されます。カスタムメトリクスの課金に関する詳細は、[カスタムメトリクスの課金に関するFAQ](https://docs.datadoghq.com/account_management/billing/custom_metrics/?tab=countrate)をご覧ください。
+  q: Datadogはカスタムメトリクスをどのようにカウントし、計測していますか？
+  weight: 35
+- a: Datadogでは、カスタムビルドのデプロイツールやスケジュールされたメンテナンスジョブなど、独自のカスタムアプリケーションから来るカスタムイベントを送信することができます。このようにして、任意のイベントをパフォーマンス
+    メトリクスと相関させ、アラート用のモニターを作成し、処理パイプラインで取り込み時のイベントをリッチ化して、他の標準イベントと一緒にクエリできるようにします。
+  q: カスタムイベントとは何ですか？
+  weight: 40
+- a: 'Datadog は、インフラストラクチャー監視で監視するホストごとに、Pro プランでは 500 個、Enterprise プランでは 1,000 個のカスタムイベントを提供します。カスタムイベントは、ホスト単位ではなく、アカウント全体で平均して算出されます。この上限を超えると、Datadog
+    は 100,000 カスタムイベントに対して $<span x-text="pricing[region][''CUSTOM-EVENTS''].annual_cost">2</span>
+    を請求します（年間請求またはオンデマンドで $<span x-text="pricing[region][''CUSTOM-EVENTS''].on_demand_cost">3</span>
+    )ただし、お客様が割り当て済みの量を超えることはほとんどありません。
+
+    '
+  q: ホストごとにいくつのイベントを<a href="/pricing/allotments/">割り当て</a>できますか？
+  weight: 50
+- a: "Datadog カスタムメトリクスは次の 3 つの方法で送信できます。 <ul>\n  <li>Datadog Agent に付属する DogStatsD\
+    \ を使用して、多くのプログラミング言語に対応した、Agent のノンブロッキング API ファンクションを通してカスタムメトリクスを送信できます。</li>\n\
+    \  <li>Datadog Agentでは、Agentへのプラグインを通じてカスタムインテグレーションを作成できます。このプラグインシステムにより、Agentはユーザに代わってカスタムメトリクスを収集します。Datadog\
+    \ Agentにフィードバックされたインテグレーションは、標準的なメトリクスに変換されます。</li>\n  <li>また、Datadogには全機能を備えたAPIがあり、HTTPで直接、あるいは言語固有のライブラリを使って、メトリクスを送信できます。</li>\n\
+    </ul>\n"
+  q: カスタムメトリクスやイベントを送信するにはどうすればいいですか？
+  weight: 60
+- a: '[セキュリティ](/security)は Datadog が最も重要と考えている機能であり、ユニバーサル HTTPS、強力な TLS 構成、および HTTP
+    Strict Transport Security を取り入れています。Datadog Agent はオープンソースであるため、自社のセキュリティ要件を満たしているかどうかを検証できます。'
+  q: データの安全性はどのように保護されますか。
+  weight: 70
+- a: <a href="/pricing/list/">年間プラン、月間プラン、時間単位プラン</a>をご用意しています。お客様のニーズに合わせて請求プランをカスタマイズすることができます。請求に関する詳しい説明は、[請求に関する
+    FAQ](https://docs.datadoghq.com/account_management/billing/) をご覧ください。
+  q: データの安全性はどのように保護されますか。
+  weight: 80
+- a: <a href="/pricing/list/">年間プラン、月間プラン、時間単位プラン</a>をご用意しています。お客様のニーズに合わせて請求プランをカスタマイズすることができます。請求に関する詳しい説明は、[請求に関する
+    FAQ](https://docs.datadoghq.com/account_management/billing/) をご覧ください。
+  q: 他の請求オプションはありますか？
+  weight: 90
+- a: 当社は、パートナーとなる技術プロバイダー、サービスプロバイダー、および販売代理店を常に探しています。詳細については、[パートナーに関するページ](/partner/)を参照してください。
+  q: パートナー向けの特別サービスはありますか？
+  weight: 100
+- a: IoT デバイスとは、オンプレミスやクラウドデータセンターの外に設置され、ネットワークを介してデータを送信する非標準の計算機デバイスです。IoT デバイスの例としては、Raspberry
+    Pi や NVIDIA Jetson などがあります。Datadog IoT Agent を使って、Datadog で IoT デバイスを監視することができます。
+  q: IoT デバイスはどのように定義されますか。
+  weight: 110
+- a: DevSecOps の SKU は、インフラストラクチャーのサブセットのために購入することはできません。すべての既存のホストとコンテナが対象となります。また、DevSecOps
+    SKU を単体のインフラストラクチャーまたは Cloud Security Management の SKU と組み合わせることもできません。
+  q: 一部のホスト用に DevSecOps SKU を購入し、残りのホスト用にスタンドアロンの Infrastructure または Cloud Security
+    Management SKU を購入することはできますか？
+  weight: 120
+features:
+  add_ons:
+  - name: AWS Fargate (サーバーレスコンテナ)
+    plans:
+    - false
+    - タスクごとに $<span x-text="pricing[region]['FARGATE-PRO'].annual_cost">1</span>。機能ごとに
+      5 つのカスタムメトリクスと 5 つの取り込み済みカスタムメトリクスの割り当てが含まれます。
+    - タスクごとに $<span x-text="pricing[region]['FARGATE-PRO'].annual_cost">1</span>。機能ごとに
+      5 つのカスタムメトリクスと 5 つの取り込み済みカスタムメトリクスの割り当てが含まれます。
+  - name: IoT デバイスモニタリング
+    plans:
+    - false
+    - デバイスごとに $<span x-text="pricing[region]['IOT-MONT'].annual_cost">5</span>。デバイスごとに
+      20 のカスタムメトリクスと 20 の取り込み済みカスタムメトリクスの割り当てが含まれます。
+    - デバイスごとに $<span x-text="pricing[region]['IOT-MONT'].annual_cost">5</span>。デバイスごとに
+      20 のカスタムメトリクスと 20 の取り込み済みカスタムメトリクスの割り当てが含まれます。
+  advanced_administrative:
+  - name: SCIM
+    plans:
+    - false
+    - true
+    - true
+  - name: IP 許可リスト
+    plans:
+    - false
+    - false
+    - true
+  devsecops:
+  - name: インフラストラクチャーのモニタリング
+    plans:
+    - false
+    - Infrastructure Pro のすべての機能
+    - Infrastructure Enterprise のすべての機能
+  - name: クラウドセキュリティポスチャ管理 (CSPM)
+    plans:
+    - false
+    - true
+    - true
+  - name: Kubernetes セキュリティポスチャ管理 (KSPM)
+    plans:
+    - false
+    - true
+    - true
+  - name: リソースをコンプライアンスフレームワークにマッピングし、監査に役立てる。
+    plans:
+    - false
+    - true
+    - true
+  - fedRegion: false
+    name: 脆弱性管理
+    plans:
+    - false
+    - コンテナイメージ
+    - ホストイメージ
+  - name: クラウドインフラストラクチャ権限管理 (CIEM)
+    plans:
+    - false
+    - true
+    - true
+  - name: ファイル整合性モニタリング
+    plans:
+    - false
+    - false
+    - true
+  - name: クラウドワークロードセキュリティ (CWS)
+    plans:
+    - false
+    - false
+    - true
+  - name: 異常なワークロードプロファイルの検出
+    plans:
+    - false
+    - false
+    - true
+  - name: リソースカタログ
+    plans:
+    - false
+    - true
+    - true
+  - name: ケース管理
+    plans:
+    - false
+    - true
+    - true
+  - name: ワークフロー
+    plans:
+    - false
+    - ホストあたり 5 回の割り当て済みワークフロー実行/月
+    - ホストあたり 20 回の割り当て済みワークフロー実行/月
+  - name: コンテナ
+    plans:
+    - false
+    - ホストあたり 5 個のコンテナ割り当て/月
+    - ホストあたり 10 個のコンテナ割り当て/月
+  main:
+  - name: 標準イベントとメトリックス
+    plans:
+    - 最大 5 ホスト
+    - true
+    - true
+  - name: すぐに使えるダッシュボード
+    plans:
+    - true
+    - true
+    - true
+  - name: 850 種類以上のインテグレーション
+    plans:
+    - true
+    - true
+    - true
+  - name: ホストとコンテナマップ
+    plans:
+    - true
+    - true
+    - true
+  - name: エンタープライズレベルのセキュリティ
+    plans:
+    - true
+    - true
+    - true
+  - name: 無制限のユーザーアカウント
+    plans:
+    - true
+    - true
+    - true
+  - name: CoScreenでの1対1のコラボレーション
+    plans:
+    - true
+    - true
+    - true
+  - name: フルレゾリューションデータ保持
+    plans:
+    - 1 日
+    - 15 か月
+    - 15ヶ月、カスタマイズ可能
+  - name: アラート
+    plans:
+    - false
+    - 無制限
+    - 無制限
+  - name: <a href="/pricing/allotments/">コンテナモニタリング</a>
+    plans:
+    - false
+    - 5/ホストを割り当て済み
+    - 10/ホストを割り当て済み
+  - name: <a href="/pricing/allotments/">カスタムメトリクス</a>
+    plans:
+    - false
+    - 100/ホストを割り当て済み
+    - 200/ホストを割り当て済み
+  - name: <a href="/pricing/allotments/">カスタムイベント</a>
+    plans:
+    - false
+    - 500/ホストを割り当て済み
+    - 1000/ホストを割り当て済み
+  - name: SAML によるシングルサインオン
+    plans:
+    - false
+    - true
+    - true
+  - name: 外れ値の検出
+    plans:
+    - false
+    - true
+    - true
+  - name: 'Watchdog: 潜在的な問題を自動検出'
+    plans:
+    - false
+    - false
+    - true
+  - name: 相関
+    plans:
+    - false
+    - false
+    - true
+  - name: 異常検知
+    plans:
+    - false
+    - false
+    - true
+  - name: 予測モニタリング
+    plans:
+    - false
+    - false
+    - true
+  - name: ライブプロセス
+    plans:
+    - false
+    - false
+    - true
+fed_product: true
+name: インフラストラクチャー
+plans:
+- custom_column_width: col-md-4
+  default_fine_print: false
+  description: コアコレクションと可視化機能
+  key_points:
+  - メトリクスを 1 日保存
+  - 最大 5 ホスト
+  name: Free
+  pricing_data_key: インフラストラクチャー
+- custom_column_width: col-md-4
+  description: システム、サービス、サーバーレス機能の監視を一元化
+  key_points:
+  - 850 種類以上のインテグレーション
+  - すぐに使えるダッシュボード
+  - 15 か月間のメトリクス保持
+  name: Pro
+  price_helper1: ホストごと、
+  price_helper2: 1 か月*
+  pricing_data_key: HOSTS-PRO
+- custom_column_width: col-md-4
+  description: 高度な機能と管理コントロール
+  key_points:
+  - 機械学習に基づいたアラート
+  - ライブプロセス
+  name: Enterprise
+  price_helper1: ホストごと、
+  price_helper2: 1 か月*
+  pricing_data_key: HOSTS-ENTERP
+- custom_column_width: col-md-4
+  phantom_plan: true
+- custom_column_width: col-md-4
+  default_fine_print: true
+  description: クラウドリソースの保護と業界標準の遵守
+  dynamic_key_points:
+  - copy: クラウドセキュリティポスチャ管理 (CSPM)
+  - copy: Kubernetes セキュリティ態勢管理 (KSPM)
+  - copy: リソースをコンプライアンスフレームワークにマッピングし、監査に役立てる。
+  - copy: コンテナとホストの脆弱性管理 (VM)
+    fedRegion: false
+  - copy: クラウドインフラストラクチャ権限管理 (CIEM)
+  - copy: クラウドリソースと関連するリスクの包括的なインベントリ
+  - copy: ケース管理
+  include_other_plan: 'Infrastructure Pro および CSM Pro の全機能に加え、以下の機能が含まれます:'
+  name: DevSecOps Pro
+  price_helper1: ホストごと、
+  price_helper2: 月額*
+  pricing_data_key: HOST-DEVSECOPS-PRO
+- custom_column_width: col-md-4
+  default_fine_print: true
+  description: 高度なリスク・脅威検知機能
+  include_other_plan: 'Infrastructure Enterprise と CSM Enterprise の全機能に加え、以下の機能が含まれます:'
+  key_points:
+  - ファイル整合性モニタリング
+  - Cloud Workload Security (CWS) for Linux、Windows Kubernetes、Docker、AWS Fargate
+    ECS/EKS
+  - コンテナ割り当ての増加（ホストライセンス**ごとに20コンテナを<a href="/pricing/allotments/">割り当て</a>)
+  name: DevSecOps Enterprise
+  price_helper1: ホストごと、
+  price_helper2: 月額*
+  pricing_data_key: HOST-DEVSECOPS-ENT
+pricing_nav_categories:
+- インフラストラクチャー
+pricing_sub_text: '<h3>サポートプラン</h3> <br/>Datadog は基本的なプランから特別注文のサービスまで、あらゆる組織に適したサポートレベルを提供します。<br/><br/><a
+  href="/support-services/plans/" class="text-underline small fw-semibold">サポートプランの詳細についてはこちら</a>
+
+  '
+removePricingLower: true
+volume_discount_cta:
+  volume_pricing: 'カスタムメトリクス: 100 件あたり $<span x-text="pricing[region].custom_metrics_level_5.annual_cost">1</span>
+    から (<a href="/pricing/?product=infrastructure#infrastructure-how-do-i-get-charged-for-additional-custom-metrics">よくあるご質問をご覧ください</a>)'
+  volume_threshold: (500+ ホスト/月)
