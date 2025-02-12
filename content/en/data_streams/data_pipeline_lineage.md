@@ -52,7 +52,7 @@ Don't see your tech stack here? [Submit a request][2].
 
 After you set up Data Pipeline Lineage, go the [Data Streams Monitoring][9] page in Datadog and select **Map** to see your visualized pipelines.
 
-## Further Reading
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
