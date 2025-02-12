@@ -11,12 +11,12 @@ further_reading:
 
 ## Overview
 
-[Ragas][1] is an evaluation framework for retrieval augmented generation (RAG) applications. Datadog's Ragas integration enables you to evaluate your production application with faithfulness, answer relevancy, and context precision scores. You can use these scores to find traces that have a high likelihood of inaccurate answers and review them to improve your RAG pipeline.
+[Ragas][1] is an evaluation framework for retrieval augmented generation (RAG) applications. Datadog's Ragas integration enables you to evaluate your production application with scores for faithfulness, answer relevancy, and context precision. You can use these scores to find traces that have a high likelihood of inaccurate answers and review them to improve your RAG pipeline.
 
 For a simplified setup guide, see [Ragas Quickstart][7].
 
 <div class="alert alert-warning">
-Datadog recommends that you use sampling for Ragas evaluations. These LLM-as-a-judge evaluations are powered by your LLM provider's account. Evaluations are automatically traced and sent to Datadog. These traces contain LLM spans, which may affect your LLM Observability billing. See <a href="#Sampling">Sampling</a>.
+Datadog recommends that you use sampling for Ragas evaluations. These LLM-as-a-judge evaluations are powered by your LLM provider's account. Evaluations are automatically traced and sent to Datadog. These traces contain LLM spans, which may affect your LLM Observability billing. See <a href="#sampling">Sampling</a>.
 </div>
 
 ## Evaluations
@@ -30,7 +30,7 @@ This score is generated through three steps:
 2. **Creating verdicts**: For each statement, determining if it is unfaithful to the provided context
 3. **Computing a score**: Dividing the number of contradicting statements over the total number of statements
 
-For more information, see [Ragas' Faithfulness documentation][2].
+For more information, see [Ragas's Faithfulness documentation][2].
 
 ### Answer Relevancy
 
@@ -38,21 +38,21 @@ The _Answer Relevancy_ (or _Response Relevancy_) score assesses how pertinent th
 
 The Answer Relevancy score is defined as the mean cosine similarity of the original question to a number of artificial questions, which are generated (reverse engineered) based on the response.
 
-For more information, see [Ragas' Answer Relevancy documentation][3].
+For more information, see [Ragas's Answer Relevancy documentation][3].
 
 ### Context Precision 
 
 The _Context Precision_ score assesses if the context was useful in arriving at the given answer. 
 
-This score is modified from Ragas' original Context Precision metric, which computes the mean of the Precision@k for each chunk in the context. Precision@k is the ratio of the number of relevant chunks at rank _k_ to the total number of chunks at rank _k_.
+This score is modified from Ragas's original Context Precision metric, which computes the mean of the Precision@k for each chunk in the context. Precision@k is the ratio of the number of relevant chunks at rank _k_ to the total number of chunks at rank _k_.
 
 Datadog's Context Precision score is computed by dividing the number of relevant contexts by the total number of contexts.
 
-For more information, see [Ragas' Context Precision documentation][4].
+For more information, see [Ragas's Context Precision documentation][4].
 
 ## Setup 
 
-Datadog's Ragas evaluations require `ragas` v0.1+ and `ddtrace` v3.0.0+
+Datadog's Ragas evaluations require `ragas` v0.1+ and `ddtrace` v3.0.0+.
 
 1. **Install dependencies**. Run the following command:
 
@@ -97,15 +97,15 @@ Datadog's Ragas evaluations require `ragas` v0.1+ and `ddtrace` v3.0.0+
    {{% /tab %}}
    {{< /tabs >}}
 
-3. (Optional, but recommended) **Enable sampling**. Datadog traces Ragas score generation. These traces contain LLM spans, which may affect your LLM Observability billing. See [Sampling](#Sampling).
+3. (Optional, but recommended) **Enable sampling**. Datadog traces Ragas score generation. These traces contain LLM spans, which may affect your LLM Observability billing. See [Sampling](#sampling).
 
-3. **Run your script and specify enabled Ragas evaluators**. Use the environment variable `DD_LLMOBS_EVALUATORS` to provide a comma-separated list of Ragas evaluators you wish to enable. These evaluators are `ragas_faithfulness`, `ragas_context_precision`, and `ragas_answer_relevancy`.
+4. **Run your script and specify enabled Ragas evaluators**. Use the environment variable `DD_LLMOBS_EVALUATORS` to provide a comma-separated list of Ragas evaluators you wish to enable. These evaluators are `ragas_faithfulness`, `ragas_context_precision`, and `ragas_answer_relevancy`.
    
    For example, to run your script with all Ragas evaluators enabled:
    ```bash
    DD_LLMOBS_EVALUATORS="ragas_faithfulness,ragas_context_precision,ragas_answer_relevancy" \
    DD_ENV=dev \
-   DD_API_KEY=<YOUR_DATADOG_API_KEY> \
+   DD_API_KEY=<YOUR-DATADOG-API-KEY> \
    DD_SITE={{< region-param key=dd_site code="true" >}} \
    python driver.py
    ```
@@ -139,7 +139,7 @@ export DD_LLMOBS_EVALUATORS_SAMPLING_RULES='[
 
 #### Customization
 
-Ragas supports [customizations][5]. For example, the following snippet configures the Faitfulness evaluator to use `gpt-4` and adds custom instructions for the prompt to the evaluating LLM:
+Ragas supports [customizations][5]. For example, the following snippet configures the Faithfulness evaluator to use `gpt-4` and adds custom instructions for the prompt to the evaluating LLM:
 
 ```python
 from langchain_openai import ChatOpenAI
@@ -174,7 +174,7 @@ You can also configure your LLM Traces page to display Ragas scores.
 
 Your LLM inference could be missing an evaluation for the following reasons:
 
-- The LLM span was not sampled for an evaluation because you have implemented [sampling](#sampling)
+- The LLM span was not sampled for an evaluation because you have implemented [sampling](#sampling).
 - An error occurred during the Ragas evaluation. Search for `runner.integration:ragas` to see traces for the Ragas evaluation itself.
 
 ### Flushing
