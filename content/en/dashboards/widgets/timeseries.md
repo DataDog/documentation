@@ -37,7 +37,9 @@ The timeseries visualization allows you to display the evolution of one or more 
 
 ## Display options
 
-Graphs can be displayed as lines, areas, and bars. Line graphs contain additional parameters:
+Graphs can be displayed as lines, areas, and bars. Datadog graphs aggregate data over intervals such as sum every hour. By default, the last time interval in a timeseries graph with incomplete data is shaded and labeled it as ‘partial data’.
+
+Line graphs contain additional parameters:
 
 | Parameter | Options                  |
 |-----------|--------------------------|
