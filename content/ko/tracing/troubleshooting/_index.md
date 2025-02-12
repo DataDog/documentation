@@ -33,9 +33,9 @@ further_reading:
 - link: /integrations/
   tag: 문서
   text: Datadog의 전체 통합 목록
-- link: /tracing/guide/inferred-service-opt-in/
+- link: /tracing/services/inferred_services
   tag: 문서
-  text: 추론된 서비스 종속성(베타)
+  text: Inferred Service dependencies
 title: 애플리케이션 성능 모니터링(APM) 트러블슈팅
 ---
 
@@ -100,7 +100,7 @@ Datadog APM 사용 중 예측하지 못한 동작을 경험하는 경우 이 페
 - `service:test-mongodb`
 - `service:test-postgresdb`
 
-[추론된 서비스 종속성(베타)[30]를 사용할 수 있습니다. 추론된 외부 API에서는 기본 명명 규칙인 `net.peer.name`을 사용합니다(예: `api.stripe.com`, `api.twilio.com`). 추론된 데이터베이스에서는 기본 명명 규칙 `scheme db.instance`를 사용합니다.
+[추론된 서비스 종속성(평가판)[30]을 사용할 수 있습니다. 추론된 외부 API에서는 기본 명명 규칙인 `net.peer.name`을 사용합니다(예: `api.stripe.com`, `api.twilio.com`). 추론된 데이터베이스에서는 기본 명명 규칙 `scheme db.instance`를 사용합니다.
 
 또는 언어에 따라 서비스 이름을 `DD_SERVICE_MAPPING` 또는 `DD_TRACE_SERVICE_MAPPING`와 같은 환경 변수를 사용해 명명할 수도 있습니다.
 
@@ -207,7 +207,7 @@ Ruby에서는 `DD_SERVICE_MAPPING` 또는 `DD_TRACE_SERVICE_MAPPING`을 지원�
 
 Datadog에서는 40분 간격으로 다음 조합을 허용합니다.
 
-- 고유한 `environments` 및 `service` 조합 1,000개
+- 고유한 `environments` 및 `service` 조합 5,000개
 - 환경당 고유한 `second primary tag values` 30개
 - 환경 및 서비스당 고유한 `operation names` 100개
 - 환경, 서비스, 작업 이름당 고유한 `resources` 1,000개
@@ -376,6 +376,6 @@ Datadog 트레이서의 자세한 세부 사항을 캡처하려면 트레이서�
 [27]: /ko/tracing/trace_collection/library_config/
 [28]: https://app.datadoghq.com/dash/integration/apm_estimated_usage
 [29]: /ko/tracing/troubleshooting/#data-volume-guidelines
-[30]: /ko/tracing/guide/inferred-service-opt-in/?tab=java
+[30]: /ko/tracing/services/inferred_services
 [31]: /ko/tracing/trace_pipeline/metrics/#apm-traces-estimated-usage-dashboard
 [32]: https://app.datadoghq.com/services
