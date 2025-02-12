@@ -74,7 +74,7 @@ In this example, use `service:network_directory` as your main query, and then de
 
 {{% filter_by_reference_tables %}}
 
-{{< img src="logs/explorer/advanced_search/reference_tables_logs.png" alt="The Datadog Log Explorer with reference table search options highlighted" border="true" popup="true" style="width:100%;" >}}
+{{< img src="logs/explorer/advanced_search/reference_table_join_filter.png" alt="The Datadog Log Explorer with reference table search options highlighted" border="true" popup="true" style="width:100%;" >}}
 
 ## Further reading
 
