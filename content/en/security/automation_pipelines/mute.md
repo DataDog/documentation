@@ -42,4 +42,8 @@ When a finding has a due date, you can see it in these locations:
 
 When Datadog identifies a vulnerability, it evaluates the vulnerability against your sequence of mute rules. Starting with the first rule, if there's a match, Datadog mutes the vulnerability for the specified duration and stops evaluating further. If no match occurs, Datadog moves to the next rule. This process continues until a match is found or all rules are checked without a match.
 
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
 [2]: https://app.datadoghq.com/security/configuration/pipeline-vulnerability
