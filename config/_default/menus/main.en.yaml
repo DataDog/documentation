@@ -882,9 +882,9 @@ menu:
       url: developers/integrations/create-an-integration-dashboard
       parent: dev_tools_integrations
       weight: 407
-    - name: Create a Recommended Monitor
-      identifier: dev_tools_integrations_recommended_monitor
-      url: developers/integrations/create-an-integration-recommended-monitor
+    - name: Create a Monitor Template
+      identifier: dev_tools_integrations_monitor_template
+      url: developers/integrations/create-an-integration-monitor-template
       parent: dev_tools_integrations
       weight: 408
     - name: Create a Cloud SIEM Detection Rule
@@ -1479,10 +1479,10 @@ menu:
       parent: alerting
       identifier: monitor_configuration
       weight: 1
-    - name: Recommended Monitors
-      url: monitors/recommended/
+    - name: Monitor Templates
+      url: monitors/templates/
       parent: alerting
-      identifier: monitor_recommended
+      identifier: monitor_templates
       weight: 2
     - name: Monitor Types
       url: monitors/types/
@@ -4083,16 +4083,21 @@ menu:
       identifier: data_streams_live_messages
       parent: data_streams
       weight: 2
+    - name: Data Pipeline Lineage
+      url: data_streams/data_pipeline_lineage
+      identifier: data_streams_pipeline_lineage
+      parent: data_streams
+      weight: 3
     - name: Troubleshooting
       url: data_streams/troubleshooting
       identifier: data_streams_troubleshooting
       parent: data_streams
-      weight: 3
+      weight: 4
     - name: Guide
       url: data_streams/guide
       identifier: data_streams_guide
       parent: data_streams
-      weight: 4
+      weight: 5
     - name: Data Jobs Monitoring
       url: data_jobs/
       pre: data-jobs-monitoring
@@ -7047,7 +7052,7 @@ menu:
       identifier: rum_generate_metrics
       weight: 403
     - name: Connect RUM and Traces
-      url: real_user_monitoring/connect_rum_and_traces
+      url: real_user_monitoring/platform/connect_rum_and_traces
       parent: real_user_monitoring_platform
       identifier: rum_connect_rum_and_traces
       weight: 404

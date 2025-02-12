@@ -45,6 +45,10 @@ further_reading:
   tag: Blog
   text: Mejorar la experiencia y la colaboración de los desarrolladores con el esquema
     del Catálogo de servicios versión 3.0
+- link: https://www.datadoghq.com/blog/memory-leak-workflow/
+  tag: Blog
+  text: Investiga las fugas de memoria y los errores OOMs (sin memoria) con el flujo
+    de trabajo guiado de Datadog.
 title: Catálogo de servicios de Datadog
 ---
 
@@ -54,29 +58,15 @@ title: Catálogo de servicios de Datadog
 
 El [Catálogo de servicios][1] de Datadog proporciona una visión consolidada de tus servicios, combinando metadatos de propiedad, perspectivas de rendimiento, análisis de seguridad, asignación de costes y mucho más. Facilita que las organizaciones consigan la propiedad integral del servicio a escala, obtengan información sobre el rendimiento en tiempo real, detecten y aborden los riesgos de fiabilidad y seguridad, y gestionen las dependencias de las aplicaciones, todo en un único lugar.
 
-{{< callout url="https://www.datadoghq.com/product-preview/internal-developer-portal/" d_target="#signupModal" btn_hidden="false" header="Suscribirse para obtener una vista previa de nuestro Portal para desarrolladores" >}}
+{{< callout url="https://www.datadoghq.com/product-preview/internal-developer-portal/" d_target="#signupModal" btn_hidden="false" header="Suscríbete para obtener una vista previa de nuestro Portal para desarrolladores" >}}
 {{< /callout >}}
 
-### Casos de uso
-
-#### Detección del servicio
-- El Catálogo de servicios de Datadog incluye todos los servicios detectados de APM, USM y RUM por defecto. Si utilizas alguno de estos productos, tu catálogo estará precargado con entradas.
-- A medida que instrumentas más aplicaciones a través de tus entornos, que se añaden automáticamente al Catálogo de servicios.
-
-#### Asignación y gestión de dependencias 
-- Documenta y realiza un seguimiento automático de todas tus dependencias ascendentes y descendentes con telemetrías de aplicaciones recopiladas por APM, USM y RUM.
-- Declara manualmente las relaciones de dependencia entre componentes (disponible a través del [esquema de metadatos v3.0][8]).
-- Comprende y evalúa las repercusiones del rendimiento en todos los equipos y servicios.
+### Casos prácticos
 
 #### Gobernanza y optimización
 - Proporciona a la dirección de ingeniería una visión clara de las prácticas recomendadas en todos los equipos y servicios a través de [Planillas de servicio][9].
 - Reduce los riesgos de las aplicaciones encontrando y solucionando vulnerabilidades de seguridad conocidas en las dependencias de tus servicios.
 - Comprende las tendencias e identificar las ineficiencias en los costes relacionados con tus servicios.
-
-#### Intercambio de conocimientos
-- Localiza información sin tener que navegar por numerosos repositorios, canales o páginas de documentación.
-- Ahorra tiempo buscando manuales de ejecución o páginas de wiki al incorporar nuevos miembros al equipo.
-- Aprovecha los mapas topológicos generados automáticamente en tiempo real para comprender la arquitectura del sistema.
 
 #### Evaluar la cobertura de monitorización 
 - Detecta cuáles servicios no comunican datos de observabilidad o no los controlan.
@@ -145,8 +135,9 @@ Cada entrada que aparece en el Catálogo de servicios se clasifica como un tipo 
 *  Colas
 *  Aplicaciones RUM
 *  Proveedores externos
+*  Endpoints
 
-{{< img src="tracing/service_catalog/component_selector.png" alt="Selctor del componente Catálogo de servicios" style="width:30%;" >}}
+{{< img src="tracing/service_catalog/select-component.png" alt="Selector de componentes del Catálogo de servicios" style="width:30%;" >}}
 
 Datadog rellena las entradas del Catálogo de servicios y determina su tipo de componente asociado basándose en atributos de tramos recopilados de ([etiquetas iguales][10]) de APM, pero también en otros tipos de telemetrías recopiladas (USM, DSM, RUM, etc...).
 
@@ -158,9 +149,9 @@ Datadog rellena las entradas del Catálogo de servicios y determina su tipo de c
 ## Conservación de datos
 Los servicios y las estadísticas de recursos, y los resúmenes de tramo en la **Lista de servicio** y **Página de servicios** se conservan hasta 30 días. Para consultas personalizadas en métricas de trazas de APM, utiliza Metric Explorer. [Más información sobre la conservación de datos en APM][4].
 
-## {{< img src="synthetics/browser_test.mp4" alt="Browser tests" video=true style="width:100%;">}}
+## Referencias adicionales
 
-Grabar pruebas de aplicaciones móviles
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/services
 [2]: /es/account_management/rbac/

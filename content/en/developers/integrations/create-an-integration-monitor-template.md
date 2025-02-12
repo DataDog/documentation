@@ -1,20 +1,22 @@
 ---
+aliases:
+- /developers/integrations/create-an-integration-recommended-monitor
 further_reading:
 - link: https://docs.datadoghq.com/monitors/configuration/
   tag: Documentation
   text: Configure Monitors
-title: Create an Integration-Recommended Monitor
+title: Create an Integration-Monitor Template
 description: Learn how to create a monitor for your integration.
 ---
 ## Overview
 
 [Datadog Monitors][1] track key metrics, so you can efficiently monitor your infrastructure and integrations. Datadog provides a set of out-of-the-box monitors for many features and integrations. View these monitors in your [Monitors Template list][2].
 
-Create an out-of-the-box monitor to help users find value in your Datadog integration. This guide provides steps for creating an integration-recommended monitor and best practices to follow during the creation process.
+Create an out-of-the-box monitor to help users find value in your Datadog integration. This guide provides steps for creating an integration-monitor template and best practices to follow during the creation process.
 
 To create a Datadog integration, see [Create a New Integration][3].
 
-## Steps to create a recommended monitor
+## Steps to create a monitor template
 ### Build a monitor JSON Schema
 
 1. [Create a monitor][4].
@@ -23,8 +25,8 @@ To create a Datadog integration, see [Create a New Integration][3].
  
 3. Click **Export Monitor**.
 
-4. Check **Select to export as a recommended monitor**.
-    {{< img src="developers/integrations/monitor_json.png" alt="Monitor JSON modal to export as recommended monitor" style="width:100%;" >}}
+4. Check **Select to export as a monitor template**.
+    {{< img src="developers/integrations/monitor_json.png" alt="Monitor JSON modal to export as monitor template" style="width:100%;" >}}
 
 5. Click **Copy** to use the JSON schema of your configured monitor.
 
@@ -36,9 +38,9 @@ To create a Datadog integration, see [Create a New Integration][3].
 
 1. Save the monitor JSON file to your integration's `assets/monitors` folder. Add the asset to your `manifest.json` file. See [Integrations Assets Reference][5] for more information about your integration's file structure and manifest file.
 
-2. Open a pull request (PR) to add your recommended monitor JSON file and updated manifest file to the corresponding integration folder either in the [`integrations-extras` GitHub repository][6] or [`Marketplace` GitHub repository][9]. 
+2. Open a pull request (PR) to add your monitor template JSON file and updated manifest file to the corresponding integration folder either in the [`integrations-extras` GitHub repository][6] or [`Marketplace` GitHub repository][9]. 
 
-3. After it's approved, Datadog merges the PR and your integration-recommended monitor is pushed to production.
+3. After it's approved, Datadog merges the PR and your integration-monitor template is pushed to production.
 
 ## Verify your monitor in production
 
@@ -48,7 +50,7 @@ Find your monitor in the [Monitors Template list][2]. Ensure logos render correc
 
 ## Configuration best practices
 
-In addition to the monitor definition, the [Title](#title), [Description](#description), and Tags fields are required for recommended monitors. Set tags to "integration:<app_id>", see other available monitor tags [here][8]. For more information, see the documentation on [configuring a monitor][7].
+In addition to the monitor definition, the [Title](#title), [Description](#description), and Tags fields are required for monitor templates. Set tags to "integration:<app_id>", see other available monitor tags [here][8]. For more information, see the documentation on [configuring a monitor][7].
 
 ### Title
 

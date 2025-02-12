@@ -28,13 +28,11 @@ Configure mute rules to streamline security alerts by automatically filtering ou
 1. To add severity criteria to the rule, click **Add Severity**.
 1. Specify the mute reason and duration:
     - **Reason for muting**: The reason for muting the finding. Available reasons include:
-      - **Duplicate**
-      - **External solution**
+      - **False Positive**
+      - **Risk Accepted**
       - **Pending fix**
-      - **False positive**
-      - **Internal solution**
-      - **No fix available**
-      - **Accepted risk**
+      - **No Fix**
+      - **Duplicate**
       - **Other**
     - **Rule expiration**: The date on which the rule expires. 
     - **Further description for muting reason**: Optional box for additional details.
