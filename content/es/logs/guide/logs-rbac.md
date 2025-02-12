@@ -121,7 +121,7 @@ Para obtener más información sobre la creación de roles, consulta [Control de
 ### Asignación de roles a usuarios
 
 {{< tabs >}}
-{{% tab "UI" (IU) %}}
+{{% tab "UI (IU)" %}}
 
 1. En la [sección de usuarios][1] de Datadog, selecciona un usuario y asígnale el rol `ACME Admin` o `ACME User`.
 
@@ -154,7 +154,7 @@ En esta sección se explica cómo:
 ### Definición de una consulta de restricción
 
 {{< tabs >}}
-{{% tab "UI" (IU) %}}
+{{% tab "UI (IU)" %}}
 
 1. Ve a la página [Acceso a datos][1].
 1. Crea una consulta de restricción `team:acme` y aplícala a los roles ACME.
