@@ -972,6 +972,11 @@
     },
     {
       "group": "security_monitoring",
+      "suffix": "_1965169892",
+      "description": "Create a detection rule with type 'application_security 'returns \"OK\" response"
+    },
+    {
+      "group": "security_monitoring",
       "suffix": "_461183901",
       "description": "Create a detection rule with type 'impossible_travel' returns \"OK\" response"
     },
@@ -1329,11 +1334,25 @@
       "description": "Update a user returns \"OK\" response"
     }
   ],
+  "CreateWorkflow": [
+    {
+      "group": "workflow_automation",
+      "suffix": "",
+      "description": "Create a Workflow returns \"Successfully created a workflow.\" response"
+    }
+  ],
   "CreateWorkflowInstance": [
     {
       "group": "workflow_automation",
       "suffix": "",
       "description": "Execute a workflow returns \"Created\" response"
+    }
+  ],
+  "UpdateWorkflow": [
+    {
+      "group": "workflow_automation",
+      "suffix": "",
+      "description": "Update an existing Workflow returns \"Successfully updated a workflow.\" response"
     }
   ]
 }
