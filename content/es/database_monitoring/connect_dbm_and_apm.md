@@ -31,12 +31,10 @@ Las integraciones del rastreador de APM admiten un *Modo de propagación*, que c
 
 | DD_DBM_PROPAGATION_MODE | Postgres  |   MySQL     | SQL Server |  Oracle   |
 |:------------------------|:---------:|:-----------:|:----------:|:---------:|
-| `full`                  | {{< X >}} | {{< X >}} * |    {{< X >}} ** |           |
+| `full`                  | {{< X >}} | {{< X >}} * | {{< X >}}  | {{< X >}} |
 | `service`               | {{< X >}} | {{< X >}}   | {{< X >}}  | {{< X >}} |
 
 \* El modo de propagación completa en Aurora MySQL requiere la versión 3.
-
-\*\* SQL Server solo es compatible con el modo completo con los rastreadores de Java y .NET.
 
 **Rastreadores y controladores de aplicaciones compatibles**
 
@@ -46,7 +44,7 @@ Las integraciones del rastreador de APM admiten un *Modo de propagación*, que c
 |                                          | [base de datos/sql][4]      | {{< X >}} | {{< X >}} | solo el modo `service` | solo el modo `service` |
 |                                          | [sqlx][5]              | {{< X >}} | {{< X >}} | solo el modo `service` | solo el modo `service` |
 | **Java** [dd-trace-java][23] >= 1.11.0   |                        |           |           |                     |                     |
-|                                          | [jdbc][22]             | {{< X >}} | {{< X >}} | {{< X >}} ** | solo el modo `service` |
+|                                          | [jdbc][22]             | {{< X >}} | {{< X >}} | {{< X >}} **        | {{< X >}} ***       |
 | **Ruby:** [dd-trace-rb][6] >= 1.8.0      |                        |           |           |                     |                     |
 |                                          | [pg][8]                | {{< X >}} |           |                     |                     |
 |                                          | [mysql2][7]            |           | {{< X >}} |                     |                     |
@@ -75,12 +73,18 @@ Las integraciones del rastreador de APM admiten un *Modo de propagación*, que c
 \* [CommandType.StoredProcedure][25] no compatible
 
 \*\* Modo completo de SQL Server para Java/.NET:
+
+<div class="alert alert-warning">Si tu aplicación utiliza <code>context_info</code> para la instrumentación, el rastreador de APM lo sobrescribe.</div>
+
   - La instrumentación ejecuta un comando `SET context_info` cuando el cliente emite una consulta, lo que realiza un recorrido completo adicional a la base de datos.
-  - Si tus aplicaciones usan `context_info` para instrumentar la aplicación, el rastreador de APM lo sobrescribe.
   - Requisitos previos:
     - Versión 7.55.0 o posterior del Agent
     - Versión 1.39.0 o posterior del rastreador de Java
     - Versión del rastreador .NET 3.3 o posterior
+
+\*\*\* Oracle modo completo para Java:
+  - La instrumentación sobrescribe `V$SESSION.ACTION`.
+  - Requisito previo: rastreador de Java 1.45 o posterior
 
 ## Configuración
 Para obtener la mejor experiencia de usuario, asegúrate de que las siguientes variables de entorno se hayan configurado en tu aplicación:
@@ -91,35 +95,44 @@ DD_ENV=(entorno de la aplicación)
 DD_VERSION=(versión de la aplicación)
 ```
 
+Datadog recomienda establecer el modo de enmascaramiento en `obfuscate_and_normalize` para las versiones del Agent `7.63` y posteriores. Añade el siguiente parámetro en la sección `apm_config` de tu archivo de configuración del Agent de APM:
+
+```
+  sql_obfuscation_mode: "obfuscate_and_normalize"
+```
+
 {{< tabs >}}
 {{% tab "Go" %}}
 
 Actualiza las dependencias de tu aplicación para incluir [dd-trace-go@v1.44.0][1] o posterior:
-```
-go get gopkg.in/DataDog/dd-trace-go.v1@v1.44.0
+```shell
+go get gopkg.in/DataDog/dd-trace-go.v1@v1.44.0 # 1.x
+# go get github.com/DataDog/dd-trace-go/v2 # 2.x
 ```
 
 Actualiza tu código para importar el paquete `contrib/database/sql`:
 ```go
 import (
    "database/sql"
-   "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
-   sqltrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/database/sql"
+   "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer" // 1.x
+   sqltrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/database/sql" // 1.x
+   // "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer" // 2.x
+   // sqltrace "github.com/DataDog/dd-trace-go/contrib/database/sql/v2" // 2.x
 )
 ```
 
 Habilita la función de propagación de la monitorización de base de datos mediante uno de los siguientes métodos:
-1. Variable de entorno:
+- Variable de entorno:
    `DD_DBM_PROPAGATION_MODE=full`
 
-2. Uso de código durante el registro del controlador:
+- Uso de código durante el registro del controlador:
    ```go
-   sqltrace.Register("postgres", &pq.Driver{}, sqltrace.WithDBMPropagation(tracer.DBMPropagationModeFull), sqltrace.WithServiceName("my-db-service"))
+   sqltrace.Register("postgres", &pq.Driver{}, sqltrace.WithDBMPropagation(tracer.DBMPropagationModeFull), sqltrace.WithService("my-db-service"))
    ```
 
-3. Uso de código en `sqltrace.Open`:
+- Uso de código en `sqltrace.Open`:
    ```go
-   sqltrace.Register("postgres", &pq.Driver{}, sqltrace.WithServiceName("my-db-service"))
+   sqltrace.Register("postgres", &pq.Driver{}, sqltrace.WithService("my-db-service"))
 
    db, err := sqltrace.Open("postgres", "postgres://pqgotest:password@localhost/pqgotest?sslmode=disable", sqltrace.WithDBMPropagation(tracer.DBMPropagationModeFull))
    if err != nil {
@@ -131,22 +144,24 @@ Ejemplo completo:
 ```go
 import (
     "database/sql"
-    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
-    sqltrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/database/sql"
+    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer" // 1.x
+   sqltrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/database/sql" // 1.x
+   // "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer" // 2.x
+   // sqltrace "github.com/DataDog/dd-trace-go/contrib/database/sql/v2" // 2.x
 )
 
 func main() {
-    // El primer paso es establecer el modo de propagación de dbm al registrar el controlador. Ten en cuenta que esto
-    // también se puede hacer en sqltrace.Open para obtener un control más detallado sobre la función.
+    // The first step is to set the dbm propagation mode when registering the driver. Note that this can also
+    // be done on sqltrace.Open for more granular control over the feature.
     sqltrace.Register("postgres", &pq.Driver{}, sqltrace.WithDBMPropagation(tracer.DBMPropagationModeFull))
 
-    // Seguido de una llamada para abrir.
+    // Followed by a call to Open.
     db, err := sqltrace.Open("postgres", "postgres://pqgotest:password@localhost/pqgotest?sslmode=disable")
     if err != nil {
         log.Fatal(err)
     }
 
-    // Luego, continuamos usando el paquete de base de datos/sql como lo haríamos normalmente, con rastreo.
+    // Then, we continue using the database/sql package as we normally would, with tracing.
     rows, err := db.Query("SELECT name FROM users WHERE age=?", 27)
     if err != nil {
         log.Fatal(err)
@@ -195,7 +210,15 @@ public class Application {
 }
 ```
 
-**Nota**: Las instrucciones preparadas no son compatibles con el modo `full` y todas las llamadas a la API de JDBC que usan instrucciones preparadas se degradan de manera automática al modo `service`. Debido a que la mayoría de las bibliotecas SQL de Java usan instrucciones preparadas de forma predeterminada, esto significa que la **mayoría** de las aplicaciones Java solo pueden usar el modo `service`.
+**Versiones 1.44 y posteriores**:
+Habilita el rastreo de sentencias preparadas para Postgres mediante **uno** de los siguientes métodos:
+- Establece la propiedad del sistema `dd.dbm.trace_prepared_statements=true`
+- Establece la variable de entorno `export DD_DBM_TRACE_PREPARED_STATEMENTS=true`
+
+**Nota**: La instrumentación de sentencias preparadas sobrescribe la propiedad `Application` y provoca un recorrido de ida y vuelta adicional a la base de datos. Este movimiento adicional tiene un impacto insignificante en la latencia.
+
+**Versiones del rastreador inferiores a 1.44**:
+Las sentencias preparadas no son compatibles con el modo `full` para Postgres y MySQL, y todas las llamadas a la API de JDBC que utilizan sentencias preparadas se degradan automáticamente al modo `service`. Dado que la mayoría de las bibliotecas SQL de Java utilizan sentencias preparadas por defecto, esto significa que **la mayoría** de las aplicaciones Java sólo pueden utilizar el modo `service`.
 
 [1]: /es/tracing/trace_collection/dd_libraries/java/
 [2]: /es/tracing/trace_collection/compatibility/java/#data-store-compatibility
@@ -338,7 +361,7 @@ npm install dd-trace@^3.17.0
 
 Actualiza tu código para importar e inicializar el rastreador:
 ```javascript
-// Esta línea debe venir antes de importar cualquier módulo instrumentado.
+// This line must come before importing any instrumented module.
 const tracer = require('dd-trace').init();
 ```
 
