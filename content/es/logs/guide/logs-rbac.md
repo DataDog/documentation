@@ -81,7 +81,7 @@ Esta sección te guiará a través de la creación de dos roles, `ACME Admin` y 
 ### Creación de un rol
 
 {{< tabs >}}
-{{% tab "UI" (IU) %}}
+{{% tab "UI (IU)" %}}
 
 1. Ve a la sección [Roles][1] en Parámetros de organización de Datadog.
 1. Haz clic en **New Role** (Nuevo rol) para crear los roles `ACME Admin` y `ACME User`.
