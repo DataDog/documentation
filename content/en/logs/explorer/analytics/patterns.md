@@ -18,7 +18,9 @@ further_reading:
 
 ## Overview
 
-When aggregating indexed logs by **Patterns**, logs that have a `message` with similar structures are grouped altogether. Optionally, select one to three faceted fields to pre-aggregate your logs into groups before patterns are detected within these groupings.
+By default, **Log Patterns** will "cluster" logs with similar values for the `message` field, and aggregate results by `Status` and `Service`.
+
+Optionally, select a different log attribute for clustering and/or grouping.
 
 The **Patterns** view is helpful for detecting and filtering noisy error patterns that could cause you to miss other issues. The pattern detection is based on 10,000 log samples. Refine your search to see patterns limited to a specific subset of logs.
 
