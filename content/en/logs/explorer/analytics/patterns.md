@@ -18,9 +18,9 @@ further_reading:
 
 ## Overview
 
-By default, **Log Patterns** will "cluster" logs with similar values for the `message` field, and aggregate results by `Status` and `Service`.
+By default, **Log Patterns** "cluster" logs with similar values for the `message` field, and group results by `Status` and `Service`. 
 
-Optionally, select a different log attribute for clustering and/or grouping.
+You can select different log attributes for clustering or grouping results.
 
 The **Patterns** view is helpful for detecting and filtering noisy error patterns that could cause you to miss other issues. The pattern detection is based on 10,000 log samples. Refine your search to see patterns limited to a specific subset of logs.
 
