@@ -2335,6 +2335,19 @@ menu:
           - ListSecurityMonitoringSignals
         unstable: []
         order: 14
+    - name: Get a rule's version history
+      url: '#get-a-rules-version-history'
+      identifier: security-monitoring-get-a-rules-version-history
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetRuleVersionHistory
+        unstable:
+          - v2
+        order: 25
     - name: Test an existing rule
       url: '#test-an-existing-rule'
       identifier: security-monitoring-test-an-existing-rule
