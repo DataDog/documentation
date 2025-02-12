@@ -28,16 +28,6 @@ Configure mute rules to streamline security alerts by automatically filtering ou
     - **Further description for muting reason**: Optional box for additional details.
 1. Click **Save**. The rule applies to new findings immediately and starts checking existing findings within the next hour.
 
-## Where due dates appear
-
-When a finding has a due date, you can see it in these locations:
-
-- Explorer facets
-- Findings side panel
-- Notifications
-- Jira ticket descriptions
-- Reporting metrics (as an "overdue" Boolean) to identify teams or repositories with the most overdue vulnerabilities
-
 ## Rule matching order
 
 When Datadog identifies a vulnerability, it evaluates the vulnerability against your sequence of mute rules. Starting with the first rule, if there's a match, Datadog mutes the vulnerability for the specified duration and stops evaluating further. If no match occurs, Datadog moves to the next rule. This process continues until a match is found or all rules are checked without a match.
