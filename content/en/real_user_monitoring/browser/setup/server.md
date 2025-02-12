@@ -29,7 +29,10 @@ The available functionality has the following important limitations:
 
 - If proxying compressed traffic, the Auto-Instrumentation method is not able to inject the JS scriptlet into the HTML traffic.
 - This instrumentation method does not support any [advanced RUM configurations][3]. However, `allowedTracingUrls` and `excludedActivityUrls` are supported for NGINX, IIS and httpd web servers.
-- If acting as a proxy and the upstream server has end-to-end encryption (like TLS) enabled, the module cannot inject RUM. Ensure the web server is set up for TLS origination for successful instrumentation.
+- If the web server is acting as a proxy and the upstream server has end-to-end encryption (like TLS) or content compression (like gzip, zstd, or Brotli) enabled, the module may not inject RUM. Ensure the following for successful instrumentation:
+  - Content compression is disabled on the upstream server.
+  - The web server is configured to compress the content.
+  - The web server is set up for TLS origination.
 - (Windows IIS only) Configuration for Auto-Instrumentation is only available per Windows IIS site.
 
 ## Prerequisites
@@ -276,7 +279,7 @@ Since the module is in Preview, it's possible NGINX may stop serving requests, p
 If you notice that RUM is not being injected into HTML pages, consider the following potential causes:
 
 - **Content-Type mismatch**: RUM is injected only into HTML pages. If the `Content-Type` header does not correctly indicate `text/html`, the injection is skipped.
-- **Content compression by upstream server**: If NGINX is acting as a proxy and the upstream server has content compression (like gzip, zstd, or Brotli) enabled, the module may not inject RUM. Ensure that content compression is disabled on the upstream server and configure NGINX to compress the content.
+- **Upstream server has end-to-end encryption or content compression**: See [Limitations][41].
 
 ## Reference
 
@@ -347,3 +350,4 @@ If you notice that RUM is not being injected into HTML pages, consider the follo
 [38]: https://ddagent-windows-unstable.s3.amazonaws.com/inject-browser-sdk/nginx/latest/ngx_http_datadog_module-arm64-1.26.2.so.tgz
 [39]: https://ddagent-windows-unstable.s3.amazonaws.com/inject-browser-sdk/nginx/latest/ngx_http_datadog_module-amd64-1.27.0.so.tgz
 [40]: https://ddagent-windows-unstable.s3.amazonaws.com/inject-browser-sdk/nginx/latest/ngx_http_datadog_module-arm64-1.27.0.so.tgz
+[41]: /real_user_monitoring/browser/setup/server/#limitations
