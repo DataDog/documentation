@@ -62,8 +62,10 @@ When you create a new **Dataproc Cluster on Compute Engine** in the [Google Clou
 
 1. On the **Customize cluster** page, locate the **Initialization Actions** section. Enter the path where you saved the script from the previous step.
 
+    When your cluster is created, this initialization action installs the Datadog Agent and downloads the Java tracer on each node of the cluster.
 
-When your cluster is created, this initialization action installs the Datadog Agent and downloads the Java tracer on each node of the cluster.
+1. **Optional**: Enable logs collection for your cluster by following the Dataproc integration [Log collection setup][14] steps. Application logs will be correlated to Spark job run traces.
+
 
 ### Specify service tagging per Spark application
 
@@ -108,3 +110,4 @@ In Datadog, view the [Data Jobs Monitoring][8] page to see a list of all your da
 [11]: https://docs.datadoghq.com/data_jobs/kubernetes/
 [12]: https://cloud.google.com/secret-manager/docs/access-control
 [13]: https://github.com/DataDog/datadog-agent/blob/main/pkg/fleet/installer/setup/djm/dataproc.go
+[14]: /integrations/google_cloud_dataproc/#log-collection
