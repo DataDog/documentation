@@ -23,10 +23,10 @@ further_reading:
 
 Device profiles define which metrics to collect and how to transform them into Datadog metrics. Each [profile][2] is expected to monitor a class of similar devices from the same vendor. 
 
-The Device Onboarding Experience provides a guided, GUI-based experience to:
-- Seamlessly create and manage device profiles
-- Specify tags and metrics to be collected from your network devices 
-- Verify the matching devices to each profile
+The Device profiles template provides a guided, GUI-based experience to:
+- Seamlessly create and manage device profiles.
+- Specify tags and metrics to be collected from your network devices. 
+- Verify the matching devices to each profile.
 
 For more information on advanced profile details, review the [Profile Format Reference][3] page.
 
@@ -36,40 +36,88 @@ The minimum Agent version required is `7.64` or higher.
 
 ## Inventory page
 
-Navigate to [Infrastructure > Network Devices > Configuration][1] to view the device profile [Inventory][4] page. This is where you can see a snapshot of the device profiles you created using the [Device Profile Setup](#build-device-profiles) below. 
+Navigate to [Infrastructure > Network Devices > Configuration][1] to view the device profile [Inventory][4] page. This is where you can see a snapshot of the device profiles you created using the [Device Profile Setup](#setup) below. 
 
-{{< img src="/network_device_monitoring/profile_onboarding/device_inventory_page.png" alt="The Network Device profile inventory page" style="width:100%;">}}
+  {{< img src="/network_device_monitoring/profile_onboarding/device_inventory_page.png" alt="The Network Device profile inventory page" style="width:100%;">}}
 
 This page includes the following features:
 
 - **Draft status**: Indicates a net new profile that has not yet been applied to the Agent. To apply a profile to the Agent, click into the profile and sync the Agent.
 Once a profile is applied, you cannot bring it back to draft status.
 
-{{< img src="/network_device_monitoring/profile_onboarding/device_status.png" alt="Screenshot of a device profile showing the draft state status" style="width:50%;">}}
+  {{< img src="/network_device_monitoring/profile_onboarding/device_status.png" alt="Screenshot of a device profile showing the draft state status" style="width:50%;">}}
 
 - **Filters**: The filters include the following options:
   - Custom Profiles - User created device profiles.
   - Created by Datadog - Datadog out-of-the-box profiles that can be viewed and used to build your own custom profile.
   - Draft Profiles - Devices profiles in that are in draft mode.
 
-{{< img src="/network_device_monitoring/profile_onboarding/device_filters.png" alt="Screenshot of the device profile inventory page showing the filter options" style="width:60%;">}}
+  {{< img src="/network_device_monitoring/profile_onboarding/device_filters.png" alt="Screenshot of the device profile inventory page showing the filter options" style="width:60%;">}}
 
-- **Create new profile and Download**: The **+ Create New Profile** button opens the profile creation form which allows you to [build a new device profile.](#build-device-profiles) Clicking the download button will generate and download a `.zip` bundle which contains the `yaml` files for the profiles you created. 
+- **Create new profile and Download**: The **+ Create New Profile** button opens the profile creation form which allows you to [build a new device profile.](#build-device-profiles) Clicking the download button will generate and download a `.zip` bundle which contains the `yaml` files for the profiles you created. <br></br>
 
-{{< img src="/network_device_monitoring/profile_onboarding/create_profile_download.png" alt="Screenshot of the device profile inventory page showing the download and create a new profile buttons" style="width:50%;">}}
+  {{< img src="/network_device_monitoring/profile_onboarding/create_profile_download.png" alt="Screenshot of the device profile inventory page showing the download and create a new profile buttons" style="width:50%;">}}
 
-- **Kebab menu**: Clicking the kebab menu to the right of a profile allows you to edit, clone, or delete the profile (for custom or draft profiles only). You can also navigate to the **View related devices** on the NDM page, filtered to the device the profile is applied to.
+- **Kebab menu**: Clicking the kebab menu to the right of a profile allows you to edit, clone, or delete the profile (for custom or draft profiles only). You can also navigate to the **View related devices** on the NDM page, filtered to the device the profile is applied to.<br></br>
 
-{{< img src="/network_device_monitoring/profile_onboarding/device_kebab_menu.png" alt="Screenshot of the device profile inventory page showing the kebab menu on the right hand side" style="width:50%;">}}
+  {{< img src="/network_device_monitoring/profile_onboarding/device_kebab_menu.png" alt="Screenshot of the device profile inventory page showing the kebab menu on the right hand side" style="width:40%;">}}
 
-### Build device profiles
+## Setup
+
+### Profile details
 
 1. Build your own NDM profile by navigating to [Infrastructure > Network Devices > Configuration][1]. 
-2. Click on Device Onboarding > **Create New Profile**.
-  {{< img src="/network_device_monitoring/profile_onboarding/create_profile_2.png" alt="The Network Device profile creation page" style="width:100%;">}}
-3. Provide your device profile a name, vendor information(optional) and description (optional).
+2. Click on Device Onboarding > **+ Create New Profile**. This brings you to the profile creation page shown below.
+  {{< img src="/network_device_monitoring/profile_onboarding/create_profile_3.png" alt="The Network Device profile creation page" style="width:100%;">}}
+
+3. Provide your device profile a name and description (optional).
 4. Select the `SysObjectID`. This is what is used to match network devices to the device profiles that define what is collected and monitored from each device. 
-  {{< img src="/network_device_monitoring/profile_onboarding/Sys_object_ID_Field.png" alt="The Network Device profile creation page showing the Sys Object ID Dropdown" style="width:100%;">}}
+
+  {{< img src="/network_device_monitoring/profile_onboarding/Sys_object_ID_Field_2.png" alt="The Network Device profile creation page showing the Sys Object ID Dropdown" style="width:60%;">}}
+
+### Profile inheritance (optional)
+
+Use profile inheritance to adopt configurations such as metadata, metrics, and tags. This simplifies scaling your device profiles and allows you to build on existing ones. After you select a profile to inherit, the fields are populated on the right side of the screen under **Inherited Profiles**, with an `Inherited` tag next to any metrics or metadata inherited from this profile:
+
+  {{< img src="/network_device_monitoring/profile_onboarding/profile_inheritance.png" alt="The Network Device profile creation page showing the Profile inheritance section." style="width:100%;">}}
+
+**Note**: Changes to parent profiles will be propagated to the child profiles.
+
+### Select reference devices
+
+Use reference devices to select which devices you want to gather OIDs for your chosen device models. This field is pre-selected based on the `SysObjectID` that was specified in the [profile details](#profile-details).
+
+**Note**: A single reference device is sufficient to perform a device scan, however, you have the option to add more devices or change the current selection.
+
+  {{< img src="/network_device_monitoring/profile_onboarding/reference_devices.png" alt="The Network Device profile creation page showing the Reference device section." style="width:100%;">}}
+
+### Scan reference devices
+
+Scan additional reference devices to discover their available metrics. This runs an SNMP walk with Remote Configuration. 
+
+Troubleshooting
+If device is unscanned 
+If remote config is not enabled (direct them to Fleet Automation) - add screenshot of error state  
+Direct them to enabled RC 
+Option to do manual scan 
+
+  {{< img src="/network_device_monitoring/profile_onboarding/scan_reference_devices.png" alt="The Network Device profile creation page showing the Scan reference device section." style="width:80%;">}}
+
+### Define metadata
+
+DD has sensible defaults for the majority of devices from our DD created OOTB profiles if they’re using an inherited profile
+Even if they don’t inherit from any profile, device name, device description will be defined
+Option to override 
+Metadata functionality
+Shown in the NDM page view (screenshot as example)
+
+### Define metrics
+
+Click add metrics, which will pull up modal 
+See list of all possible metrics for that device 
+See units, description on hover to make selection easy
+Add the metrics either from a device scan or manually creating a new metric to the profile
+
 
 ### Global Tags
 
@@ -79,12 +127,12 @@ Add global tags for more advanced and granular options, which allows you to assi
 
 #### Advanced Options
 
-| Modification       | Description   |
-| ------------- | ------------- |
-| No Modification | The device's returned value will be used directly as the tag value. |
-| Format | This can be [mac_address][5] or [ip_address][6]. |
-| Extract Value | A regular expression used to [extract][7] the tag value from the SNMP value provided by the device. |
-| Mapping | This is described [here][8]. |
+| Modification    | Description                                                                                         |
+|-----------------|-----------------------------------------------------------------------------------------------------|
+| No Modification | The device's returned value will be used directly as the tag value.                                 |
+| Format          | This can be [mac_address][5] or [ip_address][6].                                                    |
+| Extract Value   | A regular expression used to [extract][7] the tag value from the SNMP value provided by the device. |
+| Mapping         | This is described [here][8].                                                                        |
 
 
 ### Scalar metrics
