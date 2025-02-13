@@ -161,7 +161,16 @@ Based on Datadog's intelligent query insights across thousands of custom metrics
 
 Even though a metric is not queried for the past 30 days, your teams might still derive value from it for incident management and outage remediation. Conversely, your teams could be underutilizing existing, actively queried metrics. So understanding the relative utility of your metrics is the next recommended step in your governance workflow. 
 
-Datadog's Metrics without Limits™ is a suite of features that also provide you with OOTB insights to assess the value of your actively queried metrics with [Metrics Related Assets][15]. A metrics related asset refers to any Datadog asset, such as a dashboard, notebook, monitor, or SLO that queries a particular metric. Use related asset popularity and quantity to evaluate metric utility within your organization, enabling data-driven decisions. Gain a better understanding of how your team can use existing metrics to get more value from your observability spend. 
+Datadog's Metrics without Limits™ is a suite of features that also provide you with OOTB insights to assess the value of your actively queried metrics with the [Metrics Related Assets facet][16] on the Summary page and Volume Management pages or on the [Metrics Related Assets][15] side panel. A metrics related asset refers to any Datadog asset, such as a dashboard, notebook, monitor, or SLO that queries a particular metric. 
+
+#### Metrics Related Assets facet
+Instantly filter for all metrics that are unused on your platform to make informed decisions about your metric configurations. Confidently reduce your costs without accidentally breaking any business critical assets.
+
+
+
+#### Metrics Related Assets side panel
+
+Use related asset popularity and quantity to evaluate metric utility within your organization, enabling data-driven decisions. Gain a better understanding of how your team can use existing metrics to get more value from your observability spend. 
 
 {{< img src="metrics/related_assets_2025-01-27.png" alt="Metric detail side panel showing the Related Assets section. The example metric is applied to three dashboards" style="width:100%;" >}}
 
@@ -169,6 +178,7 @@ To view a metric's related assets:
 1. Click on the metric name to open its details side panel.
 1. Scroll down to the section of the side panel titled **Related Assets**.
 1. Click the dropdown button to view the type of related asset you are interested in (dashboards, monitors, notebooks, SLOs). You can use the search bar to validate specific assets.
+
    
 
 ## Monitoring and prevention
@@ -226,3 +236,4 @@ After you've received an alert, use the Metrics Volume Management page to inspec
 [13]: https://app.datadoghq.com/metric/volume?bulk_manage_tags=true&facet.query_activity=-queried&sort=volume_total
 [14]: https://docs.datadoghq.com/metrics/metrics-without-limits/#configuration-of-tags
 [15]: /metrics/summary/#metrics-related-assets
+[16]: metrics/summary/#facet-panel
