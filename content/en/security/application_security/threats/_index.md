@@ -41,9 +41,9 @@ Discover the ways Datadog ASM Threat Management helps common use cases:
 
 ## Security signals
 
-Security signals raised by Threat Monitoring are summarized and surfaced in views you already commonly visit to monitor service health and performance. The [Service Catalog][1] and individual Service Pages in APM provide insights into application threat signals, allowing you to investigate vulnerabilities, block attackers, and review attack exposures.
+Security signals raised by Threat Monitoring are summarized and surfaced in views you already commonly visit to monitor service health and performance. The [Software Catalog][1] and individual Service Pages in APM provide insights into application threat signals, allowing you to investigate vulnerabilities, block attackers, and review attack exposures.
 
-{{< img src="security/application_security/threats/threats-on-svc-cat_3.png" alt="Service Catalog with services showing threat signals" style="width:100%;" >}}
+{{< img src="security/application_security/threats/threats-on-svc-cat_3.png" alt="Software Catalog with services showing threat signals" style="width:100%;" >}}
 
 For additional information about how Threat Management works, read [How ASM Works][4].
 

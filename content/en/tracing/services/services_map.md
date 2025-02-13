@@ -82,7 +82,7 @@ Additionally, monitors can be tagged by service in the **Say what's happening** 
 
 ### Nodes and edges
 
-Nodes represent services exactly as instrumented in APM and match those in your [Service Catalog][4]. Edges represent aggregate calls from one service to another. These interactions are shown on the flame graph for each individual [trace][5].
+Nodes represent services exactly as instrumented in APM and match those in your [Software Catalog][4]. Edges represent aggregate calls from one service to another. These interactions are shown on the flame graph for each individual [trace][5].
 
 New services or connections appear within moments of being instrumented and age out if there are no corresponding traces seen for 30 days. This takes into account services that do work infrequently, but are an important part of a functioning system.
 
