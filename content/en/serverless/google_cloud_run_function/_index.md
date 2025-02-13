@@ -162,6 +162,8 @@ To set up logging in your application, see [C# Log Collection][3]. To set up tra
 1. Deploy your main application.
 
 [1]: https://app.datadoghq.com/organization-settings/api-keys
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Environment variables
 
