@@ -65,20 +65,17 @@ To set up logging in your application, see [Python Log Collection][3]. [Python L
 In your main application, add the `dd-trace-java` library. Follow the instructions in [Tracing Java Applications][1] or use the following example Dockerfile to add and start the tracing library with automatic instrumentation:
 
 ```dockerfile
-FROM eclipse-temurin:17-jre-jammy
-WORKDIR /app
-COPY target/cloudrun-java-1.jar cloudrun-java-1.jar
+FROM openjdk:17-jdk
 
-
-# Add the Datadog tracer
+# Set the working directory in the container
+WORKDIR /
 ADD 'https://dtdg.co/latest-java-tracer' dd-java-agent.jar
 
+# Copy the JAR file into the container
+COPY target/helloworld-0.0.1-SNAPSHOT.jar helloworld.jar
+ENV JAVA_OPTS=-javaagent:dd-java-agent.jar
 
-EXPOSE 8080
-
-
-# Start the Datadog tracer with the javaagent argument
-ENTRYPOINT [ "java", "-javaagent:dd-java-agent.jar", "-jar", "cloudrun-java-1.jar" ]
+CMD ["java", "-javaagent:dd-java-agent.jar", "-jar", "helloworld.jar"]
 ```
 
 #### Metrics
@@ -117,27 +114,6 @@ To set up logging in your application, see [Go Log Collection][3]. To set up tra
 #### Tracing
 
 In your main application, add the .NET tracing library. See [Tracing .NET Applications][1] for instructions.
-
-Example Dockerfile:
-
-```dockerfile
-FROM mcr.microsoft.com/dotnet/aspnet:8.0-jammy
-WORKDIR /app
-COPY ./bin/Release/net8.0/publish /app
-
-ADD https://github.com/DataDog/dd-trace-dotnet/releases/download/v2.56.0/datadog-dotnet-apm_2.56.0_amd64.deb /opt/datadog/datadog-dotnet-apm_2.56.0_amd64.deb
-RUN dpkg -i /opt/datadog/datadog-dotnet-apm_2.56.0_amd64.deb
-RUN mkdir -p /shared-volume/logs/
-
-ENV CORECLR_ENABLE_PROFILING=1
-ENV CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
-ENV CORECLR_PROFILER_PATH=/opt/datadog/Datadog.Trace.ClrProfiler.Native.so
-ENV DD_DOTNET_TRACER_HOME=/opt/datadog/
-
-ENV DD_TRACE_DEBUG=true
-
-ENTRYPOINT ["dotnet", "dotnet.dll"]
-```
 
 #### Metrics
 The tracing library also collects custom metrics. See the [code examples][2].
