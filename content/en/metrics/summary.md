@@ -37,9 +37,9 @@ The search bars provide the most comprehensive set of actions to filter the list
 - **Metric Type**: Differentiate between distribution and non-distribution metrics (counts, gauges, rates)
 - **Metric Origin**: The product from which the metric originated (for example, metrics generated from Logs or APM Spans). To learn more about the different metric origin types, see [Metric origin definitions][12].
 
-**Note**:
+### Definitions
 
-A metric is **unqueried** if it has not been accessed in monitors, SLOs, executed notebooks, opened dashboards, used in Metrics Explorer queries, or accessed via API calls within the past 30, 60, or 90 days.
+A metric is **unqueried** if it has not been accessed in monitors, SLOs, executed notebooks, opened dashboards, used in Metrics Explorer queries, or accessed through API calls within the past 30, 60, or 90 days.
 
 A metric is considered **used** as long as it exists on an asset, regardless if it has been actively queried.
 
