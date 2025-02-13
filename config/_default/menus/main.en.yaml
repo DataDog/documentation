@@ -2988,21 +2988,26 @@ menu:
       parent: serverless
       identifier: serverless_container_apps
       weight: 5
+    - name: Azure Functions
+      url: serverless/azure_functions
+      parent: serverless
+      identifier: serverless_azure_functions
+      weight: 6
     - name: Google Cloud Run
       url: serverless/google_cloud_run
       parent: serverless
       identifier: serverless_gcr
-      weight: 6
+      weight: 7
     - name: Glossary
       url: serverless/glossary
       parent: serverless
       identifier: serverless_glossary
-      weight: 7
+      weight: 8
     - name: Guides
       url: serverless/guide/
       identifier: serverless_guides
       parent: serverless
-      weight: 8
+      weight: 9
     - name: Network Monitoring
       url: network_monitoring/
       pre: network
