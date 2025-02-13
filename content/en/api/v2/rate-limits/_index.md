@@ -29,7 +29,7 @@ The list above is not comprehensive of all rate limits on Datadog APIs. If you a
 | `X-RateLimit-Reset`     | time in seconds until next reset.                        |
 | `X-RateLimit-Name`      | name of the rate limit for increase requests             |
 
-{{< h3 >}}Datadog API Usage Metrics{{< /h3 >}}
+### Datadog API Usage Metrics
 
 All Datadog APIs have a limit to the amount of usage in a given period of time. APIs can have unique, distinct rate limit buckets or be grouped together into a single bucket depending on the resource(s) being used. For example, the monitor status API has a rate limit that allows a human or automation script to query only so many times per minute. The endpoint rejects excess requests with a 429 response code and a hint to back off until a reset period has expired. API usage metrics allow Datadog users to self-service and audit API rate limit consumption for API endpoints (exclusive of metrics, logs, and event submission endpoints). These metrics provide a picture of allowed and blocked requests and are provided with the following dimensions and available tags:
 
@@ -40,7 +40,7 @@ All Datadog APIs have a limit to the amount of usage in a given period of time. 
 {{% site-region region="ap1" %}}[Datadog API Rate Limit Usage Dashboard](https://ap1.datadoghq.com/dash/integration/2698/datadog-api-rate-limit-usage){{% /site-region %}}
 {{% site-region region="gov" %}}[Datadog API Rate Limit Usage Dashboard](https://app.ddog-gov.com/dash/integration/1330/datadog-api-rate-limit-usage){{% /site-region %}}
 
-{{< h4 >}}Available Metrics{{< /h4 >}}
+#### Available Metrics
 
 <table>
   <thead>
@@ -127,7 +127,7 @@ All Datadog APIs have a limit to the amount of usage in a given period of time. 
 </table>
 
 
-{{< h4 >}}Tag Key{{< /h4 >}}
+#### Tag Key
 
 
 | Tag Name | Description |
@@ -140,12 +140,13 @@ All Datadog APIs have a limit to the amount of usage in a given period of time. 
 | rate_limit_status | `passed`: Request was not blocked<br />`blocked`: Request was blocked due to rate limits breached |
 | user_uuid | UUID of user for API consumption. |
 
-{{< h4 >}}Rollup in widgets{{< /h4 >}}
+#### Rollup in widgets
+
 Metric visualizations should generally be rolled up to the minute using sum(60s) to aggregate the total number of requests per minute.
 
 Ratio metrics are already normalized to the corresponding `limit_period`.
 
-{{< h5 >}}Example use cases{{< /h5 >}}
+##### Example use cases
 
 | Use Case | Example |
 | -------- | ------- |
@@ -156,7 +157,7 @@ Ratio metrics are already normalized to the corresponding `limit_period`.
 | Ratio of Rate Limits Used by Rate Limit Name | Graph the sum of `datadog.apis.usage.per_org_ratio`, `datadog.apis.usage.per_user_ratio` and `datadog.apis.usage.per_api_key_ratio` group by `limit_name`<br /><br />`default_zero(max:datadog.apis.usage.per_org_ratio{*} by {limit_name}) + default_zero(max:datadog.apis.usage.per_user_ratio{*} by {limit_name}) + default_zero(max:datadog.apis.usage.per_api_key_ratio{*} by {limit_name})` |
 
 
-{{< h3 >}}Increasing your Rate Limit{{< /h3 >}}
+### Increasing your Rate Limit
 On a case by case basis, users can request rate limits to be increased by providing the following details in a Support ticket under Help -> New Support Ticket. Upon receiving a rate limit increase, our Support Engineering team reviews the use case and if needed, works with internal engineering resources to confirm the viability of the rate limit increase request.
 
     Title:
@@ -175,7 +176,7 @@ On a case by case basis, users can request rate limits to be increased by provid
 
 Once Datadog Support reviews and approves the use case, a rate limit increase can be applied behind the scenes. Note that there is a maximum to how much a rate limit can be increased due to the SaaS nature of Datadog. Datadog Support reserves the right to reject rate limit increases based on use cases and Engineering recommendations.
 
-{{< h3 >}}Audit Logs{{< /h3 >}}
+### Audit Logs
 API limit and usage metrics provide insight into usage patterns and blocked requests. If you need additional details, Audit Trail offers more granular visibility into API activity.
 
 With Audit Trail, you can for instance view:
