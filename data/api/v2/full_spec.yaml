@@ -3804,7 +3804,7 @@ components:
       properties:
         attributes:
           additionalProperties: {}
-          description: JSON object of attributes from CI Visibility test events.
+          description: JSON object of attributes from Test Optimization test events.
           example:
             customAttribute: 123
             duration: 2345
@@ -36146,8 +36146,8 @@ paths:
         type: safe
   /api/v2/ci/tests/analytics/aggregate:
     post:
-      description: The API endpoint to aggregate CI Visibility test events into buckets
-        of computed metrics and timeseries.
+      description: The API endpoint to aggregate test events into buckets of computed
+        metrics and timeseries.
       operationId: AggregateCIAppTestEvents
       requestBody:
         content:
@@ -36175,7 +36175,7 @@ paths:
         - ci_visibility_read
       summary: Aggregate tests events
       tags:
-      - CI Visibility Tests
+      - Test Optimization
       x-codegen-request-body-name: body
       x-menu-order: 3
       x-permission:
@@ -36186,8 +36186,7 @@ paths:
         type: safe
   /api/v2/ci/tests/events:
     get:
-      description: 'List endpoint returns CI Visibility test events that match a [search
-        query](https://docs.datadoghq.com/continuous_integration/explorer/search_syntax/).
+      description: 'List endpoint returns test events that match a [search query](https://docs.datadoghq.com/continuous_integration/explorer/search_syntax/).
 
         [Results are paginated similarly to logs](https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination).
 
@@ -36262,7 +36261,7 @@ paths:
         - ci_visibility_read
       summary: Get a list of tests events
       tags:
-      - CI Visibility Tests
+      - Test Optimization
       x-menu-order: 1
       x-pagination:
         cursorParam: page[cursor]
@@ -36277,8 +36276,7 @@ paths:
         type: safe
   /api/v2/ci/tests/events/search:
     post:
-      description: 'List endpoint returns CI Visibility test events that match a [search
-        query](https://docs.datadoghq.com/continuous_integration/explorer/search_syntax/).
+      description: 'List endpoint returns test events that match a [search query](https://docs.datadoghq.com/continuous_integration/explorer/search_syntax/).
 
         [Results are paginated similarly to logs](https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination).
 
@@ -36311,7 +36309,7 @@ paths:
         - ci_visibility_read
       summary: Search tests events
       tags:
-      - CI Visibility Tests
+      - Test Optimization
       x-codegen-request-body-name: body
       x-menu-order: 2
       x-pagination:
@@ -55158,10 +55156,6 @@ tags:
     to your Datadog site over HTTP. See the [CI Pipeline Visibility in Datadog page](https://docs.datadoghq.com/continuous_integration/pipelines/)
     for more information.
   name: CI Visibility Pipelines
-- description: Search or aggregate your CI Visibility test events over HTTP. See the
-    [Test Visibility in Datadog page](https://docs.datadoghq.com/tests/) for more
-    information.
-  name: CI Visibility Tests
 - description: 'Datadog Cloud Security Management (CSM) delivers real-time threat
     detection
 
@@ -55549,6 +55543,9 @@ tags:
 - description: View and manage teams within Datadog. See the [Teams page](https://docs.datadoghq.com/account_management/teams/)
     for more information.
   name: Teams
+- description: Search or aggregate your test events over HTTP. See the [Test Optimization
+    in Datadog](https://docs.datadoghq.com/tests/) page for more information.
+  name: Test Optimization
 - description: 'The usage metering API allows you to get hourly, daily, and
 
     monthly usage across multiple facets of Datadog.
