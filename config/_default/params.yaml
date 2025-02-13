@@ -218,6 +218,6 @@ core_product:
     - name: observability pipelines
     - name: security
     - name: serverless monitoring
-    - name: service catalog
+    - name: software catalog
     - name: slos
     - name: watchdog
