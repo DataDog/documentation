@@ -137,8 +137,6 @@ Attach the new S3 policy to the Datadog integration role.
 
 ### Account filtering
 
-Cloud Cost Management enables you to ingest cloud cost data for your AWS accounts, including management accounts for your [AWS Organizations][17].
-
 Use Account Filtering to get granular control of what AWS member accounts you want to pull into Cloud Cost Management. You will not incur any additional costs for accounts that you filter out.
 
 To use Account Filtering, an AWS management account is required. You can configure account filters during setup and after an account has been configured in Cloud Cost Management.
@@ -162,10 +160,6 @@ Navigate to [**Cloud Costs** > **Accounts**][18] and click on **Manage Account**
 Click on **Billing dataset** to access the Account Filtering UI.
 
 {{< img src="cloud_cost/account_filtering/account_filtering.png" alt="Account Filtering UI to filter AWS member accounts" style="width:100%;" >}}
-
-#### Account Filtering UI
-
-You can select / deselect accounts from the table to filter member accounts. You can optionally check the **Include new member accounts by default** box if you want to automatically include new member accounts that get created.
 
 ## Cost types
 
@@ -403,5 +397,4 @@ After the billing conductor CUR is created, follow the Cloud Cost Management ins
 [14]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_tagging.html
 [15]: /cloud_cost_management/tag_pipelines
 [16]: https://docs.aws.amazon.com/billingconductor/latest/userguide/what-is-billingconductor.html
-[17]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/consolidated-billing.html
 [18]: https://app.datadoghq.com/cost/settings/accounts
