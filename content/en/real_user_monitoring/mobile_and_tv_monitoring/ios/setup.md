@@ -479,7 +479,7 @@ struct BarView: View {
 
 ## Track iOS errors
 
-[iOS Crash Reporting and Error Tracking][8] displays any issues in your application and the latest available errors. You can view error details and attributes including JSON in the [RUM Explorer][10].
+[iOS Crash Reporting and Error Tracking][8] displays any issues in your application and the latest available errors. You can view error details and attributes including JSON in the [RUM Explorer][9].
 
 ## Sending data when device is offline
 
@@ -491,7 +491,7 @@ This means that even if users open your application while offline, no data is lo
 
 ## Supported versions
 
-See [Supported versions][11] for a list operating system versions and platforms that are compatible with the iOS SDK.
+See [Supported versions][10] for a list operating system versions and platforms that are compatible with the iOS SDK.
 
 ## Further Reading
 
@@ -505,6 +505,5 @@ See [Supported versions][11] for a list operating system versions and platforms 
 [6]: /real_user_monitoring/ios/advanced_configuration/#initialization-parameters
 [7]: https://github.com/DataDog/dd-sdk-ios
 [8]: /real_user_monitoring/error_tracking/ios/
-[9]: /real_user_monitoring/mobile_and_tv_monitoring/ios/advanced_configuration#custom-actions
-[10]: /real_user_monitoring/explorer/
-[11]: /real_user_monitoring/mobile_and_tv_monitoring/supported_versions/ios/
+[9]: /real_user_monitoring/explorer/
+[10]: /real_user_monitoring/mobile_and_tv_monitoring/supported_versions/ios/
