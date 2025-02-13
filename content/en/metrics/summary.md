@@ -200,7 +200,7 @@ This table shows the mapping between the metric origin as seen in the facet and 
 
 | Metric Origin           | Submitted from                                                                |
 | ------------------------| ----------------------------------------------------------------------------- |
-| API Catalog             | Timeseries sent by the Datadog [Service Catalog][13] product from the APIM Endpoint.
+| API Catalog             | Timeseries sent by the Datadog [Software Catalog][13] product from the APIM Endpoint.
 | APM                     | Timeseries sent by the Datadog APM product for metrics generated from traces and span metrics.
 | Agent                   | Timeseries sent by the Datadog Agent, collected from [Agent integrations][10], [built-in integrations][9], [DogStatsD][32], or [custom Agent checks][33].
 | CSM                     | Timeseries sent by the Datadog [Cloud Security Monitoring][14] product.
@@ -220,7 +220,7 @@ This table shows the mapping between the metric origin as seen in the facet and 
 | RUM                     | Timeseries generated from the Datadog [Real User Monitoring][23] product.
 | SAAS Integrations       | Timeseries collected from popular SAAS platforms like Slack, Docker, PagerDuty etc.
 | Serverless              | Timeseries sent by the Datadog [Serverless][24] platform including Function, App Services, Cloud Run, and Container App Metrics.
-| Service Catalog         | Timeseries sent by the Datadog [Service Catalog][25] product including [Scorecard][29] metrics.
+| Software Catalog         | Timeseries sent by the Datadog [Software Catalog][25] product including [Scorecard][29] metrics.
 | Synthetic Monitoring    | Synthetic monitoring and continuous testing metrics generated from the Datadog [Synthetic Monitoring][26] product. 
 | USM                     | Timeseries generated from the Datadog [Universal Service Monitoring][27] product. 
 
@@ -241,7 +241,7 @@ This table shows the mapping between the metric origin as seen in the facet and 
 [10]: /integrations/agent_metrics/
 [11]: /account_management/billing/usage_metrics/
 [12]: /metrics/summary/#metric-origin-definitions
-[13]: /service_catalog/endpoints/
+[13]: /software_catalog/endpoints/
 [14]: /security/cloud_security_management/
 [15]: /database_monitoring/
 [16]: /data_streams/
@@ -253,11 +253,11 @@ This table shows the mapping between the metric origin as seen in the facet and 
 [22]: /integrations/process/
 [23]: /monitors/types/real_user_monitoring/
 [24]: /serverless/
-[25]: /service_catalog/
+[25]: /software_catalog/
 [26]: /synthetics/
 [27]: /universal_service_monitoring/
 [28]: /logs/
-[29]: /service_catalog/scorecards/
+[29]: /software_catalog/scorecards/
 [30]: /metrics/custom_metrics/historical_metrics/#bulk-configuration-for-multiple-metrics
 [31]: /metrics/distributions/#bulk-configuration-for-multiple-metrics
 [32]: /metrics/custom_metrics/dogstatsd_metrics_submission/

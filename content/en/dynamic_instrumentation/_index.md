@@ -18,7 +18,7 @@ further_reading:
 - link: "/getting_started/tagging/unified_service_tagging/"
   tag: "Documentation"
   text: "Unified Service Tagging"
-- link: "/tracing/service_catalog/"
+- link: "/tracing/software_catalog/"
   tag: "Documentation"
   text: "Discover and catalog the services reporting to Datadog"
 - link: "/metrics"

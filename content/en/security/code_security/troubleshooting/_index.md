@@ -132,7 +132,7 @@ The generated lock file is used by [`osv-scanner`][7] to extract dependencies an
 
 ## No vulnerabilities detected by Software Composition Analysis
 
-There are a series of steps that must run successfully for vulnerability information to appear either in the [Service Catalog Security View][16] or in the [Vulnerability Explorer][12]. It is important to check each step when investigating this issue. 
+There are a series of steps that must run successfully for vulnerability information to appear either in the [Software Catalog Security View][16] or in the [Vulnerability Explorer][12]. It is important to check each step when investigating this issue. 
 
 ### Confirming runtime detection is enabled
 
