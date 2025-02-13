@@ -371,7 +371,7 @@ The metrics are stored in the folder defined by the `forwarder_storage_path` set
 
 To avoid running out of storage space, the Agent stores the metrics on disk only if the total storage space used is less than 80 percent. This limit is defined by `forwarder_storage_max_disk_ratio` setting.
 
-## Installing the Operator
+## Installing the Datadog Operator
 
 If you are installing the Datadog Operator in a Kubernetes environment with limited connectivity, you need to allowlist the following endpoints for TCP port 443, based on your location:
 
