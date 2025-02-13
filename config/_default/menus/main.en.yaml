@@ -2993,6 +2993,10 @@ menu:
       parent: serverless
       identifier: serverless_gcr
       weight: 6
+    - name: Functions
+      url: serverless/google_cloud_run/functions
+      parent: serverless_gcr
+      weight: 601
     - name: Glossary
       url: serverless/glossary
       parent: serverless

@@ -1,5 +1,5 @@
 ---
-title: Google Cloud Run
+title: Google Cloud Run Functions
 further_reading:
 
   - link: 'https://cloud.google.com/blog/products/serverless/google-cloud-functions-is-now-cloud-run-functions'
@@ -10,7 +10,7 @@ further_reading:
 
 ## Overview
 
-Google Cloud Run Function is a fully managed serverless platform for deploying and scaling container-based applications. Datadog provides monitoring and log collection for Cloud Run Functions through the [Google Cloud integration][1].
+Google Cloud Run is a fully managed serverless platform for deploying and scaling container-based applications. Datadog provides monitoring and log collection for Cloud Run functions (formerly Cloud Functions) through the [Google Cloud integration][1].
 
 ## Setup
 
@@ -64,7 +64,7 @@ To set up logging in your application, see [Python Log Collection][3]. [Python L
 
 In your main application, add the `dd-trace-java` library. Follow the instructions in [Tracing Java Applications][1] or use the following example Dockerfile to add and start the tracing library with automatic instrumentation:
 
-```dockerfile
+{{< code-block lang="dockerfile" filename="Dockerfile"  collapsible="true" >}}
 FROM openjdk:17-jdk
 
 # Set the working directory in the container
@@ -76,7 +76,7 @@ COPY target/helloworld-0.0.1-SNAPSHOT.jar helloworld.jar
 ENV JAVA_OPTS=-javaagent:dd-java-agent.jar
 
 CMD ["java", "-javaagent:dd-java-agent.jar", "-jar", "helloworld.jar"]
-```
+{{< /code-block >}}
 
 #### Metrics
 To collect custom metrics, [install the Java DogStatsD client][2].
@@ -141,15 +141,15 @@ To set up logging in your application, see [C# Log Collection][3]. To set up tra
 1. Go to **Volume Mounts** and set up a volume mount for logs. Ensure that the mount path matches your application's write location. For example:
    {{< img src="serverless/gcr/volume_mount.png" width="80%" alt="Volume Mounts tab. Under Mounted volumes, Volume Mount 1. For Name 1, 'shared-logs (In-Memory)' is selected. For Mount path 1, '/shared-volume' is selected.">}}
 1. Go to **Settings** and add a startup check.
-  - **Select health check type**: Startup check
-  - **Select probe type**: TCP
-  - **Port**: Enter a port number. Make note of this, as it is used in the next step.
+   - **Select health check type**: Startup check
+   - **Select probe type**: TCP
+   - **Port**: Enter a port number. Make note of this, as it is used in the next step.
 1. Go to **Variables & Secrets** and add the following environment variables as name-value pairs:
-  - `DD_SERVICE`: A name for your service. For example, `gcr-sidecar-test`.
-  - `DD_ENV`: A name for your environment. For example, `dev`.
-  - `DD_SERVERLESS_LOG_PATH`: Your log path. For example, `/shared-volume/logs/*.log`.
-  - `DD_API_KEY`: Your [Datadog API key][1].
-  - `DD_HEALTH_PORT`: The port you selected for the startup check in the previous step.
+   - `DD_SERVICE`: A name for your service. For example, `gcr-sidecar-test`.
+   - `DD_ENV`: A name for your environment. For example, `dev`.
+   - `DD_SERVERLESS_LOG_PATH`: Your log path. For example, `/shared-volume/logs/*.log`.
+   - `DD_API_KEY`: Your [Datadog API key][1].
+   - `DD_HEALTH_PORT`: The port you selected for the startup check in the previous step.
 
    For a list of all environment variables, including additional tags, see [Environment variables](#environment-variables).
 
