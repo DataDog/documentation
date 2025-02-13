@@ -41,16 +41,16 @@
   ],
   "CreateActionConnection": [
     {
-      "group": "action_connection",
+      "group": "action_connections",
       "suffix": "",
-      "description": "Create a new Action Connection returns \"Successfully created Action Connection\" response"
+      "description": "Create a new Action Connection returns \"Created\" response"
     }
   ],
   "UpdateActionConnection": [
     {
-      "group": "action_connection",
+      "group": "action_connections",
       "suffix": "",
-      "description": "Update an existing Action Connection returns \"Successfully updated Action Connection\" response"
+      "description": "Update an existing Action Connection returns \"OK\" response"
     }
   ],
   "CreateApp": [
