@@ -48,7 +48,7 @@ Have any SLOs defined
 : [Service Level Objectives (SLOs)][2] provide a framework for defining clear targets around application performance, which helps you provide a consistent customer experience, balance feature development with platform stability, and improve communication with internal and external users.
 
 Have any monitors defined
-: Monitors reduce downtime by helping your team quickly react to issues in your environment. Review [recommended monitors][3].
+: Monitors reduce downtime by helping your team quickly react to issues in your environment. Review [monitor templates][3].
 
 Specified on-call
 : Improve the on-call experience for everyone by establishing clear ownership of your services. This gives your on-call engineers the correct point of contact during incidents, reducing the time it takes to resolve your incidents. 
