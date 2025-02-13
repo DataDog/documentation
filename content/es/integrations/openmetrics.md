@@ -19,7 +19,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - métricas
-custom_kind: integration
+custom_kind: integración
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/openmetrics/README.md
 display_on_public_website: true
@@ -27,7 +27,7 @@ draft: false
 git_integration_title: openmetrics
 integration_id: openmetrics
 integration_title: OpenMetrics
-integration_version: 6.0.0
+integration_version: 6.1.0
 is_public: true
 manifest_version: 2.0.0
 name: openmetrics
@@ -65,7 +65,7 @@ tile:
 
 Extrae métricas personalizadas de cualquier endpoint de OpenMetrics o Prometheus.
 
-</div>Todas las métricas recuperadas por esta integración se consideran <a href="https://docs.datadoghq.com/developers/metrics/custom_metrics">métricas personalizadas</a>.</div>
+<div class="alert alert-warning">Todas las métricas recuperadas por esta integración se consideran <a href="https://docs.datadoghq.com/developers/metrics/custom_metrics">métricas personalizadas</a>.</div>
 
 La integración es compatible tanto con el [formato de exposición de Prometheus][1] como con la [especificación de OpenMetrics][2].
 
@@ -146,7 +146,7 @@ Aunque el comportamiento debería seguir siendo el mismo en la mayoría de las c
 Si observas errores en el parseo al seleccionar el endpoint de OpenMetrics con esta nueva versión, puedes forzar el uso del formato menos estricto de Prometheus, al configurar manualmente el encabezado `Accept` que la integración envía a `text/plain` mediante la opción `headers` en el [archivo de configuración][12]. Por ejemplo: 
 
 ```yaml
-## Todas las opciones definidas aquí están disponibles para todas las instancias.
+## All options defined here are available to all instances.
 #
 init_config:
   ...

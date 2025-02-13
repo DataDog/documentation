@@ -1,0 +1,43 @@
+name: クラウドコストマネジメント
+description: クラウドコストをコントロールする 
+pricing_nav_categories: 
+    - インフラストラクチャー
+fed_product: true
+
+plans:
+    - name: 'クラウドコストマネジメント'
+      pricing_data_key: "CCM"
+      price_helper1: 'ホスト 1 台あたり、'
+      price_helper2: '1 か月*'
+      description: 'クラウドアカウント、ホスト、コンテナにわたる継続的な構成監査'
+      key_points:
+          - 個々のリソースに至るまで、粒度の細かいレベルでコストを分解し、割り当てる
+          - トップコストの変化を素早く把握し、アクションを起こす
+          - エンジニアリングチームがアプリケーションのダッシュボードにコストを含めることができるようにする
+          
+features:
+    combined_other_plans:
+        - サービスカタログにシームレスにピボットして、サービスのパフォーマンスを把握する
+        - コストデータと観測可能性データを一元化し、コストドライバーを把握する
+    service_support:
+        - テクニカルサポート (チャット・メール)
+        - コミュニティフォーラムとオンラインドキュメント
+        - <a href="/support-services/plans/">お客様の組織に適したサポートレベルのプラン</a>
+
+faq:
+  - q: CCM によるホストの定義や請求はどうなっていますか？
+    a: ホストとは、AWS のコストおよび使用量レポートに表示される EC2 インスタンスや、Azure <span x-show="!fedRegionSelected">/ Google</span> 内の VM を指します。計測には、月全体の時間平均を使用します。
+  - q: クラウドコストマネジメントを利用するために、他の Datadog 製品を購入する必要はありますか？
+    a: インフラストラクチャー、トレース、コストなどのデータを 1 か所にまとめておくことは、包括的な可視化と文脈の把握のために、私たちが推奨することです。ただし、クラウドコストマネジメントは、他の Datadog 製品を購入することなく使用することができます。
+  - q: 他の請求オプションはありますか？
+    a: "<a href=\"/pricing/list/\">年間プラン、月間プラン、時間単位プラン</a>をご用意しています。お客様のニーズに合わせて請求プランをカスタマイズすることができます。請求に関する詳しい説明は、[請求に関する FAQ](https://docs.datadoghq.com/account_management/billing/) をご覧ください。"
+  - q: どのクラウドサービスプロバイダーで利用できるのですか？
+    a: |
+            クラウドコストマネジメントは AWS<span x-text="fedRegionSelected ? ' and Azure' : ', Azure, and Google Cloud,'">、Azure、Google Cloud</span>で利用可能で、[その他のコストインテグレーション](https://docs.datadoghq.com/cloud_cost_management/saas_costs/?tab=fastly)のベータ版もサポートしています。
+  - q: 全リージョンで使用可能ですか？
+    a: はい。クラウドコストマネジメントは、EU および US でホストされているすべてのアカウントで利用できます。
+  - q: パートナー向けの特別な提供はありますか？
+    a: "私たちは、テクノロジーやサービスプロバイダー、再販業者との提携を常に求めています。詳しくは[パートナー](https://www.datadoghq.com/partner/)のページをご覧ください。"
+  - q: |
+            クラウドコストマネジメントは、AWS<span x-text="fedRegionSelected ? ' and Azure' : ', Azure, and Google Cloud,'">、Azure、Google Cloud</span> の全製品を可視化することができますか？
+    a: はい、クラウドコストマネジメントのお支払いがホスト数のみの場合であっても、請求書にはすべてのリソース (ストレージ、データベースなど) のコストが表示されます。
