@@ -8430,7 +8430,7 @@ menu:
         operationids:
           - CancelWorkflowInstance
         unstable: []
-        order: 4
+        order: 8
     - name: Get a workflow instance
       url: '#get-a-workflow-instance'
       identifier: workflow-automation-get-a-workflow-instance
@@ -8442,7 +8442,7 @@ menu:
         operationids:
           - GetWorkflowInstance
         unstable: []
-        order: 3
+        order: 7
     - name: Execute a workflow
       url: '#execute-a-workflow'
       identifier: workflow-automation-execute-a-workflow
@@ -8454,7 +8454,7 @@ menu:
         operationids:
           - CreateWorkflowInstance
         unstable: []
-        order: 2
+        order: 6
     - name: List workflow instances
       url: '#list-workflow-instances'
       identifier: workflow-automation-list-workflow-instances
@@ -8466,4 +8466,52 @@ menu:
         operationids:
           - ListWorkflowInstances
         unstable: []
+        order: 5
+    - name: Update an existing Workflow
+      url: '#update-an-existing-workflow'
+      identifier: workflow-automation-update-an-existing-workflow
+      parent: workflow-automation
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateWorkflow
+        unstable: []
+        order: 3
+    - name: Get an existing Workflow
+      url: '#get-an-existing-workflow'
+      identifier: workflow-automation-get-an-existing-workflow
+      parent: workflow-automation
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetWorkflow
+        unstable: []
         order: 1
+    - name: Delete an existing Workflow
+      url: '#delete-an-existing-workflow'
+      identifier: workflow-automation-delete-an-existing-workflow
+      parent: workflow-automation
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteWorkflow
+        unstable: []
+        order: 4
+    - name: Create a Workflow
+      url: '#create-a-workflow'
+      identifier: workflow-automation-create-a-workflow
+      parent: workflow-automation
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateWorkflow
+        unstable: []
+        order: 2

@@ -4083,16 +4083,21 @@ menu:
       identifier: data_streams_live_messages
       parent: data_streams
       weight: 2
+    - name: Data Pipeline Lineage
+      url: data_streams/data_pipeline_lineage
+      identifier: data_streams_pipeline_lineage
+      parent: data_streams
+      weight: 3
     - name: Troubleshooting
       url: data_streams/troubleshooting
       identifier: data_streams_troubleshooting
       parent: data_streams
-      weight: 3
+      weight: 4
     - name: Guide
       url: data_streams/guide
       identifier: data_streams_guide
       parent: data_streams
-      weight: 4
+      weight: 5
     - name: Data Jobs Monitoring
       url: data_jobs/
       pre: data-jobs-monitoring
@@ -5699,6 +5704,11 @@ menu:
       parent: automation_pipelines
       identifier: automation_pipelines_inbox
       weight: 10002
+    - name: Set Due Date Rules
+      url: security/automation_pipelines/set_due_date
+      parent: automation_pipelines
+      identifier: automation_pipelines_due_date
+      weight: 10003
     - name: Security Inbox
       url: security/security_inbox
       parent: security_platform
