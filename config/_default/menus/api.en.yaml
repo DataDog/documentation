@@ -2335,6 +2335,19 @@ menu:
           - ListSecurityMonitoringSignals
         unstable: []
         order: 14
+    - name: Get a rule's version history
+      url: '#get-a-rules-version-history'
+      identifier: security-monitoring-get-a-rules-version-history
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetRuleVersionHistory
+        unstable:
+          - v2
+        order: 25
     - name: Test an existing rule
       url: '#test-an-existing-rule'
       identifier: security-monitoring-test-an-existing-rule
@@ -2575,9 +2588,9 @@ menu:
           - ListSecurityFilters
         unstable: []
         order: 18
-    - name: Patch a vulnerability-based rule
-      url: '#patch-a-vulnerability-based-rule'
-      identifier: security-monitoring-patch-a-vulnerability-based-rule
+    - name: Patch a vulnerability-based notification rule
+      url: '#patch-a-vulnerability-based-notification-rule'
+      identifier: security-monitoring-patch-a-vulnerability-based-notification-rule
       parent: security-monitoring
       generated: true
       params:
@@ -2587,9 +2600,9 @@ menu:
           - PatchVulnerabilityNotificationRule
         unstable: []
         order: 20
-    - name: Get details of a vulnerability-based rule
-      url: '#get-details-of-a-vulnerability-based-rule'
-      identifier: security-monitoring-get-details-of-a-vulnerability-based-rule
+    - name: Get details of a vulnerability notification rule
+      url: '#get-details-of-a-vulnerability-notification-rule'
+      identifier: security-monitoring-get-details-of-a-vulnerability-notification-rule
       parent: security-monitoring
       generated: true
       params:
@@ -2599,9 +2612,9 @@ menu:
           - GetVulnerabilityNotificationRule
         unstable: []
         order: 18
-    - name: Delete a vulnerability-based rule
-      url: '#delete-a-vulnerability-based-rule'
-      identifier: security-monitoring-delete-a-vulnerability-based-rule
+    - name: Delete a vulnerability-based notification rule
+      url: '#delete-a-vulnerability-based-notification-rule'
+      identifier: security-monitoring-delete-a-vulnerability-based-notification-rule
       parent: security-monitoring
       generated: true
       params:
@@ -2611,9 +2624,9 @@ menu:
           - DeleteVulnerabilityNotificationRule
         unstable: []
         order: 21
-    - name: Create a new vulnerability-based rule
-      url: '#create-a-new-vulnerability-based-rule'
-      identifier: security-monitoring-create-a-new-vulnerability-based-rule
+    - name: Create a new vulnerability-based notification rule
+      url: '#create-a-new-vulnerability-based-notification-rule'
+      identifier: security-monitoring-create-a-new-vulnerability-based-notification-rule
       parent: security-monitoring
       generated: true
       params:
@@ -2623,9 +2636,9 @@ menu:
           - CreateVulnerabilityNotificationRule
         unstable: []
         order: 16
-    - name: Get the list of vulnerability-based rules
-      url: '#get-the-list-of-vulnerability-based-rules'
-      identifier: security-monitoring-get-the-list-of-vulnerability-based-rules
+    - name: Get the list of vulnerability notification rules
+      url: '#get-the-list-of-vulnerability-notification-rules'
+      identifier: security-monitoring-get-the-list-of-vulnerability-notification-rules
       parent: security-monitoring
       generated: true
       params:
@@ -2645,12 +2658,11 @@ menu:
           - v2
         operationids:
           - ListVulnerabilities
-        unstable:
-          - v2
+        unstable: []
         order: 25
-    - name: Patch a signal-based rule
-      url: '#patch-a-signal-based-rule'
-      identifier: security-monitoring-patch-a-signal-based-rule
+    - name: Patch a signal-based notification rule
+      url: '#patch-a-signal-based-notification-rule'
+      identifier: security-monitoring-patch-a-signal-based-notification-rule
       parent: security-monitoring
       generated: true
       params:
@@ -2660,9 +2672,9 @@ menu:
           - PatchSignalNotificationRule
         unstable: []
         order: 20
-    - name: Get details of a signal-based rule
-      url: '#get-details-of-a-signal-based-rule'
-      identifier: security-monitoring-get-details-of-a-signal-based-rule
+    - name: Get details of a signal-based notification rule
+      url: '#get-details-of-a-signal-based-notification-rule'
+      identifier: security-monitoring-get-details-of-a-signal-based-notification-rule
       parent: security-monitoring
       generated: true
       params:
@@ -2672,9 +2684,9 @@ menu:
           - GetSignalNotificationRule
         unstable: []
         order: 18
-    - name: Delete a signal-based rule
-      url: '#delete-a-signal-based-rule'
-      identifier: security-monitoring-delete-a-signal-based-rule
+    - name: Delete a signal-based notification rule
+      url: '#delete-a-signal-based-notification-rule'
+      identifier: security-monitoring-delete-a-signal-based-notification-rule
       parent: security-monitoring
       generated: true
       params:
@@ -2684,9 +2696,9 @@ menu:
           - DeleteSignalNotificationRule
         unstable: []
         order: 21
-    - name: Create a new signal-based rule
-      url: '#create-a-new-signal-based-rule'
-      identifier: security-monitoring-create-a-new-signal-based-rule
+    - name: Create a new signal-based notification rule
+      url: '#create-a-new-signal-based-notification-rule'
+      identifier: security-monitoring-create-a-new-signal-based-notification-rule
       parent: security-monitoring
       generated: true
       params:
@@ -2696,9 +2708,9 @@ menu:
           - CreateSignalNotificationRule
         unstable: []
         order: 16
-    - name: Get the list of signal-based rules
-      url: '#get-the-list-of-signal-based-rules'
-      identifier: security-monitoring-get-the-list-of-signal-based-rules
+    - name: Get the list of signal-based notification rules
+      url: '#get-the-list-of-signal-based-notification-rules'
+      identifier: security-monitoring-get-the-list-of-signal-based-notification-rules
       parent: security-monitoring
       generated: true
       params:
@@ -2718,8 +2730,7 @@ menu:
           - v2
         operationids:
           - GetSBOM
-        unstable:
-          - v2
+        unstable: []
         order: 27
     - name: List vulnerable assets
       url: '#list-vulnerable-assets'
@@ -2731,8 +2742,7 @@ menu:
           - v2
         operationids:
           - ListVulnerableAssets
-        unstable:
-          - v2
+        unstable: []
         order: 26
     - name: Get a finding
       url: '#get-a-finding'
@@ -3850,8 +3860,7 @@ menu:
           - v2
         operationids:
           - GetMonthlyCostAttribution
-        unstable:
-          - v2
+        unstable: []
         order: 5
     - name: Get active billing dimensions for cost attribution
       url: '#get-active-billing-dimensions-for-cost-attribution'
@@ -3863,8 +3872,7 @@ menu:
           - v2
         operationids:
           - GetActiveBillingDimensions
-        unstable:
-          - v2
+        unstable: []
         order: 5
     - name: Get all custom metrics by hourly average
       url: '#get-all-custom-metrics-by-hourly-average'
@@ -6817,6 +6825,66 @@ menu:
       url: /api/latest/microsoft-teams-integration/
       identifier: microsoft-teams-integration
       generated: true
+    - name: Update Workflows webhook handle
+      url: '#update-workflows-webhook-handle'
+      identifier: microsoft-teams-integration-update-workflows-webhook-handle
+      parent: microsoft-teams-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateWorkflowsWebhookHandle
+        unstable: []
+        order: 1
+    - name: Get Workflows webhook handle information
+      url: '#get-workflows-webhook-handle-information'
+      identifier: microsoft-teams-integration-get-workflows-webhook-handle-information
+      parent: microsoft-teams-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetWorkflowsWebhookHandle
+        unstable: []
+        order: 1
+    - name: Delete Workflows webhook handle
+      url: '#delete-workflows-webhook-handle'
+      identifier: microsoft-teams-integration-delete-workflows-webhook-handle
+      parent: microsoft-teams-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteWorkflowsWebhookHandle
+        unstable: []
+        order: 1
+    - name: Create Workflows webhook handle
+      url: '#create-workflows-webhook-handle'
+      identifier: microsoft-teams-integration-create-workflows-webhook-handle
+      parent: microsoft-teams-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateWorkflowsWebhookHandle
+        unstable: []
+        order: 1
+    - name: Get all Workflows webhook handles
+      url: '#get-all-workflows-webhook-handles'
+      identifier: microsoft-teams-integration-get-all-workflows-webhook-handles
+      parent: microsoft-teams-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListWorkflowsWebhookHandles
+        unstable: []
+        order: 1
     - name: Update tenant-based handle
       url: '#update-tenant-based-handle'
       identifier: microsoft-teams-integration-update-tenant-based-handle
@@ -8362,7 +8430,7 @@ menu:
         operationids:
           - CancelWorkflowInstance
         unstable: []
-        order: 4
+        order: 8
     - name: Get a workflow instance
       url: '#get-a-workflow-instance'
       identifier: workflow-automation-get-a-workflow-instance
@@ -8374,7 +8442,7 @@ menu:
         operationids:
           - GetWorkflowInstance
         unstable: []
-        order: 3
+        order: 7
     - name: Execute a workflow
       url: '#execute-a-workflow'
       identifier: workflow-automation-execute-a-workflow
@@ -8386,7 +8454,7 @@ menu:
         operationids:
           - CreateWorkflowInstance
         unstable: []
-        order: 2
+        order: 6
     - name: List workflow instances
       url: '#list-workflow-instances'
       identifier: workflow-automation-list-workflow-instances
@@ -8398,4 +8466,52 @@ menu:
         operationids:
           - ListWorkflowInstances
         unstable: []
+        order: 5
+    - name: Update an existing Workflow
+      url: '#update-an-existing-workflow'
+      identifier: workflow-automation-update-an-existing-workflow
+      parent: workflow-automation
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateWorkflow
+        unstable: []
+        order: 3
+    - name: Get an existing Workflow
+      url: '#get-an-existing-workflow'
+      identifier: workflow-automation-get-an-existing-workflow
+      parent: workflow-automation
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetWorkflow
+        unstable: []
         order: 1
+    - name: Delete an existing Workflow
+      url: '#delete-an-existing-workflow'
+      identifier: workflow-automation-delete-an-existing-workflow
+      parent: workflow-automation
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteWorkflow
+        unstable: []
+        order: 4
+    - name: Create a Workflow
+      url: '#create-a-workflow'
+      identifier: workflow-automation-create-a-workflow
+      parent: workflow-automation
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateWorkflow
+        unstable: []
+        order: 2

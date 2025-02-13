@@ -24,15 +24,18 @@ Supported databases
 : SQL Server
 
 Supported deployments
-: All deployment types except Azure DB (Azure Managed Instance is supported)
+: All deployment types. Azure DB is supported for Agent versions 7.64.0 and later.
 
 Supported Agent versions
 : 7.59.0+
 
 ## Setup
+{{< tabs >}}
+{{% tab "All deployment types except Azure DB" %}}
+
 1. In the SQL Server database instance, create a Datadog Extended Events (XE) session. You can run the session on any database in the instance.
 
-   **Note**: If the Datadog XE session isn't created in the database, the Agent still attempts to collect deadlock events from a default SQL Server XE view. This view writes to the buffer pool, but there's a higher chance of missing events because of a size limitation on the XML queried from it. For more information, see [You may not see the data you expect in Extended Event Ring Buffer Targets][2] on the SQL Server Support Blog.
+   **Note**: If the Datadog XE session isn't created in the database, the Agent still attempts to collect deadlock events from the default SQL Server system health XE session.
 
 ```sql
   CREATE EVENT SESSION datadog
@@ -56,6 +59,39 @@ Supported Agent versions
   deadlocks_collection:
       enabled: true
 ```
+
+{{% /tab %}}
+
+{{% tab "Azure DB" %}}
+
+1. In the SQL Server database, create a Datadog Extended Events (XE) session.
+
+```sql
+  CREATE EVENT SESSION datadog
+  ON database
+  ADD EVENT sqlserver.database_xml_deadlock_report
+  ADD TARGET package0.ring_buffer
+  WITH (
+      MAX_MEMORY = 1024 KB,
+      EVENT_RETENTION_MODE = ALLOW_SINGLE_EVENT_LOSS,
+      MAX_DISPATCH_LATENCY = 30 SECONDS,
+      STARTUP_STATE = ON
+  );
+  GO
+
+  ALTER EVENT SESSION datadog ON DATABASE STATE = START;
+  GO
+```
+
+2. In the Datadog Agent, enable deadlocks in `sqlserver.d/conf.yaml`.
+```yaml
+  deadlocks_collection:
+      enabled: true
+```
+
+{{% /tab %}}
+
+{{< /tabs >}}
 
 ## Exploring deadlock events
 

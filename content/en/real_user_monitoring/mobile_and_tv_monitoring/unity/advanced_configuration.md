@@ -164,9 +164,10 @@ To remove an existing attribute, set it to `null`.
 For example:
 
 ```cs
-DatadogSdk.Instance.AddUserExtraInfo({
- 'attribute_1': 'foo',
- 'attribute_2': null,
+DatadogSdk.Instance.AddUserExtraInfo(new ()
+{
+ { "attribute_1", "foo" },
+ { "attribute_2", null },
 });
 ```
 

@@ -70,6 +70,8 @@ To update Reference Tables from S3, Datadog uses the IAM role in your AWS accoun
 			"Effect": "Allow",
 			"Action": [
 				"s3:GetObject",
+				// Grant KMS decrypt permissions if uploading KMS-encrypted object
+				// "kms:Decrypt",
 				"s3:ListBucket"
 			],
 			"Resource": [
