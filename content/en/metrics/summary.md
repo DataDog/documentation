@@ -39,7 +39,7 @@ The search bars provide the most comprehensive set of actions to filter the list
 
 **Note**:
 
-A metric is **unqueried** if it has not been accessed in monitors, SLOs, executed notebooks, opened dashboards, Metrci Explorer queries, or accessed via API calls within the past 30, 60, or 90 days.
+A metric is **unqueried** if it has not been accessed in monitors, SLOs, executed notebooks, opened dashboards, used in Metrics Explorer queries, or accessed via API calls within the past 30, 60, or 90 days.
 
 A metric is considered **used** as long as it exists on an asset, regardless if it has been actively queried.
 
