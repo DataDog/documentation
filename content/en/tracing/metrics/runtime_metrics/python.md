@@ -18,10 +18,6 @@ further_reading:
       text: 'Explore your services, resources, and traces'
 ---
 
-<div class="alert alert-warning">
-This feature is in public beta.
-</div>
-
 ## Automatic configuration
 
 Runtime metrics collection can be enabled with the `DD_RUNTIME_METRICS_ENABLED=true` environment parameter when running with `ddtrace-run`.

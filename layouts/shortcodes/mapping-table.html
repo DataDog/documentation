@@ -1,8 +1,12 @@
 {{/*  
     Render a HTML table from a CSV file located in the assets/_data/semantic-core directory (Global resource).
-    CSV file should be an 2D array with the first array/row as the header.
-    
-    resource: string - name of the CSV file.
+    CSV file should be a 2D array with the first array/row as the header. 
+
+    Note: 
+    - csv files mounted from websites-sources: https://github.com/DataDog/websites-sources/tree/main/assets/_data/semantic-core
+    - csv files cannot be mounted to the ./data directory (https://gohugo.io/content-management/data-sources/)
+
+    @param resource: string - name of the CSV file.
 */}}
 
 {{ $resource_path := print "_data/semantic-core/" (.Get "resource")}}

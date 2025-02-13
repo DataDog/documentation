@@ -28,6 +28,9 @@ further_reading:
 - link: "/data_streams/"
   tag: "Documentation"
   text: "Data Streams Monitoring"
+- link: "https://www.datadoghq.com/blog/change-tracking/"
+  tag: "Blog"
+  text: "Unify visibility into changes to your services and dependencies"
 ---
 
 ## Overview
@@ -39,6 +42,7 @@ Change Tracking streamlines troubleshooting and incident response by surfacing r
 Change Tracking supports monitoring of a range of modifications to your service and its dependencies including:
 - Deployments
 - Feature Flags
+- Configuration Changes
 - Database Modifications
 - Schema Changes
 - Scale Adjustments
@@ -118,6 +122,7 @@ Change Tracking follows these types of changes across your infrastructure:
 | Kubernetes Deployment Manifest Updates | Datadog Agent Set Up for Kubernetes (Add service label to kubernetes yaml file if possible)
 | LaunchDarkly Feature Flag Events (service tag must be defined on event) | Third Party Datadog Integrations ([LaunchDarkly only][5])
 | Custom Feature Flag Events | [Event Management API][6]
+| Custom Configuration Change Events | [Event Management API][6]
 | Watchdog Alerts (Error Rate Spikes, Latency Spikes, Cloud and API Outages, etc.). | See [Watchdog][7] documentation to learn more about requirements for specific Watchdog Alerts.
 | CrashLoopBackOff Kubernetes Pod Crashes | Kubernetes Integration (Add service label to kubernetes yaml file if possible)
 | PostgreSQL Database Table Change | [Database Monitoring (DBM)][8], [Correlate Database Monitoring and Traces][10]
