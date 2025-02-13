@@ -38,6 +38,7 @@ title: Agent ガイド
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Agent のバージョン管理ガイド:" >}}
+    {{< nextlink href="agent/guide/upgrade" >}}Agent 7 へのアップグレード{{< /nextlink >}}
     {{< nextlink href="agent/guide/version_differences" >}}Agent バージョンの違い{{< /nextlink >}}
     {{< nextlink href="agent/guide/upgrade_between_minor_versions" >}}Datadog Agent のマイナーバージョン間のアップグレード{{< /nextlink >}}
     {{< nextlink href="agent/guide/agent-v6-python-3" >}}Python のバージョン管理: Datadog Agent v6 で Python 3 を使用する{{< /nextlink >}}
