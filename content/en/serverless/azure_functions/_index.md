@@ -60,30 +60,30 @@ This page explains how to collect traces, trace metrics, runtime metrics, and cu
 3. (Optional) **Enable runtime metrics**. See [Python Runtime Metrics][2].
 
 4. (Optional) **Enable custom metrics**. See [Metric Submission: DogStatsD][3].
+
 [1]: /tracing/trace_collection/automatic_instrumentation/?tab=singlestepinstrumentation
 [2]: /tracing/metrics/runtime_metrics/python/
 [3]: /metrics/custom_metrics/dogstatsd_metrics_submission/?code-lang=python
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
-3. **Deploy your function**.
+5. **Deploy your function**.
 
-4. **Configure Datadog intake**. Add the following environment variables to your function's application settings:
-   ```
-   DD_API_KEY=<YOUR_API_KEY>
-   DD_SITE={{< region-param key=dd_site code="true" >}}
-   ```
-   - Set `DD_API_KEY` to your [Datadog API key][1].
-   - Set `DD_SITE` to {{< region-param key=dd_site code="true" >}}. (Ensure that your correct [Datadog site][2] is selected in the drop-down on the right side of this page.)
+6. **Configure Datadog intake**. Add the following environment variables to your function's application settings:
 
-5. **Configure Unified Service Tagging**. You can collect metrics from your Azure Functions by installing the [Datadog Azure integration][6]. To correlate these metrics with your traces, first set the `env`, `service`, and `version` tags on your resource in Azure. Then, configure the following environment variables. You can add custom tags as `DD_TAGS`.
+   | Name | Value |
+   | ---- | ----- |
+   | `DD_API_KEY` | Your [Datadog API key][1]. |
+   | `DD_SITE` | Your [Datadog site][2]. For example, {{< region-param key=dd_site code="true" >}}. |
 
-    ```
-    DD_ENV="<ENVIRONMENT>"
-    DD_SERVICE="<SERVICE_NAME>"
-    DD_VERSION="<VERSION>"
-    DD_TAGS="<KEY_1:VALUE_1>,<KEY_2:VALUE_2>"
-    ```
+7. **Configure Unified Service Tagging**. You can collect metrics from your Azure Functions by installing the [Datadog Azure integration][6]. To correlate these metrics with your traces, first set the `env`, `service`, and `version` tags on your resource in Azure. Then, configure the following environment variables. You can add custom tags as `DD_TAGS`.
+
+   | Name | Value |
+   | ---- | ----- |
+   | `DD_ENV` | How you want to tag your env for [Unified Service Tagging][9]. For example, `prod`. |
+   | `DD_SERVICE` | How you want to tag your service for [Unified Service Tagging][9].  |
+   | `DD_VERSION` | How you want to tag your version for [Unified Service Tagging][9]. |
+   | `DD_TAGS` | Your comma-separated custom tags. For example, `key1:value1,key2:value2`.  |
 
 ## What's next?
 
@@ -128,3 +128,4 @@ To use a GitHub Action to deploy to a Linux Consumption function, you must confi
 [6]: /integrations/azure/
 [7]: /tracing/troubleshooting/tracer_debug_logs/#enable-debug-mode
 [8]: https://github.com/Azure/functions-action?tab=readme-ov-file#using-azure-service-principal-for-rbac-as-deployment-credential
+[9]: /getting_started/tagging/unified_service_tagging/
