@@ -373,7 +373,7 @@ To avoid running out of storage space, the Agent stores the metrics on disk only
 
 ## Installing the Operator
 
-If you are installing the Datadog Operator in Kubernetes environment with limited connectivity, you also want to allowlist the following endpoints for TCP port 443, based on your location:
+If you are installing the Datadog Operator in a Kubernetes environment with limited connectivity, you need to allowlist the following endpoints for TCP port 443, based on your location:
 
 - `gcr.io/datadoghq` (GCR US)
 - `eu.gcr.io/datadoghq` (GCR Europe)
