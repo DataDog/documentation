@@ -77,7 +77,7 @@ Once a profile is applied, you cannot bring it back to draft status.
 
 ### Profile inheritance (optional)
 
-Use profile inheritance to adopt configurations such as metadata, metrics, and tags. This simplifies scaling your device profiles and allows you to build on existing ones. After you select a profile to inherit, the fields are populated on the right side of the screen under **Inherited Profiles**, with an `Inherited` tag next to any metrics or metadata inherited from this profile:
+Use profile inheritance to adopt configurations such as metadata, metrics, and tags. This simplifies scaling your device profiles and allows you to build on existing ones. After you select a profile to inherit, the fields are populated on the right side of the screen under **Inherited Profiles**, with an `Inherited` tag next to any metrics or metadata inherited from this profile: (Need new screen shots as currently isn't showing Inherited tags for Scalar metrics)
 
   {{< img src="/network_device_monitoring/profile_onboarding/profile_inheritance.png" alt="The Network Device profile creation page showing the Profile inheritance section." style="width:100%;">}}
 
@@ -105,8 +105,8 @@ Option to do manual scan
 
 ### Define metadata
 
-DD has sensible defaults for the majority of devices from our DD created OOTB profiles if they’re using an inherited profile
-Even if they don’t inherit from any profile, device name, device description will be defined
+DD has sensible defaults for the majority of devices from our DD created OOTB profiles if they're using an inherited profile
+Even if they don't inherit from any profile, device name, device description will be defined
 Option to override 
 Metadata functionality
 Shown in the NDM page view (screenshot as example)
