@@ -37,7 +37,7 @@
 {{/* Dont fix indentation, Hugo will think it's a code block */}}
 <ul>
     {{- with .threat_detection -}}
-        {{- $ootb_link := (print "https://docs.datadoghq.com/security/default_rules/#" (index . 0)) -}}
+        {{- $ootb_link := (print "https://docs.datadoghq.com/security/default_rules/#" .) -}}
         <li><a href="{{- $ootb_link -}}">Detection Rules</a></li>
     {{- end -}}
 
