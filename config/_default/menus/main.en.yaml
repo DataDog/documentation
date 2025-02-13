@@ -758,33 +758,33 @@ menu:
       parent: opentelemetry_top_level
       weight: 8
     - name: Guides and Resources
-      url: opentelemetry/guide/
+      url: /opentelemetry/guide
       identifier: otel_guides
       parent: opentelemetry_top_level
       weight: 9
     - name: Get Started with OTel at Datadog
-      url: /getting_started/opentelemetry/
+      url: /getting_started/opentelemetry
       identifier: otel_guides_getting_started
       parent: otel_guides
       weight: 901
     - name: Produce Delta Temporality Metrics
-      url: opentelemetry/guide/otlp_delta_temporality/
+      url: /opentelemetry/guide/otlp_delta_temporality
       identifier: otel_guides_delta_temporality
       parent: otel_guides
       weight: 902
     - name: Send Data from the OTel Demo
-      url: /opentelemetry/guide/otel_demo_to_datadog/
+      url: /opentelemetry/guide/otel_demo_to_datadog
       parent: otel_guides
       weight: 903
     - name: Migration Guides
-      url: /opentelemetry/guide/migrate/
+      url: /opentelemetry/guide/migrate
       identifier: otel_guides_migration
       parent: otel_guides
       weight: 904
     - name: Migrate to OTel Collector v0.95.0+
-      url: /opentelemetry/guide/migrate/collector_0_95_0/
+      url: /opentelemetry/guide/migrate/collector_0_95_0
       parent: otel_guides_migration
-      weight: 9041
+      weight: 9999
     - name: Developers
       url: developers/
       pre: dev-code
