@@ -1,0 +1,27 @@
+{
+  "compute": [
+    {
+      "aggregation": "count",
+      "metric": "@test.is_flaky",
+      "type": "total"
+    }
+  ],
+  "filter": {
+    "from": "now-15m",
+    "query": "@language:(python OR go)",
+    "to": "now"
+  },
+  "group_by": [
+    {
+      "facet": "@git.branch",
+      "limit": 10,
+      "sort": {
+        "order": "asc"
+      },
+      "total": false
+    }
+  ],
+  "options": {
+    "timezone": "GMT"
+  }
+}

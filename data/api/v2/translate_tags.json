@@ -39,10 +39,6 @@
     "name": "CI Visibility Pipelines",
     "description": "Search or aggregate your CI Visibility pipeline events and send them to your Datadog site over HTTP. See the [CI Pipeline Visibility in Datadog page](https://docs.datadoghq.com/continuous_integration/pipelines/) for more information."
   },
-  "ci-visibility-tests": {
-    "name": "CI Visibility Tests",
-    "description": "Search or aggregate your CI Visibility test events over HTTP. See the [Test Visibility in Datadog page](https://docs.datadoghq.com/tests/) for more information."
-  },
   "csm-agents": {
     "name": "CSM Agents",
     "description": "Datadog Cloud Security Management (CSM) delivers real-time threat detection\nand continuous configuration audits across your entire cloud infrastructure,\nall in a unified view for seamless collaboration and faster remediation.\nGo to https://docs.datadoghq.com/security/cloud_security_management to learn more"
@@ -246,6 +242,10 @@
   "teams": {
     "name": "Teams",
     "description": "View and manage teams within Datadog. See the [Teams page](https://docs.datadoghq.com/account_management/teams/) for more information."
+  },
+  "test-optimization": {
+    "name": "Test Optimization",
+    "description": "Search or aggregate your test events over HTTP. See the [Test Optimization in Datadog](https://docs.datadoghq.com/tests/) page for more information."
   },
   "usage-metering": {
     "name": "Usage Metering",

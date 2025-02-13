@@ -136,25 +136,6 @@
       "description": "Send running pipeline event returns \"Request accepted for processing\" response"
     }
   ],
-  "AggregateCIAppTestEvents": [
-    {
-      "group": "ci_visibility_tests",
-      "suffix": "",
-      "description": "Aggregate tests events returns \"OK\" response"
-    }
-  ],
-  "SearchCIAppTestEvents": [
-    {
-      "group": "ci_visibility_tests",
-      "suffix": "",
-      "description": "Search tests events returns \"OK\" response"
-    },
-    {
-      "group": "ci_visibility_tests",
-      "suffix": "_1675695429",
-      "description": "Search tests events returns \"OK\" response with pagination"
-    }
-  ],
   "CreateCSMThreatsAgentRule": [
     {
       "group": "csm_threats",
@@ -1311,6 +1292,25 @@
       "group": "teams",
       "suffix": "",
       "description": "Update permission setting for team returns \"OK\" response"
+    }
+  ],
+  "AggregateCIAppTestEvents": [
+    {
+      "group": "test_optimization",
+      "suffix": "",
+      "description": "Aggregate tests events returns \"OK\" response"
+    }
+  ],
+  "SearchCIAppTestEvents": [
+    {
+      "group": "test_optimization",
+      "suffix": "",
+      "description": "Search tests events returns \"OK\" response"
+    },
+    {
+      "group": "test_optimization",
+      "suffix": "_1675695429",
+      "description": "Search tests events returns \"OK\" response with pagination"
     }
   ],
   "CreateUser": [
