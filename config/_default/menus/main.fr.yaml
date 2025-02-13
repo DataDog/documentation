@@ -473,15 +473,10 @@ menu:
       url: agent/fleet_automation
       parent: agent
       weight: 8
-    - name: Upgrade the Agent
-      url: agent/upgrade
-      parent: agent
-      identifier: agent_upgrade
-      weight: 9
     - name: Dépannage
       url: agent/troubleshooting/
       parent: agent
-      weight: 10
+      weight: 9
       identifier: agent_troubleshooting
     - name: Container Hostname Detection
       identifier: agent_troubleshooting_hostname_containers
@@ -2090,21 +2085,31 @@ menu:
       parent: oncall
       identifier: oncall_pages
       weight: 2
+    - name: Processing Rules
+      url: service_management/on-call/processing_rules/
+      parent: oncall
+      identifier: oncall_processing_rules
+      weight: 3
     - name: Escalation Policies
       url: service_management/on-call/escalation_policies/
       parent: oncall
       identifier: oncall_escalation_policies
-      weight: 3
+      weight: 4
     - name: Schedules
       url: service_management/on-call/schedules/
       parent: oncall
       identifier: oncall_schedules
-      weight: 4
+      weight: 5
     - name: Profile Settings
       url: service_management/on-call/profile_settings/
       parent: oncall
       identifier: oncall_profile_settings
-      weight: 5
+      weight: 6
+    - name: Guides
+      url: service_management/on-call/guides/
+      parent: oncall
+      identifier: oncall_guides
+      weight: 7
     - name: Event Management
       url: service_management/events/
       pre: events

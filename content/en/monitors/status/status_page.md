@@ -14,6 +14,9 @@ further_reading:
 - link: "/monitors/status/events/"
   tag: "Documentation"
   text: "Learn more about event details"
+- link: "https://www.datadoghq.com/blog/monitor-status-page/"
+  tag: "Blog"
+  text: "Quickly get rich, actionable context for alerts with Datadog's new Monitor Status page"
 ---
 
 <div class="alert alert-warning">The provisional status page has limited support for monitors and their features. For more details, see <a href="#restrictions-of-provisional-status-page">Restrictions of provisional status page</a>.<br><br>If you are using the legacy status page, see the <a href="/monitors/status/status_legacy">Status Page (Legacy)</a> documentation</div>
@@ -70,11 +73,8 @@ For more information, see the [Monitor status events][3] documentation.
 The following monitor types are not supported by the provisional status page:
 
 - Anomaly
-- Cloud Cost
-- Composite
 - Database Monitoring
 - Forecast
-- Live Process
 - Outlier
 - Synthetics
 - SLO Alerts

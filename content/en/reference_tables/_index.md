@@ -60,7 +60,7 @@ Reference Tables can automatically pull a CSV file from an Amazon S3 bucket to k
 
 To update Reference Tables from S3, Datadog uses the IAM role in your AWS account that you configured for the [AWS integration][1]. If you have not yet created that role, [follow these steps][2] to do so. To allow that role to update your Reference Tables, add the following permission statement to its IAM policies. Be sure to edit the bucket names to match your environment.
 
-**Note**: If using server-side encryption, you can only upload Reference Tables encrypted with Amazon S3-managed keys (SSE-S3).
+**Note**: If using server-side encryption, you can upload Reference Tables encrypted with Amazon S3-managed keys (SSE-S3) or AWS Key Management Service keys (SSE-KMS).
 
 ```json
 {
@@ -70,6 +70,8 @@ To update Reference Tables from S3, Datadog uses the IAM role in your AWS accoun
 			"Effect": "Allow",
 			"Action": [
 				"s3:GetObject",
+				// Grant KMS decrypt permissions if uploading KMS-encrypted object
+				// "kms:Decrypt",
 				"s3:ListBucket"
 			],
 			"Resource": [

@@ -16,7 +16,7 @@ ignores:
   - "content/en/infrastructure/resource_catalog/*.md"
   - "content/en/integrations/rapdev_services.md"
   - "content/en/service_management/workflows/actions_catalog/*.md"
-  - "content/en/code_analysis/static_analysis_rules/**/*.md"
+  - "content/en/security/code_security/static_analysis/static_analysis_rules/**/*.md"
   - "content/en/api/v1/**/*.md"
   - "content/en/api/v2/**/*.md"
   - "config/_default/menus/menus.en.yaml"
@@ -28,6 +28,14 @@ ignores:
   - "**/*.ja.yaml"
   - "**/*.ja.json"
   - "**/ja.json"
+  - "**/*.ko.md"
+  - "**/*.ko.yaml"
+  - "**/*.ko.json"
+  - "**/ko.json"
+  - "**/*.es.md"
+  - "**/*.es.yaml"
+  - "**/*.es.json"
+  - "**/es.json"
 
 # These files will be uploaded to Transifex for translation when syncing.
 sources:
@@ -57,4 +65,3 @@ sources:
   dst: "content/{lang}/workflows/actions_catalog/_index.md"
 - src: "content/en/workflows/actions_catalog/generic_actions.md"
   dst: "content/{lang}/workflows/actions_catalog/generic_actions.md"
-

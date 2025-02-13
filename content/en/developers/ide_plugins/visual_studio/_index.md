@@ -10,7 +10,7 @@ further_reading:
 - link: "/integrations/guide/source-code-integration/"
   tag: "Documentation"
   text: "Learn about Source Code Integration"
-- link: "/code_analysis/static_analysis"
+- link: "/security/code_security/static_analysis"
   tag: "Documentation"
   text: "Learn about Static Analysis"
 - link: "https://marketplace.visualstudio.com/items?itemName=Datadog.VisualStudio"
@@ -81,7 +81,16 @@ When you start editing a source file supported by Static Analysis, the extension
 4. Open a solution in Visual Studio.
 5. Go to **Extensions > Datadog > Linked Services**.
 6. Add services, and save your solution.
-7. Go to **Extensions > Datadog > Code Insights**.
+7. Go to **Tools > Options > Datadog** and enable **Code Insights**.
+8. Sign in to Datadog by clicking the plus (**+**) icon. Changes do not affect existing connections to Datadog.
+
+### Custom subdomains
+
+If your organization uses a [custom sub-domain][23], set the custom URL as the Datadog server address in the extension settings:
+1. Click **Tools > Options > Datadog**.
+1. If you're editing an existing connection to Datadog, sign out of the connection before you edit the server address. Changes do not affect existing connections.
+1. Under **Advanced**, set your custom URL as the Datadog server address.
+1. Click the plus (**+**) icon to sign in.
 
 ## Feedback
 
@@ -111,7 +120,8 @@ If you don't wish to send this data to Datadog, you can opt out at any time in t
 [16]: https://github.com/DataDog/datadog-for-visual-studio/issues
 [17]: https://marketplace.visualstudio.com/items?itemName=Datadog.VisualStudio
 [18]: /logs/explorer/
-[19]: /code_analysis/static_analysis/
-[20]: /code_analysis/static_analysis_rules/
+[19]: /security/code_security/static_analysis/
+[20]: /security/code_security/static_analysis/static_analysis_rules/
 [21]: https://www.datadoghq.com/legal/privacy/
 [22]: https://www.datadoghq.com/legal/eula/
+[23]: /account_management/multi_organization/#custom-sub-domains

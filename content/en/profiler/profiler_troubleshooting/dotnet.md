@@ -15,7 +15,7 @@ If you've configured the profiler and don't see profiles in the profile search p
 
 {{< tabs >}}
 
-{{% tab "Linux" %}}
+{{% tab "Linux with Single Step APM Instrumentation" %}}
 
 1. Check that the Agent is installed and running.
 
@@ -72,6 +72,81 @@ If you've configured the profiler and don't see profiles in the profile search p
 
    Note that the following message could appear, but it does not impact Datadog profiling: `Profiler signal handler has been replaced. Restoring it.` This indicates only that the Datadog signal handler is reinstalled when it was overwritten.
 
+5. Confirm that the following environment variables are not set:
+   - `CORECLR_ENABLE_PROFILING`
+   - `CORECLR_PROFILER`
+   - `CORECLR_PROFILER_PATH`
+   - The value pointing to `Datadog.Linux.ApiWrapper.x64.so` in `LD_PRELOAD`
+   
+   If these variables have been set, remove them from your scripts or Dockerfile. Otherwise, a previous manually-installed version of the profiler is used.
+
+6. Check that the value of `DD_PROFILING_ENABLED` is set to `1` or `Auto`. If set to `Auto`, the profiler generates profiles only if both of the following conditions are met:
+   - A trace was created
+   - The application ran for more than 30 seconds
+If it is set to another value or not set at all, the profiler is disabled.
+
+[1]: /profiler/enabling/dotnet/?tab=linux#configuration
+
+{{% /tab %}}
+{{% tab "Linux" %}}
+
+1. Check that the Agent is installed and running.
+
+2. Check that the profiler has been loaded from the loader log:
+
+   1. Open the `dotnet-native-loader-dotnet-<PID>` log file in the `/var/log/datadog` folder.
+
+   2. Look for `CorProfiler::Initialize: Continuous Profiler initialized successfully.` near the end. If that message is not present, enable debug logs by setting the `DD_TRACE_DEBUG` environment variable for the application.
+
+   3. Restart the application.
+
+   4. Open the `dotnet-native-loader-dotnet-<pid>` log file in the `/var/log/datadog` folder.
+
+   5. Look for the `#Profiler` entry.
+
+   6. Check the following lines to ensure that the profiler library has been loaded:
+      ```
+      [...] #Profiler
+      [...] PROFILER;{BD1A650D-AC5D-4896-B64F-D6FA25D6B26A};win-x64;.\Datadog.Profiler.Native.dll
+      [...] PROFILER;{BD1A650D-AC5D-4896-B64F-D6FA25D6B26A};win-x86;.\Datadog.Profiler.Native.dll
+      [...] DynamicDispatcherImpl::LoadConfiguration: [PROFILER] Loading: .\Datadog.Profiler.Native.dll [AbsolutePath=/opt/datadog/linux-x64/./Datadog.Tracer.Native.so]
+      [...] [PROFILER] Creating a new DynamicInstance object
+      [...] Load: /opt/datadog/linux-x64/./Datadog.Tracer.Native.so
+      [...] GetFunction: DllGetClassObject
+      [...] GetFunction: DllCanUnloadNow
+      ```
+
+3. Check that the value of `DD_PROFILING_ENABLED` is set to `1`; if it is not set or with another value, the profiler is disabled.
+
+4. Check the result of profiles export:
+
+   1. If debug logs were not enabled in step 2.b, set the `DD_TRACE_DEBUG` environment variable to `true` for the application and restart it.
+
+   2. Open the `DD-DotNet-Profiler-Native-<Application Name>-<pid>` log file in the `/var/log/datadog` folder.
+
+   3. Look for `libddprof error: Failed to send profile.` entries: this message means it can't contact the agent. Ensure the `DD_TRACE_AGENT_URL` is set to the correct Agent URL. See [Enabling the .NET Profiler-Configuration][1] for more information.
+
+   4. If the `Failed to send profile` message is not present, look for `The profile was sent. Success?` entries.
+
+      The following message means the profile has been sent successfully:
+      ```
+      true, Http code: 200
+      ```
+
+   5. Check the other HTTP codes for possible errors such as 403 for invalid API key.
+
+5. For missing CPU or Wall time profiles only, check that the Datadog signal handler for stack walk has not been replaced:
+
+   1. Open the `DD-DotNet-Profiler-Native-<Application Name>-<pid>` log file in the `/var/log/datadog` folder.
+
+   2. Look for these two messages:
+      - `Profiler signal handler was replaced again. It will not be restored: the profiler is disabled.`
+      - `Fail to restore profiler signal handler.`
+
+   3. If one of these messages is present, it means that the application code or a third party code is repeatedly reinstalling its own signal handler over the Datadog signal handler. To avoid any further conflict, the CPU and Wall time profilers are disabled.
+
+   Note that the following message could appear, but it does not impact Datadog profiling: `Profiler signal handler has been replaced. Restoring it.` This indicates only that the Datadog signal handler is reinstalled when it was overwritten.
+
 [1]: /profiler/enabling/dotnet/?tab=linux#configuration
 
 {{% /tab %}}
@@ -106,9 +181,11 @@ The default profiler log directory is `%ProgramData%\Datadog .NET Tracer\logs\`.
       [...] GetFunction: DllCanUnloadNow
       ```
 
-3. Check the result of profiles export:
+3. Check that the value of `DD_PROFILING_ENABLED` is set to `1`; if it is not set, or set with another value, the profiler is disabled.
 
-   1. If debug logs were not enabled in step 2.2, set the `DD_TRACE_DEBUG` environment variable to `true` for the application and restart it.
+4. Check the result of profiles export:
+
+   1. If debug logs were not enabled in step 2.b, set the `DD_TRACE_DEBUG` environment variable to `true` for the application and restart it.
 
    2. Open the `DD-DotNet-Profiler-Native-<Application Name>-<pid>` log file from the default log folder.
 
@@ -188,6 +265,6 @@ If an application hangs, or otherwise becomes unresponsive on Linux, CPU and Wal
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /tracing/troubleshooting/#tracer-debug-logs
+[1]: /tracing/troubleshooting/#debugging-and-logging
 [2]: /help/
 [3]: /profiler/profile_types/?code-lang=dotnet

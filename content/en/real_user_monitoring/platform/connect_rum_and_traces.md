@@ -129,7 +129,7 @@ To start sending just your iOS application's traces to Datadog, see [iOS Trace C
 
   - When `traceContextInjection` is set to `sampled`, **20%** of backend traces are kept. For the remaining **80%**, the browser SDK **does not inject** a sampling decision. The decision is made on the server side and is based on the tracing library head-based sampling [configuration][2]. In the example below, the backend sample rate is set to 40%, and therefore 32% of the remaining backend traces are kept.
 
-    {{< img src="real_user_monitoring/connect_rum_and_traces/traceContextInjection_sampled-2.png" alt="traceContextInjection set to sampled" style="width:90%;">}}
+    {{< img src="real_user_monitoring/connect_rum_and_traces/traceContextInjection_sampled-3.png" alt="traceContextInjection set to sampled" style="width:90%;">}}
 
 <div class="alert alert-info">End-to-end tracing is available for requests fired after the Browser SDK is initialized. End-to-end tracing of the initial HTML document and early browser requests is not supported.</div>
 
@@ -153,8 +153,8 @@ To start sending just your iOS application's traces to Datadog, see [iOS Trace C
     val tracedHosts = listOf("example.com", "example.eu")
 
     val okHttpClient = OkHttpClient.Builder()
-        .addInterceptor(DatadogInterceptor(tracedHosts))
-        .addNetworkInterceptor(TracingInterceptor(tracedHosts))
+        .addInterceptor(DatadogInterceptor.Builder(tracedHosts).build())
+        .addNetworkInterceptor(TracingInterceptor.Builder(tracedHosts).build())
         .eventListenerFactory(DatadogEventListener.Factory())
         .build()
     ```
@@ -163,11 +163,17 @@ To start sending just your iOS application's traces to Datadog, see [iOS Trace C
 
 3.  _(Optional)_ Configure the `traceSampler` parameter to keep a defined percentage of the backend traces. If not set, 20% of the traces coming from application requests are sent to Datadog. To keep 100% of backend traces:
 
-```kotlin
-    val okHttpClient = OkHttpClient.Builder()
-       .addInterceptor(DatadogInterceptor(traceSampler = RateBasedSampler(100f)))
-       .build()
-```
+    ```kotlin
+        val tracedHosts = listOf("example.com")
+
+        val okHttpClient = OkHttpClient.Builder()
+        .addInterceptor(
+            DatadogInterceptor.Builder(tracedHosts)
+                .setTraceSampler(RateBasedSampler(100f))
+                .build()
+        )
+        .build()
+    ```
 
 **Note**:
 * `traceSampler` **does not** impact RUM sessions sampling. Only backend traces are sampled out.
@@ -310,6 +316,50 @@ To start sending just your iOS application's traces to Datadog, see [iOS Trace C
 
 
 {{% /tab %}}
+{{% tab "Kotlin Multiplatform RUM" %}}
+
+1. Set up [RUM Kotlin Multiplatform Monitoring][1].
+2. Set up [Ktor instrumentation][2].
+
+3. Set the `tracedHosts` initialization parameter in the Datadog Ktor Plugin configuration to define the list of internal, first-party origins called by your Kotlin Multiplatform application:
+    ```kotlin
+    val ktorClient = HttpClient {
+        install(
+            datadogKtorPlugin(
+                tracedHosts = mapOf(
+                    "example.com" to setOf(TracingHeaderType.DATADOG),
+                    "example.eu" to setOf(TracingHeaderType.DATADOG)
+                ),
+                traceSampleRate = 100f
+            )
+        )
+    }
+    ```
+
+    By default, all subdomains of listed hosts are traced. For instance, if you add `example.com`, you also enable tracing for `api.example.com` and `foo.example.com`.
+
+4. _(Optional)_ Set the `traceSampleRate` initialization parameter to keep a defined percentage of the backend traces. If not set, 20% of the traces coming from application requests are sent to Datadog.
+
+     To keep 100% of backend traces:
+    ```kotlin
+    val ktorClient = HttpClient {
+        install(
+            datadogKtorPlugin(
+                tracedHosts = mapOf(
+                    "example.com" to setOf(TracingHeaderType.DATADOG),
+                    "example.eu" to setOf(TracingHeaderType.DATADOG)
+                ),
+                traceSampleRate = 100f
+            )
+        )
+    }
+    ```
+
+    **Note**: `traceSampleRate` **does not** impact RUM sessions sampling. Only backend traces are sampled out.
+
+[1]: /real_user_monitoring/mobile_and_tv_monitoring/kotlin_multiplatform/setup
+[2]: /real_user_monitoring/mobile_and_tv_monitoring/kotlin_multiplatform/setup?tab=rum#initialize-the-rum-ktor-plugin-to-track-network-events-made-with-ktor
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Verifying setup
@@ -373,6 +423,18 @@ To verify you've configured the APM integration with RUM, follow the steps below
 [3]: https://docs.datadoghq.com/real_user_monitoring/platform/connect_rum_and_traces/?tab=reactnativerum#how-are-rum-resources-linked-to-traces
 
 {{% /tab %}}
+{{% tab "Kotlin Multiplatform" %}}
+
+1. Run your application from Xcode (iOS) or Android Studio (Android).
+2. Visit a screen in your application.
+3. Open Xcode's [Network Connections and HTTP Traffic instrument][1] or Android Studio's [Network Inspector][2].
+4. Check the request headers for a RUM resource and verify that the [required headers are set by the SDK][3].
+
+[1]: https://developer.apple.com/documentation/foundation/url_loading_system/analyzing_http_traffic_with_instruments
+[2]: https://developer.android.com/studio/debug/network-profiler#network-inspector-overview
+[3]: /real_user_monitoring/platform/connect_rum_and_traces/?tab=kotlinmultiplatformrum#how-are-rum-resources-linked-to-traces
+
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Supported libraries
@@ -418,7 +480,7 @@ The default injection style is `tracecontext`, `Datadog`.
 
     `propagatorTypes` accepts a list of strings for desired propagators:
       - `datadog`: Datadog's propagator (`x-datadog-*`)
-      - `tracecontext`: [W3C Trace Context](https://www.w3.org/TR/trace-context/) (`traceparent`)
+      - `tracecontext`: [W3C Trace Context](https://www.w3.org/TR/trace-context/) (`traceparent`, `tracestate`)
       - `b3`: [B3 single header](https://github.com/openzipkin/b3-propagation#single-header) (`b3`)
       - `b3multi`: [B3 multiple headers](https://github.com/openzipkin/b3-propagation#multiple-headers) (`X-B3-*`)
 
@@ -461,8 +523,8 @@ The default injection style is `tracecontext`, `Datadog`.
                           "example.eu" to setOf(TracingHeaderType.DATADOG))
 
     val okHttpClient = OkHttpClient.Builder()
-        .addInterceptor(DatadogInterceptor(tracedHosts))
-        .addNetworkInterceptor(TracingInterceptor(tracedHosts))
+        .addInterceptor(DatadogInterceptor.Builder(tracedHosts).build())
+        .addNetworkInterceptor(TracingInterceptor.Builder(tracedHosts).build())
         .eventListenerFactory(DatadogEventListener.Factory())
         .build()
     ```
@@ -524,6 +586,32 @@ The default injection style is `tracecontext`, `Datadog`.
 
 {{% /tab %}}
 
+{{% tab "Kotlin Multiplatform RUM" %}}
+1. Set up RUM to [connect with APM](#setup-rum).
+
+2. Configure the RUM SDK with the list of internal, first-party origins and the tracing header type to use as follows:
+    ```kotlin
+    val ktorClient = HttpClient {
+        install(
+            datadogKtorPlugin(
+                tracedHosts = mapOf(
+                    "example.com" to setOf(TracingHeaderType.DATADOG),
+                    "example.eu" to setOf(TracingHeaderType.DATADOG)
+                ),
+                traceSampleRate = 100f
+            )
+        )
+    }
+    ```
+
+    `TracingHeaderType` is an enum representing the following tracing header types:
+      - `TracingHeaderType.DATADOG`: Datadog's propagator (`x-datadog-*`)
+      - `TracingHeaderType.TRACECONTEXT`: [W3C Trace Context](https://www.w3.org/TR/trace-context/) (`traceparent`)
+      - `TracingHeaderType.B3`: [B3 single header](https://github.com/openzipkin/b3-propagation#single-header) (`b3`)
+      - `TracingHeaderType.B3MULTI`: [B3 multiple headers](https://github.com/openzipkin/b3-propagation#multiple-headers) (`X-B3-*`)
+
+{{% /tab %}}
+
 {{< /tabs >}}
 
 
@@ -540,8 +628,8 @@ Datadog uses the distributed tracing protocol and sets up the HTTP headers below
 `x-datadog-origin: rum`
 : To make sure the generated traces from Real User Monitoring don't affect your APM Index Spans counts.
 
-`x-datadog-sampling-priority: 1`
-: To make sure that the Agent keeps the trace.
+`x-datadog-sampling-priority`
+: Set to `1` by the Real User Monitoring SDK if the trace was sampled, or `0` if it was not.
 {{% /tab %}}
 {{% tab "W3C Trace Context" %}}
 
@@ -551,8 +639,15 @@ Datadog uses the distributed tracing protocol and sets up the HTTP headers below
 : `parent id`: 64 bits span ID, hexadecimal on 16 characters.
 : `trace flags`: Sampled (`01`) or not sampled (`00`)
 
+`tracestate: dd=s:[sampling priority];o:[origin]`
+: `dd`: Datadog's vendor prefix.
+: `sampling priority`: Set to `1` if the trace was sampled, or `0` if it was not.
+: `origin`: Always set to `rum` to make sure the generated traces from Real User Monitoring don't affect your APM Index Spans counts.
+
 Example:
 : `traceparent: 00-00000000000000008448eb211c80319c-b7ad6b7169203331s-01`
+: `tracestate: dd=s:1;o:rum`
+
 {{% /tab %}}
 {{% tab "b3 / b3 Multiple Headers" %}}
 `b3: [trace id]-[span id]-[sampled]`
