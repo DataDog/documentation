@@ -86,7 +86,7 @@ Instrument your main application with the `dd-trace-dotnet` library.
    RUN mkdir -p /datadog/tracer
    RUN mkdir -p /home/LogFiles/dotnet
 
-   ADD https://github.com/DataDog/dd-trace-dotnet/releases/download/v2.51.0/datadog-dotnet-apm-2.49.0.tar.gz /datadog/tracer
+   ADD https://github.com/DataDog/dd-trace-dotnet/releases/download/v2.51.0/datadog-dotnet-apm-2.51.0.tar.gz /datadog/tracer
    RUN cd /datadog/tracer && tar -zxf datadog-dotnet-apm-2.49.0.tar.gz
    {{< /code-block >}}
 
