@@ -7,7 +7,7 @@ further_reading:
 ---
 
 {{< callout btn_hidden="true" header="Join the Preview!">}}
-Budgeting is in Preview.
+Budgeting is in Preview. To request access, contact your CSM.
 {{< /callout >}}
 
 ## Overview
