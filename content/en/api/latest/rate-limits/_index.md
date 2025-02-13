@@ -29,7 +29,7 @@ The list above is not comprehensive of all rate limits on Datadog APIs. If you a
 | `X-RateLimit-Reset`     | time in seconds until next reset.                        |
 | `X-RateLimit-Name`      | name of the rate limit for increase requests             |
 
-{{< h3 >}}Datadog API Usage Metrics{{< /h3 >}}
+### Datadog API Usage Metrics
 
 All Datadog APIs have a limit to the amount of usage in a given period of time. APIs can have unique, distinct rate limit buckets or be grouped together into a single bucket depending on the resource(s) being used. For example, the monitor status API has a rate limit that allows a human or automation script to query only so many times per minute. The endpoint rejects excess requests with a 429 response code and a hint to back off until a reset period has expired. API usage metrics allow Datadog users to self-service and audit API rate limit consumption for API endpoints (exclusive of metrics, logs, and event submission endpoints). These metrics provide a picture of allowed and blocked requests and are provided with the following dimensions and available tags:
 
