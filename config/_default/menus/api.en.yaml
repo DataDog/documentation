@@ -4987,46 +4987,6 @@ menu:
           - CreateCIAppPipelineEvent
         unstable: []
         order: 1
-    - name: CI Visibility Tests
-      url: /api/latest/ci-visibility-tests/
-      identifier: ci-visibility-tests
-      generated: true
-    - name: Search tests events
-      url: '#search-tests-events'
-      identifier: ci-visibility-tests-search-tests-events
-      parent: ci-visibility-tests
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - SearchCIAppTestEvents
-        unstable: []
-        order: 2
-    - name: Get a list of tests events
-      url: '#get-a-list-of-tests-events'
-      identifier: ci-visibility-tests-get-a-list-of-tests-events
-      parent: ci-visibility-tests
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - ListCIAppTestEvents
-        unstable: []
-        order: 1
-    - name: Aggregate tests events
-      url: '#aggregate-tests-events'
-      identifier: ci-visibility-tests-aggregate-tests-events
-      parent: ci-visibility-tests
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - AggregateCIAppTestEvents
-        unstable: []
-        order: 3
     - name: CSM Agents
       url: /api/latest/csm-agents/
       identifier: csm-agents
@@ -8402,6 +8362,46 @@ menu:
           - ListTeams
         unstable: []
         order: 1
+    - name: Test Optimization
+      url: /api/latest/test-optimization/
+      identifier: test-optimization
+      generated: true
+    - name: Search tests events
+      url: '#search-tests-events'
+      identifier: test-optimization-search-tests-events
+      parent: test-optimization
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - SearchCIAppTestEvents
+        unstable: []
+        order: 2
+    - name: Get a list of tests events
+      url: '#get-a-list-of-tests-events'
+      identifier: test-optimization-get-a-list-of-tests-events
+      parent: test-optimization
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListCIAppTestEvents
+        unstable: []
+        order: 1
+    - name: Aggregate tests events
+      url: '#aggregate-tests-events'
+      identifier: test-optimization-aggregate-tests-events
+      parent: test-optimization
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - AggregateCIAppTestEvents
+        unstable: []
+        order: 3
     - name: Workflow Automation
       url: /api/latest/workflow-automation/
       identifier: workflow-automation
