@@ -5704,6 +5704,11 @@ menu:
       parent: automation_pipelines
       identifier: automation_pipelines_inbox
       weight: 10002
+    - name: Set Due Date Rules
+      url: security/automation_pipelines/set_due_date
+      parent: automation_pipelines
+      identifier: automation_pipelines_due_date
+      weight: 10003
     - name: Security Inbox
       url: security/security_inbox
       parent: security_platform
