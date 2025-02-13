@@ -64,7 +64,7 @@ When you create a new **Dataproc Cluster on Compute Engine** in the [Google Clou
 
     When your cluster is created, this initialization action installs the Datadog Agent and downloads the Java tracer on each node of the cluster.
 
-1. **Optional**: Enable logs collection for your cluster by following the Dataproc integration [Log collection setup][14] steps. Application logs will be correlated to Spark job run traces.
+1. **Optional**: Enable logs collection for your cluster by following the Dataproc integration [Log collection setup][14] steps. This correlates application logs to Spark job run traces.
 
 
 ### Specify service tagging per Spark application
