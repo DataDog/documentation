@@ -99,6 +99,8 @@ Logs are billed separately from CI Visibility. Log retention, exclusion, and ind
 
 If you are using self-hosted GitHub runners, you can correlate jobs with the hosts running them by ensuring that the GitHub runner name matches the hostname of the machine. CI Visibility uses this information to link to infrastructure metrics.
 
+If you are using Actions Runner Controller, you can correlate jobs by having the DataDog Agent reporting data from the clusters where the GitHub jobs are being ran.
+
 To see the metrics, click on a job span in the trace view. A window opens with an **Infrastructure** tab displaying the host metrics.
 
 ## Visualize pipeline data in Datadog
