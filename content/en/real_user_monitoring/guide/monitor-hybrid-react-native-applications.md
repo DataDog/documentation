@@ -22,7 +22,7 @@ RUM Events from both of these sources are reported as coming from the same appli
   - Through *auto-instrumentation* - Some React classes and methods are modified to automate this. Auto-instrumentation for JavaScript errors, resources, and interactions can only be started from JavaScript code.
   - Through *manual instrumentation* - For example, if you want to report something that you consider an error, but which is not going to crash the app. 
 - You can share the same instance of the core SDK between native and React Native without having to initialize the SDK on both sides separately. This allows you to initialize the native SDK on either the native side or on the React Native side (by calling `DdSdkReactNative.initialize`) and have it initialized for both sides, with events appearing in the same RUM session. React Native uses the default core instance. This means that you can use *manual instrumentation* on both sides, but *auto-instrumentation* is only activated for the side that the SDK was initialized.
-- You can report Datadog RUM events or logs only after the initialization. If you have not initialized the SDK yet, events and legs are not sent.
+- You can report Datadog RUM events or logs only after the initialization. If you have not initialized the SDK yet, events and logs are not sent.
 - You cannot change the source attribute of a RUM session - all your RUM events appear under the same source.
 
 ## Monitor React Native apps with native content
