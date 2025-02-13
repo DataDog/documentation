@@ -5121,6 +5121,11 @@ menu:
       parent: observability_pipelines
       identifier: observability_pipelines_sources
       weight: 6
+    - name: Amazon Data Firehose
+      url: observability_pipelines/sources/amazon_data_firehose/
+      parent: observability_pipelines_sources
+      identifier: observability_pipelines_sources_amazon_data_firehose
+      weight: 601
     - name: Amazon S3
       url: observability_pipelines/sources/amazon_s3/
       parent: observability_pipelines_sources
