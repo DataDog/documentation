@@ -37,27 +37,27 @@
 "description": "Supervisa errores de puerta de enlace (Gateway), coincidencias y errores de caché y latencia de solicitud."
 "display_on_public_website": verdadero
 "doc_link": "https://docs.datadoghq.com/integrations/amazon_api_gateway/"
-"draft": falso
+"draft": false
 "git_integration_title": "amazon_api_gateway"
-"has_logo": verdadero
+"has_logo": true
 "integration_id": "amazon-api-gateway"
 "integration_title": "Amazon Api Gateway"
 "integration_version": ""
-"is_public": verdadero
+"is_public": true
 "manifest_version": "2.0.0"
 "name": "amazon_api_gateway"
 "public_title": "Integración de Amazon Api Gateway"
-"short_description": "Amazon API Gateway es un servicio administrado para APIs".
+"short_description": "Amazon API Gateway es un servicio administrado para APIs"
 "supported_os": []
 "tile":
   "changelog": "CHANGELOG.md"
   "classifier_tags":
-  - "Category::AWS"
-  - "Category::Métricas"
-  - "Category::Cloud"
-  - "Offering::Integration"
+    - "Category::AWS"
+    - "Category::Métricas"
+    - "Category::Cloud"
+    - "Offering::Integration"
   "configuration": "README.md#Setup"
-  "description": "Amazon API Gateway es un servicio administrado para APIs".
+  "description": "Amazon API Gateway es un servicio administrado para APIs"
   "media": []
   "overview": "README.md#Overview"
   "support": "README.md#Support"

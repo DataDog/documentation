@@ -58,15 +58,15 @@ Integrarse con Microsoft Teams para:
 - Recibir notificaciones de alertas en Datadog y eventos en Microsoft Teams.
 - Gestionar las incidencias desde Microsoft Teams.
 - Silenciar los monitores activados directamente desde Microsoft Teams.
-  {{< /site-region >}}
-  {{< site-region region="gov" >}}
+{{< /site-region >}}
+{{< site-region region="gov" >}}
 - Recibir notificaciones de alertas en Datadog y eventos en Microsoft Teams.
 - Silenciar los monitores activados directamente desde Microsoft Teams.
-  {{< /site-region >}}
+{{< /site-region >}}
 
 ## Configuración
 
-{{< pestañas >}}
+{{< tabs >}}
 
 {{% tab "Aplicación Datadog (recomendado)" %}}
 
@@ -90,14 +90,14 @@ Asegúrate de haber añadido la aplicación Datadog para el Gobierno a todos los
 2. En la barra de herramientas vertical, haz clic en **Apps** (Aplicaciones).
 3. Busca "Datadog" y haz clic en **Open** (Abrir).
 4. En el modal que se abre, selecciona el canal principal del equipo donde debe añadirse la aplicación. Haz clic en **Go** (Listo) para completar la instalación.
-   {{< /site-region >}}
+{{< /site-region >}}
 
 {{< site-region region="gov" >}}
 1. Abre Microsoft Teams.
 2. En la barra de herramientas vertical, haz clic en **Apps** (Aplicaciones).
 3. Busca "Datadog para el Gobierno" y haz clic en **Open** (Abrir).
 4. En el modal que se abre, selecciona el canal principal del equipo donde debe añadirse la aplicación. Haz clic en **Go** (Listo) para completar la instalación.
-   {{< /site-region >}}
+{{< /site-region >}}
 
 {{< site-region region="us,us3,us5,eu,ap1" >}}
 {{< img src="integrations/microsoft_teams/microsoft_teams_add_app_to_team.png" alt="Microsoft Teams Añadir aplicación al equipo" >}}

@@ -56,11 +56,12 @@ Microsoft Teams와 통합하면 다음과 같은 작업을 할 수 있습니다.
 - Microsoft Teams에서 Datadog 경고 및 이벤트 알림 받기.
 - Microsoft Teams 내에서 인시던트 관리.
 - Microsoft Teams에서 직접 트리거된 모니터링 음소거.
-  {{< /site-region >}}
-  {{ < site-region region="gov" > }}
+{{< /site-region >}}
+
+{{< site-region region="gov" >}}
 - Microsoft Teams에서 Datadog 경고 및 이벤트 알림 받기.
 - Microsoft Teams에서 직접 트리거된 모니터링 음소거.
-  {{< /site-region >}}
+{{< /site-region >}}
 
 ## 설정
 
@@ -88,14 +89,14 @@ Datadog 알림을 받으려는 모든 팀에 Datadog for Government 앱을 추�
 2. 세로 도구 모음에서 **앱**을 클릭합니다.
 3. "Datadog"을 검색하고 **열기**를 클릭합니다.
 4. 열리는 모달에서 앱을 추가할 팀의 기본 채널을 선택합니다. **이동**을 클릭하여 설치를 완료합니다.
-   {{< /site-region >}}
+{{< /site-region >}}
 
-{{ < site-region region="gov" > }}
+{{< site-region region="gov" >}}
 1. Microsoft Teams를 엽니다.
 2. 세로 도구 모음에서 **앱**을 클릭합니다.
 3. "Datadog for Government"를 검색하고 **열기**를 클릭합니다.
 4. 열리는 모달에서 앱을 추가할 팀의 기본 채널을 선택합니다. **이동**을 클릭하여 설치를 완료합니다.
-   {{< /site-region >}}
+{{< /site-region >}}
 
 {{< site-region region="us,us3,us5,eu,ap1" >}}
 {{< img src="integrations/microsoft_teams/microsoft_teams_add_app_to_team.png" alt="Microsoft Teams이 팀에 앱 추가" >}}
@@ -132,7 +133,7 @@ Microsoft는 Microsoft Teams용 Office 365 커넥터를 지원 중단한다고 �
 
 {{< /site-region >}}
 
-{{ < site-region region="gov" > }}
+{{< site-region region="gov" >}}
 1. [설정 단계](#setup)에 따라 Microsoft 테넌트를 Datadog에 연결합니다.
 2. 레거시 Office 365 커넥터가 설정된 모든 팀에 Datadog for Government 앱을 추가합니다.
 3. [Microsoft Teams 통합 타일][1]의 각 레거시 알림 커넥터 핸들에 대해
@@ -141,7 +142,6 @@ Microsoft는 Microsoft Teams용 Office 365 커넥터를 지원 중단한다고 �
    3. 레거시 커넥터 핸들이 메시지를 전송하던 원하는 팀과 채널을 드롭다운 메뉴에서 선택하고 **저장**을 클릭합니다. 이 신규 핸들은 기존 레거시 커넥터 핸들을 재정의합니다.
 
 [1]: https://app.datadoghq.com/integrations/microsoft-teams
-
 {{< /site-region >}}
 
 ### 사용법

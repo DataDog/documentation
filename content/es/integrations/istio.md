@@ -19,7 +19,7 @@
       - "istio.mesh.request.count"
       - "istio.galley.endpoint_no_pod"
       "metadata_path": "metadata.csv"
-      "prefix": "istio".
+      "prefix": "istio"
     "process_signatures":
     - "pilot-agent proxy router"
     - "envoy envoy-rev0.json"
@@ -60,7 +60,7 @@
 "manifest_version": "2.0.0"
 "name": "istio"
 "public_title": "Istio"
-"short_description": "Recopila métricas de esquemas de rendimiento, rendimiento de consultas, métricas personalizadas y mucho más".
+"short_description": "Recopila métricas de esquemas de rendimiento, rendimiento de consultas, métricas personalizadas y mucho más"
 "supported_os":
 - "linux"
 - "windows"
@@ -79,7 +79,7 @@
   - "Submitted Data Type::Trazas (traces)"
   - "Offering::Integración"
   "configuration": "README.md#Configuración"
-  "description": "Recopila métricas de esquema de rendimiento, rendimiento de consultas, métricas personalizadas y mucho más".
+  "description": "Recopila métricas de esquema de rendimiento, rendimiento de consultas, métricas personalizadas y mucho más"
   "media": []
   "overview": "README.md#Información general"
   "resources":

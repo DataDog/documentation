@@ -245,7 +245,6 @@ datadog:
 ```
 {{% /tab %}}
 
-{{% /tab %}}
 {{% tab "Operator" %}}
 `datadog-agent.yaml` ファイルに `DD_PROCESS_CONFIG_RUN_IN_CORE_AGENT_ENABLED` 構成を追加します。
 
