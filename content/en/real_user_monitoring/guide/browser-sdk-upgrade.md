@@ -79,7 +79,7 @@ The default value for the `traceContextInjection` initialization parameter has b
 #### Enabling compression for Datadog intake requests
 
 Compression for Datadog intake requests will be enabled by default in a future major version.
-Datadog recommends that you opt-in to compression now using the `compressIntakeRequest` [initialization parameter][28].
+Datadog recommends that you opt-in to compression now using the `compressIntakeRequests` [initialization parameter][28].
 Since compression is performed in a Worker thread, configuring the Content Security Policy is necessary. See [CSP guidelines][18] for more information.
 
 ## From v4 to v5

@@ -22,7 +22,7 @@ The following languages and technologies are supported:
 {{< partial name="code_security/sca-getting-started.html" >}}
 
 SCA supports both static and runtime dependency detection:
-- For static detection, you can scan via your CI/CD pipelines or directly via Datadog with hosted scanning (GitHub-only). Go to the [**Code Security** setup page][13] or see [static setup][1] to get started.
+- For static detection, you can scan via your CI/CD pipelines or directly via Datadog with hosted scanning (GitHub-only). Go to the [Code Security setup page][4] or see [static setup][1] to get started.
 - For runtime detection, you can easily enable SCA on your services instrumented with Datadog APM. See [runtime setup][2] to get started.
 
 ## Search and filter results
