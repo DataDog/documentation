@@ -84,7 +84,6 @@ The following monitor types are not supported by the provisional status page:
 
 The following features are not supported by the provisional status page:
 
-- Custom schedules
 - Notification grouping
 
 
