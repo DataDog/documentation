@@ -17,7 +17,7 @@ JavaScript is available in Workflows using inline expressions or through the ded
 
 ## Inline JavaScript expressions
 
-You can use JavaScript (JS) expressions directly in workflow steps to perform a wide range of data transformations without needing to include dedicated expression steps.
+You can use JavaScript (JS) expressions directly in workflow steps to perform a wide range of data transformations without needing to include dedicated JS steps.
 
 To use an inline expression in your workflow, enclose the expression in `${}`. For example, to convert a string ID (`Trigger.stringId`) to an integer, use `${ parseInt(Trigger.stringId) }`.
 
