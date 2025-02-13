@@ -3,7 +3,6 @@ title: Simplify API Management
 aliases:
   - /tracing/software_catalog/guides/api_management
   - /software_catalog/guides/api_management
-  - /software_catalog/use_cases/api_management
   - /tracing/service_catalog/guides/api_management
   - /service_catalog/guides/api_management
   - /service_catalog/use_cases/api_management
