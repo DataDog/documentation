@@ -329,7 +329,7 @@ Amazon Elastic Kubernetes Service (EKS) supports monitoring all control plane co
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
 
-Operator installations are limited to API Server [metrics][1]. For support for `kube_controller_manager` and `kube_scheduler` metrics, use the Helm install.
+Add the following annotations. Operator installations are limited to API Server [metrics][1]. For support for `kube_controller_manager` and `kube_scheduler` metrics, use the Helm install.
 
 ```yaml
 annotations:
