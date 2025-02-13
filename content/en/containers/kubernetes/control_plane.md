@@ -317,17 +317,20 @@ scheduler:
 
 ## Kubernetes on Amazon EKS {#EKS}
 
-Amazon Elastic Kubernetes Service (EKS) supports monitoring all control plane components using cluster checks. If you use Helm to install the Datadog agent, these metrics are available immediately by adding the following annotations to the `default/kubernetes` service. Operator installations are limited to API Server [metrics][5], but support for `kube_controller_manager` and `kube_scheduler` metrics is coming in Operator v1.13.0.
+Amazon Elastic Kubernetes Service (EKS) supports monitoring all control plane components using cluster checks. 
 
 ### Prerequisites
 - An EKS Cluster running on Kubernetes version >= 1.28
-- Deploy the Agent via one of:
-  - helm chart version >= `3.90.1`
-  - Operator >= `v1.13.0`
+- Deploy the Agent using one of:
+  - Helm chart version >= `3.90.1`
+  - Datadog Operator >= `v1.13.0`
 - Enable the Datadog [Cluster Agent][6]
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
+
+Operator installations are limited to API Server [metrics][1]. For support for `kube_controller_manager` and `kube_scheduler` metrics, use the Helm install.
+
 ```yaml
 annotations:
   ad.datadoghq.com/endpoints.check_names: '["kube_apiserver_metrics"]'
@@ -335,8 +338,13 @@ annotations:
   ad.datadoghq.com/endpoints.instances:
     '[{ "prometheus_url": "https://%%host%%:%%port%%/metrics", "bearer_token_auth": "true" }]'
 ```
+
+[1]: https://aws.github.io/aws-eks-best-practices/reliability/docs/controlplane/#monitor-control-plane-metrics
 {{% /tab %}}
 {{% tab "Helm" %}}
+
+Add the following annotations to the `default/kubernetes` service:
+
 ```yaml
 annotations:
   ad.datadoghq.com/endpoints.check_names: '["kube_apiserver_metrics"]'
