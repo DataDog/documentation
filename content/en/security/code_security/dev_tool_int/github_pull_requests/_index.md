@@ -56,13 +56,37 @@ The permissions you grant to the GitHub App determine which [GitHub integration]
 
 ### Enable Code Security PR comments for your repositories
 
-1. In Datadog, navigate to [**Security** > **Code Security** > **Settings**][4].
+1. In Datadog, navigate to [**Security** > **Code Security** > **Setup**][4].
 2. In **Enable scanning for your repositories**, select **Edit** next to a given repository.
 3. Toggle **Enable Static Analyis** to on.
 
 **Note:** If you are using [GitHub Actions][6] to run your scans, trigger the action on `push` in order for comments to appear.
 
-### Fixing a vulnerability directly from Datadog 
+### Configure PR comment settings for your repositories
+
+You can configure PR comment settings globally for all repositories or individually for a single repository. These configurations enable PR comments for different scan types and allow you to set minimum severity thresholds.
+
+To configure PR comments for all repositories:
+
+1. In Datadog, navigate to [**Security** > **Code Security** > **Settings**][7].
+1. In **Repository Settings**, click **Global PR Comment Configuration**. 
+    - Toggle the switches for your preferred settings:
+        - **Enable PR comments for all scan types and severities** 
+        - **Enable for Static Analysis (SAST)** and specify a minimum severity threshold.
+        - **Enable for Infrastructure-as-Code (IaC)** and specify a minimum severity threshold.
+1. Click **Save**.
+
+To configure PR comments for a single repository:
+
+1. In Datadog, navigate to [**Security** > **Code Security** > **Settings**][7].
+1. In **Repository Settings**, select a repository from the list.
+    - Toggle the switches for your preferred settings:
+        - **Enable PR comments for all scan types and severities** 
+        - **Enable for Static Analysis (SAST)** and specify a minimum severity threshold.
+        - **Enable for Infrastructure-as-Code (IaC)** and specify a minimum severity threshold.
+1. Click **Save Configuration**.
+
+### Fix a vulnerability directly from Datadog
 
 If your GitHub app's **Pull Requests** permission is set to **Read & Write**, one-click remediation is enabled for all Static Code Analysis findings with an available suggested fix.
 
@@ -79,3 +103,4 @@ Follow these steps to fix a vulnerability and open a pull request:
 [4]: https://app.datadoghq.com/security/configuration/code-security/setup
 [5]: https://app.datadoghq.com/integrations/github/configuration
 [6]: /security/code_security/static_analysis/github_actions/
+[7]: https://app.datadoghq.com/security/configuration/code-security/settings
