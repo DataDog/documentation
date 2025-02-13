@@ -151,7 +151,7 @@ Navigate to [**Cloud Costs** > **Accounts**][18] and click on **Add Account** on
 
 You can configure account filters in step 4 of the setup process.
 
-{{< img src="cloud_cost/account_filtering/manage_account.png" alt="Account Filtering UI to filter AWS member accounts during setup" style="width:100%;" >}}
+{{< img src="cloud_cost/account_filtering/account_filtering_setup.png" alt="Account Filtering UI to filter AWS member accounts during setup" style="width:100%;" >}}
 
 #### Configure account filters for existing account
 
