@@ -1741,6 +1741,10 @@
     "request_description": "",
     "request_schema_description": "Test the rule queries of a rule (rule property is ignored when applied to an existing rule)"
   },
+  "GetRuleVersionHistory": {
+    "description": "Get a rule's version history.",
+    "summary": "Get a rule's version history"
+  },
   "ListSecurityMonitoringSignals": {
     "description": "The list endpoint returns security signals that match a search query.\nBoth this endpoint and the POST endpoint can be used interchangeably when listing\nsecurity signals.",
     "summary": "Get a quick list of security signals"
