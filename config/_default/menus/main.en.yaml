@@ -5760,10 +5760,10 @@ menu:
       parent: cloud_siem_detection_rules
       identifier: cloud_siem_signal_correlation_rules
       weight: 20500
-    - name: ATT&CK Map
-      url: security/cloud_siem/detection_rules/attack_map
+    - name: MITRE ATT&CK Map
+      url: security/cloud_siem/detection_rules/mitre_attack_map
       parent: cloud_siem_detection_rules
-      identifier: cloud_siem_attack_map
+      identifier: cloud_siem_mitre_attack_map
       weight: 20510
     - name: OOTB Rules
       url: /security/default_rules/#cat-cloud-siem-log-detection

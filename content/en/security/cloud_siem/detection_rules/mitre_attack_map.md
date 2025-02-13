@@ -1,6 +1,8 @@
 ---
-title: ATT&CK Map
+title: MITRE ATT&CK Map
 disable_toc: false
+aliases:
+  - /security/cloud_siem/detection_rules/attack_map
 further_reading:
 - link: "/security/cloud_siem/detection_rules/"
   tag: "Documentation"
@@ -9,15 +11,15 @@ further_reading:
 
 ## Overview
 
-<div class="alert alert-warning">The ATT&CK Map only covers <a href="https://attack.mitre.org/matrices/enterprise/">MITRE ATT&CK Enterprise.</a></div>
+<div class="alert alert-warning">The MITRE ATT&CK Map only covers <a href="https://attack.mitre.org/matrices/enterprise/">MITRE ATT&CK Enterprise.</a></div>
 
-The MITRE ATT&CK Framework is a knowledge base used to develop specific threat models and methodologies. Use the Cloud SIEM ATT&CK Map to explore and visualize the MITRE ATT&CK Framework against Datadog's out-of-the-box rules and your custom detection rules. The ATT&CK Map displays detection rule density as a heat map to provide visibility into attacker techniques. Your security teams can use the heat map to assess gaps in coverage that is relevant to their organization or team and prioritize improvements to their detection rule defenses.
+The MITRE ATT&CK Framework is a knowledge base used to develop specific threat models and methodologies. Use the Cloud SIEM MITRE ATT&CK Map to explore and visualize the MITRE ATT&CK Framework against Datadog's out-of-the-box rules and your custom detection rules. The MITRE ATT&CK Map displays detection rule density as a heat map to provide visibility into attacker techniques. Your security teams can use the heat map to assess gaps in coverage that is relevant to their organization or team and prioritize improvements to their detection rule defenses.
 
-## View detection rules in the ATT&CK Map
+## View detection rules in the MITRE ATT&CK Map
 
 To view detection rules against the MITRE ATT&CK Framework:
 1. Navigate to the [Detection Rules][1] page.
-1. Click the **ATT&CK Map** button located next to **Rules List**.
+1. Click the **MITRE ATT&CK Map** button located next to **Rules List**.
 
 The default view of the map shows all Datadog out-of-the-box and custom rules for active sources, broken down into different attack techniques. Active sources are the sources of logs found and analyzed in the Cloud SIEM index.
 
@@ -31,7 +33,7 @@ Click the rule density buttons to visualize the map for a specific number of rul
 
 To view more information about a technique and the rules monitoring the technique:
 
-1. On the [ATT&CK Map][3] page, click on a technique tile.
+1. On the [MITRE ATT&CK Map][3] page, click on a technique tile.
 1. Click **Create Custom Rule** if you want to create a custom rule for this technique. See [Detection Rules][4] for more information on creating custom rules.
 1. In the **Rules monitoring this Technique** section, you can:
 	1. Enter a search query to filter to specific rules.
@@ -49,7 +51,7 @@ This is an example of the format you need to use for tagging custom rules and th
 - `technique: <technique number>-<technique name>`
     - For example: `technique:T1566-Phishing`
 
-**Note**: The tactic and technique need to be based on the MITRE ATT&CK version stated on the [ATT&CK Map][3] page.
+**Note**: The tactic and technique need to be based on the MITRE ATT&CK version stated on the [MITRE ATT&CK Map][3] page.
 
 ## Further reading
 
