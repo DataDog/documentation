@@ -196,7 +196,7 @@ You can create monitors from the **Monitors** tab, or click on the Settings icon
 - The size of a reference table file uploaded through an integration can be up to 200 MB
 - You can have up to 100 reference tables per organization
 
-Please reach out to support if you have a use case that exceed said limits.
+Reach out to [support][5] if you have a use case that exceed these limits.
 
 
 ## Further Reading
