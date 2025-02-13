@@ -148,7 +148,7 @@ This configuration example protects all supported data from `NewService`.
 
 ### Teams and roles
 
-Data Access Control supports granting access to users through Datadog roles or teams. When granting access, consider your existing access control configuration and access strategy. If you are pursuing a service-based approach and are already [customizing the Service Catalog][9], take advantage of the service ownership model by using Teams as part of your Data Access Control configuration.
+Data Access Control supports granting access to users through Datadog roles or teams. When granting access, consider your existing access control configuration and access strategy. If you are pursuing a service-based approach and are already [customizing the Software Catalog][9], take advantage of the service ownership model by using Teams as part of your Data Access Control configuration.
 
 **Note:** Teams used for Data Access Control must be configured such that adding or removing users can only be done by team members or an administrator, not `Anyone in the organization`.
 
@@ -180,4 +180,4 @@ When querying data through Datadog APIs with restrictions enabled, users without
 [6]: https://app.datadoghq.com/organization-settings/
 [7]: https://app.datadoghq.com/organization-settings/data-access-controls/
 [8]: /data_security/
-[9]: /service_catalog/customize/
+[9]: /software_catalog/customize/
