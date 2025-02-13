@@ -33,6 +33,13 @@ The list above is not comprehensive of all rate limits on Datadog APIs. If you a
 
 All Datadog APIs have a limit to the amount of usage in a given period of time. APIs can have unique, distinct rate limit buckets or be grouped together into a single bucket depending on the resource(s) being used. For example, the monitor status API has a rate limit that allows a human or automation script to query only so many times per minute. The endpoint rejects excess requests with a 429 response code and a hint to back off until a reset period has expired. API usage metrics allow Datadog users to self-service and audit API rate limit consumption for API endpoints (exclusive of metrics, logs, and event submission endpoints). These metrics provide a picture of allowed and blocked requests and are provided with the following dimensions and available tags:
 
+{{% site-region region="us" %}}[Datadog API Rate Limit Usage Dashboard](https://app.datadoghq.com/dash/integration/31668/datadog-api-rate-limit-usage){{% /site-region %}}
+{{% site-region region="eu1" %}}[Datadog API Rate Limit Usage Dashboard](https://app.datadoghq.eu/dash/integration/1386/datadog-api-rate-limit-usage){{% /site-region %}}
+{{% site-region region="us3" %}}[Datadog API Rate Limit Usage Dashboard](https://us3.datadoghq.com/dash/integration/2248/datadog-api-rate-limit-usage){{% /site-region %}}
+{{% site-region region="us5" %}}[Datadog API Rate Limit Usage Dashboard](https://us5.datadoghq.com/dash/integration/1421/datadog-api-rate-limit-usage){{% /site-region %}}
+{{% site-region region="ap1" %}}[Datadog API Rate Limit Usage Dashboard](https://ap1.datadoghq.com/dash/integration/2698/datadog-api-rate-limit-usage){{% /site-region %}}
+{{% site-region region="gov" %}}[Datadog API Rate Limit Usage Dashboard](https://app.ddog-gov.com/dash/integration/1330/datadog-api-rate-limit-usage){{% /site-region %}}
+
 {{< h4 >}}Available Metrics{{< /h4 >}}
 
 <table>
