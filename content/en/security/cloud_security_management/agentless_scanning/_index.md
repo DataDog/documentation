@@ -132,5 +132,5 @@ To establish estimates on scanner costs, reach out to your [Datadog Customer Suc
 [8]: /sensitive_data_scanner
 [9]: /security/cloud_security_management
 [10]: /agent/remote_config
-[11]: /sensitive_data_scanner/library_rules/
+[11]: /sensitive_data_scanner/scanning_rules/library_rules/
 [12]: /help
