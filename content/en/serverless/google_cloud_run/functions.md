@@ -12,6 +12,8 @@ further_reading:
 
 Google Cloud Run is a fully managed serverless platform for deploying and scaling container-based applications. Datadog provides monitoring and log collection for Cloud Run functions (formerly Cloud Functions) through the [Google Cloud integration][1].
 
+<div class="alert alert-info">Datadog Serverless Monitoring is supported for Cloud Run functions (2nd gen). If you want to monitor 1st gen functions, contact your technical account manager.</div>
+
 ## Setup
 
 ### Application
@@ -131,7 +133,7 @@ To set up logging in your application, see [C# Log Collection][3]. To set up tra
 
 ### Containers
 {{< tabs >}}
-{{% tab "GCR UI" %}}
+{{% tab "GCR UI - Node.js, Python, Go, .NET" %}}
 
 #### Sidecar container
 
@@ -162,6 +164,15 @@ To set up logging in your application, see [C# Log Collection][3]. To set up tra
 1. Deploy your main application.
 
 [1]: https://app.datadoghq.com/organization-settings/api-keys
+{{% /tab %}}
+{{% tab "Java" %}}
+
+If you are using Java, you must use the [gcloud CLI][1] to deploy your function.
+
+<!-- more here -->
+
+
+[1]: https://cloud.google.com/sdk/gcloud/reference/beta/functions/deploy
 {{% /tab %}}
 {{< /tabs >}}
 
