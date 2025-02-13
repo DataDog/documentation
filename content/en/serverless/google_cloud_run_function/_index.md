@@ -2,7 +2,7 @@
 title: Google Cloud Run
 further_reading:
 
-  - link: 'https://www.datadoghq.com/blog/collect-traces-logs-from-cloud-run-with-datadog/'
+  - link: 'https://cloud.google.com/blog/products/serverless/google-cloud-functions-is-now-cloud-run-functions'
     tag: 'Blog'
     text: 'Collect traces, logs, and custom metrics from Cloud Run Functions'
 
