@@ -87,7 +87,7 @@ Instrument your main application with the `dd-trace-dotnet` library.
    RUN mkdir -p /home/LogFiles/dotnet
 
    ADD https://github.com/DataDog/dd-trace-dotnet/releases/download/v2.51.0/datadog-dotnet-apm-2.51.0.tar.gz /datadog/tracer
-   RUN cd /datadog/tracer && tar -zxf datadog-dotnet-apm-2.49.0.tar.gz
+   RUN cd /datadog/tracer && tar -zxf datadog-dotnet-apm-2.51.0.tar.gz
    {{< /code-block >}}
 
 2. Build the image and push it to your preferred container registry.
@@ -120,8 +120,8 @@ COPY --from=build /app/out ./
 RUN mkdir -p /datadog/tracer
 RUN mkdir -p /home/LogFiles/dotnet
 
-ADD https://github.com/DataDog/dd-trace-dotnet/releases/download/v2.49.0/datadog-dotnet-apm-2.49.0.tar.gz /datadog/tracer
-RUN cd /datadog/tracer && tar -zxf datadog-dotnet-apm-2.49.0.tar.gz
+ADD https://github.com/DataDog/dd-trace-dotnet/releases/download/v2.51.0/datadog-dotnet-apm-2.51.0.tar.gz /datadog/tracer
+RUN cd /datadog/tracer && tar -zxf datadog-dotnet-apm-2.51.0.tar.gz
 
 # Set the entry point for the application
 ENTRYPOINT ["dotnet", "<your dotnet app>.dll"]
