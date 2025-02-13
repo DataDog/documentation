@@ -17,117 +17,141 @@ further_reading:
 - link: /security/cloud_security_management/setup/supported_deployment_types
   tag: ドキュメント
   text: サポートされるデプロイメントタイプ
+- link: /security/guide/aws_fargate_config_guide
+  tag: ドキュメント
+  text: Datadog Security を使用するための AWS Fargate 構成ガイド
 - link: /security/cloud_security_management/guide/agent_variables/
   tag: ガイド
   text: Cloud Security Management Agent 変数
 title: Cloud Security Management の設定
 ---
 
-Datadog は、[Cloud Security Management (CSM)][6] のセットアップをサポートするガイド付きワークフローを提供しています。最初のステップは、使用したい機能を選択することです。その後、選択した機能の設定手順に従って構成を行います。
+## 概要
 
-<div class="alert alert-info">以下の手順は、新規の CSM ユーザー向けです。既存ユーザーで追加機能の有効化を希望する場合は、<a href="/security/cloud_security_management/setup/#enable-additional-features">追加機能を有効にする</a>を参照してください。</div>
+Cloud Security Management (CSM) を使い始めるには、以下を確認してください。
 
-1. [Cloud Security Management の紹介][10]ページで、**Get Started with Cloud Security Management** をクリックします。
-1. [Features][11] ページで、有効にしたい機能を選択します。
-1. **Start Using Cloud Security Management** をクリックし、選択内容を確認します。
+- [概要](#overview)
+- [エージェントレススキャニングを有効化する](#enable-agentless-scanning)
+- [追加のカバレッジのためにエージェントをデプロイする](#deploy-the-agent-for-additional-coverage)
+- [追加機能を有効化する](#enable-additional-features)
+  - [AWS CloudTrail ログ](#aws-cloudtrail-logs)
+  - [IaC スキャニング](#iac-scanning)
+  - [IaC リメディエーション](#iac-remediation)
+  - [クラウドインテグレーション経由でのデプロイ](#deploy-via-cloud-integrations)
+- [CSM を無効化する](#disable-csm)
+- [参考文献](#further-reading)
 
-{{< img src="security/csm/setup/features_selection_new_user2.png" alt="CSM Features ページ" width="100%">}}
+## Agent レススキャンの有効化
 
-選択内容を確認後、[Setup][3] ページが表示されます。このページの指示は選択した機能に基づいてカスタマイズされます。例えば、**Misconfigurations** を有効にすると、**Cloud Accounts** と **Hosts and Containers** セクションのみが表示されます。
+最も簡単に Cloud Security Management を始める方法は、[エージェントレススキャニングの有効化][1]です。エージェントレススキャニングを使用すると、Datadog Agent をインストールすることなく、AWS ホスト、稼働中のコンテナ、Lambda 関数、および稼働中の Amazon Machine Images (AMI) 内に存在する脆弱性を可視化できます。
 
-次の表は、各機能に応じて Setup ページに表示されるセクションを示しています。
+エージェントレススキャニングの詳細については、[Cloud Security Management Agentless Scanning][2] を参照してください。
+
+## 追加のカバレッジのために Agent をデプロイする
+
+より広範なカバレッジと追加機能を得るには、ホストに Datadog Agent をデプロイしてください。以下の表では、Agent ベースのデプロイによって提供される機能拡張を示しています。詳細については、[Agent での Cloud Security Management のセットアップ][3]を参照してください。
 
 <table>
-  <thead>
-    <tr>
-      <th style="width: 50%;">機能</th>
-      <th style="width: 50%;">セットアップページ</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Misconfigurations</td>
-      <td>
-        <ul style="font-size: 16px;">
-          <li><a href="/security/cloud_security_management/setup/cloud_accounts">Cloud Integrations</a></li>
-          <li><a href="/security/cloud_security_management/setup/agent">Hosts and Containers</a></li>
-          <li><a href="/security/cloud_security_management/setup/cloudtrail_logs">AWS CloudTrail Logs</a></li>
-          <li><a href="/security/cloud_security_management/setup/source_code_integrations">Source Code Integrations</a></li>
-        </ul>
-      </td>
-    </tr>
-    <tr>
-      <td>Threat Detection</td>
-      <td>
-        <ul style="font-size: 16px;">
-          <li><a href="/security/cloud_security_management/setup/agent">Hosts and Containers</a></li>
-          <li><a href="/security/guide/aws_fargate_config_guide/?tab=amazonecs#cloud-security-management">Serverless Resources</a></li>
-        </ul>
-      </td>
-    </tr>
-    <tr>
-      <td>Identity Risks (CIEM)<br><em>*要 Misconfigurations</em></td>
-      <td>
-        <ul style="font-size: 16px;">
-          <li><a href="/security/cloud_security_management/setup/cloudtrail_logs">AWS CloudTrail Logs</a></li>
-        </ul>
-      </td>
-    </tr>
-    <tr>
-      <td>Host Vulnerability Management</td>
-      <td>
-        <ul style="font-size: 16px;">
-          <li><a href="/security/cloud_security_management/setup/cloud_accounts">Cloud Integrations</a></li>
-          <li><a href="/security/cloud_security_management/setup/agent">Hosts and Containers</a></li>
-        </ul>
-      </td>
-    </tr>
-    <tr>
-      <td>Container Vulnerability Management</td>
-      <td>
-        <ul style="font-size: 16px;">
-          <li><a href="/security/cloud_security_management/setup/cloud_accounts">Cloud Integrations</a></li>
-          <li><a href="/security/cloud_security_management/setup/agent">Hosts and Containers</a></li>
-        </ul>
-      </td>
-    </tr>
-    <tr>
-      <td>AWS CloudTrail Logs<br><em>*要 Cloud SIEM</em></td>
-      <td>
-        <ul style="font-size: 16px;">
-          <li><a href="/security/cloud_security_management/setup/cloudtrail_logs">AWS CloudTrail Logs</a></li>
-        </ul>
-      </td>
-    </tr>
-  </tbody>
+<thead>
+<tr>
+<th>機能</th>
+<th>エージェントレス</th>
+<th>エージェントレス + Agent ベースのデプロイ</th>
+<th>Agent ベースのデプロイ</th>
+</tr>
+</thead>
+<tr>
+<td><strong><a href="/security/cloud_security_management/identity_risks">CSM Identity Risks</a></strong></td>
+<td>{{< X >}}</td>
+<td>{{< X >}}</td>
+<td></td>
+</tr>
+<tr>
+<td><strong><a href="/security/cloud_security_management/misconfigurations">CSM Misconfigurations</a></strong></td>
+<td>{{< X >}}</td>
+<td>{{< X >}}</td>
+<td>{{< X >}}</td>
+</tr>
+<tr>
+<td style="padding-left: 20px;"><a href="/security/default_rules/?search=host+benchmarks">ホストベンチマーク</a></td>
+<td></td>
+<td>{{< X >}}</td>
+<td>{{< X >}}</td>
+</tr>
+<tr>
+<td><strong><a href="/security/cloud_security_management/vulnerabilities">CSM Vulnerabilities</a></strong></td>
+<td>{{< X >}}</td>
+<td>{{< X >}}</td>
+<td>{{< X >}}</td>
+</tr>
+<tr>
+<td style="padding-left: 20px;">脆弱性の優先順位付け</td>
+<td>{{< X >}}</td>
+<td>{{< X >}}<br />ランタイムコンテキストを含む</td>
+<td>{{< X >}}<br />ランタイムコンテキストを含む</td>
+</tr>
+<tr>
+<td style="padding-left: 20px;">脆弱性の更新頻度</td>
+<td>12 時間</td>
+<td>リアルタイム</td>
+<td>リアルタイム</td>
+</tr>
+<tr>
+<td><strong><a href="/security/threats">CSM Threats</a></strong></td>
+<td></td>
+<td>{{< X >}}</td>
+<td>{{< X >}}</td>
+</tr>
+<tr>
+<td style="padding-left: 20px;">Threat detection</td>
+<td></td>
+<td>{{< X >}}</td>
+<td>{{< X >}}</td>
+</tr>
+<tr>
+<td><strong><a href="/security/security_inbox">Security Inbox</a></strong></td>
+<td>{{< X >}}</td>
+<td>{{< X >}}<br />より正確なインサイト付き</td>
+<td>{{< X >}}<br />より正確なインサイト付き</td>
+</tr>
 </table>
-
-<div class="alert alert-info">Agentless Scanning のセットアップ方法については、<a href="/security/cloud_security_management/setup/agentless_scanning">CSM Agentless Scanning のセットアップ</a>を参照してください。</div>
-
-{{< partial name="security-platform/CSW-billing-note.html" >}}
-
 
 ## 追加機能を有効にする
 
-[Features][11] ページに戻り、追加したい機能の **Enable** をクリックすることで、いつでも CSM の追加機能を有効にできます。このページはステータスページとしても機能しており、有効な機能や、構成が未完了の機能、未有効の機能が確認できます。
+### AWS CloudTrail ログ
 
-{{< img src="security/csm/setup/features_page.png" alt="CSM Features ページ" width="100%">}}
+AWS CloudTrail ログを活用して、[CSM Identity Risks][6] の利点を最大化しましょう。クラウドリソースの使用状況をより深く把握し、プロビジョニングされた権限と実際に使用されている権限の差が大きいユーザーやロールを特定できます。詳細については、[Cloud Security Management 向けの AWS CloudTrail ログの設定][4]をご覧ください。
+
+### IaC スキャニング
+
+Infrastructure as Code (IaC) スキャニングを GitHub と統合して、Terraform で定義されたクラウドリソースの誤構成を検出します。詳細については、[Cloud Security Management 向けの IaC スキャニングの設定][10]を参照してください。
+
+### IaC リメディエーション
+
+Terraform を用いた IaC リメディエーションを使うことで、GitHub 上でプルリクエストを作成し、誤構成を修正してアイデンティティリスクを軽減するコード変更を適用できます。詳細については、[Cloud Security Management 向けの IaC リメディエーションの設定][5]を参照してください。
+
+### クラウドインテグレーション経由でのデプロイ
+
+AWS、Azure、GCP 向けのリソーススキャニングを有効にすると、コンプライアンスセキュリティのカバレッジを監視し、IAM ベースの攻撃からクラウドインフラストラクチャーを保護できます。詳細については、[クラウドインテグレーションを介した Cloud Security Management のデプロイ][7]を参照してください。
+
+## CSM の無効化
+
+CSM の無効化については、以下のドキュメントを参照してください。
+
+- [CSM Vulnerabilities を無効化する][8]
+- [CSM Threats を無効化する][9]
 
 ## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/security/cloud_security_management/setup/agent
-[2]: /ja/security/cloud_security_management/setup/cloud_accounts
-[3]: https://app.datadoghq.com/security/configuration/csm/setup
-[4]: /ja/security/cloud_security_management/setup/agentless_scanning
-[5]: https://app.datadoghq.com/security/csm
-[6]: /ja/security/cloud_security_management/
-[7]: /ja/security/guide/aws_fargate_config_guide/
-[9]: https://app.datadoghq.com/security/getting-started
-[10]: https://app.datadoghq.com/security/csm/intro
-[11]: https://app.datadoghq.com/security/configuration/csm/features
-[12]: /ja/security/cloud_security_management/setup/threat_detection
-[13]: /ja/security/cloud_security_management/setup/identity_risks_ciem
-[14]: /ja/security/cloud_security_management/setup/host_vulnerability_management
-[15]: /ja/security/cloud_security_management/setup/container_vulnerability_management
+[1]: /ja/security/cloud_security_management/setup/agentless_scanning
+[2]: /ja/security/cloud_security_management/agentless_scanning
+[3]: /ja/security/cloud_security_management/setup/agent
+[4]: /ja/security/cloud_security_management/setup/cloudtrail_logs
+[5]: /ja/security/cloud_security_management/setup/iac_remediation
+[6]: /ja/security/cloud_security_management/identity_risks
+[7]: /ja/security/cloud_security_management/setup/cloud_accounts
+[8]: /ja/security/cloud_security_management/troubleshooting/vulnerabilities/#disable-csm-vulnerabilities
+[9]: /ja/security/cloud_security_management/troubleshooting/threats/#disable-csm-threats
+[10]: /ja/security/cloud_security_management/setup/iac_scanning
