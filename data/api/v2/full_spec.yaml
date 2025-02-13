@@ -13124,6 +13124,30 @@ components:
             $ref: '#/components/schemas/GetInterfacesData'
           type: array
       type: object
+    GetRuleVersionHistoryData:
+      description: Data for the rule version history.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/RuleVersionHistory'
+        id:
+          description: ID of the rule.
+          type: string
+        type:
+          $ref: '#/components/schemas/GetRuleVersionHistoryDataType'
+      type: object
+    GetRuleVersionHistoryDataType:
+      description: Type of data.
+      enum:
+      - GetRuleVersionHistoryResponse
+      type: string
+      x-enum-varnames:
+      - GETRULEVERSIONHISTORYRESPONSE
+    GetRuleVersionHistoryResponse:
+      description: Response for getting the rule version history.
+      properties:
+        data:
+          $ref: '#/components/schemas/GetRuleVersionHistoryData'
+      type: object
     GetSBOMResponse:
       description: The expected response schema when getting an SBOM.
       properties:
@@ -24478,6 +24502,57 @@ components:
           description: The user name.
           example: John Doe
           type: string
+      type: object
+    RuleVersionHistory:
+      description: Response object containing the version history of a rule.
+      properties:
+        count:
+          description: The number of rule versions.
+          format: int32
+          maximum: 2147483647
+          type: integer
+        data:
+          additionalProperties:
+            $ref: '#/components/schemas/RuleVersions'
+            description: A rule version with a list of updates.
+          description: The `RuleVersionHistory` `data`.
+          type: object
+      type: object
+    RuleVersionUpdate:
+      description: A change in a rule version.
+      properties:
+        change:
+          description: The new value of the field.
+          example: cloud_provider:aws
+          type: string
+        field:
+          description: The field that was changed.
+          example: Tags
+          type: string
+        type:
+          $ref: '#/components/schemas/RuleVersionUpdateType'
+      type: object
+    RuleVersionUpdateType:
+      description: The type of change.
+      enum:
+      - create
+      - update
+      - delete
+      type: string
+      x-enum-varnames:
+      - CREATE
+      - UPDATE
+      - DELETE
+    RuleVersions:
+      description: A rule version with a list of updates.
+      properties:
+        changes:
+          description: A list of changes.
+          items:
+            $ref: '#/components/schemas/RuleVersionUpdate'
+          type: array
+        rule:
+          $ref: '#/components/schemas/SecurityMonitoringRuleResponse'
       type: object
     RumMetricCompute:
       description: The compute rule to compute the rum-based metric.
@@ -50124,6 +50199,45 @@ paths:
         - security_monitoring_rules_write
       x-undo:
         type: idempotent
+  /api/v2/security_monitoring/rules/{rule_id}/version_history:
+    get:
+      description: Get a rule's version history.
+      operationId: GetRuleVersionHistory
+      parameters:
+      - $ref: '#/components/parameters/SecurityMonitoringRuleID'
+      - $ref: '#/components/parameters/PageSize'
+      - $ref: '#/components/parameters/PageNumber'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetRuleVersionHistoryResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_rules_read
+      summary: Get a rule's version history
+      tags:
+      - Security Monitoring
+      x-menu-order: 25
+      x-permission:
+        operator: OR
+        permissions:
+        - security_monitoring_rules_read
+      x-undo:
+        type: safe
+      x-unstable: '**Note**: This endpoint is in beta and may be subject to changes.'
   /api/v2/security_monitoring/signals:
     get:
       description: 'The list endpoint returns security signals that match a search

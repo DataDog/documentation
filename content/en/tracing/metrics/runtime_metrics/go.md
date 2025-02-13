@@ -26,7 +26,7 @@ To enable Go runtime metrics collection, start the tracer using the `WithRuntime
 tracer.Start(tracer.WithRuntimeMetrics())
 ```
 
-View runtime metrics in correlation with your Go services on the [Service Catalog][1] in Datadog.
+View runtime metrics in correlation with your Go services on the [Software Catalog][1] in Datadog.
 
 By default, runtime metrics from your application are sent every 10 seconds to the Datadog Agent with DogStatsD. Make sure that [DogStatsD is enabled for the Agent][2]. If your Datadog Agent DogStatsD address differs from the default `localhost:8125`, use the [`WithDogstatsdAddress`][3] (or [`WithDogstatsdAddress` v2][9]) option (available starting in 1.18.0) or the environment variables `DD_AGENT_HOST` and `DD_DOGSTATSD_PORT`.
 

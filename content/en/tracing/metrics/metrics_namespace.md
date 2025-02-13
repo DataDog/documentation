@@ -4,7 +4,7 @@ further_reading:
     - link: 'tracing/trace_collection/'
       tag: 'Documentation'
       text: 'Learn how to setup APM tracing with your application'
-    - link: 'tracing/service_catalog/'
+    - link: 'tracing/software_catalog/'
       tag: 'Documentation'
       text: 'Discover and catalog the services reporting to Datadog'
     - link: 'tracing/services/service_page'
@@ -149,6 +149,6 @@ XRay spans are sampled before they are sent to Datadog, which means trace metric
 [5]: /metrics/types/?tab=count#metric-types
 [6]: /metrics/types/?tab=distribution#metric-types
 [7]: /metrics/types/?tab=gauge#metric-types
-[8]: /tracing/service_catalog/#services-types
+[8]: /tracing/software_catalog/#services-types
 [9]: /tracing/glossary/#services
 [10]: /tracing/guide/configure_an_apdex_for_your_traces_with_datadog_apm/
