@@ -458,7 +458,7 @@ The `trackRUMView(name:)` method starts and stops a view when the `SwiftUI` view
 
 The Datadog iOS SDK allows you to instrument tap actions of `SwiftUI` applications. The instrumentation also works with hybrid `UIKit` and `SwiftUI` applications.
 
-<div class="alert alert-warning">**Known Issue**: Using `.trackRUMTapAction(name:)` for `SwiftUI` controls inside a `List` can break their default gestures (for example, disabling `Button` action or breaking `NavigationLink`). To track taps in a `List` elements, please use [Custom Actions][9] API.</div>
+<div class="alert alert-warning">Using <code>.trackRUMTapAction(name:)</code> for <code>SwiftUI</code> controls inside a <code>List</code> can break its default gestures. For example, it may disable the <code>Button</code> action or break <code>NavigationLink</code>. To track taps in a <code>List</code> element, use the <a href="/real_user_monitoring/mobile_and_tv_monitoring/ios/advanced_configuration#custom-actions">Custom Actions</a> API instead.</div>
 
 To instrument a tap action on a `SwiftUI.View`, add the following method to your view declaration:
 
