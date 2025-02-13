@@ -49,7 +49,7 @@ ${ Steps.Describe_auto_scaling_group.autoScalingGroup.DesiredCapacity + 1 }
 
 ## JavaScript expression actions
 
-The **Expression** and **Function** actions perform custom data transformations within your workflows using JavaScript. Use the values of any context variables available within your workflow as inputs for your JavaScript expressions and functions with the syntax `$.Steps.<step_name>.<variable>`.
+The [Expression](#expression-step) and [Function](#function-step) actions perform custom data transformations within your workflows using JavaScript. Use the values of any context variables available within your workflow as inputs for your JavaScript expressions and functions with the syntax `$.Steps.<step_name>.<variable>`.
 
 The data returned by these actions can then be referenced in subsequent steps of the workflow.
 
