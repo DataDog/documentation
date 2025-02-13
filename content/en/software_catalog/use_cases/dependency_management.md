@@ -2,7 +2,6 @@
 title: Manage and Map Dependencies
 aliases:
   - /tracing/software_catalog/guides/dependency_management
-  - /software_catalog/use_cases/dependency_management
   - /software_catalog/guides/dependency_management
   - /tracing/software_catalog/use_cases/dependency_management
   - /tracing/service_catalog/guides/dependency_management
