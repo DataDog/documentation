@@ -28,7 +28,7 @@ Set `ENV NODE_OPTIONS="--require dd-trace/init"`. This specifies that the `dd-tr
 The tracing library also collects custom metrics. See the [code examples][2].
 
 #### Logs
-The Datadog sidecar collects logs through a shared volume. To forward logs from your main container to the sidecar, configure your application to write all logs to a location such as `shared-volume/logs/*.log` using the steps below. You must follow the setup in the GCP UI to add the environment variable `DD_SERVERLESS_LOG_PATH` and a shared Volume Mount to both the main and sidecar container. If you decide to deploy using YAML or Terraform, the environment variables, health check, and volume mount are already added.
+The Datadog sidecar collects logs through a shared volume. To forward logs from your main container to the sidecar, configure your application to write all logs to a location such as `shared-volume/logs/*.log` using the steps below. You must follow the setup in the GCP UI to add the environment variable `DD_SERVERLESS_LOG_PATH` and a shared Volume Mount to both the main and sidecar container.
 
 To set up logging in your application, see [Node.js Log Collection][3]. To set up trace log correlation, see [Correlating Node.js Logs and Traces][4].
 
@@ -47,7 +47,7 @@ In your main application, add the `dd-trace-py` library. See [Tracing Python App
 The tracing library also collects custom metrics. See the [code examples][2].
 
 #### Logs
-The Datadog sidecar collects logs through a shared volume. To forward logs from your main container to the sidecar, configure your application to write all logs to a location such as `shared-volume/logs/*.log` using the steps below. You must follow the setup in the GCP UI to add the environment variable `DD_SERVERLESS_LOG_PATH` and a shared Volume Mount to both the main and sidecar container. If you decide to deploy using YAML or Terraform, the environment variables, health check, and volume mount are already added.
+The Datadog sidecar collects logs through a shared volume. To forward logs from your main container to the sidecar, configure your application to write all logs to a location such as `shared-volume/logs/*.log` using the steps below. You must follow the setup in the GCP UI to add the environment variable `DD_SERVERLESS_LOG_PATH` and a shared Volume Mount to both the main and sidecar container.
 
 To set up logging in your application, see [Python Log Collection][3]. [Python Logging Best Practices][6] can also be helpful. To set up trace log correlation, see [Correlating Python Logs and Traces][4].
 
@@ -85,7 +85,7 @@ ENTRYPOINT [ "java", "-javaagent:dd-java-agent.jar", "-jar", "cloudrun-java-1.ja
 To collect custom metrics, [install the Java DogStatsD client][2].
 
 #### Logs
-The Datadog sidecar collects logs through a shared volume. To forward logs from your main container to the sidecar, configure your application to write all logs to a location such as `shared-volume/logs/*.log` using the steps below. You must follow the setup in the GCP UI to add the environment variable `DD_SERVERLESS_LOG_PATH` and a shared Volume Mount to both the main and sidecar container. If you decide to deploy using YAML or Terraform, the environment variables, health check, and volume mount are already added.
+The Datadog sidecar collects logs through a shared volume. To forward logs from your main container to the sidecar, configure your application to write all logs to a location such as `shared-volume/logs/*.log` using the steps below. You must follow the setup in the GCP UI to add the environment variable `DD_SERVERLESS_LOG_PATH` and a shared Volume Mount to both the main and sidecar container.
 
 To set up logging in your application, see [Java Log Collection][3]. To set up trace log correlation, see [Correlating Java Logs and Traces][4].
 
@@ -104,7 +104,7 @@ In your main application, add the `dd-trace-go` library. See [Tracing Go Applica
 The tracing library also collects custom metrics. See the [code examples][2].
 
 #### Logs
-The Datadog sidecar collects logs through a shared volume. To forward logs from your main container to the sidecar, configure your application to write all logs to a location such as `shared-volume/logs/*.log` using the steps below. You must follow the setup in the GCP UI to add the environment variable `DD_SERVERLESS_LOG_PATH` and a shared Volume Mount to both the main and sidecar container. If you decide to deploy using YAML or Terraform, the environment variables, health check, and volume mount are already added.
+The Datadog sidecar collects logs through a shared volume. To forward logs from your main container to the sidecar, configure your application to write all logs to a location such as `shared-volume/logs/*.log` using the steps below. You must follow the setup in the GCP UI to add the environment variable `DD_SERVERLESS_LOG_PATH` and a shared Volume Mount to both the main and sidecar container.
 
 To set up logging in your application, see [Go Log Collection][3]. To set up trace log correlation, see [Correlating Go Logs and Traces][4].
 
@@ -143,30 +143,13 @@ ENTRYPOINT ["dotnet", "dotnet.dll"]
 The tracing library also collects custom metrics. See the [code examples][2].
 
 #### Logs
-The Datadog sidecar collects logs through a shared volume. To forward logs from your main container to the sidecar, configure your application to write all logs to a location such as `shared-volume/logs/*.log` using the steps below. You must follow the setup in the GCP UI to add the environment variable `DD_SERVERLESS_LOG_PATH` and a shared Volume Mount to both the main and sidecar container. If you decide to deploy using YAML or Terraform, the environment variables, health check, and volume mount are already added.
-
+The Datadog sidecar collects logs through a shared volume. To forward logs from your main container to the sidecar, configure your application to write all logs to a location such as `shared-volume/logs/*.log` using the steps below. You must follow the setup in the GCP UI to add the environment variable `DD_SERVERLESS_LOG_PATH` and a shared Volume Mount to both the main and sidecar container.
 To set up logging in your application, see [C# Log Collection][3]. To set up trace log correlation, see [Correlating .NET Logs and Traces][4].
 
 [1]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/dotnet-core/?tab=linux#enable-the-tracer-for-your-service
 [2]: https://www.datadoghq.com/blog/statsd-for-net-dogstatsd/
 [3]: /log_collection/csharp/?tab=serilog
 [4]: /tracing/other_telemetry/connect_logs_and_traces/dotnet/?tab=serilog
-{{% /tab %}}
-{{% tab "PHP" %}}
-In your main application, add the `dd-trace-php` library. See [Tracing PHP Applications][1] for instructions.
-
-#### Metrics
-The tracing library also collects custom metrics. See the [code examples][2].
-
-#### Logs
-The Datadog sidecar collects logs through a shared volume. To forward logs from your main container to the sidecar, configure your application to write all logs to a location such as `shared-volume/logs/*.log` using the steps below. You must follow the setup in the GCP UI to add the environment variable `DD_SERVERLESS_LOG_PATH` and a shared Volume Mount to both the main and sidecar container. If you decide to deploy using YAML or Terraform, the environment variables, health check, and volume mount are already added.
-
-To set up logging in your application, see [PHP Log Collection][3]. To set up trace log correlation, see [Correlating PHP Logs and Traces][4].
-
-[1]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/php/
-[2]: /metrics/custom_metrics/dogstatsd_metrics_submission/#code-examples
-[3]: /logs/log_collection/php
-[4]: /tracing/other_telemetry/connect_logs_and_traces/php
 {{% /tab %}}
 {{< /tabs >}}
 
