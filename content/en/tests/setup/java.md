@@ -509,7 +509,7 @@ There's a set of parameters that the product checks to establish correspondence 
 
 - `mvn test --temp-dir=/var/folders/t1/rs2htfh55mz9px2j4prmpg_c0000gq/T`
 
-Datadog recommends using `DD_TEST_SESSION_NAME` if your test commands include unstable data.
+Datadog recommends using `DD_TEST_SESSION_NAME` if your test commands varies between executions.
 
 ## Troubleshooting
 
