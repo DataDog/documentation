@@ -155,7 +155,7 @@ The best way to fix this is to make sure that the test parameters are the same b
 
 ## Session history, performance or code coverage tab only show a single execution
 
-This is likely caused by an unstable test session fingerprint. There's a set of parameters that the product checks to establish correspondence between test sessions. The test command used to execute the tests is one of them. If the test command contains a string that changes for every execution, such as a temporary folder, Datadog considers the sessions to be unrelated to each other. Some examples of unstable test commands are:
+This is likely caused by an unstable test session fingerprint. There's a set of parameters that Datadog checks to establish correspondence between test sessions. The test command used to execute the tests is one of them. If the test command contains a string that changes for every execution, such as a temporary folder, Datadog considers the sessions to be unrelated to each other. For example:
 
 - `yarn test --temp-dir=/var/folders/t1/rs2htfh55mz9px2j4prmpg_c0000gq/T`
 - `mvn test --temp-dir=/var/folders/t1/rs2htfh55mz9px2j4prmpg_c0000gq/T`
