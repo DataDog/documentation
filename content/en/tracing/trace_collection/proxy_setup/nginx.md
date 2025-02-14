@@ -145,7 +145,7 @@ Update the controller pod specification to include the init-container and config
                       fieldPath: status.hostIP
 {{< /highlight >}}
 
-**Note**: For an alternative way to access the Datadog Agent, see the [Kubernetes installation guide][8].
+**Note**: For an alternative way to access the Datadog Agent, see the [Kubernetes installation guide][1].
 
 **3. Configure Ingress-NGINX** <br>
 Create or modify the `ConfigMap` to load the Datadog module:
@@ -262,7 +262,7 @@ controller:
   opentelemetry:
     enabled: true
   config:
-    otel-service-name: "nginx:
+    otel-service-name: "nginx"
     otel-sampler: AlwaysOn
     otel-sampler-ratio: 0.01
   extraEnvs:
