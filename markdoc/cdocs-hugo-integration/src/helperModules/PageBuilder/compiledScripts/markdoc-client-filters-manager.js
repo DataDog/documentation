@@ -12675,16 +12675,32 @@
           ...processCreateParams(params)
         });
       };
-      function custom(check, params = {}, fatal) {
+      function cleanParams(params, data) {
+        const p = typeof params === "function" ? params(data) : typeof params === "string" ? { message: params } : params;
+        const p2 = typeof p === "string" ? { message: p } : p;
+        return p2;
+      }
+      function custom(check, _params = {}, fatal) {
         if (check)
           return ZodAny.create().superRefine((data, ctx) => {
             var _a, _b;
-            if (!check(data)) {
-              const p = typeof params === "function" ? params(data) : typeof params === "string" ? { message: params } : params;
-              const _fatal = (_b = (_a = p.fatal) !== null && _a !== void 0 ? _a : fatal) !== null && _b !== void 0 ? _b : true;
-              const p2 = typeof p === "string" ? { message: p } : p;
-              ctx.addIssue({ code: "custom", ...p2, fatal: _fatal });
+            const r = check(data);
+            if (r instanceof Promise) {
+              return r.then((r2) => {
+                var _a2, _b2;
+                if (!r2) {
+                  const params = cleanParams(_params, data);
+                  const _fatal = (_b2 = (_a2 = params.fatal) !== null && _a2 !== void 0 ? _a2 : fatal) !== null && _b2 !== void 0 ? _b2 : true;
+                  ctx.addIssue({ code: "custom", ...params, fatal: _fatal });
+                }
+              });
             }
+            if (!r) {
+              const params = cleanParams(_params, data);
+              const _fatal = (_b = (_a = params.fatal) !== null && _a !== void 0 ? _a : fatal) !== null && _b !== void 0 ? _b : true;
+              ctx.addIssue({ code: "custom", ...params, fatal: _fatal });
+            }
+            return;
           });
         return ZodAny.create();
       }
