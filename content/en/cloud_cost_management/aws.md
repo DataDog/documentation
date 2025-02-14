@@ -139,7 +139,7 @@ Attach the new S3 policy to the Datadog integration role.
 
 Use Account Filtering to control which AWS member accounts to pull into Cloud Cost Management. You do not incur any additional costs for accounts that you filter out.
 
-To use Account Filtering, an AWS management account is required. You can configure account filters during setup and after an account has been configured in Cloud Cost Management.
+Using Account Filtering requires an AWS management account. You can configure account filters during setup and after an account has been configured in Cloud Cost Management.
 
 #### Configure account filters for new account
 
