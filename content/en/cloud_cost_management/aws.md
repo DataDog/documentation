@@ -157,7 +157,7 @@ Navigate to [**Cloud Costs** > **Accounts**][18] and click **Manage Account** fo
 
 {{< img src="cloud_cost/account_filtering/manage_account.png" alt="Manage Account button on account card" style="width:100%;" >}}
 
-Click on **Billing dataset** to access the Account Filtering UI.
+Click **Billing dataset** to access the Account Filtering UI.
 
 {{< img src="cloud_cost/account_filtering/account_filtering.png" alt="Account Filtering UI to filter AWS member accounts" style="width:100%;" >}}
 
