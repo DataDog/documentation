@@ -23,7 +23,7 @@ Use [App Builder][2] to create dynamic, user-friendly forms to collect inputs fr
 Navigate to [App Builder Blueprints][9] or [Workflow Automation Blueprints][15]. These are examples of how to configure an App or Workflow to help you get started. You can make updates to the examples to fit your needs, such as configuring inputs, setting up integrations with other tools, and configuring permissions. See some examples below:
 
 #### Software Templating
-Configure an form to collect inputs from a developer, integrate with a template in source code management (e.g. Github), and generate a new repository or PR for a developer.
+Configure an form to collect inputs from a developer, integrate with a template in source code management (e.g. Github), and generate a new repository or PR for a developer. Learn more in our [documentation][] on Software Templates.
 
 #### Remediaton
 Consolidate data from cloud infrastructure or Kubernetes and enable developers to take simple, safe remediation actions. Trigger actions manually, in response to a monitor, or from an external API call.
@@ -31,15 +31,13 @@ Consolidate data from cloud infrastructure or Kubernetes and enable developers t
 #### Change Management
 Manage deployments, feature flag changes, and more. Initiate changes directly from Datadog or track the current status and approval.
 
-##### Provisioning Infrastructure
+#### Provisioning Infrastructure
 Enable developers to spin up new infrastructure (e.g. S3 bucket) with a few inputs and one click. Collect approvals from an SRE/platform engineering team through source control or Approval actions within Workflow Automation.
 
 #### Developer Environments
 Spin up ephemeral environments for developers on-demand. Use Workflow Automation to automatically deprovision any unused infrastructure to control costs.
 
 ### Start from scratch
-Navigate to the [Workflow Automation][3] page to configure the template in Datadog.
-
 1. Create a form for the developer-facing frontend using App Builder:
    - Navigate to **Actions** > **App Builder** and select **New App**.
    - Enter a name and description, and use the drag-and-drop editor to create a form that collects the required parameters for your template.
