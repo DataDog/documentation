@@ -59,18 +59,39 @@ further_reading:
 - link: https://www.datadoghq.com/blog/optimize-and-secure-azure-functions/
   tag: 블로그
   text: Azure Functions 최적화 및 보안 팁
+- link: https://www.datadoghq.com/blog/datadog-detection-as-code/
+  tag: 블로그
+  text: Datadog를 사용해 코드로 감지하기
+- link: https://www.datadoghq.com/blog/lateral-movement-entra-id-azure/
+  tag: 블로그
+  text: 하이브리드 Azure 환경에서 측면 움직임 감지
+- link: https://www.datadoghq.com/blog/secrets-management/
+  tag: 블로그
+  text: 클라우드 환경이 공격에 취약하게 되는 비밀 파악
+- link: https://www.datadoghq.com/blog/cloud-security-roundup-infrastructure-identity/
+  tag: 블로그
+  text: 'Cloud security research and guide roundup: Infrastructure and access'
+- link: https://www.datadoghq.com/blog/cloud-security-roundup-devsecops-threat-detection-ai/
+  tag: 블로그
+  text: 'Cloud security research and guide roundup: DevSecOps, threat detection, and
+    AI'
 title: Datadog 보안
 ---
 
 ## 개요
 
-프로덕션 보안 운영에 속도와 규모를 더하세요. Datadog 보안은 애플리케이션, 호스트, 컨테이너 및 클라우드 인프라에 대한 지속적인 설정 감사와 실시간 위협 감지를 제공합니다. 더욱 향상된 Datadog 관측 가능성 플랫폼과 결합된 Datadog 보안은 조직 공통의 목표에 딱 맞는 보안과 운영의 완벽한 통합을 보여줍니다.  
+Bring speed and scale to your production security operations. Datadog Security delivers real-time threat detection, and continuous configuration audits across applications, hosts, containers, and cloud infrastructure. Coupled with the greater Datadog observability platform, Datadog Security brings unprecedented integration between security and operations aligned to your organization's shared goals.
 
-Datadog Security에는 [애플리케이션 보안 관리](#application-security-management), [Cloud SIEM](#cloud-siem), [클라우드 보안 관리](#cloud-security-management)가 포함되어 있습니다. 자세히 알아보려면 [30초 제품 가이드 투어][14]를 확인하세요.
+Datadog Security includes [Application Security](#application-security), [Cloud SIEM](#cloud-siem), and [Cloud Security Management](#cloud-security-management). To learn more, check out the [30-second Product Guided Tour][14].
 
 ## 애플리케이션 보안
 
 Datdog [애플리케이션 보안][1]은 SSRF(Server-Side-Request-Forgery), SQL 삽입, Log4Shell, XSS(Reflected Cross-Site-Scripting) 등 코드 수준 취약성을 악용하려는 애플리케이션 수준 공격에 관측성을 제공합니다. ASM에서는 [Datadog APM][2], [Datadog 에이전트][3] 및 인앱 감지 규칙을 활용해 애플리케이션 환경에서 위협을 감지합니다. 제품 [둘러보기](https://www.datadoghq.com/guided-tour/security/application-security-management/)를 확인해 자세히 알아보세요.
+
+In addition to threat detection, Datadog provides end-to-end code and library vulnerability detection from development to production with [Code Security][20], which includes the following capabilities:
+- [Static Code Analysis (SAST)][21] for identifying security and quality issues in your first-party code
+- [Software Composition Analysis (SCA)][22] for identifying open source dependencies in both your repositories and your services
+- [Runtime Code Analysis (IAST)][23] for code-level vulnerabilities in your services
 
 {{< img src="/security/application_security/app-sec-landing-page.png" alt="공격 흐름과 화염 그래프를 표시하는 Datadog 보안 신호 패널" width="75%">}}
 
@@ -108,3 +129,10 @@ Datadog 보안을 시작하려면 Datadog에서 [**Security** > **Setup**][9] �
 [14]: https://www.datadoghq.com/guided-tour/security/
 [15]: /ko/security/cloud_security_management/identity_risks/
 [16]: /ko/security/cloud_security_management/vulnerabilities/
+[17]: /ko/security/application_security/troubleshooting/#disabling-threat-management-and-protection
+[18]: /ko/security/application_security/troubleshooting/#disabling-software-composition-analysis
+[19]: /ko/security/application_security/troubleshooting/#disabling-code-security
+[20]: /ko/security/code_security/
+[21]: /ko/security/code_security/static_analysis/
+[22]: /ko/security/code_security/software_composition_analysis/
+[23]: /ko/security/code_security/iast/

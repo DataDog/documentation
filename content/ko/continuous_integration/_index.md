@@ -38,6 +38,9 @@ further_reading:
 - link: https://www.datadoghq.com/blog/modernize-your-ci-cd-environment/
   tag: 블로그
   text: Datadog CI 파이프라인 가시성을 통한 CI/CD 현대화 모니터링
+- link: https://www.datadoghq.com/blog/datadog-detection-as-code/
+  tag: 블로그
+  text: Datadog를 사용해 코드로 감지하기
 title: 지속적 통합 가시성
 ---
 
