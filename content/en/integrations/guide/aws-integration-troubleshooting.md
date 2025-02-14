@@ -82,8 +82,8 @@ If you removed the AWS integration, but continue to run a Datadog Agent on your 
 You can verify the integration is enabled by checking the "Apps Running" for that host from the infrastructure list or by checking the metrics summary and creating a notebook scoped to that host.
 
 By default, host-level tags remain permanently attached to AWS hosts. If you want to permanently remove AWS host tags from a host, you can do this by the following methods:
-   - Using the [Remove host tags API endpoint][11] to remove all user-assigned tags for a single host
-   - Using the [remove_lingering_aws_host_tags.py tool][12] to remove all user-assigned tags from a list of hosts, or from all hosts
+   - Use the [Remove host tags API endpoint][11] to remove all user-assigned tags for a single host
+   - Use the [remove_lingering_aws_host_tags.py tool][12] to remove all user-assigned tags from a list of hosts, or from all hosts
 
 [1]: /integrations/amazon_web_services/
 [2]: /integrations/guide/error-datadog-not-authorized-sts-assume-role/#pagetitle
