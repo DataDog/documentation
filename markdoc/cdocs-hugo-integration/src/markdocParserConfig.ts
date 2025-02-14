@@ -8,17 +8,17 @@
  * You can read more about the Markdoc config object here:
  * https://markdoc.dev/docs/config
  */
-import { alertDefinition, Alert } from './components/alert';
-import { imgDefinition, Img } from './components/img';
-import { regionParamDefinition, RegionParam } from './components/regionParam';
-import { siteRegionDefinition, SiteRegion } from './components/siteRegion';
-import { tabDefinition, Tab } from './components/tab';
-import { tabsDefinition, Tabs } from './components/tabs';
-import { fenceDefinition, Fence } from './components/fence';
-import { xDefinition, X } from './components/x';
-import { calloutDefinition, Callout } from './components/callout';
-import { nextlinkDefinition, Nextlink } from './components/nextlink';
-import { whatsnextDefinition, Whatsnext } from './components/whatsnext';
+import { alertDefinition, Alert } from './tags/alert';
+import { imgDefinition, Img } from './tags/img';
+import { regionParamDefinition, RegionParam } from './tags/regionParam';
+import { siteRegionDefinition, SiteRegion } from './tags/siteRegion';
+import { tabDefinition, Tab } from './tags/tab';
+import { tabsDefinition, Tabs } from './tags/tabs';
+import { fenceDefinition, Fence } from './tags/fence';
+import { xDefinition, X } from './tags/x';
+import { calloutDefinition, Callout } from './tags/callout';
+import { nextlinkDefinition, Nextlink } from './tags/nextlink';
+import { whatsnextDefinition, Whatsnext } from './tags/whatsnext';
 
 export const transformConfig = {
   tags: {

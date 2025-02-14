@@ -11,7 +11,7 @@ import { PageTemplate } from './PageTemplate';
 import { renderToString } from 'react-dom/server';
 import { HugoConfig } from '../../schemas/config/hugo';
 import { render } from '../renderer';
-import { FurtherReadingTemplate } from '../../components/furtherReading';
+import { FurtherReadingTemplate } from '../../tags/furtherReading';
 import { CompilationError } from '../../schemas/compilationResults';
 import { Frontmatter } from '../../schemas/frontmatter';
 

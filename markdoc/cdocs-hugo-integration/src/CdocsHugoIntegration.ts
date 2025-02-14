@@ -8,7 +8,7 @@ import {
 import { IntegrationConfig } from './schemas/config/integration';
 import { HugoGlobalConfig } from './schemas/config/hugo';
 import { MdocFileParser } from './helperModules/MdocFileParser';
-import { PageBuilder } from './helperModules/PageBuilder';
+import { PageBuilder } from './helperModules/PageBuilder/PageBuilder';
 import {
   CompilationError,
   ParsedFile,
