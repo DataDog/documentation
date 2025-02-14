@@ -5,12 +5,11 @@
     "scripts": {
         "test": "npm run build; vitest run --coverage --reporter=verbose",
         "test:watch": "npm run build; vitest",
-        "build-markdoc-integration": "rimraf ./dist && npx tsc; npm run copy-assets && npm run copy-author-console",
+        "build-markdoc-integration": "rimraf ./dist && npx tsc; npm run copy-assets",
         "build-prod-renderer": "npx esbuild ./dist/markdoc-client-filters-manager.js --metafile=esbuild-meta-prod.json --tree-shaking=true --bundle --minify --outfile='./dist/helperModules/PageBuilder/compiledScripts/markdoc-client-filters-manager.min.js'",
         "build-dev-renderer": "npx esbuild ./dist/markdoc-client-filters-manager.js --metafile=esbuild-meta-dev.json --tree-shaking=true --bundle --outfile='./dist/helperModules/PageBuilder/compiledScripts/markdoc-client-filters-manager.js'",
         "build": "npm run build-markdoc-integration && npm run build-dev-renderer && npm run build-prod-renderer && npm run copy-assets && npm run copy-compiled-scripts",
         "copy-assets": "cp -r ./src/helperModules/PageBuilder/assets ./dist/helperModules/PageBuilder",
-        "copy-author-console": "cp -r ./src/author-console ./dist/author-console",
         "copy-compiled-scripts": "cp -r ./dist/helperModules/PageBuilder/compiledScripts ./src/helperModules/PageBuilder"
     },
     "engines": {
