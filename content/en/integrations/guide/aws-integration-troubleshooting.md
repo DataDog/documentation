@@ -85,8 +85,6 @@ By default, host-level tags remain permanently attached to AWS hosts. If you wan
    - Using the [Remove host tags API endpoint][11] to remove all user-assigned tags for a single host
    - Using the [remove_lingering_aws_host_tags.py tool][12] to remove all user-assigned tags from a list of hosts, or from all hosts
 
-If you want to permanently remove AWS host tags from a host, you can do this by using the .
-
 [1]: /integrations/amazon_web_services/
 [2]: /integrations/guide/error-datadog-not-authorized-sts-assume-role/#pagetitle
 [3]: /agent/
