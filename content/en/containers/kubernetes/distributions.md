@@ -104,8 +104,6 @@ spec:
     credentials:
       apiKey: <DATADOG_API_KEY>
       appKey: <DATADOG_APP_KEY>
-    kubelet:
-      tlsVerify: false
   override:
     clusterAgent:
       containers:
@@ -127,9 +125,6 @@ Custom `datadog-values.yaml`:
 datadog:
   apiKey: <DATADOG_API_KEY>
   appKey: <DATADOG_APP_KEY>
-  # Required as of Agent 7.35. See Kubelet Certificate note below.
-  kubelet:
-    tlsVerify: false
 
 providers:
   aks:
@@ -141,14 +136,6 @@ The `providers.aks.enabled` option sets the necessary environment variable `DD_A
 {{% /tab %}}
 
 {{< /tabs >}}
-
-The `kubelet.tlsVerify=false` sets the environment variable `DD_KUBELET_TLS_VERIFY=false` for you to deactivate verification of the server certificate.
-
-### AKS Kubelet certificate
-
-There is a known issue with the format of the AKS Kubelet certificate in older node image versions. As of Agent 7.35, it is required to use `tlsVerify: false` as the certificates did not contain a valid Subject Alternative Name (SAN).
-
-If all the nodes within your AKS cluster are using a supported node image version, you can use Kubelet TLS Verification. Your version must be at or above the [versions listed here for the 2022-10-30 release][2]. You must also update your Kubelet configuration to use the node name for the address and map in the custom certificate path.
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
