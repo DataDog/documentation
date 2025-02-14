@@ -53,7 +53,7 @@ otlp_config:
       "old_name1": "new_name"
 {{< /highlight >}}
 
-2. Unset these environment variables:
+2. Remove these environment variables:
    - `DD_OTLP_CONFIG_TRACES_SPAN_NAME_AS_RESOURCE_NAME`
    - `DD_OTLP_CONFIG_TRACES_SPAN_NAME_REMAPPINGS`
 
