@@ -1,7 +1,7 @@
 ---
 title: Self-Service
 aliases:
-  - /service_catalog/software_templates
+  - /service_catalog/self-service
 further_reading:
 - link: "https://www.datadoghq.com/blog/app-builder-remediation/"
   tag: "Blog"
