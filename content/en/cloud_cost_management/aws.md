@@ -151,7 +151,7 @@ You can configure account filters in step 4 of the setup process.
 
 {{< img src="cloud_cost/account_filtering/account_filtering_setup.png" alt="Account Filtering UI to filter AWS member accounts during setup" style="width:100%;" >}}
 
-#### Configure account filters for existing account
+#### Configure account filters for an existing account
 
 Navigate to [**Cloud Costs** > **Accounts**][18] and click on **Manage Account** for the management account you want to filter.
 
