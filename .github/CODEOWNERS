@@ -64,8 +64,8 @@ data/sdk_versions.json                                        @Datadog/documenta
 layouts/shortcodes/**/*.md                                    @DataDog/documentation
 
 # SDK versions
-.github/workflows/bump_versions.yml   @DataDog/api-clients @DataDog/web-frameworks @DataDog/documentation @DataDog/WebOps-Platform
-/data/sdk_versions.json               @DataDog/api-clients @DataDog/web-frameworks @DataDog/documentation
+.github/workflows/bump_versions.yml   @DataDog/web-frameworks @DataDog/documentation @DataDog/WebOps-Platform
+/data/sdk_versions.json               @DataDog/web-frameworks @DataDog/documentation
 
 # Serverless
 
@@ -76,8 +76,8 @@ layouts/shortcodes/**/*.md                                    @DataDog/documenta
 /content/en/database_monitoring/                        @DataDog/database-monitoring @DataDog/documentation
 /layouts/partials/dbm/                                  @DataDog/database-monitoring @DataDog/documentation
 
-# Agent Shared Component
-/content/en/agent/proxy.md                              @DataDog/agent-shared-components @DataDog/documentation
+# Agent Runtimes
+/content/en/agent/proxy.md                              @DataDog/agent-runtimes @DataDog/documentation
 
 # Agent-integration-tools
 content/en/developers/integrations/agent_integration.md                         @DataDog/agent-integrations @DataDog/documentation

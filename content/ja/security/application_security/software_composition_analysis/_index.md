@@ -31,6 +31,9 @@ further_reading:
 - link: https://www.datadoghq.com/blog/sca-prioritize-vulnerabilities/
   tag: ブログ
   text: Datadog SCA を使用した脆弱性修正の優先順位付け
+- link: https://www.datadoghq.com/blog/smart-vulnerability-remediation/
+  tag: ブログ
+  text: Datadog は、よりスマートな脆弱性修正を提供します
 title: Software Composition Analysis
 ---
 
@@ -44,7 +47,7 @@ Datadog Software Composition Analysis (SCA) は、オープンソースの利用
 
 Datadog SCA がユニークなのは、開発者がコミットするコードから、Datadog 上で実行中の本番アプリケーションに至るまで、ソフトウェア開発ライフサイクル全体をエンドツーエンドでカバーする点です。
 
-Datadog SCA は、Open Source Vulnerabilities (OSV)、National Vulnerability Database (NVD)、GitHub アドバイザリ、その他の言語エコシステムアドバイザリなどから情報を収集した独自のデータベースを使用しています。さらに、Datadog のセキュリティリサーチチームが脆弱性やマルウェアの発見を評価しています。詳細については、[GuardDog][13] GitHub プロジェクトを参照してください。
+Datadog SCA は、Open Source Vulnerabilities (OSV)、National Vulnerability Database (NVD)、GitHub アドバイザリ、その他の言語エコシステムアドバイザリなどから情報を収集した厳選された独自のデータベースを使用しています。さらに、Datadog のセキュリティリサーチチームが脆弱性やマルウェアの発見を評価しています。詳細については、[GuardDog][13] GitHub プロジェクトを参照してください。
 
 
 各 ASM 製品の ASM 互換性を確認して、サービスがサポートされているかどうかをご確認ください。
@@ -54,7 +57,7 @@ Datadog SCA は、Open Source Vulnerabilities (OSV)、National Vulnerability Dat
 
 Datadog SCA Library Inventory は、アプリケーションを構成するライブラリとそのバージョンを把握するために役立ちます。Library Explorer にアクセスするには、[**Security** > **Application Security** > **Catalog** > **Libraries**][8] に移動してください。
 
-Datadog SCA はソフトウェア開発ライフサイクル全体をカバーしているため、ライブラリはアプリケーションのライフサイクルを通じて検出されます。ライブラリインベントリには、ライブラリ名やバージョン、その他のリスク面 (ライセンス、品質) など、ライブラリに関するすべての情報が含まれています。
+Datadog SCA は、コードから本番環境に至るソフトウェア開発ライフサイクル全体をカバーし、アプリケーションのライフサイクル全般で使用されているライブラリを検出して、脆弱性、リスク、ライセンスなどの問題をアラートで通知します。
 
 {{< img src="/security/application_security/software_composition_analysis/asm_library_explorer.png" alt="ライブラリごとにグループ化されたライブラリの脆弱性を表示する Software Composition Analysis (SCA) Library Explorer ページ" style="width:100%;" >}}
 
@@ -81,13 +84,19 @@ Datadog SCA は、サービスを分析するために 2 つの手法を活用�
 
 脆弱性の Details Explorer では、影響を受けるインフラストラクチャーを表示できます。このビューにより、全体的な攻撃リスクをより明確に把握することができます。
 
-ASM 内では、脆弱性の重大度ベーススコアは、既存の攻撃と脆弱性が検出された環境のビジネス上の機密性に基づいて修正されます。例えば、本番環境が検出されない場合、重大度は低減されます。
+## Datadog Severity Score
 
-調整後の脆弱性スコアは、各サービスの完全なコンテキストを含んでいます。
+各脆弱性には、基本的な重大度スコア (base severity score) が定義されています。修正の優先順位付けを支援するために、Datadog は疑わしいリクエストや攻撃の証拠、環境のビジネス上の重要度やインターネットへの公開度、悪用が成功するリスクなどを考慮して、基本の CVSS スコアを Datadog Severity Score に変換します。
 
-- 元の脆弱性の重大度
-- 不審なリクエストの証拠
-- 機密性の高い環境、インターネットに接続された環境
+基本スコアには、最大 4 つのスコア修正要素 (score modifiers) が適用される可能性があります。うち 2 つは実行時のコンテキストによるものです。
+ - 脆弱性が本番環境に存在する
+ - 脆弱性があるサービスが攻撃を受けている
+
+残りの 2 つは、CVE のコンテキストに基づきます。
+ - エクスプロイトが利用可能かどうか
+ - 悪用が行われる可能性
+
+Datadog は、上記の要因に基づいて基本 CVSS スコアがどのように Datadog Severity Score に調整されるかを表示します。
 
 {{< img src="security/application_security/vulnerability-score-modified_3.png" alt="変更された重大度スコアを表示する脆弱性詳細ページ" style="width:100%;" >}}
 
@@ -117,6 +126,10 @@ Software Composition Analysis は、APM がすでに収集している情報を�
 
 {{< img src="security/application_security/threats/threats-on-svc-cat_3.png" alt="APM サービスカタログに表示される脆弱性情報" style="width:100%;" >}}
 
+## Software Composition Analysis の無効化
+
+Software Composition Analysis を無効化する方法の詳細については、[Software Composition Analysis の無効化][14]を参照してください。
+
 ## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -133,3 +146,4 @@ Software Composition Analysis は、APM がすでに収集している情報を�
 [11]: /ja/integrations/jira/
 [12]: https://app.datadoghq.com/security/configuration/asm/setup
 [13]: https://github.com/DataDog/guarddog
+[14]: /ja/security/application_security/troubleshooting/#disabling-software-composition-analysis

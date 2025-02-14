@@ -803,7 +803,7 @@ When you use this approach, both the testing framework and Test Optimization can
 
 ### Test session name `DD_TEST_SESSION_NAME`
 
-Use `DD_TEST_SESSION_NAME` to define the test session name for your tests (`test_session.name` tag). Use this to identify a group of tests. Examples of values for this tag would be:
+Use `DD_TEST_SESSION_NAME` to define the name of the test session and the related group of tests. Examples of values for this tag would be:
 
 - `unit-tests`
 - `integration-tests`
@@ -821,12 +821,12 @@ The test session name should be unique within a repository to help you distingui
 
 #### When to use `DD_TEST_SESSION_NAME`
 
-If your tests are run with commands that include a dynamic string, such as:
+There's a set of parameters that the product checks to establish correspondence between test sessions. The test command used to execute the tests is one of them. If the test command contains a string that changes for every execution, such as a temporary folder, Datadog considers the sessions to be unrelated to each other. Some examples of unstable test commands are:
 
 - `yarn test --temp-dir=/var/folders/t1/rs2htfh55mz9px2j4prmpg_c0000gq/T`
 - `pnpm vitest --temp-dir=/var/folders/t1/rs2htfh55mz9px2j4prmpg_c0000gq/T`
 
-The default value for the test session name will be unstable. It is recommended to use `DD_TEST_SESSION_NAME` in this case.
+Datadog recommends using `DD_TEST_SESSION_NAME` if your test commands varies between executions.
 
 ## Further reading
 

@@ -80,19 +80,10 @@ To start configuring your environment to detect and protect threats with ASM, fo
 
 In the [Security Signals Explorer][6], click on any security signal to see what happened and the suggested steps to mitigate the attack. In the same panel, view traces with their correlated attack flow and request information to gain further context.
 
-## Investigate risk introduced in upstream open source libraries and dependencies
-
-[Software Composition Analysis (SCA)][8] shows you when your services are at risk because they use or have dependencies on open source libraries that have known vulnerabilities. Investigate vulnerability findings and secure your software by following remediation advice or researching the cause of the vulnerability.
-
-## Detect vulnerabilities in your application's code
-Datadog [Code Security][9] scans your first-party code and open source libraries used in your applications in both your repositories and running services, providing end-to-end visibility of application vulnerabilities from development to production.
-
 ## Disable ASM
 For information on disabling ASM or its features, see the following:
 
 - [Disabling threat management and protection][10]
-- [Disabling Software Composition Analysis][11]
-- [Disabling Code Security][12]
 
 ## Next steps
 

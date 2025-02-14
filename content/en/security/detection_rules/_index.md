@@ -108,6 +108,29 @@ To delete a custom rule, click the vertical three-dot menu for the rule and sele
 
 **Note**: You can only delete custom rules. To remove a default rule, you must [disable it](#enable-or-disable-rules).
 
+### See the version history for a rule
+
+{{< img src="/security/security_monitoring/detection_rules/rule_version_history_20250207.png" alt="The version history for a GitHub OAuth access token compromise showing" style="width:80%;" >}}
+
+Use Rule Version History to:
+- See past versions of a detection rule and understand the changes over time.
+- See who made the changes for improved collaboration.
+- Compare versions with diffs to analyze the modifications and impact of the changes.
+
+To see the version history of a rule:
+1. Navigate to the [Security Settings][15] page. In the left navigation panel:
+    - For ASM: Click **Application Security** and then click **Detection Rules**.
+    - For CSM: Click **Cloud Security Management** and then click **Threat Detection Rules**.
+    - For Cloud SIEM: Click **Cloud SIEM** and then click **Detection Rules**.
+1. Click on the rule you are interested in.
+1. In the rule editor, click **Version History** to see past changes.
+1. Click a specific version to see what changes were made.
+1. Click **Open Version Comparison** to see what changed between versions.
+1. Select the two versions you want to compare.
+    - Data highlighted in red indicates data that was modified or removed.
+    - Data highlighted in green indicates data that was added.
+1. Click **Unified** if you want to see the comparison in the same panel.
+
 ### Restrict edit permissions
 
 {{% security-products/detection-rules-granular-access %}}
@@ -151,3 +174,4 @@ The rule deprecation process is as follows:
 [12]: /security/application_security/threats/custom_rules/
 [13]: /security/cloud_security_management/misconfigurations/custom_rules
 [14]: /security/threats/workload_security_rules?tab=host#create-custom-rules
+[15]: https://app.datadoghq.com/security/configuration/

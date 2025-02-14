@@ -97,7 +97,11 @@ Logs are billed separately from CI Visibility. Log retention, exclusion, and ind
 
 ### Correlate infrastructure metrics to jobs
 
-If you are using self-hosted GitHub runners, you can correlate jobs with the hosts running them by ensuring that the GitHub runner name matches the hostname of the machine. CI Visibility uses this information to link to infrastructure metrics.
+The GitHub Actions CI Visibility integration allows for correlation between infrastructure and jobs. To achieve this, ensure the [Datadog Agent][20] is running on the host where the jobs are executed. Depending on the configuration, additional steps might be required:
+
+- For [Actions Runner Controller][21]: No additional setup required. Due to limitations in the Datadog Agent, jobs shorter than the minimum collection interval of the Datadog Agent might not always display infrastructure correlation metrics. To adjust this value, see [Datadog Agent configuration template][22] and change `min_collection_interval` to be less than 15 seconds.
+
+- For other configurations: To correlate jobs with the hosts running them, ensure the GitHub runner name matches the machine's hostname.
 
 To see the metrics, click on a job span in the trace view. A window opens with an **Infrastructure** tab displaying the host metrics.
 
@@ -130,3 +134,6 @@ The **CI Pipeline List** page shows data for only the default branch of each rep
 [17]: https://app.datadoghq.com/ci/pipelines
 [18]: https://app.datadoghq.com/ci/pipeline-executions
 [19]: /continuous_integration/search/#search-for-pipelines
+[20]: /agent
+[21]: https://github.com/actions/actions-runner-controller
+[22]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/config_template.yaml

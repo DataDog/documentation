@@ -205,7 +205,7 @@ components:
       schema:
         type: string
     ConfluentAccountID:
-      description: Confluent Account id.
+      description: Confluent Account ID.
       in: path
       name: account_id
       required: true
@@ -1075,6 +1075,22 @@ components:
       type: string
       x-enum-varnames:
       - API_KEYS
+    APITrigger:
+      description: Trigger a workflow VIA an API. The workflow must be published.
+      properties:
+        rateLimit:
+          $ref: '#/components/schemas/TriggerRateLimit'
+      type: object
+    APITriggerWrapper:
+      description: Schema for an API-based trigger.
+      properties:
+        apiTrigger:
+          $ref: '#/components/schemas/APITrigger'
+        startStepNames:
+          $ref: '#/components/schemas/StartStepNames'
+      required:
+      - apiTrigger
+      type: object
     AWSAccountConfigID:
       description: 'Unique Datadog ID of the AWS Account Integration Config.
 
@@ -1849,6 +1865,56 @@ components:
       - id
       - base_severity
       type: object
+    Annotation:
+      description: A list of annotations used in the workflow. These are like sticky
+        notes for your workflow!
+      properties:
+        display:
+          $ref: '#/components/schemas/AnnotationDisplay'
+        id:
+          description: The `Annotation` `id`.
+          example: ''
+          type: string
+        markdownTextAnnotation:
+          $ref: '#/components/schemas/AnnotationMarkdownTextAnnotation'
+      required:
+      - id
+      - display
+      - markdownTextAnnotation
+      type: object
+    AnnotationDisplay:
+      description: The definition of `AnnotationDisplay` object.
+      properties:
+        bounds:
+          $ref: '#/components/schemas/AnnotationDisplayBounds'
+      type: object
+    AnnotationDisplayBounds:
+      description: The definition of `AnnotationDisplayBounds` object.
+      properties:
+        height:
+          description: The `bounds` `height`.
+          format: double
+          type: number
+        width:
+          description: The `bounds` `width`.
+          format: double
+          type: number
+        x:
+          description: The `bounds` `x`.
+          format: double
+          type: number
+        y:
+          description: The `bounds` `y`.
+          format: double
+          type: number
+      type: object
+    AnnotationMarkdownTextAnnotation:
+      description: The definition of `AnnotationMarkdownTextAnnotation` object.
+      properties:
+        text:
+          description: The `markdownTextAnnotation` `text`.
+          type: string
+      type: object
     ApiID:
       description: API identifier.
       example: 90646597-5fdb-4a17-a240-647003f8c028
@@ -1991,6 +2057,17 @@ components:
           type: array
         deployment:
           $ref: '#/components/schemas/DeploymentRelationship'
+      type: object
+    AppTriggerWrapper:
+      description: Schema for an App-based trigger.
+      properties:
+        appTrigger:
+          description: Trigger a workflow VIA an App.
+          type: object
+        startStepNames:
+          $ref: '#/components/schemas/StartStepNames'
+      required:
+      - appTrigger
       type: object
     ApplicationKeyCreateAttributes:
       description: Attributes used to create an application Key.
@@ -5259,6 +5336,23 @@ components:
       - OPEN
       - IN_PROGRESS
       - CLOSED
+    CaseTrigger:
+      description: Trigger a workflow VIA a Case. For automatic triggering a handle
+        must be configured and the workflow must be published.
+      properties:
+        rateLimit:
+          $ref: '#/components/schemas/TriggerRateLimit'
+      type: object
+    CaseTriggerWrapper:
+      description: Schema for a Case-based trigger.
+      properties:
+        caseTrigger:
+          $ref: '#/components/schemas/CaseTrigger'
+        startStepNames:
+          $ref: '#/components/schemas/StartStepNames'
+      required:
+      - caseTrigger
+      type: object
     CaseType:
       description: Case type
       enum:
@@ -5476,6 +5570,17 @@ components:
       type: string
       x-enum-varnames:
       - SERVICE
+    ChangeEventTriggerWrapper:
+      description: Schema for a Change Event-based trigger.
+      properties:
+        changeEventTrigger:
+          description: Trigger a workflow VIA a Change Event.
+          type: object
+        startStepNames:
+          $ref: '#/components/schemas/StartStepNames'
+      required:
+      - changeEventTrigger
+      type: object
     ChargebackBreakdown:
       description: Charges breakdown.
       properties:
@@ -6178,6 +6283,60 @@ components:
       required:
       - location
       type: object
+    CompletionCondition:
+      description: The definition of `CompletionCondition` object.
+      properties:
+        operand1:
+          description: The `CompletionCondition` `operand1`.
+        operand2:
+          description: The `CompletionCondition` `operand2`.
+        operator:
+          $ref: '#/components/schemas/CompletionConditionOperator'
+      required:
+      - operand1
+      - operator
+      type: object
+    CompletionConditionOperator:
+      description: The definition of `CompletionConditionOperator` object.
+      enum:
+      - OPERATOR_EQUAL
+      - OPERATOR_NOT_EQUAL
+      - OPERATOR_GREATER_THAN
+      - OPERATOR_LESS_THAN
+      - OPERATOR_GREATER_THAN_OR_EQUAL_TO
+      - OPERATOR_LESS_THAN_OR_EQUAL_TO
+      - OPERATOR_CONTAINS
+      - OPERATOR_DOES_NOT_CONTAIN
+      - OPERATOR_IS_NULL
+      - OPERATOR_IS_NOT_NULL
+      - OPERATOR_IS_EMPTY
+      - OPERATOR_IS_NOT_EMPTY
+      example: OPERATOR_EQUAL
+      type: string
+      x-enum-varnames:
+      - OPERATOR_EQUAL
+      - OPERATOR_NOT_EQUAL
+      - OPERATOR_GREATER_THAN
+      - OPERATOR_LESS_THAN
+      - OPERATOR_GREATER_THAN_OR_EQUAL_TO
+      - OPERATOR_LESS_THAN_OR_EQUAL_TO
+      - OPERATOR_CONTAINS
+      - OPERATOR_DOES_NOT_CONTAIN
+      - OPERATOR_IS_NULL
+      - OPERATOR_IS_NOT_NULL
+      - OPERATOR_IS_EMPTY
+      - OPERATOR_IS_NOT_EMPTY
+    CompletionGate:
+      description: Used to create conditions before running subsequent actions.
+      properties:
+        completionCondition:
+          $ref: '#/components/schemas/CompletionCondition'
+        retryStrategy:
+          $ref: '#/components/schemas/RetryStrategy'
+      required:
+      - completionCondition
+      - retryStrategy
+      type: object
     Component:
       description: '[Definition of a UI component in the app](https://docs.datadoghq.com/service_management/app_builder/components/)'
       properties:
@@ -6648,6 +6807,70 @@ components:
           items:
             $ref: '#/components/schemas/ConfluentResourceResponseData'
           type: array
+      type: object
+    Connection:
+      description: The definition of `Connection` object.
+      properties:
+        connectionId:
+          description: The `Connection` `connectionId`.
+          example: ''
+          type: string
+        label:
+          description: The `Connection` `label`.
+          example: ''
+          type: string
+      required:
+      - connectionId
+      - label
+      type: object
+    ConnectionEnv:
+      description: A list of connections or connection groups used in the workflow.
+      properties:
+        connectionGroups:
+          description: The `ConnectionEnv` `connectionGroups`.
+          items:
+            $ref: '#/components/schemas/ConnectionGroup'
+          type: array
+        connections:
+          description: The `ConnectionEnv` `connections`.
+          items:
+            $ref: '#/components/schemas/Connection'
+          type: array
+        env:
+          $ref: '#/components/schemas/ConnectionEnvEnv'
+      required:
+      - env
+      type: object
+    ConnectionEnvEnv:
+      description: The definition of `ConnectionEnvEnv` object.
+      enum:
+      - default
+      example: default
+      type: string
+      x-enum-varnames:
+      - DEFAULT
+    ConnectionGroup:
+      description: The definition of `ConnectionGroup` object.
+      properties:
+        connectionGroupId:
+          description: The `ConnectionGroup` `connectionGroupId`.
+          example: ''
+          type: string
+        label:
+          description: The `ConnectionGroup` `label`.
+          example: ''
+          type: string
+        tags:
+          description: The `ConnectionGroup` `tags`.
+          example:
+          - ''
+          items:
+            type: string
+          type: array
+      required:
+      - connectionGroupId
+      - label
+      - tags
       type: object
     Container:
       description: Container object.
@@ -7556,6 +7779,82 @@ components:
           $ref: '#/components/schemas/RelationshipToRule'
         type:
           $ref: '#/components/schemas/RuleType'
+      type: object
+    CreateWorkflowRequest:
+      description: A request object for creating a new workflow.
+      example:
+        data:
+          attributes:
+            description: A sample workflow.
+            name: Example Workflow
+            published: true
+            spec:
+              annotations:
+              - display:
+                  bounds:
+                    height: 150
+                    width: 300
+                    x: -375
+                    y: -0.5
+                id: 99999999-9999-9999-9999-999999999999
+                markdownTextAnnotation:
+                  text: Example annotation.
+              connectionEnvs:
+              - connections:
+                - connectionId: 11111111-1111-1111-1111-111111111111
+                  label: INTEGRATION_DATADOG
+                env: default
+              handle: my-handle
+              inputSchema:
+                parameters:
+                - defaultValue: default
+                  name: input
+                  type: STRING
+              outputSchema:
+                parameters:
+                - name: output
+                  type: ARRAY_OBJECT
+                  value: '{{ Steps.Step1 }}'
+              steps:
+              - actionId: com.datadoghq.dd.monitor.listMonitors
+                connectionLabel: INTEGRATION_DATADOG
+                name: Step1
+                outboundEdges:
+                - branchName: main
+                  nextStepName: Step2
+                parameters:
+                - name: tags
+                  value: service:monitoring
+              - actionId: com.datadoghq.core.noop
+                name: Step2
+              triggers:
+              - monitorTrigger:
+                  rateLimit:
+                    count: 1
+                    interval: 3600s
+                startStepNames:
+                - Step1
+              - githubWebhookTrigger: {}
+                startStepNames:
+                - Step1
+            tags:
+            - team:infra
+            - service:monitoring
+            - foo:bar
+          type: workflows
+      properties:
+        data:
+          $ref: '#/components/schemas/WorkflowData'
+      required:
+      - data
+      type: object
+    CreateWorkflowResponse:
+      description: The response object after creating a new workflow.
+      properties:
+        data:
+          $ref: '#/components/schemas/WorkflowData'
+      required:
+      - data
       type: object
     Creator:
       description: Creator of the object.
@@ -9042,6 +9341,17 @@ components:
           items:
             $ref: '#/components/schemas/DashboardListItemResponse'
           type: array
+      type: object
+    DashboardTriggerWrapper:
+      description: Schema for a Dashboard-based trigger.
+      properties:
+        dashboardTrigger:
+          description: Trigger a workflow VIA a Dashboard.
+          type: object
+        startStepNames:
+          $ref: '#/components/schemas/StartStepNames'
+      required:
+      - dashboardTrigger
       type: object
     DashboardType:
       description: The type of the dashboard.
@@ -11022,6 +11332,19 @@ components:
           minLength: 1
           type: string
       type: object
+    ErrorHandler:
+      description: Used to handle errors in an action.
+      properties:
+        fallbackStepName:
+          description: The `ErrorHandler` `fallbackStepName`.
+          example: ''
+          type: string
+        retryStrategy:
+          $ref: '#/components/schemas/RetryStrategy'
+      required:
+      - retryStrategy
+      - fallbackStepName
+      type: object
     Event:
       description: The metadata associated with a request.
       properties:
@@ -12014,7 +12337,7 @@ components:
       description: The schema representation of a Fastly service.
       properties:
         id:
-          description: The id of the Fastly service
+          description: The ID of the Fastly service
           example: 6abc7de6893AbcDe9fghIj
           type: string
         tags:
@@ -12801,6 +13124,30 @@ components:
             $ref: '#/components/schemas/GetInterfacesData'
           type: array
       type: object
+    GetRuleVersionHistoryData:
+      description: Data for the rule version history.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/RuleVersionHistory'
+        id:
+          description: ID of the rule.
+          type: string
+        type:
+          $ref: '#/components/schemas/GetRuleVersionHistoryDataType'
+      type: object
+    GetRuleVersionHistoryDataType:
+      description: Type of data.
+      enum:
+      - GetRuleVersionHistoryResponse
+      type: string
+      x-enum-varnames:
+      - GETRULEVERSIONHISTORYRESPONSE
+    GetRuleVersionHistoryResponse:
+      description: Response for getting the rule version history.
+      properties:
+        data:
+          $ref: '#/components/schemas/GetRuleVersionHistoryData'
+      type: object
     GetSBOMResponse:
       description: The expected response schema when getting an SBOM.
       properties:
@@ -12830,6 +13177,12 @@ components:
       - _HANDLE
       - EMAIL
       - _EMAIL
+    GetWorkflowResponse:
+      description: The response object after getting a workflow.
+      properties:
+        data:
+          $ref: '#/components/schemas/WorkflowData'
+      type: object
     GitCommitSHA:
       description: Git Commit SHA.
       example: 66adc9350f2cc9b250b69abddab733dd55e1a588
@@ -12839,6 +13192,26 @@ components:
       description: Git Repository URL
       example: https://github.com/organization/example-repository
       type: string
+    GithubWebhookTrigger:
+      description: Trigger a workflow VIA GitHub webhook. To trigger a workflow from
+        GitHub, you must set a `webhookSecret`. In your GitHub Webhook Settings, set
+        the Payload URL to "base_url"/api/v2/workflows/"workflow_id"/webhook?orgId="org_id",
+        select application/json for the content type, and be highly recommend enabling
+        SSL verification for security. The workflow must be published.
+      properties:
+        rateLimit:
+          $ref: '#/components/schemas/TriggerRateLimit'
+      type: object
+    GithubWebhookTriggerWrapper:
+      description: Schema for a GitHub webhook-based trigger.
+      properties:
+        githubWebhookTrigger:
+          $ref: '#/components/schemas/GithubWebhookTrigger'
+        startStepNames:
+          $ref: '#/components/schemas/StartStepNames'
+      required:
+      - githubWebhookTrigger
+      type: object
     GroupScalarColumn:
       description: A column containing the tag keys and values in a group.
       properties:
@@ -15134,6 +15507,23 @@ components:
       type: string
       x-enum-varnames:
       - INCIDENT_TODOS
+    IncidentTrigger:
+      description: Trigger a workflow VIA an Incident. For automatic triggering a
+        handle must be configured and the workflow must be published.
+      properties:
+        rateLimit:
+          $ref: '#/components/schemas/TriggerRateLimit'
+      type: object
+    IncidentTriggerWrapper:
+      description: Schema for an Incident-based trigger.
+      properties:
+        incidentTrigger:
+          $ref: '#/components/schemas/IncidentTrigger'
+        startStepNames:
+          $ref: '#/components/schemas/StartStepNames'
+      required:
+      - incidentTrigger
+      type: object
     IncidentType:
       default: incidents
       description: Incident resource type.
@@ -15578,6 +15968,59 @@ components:
       - ONCALL
       - INCIDENT
       - RELATION
+    InputSchema:
+      description: A list of input parameters for the workflow. These can be used
+        as dynamic runtime values in your workflow.
+      properties:
+        parameters:
+          description: The `InputSchema` `parameters`.
+          items:
+            $ref: '#/components/schemas/InputSchemaParameters'
+          type: array
+      type: object
+    InputSchemaParameters:
+      description: The definition of `InputSchemaParameters` object.
+      properties:
+        defaultValue:
+          description: The `InputSchemaParameters` `defaultValue`.
+        description:
+          description: The `InputSchemaParameters` `description`.
+          type: string
+        label:
+          description: The `InputSchemaParameters` `label`.
+          type: string
+        name:
+          description: The `InputSchemaParameters` `name`.
+          example: ''
+          type: string
+        type:
+          $ref: '#/components/schemas/InputSchemaParametersType'
+      required:
+      - name
+      - type
+      type: object
+    InputSchemaParametersType:
+      description: The definition of `InputSchemaParametersType` object.
+      enum:
+      - STRING
+      - NUMBER
+      - BOOLEAN
+      - OBJECT
+      - ARRAY_STRING
+      - ARRAY_NUMBER
+      - ARRAY_BOOLEAN
+      - ARRAY_OBJECT
+      example: STRING
+      type: string
+      x-enum-varnames:
+      - STRING
+      - NUMBER
+      - BOOLEAN
+      - OBJECT
+      - ARRAY_STRING
+      - ARRAY_NUMBER
+      - ARRAY_BOOLEAN
+      - ARRAY_OBJECT
     IntakePayloadAccepted:
       description: The payload accepted for intake.
       properties:
@@ -15779,6 +16222,15 @@ components:
           example: 1729843470000
           format: int64
           type: integer
+        groupSignalsBy:
+          description: Additional grouping to perform on top of the existing groups
+            in the query section. Must be a subset of the existing groups.
+          example:
+          - service
+          items:
+            description: Field to group by.
+            type: string
+          type: array
         index:
           description: Index used to load the data.
           example: cloud_siem
@@ -19759,6 +20211,23 @@ components:
         type:
           $ref: '#/components/schemas/MonitorDowntimeMatchResourceType'
       type: object
+    MonitorTrigger:
+      description: Trigger a workflow VIA a Monitor. For automatic triggering a handle
+        must be configured and the workflow must be published.
+      properties:
+        rateLimit:
+          $ref: '#/components/schemas/TriggerRateLimit'
+      type: object
+    MonitorTriggerWrapper:
+      description: Schema for a Monitor-based trigger.
+      properties:
+        monitorTrigger:
+          $ref: '#/components/schemas/MonitorTrigger'
+        startStepNames:
+          $ref: '#/components/schemas/StartStepNames'
+      required:
+      - monitorTrigger
+      type: object
     MonitorType:
       description: Attributes from the monitor that triggered the event.
       nullable: true
@@ -20534,6 +21003,21 @@ components:
       type: string
       x-enum-varnames:
       - ORGS
+    OutboundEdge:
+      description: The definition of `OutboundEdge` object.
+      properties:
+        branchName:
+          description: The `OutboundEdge` `branchName`.
+          example: ''
+          type: string
+        nextStepName:
+          description: The `OutboundEdge` `nextStepName`.
+          example: ''
+          type: string
+      required:
+      - nextStepName
+      - branchName
+      type: object
     OutcomeType:
       default: outcome
       description: The JSON:API type for an outcome.
@@ -20713,6 +21197,60 @@ components:
           example: /api/v2/scorecard/outcomes?include=rule&page%5Blimit%5D=100&page%5Boffset%5D=100
           type: string
       type: object
+    OutputSchema:
+      description: A list of output parameters for the workflow.
+      properties:
+        parameters:
+          description: The `OutputSchema` `parameters`.
+          items:
+            $ref: '#/components/schemas/OutputSchemaParameters'
+          type: array
+      type: object
+    OutputSchemaParameters:
+      description: The definition of `OutputSchemaParameters` object.
+      properties:
+        defaultValue:
+          description: The `OutputSchemaParameters` `defaultValue`.
+        description:
+          description: The `OutputSchemaParameters` `description`.
+          type: string
+        label:
+          description: The `OutputSchemaParameters` `label`.
+          type: string
+        name:
+          description: The `OutputSchemaParameters` `name`.
+          example: ''
+          type: string
+        type:
+          $ref: '#/components/schemas/OutputSchemaParametersType'
+        value:
+          description: The `OutputSchemaParameters` `value`.
+      required:
+      - name
+      - type
+      type: object
+    OutputSchemaParametersType:
+      description: The definition of `OutputSchemaParametersType` object.
+      enum:
+      - STRING
+      - NUMBER
+      - BOOLEAN
+      - OBJECT
+      - ARRAY_STRING
+      - ARRAY_NUMBER
+      - ARRAY_BOOLEAN
+      - ARRAY_OBJECT
+      example: STRING
+      type: string
+      x-enum-varnames:
+      - STRING
+      - NUMBER
+      - BOOLEAN
+      - OBJECT
+      - ARRAY_STRING
+      - ARRAY_NUMBER
+      - ARRAY_BOOLEAN
+      - ARRAY_OBJECT
     Pagination:
       description: Pagination object.
       properties:
@@ -20724,6 +21262,19 @@ components:
           description: Total count of elements matched by the filter.
           format: int64
           type: integer
+      type: object
+    Parameter:
+      description: The definition of `Parameter` object.
+      properties:
+        name:
+          description: The `Parameter` `name`.
+          example: ''
+          type: string
+        value:
+          description: The `Parameter` `value`.
+      required:
+      - name
+      - value
       type: object
     PartialAPIKey:
       description: Partial Datadog API key.
@@ -22367,6 +22918,24 @@ components:
             from the other indexes
           type: string
       type: object
+    ReadinessGate:
+      description: Used to merge multiple branches into a single branch.
+      properties:
+        thresholdType:
+          $ref: '#/components/schemas/ReadinessGateThresholdType'
+      required:
+      - thresholdType
+      type: object
+    ReadinessGateThresholdType:
+      description: The definition of `ReadinessGateThresholdType` object.
+      enum:
+      - ANY
+      - ALL
+      example: ANY
+      type: string
+      x-enum-varnames:
+      - ANY
+      - ALL
     RelationType:
       description: Supported relation types.
       enum:
@@ -23499,6 +24068,41 @@ components:
       required:
       - data
       type: object
+    RetryStrategy:
+      description: The definition of `RetryStrategy` object.
+      properties:
+        kind:
+          $ref: '#/components/schemas/RetryStrategyKind'
+        linear:
+          $ref: '#/components/schemas/RetryStrategyLinear'
+      required:
+      - kind
+      type: object
+    RetryStrategyKind:
+      description: The definition of `RetryStrategyKind` object.
+      enum:
+      - RETRY_STRATEGY_LINEAR
+      example: RETRY_STRATEGY_LINEAR
+      type: string
+      x-enum-varnames:
+      - RETRY_STRATEGY_LINEAR
+    RetryStrategyLinear:
+      description: The definition of `RetryStrategyLinear` object.
+      properties:
+        interval:
+          description: The `RetryStrategyLinear` `interval`. The expected format is
+            the number of seconds ending with an s. For example, 1 day is 86400s
+          example: ''
+          type: string
+        maxRetries:
+          description: The `RetryStrategyLinear` `maxRetries`.
+          example: 0.0
+          format: double
+          type: number
+      required:
+      - interval
+      - maxRetries
+      type: object
     Role:
       description: Role object returned by the API.
       properties:
@@ -23838,8 +24442,7 @@ components:
       x-enum-varnames:
       - RULE
     RuleTypes:
-      description: Security rule types used to filter signals and vulnerabilities
-        generating notifications.
+      description: Security rule types used as filters in security rules.
       example:
       - misconfiguration
       - attack_path
@@ -23847,7 +24450,7 @@ components:
         $ref: '#/components/schemas/RuleTypesItems'
       type: array
     RuleTypesItems:
-      description: 'Security rule types which can be used in notification rules.
+      description: 'Security rule type which can be used in security rules.
 
         Signal-based notification rules can filter signals based on rule types application_security,
         log_detection,
@@ -23899,6 +24502,57 @@ components:
           description: The user name.
           example: John Doe
           type: string
+      type: object
+    RuleVersionHistory:
+      description: Response object containing the version history of a rule.
+      properties:
+        count:
+          description: The number of rule versions.
+          format: int32
+          maximum: 2147483647
+          type: integer
+        data:
+          additionalProperties:
+            $ref: '#/components/schemas/RuleVersions'
+            description: A rule version with a list of updates.
+          description: The `RuleVersionHistory` `data`.
+          type: object
+      type: object
+    RuleVersionUpdate:
+      description: A change in a rule version.
+      properties:
+        change:
+          description: The new value of the field.
+          example: cloud_provider:aws
+          type: string
+        field:
+          description: The field that was changed.
+          example: Tags
+          type: string
+        type:
+          $ref: '#/components/schemas/RuleVersionUpdateType'
+      type: object
+    RuleVersionUpdateType:
+      description: The type of change.
+      enum:
+      - create
+      - update
+      - delete
+      type: string
+      x-enum-varnames:
+      - CREATE
+      - UPDATE
+      - DELETE
+    RuleVersions:
+      description: A rule version with a list of updates.
+      properties:
+        changes:
+          description: A list of changes.
+          items:
+            $ref: '#/components/schemas/RuleVersionUpdate'
+          type: array
+        rule:
+          $ref: '#/components/schemas/SecurityMonitoringRuleResponse'
       type: object
     RumMetricCompute:
       description: The compute rule to compute the rum-based metric.
@@ -24614,6 +25268,26 @@ components:
         type:
           $ref: '#/components/schemas/ScalarFormulaResponseType'
       type: object
+    ScheduleTrigger:
+      description: Trigger a workflow VIA a Schedule. The workflow must be published.
+      properties:
+        rruleExpression:
+          description: Recurrence rule expression for scheduling.
+          example: ''
+          type: string
+      required:
+      - rruleExpression
+      type: object
+    ScheduleTriggerWrapper:
+      description: Schema for a Schedule-based trigger.
+      properties:
+        scheduleTrigger:
+          $ref: '#/components/schemas/ScheduleTrigger'
+        startStepNames:
+          $ref: '#/components/schemas/StartStepNames'
+      required:
+      - scheduleTrigger
+      type: object
     ScorecardType:
       default: scorecard
       description: The JSON:API type for scorecard.
@@ -24899,6 +25573,11 @@ components:
     SecurityMonitoringRuleCase:
       description: Case when signal is generated.
       properties:
+        actions:
+          description: Action to perform for each rule case.
+          items:
+            $ref: '#/components/schemas/SecurityMonitoringRuleCaseAction'
+          type: array
         condition:
           description: 'A rule case contains logical operations (`>`,`>=`, `&&`, `||`)
             to determine if a signal should be generated
@@ -24917,9 +25596,42 @@ components:
         status:
           $ref: '#/components/schemas/SecurityMonitoringRuleSeverity'
       type: object
+    SecurityMonitoringRuleCaseAction:
+      description: Action to perform when a signal is triggered. Only available for
+        Application Security rule type.
+      properties:
+        options:
+          $ref: '#/components/schemas/SecurityMonitoringRuleCaseActionOptions'
+        type:
+          $ref: '#/components/schemas/SecurityMonitoringRuleCaseActionType'
+      type: object
+    SecurityMonitoringRuleCaseActionOptions:
+      description: Options for the rule action
+      properties:
+        duration:
+          description: Duration of the action in seconds. 0 indicates no expiration.
+          example: 0
+          format: int64
+          minimum: 0
+          type: integer
+      type: object
+    SecurityMonitoringRuleCaseActionType:
+      description: The action type.
+      enum:
+      - block_ip
+      - block_user
+      type: string
+      x-enum-varnames:
+      - BLOCK_IP
+      - BLOCK_USER
     SecurityMonitoringRuleCaseCreate:
       description: Case when signal is generated.
       properties:
+        actions:
+          description: Action to perform for each rule case.
+          items:
+            $ref: '#/components/schemas/SecurityMonitoringRuleCaseAction'
+          type: array
         condition:
           description: 'A case contains logical operations (`>`,`>=`, `&&`, `||`)
             to determine if a signal should be generated
@@ -25380,6 +26092,15 @@ components:
             and workload security rules.
           items:
             $ref: '#/components/schemas/SecurityMonitoringFilter'
+          type: array
+        groupSignalsBy:
+          description: Additional grouping to perform on top of the existing groups
+            in the query section. Must be a subset of the existing groups.
+          example:
+          - service
+          items:
+            description: Field to group by.
+            type: string
           type: array
         hasExtendedTitle:
           description: Whether the notifications include the triggering group-by values
@@ -26086,6 +26807,15 @@ components:
           items:
             $ref: '#/components/schemas/SecurityMonitoringFilter'
           type: array
+        groupSignalsBy:
+          description: Additional grouping to perform on top of the existing groups
+            in the query section. Must be a subset of the existing groups.
+          example:
+          - service
+          items:
+            description: Field to group by.
+            type: string
+          type: array
         hasExtendedTitle:
           description: Whether the notifications include the triggering group-by values
             in their title.
@@ -26157,6 +26887,15 @@ components:
             and workload security rules.
           items:
             $ref: '#/components/schemas/SecurityMonitoringFilter'
+          type: array
+        groupSignalsBy:
+          description: Additional grouping to perform on top of the existing groups
+            in the query section. Must be a subset of the existing groups.
+          example:
+          - service
+          items:
+            description: Field to group by.
+            type: string
           type: array
         hasExtendedTitle:
           description: Whether the notifications include the triggering group-by values
@@ -26299,6 +27038,15 @@ components:
           items:
             $ref: '#/components/schemas/SecurityMonitoringFilter'
           type: array
+        groupSignalsBy:
+          description: Additional grouping to perform on top of the existing groups
+            in the query section. Must be a subset of the existing groups.
+          example:
+          - service
+          items:
+            description: Field to group by.
+            type: string
+          type: array
         hasExtendedTitle:
           description: Whether the notifications include the triggering group-by values
             in their title.
@@ -26375,6 +27123,15 @@ components:
             and workload security rules.
           items:
             $ref: '#/components/schemas/SecurityMonitoringFilter'
+          type: array
+        groupSignalsBy:
+          description: Additional grouping to perform on top of the existing groups
+            in the query section. Must be a subset of the existing groups.
+          example:
+          - service
+          items:
+            description: Field to group by.
+            type: string
           type: array
         hasExtendedTitle:
           description: Whether the notifications include the triggering group-by values
@@ -26780,6 +27537,23 @@ components:
           example: John Doe
           nullable: true
           type: string
+      type: object
+    SecurityTrigger:
+      description: Trigger a workflow VIA a Security Signal or Finding. For automatic
+        triggering a handle must be configured and the workflow must be published.
+      properties:
+        rateLimit:
+          $ref: '#/components/schemas/TriggerRateLimit'
+      type: object
+    SecurityTriggerWrapper:
+      description: Schema for a Security-based trigger.
+      properties:
+        securityTrigger:
+          $ref: '#/components/schemas/SecurityTrigger'
+        startStepNames:
+          $ref: '#/components/schemas/StartStepNames'
+      required:
+      - securityTrigger
       type: object
     Selectors:
       description: 'Selectors are used to filter security issues for which notifications
@@ -28538,6 +29312,17 @@ components:
       - channel_name
       - redirect_url
       type: object
+    SlackTriggerWrapper:
+      description: Schema for a Slack-based trigger.
+      properties:
+        slackTrigger:
+          description: Trigger a workflow VIA Slack. The workflow must be published.
+          type: object
+        startStepNames:
+          $ref: '#/components/schemas/StartStepNames'
+      required:
+      - slackTrigger
+      type: object
     SloReportCreateRequest:
       description: The SLO report request body.
       properties:
@@ -29460,6 +30245,41 @@ components:
             from the other indexes
           type: string
       type: object
+    Spec:
+      description: The spec defines what the workflow does.
+      properties:
+        annotations:
+          description: A list of annotations used in the workflow. These are like
+            sticky notes for your workflow!
+          items:
+            $ref: '#/components/schemas/Annotation'
+          type: array
+        connectionEnvs:
+          description: A list of connections or connection groups used in the workflow.
+          items:
+            $ref: '#/components/schemas/ConnectionEnv'
+          type: array
+        handle:
+          description: Unique identifier used to trigger workflows automatically in
+            Datadog.
+          type: string
+        inputSchema:
+          $ref: '#/components/schemas/InputSchema'
+        outputSchema:
+          $ref: '#/components/schemas/OutputSchema'
+        steps:
+          description: A `Step` is a sub-component of a workflow. Each `Step` performs
+            an action.
+          items:
+            $ref: '#/components/schemas/Step'
+          type: array
+        triggers:
+          description: The list of triggers that activate this workflow. At least
+            one trigger is required, and each trigger type may appear at most once.
+          items:
+            $ref: '#/components/schemas/Trigger'
+          type: array
+      type: object
     SpecVersion:
       description: The version of the CycloneDX specification a BOM conforms to.
       enum:
@@ -29478,6 +30298,14 @@ components:
       - ONE_THREE
       - ONE_FOUR
       - ONE_FIVE
+    StartStepNames:
+      description: A list of steps that run first after a trigger fires.
+      example:
+      - ''
+      items:
+        description: The `StartStepNames` `items`.
+        type: string
+      type: array
     State:
       description: The state of the rule evaluation.
       enum:
@@ -29490,6 +30318,64 @@ components:
       - PASS
       - FAIL
       - SKIP
+    Step:
+      description: A Step is a sub-component of a workflow. Each Step performs an
+        action.
+      properties:
+        actionId:
+          description: The unique identifier of an action.
+          example: ''
+          type: string
+        completionGate:
+          $ref: '#/components/schemas/CompletionGate'
+        connectionLabel:
+          description: The unique identifier of a connection defined in the spec.
+          type: string
+        display:
+          $ref: '#/components/schemas/StepDisplay'
+        errorHandlers:
+          description: The `Step` `errorHandlers`.
+          items:
+            $ref: '#/components/schemas/ErrorHandler'
+          type: array
+        name:
+          description: Name of the step.
+          example: ''
+          type: string
+        outboundEdges:
+          description: A list of subsequent actions to run.
+          items:
+            $ref: '#/components/schemas/OutboundEdge'
+          type: array
+        parameters:
+          description: A list of inputs for an action.
+          items:
+            $ref: '#/components/schemas/Parameter'
+          type: array
+        readinessGate:
+          $ref: '#/components/schemas/ReadinessGate'
+      required:
+      - name
+      - actionId
+      type: object
+    StepDisplay:
+      description: The definition of `StepDisplay` object.
+      properties:
+        bounds:
+          $ref: '#/components/schemas/StepDisplayBounds'
+      type: object
+    StepDisplayBounds:
+      description: The definition of `StepDisplayBounds` object.
+      properties:
+        x:
+          description: The `bounds` `x`.
+          format: double
+          type: number
+        y:
+          description: The `bounds` `y`.
+          format: double
+          type: number
+      type: object
     TagsEventAttribute:
       description: Array of tags associated with your event.
       example:
@@ -30302,6 +31188,33 @@ components:
       type: string
       x-enum-varnames:
       - SECRET
+    Trigger:
+      description: One of the triggers that can start the execution of a workflow.
+      oneOf:
+      - $ref: '#/components/schemas/APITriggerWrapper'
+      - $ref: '#/components/schemas/AppTriggerWrapper'
+      - $ref: '#/components/schemas/CaseTriggerWrapper'
+      - $ref: '#/components/schemas/ChangeEventTriggerWrapper'
+      - $ref: '#/components/schemas/DashboardTriggerWrapper'
+      - $ref: '#/components/schemas/GithubWebhookTriggerWrapper'
+      - $ref: '#/components/schemas/IncidentTriggerWrapper'
+      - $ref: '#/components/schemas/MonitorTriggerWrapper'
+      - $ref: '#/components/schemas/ScheduleTriggerWrapper'
+      - $ref: '#/components/schemas/SecurityTriggerWrapper'
+      - $ref: '#/components/schemas/SlackTriggerWrapper'
+      - $ref: '#/components/schemas/WorkflowTriggerWrapper'
+    TriggerRateLimit:
+      description: Defines a rate limit for a trigger.
+      properties:
+        count:
+          description: The `TriggerRateLimit` `count`.
+          format: int64
+          type: integer
+        interval:
+          description: The `TriggerRateLimit` `interval`. The expected format is the
+            number of seconds ending with an s. For example, 1 day is 86400s
+          type: string
+      type: object
     TriggerSource:
       description: 'The type of security issues on which the rule applies. Notification
         rules based on security signals need to use the trigger source "security_signals",
@@ -30590,6 +31503,81 @@ components:
           $ref: '#/components/schemas/RelationshipToRule'
         type:
           $ref: '#/components/schemas/RuleType'
+      type: object
+    UpdateWorkflowRequest:
+      description: A request object for updating an existing workflow.
+      example:
+        data:
+          attributes:
+            description: A sample workflow.
+            name: Example Workflow
+            published: true
+            spec:
+              annotations:
+              - display:
+                  bounds:
+                    height: 150
+                    width: 300
+                    x: -375
+                    y: -0.5
+                id: 99999999-9999-9999-9999-999999999999
+                markdownTextAnnotation:
+                  text: Example annotation.
+              connectionEnvs:
+              - connections:
+                - connectionId: 11111111-1111-1111-1111-111111111111
+                  label: INTEGRATION_DATADOG
+                env: default
+              handle: my-handle
+              inputSchema:
+                parameters:
+                - defaultValue: default
+                  name: input
+                  type: STRING
+              outputSchema:
+                parameters:
+                - name: output
+                  type: ARRAY_OBJECT
+                  value: '{{ Steps.Step1 }}'
+              steps:
+              - actionId: com.datadoghq.dd.monitor.listMonitors
+                connectionLabel: INTEGRATION_DATADOG
+                name: Step1
+                outboundEdges:
+                - branchName: main
+                  nextStepName: Step2
+                parameters:
+                - name: tags
+                  value: service:monitoring
+              - actionId: com.datadoghq.core.noop
+                name: Step2
+              triggers:
+              - monitorTrigger:
+                  rateLimit:
+                    count: 1
+                    interval: 3600s
+                startStepNames:
+                - Step1
+              - githubWebhookTrigger: {}
+                startStepNames:
+                - Step1
+            tags:
+            - team:infra
+            - service:monitoring
+            - foo:bar
+          id: 22222222-2222-2222-2222-222222222222
+          type: workflows
+      properties:
+        data:
+          $ref: '#/components/schemas/WorkflowDataUpdate'
+      required:
+      - data
+      type: object
+    UpdateWorkflowResponse:
+      description: The response object after updating a workflow.
+      properties:
+        data:
+          $ref: '#/components/schemas/WorkflowDataUpdate'
       type: object
     UpsertCatalogEntityRequest:
       description: Create or update entity request.
@@ -31658,6 +32646,134 @@ components:
       - PAST_SIX_MONTHS
       - PAST_ONE_YEAR
       - ALERT
+    WorkflowData:
+      description: Data related to the workflow.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/WorkflowDataAttributes'
+        id:
+          description: The workflow identifier
+          readOnly: true
+          type: string
+        relationships:
+          $ref: '#/components/schemas/WorkflowDataRelationships'
+        type:
+          $ref: '#/components/schemas/WorkflowDataType'
+      required:
+      - type
+      - attributes
+      type: object
+    WorkflowDataAttributes:
+      description: The definition of `WorkflowDataAttributes` object.
+      properties:
+        createdAt:
+          description: When the workflow was created.
+          format: date-time
+          readOnly: true
+          type: string
+        description:
+          description: Description of the workflow.
+          type: string
+        name:
+          description: Name of the workflow.
+          example: ''
+          type: string
+        published:
+          description: Set the workflow to published or unpublished. Workflows in
+            an unpublished state will only be executable via manual runs. Automatic
+            triggers such as Schedule will not execute the workflow until it is published.
+          type: boolean
+        spec:
+          $ref: '#/components/schemas/Spec'
+        tags:
+          description: Tags of the workflow.
+          items:
+            type: string
+          type: array
+        updatedAt:
+          description: When the workflow was last updated.
+          format: date-time
+          readOnly: true
+          type: string
+        webhookSecret:
+          description: If a Webhook trigger is defined on this workflow, a webhookSecret
+            is required and should be provided here.
+          type: string
+          writeOnly: true
+      required:
+      - name
+      - spec
+      type: object
+    WorkflowDataRelationships:
+      description: The definition of `WorkflowDataRelationships` object.
+      properties:
+        creator:
+          $ref: '#/components/schemas/WorkflowUserRelationship'
+        owner:
+          $ref: '#/components/schemas/WorkflowUserRelationship'
+      readOnly: true
+      type: object
+    WorkflowDataType:
+      description: The definition of `WorkflowDataType` object.
+      enum:
+      - workflows
+      example: workflows
+      type: string
+      x-enum-varnames:
+      - WORKFLOWS
+    WorkflowDataUpdate:
+      description: Data related to the workflow being updated.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/WorkflowDataUpdateAttributes'
+        id:
+          description: The workflow identifier
+          type: string
+        relationships:
+          $ref: '#/components/schemas/WorkflowDataRelationships'
+        type:
+          $ref: '#/components/schemas/WorkflowDataType'
+      required:
+      - type
+      - attributes
+      type: object
+    WorkflowDataUpdateAttributes:
+      description: The definition of `WorkflowDataUpdateAttributes` object.
+      properties:
+        createdAt:
+          description: When the workflow was created.
+          format: date-time
+          readOnly: true
+          type: string
+        description:
+          description: Description of the workflow.
+          type: string
+        name:
+          description: Name of the workflow.
+          type: string
+        published:
+          description: Set the workflow to published or unpublished. Workflows in
+            an unpublished state will only be executable via manual runs. Automatic
+            triggers such as Schedule will not execute the workflow until it is published.
+          type: boolean
+        spec:
+          $ref: '#/components/schemas/Spec'
+        tags:
+          description: Tags of the workflow.
+          items:
+            type: string
+          type: array
+        updatedAt:
+          description: When the workflow was last updated.
+          format: date-time
+          readOnly: true
+          type: string
+        webhookSecret:
+          description: If a Webhook trigger is defined on this workflow, a webhookSecret
+            is required and should be provided here.
+          type: string
+          writeOnly: true
+      type: object
     WorkflowInstanceCreateMeta:
       description: Additional information for creating a workflow instance.
       properties:
@@ -31724,6 +32840,45 @@ components:
           format: int64
           type: integer
       type: object
+    WorkflowTriggerWrapper:
+      description: Schema for a Workflow-based trigger.
+      properties:
+        startStepNames:
+          $ref: '#/components/schemas/StartStepNames'
+        workflowTrigger:
+          description: Trigger a workflow VIA the Datadog UI. Only required if no
+            other trigger exists.
+          type: object
+      required:
+      - workflowTrigger
+      type: object
+    WorkflowUserRelationship:
+      description: The definition of `WorkflowUserRelationship` object.
+      properties:
+        data:
+          $ref: '#/components/schemas/WorkflowUserRelationshipData'
+      type: object
+    WorkflowUserRelationshipData:
+      description: The definition of `WorkflowUserRelationshipData` object.
+      properties:
+        id:
+          description: The user identifier
+          example: ''
+          type: string
+        type:
+          $ref: '#/components/schemas/WorkflowUserRelationshipType'
+      required:
+      - type
+      - id
+      type: object
+    WorkflowUserRelationshipType:
+      description: The definition of `WorkflowUserRelationshipType` object.
+      enum:
+      - users
+      example: users
+      type: string
+      x-enum-varnames:
+      - USERS
     WorklflowCancelInstanceResponse:
       description: Information about the canceled instance.
       properties:
@@ -42374,7 +43529,7 @@ paths:
         required: false
         schema:
           type: boolean
-      - description: '(Beta) Filter custom metrics that have or have not been queried
+      - description: '(Preview) Filter custom metrics that have or have not been queried
           in the specified window[seconds].
 
           If no window is provided or the window is less than 2 hours, a default of
@@ -42395,6 +43550,14 @@ paths:
         required: false
         schema:
           type: string
+      - description: (Preview) Filter metrics that are used in dashboards, monitors,
+          notebooks, SLOs.
+        example: true
+        in: query
+        name: filter[related_assets]
+        required: false
+        schema:
+          type: boolean
       - description: 'The number of seconds of look back (from now) to apply to a
           filter[tag] or filter[queried] query.
 
@@ -47243,6 +48406,9 @@ paths:
       x-menu-order: 27
       x-undo:
         type: safe
+      x-unstable: '**Note**: This endpoint is a private preview.
+
+        If you are interested in accessing this API, please [fill out this form](https://forms.gle/kMYC1sDr6WDUBDsx9).'
   /api/v2/security/signals/notification_rules:
     get:
       description: Returns the list of notification rules for security signals.
@@ -47259,7 +48425,7 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - security_monitoring_notification_profiles_read
-      summary: Get the list of signal-based rules
+      summary: Get the list of signal-based notification rules
       tags:
       - Security Monitoring
       x-menu-order: 15
@@ -47304,7 +48470,7 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - security_monitoring_notification_profiles_write
-      summary: Create a new signal-based rule
+      summary: Create a new signal-based notification rule
       tags:
       - Security Monitoring
       x-codegen-request-body-name: body
@@ -47355,7 +48521,7 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - security_monitoring_notification_profiles_write
-      summary: Delete a signal-based rule
+      summary: Delete a signal-based notification rule
       tags:
       - Security Monitoring
       x-menu-order: 21
@@ -47395,7 +48561,7 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - security_monitoring_notification_profiles_read
-      summary: Get details of a signal-based rule
+      summary: Get details of a signal-based notification rule
       tags:
       - Security Monitoring
       x-menu-order: 18
@@ -47444,7 +48610,7 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - security_monitoring_notification_profiles_write
-      summary: Patch a signal-based rule
+      summary: Patch a signal-based notification rule
       tags:
       - Security Monitoring
       x-codegen-request-body-name: body
@@ -47850,7 +49016,7 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - security_monitoring_notification_profiles_read
-      summary: Get the list of vulnerability-based rules
+      summary: Get the list of vulnerability notification rules
       tags:
       - Security Monitoring
       x-menu-order: 15
@@ -47895,7 +49061,7 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - security_monitoring_notification_profiles_write
-      summary: Create a new vulnerability-based rule
+      summary: Create a new vulnerability-based notification rule
       tags:
       - Security Monitoring
       x-codegen-request-body-name: body
@@ -47946,7 +49112,7 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - security_monitoring_notification_profiles_write
-      summary: Delete a vulnerability-based rule
+      summary: Delete a vulnerability-based notification rule
       tags:
       - Security Monitoring
       x-menu-order: 21
@@ -47986,7 +49152,7 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - security_monitoring_notification_profiles_read
-      summary: Get details of a vulnerability-based rule
+      summary: Get details of a vulnerability notification rule
       tags:
       - Security Monitoring
       x-menu-order: 18
@@ -48035,7 +49201,7 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - security_monitoring_notification_profiles_write
-      summary: Patch a vulnerability-based rule
+      summary: Patch a vulnerability-based notification rule
       tags:
       - Security Monitoring
       x-codegen-request-body-name: body
@@ -49036,6 +50202,45 @@ paths:
         - security_monitoring_rules_write
       x-undo:
         type: idempotent
+  /api/v2/security_monitoring/rules/{rule_id}/version_history:
+    get:
+      description: Get a rule's version history.
+      operationId: GetRuleVersionHistory
+      parameters:
+      - $ref: '#/components/parameters/SecurityMonitoringRuleID'
+      - $ref: '#/components/parameters/PageSize'
+      - $ref: '#/components/parameters/PageNumber'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetRuleVersionHistoryResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_rules_read
+      summary: Get a rule's version history
+      tags:
+      - Security Monitoring
+      x-menu-order: 25
+      x-permission:
+        operator: OR
+        permissions:
+        - security_monitoring_rules_read
+      x-undo:
+        type: safe
+      x-unstable: '**Note**: This endpoint is in beta and may be subject to changes.'
   /api/v2/security_monitoring/signals:
     get:
       description: 'The list endpoint returns security signals that match a search
@@ -53624,6 +54829,206 @@ paths:
         - teams_read
       x-undo:
         type: safe
+  /api/v2/workflows:
+    post:
+      description: Create a new workflow, returning the workflow ID. This API requires
+        an application key scoped with the `workflows_write` permission.
+      operationId: CreateWorkflow
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateWorkflowRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateWorkflowResponse'
+          description: Successfully created a workflow.
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Forbidden
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Too many requests
+      summary: Create a Workflow
+      tags:
+      - Workflow Automation
+      x-given:
+        workflow:
+          parameters:
+          - name: body
+            value: "{\n  \"data\": {\n    \"type\": \"workflows\",\n    \"attributes\":
+              {\n        \"name\": \"Cassette Workflow x-given\",\n        \"spec\":
+              {\n            \"triggers\": [\n                {\n                    \"startStepNames\":
+              [\"No_op\"],\n                    \"workflowTrigger\": {}\n                }\n
+              \           ],\n            \"steps\": [\n              {\n                \"name\":
+              \"No_op\",\n                \"actionId\": \"com.datadoghq.core.noop\"\n
+              \             }\n            ]\n        }\n    }\n  }\n}"
+          step: there is a valid "workflow" in the system
+      x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - workflows_write
+      x-undo:
+        operationId: DeleteWorkflow
+        parameters:
+        - name: workflow_id
+          source: data.id
+        type: unsafe
+  /api/v2/workflows/{workflow_id}:
+    delete:
+      description: Delete a workflow by ID. This API requires an application key scoped
+        with the `workflows_write` permission.
+      operationId: DeleteWorkflow
+      parameters:
+      - $ref: '#/components/parameters/WorkflowId'
+      responses:
+        '204':
+          description: Successfully deleted a workflow.
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Not found
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Too many requests
+      summary: Delete an existing Workflow
+      tags:
+      - Workflow Automation
+      x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - workflows_write
+      x-undo:
+        type: idempotent
+    get:
+      description: Get a workflow by ID.  This API requires an application key scoped
+        with the `workflows_read` permission.
+      operationId: GetWorkflow
+      parameters:
+      - $ref: '#/components/parameters/WorkflowId'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetWorkflowResponse'
+          description: Successfully got a workflow.
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Not found
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Too many requests
+      summary: Get an existing Workflow
+      tags:
+      - Workflow Automation
+      x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - workflows_read
+      x-undo:
+        type: safe
+    patch:
+      description: Update a workflow by ID. This API requires an application key scoped
+        with the `workflows_write` permission.
+      operationId: UpdateWorkflow
+      parameters:
+      - $ref: '#/components/parameters/WorkflowId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateWorkflowRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateWorkflowResponse'
+          description: Successfully updated a workflow.
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Not found
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Too many requests
+      summary: Update an existing Workflow
+      tags:
+      - Workflow Automation
+      x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - workflows_write
+      x-undo:
+        type: idempotent
   /api/v2/workflows/{workflow_id}/instances:
     get:
       description: List all instances of a given workflow. This API requires an application
@@ -53654,7 +55059,7 @@ paths:
       summary: List workflow instances
       tags:
       - Workflow Automation
-      x-menu-order: 1
+      x-menu-order: 5
       x-permission:
         operator: OR
         permissions:
@@ -53695,7 +55100,7 @@ paths:
       tags:
       - Workflow Automation
       x-codegen-request-body-name: body
-      x-menu-order: 2
+      x-menu-order: 6
       x-permission:
         operator: OR
         permissions:
@@ -53733,7 +55138,7 @@ paths:
       summary: Get a workflow instance
       tags:
       - Workflow Automation
-      x-menu-order: 3
+      x-menu-order: 7
       x-permission:
         operator: OR
         permissions:
@@ -53766,7 +55171,7 @@ paths:
       summary: Cancel a workflow instance
       tags:
       - Workflow Automation
-      x-menu-order: 4
+      x-menu-order: 8
       x-permission:
         operator: OR
         permissions:
@@ -54286,7 +55691,12 @@ tags:
   externalDocs:
     url: https://docs.datadoghq.com/account_management/users
   name: Users
-- description: Automate your teams operational processes with Datadog Workflow Automation.
+- description: Datadog Workflow Automation allows you to automate your end-to-end
+    processes by connecting Datadog with the rest of your tech stack. Build workflows
+    to auto-remediate your alerts, streamline your incident and security processes,
+    and reduce manual toil. Workflow Automation supports over 1,000+ OOTB actions,
+    including AWS, JIRA, ServiceNow, GitHub, and OpenAI. Learn more in our Workflow
+    Automation docs [here](https://docs.datadoghq.com/service_management/workflows/).
   externalDocs:
     description: Find out more at
     url: https://docs.datadoghq.com/service_management/workflows/

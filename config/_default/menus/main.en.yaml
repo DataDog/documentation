@@ -152,9 +152,9 @@ menu:
       url: getting_started/api/
       parent: getting_started
       weight: 14
-    - name: Service Catalog
-      identifier: getting_started_service_catalog
-      url: getting_started/service_catalog/
+    - name: Software Catalog
+      identifier: getting_started_software_catalog
+      url: getting_started/software_catalog/
       parent: getting_started
       weight: 15
     - name: Session Replay
@@ -882,9 +882,9 @@ menu:
       url: developers/integrations/create-an-integration-dashboard
       parent: dev_tools_integrations
       weight: 407
-    - name: Create a Recommended Monitor
-      identifier: dev_tools_integrations_recommended_monitor
-      url: developers/integrations/create-an-integration-recommended-monitor
+    - name: Create a Monitor Template
+      identifier: dev_tools_integrations_monitor_template
+      url: developers/integrations/create-an-integration-monitor-template
       parent: dev_tools_integrations
       weight: 408
     - name: Create a Cloud SIEM Detection Rule
@@ -1479,10 +1479,10 @@ menu:
       parent: alerting
       identifier: monitor_configuration
       weight: 1
-    - name: Recommended Monitors
-      url: monitors/recommended/
+    - name: Monitor Templates
+      url: monitors/templates/
       parent: alerting
-      identifier: monitor_recommended
+      identifier: monitor_templates
       weight: 2
     - name: Monitor Types
       url: monitors/types/
@@ -1908,141 +1908,141 @@ menu:
       identifier: bits_ai_natural_language_querying
       parent: bits_ai
       weight: 3
-    - name: Service Catalog
-      url: service_catalog/
+    - name: Software Catalog
+      url: software_catalog/
       pre: service-catalog
       parent: platform_heading
-      identifier: service_catalog
+      identifier: software_catalog
       weight: 110000
-    - name: Customize the Service Catalog
-      url: service_catalog/customize
-      parent: service_catalog
-      identifier: service_catalog_customize
+    - name: Customize the Software Catalog
+      url: software_catalog/customize
+      parent: software_catalog
+      identifier: software_catalog_customize
       weight: 1
     - name: Create Entries
-      url: service_catalog/customize/create_entries
-      parent: service_catalog_customize
-      identifier: service_catalog_create_entry
+      url: software_catalog/customize/create_entries
+      parent: software_catalog_customize
+      identifier: software_catalog_create_entry
       weight: 101
     - name: Import Entries from Datadog
-      url: service_catalog/customize/import_entries_dd
-      parent: service_catalog_customize
-      identifier: service_catalog_import_from_telemetries
+      url: software_catalog/customize/import_entries_dd
+      parent: software_catalog_customize
+      identifier: software_catalog_import_from_telemetries
       weight: 102
     - name: Import Entries from Backstage
-      url: service_catalog/customize/import_entries_backstage
-      parent: service_catalog_customize
-      identifier: service_catalog_import_from_backstage
+      url: software_catalog/customize/import_entries_backstage
+      parent: software_catalog_customize
+      identifier: software_catalog_import_from_backstage
       weight: 103
     - name: Import Entries from ServiceNow
-      url: service_catalog/customize/import_entries_servicenow
-      parent: service_catalog_customize
-      identifier: service_catalog_import_from_servicenow
+      url: software_catalog/customize/import_entries_servicenow
+      parent: software_catalog_customize
+      identifier: software_catalog_import_from_servicenow
       weight: 104
-    - name: Navigate the Service Catalog
-      url: service_catalog/navigating
-      parent: service_catalog
-      identifier: service_catalog_browse
+    - name: Navigate the Software Catalog
+      url: software_catalog/navigating
+      parent: software_catalog
+      identifier: software_catalog_browse
       weight: 2
     - name: Use Cases
-      url: service_catalog/use_cases
-      parent: service_catalog
-      identifier: service_catalog_use_cases
+      url: software_catalog/use_cases
+      parent: software_catalog
+      identifier: software_catalog_use_cases
       weight: 3
     - name: API Management
-      url: service_catalog/use_cases/api_management
-      parent: service_catalog_use_cases
-      identifier: service_catalog_use_cases_api_management
+      url: software_catalog/use_cases/api_management
+      parent: software_catalog_use_cases
+      identifier: software_catalog_use_cases_api_management
       weight: 301
     - name: Cloud Cost Management
-      url: service_catalog/use_cases/cloud_cost_management
-      parent: service_catalog_use_cases
-      identifier: service_catalog_use_cases_cloud_cost_management
+      url: software_catalog/use_cases/cloud_cost_management
+      parent: software_catalog_use_cases
+      identifier: software_catalog_use_cases_cloud_cost_management
       weight: 302
     - name: Application Security Management
-      url: service_catalog/use_cases/appsec_management
-      parent: service_catalog_use_cases
-      identifier: service_catalog_use_cases_appsec_management
+      url: software_catalog/use_cases/appsec_management
+      parent: software_catalog_use_cases
+      identifier: software_catalog_use_cases_appsec_management
       weight: 303
     - name: Developer Onboarding
-      url: service_catalog/use_cases/dev_onboarding
-      parent: service_catalog_use_cases
-      identifier: service_catalog_use_cases_dev_onboarding
+      url: software_catalog/use_cases/dev_onboarding
+      parent: software_catalog_use_cases
+      identifier: software_catalog_use_cases_dev_onboarding
       weight: 304
     - name: Dependency Management
-      url: service_catalog/use_cases/dependency_management
-      parent: service_catalog_use_cases
-      identifier: service_catalog_use_cases_dependency_management
-      weight: 305
+      url: software_catalog/use_cases/dependency_management
+      parent: software_catalog_use_cases
+      identifier: software_catalog_use_cases_dependency_management
+      weight: 305     
     - name: Manage a Component
-      url: service_catalog/manage
-      parent: service_catalog
-      identifier: service_catalog_investigate
+      url: software_catalog/manage
+      parent: software_catalog
+      identifier: software_catalog_investigate
       weight: 4
     - name: Definitions
-      url: service_catalog/service_definitions/
-      parent: service_catalog
-      identifier: service_catalog_definitions_versions
+      url: software_catalog/service_definitions/
+      parent: software_catalog
+      identifier: software_catalog_definitions_versions
       weight: 5
     - name: v3.0
-      url: /service_catalog/service_definitions/v3-0/
-      parent: service_catalog_definitions_versions
-      identifier: service_catalog_definitions_3-0
+      url: /software_catalog/service_definitions/v3-0/
+      parent: software_catalog_definitions_versions
+      identifier: software_catalog_definitions_3-0
       weight: 401
     - name: v2.2
-      url: /service_catalog/service_definitions/v2-2/
-      parent: service_catalog_definitions_versions
-      identifier: service_catalog_definitions_2-2
+      url: /software_catalog/service_definitions/v2-2/
+      parent: software_catalog_definitions_versions
+      identifier: software_catalog_definitions_2-2
       weight: 402
     - name: v2.1
-      url: /service_catalog/service_definitions/v2-1/
-      parent: service_catalog_definitions_versions
-      identifier: service_catalog_definitions_2-1
+      url: /software_catalog/service_definitions/v2-1/
+      parent: software_catalog_definitions_versions
+      identifier: software_catalog_definitions_2-1
       weight: 403
     - name: v2.0
-      url: /service_catalog/service_definitions/v2-0/
-      parent: service_catalog_definitions_versions
-      identifier: service_catalog_definitions_2-0
+      url: /software_catalog/service_definitions/v2-0/
+      parent: software_catalog_definitions_versions
+      identifier: software_catalog_definitions_2-0
       weight: 404
     - name: Scorecards
-      url: service_catalog/scorecards
-      parent: service_catalog
-      identifier: service_catalog_scorecards
+      url: software_catalog/scorecards
+      parent: software_catalog
+      identifier: software_catalog_scorecards
       weight: 6
     - name: Scorecard Configuration
-      url: service_catalog/scorecards/scorecard_configuration
-      parent: service_catalog_scorecards
+      url: software_catalog/scorecards/scorecard_configuration
+      parent: software_catalog_scorecards
       identifier: scorecard_configuration
       weight: 501
     - name: Custom Rules
-      url: service_catalog/scorecards/custom_rules
-      parent: service_catalog_scorecards
+      url: software_catalog/scorecards/custom_rules
+      parent: software_catalog_scorecards
       identifier: scorecard_custom_rules
       weight: 502
     - name: Using Scorecards
-      url: service_catalog/scorecards/using_scorecards
-      parent: service_catalog_scorecards
+      url: software_catalog/scorecards/using_scorecards
+      parent: software_catalog_scorecards
       identifier: using_scorecards
       weight: 503
     - name: Software Templates
-      url: service_catalog/software_templates
-      parent: service_catalog
+      url: software_catalog/software_templates
+      parent: software_catalog
       identifier: software_templates
       weight: 7
     - name: Definition APIs
-      url: service_catalog/apis
-      parent: service_catalog
-      identifier: service_catalog_apis
+      url: software_catalog/apis
+      parent: software_catalog
+      identifier: software_catalog_apis
       weight: 8
     - name: Integrations
-      url: service_catalog/integrations
-      parent: service_catalog
-      identifier: service_catalog_integrations
+      url: software_catalog/integrations
+      parent: software_catalog
+      identifier: software_catalog_integrations
       weight: 9
     - name: Troubleshooting
-      url: service_catalog/troubleshooting
-      parent: service_catalog
-      identifier: service_catalog_troubleshooting
+      url: software_catalog/troubleshooting
+      parent: software_catalog
+      identifier: software_catalog_troubleshooting
       weight: 10
     - name: Error Tracking
       url: error_tracking/
@@ -2527,11 +2527,6 @@ menu:
       parent: workflows_actions
       identifier: workflows_flow_control
       weight: 502
-    - name: Data Transformation
-      url: service_management/workflows/actions/data_transformation/
-      parent: workflows_actions
-      identifier: workflows_data_transformation
-      weight: 503
     - name: Save and Reuse Actions
       url: service_management/workflows/saved_actions/
       parent: workflows
@@ -2542,16 +2537,21 @@ menu:
       parent: workflows
       identifier: workflows_test_and_debug
       weight: 8
+    - name: JavaScript Expressions
+      url: service_management/workflows/expressions/
+      parent: workflows
+      identifier: workflows_expressions
+      weight: 9
     - name: Track Workflows
       url: service_management/workflows/track
       parent: workflows
       identifier: workflows_track
-      weight: 9
+      weight: 10
     - name: Limits
       url: service_management/workflows/limits/
       parent: workflows
       identifier: workflows_limits
-      weight: 10
+      weight: 11
     - name: App Builder
       url: service_management/app_builder/
       pre: app-builder
@@ -2988,21 +2988,26 @@ menu:
       parent: serverless
       identifier: serverless_container_apps
       weight: 5
+    - name: Azure Functions
+      url: serverless/azure_functions
+      parent: serverless
+      identifier: serverless_azure_functions
+      weight: 6
     - name: Google Cloud Run
       url: serverless/google_cloud_run
       parent: serverless
       identifier: serverless_gcr
-      weight: 6
+      weight: 7
     - name: Glossary
       url: serverless/glossary
       parent: serverless
       identifier: serverless_glossary
-      weight: 7
+      weight: 8
     - name: Guides
       url: serverless/guide/
       identifier: serverless_guides
       parent: serverless
-      weight: 8
+      weight: 9
     - name: Network Monitoring
       url: network_monitoring/
       pre: network
@@ -3545,10 +3550,10 @@ menu:
       parent: tracing
       identifier: tracing_services
       weight: 7
-    - name: Service Catalog
-      url: /service_catalog/
+    - name: Software Catalog
+      url: /software_catalog/
       parent: tracing_services
-      identifier: tracing_service_catalog
+      identifier: tracing_software_catalog
       weight: 701
     - name: Service Page
       url: tracing/services/service_page/
@@ -3581,17 +3586,17 @@ menu:
       identifier: tracing_apm_monitors
       weight: 707
     - name: Endpoint Observability
-      url: /service_catalog/endpoints/
+      url: /software_catalog/endpoints/
       identifier: endpoint_observability
       parent: tracing
       weight: 8
     - name: Explore Endpoints
-      url: /service_catalog/endpoints/explore_endpoints
+      url: /software_catalog/endpoints/explore_endpoints
       identifier: explore_endpoints
       parent: endpoint_observability
       weight: 802
     - name: Monitor Endpoints
-      url: /service_catalog/endpoints/monitor_endpoints
+      url: /software_catalog/endpoints/monitor_endpoints
       identifier: monitor_endpoints
       parent: endpoint_observability
       weight: 803
@@ -3826,21 +3831,26 @@ menu:
       parent: profiler_troubleshooting
       identifier: profiler_troubleshooting_ruby
       weight: 604
+    - name: Node.js
+      url: profiler/profiler_troubleshooting/nodejs/
+      parent: profiler_troubleshooting
+      identifier: profiler_troubleshooting_nodejs
+      weight: 605
     - name: .NET
       url: profiler/profiler_troubleshooting/dotnet/
       parent: profiler_troubleshooting
       identifier: profiler_troubleshooting_dotnet
-      weight: 605
+      weight: 606
     - name: PHP
       url: profiler/profiler_troubleshooting/php/
       parent: profiler_troubleshooting
       identifier: profiler_troubleshooting_php
-      weight: 606
+      weight: 607
     - name: C/C++/Rust
       url: profiler/profiler_troubleshooting/ddprof/
       parent: profiler_troubleshooting
       identifier: profiler_troubleshooting_linux
-      weight: 607
+      weight: 608
     - name: Guides
       url: profiler/guide/
       parent: profiler
@@ -4103,16 +4113,21 @@ menu:
       identifier: data_streams_live_messages
       parent: data_streams
       weight: 2
+    - name: Data Pipeline Lineage
+      url: data_streams/data_pipeline_lineage
+      identifier: data_streams_pipeline_lineage
+      parent: data_streams
+      weight: 3
     - name: Troubleshooting
       url: data_streams/troubleshooting
       identifier: data_streams_troubleshooting
       parent: data_streams
-      weight: 3
+      weight: 4
     - name: Guide
       url: data_streams/guide
       identifier: data_streams_guide
       parent: data_streams
-      weight: 4
+      weight: 5
     - name: Data Jobs Monitoring
       url: data_jobs/
       pre: data-jobs-monitoring
@@ -5719,6 +5734,11 @@ menu:
       parent: automation_pipelines
       identifier: automation_pipelines_inbox
       weight: 10002
+    - name: Set Due Date Rules
+      url: security/automation_pipelines/set_due_date
+      parent: automation_pipelines
+      identifier: automation_pipelines_due_date
+      weight: 10003
     - name: Security Inbox
       url: security/security_inbox
       parent: security_platform
@@ -5770,6 +5790,11 @@ menu:
       parent: cloud_siem_detection_rules
       identifier: cloud_siem_signal_correlation_rules
       weight: 20500
+    - name: MITRE ATT&CK Map
+      url: security/cloud_siem/detection_rules/mitre_attack_map
+      parent: cloud_siem_detection_rules
+      identifier: cloud_siem_mitre_attack_map
+      weight: 20510
     - name: OOTB Rules
       url: /security/default_rules/#cat-cloud-siem-log-detection
       parent: cloud_siem
@@ -6681,36 +6706,41 @@ menu:
       parent: rum_mobile_android
       identifier: rum_mobile_android_crash
       weight: 102
+    - name: Monitoring App Performance
+      url: real_user_monitoring/mobile_and_tv_monitoring/android/monitoring_app_performance
+      parent: rum_mobile_android
+      identifier: rum_mobile_android_monitoring_app_performance
+      weight: 103
     - name: Advanced Configuration
       url: real_user_monitoring/mobile_and_tv_monitoring/android/advanced_configuration
       parent: rum_mobile_android
       identifier: rum_mobile_android_advanced_config
-      weight: 103
+      weight: 104
     - name: Data Collected
       url: real_user_monitoring/mobile_and_tv_monitoring/android/data_collected
       parent: rum_mobile_android
       identifier: rum_mobile_android_data_collected
-      weight: 104
+      weight: 105
     - name: Mobile Vitals
       url: real_user_monitoring/mobile_and_tv_monitoring/android/mobile_vitals
       parent: rum_mobile_android
       identifier: rum_mobile_android_mobile_vitals
-      weight: 105
+      weight: 106
     - name: Web View Tracking
       url: real_user_monitoring/mobile_and_tv_monitoring/android/web_view_tracking
       parent: rum_mobile_android
       identifier: rum_mobile_android_web_view_tracking
-      weight: 106
+      weight: 107
     - name: Integrated Libraries
       url: real_user_monitoring/mobile_and_tv_monitoring/android/integrated_libraries
       parent: rum_mobile_android
       identifier: rum_mobile_android_integrated_libraries
-      weight: 107
+      weight: 108
     - name: Troubleshooting
       url: real_user_monitoring/mobile_and_tv_monitoring/android/troubleshooting
       parent: rum_mobile_android
       identifier: rum_mobile_android_troubleshooting
-      weight: 108
+      weight: 109
     - name: iOS and tvOS
       url: real_user_monitoring/mobile_and_tv_monitoring/ios
       parent: mobile_and_tv_monitoring
@@ -6726,41 +6756,46 @@ menu:
       parent: rum_mobile_ios
       identifier: rum_mobile_ios_crash
       weight: 102
+    - name: Mobile App Performance
+      url: real_user_monitoring/mobile_and_tv_monitoring/ios/monitoring_app_performance
+      parent: rum_mobile_ios
+      identifier: rum_mobile_ios_monitoring_app_performance
+      weight: 103
     - name: Advanced Configuration
       url: real_user_monitoring/mobile_and_tv_monitoring/ios/advanced_configuration
       parent: rum_mobile_ios
       identifier: rum_mobile_ios_advanced_config
-      weight: 103
+      weight: 104
     - name: Data Collected
       url: real_user_monitoring/mobile_and_tv_monitoring/ios/data_collected
       parent: rum_mobile_ios
       identifier: rum_mobile_ios_data_collected
-      weight: 104
+      weight: 105
     - name: Mobile Vitals
       url: real_user_monitoring/mobile_and_tv_monitoring/ios/mobile_vitals?tab=ios
       parent: rum_mobile_ios
       identifier: rum_mobile_ios_mobile_vitals
-      weight: 105
+      weight: 106
     - name: Web View Tracking
       url: real_user_monitoring/mobile_and_tv_monitoring/ios/web_view_tracking?tab=ios
       parent: rum_mobile_ios
       identifier: rum_mobile_ios_web_view_tracking
-      weight: 106
+      weight: 107
     - name: Integrated Libraries
       url: real_user_monitoring/mobile_and_tv_monitoring/ios/integrated_libraries
       parent: rum_mobile_ios
       identifier: rum_mobile_ios_integrated_libraries
-      weight: 107
+      weight: 108
     - name: Troubleshooting
       url: real_user_monitoring/mobile_and_tv_monitoring/ios/troubleshooting
       parent: rum_mobile_ios
       identifier: rum_mobile_ios_troubleshooting
-      weight: 108
+      weight: 109
     - name: Supported Versions
       url: real_user_monitoring/mobile_and_tv_monitoring/ios/supported_versions
       parent: rum_mobile_ios
       identifier: rum_mobile_ios_supported_versions
-      weight: 109
+      weight: 110
     - name: Flutter
       url: real_user_monitoring/mobile_and_tv_monitoring/flutter
       parent: mobile_and_tv_monitoring
@@ -7047,7 +7082,7 @@ menu:
       identifier: rum_generate_metrics
       weight: 403
     - name: Connect RUM and Traces
-      url: real_user_monitoring/connect_rum_and_traces
+      url: real_user_monitoring/platform/connect_rum_and_traces
       parent: real_user_monitoring_platform
       identifier: rum_connect_rum_and_traces
       weight: 404

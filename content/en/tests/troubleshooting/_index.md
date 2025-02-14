@@ -155,7 +155,7 @@ The best way to fix this is to make sure that the test parameters are the same b
 
 ## Session history, performance or code coverage tab only show a single execution
 
-This is likely caused by an unstable test session fingerprint. The default value for the test session fingerprint includes the test command, so an unstable test command might cause the test session fingerprint to be unstable. Some examples of unstable test commands include:
+This is likely caused by an unstable test session fingerprint. There's a set of parameters that the product checks to establish correspondence between test sessions. The test command used to execute the tests is one of them. If the test command contains a string that changes for every execution, such as a temporary folder, Datadog considers the sessions to be unrelated to each other. Some examples of unstable test commands are:
 
 - `yarn test --temp-dir=/var/folders/t1/rs2htfh55mz9px2j4prmpg_c0000gq/T`
 - `mvn test --temp-dir=/var/folders/t1/rs2htfh55mz9px2j4prmpg_c0000gq/T`
@@ -170,6 +170,10 @@ This can be solved by using the `DD_TEST_SESSION_NAME` environment variable. Use
 - `flaky-tests`
 - `ui-tests`
 - `backend-tests`
+
+## Test Impact Analysis does not show any time saved
+
+This is also caused by an unstable test session fingerprint. See the [Session history, performance or code coverage tab only show a single execution](#session-history-performance-or-code-coverage-tab-only-show-a-single-execution) section for more information.
 
 ## Further reading
 

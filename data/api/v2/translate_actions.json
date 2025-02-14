@@ -1567,25 +1567,25 @@
   },
   "GetSignalNotificationRules": {
     "description": "Returns the list of notification rules for security signals.",
-    "summary": "Get the list of signal-based rules"
+    "summary": "Get the list of signal-based notification rules"
   },
   "CreateSignalNotificationRule": {
     "description": "Create a new notification rule for security signals and return the created rule.",
-    "summary": "Create a new signal-based rule",
+    "summary": "Create a new signal-based notification rule",
     "request_description": "The body of the create notification rule request is composed of the rule type and the rule attributes:\nthe rule name, the selectors, the notification targets, and the rule enabled status.\n",
     "request_schema_description": "Body of the notification rule create request."
   },
   "DeleteSignalNotificationRule": {
     "description": "Delete a notification rule for security signals.",
-    "summary": "Delete a signal-based rule"
+    "summary": "Delete a signal-based notification rule"
   },
   "GetSignalNotificationRule": {
     "description": "Get the details of a notification rule for security signals.",
-    "summary": "Get details of a signal-based rule"
+    "summary": "Get details of a signal-based notification rule"
   },
   "PatchSignalNotificationRule": {
     "description": "Partially update the notification rule. All fields are optional; if a field is not provided, it is not updated.",
-    "summary": "Patch a signal-based rule",
+    "summary": "Patch a signal-based notification rule",
     "request_description": "",
     "request_schema_description": "Body of the notification rule patch request."
   },
@@ -1595,25 +1595,25 @@
   },
   "GetVulnerabilityNotificationRules": {
     "description": "Returns the list of notification rules for security vulnerabilities.",
-    "summary": "Get the list of vulnerability-based rules"
+    "summary": "Get the list of vulnerability notification rules"
   },
   "CreateVulnerabilityNotificationRule": {
     "description": "Create a new notification rule for security vulnerabilities and return the created rule.",
-    "summary": "Create a new vulnerability-based rule",
+    "summary": "Create a new vulnerability-based notification rule",
     "request_description": "The body of the create notification rule request is composed of the rule type and the rule attributes:\nthe rule name, the selectors, the notification targets, and the rule enabled status.\n",
     "request_schema_description": "Body of the notification rule create request."
   },
   "DeleteVulnerabilityNotificationRule": {
     "description": "Delete a notification rule for security vulnerabilities.",
-    "summary": "Delete a vulnerability-based rule"
+    "summary": "Delete a vulnerability-based notification rule"
   },
   "GetVulnerabilityNotificationRule": {
     "description": "Get the details of a notification rule for security vulnerabilities.",
-    "summary": "Get details of a vulnerability-based rule"
+    "summary": "Get details of a vulnerability notification rule"
   },
   "PatchVulnerabilityNotificationRule": {
     "description": "Partially update the notification rule. All fields are optional; if a field is not provided, it is not updated.",
-    "summary": "Patch a vulnerability-based rule",
+    "summary": "Patch a vulnerability-based notification rule",
     "request_description": "",
     "request_schema_description": "Body of the notification rule patch request."
   },
@@ -1740,6 +1740,10 @@
     "summary": "Test an existing rule",
     "request_description": "",
     "request_schema_description": "Test the rule queries of a rule (rule property is ignored when applied to an existing rule)"
+  },
+  "GetRuleVersionHistory": {
+    "description": "Get a rule's version history.",
+    "summary": "Get a rule's version history"
   },
   "ListSecurityMonitoringSignals": {
     "description": "The list endpoint returns security signals that match a search query.\nBoth this endpoint and the POST endpoint can be used interchangeably when listing\nsecurity signals.",
@@ -2152,6 +2156,26 @@
   "GetUserMemberships": {
     "description": "Get a list of memberships for a user",
     "summary": "Get user memberships"
+  },
+  "CreateWorkflow": {
+    "description": "Create a new workflow, returning the workflow ID. This API requires an application key scoped with the `workflows_write` permission.",
+    "summary": "Create a Workflow",
+    "request_description": "",
+    "request_schema_description": "A request object for creating a new workflow."
+  },
+  "DeleteWorkflow": {
+    "description": "Delete a workflow by ID. This API requires an application key scoped with the `workflows_write` permission.",
+    "summary": "Delete an existing Workflow"
+  },
+  "GetWorkflow": {
+    "description": "Get a workflow by ID.  This API requires an application key scoped with the `workflows_read` permission.",
+    "summary": "Get an existing Workflow"
+  },
+  "UpdateWorkflow": {
+    "description": "Update a workflow by ID. This API requires an application key scoped with the `workflows_write` permission.",
+    "summary": "Update an existing Workflow",
+    "request_description": "",
+    "request_schema_description": "A request object for updating an existing workflow."
   },
   "ListWorkflowInstances": {
     "description": "List all instances of a given workflow. This API requires an application key scoped with the workflows_read permission.",

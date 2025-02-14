@@ -12,6 +12,9 @@ further_reading:
   text: "Terraform Azure Datadog Log Forwarder"
 ---
 
+{{< callout url="https://docs.google.com/forms/d/e/1FAIpQLSeZkmqTwBQ43zR9SZoyf_oUDCFDsth00lb4jRKjfn-vKNW4dA/viewform" header="Automated Log Forwarding for Azure (in Preview)">}}
+Automatically set up log forwarding across your Azure environment—no manual configuration required! This feature automatically manages and scales log forwarding services.{{< /callout >}}
+
 ## Overview
 
 Use this guide to set up logging from your Azure subscriptions to Datadog.

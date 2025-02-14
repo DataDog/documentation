@@ -1,6 +1,6 @@
 setuptools로 애플리케이션이 패키지된 경우:
 
-1. [`dd-trace` 패키지](https://github.com/DataDog/dd-trace-go)를 설치하세요.
+1. [`dd-trace` 패키지](https://github.com/DataDog/dd-trace-py)를 설치하세요.
 1. `setup.py` 파일에 처음으로 가져올 항목으로 `import ddtrace.sourcecode.setuptools_auto`를 추가하세요.
 1. 환경 변수 `DD_MAIN_PACKAGE`를 주 Python 패키지 이름으로 설정하세요.
 

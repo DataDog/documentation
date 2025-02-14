@@ -29,6 +29,7 @@ title: Guías de monitores
 
 {{< whatsnext desc="API:" >}}
     {{< nextlink href="monitors/guide/monitor_api_options" >}}Monitorizar opciones de API{{< /nextlink >}}
+    {{< nextlink href="monitors/guide/on_missing_data" >}}Migración a la configuración de Datos faltantes{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="General Guides:" >}}
@@ -44,6 +45,9 @@ title: Guías de monitores
     {{< nextlink href="monitors/guide/integrate-monitors-with-statuspage" >}}Integrar monitores con Statuspage{{< /nextlink >}}
     {{< nextlink href="monitors/guide/github_gating" >}}Aislar tus despliegues de acciones de GitHub utilizando monitores de Datadog{{< /nextlink >}}
     {{< nextlink href="monitors/guide/monitoring-available-disk-space" >}}Monitorizar el espacio disponible en el disco{{< /nextlink >}}
+ {{< nextlink href="monitors/guide/on_missing_data" >}}Migración a la configuración de Datos faltantes{{< /nextlink >}}
+{{< nextlink href="monitors/guide/composite_use_cases" >}}Casos de uso de monitor compuesto{{< /nextlink >}}
+{{< nextlink href="monitors/guide/notification-message-best-practices" >}}Prácticas recomendadas de Mensajes de notificación{{< /nextlink>}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Consultas:" >}}

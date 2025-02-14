@@ -57,7 +57,7 @@ To report test results to Datadog, you need to configure the `datadog-ci` gem:
 {{% ci-autoinstrumentation %}}
 
 <div class="alert alert-warning">
-  <strong>Note</strong>: Auto-instrumentation is not supported for JRuby. Follow the <a href="/tests/setup/ruby/?tab=ciproviderwithautoinstrumentationsupport#manually-instrumenting-your-tests">manual instrumentation steps</a> instead.  
+  <strong>Note</strong>: Auto-instrumentation is not supported for JRuby. Follow the <a href="/tests/setup/ruby/?tab=ciproviderwithautoinstrumentationsupport#manually-instrumenting-your-tests">manual instrumentation steps</a> instead.
 </div>
 
 {{% /tab %}}
@@ -99,6 +99,9 @@ Follow these steps if your CI Provider is not supported for auto-instrumentation
 
 `DD_CIVISIBILITY_ENABLED=true` (Required)
 : Enables the Test Optimization product.
+
+`DD_TEST_SESSION_NAME`
+: Use this to identify a group of tests (for example: `unit-tests` or `integration-tests`).
 
 `DD_ENV` (Required)
 : Environment where the tests are being run (for example: `local` when running tests on a developer workstation or `ci` when running them on a CI provider).
@@ -206,11 +209,11 @@ For the full list of available instrumentation methods, see the [tracing documen
 ## Manually instrumenting your tests
 
 <div class="alert alert-info">
-<strong>Attention</strong>: when using manual instrumentation, run your tests like you normally do: 
+<strong>Attention</strong>: when using manual instrumentation, run your tests like you normally do:
 don't change `RUBYOPT` env variable and don't prepend `bundle exec ddcirb exec` to your test command
 </div>
 
-Auto-instrumentation adds additional performance overhead at the code loading stage. It can be especially noticeable for 
+Auto-instrumentation adds additional performance overhead at the code loading stage. It can be especially noticeable for
 large repositories with a lot of dependencies. If your project takes 20+ seconds to start, you are likely
 to benefit from manually instrumenting your tests.
 
@@ -449,6 +452,35 @@ Datadog::CI.active_test_module&.finish
 Datadog::CI.active_test_session&.passed!
 Datadog::CI.active_test_session&.finish
 ```
+
+## Best practices
+
+### Test session name `DD_TEST_SESSION_NAME`
+
+Use `DD_TEST_SESSION_NAME` to define the name of the test session and the related group of tests. Examples of values for this tag would be:
+
+- `unit-tests`
+- `integration-tests`
+- `smoke-tests`
+- `flaky-tests`
+- `ui-tests`
+- `backend-tests`
+
+If `DD_TEST_SESSION_NAME` is not specified, the default value used is a combination of the:
+
+- CI job name
+- Command used to run the tests (such as `yarn test`)
+
+The test session name needs to be unique within a repository to help you distinguish different groups of tests.
+
+#### When to use `DD_TEST_SESSION_NAME`
+
+There's a set of parameters that the product checks to establish correspondence between test sessions. The test command used to execute the tests is one of them. If the test command contains a string that changes for every execution, such as a temporary folder, Datadog considers the sessions to be unrelated to each other. Some examples of unstable test commands are:
+
+- `yarn test --temp-dir=/var/folders/t1/rs2htfh55mz9px2j4prmpg_c0000gq/T`
+- `pnpm vitest --temp-dir=/var/folders/t1/rs2htfh55mz9px2j4prmpg_c0000gq/T`
+
+Datadog recommends using `DD_TEST_SESSION_NAME` if your test commands varies between executions.
 
 ## Further reading
 

@@ -229,9 +229,9 @@ To verify the configuration:
 1. Check the raw trace data to confirm that container IDs and tags are properly translated into Datadog format (for example, `container.id` should become `container_id`).
 2. Verify that container metadata appears on the Containers page.
 
-## Missing metrics in Service Catalog and dashboards
+## Missing metrics in Software Catalog and dashboards
 
-**Symptom**: Metrics are not appearing in the Service Catalog and dashboards despite being properly collected.
+**Symptom**: Metrics are not appearing in the Software Catalog and dashboards despite being properly collected.
 
 **Cause**: This typically occurs due to incorrect or improperly mapped semantic conventions.
 

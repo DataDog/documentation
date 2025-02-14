@@ -111,10 +111,10 @@ Set the following environment variables to configure the tracer:
 `DD_CIVISIBILITY_ENABLED=true` (Required)
 : Enables the Test Optimization product.
 
-`DD_ENV` (Required)
+`DD_ENV`
 : Environment where the tests are being run (for example: `local` when running tests on a developer workstation or `ci` when running them on a CI provider).
 
-`DD_SERVICE` (Required)
+`DD_SERVICE`
 : Name of the service or library being tested.
 
 `DD_TRACER_FOLDER` (Required)
@@ -122,6 +122,9 @@ Set the following environment variables to configure the tracer:
 
 `MAVEN_OPTS=-javaagent:$DD_TRACER_FOLDER/dd-java-agent.jar` (Required)
 : Injects the tracer into the Maven build process.
+
+`DD_TEST_SESSION_NAME`
+: Identifies a group of tests (for example: `unit-tests` or `integration-tests`).
 
 Run your tests as you normally do (for example: `mvn test` or `mvn verify`).
 
@@ -133,10 +136,10 @@ Set the following environment variables to configure the tracer:
 `DD_CIVISIBILITY_ENABLED=true` (Required)
 : Enables the Test Optimization product.
 
-`DD_ENV` (Required)
+`DD_ENV`
 : Environment where the tests are being run (for example: `local` when running tests on a developer workstation or `ci` when running them on a CI provider).
 
-`DD_SERVICE` (Required)
+`DD_SERVICE`
 : Name of the service or library being tested.
 
 `DD_TRACER_FOLDER` (Required)
@@ -155,10 +158,13 @@ Set the following environment variables to configure the tracer:
 `DD_CIVISIBILITY_ENABLED=true` (Required)
 : Enables the Test Optimization product.
 
-`DD_ENV` (Required)
+`DD_TEST_SESSION_NAME`
+: Identifies a group of tests (for example: `unit-tests` or `integration-tests`).
+
+`DD_ENV`
 : Environment where the tests are being run (for example: `local` when running tests on a developer workstation or `ci` when running them on a CI provider).
 
-`DD_SERVICE` (Required)
+`DD_SERVICE`
 : Name of the service or library being tested.
 
 `DD_TRACER_FOLDER` (Required)
@@ -177,10 +183,13 @@ Set the following environment variables to configure the tracer:
 `DD_CIVISIBILITY_ENABLED=true` (Required)
 : Enables the Test Optimization product.
 
-`DD_ENV` (Required)
+`DD_TEST_SESSION_NAME`
+: Identifies a group of tests (for example: `unit-tests` or `integration-tests`).
+
+`DD_ENV`
 : Environment where the tests are being run (for example: `local` when running tests on a developer workstation or `ci` when running them on a CI provider).
 
-`DD_SERVICE` (Required)
+`DD_SERVICE`
 : Name of the service or library being tested.
 
 `DD_TRACER_FOLDER` (Required)
@@ -210,7 +219,33 @@ The tracer exposes a set of APIs that can be used to extend its functionality pr
 
 ### Adding custom tags to tests
 
-To add custom tags include [opentracing-util][4] library as a compile-time dependency to your project.
+{{< tabs >}}
+{{% tab "OpenTelemetry API" %}}
+
+To add custom tags, include the [opentelemetry-api][1] library as a compile-time dependency and set `dd.trace.otel.enabled` (system property) or `DD_TRACE_OTEL_ENABLED` (environment variable) to `true`.
+
+You can then add custom tags to your tests by using the active span:
+
+```java
+import io.opentelemetry.api.trace.Span;
+
+// ...
+// inside your test
+Span span = Span.current();
+span.setAttribute("test_owner", "my_team");
+// test continues normally
+// ...
+```
+
+For more information about adding tags, see the [Adding Tags][2] section of the Java custom instrumentation documentation.
+
+[1]: https://mvnrepository.com/artifact/io.opentelemetry/opentelemetry-api
+[2]: /tracing/trace_collection/custom_instrumentation/java?tab=locally#adding-tags
+
+{{% /tab %}}
+{{% tab "OpenTracing API" %}}
+
+To add custom tags, include the [opentracing-util][1] library as a compile-time dependency to your project.
 
 You can then add custom tags to your tests by using the active span:
 
@@ -230,11 +265,34 @@ if (span != null) {
 
 To create filters or `group by` fields for these tags, you must first create facets.
 
-For more information about adding tags, see the [Adding Tags][5] section of the Java custom instrumentation documentation.
+For more information about adding tags, see the [Adding Tags][2] section of the Java custom instrumentation documentation.
+
+[1]: https://mvnrepository.com/artifact/io.opentracing/opentracing-util
+[2]: /tracing/trace_collection/custom_instrumentation/java?tab=locally#adding-tags
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ### Adding custom measures to tests
 
 Just like tags, you can add custom measures to your tests by using the current active span:
+
+{{< tabs >}}
+{{% tab "OpenTelemetry API" %}}
+
+```java
+import io.opentelemetry.api.trace.Span;
+
+// ...
+// inside your test
+Span span = Span.current();
+span.setAttribute("test.memory.usage", 1e8);
+// test continues normally
+// ...
+```
+
+{{% /tab %}}
+{{% tab "OpenTracing API" %}}
 
 ```java
 import io.opentracing.Span;
@@ -249,6 +307,9 @@ if (span != null) {
 // test continues normally
 // ...
 ```
+
+{{% /tab %}}
+{{< /tabs >}}
 
 For more information about custom measures, see the [Add Custom Measures guide][6].
 
@@ -424,6 +485,32 @@ static Stream<Arguments> randomArguments() {
 }
 ```
 
+### Test session name `DD_TEST_SESSION_NAME`
+
+Use `DD_TEST_SESSION_NAME` to define the name of the test session and the related group of tests. Examples of values for this tag would be:
+
+- `unit-tests`
+- `integration-tests`
+- `smoke-tests`
+- `flaky-tests`
+- `ui-tests`
+- `backend-tests`
+
+If `DD_TEST_SESSION_NAME` is not specified, the default value used is a combination of the:
+
+- CI job name
+- Command used to run the tests (such as `mvn test`)
+
+The test session name needs to be unique within a repository to help you distinguish different groups of tests.
+
+#### When to use `DD_TEST_SESSION_NAME`
+
+There's a set of parameters that the product checks to establish correspondence between test sessions. The test command used to execute the tests is one of them. If the test command contains a string that changes for every execution, such as a temporary folder, Datadog considers the sessions to be unrelated to each other. Some examples of unstable test commands are:
+
+- `mvn test --temp-dir=/var/folders/t1/rs2htfh55mz9px2j4prmpg_c0000gq/T`
+
+Datadog recommends using `DD_TEST_SESSION_NAME` if your test commands varies between executions.
+
 ## Troubleshooting
 
 ### The tests are not appearing in Datadog after enabling Test Optimization in the tracer
@@ -483,8 +570,6 @@ To disable all integrations, augment the list of `-javaagent` arguments with `dd
 [1]: #using-manual-testing-api
 [2]: https://app.datadoghq.com/ci/setup/test?language=java
 [3]: /tracing/trace_collection/library_config/java/?tab=containers#configuration
-[4]: https://mvnrepository.com/artifact/io.opentracing/opentracing-util
-[5]: /tracing/trace_collection/custom_instrumentation/java?tab=locally#adding-tags
 [6]: /tests/guides/add_custom_measures/?tab=java
 [7]: https://mvnrepository.com/artifact/com.datadoghq/dd-trace-api
 [8]: /tests/#parameterized-test-configurations

@@ -74,7 +74,7 @@ Datadog supports associating the following resources with team handles:
 - [Incidents][6]
 - [Monitors][7]
 - [Resource Catalog][8]
-- [Service Catalog][9]
+- [Software Catalog][9]
 - [Service Level Objectives][10]
 - Synthetic Tests, Global Variables, Private Locations
 
@@ -129,11 +129,11 @@ The following table describes the products in which you can use the team filter:
 |-------------------------|----------------------------------------------------------------------------------|
 | [Dashboards][11]         | Team handle                                                                      |
 | [Resource Catalog][8]   | Team handle                                                                      |
-| [Service Catalog][12]    | Team handle                                                                      |
+| [Software Catalog][12]    | Team handle                                                                      |
 | [Incidents][13]          | Team handle                                                                      |
 | [Monitors][14]          | Team handle                                                                      |
-| [APM Error Tracking][15] | Service owned by teams (determined by ownership inside the [Service Catalog][12]) |
-| [Logs Error Tracking][16] | Service owned by teams (determined by ownership inside the [Service Catalog][12]) |
+| [APM Error Tracking][15] | Service owned by teams (determined by ownership inside the [Software Catalog][12]) |
+| [Logs Error Tracking][16] | Service owned by teams (determined by ownership inside the [Software Catalog][12]) |
 | [Service Level Objectives][17] | Team handle                                                                 |
 | [Data Streams Monitoring][18]  | Team handle                                                                 |
 | [Synthetic Tests][19]          | Team handle                                                                 |
@@ -157,7 +157,7 @@ To customize your team, see [Team Management][3].
 [6]: /service_management/incident_management/
 [7]: /monitors/configuration/?tab=thresholdalert#add-metadata
 [8]: /infrastructure/resource_catalog/
-[9]: /tracing/service_catalog/adding_metadata/#add-metadata-from-the-datadog-ui
+[9]: /tracing/software_catalog/adding_metadata/#add-metadata-from-the-datadog-ui
 [10]: /service_management/service_level_objectives/#slo-tags
 [11]: https://app.datadoghq.com/dashboard/lists
 [12]: https://app.datadoghq.com/services
