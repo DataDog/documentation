@@ -105,7 +105,15 @@ export const HugoGlobalConfigSchema = z
  * other site-wide configuration data, such as the
  * i18n translation data.
  */
-export type HugoGlobalConfig = z.infer<typeof HugoGlobalConfigSchema>;
+export type HugoGlobalConfig = {
+  siteParams: HugoSiteParams;
+  siteConfig: HugoSiteConfig;
+  env: HugoEnv;
+  languages: HugoLanguagesConfig;
+  siteDir: string;
+  i18n: i18nConfig;
+  dirs: HugoSubdirsByType;
+};
 
 /**
  * Any Hugo config that applies to a single page,
