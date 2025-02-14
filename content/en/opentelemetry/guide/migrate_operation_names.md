@@ -77,7 +77,7 @@ If you previously used span name configurations, replace them with processor con
 
 #### Replace SpanNameAsResourceName
 
-The removed `span_name_as_resource_name` configuration pulled the `span.name` attribute from your OpenTelemetry trace to populate the Datadog operation name. To maintain this functionality, use a transform processor to map span names to the `operation.name` attribute:
+The `span_name_as_resource_name` configuration you removed pulled the `span.name` attribute from your OpenTelemetry trace to populate the Datadog operation name. To maintain this functionality, use a transform processor to map span names to the `operation.name` attribute:
 
 ```yaml
 processors:
@@ -90,7 +90,7 @@ processors:
 
 #### Replace SpanNameRemappings
 
-The removed `span_name_remappings` configuration allowed automatic mapping between operation names. To maintain this functionality, use a transform processor to set specific operation names:
+The `span_name_remappings` configuration you removed allowed automatic mapping between operation names. To maintain this functionality, use a transform processor to set specific operation names:
 
 ```yaml
 processors:
