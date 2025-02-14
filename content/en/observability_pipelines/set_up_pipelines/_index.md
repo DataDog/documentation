@@ -33,16 +33,17 @@ Set up your pipelines and its [sources][1], [processors][2], and [destinations][
 1. Enable monitors for your pipeline.
 
 For detailed setup instructions, select a template-specific documentation and then select your source from that page:
-    - [Log volume control][4]
-    - [Dual ship logs][5]
-    - [Split logs][6]
-    - [Archive logs to Datadog Archives][7]
-    - [Sensitive data redaction][8]
-    - [Log Enrichment][9]
+  - [Log volume control][4]
+  - [Dual ship logs][5]
+  - [Split logs][6]
+  - [Archive logs to Datadog Archives][7]
+  - [Sensitive data redaction][8]
+  - [Log Enrichment][9]
+  - [Generate Metrics][10]
 
-See [Advanced Configurations][10] for bootstrapping options and for details on setting up the Worker with Kubernetes.
+See [Advanced Configurations][11] for bootstrapping options and for details on setting up the Worker with Kubernetes.
 
-After you have set up your pipeline, see [Update Existing Pipelines][11] if you want to make any changes to it.
+After you have set up your pipeline, see [Update Existing Pipelines][12] if you want to make any changes to it.
 
 ## Clone a pipeline
 
@@ -65,11 +66,12 @@ After you have set up your pipeline, see [Update Existing Pipelines][11] if you 
 [1]: /observability_pipelines/sources/
 [2]: /observability_pipelines/processors/
 [3]: /observability_pipelines/destinations/
-[4]: /observability_pipelines/log_volume_control/
-[5]: /observability_pipelines/dual_ship_logs/
-[6]: /observability_pipelines/split_logs/
-[7]: /observability_pipelines/archive_logs/
-[8]: /observability_pipelines/sensitive_data_redaction/
-[9]: /observability_pipelines/log_enrichment/
-[10]: /observability_pipelines/advanced_configurations/
-[11]: /observability_pipelines/update_existing_pipelines/
+[4]: /observability_pipelines/set_up_pipelines/log_volume_control/
+[5]: /observability_pipelines/set_up_pipelines/dual_ship_logs/
+[6]: /observability_pipelines/set_up_pipelines/split_logs/
+[7]: /observability_pipelines/set_up_pipelines/archive_logs/
+[8]: /observability_pipelines/set_up_pipelines/sensitive_data_redaction/
+[9]: /observability_pipelines/set_up_pipelines/log_enrichment/
+[10]: /observability_pipelines/set_up_pipelines/generate_metrics/
+[11]: /observability_pipelines/advanced_configurations/
+[12]: /observability_pipelines/update_existing_pipelines/
