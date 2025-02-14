@@ -64,7 +64,7 @@ The permissions you grant to the GitHub App determine which [GitHub integration]
 
 ### Configure PR comment settings for your repositories
 
-Configure PR comment settings globally for all repositories or tailor them individually for a single repository. You can enable comments for various scan types and define the minimum severity thresholds that determine when PR comments appear, allowing the exclusion of lower-severity issues.
+Configure PR comment settings globally for all repositories or tailor them individually for a single repository. You can enable comments for different scan types and set minimum severity thresholds to control when PR comments appear, enabling you to exclude comments from appearing on lower-severity issues.
 
 To configure PR comments for all repositories:
 
