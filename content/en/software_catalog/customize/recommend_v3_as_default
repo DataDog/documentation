@@ -42,7 +42,7 @@ To specify on-call, source code, or documentation for your services, you can add
 ### Entity Definition Schema (v3) (Recommended)
 The Entity Definition Schema is a structure that contains basic information about a software component. 
 
-See [here][3] for more details.
+For more details, see the [Definition Schema v3.0][3].
 
 ### Service Definition Schema (v2.2)
 
