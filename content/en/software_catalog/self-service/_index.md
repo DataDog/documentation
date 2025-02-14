@@ -23,7 +23,7 @@ Use [App Builder][2] to create dynamic, user-friendly forms to collect inputs fr
 Navigate to [App Builder Blueprints][9] or [Workflow Automation Blueprints][15]. These are examples of how to configure an App or Workflow to help you get started. You can make updates to the examples to fit your needs, such as configuring inputs, setting up integrations with other tools, and configuring permissions. See some examples below:
 
 #### Software Templating
-Configure an form to collect inputs from a developer, integrate with a template in source code management (e.g. Github), and generate a new repository or PR for a developer. Learn more in our [documentation][] on Software Templates.
+Configure an form to collect inputs from a developer, integrate with a template in source code management (e.g. Github), and generate a new repository or PR for a developer. Learn more in our [documentation][16] on Software Templates.
 
 #### Remediaton
 Consolidate data from cloud infrastructure or Kubernetes and enable developers to take simple, safe remediation actions. Trigger actions manually, in response to a monitor, or from an external API call.
@@ -78,3 +78,4 @@ When you have finished setting up and testing up your App, you can publish it fo
 [13]: https://app.datadoghq.com/app-builder/apps/edit?activeTab=data&showActionCatalog=false&template=provision-eks-cluster&viewMode=edit&visibleDataItemId=createOrUpdateFile0-action
 [14]: https://app.datadoghq.com/app-builder/apps/edit?activeTab=data&showActionCatalog=false&template=rds_provision_instance&viewMode=edit&visibleDataItemId=createDbInstance0-action
 [15]: https://app.datadoghq.com/workflow/blueprints
+[16] /software_catalog/self-service/software_templates
