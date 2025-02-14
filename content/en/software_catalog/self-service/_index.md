@@ -46,7 +46,7 @@ Spin up ephemeral environments for developers on-demand. Use Workflow Automation
    - Create a **Button** that submits the form, triggers your workflow, and passes in the parameters for the template.
    - Save and publish the app.
 
-2. Pair your App with [Actions][7] or a [Workflow][6] to automate processes:
+2. Pair your App with [Actions][7] or a [Workflow][6] to automate processes
 
   {{< img src="tracing/software_catalog/templating-workflow.png" alt="Workflow for building software template automation" style="width:100%;" >}}
 
