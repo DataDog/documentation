@@ -18,7 +18,7 @@
  * in the head of the main page layout.
  */
 
-import { buildCustomizationMenuUi } from './PageBuilder/components/CustomizationMenu';
+import { buildCustomizationMenuUi } from './PageBuilder/customizationMenu';
 import { resolveFilters } from 'cdocs-data/dist/api/shared/resolveFilters';
 import { ClientSideFiltersManifest } from 'cdocs-data/dist/schemas/pageFilters';
 import { getTraitValsFromUrl } from 'cdocs-data/dist/api/browser/getTraitValsFromUrl';

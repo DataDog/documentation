@@ -1,5 +1,5 @@
 import { resolveFilters, FiltersManifest } from 'cdocs-data';
-import { buildCustomizationMenuUi } from '../components/CustomizationMenu';
+import { buildCustomizationMenuUi } from './customizationMenu';
 
 /**
  * A JSX template for the main content area of a page,

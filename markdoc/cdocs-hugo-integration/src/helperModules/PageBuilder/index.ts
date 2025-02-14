@@ -7,7 +7,7 @@ import { FiltersManifest, pruneManifestForClient } from 'cdocs-data';
 import { buildRenderableTree, getMinifiedIfFunctionsByRef } from '../treeManagement';
 import { customComponents } from '../../markdocParserConfig';
 import yaml from 'js-yaml';
-import { PageTemplate } from './templates/PageTemplate';
+import { PageTemplate } from './PageTemplate';
 import { renderToString } from 'react-dom/server';
 import { HugoConfig } from '../../schemas/config/hugo';
 import { render } from '../renderer';
