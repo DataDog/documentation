@@ -143,7 +143,7 @@ Using Account Filtering requires an AWS management account. You can configure ac
 
 #### Configure account filters for a new account
 
-Navigate to [**Cloud Costs** > **Accounts**][18] and click on **Add Account** on the AWS account card.
+Navigate to [**Cloud Costs** > **Accounts**][18] and click **Add Account** on the AWS account card.
 
 {{< img src="cloud_cost/account_filtering/add_account.png" alt="Add Account button on account card" style="width:100%;" >}}
 
