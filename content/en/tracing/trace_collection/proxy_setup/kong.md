@@ -1,5 +1,8 @@
 ---
 title: Instrumenting Kong
+code_lang: kong
+type: multi-code-lang
+code_lang_weight: 40
 further_reading:
 - link: "https://docs.konghq.com/gateway/latest/"
   tag: "External Site"

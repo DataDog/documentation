@@ -1,5 +1,8 @@
 ---
 title: Instrumenting NGINX
+code_lang: nginx
+type: multi-code-lang
+code_lang_weight: 50
 further_reading:
 - link: "https://www.nginx.com/"
   tag: "External Site"

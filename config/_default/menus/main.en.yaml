@@ -3396,27 +3396,27 @@ menu:
       parent: tracing_trace_collection
       identifier: tracing_proxies
       weight: 208
-    - name: Tracing Envoy
+    - name: Envoy
       url: tracing/trace_collection/proxy_setup/envoy
       parent: tracing_proxies
       identifier: tracing_proxies_envoy
       weight: 2081
-    - name: Tracing NGINX
+    - name: NGINX
       url: tracing/trace_collection/proxy_setup/nginx
       parent: tracing_proxies
       identifier: tracing_proxies_nginx
       weight: 2082
-    - name: Tracing Istio
+    - name: Istio
       url: tracing/trace_collection/proxy_setup/istio
       parent: tracing_proxies
       identifier: tracing_proxies_istio
       weight: 2083
-    - name: Tracing Kong
+    - name: Kong
       url: tracing/trace_collection/proxy_setup/kong
       parent: tracing_proxies
       identifier: tracing_proxies_kong
       weight: 2084
-    - name: Tracing Apache HTTP Server
+    - name: Apache HTTP Server
       url: tracing/trace_collection/proxy_setup/httpd
       parent: tracing_proxies
       identifier: tracing_proxies_httpd

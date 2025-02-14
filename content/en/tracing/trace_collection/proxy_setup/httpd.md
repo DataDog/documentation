@@ -1,5 +1,8 @@
 ---
 title: Instrumenting Apache HTTP Server
+code_lang: httpd
+type: multi-code-lang
+code_lang_weight: 10
 further_reading:
 - link: "https://github.com/DataDog/httpd-datadog"
   tag: "Source Code"

@@ -124,6 +124,11 @@ code_language_ids:
     status_page: "Status Page"
     notebooks_legacy: "Notebooks (Legacy)"
     notebooks_new: "Notebooks (New)"
+    envoy: "Envoy"
+    httpd: "Apache HTTP Server"
+    istio: "Istio"
+    kong: "Kong"
+    nginx: "NGINX"
 branch: ""
 
 signupclass: sign-up-trigger

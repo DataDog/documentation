@@ -1,5 +1,8 @@
 ---
 title: Instrumenting Istio
+code_lang: istio
+type: multi-code-lang
+code_lang_weight: 30
 further_reading:
 - link: "https://istio.io/"
   tag: "External Site"

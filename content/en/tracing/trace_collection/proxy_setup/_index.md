@@ -1,5 +1,6 @@
 ---
 title: Tracing a Proxy
+type: multi-code-lang
 further_reading:
 - link: "/tracing/glossary/"
   tag: "Documentation"
@@ -8,9 +9,11 @@ algolia:
   tags: ['proxies','tracing proxies','proxy']
 ---
 
-{{< include-markdown "/tracing/trace_collection/proxy_setup/envoy" >}}
 You can set up tracing to include collecting trace information about proxies.
 
+{{< partial name="apm/apm-proxies.html" >}}
+
+<br>
 
 ## Further Reading
 
