@@ -173,7 +173,7 @@ This can be solved by using the `DD_TEST_SESSION_NAME` environment variable. Use
 
 ## Test Impact Analysis does not show any time saved
 
-This is also caused by an unstable test session fingerprint. See [section above][17] for more information.
+This is also caused by an unstable test session fingerprint. See the [Session history, performance or code coverage tab only show a single execution](#session-history-performance-or-code-coverage-tab-only-show-a-single-execution) section for more information.
 
 ## Further reading
 
