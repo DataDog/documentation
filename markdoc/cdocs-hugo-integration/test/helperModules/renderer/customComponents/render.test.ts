@@ -3,7 +3,10 @@ import fs from 'fs';
 import { describe, test, expect } from 'vitest';
 import prettier from 'prettier';
 import { SNAPSHOTS_DIR } from '../../../config/constants';
-import { render, CustomHtmlComponent } from '../../../../src/helperModules/renderer';
+import {
+  render,
+  CustomHtmlComponent
+} from '../../../../src/helperModules/markdocCustomization/renderer';
 import {
   mockHugoGlobalConfig,
   mockPageConfig

@@ -2,7 +2,7 @@
  * A custom tag that renders a checkmark,
  * usually used inside a table cell.
  */
-import { CustomHtmlComponent } from '../helperModules/renderer';
+import { CustomHtmlComponent } from '../renderer';
 
 export const xDefinition = {
   render: 'X'

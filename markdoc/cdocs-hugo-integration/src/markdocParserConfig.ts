@@ -8,17 +8,32 @@
  * You can read more about the Markdoc config object here:
  * https://markdoc.dev/docs/config
  */
-import { alertDefinition, Alert } from './tags/alert';
-import { imgDefinition, Img } from './tags/img';
-import { regionParamDefinition, RegionParam } from './tags/regionParam';
-import { siteRegionDefinition, SiteRegion } from './tags/siteRegion';
-import { tabDefinition, Tab } from './tags/tab';
-import { tabsDefinition, Tabs } from './tags/tabs';
-import { fenceDefinition, Fence } from './tags/fence';
-import { xDefinition, X } from './tags/x';
-import { calloutDefinition, Callout } from './tags/callout';
-import { nextlinkDefinition, Nextlink } from './tags/nextlink';
-import { whatsnextDefinition, Whatsnext } from './tags/whatsnext';
+import { alertDefinition, Alert } from './helperModules/markdocCustomization/tags/alert';
+import { imgDefinition, Img } from './helperModules/markdocCustomization/tags/img';
+import {
+  regionParamDefinition,
+  RegionParam
+} from './helperModules/markdocCustomization/tags/regionParam';
+import {
+  siteRegionDefinition,
+  SiteRegion
+} from './helperModules/markdocCustomization/tags/siteRegion';
+import { tabDefinition, Tab } from './helperModules/markdocCustomization/tags/tab';
+import { tabsDefinition, Tabs } from './helperModules/markdocCustomization/tags/tabs';
+import { fenceDefinition, Fence } from './helperModules/markdocCustomization/tags/fence';
+import { xDefinition, X } from './helperModules/markdocCustomization/tags/x';
+import {
+  calloutDefinition,
+  Callout
+} from './helperModules/markdocCustomization/tags/callout';
+import {
+  nextlinkDefinition,
+  Nextlink
+} from './helperModules/markdocCustomization/tags/nextlink';
+import {
+  whatsnextDefinition,
+  Whatsnext
+} from './helperModules/markdocCustomization/tags/whatsnext';
 
 export const transformConfig = {
   tags: {

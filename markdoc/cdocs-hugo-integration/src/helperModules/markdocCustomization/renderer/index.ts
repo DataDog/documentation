@@ -1,6 +1,6 @@
 import MarkdownIt from 'markdown-it';
 import type { RenderableTreeNodes, Config as MarkdocConfig } from 'cdocs-markdoc';
-import { HugoConfig } from '../../schemas/config/hugo';
+import { HugoConfig } from '../../../schemas/config/hugo';
 const { escapeHtml } = MarkdownIt().utils;
 import { isTag, isClientVariable, isClientFunction } from './utils';
 import { CustomHtmlComponent } from './CustomHtmlComponent';

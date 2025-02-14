@@ -1,4 +1,4 @@
-import { CustomHtmlComponent, render } from '../../helperModules/renderer';
+import { CustomHtmlComponent, render } from '../../renderer';
 import { highlight } from 'chroma-highlight';
 import { v4 as uuidv4 } from 'uuid';
 import { CodeBlockTemplate } from './templates';

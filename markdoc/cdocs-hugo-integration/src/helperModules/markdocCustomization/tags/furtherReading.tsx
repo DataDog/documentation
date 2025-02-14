@@ -1,7 +1,7 @@
 import { WhatsnextTemplate } from './whatsnext';
 import { NextlinkTemplate } from './nextlink';
-import { FurtherReadingConfig } from '../schemas/frontmatter';
-import { HugoConfig } from '../schemas/config/hugo';
+import { FurtherReadingConfig } from '../../../schemas/frontmatter';
+import { HugoConfig } from '../../../schemas/config/hugo';
 import { renderToString } from 'react-dom/server';
 
 export function FurtherReadingTemplate(props: {

@@ -25,7 +25,7 @@ import { getTraitValsFromUrl } from 'cdocs-data/dist/api/browser/getTraitValsFro
 import { writeTraitValsToUrl } from 'cdocs-data/dist/api/browser/writeTraitValsToUrl';
 import { CdocsClientStorage } from 'cdocs-data/dist/api/browser/CdocsClientStorage';
 import { ClientFunction } from 'cdocs-markdoc/src/types';
-import { reresolveFunctionNode } from './renderer/reresolver';
+import { reresolveFunctionNode } from './markdocCustomization/renderer/reresolver';
 import {
   expandClientFunction,
   MinifiedClientFunction

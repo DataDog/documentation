@@ -1,4 +1,4 @@
-import { CustomHtmlComponent } from '../helperModules/renderer';
+import { CustomHtmlComponent } from '../renderer';
 
 export const siteRegionDefinition = {
   render: 'SiteRegion',

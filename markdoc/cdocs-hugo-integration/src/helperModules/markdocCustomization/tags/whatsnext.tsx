@@ -1,6 +1,6 @@
-import { CustomHtmlComponent } from '../helperModules/renderer';
-import { HugoConfig } from '../schemas/config/hugo';
-import { HugoFunctions } from '../helperModules/HugoFunctions';
+import { CustomHtmlComponent } from '../renderer';
+import { HugoConfig } from '../../../schemas/config/hugo';
+import { HugoFunctions } from '../../HugoFunctions';
 import { renderToString } from 'react-dom/server';
 
 export const whatsnextDefinition = {

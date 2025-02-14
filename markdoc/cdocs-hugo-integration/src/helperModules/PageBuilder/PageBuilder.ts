@@ -10,8 +10,8 @@ import yaml from 'js-yaml';
 import { PageTemplate } from './PageTemplate';
 import { renderToString } from 'react-dom/server';
 import { HugoConfig } from '../../schemas/config/hugo';
-import { render } from '../renderer';
-import { FurtherReadingTemplate } from '../../tags/furtherReading';
+import { render } from '../markdocCustomization/renderer';
+import { FurtherReadingTemplate } from '../markdocCustomization/tags/furtherReading';
 import { CompilationError } from '../../schemas/compilationResults';
 import { Frontmatter } from '../../schemas/frontmatter';
 

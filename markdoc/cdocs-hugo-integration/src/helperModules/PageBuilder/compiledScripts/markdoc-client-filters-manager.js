@@ -12995,9 +12995,9 @@
     }
   });
 
-  // dist/helperModules/renderer/reresolver.js
+  // dist/helperModules/markdocCustomization/renderer/reresolver.js
   var require_reresolver = __commonJS({
-    "dist/helperModules/renderer/reresolver.js"(exports) {
+    "dist/helperModules/markdocCustomization/renderer/reresolver.js"(exports) {
       "use strict";
       Object.defineProperty(exports, "__esModule", { value: true });
       exports.reresolveFunctionNode = reresolveFunctionNode;

@@ -41,7 +41,7 @@
       "imports": [],
       "format": "cjs"
     },
-    "dist/helperModules/renderer/reresolver.js": {
+    "dist/helperModules/markdocCustomization/renderer/reresolver.js": {
       "bytes": 1799,
       "imports": [
         {
@@ -58,7 +58,7 @@
       "format": "cjs"
     },
     "dist/helperModules/ClientFiltersManager.js": {
-      "bytes": 17895,
+      "bytes": 17916,
       "imports": [
         {
           "path": "dist/helperModules/PageBuilder/customizationMenu.js",
@@ -86,9 +86,9 @@
           "original": "cdocs-data/dist/api/browser/CdocsClientStorage"
         },
         {
-          "path": "dist/helperModules/renderer/reresolver.js",
+          "path": "dist/helperModules/markdocCustomization/renderer/reresolver.js",
           "kind": "require-call",
-          "original": "./renderer/reresolver"
+          "original": "./markdocCustomization/renderer/reresolver"
         },
         {
           "path": "dist/helperModules/PageBuilder/pageConfigMinification.js",
@@ -137,7 +137,7 @@
         "node_modules/cdocs-markdoc/dist/index.js": {
           "bytesInOutput": 211800
         },
-        "dist/helperModules/renderer/reresolver.js": {
+        "dist/helperModules/markdocCustomization/renderer/reresolver.js": {
           "bytesInOutput": 790
         },
         "dist/helperModules/PageBuilder/pageConfigMinification.js": {

@@ -1,4 +1,4 @@
-import { CustomHtmlComponent } from '../../helperModules/renderer';
+import { CustomHtmlComponent } from '../../renderer';
 import { ImgTemplate } from './templates';
 import { renderToString } from 'react-dom/server';
 

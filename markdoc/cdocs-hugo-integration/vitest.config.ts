@@ -8,7 +8,7 @@ export default defineConfig({
         '**/markdoc-client-filters-manager.js',
         '**/markdoc-client-filters-manager.ts',
         '**/helperModules/ClientFiltersManager.ts',
-        '**/helperModules/renderer/reresolver.ts',
+        '**/helperModules/markdocCustomization/renderer/reresolver.ts',
         '**/debugBookmarklet.js',
         '**/compiledScripts/**',
         '**/scripts/**',

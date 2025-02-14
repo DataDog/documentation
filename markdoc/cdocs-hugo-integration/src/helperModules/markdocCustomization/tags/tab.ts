@@ -1,6 +1,6 @@
 import { Config, Node } from 'cdocs-markdoc';
-import { HugoFunctions } from '../helperModules/HugoFunctions';
-import { CustomHtmlComponent } from '../helperModules/renderer';
+import { HugoFunctions } from '../../HugoFunctions';
+import { CustomHtmlComponent } from '../renderer';
 
 export const tabDefinition = {
   render: 'Tab',
