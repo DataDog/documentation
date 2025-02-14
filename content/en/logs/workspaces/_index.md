@@ -47,12 +47,12 @@ In addition to the default columns, you can add your own columns to your workspa
 
 ### Calculated fields queries 
 
-You can create a workspace with [Calculated Fields][4] queries from the Log Explorer. To transfer a query from the Logs Explorer, enter a query with Calculated Fields and click **Open in New Workspace**. 
+You can take existing Log Explorer queries with [Calculated Fields][4] and directly open them in Workspaces. To transfer these queries from the Log Explorer, click **Open in New Workspace**. The Calculated Fields will automatically be converted into a Transformation cell.
 
-You can also use existing dataset to define a computed field using a formula that can be reused in further datasets:
+You can also create Calculated Fields directly within a Workspace to define a computed field from existing data sources. These fields can be reused in subsequent analysis:
 1. Open a Workspace with a data source.
 1. Add a [Transformation cell](#transformation-cell).
-1. Click **More**.
+1. Click **More operations**.
 1. Select **Calculate**.
 
 {{< img src="/logs/workspace/workspaces_calculated_fields.png" alt="Screenshot of an example Workspaces interface with the 'Calculate' option selected from the 'More' dropdown menu, demonstrating how to add Calculated Fields to a query." style="width:100%;" >}}
