@@ -1,6 +1,6 @@
 import { describe, test, expect } from 'vitest';
-import { MdocFileParser } from '../../../src/helperModules/MdocFileParser';
-import { PageBuilder } from '../../../src/helperModules/rendering/PageBuilder';
+import { MdocFileParser } from '../../../src/MdocFileParser';
+import { PageBuilder } from '../../../src/fileRendering/PageBuilder';
 import { buildFiltersManifest, loadCustomizationConfig } from 'cdocs-data';
 import {
   VALID_CONTENT_DIR,

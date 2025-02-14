@@ -1,5 +1,5 @@
 import { CustomHtmlComponent } from '../renderer';
-import { HugoConfig } from '../../../schemas/config/hugo';
+import { HugoConfig } from '../../schemas/config/hugo';
 import { HugoFunctions } from '../../hugoUtils/HugoFunctions';
 import { renderToString } from 'react-dom/server';
 

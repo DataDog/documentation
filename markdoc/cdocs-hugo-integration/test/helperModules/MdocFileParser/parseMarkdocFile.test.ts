@@ -1,5 +1,5 @@
 import { describe, test, expect } from 'vitest';
-import { MdocFileParser } from '../../../src/helperModules/MdocFileParser';
+import { MdocFileParser } from '../../../src/MdocFileParser';
 import {
   VALID_CONTENT_DIR,
   VALID_PARTIALS_DIR,

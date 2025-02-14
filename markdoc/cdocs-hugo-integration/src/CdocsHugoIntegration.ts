@@ -7,15 +7,15 @@ import {
 } from 'cdocs-data';
 import { IntegrationConfig } from './schemas/config/integration';
 import { HugoGlobalConfig } from './schemas/config/hugo';
-import { MdocFileParser } from './helperModules/MdocFileParser';
-import { PageBuilder } from './helperModules/rendering/PageBuilder';
+import { MdocFileParser } from './MdocFileParser';
+import { PageBuilder } from './fileRendering/PageBuilder';
 import {
   CompilationError,
   ParsedFile,
   CompilationResult
 } from './schemas/compilationResults';
-import { FileSearcher } from './helperModules/FileSearcher';
-import { HugoGlobalConfigBuilder } from './helperModules/hugoUtils/HugoGlobalConfigBuilder';
+import { FileSearcher } from './FileSearcher';
+import { HugoGlobalConfigBuilder } from './hugoUtils/HugoGlobalConfigBuilder';
 
 /**
  * The external interface of the integration.

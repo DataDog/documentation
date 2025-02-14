@@ -3,7 +3,7 @@ import fs from 'fs';
 import path from 'path';
 import yaml from 'js-yaml';
 import { Frontmatter, FrontmatterSchema } from 'cdocs-data';
-import { CompilationError, ParsedFile } from '../schemas/compilationResults';
+import { CompilationError, ParsedFile } from './schemas/compilationResults';
 
 /**
  * A module responsible for parsing a Markdoc file into a data structure,

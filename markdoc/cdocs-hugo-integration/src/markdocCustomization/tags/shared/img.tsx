@@ -1,4 +1,4 @@
-import { HugoConfig } from '../../../../schemas/config/hugo';
+import { HugoConfig } from '../../../schemas/config/hugo';
 import { cssStringToObject } from '../utils';
 
 /**

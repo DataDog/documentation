@@ -6,7 +6,7 @@ import { SNAPSHOTS_DIR } from '../../../config/constants';
 import {
   render,
   CustomHtmlComponent
-} from '../../../../src/helperModules/markdocCustomization/renderer';
+} from '../../../../src/markdocCustomization/renderer';
 import {
   mockHugoGlobalConfig,
   mockPageConfig

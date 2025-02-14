@@ -18,7 +18,7 @@
  * in the head of the main page layout.
  */
 
-import { buildCustomizationMenuUi } from '../rendering/customizationMenu';
+import { buildCustomizationMenuUi } from '../fileRendering/customizationMenu';
 import { resolveFilters } from 'cdocs-data/dist/api/shared/resolveFilters';
 import { ClientSideFiltersManifest } from 'cdocs-data/dist/schemas/pageFilters';
 import { getTraitValsFromUrl } from 'cdocs-data/dist/api/browser/getTraitValsFromUrl';
@@ -29,7 +29,7 @@ import { reresolveFunctionNode } from '../markdocCustomization/renderer/reresolv
 import {
   expandClientFunction,
   MinifiedClientFunction
-} from '../rendering/pageConfigMinification';
+} from '../fileRendering/pageConfigMinification';
 
 const PILLS_MENU_ID = 'cdoc-filters-pill-menu';
 const DROPDOWN_MENU_ID = 'cdoc-filters-dropdown-menu';

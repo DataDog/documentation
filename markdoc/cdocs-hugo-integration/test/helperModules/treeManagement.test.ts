@@ -1,12 +1,12 @@
 import { describe, test, expect } from 'vitest';
-import { MdocFileParser } from '../../src/helperModules/MdocFileParser';
+import { MdocFileParser } from '../../src/MdocFileParser';
 import {
   VALID_CONTENT_DIR,
   VALID_PARTIALS_DIR,
   SNAPSHOTS_DIR,
   VALID_FILTERS_CONFIG_DIR
 } from '../config/constants';
-import { buildRenderableTree } from '../../src/helperModules/rendering/treeManagement';
+import { buildRenderableTree } from '../../src/fileRendering/treeManagement';
 import { buildFiltersManifest, loadCustomizationConfig } from 'cdocs-data';
 
 describe('treeManagement', () => {

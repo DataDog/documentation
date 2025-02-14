@@ -1,7 +1,7 @@
 import { renderToString } from 'react-dom/server';
 import { HugoFunctions } from '../../hugoUtils/HugoFunctions';
 import { CustomHtmlComponent } from '../renderer';
-import { HugoConfig } from '../../../schemas/config/hugo';
+import { HugoConfig } from '../../schemas/config/hugo';
 import { ImgTemplate } from './shared/img';
 
 export const nextlinkDefinition = {

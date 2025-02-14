@@ -8,7 +8,7 @@
  * Read more about Markdoc's phases: https://markdoc.dev/docs/render
  */
 
-import { CompilationError, ParsedFile } from '../../schemas/compilationResults';
+import { CompilationError, ParsedFile } from '../schemas/compilationResults';
 import CdocsMarkdoc, {
   RenderableTreeNodes,
   RenderableTreeNode,

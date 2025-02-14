@@ -1,5 +1,5 @@
 import md5 from 'md5';
-import { HugoConfig } from '../../schemas/config/hugo';
+import { HugoConfig } from '../schemas/config/hugo';
 import fs from 'fs';
 
 /**

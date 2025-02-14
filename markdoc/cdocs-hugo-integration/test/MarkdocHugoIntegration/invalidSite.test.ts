@@ -1,7 +1,7 @@
 import { CdocsHugoIntegration } from '../../src';
 import { describe, test, expect } from 'vitest';
 import { SNAPSHOTS_DIR, INVALID_SITE_DIR } from '../config/constants';
-import { FileSearcher } from '../../src/helperModules/FileSearcher';
+import { FileSearcher } from '../../src/FileSearcher';
 
 const siteDir = INVALID_SITE_DIR;
 const contentDir = siteDir + '/content';

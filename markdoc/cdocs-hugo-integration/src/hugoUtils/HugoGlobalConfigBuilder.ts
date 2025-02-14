@@ -13,8 +13,8 @@ import {
   HugoSubdirsByType,
   i18nConfig,
   i18nConfigSchema
-} from '../../schemas/config/hugo';
-import { IntegrationConfig } from '../../schemas/config/integration';
+} from '../schemas/config/hugo';
+import { IntegrationConfig } from '../schemas/config/integration';
 
 export class HugoGlobalConfigBuilder {
   static build(p: IntegrationConfig): HugoGlobalConfig {

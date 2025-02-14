@@ -1,4 +1,4 @@
-import { ParsedFile } from '../../schemas/compilationResults';
+import { ParsedFile } from '../schemas/compilationResults';
 import { RenderableTreeNode } from 'cdocs-markdoc';
 import prettier from 'prettier';
 import fs from 'fs';
@@ -9,11 +9,11 @@ import { customComponents } from '../markdocCustomization/parserConfig';
 import yaml from 'js-yaml';
 import { PageTemplate } from './PageTemplate';
 import { renderToString } from 'react-dom/server';
-import { HugoConfig } from '../../schemas/config/hugo';
+import { HugoConfig } from '../schemas/config/hugo';
 import { render } from '../markdocCustomization/renderer';
 import { FurtherReadingTemplate } from '../markdocCustomization/tags/furtherReading';
-import { CompilationError } from '../../schemas/compilationResults';
-import { Frontmatter } from '../../schemas/frontmatter';
+import { CompilationError } from '../schemas/compilationResults';
+import { Frontmatter } from '../schemas/frontmatter';
 
 const stylesStr = fs.readFileSync(path.resolve(__dirname, 'assets/styles.css'), 'utf8');
 
