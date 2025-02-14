@@ -3,7 +3,6 @@ title: Manage and Optimize Cloud Costs
 aliases:
   - /tracing/software_catalog/guides/cloud_cost_management
   - /software_catalog/guides/cloud_cost_management
-  - /software_catalog/use_cases/cloud_cost_management
   - /tracing/service_catalog/guides/cloud_cost_management
   - /service_catalog/guides/cloud_cost_management
   - /service_catalog/use_cases/cloud_cost_management

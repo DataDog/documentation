@@ -28,7 +28,7 @@ Datadog fournit une collection d'actions de workflow qui ne sont pas associées 
 
 {{< whatsnext desc="En savoir plus sur les actions génériques :" >}}
     {{< nextlink href="/service_management/workflows/actions/flow_control" >}}Utiliser des actions logiques pour ajouter des intervalles de sommeil, utiliser une condition, utiliser des itérations et plus encore.{{< /nextlink >}}
-    {{< nextlink href="/service_management/workflows/actions/data_transformation" >}}Effectuer des transformations de données personnalisées au sein de vos workflows à l'aide de JavaScript.{{< /nextlink >}}
+    {{< nextlink href="/service_management/workflows/expressions" >}}Effectuer des transformations de données personnalisées au sein de vos workflows à l'aide de JavaScript.{{< /nextlink >}}
     {{< nextlink href="/service_management/workflows/actions/http" >}}Utiliser l'action HTTP pour effectuer une requête sur un endpoint personnalisé.{{< /nextlink >}}
     {{< nextlink href="/service_management/workflows/actions/saved_actions" >}}Utiliser la fonctionnalité <i>Saved Actions</i> pour stocker et réutiliser une action et ses paramètres.{{< /nextlink >}}
 {{< /whatsnext >}}
