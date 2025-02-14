@@ -1,6 +1,6 @@
 import { describe, test, expect } from 'vitest';
 import { HugoFunctions } from '../../src/helperModules/HugoFunctions';
-import { mockHugoConfig } from '../mocks/valid/hugoConfig';
+import { mockHugoConfig } from '../config/mocks/valid/hugoConfig';
 import { VALID_SITE_DIR } from '../config/constants';
 
 describe('HugoFunctions', () => {

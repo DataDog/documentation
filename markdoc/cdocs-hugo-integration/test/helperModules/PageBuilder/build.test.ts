@@ -8,7 +8,10 @@ import {
   VALID_FILTERS_CONFIG_DIR,
   SNAPSHOTS_DIR
 } from '../../config/constants';
-import { mockHugoGlobalConfig, mockPageConfig } from '../../mocks/valid/hugoConfig';
+import {
+  mockHugoGlobalConfig,
+  mockPageConfig
+} from '../../config/mocks/valid/hugoConfig';
 
 describe('PageBuilder.build', () => {
   const testFilePath = VALID_CONTENT_DIR + '/en/primary_colors.mdoc.md';

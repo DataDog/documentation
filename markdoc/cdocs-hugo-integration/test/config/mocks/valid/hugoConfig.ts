@@ -1,6 +1,6 @@
-import { HugoConfig, HugoGlobalConfig } from '../../../src/schemas/config/hugo';
-import { VALID_SITE_DIR } from '../../config/constants';
-import { PageConfig } from '../../../src/schemas/config/hugo';
+import { HugoConfig, HugoGlobalConfig } from '../../../../src/schemas/config/hugo';
+import { VALID_SITE_DIR } from '../../constants';
+import { PageConfig } from '../../../../src/schemas/config/hugo';
 
 const mockHugoGlobalConfig: HugoGlobalConfig = {
   siteParams: { img_url: 'https://example.com' },

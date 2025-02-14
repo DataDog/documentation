@@ -1,5 +1,5 @@
 import { describe, test, expect } from 'vitest';
-import { HugoGlobalConfigSchema } from '../../src/schemas/config/hugo';
+import { HugoGlobalConfig, HugoGlobalConfigSchema } from '../../src/schemas/config/hugo';
 import { VALID_SITE_DIR, SNAPSHOTS_DIR } from '../config/constants';
 import { IntegrationConfig } from '../../src/schemas/config/integration';
 import { HugoGlobalConfigBuilder } from '../../src/helperModules/HugoGlobalConfigBuilder';
@@ -19,7 +19,17 @@ describe('HugoFunctions', () => {
   });
 
   test('matches the snapshot', async () => {
-    await expect(JSON.stringify(hugoConfig, null, 2)).toMatchFileSnapshot(
+    const hugoConfigDup = { ...hugoConfig };
+    const dirs = ['content', 'customizationConfig', 'partials', 'images', 'static'];
+
+    dirs.forEach((dir) => {
+      hugoConfigDup.dirs[dir] = hugoConfigDup.dirs[dir].replace(
+        VALID_SITE_DIR,
+        '<SANITIZED_VALID_SITE_DIR>'
+      );
+    });
+
+    await expect(JSON.stringify(hugoConfigDup, null, 2)).toMatchFileSnapshot(
       `${SNAPSHOTS_DIR}/helperModules/HugoGlobalConfigBuilder.snap.json`
     );
   });

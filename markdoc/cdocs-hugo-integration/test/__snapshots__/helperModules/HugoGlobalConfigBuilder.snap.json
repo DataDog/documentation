@@ -142,7 +142,7 @@
     "es"
   ],
   "env": "development",
-  "siteDir": "/Users/jen.gilbert/go/src/github.com/DataDog/documentation/markdoc/cdocs-hugo-integration/test/mocks/validSite",
+  "siteDir": "/Users/jen.gilbert/go/src/github.com/DataDog/documentation/markdoc/cdocs-hugo-integration/test/config/mocks/validSite",
   "i18n": {
     "en": {
       "additional_sentence": {
@@ -151,10 +151,10 @@
     }
   },
   "dirs": {
-    "content": "/Users/jen.gilbert/go/src/github.com/DataDog/documentation/markdoc/cdocs-hugo-integration/test/mocks/validSite/content",
-    "customizationConfig": "/Users/jen.gilbert/go/src/github.com/DataDog/documentation/markdoc/cdocs-hugo-integration/test/mocks/validSite/customization_config",
-    "partials": "/Users/jen.gilbert/go/src/github.com/DataDog/documentation/markdoc/cdocs-hugo-integration/test/mocks/validSite/layouts/partials",
-    "images": "/Users/jen.gilbert/go/src/github.com/DataDog/documentation/markdoc/cdocs-hugo-integration/test/mocks/validSite/static/images",
-    "static": "/Users/jen.gilbert/go/src/github.com/DataDog/documentation/markdoc/cdocs-hugo-integration/test/mocks/validSite/static"
+    "content": "<SANITIZED_VALID_SITE_DIR>/content",
+    "customizationConfig": "<SANITIZED_VALID_SITE_DIR>/customization_config",
+    "partials": "<SANITIZED_VALID_SITE_DIR>/layouts/partials",
+    "images": "<SANITIZED_VALID_SITE_DIR>/static/images",
+    "static": "<SANITIZED_VALID_SITE_DIR>/static"
   }
 }
