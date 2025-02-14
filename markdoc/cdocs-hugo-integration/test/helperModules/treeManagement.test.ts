@@ -6,7 +6,7 @@ import {
   SNAPSHOTS_DIR,
   VALID_FILTERS_CONFIG_DIR
 } from '../config/constants';
-import { buildRenderableTree } from '../../src/helperModules/treeManagement';
+import { buildRenderableTree } from '../../src/helperModules/rendering/treeManagement';
 import { buildFiltersManifest, loadCustomizationConfig } from 'cdocs-data';
 
 describe('treeManagement', () => {

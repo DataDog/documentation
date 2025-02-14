@@ -18,18 +18,18 @@
  * in the head of the main page layout.
  */
 
-import { buildCustomizationMenuUi } from './PageBuilder/customizationMenu';
+import { buildCustomizationMenuUi } from '../rendering/customizationMenu';
 import { resolveFilters } from 'cdocs-data/dist/api/shared/resolveFilters';
 import { ClientSideFiltersManifest } from 'cdocs-data/dist/schemas/pageFilters';
 import { getTraitValsFromUrl } from 'cdocs-data/dist/api/browser/getTraitValsFromUrl';
 import { writeTraitValsToUrl } from 'cdocs-data/dist/api/browser/writeTraitValsToUrl';
 import { CdocsClientStorage } from 'cdocs-data/dist/api/browser/CdocsClientStorage';
 import { ClientFunction } from 'cdocs-markdoc/src/types';
-import { reresolveFunctionNode } from './markdocCustomization/renderer/reresolver';
+import { reresolveFunctionNode } from '../markdocCustomization/renderer/reresolver';
 import {
   expandClientFunction,
   MinifiedClientFunction
-} from './PageBuilder/pageConfigMinification';
+} from '../rendering/pageConfigMinification';
 
 const PILLS_MENU_ID = 'cdoc-filters-pill-menu';
 const DROPDOWN_MENU_ID = 'cdoc-filters-dropdown-menu';

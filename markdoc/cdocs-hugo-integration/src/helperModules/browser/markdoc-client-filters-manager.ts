@@ -4,7 +4,7 @@
  * class available to the window object, so that it can be accessed by the
  * client-side code in the browser.
  */
-import { ClientFiltersManager } from './helperModules/ClientFiltersManager';
+import { ClientFiltersManager } from './helperModules/browser/ClientFiltersManager';
 
 // @ts-ignore
 window.clientFiltersManager = ClientFiltersManager.instance;

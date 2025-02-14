@@ -4,7 +4,7 @@ import prettier from 'prettier';
 import fs from 'fs';
 import path from 'path';
 import { FiltersManifest, pruneManifestForClient } from 'cdocs-data';
-import { buildRenderableTree, getMinifiedIfFunctionsByRef } from '../treeManagement';
+import { buildRenderableTree, getMinifiedIfFunctionsByRef } from './treeManagement';
 import { customComponents } from '../markdocCustomization/parserConfig';
 import yaml from 'js-yaml';
 import { PageTemplate } from './PageTemplate';

@@ -8,19 +8,16 @@
  * Read more about Markdoc's phases: https://markdoc.dev/docs/render
  */
 
-import { CompilationError, ParsedFile } from '../schemas/compilationResults';
+import { CompilationError, ParsedFile } from '../../schemas/compilationResults';
 import CdocsMarkdoc, {
   RenderableTreeNodes,
   RenderableTreeNode,
   ClientFunctionSchema,
   Tag
 } from 'cdocs-markdoc';
-import {
-  MinifiedClientFunction,
-  minifyClientFunction
-} from './PageBuilder/pageConfigMinification';
-import { transformConfig } from './markdocCustomization/parserConfig';
-import { HugoFunctions } from './hugoUtils/HugoFunctions';
+import { MinifiedClientFunction, minifyClientFunction } from './pageConfigMinification';
+import { transformConfig } from '../markdocCustomization/parserConfig';
+import { HugoFunctions } from '../hugoUtils/HugoFunctions';
 import { FiltersManifest } from 'cdocs-data';
 
 /**
