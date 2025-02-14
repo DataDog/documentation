@@ -72,7 +72,7 @@ DDRUMMonitor *rum = [DDRUMMonitor shared];
 {{% /tab %}}
 {{< /tabs >}}
 
-For more details and available options, [see `RUMMonitorProtocol` on GitHub][4].
+For more details and available options, see [`RUMMonitorProtocol` in GitHub][4].
 
 ### Custom Actions
 
@@ -111,7 +111,7 @@ let rum = RUMMonitor.shared()
 
 **Note**: When using `.startAction(type:name:)` and `.stopAction(type:)`, the action `type` must be the same. This is necessary for the RUM iOS SDK to match an action start with its completion.
 
-For more details and available options, [see `RUMMonitorProtocol` on GitHub][4].
+For more details and available options, see [`RUMMonitorProtocol` in GitHub][4].
 
 ### Custom Resources
 
@@ -161,7 +161,7 @@ rum.stopResource(
 
 **Note**: The `String` used for `resourceKey` in both calls must be unique for the resource you are calling. This is necessary for the RUM iOS SDK to match a resource's start with its completion.
 
-For more details and available options, [see `RUMMonitorProtocol` on GitHub][4].
+For more details and available options, see [`RUMMonitorProtocol` in GitHub][4].
 
 ### Custom Errors
 
@@ -184,7 +184,7 @@ rum.addError(message: "error message.")
 {{% /tab %}}
 {{< /tabs >}}
 
-For more details and available options, [see `RUMMonitorProtocol` on GitHub][4] and [Error Attributes documentation][5].
+For more details and available options, see [`RUMMonitorProtocol` in GitHub][4] and the [Error Attributes documentation][5].
 
 ## Track custom global attributes
 
@@ -200,7 +200,7 @@ To set a custom global attribute, use `RUMMonitor.shared().addAttribute(forKey:v
 * To update the value, use `RUMMonitor.shared().addAttribute(forKey: "<KEY>", value: "<UPDATED_VALUE>")`.
 * To remove the key, use `RUMMonitor.shared().removeAttribute(forKey: "<KEY_TO_REMOVE>")`.
 
-For better performance in bulk operations (modifying multiple attributes at once) use `.addAttributes(_:)` and `.addAttributes(_:)`.
+For better performance in bulk operations (modifying multiple attributes at once), use `.addAttributes(_:)` and `. removeAttributes(forKeys:)`.
 
 **Note**: You can't create facets on custom attributes if you use spaces or special characters in your key names. For example, use `forKey: "store_id"` instead of `forKey: "Store ID"`.
 
