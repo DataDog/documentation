@@ -16,8 +16,6 @@ import {
 } from './schemas/compilationResults';
 import { FileSearcher } from './helperModules/FileSearcher';
 import { HugoGlobalConfigBuilder } from './helperModules/HugoGlobalConfigBuilder';
-// import { AuthorConsoleData } from './schemas/authorConsole';
-// import { AuthorConsoleBuilder } from './helperModules/AuthorConsoleBuilder';
 
 /**
  * The external interface of the integration.
@@ -44,38 +42,8 @@ export class CdocsHugoIntegration {
       langs: this.hugoGlobalConfig.languages
     });
 
-    // new data types
     this.customizationConfigByLang = customizationConfigByLang;
   }
-
-  /*
-  async injectAuthorConsole() {
-    const consoleData: AuthorConsoleData = {
-      glossary: this.glossariesByLang.en,
-      buildStatus: {
-        hasErrors: this.#hasErrors(),
-        errorsByFilePath: this.errorsByFilePath,
-        timestamp: Date.now()
-      }
-    };
-
-    const consoleHtml = await AuthorConsoleBuilder.buildHtml({
-      data: consoleData
-    });
-
-    if (this.hugoGlobalConfig.env === 'development') {
-      // write it to the static folder
-      const consolePath =
-        this.hugoGlobalConfig.dirs.static + '/markdoc/console/index.html';
-      fs.mkdirSync(this.hugoGlobalConfig.dirs.static + '/markdoc/console', {
-        recursive: true
-      });
-      fs.writeFileSync(consolePath, consoleHtml);
-    }
-
-    return consoleHtml;
-  }
-  */
 
   /**
    * Provide a string that includes the shared styles and scripts

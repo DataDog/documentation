@@ -1,3 +1,1 @@
-import { CdocsHugoIntegration } from './CdocsHugoIntegration';
-
-export { CdocsHugoIntegration };
+export { CdocsHugoIntegration } from './CdocsHugoIntegration';
