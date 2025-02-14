@@ -2,12 +2,9 @@
 title: Scanning Rules
 disable_toc: false
 further_reading:
-- link: "sensitive_data_scanner/scanning_rules/library_rules/"
+- link: "/sensitive_data_scanner/guide/best_practices_for_creating_custom_rules/"
   tag: "Documentation"
-  text: "Learn more about Datadog scanning library rules"
-- link: "sensitive_data_scanner/scanning_rules/custom_rules/"
-  tag: "Documentation"
-  text: "Learn more about regular expressions for custom scanning rules"
+  text: "Best practices for creating custom scanning rules"
 ---
 
 ## Telemetry Data
