@@ -68,7 +68,6 @@ spec:
     credentials:
       apiKey: <DATADOG_API_KEY>
       appKey: <DATADOG_APP_KEY>
-    criSocketPath: /run/dockershim.sock
   override:
     clusterAgent:
       image:
@@ -77,21 +76,6 @@ spec:
 
 [1]:/containers/kubernetes/installation/?tab=datadogoperator
 [2]: /agent/guide/operator-eks-addon
-
-{{% /tab %}}
-{{% tab "Helm" %}}
-
-Custom `datadog-values.yaml`:
-
-```yaml
-datadog:
-  apiKey: <DATADOG_API_KEY>
-  appKey: <DATADOG_APP_KEY>
-  criSocketPath: /run/dockershim.sock
-  env:
-    - name: DD_AUTOCONFIG_INCLUDE_FEATURES
-      value: "containerd"
-```
 
 {{% /tab %}}
 
