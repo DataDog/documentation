@@ -24,7 +24,7 @@ title: 로그 아카이브
 
 [인덱싱][1] 여부에 관계없이 수집된 모든 로그를 자체 클라우드 스토리지 시스템에 전달하도록 Datadog 계정을 설정하세요. [Rehydration][2]을 사용하면 스토리지에 최적화된 아카이브에 로그를 장기간 보관하고 컴플라이언스 요구 사항을 충족하는 동시에 임시 조사에 대한 감사 기능을 유지할 수 있습니다.
 
-{{< img src="/logs/archives/log_forwarding_archives_122024.png" alt="Log Forwarding 페이지의 Archives 탭" style="width:100%;">}}
+{{< img src="/logs/archives/log_forwarding_archives_122024.png" alt="Log Forwarding 페이지의 Archives 탭" style="width:100%;" >}}
 
 [**Log Forwarding** 페이지][13]로 이동하여 수집된 로그를 자체 클라우드 호스팅 스토리지 버킷에 전달하기 위한 아카이브를 설정하세요.
 
@@ -71,7 +71,7 @@ title: 로그 아카이브
 
 ### 스토리지 버킷 생성하기 
 
-{{ < site-region region="gov" > }}
+{{< site-region region="gov" >}}
 <div class="alert alert-warning">아카이브로 로그를 보내는 것은 Datadog GovCloud 환경 외부에서 일어나며, 이는 Datadog의 통제를 벗어나는 것입니다. Datadog은 FedRAMP, DoD 영향 수준, ITAR, 수출 규정 준수, 데이터 보존 또는 해당 로그에 적용되는 유사 규정과 관련해 사용자가 가질 의무 또는 요구 사항을 포함하되 이에 국한되지 않는 Datadog GovCloud 환경을 떠난 모든 로그에 대해 책임을 지지 않습니다.</div>
 {{< /site-region >}}
 
@@ -80,7 +80,7 @@ title: 로그 아카이브
 
 [AWS 콘솔][1]에서 [S3 버킷을 생성하여][2] 아카이브를 보냅니다.
 
-{{ < site-region region="gov" > }}
+{{< site-region region="gov" >}}
 <div class="alert alert-warning">가상 호스트 스타일 주소를 이용하는 S3 FIPS 엔드포인트와 통합되어 있을 경우 Datadog Archives에서 점(.)이 있는 버킷 이름을 지원하지 않습니다. 자세한 내용은 AWS 설명서를 참고하세요.<a href="https://aws.amazon.com/compliance/fips/">AWS FIPS</a> 및 <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/VirtualHosting.html">AWS Virtual Hosting</a>.</div>
 {{< /site-region >}}
 
@@ -186,7 +186,7 @@ title: 로그 아카이브
 2. [Google Cloud IAM Admin 페이지][1]에서 Datadog Google Cloud 서비스 계정 주체를 선택하고 **Edit principal**을 선택합니다.
 3. **ADD ANOTHER ROLE**을 클릭한 후 **Storage Object Admin** 역할을 선택하고 저장합니다.
 
-   {{< img src="logs/archives/gcp_role_storage_object_admin-2.png" alt="Datadog Google Cloud 서비스 계정에 Storage Object Admin역할을 추가합니다." style="width:75%;">}}
+{{< img src="logs/archives/gcp_role_storage_object_admin-2.png" alt="Datadog Google Cloud 서비스 계정에 Storage Object Admin역할을 추가합니다." style="width:75%;" >}}
 
 [1]: https://console.cloud.google.com/iam-admin/iam
 {{% /tab %}}

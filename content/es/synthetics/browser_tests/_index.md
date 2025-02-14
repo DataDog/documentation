@@ -83,7 +83,7 @@ Cuando configures un nuevo test de navegador de Synthetic Monitoring, utiliza fr
 
 ### Opciones avanzadas
 
-{{< pestañas >}}
+{{< tabs >}}
 
 {{% tab "Opciones de solicitud" %}}
 

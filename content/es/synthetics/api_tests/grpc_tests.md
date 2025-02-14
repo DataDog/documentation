@@ -59,7 +59,7 @@ Puedes crear un test utilizando una de las siguientes opciones:
        2. Especifica el **Host** y el **Puerto** donde se ejecutará el test. De forma predeterminada, el puerto gRPC es `50051`.
        3. Selecciona **Check de comportamiento** para realizar una llamada unaria o **Check de estado** para realizar un check de estado.<br /><br>
 
-      {{< pestañas >}}
+      {{< tabs >}}
       {{% tab "Check de comportamiento" %}}
 
 Para un check de comportamiento, especifica la **Reflexión del servidor** o [carga un **Archivo Proto**][101] que define tu servidor gRPC. Selecciona un método e incluye un mensaje de solicitud. Datadog no admite métodos de streaming.<br /><br>
@@ -80,7 +80,7 @@ Para un check de estado, introduce el nombre del servicio. Deja este campo vací
 
    4. Añade **Opciones avanzadas** (opcional) a tu test:
 
-      {{< pestañas >}}
+      {{< tabs >}}
       {{% tab "Opciones de solicitud" %}}
 
 - **Tiempo de espera**: Especifica la cantidad de tiempo en segundos antes de que se inicie un tiempo de espera en el test.

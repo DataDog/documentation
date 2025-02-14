@@ -32,7 +32,7 @@
 "manifest_version": "2.0.0"
 "name": "pdh_check"
 "public_title": "Check de PDH"
-"short_description": "Recopila y grafica cualquier contador del rendimiento de Windows".
+"short_description": "Recopila y grafica cualquier contador del rendimiento de Windows"
 "supported_os":
 - "windows"
 "tile":
@@ -42,7 +42,7 @@
   - "Category::Sistema operativo y sistema"
   - "Offering::Integración"
   "configuration": "README.md#Configuración"
-  "description": "Recopila y grafica cualquier contador del rendimiento de Windows".
+  "description": "Recopila y grafica cualquier contador del rendimiento de Windows"
   "media": []
   "overview": "README.md#Información general"
   "support": "README.md#Soporte"

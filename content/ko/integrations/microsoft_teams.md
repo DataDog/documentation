@@ -130,7 +130,6 @@ Microsoft는 Microsoft Teams용 Office 365 커넥터를 지원 중단한다고 �
    3. 레거시 커넥터 핸들이 메시지를 전송하던 원하는 팀과 채널을 드롭다운 메뉴에서 선택하고 **저장**을 클릭합니다. 이 신규 핸들은 기존 레거시 커넥터 핸들을 재정의합니다.
 
 [1]: https://app.datadoghq.com/integrations/microsoft-teams
-
 {{< /site-region >}}
 
 {{< site-region region="gov" >}}
@@ -281,7 +280,7 @@ Microsoft는 Microsoft Teams용 Office 365 커넥터를 지원 중단한다고 �
 
 {{< /site-region >}}
 
-{{ < site-region region="gov" > }}
+{{< site-region region="gov" >}}
 1. [설정 단계][2]에 따라 Microsoft 테넌트를 Datadog에 연결합니다.
 2. 레거시 Office 365 커넥터가 설정된 모든 팀에 Datadog for Government 앱을 추가합니다.
 3. [Microsoft Teams 통합 타일][1]의 각 레거시 알림 커넥터 핸들에 대해
@@ -312,11 +311,11 @@ Microsoft는 Microsoft Teams용 Office 365 커넥터를 지원 중단한다고 �
 
 1. 채널 목록에서 채널 이름 옆의 `...` 버튼을 선택한 다음 **커넥터**를 선택합니다.
 
-   {{< img src="integrations/microsoft_teams/microsoft_team_step_1_v2.png" alt="Microsoft Teams 단계 1" >}}
+{{< img src="integrations/microsoft_teams/microsoft_team_step_1_v2.png" alt="Microsoft Teams 단계 1" >}}
 
 2. Datadog을 검색하고 **설정**를 클릭합니다.
 
-   {{< img src="integrations/microsoft_teams/microsoft_team_step_2_v2.png" alt="Microsoft Teams 단계 2" >}}
+{{< img src="integrations/microsoft_teams/microsoft_team_step_2_v2.png" alt="Microsoft Teams 단계 2" >}}
 
 3. 커넥터 설정 모달에서 웹훅 URL을 복사합니다.
 4. Datadog에서 [**통합 > Microsoft Teams**][4]로 이동합니다.
@@ -342,7 +341,7 @@ Microsoft는 Microsoft Teams용 Office 365 커넥터를 지원 중단한다고 �
 2. 세로 도구 모음에서 **앱**을 클릭합니다.
 3. "Datadog"을 검색하고 **열기**를 클릭합니다.
 4. 열리는 모달에서 앱을 추가할 팀의 기본 채널을 선택합니다. **이동**을 클릭하여 설치를 완료합니다.
-   {{< img src="integrations/microsoft_teams/microsoft_teams_add_app_to_team.png" alt="Microsoft Teams이 팀에 앱 추가" >}}
+{{< img src="integrations/microsoft_teams/microsoft_teams_add_app_to_team.png" alt="Microsoft Teams이 팀에 앱 추가" >}}
 
 그런 다음 Microsoft 테넌트를 Datadog에 연결합니다.
 
@@ -371,7 +370,7 @@ Microsoft Teams에서 Datadog의 작업을 수행하려면 Datadog와 Microsoft 
 1. Microsoft Teams를 엽니다.
 2. 세로 도구 모음에서 `...` 버튼을 클릭하고 Datadog 를 선택하여 Datadog 봇과 채팅을 시작합니다.
 3. "계정"을 입력하고 Enter 키를 누릅니다.
-   {{< img src="integrations/microsoft_teams/microsoft_teams_connect_account_from_teams.png" alt="Microsoft Teams의 계정 연결" >}}
+{{< img src="integrations/microsoft_teams/microsoft_teams_connect_account_from_teams.png" alt="Microsoft Teams의 계정 연결" >}}
 
 4. Datadog 봇이 계정 연결 방법에 대해 안내할 것입니다. **Datadog 계정 연결**을 클릭합니다.
 5. 그러면 Datadog 봇이 계정 연결 링크가 포함된 메시지를 보냅니다. 링크를 클릭하고 프롬프트의 지시를 따릅니다.
@@ -602,7 +601,7 @@ Microsoft Teams 통합에서 인시던트 관리 기능을 사용하려면 추�
 ### 봇이 비공개 채널을 지원하나요?
 [Microsoft Teams][2]의 비공개 채널 제한으로 봇은 비공개 채널을 지원하지 않습니다. 알림을 비공개 채널로 전송하려면 [Microsoft 워크플로 웹훅][3]을 참조하세요.
 
-{{ < site-region region="gov" > }}
+{{< site-region region="gov" >}}
 ### Is the Datadog for Government app supported in GCC or GCC High?
 Currently, the Datadog for Government app only supports Datadog US1-FED customers who are trying to connect to their `commercial` Microsoft Teams tenant. GCC and GCC High tenants are not supported by the app.
 {{< /site-region >}}

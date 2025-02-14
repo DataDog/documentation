@@ -33,8 +33,8 @@ Este documento te guiará a través de los siguientes pasos:
 
 Introduce la siguiente información en función de los destinos de logs seleccionados.
 
-{{< pestañas >}}
-{{% pestaña "Amazon OpenSearch" %}}
+{{< tabs >}}
+{{% tab "Amazon OpenSearch" %}}
 
 {{% observability_pipelines/destination_settings/amazon_opensearch %}}
 
@@ -48,8 +48,8 @@ Introduce la siguiente información en función de los destinos de logs seleccio
 
 {{% observability_pipelines/destination_settings/datadog %}}
 
-{{% /pestaña %}}
-{{% pestaña "Datadog Archivos" %}}
+{{% /tab %}}
+{{% tab "Datadog Archivos" %}}
 
 {{% observability_pipelines/destination_settings/datadog_archives_note %}}
 
@@ -78,8 +78,8 @@ Para configurar el destino, siga las instrucciones del proveedor de la nube que 
 
 {{% observability_pipelines/destination_settings/elasticsearch %}}
 
-{{% /pestaña %}}
-{{% pestaña "Microsoft Sentinel" %}}
+{{% /tab %}}
+{{% tab "Microsoft Sentinel" %}}
 
 {{% observability_pipelines/destination_settings/microsoft_sentinel %}}
 
@@ -93,8 +93,8 @@ Para configurar el destino, siga las instrucciones del proveedor de la nube que 
 
 {{% observability_pipelines/destination_settings/opensearch %}}
 
-{{% /pestaña %}}
-{{% pestaña "SentinelOne" %}}
+{{% /tab %}}
+{{% tab "SentinelOne" %}}
 
 {{% observability_pipelines/destination_settings/sentinelone %}}
 
@@ -128,8 +128,8 @@ Para configurar el destino, siga las instrucciones del proveedor de la nube que 
 
 {{% observability_pipelines/processors/add_processors %}}
 
-{{< pestañas >}}
-{{% pestaña "Add env vars" %}}
+{{< tabs >}}
+{{% tab "Add env vars" %}}
 
 {{% observability_pipelines/processors/add_env_vars %}}
 
@@ -143,8 +143,8 @@ Para configurar el destino, siga las instrucciones del proveedor de la nube que 
 
 {{% observability_pipelines/processors/dedupe %}}
 
-{{% /pestaña %}}
-{{% pestaña "Editar campos" %}}
+{{% /tab %}}
+{{% tab "Editar campos" %}}
 
 {{% observability_pipelines/processors/remap %}}
 
@@ -153,8 +153,8 @@ Para configurar el destino, siga las instrucciones del proveedor de la nube que 
 
 {{% observability_pipelines/processors/enrichment_table %}}
 
-{{% /pestaña %}}
-{{% pestaña "Filtro" %}}
+{{% /tab %}}
+{{% tab "Filtro" %}}
 
 {{% observability_pipelines/processors/filter %}}
 
@@ -183,8 +183,8 @@ Para configurar el destino, siga las instrucciones del proveedor de la nube que 
 
 {{% observability_pipelines/processors/reduce %}}
 
-{{% /pestaña %}}
-{{% pestaña "Reasignar a OCSF" %}}
+{{% /tab %}}
+{{% tab "Reasignar a OCSF" %}}
 
 {{% observability_pipelines/processors/remap_ocsf %}}
 
@@ -221,8 +221,8 @@ Para configurar el destino, siga las instrucciones del proveedor de la nube que 
 1. Ingresa la ruta completa de la URL del endpoint HTTP/S, como `https://127.0.0.8/logs`. El worker de Observability Pipelines recopila eventos de logs de este endpoint.
 
 1. Proporcione las variables entorno para cada uno de los destinos seleccionados. Consulte [Prerrequisitos](#prerrequisitos) para obtener más información.
-{{< pestañas >}}
-{{% pestaña "Amazon OpenSearch" %}}
+{{< tabs >}}
+{{% tab "Amazon OpenSearch" %}}
 
 {{% observability_pipelines/destination_env_vars/amazon_opensearch %}}
 
@@ -236,8 +236,8 @@ Para configurar el destino, siga las instrucciones del proveedor de la nube que 
 
 {{% observability_pipelines/destination_env_vars/datadog %}}
 
-{{% /pestaña %}}
-{{% pestaña "Datadog Archivos" %}}
+{{% /tab %}}
+{{% tab "Datadog Archivos" %}}
 
 Para el destino de archivos de Datadog, sigue las instrucciones del proveedor de la nube que utilices para archivar tus logs.
 
@@ -262,8 +262,8 @@ Para el destino de archivos de Datadog, sigue las instrucciones del proveedor de
 
 {{% observability_pipelines/destination_env_vars/elasticsearch %}}
 
-{{% /pestaña %}}
-{{% pestaña "Microsoft Sentinel" %}}
+{{% /tab %}}
+{{% tab "Microsoft Sentinel" %}}
 
 {{% observability_pipelines/destination_env_vars/microsoft_sentinel %}}
 
@@ -277,8 +277,8 @@ Para el destino de archivos de Datadog, sigue las instrucciones del proveedor de
 
 {{% observability_pipelines/destination_env_vars/opensearch %}}
 
-{{% /pestaña %}}
-{{% pestaña "SentinelOne" %}}
+{{% /tab %}}
+{{% tab "SentinelOne" %}}
 
 {{% observability_pipelines/destination_env_vars/sentinelone %}}
 
@@ -300,7 +300,7 @@ Para el destino de archivos de Datadog, sigue las instrucciones del proveedor de
 {{% /tab %}}
 {{< /tabs >}}
 1. Sigue las instrucciones de tu entorno para instalar el worker.
-{{< pestañas >}}
+{{< tabs >}}
 {{% tab "Docker" %}}
 
 {{% observability_pipelines/install_worker/docker %}}

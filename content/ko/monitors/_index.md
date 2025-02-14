@@ -49,9 +49,9 @@ Datadog 모니터링을 시작하는 가장 빠른 방법은 [권장 모니터�
 또한 학습 센터(Learning Center)의 랩 환경이나 모니터링 시작하기 지침에 따라 처음부터 직접 모니터링을 만들 수 있습니다.
 
 {{< whatsnext desc="다음 리소스를 사용하여 모니터링 생성하기:" >}}
-    {{< nextlink href="/getting_started/monitors/" >}}모니터링 시작하기: 메트릭 기반 모니터링 생성 방법{{< /nextlink >}}
-    {{< nextlink href="/monitors/types/" >}}모니터링 유형으로 모니터링 생성하기{{< /nextlink >}}
-  {{< nextlink href="https://learn.datadoghq.com/courses/getting-started-monitors" >}학습 센터: 샌드박스 랩 환경에서 모니터 구축{{< /nextlink >}}
+  {{< nextlink href="/getting_started/monitors/" >}}모니터링 시작하기: 메트릭 기반 모니터링 생성 방법{{< /nextlink >}}
+  {{< nextlink href="/monitors/types/" >}}모니터링 유형으로 모니터링 생성하기{{< /nextlink >}}
+  {{< nextlink href="https://learn.datadoghq.com/courses/getting-started-monitors" >}}학습 센터: 샌드박스 랩 환경에서 모니터 구축{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## 집계 데이터 분석
