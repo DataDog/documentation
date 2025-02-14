@@ -35,7 +35,7 @@ further_reading:
 
 Enable runtime metrics collection in the .NET Tracer 1.23.0+ with the `DD_RUNTIME_METRICS_ENABLED=true` environment variable.
 
-View runtime metrics in correlation with your .NET services. See the [Service Catalog][1] in Datadog.
+View runtime metrics in correlation with your .NET services. See the [Software Catalog][1] in Datadog.
 
 By default, runtime metrics from your application are sent to the Datadog Agent with DogStatsD over port `8125`. Make sure that [DogStatsD is enabled for the Agent][2].
 

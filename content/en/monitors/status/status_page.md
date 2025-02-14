@@ -76,7 +76,6 @@ The following monitor types are not supported by the provisional status page:
 - Database Monitoring
 - Forecast
 - Outlier
-- Synthetics
 - SLO Alerts
 - Usage
 
@@ -84,7 +83,6 @@ The following monitor types are not supported by the provisional status page:
 
 The following features are not supported by the provisional status page:
 
-- Custom schedules
 - Notification grouping
 
 
