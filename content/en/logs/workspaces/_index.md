@@ -55,7 +55,7 @@ You can also create Calculated Fields directly within a Workspace to define a co
 1. Click **More operations**.
 1. Select **Calculate**.
 
-{{< img src="/logs/workspace/workspaces_calculated_fields.png" alt="Screenshot of an example Workspaces interface with the 'Calculate' option selected from the 'More' dropdown menu, demonstrating how to add Calculated Fields to a query." style="width:100%;" >}}
+{{< img src="/logs/workspace/calculated_fields_transformation_cell.png" alt="Screenshot of an example Workspaces interface with the 'Calculate' option selected from the 'More' dropdown menu, demonstrating how to add Calculated Fields to a query." style="width:100%;" >}}
 
 ## Analyze, transform, and visualize your logs
 You can add the following cells to:
