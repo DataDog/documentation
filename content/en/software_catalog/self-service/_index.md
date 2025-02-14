@@ -19,37 +19,25 @@ Use [App Builder][2] to create dynamic, user-friendly forms to collect inputs fr
 
 {{< img src="tracing/service_catalog/self-service-ui.png" alt="Publish to Self-Service" style="width:100%;" >}}
 
-{{< callout url="https://forms.gle/6Er52qd3BCERhotg7" d_target="#signupModal" btn_hidden="false">}}
-  Software Templates are in Preview. Complete the form to request access.
-{{< /callout >}} 
+### Start from an example
+Navigate to [App Builder Blueprints][9] or [Workflow Automation Blueprints][15]. These are examples of how to configure an App or Workflow to help you get started. You can make updates to the examples to fit your needs, such as configuring inputs, setting up integrations with other tools, and configuring permissions. See some examples below:
 
-### Create software template workflows
-To use software templates in Datadog, create a Git repository with the desired template. You can start from scratch or use our quickstart blueprints to learn from an example.
+#### Software Templating
+Configure an form to collect inputs from a developer, integrate with a template in source code management (e.g. Github), and generate a new repository or PR for a developer.
 
-#### Start from an example
-Navigate to [App Builder Blueprints][9] and select one of the following blueprints. These are examples of how to configure an App or Workflow to help you get started. You can make updates to the examples to fit your needs, such as configuring inputs, setting up integrations with source code management or cloud providers, and configuring permissions.
+#### Remediaton
+Consolidate data from cloud infrastructure or Kubernetes and enable developers to take simple, safe remediation actions. Trigger actions manually, in response to a monitor, or from an external API call.
 
-##### Scaffold New Service
+#### Change Management
+Manage deployments, feature flag changes, and more. Initiate changes directly from Datadog or track the current status and approval.
 
-The [Scaffold New Service blueprint][11] shows an example of scaffolding a new lambda function from a template. The form captures inputs from a developer that will be passed into the corresponding Git repo.
+##### Provisioning Infrastructure
+Enable developers to spin up new infrastructure (e.g. S3 bucket) with a few inputs and one click. Collect approvals from an SRE/platform engineering team through source control or Approval actions within Workflow Automation.
 
-1. From the app, customize the form to include the parameters you want to capture from your developers.
-2. Click **Save as New App** to save the app. This will also create a corresponding templating workflow.
+#### Developer Environments
+Spin up ephemeral environments for developers on-demand. Use Workflow Automation to automatically deprovision any unused infrastructure to control costs.
 
-##### Create S3 bucket with Terraform
-
-The [Create S3 Bucket blueprint][10] shows an example of how to generate Terraform code for an S3 bucket using a form in GitHub.
-
-##### Provision Kubernetes cluster
-
-The [Provision EKS Cluster blueprint][12] shows an example of how to generate Terraform code for a Kubernetes cluster in GitHub.
-
-##### Provision RDS instance
-
-The [Provision RDS Instance blueprint][13] shows an example of how to provision an RDS instance through direct integration with AWS.
-
-
-#### Start from scratch
+### Start from scratch
 Navigate to the [Workflow Automation][3] page to configure the template in Datadog.
 
 1. Create a form for the developer-facing frontend using App Builder:
@@ -60,15 +48,7 @@ Navigate to the [Workflow Automation][3] page to configure the template in Datad
    - Create a **Button** that submits the form, triggers your workflow, and passes in the parameters for the template.
    - Save and publish the app.
 
-2. [Create a workflow][6] for your template:
-   - From the [Workflow Automation][3] page, click **New Workflow**. 
-   - Enter a name, add relevant tags, and define the input parameters you want to collect from users.
-  
-3. Configure the templating workflow:
-   - Use GitHub, Gitlab, or HTTP [actions][7] to retrieve your template files.
-   - Use the Apply Template [action][7] to manipulate your template repository and pass in your input parameters.
-   - Use GitHub, Gitlab, or HTTP [actions][7] to upload the project files to the repository.
-   - Save the workflow.
+2. Pair your App with [Actions][7] or a [Workflow][6] to automate processes:
 
   {{< img src="tracing/software_catalog/templating-workflow.png" alt="Workflow for building software template automation" style="width:100%;" >}}
 
@@ -80,28 +60,6 @@ Navigate to the [Workflow Automation][3] page to configure the template in Datad
 When you have finished setting up and testing up your App, you can publish it for your team members to use. The publishing flow prompts you to define permissions and then allows you to add your App to a Dashboard or to the Self-Service portal. 
 
   {{< img src="tracing/service_catalog/self-service-publish.png" alt="Publish to Self-Service" style="width:100%;" >}}
-
-### Available Software Catalog Actions
-
-Below is a list of actions available for Software Catalog in Datadog App Builder and Workflow Automation. You can see a full list of in the [Action Catalog][7].
-
-- **Templating**
-  - "Apply template" to pass in parameters to a set of files
-- **Github**
-  - "Create or update file" to create new files
-  - "Edit configuration file" to manipulate YAML or JSON files
-  - "Trigger GitHub Actions workflow run" to initiate a GitHub Action
-  - "Search repositories" to return a list of repositories
-  - "Create pull request" to open a pull request
-- **Retrieve Service Information**
-  - "Get service definition" for a single service
-  - "List service definitions" to get all definitions from Datadog Software Catalog
-  - "Get service dependencies" to get a service's immediate upstream and downstream services
-- **Incident Triage**
-  - "Get service PagerDuty on call"
-  - When integrated with other actions, you can trigger workflows based on critical events (for example, execute runbooks).
-- **Private Actions**
-  - To interact with private resources, use the [Private Action Runner][12].
     
 
 ## Further reading
@@ -121,3 +79,4 @@ Below is a list of actions available for Software Catalog in Datadog App Builder
 [12]: /actions/private_actions/
 [13]: https://app.datadoghq.com/app-builder/apps/edit?activeTab=data&showActionCatalog=false&template=provision-eks-cluster&viewMode=edit&visibleDataItemId=createOrUpdateFile0-action
 [14]: https://app.datadoghq.com/app-builder/apps/edit?activeTab=data&showActionCatalog=false&template=rds_provision_instance&viewMode=edit&visibleDataItemId=createDbInstance0-action
+[15]: https://app.datadoghq.com/workflow/blueprints
