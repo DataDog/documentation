@@ -19,8 +19,8 @@ import {
   MinifiedClientFunction,
   minifyClientFunction
 } from './PageBuilder/pageConfigMinification';
-import { transformConfig } from '../markdocParserConfig';
-import { HugoFunctions } from './HugoFunctions';
+import { transformConfig } from './markdocCustomization/parserConfig';
+import { HugoFunctions } from './hugoUtils/HugoFunctions';
 import { FiltersManifest } from 'cdocs-data';
 
 /**

@@ -1,5 +1,5 @@
 import { Config, Node } from 'cdocs-markdoc';
-import { HugoFunctions } from '../../HugoFunctions';
+import { HugoFunctions } from '../../hugoUtils/HugoFunctions';
 import { CustomHtmlComponent } from '../renderer';
 
 export const tabDefinition = {

@@ -1,5 +1,5 @@
 import { describe, test, expect } from 'vitest';
-import { HugoFunctions } from '../../src/helperModules/HugoFunctions';
+import { HugoFunctions } from '../../src/helperModules/hugoUtils/HugoFunctions';
 import { mockHugoConfig } from '../config/mocks/valid/hugoConfig';
 import { VALID_SITE_DIR } from '../config/constants';
 

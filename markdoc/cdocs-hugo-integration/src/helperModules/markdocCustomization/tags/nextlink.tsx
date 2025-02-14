@@ -1,5 +1,5 @@
 import { renderToString } from 'react-dom/server';
-import { HugoFunctions } from '../../HugoFunctions';
+import { HugoFunctions } from '../../hugoUtils/HugoFunctions';
 import { CustomHtmlComponent } from '../renderer';
 import { HugoConfig } from '../../../schemas/config/hugo';
 import { ImgTemplate } from './shared/img';

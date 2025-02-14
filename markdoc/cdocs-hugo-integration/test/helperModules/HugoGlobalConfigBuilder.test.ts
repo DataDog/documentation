@@ -2,7 +2,7 @@ import { describe, test, expect } from 'vitest';
 import { HugoGlobalConfigSchema } from '../../src/schemas/config/hugo';
 import { VALID_SITE_DIR, SNAPSHOTS_DIR } from '../config/constants';
 import { IntegrationConfig } from '../../src/schemas/config/integration';
-import { HugoGlobalConfigBuilder } from '../../src/helperModules/HugoGlobalConfigBuilder';
+import { HugoGlobalConfigBuilder } from '../../src/helperModules/hugoUtils/HugoGlobalConfigBuilder';
 
 describe('HugoFunctions', () => {
   const integrationConfig: IntegrationConfig = {

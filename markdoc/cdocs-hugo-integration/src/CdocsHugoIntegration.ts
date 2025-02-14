@@ -15,7 +15,7 @@ import {
   CompilationResult
 } from './schemas/compilationResults';
 import { FileSearcher } from './helperModules/FileSearcher';
-import { HugoGlobalConfigBuilder } from './helperModules/HugoGlobalConfigBuilder';
+import { HugoGlobalConfigBuilder } from './helperModules/hugoUtils/HugoGlobalConfigBuilder';
 
 /**
  * The external interface of the integration.
