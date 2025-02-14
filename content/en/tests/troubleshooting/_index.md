@@ -195,4 +195,3 @@ This is also caused by an unstable test session fingerprint. See the [Session hi
 [14]: /tests/#supported-features
 [15]: /agent/configuration/network/
 [16]: /tests/network/
-[17]: #session-history-performance-or-code-coverage-tab-only-show-a-single-execution
