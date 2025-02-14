@@ -119,7 +119,7 @@ To automatically instrument your RUM application:
 {{% /collapse-content %}}
 
 {{% /tab %}}
-{{% tab "httpd" %}}
+{{% tab "Apache httpd" %}}
 
 The Auto-Instrumentation method leverages the [Apache httpd Modules capability][1] to implement a response body filter. The filter injects the RUM SDK into the response body for responses
 identified as HTML. For more granular control over how configuration files or permissions are handled, you can also install Apache httpd Server manually.
