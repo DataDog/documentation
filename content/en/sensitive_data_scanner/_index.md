@@ -49,7 +49,7 @@ Sensitive data, such as credit card numbers, API keys, IP addresses, and persona
 
 Sensitive Data Scanner can scan your data [in the cloud](#in-the-cloud) or [within your environment](#in-your-environment).
 
-### In the cloud  {#in-the-cloud}
+### In the Cloud  {#in-the-cloud}
 
 With Sensitive Data Scanner in the Cloud, you submit your application logs, APM events, RUM events, and events from Event Management to the Datadog backend, so they leave your premises before they are redacted. However, the logs and events are scanned and redacted in the Datadog backend during processing, so sensitive data is redacted before events are indexed in Datadog.
 
@@ -64,12 +64,12 @@ To use Sensitive Data Scanner, set up a scanning group to define what data to sc
 - Add predefined scanning rules from Datadog's [Scanning Rule Library][2]. These rules detect common patterns such as email addresses, credit card numbers, API keys, authorization tokens, network and device information, and more.
 - [Create your own rules using regex patterns][3].
 
-See [Set Up Sensitive Data Scanner in the Cloud][4] for setup details.
+See [Set Up Sensitive Data Scanner for Telemetry Data][4] for setup details.
 
 
 ### In your environment {#in-your-environment}
 
-Use [Observability Pipelines][5] to collect and process your logs within your environment, and then route the data to their downstream integrations. When you set up a pipeline in Observability Pipelines, add the [Sensitive Data Scanner processor][6] to redact sensitive data in your logs before they leave your premises. You can add predefined scanning rules from the Rule Library, such as email address, credit card numbers, API keys, authorization tokens, IP addresses, and more. You can also create your own rules using regex patterns.
+Use [Observability Pipelines][5] to collect and process your logs within your environment, and then route the data to their downstream integrations. When you set up a pipeline in Observability Pipelines, add the [Sensitive Data Scanner processor][6] to redact sensitive data in your logs before they leave your premises. You can add predefined scanning rules from the Rule Library, such as email addresses, credit card numbers, API keys, authorization tokens, IP addresses, and more. You can also create your own rules using regex patterns.
 
 See [Set Up Pipelines][7] for more information.
 

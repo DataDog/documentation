@@ -45,8 +45,8 @@ Whenever possible, use Datadog's out-of-the-box [library rules][3]. These rules 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /sensitive_data_scanner/custom_rules/
-[2]: /sensitive_data_scanner/?tab=inthecloud#add-scanning-rules
+[1]: /sensitive_data_scanner/scanning_rules/custom_rules/
+[2]: /sensitive_data_scanner/setup/telemetry_data/#add-scanning-rules
 [3]: /sensitive_data_scanner/scanning_rules/library_rules/
 [4]: /help/
-[5]: /sensitive_data_scanner/?tab=inthecloud#add-additional-keywords
+[5]: /sensitive_data_scanner/setup/telemetry_data/#add-additional-keywords
