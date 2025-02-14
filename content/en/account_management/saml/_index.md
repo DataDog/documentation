@@ -59,19 +59,19 @@ Configuring [SAML (Security Assertion Markup Language)][1] for your Datadog acco
 
 ## Using SAML
 
-Once SAML is configured in Datadog and your IdP is set up to accept requests from Datadog, users can log in.
+AFter SAML is configured in Datadog and your IdP is set up to accept requests from Datadog, users can log in.
 
 ### SP-initiated login
 
 SP-initiated, or Service Provider-initiated, means login initiated from Datadog. Users log in through the **Single Sign-on URL** shown in the status box at the top of the [SAML Configuration page][19]. The **Single Sign-on URL** is also displayed on the [Team page][20]. Loading this URL initiates a SAML authentication against your IdP. **Note**: This URL isn't displayed unless SAML is enabled for your account and you are using SP-initiated login.
 
-When a user logs in through SP-initiated SAML and the organization does not have a custom subdomain, Datadog send a one-time email verification code that is required to log in.
+When a user logs in through SP-initiated SAML and the organization does not have a custom subdomain, Datadog requires additional security. Users receive a one-time email verification code that is required to log in.
 
 {{< img src="account_management/saml/saml_enabled_cropped.png" alt="Confirmation that SAML Enabled" >}}
 
 ### IdP-initiated login
 
-IdP-initiated, or Identity Provider-initiated, means login initiated from your app portal. Users log in by clicking on the app icon in your app portal, for example, in the Google App drawer or the Okta App Portal. In some scenarios, users who log in with the SP-initiated login URL can also use IdP-initiated login, depending on your Identity Provider's configuration and support.
+IdP-initiated, or Identity Provider-initiated, means login initiated from your app portal. Users log in by clicking on the app icon in your app portal, for example, in the Google App drawer or the Okta App Portal. Users of SP-initiated login may also be able to use IdP-initiated login, depending on your Identity Provider's configuration.
 
 ## Assertions and attributes
 
