@@ -97,7 +97,7 @@ Logs are billed separately from CI Visibility. Log retention, exclusion, and ind
 
 ### Correlate infrastructure metrics to jobs
 
-The Github Actions CI Visibility integration allows for correlation between infrastructure and jobs. To achieve this, ensure the [Datadog Agent][20] is running on the host where the jobs are executed. Depending on the configuration, additional steps might be required:
+The GitHub Actions CI Visibility integration allows for correlation between infrastructure and jobs. To achieve this, ensure the [Datadog Agent][20] is running on the host where the jobs are executed. Depending on the configuration, additional steps might be required:
 
 - For [Actions Runner Controller][21]: No additional setup required. Due to limitations in the Datadog Agent, jobs shorter than the minimum collection interval of the Datadog Agent might not always display infrastructure correlation metrics. To adjust this value, see [Datadog Agent configuration template][22] and adjust the variable `min_collection_interval` to be less than 15 seconds
 
