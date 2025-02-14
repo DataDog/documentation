@@ -153,7 +153,7 @@ You can configure account filters in step 4 of the setup process.
 
 #### Configure account filters for an existing account
 
-Navigate to [**Cloud Costs** > **Accounts**][18] and click on **Manage Account** for the management account you want to filter.
+Navigate to [**Cloud Costs** > **Accounts**][18] and click **Manage Account** for the management account you want to filter.
 
 {{< img src="cloud_cost/account_filtering/manage_account.png" alt="Manage Account button on account card" style="width:100%;" >}}
 
