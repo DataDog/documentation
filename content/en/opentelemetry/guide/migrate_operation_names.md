@@ -25,7 +25,7 @@ Before migrating, remove any existing span name configuration:
 
 Remove `span_name_as_resource_name` and `span_name_remappings` from your Datadog exporter and connector configurations:
 
-{{< highlight py "hl_lines=4-6 11" >}}
+{{< highlight py "hl_lines=4-7 11-12" >}}
 # Remove the highlighted lines if they exist in your configuration
 exporters:
   datadog:
