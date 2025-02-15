@@ -1,0 +1,109 @@
+{
+  "$$mdtype": "Tag",
+  "name": "article",
+  "attributes": {},
+  "children": [
+    {
+      "$$mdtype": "Tag",
+      "name": "h1",
+      "attributes": {},
+      "children": [
+        "Description list test"
+      ]
+    },
+    {
+      "$$mdtype": "Tag",
+      "name": "dl",
+      "attributes": {},
+      "children": [
+        {
+          "$$mdtype": "Tag",
+          "name": "dt",
+          "attributes": {},
+          "children": [
+            "Service"
+          ]
+        },
+        {
+          "$$mdtype": "Tag",
+          "name": "dd",
+          "attributes": {},
+          "children": [
+            "Services are the building blocks of modern microservice architectures - broadly a service groups together endpoints, queries, or jobs for the purposes of building your application."
+          ]
+        },
+        {
+          "$$mdtype": "Tag",
+          "name": "dt",
+          "attributes": {},
+          "children": [
+            "Resource"
+          ]
+        },
+        {
+          "$$mdtype": "Tag",
+          "name": "dd",
+          "attributes": {},
+          "children": [
+            "Resources represent a particular domain of a customer application - they are typically an instrumented web endpoint, database query, or background job."
+          ]
+        },
+        {
+          "$$mdtype": "Tag",
+          "name": "dt",
+          "attributes": {},
+          "children": [
+            {
+              "$$mdtype": "Tag",
+              "name": "code",
+              "attributes": {},
+              "children": [
+                "clusterChecksRunner.affinity.podAffinity.preferredDuringSchedulingIgnoredDuringExecution"
+              ]
+            }
+          ]
+        },
+        {
+          "$$mdtype": "Tag",
+          "name": "dd",
+          "attributes": {},
+          "children": [
+            "Required. A list of node selector terms. The terms are ORed."
+          ]
+        },
+        {
+          "$$mdtype": "Tag",
+          "name": "dt",
+          "attributes": {},
+          "children": [
+            {
+              "$$mdtype": "Tag",
+              "name": "code",
+              "attributes": {},
+              "children": [
+                "site"
+              ]
+            }
+          ]
+        },
+        {
+          "$$mdtype": "Tag",
+          "name": "dd",
+          "attributes": {},
+          "children": [
+            "Set the site of the Datadog intake for Agent data. Defaults to ",
+            {
+              "$$mdtype": "Tag",
+              "name": "code",
+              "attributes": {},
+              "children": [
+                "datadoghq.com"
+              ]
+            },
+            "."
+          ]
+        }
+      ]
+    }
+  ]
+}

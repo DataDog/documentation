@@ -1,0 +1,25 @@
+primary_color_options:
+  - label: Red
+    id: red
+  - label: Yellow
+    id: yellow
+  - label: Blue
+    id: blue
+    default: true
+
+rainbow_color_options:
+  - label: Red
+    id: red
+  - label: Orange
+    id: orange
+  - label: Yellow
+    id: yellow
+  - label: Green
+    id: green
+  - label: Blue
+    id: blue
+  - label: Indigo
+    id: indigo
+  - label: Violet
+    id: violet
+    default: true

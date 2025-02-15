@@ -1,0 +1,3 @@
+environment: development
+img_url: "http://localhost:1313/"
+static_url: "http://localhost:1313/"
