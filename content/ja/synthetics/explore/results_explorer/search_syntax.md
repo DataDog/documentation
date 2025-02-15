@@ -1,9 +1,10 @@
 ---
 aliases:
 - /ja/synthetics/explorer/search_syntax
+- /ja/continuous_testing/explorer/search_syntax/
 description: Synthetic Monitoring & Testing Results Explorer で検索クエリを作成する方法を学びましょう。
 further_reading:
-- link: /continuous_testing/explorer
+- link: /synthetics/explore/results_explorer
   tag: ドキュメント
   text: Learn about the Synthetic Monitoring & Testing Results Explorer
 title: 検索構文
@@ -34,6 +35,6 @@ title: 検索構文
 
 特定の範囲内の数値属性を検索することができます。例えば、**Duration** ファセットで平均継続時間が 2～10 ナノ秒のすべてのバッチを取得します。検索クエリは `Duration:[2-10]` で更新されます。
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}

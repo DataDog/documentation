@@ -9,9 +9,9 @@ title: テスト実行の検索
 
 ## 概要
 
-After selecting a time frame from the dropdown menu on the top right, you can search for test runs by clicking on the **Test Runs** event type in the [Synthetic Monitoring & Testing Results Explorer][1].
+右上のドロップダウンメニューから時間帯を選択した後、[Synthetic Monitoring & Testing Results Explorer][1] の **Test Runs** イベントタイプをクリックすると、テスト実行を検索することができます。
 
-{{< img src="continuous_testing/explorer_test_runs_1.png" alt="Search and manage your test runs in the Synthetic Monitoring & Testing Results Explorer" style="width:100%;">}}
+{{< img src="continuous_testing/explorer_test_runs_1.png" alt="Synthetic Monitoring & Testing Results Explorer でテスト実行を検索・管理する" style="width:100%;" >}}
 
 ファセットを使用すると、以下のアクションを実行できます。
 
@@ -24,7 +24,7 @@ After selecting a time frame from the dropdown menu on the top right, you can se
 
 ### Common テスト実行属性
 
-**Common** facets allow you to filter on your test runs' attributes.
+**Common** ファセットを使用すると、テスト実行の属性でフィルタリングできます。
 
 | ファセット            | 説明                                                                                             |
 |------------------|---------------------------------------------------------------------------------------------------------|
