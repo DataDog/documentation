@@ -42,6 +42,19 @@ Consideraciones sobre la seguridad de los datos
 Configura lo siguiente en el [grupo de parámetros del clúster de base de datos][3] y, a continuación, **reinicia el servidor** para que los ajustes surtan efecto:
 
 {{< tabs >}}
+{{% tab "MySQL ≥ 5.7" %}}
+| Parámetro | Valor | Descripción |
+| --- | --- | --- |
+| `performance_schema` | `1` | Obligatorio. Activa el [Esquema de rendimiento][1]. |
+| <code style="word-break:break-all;">performance_schema_consumer_events_statements_current</code> | `1` | Obligatorio. Habilita la monitorización de las consultas que se están ejecutando actualmente. |
+| <code style="word-break:break-all;">performance-schema-consumer-events-waits-current</code> | `ON` | Obligatorio. Habilita la recopilación de eventos de espera. |
+| <code style="word-break:break-all;">performance_schema_consumer_events_statements_history</code> | `1` | Opcional. Habilita el seguimiento del historial de consultas recientes por subproceso. Si se activa, aumenta la probabilidad de capturar detalles de ejecución de consultas poco frecuentes. |
+| <code style="word-break:break-all;">performance_schema_consumer_events_statements_history_long</code> | `1` | Opcional. Permite el seguimiento de un mayor número de consultas recientes en todos los subprocesos. Si se activa, aumenta la probabilidad de capturar detalles de ejecución de consultas poco frecuentes. |
+| <code style="word-break:break-all;">performance_schema_max_digest_length</code> | `4096` | Aumenta el tamaño del texto de resumen SQL en las tablas de `events_statements_*`. Si se deja en el valor por defecto, las consultas de más de `1024` caracteres no se recopilan. |
+| <code style="word-break:break-all;">performance_schema_max_sql_text_length</code> | `4096` | Debe coincidir con <code style="word-break:break-all;">performance_schema_max_digest_length</code>. |
+
+[1]: https://dev.mysql.com/doc/refman/8.0/en/performance-schema-quick-start.html
+{{< tab >}}
 {{% tab "MySQL 5.6" %}}
 | Parámetros | Valor | Descripción |
 | --- | --- | --- |
@@ -50,20 +63,6 @@ Configura lo siguiente en el [grupo de parámetros del clúster de base de datos
 | <code style="word-break:break-all;">performance-schema-consumer-events-waits-current</code> | `ON` | Obligatorio. Activa la recopilación de eventos de espera. |
 | <code style="word-break:break-all;">performance_schema_consumer_events_statements_history</code> | `1` | Opcional. Activa el seguimiento del historial de consulta reciente por subproceso. Si se activa, aumenta la probabilidad de capturar detalles de ejecución desde consultas poco frecuentes. |
 | <code style="word-break:break-all;">performance_schema_consumer_events_statements_history_long</code> | `1` | Opcional. Activa el seguimiento de un número más grande de consultas recientes en todos los subprocesos. Si se activa, aumenta la probabilidad de capturar detalles de ejecución desde consultas poco frecuentes. |
-
-[1]: https://dev.mysql.com/doc/refman/8.0/en/performance-schema-quick-start.html
-{{% /tab %}}
-
-{{% tab "MySQL ≥ 5.7" %}}
-| Parámetro | Valor | Descripción |
-| --- | --- | --- |
-| `performance_schema` | `1` | Obligatorio. Activa el [Esquema de rendimiento][1]. |
-| <code style="word-break:break-all;">performance_schema_consumer_events_statements_current</code> | `1` | Obligatorio. Activa la monitorización de consultas actualmente en ejecución. |
-| <code style="word-break:break-all;">performance-schema-consumer-events-waits-current</code> | `ON` | Obligatorio. Activa la recopilación de eventos de espera. |
-| <code style="word-break:break-all;">performance_schema_consumer_events_statements_history</code> | `1` | Opcional. Activa el seguimiento del historial de consulta reciente por subproceso. Si se activa, aumenta la probabilidad de capturar detalles de ejecución desde consultas poco frecuentes. |
-| <code style="word-break:break-all;">performance_schema_consumer_events_statements_history_long</code> | `1` | Opcional. Activa el seguimiento del historial de consulta reciente por subproceso. Si se activa, aumenta la probabilidad de capturar detalles de ejecución desde consultas poco frecuentes. |
-| <code style="word-break:break-all;">performance_schema_max_digest_length</code> | `4096` | Aumenta el tamaño del texto de compendio SQL en las tablas `events_statements_*`. Si se deja el valor por defecto, las consultas más largas que `1024` caracteres no se recopilarán. |
-| <code style="word-break:break-all;">performance_schema_max_sql_text_length</code> | `4096` | Debe coincidir con <code style="word-break:break-all;">performance_schema_max_digest_length</code>. |
 
 [1]: https://dev.mysql.com/doc/refman/8.0/en/performance-schema-quick-start.html
 {{% /tab %}}
@@ -78,18 +77,6 @@ El Datadog Agent requiere acceso de solo lectura a la base de datos para poder r
 Las siguientes instrucciones conceden permiso al Agent para iniciar sesión desde cualquier host con `datadog@'%'`. Puedes restringir al usuario `datadog` para que solo pueda iniciar sesión desde el host local usando `datadog@'localhost'`. Consulta la [documentación de MySQL][4] para obtener más información.
 
 {{< tabs >}}
-{{% tab "MySQL 5.6" %}}
-
-Crea el usuario `datadog` y concédele permisos básicos:
-
-```sql
-CREATE USER datadog@'%' IDENTIFIED BY '<UNIQUEPASSWORD>';
-GRANT REPLICATION CLIENT ON *.* TO datadog@'%' WITH MAX_USER_CONNECTIONS 5;
-GRANT PROCESS ON *.* TO datadog@'%';
-GRANT SELECT ON performance_schema.* TO datadog@'%';
-```
-
-{{% /tab %}}
 {{% tab "MySQL ≥ 5.7" %}}
 
 Crea el usuario `datadog` y concédele permisos básicos:
@@ -98,6 +85,18 @@ Crea el usuario `datadog` y concédele permisos básicos:
 CREATE USER datadog@'%' IDENTIFIED by '<UNIQUEPASSWORD>';
 ALTER USER datadog@'%' WITH MAX_USER_CONNECTIONS 5;
 GRANT REPLICATION CLIENT ON *.* TO datadog@'%';
+GRANT PROCESS ON *.* TO datadog@'%';
+GRANT SELECT ON performance_schema.* TO datadog@'%';
+```
+
+{{% /tab %}}
+{{% tab "MySQL 5.6" %}}
+
+Crea el usuario `datadog` y concédele permisos básicos:
+
+```sql
+CREATE USER datadog@'%' IDENTIFIED BY '<UNIQUEPASSWORD>';
+GRANT REPLICATION CLIENT ON *.* TO datadog@'%' WITH MAX_USER_CONNECTIONS 5;
 GRANT PROCESS ON *.* TO datadog@'%';
 GRANT SELECT ON performance_schema.* TO datadog@'%';
 ```
@@ -159,6 +158,9 @@ DELIMITER ;
 GRANT EXECUTE ON PROCEDURE datadog.enable_events_statements_consumers TO datadog@'%';
 ```
 
+### Guardar tu contraseña de forma segura
+{{% dbm-secret %}}
+
 ## Instalación y configuración del Agent
 
 Para monitorizar hosts de Aurora, instala el Datadog Agent en tu infraestructura y configúralo para conectarse a cada endpoint de instancia de forma remota. El Agent no necesita ejecutarse en la base de datos, sólo necesita conectarse a ella. Para conocer otros métodos de instalación del Agent no mencionados aquí, consulta las [instrucciones de instalación del Agent][5].
@@ -186,16 +188,14 @@ instances:
     host: '<AWS_INSTANCE_ENDPOINT>'
     port: 3306
     username: datadog
-    password: '<YOUR_CHOSEN_PASSWORD>' # desde el paso CREATE USER (crear usuario) anterior
+    password: 'ENC[datadog_user_database_password]' # from the CREATE USER step earlier, stored as a secret
 
-    # Después de añadir tu proyecto e instancia, configura la integración de Datadog AWS para extraer datos de nube adicionales, como CPU y Memoria.
+    # After adding your project and instance, configure the Datadog AWS integration to pull additional cloud data such as CPU and Memory.
     aws:
       instance_endpoint: '<AWS_INSTANCE_ENDPOINT>'
 ```
 
 <div class="alert alert-warning"><strong>Importante</strong>: Utiliza aquí el endpoint de la instancia de Aurora, no el endpoint del clúster.</div>
-
-**Nota**: Escribe tu contraseña entre comillas simples en caso de que haya un carácter especial.
 
 [Reinicia el Agent][3] para empezar a enviar métricas de MySQL a Datadog.
 
@@ -242,17 +242,13 @@ FROM gcr.io/datadoghq/agent:7.36.1
 
 LABEL "com.datadoghq.ad.check_names"='["mysql"]'
 LABEL "com.datadoghq.ad.init_configs"='[{}]'
-LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<AWS_INSTANCE_ENDPOINT>", "port": 3306,"username": "datadog","password": "<UNIQUEPASSWORD>"}]'
+LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<AWS_INSTANCE_ENDPOINT>", "port": 3306,"username": "datadog","password": "ENC[datadog_user_database_password]"}]'
 ```
 
 <div class="alert alert-warning"><strong>Importante</strong>: Utiliza el endpoint de la instancia de Aurora como host, no el endpoint del clúster.</div>
 
-Para evitar exponer la contraseña del usuario `datadog` en texto simple, utiliza el [paquete de gestión de secretos][2] del Agent y declara la contraseña utilizando la sintaxis `ENC[]` o consulta la [documentación de variables de plantilla Autodiscovery][3] para saber cómo pasar la contraseña como una variable de entorno.
-
 
 [1]: /es/agent/docker/integrations/?tab=docker
-[2]: /es/agent/configuration/secrets-management
-[3]: /es/agent/faq/template_variables/
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
@@ -269,15 +265,15 @@ Realiza los siguientes pasos para instalar el [Datadog Cluster Agent][1] en tu c
     ```yaml
     clusterAgent:
       confd:
-        mysql.yaml: -|
+        mysql.yaml: |-
           cluster_check: true
           init_config:
-            instances:
-              - dbm: true
-                host: <INSTANCE_ADDRESS>
-                port: 3306
-                username: datadog
-                password: '<UNIQUE_PASSWORD>'
+          instances:
+            - dbm: true
+              host: <INSTANCE_ADDRESS>
+              port: 3306
+              username: datadog
+              password: 'ENC[datadog_user_database_password]'
 
     clusterChecksRunner:
       enabled: true
@@ -296,22 +292,22 @@ Para Windows, añade <code>--set targetSystem=Windows</code> al comando <code>he
 [2]: /es/getting_started/site
 [3]: /es/containers/kubernetes/installation/?tab=helm#installation
 
-### Configurar con archivos integrados
+### Configuración con archivos integrados
 
-Para configurar un check de clúster con un archivo de configuración integrado, integra el archivo de configuración del contenedor del Cluster Agent en la ruta `/conf.d/postgres.yaml`:
+Para configurar un check de clúster con un archivo de configuración integrado, integra el archivo de configuración del contenedor del Cluster Agent en la ruta `/conf.d/mysql.yaml`:
 
 ```yaml
-cluster_check: true  # Asegúrate de incluir este indicador
+cluster_check: true  # Make sure to include this flag
 init_config:
 instances:
   - dbm: true
     host: '<AWS_INSTANCE_ENDPOINT>'
     port: 3306
     username: datadog
-    password: '<UNIQUEPASSWORD>'
+    password: 'ENC[datadog_user_database_password]'
 ```
 
-### Configurar con anotaciones de servicios de Kubernetes
+### Configuración con anotaciones de servicios de Kubernetes
 
 En lugar de integrar un archivo, puedes declarar la configuración de la instancia como servicio de Kubernetes. Para configurar este check en un Agent que se ejecuta en Kubernetes, crea un servicio en el mismo espacio de nombres que el Datadog Cluster Agent:
 
@@ -334,7 +330,7 @@ metadata:
           "host": "<AWS_INSTANCE_ENDPOINT>",
           "port": 3306,
           "username": "datadog",
-          "password": "<UNIQUEPASSWORD>"
+          "password": "ENC[datadog_user_database_password]"
         }
       ]
 spec:
@@ -359,7 +355,7 @@ Para evitar exponer la contraseña del usuario `datadog` en texto simple, utiliz
 
 ### Validar
 
-[Ejecuta el subcomando de estado del Agent][6] y busca `mysql` en la sección Checks. Si no, visita la página [Bases de datos][7] para empezar.
+[Ejecuta el subcomando de estado del Agent][6] y busca `mysql` en la sección Checks. Si no, consulta la página [Bases de datos][7] para empezar.
 
 ## Ejemplo de configuraciones del Agent
 {{% dbm-mysql-agent-config-examples %}}
@@ -378,7 +374,7 @@ Si has instalado y configurado las integraciones y el Agent como se describe, pe
 
 
 [1]: /es/database_monitoring/agent_integration_overhead/?tab=mysql
-[2]: /es/database_monitoring/data_collected/#sensitive-information
+[2]: /es/containers/cluster_agent/clusterchecks/?tab=datadogoperator
 [3]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_WorkingWithParamGroups.html
 [4]: https://dev.mysql.com/doc/refman/5.7/en/creating-accounts.html
 [5]: https://app.datadoghq.com/account/settings/agent/latest

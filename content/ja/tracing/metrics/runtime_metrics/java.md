@@ -22,7 +22,7 @@ type: multi-code-lang
 
 JVM メトリクス収集は、初期設定で Java トレーサー v0.29.0+ に有効になっています。トレースクライアントの設定パラメーターで、システムプロパティ `-Ddd.jmxfetch.enabled=false` または環境変数 `DD_JMXFETCH_ENABLED=false` を使用して無効にすることも可能です。v0.64.0+ では、`DD_RUNTIME_METRICS_ENABLED=false` 環境変数を使用して無効にすることもできます。
 
-JVM メトリクスは、Java サービスと相関して表示できます。Datadog の[サービスカタログ][1]を参照してください。
+JVM メトリクスは、Java サービスと相関して表示できます。Datadog の [Software Catalog][1] を参照してください。
 
 {{< img src="tracing/runtime_metrics/jvm-runtime.png" alt="JVM ランタイム" >}}
 
@@ -33,7 +33,7 @@ Agent をコンテナとして実行している場合は、`DD_DOGSTATSD_NON_LO
 - **Kubernetes**: [DogstatsD ポートをホストポートにバインドする][4] _必要があります_。
 - **ECS**。[タスク定義で適切なフラグを設定します][5]。
 
-Alternatively, the Agent can ingest metrics with a Unix Domain Socket (UDS) as an alternative to UDP transport. For more information, read [DogStatsD over Unix Domain Socket][9].
+または、Agent は UDP トランスポートの代わりに Unix Domain Socket (UDS) を使用してメトリクスを取り込むこともできます。詳細については、[Unix Domain Socket 経由の DogStatsD][9] を参照してください。
 
 **注**:
 
@@ -49,7 +49,7 @@ Alternatively, the Agent can ingest metrics with a Unix Domain Socket (UDS) as a
 
 APM サービス詳細画面にこれらのメトリクスを表示するだけでなく、Datadog は[デフォルトの JVM ランタイムダッシュボード][7]を提供します。
 
-Additional JMX metrics can be added using configuration files that are passed on using `dd.jmxfetch.config.dir` and `dd.jmxfetch.config`. You can also enable existing Datadog JMX integrations individually with the `dd.jmxfetch.<INTEGRATION_NAME>.enabled=true` parameter. This auto-embeds configuration from Datadog's existing JMX configuration files. See the [JMX Integration][8] for further details on configuration.
+`dd.jmxfetch.config.dir` と `dd.jmxfetch.config` で指定された設定ファイルを使用して、さらに JMX メトリクスを追加できます。`dd.jmxfetch.<INTEGRATION_NAME>.enabled=true` パラメータを使用して、既存の Datadog JMX インテグレーションを個別に有効にすることもできます。これにより、Datadog の既存の JMX 設定ファイルから設定が自動的に埋め込まれます。設定の詳細については、[JMX インテグレーション][8]を参照してください。
 
 ## その他の参考資料
 

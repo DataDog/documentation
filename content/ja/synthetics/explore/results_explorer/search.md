@@ -1,9 +1,10 @@
 ---
 aliases:
 - /ja/synthetics/explorer/search
+- /ja/continuous_testing/explorer/search/
 description: 実行された CI ジョブのバッチを調査し、失敗したテスト結果のトラブルシューティングを行います。
 further_reading:
-- link: /continuous_testing/explorer
+- link: /synthetics/explore/results_explorer
   tag: ドキュメント
   text: Learn about the Synthetic Monitoring & Testing Results Explorer
 title: テストバッチを検索する
@@ -78,7 +79,7 @@ title: テストバッチを検索する
 
 CI バッチの検索については、[検索構文][2]を参照してください。
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
