@@ -3,7 +3,7 @@
 {{- with $headless := $hugo_context.Site.GetPage "/glossary/terms" -}}
     {{- range $headless.Resources.ByType "page" -}}
         {{- $page := . -}}
-        {{- $object_id := (print $glossaryPage.File.UniqueID "_" $headless.File.Lang "_" ($page.Params.Title | anchorize)) -}}
+        {{- $object_id := (print $glossaryPage.File.UniqueID "_" $headless.Language.Lang "_" ($page.Params.Title | anchorize)) -}}
         {{- $relpermalink := print $glossaryPage.RelPermalink "#" ($page.Params.Title | anchorize) -}}
         {{- $content := .Plain -}}
         {{
