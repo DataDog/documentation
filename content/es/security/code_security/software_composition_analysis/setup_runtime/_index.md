@@ -60,7 +60,7 @@ Este tema explica cómo configurar SCA utilizando un ejemplo de Java.
 
 1. **Actualiza la [biblioteca Java de Datadog][1]** al menos a la versión 0.94.0 (o a la versión 1.1.4 para las funciones de detección del análisis de composición de software):
 
-   {{< pestañas >}}
+   {{< tabs >}}
    {{% tab "Wget" %}}
    ```shell
    wget -O dd-java-agent.jar 'https://dtdg.co/latest-java-tracer'
