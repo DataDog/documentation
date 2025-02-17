@@ -28,8 +28,8 @@ After your applications have been instrumented, you can configure your RUM appli
 The available functionality has the following important limitations:
 
 - If proxying compressed traffic, the Auto-Instrumentation method is not able to inject the JS scriptlet into the HTML traffic.
-- This instrumentation method does not support any [advanced RUM configurations][3]. However, `allowedTracingUrls` and `excludedActivityUrls` are supported for NGINX, Windows IIS, and Apache httpd web servers.
-- If the web server is acting as a proxy and the upstream server has end-to-end encryption (like TLS) or content compression (like gzip, zstd, or Brotli) enabled, the module may not inject RUM. Ensure the following for successful instrumentation:
+- This instrumentation method does not support any [advanced RUM configurations][3]. However, `allowedTracingUrls` and `excludedActivityUrls` are supported.
+- If the web server is acting as a proxy and the upstream server has end-to-end encryption (like TLS) or content compression (like gzip, zstd, or Brotli) enabled, the module may not inject the RUM Browser SDK. Ensure the following for successful instrumentation:
   - Content compression is disabled on the upstream server.
   - The web server is set up for TLS origination.
 - (Windows IIS only) Configuration for Auto-Instrumentation is only available per Windows IIS site.
@@ -45,7 +45,7 @@ The automatic installation method requires that you have the [Datadog Agent][2] 
 {{< tabs >}}
 {{% tab "NGINX" %}}
 
-The Auto-Instrumentation method leverages the [NGINX Dynamic Modules capability][1] to implement a response body filter. The filter injects the RUM SDK into the response body for responses
+The Auto-Instrumentation method leverages the [NGINX Dynamic Modules capability][1] to implement a response body filter. The filter injects the RUM Browser SDK into the response body for responses
 identified as HTML. For more granular control over how configuration files or permissions are handled, you can also install NGINX manually.
 
 [1]: https://docs.nginx.com/nginx/admin-guide/dynamic-modules/dynamic-modules/
@@ -118,10 +118,10 @@ To automatically instrument your RUM application:
 {{% /collapse-content %}}
 
 {{% /tab %}}
-{{% tab "Apache httpd" %}}
+{{% tab "Apache HTTP Server" %}}
 
 The Auto-Instrumentation method leverages the [Apache httpd Modules capability][1] to implement a response body filter. The filter injects the RUM SDK into the response body for responses
-identified as HTML. For more granular control over how configuration files or permissions are handled, you can also install Apache httpd Server manually.
+identified as HTML. For more granular control over how configuration files or permissions are handled, you can also install the module manually.
 
 [1]: https://httpd.apache.org/modules/
 
@@ -134,8 +134,8 @@ To automatically instrument your RUM application:
 2. Select **Auto-Instrumentation** and **httpd**.
 3. Set your Session and Session Replay sample rates. See [guidance on configuring sampling][2].
 4. Copy and run the installer command to load the Datadog httpd Module with the RUM SDK Injector onto httpd.
-5. After the installer successfully installs the SDK Injector, restart httpd to begin collecting RUM sessions.
-6. (Optional) To verify the module is successfully injecting the RUM Browser SDK into HTML pages, check the NGINX error logs for relevant messages. The module logs important steps during the injection process. Ensure that httpd is configured with at least the `info` log level.
+5. After the installer successfully installs the SDK Injector, restart Apache HTTP Server to begin collecting RUM sessions.
+6. (Optional) To verify the module is successfully injecting the RUM Browser SDK into HTML pages, check the error logs for relevant messages. The module logs important steps during the injection process. Ensure that Apache HTTP Server is configured with at least the `info` log level.
 
 [1]: https://app.datadoghq.com/rum/list
 [2]: /real_user_monitoring/guide/sampling-browser-plans/
@@ -147,12 +147,12 @@ To automatically instrument your RUM application:
 ### Download the module file
 
 1. Download the [zipped module][1].
-2. Extract the zip to obtain the `mod_datadog.so` file. Move it to a location that httpd has access to (referenced as `<RUM_MODULE_PATH>` in the steps below).
+2. Extract the zip to obtain the `mod_datadog.so` file. Move it to a location that Apache HTTP Server has access to (referenced as `<RUM_MODULE_PATH>` in the steps below).
 
 [1]: https://rum-auto-instrumentation.s3.amazonaws.com/httpd/latest/mod_datadog-amd64.zip
 
-### Update httpd configuration
-1. Locate the configuration file. You can use `apachectl -V` to see the configuration path. Add the following line to load the module:
+### Update Apache HTTP Server configuration
+1. Locate the configuration file. You can use `apachectl -V` to find the default configuration path. Add the following line to load the module:
 
    ```javascript
    LoadModule datadog_module <RUM_MODULE_PATH>
@@ -181,8 +181,8 @@ To automatically instrument your RUM application:
 
 ### Restart your server
 
-1. Restart the httpd server to begin collecting data for your Datadog RUM application. By default, the RUM SDK is injected to all HTML documents. You may need to clear your browser cache.
-2. (Optional) To verify the module is successfully injecting the RUM Browser SDK into HTML pages, check the httpd error logs for relevant messages. The module logs important steps during the injection process. Ensure that httpd is configured with at least the `info` log level.
+1. Restart the Apache HTTP Server to begin collecting data for your Datadog RUM application. By default, the RUM SDK is injected to all HTML documents. You may need to clear your browser cache.
+2. (Optional) To verify the module is successfully injecting the RUM Browser SDK into HTML pages, check the httpd error logs for relevant messages. The module logs important steps during the injection process. Ensure that Apache HTTP Server is configured with at least the `info` log level.
 
 {{% /collapse-content %}}
 
