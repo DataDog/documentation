@@ -31,7 +31,6 @@ The available functionality has the following important limitations:
 - This instrumentation method does not support any [advanced RUM configurations][3]. However, `allowedTracingUrls` and `excludedActivityUrls` are supported for NGINX, Windows IIS, and Apache httpd web servers.
 - If the web server is acting as a proxy and the upstream server has end-to-end encryption (like TLS) or content compression (like gzip, zstd, or Brotli) enabled, the module may not inject RUM. Ensure the following for successful instrumentation:
   - Content compression is disabled on the upstream server.
-  - The web server is configured to compress the content.
   - The web server is set up for TLS origination.
 - (Windows IIS only) Configuration for Auto-Instrumentation is only available per Windows IIS site.
 
@@ -46,7 +45,7 @@ The automatic installation method requires that you have the [Datadog Agent][2] 
 {{< tabs >}}
 {{% tab "NGINX" %}}
 
-The Auto-Instrumentation method leverages the [NGINX Dynamic Modules capability][1] to implement a response body filter. The filter injects the RUM SDK into the response body for responses 
+The Auto-Instrumentation method leverages the [NGINX Dynamic Modules capability][1] to implement a response body filter. The filter injects the RUM SDK into the response body for responses
 identified as HTML. For more granular control over how configuration files or permissions are handled, you can also install NGINX manually.
 
 [1]: https://docs.nginx.com/nginx/admin-guide/dynamic-modules/dynamic-modules/
@@ -289,22 +288,22 @@ If you notice that RUM is not being injected into HTML pages, consider the follo
 |---------------|-------|--------|
 | 1.22.0 | [ngx_http_datadog-amd64-1.22.0][5] | [ngx_http_datadog-arm64-1.22.0][6] |
 | 1.22.1 | [ngx_http_datadog-amd64-1.22.1][7] | [ngx_http_datadog-arm64-1.22.1][8] |
-| 1.23.0 | [ngx_http_datadog-amd64-1.23.0][9] | [ngx_http_datadog-arm64-1.23.0][10] | 
-| 1.23.1 | [ngx_http_datadog-amd64-1.23.1][11] | [ngx_http_datadog-arm64-1.23.1][12] | 
-| 1.23.2 | [ngx_http_datadog-amd64-1.23.2][13] | [ngx_http_datadog-arm64-1.23.2][14] | 
-| 1.23.3 | [ngx_http_datadog-amd64-1.23.3][15] | [ngx_http_datadog-arm64-1.23.3][16] | 
-| 1.23.4 | [ngx_http_datadog-amd64-1.23.4][17] | [ngx_http_datadog-arm64-1.23.4][18] | 
-| 1.24.0 | [ngx_http_datadog-amd64-1.24.0][19] | [ngx_http_datadog-arm64-1.24.0][20] | 
-| 1.25.0 | [ngx_http_datadog-amd64-1.25.0][21] | [ngx_http_datadog-arm64-1.25.0][22] | 
-| 1.25.1 | [ngx_http_datadog-amd64-1.25.1][23] | [ngx_http_datadog-arm64-1.25.1][24] | 
-| 1.25.2 | [ngx_http_datadog-amd64-1.25.2][25] | [ngx_http_datadog-arm64-1.25.2][26] | 
-| 1.25.3 | [ngx_http_datadog-amd64-1.25.3][27] | [ngx_http_datadog-arm64-1.25.3][28] | 
-| 1.25.4 | [ngx_http_datadog-amd64-1.25.4][29] | [ngx_http_datadog-arm64-1.25.4][30] | 
-| 1.25.5 | [ngx_http_datadog-amd64-1.25.5][31] | [ngx_http_datadog-arm64-1.25.5][32] | 
-| 1.26.0 | [ngx_http_datadog-amd64-1.26.0][33] | [ngx_http_datadog-arm64-1.26.0][34] | 
-| 1.26.1 | [ngx_http_datadog-amd64-1.26.1][35] | [ngx_http_datadog-arm64-1.26.1][36] | 
-| 1.26.2 | [ngx_http_datadog-amd64-1.26.2][37] | [ngx_http_datadog-arm64-1.26.2][38] | 
-| 1.27.0 | [ngx_http_datadog-amd64-1.27.0][39] | [ngx_http_datadog-arm64-1.27.0][40] | 
+| 1.23.0 | [ngx_http_datadog-amd64-1.23.0][9] | [ngx_http_datadog-arm64-1.23.0][10] |
+| 1.23.1 | [ngx_http_datadog-amd64-1.23.1][11] | [ngx_http_datadog-arm64-1.23.1][12] |
+| 1.23.2 | [ngx_http_datadog-amd64-1.23.2][13] | [ngx_http_datadog-arm64-1.23.2][14] |
+| 1.23.3 | [ngx_http_datadog-amd64-1.23.3][15] | [ngx_http_datadog-arm64-1.23.3][16] |
+| 1.23.4 | [ngx_http_datadog-amd64-1.23.4][17] | [ngx_http_datadog-arm64-1.23.4][18] |
+| 1.24.0 | [ngx_http_datadog-amd64-1.24.0][19] | [ngx_http_datadog-arm64-1.24.0][20] |
+| 1.25.0 | [ngx_http_datadog-amd64-1.25.0][21] | [ngx_http_datadog-arm64-1.25.0][22] |
+| 1.25.1 | [ngx_http_datadog-amd64-1.25.1][23] | [ngx_http_datadog-arm64-1.25.1][24] |
+| 1.25.2 | [ngx_http_datadog-amd64-1.25.2][25] | [ngx_http_datadog-arm64-1.25.2][26] |
+| 1.25.3 | [ngx_http_datadog-amd64-1.25.3][27] | [ngx_http_datadog-arm64-1.25.3][28] |
+| 1.25.4 | [ngx_http_datadog-amd64-1.25.4][29] | [ngx_http_datadog-arm64-1.25.4][30] |
+| 1.25.5 | [ngx_http_datadog-amd64-1.25.5][31] | [ngx_http_datadog-arm64-1.25.5][32] |
+| 1.26.0 | [ngx_http_datadog-amd64-1.26.0][33] | [ngx_http_datadog-arm64-1.26.0][34] |
+| 1.26.1 | [ngx_http_datadog-amd64-1.26.1][35] | [ngx_http_datadog-arm64-1.26.1][36] |
+| 1.26.2 | [ngx_http_datadog-amd64-1.26.2][37] | [ngx_http_datadog-arm64-1.26.2][38] |
+| 1.27.0 | [ngx_http_datadog-amd64-1.27.0][39] | [ngx_http_datadog-arm64-1.27.0][40] |
 
 ## Further reading
 
