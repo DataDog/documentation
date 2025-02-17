@@ -54,7 +54,7 @@ Configura lo siguiente en el [grupo de parámetros del clúster de base de datos
 | <code style="word-break:break-all;">performance_schema_max_sql_text_length</code> | `4096` | Debe coincidir con <code style="word-break:break-all;">performance_schema_max_digest_length</code>. |
 
 [1]: https://dev.mysql.com/doc/refman/8.0/en/performance-schema-quick-start.html
-{{< /tab >}}
+{{% /tab %}}
 {{% tab "MySQL 5.6" %}}
 | Parámetros | Valor | Descripción |
 | --- | --- | --- |
