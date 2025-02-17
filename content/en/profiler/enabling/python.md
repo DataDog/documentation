@@ -117,14 +117,6 @@ prof.start()  # Should be as early as possible, eg before other imports, to ensu
 
 You can configure the profiler using the [environment variables][6].
 
-### Code provenance
-
-The Python profiler supports code provenance reporting, which provides
-insight into the library that is running the code. While this is
-disabled by default, you can turn it on by setting
-`DD_PROFILING_ENABLE_CODE_PROVENANCE=1`.
-
-
 ### Stack V2
 
 Stack V2 is the new stack sampler implementation for CPython 3.8+ on x86_64 Linux.
