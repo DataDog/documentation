@@ -22,9 +22,10 @@ Dynamic Instrumentation is a feature of supporting Datadog tracing libraries. If
 
 1. Install or upgrade your Agent to version [7.45.0][6] or higher.
 2. If you don't already have APM enabled, in your Agent configuration, set the `DD_APM_ENABLED` environment variable to `true` and listening to the port `8126/TCP`.
-3. Install or upgrade the Node.js tracing library to version 5.35.0 or higher, by following the [relevant instructions][2].
-4. Run your service with Dynamic Instrumentation enabled by setting the `DD_DYNAMIC_INSTRUMENTATION_ENABLED` environment variable to `true`. Specify `DD_SERVICE`, `DD_ENV`, and `DD_VERSION` Unified Service Tags so you can filter and group your instrumentations and target active clients across these dimensions.
-5. After starting your service with Dynamic Instrumentation enabled, you can start using Dynamic Instrumentation on the [APM > Dynamic Instrumentation page][3].
+3. Install or upgrade the Node.js tracing library to version 5.37.0 or higher, by following the [relevant instructions][2].
+4. If your source code is transpiled during deployment (e.g. if using TypeScript), ensure that source maps are published along with the deployed Node.js application.
+5. Run your service with Dynamic Instrumentation enabled by setting the `DD_DYNAMIC_INSTRUMENTATION_ENABLED` environment variable to `true`. Specify `DD_SERVICE`, `DD_ENV`, and `DD_VERSION` Unified Service Tags so you can filter and group your instrumentations and target active clients across these dimensions.
+6. After starting your service with Dynamic Instrumentation enabled, you can start using Dynamic Instrumentation on the [APM > Dynamic Instrumentation page][3].
 
 ## Configuration
 
@@ -51,7 +52,7 @@ The following limitations apply to the limited preview:
 - [Dynamic Logs][7] attached to a specific file/line
 - Capturing of variables for Dynamic Logs
 - [PII redaction][8] based on variable/property names
-- [Source code integration][9]
+- [Source code integration][9] (incl. source map support)
 
 ### Unsupported features
 
@@ -59,7 +60,6 @@ The following limitations apply to the limited preview:
 - Dynamic Logs attached to a function/method
 - Custom template for Dynamic Logs
 - Dynamic Log conditions
-- Source maps (e.g. if using TypeScript, the Dynamic Log needs to be configured against the transpiled JavaScript file)
 - PII redaction based on specific classes or types
 
 ## Further reading
