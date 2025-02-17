@@ -1115,6 +1115,61 @@ components:
       type: string
       x-enum-varnames:
       - CHECK_STATUS
+    ColumnOrderObject:
+      description: Order criteria
+      properties:
+        index:
+          description: Index of the sorted column
+          format: double
+          type: number
+        name:
+          description: Name of the sorted column
+          type: string
+        order:
+          $ref: '#/components/schemas/ColumnOrderObjectOrder'
+          description: Order of the sort
+        type:
+          $ref: '#/components/schemas/ColumnOrderObjectType'
+          description: Type of sorted attribute
+      required:
+      - order
+      - type
+      type: object
+    ColumnOrderObjectOrder:
+      description: Order object
+      enum:
+      - asc
+      - desc
+      example: asc
+      type: string
+      x-enum-varnames:
+      - ASC
+      - DESC
+    ColumnOrderObjectType:
+      description: type of column
+      enum:
+      - formula
+      - group
+      example: formula
+      type: string
+      x-enum-varnames:
+      - FORMULA
+      - GROUP
+    ColumnSortObject:
+      description: Sort object
+      properties:
+        count:
+          description: Limit number of items displayed
+          format: double
+          type: number
+        order_by:
+          description: Order criteria
+          items:
+            $ref: '#/components/schemas/ColumnOrderObject'
+            maxItems: 1
+            minItems: 1
+          type: array
+      type: object
     ContentEncoding:
       description: HTTP header used to compress the media-type.
       enum:
@@ -10330,6 +10385,8 @@ components:
           $ref: '#/components/schemas/LogQueryDefinition'
         security_query:
           $ref: '#/components/schemas/LogQueryDefinition'
+        sort:
+          $ref: '#/components/schemas/ColumnSortObject'
       type: object
     ReferenceTableLogsLookupProcessor:
       description: '**Note**: Reference Tables are in public beta.
